@@ -1,3 +1,4 @@
+"use strict";
 // --- MyLambdaPi Revised: Bidirectional with Unification ---
 // --- Report on Changed Specification (as detailed above) ---
 // This implementation focuses on a core lambda calculus with Pi types,
@@ -52,9 +53,10 @@ function normalize(term, ctx, depth = 0) {
             // To normalize body, apply to a fresh var under extended context
             // This is needed if we want to see solved holes *inside* the body structure for printing.
             // For HOAS, the body function itself doesn't change unless its captured env changes or it's re-constructed.
-            const freshVLam = Var(freshVarName(current.paramName));
+            const freshNameLam = freshVarName(current.paramName);
+            const freshVLam = Var(freshNameLam);
             const lamCtxType = normParamType || (current.paramType ? normalize(current.paramType, ctx) : Hole()); // Best guess for context
-            const extendedLamCtx = extendCtx(ctx, freshVLam.name, lamCtxType);
+            const extendedLamCtx = extendCtx(ctx, freshNameLam, lamCtxType);
             // Create a new lambda with potentially normalized type and body structure
             return Lam(current.paramName, v => normalize(current.body(v), extendedLamCtx, depth + 1), normParamType);
         case 'App':
@@ -66,8 +68,9 @@ function normalize(term, ctx, depth = 0) {
             return App(normFunc, normArg);
         case 'Pi':
             const normPiParamType = normalize(current.paramType, ctx, depth + 1);
-            const freshVPi = Var(freshVarName(current.paramName));
-            const extendedPiCtx = extendCtx(ctx, freshVPi.name, normPiParamType);
+            const freshNamePi = freshVarName(current.paramName);
+            const freshVPi = Var(freshNamePi);
+            const extendedPiCtx = extendCtx(ctx, freshNamePi, normPiParamType);
             return Pi(current.paramName, normPiParamType, v => normalize(current.bodyType(v), extendedPiCtx, depth + 1));
     }
 }
@@ -93,18 +96,20 @@ function areEqual(t1, t2, ctx, depth = 0) {
                 (normT1.paramType && t2Lam.paramType && areEqual(normT1.paramType, t2Lam.paramType, ctx, depth + 1));
             if (!paramTypesOk)
                 return false;
-            const freshVar = Var(freshVarName("eqLam"));
+            const freshNameEqLam = freshVarName("eqLam");
+            const freshVarEqLam = Var(freshNameEqLam);
             const CtxType = normT1.paramType || Hole(); // Use specified type or a placeholder
-            const extendedCtx = extendCtx(ctx, freshVar.name, CtxType);
-            return areEqual(normT1.body(freshVar), t2Lam.body(freshVar), extendedCtx, depth + 1);
+            const extendedCtx = extendCtx(ctx, freshNameEqLam, CtxType);
+            return areEqual(normT1.body(freshVarEqLam), t2Lam.body(freshVarEqLam), extendedCtx, depth + 1);
         }
         case 'Pi': {
             const t2Pi = normT2;
             if (!areEqual(normT1.paramType, t2Pi.paramType, ctx, depth + 1))
                 return false;
-            const freshVar = Var(freshVarName("eqPi"));
-            const extendedCtx = extendCtx(ctx, freshVar.name, normT1.paramType);
-            return areEqual(normT1.bodyType(freshVar), t2Pi.bodyType(freshVar), extendedCtx, depth + 1);
+            const freshNameEqPi = freshVarName("eqPi");
+            const freshVarEqPi = Var(freshNameEqPi);
+            const extendedCtx = extendCtx(ctx, freshNameEqPi, normT1.paramType);
+            return areEqual(normT1.bodyType(freshVarEqPi), t2Pi.bodyType(freshVarEqPi), extendedCtx, depth + 1);
         }
     }
     return false; // Should be exhaustive
@@ -180,19 +185,21 @@ function unify(t1, t2, ctx, depth = 0) {
                 return false;
             }
             // Bodies:
-            const freshVar = Var(freshVarName("unifyLam"));
+            const freshNameUnifyLam = freshVarName("unifyLam");
+            const freshVarUnifyLam = Var(freshNameUnifyLam);
             // Use the (now unified, if present) param type for context
             const CtxType = normT1.paramType ? getTermRef(normT1.paramType) : Hole();
-            const extendedCtx = extendCtx(ctx, freshVar.name, CtxType);
-            return unify(normT1.body(freshVar), t2Lam.body(freshVar), extendedCtx, depth + 1);
+            const extendedCtx = extendCtx(ctx, freshNameUnifyLam, CtxType);
+            return unify(normT1.body(freshVarUnifyLam), t2Lam.body(freshVarUnifyLam), extendedCtx, depth + 1);
         }
         case 'Pi': {
             const t2Pi = normT2;
             if (!unify(normT1.paramType, t2Pi.paramType, ctx, depth + 1))
                 return false;
-            const freshVar = Var(freshVarName("unifyPi"));
-            const extendedCtx = extendCtx(ctx, freshVar.name, getTermRef(normT1.paramType)); // Use unified type
-            return unify(normT1.bodyType(freshVar), t2Pi.bodyType(freshVar), extendedCtx, depth + 1);
+            const freshNameUnifyPi = freshVarName("unifyPi");
+            const freshVarUnifyPi = Var(freshNameUnifyPi);
+            const extendedCtx = extendCtx(ctx, freshNameUnifyPi, getTermRef(normT1.paramType)); // Use unified type
+            return unify(normT1.bodyType(freshVarUnifyPi), t2Pi.bodyType(freshVarUnifyPi), extendedCtx, depth + 1);
         }
     }
     return false; // Var, Type should be caught by areEqual or hole unification
