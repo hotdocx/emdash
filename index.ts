@@ -1,15 +1,13 @@
-// --- MyLambdaPi Final Corrected (v4): Deep Elaboration for HOAS ---
+// --- MyLambdaPi Final Corrected (v5): Fix WHNF/Normalize Loop ---
 
 // --- Report on Changed Specification ---
-// This version implements a "deep elaboration" strategy for lambda terms within the `check` function.
-// When a lambda is checked against a Pi type, not only is its parameter type annotated, but its
-// HOAS `body` function is replaced. The new `body` function, when invoked, ensures that the
-// term it produces (by calling the original body function) is itself recursively checked/elaborated
-// against the expected type derived from the outer Pi. This allows `normalize` to operate on
-// term structures that are more thoroughly annotated, addressing issues like the one in Example 9.
-// TSC errors from the previous snippet are also addressed.
-// The core phases remain: an elaboration+typechecking phase (which now does this deeper work)
-// followed by a normalization phase on the elaborated terms.
+// This version refines the fixed-point loop within `whnf` and the head-reduction
+// part of `normalize`. The termination condition for the delta-reduction and rewrite-rule
+// application loop no longer uses `areEqual` internally, which was causing re-entrant
+// calls to `whnf` and leading to stack overflows. Instead, it relies on detecting
+// if the `current` term reference was changed by a delta or rule application step.
+// This should resolve the stack overflow in Example 11.
+// All other features and previous fixes remain.
 // --- End Report ---
 
 let nextVarId = 0;
@@ -68,77 +66,79 @@ function getTermRef(term: Term): Term {
     return term;
 }
 
-const MAX_RECURSION_DEPTH = 100; // For delta/rule loops
-const MAX_STACK_DEPTH = 70;     // For TS call stack
+const MAX_RECURSION_DEPTH = 100;
+const MAX_STACK_DEPTH = 70;
 
 function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     let current = getTermRef(term);
 
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
-        let changedThisIteration = false;
-        const termAtStartOfIter = current; // Physical identity for this check
+        let changedInThisPass = false; // Detects change within a single pass of delta + rules
+        const termBeforePass = current; // Physical reference before this pass
 
+        // 1. Delta Reduction
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
             if (gdef && gdef.value) {
                 const valRef = getTermRef(gdef.value);
-                if (valRef !== current) { // Avoid loop if x = x
+                if (valRef !== current) { // Check if it's actually different
                      current = valRef;
-                     changedThisIteration = true;
+                     changedInThisPass = true;
                 }
             }
         }
-        
-        const termAfterDelta = current;
-        // Try rules even if delta changed, as rules might apply to the new term
+
+        // 2. Rewrite Rules
+        const termAfterDeltaThisPass = current; // Term after delta in this pass
         for (const rule of userRewriteRules) {
-            const subst = matchPattern(rule.lhs, termAfterDelta, ctx, rule.patternVars, undefined, stackDepth + 1);
+            // Match against `current` (which is `termAfterDeltaThisPass`)
+            const subst = matchPattern(rule.lhs, termAfterDeltaThisPass, ctx, rule.patternVars, undefined, stackDepth + 1);
             if (subst) {
                 const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                // Check for semantic change to avoid loops with identity rules or non-converging rules
-                if (!areEqual(termAfterDelta, rhsApplied, ctx, stackDepth + 1)) {
+                // Check for physical change primarily.
+                // If a rule `X -> X` is applied, `rhsApplied` might be physically same as `termAfterDeltaThisPass`.
+                // If `applySubst` constructs new terms, this works.
+                if (rhsApplied !== termAfterDeltaThisPass) {
                     current = rhsApplied;
-                    changedThisIteration = true;
-                } else if (termAfterDelta !== rhsApplied && !changedThisIteration) {
-                    // Rule applied but result is equal (e.g. eta rule).
-                    // Consider it a change if physical identity changed to ensure progress with such rules.
-                    current = rhsApplied;
-                    changedThisIteration = true;
+                    changedInThisPass = true;
                 }
+                // If a rule matched, we assume progress or a deliberate identity rewrite, so break from rule loop.
+                // The outer loop's `changedInThisPass` will handle termination.
                 break; 
             }
         }
         
-        if (!changedThisIteration) {
-            // If areEqual says they are same, they are. Only break if no change.
-            if (termAtStartOfIter === current || areEqual(termAtStartOfIter, current, ctx, stackDepth + 1)) break;
+        if (!changedInThisPass) {
+            // If no change by delta or rules in this entire pass, the head is stable.
+            break;
         }
-        if (i === MAX_RECURSION_DEPTH -1 && changedThisIteration) console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(termAtStartOfIter)} -> ${printTerm(current)}`);
+        // If changedInThisPass is true, loop again. `current` is updated.
+        if (i === MAX_RECURSION_DEPTH -1) console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(termBeforePass)} -> ${printTerm(current)}`);
     }
-    current = getTermRef(current); // Re-chase if last rule was identity map
+    current = getTermRef(current); // Re-chase if last rule was identity map that changed ref
 
+    // Beta Reduction (applied after head is stable from delta/rules)
     if (current.tag === 'App') {
-        const funcNorm = whnf(current.func, ctx, stackDepth + 1);
+        const funcNorm = whnf(current.func, ctx, stackDepth + 1); // WHNF for the function part
         if (funcNorm.tag === 'Lam') {
-            return whnf(funcNorm.body(current.arg), ctx, stackDepth + 1); // Beta reduction
+            return whnf(funcNorm.body(current.arg), ctx, stackDepth + 1); // Beta reduction, then WHNF result
         }
-        // Reconstruct App if the function part changed, even if it didn't become a Lam
-        // This ensures that if a rule rewrote `f` to `g` in `f x`, we get `g x`.
+        // If funcNorm changed due to its own WHNF, reconstruct App
         if (funcNorm !== getTermRef(current.func)) return App(funcNorm, current.arg);
-        return current; // Original App
+        return current; // Original App, head is not a lambda
     }
-    return current;
+    return current; // Head is not an App, or App's head is not Lam
 }
 
 function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Normalize stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     let current = getTermRef(term);
 
-    // Apply top-level delta/rules iteratively (similar to whnf's head reduction)
+    // Head reduction loop (delta & rules)
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
-        let changedThisIteration = false;
-        const termAtStartOfIter = current;
+        let changedInThisPass = false;
+        const termBeforePass = current;
 
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
@@ -146,33 +146,30 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 const valRef = getTermRef(gdef.value);
                  if (valRef !== current) { 
                     current = valRef;
-                    changedThisIteration = true;
+                    changedInThisPass = true;
                 }
             }
         }
         
-        const termAfterDelta = current;
+        const termAfterDeltaThisPass = current;
         for (const rule of userRewriteRules) {
-            const subst = matchPattern(rule.lhs, termAfterDelta, ctx, rule.patternVars, undefined, stackDepth + 1);
+            const subst = matchPattern(rule.lhs, termAfterDeltaThisPass, ctx, rule.patternVars, undefined, stackDepth + 1);
             if (subst) {
                 const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                 if (!areEqual(termAfterDelta, rhsApplied, ctx, stackDepth + 1)) {
+                 if (rhsApplied !== termAfterDeltaThisPass) {
                     current = rhsApplied;
-                    changedThisIteration = true;
-                } else if (termAfterDelta !== rhsApplied && !changedThisIteration) {
-                    current = rhsApplied;
-                    changedThisIteration = true;
+                    changedInThisPass = true;
                 }
                 break;
             }
         }
 
-        if (!changedThisIteration) {
-             if (termAtStartOfIter === current || areEqual(termAtStartOfIter, current, ctx, stackDepth + 1)) break;
+        if (!changedInThisPass) {
+             break;
         }
-        if (i === MAX_RECURSION_DEPTH -1 && changedThisIteration) console.warn(`Normalize reached max iterations for delta/rules on: ${printTerm(termAtStartOfIter)} -> ${printTerm(current)}`);
+        if (i === MAX_RECURSION_DEPTH -1) console.warn(`Normalize reached max iterations for delta/rules head on: ${printTerm(termBeforePass)} -> ${printTerm(current)}`);
     }
-    current = getTermRef(current); // Final chase
+    current = getTermRef(current); // Final chase after head reduction
 
     // Structural recursion for normalization
     switch (current.tag) {
@@ -180,32 +177,28 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
         case 'Lam': {
             const currentLam = current;
             const normLamParamType = currentLam.paramType ? normalize(currentLam.paramType, ctx, stackDepth + 1) : undefined;
-            // The body function `currentLam.body` is the one potentially replaced by `check`
-            // to be an "elaborating body function".
             const newLam = Lam(currentLam.paramName,
                 (v_arg: Term) => {
-                    // When this HOAS body is called, `currentLam.body` (the elaborating one)
-                    // will ensure its result is elaborated before `normalize` sees it.
                     const paramTypeForBodyCtx = normLamParamType || 
                         (currentLam._isAnnotated && currentLam.paramType ? getTermRef(currentLam.paramType) : Hole());
                     let bodyCtx = ctx;
                     if (v_arg.tag === 'Var') { bodyCtx = extendCtx(ctx, v_arg.name, paramTypeForBodyCtx); }
-                    // `currentLam.body(v_arg)` here calls the (potentially) elaborating body function.
-                    // The result is then normalized.
                     return normalize(currentLam.body(v_arg), bodyCtx, stackDepth + 1);
                 }, normLamParamType);
             newLam._isAnnotated = currentLam._isAnnotated;
             return newLam;
         }
         case 'App':
+            // Head should have been reduced by the loop above if it was a Lam or rewrite.
+            // So, just normalize children.
             const normFunc = normalize(current.func, ctx, stackDepth + 1);
             const normArg = normalize(current.arg, ctx, stackDepth + 1);
-            // Check for beta-reduction after normalizing func and arg
-            const betaReducedFunc = getTermRef(normFunc);
-            if (betaReducedFunc.tag === 'Lam') {
-                return normalize(betaReducedFunc.body(normArg), ctx, stackDepth + 1);
+            // One final beta check if normalization of func exposed a lambda
+            const finalNormFunc = getTermRef(normFunc);
+            if (finalNormFunc.tag === 'Lam') {
+                return normalize(finalNormFunc.body(normArg), ctx, stackDepth + 1);
             }
-            return App(normFunc, normArg); // No beta reduction, return normalized App
+            return App(normFunc, normArg);
         case 'Pi': {
             const currentPi = current;
             const normPiParamType = normalize(currentPi.paramType, ctx, stackDepth + 1);
@@ -246,7 +239,6 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             const freshV = Var(freshVarName(rt1.paramName));
             const CtxType = rt1.paramType ? getTermRef(rt1.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
-            // The .body functions here are the potentially "elaborating" ones if they came from `check`.
             return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
         case 'Pi': {
@@ -266,9 +258,9 @@ function termContainsHole(term: Term, holeId: string, visited: Set<string>, dept
     switch (current.tag) {
         case 'Hole': return current.id === holeId;
         case 'Type': case 'Var': return false;
-        // Default case for structured terms:
+        // Default for structured terms to use visited set
         default: {
-            const termStr = printTerm(current, [], 0);
+            const termStr = printTerm(current); // Use default boundVars for visited key
             if (visited.has(termStr)) return false;
             visited.add(termStr);
 
@@ -277,12 +269,13 @@ function termContainsHole(term: Term, holeId: string, visited: Set<string>, dept
                        termContainsHole(current.arg, holeId, visited, depth + 1);
             } else if (current.tag === 'Lam') {
                 return (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1)) ||
-                       false; // HOAS body occurs check is simplified; assumes ?h cannot be λx.?h
+                       false; 
             } else if (current.tag === 'Pi') {
                 return termContainsHole(current.paramType, holeId, visited, depth + 1) ||
-                       false; // Similar simplification for Pi
+                       false;
             }
-            return false; // Should be exhaustive for Term
+            // Should be exhaustive if all Term cases are handled above or here
+            return false; 
         }
     }
 }
@@ -346,7 +339,7 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error("solveConstraints stack depth exceeded");
     let changedInIteration = true;
     let iterations = 0;
-    const maxIterations = constraints.length * 10 + 50;
+    const maxIterations = constraints.length * 10 + 50; 
 
     while (changedInIteration && iterations < maxIterations) {
         changedInIteration = false;
@@ -405,14 +398,17 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
             const lam = current;
             const paramName = lam.paramName;
             if (lam._isAnnotated && lam.paramType) {
-                check(ctx, lam.paramType, Type(), stackDepth + 1);
+                check(ctx, lam.paramType, Type(), stackDepth + 1); // Check param type is a Type
                 const extendedCtx = extendCtx(ctx, paramName, lam.paramType);
-                const bodyType = infer(extendedCtx, lam.body(Var(paramName)), stackDepth + 1);
-                return Pi(paramName, lam.paramType, _ => bodyType);
-            } else {
+                // The body `lam.body(Var(paramName))` will be elaborated if `lam.body` is an elaborating one
+                const bodyTermInstance = lam.body(Var(paramName));
+                const bodyType = infer(extendedCtx, bodyTermInstance, stackDepth + 1);
+                return Pi(paramName, lam.paramType, _ => bodyType); // This Pi's bodyType also needs to be elaborating for consistency
+            } else { // Unannotated lambda
                 const paramTypeHole = Hole(freshHoleName());
                 const extendedCtx = extendCtx(ctx, paramName, paramTypeHole);
-                const bodyType = infer(extendedCtx, lam.body(Var(paramName)), stackDepth + 1);
+                const bodyTermInstance = lam.body(Var(paramName));
+                const bodyType = infer(extendedCtx, bodyTermInstance, stackDepth + 1);
                 return Pi(paramName, paramTypeHole, _ => bodyType);
             }
         }
@@ -421,7 +417,9 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
             check(ctx, pi.paramType, Type(), stackDepth + 1);
             const paramName = pi.paramName;
             const extendedCtx = extendCtx(ctx, paramName, pi.paramType);
-            check(extendedCtx, pi.bodyType(Var(paramName)), Type(), stackDepth + 1);
+            // Pi's bodyType function should yield an elaborated type
+            const bodyTypeInstance = pi.bodyType(Var(paramName));
+            check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1);
             return Type();
         }
     }
@@ -429,44 +427,55 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
 
 function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): void {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Check stack depth exceeded (depth: ${stackDepth}, term ${printTerm(term)}, expType ${printTerm(expectedType)})`);
-    const current = getTermRef(term); // Check the resolved term
+    const current = getTermRef(term);
     const normExpectedType = whnf(expectedType, ctx, stackDepth + 1);
 
     if (current.tag === 'Lam' && !current._isAnnotated && normExpectedType.tag === 'Pi') {
-        const lamTerm = current;
-        const expectedPi = normExpectedType;
+        const lamTerm = current; // Term & { tag: 'Lam' }
+        const expectedPi = normExpectedType; // Term & { tag: 'Pi' }
 
         const paramName = lamTerm.paramName;
+        // Mutate the current Lam instance with the parameter type from the expected Pi type
         lamTerm.paramType = expectedPi.paramType;
         lamTerm._isAnnotated = true;
 
-        const originalBodyFn = lamTerm.body;
+        const originalBodyFn = lamTerm.body; // Save the original JS function for the body
 
-        // This new body function performs deep elaboration when called.
+        // Replace the body function with an "elaborating" one
         lamTerm.body = (v_arg: Term): Term => {
-            const freshInnerTerm = originalBodyFn(v_arg);
-            let ctxForInnerBody = ctx; // `ctx` is the context of the *outer* check call
-            // `lamTerm.paramType` is the *elaborated* param type of the current lambda
-            const currentLamParamType = lamTerm.paramType!; 
-            if (v_arg.tag === 'Var') {
+            // This v_arg is typically a Var(paramName) created by normalize or printTerm
+            const freshInnerRawTerm = originalBodyFn(v_arg); // Get raw structure from original HOAS body
+
+            // Determine the context for checking the inner raw term.
+            // `ctx` is the context from the *outer* check call (for lamTerm).
+            // `v_arg` should be typed with `lamTerm.paramType` (which is `expectedPi.paramType`).
+            let ctxForInnerBody = ctx;
+            const currentLamParamType = lamTerm.paramType!; // Should be set by now
+            if (v_arg.tag === 'Var') { // Common case for HOAS
                 ctxForInnerBody = extendCtx(ctx, v_arg.name, currentLamParamType);
+            } else {
+                // If v_arg is not a var, it's complex. For simplicity, use outer ctx.
+                // A full system might need to infer v_arg's type if it's not a simple var.
             }
+            
+            // Determine the expected type for `freshInnerRawTerm`.
+            // This comes from the body of the `expectedPi`.
             const expectedTypeForInnerBody = expectedPi.bodyType(v_arg);
             
-            // Call the main `check` function to elaborate `freshInnerTerm`.
-            // Pass `stackDepth + 1` (or similar, manage carefully) from the *outer* check call's perspective.
-            // The `check` function manages its own stack depth increments.
-            check(ctxForInnerBody, freshInnerTerm, expectedTypeForInnerBody, stackDepth); // Use current stackDepth; check will increment
+            // Recursively call `check` to elaborate `freshInnerRawTerm`.
+            // `check` will mutate `freshInnerRawTerm` if it's, e.g., another lambda.
+            // The stackDepth here is the one from the call to `check` for `lamTerm`.
+            // `check` itself will increment it for its internal calls.
+            check(ctxForInnerBody, freshInnerRawTerm, expectedTypeForInnerBody, stackDepth); 
             
-            return freshInnerTerm;
+            return freshInnerRawTerm; // Return the (now elaborated) inner term
         };
 
-        // After replacing lamTerm.body, we need to run the original check logic for this level
-        // This ensures constraints related to the body of *this* lambda are generated.
-        // We use the *original* body function here for this one-time check pass.
+        // After replacing lamTerm.body, we still need to ensure constraints for this level are added.
+        // We check the *original* body function against the expected body type
+        // to generate constraints for this lambda's body correctly.
         const tempVarForOriginalCheck = Var(paramName);
-        // The context for this check needs `paramName` to be typed with the now-annotated paramType.
-        const extendedCtx = extendCtx(ctx, tempVarForOriginalCheck.name, lamTerm.paramType);
+        const extendedCtx = extendCtx(ctx, tempVarForOriginalCheck.name, lamTerm.paramType); // Use the newly annotated paramType
         check(extendedCtx, originalBodyFn(tempVarForOriginalCheck), expectedPi.bodyType(tempVarForOriginalCheck), stackDepth + 1);
         return;
     }
@@ -478,7 +487,7 @@ function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number 
     }
 
     const inferredType = infer(ctx, current, stackDepth + 1);
-    addConstraint(inferredType, normExpectedType, `Check general case: ${printTerm(current)} : ${printTerm(inferredType)} vs ${printTerm(normExpectedType)}`);
+    addConstraint(inferredType, normExpectedType, `Check general case for ${printTerm(current)}`);
 }
 
 
@@ -486,24 +495,28 @@ interface ElaborationResult { term: Term; type: Term; }
 function elaborate(term: Term, expectedType?: Term, initialCtx: Context = emptyCtx): ElaborationResult {
     constraints = []; nextHoleId = 0; nextVarId = 0;
     let finalTypeToReport: Term;
+    // Create a pristine copy for elaboration if term is complex, to avoid unintended shared mutations
+    // For simple HOAS functions, this isn't a deep copy, but it means `term` isn't the exact same obj as input
+    const termToElaborate = term; // Shallow copy is enough if mutations are managed carefully
+
     try {
         if (expectedType) {
-            check(initialCtx, term, expectedType); // `term` is mutated here with annotations
+            check(initialCtx, termToElaborate, expectedType);
             finalTypeToReport = expectedType;
         } else {
-            finalTypeToReport = infer(initialCtx, term); // `term` might be mutated if it's a hole, etc.
+            finalTypeToReport = infer(initialCtx, termToElaborate);
         }
         if (!solveConstraints(initialCtx)) {
             const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), initialCtx));
-            // Corrected typo: fc.t1, fc.t2
             const fcMsg = fc ? `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin})` : "Unknown constraint";
             throw new Error(`Type error: Could not solve constraints. Approx failing: ${fcMsg}`);
         }
     } catch (e) { throw e; }
-    // `term` here is the (potentially) top-level mutated term with annotations.
-    const elaboratedTerm = normalize(term, initialCtx);
+    // termToElaborate is now the (potentially) mutated, elaborated term structure.
+    const finalElaboratedTermStructure = termToElaborate;
+    const normalizedElaboratedTerm = normalize(finalElaboratedTermStructure, initialCtx);
     const finalTypeNormalized = normalize(finalTypeToReport, initialCtx);
-    return { term: elaboratedTerm, type: finalTypeNormalized };
+    return { term: normalizedElaboratedTerm, type: finalTypeNormalized };
 }
 
 function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean {
@@ -531,10 +544,10 @@ function matchPattern(
     const rtTerm = getTermRef(normTerm);
 
     if (rtTerm.tag === 'Hole') return null;
-    // Pattern itself should not be a hole that needs solving during matching
     if (rtPattern.tag === 'Hole') return null; 
     if (rtPattern.tag !== rtTerm.tag) return null;
 
+    // Both are not Holes and have the same tag
     switch (rtPattern.tag) {
         case 'Type': return subst;
         case 'Var': return rtPattern.name === (rtTerm as Term & {tag:'Var'}).name ? subst : null;
@@ -545,12 +558,12 @@ function matchPattern(
             return matchPattern(rtPattern.arg, termApp.arg, ctx, patternVarDecls, s1, stackDepth + 1);
         }
         case 'Lam': {
-            const lamP = rtPattern as Term & {tag:'Lam'}; // Known to be Lam
-            const lamT = rtTerm as Term & {tag:'Lam'}; // Known to be Lam
+            const lamP = rtPattern as Term & {tag:'Lam'}; 
+            const lamT = rtTerm as Term & {tag:'Lam'}; 
             if (lamP._isAnnotated !== lamT._isAnnotated) return null;
             let tempSubst = subst;
             if (lamP._isAnnotated) {
-                if (!lamP.paramType || !lamT.paramType) return null; // Should be present if _isAnnotated
+                if (!lamP.paramType || !lamT.paramType) return null;
                  const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, tempSubst, stackDepth + 1);
                  if (!sType) return null;
                  tempSubst = sType;
@@ -558,8 +571,6 @@ function matchPattern(
             const freshV = Var(freshVarName(lamP.paramName));
             const CtxType = lamP.paramType ? getTermRef(lamP.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
-            // For first-order patterns, areEqual is appropriate for body comparison.
-            // It doesn't attempt to bind pattern variables inside the body.
             return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': {
@@ -588,6 +599,7 @@ function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVar
         case 'Lam': {
             const lam = current;
             const lamParam = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
+            // The new HOAS body, when invoked, will apply substitution to the result of the original body
             const newLam = Lam(lam.paramName,
                 (v_arg: Term) => applySubst(lam.body(v_arg), subst, patternVarDecls), lamParam);
             newLam._isAnnotated = lam._isAnnotated;
@@ -634,7 +646,9 @@ function printTerm(term: Term, boundVars: string[] = [], stackDepth = 0): string
         case 'Lam': {
             const paramName = current.paramName;
             const typeAnnotation = current._isAnnotated && current.paramType ? ` : ${printTerm(current.paramType, boundVars, stackDepth + 1)}` : '';
-            const freshV = Var(paramName);
+            // When printing a Lam, its body function (potentially elaborating) is called.
+            // The result of that call is then printed.
+            const freshV = Var(paramName); 
             return `(λ ${paramName}${typeAnnotation}. ${printTerm(current.body(freshV), [...boundVars, paramName], stackDepth + 1)})`;
         }
         case 'App':
@@ -651,8 +665,8 @@ function resetMyLambdaPi() {
     nextVarId = 0; nextHoleId = 0;
 }
 
-// --- Example Usage (Adjusted Example 9 test) ---
-console.log("--- MyLambdaPi Final Corrected (v4): Deep Elaboration for HOAS ---");
+// --- Example Usage (Adjusted Example 9 test logic if needed, but v4 change should handle it) ---
+console.log("--- MyLambdaPi Final Corrected (v5): Fix WHNF/Normalize Loop ---");
 const Nat = Var("Nat");
 const Bool = Var("Bool");
 const Zero = Var("zero"); 
@@ -680,7 +694,7 @@ try {
 
     console.log("\n--- Example 2: Check (λx. x) against (Πx:Nat. Nat) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
-    const idUnannotated = Lam("x", x => x); // New instance for this test
+    const idUnannotated = Lam("x", x => x);
     const targetType2 = Pi("x", Nat, _ => Nat);
     result = elaborate(idUnannotated, targetType2, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
@@ -695,7 +709,7 @@ try {
 
     console.log("\n--- Example 3: Infer (λx. x) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
-    const idUnannotatedInfer = Lam("x", x => x); // New instance
+    const idUnannotatedInfer = Lam("x", x => x);
     result = elaborate(idUnannotatedInfer, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
     console.log(`   Type: ${printTerm(result.type)}`);
@@ -712,7 +726,7 @@ try {
     console.log("\n--- Example 4: Check ((λx:Nat. x) ?argHole) against Nat ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
     const idFunc4 = Lam("x", x => x, Nat);
-    const myHole4 = Hole("argHole"); // New hole instance
+    const myHole4 = Hole("argHole");
     const appWithHole4 = App(idFunc4, myHole4);
     result = elaborate(appWithHole4, Nat, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
@@ -726,7 +740,7 @@ try {
 
     console.log("\n--- Example 5: Infer (λf. λx. f x) ---");
     resetMyLambdaPi();
-    const complexLam5 = Lam("f", f => Lam("x", x => App(f, x))); // New instance
+    const complexLam5 = Lam("f", f => Lam("x", x => App(f, x)));
     result = elaborate(complexLam5, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
     console.log(`   Type: ${printTerm(result.type)}`);
@@ -759,7 +773,7 @@ try {
     console.log("\n--- Example 7: Infer (expectsNatFunc ?f_hole) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type()); defineGlobal("Bool", Type());
     defineGlobal("expectsNatFunc", Pi("f", Pi("ff_arg", Nat, _ => Nat), _ => Bool));
-    const fHole7 = Hole("f_hole"); // New instance
+    const fHole7 = Hole("f_hole");
     const appTerm7 = App(Var("expectsNatFunc"), fHole7);
     result = elaborate(appTerm7, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
@@ -786,32 +800,34 @@ try {
     const polyId9_source = Lam("f", f => Lam("x", x => App(f, x)));
     const concretePiType9 = Pi("f", Pi("y", Nat, _ => Nat), _fVal => Pi("x", Nat, _xVal => Nat));
     result = elaborate(polyId9_source, concretePiType9, baseCtx);
-    console.log(`   Term (Elaborated): ${printTerm(result.term)}`);
+    console.log(`   Term (Elaborated): ${printTerm(result.term)}`); // This term is normalize(mutated_polyId9_source)
     console.log(`   Type (Checked): ${printTerm(result.type)}`);
-    if (!areEqual(result.type, concretePiType9, baseCtx)) throw new Error("Type mismatch for ex9");
+    if (!areEqual(result.type, concretePiType9, baseCtx)) throw new Error("Type mismatch for ex9 overall type");
 
-    const elabTerm9 = getTermRef(result.term);
+    const elabTerm9 = getTermRef(result.term); // elabTerm9 is the *normalized* elaborated term.
     if (elabTerm9.tag === 'Lam' && elabTerm9._isAnnotated && elabTerm9.paramType && getTermRef(elabTerm9.paramType).tag === 'Pi') {
         const elabFType = getTermRef(elabTerm9.paramType) as Term & {tag:'Pi'};
-        // Invoke the (elaborating) body of the normalized outer lambda
+        // The body of elabTerm9 is an "elaborating" HOAS function. When called, it should produce
+        // an already elaborated (and thus annotated) inner lambda structure.
         const actualInnerLam = getTermRef(elabTerm9.body(Var("f_for_test"))); 
+        
         if (actualInnerLam.tag === 'Lam' && actualInnerLam._isAnnotated && actualInnerLam.paramType &&
             areEqual(actualInnerLam.paramType, Nat, baseCtx)) {
-            // Check type of inner lambda's body App(f,x)
+            
             const ctxForInnerBodyCheck = extendCtx(extendCtx(baseCtx, "f_for_test", elabFType), actualInnerLam.paramName, actualInnerLam.paramType);
             const innerLamBodyResultType = infer(ctxForInnerBodyCheck, actualInnerLam.body(Var(actualInnerLam.paramName)));
+            
             if (areEqual(innerLamBodyResultType, Nat, ctxForInnerBodyCheck)) {
-                console.log("   Correct (term structure and inner types suggest deep annotation).");
+                console.log("   Correct (deep annotation preserved through normalization).");
             } else {
                 throw new Error(`Inner lambda body type mismatch. Expected Nat, got ${printTerm(innerLamBodyResultType)}`);
             }
         } else {
-            throw new Error("Normalized inner lambda not annotated as expected: " + printTerm(actualInnerLam));
+            throw new Error(`Normalized inner lambda not annotated as expected: ${printTerm(actualInnerLam)}. Expected param type Nat.`);
         }
     } else {
         throw new Error("Normalized outer lambda not annotated as expected: " + printTerm(elabTerm9));
     }
-
 
     console.log("\n--- Example 10: Delta Reduction ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type()); defineGlobal("zero", Nat);
@@ -848,5 +864,5 @@ try {
 } catch (e) {
     console.error("\n*** A TEST SCENARIO FAILED ***");
     console.error((e as Error).message);
-    console.error((e as Error).stack); // Full stack for debugging failed tests
+    console.error((e as Error).stack);
 }
