@@ -1,13 +1,15 @@
-// --- MyLambdaPi Final Corrected: Bidirectional, Unification, Defs, Rewrite Rules ---
+// --- MyLambdaPi Final Corrected (v4): Deep Elaboration for HOAS ---
 
-// --- Report on Changed Specification (Same as previous detailed report) ---
-// This implementation focuses on a core lambda calculus with Pi types,
-// bidirectional type checking, unification-based hole solving,
-// user-defined global symbols with delta reduction, and
-// user-provided first-order rewrite rules with type preservation checks.
-// Identity types are omitted.
-// Fixes for previous errors related to lambda elaboration, hole type querying,
-// and TypeScript type errors are included.
+// --- Report on Changed Specification ---
+// This version implements a "deep elaboration" strategy for lambda terms within the `check` function.
+// When a lambda is checked against a Pi type, not only is its parameter type annotated, but its
+// HOAS `body` function is replaced. The new `body` function, when invoked, ensures that the
+// term it produces (by calling the original body function) is itself recursively checked/elaborated
+// against the expected type derived from the outer Pi. This allows `normalize` to operate on
+// term structures that are more thoroughly annotated, addressing issues like the one in Example 9.
+// TSC errors from the previous snippet are also addressed.
+// The core phases remain: an elaboration+typechecking phase (which now does this deeper work)
+// followed by a normalization phase on the elaborated terms.
 // --- End Report ---
 
 let nextVarId = 0;
@@ -15,11 +17,6 @@ const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`;
 
 let nextHoleId = 0;
 const freshHoleName = (): string => `?h${nextHoleId++}`;
-
-// --- Term and PatternTerm Types ---
-// PatternVar is only a tag for the pattern structure, not a full Term itself.
-// In LHS/RHS of rules, actual pattern variables are represented as Var nodes
-// whose names are declared in rule.patternVars.
 
 type BaseTerm =
     | { tag: 'Type' }
@@ -30,16 +27,8 @@ type BaseTerm =
     | { tag: 'Hole', id: string, ref?: Term, elaboratedType?: Term };
 
 type Term = BaseTerm;
-
-// For rule definition, LHS/RHS can conceptually include pattern variables.
-// We'll represent these as `Var` nodes whose names are in `rule.patternVars`.
-// PatternTerm is mostly for conceptual clarity during rule definition; the actual
-// structure stored in rule.lhs/rhs will be `Term`.
 type PatternVarDecl = { name: string, type: Term };
-// PatternTerm is not strictly needed as a separate type if we use Var for pattern vars.
 
-
-// --- Constructors ---
 const Type = (): Term => ({ tag: 'Type' });
 const Var = (name: string): Term & { tag: 'Var' } => ({ tag: 'Var', name });
 const Lam = (paramName: string, body: (v: Term) => Term, paramType?: Term): Term & { tag: 'Lam' } =>
@@ -47,265 +36,260 @@ const Lam = (paramName: string, body: (v: Term) => Term, paramType?: Term): Term
 const App = (func: Term, arg: Term): Term => ({ tag: 'App', func, arg });
 const Pi = (paramName: string, paramType: Term, bodyType: (v: Term) => Term): Term =>
     ({ tag: 'Pi', paramName, paramType, bodyType });
-
 const Hole = (id?: string): Term & { tag: 'Hole' } => {
     const holeId = id || freshHoleName();
     return { tag: 'Hole', id: holeId, ref: undefined, elaboratedType: undefined };
 };
 
-// --- Contexts and Global Definitions ---
 type Binding = { name: string, type: Term };
 type Context = Binding[];
-
 const emptyCtx: Context = [];
 const extendCtx = (ctx: Context, name: string, type: Term): Context => [{ name, type }, ...ctx];
 const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
 
 interface GlobalDef { name: string; type: Term; value?: Term; }
 const globalDefs: Map<string, GlobalDef> = new Map();
-
 function defineGlobal(name: string, type: Term, value?: Term) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     globalDefs.set(name, { name, type, value });
 }
 
-// --- Rewrite Rules ---
-interface RewriteRule {
-    name: string;
-    patternVars: PatternVarDecl[];
-    lhs: Term; // LHS is a Term where some Vars are pattern vars
-    rhs: Term; // RHS is a Term where some Vars are pattern vars
-}
+interface RewriteRule { name: string; patternVars: PatternVarDecl[]; lhs: Term; rhs: Term; }
 const userRewriteRules: RewriteRule[] = [];
+function addRewriteRule(rule: RewriteRule) { userRewriteRules.push(rule); }
 
-function addRewriteRule(rule: RewriteRule) {
-    userRewriteRules.push(rule);
-}
-
-type Substitution = Map<string, Term>; // Maps pattern var name to Term
-
-
-// --- Constraints and Unification ---
+type Substitution = Map<string, Term>;
 interface Constraint { t1: Term; t2: Term; origin?: string; }
-let constraints: Constraint[] = []; // Changed to let for resetMyLambdaPi
+let constraints: Constraint[] = [];
 
-function addConstraint(t1: Term, t2: Term, origin?: string) {
-    constraints.push({ t1, t2, origin });
-}
-
+function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
 function getTermRef(term: Term): Term {
     if (term.tag === 'Hole' && term.ref) return getTermRef(term.ref);
     return term;
 }
 
-
-// --- Normalization (WHNF and Full) ---
-const MAX_RECURSION_DEPTH = 100;
-const MAX_STACK_DEPTH = 70;
+const MAX_RECURSION_DEPTH = 100; // For delta/rule loops
+const MAX_STACK_DEPTH = 70;     // For TS call stack
 
 function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error("WHNF stack depth exceeded");
+    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     let current = getTermRef(term);
-    let iterationTerm = current; // Term at the start of the current fixed-point iteration
 
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
-        const prevIterationTerm = iterationTerm; // Save term from start of *this* iteration
+        let changedThisIteration = false;
+        const termAtStartOfIter = current; // Physical identity for this check
 
-        // 1. Delta Reduction
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
             if (gdef && gdef.value) {
-                current = getTermRef(gdef.value);
-            }
-        }
-
-        // 2. Rewrite Rules
-        let ruleAppliedThisIter = false;
-        for (const rule of userRewriteRules) {
-            const subst = matchPattern(rule.lhs, current, ctx, rule.patternVars, undefined, stackDepth + 1);
-            if (subst) {
-                current = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                ruleAppliedThisIter = true;
-                break;
+                const valRef = getTermRef(gdef.value);
+                if (valRef !== current) { // Avoid loop if x = x
+                     current = valRef;
+                     changedThisIteration = true;
+                }
             }
         }
         
-        iterationTerm = current; // Update term for next fixed-point check
-        // If no change after delta and one rule pass, break fixed-point loop
-        if (areEqual(prevIterationTerm, iterationTerm, ctx, stackDepth + 1)) {
-            break;
+        const termAfterDelta = current;
+        // Try rules even if delta changed, as rules might apply to the new term
+        for (const rule of userRewriteRules) {
+            const subst = matchPattern(rule.lhs, termAfterDelta, ctx, rule.patternVars, undefined, stackDepth + 1);
+            if (subst) {
+                const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
+                // Check for semantic change to avoid loops with identity rules or non-converging rules
+                if (!areEqual(termAfterDelta, rhsApplied, ctx, stackDepth + 1)) {
+                    current = rhsApplied;
+                    changedThisIteration = true;
+                } else if (termAfterDelta !== rhsApplied && !changedThisIteration) {
+                    // Rule applied but result is equal (e.g. eta rule).
+                    // Consider it a change if physical identity changed to ensure progress with such rules.
+                    current = rhsApplied;
+                    changedThisIteration = true;
+                }
+                break; 
+            }
         }
-        if (i === MAX_RECURSION_DEPTH -1) console.warn("WHNF reached max iterations for delta/rules");
+        
+        if (!changedThisIteration) {
+            // If areEqual says they are same, they are. Only break if no change.
+            if (termAtStartOfIter === current || areEqual(termAtStartOfIter, current, ctx, stackDepth + 1)) break;
+        }
+        if (i === MAX_RECURSION_DEPTH -1 && changedThisIteration) console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(termAtStartOfIter)} -> ${printTerm(current)}`);
     }
-    // current is now the result of delta/rewrite reductions at this level.
+    current = getTermRef(current); // Re-chase if last rule was identity map
 
-    // 3. Beta Reduction
-    current = getTermRef(current); // Re-chase refs after delta/rules
     if (current.tag === 'App') {
         const funcNorm = whnf(current.func, ctx, stackDepth + 1);
         if (funcNorm.tag === 'Lam') {
-            return whnf(funcNorm.body(current.arg), ctx, stackDepth + 1);
+            return whnf(funcNorm.body(current.arg), ctx, stackDepth + 1); // Beta reduction
         }
+        // Reconstruct App if the function part changed, even if it didn't become a Lam
+        // This ensures that if a rule rewrote `f` to `g` in `f x`, we get `g x`.
         if (funcNorm !== getTermRef(current.func)) return App(funcNorm, current.arg);
-        return current;
+        return current; // Original App
     }
     return current;
 }
 
 function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error("Normalize stack depth exceeded");
+    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Normalize stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     let current = getTermRef(term);
-    let iterationTerm = current;
 
+    // Apply top-level delta/rules iteratively (similar to whnf's head reduction)
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
-        const prevIterationTerm = iterationTerm;
+        let changedThisIteration = false;
+        const termAtStartOfIter = current;
+
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
             if (gdef && gdef.value) {
-                current = getTermRef(gdef.value);
+                const valRef = getTermRef(gdef.value);
+                 if (valRef !== current) { 
+                    current = valRef;
+                    changedThisIteration = true;
+                }
             }
         }
-        let ruleAppliedThisIter = false;
+        
+        const termAfterDelta = current;
         for (const rule of userRewriteRules) {
-            const subst = matchPattern(rule.lhs, current, ctx, rule.patternVars, undefined, stackDepth + 1);
+            const subst = matchPattern(rule.lhs, termAfterDelta, ctx, rule.patternVars, undefined, stackDepth + 1);
             if (subst) {
-                current = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                ruleAppliedThisIter = true;
+                const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
+                 if (!areEqual(termAfterDelta, rhsApplied, ctx, stackDepth + 1)) {
+                    current = rhsApplied;
+                    changedThisIteration = true;
+                } else if (termAfterDelta !== rhsApplied && !changedThisIteration) {
+                    current = rhsApplied;
+                    changedThisIteration = true;
+                }
                 break;
             }
         }
-        iterationTerm = current;
-        if (areEqual(prevIterationTerm, iterationTerm, ctx, stackDepth + 1)) break;
-        if (i === MAX_RECURSION_DEPTH -1) console.warn("Normalize reached max iterations for delta/rules");
-    }
-    current = getTermRef(current);
 
+        if (!changedThisIteration) {
+             if (termAtStartOfIter === current || areEqual(termAtStartOfIter, current, ctx, stackDepth + 1)) break;
+        }
+        if (i === MAX_RECURSION_DEPTH -1 && changedThisIteration) console.warn(`Normalize reached max iterations for delta/rules on: ${printTerm(termAtStartOfIter)} -> ${printTerm(current)}`);
+    }
+    current = getTermRef(current); // Final chase
+
+    // Structural recursion for normalization
     switch (current.tag) {
         case 'Type': case 'Var': case 'Hole': return current;
-        case 'Lam':
-            const lamParamTypeRef = current.paramType ? getTermRef(current.paramType) : undefined;
-            const normLamParamType = lamParamTypeRef ? normalize(lamParamTypeRef, ctx, stackDepth + 1) : undefined;
-            
-            // For HOAS body, normalization should "look inside" by applying to a generic var
-            // and normalizing the result in an appropriately extended context.
-            const newLam = Lam(current.paramName,
+        case 'Lam': {
+            const currentLam = current;
+            const normLamParamType = currentLam.paramType ? normalize(currentLam.paramType, ctx, stackDepth + 1) : undefined;
+            // The body function `currentLam.body` is the one potentially replaced by `check`
+            // to be an "elaborating body function".
+            const newLam = Lam(currentLam.paramName,
                 (v_arg: Term) => {
-                    // The context for normalizing body(v_arg) should be the original context 'ctx'
-                    // extended with v_arg : (type of param).
-                    const paramTypeForBodyCtx = normLamParamType || (current._isAnnotated && current.paramType ? getTermRef(current.paramType) : Hole());
-                    // If v_arg is a Var, its name should be fresh or match current.paramName
+                    // When this HOAS body is called, `currentLam.body` (the elaborating one)
+                    // will ensure its result is elaborated before `normalize` sees it.
+                    const paramTypeForBodyCtx = normLamParamType || 
+                        (currentLam._isAnnotated && currentLam.paramType ? getTermRef(currentLam.paramType) : Hole());
                     let bodyCtx = ctx;
-                    if (v_arg.tag === 'Var') { // This is typical for HOAS
-                        bodyCtx = extendCtx(ctx, v_arg.name, paramTypeForBodyCtx);
-                    }
-                    return normalize(current.body(v_arg), bodyCtx, stackDepth + 1);
-                },
-                normLamParamType);
-            newLam._isAnnotated = current._isAnnotated;
+                    if (v_arg.tag === 'Var') { bodyCtx = extendCtx(ctx, v_arg.name, paramTypeForBodyCtx); }
+                    // `currentLam.body(v_arg)` here calls the (potentially) elaborating body function.
+                    // The result is then normalized.
+                    return normalize(currentLam.body(v_arg), bodyCtx, stackDepth + 1);
+                }, normLamParamType);
+            newLam._isAnnotated = currentLam._isAnnotated;
             return newLam;
+        }
         case 'App':
             const normFunc = normalize(current.func, ctx, stackDepth + 1);
             const normArg = normalize(current.arg, ctx, stackDepth + 1);
-            if (normFunc.tag === 'Lam') {
-                return normalize(normFunc.body(normArg), ctx, stackDepth + 1); // Beta reduction
+            // Check for beta-reduction after normalizing func and arg
+            const betaReducedFunc = getTermRef(normFunc);
+            if (betaReducedFunc.tag === 'Lam') {
+                return normalize(betaReducedFunc.body(normArg), ctx, stackDepth + 1);
             }
-            return App(normFunc, normArg);
-        case 'Pi':
-            const normPiParamType = normalize(current.paramType, ctx, stackDepth + 1);
-            const newPi = Pi(current.paramName, normPiParamType,
-                (v_arg: Term) => {
-                    let bodyTypeCtx = ctx;
-                    if (v_arg.tag === 'Var') {
-                        bodyTypeCtx = extendCtx(ctx, v_arg.name, normPiParamType);
-                    }
-                    return normalize(current.bodyType(v_arg), bodyTypeCtx, stackDepth + 1);
-                });
-            return newPi;
+            return App(normFunc, normArg); // No beta reduction, return normalized App
+        case 'Pi': {
+            const currentPi = current;
+            const normPiParamType = normalize(currentPi.paramType, ctx, stackDepth + 1);
+            return Pi(currentPi.paramName, normPiParamType, (v_arg: Term) => {
+                let bodyTypeCtx = ctx;
+                if (v_arg.tag === 'Var') { bodyTypeCtx = extendCtx(ctx, v_arg.name, normPiParamType); }
+                return normalize(currentPi.bodyType(v_arg), bodyTypeCtx, stackDepth + 1);
+            });
+        }
     }
-    throw new Error(`normalize: Unhandled term tag ${(current as Term).tag}`);
 }
 
-
-// --- Equality and Unification ---
 function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
-    if (depth > MAX_STACK_DEPTH) throw new Error("Equality check depth exceeded");
-
+    if (depth > MAX_STACK_DEPTH) throw new Error(`Equality check depth exceeded (areEqual depth: ${depth})`);
     const normT1 = whnf(t1, ctx, depth + 1);
     const normT2 = whnf(t2, ctx, depth + 1);
-
     const rt1 = getTermRef(normT1);
     const rt2 = getTermRef(normT2);
 
-    if (rt1.tag === 'Hole' || rt2.tag === 'Hole') {
-        return (rt1.tag === 'Hole' && rt2.tag === 'Hole' && rt1.id === rt2.id);
-    }
+    if (rt1.tag === 'Hole' && rt2.tag === 'Hole') return rt1.id === rt2.id;
+    if (rt1.tag === 'Hole' || rt2.tag === 'Hole') return false;
     if (rt1.tag !== rt2.tag) return false;
 
     switch (rt1.tag) {
         case 'Type': return true;
-        case 'Var': return rt1.name === (rt2 as typeof rt1).name;
-        case 'App':
-            return areEqual(rt1.func, (rt2 as typeof rt1).func, ctx, depth + 1) &&
-                   areEqual(rt1.arg, (rt2 as typeof rt1).arg, ctx, depth + 1);
+        case 'Var': return rt1.name === (rt2 as Term & {tag:'Var'}).name;
+        case 'App': {
+            const app2 = rt2 as Term & {tag:'App'};
+            return areEqual(rt1.func, app2.func, ctx, depth + 1) &&
+                   areEqual(rt1.arg, app2.arg, ctx, depth + 1);
+        }
         case 'Lam': {
-            const lam2 = rt2 as typeof rt1;
+            const lam2 = rt2 as Term & {tag:'Lam'};
             if (rt1._isAnnotated !== lam2._isAnnotated) return false;
-            if (rt1._isAnnotated) { // Both should be annotated
+            if (rt1._isAnnotated) {
                 if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) return false;
             }
             const freshV = Var(freshVarName(rt1.paramName));
             const CtxType = rt1.paramType ? getTermRef(rt1.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
+            // The .body functions here are the potentially "elaborating" ones if they came from `check`.
             return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
         case 'Pi': {
-            const pi2 = rt2 as typeof rt1;
+            const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshV = Var(freshVarName(rt1.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(rt1.paramType));
             return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
     }
-    return false;
 }
 
 function termContainsHole(term: Term, holeId: string, visited: Set<string>, depth = 0): boolean {
     if (depth > MAX_STACK_DEPTH) return false;
-
     const current = getTermRef(term);
-    if (current.tag === 'Hole') return current.id === holeId;
-
-    const termStr = printTerm(current, [], 0); // Simple print for visited set key
-    if (visited.has(termStr)) return false;
-    visited.add(termStr);
 
     switch (current.tag) {
+        case 'Hole': return current.id === holeId;
         case 'Type': case 'Var': return false;
-        case 'App':
-            return termContainsHole(current.func, holeId, visited, depth + 1) ||
-                   termContainsHole(current.arg, holeId, visited, depth + 1);
-        case 'Lam': {
-            const paramTypeContains = current.paramType ? termContainsHole(current.paramType, holeId, visited, depth + 1) : false;
-            if (paramTypeContains) return true;
-            // HOAS body - occurs check simplification: for `?h = λx. ...?h...`
-            // This is complex. A common simplification is to not allow a hole to be instantiated
-            // with a function that *closes over* that same hole.
-            // The `visited` set helps for non-HOAS cycles.
-            return false;
-        }
-        case 'Pi': {
-            const paramTypeContains = termContainsHole(current.paramType, holeId, visited, depth + 1);
-            if (paramTypeContains) return true;
-            return false;
+        // Default case for structured terms:
+        default: {
+            const termStr = printTerm(current, [], 0);
+            if (visited.has(termStr)) return false;
+            visited.add(termStr);
+
+            if (current.tag === 'App') {
+                return termContainsHole(current.func, holeId, visited, depth + 1) ||
+                       termContainsHole(current.arg, holeId, visited, depth + 1);
+            } else if (current.tag === 'Lam') {
+                return (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1)) ||
+                       false; // HOAS body occurs check is simplified; assumes ?h cannot be λx.?h
+            } else if (current.tag === 'Pi') {
+                return termContainsHole(current.paramType, holeId, visited, depth + 1) ||
+                       false; // Similar simplification for Pi
+            }
+            return false; // Should be exhaustive for Term
         }
     }
-    return false;
 }
 
 
 function unify(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
-    if (depth > MAX_STACK_DEPTH) throw new Error(`Unification stack depth exceeded`);
-
+    if (depth > MAX_STACK_DEPTH) throw new Error(`Unification stack depth exceeded (depth: ${depth})`);
     const rt1 = getTermRef(t1);
     const rt2 = getTermRef(t2);
 
@@ -318,51 +302,42 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     if (rt1.tag !== rt2.tag) return false;
 
     switch (rt1.tag) {
-        case 'Type': return rt2.tag === 'Type'; // Type = Type
-        case 'Var': return rt2.tag === 'Var' && rt1.name === rt2.name;
-        case 'App':
-            return rt2.tag === 'App' &&
-                   unify(rt1.func, rt2.func, ctx, depth + 1) &&
-                   unify(rt1.arg, rt2.arg, ctx, depth + 1);
+        case 'Type': return true;
+        case 'Var': return rt1.name === (rt2 as Term & {tag:'Var'}).name;
+        case 'App': {
+            const app2 = rt2 as Term & {tag:'App'};
+            return unify(rt1.func, app2.func, ctx, depth + 1) &&
+                   unify(rt1.arg, app2.arg, ctx, depth + 1);
+        }
         case 'Lam': {
-            if (rt2.tag !== 'Lam') return false;
-            if (rt1._isAnnotated !== rt2._isAnnotated) return false;
+            const lam2 = rt2 as Term & {tag:'Lam'};
+            if (rt1._isAnnotated !== lam2._isAnnotated) return false;
             if (rt1._isAnnotated) {
-                if (!rt1.paramType || !rt2.paramType || !unify(rt1.paramType, rt2.paramType, ctx, depth + 1)) return false;
+                if (!rt1.paramType || !lam2.paramType || !unify(rt1.paramType, lam2.paramType, ctx, depth + 1)) return false;
             }
             const freshV = Var(freshVarName(rt1.paramName));
             const CtxType = rt1.paramType ? getTermRef(rt1.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
-            return unify(rt1.body(freshV), rt2.body(freshV), extendedCtx, depth + 1);
+            return unify(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
         case 'Pi': {
-            if (rt2.tag !== 'Pi') return false;
-            if (!unify(rt1.paramType, rt2.paramType, ctx, depth + 1)) return false;
+            const pi2 = rt2 as Term & {tag:'Pi'};
+            if (!unify(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshV = Var(freshVarName(rt1.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(rt1.paramType));
-            return unify(rt1.bodyType(freshV), rt2.bodyType(freshV), extendedCtx, depth + 1);
+            return unify(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
     }
-    return false;
 }
 
 function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, depth: number): boolean {
     const normTerm = getTermRef(term);
-
     if (normTerm.tag === 'Hole') {
         if (hole.id === normTerm.id) return true;
-        // Canonicalize: smaller ID points to larger ID, or some other consistent rule
-        if (hole.id < normTerm.id) {
-             (normTerm as Term & {tag:'Hole'}).ref = hole;
-        } else {
-            hole.ref = normTerm;
-        }
+        if (hole.id < normTerm.id) (normTerm as Term & {tag:'Hole'}).ref = hole; else hole.ref = normTerm;
         return true;
     }
-    if (termContainsHole(normTerm, hole.id, new Set(), depth + 1)) {
-        // console.warn(`Occurs check failed: ${hole.id} in ${printTerm(normTerm)}`);
-        return false;
-    }
+    if (termContainsHole(normTerm, hole.id, new Set(), depth + 1)) return false;
     hole.ref = normTerm;
     return true;
 }
@@ -371,7 +346,7 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error("solveConstraints stack depth exceeded");
     let changedInIteration = true;
     let iterations = 0;
-    const maxIterations = constraints.length * 5 + 50;
+    const maxIterations = constraints.length * 10 + 50;
 
     while (changedInIteration && iterations < maxIterations) {
         changedInIteration = false;
@@ -380,28 +355,20 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
             const constraint = constraints[i];
             if (areEqual(constraint.t1, constraint.t2, ctx, stackDepth + 1)) continue;
             try {
-                if (unify(constraint.t1, constraint.t2, ctx, stackDepth + 1)) {
-                    changedInIteration = true;
-                } else {
-                    return false;
-                }
-            } catch (e) {
-                return false;
-            }
+                if (unify(constraint.t1, constraint.t2, ctx, stackDepth + 1)) { changedInIteration = true; }
+                else { return false; }
+            } catch (e) { return false; }
         }
     }
-    if (iterations >= maxIterations && changedInIteration) { /* console.warn("Constraint solving max iterations."); */ }
+    if (iterations >= maxIterations && changedInIteration) { console.warn("Constraint solving max iterations and still changing."); }
     for (const constraint of constraints) {
-        if (!areEqual(constraint.t1, constraint.t2, ctx, stackDepth + 1)) {
-            return false;
-        }
+        if (!areEqual(constraint.t1, constraint.t2, ctx, stackDepth + 1)) return false;
     }
     return true;
 }
 
-// --- Bidirectional Type Checking ---
 function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded for ${printTerm(term)}`);
+    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     const current = getTermRef(term);
 
     if (current.tag === 'Var') {
@@ -417,7 +384,7 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
         case 'Hole':
             if (current.elaboratedType) return getTermRef(current.elaboratedType);
             const newTypeForHole = Hole(freshHoleName());
-            current.elaboratedType = newTypeForHole; // Mutate to store its type
+            current.elaboratedType = newTypeForHole;
             return newTypeForHole;
         case 'App': {
             const funcType = infer(ctx, current.func, stackDepth + 1);
@@ -425,92 +392,120 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
             if (normFuncType.tag === 'Hole') {
                 const argTypeHole = Hole(freshHoleName());
                 const resultTypeHole = Hole(freshHoleName());
-                const freshPN = freshVarName("appArg");
-                addConstraint(normFuncType, Pi(freshPN, argTypeHole, _ => resultTypeHole), `App func type hole`);
+                const freshPN = freshVarName("appArgInfer");
+                addConstraint(normFuncType, Pi(freshPN, argTypeHole, _ => resultTypeHole), `App func type hole for ${printTerm(current.func)}`);
                 check(ctx, current.arg, argTypeHole, stackDepth + 1);
                 return resultTypeHole;
             }
-            if (normFuncType.tag !== 'Pi') throw new Error(`Cannot apply non-function: ${printTerm(current.func)} : ${printTerm(normFuncType)}`);
+            if (normFuncType.tag !== 'Pi') throw new Error(`Cannot apply non-function: ${printTerm(current.func)} of type ${printTerm(normFuncType)}`);
             check(ctx, current.arg, normFuncType.paramType, stackDepth + 1);
             return normFuncType.bodyType(current.arg);
         }
         case 'Lam': {
-            const paramName = current.paramName; // Use given name
-            if (current._isAnnotated && current.paramType) {
-                check(ctx, current.paramType, Type(), stackDepth + 1);
-                const extendedCtx = extendCtx(ctx, paramName, current.paramType);
-                const bodyType = infer(extendedCtx, current.body(Var(paramName)), stackDepth + 1);
-                return Pi(paramName, current.paramType, _ => bodyType);
+            const lam = current;
+            const paramName = lam.paramName;
+            if (lam._isAnnotated && lam.paramType) {
+                check(ctx, lam.paramType, Type(), stackDepth + 1);
+                const extendedCtx = extendCtx(ctx, paramName, lam.paramType);
+                const bodyType = infer(extendedCtx, lam.body(Var(paramName)), stackDepth + 1);
+                return Pi(paramName, lam.paramType, _ => bodyType);
             } else {
                 const paramTypeHole = Hole(freshHoleName());
                 const extendedCtx = extendCtx(ctx, paramName, paramTypeHole);
-                const bodyType = infer(extendedCtx, current.body(Var(paramName)), stackDepth + 1);
+                const bodyType = infer(extendedCtx, lam.body(Var(paramName)), stackDepth + 1);
                 return Pi(paramName, paramTypeHole, _ => bodyType);
             }
         }
         case 'Pi': {
-            check(ctx, current.paramType, Type(), stackDepth + 1);
-            const paramName = current.paramName;
-            const extendedCtx = extendCtx(ctx, paramName, current.paramType);
-            check(extendedCtx, current.bodyType(Var(paramName)), Type(), stackDepth + 1);
+            const pi = current;
+            check(ctx, pi.paramType, Type(), stackDepth + 1);
+            const paramName = pi.paramName;
+            const extendedCtx = extendCtx(ctx, paramName, pi.paramType);
+            check(extendedCtx, pi.bodyType(Var(paramName)), Type(), stackDepth + 1);
             return Type();
         }
     }
-    throw new Error(`infer: Unhandled term tag ${(current as Term).tag}`);
 }
 
 function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): void {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Check stack depth exceeded`);
-    const current = getTermRef(term); // Important to chase refs for `term` as well
+    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Check stack depth exceeded (depth: ${stackDepth}, term ${printTerm(term)}, expType ${printTerm(expectedType)})`);
+    const current = getTermRef(term); // Check the resolved term
     const normExpectedType = whnf(expectedType, ctx, stackDepth + 1);
 
     if (current.tag === 'Lam' && !current._isAnnotated && normExpectedType.tag === 'Pi') {
-        const paramName = current.paramName;
-        current.paramType = normExpectedType.paramType; // Mutate for elaboration
-        current._isAnnotated = true;
-        const extendedCtx = extendCtx(ctx, paramName, normExpectedType.paramType);
-        check(extendedCtx, current.body(Var(paramName)), normExpectedType.bodyType(Var(paramName)), stackDepth + 1);
+        const lamTerm = current;
+        const expectedPi = normExpectedType;
+
+        const paramName = lamTerm.paramName;
+        lamTerm.paramType = expectedPi.paramType;
+        lamTerm._isAnnotated = true;
+
+        const originalBodyFn = lamTerm.body;
+
+        // This new body function performs deep elaboration when called.
+        lamTerm.body = (v_arg: Term): Term => {
+            const freshInnerTerm = originalBodyFn(v_arg);
+            let ctxForInnerBody = ctx; // `ctx` is the context of the *outer* check call
+            // `lamTerm.paramType` is the *elaborated* param type of the current lambda
+            const currentLamParamType = lamTerm.paramType!; 
+            if (v_arg.tag === 'Var') {
+                ctxForInnerBody = extendCtx(ctx, v_arg.name, currentLamParamType);
+            }
+            const expectedTypeForInnerBody = expectedPi.bodyType(v_arg);
+            
+            // Call the main `check` function to elaborate `freshInnerTerm`.
+            // Pass `stackDepth + 1` (or similar, manage carefully) from the *outer* check call's perspective.
+            // The `check` function manages its own stack depth increments.
+            check(ctxForInnerBody, freshInnerTerm, expectedTypeForInnerBody, stackDepth); // Use current stackDepth; check will increment
+            
+            return freshInnerTerm;
+        };
+
+        // After replacing lamTerm.body, we need to run the original check logic for this level
+        // This ensures constraints related to the body of *this* lambda are generated.
+        // We use the *original* body function here for this one-time check pass.
+        const tempVarForOriginalCheck = Var(paramName);
+        // The context for this check needs `paramName` to be typed with the now-annotated paramType.
+        const extendedCtx = extendCtx(ctx, tempVarForOriginalCheck.name, lamTerm.paramType);
+        check(extendedCtx, originalBodyFn(tempVarForOriginalCheck), expectedPi.bodyType(tempVarForOriginalCheck), stackDepth + 1);
         return;
     }
+
     if (current.tag === 'Hole') {
-        const inferredHoleType = infer(ctx, current, stackDepth + 1); // This gets/sets current.elaboratedType
-        addConstraint(inferredHoleType, normExpectedType, `Hole ${current.id} checked`);
+        const inferredHoleType = infer(ctx, current, stackDepth + 1);
+        addConstraint(inferredHoleType, normExpectedType, `Hole ${current.id} checked against ${printTerm(normExpectedType)}`);
         return;
     }
+
     const inferredType = infer(ctx, current, stackDepth + 1);
     addConstraint(inferredType, normExpectedType, `Check general case: ${printTerm(current)} : ${printTerm(inferredType)} vs ${printTerm(normExpectedType)}`);
 }
 
-interface ElaborationResult { term: Term; type: Term; }
 
+interface ElaborationResult { term: Term; type: Term; }
 function elaborate(term: Term, expectedType?: Term, initialCtx: Context = emptyCtx): ElaborationResult {
     constraints = []; nextHoleId = 0; nextVarId = 0;
-
     let finalTypeToReport: Term;
     try {
         if (expectedType) {
-            check(initialCtx, term, expectedType);
+            check(initialCtx, term, expectedType); // `term` is mutated here with annotations
             finalTypeToReport = expectedType;
         } else {
-            finalTypeToReport = infer(initialCtx, term);
+            finalTypeToReport = infer(initialCtx, term); // `term` might be mutated if it's a hole, etc.
         }
-
         if (!solveConstraints(initialCtx)) {
             const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), initialCtx));
+            // Corrected typo: fc.t1, fc.t2
             const fcMsg = fc ? `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin})` : "Unknown constraint";
             throw new Error(`Type error: Could not solve constraints. Approx failing: ${fcMsg}`);
         }
-    } catch (e) {
-        throw e;
-    }
-
+    } catch (e) { throw e; }
+    // `term` here is the (potentially) top-level mutated term with annotations.
     const elaboratedTerm = normalize(term, initialCtx);
     const finalTypeNormalized = normalize(finalTypeToReport, initialCtx);
     return { term: elaboratedTerm, type: finalTypeNormalized };
 }
 
-// --- Pattern Matching and Rewrite Rule Application ---
-// Helper to check if a Var name is a declared pattern variable
 function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean {
     return patternVarDecls.some(pvd => pvd.name === name);
 }
@@ -521,11 +516,9 @@ function matchPattern(
     currentSubst?: Substitution, stackDepth = 0
 ): Substitution | null {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error("matchPattern stack depth exceeded");
-
     const subst = currentSubst || new Map<string, Term>();
     const normTerm = whnf(term, ctx, stackDepth + 1);
 
-    // If pattern is Var and its name is in patternVarDecls, it's a pattern variable
     if (pattern.tag === 'Var' && isPatternVarName(pattern.name, patternVarDecls)) {
         const pvarName = pattern.name;
         const existing = subst.get(pvarName);
@@ -534,106 +527,92 @@ function matchPattern(
         return subst;
     }
 
-    const rtPattern = getTermRef(pattern); // Pattern itself should not contain holes to be solved
+    const rtPattern = getTermRef(pattern);
     const rtTerm = getTermRef(normTerm);
 
-    if (rtTerm.tag === 'Hole') return null; // Cannot match concrete pattern against hole term
+    if (rtTerm.tag === 'Hole') return null;
+    // Pattern itself should not be a hole that needs solving during matching
+    if (rtPattern.tag === 'Hole') return null; 
     if (rtPattern.tag !== rtTerm.tag) return null;
 
     switch (rtPattern.tag) {
         case 'Type': return subst;
-        case 'Var': // This is a constant Var in pattern, not a pattern variable
-            return rtTerm.tag === 'Var' && rtPattern.name === rtTerm.name ? subst : null;
+        case 'Var': return rtPattern.name === (rtTerm as Term & {tag:'Var'}).name ? subst : null;
         case 'App': {
-            if (rtTerm.tag !== 'App') return null;
-            const s1 = matchPattern(rtPattern.func, rtTerm.func, ctx, patternVarDecls, subst, stackDepth + 1);
+            const termApp = rtTerm as Term & {tag:'App'};
+            const s1 = matchPattern(rtPattern.func, termApp.func, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!s1) return null;
-            return matchPattern(rtPattern.arg, rtTerm.arg, ctx, patternVarDecls, s1, stackDepth + 1);
+            return matchPattern(rtPattern.arg, termApp.arg, ctx, patternVarDecls, s1, stackDepth + 1);
         }
         case 'Lam': {
-            if (rtTerm.tag !== 'Lam') return null;
-            // For first-order patterns, lambda parameters are not pattern variables.
-            // Match parameter types if both annotated.
-            if (rtPattern._isAnnotated !== rtTerm._isAnnotated) return null;
-            if (rtPattern._isAnnotated) {
-                 if (!rtPattern.paramType || !rtTerm.paramType) return null; // Should not happen
-                 const sType = matchPattern(rtPattern.paramType, rtTerm.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
+            const lamP = rtPattern as Term & {tag:'Lam'}; // Known to be Lam
+            const lamT = rtTerm as Term & {tag:'Lam'}; // Known to be Lam
+            if (lamP._isAnnotated !== lamT._isAnnotated) return null;
+            let tempSubst = subst;
+            if (lamP._isAnnotated) {
+                if (!lamP.paramType || !lamT.paramType) return null; // Should be present if _isAnnotated
+                 const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, tempSubst, stackDepth + 1);
                  if (!sType) return null;
+                 tempSubst = sType;
             }
-            // For bodies, we need to be careful. If the pattern's body contains
-            // pattern variables, this simple equality check isn't enough.
-            // For now, assume first-order means pattern vars don't appear *bound* inside pattern's lambda.
-            // Fallback to areEqual for Lam/Pi bodies, which is HOAS-aware but won't bind pattern vars.
-            // A more sophisticated matcher for patterns like `λx. ?F x` is needed for deeper HOAS patterns.
-             return areEqual(rtPattern, rtTerm, ctx, stackDepth+1) ? subst : null;
+            const freshV = Var(freshVarName(lamP.paramName));
+            const CtxType = lamP.paramType ? getTermRef(lamP.paramType) : Hole();
+            const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
+            // For first-order patterns, areEqual is appropriate for body comparison.
+            // It doesn't attempt to bind pattern variables inside the body.
+            return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': {
-            if (rtTerm.tag !== 'Pi') return null;
-             const sType = matchPattern(rtPattern.paramType, rtTerm.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
-             if (!sType) return null;
-            return areEqual(rtPattern, rtTerm, ctx, stackDepth+1) ? subst : null; // Similar to Lam
+            const piP = rtPattern as Term & {tag:'Pi'};
+            const piT = rtTerm as Term & {tag:'Pi'};
+            const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
+            if (!sType) return null;
+            const freshV = Var(freshVarName(piP.paramName));
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType));
+            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth+1) ? sType : null;
         }
     }
-    return null;
 }
 
-function applySubst(
-    term: Term, subst: Substitution,
-    patternVarDecls: PatternVarDecl[]
-): Term {
+function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVarDecl[]): Term {
     const current = getTermRef(term);
-
     if (current.tag === 'Var' && isPatternVarName(current.name, patternVarDecls)) {
         const replacement = subst.get(current.name);
         if (!replacement) throw new Error(`Unbound PVar ${current.name} in RHS subst`);
         return replacement;
     }
-
     switch (current.tag) {
-        case 'Type': case 'Var': case 'Hole': return current; // Var here is a non-pattern var
+        case 'Type': case 'Var': case 'Hole': return current;
         case 'App':
-            return App(
-                applySubst(current.func, subst, patternVarDecls),
-                applySubst(current.arg, subst, patternVarDecls)
-            );
-        case 'Lam':
-            const lamParam = current.paramType ? applySubst(current.paramType, subst, patternVarDecls) : undefined;
-            // HOAS body: if pattern variables are captured, they are substituted when `body(v)` is called.
-            // This relies on substitution "distributing" over the HOAS function.
-            // The body function itself is (v => bodyTerm). If bodyTerm contains a pattern var `?P`,
-            // and `?P` is substituted by `S_P`, then the new body is effectively (v => bodyTerm[S_P/?P]).
-            // This happens naturally if `applySubst` is called on the result of `current.body(v)`.
-            const newLam = Lam(current.paramName,
-                (v_arg: Term) => applySubst(current.body(v_arg), subst, patternVarDecls),
-                lamParam
-            );
-            newLam._isAnnotated = current._isAnnotated;
+            return App(applySubst(current.func, subst, patternVarDecls), applySubst(current.arg, subst, patternVarDecls));
+        case 'Lam': {
+            const lam = current;
+            const lamParam = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
+            const newLam = Lam(lam.paramName,
+                (v_arg: Term) => applySubst(lam.body(v_arg), subst, patternVarDecls), lamParam);
+            newLam._isAnnotated = lam._isAnnotated;
             return newLam;
-        case 'Pi':
-            return Pi(current.paramName, applySubst(current.paramType, subst, patternVarDecls),
-                (v_arg: Term) => applySubst(current.bodyType(v_arg), subst, patternVarDecls)
-            );
+        }
+        case 'Pi': {
+            const pi = current;
+            return Pi(pi.paramName, applySubst(pi.paramType, subst, patternVarDecls),
+                (v_arg: Term) => applySubst(pi.bodyType(v_arg), subst, patternVarDecls));
+        }
     }
-    throw new Error(`applySubst: unhandled tag ${(current as Term).tag}`);
 }
-
 
 function checkRewriteRule(rule: RewriteRule, baseCtx: Context): boolean {
     let patternCtx = baseCtx;
-    for (const pv of rule.patternVars) {
-        patternCtx = extendCtx(patternCtx, pv.name, pv.type);
-    }
-
-    const ruleCheckConstraintsBackup = [...constraints]; // Backup global constraints
-    constraints = []; // Use a local constraint store for rule checking
-
+    for (const pv of rule.patternVars) { patternCtx = extendCtx(patternCtx, pv.name, pv.type); }
+    const ruleCheckConstraintsBackup = [...constraints];
+    constraints = [];
     try {
         const lhsType = infer(patternCtx, rule.lhs);
         const rhsType = infer(patternCtx, rule.rhs);
         addConstraint(lhsType, rhsType, `Rewrite rule ${rule.name} type preservation`);
         if (!solveConstraints(patternCtx)) {
             console.error(`Rule ${rule.name} does not preserve types.`);
-            const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), patternCtx));
+            const fc = constraints.find(constraint => !areEqual(getTermRef(constraint.t1), getTermRef(constraint.t2), patternCtx));
             if (fc) console.error(`  Failing constraint: ${printTerm(getTermRef(fc.t1))} = ${printTerm(getTermRef(fc.t2))}`);
             return false;
         }
@@ -641,29 +620,21 @@ function checkRewriteRule(rule: RewriteRule, baseCtx: Context): boolean {
     } catch (e) {
         console.error(`Error checking rule ${rule.name}: ${(e as Error).message}`);
         return false;
-    } finally {
-        constraints = ruleCheckConstraintsBackup; // Restore global constraints
-    }
+    } finally { constraints = ruleCheckConstraintsBackup; }
 }
 
-// --- Pretty Printer ---
 function printTerm(term: Term, boundVars: string[] = [], stackDepth = 0): string {
     if (stackDepth > MAX_STACK_DEPTH) return "<print_depth_exceeded>";
     if (!term) return "<null_term>";
-
     const current = getTermRef(term);
-
     switch (current.tag) {
         case 'Type': return 'Type';
         case 'Var': return current.name;
-        case 'Hole':
-            let s = current.id;
-            // if (current.elaboratedType) s += `(:${printTerm(current.elaboratedType, boundVars, stackDepth + 1)})`;
-            return s;
+        case 'Hole': return current.id;
         case 'Lam': {
-            const paramName = current.paramName; // Use the actual param name
+            const paramName = current.paramName;
             const typeAnnotation = current._isAnnotated && current.paramType ? ` : ${printTerm(current.paramType, boundVars, stackDepth + 1)}` : '';
-            const freshV = Var(paramName); // Use paramName for the HOAS application
+            const freshV = Var(paramName);
             return `(λ ${paramName}${typeAnnotation}. ${printTerm(current.body(freshV), [...boundVars, paramName], stackDepth + 1)})`;
         }
         case 'App':
@@ -674,24 +645,19 @@ function printTerm(term: Term, boundVars: string[] = [], stackDepth = 0): string
             return `(Π ${paramName} : ${printTerm(current.paramType, boundVars, stackDepth + 1)}. ${printTerm(current.bodyType(freshV), [...boundVars, paramName], stackDepth + 1)})`;
         }
     }
-    return "<unknown_term_in_print>";
 }
-
 function resetMyLambdaPi() {
     constraints = []; globalDefs.clear(); userRewriteRules.length = 0;
     nextVarId = 0; nextHoleId = 0;
 }
 
-
-// --- Example Usage (Copied and adapted for Var in rules) ---
-console.log("--- MyLambdaPi Final Corrected: Bidirectional, Unification, Defs, Rewrite Rules ---");
-
+// --- Example Usage (Adjusted Example 9 test) ---
+console.log("--- MyLambdaPi Final Corrected (v4): Deep Elaboration for HOAS ---");
 const Nat = Var("Nat");
 const Bool = Var("Bool");
-const Zero = Var("zero"); // For rule convenience
+const Zero = Var("zero"); 
 const Succ = Var("succ");
 const Add = Var("add");
-
 
 try {
     resetMyLambdaPi();
@@ -701,7 +667,6 @@ try {
     defineGlobal("succ", Pi("n", Nat, _ => Nat));
     defineGlobal("true", Bool);
     defineGlobal("expectsNatFunc", Pi("f", Pi("ff_arg", Nat, _ => Nat), _ => Bool));
-
     const baseCtx = emptyCtx;
 
     console.log("\n--- Example 1: Infer (λx:Nat. x) ---");
@@ -715,7 +680,7 @@ try {
 
     console.log("\n--- Example 2: Check (λx. x) against (Πx:Nat. Nat) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
-    const idUnannotated = Lam("x", x => x);
+    const idUnannotated = Lam("x", x => x); // New instance for this test
     const targetType2 = Pi("x", Nat, _ => Nat);
     result = elaborate(idUnannotated, targetType2, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
@@ -730,14 +695,14 @@ try {
 
     console.log("\n--- Example 3: Infer (λx. x) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
-    const idUnannotatedInfer = Lam("x", x => x);
+    const idUnannotatedInfer = Lam("x", x => x); // New instance
     result = elaborate(idUnannotatedInfer, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
     console.log(`   Type: ${printTerm(result.type)}`);
     const resT3 = getTermRef(result.type);
     if (resT3.tag === 'Pi' && getTermRef(resT3.paramType).tag === 'Hole') {
         const paramHole = getTermRef(resT3.paramType) as Term & {tag:'Hole'};
-        const freshV3 = Var(resT3.paramName); // Use the Pi's own param name
+        const freshV3 = Var(resT3.paramName);
         const bodyYieldsParamHole = areEqual(resT3.bodyType(freshV3), paramHole, baseCtx);
         if (bodyYieldsParamHole) {
              console.log(`   Correct: Type is Π ${resT3.paramName}:${paramHole.id}. ${paramHole.id}`);
@@ -747,20 +712,21 @@ try {
     console.log("\n--- Example 4: Check ((λx:Nat. x) ?argHole) against Nat ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
     const idFunc4 = Lam("x", x => x, Nat);
-    const myHole4 = Hole("argHole");
+    const myHole4 = Hole("argHole"); // New hole instance
     const appWithHole4 = App(idFunc4, myHole4);
     result = elaborate(appWithHole4, Nat, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
     console.log(`   Type: ${printTerm(result.type)}`);
-    if(getTermRef(result.term).tag !== 'Hole' || (getTermRef(result.term) as Term & {tag:'Hole'}).id !== myHole4.id) throw new Error(`Term not ${myHole4.id} for ex4, got ${printTerm(result.term)}`);
-    const typeOfMyHole4 = myHole4.elaboratedType ? getTermRef(myHole4.elaboratedType) : Hole() /* dummy */;
+    const resTerm4 = getTermRef(result.term);
+    if(resTerm4.tag !== 'Hole' || resTerm4.id !== myHole4.id) throw new Error(`Term not ${myHole4.id} for ex4, got ${printTerm(result.term)}`);
+    const typeOfMyHole4 = myHole4.elaboratedType ? getTermRef(myHole4.elaboratedType) : Hole();
     console.log(`   Type of ?argHole: ${printTerm(typeOfMyHole4)}`);
     if (!areEqual(typeOfMyHole4, Nat, baseCtx)) throw new Error("Hole type not Nat for ex4: " + printTerm(typeOfMyHole4));
     console.log("   Correct.");
 
     console.log("\n--- Example 5: Infer (λf. λx. f x) ---");
     resetMyLambdaPi();
-    const complexLam5 = Lam("f", f => Lam("x", x => App(f, x)));
+    const complexLam5 = Lam("f", f => Lam("x", x => App(f, x))); // New instance
     result = elaborate(complexLam5, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
     console.log(`   Type: ${printTerm(result.type)}`);
@@ -793,7 +759,7 @@ try {
     console.log("\n--- Example 7: Infer (expectsNatFunc ?f_hole) ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type()); defineGlobal("Bool", Type());
     defineGlobal("expectsNatFunc", Pi("f", Pi("ff_arg", Nat, _ => Nat), _ => Bool));
-    const fHole7 = Hole("f_hole");
+    const fHole7 = Hole("f_hole"); // New instance
     const appTerm7 = App(Var("expectsNatFunc"), fHole7);
     result = elaborate(appTerm7, undefined, baseCtx);
     console.log(`   Term: ${printTerm(result.term)}`);
@@ -817,26 +783,35 @@ try {
 
     console.log("\n--- Example 9: Check polymorphic id against concrete type ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type());
-    const polyId9 = Lam("f", f => Lam("x", x => App(f, x)));
+    const polyId9_source = Lam("f", f => Lam("x", x => App(f, x)));
     const concretePiType9 = Pi("f", Pi("y", Nat, _ => Nat), _fVal => Pi("x", Nat, _xVal => Nat));
-    result = elaborate(polyId9, concretePiType9, baseCtx);
+    result = elaborate(polyId9_source, concretePiType9, baseCtx);
     console.log(`   Term (Elaborated): ${printTerm(result.term)}`);
     console.log(`   Type (Checked): ${printTerm(result.type)}`);
     if (!areEqual(result.type, concretePiType9, baseCtx)) throw new Error("Type mismatch for ex9");
+
     const elabTerm9 = getTermRef(result.term);
-    if(elabTerm9.tag === 'Lam' && elabTerm9._isAnnotated && elabTerm9.paramType && getTermRef(elabTerm9.paramType).tag === 'Pi') {
+    if (elabTerm9.tag === 'Lam' && elabTerm9._isAnnotated && elabTerm9.paramType && getTermRef(elabTerm9.paramType).tag === 'Pi') {
         const elabFType = getTermRef(elabTerm9.paramType) as Term & {tag:'Pi'};
-        const elabXLam = getTermRef(elabTerm9.body(Var("f_"))) as Term & {tag:'Lam'};
-        if(areEqual(elabFType.paramType, Nat, baseCtx) && areEqual(elabFType.bodyType(Var("y_")), Nat, baseCtx) &&
-           elabXLam._isAnnotated && elabXLam.paramType && areEqual(elabXLam.paramType, Nat, baseCtx)
-        ) {
-             console.log("   Correct (term structure suggests annotation).");
+        // Invoke the (elaborating) body of the normalized outer lambda
+        const actualInnerLam = getTermRef(elabTerm9.body(Var("f_for_test"))); 
+        if (actualInnerLam.tag === 'Lam' && actualInnerLam._isAnnotated && actualInnerLam.paramType &&
+            areEqual(actualInnerLam.paramType, Nat, baseCtx)) {
+            // Check type of inner lambda's body App(f,x)
+            const ctxForInnerBodyCheck = extendCtx(extendCtx(baseCtx, "f_for_test", elabFType), actualInnerLam.paramName, actualInnerLam.paramType);
+            const innerLamBodyResultType = infer(ctxForInnerBodyCheck, actualInnerLam.body(Var(actualInnerLam.paramName)));
+            if (areEqual(innerLamBodyResultType, Nat, ctxForInnerBodyCheck)) {
+                console.log("   Correct (term structure and inner types suggest deep annotation).");
+            } else {
+                throw new Error(`Inner lambda body type mismatch. Expected Nat, got ${printTerm(innerLamBodyResultType)}`);
+            }
         } else {
-            throw new Error("Term not fully annotated as expected for ex9 (inner parts): " + printTerm(elabTerm9));
+            throw new Error("Normalized inner lambda not annotated as expected: " + printTerm(actualInnerLam));
         }
     } else {
-        throw new Error("Term not fully annotated as expected for ex9 (outer): " + printTerm(elabTerm9));
+        throw new Error("Normalized outer lambda not annotated as expected: " + printTerm(elabTerm9));
     }
+
 
     console.log("\n--- Example 10: Delta Reduction ---");
     resetMyLambdaPi(); defineGlobal("Nat", Type()); defineGlobal("zero", Nat);
@@ -854,11 +829,10 @@ try {
     defineGlobal("succ", Pi("n", Nat, _ => Nat));
     defineGlobal("add", Pi("m", Nat, _ => Pi("n_", Nat, _ => Nat)));
     const pvarN_decl: PatternVarDecl = { name: "N", type: Nat };
-    // LHS and RHS use Var for pattern variables
     const ruleAddZ: RewriteRule = {
         name: "add_Z_N", patternVars: [pvarN_decl],
-        lhs: App(App(Add, Zero), Var("N")), // Var("N") is the pattern var
-        rhs: Var("N")                       // Var("N") is the pattern var
+        lhs: App(App(Add, Zero), Var("N")),
+        rhs: Var("N")
     };
     if (checkRewriteRule(ruleAddZ, baseCtx)) {
         addRewriteRule(ruleAddZ); console.log(`   Rule ${ruleAddZ.name} added.`);
@@ -874,5 +848,5 @@ try {
 } catch (e) {
     console.error("\n*** A TEST SCENARIO FAILED ***");
     console.error((e as Error).message);
-    // console.error((e as Error).stack); // Can be very long
+    console.error((e as Error).stack); // Full stack for debugging failed tests
 }
