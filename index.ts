@@ -1,4 +1,4 @@
-// --- MyLambdaPi Final Corrected (v5): Fix WHNF/Normalize Loop ---
+// --- MyLambdaPi Final Corrected (v10): Fix WHNF/Normalize Loop ---
 
 // --- Report on Changed Specification ---
 // This version refines the fixed-point loop within `whnf` and the head-reduction
@@ -675,7 +675,7 @@ function resetMyLambdaPi() {
 }
 
 // --- Example Usage (Adjusted Example 9 test logic if needed, but v4 change should handle it) ---
-console.log("--- MyLambdaPi Final Corrected (v5): Fix WHNF/Normalize Loop ---");
+console.log("--- MyLambdaPi Final Corrected (v10): Fix WHNF/Normalize Loop ---");
 const Nat = Var("Nat");
 const Bool = Var("Bool");
 const Zero = Var("zero"); 
