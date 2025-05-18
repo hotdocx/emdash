@@ -1110,8 +1110,16 @@ function matchPattern(
     }
     if (rtPattern.tag === 'Hole' && rtPattern.id === '_') return subst;
 
-    if (currentTermStruct.tag === 'Hole' && rtPattern.tag !== 'Hole' && rtPattern.id !== '_') return null; 
+    // Check if pattern is a Hole (and not wildcard '_') while termToMatch is not
     if (rtPattern.tag === 'Hole' && rtPattern.id !== '_' && currentTermStruct.tag !== 'Hole') return null;
+
+    // Check if termToMatch is a Hole while pattern is not a Hole (and not wildcard '_')
+    // The check `rtPattern.id !== '_'` was incorrectly placed after `rtPattern.tag !== 'Hole'`.
+    // If pattern is not a hole, its id cannot be checked.
+    // The condition simply needs to check if currentTermStruct is a Hole and rtPattern is not a Hole.
+    if (currentTermStruct.tag === 'Hole' && rtPattern.tag !== 'Hole') return null;
+
+    // Check if both are Holes (and not wildcard '_')
     if (rtPattern.tag === 'Hole' && rtPattern.id !== '_' && currentTermStruct.tag === 'Hole') {
         return (rtPattern as Term & {tag:'Hole'}).id === (currentTermStruct as Term & {tag:'Hole'}).id ? subst : null;
     }
