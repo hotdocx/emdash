@@ -166,8 +166,8 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     }
                     // If a user rule fired, we might have changed the head enough
                     // that Emdash structural rules or further user rules might apply differently.
-                    // Break and re-evaluate from the top of the whnf loop for the new `current`.
-                    goto nextWhnfIteration; // Use a label to break and continue outer loop
+                    // Continue the outer loop to re-evaluate from the top with the new `current`.
+                    continue; // Use continue to jump to the next iteration of the for loop
                 }
             }
         }
@@ -216,9 +216,6 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             changedInThisIteration = true;
         }
         
-        nextWhnfIteration:; // Label for goto
-        current = getTermRef(current);
-
         if (!changedInThisIteration && current === termAtStartOfIteration) {
             break; 
         }
@@ -268,7 +265,8 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
                         current = rhsApplied;
                         changedInThisIteration = true;
                     }
-                    goto nextNormalizeHeadIteration;
+                    // Continue the outer loop to re-evaluate with the new `current`.
+                    continue; // Use continue to jump to the next iteration of the for loop
                 }
             }
         }
@@ -304,8 +302,6 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
             current = termAfterEmdashRules; changedInThisIteration = true;
         }
         
-        nextNormalizeHeadIteration:;
-        current = getTermRef(current);
         if (!changedInThisIteration && current === termAtStartOfIteration) break;
         if (i === MAX_RECURSION_DEPTH -1 && (changedInThisIteration || current !== termAtStartOfIteration)) {
             // console.warn(`Normalize (head) reached max iterations: ${printTerm(term)} -> ${printTerm(current)}`);
