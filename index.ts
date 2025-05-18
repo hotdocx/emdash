@@ -313,18 +313,19 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
             );
         case 'ComposeMorph':
             // Check for beta reduction opportunity if C_impl was applied
-            const headReducedCompose = current; // Already head-reduced by the loop above
-            if (headReducedCompose.tag === 'App') { // It might have reduced to an App sequence
-                return normalize(headReducedCompose, ctx, stackDepth + 1); // Normalize the result of C_impl application
+            // `current` has been head-reduced by the loop above. Check its final tag.
+            // Assert `current` as `Term` to satisfy the type checker, as its tag might have changed via reduction.
+            if ((current as Term).tag === 'App') { // It might have reduced to an App sequence
+                return normalize(current as Term, ctx, stackDepth + 1); // Normalize the result of the C_impl application
             }
             // If it didn't reduce via MkCat_ rule, then it's still a ComposeMorph tag. Normalize args.
             return ComposeMorph(
-                normalize(headReducedCompose.g, ctx, stackDepth + 1),
-                normalize(headReducedCompose.f, ctx, stackDepth + 1),
-                headReducedCompose.cat_IMPLICIT ? normalize(headReducedCompose.cat_IMPLICIT, ctx, stackDepth + 1) : undefined,
-                headReducedCompose.objX_IMPLICIT ? normalize(headReducedCompose.objX_IMPLICIT, ctx, stackDepth + 1) : undefined,
-                headReducedCompose.objY_IMPLICIT ? normalize(headReducedCompose.objY_IMPLICIT, ctx, stackDepth + 1) : undefined,
-                headReducedCompose.objZ_IMPLICIT ? normalize(headReducedCompose.objZ_IMPLICIT, ctx, stackDepth + 1) : undefined
+                normalize(current.g, ctx, stackDepth + 1),
+                normalize(current.f, ctx, stackDepth + 1),
+                current.cat_IMPLICIT ? normalize(current.cat_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objX_IMPLICIT ? normalize(current.objX_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objY_IMPLICIT ? normalize(current.objY_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objZ_IMPLICIT ? normalize(current.objZ_IMPLICIT, ctx, stackDepth + 1) : undefined
             );
         case 'Lam': {
             const currentLam = current;
@@ -625,7 +626,7 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
             if (rt1._isAnnotated) {
                 if(!rt1.paramType || !lam2.paramType) return tryUnificationRules(rt1, rt2, ctx, depth +1); // Should not happen
                 paramTypeStatus = unify(rt1.paramType, lam2.paramType, ctx, depth + 1);
-                if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+                if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth +1);
             }
             const freshV = Var(freshVarName(rt1.paramName));
             const CtxParamType = rt1.paramType ? getTermRef(rt1.paramType) : Hole();
@@ -1401,7 +1402,8 @@ function runPhase1Tests() {
     // Test 1: CatTerm, ObjTerm, HomTerm type checking
     console.log("\n--- Test 1: Basic Cat/Obj/Hom Types ---");
     resetMyLambdaPi(); setupPhase1Globals();
-    let testTerm = CatTerm();
+    let testTerm: Term; // Declare with broader type
+    testTerm = CatTerm();
     let elabRes = elaborate(testTerm, undefined, baseCtx);
     console.log(`Term: ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
     if(elabRes.type.tag !== 'Type') throw new Error("Test 1.1 failed: Cat is not Type");
@@ -1436,7 +1438,8 @@ function runPhase1Tests() {
     const C_impl_Nat = Lam("X", _X => Lam("Y", _Y => Lam("Z", _Z => Lam("g", _g => Lam("f", _f => Hole("comp_result"))))));
     
     const NatCat = MkCat_(NatObj, H_repr_Nat, C_impl_Nat);
-    elabRes = elaborate(NatCat, undefined, baseCtx); // Infer type of NatCat
+    testTerm = NatCat; // Assign NatCat to the now broadly typed testTerm
+    elabRes = elaborate(testTerm, undefined, baseCtx); // Infer type of NatCat
     console.log(`NatCat Term: ${printTerm(elabRes.term)}`);
     console.log(`NatCat Type: ${printTerm(elabRes.type)}`);
     if(elabRes.type.tag !== 'CatTerm') throw new Error("Test 2.1 failed: MkCat_ type is not Cat");
@@ -1453,7 +1456,8 @@ function runPhase1Tests() {
     const HomInNatCat = HomTerm(NatCat, X_in_NatCat, Y_in_NatCat);
     // Need to define someNatVal1/2 in context for H_repr_Nat to type check if it used them.
     // Our H_repr_Nat is just Lam(X => Lam(Y => Type())), so it doesn't use X,Y values.
-    elabRes = elaborate(HomInNatCat, undefined, baseCtx);
+    testTerm = HomInNatCat; // Assign HomInNatCat
+    elabRes = elaborate(testTerm, undefined, baseCtx);
     console.log(`Hom(NatCat,X,Y) Term (norm): ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
     const expectedHomReduced = App(App(H_repr_Nat, X_in_NatCat), Y_in_NatCat); // H X Y
     // Normalizing expectedHomReduced will give Type()
