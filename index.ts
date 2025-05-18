@@ -221,10 +221,10 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         
         current = getTermRef(current); // Re-resolve after all potential changes in this pass
 
-        if (!changedInThisPass && current === termAtStartOfIteration) { // Check if term reference itself changed
+        if (!changedInThisPass && current === termAtStartOfPass) { // Check if term reference itself changed
             break; 
         }
-        if (i === MAX_RECURSION_DEPTH - 1 && (changedInThisPass || current !== termAtStartOfIteration) ) {
+        if (i === MAX_RECURSION_DEPTH - 1 && (changedInThisPass || current !== termAtStartOfPass) ) {
             // console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(term)} -> ${printTerm(current)}`);
         }
     }
@@ -343,7 +343,7 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
         case 'ComposeMorph':
             // If ComposeMorph's head reduction resulted in Apps (from C_impl), it will be an App tag.
             // Otherwise, it's still a ComposeMorph tag, normalize its arguments.
-            if (current.tag === 'App') return normalize(current, ctx, stackDepth + 1); // Should have been handled by the loop if it became App(Lam...)
+            if ((current as Term).tag === 'App') return normalize(current, ctx, stackDepth + 1); // Should have been handled by the loop if it became App(Lam...)
             return ComposeMorph(
                 normalize(current.g, ctx, stackDepth + 1),
                 normalize(current.f, ctx, stackDepth + 1),
