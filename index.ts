@@ -689,6 +689,121 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
     return constraints.length === 0;
 }
 
+function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], collectedVars: Set<string>, visited: Set<Term> = new Set()): void {
+    const current = getTermRef(term);
+    if (visited.has(current)) return;
+    visited.add(current);
+
+    if (current.tag === 'Var' && isPatternVarName(current.name, patternVarDecls)) {
+        collectedVars.add(current.name);
+    }
+    switch (current.tag) {
+        case 'App':
+            collectPatternVars(current.func, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.arg, patternVarDecls, collectedVars, visited);
+            break;
+        case 'Lam':
+            if (current.paramType) collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
+            // Cannot inspect HOAS body for schematic vars without application.
+            // Assume pattern variables are not free inside HOAS function bodies in patterns.
+            break;
+        case 'Pi':
+            collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
+            // Similar HOAS body limitation.
+            break;
+        // Emdash Phase 1
+        case 'ObjTerm':
+            collectPatternVars(current.cat, patternVarDecls, collectedVars, visited);
+            break;
+        case 'HomTerm':
+            collectPatternVars(current.cat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.dom, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.cod, patternVarDecls, collectedVars, visited);
+            break;
+        case 'MkCat_':
+            collectPatternVars(current.objRepresentation, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.homRepresentation, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.composeImplementation, patternVarDecls, collectedVars, visited);
+            break;
+        case 'IdentityMorph':
+            if(current.cat_IMPLICIT) collectPatternVars(current.cat_IMPLICIT, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.obj, patternVarDecls, collectedVars, visited);
+            break;
+        case 'ComposeMorph':
+            collectPatternVars(current.g, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.f, patternVarDecls, collectedVars, visited);
+            if(current.cat_IMPLICIT) collectPatternVars(current.cat_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objX_IMPLICIT) collectPatternVars(current.objX_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objY_IMPLICIT) collectPatternVars(current.objY_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objZ_IMPLICIT) collectPatternVars(current.objZ_IMPLICIT, patternVarDecls, collectedVars, visited);
+            break;
+    }
+}
+
+function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, ctx: Context): void {
+    const lhsVars = new Set<string>();
+    // Collect all variables that actually appear in the LHS patterns
+    collectPatternVars(rule.lhsPattern1, rule.patternVars, lhsVars, new Set<Term>());
+    collectPatternVars(rule.lhsPattern2, rule.patternVars, lhsVars, new Set<Term>());
+
+    const finalSubst = new Map(subst); // Copy initial substitution from LHS matching
+
+    // For RHS variables not in LHS, create fresh holes
+    for (const pVarDecl of rule.patternVars) {
+        const pVarName = pVarDecl.name;
+        // Check if this pVarName is used in any of the RHS constraint terms
+        let usedInRhs = false;
+        for(const {t1: rhs_t1, t2: rhs_t2} of rule.rhsNewConstraints) {
+            const rhsTermVars = new Set<string>();
+            collectPatternVars(rhs_t1, rule.patternVars, rhsTermVars, new Set<Term>());
+            collectPatternVars(rhs_t2, rule.patternVars, rhsTermVars, new Set<Term>());
+            if (rhsTermVars.has(pVarName)) {
+                usedInRhs = true;
+                break;
+            }
+        }
+
+        if (usedInRhs && !lhsVars.has(pVarName)) {
+            // This variable is used in RHS constraints but was not bound by LHS patterns.
+            // It must become a fresh hole if not already made one (e.g. by appearing in another part of RHS).
+            if (!finalSubst.has(pVarName)) { // Ensure we don't overwrite if it was somehow in subst
+                 finalSubst.set(pVarName, Hole(freshHoleName()));
+            }
+        }
+    }
+    
+    for (const constrPair of rule.rhsNewConstraints) {
+        const newT1 = applySubst(constrPair.t1, finalSubst, rule.patternVars);
+        const newT2 = applySubst(constrPair.t2, finalSubst, rule.patternVars);
+        addConstraint(newT1, newT2, `UnifRule ${rule.name}`);
+    }
+}
+
+function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): UnifyResult {
+    for (const rule of userUnificationRules) {
+        // Try match (t1, t2) with (lhsPattern1, lhsPattern2)
+        let subst1 = matchPattern(rule.lhsPattern1, t1, ctx, rule.patternVars, undefined, depth + 1);
+        if (subst1) {
+            // Pass subst1 to continue matching on the same substitution set
+            let subst2 = matchPattern(rule.lhsPattern2, t2, ctx, rule.patternVars, subst1, depth + 1);
+            if (subst2) {
+                applyAndAddRuleConstraints(rule, subst2, ctx);
+                return UnifyResult.RewrittenByRule;
+            }
+        }
+
+        // Try match (t2, t1) with (lhsPattern1, lhsPattern2) -- commutativity
+        let substComm1 = matchPattern(rule.lhsPattern1, t2, ctx, rule.patternVars, undefined, depth + 1);
+        if (substComm1) {
+            let substComm2 = matchPattern(rule.lhsPattern2, t1, ctx, rule.patternVars, substComm1, depth + 1);
+            if (substComm2) {
+                applyAndAddRuleConstraints(rule, substComm2, ctx);
+                return UnifyResult.RewrittenByRule;
+            }
+        }
+    }
+    return UnifyResult.Failed;
+}
 
 function ensureImplicitsAsHoles(term: Term): Term {
     const t = term; 
@@ -1282,8 +1397,8 @@ function runPhase1Tests() {
 
     console.log("\n--- Test 2: MkCat_ and Projections ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    const H_repr_Nat = Lam("X", Var("NatType"), _X => Lam("Y", Var("NatType"), _Y => Type())); 
-    const C_impl_Nat_dummy = Lam("Xobj", Var("NatType"), _Xobj => Lam("Yobj", Var("NatType"), _Yobj => Lam("Zobj", Var("NatType"), _Zobj => Lam("gmorph", App(App(H_repr_Nat,Var("Yobj")),Var("Zobj")), _gmorph => Lam("fmorph", App(App(H_repr_Nat,Var("Xobj")),Var("Yobj")),_fmorph => Hole("comp_res_dummy"))))));
+    const H_repr_Nat = Lam("X", _X => Lam("Y", _Y => Type(), Var("NatType")), Var("NatType")); 
+    const C_impl_Nat_dummy = Lam("Xobj", _Xobj => Lam("Yobj", _Yobj => Lam("Zobj", _Zobj => Lam("gmorph", _gmorph => Lam("fmorph",_fmorph => Hole("comp_res_dummy"), App(App(H_repr_Nat,Var("Xobj")),Var("Yobj"))), App(App(H_repr_Nat,Var("Yobj")),Var("Zobj")) ), Var("NatType")   ), Var("NatType")    ), Var("NatType")   );
     
     const NatCategoryTermVal = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx); 
