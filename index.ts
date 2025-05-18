@@ -41,8 +41,14 @@ type PatternVarDecl = { name: string, type: Term };
 
 const Type = (): Term => ({ tag: 'Type' });
 const Var = (name: string): Term & { tag: 'Var' } => ({ tag: 'Var', name });
-const Lam = (paramName: string, body: (v: Term) => Term, paramType?: Term): Term & { tag: 'Lam' } =>
-    ({ tag: 'Lam', paramName, paramType, body, _isAnnotated: !!paramType });
+const Lam = (paramName: string, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
+    if (typeof paramTypeOrBody === 'function') { // Unannotated: Lam(paramName, body)
+        return { tag: 'Lam', paramName, paramType: undefined, body: paramTypeOrBody, _isAnnotated: false };
+    } else { // Annotated: Lam(paramName, paramType, body)
+        if (bodyOrNothing === undefined) throw new Error("Annotated lambda needs a body function.");
+        return { tag: 'Lam', paramName, paramType: paramTypeOrBody, body: bodyOrNothing, _isAnnotated: true };
+    }
+}
 const App = (func: Term, arg: Term): Term => ({ tag: 'App', func, arg });
 const Pi = (paramName: string, paramType: Term, bodyType: (v: Term) => Term): Term =>
     ({ tag: 'Pi', paramName, paramType, bodyType });
@@ -77,7 +83,7 @@ const globalDefs: Map<string, GlobalDef> = new Map();
 
 function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
-    if (isConstantSymbol && value !== undefined) { // Corrected check
+    if (isConstantSymbol && value !== undefined) { 
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
     }
     globalDefs.set(name, { name, type, value, isConstantSymbol });
@@ -135,7 +141,6 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
-            // Only unfold if it has a value AND is NOT a declared constant symbol
             if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) { 
                 const valRef = getTermRef(gdef.value);
                 if (valRef !== current) {
@@ -148,23 +153,36 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         const termAfterDelta = current;
         let termAfterEmdashRules = termAfterDelta;
 
-        if (termAfterEmdashRules.tag === 'ObjTerm' && getTermRef(termAfterEmdashRules.cat).tag === 'MkCat_') {
-            const mkCatTerm = getTermRef(termAfterEmdashRules.cat) as Term & {tag: 'MkCat_'};
-            termAfterEmdashRules = mkCatTerm.objRepresentation; 
-        } else if (termAfterEmdashRules.tag === 'HomTerm' && getTermRef(termAfterEmdashRules.cat).tag === 'MkCat_') {
-            const mkCatTerm = getTermRef(termAfterEmdashRules.cat) as Term & {tag: 'MkCat_'};
-            const H_repr = mkCatTerm.homRepresentation;
-            termAfterEmdashRules = App(App(H_repr, termAfterEmdashRules.dom), termAfterEmdashRules.cod);
+        if (termAfterEmdashRules.tag === 'ObjTerm') {
+            const resolvedCat = whnf(termAfterEmdashRules.cat, ctx, stackDepth + 1);
+            if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
+                termAfterEmdashRules = mkCatTerm.objRepresentation;
+            }
+        } else if (termAfterEmdashRules.tag === 'HomTerm') {
+            const resolvedCat = whnf(termAfterEmdashRules.cat, ctx, stackDepth + 1);
+            if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
+                const H_repr = mkCatTerm.homRepresentation;
+                // Arguments dom/cod to HomTerm should be in WHNF for H_repr application if H_repr inspects them.
+                // For safety, normalize them. Or assume H_repr handles potentially non-normal args.
+                // Let's assume H_repr (a lambda) will take args as-is and its body will be normalized when applied.
+                termAfterEmdashRules = App(App(H_repr, termAfterEmdashRules.dom), termAfterEmdashRules.cod);
+            }
         } else if (termAfterEmdashRules.tag === 'ComposeMorph') {
             const comp = termAfterEmdashRules;
-            const catVal = comp.cat_IMPLICIT ? getTermRef(comp.cat_IMPLICIT) : undefined; 
-            if (catVal && catVal.tag === 'MkCat_') {
-                const C_impl = catVal.composeImplementation;
-                if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) {
-                    const objX_val = getTermRef(comp.objX_IMPLICIT);
-                    const objY_val = getTermRef(comp.objY_IMPLICIT);
-                    const objZ_val = getTermRef(comp.objZ_IMPLICIT);
-                    termAfterEmdashRules = App(App(App(App(App(C_impl, objX_val), objY_val), objZ_val), comp.g), comp.f);
+            if (comp.cat_IMPLICIT) { // Implicits must be resolved for this rule
+                const resolvedCat = whnf(comp.cat_IMPLICIT, ctx, stackDepth + 1);
+                if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                    const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
+                    const C_impl = mkCatTerm.composeImplementation;
+                    if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) {
+                        const objX_val = getTermRef(comp.objX_IMPLICIT); // Already holes or solved values
+                        const objY_val = getTermRef(comp.objY_IMPLICIT);
+                        const objZ_val = getTermRef(comp.objZ_IMPLICIT);
+                        // g and f are arguments, their normalization happens during App reduction
+                        termAfterEmdashRules = App(App(App(App(App(C_impl, objX_val), objY_val), objZ_val), comp.g), comp.f);
+                    }
                 }
             }
         }
@@ -175,7 +193,6 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         }
 
         const termBeforeUserRules = current;
-        // Check if current head is a constant symbol (either Emdash primitive or global Var marked as such)
         const headIsConstant = isEmdashConstantSymbolTag(current.tag) || 
                                (current.tag === 'Var' && globalDefs.get(current.name)?.isConstantSymbol);
 
@@ -199,7 +216,7 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             break;
         }
         if (i === MAX_RECURSION_DEPTH - 1 && (changedInThisIteration || current !== termAtStartOfIteration) ) {
-             // console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(term)} -> ${printTerm(current)}`);
+            // console.warn(`WHNF reached max iterations for delta/rules on: ${printTerm(term)} -> ${printTerm(current)}`);
         }
     }
 
@@ -217,11 +234,13 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Normalize stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     
-    let current = getTermRef(term);
+    let current = getTermRef(term); // Start with resolved term
+    // Head reduction loop
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
         let changedInThisIteration = false;
         const termAtStartOfIteration = current;
 
+        // Delta
         if (current.tag === 'Var') {
             const gdef = globalDefs.get(current.name);
             if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
@@ -230,22 +249,33 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
             }
         }
 
+        // Emdash specific reductions
         const termAfterDelta = current;
         let termAfterEmdashRules = termAfterDelta;
-        if (termAfterEmdashRules.tag === 'ObjTerm' && getTermRef(termAfterEmdashRules.cat).tag === 'MkCat_') {
-            termAfterEmdashRules = (getTermRef(termAfterEmdashRules.cat) as Term & {tag: 'MkCat_'}).objRepresentation;
-        } else if (termAfterEmdashRules.tag === 'HomTerm' && getTermRef(termAfterEmdashRules.cat).tag === 'MkCat_') {
-            const mkCatTerm = getTermRef(termAfterEmdashRules.cat) as Term & {tag: 'MkCat_'};
-            termAfterEmdashRules = App(App(mkCatTerm.homRepresentation, termAfterEmdashRules.dom), termAfterEmdashRules.cod);
+
+        if (termAfterEmdashRules.tag === 'ObjTerm') {
+            const resolvedCat = whnf(termAfterEmdashRules.cat, ctx, stackDepth + 1); // WHNF needed for rule condition
+            if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                termAfterEmdashRules = (getTermRef(resolvedCat) as Term & {tag: 'MkCat_'}).objRepresentation;
+            }
+        } else if (termAfterEmdashRules.tag === 'HomTerm') {
+            const resolvedCat = whnf(termAfterEmdashRules.cat, ctx, stackDepth + 1);
+            if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
+                termAfterEmdashRules = App(App(mkCatTerm.homRepresentation, termAfterEmdashRules.dom), termAfterEmdashRules.cod);
+            }
         } else if (termAfterEmdashRules.tag === 'ComposeMorph') {
             const comp = termAfterEmdashRules;
-            const catVal = comp.cat_IMPLICIT ? getTermRef(comp.cat_IMPLICIT) : undefined;
-            if (catVal && catVal.tag === 'MkCat_') {
-                if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) { 
-                     const objX_val = getTermRef(comp.objX_IMPLICIT);
-                     const objY_val = getTermRef(comp.objY_IMPLICIT);
-                     const objZ_val = getTermRef(comp.objZ_IMPLICIT);
-                     termAfterEmdashRules = App(App(App(App(App(catVal.composeImplementation, objX_val), objY_val), objZ_val), comp.g), comp.f);
+            if (comp.cat_IMPLICIT) {
+                const resolvedCat = whnf(comp.cat_IMPLICIT, ctx, stackDepth + 1);
+                if (getTermRef(resolvedCat).tag === 'MkCat_') {
+                    const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
+                    if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) { 
+                         const objX_val = getTermRef(comp.objX_IMPLICIT); // Implicits assumed resolved by type checking
+                         const objY_val = getTermRef(comp.objY_IMPLICIT);
+                         const objZ_val = getTermRef(comp.objZ_IMPLICIT);
+                         termAfterEmdashRules = App(App(App(App(App(mkCatTerm.composeImplementation, objX_val), objY_val), objZ_val), comp.g), comp.f);
+                    }
                 }
             }
         }
@@ -272,6 +302,7 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
             // console.warn(`Normalize (head) reached max iterations: ${printTerm(term)} -> ${printTerm(current)}`);
         }
     }
+    // `current` is now head-stable. Now normalize subterms.
 
     switch (current.tag) {
         case 'Type': case 'Var': case 'Hole': case 'CatTerm':
@@ -297,9 +328,10 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
             );
         case 'ComposeMorph':
             const headReducedCompose = current; 
-            if ((headReducedCompose as BaseTerm).tag === 'App') { // Use BaseTerm for cast
+            if ((headReducedCompose as BaseTerm).tag === 'App') { // Fixed cast
                 return normalize(headReducedCompose, ctx, stackDepth + 1); 
             }
+            // If it's still ComposeMorph, normalize its g and f, and implicits
             return ComposeMorph(
                 normalize(headReducedCompose.g, ctx, stackDepth + 1),
                 normalize(headReducedCompose.f, ctx, stackDepth + 1),
@@ -311,14 +343,14 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
         case 'Lam': {
             const currentLam = current;
             const normLamParamType = currentLam.paramType ? normalize(currentLam.paramType, ctx, stackDepth + 1) : undefined;
-            const newLam = Lam(currentLam.paramName,
+            const newLam = Lam(currentLam.paramName, normLamParamType, // Adjusted Lam constructor call
                 (v_arg: Term) => {
                     const paramTypeForBodyCtx = normLamParamType || 
                         (currentLam._isAnnotated && currentLam.paramType ? getTermRef(currentLam.paramType) : Hole());
                     let bodyCtx = ctx;
                     if (v_arg.tag === 'Var') { bodyCtx = extendCtx(ctx, v_arg.name, paramTypeForBodyCtx); }
                     return normalize(currentLam.body(v_arg), bodyCtx, stackDepth + 1);
-                }, normLamParamType);
+                });
             newLam._isAnnotated = currentLam._isAnnotated;
             return newLam;
         }
@@ -354,7 +386,7 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     if (rt1.tag !== rt2.tag) return false;
 
     switch (rt1.tag) {
-        case 'Type': case 'CatTerm': return rt2.tag === rt1.tag; // Ensure same tag
+        case 'Type': case 'CatTerm': return rt2.tag === rt1.tag;
         case 'Var': return rt1.name === (rt2 as Term & {tag:'Var'}).name;
         case 'App': {
             const app2 = rt2 as Term & {tag:'App'};
@@ -402,8 +434,20 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             const comp_cat1_eq = rt1.cat_IMPLICIT ? getTermRef(rt1.cat_IMPLICIT) : Hole('_');
             const comp_cat2_eq = comp2.cat_IMPLICIT ? getTermRef(comp2.cat_IMPLICIT) : Hole('_');
             if ((comp_cat1_eq.tag !== 'Hole' || comp_cat1_eq.id !== '_') && (comp_cat2_eq.tag !== 'Hole' || comp_cat2_eq.id !== '_') && !areEqual(comp_cat1_eq, comp_cat2_eq, ctx, depth+1)) return false;
-            // For ComposeMorph, after whnf, if they are still ComposeMorph tags, their explicit parts must be equal.
-            // Implicits are mainly for type checking and enabling reductions; for structural equality of already-reduced terms, they might not be compared if one is a hole.
+            
+            // Also compare other implicits if they are resolved and not wildcards
+            const comp_objX1_eq = rt1.objX_IMPLICIT ? getTermRef(rt1.objX_IMPLICIT) : Hole('_');
+            const comp_objX2_eq = comp2.objX_IMPLICIT ? getTermRef(comp2.objX_IMPLICIT) : Hole('_');
+            if ((comp_objX1_eq.tag !== 'Hole' || comp_objX1_eq.id !== '_') && (comp_objX2_eq.tag !== 'Hole' || comp_objX2_eq.id !== '_') && !areEqual(comp_objX1_eq, comp_objX2_eq, ctx, depth+1)) return false;
+
+            const comp_objY1_eq = rt1.objY_IMPLICIT ? getTermRef(rt1.objY_IMPLICIT) : Hole('_');
+            const comp_objY2_eq = comp2.objY_IMPLICIT ? getTermRef(comp2.objY_IMPLICIT) : Hole('_');
+            if ((comp_objY1_eq.tag !== 'Hole' || comp_objY1_eq.id !== '_') && (comp_objY2_eq.tag !== 'Hole' || comp_objY2_eq.id !== '_') && !areEqual(comp_objY1_eq, comp_objY2_eq, ctx, depth+1)) return false;
+
+            const comp_objZ1_eq = rt1.objZ_IMPLICIT ? getTermRef(rt1.objZ_IMPLICIT) : Hole('_');
+            const comp_objZ2_eq = comp2.objZ_IMPLICIT ? getTermRef(comp2.objZ_IMPLICIT) : Hole('_');
+            if ((comp_objZ1_eq.tag !== 'Hole' || comp_objZ1_eq.id !== '_') && (comp_objZ2_eq.tag !== 'Hole' || comp_objZ2_eq.id !== '_') && !areEqual(comp_objZ1_eq, comp_objZ2_eq, ctx, depth+1)) return false;
+
             return areEqual(rt1.g, comp2.g, ctx, depth + 1) &&
                    areEqual(rt1.f, comp2.f, ctx, depth + 1);
     }
@@ -484,11 +528,9 @@ function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx
         const t2_arg = args2[i];
 
         if (t1_arg === undefined && t2_arg === undefined) continue;
-        if (!t1_arg || !t2_arg) { // One is undefined, the other is not. If not a hole, this is a structural mismatch.
+        if (!t1_arg || !t2_arg) { 
             if ((t1_arg && t1_arg.tag !== 'Hole') || (t2_arg && t2_arg.tag !== 'Hole')) return UnifyResult.Failed;
-            // If one is undef and other is hole, unify hole with a conceptual "absent" or specific marker (or fail).
-            // For now, if shapes differ for injective, it's fail.
-            if(t1_arg !== t2_arg) return UnifyResult.Failed; // e.g. undef vs hole
+            if(t1_arg !== t2_arg) return UnifyResult.Failed; 
             continue;
         }
 
@@ -497,25 +539,26 @@ function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx
         if (argStatus === UnifyResult.RewrittenByRule || argStatus === UnifyResult.Progress) {
             madeProgress = true;
             allSubSolved = false;
-        } else if (argStatus !== UnifyResult.Solved) { // Should not happen if Failed/Rewritten/Progress handled
+        } else if (argStatus !== UnifyResult.Solved) {
             allSubSolved = false;
         }
     }
     
-    if (madeProgress) return UnifyResult.Progress; // If any sub-problem made progress, the whole is Progress.
+    if (madeProgress) return UnifyResult.Progress; 
     
-    // If allSubSolved is true, it means all unify calls on args returned Solved.
-    // Then check if the parent terms are actually equal.
     if (allSubSolved) {
+        // After all arguments report 'Solved', re-check parent equality.
+        // This is crucial because sub-unifications might have filled holes.
         if (areEqual(parentRt1, parentRt2, ctx, depth + 1)) return UnifyResult.Solved;
-        // All args "solved", but parents not equal. This means the structure itself is problematic.
-        // This path (injective unification where args are fine but whole is not) should then try rules.
-        // However, the `isEmdashUnificationInjectiveTag` path in `unify` returns if this `unifyArgs` fails.
-        // So if we reach here and `areEqual` is false, it's likely `Progress` still.
-        return UnifyResult.Progress; 
+        // If still not equal, it implies a structural mismatch not caught by arg unification,
+        // or that the "Solved" state from sub-unifications didn't make the parents equal.
+        // For injective symbols, this should ideally mean a failure if not Solved.
+        // However, if sub-unifications involved creating new constraints that are still pending,
+        // then it's Progress.
+        return UnifyResult.Progress; // Or Failed if truly injective means no further rules apply
     }
     
-    return UnifyResult.Progress; // Default if not all solved but no failure.
+    return UnifyResult.Progress; 
 }
 
 
@@ -560,18 +603,12 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
                 args1 = [id1.cat_IMPLICIT, id1.obj]; args2 = [id2.cat_IMPLICIT, id2.obj];
                 break;
             default: 
-                // This means a tag was in EMDASH_CONSTANT_SYMBOLS but not handled here specifically
-                // or logic error in isEmdashUnificationInjectiveTag.
-                // For constant symbols that are not IdentityMorph, their equality is structural.
-                // areEqual should have handled them if they were truly equal.
-                // If they are not areEqual, but have same constant tag, try rules.
                 return tryUnificationRules(rt1, rt2, ctx, depth + 1);
         }
         const argStatus = unifyArgs(args1, args2, ctx, depth, rt1, rt2);
-        // If injective path fails, it means args didn't unify. Don't try rules for the S===S problem here,
-        // as injectivity means S t1 = S t2 <=> t1=t2. If t1!=t2, then S t1 != S t2.
-        // This is different from non-injective where S t1 = S t2 might hold by a rule even if t1!=t2.
-        return argStatus; // Failed, Progress, or Solved.
+        // If injective unification of args fails, the whole thing fails. No fallback to rules for S=S.
+        if (argStatus === UnifyResult.Failed) return UnifyResult.Failed; 
+        return argStatus; 
     }
 
     switch (rt1.tag) {
@@ -635,60 +672,6 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
     }
 }
 
-function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error("solveConstraints stack depth exceeded");
-    let changedInOuterLoop = true;
-    let iterations = 0;
-    const maxIterations = (constraints.length + userUnificationRules.length + 20) * 30 + 100;
-
-    while (changedInOuterLoop && iterations < maxIterations) {
-        changedInOuterLoop = false;
-        iterations++;
-        
-        let currentConstraintIdx = 0;
-        while(currentConstraintIdx < constraints.length) {
-            const constraint = constraints[currentConstraintIdx];
-            const c_t1_current_ref = getTermRef(constraint.t1);
-            const c_t2_current_ref = getTermRef(constraint.t2);
-
-            if (areEqual(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1)) {
-                constraints.splice(currentConstraintIdx, 1); 
-                changedInOuterLoop = true; 
-                continue; 
-            }
-
-            try {
-                const unifyResult = unify(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1);
-                
-                if (unifyResult === UnifyResult.Solved) {
-                    changedInOuterLoop = true; 
-                    currentConstraintIdx++; 
-                } else if (unifyResult === UnifyResult.RewrittenByRule) {
-                    constraints.splice(currentConstraintIdx, 1); 
-                    changedInOuterLoop = true;
-                } else if (unifyResult === UnifyResult.Progress) {
-                    changedInOuterLoop = true;
-                    currentConstraintIdx++; 
-                } else { 
-                    return false; 
-                }
-            } catch (e) {
-                return false; 
-            }
-        }
-    }
-
-    if (iterations >= maxIterations && changedInOuterLoop && constraints.length > 0) { 
-        // console.warn("Constraint solving reached max iterations and was still making changes. Constraints list size: " + constraints.length);
-    }
-    for (const constraint of constraints) { 
-        if (!areEqual(getTermRef(constraint.t1), getTermRef(constraint.t2), ctx, stackDepth + 1)) {
-            return false;
-        }
-    }
-    return constraints.length === 0;
-}
-
 function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], collectedVars: Set<string>, visited: Set<Term> = new Set()): void {
     const current = getTermRef(term);
     if (visited.has(current)) return;
@@ -704,14 +687,10 @@ function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], colle
             break;
         case 'Lam':
             if (current.paramType) collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
-            // Cannot inspect HOAS body for schematic vars without application.
-            // Assume pattern variables are not free inside HOAS function bodies in patterns.
             break;
         case 'Pi':
             collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
-            // Similar HOAS body limitation.
             break;
-        // Emdash Phase 1
         case 'ObjTerm':
             collectPatternVars(current.cat, patternVarDecls, collectedVars, visited);
             break;
@@ -742,16 +721,13 @@ function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], colle
 
 function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, ctx: Context): void {
     const lhsVars = new Set<string>();
-    // Collect all variables that actually appear in the LHS patterns
     collectPatternVars(rule.lhsPattern1, rule.patternVars, lhsVars, new Set<Term>());
     collectPatternVars(rule.lhsPattern2, rule.patternVars, lhsVars, new Set<Term>());
 
-    const finalSubst = new Map(subst); // Copy initial substitution from LHS matching
+    const finalSubst = new Map(subst); 
 
-    // For RHS variables not in LHS, create fresh holes
     for (const pVarDecl of rule.patternVars) {
         const pVarName = pVarDecl.name;
-        // Check if this pVarName is used in any of the RHS constraint terms
         let usedInRhs = false;
         for(const {t1: rhs_t1, t2: rhs_t2} of rule.rhsNewConstraints) {
             const rhsTermVars = new Set<string>();
@@ -764,9 +740,7 @@ function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, 
         }
 
         if (usedInRhs && !lhsVars.has(pVarName)) {
-            // This variable is used in RHS constraints but was not bound by LHS patterns.
-            // It must become a fresh hole if not already made one (e.g. by appearing in another part of RHS).
-            if (!finalSubst.has(pVarName)) { // Ensure we don't overwrite if it was somehow in subst
+            if (!finalSubst.has(pVarName)) {
                  finalSubst.set(pVarName, Hole(freshHoleName()));
             }
         }
@@ -781,10 +755,8 @@ function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, 
 
 function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): UnifyResult {
     for (const rule of userUnificationRules) {
-        // Try match (t1, t2) with (lhsPattern1, lhsPattern2)
         let subst1 = matchPattern(rule.lhsPattern1, t1, ctx, rule.patternVars, undefined, depth + 1);
         if (subst1) {
-            // Pass subst1 to continue matching on the same substitution set
             let subst2 = matchPattern(rule.lhsPattern2, t2, ctx, rule.patternVars, subst1, depth + 1);
             if (subst2) {
                 applyAndAddRuleConstraints(rule, subst2, ctx);
@@ -792,7 +764,6 @@ function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): U
             }
         }
 
-        // Try match (t2, t1) with (lhsPattern1, lhsPattern2) -- commutativity
         let substComm1 = matchPattern(rule.lhsPattern1, t2, ctx, rule.patternVars, undefined, depth + 1);
         if (substComm1) {
             let substComm2 = matchPattern(rule.lhsPattern2, t1, ctx, rule.patternVars, substComm1, depth + 1);
@@ -804,6 +775,65 @@ function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): U
     }
     return UnifyResult.Failed;
 }
+
+function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
+    if (stackDepth > MAX_STACK_DEPTH) throw new Error("solveConstraints stack depth exceeded");
+    let changedInOuterLoop = true;
+    let iterations = 0;
+    const maxIterations = (constraints.length + userUnificationRules.length + 20) * 30 + 100;
+
+    while (changedInOuterLoop && iterations < maxIterations) {
+        changedInOuterLoop = false;
+        iterations++;
+        
+        let currentConstraintIdx = 0;
+        while(currentConstraintIdx < constraints.length) {
+            const constraint = constraints[currentConstraintIdx];
+            const c_t1_current_ref = getTermRef(constraint.t1);
+            const c_t2_current_ref = getTermRef(constraint.t2);
+
+            if (areEqual(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1)) {
+                constraints.splice(currentConstraintIdx, 1); 
+                changedInOuterLoop = true; 
+                continue; 
+            }
+
+            try {
+                const unifyResult = unify(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1);
+                
+                if (unifyResult === UnifyResult.Solved) {
+                    changedInOuterLoop = true; 
+                    // If unify reports Solved, it means it either made an assignment or found them structurally equal
+                    // after some internal work not caught by the top-level areEqual.
+                    // We should re-check with areEqual; if it passes now, the constraint can be removed.
+                    // For simplicity now, assume it means progress and loop again.
+                    currentConstraintIdx++; 
+                } else if (unifyResult === UnifyResult.RewrittenByRule) {
+                    constraints.splice(currentConstraintIdx, 1); 
+                    changedInOuterLoop = true;
+                } else if (unifyResult === UnifyResult.Progress) {
+                    changedInOuterLoop = true;
+                    currentConstraintIdx++; 
+                } else { // UnifyResult.Failed
+                    return false; 
+                }
+            } catch (e) {
+                return false; 
+            }
+        }
+    }
+
+    if (iterations >= maxIterations && changedInOuterLoop && constraints.length > 0) { 
+        // console.warn("Constraint solving reached max iterations and was still making changes. Constraints list size: " + constraints.length);
+    }
+    for (const constraint of constraints) { 
+        if (!areEqual(getTermRef(constraint.t1), getTermRef(constraint.t2), ctx, stackDepth + 1)) {
+            return false;
+        }
+    }
+    return constraints.length === 0;
+}
+
 
 function ensureImplicitsAsHoles(term: Term): Term {
     const t = term; 
@@ -888,7 +918,6 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
         case 'HomTerm': {
             check(ctx, current.cat, CatTerm(), stackDepth + 1);
             const catForHom = getTermRef(current.cat); 
-            // We must use the *resolved* category `catForHom` when checking dom and cod
             check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1);
             check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1);
             return Type();
@@ -903,7 +932,6 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
 
             const type_of_hom_X_Y = (X_val: Term, Y_val: Term) => App(App(H_repr_func, X_val), Y_val);
 
-            // The composeImplementation takes explicit X,Y,Z objects, then g, then f
             const expected_C_type = 
                 Pi("Xobj", O_repr, Xobj_term =>
                 Pi("Yobj", O_repr, Yobj_term =>
@@ -916,25 +944,24 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
             return CatTerm();
         }
         case 'IdentityMorph': {
-            // After ensureImplicitsAsHoles, cat_IMPLICIT is a Hole if it was undefined.
-            const catHole = current.cat_IMPLICIT!; // Should be a Hole if not provided
+            const catHoleOrTerm = current.cat_IMPLICIT!; 
             const objType = infer(ctx, current.obj, stackDepth + 1); 
-            addConstraint(objType, ObjTerm(catHole), `Object ${printTerm(current.obj)} of id must be in cat ${printTerm(catHole)}`);
-            return HomTerm(catHole, current.obj, current.obj);
+            addConstraint(objType, ObjTerm(catHoleOrTerm), `Object ${printTerm(current.obj)} of id must be in cat ${printTerm(catHoleOrTerm)}`);
+            return HomTerm(catHoleOrTerm, current.obj, current.obj);
         }
         case 'ComposeMorph': {
-            const catHole = current.cat_IMPLICIT!;
-            const XHole = current.objX_IMPLICIT!;
-            const YHole = current.objY_IMPLICIT!;
-            const ZHole = current.objZ_IMPLICIT!;
+            const catHoleOrTerm = current.cat_IMPLICIT!;
+            const XHoleOrTerm = current.objX_IMPLICIT!;
+            const YHoleOrTerm = current.objY_IMPLICIT!;
+            const ZHoleOrTerm = current.objZ_IMPLICIT!;
 
             const type_f = infer(ctx, current.f, stackDepth + 1);
             const type_g = infer(ctx, current.g, stackDepth + 1);
 
-            addConstraint(type_f, HomTerm(catHole, XHole, YHole), `Arg f of Compose`);
-            addConstraint(type_g, HomTerm(catHole, YHole, ZHole), `Arg g of Compose`);
+            addConstraint(type_f, HomTerm(catHoleOrTerm, XHoleOrTerm, YHoleOrTerm), `Arg f of Compose`);
+            addConstraint(type_g, HomTerm(catHoleOrTerm, YHoleOrTerm, ZHoleOrTerm), `Arg g of Compose`);
             
-            return HomTerm(catHole, XHole, ZHole);
+            return HomTerm(catHoleOrTerm, XHoleOrTerm, ZHoleOrTerm);
         }
     }
 }
@@ -974,30 +1001,33 @@ function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number 
     if (current.tag === 'IdentityMorph' && normExpectedType.tag === 'HomTerm') {
         const idTerm = current;
         const expHom = normExpectedType;
-        // cat_IMPLICIT is already a hole if it was undefined
-        addConstraint(idTerm.cat_IMPLICIT!, expHom.cat, `id.cat vs expected hom.cat`);
+        const catForId = idTerm.cat_IMPLICIT!; // Already a hole if was undefined
+
+        addConstraint(catForId, expHom.cat, `id.cat vs expected hom.cat`);
         addConstraint(idTerm.obj, expHom.dom, `id.obj vs expected hom.dom`);
         addConstraint(idTerm.obj, expHom.cod, `id.obj vs expected hom.cod`);
         
-        // Crucially, check that idTerm.obj is an object of the (now constrained) idTerm.cat_IMPLICIT!
-        const objTypeForId = infer(ctx, idTerm.obj, stackDepth + 1); // This might create new constraints if obj is complex
-        addConstraint(objTypeForId, ObjTerm(idTerm.cat_IMPLICIT!), `id.obj actual type check for ${printTerm(idTerm.obj)} in cat ${printTerm(idTerm.cat_IMPLICIT!)}`);
+        const objTypeForId = infer(ctx, idTerm.obj, stackDepth + 1); 
+        addConstraint(objTypeForId, ObjTerm(catForId), `id.obj actual type check for ${printTerm(idTerm.obj)} in cat ${printTerm(catForId)}`);
         return;
     }
     
     if (current.tag === 'ComposeMorph' && normExpectedType.tag === 'HomTerm') {
         const compTerm = current;
         const expHom = normExpectedType;
-        // Implicits are already holes
-        addConstraint(compTerm.cat_IMPLICIT!, expHom.cat, `comp.cat vs expected hom.cat`);
-        addConstraint(compTerm.objX_IMPLICIT!, expHom.dom, `comp.X vs expected hom.dom`);
-        addConstraint(compTerm.objZ_IMPLICIT!, expHom.cod, `comp.Z vs expected hom.cod`);
+        const catForComp = compTerm.cat_IMPLICIT!;
+        const XForComp = compTerm.objX_IMPLICIT!;
+        const YForComp = compTerm.objY_IMPLICIT!; // This will be constrained by f & g
+        const ZForComp = compTerm.objZ_IMPLICIT!;
 
-        // Additional constraints from inferring f and g, using the now-constrained implicits from compTerm
+        addConstraint(catForComp, expHom.cat, `comp.cat vs expected hom.cat`);
+        addConstraint(XForComp, expHom.dom, `comp.X vs expected hom.dom`);
+        addConstraint(ZForComp, expHom.cod, `comp.Z vs expected hom.cod`);
+
         const type_f = infer(ctx, compTerm.f, stackDepth + 1);
         const type_g = infer(ctx, compTerm.g, stackDepth + 1);
-        addConstraint(type_f, HomTerm(compTerm.cat_IMPLICIT!, compTerm.objX_IMPLICIT!, compTerm.objY_IMPLICIT!), `Check comp.f type`);
-        addConstraint(type_g, HomTerm(compTerm.cat_IMPLICIT!, compTerm.objY_IMPLICIT!, compTerm.objZ_IMPLICIT!), `Check comp.g type`);
+        addConstraint(type_f, HomTerm(catForComp, XForComp, YForComp), `Check comp.f type`);
+        addConstraint(type_g, HomTerm(catForComp, YForComp, ZForComp), `Check comp.g type`);
         return;
     }
 
@@ -1080,9 +1110,9 @@ function matchPattern(
     }
     if (rtPattern.tag === 'Hole' && rtPattern.id === '_') return subst;
 
-    if (currentTermStruct.tag === 'Hole' && rtPattern.tag !== 'Hole') return null; 
-    if (rtPattern.tag === 'Hole' && currentTermStruct.tag !== 'Hole') return null;
-    if (rtPattern.tag === 'Hole' && currentTermStruct.tag === 'Hole') {
+    if (currentTermStruct.tag === 'Hole' && rtPattern.tag !== 'Hole' && rtPattern.id !== '_') return null; 
+    if (rtPattern.tag === 'Hole' && rtPattern.id !== '_' && currentTermStruct.tag !== 'Hole') return null;
+    if (rtPattern.tag === 'Hole' && rtPattern.id !== '_' && currentTermStruct.tag === 'Hole') {
         return (rtPattern as Term & {tag:'Hole'}).id === (currentTermStruct as Term & {tag:'Hole'}).id ? subst : null;
     }
     if (rtPattern.tag !== currentTermStruct.tag) return null;
@@ -1146,7 +1176,7 @@ function matchPattern(
             const idP = rtPattern as Term & {tag:'IdentityMorph'};
             const idT = currentTermStruct as Term & {tag:'IdentityMorph'};
             let s = subst;
-            const idPcat_IMPLICIT = idP.cat_IMPLICIT; // To help TypeScript narrow type
+            const idPcat_IMPLICIT = idP.cat_IMPLICIT; 
             if (idPcat_IMPLICIT) { 
                 if (!idT.cat_IMPLICIT && idPcat_IMPLICIT.tag !== 'Hole' && !(idPcat_IMPLICIT.tag === 'Var' && idPcat_IMPLICIT.name === '_')) return null;
                 if (idT.cat_IMPLICIT) { 
@@ -1189,6 +1219,9 @@ function matchPattern(
             s = matchPattern(compP.g, compT.g, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
             return matchPattern(compP.f, compT.f, ctx, patternVarDecls, s, stackDepth + 1);
         }
+        case 'Hole': // This case should be after checking rtPattern.id === '_'
+            if (rtPattern.id === (currentTermStruct as Term & {tag:'Hole'}).id) return subst;
+            return null;
     }
 }
 
@@ -1208,9 +1241,8 @@ function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVar
         case 'Lam': {
             const lam = current;
             const lamParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
-            const newLam = Lam(lam.paramName,
-                (v_arg: Term) => applySubst(lam.body(v_arg), subst, patternVarDecls), 
-                lamParamType);
+            const newLam = Lam(lam.paramName, lamParamType, // Adjusted Lam constructor
+                (v_arg: Term) => applySubst(lam.body(v_arg), subst, patternVarDecls));
             newLam._isAnnotated = lam._isAnnotated;
             return newLam;
         }
@@ -1247,6 +1279,35 @@ function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVar
                 current.objY_IMPLICIT ? applySubst(current.objY_IMPLICIT, subst, patternVarDecls) : undefined,
                 current.objZ_IMPLICIT ? applySubst(current.objZ_IMPLICIT, subst, patternVarDecls) : undefined
             );
+    }
+}
+
+function checkRewriteRule(rule: RewriteRule, baseCtx: Context): boolean {
+    let patternCtx = baseCtx;
+    for (const pv of rule.patternVars) { patternCtx = extendCtx(patternCtx, pv.name, pv.type); }
+    
+    const ruleCheckConstraintsBackup = [...constraints]; 
+    const ruleCheckNextHoleIdBackup = nextHoleId;
+    const ruleCheckNextVarIdBackup = nextVarId;
+    
+    constraints = []; 
+    nextHoleId = 0; 
+    nextVarId = 0;
+
+    try {
+        const lhsType = infer(patternCtx, rule.lhs);
+        const rhsType = infer(patternCtx, rule.rhs);
+        addConstraint(lhsType, rhsType, `Rewrite rule ${rule.name} type preservation`);
+        if (!solveConstraints(patternCtx)) {
+            return false;
+        }
+        return true;
+    } catch (e) {
+        return false;
+    } finally { 
+        constraints = ruleCheckConstraintsBackup; 
+        nextHoleId = ruleCheckNextHoleIdBackup; 
+        nextVarId = ruleCheckNextVarIdBackup;
     }
 }
 
@@ -1305,9 +1366,16 @@ function printTerm(term: Term, boundVars: string[] = [], stackDepth = 0): string
         }
         case 'ComposeMorph': {
             let catCompStr = "";
+            let implicitsStr = "";
             if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') {
                  catCompStr = ` [cat=${printTerm(current.cat_IMPLICIT, boundVars, stackDepth + 1)}]`;
             }
+            // Optionally print other resolved implicits if needed for debugging
+            // if (current.objX_IMPLICIT && getTermRef(current.objX_IMPLICIT).tag !== 'Hole') implicitsStr += ` X=${printTerm(current.objX_IMPLICIT, boundVars, stackDepth+1)}`;
+            // if (current.objY_IMPLICIT && getTermRef(current.objY_IMPLICIT).tag !== 'Hole') implicitsStr += ` Y=${printTerm(current.objY_IMPLICIT, boundVars, stackDepth+1)}`;
+            // if (current.objZ_IMPLICIT && getTermRef(current.objZ_IMPLICIT).tag !== 'Hole') implicitsStr += ` Z=${printTerm(current.objZ_IMPLICIT, boundVars, stackDepth+1)}`;
+            // if (implicitsStr) catCompStr += implicitsStr;
+
             return `(${printTerm(current.g, boundVars, stackDepth + 1)} ∘${catCompStr} ${printTerm(current.f, boundVars, stackDepth + 1)})`;
         }
     }
@@ -1326,26 +1394,34 @@ function setupPhase1GlobalsAndRules() {
     defineGlobal("NatType", Type(), undefined, true); 
     defineGlobal("BoolType", Type(), undefined, true);
 
-    const pvarCat = { name: "CAT_pv", type: CatTerm() }; // Changed name to avoid clash
+    const pvarCat = { name: "CAT_pv", type: CatTerm() };
     const pvarX_obj = { name: "X_obj_pv", type: ObjTerm(Var("CAT_pv")) }; 
     const pvarY_obj = { name: "Y_obj_pv", type: ObjTerm(Var("CAT_pv")) }; 
-    // const pvarZ_obj = { name: "Z_obj_pv", type: ObjTerm(Var("CAT_pv")) }; // Not used in current rules
+    const pvarZ_obj = { name: "Z_obj_pv", type: ObjTerm(Var("CAT_pv")) };
+
 
     const pvarF_morph = { name: "f_morph_pv", type: HomTerm(Var("CAT_pv"), Var("X_obj_pv"), Var("Y_obj_pv")) }; 
-    const pvarG_morph = { name: "g_morph_pv", type: HomTerm(Var("CAT_pv"), Var("Y_obj_pv"), Var("X_obj_pv")) }; // g: Y -> X for g o id_X
+    const pvarG_comp_lhs = { name: "g_morph_lhs_pv", type: HomTerm(Var("CAT_pv"), Var("Y_obj_pv"), Var("Z_obj_pv")) }; // g in g o id
+    const pvarG_comp_rhs = { name: "g_morph_rhs_pv", type: HomTerm(Var("CAT_pv"), Var("X_obj_pv"), Var("Z_obj_pv")) }; // f in id o f
 
-    // Rule: g o id_X = g where g : Hom CAT Y X, id_X : Hom CAT X X
-    // lhs: ComposeMorph(g_morph_pv, IdentityMorph(X_obj_pv, CAT_pv), CAT_pv, Y_obj_pv (cod g), X_obj_pv (dom g & cod id), X_obj_pv (dom id))
+    // Rule: g o id_X = g
+    // lhs: ComposeMorph(g_morph_lhs_pv, IdentityMorph(X_obj_pv, CAT_pv), CAT_pv, Z_obj_pv (cod g), X_obj_pv (dom g & cod id), X_obj_pv (dom id))
+    // G : Hom CAT Y X (in pattern was Z Y X) -> G : Hom CAT CodG DomG
+    // id : Hom CAT DomG DomG
+    // Result : Hom CAT CodG DomG
     addRewriteRule({
-        name: "comp_g_idX",
-        patternVars: [pvarCat, pvarX_obj, pvarY_obj, pvarG_morph],
-        lhs: ComposeMorph(Var("g_morph_pv"), IdentityMorph(Var("X_obj_pv"), Var("CAT_pv")), 
-                         Var("CAT_pv"), Var("Y_obj_pv"), Var("X_obj_pv"), Var("X_obj_pv")),
-        rhs: Var("g_morph_pv")
+        name: "comp_g_idX", // g o id_X (g : Hom C Y X, id_X: Hom C X X ) -> g
+        patternVars: [pvarCat, pvarX_obj, pvarZ_obj, /* G: Hom Z X */ {name: "g_param", type: HomTerm(Var("CAT_pv"), Var("Z_obj_pv"), Var("X_obj_pv"))}],
+        lhs: ComposeMorph(Var("g_param"), IdentityMorph(Var("X_obj_pv"), Var("CAT_pv")), 
+                         Var("CAT_pv"), Var("Z_obj_pv"), Var("X_obj_pv"), Var("X_obj_pv")),
+        rhs: Var("g_param")
     });
-
-    // Rule: id_Y o f = f where f : Hom CAT X Y, id_Y : Hom CAT Y Y
+    
+    // Rule: id_Y o f = f
     // lhs: ComposeMorph(IdentityMorph(Y_obj_pv, CAT_pv), f_morph_pv, CAT_pv, Y_obj_pv (cod id & cod f), Y_obj_pv (dom id), X_obj_pv (dom f))
+    // F : Hom CAT X Y
+    // id: Hom CAT Y Y
+    // Result: Hom CAT X Y
     addRewriteRule({
         name: "comp_idY_f",
         patternVars: [pvarCat, pvarX_obj, pvarY_obj, pvarF_morph], 
@@ -1359,7 +1435,6 @@ function setupPhase1GlobalsAndRules() {
 function runPhase1Tests() {
     const baseCtx = emptyCtx;
     const NatObjRepr = Var("NatType"); 
-    // const BoolObjRepr = Var("BoolType"); // Not used in phase 1 tests
 
     console.log("\n--- Test 1: Basic Cat/Obj/Hom Types ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
@@ -1370,10 +1445,9 @@ function runPhase1Tests() {
     if(elabRes.type.tag !== 'Type') throw new Error("Test 1.1 failed: Cat is not Type");
 
     const someCatHole = Hole("?MyCat"); 
-    const type_of_someCatHole = infer(baseCtx, someCatHole); // This sets someCatHole.elaboratedType = ?h_type_of_MyCat
+    const type_of_someCatHole = infer(baseCtx, someCatHole);
     addConstraint(type_of_someCatHole, CatTerm(), "Constraint: type of ?MyCat is Cat");
     if(!solveConstraints(baseCtx)) throw new Error("Test 1.2 setup failed: ?MyCat not typable as Cat");
-    // After solving, someCatHole.elaboratedType.ref should be CatTerm()
     
     testTerm = ObjTerm(someCatHole);
     elabRes = elaborate(testTerm, undefined, baseCtx);
@@ -1382,7 +1456,6 @@ function runPhase1Tests() {
     
     const objXHole = Hole("?X"); 
     const objYHole = Hole("?Y");
-    // To correctly type ?X and ?Y as objects of ?MyCat, we infer their types and constrain them.
     const type_of_objXHole = infer(baseCtx, objXHole);
     const type_of_objYHole = infer(baseCtx, objYHole);
     addConstraint(type_of_objXHole, ObjTerm(someCatHole), "Constraint: type of ?X is Obj ?MyCat");
@@ -1397,8 +1470,14 @@ function runPhase1Tests() {
 
     console.log("\n--- Test 2: MkCat_ and Projections ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    const H_repr_Nat = Lam("X", _X => Lam("Y", _Y => Type(), Var("NatType")), Var("NatType")); 
-    const C_impl_Nat_dummy = Lam("Xobj", _Xobj => Lam("Yobj", _Yobj => Lam("Zobj", _Zobj => Lam("gmorph", _gmorph => Lam("fmorph",_fmorph => Hole("comp_res_dummy"), App(App(H_repr_Nat,Var("Xobj")),Var("Yobj"))), App(App(H_repr_Nat,Var("Yobj")),Var("Zobj")) ), Var("NatType")   ), Var("NatType")    ), Var("NatType")   );
+    // Corrected Lam arguments for H_repr_Nat and C_impl_Nat_dummy
+    const H_repr_Nat = Lam("X", NatObjRepr, _X => Lam("Y", NatObjRepr, _Y => Type())); 
+    const C_impl_Nat_dummy = Lam("Xobj", NatObjRepr, Xobj_term => 
+                              Lam("Yobj", NatObjRepr, Yobj_term => 
+                              Lam("Zobj", NatObjRepr, Zobj_term => 
+                              Lam("gmorph", App(App(H_repr_Nat,Yobj_term),Zobj_term), _gmorph_term => 
+                              Lam("fmorph", App(App(H_repr_Nat,Xobj_term),Yobj_term),_fmorph_term => 
+                              Hole("comp_res_dummy"))))));
     
     const NatCategoryTermVal = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx); 
@@ -1425,29 +1504,26 @@ function runPhase1Tests() {
     console.log("\n--- Test 3: IdentityMorph ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
     const MyNatCat3_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
-    // Define MyNatCat3_Global as a *value*, not a primitive constant symbol
-    defineGlobal("MyNatCat3_Global", CatTerm(), MyNatCat3_val, false); 
+    defineGlobal("MyNatCat3_Global", CatTerm(), MyNatCat3_val, false); // isConstantSymbol = false
 
-    // x_obj_for_id must be a term whose type is Obj(MyNatCat3_Global)
-    // Obj(MyNatCat3_Global) normalizes to NatObjRepr (i.e. NatType)
-    defineGlobal("x_obj_term", NatObjRepr); // x_obj_term : NatType
-    const anObjX = Var("x_obj_term"); 
+    // x_obj_term should be a term whose type is Obj(MyNatCat3_Global).
+    // Obj(MyNatCat3_Global) reduces to NatObjRepr. So x_obj_term's type is NatObjRepr.
+    defineGlobal("x_obj_val", NatObjRepr); // x_obj_val : NatObjRepr
+    const anObjX_term = Var("x_obj_val"); 
 
-    const id_x = IdentityMorph(anObjX); 
-    // We expect id_x to have type Hom MyNatCat3_Global anObjX anObjX
-    const expected_id_x_type = HomTerm(Var("MyNatCat3_Global"), anObjX, anObjX);
+    const id_x = IdentityMorph(anObjX_term); 
+    const expected_id_x_type = HomTerm(Var("MyNatCat3_Global"), anObjX_term, anObjX_term);
     elabRes = elaborate(id_x, expected_id_x_type, baseCtx);
 
     console.log(`Term id_x: ${printTerm(elabRes.term)}`);
-    console.log(`Type id_x: ${printTerm(elabRes.type)}`); // Should be normalized version of expected_id_x_type
+    console.log(`Type id_x: ${printTerm(elabRes.type)}`);
     
     const idTermSolved = getTermRef(elabRes.term) as Term & {tag:"IdentityMorph"};
     if (!idTermSolved.cat_IMPLICIT) throw new Error("Test 3.1 failed: id_x cat_IMPLICIT not filled.");
-    // After elaboration against expected_id_x_type, cat_IMPLICIT should be MyNatCat3_Global
     if (!areEqual(getTermRef(idTermSolved.cat_IMPLICIT), Var("MyNatCat3_Global"), baseCtx)) {
         throw new Error(`Test 3.1 failed: id_x.cat_IMPLICIT not resolved to MyNatCat3_Global. Got: ${printTerm(getTermRef(idTermSolved.cat_IMPLICIT))}`);
     }
-    if (!areEqual(elabRes.type, expected_id_x_type, baseCtx)) {
+    if (!areEqual(elabRes.type, expected_id_x_type, baseCtx)) { // Compare normalized type with expected (which also gets normalized in areEqual)
          throw new Error(`Test 3.2 failed: id_x type mismatch. Expected ${printTerm(expected_id_x_type)}, Got ${printTerm(elabRes.type)}`)
     }
     console.log("Test 3 Passed.");
@@ -1455,15 +1531,14 @@ function runPhase1Tests() {
     console.log("\n--- Test 4: ComposeMorph Inference ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
     const MyNatCat4_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
-    defineGlobal("C4_Global", CatTerm(), MyNatCat4_val, false); // C4_Global is MyNatCat4_val
+    defineGlobal("C4_Global", CatTerm(), MyNatCat4_val, false); 
 
-    // Define object terms of type Obj(C4_Global), which is NatObjRepr (i.e. NatType)
-    defineGlobal("obj_x_term", NatObjRepr); 
-    defineGlobal("obj_y_term", NatObjRepr); 
-    defineGlobal("obj_z_term", NatObjRepr);
-    const x_term = Var("obj_x_term"); 
-    const y_term = Var("obj_y_term"); 
-    const z_term = Var("obj_z_term");
+    defineGlobal("obj_x_val", NatObjRepr); 
+    defineGlobal("obj_y_val", NatObjRepr); 
+    defineGlobal("obj_z_val", NatObjRepr);
+    const x_term = Var("obj_x_val"); 
+    const y_term = Var("obj_y_val"); 
+    const z_term = Var("obj_z_val");
 
     const f_morph_hole = Hole("?f_xy"); 
     const g_morph_hole = Hole("?g_yz"); 
@@ -1481,9 +1556,9 @@ function runPhase1Tests() {
         throw new Error("Test 4.1 failed: ComposeMorph implicits not filled.");
     }
     if(!areEqual(getTermRef(compTermSolved.cat_IMPLICIT), Var("C4_Global"), baseCtx)) throw new Error("Test 4.1 Failed: comp.cat not C4_Global");
-    if(!areEqual(getTermRef(compTermSolved.objX_IMPLICIT), x_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.X not obj_x_term");
-    if(!areEqual(getTermRef(compTermSolved.objY_IMPLICIT), y_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Y not obj_y_term");
-    if(!areEqual(getTermRef(compTermSolved.objZ_IMPLICIT), z_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Z not obj_z_term");
+    if(!areEqual(getTermRef(compTermSolved.objX_IMPLICIT), x_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.X not obj_x_val");
+    if(!areEqual(getTermRef(compTermSolved.objY_IMPLICIT), y_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Y not obj_y_val");
+    if(!areEqual(getTermRef(compTermSolved.objZ_IMPLICIT), z_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Z not obj_z_val");
         
     const f_type = (f_morph_hole as Term & {tag:"Hole"}).elaboratedType;
     const g_type = (g_morph_hole as Term & {tag:"Hole"}).elaboratedType;
@@ -1502,18 +1577,15 @@ function runPhase1Tests() {
     const C5_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
     defineGlobal("C5_cat_global", CatTerm(), C5_val, false);
     
-    defineGlobal("x5_obj_term", NatObjRepr); 
-    defineGlobal("y5_obj_term", NatObjRepr);
-    const X5_term = Var("x5_obj_term"); 
-    const Y5_term = Var("y5_obj_term");
+    defineGlobal("x5_val", NatObjRepr); 
+    defineGlobal("y5_val", NatObjRepr);
+    const X5_term = Var("x5_val"); 
+    const Y5_term = Var("y5_val");
     
-    // g: Hom C5_cat_global X5_term Y5_term (for rule g o id_X where X is dom(g))
-    defineGlobal("concrete_g_xy", HomTerm(Var("C5_cat_global"), X5_term, Y5_term)); 
-    const concrete_g_xy_term = Var("concrete_g_xy");
+    defineGlobal("concrete_g_xy_val", HomTerm(Var("C5_cat_global"), X5_term, Y5_term)); 
+    const concrete_g_xy_term = Var("concrete_g_xy_val");
 
-    const id_X5_term = IdentityMorph(X5_term, Var("C5_cat_global")); // id_{X5_term} in C5_cat_global
-    // Test: concrete_g_xy o id_X5_term
-    // ComposeMorph(concrete_g_xy, id_X5_term, cat=C5_cat_global, X=X5_term, Y=X5_term, Z=Y5_term)
+    const id_X5_term = IdentityMorph(X5_term, Var("C5_cat_global")); 
     const test_comp_concrete_g_id = ComposeMorph(concrete_g_xy_term, id_X5_term, 
                                                 Var("C5_cat_global"), X5_term, X5_term, Y5_term);
 
