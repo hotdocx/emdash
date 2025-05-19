@@ -118,7 +118,7 @@ function getTermRef(term: Term): Term {
 }
 
 const MAX_WHNF_ITERATIONS = 100; // Renamed from MAX_RECURSION_DEPTH
-const MAX_STACK_DEPTH = 100;
+const MAX_STACK_DEPTH = 200; // Increased from 100
 
 // Metadata for Emdash symbols
 // UPDATED: ObjTerm and HomTerm are NOT constant symbols for rewrite head blocking
