@@ -118,7 +118,7 @@ function getTermRef(term: Term): Term {
 }
 
 const MAX_RECURSION_DEPTH = 100;
-const MAX_STACK_DEPTH = 100; // Increased from 70
+const MAX_STACK_DEPTH = 70;
 
 // Metadata for Emdash symbols
 const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_']);
@@ -341,13 +341,16 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
                 if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) return false;
             }
             const freshV = Var(freshVarName(rt1.paramName));
-            return areEqual(rt1.body(freshV), lam2.body(freshV), ctx, depth + 1);
+            const CtxType = rt1.paramType && rt1._isAnnotated ? getTermRef(rt1.paramType) : Hole();
+            const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
+            return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
         case 'Pi': {
             const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshV = Var(freshVarName(rt1.paramName));
-            return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), ctx, depth + 1);
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(rt1.paramType));
+            return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
         case 'ObjTerm':
             return areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
@@ -1377,63 +1380,6 @@ function setupPhase1GlobalsAndRules() {
         ),
         rhs: Var("f_param_idf")
     });
-
-    // Associativity rule: h o (g o f) = (h o g) o f
-    // h: Y -> Z, g: X -> Y, f: W -> X
-    // const pvarW_obj = { name: "W_obj_pv", type: ObjTerm(Var("CAT_pv")) }; // Need W
-    // const pvarX_obj = { name: "X_obj_pv", type: ObjTerm(Var("CAT_pv")) }; // Already defined
-    // const pvarY_obj = { name: "Y_obj_pv", type: ObjTerm(Var("CAT_pv")) }; // Already defined
-    // const pvarZ_obj = { name: "Z_obj_pv", type: ObjTerm(Var("CAT_pv")) }; // Already defined
-
-    // const f_assoc_type = HomTerm(Var("CAT_pv"), Var("W_obj_pv"), Var("X_obj_pv")); // f: W -> X
-    // const g_assoc_type = HomTerm(Var("CAT_pv"), Var("X_obj_pv"), Var("Y_obj_pv")); // g: X -> Y
-    // const h_assoc_type = HomTerm(Var("CAT_pv"), Var("Y_obj_pv"), Var("Z_obj_pv")); // h: Y -> Z
-
-    // addRewriteRule({
-    //     name: "comp_assoc",
-    //     patternVars: [pvarCat, pvarW_obj, pvarX_obj, pvarY_obj, pvarZ_obj,
-    //                   { name: "f_assoc_pv", type: f_assoc_type },
-    //                   { name: "g_assoc_pv", type: g_assoc_type },
-    //                   { name: "h_assoc_pv", type: h_assoc_type }],
-    //     lhs: ComposeMorph(
-    //             Var("h_assoc_pv"), // h
-    //             ComposeMorph(
-    //                 Var("g_assoc_pv"), // g
-    //                 Var("f_assoc_pv"), // f
-    //                 Var("CAT_pv"),     // Implicits for (g o f)
-    //                 Var("W_obj_pv"),
-    //                 Var("X_obj_pv"),
-    //                 Var("Y_obj_pv")
-    //             ),
-    //             Var("CAT_pv"),     // Implicits for h o (g o f)
-    //             Var("W_obj_pv"), // dom(g o f)
-    //             Var("Y_obj_pv"), // cod(g o f) = dom(h)
-    //             Var("Z_obj_pv")  // cod(h)
-    //     ),
-    //     rhs: ComposeMorph(
-    //             ComposeMorph(
-    //                 Var("h_assoc_pv"), // h
-    //                 Var("g_assoc_pv"), // g
-    //                 Var("CAT_pv"),     // Implicits for (h o g)
-    //                 Var("X_obj_pv"),
-    //                 Var("Y_obj_pv"),
-    //                 Var("Z_obj_pv")
-    //             ),
-    //             Var("f_assoc_pv"), // f
-    //             Var("CAT_pv"),     // Implicits for (h o g) o f
-    //             Var("W_obj_pv"),  // dom(f)
-    //             Var("X_obj_pv"),  // cod(f) = dom(h o g)
-    //             Var("Z_obj_pv")   // cod(h o g)
-    //     )
-    // });
-
-    // Unification Rule for Hom Term Equality (experimental)
-    // If Hom(C, D1, C1) == Hom(C, D2, C2) THEN C == C, D1 == D2, C1 == C2
-    // This is somewhat captured by the isEmdashUnificationInjectiveStructurally check,
-    // but maybe explicit rules help? Let's hold off on this for now unless structural unif proves insufficient.
-
-
-
 }
 // (The Test functions `runPhase1Tests` and main try-catch block are identical to your provided "NEW TEST CODE" and are appended here)
 function runPhase1Tests() {
