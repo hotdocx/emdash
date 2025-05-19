@@ -1408,6 +1408,32 @@ function matchPattern(
     // Neither is a pattern variable, neither is a Hole (or handled). Tags must match for structural match.
     if (rtPattern.tag !== currentTermStruct.tag) return null;
 
+    // For IdentityMorph and ComposeMorph, implicit args in patterns are handled.
+    // Helper for matching optional/implicit arguments in patterns.
+    const matchOptImplicitArgPattern = (currentS: Substitution | null, patArg?: Term, termArg?: Term): Substitution | null => {
+        if (!currentS) return null; // Previous match failed
+
+        if (patArg) { // Pattern specifies this implicit argument
+            const patArgRef = getTermRef(patArg);
+            // If patArg is a wildcard var/hole, it matches anything (even absence if termArg is undef)
+            // For pattern matching, wildcard means "don't care and don't bind".
+            // If it's a pvar, it tries to bind.
+            if ((patArgRef.tag === 'Var' && isPatternVarName(patArgRef.name, patternVarDecls) && patArgRef.name === '_') ||
+                (patArgRef.tag === 'Hole' && patArgRef.id === '_')) {
+                return currentS; // Wildcard matches presence or absence of termArg
+            }
+
+            if (!termArg) return null; // Pattern requires implicit, term doesn't have it (and pattern arg not wildcard)
+
+            // Both pattern and term have the implicit arg, recursively match.
+            return matchPattern(patArg, termArg, ctx, patternVarDecls, currentS, stackDepth + 1);
+
+        }
+        // If patArg is undefined, pattern doesn't care about this implicit.
+        // It matches whether termArg is present or absent.
+        return currentS;
+    };
+
     // Structural comparison for each tag
     switch (rtPattern.tag) {
         case 'Type': case 'CatTerm': return subst; // Tags match, success.
@@ -1446,7 +1472,7 @@ function matchPattern(
             if (!sType) return null;
             const freshV = Var(freshVarName(piP.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType)); // Use pattern's param type for context
-            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth+1) ? sType : null;
+            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm': {
             return matchPattern(rtPattern.cat, (currentTermStruct as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1);
@@ -1469,31 +1495,7 @@ function matchPattern(
             if(!s) return null;
             return matchPattern(mkP.composeImplementation, mkT.composeImplementation, ctx, patternVarDecls, s, stackDepth + 1);
         }
-        // For IdentityMorph and ComposeMorph, implicit args in patterns are handled.
-        // Helper for matching optional/implicit arguments in patterns.
-        const matchOptImplicitArgPattern = (currentS: Substitution | null, patArg?: Term, termArg?: Term): Substitution | null => {
-            if (!currentS) return null; // Previous match failed
 
-            if (patArg) { // Pattern specifies this implicit argument
-                const patArgRef = getTermRef(patArg);
-                // If patArg is a wildcard var/hole, it matches anything (even absence if termArg is undef)
-                // For pattern matching, wildcard means "don't care and don't bind".
-                // If it's a pvar, it tries to bind.
-                if ((patArgRef.tag === 'Var' && isPatternVarName(patArgRef.name, patternVarDecls) && patArgRef.name === '_') ||
-                    (patArgRef.tag === 'Hole' && patArgRef.id === '_')) {
-                    return currentS; // Wildcard matches presence or absence of termArg
-                }
-
-                if (!termArg) return null; // Pattern requires implicit, term doesn't have it (and pattern arg not wildcard)
-
-                // Both pattern and term have the implicit arg, recursively match.
-                return matchPattern(patArg, termArg, ctx, patternVarDecls, currentS, stackDepth + 1);
-
-            }
-            // If patArg is undefined, pattern doesn't care about this implicit.
-            // It matches whether termArg is present or absent.
-            return currentS;
-        };
 
         case 'IdentityMorph': {
             const idP = rtPattern as Term & {tag:'IdentityMorph'};
@@ -1718,15 +1720,7 @@ function setupPhase1GlobalsAndRules() {
     // This means Z is objX_IMPLICIT, X is objY_IMPLICIT, X is objZ_IMPLICIT
     // So f = IdentityMorph(X,C) which has type Hom C X X.  objX_imp = X, objY_imp = X
     // And g has type Hom C X X. objY_imp = X, objZ_imp = X.
-    // Wait, the rule from doc: `ComposeMorph(g, IdentityMorph(X, C), C, Z, X, X) ↪ g`  (where `g : Hom C Z X`)
-    // This implies f = IdentityMorph(X,C) has type Hom C X X.
-    // g has type Hom C X Z.  (Note: doc says g: Hom C Z X, but for g o f, f: A->B, g: B->C. Here f=id_X: X->X, g: X->Z)
-    // LHS: ComposeMorph(g_XZ, id_X)
-    // Implicits: cat=C, objX=X (dom(id_X)), objY=X (cod(id_X)/dom(g_XZ)), objZ=Z (cod(g_XZ))
-    // This seems to be the "id_Y o f = f" form if Y=X. Let's use the specific forms from doc.
-
-    // Rule from doc: ComposeMorph(g, IdentityMorph(X_obj, CAT), CAT, obj_of_g_domain, X_obj, X_obj_cod_of_g) -> g
-    // Where g: Hom CAT (obj_of_g_domain) (X_obj)
+    // Wait, the rule from doc: `ComposeMorph(g, IdentityMorph(X_obj, CAT), CAT, obj_of_g_domain, X_obj, X_obj_cod_of_g) -> g`  (where `g : Hom CAT (obj_of_g_domain) (X_obj)`)
     // So f = IdentityMorph(X_obj, CAT) : Hom CAT X_obj X_obj
     // And g is the first argument to ComposeMorph.
     // Let's use the provided rule structures from Test 5 logic.
