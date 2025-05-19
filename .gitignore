@@ -2,3 +2,4 @@ node_modules
 dist/
 index2.ts
 code2.ts
+backups/
