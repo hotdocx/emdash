@@ -138,46 +138,15 @@ function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
 
 function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
+
     let current = getTermRef(term);
 
+    // We loop to apply reductions until the head is no longer reducible.
     for (let i = 0; i < MAX_RECURSION_DEPTH; i++) {
-        let changedInThisPass = false;
-        const termAtStartOfPass = current;
+        const termAtStartOfPass = current; // Snapshot to detect if any change occurred
 
-        // 1. Delta Reduction (for Vars)
-        if (current.tag === 'Var') {
-            const gdef = globalDefs.get(current.name);
-            if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
-                const valRef = getTermRef(gdef.value);
-                if (valRef !== current) {
-                     current = valRef;
-                     changedInThisPass = true;
-                }
-            }
-        }
-        if (changedInThisPass) { continue; } // Restart loop if delta occurred
-
-        // 2. User-Defined Rewrite Rules (Higher Priority than Emdash unfoldings for laws like g o id = g)
-        if (!isEmdashConstantSymbolStructurally(current)) { // Constant symbols cannot be rewrite heads
-            for (const rule of userRewriteRules) {
-                const subst = matchPattern(rule.lhs, current, ctx, rule.patternVars, undefined, stackDepth + 1);
-                if (subst) {
-                    const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                    if (rhsApplied !== current) { // Must compare with current before rule attempt
-                        current = rhsApplied;
-                        changedInThisPass = true;
-                    }
-                    // Even if rhsApplied === current (e.g. X -> X rule), if it matched, consider it a step.
-                    // The outer loop's `current === termAtStartOfPass` check handles termination.
-                    // If a rule fires (even to the same term ref), we mark change to re-evaluate.
-                    if(!changedInThisPass && rhsApplied === current) changedInThisPass = true; 
-                    break; 
-                }
-            }
-        }
-        if (changedInThisPass) { continue; }
-
-        // 3. Emdash Specific Unfolding/Structural Reductions
+        // Check for structural Emdash reductions (Obj, Hom, Compose on MkCat_)
+        // These are high priority structural steps.
         const termBeforeEmdashUnfold = current;
         let termAfterEmdashUnfold = termBeforeEmdashUnfold;
 
@@ -192,18 +161,17 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             if (getTermRef(resolvedCat).tag === 'MkCat_') {
                 const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
                 const H_repr = mkCatTerm.homRepresentation;
-                // Args dom/cod are passed as is to App; whnf of App will handle them
                 termAfterEmdashUnfold = App(App(H_repr, termAfterEmdashUnfold.dom), termAfterEmdashUnfold.cod);
             }
         } else if (termAfterEmdashUnfold.tag === 'ComposeMorph') {
             const comp = termAfterEmdashUnfold;
-            if (comp.cat_IMPLICIT) {
+            if (comp.cat_IMPLICIT) { // Ensure cat_IMPLICIT is set (likely a Hole initially)
                 const resolvedCat = whnf(comp.cat_IMPLICIT, ctx, stackDepth + 1);
                 if (getTermRef(resolvedCat).tag === 'MkCat_') {
                     const mkCatTerm = getTermRef(resolvedCat) as Term & {tag: 'MkCat_'};
                     const C_impl = mkCatTerm.composeImplementation;
-                    if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) {
-                         const objX_val = comp.objX_IMPLICIT; // Use directly, App will whnf
+                    if (comp.objX_IMPLICIT && comp.objY_IMPLICIT && comp.objZ_IMPLICIT) { // Ensure implicits are set
+                         const objX_val = comp.objX_IMPLICIT;
                          const objY_val = comp.objY_IMPLICIT;
                          const objZ_val = comp.objZ_IMPLICIT;
                          termAfterEmdashUnfold = App(App(App(App(App(C_impl, objX_val), objY_val), objZ_val), comp.g), comp.f);
@@ -214,32 +182,101 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
         if (termAfterEmdashUnfold !== termBeforeEmdashUnfold) {
             current = termAfterEmdashUnfold;
-            changedInThisPass = true;
-            continue; 
+            continue; // Restart the loop to reduce the new term
         }
-        
-        current = getTermRef(current); 
 
-        if (!changedInThisPass && current === termAtStartOfPass) {
+        current = getTermRef(current); // Get the reference after potential structural reduction
+
+        // Try to apply Beta or Delta reduction if the head is an App or a Var.
+        switch (current.tag) {
+            case 'App': {
+                // Reduce the function part to WHNF first.
+                const funcWhnf = whnf(current.func, ctx, stackDepth + 1);
+                const funcWhnfRef = getTermRef(funcWhnf); // Get the underlying term after reducing func
+
+                // If the function part is a Lambda, perform Beta reduction.
+                if (funcWhnfRef.tag === 'Lam') {
+                    const result = funcWhnfRef.body(current.arg);
+                    // The WHNF of the application is the WHNF of the result of the beta reduction.
+                    return whnf(result, ctx, stackDepth + 1); // Recursively find WHNF of the result
+                }
+
+                // If the function part reduced but isn't a Lambda,
+                // the head of the App is the head of the normalized function.
+                // The App is in WHNF if the function part is in WHNF and not a Lambda.
+                // We need to return the App with the function part in WHNF.
+                // If the function part's reference changed (e.g., a Var reduced to something else),
+                // we update the current term and continue the loop.
+                if (funcWhnfRef !== getTermRef(current.func)) { // Check if the head of the function changed
+                     current = App(funcWhnf, current.arg); // Update current with the term with the normalized function
+                     // Continue the loop to process the updated 'current' term.
+                     continue;
+                }
+
+                // If the function part did not reduce its head to a Lam or change its head structure,
+                // the application is in WHNF.
+                return current;
+            }
+            case 'Var': {
+                // If the term is a standalone variable, unfold it only if it has a value
+                // and is not a constant symbol. This is Delta reduction.
+                const gdef = globalDefs.get(current.name);
+                if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
+                    const valRef = getTermRef(gdef.value);
+                    if (valRef !== current) { // Avoid infinite loops with X = X
+                        current = valRef; // Update current to the variable's value
+                        continue; // Restart the loop to reduce the value
+                    }
+                }
+                // If it's a variable without a value or a constant symbol, it's in WHNF.
+                return current;
+            }
+            case 'Hole':
+                 // Holes are in WHNF.
+                return current;
+            case 'Type':
+                 // Type is in WHNF.
+                return current;
+            case 'Pi':
+                // Pi types are in WHNF (their components are not reduced at the head).
+                return current;
+             case 'CatTerm':
+                // CatTerm is in WHNF.
+                return current;
+             case 'ObjTerm': // Handled by structural reduction above if cat is MkCat_
+                 return current;
+             case 'HomTerm': // Handled by structural reduction above if cat is MkCat_
+                 return current;
+             case 'MkCat_': // MkCat_ is in WHNF (its components are not reduced at the head)
+                 return current;
+             case 'IdentityMorph': // Handled by structural reduction above if cat is MkCat_ applied
+                 return current;
+             case 'ComposeMorph': // Handled by structural reduction above if cat is MkCat_ applied
+                 return current;
+            default:
+                 // Should not reach here if all tags are covered.
+                 return current;
+        }
+
+        // If no reduction rule applied in this pass, the term is in WHNF.
+        // We only break if no changes occurred in this iteration.
+        if (current === termAtStartOfPass) {
             break;
         }
-        if (i === MAX_RECURSION_DEPTH - 1 && (changedInThisPass || current !== termAtStartOfPass) ) {
-            // console.warn(`WHNF reached max iterations for: ${printTerm(term)} -> ${printTerm(current)}`);
-        }
-    }
+    
 
-    // 4. Beta Reduction
-    if (current.tag === 'App') {
-        const funcNorm = whnf(current.func, ctx, stackDepth + 1);
-        if (funcNorm.tag === 'Lam') {
-            return whnf(funcNorm.body(current.arg), ctx, stackDepth + 1);
-        }
-        // If funcNorm changed due to its own WHNF (e.g. it was a Var that delta-reduced to Lam)
-        // but not enough to beta-reduce here, reconstruct App with normalized function.
-        if (funcNorm !== getTermRef(current.func)) return App(funcNorm, current.arg);
+    // If the loop finishes without returning (e.g., max iterations reached),
+    // return the current state.
+    if (i === MAX_RECURSION_DEPTH - 1 && current === termAtStartOfPass) {
+        // If we hit max depth and didn't change in the last iteration, we assume it's in WHNF.
+        return current;
+    } else if (i === MAX_RECURSION_DEPTH - 1) {
+        // If we hit max depth but did change, it might not be fully in WHNF.
+        // console.warn(`WHNF reached max iterations for: ${printTerm(term)} -> ${printTerm(current)}`);
         return current;
     }
-    return current;
+}
+    return current; // Should be reached after the loop breaks
 }
 
 function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
@@ -322,76 +359,119 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     const rt1 = getTermRef(normT1);
     const rt2 = getTermRef(normT2);
 
+    if (rt1 === rt2 && rt1.tag !== 'Hole') return true;
     if (rt1.tag === 'Hole' && rt2.tag === 'Hole') return rt1.id === rt2.id;
     if (rt1.tag === 'Hole' || rt2.tag === 'Hole') return false;
     if (rt1.tag !== rt2.tag) return false;
 
     switch (rt1.tag) {
-        case 'Type': case 'CatTerm': return rt2.tag === rt1.tag; // Ensures rt2.tag is also 'Type' or 'CatTerm'
+        case 'Type': case 'CatTerm': return true;
         case 'Var': return rt1.name === (rt2 as Term & {tag:'Var'}).name;
         case 'App': {
             const app2 = rt2 as Term & {tag:'App'};
-            return areEqual(rt1.func, app2.func, ctx, depth + 1) &&
-                   areEqual(rt1.arg, app2.arg, ctx, depth + 1);
+            // Ensure function and argument terms are in WHNF before recursive comparison
+            const func1Norm = whnf(rt1.func, ctx, depth + 1);
+            const arg1Norm = whnf(rt1.arg, ctx, depth + 1);
+            const func2Norm = whnf(app2.func, ctx, depth + 1);
+            const arg2Norm = whnf(app2.arg, ctx, depth + 1);
+            return areEqual(func1Norm, arg1Norm, ctx, depth + 1) &&
+                   areEqual(func2Norm, arg2Norm, ctx, depth + 1);
         }
         case 'Lam': {
             const lam2 = rt2 as Term & {tag:'Lam'};
             if (rt1._isAnnotated !== lam2._isAnnotated) return false;
+            let paramTypesEqual = true;
             if (rt1._isAnnotated) {
-                if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) return false;
+                if (!rt1.paramType || !lam2.paramType) return false;
+                const normParamType1 = whnf(rt1.paramType, ctx, depth + 1);
+                const normParamType2 = whnf(lam2.paramType, ctx, depth + 1);
+                paramTypesEqual = areEqual(normParamType1, normParamType2, ctx, depth + 1);
+                if (!paramTypesEqual) return false;
             }
             const freshV = Var(freshVarName(rt1.paramName));
+            const bodyTerm1 = whnf(rt1.body(freshV), ctx, depth + 1);
+            const bodyTerm2 = whnf(lam2.body(freshV), ctx, depth + 1);
+
             const CtxType = rt1.paramType && rt1._isAnnotated ? getTermRef(rt1.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxType);
-            return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
+
+            return areEqual(bodyTerm1, bodyTerm2, extendedCtx, depth + 1);
         }
         case 'Pi': {
             const pi2 = rt2 as Term & {tag:'Pi'};
-            if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
+            const normParamType1 = whnf(rt1.paramType, ctx, depth + 1);
+            const normParamType2 = whnf(pi2.paramType, ctx, depth + 1);
+            if (!areEqual(normParamType1, normParamType2, ctx, depth + 1)) return false;
+
             const freshV = Var(freshVarName(rt1.paramName));
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(rt1.paramType));
-            return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(normParamType1));
+            const bodyType1 = whnf(rt1.bodyType(freshV), extendedCtx, depth + 1);
+            const bodyType2 = whnf(pi2.bodyType(freshV), extendedCtx, depth + 1);
+            return areEqual(bodyType1, bodyType2, extendedCtx, depth + 1);
         }
         case 'ObjTerm':
-            return areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
+            const normCat1 = whnf(rt1.cat, ctx, depth + 1);
+            const normCat2 = whnf((rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
+            return areEqual(normCat1, normCat2, ctx, depth + 1);
         case 'HomTerm':
             const hom2 = rt2 as Term & {tag:'HomTerm'};
-            return areEqual(rt1.cat, hom2.cat, ctx, depth + 1) &&
-                   areEqual(rt1.dom, hom2.dom, ctx, depth + 1) &&
-                   areEqual(rt1.cod, hom2.cod, ctx, depth + 1);
+            const normCatH1 = whnf(rt1.cat, ctx, depth + 1);
+            const normDom1 = whnf(rt1.dom, ctx, depth + 1);
+            const normCod1 = whnf(rt1.cod, ctx, depth + 1);
+            const normCatH2 = whnf(hom2.cat, ctx, depth + 1);
+            const normDom2 = whnf(hom2.dom, ctx, depth + 1);
+            const normCod2 = whnf(hom2.cod, ctx, depth + 1);
+            return areEqual(normCatH1, normCatH2, ctx, depth + 1) &&
+                   areEqual(normDom1, normDom2, ctx, depth + 1) &&
+                   areEqual(normCod1, normCod2, ctx, depth + 1);
         case 'MkCat_':
             const mkcat2 = rt2 as Term & {tag:'MkCat_'};
-            return areEqual(rt1.objRepresentation, mkcat2.objRepresentation, ctx, depth + 1) &&
-                   areEqual(rt1.homRepresentation, mkcat2.homRepresentation, ctx, depth + 1) &&
-                   areEqual(rt1.composeImplementation, mkcat2.composeImplementation, ctx, depth + 1);
-        case 'IdentityMorph':
+            const normO1 = whnf(rt1.objRepresentation, ctx, depth + 1);
+            const normH1 = whnf(rt1.homRepresentation, ctx, depth + 1);
+            const normC1 = whnf(rt1.composeImplementation, ctx, depth + 1);
+            const normO2 = whnf(mkcat2.objRepresentation, ctx, depth + 1);
+            const normH2 = whnf(mkcat2.homRepresentation, ctx, depth + 1);
+            const normC2 = whnf(mkcat2.composeImplementation, ctx, depth + 1);
+            return areEqual(normO1, normO2, ctx, depth + 1) &&
+                   areEqual(normH1, normH2, ctx, depth + 1) &&
+                   areEqual(normC1, normC2, ctx, depth + 1);
+        case 'IdentityMorph': {
             const id2 = rt2 as Term & {tag:'IdentityMorph'};
-            // For equality, implicits must match if both are present and not wildcards
-            const cat1_eq = rt1.cat_IMPLICIT ? getTermRef(rt1.cat_IMPLICIT) : undefined;
-            const cat2_eq = id2.cat_IMPLICIT ? getTermRef(id2.cat_IMPLICIT) : undefined;
+            const normObj1 = whnf(rt1.obj, ctx, depth + 1);
+            const normObj2 = whnf(id2.obj, ctx, depth + 1);
+
+            const cat1_eq = rt1.cat_IMPLICIT ? whnf(rt1.cat_IMPLICIT, ctx, depth + 1) : undefined;
+            const cat2_eq = id2.cat_IMPLICIT ? whnf(id2.cat_IMPLICIT, ctx, depth + 1) : undefined;
             if (cat1_eq && cat2_eq) {
                  if (!areEqual(cat1_eq, cat2_eq, ctx, depth + 1)) return false;
-            } else if (cat1_eq !== cat2_eq) { // One has it, other doesn't
+            } else if (cat1_eq !== cat2_eq) {
                  return false;
             }
-            return areEqual(rt1.obj, id2.obj, ctx, depth + 1);
+            return areEqual(normObj1, normObj2, ctx, depth + 1);
+        }
         case 'ComposeMorph': {
             const comp2 = rt2 as Term & {tag:'ComposeMorph'};
+            const normG1 = whnf(rt1.g, ctx, depth + 1);
+            const normF1 = whnf(rt1.f, ctx, depth + 1);
+            const normG2 = whnf(comp2.g, ctx, depth + 1);
+            const normF2 = whnf(comp2.f, ctx, depth + 1);
+
             const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
-                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
-                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                const rImp1 = imp1 ? whnf(imp1, ctx, depth + 1) : undefined;
+                const rImp2 = imp2 ? whnf(imp2, ctx, depth + 1) : undefined;
                 if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
-                return rImp1 === rImp2; // Both undefined is fine, one defined & other not is unequal
+                return rImp1 === rImp2;
             };
             if (!implicitsMatch(rt1.cat_IMPLICIT, comp2.cat_IMPLICIT)) return false;
             if (!implicitsMatch(rt1.objX_IMPLICIT, comp2.objX_IMPLICIT)) return false;
             if (!implicitsMatch(rt1.objY_IMPLICIT, comp2.objY_IMPLICIT)) return false;
             if (!implicitsMatch(rt1.objZ_IMPLICIT, comp2.objZ_IMPLICIT)) return false;
 
-            return areEqual(rt1.g, comp2.g, ctx, depth + 1) &&
-                   areEqual(rt1.f, comp2.f, ctx, depth + 1);
+            return areEqual(normG1, normG2, ctx, depth + 1) &&
+                   areEqual(normF1, normF2, ctx, depth + 1);
         }
     }
+    return false;
 }
 
 function termContainsHole(term: Term, holeId: string, visited: Set<string>, depth = 0): boolean {
@@ -466,18 +546,27 @@ function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx
         const t1_arg = args1[i];
         const t2_arg = args2[i];
 
-        if (t1_arg === undefined && t2_arg === undefined) continue;
+        // Normalize args before potential Hole check or unify call
+        const norm_t1_arg = t1_arg ? whnf(t1_arg, ctx, depth + 1) : undefined;
+        const norm_t2_arg = t2_arg ? whnf(t2_arg, ctx, depth + 1) : undefined;
+
+        if (norm_t1_arg === undefined && norm_t2_arg === undefined) continue;
         // If one is undefined and other is not a hole -> mismatch
-        if ((t1_arg === undefined && t2_arg && t2_arg.tag !== 'Hole') ||
-            (t2_arg === undefined && t1_arg && t1_arg.tag !== 'Hole')) {
+        if ((norm_t1_arg === undefined && norm_t2_arg && getTermRef(norm_t2_arg).tag !== 'Hole') ||
+            (norm_t2_arg === undefined && norm_t1_arg && getTermRef(norm_t1_arg).tag !== 'Hole')) {
             return UnifyResult.Failed;
         }
         // If one is undefined and other is a hole -> let unify handle Hole with undefined (should be okay if hole solves to it)
         // Or both are defined terms
-        const arg1ToUnify = t1_arg || Hole(freshHoleName() + "_undef_arg_lhs"); // Treat undefined as a fresh hole for unification
-        const arg2ToUnify = t2_arg || Hole(freshHoleName() + "_undef_arg_rhs");
+        const arg1ToUnify = norm_t1_arg || Hole(freshHoleName() + "_undef_arg_lhs"); // Treat undefined as a fresh hole for unification
+        const arg2ToUnify = norm_t2_arg || Hole(freshHoleName() + "_undef_arg_rhs");
 
-        const argStatus = unify(arg1ToUnify, arg2ToUnify, ctx, depth + 1);
+        // Ensure arguments to unify are normalized
+        const final_arg1ToUnify = whnf(arg1ToUnify, ctx, depth + 1);
+        const final_arg2ToUnify = whnf(arg2ToUnify, ctx, depth + 1);
+
+
+        const argStatus = unify(final_arg1ToUnify, final_arg2ToUnify, ctx, depth + 1);
 
         if (argStatus === UnifyResult.Failed) return UnifyResult.Failed;
         if (argStatus === UnifyResult.RewrittenByRule || argStatus === UnifyResult.Progress) {
@@ -494,10 +583,13 @@ function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx
         // areEqual already called at the beginning of unify, so if all args solved,
         // and no progress/rewrite, it implies the overall structure should be Solved if it matches.
         // This re-check is important if hole fillings in args make parents equal.
-        if(areEqual(parentRt1, parentRt2, ctx, depth +1)) return UnifyResult.Solved;
+        // Need to whnf parents again before final equality check in case sub-unifications caused parent reduction.
+        const finalParentRt1 = whnf(parentRt1, ctx, depth + 1);
+        const finalParentRt2 = whnf(parentRt2, ctx, depth + 1);
+        if(areEqual(finalParentRt1, finalParentRt2, ctx, depth +1)) return UnifyResult.Solved;
         else return UnifyResult.Progress; // Args solved, but parents still not equal (e.g. different Var names)
     }
-    return UnifyResult.Progress;
+    return UnifyResult.Progress; // Should not reach here if allSubSolved is false
 }
 
 
@@ -507,111 +599,145 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
     const rt2 = getTermRef(t2);
 
     if (rt1 === rt2 && rt1.tag !== 'Hole') return UnifyResult.Solved;
-    if (areEqual(rt1, rt2, ctx, depth + 1)) return UnifyResult.Solved;
+    // Ensure terms are normalized *before* the initial areEqual check
+    const norm_rt1 = whnf(rt1, ctx, depth + 1);
+    const norm_rt2 = whnf(rt2, ctx, depth + 1);
+    if (areEqual(norm_rt1, norm_rt2, ctx, depth + 1)) return UnifyResult.Solved;
 
-    if (rt1.tag === 'Hole') {
-        if (unifyHole(rt1, rt2, ctx, depth + 1)) return UnifyResult.Solved;
-        else return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+
+    if (norm_rt1.tag === 'Hole') {
+        if (unifyHole(norm_rt1, norm_rt2, ctx, depth + 1)) return UnifyResult.Solved;
+        else return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
     }
-    if (rt2.tag === 'Hole') {
-        if (unifyHole(rt2, rt1, ctx, depth + 1)) return UnifyResult.Solved;
-        else return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+    if (norm_rt2.tag === 'Hole') {
+        if (unifyHole(norm_rt2, norm_rt1, ctx, depth + 1)) return UnifyResult.Solved;
+        else return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
     }
 
-    if (rt1.tag !== rt2.tag) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+    if (norm_rt1.tag !== norm_rt2.tag) return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
 
-    if (isEmdashUnificationInjectiveStructurally(rt1.tag)) {
+    if (isEmdashUnificationInjectiveStructurally(norm_rt1.tag)) {
         let args1: (Term|undefined)[] = [];
         let args2: (Term|undefined)[] = [];
-        switch (rt1.tag) {
+        switch (norm_rt1.tag) {
             case 'CatTerm': return UnifyResult.Solved;
             case 'ObjTerm':
-                args1 = [rt1.cat]; args2 = [(rt2 as Term & {tag:'ObjTerm'}).cat];
+                args1 = [norm_rt1.cat]; args2 = [(norm_rt2 as Term & {tag:'ObjTerm'}).cat];
                 break;
             case 'HomTerm':
-                const hom1 = rt1 as Term & {tag:'HomTerm'}; const hom2 = rt2 as Term & {tag:'HomTerm'};
+                const hom1 = norm_rt1 as Term & {tag:'HomTerm'}; const hom2 = norm_rt2 as Term & {tag:'HomTerm'};
                 args1 = [hom1.cat, hom1.dom, hom1.cod]; args2 = [hom2.cat, hom2.dom, hom2.cod];
                 break;
             case 'MkCat_':
-                const mk1 = rt1 as Term & {tag:'MkCat_'}; const mk2 = rt2 as Term & {tag:'MkCat_'};
+                const mk1 = norm_rt1 as Term & {tag:'MkCat_'}; const mk2 = norm_rt2 as Term & {tag:'MkCat_'};
                 args1 = [mk1.objRepresentation, mk1.homRepresentation, mk1.composeImplementation];
                 args2 = [mk2.objRepresentation, mk2.homRepresentation, mk2.composeImplementation];
                 break;
             case 'IdentityMorph':
-                const id1 = rt1 as Term & {tag:'IdentityMorph'}; const id2 = rt2 as Term & {tag:'IdentityMorph'};
+                const id1 = norm_rt1 as Term & {tag:'IdentityMorph'}; const id2 = norm_rt2 as Term & {tag:'IdentityMorph'};
                 args1 = [id1.cat_IMPLICIT, id1.obj]; args2 = [id2.cat_IMPLICIT, id2.obj];
                 break;
             default:
-                return tryUnificationRules(rt1, rt2, ctx, depth + 1); // Should not be reached if tags are in set
+                return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1); // Should not be reached if tags are in set
         }
-        const argStatus = unifyArgs(args1, args2, ctx, depth, rt1, rt2);
+        // Pass the normalized terms norm_rt1 and norm_rt2 to unifyArgs
+        const argStatus = unifyArgs(args1, args2, ctx, depth, norm_rt1, norm_rt2);
         // If unifyArgs returns Failed, it means a structural mismatch in args.
         // We try rules for the parent terms rt1, rt2.
-        if (argStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+        if (argStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
         return argStatus;
     }
 
     // Non-injective cases or fall-through for non-Emdash-kernel terms
-    switch (rt1.tag) {
+    switch (norm_rt1.tag) {
         case 'Type': return UnifyResult.Solved;
-        case 'Var': return tryUnificationRules(rt1, rt2, ctx, depth + 1); // Vars not equal by name, try rules
+        case 'Var': return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1); // Vars not equal by name, try rules
         case 'App': {
-            const app2 = rt2 as Term & {tag:'App'};
-            const funcUnifyStatus = unify(rt1.func, app2.func, ctx, depth + 1);
-            if (funcUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            const app2 = norm_rt2 as Term & {tag:'App'};
+            // Unify function and argument separately.
+            // Explicitly whnf func and arg *before* recursive unify call
+            const norm_func1 = whnf(norm_rt1.func, ctx, depth + 1);
+            const norm_arg1 = whnf(norm_rt1.arg, ctx, depth + 1);
+            const norm_func2 = whnf(app2.func, ctx, depth + 1);
+            const norm_arg2 = whnf(app2.arg, ctx, depth + 1);
 
-            const argUnifyStatus = unify(rt1.arg, app2.arg, ctx, depth + 1);
-            if (argUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            const funcUnifyStatus = unify(norm_func1, norm_func2, ctx, depth + 1);
+            if (funcUnifyStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
 
+            const argUnifyStatus = unify(norm_arg1, norm_arg2, ctx, depth + 1);
+            if (argUnifyStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
+
+            // If both sub-parts solved, check if the overall App term is now equal after potential hole filling/reductions
+            const final_app1 = whnf(norm_rt1, ctx, depth + 1); // Re-whnf after sub-unification
+            const final_app2 = whnf(norm_rt2, ctx, depth + 1); // Re-whnf after sub-unification
+
+            if (areEqual(final_app1, final_app2, ctx, depth + 1)) return UnifyResult.Solved;
+
+            // If sub-parts were solved or made progress, but the overall term is not equal yet,
+            // or if any sub-part made progress, we report progress.
             if (funcUnifyStatus === UnifyResult.Solved && argUnifyStatus === UnifyResult.Solved) {
-                if (areEqual(rt1, rt2, ctx, depth + 1)) return UnifyResult.Solved;
-                return tryUnificationRules(rt1, rt2, ctx, depth + 1); // Solved sub-parts but not overall equal
+                return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1); // Solved sub-parts but not overall equal, try rules
             }
-            return UnifyResult.Progress; // Some sub-part made progress or was rewritten
+             return UnifyResult.Progress; // Some sub-part made progress or was rewritten
         }
         case 'Lam': {
-            const lam2 = rt2 as Term & {tag:'Lam'};
-            if (rt1._isAnnotated !== lam2._isAnnotated) return tryUnificationRules(rt1, rt2, ctx, depth +1);
+            const lam2 = norm_rt2 as Term & {tag:'Lam'};
+            if (norm_rt1._isAnnotated !== lam2._isAnnotated) return tryUnificationRules(norm_rt1, lam2, ctx, depth +1);
             let paramTypeStatus = UnifyResult.Solved;
-            if (rt1._isAnnotated) {
-                if(!rt1.paramType || !lam2.paramType) return tryUnificationRules(rt1, rt2, ctx, depth +1);
-                paramTypeStatus = unify(rt1.paramType, lam2.paramType, ctx, depth + 1);
-                if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            if (norm_rt1._isAnnotated) {
+                if(!norm_rt1.paramType || !lam2.paramType) return tryUnificationRules(norm_rt1, lam2, ctx, depth +1);
+                paramTypeStatus = unify(norm_rt1.paramType, lam2.paramType, ctx, depth + 1);
+                if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, lam2, ctx, depth + 1);
             }
-            const freshV = Var(freshVarName(rt1.paramName));
-            const CtxParamType = rt1.paramType ? getTermRef(rt1.paramType) : Hole();
+            const freshV = Var(freshVarName(norm_rt1.paramName));
+            const CtxParamType = norm_rt1.paramType ? getTermRef(norm_rt1.paramType) : Hole();
             const extendedCtx = extendCtx(ctx, freshV.name, CtxParamType);
-            const bodyStatus = unify(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
-            if(bodyStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+
+            // Apply freshV to bodies and unify the results
+            const body1_applied = norm_rt1.body(freshV);
+            const body2_applied = lam2.body(freshV);
+            const bodyStatus = unify(body1_applied, body2_applied, extendedCtx, depth + 1);
+            if(bodyStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, lam2, ctx, depth + 1);
+
+            const final_lam1 = whnf(norm_rt1, ctx, depth + 1); // Re-whnf after sub-unification
+            const final_lam2 = whnf(norm_rt2, ctx, depth + 1); // Re-whnf after sub-unification
+             if(areEqual(final_lam1, final_lam2, ctx, depth+1)) return UnifyResult.Solved;
 
             if(paramTypeStatus === UnifyResult.Solved && bodyStatus === UnifyResult.Solved) {
-                if(areEqual(rt1, rt2, ctx, depth+1)) return UnifyResult.Solved;
-                return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+                return tryUnificationRules(norm_rt1, lam2, ctx, depth + 1);
             }
             return UnifyResult.Progress;
         }
         case 'Pi': {
-            const pi2 = rt2 as Term & {tag:'Pi'};
-            const paramTypeStatus = unify(rt1.paramType, pi2.paramType, ctx, depth + 1);
-            if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            const pi2 = norm_rt2 as Term & {tag:'Pi'};
+            // Unify param types
+            const paramTypeStatus = unify(norm_rt1.paramType, pi2.paramType, ctx, depth + 1);
+            if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, pi2, ctx, depth + 1);
 
-            const freshV = Var(freshVarName(rt1.paramName));
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(rt1.paramType));
-            const bodyTypeStatus = unify(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
-            if(bodyTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            const freshV = Var(freshVarName(norm_rt1.paramName));
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(norm_rt1.paramType));
+
+            // Apply freshV to body types and unify the results
+            const bodyType1_applied = norm_rt1.bodyType(freshV);
+            const bodyType2_applied = pi2.bodyType(freshV);
+            const bodyTypeStatus = unify(bodyType1_applied, bodyType2_applied, extendedCtx, depth + 1);
+            if(bodyTypeStatus === UnifyResult.Failed) return tryUnificationRules(norm_rt1, pi2, ctx, depth + 1);
+
+            const final_pi1 = whnf(norm_rt1, ctx, depth + 1); // Re-whnf after sub-unification
+            const final_pi2 = whnf(norm_rt2, ctx, depth + 1); // Re-whnf after sub-unification
+            if(areEqual(final_pi1, final_pi2, ctx, depth+1)) return UnifyResult.Solved;
 
             if(paramTypeStatus === UnifyResult.Solved && bodyTypeStatus === UnifyResult.Solved) {
-                if(areEqual(rt1, rt2, ctx, depth+1)) return UnifyResult.Solved;
-                return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+                return tryUnificationRules(norm_rt1, pi2, ctx, depth + 1);
             }
             return UnifyResult.Progress;
         }
         case 'ComposeMorph': // Not unification-injective in g, f. Relies on reduction/rules.
-            return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
         default:
             // This path should ideally not be taken if all Emdash tags are handled by injectivity.
             // console.warn(`Unify: Unhandled same-tag case: ${rt1.tag}`);
-            return tryUnificationRules(rt1, rt2, ctx, depth + 1);
+            return tryUnificationRules(norm_rt1, norm_rt2, ctx, depth + 1);
     }
 }
 
@@ -699,10 +825,14 @@ function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, 
 }
 
 function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): UnifyResult {
+     // Normalize terms before trying to match patterns against them
+     const norm_t1 = whnf(t1, ctx, depth + 1);
+     const norm_t2 = whnf(t2, ctx, depth + 1);
+
     for (const rule of userUnificationRules) {
-        let subst1 = matchPattern(rule.lhsPattern1, t1, ctx, rule.patternVars, undefined, depth + 1);
+        let subst1 = matchPattern(rule.lhsPattern1, norm_t1, ctx, rule.patternVars, undefined, depth + 1);
         if (subst1) {
-            let subst2 = matchPattern(rule.lhsPattern2, t2, ctx, rule.patternVars, subst1, depth + 1);
+            let subst2 = matchPattern(rule.lhsPattern2, norm_t2, ctx, rule.patternVars, subst1, depth + 1);
             if (subst2) {
                 applyAndAddRuleConstraints(rule, subst2, ctx);
                 return UnifyResult.RewrittenByRule;
@@ -710,9 +840,9 @@ function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): U
         }
 
         // Commuted
-        subst1 = matchPattern(rule.lhsPattern1, t2, ctx, rule.patternVars, undefined, depth + 1);
+        subst1 = matchPattern(rule.lhsPattern1, norm_t2, ctx, rule.patternVars, undefined, depth + 1);
         if (subst1) {
-            let subst2 = matchPattern(rule.lhsPattern2, t1, ctx, rule.patternVars, subst1, depth + 1);
+            let subst2 = matchPattern(rule.lhsPattern2, norm_t1, ctx, rule.patternVars, subst1, depth + 1);
             if (subst2) {
                 applyAndAddRuleConstraints(rule, subst2, ctx);
                 return UnifyResult.RewrittenByRule;
@@ -739,14 +869,19 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
             const c_t1_current_ref = getTermRef(constraint.t1);
             const c_t2_current_ref = getTermRef(constraint.t2);
 
-            if (areEqual(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1)) {
+            // Ensure terms are normalized before equality check
+            const norm_c_t1 = whnf(c_t1_current_ref, ctx, stackDepth + 1);
+            const norm_c_t2 = whnf(c_t2_current_ref, ctx, stackDepth + 1);
+
+            if (areEqual(norm_c_t1, norm_c_t2, ctx, stackDepth + 1)) {
                 constraints.splice(currentConstraintIdx, 1);
                 changedInOuterLoop = true;
                 continue;
             }
 
             try {
-                const unifyResult = unify(c_t1_current_ref, c_t2_current_ref, ctx, stackDepth + 1);
+                 // Ensure terms passed to unify are normalized
+                const unifyResult = unify(norm_c_t1, norm_c_t2, ctx, stackDepth + 1);
 
                 if (unifyResult === UnifyResult.Solved) {
                     changedInOuterLoop = true;
@@ -777,8 +912,14 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
         // console.warn("Constraint solving reached max iterations and was still making changes. Constraints left: " + constraints.length);
     }
     for (const constraint of constraints) {
-        if (!areEqual(getTermRef(constraint.t1), getTermRef(constraint.t2), ctx, stackDepth + 1)) {
-            // console.warn(`Final check failed for constraint: ${printTerm(getTermRef(constraint.t1))} === ${printTerm(getTermRef(constraint.t2))} (orig: ${constraint.origin || 'unknown'})`);
+         // Ensure terms are normalized for final check
+        const final_c_t1 = whnf(getTermRef(constraint.t1), ctx);
+        const final_c_t2 = whnf(getTermRef(constraint.t2), ctx);
+        if (!areEqual(final_c_t1, final_c_t2, ctx)) { // Start depth fresh for final check? Or continue depth? Let's use 0 for final check.
+             // Re-whnf at depth 0 for robustness in final reporting.
+             const final_c_t1_dbg = whnf(getTermRef(constraint.t1), ctx, 0);
+             const final_c_t2_dbg = whnf(getTermRef(constraint.t2), ctx, 0);
+             console.warn(`Final check failed for constraint: ${printTerm(final_c_t1_dbg)} ${areEqual(final_c_t1_dbg, final_c_t2_dbg, ctx, 0) ? "===" : "=/="} ${printTerm(final_c_t2_dbg)} (origin: ${constraint.origin})`);
             return false;
         }
     }
@@ -1126,7 +1267,7 @@ function matchPattern(
             if (!sType) return null;
             const freshV = Var(freshVarName(piP.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType));
-            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth+1) ? sType : null;
+            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm': {
             return matchPattern(rtPattern.cat, (currentTermStruct as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1);
@@ -1425,16 +1566,15 @@ function runPhase1Tests() {
     const type_of_H_repr_Nat = Pi("X", NatObjRepr, _X => Pi("Y", NatObjRepr, _Y => Type()));
         defineGlobal("H_repr_Nat_reduced", type_of_H_repr_Nat, undefined, true);
     const H_repr_Nat = Lam("X", NatObjRepr, _X => Lam("Y", NatObjRepr, _Y => App(App(Var("H_repr_Nat_reduced"), _X), _Y)));
-    // Use H_repr_Nat_Constant as the global definition representing the type family
-    defineGlobal("H_repr_Nat_Constant", type_of_H_repr_Nat, H_repr_Nat, false); // Now directly the constant symbol for the type family
-
+    // Use H_repr_Nat_Def as the global definition representing the type family
+    defineGlobal("H_repr_Nat_Def", type_of_H_repr_Nat, H_repr_Nat, false);
     const type_of_C_impl_Nat_dummy = Pi("Xobj", NatObjRepr, Xobj_term =>
         Pi("Yobj", NatObjRepr, Yobj_term =>
         Pi("Zobj", NatObjRepr, Zobj_term =>
         // Use the constant symbol directly in the Pi types
-        Pi("gmorph", App(App(Var("H_repr_Nat_Constant"),Yobj_term),Zobj_term), _gmorph_term =>
-        Pi("fmorph", App(App(Var("H_repr_Nat_Constant"),Xobj_term),Yobj_term), _fmorph_term =>
-            App(App(Var("H_repr_Nat_Constant"),Xobj_term),Zobj_term))))));
+        Pi("gmorph", App(App(Var("H_repr_Nat_Def"),Yobj_term),Zobj_term), _gmorph_term =>
+        Pi("fmorph", App(App(Var("H_repr_Nat_Def"),Xobj_term),Yobj_term), _fmorph_term =>
+            App(App(Var("H_repr_Nat_Def"),Xobj_term),Zobj_term))))));
     defineGlobal("C_impl_Nat_dummy_reduced", type_of_C_impl_Nat_dummy, undefined, true);
 
     // The term for composition implementation
@@ -1442,8 +1582,8 @@ function runPhase1Tests() {
                               Lam("Yobj", NatObjRepr, Yobj_term =>
                               Lam("Zobj", NatObjRepr, Zobj_term =>
                               // Use the constant symbol directly in the type annotations
-                              Lam("gmorph", App(App(Var("H_repr_Nat_Constant"),Yobj_term),Zobj_term), _gmorph_term =>
-                              Lam("fmorph", App(App(Var("H_repr_Nat_Constant"),Xobj_term),Yobj_term),_fmorph_term =>
+                              Lam("gmorph", App(App(Var("H_repr_Nat_Def"),Yobj_term),Zobj_term), _gmorph_term =>
+                              Lam("fmorph", App(App(Var("H_repr_Nat_Def"),Xobj_term),Yobj_term),_fmorph_term =>
                                 // In a real implementation, this would be the actual composition logic.
                                 // For now, we can use a placeholder that returns a term of the correct type.
                                 // For testing type-checking, let's make it return a fresh hole of the correct type.
@@ -1453,7 +1593,7 @@ function runPhase1Tests() {
     // Its type should be the type_of_C_impl_Nat_dummy defined above
     defineGlobal("C_impl_Nat_dummy_term", type_of_C_impl_Nat_dummy, C_impl_Nat_dummy_term, false); // Now a term, not a constant symbol
 
-    const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Constant"), Var("C_impl_Nat_dummy_term"));
+    const NatCategoryTermVal = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy_term);
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
     console.log(`NatCategoryTermVal Term: ${printTerm(elabRes.term)}`);
     console.log(`NatCategoryTermVal Type: ${printTerm(elabRes.type)}`);
@@ -1472,13 +1612,13 @@ function runPhase1Tests() {
     elabRes = elaborate(HomInNatCat, undefined, baseCtx);
     console.log(`Hom(NatCat,X,Y) Term (norm): ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
     // Expected Hom type should use the constant symbol
-    const expectedHomReduced = App(App(Var("H_repr_Nat_Constant"), X_in_NatCat), Y_in_NatCat);
+    const expectedHomReduced = App(App(Var("H_repr_Nat_Def"), X_in_NatCat), Y_in_NatCat);
     if (!areEqual(elabRes.term, normalize(expectedHomReduced, baseCtx), baseCtx)) throw new Error(`Test 2.3 failed: Hom(NatCat,X,Y) did not reduce correctly. Expected ${printTerm(normalize(expectedHomReduced,baseCtx))} Got ${printTerm(elabRes.term)}`);
     console.log("Test 2 Passed.");
 
     console.log("\n--- Test 3: IdentityMorph ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Constant"), Var("C_impl_Nat_dummy_term"));
+    const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Def"), Var("C_impl_Nat_dummy_term"));
     defineGlobal("MyNatCat3_Global", CatTerm(), MyNatCat3_val, false);
 
     // x_obj_val_t3 is a term *of type* Obj(MyNatCat3_Global)
