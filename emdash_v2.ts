@@ -1248,6 +1248,10 @@ function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number 
         // Whether elaboratedType was just set or existed, constrain its (inferred) type with expected.
         const inferredHoleType = infer(ctx, current, stackDepth + 1); // Infer will use/create elaboratedType
         addConstraint(inferredHoleType, normExpectedType, `Hole ${current.id} checked against ${printTerm(normExpectedType)}`);
+        
+        // Ensure the type assigned to/expected for the hole is itself a well-formed type.
+        // This generates constraints for components of normExpectedType if it's complex.
+        check(ctx, normExpectedType, Type(), stackDepth + 1);
         return;
     }
 
