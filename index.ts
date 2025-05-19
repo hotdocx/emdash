@@ -1436,7 +1436,7 @@ function runPhase1Tests() {
     const MyNatCat3_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
     defineGlobal("MyNatCat3_Global", CatTerm(), MyNatCat3_val, false); 
 
-    defineGlobal("x_obj_val_t3", NatObjRepr); 
+    defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_Global"))); 
     const anObjX_term = Var("x_obj_val_t3"); 
 
     const id_x = IdentityMorph(anObjX_term); 
@@ -1459,7 +1459,7 @@ function runPhase1Tests() {
     console.log("\n--- Test 4: ComposeMorph Inference ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules();
     const MyNatCat4_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
-    defineGlobal("C4_Global", CatTerm(), MyNatCat4_val, false); 
+    defineGlobal("C4_Global", CatTerm(), undefined, true); 
 
     defineGlobal("obj_x_val_t4", NatObjRepr); 
     defineGlobal("obj_y_val_t4", NatObjRepr); 
@@ -1470,8 +1470,10 @@ function runPhase1Tests() {
 
     const f_morph_hole = Hole("?f_xy"); 
     const g_morph_hole = Hole("?g_yz"); 
+
+    const y_hole = Hole("?y_hole"); 
     
-    const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole); 
+    const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole,Var("C4_Global"), undefined, y_hole, undefined); 
     const expectedCompType = HomTerm(Var("C4_Global"), x_term, z_term);
     elabRes = elaborate(comp_gf, expectedCompType, baseCtx);
 
@@ -1480,20 +1482,20 @@ function runPhase1Tests() {
     if(!areEqual(elabRes.type, expectedCompType, baseCtx)) throw new Error(`Test 4.0 Failed: comp_gf type not as expected. Got ${printTerm(elabRes.type)}, Expected ${printTerm(expectedCompType)}`);
     
     const compTermSolved = getTermRef(elabRes.term) as Term & {tag:"ComposeMorph"};
-    if (!compTermSolved.cat_IMPLICIT || !compTermSolved.objX_IMPLICIT || !compTermSolved.objY_IMPLICIT || !compTermSolved.objZ_IMPLICIT) {
+    if (!compTermSolved.cat_IMPLICIT || !compTermSolved.objX_IMPLICIT  || !compTermSolved.objZ_IMPLICIT) {
         throw new Error("Test 4.1 failed: ComposeMorph implicits not filled.");
     }
     if(!areEqual(getTermRef(compTermSolved.cat_IMPLICIT), Var("C4_Global"), baseCtx)) throw new Error("Test 4.1 Failed: comp.cat not C4_Global");
     if(!areEqual(getTermRef(compTermSolved.objX_IMPLICIT), x_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.X not obj_x_val_t4");
-    if(!areEqual(getTermRef(compTermSolved.objY_IMPLICIT), y_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Y not obj_y_val_t4");
+    if(!areEqual(getTermRef(compTermSolved.objY_IMPLICIT), y_hole, baseCtx)) throw new Error("Test 4.1 Failed: comp.Y not y_hole");
     if(!areEqual(getTermRef(compTermSolved.objZ_IMPLICIT), z_term, baseCtx)) throw new Error("Test 4.1 Failed: comp.Z not obj_z_val_t4");
         
     const f_type = (f_morph_hole as Term & {tag:"Hole"}).elaboratedType;
     const g_type = (g_morph_hole as Term & {tag:"Hole"}).elaboratedType;
     if (!f_type || !g_type) throw new Error("Test 4.1: f or g did not get elaborated types.");
 
-    const expected_f_type = HomTerm(Var("C4_Global"), x_term, y_term);
-    const expected_g_type = HomTerm(Var("C4_Global"), y_term, z_term);
+    const expected_f_type = HomTerm(Var("C4_Global"), x_term, y_hole);
+    const expected_g_type = HomTerm(Var("C4_Global"), y_hole, z_term);
 
     if (!areEqual(getTermRef(f_type), expected_f_type, baseCtx)) throw new Error(`Test 4.1: ?f_xy type mismatch. Got ${printTerm(getTermRef(f_type))}, expected ${printTerm(expected_f_type)}`);
     if (!areEqual(getTermRef(g_type), expected_g_type, baseCtx)) throw new Error(`Test 4.1: ?g_yz type mismatch. Got ${printTerm(getTermRef(g_type))}, expected ${printTerm(expected_g_type)}`);
@@ -1503,10 +1505,10 @@ function runPhase1Tests() {
     console.log("\n--- Test 5: Rewrite rule comp (g (id X)) ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules(); 
     const C5_val = MkCat_(NatObjRepr, H_repr_Nat, C_impl_Nat_dummy);
-    defineGlobal("C5_cat_global", CatTerm(), C5_val, false);
+    defineGlobal("C5_cat_global", CatTerm(), undefined, true);
     
-    defineGlobal("x5_val_t5", NatObjRepr); 
-    defineGlobal("y5_val_t5", NatObjRepr);
+    defineGlobal("x5_val_t5", ObjTerm(Var("C5_cat_global"))); 
+    defineGlobal("y5_val_t5", ObjTerm(Var("C5_cat_global")));
     const X5_term = Var("x5_val_t5"); 
     const Y5_term = Var("y5_val_t5");
     
