@@ -119,6 +119,7 @@ function getTermRef(term: Term): Term {
 
 const MAX_WHNF_ITERATIONS = 100; // Renamed from MAX_RECURSION_DEPTH
 const MAX_STACK_DEPTH = 200; // Increased from 100
+const DEBUG_VERBOSE = false;
 
 // Metadata for Emdash symbols
 // UPDATED: ObjTerm and HomTerm are NOT constant symbols for rewrite head blocking
@@ -139,20 +140,20 @@ function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
 
 
 function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
-    console.log(`[TRACE whnf (${stackDepth})] Enter: term = ${printTerm(term)}`);
+    consoleLog(`[TRACE whnf (${stackDepth})] Enter: term = ${printTerm(term)}`);
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     
     let current = term;
 
     for (let i = 0; i < MAX_WHNF_ITERATIONS; i++) {
-        console.log(`[TRACE whnf (${stackDepth})] Iteration ${i}, current = ${printTerm(current)}`);
+        consoleLog(`[TRACE whnf (${stackDepth})] Iteration ${i}, current = ${printTerm(current)}`);
         let changedInThisPass = false;
         const termAtStartOfOuterPass = current; // For detecting overall progress in one whnf call if no specific rule restarts
 
         // 1. Resolve solved Holes (most fundamental step)
         const dereffedCurrent = getTermRef(current);
         if (dereffedCurrent !== current) {
-            console.log(`[TRACE whnf (${stackDepth})] Hole dereferenced: ${printTerm(current)} -> ${printTerm(dereffedCurrent)}`);
+            consoleLog(`[TRACE whnf (${stackDepth})] Hole dereferenced: ${printTerm(current)} -> ${printTerm(dereffedCurrent)}`);
             current = dereffedCurrent;
             changedInThisPass = true; 
         }
@@ -161,24 +162,24 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
 
         // 2. User-Defined Rewrite Rules
-        console.log(`[TRACE whnf (${stackDepth})] Checking user rewrite rules for: ${printTerm(current)} (isKernelConstant: ${isKernelConstantSymbolStructurally(current)})`);
+        consoleLog(`[TRACE whnf (${stackDepth})] Checking user rewrite rules for: ${printTerm(current)} (isKernelConstant: ${isKernelConstantSymbolStructurally(current)})`);
         if (!isKernelConstantSymbolStructurally(current)) {
             for (const rule of userRewriteRules) {
-                console.log(`[TRACE whnf (${stackDepth})] Trying rule: ${rule.name} on ${printTerm(current)}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] Trying rule: ${rule.name} on ${printTerm(current)}`);
                 const termBeforeThisRuleAttempt = current; // Save the term state before this specific rule match
                 const subst = matchPattern(rule.lhs, termBeforeThisRuleAttempt, ctx, rule.patternVars, undefined, stackDepth + 1);
                 if (subst) {
-                    console.log(`[TRACE whnf (${stackDepth})] Rule ${rule.name} matched against ${printTerm(termBeforeThisRuleAttempt)}.`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] Rule ${rule.name} matched against ${printTerm(termBeforeThisRuleAttempt)}.`);
                     const rhsApplied = getTermRef(applySubst(rule.rhs, subst, rule.patternVars));
-                    console.log(`[TRACE whnf (${stackDepth})] RHS after subst for rule ${rule.name}: ${printTerm(rhsApplied)}.`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] RHS after subst for rule ${rule.name}: ${printTerm(rhsApplied)}.`);
 
                     // Check if the rule application resulted in a structural change.
                     if (areStructurallyEqualNoWhnf(rhsApplied, termBeforeThisRuleAttempt, ctx, stackDepth + 1)) {
-                        console.log(`[TRACE whnf (${stackDepth})] Rule ${rule.name} result is structurally identical to matched term. No change by this specific rule. Matched: ${printTerm(termBeforeThisRuleAttempt)}, RHS: ${printTerm(rhsApplied)}.`);
+                        consoleLog(`[TRACE whnf (${stackDepth})] Rule ${rule.name} result is structurally identical to matched term. No change by this specific rule. Matched: ${printTerm(termBeforeThisRuleAttempt)}, RHS: ${printTerm(rhsApplied)}.`);
                         // No change from this rule, so continue to the next rule in the userRewriteRules loop.
                     } else {
                         // Structurally different, this is progress from this rule.
-                        console.log(`[TRACE whnf (${stackDepth})] Rule ${rule.name} resulted in structural change: ${printTerm(termBeforeThisRuleAttempt)} -> ${printTerm(rhsApplied)}.`);
+                        consoleLog(`[TRACE whnf (${stackDepth})] Rule ${rule.name} resulted in structural change: ${printTerm(termBeforeThisRuleAttempt)} -> ${printTerm(rhsApplied)}.`);
                         current = rhsApplied; // Update the main 'current' term for whnf.
                         changedInThisPass = true;
                         break; // Rule applied and caused change, break from userRewriteRules loop.
@@ -186,7 +187,7 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
             }
             if (changedInThisPass) {
-                console.log(`[TRACE whnf (${stackDepth})] A user rule caused structural change. Continuing whnf loop's next iteration. New current for whnf: ${printTerm(current)}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] A user rule caused structural change. Continuing whnf loop's next iteration. New current for whnf: ${printTerm(current)}`);
                 continue; // Restart entire whnf loop from step 1 with the modified 'current'.
             }
         }
@@ -194,21 +195,21 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         // 3. Head-Specific Reductions (Standard Beta, Categorical Beta, Delta)
         const headSpecificReductionTerm = current; 
         let reducedInThisBlock = false;
-        console.log(`[TRACE whnf (${stackDepth})] Checking head-specific reductions for: ${printTerm(current)} (tag: ${current.tag})`);
+        consoleLog(`[TRACE whnf (${stackDepth})] Checking head-specific reductions for: ${printTerm(current)} (tag: ${current.tag})`);
 
         switch (current.tag) {
             case 'App': { 
                 const func = current.func;
                 const func_whnf = whnf(func, ctx, stackDepth + 1); 
                 const func_whnf_ref = getTermRef(func_whnf);
-                console.log(`[TRACE whnf (${stackDepth})] App: func_whnf_ref = ${printTerm(func_whnf_ref)}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] App: func_whnf_ref = ${printTerm(func_whnf_ref)}`);
 
                 if (func_whnf_ref.tag === 'Lam') {
-                    console.log(`[TRACE whnf (${stackDepth})] App: Beta reducing with arg ${printTerm(current.arg)}`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] App: Beta reducing with arg ${printTerm(current.arg)}`);
                     current = func_whnf_ref.body(current.arg); 
                     reducedInThisBlock = true;
                 } else if (func_whnf !== func) { 
-                    console.log(`[TRACE whnf (${stackDepth})] App: func part changed to ${printTerm(func_whnf)}, reconstructing App.`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] App: func part changed to ${printTerm(func_whnf)}, reconstructing App.`);
                     current = App(func_whnf, current.arg);
                     reducedInThisBlock = true; 
                 }
@@ -218,14 +219,14 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 const cat = current.cat;
                 const cat_whnf = whnf(cat, ctx, stackDepth + 1);
                 const cat_whnf_ref = getTermRef(cat_whnf);
-                console.log(`[TRACE whnf (${stackDepth})] ObjTerm: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] ObjTerm: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
 
                 if (cat_whnf_ref.tag === 'MkCat_') {
-                    console.log(`[TRACE whnf (${stackDepth})] ObjTerm: Categorical Beta to ${printTerm(cat_whnf_ref.objRepresentation)}`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] ObjTerm: Categorical Beta to ${printTerm(cat_whnf_ref.objRepresentation)}`);
                     current = cat_whnf_ref.objRepresentation; 
                     reducedInThisBlock = true;
                 } else if (cat_whnf !== cat) {
-                    console.log(`[TRACE whnf (${stackDepth})] ObjTerm: cat part changed to ${printTerm(cat_whnf)}, reconstructing ObjTerm.`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] ObjTerm: cat part changed to ${printTerm(cat_whnf)}, reconstructing ObjTerm.`);
                     current = ObjTerm(cat_whnf);
                     reducedInThisBlock = true;
                 }
@@ -235,31 +236,31 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 const cat = current.cat;
                 const cat_whnf = whnf(cat, ctx, stackDepth + 1);
                 const cat_whnf_ref = getTermRef(cat_whnf);
-                console.log(`[TRACE whnf (${stackDepth})] HomTerm: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] HomTerm: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
 
                 if (cat_whnf_ref.tag === 'MkCat_') {
                     const newTerm = App(App(cat_whnf_ref.homRepresentation, current.dom), current.cod);
-                    console.log(`[TRACE whnf (${stackDepth})] HomTerm: Categorical Beta to ${printTerm(newTerm)}`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] HomTerm: Categorical Beta to ${printTerm(newTerm)}`);
                     current = newTerm;
                     reducedInThisBlock = true;
                 } else if (cat_whnf !== cat) {
-                    console.log(`[TRACE whnf (${stackDepth})] HomTerm: cat part changed to ${printTerm(cat_whnf)}, reconstructing HomTerm.`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] HomTerm: cat part changed to ${printTerm(cat_whnf)}, reconstructing HomTerm.`);
                     current = HomTerm(cat_whnf, current.dom, current.cod);
                     reducedInThisBlock = true;
                 }
                 break;
             }
             case 'ComposeMorph': { 
-                console.log(`[TRACE whnf (${stackDepth})] ComposeMorph: cat_IMPLICIT = ${current.cat_IMPLICIT ? printTerm(current.cat_IMPLICIT) : 'undef'}`);
+                consoleLog(`[TRACE whnf (${stackDepth})] ComposeMorph: cat_IMPLICIT = ${current.cat_IMPLICIT ? printTerm(current.cat_IMPLICIT) : 'undef'}`);
                 if (current.cat_IMPLICIT && current.objX_IMPLICIT && current.objY_IMPLICIT && current.objZ_IMPLICIT) {
                     const cat = current.cat_IMPLICIT;
                     const cat_whnf = whnf(cat, ctx, stackDepth + 1);
                     const cat_whnf_ref = getTermRef(cat_whnf);
-                    console.log(`[TRACE whnf (${stackDepth})] ComposeMorph: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] ComposeMorph: cat_whnf_ref = ${printTerm(cat_whnf_ref)}`);
 
                     if (cat_whnf_ref.tag === 'MkCat_') {
                         const newTerm = App(App(App(App(App(cat_whnf_ref.composeImplementation, current.objX_IMPLICIT), current.objY_IMPLICIT), current.objZ_IMPLICIT), current.g), current.f);
-                        console.log(`[TRACE whnf (${stackDepth})] ComposeMorph: Categorical Beta to ${printTerm(newTerm)}`);
+                        consoleLog(`[TRACE whnf (${stackDepth})] ComposeMorph: Categorical Beta to ${printTerm(newTerm)}`);
                         current = newTerm;
                         reducedInThisBlock = true;
                     } 
@@ -269,7 +270,7 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             case 'Var': { 
                 const gdef = globalDefs.get(current.name);
                 if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
-                    console.log(`[TRACE whnf (${stackDepth})] Var: Delta reducing ${current.name} to ${printTerm(gdef.value)}`);
+                    consoleLog(`[TRACE whnf (${stackDepth})] Var: Delta reducing ${current.name} to ${printTerm(gdef.value)}`);
                     current = gdef.value;
                     reducedInThisBlock = true;
                 }
@@ -278,27 +279,27 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         }
         
         if (reducedInThisBlock) {
-             console.log(`[TRACE whnf (${stackDepth})] Head-specific reduction occurred, continuing to next iteration. New current = ${printTerm(current)}`);
+             consoleLog(`[TRACE whnf (${stackDepth})] Head-specific reduction occurred, continuing to next iteration. New current = ${printTerm(current)}`);
              changedInThisPass = true;
              continue; 
         }
 
-        console.log(`[TRACE whnf (${stackDepth})] Before final progress check: current = ${printTerm(current)}, termBeforeInnerReductions = ${printTerm(termBeforeInnerReductions)}, changedInThisPass = ${changedInThisPass}`);
+        consoleLog(`[TRACE whnf (${stackDepth})] Before final progress check: current = ${printTerm(current)}, termBeforeInnerReductions = ${printTerm(termBeforeInnerReductions)}, changedInThisPass = ${changedInThisPass}`);
         const currentAfterSubPartsReduced = getTermRef(current); 
         if (currentAfterSubPartsReduced !== termBeforeInnerReductions) { 
-            console.log(`[TRACE whnf (${stackDepth})] Structural change in sub-parts detected: ${printTerm(termBeforeInnerReductions)} -> ${printTerm(currentAfterSubPartsReduced)}`);
+            consoleLog(`[TRACE whnf (${stackDepth})] Structural change in sub-parts detected: ${printTerm(termBeforeInnerReductions)} -> ${printTerm(currentAfterSubPartsReduced)}`);
             current = currentAfterSubPartsReduced; 
             changedInThisPass = true; 
         }
         
         if (!changedInThisPass) {
-            console.log(`[TRACE whnf (${stackDepth})] No change in this pass, breaking loop. Current = ${printTerm(current)}`);
+            consoleLog(`[TRACE whnf (${stackDepth})] No change in this pass, breaking loop. Current = ${printTerm(current)}`);
             break; 
         }
         
-        console.log(`[TRACE whnf (${stackDepth})] End of iteration ${i}. Current = ${printTerm(current)}, termAtStartOfOuterPass = ${printTerm(termAtStartOfOuterPass)}, changedInThisPass = ${changedInThisPass}`);
+        consoleLog(`[TRACE whnf (${stackDepth})] End of iteration ${i}. Current = ${printTerm(current)}, termAtStartOfOuterPass = ${printTerm(termAtStartOfOuterPass)}, changedInThisPass = ${changedInThisPass}`);
         if (current === termAtStartOfOuterPass && !changedInThisPass && i > 0) { 
-             console.log(`[TRACE whnf (${stackDepth})] Term stabilized, breaking loop.`);
+             consoleLog(`[TRACE whnf (${stackDepth})] Term stabilized, breaking loop.`);
              break;
         }
          if (i === MAX_WHNF_ITERATIONS - 1 ) {
@@ -307,7 +308,7 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
              }
         }
     }
-    console.log(`[TRACE whnf (${stackDepth})] Exit: returning ${printTerm(current)} for original ${printTerm(term)}`);
+    consoleLog(`[TRACE whnf (${stackDepth})] Exit: returning ${printTerm(current)} for original ${printTerm(term)}`);
     return current;
 }
 
@@ -398,25 +399,25 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
 }
 
 function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
-    console.log(`[TRACE areEqual (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
+    consoleLog(`[TRACE areEqual (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     if (depth > MAX_STACK_DEPTH) throw new Error(`Equality check depth exceeded (areEqual depth: ${depth})`);
     const normT1 = whnf(t1, ctx, depth + 1);
     const normT2 = whnf(t2, ctx, depth + 1);
     const rt1 = getTermRef(normT1);
     const rt2 = getTermRef(normT2);
-    console.log(`[TRACE areEqual (${depth})] normT1 = ${printTerm(normT1)}, normT2 = ${printTerm(normT2)} => rt1 = ${printTerm(rt1)}, rt2 = ${printTerm(rt2)}`);
+    consoleLog(`[TRACE areEqual (${depth})] normT1 = ${printTerm(normT1)}, normT2 = ${printTerm(normT2)} => rt1 = ${printTerm(rt1)}, rt2 = ${printTerm(rt2)}`);
 
     if (rt1.tag === 'Hole' && rt2.tag === 'Hole') {
         const result = rt1.id === rt2.id;
-        console.log(`[TRACE areEqual (${depth})] Holes: ${rt1.id} === ${rt2.id} is ${result}`);
+        consoleLog(`[TRACE areEqual (${depth})] Holes: ${rt1.id} === ${rt2.id} is ${result}`);
         return result;
     }
     if (rt1.tag === 'Hole' || rt2.tag === 'Hole') {
-        console.log(`[TRACE areEqual (${depth})] One is hole, other is not. Returning false.`);
+        consoleLog(`[TRACE areEqual (${depth})] One is hole, other is not. Returning false.`);
         return false; 
     }
     if (rt1.tag !== rt2.tag) {
-        console.log(`[TRACE areEqual (${depth})] Tags differ: ${rt1.tag} vs ${rt2.tag}. Returning false.`);
+        consoleLog(`[TRACE areEqual (${depth})] Tags differ: ${rt1.tag} vs ${rt2.tag}. Returning false.`);
         return false;
     }
 
@@ -424,76 +425,76 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     switch (rt1.tag) {
         case 'Type': case 'CatTerm': 
             result = (rt2.tag === rt1.tag);
-            console.log(`[TRACE areEqual (${depth})] Type/CatTerm: result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] Type/CatTerm: result = ${result}`);
             break;
         case 'Var': 
             result = rt1.name === (rt2 as Term & {tag:'Var'}).name;
-            console.log(`[TRACE areEqual (${depth})] Var: ${rt1.name} === ${(rt2 as Term & {tag:'Var'}).name} is ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] Var: ${rt1.name} === ${(rt2 as Term & {tag:'Var'}).name} is ${result}`);
             break;
         case 'App': {
             const app2 = rt2 as Term & {tag:'App'};
-            console.log(`[TRACE areEqual (${depth})] App: comparing func and arg recursively.`);
+            consoleLog(`[TRACE areEqual (${depth})] App: comparing func and arg recursively.`);
             result = areEqual(rt1.func, app2.func, ctx, depth + 1) &&
                    areEqual(rt1.arg, app2.arg, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] App: recursive result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] App: recursive result = ${result}`);
             break;
         }
         case 'Lam': {
             const lam2 = rt2 as Term & {tag:'Lam'};
-            console.log(`[TRACE areEqual (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
+            consoleLog(`[TRACE areEqual (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
             if (rt1._isAnnotated !== lam2._isAnnotated) { result = false; break; }
             if (rt1._isAnnotated) { 
                 if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
-                    console.log(`[TRACE areEqual (${depth})] Lam: annotated param types not equal.`);
+                    consoleLog(`[TRACE areEqual (${depth})] Lam: annotated param types not equal.`);
                     result = false; break;
                 }
-                console.log(`[TRACE areEqual (${depth})] Lam: annotated param types are equal.`);
+                consoleLog(`[TRACE areEqual (${depth})] Lam: annotated param types are equal.`);
             }
             const freshVName = freshVarName(rt1.paramName);
             const freshV = Var(freshVName);
-            console.log(`[TRACE areEqual (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
+            consoleLog(`[TRACE areEqual (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
             result = areEqual(rt1.body(freshV), lam2.body(freshV), ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] Lam: bodies comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] Lam: bodies comparison result = ${result}`);
             break;
         }
         case 'Pi': {
             const pi2 = rt2 as Term & {tag:'Pi'};
-            console.log(`[TRACE areEqual (${depth})] Pi: comparing param types.`);
+            consoleLog(`[TRACE areEqual (${depth})] Pi: comparing param types.`);
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) {
-                console.log(`[TRACE areEqual (${depth})] Pi: param types not equal.`);
+                consoleLog(`[TRACE areEqual (${depth})] Pi: param types not equal.`);
                 result = false; break;
             }
-            console.log(`[TRACE areEqual (${depth})] Pi: param types equal. Comparing body types.`);
+            consoleLog(`[TRACE areEqual (${depth})] Pi: param types equal. Comparing body types.`);
             const freshVName = freshVarName(rt1.paramName);
             const freshV = Var(freshVName);
             result = areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] Pi: body types comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] Pi: body types comparison result = ${result}`);
             break;
         }
         case 'ObjTerm':
-            console.log(`[TRACE areEqual (${depth})] ObjTerm: comparing categories.`);
+            consoleLog(`[TRACE areEqual (${depth})] ObjTerm: comparing categories.`);
             result = areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] ObjTerm: categories comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] ObjTerm: categories comparison result = ${result}`);
             break;
         case 'HomTerm':
             const hom2 = rt2 as Term & {tag:'HomTerm'};
-            console.log(`[TRACE areEqual (${depth})] HomTerm: comparing cat, dom, cod.`);
+            consoleLog(`[TRACE areEqual (${depth})] HomTerm: comparing cat, dom, cod.`);
             result = areEqual(rt1.cat, hom2.cat, ctx, depth + 1) &&
                    areEqual(rt1.dom, hom2.dom, ctx, depth + 1) &&
                    areEqual(rt1.cod, hom2.cod, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] HomTerm: comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] HomTerm: comparison result = ${result}`);
             break;
         case 'MkCat_':
             const mkcat2 = rt2 as Term & {tag:'MkCat_'};
-            console.log(`[TRACE areEqual (${depth})] MkCat_: comparing obj, hom, compose impls.`);
+            consoleLog(`[TRACE areEqual (${depth})] MkCat_: comparing obj, hom, compose impls.`);
             result = areEqual(rt1.objRepresentation, mkcat2.objRepresentation, ctx, depth + 1) &&
                    areEqual(rt1.homRepresentation, mkcat2.homRepresentation, ctx, depth + 1) &&
                    areEqual(rt1.composeImplementation, mkcat2.composeImplementation, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] MkCat_: comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] MkCat_: comparison result = ${result}`);
             break;
         case 'IdentityMorph':
             const id2 = rt2 as Term & {tag:'IdentityMorph'};
-            console.log(`[TRACE areEqual (${depth})] IdentityMorph: comparing implicits and obj.`);
+            consoleLog(`[TRACE areEqual (${depth})] IdentityMorph: comparing implicits and obj.`);
             const cat1_eq = rt1.cat_IMPLICIT ? getTermRef(rt1.cat_IMPLICIT) : undefined;
             const cat2_eq = id2.cat_IMPLICIT ? getTermRef(id2.cat_IMPLICIT) : undefined;
             let implicitsResult = true;
@@ -502,14 +503,14 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             } else if (cat1_eq !== cat2_eq) { 
                  implicitsResult = false;
             }
-            if (!implicitsResult) { result = false; console.log(`[TRACE areEqual (${depth})] IdentityMorph: cat_IMPLICITs not equal.`); break; }
-            console.log(`[TRACE areEqual (${depth})] IdentityMorph: cat_IMPLICITs equal or both absent. Comparing obj.`);
+            if (!implicitsResult) { result = false; consoleLog(`[TRACE areEqual (${depth})] IdentityMorph: cat_IMPLICITs not equal.`); break; }
+            consoleLog(`[TRACE areEqual (${depth})] IdentityMorph: cat_IMPLICITs equal or both absent. Comparing obj.`);
             result = areEqual(rt1.obj, id2.obj, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] IdentityMorph: obj comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] IdentityMorph: obj comparison result = ${result}`);
             break;
         case 'ComposeMorph': { 
             const comp2 = rt2 as Term & {tag:'ComposeMorph'};
-            console.log(`[TRACE areEqual (${depth})] ComposeMorph: comparing implicits, g, and f.`);
+            consoleLog(`[TRACE areEqual (${depth})] ComposeMorph: comparing implicits, g, and f.`);
             const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
                 const rImp1 = imp1 ? getTermRef(imp1) : undefined;
                 const rImp2 = imp2 ? getTermRef(imp2) : undefined;
@@ -520,15 +521,15 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             if (!implicitsMatch(rt1.objX_IMPLICIT, comp2.objX_IMPLICIT)) { result = false; console.log('[TRACE areEqual (${depth})] ComposeMorph: objX_IMPLICITs not equal.'); break; }
             if (!implicitsMatch(rt1.objY_IMPLICIT, comp2.objY_IMPLICIT)) { result = false; console.log('[TRACE areEqual (${depth})] ComposeMorph: objY_IMPLICITs not equal.'); break; }
             if (!implicitsMatch(rt1.objZ_IMPLICIT, comp2.objZ_IMPLICIT)) { result = false; console.log('[TRACE areEqual (${depth})] ComposeMorph: objZ_IMPLICITs not equal.'); break; }
-            console.log(`[TRACE areEqual (${depth})] ComposeMorph: All implicits match. Comparing g and f.`);
+            consoleLog(`[TRACE areEqual (${depth})] ComposeMorph: All implicits match. Comparing g and f.`);
 
             result = areEqual(rt1.g, comp2.g, ctx, depth + 1) &&
                    areEqual(rt1.f, comp2.f, ctx, depth + 1);
-            console.log(`[TRACE areEqual (${depth})] ComposeMorph: g and f comparison result = ${result}`);
+            consoleLog(`[TRACE areEqual (${depth})] ComposeMorph: g and f comparison result = ${result}`);
             break;
         }
     }
-    console.log(`[TRACE areEqual (${depth})] Exit: returning ${result} for t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
+    consoleLog(`[TRACE areEqual (${depth})] Exit: returning ${result} for t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     return result;
 }
 
@@ -1081,24 +1082,24 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
 
 // ADDING NEW FUNCTION HERE
 function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
-    console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
+    consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     if (depth > MAX_STACK_DEPTH) throw new Error(`Structural Equality check depth exceeded (areStructurallyEqualNoWhnf depth: ${depth})`);
     // DO NOT CALL WHNF HERE
     const rt1 = getTermRef(t1);
     const rt2 = getTermRef(t2);
-    console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] rt1 = ${printTerm(rt1)}, rt2 = ${printTerm(rt2)}`);
+    consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] rt1 = ${printTerm(rt1)}, rt2 = ${printTerm(rt2)}`);
 
     if (rt1.tag === 'Hole' && rt2.tag === 'Hole') {
         const result = rt1.id === rt2.id;
-        console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Holes: ${rt1.id} === ${rt2.id} is ${result}`);
+        consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Holes: ${rt1.id} === ${rt2.id} is ${result}`);
         return result;
     }
     if (rt1.tag === 'Hole' || rt2.tag === 'Hole') {
-        console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] One is hole, other is not. Returning false.`);
+        consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] One is hole, other is not. Returning false.`);
         return false; 
     }
     if (rt1.tag !== rt2.tag) {
-        console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Tags differ: ${rt1.tag} vs ${rt2.tag}. Returning false.`);
+        consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Tags differ: ${rt1.tag} vs ${rt2.tag}. Returning false.`);
         return false;
     }
 
@@ -1106,76 +1107,76 @@ function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0)
     switch (rt1.tag) {
         case 'Type': case 'CatTerm': 
             result = (rt2.tag === rt1.tag);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Type/CatTerm: result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Type/CatTerm: result = ${result}`);
             break;
         case 'Var': 
             result = rt1.name === (rt2 as Term & {tag:'Var'}).name;
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Var: ${rt1.name} === ${(rt2 as Term & {tag:'Var'}).name} is ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Var: ${rt1.name} === ${(rt2 as Term & {tag:'Var'}).name} is ${result}`);
             break;
         case 'App': {
             const app2 = rt2 as Term & {tag:'App'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] App: comparing func and arg recursively.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] App: comparing func and arg recursively.`);
             result = areStructurallyEqualNoWhnf(rt1.func, app2.func, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.arg, app2.arg, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] App: recursive result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] App: recursive result = ${result}`);
             break;
         }
         case 'Lam': {
             const lam2 = rt2 as Term & {tag:'Lam'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
             if (rt1._isAnnotated !== lam2._isAnnotated) { result = false; break; }
             if (rt1._isAnnotated) { 
                 if (!rt1.paramType || !lam2.paramType || !areStructurallyEqualNoWhnf(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
-                    console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types not equal.`);
+                    consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types not equal.`);
                     result = false; break;
                 }
-                console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types are equal.`);
+                consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types are equal.`);
             }
             const freshVName = freshVarName(rt1.paramName);
             const freshV = Var(freshVName);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
             result = areStructurallyEqualNoWhnf(rt1.body(freshV), lam2.body(freshV), ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: bodies comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: bodies comparison result = ${result}`);
             break;
         }
         case 'Pi': {
             const pi2 = rt2 as Term & {tag:'Pi'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: comparing param types.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: comparing param types.`);
             if (!areStructurallyEqualNoWhnf(rt1.paramType, pi2.paramType, ctx, depth + 1)) {
-                console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: param types not equal.`);
+                consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: param types not equal.`);
                 result = false; break;
             }
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: param types equal. Comparing body types.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: param types equal. Comparing body types.`);
             const freshVName = freshVarName(rt1.paramName);
             const freshV = Var(freshVName);
             result = areStructurallyEqualNoWhnf(rt1.bodyType(freshV), pi2.bodyType(freshV), ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: body types comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: body types comparison result = ${result}`);
             break;
         }
         case 'ObjTerm':
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] ObjTerm: comparing categories.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] ObjTerm: comparing categories.`);
             result = areStructurallyEqualNoWhnf(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] ObjTerm: categories comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] ObjTerm: categories comparison result = ${result}`);
             break;
         case 'HomTerm':
             const hom2 = rt2 as Term & {tag:'HomTerm'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] HomTerm: comparing cat, dom, cod.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] HomTerm: comparing cat, dom, cod.`);
             result = areStructurallyEqualNoWhnf(rt1.cat, hom2.cat, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.dom, hom2.dom, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.cod, hom2.cod, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] HomTerm: comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] HomTerm: comparison result = ${result}`);
             break;
         case 'MkCat_':
             const mkcat2 = rt2 as Term & {tag:'MkCat_'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] MkCat_: comparing obj, hom, compose impls.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] MkCat_: comparing obj, hom, compose impls.`);
             result = areStructurallyEqualNoWhnf(rt1.objRepresentation, mkcat2.objRepresentation, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.homRepresentation, mkcat2.homRepresentation, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.composeImplementation, mkcat2.composeImplementation, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] MkCat_: comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] MkCat_: comparison result = ${result}`);
             break;
         case 'IdentityMorph':
             const id2 = rt2 as Term & {tag:'IdentityMorph'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: comparing implicits and obj.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: comparing implicits and obj.`);
             const cat1_eq = rt1.cat_IMPLICIT ? getTermRef(rt1.cat_IMPLICIT) : undefined;
             const cat2_eq = id2.cat_IMPLICIT ? getTermRef(id2.cat_IMPLICIT) : undefined;
             let implicitsResult = true;
@@ -1184,14 +1185,14 @@ function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0)
             } else if (cat1_eq !== cat2_eq) { 
                  implicitsResult = false;
             }
-            if (!implicitsResult) { result = false; console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: cat_IMPLICITs not equal.`); break; }
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: cat_IMPLICITs equal or both absent. Comparing obj.`);
+            if (!implicitsResult) { result = false; consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: cat_IMPLICITs not equal.`); break; }
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: cat_IMPLICITs equal or both absent. Comparing obj.`);
             result = areStructurallyEqualNoWhnf(rt1.obj, id2.obj, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: obj comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] IdentityMorph: obj comparison result = ${result}`);
             break;
         case 'ComposeMorph': {
             const comp2 = rt2 as Term & {tag:'ComposeMorph'};
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: comparing implicits, g, and f.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: comparing implicits, g, and f.`);
             const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
                 const rImp1 = imp1 ? getTermRef(imp1) : undefined;
                 const rImp2 = imp2 ? getTermRef(imp2) : undefined;
@@ -1202,15 +1203,15 @@ function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0)
             if (!implicitsMatch(rt1.objX_IMPLICIT, comp2.objX_IMPLICIT)) { result = false; console.log('[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: objX_IMPLICITs not equal.'); break; }
             if (!implicitsMatch(rt1.objY_IMPLICIT, comp2.objY_IMPLICIT)) { result = false; console.log('[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: objY_IMPLICITs not equal.'); break; }
             if (!implicitsMatch(rt1.objZ_IMPLICIT, comp2.objZ_IMPLICIT)) { result = false; console.log('[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: objZ_IMPLICITs not equal.'); break; }
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: All implicits match. Comparing g and f.`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: All implicits match. Comparing g and f.`);
 
             result = areStructurallyEqualNoWhnf(rt1.g, comp2.g, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.f, comp2.f, ctx, depth + 1);
-            console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: g and f comparison result = ${result}`);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] ComposeMorph: g and f comparison result = ${result}`);
             break;
         }
     }
-    console.log(`[TRACE areStructurallyEqualNoWhnf (${depth})] Exit: returning ${result} for t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
+    consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Exit: returning ${result} for t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     return result;
 }
 
@@ -1570,68 +1571,68 @@ function matchPattern(
     patternVarDecls: PatternVarDecl[],
     currentSubst?: Substitution, stackDepth = 0
 ): Substitution | null {
-    console.log(`[TRACE matchPattern (${stackDepth})] Enter: pattern = ${printTerm(pattern)}, termToMatch = ${printTerm(termToMatch)}`);
+    consoleLog(`[TRACE matchPattern (${stackDepth})] Enter: pattern = ${printTerm(pattern)}, termToMatch = ${printTerm(termToMatch)}`);
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`matchPattern stack depth exceeded for pattern ${printTerm(pattern)} vs term ${printTerm(termToMatch)}`);
     
     const currentTermStruct = getTermRef(termToMatch);
     const rtPattern = getTermRef(pattern); 
-    console.log(`[TRACE matchPattern (${stackDepth})] rtPattern = ${printTerm(rtPattern)}, currentTermStruct = ${printTerm(currentTermStruct)}`);
+    consoleLog(`[TRACE matchPattern (${stackDepth})] rtPattern = ${printTerm(rtPattern)}, currentTermStruct = ${printTerm(currentTermStruct)}`);
 
     const subst = currentSubst ? new Map(currentSubst) : new Map<string, Term>();
 
     // Pattern variable case (Var or Hole in pattern treated as pvar)
     if (rtPattern.tag === 'Var' && isPatternVarName(rtPattern.name, patternVarDecls)) {
         const pvarName = rtPattern.name;
-        console.log(`[TRACE matchPattern (${stackDepth})] Pattern Var: ${pvarName}`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Var: ${pvarName}`);
         if (pvarName === '_') {
-            console.log(`[TRACE matchPattern (${stackDepth})] Wildcard Var "_", returning current subst.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Wildcard Var "_", returning current subst.`);
             return subst; 
         }
         const existing = subst.get(pvarName);
         if (existing) { 
-            console.log(`[TRACE matchPattern (${stackDepth})] Pattern Var ${pvarName} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Var ${pvarName} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
             const consistent = areStructurallyEqualNoWhnf(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
-            console.log(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarName}: ${consistent}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarName}: ${consistent}`);
             return consistent ? subst : null;
         }
-        console.log(`[TRACE matchPattern (${stackDepth})] Binding ${pvarName} to ${printTerm(currentTermStruct)}`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Binding ${pvarName} to ${printTerm(currentTermStruct)}`);
         subst.set(pvarName, currentTermStruct); 
         return subst;
     }
     if (rtPattern.tag === 'Hole' && isPatternVarName(rtPattern.id, patternVarDecls)) { 
         const pvarId = rtPattern.id;
-        console.log(`[TRACE matchPattern (${stackDepth})] Pattern Hole (as pvar): ${pvarId}`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Hole (as pvar): ${pvarId}`);
         if (pvarId === '_') {
-            console.log(`[TRACE matchPattern (${stackDepth})] Wildcard Hole "_", returning current subst.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Wildcard Hole "_", returning current subst.`);
             return subst; 
         }
         const existing = subst.get(pvarId);
         if (existing) {
-            console.log(`[TRACE matchPattern (${stackDepth})] Pattern Hole ${pvarId} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Hole ${pvarId} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
             const consistent = areStructurallyEqualNoWhnf(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
-            console.log(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarId}: ${consistent}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarId}: ${consistent}`);
             return consistent ? subst : null;
         }
-        console.log(`[TRACE matchPattern (${stackDepth})] Binding ${pvarId} to ${printTerm(currentTermStruct)}`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Binding ${pvarId} to ${printTerm(currentTermStruct)}`);
         subst.set(pvarId, currentTermStruct);
         return subst;
     }
 
     if (rtPattern.tag === 'Hole') { 
         if (currentTermStruct.tag === 'Hole' && rtPattern.id === currentTermStruct.id) {
-            console.log(`[TRACE matchPattern (${stackDepth})] Concrete Hole in pattern ${rtPattern.id} matches term Hole ${currentTermStruct.id}.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Concrete Hole in pattern ${rtPattern.id} matches term Hole ${currentTermStruct.id}.`);
             return subst;
         }
-        console.log(`[TRACE matchPattern (${stackDepth})] Concrete Hole in pattern ${rtPattern.id} does not match term ${printTerm(currentTermStruct)}. Returning null.`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Concrete Hole in pattern ${rtPattern.id} does not match term ${printTerm(currentTermStruct)}. Returning null.`);
         return null; 
     }
     if (currentTermStruct.tag === 'Hole') {
-        console.log(`[TRACE matchPattern (${stackDepth})] Term is Hole ${currentTermStruct.id} but pattern is not pvar/concrete matching hole. Returning null.`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Term is Hole ${currentTermStruct.id} but pattern is not pvar/concrete matching hole. Returning null.`);
         return null;
     }
 
     if (rtPattern.tag !== currentTermStruct.tag) {
-        console.log(`[TRACE matchPattern (${stackDepth})] Tags differ: pattern ${rtPattern.tag} vs term ${currentTermStruct.tag}. Returning null.`);
+        consoleLog(`[TRACE matchPattern (${stackDepth})] Tags differ: pattern ${rtPattern.tag} vs term ${currentTermStruct.tag}. Returning null.`);
         return null;
     }
 
@@ -1662,105 +1663,105 @@ function matchPattern(
     // Structural comparison for each tag
     switch (rtPattern.tag) {
         case 'Type': case 'CatTerm': 
-            console.log(`[TRACE matchPattern (${stackDepth})] Matched Type/CatTerm.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Matched Type/CatTerm.`);
             return subst; 
         case 'Var': 
             const varNameMatch = rtPattern.name === (currentTermStruct as Term & {tag:'Var'}).name;
-            console.log(`[TRACE matchPattern (${stackDepth})] Concrete Var in pattern: ${rtPattern.name} vs term Var ${(currentTermStruct as Term & {tag:'Var'}).name}. Match: ${varNameMatch}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Concrete Var in pattern: ${rtPattern.name} vs term Var ${(currentTermStruct as Term & {tag:'Var'}).name}. Match: ${varNameMatch}`);
             return varNameMatch ? subst : null;
         case 'App': {
             const termApp = currentTermStruct as Term & {tag:'App'};
-            console.log(`[TRACE matchPattern (${stackDepth})] App: matching func and arg recursively.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] App: matching func and arg recursively.`);
             const s1 = matchPattern(rtPattern.func, termApp.func, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!s1) {
-                console.log(`[TRACE matchPattern (${stackDepth})] App: func match failed. Returning null.`);
+                consoleLog(`[TRACE matchPattern (${stackDepth})] App: func match failed. Returning null.`);
                 return null;
             }
-            console.log(`[TRACE matchPattern (${stackDepth})] App: func matched. Matching arg.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] App: func matched. Matching arg.`);
             const s2 = matchPattern(rtPattern.arg, termApp.arg, ctx, patternVarDecls, s1, stackDepth + 1);
-            if(!s2) console.log(`[TRACE matchPattern (${stackDepth})] App: arg match failed. Returning null.`);
+            if(!s2) consoleLog(`[TRACE matchPattern (${stackDepth})] App: arg match failed. Returning null.`);
             return s2;
         }
         case 'Lam': { 
             const lamP = rtPattern as Term & {tag:'Lam'};
             const lamT = currentTermStruct as Term & {tag:'Lam'};
-            console.log(`[TRACE matchPattern (${stackDepth})] Lam: pattern annotated=${lamP._isAnnotated}, term annotated=${lamT._isAnnotated}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: pattern annotated=${lamP._isAnnotated}, term annotated=${lamT._isAnnotated}`);
             if (lamP._isAnnotated !== lamT._isAnnotated) {
-                console.log(`[TRACE matchPattern (${stackDepth})] Lam: annotation mismatch. Returning null.`);
+                consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: annotation mismatch. Returning null.`);
                 return null;
             }
             
             let tempSubst = subst;
             if (lamP._isAnnotated) { 
                 if (!lamP.paramType || !lamT.paramType) {
-                     console.log(`[TRACE matchPattern (${stackDepth})] Lam: annotated but one has no paramType. Returning null.`);
+                     consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: annotated but one has no paramType. Returning null.`);
                      return null; 
                 }
-                console.log(`[TRACE matchPattern (${stackDepth})] Lam: matching annotated param types.`);
+                consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: matching annotated param types.`);
                  const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, tempSubst, stackDepth + 1);
                  if (!sType) {
-                    console.log(`[TRACE matchPattern (${stackDepth})] Lam: param type match failed. Returning null.`);
+                    consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: param type match failed. Returning null.`);
                     return null;
                  }
                  tempSubst = sType;
-                 console.log(`[TRACE matchPattern (${stackDepth})] Lam: param types matched.`);
+                 consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: param types matched.`);
             }
             const freshV = Var(freshVarName(lamP.paramName));
             const CtxTypeP = lamP.paramType ? getTermRef(lamP.paramType) : Hole(freshHoleName()+"_match_lam_ctx");
             const extendedCtx = extendCtx(ctx, freshV.name, CtxTypeP);
-            console.log(`[TRACE matchPattern (${stackDepth})] Lam: comparing bodies using areEqual with fresh var ${freshV.name}.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: comparing bodies using areEqual with fresh var ${freshV.name}.`);
             const bodiesEqual = areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1);
-            console.log(`[TRACE matchPattern (${stackDepth})] Lam: bodies areEqual result: ${bodiesEqual}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Lam: bodies areEqual result: ${bodiesEqual}`);
             return bodiesEqual ? tempSubst : null;
         }
         case 'Pi': { 
             const piP = rtPattern as Term & {tag:'Pi'};
             const piT = currentTermStruct as Term & {tag:'Pi'};
-            console.log(`[TRACE matchPattern (${stackDepth})] Pi: matching param types.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Pi: matching param types.`);
             const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!sType) {
-                console.log(`[TRACE matchPattern (${stackDepth})] Pi: param type match failed. Returning null.`);
+                consoleLog(`[TRACE matchPattern (${stackDepth})] Pi: param type match failed. Returning null.`);
                 return null;
             }
-            console.log(`[TRACE matchPattern (${stackDepth})] Pi: param types matched. Comparing body types using areEqual.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Pi: param types matched. Comparing body types using areEqual.`);
             const freshV = Var(freshVarName(piP.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType)); 
             const bodyTypesEqual = areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1);
-            console.log(`[TRACE matchPattern (${stackDepth})] Pi: body types areEqual result: ${bodyTypesEqual}`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] Pi: body types areEqual result: ${bodyTypesEqual}`);
             return bodyTypesEqual ? sType : null;
         }
         case 'ObjTerm': {
-            console.log(`[TRACE matchPattern (${stackDepth})] ObjTerm: matching categories.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] ObjTerm: matching categories.`);
             const catMatchResult = matchPattern(rtPattern.cat, (currentTermStruct as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1);
-            if(!catMatchResult) console.log(`[TRACE matchPattern (${stackDepth})] ObjTerm: category match failed.`);
+            if(!catMatchResult) consoleLog(`[TRACE matchPattern (${stackDepth})] ObjTerm: category match failed.`);
             return catMatchResult;
         }
         case 'HomTerm': {
             const homP = rtPattern as Term & {tag:'HomTerm'};
             const homT = currentTermStruct as Term & {tag:'HomTerm'};
-            console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: matching cat, dom, cod.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: matching cat, dom, cod.`);
             let s = matchPattern(homP.cat, homT.cat, ctx, patternVarDecls, subst, stackDepth + 1);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: cat match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: cat matched. Matching dom.`);
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: cat match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: cat matched. Matching dom.`);
             s = matchPattern(homP.dom, homT.dom, ctx, patternVarDecls, s, stackDepth + 1);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: dom match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: dom matched. Matching cod.`);
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: dom match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: dom matched. Matching cod.`);
             const codMatchResult = matchPattern(homP.cod, homT.cod, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!codMatchResult) console.log(`[TRACE matchPattern (${stackDepth})] HomTerm: cod match failed.`);
+            if(!codMatchResult) consoleLog(`[TRACE matchPattern (${stackDepth})] HomTerm: cod match failed.`);
             return codMatchResult;
         }
         case 'MkCat_': {
             const mkP = rtPattern as Term & {tag:'MkCat_'};
             const mkT = currentTermStruct as Term & {tag:'MkCat_'};
-            console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: matching objRepresentation, homRepresentation, composeImplementation.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: matching objRepresentation, homRepresentation, composeImplementation.`);
             let s = matchPattern(mkP.objRepresentation, mkT.objRepresentation, ctx, patternVarDecls, subst, stackDepth + 1);
-            if(!s) { console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: objRepresentation match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: objRepresentation matched. Matching homRepresentation.`);
+            if(!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: objRepresentation match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: objRepresentation matched. Matching homRepresentation.`);
             s = matchPattern(mkP.homRepresentation, mkT.homRepresentation, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!s) { console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: homRepresentation match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: homRepresentation matched. Matching composeImplementation.`);
+            if(!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: homRepresentation match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: homRepresentation matched. Matching composeImplementation.`);
             const composeImplMatchResult = matchPattern(mkP.composeImplementation, mkT.composeImplementation, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!composeImplMatchResult) console.log(`[TRACE matchPattern (${stackDepth})] MkCat_: composeImplementation match failed.`);
+            if(!composeImplMatchResult) consoleLog(`[TRACE matchPattern (${stackDepth})] MkCat_: composeImplementation match failed.`);
             return composeImplMatchResult;
         }
 
@@ -1768,36 +1769,36 @@ function matchPattern(
         case 'IdentityMorph': {
             const idP = rtPattern as Term & {tag:'IdentityMorph'};
             const idT = currentTermStruct as Term & {tag:'IdentityMorph'};
-            console.log(`[TRACE matchPattern (${stackDepth})] IdentityMorph: matching cat_IMPLICIT and obj.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] IdentityMorph: matching cat_IMPLICIT and obj.`);
             let s: Substitution | null = subst;
             s = matchOptImplicitArgPattern(s, idP.cat_IMPLICIT, idT.cat_IMPLICIT);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] IdentityMorph: cat_IMPLICIT match failed via matchOptImplicitArgPattern.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] IdentityMorph: cat_IMPLICIT matched. Matching obj.`);
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] IdentityMorph: cat_IMPLICIT match failed via matchOptImplicitArgPattern.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] IdentityMorph: cat_IMPLICIT matched. Matching obj.`);
             const objMatchResult = matchPattern(idP.obj, idT.obj, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!objMatchResult) console.log(`[TRACE matchPattern (${stackDepth})] IdentityMorph: obj match failed.`);
+            if(!objMatchResult) consoleLog(`[TRACE matchPattern (${stackDepth})] IdentityMorph: obj match failed.`);
             return objMatchResult;
         }
         case 'ComposeMorph': {
             const compP = rtPattern as Term & {tag:'ComposeMorph'};
             const compT = currentTermStruct as Term & {tag:'ComposeMorph'};
-            console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: matching implicits, g, and f.`);
+            consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: matching implicits, g, and f.`);
             let s: Substitution | null = subst;
             
             s = matchOptImplicitArgPattern(s, compP.cat_IMPLICIT, compT.cat_IMPLICIT);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: cat_IMPLICIT match failed.`); return null; }
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: cat_IMPLICIT match failed.`); return null; }
             s = matchOptImplicitArgPattern(s, compP.objX_IMPLICIT, compT.objX_IMPLICIT);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objX_IMPLICIT match failed.`); return null; }
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objX_IMPLICIT match failed.`); return null; }
             s = matchOptImplicitArgPattern(s, compP.objY_IMPLICIT, compT.objY_IMPLICIT);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objY_IMPLICIT match failed.`); return null; }
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objY_IMPLICIT match failed.`); return null; }
             s = matchOptImplicitArgPattern(s, compP.objZ_IMPLICIT, compT.objZ_IMPLICIT);
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objZ_IMPLICIT match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: All implicits matched. Matching g.`);
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: objZ_IMPLICIT match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: All implicits matched. Matching g.`);
 
             s = matchPattern(compP.g, compT.g, ctx, patternVarDecls, s, stackDepth + 1); 
-            if (!s) { console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: g match failed.`); return null; }
-            console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: g matched. Matching f.`);
+            if (!s) { consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: g match failed.`); return null; }
+            consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: g matched. Matching f.`);
             const fMatchResult = matchPattern(compP.f, compT.f, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!fMatchResult) console.log(`[TRACE matchPattern (${stackDepth})] ComposeMorph: f match failed.`);
+            if(!fMatchResult) consoleLog(`[TRACE matchPattern (${stackDepth})] ComposeMorph: f match failed.`);
             return fMatchResult;
         }
     }
@@ -1961,6 +1962,11 @@ function printTerm(term: Term, boundVarsMap: Map<string, string> = new Map(), st
     }
 }
 
+function consoleLog(message?: any, ...optionalParams: any[]): void {
+    if (DEBUG_VERBOSE) {
+        console.log(message, ...optionalParams);
+    }
+}
 
 function resetMyLambdaPi() {
     constraints = []; globalDefs.clear();
