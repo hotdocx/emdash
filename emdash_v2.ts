@@ -122,7 +122,7 @@ let whnfIterationCount = 0;
 
 export const MAX_STACK_DEPTH = 200; // General recursion depth limit
 
-export let DEBUG_VERBOSE = false;
+export let DEBUG_VERBOSE = true;
 
 // Metadata for Emdash symbols
 // UPDATED: ObjTerm and HomTerm are NOT constant symbols for rewrite head blocking
@@ -1287,34 +1287,35 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
 
             if (lam._isAnnotated && lam.paramType) { // Annotated lambda
                 check(ctx, lam.paramType, Type(), stackDepth + 1); // Check param type is a Type
-                const extendedCtx = extendCtx(ctx, paramName, lam.paramType);
-                const bodyTermInstance = lam.body(Var(paramName)); // Instantiate HOAS body
-                const bodyType = infer(extendedCtx, bodyTermInstance, stackDepth + 1);
-                return Pi(paramName, lam.paramType, _ => bodyType); // Return Pi type
+                const paramName = lam.paramName; // Ensure paramName is from the current lam
+                const paramType = lam.paramType; // Ensure paramType is from the current lam
+                // The bodyType function of the Pi must use its argument.
+                return Pi(paramName, paramType, (pi_arg: Term) => {
+                    // Infer the type of the lambda's body, where pi_arg is the instance of the lambda's parameter.
+                    // The context for this inference must bind paramName to paramType.
+                    const tempCtx = extendCtx(ctx, paramName, paramType);
+                    return infer(tempCtx, lam.body(pi_arg), stackDepth + 1);
+                });
             } else { // Unannotated lambda, infer parameter type
+                const paramName = lam.paramName; // Save paramName
                 const paramTypeHole = Hole(freshHoleName() + "_lam_" + paramName + "_paramT");
                 
                 // Bug Fix #1: Tentatively annotate the Lam term itself with the paramTypeHole
-                // This allows solveConstraints to fill this hole, and normalize can then use the solved type.
-                // This is a mutation but aligns with deep elaboration.
-                // We need to ensure 'current' (which is a getTermRef result) can be mutated IF it was the original term.
-                // If 'term' was the original un-dereferenced Lam, mutate that.
-                if (term.tag === 'Lam' && !term._isAnnotated) { // ensure we are mutating the original term if it's a Lam
+                if (term.tag === 'Lam' && !term._isAnnotated) {
                     term.paramType = paramTypeHole;
-                    term._isAnnotated = true; // Mark as "annotated" for normalization/equality purposes now
-                } else if (current.tag === 'Lam' && !current._isAnnotated) { // If current is the actual Lam node
+                    term._isAnnotated = true; 
+                } else if (current.tag === 'Lam' && !current._isAnnotated) {
                      current.paramType = paramTypeHole;
                      current._isAnnotated = true;
                 }
-                // If current was a hole that dereferenced to a Lam, this mutation might be on a shared structure.
-                // This part of the fix is tricky. The idea is the Lam term passed to 'elaborate' gets updated.
-                // Let's assume `elaborate` will use the `term` given to it, which might have its `paramType` field
-                // (if it's a Lam) updated by this infer call if that Lam was passed directly.
 
-                const extendedCtx = extendCtx(ctx, paramName, paramTypeHole);
-                const bodyTermInstance = lam.body(Var(paramName));
-                const bodyType = infer(extendedCtx, bodyTermInstance, stackDepth + 1);
-                return Pi(paramName, paramTypeHole, _ => bodyType);
+                // The bodyType function of the Pi must use its argument.
+                return Pi(paramName, paramTypeHole, (pi_arg: Term) => {
+                    // Infer the type of the lambda's body, where pi_arg is the instance of the lambda's parameter.
+                    // The context for this inference must bind paramName to paramTypeHole.
+                    const tempCtx = extendCtx(ctx, paramName, paramTypeHole);
+                    return infer(tempCtx, lam.body(pi_arg), stackDepth + 1);
+                });
             }
         }
         case 'Pi': { // (Π x : A . B) : Type
