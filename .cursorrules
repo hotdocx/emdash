@@ -1,0 +1,5 @@
+The file `README.md` contain some basic initial information (the Functional Requirements PRD document) about the current project. The README.md MAY BE OUTDATED AND MAY BE INCOMPLETE.
+
+When you are working on each main Task (under each Phase of the project) as outlined in the @README.md , you should create or update a file inside the project's `/tasks` folder, whose name follows this pattern `TASK_SCRATCHPAD_{INCREMENTAL_SEQUENCE_NUMBER}_{TASK_SHORT_NAME_TAGS}.md` (for example `TASK_SCRATCHPAD_019_Basic_Event_Detail_Page.md` ), in order to document/track your progress towards the implemetation after each subtask and step, detailing:
+- what has already been implemented (and where, and how), and 
+- what remains to be implemented to finish the current main Task (and suggesting a next user prompt), and whether we are ready to archive this Task file and move on to the next main Task.
