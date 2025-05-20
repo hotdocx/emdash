@@ -655,6 +655,45 @@ The development of Emdash (Phase 1) involved tackling several common and some sp
 
 The development journey has been iterative, with solutions to problems like rewrite looping and implicit argument handling being key refinements. The current system provides a solid base for Phase 1, but future phases will require continued attention to these foundational aspects.
 
+### 6.6 Refactoring `check(Lam, Pi)` for Deep Elaboration
+
+A key part of bidirectional type checking is the rule for checking an unannotated lambda abstraction `λx. body` against an expected Pi-type `Πx:A. Bx`. This rule typically involves:
+1.  Using the type `A` from the Pi-type to annotate the lambda's parameter `x`.
+2.  Then, checking that the lambda's `body` (with `x` now considered to have type `A`) conforms to the expected body type `Bx`. This is often referred to as "deep elaboration" of the lambda body.
+
+**Previous Implementation (HOAS Body Replacement):**
+
+The initial implementation of this rule in `check(ctx, term, expectedType)` for the case `term = Lam(...)` and `expectedType = Pi(...)` (after normalization) involved the following steps:
+1.  Identify the lambda term to be annotated (`lamToAnnotate`).
+2.  Mutate `lamToAnnotate` by setting its `paramType` to `expectedPi.paramType` and `_isAnnotated = true`.
+3.  **Crucially, the `body` field of `lamToAnnotate` (which is a HOAS JavaScript function) was replaced with a *new* JavaScript function.** This new function, when invoked with an argument `v_arg` (representing the lambda parameter):
+    a.  Called the *original* body function: `freshInnerRawTerm = originalBodyFn(v_arg)`.
+    b.  Constructed an appropriate context `ctxForInnerBody` by extending the outer `check`'s context with `v_arg` and its (now annotated) type.
+    c.  Determined the `expectedTypeForInnerBody` by evaluating `expectedPi.bodyType(v_arg)`.
+    d.  Performed a recursive call: `check(ctxForInnerBody, freshInnerRawTerm, expectedTypeForInnerBody)`.
+    e.  Returned `freshInnerRawTerm`.
+4.  After this HOAS body replacement, the `check` function would then immediately make a call like `check(extendedCtx, lamToAnnotate.body(Var(paramName)), expectedPi.bodyType(Var(paramName)))` to trigger the newly installed checking logic within the modified body.
+
+This approach, while functional, was somewhat indirect. The modification of the HOAS function itself made the flow of control for the deep elaboration less immediately obvious from the main `check` function's structure.
+
+**Refactored Implementation (Direct Body Check):**
+
+The `check(Lam, Pi)` rule was refactored for clarity and more direct logic:
+1.  When `check` is called with an unannotated `Lam` and an expected `Pi` type:
+2.  Identify the lambda term instance that needs its annotation updated for the scope of the current elaboration (e.g., `lamToUpdateAnnotation`). If found, its `paramType` is set from `expectedPi.paramType` and `_isAnnotated` is set to `true`.
+3.  The core logic then proceeds directly:
+    a.  The parameter name (`paramName`) and type (`paramType`) are taken from the lambda and the expected Pi-type.
+    b.  An `extendedCtx` is created: `extendCtx(ctx, paramName, paramType)`.
+    c.  The lambda's original HOAS body function is invoked with a variable representing its parameter: `actualBodyTerm = lamTerm.body(Var(paramName))`.
+    d.  The Pi-type's body type function is also invoked with the same variable: `expectedBodyPiType = expectedPi.bodyType(Var(paramName))`.
+    e.  A direct recursive call is made: `check(extendedCtx, actualBodyTerm, expectedBodyPiType)`.
+
+**Motivation and Outcome:**
+
+This refactoring achieves the same "deep elaboration" goal but in a more straightforward manner. It avoids modifying the lambda's HOAS `body` function with another layer of HOAS function. Instead, it directly instantiates the original body and the expected body type and performs the check. This makes the logic more localized and easier to follow within the `check` function.
+
+This change was made after resolving several issues related to context handling in `areEqual` for `Lam` and `Pi` types, particularly when `infer(Lam)` constructs `Pi` types whose bodies involve further `infer` calls. After this refactoring (and the related `areEqual` fixes), all existing tests, including new Test B11 specifically designed for `check(Lam, Pi)`, continued to pass, suggesting the change is robust for the current test suite. Documenting this allows for easier review or reversion if future, more complex scenarios reveal issues.
+
 ## 7. Future Work and Improvements
 
 With Phase 1 (Core Categories) complete, Emdash has a foundational layer. Future work can expand its capabilities in several directions, from implementing more categorical structures to refining the core type system.

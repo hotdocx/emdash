@@ -1428,48 +1428,40 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         const lamTerm = current; // This is the getTermRef'd version.
         const expectedPi = normExpectedType;
 
-        // Annotate the Lam term with the parameter type from Pi.
-        // This mutation needs to affect the term that `elaborate` will eventually return/normalize.
-        // If `current` is the actual Lam node (not a hole that resolved to it), mutate it.
-        // The more robust way is if `elaborate` reconstructs after solving, or `infer`/`check` return elaborated terms.
-        // For now, assume `term` (original argument to check) is the one to mutate if it's the Lam.
-        let lamToAnnotate : Term & {tag: 'Lam'};
+        // The original term (before getTermRef) is what needs to be potentially mutated
+        // for its annotation to stick for the elaboration result.
+        let lamToUpdateAnnotation : Term & {tag: 'Lam'} | undefined;
         if (term.tag === 'Lam' && !term._isAnnotated) {
-            lamToAnnotate = term;
-        } else if (current.tag === 'Lam' && !current._isAnnotated) { // Should be the same if term was not a hole
-            lamToAnnotate = current;
-        } else {
-            // This case should ideally not happen if unannotated lambdas are directly passed.
-            // If current is a Lam from a solved hole, it might already be annotated by infer.
-            // Fall through to general infer and constrain if this path is complex.
-            const inferredType = infer(ctx, current, stackDepth + 1);
-            addConstraint(inferredType, normExpectedType, `Check Lam (unannotated, from hole?) ${printTerm(current)} against Pi ${printTerm(normExpectedType)}`);
-            return;
+            lamToUpdateAnnotation = term;
+        } else if (current.tag === 'Lam' && !current._isAnnotated) { // current might be term if term wasn't a Hole
+            lamToUpdateAnnotation = current;
+        }
+        // If lamToUpdateAnnotation is still undefined here, it means the original term
+        // was a Hole that resolved to an unannotated Lam. In this case, the Lam node itself
+        // is not the root `term` of the check, so mutating its annotation might be temporary
+        // for this check's scope. For robust elaboration, infer should handle this better for holes.
+
+        if (lamToUpdateAnnotation) {
+            lamToUpdateAnnotation.paramType = expectedPi.paramType;
+            lamToUpdateAnnotation._isAnnotated = true;
+            consoleLog(`[TRACE check Lam-Pi Rule] Annotated ${lamToUpdateAnnotation.paramName} with type ${printTerm(expectedPi.paramType)}`);
         }
 
-        lamToAnnotate.paramType = expectedPi.paramType;
-        lamToAnnotate._isAnnotated = true;
-
-        // Deep elaboration: replace body function with one that checks recursively.
-        // This was described in "Difficulties Encountered" - Solution (Deep Elaboration)
-        const originalBodyFn = lamToAnnotate.body;
-        lamToAnnotate.body = (v_arg: Term): Term => {
-            const freshInnerRawTerm = originalBodyFn(v_arg); // Get the body term
-            let ctxForInnerBody = ctx;
-            const currentLamParamType = lamToAnnotate.paramType!; // Now annotated
-            if (v_arg.tag === 'Var') { // Extend context with the param type
-                ctxForInnerBody = extendCtx(ctx, v_arg.name, currentLamParamType);
-            }
-            const expectedTypeForInnerBody = expectedPi.bodyType(v_arg); // Get expected body type
-            check(ctxForInnerBody, freshInnerRawTerm, expectedTypeForInnerBody, stackDepth + 1); // Check it
-            return freshInnerRawTerm; // Return original structure, side effects of check applied
-        };
+        // Directly check the body now.
+        const paramName = lamTerm.paramName; // or expectedPi.paramName, should be compatible
+        const paramType = expectedPi.paramType;
         
-        // Check the original body structure once with the new annotation to ensure constraints are generated.
-        // This call to `check` will use the *new* body function defined above, which performs the inner check.
-        const tempVarForOriginalCheck = Var(lamToAnnotate.paramName);
-        const extendedCtx = extendCtx(ctx, tempVarForOriginalCheck.name, lamToAnnotate.paramType);
-        check(extendedCtx, lamToAnnotate.body(tempVarForOriginalCheck), expectedPi.bodyType(tempVarForOriginalCheck), stackDepth + 1);
+        const extendedCtx = extendCtx(ctx, paramName, paramType);
+        
+        // Instantiate the lambda's original body with a Var representing its parameter.
+        // This Var uses the *original* paramName from the Lam term itself.
+        const actualBodyTerm = lamTerm.body(Var(paramName)); 
+        
+        // Instantiate the Pi-type's body type with the same Var.
+        const expectedBodyPiType = expectedPi.bodyType(Var(paramName));
+
+        consoleLog(`[TRACE check Lam-Pi Rule] Checking body of ${paramName} in extended context.`);
+        check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
         return;
     }
 

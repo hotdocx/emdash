@@ -481,6 +481,35 @@ function runBaseDTTTests() {
         console.error("Test B10 Failed:", e.message, e.stack);
     }
 
+    // Test B11: Unannotated Lam with Expected Pi Type
+    resetMyLambdaPi();
+    try {
+        // Term: (λx. x) expected type: (Π Y:Type. Y)
+        const unannotId = Lam("x", (x_var: Term): Term => x_var); // λx.x
+        const expectedPiType = Pi("Y", Type(), (Y_var: Term): Term => Type()); // ΠY:Type.Y
+
+        const result = elaborate(unannotId, expectedPiType, Ctx);
+
+        if (result.term.tag !== 'Lam' || !result.term._isAnnotated || !result.term.paramType) {
+            throw new Error("Test B11.1: Elaborated term is not a correctly annotated lambda.");
+        }
+        if (!areEqual(result.term.paramType, Type(), Ctx)) {
+            throw new Error(`Test B11.1: Annotated param type is not Type. Got ${printTerm(result.term.paramType)}`);
+        }
+        
+        const testApp = App(result.term, Type());
+        const bodyCheckResult = elaborate(testApp, undefined, Ctx);
+        assertEqual(printTerm(bodyCheckResult.term), "Type", "Test B11.1: Body of elaborated lambda not behaving as identity for Type.");
+
+        // The reported type should be equivalent to the expected Pi type
+        const expectedNormalizedPiForComparison = Pi("Y", Type(), (_ignoredVar: Term) => Type()); 
+        assertEqual(printTerm(normalize(result.type, Ctx)), printTerm(normalize(expectedNormalizedPiForComparison, Ctx)), "Test B11.2: Type of elaborated term not matching expected Pi type");
+        console.log("Assertion Passed: Test B11: Unannotated lambda checked against Pi type successfully.");
+
+    } catch (e: any) {
+        console.error("Test B11 Failed:", e.message, e.stack);
+    }
+
     console.log("Base DTT (MyLambdaPi) Tests Completed.");
 }
 
