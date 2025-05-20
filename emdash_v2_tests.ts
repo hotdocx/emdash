@@ -357,129 +357,129 @@ function runBaseDTTTests() {
         console.error("Test B2 Failed:", e.message, e.stack);
     }
 
-    // // Test B3: Beta Reduction
-    // resetMyLambdaPi();
-    // try {
-    //     // (λ x:Type. x) Type  ~> Type
-    //     const term = App(Lam("x", Type(), (x_var: Term): Term => x_var), Type());
-    //     const result = elaborate(term, undefined, Ctx);
-    //     assertEqual(printTerm(result.term), "Type", "Test B3.1: Beta reduction (λx:Type. x) Type");
-    //     assertEqual(printTerm(result.type), "Type", "Test B3.1: Type is Type");
-    // } catch (e: any) {
-    //     console.error("Test B3 Failed:", e.message, e.stack);
-    // }
+    // Test B3: Beta Reduction
+    resetMyLambdaPi();
+    try {
+        // (λ x:Type. x) Type  ~> Type
+        const term = App(Lam("x", Type(), (x_var: Term): Term => x_var), Type());
+        const result = elaborate(term, undefined, Ctx);
+        assertEqual(printTerm(result.term), "Type", "Test B3.1: Beta reduction (λx:Type. x) Type");
+        assertEqual(printTerm(result.type), "Type", "Test B3.1: Type is Type");
+    } catch (e: any) {
+        console.error("Test B3 Failed:", e.message, e.stack);
+    }
 
-    // // Test B4: Unbound Variable
-    // resetMyLambdaPi();
-    // try {
-    //     elaborate(Var("unbound"), undefined, Ctx);
-    //     console.error("Test B4 Failed: Should have thrown Unbound variable error.");
-    // } catch (e: any) {
-    //     if ((e as Error).message.includes("Unbound variable: unbound")) {
-    //         console.log("Assertion Passed: Test B4: Detected unbound variable as expected.");
-    //     } else {
-    //         console.error("Test B4 Failed: Incorrect error for unbound variable.", (e as Error).message, (e as Error).stack);
-    //     }
-    // }
+    // Test B4: Unbound Variable
+    resetMyLambdaPi();
+    try {
+        elaborate(Var("unbound"), undefined, Ctx);
+        console.error("Test B4 Failed: Should have thrown Unbound variable error.");
+    } catch (e: any) {
+        if ((e as Error).message.includes("Unbound variable: unbound")) {
+            console.log("Assertion Passed: Test B4: Detected unbound variable as expected.");
+        } else {
+            console.error("Test B4 Failed: Incorrect error for unbound variable.", (e as Error).message, (e as Error).stack);
+        }
+    }
 
-    // // Test B5: Hole Inference basic
-    // resetMyLambdaPi();
-    // try {
-    //     // infer _
-    //     const holeTerm = Hole("testHoleB5");
-    //     const result = elaborate(holeTerm, undefined, Ctx);
-    //     assertEqual(printTerm(result.term), "testHoleB5(:?h0_type_of_testHoleB5)", "Test B5.1: Elaborated hole is itself");
-    //     // Hole names are ?h0, ?h1 etc. by default from freshHoleName
-    //     assertEqual(printTerm(result.type), "?h0_type_of_testHoleB5", "Test B5.1: Type of inferred hole is a new hole for its type"); 
+    // Test B5: Hole Inference basic
+    resetMyLambdaPi();
+    try {
+        // infer _
+        const holeTerm = Hole("testHoleB5");
+        const result = elaborate(holeTerm, undefined, Ctx);
+        assertEqual(printTerm(result.term), "testHoleB5(:?h0_type_of_testHoleB5)", "Test B5.1: Elaborated hole is itself");
+        // Hole names are ?h0, ?h1 etc. by default from freshHoleName
+        assertEqual(printTerm(result.type), "?h0_type_of_testHoleB5", "Test B5.1: Type of inferred hole is a new hole for its type"); 
 
-    //     resetMyLambdaPi(); // Reset for fresh hole names
-    //     const holeTerm2 = Hole("testHoleB5_2");
-    //     const result2 = elaborate(holeTerm2, Type(), Ctx);
-    //     assertEqual(printTerm(result2.term), "testHoleB5_2(:Type)", "Test B5.2: Elaborated hole checked against Type");
-    //     assertEqual(printTerm(result2.type), "Type", "Test B5.2: Type of hole checked against Type is Type");
-    // } catch (e: any) {
-    //     console.error("Test B5 Failed:", e.message, e.stack);
-    // }
+        resetMyLambdaPi(); // Reset for fresh hole names
+        const holeTerm2 = Hole("testHoleB5_2");
+        const result2 = elaborate(holeTerm2, Type(), Ctx);
+        assertEqual(printTerm(result2.term), "testHoleB5_2(:Type)", "Test B5.2: Elaborated hole checked against Type");
+        assertEqual(printTerm(result2.type), "Type", "Test B5.2: Type of hole checked against Type is Type");
+    } catch (e: any) {
+        console.error("Test B5 Failed:", e.message, e.stack);
+    }
 
-    // // Test B6: Definitional Equality (areEqual)
-    // resetMyLambdaPi();
-    // try {
-    //     const term1_src = Lam("x", Type(), (x_var: Term): Term => x_var);
-    //     const term2_src = Lam("y", Type(), (y_var: Term): Term => y_var);
-    //     const elab1 = elaborate(term1_src, undefined, Ctx).term;
-    //     const elab2 = elaborate(term2_src, undefined, Ctx).term;
-    //     //NO assertEqual(printTerm(elab1), printTerm(elab2), "Test B6.1: Alpha-equivalent lambdas should print the same after elaboration");
+    // Test B6: Definitional Equality (areEqual)
+    resetMyLambdaPi();
+    try {
+        const term1_src = Lam("x", Type(), (x_var: Term): Term => x_var);
+        const term2_src = Lam("y", Type(), (y_var: Term): Term => y_var);
+        const elab1 = elaborate(term1_src, undefined, Ctx).term;
+        const elab2 = elaborate(term2_src, undefined, Ctx).term;
+        //NO assertEqual(printTerm(elab1), printTerm(elab2), "Test B6.1: Alpha-equivalent lambdas should print the same after elaboration");
 
-    //     const pi1_src = Pi("A", Type(), (A_var: Term): Term => A_var);
-    //     const pi2_src = Pi("B", Type(), (B_var: Term): Term => B_var);
-    //     const elabPi1 = elaborate(pi1_src, undefined, Ctx).term;
-    //     const elabPi2 = elaborate(pi2_src, undefined, Ctx).term;
-    //     // NO assertEqual(printTerm(elabPi1), printTerm(elabPi2), "Test B6.2: Alpha-equivalent Pi-types should print the same");
+        const pi1_src = Pi("A", Type(), (A_var: Term): Term => A_var);
+        const pi2_src = Pi("B", Type(), (B_var: Term): Term => B_var);
+        const elabPi1 = elaborate(pi1_src, undefined, Ctx).term;
+        const elabPi2 = elaborate(pi2_src, undefined, Ctx).term;
+        // NO assertEqual(printTerm(elabPi1), printTerm(elabPi2), "Test B6.2: Alpha-equivalent Pi-types should print the same");
 
-    // } catch (e: any) {
-    //     console.error("Test B6 Failed:", e.message, e.stack);
-    // }
+    } catch (e: any) {
+        console.error("Test B6 Failed:", e.message, e.stack);
+    }
 
-    // // Test B7: Normalization (via elaboration)
-    // resetMyLambdaPi();
-    // try {
-    //     // Corrected B7.1: Well-typed complex beta-reduction
-    //     // Term: ((λ F : (Π Z : Type. Type). (F Type)) (λ Y : Type. Y))
-    //     // Expected to normalize to Type, with type Type.
+    // Test B7: Normalization (via elaboration)
+    resetMyLambdaPi();
+    try {
+        // Corrected B7.1: Well-typed complex beta-reduction
+        // Term: ((λ F : (Π Z : Type. Type). (F Type)) (λ Y : Type. Y))
+        // Expected to normalize to Type, with type Type.
 
-    //     const piTypeForZ = Pi("Z", Type(), (Z_var: Term): Term => Type()); // Represents (Π Z : Type. Type)
+        const piTypeForZ = Pi("Z", Type(), (Z_var: Term): Term => Type()); // Represents (Π Z : Type. Type)
         
-    //     const outerLamFunc = Lam("F", piTypeForZ, (F_var: Term): Term => App(F_var, Type())); // Represents (λ F : (Π Z : Type. Type). (F Type))
+        const outerLamFunc = Lam("F", piTypeForZ, (F_var: Term): Term => App(F_var, Type())); // Represents (λ F : (Π Z : Type. Type). (F Type))
         
-    //     const innerIdFunc = Lam("Y", Type(), (Y_var: Term): Term => Y_var); // Represents (λ Y : Type. Y)
+        const innerIdFunc = Lam("Y", Type(), (Y_var: Term): Term => Y_var); // Represents (λ Y : Type. Y)
         
-    //     const complexTermNew = App(outerLamFunc, innerIdFunc);
+        const complexTermNew = App(outerLamFunc, innerIdFunc);
 
-    //     const result = elaborate(complexTermNew, undefined, Ctx);
-    //     assertEqual(printTerm(result.term), "Type", "Test B7.1: Normalization of complex beta-reduction evaluates to Type");
-    //     assertEqual(printTerm(result.type), "Type", "Test B7.1: Type of normalized complex term is Type");
+        const result = elaborate(complexTermNew, undefined, Ctx);
+        assertEqual(printTerm(result.term), "Type", "Test B7.1: Normalization of complex beta-reduction evaluates to Type");
+        assertEqual(printTerm(result.type), "Type", "Test B7.1: Type of normalized complex term is Type");
 
-    // } catch (e: any) {
-    //     console.error("Test B7 Failed:", e.message, e.stack);
-    // }
+    } catch (e: any) {
+        console.error("Test B7 Failed:", e.message, e.stack);
+    }
 
-    // // Test B8: Let expression (Placeholder)
-    // resetMyLambdaPi();
-    // try {
-    //     console.warn("Test B8 for Let expressions is a placeholder and will likely fail or do nothing if Let is not implemented in emdash_v2.ts BaseTerm and elaboration logic.");
-    // } catch (e: any) {
-    //     console.error("Test B8 Failed (as expected if Let is not implemented, otherwise an issue):", (e as Error).message, (e as Error).stack);
-    // }
+    // Test B8: Let expression (Placeholder)
+    resetMyLambdaPi();
+    try {
+        console.warn("Test B8 for Let expressions is a placeholder and will likely fail or do nothing if Let is not implemented in emdash_v2.ts BaseTerm and elaboration logic.");
+    } catch (e: any) {
+        console.error("Test B8 Failed (as expected if Let is not implemented, otherwise an issue):", (e as Error).message, (e as Error).stack);
+    }
 
-    // // Test B9: Type Mismatch Error
-    // resetMyLambdaPi();
-    // try {
-    //     elaborate(Type(), Pi("X", Type(), (X_var: Term): Term => X_var), Ctx);
-    //     console.error("Test B9 Failed: Should have thrown a type mismatch error.");
-    // } catch (e: any) {
-    //     if ((e as Error).message.includes("Could not solve constraints") || (e as Error).message.includes("Cannot unify Type with Π X:Type. X")) {
-    //         console.log("Assertion Passed: Test B9: Detected type mismatch as expected.");
-    //     } else {
-    //         console.error("Test B9 Failed: Incorrect error for type mismatch.", (e as Error).message, (e as Error).stack);
-    //     }
-    // }
+    // Test B9: Type Mismatch Error
+    resetMyLambdaPi();
+    try {
+        elaborate(Type(), Pi("X", Type(), (X_var: Term): Term => X_var), Ctx);
+        console.error("Test B9 Failed: Should have thrown a type mismatch error.");
+    } catch (e: any) {
+        if ((e as Error).message.includes("Could not solve constraints") || (e as Error).message.includes("Cannot unify Type with Π X:Type. X")) {
+            console.log("Assertion Passed: Test B9: Detected type mismatch as expected.");
+        } else {
+            console.error("Test B9 Failed: Incorrect error for type mismatch.", (e as Error).message, (e as Error).stack);
+        }
+    }
 
-    // // Test B10: Lambda type inference for unannotated params
-    // resetMyLambdaPi();
-    // try {
-    //     const unannotId = Lam("x", (x_var: Term): Term => x_var); // Unannotated Lam
-    //     const result = elaborate(unannotId, undefined, Ctx);
-    //     const printType = printTerm(result.type);
-    //     if (result.type.tag === 'Pi' && result.type.paramType?.tag === 'Hole') {
-    //          const paramTypeHoleName = result.type.paramType.id;
-    //          const expectedTypeStr = `(Π x : ${paramTypeHoleName}. ${paramTypeHoleName})`;
-    //          assertEqual(printType, expectedTypeStr, `Test B10.1: Inferred type of λx.x is ${expectedTypeStr}`);
-    //     } else {
-    //         throw new Error (`Test B10.1: Inferred type structure incorrect. Got ${printType}`);
-    //     }
-    // } catch (e: any) {
-    //     console.error("Test B10 Failed:", e.message, e.stack);
-    // }
+    // Test B10: Lambda type inference for unannotated params
+    resetMyLambdaPi();
+    try {
+        const unannotId = Lam("x", (x_var: Term): Term => x_var); // Unannotated Lam
+        const result = elaborate(unannotId, undefined, Ctx);
+        const printType = printTerm(result.type);
+        if (result.type.tag === 'Pi' && result.type.paramType?.tag === 'Hole') {
+             const paramTypeHoleName = result.type.paramType.id;
+             const expectedTypeStr = `(Π x : ${paramTypeHoleName}. ${paramTypeHoleName})`;
+             assertEqual(printType, expectedTypeStr, `Test B10.1: Inferred type of λx.x is ${expectedTypeStr}`);
+        } else {
+            throw new Error (`Test B10.1: Inferred type structure incorrect. Got ${printType}`);
+        }
+    } catch (e: any) {
+        console.error("Test B10 Failed:", e.message, e.stack);
+    }
 
     console.log("Base DTT (MyLambdaPi) Tests Completed.");
 }

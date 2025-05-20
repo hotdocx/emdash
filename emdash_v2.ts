@@ -122,7 +122,7 @@ let whnfIterationCount = 0;
 
 export const MAX_STACK_DEPTH = 200; // General recursion depth limit
 
-export let DEBUG_VERBOSE = true;
+export let DEBUG_VERBOSE = false;
 
 // Metadata for Emdash symbols
 // UPDATED: ObjTerm and HomTerm are NOT constant symbols for rewrite head blocking
@@ -444,17 +444,28 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             const lam2 = rt2 as Term & {tag:'Lam'};
             consoleLog(`[TRACE areEqual (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
             if (rt1._isAnnotated !== lam2._isAnnotated) { result = false; break; }
+            
+            let paramTypeForCtx_Lam: Term;
             if (rt1._isAnnotated) { 
                 if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
                     consoleLog(`[TRACE areEqual (${depth})] Lam: annotated param types not equal.`);
                     result = false; break;
                 }
                 consoleLog(`[TRACE areEqual (${depth})] Lam: annotated param types are equal.`);
+                paramTypeForCtx_Lam = getTermRef(rt1.paramType!); // paramType is verified equal
+            } else {
+                // For unannotated lams, paramType on Lam term itself is undefined.
+                // The Pi type inferred for it would have a (possibly hole) param type.
+                // For comparing bodies directly, use a fresh hole type as placeholder if not available.
+                // This path might be less common if comparisons happen on inferred Pi types mostly.
+                paramTypeForCtx_Lam = rt1.paramType ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_areEqual_unannot_lam_param");
             }
-            const freshVName = freshVarName(rt1.paramName);
-            const freshV = Var(freshVName);
-            consoleLog(`[TRACE areEqual (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
-            result = areEqual(rt1.body(freshV), lam2.body(freshV), ctx, depth + 1);
+
+            const freshVName_Lam = rt1.paramName; // Use the original parameter name
+            const freshV_Lam = Var(freshVName_Lam);
+            const extendedCtx_Lam = extendCtx(ctx, freshVName_Lam, paramTypeForCtx_Lam);
+            consoleLog(`[TRACE areEqual (${depth})] Lam: comparing bodies with var ${freshVName_Lam} in extended context.`);
+            result = areEqual(rt1.body(freshV_Lam), lam2.body(freshV_Lam), extendedCtx_Lam, depth + 1);
             consoleLog(`[TRACE areEqual (${depth})] Lam: bodies comparison result = ${result}`);
             break;
         }
@@ -466,9 +477,11 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
                 result = false; break;
             }
             consoleLog(`[TRACE areEqual (${depth})] Pi: param types equal. Comparing body types.`);
-            const freshVName = freshVarName(rt1.paramName);
-            const freshV = Var(freshVName);
-            result = areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), ctx, depth + 1);
+            const freshVName_Pi = rt1.paramName; // Use the original parameter name
+            const freshV_Pi = Var(freshVName_Pi);
+            const extendedCtx_Pi = extendCtx(ctx, freshVName_Pi, getTermRef(rt1.paramType)); 
+            consoleLog(`[TRACE areEqual (${depth})] Pi: comparing body types with var ${freshVName_Pi} in extended context.`);
+            result = areEqual(rt1.bodyType(freshV_Pi), pi2.bodyType(freshV_Pi), extendedCtx_Pi, depth + 1);
             consoleLog(`[TRACE areEqual (${depth})] Pi: body types comparison result = ${result}`);
             break;
         }
@@ -1125,17 +1138,24 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             const lam2 = rt2 as Term & {tag:'Lam'};
             consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated1=${rt1._isAnnotated}, annotated2=${lam2._isAnnotated}`);
             if (rt1._isAnnotated !== lam2._isAnnotated) { result = false; break; }
+            
+            let paramTypeForCtx_Lam_Struct: Term;
             if (rt1._isAnnotated) { 
                 if (!rt1.paramType || !lam2.paramType || !areStructurallyEqualNoWhnf(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
                     consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types not equal.`);
                     result = false; break;
                 }
                 consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: annotated param types are equal.`);
+                paramTypeForCtx_Lam_Struct = getTermRef(rt1.paramType!); // paramType is verified equal
+            } else {
+                paramTypeForCtx_Lam_Struct = rt1.paramType ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_structEq_unannot_lam_param");
             }
-            const freshVName = freshVarName(rt1.paramName);
-            const freshV = Var(freshVName);
-            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: comparing bodies with fresh var ${freshVName}.`);
-            result = areStructurallyEqualNoWhnf(rt1.body(freshV), lam2.body(freshV), ctx, depth + 1);
+
+            const freshVName_Lam_Struct = rt1.paramName; // Use the original parameter name
+            const freshV_Lam_Struct = Var(freshVName_Lam_Struct);
+            const extendedCtx_Lam_Struct = extendCtx(ctx, freshVName_Lam_Struct, paramTypeForCtx_Lam_Struct);
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: comparing bodies with var ${freshVName_Lam_Struct} in extended context.`);
+            result = areStructurallyEqualNoWhnf(rt1.body(freshV_Lam_Struct), lam2.body(freshV_Lam_Struct), extendedCtx_Lam_Struct, depth + 1);
             consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Lam: bodies comparison result = ${result}`);
             break;
         }
@@ -1147,9 +1167,11 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
                 result = false; break;
             }
             consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: param types equal. Comparing body types.`);
-            const freshVName = freshVarName(rt1.paramName);
-            const freshV = Var(freshVName);
-            result = areStructurallyEqualNoWhnf(rt1.bodyType(freshV), pi2.bodyType(freshV), ctx, depth + 1);
+            const freshVName_Pi_Struct = rt1.paramName; // Use the original parameter name
+            const freshV_Pi_Struct = Var(freshVName_Pi_Struct);
+            const extendedCtx_Pi_Struct = extendCtx(ctx, freshVName_Pi_Struct, getTermRef(rt1.paramType)); 
+            consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: comparing body types with var ${freshVName_Pi_Struct} in extended context.`);
+            result = areStructurallyEqualNoWhnf(rt1.bodyType(freshV_Pi_Struct), pi2.bodyType(freshV_Pi_Struct), extendedCtx_Pi_Struct, depth + 1);
             consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Pi: body types comparison result = ${result}`);
             break;
         }
