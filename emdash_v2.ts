@@ -1,13 +1,13 @@
 // --- MyLambdaPi with Emdash Phase 1: Core Categories (Attempt 7 - Applying Revisions) ---
 
-let nextVarId = 0;
-const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`;
+export let nextVarId = 0;
+export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`;
 
-let nextHoleId = 0;
-const freshHoleName = (): string => `?h${nextHoleId++}`;
+export let nextHoleId = 0;
+export const freshHoleName = (): string => `?h${nextHoleId++}`;
 
 // --- Term Definition ---
-type BaseTerm =
+export type BaseTerm =
     | { tag: 'Type' }
     | { tag: 'Var', name: string }
     | { tag: 'Lam', paramName: string, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
@@ -36,12 +36,12 @@ type BaseTerm =
         objZ_IMPLICIT?: Term
       };
 
-type Term = BaseTerm;
-type PatternVarDecl = { name: string, type: Term };
+export type Term = BaseTerm;
+export type PatternVarDecl = { name: string, type: Term };
 
-const Type = (): Term => ({ tag: 'Type' });
-const Var = (name: string): Term & { tag: 'Var' } => ({ tag: 'Var', name });
-const Lam = (paramName: string, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
+export const Type = (): Term => ({ tag: 'Type' });
+export const Var = (name: string): Term & { tag: 'Var' } => ({ tag: 'Var', name });
+export const Lam = (paramName: string, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
     if (typeof paramTypeOrBody === 'function' && bodyOrNothing === undefined) {
         return { tag: 'Lam', paramName, paramType: undefined, body: paramTypeOrBody, _isAnnotated: false };
     } else if (bodyOrNothing && typeof bodyOrNothing === 'function' && paramTypeOrBody) {
@@ -49,39 +49,39 @@ const Lam = (paramName: string, paramTypeOrBody: Term | ((v: Term) => Term), bod
     }
     throw new Error(`Invalid Lam arguments: ${paramName}, ${paramTypeOrBody}, ${bodyOrNothing}`);
 }
-const App = (func: Term, arg: Term): Term => ({ tag: 'App', func, arg });
-const Pi = (paramName: string, paramType: Term, bodyType: (v: Term) => Term): Term =>
+export const App = (func: Term, arg: Term): Term => ({ tag: 'App', func, arg });
+export const Pi = (paramName: string, paramType: Term, bodyType: (v: Term) => Term): Term =>
     ({ tag: 'Pi', paramName, paramType, bodyType });
-const Hole = (id?: string): Term & { tag: 'Hole' } => {
+export const Hole = (id?: string): Term & { tag: 'Hole' } => {
     const holeId = id || freshHoleName();
     return { tag: 'Hole', id: holeId, ref: undefined, elaboratedType: undefined };
 };
 
-const CatTerm = (): Term & { tag: 'CatTerm' } => ({ tag: 'CatTerm' });
-const ObjTerm = (cat: Term): Term & { tag: 'ObjTerm' } => ({ tag: 'ObjTerm', cat });
-const HomTerm = (cat: Term, dom: Term, cod: Term): Term & { tag: 'HomTerm' } => ({ tag: 'HomTerm', cat, dom, cod });
-const MkCat_ = (objRepresentation: Term, homRepresentation: Term, composeImplementation: Term): Term & { tag: 'MkCat_' } =>
+export const CatTerm = (): Term & { tag: 'CatTerm' } => ({ tag: 'CatTerm' });
+export const ObjTerm = (cat: Term): Term & { tag: 'ObjTerm' } => ({ tag: 'ObjTerm', cat });
+export const HomTerm = (cat: Term, dom: Term, cod: Term): Term & { tag: 'HomTerm' } => ({ tag: 'HomTerm', cat, dom, cod });
+export const MkCat_ = (objRepresentation: Term, homRepresentation: Term, composeImplementation: Term): Term & { tag: 'MkCat_' } =>
     ({ tag: 'MkCat_', objRepresentation, homRepresentation, composeImplementation });
-const IdentityMorph = (obj: Term, cat_IMPLICIT?: Term): Term & { tag: 'IdentityMorph' } =>
+export const IdentityMorph = (obj: Term, cat_IMPLICIT?: Term): Term & { tag: 'IdentityMorph' } =>
     ({ tag: 'IdentityMorph', obj, cat_IMPLICIT });
-const ComposeMorph = (g: Term, f: Term, cat_IMPLICIT?: Term, objX_IMPLICIT?: Term, objY_IMPLICIT?: Term, objZ_IMPLICIT?: Term): Term & { tag: 'ComposeMorph' } =>
+export const ComposeMorph = (g: Term, f: Term, cat_IMPLICIT?: Term, objX_IMPLICIT?: Term, objY_IMPLICIT?: Term, objZ_IMPLICIT?: Term): Term & { tag: 'ComposeMorph' } =>
     ({ tag: 'ComposeMorph', g, f, cat_IMPLICIT, objX_IMPLICIT, objY_IMPLICIT, objZ_IMPLICIT });
 
-type Binding = { name: string, type: Term };
-type Context = Binding[];
-const emptyCtx: Context = [];
-const extendCtx = (ctx: Context, name: string, type: Term): Context => [{ name, type }, ...ctx];
-const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
+export type Binding = { name: string, type: Term };
+export type Context = Binding[];
+export const emptyCtx: Context = [];
+export const extendCtx = (ctx: Context, name: string, type: Term): Context => [{ name, type }, ...ctx];
+export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
 
-interface GlobalDef {
+export interface GlobalDef {
     name: string;
     type: Term;
     value?: Term;
     isConstantSymbol?: boolean;
 }
-const globalDefs: Map<string, GlobalDef> = new Map();
+export let globalDefs: Map<string, GlobalDef> = new Map();
 
-function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false) {
+export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
@@ -89,44 +89,47 @@ function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: 
     globalDefs.set(name, { name, type, value, isConstantSymbol });
 }
 
-interface RewriteRule { name: string; patternVars: PatternVarDecl[]; lhs: Term; rhs: Term; }
-const userRewriteRules: RewriteRule[] = [];
-function addRewriteRule(rule: RewriteRule) {
+export interface RewriteRule { name: string; patternVars: PatternVarDecl[]; lhs: Term; rhs: Term; }
+export let userRewriteRules: RewriteRule[] = [];
+export function addRewriteRule(rule: RewriteRule) {
     userRewriteRules.push(rule);
 }
 
-interface UnificationRule {
+export interface UnificationRule {
     name: string;
     patternVars: PatternVarDecl[];
     lhsPattern1: Term;
     lhsPattern2: Term;
     rhsNewConstraints: Array<{ t1: Term, t2: Term }>;
 }
-const userUnificationRules: UnificationRule[] = [];
-function addUnificationRule(rule: UnificationRule) {
+export let userUnificationRules: UnificationRule[] = [];
+export function addUnificationRule(rule: UnificationRule) {
     userUnificationRules.push(rule);
 }
 
-type Substitution = Map<string, Term>;
-interface Constraint { t1: Term; t2: Term; origin?: string; }
-let constraints: Constraint[] = [];
+export type Substitution = Map<string, Term>;
+export interface Constraint { t1: Term; t2: Term; origin?: string; }
+export let constraints: Constraint[] = [];
 
-function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
-function getTermRef(term: Term): Term {
+export function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
+export function getTermRef(term: Term): Term {
     if (term.tag === 'Hole' && term.ref) return getTermRef(term.ref);
     return term;
 }
 
-const MAX_WHNF_ITERATIONS = 100; // Renamed from MAX_RECURSION_DEPTH
-const MAX_STACK_DEPTH = 200; // Increased from 100
-const DEBUG_VERBOSE = false;
+export const MAX_WHNF_ITERATIONS = 1000; // Max iterations for whnf reduction loop
+let whnfIterationCount = 0;
+
+export const MAX_STACK_DEPTH = 200; // General recursion depth limit
+
+export let DEBUG_VERBOSE = false;
 
 // Metadata for Emdash symbols
 // UPDATED: ObjTerm and HomTerm are NOT constant symbols for rewrite head blocking
-const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'MkCat_']);
-const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>(['IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_']);
+export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'MkCat_']);
+export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>(['IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_']);
 
-function isKernelConstantSymbolStructurally(term: Term): boolean {
+export function isKernelConstantSymbolStructurally(term: Term): boolean {
     const t = getTermRef(term);
     if (EMDASH_CONSTANT_SYMBOLS_TAGS.has(t.tag)) return true;
     // Check for global Vars marked as isConstantSymbol
@@ -134,12 +137,11 @@ function isKernelConstantSymbolStructurally(term: Term): boolean {
     return false;
 }
 
-function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
+export function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
     return EMDASH_UNIFICATION_INJECTIVE_TAGS.has(tag);
 }
 
-
-function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
+export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     consoleLog(`[TRACE whnf (${stackDepth})] Enter: term = ${printTerm(term)}`);
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     
@@ -312,8 +314,7 @@ function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     return current;
 }
 
-
-function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
+export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Normalize stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     
     const headReduced = whnf(term, ctx, stackDepth + 1);
@@ -398,7 +399,7 @@ function normalize(term: Term, ctx: Context, stackDepth: number = 0): Term {
     }
 }
 
-function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
+export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     consoleLog(`[TRACE areEqual (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     if (depth > MAX_STACK_DEPTH) throw new Error(`Equality check depth exceeded (areEqual depth: ${depth})`);
     const normT1 = whnf(t1, ctx, depth + 1);
@@ -533,7 +534,7 @@ function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     return result;
 }
 
-function termContainsHole(term: Term, holeId: string, visited: Set<string>, depth = 0): boolean {
+export function termContainsHole(term: Term, holeId: string, visited: Set<string>, depth = 0): boolean {
     if (depth > MAX_STACK_DEPTH * 2) { // Increased depth for occurs check, can be deeper than other ops
         console.warn(`termContainsHole depth exceeded for hole ${holeId} in ${printTerm(term)}`);
         return true; // Fail safe: assume it contains if too deep
@@ -593,9 +594,9 @@ function termContainsHole(term: Term, holeId: string, visited: Set<string>, dept
     }
 }
 
-enum UnifyResult { Solved, Failed, RewrittenByRule, Progress }
+export enum UnifyResult { Solved, Failed, RewrittenByRule, Progress }
 
-function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, depth: number): boolean {
+export function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, depth: number): boolean {
     const normTerm = getTermRef(term); // Dereference term before occurs check
     if (normTerm.tag === 'Hole') {
         if (hole.id === normTerm.id) return true; // Unifying hole with itself is success
@@ -613,7 +614,7 @@ function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, depth: 
     return true;
 }
 
-function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx: Context, depth: number, parentRt1: Term, parentRt2: Term): UnifyResult {
+export function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx: Context, depth: number, parentRt1: Term, parentRt2: Term): UnifyResult {
     if (args1.length !== args2.length) return UnifyResult.Failed;
 
     let madeProgress = false;
@@ -659,8 +660,7 @@ function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx
     return UnifyResult.Progress;
 }
 
-
-function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
+export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
     if (depth > MAX_STACK_DEPTH) throw new Error(`Unification stack depth exceeded (Unify depth: ${depth}, ${printTerm(t1)} vs ${printTerm(t2)})`);
     
     const rt1_orig = getTermRef(t1);
@@ -882,7 +882,7 @@ function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
 }
 
 // --- Functions for Unification Rules ---
-function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], collectedVars: Set<string>, visited: Set<Term> = new Set()): void {
+export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], collectedVars: Set<string>, visited: Set<Term> = new Set()): void {
     const current = getTermRef(term);
     if (visited.has(current) && current.tag !== 'Var' && current.tag !== 'Hole') return; 
     visited.add(current);
@@ -937,7 +937,7 @@ function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[], colle
     }
 }
 
-function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, ctx: Context): void {
+export function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, ctx: Context): void {
     const lhsVars = new Set<string>();
     collectPatternVars(rule.lhsPattern1, rule.patternVars, lhsVars, new Set<Term>());
     collectPatternVars(rule.lhsPattern2, rule.patternVars, lhsVars, new Set<Term>());
@@ -973,7 +973,7 @@ function applyAndAddRuleConstraints(rule: UnificationRule, subst: Substitution, 
     }
 }
 
-function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): UnifyResult {
+export function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): UnifyResult {
     for (const rule of userUnificationRules) {
         // Attempt: rule.lhsPattern1 vs t1, rule.lhsPattern2 vs t2
         let subst1 = matchPattern(rule.lhsPattern1, t1, ctx, rule.patternVars, undefined, depth + 1);
@@ -999,7 +999,7 @@ function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: number): U
 }
 // --- End functions for Unification Rules ---
 
-function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
+export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error("solveConstraints stack depth exceeded");
     let changedInOuterLoop = true;
     let iterations = 0;
@@ -1081,7 +1081,7 @@ function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
 }
 
 // ADDING NEW FUNCTION HERE
-function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
+export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     consoleLog(`[TRACE areStructurallyEqualNoWhnf (${depth})] Enter: t1 = ${printTerm(t1)}, t2 = ${printTerm(t2)}`);
     if (depth > MAX_STACK_DEPTH) throw new Error(`Structural Equality check depth exceeded (areStructurallyEqualNoWhnf depth: ${depth})`);
     // DO NOT CALL WHNF HERE
@@ -1215,7 +1215,7 @@ function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0)
     return result;
 }
 
-function ensureImplicitsAsHoles(term: Term): Term {
+export function ensureImplicitsAsHoles(term: Term): Term {
     // This function is called at the start of infer/check, before getTermRef on the input term.
     // It can mutate the term directly.
     if (term.tag === 'IdentityMorph') {
@@ -1236,7 +1236,7 @@ function ensureImplicitsAsHoles(term: Term): Term {
     return term;
 }
 
-function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
+export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
 
     // Ensure implicits are holes *before* getTermRef, as getTermRef might return a solved hole's content.
@@ -1393,7 +1393,7 @@ function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
     }
 }
 
-function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): void {
+export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): void {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Check stack depth exceeded (depth: ${stackDepth}, term ${printTerm(term)}, expType ${printTerm(expectedType)})`);
 
     const termWithImplicits = ensureImplicitsAsHoles(term); // Ensure implicits before getTermRef
@@ -1502,8 +1502,8 @@ function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number 
     addConstraint(inferredType, normExpectedType, `Check general: ${printTerm(inferredType)} vs ${printTerm(normExpectedType)} for term ${printTerm(current)}`);
 }
 
-interface ElaborationResult { term: Term; type: Term; }
-function elaborate(term: Term, expectedType?: Term, initialCtx: Context = emptyCtx): ElaborationResult {
+export interface ElaborationResult { term: Term; type: Term; }
+export function elaborate(term: Term, expectedType?: Term, initialCtx: Context = emptyCtx): ElaborationResult {
     constraints = []; // Reset global constraints
     // Reset fresh ID counters for each elaboration call for reproducible hole/var names in tests.
     // In a real system, these might be instance-based or managed differently.
@@ -1561,12 +1561,11 @@ function elaborate(term: Term, expectedType?: Term, initialCtx: Context = emptyC
     return { term: normalizedElaboratedTerm, type: normalizedReportedType };
 }
 
-
-function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean {
+export function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean {
     return patternVarDecls.some(pvd => pvd.name === name);
 }
 
-function matchPattern(
+export function matchPattern(
     pattern: Term, termToMatch: Term, ctx: Context,
     patternVarDecls: PatternVarDecl[],
     currentSubst?: Substitution, stackDepth = 0
@@ -1804,7 +1803,7 @@ function matchPattern(
     }
 }
 
-function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVarDecl[]): Term {
+export function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVarDecl[]): Term {
     const current = getTermRef(term); // Dereference first
 
     // Check if current is a pattern variable (Var or Hole)
@@ -1879,7 +1878,7 @@ function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVar
 }
 
 // Print term with bound variables handling for HOAS
-function printTerm(term: Term, boundVarsMap: Map<string, string> = new Map(), stackDepth = 0): string {
+export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Map(), stackDepth = 0): string {
     if (stackDepth > MAX_STACK_DEPTH * 2) return "<print_depth_exceeded>";
     if (!term) return "<null_term>";
     
@@ -1962,13 +1961,13 @@ function printTerm(term: Term, boundVarsMap: Map<string, string> = new Map(), st
     }
 }
 
-function consoleLog(message?: any, ...optionalParams: any[]): void {
+export function consoleLog(message?: any, ...optionalParams: any[]): void {
     if (DEBUG_VERBOSE) {
         console.log(message, ...optionalParams);
     }
 }
 
-function resetMyLambdaPi() {
+export function resetMyLambdaPi() {
     constraints = []; globalDefs.clear();
     userRewriteRules.length = 0;
     userUnificationRules.length = 0;
@@ -1980,7 +1979,7 @@ console.log("--- MyLambdaPi with Emdash Phase 1: Core Categories (Attempt 7) ---
 
 // SetupPhase1GlobalsAndRules and runPhase1Tests are unchanged from your provided "NEW TEST CODE"
 // They will be used to test these modifications.
-function setupPhase1GlobalsAndRules() {
+export function setupPhase1GlobalsAndRules() {
     defineGlobal("NatType", Type(), undefined, true); // NatType is a kernel constant Type
     defineGlobal("BoolType", Type(), undefined, true);
 
@@ -2062,264 +2061,7 @@ function setupPhase1GlobalsAndRules() {
         rhs: Var("f_XY_pv")
     });
 }
-function runPhase1Tests() {
-    const baseCtx = emptyCtx;
-    const NatObjRepr = Var("NatType"); // This is a term of type Type
 
-    console.log("\n--- Test 1: Basic Cat/Obj/Hom Types ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    let testTerm : Term;
-    testTerm = CatTerm();
-    let elabRes = elaborate(testTerm, undefined, baseCtx);
-    console.log(`Term: ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
-    if(elabRes.type.tag !== 'Type') throw new Error("Test 1.1 failed: Cat is not Type");
-
-    const someCatHole = Hole("?MyCat");
-    const type_of_someCatHole = infer(baseCtx, someCatHole); // Type of hole is another hole, ?type_of_?MyCat
-    addConstraint(type_of_someCatHole, CatTerm(), "Constraint: type of ?MyCat is Cat");
-    // solveConstraints needs to be called if we want ?MyCat's elaboratedType to be CatTerm()
-    // For now, ObjTerm(someCatHole) means check(someCatHole, CatTerm()) will be called by infer(ObjTerm(...))
-
-    testTerm = ObjTerm(someCatHole);
-    elabRes = elaborate(testTerm, undefined, baseCtx); // This elaborate will solve ?MyCat's type.
-    console.log(`Term: ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
-    if(elabRes.type.tag !== 'Type') throw new Error("Test 1.2 failed: Obj ?MyCat is not Type");
-    // Check if someCatHole's elaborated type was correctly inferred to CatTerm
-    const myCatHoleAfterElab = getTermRef(someCatHole) as Term & {tag:"Hole"};
-    if (!myCatHoleAfterElab.elaboratedType || !areEqual(getTermRef(myCatHoleAfterElab.elaboratedType), CatTerm(), baseCtx)) {
-        // throw new Error(`Test 1.2b failed: ?MyCat elaboratedType not CatTerm. Got: ${myCatHoleAfterElab.elaboratedType ? printTerm(getTermRef(myCatHoleAfterElab.elaboratedType)) : 'undefined'}`);
-        // This check is too strict if ?MyCat itself got solved to CatTerm() or another Cat term.
-        // The primary check is that ObjTerm(someCatHole) typechecks.
-    }
-
-
-    const objXHole = Hole("?X");
-    const objYHole = Hole("?Y");
-    // Constrain types of ?X and ?Y to be Obj(?MyCat) AFTER ?MyCat's type is known to be Cat.
-    // This happens within the elaboration of HomTerm.
-    // No, this needs to be setup if ?X, ?Y are used standalone.
-    // If HomTerm is elaborated, its internal checks handle this.
-
-    testTerm = HomTerm(someCatHole, objXHole, objYHole);
-    elabRes = elaborate(testTerm, undefined, baseCtx);
-    console.log(`Term: ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
-    if(elabRes.type.tag !== 'Type') throw new Error("Test 1.3 failed: Hom ?MyCat ?X ?Y is not Type");
-    console.log("Test 1 Passed.");
-
-
-    console.log("\n--- Test 2: MkCat_ and Projections ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    // H_repr_Nat_Global : (X:NatType) -> (Y:NatType) -> Type
-    defineGlobal("H_repr_Nat_Global", Pi("X", NatObjRepr, _X => Pi("Y", NatObjRepr, _Y => Type())), undefined, true);
-    
-    // C_impl_Nat_dummy_Global : (X:NatType) -> (Y:NatType) -> (Z:NatType) -> (H_repr_Nat_Global Y Z) -> (H_repr_Nat_Global X Y) -> (H_repr_Nat_Global X Z)
-    // Corrected definition:
-    defineGlobal("C_impl_Nat_dummy_Global",
-        Pi("X_arg", NatObjRepr, X_term =>      // Parameter for X_arg
-        Pi("Y_arg", NatObjRepr, Y_term =>      // Parameter for Y_arg
-        Pi("Z_arg", NatObjRepr, Z_term =>      // Parameter for Z_arg
-        Pi("g_morph", App(App(Var("H_repr_Nat_Global"), Y_term), Z_term), _g_term => // Use Y_term, Z_term
-        Pi("f_morph", App(App(Var("H_repr_Nat_Global"), X_term), Y_term), _f_term => // Use X_term, Y_term
-        App(App(Var("H_repr_Nat_Global"), X_term), Z_term) // Use X_term, Z_term
-        ))))), undefined, true);
-
-    // Dummy compose impl term, e.g. returns first argument g (if types were non-dependent, or use a hole)
-    // For type checking, the exact impl doesn't matter as much as its type.
-    // Let's make a dummy C_impl term whose type is C_impl_Nat_dummy_Global.
-    // It should be a Lam that takes all args and returns a term of type (H_repr_Nat_Global X Z).
-    // For simplicity, we can use a Hole for the body if we don't want to construct a placeholder.
-    // Or, for this test, just use the global Var directly in MkCat_, assuming it's defined.
-    
-    const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
-    elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
-    console.log(`NatCategoryTermVal Term: ${printTerm(elabRes.term)}`);
-    console.log(`NatCategoryTermVal Type: ${printTerm(elabRes.type)}`);
-    if(elabRes.type.tag !== 'CatTerm') throw new Error("Test 2.1 failed: MkCat_ type is not Cat");
-
-    const ObjOfNatCat = ObjTerm(NatCategoryTermVal);
-    elabRes = elaborate(ObjOfNatCat, undefined, baseCtx); // elaborate will call normalize, which calls whnf
-    console.log(`Obj(NatCategoryTermVal) Term (norm): ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
-    if (!areEqual(elabRes.term, NatObjRepr, baseCtx)) throw new Error(`Test 2.2 failed: Obj(NatCategoryTerm) did not reduce to NatType. Got ${printTerm(elabRes.term)}`);
-
-    defineGlobal("nat_val1_t2", NatObjRepr); 
-    defineGlobal("nat_val2_t2", NatObjRepr);
-    const X_in_NatCat = Var("nat_val1_t2");
-    const Y_in_NatCat = Var("nat_val2_t2");
-
-    const HomInNatCat = HomTerm(NatCategoryTermVal, X_in_NatCat, Y_in_NatCat);
-    elabRes = elaborate(HomInNatCat, undefined, baseCtx);
-    console.log(`Hom(NatCat,X,Y) Term (norm): ${printTerm(elabRes.term)}, Type: ${printTerm(elabRes.type)}`);
-    
-    const expectedHomReduced = App(App(Var("H_repr_Nat_Global"), X_in_NatCat), Y_in_NatCat);
-    if (!areEqual(elabRes.term, normalize(expectedHomReduced, baseCtx), baseCtx)) throw new Error(`Test 2.3 failed: Hom(NatCat,X,Y) did not reduce correctly. Expected ${printTerm(normalize(expectedHomReduced,baseCtx))} Got ${printTerm(elabRes.term)}`);
-    console.log("Test 2 Passed.");
-
-
-    console.log("\n--- Test 3: IdentityMorph ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    // MyNatCat3_Global is a MkCat_ term, not abstract
-    const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
-    defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val, false); // Defined as a MkCat_
-
-    defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef"))); 
-    const anObjX_term = Var("x_obj_val_t3");
-
-    const id_x = IdentityMorph(anObjX_term); // cat_IMPLICIT will be inferred
-    // Expected type of id_x: Hom MyNatCat3_GlobalDef anObjX_term anObjX_term
-    // This should normalize to: App(App(H_repr_Nat_Global, anObjX_term), anObjX_term)
-    // (because MyNatCat3_GlobalDef is a MkCat_ and ObjTerm(MyNatCat3_GlobalDef) is NatObjRepr,
-    // and anObjX_term is of that type)
-    const expected_id_x_type_structure = HomTerm(Var("MyNatCat3_GlobalDef"), anObjX_term, anObjX_term);
-    
-    elabRes = elaborate(id_x, expected_id_x_type_structure, baseCtx);
-
-    console.log(`Term id_x: ${printTerm(elabRes.term)}`); // Should be IdentityMorph(...)
-    console.log(`Type id_x: ${printTerm(elabRes.type)}`); // Should be normalized Hom type
-
-    const idTermSolved = getTermRef(elabRes.term); // elabRes.term is already normalized
-    if (idTermSolved.tag !== 'IdentityMorph') throw new Error (`Test 3.0 failed: elaborated id_x is not IdentityMorph, but ${idTermSolved.tag}`);
-
-    if (!idTermSolved.cat_IMPLICIT) throw new Error("Test 3.1 failed: id_x cat_IMPLICIT not filled.");
-    if (!areEqual(getTermRef(idTermSolved.cat_IMPLICIT), Var("MyNatCat3_GlobalDef"), baseCtx)) {
-        throw new Error(`Test 3.1 failed: id_x.cat_IMPLICIT not resolved to MyNatCat3_GlobalDef. Got: ${printTerm(getTermRef(idTermSolved.cat_IMPLICIT!))}`);
-    }
-    
-    const expected_normalized_type = normalize(App(App(Var("H_repr_Nat_Global"), anObjX_term), anObjX_term), baseCtx);
-    if (!areEqual(elabRes.type, expected_normalized_type, baseCtx)) {
-         throw new Error(`Test 3.2 failed: id_x type mismatch. Expected ${printTerm(expected_normalized_type)}, Got ${printTerm(elabRes.type)}`);
-    }
-    console.log("Test 3 Passed.");
-
-    console.log("\n--- Test 4: ComposeMorph Inference ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    defineGlobal("C4_Global", CatTerm(), undefined, true); // C4_Global is an ABSTRACT Cat
-
-    defineGlobal("obj_x_val_t4", ObjTerm(Var("C4_Global")));
-    defineGlobal("obj_z_val_t4", ObjTerm(Var("C4_Global")));
-    const x_term_t4 = Var("obj_x_val_t4");
-    const z_term_t4 = Var("obj_z_val_t4");
-    
-    const y_hole_obj_t4 = Hole("?y_obj_t4");
-    // For y_hole_obj_t4 to be used in Hom C4_Global _ _, its type must be ObjTerm(C4_Global)
-    // This constraint will be added by check(f, Hom(C4,x,y_hole)) and check(g, Hom(C4,y_hole,z))
-    
-    const f_morph_hole = Hole("?f_xy_t4");
-    const g_morph_hole = Hole("?g_yz_t4");
-
-    // comp_gf = g_morph_hole o f_morph_hole
-    // We are providing all implicits here for ComposeMorph for this test,
-    // to ensure `check` for ComposeMorph (when expected type is HomTerm) correctly
-    // uses these provided implicits to constrain f and g.
-    const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole, Var("C4_Global"), x_term_t4, y_hole_obj_t4, z_term_t4);
-    const expectedCompType = HomTerm(Var("C4_Global"), x_term_t4, z_term_t4);
-    
-    elabRes = elaborate(comp_gf, expectedCompType, baseCtx);
-
-    console.log(`Term comp_gf: ${printTerm(elabRes.term)}`); // Should be ComposeMorph(...)
-    console.log(`Type comp_gf: ${printTerm(elabRes.type)}`); // Should be HomTerm(C4, x, z)
-
-    if(!areEqual(elabRes.type, expectedCompType, baseCtx)) throw new Error(`Test 4.0 Failed: comp_gf type not as expected. Got ${printTerm(elabRes.type)}, Expected ${printTerm(expectedCompType)}`);
-
-    const compTermSolved = elabRes.term as Term & {tag:"ComposeMorph"}; // elabRes.term is normalized
-    if (compTermSolved.tag !== 'ComposeMorph') throw new Error(`Test 4.0b failed: comp_gf did not remain ComposeMorph. Got ${compTermSolved.tag}`);
-
-    if (!compTermSolved.cat_IMPLICIT || !compTermSolved.objX_IMPLICIT || !compTermSolved.objY_IMPLICIT || !compTermSolved.objZ_IMPLICIT) {
-        throw new Error("Test 4.1 failed: ComposeMorph implicits not resolved/present as expected.");
-    }
-    if(!areEqual(getTermRef(compTermSolved.cat_IMPLICIT), Var("C4_Global"), baseCtx)) throw new Error("Test 4.1 Failed: comp.cat not C4_Global");
-    if(!areEqual(getTermRef(compTermSolved.objX_IMPLICIT), x_term_t4, baseCtx)) throw new Error("Test 4.1 Failed: comp.X not obj_x_val_t4");
-    // y_hole_obj_t4 should still be a hole after normalization if it wasn't solved by other constraints
-    // Its elaboratedType should be ObjTerm(C4_Global)
-    if(!areEqual(getTermRef(compTermSolved.objY_IMPLICIT), y_hole_obj_t4, baseCtx)) throw new Error(`Test 4.1 Failed: comp.Y not ${y_hole_obj_t4.id}. Got ${printTerm(getTermRef(compTermSolved.objY_IMPLICIT!))}`);
-    if(!areEqual(getTermRef(compTermSolved.objZ_IMPLICIT), z_term_t4, baseCtx)) throw new Error("Test 4.1 Failed: comp.Z not obj_z_val_t4");
-
-    const f_type_hole = getTermRef(f_morph_hole) as Term & {tag:"Hole"};
-    const g_type_hole = getTermRef(g_morph_hole) as Term & {tag:"Hole"};
-
-    if (!f_type_hole.elaboratedType || !g_type_hole.elaboratedType) throw new Error("Test 4.2: f or g did not get elaborated types.");
-
-    const expected_f_type = HomTerm(Var("C4_Global"), x_term_t4, y_hole_obj_t4);
-    const expected_g_type = HomTerm(Var("C4_Global"), y_hole_obj_t4, z_term_t4);
-
-    if (!areEqual(getTermRef(f_type_hole.elaboratedType), expected_f_type, baseCtx)) throw new Error(`Test 4.3: ?f_xy type mismatch. Got ${printTerm(getTermRef(f_type_hole.elaboratedType))}, expected ${printTerm(expected_f_type)}`);
-    if (!areEqual(getTermRef(g_type_hole.elaboratedType), expected_g_type, baseCtx)) throw new Error(`Test 4.4: ?g_yz type mismatch. Got ${printTerm(getTermRef(g_type_hole.elaboratedType))}, expected ${printTerm(expected_g_type)}`);
-    
-    // Check type of y_hole_obj_t4
-    const y_hole_actual_type = infer(baseCtx, y_hole_obj_t4); // Should pick up its elaborated type
-    const y_hole_expected_type = ObjTerm(Var("C4_Global"));
-    if(!areEqual(y_hole_actual_type, y_hole_expected_type, baseCtx)) {
-        throw new Error(`Test 4.5: y_hole_obj_t4 type mismatch. Got ${printTerm(y_hole_actual_type)}, expected ${printTerm(y_hole_expected_type)}`);
-    }
-    console.log("Test 4 Passed.");
-
-
-    console.log("\n--- Test 5: Rewrite rule comp (g o id) ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules(); // Rules comp_g_idX_fwd and comp_idY_f_fwd are setup
-    defineGlobal("C5_cat_global", CatTerm(), undefined, true); 
-
-    defineGlobal("x5_obj_t5", ObjTerm(Var("C5_cat_global")));
-    defineGlobal("y5_obj_t5", ObjTerm(Var("C5_cat_global")));
-    const X5_term = Var("x5_obj_t5");
-    const Y5_term = Var("y5_obj_t5");
-
-    // Rule "comp_g_idX_fwd": ComposeMorph(g_XY, id_X, C, X, X, Y) -> g_XY
-    // g_XY : Hom C X Y
-    // id_X : Hom C X X
-    defineGlobal("g_XY_concrete_t5", HomTerm(Var("C5_cat_global"), X5_term, Y5_term));
-    const g_XY_for_rule = Var("g_XY_concrete_t5");
-    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global"));
-
-    const test_term_g_o_id = ComposeMorph(g_XY_for_rule, id_X5_for_rule, 
-                                          Var("C5_cat_global"), X5_term, X5_term, Y5_term);
-    
-    elabRes = elaborate(test_term_g_o_id, undefined, baseCtx);
-    console.log(`Term (g o id_X): ${printTerm(elabRes.term)}`);
-    console.log(`Type (g o id_X): ${printTerm(elabRes.type)}`);
-
-    if (!areEqual(elabRes.term, g_XY_for_rule, baseCtx)) {
-        throw new Error(`Test 5.1 failed: (g o id_X) did not reduce to g. Got ${printTerm(elabRes.term)}, expected ${printTerm(g_XY_for_rule)}`);
-    }
-    const expectedTypeT5_1 = HomTerm(Var("C5_cat_global"), X5_term, Y5_term);
-    if (!areEqual(elabRes.type, expectedTypeT5_1, baseCtx)) {
-        throw new Error(`Test 5.1 type failed. Got ${printTerm(elabRes.type)}, expected ${printTerm(expectedTypeT5_1)}`);
-    }
-
-    // Rule "comp_idY_f_fwd": ComposeMorph(id_Y, f_XY, C, X, Y, Y) -> f_XY
-    // f_XY : Hom C X Y
-    // id_Y : Hom C Y Y
-    defineGlobal("f_XY_concrete_t5", HomTerm(Var("C5_cat_global"), X5_term, Y5_term));
-    const f_XY_for_rule = Var("f_XY_concrete_t5");
-    const id_Y5_for_rule = IdentityMorph(Y5_term, Var("C5_cat_global"));
-
-    const test_term_id_o_f = ComposeMorph(id_Y5_for_rule, f_XY_for_rule,
-                                          Var("C5_cat_global"), X5_term, Y5_term, Y5_term);
-
-    elabRes = elaborate(test_term_id_o_f, undefined, baseCtx);
-    console.log(`Term (id_Y o f): ${printTerm(elabRes.term)}`);
-    console.log(`Type (id_Y o f): ${printTerm(elabRes.type)}`);
-    if (!areEqual(elabRes.term, f_XY_for_rule, baseCtx)) {
-        throw new Error(`Test 5.2 failed: (id_Y o f) did not reduce to f. Got ${printTerm(elabRes.term)}, expected ${printTerm(f_XY_for_rule)}`);
-    }
-    const expectedTypeT5_2 = HomTerm(Var("C5_cat_global"), X5_term, Y5_term);
-     if (!areEqual(elabRes.type, expectedTypeT5_2, baseCtx)) {
-        throw new Error(`Test 5.2 type failed. Got ${printTerm(elabRes.type)}, expected ${printTerm(expectedTypeT5_2)}`);
-    }
-    console.log("Test 5 Passed.");
-}
-
-
-try {
-    runPhase1Tests();
-    console.log("\nAll Phase 1 Emdash tests passed successfully!");
-} catch (e) {
-    console.error("\n*** PHASE 1 EMdash TEST SCENARIO FAILED ***");
-    console.error((e as Error).message);
-    // console.error("Full error object:", e); // For more detailed trace if needed
-    if (e instanceof Error && e.stack) {
-        console.error(e.stack);
-    }
-}
-
-function resetMyLambdaPi_Emdash() { // If needed for more modular testing later
+export function resetMyLambdaPi_Emdash() { // If needed for more modular testing later
     resetMyLambdaPi();
 }
