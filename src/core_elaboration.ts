@@ -228,9 +228,9 @@ export function elaborate(term: Term, expectedType?: Term, initialCtx: Context =
             const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), initialCtx));
             let fcMsg = "Unknown constraint";
             if (fc) {
-                const fc_t1_print = printTerm(getTermRef(c.t1));
-                const fc_t2_print = printTerm(getTermRef(c.t2));
-                fcMsg = `${fc_t1_print} vs ${fc_t2_print} (orig: ${c.origin || 'unspecified'})`;
+                const fc_t1_print = printTerm(getTermRef(fc.t1));
+                const fc_t2_print = printTerm(getTermRef(fc.t2));
+                fcMsg = `${fc_t1_print} vs ${fc_t2_print} (orig: ${fc.origin || 'unspecified'})`;
             }
             console.error("Remaining constraints on failure during elaboration:");
             constraints.forEach(c => {
