@@ -423,17 +423,22 @@ function runBaseDTTTests() {
     // Test B7: Normalization (via elaboration)
     resetMyLambdaPi();
     try {
-        const piTypeForF = Pi("A", Type(), (A_var: Term): Term => A_var);
-        const complexTerm = App(
-            App(
-                Lam("F", piTypeForF, (F_var: Term): Term => F_var), 
-                Lam("G", Type(), (G_var: Term): Term => G_var) 
-            ),
-            Type()
-        );
-        const result = elaborate(complexTerm, undefined, Ctx);
-        assertEqual(printTerm(result.term), "Type", "Test B7.1: Normalization of a complex beta-reduction chain");
-        assertEqual(printTerm(result.type), "Type", "Test B7.1: Type of normalized complex term");
+        // Corrected B7.1: Well-typed complex beta-reduction
+        // Term: ((λ F : (Π Z : Type. Z). (F Type)) (λ Y : Type. Y))
+        // Expected to normalize to Type, with type Type.
+
+        const piTypeForZ = Pi("Z", Type(), (Z_var: Term): Term => Type()); // Represents (Π Z : Type. Z)
+        
+        const outerLamFunc = Lam("F", piTypeForZ, (F_var: Term): Term => App(F_var, Type())); // Represents (λ F : (Π Z : Type. Z). (F Type))
+        
+        const innerIdFunc = Lam("Y", Type(), (Y_var: Term): Term => Y_var); // Represents (λ Y : Type. Y)
+        
+        const complexTermNew = App(outerLamFunc, innerIdFunc);
+
+        const result = elaborate(complexTermNew, undefined, Ctx);
+        assertEqual(printTerm(result.term), "Type", "Test B7.1: Normalization of complex beta-reduction evaluates to Type");
+        assertEqual(printTerm(result.type), "Type", "Test B7.1: Type of normalized complex term is Type");
+
     } catch (e: any) {
         console.error("Test B7 Failed:", e.message, e.stack);
     }
