@@ -1417,104 +1417,69 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
 }
 
 export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): void {
-    if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Check stack depth exceeded (depth: ${stackDepth}, term ${printTerm(term)}, expType ${printTerm(expectedType)})`);
+    if (stackDepth > MAX_STACK_DEPTH) {
+        throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
+    }
+    // consoleLog(`check: term ${printTerm(term)}, expectedType ${printTerm(expectedType)}`, ctx);
 
-    const termWithImplicits = ensureImplicitsAsHoles(term); // Ensure implicits before getTermRef
-    const current = getTermRef(termWithImplicits);
-    const normExpectedType = whnf(expectedType, ctx, stackDepth + 1); // whnf expected type
+    let currentTerm = getTermRef(term); // Dereference holes fully at the start
+    let currentExpectedType = getTermRef(expectedType); // Also dereference expected type
 
-    // Handling for unannotated Lam when expected type is Pi (bidirectional rule for lambda)
-    if (current.tag === 'Lam' && !current._isAnnotated && normExpectedType.tag === 'Pi') {
-        const lamTerm = current; // This is the getTermRef'd version.
-        const expectedPi = normExpectedType;
+    // Ensure implicits are holes for relevant terms before any processing
+    if (currentTerm.tag === 'IdentityMorph' || currentTerm.tag === 'ComposeMorph') {
+        currentTerm = ensureImplicitsAsHoles(currentTerm);
+    }
 
-        // The original term (before getTermRef) is what needs to be potentially mutated
-        // for its annotation to stick for the elaboration result.
-        let lamToUpdateAnnotation : Term & {tag: 'Lam'} | undefined;
-        if (term.tag === 'Lam' && !term._isAnnotated) {
-            lamToUpdateAnnotation = term;
-        } else if (current.tag === 'Lam' && !current._isAnnotated) { // current might be term if term wasn't a Hole
-            lamToUpdateAnnotation = current;
-        }
-        // If lamToUpdateAnnotation is still undefined here, it means the original term
-        // was a Hole that resolved to an unannotated Lam. In this case, the Lam node itself
-        // is not the root `term` of the check, so mutating its annotation might be temporary
-        // for this check's scope. For robust elaboration, infer should handle this better for holes.
+    const expectedTypeNorm = whnf(currentExpectedType, ctx, stackDepth + 1);
+    // consoleLog(`check (norm expected): term ${printTerm(currentTerm)}, expectedTypeNorm ${printTerm(expectedTypeNorm)}`, ctx);
 
-        if (lamToUpdateAnnotation) {
-            lamToUpdateAnnotation.paramType = expectedPi.paramType;
-            lamToUpdateAnnotation._isAnnotated = true;
-            consoleLog(`[TRACE check Lam-Pi Rule] Annotated ${lamToUpdateAnnotation.paramName} with type ${printTerm(expectedPi.paramType)}`);
-        }
+    // Rule for checking unannotated lambda against Pi
+    if (currentTerm.tag === 'Lam' && !currentTerm._isAnnotated && expectedTypeNorm.tag === 'Pi') {
+        // consoleLog(`check: lam! ${printTerm(currentTerm)} against Pi ${printTerm(expectedTypeNorm)}`, ctx);
+        // Deep elaboration: annotate lambda with param type from Pi, then check body
+        const lamTerm = currentTerm; 
+        const expectedPi = expectedTypeNorm;
 
-        // Directly check the body now.
-        const paramName = lamTerm.paramName; // or expectedPi.paramName, should be compatible
-        const paramType = expectedPi.paramType;
-        
-        const extendedCtx = extendCtx(ctx, paramName, paramType);
-        
-        // Instantiate the lambda's original body with a Var representing its parameter.
-        // This Var uses the *original* paramName from the Lam term itself.
-        const actualBodyTerm = lamTerm.body(Var(paramName)); 
-        
-        // Instantiate the Pi-type's body type with the same Var.
-        const expectedBodyPiType = expectedPi.bodyType(Var(paramName));
+        lamTerm.paramType = expectedPi.paramType;
+        lamTerm._isAnnotated = true; 
 
-        consoleLog(`[TRACE check Lam-Pi Rule] Checking body of ${paramName} in extended context.`);
+        const extendedCtx = extendCtx(ctx, lamTerm.paramName, lamTerm.paramType);
+        const actualBodyTerm = lamTerm.body(Var(lamTerm.paramName));
+        const expectedBodyPiType = expectedPi.bodyType(Var(lamTerm.paramName)); 
         check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
         return;
     }
 
-    if (current.tag === 'Hole') {
-        if (!current.elaboratedType) {
-            current.elaboratedType = normExpectedType; // Tentatively assign type to hole
+    if (currentTerm.tag === 'Hole') {
+        // consoleLog(`check: hole! ${printTerm(currentTerm)} against ${printTerm(expectedTypeNorm)}`);
+        if (!currentTerm.elaboratedType) {
+            currentTerm.elaboratedType = expectedTypeNorm;
+        } else {
+            addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeNorm, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
         }
-        // Whether elaboratedType was just set or existed, constrain its (inferred) type with expected.
-        const inferredHoleType = infer(ctx, current, stackDepth + 1); // Infer will use/create elaboratedType
-        addConstraint(inferredHoleType, normExpectedType, `Hole ${current.id} checked against ${printTerm(normExpectedType)}`);
-        
-        // Ensure the type assigned to/expected for the hole is itself a well-formed type.
-        // This generates constraints for components of normExpectedType if it's complex.
-        check(ctx, normExpectedType, Type(), stackDepth + 1);
+        check(ctx, expectedTypeNorm, Type(), stackDepth + 1);
         return;
     }
 
-    // Specific check logic for IdentityMorph/ComposeMorph when expected is HomTerm
-    // This aligns with "Difficulties Encountered" - Solution 5
-    if (current.tag === 'IdentityMorph' && normExpectedType.tag === 'HomTerm') {
-        const idTerm = current; // implicits are holes
-        const expHom = normExpectedType;
-
-        // Constrain cat_IMPLICIT with cat from expected HomTerm
-        addConstraint(idTerm.cat_IMPLICIT!, expHom.cat, `IdentityMorph cat implicit ${printTerm(idTerm.cat_IMPLICIT!)} for ${printTerm(idTerm.obj)} vs expected Hom.cat ${printTerm(expHom.cat)}`);
-        // Constrain obj with dom and cod from expected HomTerm
-        addConstraint(idTerm.obj, expHom.dom, `IdentityMorph obj ${printTerm(idTerm.obj)} vs Hom.dom ${printTerm(expHom.dom)}`);
-        addConstraint(idTerm.obj, expHom.cod, `IdentityMorph obj ${printTerm(idTerm.obj)} vs Hom.cod ${printTerm(expHom.cod)}`);
-        
-        // Also, the object itself must be of type Obj(cat_IMPLICIT)
-        const objActualType = infer(ctx, idTerm.obj, stackDepth +1); // Infer type of object
-        addConstraint(objActualType, ObjTerm(idTerm.cat_IMPLICIT!), `Object ${printTerm(idTerm.obj)} type check: ${printTerm(objActualType)} vs Obj(${printTerm(idTerm.cat_IMPLICIT!)})`);
-        return; // Constraints are set, solver does the work.
+    if (currentTerm.tag === 'IdentityMorph' && expectedTypeNorm.tag === 'HomTerm') {
+        const inferredType = infer(ctx, currentTerm, stackDepth + 1);
+        addConstraint(inferredType, expectedTypeNorm, `check IdentityMorph: ${printTerm(currentTerm)} against ${printTerm(expectedTypeNorm)} (via infer)`);
+        return;
     }
 
-    if (current.tag === 'ComposeMorph' && normExpectedType.tag === 'HomTerm') {
-        const compTerm = current; // implicits are holes
-        const expHom = normExpectedType;
-
-        addConstraint(compTerm.cat_IMPLICIT!, expHom.cat, `ComposeMorph cat implicit ${printTerm(compTerm.cat_IMPLICIT!)} vs Hom.cat ${printTerm(expHom.cat)}`);
-        addConstraint(compTerm.objX_IMPLICIT!, expHom.dom, `ComposeMorph objX implicit ${printTerm(compTerm.objX_IMPLICIT!)} (dom of result) vs Hom.dom ${printTerm(expHom.dom)}`);
-        addConstraint(compTerm.objZ_IMPLICIT!, expHom.cod, `ComposeMorph objZ implicit ${printTerm(compTerm.objZ_IMPLICIT!)} (cod of result) vs Hom.cod ${printTerm(expHom.cod)}`);
-        
-        // objY_IMPLICIT is the intermediate object.
-        // Check f and g against HomTerms constructed with these (potentially hole) implicits.
-        check(ctx, compTerm.f, HomTerm(compTerm.cat_IMPLICIT!, compTerm.objX_IMPLICIT!, compTerm.objY_IMPLICIT!), stackDepth + 1);
-        check(ctx, compTerm.g, HomTerm(compTerm.cat_IMPLICIT!, compTerm.objY_IMPLICIT!, compTerm.objZ_IMPLICIT!), stackDepth + 1);
-        return; // Constraints set.
+    if (currentTerm.tag === 'ComposeMorph' && expectedTypeNorm.tag === 'HomTerm') {
+        const inferredType = infer(ctx, currentTerm, stackDepth + 1);
+        addConstraint(inferredType, expectedTypeNorm, `check ComposeMorph: ${printTerm(currentTerm)} against ${printTerm(expectedTypeNorm)} (via infer)`);
+        return;
     }
 
-    // Default case: infer type of `current` and add constraint `inferred === expected`.
-    const inferredType = infer(ctx, current, stackDepth + 1);
-    addConstraint(inferredType, normExpectedType, `Check general: ${printTerm(inferredType)} vs ${printTerm(normExpectedType)} for term ${printTerm(current)}`);
+
+    // Default case: infer type and check against expected
+    const inferredType = infer(ctx, currentTerm, stackDepth + 1);
+    const inferredTypeNorm = whnf(inferredType, ctx, stackDepth + 1); 
+
+    // consoleLog(`check: term ${printTerm(currentTerm)}, inferred ${printTerm(inferredTypeNorm)}, expected ${printTerm(expectedTypeNorm)}`);
+    addConstraint(inferredTypeNorm, expectedTypeNorm, `check default: inferredType(${printTerm(currentTerm)}) === expectedType(${printTerm(expectedType)})`);
 }
 
 export interface ElaborationResult { term: Term; type: Term; }
