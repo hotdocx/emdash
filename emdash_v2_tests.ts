@@ -1,8 +1,7 @@
 import {
     Term,
     Context,
-    elaborate,
-    printTerm,
+    ElaborationResult,
     Type,
     Var,
     Lam,
@@ -15,19 +14,25 @@ import {
     MkCat_,
     IdentityMorph,
     ComposeMorph,
+} from './src/core_types';
+import {
     defineGlobal,
     addRewriteRule,
-    addUnificationRule,
     resetMyLambdaPi,
     setupPhase1GlobalsAndRules,
-    ElaborationResult,
     emptyCtx,
     getTermRef,
-    infer,
     addConstraint,
+} from './src/core_context_globals';
+import {
     areEqual,
-    normalize
-} from './emdash_v2'; // Adjust path as necessary
+    normalize,
+} from './src/core_logic';
+import {
+    elaborate,
+    printTerm,
+    infer,
+} from './src/core_elaboration';
 
 // Helper function to assert equality for test cases
 function assertEqual(actual: string, expected: string, message: string) {

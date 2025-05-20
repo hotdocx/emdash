@@ -1,22 +1,22 @@
 import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph } from './core_types';
 import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName } from './core_context_globals';
-// Removed forward import: import { matchPattern, applySubst } from './core_elaboration'; 
+import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
 export const MAX_WHNF_ITERATIONS = 1000; 
 export let whnfIterationCount = 0; 
 export const MAX_STACK_DEPTH = 200; 
 
 // Forward declaration for printTerm - it will be in core_elaboration
-declare function printTerm(term: Term, boundVarsMap?: Map<string, string>, stackDepth?: number): string;
+// declare function printTerm(term: Term, boundVarsMap?: Map<string, string>, stackDepth?: number): string;
 // Forward declaration for isPatternVarName - it will be in core_elaboration
-declare function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean;
+// declare function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean;
 // Forward declaration for matchPattern and applySubst - they will be in core_elaboration
-declare function matchPattern(
-    pattern: Term, termToMatch: Term, ctx: Context,
-    patternVarDecls: PatternVarDecl[],
-    currentSubst?: Substitution, stackDepth?: number
-): Substitution | null;
-declare function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVarDecl[]): Term;
+// declare function matchPattern(
+//     pattern: Term, termToMatch: Term, ctx: Context,
+//     patternVarDecls: PatternVarDecl[],
+//     currentSubst?: Substitution, stackDepth?: number
+// ): Substitution | null;
+// declare function applySubst(term: Term, subst: Substitution, patternVarDecls: PatternVarDecl[]): Term;
 
 
 export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {

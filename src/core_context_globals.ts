@@ -1,10 +1,14 @@
 import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, CatTerm, ObjTerm, HomTerm, Type, Var, App, Pi, IdentityMorph, ComposeMorph } from './core_types';
+import { printTerm } from './core_elaboration';
 
 export let nextVarId = 0;
 export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`;
 
 export let nextHoleId = 0;
 export const freshHoleName = (): string => `?h${nextHoleId++}`;
+
+export const resetVarId = () => { nextVarId = 0; };
+export const resetHoleId = () => { nextHoleId = 0; };
 
 export let globalDefs: Map<string, GlobalDef> = new Map();
 
@@ -61,10 +65,12 @@ export function consoleLog(message?: any, ...optionalParams: any[]): void {
 }
 
 export function resetMyLambdaPi() {
-    constraints = []; globalDefs.clear();
+    constraints.length = 0; // Clear constraints by setting length to 0
+    globalDefs.clear();
     userRewriteRules.length = 0;
     userUnificationRules.length = 0;
-    nextVarId = 0; nextHoleId = 0;
+    resetVarId();
+    resetHoleId();
 }
 
 export function setupPhase1GlobalsAndRules() {
