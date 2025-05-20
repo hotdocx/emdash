@@ -172,7 +172,7 @@ The Emdash system, implemented in `emdash_v2.ts`, is structured around a core se
     *   Pattern variables are identified by `isPatternVarName`.
     *   If `pattern` is a pattern variable `pvar`:
         *   If `pvar` is `_` (wildcard), succeeds.
-        *   If `pvar` is already in `subst`, checks if `termToMatch` is structurally equal (via `areStructurallyEqualNoWhnf`) to the existing binding.
+        *   If `pvar` is already in `subst` (bound to, say, `term_bound`), checks if `termToMatch` is definitionally equal (via `areEqual(termToMatch, term_bound, ctx)`) to `term_bound`. This means the system attempts to reduce both terms using β-reduction, δ-reduction (unfolding definitions), and all applicable user-defined rewrite rules before comparing their structure. This behavior is similar to how Agda handles non-linear patterns in its rewrite rules.
         *   Otherwise, adds `pvar := termToMatch` to `subst`.
     *   Otherwise, compares tags. If different, fails.
     *   Recursively matches subterms. For HOAS terms (`Lam`, `Pi`), bodies are compared using `areEqual` under fresh variables, as direct structural matching of functions is not feasible.

@@ -513,14 +513,112 @@ function runBaseDTTTests() {
     console.log("Base DTT (MyLambdaPi) Tests Completed.");
 }
 
+// --- START OF NEW NON-LINEAR PATTERN TESTS ---
+function runNonLinearPatternTests() {
+    const CtxNL = emptyCtx;
+    console.log("\n--- Test NL: Non-Linear Pattern Matching ---");
+
+    // Define some basic types and terms for the tests
+    resetMyLambdaPi();
+    setupPhase1GlobalsAndRules(); // Basic setup
+
+    defineGlobal("NLT", Type(), undefined, true); // NLType
+    defineGlobal("nl_A", Var("NLT"));
+    defineGlobal("nl_B", Var("NLT"));
+    defineGlobal("nl_C", Var("NLT"));
+    defineGlobal("nl_R_func", Pi("arg", Var("NLT"), (_arg) => Var("NLT")), undefined, true); // R : NLT -> NLT
+
+    // Define a global that can be delta-reduced
+    // nl_A_alias will reduce to nl_A
+    defineGlobal("nl_A_alias", Var("NLT"), Var("nl_A"));
+
+    // Define a term P(arg1:NLT, arg2:NLT) -> NLT for rules
+    defineGlobal("P_func", Pi("arg1", Var("NLT"), (_) => Pi("arg2", Var("NLT"), (_) => Var("NLT"))), undefined, true);
+
+    // Rewrite Rule: P($x, $x) -> R($x)
+    // $x should have type NLT
+    const pVarX_NL = { name: "X_nl_pv", type: Var("NLT") };
+    addRewriteRule({
+        name: "P_nonlinear_xx_to_R",
+        patternVars: [pVarX_NL],
+        lhs: App(App(Var("P_func"), Var("X_nl_pv")), Var("X_nl_pv")),
+        rhs: App(Var("nl_R_func"), Var("X_nl_pv"))
+    });
+
+    // Test NL.1: P(nl_A, nl_A_alias) should match P($x,$x) and rewrite to R(nl_A)
+    // because nl_A_alias is definitionally equal to nl_A.
+    console.log("\n--- Test NL.1: Non-linear match with definitional equality ---");
+    try {
+        const term_P_A_AAlias = App(App(Var("P_func"), Var("nl_A")), Var("nl_A_alias"));
+        const elabRes1 = elaborate(term_P_A_AAlias, undefined, CtxNL);
+        const expected_R_A = App(Var("nl_R_func"), Var("nl_A"));
+        
+        console.log(`Term P(A, A_alias): ${printTerm(term_P_A_AAlias)}`);
+        console.log(`Elaborated: ${printTerm(elabRes1.term)}`);
+        console.log(`Expected rewrite to: ${printTerm(normalize(expected_R_A, CtxNL))}`);
+        
+        if (!areEqual(elabRes1.term, expected_R_A, CtxNL)) {
+            throw new Error(`Test NL.1 Failed: P(nl_A, nl_A_alias) did not rewrite to R(nl_A). Got ${printTerm(elabRes1.term)}`);
+        }
+        assertEqual(printTerm(normalize(elabRes1.type, CtxNL)), printTerm(Var("NLT")), "Test NL.1: Type of R(nl_A) is NLT");
+        console.log("Test NL.1 Passed.");
+    } catch (e: any) {
+        console.error("Test NL.1 Failed:", e.message, e.stack);
+    }
+
+    // Test NL.2: P(nl_A, nl_B) should NOT match P($x,$x) because nl_A and nl_B are not def. equal.
+    // So, it should remain P(nl_A, nl_B).
+    console.log("\n--- Test NL.2: Non-linear non-match ---");
+    try {
+        const term_P_A_B = App(App(Var("P_func"), Var("nl_A")), Var("nl_B"));
+        const elabRes2 = elaborate(term_P_A_B, undefined, CtxNL);
+
+        console.log(`Term P(A, B): ${printTerm(term_P_A_B)}`);
+        console.log(`Elaborated: ${printTerm(elabRes2.term)}`);
+
+        if (!areEqual(elabRes2.term, term_P_A_B, CtxNL)) { // Should not have rewritten
+            throw new Error(`Test NL.2 Failed: P(nl_A, nl_B) unexpectedly rewrote. Got ${printTerm(elabRes2.term)}`);
+        }
+        assertEqual(printTerm(normalize(elabRes2.type, CtxNL)), printTerm(Var("NLT")), "Test NL.2: Type of P(nl_A, nl_B) is NLT");
+        console.log("Test NL.2 Passed.");
+    } catch (e: any) {
+        console.error("Test NL.2 Failed:", e.message, e.stack);
+    }
+
+    // Test NL.3: P(nl_C, nl_C) should match P($x,$x) and rewrite to R(nl_C)
+    // (Simple direct non-linear match)
+    console.log("\n--- Test NL.3: Non-linear direct match ---");
+    try {
+        const term_P_C_C = App(App(Var("P_func"), Var("nl_C")), Var("nl_C"));
+        const elabRes3 = elaborate(term_P_C_C, undefined, CtxNL);
+        const expected_R_C = App(Var("nl_R_func"), Var("nl_C"));
+
+        console.log(`Term P(C, C): ${printTerm(term_P_C_C)}`);
+        console.log(`Elaborated: ${printTerm(elabRes3.term)}`);
+        console.log(`Expected rewrite to: ${printTerm(normalize(expected_R_C, CtxNL))}`);
+        
+        if (!areEqual(elabRes3.term, expected_R_C, CtxNL)) {
+            throw new Error(`Test NL.3 Failed: P(nl_C, nl_C) did not rewrite to R(nl_C). Got ${printTerm(elabRes3.term)}`);
+        }
+        assertEqual(printTerm(normalize(elabRes3.type, CtxNL)), printTerm(Var("NLT")), "Test NL.3: Type of R(nl_C) is NLT");
+        console.log("Test NL.3 Passed.");
+    } catch (e: any) {
+        console.error("Test NL.3 Failed:", e.message, e.stack);
+    }
+    
+    console.log("Non-Linear Pattern Tests Completed.");
+}
+// --- END OF NEW NON-LINEAR PATTERN TESTS ---
+
 // Add a main execution block or export test runner
 if (require.main === module) {
     let DEBUG_VERBOSE_orig = (globalThis as any).DEBUG_VERBOSE;
-    (globalThis as any).DEBUG_VERBOSE = true; // Disable verbose logging for tests unless specified
+    (globalThis as any).DEBUG_VERBOSE = false; // Disable verbose logging for tests unless specified
     
     try {
         runPhase1Tests();
         runBaseDTTTests();
+        runNonLinearPatternTests(); // Call the new test suite
     } catch (e) {
         console.error("A test suite threw an uncaught error:", e);
     } finally {
@@ -528,7 +626,7 @@ if (require.main === module) {
     }
 }
 
-export { runPhase1Tests, runBaseDTTTests, assertEqual, assertLogs };
+export { runPhase1Tests, runBaseDTTTests, runNonLinearPatternTests, assertEqual, assertLogs };
 
 
 if (typeof (globalThis as any).DEBUG_VERBOSE === 'undefined') {

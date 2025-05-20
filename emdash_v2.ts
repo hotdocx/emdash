@@ -1605,7 +1605,7 @@ export function matchPattern(
         const existing = subst.get(pvarName);
         if (existing) { 
             consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Var ${pvarName} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
-            const consistent = areStructurallyEqualNoWhnf(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
+            const consistent = areEqual(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
             consoleLog(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarName}: ${consistent}`);
             return consistent ? subst : null;
         }
@@ -1623,7 +1623,7 @@ export function matchPattern(
         const existing = subst.get(pvarId);
         if (existing) {
             consoleLog(`[TRACE matchPattern (${stackDepth})] Pattern Hole ${pvarId} already bound to ${printTerm(existing)}. Checking consistency with ${printTerm(currentTermStruct)}`);
-            const consistent = areStructurallyEqualNoWhnf(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
+            const consistent = areEqual(currentTermStruct, getTermRef(existing), ctx, stackDepth + 1);
             consoleLog(`[TRACE matchPattern (${stackDepth})] Consistency check for ${pvarId}: ${consistent}`);
             return consistent ? subst : null;
         }
