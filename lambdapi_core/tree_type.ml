@@ -1,0 +1,161 @@
+(** Miscellaneous types and utilities for decision trees. *)
+
+open Lplib open Base
+open Common
+
+(** {3 Atomic pattern constructor representation} *)
+
+(** Representation of an atomic pattern constructor. *)
+module TC =
+  struct
+    (** Atomic pattern constructor. Term are identified by these constructors
+        in the  trees. During  matching (in {!val:Eval.tree_walk}),  terms are
+        transformed into these constructors to get the right sub-tree. *)
+    type t =
+      | Symb of Path.t * string * int
+      (** Symbol identified by a fully qualified name (module path and name)
+          and its arity in the pattern. *)
+      | Vari of int
+      (** A bound  variable identified by a ({e  branch}-wise) unique integer.
+          These variables  are used with  a bidirectional map  (implemented as
+          two maps) to  a higher order variable. They  are also used
+          in the environment builder to refer  to the higher order variables a
+          term may depend on. *)
+      | Type
+
+    (** {b NOTE} the effective arity carried by the representation of a symbol
+        is specific to a given symbol instance. Indeed, a symbol (in the sense
+        of {!type:Term.sym}) may lead to several constructors, with different
+        effective arities. In the pattern “f g (g $x)” for example, symbol [g]
+        is used with arity 0 (first occurence) and 1 (second occurence). *)
+
+    (** [pp oc c] prints tree constructor [c] to output channel [o]. *)
+    let pp : t pp = fun oc c ->
+      match c with
+      | Vari(d)     -> int oc d
+      | Symb(_,s,a) -> out oc "%s %d-ary" s a
+      | Type        -> out oc "TYPE"
+
+    (** [compare c1 c2] implements a total order on constructors. *)
+    let compare : t -> t -> int = Stdlib.compare
+  end
+
+(** A mapping with atomic pattern constructors as keys. *)
+module TCMap = Map.Make(TC)
+
+(** {3 Decision trees for rewriting} *)
+
+(** Representation of a branching conditions. *)
+type tree_cond =
+  | CondNL of int * int
+  (** Are the terms at the given indices convertible? We enforce the invariant
+      that the first element is a point of reference, which appears in all the
+      convertibility conditions involving a given non-linear variable. *)
+  | CondFV of int * int array
+  (** Are the (indexed) bound variables (which are free at the time of the
+      checking) of the term at the given index in the array? *)
+
+(** {b NOTE} that when performing a {!constructor:tree_cond.CondFV} check, we
+    are concerned about variables that were bound in the term being reduced
+    and that may appear free while deconstructing it.  If the term being
+    reduced contains free variables, those can appear in a subterm even if not
+    in the array. *)
+
+let tree_cond : tree_cond pp = fun ppf tc ->
+  match tc with
+  | CondNL(i, j) -> out ppf "Nl(%d, %d)" i j
+  | CondFV(i, _) -> out ppf "Fv(%d)" i
+
+(** Substitution of variables in a RHS. During the filtering process, some
+    subterms of the filtered term may be stored in an array. Let [v] be that
+    array. When a leaf is reached, variables of the LHS that are bound in the
+    RHS must be substitued. An element [(p, (v, xs))] of the substitution
+    substitutes variable [v] of the RHS by term [p] of array [v]. In the case
+    of higher order patterns, [p] may need to be itself subsituted  with {e
+    bound} variables [xs] collected when traversing binders. *)
+type rhs_substit = (int * (int * int array)) list
+
+(** Representation of a tree. The definition relies on parameters since module
+    {!module:Term} depends on the current module, and that would thus produce
+    a dependency cycle. However it should be understood that parameter ['a]
+    will only be instantiated with [Term.rule]. *)
+type 'a tree =
+  | Fail
+  (** Empty decision tree, used when there are no rewriting rules. *)
+  | Leaf of rhs_substit * 'a
+  (** The value [Leaf(m, rhs)] stores the RHS [rhs] of the rewriting rule that
+      can be applied upon reaching the  leaf. The association list [m] is used
+      to construct the environment of the RHS. Note that we do not need to use
+      a map here  since we only need  to insert at the head,  and iterate over
+      the elements of the structure. *)
+  | Cond of
+      { ok   : 'a tree
+      (** Branch to follow if the condition is verified. *)
+      ; cond : tree_cond
+      (** The condition to test. *)
+      ; fail : 'a tree
+      (** Branch to follow if the condition is not verified. *) }
+  (** Conditional branching according to a condition. *)
+  | Eos of 'a tree * 'a tree
+  (** End of stack node, branches on left tree if the stack is finished, on
+     the right if it isn't.  Required when there are rules with a lower arity
+     than some other rule above and when {!field:Term.sym.sym_mstrat} is
+     {!constructor:Term.match_strat.Sequen}. *)
+  | Node of
+      { swap : int
+      (** Indicates on which term of the input stack (counting from the head),
+          the next switch is to be done. *)
+      ; store : bool
+      (** Whether to store the current term. Stored terms might be used in the
+          right hand side, are for constraint checks. *)
+      ; children : 'a tree TCMap.t
+      (** Subtrees representing the matching of available constructors. *)
+      ; abstraction : (int * 'a tree) option
+      (** Specialisation by an abstraction with the involved free variable. *)
+      ; product : (int * 'a tree) option
+      (** Specialisation by product with the involved free variable. *)
+      ; default : 'a tree option
+      (** When the available patterns contain a wildcard, this subtree is used
+          as a last resort (if none of the [children] match). *) }
+  (** Arbitrarily branching node allowing to perform switches (a switch is the
+      matching of a pattern). The node contains one subtree per switch, plus a
+      possible default case as well as an abstraction case. *)
+
+(** [tree_capacity t] computes the capacity of tree [t]. During evaluation the
+    terms that are being filtered by the patterns have to be saved in order to
+    be bound in the right hand side of the rule, or because they must verify a
+    constraint. The capacity is the maximum number of such terms that may need
+    to be saved. More precisely, let [P] be the set of all paths from the root
+    to leaves in the tree [t], and let [nb_store] be a function mapping a path
+    to the number of nodes that have the [store] tag to [true]. We then
+    define the capacity [c] of [t] is [c = max{nb_store(p) | p ∈ P}]. *)
+let rec tree_capacity : 'r tree -> int = fun tr ->
+  match tr with
+  | Leaf(_)  | Fail     -> 0
+  | Eos(l,r)            -> max (tree_capacity l) (tree_capacity r)
+  | Cond({ok; fail; _}) -> max (tree_capacity ok) (tree_capacity fail)
+  | Node(r)             ->
+      let c_ch =
+        TCMap.fold (fun _ t m -> max m (tree_capacity t)) r.children 0
+      in
+      let c_default = Option.map_default tree_capacity 0 r.default in
+      let c_abs =
+        Option.map_default (fun (_,t) -> tree_capacity t) 0 r.abstraction
+      in
+      let c_prod =
+        Option.map_default (fun (_,t) -> tree_capacity t) 0 r.product
+      in
+      let c = List.max [c_ch; c_default; c_abs; c_prod] in
+      if r.store then c + 1 else c
+
+(** A tree with its capacity and as lazy structures. For the definition of
+   the capacity, see {!val:Tree_type.tree_capacity}. Laziness allows to
+   (sometimes) avoid creating several times the same trees when the rules are
+   not given in one go. *)
+type 'a dtree = int Lazy.t * 'a tree Lazy.t
+
+(** [empty_dtree] is the empty decision tree. *)
+let empty_dtree : 'a dtree = (lazy 0, lazy Fail)
+
+(** [is_empty dt] tells whether [dt] is empty. *)
+let is_empty (dt:'a dtree) :bool = Lazy.force (snd dt) = Fail
