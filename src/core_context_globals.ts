@@ -11,6 +11,9 @@ export const freshHoleName = (): string => `?h${nextHoleId++}`;
 export const resetVarId = () => { nextVarId = 0; };
 export const resetHoleId = () => { nextHoleId = 0; };
 
+// Helper for a fresh, unnamed hole.
+export const FH = (): Term & { tag: 'Hole' } => Hole(freshHoleName());
+
 export let globalDefs: Map<string, GlobalDef> = new Map();
 
 export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean) {
