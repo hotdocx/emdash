@@ -62,26 +62,37 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
         }
         case 'App': {
             const appNode = current; // current is App
-            let elabF = appNode.func; // The function part to be elaborated/applied
-            let typeF = whnf(infer(ctx, elabF, stackDepth + 1), ctx);
+            let elabF_type_tracker = appNode.func; // Used for iterating through Pi types
+            let typeF = whnf(infer(ctx, elabF_type_tracker, stackDepth + 1), ctx);
 
             if (appNode.icit === Icit.Expl) {
-                // Insert missing leading implicit applications for elabF
+                let final_func_for_app_node = appNode.func; // This will become the (potentially modified) func part of appNode
+
                 while (typeF.tag === 'Pi' && typeF.icit === Icit.Impl) {
                     const implHole = Hole(freshHoleName() + "_auto_impl_arg_");
                     if (typeF.paramType) { (implHole as Term & {tag:'Hole'}).elaboratedType = typeF.paramType; }
-                    elabF = App(elabF, implHole, Icit.Impl); // This App node IS the one for the implicit arg
-                    typeF = whnf(typeF.bodyType(implHole), ctx);
+                    
+                    final_func_for_app_node = App(final_func_for_app_node, implHole, Icit.Impl);
+                    // For the next iteration of type checking the Pi chain:
+                    elabF_type_tracker = final_func_for_app_node; // The type of this new App becomes the next typeF
+                    typeF = whnf(typeF.bodyType(implHole), ctx); // typeF is now the type *after* the implicit application
                 }
-                // After loop, typeF should be Pi _ Icit.Expl expectedArgType resultBodyType
+
+                // Update the original appNode's function if implicits were inserted
+                if (appNode.tag === 'App' && appNode.func !== final_func_for_app_node) {
+                    appNode.func = final_func_for_app_node;
+                }
+
                 if (!(typeF.tag === 'Pi' && typeF.icit === Icit.Expl)) {
-                    throw new Error(`Type error in App (explicit): function ${printTerm(elabF)} of type ${printTerm(typeF)} does not expect an explicit argument for ${printTerm(appNode.arg)}.`);
+                    throw new Error(`Type error in App (explicit): function ${printTerm(appNode.func)} of type ${printTerm(typeF)} does not expect an explicit argument for ${printTerm(appNode.arg)}.`);
                 }
                 check(ctx, appNode.arg, typeF.paramType, stackDepth + 1);
                 return whnf(typeF.bodyType(appNode.arg), ctx);
             } else { // appNode.icit === Icit.Impl
+                // No auto-insertion for explicit implicit applications {e.g., f {Nat}}
+                // We directly check if typeF is an implicit Pi.
                 if (!(typeF.tag === 'Pi' && typeF.icit === Icit.Impl)) {
-                    throw new Error(`Type error in App (implicit): function ${printTerm(elabF)} of type ${printTerm(typeF)} does not expect an implicit argument for ${printTerm(appNode.arg)}.`);
+                    throw new Error(`Type error in App (implicit): function ${printTerm(appNode.func)} of type ${printTerm(typeF)} does not expect an implicit argument for ${printTerm(appNode.arg)}.`);
                 }
                 check(ctx, appNode.arg, typeF.paramType, stackDepth + 1);
                 return whnf(typeF.bodyType(appNode.arg), ctx);
