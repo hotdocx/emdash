@@ -10,7 +10,7 @@ import {
     cloneTerm, setDebugVerbose, getDebugVerbose // Use getter/setter for DEBUG_VERBOSE
 } from './src/core_context_globals';
 import {
-    areEqual, normalize, whnf, unify // Removed UnifyResult from here
+    areEqual, normalize, whnf, unify, solveConstraints // Removed UnifyResult from here
 } from './src/core_logic';
 import {
     elaborate, printTerm, infer, check, isPatternVarName, matchPattern, ElaborationOptions
@@ -181,6 +181,7 @@ function runImplicitArgumentTests() {
     assertEqual(printTerm(elabRes.type), "Nat", "IA1.2: Type of (constId five) should be Nat");
 
     resetMyLambdaPi();
+    setDebugVerbose(true);
     defineGlobal("Nat", Type(), undefined, true);
     const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
     const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param); 
@@ -208,6 +209,7 @@ function runImplicitArgumentTests() {
 
 
     resetMyLambdaPi();
+    setDebugVerbose(true);
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); 
@@ -221,7 +223,26 @@ function runImplicitArgumentTests() {
     const term_f_a = App(App(Var("f_inj"), Var("Nat"), Icit.Impl), Var("a_val"), Icit.Expl);
     const term_f_h1 = App(App(Var("f_inj"), Var("Nat"), Icit.Impl), hole1, Icit.Expl);
     addConstraint(term_f_a, term_f_h1, "IA3.1 Constraint: f_inj a = f_inj ?h1 (injective)");
-    elaborate(hole1, Var("Nat"), ctx); 
+    solveConstraints(ctx);
+    console.log(`[DEBUG CHECK IA3.1] DEBUG_VERBOSE before elaborate(hole1): ${getDebugVerbose()}`);
+    elaborate(hole1, Var("Nat"), ctx);
+
+    console.log(`[TEST IA3.1] After elaborate for ?h1_ia3:`);
+    console.log(`[TEST IA3.1]   hole1 direct: ${printTerm(hole1)}`);
+    const hole1Ref = getTermRef(hole1);
+    console.log(`[TEST IA3.1]   getTermRef(hole1): ${printTerm(hole1Ref)}`);
+    // For more detailed structure inspection of the hole object itself:
+    console.log(`[TEST IA3.1]   hole1 object structure:`, JSON.stringify(hole1, (key, value) => {
+        if (value && typeof value === 'object' && value.tag && typeof value.body === 'function') return `${value.tag} (body as func)`; // Avoid serializing functions
+        if (value && typeof value === 'object' && value.tag && typeof value.bodyType === 'function') return `${value.tag} (bodyType as func)`;
+        if (typeof value === 'function') return '<function>';
+        return value;
+    }, 2));
+    if (hole1.tag === 'Hole' && hole1.ref) {
+        console.log(`[TEST IA3.1]   hole1.ref direct: ${printTerm(hole1.ref)}`);
+    }
+
+
     assert(areEqual(getTermRef(hole1), Var("a_val"), ctx), "IA3.1: For injective f_inj, (f_inj a = f_inj ?h1) should solve ?h1 to a_val");
 
     resetMyLambdaPi();
@@ -265,6 +286,8 @@ if (require.main === module) {
     setDebugVerbose(false); 
     
     try {
+        setDebugVerbose(true);
+        console.log(`[DEBUG CHECK] DEBUG_VERBOSE is initially: ${getDebugVerbose()}`);
         runPhase1Tests();
         // runNonLinearPatternTests(); 
         runImplicitArgumentTests();

@@ -342,8 +342,8 @@ export function elaborate(
 ): ElaborationResult {
     const originalConstraints = [...constraints];
     constraints.length = 0;
-    resetHoleId();
-    resetVarId();
+    // resetHoleId();
+    // resetVarId();
 
     let finalTermToReport: Term;
     let finalTypeToReport: Term;
