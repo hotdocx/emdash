@@ -233,10 +233,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else {
             addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeWhnf, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
         }
-        // Ensure the expected type (which is now the hole's type) is itself a Type.
-        // This might be too strong if the hole is, e.g., a function.
-        // The constraint system should handle this naturally.
-        // check(ctx, expectedTypeWhnf, Type(), stackDepth + 1); // This seems problematic if expectedType is not Type.
         return;
     }
 
@@ -245,9 +241,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     addConstraint(whnf(inferredType, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(currentTerm)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
 }
 
-export interface ElaborationOptions {
-    normalizeResultTerm?: boolean;
-}
 
 export function elaborate(
     term: Term,
@@ -383,15 +376,18 @@ export function matchPattern(
             if (lamP._isAnnotated !== lamT._isAnnotated) return null;
             let tempSubst = subst;
             if (lamP._isAnnotated) {
-                if (!lamP.paramType || !lamT.paramType) return null;
+                if (!lamP.paramType || !lamT.paramType) return null; // Both must have types if annotated
                  const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, tempSubst, stackDepth + 1);
                  if (!sType) return null;
                  tempSubst = sType;
             }
             const freshV = Var(freshVarName(lamP.paramName));
-            const paramTypeForCtx = lamP.paramType ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
+            // Use actual param type from pattern if available for context, otherwise a hole.
+            const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
             const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
-            return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
+            // Compare bodies under the fresh variable and extended context
+            // HOAS equality: instantiate with the same fresh var and compare results.
+             return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': {
             const piP = rtPattern; const piT = rtTermToMatch as Term & {tag:'Pi'};
@@ -399,6 +395,7 @@ export function matchPattern(
             if (!sType) return null;
             const freshV = Var(freshVarName(piP.paramName));
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
+            // HOAS equality for body types
             return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm':
@@ -426,7 +423,9 @@ export function matchPattern(
                 if (!idT.cat_IMPLICIT) return null; // Term must also have it
                 s = matchPattern(idP.cat_IMPLICIT, idT.cat_IMPLICIT, ctx, patternVarDecls, s, stackDepth +1);
                 if (!s) return null;
-            } // If pattern omits implicit, it's a wildcard for that slot
+            } // If pattern omits implicit, it's a wildcard for that slot (matches if term also omits or has any)
+              // This logic might need refinement: if idP.cat_IMPLICIT is undefined, does it match idT.cat_IMPLICIT if defined?
+              // Current: if idP.cat_IMPLICIT, idT.cat_IMPLICIT must exist and match. If !idP.cat_IMPLICIT, it's fine.
             return matchPattern(idP.obj, idT.obj, ctx, patternVarDecls, s, stackDepth + 1);
         }
         case 'ComposeMorph': {
@@ -435,11 +434,11 @@ export function matchPattern(
             const implicitsP = [compP.cat_IMPLICIT, compP.objX_IMPLICIT, compP.objY_IMPLICIT, compP.objZ_IMPLICIT];
             const implicitsT = [compT.cat_IMPLICIT, compT.objX_IMPLICIT, compT.objY_IMPLICIT, compT.objZ_IMPLICIT];
             for(let i=0; i<implicitsP.length; i++) {
-                if (implicitsP[i]) {
-                    if (!implicitsT[i]) return null;
+                if (implicitsP[i]) { // Pattern specifies an implicit
+                    if (!implicitsT[i]) return null; // Term must also have it
                     s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1);
                     if (!s) return null;
-                }
+                } // If pattern omits an implicit, it's a wildcard for that slot.
             }
             s = matchPattern(compP.g, compT.g, ctx, patternVarDecls, s, stackDepth + 1);
             if (!s) return null;
@@ -473,12 +472,19 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             return App(applySubst(current.func, subst, patternVarDecls), applySubst(current.arg, subst, patternVarDecls), current.icit);
         case 'Lam': {
             const lam = current;
-            const lamParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
-            const newLam = Lam(lam.paramName, lam.icit, lamParamType,
-                (v_arg: Term) => applySubst(lam.body(v_arg), subst, patternVarDecls));
-            (newLam as Term & {tag:'Lam'})._isAnnotated = lam._isAnnotated;
-            if(lamParamType) (newLam as Term & {tag:'Lam'}).paramType = lamParamType;
-            return newLam;
+            const appliedParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
+            const originalBodyFn = lam.body;
+            const newBodyFn = (v_arg: Term): Term => applySubst(originalBodyFn(v_arg), subst, patternVarDecls);
+
+            // Direct construction for robustness
+            return {
+                tag: 'Lam',
+                paramName: lam.paramName,
+                icit: lam.icit,
+                paramType: appliedParamType,
+                body: newBodyFn,
+                _isAnnotated: lam._isAnnotated
+            };
         }
         case 'Pi': {
             const pi = current;
@@ -545,10 +551,14 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             let typeInfo = "";
             if (current.elaboratedType && getTermRef(current.elaboratedType) !== current) { // Avoid self-reference in print
                 const elabTypeRef = getTermRef(current.elaboratedType);
-                if (!((elabTypeRef.tag === 'Hole' && elabTypeRef.id === current.id && elabTypeRef.elaboratedType === current.elaboratedType) ||
-                      (elabTypeRef.tag === 'Type' && term.tag === 'Type'))) {
+                // Check if elabTypeRef is a self-referential hole or a simple Type for a Type term to avoid verbose prints
+                const isSelfRefPrint = (elabTypeRef.tag === 'Hole' && elabTypeRef.id === current.id && elabTypeRef.elaboratedType === current.elaboratedType);
+                const isTypeForType = (elabTypeRef.tag === 'Type' && term.tag === 'Type'); // original term, not current
+                
+                if (!isSelfRefPrint && !isTypeForType) {
                     const elabTypePrint = printTerm(elabTypeRef, new Map(boundVarsMap), stackDepth + 1);
-                     if(!elabTypePrint.startsWith("?h") || elabTypePrint.length > current.id.length +3 ) {
+                     // Only add type info if it's not just another hole id or excessively simple
+                     if(!elabTypePrint.startsWith("?h") || elabTypePrint.length > current.id.length + 3 ) { // Heuristic
                         typeInfo = `(:${elabTypePrint})`;
                     }
                 }
@@ -563,7 +573,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             const typeAnnotation = (current._isAnnotated && current.paramType)
                 ? ` : ${printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1)}`
                 : '';
-            const bodyTerm = current.body(Var(current.paramName));
+            const bodyTerm = current.body(Var(current.paramName)); // Instantiate with original paramName for HOAS
             const binder = current.icit === Icit.Impl ? `{${paramDisplayName}${typeAnnotation}}` : `(${paramDisplayName}${typeAnnotation})`;
             return `(λ ${binder}. ${printTerm(bodyTerm, newBoundVars, stackDepth + 1)})`;
         }
@@ -577,7 +587,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             newBoundVars.set(current.paramName, paramDisplayName);
 
             const paramTypeStr = printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1);
-            const bodyTypeTerm = current.bodyType(Var(current.paramName));
+            const bodyTypeTerm = current.bodyType(Var(current.paramName)); // Instantiate with original paramName
             const binder = current.icit === Icit.Impl ? `{${paramDisplayName} : ${paramTypeStr}}` : `(${paramDisplayName} : ${paramTypeStr})`;
             return `(Π ${binder}. ${printTerm(bodyTypeTerm, newBoundVars, stackDepth + 1)})`;
         }
@@ -589,7 +599,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(mkCat_ {O=${printTerm(current.objRepresentation, new Map(boundVarsMap), stackDepth + 1)}, H=${printTerm(current.homRepresentation, new Map(boundVarsMap), stackDepth + 1)}, C=${printTerm(current.composeImplementation, new Map(boundVarsMap), stackDepth + 1)}})`;
         case 'IdentityMorph': {
             let catIdStr = "";
-            if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') {
+            if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') { // Only print if not a remaining hole
                  catIdStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
             }
             return `(id${catIdStr} ${printTerm(current.obj, new Map(boundVarsMap), stackDepth + 1)})`;
@@ -598,6 +608,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             let catCompStr = "";
             if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') {
                  catCompStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
+                 // Could also print objX, objY, objZ if they are not holes and add value
             }
             return `(${printTerm(current.g, new Map(boundVarsMap), stackDepth + 1)} ∘${catCompStr} ${printTerm(current.f, new Map(boundVarsMap), stackDepth + 1)})`;
         }

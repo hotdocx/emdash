@@ -2,18 +2,18 @@ import {
     Term, Context, ElaborationResult, Icit,
     Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph,
-    PatternVarDecl, ElaborationOptions
+    PatternVarDecl
 } from './src/core_types';
 import {
     defineGlobal, addRewriteRule, resetMyLambdaPi, setupPhase1GlobalsAndRules,
     emptyCtx, getTermRef, addConstraint, StoredRewriteRule, userRewriteRules,
-    cloneTerm
+    cloneTerm, DEBUG_VERBOSE // Import DEBUG_VERBOSE
 } from './src/core_context_globals';
 import {
     areEqual, normalize, whnf, unify, UnifyResult
 } from './src/core_logic';
 import {
-    elaborate, printTerm, infer, check, isPatternVarName, matchPattern
+    elaborate, printTerm, infer, check, isPatternVarName, matchPattern, ElaborationOptions
 } from './src/core_elaboration';
 
 // Helper function to assert equality for test cases
@@ -28,8 +28,8 @@ function assertEqual(actual: string, expected: string, message: string) {
 }
 function assert(condition: boolean, message: string) {
     if (!condition) {
-        console.error(`Assertion Failed: ${message}`);
-        throw new Error(`Assertion Failed: ${message}`);
+            console.error(`Assertion Failed: ${message}`);
+            throw new Error(`Assertion Failed: ${message}`);
     }
     console.log(`Assertion Passed: ${message}`);
 }
@@ -69,7 +69,7 @@ function runPhase1Tests() {
         Pi("f_morph", Icit.Expl, App(App(Var("H_repr_Nat_Global"), X_term, Icit.Expl), Y_term, Icit.Expl), _f_term =>
         App(App(Var("H_repr_Nat_Global"), X_term, Icit.Expl), Z_term, Icit.Expl)
         ))))), undefined, true);
-
+    
     const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
     assert(elabRes.type.tag === 'CatTerm', "Test 2.1: MkCat_ type is not Cat");
@@ -97,14 +97,15 @@ function runPhase1Tests() {
 
     defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef")), undefined, true);
     const anObjX_term = Var("x_obj_val_t3");
-    const id_x = IdentityMorph(anObjX_term);
+    const id_x = IdentityMorph(anObjX_term); // Implicit cat should be inferred
     const expected_id_x_type_structure = HomTerm(Var("MyNatCat3_GlobalDef"), anObjX_term, anObjX_term);
     elabRes = elaborate(id_x, expected_id_x_type_structure, baseCtx);
 
     const idTermSolved = getTermRef(elabRes.term) as Term & {tag: 'IdentityMorph'};
     assert(idTermSolved.tag === 'IdentityMorph', `Test 3.0 failed: elaborated id_x is not IdentityMorph, but ${idTermSolved.tag}`);
     assert(!!idTermSolved.cat_IMPLICIT, "Test 3.1a failed: id_x cat_IMPLICIT not filled.");
-    assert(areEqual(getTermRef(idTermSolved.cat_IMPLICIT!), Var("MyNatCat3_GlobalDef"), baseCtx), `Test 3.1b failed: id_x.cat_IMPLICIT not resolved. Got: ${printTerm(getTermRef(idTermSolved.cat_IMPLICIT!))}`);
+    assert(areEqual(getTermRef(idTermSolved.cat_IMPLICIT!), Var("MyNatCat3_GlobalDef"), baseCtx), `Test 3.1b failed: id_x.cat_IMPLICIT not resolved. Expected ${printTerm(Var("MyNatCat3_GlobalDef"))}, Got: ${printTerm(getTermRef(idTermSolved.cat_IMPLICIT!))}`);
+    
     const expected_normalized_type_t3 = normalize(App(App(Var("H_repr_Nat_Global"), anObjX_term, Icit.Expl), anObjX_term, Icit.Expl), baseCtx);
     assert(areEqual(elabRes.type, expected_normalized_type_t3, baseCtx), `Test 3.2 failed: id_x type mismatch. Expected ${printTerm(expected_normalized_type_t3)}, Got ${printTerm(elabRes.type)}`);
     console.log("Test 3 Passed.");
@@ -120,23 +121,32 @@ function runPhase1Tests() {
     const f_morph_hole = Hole("?f_xy_t4");
     const g_morph_hole = Hole("?g_yz_t4");
 
+    // Provide all implicits for ComposeMorph to guide inference for f and g
     const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole, Var("C4_Global"), x_term_t4, y_hole_obj_t4, z_term_t4);
     const expectedCompType = HomTerm(Var("C4_Global"), x_term_t4, z_term_t4);
     elabRes = elaborate(comp_gf, expectedCompType, baseCtx);
 
-    assert(areEqual(elabRes.type, expectedCompType, baseCtx), `Test 4.0 Failed: comp_gf type not as expected.`);
+    assert(areEqual(elabRes.type, expectedCompType, baseCtx), `Test 4.0 Failed: comp_gf type not as expected. Expected ${printTerm(expectedCompType)}, Got ${printTerm(elabRes.type)}`);
     const compTermSolved = elabRes.term as Term & {tag:"ComposeMorph"};
     assert(compTermSolved.tag === 'ComposeMorph', `Test 4.0b failed: comp_gf did not remain ComposeMorph.`);
     assert(!!compTermSolved.cat_IMPLICIT && !!compTermSolved.objX_IMPLICIT && !!compTermSolved.objY_IMPLICIT && !!compTermSolved.objZ_IMPLICIT, "Test 4.1 failed: ComposeMorph implicits not resolved/present.");
-    const f_type_hole = getTermRef(f_morph_hole) as Term & {tag:"Hole"};
-    const g_type_hole = getTermRef(g_morph_hole) as Term & {tag:"Hole"};
-    assert(!!f_type_hole.elaboratedType && !!g_type_hole.elaboratedType, "Test 4.2: f or g did not get elaborated types.");
+    
+    const f_hole_ref = getTermRef(f_morph_hole) as Term & {tag:"Hole"};
+    const g_hole_ref = getTermRef(g_morph_hole) as Term & {tag:"Hole"};
+    assert(!!f_hole_ref.elaboratedType, "Test 4.2a: f_morph_hole did not get an elaborated type.");
+    assert(!!g_hole_ref.elaboratedType, "Test 4.2b: g_morph_hole did not get an elaborated type.");
+    // Expected type for f_morph_hole: Hom C4_Global x_term_t4 ?y_obj_t4
+    // Expected type for g_morph_hole: Hom C4_Global ?y_obj_t4 z_term_t4
+    const expected_f_type = HomTerm(Var("C4_Global"), x_term_t4, y_hole_obj_t4);
+    const expected_g_type = HomTerm(Var("C4_Global"), y_hole_obj_t4, z_term_t4);
+    assert(areEqual(getTermRef(f_hole_ref.elaboratedType!), expected_f_type, baseCtx), `Test 4.3a: f_morph_hole type mismatch. Expected ${printTerm(expected_f_type)}, Got ${printTerm(getTermRef(f_hole_ref.elaboratedType!))}`);
+    assert(areEqual(getTermRef(g_hole_ref.elaboratedType!), expected_g_type, baseCtx), `Test 4.3b: g_morph_hole type mismatch. Expected ${printTerm(expected_g_type)}, Got ${printTerm(getTermRef(g_hole_ref.elaboratedType!))}`);
     console.log("Test 4 Passed.");
 
 
     console.log("\n--- Test 5: Rewrite rule comp (g o id) ---");
     resetMyLambdaPi(); setupPhase1GlobalsAndRules(); // Rules already added here via setup
-    defineGlobal("C5_cat_global", CatTerm(), undefined, true);
+    defineGlobal("C5_cat_global", CatTerm(), undefined, true); 
     defineGlobal("x5_obj_t5", ObjTerm(Var("C5_cat_global")), undefined, true);
     defineGlobal("y5_obj_t5", ObjTerm(Var("C5_cat_global")), undefined, true);
     const X5_term = Var("x5_obj_t5");
@@ -144,10 +154,10 @@ function runPhase1Tests() {
 
     defineGlobal("g_XY_concrete_t5", HomTerm(Var("C5_cat_global"), X5_term, Y5_term), undefined, true);
     const g_XY_for_rule = Var("g_XY_concrete_t5");
-    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global"));
+    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global")); // Explicit cat for clarity in test setup
     const test_term_g_o_id = ComposeMorph(g_XY_for_rule, id_X5_for_rule, Var("C5_cat_global"), X5_term, X5_term, Y5_term);
-    elabRes = elaborate(test_term_g_o_id, undefined, baseCtx);
-    assert(areEqual(elabRes.term, g_XY_for_rule, baseCtx), `Test 5.1 failed: (g o id_X) did not reduce to g.`);
+    elabRes = elaborate(test_term_g_o_id, undefined, baseCtx); // Type is Hom C5_cat_global X5_term Y5_term
+    assert(areEqual(elabRes.term, g_XY_for_rule, baseCtx), `Test 5.1 failed: (g o id_X) did not reduce to g. Got ${printTerm(elabRes.term)} Expected ${printTerm(g_XY_for_rule)}`);
     console.log("Test 5 Passed.");
 }
 
@@ -159,11 +169,9 @@ function runImplicitArgumentTests() {
     resetMyLambdaPi();
     // constId : {A:Type} -> A -> A = \{A} x. x
     defineGlobal("constId",
-        Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _x => A)),
-        Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x))
+        Pi("A", Icit.Impl, Type(), A_param => Pi("x", Icit.Expl, A_param, _x_param => A_param)),
+        Lam("A_lam", Icit.Impl, Type(), A_term => Lam("x_lam", Icit.Expl, A_term, x_term => x_term))
     );
-    // constId NatType 5 (where NatType is Type, 5 is NatType after type checking for 5)
-    // This requires a placeholder for 5, let's use a Var assumed to be NatType
     defineGlobal("Nat", Type(), undefined, true);
     defineGlobal("five", Var("Nat"), undefined, true);
 
@@ -178,66 +186,61 @@ function runImplicitArgumentTests() {
     assertEqual(printTerm(elabRes.type), "Nat", "IA1.2: Type is Nat");
 
     // Test IA2: Check with implicit lambda insertion
-    // Type of constId is {A:Type} -> A -> A
-    // We check (λx.x) against this type.
     resetMyLambdaPi();
     defineGlobal("Nat", Type(), undefined, true);
-    const idFuncType = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _x => A));
-    const simpleId = Lam("x", Icit.Expl, Var("Nat") /* assume Nat for x */, x => x); // λ (x:Nat). x
-    // This check should insert Lam("A", Icit.Impl, Type(), A_impl => simpleId_where_x_has_type_A_impl)
-    // Forcing Nat as type of x in simpleId means it won't unify with {A:Type}A->A directly.
-    // Let's make simpleId polymorphic in its argument type for the check
-    const polySimpleId = Lam("y", Icit.Expl, Hole("?Y_param_type"), y => y); // λ(y:_).y
+    const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
+    const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param); // λ(y:_).y
 
     elabRes = elaborate(polySimpleId, idFuncType, ctx);
-    // Expected elaborated term: \{A:Type} (λ (y:A). y)
     const elabTerm = elabRes.term;
     assert(elabTerm.tag === 'Lam' && elabTerm.icit === Icit.Impl, "IA2.1: Outer lambda implicit");
     assert(elabTerm.paramType?.tag === 'Type', "IA2.1: Outer param type is Type");
-    const innerLam = (elabTerm as Term & {tag:'Lam'}).body(Type());
-    assert(innerLam.tag === 'Lam' && innerLam.icit === Icit.Expl, "IA2.1: Inner lambda explicit");
-    // Check that the hole ?Y_param_type got resolved to A (from the Pi)
-    const finalYParamType = (getTermRef(innerLam) as Term & {tag:'Lam'}).paramType;
-    assert(finalYParamType?.tag === 'Var' && finalYParamType.name === (elabTerm as Term & {tag:'Lam'}).paramName, "IA2.1: Inner param type is outer A");
+    
+    const outerLamParamName = (elabTerm as Term & {tag:'Lam'}).paramName;
+    const innerLamTerm = (elabTerm as Term & {tag:'Lam'}).body(Var(outerLamParamName)); // Instantiate with the var for outerLam's param
+    const finalInnerLam = getTermRef(innerLamTerm) as Term & {tag:'Lam'};
+
+    assert(finalInnerLam.tag === 'Lam' && finalInnerLam.icit === Icit.Expl, "IA2.1: Inner lambda explicit");
+    assert(finalInnerLam._isAnnotated, "IA2.1: Inner lambda should be annotated");
+    assert(!!finalInnerLam.paramType, "IA2.1: Inner lambda paramType should be defined");
+    
+    const finalYParamType = finalInnerLam.paramType!; 
+    assert(finalYParamType.tag === 'Var' && finalYParamType.name === outerLamParamName, "IA2.1: Inner param type should be the var bound by outer implicit lambda. Expected Var("+outerLamParamName+"), Got "+printTerm(finalYParamType));
 
 
     // Test IA3: Injectivity
     resetMyLambdaPi();
-    defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => Pi("y", Icit.Expl, T, _ => Type()))));
-    defineGlobal("refl", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, x => App(App(App(Var("Eq"),T,Icit.Impl),x,Icit.Expl),x,Icit.Expl) )));
-    defineGlobal("f", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, true); // f is injective
-    defineGlobal("g", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, false); // g is NOT injective
+    defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
+    defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
+    defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); // f_inj is injective
+    defineGlobal("g_noninj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, false); // g_noninj is NOT injective
 
     defineGlobal("Nat", Type(), undefined, true);
-    defineGlobal("a", Var("Nat"), undefined, true);
-    defineGlobal("b", Var("Nat"), undefined, true);
+    defineGlobal("a_val", Var("Nat"), undefined, true);
+    defineGlobal("b_val", Var("Nat"), undefined, true);
 
-    // f {Nat} a = f {Nat} b  SHOULD imply a = b (if unification uses injectivity)
-    // For testing, we'd set up a unification problem constraint.
-    // This requires more direct use of unify, or a test through rewrite rules.
-    // For now, this serves as a setup. We can test unification behavior separately.
     const hole1 = Hole("?h1_ia3");
-    const hole2 = Hole("?h2_ia3");
-    const term_f_a = App(App(Var("f"), Var("Nat"), Icit.Impl), Var("a"), Icit.Expl);
-    const term_f_b = App(App(Var("f"), Var("Nat"), Icit.Impl), hole1, Icit.Expl); // hole1 should become 'a' if f a = f ?h1
-    addConstraint(term_f_a, term_f_b, "IA3.1: f a = f ?h1 (injective)");
-    elaborate(hole1, Var("Nat"), ctx); // Elaborate something to run solveConstraints
-    assert(areEqual(getTermRef(hole1), Var("a"), ctx), "IA3.1: Injectivity for f solved ?h1 to a");
+    const term_f_a = App(App(Var("f_inj"), Var("Nat"), Icit.Impl), Var("a_val"), Icit.Expl);
+    const term_f_h1 = App(App(Var("f_inj"), Var("Nat"), Icit.Impl), hole1, Icit.Expl);
+    addConstraint(term_f_a, term_f_h1, "IA3.1: f_inj a = f_inj ?h1 (injective)");
+    elaborate(hole1, Var("Nat"), ctx); // Elaborate something to run solveConstraints, with ?h1 expected to be Nat
+    assert(areEqual(getTermRef(hole1), Var("a_val"), ctx), "IA3.1: Injectivity for f_inj solved ?h1 to a_val");
 
-    resetMyLambdaPi(); // Reset constraints etc.
+    resetMyLambdaPi(); 
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => Pi("y", Icit.Expl, T, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, x => App(App(App(Var("Eq"),T,Icit.Impl),x,Icit.Expl),x,Icit.Expl) )));
-    defineGlobal("f", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, true); // f is injective
-    defineGlobal("g", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, false); // g is NOT injective
+    defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, true); 
+    defineGlobal("g_noninj", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, false);
     defineGlobal("Nat", Type(), undefined, true);
-    defineGlobal("a", Var("Nat"), undefined, true);
-    defineGlobal("b", Var("Nat"), undefined, true);
+    defineGlobal("a_val", Var("Nat"), undefined, true);
+    // defineGlobal("b_val", Var("Nat"), undefined, true); // b_val not used in this part of test
+
     const hole3 = Hole("?h3_ia3");
-    const term_g_a = App(App(Var("g"), Var("Nat"), Icit.Impl), Var("a"), Icit.Expl);
-    const term_g_b = App(App(Var("g"), Var("Nat"), Icit.Impl), hole3, Icit.Expl); // hole3 should NOT become 'a'
-    addConstraint(term_g_a, term_g_b, "IA3.2: g a = g ?h3 (non-injective)");
-    elaborate(hole3, Var("Nat"), ctx);
-    assert(getTermRef(hole3).tag === 'Hole', "IA3.2: Non-injectivity for g means ?h3 remains a hole");
+    const term_g_a = App(App(Var("g_noninj"), Var("Nat"), Icit.Impl), Var("a_val"), Icit.Expl);
+    const term_g_h3 = App(App(Var("g_noninj"), Var("Nat"), Icit.Impl), hole3, Icit.Expl); 
+    addConstraint(term_g_a, term_g_h3, "IA3.2: g_noninj a = g_noninj ?h3 (non-injective)");
+    elaborate(hole3, Var("Nat"), ctx); // Elaborate hole3, expecting it to be Nat
+    assert(getTermRef(hole3).tag === 'Hole', "IA3.2: Non-injectivity for g_noninj means ?h3 remains a hole, not solved to a_val");
 
     console.log("Implicit Argument Tests Completed.");
 }
@@ -251,7 +254,6 @@ function runElaborateNonNormalizedTest() {
     const elabOpts: ElaborationOptions = { normalizeResultTerm: false };
     const elabRes = elaborate(termRaw, undefined, ctx, elabOpts);
 
-    // The term should be App(Lam(...), Type), not its beta-reduced form 'Type'
     assert(elabRes.term.tag === 'App', "ElabNoNorm.1: Result term should be App");
     if (elabRes.term.tag === 'App') {
         assert(elabRes.term.func.tag === 'Lam', "ElabNoNorm.1: Func part should be Lam");
@@ -264,25 +266,27 @@ function runElaborateNonNormalizedTest() {
 
 // Add a main execution block or export test runner
 if (require.main === module) {
-    let DEBUG_VERBOSE_orig = (globalThis as any).DEBUG_VERBOSE;
-    (globalThis as any).DEBUG_VERBOSE = false; // Disable verbose logging for tests unless specified
-
+    let originalDebugVerbose = DEBUG_VERBOSE;
+    DEBUG_VERBOSE = false; // Disable verbose logging for tests unless specified
+    
     try {
         runPhase1Tests();
         // runBaseDTTTests(); // These might be outdated or overlap, focus on new ones.
-        runNonLinearPatternTests();
+        // runNonLinearPatternTests(); // This function is not defined in the current file scope.
         runImplicitArgumentTests();
         runElaborateNonNormalizedTest();
 
     } catch (e) {
         console.error("A test suite threw an uncaught error:", e);
     } finally {
-        (globalThis as any).DEBUG_VERBOSE = DEBUG_VERBOSE_orig;
+        DEBUG_VERBOSE = originalDebugVerbose; // Restore original DEBUG_VERBOSE setting
     }
 }
 
-export { runPhase1Tests, runImplicitArgumentTests, assertEqual, assert };
+// Exporting for potential external test runners, though not strictly necessary for `if require.main`
+export { runPhase1Tests, runImplicitArgumentTests, runElaborateNonNormalizedTest, assertEqual, assert };
 
-if (typeof (globalThis as any).DEBUG_VERBOSE === 'undefined') {
-    (globalThis as any).DEBUG_VERBOSE = false;
+// Ensure DEBUG_VERBOSE has a default if not set by test runner environment
+if (typeof DEBUG_VERBOSE === 'undefined') {
+    DEBUG_VERBOSE = false; 
 }

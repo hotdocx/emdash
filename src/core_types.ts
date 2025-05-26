@@ -53,7 +53,7 @@ export const Pi = (paramName: string, icit: Icit, paramType: Term, bodyType: (v:
 export declare const freshHoleName: () => string;
 
 export const Hole = (id?: string): Term & { tag: 'Hole' } => {
-    const holeId = id || freshHoleName();
+    const holeId = id || freshHoleName(); // freshHoleName will be injected by core_context_globals.ts
     return { tag: 'Hole', id: holeId, ref: undefined, elaboratedType: undefined };
 };
 

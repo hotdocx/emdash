@@ -1,4 +1,4 @@
-import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph } from './core_types';
+import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
@@ -61,10 +61,15 @@ export function cloneTerm(term: Term, clonedObjects: Map<Term, Term> = new Map()
                 const originalBodyInstance = originalBodyFn(v_bound);
                 return cloneTerm(originalBodyInstance, clonedObjects);
             };
-            const newLam = Lam(term.paramName, term.icit, clonedParamType, newClonedBodyFn);
-            (newLam as Term & {tag:'Lam'})._isAnnotated = term._isAnnotated; // Preserve annotation status
-            if (clonedParamType) (newLam as Term & {tag:'Lam'}).paramType = clonedParamType; // Ensure it's set if was present
-            result = newLam;
+            // Direct construction for robustness, avoiding smart constructor overload issues
+            result = {
+                tag: 'Lam',
+                paramName: term.paramName,
+                icit: term.icit,
+                paramType: clonedParamType,
+                body: newClonedBodyFn,
+                _isAnnotated: term._isAnnotated
+            };
             break;
         }
         case 'Pi': {
@@ -108,7 +113,7 @@ export function cloneTerm(term: Term, clonedObjects: Map<Term, Term> = new Map()
             const exhaustiveCheck: never = term;
             throw new Error(`cloneTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
     }
-    if (term.tag !== 'Var' && term.tag !== 'Type' && term.tag !== 'CatTerm') {
+    if (term.tag !== 'Var' && term.tag !== 'Type' && term.tag !== 'CatTerm') { // Avoid storing simple immutable singletons
          clonedObjects.set(term, result);
     }
     return result;
@@ -209,9 +214,19 @@ export let constraints: Constraint[] = [];
 export function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
 
 export function getTermRef(term: Term): Term {
-    if (term.tag === 'Hole' && term.ref) return getTermRef(term.ref);
-    return term;
+    let current = term;
+    const visited = new Set<Term>(); // To detect cycles in Hole references
+    while (current.tag === 'Hole' && current.ref) {
+        if (visited.has(current)) {
+            console.warn(`Cycle detected in Hole references starting from ${term.tag === 'Hole' ? term.id : 'original term'}. Returning current hole: ${current.id}`);
+            return current; // Break cycle
+        }
+        visited.add(current);
+        current = current.ref;
+    }
+    return current;
 }
+
 
 export const emptyCtx: Context = [];
 export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = Icit.Expl): Context => [{ name, type, icit }, ...ctx];
@@ -251,7 +266,7 @@ export function resetMyLambdaPi() {
 }
 
 export function setupPhase1GlobalsAndRules() {
-    defineGlobal("NatType", Type(), undefined, true);
+    defineGlobal("NatType", Type(), undefined, true); 
     defineGlobal("BoolType", Type(), undefined, true);
 
     const pvarCat = "$CAT_pv";
@@ -291,6 +306,6 @@ export function setupPhase1GlobalsAndRules() {
     );
 }
 
-export function resetMyLambdaPi_Emdash() {
+export function resetMyLambdaPi_Emdash() { 
     resetMyLambdaPi();
 }
