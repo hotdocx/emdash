@@ -292,7 +292,7 @@ function runChurchEncodingTests() {
     const id_func_val = Lam("A_id_val", Icit.Expl, A_id_val_term => Lam("x_id_val", Icit.Expl, x_id_val_actual_term => x_id_val_actual_term));
     defineGlobal("id_func", id_func_type_original, id_func_val);
     elabRes = elaborate(Var("id_func"), undefined, baseCtx);
-    const id_func_type_expected = Pi("A_id_param", Icit.Expl, Type(), A_id_term => Pi("x_id_param", Icit.Expl, A_id_term, _x_id_term => A_id_term));
+    const id_func_type_expected = Pi("A_id_param", Icit.Expl, Type(), A_id_term => Pi("x_id_param", Icit.Expl, A_id_term, _x_term => A_id_term));
     assert(areEqual(elabRes.type, id_func_type_expected, baseCtx), "Church Test 1.1: id_func type check");
 
     // let List : U -> U = \A. (L : _) -> (A -> L -> L) -> L -> L;
@@ -574,7 +574,17 @@ function runChurchEncodingTests() {
     defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
     elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
     const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-    assert(areEqual(elabRes.type, eqTest_val_type_expected, baseCtx), "Church Test 18.1: eqTest_val type check");
+
+    console.log(`[DEBUG TEST 18.1] elabRes.type: ${printTerm(elabRes.type)}`);
+    console.log(`[DEBUG TEST 18.1] eqTest_val_type_expected: ${printTerm(eqTest_val_type_expected)}`);
+    const n1_debug_18_1 = whnf(elabRes.type, baseCtx);
+    const n2_debug_18_1 = whnf(eqTest_val_type_expected, baseCtx);
+    console.log(`[DEBUG TEST 18.1] whnf(elabRes.type): ${printTerm(n1_debug_18_1)}`);
+    console.log(`[DEBUG TEST 18.1] whnf(eqTest_val_type_expected): ${printTerm(n2_debug_18_1)}`);
+    const isEqualDebug_18_1 = areEqual(elabRes.type, eqTest_val_type_expected, baseCtx);
+    console.log(`[DEBUG TEST 18.1] areEqual result: ${isEqualDebug_18_1}`);
+
+    assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
 
     // U
     elabRes = elaborate(Type(), undefined, baseCtx);
