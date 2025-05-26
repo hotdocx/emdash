@@ -177,7 +177,7 @@ export function addRewriteRule(
         // The type of the elaborated LHS, inferred in the *global* context (not lhsElabCtx)
         // This is the type the RHS must also have.
         constraints.length = 0; // Clear for LHS type inference
-        const typeOfGlobalLhs = infer(ctx, elaboratedLhs, 0);
+        const typeOfGlobalLhs = infer(lhsElabCtx, elaboratedLhs, 0);
          if (!solveConstraints(ctx)) { // Solve constraints related to LHS's global type
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
         }

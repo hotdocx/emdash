@@ -801,6 +801,7 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
                     changedInOuterLoop = true; 
                     currentConstraintIdx++;
                 } else { 
+                    console.log(`[solveConstraints DEBUG] UnifyResult.Failed for constraint: ${printTerm(c_t1_current_ref)} vs ${printTerm(c_t2_current_ref)} (orig: ${constraint.origin || 'unknown'})`);
                     console.warn(`Unification failed permanently for constraint: ${printTerm(c_t1_current_ref)} === ${printTerm(c_t2_current_ref)} (orig: ${constraint.origin || 'unknown'})`);
                     return false; 
                 }
