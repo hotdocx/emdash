@@ -21,7 +21,62 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
     if (isConstantSymbol && value !== undefined) {
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
     }
-    globalDefs.set(name, { name, type, value, isConstantSymbol, isInjective });
+
+    const originalConstraintsBackup = [...constraints];
+    constraints.length = 0; // Isolate constraint solving for this global definition
+
+    // Build a context from already defined globals for elaboration
+    let elabCtx: Context = emptyCtx;
+    // Add existing globals to the context in order of definition (Map iteration order)
+    // This is a simplification; a more robust approach might involve proper dependency analysis
+    // or disallowing forward references during the definition of a global's type/value.
+    globalDefs.forEach(gDef => {
+        elabCtx = extendCtx(elabCtx, gDef.name, gDef.type, Icit.Expl, gDef.value);
+    });
+
+
+    let elaboratedType: Term;
+    let elaboratedValue: Term | undefined = undefined;
+
+    try {
+        // 1. Elaborate the declared type itself. It must be a valid type (i.e., have type Type).
+        const typeForType = cloneTerm(type); // Clone to avoid modifying the original input
+        const inferredKind = infer(elabCtx, typeForType, 0); // Infer the kind of the provided type
+        if (!solveConstraints(elabCtx)) {
+            const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
+            throw new Error(`Global \'${name}\': Could not solve constraints while inferring the kind of the declared type \'${printTerm(type)}\'. Unsolved: ${remaining}`);
+        }
+        // The inferred kind must be Type
+        if (!areEqual(getTermRef(inferredKind.type), Type(), elabCtx)) {
+            throw new Error(`Global \'${name}\': Declared type \'${printTerm(type)}\' is not a valid type. Expected kind Type, but got kind \'${printTerm(getTermRef(inferredKind.type))}\'.`);
+        }
+        elaboratedType = whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
+
+        // 2. If a value is provided, check it against the elaborated declared type.
+        if (value !== undefined) {
+            const valueToCheck = cloneTerm(value); // Clone to avoid modifying original
+            // Check the value against the elaboratedType in the current elabCtx
+            constraints.length = 0; // Reset constraints specifically for value checking
+            const checkedValueResult = check(elabCtx, valueToCheck, elaboratedType, 0); // Modifies valueToCheck
+            if (!solveConstraints(elabCtx)) {
+                const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
+                throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
+            }
+            elaboratedValue = whnf(getTermRef(valueToCheck), elabCtx); // Store the elaborated (and normalized) value
+        }
+
+        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective });
+        // consoleLog(`Global \'${name}\' defined and elaborated successfully.`);
+
+    } catch (e) {
+        const error = e as Error;
+        console.error(`Failed to define global \'${name}\': ${error.message}. Stack: ${error.stack}`);
+        // Restore constraints and rethrow to halt further execution if a global fails
+        constraints.splice(0, constraints.length, ...originalConstraintsBackup);
+        throw e; // Rethrow the error
+    } finally {
+        constraints.splice(0, constraints.length, ...originalConstraintsBackup); // Restore global constraints
+    }
 }
 
 export let rawUserRewriteRules: RewriteRule[] = []; // Stores raw rules before elaboration
