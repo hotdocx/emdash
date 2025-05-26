@@ -151,9 +151,9 @@ function runPhase1Tests() {
 
     defineGlobal("g_XY_concrete_t5", HomTerm(Var("C5_cat_global"), X5_term, Y5_term), undefined, true);
     const g_XY_for_rule = Var("g_XY_concrete_t5");
-    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global")); 
+    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global"));
     const test_term_g_o_id = ComposeMorph(g_XY_for_rule, id_X5_for_rule, Var("C5_cat_global"), X5_term, X5_term, Y5_term);
-    elabRes = elaborate(test_term_g_o_id, undefined, baseCtx); 
+    elabRes = elaborate(test_term_g_o_id, undefined, baseCtx);
     assert(areEqual(elabRes.term, g_XY_for_rule, baseCtx), `Test 5.1 failed: (g o id_X) did not reduce to g. Got ${printTerm(elabRes.term)} Expected ${printTerm(g_XY_for_rule)}`);
     console.log("Test 5 Passed.");
 }
@@ -202,7 +202,7 @@ function runImplicitArgumentTests() {
         
         const finalYParamType = finalInnerLam.paramType!; 
         assert(finalYParamType.tag === 'Var' && finalYParamType.name === outerLamParamName, "IA2.1: Inner param type should be the var bound by outer implicit lambda. Expected Var("+outerLamParamName+"), Got "+printTerm(finalYParamType));
-    } else {
+        } else {
         assert(false, "IA2.1: elabTerm was not a Lam as expected.");
     }
 
@@ -224,7 +224,7 @@ function runImplicitArgumentTests() {
     elaborate(hole1, Var("Nat"), ctx); 
     assert(areEqual(getTermRef(hole1), Var("a_val"), ctx), "IA3.1: Injectivity for f_inj solved ?h1 to a_val");
 
-    resetMyLambdaPi(); 
+    resetMyLambdaPi();
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => Pi("y", Icit.Expl, T, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, x => App(App(App(Var("Eq"),T,Icit.Impl),x,Icit.Expl),x,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T => Pi("x", Icit.Expl, T, _ => T)), undefined, false, true); 
