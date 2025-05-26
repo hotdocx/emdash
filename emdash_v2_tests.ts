@@ -296,8 +296,8 @@ function runChurchEncodingTests() {
 
     // let List : U -> U = \A. (L : _) -> (A -> L -> L) -> L -> L;
     const List_type_type = Pi("A_List_type_param", Icit.Expl, Type(), _A_List_type_term => Type());
-    const List_type_val = Lam("A_List_val", Icit.Expl, Type(), A_List_val_term =>
-        Pi("L_List_param", Icit.Expl, FH(), L_List_val_term =>
+    const List_type_val = Lam("A_List_val", Icit.Expl, A_List_val_term =>
+        Pi("L_List_param", Icit.Expl, Type(), L_List_val_term =>
             Pi("cons_List_param", Icit.Expl, Pi("elem_type_in_cons", Icit.Expl, A_List_val_term, _ => Pi("list_type_in_cons", Icit.Expl, L_List_val_term, _ => L_List_val_term)), _cons_func_term =>
                 Pi("nil_List_param", Icit.Expl, L_List_val_term, _nil_actual_term => L_List_val_term)
             )
