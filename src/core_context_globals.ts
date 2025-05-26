@@ -181,7 +181,7 @@ export function addRewriteRule(
          if (!solveConstraints(ctx)) { // Solve constraints related to LHS's global type
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
         }
-        const targetRhsType = whnf(getTermRef(typeOfGlobalLhs), ctx);
+        const targetRhsType = whnf(getTermRef(typeOfGlobalLhs.type), ctx);
 
 
         constraints.length = 0; // Clear for RHS checking
