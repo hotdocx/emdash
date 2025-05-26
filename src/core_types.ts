@@ -67,7 +67,12 @@ export const IdentityMorph = (obj: Term, cat_IMPLICIT?: Term): Term & { tag: 'Id
 export const ComposeMorph = (g: Term, f: Term, cat_IMPLICIT?: Term, objX_IMPLICIT?: Term, objY_IMPLICIT?: Term, objZ_IMPLICIT?: Term): Term & { tag: 'ComposeMorph' } =>
     ({ tag: 'ComposeMorph', g, f, cat_IMPLICIT, objX_IMPLICIT, objY_IMPLICIT, objZ_IMPLICIT });
 
-export type Binding = { name: string, type: Term, icit?: Icit };
+export type Binding = {
+    name: string;
+    type: Term;
+    definition?: Term; // <<< MODIFIED HERE
+    icit?: Icit;
+};
 export type Context = Binding[];
 
 export interface GlobalDef {

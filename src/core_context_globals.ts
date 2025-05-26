@@ -3,7 +3,7 @@ import { printTerm, infer, check } from './core_elaboration'; // infer, check ne
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
 export let nextVarId = 0;
-export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`;
+export const freshVarName = (hint: string = 'v'): string => `$$fresh_${hint}${nextVarId++}`;
 
 export let nextHoleId = 0;
 export const freshHoleName = (): string => `?h${nextHoleId++}`;
@@ -229,7 +229,11 @@ export function getTermRef(term: Term): Term {
 
 
 export const emptyCtx: Context = [];
-export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = Icit.Expl): Context => [{ name, type, icit }, ...ctx];
+
+// <<< MODIFIED HERE
+export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = Icit.Expl, definition?: Term): Context => {
+    return [{ name, type, icit, definition }, ...ctx];
+};
 
 export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
 

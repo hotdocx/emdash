@@ -38,18 +38,23 @@ export function ensureImplicitsAsHoles(term: Term): Term {
 export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
 
-    const originalTerm = term; // Keep a reference to the original term for potential annotations
-    const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm); // ensureImplicitsAsHoles mutates
+    const originalTerm = term; 
+    const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm); 
     const current = getTermRef(termWithKernelImplicits);
 
 
     if (current.tag === 'Var') {
-        const gdef = globalDefs.get(current.name);
-        if (gdef) return gdef.type; // Type stored in globalDefs should be WHNF or easily normalizable
+        // Check for local definition first (whnf will do this, but for type, we look at binding type)
+        const localBinding = lookupCtx(ctx, current.name);
+        if (localBinding) return localBinding.type;
 
-        const binding = lookupCtx(ctx, current.name);
-        if (!binding) throw new Error(`Unbound variable: ${current.name} in context [${ctx.map(b => b.name).join(', ')}]`);
-        return binding.type; // Type from context
+
+        const gdef = globalDefs.get(current.name);
+        if (gdef) return gdef.type; 
+
+        // If localBinding was not found earlier, this error is correct.
+        if (!localBinding) throw new Error(`Unbound variable: ${current.name} in context [${ctx.map(b => b.name).join(', ')}]`);
+        return localBinding.type; // Should have been caught by lookupCtx above. Defensive.
     }
 
     switch (current.tag) {
@@ -61,24 +66,22 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
             return newTypeForHole;
         }
         case 'App': {
-            const appNode = current; // current is App
-            let elabF_type_tracker = appNode.func; // Used for iterating through Pi types
+            const appNode = current; 
+            let elabF_type_tracker = appNode.func; 
             let typeF = whnf(infer(ctx, elabF_type_tracker, stackDepth + 1), ctx);
 
             if (appNode.icit === Icit.Expl) {
-                let final_func_for_app_node = appNode.func; // This will become the (potentially modified) func part of appNode
+                let final_func_for_app_node = appNode.func; 
 
                 while (typeF.tag === 'Pi' && typeF.icit === Icit.Impl) {
                     const implHole = Hole(freshHoleName() + "_auto_impl_arg_");
                     if (typeF.paramType) { (implHole as Term & {tag:'Hole'}).elaboratedType = typeF.paramType; }
                     
                     final_func_for_app_node = App(final_func_for_app_node, implHole, Icit.Impl);
-                    // For the next iteration of type checking the Pi chain:
-                    elabF_type_tracker = final_func_for_app_node; // The type of this new App becomes the next typeF
-                    typeF = whnf(typeF.bodyType(implHole), ctx); // typeF is now the type *after* the implicit application
+                    elabF_type_tracker = final_func_for_app_node; 
+                    typeF = whnf(typeF.bodyType(implHole), ctx); 
                 }
 
-                // Update the original appNode's function if implicits were inserted
                 if (appNode.tag === 'App' && appNode.func !== final_func_for_app_node) {
                     appNode.func = final_func_for_app_node;
                 }
@@ -87,10 +90,11 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
                     throw new Error(`Type error in App (explicit): function ${printTerm(appNode.func)} of type ${printTerm(typeF)} does not expect an explicit argument for ${printTerm(appNode.arg)}.`);
                 }
                 check(ctx, appNode.arg, typeF.paramType, stackDepth + 1);
+                // The Pi's bodyType function is called with the argument.
+                // Inside this function, if it creates a context where its parameter is defined as appNode.arg,
+                // then whnf (on the result) will perform the substitution.
                 return whnf(typeF.bodyType(appNode.arg), ctx);
             } else { // appNode.icit === Icit.Impl
-                // No auto-insertion for explicit implicit applications {e.g., f {Nat}}
-                // We directly check if typeF is an implicit Pi.
                 if (!(typeF.tag === 'Pi' && typeF.icit === Icit.Impl)) {
                     throw new Error(`Type error in App (implicit): function ${printTerm(appNode.func)} of type ${printTerm(typeF)} does not expect an implicit argument for ${printTerm(appNode.arg)}.`);
                 }
@@ -98,37 +102,52 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
                 return whnf(typeF.bodyType(appNode.arg), ctx);
             }
         }
-        case 'Lam': {
-            const lamNode = current; // current is Lam
+        case 'Lam': { // <<< MODIFIED HERE (Phase 2 style)
+            const lamNode = current;
             let actualParamType: Term;
 
             if (lamNode._isAnnotated && lamNode.paramType) {
-                check(ctx, lamNode.paramType, Type(), stackDepth + 1);
-                actualParamType = lamNode.paramType;
-            } else { // Unannotated lambda
+                check(ctx, lamNode.paramType, Type(), stackDepth + 1); 
+                actualParamType = getTermRef(lamNode.paramType);
+            } else { 
                 actualParamType = Hole(freshHoleName() + "_lam_" + lamNode.paramName + "_paramT_infer_");
-                // Annotate the Lam node itself if it was the original input
-                // This relies on 'current' being the object that might need annotation.
-                // If 'originalTerm' was a Hole that resolved to this Lam, this won't reach the original Hole.
-                // This is a known subtlety with mutable elaboration via getTermRef.
+                 (actualParamType as Term & {tag:'Hole'}).elaboratedType = Type(); 
+
                 if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalTerm._isAnnotated) {
                     originalTerm.paramType = actualParamType;
                     originalTerm._isAnnotated = true;
-                } else if (lamNode.tag === 'Lam' && !lamNode._isAnnotated) { // Fallback: if current is the Lam
+                } else if (lamNode.tag === 'Lam' && !lamNode._isAnnotated) { 
                     lamNode.paramType = actualParamType;
                     lamNode._isAnnotated = true;
                 }
             }
-            return Pi(lamNode.paramName, lamNode.icit, actualParamType, (pi_v_arg: Term) => {
-                const extendedCtx = extendCtx(ctx, lamNode.paramName, actualParamType, lamNode.icit);
-                return infer(extendedCtx, lamNode.body(pi_v_arg), stackDepth + 1);
-            });
+            
+            return Pi(
+                lamNode.paramName,
+                lamNode.icit,
+                actualParamType,
+                (pi_body_argument_term: Term): Term => {
+                    const body_infer_ctx = extendCtx(
+                        ctx, 
+                        lamNode.paramName, 
+                        actualParamType, // Type of the lambda parameter
+                        lamNode.icit, 
+                        pi_body_argument_term // Definition of the lambda parameter as the argument to Pi's bodyType
+                    );
+                    
+                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName));
+                    // `infer` (and its internal call to `whnf`) on `lambda_body_structure` 
+                    // will use `body_infer_ctx`. When `whnf` encounters `Var(lamNode.paramName)`,
+                    // it will find its definition (`pi_body_argument_term`) in `body_infer_ctx` and substitute.
+                    return infer(body_infer_ctx, lambda_body_structure, stackDepth + 1);
+                }
+            );
         }
         case 'Pi': {
             const piNode = current;
             check(ctx, piNode.paramType, Type(), stackDepth + 1);
-            const extendedCtx = extendCtx(ctx, piNode.paramName, piNode.paramType, piNode.icit);
-            const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName));
+            const extendedCtx = extendCtx(ctx, piNode.paramName, piNode.paramType, piNode.icit); // No definition for param
+            const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName)); 
             check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1);
             return Type();
         }
@@ -166,7 +185,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): Term {
         }
         case 'IdentityMorph': {
             const idTerm = current;
-            const catArg = idTerm.cat_IMPLICIT!; // Should be a Hole if not provided
+            const catArg = idTerm.cat_IMPLICIT!; 
 
             const objActualType = infer(ctx, idTerm.obj, stackDepth + 1);
             addConstraint(objActualType, ObjTerm(catArg), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(catArg)})`);
@@ -194,42 +213,37 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
 
-    const originalTerm = term; // For annotations
+    const originalTerm = term; 
     const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
     const currentTerm = getTermRef(termWithKernelImplicits);
     const currentExpectedType = getTermRef(expectedType);
 
     const expectedTypeWhnf = whnf(currentExpectedType, ctx, stackDepth + 1);
 
-    // Implicit Lambda Insertion Rule
     if (expectedTypeWhnf.tag === 'Pi' && expectedTypeWhnf.icit === Icit.Impl) {
-        const termRef = getTermRef(currentTerm); // Check the actual structure of term
+        const termRef = getTermRef(currentTerm); 
         if (!(termRef.tag === 'Lam' && termRef.icit === Icit.Impl)) {
-            // Term is not an explicit implicit lambda. Check if 'term' can be the body.
-            const extendedCtx = extendCtx(ctx, expectedTypeWhnf.paramName, expectedTypeWhnf.paramType, expectedTypeWhnf.icit);
+            const extendedCtx = extendCtx(ctx, expectedTypeWhnf.paramName, expectedTypeWhnf.paramType, expectedTypeWhnf.icit); // No definition for param
             const expectedBodyType = whnf(expectedTypeWhnf.bodyType(Var(expectedTypeWhnf.paramName)), extendedCtx);
             check(extendedCtx, currentTerm, expectedBodyType, stackDepth + 1);
-            return; // If this checks, 'term' is valid to form an implicit lambda.
+            return; 
         }
     }
     
-    // Rule for checking unannotated user lambda against Pi
     if (currentTerm.tag === 'Lam' && !currentTerm._isAnnotated && expectedTypeWhnf.tag === 'Pi') {
         const lamNode = currentTerm;
         const expectedPiNode = expectedTypeWhnf;
 
-        // Check if icitness matches. If not, this rule doesn't apply, fall through to general case.
         if (lamNode.icit === expectedPiNode.icit) {
-            // Annotate the lambda with param type from Pi
-            if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalTerm._isAnnotated) { // Annotate original if possible
+            if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalTerm._isAnnotated) { 
                  originalTerm.paramType = expectedPiNode.paramType;
                  originalTerm._isAnnotated = true;
-            } else if (lamNode.tag === 'Lam' && !lamNode._isAnnotated) { // Fallback for current
+            } else if (lamNode.tag === 'Lam' && !lamNode._isAnnotated) { 
                 lamNode.paramType = expectedPiNode.paramType;
                 lamNode._isAnnotated = true;
             }
             
-            const extendedCtx = extendCtx(ctx, lamNode.paramName, expectedPiNode.paramType, lamNode.icit);
+            const extendedCtx = extendCtx(ctx, lamNode.paramName, expectedPiNode.paramType, lamNode.icit); // No definition for param
             const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
             const expectedBodyPiType = whnf(expectedPiNode.bodyType(Var(lamNode.paramName)),extendedCtx);
             check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
@@ -247,7 +261,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         return;
     }
 
-    // General case: infer type and check against expected
     const inferredType = infer(ctx, currentTerm, stackDepth + 1);
     addConstraint(whnf(inferredType, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(currentTerm)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
 }
@@ -308,28 +321,27 @@ export function elaborate(
 
 
 export function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]): boolean {
-    // PatternVarDecl is now string, e.g., "$x"
     return name.startsWith('$') && patternVarDecls.includes(name);
 }
 
 export function matchPattern(
-    pattern: Term, // This should be an already elaborated pattern
-    termToMatch: Term, // This should be in WHNF or normalized
+    pattern: Term, 
+    termToMatch: Term, 
     ctx: Context,
-    patternVarDecls: PatternVarDecl[], // string[] like ["$x", "$y"]
+    patternVarDecls: PatternVarDecl[], 
     currentSubst?: Substitution,
     stackDepth = 0
 ): Substitution | null {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`matchPattern stack depth exceeded for pattern ${printTerm(pattern)} vs term ${printTerm(termToMatch)}`);
 
-    const rtPattern = getTermRef(pattern); // Pattern should already be elaborated, getTermRef for safety
-    const rtTermToMatch = getTermRef(termToMatch); // termToMatch should be whnf'd before call
+    const rtPattern = getTermRef(pattern); 
+    const rtTermToMatch = getTermRef(termToMatch); 
 
     const subst = currentSubst ? new Map(currentSubst) : new Map<string, Term>();
 
     if (rtPattern.tag === 'Var' && isPatternVarName(rtPattern.name, patternVarDecls)) {
         const pvarName = rtPattern.name;
-        if (pvarName === '_') return subst; // Wildcard var
+        if (pvarName === '_') return subst; 
         const existing = subst.get(pvarName);
         if (existing) {
             return areEqual(rtTermToMatch, getTermRef(existing), ctx, stackDepth + 1) ? subst : null;
@@ -339,8 +351,8 @@ export function matchPattern(
     }
 
     if (rtPattern.tag === 'Hole') {
-        if (rtPattern.id === '_') return subst; // Wildcard hole
-        if (isPatternVarName(rtPattern.id, patternVarDecls)) { // Named hole pattern var like $?H
+        if (rtPattern.id === '_') return subst; 
+        if (isPatternVarName(rtPattern.id, patternVarDecls)) { 
             const pvarId = rtPattern.id;
             const existing = subst.get(pvarId);
             if (existing) {
@@ -385,7 +397,7 @@ export function matchPattern(
             }
             const freshV = Var(freshVarName(lamP.paramName));
             const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
-            const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
+            const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit); // No definition for freshV
              return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': {
@@ -393,7 +405,7 @@ export function matchPattern(
             const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!sType) return null;
             const freshV = Var(freshVarName(piP.paramName));
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit); // No definition for freshV
             return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm':
@@ -470,7 +482,14 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             const lam = current;
             const appliedParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
             const originalBodyFn = lam.body;
-            const newBodyFn = (v_arg: Term): Term => applySubst(originalBodyFn(v_arg), subst, patternVarDecls);
+            const newBodyFn = (v_arg: Term): Term => {
+                // If lam.paramName is a key in `subst`, it means a pattern variable like $x
+                // shadows the lambda's own parameter name. This is tricky.
+                // For now, assume pattern vars ($x) don't clash with actual param names (x)
+                // or that subst is only for pattern vars.
+                // A more robust applySubst would need a Set of bound vars to avoid substituting them.
+                return applySubst(originalBodyFn(v_arg), subst, patternVarDecls);
+            }
 
             return {
                 tag: 'Lam',

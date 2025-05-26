@@ -1,5 +1,5 @@
-import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph } from './core_types';
-import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose } from './core_context_globals';
+import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
+import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
 export const MAX_WHNF_ITERATIONS = 1000;
@@ -41,7 +41,7 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
             const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_structEq_unannot_lam_param");
-            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit);
+            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for structural check
             return areStructurallyEqualNoWhnf(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
         case 'Pi': {
@@ -49,7 +49,7 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             if (!areStructurallyEqualNoWhnf(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
-            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit);
+            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition
             return areStructurallyEqualNoWhnf(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
         case 'ObjTerm':
@@ -115,6 +115,17 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         
         const termBeforeInnerReductions = current; 
 
+        // <<< MODIFIED HERE: Check for local definitions first >>>
+        if (current.tag === 'Var') {
+            const binding = lookupCtx(ctx, current.name);
+            if (binding && binding.definition) {
+                current = binding.definition; // Substitute with the definition
+                changedInThisPass = true;
+                continue; // Restart the whnf loop with the new term
+            }
+            // If no local definition, proceed to check rewrite rules and global definitions
+        }
+
         if (!isKernelConstantSymbolStructurally(current)) {
             for (const rule of userRewriteRules) { 
                 const subst = matchPattern(rule.elaboratedLhs, termBeforeInnerReductions, ctx, rule.patternVars, undefined, stackDepth + 1);
@@ -136,6 +147,14 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             case 'App': {
                 const func_whnf_ref = getTermRef(whnf(current.func, ctx, stackDepth + 1));
                 if (func_whnf_ref.tag === 'Lam' && func_whnf_ref.icit === current.icit) { 
+                    // Beta reduction: The body of the lambda is called with the argument.
+                    // If the lambda's parameter was meant to be substituted by `current.arg`,
+                    // the `body` function itself should handle this, OR
+                    // we rely on a later `Var` lookup in `whnf` if body uses `Var(paramName)`.
+                    // With the new local definition handling, if body uses Var(paramName),
+                    // it needs to be in a context where paramName is defined as current.arg.
+                    // This is more relevant for `normalize` or `infer` when they set up such contexts.
+                    // For raw `whnf` of an `App(Lam(...), arg)`, direct application of `body(arg)` is standard.
                     current = func_whnf_ref.body(current.arg);
                     reducedInKernelBlock = true;
                 } else if (getTermRef(current.func) !== func_whnf_ref) { 
@@ -176,7 +195,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
-            case 'Var': {
+            case 'Var': { // This is reached if no local definition was found earlier in the loop for this Var.
                 const gdef = globalDefs.get(current.name);
                 if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
                     current = gdef.value; 
@@ -250,11 +269,14 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                                      ? normalize(currentLam.paramType, ctx, stackDepth + 1)
                                      : undefined;
 
-            const newBodyFn = (v_arg: Term): Term => {
+            const newBodyFn = (v_arg_placeholder: Term): Term => { 
+                // This v_arg_placeholder is typically Var(currentLam.paramName) when the Lam body is instantiated.
+                // For normalization, we extend the *original* context `ctx` with the param, NOT defining it as v_arg_placeholder.
+                // The v_arg_placeholder is only used to get the structure of the body.
                 const paramTypeForBodyCtx = normLamParamType || 
                                             (currentLam.paramType ? getTermRef(currentLam.paramType) : Hole(freshHoleName()+"_norm_lam_body_ctx"));
-                const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit);
-                return normalize(currentLam.body(v_arg), bodyCtx, stackDepth + 1);
+                const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit); // No definition here for the param
+                return normalize(currentLam.body(v_arg_placeholder), bodyCtx, stackDepth + 1);
             };
             return {
                 tag: 'Lam',
@@ -262,23 +284,42 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 icit: currentLam.icit,
                 paramType: normLamParamType, 
                 _isAnnotated: currentLam._isAnnotated, 
-                body: newBodyFn
+                body: newBodyFn 
             };
         }
-        case 'App':
+        case 'App': { // <<< MODIFIED HERE for beta-reduction context
             const normFunc = normalize(current.func, ctx, stackDepth + 1);
             const normArg = normalize(current.arg, ctx, stackDepth + 1);
-            const finalNormFunc = getTermRef(normFunc); 
+            const finalNormFunc = getTermRef(normFunc);
+
             if (finalNormFunc.tag === 'Lam' && finalNormFunc.icit === current.icit) {
-                return normalize(finalNormFunc.body(normArg), ctx, stackDepth + 1);
+                // Beta reduction: The context for normalizing the body is `ctx`
+                // extended with `finalNormFunc.paramName` defined as `normArg`.
+                const bodyParamType = finalNormFunc.paramType ? 
+                                      getTermRef(finalNormFunc.paramType) : 
+                                      Hole(freshHoleName() + "_beta_param_type_");
+                
+                const extendedCtxForBody = extendCtx(
+                    ctx, 
+                    finalNormFunc.paramName, 
+                    bodyParamType, // Type for the context binding
+                    finalNormFunc.icit, 
+                    normArg        // Definition for the parameter
+                );
+                // The body `finalNormFunc.body(Var(finalNormFunc.paramName))` will instantiate the body.
+                // `whnf` (called by `normalize`) on `Var(finalNormFunc.paramName)` inside this `extendedCtxForBody`
+                // will then pick up `normArg` as its definition.
+                return normalize(finalNormFunc.body(Var(finalNormFunc.paramName)), extendedCtxForBody, stackDepth + 1);
             }
             return App(normFunc, normArg, current.icit); 
+        }
         case 'Pi': {
             const currentPi = current;
             const normPiParamType = normalize(currentPi.paramType, ctx, stackDepth + 1);
-            return Pi(currentPi.paramName, currentPi.icit, normPiParamType, (v_arg: Term) => {
-                const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit);
-                return normalize(currentPi.bodyType(v_arg), bodyTypeCtx, stackDepth + 1);
+            return Pi(currentPi.paramName, currentPi.icit, normPiParamType, (v_arg_placeholder: Term) => {
+                // Similar to Lam, for normalizing the Pi's bodyType structure.
+                const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit); // No definition for param
+                return normalize(currentPi.bodyType(v_arg_placeholder), bodyTypeCtx, stackDepth + 1);
             });
         }
         default: const exhaustiveCheck: never = current; throw new Error(`Normalize: Unhandled term: ${(exhaustiveCheck as any).tag }`);
@@ -307,7 +348,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             return areEqual(rt1.func, app2.func, ctx, depth + 1) &&
                    areEqual(rt1.arg, app2.arg, ctx, depth + 1);
         }
-        case 'Lam': {
+        case 'Lam': { // For alpha-equivalence, extend context without definition
             const lam2 = rt2 as Term & {tag:'Lam'};
             if (rt1._isAnnotated !== lam2._isAnnotated) return false;
             let paramTypeOk = true;
@@ -315,21 +356,21 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
                 if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
                     paramTypeOk = false;
                 }
-            } 
+            }
             if(!paramTypeOk) return false;
 
             const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
             const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_areEqual_unannot_lam_param");
-            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit);
+            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for freshV
             return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
         }
-        case 'Pi': {
+        case 'Pi': { // For alpha-equivalence, extend context without definition
             const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
-            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit);
+            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition for freshV
             return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
         case 'ObjTerm': return areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
@@ -445,6 +486,12 @@ export function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, 
         consoleLog(`UnifyHole: ${hole.id} now points to ${normTerm.id} (or vice versa)`);
         return true;
     }
+
+    if (normTerm.tag === 'Var' && normTerm.name.startsWith('$$fresh_')) {
+        consoleLog(`UnifyHole: Occurs check failed (special): hole ${hole.id} cannot be solved by fresh unification variable ${normTerm.name}`);
+        return false;
+    }
+
     if (termContainsHole(normTerm, hole.id, new Set(), depth + 1)) {
         consoleLog(`UnifyHole: Occurs check failed for ${hole.id} in ${printTerm(normTerm)}`);
         return false; 
@@ -493,8 +540,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
 
     if (current_t1 === current_t2 && current_t1.tag !== 'Hole') return UnifyResult.Solved;
 
-    // Phase 1: Direct hole solving (X = ?H or ?H = X or ?H1 = ?H2)
-    // unifyHole already calls whnf on the non-hole side.
     if (current_t1.tag === 'Hole') {
         return unifyHole(current_t1, current_t2, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(current_t1, current_t2, ctx, depth +1);
     }
@@ -502,9 +547,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return unifyHole(current_t2, current_t1, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(current_t1, current_t2, ctx, depth +1);
     }
 
-    // Phase 2: Structural unification for identical tags before full WHNF of the terms themselves.
-    // This is for injective-like constructors.
-    // The arguments to these constructors will be unified, which involves their own WHNF etc.
     if (current_t1.tag === current_t2.tag) {
         const commonTag = current_t1.tag;
         let structuralResult: UnifyResult | undefined = undefined;
@@ -535,14 +577,13 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                 );
                 break;
             }
-            case 'IdentityMorph': { // Assumes implicits are present (e.g. as holes by ensureImplicitsAsHoles)
+            case 'IdentityMorph': { 
                 const id1 = current_t1 as Term & {tag:'IdentityMorph'};
                 const id2 = current_t2 as Term & {tag:'IdentityMorph'};
-                // Note: ensureImplicitsAsHoles should guarantee cat_IMPLICIT is defined
                 structuralResult = unifyArgs([id1.obj, id1.cat_IMPLICIT!], [id2.obj, id2.cat_IMPLICIT!], ctx, depth + 1);
                 break;
             }
-            case 'ComposeMorph': { // Assumes implicits are present
+            case 'ComposeMorph': { 
                 const comp1 = current_t1 as Term & {tag:'ComposeMorph'};
                 const comp2 = current_t2 as Term & {tag:'ComposeMorph'};
                 structuralResult = unifyArgs(
@@ -552,32 +593,21 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                 );
                 break;
             }
-            // Lam, Pi, App are typically handled after WHNF of the main term by the next phase.
         }
 
         if (structuralResult !== undefined) {
-            // If structural unification was attempted:
-            // - If Failed, try unification rules before giving up.
-            // - If Solved or Progress, return that status.
             return (structuralResult === UnifyResult.Failed) ? tryUnificationRules(current_t1, current_t2, ctx, depth + 1) : structuralResult;
         }
     }
 
-    // Phase 3: Full WHNF and then unify.
-    // This is reached if initial hole solving didn't apply,
-    // and structural pre-check (Phase 2) didn't apply or didn't cover the tag, or made progress but didn't solve.
     const rt1_whnf = whnf(current_t1, ctx, depth + 1);
     const rt2_whnf = whnf(current_t2, ctx, depth + 1);
 
     const rt1_final = getTermRef(rt1_whnf);
     const rt2_final = getTermRef(rt2_whnf);
 
-    // If WHNF made them identical (and not a hole, which is handled by Phase 1 if they were originally holes)
     if (rt1_final === rt2_final && rt1_final.tag !== 'Hole') return UnifyResult.Solved;
 
-    // Handle cases where one side WHNF'd to a hole.
-    // This can happen if e.g. a Var was defined as a Hole, and that Hole got solved during whnf,
-    // or if a Var reduces to a Hole directly.
     if (rt1_final.tag === 'Hole') {
         return unifyHole(rt1_final, rt2_final, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
     }
@@ -589,13 +619,11 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
     }
     
-    // Icit check for App, Lam, Pi (if tags are same)
     if ((rt1_final.tag === 'App' || rt1_final.tag === 'Lam' || rt1_final.tag === 'Pi') &&
         (rt1_final.icit !== (rt2_final as typeof rt1_final).icit)) { 
          return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1); 
     }
 
-    // Phase 4: Switch on WHNF'd term tags (existing logic)
     switch (rt1_final.tag) {
         case 'Type': case 'CatTerm': return UnifyResult.Solved; 
         case 'Var': 
@@ -605,15 +633,12 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             const f1_head_whnf = getTermRef(whnf(app1.func, ctx, depth + 1));
             const f2_head_whnf = getTermRef(whnf(app2.func, ctx, depth + 1));
 
-            // Check for injective function head
             if (f1_head_whnf.tag === 'Var' && f2_head_whnf.tag === 'Var' && f1_head_whnf.name === f2_head_whnf.name) {
                 const gdef = globalDefs.get(f1_head_whnf.name);
                 if (gdef && gdef.isInjective) { 
-                    // If head is injective and same, only unify arguments
                     return unify(app1.arg, app2.arg, ctx, depth + 1); 
                 }
             }
-            // Otherwise, unify both function and arguments
             const funcUnifyStatus = unify(app1.func, app2.func, ctx, depth + 1);
             if (funcUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
@@ -621,12 +646,11 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (argUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if (funcUnifyStatus === UnifyResult.Solved && argUnifyStatus === UnifyResult.Solved) {
-                 // Check if they are truly equal now that components are solved
                  return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
             }
-            return UnifyResult.Progress; // If either made progress but not fully solved
+            return UnifyResult.Progress;
         }
-        case 'Lam': {
+        case 'Lam': { // WHNF'd lams are compared by alpha-equivalence (via areEqual or directly here)
             const lam1 = rt1_final; const lam2 = rt2_final as Term & {tag:'Lam'};
             if (lam1._isAnnotated !== lam2._isAnnotated) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
             
@@ -639,7 +663,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             
             const freshV = Var(freshVarName(lam1.paramName)); 
             const CtxParamType = (lam1._isAnnotated && lam1.paramType) ? getTermRef(lam1.paramType) : Hole(freshHoleName() + "_unif_lam_ctx");
-            const extendedCtx = extendCtx(ctx, freshV.name, CtxParamType, lam1.icit);
+            const extendedCtx = extendCtx(ctx, freshV.name, CtxParamType, lam1.icit); // No definition for freshV
             const bodyStatus = unify(lam1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
             
             if(bodyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
@@ -649,13 +673,13 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             }
             return UnifyResult.Progress;
         }
-        case 'Pi': {
+        case 'Pi': { // WHNF'd Pis are compared by alpha-equivalence
             const pi1 = rt1_final; const pi2 = rt2_final as Term & {tag:'Pi'};
             const paramTypeStatus = unify(pi1.paramType, pi2.paramType, ctx, depth + 1);
             if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             const freshV = Var(freshVarName(pi1.paramName)); 
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(pi1.paramType), pi1.icit);
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(pi1.paramType), pi1.icit); // No definition for freshV
             const bodyTypeStatus = unify(pi1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
             
             if(bodyTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
@@ -665,8 +689,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             }
             return UnifyResult.Progress;
         }
-         case 'ObjTerm': { // This case is reached if Phase 2 didn't handle it or only made progress.
-                           // rt1_final.cat and rt2_final.cat are already whnf'd arguments due to outer whnf.
+         case 'ObjTerm': { 
             const argStatus = unify((rt1_final as Term & {tag:'ObjTerm'}).cat, (rt2_final as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
             return (argStatus === UnifyResult.Failed) ? tryUnificationRules(rt1_final, rt2_final, ctx, depth +1) : argStatus;
         }
@@ -700,7 +723,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         }
         case 'IdentityMorph': {
             const id1 = rt1_final as Term & {tag:'IdentityMorph'}; const id2 = rt2_final as Term & {tag:'IdentityMorph'};
-            // Implicits cat_IMPLICIT should be present due to ensureImplicitsAsHoles before elaboration starts
             const catStatus = unifyArgs([id1.cat_IMPLICIT!], [id2.cat_IMPLICIT!], ctx, depth + 1);
             if(catStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
@@ -733,7 +755,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             return UnifyResult.Progress;
         }
         default:
-            // Should not be reached if all tags are covered or if rt1_final.tag !== rt2_final.tag was handled
             const unhandledTag = (rt1_final as any)?.tag || 'unknown_tag';
             console.warn(`Unify: Unhandled identical tag in switch: ${unhandledTag}`);
             return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
@@ -758,9 +779,12 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             break;
         case 'Lam':
             if (current.paramType) collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
+            // Note: Lam body is a function, can't easily traverse its structure for pattern vars here.
+            // Pattern matching on Lam bodies typically involves instantiating with a fresh var and matching the result.
             break;
         case 'Pi':
             collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
+            // Similar to Lam, Pi bodyType is a function.
             break;
         case 'ObjTerm': collectPatternVars(current.cat, patternVarDecls, collectedVars, visited); break;
         case 'HomTerm':
@@ -909,7 +933,7 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
             }
         }
         if (constraints.every(c => areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, stackDepth + 1))) {
-            constraints.length = 0;
+            constraints.length = 0; // All remaining constraints are indeed equal after all.
         }
     }
     return constraints.length === 0; 
