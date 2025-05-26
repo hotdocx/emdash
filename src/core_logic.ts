@@ -487,10 +487,10 @@ export function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, 
         return true;
     }
 
-    if (normTerm.tag === 'Var' && normTerm.name.startsWith('$$fresh_')) {
-        consoleLog(`UnifyHole: Occurs check failed (special): hole ${hole.id} cannot be solved by fresh unification variable ${normTerm.name}`);
-        return false;
-    }
+    // if (normTerm.tag === 'Var' && normTerm.name.startsWith('$$fresh_')) {
+    //     consoleLog(`UnifyHole: Occurs check failed (special): hole ${hole.id} cannot be solved by fresh unification variable ${normTerm.name}`);
+    //     return false;
+    // }
 
     if (termContainsHole(normTerm, hole.id, new Set(), depth + 1)) {
         consoleLog(`UnifyHole: Occurs check failed for ${hole.id} in ${printTerm(normTerm)}`);

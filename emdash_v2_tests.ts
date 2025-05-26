@@ -186,7 +186,7 @@ function runImplicitArgumentTests() {
     const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param); 
 
     elabRes = elaborate(polySimpleId, idFuncType, ctx);
-    const elabTerm = elabRes.term;
+    const elabTerm = elabRes.term; console.log({elabTerm});
     assert(elabTerm.tag === 'Lam' && elabTerm.icit === Icit.Impl, "IA2.1: Elaborated polyId against Pi type should have an outer implicit lambda");
     
     if (elabTerm.tag === 'Lam') { // Ensure elabTerm is narrowed for TS

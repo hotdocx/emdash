@@ -3,7 +3,7 @@ import { printTerm, infer, check } from './core_elaboration'; // infer, check ne
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
 export let nextVarId = 0;
-export const freshVarName = (hint: string = 'v'): string => `$$fresh_${hint}${nextVarId++}`;
+export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`; ////`$$fresh_${hint}${nextVarId++}`;
 
 export let nextHoleId = 0;
 export const freshHoleName = (): string => `?h${nextHoleId++}`;
