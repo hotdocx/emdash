@@ -59,7 +59,7 @@ function runPhase1Tests() {
 
 
     console.log("\n--- Test 2: MkCat_ and Projections ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
+    // resetMyLambdaPi(); setupPhase1GlobalsAndRules();
     defineGlobal("H_repr_Nat_Global", Pi("X", Icit.Expl, NatObjRepr, _X => Pi("Y", Icit.Expl, NatObjRepr, _Y => Type())), undefined, true);
     defineGlobal("C_impl_Nat_dummy_Global",
         Pi("X_arg", Icit.Expl, NatObjRepr, X_term =>
@@ -288,11 +288,12 @@ function runChurchEncodingTests() {
     resetMyLambdaPi();
 
     // let id : (A : _) -> A -> A = \A x. x;
-    const id_func_type = Pi("A_id_param", Icit.Expl, FH(), A_id_term => Pi("x_id_param", Icit.Expl, A_id_term, _x_id_term => A_id_term));
+    const id_func_type_original = Pi("A_id_param", Icit.Expl, FH(), A_id_term => Pi("x_id_param", Icit.Expl, A_id_term, _x_id_term => A_id_term));
     const id_func_val = Lam("A_id_val", Icit.Expl, A_id_val_term => Lam("x_id_val", Icit.Expl, x_id_val_actual_term => x_id_val_actual_term));
-    defineGlobal("id_func", id_func_type, id_func_val);
+    defineGlobal("id_func", id_func_type_original, id_func_val);
     elabRes = elaborate(Var("id_func"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, id_func_type, baseCtx), "Church Test 1.1: id_func type check");
+    const id_func_type_expected = Pi("A_id_param", Icit.Expl, Type(), A_id_term => Pi("x_id_param", Icit.Expl, A_id_term, _x_id_term => A_id_term));
+    assert(areEqual(elabRes.type, id_func_type_expected, baseCtx), "Church Test 1.1: id_func type check");
 
     // let List : U -> U = \A. (L : _) -> (A -> L -> L) -> L -> L;
     const List_type_type = Pi("A_List_type_param", Icit.Expl, Type(), _A_List_type_term => Type());
@@ -308,7 +309,7 @@ function runChurchEncodingTests() {
     assert(areEqual(elabRes.type, List_type_type, baseCtx), "Church Test 2.1: List_type type check");
 
     // let nil : (A : _) -> List A = \A L cons nil_val. nil_val;
-    const nil_func_type = Pi("A_nil_param", Icit.Expl, FH(), A_nil_term => App(Var("List_type"), A_nil_term, Icit.Expl));
+    const nil_func_type_original = Pi("A_nil_param", Icit.Expl, FH(), A_nil_term => App(Var("List_type"), A_nil_term, Icit.Expl));
     const nil_func_val = Lam("A_nil_val", Icit.Expl, A_nil_val_term =>
         Lam("L_nil_param", Icit.Expl, L_nil_val_term =>
             Lam("cons_nil_param", Icit.Expl, cons_func_term =>
@@ -316,12 +317,13 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("nil_func", nil_func_type, nil_func_val);
+    defineGlobal("nil_func", nil_func_type_original, nil_func_val);
     elabRes = elaborate(Var("nil_func"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, nil_func_type, baseCtx), "Church Test 3.1: nil_func type check");
+    const nil_func_type_expected = Pi("A_nil_param", Icit.Expl, Type(), A_nil_term => App(Var("List_type"), A_nil_term, Icit.Expl));
+    assert(areEqual(elabRes.type, nil_func_type_expected, baseCtx), "Church Test 3.1: nil_func type check");
 
     // let cons : (A : _) -> A -> List A -> List A = \A x xs L cons_fn nil_fn. cons_fn x (xs _ cons_fn nil_fn);
-    const cons_func_type = Pi("A_cons_param", Icit.Expl, FH(), A_cons_term =>
+    const cons_func_type_original = Pi("A_cons_param", Icit.Expl, FH(), A_cons_term =>
         Pi("x_cons_param", Icit.Expl, A_cons_term, _x_term =>
             Pi("xs_cons_param", Icit.Expl, App(Var("List_type"), A_cons_term, Icit.Expl), _xs_term =>
                 App(Var("List_type"), A_cons_term, Icit.Expl)
@@ -344,17 +346,24 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("cons_func", cons_func_type, cons_func_val);
+    defineGlobal("cons_func", cons_func_type_original, cons_func_val);
     elabRes = elaborate(Var("cons_func"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, cons_func_type, baseCtx), "Church Test 4.1: cons_func type check");
+    const cons_func_type_expected = Pi("A_cons_param", Icit.Expl, Type(), A_cons_term =>
+        Pi("x_cons_param", Icit.Expl, A_cons_term, _x_term =>
+            Pi("xs_cons_param", Icit.Expl, App(Var("List_type"), A_cons_term, Icit.Expl), _xs_term =>
+                App(Var("List_type"), A_cons_term, Icit.Expl)
+            )
+        )
+    );
+    assert(areEqual(elabRes.type, cons_func_type_expected, baseCtx), "Church Test 4.1: cons_func type check");
 
     // let Bool : U = (B : _) -> B -> B -> B;
-    const Bool_type_val = Pi("B_Bool_param", Icit.Expl, FH(), B_Bool_term =>
+    const Bool_type_val_original_with_FH = Pi("B_Bool_param", Icit.Expl, FH(), B_Bool_term =>
         Pi("t_Bool_param", Icit.Expl, B_Bool_term, _t_term =>
             Pi("f_Bool_param", Icit.Expl, B_Bool_term, _f_term => B_Bool_term)
         )
     );
-    defineGlobal("Bool_type", Type(), Bool_type_val);
+    defineGlobal("Bool_type", Type(), Bool_type_val_original_with_FH);
     elabRes = elaborate(Var("Bool_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 5.1: Bool_type type check");
 
@@ -408,7 +417,7 @@ function runChurchEncodingTests() {
     assert(areEqual(elabRes.type, list1_val_type, baseCtx), "Church Test 9.1: list1_val type check");
 
     // let Eq : (A : _) -> A -> A -> U = \A x y. (P : A -> U) -> P x -> P y;
-    const Eq_type_type = Pi("A_Eq_param", Icit.Expl, FH(), A_Eq_term =>
+    const Eq_type_type_original = Pi("A_Eq_param", Icit.Expl, FH(), A_Eq_term =>
         Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
             Pi("y_Eq_param", Icit.Expl, A_Eq_term, _y_term => Type())
         )
@@ -424,12 +433,17 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("Eq_type", Eq_type_type, Eq_type_val);
+    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val);
     elabRes = elaborate(Var("Eq_type"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, Eq_type_type, baseCtx), "Church Test 10.1: Eq_type type check");
+    const Eq_type_type_expected = Pi("A_Eq_param", Icit.Expl, Type(), A_Eq_term =>
+        Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
+            Pi("y_Eq_param", Icit.Expl, A_Eq_term, _y_term => Type())
+        )
+    );
+    assert(areEqual(elabRes.type, Eq_type_type_expected, baseCtx), "Church Test 10.1: Eq_type type check");
 
     // let refl : (A : _)(x : A) -> Eq A x x = \A x P px. px;
-    const refl_func_type = Pi("A_refl_param", Icit.Expl, FH(), A_refl_term =>
+    const refl_func_type_original = Pi("A_refl_param", Icit.Expl, FH(), A_refl_term =>
         Pi("x_refl_param", Icit.Expl, A_refl_term, x_refl_term =>
             App(App(App(Var("Eq_type"), A_refl_term, Icit.Expl), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
         )
@@ -443,9 +457,14 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("refl_func", refl_func_type, refl_func_val);
+    defineGlobal("refl_func", refl_func_type_original, refl_func_val);
     elabRes = elaborate(Var("refl_func"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, refl_func_type, baseCtx), "Church Test 11.1: refl_func type check");
+    const refl_func_type_expected = Pi("A_refl_param", Icit.Expl, Type(), A_refl_term =>
+        Pi("x_refl_param", Icit.Expl, A_refl_term, x_refl_term =>
+            App(App(App(Var("Eq_type"), A_refl_term, Icit.Expl), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
+        )
+    );
+    assert(areEqual(elabRes.type, refl_func_type_expected, baseCtx), "Church Test 11.1: refl_func type check");
 
     // let list1_v2 : List Bool = cons _ true (cons _ false (nil _)); (renamed list1 to list1_v2)
     const list1_v2_val_type = App(Var("List_type"), Var("Bool_type"), Icit.Expl);
@@ -550,11 +569,12 @@ function runChurchEncodingTests() {
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
 
     // let eqTest : Eq _ hundred hundred = refl _ _;
-    const eqTest_val_type = App(App(App(Var("Eq_type"), FH(), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl); 
-    const eqTest_val_val = App(App(Var("refl_func"), FH(), Icit.Expl), FH(), Icit.Expl); 
-    defineGlobal("eqTest_val", eqTest_val_type, eqTest_val_val);
+    const eqTest_val_type_original = App(App(App(Var("Eq_type"), FH(), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    const eqTest_val_val = App(App(Var("refl_func"), FH(), Icit.Expl), FH(), Icit.Expl);
+    defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
     elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, eqTest_val_type, baseCtx), "Church Test 18.1: eqTest_val type check");
+    const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    assert(areEqual(elabRes.type, eqTest_val_type_expected, baseCtx), "Church Test 18.1: eqTest_val type check");
 
     // U
     elabRes = elaborate(Type(), undefined, baseCtx);

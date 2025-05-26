@@ -50,7 +50,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
         if (!areEqual(getTermRef(inferredKind.type), Type(), elabCtx)) {
             throw new Error(`Global \'${name}\': Declared type \'${printTerm(type)}\' is not a valid type. Expected kind Type, but got kind \'${printTerm(getTermRef(inferredKind.type))}\'.`);
         }
-        elaboratedType = whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
+        elaboratedType = getTermRef(typeForType); //whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
 
         // 2. If a value is provided, check it against the elaborated declared type.
         if (value !== undefined) {
@@ -62,7 +62,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
                 throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
             }
-            elaboratedValue = whnf(getTermRef(valueToCheck), elabCtx); // Store the elaborated (and normalized) value
+            elaboratedValue = getTermRef(valueToCheck); //whnf(getTermRef(valueToCheck), elabCtx); // Store the elaborated (and normalized) value
         }
 
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective });
