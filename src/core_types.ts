@@ -50,11 +50,11 @@ export const Pi = (paramName: string, icit: Icit, paramType: Term, bodyType: (v:
     ({ tag: 'Pi', paramName, icit, paramType, bodyType });
 
 // Forward declaration for freshHoleName, will be imported from core_context_globals
-export declare const freshHoleName: () => string;
+// export declare const freshHoleName: () => string;
 
-export const Hole = (id?: string): Term & { tag: 'Hole' } => {
-    const holeId = id || freshHoleName(); // freshHoleName will be injected by core_context_globals.ts
-    return { tag: 'Hole', id: holeId, ref: undefined, elaboratedType: undefined };
+export const Hole = (id: string): Term & { tag: 'Hole' } => {
+    // const holeId = id || freshHoleName();
+    return { tag: 'Hole', id: id, ref: undefined, elaboratedType: undefined };
 };
 
 export const CatTerm = (): Term & { tag: 'CatTerm' } => ({ tag: 'CatTerm' });
