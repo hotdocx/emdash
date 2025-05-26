@@ -91,7 +91,7 @@ function runPhase1Tests() {
 
 
     console.log("\n--- Test 3: IdentityMorph ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
+    // resetMyLambdaPi(); setupPhase1GlobalsAndRules();
     const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
     defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val, false);
 
