@@ -488,26 +488,96 @@ export function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)
 export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
     if (depth > MAX_STACK_DEPTH) throw new Error(`Unification stack depth exceeded (Unify depth: ${depth}, ${printTerm(t1)} vs ${printTerm(t2)})`);
 
-    const rt1_orig_ref = getTermRef(t1);
-    const rt2_orig_ref = getTermRef(t2);
+    let current_t1 = getTermRef(t1);
+    let current_t2 = getTermRef(t2);
 
-    if (rt1_orig_ref === rt2_orig_ref && rt1_orig_ref.tag !== 'Hole') return UnifyResult.Solved; 
+    if (current_t1 === current_t2 && current_t1.tag !== 'Hole') return UnifyResult.Solved;
 
-    if (rt1_orig_ref.tag === 'Hole') {
-        return unifyHole(rt1_orig_ref, rt2_orig_ref, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(rt1_orig_ref, rt2_orig_ref, ctx, depth +1);
+    // Phase 1: Direct hole solving (X = ?H or ?H = X or ?H1 = ?H2)
+    // unifyHole already calls whnf on the non-hole side.
+    if (current_t1.tag === 'Hole') {
+        return unifyHole(current_t1, current_t2, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(current_t1, current_t2, ctx, depth +1);
     }
-    if (rt2_orig_ref.tag === 'Hole') {
-        return unifyHole(rt2_orig_ref, rt1_orig_ref, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(rt1_orig_ref, rt2_orig_ref, ctx, depth +1);
+    if (current_t2.tag === 'Hole') {
+        return unifyHole(current_t2, current_t1, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(current_t1, current_t2, ctx, depth +1);
     }
 
-    const rt1_whnf = whnf(rt1_orig_ref, ctx, depth + 1);
-    const rt2_whnf = whnf(rt2_orig_ref, ctx, depth + 1);
+    // Phase 2: Structural unification for identical tags before full WHNF of the terms themselves.
+    // This is for injective-like constructors.
+    // The arguments to these constructors will be unified, which involves their own WHNF etc.
+    if (current_t1.tag === current_t2.tag) {
+        const commonTag = current_t1.tag;
+        let structuralResult: UnifyResult | undefined = undefined;
+
+        switch (commonTag) {
+            case 'Type': case 'CatTerm':
+                structuralResult = UnifyResult.Solved;
+                break;
+            case 'Var':
+                structuralResult = (current_t1 as Term & {tag:'Var'}).name === (current_t2 as Term & {tag:'Var'}).name ? UnifyResult.Solved : UnifyResult.Failed;
+                break;
+            case 'ObjTerm':
+                structuralResult = unify((current_t1 as Term & {tag:'ObjTerm'}).cat, (current_t2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
+                break;
+            case 'HomTerm': {
+                const hom1 = current_t1 as Term & {tag:'HomTerm'};
+                const hom2 = current_t2 as Term & {tag:'HomTerm'};
+                structuralResult = unifyArgs([hom1.cat, hom1.dom, hom1.cod], [hom2.cat, hom2.dom, hom2.cod], ctx, depth + 1);
+                break;
+            }
+            case 'MkCat_': {
+                const mk1 = current_t1 as Term & {tag:'MkCat_'};
+                const mk2 = current_t2 as Term & {tag:'MkCat_'};
+                structuralResult = unifyArgs(
+                    [mk1.objRepresentation, mk1.homRepresentation, mk1.composeImplementation],
+                    [mk2.objRepresentation, mk2.homRepresentation, mk2.composeImplementation],
+                    ctx, depth + 1
+                );
+                break;
+            }
+            case 'IdentityMorph': { // Assumes implicits are present (e.g. as holes by ensureImplicitsAsHoles)
+                const id1 = current_t1 as Term & {tag:'IdentityMorph'};
+                const id2 = current_t2 as Term & {tag:'IdentityMorph'};
+                // Note: ensureImplicitsAsHoles should guarantee cat_IMPLICIT is defined
+                structuralResult = unifyArgs([id1.obj, id1.cat_IMPLICIT!], [id2.obj, id2.cat_IMPLICIT!], ctx, depth + 1);
+                break;
+            }
+            case 'ComposeMorph': { // Assumes implicits are present
+                const comp1 = current_t1 as Term & {tag:'ComposeMorph'};
+                const comp2 = current_t2 as Term & {tag:'ComposeMorph'};
+                structuralResult = unifyArgs(
+                    [comp1.g, comp1.f, comp1.cat_IMPLICIT!, comp1.objX_IMPLICIT!, comp1.objY_IMPLICIT!, comp1.objZ_IMPLICIT!],
+                    [comp2.g, comp2.f, comp2.cat_IMPLICIT!, comp2.objX_IMPLICIT!, comp2.objY_IMPLICIT!, comp2.objZ_IMPLICIT!],
+                    ctx, depth + 1
+                );
+                break;
+            }
+            // Lam, Pi, App are typically handled after WHNF of the main term by the next phase.
+        }
+
+        if (structuralResult !== undefined) {
+            // If structural unification was attempted:
+            // - If Failed, try unification rules before giving up.
+            // - If Solved or Progress, return that status.
+            return (structuralResult === UnifyResult.Failed) ? tryUnificationRules(current_t1, current_t2, ctx, depth + 1) : structuralResult;
+        }
+    }
+
+    // Phase 3: Full WHNF and then unify.
+    // This is reached if initial hole solving didn't apply,
+    // and structural pre-check (Phase 2) didn't apply or didn't cover the tag, or made progress but didn't solve.
+    const rt1_whnf = whnf(current_t1, ctx, depth + 1);
+    const rt2_whnf = whnf(current_t2, ctx, depth + 1);
 
     const rt1_final = getTermRef(rt1_whnf);
     const rt2_final = getTermRef(rt2_whnf);
 
+    // If WHNF made them identical (and not a hole, which is handled by Phase 1 if they were originally holes)
     if (rt1_final === rt2_final && rt1_final.tag !== 'Hole') return UnifyResult.Solved;
 
+    // Handle cases where one side WHNF'd to a hole.
+    // This can happen if e.g. a Var was defined as a Hole, and that Hole got solved during whnf,
+    // or if a Var reduces to a Hole directly.
     if (rt1_final.tag === 'Hole') {
         return unifyHole(rt1_final, rt2_final, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
     }
@@ -519,12 +589,13 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
     }
     
+    // Icit check for App, Lam, Pi (if tags are same)
     if ((rt1_final.tag === 'App' || rt1_final.tag === 'Lam' || rt1_final.tag === 'Pi') &&
         (rt1_final.icit !== (rt2_final as typeof rt1_final).icit)) { 
          return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1); 
     }
 
-
+    // Phase 4: Switch on WHNF'd term tags (existing logic)
     switch (rt1_final.tag) {
         case 'Type': case 'CatTerm': return UnifyResult.Solved; 
         case 'Var': 
@@ -534,12 +605,15 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             const f1_head_whnf = getTermRef(whnf(app1.func, ctx, depth + 1));
             const f2_head_whnf = getTermRef(whnf(app2.func, ctx, depth + 1));
 
+            // Check for injective function head
             if (f1_head_whnf.tag === 'Var' && f2_head_whnf.tag === 'Var' && f1_head_whnf.name === f2_head_whnf.name) {
                 const gdef = globalDefs.get(f1_head_whnf.name);
                 if (gdef && gdef.isInjective) { 
+                    // If head is injective and same, only unify arguments
                     return unify(app1.arg, app2.arg, ctx, depth + 1); 
                 }
             }
+            // Otherwise, unify both function and arguments
             const funcUnifyStatus = unify(app1.func, app2.func, ctx, depth + 1);
             if (funcUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
@@ -547,9 +621,10 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (argUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if (funcUnifyStatus === UnifyResult.Solved && argUnifyStatus === UnifyResult.Solved) {
+                 // Check if they are truly equal now that components are solved
                  return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
             }
-            return UnifyResult.Progress; 
+            return UnifyResult.Progress; // If either made progress but not fully solved
         }
         case 'Lam': {
             const lam1 = rt1_final; const lam2 = rt2_final as Term & {tag:'Lam'};
@@ -590,12 +665,13 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             }
             return UnifyResult.Progress;
         }
-         case 'ObjTerm': {
-            const argStatus = unify(rt1_final.cat, (rt2_final as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
+         case 'ObjTerm': { // This case is reached if Phase 2 didn't handle it or only made progress.
+                           // rt1_final.cat and rt2_final.cat are already whnf'd arguments due to outer whnf.
+            const argStatus = unify((rt1_final as Term & {tag:'ObjTerm'}).cat, (rt2_final as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
             return (argStatus === UnifyResult.Failed) ? tryUnificationRules(rt1_final, rt2_final, ctx, depth +1) : argStatus;
         }
         case 'HomTerm': {
-            const hom1 = rt1_final; const hom2 = rt2_final as Term & {tag:'HomTerm'};
+            const hom1 = rt1_final as Term & {tag:'HomTerm'}; const hom2 = rt2_final as Term & {tag:'HomTerm'};
             const catStatus = unify(hom1.cat, hom2.cat, ctx, depth + 1);
             if(catStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             const domStatus = unify(hom1.dom, hom2.dom, ctx, depth + 1);
@@ -609,7 +685,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             return UnifyResult.Progress;
         }
         case 'MkCat_': {
-            const mk1 = rt1_final; const mk2 = rt2_final as Term & {tag:'MkCat_'};
+            const mk1 = rt1_final as Term & {tag:'MkCat_'}; const mk2 = rt2_final as Term & {tag:'MkCat_'};
             const objRStatus = unify(mk1.objRepresentation, mk2.objRepresentation, ctx, depth + 1);
             if(objRStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
             const homRStatus = unify(mk1.homRepresentation, mk2.homRepresentation, ctx, depth + 1);
@@ -623,8 +699,9 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             return UnifyResult.Progress;
         }
         case 'IdentityMorph': {
-            const id1 = rt1_final; const id2 = rt2_final as Term & {tag:'IdentityMorph'};
-            const catStatus = unifyArgs([id1.cat_IMPLICIT], [id2.cat_IMPLICIT], ctx, depth + 1);
+            const id1 = rt1_final as Term & {tag:'IdentityMorph'}; const id2 = rt2_final as Term & {tag:'IdentityMorph'};
+            // Implicits cat_IMPLICIT should be present due to ensureImplicitsAsHoles before elaboration starts
+            const catStatus = unifyArgs([id1.cat_IMPLICIT!], [id2.cat_IMPLICIT!], ctx, depth + 1);
             if(catStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             const objStatus = unify(id1.obj, id2.obj, ctx, depth + 1);
@@ -636,10 +713,10 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             return UnifyResult.Progress;
         }
         case 'ComposeMorph': {
-            const cm1 = rt1_final; const cm2 = rt2_final as Term & {tag:'ComposeMorph'};
+            const cm1 = rt1_final as Term & {tag:'ComposeMorph'}; const cm2 = rt2_final as Term & {tag:'ComposeMorph'};
             const implicitsStatus = unifyArgs(
-                [cm1.cat_IMPLICIT, cm1.objX_IMPLICIT, cm1.objY_IMPLICIT, cm1.objZ_IMPLICIT],
-                [cm2.cat_IMPLICIT, cm2.objX_IMPLICIT, cm2.objY_IMPLICIT, cm2.objZ_IMPLICIT],
+                [cm1.cat_IMPLICIT!, cm1.objX_IMPLICIT!, cm1.objY_IMPLICIT!, cm1.objZ_IMPLICIT!],
+                [cm2.cat_IMPLICIT!, cm2.objX_IMPLICIT!, cm2.objY_IMPLICIT!, cm2.objZ_IMPLICIT!],
                 ctx, depth + 1 
             );
             if (implicitsStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
@@ -656,6 +733,9 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             return UnifyResult.Progress;
         }
         default:
+            // Should not be reached if all tags are covered or if rt1_final.tag !== rt2_final.tag was handled
+            const unhandledTag = (rt1_final as any)?.tag || 'unknown_tag';
+            console.warn(`Unify: Unhandled identical tag in switch: ${unhandledTag}`);
             return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
     }
 }
