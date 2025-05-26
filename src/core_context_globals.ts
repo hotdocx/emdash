@@ -147,7 +147,7 @@ export function addRewriteRule(
         }
 
         // `infer` will fill Holes in lhsToElaborate, making it the "elaboratedLhsPattern"
-        const inferredLhsOverallType = infer(lhsElabCtx, lhsToElaborate, 0);
+        infer(lhsElabCtx, lhsToElaborate, 0); // Result type not immediately needed here, side-effects on lhsToElaborate
 
         if (!solveConstraints(lhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
@@ -247,10 +247,18 @@ export function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
     return EMDASH_UNIFICATION_INJECTIVE_TAGS.has(tag);
 }
 
-export let DEBUG_VERBOSE = false;
+let _debug_verbose_flag = false;
+
+export function setDebugVerbose(value: boolean): void {
+    _debug_verbose_flag = value;
+}
+
+export function getDebugVerbose(): boolean {
+    return _debug_verbose_flag;
+}
 
 export function consoleLog(message?: any, ...optionalParams: any[]): void {
-    if (DEBUG_VERBOSE) {
+    if (_debug_verbose_flag) {
         console.log(message, ...optionalParams);
     }
 }
@@ -263,6 +271,7 @@ export function resetMyLambdaPi() {
     userUnificationRules.length = 0;
     resetVarId();
     resetHoleId();
+    setDebugVerbose(false); // Reset debug flag as well
 }
 
 export function setupPhase1GlobalsAndRules() {
@@ -286,7 +295,7 @@ export function setupPhase1GlobalsAndRules() {
             Var(pvarY_obj)
         ),
         Var(pvar_g_XY),
-        emptyCtx // Assuming globals for types (CatTerm, ObjTerm etc) are already in globalDefs or types are simple
+        emptyCtx 
     );
 
     const pvar_f_XY = "$f_XY_pv";
