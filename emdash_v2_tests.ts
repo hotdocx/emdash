@@ -396,11 +396,11 @@ function runChurchEncodingTests() {
     // let list1 : List Bool = cons _ (id _ true) (nil _);
     const list1_val_type = App(Var("List_type"), Var("Bool_type"), Icit.Expl);
     const list1_val_val = App(
-        App(App(Var("cons_func"), Var("Bool_type"), Icit.Expl),
-            App(App(Var("id_func"), Var("Bool_type"), Icit.Expl), Var("true_val"), Icit.Expl),
+        App(App(Var("cons_func"), Hole(), Icit.Expl),
+            App(App(Var("id_func"), Hole(), Icit.Expl), Var("true_val"), Icit.Expl),
             Icit.Expl
         ),
-        App(Var("nil_func"), Var("Bool_type"), Icit.Expl),
+        App(Var("nil_func"), Hole(), Icit.Expl),
         Icit.Expl
     );
     defineGlobal("list1_val", list1_val_type, list1_val_val);
@@ -550,8 +550,8 @@ function runChurchEncodingTests() {
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
 
     // let eqTest : Eq _ hundred hundred = refl _ _;
-    const eqTest_val_type = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-    const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    const eqTest_val_type = App(App(App(Var("Eq_type"), Hole(), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    const eqTest_val_val = App(App(Var("refl_func"), Hole(), Icit.Expl), Var("hundred_val"), Icit.Expl);
     defineGlobal("eqTest_val", eqTest_val_type, eqTest_val_val);
     elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
     assert(areEqual(elabRes.type, eqTest_val_type, baseCtx), "Church Test 18.1: eqTest_val type check");
