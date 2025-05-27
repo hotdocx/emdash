@@ -584,7 +584,7 @@ function runChurchEncodingTests() {
     const isEqualDebug_18_1 = areEqual(elabRes.type, eqTest_val_type_expected, baseCtx);
     console.log(`[DEBUG TEST 18.1] areEqual result: ${isEqualDebug_18_1}`);
 
-    // assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
+    assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
 
     // U
     elabRes = elaborate(Type(), undefined, baseCtx);
