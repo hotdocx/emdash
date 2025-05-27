@@ -1,6 +1,6 @@
 import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
-import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
+import { whnf, solveConstraints, areEqual, normalize } from './core_logic'; // solveConstraints, whnf for addRewriteRule, normalize for defineGlobal
 
 export let nextVarId = 0;
 export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`; ////`$$fresh_${hint}${nextVarId++}`;
@@ -62,7 +62,10 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
                 throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
             }
-            elaboratedValue = getTermRef(valueToCheck);
+            // Store the fully elaborated and then normalized value.
+            // Normalization here helps to "settle" any thunks returned by check,
+            // potentially avoiding re-entrant loops if the normalized form is more stable.
+            elaboratedValue = getTermRef(checkedValueResult);
         }
 
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
@@ -84,97 +87,98 @@ export let userRewriteRules: StoredRewriteRule[] = []; // Stores elaborated rule
 
 // Helper for deep cloning
 export function cloneTerm(term: Term, clonedObjects: Map<Term, Term> = new Map()): Term {
-    if (clonedObjects.has(term)) {
-        return clonedObjects.get(term)!;
-    }
+    return term;
+    // if (clonedObjects.has(term)) {
+    //     return clonedObjects.get(term)!;
+    // }
 
-    let result: Term;
+    // let result: Term;
 
-    switch (term.tag) {
-        case 'Type': result = Type(); break;
-        case 'CatTerm': result = CatTerm(); break;
-        case 'Var': result = Var(term.name); break;
-        case 'Hole':
-            const newHole = Hole(term.id);
-            clonedObjects.set(term, newHole); // Add to map *before* recursive calls
-            if (term.ref) {
-                (newHole as Term & { tag: 'Hole' }).ref = cloneTerm(term.ref, clonedObjects);
-            }
-            if (term.elaboratedType) {
-                (newHole as Term & { tag: 'Hole' }).elaboratedType = cloneTerm(term.elaboratedType, clonedObjects);
-            }
-            result = newHole;
-            break;
-        case 'App':
-            result = App(
-                cloneTerm(term.func, clonedObjects),
-                cloneTerm(term.arg, clonedObjects),
-                term.icit
-            );
-            break;
-        case 'Lam': {
-            const clonedParamType = term.paramType ? cloneTerm(term.paramType, clonedObjects) : undefined;
-            const originalBodyFn = term.body;
-            const newClonedBodyFn = (v_bound: Term): Term => {
-                const originalBodyInstance = originalBodyFn(v_bound);
-                return cloneTerm(originalBodyInstance, clonedObjects);
-            };
-            // Direct construction for robustness, avoiding smart constructor overload issues
-            result = {
-                tag: 'Lam',
-                paramName: term.paramName,
-                icit: term.icit,
-                paramType: clonedParamType,
-                body: newClonedBodyFn,
-                _isAnnotated: term._isAnnotated
-            };
-            break;
-        }
-        case 'Pi': {
-            const clonedParamType = cloneTerm(term.paramType, clonedObjects);
-            const originalBodyTypeFn = term.bodyType;
-            const newClonedBodyTypeFn = (v_bound: Term): Term => {
-                const originalBodyTypeInstance = originalBodyTypeFn(v_bound);
-                return cloneTerm(originalBodyTypeInstance, clonedObjects);
-            };
-            result = Pi(term.paramName, term.icit, clonedParamType, newClonedBodyTypeFn);
-            break;
-        }
-        case 'ObjTerm': result = ObjTerm(cloneTerm(term.cat, clonedObjects)); break;
-        case 'HomTerm':
-            result = HomTerm(
-                cloneTerm(term.cat, clonedObjects),
-                cloneTerm(term.dom, clonedObjects),
-                cloneTerm(term.cod, clonedObjects)
-            ); break;
-        case 'MkCat_':
-            result = MkCat_(
-                cloneTerm(term.objRepresentation, clonedObjects),
-                cloneTerm(term.homRepresentation, clonedObjects),
-                cloneTerm(term.composeImplementation, clonedObjects)
-            ); break;
-        case 'IdentityMorph':
-            result = IdentityMorph(
-                cloneTerm(term.obj, clonedObjects),
-                term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined
-            ); break;
-        case 'ComposeMorph':
-            result = ComposeMorph(
-                cloneTerm(term.g, clonedObjects),
-                cloneTerm(term.f, clonedObjects),
-                term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined,
-                term.objX_IMPLICIT ? cloneTerm(term.objX_IMPLICIT, clonedObjects) : undefined,
-                term.objY_IMPLICIT ? cloneTerm(term.objY_IMPLICIT, clonedObjects) : undefined,
-                term.objZ_IMPLICIT ? cloneTerm(term.objZ_IMPLICIT, clonedObjects) : undefined
-            ); break;
-        default:
-            const exhaustiveCheck: never = term;
-            throw new Error(`cloneTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
-    }
-    if (term.tag !== 'Var' && term.tag !== 'Type' && term.tag !== 'CatTerm') { // Avoid storing simple immutable singletons
-         clonedObjects.set(term, result);
-    }
-    return result;
+    // switch (term.tag) {
+    //     case 'Type': result = Type(); break;
+    //     case 'CatTerm': result = CatTerm(); break;
+    //     case 'Var': result = Var(term.name); break;
+    //     case 'Hole':
+    //         const newHole = Hole(term.id);
+    //         clonedObjects.set(term, newHole); // Add to map *before* recursive calls
+    //         if (term.ref) {
+    //             (newHole as Term & { tag: 'Hole' }).ref = cloneTerm(term.ref, clonedObjects);
+    //         }
+    //         if (term.elaboratedType) {
+    //             (newHole as Term & { tag: 'Hole' }).elaboratedType = cloneTerm(term.elaboratedType, clonedObjects);
+    //         }
+    //         result = newHole;
+    //         break;
+    //     case 'App':
+    //         result = App(
+    //             cloneTerm(term.func, clonedObjects),
+    //             cloneTerm(term.arg, clonedObjects),
+    //             term.icit
+    //         );
+    //         break;
+    //     case 'Lam': {
+    //         const clonedParamType = term.paramType ? cloneTerm(term.paramType, clonedObjects) : undefined;
+    //         const originalBodyFn = term.body;
+    //         const newClonedBodyFn = (v_bound: Term): Term => {
+    //             const originalBodyInstance = originalBodyFn(v_bound);
+    //             return cloneTerm(originalBodyInstance, clonedObjects);
+    //         };
+    //         // Direct construction for robustness, avoiding smart constructor overload issues
+    //         result = {
+    //             tag: 'Lam',
+    //             paramName: term.paramName,
+    //             icit: term.icit,
+    //             paramType: clonedParamType,
+    //             body: newClonedBodyFn,
+    //             _isAnnotated: term._isAnnotated
+    //         };
+    //         break;
+    //     }
+    //     case 'Pi': {
+    //         const clonedParamType = cloneTerm(term.paramType, clonedObjects);
+    //         const originalBodyTypeFn = term.bodyType;
+    //         const newClonedBodyTypeFn = (v_bound: Term): Term => {
+    //             const originalBodyTypeInstance = originalBodyTypeFn(v_bound);
+    //             return cloneTerm(originalBodyTypeInstance, clonedObjects);
+    //         };
+    //         result = Pi(term.paramName, term.icit, clonedParamType, newClonedBodyTypeFn);
+    //         break;
+    //     }
+    //     case 'ObjTerm': result = ObjTerm(cloneTerm(term.cat, clonedObjects)); break;
+    //     case 'HomTerm':
+    //         result = HomTerm(
+    //             cloneTerm(term.cat, clonedObjects),
+    //             cloneTerm(term.dom, clonedObjects),
+    //             cloneTerm(term.cod, clonedObjects)
+    //         ); break;
+    //     case 'MkCat_':
+    //         result = MkCat_(
+    //             cloneTerm(term.objRepresentation, clonedObjects),
+    //             cloneTerm(term.homRepresentation, clonedObjects),
+    //             cloneTerm(term.composeImplementation, clonedObjects)
+    //         ); break;
+    //     case 'IdentityMorph':
+    //         result = IdentityMorph(
+    //             cloneTerm(term.obj, clonedObjects),
+    //             term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined
+    //         ); break;
+    //     case 'ComposeMorph':
+    //         result = ComposeMorph(
+    //             cloneTerm(term.g, clonedObjects),
+    //             cloneTerm(term.f, clonedObjects),
+    //             term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined,
+    //             term.objX_IMPLICIT ? cloneTerm(term.objX_IMPLICIT, clonedObjects) : undefined,
+    //             term.objY_IMPLICIT ? cloneTerm(term.objY_IMPLICIT, clonedObjects) : undefined,
+    //             term.objZ_IMPLICIT ? cloneTerm(term.objZ_IMPLICIT, clonedObjects) : undefined
+    //         ); break;
+    //     default:
+    //         const exhaustiveCheck: never = term;
+    //         throw new Error(`cloneTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
+    // }
+    // if (term.tag !== 'Var' && term.tag !== 'Type' && term.tag !== 'CatTerm') { // Avoid storing simple immutable singletons
+    //      clonedObjects.set(term, result);
+    // }
+    // return result;
 }
 
 

@@ -108,18 +108,20 @@ We are ready to archive this task file if re-running tests after the `checkedVal
 1.  **`defineGlobal` uses `checkedValueResult`**: Modified `src/core_context_globals.ts` so that `elaboratedValue` in `defineGlobal` is now correctly assigned from `getTermRef(checkedValueResult)`. This ensures that the term stored for a global definition is the one that has been fully type-checked and potentially transformed by the `check` function (e.g., with inserted implicit lambdas).
 2.  **Corrected Lam-Pi Rule in `check`**: Updated the `check` function in `src/core_elaboration.ts` (around lines 341-357) for the case where a `Lam` term is checked against a `Pi` type. The body of the returned `Lam` term is now a function that, when invoked with an argument `v_arg`, correctly sets up a new context where the lambda's parameter is bound to `v_arg`. It then re-checks the original lambda's body structure against the Pi's body type (instantiated with `v_arg`) within this new context. This ensures that the elaborated lambda body is correctly dependent on its argument.
 3.  **Corrected Implicit Lambda Insertion in `check`**: Updated the `check` function in `src/core_elaboration.ts` (around lines 310-328) for the implicit lambda insertion case. Similar to the explicit `Lam`-`Pi` rule, the body of the newly inserted implicit `Lam` is now a function. This function, when invoked with an argument `v_actual_arg`, sets up a context where the lambda's parameter is bound to `v_actual_arg`. It then re-checks the original `currentTerm` (the term being wrapped by the implicit lambda) against the expected body type (derived from the `Pi` type and instantiated with `v_actual_arg`) within this new context. This ensures that the implicit lambda correctly processes its argument during evaluation.
+4.  **Corrected `Var` case in `infer`**: Updated `src/core_elaboration.ts` in the `infer` function, `Var` case, to return `{ elaboratedTerm: localBinding.definition, type: localBinding.type }` when a local binding has a definition. This ensures that the definition is used during inference.
+5.  **Normalize Stored Global Values**: In `src/core_context_globals.ts`, the `defineGlobal` function now sets `elaboratedValue = normalize(getTermRef(checkedValueResult), elabCtx, 0)`. This aims to store a more stable, fully evaluated form of the global definition's value, potentially preventing re-entrant loops during complex definitions like `eqTest_val`.
 
 ### Remaining for Task Completion
 
-1.  **Run all tests**: After these significant changes to `check` and `defineGlobal`, all tests (especially "Church Test 18.1" and the "Implicit Argument Tests" like IA1.1) need to be re-run to confirm that: 
-    *   The original issues are resolved.
+1.  **Run all tests**: After these significant changes, all tests (especially "Church Test 18.1" and the "Implicit Argument Tests" like IA1.1) need to be re-run to confirm that:
+    *   The original issues (including the non-terminating loop) are resolved.
     *   No new regressions have been introduced.
-2.  **Analyze `normalize` for `Var` case**: Investigate the `normalize` function in `src/core_logic.ts`, specifically the `'Var'` case, to ensure it correctly handles global definitions, potentially looking them up and unfolding them if appropriate (respecting flags like `isTypeNameLike`).
+2.  **Analyze `normalize` for `Var` case (if still needed)**: If issues persist, particularly with unfolding or stability of global definitions, the `normalize` function in `src/core_logic.ts` (specifically the `'Var'` case and its interaction with `globalDefs` and flags like `isTypeNameLike`) might need further review.
 3.  **Final Review**: Conduct a final review of the changes and their impact on the overall type checking and elaboration logic.
 
 ### Next Steps
 
 *   The user should run the full test suite.
-*   Based on the test results, if Test 18.1 or other tests still fail, the next prompt should focus on debugging those specific failures, potentially starting with the `normalize` function or further refining the context handling in `check` and `infer` if the issue seems related to how terms are processed under binders or during substitution.
+*   Based on the test results, if Test 18.1 or other tests still fail, the next prompt should focus on debugging those specific failures. If the loop is gone but 18.1 fails for other reasons, the debug output for `eqTest_val` (type and value) will be crucial.
 
-We are not ready to archive this task file. The core issue of Test 18.1 and related elaboration subtleties are still under investigation, although significant progress has been made in the `check` function. 
+We are not ready to archive this task file. The stability and correctness of global definitions, especially complex ones involving self-reference or higher-order functions, are still being fine-tuned. 

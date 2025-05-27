@@ -375,21 +375,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         
         const elaboratedBody_unused = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
         // console.log('CHECK>>', lamNode.paramName, lamNode.icit, lamParamType, actualBodyTerm, expectedBodyPiType, elaboratedBody_unused);
-        return Lam(
-            lamNode.paramName,
-            lamNode.icit,
-            lamParamType,
-            (v_arg: Term) => { // v_arg is the term this Lam is applied to.
-                // Context for checking the body: lamNode.paramName is bound to v_arg, with type lamParamType.
-                const bodyCheckCtx = extendCtx(ctx, lamNode.paramName, lamParamType, lamNode.icit, v_arg);
-                // The structure to check is the original body structure: lamNode.body(Var(lamNode.paramName))
-                const bodyToReCheck = lamNode.body(Var(lamNode.paramName));
-                // The type it needs to conform to is derived from the Pi's body, instantiated with v_arg.
-                const bodyExpectedType = whnf(expectedPiNode.bodyType(v_arg), bodyCheckCtx);
-    
-                return check(bodyCheckCtx, bodyToReCheck, bodyExpectedType, stackDepth + 1);
-            }
-        );
+        return lamNode;
     }
 
 

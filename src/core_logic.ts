@@ -2,8 +2,8 @@ import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, A
 import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
-export const MAX_WHNF_ITERATIONS = 1000;
-export const MAX_STACK_DEPTH = 200;
+export const MAX_WHNF_ITERATIONS = 10000;
+export const MAX_STACK_DEPTH = 20000;
 
 export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     if (depth > MAX_STACK_DEPTH) throw new Error(`Structural Equality check depth exceeded (areStructurallyEqualNoWhnf depth: ${depth})`);

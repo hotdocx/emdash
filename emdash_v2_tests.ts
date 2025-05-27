@@ -436,7 +436,7 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, true, true);
+    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, false, true);
     elabRes = elaborate(Var("Eq_type"), undefined, baseCtx);
     const Eq_type_type_expected = Pi("A_Eq_param", Icit.Expl, Type(), A_Eq_term =>
         Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
@@ -490,7 +490,7 @@ function runChurchEncodingTests() {
             Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
         )
     );
-    defineGlobal("Nat_type", Type(), Nat_type_val, false, true, true);
+    defineGlobal("Nat_type", Type(), Nat_type_val, false, false, true);
     elabRes = elaborate(Var("Nat_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 13.1: Nat_type type check");
 
