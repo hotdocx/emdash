@@ -164,6 +164,7 @@ function runImplicitArgumentTests() {
     const ctx = emptyCtx;
 
     resetMyLambdaPi();
+    setDebugVerbose(true);
     defineGlobal("constId",
         Pi("A", Icit.Impl, Type(), A_param => Pi("x", Icit.Expl, A_param, _x_param => A_param)),
         Lam("A_lam", Icit.Impl, Type(), A_term => Lam("x_lam", Icit.Expl, A_term, x_term => x_term))
