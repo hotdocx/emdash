@@ -197,7 +197,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             }
             case 'Var': { // This is reached if no local definition was found earlier in the loop for this Var.
                 const gdef = globalDefs.get(current.name);
-                if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
+                if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol && !gdef.isTypeNameLike) {
                     current = gdef.value; 
                     reducedInKernelBlock = true;
                 }

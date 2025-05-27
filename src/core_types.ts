@@ -81,6 +81,7 @@ export interface GlobalDef {
     value?: Term;
     isConstantSymbol?: boolean;
     isInjective?: boolean; // For unification decomposition: F X = F Y => X = Y
+    isTypeNameLike?: boolean; // Added: True if whnf should not unfold this (e.g. for Nat_type)
 }
 export interface RewriteRule { // Raw rule definition for storage before elaboration
     name: string;

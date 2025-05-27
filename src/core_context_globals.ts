@@ -16,7 +16,7 @@ export const FH = (): Term & { tag: 'Hole' } => Hole(freshHoleName());
 
 export let globalDefs: Map<string, GlobalDef> = new Map();
 
-export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean) {
+export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean, isTypeNameLike?: boolean) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
@@ -65,7 +65,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
             elaboratedValue = getTermRef(valueToCheck); //whnf(getTermRef(valueToCheck), elabCtx); // Store the elaborated (and normalized) value
         }
 
-        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective });
+        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
         // consoleLog(`Global \'${name}\' defined and elaborated successfully.`);
 
     } catch (e) {
