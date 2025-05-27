@@ -147,6 +147,8 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             case 'App': {
                 const func_whnf_ref = getTermRef(whnf(current.func, ctx, stackDepth + 1));
                 if (func_whnf_ref.tag === 'Lam' && func_whnf_ref.icit === current.icit) { 
+                    console.log('WHNF>>', i , ' ', {current}, ' ', {func_whnf_ref}, ' current.arg: ', current.arg );
+
                     // Beta reduction: The body of the lambda is called with the argument.
                     // If the lambda's parameter was meant to be substituted by `current.arg`,
                     // the `body` function itself should handle this, OR
@@ -156,6 +158,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     // This is more relevant for `normalize` or `infer` when they set up such contexts.
                     // For raw `whnf` of an `App(Lam(...), arg)`, direct application of `body(arg)` is standard.
                     current = func_whnf_ref.body(current.arg);
+                    console.log('WHNF>> After sub', i , ' ', {current});
                     reducedInKernelBlock = true;
                 } else if (getTermRef(current.func) !== func_whnf_ref) { 
                     current = App(func_whnf_ref, current.arg, current.icit);
@@ -235,13 +238,6 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
     const current = getTermRef(headReduced); 
     switch (current.tag) {
         case 'Type': case 'Var' : case 'Hole': case 'CatTerm': return current;
-        // case 'Var' : {
-        //     const binding = lookupCtx(ctx, current.name);
-        //     if (binding && binding.definition) {
-        //         return normalize(binding.definition, ctx, stackDepth + 1); // Substitute with the definition
-        //     }
-        //     return current;
-        // };
         case 'ObjTerm': return ObjTerm(normalize(current.cat, ctx, stackDepth + 1));
         case 'HomTerm':
             return HomTerm(

@@ -51,7 +51,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
 
     if (current.tag === 'Var') {
         const localBinding = lookupCtx(ctx, current.name);
-        if (localBinding) return { elaboratedTerm: current, type: localBinding.type };
+        if (localBinding) return { elaboratedTerm: localBinding.definition, type: localBinding.type };
 
         const gdef = globalDefs.get(current.name);
         if (gdef) return { elaboratedTerm: current, type: gdef.type };
