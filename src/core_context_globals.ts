@@ -62,7 +62,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
                 throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
             }
-            elaboratedValue = getTermRef(checkedValueResult);
+            elaboratedValue = getTermRef(valueToCheck);
         }
 
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
