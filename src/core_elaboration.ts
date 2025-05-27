@@ -305,13 +305,33 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         const termRef = getTermRef(currentTerm);
         if (!(termRef.tag === 'Lam' && termRef.icit === Icit.Impl)) {
             // Insert implicit lambda
-            const extendedCtx = extendCtx(ctx, expectedTypeWhnf.paramName, expectedTypeWhnf.paramType, expectedTypeWhnf.icit);
-            const expectedBodyType = whnf(expectedTypeWhnf.bodyType(Var(expectedTypeWhnf.paramName)), extendedCtx);
+            const lamParamName = expectedTypeWhnf.paramName;
+            const lamParamType = getTermRef(expectedTypeWhnf.paramType);
             
-            const elaboratedBody = check(extendedCtx, currentTerm, expectedBodyType, stackDepth + 1);
-            
-            // Construct the new implicit Lam
-            return Lam(expectedTypeWhnf.paramName, Icit.Impl, getTermRef(expectedTypeWhnf.paramType), (_v:Term) => elaboratedBody);
+            // Construct the new implicit Lam.
+            // The body function will re-check `currentTerm` (which is termRef after getTermRef, 
+            // or the original term passed to this check branch)
+            // in the context of the actual argument supplied to this new lambda.
+            return Lam(
+                lamParamName,
+                Icit.Impl,
+                lamParamType,
+                (v_actual_arg: Term) => {
+                    const bodyCheckCtx = extendCtx(
+                        ctx, // Original context from the current `check` call
+                        lamParamName,
+                        lamParamType,
+                        Icit.Impl,
+                        v_actual_arg // Bind lamParamName to the concrete v_actual_arg
+                    );
+                    // The type the body (currentTerm) must conform to, instantiated with the concrete argument
+                    const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(v_actual_arg), bodyCheckCtx);
+                    
+                    // `currentTerm` is the term that this implicit lambda is being wrapped around.
+                    // This `currentTerm` comes from the outer scope of this `if` block.
+                    return check(bodyCheckCtx, currentTerm, bodyExpectedTypeInner, stackDepth + 1);
+                }
+            );
         }
     }
     
@@ -346,9 +366,23 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
         const expectedBodyPiType = whnf(expectedPiNode.bodyType(Var(lamNode.paramName)), extendedCtx);
         
-        const elaboratedBody = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
-        
-        return Lam(lamNode.paramName, lamNode.icit, lamParamType, (_v:Term) => elaboratedBody);
+        const elaboratedBody_unused = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
+        // console.log('CHECK>>', lamNode.paramName, lamNode.icit, lamParamType, actualBodyTerm, expectedBodyPiType, elaboratedBody_unused);
+        return Lam(
+            lamNode.paramName,
+            lamNode.icit,
+            lamParamType,
+            (v_arg: Term) => { // v_arg is the term this Lam is applied to.
+                // Context for checking the body: lamNode.paramName is bound to v_arg, with type lamParamType.
+                const bodyCheckCtx = extendCtx(ctx, lamNode.paramName, lamParamType, lamNode.icit, v_arg);
+                // The structure to check is the original body structure: lamNode.body(Var(lamNode.paramName))
+                const bodyToReCheck = lamNode.body(Var(lamNode.paramName));
+                // The type it needs to conform to is derived from the Pi's body, instantiated with v_arg.
+                const bodyExpectedType = whnf(expectedPiNode.bodyType(v_arg), bodyCheckCtx);
+    
+                return check(bodyCheckCtx, bodyToReCheck, bodyExpectedType, stackDepth + 1);
+            }
+        );
     }
 
 

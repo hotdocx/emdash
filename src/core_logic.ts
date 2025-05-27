@@ -233,9 +233,15 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Normalize stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     const headReduced = whnf(term, ctx, stackDepth + 1);
     const current = getTermRef(headReduced); 
-
     switch (current.tag) {
-        case 'Type': case 'Var': case 'Hole': case 'CatTerm': return current;
+        case 'Type': case 'Var' : case 'Hole': case 'CatTerm': return current;
+        // case 'Var' : {
+        //     const binding = lookupCtx(ctx, current.name);
+        //     if (binding && binding.definition) {
+        //         return normalize(binding.definition, ctx, stackDepth + 1); // Substitute with the definition
+        //     }
+        //     return current;
+        // };
         case 'ObjTerm': return ObjTerm(normalize(current.cat, ctx, stackDepth + 1));
         case 'HomTerm':
             return HomTerm(
@@ -311,6 +317,7 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 // will then pick up `normArg` as its definition.
                 return normalize(finalNormFunc.body(Var(finalNormFunc.paramName)), extendedCtxForBody, stackDepth + 1);
             }
+            console.log('NORMALIZE>>', normFunc, normArg, current.icit);
             return App(normFunc, normArg, current.icit); 
         }
         case 'Pi': {

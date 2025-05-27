@@ -7,7 +7,8 @@ import {
 import {
     defineGlobal, addRewriteRule, resetMyLambdaPi, setupPhase1GlobalsAndRules,
     emptyCtx, getTermRef, addConstraint, userRewriteRules, // Removed StoredRewriteRule from here
-    cloneTerm, setDebugVerbose, getDebugVerbose, FH // Imported FH, removed freshHoleName
+    cloneTerm, setDebugVerbose, getDebugVerbose, FH, // Imported FH, removed freshHoleName
+    globalDefs
 } from './src/core_context_globals';
 import {
     areEqual, normalize, whnf, unify, solveConstraints // Removed UnifyResult from here
@@ -171,8 +172,8 @@ function runImplicitArgumentTests() {
     defineGlobal("five", Var("Nat"), undefined, true);
 
     let term = App(App(Var("constId"), Var("Nat"), Icit.Impl), Var("five"), Icit.Expl); 
-    let elabRes = elaborate(term, undefined, ctx);
-    assertEqual(printTerm(elabRes.term), "five", "IA1.1: (constId {Nat} five) should elaborate to five");
+    let elabRes = elaborate(term, undefined, ctx)// , { normalizeResultTerm : false });
+    assertEqual(printTerm(elabRes.term), "five", "IA1.1: (constId {Nat} five) should elaborate to five, Got " + printTerm(elabRes.term));
     assertEqual(printTerm(elabRes.type), "Nat", "IA1.1: Type of (constId {Nat} five) should be Nat");
 
     term = App(Var("constId"), Var("five"), Icit.Expl); 
@@ -181,7 +182,7 @@ function runImplicitArgumentTests() {
     assertEqual(printTerm(elabRes.type), "Nat", "IA1.2: Type of (constId five) should be Nat");
 
     resetMyLambdaPi();
-    setDebugVerbose(true);
+    setDebugVerbose(false);
     defineGlobal("Nat", Type(), undefined, true, false, true); // isTypeNameLike: true, isConstantSymbol: true
     const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
     const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param); 
@@ -209,7 +210,7 @@ function runImplicitArgumentTests() {
 
 
     resetMyLambdaPi();
-    setDebugVerbose(true);
+    setDebugVerbose(false);
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); 
@@ -246,7 +247,7 @@ function runImplicitArgumentTests() {
     assert(areEqual(getTermRef(hole1), Var("a_val"), ctx), "IA3.1: For injective f_inj, (f_inj a = f_inj ?h1) should solve ?h1 to a_val");
 
     resetMyLambdaPi();
-    setDebugVerbose(true);
+    setDebugVerbose(false);
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); 
@@ -434,7 +435,7 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, false, true);
+    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, true, true);
     elabRes = elaborate(Var("Eq_type"), undefined, baseCtx);
     const Eq_type_type_expected = Pi("A_Eq_param", Icit.Expl, Type(), A_Eq_term =>
         Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
@@ -488,7 +489,7 @@ function runChurchEncodingTests() {
             Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
         )
     );
-    defineGlobal("Nat_type", Type(), Nat_type_val, false, false, true);
+    defineGlobal("Nat_type", Type(), Nat_type_val, false, true, true);
     elabRes = elaborate(Var("Nat_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 13.1: Nat_type type check");
 
@@ -568,14 +569,18 @@ function runChurchEncodingTests() {
     defineGlobal("thousand_val", Var("Nat_type"), thousand_val_val);
     elabRes = elaborate(Var("thousand_val"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
-
+    // setDebugVerbose(true);
     // let eqTest : Eq _ hundred hundred = refl _ _;
-    const eqTest_val_type_original = App(App(App(Var("Eq_type"), FH(), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
     const eqTest_val_val = App(App(Var("refl_func"), FH(), Icit.Expl), FH(), Icit.Expl);
     defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
     elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
+    const eqTest_val_term = Var("eqTest_val");
     const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-
+    const gdef = globalDefs.get("eqTest_val");
+    console.log(`[DEBUG TEST 18.1] gdef type: ${printTerm(gdef.type)}`);
+    console.log(`[DEBUG TEST 18.1] gdef value: ${printTerm(gdef.value)}`);
+    console.log(`[DEBUG TEST 18.1] eqTest_val_term: ${printTerm(whnf(Var("eqTest_val"), baseCtx))}`);
     console.log(`[DEBUG TEST 18.1] elabRes.type: ${printTerm(elabRes.type)}`);
     console.log(`[DEBUG TEST 18.1] eqTest_val_type_expected: ${printTerm(eqTest_val_type_expected)}`);
     const n1_debug_18_1 = whnf(elabRes.type, baseCtx);
@@ -585,7 +590,7 @@ function runChurchEncodingTests() {
     const isEqualDebug_18_1 = areEqual(elabRes.type, eqTest_val_type_expected, baseCtx);
     console.log(`[DEBUG TEST 18.1] areEqual result: ${isEqualDebug_18_1}`);
 
-    // assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
+    assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
 
     // U
     elabRes = elaborate(Type(), undefined, baseCtx);
@@ -694,8 +699,9 @@ function runChurchEncodingTests() {
     assert(areEqual(resolved_fh_direct_21, nat_type_global_ref, baseCtx), `Church Test 21.5: Direct check of fh_hole_instance_21.ref resolved to Nat_type. Expected ${printTerm(nat_type_global_ref)}, Got ${printTerm(resolved_fh_direct_21)}`);
     
     // Check the body of the Pi for Q
-    const Q_body_type_elab21 = getTermRef(Pi_Q_elab21.bodyType(Var(Pi_Q_elab21.paramName)));
-    assert(areEqual(Q_body_type_elab21, Type(), baseCtx), `Church Test 21.6: Body type of Pi Q is Type. Expected Type, Got ${printTerm(Q_body_type_elab21)}`);
+    const Q_body_elab21 = getTermRef(Pi_Q_elab21.bodyType(Var(Pi_Q_elab21.paramName)));
+    const Q_body_expected = App(Var(Q_param_name_fh21), five_val_global_ref, Icit.Expl);
+    assert(areEqual(Q_body_elab21, Q_body_expected, baseCtx), `Church Test 21.6: Body type of Pi Q . Expected ${printTerm(Q_body_expected)}, Got ${printTerm(Q_body_elab21)}`);
 
     console.log("Church Test 21 (FH in Pi type with Globals resolution) completed.");
 

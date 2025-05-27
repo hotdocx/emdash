@@ -71,4 +71,55 @@ This mechanism seems correct and should lead to the desired resolution of the ho
 - If it passes, this task can be considered complete and archived.
 - If it fails, debugging will be required based on the failure message and further analysis of the trace. Assuming it passes given the analysis.
 
-**Conclusion (Anticipated):** The test should pass, confirming the robust handling of holes within nested Pi type parameter declarations. We are ready to archive this task file and move on to the next main Task. 
+**Conclusion (Anticipated):** The test should pass, confirming the robust handling of holes within nested Pi type parameter declarations. We are ready to archive this task file and move on to the next main Task.
+
+## Update & Analysis (Post Test 21 Manual Fix & Test 18.1 Debug)
+
+**User manually fixed Test 21.6 assertion:** The original assertion `areEqual(Q_body_elab21, Type(), ...)` was indeed unsound. The body `App(Q_term, five_val_global_ref)` should have type `Type`, but the term itself is an application, not `Type`. The corrected assertion likely checks `areEqual(elabRes21.type, Type(), baseCtx)` for the overall expression, and specific structural checks for the body, which now pass.
+
+**Test 18.1 (`eqTest_val`) Failure Analysis:**
+
+*   **Observation:** Test 18.1 still fails. The `gdef.value` for `eqTest_val` showed `((refl_func ?h13(:Type)) ?h14(:?h13(:Type)))`. This indicates that the holes `?h13` and `?h14` (from `FH()` in the *value* part of `eqTest_val`) are correctly having their `elaboratedType` properties set during inference.
+*   **Issue in `defineGlobal`:** A crucial bug was identified: `elaboratedValue = getTermRef(valueToCheck)` should be `elaboratedValue = getTermRef(checkedValueResult)`. The `check` function returns the elaborated term, which might be structurally different (e.g., due to implicit lambda insertion) from the input `valueToCheck`. This has been corrected.
+*   **Root Cause of 18.1 Failure (Hypothesis):** The core problem for Test 18.1 seems to be that the `type` stored in `globalDefs` for `eqTest_val` (which is `elabRes.type` in the test, derived from `elaboratedType` in `defineGlobal`) is being corrupted. Specifically, a subterm `Var("Nat_type")` within this stored type definition appears to be replaced by or aliased with `?h13` (a hole originating from the *value's* elaboration).
+    *   The original type `Eq_type Nat_type hundred_val hundred_val` has no holes.
+    *   The `elaboratedType` in `defineGlobal` is a clone of this original type and should remain pristine.
+    *   However, the failure log `whnf(elabRes.type): (Π (P_Eq_param : (Π (ignored_P_arg : ?h13(:Type)). Type))` indicates that `elabRes.type` effectively became `Eq_type ?h13 hundred_val hundred_val`.
+    *   This points to an unintended mutation of the `elaboratedType` (the `expectedType` argument to `check`) during the elaboration/checking of the *value* part of the global definition.
+
+**Current State of `isTypeNameLike` fix:**
+*   The `isTypeNameLike` flag was added to `GlobalDef` and `defineGlobal`.
+*   `whnf` was updated to respect `isTypeNameLike` for `Var`s, preventing unfolding of these globals.
+*   Definitions for `Nat_type`, `Bool_type`, `List_type`, `Eq_type` in tests were updated with `isTypeNameLike: true`.
+*   This successfully fixed Test 21.4 and 21.5 where `fh_hole_instance_21` now correctly resolves to `Var("Nat_type")` instead of its unfolded definition.
+
+**Next Steps:**
+1.  Re-run all tests to see if the `checkedValueResult` fix in `defineGlobal` has fixed Test 18.1. It's possible that storing an incompletely elaborated value led to subsequent errors during `areEqual` that manifested as the type mismatch.
+2.  If Test 18.1 still fails, a deep dive into how `expectedType` (which is `elaboratedType` in `defineGlobal`) could be mutated by `check(..., valueToCheck, elaboratedType, ...)` or its sub-calls (`addConstraint`, `solveConstraints`, `unify`) is required. This might involve careful logging or step-through debugging, looking for any aliasing or direct modification of non-hole terms within `elaboratedType`.
+
+We are ready to archive this task file if re-running tests after the `checkedValueResult` fix shows that Test 18.1 passes. If not, further investigation is needed for Test 18.1.
+
+**Conclusion (Anticipated):** The test should pass, confirming the robust handling of holes within nested Pi type parameter declarations. We are ready to archive this task file and move on to the next main Task.
+
+## Progress Log
+
+### Implemented (Fixes and Refinements)
+
+1.  **`defineGlobal` uses `checkedValueResult`**: Modified `src/core_context_globals.ts` so that `elaboratedValue` in `defineGlobal` is now correctly assigned from `getTermRef(checkedValueResult)`. This ensures that the term stored for a global definition is the one that has been fully type-checked and potentially transformed by the `check` function (e.g., with inserted implicit lambdas).
+2.  **Corrected Lam-Pi Rule in `check`**: Updated the `check` function in `src/core_elaboration.ts` (around lines 341-357) for the case where a `Lam` term is checked against a `Pi` type. The body of the returned `Lam` term is now a function that, when invoked with an argument `v_arg`, correctly sets up a new context where the lambda's parameter is bound to `v_arg`. It then re-checks the original lambda's body structure against the Pi's body type (instantiated with `v_arg`) within this new context. This ensures that the elaborated lambda body is correctly dependent on its argument.
+3.  **Corrected Implicit Lambda Insertion in `check`**: Updated the `check` function in `src/core_elaboration.ts` (around lines 310-328) for the implicit lambda insertion case. Similar to the explicit `Lam`-`Pi` rule, the body of the newly inserted implicit `Lam` is now a function. This function, when invoked with an argument `v_actual_arg`, sets up a context where the lambda's parameter is bound to `v_actual_arg`. It then re-checks the original `currentTerm` (the term being wrapped by the implicit lambda) against the expected body type (derived from the `Pi` type and instantiated with `v_actual_arg`) within this new context. This ensures that the implicit lambda correctly processes its argument during evaluation.
+
+### Remaining for Task Completion
+
+1.  **Run all tests**: After these significant changes to `check` and `defineGlobal`, all tests (especially "Church Test 18.1" and the "Implicit Argument Tests" like IA1.1) need to be re-run to confirm that: 
+    *   The original issues are resolved.
+    *   No new regressions have been introduced.
+2.  **Analyze `normalize` for `Var` case**: Investigate the `normalize` function in `src/core_logic.ts`, specifically the `'Var'` case, to ensure it correctly handles global definitions, potentially looking them up and unfolding them if appropriate (respecting flags like `isTypeNameLike`).
+3.  **Final Review**: Conduct a final review of the changes and their impact on the overall type checking and elaboration logic.
+
+### Next Steps
+
+*   The user should run the full test suite.
+*   Based on the test results, if Test 18.1 or other tests still fail, the next prompt should focus on debugging those specific failures, potentially starting with the `normalize` function or further refining the context handling in `check` and `infer` if the issue seems related to how terms are processed under binders or during substitution.
+
+We are not ready to archive this task file. The core issue of Test 18.1 and related elaboration subtleties are still under investigation, although significant progress has been made in the `check` function. 
