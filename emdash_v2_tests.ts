@@ -16,6 +16,7 @@ import {
 import {
     elaborate, printTerm, infer, check, isPatternVarName, matchPattern, ElaborationOptions
 } from './src/core_elaboration';
+import { describe, it } from 'node:test';
 
 // Helper function to assert equality for test cases
 function assertEqual(actual: string, expected: string, message: string) {
@@ -264,6 +265,159 @@ function runImplicitArgumentTests() {
     assert(getTermRef(hole3).tag === 'Hole', "IA3.2: For non-injective g_noninj, (g_noninj a = g_noninj ?h3) should leave ?h3 as a hole");
 
     console.log("Implicit Argument Tests Completed.");
+}
+
+function runMoreImplicitArgumentTests() {
+    describe("More Implicit Argument Tests from Haskell Examples", () => {
+        it("id : {A : U} -> A -> A = \\x. x", () => {
+            resetMyLambdaPi();
+            const id_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            const id_raw_val = Lam("x", Icit.Expl, FH(), x => x);
+            const elabId = elaborate(id_raw_val, id_type);
+            const expected_id_elab_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
+            assertEqual(printTerm(elabId.term), printTerm(expected_id_elab_val), "id elaboration: term");
+            assertEqual(printTerm(elabId.type), printTerm(id_type), "id elaboration: type");
+            defineGlobal("id", elabId.type, elabId.term);
+        });
+
+        it("const : {A B} -> A -> B -> A = \\x y. x", () => {
+            resetMyLambdaPi();
+            const const_type = Pi("A", Icit.Impl, Type(), A =>
+                               Pi("B", Icit.Impl, Type(), B =>
+                               Pi("x", Icit.Expl, A, _ =>
+                               Pi("y", Icit.Expl, B, _ => A))));
+            const const_raw_val = Lam("x", Icit.Expl, FH(), x => Lam("y", Icit.Expl, FH(), y => x));
+            const elabConst = elaborate(const_raw_val, const_type);
+            const expected_const_elab_val = Lam("A", Icit.Impl, Type(), A =>
+                                           Lam("B", Icit.Impl, Type(), B =>
+                                           Lam("x", Icit.Expl, A, x =>
+                                           Lam("y", Icit.Expl, B, y => x))));
+            assertEqual(printTerm(elabConst.term), printTerm(expected_const_elab_val), "const elaboration: term");
+            assertEqual(printTerm(elabConst.type), printTerm(const_type), "const elaboration: type");
+            defineGlobal("const", elabConst.type, elabConst.term);
+        });
+
+        it("the : (A : _) -> A -> A = \\_ x. x", () => {
+            resetMyLambdaPi();
+            // (A:_) means A is a type, so Pi("A", Icit.Expl, Type(), ...)
+            const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            // Raw value uses FH() for the type of 'A' in Lam binding, to be inferred/checked.
+            // However, paramType for Lam is required for _isAnnotated: true.
+            // Let's be explicit based on the Pi type.
+            const the_raw_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
+            const elabThe = elaborate(the_raw_val, the_type);
+
+            // defineGlobal requires the value to be elaborated if not a base constant.
+            defineGlobal("the", elabThe.type, elabThe.term);
+
+            // Verify definition
+            const globalThe = globalDefs.get("the");
+            assert(globalThe !== undefined, "the should be defined globally");
+            assertEqual(printTerm(globalThe!.type), printTerm(the_type), "the global type check");
+            assertEqual(printTerm(normalize(globalThe!.value!, emptyCtx)), printTerm(normalize(elabThe.term, emptyCtx)), "the global value check");
+        });
+
+        it("argTest1 = const {U}{U} U (infer type and value)", () => {
+            resetMyLambdaPi();
+            // Define const first
+            const const_type = Pi("A", Icit.Impl, Type(), A => Pi("B", Icit.Impl, Type(), B => Pi("x", Icit.Expl, A, _ => Pi("y", Icit.Expl, B, _ => A))));
+            const const_val = Lam("A", Icit.Impl, Type(), A => Lam("B", Icit.Impl, Type(), B => Lam("x", Icit.Expl, A, x => Lam("y", Icit.Expl, B, y => x))));
+            defineGlobal("const", const_type, const_val);
+
+            const raw_argTest1_val = App(App(App(Var("const"), Type(), Icit.Impl), Type(), Icit.Impl), Type(), Icit.Expl);
+            const elab_argTest1 = elaborate(raw_argTest1_val); // Infer
+
+            const expected_elab_term = Lam("y", Icit.Expl, Type(), _ => Type());
+            const expected_elab_type = Pi("y", Icit.Expl, Type(), _ => Type());
+
+            assertEqual(printTerm(elab_argTest1.term), printTerm(expected_elab_term), "argTest1 elab term");
+            assertEqual(printTerm(elab_argTest1.type), printTerm(expected_elab_type), "argTest1 elab type");
+        });
+
+        it("id2 : {A} -> A -> A = \\{A} x. x", () => {
+            resetMyLambdaPi();
+            const id2_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            const id2_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
+            const elab_id2 = elaborate(id2_val, id2_type); // Check this explicit lambda form
+
+            assertEqual(printTerm(elab_id2.term), printTerm(id2_val), "id2 elab term");
+            assertEqual(printTerm(elab_id2.type), printTerm(id2_type), "id2 elab type");
+            defineGlobal("id2", elab_id2.type, elab_id2.term);
+        });
+
+        it("insert : {A} -> A -> A = id (elaboration and normalization)", () => {
+            resetMyLambdaPi();
+            // Define id first
+            const id_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            const id_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
+            defineGlobal("id", id_type, id_val);
+
+            const insert_type = Pi("A_ins", Icit.Impl, Type(), A_ins => Pi("x_ins", Icit.Expl, A_ins, _ => A_ins));
+            const elab_insert = elaborate(Var("id"), insert_type);
+
+            // The Haskell comment: "Here the output rhs is \\{A}. id {A}"
+            // Normalizing id {A} (i.e., App(Var("id"), Var("A"), Icit.Impl))
+            // where id is Lam A'. Lam x'. x'
+            // gives Lam x. x (where x has type A).
+            // So, \\{A}. (id {A}) normalizes to Lam A. Lam x. x.
+            // This is alpha-equivalent to id_val.
+            // elaborate(Var("id"), insert_type) should return the normalized value of "id" if "id" is a global.
+            const expected_insert_val = id_val; // since Var("id") with insert_type should elaborate to the value of id
+
+            assertEqual(printTerm(elab_insert.term), printTerm(expected_insert_val), "insert elab term check against id_val");
+            assertEqual(printTerm(elab_insert.type), printTerm(insert_type), "insert elab type check");
+            defineGlobal("insert", elab_insert.type, elab_insert.term);
+        });
+        
+        it("noinsert = \\{A} x. the A x (infer type and value)", () => {
+            resetMyLambdaPi();
+            // Define "the"
+            const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            const the_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
+            defineGlobal("the", the_type, the_val);
+
+            const noinsert_raw_val = Lam("A", Icit.Impl, Type(), A =>
+                                     Lam("x", Icit.Expl, A, x =>
+                                     App(App(Var("the"), A, Icit.Expl), x, Icit.Expl)));
+            const elab_noinsert = elaborate(noinsert_raw_val);
+
+            const expected_noinsert_type = Pi("A", Icit.Impl, Type(), A_ => Pi("x", Icit.Expl, A_, _ => A_));
+            // The term itself should be alpha-equivalent to noinsert_raw_val after normalization (which it already is)
+            assertEqual(printTerm(elab_noinsert.term), printTerm(noinsert_raw_val), "noinsert elab term");
+            assertEqual(printTerm(elab_noinsert.type), printTerm(expected_noinsert_type), "noinsert elab type");
+        });
+
+        it("insert2 = (\\{A} x. the A x) U (implicit application, infer type and value)", () => {
+            resetMyLambdaPi();
+            // Define "the"
+            const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+            const the_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
+            defineGlobal("the", the_type, the_val);
+
+            const app_fn = Lam("A", Icit.Impl, Type(), A_ =>
+                           Lam("x", Icit.Expl, A_, x_ =>
+                           App(App(Var("the"), A_, Icit.Expl), x_, Icit.Expl)));
+            
+            // Haskell comment indicates (\{A} x. the A x) {U} U
+            // The first {U} fills the implicit {A}. The second U is the explicit arg for x.
+            // My translation: App(app_fn, Type(), Icit.Impl) for the first part.
+            // This results in Lam("x", Icit.Expl, Type(), x_ => App(App(Var("the"), Type(), Icit.Expl), x_, Icit.Expl)))
+            // The Haskell comment seems to show the term *before* the second explicit U application.
+            // The example `let insert2 = (\{A} x. the A x) U;` implies U is the *argument* to the lambda,
+            // and it should be an *implicit* application to fill {A}.
+
+            const insert2_raw_val = App(app_fn, Type(), Icit.Impl); // This is (\{A} x. body) {Type()}
+            const elab_insert2 = elaborate(insert2_raw_val);
+
+            const expected_insert2_term = Lam("x", Icit.Expl, Type(), x_ =>
+                                            App(App(Var("the"), Type(), Icit.Expl), x_, Icit.Expl));
+            const expected_insert2_type = Pi("x", Icit.Expl, Type(), _ => Type());
+
+            assertEqual(printTerm(elab_insert2.term), printTerm(expected_insert2_term), "insert2 elab term");
+            assertEqual(printTerm(elab_insert2.type), printTerm(expected_insert2_type), "insert2 elab type");
+        });
+
+    });
 }
 
 function runElaborateNonNormalizedTest() {
@@ -721,6 +875,7 @@ if (require.main === module) {
         runPhase1Tests();
         // runNonLinearPatternTests(); 
         runImplicitArgumentTests();
+        runMoreImplicitArgumentTests();
         runElaborateNonNormalizedTest();
         runChurchEncodingTests();
 
@@ -731,4 +886,4 @@ if (require.main === module) {
     }
 }
 
-export { runPhase1Tests, runImplicitArgumentTests, runElaborateNonNormalizedTest, runChurchEncodingTests, assertEqual, assert };
+export { runPhase1Tests, runImplicitArgumentTests, runMoreImplicitArgumentTests, runElaborateNonNormalizedTest, runChurchEncodingTests, assertEqual, assert };

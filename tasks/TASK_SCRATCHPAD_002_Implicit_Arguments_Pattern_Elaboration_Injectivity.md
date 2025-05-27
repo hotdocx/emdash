@@ -225,14 +225,26 @@ The primary change is how `unify` handles applications, respecting the `isInject
 ## 7. Implementation Status & Next Steps
 
 *   **Design:** The design detailed above is considered final for this phase.
-*   **Implementation:** The next step is to implement these changes across `core_types.ts`, `core_context_globals.ts`, `core_elaboration.ts`, and `core_logic.ts`.
-*   **Testing:** Extensive new tests will be required for:
-    *   Correct `Icit` tagging by `infer`/`check`.
-    *   Insertion of implicit applications and lambdas.
-    *   Elaboration of various pattern forms.
-    *   `matchPattern` behavior with elaborated patterns and terms.
-    *   Unification with `isInjective` symbols.
-    *   Uniform handling of kernel implicits for `IdentityMorph`, `ComposeMorph`.
-*   **Archival:** Once implemented and tested, this task can be considered complete, and the system will be significantly more robust in handling implicits and rewrite rules.
+*   **Implementation:** 
+    *   The core type system changes (`Icit` enum, `Lam`, `App`, `Pi` updates, `GlobalDef` enhancements for `isInjective`) have been implemented.
+    *   The context and globals (`defineGlobal`) have been updated.
+    *   Elaboration logic (`infer`, `check`) has been significantly updated to handle implicit argument insertion for `App` and `Lam`, and `icit` matching.
+    *   Kernel implicit handling for `IdentityMorph` and `ComposeMorph` (via `ensureImplicitsAsHoles`) has been integrated into `infer`/`check`.
+    *   The `unify` logic in `core_logic.ts` has been updated to handle injective symbols (`isInjective` flag on global definitions) for `App` vs `App` cases.
+    *   `printTerm` has been updated for `Icit`.
+    *   Elaboration of patterns via reusing `infer`/`check` (with a non-normalizing option in `elaborate`) is implemented. `matchPattern` now expects elaborated patterns and matches `icit` tags.
+*   **Testing:** 
+    *   Basic tests for `Icit` tagging, implicit application/lambda insertion exist in `runImplicitArgumentTests`.
+    *   **A new suite `runMoreImplicitArgumentTests` has been added to `emdash_v2_tests.ts` to translate and test more examples from `example_implicits.hs`, covering `id`, `const`, `the`, explicit implicit application, and implicit lambda insertion rules (`insert`, `noinsert`, `insert2`).**
+    *   Further testing is needed for: 
+        *   More complex pattern elaboration scenarios.
+        *   `matchPattern` behavior with more diverse elaborated patterns and terms.
+        *   More intricate unification cases involving `isInjective` symbols.
+        *   Thorough tests for uniform kernel implicits, especially for `ComposeMorph` with many implicits.
+*   **Next Steps:**
+    1.  Continue adding targeted tests for the areas mentioned above.
+    2.  Address any bugs or refinements identified during testing.
+    3.  Once testing is satisfactory, consider this task complete for the core functionality.
+*   **Archival:** This task is approaching completion for the core logic. Further refinement will likely occur as more complex user-level features are built upon this foundation.
 
 This concludes the plan for the scratchpad. 
