@@ -655,6 +655,49 @@ function runChurchEncodingTests() {
 
     console.log("Church Test 20 (FH in Pi type resolution) completed.");
 
+    console.log("\n--- Test: FH() in Pi type resolves correctly with Globals (Church Test 21) ---");
+    // Test: Π Q : (Π ignored_Q_arg : FH(). Type). Q five_val
+    // Expected: FH() resolves to Var("Nat_type")
+    // The overall type of the expression is Type.
+    // Assumes Nat_type and five_val are globally defined from earlier in Church Encoding tests.
+
+    const Q_param_name_fh21 = "Q_for_FH_test_21";
+    const ignored_Q_arg_name_fh21 = "ignored_Q_arg_for_FH_test_21";
+
+    const fh_hole_instance_21 = FH(); // This is the specific hole we're interested in for Test 21.
+    const five_val_global_ref = Var("five_val"); // Reference to the global five_val
+    const nat_type_global_ref = Var("Nat_type"); // Reference to the global Nat_type
+
+    const Q_param_type_decl_fh21 = Pi(ignored_Q_arg_name_fh21, Icit.Expl, fh_hole_instance_21, _ => Type());
+
+    const term_FH_test_21 = Pi(Q_param_name_fh21, Icit.Expl, Q_param_type_decl_fh21, Q_term =>
+        App(Q_term, five_val_global_ref, Icit.Expl)
+    );
+
+    const elabRes21 = elaborate(term_FH_test_21, undefined, baseCtx); // Expect overall type to be Type
+    assert(areEqual(elabRes21.type, Type(), baseCtx), "Church Test 21.1: Overall expression type is Type");
+
+    const elaborated_term_FH21 = getTermRef(elabRes21.term);
+    assert(elaborated_term_FH21.tag === 'Pi', "Church Test 21.2: Elaborated term is a Pi (Q level)");
+
+    const Pi_Q_elab21 = elaborated_term_FH21 as Term & { tag: 'Pi' };
+    const Q_param_type_elab21 = getTermRef(Pi_Q_elab21.paramType);
+    assert(Q_param_type_elab21.tag === 'Pi', `Church Test 21.3: Q param type is a Pi (ignored_Q level). Got ${Q_param_type_elab21.tag}`);
+
+    const Pi_ignored_elab21 = Q_param_type_elab21 as Term & { tag: 'Pi' };
+    const resolved_hole_in_Q_param_type = getTermRef(Pi_ignored_elab21.paramType);
+
+    assert(areEqual(resolved_hole_in_Q_param_type, nat_type_global_ref, baseCtx), `Church Test 21.4: fh_hole_instance_21 resolved to Nat_type. Expected ${printTerm(nat_type_global_ref)}, Got ${printTerm(resolved_hole_in_Q_param_type)}`);
+
+    const resolved_fh_direct_21 = getTermRef(fh_hole_instance_21);
+    assert(areEqual(resolved_fh_direct_21, nat_type_global_ref, baseCtx), `Church Test 21.5: Direct check of fh_hole_instance_21.ref resolved to Nat_type. Expected ${printTerm(nat_type_global_ref)}, Got ${printTerm(resolved_fh_direct_21)}`);
+    
+    // Check the body of the Pi for Q
+    const Q_body_type_elab21 = getTermRef(Pi_Q_elab21.bodyType(Var(Pi_Q_elab21.paramName)));
+    assert(areEqual(Q_body_type_elab21, Type(), baseCtx), `Church Test 21.6: Body type of Pi Q is Type. Expected Type, Got ${printTerm(Q_body_type_elab21)}`);
+
+    console.log("Church Test 21 (FH in Pi type with Globals resolution) completed.");
+
     console.log("Church Encoding Tests Completed.");
 }
 
