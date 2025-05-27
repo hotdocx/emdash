@@ -1,6 +1,6 @@
 import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
-import { whnf, solveConstraints, areEqual, normalize } from './core_logic'; // solveConstraints, whnf for addRewriteRule, normalize for defineGlobal
+import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
 export let nextVarId = 0;
 export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`; ////`$$fresh_${hint}${nextVarId++}`;
@@ -62,9 +62,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
                 throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
             }
-            // Store the fully elaborated and then normalized value.
-            // Normalization here helps to "settle" any thunks returned by check,
-            // potentially avoiding re-entrant loops if the normalized form is more stable.
+            // Store the fully elaborated term
             elaboratedValue = getTermRef(checkedValueResult);
         }
 
