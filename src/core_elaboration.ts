@@ -70,34 +70,68 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'App': {
             const appNode = current;
-            let inferredFuncResult = infer(ctx, appNode.func, stackDepth + 1);
-            let typeF = whnf(inferredFuncResult.type, ctx);
-            let final_func_for_app_node = inferredFuncResult.elaboratedTerm;
+            let { elaboratedTerm: func_elab_initial, type: type_of_func_elab_initial } = infer(ctx, appNode.func, stackDepth + 1);
 
+            let func_after_implicits = func_elab_initial;
+            let typeF_after_implicits = whnf(type_of_func_elab_initial, ctx);
+
+            // Auto-insert implicit arguments if current application is explicit
             if (appNode.icit === Icit.Expl) {
-                while (typeF.tag === 'Pi' && typeF.icit === Icit.Impl) {
-                    const implHole = Hole(freshHoleName() + "_auto_impl_arg_");
-                    if (typeF.paramType) { (implHole as Term & {tag:'Hole'}).elaboratedType = typeF.paramType; }
+                while (typeF_after_implicits.tag === 'Pi' && typeF_after_implicits.icit === Icit.Impl) {
+                    const implHole = Hole(freshHoleName() + "_auto_impl_arg");
+                    if (typeF_after_implicits.paramType) { 
+                        // Ensure the elaboratedType of the hole is also a clone or a fresh type if it's complex,
+                        // but for now, direct assignment of the Pi's paramType (which should be a type) is okay.
+                        (implHole as Term & {tag:'Hole'}).elaboratedType = typeF_after_implicits.paramType; 
+                    }
                     
-                    final_func_for_app_node = App(final_func_for_app_node, implHole, Icit.Impl);
-                    typeF = whnf(typeF.bodyType(implHole), ctx);
+                    func_after_implicits = App(func_after_implicits, implHole, Icit.Impl);
+                    typeF_after_implicits = whnf(typeF_after_implicits.bodyType(implHole), ctx);
                 }
-
-                if (!(typeF.tag === 'Pi' && typeF.icit === Icit.Expl)) {
-                    throw new Error(`Type error in App (explicit): function ${printTerm(final_func_for_app_node)} of type ${printTerm(typeF)} does not expect an explicit argument for ${printTerm(appNode.arg)}.`);
-                }
-                const elaboratedArg = check(ctx, appNode.arg, typeF.paramType, stackDepth + 1);
-                const finalAppTerm = App(final_func_for_app_node, elaboratedArg, Icit.Expl);
-                return { elaboratedTerm: finalAppTerm, type: whnf(typeF.bodyType(elaboratedArg), ctx) };
-
-            } else { // appNode.icit === Icit.Impl
-                if (!(typeF.tag === 'Pi' && typeF.icit === Icit.Impl)) {
-                    throw new Error(`Type error in App (implicit): function ${printTerm(final_func_for_app_node)} of type ${printTerm(typeF)} does not expect an implicit argument for ${printTerm(appNode.arg)}.`);
-                }
-                const elaboratedArg = check(ctx, appNode.arg, typeF.paramType, stackDepth + 1);
-                const finalAppTerm = App(final_func_for_app_node, elaboratedArg, Icit.Impl);
-                return { elaboratedTerm: finalAppTerm, type: whnf(typeF.bodyType(elaboratedArg), ctx) };
             }
+
+            // Now, typeF_after_implicits is the type of func_after_implicits.
+            // We expect it to be a Pi type matching appNode.icit.
+
+            let expectedParamTypeFromPi: Term;
+            let bodyTypeFnFromPi: (argVal: Term) => Term;
+            const applicationIcit = appNode.icit; // The icit of the current application (appNode.arg)
+
+            if (typeF_after_implicits.tag === 'Pi' && typeF_after_implicits.icit === applicationIcit) {
+                expectedParamTypeFromPi = typeF_after_implicits.paramType;
+                bodyTypeFnFromPi = typeF_after_implicits.bodyType;
+            } else if (typeF_after_implicits.tag === 'Pi' && typeF_after_implicits.icit !== applicationIcit) {
+                // Icit mismatch
+                throw new Error(`Type error in App (${applicationIcit === Icit.Expl ? "explicit" : "implicit"}): function ${printTerm(func_after_implicits)} of type ${printTerm(typeF_after_implicits)} expects a ${typeF_after_implicits.icit === Icit.Expl ? "explicit" : "implicit"} argument, but an ${applicationIcit === Icit.Expl ? "explicit" : "implicit"} one was provided for ${printTerm(appNode.arg)}.`);
+            } else {
+                // typeF_after_implicits is not a Pi of the correct icit (could be a Hole, or wrong Pi, or other non-Pi type).
+                // Constrain it to be the Pi type we expect for this application.
+                const freshPiParamName = freshVarName("pi_param_app");
+                const paramTypeHole = Hole(freshHoleName() + "_app_paramT_infer");
+                (paramTypeHole as Term & {tag:'Hole'}).elaboratedType = Type(); 
+
+                const bodyTypeHole = Hole(freshHoleName() + "_app_bodyT_infer");
+                (bodyTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
+
+                const targetPiType = Pi(
+                    freshPiParamName,
+                    applicationIcit,
+                    paramTypeHole,
+                    (_arg: Term) => bodyTypeHole 
+                );
+
+                addConstraint(typeF_after_implicits, targetPiType, `App: func ${printTerm(func_after_implicits)} type constraint for arg ${printTerm(appNode.arg)}`);
+                
+                expectedParamTypeFromPi = paramTypeHole;
+                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole;
+            }
+
+            // Check the argument and determine the result type
+            const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
+            const finalAppTerm = App(func_after_implicits, elaboratedArg, applicationIcit);
+            const resultType = whnf(bodyTypeFnFromPi(elaboratedArg), ctx);
+
+            return { elaboratedTerm: finalAppTerm, type: resultType };
         }
         case 'Lam': {
             const lamNode = current;
