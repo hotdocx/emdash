@@ -236,7 +236,10 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
     const headReduced = whnf(term, ctx, stackDepth + 1);
     const current = getTermRef(headReduced); 
     switch (current.tag) {
-        case 'Type': case 'Var' : case 'Hole': case 'CatTerm': return current;
+        case 'Type': case 'Var' :  case 'CatTerm': return current;
+        case 'Hole': {
+            console.log('NORMALIZE>>HOLE', {current});
+            return current;};
         case 'ObjTerm': return ObjTerm(normalize(current.cat, ctx, stackDepth + 1));
         case 'HomTerm':
             return HomTerm(

@@ -319,7 +319,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             // The body function will re-check `currentTerm` (which is termRef after getTermRef, 
             // or the original term passed to this check branch)
             // in the context of the actual argument supplied to this new lambda.
-            return Lam(
+            return check(ctx, Lam(
                 lamParamName,
                 Icit.Impl,
                 lamParamType,
@@ -336,9 +336,11 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                     
                     // `currentTerm` is the term that this implicit lambda is being wrapped around.
                     // This `currentTerm` comes from the outer scope of this `if` block.
-                    return check(bodyCheckCtx, currentTerm, bodyExpectedTypeInner, stackDepth + 1);
+                    const bodyterm = check(bodyCheckCtx, currentTerm, bodyExpectedTypeInner, stackDepth + 1);
+                    console.log('CHECK>>IMPLICIT LAMBDA BODY', {bodyterm});
+                    return bodyterm;
                 }
-            );
+            ), expectedTypeWhnf, stackDepth + 1);
         }
     }
     
