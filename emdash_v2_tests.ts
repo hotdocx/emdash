@@ -682,11 +682,11 @@ function runChurchEncodingTests() {
     elabRes = elaborate(Var("thousand_val"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
     // setDebugVerbose(true);
-    // // let eqTest : Eq _ hundred hundred = refl _ _;
-    // const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-    // const eqTest_val_val = App(App(Var("refl_func"), FH(), Icit.Expl), FH(), Icit.Expl);
-    // defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
-    // elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
+    // let eqTest : Eq _ hundred hundred = refl _ _;
+    const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+    const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), FH(), Icit.Expl);
+    defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
+    elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
 
     // const eqTest_val_term = Var("eqTest_val");
     // const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
