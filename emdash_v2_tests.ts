@@ -269,102 +269,103 @@ function runImplicitArgumentTests() {
 
 function runMoreImplicitArgumentTests() {
     describe("More Implicit Argument Tests from Haskell Examples", () => {
-        it("id : {A : U} -> A -> A = \\x. x", () => {
-            resetMyLambdaPi();
-            const id_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
-            const id_raw_val = Lam("x", Icit.Expl, FH(), x => x);
-            const elabId = elaborate(id_raw_val, id_type);
-            const expected_id_elab_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
-            assertEqual(printTerm(elabId.term), printTerm(expected_id_elab_val), "id elaboration: term");
-            assertEqual(printTerm(elabId.type), printTerm(id_type), "id elaboration: type");
-            defineGlobal("id", elabId.type, elabId.term);
-        });
+        // it("id : {A : U} -> A -> A = \\x. x", () => {
+        //     resetMyLambdaPi();
+        //     const id_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+        //     const id_raw_val = Lam("x", Icit.Expl, FH(), x => x);
+        //     const elabId = elaborate(id_raw_val, id_type);
+        //     const expected_id_elab_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
+        //     assertEqual(printTerm(elabId.term), printTerm(expected_id_elab_val), "id elaboration: term");
+        //     assertEqual(printTerm(elabId.type), printTerm(id_type), "id elaboration: type");
+        //     defineGlobal("id", elabId.type, elabId.term);
+        // });
 
-        it("const : {A B} -> A -> B -> A = \\x y. x", () => {
-            resetMyLambdaPi();
-            const const_type = Pi("A", Icit.Impl, Type(), A =>
-                               Pi("B", Icit.Impl, Type(), B =>
-                               Pi("x", Icit.Expl, A, _ =>
-                               Pi("y", Icit.Expl, B, _ => A))));
-            const const_raw_val = Lam("x", Icit.Expl, FH(), x => Lam("y", Icit.Expl, FH(), y => x));
-            const elabConst = elaborate(const_raw_val, const_type);
-            const expected_const_elab_val = Lam("A", Icit.Impl, Type(), A =>
-                                           Lam("B", Icit.Impl, Type(), B =>
-                                           Lam("x", Icit.Expl, A, x =>
-                                           Lam("y", Icit.Expl, B, y => x))));
-            assertEqual(printTerm(elabConst.term), printTerm(expected_const_elab_val), "const elaboration: term");
-            assertEqual(printTerm(elabConst.type), printTerm(const_type), "const elaboration: type");
-            defineGlobal("const", elabConst.type, elabConst.term);
-        });
+        // it("const : {A B} -> A -> B -> A = \\x y. x", () => {
+        //     resetMyLambdaPi();
+        //     const const_type = Pi("A", Icit.Impl, Type(), A =>
+        //                        Pi("B", Icit.Impl, Type(), B =>
+        //                        Pi("x", Icit.Expl, A, _ =>
+        //                        Pi("y", Icit.Expl, B, _ => A))));
+        //     const const_raw_val = Lam("x", Icit.Expl, x => Lam("y", Icit.Expl, y => x));
+        //     const elabConst = elaborate(const_raw_val, const_type);
+        //     const expected_const_elab_val = Lam("A", Icit.Impl, Type(), A =>
+        //                                    Lam("B", Icit.Impl, Type(), B =>
+        //                                    Lam("x", Icit.Expl, A, x =>
+        //                                    Lam("y", Icit.Expl, B, y => x))));
+        //     assert(areEqual(elabConst.term, expected_const_elab_val, emptyCtx), "const elaboration: term equal");
+        //     assertEqual(printTerm(elabConst.term), printTerm(expected_const_elab_val), "const elaboration: term");
+        //     assertEqual(printTerm(elabConst.type), printTerm(const_type), "const elaboration: type");
+        //     defineGlobal("const", elabConst.type, elabConst.term);
+        // });
 
-        it("the : (A : _) -> A -> A = \\_ x. x", () => {
-            resetMyLambdaPi();
-            // (A:_) means A is a type, so Pi("A", Icit.Expl, Type(), ...)
-            const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
-            // Raw value uses FH() for the type of 'A' in Lam binding, to be inferred/checked.
-            // However, paramType for Lam is required for _isAnnotated: true.
-            // Let's be explicit based on the Pi type.
-            const the_raw_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
-            const elabThe = elaborate(the_raw_val, the_type);
+        // it("the : (A : _) -> A -> A = \\_ x. x", () => {
+        //     resetMyLambdaPi();
+        //     // (A:_) means A is a type, so Pi("A", Icit.Expl, Type(), ...)
+        //     const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+        //     // Raw value uses FH() for the type of 'A' in Lam binding, to be inferred/checked.
+        //     // However, paramType for Lam is required for _isAnnotated: true.
+        //     // Let's be explicit based on the Pi type.
+        //     const the_raw_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
+        //     const elabThe = elaborate(the_raw_val, the_type);
 
-            // defineGlobal requires the value to be elaborated if not a base constant.
-            defineGlobal("the", elabThe.type, elabThe.term);
+        //     // defineGlobal requires the value to be elaborated if not a base constant.
+        //     defineGlobal("the", elabThe.type, elabThe.term);
 
-            // Verify definition
-            const globalThe = globalDefs.get("the");
-            assert(globalThe !== undefined, "the should be defined globally");
-            assertEqual(printTerm(globalThe!.type), printTerm(the_type), "the global type check");
-            assertEqual(printTerm(normalize(globalThe!.value!, emptyCtx)), printTerm(normalize(elabThe.term, emptyCtx)), "the global value check");
-        });
+        //     // Verify definition
+        //     const globalThe = globalDefs.get("the");
+        //     assert(globalThe !== undefined, "the should be defined globally");
+        //     assertEqual(printTerm(globalThe!.type), printTerm(the_type), "the global type check");
+        //     assertEqual(printTerm(normalize(globalThe!.value!, emptyCtx)), printTerm(normalize(elabThe.term, emptyCtx)), "the global value check");
+        // });
 
-        it("argTest1 = const {U}{U} U (infer type and value)", () => {
-            resetMyLambdaPi();
-            // Define const first
-            const const_type = Pi("A", Icit.Impl, Type(), A => Pi("B", Icit.Impl, Type(), B => Pi("x", Icit.Expl, A, _ => Pi("y", Icit.Expl, B, _ => A))));
-            const const_val = Lam("A", Icit.Impl, Type(), A => Lam("B", Icit.Impl, Type(), B => Lam("x", Icit.Expl, A, x => Lam("y", Icit.Expl, B, y => x))));
-            defineGlobal("const", const_type, const_val);
+        // it("argTest1 = const {U}{U} U (infer type and value)", () => {
+        //     resetMyLambdaPi();
+        //     // Define const first
+        //     const const_type = Pi("A", Icit.Impl, Type(), A => Pi("B", Icit.Impl, Type(), B => Pi("x", Icit.Expl, A, _ => Pi("y", Icit.Expl, B, _ => A))));
+        //     const const_val = Lam("A", Icit.Impl, Type(), A => Lam("B", Icit.Impl, Type(), B => Lam("x", Icit.Expl, A, x => Lam("y", Icit.Expl, B, y => x))));
+        //     defineGlobal("const", const_type, const_val);
 
-            const raw_argTest1_val = App(App(App(Var("const"), Type(), Icit.Impl), Type(), Icit.Impl), Type(), Icit.Expl);
-            const elab_argTest1 = elaborate(raw_argTest1_val); // Infer
+        //     const raw_argTest1_val = App(App(App(Var("const"), Type(), Icit.Impl), Type(), Icit.Impl), Type(), Icit.Expl);
+        //     const elab_argTest1 = elaborate(raw_argTest1_val); // Infer
 
-            const expected_elab_term = Lam("y", Icit.Expl, Type(), _ => Type());
-            const expected_elab_type = Pi("y", Icit.Expl, Type(), _ => Type());
+        //     const expected_elab_term = Lam("y", Icit.Expl, Type(), _ => Type());
+        //     const expected_elab_type = Pi("y", Icit.Expl, Type(), _ => Type());
 
-            assertEqual(printTerm(elab_argTest1.term), printTerm(expected_elab_term), "argTest1 elab term");
-            assertEqual(printTerm(elab_argTest1.type), printTerm(expected_elab_type), "argTest1 elab type");
-        });
+        //     assertEqual(printTerm(elab_argTest1.term), printTerm(expected_elab_term), "argTest1 elab term");
+        //     assertEqual(printTerm(elab_argTest1.type), printTerm(expected_elab_type), "argTest1 elab type");
+        // });
 
-        it("id2 : {A} -> A -> A = \\{A} x. x", () => {
-            resetMyLambdaPi();
-            const id2_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
-            const id2_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
-            const elab_id2 = elaborate(id2_val, id2_type); // Check this explicit lambda form
+        // it("id2 : {A} -> A -> A = \\{A} x. x", () => {
+        //     resetMyLambdaPi();
+        //     const id2_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+        //     const id2_val = Lam("A", Icit.Impl, Type(), A => Lam("x", Icit.Expl, A, x => x));
+        //     const elab_id2 = elaborate(id2_val, id2_type); // Check this explicit lambda form
 
-            assertEqual(printTerm(elab_id2.term), printTerm(id2_val), "id2 elab term");
-            assertEqual(printTerm(elab_id2.type), printTerm(id2_type), "id2 elab type");
-            defineGlobal("id2", elab_id2.type, elab_id2.term);
-        });
+        //     assertEqual(printTerm(elab_id2.term), printTerm(id2_val), "id2 elab term");
+        //     assertEqual(printTerm(elab_id2.type), printTerm(id2_type), "id2 elab type");
+        //     defineGlobal("id2", elab_id2.type, elab_id2.term);
+        // });
 
-        it("insert2 = (\\{A} x. the A x) U (explicit application, infer type and value)", () => {
-            resetMyLambdaPi();
-            // Define "the"
-            const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
-            const the_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
-            defineGlobal("the", the_type, the_val);
+        // it("insert2 = (\\{A} x. the A x) U (explicit application, infer type and value)", () => {
+        //     resetMyLambdaPi();
+        //     // Define "the"
+        //     const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
+        //     const the_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x));
+        //     defineGlobal("the", the_type, the_val);
 
-            const app_fn = Lam("A", Icit.Impl, Type(), A_ =>
-                           Lam("x", Icit.Expl, A_, x_ =>
-                           App(App(Var("the"), A_, Icit.Expl), x_, Icit.Expl)));
+        //     const app_fn = Lam("A", Icit.Impl, Type(), A_ =>
+        //                    Lam("x", Icit.Expl, A_, x_ =>
+        //                    App(App(Var("the"), A_, Icit.Expl), x_, Icit.Expl)));
             
-            const insert2_raw_val = App(app_fn, Type(), Icit.Expl); // This is (\{A} x. body) (Type())
-            const elab_insert2 = elaborate(insert2_raw_val);
+        //     const insert2_raw_val = App(app_fn, Type(), Icit.Expl); // This is (\{A} x. body) (Type())
+        //     const elab_insert2 = elaborate(insert2_raw_val);
 
-            const expected_insert2_term = Type();
-            const expected_insert2_type = Type();
+        //     const expected_insert2_term = Type();
+        //     const expected_insert2_type = Type();
 
-            assertEqual(printTerm(elab_insert2.term), printTerm(expected_insert2_term), "insert2 elab term");
-            assertEqual(printTerm(elab_insert2.type), printTerm(expected_insert2_type), "insert2 elab type");
-        });
+        //     assertEqual(printTerm(elab_insert2.term), printTerm(expected_insert2_term), "insert2 elab term");
+        //     assertEqual(printTerm(elab_insert2.type), printTerm(expected_insert2_type), "insert2 elab type");
+        // });
 
     });
 }

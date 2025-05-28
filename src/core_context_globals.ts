@@ -58,6 +58,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
             // Check the value against the elaboratedType in the current elabCtx
             constraints.length = 0; // Reset constraints specifically for value checking
             const checkedValueResult = check(elabCtx, valueToCheck, elaboratedType, 0); // Modifies valueToCheck
+
             if (!solveConstraints(elabCtx)) {
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
                 throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
