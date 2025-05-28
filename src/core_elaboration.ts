@@ -342,7 +342,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             );
             solveConstraints(ctx);
 
-            console.log('ELABORATE>>IMPLICIT LAMBDA ', printTerm(newLam));
+            // console.log('ELABORATE>>IMPLICIT LAMBDA ', printTerm(newLam));
             return newLam;
         }
     }
@@ -357,7 +357,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
         if (!lamNode._isAnnotated) { // If Lam is unannotated, take type from Pi
             lamParamType = expectedPiNode.paramType;
-            console.log('CHECK>>lamParamType', {lamParamType});
+            // console.log('CHECK>>lamParamType', {lamParamType});
             // Mutate originalTerm if it's the same as currentTerm and unannotated
             if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalTerm._isAnnotated) {
                 lamNode.paramType = lamParamType;
@@ -371,7 +371,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else if (lamNode.paramType) { // If Lam is annotated, check its type against Pi's param type
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
-            console.log('CHECK>>>addConstraint', elabLamParamType, expectedPiNode.paramType);
+            // console.log('CHECK>>>addConstraint', elabLamParamType, expectedPiNode.paramType);
             lamParamType = elabLamParamType; // elabLamParamType could be a hole, so maybe not this: // Use the elaborated one
             // lamNode.paramType = elabLamParamType;
             // lamNode._isAnnotated = true;
@@ -387,8 +387,8 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         
         // const elaboratedBody_unused = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
         // console.log('CHECK>>', lamNode.paramName, lamNode.icit, lamParamType, actualBodyTerm, expectedBodyPiType, elaboratedBody_unused);
-        console.log('CHECK>>lamNode', {lamNode});//, {actualBodyTerm}, {expectedBodyPiType}, {elaboratedBody_unused});
-        console.log('CHECK>>lamNode.body', lamNode.body((Var(lamNode.paramName))));
+        // console.log('CHECK>>lamNode', {lamNode});//, {actualBodyTerm}, {expectedBodyPiType}, {elaboratedBody_unused});
+        // console.log('CHECK>>lamNode.body', lamNode.body((Var(lamNode.paramName))));
         const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
 
         return Lam(lamNode.paramName, lamNode.icit, lamParamType,
