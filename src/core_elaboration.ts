@@ -48,14 +48,19 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
     const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
     let current = getTermRef(termWithKernelImplicits); // Use let for potential re-assignment
 
-    if (current.tag === 'Var' && (current.name.startsWith("_occ_check_") || current.name.startsWith("v_param_check"))) { // Check for occ_check or similar placeholders
-        // These are special placeholders from termContainsHole or similar operations,
-        // not meant for full inference that requires a context-defined type.
-        // Give them a fresh hole type to avoid "Unbound variable" and allow structural checks to proceed.
-        consoleLog(`[Infer Special Placeholder] Detected placeholder var: ${current.name}`);
-        const placeholderType = Hole(freshHoleName() + "_type_of_placeholder_" + current.name.replace(/[?$]/g, ""));
-        (placeholderType as Term & {tag:'Hole'}).elaboratedType = Type(); // It's a type for some term
-        return { elaboratedTerm: current, type: placeholderType };
+    if (current.tag === 'Var') {
+        const placeholderPrefixes = [
+            "_occ_check_", 
+            "_areEqualLamBody_", "_areEqualPiBody_",
+            "_normalizeLamBody_", "_normalizePiBody_",
+            "_matchLamBody_", "_matchPiBody_"
+        ];
+        if (placeholderPrefixes.some(prefix => current.name.startsWith(prefix))) {
+            consoleLog(`[Infer Special Placeholder] Detected placeholder var: ${current.name}`);
+            const placeholderType = Hole(freshHoleName() + "_type_of_placeholder_" + current.name.replace(/[?$]/g, ""));
+            (placeholderType as Term & {tag:'Hole'}).elaboratedType = Type();
+            return { elaboratedTerm: current, type: placeholderType };
+        }
     }
 
     if (current.tag === 'Var') {
@@ -562,17 +567,19 @@ export function matchPattern(
                  tempSubst = sType;
             }
             // For bodies, check alpha-equivalence. Substitution doesn't dive into bodies here.
-            const freshV = Var(freshVarName(lamP.paramName)); // Use a fresh var for comparison
+            const freshVName = freshVarName("_matchLamBody_");
+            const freshV = Var(freshVName); 
             const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
-            const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
+            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, lamP.icit);
              return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': { // Similar to Lam, match param types and alpha-equivalent body types.
             const piP = rtPattern; const piT = rtTermToMatch as Term & {tag:'Pi'};
             const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!sType) return null;
-            const freshV = Var(freshVarName(piP.paramName));
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
+            const freshVName = freshVarName("_matchPiBody_");
+            const freshV = Var(freshVName);
+            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(piP.paramType), piP.icit);
             return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm':
