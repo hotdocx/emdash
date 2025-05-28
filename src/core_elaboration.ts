@@ -43,14 +43,13 @@ export interface InferResult {
 
 // Helper function to insert implicit applications
 // Based on Haskell's insert' and parts of insert
-function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: number, unConditional: boolean = false): { term: Term, type: Term } {
+function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: number): { term: Term, type: Term } {
     let currentTerm = term;
     let currentType = whnf(type, ctx, stackDepth + 1);
 
     // Do not insert if the term itself is an implicit lambda
-    // and we are not in unconditional mode
     const termRef = getTermRef(currentTerm);
-    if (termRef.tag === 'Lam' && termRef.icit === Icit.Impl && !unConditional) {
+    if (termRef.tag === 'Lam' && termRef.icit === Icit.Impl) {
         return { term: currentTerm, type: currentType };
     }
 
@@ -123,9 +122,19 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
 
             if (appNode.icit === Icit.Expl) {
-                const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
-                funcAfterImplicits = inserted.term;
-                typeFAfterImplicits = inserted.type;
+                // Explicitly loop to insert implicit Apps for the function part,
+                // similar to Haskell's insert' behavior for App Expl.
+                while (typeFAfterImplicits.tag === 'Pi' && typeFAfterImplicits.icit === Icit.Impl) {
+                    const implHole = Hole(freshHoleName() + "_expl_app_auto_impl_arg");
+                    if (typeFAfterImplicits.paramType) {
+                        (implHole as Term & {tag:'Hole'}).elaboratedType = typeFAfterImplicits.paramType;
+                    }
+                    funcAfterImplicits = App(funcAfterImplicits, implHole, Icit.Impl);
+                    typeFAfterImplicits = whnf(typeFAfterImplicits.bodyType(implHole), ctx, stackDepth + 1);
+                }
+                // After this loop, funcAfterImplicits has had its outermost implicit args applied.
+                // It might still be a function that itself could take more (e.g. if it was a global var that resolved to Π{ι₁} Π{ι₂} Π(ε₁)...)
+                // but the next step will check its resulting type against the expected Pi for the explicit application.
             }
             
             // Now, typeFAfterImplicits is the type of funcAfterImplicits.
