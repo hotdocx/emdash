@@ -48,6 +48,15 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
     const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
     let current = getTermRef(termWithKernelImplicits); // Use let for potential re-assignment
 
+    if (current.tag === 'Var' && (current.name.startsWith("_occ_check_") || current.name.startsWith("v_param_check"))) { // Check for occ_check or similar placeholders
+        // These are special placeholders from termContainsHole or similar operations,
+        // not meant for full inference that requires a context-defined type.
+        // Give them a fresh hole type to avoid "Unbound variable" and allow structural checks to proceed.
+        consoleLog(`[Infer Special Placeholder] Detected placeholder var: ${current.name}`);
+        const placeholderType = Hole(freshHoleName() + "_type_of_placeholder_" + current.name.replace(/[?$]/g, ""));
+        (placeholderType as Term & {tag:'Hole'}).elaboratedType = Type(); // It's a type for some term
+        return { elaboratedTerm: current, type: placeholderType };
+    }
 
     if (current.tag === 'Var') {
         const localBinding = lookupCtx(ctx, current.name);
