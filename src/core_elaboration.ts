@@ -48,20 +48,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
     const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
     let current = getTermRef(termWithKernelImplicits); // Use let for potential re-assignment
 
-    if (current.tag === 'Var') {
-        const placeholderPrefixes = [
-            "_occ_check_", 
-            "_areEqualLamBody_", "_areEqualPiBody_",
-            "_normalizeLamBody_", "_normalizePiBody_",
-            "_matchLamBody_", "_matchPiBody_"
-        ];
-        if (placeholderPrefixes.some(prefix => current.name.startsWith(prefix))) {
-            consoleLog(`[Infer Special Placeholder] Detected placeholder var: ${current.name}`);
-            const placeholderType = Hole(freshHoleName() + "_type_of_placeholder_" + current.name.replace(/[?$]/g, ""));
-            (placeholderType as Term & {tag:'Hole'}).elaboratedType = Type();
-            return { elaboratedTerm: current, type: placeholderType };
-        }
-    }
+
 
     if (current.tag === 'Var') {
         const localBinding = lookupCtx(ctx, current.name);
@@ -77,7 +64,19 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         const gdef = globalDefs.get(current.name);
         if (gdef) return { elaboratedTerm: current, type: gdef.type };
 
-        if (!localBinding) throw new Error(`Unbound variable: ${current.name} in context [${ctx.map(b => b.name).join(', ')}]`);
+        if (!localBinding) {
+            if ((current.name.startsWith("_occ_check_") || current.name.startsWith("v_param_check"))) { // Check for occ_check or similar placeholders
+                // These are special placeholders from termContainsHole or similar operations,
+                // not meant for full inference that requires a context-defined type.
+                // Give them a fresh hole type to avoid "Unbound variable" and allow structural checks to proceed.
+                consoleLog(`[Infer Special Placeholder] Detected placeholder var: ${current.name}`);
+                const placeholderType = Hole("_type_of_placeholder_" + current.name.replace(/[?$]/g, ""));
+                (placeholderType as Term & {tag:'Hole'}).elaboratedType = Type(); // It's a type for some term
+                return { elaboratedTerm: current, type: placeholderType };
+            }
+     
+            throw new Error(`Unbound variable: ${current.name} in context [${ctx.map(b => b.name).join(', ')}]`);
+        }
         return { elaboratedTerm: current, type: localBinding.type }; // Defensive
     }
 
@@ -170,7 +169,6 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 lamNode._isAnnotated = true;
             }
             
-            const lambda_body_structure = lamNode.body(Var(lamNode.paramName));  // MOVED, because side effects
             const piType = Pi(
                 lamNode.paramName,
                 lamNode.icit,
@@ -183,6 +181,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                         lamNode.icit,
                         pi_body_argument_term
                     );
+                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName));
                     const inferredBodyResult = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1);
                     return inferredBodyResult.type;
                 }
@@ -192,7 +191,6 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             // The body function of the elaborated Lam must itself perform inference/checking when instantiated
             // or we ensure its structure is "finalized" here.
             // For now, the body function will simply use the structure as defined.
-            const bodyTerm = lamNode.body(Var(lamNode.paramName)); // MOVED, because side effects // Use original param name for structure
             const elaboratedLam = Lam(
                 lamNode.paramName,
                 lamNode.icit,
@@ -204,6 +202,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                      // if the whole Lam is returned as part of elaboration result.
                      // The key is that `actualParamType` is correct.
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
+                    const bodyTerm = lamNode.body(Var(lamNode.paramName)); // Use original param name for structure
                     const inferredBody = infer(bodyInferCtx, bodyTerm, stackDepth +1);
                     return inferredBody.elaboratedTerm;
 
@@ -229,10 +228,10 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             const extendedCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
             const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName));
             const elaboratedBodyTypeResult = check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1); // this is a Term
-            const piNodeBodyType = piNode.bodyType(Var(piNode.paramName))
             const finalPi = Pi(piNode.paramName, piNode.icit, elaboratedParamType, (v: Term) => {
                 // Need to re-check/re-infer the body in the new context if we want its structure changed
                 const bodyCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit, v);
+                const piNodeBodyType = piNode.bodyType(Var(piNode.paramName))
                 return check(bodyCtx, piNodeBodyType, Type(), stackDepth+1);
             });
             return { elaboratedTerm: finalPi, type: Type() };
@@ -354,7 +353,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                     return bodyterm;
                 }
             );
-            solveConstraints(ctx);
+            // solveConstraints(ctx);
 
             // console.log('ELABORATE>>IMPLICIT LAMBDA ', printTerm(newLam));
             return newLam;
@@ -403,11 +402,11 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         // console.log('CHECK>>', lamNode.paramName, lamNode.icit, lamParamType, actualBodyTerm, expectedBodyPiType, elaboratedBody_unused);
         // console.log('CHECK>>lamNode', {lamNode});//, {actualBodyTerm}, {expectedBodyPiType}, {elaboratedBody_unused});
         // console.log('CHECK>>lamNode.body', lamNode.body((Var(lamNode.paramName))));
-        const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
-
+     
         return Lam(lamNode.paramName, lamNode.icit, lamParamType,
             v_arg =>   {      const extendedCtx = extendCtx(ctx, lamNode.paramName, lamParamType, lamNode.icit, v_arg);
-            const expectedBodyPiType = whnf(expectedPiNode.bodyType(v_arg), extendedCtx);
+                const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
+                const expectedBodyPiType = whnf(expectedPiNode.bodyType(v_arg), extendedCtx);
             
             const toReturn = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
         return toReturn; });
@@ -567,19 +566,17 @@ export function matchPattern(
                  tempSubst = sType;
             }
             // For bodies, check alpha-equivalence. Substitution doesn't dive into bodies here.
-            const freshVName = freshVarName("_matchLamBody_");
-            const freshV = Var(freshVName); 
+            const freshV = Var(freshVarName(lamP.paramName)); // Use a fresh var for comparison
             const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
-            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, lamP.icit);
+            const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
              return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
         }
         case 'Pi': { // Similar to Lam, match param types and alpha-equivalent body types.
             const piP = rtPattern; const piT = rtTermToMatch as Term & {tag:'Pi'};
             const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!sType) return null;
-            const freshVName = freshVarName("_matchPiBody_");
-            const freshV = Var(freshVName);
-            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(piP.paramType), piP.icit);
+            const freshV = Var(freshVarName(piP.paramName));
+            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
             return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
         case 'ObjTerm':

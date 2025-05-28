@@ -270,14 +270,14 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                                      ? normalize(currentLam.paramType, ctx, stackDepth + 1)
                                      : undefined;
 
-            const freshPNameForBodyInstance = freshVarName("_normalizeLamBody_");
-            const v_placeholder_for_body_instance = Var(freshPNameForBodyInstance);
-
-            const newBodyFn = (_v_arg_placeholder_ignored: Term): Term => {
+            const newBodyFn = (v_arg_placeholder: Term): Term => { 
+                // This v_arg_placeholder is typically Var(currentLam.paramName) when the Lam body is instantiated.
+                // For normalization, we extend the *original* context `ctx` with the param, NOT defining it as v_arg_placeholder.
+                // The v_arg_placeholder is only used to get the structure of the body.
                 const paramTypeForBodyCtx = normLamParamType || 
                                             (currentLam.paramType ? getTermRef(currentLam.paramType) : Hole(freshHoleName()+"_norm_lam_body_ctx"));
-                const bodyCtx = extendCtx(ctx, freshPNameForBodyInstance, paramTypeForBodyCtx, currentLam.icit);
-                return normalize(currentLam.body(v_placeholder_for_body_instance), bodyCtx, stackDepth + 1);
+                const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit); // No definition here for the param
+                return normalize(currentLam.body(v_arg_placeholder), bodyCtx, stackDepth + 1);
             };
             return {
                 tag: 'Lam',
@@ -318,13 +318,10 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
         case 'Pi': {
             const currentPi = current;
             const normPiParamType = normalize(currentPi.paramType, ctx, stackDepth + 1);
-            const freshPNameForBodyTypeInstance = freshVarName("_normalizePiBody_");
-            const v_placeholder_for_body_type_instance = Var(freshPNameForBodyTypeInstance);
-
-            return Pi(currentPi.paramName, currentPi.icit, normPiParamType, (_v_arg_placeholder_ignored: Term) => {
+            return Pi(currentPi.paramName, currentPi.icit, normPiParamType, (v_arg_placeholder: Term) => {
                 // Similar to Lam, for normalizing the Pi's bodyType structure.
-                const bodyTypeCtx = extendCtx(ctx, freshPNameForBodyTypeInstance, normPiParamType, currentPi.icit);
-                return normalize(currentPi.bodyType(v_placeholder_for_body_type_instance), bodyTypeCtx, stackDepth + 1);
+                const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit); // No definition for param
+                return normalize(currentPi.bodyType(v_arg_placeholder), bodyTypeCtx, stackDepth + 1);
             });
         }
         default: const exhaustiveCheck: never = current; throw new Error(`Normalize: Unhandled term: ${(exhaustiveCheck as any).tag }`);
@@ -364,7 +361,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             }
             if(!paramTypeOk) return false;
 
-            const freshVName = freshVarName("_areEqualLamBody_");
+            const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
             const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_areEqual_unannot_lam_param");
             const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for freshV
@@ -373,7 +370,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
         case 'Pi': { // For alpha-equivalence, extend context without definition
             const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
-            const freshVName = freshVarName("_areEqualPiBody_");
+            const freshVName = rt1.paramName; 
             const freshV = Var(freshVName);
             const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition for freshV
             return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
@@ -424,7 +421,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     }
 }
 
-export function termContainsHole(term: Term, holeId: string, visited: Set<string> = new Set(), depth = 0, ctxForBodyInst: Context = emptyCtx): boolean {
+export function termContainsHole(term: Term, holeId: string, visited: Set<string> = new Set(), depth = 0): boolean {
     if (depth > MAX_STACK_DEPTH * 2) { 
         console.warn(`termContainsHole depth exceeded for hole ${holeId} in ${printTerm(term)}`);
         return true; 
@@ -449,38 +446,32 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
             return termContainsHole(current.func, holeId, visited, depth + 1) ||
                    termContainsHole(current.arg, holeId, visited, depth + 1);
         case 'Lam':
-            if (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1, ctxForBodyInst)) return true;
-            const freshVLamName = freshVarName("_occ_check_lam_");
-            const freshVLam = Var(freshVLamName);
-            const lamParamTypeForCtx = current.paramType ? getTermRef(current.paramType) : Hole(freshHoleName()+"_occ_check_lam_param_type_");
-            const lamBodyCtx = extendCtx(ctxForBodyInst, freshVLamName, lamParamTypeForCtx, current.icit);
-            return termContainsHole(current.body(freshVLam), holeId, new Set(visited), depth + 1, lamBodyCtx);
+            if (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
+            const freshVLam = Var(freshVarName("_occ_check_lam")); 
+            return termContainsHole(current.body(freshVLam), holeId, new Set(visited) , depth + 1);
         case 'Pi':
-            if (termContainsHole(current.paramType, holeId, visited, depth + 1, ctxForBodyInst)) return true;
-            const freshVPiName = freshVarName("_occ_check_pi_");
-            const freshVPi = Var(freshVPiName);
-            const piParamTypeForCtx = getTermRef(current.paramType);
-            const piBodyCtx = extendCtx(ctxForBodyInst, freshVPiName, piParamTypeForCtx, current.icit);
-            return termContainsHole(current.bodyType(freshVPi), holeId, new Set(visited), depth + 1, piBodyCtx);
-        case 'ObjTerm': return termContainsHole(current.cat, holeId, visited, depth + 1, ctxForBodyInst);
+            if (termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
+            const freshVPi = Var(freshVarName("_occ_check_pi")); 
+            return termContainsHole(current.bodyType(freshVPi), holeId, new Set(visited) , depth + 1);
+        case 'ObjTerm': return termContainsHole(current.cat, holeId, visited, depth + 1);
         case 'HomTerm':
-            return termContainsHole(current.cat, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   termContainsHole(current.dom, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   termContainsHole(current.cod, holeId, visited, depth + 1, ctxForBodyInst);
+            return termContainsHole(current.cat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.dom, holeId, visited, depth + 1) ||
+                   termContainsHole(current.cod, holeId, visited, depth + 1);
         case 'MkCat_':
-            return termContainsHole(current.objRepresentation, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   termContainsHole(current.homRepresentation, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   termContainsHole(current.composeImplementation, holeId, visited, depth + 1, ctxForBodyInst);
+            return termContainsHole(current.objRepresentation, holeId, visited, depth + 1) ||
+                   termContainsHole(current.homRepresentation, holeId, visited, depth + 1) ||
+                   termContainsHole(current.composeImplementation, holeId, visited, depth + 1);
         case 'IdentityMorph':
-            return (current.cat_IMPLICIT && termContainsHole(current.cat_IMPLICIT, holeId, visited, depth + 1, ctxForBodyInst)) ||
-                   termContainsHole(current.obj, holeId, visited, depth + 1, ctxForBodyInst);
+            return (current.cat_IMPLICIT && termContainsHole(current.cat_IMPLICIT, holeId, visited, depth + 1)) ||
+                   termContainsHole(current.obj, holeId, visited, depth + 1);
         case 'ComposeMorph':
-            return termContainsHole(current.g, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   termContainsHole(current.f, holeId, visited, depth + 1, ctxForBodyInst) ||
-                   (current.cat_IMPLICIT && termContainsHole(current.cat_IMPLICIT, holeId, visited, depth + 1, ctxForBodyInst)) ||
-                   (current.objX_IMPLICIT && termContainsHole(current.objX_IMPLICIT, holeId, visited, depth + 1, ctxForBodyInst)) ||
-                   (current.objY_IMPLICIT && termContainsHole(current.objY_IMPLICIT, holeId, visited, depth + 1, ctxForBodyInst)) ||
-                   (current.objZ_IMPLICIT && termContainsHole(current.objZ_IMPLICIT, holeId, visited, depth + 1, ctxForBodyInst));
+            return termContainsHole(current.g, holeId, visited, depth + 1) ||
+                   termContainsHole(current.f, holeId, visited, depth + 1) ||
+                   (current.cat_IMPLICIT && termContainsHole(current.cat_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objX_IMPLICIT && termContainsHole(current.objX_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objY_IMPLICIT && termContainsHole(current.objY_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objZ_IMPLICIT && termContainsHole(current.objZ_IMPLICIT, holeId, visited, depth + 1));
         default: const exhaustiveCheck: never = current; return false;
     }
 }
