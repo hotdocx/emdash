@@ -17,6 +17,7 @@ import {
     elaborate, printTerm, infer, check, isPatternVarName, matchPattern, ElaborationOptions
 } from './src/core_elaboration';
 import { describe, it } from 'node:test';
+import { abort } from 'process';
 
 // Helper function to assert equality for test cases
 function assertEqual(actual: string, expected: string, message: string) {
@@ -1003,8 +1004,8 @@ function runChurchStyleImplicitTests() {
     );
     defineGlobal("map_hs", map_func_type, map_func_val_raw);
     elabRes = elaborate(Var("map_hs"), undefined, baseCtx);
-    assert(areEqual(elabRes.type, map_func_type, baseCtx), "HSI Test 8.1: map_hs type check");
-    assert(areEqual(elabRes.term, map_func_val_annotated, baseCtx), "HSI Test 8.2: map_hs value check");
+    assert(areEqual(globalDefs.get("map_hs").type, map_func_type, baseCtx), "HSI Test 8.1: map_hs type check");
+    assert(areEqual(globalDefs.get("map_hs").value, map_func_val_annotated, baseCtx), "HSI Test 8.2: map_hs value check");
 
     // let list1 : List Bool
     // = cons true (cons false (cons true nil));
@@ -1025,7 +1026,10 @@ function runChurchStyleImplicitTests() {
                                Icit.Expl), 
                            Icit.Expl);
     defineGlobal("list1_hs", list1_hs_type, list1_hs_val_FAIL);
+    abort();
     elabRes = elaborate(Var("list1_hs"), undefined, baseCtx);
+    console.log('printTerm(elabRes.type)', printTerm(elabRes.type));
+    console.log('printTerm(list1_hs_type)', printTerm(list1_hs_type));
     assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
     assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
 
