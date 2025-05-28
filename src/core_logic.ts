@@ -498,15 +498,8 @@ export function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, 
         consoleLog(`[UnifyHole] Occurs check FAILED for ${hole.id} in ${printTerm(normTerm)} (depth ${depth})`);
         return false; 
     }
-    if (hole.id === '?h1_ia3') {
-        console.log(`[[DIRECT LOG]] Inside unifyHole for ${hole.id}, about to set .ref to: ${printTerm(normTerm)}`);
-    }
     consoleLog(`[UnifyHole] Setting ${hole.id}.ref = ${printTerm(normTerm)} (depth ${depth}). Current hole.ref before: ${hole.ref ? printTerm(hole.ref) : 'undefined'}`);
     hole.ref = normTerm; 
-    if (hole.id === '?h1_ia3') {
-        console.log(`[[DIRECT LOG]] Inside unifyHole for ${hole.id}, .ref is NOW (hopefully): ${hole.ref ? printTerm(hole.ref) : 'undefined'}`);
-        console.log(`[[DIRECT LOG]]   getTermRef(${hole.id}) is NOW: ${printTerm(getTermRef(hole))}`);
-    }
     // Check right after setting if getTermRef sees it
     const currentValOfHole = getTermRef(hole);
     consoleLog(`[UnifyHole] ${hole.id} now points to (via getTermRef): ${printTerm(currentValOfHole)}. Direct hole.ref: ${printTerm(hole.ref!)}. (depth ${depth})`);
@@ -663,13 +656,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (ultimateHead1.tag === 'Var' && ultimateHead2.tag === 'Var' && ultimateHead1.name === ultimateHead2.name) {
                 const gdef = globalDefs.get(ultimateHead1.name);
                 if (gdef && gdef.isInjective) {
-                    if (ultimateHead1.name === 'f_inj') {
-                        console.log(`[[DIRECT LOG]] Reached INJECTIVE App case for: ${ultimateHead1.name}`);
-                        console.log(`[[DIRECT LOG]]   app1.func: ${printTerm(app1.func)}`);
-                        console.log(`[[DIRECT LOG]]   app2.func: ${printTerm(app2.func)}`);
-                        console.log(`[[DIRECT LOG]]   app1.arg: ${printTerm(app1.arg)}`);
-                        console.log(`[[DIRECT LOG]]   app2.arg: ${printTerm(app2.arg)}`);
-                    }
                     consoleLog(`[Unify App INJ] Head: ${ultimateHead1.name}. Unifying funcs: ${printTerm(app1.func)} vs ${printTerm(app2.func)} (depth ${depth})`);
                     const funcStatus = unify(app1.func, app2.func, ctx, depth + 1);
                     consoleLog(`[Unify App INJ] Head: ${ultimateHead1.name}. Func status: ${UnifyResult[funcStatus]} (depth ${depth})`);

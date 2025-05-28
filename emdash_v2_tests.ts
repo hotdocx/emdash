@@ -165,7 +165,6 @@ function runImplicitArgumentTests() {
     const ctx = emptyCtx;
 
     resetMyLambdaPi();
-    setDebugVerbose(false);
     defineGlobal("constId",
         Pi("A", Icit.Impl, Type(), A_param => Pi("x", Icit.Expl, A_param, _x_param => A_param)),
         Lam("A_lam", Icit.Impl, Type(), A_term => Lam("x_lam", Icit.Expl, A_term, x_term => x_term))
@@ -184,13 +183,12 @@ function runImplicitArgumentTests() {
     assertEqual(printTerm(elabRes.type), "Nat", "IA1.2: Type of (constId five) should be Nat");
 
     resetMyLambdaPi();
-    setDebugVerbose(false);
     defineGlobal("Nat", Type(), undefined, true, false, true); // isTypeNameLike: true, isConstantSymbol: true
     const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
     const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param); 
 
     elabRes = elaborate(polySimpleId, idFuncType, ctx);
-    const elabTerm = elabRes.term; console.log({elabTerm});
+    const elabTerm = elabRes.term;
     assert(elabTerm.tag === 'Lam' && elabTerm.icit === Icit.Impl, "IA2.1: Elaborated polyId against Pi type should have an outer implicit lambda");
     
     if (elabTerm.tag === 'Lam') { // Ensure elabTerm is narrowed for TS
@@ -212,7 +210,6 @@ function runImplicitArgumentTests() {
 
 
     resetMyLambdaPi();
-    setDebugVerbose(false);
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); 
@@ -249,7 +246,6 @@ function runImplicitArgumentTests() {
     assert(areEqual(getTermRef(hole1), Var("a_val"), ctx), "IA3.1: For injective f_inj, (f_inj a = f_inj ?h1) should solve ?h1 to a_val");
 
     resetMyLambdaPi();
-    setDebugVerbose(false);
     defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
     defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
     defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); 
@@ -681,7 +677,7 @@ function runChurchEncodingTests() {
     defineGlobal("thousand_val", Var("Nat_type"), thousand_val_val);
     elabRes = elaborate(Var("thousand_val"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
-    // setDebugVerbose(true);
+
     // let eqTest : Eq _ hundred hundred = refl _ _;
     const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
     const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), FH(), Icit.Expl);
@@ -827,7 +823,6 @@ if (require.main === module) {
     setDebugVerbose(false); 
     
     try {
-        setDebugVerbose(true);
         console.log(`[DEBUG CHECK] DEBUG_VERBOSE is initially: ${getDebugVerbose()}`);
         runPhase1Tests();
         // runNonLinearPatternTests(); 
