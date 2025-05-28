@@ -55,12 +55,15 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
     }
 
     while (currentType.tag === 'Pi' && currentType.icit === Icit.Impl) {
+        //  console.log('insertImplicitApps>>', {unConditional}, printTerm(currentTerm), ' ::::: ', printTerm(currentType));
+
         const implHole = Hole(freshHoleName() + "_auto_inserted_impl_arg");
         if (currentType.paramType) {
             (implHole as Term & {tag:'Hole'}).elaboratedType = currentType.paramType;
         }
         currentTerm = App(currentTerm, implHole, Icit.Impl);
         currentType = whnf(currentType.bodyType(implHole), ctx, stackDepth + 1);
+        // console.log('insertImplicitApps<<', printTerm(currentTerm), ' ::::: ', printTerm(currentType));
     }
     return { term: currentTerm, type: currentType };
 }
@@ -123,6 +126,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
 
             if (appNode.icit === Icit.Expl) {
+                // console.log('inferImpl>>', printTerm(funcAfterImplicits), ' ::::: ', printTerm(typeFAfterImplicits));
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
@@ -152,6 +156,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             }
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
+            // console.log('inferARG+++++', {elaboratedArg}, appNode.arg, {expectedParamTypeFromPi});
             const finalAppTerm = App(funcAfterImplicits, elaboratedArg, applicationIcit);
             const resultType = whnf(bodyTypeFnFromPi(elaboratedArg), ctx);
 

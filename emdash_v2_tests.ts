@@ -910,7 +910,8 @@ function runChurchStyleImplicitTests() {
     elabRes = elaborate(Var("nil_hs"), undefined, baseCtx); 
     // NOTE: the non-fully-elaborated no-implicit-insertions `nil_hs` is available from globalDefs.get("nil_hs")
     assert(unify(elabRes.type, App(Var("List_hs"), FH(), Icit.Expl), baseCtx) === UnifyResult.Solved, "HSI Test 6.1: nil_hs type check");
-    const globalNilHsDef = globalDefs.get("nil_hs")!;
+    const globalNilHsDef = globalDefs.get("nil_hs")!
+    console.log({globalNilHsDef});
     assert(areEqual(globalNilHsDef.value,  nil_func_val_elab_expected, baseCtx), "HSI Test 6.2: nil_hs value check against non-fully elaborated form (no implicit insertions) ");
 
     // let cons : {A} -> A -> List A -> List A
@@ -1027,11 +1028,11 @@ function runChurchStyleImplicitTests() {
                            Icit.Expl);
     defineGlobal("list1_hs", list1_hs_type, list1_hs_val_FAIL);
     abort();
-    elabRes = elaborate(Var("list1_hs"), undefined, baseCtx);
-    console.log('printTerm(elabRes.type)', printTerm(elabRes.type));
-    console.log('printTerm(list1_hs_type)', printTerm(list1_hs_type));
-    assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
-    assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
+    // elabRes = elaborate(Var("list1_hs"), undefined, baseCtx);
+    // console.log('printTerm(elabRes.type)', printTerm(elabRes.type));
+    // console.log('printTerm(list1_hs_type)', printTerm(list1_hs_type));
+    // assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
+    // assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
 
     // // --- Dependent Function Composition ---
     // const comp_func_type = Pi("A_comp", Icit.Impl, Type(), A_comp_term =>
