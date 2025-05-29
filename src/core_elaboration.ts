@@ -165,7 +165,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1, isSubElaboration);
             
-            if (!isSubElaboration && (insertedProgressByOuter || funcTypeWasRefinedToPi)) {
+            if (insertedProgressByOuter || funcTypeWasRefinedToPi) {
                 if (!solveConstraints(ctx, stackDepth + 1)) {
                     const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
                     let fcMsg = "Unknown constraint";
@@ -378,7 +378,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else if (lamNode.paramType) { 
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
-            solveConstraints(ctx); // ALTERNATIVELY: attempt to solve only when lamNode.paramType is a hole
+            solveConstraints(ctx, stackDepth + 1); // ALTERNATIVELY: attempt to solve only when lamNode.paramType is a hole
             lamParamType = elabLamParamType; 
         }
         if (!lamParamType) {

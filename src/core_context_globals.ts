@@ -274,6 +274,8 @@ export function addUnificationRule(rule: UnificationRule) {
 export let constraints: Constraint[] = [];
 export function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
 
+export const solveConstraintsControl = { depth: 0 }; // Guard against re-entrant solveConstraints calls
+
 export function getTermRef(term: Term): Term {
     let current = term;
     const visited = new Set<Term>(); // To detect cycles in Hole references

@@ -1,5 +1,5 @@
 import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
-import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose } from './core_context_globals';
+import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose, solveConstraintsControl } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
 export const MAX_WHNF_ITERATIONS = 10000;
@@ -912,6 +912,13 @@ export function tryUnificationRules(t1: Term, t2: Term, ctx: Context, depth: num
 
 export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean {
     if (stackDepth > MAX_STACK_DEPTH * 2) throw new Error("solveConstraints stack depth exceeded");
+
+    if (solveConstraintsControl.depth > 0 && stackDepth > 0) { 
+        // consoleLog(`[solveConstraints SKIPPING RE-ENTRANT CALL] depth: ${solveConstraintsControl.depth}, stack: ${stackDepth}`);
+        return true; 
+    }
+
+    solveConstraintsControl.depth++;
     let changedInOuterLoop = true;
     let iterations = 0;
     const maxIterations = (constraints.length * constraints.length + userUnificationRules.length * constraints.length + 100) * 2 + 200;
@@ -964,20 +971,9 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
         console.warn("Constraint solving reached max iterations and was still making changes. Constraints left: " + constraints.length);
     }
 
-    if (constraints.length > 0) {
-        for (const constraint of constraints) { 
-            if (!areEqual(getTermRef(constraint.t1), getTermRef(constraint.t2), ctx, stackDepth + 1)) {
-                console.warn(`Final check failed for UNRESOLVED constraint: ${printTerm(getTermRef(constraint.t1))} === ${printTerm(getTermRef(constraint.t2))} (orig: ${constraint.origin || 'unknown'})`);
-                if (getDebugVerbose() || iterations >= maxIterations) { 
-                    console.warn("All remaining constraints after solve attempt:");
-                    constraints.forEach(c => console.warn(`  ${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (origin: ${c.origin})`));
-                }
-                return false; 
-            }
-        }
-        if (constraints.every(c => areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, stackDepth + 1))) {
-            constraints.length = 0; // All remaining constraints are indeed equal after all.
-        }
-    }
-    return constraints.length === 0; 
+    const allSolved = constraints.length === 0 || constraints.every(c => areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, stackDepth + 1));
+    if(allSolved && constraints.length > 0) constraints.length = 0; 
+
+    solveConstraintsControl.depth--;
+    return allSolved; 
 }
