@@ -911,7 +911,7 @@ function runChurchStyleImplicitTests() {
     // NOTE: the non-fully-elaborated no-implicit-insertions `nil_hs` is available from globalDefs.get("nil_hs")
     assert(unify(elabRes.type, App(Var("List_hs"), FH(), Icit.Expl), baseCtx) === UnifyResult.Solved, "HSI Test 6.1: nil_hs type check");
     const globalNilHsDef = globalDefs.get("nil_hs")!
-    console.log({globalNilHsDef});
+    // console.log({globalNilHsDef});
     assert(areEqual(globalNilHsDef.value,  nil_func_val_elab_expected, baseCtx), "HSI Test 6.2: nil_hs value check against non-fully elaborated form (no implicit insertions) ");
 
     // let cons : {A} -> A -> List A -> List A
@@ -947,13 +947,9 @@ function runChurchStyleImplicitTests() {
                                 App(App(App(xs_term, L_term, Icit.Expl), c_term, Icit.Expl), n_term, Icit.Expl),
                                 Icit.Expl)))))));
     defineGlobal("cons_hs", cons_func_type, cons_func_val_raw);
-    elabRes = elaborate(Var("cons_hs"), undefined, baseCtx);
     assert(areEqual(globalDefs.get("cons_hs").type, cons_func_type, baseCtx), "HSI Test 7.1: cons_hs type check");
-    // const globalConsHsDef = globalDefs.get("cons_hs")!;
-    // assert(!!globalConsHsDef.value, "HSI Test 7.2a: Global cons_hs should have a value");
-    // const elabGlobalConsVal = check(baseCtx, globalConsHsDef.value!, globalConsHsDef.type);
-    console.log('printTerm(globalDefs.get("cons_hs")!.value)', printTerm(globalDefs.get("cons_hs")!.value));
-    console.log('printTerm(cons_func_val_elab_expected)', printTerm(cons_func_val_elab_expected));
+    // console.log('printTerm(globalDefs.get("cons_hs")!.value)', printTerm(globalDefs.get("cons_hs")!.value));
+    // console.log('printTerm(cons_func_val_elab_expected)', printTerm(cons_func_val_elab_expected));
     assert(areEqual(globalDefs.get("cons_hs")!.value, cons_func_val_elab_expected, baseCtx), "HSI Test 7.2: cons_hs value check");
 
     // let map : {A B} -> (A -> B) -> List A -> List B
@@ -1070,46 +1066,50 @@ function runChurchStyleImplicitTests() {
             )
         )
     );
+    // issue solved: ?h11_auto_inserted_impl_arg
     // const comp_func_val_annotated = 
     // (λ {A_comp : Type}. (λ {B_comp : (Π (_a_B : A_comp). Type)}. (λ {C_comp : (Π {a_C_arg : A_comp}. (Π (b_C_arg : (B_comp a_C_arg)). Type))}. (λ (f_val_raw : (Π {a_f_arg : A_comp}. (Π (b_f_arg : (B_comp a_f_arg)). ((C_comp {a_f_arg}) b_f_arg)))). (λ (g_val_raw : (Π (a_g_arg : A_comp). (B_comp a_g_arg))). (λ (a_val_raw : A_comp). ((f_val_raw {?h11_auto_inserted_impl_arg(:A_comp)}) (g_val_raw a_val_raw))))))))
+
     defineGlobal("comp_hs", comp_func_type, comp_func_val_raw);
-    elabRes = elaborate(Var("comp_hs"), undefined, baseCtx);
-    console.log('printTerm(globalDefs.get("comp_hs")!.value)', printTerm(globalDefs.get("comp_hs")!.value));
+    // console.log('printTerm(globalDefs.get("comp_hs")!.value)', printTerm(globalDefs.get("comp_hs")!.value));
     assert(areEqual(globalDefs.get("comp_hs").type, comp_func_type, baseCtx), "HSI Test 10.1: comp_hs type check");
-    // const globalCompHsDef = globalDefs.get("comp_hs")!;
-    // assert(!!globalCompHsDef.value, "HSI Test 10.2a: Global comp_hs should have a value");
-    // assert(areEqual(normalize(check(baseCtx, globalCompHsDef.value!, globalCompHsDef.type), baseCtx), normalize(check(baseCtx, comp_func_val_raw, comp_func_type), baseCtx), baseCtx), "HSI Test 10.2: comp_hs value check");
 
-    // const B_for_compEx = Pi("_a_B_ex", Icit.Expl, Var("Bool"), _ => App(Var("List_hs"), Var("Bool"), Icit.Expl));
-    // const C_for_compEx = Pi("a_C_ex", Icit.Impl, Var("Bool"), a_C_val => 
-    //                         Pi("b_C_ex", Icit.Expl, App(B_for_compEx, a_C_val, Icit.Expl), _ => App(Var("List_hs"), Var("Bool"), Icit.Expl)));
 
-    // const f_for_compEx = App(App(Var("cons_hs"), Var("Bool"), Icit.Impl), Var("true_hs"), Icit.Expl);
-    // const g_for_compEx = App(App(Var("cons_hs"), Var("Bool"), Icit.Impl), Var("false_hs"), Icit.Expl);
-    // const a_for_compEx = App(Var("nil_hs"), Var("Bool"), Icit.Impl);
+    // let compExample = comp (cons true) (cons false) nil;
+    // NOTE: no higher-order meta supported yet; therefore must provide B and C
+    const B_for_compEx = Lam("_a_B_ex", Icit.Expl, _ => App(Var("List_hs"), Var("Bool"), Icit.Expl));
+    const C_for_compEx = Lam("a_C_ex", Icit.Impl, a_C_val => 
+                            Lam("b_C_ex", Icit.Expl, _ => App(Var("List_hs"), Var("Bool"), Icit.Expl)));
 
-    // const compEx_val = App(App(App(App(App(App(Var("comp_hs"), 
-    //     Var("Bool"), Icit.Impl),      
-    //     B_for_compEx, Icit.Impl),   
-    //     C_for_compEx, Icit.Impl),   
-    //     f_for_compEx, Icit.Expl),   
-    //     g_for_compEx, Icit.Expl),   
-    //     a_for_compEx, Icit.Expl);
-            
-    // const compEx_expected_type = App(Var("List_hs"), Var("Bool"), Icit.Expl); 
-    // defineGlobal("compExample_hs", compEx_expected_type, compEx_val);
+    const f_for_compEx = App(Var("cons_hs"), Var("true_hs"), Icit.Expl);
+    const g_for_compEx = App(Var("cons_hs"), Var("false_hs"), Icit.Expl);
+    const a_for_compEx = Var("nil_hs");
+
+    const compEx_val = App(App(App(App(App(App(Var("comp_hs"), 
+        FH(), Icit.Impl),      
+        B_for_compEx, Icit.Impl),   
+        C_for_compEx, Icit.Impl),   
+        f_for_compEx, Icit.Expl),   
+        g_for_compEx, Icit.Expl),   
+        a_for_compEx, Icit.Expl);
+    
+    const compEx_expected_type = App(Var("List_hs"), Var("Bool"), Icit.Expl); 
+    defineGlobal("compExample_hs", compEx_expected_type, compEx_val);
+    console.log('printTerm(normalize(globalDefs.get("compExample_hs")!.value, baseCtx))', 
+        printTerm(normalize(globalDefs.get("compExample_hs")!.value, baseCtx)), "HSI Test 11.0: compExample_hs value normalized");
+
     // elabRes = elaborate(Var("compExample_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, compEx_expected_type, baseCtx), "HSI Test 11.1: compExample_hs type check");
+    assert(areEqual(globalDefs.get("compExample_hs").type, compEx_expected_type, baseCtx), "HSI Test 11.1: compExample_hs type check");
     // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(compEx_val, baseCtx), baseCtx), "HSI Test 11.2: compExample_hs value check");
 
-    // const Nat_hs_type_val = Pi("N_Nat_param", Icit.Expl, Type(), N_Nat_term =>
-    //     Pi("s_Nat_param", Icit.Expl, Pi("arg_s_Nat", Icit.Expl, N_Nat_term, _ => N_Nat_term), _s_term =>
-    //         Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
-    //     )
-    // );
-    // defineGlobal("Nat_hs", Type(), Nat_hs_type_val, false, false, true);
-    // elabRes = elaborate(Var("Nat_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 12.1: Nat_hs type check");
+    const Nat_hs_type_val = Pi("N_Nat_param", Icit.Expl, Type(), N_Nat_term =>
+        Pi("s_Nat_param", Icit.Expl, Pi("arg_s_Nat", Icit.Expl, N_Nat_term, _ => N_Nat_term), _s_term =>
+            Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
+        )
+    );
+    defineGlobal("Nat_hs", Type(), Nat_hs_type_val, false, false, false);
+    elabRes = elaborate(Var("Nat_hs"), undefined, baseCtx);
+    assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 12.1: Nat_hs type check");
 
     // const ten_hs_val_raw = Lam("N_ten", Icit.Expl, Type(), N_ten_term =>
     //     Lam("s_ten", Icit.Expl, Pi("_arg",Icit.Expl,N_ten_term,_=>N_ten_term), s_ten_actual_term =>
