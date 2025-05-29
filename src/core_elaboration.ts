@@ -71,7 +71,7 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
 }
 
 
-export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferResult {
+export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubElaboration: boolean = false): InferResult {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
 
     const originalTerm = term;
@@ -121,35 +121,34 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         case 'App': {
             const appNode = current;
             // Infer type of function part
-            let { elaboratedTerm: inferredFuncElab, type: inferredFuncType } = infer(ctx, appNode.func, stackDepth + 1);
+            let { elaboratedTerm: inferredFuncElab, type: inferredFuncType } = infer(ctx, appNode.func, stackDepth + 1, isSubElaboration);
 
             // Insert implicit applications if the current application is explicit
             let funcAfterImplicits = inferredFuncElab;
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
+            let insertedProgressByOuter = false; 
 
             if (appNode.icit === Icit.Expl) {
-                // console.log('inferImpl>>', printTerm(funcAfterImplicits), ' ::::: ', printTerm(typeFAfterImplicits));
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
                 funcAfterImplicits = inserted.term;
-                typeFAfterImplicits = inserted.type; // This is type of funcAfterImplicits
-                // insertedProgress = inserted.progress; // No longer strictly needed for this logic
+                typeFAfterImplicits = inserted.type; 
+                insertedProgressByOuter = inserted.progress || false;
             }
             
             let expectedParamTypeFromPi: Term;
             let bodyTypeFnFromPi: (argVal: Term) => Term;
             const applicationIcit = appNode.icit;
 
-            // Ensure typeFAfterImplicits is WHNF before checking its tag
             const whnfOfFuncTypeAfterImplicits = whnf(typeFAfterImplicits, ctx, stackDepth + 1);
+            let funcTypeWasRefinedToPi = false;
 
             if (whnfOfFuncTypeAfterImplicits.tag === 'Pi' && whnfOfFuncTypeAfterImplicits.icit === applicationIcit) {
                 expectedParamTypeFromPi = whnfOfFuncTypeAfterImplicits.paramType;
                 bodyTypeFnFromPi = whnfOfFuncTypeAfterImplicits.bodyType;
             } else if (whnfOfFuncTypeAfterImplicits.tag === 'Pi' && whnfOfFuncTypeAfterImplicits.icit !== applicationIcit) {
-                // Icit mismatch error
                 throw new Error(`Type error in App (${applicationIcit === Icit.Expl ? "explicit" : "implicit"}): function ${printTerm(funcAfterImplicits)} of type ${printTerm(whnfOfFuncTypeAfterImplicits)} expects a ${whnfOfFuncTypeAfterImplicits.icit === Icit.Expl ? "explicit" : "implicit"} argument, but an ${applicationIcit === Icit.Expl ? "explicit" : "implicit"} one was provided for ${printTerm(appNode.arg)}.`);
             } else {
-                // Function type is not a matching Pi, so we constrain it to become one.
+                funcTypeWasRefinedToPi = true; // Mark that we are refining the function type
                 const freshPiParamName = freshVarName("pi_param_app");
                 const paramTypeHole = Hole(freshHoleName() + "_app_paramT_infer");
                 (paramTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
@@ -157,39 +156,31 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 (bodyTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
                 const targetPiType = Pi(freshPiParamName, applicationIcit, paramTypeHole, (_arg: Term) => bodyTypeHole);
                 
-                // Add constraint: current function type (after implicits) === desired Pi type
                 addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type needs to be Pi for arg ${printTerm(appNode.arg)}`);
                 consoleLog(`INFER>>ADDCONSTRAINT_REFINE_HIGHER_ORDER_TYPE for App: ${printTerm(typeFAfterImplicits)} === ${printTerm(targetPiType)}`);
                 
                 expectedParamTypeFromPi = paramTypeHole;
-                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole; // This body will be bodyTypeHole resolved
+                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole; 
             }
 
-            const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
+            const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1, isSubElaboration);
             
-            // Solve constraints generated from inferring func, inserting implicits, potentially refining func type to Pi, and checking arg.
-            // This allows holes (e.g., from inserted implicits or synthesized Pi types) to be resolved.
-            // This call replaces the user's original conditional fix.
-            if (!solveConstraints(ctx, stackDepth + 1)) {
-                const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
-                let fcMsg = "Unknown constraint";
-                if (fc) {
-                    fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
+            if (!isSubElaboration && (insertedProgressByOuter || funcTypeWasRefinedToPi)) {
+                if (!solveConstraints(ctx, stackDepth + 1)) {
+                    const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
+                    let fcMsg = "Unknown constraint";
+                    if (fc) {
+                        fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
+                    }
+                    console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
+                    throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
                 }
-                console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
-                throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
             }
 
-            // Construct the final application using potentially refined terms (due to solved holes).
-            // getTermRef is important here.
             const finalFuncPart = getTermRef(funcAfterImplicits);
-            // check returns an elaborated term; getTermRef for safety if it was a hole directly that got solved.
             const finalArgPart = getTermRef(elaboratedArg); 
             
             const finalAppTerm = App(finalFuncPart, finalArgPart, applicationIcit);
-            
-            // The bodyTypeFnFromPi, when called, will use the (now potentially solved) components it captured.
-            // whnf will handle dereferencing internally.
             const resultType = whnf(bodyTypeFnFromPi(finalArgPart), ctx, stackDepth + 1);
 
             return { elaboratedTerm: finalAppTerm, type: resultType };
@@ -201,7 +192,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             let originalParamType = lamNode.paramType;
 
             if (lamNode._isAnnotated && lamNode.paramType) {
-                actualParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1);
+                actualParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             } else {
                 actualParamType = Hole(freshHoleName() + "_lam_" + lamNode.paramName + "_paramT_infer_");
                 (actualParamType as Term & {tag:'Hole'}).elaboratedType = Type();
@@ -215,16 +206,13 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 actualParamType,
                 (pi_body_argument_term: Term): Term => {
                     const body_infer_ctx = extendCtx(ctx, lamNode.paramName, actualParamType, lamNode.icit, pi_body_argument_term);
-                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName)); // Get the raw body structure
+                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName)); 
                     
-                    // Infer the type of the raw body structure
-                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1);
+                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, true);
                     
-                    // If the body might itself be a function expecting implicits, insert them.
-                    // This corresponds to Haskell's `insert cxt' $ infer cxt' t`
                     const insertedBody = insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     
-                    return insertedBody.type; // Return the type of the (potentially implicitly-applied) body
+                    return insertedBody.type; 
                 }
             );
 
@@ -235,8 +223,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 (v: Term) => {
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
                     const bodyTermRaw = lamNode.body(Var(lamNode.paramName));
-                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1);
-                     // Also apply insertImplicitApps here for the actual elaborated term's body
+                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, true);
                     const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term;
                 }
@@ -255,35 +242,35 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'Pi': {
             const piNode = current;
-            const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1);
+            const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             const extendedCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
             const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName));
-            const elaboratedBodyTypeResult = check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1); 
+            const elaboratedBodyTypeResult = check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1, true); 
             const finalPi = Pi(piNode.paramName, piNode.icit, elaboratedParamType, (v: Term) => {
                 const bodyCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit, v);
                 const piNodeBodyType = piNode.bodyType(Var(piNode.paramName))
-                return check(bodyCtx, piNodeBodyType, Type(), stackDepth+1);
+                return check(bodyCtx, piNodeBodyType, Type(), stackDepth+1, true);
             });
             return { elaboratedTerm: finalPi, type: Type() };
         }
         case 'CatTerm': return { elaboratedTerm: current, type: Type() };
         case 'ObjTerm': {
-            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1);
+            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1, isSubElaboration);
             return { elaboratedTerm: ObjTerm(elabCat), type: Type() };
         }
         case 'HomTerm': {
-            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1);
+            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1, isSubElaboration);
             const catForHom = getTermRef(elabCat);
-            const elabDom = check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1);
-            const elabCod = check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1);
+            const elabDom = check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1, isSubElaboration);
+            const elabCod = check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1, isSubElaboration);
             return { elaboratedTerm: HomTerm(elabCat, elabDom, elabCod), type: Type() };
         }
         case 'MkCat_': {
-            const elabObjR = check(ctx, current.objRepresentation, Type(), stackDepth + 1);
+            const elabObjR = check(ctx, current.objRepresentation, Type(), stackDepth + 1, isSubElaboration);
             const O_repr_norm = getTermRef(elabObjR);
 
             const expected_H_type = Pi("X", Icit.Expl, O_repr_norm, _X => Pi("Y", Icit.Expl, O_repr_norm, _Y => Type()));
-            const elabHomR = check(ctx, current.homRepresentation, expected_H_type, stackDepth + 1);
+            const elabHomR = check(ctx, current.homRepresentation, expected_H_type, stackDepth + 1, isSubElaboration);
             const H_repr_func_norm = getTermRef(elabHomR);
 
             const type_of_hom_X_Y = (X_val: Term, Y_val: Term) => App(App(H_repr_func_norm, X_val, Icit.Expl), Y_val, Icit.Expl);
@@ -296,27 +283,27 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 Pi("fmorph", Icit.Expl, type_of_hom_X_Y(Xobj_term, Yobj_term), _fmorph_term =>
                 type_of_hom_X_Y(Xobj_term, Zobj_term)
                 )))));
-            const elabCompI = check(ctx, current.composeImplementation, expected_C_type, stackDepth + 1);
+            const elabCompI = check(ctx, current.composeImplementation, expected_C_type, stackDepth + 1, isSubElaboration);
             const finalMkCat = MkCat_(elabObjR, elabHomR, elabCompI);
             return { elaboratedTerm: finalMkCat, type: CatTerm() };
         }
         case 'IdentityMorph': {
             const idTerm = current;
-            const catArg = idTerm.cat_IMPLICIT ? check(ctx, idTerm.cat_IMPLICIT, CatTerm(), stackDepth +1) : Hole(freshHoleName() + "_id_cat_implicit_infer");
+            const catArg = idTerm.cat_IMPLICIT ? check(ctx, idTerm.cat_IMPLICIT, CatTerm(), stackDepth +1, isSubElaboration) : Hole(freshHoleName() + "_id_cat_implicit_infer");
             if (idTerm.cat_IMPLICIT === undefined && current.tag === 'IdentityMorph') current.cat_IMPLICIT = catArg;
 
 
-            const objInferResult = infer(ctx, idTerm.obj, stackDepth + 1);
+            const objInferResult = infer(ctx, idTerm.obj, stackDepth + 1, isSubElaboration);
             addConstraint(objInferResult.type, ObjTerm(catArg), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(catArg)})`);
             const finalIdMorph = IdentityMorph(objInferResult.elaboratedTerm, catArg);
             return { elaboratedTerm: finalIdMorph, type: HomTerm(catArg, objInferResult.elaboratedTerm, objInferResult.elaboratedTerm) };
         }
         case 'ComposeMorph': {
             const compTerm = current;
-            const catArg = compTerm.cat_IMPLICIT ? check(ctx, compTerm.cat_IMPLICIT, CatTerm(), stackDepth+1) : Hole(freshHoleName() + "_comp_cat_implicit_infer");
-            const XArg = compTerm.objX_IMPLICIT ? check(ctx, compTerm.objX_IMPLICIT, ObjTerm(catArg), stackDepth+1) : Hole(freshHoleName() + "_comp_X_implicit_infer");
-            const YArg = compTerm.objY_IMPLICIT ? check(ctx, compTerm.objY_IMPLICIT, ObjTerm(catArg), stackDepth+1) : Hole(freshHoleName() + "_comp_Y_implicit_infer");
-            const ZArg = compTerm.objZ_IMPLICIT ? check(ctx, compTerm.objZ_IMPLICIT, ObjTerm(catArg), stackDepth+1) : Hole(freshHoleName() + "_comp_Z_implicit_infer");
+            const catArg = compTerm.cat_IMPLICIT ? check(ctx, compTerm.cat_IMPLICIT, CatTerm(), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_cat_implicit_infer");
+            const XArg = compTerm.objX_IMPLICIT ? check(ctx, compTerm.objX_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_X_implicit_infer");
+            const YArg = compTerm.objY_IMPLICIT ? check(ctx, compTerm.objY_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_Y_implicit_infer");
+            const ZArg = compTerm.objZ_IMPLICIT ? check(ctx, compTerm.objZ_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_Z_implicit_infer");
             
             if(current.tag === 'ComposeMorph'){ // Fill in kernel implicits if they were inferred
                 if(!current.cat_IMPLICIT) current.cat_IMPLICIT = catArg;
@@ -326,8 +313,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             }
 
 
-            const elabF = check(ctx, compTerm.f, HomTerm(catArg, XArg, YArg), stackDepth + 1);
-            const elabG = check(ctx, compTerm.g, HomTerm(catArg, YArg, ZArg), stackDepth + 1);
+            const elabF = check(ctx, compTerm.f, HomTerm(catArg, XArg, YArg), stackDepth + 1, isSubElaboration);
+            const elabG = check(ctx, compTerm.g, HomTerm(catArg, YArg, ZArg), stackDepth + 1, isSubElaboration);
             const finalComp = ComposeMorph(elabG, elabF, catArg, XArg, YArg, ZArg);
             return { elaboratedTerm: finalComp, type: HomTerm(catArg, XArg, ZArg) };
         }
@@ -337,7 +324,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
     }
 }
 
-export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): Term {
+export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0, isSubElaboration: boolean = false): Term {
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
@@ -363,8 +350,8 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 (v_actual_arg: Term) => {
                     const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl, v_actual_arg);
                     const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(v_actual_arg), bodyCheckCtx);
-                    // Pass `termRef` (the term before implicit lambda insertion) to the recursive check
-                    const bodyterm = check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1);
+                    // Pass isSubElaboration = true for this internal check call
+                    const bodyterm = check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1, true);
                     return bodyterm;
                 }
             );
@@ -389,7 +376,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             lamNode._isAnnotated = true;
 
         } else if (lamNode.paramType) { 
-            const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1);
+            const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
             solveConstraints(ctx); // ALTERNATIVELY: attempt to solve only when lamNode.paramType is a hole
             lamParamType = elabLamParamType; 
@@ -404,7 +391,8 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 const extendedCtx = extendCtx(ctx, lamNode.paramName, finalLamParamType, lamNode.icit, v_arg);
                 const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
                 const expectedBodyPiType = whnf(expectedPiNode.bodyType(v_arg), extendedCtx);
-                return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1);
+                // Pass isSubElaboration = true for this internal check call
+                return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, true);
             }
         );
     }
@@ -420,7 +408,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
     // Default case: infer type, insert implicits, then check against expected
     // This corresponds to `(t, inferred) <- insert cxt $ infer cxt t` in Haskell
-    let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1);
+    let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1, isSubElaboration);
     
     // Insert implicit applications based on the inferred type
     const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1);
