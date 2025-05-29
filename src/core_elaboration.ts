@@ -126,47 +126,71 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             // Insert implicit applications if the current application is explicit
             let funcAfterImplicits = inferredFuncElab;
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
-            let insertedProgress = false;
 
             if (appNode.icit === Icit.Expl) {
                 // console.log('inferImpl>>', printTerm(funcAfterImplicits), ' ::::: ', printTerm(typeFAfterImplicits));
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
                 funcAfterImplicits = inserted.term;
-                typeFAfterImplicits = inserted.type;
-                insertedProgress = inserted.progress;
+                typeFAfterImplicits = inserted.type; // This is type of funcAfterImplicits
+                // insertedProgress = inserted.progress; // No longer strictly needed for this logic
             }
             
-            // Now, typeFAfterImplicits is the type of funcAfterImplicits.
-            // We expect it to be a Pi type matching appNode.icit.
             let expectedParamTypeFromPi: Term;
             let bodyTypeFnFromPi: (argVal: Term) => Term;
             const applicationIcit = appNode.icit;
 
-            if (typeFAfterImplicits.tag === 'Pi' && typeFAfterImplicits.icit === applicationIcit) {
-                expectedParamTypeFromPi = typeFAfterImplicits.paramType;
-                bodyTypeFnFromPi = typeFAfterImplicits.bodyType;
-            } else if (typeFAfterImplicits.tag === 'Pi' && typeFAfterImplicits.icit !== applicationIcit) {
-                throw new Error(`Type error in App (${applicationIcit === Icit.Expl ? "explicit" : "implicit"}): function ${printTerm(funcAfterImplicits)} of type ${printTerm(typeFAfterImplicits)} expects a ${typeFAfterImplicits.icit === Icit.Expl ? "explicit" : "implicit"} argument, but an ${applicationIcit === Icit.Expl ? "explicit" : "implicit"} one was provided for ${printTerm(appNode.arg)}.`);
+            // Ensure typeFAfterImplicits is WHNF before checking its tag
+            const whnfOfFuncTypeAfterImplicits = whnf(typeFAfterImplicits, ctx, stackDepth + 1);
+
+            if (whnfOfFuncTypeAfterImplicits.tag === 'Pi' && whnfOfFuncTypeAfterImplicits.icit === applicationIcit) {
+                expectedParamTypeFromPi = whnfOfFuncTypeAfterImplicits.paramType;
+                bodyTypeFnFromPi = whnfOfFuncTypeAfterImplicits.bodyType;
+            } else if (whnfOfFuncTypeAfterImplicits.tag === 'Pi' && whnfOfFuncTypeAfterImplicits.icit !== applicationIcit) {
+                // Icit mismatch error
+                throw new Error(`Type error in App (${applicationIcit === Icit.Expl ? "explicit" : "implicit"}): function ${printTerm(funcAfterImplicits)} of type ${printTerm(whnfOfFuncTypeAfterImplicits)} expects a ${whnfOfFuncTypeAfterImplicits.icit === Icit.Expl ? "explicit" : "implicit"} argument, but an ${applicationIcit === Icit.Expl ? "explicit" : "implicit"} one was provided for ${printTerm(appNode.arg)}.`);
             } else {
+                // Function type is not a matching Pi, so we constrain it to become one.
                 const freshPiParamName = freshVarName("pi_param_app");
                 const paramTypeHole = Hole(freshHoleName() + "_app_paramT_infer");
                 (paramTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
                 const bodyTypeHole = Hole(freshHoleName() + "_app_bodyT_infer");
                 (bodyTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
                 const targetPiType = Pi(freshPiParamName, applicationIcit, paramTypeHole, (_arg: Term) => bodyTypeHole);
-                addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type constraint for arg ${printTerm(appNode.arg)}`);
-                console.log('INFER>>ADDCONSTRAINT_REFINE_HIGHER_ORDER_TYPE', printTerm(typeFAfterImplicits), ' === ', printTerm(targetPiType));
+                
+                // Add constraint: current function type (after implicits) === desired Pi type
+                addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type needs to be Pi for arg ${printTerm(appNode.arg)}`);
+                consoleLog(`INFER>>ADDCONSTRAINT_REFINE_HIGHER_ORDER_TYPE for App: ${printTerm(typeFAfterImplicits)} === ${printTerm(targetPiType)}`);
+                
                 expectedParamTypeFromPi = paramTypeHole;
-                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole;
+                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole; // This body will be bodyTypeHole resolved
             }
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
-            if (insertedProgress) {
-                solveConstraints(ctx, stackDepth + 1);
+            
+            // Solve constraints generated from inferring func, inserting implicits, potentially refining func type to Pi, and checking arg.
+            // This allows holes (e.g., from inserted implicits or synthesized Pi types) to be resolved.
+            // This call replaces the user's original conditional fix.
+            if (!solveConstraints(ctx, stackDepth + 1)) {
+                const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
+                let fcMsg = "Unknown constraint";
+                if (fc) {
+                    fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
+                }
+                console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
+                throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
             }
 
-            const finalAppTerm = App(funcAfterImplicits, elaboratedArg, applicationIcit);
-            const resultType = whnf(bodyTypeFnFromPi(elaboratedArg), ctx);
+            // Construct the final application using potentially refined terms (due to solved holes).
+            // getTermRef is important here.
+            const finalFuncPart = getTermRef(funcAfterImplicits);
+            // check returns an elaborated term; getTermRef for safety if it was a hole directly that got solved.
+            const finalArgPart = getTermRef(elaboratedArg); 
+            
+            const finalAppTerm = App(finalFuncPart, finalArgPart, applicationIcit);
+            
+            // The bodyTypeFnFromPi, when called, will use the (now potentially solved) components it captured.
+            // whnf will handle dereferencing internally.
+            const resultType = whnf(bodyTypeFnFromPi(finalArgPart), ctx, stackDepth + 1);
 
             return { elaboratedTerm: finalAppTerm, type: resultType };
         }

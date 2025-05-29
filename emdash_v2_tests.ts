@@ -1070,13 +1070,7 @@ function runChurchStyleImplicitTests() {
             )
         )
     );
-    // const comp_func_val_annotated = Lam("f_val_raw", Icit.Expl, FH(), f_val => 
-    //     Lam("g_val_raw", Icit.Expl, FH(), g_val => 
-    //         Lam("a_val_raw", Icit.Expl, FH(), a_val => 
-    //             App(f_val, App(g_val, a_val, Icit.Expl), Icit.Expl)
-    //         )
-    //     )
-    // );
+    // const comp_func_val_annotated = 
     // (λ {A_comp : Type}. (λ {B_comp : (Π (_a_B : A_comp). Type)}. (λ {C_comp : (Π {a_C_arg : A_comp}. (Π (b_C_arg : (B_comp a_C_arg)). Type))}. (λ (f_val_raw : (Π {a_f_arg : A_comp}. (Π (b_f_arg : (B_comp a_f_arg)). ((C_comp {a_f_arg}) b_f_arg)))). (λ (g_val_raw : (Π (a_g_arg : A_comp). (B_comp a_g_arg))). (λ (a_val_raw : A_comp). ((f_val_raw {?h11_auto_inserted_impl_arg(:A_comp)}) (g_val_raw a_val_raw))))))))
     defineGlobal("comp_hs", comp_func_type, comp_func_val_raw);
     elabRes = elaborate(Var("comp_hs"), undefined, baseCtx);
