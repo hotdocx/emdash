@@ -1027,12 +1027,12 @@ function runChurchStyleImplicitTests() {
                                Icit.Expl), 
                            Icit.Expl);
     defineGlobal("list1_hs", list1_hs_type, list1_hs_val_FAIL);
-    abort();
-    // elabRes = elaborate(Var("list1_hs"), undefined, baseCtx);
-    // console.log('printTerm(elabRes.type)', printTerm(elabRes.type));
-    // console.log('printTerm(list1_hs_type)', printTerm(list1_hs_type));
-    // assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
-    // assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
+    // abort();
+    elabRes = elaborate(Var("list1_hs"), undefined, baseCtx);
+    console.log('printTerm(elabRes.type)', printTerm(elabRes.type));
+    console.log('printTerm(list1_hs_type)', printTerm(list1_hs_type));
+    assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
+    assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
 
     // // --- Dependent Function Composition ---
     // const comp_func_type = Pi("A_comp", Icit.Impl, Type(), A_comp_term =>

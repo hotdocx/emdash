@@ -50,9 +50,9 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
     // Do not insert if the term itself is an implicit lambda
     // and we are not in unconditional mode
     const termRef = getTermRef(currentTerm);
-    if (termRef.tag === 'Lam' && termRef.icit === Icit.Impl && !unConditional) {
-        return { term: currentTerm, type: currentType };
-    }
+    // if (termRef.tag === 'Lam' && termRef.icit === Icit.Impl && !unConditional) {
+    //     return { term: currentTerm, type: currentType };
+    // }
 
     while (currentType.tag === 'Pi' && currentType.icit === Icit.Impl) {
         //  console.log('insertImplicitApps>>', {unConditional}, printTerm(currentTerm), ' ::::: ', printTerm(currentType));
