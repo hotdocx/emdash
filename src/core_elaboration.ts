@@ -43,7 +43,7 @@ export interface InferResult {
 
 // Helper function to insert implicit applications
 // Based on Haskell's insert' and parts of insert
-function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: number, unConditional: boolean = false): { term: Term, type: Term } {
+function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: number, unConditional: boolean = false): { term: Term, type: Term, progress?: boolean } {
     let currentTerm = term;
     let currentType = whnf(type, ctx, stackDepth + 1);
 
@@ -54,6 +54,7 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
     //     return { term: currentTerm, type: currentType };
     // }
 
+    let progress = false;
     while (currentType.tag === 'Pi' && currentType.icit === Icit.Impl) {
         //  console.log('insertImplicitApps>>', {unConditional}, printTerm(currentTerm), ' ::::: ', printTerm(currentType));
 
@@ -63,9 +64,10 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
         }
         currentTerm = App(currentTerm, implHole, Icit.Impl);
         currentType = whnf(currentType.bodyType(implHole), ctx, stackDepth + 1);
+        progress = true;
         // console.log('insertImplicitApps<<', printTerm(currentTerm), ' ::::: ', printTerm(currentType));
     }
-    return { term: currentTerm, type: currentType };
+    return { term: currentTerm, type: currentType, progress };
 }
 
 
@@ -124,14 +126,14 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             // Insert implicit applications if the current application is explicit
             let funcAfterImplicits = inferredFuncElab;
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
+            let insertedProgress = false;
 
             if (appNode.icit === Icit.Expl) {
                 // console.log('inferImpl>>', printTerm(funcAfterImplicits), ' ::::: ', printTerm(typeFAfterImplicits));
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
-                try {solveConstraints(ctx)} catch {};
-
+                insertedProgress = inserted.progress;
             }
             
             // Now, typeFAfterImplicits is the type of funcAfterImplicits.
@@ -159,7 +161,10 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             }
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
-            // console.log('inferARG+++++', {elaboratedArg}, appNode.arg, {expectedParamTypeFromPi});
+            if (insertedProgress) {
+                solveConstraints(ctx, stackDepth + 1);
+            }
+
             const finalAppTerm = App(funcAfterImplicits, elaboratedArg, applicationIcit);
             const resultType = whnf(bodyTypeFnFromPi(elaboratedArg), ctx);
 
