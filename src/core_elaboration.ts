@@ -130,6 +130,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true);
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
+                try {solveConstraints(ctx)} catch {};
+
             }
             
             // Now, typeFAfterImplicits is the type of funcAfterImplicits.
@@ -151,6 +153,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 (bodyTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
                 const targetPiType = Pi(freshPiParamName, applicationIcit, paramTypeHole, (_arg: Term) => bodyTypeHole);
                 addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type constraint for arg ${printTerm(appNode.arg)}`);
+                console.log('INFER>>ADDCONSTRAINT_REFINE_HIGHER_ORDER_TYPE', printTerm(typeFAfterImplicits), ' === ', printTerm(targetPiType));
                 expectedParamTypeFromPi = paramTypeHole;
                 bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole;
             }

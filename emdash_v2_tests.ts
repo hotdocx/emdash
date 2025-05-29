@@ -1034,38 +1034,53 @@ function runChurchStyleImplicitTests() {
     assert(areEqual(elabRes.type, list1_hs_type, baseCtx), "HSI Test 9.1: list1_hs type check");
     assert(areEqual(elabRes.term, list1_hs_val_annotated, baseCtx), "HSI Test 9.2: list1_hs value check");
 
-    // // --- Dependent Function Composition ---
-    // const comp_func_type = Pi("A_comp", Icit.Impl, Type(), A_comp_term =>
-    //     Pi("B_comp", Icit.Impl, Pi("_a_B", Icit.Expl, A_comp_term, _ => Type()), B_comp_func_term => 
-    //         Pi("C_comp", Icit.Impl, 
-    //             Pi("a_C_arg", Icit.Impl, A_comp_term, a_C_val => 
-    //                 Pi("b_C_arg", Icit.Expl, App(B_comp_func_term, a_C_val, Icit.Expl), _b_C_val => Type())
-    //             ), C_comp_func_term =>
-    //             Pi("f_comp_param", Icit.Expl, 
-    //                 Pi("a_f_arg", Icit.Impl, A_comp_term, a_f_val => 
-    //                     Pi("b_f_arg", Icit.Expl, App(B_comp_func_term, a_f_val, Icit.Expl), b_f_val => 
-    //                         App(App(C_comp_func_term, a_f_val, Icit.Impl), b_f_val, Icit.Expl) 
-    //                     )
-    //                 ), f_param_term =>
-    //                     Pi("g_comp_param", Icit.Expl, Pi("a_g_arg", Icit.Expl, A_comp_term, a_g_val => App(B_comp_func_term, a_g_val, Icit.Expl)), g_param_term => 
-    //                         Pi("a_comp_param", Icit.Expl, A_comp_term, a_comp_val => 
-    //                             App(App(C_comp_func_term, a_comp_val, Icit.Impl), App(g_param_term, a_comp_val, Icit.Expl), Icit.Expl)
-    //                         )
-    //                     )
-    //             )
-    //         )
-    //     )
-    // );
-    // const comp_func_val_raw = Lam("f_val_raw", Icit.Expl, FH(), f_val => 
+    // --- Dependent Function Composition ---
+//     -- dependent function composition
+// let comp : {A}{B : A -> U}{C : {a} -> B a -> U}
+//            (f : {a}(b : B a) -> C b)
+//            (g : (a : A) -> B a)
+//            (a : A)
+//            -> C (g a)
+//     = \f g a. f (g a);
+    const comp_func_type = Pi("A_comp", Icit.Impl, Type(), A_comp_term =>
+        Pi("B_comp", Icit.Impl, Pi("_a_B", Icit.Expl, A_comp_term, _ => Type()), B_comp_func_term => 
+            Pi("C_comp", Icit.Impl, 
+                Pi("a_C_arg", Icit.Impl, A_comp_term, a_C_val => 
+                    Pi("b_C_arg", Icit.Expl, App(B_comp_func_term, a_C_val, Icit.Expl), _b_C_val => Type())
+                ), C_comp_func_term =>
+                Pi("f_comp_param", Icit.Expl, 
+                    Pi("a_f_arg", Icit.Impl, A_comp_term, a_f_val => 
+                        Pi("b_f_arg", Icit.Expl, App(B_comp_func_term, a_f_val, Icit.Expl), b_f_val => 
+                            App(App(C_comp_func_term, a_f_val, Icit.Impl), b_f_val, Icit.Expl) 
+                        )
+                    ), f_param_term =>
+                        Pi("g_comp_param", Icit.Expl, Pi("a_g_arg", Icit.Expl, A_comp_term, a_g_val => App(B_comp_func_term, a_g_val, Icit.Expl)), g_param_term => 
+                            Pi("a_comp_param", Icit.Expl, A_comp_term, a_comp_val => 
+                                App(App(C_comp_func_term, a_comp_val, Icit.Impl), App(g_param_term, a_comp_val, Icit.Expl), Icit.Expl)
+                            )
+                        )
+                )
+            )
+        )
+    );
+    const comp_func_val_raw = Lam("f_val_raw", Icit.Expl, f_val => 
+        Lam("g_val_raw", Icit.Expl, g_val => 
+            Lam("a_val_raw", Icit.Expl, a_val => 
+                App(f_val, App(g_val, a_val, Icit.Expl), Icit.Expl)
+            )
+        )
+    );
+    // const comp_func_val_annotated = Lam("f_val_raw", Icit.Expl, FH(), f_val => 
     //     Lam("g_val_raw", Icit.Expl, FH(), g_val => 
     //         Lam("a_val_raw", Icit.Expl, FH(), a_val => 
     //             App(f_val, App(g_val, a_val, Icit.Expl), Icit.Expl)
     //         )
     //     )
     // );
-    // defineGlobal("comp_hs", comp_func_type, comp_func_val_raw);
-    // elabRes = elaborate(Var("comp_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, comp_func_type, baseCtx), "HSI Test 10.1: comp_hs type check");
+    defineGlobal("comp_hs", comp_func_type, comp_func_val_raw);
+    elabRes = elaborate(Var("comp_hs"), undefined, baseCtx);
+    console.log('printTerm(globalDefs.get("comp_hs")!.value)', printTerm(globalDefs.get("comp_hs")!.value));
+    assert(areEqual(globalDefs.get("comp_hs").type, comp_func_type, baseCtx), "HSI Test 10.1: comp_hs type check");
     // const globalCompHsDef = globalDefs.get("comp_hs")!;
     // assert(!!globalCompHsDef.value, "HSI Test 10.2a: Global comp_hs should have a value");
     // assert(areEqual(normalize(check(baseCtx, globalCompHsDef.value!, globalCompHsDef.type), baseCtx), normalize(check(baseCtx, comp_func_val_raw, comp_func_type), baseCtx), baseCtx), "HSI Test 10.2: comp_hs value check");
