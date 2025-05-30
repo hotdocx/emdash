@@ -1171,6 +1171,8 @@ function runChurchStyleImplicitTests() {
     // SLOW ~ 20s, uncomment later
     // assert(areEqual(elabRes.term, check(baseCtx, hundred_hs_val, Var("Nat_hs")), baseCtx), "HSI Test 15.2: hundred_hs value check");
 
+    // let Eq : {A} -> A -> A -> U
+    // = \{A} x y. (P : A -> U) -> P x -> P y;
     const Eq_hs_type = Pi("A_Eq", Icit.Impl, Type(), A_Eq_term => 
         Pi("x_Eq", Icit.Expl, A_Eq_term, _ => 
             Pi("y_Eq", Icit.Expl, A_Eq_term, _ => Type())
@@ -1201,6 +1203,8 @@ function runChurchStyleImplicitTests() {
     // assert(unify(elabRes.type, Eq_hs_type_impl, baseCtx) == UnifyResult.Solved, "HSI Test 16.1: Eq_hs type check");
     // assert(areEqual(elabRes.term, check(baseCtx, Eq_hs_val_raw, Eq_hs_type_impl), baseCtx) , "HSI Test 16.2: Eq_hs value check");
 
+    // let refl : {A}{x : A} -> Eq x x
+    // = \_ px. px;
     const refl_hs_type = Pi("A_refl", Icit.Impl, Type(), A_refl_term => 
         Pi("x_refl", Icit.Impl, A_refl_term, x_refl_term => 
             App(App(Var("Eq_hs"), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)

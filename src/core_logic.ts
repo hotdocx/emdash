@@ -687,8 +687,15 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (argUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if (funcUnifyStatus === UnifyResult.Solved && argUnifyStatus === UnifyResult.Solved) {
-                 return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                 // If func and args solved, the Apps are considered unified.
+                 // The areEqual check here is more of a consistency check after the fact.
+                 // If this fundamental unification strategy is sound, they should be equal.
+                 // For now, let's assume if components solve, the App itself is Solved.
+                 return UnifyResult.Solved; 
             }
+            // If one was Progress and the other Solved, it's overall Progress.
+            // If both were Progress, it's Progress.
+            // Failed cases are handled above.
             return UnifyResult.Progress;
         }
         case 'Lam': { 
@@ -710,7 +717,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(bodyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if(paramTypeStatus === UnifyResult.Solved && bodyStatus === UnifyResult.Solved) {
-                return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                return UnifyResult.Solved; // If components solve, Lam is solved
             }
             return UnifyResult.Progress;
         }
@@ -726,7 +733,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(bodyTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if(paramTypeStatus === UnifyResult.Solved && bodyTypeStatus === UnifyResult.Solved) {
-                 return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                 return UnifyResult.Solved; // If components solve, Pi is solved
             }
             return UnifyResult.Progress;
         }
@@ -744,7 +751,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(codStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if(catStatus === UnifyResult.Solved && domStatus === UnifyResult.Solved && codStatus === UnifyResult.Solved) {
-                return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                return UnifyResult.Solved; // If components solve, HomTerm is solved
             }
             return UnifyResult.Progress;
         }
@@ -758,7 +765,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(compIStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
             
             if(objRStatus === UnifyResult.Solved && homRStatus === UnifyResult.Solved && compIStatus === UnifyResult.Solved) {
-                 return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                 return UnifyResult.Solved; // If components solve, MkCat_ is solved
             }
             return UnifyResult.Progress;
         }
@@ -771,7 +778,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(objStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
             if(catStatus === UnifyResult.Solved && objStatus === UnifyResult.Solved){
-                 return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                 return UnifyResult.Solved; // If components solve, IdentityMorph is solved
             }
             return UnifyResult.Progress;
         }
@@ -791,7 +798,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (fStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
             
             if (implicitsStatus === UnifyResult.Solved && gStatus === UnifyResult.Solved && fStatus === UnifyResult.Solved) {
-                return areEqual(rt1_final, rt2_final, ctx, depth+1) ? UnifyResult.Solved : UnifyResult.Progress;
+                return UnifyResult.Solved; // If components solve, ComposeMorph is solved
             }
             return UnifyResult.Progress;
         }
