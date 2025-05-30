@@ -16,8 +16,8 @@ export const FH = (): Term & { tag: 'Hole' } => Hole(freshHoleName());
 
 export let globalDefs: Map<string, GlobalDef> = new Map();
 
-export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean, isTypeNameLike?: boolean) {
-    // TODO: for performance reasons, there should be a switch to register symbol 
+export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean, isTypeNameLike?: boolean, toElaborateType: boolean = false) {
+    // TODO: [DONE] for performance reasons, there should be a switch to register symbol 
     // by either elaborating the type or not-elaborating a manually-already-elaborated type
 
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
@@ -64,7 +64,7 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
         //TODO: should use elaborated expectedType instead of expectedType. DONE?
         // The elaborated type version has performance problems (with COMP_HS test example, with implicit arguments)
         elaboratedType = check(elabCtx, type, Type());  
-        elaboratedType = whnf(getTermRef(elaboratedType), elabCtx);
+        elaboratedType = toElaborateType ? whnf(getTermRef(elaboratedType), elabCtx) : type;
 
 
         // 2. If a value is provided, check it against the elaborated declared type.

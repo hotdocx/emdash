@@ -1226,7 +1226,7 @@ function runChurchStyleImplicitTests() {
             )
         )
     );
-    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw); const x_fh = FH();
+    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw, false, false, false, true); const x_fh = FH();
     elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
     // assert(areEqual(elabRes.type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
     // console.log(elabRes.term);
