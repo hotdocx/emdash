@@ -17,6 +17,9 @@ export const FH = (): Term & { tag: 'Hole' } => Hole(freshHoleName());
 export let globalDefs: Map<string, GlobalDef> = new Map();
 
 export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean, isTypeNameLike?: boolean) {
+    // TODO: for performance reasons, there should be a switch to register symbol 
+    // by either elaborating the type or not-elaborating a manually-already-elaborated type
+
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
@@ -39,18 +42,30 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
     let elaboratedValue: Term | undefined = undefined;
 
     try {
+        // TODO: for performance reasons, there should be a switch to register symbol 
+        // by either elaborating the type or not-elaborating a manually-already-elaborated type
+        // TODO: can clone a flat-copy/print after elaboration 
+        // (to remove the pending-reevaluated infer/check recursive calls inside lam/pi bodies) ?  
+
         // 1. Elaborate the declared type itself. It must be a valid type (i.e., have type Type).
-        const typeForType = cloneTerm(type); // Clone to avoid modifying the original input
-        const inferredKind = infer(elabCtx, typeForType, 0); // Infer the kind of the provided type
-        if (!solveConstraints(elabCtx)) {
-            const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
-            throw new Error(`Global \'${name}\': Could not solve constraints while inferring the kind of the declared type \'${printTerm(type)}\'. Unsolved: ${remaining}`);
-        }
-        // The inferred kind must be Type
-        if (!areEqual(getTermRef(inferredKind.type), Type(), elabCtx)) {
-            throw new Error(`Global \'${name}\': Declared type \'${printTerm(type)}\' is not a valid type. Expected kind Type, but got kind \'${printTerm(getTermRef(inferredKind.type))}\'.`);
-        }
-        elaboratedType = getTermRef(typeForType); //whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
+        // const typeForType = cloneTerm(type); // Clone to avoid modifying the original input
+        // const inferredKind = infer(elabCtx, typeForType, 0); // Infer the kind of the provided type
+        // if (!solveConstraints(elabCtx)) {
+        //     const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
+        //     throw new Error(`Global \'${name}\': Could not solve constraints while inferring the kind of the declared type \'${printTerm(type)}\'. Unsolved: ${remaining}`);
+        // }
+        // // The inferred kind must be Type
+        // if (!areEqual(getTermRef(inferredKind.type), Type(), elabCtx)) {
+        //     throw new Error(`Global \'${name}\': Declared type \'${printTerm(type)}\' is not a valid type. Expected kind Type, but got kind \'${printTerm(getTermRef(inferredKind.type))}\'.`);
+        // }
+        // //TODO: ??APPARENTLY-SOURCE performance problem WITH COMP_HS TEST EXAMPLE?? when using inferredKind.elaboratedTerm instead of typeForType
+        // elaboratedType = whnf(getTermRef(typeForType), elabCtx); //whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
+
+        //TODO: should use elaborated expectedType instead of expectedType. DONE?
+        // The elaborated type version has performance problems (with COMP_HS test example, with implicit arguments)
+        elaboratedType = check(elabCtx, type, Type());  
+        elaboratedType = whnf(getTermRef(elaboratedType), elabCtx);
+
 
         // 2. If a value is provided, check it against the elaborated declared type.
         if (value !== undefined) {
@@ -66,6 +81,10 @@ export function defineGlobal(name: string, type: Term, value?: Term, isConstantS
             // Store the fully elaborated term
             elaboratedValue = getTermRef(checkedValueResult);
         }
+        
+        console.log('defineGlobal> ', { name: name + (isConstantSymbol ? ' (constant symbol)' : '')
+            + (isInjective ? ' (injective)' : ''),
+            type: printTerm(elaboratedType), value: printTerm(elaboratedValue) });
 
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
         // consoleLog(`Global \'${name}\' defined and elaborated successfully.`);

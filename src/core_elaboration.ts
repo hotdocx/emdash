@@ -440,10 +440,13 @@ export function elaborate(
 
     try {
         if (expectedType) {
-            finalTermToReport = check(initialCtx, term, expectedType);
+            //TODO: should use elaborated expectedType instead of expectedType. DONE?
+            const elaboratedExpectedType = check(initialCtx, expectedType, Type());
+
+            finalTermToReport = check(initialCtx, term, elaboratedExpectedType);
             // After check, the type of finalTermToReport should match expectedType.
             // We use the (potentially refined by check) expectedType for the result.
-            finalTypeToReport = whnf(getTermRef(expectedType), initialCtx); 
+            finalTypeToReport = elaboratedExpectedType; 
         } else {
             const inferResult = infer(initialCtx, term);
             // If no expected type, infer, then insert implicits.

@@ -100,7 +100,7 @@ function runPhase1Tests() {
 
     defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef")), undefined, true);
     const anObjX_term = Var("x_obj_val_t3");
-    const id_x = IdentityMorph(anObjX_term); 
+    const id_x = IdentityMorph(anObjX_term, Var("MyNatCat3_GlobalDef")); 
     const expected_id_x_type_structure = HomTerm(Var("MyNatCat3_GlobalDef"), anObjX_term, anObjX_term);
     elabRes = elaborate(id_x, expected_id_x_type_structure, baseCtx);
 
@@ -415,7 +415,7 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("List_type", List_type_type, List_type_val, false, false, true);
+    defineGlobal("List_type", List_type_type, List_type_val, false, false, false);
     elabRes = elaborate(Var("List_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, List_type_type, baseCtx), "Church Test 2.1: List_type type check");
 
@@ -474,7 +474,7 @@ function runChurchEncodingTests() {
             Pi("f_Bool_param", Icit.Expl, B_Bool_term, _f_term => B_Bool_term)
         )
     );
-    defineGlobal("Bool_type", Type(), Bool_type_val_original_with_FH, false, false, true);
+    defineGlobal("Bool_type", Type(), Bool_type_val_original_with_FH, false, false, false);
     elabRes = elaborate(Var("Bool_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 5.1: Bool_type type check");
 
@@ -544,7 +544,7 @@ function runChurchEncodingTests() {
             )
         )
     );
-    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, false, true);
+    defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, false, false);
     elabRes = elaborate(Var("Eq_type"), undefined, baseCtx);
     const Eq_type_type_expected = Pi("A_Eq_param", Icit.Expl, Type(), A_Eq_term =>
         Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
@@ -598,7 +598,7 @@ function runChurchEncodingTests() {
             Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
         )
     );
-    defineGlobal("Nat_type", Type(), Nat_type_val, false, false, true);
+    defineGlobal("Nat_type", Type(), Nat_type_val, false, false, false);
     elabRes = elaborate(Var("Nat_type"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 13.1: Nat_type type check");
 
@@ -1203,7 +1203,12 @@ function runChurchStyleImplicitTests() {
 
     const refl_hs_type = Pi("A_refl", Icit.Impl, Type(), A_refl_term => 
         Pi("x_refl", Icit.Impl, A_refl_term, x_refl_term => 
+            // This version, instead of the manually-already-elaborated version below,
+            // creates the requirement to elaborate types before storing them with global symbols
+            // And this creates slow-performance problems
             App(App(Var("Eq_hs"), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
+            // manually-already-elaborated version:
+            // App(App(App(Var("Eq_hs"), A_refl_term, Icit.Impl), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
         )
     );
     const refl_hs_val_raw = 
@@ -1222,11 +1227,11 @@ function runChurchStyleImplicitTests() {
         )
     );
     defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw); const x_fh = FH();
-    // elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
+    elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
     // assert(areEqual(elabRes.type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
     // console.log(elabRes.term);
-    setDebugVerbose(true);
-    console.log(printTerm(check(baseCtx, Var("refl_hs"), refl_hs_type)));
+
+    console.log(printTerm(elabRes.term));
     // console.log(printTerm(check(baseCtx, refl_hs_val_annotated, refl_hs_type))); //fails to print term
     // assert(areEqual(elabRes.term, check(baseCtx, refl_hs_val_annotated, refl_hs_type), baseCtx), "HSI Test 17.2: refl_hs value check");
 
@@ -1293,8 +1298,9 @@ function runChurchStyleImplicitTests() {
 
     const the_final_expr_term_to_check = App(App(Var("the"), final_expr_type_expected, Icit.Expl), Var("refl_hs"), Icit.Expl);
     const the_final_expr_term_to_check_ = App(Var("the"), final_expr_type_expected, Icit.Expl);
-    // SLOW ~ 20s, uncomment later
-    // elabRes = elaborate(the_final_expr_term_to_check_, undefined, baseCtx);
+    // SLOW ~ 200s, uncomment later
+    defineGlobal("the_refl", final_expr_type_expected, the_final_expr_term_to_check);
+    // elabRes = elaborate(the_final_expr_term_to_check, undefined, baseCtx);
 
     // assert(areEqual(elabRes.type, final_expr_type_expected, baseCtx), "HSI Test 19.1: final 'the' expression type check");
     // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(final_expr_val_expected, baseCtx), baseCtx), "HSI Test 19.2: final 'the' expression value check");
