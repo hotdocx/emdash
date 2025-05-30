@@ -968,6 +968,7 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
     } 
 
     if (iterations >= maxIterations && changedInOuterLoop && constraints.length > 0) {
+        console.log({constraints}, printTerm(constraints[0].t1), printTerm(constraints[0].t2));
         console.warn("Constraint solving reached max iterations and was still making changes. Constraints left: " + constraints.length);
     }
 
