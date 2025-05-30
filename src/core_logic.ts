@@ -489,13 +489,8 @@ export function unifyHole(hole: Term & {tag: 'Hole'}, term: Term, ctx: Context, 
         return true;
     }
 
-    // if (normTerm.tag === \'Var\' && normTerm.name.startsWith(\'$$fresh_\')) {
-    //     consoleLog(`UnifyHole: Occurs check failed (special): hole ${hole.id} cannot be solved by fresh unification variable ${normTerm.name}`);
-    //     return false;
-    // }
-
     if (termContainsHole(normTerm, hole.id, new Set(), depth + 1)) { // Occurs check
-        consoleLog(`[UnifyHole] Occurs check FAILED for ${hole.id} in ${printTerm(normTerm)} (depth ${depth})`);
+        console.error(`[UnifyHole CRITICAL] Occurs check FAILED for hole ${hole.id} in term ${printTerm(normTerm)}. Depth: ${depth}. This means unification cannot proceed for this hole.`);
         return false; 
     }
     consoleLog(`[UnifyHole] Setting ${hole.id}.ref = ${printTerm(normTerm)} (depth ${depth}). Current hole.ref before: ${hole.ref ? printTerm(hole.ref) : 'undefined'}`);
