@@ -1176,7 +1176,7 @@ function runChurchStyleImplicitTests() {
             Pi("y_Eq", Icit.Expl, A_Eq_term, _ => Type())
         )
     );
-    const Eq_hs_val_raw = Lam("A_eq_impl", Icit.Impl, Type(), A_eq_val => 
+    const Eq_hs_val_raw = Lam("A_eq_impl", Icit.Impl, A_eq_val => 
         Lam("x_eq_expl", Icit.Expl, A_eq_val, x_eq_actual => 
             Lam("y_eq_expl", Icit.Expl, A_eq_val, y_eq_actual => 
                 Pi("P_eq_expl", Icit.Expl, Pi("_ignored_P_arg", Icit.Expl, A_eq_val, _ => Type()), P_eq_val => 
@@ -1194,29 +1194,37 @@ function runChurchStyleImplicitTests() {
         );
     defineGlobal("Eq_hs", Eq_hs_type, Eq_hs_val_raw, false, false, false);
     elabRes = elaborate(Var("Eq_hs"), undefined, baseCtx);
-    console.log(printTerm(elabRes.type));
-    console.log(printTerm(Eq_hs_type_impl));
+    // console.log(printTerm(elabRes.type));
+    // console.log(printTerm(Eq_hs_type_impl));
     assert(unify(elabRes.type, Eq_hs_type_impl, baseCtx) == UnifyResult.Solved, "HSI Test 16.1: Eq_hs type check");
-    assert(areEqual(elabRes.term, check(baseCtx, Eq_hs_val_raw, Eq_hs_type_impl), baseCtx), "HSI Test 16.2: Eq_hs value check");
+    assert(areEqual(elabRes.term, check(baseCtx, Eq_hs_val_raw, Eq_hs_type_impl), baseCtx) , "HSI Test 16.2: Eq_hs value check");
 
-    // const refl_hs_type = Pi("A_refl", Icit.Impl, Type(), A_refl_term => 
-    //     Pi("x_refl", Icit.Impl, A_refl_term, x_refl_term => 
-    //         App(App(App(Var("Eq_hs"), A_refl_term, Icit.Impl), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
-    //     )
-    // );
-    // const refl_hs_val_raw = Lam("A_refl_impl", Icit.Impl, Type(), A_refl_val => 
-    //     Lam("x_refl_impl", Icit.Impl, A_refl_val, x_refl_actual_val => 
-    //         Lam("P_refl_expl", Icit.Expl, Pi("_ignored_P_arg", Icit.Expl, A_refl_val, _ => Type()), P_val =>
-    //             Lam("Px_refl_expl", Icit.Expl, App(P_val, x_refl_actual_val, Icit.Expl) , Px_refl_actual => 
-    //                 Px_refl_actual
-    //             )
-    //         )
-    //     )
-    // );
-    // defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw);
-    // elabRes = elaborate(Var("refl_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
-    // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(check(baseCtx, refl_hs_val_raw, refl_hs_type), baseCtx), baseCtx), "HSI Test 17.2: refl_hs value check");
+    const refl_hs_type = Pi("A_refl", Icit.Impl, Type(), A_refl_term => 
+        Pi("x_refl", Icit.Impl, A_refl_term, x_refl_term => 
+            App(App(Var("Eq_hs"), x_refl_term, Icit.Expl), x_refl_term, Icit.Expl)
+        )
+    );
+    const refl_hs_val_raw = 
+            Lam("P_refl_expl", Icit.Expl, P_val =>
+                Lam("Px_refl_expl", Icit.Expl, Px_refl_actual => 
+                    Px_refl_actual
+                )
+            );
+    const refl_hs_val_annotated = Lam("A_refl_impl", Icit.Impl, Type(), A_refl_val => 
+        Lam("x_refl_impl", Icit.Impl, A_refl_val, x_refl_actual_val => 
+            Lam("P_refl_expl", Icit.Expl, Pi("_ignored_P_arg", Icit.Expl, A_refl_val, _ => Type()), P_val =>
+                Lam("Px_refl_expl", Icit.Expl, App(P_val, x_refl_actual_val, Icit.Expl) , Px_refl_actual => 
+                    Px_refl_actual
+                )
+            )
+        )
+    );
+    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw);
+    elabRes = elaborate(Var("refl_hs"), undefined, baseCtx);
+    // assert(areEqual(globalDefs.get("refl_hs").type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
+    // console.log(printTerm(elabRes.term));
+    // console.log(printTerm(check(baseCtx, refl_hs_val_annotated, refl_hs_type)));
+    // assert(areEqual(elabRes.term, check(baseCtx, refl_hs_val_annotated, refl_hs_type), baseCtx), "HSI Test 17.2: refl_hs value check");
 
     // const sym_hs_type = Pi("A_sym", Icit.Impl, Type(), A_sym_term =>
     //     Pi("x_sym", Icit.Impl, A_sym_term, x_sym_term => 
