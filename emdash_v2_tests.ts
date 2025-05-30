@@ -1098,9 +1098,9 @@ function runChurchStyleImplicitTests() {
     console.log('printTerm(normalize(globalDefs.get("compExample_hs")!.value, baseCtx))', 
         printTerm(normalize(globalDefs.get("compExample_hs")!.value, baseCtx)), "HSI Test 11.0: compExample_hs value normalized");
 
-    // elabRes = elaborate(Var("compExample_hs"), undefined, baseCtx);
+    elabRes = elaborate(Var("compExample_hs"), undefined, baseCtx);
     assert(areEqual(globalDefs.get("compExample_hs").type, compEx_expected_type, baseCtx), "HSI Test 11.1: compExample_hs type check");
-    // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(compEx_val, baseCtx), baseCtx), "HSI Test 11.2: compExample_hs value check");
+    assert(areEqual(elabRes.term, check(baseCtx, compEx_val, compEx_expected_type), baseCtx), "HSI Test 11.2: compExample_hs value check");
 
     const Nat_hs_type_val = Pi("N_Nat_param", Icit.Expl, Type(), N_Nat_term =>
         Pi("s_Nat_param", Icit.Expl, Pi("arg_s_Nat", Icit.Expl, N_Nat_term, _ => N_Nat_term), _s_term =>
@@ -1111,50 +1111,65 @@ function runChurchStyleImplicitTests() {
     elabRes = elaborate(Var("Nat_hs"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 12.1: Nat_hs type check");
 
-    // const ten_hs_val_raw = Lam("N_ten", Icit.Expl, Type(), N_ten_term =>
-    //     Lam("s_ten", Icit.Expl, Pi("_arg",Icit.Expl,N_ten_term,_=>N_ten_term), s_ten_actual_term =>
-    //         Lam("z_ten", Icit.Expl, N_ten_term, z_ten_actual_term =>
-    //             App(s_ten_actual_term, 
-    //                 App(s_ten_actual_term, 
-    //                     App(s_ten_actual_term, 
-    //                         App(s_ten_actual_term, 
-    //                             App(s_ten_actual_term, 
-    //                                 App(s_ten_actual_term, 
-    //                                     App(s_ten_actual_term, 
-    //                                         App(s_ten_actual_term, 
-    //                                             App(s_ten_actual_term, 
-    //                                                 App(s_ten_actual_term, z_ten_actual_term, Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl)))
-    //         );
-    // defineGlobal("ten_hs", Var("Nat_hs"), ten_hs_val_raw);
-    // elabRes = elaborate(Var("ten_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 13.1: ten_hs type check");
-    // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(check(baseCtx, ten_hs_val_raw, Var("Nat_hs")), baseCtx), baseCtx), "HSI Test 13.2: ten_hs value check");
+    const ten_hs_val_raw = Lam("N_ten", Icit.Expl, Type(), N_ten_term =>
+        Lam("s_ten", Icit.Expl, /*Pi("_arg",Icit.Expl,N_ten_term,_=>N_ten_term),*/ s_ten_actual_term =>
+            Lam("z_ten", Icit.Expl, /*N_ten_term,*/ z_ten_actual_term =>
+                App(s_ten_actual_term, 
+                    App(s_ten_actual_term, 
+                        App(s_ten_actual_term, 
+                            App(s_ten_actual_term, 
+                                App(s_ten_actual_term, 
+                                    App(s_ten_actual_term, 
+                                        App(s_ten_actual_term, 
+                                            App(s_ten_actual_term, 
+                                                App(s_ten_actual_term, 
+                                                    App(s_ten_actual_term, z_ten_actual_term, Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl)))
+            );
+    defineGlobal("ten_hs", Var("Nat_hs"), ten_hs_val_raw);
+    elabRes = elaborate(Var("ten_hs"), undefined, baseCtx);
+    assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 13.1: ten_hs type check");
+    assert(areEqual(elabRes.term, check(baseCtx, ten_hs_val_raw, Var("Nat_hs")), baseCtx), "HSI Test 13.2: ten_hs value check");
 
-    // const mul_hs_type = Pi("a_mul", Icit.Expl, Var("Nat_hs"), _ => Pi("b_mul", Icit.Expl, Var("Nat_hs"), _ => Var("Nat_hs")));
-    // const mul_hs_val_raw = Lam("a_m", Icit.Expl, Var("Nat_hs"), a_m_val =>
-    //     Lam("b_m", Icit.Expl, Var("Nat_hs"), b_m_val => 
-    //         Lam("N_m", Icit.Expl, Type(), N_m_val => 
-    //             Lam("s_m", Icit.Expl, Pi("_arg",Icit.Expl,N_m_val,_=>N_m_val), s_m_val => 
-    //                 Lam("z_m", Icit.Expl, N_m_val, z_m_val => 
-    //                     App(App(App(a_m_val, N_m_val, Icit.Expl), 
-    //                             App(App(b_m_val, N_m_val, Icit.Expl), s_m_val, Icit.Expl), 
-    //                             Icit.Expl), 
-    //                         z_m_val, Icit.Expl)
-    //                 )
-    //             )
-    //         )
-    //     )
-    // );
-    // defineGlobal("mul_hs", mul_hs_type, mul_hs_val_raw);
-    // elabRes = elaborate(Var("mul_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, mul_hs_type, baseCtx), "HSI Test 14.1: mul_hs type check");
-    // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(check(baseCtx, mul_hs_val_raw, mul_hs_type), baseCtx), baseCtx), "HSI Test 14.2: mul_hs value check");
+    const mul_hs_type = Pi("a_mul", Icit.Expl, Var("Nat_hs"), _ => Pi("b_mul", Icit.Expl, Var("Nat_hs"), _ => Var("Nat_hs")));
+    const mul_hs_val_raw = Lam("a_m", Icit.Expl, a_m_val =>
+        Lam("b_m", Icit.Expl, b_m_val => 
+            Lam("N_m", Icit.Expl, N_m_val => 
+                Lam("s_m", Icit.Expl, s_m_val => 
+                    Lam("z_m", Icit.Expl, z_m_val => 
+                        App(App(App(a_m_val, FH(), Icit.Expl), 
+                                App(App(b_m_val, FH(), Icit.Expl), s_m_val, Icit.Expl), 
+                                Icit.Expl), 
+                            z_m_val, Icit.Expl)
+                    )
+                )
+            )
+        )
+    );
+    const mul_hs_val_annotated = Lam("a_m", Icit.Expl, Var("Nat_hs"), a_m_val =>
+        Lam("b_m", Icit.Expl, Var("Nat_hs"), b_m_val => 
+            Lam("N_m", Icit.Expl, Type(), N_m_val => 
+                Lam("s_m", Icit.Expl, Pi("_arg",Icit.Expl,N_m_val,_=>N_m_val), s_m_val => 
+                    Lam("z_m", Icit.Expl, N_m_val, z_m_val => 
+                        App(App(App(a_m_val, N_m_val, Icit.Expl), 
+                                App(App(b_m_val, N_m_val, Icit.Expl), s_m_val, Icit.Expl), 
+                                Icit.Expl), 
+                            z_m_val, Icit.Expl)
+                    )
+                )
+            )
+        )
+    );
+    defineGlobal("mul_hs", mul_hs_type, mul_hs_val_raw);
+    elabRes = elaborate(Var("mul_hs"), undefined, baseCtx);
+    assert(areEqual(elabRes.type, mul_hs_type, baseCtx), "HSI Test 14.1: mul_hs type check");
+    assert(areEqual(elabRes.term, check(baseCtx, mul_hs_val_raw, mul_hs_type), baseCtx), "HSI Test 14.2: mul_hs value check");
 
-    // const hundred_hs_val = App(App(Var("mul_hs"), Var("ten_hs"), Icit.Expl), Var("ten_hs"), Icit.Expl);
-    // defineGlobal("hundred_hs", Var("Nat_hs"), hundred_hs_val);
-    // elabRes = elaborate(Var("hundred_hs"), undefined, baseCtx);
-    // assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 15.1: hundred_hs type check");
-    // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(hundred_hs_val, baseCtx), baseCtx), "HSI Test 15.2: hundred_hs value check");
+    const hundred_hs_val = App(App(Var("mul_hs"), Var("ten_hs"), Icit.Expl), Var("ten_hs"), Icit.Expl);
+    defineGlobal("hundred_hs", Var("Nat_hs"), hundred_hs_val);
+    elabRes = elaborate(Var("hundred_hs"), undefined, baseCtx);
+    assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 15.1: hundred_hs type check");
+    // SLOW ~ 20s
+    assert(areEqual(elabRes.term, check(baseCtx, hundred_hs_val, Var("Nat_hs")), baseCtx), "HSI Test 15.2: hundred_hs value check");
 
     // const Eq_hs_type = Pi("A_Eq", Icit.Impl, Type(), A_Eq_term => 
     //     Pi("x_Eq", Icit.Expl, A_Eq_term, _ => 

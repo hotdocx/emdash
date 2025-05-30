@@ -158,24 +158,26 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 
                 addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type needs to be Pi for arg ${printTerm(appNode.arg)}`);
                 consoleLog(`INFER>>ADDCONSTRAINT_REFINE_HIGHER_ORDER_TYPE for App: ${printTerm(typeFAfterImplicits)} === ${printTerm(targetPiType)}`);
-                
+                solveConstraints(ctx, stackDepth + 1)
+
                 expectedParamTypeFromPi = paramTypeHole;
                 bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole; 
             }
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1, isSubElaboration);
             
-            if (insertedProgressByOuter || funcTypeWasRefinedToPi) {
-                if (!solveConstraints(ctx, stackDepth + 1)) {
-                    const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
-                    let fcMsg = "Unknown constraint";
-                    if (fc) {
-                        fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
-                    }
-                    console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
-                    throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
-                }
-            }
+            // if (true /*insertedProgressByOuter || funcTypeWasRefinedToPi*/) { // this condition is too restrictive and will allow errors
+                // solveConstraints HERE was important to prevent error // could move it to end of `check` function, apparently not affecting perf
+                // if (!solveConstraints(ctx, stackDepth + 1)) {
+                //     const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
+                //     let fcMsg = "Unknown constraint";
+                //     if (fc) {
+                //         fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
+                //     }
+                //     console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
+                //     throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
+                // }
+            // }
 
             const finalFuncPart = getTermRef(funcAfterImplicits);
             const finalArgPart = getTermRef(elaboratedArg); 
@@ -295,6 +297,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
 
             const objInferResult = infer(ctx, idTerm.obj, stackDepth + 1, isSubElaboration);
             addConstraint(objInferResult.type, ObjTerm(catArg), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(catArg)})`);
+            solveConstraints(ctx, stackDepth + 1) // apparently not affecting perf
             const finalIdMorph = IdentityMorph(objInferResult.elaboratedTerm, catArg);
             return { elaboratedTerm: finalIdMorph, type: HomTerm(catArg, objInferResult.elaboratedTerm, objInferResult.elaboratedTerm) };
         }
@@ -378,6 +381,9 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else if (lamNode.paramType) { 
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
+            // solveConstraints HERE was important to prevent error 
+            // (until the addition of the final solveConstraints at the end of the function)
+            // Now for efficientcy could erase this,
             solveConstraints(ctx, stackDepth + 1); // ALTERNATIVELY: attempt to solve only when lamNode.paramType is a hole
             lamParamType = elabLamParamType; 
         }
@@ -402,6 +408,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             currentTerm.elaboratedType = expectedTypeWhnf;
         } else {
             addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeWhnf, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
+            solveConstraints(ctx, stackDepth + 1);  // apparently not affecting perf
         }
         return currentTerm;
     }
@@ -414,6 +421,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1);
     
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
+    solveConstraints(ctx, stackDepth + 1);  // apparently not affecting perf regardless of alt position
     return afterInsert.term; // Return the term after implicit applications
 }
 
