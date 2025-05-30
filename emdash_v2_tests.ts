@@ -1193,7 +1193,7 @@ function runChurchStyleImplicitTests() {
             Pi("y_Eq", Icit.Expl, A_FH, _ => Type())
         );
     defineGlobal("Eq_hs", Eq_hs_type, Eq_hs_val_raw, false, false, false);
-    elabRes = elaborate(Var("Eq_hs"), undefined, baseCtx);
+    elabRes = elaborate(Var("Eq_hs"), Eq_hs_type, baseCtx);
     // console.log(printTerm(elabRes.type));
     // console.log(printTerm(Eq_hs_type_impl));
     assert(unify(elabRes.type, Eq_hs_type_impl, baseCtx) == UnifyResult.Solved, "HSI Test 16.1: Eq_hs type check");
@@ -1219,9 +1219,9 @@ function runChurchStyleImplicitTests() {
             )
         )
     );
-    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw);
-    elabRes = elaborate(Var("refl_hs"), undefined, baseCtx);
-    // assert(areEqual(globalDefs.get("refl_hs").type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
+    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw); const x_fh = FH();
+    elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
+    assert(areEqual(globalDefs.get("refl_hs").type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
     // console.log(printTerm(elabRes.term));
     // console.log(printTerm(check(baseCtx, refl_hs_val_annotated, refl_hs_type)));
     // assert(areEqual(elabRes.term, check(baseCtx, refl_hs_val_annotated, refl_hs_type), baseCtx), "HSI Test 17.2: refl_hs value check");
