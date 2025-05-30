@@ -1221,11 +1221,11 @@ function runChurchStyleImplicitTests() {
             )
         )
     );
-    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_annotated); const x_fh = FH();
+    defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw); const x_fh = FH();
     // elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
     // assert(areEqual(elabRes.type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
     // console.log(elabRes.term);
-    // // console.log(printTerm(elabRes.term));
+    console.log(printTerm(check(baseCtx, Var("refl_hs"), refl_hs_type)));
     // console.log(printTerm(check(baseCtx, refl_hs_val_annotated, refl_hs_type))); //fails to print term
     // assert(areEqual(elabRes.term, check(baseCtx, refl_hs_val_annotated, refl_hs_type), baseCtx), "HSI Test 17.2: refl_hs value check");
 
@@ -1294,7 +1294,7 @@ function runChurchStyleImplicitTests() {
     const the_final_expr_term_to_check_ = App(Var("the"), final_expr_type_expected, Icit.Expl);
     // SLOW ~ 20s, uncomment later
     // elabRes = elaborate(the_final_expr_term_to_check_, undefined, baseCtx);
-    
+
     // assert(areEqual(elabRes.type, final_expr_type_expected, baseCtx), "HSI Test 19.1: final 'the' expression type check");
     // assert(areEqual(normalize(elabRes.term, baseCtx), normalize(final_expr_val_expected, baseCtx), baseCtx), "HSI Test 19.2: final 'the' expression value check");
 
