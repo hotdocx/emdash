@@ -1,36 +1,53 @@
 import {
     Term, Context, PatternVarDecl, Substitution, ElaborationResult, Icit, Binding,
-    Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph
+    Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, MkCat_,
+    IdentityMorph, ComposeMorph,
+    BaseTerm
 } from './core_types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
     freshHoleName, freshVarName, consoleLog,
     resetHoleId,
     resetVarId,
-    constraints
+    constraints,
+    cloneTerm
 } from './core_context_globals';
 import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH } from './core_logic';
+import { KERNEL_IMPLICIT_SPECS } from './core_kernel_metadata';
+
+// Use Extract to get the specific type from the BaseTerm union for casting
+type IdentityMorphType = Extract<BaseTerm, { tag: 'IdentityMorph' }>;
+type ComposeMorphType = Extract<BaseTerm, { tag: 'ComposeMorph' }>;
 
 export interface ElaborationOptions {
     normalizeResultTerm?: boolean;
 }
 
-export function ensureImplicitsAsHoles(term: Term): Term {
-    // This is for kernel constructor implicit arguments, not general function implicits.
-    // It's called before getTermRef, so it can mutate.
-    if (term.tag === 'IdentityMorph') {
-        if (term.cat_IMPLICIT === undefined) {
-            let objHint = "obj";
-            if (term.obj.tag === 'Var') objHint = term.obj.name;
-            else if (term.obj.tag === 'Hole') objHint = term.obj.id.replace("?", "");
-            term.cat_IMPLICIT = Hole(freshHoleName() + "_cat_of_" + objHint);
+export function ensureKernelImplicitsPresent(term: Term): Term {
+    const originalTermTag = term.tag;
+    const specs = [...KERNEL_IMPLICIT_SPECS];
+
+    for (const spec of specs) {
+        if (originalTermTag === spec.tag) {
+            const specificTerm = term as Term & { [key: string]: any };
+            for (const fieldName of spec.fields as Array<keyof Term>) {
+                if (specificTerm[fieldName as string] === undefined) {
+                    let baseHint = spec.tag.toLowerCase().replace(/morph|term/g, '').replace(/_/g, '');
+                    const fieldHint = (fieldName as string).replace('_IMPLICIT', '').toLowerCase();
+
+                    let dynamicHintPart = "";
+                    if (spec.tag === 'IdentityMorph' && specificTerm.obj) {
+                        const idObj = getTermRef(specificTerm.obj);
+                        if (idObj.tag === 'Var') dynamicHintPart = `_${idObj.name}`;
+                        else if (idObj.tag === 'Hole') dynamicHintPart = `_${idObj.id.replace("?","h")}`;
+                    }
+                    // TODO: Could add similar hints for ComposeMorph based on g or f if simple and useful
+
+                    specificTerm[fieldName as string] = Hole(freshHoleName() + `_k_${baseHint}${dynamicHintPart}_${fieldHint}`);
+                }
+            }
+            break;
         }
-    }
-    if (term.tag === 'ComposeMorph') {
-        if (term.cat_IMPLICIT === undefined) term.cat_IMPLICIT = Hole(freshHoleName() + "_comp_cat");
-        if (term.objX_IMPLICIT === undefined) term.objX_IMPLICIT = Hole(freshHoleName() + "_comp_X");
-        if (term.objY_IMPLICIT === undefined) term.objY_IMPLICIT = Hole(freshHoleName() + "_comp_Y");
-        if (term.objZ_IMPLICIT === undefined) term.objZ_IMPLICIT = Hole(freshHoleName() + "_comp_Z");
     }
     return term;
 }
@@ -75,7 +92,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
 
     const originalTerm = term;
-    const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
+    const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
     let current = getTermRef(termWithKernelImplicits); // Use let for potential re-assignment
 
 
@@ -172,7 +189,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 //     const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), ctx, 0));
                 //     let fcMsg = "Unknown constraint";
                 //     if (fc) {
-                //         fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
+                //         fcMsg = `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin || 'unspecified'})`;
                 //     }
                 //     console.error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}. Func: ${printTerm(funcAfterImplicits)}, Arg: ${printTerm(appNode.arg)}, Expected Param Type for Arg: ${printTerm(expectedParamTypeFromPi)}`);
                 //     throw new Error(`Type error during App inference: Could not solve constraints after checking argument. Approx failing: ${fcMsg}.`);
@@ -290,34 +307,44 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             return { elaboratedTerm: finalMkCat, type: CatTerm() };
         }
         case 'IdentityMorph': {
-            const idTerm = current;
-            const catArg = idTerm.cat_IMPLICIT ? check(ctx, idTerm.cat_IMPLICIT, CatTerm(), stackDepth +1, isSubElaboration) : Hole(freshHoleName() + "_id_cat_implicit_infer");
-            if (idTerm.cat_IMPLICIT === undefined && current.tag === 'IdentityMorph') current.cat_IMPLICIT = catArg;
+            const idTerm = current as Term & IdentityMorphType;
 
+            const elabCatImplicit = check(ctx, idTerm.cat_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
 
             const objInferResult = infer(ctx, idTerm.obj, stackDepth + 1, isSubElaboration);
-            addConstraint(objInferResult.type, ObjTerm(catArg), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(catArg)})`);
-            solveConstraints(ctx, stackDepth + 1) // apparently not affecting perf
-            const finalIdMorph = IdentityMorph(objInferResult.elaboratedTerm, catArg);
-            return { elaboratedTerm: finalIdMorph, type: HomTerm(catArg, objInferResult.elaboratedTerm, objInferResult.elaboratedTerm) };
-        }
-        case 'ComposeMorph': {
-            const compTerm = current;
-            const catArg = compTerm.cat_IMPLICIT ? check(ctx, compTerm.cat_IMPLICIT, CatTerm(), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_cat_implicit_infer");
-            const XArg = compTerm.objX_IMPLICIT ? check(ctx, compTerm.objX_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_X_implicit_infer");
-            const YArg = compTerm.objY_IMPLICIT ? check(ctx, compTerm.objY_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_Y_implicit_infer");
-            const ZArg = compTerm.objZ_IMPLICIT ? check(ctx, compTerm.objZ_IMPLICIT, ObjTerm(catArg), stackDepth+1, isSubElaboration) : Hole(freshHoleName() + "_comp_Z_implicit_infer");
+            addConstraint(objInferResult.type, ObjTerm(elabCatImplicit), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(elabCatImplicit)})`);
             
-            if(current.tag === 'ComposeMorph'){ // Fill in kernel implicits if they were inferred
-                if(!current.cat_IMPLICIT) current.cat_IMPLICIT = catArg;
-                if(!current.objX_IMPLICIT) current.objX_IMPLICIT = XArg;
-                if(!current.objY_IMPLICIT) current.objY_IMPLICIT = YArg;
-                if(!current.objZ_IMPLICIT) current.objZ_IMPLICIT = ZArg;
+            if (!solveConstraints(ctx, stackDepth + 1)) {
+                 console.warn(`[Infer IdentityMorph] Could not solve constraints after processing object and category for ${printTerm(idTerm)}`);
             }
 
+            const finalIdMorph = IdentityMorph(objInferResult.elaboratedTerm, getTermRef(elabCatImplicit));
+            return { elaboratedTerm: finalIdMorph, type: HomTerm(getTermRef(elabCatImplicit), objInferResult.elaboratedTerm, objInferResult.elaboratedTerm) };
+        }
+        case 'ComposeMorph': {
+            const compTerm = current as Term & ComposeMorphType;
+
+            const elabCatImplicit = check(ctx, compTerm.cat_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabObjXImplicit = check(ctx, compTerm.objX_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
+            const elabObjYImplicit = check(ctx, compTerm.objY_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
+            const elabObjZImplicit = check(ctx, compTerm.objZ_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
+            
+            if (!solveConstraints(ctx, stackDepth + 1)) {
+                console.warn(`[Infer ComposeMorph] Could not solve constraints after processing implicits for ${printTerm(compTerm)}`);
+            }
+
+            const catArg = getTermRef(elabCatImplicit);
+            const XArg = getTermRef(elabObjXImplicit);
+            const YArg = getTermRef(elabObjYImplicit);
+            const ZArg = getTermRef(elabObjZImplicit);
 
             const elabF = check(ctx, compTerm.f, HomTerm(catArg, XArg, YArg), stackDepth + 1, isSubElaboration);
             const elabG = check(ctx, compTerm.g, HomTerm(catArg, YArg, ZArg), stackDepth + 1, isSubElaboration);
+            
+            if (!solveConstraints(ctx, stackDepth + 1)) {
+                console.warn(`[Infer ComposeMorph] Could not solve constraints after processing f and g for ${printTerm(compTerm)}`);
+            }
+
             const finalComp = ComposeMorph(elabG, elabF, catArg, XArg, YArg, ZArg);
             return { elaboratedTerm: finalComp, type: HomTerm(catArg, XArg, ZArg) };
         }
@@ -333,7 +360,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     }
 
     const originalTerm = term;
-    const termWithKernelImplicits = ensureImplicitsAsHoles(originalTerm);
+    const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
     let currentTerm = getTermRef(termWithKernelImplicits); 
     const currentExpectedType = getTermRef(expectedType);
 
