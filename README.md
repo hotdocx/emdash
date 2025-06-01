@@ -1,4 +1,3 @@
-
 Okay, I will generate an updated `README.md` file that incorporates the new design, architecture, and implementation details, especially focusing on the features around implicit arguments, pattern elaboration, kernel constructor implicits, and unification with injective symbols.
 
 This new `README.md` will synthesize information from the previous version and the details outlined in `TASK_SCRATCHPAD_002_Implicit_Arguments_Pattern_Elaboration_Injectivity.md`.
@@ -223,6 +222,30 @@ Primitive term constructors like `IdentityMorph` and `ComposeMorph` now have the
 
 Other constructs (`CatTerm`, `ObjTerm`, `HomTerm`, `MkCat_`) remain largely the same in their typing rules but interact with a system that is now fully aware of implicits.
 
+### 4.2.1 Emdash Phase 2: Functors and Natural Transformations (Kernel Implementation)
+
+Building upon the core, Phase 2 introduces kernel-level terms for functors and natural transformations:
+
+*   **`FunctorCategoryTerm(domainCat: Term, codomainCat: Term)`**: Represents the category `Functor A B` (or `B^A`).
+    *   Type Rule: `Γ ⊢ A:Cat, B:Cat => Γ ⊢ FunctorCategoryTerm(A,B) : Cat`
+*   **`FMap0Term(functor: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term)`**: Represents the object mapping `F(X)` of a functor `F`. (`fapp0 F X` in LP spec).
+    *   `functor` has type `ObjTerm(FunctorCategoryTerm(catA, catB))`, `objectX` has type `ObjTerm(catA)`.
+    *   Type Rule: `Γ ⊢ F:Obj(Functor(A,B)), X:Obj(A) => Γ ⊢ FMap0Term(F,X,[A],[B]) : ObjTerm(B)`
+*   **`FMap1Term(functor: Term, morphism_a: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, objX_A_IMPLICIT?: Term, objY_A_IMPLICIT?: Term)`**: Represents the morphism mapping `F(a)` of a functor `F`. (`fapp1 F a` in LP spec).
+    *   `functor` has type `ObjTerm(FunctorCategoryTerm(catA, catB))`, `morphism_a` has type `HomTerm(catA, objX_A, objY_A)`.
+    *   Type Rule: `Γ ⊢ F:Obj(Functor(A,B)), a:Hom(A,X,Y) => Γ ⊢ FMap1Term(F,a,[A],[B],[X],[Y]) : HomTerm(B, FMap0Term(F,X), FMap0Term(F,Y))`
+*   **`NatTransTypeTerm(catA: Term, catB: Term, functorF: Term, functorG: Term)`**: Represents the type of natural transformations `Transf A B F G`.
+    *   `functorF` and `functorG` have type `ObjTerm(FunctorCategoryTerm(catA, catB))`.
+    *   Type Rule: `Γ ⊢ A:Cat, B:Cat, F:Obj(Functor(A,B)), G:Obj(Functor(A,B)) => Γ ⊢ NatTransTypeTerm(A,B,F,G) : Type`
+*   **`NatTransComponentTerm(transformation: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, functorF_IMPLICIT?: Term, functorG_IMPLICIT?: Term)`**: Represents the component `ε_X` of a natural transformation `ε`. (`tapp eps X` in LP spec).
+    *   `transformation` has type `NatTransTypeTerm(catA, catB, functorF, functorG)`, `objectX` has type `ObjTerm(catA)`.
+    *   Type Rule: `Γ ⊢ ε:NatTrans(A,B,F,G), X:Obj(A) => Γ ⊢ NatTransComponentTerm(ε,X,[A],[B],[F],[G]) : HomTerm(B, FMap0Term(F,X), FMap0Term(G,X))`
+
+*   **Kernel Reduction Rule:** The LP rule `@Hom (Functor _ _) $F $G ↪ Transf $F $G` is implemented directly in the `whnf` reduction logic:
+    *   `HomTerm(cat = FunctorCategoryTerm(A,B), dom = F, cod = G)` reduces to `NatTransTypeTerm(A,B,F,G)`. 
+
+These terms also have their relevant implicit arguments (e.g., `catA_IMPLICIT`) managed via `ensureKernelImplicitsPresent` and `KERNEL_IMPLICITS_METADATA`.
+
 ### 4.3 Elaboration Strategy for Implicits
 
 *   **Implicit Application Insertion:** If `f` has type `Π{A}.B` and an explicit application `f t` is encountered, a hole `?h_impl:A` is inserted: `f {?h_impl} t`.
@@ -259,9 +282,17 @@ With a solid foundation for implicit arguments and pattern matching, future work
 ### 6.1 Immediate Next Steps: Phase 2 (Functors and Natural Transformations)
 
 The enhanced implicit handling and pattern elaboration will be invaluable for Phase 2.
-*   Functor and natural transformation definitions often involve implicit arguments (e.g., source/target categories).
-*   Rewrite rules for functoriality and naturality laws will benefit from the robust pattern matching.
-*   The plan for Phase 2 (defining `FunctorCatTerm`, `MkFunctor_`, `NatTransTerm`, `MkNatTrans_`, their typing rules, computational rules, and laws) remains largely the same but will now leverage the new implicit infrastructure.
+*   Functor and natural transformation definitions often involve implicit arguments (e.g., source/target categories), which are now handled systematically by the kernel term design and `ensureKernelImplicitsPresent`.
+*   Rewrite rules for functoriality and naturality laws will benefit from the robust pattern matching on these new kernel terms.
+*   The core kernel implementation of Functors and Natural Transformations ( `FunctorCategoryTerm`, `FMap0Term`, `FMap1Term`, `NatTransTypeTerm`, `NatTransComponentTerm`), their typing rules, and the key reduction for `HomTerm(FunctorCategoryTerm(...))` are now in place.
+
+Further work in Phase 2 will involve:
+*   Defining user-facing constructor functions (like `mkFunctor_`, `mkNatTrans_` from the LP spec, if desired) that build these kernel terms.
+*   Adding user-level rewrite rules for functoriality (e.g., `F(id) = id`, `F(g ∘ f) = F(g) ∘ F(f)`) and naturality squares.
+*   Defining `Set` category and the Yoneda embedding, which will utilize these functorial constructs.
+*   Extensive testing of these higher-level definitions and rules.
+
+The new implicit argument handling and pattern elaboration significantly de-risk Phase 2 by providing a more powerful and predictable foundation for defining these higher-level categorical structures and their laws.
 
 ### 6.2 Potential New Features and Enhancements (Revisited)
 
@@ -300,13 +331,15 @@ New tests were crucial for validating the implicit argument and pattern elaborat
 
 ### 8.1 Plan for Phase 2: Functors and Natural Transformations (Leveraging New Implicit System)
 
-The strategy for Phase 2 remains:
-1.  **Extending `Term` type:** Introduce `FunctorCatTerm`, `MkFunctor_`, `FMap0`, `FMap1`, `NatTransTerm`, `MkNatTrans_`, `TApp`. These will benefit from the `kernelImplicitSpec` mechanism if they have standard implicit arguments.
-2.  **Updating `infer`/`check`:** Type rules will naturally use the existing `Icit` system for any implicit parameters in functor/natural transformation types or constructors.
-3.  **Implementing `whnf` reductions:** For unfolding `MkFunctor_`, etc.
-4.  **Adding rewrite rules:** For functoriality and naturality. The improved `elaboratePattern` will make these rules more robust.
-5.  **Defining `Set` and Yoneda.**
-6.  **Testing.**
+The strategy for Phase 2 has commenced with the kernel implementation:
+1.  **Extending `Term` type:** `FunctorCategoryTerm`, `FMap0Term`, `FMap1Term`, `NatTransTypeTerm`, `NatTransComponentTerm` have been added. These benefit from the `KERNEL_IMPLICITS_METADATA` mechanism for their implicit arguments.
+2.  **Updating `infer`/`check`:** Type rules for these new terms are implemented, using the existing `Icit` system and implicit argument handling for their components and parameters.
+3.  **Implementing `whnf` reductions:** The key reduction `HomTerm(FunctorCategoryTerm(A,B), F, G) ==> NatTransTypeTerm(A,B,F,G)` is implemented.
+
+Next steps within Phase 2 involve:
+4.  **User-level constructors and Rewrite rules:** Defining functions like `mkFunctor` (which would construct an `ObjTerm(FunctorCategoryTerm(...))` along with its map actions potentially as `FMap0Term`/`FMap1Term` or lambda abstractions returning these) and `mkTransf`. Adding rewrite rules for functoriality and naturality. The improved `elaboratePattern` will make these rules more robust.
+5.  **Defining `Set` and Yoneda:** Implementing the `Set` category and the Yoneda embedding using the new functorial machinery.
+6.  **Testing:** Thoroughly testing all new definitions, rules, and their interactions.
 
 The new implicit argument handling and pattern elaboration significantly de-risk Phase 2 by providing a more powerful and predictable foundation for defining these higher-level categorical structures and their laws.
 

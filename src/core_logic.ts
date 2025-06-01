@@ -1,4 +1,4 @@
-import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
+import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm } from './core_types';
 import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose, solveConstraintsControl } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
@@ -95,6 +95,67 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             return areStructurallyEqualNoWhnf(rt1.g, comp2.g, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.f, comp2.f, ctx, depth + 1);
         }
+        case 'FunctorCategoryTerm': {
+            const fc2 = rt2 as Term & {tag:'FunctorCategoryTerm'};
+            return areStructurallyEqualNoWhnf(rt1.domainCat, fc2.domainCat, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.codomainCat, fc2.codomainCat, ctx, depth + 1);
+        }
+        case 'FMap0Term': {
+            const fm0_2 = rt2 as Term & {tag:'FMap0Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm0_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm0_2.catB_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.functor, fm0_2.functor, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.objectX, fm0_2.objectX, ctx, depth + 1);
+        }
+        case 'FMap1Term': {
+            const fm1_2 = rt2 as Term & {tag:'FMap1Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm1_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm1_2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.objX_A_IMPLICIT, fm1_2.objX_A_IMPLICIT) ||
+                !implicitsMatch(rt1.objY_A_IMPLICIT, fm1_2.objY_A_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.functor, fm1_2.functor, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.morphism_a, fm1_2.morphism_a, ctx, depth + 1);
+        }
+        case 'NatTransTypeTerm': {
+            const nt2 = rt2 as Term & {tag:'NatTransTypeTerm'};
+            return areStructurallyEqualNoWhnf(rt1.catA, nt2.catA, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.catB, nt2.catB, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.functorF, nt2.functorF, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.functorG, nt2.functorG, ctx, depth + 1);
+        }
+        case 'NatTransComponentTerm': {
+            const nc2 = rt2 as Term & {tag:'NatTransComponentTerm'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, nc2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, nc2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.functorF_IMPLICIT, nc2.functorF_IMPLICIT) ||
+                !implicitsMatch(rt1.functorG_IMPLICIT, nc2.functorG_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.transformation, nc2.transformation, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.objectX, nc2.objectX, ctx, depth + 1);
+        }
         default:
             const exhaustiveCheck: never = rt1; return false;
     }
@@ -185,6 +246,15 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     current = HomTerm(cat_whnf_ref, current.dom, current.cod);
                     reducedInKernelBlock = true;
                 }
+                // Check for HomTerm reduction *after* potential changes to current.cat above
+                if (current.tag === 'HomTerm') { // Ensure current is still a HomTerm
+                    const cat_for_hom_whnf = getTermRef(whnf(current.cat, ctx, stackDepth + 1));
+                    if (cat_for_hom_whnf.tag === 'FunctorCategoryTerm') {
+                        const functorCat = cat_for_hom_whnf;
+                        current = NatTransTypeTerm(functorCat.domainCat, functorCat.codomainCat, current.dom, current.cod);
+                        reducedInKernelBlock = true;
+                    }
+                }
                 break;
             }
             case 'ComposeMorph': {
@@ -263,6 +333,43 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 current.objX_IMPLICIT ? normalize(current.objX_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.objY_IMPLICIT ? normalize(current.objY_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.objZ_IMPLICIT ? normalize(current.objZ_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'FunctorCategoryTerm':
+            return FunctorCategoryTerm(
+                normalize(current.domainCat, ctx, stackDepth + 1),
+                normalize(current.codomainCat, ctx, stackDepth + 1)
+            );
+        case 'FMap0Term':
+            return FMap0Term(
+                normalize(current.functor, ctx, stackDepth + 1),
+                normalize(current.objectX, ctx, stackDepth + 1),
+                current.catA_IMPLICIT ? normalize(current.catA_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catB_IMPLICIT ? normalize(current.catB_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'FMap1Term':
+            return FMap1Term(
+                normalize(current.functor, ctx, stackDepth + 1),
+                normalize(current.morphism_a, ctx, stackDepth + 1),
+                current.catA_IMPLICIT ? normalize(current.catA_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catB_IMPLICIT ? normalize(current.catB_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objX_A_IMPLICIT ? normalize(current.objX_A_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objY_A_IMPLICIT ? normalize(current.objY_A_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'NatTransTypeTerm':
+            return NatTransTypeTerm(
+                normalize(current.catA, ctx, stackDepth + 1),
+                normalize(current.catB, ctx, stackDepth + 1),
+                normalize(current.functorF, ctx, stackDepth + 1),
+                normalize(current.functorG, ctx, stackDepth + 1)
+            );
+        case 'NatTransComponentTerm':
+            return NatTransComponentTerm(
+                normalize(current.transformation, ctx, stackDepth + 1),
+                normalize(current.objectX, ctx, stackDepth + 1),
+                current.catA_IMPLICIT ? normalize(current.catA_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catB_IMPLICIT ? normalize(current.catB_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorF_IMPLICIT ? normalize(current.functorF_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorG_IMPLICIT ? normalize(current.functorG_IMPLICIT, ctx, stackDepth + 1) : undefined
             );
         case 'Lam': {
             const currentLam = current;
@@ -417,6 +524,67 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             return areEqual(rt1.g, comp2.g, ctx, depth + 1) &&
                    areEqual(rt1.f, comp2.f, ctx, depth + 1);
         }
+        case 'FunctorCategoryTerm': {
+            const fc2 = rt2 as Term & {tag:'FunctorCategoryTerm'};
+            return areEqual(rt1.domainCat, fc2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.codomainCat, fc2.codomainCat, ctx, depth + 1);
+        }
+        case 'FMap0Term': {
+            const fm0_2 = rt2 as Term & {tag:'FMap0Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm0_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm0_2.catB_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.functor, fm0_2.functor, ctx, depth + 1) &&
+                   areEqual(rt1.objectX, fm0_2.objectX, ctx, depth + 1);
+        }
+        case 'FMap1Term': {
+            const fm1_2 = rt2 as Term & {tag:'FMap1Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm1_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm1_2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.objX_A_IMPLICIT, fm1_2.objX_A_IMPLICIT) ||
+                !implicitsMatch(rt1.objY_A_IMPLICIT, fm1_2.objY_A_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.functor, fm1_2.functor, ctx, depth + 1) &&
+                   areEqual(rt1.morphism_a, fm1_2.morphism_a, ctx, depth + 1);
+        }
+        case 'NatTransTypeTerm': {
+            const nt2 = rt2 as Term & {tag:'NatTransTypeTerm'};
+            return areEqual(rt1.catA, nt2.catA, ctx, depth + 1) &&
+                   areEqual(rt1.catB, nt2.catB, ctx, depth + 1) &&
+                   areEqual(rt1.functorF, nt2.functorF, ctx, depth + 1) &&
+                   areEqual(rt1.functorG, nt2.functorG, ctx, depth + 1);
+        }
+        case 'NatTransComponentTerm': {
+            const nc2 = rt2 as Term & {tag:'NatTransComponentTerm'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, nc2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, nc2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.functorF_IMPLICIT, nc2.functorF_IMPLICIT) ||
+                !implicitsMatch(rt1.functorG_IMPLICIT, nc2.functorG_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.transformation, nc2.transformation, ctx, depth + 1) &&
+                   areEqual(rt1.objectX, nc2.objectX, ctx, depth + 1);
+        }
         default: const exhaustiveCheck: never = rt1; return false;
     }
 }
@@ -472,6 +640,33 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
                    (current.objX_IMPLICIT && termContainsHole(current.objX_IMPLICIT, holeId, visited, depth + 1)) ||
                    (current.objY_IMPLICIT && termContainsHole(current.objY_IMPLICIT, holeId, visited, depth + 1)) ||
                    (current.objZ_IMPLICIT && termContainsHole(current.objZ_IMPLICIT, holeId, visited, depth + 1));
+        case 'FunctorCategoryTerm':
+            return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.codomainCat, holeId, visited, depth + 1);
+        case 'FMap0Term':
+            return termContainsHole(current.functor, holeId, visited, depth + 1) ||
+                   termContainsHole(current.objectX, holeId, visited, depth + 1) ||
+                   (current.catA_IMPLICIT && termContainsHole(current.catA_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.catB_IMPLICIT && termContainsHole(current.catB_IMPLICIT, holeId, visited, depth + 1));
+        case 'FMap1Term':
+            return termContainsHole(current.functor, holeId, visited, depth + 1) ||
+                   termContainsHole(current.morphism_a, holeId, visited, depth + 1) ||
+                   (current.catA_IMPLICIT && termContainsHole(current.catA_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.catB_IMPLICIT && termContainsHole(current.catB_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objX_A_IMPLICIT && termContainsHole(current.objX_A_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objY_A_IMPLICIT && termContainsHole(current.objY_A_IMPLICIT, holeId, visited, depth + 1));
+        case 'NatTransTypeTerm':
+            return termContainsHole(current.catA, holeId, visited, depth + 1) ||
+                   termContainsHole(current.catB, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorF, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorG, holeId, visited, depth + 1);
+        case 'NatTransComponentTerm':
+            return termContainsHole(current.transformation, holeId, visited, depth + 1) ||
+                   termContainsHole(current.objectX, holeId, visited, depth + 1) ||
+                   (current.catA_IMPLICIT && termContainsHole(current.catA_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.catB_IMPLICIT && termContainsHole(current.catB_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.functorF_IMPLICIT && termContainsHole(current.functorF_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.functorG_IMPLICIT && termContainsHole(current.functorG_IMPLICIT, holeId, visited, depth + 1));
         default: const exhaustiveCheck: never = current; return false;
     }
 }
@@ -587,6 +782,72 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                     const cat1_imp = id1.cat_IMPLICIT || Hole(freshHoleName() + "_id_cat1_struct");
                     const cat2_imp = id2.cat_IMPLICIT || Hole(freshHoleName() + "_id_cat2_struct");
                     structuralResult = unifyArgs([id1.obj, cat1_imp], [id2.obj, cat2_imp], ctx, depth + 1);
+                    break;
+                }
+                case 'FunctorCategoryTerm': {
+                    const fc1 = current_t1 as Term & {tag:'FunctorCategoryTerm'};
+                    const fc2 = current_t2 as Term & {tag:'FunctorCategoryTerm'};
+                    structuralResult = unifyArgs([fc1.domainCat, fc1.codomainCat], [fc2.domainCat, fc2.codomainCat], ctx, depth + 1);
+                    break;
+                }
+                case 'FMap0Term': {
+                    const fm0_1 = current_t1 as Term & {tag:'FMap0Term'};
+                    const fm0_2 = current_t2 as Term & {tag:'FMap0Term'};
+                    const catA1_imp = fm0_1.catA_IMPLICIT || Hole(freshHoleName() + "_fm0_catA1_struct");
+                    const catA2_imp = fm0_2.catA_IMPLICIT || Hole(freshHoleName() + "_fm0_catA2_struct");
+                    const catB1_imp = fm0_1.catB_IMPLICIT || Hole(freshHoleName() + "_fm0_catB1_struct");
+                    const catB2_imp = fm0_2.catB_IMPLICIT || Hole(freshHoleName() + "_fm0_catB2_struct");
+                    structuralResult = unifyArgs(
+                        [fm0_1.functor, fm0_1.objectX, catA1_imp, catB1_imp],
+                        [fm0_2.functor, fm0_2.objectX, catA2_imp, catB2_imp],
+                        ctx, depth + 1
+                    );
+                    break;
+                }
+                case 'FMap1Term': {
+                    const fm1_1 = current_t1 as Term & {tag:'FMap1Term'};
+                    const fm1_2 = current_t2 as Term & {tag:'FMap1Term'};
+                    const catA1_imp = fm1_1.catA_IMPLICIT || Hole(freshHoleName() + "_fm1_catA1_struct");
+                    const catA2_imp = fm1_2.catA_IMPLICIT || Hole(freshHoleName() + "_fm1_catA2_struct");
+                    const catB1_imp = fm1_1.catB_IMPLICIT || Hole(freshHoleName() + "_fm1_catB1_struct");
+                    const catB2_imp = fm1_2.catB_IMPLICIT || Hole(freshHoleName() + "_fm1_catB2_struct");
+                    const objX1_imp = fm1_1.objX_A_IMPLICIT || Hole(freshHoleName() + "_fm1_objX1_struct");
+                    const objX2_imp = fm1_2.objX_A_IMPLICIT || Hole(freshHoleName() + "_fm1_objX2_struct");
+                    const objY1_imp = fm1_1.objY_A_IMPLICIT || Hole(freshHoleName() + "_fm1_objY1_struct");
+                    const objY2_imp = fm1_2.objY_A_IMPLICIT || Hole(freshHoleName() + "_fm1_objY2_struct");
+                    structuralResult = unifyArgs(
+                        [fm1_1.functor, fm1_1.morphism_a, catA1_imp, catB1_imp, objX1_imp, objY1_imp],
+                        [fm1_2.functor, fm1_2.morphism_a, catA2_imp, catB2_imp, objX2_imp, objY2_imp],
+                        ctx, depth + 1
+                    );
+                    break;
+                }
+                case 'NatTransTypeTerm': {
+                    const nt1 = current_t1 as Term & {tag:'NatTransTypeTerm'};
+                    const nt2 = current_t2 as Term & {tag:'NatTransTypeTerm'};
+                    structuralResult = unifyArgs(
+                        [nt1.catA, nt1.catB, nt1.functorF, nt1.functorG],
+                        [nt2.catA, nt2.catB, nt2.functorF, nt2.functorG],
+                        ctx, depth + 1
+                    );
+                    break;
+                }
+                case 'NatTransComponentTerm': {
+                    const nc1 = current_t1 as Term & {tag:'NatTransComponentTerm'};
+                    const nc2 = current_t2 as Term & {tag:'NatTransComponentTerm'};
+                    const catA1_imp = nc1.catA_IMPLICIT || Hole(freshHoleName() + "_nc_catA1_struct");
+                    const catA2_imp = nc2.catA_IMPLICIT || Hole(freshHoleName() + "_nc_catA2_struct");
+                    const catB1_imp = nc1.catB_IMPLICIT || Hole(freshHoleName() + "_nc_catB1_struct");
+                    const catB2_imp = nc2.catB_IMPLICIT || Hole(freshHoleName() + "_nc_catB2_struct");
+                    const funF1_imp = nc1.functorF_IMPLICIT || Hole(freshHoleName() + "_nc_funF1_struct");
+                    const funF2_imp = nc2.functorF_IMPLICIT || Hole(freshHoleName() + "_nc_funF2_struct");
+                    const funG1_imp = nc1.functorG_IMPLICIT || Hole(freshHoleName() + "_nc_funG1_struct");
+                    const funG2_imp = nc2.functorG_IMPLICIT || Hole(freshHoleName() + "_nc_funG2_struct");
+                    structuralResult = unifyArgs(
+                        [nc1.transformation, nc1.objectX, catA1_imp, catB1_imp, funF1_imp, funG1_imp],
+                        [nc2.transformation, nc2.objectX, catA2_imp, catB2_imp, funF2_imp, funG2_imp],
+                        ctx, depth + 1
+                    );
                     break;
                 }
                  // Note: ComposeMorph is not typically considered injective in this structural way
@@ -797,6 +1058,73 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             }
             return UnifyResult.Progress;
         }
+        case 'FunctorCategoryTerm': {
+            const fc1 = rt1_final as Term & {tag:'FunctorCategoryTerm'}; const fc2 = rt2_final as Term & {tag:'FunctorCategoryTerm'};
+            const domStatus = unify(fc1.domainCat, fc2.domainCat, ctx, depth + 1);
+            if (domStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const codStatus = unify(fc1.codomainCat, fc2.codomainCat, ctx, depth + 1);
+            if (codStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (domStatus === UnifyResult.Solved && codStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
+        case 'FMap0Term': {
+            const fm0_1 = rt1_final as Term & {tag:'FMap0Term'}; const fm0_2 = rt2_final as Term & {tag:'FMap0Term'};
+            const implicitsStatus = unifyArgs(
+                [fm0_1.catA_IMPLICIT, fm0_1.catB_IMPLICIT],
+                [fm0_2.catA_IMPLICIT, fm0_2.catB_IMPLICIT],
+                ctx, depth + 1
+            );
+            if (implicitsStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const funcStatus = unify(fm0_1.functor, fm0_2.functor, ctx, depth + 1);
+            if (funcStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const objStatus = unify(fm0_1.objectX, fm0_2.objectX, ctx, depth + 1);
+            if (objStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (implicitsStatus === UnifyResult.Solved && funcStatus === UnifyResult.Solved && objStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
+        case 'FMap1Term': {
+            const fm1_1 = rt1_final as Term & {tag:'FMap1Term'}; const fm1_2 = rt2_final as Term & {tag:'FMap1Term'};
+            const implicitsStatus = unifyArgs(
+                [fm1_1.catA_IMPLICIT, fm1_1.catB_IMPLICIT, fm1_1.objX_A_IMPLICIT, fm1_1.objY_A_IMPLICIT],
+                [fm1_2.catA_IMPLICIT, fm1_2.catB_IMPLICIT, fm1_2.objX_A_IMPLICIT, fm1_2.objY_A_IMPLICIT],
+                ctx, depth + 1
+            );
+            if (implicitsStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const funcStatus = unify(fm1_1.functor, fm1_2.functor, ctx, depth + 1);
+            if (funcStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const morphStatus = unify(fm1_1.morphism_a, fm1_2.morphism_a, ctx, depth + 1);
+            if (morphStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (implicitsStatus === UnifyResult.Solved && funcStatus === UnifyResult.Solved && morphStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
+        case 'NatTransTypeTerm': {
+            const nt1 = rt1_final as Term & {tag:'NatTransTypeTerm'}; const nt2 = rt2_final as Term & {tag:'NatTransTypeTerm'};
+            const catAStatus = unify(nt1.catA, nt2.catA, ctx, depth + 1);
+            if (catAStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const catBStatus = unify(nt1.catB, nt2.catB, ctx, depth + 1);
+            if (catBStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const funFStatus = unify(nt1.functorF, nt2.functorF, ctx, depth + 1);
+            if (funFStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const funGStatus = unify(nt1.functorG, nt2.functorG, ctx, depth + 1);
+            if (funGStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (catAStatus === UnifyResult.Solved && catBStatus === UnifyResult.Solved && funFStatus === UnifyResult.Solved && funGStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
+        case 'NatTransComponentTerm': {
+            const nc1 = rt1_final as Term & {tag:'NatTransComponentTerm'}; const nc2 = rt2_final as Term & {tag:'NatTransComponentTerm'};
+            const implicitsStatus = unifyArgs(
+                [nc1.catA_IMPLICIT, nc1.catB_IMPLICIT, nc1.functorF_IMPLICIT, nc1.functorG_IMPLICIT],
+                [nc2.catA_IMPLICIT, nc2.catB_IMPLICIT, nc2.functorF_IMPLICIT, nc2.functorG_IMPLICIT],
+                ctx, depth + 1
+            );
+            if (implicitsStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const transStatus = unify(nc1.transformation, nc2.transformation, ctx, depth + 1);
+            if (transStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const objStatus = unify(nc1.objectX, nc2.objectX, ctx, depth + 1);
+            if (objStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (implicitsStatus === UnifyResult.Solved && transStatus === UnifyResult.Solved && objStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
         default:
             // This case should ideally not be reached if tags are identical and handled above.
             // If it is, it implies a missing specific handler for a tag.
@@ -853,6 +1181,38 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             if(current.objX_IMPLICIT) collectPatternVars(current.objX_IMPLICIT, patternVarDecls, collectedVars, visited);
             if(current.objY_IMPLICIT) collectPatternVars(current.objY_IMPLICIT, patternVarDecls, collectedVars, visited);
             if(current.objZ_IMPLICIT) collectPatternVars(current.objZ_IMPLICIT, patternVarDecls, collectedVars, visited);
+            break;
+        case 'FunctorCategoryTerm':
+            collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
+            break;
+        case 'FMap0Term':
+            collectPatternVars(current.functor, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.objectX, patternVarDecls, collectedVars, visited);
+            if(current.catA_IMPLICIT) collectPatternVars(current.catA_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.catB_IMPLICIT) collectPatternVars(current.catB_IMPLICIT, patternVarDecls, collectedVars, visited);
+            break;
+        case 'FMap1Term':
+            collectPatternVars(current.functor, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.morphism_a, patternVarDecls, collectedVars, visited);
+            if(current.catA_IMPLICIT) collectPatternVars(current.catA_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.catB_IMPLICIT) collectPatternVars(current.catB_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objX_A_IMPLICIT) collectPatternVars(current.objX_A_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objY_A_IMPLICIT) collectPatternVars(current.objY_A_IMPLICIT, patternVarDecls, collectedVars, visited);
+            break;
+        case 'NatTransTypeTerm':
+            collectPatternVars(current.catA, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.catB, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorF, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorG, patternVarDecls, collectedVars, visited);
+            break;
+        case 'NatTransComponentTerm':
+            collectPatternVars(current.transformation, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.objectX, patternVarDecls, collectedVars, visited);
+            if(current.catA_IMPLICIT) collectPatternVars(current.catA_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.catB_IMPLICIT) collectPatternVars(current.catB_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.functorF_IMPLICIT) collectPatternVars(current.functorF_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.functorG_IMPLICIT) collectPatternVars(current.functorG_IMPLICIT, patternVarDecls, collectedVars, visited);
             break;
     }
 }

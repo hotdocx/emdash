@@ -1,7 +1,7 @@
 import {
     Term, Context, PatternVarDecl, Substitution, ElaborationResult, Icit, Binding,
     Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, MkCat_,
-    IdentityMorph, ComposeMorph,
+    IdentityMorph, ComposeMorph, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
     BaseTerm
 } from './core_types';
 import {
@@ -18,6 +18,12 @@ import { KERNEL_IMPLICIT_SPECS } from './core_kernel_metadata';
 // Use Extract to get the specific type from the BaseTerm union for casting
 type IdentityMorphType = Extract<BaseTerm, { tag: 'IdentityMorph' }>;
 type ComposeMorphType = Extract<BaseTerm, { tag: 'ComposeMorph' }>;
+// Emdash Phase 2: Functors and Natural Transformations
+type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;
+type FMap0TermType = Extract<BaseTerm, { tag: 'FMap0Term' }>;
+type FMap1TermType = Extract<BaseTerm, { tag: 'FMap1Term' }>;
+type NatTransTypeTermType = Extract<BaseTerm, { tag: 'NatTransTypeTerm' }>;
+type NatTransComponentTermType = Extract<BaseTerm, { tag: 'NatTransComponentTerm' }>;
 
 export interface ElaborationOptions {
     normalizeResultTerm?: boolean;
@@ -348,6 +354,78 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const finalComp = ComposeMorph(elabG, elabF, catArg, XArg, YArg, ZArg);
             return { elaboratedTerm: finalComp, type: HomTerm(catArg, XArg, ZArg) };
         }
+        case 'FunctorCategoryTerm': {
+            const fcTerm = current as Term & FunctorCategoryTermType;
+            const elabDomainCat = check(ctx, fcTerm.domainCat, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCodomainCat = check(ctx, fcTerm.codomainCat, CatTerm(), stackDepth + 1, isSubElaboration);
+            return { elaboratedTerm: FunctorCategoryTerm(elabDomainCat, elabCodomainCat), type: CatTerm() };
+        }
+        case 'FMap0Term': {
+            const fm0Term = current as Term & FMap0TermType;
+            const elabCatA = check(ctx, fm0Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCatB = check(ctx, fm0Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            
+            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const elabFunctor = check(ctx, fm0Term.functor, expectedFunctorType, stackDepth + 1, isSubElaboration);
+            
+            const expectedObjectType = ObjTerm(elabCatA);
+            const elabObjectX = check(ctx, fm0Term.objectX, expectedObjectType, stackDepth + 1, isSubElaboration);
+            
+            const finalFMap0 = FMap0Term(elabFunctor, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB));
+            return { elaboratedTerm: finalFMap0, type: ObjTerm(getTermRef(elabCatB)) };
+        }
+        case 'FMap1Term': {
+            const fm1Term = current as Term & FMap1TermType;
+            const elabCatA = check(ctx, fm1Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCatB = check(ctx, fm1Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabObjX_A = check(ctx, fm1Term.objX_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, isSubElaboration);
+            const elabObjY_A = check(ctx, fm1Term.objY_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, isSubElaboration);
+
+            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const elabFunctor = check(ctx, fm1Term.functor, expectedFunctorType, stackDepth + 1, isSubElaboration);
+
+            const expectedMorphismType = HomTerm(elabCatA, elabObjX_A, elabObjY_A);
+            const elabMorphism_a = check(ctx, fm1Term.morphism_a, expectedMorphismType, stackDepth + 1, isSubElaboration);
+
+            // Result type: Hom B (FMap0 F X) (FMap0 F Y)
+            // We need to construct FMap0 terms for domain and codomain of the resulting morphism
+            const fmap0_X = FMap0Term(elabFunctor, elabObjX_A, getTermRef(elabCatA), getTermRef(elabCatB));
+            const fmap0_Y = FMap0Term(elabFunctor, elabObjY_A, getTermRef(elabCatA), getTermRef(elabCatB));
+
+            const finalFMap1 = FMap1Term(elabFunctor, elabMorphism_a, getTermRef(elabCatA), getTermRef(elabCatB), getTermRef(elabObjX_A), getTermRef(elabObjY_A));
+            return { elaboratedTerm: finalFMap1, type: HomTerm(getTermRef(elabCatB), fmap0_X, fmap0_Y) };
+        }
+        case 'NatTransTypeTerm': {
+            const ntTerm = current as Term & NatTransTypeTermType;
+            const elabCatA = check(ctx, ntTerm.catA, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCatB = check(ctx, ntTerm.catB, CatTerm(), stackDepth + 1, isSubElaboration);
+            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const elabFunctorF = check(ctx, ntTerm.functorF, expectedFunctorType, stackDepth + 1, isSubElaboration);
+            const elabFunctorG = check(ctx, ntTerm.functorG, expectedFunctorType, stackDepth + 1, isSubElaboration);
+
+            const finalNatTransType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
+            return { elaboratedTerm: finalNatTransType, type: Type() };
+        }
+        case 'NatTransComponentTerm': {
+            const ncTerm = current as Term & NatTransComponentTermType;
+            const elabCatA = check(ctx, ncTerm.catA_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCatB = check(ctx, ncTerm.catB_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabFunctorF = check(ctx, ncTerm.functorF_IMPLICIT!, ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB)), stackDepth + 1, isSubElaboration);
+            const elabFunctorG = check(ctx, ncTerm.functorG_IMPLICIT!, ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB)), stackDepth + 1, isSubElaboration);
+
+            const expectedTransformationType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
+            const elabTransformation = check(ctx, ncTerm.transformation, expectedTransformationType, stackDepth + 1, isSubElaboration);
+
+            const expectedObjectType = ObjTerm(elabCatA);
+            const elabObjectX = check(ctx, ncTerm.objectX, expectedObjectType, stackDepth + 1, isSubElaboration);
+
+            // Result type: Hom catB (FMap0 F X) (FMap0 G X)
+            const fmap0_F_X = FMap0Term(elabFunctorF, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB));
+            const fmap0_G_X = FMap0Term(elabFunctorG, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB));
+
+            const finalNatTransComp = NatTransComponentTerm(elabTransformation, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB), getTermRef(elabFunctorF), getTermRef(elabFunctorG));
+            return { elaboratedTerm: finalNatTransComp, type: HomTerm(getTermRef(elabCatB), fmap0_F_X, fmap0_G_X) };
+        }
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`Infer: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -625,9 +703,8 @@ export function matchPattern(
                 if (!idT.cat_IMPLICIT) return null; 
                 s = matchPattern(idP.cat_IMPLICIT, idT.cat_IMPLICIT, ctx, patternVarDecls, s, stackDepth +1);
                 if (!s) return null;
-            }  else if (idT.cat_IMPLICIT) { 
-                return null;
-            }
+            }  // If pattern has no cat_IMPLICIT, term can have one or not. It's like a wildcard for that field if absent in pattern.
+            
             return matchPattern(idP.obj, idT.obj, ctx, patternVarDecls, s, stackDepth + 1);
         }
         case 'ComposeMorph': {
@@ -636,17 +713,81 @@ export function matchPattern(
             const implicitsP = [compP.cat_IMPLICIT, compP.objX_IMPLICIT, compP.objY_IMPLICIT, compP.objZ_IMPLICIT];
             const implicitsT = [compT.cat_IMPLICIT, compT.objX_IMPLICIT, compT.objY_IMPLICIT, compT.objZ_IMPLICIT];
             for(let i=0; i<implicitsP.length; i++) {
-                if (implicitsP[i]) { 
+                if (implicitsP[i]) { // If pattern specifies an implicit, term must have it and match
                     if (!implicitsT[i]) return null; 
                     s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1);
                     if (!s) return null;
-                } else if (implicitsT[i]) { 
-                    return null;
-                }
+                } // If pattern omits an implicit, term's corresponding implicit is not checked here (acts as wildcard)
             }
             s = matchPattern(compP.g, compT.g, ctx, patternVarDecls, s, stackDepth + 1);
             if (!s) return null;
             return matchPattern(compP.f, compT.f, ctx, patternVarDecls, s, stackDepth + 1);
+        }
+        case 'FunctorCategoryTerm': {
+            const fcP = rtPattern; const fcT = rtTermToMatch as Term & {tag:'FunctorCategoryTerm'};
+            let s = matchPattern(fcP.domainCat, fcT.domainCat, ctx, patternVarDecls, subst, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(fcP.codomainCat, fcT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1);
+        }
+        case 'FMap0Term': {
+            const fm0P = rtPattern; const fm0T = rtTermToMatch as Term & {tag:'FMap0Term'};
+            let s: Substitution | null = subst;
+            // Matching implicits: if pattern specifies them, term must match.
+            if (fm0P.catA_IMPLICIT) {
+                if (!fm0T.catA_IMPLICIT) return null;
+                s = matchPattern(fm0P.catA_IMPLICIT, fm0T.catA_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1);
+                if (!s) return null;
+            }
+            if (fm0P.catB_IMPLICIT) {
+                if (!fm0T.catB_IMPLICIT) return null;
+                s = matchPattern(fm0P.catB_IMPLICIT, fm0T.catB_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1);
+                if (!s) return null;
+            }
+            s = matchPattern(fm0P.functor, fm0T.functor, ctx, patternVarDecls, s, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(fm0P.objectX, fm0T.objectX, ctx, patternVarDecls, s, stackDepth + 1);
+        }
+        case 'FMap1Term': {
+            const fm1P = rtPattern; const fm1T = rtTermToMatch as Term & {tag:'FMap1Term'};
+            let s: Substitution | null = subst;
+            const implicitsP = [fm1P.catA_IMPLICIT, fm1P.catB_IMPLICIT, fm1P.objX_A_IMPLICIT, fm1P.objY_A_IMPLICIT];
+            const implicitsT = [fm1T.catA_IMPLICIT, fm1T.catB_IMPLICIT, fm1T.objX_A_IMPLICIT, fm1T.objY_A_IMPLICIT];
+            for(let i=0; i<implicitsP.length; i++) {
+                if (implicitsP[i]) {
+                    if (!implicitsT[i]) return null;
+                    s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1);
+                    if (!s) return null;
+                }
+            }
+            s = matchPattern(fm1P.functor, fm1T.functor, ctx, patternVarDecls, s, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(fm1P.morphism_a, fm1T.morphism_a, ctx, patternVarDecls, s, stackDepth + 1);
+        }
+        case 'NatTransTypeTerm': {
+            const ntP = rtPattern; const ntT = rtTermToMatch as Term & {tag:'NatTransTypeTerm'};
+            let s = matchPattern(ntP.catA, ntT.catA, ctx, patternVarDecls, subst, stackDepth + 1);
+            if (!s) return null;
+            s = matchPattern(ntP.catB, ntT.catB, ctx, patternVarDecls, s, stackDepth + 1);
+            if (!s) return null;
+            s = matchPattern(ntP.functorF, ntT.functorF, ctx, patternVarDecls, s, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(ntP.functorG, ntT.functorG, ctx, patternVarDecls, s, stackDepth + 1);
+        }
+        case 'NatTransComponentTerm': {
+            const ncP = rtPattern; const ncT = rtTermToMatch as Term & {tag:'NatTransComponentTerm'};
+            let s: Substitution | null = subst;
+            const implicitsP = [ncP.catA_IMPLICIT, ncP.catB_IMPLICIT, ncP.functorF_IMPLICIT, ncP.functorG_IMPLICIT];
+            const implicitsT = [ncT.catA_IMPLICIT, ncT.catB_IMPLICIT, ncT.functorF_IMPLICIT, ncT.functorG_IMPLICIT];
+             for(let i=0; i<implicitsP.length; i++) {
+                if (implicitsP[i]) {
+                    if (!implicitsT[i]) return null;
+                    s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1);
+                    if (!s) return null;
+                }
+            }
+            s = matchPattern(ncP.transformation, ncT.transformation, ctx, patternVarDecls, s, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(ncP.objectX, ncT.objectX, ctx, patternVarDecls, s, stackDepth + 1);
         }
         default:
              const exhaustiveCheck: never = rtPattern;
@@ -720,6 +861,43 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 current.objX_IMPLICIT ? applySubst(current.objX_IMPLICIT, subst, patternVarDecls) : undefined,
                 current.objY_IMPLICIT ? applySubst(current.objY_IMPLICIT, subst, patternVarDecls) : undefined,
                 current.objZ_IMPLICIT ? applySubst(current.objZ_IMPLICIT, subst, patternVarDecls) : undefined
+            );
+        case 'FunctorCategoryTerm':
+            return FunctorCategoryTerm(
+                applySubst(current.domainCat, subst, patternVarDecls),
+                applySubst(current.codomainCat, subst, patternVarDecls)
+            );
+        case 'FMap0Term':
+            return FMap0Term(
+                applySubst(current.functor, subst, patternVarDecls),
+                applySubst(current.objectX, subst, patternVarDecls),
+                current.catA_IMPLICIT ? applySubst(current.catA_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.catB_IMPLICIT ? applySubst(current.catB_IMPLICIT, subst, patternVarDecls) : undefined
+            );
+        case 'FMap1Term':
+            return FMap1Term(
+                applySubst(current.functor, subst, patternVarDecls),
+                applySubst(current.morphism_a, subst, patternVarDecls),
+                current.catA_IMPLICIT ? applySubst(current.catA_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.catB_IMPLICIT ? applySubst(current.catB_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.objX_A_IMPLICIT ? applySubst(current.objX_A_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.objY_A_IMPLICIT ? applySubst(current.objY_A_IMPLICIT, subst, patternVarDecls) : undefined
+            );
+        case 'NatTransTypeTerm':
+            return NatTransTypeTerm(
+                applySubst(current.catA, subst, patternVarDecls),
+                applySubst(current.catB, subst, patternVarDecls),
+                applySubst(current.functorF, subst, patternVarDecls),
+                applySubst(current.functorG, subst, patternVarDecls)
+            );
+        case 'NatTransComponentTerm':
+            return NatTransComponentTerm(
+                applySubst(current.transformation, subst, patternVarDecls),
+                applySubst(current.objectX, subst, patternVarDecls),
+                current.catA_IMPLICIT ? applySubst(current.catA_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.catB_IMPLICIT ? applySubst(current.catB_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.functorF_IMPLICIT ? applySubst(current.functorF_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.functorG_IMPLICIT ? applySubst(current.functorG_IMPLICIT, subst, patternVarDecls) : undefined
             );
         default:
             const exhaustiveCheck: never = current;
@@ -799,18 +977,28 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(mkCat_ {O=${printTerm(current.objRepresentation, new Map(boundVarsMap), stackDepth + 1)}, H=${printTerm(current.homRepresentation, new Map(boundVarsMap), stackDepth + 1)}, C=${printTerm(current.composeImplementation, new Map(boundVarsMap), stackDepth + 1)}})`;
         case 'IdentityMorph': {
             let catIdStr = "";
-            if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') { 
+            if (current.cat_IMPLICIT && (getTermRef(current.cat_IMPLICIT).tag !== 'Hole' || (getTermRef(current.cat_IMPLICIT) as Term & {tag: 'Hole'}).id.startsWith("_type_of_"))) { 
                  catIdStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
             }
             return `(id${catIdStr} ${printTerm(current.obj, new Map(boundVarsMap), stackDepth + 1)})`;
         }
         case 'ComposeMorph': {
             let catCompStr = "";
-            if (current.cat_IMPLICIT && getTermRef(current.cat_IMPLICIT).tag !== 'Hole') {
+            if (current.cat_IMPLICIT && (getTermRef(current.cat_IMPLICIT).tag !== 'Hole' || (getTermRef(current.cat_IMPLICIT) as Term & {tag: 'Hole'}).id.startsWith("_type_of_"))) {
                  catCompStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
             }
             return `(${printTerm(current.g, new Map(boundVarsMap), stackDepth + 1)} ∘${catCompStr} ${printTerm(current.f, new Map(boundVarsMap), stackDepth + 1)})`;
         }
+        case 'FunctorCategoryTerm':
+            return `(Functor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'FMap0Term':
+            return `(fmap0 ${printTerm(current.functor, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'FMap1Term':
+            return `(fmap1 ${printTerm(current.functor, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_a, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'NatTransTypeTerm':
+            return `(Transf ${printTerm(current.catA, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.catB, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorG, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'NatTransComponentTerm':
+            return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`printTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);

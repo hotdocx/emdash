@@ -1,5 +1,18 @@
 /*
     m— emdash functorial programming
+    NOTES: for implementing this specification of emdash into typescript:
+    - the Lambdapi's `τ` decoder and `ABC_Type` versions of `ABC` need not be present in the Typescript implementation
+    - any argument enclosed in brackets (such as `[A : Cat]` ) to mark it as Lamdapi's implicit argument
+        means that in the typescript implementation too it should be treated as an implicit argument
+       (either as implicit input of a kernel term constructor or an implicit argument of a global/local variable which has an implicit Pi type)
+    - a Lambdapi symbol marked as `constant symbol` means the corresponsing emdash symbol should be registered as `constant` and `injective`
+    - a Lambdapi symbol marked as `injective symbol` means the corresponsing emdash symbol should be registered as `injective`
+    - an ordinary Lambdapi symbol `symbol XYZ (without marking such as `constant symbol` or `injective symbol`)
+      means that the corresponsing emdash symbol SHOULD NOT be registered as `constant` nor `injective.
+    - sometimes a Lambdapi rewrite rule ( `rule ... ↪ ... ;` ) or unification rule ( `unif_rule ... ≡ ... ↪ [ ... ≡ ... ; ... ≡ ... ];` ) will either:
+      + be directly implementad inside the kernel ( `whnf`, `areEqual`, `unify`, etc...) if it belongs very-much to the kernel
+      + or be implemented via the mechanism of `user-provided rewrite rules` or `user-provided unification rules`
+        if it belongs very-much to the standard library or for convenience reasons.
 */
 
 // ===== START OF BASIC KERNEL SPECIFICATION  =====

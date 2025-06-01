@@ -19,6 +19,11 @@ export interface KernelImplicitSpec<T extends Term> {
 type IdentityMorphTypeExt = Extract<BaseTerm, { tag: 'IdentityMorph' }>;
 type ComposeMorphTypeExt = Extract<BaseTerm, { tag: 'ComposeMorph' }>;
 
+// Emdash Phase 2: Functors and Natural Transformations
+type FMap0TermTypeExt = Extract<BaseTerm, { tag: 'FMap0Term' }>;
+type FMap1TermTypeExt = Extract<BaseTerm, { tag: 'FMap1Term' }>;
+type NatTransComponentTermTypeExt = Extract<BaseTerm, { tag: 'NatTransComponentTerm' }>;
+
 // Array of specs, easier to iterate and type-safe
 // We cast to 'any' for the T in KernelImplicitSpec<T> because T varies for each element.
 // The internal structure of each spec object will still be type-checked against KernelImplicitSpec<SpecificTerm>.
@@ -32,6 +37,19 @@ export const KERNEL_IMPLICIT_SPECS: Array<KernelImplicitSpec<any>> = [
         fields: ['cat_IMPLICIT', 'objX_IMPLICIT', 'objY_IMPLICIT', 'objZ_IMPLICIT']
     } as KernelImplicitSpec<ComposeMorphTypeExt> // Explicitly use the type from CoreTypes namespace
     // Add more kernel terms with implicits here as they are defined
+    ,
+    {
+        tag: 'FMap0Term',
+        fields: ['catA_IMPLICIT', 'catB_IMPLICIT']
+    } as KernelImplicitSpec<FMap0TermTypeExt>,
+    {
+        tag: 'FMap1Term',
+        fields: ['catA_IMPLICIT', 'catB_IMPLICIT', 'objX_A_IMPLICIT', 'objY_A_IMPLICIT']
+    } as KernelImplicitSpec<FMap1TermTypeExt>,
+    {
+        tag: 'NatTransComponentTerm',
+        fields: ['catA_IMPLICIT', 'catB_IMPLICIT', 'functorF_IMPLICIT', 'functorG_IMPLICIT']
+    } as KernelImplicitSpec<NatTransComponentTermTypeExt>
 ];
 
 // This function is now defined in core_elaboration.ts to avoid circular dependencies

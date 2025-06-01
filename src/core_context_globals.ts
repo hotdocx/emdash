@@ -320,7 +320,10 @@ export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = I
 export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
 
 export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'MkCat_']);
-export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>(['IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_']);
+export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
+    'IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_',
+    'FunctorCategoryTerm', 'FMap0Term', 'FMap1Term', 'NatTransTypeTerm', 'NatTransComponentTerm'
+]);
 
 export function isKernelConstantSymbolStructurally(term: Term): boolean {
     const t = getTermRef(term);

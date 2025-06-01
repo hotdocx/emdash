@@ -27,6 +27,36 @@ export type BaseTerm =
         objX_IMPLICIT?: Term,
         objY_IMPLICIT?: Term,
         objZ_IMPLICIT?: Term
+      }
+    // Emdash Phase 2: Functors and Natural Transformations
+    | { tag: 'FunctorCategoryTerm', domainCat: Term, codomainCat: Term }
+    | { tag: 'FMap0Term', // fapp0 F X
+        functor: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
+        objectX: Term, // ObjTerm(catA)
+        catA_IMPLICIT?: Term,
+        catB_IMPLICIT?: Term
+      }
+    | { tag: 'FMap1Term', // fapp1 F a
+        functor: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
+        morphism_a: Term, // HomTerm(catA, objX_A, objY_A)
+        catA_IMPLICIT?: Term,
+        catB_IMPLICIT?: Term,
+        objX_A_IMPLICIT?: Term,
+        objY_A_IMPLICIT?: Term
+      }
+    | { tag: 'NatTransTypeTerm', // Transf A B F G
+        catA: Term,
+        catB: Term,
+        functorF: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
+        functorG: Term  // ObjTerm(FunctorCategoryTerm(catA, catB))
+      }
+    | { tag: 'NatTransComponentTerm', // tapp eps X
+        transformation: Term, // Term of type NatTransTypeTerm
+        objectX: Term, // ObjTerm(catA)
+        catA_IMPLICIT?: Term,
+        catB_IMPLICIT?: Term,
+        functorF_IMPLICIT?: Term,
+        functorG_IMPLICIT?: Term
       };
 
 export type Term = BaseTerm;
@@ -66,6 +96,22 @@ export const IdentityMorph = (obj: Term, cat_IMPLICIT?: Term): Term & { tag: 'Id
     ({ tag: 'IdentityMorph', obj, cat_IMPLICIT });
 export const ComposeMorph = (g: Term, f: Term, cat_IMPLICIT?: Term, objX_IMPLICIT?: Term, objY_IMPLICIT?: Term, objZ_IMPLICIT?: Term): Term & { tag: 'ComposeMorph' } =>
     ({ tag: 'ComposeMorph', g, f, cat_IMPLICIT, objX_IMPLICIT, objY_IMPLICIT, objZ_IMPLICIT });
+
+// Emdash Phase 2: Functors and Natural Transformations Constructors
+export const FunctorCategoryTerm = (domainCat: Term, codomainCat: Term): Term & { tag: 'FunctorCategoryTerm' } =>
+    ({ tag: 'FunctorCategoryTerm', domainCat, codomainCat });
+
+export const FMap0Term = (functor: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term): Term & { tag: 'FMap0Term' } =>
+    ({ tag: 'FMap0Term', functor, objectX, catA_IMPLICIT, catB_IMPLICIT });
+
+export const FMap1Term = (functor: Term, morphism_a: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, objX_A_IMPLICIT?: Term, objY_A_IMPLICIT?: Term): Term & { tag: 'FMap1Term' } =>
+    ({ tag: 'FMap1Term', functor, morphism_a, catA_IMPLICIT, catB_IMPLICIT, objX_A_IMPLICIT, objY_A_IMPLICIT });
+
+export const NatTransTypeTerm = (catA: Term, catB: Term, functorF: Term, functorG: Term): Term & { tag: 'NatTransTypeTerm' } =>
+    ({ tag: 'NatTransTypeTerm', catA, catB, functorF, functorG });
+
+export const NatTransComponentTerm = (transformation: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, functorF_IMPLICIT?: Term, functorG_IMPLICIT?: Term): Term & { tag: 'NatTransComponentTerm' } =>
+    ({ tag: 'NatTransComponentTerm', transformation, objectX, catA_IMPLICIT, catB_IMPLICIT, functorF_IMPLICIT, functorG_IMPLICIT });
 
 export type Binding = {
     name: string;
