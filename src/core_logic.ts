@@ -533,11 +533,11 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
                    termContainsHole(current.arg, holeId, visited, depth + 1);
         case 'Lam':
             if (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
-            const freshVLam = Var(freshVarName("_occ_check_lam"), true); 
+            const freshVLam = Var(current.paramName, true, "occurs_check"); 
             return termContainsHole(current.body(freshVLam), holeId, new Set(visited) , depth + 1);
         case 'Pi':
             if (termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
-            const freshVPi = Var(freshVarName("_occ_check_pi"), true); 
+            const freshVPi = Var(current.paramName, true, "occurs_check"); 
             return termContainsHole(current.bodyType(freshVPi), holeId, new Set(visited) , depth + 1);
         case 'ObjTerm': return termContainsHole(current.cat, holeId, visited, depth + 1);
         case 'HomTerm':

@@ -117,7 +117,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
         if (gdef) return { elaboratedTerm: current, type: gdef.type };
 
         if (!localBinding) {
-            if ((current.name.startsWith("_occ_check_") || current.name.startsWith("v_param_check"))) { // Check for occ_check or similar placeholders
+            // if ( (current.name.startsWith("_occ_check_") || current.name.startsWith("v_param_check"))) { // Check for occ_check or similar placeholders
+            if (current.origin === "occurs_check") { // Check for occ_check or similar placeholders
                 // These are special placeholders from termContainsHole or similar operations,
                 // not meant for full inference that requires a context-defined type.
                 // Give them a fresh hole type to avoid "Unbound variable" and allow structural checks to proceed.

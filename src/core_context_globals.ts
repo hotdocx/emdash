@@ -128,7 +128,10 @@ export function addRewriteRule(
         elaboratedRhs = getTermRef(rhsToElaborate);
 
         userRewriteRules.push({ name: ruleName, patternVars: userPatternVars, elaboratedLhs, elaboratedRhs });
-        console.log(`Rule '${ruleName}' added and elaborated successfully.`);
+        console.log(`Rule '${ruleName}' added and elaborated successfully.`,
+            `elaboratedLhs: ${printTerm(elaboratedLhs)}`,
+            `elaboratedRhs: ${printTerm(elaboratedRhs)}`
+        );
 
     } catch (e) {
         console.error(`Failed to add rewrite rule '${ruleName}': ${(e as Error).message}. Stack: ${(e as Error).stack}`);
