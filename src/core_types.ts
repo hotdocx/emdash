@@ -57,7 +57,10 @@ export type BaseTerm =
         catB_IMPLICIT?: Term,
         functorF_IMPLICIT?: Term,
         functorG_IMPLICIT?: Term
-      };
+      }
+    // Emdash Phase 3: Yoneda and Set Category Primitives
+    | { tag: 'HomCovFunctorIdentity', domainCat: Term, objW_InDomainCat: Term }
+    ;
 
 export type Term = BaseTerm;
 export type PatternVarDecl = string; // e.g., "$x", "$myVar"
@@ -112,6 +115,9 @@ export const NatTransTypeTerm = (catA: Term, catB: Term, functorF: Term, functor
 
 export const NatTransComponentTerm = (transformation: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, functorF_IMPLICIT?: Term, functorG_IMPLICIT?: Term): Term & { tag: 'NatTransComponentTerm' } =>
     ({ tag: 'NatTransComponentTerm', transformation, objectX, catA_IMPLICIT, catB_IMPLICIT, functorF_IMPLICIT, functorG_IMPLICIT });
+
+export const HomCovFunctorIdentity = (domainCat: Term, objW_InDomainCat: Term): Term & { tag: 'HomCovFunctorIdentity' } =>
+    ({ tag: 'HomCovFunctorIdentity', domainCat, objW_InDomainCat });
 
 export type Binding = {
     name: string;

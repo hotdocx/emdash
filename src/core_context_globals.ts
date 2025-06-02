@@ -1,4 +1,5 @@
-import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, NatTransTypeTerm } from './core_types';
+import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, NatTransTypeTerm, FMap0Term, FMap1Term, NatTransComponentTerm } from './core_types';
+import * as CoreTypes from './core_types'; // For HomCovFunctorIdentity in rule definition
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
@@ -458,6 +459,92 @@ export function setupPhase1GlobalsAndRules() {
     );
 }
 
+export function setupCatTheoryPrimitives(ctx: Context) {
+    // Define Set Category
+    defineGlobal("Set", CatTerm(), CatTerm(), true, true, true, false); 
+
+    // Define hom_cov Functor
+    const setTermVal = getTermRef(globalDefs.get("Set")!.value!);
+    defineGlobal("hom_cov",
+        Pi("A", Icit.Impl, CatTerm(), A_cat_val =>
+            Pi("W", Icit.Expl, ObjTerm(A_cat_val), _W_obj_val =>
+                ObjTerm(FunctorCategoryTerm(A_cat_val, setTermVal))
+            )
+        ),
+        Lam("A_cat_impl_arg", Icit.Impl, CatTerm(), A_cat_term =>
+            Lam("W_obj_expl_arg", Icit.Expl, ObjTerm(A_cat_term), W_obj_term =>
+                CoreTypes.HomCovFunctorIdentity(A_cat_term, W_obj_term)
+            )
+        ),
+        true, true, false, true 
+    );
+
+    // Add "naturality_direct_hom_cov_fapp1_tapp" rewrite rule
+    const pva = (name: string) => Var(name, false); 
+    const catSet = getTermRef(globalDefs.get("Set")!.value!);
+
+    const userPatternVars_NatDirect = [
+        "$A_cat", "$W_obj", "$F_func", "$G_func",
+        "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
+    ];
+
+    // LHS: fapp1 (hom_cov $A_cat $W_obj) (fapp1 $G_func $a_morph) (tapp $eps_transf $X_obj)
+    // Corresponds to: (hom_cov A W) (G a) (eps X)
+    // Which is: ((hom_cov A W) on (G a)) applied to (eps X)
+    // This should be App( App(fmap1_outer, fmap1_inner), tapp_arg )
+    // fmap1_outer: FMap1Term(functor=HomCovFunctorIdentity($A_cat, $W_obj), morphism_a=fmap1_inner, implicits...)
+    // fmap1_inner: FMap1Term(functor=$G_func, morphism_a=$a_morph, implicits...)
+    // tapp_arg: NatTransComponentTerm(transformation=$eps_transf, objectX=$X_obj, implicits...)
+
+    const LHS_NatDirect = App(
+        FMap1Term(
+            CoreTypes.HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
+            FMap1Term(
+                pva("$G_func"), pva("$a_morph"),
+                pva("$A_cat"), catSet, pva("$X_obj"), pva("$X_prime_obj")
+            ),
+            pva("$A_cat"), catSet, 
+            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), catSet), // FMap0 G X
+            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), catSet) // FMap0 G X'
+        ),
+        NatTransComponentTerm(
+            pva("$eps_transf"), pva("$X_obj"),
+            pva("$A_cat"), catSet, pva("$F_func"), pva("$G_func")
+        ),
+        Icit.Expl 
+    );
+
+    // RHS: fapp1 (hom_cov $A_cat $W_obj) (fapp1 $F_func $a_morph) (tapp $eps_transf $X_prime_obj)
+    // Corresponds to: (hom_cov A W) (F a) (eps X')
+    const RHS_NatDirect = App(
+        FMap1Term(
+            CoreTypes.HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
+            FMap1Term(
+                pva("$F_func"), pva("$a_morph"), 
+                pva("$A_cat"), catSet, pva("$X_obj"), pva("$X_prime_obj")
+            ),
+            pva("$A_cat"), catSet,
+            FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), catSet), // FMap0 F X
+            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), catSet) // FMap0 F X'
+        ),
+        NatTransComponentTerm(
+            pva("$eps_transf"), pva("$X_prime_obj"), 
+            pva("$A_cat"), catSet, pva("$F_func"), pva("$G_func")
+        ),
+        Icit.Expl
+    );
+
+    addRewriteRule(
+        "naturality_direct_hom_cov_fapp1_tapp",
+        userPatternVars_NatDirect,
+        LHS_NatDirect,
+        RHS_NatDirect,
+        ctx 
+    );
+}
+
 export function resetMyLambdaPi_Emdash() { 
     resetMyLambdaPi();
+    setupPhase1GlobalsAndRules(); 
+    setupCatTheoryPrimitives(emptyCtx);
 } 
