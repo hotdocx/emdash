@@ -52,7 +52,7 @@ The Emdash system is structured around a core set of data types representing ter
 *   **`Term`**: The fundamental data type for all expressions. It's a discriminated union (`BaseTerm`) encompassing:
     *   **Standard TT constructs (with `Icit` integration):**
         *   `Type`: The sort of types.
-        *   `Var(name: string)`: Variables.
+        *   `Var(name: string, isLambdaBound?: boolean)`: Variables. Now includes an optional flag to mark if the variable was introduced when opening a `Lam` or `Pi` (i.e., it's a binder).
         *   `Lam(name: string, icit: Icit, body: (v: Term) => Term, paramType?: Term, _isAnnotated?: boolean)`: Lambda abstraction, where `icit` marks the binder's implicitness.
         *   `App(func: Term, arg: Term, icit: Icit)`: Application, where `icit` marks the argument's implicitness (e.g., `f {implicit_arg}` vs. `f explicit_arg`).
         *   `Pi(name: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term)`: Dependent function type, where `icit` marks the binder's implicitness.
@@ -130,14 +130,18 @@ This is significantly enhanced to support the new implicit argument system.
 #### 2.2.3 Unification and Constraint Solving (`unify`, `solveConstraints`)
 
 *   **`unify(t1: Term, t2: Term, ctx: Context)`:**
-    *   **Injectivity for Globals:** When unifying `App(f1, arg1, icit1)` and `App(f2, arg2, icit2)`:
-        1.  `whnf(f1)` to `rf1`, `whnf(f2)` to `rf2`.
-        2.  If `rf1` is `Var(name1)`, `rf2` is `Var(name2)`, and `name1 === name2`:
-            *   Retrieve `globalDef` for `name1`.
-            *   If `globalDef.isInjective === true`: Recursively unify `arg1` with `arg2` (and `f1` with `f2`, `icit1` with `icit2`).
-            *   Else (not injective, or heads are not identical injective vars): The terms `App(...)` do not decompose automatically. Unification relies on `areEqual` or user unification rules.
-    *   Hole unification (`unifyHole`) and structural unification for other terms (including `Icit` comparison for `Lam`, `App`, `Pi`) proceed with refinements.
-*   **`solveConstraints`:** Iteratively processes constraints, using `unify`.
+    *   **Refined Application Unification (`App(f1, arg1) =?= App(f2, arg2)`):**
+        1.  The function parts `f1.func` and `f2.func` are first unified (after WHNF).
+        2.  If they unify successfully to an identical common function head:
+            *   This common head is then checked for "actual injectivity" using a helper `isActuallyInjectiveHead`. A head is "actually injective" if it's:
+                *   A `Var` that is marked `isLambdaBound: true` (i.e., it's a variable introduced by a `Lam` or `Pi` binder, which acts as a placeholder).
+                *   A `Var` corresponding to a global definition explicitly marked `isInjective: true`.
+            *   If the common function head **is** "actually injective", unification proceeds to unify the arguments `arg1` and `arg2` (after WHNF).
+            *   If the common function head **is not** "actually injective" (e.g., it's a global constant not marked injective, or a complex term), the arguments `arg1` and `arg2` are **not** automatically unified. In this case, the `App` unification only succeeds if the arguments are already definitionally equal (`areEqual`). Otherwise, the unification of the `App` terms typically becomes "stuck" (returns `Progress`), preventing unsound eager unification of arguments for non-injective functions.
+        3.  If the function parts fail to unify, the overall `App` unification fails (or tries user-defined unification rules).
+    *   **Hole Unification (`unifyHole`):** If one side is a hole, it's unified with the other side, subject to an occurs check.
+    *   **Structural Unification:** For other term types (including `Lam`, `Pi` with `Icit` comparison, and injective kernel constructors), unification proceeds by structurally decomposing and unifying components.
+*   **`solveConstraints`:** Iteratively processes constraints, using the refined `unify` logic. This loop is responsible for ensuring global consistency. If an eager assignment (now more cautious) leads to a contradiction elsewhere, `solveConstraints` should fail.
 
 #### 2.2.4 Pattern Matching and Rewriting (`elaboratePattern`, `matchPattern`, `applySubst`)
 
@@ -184,7 +188,7 @@ The introduction of systematic implicit argument handling and pattern elaboratio
 *   **Expressiveness:** Users can define functions and types with implicit arguments in a standard way. Rewrite rules can be written more naturally.
 *   **Consistency:** Term elaboration and pattern elaboration follow similar principles. Kernel implicits are handled uniformly.
 *   **Reduced Verbosity:** Implicit arguments significantly cut down on the boilerplate in writing terms.
-*   **Soundness:** Injectivity controls and more careful pattern matching contribute to a more sound unification and rewriting process.
+*   **Soundness:** The `isInjective` flag on global definitions, the `isLambdaBound` flag on `Var` terms, and the refined unification logic for applications provide finer-grained control. This prevents unsound decomposition of applications under non-injective heads or premature commitment of metavariables, leading to a more robust and sound unification and rewriting process.
 
 ## 4. Emdash Type Theory Specification (with Implicits)
 
@@ -196,8 +200,8 @@ This section details the type theory implemented in Emdash, now incorporating ex
     *   A single sort `Type`. Axiom: `Type : Type`.
 *   **Terms:**
     1.  **`Type`**: The sort of all types.
-    2.  **`Var(name: string)`**: Variables.
-    3.  **`Lam(paramName: string, icit: Icit, body: (v: Term) => Term, paramType?: Term)`**: Lambda abstraction.
+    2.  **`Var(name: string, isLambdaBound?: boolean)`**: Variables. Now includes an optional flag to mark if the variable was introduced when opening a `Lam` or `Pi` (i.e., it's a binder).
+    3.  **`Lam(name: string, icit: Icit, body: (v: Term) => Term, paramType?: Term, _isAnnotated?: boolean)`:** Lambda abstraction.
         *   Introduction (Explicit Binder): `Γ, x:A ⊢ t : B(x)  =>  Γ ⊢ (λ(x:A). t) : (Π(x:A). B(x))`
         *   Introduction (Implicit Binder): `Γ, x:A ⊢ t : B(x)  =>  Γ ⊢ (λ{x:A}. t) : (Π{x:A}. B(x))`
             (Type annotation `A` can be a hole `?A` during inference).
@@ -272,6 +276,15 @@ The development of Emdash's robust implicit argument system and pattern elaborat
     *   Added the `isInjective` flag for globals to control application decomposition in `unify`.
     *   Updated `matchPattern` to compare `icit` tags and to expect already elaborated patterns.
 6.  **Implementation and Testing:** This involved substantial changes across `core_types.ts`, `core_elaboration.ts`, and `core_logic.ts`, followed by extensive testing to ensure correctness and handle edge cases. The main challenge was ensuring the interactions between HOAS, implicit insertion, pattern variable scope, and the non-normalizing elaboration mode were all correct.
+7.  **Addressing Unification Soundness (Key Refinement):**
+    *   Identified a potential unsoundness where unifying `App(f, X) =?= App(f, Y)` could eagerly commit `X =?= Y` even if `f` was not injective, potentially leading to globally incorrect solutions.
+    *   **Solution:**
+        *   Introduced `isLambdaBound?: boolean` to `Var` terms to distinguish lambda/pi-bound variables (which act as placeholders and are inherently injective in their role) from other variables.
+        *   Refined the `unify` logic for `App` terms:
+            *   Unify function parts first.
+            *   If function parts are equal, check if the common function head is "actually injective" (lambda-bound or a globally declared injective symbol via `isActuallyInjectiveHead` helper).
+            *   Only if the head is "actually injective" are arguments unified. Otherwise, arguments must already be `areEqual` for the `App` unification to succeed without needing further argument unification.
+    *   This change significantly improves the soundness of unification by preventing over-eager commitments for non-injective applications.
 
 This iterative process of design, insight, and refinement led to the current, more robust system.
 
@@ -347,5 +360,5 @@ The new implicit argument handling and pattern elaboration significantly de-risk
 
 Emdash has undergone a significant enhancement with the introduction of a comprehensive system for implicit arguments, robust pattern elaboration, uniform kernel implicit handling, and controlled injectivity in unification. These features address key areas of expressiveness, correctness, and user convenience, moving Emdash closer to its goal of being a practical tool for computational synthetic category theory.
 
-The design choices, particularly reusing term elaboration logic for patterns and standardizing kernel implicits, aim for consistency and maintainability. While adding complexity, these features are foundational for tackling more advanced categorical constructs in Phase 2 and beyond. The development journey underscores the iterative nature of type system design, where addressing core logical requirements (like proper implicit handling) unlocks further potential. Emdash is now better equipped to support the concise and powerful expression of categorical ideas.
+The design choices, particularly reusing term elaboration logic for patterns and standardizing kernel implicits, aim for consistency and maintainability. The latest refinements to unification, distinguishing lambda/pi-bound variables (via `isLambdaBound`) and carefully handling application terms based on the declared or inherent injectivity of their function heads, significantly enhance the soundness of the system. While adding complexity, these features are foundational for tackling more advanced categorical constructs in Phase 2 and beyond. The development journey underscores the iterative nature of type system design, where addressing core logical requirements (like proper implicit handling and sound unification) unlocks further potential. Emdash is now better equipped to support the concise and powerful expression of categorical ideas.
 ```
