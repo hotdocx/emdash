@@ -39,7 +39,7 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             }
             if (!paramTypeOk) return false;
             const freshVName = rt1.paramName; 
-            const freshV = Var(freshVName);
+            const freshV = Var(freshVName, true);
             const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_structEq_unannot_lam_param");
             const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for structural check
             return areStructurallyEqualNoWhnf(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
@@ -48,7 +48,7 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areStructurallyEqualNoWhnf(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshVName = rt1.paramName; 
-            const freshV = Var(freshVName);
+            const freshV = Var(freshVName, true);
             const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition
             return areStructurallyEqualNoWhnf(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
@@ -417,7 +417,7 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 // The body `finalNormFunc.body(Var(finalNormFunc.paramName))` will instantiate the body.
                 // `whnf` (called by `normalize`) on `Var(finalNormFunc.paramName)` inside this `extendedCtxForBody`
                 // will then pick up `normArg` as its definition.
-                return normalize(finalNormFunc.body(Var(finalNormFunc.paramName)), extendedCtxForBody, stackDepth + 1);
+                return normalize(finalNormFunc.body(Var(finalNormFunc.paramName, true)), extendedCtxForBody, stackDepth + 1);
             }
             // console.log('NORMALIZE>>', normFunc, normArg, current.icit);
             return App(normFunc, normArg, current.icit); 
@@ -469,7 +469,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             if(!paramTypeOk) return false;
 
             const freshVName = rt1.paramName; 
-            const freshV = Var(freshVName);
+            const freshV = Var(freshVName, true);
             const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_areEqual_unannot_lam_param");
             const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for freshV
             return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
@@ -478,7 +478,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             const pi2 = rt2 as Term & {tag:'Pi'};
             if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
             const freshVName = rt1.paramName; 
-            const freshV = Var(freshVName);
+            const freshV = Var(freshVName, true);
             const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition for freshV
             return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
         }
@@ -615,11 +615,11 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
                    termContainsHole(current.arg, holeId, visited, depth + 1);
         case 'Lam':
             if (current.paramType && termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
-            const freshVLam = Var(freshVarName("_occ_check_lam")); 
+            const freshVLam = Var(freshVarName("_occ_check_lam"), true); 
             return termContainsHole(current.body(freshVLam), holeId, new Set(visited) , depth + 1);
         case 'Pi':
             if (termContainsHole(current.paramType, holeId, visited, depth + 1)) return true;
-            const freshVPi = Var(freshVarName("_occ_check_pi")); 
+            const freshVPi = Var(freshVarName("_occ_check_pi"), true); 
             return termContainsHole(current.bodyType(freshVPi), holeId, new Set(visited) , depth + 1);
         case 'ObjTerm': return termContainsHole(current.cat, holeId, visited, depth + 1);
         case 'HomTerm':
@@ -987,7 +987,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                 if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             }
             
-            const freshV = Var(freshVarName(lam1.paramName)); 
+            const freshV = Var(freshVarName(lam1.paramName), true); 
             const CtxParamType = (lam1._isAnnotated && lam1.paramType) ? getTermRef(lam1.paramType) : Hole(freshHoleName() + "_unif_lam_ctx");
             const extendedCtx = extendCtx(ctx, freshV.name, CtxParamType, lam1.icit); 
             const bodyStatus = unify(lam1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
@@ -1004,7 +1004,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             const paramTypeStatus = unify(pi1.paramType, pi2.paramType, ctx, depth + 1);
             if(paramTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             
-            const freshV = Var(freshVarName(pi1.paramName)); 
+            const freshV = Var(freshVarName(pi1.paramName), true); 
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(pi1.paramType), pi1.icit); 
             const bodyTypeStatus = unify(pi1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
             
@@ -1361,4 +1361,30 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
 
     solveConstraintsControl.depth--;
     return allSolved; 
+}
+
+function isActuallyInjectiveHead(
+    funcHeadInput: Term, // The common, unified, (previously) whnf'd function head.
+    ctx: Context,
+    depth: number
+): boolean {
+    if (depth > MAX_STACK_DEPTH) throw new Error(`isActuallyInjectiveHead depth exceeded`);
+
+    let ultimateHead = getTermRef(funcHeadInput);
+    const visitedInLoop = new Set<Term>();
+
+    // Traverse down the spine of applications to find the ultimate Var head.
+    // Each step of the function part should be whnf'd to ensure we see through definitions.
+    while (ultimateHead.tag === 'App') {
+        if (visitedInLoop.has(ultimateHead)) return false; // Cycle detection
+        visitedInLoop.add(ultimateHead);
+        ultimateHead = getTermRef(whnf(ultimateHead.func, ctx, depth + 1));
+    }
+
+    if (ultimateHead.tag === 'Var') {
+        if (ultimateHead.isLambdaBound) return true;
+        const gdef = globalDefs.get(ultimateHead.name);
+        if (gdef && gdef.isInjective) return true;
+    }
+    return false;
 }

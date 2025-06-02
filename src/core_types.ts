@@ -2,7 +2,7 @@ export enum Icit { Impl, Expl }
 
 export type BaseTerm =
     | { tag: 'Type' }
-    | { tag: 'Var', name: string }
+    | { tag: 'Var', name: string, isLambdaBound?: boolean }
     | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'App', func: Term, arg: Term, icit: Icit }
     | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term }
@@ -63,7 +63,7 @@ export type Term = BaseTerm;
 export type PatternVarDecl = string; // e.g., "$x", "$myVar"
 
 export const Type = (): Term => ({ tag: 'Type' });
-export const Var = (name: string): Term & { tag: 'Var' } => ({ tag: 'Var', name });
+export const Var = (name: string, isLambdaBound: boolean = false): Term & { tag: 'Var' } => ({ tag: 'Var', name, isLambdaBound });
 
 export const Lam = (paramName: string, icit: Icit, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
     if (typeof paramTypeOrBody === 'function' && bodyOrNothing === undefined) { // Unannotated: Lam(name, icit, body)

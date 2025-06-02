@@ -231,7 +231,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 actualParamType,
                 (pi_body_argument_term: Term): Term => {
                     const body_infer_ctx = extendCtx(ctx, lamNode.paramName, actualParamType, lamNode.icit, pi_body_argument_term);
-                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName)); 
+                    const lambda_body_structure = lamNode.body(Var(lamNode.paramName, true)); 
                     
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, true);
                     
@@ -247,7 +247,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 getTermRef(actualParamType),
                 (v: Term) => {
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
-                    const bodyTermRaw = lamNode.body(Var(lamNode.paramName));
+                    const bodyTermRaw = lamNode.body(Var(lamNode.paramName, true));
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, true);
                     const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term;
@@ -269,11 +269,11 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const piNode = current;
             const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, isSubElaboration);
             const extendedCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
-            const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName));
+            const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName, true));
             const elaboratedBodyTypeResult = check(extendedCtx, bodyTypeInstance, Type(), stackDepth + 1, true); 
             const finalPi = Pi(piNode.paramName, piNode.icit, elaboratedParamType, (v: Term) => {
                 const bodyCtx = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit, v);
-                const piNodeBodyType = piNode.bodyType(Var(piNode.paramName))
+                const piNodeBodyType = piNode.bodyType(Var(piNode.paramName, true));
                 return check(bodyCtx, piNodeBodyType, Type(), stackDepth+1, true);
             });
             return { elaboratedTerm: finalPi, type: Type() };
@@ -500,7 +500,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         return Lam(lamNode.paramName, lamNode.icit, finalLamParamType,
             (v_arg: Term) => {
                 const extendedCtx = extendCtx(ctx, lamNode.paramName, finalLamParamType, lamNode.icit, v_arg);
-                const actualBodyTerm = lamNode.body(Var(lamNode.paramName));
+                const actualBodyTerm = lamNode.body(Var(lamNode.paramName, true));
                 const expectedBodyPiType = whnf(expectedPiNode.bodyType(v_arg), extendedCtx);
                 // Pass isSubElaboration = true for this internal check call
                 return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, true);
@@ -665,7 +665,7 @@ export function matchPattern(
                  if (!sType) return null;
                  tempSubst = sType;
             }
-            const freshV = Var(freshVarName(lamP.paramName)); 
+            const freshV = Var(freshVarName(lamP.paramName), true); 
             const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
             const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
              return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
@@ -674,7 +674,7 @@ export function matchPattern(
             const piP = rtPattern; const piT = rtTermToMatch as Term & {tag:'Pi'};
             const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
             if (!sType) return null;
-            const freshV = Var(freshVarName(piP.paramName));
+            const freshV = Var(freshVarName(piP.paramName), true);
             const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
             return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
         }
@@ -951,7 +951,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             const typeAnnotation = (current._isAnnotated && current.paramType)
                 ? ` : ${printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1)}`
                 : '';
-            const bodyTerm = current.body(Var(current.paramName)); 
+            const bodyTerm = current.body(Var(current.paramName, true)); 
             const binder = current.icit === Icit.Impl ? `{${paramDisplayName}${typeAnnotation}}` : `(${paramDisplayName}${typeAnnotation})`;
             return `(λ ${binder}. ${printTerm(bodyTerm, newBoundVars, stackDepth + 1)})`;
         }
@@ -965,7 +965,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             newBoundVars.set(current.paramName, paramDisplayName);
 
             const paramTypeStr = printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1);
-            const bodyTypeTerm = current.bodyType(Var(current.paramName)); 
+            const bodyTypeTerm = current.bodyType(Var(current.paramName, true)); 
             const binder = current.icit === Icit.Impl ? `{${paramDisplayName} : ${paramTypeStr}}` : `(${paramDisplayName} : ${paramTypeStr})`;
             return `(Π ${binder}. ${printTerm(bodyTypeTerm, newBoundVars, stackDepth + 1)})`;
         }
