@@ -10,8 +10,9 @@ import {
     resetHoleId,
     resetVarId,
     constraints,
-    cloneTerm
-} from './core_context_globals';
+    cloneTerm,
+    printTerm
+} from './core_state';
 import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH } from './core_logic';
 import { KERNEL_IMPLICIT_SPECS } from './core_kernel_metadata';
 
@@ -519,9 +520,9 @@ export function elaborate(
                 fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
             }
             console.error("Remaining constraints on failure during elaboration:");
-            constraints.forEach(c => {
-                 const c_t1_dbg = getTermRef(c.t1); const c_t2_dbg = getTermRef(c.t2);
-                 console.error(`  ${printTerm(c_t1_dbg)} ${areEqual(c_t1_dbg, c_t2_dbg, initialCtx,0) ? "===" : "=/="} ${printTerm(c_t2_dbg)} (origin: ${c.origin})`);
+            constraints.forEach(c_debug => {
+                 const c_t1_dbg = getTermRef(c_debug.t1); const c_t2_dbg = getTermRef(c_debug.t2);
+                 console.error(`  ${printTerm(c_t1_dbg)} ${areEqual(c_t1_dbg, c_t2_dbg, initialCtx,0) ? "===" : "=/="} ${printTerm(c_t2_dbg)} (origin: ${c_debug.origin})`);
             });
             throw new Error(`Type error: Could not solve constraints. Approx failing: ${fcMsg}`);
         }
@@ -813,92 +814,5 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`applySubst: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
-    }
-}
-
-export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Map(), stackDepth = 0): string {
-    if (stackDepth > MAX_STACK_DEPTH * 2) return "<print_depth_exceeded>";
-    if (!term) return "<null_term>";
-
-    const current = getTermRef(term);
-
-    const getUniqueName = (baseName: string): string => {
-        if (!boundVarsMap.has(baseName) && !globalDefs.has(baseName) && !Array.from(boundVarsMap.values()).includes(baseName)) {
-            return baseName;
-        }
-        let uniqueName = baseName;
-        let suffix = 1;
-        while (globalDefs.has(uniqueName) || Array.from(boundVarsMap.values()).includes(uniqueName) || boundVarsMap.has(uniqueName) ) {
-            uniqueName = `${baseName}_${suffix++}`;
-            if (suffix > 100) return `${baseName}_too_many`; 
-        }
-        return uniqueName;
-    };
-
-    switch (current.tag) {
-        case 'Type': return 'Type';
-        case 'Var': return boundVarsMap.get(current.name) || current.name;
-        case 'Hole': {
-            let typeInfo = "";
-            if (current.elaboratedType && getTermRef(current.elaboratedType) !== current) { 
-                const elabTypeRef = getTermRef(current.elaboratedType);
-                const isSelfRefPrint = (elabTypeRef.tag === 'Hole' && elabTypeRef.id === current.id && elabTypeRef.elaboratedType === current.elaboratedType);
-                const isTypeForType = (elabTypeRef.tag === 'Type' && term.tag === 'Type'); 
-                
-                if (!isSelfRefPrint && !isTypeForType) {
-                    const elabTypePrint = printTerm(elabTypeRef, new Map(boundVarsMap), stackDepth + 1);
-                     if(!elabTypePrint.startsWith("?h") || elabTypePrint.length > current.id.length + 3 ) { 
-                        typeInfo = `(:${elabTypePrint})`;
-                    }
-                }
-            }
-            return (current.id === '_' ? '_' : (boundVarsMap.get(current.id) || current.id)) + typeInfo;
-        }
-        case 'Lam': {
-            const paramDisplayName = getUniqueName(current.paramName);
-            const newBoundVars = new Map(boundVarsMap);
-            newBoundVars.set(current.paramName, paramDisplayName);
-
-            const typeAnnotation = (current._isAnnotated && current.paramType)
-                ? ` : ${printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1)}`
-                : '';
-            const bodyTerm = current.body(Var(current.paramName, true)); 
-            const binder = current.icit === Icit.Impl ? `{${paramDisplayName}${typeAnnotation}}` : `(${paramDisplayName}${typeAnnotation})`;
-            return `(λ ${binder}. ${printTerm(bodyTerm, newBoundVars, stackDepth + 1)})`;
-        }
-        case 'App':
-            const funcStr = printTerm(current.func, new Map(boundVarsMap), stackDepth + 1);
-            const argStr = printTerm(current.arg, new Map(boundVarsMap), stackDepth + 1);
-            return current.icit === Icit.Impl ? `(${funcStr} {${argStr}})` : `(${funcStr} ${argStr})`;
-        case 'Pi': {
-            const paramDisplayName = getUniqueName(current.paramName);
-            const newBoundVars = new Map(boundVarsMap);
-            newBoundVars.set(current.paramName, paramDisplayName);
-
-            const paramTypeStr = printTerm(current.paramType, new Map(boundVarsMap), stackDepth + 1);
-            const bodyTypeTerm = current.bodyType(Var(current.paramName, true)); 
-            const binder = current.icit === Icit.Impl ? `{${paramDisplayName} : ${paramTypeStr}}` : `(${paramDisplayName} : ${paramTypeStr})`;
-            return `(Π ${binder}. ${printTerm(bodyTypeTerm, newBoundVars, stackDepth + 1)})`;
-        }
-        case 'CatTerm': return 'Cat';
-        case 'ObjTerm': return `(Obj ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'HomTerm':
-            return `(Hom ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.dom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.cod, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'FunctorCategoryTerm':
-            return `(Functor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'FMap0Term':
-            return `(fmap0 ${printTerm(current.functor, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'FMap1Term':
-            return `(fmap1 ${printTerm(current.functor, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_a, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'NatTransTypeTerm':
-            return `(Transf ${printTerm(current.catA, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.catB, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorG, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'NatTransComponentTerm':
-            return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'HomCovFunctorIdentity':
-            return `(HomCovFunctor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objW_InDomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'SetTerm': return 'Set';
-        default:
-            const exhaustiveCheck: never = current;
-            throw new Error(`printTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
     }
 }

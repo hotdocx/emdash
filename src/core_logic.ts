@@ -1,6 +1,10 @@
 import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm } from './core_types';
-import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose, solveConstraintsControl } from './core_context_globals';
-import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
+import {
+    getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx,
+    isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName,
+    solveConstraintsControl, printTerm // Added printTerm, removed getDebugVerbose
+} from './core_state'; // Import from the new state file
+import { matchPattern, applySubst, isPatternVarName } from './core_elaboration'; // For WHNF userRewriteRules and Unification rules
 
 export const MAX_WHNF_ITERATIONS = 10000;
 export const MAX_STACK_DEPTH = 20000;

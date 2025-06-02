@@ -1,271 +1,124 @@
-import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, Binding, FunctorCategoryTerm, NatTransTypeTerm, FMap0Term, FMap1Term, NatTransComponentTerm, SetTerm } from './core_types';
-import * as CoreTypes from './core_types'; // For HomCovFunctorIdentity in rule definition
-import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
-import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
+import {
+    Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Icit,
+    Type, Var, Lam, App, Pi, Hole,
+    CatTerm, ObjTerm, HomTerm,
+    FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, SetTerm, HomCovFunctorIdentity
+} from './core_types';
+import {
+    globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
+    freshHoleName, freshVarName, resetVarId, resetHoleId, setDebugVerbose,
+    cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, solveConstraintsControl, // Added printTerm, solveConstraintsControl
+    lookupCtx
+} from './core_state'; // Import from the new state file
+import { whnf, solveConstraints, areEqual } from './core_logic'; // For defineGlobal, addRewriteRule
+import { infer, check } from './core_elaboration'; // For defineGlobal, addRewriteRule
 
-export let nextVarId = 0;
-export const freshVarName = (hint: string = 'v'): string => `${hint}${nextVarId++}`; ////`$$fresh_${hint}${nextVarId++}`;
-
-export let nextHoleId = 0;
-export const freshHoleName = (): string => `?h${nextHoleId++}`;
-
-export const resetVarId = () => { nextVarId = 0; };
-export const resetHoleId = () => { nextHoleId = 0; };
-
-// Helper for a fresh, unnamed hole.
-export const FH = (): Term & { tag: 'Hole' } => Hole(freshHoleName());
-
-export let globalDefs: Map<string, GlobalDef> = new Map();
+// Re-export functions that depend on imports from core_logic and core_elaboration
 
 export function defineGlobal(name: string, type: Term, value?: Term, isConstantSymbol: boolean = false, isInjective?: boolean, isTypeNameLike?: boolean, toElaborateType: boolean = false) {
-    // TODO: [DONE] for performance reasons, there should be a switch to register symbol 
-    // by either elaborating the type or not-elaborating a manually-already-elaborated type
-
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
         throw new Error(`Constant symbol ${name} cannot have a definition/value.`);
     }
 
     const originalConstraintsBackup = [...constraints];
-    constraints.length = 0; // Isolate constraint solving for this global definition
+    constraints.length = 0;
 
-    // Build a context from already defined globals for elaboration
     let elabCtx: Context = emptyCtx;
-    // Add existing globals to the context in order of definition (Map iteration order)
-    // This is a simplification; a more robust approach might involve proper dependency analysis
-    // or disallowing forward references during the definition of a global's type/value.
     globalDefs.forEach(gDef => {
         elabCtx = extendCtx(elabCtx, gDef.name, gDef.type, Icit.Expl, gDef.value);
     });
-
 
     let elaboratedType: Term;
     let elaboratedValue: Term | undefined = undefined;
 
     try {
-        // TODO: for performance reasons, there should be a switch to register symbol 
-        // by either elaborating the type or not-elaborating a manually-already-elaborated type
-        // TODO: can clone a flat-copy/print after elaboration 
-        // (to remove the pending-reevaluated infer/check recursive calls inside lam/pi bodies) ?  
-
-        // 1. Elaborate the declared type itself. It must be a valid type (i.e., have type Type).
-        // const typeForType = cloneTerm(type); // Clone to avoid modifying the original input
-        // const inferredKind = infer(elabCtx, typeForType, 0); // Infer the kind of the provided type
-        // if (!solveConstraints(elabCtx)) {
-        //     const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
-        //     throw new Error(`Global \'${name}\': Could not solve constraints while inferring the kind of the declared type \'${printTerm(type)}\'. Unsolved: ${remaining}`);
-        // }
-        // // The inferred kind must be Type
-        // if (!areEqual(getTermRef(inferredKind.type), Type(), elabCtx)) {
-        //     throw new Error(`Global \'${name}\': Declared type \'${printTerm(type)}\' is not a valid type. Expected kind Type, but got kind \'${printTerm(getTermRef(inferredKind.type))}\'.`);
-        // }
-        // //TODO: ??APPARENTLY-SOURCE performance problem WITH COMP_HS TEST EXAMPLE?? when using inferredKind.elaboratedTerm instead of typeForType
-        // elaboratedType = whnf(getTermRef(typeForType), elabCtx); //whnf(getTermRef(typeForType), elabCtx); // Store the elaborated (and normalized) type
-
-        //TODO: should use elaborated expectedType instead of expectedType. DONE?
-        // The elaborated type version has performance problems (with COMP_HS test example, with implicit arguments)
-        elaboratedType = check(elabCtx, type, Type());  
+        elaboratedType = check(elabCtx, type, Type());
         elaboratedType = toElaborateType ? whnf(getTermRef(elaboratedType), elabCtx) : type;
 
-
-        // 2. If a value is provided, check it against the elaborated declared type.
         if (value !== undefined) {
-            const valueToCheck = cloneTerm(value); // Clone to avoid modifying original
-            // Check the value against the elaboratedType in the current elabCtx
-            constraints.length = 0; // Reset constraints specifically for value checking
-            const checkedValueResult = check(elabCtx, valueToCheck, elaboratedType, 0); // Modifies valueToCheck
+            const valueToCheck = cloneTerm(value);
+            constraints.length = 0;
+            const checkedValueResult = check(elabCtx, valueToCheck, elaboratedType, 0);
 
             if (!solveConstraints(elabCtx)) {
                 const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
-                throw new Error(`Global \'${name}\': Value \'${printTerm(value)}\' does not type check against declared type \'${printTerm(elaboratedType)}\'. Unsolved constraints: ${remaining}`);
+                throw new Error(`Global '${name}': Value '${printTerm(value)}' does not type check against declared type '${printTerm(elaboratedType)}'. Unsolved constraints: ${remaining}`);
             }
-            // Store the fully elaborated term
             elaboratedValue = getTermRef(checkedValueResult);
         }
         
         console.log('defineGlobal> ', { name: name + (isConstantSymbol ? ' (constant symbol)' : '')
             + (isInjective ? ' (injective)' : ''),
-            type: printTerm(elaboratedType), value: printTerm(elaboratedValue) });
+            type: printTerm(elaboratedType), value: elaboratedValue ? printTerm(elaboratedValue) : 'undefined' });
 
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
-        // consoleLog(`Global \'${name}\' defined and elaborated successfully.`);
 
     } catch (e) {
         const error = e as Error;
-        console.error(`Failed to define global \'${name}\': ${error.message}. Stack: ${error.stack}`);
-        // Restore constraints and rethrow to halt further execution if a global fails
+        console.error(`Failed to define global '${name}': ${error.message}. Stack: ${error.stack}`);
         constraints.splice(0, constraints.length, ...originalConstraintsBackup);
-        throw e; // Rethrow the error
+        throw e;
     } finally {
-        constraints.splice(0, constraints.length, ...originalConstraintsBackup); // Restore global constraints
+        constraints.splice(0, constraints.length, ...originalConstraintsBackup);
     }
 }
-
-export let rawUserRewriteRules: RewriteRule[] = []; // Stores raw rules before elaboration
-export let userRewriteRules: StoredRewriteRule[] = []; // Stores elaborated rules
-
-// Helper for deep cloning
-export function cloneTerm(term: Term, clonedObjects: Map<Term, Term> = new Map()): Term {
-    return term;
-    // if (clonedObjects.has(term)) {
-    //     return clonedObjects.get(term)!;
-    // }
-
-    // let result: Term;
-
-    // switch (term.tag) {
-    //     case 'Type': result = Type(); break;
-    //     case 'CatTerm': result = CatTerm(); break;
-    //     case 'Var': result = Var(term.name); break;
-    //     case 'Hole':
-    //         const newHole = Hole(term.id);
-    //         clonedObjects.set(term, newHole); // Add to map *before* recursive calls
-    //         if (term.ref) {
-    //             (newHole as Term & { tag: 'Hole' }).ref = cloneTerm(term.ref, clonedObjects);
-    //         }
-    //         if (term.elaboratedType) {
-    //             (newHole as Term & { tag: 'Hole' }).elaboratedType = cloneTerm(term.elaboratedType, clonedObjects);
-    //         }
-    //         result = newHole;
-    //         break;
-    //     case 'App':
-    //         result = App(
-    //             cloneTerm(term.func, clonedObjects),
-    //             cloneTerm(term.arg, clonedObjects),
-    //             term.icit
-    //         );
-    //         break;
-    //     case 'Lam': {
-    //         const clonedParamType = term.paramType ? cloneTerm(term.paramType, clonedObjects) : undefined;
-    //         const originalBodyFn = term.body;
-    //         const newClonedBodyFn = (v_bound: Term): Term => {
-    //             const originalBodyInstance = originalBodyFn(v_bound);
-    //             return cloneTerm(originalBodyInstance, clonedObjects);
-    //         };
-    //         // Direct construction for robustness, avoiding smart constructor overload issues
-    //         result = {
-    //             tag: 'Lam',
-    //             paramName: term.paramName,
-    //             icit: term.icit,
-    //             paramType: clonedParamType,
-    //             body: newClonedBodyFn,
-    //             _isAnnotated: term._isAnnotated
-    //         };
-    //         break;
-    //     }
-    //     case 'Pi': {
-    //         const clonedParamType = cloneTerm(term.paramType, clonedObjects);
-    //         const originalBodyTypeFn = term.bodyType;
-    //         const newClonedBodyTypeFn = (v_bound: Term): Term => {
-    //             const originalBodyTypeInstance = originalBodyTypeFn(v_bound);
-    //             return cloneTerm(originalBodyTypeInstance, clonedObjects);
-    //         };
-    //         result = Pi(term.paramName, term.icit, clonedParamType, newClonedBodyTypeFn);
-    //         break;
-    //     }
-    //     case 'ObjTerm': result = ObjTerm(cloneTerm(term.cat, clonedObjects)); break;
-    //     case 'HomTerm':
-    //         result = HomTerm(
-    //             cloneTerm(term.cat, clonedObjects),
-    //             cloneTerm(term.dom, clonedObjects),
-    //             cloneTerm(term.cod, clonedObjects)
-    //         ); break;
-    //     case 'MkCat_':
-    //         result = MkCat_(
-    //             cloneTerm(term.objRepresentation, clonedObjects),
-    //             cloneTerm(term.homRepresentation, clonedObjects),
-    //             cloneTerm(term.composeImplementation, clonedObjects)
-    //         ); break;
-    //     case 'IdentityMorph':
-    //         result = IdentityMorph(
-    //             cloneTerm(term.obj, clonedObjects),
-    //             term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined
-    //         ); break;
-    //     case 'ComposeMorph':
-    //         result = ComposeMorph(
-    //             cloneTerm(term.g, clonedObjects),
-    //             cloneTerm(term.f, clonedObjects),
-    //             term.cat_IMPLICIT ? cloneTerm(term.cat_IMPLICIT, clonedObjects) : undefined,
-    //             term.objX_IMPLICIT ? cloneTerm(term.objX_IMPLICIT, clonedObjects) : undefined,
-    //             term.objY_IMPLICIT ? cloneTerm(term.objY_IMPLICIT, clonedObjects) : undefined,
-    //             term.objZ_IMPLICIT ? cloneTerm(term.objZ_IMPLICIT, clonedObjects) : undefined
-    //         ); break;
-    //     default:
-    //         const exhaustiveCheck: never = term;
-    //         throw new Error(`cloneTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
-    // }
-    // if (term.tag !== 'Var' && term.tag !== 'Type' && term.tag !== 'CatTerm') { // Avoid storing simple immutable singletons
-    //      clonedObjects.set(term, result);
-    // }
-    // return result;
-}
-
 
 export function addRewriteRule(
     ruleName: string,
     userPatternVars: PatternVarDecl[],
     rawLhsTerm: Term,
     rawRhsTerm: Term,
-    ctx: Context // Global context for type lookups
+    ctx: Context
 ) {
-    rawUserRewriteRules.push({ name: ruleName, patternVars: userPatternVars, lhs: rawLhsTerm, rhs: rawRhsTerm}); // Store raw for reference
-
     const originalConstraintsBackup = [...constraints];
-    constraints.length = 0; // Isolate constraint solving for this rule
+    constraints.length = 0;
 
     let elaboratedLhs: Term;
     let elaboratedRhs: Term;
     const solvedPatVarTypes = new Map<PatternVarDecl, Term>();
 
     try {
-        // --- 1. Elaborate LHS ---
         const lhsToElaborate = cloneTerm(rawLhsTerm);
-        let lhsElabCtx: Context = [...ctx]; // Start with global context
+        let lhsElabCtx: Context = [...ctx];
         for (const pVarName of userPatternVars) {
             if (!pVarName.startsWith('$')) throw new Error(`Pattern variable ${pVarName} in rule '${ruleName}' must start with '$'.`);
-            // Pattern vars get a Hole type in their own elaboration context
-            lhsElabCtx = extendCtx(lhsElabCtx, pVarName, Hole(freshHoleName() + "_type_pvar_" + pVarName.substring(1)), Icit.Expl); // Icit doesn't matter much here
+            lhsElabCtx = extendCtx(lhsElabCtx, pVarName, Hole(freshHoleName() + "_type_pvar_" + pVarName.substring(1)), Icit.Expl);
         }
 
-        // `infer` will fill Holes in lhsToElaborate, making it the "elaboratedLhsPattern"
-        infer(lhsElabCtx, lhsToElaborate, 0); // Result type not immediately needed here, side-effects on lhsToElaborate
+        infer(lhsElabCtx, lhsToElaborate, 0);
 
         if (!solveConstraints(lhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
             throw new Error(`Rule '${ruleName}' LHS pattern (${printTerm(rawLhsTerm)}) is ill-typed or inconsistent. Unsolved constraints: ${remaining}`);
         }
-        elaboratedLhs = getTermRef(lhsToElaborate); // This is the structurally elaborated LHS
+        elaboratedLhs = getTermRef(lhsToElaborate);
 
-        // Extract solved types for pattern variables from lhsElabCtx
         for (const pVarName of userPatternVars) {
             const binding = lookupCtx(lhsElabCtx, pVarName);
             if (binding) {
-                 solvedPatVarTypes.set(pVarName, getTermRef(binding.type)); // Store the (potentially solved) Hole
-            } else { // Should not happen
+                 solvedPatVarTypes.set(pVarName, getTermRef(binding.type));
+            } else {
                  console.warn(`Pattern variable ${pVarName} not found in LHS elaboration context for rule '${ruleName}'.`);
                  solvedPatVarTypes.set(pVarName, Hole(freshHoleName() + "_type_pvar_unfound_" + pVarName.substring(1)));
             }
         }
 
-        // --- 2. Elaborate RHS & Type Check for Preservation ---
         const rhsToElaborate = cloneTerm(rawRhsTerm);
-        let rhsElabCtx: Context = [...ctx]; // Start with global context
+        let rhsElabCtx: Context = [...ctx];
         for (const pVarName of userPatternVars) {
             const pVarType = solvedPatVarTypes.get(pVarName) || Hole(freshHoleName() + "_type_pvar_rhs_missing_" + pVarName.substring(1));
-            rhsElabCtx = extendCtx(rhsElabCtx, pVarName, pVarType, Icit.Expl); // Icit assumed Expl for vars
+            rhsElabCtx = extendCtx(rhsElabCtx, pVarName, pVarType, Icit.Expl);
         }
 
-        // The type of the elaborated LHS, inferred in the *global* context (not lhsElabCtx)
-        // This is the type the RHS must also have.
-        constraints.length = 0; // Clear for LHS type inference
+        constraints.length = 0;
         const typeOfGlobalLhs = infer(lhsElabCtx, elaboratedLhs, 0);
-         if (!solveConstraints(ctx)) { // Solve constraints related to LHS's global type
+         if (!solveConstraints(ctx)) {
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
         }
         const targetRhsType = whnf(getTermRef(typeOfGlobalLhs.type), ctx);
 
-
-        constraints.length = 0; // Clear for RHS checking
+        constraints.length = 0;
         check(rhsElabCtx, rhsToElaborate, targetRhsType, 0);
 
         if (!solveConstraints(rhsElabCtx)) {
@@ -275,114 +128,43 @@ export function addRewriteRule(
         elaboratedRhs = getTermRef(rhsToElaborate);
 
         userRewriteRules.push({ name: ruleName, patternVars: userPatternVars, elaboratedLhs, elaboratedRhs });
-        consoleLog(`Rule '${ruleName}' added and elaborated successfully.`);
+        console.log(`Rule '${ruleName}' added and elaborated successfully.`);
 
     } catch (e) {
         console.error(`Failed to add rewrite rule '${ruleName}': ${(e as Error).message}. Stack: ${(e as Error).stack}`);
-        // Optionally rethrow or collect errors
     } finally {
-        constraints.splice(0, constraints.length, ...originalConstraintsBackup); // Restore global constraints
+        constraints.splice(0, constraints.length, ...originalConstraintsBackup);
     }
 }
 
-
-export let userUnificationRules: UnificationRule[] = [];
 export function addUnificationRule(rule: UnificationRule) {
     userUnificationRules.push(rule);
-}
-
-export let constraints: Constraint[] = [];
-export function addConstraint(t1: Term, t2: Term, origin?: string) { constraints.push({ t1, t2, origin }); }
-
-export const solveConstraintsControl = { depth: 0 }; // Guard against re-entrant solveConstraints calls
-
-export function getTermRef(term: Term): Term {
-    let current = term;
-    const visited = new Set<Term>(); // To detect cycles in Hole references
-    while (current.tag === 'Hole' && current.ref) {
-        if (visited.has(current)) {
-            console.warn(`Cycle detected in Hole references starting from ${term.tag === 'Hole' ? term.id : 'original term'}. Returning current hole: ${current.id}`);
-            return current; // Break cycle
-        }
-        visited.add(current);
-        current = current.ref;
-    }
-    return current;
-}
-
-
-export const emptyCtx: Context = [];
-
-// <<< MODIFIED HERE
-export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = Icit.Expl, definition?: Term): Context => {
-    return [{ name, type, icit, definition }, ...ctx];
-};
-
-export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
-
-export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm']);
-export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
-    'CatTerm', 'ObjTerm', 'HomTerm',
-    'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm'
-]);
-
-export function isKernelConstantSymbolStructurally(term: Term): boolean {
-    const t = getTermRef(term);
-    if (EMDASH_CONSTANT_SYMBOLS_TAGS.has(t.tag)) return true;
-    if (t.tag === 'Var' && globalDefs.get(t.name)?.isConstantSymbol) return true;
-    return false;
-}
-
-export function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
-    return EMDASH_UNIFICATION_INJECTIVE_TAGS.has(tag);
-}
-
-let _debug_verbose_flag = false;
-
-export function setDebugVerbose(value: boolean): void {
-    _debug_verbose_flag = value;
-}
-
-export function getDebugVerbose(): boolean {
-    return _debug_verbose_flag;
-}
-
-export function consoleLog(message?: any, ...optionalParams: any[]): void {
-    if (_debug_verbose_flag) {
-        console.log(message, ...optionalParams);
-    }
 }
 
 export function resetMyLambdaPi() {
     constraints.length = 0;
     globalDefs.clear();
-    rawUserRewriteRules.length = 0;
     userRewriteRules.length = 0;
     userUnificationRules.length = 0;
     resetVarId();
     resetHoleId();
-    setDebugVerbose(false); // Reset debug flag as well
+    setDebugVerbose(false);
 }
 
 export function setupPhase1GlobalsAndRules() {
     defineGlobal("NatType", Type(), undefined, true, true, true);
     defineGlobal("BoolType", Type(), undefined, true, true, true);
 
-    // From LP: constant symbol Cat : TYPE;
     defineGlobal("Cat", Type(), CatTerm(), false, true, false);
 
-    // From LP: constant symbol Set : Cat;
     defineGlobal("Set", CatTerm(), SetTerm(), false, true, false);
 
-    // From LP: injective symbol Obj : Π (A : Cat), TYPE;
-    // Its injectivity applies to applications: Obj A = Obj B => A = B.
     defineGlobal("Obj",
         Pi("A", Icit.Expl, CatTerm(), _A => Type()),
         Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)),
-        false, true, false // injective on its applications, not a TypeNameLike itself
+        false, true, false
     );
 
-    // From LP: injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
     defineGlobal("Hom",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("X", Icit.Expl, ObjTerm(A_val), _X =>
@@ -391,20 +173,18 @@ export function setupPhase1GlobalsAndRules() {
             Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
                 Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
                     HomTerm(A_term, X_term, Y_term)))),
-        false, true, false // injective on its applications
+        false, true, false
     );
 
-    // From LP: constant symbol Functor : Π(A : Cat), Π(B : Cat), Cat;
     defineGlobal("Functor",
         Pi("A", Icit.Expl, CatTerm(), _A =>
             Pi("B", Icit.Expl, CatTerm(), _B => CatTerm())),
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorCategoryTerm(A_term, B_term))),
-        false, true, false // injective on its applications
+        false, true, false
     );
 
-    // From LP: constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Obj (Functor A B)), Π (G : Obj (Functor A B)), TYPE;
     defineGlobal("Transf",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("B", Icit.Impl, CatTerm(), B_val =>
@@ -415,10 +195,9 @@ export function setupPhase1GlobalsAndRules() {
                 Lam("F_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), F_term =>
                     Lam("G_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), G_term =>
                         NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
-        false, true, false // injective on its applications
+        false, true, false
     );
 
-    // mkCat_
     defineGlobal("mkCat_",
         Pi("Obj_repr", Icit.Expl, Type(), O_repr =>
             Pi("Hom_repr", Icit.Expl, Pi("X", Icit.Expl, O_repr, _ => Pi("Y", Icit.Expl, O_repr, _ => Type())), H_repr =>
@@ -433,26 +212,24 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, // No value, it's a constant symbol defined by rules
-        true, // isConstantSymbol
-        true, // isInjective
-        false // isTypeNameLike
+        undefined,
+        true,
+        true,
+        false
     );
 
-    // identity_morph
     defineGlobal("identity_morph",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
                 App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), X_val, Icit.Expl)
             )
         ),
-        undefined, // No value
-        false, // isConstantSymbol
-        true,  // isInjective
+        undefined,
+        false,
+        true,
         false
     );
 
-    // compose_morph
     defineGlobal("compose_morph",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("X", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
@@ -467,13 +244,12 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, // No value
-        false, // isConstantSymbol
-        false, // isInjective
+        undefined,
+        false,
+        false,
         false
     );
 
-    // --- mkCat_ Rules ---
     addRewriteRule(
         "Obj_mkCat_eval",
         ["$O", "$H", "$C"],
@@ -488,15 +264,15 @@ export function setupPhase1GlobalsAndRules() {
         App(
             App(
                 App(
-                    Var("Hom"), // func
-                    App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), // cat arg for Hom
-                    Icit.Impl // icit for Hom's cat arg
+                    Var("Hom"),
+                    App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl),
+                    Icit.Impl
                 ),
-                Var("$X"), // dom arg for Hom
-                Icit.Expl // icit for Hom's dom arg
+                Var("$X"),
+                Icit.Expl
             ),
-            Var("$Y"), // cod arg for Hom
-            Icit.Expl // icit for Hom's cod arg
+            Var("$Y"),
+            Icit.Expl
         ),
         App(App(Var("$H"), Var("$X"), Icit.Expl), Var("$Y"), Icit.Expl),
         emptyCtx
@@ -510,29 +286,22 @@ export function setupPhase1GlobalsAndRules() {
         emptyCtx
     );
 
-    // --- Identity and Composition Rules ---
-    // Old rules comp_g_idX_fwd and comp_idY_f_fwd are removed implicitly by not re-adding them here.
-    // New rules using global `identity_morph` and `compose_morph` symbols:
-
-    // rule compose_morph $f (identity_morph $X) @ A ↪ $f
     addRewriteRule(
         "comp_f_idX_fwd",
         ["$A_cat", "$X_obj", "$Y_obj", "$f"],
-        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$f"), Icit.Expl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Expl), Icit.Expl),
+        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$f"), Icit.Expl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Expl), Icit.Expl),
         Var("$f"),
         emptyCtx
     );
 
-    // rule compose_morph (identity_morph $Y) $f @ A ↪ $f
     addRewriteRule(
-        "comp_idY_f_fwd_new", // New name to avoid conflict if old one was cached somehow
-        ["$A_cat", "$X_obj", "$Y_obj", "$Z_obj", "$f"],
-        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Z_obj"), Icit.Impl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$Y_obj"), Icit.Expl), Icit.Expl), Var("$f"), Icit.Expl),
+        "comp_idY_f_fwd_new",
+        ["$A_cat", "$X_obj", "$Y_obj", "$f"],
+        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$Y_obj"), Icit.Expl), Icit.Expl), Var("$f"), Icit.Expl),
         Var("$f"),
         emptyCtx
     );
 
-    // Unification Rule: (fapp1 (hom_cov $W) $a) $f === compose_morph $a $f
     const unifRule_homCov_compose_PatternVars = ["$A_cat", "$W_obj", "$X_obj", "$Y_obj", "$Z_obj", "$a_morph", "$f_morph"];
     const unifRule_LHS1 = App(
         FMap1Term(
@@ -552,37 +321,28 @@ export function setupPhase1GlobalsAndRules() {
         patternVars: unifRule_homCov_compose_PatternVars,
         lhsPattern1: unifRule_LHS1,
         lhsPattern2: unifRule_LHS2,
-        rhsNewConstraints: [{ t1: Type(), t2: Type() }] // Represents tt === tt
+        rhsNewConstraints: [{ t1: Type(), t2: Type() }]
     });
-
 }
 
 export function setupCatTheoryPrimitives(ctx: Context) {
-    // Define Set Category
-    // The global "Set" is of type CatTerm(), and its value is the kernel primitive SetTerm().
     defineGlobal("Set", CatTerm(), SetTerm(), false, true, false, false); 
 
-    // Define hom_cov Functor
-    // const setTermVal = getTermRef(globalDefs.get("Set")!.value!);
-    // Should directly use SetTerm() here as it's the kernel primitive for the Set category.
     defineGlobal("hom_cov",
         Pi("A", Icit.Impl, CatTerm(), A_cat_val =>
             Pi("W", Icit.Expl, ObjTerm(A_cat_val), _W_obj_val =>
-                ObjTerm(FunctorCategoryTerm(A_cat_val, SetTerm())) // Use SetTerm() for codomain
+                ObjTerm(FunctorCategoryTerm(A_cat_val, SetTerm()))
             )
         ),
         Lam("A_cat_impl_arg", Icit.Impl, CatTerm(), A_cat_term =>
             Lam("W_obj_expl_arg", Icit.Expl, ObjTerm(A_cat_term), W_obj_term =>
-                CoreTypes.HomCovFunctorIdentity(A_cat_term, W_obj_term)
+                HomCovFunctorIdentity(A_cat_term, W_obj_term)
             )
         ),
         false, true, false, false 
     );
 
-    // Add "naturality_direct_hom_cov_fapp1_tapp" rewrite rule
     const pva = (name: string) => Var(name, false); 
-    // const catSet = getTermRef(globalDefs.get("Set")!.value!);
-    // Directly use SetTerm() in the rule pattern
 
     const userPatternVars_NatDirect = [
         "$A_cat", "$W_obj", "$F_func", "$G_func",
@@ -591,14 +351,14 @@ export function setupCatTheoryPrimitives(ctx: Context) {
 
     const LHS_NatDirect = App(
         FMap1Term(
-            CoreTypes.HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
+            HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
             FMap1Term(
                 pva("$G_func"), pva("$a_morph"),
                 pva("$A_cat"), SetTerm(), pva("$X_obj"), pva("$X_prime_obj")
             ),
             pva("$A_cat"), SetTerm(), 
-            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()), // FMap0 G X
-            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm()) // FMap0 G X'
+            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()),
+            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm())
         ),
         NatTransComponentTerm(
             pva("$eps_transf"), pva("$X_obj"),
@@ -609,14 +369,14 @@ export function setupCatTheoryPrimitives(ctx: Context) {
 
     const RHS_NatDirect = App(
         FMap1Term(
-            CoreTypes.HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
+            HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
             FMap1Term(
                 pva("$F_func"), pva("$a_morph"), 
                 pva("$A_cat"), SetTerm(), pva("$X_obj"), pva("$X_prime_obj")
             ),
             pva("$A_cat"), SetTerm(),
-            FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()), // FMap0 F X
-            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm()) // FMap0 F X'
+            FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()),
+            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm())
         ),
         NatTransComponentTerm(
             pva("$eps_transf"), pva("$X_prime_obj"), 
@@ -639,3 +399,11 @@ export function resetMyLambdaPi_Emdash() {
     setupPhase1GlobalsAndRules(); 
     setupCatTheoryPrimitives(emptyCtx);
 } 
+
+// It seems the following exports were intended to be available for other modules from core_state originally
+// but since core_context_globals is the one orchestrating defineGlobal etc., they are re-exported here if needed elsewhere.
+export {
+    globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
+    freshHoleName, freshVarName, resetVarId, resetHoleId, setDebugVerbose,
+    cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, solveConstraintsControl
+} from './core_state';
