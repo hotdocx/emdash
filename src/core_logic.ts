@@ -1,4 +1,4 @@
-import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm } from './core_types';
+import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm } from './core_types';
 import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose, solveConstraintsControl } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 

@@ -1,7 +1,6 @@
 import {
     Term, Context, PatternVarDecl, Substitution, ElaborationResult, Icit, Binding,
-    Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, MkCat_,
-    IdentityMorph, ComposeMorph, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
+    Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
     HomCovFunctorIdentity, SetTerm,
     BaseTerm
 } from './core_types';
