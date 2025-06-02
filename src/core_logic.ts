@@ -901,13 +901,35 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
 
     switch (rt1_final.tag) {
         case 'Type': case 'CatTerm': return UnifyResult.Solved; 
-        case 'Var': 
-            return rt1_final.name === (rt2_final as Term & {tag:'Var'}).name ? UnifyResult.Solved : tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+        case 'Var': { // Comparing two Vars after WHNF
+            const var1 = rt1_final; const var2 = rt2_final as Term & {tag:'Var'};
+            if (var1.name === var2.name) return UnifyResult.Solved;
+
+            // New: Check for different constants
+            const gdef1 = globalDefs.get(var1.name);
+            const gdef2 = globalDefs.get(var2.name);
+            if (gdef1 && gdef1.isConstantSymbol && gdef2 && gdef2.isConstantSymbol) {
+                // Different names, both are constants, so fail.
+                consoleLog(`[Unify Var CONSTANT MISMATCH] ${var1.name} vs ${var2.name}`);
+                return UnifyResult.Failed; 
+            }
+            return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+        }
         case 'App': {
             const app1 = rt1_final; const app2 = rt2_final as Term & {tag:'App'};
             
             const ultimateHead1 = getUltimateHead(app1);
             const ultimateHead2 = getUltimateHead(app2);
+
+            // New: Check for different constant heads
+            if (ultimateHead1.tag === 'Var' && ultimateHead2.tag === 'Var' && ultimateHead1.name !== ultimateHead2.name) {
+                const gdefHead1 = globalDefs.get(ultimateHead1.name);
+                const gdefHead2 = globalDefs.get(ultimateHead2.name);
+                if (gdefHead1 && gdefHead1.isConstantSymbol && gdefHead2 && gdefHead2.isConstantSymbol) {
+                    consoleLog(`[Unify App CONSTANT HEAD MISMATCH] ${ultimateHead1.name} vs ${ultimateHead2.name}`);
+                    return UnifyResult.Failed;
+                }
+            }
 
             if (ultimateHead1.tag === 'Var' && ultimateHead2.tag === 'Var' && ultimateHead1.name === ultimateHead2.name) {
                 const gdef = globalDefs.get(ultimateHead1.name);

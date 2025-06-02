@@ -1,4 +1,4 @@
-import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding } from './core_types';
+import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, NatTransTypeTerm } from './core_types';
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
 
@@ -322,7 +322,7 @@ export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ct
 export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'MkCat_']);
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
     'IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_',
-    'FunctorCategoryTerm', 'FMap0Term', 'FMap1Term', 'NatTransTypeTerm', 'NatTransComponentTerm'
+    'FunctorCategoryTerm', 'NatTransTypeTerm'
 ]);
 
 export function isKernelConstantSymbolStructurally(term: Term): boolean {
@@ -364,8 +364,62 @@ export function resetMyLambdaPi() {
 }
 
 export function setupPhase1GlobalsAndRules() {
-    defineGlobal("NatType", Type(), undefined, true); 
-    defineGlobal("BoolType", Type(), undefined, true);
+    defineGlobal("NatType", Type(), undefined, true, true, true);
+    defineGlobal("BoolType", Type(), undefined, true, true, true);
+
+    // From LP: constant symbol Cat : TYPE;
+    defineGlobal("Cat", Type(), undefined, true, true, true);
+
+    // From LP: constant symbol Set : Cat;
+    defineGlobal("Set", CatTerm(), undefined, true, true, true);
+
+    // From LP: constant symbol Cat_cat : Cat;
+    defineGlobal("Cat_cat", CatTerm(), undefined, true, true, true);
+
+    // From LP: injective symbol Obj : Π (A : Cat), TYPE;
+    // This means Obj is a constant function. Its injectivity applies to applications: Obj A = Obj B => A = B.
+    defineGlobal("Obj",
+        Pi("A", Icit.Expl, CatTerm(), _A => Type()),
+        Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)),
+        false, true, false // constant, injective on its applications, not a TypeNameLike itself
+    );
+
+    // From LP: injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
+    defineGlobal("Hom",
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("X", Icit.Expl, ObjTerm(A_val), _X =>
+                Pi("Y", Icit.Expl, ObjTerm(A_val), _Y => Type()))),
+        Lam("A_val", Icit.Impl, CatTerm(), A_term =>
+            Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
+                Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
+                    HomTerm(A_term, X_term, Y_term)))),
+        false, true, false // constant, injective on its applications
+    );
+
+    // From LP: constant symbol Functor : Π(A : Cat), Π(B : Cat), Cat;
+    defineGlobal("Functor",
+        Pi("A", Icit.Expl, CatTerm(), _A =>
+            Pi("B", Icit.Expl, CatTerm(), _B => CatTerm())),
+        Lam("A_val", Icit.Expl, CatTerm(), A_term =>
+            Lam("B_val", Icit.Expl, CatTerm(), B_term =>
+                FunctorCategoryTerm(A_term, B_term))),
+        false, true, false // constant, injective on its applications
+    );
+
+    // From LP: constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Obj (Functor A B)), Π (G : Obj (Functor A B)), TYPE;
+    defineGlobal("Transf",
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("B", Icit.Impl, CatTerm(), B_val =>
+                Pi("F", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_val, B_val)), _F =>
+                    Pi("G", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_val, B_val)), _G => Type())))),
+        Lam("A_val", Icit.Impl, CatTerm(), A_term =>
+            Lam("B_val", Icit.Impl, CatTerm(), B_term =>
+                Lam("F_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), F_term =>
+                    Lam("G_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), G_term =>
+                        NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
+        false, true, false // constant, injective on its applications
+    );
+
 
     const pvarCat = "$CAT_pv";
     const pvarX_obj = "$X_obj_pv";
