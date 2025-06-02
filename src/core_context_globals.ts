@@ -256,7 +256,8 @@ export function setupPhase1GlobalsAndRules() {
     addRewriteRule(
         "Obj_mkCat_eval",
         ["$O", "$H", "$C"],
-        App(Var("Obj"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Expl),
+        // App(Var("Obj"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Expl),
+        ObjTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl)),
         Var("$O"),
         emptyCtx
     );
@@ -264,19 +265,20 @@ export function setupPhase1GlobalsAndRules() {
     addRewriteRule(
         "Hom_mkCat_eval",
         ["$O", "$H", "$C", "$X", "$Y"],
-        App(
-            App(
-                App(
-                    Var("Hom"),
-                    App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl),
-                    Icit.Impl
-                ),
-                Var("$X"),
-                Icit.Expl
-            ),
-            Var("$Y"),
-            Icit.Expl
-        ),
+        // App(
+        //     App(
+        //         App(
+        //             Var("Hom"),
+        //             App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl),
+        //             Icit.Impl
+        //         ),
+        //         Var("$X"),
+        //         Icit.Expl
+        //     ),
+        //     Var("$Y"),
+        //     Icit.Expl
+        // ),
+        HomTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Var("$X"), Var("$Y")),
         App(App(Var("$H"), Var("$X"), Icit.Expl), Var("$Y"), Icit.Expl),
         emptyCtx
     );

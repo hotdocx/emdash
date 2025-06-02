@@ -78,13 +78,19 @@ function runPhase1Tests() {
         ))))), undefined, true);
     
     // const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
-    const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
+    // elaboration issues with this version:
+    // const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
+    const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl),
+    Lam("X", Icit.Impl, NatObjRepr, X_val =>
+        Lam("Y", Icit.Impl, NatObjRepr, Y_val =>
+            Lam("Z", Icit.Impl, NatObjRepr, Z_val => App(App(App(Var("C_impl_Nat_dummy_Global"), X_val, Icit.Impl), Y_val, Icit.Impl), Z_val, Icit.Impl)))),
+     Icit.Expl);
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
     assert(elabRes.type.tag === 'CatTerm', "Test 2.1: MkCat_ term should have type Cat");
 
     const ObjOfNatCat = ObjTerm(NatCategoryTermVal);
     elabRes = elaborate(ObjOfNatCat, undefined, baseCtx);
-    // assert(areEqual(elabRes.term, NatObjRepr, baseCtx), `Test 2.2: Obj(NatCategoryTerm) should reduce to NatType. Got ${printTerm(elabRes.term)}`);
+    assert(areEqual(elabRes.term, NatObjRepr, baseCtx), `Test 2.2: Obj(NatCategoryTerm) should reduce to NatType. Got ${printTerm(elabRes.term)}`);
 
     defineGlobal("nat_val1_t2", NatObjRepr, undefined, true);
     defineGlobal("nat_val2_t2", NatObjRepr, undefined, true);

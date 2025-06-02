@@ -55,10 +55,41 @@ export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
 ]);
 
 export function isKernelConstantSymbolStructurally(term: Term): boolean {
-    const t = getTermRef(term);
-    if (EMDASH_CONSTANT_SYMBOLS_TAGS.has(t.tag)) return true;
-    if (t.tag === 'Var' && globalDefs.get(t.name)?.isConstantSymbol) return true;
-    return false;
+    const rt = getTermRef(term);
+    if (rt.tag === 'Var') {
+        const gdef = globalDefs.get(rt.name);
+        return !!(gdef && gdef.isConstantSymbol); // True if it's a Var defined as a constant
+    }
+
+    // For other term tags, decide if they should bypass rewrite rules.
+    // ObjTerm and HomTerm should NOT bypass, so they are NOT listed here.
+    // Other structural terms might still be shielded.
+    switch (rt.tag) {
+        case 'CatTerm':
+        case 'FunctorCategoryTerm':
+        // case 'FMap0Term':
+        // case 'FMap1Term':
+        case 'NatTransTypeTerm':
+        case 'NatTransComponentTerm':
+        case 'HomCovFunctorIdentity':
+        case 'SetTerm':
+            // These are structural and typically shouldn't be rewritten *as a whole* by general rules.
+            return true;
+        case 'FMap0Term':
+        case 'FMap1Term':
+        case 'ObjTerm':
+        case 'HomTerm':
+            // These should allow rewrite rules like Obj_mkCat_eval and Hom_mkCat_eval.
+            return false;
+        case 'Type': // Type itself is a primitive, doesn't get rewritten.
+            return true;
+        // Lam, App, Pi, Hole are generally not considered "kernel constants" in this sense.
+        // They are either reducible or placeholders.
+        default:
+            // For any tag not explicitly listed as true, assume false.
+            // This includes Lam, App, Pi, Hole, and any future tags not covered.
+            return false;
+    }
 }
 
 export function isEmdashUnificationInjectiveStructurally(tag: string): boolean {
