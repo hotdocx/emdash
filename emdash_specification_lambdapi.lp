@@ -13,6 +13,12 @@
       + be directly implementad inside the kernel ( `whnf`, `areEqual`, `unify`, etc...) if it belongs very-much to the kernel
       + or be implemented via the mechanism of `user-provided rewrite rules` or `user-provided unification rules`
         if it belongs very-much to the standard library or for convenience reasons.
+    - when implementing a rewrite rule or unification rule, 
+      if a construct has both a kernel-term implementation and a convenience-alias as a global,
+      such as for example `defineGlobal("Hom", ..., Lam("A_val", Icit.Impl, CatTerm(), A_term => ... HomTerm(A_term, X_term, Y_term)))`
+      then (even though both constructions are convertible) it is understood that it is the true kernel-term version which
+      should be used syntactically to express the rewrite/unification rule
+    - Note that to get Lambdapi to accept empty conditions for unif_rule we use a trick such as `unif_rule A $x ≡ B $x ↪ [ tt ≡ tt ]`
 */
 
 // ===== START OF BASIC KERNEL SPECIFICATION  =====
@@ -123,13 +129,12 @@ injective symbol Homd_ [A : Cat] [W: Obj A] [Y : Obj A] [Y': Obj A] (a: Hom Y Y'
 
 // naturality direct
 //  ϵ._X _∘> G a  ↪  (F a) _∘> ϵ._X'
-// was SLOW
-rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X/*/!\*/ $X' $a) (@tapp _ _ $F $G $ϵ $X)
+rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
 ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
 
 // naturality
 //  (f _∘> ϵ._X) _∘> G a  ↪  (f _∘> F a) _∘> ϵ._X'
-rule fapp1 (hom_cov $W) (@fapp1 _ _ $G $X/*/!\*/ $X' $a) (fapp1 (hom_cov $W) (@tapp _ _ $F $G $ϵ $X) $g) 
+rule fapp1 (hom_cov $W) (@fapp1 _ _ $G $X $X' $a) (fapp1 (hom_cov $W) (@tapp _ _ $F $G $ϵ $X) $g) 
 ↪ fapp1 (hom_cov $W) (tapp $ϵ $X') (fapp1 (hom_cov $W) (fapp1 $F $a) $g);
 
 // functoriality direct
@@ -146,7 +151,7 @@ rule fapp1 (hom_cov _) (@fapp1 _ _ $H $Y $Z $a) (fapp1 (hom_cov _) (@fapp1 _ _ $
 
 // associativity accumulation
 //  (a _∘> (f _∘> g))  ↪  ((a _∘> f) _∘> g)
-rule (fapp1 (hom_cov _) (fapp1 (hom_cov $Y) $g $f) $a) 
+rule (fapp1 (hom_cov _) (fapp1 (hom_cov _) $g $f) $a) 
 ↪ (fapp1 (hom_cov _) $g (fapp1 (hom_cov _) $f $a));
 
 // ===== END OF EXTRA KERNEL SPECIFICATION =====
