@@ -369,20 +369,17 @@ export function setupPhase1GlobalsAndRules() {
     defineGlobal("BoolType", Type(), undefined, true, true, true);
 
     // From LP: constant symbol Cat : TYPE;
-    defineGlobal("Cat", Type(), undefined, true, true, true);
+    defineGlobal("Cat", Type(), CatTerm(), false, true, false);
 
     // From LP: constant symbol Set : Cat;
-    defineGlobal("Set", CatTerm(), undefined, true, true, true);
-
-    // From LP: constant symbol Cat_cat : Cat;
-    defineGlobal("Cat_cat", CatTerm(), undefined, true, true, true);
+    defineGlobal("Set", CatTerm(), SetTerm(), false, true, false);
 
     // From LP: injective symbol Obj : Π (A : Cat), TYPE;
-    // This means Obj is a constant function. Its injectivity applies to applications: Obj A = Obj B => A = B.
+    // Its injectivity applies to applications: Obj A = Obj B => A = B.
     defineGlobal("Obj",
         Pi("A", Icit.Expl, CatTerm(), _A => Type()),
         Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)),
-        false, true, false // constant, injective on its applications, not a TypeNameLike itself
+        false, true, false // injective on its applications, not a TypeNameLike itself
     );
 
     // From LP: injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
@@ -394,7 +391,7 @@ export function setupPhase1GlobalsAndRules() {
             Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
                 Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
                     HomTerm(A_term, X_term, Y_term)))),
-        false, true, false // constant, injective on its applications
+        false, true, false // injective on its applications
     );
 
     // From LP: constant symbol Functor : Π(A : Cat), Π(B : Cat), Cat;
@@ -404,7 +401,7 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorCategoryTerm(A_term, B_term))),
-        false, true, false // constant, injective on its applications
+        false, true, false // injective on its applications
     );
 
     // From LP: constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Obj (Functor A B)), Π (G : Obj (Functor A B)), TYPE;
@@ -418,7 +415,7 @@ export function setupPhase1GlobalsAndRules() {
                 Lam("F_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), F_term =>
                     Lam("G_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), G_term =>
                         NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
-        false, true, false // constant, injective on its applications
+        false, true, false // injective on its applications
     );
 
 
@@ -462,7 +459,7 @@ export function setupPhase1GlobalsAndRules() {
 export function setupCatTheoryPrimitives(ctx: Context) {
     // Define Set Category
     // The global "Set" is of type CatTerm(), and its value is the kernel primitive SetTerm().
-    defineGlobal("Set", CatTerm(), SetTerm(), true, true, true, false); 
+    defineGlobal("Set", CatTerm(), SetTerm(), false, true, false, false); 
 
     // Define hom_cov Functor
     // const setTermVal = getTermRef(globalDefs.get("Set")!.value!);
@@ -478,7 +475,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
                 CoreTypes.HomCovFunctorIdentity(A_cat_term, W_obj_term)
             )
         ),
-        true, true, false, true 
+        false, true, false, false 
     );
 
     // Add "naturality_direct_hom_cov_fapp1_tapp" rewrite rule
