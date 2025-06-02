@@ -60,6 +60,7 @@ export type BaseTerm =
       }
     // Emdash Phase 3: Yoneda and Set Category Primitives
     | { tag: 'HomCovFunctorIdentity', domainCat: Term, objW_InDomainCat: Term }
+    | { tag: 'SetTerm' }
     ;
 
 export type Term = BaseTerm;
@@ -118,6 +119,8 @@ export const NatTransComponentTerm = (transformation: Term, objectX: Term, catA_
 
 export const HomCovFunctorIdentity = (domainCat: Term, objW_InDomainCat: Term): Term & { tag: 'HomCovFunctorIdentity' } =>
     ({ tag: 'HomCovFunctorIdentity', domainCat, objW_InDomainCat });
+
+export const SetTerm = (): Term & { tag: 'SetTerm' } => ({ tag: 'SetTerm' });
 
 export type Binding = {
     name: string;

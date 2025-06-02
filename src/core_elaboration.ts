@@ -2,7 +2,7 @@ import {
     Term, Context, PatternVarDecl, Substitution, ElaborationResult, Icit, Binding,
     Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, MkCat_,
     IdentityMorph, ComposeMorph, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    HomCovFunctorIdentity,
+    HomCovFunctorIdentity, SetTerm,
     BaseTerm
 } from './core_types';
 import {
@@ -444,6 +444,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 type: ObjTerm(FunctorCategoryTerm(elabDomainCat, globalSetTerm))
             };
         }
+        case 'SetTerm': return { elaboratedTerm: current, type: CatTerm() };
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`Infer: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -814,6 +815,7 @@ export function matchPattern(
             if (!s) return null;
             return matchPattern(hcP.objW_InDomainCat, hcT.objW_InDomainCat, ctx, patternVarDecls, s, stackDepth + 1);
         }
+        case 'SetTerm': return subst; // If tags match (already checked), it's a match
         default:
              const exhaustiveCheck: never = rtPattern;
              console.warn(`matchPattern: Unhandled pattern tag: ${(exhaustiveCheck as any).tag}.`);
@@ -929,6 +931,7 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.objW_InDomainCat, subst, patternVarDecls)
             );
+        case 'SetTerm': return current; // SetTerm has no subterms to apply substitutions to
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`applySubst: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -1031,6 +1034,7 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomCovFunctorIdentity':
             return `(HomCovFunctor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objW_InDomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'SetTerm': return 'Set';
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`printTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);

@@ -1,4 +1,4 @@
-import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity } from './core_types';
+import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm } from './core_types';
 import { getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName, getDebugVerbose, solveConstraintsControl } from './core_context_globals';
 import { printTerm, isPatternVarName, matchPattern, applySubst } from './core_elaboration';
 
@@ -161,6 +161,7 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             return areStructurallyEqualNoWhnf(rt1.domainCat, hc2.domainCat, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.objW_InDomainCat, hc2.objW_InDomainCat, ctx, depth + 1);
         }
+        case 'SetTerm': return true;
         default:
             const exhaustiveCheck: never = rt1; return false;
     }
@@ -449,6 +450,7 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 return normalize(currentPi.bodyType(v_arg_placeholder), bodyTypeCtx, stackDepth + 1);
             });
         }
+        case 'SetTerm': return current;
         default: const exhaustiveCheck: never = current; throw new Error(`Normalize: Unhandled term: ${(exhaustiveCheck as any).tag }`);
     }
 }
@@ -608,6 +610,7 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             return areEqual(rt1.domainCat, hc2.domainCat, ctx, depth + 1) &&
                    areEqual(rt1.objW_InDomainCat, hc2.objW_InDomainCat, ctx, depth + 1);
         }
+        case 'SetTerm': return true;
         default: const exhaustiveCheck: never = rt1; return false;
     }
 }
@@ -693,6 +696,7 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
         case 'HomCovFunctorIdentity':
             return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.objW_InDomainCat, holeId, visited, depth + 1);
+        case 'SetTerm': return false;
         default: const exhaustiveCheck: never = current; return false;
     }
 }
@@ -1194,6 +1198,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (domainStatus === UnifyResult.Solved && objWStatus === UnifyResult.Solved) return UnifyResult.Solved;
             return UnifyResult.Progress;
         }
+        case 'SetTerm': return UnifyResult.Solved;
         default:
             // This case should ideally not be reached if tags are identical and handled above.
             // If it is, it implies a missing specific handler for a tag.
@@ -1287,6 +1292,7 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.objW_InDomainCat, patternVarDecls, collectedVars, visited);
             break;
+        case 'SetTerm': break; // No subterms with pattern variables
     }
 }
 
