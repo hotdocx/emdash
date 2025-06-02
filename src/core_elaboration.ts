@@ -17,8 +17,6 @@ import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH } from './
 import { KERNEL_IMPLICIT_SPECS } from './core_kernel_metadata';
 
 // Use Extract to get the specific type from the BaseTerm union for casting
-type IdentityMorphType = Extract<BaseTerm, { tag: 'IdentityMorph' }>;
-type ComposeMorphType = Extract<BaseTerm, { tag: 'ComposeMorph' }>;
 // Emdash Phase 2: Functors and Natural Transformations
 type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;
 type FMap0TermType = Extract<BaseTerm, { tag: 'FMap0Term' }>;
@@ -290,70 +288,6 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const elabDom = check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1, isSubElaboration);
             const elabCod = check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1, isSubElaboration);
             return { elaboratedTerm: HomTerm(elabCat, elabDom, elabCod), type: Type() };
-        }
-        case 'MkCat_': {
-            const elabObjR = check(ctx, current.objRepresentation, Type(), stackDepth + 1, isSubElaboration);
-            const O_repr_norm = getTermRef(elabObjR);
-
-            const expected_H_type = Pi("X", Icit.Expl, O_repr_norm, _X => Pi("Y", Icit.Expl, O_repr_norm, _Y => Type()));
-            const elabHomR = check(ctx, current.homRepresentation, expected_H_type, stackDepth + 1, isSubElaboration);
-            const H_repr_func_norm = getTermRef(elabHomR);
-
-            const type_of_hom_X_Y = (X_val: Term, Y_val: Term) => App(App(H_repr_func_norm, X_val, Icit.Expl), Y_val, Icit.Expl);
-
-            const expected_C_type =
-                Pi("Xobj", Icit.Expl, O_repr_norm, Xobj_term =>
-                Pi("Yobj", Icit.Expl, O_repr_norm, Yobj_term =>
-                Pi("Zobj", Icit.Expl, O_repr_norm, Zobj_term =>
-                Pi("gmorph", Icit.Expl, type_of_hom_X_Y(Yobj_term, Zobj_term), _gmorph_term =>
-                Pi("fmorph", Icit.Expl, type_of_hom_X_Y(Xobj_term, Yobj_term), _fmorph_term =>
-                type_of_hom_X_Y(Xobj_term, Zobj_term)
-                )))));
-            const elabCompI = check(ctx, current.composeImplementation, expected_C_type, stackDepth + 1, isSubElaboration);
-            const finalMkCat = MkCat_(elabObjR, elabHomR, elabCompI);
-            return { elaboratedTerm: finalMkCat, type: CatTerm() };
-        }
-        case 'IdentityMorph': {
-            const idTerm = current as Term & IdentityMorphType;
-
-            const elabCatImplicit = check(ctx, idTerm.cat_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
-
-            const objInferResult = infer(ctx, idTerm.obj, stackDepth + 1, isSubElaboration);
-            addConstraint(objInferResult.type, ObjTerm(elabCatImplicit), `Object ${printTerm(idTerm.obj)} in IdentityMorph must be of type Obj(${printTerm(elabCatImplicit)})`);
-            
-            if (!solveConstraints(ctx, stackDepth + 1)) {
-                 console.warn(`[Infer IdentityMorph] Could not solve constraints after processing object and category for ${printTerm(idTerm)}`);
-            }
-
-            const finalIdMorph = IdentityMorph(objInferResult.elaboratedTerm, getTermRef(elabCatImplicit));
-            return { elaboratedTerm: finalIdMorph, type: HomTerm(getTermRef(elabCatImplicit), objInferResult.elaboratedTerm, objInferResult.elaboratedTerm) };
-        }
-        case 'ComposeMorph': {
-            const compTerm = current as Term & ComposeMorphType;
-
-            const elabCatImplicit = check(ctx, compTerm.cat_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
-            const elabObjXImplicit = check(ctx, compTerm.objX_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
-            const elabObjYImplicit = check(ctx, compTerm.objY_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
-            const elabObjZImplicit = check(ctx, compTerm.objZ_IMPLICIT!, ObjTerm(elabCatImplicit), stackDepth + 1, isSubElaboration);
-            
-            if (!solveConstraints(ctx, stackDepth + 1)) {
-                console.warn(`[Infer ComposeMorph] Could not solve constraints after processing implicits for ${printTerm(compTerm)}`);
-            }
-
-            const catArg = getTermRef(elabCatImplicit);
-            const XArg = getTermRef(elabObjXImplicit);
-            const YArg = getTermRef(elabObjYImplicit);
-            const ZArg = getTermRef(elabObjZImplicit);
-
-            const elabF = check(ctx, compTerm.f, HomTerm(catArg, XArg, YArg), stackDepth + 1, isSubElaboration);
-            const elabG = check(ctx, compTerm.g, HomTerm(catArg, YArg, ZArg), stackDepth + 1, isSubElaboration);
-            
-            if (!solveConstraints(ctx, stackDepth + 1)) {
-                console.warn(`[Infer ComposeMorph] Could not solve constraints after processing f and g for ${printTerm(compTerm)}`);
-            }
-
-            const finalComp = ComposeMorph(elabG, elabF, catArg, XArg, YArg, ZArg);
-            return { elaboratedTerm: finalComp, type: HomTerm(catArg, XArg, ZArg) };
         }
         case 'FunctorCategoryTerm': {
             const fcTerm = current as Term & FunctorCategoryTermType;
@@ -707,41 +641,6 @@ export function matchPattern(
             if (!s) return null;
             return matchPattern(homP.cod, homT.cod, ctx, patternVarDecls, s, stackDepth + 1);
         }
-        case 'MkCat_': {
-            const mkP = rtPattern; const mkT = rtTermToMatch as Term & {tag:'MkCat_'};
-            let s = matchPattern(mkP.objRepresentation, mkT.objRepresentation, ctx, patternVarDecls, subst, stackDepth + 1);
-            if(!s) return null;
-            s = matchPattern(mkP.homRepresentation, mkT.homRepresentation, ctx, patternVarDecls, s, stackDepth + 1);
-            if(!s) return null;
-            return matchPattern(mkP.composeImplementation, mkT.composeImplementation, ctx, patternVarDecls, s, stackDepth + 1);
-        }
-        case 'IdentityMorph': {
-            const idP = rtPattern; const idT = rtTermToMatch as Term & {tag:'IdentityMorph'};
-            let s: Substitution | null = subst;
-            if (idP.cat_IMPLICIT) { 
-                if (!idT.cat_IMPLICIT) return null; 
-                s = matchPattern(idP.cat_IMPLICIT, idT.cat_IMPLICIT, ctx, patternVarDecls, s, stackDepth +1);
-                if (!s) return null;
-            }  // If pattern has no cat_IMPLICIT, term can have one or not. It's like a wildcard for that field if absent in pattern.
-            
-            return matchPattern(idP.obj, idT.obj, ctx, patternVarDecls, s, stackDepth + 1);
-        }
-        case 'ComposeMorph': {
-            const compP = rtPattern; const compT = rtTermToMatch as Term & {tag:'ComposeMorph'};
-            let s: Substitution | null = subst;
-            const implicitsP = [compP.cat_IMPLICIT, compP.objX_IMPLICIT, compP.objY_IMPLICIT, compP.objZ_IMPLICIT];
-            const implicitsT = [compT.cat_IMPLICIT, compT.objX_IMPLICIT, compT.objY_IMPLICIT, compT.objZ_IMPLICIT];
-            for(let i=0; i<implicitsP.length; i++) {
-                if (implicitsP[i]) { // If pattern specifies an implicit, term must have it and match
-                    if (!implicitsT[i]) return null; 
-                    s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1);
-                    if (!s) return null;
-                } // If pattern omits an implicit, term's corresponding implicit is not checked here (acts as wildcard)
-            }
-            s = matchPattern(compP.g, compT.g, ctx, patternVarDecls, s, stackDepth + 1);
-            if (!s) return null;
-            return matchPattern(compP.f, compT.f, ctx, patternVarDecls, s, stackDepth + 1);
-        }
         case 'FunctorCategoryTerm': {
             const fcP = rtPattern; const fcT = rtTermToMatch as Term & {tag:'FunctorCategoryTerm'};
             let s = matchPattern(fcP.domainCat, fcT.domainCat, ctx, patternVarDecls, subst, stackDepth + 1);
@@ -869,26 +768,6 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 applySubst(current.dom, subst, patternVarDecls),
                 applySubst(current.cod, subst, patternVarDecls)
             );
-        case 'MkCat_':
-            return MkCat_(
-                applySubst(current.objRepresentation, subst, patternVarDecls),
-                applySubst(current.homRepresentation, subst, patternVarDecls),
-                applySubst(current.composeImplementation, subst, patternVarDecls)
-            );
-        case 'IdentityMorph':
-            return IdentityMorph(
-                applySubst(current.obj, subst, patternVarDecls),
-                current.cat_IMPLICIT ? applySubst(current.cat_IMPLICIT, subst, patternVarDecls) : undefined
-            );
-        case 'ComposeMorph':
-            return ComposeMorph(
-                applySubst(current.g, subst, patternVarDecls),
-                applySubst(current.f, subst, patternVarDecls),
-                current.cat_IMPLICIT ? applySubst(current.cat_IMPLICIT, subst, patternVarDecls) : undefined,
-                current.objX_IMPLICIT ? applySubst(current.objX_IMPLICIT, subst, patternVarDecls) : undefined,
-                current.objY_IMPLICIT ? applySubst(current.objY_IMPLICIT, subst, patternVarDecls) : undefined,
-                current.objZ_IMPLICIT ? applySubst(current.objZ_IMPLICIT, subst, patternVarDecls) : undefined
-            );
         case 'FunctorCategoryTerm':
             return FunctorCategoryTerm(
                 applySubst(current.domainCat, subst, patternVarDecls),
@@ -1006,22 +885,6 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
         case 'ObjTerm': return `(Obj ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomTerm':
             return `(Hom ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.dom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.cod, new Map(boundVarsMap), stackDepth + 1)})`;
-        case 'MkCat_':
-            return `(mkCat_ {O=${printTerm(current.objRepresentation, new Map(boundVarsMap), stackDepth + 1)}, H=${printTerm(current.homRepresentation, new Map(boundVarsMap), stackDepth + 1)}, C=${printTerm(current.composeImplementation, new Map(boundVarsMap), stackDepth + 1)}})`;
-        case 'IdentityMorph': {
-            let catIdStr = "";
-            if (current.cat_IMPLICIT && (getTermRef(current.cat_IMPLICIT).tag !== 'Hole' || (getTermRef(current.cat_IMPLICIT) as Term & {tag: 'Hole'}).id.startsWith("_type_of_"))) { 
-                 catIdStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
-            }
-            return `(id${catIdStr} ${printTerm(current.obj, new Map(boundVarsMap), stackDepth + 1)})`;
-        }
-        case 'ComposeMorph': {
-            let catCompStr = "";
-            if (current.cat_IMPLICIT && (getTermRef(current.cat_IMPLICIT).tag !== 'Hole' || (getTermRef(current.cat_IMPLICIT) as Term & {tag: 'Hole'}).id.startsWith("_type_of_"))) {
-                 catCompStr = ` {cat=${printTerm(current.cat_IMPLICIT, new Map(boundVarsMap), stackDepth + 1)}}`;
-            }
-            return `(${printTerm(current.g, new Map(boundVarsMap), stackDepth + 1)} ∘${catCompStr} ${printTerm(current.f, new Map(boundVarsMap), stackDepth + 1)})`;
-        }
         case 'FunctorCategoryTerm':
             return `(Functor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'FMap0Term':

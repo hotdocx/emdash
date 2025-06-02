@@ -1,4 +1,4 @@
-import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph, Binding, FunctorCategoryTerm, NatTransTypeTerm, FMap0Term, FMap1Term, NatTransComponentTerm, SetTerm } from './core_types';
+import { Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Constraint, StoredRewriteRule, Icit, Type, CatTerm, Var, Hole, App, Lam, Pi, ObjTerm, HomTerm, Binding, FunctorCategoryTerm, NatTransTypeTerm, FMap0Term, FMap1Term, NatTransComponentTerm, SetTerm } from './core_types';
 import * as CoreTypes from './core_types'; // For HomCovFunctorIdentity in rule definition
 import { printTerm, infer, check } from './core_elaboration'; // infer, check needed for addRewriteRule
 import { whnf, solveConstraints, areEqual } from './core_logic'; // solveConstraints, whnf for addRewriteRule
@@ -320,9 +320,9 @@ export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = I
 
 export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ctx.find(b => b.name === name);
 
-export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'MkCat_', 'SetTerm']);
+export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm']);
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
-    'IdentityMorph', 'CatTerm', 'ObjTerm', 'HomTerm', 'MkCat_',
+    'CatTerm', 'ObjTerm', 'HomTerm',
     'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm'
 ]);
 
@@ -418,42 +418,143 @@ export function setupPhase1GlobalsAndRules() {
         false, true, false // injective on its applications
     );
 
-
-    const pvarCat = "$CAT_pv";
-    const pvarX_obj = "$X_obj_pv";
-    const pvarY_obj = "$Y_obj_pv";
-    const pvar_g_XY = "$g_XY_pv";
-
-    addRewriteRule(
-        "comp_g_idX_fwd",
-        [pvarCat, pvarX_obj, pvarY_obj, pvar_g_XY],
-        ComposeMorph(
-            Var(pvar_g_XY),
-            IdentityMorph(Var(pvarX_obj), Var(pvarCat)),
-            Var(pvarCat),
-            Var(pvarX_obj),
-            Var(pvarX_obj),
-            Var(pvarY_obj)
+    // mkCat_
+    defineGlobal("mkCat_",
+        Pi("Obj_repr", Icit.Expl, Type(), O_repr =>
+            Pi("Hom_repr", Icit.Expl, Pi("X", Icit.Expl, O_repr, _ => Pi("Y", Icit.Expl, O_repr, _ => Type())), H_repr =>
+                Pi("compose_impl", Icit.Expl,
+                    Pi("X_obj", Icit.Impl, O_repr, Xobj_term =>
+                    Pi("Y_obj", Icit.Impl, O_repr, Yobj_term =>
+                    Pi("Z_obj", Icit.Impl, O_repr, Zobj_term =>
+                    Pi("g_morph", Icit.Expl, App(App(H_repr, Yobj_term, Icit.Expl), Zobj_term, Icit.Expl), _ =>
+                    Pi("f_morph", Icit.Expl, App(App(H_repr, Xobj_term, Icit.Expl), Yobj_term, Icit.Expl), _ =>
+                    App(App(H_repr, Xobj_term, Icit.Expl), Zobj_term, Icit.Expl)
+                    ))))), _ => CatTerm()
+                )
+            )
         ),
-        Var(pvar_g_XY),
-        emptyCtx 
+        undefined, // No value, it's a constant symbol defined by rules
+        true, // isConstantSymbol
+        true, // isInjective
+        false // isTypeNameLike
     );
 
-    const pvar_f_XY = "$f_XY_pv";
-    addRewriteRule(
-        "comp_idY_f_fwd",
-        [pvarCat, pvarX_obj, pvarY_obj, pvar_f_XY],
-        ComposeMorph(
-            IdentityMorph(Var(pvarY_obj), Var(pvarCat)),
-            Var(pvar_f_XY),
-            Var(pvarCat),
-            Var(pvarX_obj),
-            Var(pvarY_obj),
-            Var(pvarY_obj)
+    // identity_morph
+    defineGlobal("identity_morph",
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
+                App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), X_val, Icit.Expl)
+            )
         ),
-        Var(pvar_f_XY),
+        undefined, // No value
+        false, // isConstantSymbol
+        true,  // isInjective
+        false
+    );
+
+    // compose_morph
+    defineGlobal("compose_morph",
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("X", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
+                Pi("Y", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), Y_val =>
+                    Pi("Z", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), Z_val =>
+                        Pi("g", Icit.Expl, App(App(App(Var("Hom"), A_val, Icit.Impl), Y_val, Icit.Expl), Z_val, Icit.Expl), _ =>
+                            Pi("f", Icit.Expl, App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), Y_val, Icit.Expl), _ =>
+                                App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), Z_val, Icit.Expl)
+                            )
+                        )
+                    )
+                )
+            )
+        ),
+        undefined, // No value
+        false, // isConstantSymbol
+        false, // isInjective
+        false
+    );
+
+    // --- mkCat_ Rules ---
+    addRewriteRule(
+        "Obj_mkCat_eval",
+        ["$O", "$H", "$C"],
+        App(Var("Obj"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Expl),
+        Var("$O"),
         emptyCtx
     );
+
+    addRewriteRule(
+        "Hom_mkCat_eval",
+        ["$O", "$H", "$C", "$X", "$Y"],
+        App(
+            App(
+                App(
+                    Var("Hom"), // func
+                    App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), // cat arg for Hom
+                    Icit.Impl // icit for Hom's cat arg
+                ),
+                Var("$X"), // dom arg for Hom
+                Icit.Expl // icit for Hom's dom arg
+            ),
+            Var("$Y"), // cod arg for Hom
+            Icit.Expl // icit for Hom's cod arg
+        ),
+        App(App(Var("$H"), Var("$X"), Icit.Expl), Var("$Y"), Icit.Expl),
+        emptyCtx
+    );
+
+    addRewriteRule(
+        "compose_mkCat_eval",
+        ["$O", "$H", "$C"],
+        App(Var("compose_morph"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Impl),
+        Var("$C"),
+        emptyCtx
+    );
+
+    // --- Identity and Composition Rules ---
+    // Old rules comp_g_idX_fwd and comp_idY_f_fwd are removed implicitly by not re-adding them here.
+    // New rules using global `identity_morph` and `compose_morph` symbols:
+
+    // rule compose_morph $f (identity_morph $X) @ A ↪ $f
+    addRewriteRule(
+        "comp_f_idX_fwd",
+        ["$A_cat", "$X_obj", "$Y_obj", "$f"],
+        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$f"), Icit.Expl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Expl), Icit.Expl),
+        Var("$f"),
+        emptyCtx
+    );
+
+    // rule compose_morph (identity_morph $Y) $f @ A ↪ $f
+    addRewriteRule(
+        "comp_idY_f_fwd_new", // New name to avoid conflict if old one was cached somehow
+        ["$A_cat", "$X_obj", "$Y_obj", "$Z_obj", "$f"],
+        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Z_obj"), Icit.Impl), App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$Y_obj"), Icit.Expl), Icit.Expl), Var("$f"), Icit.Expl),
+        Var("$f"),
+        emptyCtx
+    );
+
+    // Unification Rule: (fapp1 (hom_cov $W) $a) $f === compose_morph $a $f
+    const unifRule_homCov_compose_PatternVars = ["$A_cat", "$W_obj", "$X_obj", "$Y_obj", "$Z_obj", "$a_morph", "$f_morph"];
+    const unifRule_LHS1 = App(
+        FMap1Term(
+            App(App(Var("hom_cov"), Var("$A_cat"), Icit.Impl), Var("$W_obj"), Icit.Expl),
+            Var("$a_morph"),
+            Var("$A_cat"),
+            SetTerm(),
+            Var("$Y_obj"),
+            Var("$Z_obj")
+        ),
+        Var("$f_morph")
+    );
+    const unifRule_LHS2 = App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Z_obj"), Icit.Impl), Var("$a_morph"), Icit.Expl), Var("$f_morph"), Icit.Expl);
+
+    addUnificationRule({
+        name: "unif_hom_cov_fapp1_compose",
+        patternVars: unifRule_homCov_compose_PatternVars,
+        lhsPattern1: unifRule_LHS1,
+        lhsPattern2: unifRule_LHS2,
+        rhsNewConstraints: [{ t1: Type(), t2: Type() }] // Represents tt === tt
+    });
+
 }
 
 export function setupCatTheoryPrimitives(ctx: Context) {

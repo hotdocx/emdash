@@ -11,23 +11,6 @@ export type BaseTerm =
     | { tag: 'CatTerm' }
     | { tag: 'ObjTerm', cat: Term }
     | { tag: 'HomTerm', cat: Term, dom: Term, cod: Term }
-    | { tag: 'MkCat_',
-        objRepresentation: Term,
-        homRepresentation: Term,
-        composeImplementation: Term
-      }
-    | { tag: 'IdentityMorph',
-        obj: Term,
-        cat_IMPLICIT?: Term
-      }
-    | { tag: 'ComposeMorph',
-        g: Term,
-        f: Term,
-        cat_IMPLICIT?: Term,
-        objX_IMPLICIT?: Term,
-        objY_IMPLICIT?: Term,
-        objZ_IMPLICIT?: Term
-      }
     // Emdash Phase 2: Functors and Natural Transformations
     | { tag: 'FunctorCategoryTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FMap0Term', // fapp0 F X
@@ -94,12 +77,6 @@ export const Hole = (id: string): Term & { tag: 'Hole' } => {
 export const CatTerm = (): Term & { tag: 'CatTerm' } => ({ tag: 'CatTerm' });
 export const ObjTerm = (cat: Term): Term & { tag: 'ObjTerm' } => ({ tag: 'ObjTerm', cat });
 export const HomTerm = (cat: Term, dom: Term, cod: Term): Term & { tag: 'HomTerm' } => ({ tag: 'HomTerm', cat, dom, cod });
-export const MkCat_ = (objRepresentation: Term, homRepresentation: Term, composeImplementation: Term): Term & { tag: 'MkCat_' } =>
-    ({ tag: 'MkCat_', objRepresentation, homRepresentation, composeImplementation });
-export const IdentityMorph = (obj: Term, cat_IMPLICIT?: Term): Term & { tag: 'IdentityMorph' } =>
-    ({ tag: 'IdentityMorph', obj, cat_IMPLICIT });
-export const ComposeMorph = (g: Term, f: Term, cat_IMPLICIT?: Term, objX_IMPLICIT?: Term, objY_IMPLICIT?: Term, objZ_IMPLICIT?: Term): Term & { tag: 'ComposeMorph' } =>
-    ({ tag: 'ComposeMorph', g, f, cat_IMPLICIT, objX_IMPLICIT, objY_IMPLICIT, objZ_IMPLICIT });
 
 // Emdash Phase 2: Functors and Natural Transformations Constructors
 export const FunctorCategoryTerm = (domainCat: Term, codomainCat: Term): Term & { tag: 'FunctorCategoryTerm' } =>
