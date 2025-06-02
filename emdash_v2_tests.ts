@@ -1,7 +1,7 @@
 import {
     Term, Context, ElaborationResult, Icit,
     Type, Var, Lam, App, Pi, Hole,
-    CatTerm, ObjTerm, HomTerm, MkCat_, IdentityMorph, ComposeMorph,
+    CatTerm, ObjTerm, HomTerm, // Removed MkCat_, IdentityMorph, ComposeMorph
     PatternVarDecl, UnifyResult, StoredRewriteRule // Added StoredRewriteRule, UnifyResult from core_types
 } from './src/core_types';
 import {
@@ -73,7 +73,8 @@ function runPhase1Tests() {
         App(App(Var("H_repr_Nat_Global"), X_term, Icit.Expl), Z_term, Icit.Expl)
         ))))), undefined, true);
     
-    const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
+    // const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
+    const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
     elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
     assert(elabRes.type.tag === 'CatTerm', "Test 2.1: MkCat_ term should have type Cat");
 
@@ -95,20 +96,25 @@ function runPhase1Tests() {
 
     console.log("\n--- Test 3: IdentityMorph ---");
     // resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-    const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
+    // const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
+    const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
     defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val, false);
 
     defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef")), undefined, true);
     const anObjX_term = Var("x_obj_val_t3");
-    const id_x = IdentityMorph(anObjX_term, Var("MyNatCat3_GlobalDef")); 
+    // const id_x = IdentityMorph(anObjX_term, Var("MyNatCat3_GlobalDef"));
+    const id_x = App(App(Var("identity_morph"), Var("MyNatCat3_GlobalDef"), Icit.Impl), anObjX_term, Icit.Expl);
     const expected_id_x_type_structure = HomTerm(Var("MyNatCat3_GlobalDef"), anObjX_term, anObjX_term);
     elabRes = elaborate(id_x, expected_id_x_type_structure, baseCtx);
 
-    const idTermSolved = getTermRef(elabRes.term) as Term & {tag: 'IdentityMorph'};
-    assert(idTermSolved.tag === 'IdentityMorph', `Test 3.0: Elaborated id_x should be IdentityMorph, but got ${idTermSolved.tag}`);
-    assert(!!idTermSolved.cat_IMPLICIT, "Test 3.1a: id_x.cat_IMPLICIT should be filled");
-    assert(areEqual(getTermRef(idTermSolved.cat_IMPLICIT!), Var("MyNatCat3_GlobalDef"), baseCtx), `Test 3.1b: id_x.cat_IMPLICIT should resolve to MyNatCat3_GlobalDef. Expected ${printTerm(Var("MyNatCat3_GlobalDef"))}, Got: ${printTerm(getTermRef(idTermSolved.cat_IMPLICIT!))}`);
-    
+    // After refactor, id_x elaborates to an App(...) term.
+    // We mainly care that its type is correct and it normalizes as expected by rewrite rules.
+    assert(elabRes.term.tag === 'App', "Test 3.0: Elaborated id_x should be an App term");
+    // Check if the head of the application is indeed 'identity_morph'
+    let currentApp = getTermRef(elabRes.term);
+    while(currentApp.tag === 'App') currentApp = getTermRef(currentApp.func);
+    assert(currentApp.tag === 'Var' && currentApp.name === 'identity_morph', "Test 3.1: Head of id_x app should be identity_morph");
+
     const expected_normalized_type_t3 = normalize(App(App(Var("H_repr_Nat_Global"), anObjX_term, Icit.Expl), anObjX_term, Icit.Expl), baseCtx);
     assert(areEqual(elabRes.type, expected_normalized_type_t3, baseCtx), `Test 3.2: id_x type should be Hom(Cat,X,X) (normalized). Expected ${printTerm(expected_normalized_type_t3)}, Got ${printTerm(elabRes.type)}`);
     console.log("Test 3 Passed.");
@@ -124,14 +130,17 @@ function runPhase1Tests() {
     const f_morph_hole = Hole("?f_xy_t4");
     const g_morph_hole = Hole("?g_yz_t4");
 
-    const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole, Var("C4_Global"), x_term_t4, y_hole_obj_t4, z_term_t4);
+    // const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole, Var("C4_Global"), x_term_t4, y_hole_obj_t4, z_term_t4);
+    const comp_gf = App(App(App(App(App(App(Var("compose_morph"), Var("C4_Global"), Icit.Impl), x_term_t4, Icit.Impl), y_hole_obj_t4, Icit.Impl), z_term_t4, Icit.Impl), g_morph_hole, Icit.Expl), f_morph_hole, Icit.Expl);
     const expectedCompType = HomTerm(Var("C4_Global"), x_term_t4, z_term_t4);
     elabRes = elaborate(comp_gf, expectedCompType, baseCtx);
 
     assert(areEqual(elabRes.type, expectedCompType, baseCtx), `Test 4.0: comp_gf type should be Hom(C,X,Z). Expected ${printTerm(expectedCompType)}, Got ${printTerm(elabRes.type)}`);
-    const compTermSolved = elabRes.term as Term & {tag:"ComposeMorph"};
-    assert(compTermSolved.tag === 'ComposeMorph', `Test 4.0b: comp_gf should remain a ComposeMorph term. Got ${compTermSolved.tag}`);
-    assert(!!compTermSolved.cat_IMPLICIT && !!compTermSolved.objX_IMPLICIT && !!compTermSolved.objY_IMPLICIT && !!compTermSolved.objZ_IMPLICIT, "Test 4.1: ComposeMorph implicits (cat, X, Y, Z) should be resolved/present.");
+    assert(elabRes.term.tag === 'App', "Test 4.0b: comp_gf should elaborate to an App term.");
+    // Check if the head of the application is indeed 'compose_morph'
+    currentApp = getTermRef(elabRes.term);
+    while(currentApp.tag === 'App') currentApp = getTermRef(currentApp.func);
+    assert(currentApp.tag === 'Var' && currentApp.name === 'compose_morph', "Test 4.1: Head of comp_gf app should be compose_morph");
     
     const f_hole_ref = getTermRef(f_morph_hole) as Term & {tag:"Hole"};
     const g_hole_ref = getTermRef(g_morph_hole) as Term & {tag:"Hole"};
@@ -154,8 +163,10 @@ function runPhase1Tests() {
 
     defineGlobal("g_XY_concrete_t5", HomTerm(Var("C5_cat_global"), X5_term, Y5_term), undefined, true);
     const g_XY_for_rule = Var("g_XY_concrete_t5");
-    const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global"));
-    const test_term_g_o_id = ComposeMorph(g_XY_for_rule, id_X5_for_rule, Var("C5_cat_global"), X5_term, X5_term, Y5_term);
+    // const id_X5_for_rule = IdentityMorph(X5_term, Var("C5_cat_global"));
+    const id_X5_for_rule = App(App(Var("identity_morph"), Var("C5_cat_global"), Icit.Impl), X5_term, Icit.Expl);
+    // const test_term_g_o_id = ComposeMorph(g_XY_for_rule, id_X5_for_rule, Var("C5_cat_global"), X5_term, X5_term, Y5_term);
+    const test_term_g_o_id = App(App(App(App(App(App(Var("compose_morph"), Var("C5_cat_global"), Icit.Impl), X5_term, Icit.Impl), X5_term, Icit.Impl), Y5_term, Icit.Impl), g_XY_for_rule, Icit.Expl), id_X5_for_rule, Icit.Expl);
     elabRes = elaborate(test_term_g_o_id, undefined, baseCtx);
     assert(areEqual(elabRes.term, g_XY_for_rule, baseCtx), `Test 5.1: (g o id_X) should reduce to g. Got ${printTerm(elabRes.term)} Expected ${printTerm(g_XY_for_rule)}`);
     console.log("Test 5 Passed.");
@@ -501,9 +512,9 @@ function runChurchEncodingTests() {
     // let not : Bool -> Bool = \b B t f. b B f t;
     const not_func_type = Pi("b_not_param", Icit.Expl, Var("Bool_type"), _b_term => Var("Bool_type"));
     const not_func_val = Lam("b_not_val", Icit.Expl, b_not_actual_term =>
-        Lam("B_not_param", Icit.Expl, B_not_term =>
-            Lam("t_not_param", Icit.Expl, t_not_actual_term =>
-                Lam("f_not_param", Icit.Expl, f_not_actual_term =>
+        Lam("B_not", Icit.Expl, Type(), B_not_term =>
+            Lam("t_not", Icit.Expl, B_not_term, t_not_actual_term =>
+                Lam("f_not", Icit.Expl, B_not_term, f_not_actual_term =>
                     App(App(App(b_not_actual_term, B_not_term, Icit.Expl), f_not_actual_term, Icit.Expl), t_not_actual_term, Icit.Expl)
                 )
             )
@@ -512,6 +523,7 @@ function runChurchEncodingTests() {
     defineGlobal("not_func", not_func_type, not_func_val);
     elabRes = elaborate(Var("not_func"), undefined, baseCtx);
     assert(areEqual(elabRes.type, not_func_type, baseCtx), "Church Test 8.1: not_func type check");
+    assert(areEqual(elabRes.term, check(baseCtx, not_func_val, not_func_type), baseCtx), "Church Test 8.2: not_func value check");
 
     // let list1 : List Bool = cons _ (id _ true) (nil _);
     const list1_val_type = App(Var("List_type"), Var("Bool_type"), Icit.Expl);
@@ -1112,8 +1124,8 @@ function runChurchStyleImplicitTests() {
     assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 12.1: Nat_hs type check");
 
     const ten_hs_val_raw = Lam("N_ten", Icit.Expl, Type(), N_ten_term =>
-        Lam("s_ten", Icit.Expl, /*Pi("_arg",Icit.Expl,N_ten_term,_=>N_ten_term),*/ s_ten_actual_term =>
-            Lam("z_ten", Icit.Expl, /*N_ten_term,*/ z_ten_actual_term =>
+        Lam("s_ten", Icit.Expl, Pi("_arg_s", Icit.Expl, N_ten_term, _ => N_ten_term), s_ten_actual_term =>
+            Lam("z_ten", Icit.Expl, N_ten_term, z_ten_actual_term =>
                 App(s_ten_actual_term, 
                     App(s_ten_actual_term, 
                         App(s_ten_actual_term, 
@@ -1123,8 +1135,19 @@ function runChurchStyleImplicitTests() {
                                         App(s_ten_actual_term, 
                                             App(s_ten_actual_term, 
                                                 App(s_ten_actual_term, 
-                                                    App(s_ten_actual_term, z_ten_actual_term, Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl), Icit.Expl)))
-            );
+                                                    App(s_ten_actual_term, z_ten_actual_term, Icit.Expl)
+                                                , Icit.Expl)
+                                            , Icit.Expl)
+                                        , Icit.Expl)
+                                    , Icit.Expl)
+                                , Icit.Expl)
+                            , Icit.Expl)
+                        , Icit.Expl)
+                    , Icit.Expl)
+                , Icit.Expl)
+            )
+        )
+    );
     defineGlobal("ten_hs", Var("Nat_hs"), ten_hs_val_raw);
     elabRes = elaborate(Var("ten_hs"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 13.1: ten_hs type check");
