@@ -14,7 +14,8 @@ import {
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
     freshHoleName, freshVarName, resetVarId, resetHoleId, setDebugVerbose,
-    cloneTerm, getTermRef, extendCtx, addConstraint
+    cloneTerm, getTermRef, extendCtx, addConstraint,
+    lookupCtx
 } from './state';
 import { whnf, solveConstraints } from './logic';
 import { infer, check } from './elaboration';

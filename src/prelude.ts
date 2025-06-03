@@ -13,6 +13,7 @@ import {
 } from './types';
 import { emptyCtx, FH } from './state';
 import { defineGlobal, addRewriteRule, addUnificationRule, resetMyLambdaPi } from './runtime';
+import { consoleLog } from './utils';
 
 /**
  * Sets up Phase 1 globals and rules: basic types, category constructors, and their evaluation rules.
@@ -325,8 +326,8 @@ function setupCatTheoryPrimitives(ctx: Context) {
         FMap0Term(Var("$G_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat")), Icit.Impl), // {GX}
         FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), Icit.Impl), // {GX'}
         FMap1Term(Var("$G_func"), Var("$a_morph"), Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")), Icit.Expl), // (G a)
-        NatTransComponentTerm(Var("$eps_transf"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")), Icit.Expl) // (eps_X)
-    );
+        NatTransComponentTerm(Var("$eps_transf"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")), Icit.Expl); // (eps_X)
+    
 
     // RHS: compose_morph {B} {F X} {F X'} {G X'} (eps_X') (F a)
     const RHS_NatDirect = App(App(App(App(App(App(
@@ -335,8 +336,8 @@ function setupCatTheoryPrimitives(ctx: Context) {
         FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), Icit.Impl), // {FX'}
         FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), Icit.Impl), // {GX'}
         NatTransComponentTerm(Var("$eps_transf"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")), Icit.Expl), // (eps_X')
-        FMap1Term(Var("$F_func"), Var("$a_morph"), Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")), Icit.Expl) // (F a)
-    );
+        FMap1Term(Var("$F_func"), Var("$a_morph"), Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")), Icit.Expl); // (F a)
+    
 
     addRewriteRule(
         "naturality_direct_compose", // Name reflects structure from LP spec

@@ -10,12 +10,12 @@ import {
     Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm
 } from './types';
 import {
-    getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx,
+    getTermRef, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx,
     isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName,
     solveConstraintsControl, CORE_MAX_STACK_DEPTH
 } from './state';
 import { matchPattern, applySubst, isPatternVarName } from './elaboration'; // For WHNF userRewriteRules and Unification rules
-import { printTerm } from './utils';
+import { printTerm, consoleLog } from './utils';
 
 /**
  * Maximum iterations for WHNF reduction to prevent infinite loops in non-terminating reductions.

@@ -15,11 +15,11 @@ import {
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
-    freshHoleName, freshVarName, consoleLog, constraints, CORE_MAX_STACK_DEPTH
+    freshHoleName, freshVarName, constraints, CORE_MAX_STACK_DEPTH
 } from './state';
 import { whnf, normalize, areEqual, solveConstraints } from './logic';
 import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './kernel_metadata';
-import { printTerm } from './utils';
+import { printTerm, consoleLog } from './utils';
 
 
 // --- Type Aliases for Extracted Term Types (used for casting within specific cases) ---
