@@ -112,78 +112,10 @@ export function consoleLog(message?: any, ...optionalParams: any[]): void {
     }
 }
 
+// [TODO] delete this function
 export function cloneTerm(term: Term, clonedObjects: Map<Term, Term> = new Map()): Term {
     return term;
-    // const current = getTermRef(term);
-    // if (clonedObjects.has(current)) {
-    //     return clonedObjects.get(current)!;
-    // }
-    // let cloned: Term;
-    // switch (current.tag) {
-    //     case 'Type': cloned = Type(); break;
-    //     case 'CatTerm': cloned = CatTerm(); break;
-    //     case 'SetTerm': cloned = SetTerm(); break;
-    //     case 'Var': cloned = Var(current.name, current.isLambdaBound); break;
-    //     case 'Hole':
-    //         const newHole = Hole(current.id);
-    //         clonedObjects.set(current, newHole);
-    //         if (current.elaboratedType) {
-    //             newHole.elaboratedType = cloneTerm(current.elaboratedType, clonedObjects);
-    //         }
-    //         cloned = newHole;
-    //         break;
-    //     case 'App':
-    //         cloned = App(cloneTerm(current.func, clonedObjects), cloneTerm(current.arg, clonedObjects), current.icit);
-    //         break;
-    //     case 'Lam':
-    //         if (current._isAnnotated && current.paramType) {
-    //             cloned = Lam(current.paramName, current.icit, cloneTerm(current.paramType, clonedObjects), current.body);
-    //         } else {
-    //             cloned = Lam(current.paramName, current.icit, current.body);
-    //         }
-    //         break;
-    //     case 'Pi':
-    //         cloned = Pi(current.paramName, current.icit, cloneTerm(current.paramType, clonedObjects), current.bodyType);
-    //         break;
-    //     case 'ObjTerm': cloned = ObjTerm(cloneTerm(current.cat, clonedObjects)); break;
-    //     case 'HomTerm':
-    //         cloned = HomTerm(cloneTerm(current.cat, clonedObjects), cloneTerm(current.dom, clonedObjects), cloneTerm(current.cod, clonedObjects));
-    //         break;
-    //     case 'FunctorCategoryTerm':
-    //         cloned = FunctorCategoryTerm(cloneTerm(current.domainCat, clonedObjects), cloneTerm(current.codomainCat, clonedObjects));
-    //         break;
-    //     case 'FMap0Term':
-    //         cloned = FMap0Term(cloneTerm(current.functor, clonedObjects), cloneTerm(current.objectX, clonedObjects),
-    //             current.catA_IMPLICIT ? cloneTerm(current.catA_IMPLICIT, clonedObjects) : undefined,
-    //             current.catB_IMPLICIT ? cloneTerm(current.catB_IMPLICIT, clonedObjects) : undefined);
-    //         break;
-    //     case 'FMap1Term':
-    //         cloned = FMap1Term(cloneTerm(current.functor, clonedObjects), cloneTerm(current.morphism_a, clonedObjects),
-    //             current.catA_IMPLICIT ? cloneTerm(current.catA_IMPLICIT, clonedObjects) : undefined,
-    //             current.catB_IMPLICIT ? cloneTerm(current.catB_IMPLICIT, clonedObjects) : undefined,
-    //             current.objX_A_IMPLICIT ? cloneTerm(current.objX_A_IMPLICIT, clonedObjects) : undefined,
-    //             current.objY_A_IMPLICIT ? cloneTerm(current.objY_A_IMPLICIT, clonedObjects) : undefined);
-    //         break;
-    //     case 'NatTransTypeTerm':
-    //         cloned = NatTransTypeTerm(cloneTerm(current.catA, clonedObjects), cloneTerm(current.catB, clonedObjects),
-    //             cloneTerm(current.functorF, clonedObjects), cloneTerm(current.functorG, clonedObjects));
-    //         break;
-    //     case 'NatTransComponentTerm':
-    //         cloned = NatTransComponentTerm(cloneTerm(current.transformation, clonedObjects), cloneTerm(current.objectX, clonedObjects),
-    //             current.catA_IMPLICIT ? cloneTerm(current.catA_IMPLICIT, clonedObjects) : undefined,
-    //             current.catB_IMPLICIT ? cloneTerm(current.catB_IMPLICIT, clonedObjects) : undefined,
-    //             current.functorF_IMPLICIT ? cloneTerm(current.functorF_IMPLICIT, clonedObjects) : undefined,
-    //             current.functorG_IMPLICIT ? cloneTerm(current.functorG_IMPLICIT, clonedObjects) : undefined);
-    //         break;
-    //     case 'HomCovFunctorIdentity':
-    //         cloned = HomCovFunctorIdentity(cloneTerm(current.domainCat, clonedObjects), cloneTerm(current.objW_InDomainCat, clonedObjects));
-    //         break;
-    //     default:
-    //         const exhaustiveCheck: never = current;
-    //         throw new Error(`cloneTerm: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
-    // }
-    // clonedObjects.set(current, cloned);
-    // return cloned;
+
 }
 
 // Moved from core_elaboration.ts
