@@ -155,8 +155,8 @@ export function resetMyLambdaPi() {
 }
 
 export function setupPhase1GlobalsAndRules() {
-    defineGlobal("NatType", Type(), undefined, true, true, true);
-    defineGlobal("BoolType", Type(), undefined, true, true, true);
+    defineGlobal("NatType", Type(), undefined, true, true, false);
+    defineGlobal("BoolType", Type(), undefined, true, true, false);
 
     defineGlobal("Cat", Type(), CatTerm(), false, true, false);
 
@@ -224,23 +224,23 @@ export function setupPhase1GlobalsAndRules() {
     defineGlobal("identity_morph",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
-                App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), X_val, Icit.Expl)
+                HomTerm(A_val, X_val, X_val)
             )
         ),
         undefined,
-        false,
+        true,
         true,
         false
     );
 
     defineGlobal("compose_morph",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
-            Pi("X", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
-                Pi("Y", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), Y_val =>
-                    Pi("Z", Icit.Impl, App(Var("Obj"), A_val, Icit.Expl), Z_val =>
-                        Pi("g", Icit.Expl, App(App(App(Var("Hom"), A_val, Icit.Impl), Y_val, Icit.Expl), Z_val, Icit.Expl), _ =>
-                            Pi("f", Icit.Expl, App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), Y_val, Icit.Expl), _ =>
-                                App(App(App(Var("Hom"), A_val, Icit.Impl), X_val, Icit.Expl), Z_val, Icit.Expl)
+            Pi("X", Icit.Impl, ObjTerm(A_val), X_val =>
+                Pi("Y", Icit.Impl, ObjTerm(A_val), Y_val =>
+                    Pi("Z", Icit.Impl, ObjTerm(A_val), Z_val =>
+                        Pi("g", Icit.Expl, HomTerm(A_val, Y_val, Z_val), _ =>
+                            Pi("f", Icit.Expl, HomTerm(A_val, X_val, Y_val), _ =>
+                                HomTerm(A_val, X_val, Z_val)
                             )
                         )
                     )
@@ -310,7 +310,7 @@ export function setupPhase1GlobalsAndRules() {
     const unifRule_homCov_compose_PatternVars = ["$A_cat", "$W_obj", "$X_obj", "$Y_obj", "$Z_obj", "$a_morph", "$f_morph"];
     const unifRule_LHS1 = App(
         FMap1Term(
-            App(App(Var("hom_cov"), Var("$A_cat"), Icit.Impl), Var("$W_obj"), Icit.Expl),
+            HomCovFunctorIdentity(Var("$A_cat"), Var("$W_obj")),
             Var("$a_morph"),
             Var("$A_cat"),
             SetTerm(),
@@ -354,6 +354,10 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
     ];
 
+    // naturality direct
+    //  ϵ._X _∘> G a  ↪  (F a) _∘> ϵ._X'
+    // rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
+    //     ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
     const LHS_NatDirect = App(
         FMap1Term(
             HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
