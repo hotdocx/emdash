@@ -8,7 +8,8 @@ import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
     freshHoleName, freshVarName, resetVarId, resetHoleId, setDebugVerbose,
     cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, solveConstraintsControl, // Added printTerm, solveConstraintsControl
-    lookupCtx
+    lookupCtx,
+    FH
 } from './core_state'; // Import from the new state file
 import { whnf, solveConstraints, areEqual } from './core_logic'; // For defineGlobal, addRewriteRule
 import { infer, check } from './core_elaboration'; // For defineGlobal, addRewriteRule
@@ -347,52 +348,79 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         false, true, false, false 
     );
 
-    const pva = (name: string) => Var(name, false); 
-
-    const userPatternVars_NatDirect = [
-        "$A_cat", "$B_cat", "$F_func", "$G_func",
-        "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
-    ];
-
     // naturality direct
     //  ϵ._X _∘> G a  ↪  (F a) _∘> ϵ._X'
     // rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
     //     ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
+
+    const userPatternVars_NatDirect = [
+        "$F_func", "$G_func",
+        "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
+    ];
     const LHS_NatDirect = App(
         FMap1Term(
-            HomCovFunctorIdentity(pva("$B_cat"), FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat"))),
+            HomCovFunctorIdentity(FH(), FH()),
             FMap1Term(
-                pva("$G_func"), pva("$a_morph"),
-                pva("$A_cat"), pva("$B_cat"), pva("$X_obj"), pva("$X_prime_obj")
-            ),
-            pva("$B_cat"), SetTerm(), 
-            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat")),
-            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat"))
+                Var("$G_func"), Var("$a_morph"),
+                FH(), FH(), Var("$X_obj"), Var("$X_prime_obj")
+            )
         ),
         NatTransComponentTerm(
-            pva("$eps_transf"), pva("$X_obj"),
-            pva("$A_cat"), pva("$B_cat"), pva("$F_func"), pva("$G_func")
+            Var("$eps_transf"), Var("$X_obj"),
+            FH(), FH(), Var("$F_func"), Var("$G_func")
         ),
         Icit.Expl 
     );
-
     const RHS_NatDirect = App(
         FMap1Term(
-            HomCovFunctorIdentity(pva("$B_cat"), FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat"))),
+            HomCovFunctorIdentity(FH(), FH()),
             NatTransComponentTerm(
-                pva("$eps_transf"), pva("$X_prime_obj"), 
-                pva("$A_cat"), pva("$B_cat"), pva("$F_func"), pva("$G_func")
-            ),
-            pva("$B_cat"), SetTerm(), 
-            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat")),
-            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat"))
+                Var("$eps_transf"), Var("$X_prime_obj")
+            )
         ),
         FMap1Term(
-            pva("$F_func"), pva("$a_morph"), 
-            pva("$A_cat"), pva("$B_cat"), pva("$X_obj"), pva("$X_prime_obj")
+            Var("$F_func"), Var("$a_morph")
         ),
         Icit.Expl
     );
+    // const userPatternVars_NatDirect = [
+    //     "$A_cat", "$B_cat", "$F_func", "$G_func",
+    //     "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
+    // ];
+    // const LHS_NatDirect = App(
+    //     FMap1Term(
+    //         HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"))),
+    //         FMap1Term(
+    //             Var("$G_func"), Var("$a_morph"),
+    //             Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")
+    //         ),
+    //         Var("$B_cat"), SetTerm(), 
+    //         FMap0Term(Var("$G_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat")),
+    //         FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))
+    //     ),
+    //     NatTransComponentTerm(
+    //         Var("$eps_transf"), Var("$X_obj"),
+    //         Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")
+    //     ),
+    //     Icit.Expl 
+    // );
+    // const RHS_NatDirect = App(
+    //     FMap1Term(
+    //         HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"))),
+    //         NatTransComponentTerm(
+    //             Var("$eps_transf"), Var("$X_prime_obj"), 
+    //             Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")
+    //         ),
+    //         Var("$B_cat"), SetTerm(), 
+    //         FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")),
+    //         FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))
+    //     ),
+    //     FMap1Term(
+    //         Var("$F_func"), Var("$a_morph"), 
+    //         Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")
+    //     ),
+    //     Icit.Expl
+    // );
 
     addRewriteRule(
         "naturality_direct_hom_cov_fapp1_tapp",

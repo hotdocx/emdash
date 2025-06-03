@@ -47,14 +47,12 @@ function runPhase1Tests() {
     const baseCtx = emptyCtx;
     const NatObjRepr = Var("NatType"); 
     console.log("\n--- Test 1: Basic Cat/Obj/Hom Types ---");
-    resetMyLambdaPi(); setupPhase1GlobalsAndRules();
+    resetMyLambdaPi(); setupCatTheoryPrimitives(baseCtx); setupPhase1GlobalsAndRules();
     let testTerm : Term;
     testTerm = CatTerm();
     let elabRes = elaborate(testTerm, undefined, baseCtx);
     assert(elabRes.type.tag === 'Type', "Test 1.1: Cat term should have type Type");
-    setupCatTheoryPrimitives(baseCtx);
-    abort();
-    
+
     const someCatHole = Hole("?MyCat");
     testTerm = ObjTerm(someCatHole);
     elabRes = elaborate(testTerm, undefined, baseCtx);
@@ -698,9 +696,11 @@ function runChurchEncodingTests() {
     elabRes = elaborate(Var("thousand_val"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_type"), baseCtx), "Church Test 17.3: thousand_val type check");
 
-    // let eqTest : Eq _ hundred hundred = refl _ _;
+    // [TODO] uncomment later
+    // // let eqTest : Eq _ hundred hundred = refl _ _;
     // const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
     // const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), FH(), Icit.Expl);
+    // // SLOW ~ 100s, uncomment later
     // defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
     // elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
 
@@ -1199,7 +1199,7 @@ function runChurchStyleImplicitTests() {
     elabRes = elaborate(Var("hundred_hs"), undefined, baseCtx);
     assert(areEqual(elabRes.type, Var("Nat_hs"), baseCtx), "HSI Test 15.1: hundred_hs type check");
     // SLOW ~ 20s, uncomment later
-    // assert(areEqual(elabRes.term, check(baseCtx, hundred_hs_val, Var("Nat_hs")), baseCtx), "HSI Test 15.2: hundred_hs value check");
+    assert(areEqual(elabRes.term, check(baseCtx, hundred_hs_val, Var("Nat_hs")), baseCtx), "HSI Test 15.2: hundred_hs value check");
 
     const Eq_hs_type = Pi("A_Eq", Icit.Impl, Type(), A_Eq_term => 
         Pi("x_Eq", Icit.Expl, A_Eq_term, _ => 
