@@ -236,6 +236,38 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
+            case 'FMap0Term': {
+                const functor_whnf = getTermRef(whnf(current.functor, ctx, stackDepth + 1));
+
+                if (functor_whnf.tag === 'HomCovFunctorIdentity') {
+                    // Rule: fapp0 (hom_cov A W) Y  ↪  Hom A W Y
+                    // current.functor (after whnf) is HomCovFunctorIdentity(A, W)
+                    // current.objectX is Y
+                    current = HomTerm(functor_whnf.domainCat, functor_whnf.objW_InDomainCat, current.objectX);
+                    reducedInKernelBlock = true;
+                } else {
+                    // No special rule applies based on functor_whnf.
+                    // Check if functor, objectX, or implicits changed and reconstruct if so.
+                    const objectX_whnf = getTermRef(whnf(current.objectX, ctx, stackDepth + 1));
+                    const catA_IMPLICIT_whnf = current.catA_IMPLICIT ? getTermRef(whnf(current.catA_IMPLICIT, ctx, stackDepth + 1)) : undefined;
+                    const catB_IMPLICIT_whnf = current.catB_IMPLICIT ? getTermRef(whnf(current.catB_IMPLICIT, ctx, stackDepth + 1)) : undefined;
+
+                    if (getTermRef(current.functor) !== functor_whnf ||
+                        getTermRef(current.objectX) !== objectX_whnf ||
+                        (current.catA_IMPLICIT && getTermRef(current.catA_IMPLICIT) !== catA_IMPLICIT_whnf) ||
+                        (current.catB_IMPLICIT && getTermRef(current.catB_IMPLICIT) !== catB_IMPLICIT_whnf)
+                    ) {
+                        current = FMap0Term(
+                            functor_whnf,
+                            objectX_whnf,
+                            catA_IMPLICIT_whnf,
+                            catB_IMPLICIT_whnf
+                        );
+                        reducedInKernelBlock = true;
+                    }
+                }
+                break;
+            }
         }
 
         if (reducedInKernelBlock) {
