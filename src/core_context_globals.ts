@@ -2,7 +2,7 @@ import {
     Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Icit,
     Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm,
-    FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, SetTerm, HomCovFunctorIdentity
+    FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, SetTerm, HomCovFunctorIdentity, FunctorTypeTerm
 } from './core_types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -182,6 +182,15 @@ export function setupPhase1GlobalsAndRules() {
 
     defineGlobal("Functor",
         Pi("A", Icit.Expl, CatTerm(), _A =>
+            Pi("B", Icit.Expl, CatTerm(), _B => Type())),
+        Lam("A_val", Icit.Expl, CatTerm(), A_term =>
+            Lam("B_val", Icit.Expl, CatTerm(), B_term =>
+                FunctorTypeTerm(A_term, B_term))),
+        false, true, false
+    );
+
+    defineGlobal("Functor_cat",
+        Pi("A", Icit.Expl, CatTerm(), _A =>
             Pi("B", Icit.Expl, CatTerm(), _B => CatTerm())),
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
@@ -192,12 +201,12 @@ export function setupPhase1GlobalsAndRules() {
     defineGlobal("Transf",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("B", Icit.Impl, CatTerm(), B_val =>
-                Pi("F", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_val, B_val)), _F =>
-                    Pi("G", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_val, B_val)), _G => Type())))),
+                Pi("F", Icit.Expl, FunctorTypeTerm(A_val, B_val), _F =>
+                    Pi("G", Icit.Expl, FunctorTypeTerm(A_val, B_val), _G => Type())))),
         Lam("A_val", Icit.Impl, CatTerm(), A_term =>
             Lam("B_val", Icit.Impl, CatTerm(), B_term =>
-                Lam("F_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), F_term =>
-                    Lam("G_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), G_term =>
+                Lam("F_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), F_term =>
+                    Lam("G_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), G_term =>
                         NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
         false, true, false
     );
@@ -337,7 +346,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     defineGlobal("hom_cov",
         Pi("A", Icit.Impl, CatTerm(), A_cat_val =>
             Pi("W", Icit.Expl, ObjTerm(A_cat_val), _W_obj_val =>
-                ObjTerm(FunctorCategoryTerm(A_cat_val, SetTerm()))
+                FunctorTypeTerm(A_cat_val, SetTerm())
             )
         ),
         Lam("A_cat_impl_arg", Icit.Impl, CatTerm(), A_cat_term =>

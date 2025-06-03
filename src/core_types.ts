@@ -12,15 +12,16 @@ export type BaseTerm =
     | { tag: 'ObjTerm', cat: Term }
     | { tag: 'HomTerm', cat: Term, dom: Term, cod: Term }
     // Emdash Phase 2: Functors and Natural Transformations
+    | { tag: 'FunctorTypeTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FunctorCategoryTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FMap0Term', // fapp0 F X
-        functor: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
+        functor: Term, // Term of type FunctorTypeTerm(catA, catB)
         objectX: Term, // ObjTerm(catA)
         catA_IMPLICIT?: Term,
         catB_IMPLICIT?: Term
       }
     | { tag: 'FMap1Term', // fapp1 F a
-        functor: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
+        functor: Term, // Term of type FunctorTypeTerm(catA, catB)
         morphism_a: Term, // HomTerm(catA, objX_A, objY_A)
         catA_IMPLICIT?: Term,
         catB_IMPLICIT?: Term,
@@ -30,8 +31,8 @@ export type BaseTerm =
     | { tag: 'NatTransTypeTerm', // Transf A B F G
         catA: Term,
         catB: Term,
-        functorF: Term, // ObjTerm(FunctorCategoryTerm(catA, catB))
-        functorG: Term  // ObjTerm(FunctorCategoryTerm(catA, catB))
+        functorF: Term, // Term of type FunctorTypeTerm(catA, catB)
+        functorG: Term  // Term of type FunctorTypeTerm(catA, catB)
       }
     | { tag: 'NatTransComponentTerm', // tapp eps X
         transformation: Term, // Term of type NatTransTypeTerm
@@ -79,6 +80,9 @@ export const ObjTerm = (cat: Term): Term & { tag: 'ObjTerm' } => ({ tag: 'ObjTer
 export const HomTerm = (cat: Term, dom: Term, cod: Term): Term & { tag: 'HomTerm' } => ({ tag: 'HomTerm', cat, dom, cod });
 
 // Emdash Phase 2: Functors and Natural Transformations Constructors
+export const FunctorTypeTerm = (domainCat: Term, codomainCat: Term): Term & { tag: 'FunctorTypeTerm' } =>
+    ({ tag: 'FunctorTypeTerm', domainCat, codomainCat });
+
 export const FunctorCategoryTerm = (domainCat: Term, codomainCat: Term): Term & { tag: 'FunctorCategoryTerm' } =>
     ({ tag: 'FunctorCategoryTerm', domainCat, codomainCat });
 

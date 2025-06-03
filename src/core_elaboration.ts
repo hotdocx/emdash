@@ -1,7 +1,7 @@
 import {
     Term, Context, PatternVarDecl, Substitution, ElaborationResult, Icit, Binding,
     Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    HomCovFunctorIdentity, SetTerm,
+    HomCovFunctorIdentity, SetTerm, FunctorTypeTerm,
     BaseTerm
 } from './core_types';
 import {
@@ -19,6 +19,7 @@ import { KERNEL_IMPLICIT_SPECS } from './core_kernel_metadata';
 // Use Extract to get the specific type from the BaseTerm union for casting
 // Emdash Phase 2: Functors and Natural Transformations
 type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;
+type FunctorTypeTermType = Extract<BaseTerm, { tag: 'FunctorTypeTerm' }>;
 type FMap0TermType = Extract<BaseTerm, { tag: 'FMap0Term' }>;
 type FMap1TermType = Extract<BaseTerm, { tag: 'FMap1Term' }>;
 type NatTransTypeTermType = Extract<BaseTerm, { tag: 'NatTransTypeTerm' }>;
@@ -296,12 +297,18 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const elabCodomainCat = check(ctx, fcTerm.codomainCat, CatTerm(), stackDepth + 1, isSubElaboration);
             return { elaboratedTerm: FunctorCategoryTerm(elabDomainCat, elabCodomainCat), type: CatTerm() };
         }
+        case 'FunctorTypeTerm': {
+            const fttTerm = current as Term & FunctorTypeTermType;
+            const elabDomainCat = check(ctx, fttTerm.domainCat, CatTerm(), stackDepth + 1, isSubElaboration);
+            const elabCodomainCat = check(ctx, fttTerm.codomainCat, CatTerm(), stackDepth + 1, isSubElaboration);
+            return { elaboratedTerm: FunctorTypeTerm(elabDomainCat, elabCodomainCat), type: Type() };
+        }
         case 'FMap0Term': {
             const fm0Term = current as Term & FMap0TermType;
             const elabCatA = check(ctx, fm0Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
             const elabCatB = check(ctx, fm0Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
             
-            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
             const elabFunctor = check(ctx, fm0Term.functor, expectedFunctorType, stackDepth + 1, isSubElaboration);
             
             const expectedObjectType = ObjTerm(elabCatA);
@@ -317,7 +324,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const elabObjX_A = check(ctx, fm1Term.objX_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, isSubElaboration);
             const elabObjY_A = check(ctx, fm1Term.objY_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, isSubElaboration);
 
-            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
             const elabFunctor = check(ctx, fm1Term.functor, expectedFunctorType, stackDepth + 1, isSubElaboration);
 
             const expectedMorphismType = HomTerm(elabCatA, elabObjX_A, elabObjY_A);
@@ -335,7 +342,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const ntTerm = current as Term & NatTransTypeTermType;
             const elabCatA = check(ctx, ntTerm.catA, CatTerm(), stackDepth + 1, isSubElaboration);
             const elabCatB = check(ctx, ntTerm.catB, CatTerm(), stackDepth + 1, isSubElaboration);
-            const expectedFunctorType = ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB));
+            const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
             const elabFunctorF = check(ctx, ntTerm.functorF, expectedFunctorType, stackDepth + 1, isSubElaboration);
             const elabFunctorG = check(ctx, ntTerm.functorG, expectedFunctorType, stackDepth + 1, isSubElaboration);
 
@@ -346,8 +353,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const ncTerm = current as Term & NatTransComponentTermType;
             const elabCatA = check(ctx, ncTerm.catA_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
             const elabCatB = check(ctx, ncTerm.catB_IMPLICIT!, CatTerm(), stackDepth + 1, isSubElaboration);
-            const elabFunctorF = check(ctx, ncTerm.functorF_IMPLICIT!, ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB)), stackDepth + 1, isSubElaboration);
-            const elabFunctorG = check(ctx, ncTerm.functorG_IMPLICIT!, ObjTerm(FunctorCategoryTerm(elabCatA, elabCatB)), stackDepth + 1, isSubElaboration);
+            const elabFunctorF = check(ctx, ncTerm.functorF_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, isSubElaboration);
+            const elabFunctorG = check(ctx, ncTerm.functorG_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, isSubElaboration);
 
             const expectedTransformationType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
             const elabTransformation = check(ctx, ncTerm.transformation, expectedTransformationType, stackDepth + 1, isSubElaboration);
@@ -376,7 +383,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
             const finalHCITerm = HomCovFunctorIdentity(elabDomainCat, elabObjW);
             return {
                 elaboratedTerm: finalHCITerm,
-                type: ObjTerm(FunctorCategoryTerm(elabDomainCat, globalSetTerm))
+                type: FunctorTypeTerm(elabDomainCat, globalSetTerm)
             };
         }
         case 'SetTerm': return { elaboratedTerm: current, type: CatTerm() };
@@ -515,7 +522,7 @@ export function elaborate(
         }
 
         if (!solveConstraints(initialCtx)) {
-            const fc = constraints.find(c => !areEqual(getTermRef(c.t1), getTermRef(c.t2), initialCtx, 0));
+            const fc = constraints.find(c_debug => !areEqual(getTermRef(c_debug.t1), getTermRef(c_debug.t2), initialCtx, 0));
             let fcMsg = "Unknown constraint";
             if (fc) {
                 fcMsg = `${printTerm(getTermRef(fc.t1))} vs ${printTerm(getTermRef(fc.t2))} (orig: ${fc.origin || 'unspecified'})`;
@@ -648,6 +655,12 @@ export function matchPattern(
             if (!s) return null;
             return matchPattern(fcP.codomainCat, fcT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1);
         }
+        case 'FunctorTypeTerm': {
+            const fttP = rtPattern as Term & FunctorTypeTermType; const fttT = rtTermToMatch as Term & FunctorTypeTermType;
+            let s = matchPattern(fttP.domainCat, fttT.domainCat, ctx, patternVarDecls, subst, stackDepth + 1);
+            if (!s) return null;
+            return matchPattern(fttP.codomainCat, fttT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1);
+        }
         case 'FMap0Term': {
             const fm0P = rtPattern; const fm0T = rtTermToMatch as Term & {tag:'FMap0Term'};
             let s: Substitution | null = subst;
@@ -771,6 +784,11 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             );
         case 'FunctorCategoryTerm':
             return FunctorCategoryTerm(
+                applySubst(current.domainCat, subst, patternVarDecls),
+                applySubst(current.codomainCat, subst, patternVarDecls)
+            );
+        case 'FunctorTypeTerm':
+            return FunctorTypeTerm(
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.codomainCat, subst, patternVarDecls)
             );

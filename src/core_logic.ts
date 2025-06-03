@@ -1,4 +1,4 @@
-import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm } from './core_types';
+import { Term, Context, PatternVarDecl, Substitution, UnifyResult, Icit, Hole, App, Lam, Pi, Var, ObjTerm, HomTerm, Type, CatTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm } from './core_types';
 import {
     getTermRef, consoleLog, globalDefs, userRewriteRules, addConstraint, constraints, emptyCtx, extendCtx, lookupCtx,
     isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally, userUnificationRules, freshVarName, freshHoleName,
@@ -68,6 +68,11 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             const fc2 = rt2 as Term & {tag:'FunctorCategoryTerm'};
             return areStructurallyEqualNoWhnf(rt1.domainCat, fc2.domainCat, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.codomainCat, fc2.codomainCat, ctx, depth + 1);
+        }
+        case 'FunctorTypeTerm': {
+            const ftt2 = rt2 as Term & {tag:'FunctorTypeTerm'};
+            return areStructurallyEqualNoWhnf(rt1.domainCat, ftt2.domainCat, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.codomainCat, ftt2.codomainCat, ctx, depth + 1);
         }
         case 'FMap0Term': {
             const fm0_2 = rt2 as Term & {tag:'FMap0Term'};
@@ -268,6 +273,15 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
+            case 'FunctorTypeTerm': {
+                const domainCat_whnf = getTermRef(whnf(current.domainCat, ctx, stackDepth + 1));
+                const codomainCat_whnf = getTermRef(whnf(current.codomainCat, ctx, stackDepth + 1));
+                if (getTermRef(current.domainCat) !== domainCat_whnf || getTermRef(current.codomainCat) !== codomainCat_whnf) {
+                    current = FunctorTypeTerm(domainCat_whnf, codomainCat_whnf);
+                    reducedInKernelBlock = true;
+                }
+                break;
+            }
         }
 
         if (reducedInKernelBlock) {
@@ -309,6 +323,11 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             );
         case 'FunctorCategoryTerm':
             return FunctorCategoryTerm(
+                normalize(current.domainCat, ctx, stackDepth + 1),
+                normalize(current.codomainCat, ctx, stackDepth + 1)
+            );
+        case 'FunctorTypeTerm':
+            return FunctorTypeTerm(
                 normalize(current.domainCat, ctx, stackDepth + 1),
                 normalize(current.codomainCat, ctx, stackDepth + 1)
             );
@@ -473,6 +492,11 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             return areEqual(rt1.domainCat, fc2.domainCat, ctx, depth + 1) &&
                    areEqual(rt1.codomainCat, fc2.codomainCat, ctx, depth + 1);
         }
+        case 'FunctorTypeTerm': {
+            const ftt2 = rt2 as Term & {tag:'FunctorTypeTerm'};
+            return areEqual(rt1.domainCat, ftt2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.codomainCat, ftt2.codomainCat, ctx, depth + 1);
+        }
         case 'FMap0Term': {
             const fm0_2 = rt2 as Term & {tag:'FMap0Term'};
             const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
@@ -577,6 +601,9 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
                    termContainsHole(current.dom, holeId, visited, depth + 1) ||
                    termContainsHole(current.cod, holeId, visited, depth + 1);
         case 'FunctorCategoryTerm':
+            return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.codomainCat, holeId, visited, depth + 1);
+        case 'FunctorTypeTerm':
             return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.codomainCat, holeId, visited, depth + 1);
         case 'FMap0Term':
@@ -967,6 +994,15 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (domStatus === UnifyResult.Solved && codStatus === UnifyResult.Solved) return UnifyResult.Solved;
             return UnifyResult.Progress;
         }
+        case 'FunctorTypeTerm': {
+            const ftt1 = rt1_final as Term & {tag:'FunctorTypeTerm'}; const ftt2 = rt2_final as Term & {tag:'FunctorTypeTerm'};
+            const domStatus = unify(ftt1.domainCat, ftt2.domainCat, ctx, depth + 1);
+            if (domStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            const codStatus = unify(ftt1.codomainCat, ftt2.codomainCat, ctx, depth + 1);
+            if (codStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (domStatus === UnifyResult.Solved && codStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
         case 'FMap0Term': {
             const fm0_1 = rt1_final as Term & {tag:'FMap0Term'}; const fm0_2 = rt2_final as Term & {tag:'FMap0Term'};
             const implicitsStatus = unifyArgs(
@@ -1078,6 +1114,10 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             collectPatternVars(current.cod, patternVarDecls, collectedVars, visited);
             break;
         case 'FunctorCategoryTerm':
+            collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
+            break;
+        case 'FunctorTypeTerm':
             collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
             break;

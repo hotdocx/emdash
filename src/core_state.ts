@@ -3,7 +3,7 @@ import {
     Type, Var, Lam, App, Pi, Hole, Binding,
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm, SetTerm, HomCovFunctorIdentity,
-    BaseTerm
+    BaseTerm, FunctorTypeTerm
 } from './core_types';
 
 // Global context for definitions and rules
@@ -51,7 +51,8 @@ export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ct
 export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm']);
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
     'CatTerm', 'ObjTerm', 'HomTerm',
-    'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm'
+    'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
+    'FunctorTypeTerm'
 ]);
 
 export function isKernelConstantSymbolStructurally(term: Term): boolean {
@@ -70,6 +71,7 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'NatTransTypeTerm':
         case 'HomCovFunctorIdentity':
         case 'SetTerm':
+        case 'FunctorTypeTerm':
             // These are structural and typically shouldn't be rewritten *as a whole* by general rules.
             return true;
         case 'FMap0Term':
@@ -256,6 +258,8 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
         case 'ObjTerm': return `(Obj ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomTerm':
             return `(Hom ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.dom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.cod, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'FunctorTypeTerm':
+            return `(FunctorType ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'FunctorCategoryTerm':
             return `(Functor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'FMap0Term':
