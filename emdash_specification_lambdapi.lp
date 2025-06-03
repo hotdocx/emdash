@@ -1,5 +1,24 @@
 /*
     m— emdash functorial programming
+    NOTES: for implementing this specification of emdash into typescript:
+    - the Lambdapi's `τ` decoder and `ABC_Type` versions of `ABC` need not be present in the Typescript implementation
+    - any argument enclosed in brackets (such as `[A : Cat]` ) to mark it as Lamdapi's implicit argument
+        means that in the typescript implementation too it should be treated as an implicit argument
+       (either as implicit input of a kernel term constructor or an implicit argument of a global/local variable which has an implicit Pi type)
+    - a Lambdapi symbol marked as `constant symbol` means the corresponsing emdash symbol should be registered as `constant` and `injective`
+    - a Lambdapi symbol marked as `injective symbol` means the corresponsing emdash symbol should be registered as `injective`
+    - an ordinary Lambdapi symbol `symbol XYZ (without marking such as `constant symbol` or `injective symbol`)
+      means that the corresponsing emdash symbol SHOULD NOT be registered as `constant` nor `injective.
+    - sometimes a Lambdapi rewrite rule ( `rule ... ↪ ... ;` ) or unification rule ( `unif_rule ... ≡ ... ↪ [ ... ≡ ... ; ... ≡ ... ];` ) will either:
+      + be directly implementad inside the kernel ( `whnf`, `areEqual`, `unify`, etc...) if it belongs very-much to the kernel
+      + or be implemented via the mechanism of `user-provided rewrite rules` or `user-provided unification rules`
+        if it belongs very-much to the standard library or for convenience reasons.
+    - when implementing a rewrite rule or unification rule, 
+      if a construct has both a kernel-term implementation and a convenience-alias as a global,
+      such as for example `defineGlobal("Hom", ..., Lam("A_val", Icit.Impl, CatTerm(), A_term => ... HomTerm(A_term, X_term, Y_term)))`
+      then (even though both constructions are convertible) it is understood that it is the true kernel-term version which
+      should be used syntactically to express the rewrite/unification rule
+    - Note that to get Lambdapi to accept empty conditions for unif_rule we use a trick such as `unif_rule A $x ≡ B $x ↪ [ tt ≡ tt ]`
 */
 
 // ===== START OF BASIC KERNEL SPECIFICATION  =====
