@@ -67,16 +67,14 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
     switch (rt.tag) {
         case 'CatTerm':
         case 'FunctorCategoryTerm':
-        // case 'FMap0Term':
-        // case 'FMap1Term':
         case 'NatTransTypeTerm':
-        case 'NatTransComponentTerm':
         case 'HomCovFunctorIdentity':
         case 'SetTerm':
             // These are structural and typically shouldn't be rewritten *as a whole* by general rules.
             return true;
         case 'FMap0Term':
         case 'FMap1Term':
+        case 'NatTransComponentTerm':
         case 'ObjTerm':
         case 'HomTerm':
             // These should allow rewrite rules like Obj_mkCat_eval and Hom_mkCat_eval.

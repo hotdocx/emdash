@@ -350,7 +350,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     const pva = (name: string) => Var(name, false); 
 
     const userPatternVars_NatDirect = [
-        "$A_cat", "$W_obj", "$F_func", "$G_func",
+        "$A_cat", "$B_cat", "$F_func", "$G_func",
         "$eps_transf", "$X_obj", "$X_prime_obj", "$a_morph"
     ];
 
@@ -360,36 +360,36 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     //     ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
     const LHS_NatDirect = App(
         FMap1Term(
-            HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
+            HomCovFunctorIdentity(pva("$B_cat"), FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat"))),
             FMap1Term(
                 pva("$G_func"), pva("$a_morph"),
-                pva("$A_cat"), SetTerm(), pva("$X_obj"), pva("$X_prime_obj")
+                pva("$A_cat"), pva("$B_cat"), pva("$X_obj"), pva("$X_prime_obj")
             ),
-            pva("$A_cat"), SetTerm(), 
-            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()),
-            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm())
+            pva("$B_cat"), SetTerm(), 
+            FMap0Term(pva("$G_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat")),
+            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat"))
         ),
         NatTransComponentTerm(
             pva("$eps_transf"), pva("$X_obj"),
-            pva("$A_cat"), SetTerm(), pva("$F_func"), pva("$G_func")
+            pva("$A_cat"), pva("$B_cat"), pva("$F_func"), pva("$G_func")
         ),
         Icit.Expl 
     );
 
     const RHS_NatDirect = App(
         FMap1Term(
-            HomCovFunctorIdentity(pva("$A_cat"), pva("$W_obj")),
-            FMap1Term(
-                pva("$F_func"), pva("$a_morph"), 
-                pva("$A_cat"), SetTerm(), pva("$X_obj"), pva("$X_prime_obj")
+            HomCovFunctorIdentity(pva("$B_cat"), FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), pva("$B_cat"))),
+            NatTransComponentTerm(
+                pva("$eps_transf"), pva("$X_prime_obj"), 
+                pva("$A_cat"), pva("$B_cat"), pva("$F_func"), pva("$G_func")
             ),
-            pva("$A_cat"), SetTerm(),
-            FMap0Term(pva("$F_func"), pva("$X_obj"), pva("$A_cat"), SetTerm()),
-            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), SetTerm())
+            pva("$B_cat"), SetTerm(), 
+            FMap0Term(pva("$F_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat")),
+            FMap0Term(pva("$G_func"), pva("$X_prime_obj"), pva("$A_cat"), pva("$B_cat"))
         ),
-        NatTransComponentTerm(
-            pva("$eps_transf"), pva("$X_prime_obj"), 
-            pva("$A_cat"), SetTerm(), pva("$F_func"), pva("$G_func")
+        FMap1Term(
+            pva("$F_func"), pva("$a_morph"), 
+            pva("$A_cat"), pva("$B_cat"), pva("$X_obj"), pva("$X_prime_obj")
         ),
         Icit.Expl
     );
