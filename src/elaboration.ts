@@ -14,7 +14,7 @@ import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
     freshHoleName, freshVarName, consoleLog, constraints, printTerm
 } from './state';
-import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH } from './logic';
+import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH, matchPattern, applySubst, isPatternVarName } from './logic'; // Added matchPattern, applySubst, isPatternVarName
 import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './kernel_metadata';
 
 // Type aliases for specific term kinds, useful for casting
@@ -53,7 +53,7 @@ export function ensureKernelImplicitsPresent(term: Term): Term {
 
                     let dynamicHintPart = "";
                     // Example: Add dynamic hints based on term content if useful
-                    // if (spec.tag === 'IdentityMorph' && specificTerm.obj) {
+                    // if (spec.tag === 'IdentityMorph' && specificTerm.obj) { // IdentityMorph example
                     //     const idObj = getTermRef(specificTerm.obj);
                     //     if (idObj.tag === 'Var') dynamicHintPart = `_${idObj.name}`;
                     //     else if (idObj.tag === 'Hole') dynamicHintPart = `_${idObj.id.replace("?","h")}`;
@@ -512,7 +512,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     // It's crucial to attempt to solve constraints here. If this fails, the check fails.
     // This was moved to the end of the `elaborate` function for the top-level call,
     // but sub-elaborations might benefit from intermediate solving.
-    // However, to avoid excessive re-solving, keep it minimal here or rely on the final solve.
     // For now, let the final solve handle it unless specific issues arise.
     // solveConstraints(ctx, stackDepth + 1);
 

@@ -15,6 +15,7 @@ import {
     extendCtx, lookupCtx, isKernelConstantSymbolStructurally, isEmdashUnificationInjectiveStructurally,
     userUnificationRules, freshVarName, freshHoleName, solveConstraintsControl, printTerm
 } from './state';
+// Removed import for matchPattern, applySubst, isPatternVarName from core_elaboration, as they will be defined here.
 
 export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to prevent infinite loops.
 export const MAX_STACK_DEPTH = 20000;   // Max recursion depth for various logical operations.
@@ -293,6 +294,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
+             // Other cases (Lam, Pi, Type, CatTerm, SetTerm, etc.) are already in WHNF or do not reduce further at head.
         }
 
         if (reducedInKernelBlock) {
@@ -454,6 +456,8 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     const rt2 = getTermRef(whnf(t2, ctx, depth + 1));
 
     // Structural comparison after WHNF
+    // Note: This reuses areStructurallyEqualNoWhnf. If WHNF is thorough, this should be correct.
+    // Alpha-equivalence for Lam/Pi is handled by areStructurallyEqualNoWhnf's fresh var instantiation.
     return areStructurallyEqualNoWhnf(rt1, rt2, ctx, depth + 1);
 }
 

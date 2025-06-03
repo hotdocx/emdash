@@ -7,12 +7,12 @@
  */
 
 import {
-    Term, Context, GlobalDef, RewriteRule, PatternVarDecl, UnificationRule, Icit,
-    Type, Var, Lam, App, Pi, Hole
+    Term, Context, GlobalDef, PatternVarDecl, UnificationRule, Icit,
+    Type, Hole
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
-    freshHoleName, freshVarName,
+    freshHoleName,
     cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, lookupCtx
 } from './state';
 import { whnf, solveConstraints, areEqual } from './logic';
@@ -60,15 +60,10 @@ export function defineGlobal(
         // Elaborate the provided type itself if requested, or assume it's valid.
         // The result of check(type, Type()) is the elaborated type.
         elaboratedType = toElaborateType ? check(elabCtx, type, Type()) : type;
-        // WHNF the type after elaboration to ensure it's in a canonical form for storage.
-        // However, for `defineGlobal("NatType", Type(), ... isTypeNameLike=true, toElaborateType=false)`
-        // we want `NatType` to have `Type()` as its type, not `Type` whnf'd (which is still `Type`).
-        // The `isTypeNameLike` more directly controls unfolding during `whnf` of Vars.
-        // The `toElaborateType` controls if the `type` parameter to `defineGlobal` is itself elaborated.
-        // If `toElaborateType` is true, we use the result of `check`.
-        // Otherwise, we assume `type` is already what we want to store.
-        // Let's always WHNF the type that will be stored, unless it's Type() itself.
-        if (elaboratedType.tag !== 'Type') {
+
+        // WHNF the type that will be stored, unless it's Type() itself or a TypeNameLike global whose type is Type().
+        // This ensures types are in a somewhat canonical form.
+        if (elaboratedType.tag !== 'Type' && !(isTypeNameLike && getTermRef(elaboratedType).tag === 'Type')) {
              elaboratedType = whnf(getTermRef(elaboratedType), elabCtx);
         }
 

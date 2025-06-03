@@ -52,6 +52,7 @@ The `src/` directory contains the core implementation, partitioned into logical 
     *   `solveConstraints`: The main constraint solver loop.
     *   `matchPattern`: Matches a pattern term against a subject term, producing a substitution (used by rewrite and unification rules).
     *   `applySubst`: Applies a substitution to a term.
+    *   `isPatternVarName`, `collectPatternVars`, `applyAndAddRuleConstraints`, `tryUnificationRules`: Helper functions for pattern matching and rule application.
 *   **`elaboration.ts`**: Implements the type checking and inference layer:
     *   `infer`: Infers the type of a given term.
     *   `check`: Checks if a term has a given expected type.
@@ -101,7 +102,7 @@ The `stdlib.ts` file demonstrates how category theory primitives are set up:
 *   `Hom A X Y` (where `X, Y : Obj A`) is defined as a `Type`.
 *   Functors like `hom_cov A W : Functor A Set` are defined, where `Set` is a predefined category.
 *   Rewrite rules are added, for example, for naturality conditions:
-    `(tapp eps X) ∘> (G a)  ↪  (F a) ∘> (tapp eps X')`
+    `(tapp eps X) _∘> (G a)  ↪  (F a) _∘> (tapp eps X')`
     This is expressed using `FMap1Term` (for functorial action on morphisms) and `NatTransComponentTerm` (for `tapp`).
 
 This setup allows the system to reason about and compute with these categorical structures.
