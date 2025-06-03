@@ -1,24 +1,5 @@
 /*
     m— emdash functorial programming
-    NOTES: for implementing this specification of emdash into typescript:
-    - the Lambdapi's `τ` decoder and `ABC_Type` versions of `ABC` need not be present in the Typescript implementation
-    - any argument enclosed in brackets (such as `[A : Cat]` ) to mark it as Lamdapi's implicit argument
-        means that in the typescript implementation too it should be treated as an implicit argument
-       (either as implicit input of a kernel term constructor or an implicit argument of a global/local variable which has an implicit Pi type)
-    - a Lambdapi symbol marked as `constant symbol` means the corresponsing emdash symbol should be registered as `constant` and `injective`
-    - a Lambdapi symbol marked as `injective symbol` means the corresponsing emdash symbol should be registered as `injective`
-    - an ordinary Lambdapi symbol `symbol XYZ (without marking such as `constant symbol` or `injective symbol`)
-      means that the corresponsing emdash symbol SHOULD NOT be registered as `constant` nor `injective.
-    - sometimes a Lambdapi rewrite rule ( `rule ... ↪ ... ;` ) or unification rule ( `unif_rule ... ≡ ... ↪ [ ... ≡ ... ; ... ≡ ... ];` ) will either:
-      + be directly implementad inside the kernel ( `whnf`, `areEqual`, `unify`, etc...) if it belongs very-much to the kernel
-      + or be implemented via the mechanism of `user-provided rewrite rules` or `user-provided unification rules`
-        if it belongs very-much to the standard library or for convenience reasons.
-    - when implementing a rewrite rule or unification rule, 
-      if a construct has both a kernel-term implementation and a convenience-alias as a global,
-      such as for example `defineGlobal("Hom", ..., Lam("A_val", Icit.Impl, CatTerm(), A_term => ... HomTerm(A_term, X_term, Y_term)))`
-      then (even though both constructions are convertible) it is understood that it is the true kernel-term version which
-      should be used syntactically to express the rewrite/unification rule
-    - Note that to get Lambdapi to accept empty conditions for unif_rule we use a trick such as `unif_rule A $x ≡ B $x ↪ [ tt ≡ tt ]`
 */
 
 // ===== START OF BASIC KERNEL SPECIFICATION  =====
@@ -53,29 +34,39 @@ rule τ (@Hom_Type $A $X $Y) ↪ @Hom $A $X $Y;
 
 // # --- Functors ---
 
-constant symbol Functor : Π(A : Cat), Π(B : Cat), Cat;
+constant symbol Functor : Π(A : Cat), Π(B : Cat), TYPE;
 
-symbol fapp0 : Π[A : Cat], Π[B : Cat], Π(F : Obj (Functor A B)), Obj A → Obj B;
-symbol fapp1 : Π[A : Cat], Π[B : Cat], Π(F : Obj (Functor A B)),
+constant symbol Functor_Type : Π(A : Cat), Π(B : Cat), Type;
+rule τ (@Functor_Type $A $B) ↪ @Functor $A $B;
+
+symbol fapp0 : Π[A : Cat], Π[B : Cat], Π(F : Functor A B), Obj A → Obj B;
+symbol fapp1 : Π[A : Cat], Π[B : Cat], Π(F : Functor A B),
   Π[X: Obj A], Π[Y: Obj A], Π(a: Hom X Y), Hom (fapp0 F X) (fapp0 F Y);
 
-// ok these rules concerned `Obj (Functor A B)`, but what is `@Hom (Functor _ _)` ? answer:
+// ok these rules concerned `Functor A B`, but what is `@Hom (Functor_cat _ _)` ? answer:
 
 
 // # --- Natural Transformations ---
 
-constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Obj (Functor A B)), Π (G : Obj (Functor A B)), TYPE;
+constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Functor A B), Π (G : Functor A B), TYPE;
 
-constant symbol Transf_Type : Π [A : Cat], Π [B : Cat], Π (F : Obj (Functor A B)), Π (G : Obj (Functor A B)), Type;
+constant symbol Transf_Type : Π [A : Cat], Π [B : Cat], Π (F : Functor A B), Π (G : Functor A B), Type;
 rule τ (@Transf_Type $A $B $F $G) ↪ @Transf $A $B $F $G;
 
 // notation:  (ϵ)._X  for  tapp ϵ X
-symbol tapp : Π [A : Cat], Π [B : Cat], Π [F : Obj (Functor A B)], Π [G : Obj (Functor A B)],
+symbol tapp : Π [A : Cat], Π [B : Cat], Π [F : Functor A B], Π [G : Functor A B],
   Π (ϵ : Transf F G), Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X);
 
-// structure-preserving (components) expressed indirectly below, no explicit map required for this rule
-rule @Hom (Functor _ _) $F $G ↪ Transf $F $G;
 
+// # --- Functor category ---
+
+constant symbol Functor_cat : Π(A : Cat), Π(B : Cat), Cat;
+
+unif_rule Obj $Z ≡ (Functor $A $B) ↪ [ $Z ≡ (Functor_cat $A $B) ];
+
+// structure-preserving (components) expressed indirectly below, no explicit map required for this rule
+rule @Hom (Functor_cat _ _) $F $G ↪ Transf $F $G;
+  
 
 // # --- Set category classifier, discrete fibrations, yoneda representable Functor ---
 
@@ -89,9 +80,9 @@ unif_rule Obj $A ≡ Type ↪ [ $A ≡ Set ];
 rule @Hom Set $X $Y ↪ (τ $X → τ $Y);
 
 // yoneda covarient embedding functor to Set; also TODO: contravariant Yoneda
-// this is a "fully-saturated" constructor `@hom_cov A W : Obj (Functor A Set)` inside kernel,
+// this is a "fully-saturated" constructor `@hom_cov A W : Functor A Set` inside kernel,
 // unlike `compose_morph` which has a Π type
-constant symbol hom_cov : Π [A : Cat], Π (W: Obj A), Obj (Functor A Set);
+constant symbol hom_cov : Π [A : Cat], Π (W: Obj A), Functor A Set;
 // constant symbol hom_con : Π [A : Cat], Π (W: Obj A), Obj (Functor Aᵒᵖ Set);
 
 rule fapp0 (hom_cov $X) $Y ↪ Hom_Type $X $Y;
@@ -100,10 +91,11 @@ rule fapp0 (hom_cov $X) $Y ↪ Hom_Type $X $Y;
 
 constant symbol Cat_cat : Cat;
 
-rule Obj Cat_cat ↪ Cat;
-rule @Hom Cat_cat $X $Y ↪ Obj (Functor $X $Y);
+unif_rule Obj $A ≡ Cat ↪ [ $A ≡ Cat_cat ];
 
-constant symbol hom_cov_cat : Π [A : Cat], Π (W: Obj A), Obj (Functor A Cat_cat);
+rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
+
+constant symbol hom_cov_cat : Π [A : Cat], Π (W: Obj A), Functor A Cat_cat;
 
 // the objects-map of hom_cov_cat is hom_cov
 rule Obj (fapp0 (hom_cov_cat $W) $Y) ↪ Hom $W $Y;
@@ -114,10 +106,8 @@ injective symbol Homd_ [A : Cat] [W: Obj A] [Y : Obj A] [Y': Obj A] (a: Hom Y Y'
 ≔ @Hom (fapp0 (hom_cov_cat W) Y') (fapp0 (fapp1 (hom_cov_cat W) a) f) h;
 
 // 2-element above 1-element  is  via the presence of classifier Cat_cat for fibrations
-// injective symbol Homd_fibr [A : Cat] (M: Obj (Functor A Cat_cat)) [Y : Obj A] [Y': Obj A] (a: Hom Y Y') (f : Obj (fapp0 M Y)) (h : Obj (fapp0 M Y')) : TYPE
+// injective symbol Homd_fibr [A : Cat] (M: Functor A Cat_cat) [Y : Obj A] [Y': Obj A] (a: Hom Y Y') (f : Obj (fapp0 M Y)) (h : Obj (fapp0 M Y')) : TYPE
 // ≔ @Hom (fapp0 M Y') (fapp0 (fapp1 M a) f) h;
-
-
 
 // ===== END OF BASIC KERNEL SPECIFICATION =====
 
@@ -151,7 +141,7 @@ rule fapp1 (hom_cov _) (@fapp1 _ _ $H $Y $Z $a) (fapp1 (hom_cov _) (@fapp1 _ _ $
 
 // associativity accumulation
 //  (a _∘> (f _∘> g))  ↪  ((a _∘> f) _∘> g)
-rule (fapp1 (hom_cov _) (fapp1 (hom_cov _) $g $f) $a) 
+rule (fapp1 (hom_cov _) (fapp1 (hom_cov $Y) $g $f) $a) 
 ↪ (fapp1 (hom_cov _) $g (fapp1 (hom_cov _) $f $a));
 
 // ===== END OF EXTRA KERNEL SPECIFICATION =====
@@ -218,10 +208,10 @@ rule compose_morph (@fapp1 _ _ $F $Y $Z $a) (fapp1 (hom_cov $W) (@fapp1 _ _ $F $
 // # --- Natural Transformations ---
 
 //  (id)._X  ↪  id 
-rule tapp (@identity_morph (Functor _ $B) $F) $I ↪ identity_morph (fapp0 $F $I);
+rule tapp (@identity_morph (Functor_cat _ $B) $F) $I ↪ identity_morph (fapp0 $F $I);
 
 // (ϵ ∘> ϵ')._X  ↪  (ϵ)._X ∘> (ϵ')._X 
-rule tapp (@compose_morph (Functor _ $B) $X $Y $Z $ϵ' $ϵ) $K
+rule tapp (@compose_morph (Functor_cat _ $B) $X $Y $Z $ϵ' $ϵ) $K
    ↪ @compose_morph $B (fapp0 $X $K) (fapp0 $Y $K) (fapp0 $Z $K) (tapp $ϵ' $K) (tapp $ϵ $K);
 
 // naturality direct
@@ -270,10 +260,10 @@ symbol Eqs [A : Type] [B : τ A → Type ] (ϵ ϵ' : Π X : τ A,τ (B X)) : TYP
 // induction/transport structures are preserved below, no explicit map required
 // NOTE: see rule for Set below. TODO: add other rewrite for (Product _ _) etc.
 // apparently both rules are required
-rule τ (@= (@Hom_Type (Functor $A $B) $F $G) $ϵ $ϵ') ↪ Eqs (tapp $ϵ) (tapp $ϵ');
+rule τ (@= (@Hom_Type (Functor_cat $A $B) $F $G) $ϵ $ϵ') ↪ Eqs (tapp $ϵ) (tapp $ϵ');
 rule τ (@= (@Transf_Type $A $B $F $G) $ϵ $ϵ') ↪ Eqs (tapp $ϵ) (tapp $ϵ');
 
-injective symbol product_family [A : Cat] [B : Cat] [F : Obj (Functor A B)] [G : Obj (Functor A B)] 
+injective symbol product_family [A : Cat] [B : Cat] [F : Functor A B] [G : Functor A B] 
 (P : Π X : Obj A, Hom (fapp0 F X) (fapp0 G X) → Type): Hom F G → Type;
 
 // rule must be in applied form, so product_family is not auto rewriteen
@@ -282,7 +272,7 @@ rule product_family $P $ϵ  ↪  `Π_ X , $P X (tapp $ϵ X);
 rule (ind_eq $H (product_family $P) $x) $X  ↪  ind_eq ($H $X) ($P $X) ($x $X);
 
 // test
-assert [A : Cat] [B : Cat] [F : Obj (Functor A B)] [G : Obj (Functor A B)]
+assert [A : Cat] [B : Cat] [F : Functor A B] [G : Functor A B]
   (ϵ ϵ' : Hom F G) (H : τ (ϵ = ϵ')) 
    (P : Π X : Obj A, Hom (fapp0 F X) (fapp0 G X) → Type) 
    (p : Π X : Obj A, τ (P X (tapp ϵ' X))) (X : Obj A) ⊢ 
@@ -319,35 +309,35 @@ injective symbol functoriality_TYPE  (A : Cat) (B : Cat) (fapp0 : Π(X: Obj A), 
     = fapp1 _ _ (compose_morph a a'));
 
 constant symbol mkFunctor_ [A : Cat] [B : Cat] : Π (fapp0 : Obj A → Obj B)
-(fapp1 : Π[X: Obj A], Π[Y: Obj A], Π(a: Hom X Y), Hom (fapp0 X) (fapp0 Y)),  Obj (Functor A B);
+(fapp1 : Π[X: Obj A], Π[Y: Obj A], Π(a: Hom X Y), Hom (fapp0 X) (fapp0 Y)),  Functor A B;
 
 rule fapp0 (mkFunctor_ $fapp0 $fapp1) ↪ $fapp0;
 rule fapp1 (mkFunctor_ $fapp0 $fapp1) $a ↪ $fapp1 _ _ $a;
     
 symbol mkFunctor (A : Cat) (B : Cat) : Π (fapp0 : Obj A → Obj B)
 (fapp1 : Π[X: Obj A], Π[Y: Obj A], Π(a: Hom X Y), Hom (fapp0 X) (fapp0 Y))
-(functoriality: functoriality_TYPE A B fapp0 fapp1),  Obj (Functor A B)
+(functoriality: functoriality_TYPE A B fapp0 fapp1),  Functor A B
   ≔ λ fapp0 fapp1 _, @mkFunctor_ A B fapp0 fapp1;
 
-constant symbol mkTransf_ [A : Cat] [B : Cat] [F G : Obj (Functor A B)] : 
+constant symbol mkTransf_ [A : Cat] [B : Cat] [F G : Functor A B] : 
  Π (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)), Transf F G;
 
 rule tapp (mkTransf_ $tapp) ↪ $tapp;
 
  //  ϵ._X ∘> G f  =  F f ∘> ϵ._Y
-injective symbol naturality_TYPE [A : Cat] [B : Cat] (F G : Obj (Functor A B)) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
+injective symbol naturality_TYPE [A : Cat] [B : Cat] (F G : Functor A B) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
 Π [X : Obj A] [Y : Obj A] (f : Hom X Y),
 τ ((compose_morph (fapp1 G f) (tapp X))
   = (compose_morph (tapp Y) (fapp1 F f)));
  
-symbol mkTransf [A : Cat] [B : Cat] (F G : Obj (Functor A B)) : 
+symbol mkTransf [A : Cat] [B : Cat] (F G : Functor A B) : 
 Π (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)),
 Π (naturality : naturality_TYPE F G tapp), Transf F G ≔ λ tapp _, @mkTransf_ A B F G tapp;
 
 
 // # --- Test 1, Super Yoneda Functor Benchmark 1 : by reflexivity proofs only ---
 
-symbol compose_functors_ : Π[A:Cat], Π[B:Cat], Π[C:Cat], Π(F: Obj (Functor B C)), Π(G: Obj (Functor A B)), Obj (Functor A C)
+symbol compose_functors_ : Π[A:Cat], Π[B:Cat], Π[C:Cat], Π(F: Functor B C), Π(G: Functor A B), Functor A C
 ≔ begin
   assume A B C F G;
   apply mkFunctor
@@ -359,7 +349,7 @@ symbol compose_functors_ : Π[A:Cat], Π[B:Cat], Π[C:Cat], Π(F: Obj (Functor B
   }
 end;
 
-symbol super_yoneda_functor_1 : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Obj (Functor (Functor B A) (Functor B Set))
+symbol super_yoneda_functor_1 : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Functor (Functor_cat B A) (Functor_cat B Set)
 ≔ begin
   assume A B W;
   apply mkFunctor
@@ -402,8 +392,8 @@ rule fapp0 (@compose_morph Cat_cat $A $B $C $G $F) $X
 rule fapp1 (@compose_morph Cat_cat $A $B $C $G $F) $a
   ↪ (fapp1 $G (fapp1 $F $a));
 
-symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: Obj (Functor B C)) (G: Obj (Functor A B)) : 
-Obj (Functor A C) ≔ @compose_morph Cat_cat _ _ _ F G; 
+symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: Functor B C) (G: Functor A B) : 
+Functor A C ≔ @compose_morph Cat_cat _ _ _ F G; 
 
 // TODO ? two rules? second rule assuming $f $g have same objects-map?
 //                    ... then lack grammar/elaboration for "function above another function"
@@ -412,7 +402,7 @@ Obj (Functor A C) ≔ @compose_morph Cat_cat _ _ _ F G;
 
 // # --- Test 2, Super Yoneda Functor Benchmark 2 : alternative with extensionality for Set category ---
 
-symbol super_yoneda_functor_2 : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Obj (Functor (Functor B A) (Functor B Set))
+symbol super_yoneda_functor_2 : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Functor (Functor_cat B A) (Functor_cat B Set)
 ≔ begin
   assume A B W;
   apply mkFunctor
@@ -435,15 +425,38 @@ symbol super_yoneda_functor_2 : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Obj (
 end;
 
 
-// # --- TODO: dependent arrow category of a dependent category ---
+// # --- TODO: ω-category, arrow/comma category, dependent arrow category of a dependent/fibration category ---
 
-constant symbol Total_cat [A : Cat] (M: Obj (Functor A Cat_cat)): Cat;
-injective symbol Total_cat_proj [A : Cat] (M: Obj (Functor A Cat_cat)): Obj (Functor (Total_cat M) A);
+inductive τΣ_ [a : Type] (P : τ a → Type) : TYPE ≔
+| Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst) ), @τΣ_ a P;
+notation τΣ_ quantifier;
 
-// so (@hom_cov_cat (Total_cat M) (W_,W)) : Obj (Functor (Total_cat M) Cat)  is both fibred over (Total_cat M)
-// and projects to ("is above")  (@hom_cov_cat A W_)
-symbol hom_cov_cat_total_proj [A : Cat] (M: Obj (Functor A Cat_cat)) (W : Obj (Total_cat M)):
-  Transf (@hom_cov_cat (Total_cat M) W) (compose_functors (@hom_cov_cat A (fapp0 (Total_cat_proj M) W)) (Total_cat_proj M));
+constant symbol Σ_ [a : Type] (P : τ a → Type) : Type; notation Σ_ quantifier;
+rule τ (Σ_ $P) ↪ τΣ_ $P;
+
+injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
+rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
+
+injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
+rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
+
+constant symbol Total_cat [A : Cat] (M: Functor A Cat_cat): Cat;
+injective symbol Total_cat_proj [A : Cat] (M: Functor A Cat_cat): Functor (Total_cat M) A;
+
+rule Obj (Total_cat $M) ↪ `τΣ_ X : Obj _, Obj_Type (fapp0 $M X);
+
+rule @Hom (Total_cat $M) $Y_f $Y'_f' 
+↪ `τΣ_ a : Hom (sigma_Fst $Y_f) (sigma_Fst $Y'_f'), 
+      @Hom_Type (fapp0 $M (sigma_Fst $Y'_f')) (fapp0 (fapp1 $M a) (sigma_Snd $Y_f)) (sigma_Snd $Y'_f');
+
+rule fapp0 (Total_cat_proj $M) $Y_f ↪ sigma_Fst $Y_f;
+rule fapp1 (Total_cat_proj $M) $a_ϕ ↪ sigma_Fst $a_ϕ;
+
+// this expresses that  `@hom_cov_cat (Total_cat M) (W_,W) : Functor (Total_cat M) Cat`
+//  is both fibred over  `Total_cat M` and is above/projects to  `@hom_cov_cat A W_`
+// also expresses composition in ω-category and whiskering/composition of 2-cell by 1-cell
+symbol hom_cov_cat_total_proj [A : Cat] (M: Functor A Cat_cat) (W : Obj (Total_cat M)):
+  Transf (@hom_cov_cat (Total_cat M) W) (fapp1 (@hom_cov Cat_cat _) (@hom_cov_cat A (fapp0 (Total_cat_proj M) W)) (Total_cat_proj M));
 
 
 // # --- TODO: Modules/profunctors without Set classifier vs functors to Set ---
@@ -452,7 +465,7 @@ symbol hom_cov_cat_total_proj [A : Cat] (M: Obj (Functor A Cat_cat)) (W : Obj (T
 // cannot use constructors mkTransf,
 // proof is via meta case analysis, must assume this symbol
 // .. hence its naturality prop gives new general conversion rules
-constant symbol module_action : Π [A : Cat] (M : Obj (Functor A Set)) [X : Obj A],
+constant symbol module_action : Π [A : Cat] (M : Functor A Set) [X : Obj A],
 τ (fapp0 M X) → Transf (hom_cov X) M;
 
 // notation `m ⋅>_ f` for  tapp (module_action _ m) _ f
@@ -482,7 +495,7 @@ symbol rule_functoriality_TYPE (A : Cat) (B : Cat) (fapp0 : Π(X: Obj A), Obj B)
   τ (compose_morph (fapp1' _ _ a) (fapp1 (hom_cov W) (fapp1' _ _ a') f)
     = (fapp1 (hom_cov W) (fapp1' _ _ (compose_morph a a'))) f) ;
   
-symbol rule_functoriality [A:Cat] [B:Cat] (F : Obj (Functor A B))
+symbol rule_functoriality [A:Cat] [B:Cat] (F : Functor A B)
    : rule_functoriality_TYPE A B (@fapp0 A B F) (@fapp1 A B F)
     ≔ λ X Y Z a a' W f, eq_refl _ ;
   
@@ -500,30 +513,30 @@ assert A [W : Obj A]  ⊢ ( (fapp1 (hom_cov W) (identity_morph _))) ≡ identity
 symbol rule_fapp1_hom_cov [A : Cat] [W X Y : Obj A] (aa : Hom X Y) (f : Hom W X):
 τ ((fapp1 (hom_cov W) aa) f = compose_morph aa f) ≔ eq_refl _;
 
-symbol rule_accumulation_transf [A : Cat] [B : Cat] (F : Obj (Functor A B)) (G : Obj (Functor A B))
+symbol rule_accumulation_transf [A : Cat] [B : Cat] (F : Functor A B) (G : Functor A B)
   (ϵ : Hom F G) (X : Obj A) [Y : Obj B] (f : Hom Y (fapp0 F X)) [Y' : Obj B] (a : Hom Y' Y) :
    τ( (compose_morph (fapp1 (hom_cov Y) (tapp ( ϵ) X) f) a) 
   = (fapp1 (hom_cov Y') (tapp ( ϵ) X)) (compose_morph f a)) ≔ eq_refl _;
 
-injective symbol rule_naturality_TYPE [A : Cat] [B : Cat] (F G : Obj (Functor A B)) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
+injective symbol rule_naturality_TYPE [A : Cat] [B : Cat] (F G : Functor A B) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
 Π [X : Obj A] [X' : Obj A] (a : Hom X X') [Y : Obj B] (f : Hom Y (fapp0 F X)),
 τ( (compose_morph (fapp1 G a) (fapp1 (hom_cov Y) (tapp X) f))
   =  (fapp1 (hom_cov Y) (tapp X') (compose_morph (fapp1 F a) f)));
 
-symbol rule_naturality [A : Cat] [B : Cat] [F : Obj (Functor A B)] [G : Obj (Functor A B)]
+symbol rule_naturality [A : Cat] [B : Cat] [F : Functor A B] [G : Functor A B]
 (ϵ : Transf F G)
 : rule_naturality_TYPE F G (tapp ( ϵ)) ≔ λ X X' a Y f , eq_refl _;
 
 // user-facing naturality from computational rule naturality
-symbol naturality_from_rule_naturality [A : Cat] [B : Cat] [F G : Obj (Functor A B)] [tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)] 
+symbol naturality_from_rule_naturality [A : Cat] [B : Cat] [F G : Functor A B] [tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)] 
 : rule_naturality_TYPE F G tapp → naturality_TYPE F G tapp
 ≔ λ H X X' a, (H X X' a _ (identity_morph (fapp0 F X)));
 
-injective symbol rule_naturality_direct_TYPE [A : Cat] [B : Cat] (F G : Obj (Functor A B)) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
+injective symbol rule_naturality_direct_TYPE [A : Cat] [B : Cat] (F G : Functor A B) (tapp : Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X)) : TYPE ≔ 
 Π [X : Obj A] [X' : Obj A] (a : Hom X X'),
 τ( compose_morph (fapp1 G a) (tapp X)
   = fapp1 (hom_cov _) (tapp X') (fapp1 F a));
 
-symbol rule_naturality_direct [A : Cat] [B : Cat] [F : Obj (Functor A B)] [G : Obj (Functor A B)]
+symbol rule_naturality_direct [A : Cat] [B : Cat] [F : Functor A B] [G : Functor A B]
 (ϵ : Transf F G) 
 : rule_naturality_direct_TYPE F G (tapp ( ϵ)) ≔ λ X X' a , eq_refl _;
