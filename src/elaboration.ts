@@ -14,7 +14,11 @@ import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
     freshHoleName, freshVarName, consoleLog, constraints, printTerm
 } from './state';
-import { whnf, normalize, areEqual, solveConstraints, MAX_STACK_DEPTH, matchPattern, applySubst, isPatternVarName } from './logic'; // Added matchPattern, applySubst, isPatternVarName
+import { whnf, normalize } from './logic/reduction';
+import { areEqual } from './logic/equality';
+import { solveConstraints } from './logic/unification';
+import { MAX_STACK_DEPTH } from './logic/constants';
+import { matchPattern, applySubst, isPatternVarName } from './logic/pattern';
 import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './kernel_metadata';
 
 // Type aliases for specific term kinds, useful for casting
