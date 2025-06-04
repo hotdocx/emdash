@@ -18,10 +18,10 @@ import {
 } from '../src/stdlib';
 import {
     areEqual,
-} from '../src/logic/equality';
+} from '../src/equality';
 import {
     normalize,
-} from '../src/logic/reduction';
+} from '../src/reduction';
 import {
     elaborate
 } from '../src/elaboration';

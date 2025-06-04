@@ -6,11 +6,11 @@
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi,
     Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit
-} from '../types';
+} from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
     freshVarName, freshHoleName, extendCtx
-} from '../state';
+} from './state';
 import { MAX_STACK_DEPTH } from './constants';
 import { matchPattern, applySubst } from './pattern';
 import { areStructurallyEqualNoWhnf } from './structural';

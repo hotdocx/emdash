@@ -4,8 +4,8 @@
  * This metadata is used during elaboration to ensure these implicits are present,
  * often by inserting holes if they are missing.
  */
-import { Term, BaseTerm, Hole } from '../types';
-import { freshHoleName } from '../state'; // Import freshHoleName from state.ts
+import { Term, BaseTerm, Hole } from './types';
+import { freshHoleName } from './state'; // Import freshHoleName from state.ts
 
 export const MAX_STACK_DEPTH = 20000; 
 

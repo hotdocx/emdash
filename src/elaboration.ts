@@ -14,12 +14,12 @@ import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
     freshHoleName, freshVarName, consoleLog, constraints, printTerm
 } from './state';
-import { whnf, normalize } from './logic/reduction';
-import { areEqual } from './logic/equality';
-import { solveConstraints } from './logic/unification';
-import { MAX_STACK_DEPTH } from './logic/constants';
-import { matchPattern, applySubst, isPatternVarName } from './logic/pattern';
-import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './logic/constants';
+import { whnf, normalize } from './reduction';
+import { areEqual } from './equality';
+import { solveConstraints } from './unification';
+import { MAX_STACK_DEPTH } from './constants';
+import { matchPattern, applySubst, isPatternVarName } from './pattern';
+import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './constants';
 
 // Type aliases for specific term kinds, useful for casting
 type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;

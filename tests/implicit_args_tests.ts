@@ -19,13 +19,13 @@ import {
 } from '../src/stdlib';
 import {
     areEqual,
-} from '../src/logic/equality';
+} from '../src/equality';
 import {
     normalize,
-} from '../src/logic/reduction';
+} from '../src/reduction';
 import {
     unify, solveConstraints
-} from '../src/logic/unification';
+} from '../src/unification';
 import {
     elaborate, ElaborationOptions
 } from '../src/elaboration';

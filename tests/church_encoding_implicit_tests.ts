@@ -18,13 +18,13 @@ import {
 } from '../src/stdlib';
 import {
     areEqual,
-} from '../src/logic/equality';
+} from '../src/equality';
 import {
     normalize,
-} from '../src/logic/reduction';
+} from '../src/reduction';
 import {
     unify
-} from '../src/logic/unification';
+} from '../src/unification';
 import {
     elaborate, check
 } from '../src/elaboration';

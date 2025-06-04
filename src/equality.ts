@@ -7,8 +7,8 @@ import {
     Term, Context, Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit
-} from '../types';
-import { getTermRef, freshHoleName, extendCtx } from '../state';
+} from './types';
+import { getTermRef, freshHoleName, extendCtx } from './state';
 import { MAX_STACK_DEPTH } from './constants';
 import { whnf } from './reduction';
 

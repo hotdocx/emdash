@@ -17,7 +17,7 @@ import {
 } from '../src/stdlib';
 import {
     areEqual
-} from '../src/logic/equality';
+} from '../src/equality';
 import {
     elaborate, check
 } from '../src/elaboration';

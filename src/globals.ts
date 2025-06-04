@@ -15,9 +15,9 @@ import {
     freshHoleName,
     cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, lookupCtx
 } from './state';
-import { whnf } from './logic/reduction';
-import { solveConstraints } from './logic/unification';
-import { areEqual } from './logic/equality';
+import { whnf } from './reduction';
+import { solveConstraints } from './unification';
+import { areEqual } from './equality';
 import { infer, check } from './elaboration';
 
 /**

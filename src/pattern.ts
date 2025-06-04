@@ -7,11 +7,11 @@ import {
     Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, CatTerm, SetTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FunctorTypeTerm, FMap0Term, FMap1Term,
     NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule
-} from '../types';
+} from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
     addConstraint, userUnificationRules, consoleLog
-} from '../state';
+} from './state';
 import { areEqual } from './equality';
 import { MAX_STACK_DEPTH } from './constants';
 
