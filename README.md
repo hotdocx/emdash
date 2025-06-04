@@ -33,7 +33,7 @@ The design is inspired by systems like Lambdapi, Agda, and Coq, with a particula
 The `src/` directory contains the core implementation, partitioned into logical modules:
 
 *   **`types.ts`**: Defines all fundamental data structures for terms (`Term`, `Var`, `App`, `Lam`, `Pi`, `Hole`, and various category theory term constructors like `CatTerm`, `ObjTerm`, `FMap0Term`, etc.), contexts (`Context`), implicit/explicit markers (`Icit`), and interfaces for global definitions, rewrite rules, and unification rules.
-*   **`kernel_metadata.ts`**: Specifies metadata for built-in ("kernel") term constructors that have implicit arguments (e.g., `FMap0Term` has implicit category arguments). This metadata is used by the elaborator to ensure these implicits are correctly handled.
+*   **`constants.ts`**: Specifies metadata for built-in ("kernel") term constructors that have implicit arguments (e.g., `FMap0Term` has implicit category arguments). This metadata is used by the elaborator to ensure these implicits are correctly handled.
 *   **`state.ts`**: Manages all global state, including:
     *   `globalDefs`: A map storing global symbol definitions.
     *   `userRewriteRules`, `userUnificationRules`: Arrays for user-defined rules.

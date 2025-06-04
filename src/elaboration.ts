@@ -19,7 +19,7 @@ import { areEqual } from './logic/equality';
 import { solveConstraints } from './logic/unification';
 import { MAX_STACK_DEPTH } from './logic/constants';
 import { matchPattern, applySubst, isPatternVarName } from './logic/pattern';
-import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './kernel_metadata';
+import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './logic/constants';
 
 // Type aliases for specific term kinds, useful for casting
 type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;
