@@ -203,7 +203,6 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
         case 'Lam': {
             const lamNode = current;
             let actualParamType: Term;
-            const originalAnnotationState = { annotated: lamNode._isAnnotated, type: lamNode.paramType };
 
             if (lamNode._isAnnotated && lamNode.paramType) {
                 actualParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, true);
@@ -211,9 +210,6 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 // Infer parameter type if not annotated
                 actualParamType = Hole(freshHoleName() + "_lam_" + lamNode.paramName + "_paramT_infer");
                 (actualParamType as Term & {tag:'Hole'}).elaboratedType = Type();
-                // Temporarily update lamNode for recursive calls, will be restored if originalTerm was this lamNode.
-                lamNode.paramType = actualParamType;
-                lamNode._isAnnotated = true;
             }
 
             // Construct the Pi type for the lambda
@@ -245,24 +241,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                     return insertedBody.term; // Return the elaborated body
                 }
             );
-            (elaboratedLam as Term & {tag: 'Lam'})._isAnnotated = true; // Mark as annotated
 
-            // Restore original annotation state if the 'current' was a mutated version of the input 'term'
-            if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalAnnotationState.annotated) {
-                originalTerm.paramType = originalAnnotationState.type;
-                originalTerm._isAnnotated = false;
-            } else if (current === lamNode && !originalAnnotationState.annotated) { // If 'current' was the one mutated
-                lamNode.paramType = originalAnnotationState.type;
-                lamNode._isAnnotated = false;
-            }
-
-            // if (!originalAnnotationState.annotated && originalTerm === lamNode && originalTerm.tag === 'Lam') {
-            //     originalTerm.paramType = originalAnnotationState.type; 
-            //     originalTerm._isAnnotated = false;
-            // } else if (lamNode.tag === 'Lam' && !originalAnnotationState.annotated) { // Current was mutated
-            //     lamNode.paramType = originalAnnotationState.type;
-            //     lamNode._isAnnotated = false;
-            // }
             return { elaboratedTerm: elaboratedLam, type: piType };
         }
         case 'Pi': {
@@ -443,25 +422,13 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         const lamNode = currentTerm;
         const expectedPiNode = expectedTypeWhnf;
         let lamParamType = lamNode.paramType; // Type annotation on the lambda
-        const originalAnnotationState = { annotated: lamNode._isAnnotated, type: lamNode.paramType };
-
 
         if (!lamNode._isAnnotated) { // Lambda is not annotated, take type from Pi
             lamParamType = expectedPiNode.paramType;
-            // Mutate the original term if it was the unannotated lambda passed in.
-            // This allows the elaborated term to carry the inferred type annotation.
-            if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalTerm._isAnnotated) {
-                originalTerm.paramType = lamParamType;
-                originalTerm._isAnnotated = true;
-            }
-            // Also update currentTerm's view if it was the unannotated Lam
-            lamNode.paramType = lamParamType;
-            lamNode._isAnnotated = true;
         } else if (lamNode.paramType) { // Lambda is annotated, check its type against Pi's domain type
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, true);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
-            // It's often beneficial to try to solve constraints here, especially if lamParamType was a hole.
-            solveConstraints(ctx, stackDepth + 1); // <<< RESTORED THIS CALL
+            solveConstraints(ctx, stackDepth + 1);
             lamParamType = elabLamParamType; // Use the elaborated type
         }
 
@@ -480,17 +447,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, true); // Check body
             }
         );
-        (elabLam as Term & {tag:'Lam'})._isAnnotated = true; // Mark elaborated lambda as annotated
-
-        // Restore original annotation state on the input `term` if it was mutated and unannotated.
-        // if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalAnnotationState.annotated) {
-        //     originalTerm.paramType = originalAnnotationState.type;
-        //     originalTerm._isAnnotated = false;
-        // } else if (currentTerm === lamNode && !originalAnnotationState.annotated) {
-        //     lamNode.paramType = originalAnnotationState.type;
-        //     lamNode._isAnnotated = false;
-        // }
-
         return elabLam;
     }
 
@@ -502,7 +458,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else {
             // If already has a type, add a constraint.
             addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeWhnf, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
-            solveConstraints(ctx, stackDepth + 1); // <<< RESTORED THIS CALL (was already present here)
         }
         return currentTerm;
     }
