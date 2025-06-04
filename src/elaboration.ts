@@ -241,7 +241,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                     return insertedBody.term; // Return the elaborated body
                 }
             );
-
+            // The Lam factory function sets ._isAnnotated = true if paramType is provided.
             return { elaboratedTerm: elaboratedLam, type: piType };
         }
         case 'Pi': {
@@ -421,18 +421,18 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (currentTerm.tag === 'Lam' && expectedTypeWhnf.tag === 'Pi' && currentTerm.icit === expectedTypeWhnf.icit) {
         const lamNode = currentTerm;
         const expectedPiNode = expectedTypeWhnf;
-        let lamParamType = lamNode.paramType; // Type annotation on the lambda
+        let lamParamType = lamNode.paramType; // Type annotation on the lambda from the original term structure
 
         if (!lamNode._isAnnotated) { // Lambda is not annotated, take type from Pi
             lamParamType = expectedPiNode.paramType;
         } else if (lamNode.paramType) { // Lambda is annotated, check its type against Pi's domain type
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, true);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
-            solveConstraints(ctx, stackDepth + 1);
+            solveConstraints(ctx, stackDepth + 1); // <<< This was marked as RESTORED THIS CALL
             lamParamType = elabLamParamType; // Use the elaborated type
         }
 
-        if (!lamParamType) { // Should not happen if logic above is correct
+        if (!lamParamType) { // Should not happen if logic above is correct and paramType was from Pi or checked
             throw new Error(`Lambda parameter type missing for ${lamNode.paramName} when checking against Pi`);
         }
 
@@ -447,6 +447,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, true); // Check body
             }
         );
+        // The Lam factory function sets ._isAnnotated = true because finalLamParamType is provided.
         return elabLam;
     }
 
@@ -458,6 +459,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else {
             // If already has a type, add a constraint.
             addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeWhnf, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
+            solveConstraints(ctx, stackDepth + 1); // <<< This was marked as RESTORED THIS CALL (was already present here)
         }
         return currentTerm;
     }
@@ -470,11 +472,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
     // Add constraint: (type of term after implicit insertion) should be equal to (expected type)
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
-    // The crucial solveConstraints call for this added constraint is typically at the end of `elaborate`.
-    // However, if intermediate solving is strictly necessary for correctness *within* a sub-check,
-    // it might be needed here. The original had it commented out.
-    // For now, maintaining the restored behavior for specific cases above (Lam vs Pi, Hole) and adding an extra intermediate solving here.
-    solveConstraints(ctx, stackDepth + 1); // This was the commented out line.
+    solveConstraints(ctx, stackDepth + 1); // This was the commented out line, now restored as per previous state.
 
     return afterInsert.term; // Return the term after potential implicit applications
 }
