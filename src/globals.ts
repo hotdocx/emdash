@@ -57,16 +57,8 @@ export function defineGlobal(
     let elaboratedValue: Term | undefined = undefined;
 
     try {
-        // Elaborate the provided type itself if requested, or assume it's valid.
-        // The result of check(type, Type()) is the elaborated type.
-        elaboratedType = toElaborateType ? check(elabCtx, type, Type()) : type;
-
-        // WHNF the type that will be stored, unless it's Type() itself or a TypeNameLike global whose type is Type().
-        // This ensures types are in a somewhat canonical form.
-        if (elaboratedType.tag !== 'Type' && !(isTypeNameLike && getTermRef(elaboratedType).tag === 'Type')) {
-             elaboratedType = whnf(getTermRef(elaboratedType), elabCtx);
-        }
-
+        elaboratedType = check(elabCtx, type, Type());
+        elaboratedType = toElaborateType ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
 
         if (value !== undefined) {
             const valueToCheck = cloneTerm(value); // Clone to avoid modifying the original
@@ -167,7 +159,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for RHS
         // Infer the type of the elaborated LHS in the *global* context (or rule's definition context)
         // to determine the target type for the RHS.
-        const typeOfGlobalLhsResult = infer(ctx, elaboratedLhs, 0); // Use original ctx, not lhsElabCtx
+        const typeOfGlobalLhsResult = infer(lhsElabCtx, elaboratedLhs, 0); // Use lhsElabCtx, not original ctx
          if (!solveConstraints(ctx)) { // Solve constraints that arose from inferring type of elaboratedLhs
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
         }

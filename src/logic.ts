@@ -501,13 +501,13 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
             if (lam.paramType && termContainsHole(lam.paramType, holeId, visited, depth + 1)) return true;
             // For Lam/Pi body, use a fresh Var to instantiate and check.
             // Create a new visited set for the body to avoid cross-scope false positives from the termKey of the placeholder.
-            const freshVLam = Var(freshVarName("occ_check_lam_"), true, "occurs_check");
+            const freshVLam = Var(lam.paramName, true, "occurs_check");
             return termContainsHole(lam.body(freshVLam), holeId, new Set(visited) , depth + 1);
         }
         case 'Pi': {
             const pi = current;
             if (termContainsHole(pi.paramType, holeId, visited, depth + 1)) return true;
-            const freshVPi = Var(freshVarName("occ_check_pi_"), true, "occurs_check");
+            const freshVPi = Var(pi.paramName, true, "occurs_check");
             return termContainsHole(pi.bodyType(freshVPi), holeId, new Set(visited) , depth + 1);
         }
         case 'ObjTerm': return termContainsHole(current.cat, holeId, visited, depth + 1);

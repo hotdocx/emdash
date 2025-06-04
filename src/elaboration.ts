@@ -455,7 +455,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, true);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
             // It's often beneficial to try to solve constraints here, especially if lamParamType was a hole.
-            solveConstraints(ctx, stackDepth + 1);
+            solveConstraints(ctx, stackDepth + 1); // <<< RESTORED THIS CALL
             lamParamType = elabLamParamType; // Use the elaborated type
         }
 
@@ -496,7 +496,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         } else {
             // If already has a type, add a constraint.
             addConstraint(getTermRef(currentTerm.elaboratedType), expectedTypeWhnf, `check Hole ${currentTerm.id}: elaboratedType vs expectedType`);
-            solveConstraints(ctx, stackDepth + 1); // Try to solve immediately
+            solveConstraints(ctx, stackDepth + 1); // <<< RESTORED THIS CALL (was already present here)
         }
         return currentTerm;
     }
@@ -509,12 +509,11 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
     // Add constraint: (type of term after implicit insertion) should be equal to (expected type)
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
-    // It's crucial to attempt to solve constraints here. If this fails, the check fails.
-    // This was moved to the end of the `elaborate` function for the top-level call,
-    // but sub-elaborations might benefit from intermediate solving.
-    // For now, let the final solve handle it unless specific issues arise.
-    // solveConstraints(ctx, stackDepth + 1);
-
+    // The crucial solveConstraints call for this added constraint is typically at the end of `elaborate`.
+    // However, if intermediate solving is strictly necessary for correctness *within* a sub-check,
+    // it might be needed here. The original had it commented out.
+    // For now, maintaining the restored behavior for specific cases above (Lam vs Pi, Hole) and adding an extra intermediate solving here.
+    solveConstraints(ctx, stackDepth + 1); // This was the commented out line.
 
     return afterInsert.term; // Return the term after potential implicit applications
 }

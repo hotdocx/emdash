@@ -40,24 +40,23 @@ export function resetMyLambdaPi() {
  */
 export function setupPhase1GlobalsAndRules() {
     // Basic Types (assumed to be Type itself, not elaborated here, so toElaborateType = false)
-    // `isTypeNameLike` ensures they are not unfolded by WHNF on Var.
-    defineGlobal("NatType", Type(), undefined, true, true, true, false);
-    defineGlobal("BoolType", Type(), undefined, true, true, true, false);
+    defineGlobal("NatType", Type(), undefined, true, true, false);
+    defineGlobal("BoolType", Type(), undefined, true, true, false);
 
     // Core Category Theory Primitives
     // `Cat` itself is a type. Its "value" CatTerm() is also a type.
     // This means CatTerm() is a specific term of type Type().
-    defineGlobal("Cat", Type(), CatTerm(), false, true, true, false);
+    defineGlobal("Cat", Type(), CatTerm(), false, true, false);
 
     // `Set` is a specific category (a term of type Cat). Its value is SetTerm().
-    defineGlobal("Set", CatTerm(), SetTerm(), false, true, true, false);
+    defineGlobal("Set", CatTerm(), SetTerm(), false, true, false);
 
     // `Obj` is a function from Cat to Type.
     // The type given to defineGlobal needs to be elaborated itself.
     defineGlobal("Obj",
         Pi("A", Icit.Expl, CatTerm(), _A => Type()), // Obj : Cat -> Type
         Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)), // A |-> Obj A
-        false, true, false, true // type needs elaboration
+        false, true, false
     );
 
     // `Hom` is a function {A:Cat} -> Obj A -> Obj A -> Type.
@@ -69,7 +68,7 @@ export function setupPhase1GlobalsAndRules() {
             Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
                 Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
                     HomTerm(A_term, X_term, Y_term)))), // {A} X Y |-> Hom A X Y
-        false, true, false, true // type needs elaboration
+        false, true, false
     );
 
     // `Functor` is a function Cat -> Cat -> Type (the type of functors).
@@ -79,7 +78,7 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorTypeTerm(A_term, B_term))), // A B |-> FunctorType A B
-        false, true, false, true // type needs elaboration
+        false, true, false
     );
 
     // `Functor_cat` is a function Cat -> Cat -> Cat (the functor category).
@@ -89,7 +88,7 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorCategoryTerm(A_term, B_term))), // A B |-> FunctorCategory A B
-        false, true, false, true // type needs elaboration
+        false, true, false
     );
 
     // `Transf` is the type of natural transformations.
@@ -103,7 +102,7 @@ export function setupPhase1GlobalsAndRules() {
                 Lam("F_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), F_term =>
                     Lam("G_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), G_term =>
                         NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
-        false, true, false, true // type needs elaboration
+        false, true, false
     );
 
     // Category constructor `mkCat_`.
@@ -121,7 +120,7 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, true, true, false, true // type needs elaboration
+        undefined, true, true, false
     );
 
     defineGlobal("identity_morph",
@@ -130,7 +129,7 @@ export function setupPhase1GlobalsAndRules() {
                 HomTerm(A_val, X_val, X_val)
             )
         ),
-        undefined, true, true, false, true // type needs elaboration
+        undefined, true, true, false
     );
 
     defineGlobal("compose_morph",
@@ -147,14 +146,14 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, false, false, false, true // type needs elaboration
+        undefined, false, false, false
     );
 
     // Rewrite Rules for mkCat_
     addRewriteRule(
         "Obj_mkCat_eval",
         ["$O", "$H", "$C"],
-        App(Var("Obj"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Expl),
+        ObjTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl)),
         Var("$O"),
         emptyCtx
     );
@@ -162,10 +161,7 @@ export function setupPhase1GlobalsAndRules() {
     addRewriteRule(
         "Hom_mkCat_eval",
         ["$O", "$H", "$C", "$X", "$Y"],
-        App(App(App(Var("Hom"),
-                App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Impl),
-            Var("$X"), Icit.Expl),
-            Var("$Y"), Icit.Expl),
+        HomTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Var("$X"), Var("$Y")),
         App(App(Var("$H"), Var("$X"), Icit.Expl), Var("$Y"), Icit.Expl),
         emptyCtx
     );
@@ -242,15 +238,14 @@ export function setupCatTheoryPrimitives(ctx: Context) {
                 HomCovFunctorIdentity(A_cat_term, W_obj_term)
             )
         ),
-        false, true, false, true // type needs elaboration
+        false, true, false, false 
     );
 
     // Naturality Rewrite Rule (Direct version from LambdAPI spec)
     // rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
     //   ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
     // This translates to:
-    // (tapp ϵ X) _∘>G (G a)  ↪  (F a) _∘>F (tapp ϵ X')
-    // where `_∘>K` denotes fapp1(hom_cov B (K X)).
+    // (tapp ϵ X) _∘> (G a)  ↪  (F a) _∘> (tapp ϵ X')
     // The explicit pattern variables for categories ensure the correct hom_cov is used.
 
     const userPatternVars_NatDirect = [
@@ -283,21 +278,21 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     );
 
     // RHS: (F a) _∘> (tapp eps X')
-    // = fapp1( hom_cov B (G X') , tapp eps X' , F a )
+    // = fapp1( hom_cov B (F X) , tapp eps X' , F a )
     // Correction: The LambdAPI rule is `fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a)`
-    // This means the functor for `_∘>` is `hom_cov _ (F X')` not `G X'`.
+    // This means the functor for `_∘>` is `hom_cov _ (F X)`.
     const RHS_NatDirect = App(
         FMap1Term( // Outer application
-            HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))), // Functor part of _∘>: hom_cov B (F X')
+            HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"))), // Functor part of _∘>: hom_cov B (F X)
             NatTransComponentTerm( // First argument to _∘>: tapp eps X'
                 Var("$eps_transf"), Var("$X_prime_obj"),
                 Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")
             ),
              // Implicit args for the outer FMap1Term (representing _∘>)
-            Var("$B_cat"), // catA for hom_cov B (F X') is B
-            SetTerm(),     // catB for hom_cov B (F X') is Set
-            FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), // objX_A for (tapp eps X') (domain in B is F X')
-            FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))  // objY_A for (tapp eps X') (codomain in B is G X')
+            Var("$B_cat"), // catA for hom_cov B (F X) is B
+            SetTerm(),     // catB for hom_cov B (F X) is Set
+            FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), // objX_A for (tapp eps X') (domain in B is F X)
+            FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))  // objY_A for (tapp eps X') (codomain in B is G X)
         ),
         FMap1Term( // Second argument to _∘>: F a
             Var("$F_func"), Var("$a_morph"),
