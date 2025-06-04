@@ -14,6 +14,7 @@ import {
     defineGlobal
 } from '../src/globals';
 import {
+    resetMyLambdaPi,
     resetMyLambdaPi_Emdash // Use the combined setup
 } from '../src/stdlib';
 import {
@@ -30,7 +31,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     let term: Term, elabRes: ElaborationResult;
 
     it("IA1.1: (constId {Nat} five) should elaborate to five", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
         defineGlobal("constId",
             Pi("A", Icit.Impl, Type(), A_param => Pi("x", Icit.Expl, A_param, _x_param => A_param)),
@@ -46,7 +47,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     });
 
     it("IA1.2: (constId five) should elaborate to five (A inferred as Nat)", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
         defineGlobal("constId", // Redefine as state is reset
             Pi("A", Icit.Impl, Type(), A_param => Pi("x", Icit.Expl, A_param, _x_param => A_param)),
@@ -62,7 +63,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     });
 
     it("IA2.1: Elaborated polyId against Pi type should have an outer implicit lambda", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
         defineGlobal("Nat", Type(), undefined, true, false, true); // isTypeNameLike: true, isConstantSymbol: true
         const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
@@ -95,7 +96,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     });
 
     it("IA3.1: For injective f_inj, (f_inj a = f_inj ?h1) should solve ?h1 to a_val", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
         defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type()))));
         defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) )));
@@ -117,7 +118,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     });
 
     it("IA3.2: For non-injective g_noninj, (g_noninj a = g_noninj ?h3) should leave ?h3 as a hole", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
         // defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type())))); // Not needed for this test
         // defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) ))); // Not needed for this test
@@ -138,7 +139,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
 
 describe("More Implicit Argument Tests from Haskell Examples", () => {
     it("id : {A : U} -> A -> A = \\\\x. x", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         const id_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
         const id_raw_val = Lam("x", Icit.Expl, x => x); // Type of x to be inferred
@@ -152,7 +153,7 @@ describe("More Implicit Argument Tests from Haskell Examples", () => {
     });
 
     it("const : {A B} -> A -> B -> A = \\\\x y. x", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         const const_type = Pi("A", Icit.Impl, Type(), A =>
                            Pi("B", Icit.Impl, Type(), B =>
@@ -171,7 +172,7 @@ describe("More Implicit Argument Tests from Haskell Examples", () => {
     });
 
     it("the : (A : _) -> A -> A = \\\\_ x. x", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         const the_type = Pi("A", Icit.Expl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
         const the_raw_val = Lam("A_", Icit.Expl, Type(), A_ => Lam("x", Icit.Expl, A_, x => x)); // Explicitly typed Lam based on Pi
@@ -188,7 +189,7 @@ describe("More Implicit Argument Tests from Haskell Examples", () => {
     });
 
     it("argTest1 = const {U}{U} U (infer type and value)", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         // Define const first (as it's used in this test)
         const const_type_for_test = Pi("A", Icit.Impl, Type(), A => Pi("B", Icit.Impl, Type(), B => Pi("x", Icit.Expl, A, _ => Pi("y", Icit.Expl, B, _ => A))));
@@ -206,7 +207,7 @@ describe("More Implicit Argument Tests from Haskell Examples", () => {
     });
 
     it("id2 : {A} -> A -> A = \\\\{A} x. x", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         const id2_type = Pi("A", Icit.Impl, Type(), A => Pi("x", Icit.Expl, A, _ => A));
         // This value is already in the fully elaborated form expected.
@@ -219,7 +220,7 @@ describe("More Implicit Argument Tests from Haskell Examples", () => {
     });
 
     it("insert2 = (\\\\{A} x. the A x) U (explicit application, infer type and value)", () => {
-        resetMyLambdaPi_Emdash();
+        resetMyLambdaPi();
         const ctx = emptyCtx;
         // Define "the" first (as it's used in this test)
         const the_type_for_test = Pi("A", Icit.Expl, Type(), A_ => Pi("x", Icit.Expl, A_, _x => A_));

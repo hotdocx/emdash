@@ -7,7 +7,7 @@ import { getDebugVerbose, setDebugVerbose } from '../src/state';
 // Import test files. The `node:test` runner will discover `describe` and `it` blocks in these files.
 import './phase1_tests'; // Assuming this file also uses or will be refactored to use describe/it
 import './implicit_args_tests';
-// import './elaboration_options_tests';
+import './elaboration_options_tests';
 // import './church_encoding_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
