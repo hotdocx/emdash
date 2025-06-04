@@ -16,8 +16,8 @@ import {
     resetMyLambdaPi_Emdash
 } from '../src/stdlib';
 import {
-    areEqual, normalize, unify
-} from '../src/logic';
+    areEqual
+} from '../src/logic/equality';
 import {
     elaborate, check
 } from '../src/elaboration';

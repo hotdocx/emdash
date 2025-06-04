@@ -18,8 +18,14 @@ import {
     resetMyLambdaPi_Emdash // Use the combined setup
 } from '../src/stdlib';
 import {
-    areEqual, normalize, whnf, unify, solveConstraints
-} from '../src/logic';
+    areEqual,
+} from '../src/logic/equality';
+import {
+    normalize,
+} from '../src/logic/reduction';
+import {
+    unify, solveConstraints
+} from '../src/logic/unification';
 import {
     elaborate, ElaborationOptions
 } from '../src/elaboration';

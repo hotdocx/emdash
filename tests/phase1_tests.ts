@@ -17,8 +17,11 @@ import {
     resetMyLambdaPi_Emdash, setupCatTheoryPrimitives, setupPhase1GlobalsAndRules // Use the combined setup
 } from '../src/stdlib';
 import {
-    areEqual, normalize
-} from '../src/logic';
+    areEqual,
+} from '../src/logic/equality';
+import {
+    normalize,
+} from '../src/logic/reduction';
 import {
     elaborate
 } from '../src/elaboration';
