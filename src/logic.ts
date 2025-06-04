@@ -21,6 +21,34 @@ export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to pre
 export const MAX_STACK_DEPTH = 20000;   // Max recursion depth for various logical operations.
 
 /**
+ * Checks if all corresponding arguments in two lists are equal by convertibility (areEqual).
+ * Handles undefined arguments by treating them as distinct unless both are undefined.
+ * @param args1 First list of terms (or undefined).
+ * @param args2 Second list of terms (or undefined).
+ * @param ctx The current context.
+ * @param depth Recursion depth.
+ * @returns True if all defined argument pairs are convertible and undefined positions match, false otherwise.
+ */
+function areAllArgsEqual(args1: (Term | undefined)[], args2: (Term | undefined)[], ctx: Context, depth: number): boolean {
+    if (args1.length !== args2.length) return false;
+    for (let i = 0; i < args1.length; i++) {
+        const t1_arg = args1[i];
+        const t2_arg = args2[i];
+
+        if (t1_arg === undefined && t2_arg === undefined) {
+            continue; // Both undefined, this pair is considered matching.
+        }
+        if (t1_arg === undefined || t2_arg === undefined) {
+            return false; // One is undefined and the other is not, so they are not equal.
+        }
+        // Both args are defined Terms, check them with areEqual.
+        if (!areEqual(t1_arg, t2_arg, ctx, depth + 1)) {
+            return false;
+        }
+    }
+    return true;
+}
+/**
  * Checks if two terms are structurally equal without performing WHNF reduction.
  * This is a stricter form of equality, comparing the raw structure of terms.
  * @param t1 The first term.
@@ -807,9 +835,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                     );
                     break;
                 }
-                // FMap0/1, NatTransTypeTerm are handled after WHNF usually or by specific unification rules if needed.
-                // Here, we handle only the strictly structural ones marked by EMDASH_UNIFICATION_INJECTIVE_TAGS.
-                // Other injective cases (like App with injective head) are handled after WHNF.
             }
         }
 
@@ -817,11 +842,9 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if (structuralResult === UnifyResult.Solved || structuralResult === UnifyResult.Failed) {
                  return (structuralResult === UnifyResult.Failed) ? tryUnificationRules(current_t1, current_t2, ctx, depth + 1) : structuralResult;
             }
-            // If progress, continue to WHNF phase.
         }
     }
 
-    // Phase 2: Reduce to WHNF and then unify.
     const rt1_whnf = whnf(current_t1, ctx, depth + 1);
     const rt2_whnf = whnf(current_t2, ctx, depth + 1);
 
@@ -837,9 +860,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return unifyHole(rt2_final, rt1_final, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
     }
 
-    // After WHNF, if tags differ, try unification rules or fail.
     if (rt1_final.tag !== rt2_final.tag) {
-        // Special kernel rule: Obj A === Type implies A === Set
         if ((rt1_final.tag === 'ObjTerm' && rt2_final.tag === 'Type') || (rt2_final.tag === 'ObjTerm' && rt1_final.tag === 'Type')) {
             const objTermNode = (rt1_final.tag === 'ObjTerm' ? rt1_final : rt2_final) as Term & {tag: 'ObjTerm'};
             const setGlobalDef = globalDefs.get("Set");
@@ -853,13 +874,11 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
     }
 
-    // Icit check for App, Lam, Pi
     if ((rt1_final.tag === 'App' || rt1_final.tag === 'Lam' || rt1_final.tag === 'Pi') &&
         (rt1_final.icit !== (rt2_final as typeof rt1_final).icit)) {
          return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
     }
 
-    // Helper to find the ultimate head of an application chain
     const getUltimateHead = (term: Term): Term => {
         let currentHead = getTermRef(term);
         while (currentHead.tag === 'App') {
@@ -898,8 +917,7 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
 
             if (ultimateHead1.tag === 'Var' && ultimateHead2.tag === 'Var' && ultimateHead1.name === ultimateHead2.name) {
                 const gdef = globalDefs.get(ultimateHead1.name);
-                if (gdef && gdef.isInjective) { // Injective global function symbol
-                    // Unify function parts then argument parts
+                if (gdef && gdef.isInjective) { 
                     const funcStatus = unify(app1.func, app2.func, ctx, depth + 1);
                     if (funcStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
                     const argStatus = unify(app1.arg, app2.arg, ctx, depth + 1);
@@ -909,7 +927,6 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                     return UnifyResult.Progress;
                 }
             }
-            // Default App unification (non-injective head or different heads)
             const funcUnifyStatus = unify(app1.func, app2.func, ctx, depth + 1);
             if (funcUnifyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             const argUnifyStatus = unify(app1.arg, app2.arg, ctx, depth + 1);
@@ -953,60 +970,94 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(paramTypeStatus === UnifyResult.Solved && bodyTypeStatus === UnifyResult.Solved) return UnifyResult.Solved;
             return UnifyResult.Progress;
         }
-        case 'ObjTerm': {
-            const argStatus = unify((rt1_final as Term & {tag:'ObjTerm'}).cat, (rt2_final as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
-            return (argStatus === UnifyResult.Failed) ? tryUnificationRules(rt1_final, rt2_final, ctx, depth +1) : argStatus;
+        case 'ObjTerm': { // INJECTIVE
+            const obj1 = rt1_final as Term & {tag:'ObjTerm'};
+            const obj2 = rt2_final as Term & {tag:'ObjTerm'};
+            let unifRuleResult = tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (unifRuleResult === UnifyResult.RewrittenByRule) {
+                return unifRuleResult;
+            }
+            return unifyArgs([obj1.cat], [obj2.cat], ctx, depth + 1);
         }
-        case 'HomTerm': {
-            const hom1 = rt1_final as Term & {tag:'HomTerm'}; const hom2 = rt2_final as Term & {tag:'HomTerm'};
+        case 'HomTerm': { // INJECTIVE
+            const hom1 = rt1_final as Term & {tag:'HomTerm'}; 
+            const hom2 = rt2_final as Term & {tag:'HomTerm'};
+            let unifRuleResult = tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (unifRuleResult === UnifyResult.RewrittenByRule) {
+                return unifRuleResult;
+            }
             return unifyArgs(
                 [hom1.cat, hom1.dom, hom1.cod],
                 [hom2.cat, hom2.dom, hom2.cod],
                 ctx, depth + 1
             );
         }
-        case 'FunctorCategoryTerm':
-        case 'FunctorTypeTerm': {
+        case 'FunctorCategoryTerm': // INJECTIVE
+        case 'FunctorTypeTerm': { // INJECTIVE
             const fc1 = rt1_final as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'};
             const fc2 = rt2_final as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'};
+            let unifRuleResult = tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (unifRuleResult === UnifyResult.RewrittenByRule) {
+                return unifRuleResult;
+            }
             return unifyArgs([fc1.domainCat, fc1.codomainCat], [fc2.domainCat, fc2.codomainCat], ctx, depth + 1);
         }
-        case 'FMap0Term': {
-            const fm0_1 = rt1_final as Term & {tag:'FMap0Term'}; const fm0_2 = rt2_final as Term & {tag:'FMap0Term'};
-            return unifyArgs(
-                [fm0_1.functor, fm0_1.objectX, fm0_1.catA_IMPLICIT, fm0_1.catB_IMPLICIT],
-                [fm0_2.functor, fm0_2.objectX, fm0_2.catA_IMPLICIT, fm0_2.catB_IMPLICIT],
-                ctx, depth + 1
-            );
+        case 'FMap0Term': { // NON-INJECTIVE
+            const fm0_1 = rt1_final as Term & {tag:'FMap0Term'}; 
+            const fm0_2 = rt2_final as Term & {tag:'FMap0Term'};
+            const args1_fm0 = [fm0_1.functor, fm0_1.objectX, fm0_1.catA_IMPLICIT, fm0_1.catB_IMPLICIT];
+            const args2_fm0 = [fm0_2.functor, fm0_2.objectX, fm0_2.catA_IMPLICIT, fm0_2.catB_IMPLICIT];
+            if (areAllArgsEqual(args1_fm0, args2_fm0, ctx, depth + 1)) {
+                return UnifyResult.Solved;
+            } else {
+                return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
         }
-        case 'FMap1Term': {
-            const fm1_1 = rt1_final as Term & {tag:'FMap1Term'}; const fm1_2 = rt2_final as Term & {tag:'FMap1Term'};
-            return unifyArgs(
-                [fm1_1.functor, fm1_1.morphism_a, fm1_1.catA_IMPLICIT, fm1_1.catB_IMPLICIT, fm1_1.objX_A_IMPLICIT, fm1_1.objY_A_IMPLICIT],
-                [fm1_2.functor, fm1_2.morphism_a, fm1_2.catA_IMPLICIT, fm1_2.catB_IMPLICIT, fm1_2.objX_A_IMPLICIT, fm1_2.objY_A_IMPLICIT],
-                ctx, depth + 1
-            );
+        case 'FMap1Term': { // NON-INJECTIVE
+            const fm1_1 = rt1_final as Term & {tag:'FMap1Term'}; 
+            const fm1_2 = rt2_final as Term & {tag:'FMap1Term'};
+            const args1_fm1 = [fm1_1.functor, fm1_1.morphism_a, fm1_1.catA_IMPLICIT, fm1_1.catB_IMPLICIT, fm1_1.objX_A_IMPLICIT, fm1_1.objY_A_IMPLICIT];
+            const args2_fm1 = [fm1_2.functor, fm1_2.morphism_a, fm1_2.catA_IMPLICIT, fm1_2.catB_IMPLICIT, fm1_2.objX_A_IMPLICIT, fm1_2.objY_A_IMPLICIT];
+            if (areAllArgsEqual(args1_fm1, args2_fm1, ctx, depth + 1)) {
+                return UnifyResult.Solved;
+            } else {
+                return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
         }
-        case 'NatTransTypeTerm': {
-            const nt1 = rt1_final as Term & {tag:'NatTransTypeTerm'}; const nt2 = rt2_final as Term & {tag:'NatTransTypeTerm'};
+        case 'NatTransTypeTerm': { // INJECTIVE
+            const nt1 = rt1_final as Term & {tag:'NatTransTypeTerm'}; 
+            const nt2 = rt2_final as Term & {tag:'NatTransTypeTerm'};
+            let unifRuleResult = tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (unifRuleResult === UnifyResult.RewrittenByRule) {
+                return unifRuleResult;
+            }
             return unifyArgs(
                 [nt1.catA, nt1.catB, nt1.functorF, nt1.functorG],
                 [nt2.catA, nt2.catB, nt2.functorF, nt2.functorG],
                 ctx, depth + 1
             );
         }
-        case 'NatTransComponentTerm': {
-            const nc1 = rt1_final as Term & {tag:'NatTransComponentTerm'}; const nc2 = rt2_final as Term & {tag:'NatTransComponentTerm'};
-            return unifyArgs(
-                [nc1.transformation, nc1.objectX, nc1.catA_IMPLICIT, nc1.catB_IMPLICIT, nc1.functorF_IMPLICIT, nc1.functorG_IMPLICIT],
-                [nc2.transformation, nc2.objectX, nc2.catA_IMPLICIT, nc2.catB_IMPLICIT, nc2.functorF_IMPLICIT, nc2.functorG_IMPLICIT],
-                ctx, depth + 1
-            );
+        case 'NatTransComponentTerm': { // NON-INJECTIVE
+            const nc1 = rt1_final as Term & {tag:'NatTransComponentTerm'}; 
+            const nc2 = rt2_final as Term & {tag:'NatTransComponentTerm'};
+            const args1_nc = [nc1.transformation, nc1.objectX, nc1.catA_IMPLICIT, nc1.catB_IMPLICIT, nc1.functorF_IMPLICIT, nc1.functorG_IMPLICIT];
+            const args2_nc = [nc2.transformation, nc2.objectX, nc2.catA_IMPLICIT, nc2.catB_IMPLICIT, nc2.functorF_IMPLICIT, nc2.functorG_IMPLICIT];
+            if (areAllArgsEqual(args1_nc, args2_nc, ctx, depth + 1)) {
+                return UnifyResult.Solved;
+            } else {
+                return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
         }
-        case 'HomCovFunctorIdentity': {
+        case 'HomCovFunctorIdentity': { // NON-INJECTIVE
             const hc1 = rt1_final as Term & {tag:'HomCovFunctorIdentity'};
             const hc2 = rt2_final as Term & {tag:'HomCovFunctorIdentity'};
-            return unifyArgs([hc1.domainCat, hc1.objW_InDomainCat], [hc2.domainCat, hc2.objW_InDomainCat], ctx, depth + 1);
+            const args1_hc = [hc1.domainCat, hc1.objW_InDomainCat];
+            const args2_hc = [hc2.domainCat, hc2.objW_InDomainCat];
+            if (areAllArgsEqual(args1_hc, args2_hc, ctx, depth + 1)) {
+                return UnifyResult.Solved;
+            } else {
+                return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
         }
         default:
             const unhandledTag = (rt1_final as any)?.tag || 'unknown_tag';
