@@ -17,7 +17,7 @@ import {
 import { assertEqual, assert } from './utils';
 
 import { describe, it } from 'node:test'; // Added for node:test
-import { resetMyLambdaPi } from '../src/core_context_globals';
+import { resetMyLambdaPi } from '../src/stdlib';
 
 describe("Elaboration Options Tests", () => {
 
