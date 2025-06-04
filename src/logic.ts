@@ -1224,7 +1224,7 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             const lam = current;
             const appliedParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
             const newBodyFn = (v_arg: Term): Term => {
-                const bodyCtxSubst = new Map(subst);
+                const bodyCtxSubst = new Map(subst);  // is such cloning of substnecessary?
                 return applySubst(lam.body(v_arg), bodyCtxSubst, patternVarDecls);
             };
 
@@ -1235,7 +1235,7 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
         case 'Pi': {
             const pi = current;
             const newBodyTypeFn = (v_arg: Term) => {
-                const bodyCtxSubst = new Map(subst);
+                const bodyCtxSubst = new Map(subst);  // is such cloning of subst necessary?
                 return applySubst(pi.bodyType(v_arg), bodyCtxSubst, patternVarDecls);
             };
             return Pi(pi.paramName, pi.icit, applySubst(pi.paramType, subst, patternVarDecls), newBodyTypeFn);

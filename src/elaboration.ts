@@ -256,7 +256,13 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, isSubEla
                 lamNode._isAnnotated = false;
             }
 
-
+            // if (!originalAnnotationState.annotated && originalTerm === lamNode && originalTerm.tag === 'Lam') {
+            //     originalTerm.paramType = originalAnnotationState.type; 
+            //     originalTerm._isAnnotated = false;
+            // } else if (lamNode.tag === 'Lam' && !originalAnnotationState.annotated) { // Current was mutated
+            //     lamNode.paramType = originalAnnotationState.type;
+            //     lamNode._isAnnotated = false;
+            // }
             return { elaboratedTerm: elaboratedLam, type: piType };
         }
         case 'Pi': {
@@ -477,13 +483,13 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         (elabLam as Term & {tag:'Lam'})._isAnnotated = true; // Mark elaborated lambda as annotated
 
         // Restore original annotation state on the input `term` if it was mutated and unannotated.
-        if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalAnnotationState.annotated) {
-            originalTerm.paramType = originalAnnotationState.type;
-            originalTerm._isAnnotated = false;
-        } else if (currentTerm === lamNode && !originalAnnotationState.annotated) {
-            lamNode.paramType = originalAnnotationState.type;
-            lamNode._isAnnotated = false;
-        }
+        // if (originalTerm === lamNode && originalTerm.tag === 'Lam' && !originalAnnotationState.annotated) {
+        //     originalTerm.paramType = originalAnnotationState.type;
+        //     originalTerm._isAnnotated = false;
+        // } else if (currentTerm === lamNode && !originalAnnotationState.annotated) {
+        //     lamNode.paramType = originalAnnotationState.type;
+        //     lamNode._isAnnotated = false;
+        // }
 
         return elabLam;
     }
@@ -505,7 +511,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1, true);
 
     // Insert implicit applications based on the inferred type before comparing with expectedTypeWhnf
-    const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1);
+    const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
 
     // Add constraint: (type of term after implicit insertion) should be equal to (expected type)
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);

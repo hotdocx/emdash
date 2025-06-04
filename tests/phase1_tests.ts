@@ -69,13 +69,12 @@ describe("Phase 1 Tests", () => {
             App(App(Var("H_repr_Nat_Global"), X_term, Icit.Expl), Z_term, Icit.Expl)
             ))))), undefined, true);
     
-        // const NatCategoryTermVal = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
-        // elaboration has issues with this version (must use a manually elaborated C_impl_Nat_dummy_Global):
-        // const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
-        const C_impl_Nat_dummy_Global = Lam("X", Icit.Impl, NatObjRepr, X_val =>
-                Lam("Y", Icit.Impl, NatObjRepr, Y_val =>
-                    Lam("Z", Icit.Impl, NatObjRepr, Z_val => App(App(App(Var("C_impl_Nat_dummy_Global"), X_val, Icit.Impl), Y_val, Icit.Impl), Z_val, Icit.Impl))))
-        const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), C_impl_Nat_dummy_Global, Icit.Expl);
+        // [SOLVED] elaboration has issues with this version (must use a manually elaborated C_impl_Nat_dummy_Global):
+        const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
+        // const C_impl_Nat_dummy_Global = Lam("X", Icit.Impl, NatObjRepr, X_val =>
+        //         Lam("Y", Icit.Impl, NatObjRepr, Y_val =>
+        //             Lam("Z", Icit.Impl, NatObjRepr, Z_val => App(App(App(Var("C_impl_Nat_dummy_Global"), X_val, Icit.Impl), Y_val, Icit.Impl), Z_val, Icit.Impl))))
+        // const NatCategoryTermVal = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), C_impl_Nat_dummy_Global, Icit.Expl);
         elabRes = elaborate(NatCategoryTermVal, undefined, baseCtx);
         assert(elabRes.type.tag === 'CatTerm', "Test 2.1: MkCat_ term should have type Cat");
     
@@ -96,8 +95,8 @@ describe("Phase 1 Tests", () => {
     
         console.log("\n--- Test 3: IdentityMorph ---");
         // resetMyLambdaPi(); setupPhase1GlobalsAndRules();
-        // const MyNatCat3_val = MkCat_(NatObjRepr, Var("H_repr_Nat_Global"), Var("C_impl_Nat_dummy_Global"));
-        const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), C_impl_Nat_dummy_Global, Icit.Expl);
+        const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
+        // const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), C_impl_Nat_dummy_Global, Icit.Expl);
         defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val, false);
     
         defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef")), undefined, true);
