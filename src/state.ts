@@ -86,7 +86,7 @@ export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ct
 // Kernel Constant and Injectivity Checks
 export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm']);
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
-    'CatTerm', 'ObjTerm', 'HomTerm',
+    'Type',  'Var', 'CatTerm', 'ObjTerm', 'HomTerm',
     'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
     'FunctorTypeTerm'
 ]);

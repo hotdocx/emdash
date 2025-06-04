@@ -443,7 +443,7 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
 
 /**
  * Checks if two terms are equal (convertible) under the type theory.
- * This involves reducing both terms to WHNF and then comparing them structurally.
+ * This involves reducing both terms to WHNF and then recursively test convertibility of the subterms.
  * @param t1 The first term.
  * @param t2 The second term.
  * @param ctx The current context.
@@ -455,10 +455,129 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     const rt1 = getTermRef(whnf(t1, ctx, depth + 1));
     const rt2 = getTermRef(whnf(t2, ctx, depth + 1));
 
-    // Structural comparison after WHNF
-    // Note: This reuses areStructurallyEqualNoWhnf. If WHNF is thorough, this should be correct.
-    // Alpha-equivalence for Lam/Pi is handled by areStructurallyEqualNoWhnf's fresh var instantiation.
-    return areStructurallyEqualNoWhnf(rt1, rt2, ctx, depth + 1);
+    if (rt1.tag === 'Hole' && rt2.tag === 'Hole') return rt1.id === rt2.id;
+    if (rt1.tag === 'Hole' || rt2.tag === 'Hole') return false; 
+    if (rt1.tag !== rt2.tag) return false;
+
+    if ((rt1.tag === 'App' || rt1.tag === 'Lam' || rt1.tag === 'Pi') &&
+        (rt2.tag === rt1.tag) && rt1.icit !== (rt2 as typeof rt1).icit) {
+        return false;
+    }
+
+    switch (rt1.tag) {
+        case 'Type': case 'CatTerm': return true;
+        case 'Var': return rt1.name === (rt2 as Term & {tag:'Var'}).name;
+        case 'App': {
+            const app2 = rt2 as Term & {tag:'App'};
+            return areEqual(rt1.func, app2.func, ctx, depth + 1) &&
+                   areEqual(rt1.arg, app2.arg, ctx, depth + 1);
+        }
+        case 'Lam': { // For alpha-equivalence, extend context without definition
+            const lam2 = rt2 as Term & {tag:'Lam'};
+            if (rt1._isAnnotated !== lam2._isAnnotated) return false;
+            let paramTypeOk = true;
+            if (rt1._isAnnotated) { 
+                if (!rt1.paramType || !lam2.paramType || !areEqual(rt1.paramType, lam2.paramType, ctx, depth + 1)) {
+                    paramTypeOk = false;
+                }
+            }
+            if(!paramTypeOk) return false;
+
+            const freshVName = rt1.paramName; 
+            const freshV = Var(freshVName, true);
+            const paramTypeForCtx = (rt1._isAnnotated && rt1.paramType) ? getTermRef(rt1.paramType) : Hole(freshHoleName()+"_areEqual_unannot_lam_param");
+            const extendedCtx = extendCtx(ctx, freshVName, paramTypeForCtx, rt1.icit); // No definition for freshV
+            return areEqual(rt1.body(freshV), lam2.body(freshV), extendedCtx, depth + 1);
+        }
+        case 'Pi': { // For alpha-equivalence, extend context without definition
+            const pi2 = rt2 as Term & {tag:'Pi'};
+            if (!areEqual(rt1.paramType, pi2.paramType, ctx, depth + 1)) return false;
+            const freshVName = rt1.paramName; 
+            const freshV = Var(freshVName, true);
+            const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition for freshV
+            return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
+        }
+        case 'ObjTerm': return areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
+        case 'HomTerm': {
+            const hom2 = rt2 as Term & {tag:'HomTerm'};
+            return areEqual(rt1.cat, hom2.cat, ctx, depth + 1) &&
+                   areEqual(rt1.dom, hom2.dom, ctx, depth + 1) &&
+                   areEqual(rt1.cod, hom2.cod, ctx, depth + 1);
+        }
+        case 'FunctorCategoryTerm': {
+            const fc2 = rt2 as Term & {tag:'FunctorCategoryTerm'};
+            return areEqual(rt1.domainCat, fc2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.codomainCat, fc2.codomainCat, ctx, depth + 1);
+        }
+        case 'FunctorTypeTerm': {
+            const ftt2 = rt2 as Term & {tag:'FunctorTypeTerm'};
+            return areEqual(rt1.domainCat, ftt2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.codomainCat, ftt2.codomainCat, ctx, depth + 1);
+        }
+        case 'FMap0Term': {
+            const fm0_2 = rt2 as Term & {tag:'FMap0Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm0_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm0_2.catB_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.functor, fm0_2.functor, ctx, depth + 1) &&
+                   areEqual(rt1.objectX, fm0_2.objectX, ctx, depth + 1);
+        }
+        case 'FMap1Term': {
+            const fm1_2 = rt2 as Term & {tag:'FMap1Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, fm1_2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, fm1_2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.objX_A_IMPLICIT, fm1_2.objX_A_IMPLICIT) ||
+                !implicitsMatch(rt1.objY_A_IMPLICIT, fm1_2.objY_A_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.functor, fm1_2.functor, ctx, depth + 1) &&
+                   areEqual(rt1.morphism_a, fm1_2.morphism_a, ctx, depth + 1);
+        }
+        case 'NatTransTypeTerm': {
+            const nt2 = rt2 as Term & {tag:'NatTransTypeTerm'};
+            return areEqual(rt1.catA, nt2.catA, ctx, depth + 1) &&
+                   areEqual(rt1.catB, nt2.catB, ctx, depth + 1) &&
+                   areEqual(rt1.functorF, nt2.functorF, ctx, depth + 1) &&
+                   areEqual(rt1.functorG, nt2.functorG, ctx, depth + 1);
+        }
+        case 'NatTransComponentTerm': {
+            const nc2 = rt2 as Term & {tag:'NatTransComponentTerm'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areEqual(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, nc2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, nc2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.functorF_IMPLICIT, nc2.functorF_IMPLICIT) ||
+                !implicitsMatch(rt1.functorG_IMPLICIT, nc2.functorG_IMPLICIT)) {
+                return false;
+            }
+            return areEqual(rt1.transformation, nc2.transformation, ctx, depth + 1) &&
+                   areEqual(rt1.objectX, nc2.objectX, ctx, depth + 1);
+        }
+        case 'HomCovFunctorIdentity': {
+            const hc2 = rt2 as Term & {tag:'HomCovFunctorIdentity'};
+            return areEqual(rt1.domainCat, hc2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.objW_InDomainCat, hc2.objW_InDomainCat, ctx, depth + 1);
+        }
+        case 'SetTerm': return true;
+        default: const exhaustiveCheck: never = rt1; return false;
+    }
 }
 
 /**
@@ -678,7 +797,17 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
                     structuralResult = unifyArgs([fc1.domainCat, fc1.codomainCat], [fc2.domainCat, fc2.codomainCat], ctx, depth +1);
                     break;
                 }
-                // FMap0/1, NatTransComponent/Type are handled after WHNF usually or by specific unification rules if needed.
+                case 'NatTransTypeTerm': {
+                    const nt1 = current_t1 as Term & {tag:'NatTransTypeTerm'};
+                    const nt2 = current_t2 as Term & {tag:'NatTransTypeTerm'};
+                    structuralResult = unifyArgs(
+                        [nt1.catA, nt1.catB, nt1.functorF, nt1.functorG],
+                        [nt2.catA, nt2.catB, nt2.functorF, nt2.functorG],
+                        ctx, depth + 1
+                    );
+                    break;
+                }
+                // FMap0/1, NatTransTypeTerm are handled after WHNF usually or by specific unification rules if needed.
                 // Here, we handle only the strictly structural ones marked by EMDASH_UNIFICATION_INJECTIVE_TAGS.
                 // Other injective cases (like App with injective head) are handled after WHNF.
             }
@@ -1094,29 +1223,20 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
         case 'Lam': {
             const lam = current;
             const appliedParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
-            // For Lam/Pi, substitution must be careful not to capture free variables in the replacement terms
-            // if they become bound by the Lam/Pi. However, pattern variables are typically closed or instantiated
-            // in a way that this is handled by the substitution map containing already-instantiated terms.
-            // The body function itself needs to be reconstructed.
             const newBodyFn = (v_arg: Term): Term => {
-                // Here, v_arg is a placeholder for the lambda's parameter.
-                // We apply subst to the *structure* of the body.
-                // If a pattern variable inside the body was $x, and $x is bound to, say, (App global_f paramName),
-                // then paramName must be correctly handled if it matches the Lam's paramName.
-                // This is typically okay because substitution is structural.
-                // If subst contains Var(lam.paramName), it means that pattern var was bound to the lambda's own parameter.
-                const bodyStructure = lam.body(Var(lam.paramName, true)); // Get structure using a lambda-bound var
-                return applySubst(bodyStructure, subst, patternVarDecls);
+                const bodyCtxSubst = new Map(subst);
+                return applySubst(lam.body(v_arg), bodyCtxSubst, patternVarDecls);
             };
-            const newLam = Lam(lam.paramName, lam.icit, appliedParamType, newBodyFn) as Term & {tag: 'Lam'};
-            newLam._isAnnotated = lam._isAnnotated && appliedParamType !== undefined;
+
+            const newLam = Lam(lam.paramName, lam.icit, appliedParamType, newBodyFn);
+            (newLam as Term & {tag: 'Lam'})._isAnnotated = lam._isAnnotated && appliedParamType !== undefined;
             return newLam;
         }
         case 'Pi': {
             const pi = current;
             const newBodyTypeFn = (v_arg: Term) => {
-                const bodyTypeStructure = pi.bodyType(Var(pi.paramName, true));
-                return applySubst(bodyTypeStructure, subst, patternVarDecls);
+                const bodyCtxSubst = new Map(subst);
+                return applySubst(pi.bodyType(v_arg), bodyCtxSubst, patternVarDecls);
             };
             return Pi(pi.paramName, pi.icit, applySubst(pi.paramType, subst, patternVarDecls), newBodyTypeFn);
         }
@@ -1128,11 +1248,12 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 applySubst(current.cod, subst, patternVarDecls)
             );
         case 'FunctorCategoryTerm':
-        case 'FunctorTypeTerm':
-            return current.tag === 'FunctorCategoryTerm' ? FunctorCategoryTerm(
+            return FunctorCategoryTerm(
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.codomainCat, subst, patternVarDecls)
-            ) : FunctorTypeTerm(
+            );
+        case 'FunctorTypeTerm':
+            return FunctorTypeTerm(
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.codomainCat, subst, patternVarDecls)
             );
