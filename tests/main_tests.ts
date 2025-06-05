@@ -11,6 +11,7 @@ import { getDebugVerbose, setDebugVerbose } from '../src/state';
 // import './church_encoding_tests';
 // import './church_encoding_implicit_tests';
 import './higher_order_unification_tests';
+import './higher_order_pattern_matching_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
