@@ -414,10 +414,8 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
     switch (current.tag) {
         case 'Var':
-            // Replace if name matches, it's not lambda-bound internally by this name (checked by boundInScope),
-            // or if it IS lambda-bound but we are targeting a specific instance (not simple for this func).
-            // This simple version replaces Var(freeVarName) if freeVarName is not in boundInScope.
-            return (current.name === freeVarName && !boundInScope.has(freeVarName) && !current.isLambdaBound) ? replacementVar : current;
+            // Replace if name matches AND it's not shadowed by an inner binder within the current term being processed.
+            return (current.name === freeVarName && !boundInScope.has(freeVarName)) ? replacementVar : current;
         case 'Lam': {
             const newBoundInScope = new Set(boundInScope);
             if (!current._isAnnotated || current.paramName !== freeVarName) { // if annotated, paramType can have freeVarName
