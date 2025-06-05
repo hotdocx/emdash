@@ -25,7 +25,7 @@ describe("Higher-Order Pattern Matching Tests", () => {
     const patternVarDecls: PatternVarDecl[] = [pvarF, pvarG, pvarX];
 
     beforeEach(() => {
-        resetMyLambdaPi_Emdash(); // Use Emdash reset to get Cat, Set, etc.
+        resetMyLambdaPi(); // Use Emdash reset to get Cat, Set, etc.
         baseCtx = emptyCtx;
 
         // Basic Types and Globals for testing
@@ -104,8 +104,8 @@ describe("Higher-Order Pattern Matching Tests", () => {
         // because $G.[x] (where x corresponds to 'a') matched App(Var("GFuncForT3"), Var("a")).
         const expectedGSubst = App(Var("GFuncForT3"), Var("a"));
         
-        // console.log("Test 3 $G raw substitution:", printTerm(gSubst));
-        // console.log("Test 3 Expected for $G:", printTerm(expectedGSubst));
+        console.log("Test 3 $G raw substitution:", printTerm(gSubst));
+        console.log("Test 3 Expected for $G:", printTerm(expectedGSubst));
         
         // We need to check areEqual(gSubst, expectedGSubst) in a context where 'a' is understood.
         // Or, more simply, the printTerm output should be structurally identical if names line up.
@@ -191,8 +191,8 @@ describe("Higher-Order Pattern Matching Tests", () => {
         const fSubst = getTermRef(subst!.get(pvarF)!);
         // Expected $F$ is Lam("z_id", Icit.Expl, Var("MyType"), id_vz => id_vz)
         const expectedF = Lam("z_id", Icit.Expl, Var("MyType"), id_vz => id_vz);
-        // console.log("Test 7 $F:", printTerm(fSubst));
-        // console.log("Test 7 Expected $F:", printTerm(expectedF));
+        console.log("Test 7 $F:", printTerm(fSubst));
+        console.log("Test 7 Expected $F:", printTerm(expectedF));
         assert(areEqual(fSubst, expectedF, baseCtx), "Test 7: $F should be identity lambda.");
     });
 
