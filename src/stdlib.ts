@@ -40,23 +40,23 @@ export function resetMyLambdaPi() {
  */
 export function setupPhase1GlobalsAndRules() {
     // Basic Types (assumed to be Type itself, not elaborated here, so toElaborateType = false)
-    defineGlobal("NatType", Type(), undefined, true, true, false);
-    defineGlobal("BoolType", Type(), undefined, true, true, false);
+    defineGlobal("NatType", Type(), undefined, true, true);
+    defineGlobal("BoolType", Type(), undefined, true, true);
 
     // Core Category Theory Primitives
     // `Cat` itself is a type. Its "value" CatTerm() is also a type.
     // This means CatTerm() is a specific term of type Type().
-    defineGlobal("Cat", Type(), CatTerm(), false, true, false);
+    defineGlobal("Cat", Type(), CatTerm(), false, true);
 
     // `Set` is a specific category (a term of type Cat). Its value is SetTerm().
-    defineGlobal("Set", CatTerm(), SetTerm(), false, true, false);
+    defineGlobal("Set", CatTerm(), SetTerm(), false, true);
 
     // `Obj` is a function from Cat to Type.
     // The type given to defineGlobal needs to be elaborated itself.
     defineGlobal("Obj",
         Pi("A", Icit.Expl, CatTerm(), _A => Type()), // Obj : Cat -> Type
         Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)), // A |-> Obj A
-        false, true, false
+        false, true
     );
 
     // `Hom` is a function {A:Cat} -> Obj A -> Obj A -> Type.
@@ -68,7 +68,7 @@ export function setupPhase1GlobalsAndRules() {
             Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
                 Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
                     HomTerm(A_term, X_term, Y_term)))), // {A} X Y |-> Hom A X Y
-        false, true, false
+        false, true
     );
 
     // `Functor` is a function Cat -> Cat -> Type (the type of functors).
@@ -78,7 +78,7 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorTypeTerm(A_term, B_term))), // A B |-> FunctorType A B
-        false, true, false
+        false, true
     );
 
     // `Functor_cat` is a function Cat -> Cat -> Cat (the functor category).
@@ -88,7 +88,7 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorCategoryTerm(A_term, B_term))), // A B |-> FunctorCategory A B
-        false, true, false
+        false, true
     );
 
     // `Transf` is the type of natural transformations.
@@ -102,7 +102,7 @@ export function setupPhase1GlobalsAndRules() {
                 Lam("F_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), F_term =>
                     Lam("G_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), G_term =>
                         NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
-        false, true, false
+        false, true
     );
 
     // Category constructor `mkCat_`.
@@ -120,7 +120,7 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, true, true, false
+        undefined, true, true
     );
 
     defineGlobal("identity_morph",
@@ -129,7 +129,7 @@ export function setupPhase1GlobalsAndRules() {
                 HomTerm(A_val, X_val, X_val)
             )
         ),
-        undefined, true, true, false
+        undefined, true, true
     );
 
     defineGlobal("compose_morph",
@@ -146,7 +146,7 @@ export function setupPhase1GlobalsAndRules() {
                 )
             )
         ),
-        undefined, false, false, false
+        undefined
     );
 
     // Rewrite Rules for mkCat_
@@ -238,7 +238,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
                 HomCovFunctorIdentity(A_cat_term, W_obj_term)
             )
         ),
-        false, true, false
     );
 
     // Naturality Rewrite Rule (Direct version from LambdAPI spec)

@@ -100,14 +100,14 @@ describe("Phase 1 Tests", () => {
         // resetMyLambdaPi(); setupPhase1GlobalsAndRules();
         const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), Var("C_impl_Nat_dummy_Global"), Icit.Expl);
         // const MyNatCat3_val = App(App(App(Var("mkCat_"), NatObjRepr, Icit.Expl), Var("H_repr_Nat_Global"), Icit.Expl), C_impl_Nat_dummy_Global, Icit.Expl);
-        defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val, false);
+        defineGlobal("MyNatCat3_GlobalDef", CatTerm(), MyNatCat3_val);
     
         defineGlobal("x_obj_val_t3", ObjTerm(Var("MyNatCat3_GlobalDef")), undefined, true);
         const anObjX_term = Var("x_obj_val_t3");
         // const id_x = IdentityMorph(anObjX_term, Var("MyNatCat3_GlobalDef"));
         const id_x = App(App(Var("identity_morph"), Var("MyNatCat3_GlobalDef"), Icit.Impl), anObjX_term, Icit.Expl);
         const expected_id_x_type_structure = HomTerm(Var("MyNatCat3_GlobalDef"), anObjX_term, anObjX_term);
-        defineGlobal("id_x", expected_id_x_type_structure, id_x, false);
+        defineGlobal("id_x", expected_id_x_type_structure, id_x);
         elabRes = elaborate(id_x, expected_id_x_type_structure, baseCtx);
     
         // // After refactor, id_x elaborates to an App(...) term.
@@ -139,7 +139,7 @@ describe("Phase 1 Tests", () => {
         // const comp_gf = ComposeMorph(g_morph_hole, f_morph_hole, Var("C4_Global"), x_term_t4, y_hole_obj_t4, z_term_t4);
         const comp_gf = App(App(App(App(App(App(Var("compose_morph"), Var("C4_Global"), Icit.Impl), x_term_t4, Icit.Impl), y_hole_obj_t4, Icit.Impl), z_term_t4, Icit.Impl), g_morph_hole, Icit.Expl), f_morph_hole, Icit.Expl);
         const expectedCompType = HomTerm(Var("C4_Global"), x_term_t4, z_term_t4);
-        defineGlobal("comp_gf", expectedCompType, comp_gf, false);
+        defineGlobal("comp_gf", expectedCompType, comp_gf);
         elabRes = elaborate(comp_gf, expectedCompType, baseCtx);
     
         assert(areEqual(elabRes.type, expectedCompType, baseCtx), `Test 4.0: comp_gf type should be Hom(C,X,Z). Expected ${printTerm(expectedCompType)}, Got ${printTerm(elabRes.type)}`);

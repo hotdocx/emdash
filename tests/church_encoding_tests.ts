@@ -52,7 +52,7 @@ describe("Church Encoding Tests", () => {
                 )
             )
         );
-        defineGlobal("List_type", List_type_type, List_type_val, false, false, false);
+        defineGlobal("List_type", List_type_type, List_type_val);
         elabRes = elaborate(Var("List_type"), undefined, baseCtx);
         assert(areEqual(elabRes.type, List_type_type, baseCtx), "Church Test 2.1: List_type type check");
     
@@ -111,7 +111,7 @@ describe("Church Encoding Tests", () => {
                 Pi("f_Bool_param", Icit.Expl, B_Bool_term, _f_term => B_Bool_term)
             )
         );
-        defineGlobal("Bool_type", Type(), Bool_type_val_original_with_FH, false, false, false);
+        defineGlobal("Bool_type", Type(), Bool_type_val_original_with_FH);
         elabRes = elaborate(Var("Bool_type"), undefined, baseCtx);
         assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 5.1: Bool_type type check");
     
@@ -184,7 +184,7 @@ describe("Church Encoding Tests", () => {
                 )
             )
         );
-        defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val, false, false, false);
+        defineGlobal("Eq_type", Eq_type_type_original, Eq_type_val);
         elabRes = elaborate(Var("Eq_type"), undefined, baseCtx);
         const Eq_type_type_expected = Pi("A_Eq_param", Icit.Expl, Type(), A_Eq_term =>
             Pi("x_Eq_param", Icit.Expl, A_Eq_term, _x_term =>
@@ -238,7 +238,7 @@ describe("Church Encoding Tests", () => {
                 Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
             )
         );
-        defineGlobal("Nat_type", Type(), Nat_type_val, false, false, false);
+        defineGlobal("Nat_type", Type(), Nat_type_val);
         elabRes = elaborate(Var("Nat_type"), undefined, baseCtx);
         assert(areEqual(elabRes.type, Type(), baseCtx), "Church Test 13.1: Nat_type type check");
     

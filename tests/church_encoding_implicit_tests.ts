@@ -48,7 +48,7 @@ describe("Church Encoding Implicit Tests", () => {
                 Pi("f_param", Icit.Expl, B_term, _f_term => B_term)
             )
         );
-        defineGlobal("Bool", Type(), Bool_type_val, false, false, false); // isTypeNameLike = true
+        defineGlobal("Bool", Type(), Bool_type_val);
         elabRes = elaborate(Var("Bool"), undefined, baseCtx);
         assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 1.1: Bool type check");
         assert(unify(elabRes.term, Bool_type_val, baseCtx) === UnifyResult.Solved, "HSI Test 1.2: Bool value check");
@@ -103,7 +103,7 @@ describe("Church Encoding Implicit Tests", () => {
                 )
             )
         );
-        defineGlobal("List_hs", List_type_constructor_type, List_type_constructor_val, false, false, false); 
+        defineGlobal("List_hs", List_type_constructor_type, List_type_constructor_val); 
         elabRes = elaborate(Var("List_hs"), undefined, baseCtx);
         assert(areEqual(elabRes.type, List_type_constructor_type, baseCtx), "HSI Test 5.1: List_hs type check");
         assert(areEqual(elabRes.term, List_type_constructor_val, baseCtx), "HSI Test 5.2: List_hs value check");
@@ -324,7 +324,7 @@ describe("Church Encoding Implicit Tests", () => {
                 Pi("z_Nat_param", Icit.Expl, N_Nat_term, _z_term => N_Nat_term)
             )
         );
-        defineGlobal("Nat_hs", Type(), Nat_hs_type_val, false, false, false);
+        defineGlobal("Nat_hs", Type(), Nat_hs_type_val);
         elabRes = elaborate(Var("Nat_hs"), undefined, baseCtx);
         assert(areEqual(elabRes.type, Type(), baseCtx), "HSI Test 12.1: Nat_hs type check");
     
@@ -420,7 +420,7 @@ describe("Church Encoding Implicit Tests", () => {
             Pi("x_Eq", Icit.Expl, A_FH, _ => 
                 Pi("y_Eq", Icit.Expl, A_FH, _ => Type())
             );
-        defineGlobal("Eq_hs", Eq_hs_type, Eq_hs_val_raw, false, false, false);
+        defineGlobal("Eq_hs", Eq_hs_type, Eq_hs_val_raw);
         elabRes = elaborate(Var("Eq_hs"), Eq_hs_type, baseCtx);
         // console.log(printTerm(elabRes.type));
         // console.log(printTerm(Eq_hs_type_impl));
@@ -454,7 +454,7 @@ describe("Church Encoding Implicit Tests", () => {
                 )
             )
         );
-        defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw, false, false, false, true); const x_fh = FH();
+        defineGlobal("refl_hs", refl_hs_type, refl_hs_val_raw, false, false, true);
         elabRes = elaborate(Var("refl_hs"), refl_hs_type, baseCtx); // fails alone without expected type
         // assert(areEqual(elabRes.type, refl_hs_type, baseCtx), "HSI Test 17.1: refl_hs type check");
         // console.log(elabRes.term);

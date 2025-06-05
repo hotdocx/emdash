@@ -71,7 +71,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
     it("IA2.1: Elaborated polyId against Pi type should have an outer implicit lambda", () => {
         resetMyLambdaPi();
         ctx = emptyCtx; // Ensure fresh context
-        defineGlobal("Nat", Type(), undefined, true, false, true); // isTypeNameLike: true, isConstantSymbol: true
+        defineGlobal("Nat", Type(), undefined, true, true);
         const idFuncType = Pi("A_pi", Icit.Impl, Type(), A_pi_param => Pi("x_pi", Icit.Expl, A_pi_param, _x_pi_param => A_pi_param));
         const polySimpleId = Lam("y_lam", Icit.Expl, Hole("?Y_param_type"), y_body_param => y_body_param);
 
@@ -109,7 +109,7 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
         defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true);
         // defineGlobal("g_noninj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, false); // Not needed for this test
 
-        defineGlobal("Nat", Type(), undefined, true, false, true);
+        defineGlobal("Nat", Type(), undefined, true, true);
         defineGlobal("a_val", Var("Nat"), undefined, true);
         // defineGlobal("b_val", Var("Nat"), undefined, true); // Not needed for this test
 
@@ -129,8 +129,8 @@ describe("Implicit Argument Tests (Original Style Refactored)", () => {
         // defineGlobal("Eq", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => Pi("y", Icit.Expl, T_param, _ => Type())))); // Not needed for this test
         // defineGlobal("refl", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, x_param => App(App(App(Var("Eq"),T_param,Icit.Impl),x_param,Icit.Expl),x_param,Icit.Expl) ))); // Not needed for this test
         // defineGlobal("f_inj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, true); // Not needed for this test
-        defineGlobal("g_noninj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)), undefined, false, false);
-        defineGlobal("Nat", Type(), undefined, true, false, true);
+        defineGlobal("g_noninj", Pi("T", Icit.Impl, Type(), T_param => Pi("x", Icit.Expl, T_param, _ => T_param)));
+        defineGlobal("Nat", Type(), undefined, true, true);
         defineGlobal("a_val", Var("Nat"), undefined, true);
 
         const hole3 = Hole("?h3_ia3");
