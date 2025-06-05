@@ -27,7 +27,6 @@ import { infer, check } from './elaboration';
  * @param value Optional definition/value for the symbol.
  * @param isConstantSymbol True if the symbol is a primitive constant (affects rewriting and unfolding).
  * @param isInjective True if the symbol is an injective constructor (for unification).
- * @param isTypeNameLike True if WHNF should not unfold this symbol (e.g., for type names like NatType).
  * @param toElaborateType True if the provided type itself needs to be elaborated and checked against Type.
  */
 export function defineGlobal(
@@ -36,7 +35,6 @@ export function defineGlobal(
     value?: Term,
     isConstantSymbol: boolean = false,
     isInjective?: boolean,
-    isTypeNameLike?: boolean,
     toElaborateType: boolean = false // If true, `type` is elaborated; otherwise, it's taken as already valid.
 ) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
@@ -75,11 +73,10 @@ export function defineGlobal(
         }
 
         console.log('defineGlobal> ', { name: name + (isConstantSymbol ? ' (constant symbol)' : '')
-            + (isInjective ? ' (injective)' : '')
-            + (isTypeNameLike ? ' (type-name like)' : ''),
+            + (isInjective ? ' (injective)' : ''),
             type: printTerm(elaboratedType), value: elaboratedValue ? printTerm(elaboratedValue) : 'undefined' });
 
-        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective, isTypeNameLike });
+        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective });
 
     } catch (e) {
         const error = e as Error;

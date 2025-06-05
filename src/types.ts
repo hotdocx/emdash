@@ -126,7 +126,6 @@ export interface GlobalDef {
     value?: Term;
     isConstantSymbol?: boolean;
     isInjective?: boolean; // For unification decomposition: F X = F Y => X = Y
-    isTypeNameLike?: boolean; // True if whnf should not unfold this (e.g. for Nat_type)
 }
 
 // Rewrite and Unification Rules

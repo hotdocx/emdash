@@ -238,7 +238,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
                 HomCovFunctorIdentity(A_cat_term, W_obj_term)
             )
         ),
-        false, true, false, false 
+        false, true, false
     );
 
     // Naturality Rewrite Rule (Direct version from LambdAPI spec)

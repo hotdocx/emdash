@@ -113,7 +113,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             }
             case 'Var': { // Global definition unfolding (if no local definition was found)
                 const gdef = globalDefs.get(current.name);
-                if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol && !gdef.isTypeNameLike) {
+                if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
                     current = gdef.value;
                     reducedInKernelBlock = true;
                 }
