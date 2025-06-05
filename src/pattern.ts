@@ -10,7 +10,7 @@ import {
 } from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
-    addConstraint, userUnificationRules, consoleLog
+    addConstraint, userUnificationRules, consoleLog, lookupCtx
 } from './state';
 import { areEqual } from './equality';
 import { MAX_STACK_DEPTH } from './constants';
@@ -379,4 +379,172 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             break;
         // Terminals like Type, Var (non-pattern), Hole (non-pattern), CatTerm, SetTerm have no subterms or are handled.
     }
+}
+
+/**
+ * Deconstructs a term into its head and spine of arguments.
+ * Example: App(App(f, x), y) -> { head: f, spine: [x, y] }
+ * Example: f (not an App) -> { head: f, spine: [] }
+ * The spine is ordered from outermost argument to innermost (f x y -> spine [x,y])
+ * @param term The term to deconstruct.
+ * @returns An object containing the head of the application chain and the spine of arguments.
+ */
+export function getHeadAndSpine(term: Term): { head: Term, spine: Term[] } {
+    let currentTerm = getTermRef(term);
+    const spine: Term[] = [];
+    while (currentTerm.tag === 'App') {
+        spine.push(currentTerm.arg);
+        currentTerm = getTermRef(currentTerm.func);
+    }
+    return { head: currentTerm, spine: spine.reverse() }; // Reverse to get application order (f x y -> [x,y])
+}
+
+/**
+ * Replaces all free occurrences of a variable with a given name in a term with a replacement term (usually another Var).
+ * This function is capture-avoiding with respect to new binders introduced within `replacementVar` if it were complex,
+ * but typically `replacementVar` is a simple Var (a lambda parameter).
+ * @param term The term to perform substitution in.
+ * @param freeVarName The name of the free variable to replace.
+ * @param replacementVar The variable term to substitute with.
+ * @param boundInScope Set of names currently bound by lambdas/pis in the traversal path.
+ * @returns The term with free occurrences of the variable replaced.
+ */
+export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: Term, boundInScope: Set<string> = new Set()): Term {
+    const current = getTermRef(term);
+
+    switch (current.tag) {
+        case 'Var':
+            // Replace if name matches, it's not lambda-bound internally by this name (checked by boundInScope),
+            // or if it IS lambda-bound but we are targeting a specific instance (not simple for this func).
+            // This simple version replaces Var(freeVarName) if freeVarName is not in boundInScope.
+            return (current.name === freeVarName && !boundInScope.has(freeVarName) && !current.isLambdaBound) ? replacementVar : current;
+        case 'Lam': {
+            const newBoundInScope = new Set(boundInScope);
+            if (!current._isAnnotated || current.paramName !== freeVarName) { // if annotated, paramType can have freeVarName
+                 newBoundInScope.add(current.paramName);
+            }
+            const newParamType = current.paramType ? replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope) : undefined; // freeVarName can be in type, use original boundInScope
+            
+            const newBodyFn = (v_arg: Term): Term => {
+                return replaceFreeVar(current.body(v_arg), freeVarName, replacementVar, newBoundInScope);
+            };
+            const resLam = Lam(current.paramName, current.icit, newParamType, newBodyFn);
+            (resLam as Term & { tag: 'Lam' })._isAnnotated = current._isAnnotated && newParamType !== undefined;
+            return resLam;
+        }
+        case 'Pi': {
+            const newBoundInScope = new Set(boundInScope);
+            if (current.paramName !== freeVarName) {
+                newBoundInScope.add(current.paramName);
+            }
+            const newParamType = replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope); // freeVarName can be in type, use original boundInScope
+
+            const newBodyTypeFn = (v_arg: Term) => {
+                return replaceFreeVar(current.bodyType(v_arg), freeVarName, replacementVar, newBoundInScope);
+            };
+            return Pi(current.paramName, current.icit, newParamType, newBodyTypeFn);
+        }
+        case 'App':
+            return App(
+                replaceFreeVar(current.func, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.arg, freeVarName, replacementVar, boundInScope),
+                current.icit
+            );
+        // Base cases that don't bind variables or have no subterms with variables relevant here
+        case 'Type': case 'Hole': case 'CatTerm': case 'SetTerm': return current;
+        // Cases that have subterms but don't bind variables themselves
+        case 'ObjTerm': return ObjTerm(replaceFreeVar(current.cat, freeVarName, replacementVar, boundInScope));
+        case 'HomTerm':
+            return HomTerm(
+                replaceFreeVar(current.cat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.dom, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.cod, freeVarName, replacementVar, boundInScope)
+            );
+        case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
+            return current.tag === 'FunctorCategoryTerm' ? FunctorCategoryTerm(
+                replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.codomainCat, freeVarName, replacementVar, boundInScope)
+            ) : FunctorTypeTerm(
+                replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.codomainCat, freeVarName, replacementVar, boundInScope)
+            );
+        case 'FMap0Term':
+            return FMap0Term(
+                replaceFreeVar(current.functor, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.objectX, freeVarName, replacementVar, boundInScope),
+                current.catA_IMPLICIT ? replaceFreeVar(current.catA_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.catB_IMPLICIT ? replaceFreeVar(current.catB_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined
+            );
+        case 'FMap1Term':
+            return FMap1Term(
+                replaceFreeVar(current.functor, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.morphism_a, freeVarName, replacementVar, boundInScope),
+                current.catA_IMPLICIT ? replaceFreeVar(current.catA_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.catB_IMPLICIT ? replaceFreeVar(current.catB_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.objX_A_IMPLICIT ? replaceFreeVar(current.objX_A_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.objY_A_IMPLICIT ? replaceFreeVar(current.objY_A_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined
+            );
+        case 'NatTransTypeTerm':
+            return NatTransTypeTerm(
+                replaceFreeVar(current.catA, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.catB, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorF, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorG, freeVarName, replacementVar, boundInScope)
+            );
+        case 'NatTransComponentTerm':
+            return NatTransComponentTerm(
+                replaceFreeVar(current.transformation, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.objectX, freeVarName, replacementVar, boundInScope),
+                current.catA_IMPLICIT ? replaceFreeVar(current.catA_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.catB_IMPLICIT ? replaceFreeVar(current.catB_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.functorF_IMPLICIT ? replaceFreeVar(current.functorF_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.functorG_IMPLICIT ? replaceFreeVar(current.functorG_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined
+            );
+        case 'HomCovFunctorIdentity':
+            return HomCovFunctorIdentity(
+                replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.objW_InDomainCat, freeVarName, replacementVar, boundInScope)
+            );
+        default:
+            const exhaustiveCheck: never = current;
+            throw new Error(`replaceFreeVar: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
+    }
+}
+
+/**
+ * Abstracts a term over a list of spine variables, creating nested Lambdas.
+ * e.g., abstractTermOverSpine(Body, [v1, v2], ctx) -> Lam(v1.name, v1.type, LV1 => Lam(v2.name, v2.type, LV2 => Body') ) 
+ * where Body' is Body with original v1 replaced by LV1 and v2 by LV2.
+ * @param termToAbstract The term that will become the body of the innermost lambda.
+ * @param spineVars An array of Var terms that were in the application spine. Order: outermost argument first.
+ * @param ctx The context to look up types for spine variables.
+ * @returns A new Term consisting of nested Lambdas.
+ */
+export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {tag:'Var'})[], ctx: Context): Term {
+    let currentBody = termToAbstract;
+
+    // Iterate over spine variables to build lambdas from outermost to innermost parameter
+    for (let i = 0; i < spineVars.length; i++) {
+        const spineVar = spineVars[i];
+        const spineVarName = spineVar.name;
+        const binding = lookupCtx(ctx, spineVarName);
+        // Ensure the variable from the spine is indeed the one bound in the current context as expected.
+        // This check might need refinement if spineVar objects don't have perfect identity with context-bound vars.
+        if (!binding || !binding.type || !spineVar.isLambdaBound /* Spine vars must be bound vars */) {
+            throw new Error(`Spine variable ${spineVarName} is not a recognized bound variable in context or has no type.`);
+        }
+        const spineVarType = binding.type; // Use type from context for the lambda parameter
+        const icitForLambda = binding.icit || Icit.Expl; // Default to Explicit if not specified in context binding
+
+        const bodyForThisLambda = currentBody; // This is the term that will become the body of Lam(spineVarName, ...)
+                                             // It might contain spineVarName as a free variable (and also other spineVars[j] for j > i).
+        currentBody = Lam(spineVarName, icitForLambda, spineVarType, (lambdaParamVar) => {
+            // lambdaParamVar is Var(spineVarName, isLambdaBound=true)
+            // We need to transform `bodyForThisLambda` such that its free occurrences of `spineVarName`
+            // (which correspond to the original spineVar that was free in bodyForThisLambda w.r.t this new Lam)
+            // are now correctly bound by `lambdaParamVar`.
+            return replaceFreeVar(bodyForThisLambda, spineVarName, lambdaParamVar);
+        });
+    }
+    return currentBody;
 } 

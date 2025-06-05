@@ -15,7 +15,7 @@ import {
 import { MAX_STACK_DEPTH } from './constants';
 import { whnf } from './reduction';
 import { areEqual, areAllArgsConvertible } from './equality';
-import { matchPattern, applySubst, collectPatternVars } from './pattern';
+import { matchPattern, applySubst, collectPatternVars, getHeadAndSpine, abstractTermOverSpine } from './pattern';
 
 /**
  * Checks if a term contains a specific hole.
@@ -207,52 +207,24 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
         return unifyHole(current_t2, current_t1, ctx, depth + 1) ? UnifyResult.Solved : tryUnificationRules(current_t1, current_t2, ctx, depth +1);
     }
 
-    // Phase 1: Structural unification for known injective constructors (before full WHNF)
-    if (current_t1.tag === current_t2.tag) {
-        const commonTag = current_t1.tag;
-        let structuralResult: UnifyResult | undefined = undefined;
+    // --- Higher-Order Unification (Flex-Rigid for Miller Fragment) ---
+    const hs1 = getHeadAndSpine(current_t1);
+    const hs2 = getHeadAndSpine(current_t2);
 
-        if (isEmdashUnificationInjectiveStructurally(commonTag)) {
-            switch (commonTag) {
-                case 'Type': case 'CatTerm': case 'SetTerm':
-                    structuralResult = UnifyResult.Solved;
-                    break;
-                case 'Var':
-                    structuralResult = (current_t1 as Term & {tag:'Var'}).name === (current_t2 as Term & {tag:'Var'}).name ? UnifyResult.Solved : UnifyResult.Failed;
-                    break;
-                case 'ObjTerm':
-                    structuralResult = unify((current_t1 as Term & {tag:'ObjTerm'}).cat, (current_t2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
-                    break;
-                case 'HomTerm': {
-                    const hom1 = current_t1 as Term & {tag:'HomTerm'}; const hom2 = current_t2 as Term & {tag:'HomTerm'};
-                    structuralResult = unifyArgs([hom1.cat, hom1.dom, hom1.cod], [hom2.cat, hom2.dom, hom2.cod], ctx, depth + 1);
-                    break;
-                }
-                case 'FunctorCategoryTerm':
-                case 'FunctorTypeTerm': {
-                    const fc1 = current_t1 as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'}; const fc2 = current_t2 as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'};
-                    structuralResult = unifyArgs([fc1.domainCat, fc1.codomainCat], [fc2.domainCat, fc2.codomainCat], ctx, depth +1);
-                    break;
-                }
-                case 'NatTransTypeTerm': {
-                    const nt1 = current_t1 as Term & {tag:'NatTransTypeTerm'};
-                    const nt2 = current_t2 as Term & {tag:'NatTransTypeTerm'};
-                    structuralResult = unifyArgs(
-                        [nt1.catA, nt1.catB, nt1.functorF, nt1.functorG],
-                        [nt2.catA, nt2.catB, nt2.functorF, nt2.functorG],
-                        ctx, depth + 1
-                    );
-                    break;
-                }
-            }
+    if (hs1.head.tag === 'Hole') {
+        if (hs2.head.tag !== 'Hole') { // Flex-Rigid: ?M s1...sn = RHS
+            const flexRigidResult = solveHoFlexRigid(hs1.head as Term & {tag: 'Hole'}, hs1.spine, current_t2, ctx, depth + 1);
+            if (flexRigidResult !== UnifyResult.Failed) return flexRigidResult; // Solved or Progress
+            // if Failed, fall through to other unification methods / rules
+        } else { // Flex-Flex: ?M s1...sn = ?N t1...tm
+            // TODO: Handle Flex-Flex, e.g. if M=N, unify spines. For now, fall through.
         }
-
-        if (structuralResult !== undefined) {
-            if (structuralResult === UnifyResult.Solved || structuralResult === UnifyResult.Failed) {
-                 return (structuralResult === UnifyResult.Failed) ? tryUnificationRules(current_t1, current_t2, ctx, depth + 1) : structuralResult;
-            }
-        }
+    } else if (hs2.head.tag === 'Hole') { // Rigid-Flex: LHS = ?N t1...tm
+        const rigidFlexResult = solveHoFlexRigid(hs2.head as Term & {tag: 'Hole'}, hs2.spine, current_t1, ctx, depth + 1);
+        if (rigidFlexResult !== UnifyResult.Failed) return rigidFlexResult;
+        // if Failed, fall through
     }
+    // --- End Higher-Order Unification Attempt ---
 
     const rt1_whnf = whnf(current_t1, ctx, depth + 1);
     const rt2_whnf = whnf(current_t2, ctx, depth + 1);
@@ -648,4 +620,70 @@ export function solveConstraints(ctx: Context, stackDepth: number = 0): boolean 
 
     solveConstraintsControl.depth--;
     return allSolved;
+}
+
+/**
+ * Solves a higher-order unification problem of the form `?Hole spineArgs = rhsTerm` (flex-rigid)
+ * for the Miller fragment (spineArgs are distinct bound variables).
+ * @param hole The Hole term at the head of the flexible term.
+ * @param spineArgs The arguments applied to the hole.
+ * @param rhsTerm The rigid term on the other side of the equation.
+ * @param ctx The current context.
+ * @param depth Recursion depth.
+ * @returns UnifyResult indicating success, progress, or failure.
+ */
+export function solveHoFlexRigid(
+    hole: Term & { tag: 'Hole' },
+    spineArgs: Term[],
+    rhsTerm: Term,
+    ctx: Context,
+    depth: number
+): UnifyResult {
+    if (depth > MAX_STACK_DEPTH) throw new Error(`solveHoFlexRigid stack depth exceeded`);
+
+    // 1. Validate Spine (Miller Fragment)
+    const spineVars: (Term & { tag: 'Var' })[] = [];
+    const distinctVarNames = new Set<string>();
+    for (const arg of spineArgs) {
+        const argRef = getTermRef(arg);
+        if (argRef.tag !== 'Var' || !argRef.isLambdaBound) {
+            consoleLog(`[solveHoFlexRigid] Spine validation failed: arg ${printTerm(argRef)} is not a lambda-bound variable.`);
+            return UnifyResult.Failed; // Not a valid Miller fragment spine arg
+        }
+        if (distinctVarNames.has(argRef.name)) {
+            consoleLog(`[solveHoFlexRigid] Spine validation failed: variable ${argRef.name} is not distinct in spine.`);
+            return UnifyResult.Failed; // Variables in spine must be distinct
+        }
+        distinctVarNames.add(argRef.name);
+        spineVars.push(argRef);
+    }
+
+    // 2. Occurs Check
+    // Ensure WHNF of rhsTerm is used for occurs check, as hole.ref assignment uses WHNF.
+    const whnfRhs = whnf(rhsTerm, ctx, depth + 1);
+    if (termContainsHole(whnfRhs, hole.id, new Set(), depth + 1)) {
+        consoleLog(`[solveHoFlexRigid] Occurs check failed for hole ${hole.id} in RHS ${printTerm(whnfRhs)}.`);
+        return UnifyResult.Failed;
+    }
+
+    // 3. Construct Solution
+    try {
+        consoleLog(`[solveHoFlexRigid] Attempting to solve ${hole.id} with spine [${spineVars.map(v => printTerm(v)).join(', ')}] = ${printTerm(rhsTerm)}`);
+        const solution = abstractTermOverSpine(whnfRhs, spineVars, ctx);
+        // Before assigning, ensure the solution itself doesn't immediately make the occurs check fail again if it were re-checked
+        // This is mostly covered by the initial occurs check on whnfRhs, as abstractTermOverSpine shouldn't reintroduce the hole.
+        consoleLog(`[solveHoFlexRigid] Solution for ${hole.id}: ${printTerm(solution)}`);
+        
+        // The unifyHole function handles assigning to hole.ref and further checks/dereferencing.
+        // We directly assign here and expect the broader unification loop to continue/re-check.
+        // This is because unifyHole might try to unify hole with another hole, which is not what we are doing here.
+        // We are *defining* the hole.
+        hole.ref = solution; 
+        // After setting the ref, the original constraint might now be solvable or lead to new ones.
+        // Returning Progress indicates that the constraint processor should re-evaluate.
+        return UnifyResult.Progress; // Indicates a change was made, constraints should be re-evaluated.
+    } catch (e) {
+        console.error(`[solveHoFlexRigid] Error constructing solution for ${hole.id}: ${(e as Error).message}. Stack: ${(e as Error).stack}`);
+        return UnifyResult.Failed;
+    }
 } 
