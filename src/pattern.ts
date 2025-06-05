@@ -519,10 +519,12 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
  * @returns A new Term consisting of nested Lambdas.
  */
 export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {tag:'Var'})[], ctx: Context): Term {
-    let currentBody = termToAbstract;
+    let resultingLambda = termToAbstract;
 
-    // Iterate over spine variables to build lambdas from outermost to innermost parameter
-    for (let i = 0; i < spineVars.length; i++) {
+    // Iterate from the last spine variable (innermost parameter in the spine) to the first,
+    // so the last spine variable becomes the parameter of the innermost lambda created,
+    // and the first spine variable (outermost argument in application) becomes the parameter of the outermost lambda.
+    for (let i = spineVars.length - 1; i >= 0; i--) { // Iterate backwards
         const spineVar = spineVars[i];
         const spineVarName = spineVar.name;
         const binding = lookupCtx(ctx, spineVarName);
@@ -534,15 +536,15 @@ export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {
         const spineVarType = binding.type; // Use type from context for the lambda parameter
         const icitForLambda = binding.icit || Icit.Expl; // Default to Explicit if not specified in context binding
 
-        const bodyForThisLambda = currentBody; // This is the term that will become the body of Lam(spineVarName, ...)
+        const bodyToWrapInLambda = resultingLambda; // This is the term that will become the body of Lam(spineVarName, ...)
                                              // It might contain spineVarName as a free variable (and also other spineVars[j] for j > i).
-        currentBody = Lam(spineVarName, icitForLambda, spineVarType, (lambdaParamVar) => {
+        resultingLambda = Lam(spineVarName, icitForLambda, spineVarType, (lambdaParamVar) => {
             // lambdaParamVar is Var(spineVarName, isLambdaBound=true)
-            // We need to transform `bodyForThisLambda` such that its free occurrences of `spineVarName`
-            // (which correspond to the original spineVar that was free in bodyForThisLambda w.r.t this new Lam)
+            // We need to transform `bodyToWrapInLambda` such that its free occurrences of `spineVarName`
+            // (which correspond to the original spineVar that was free in bodyToWrapInLambda w.r.t this new Lam)
             // are now correctly bound by `lambdaParamVar`.
-            return replaceFreeVar(bodyForThisLambda, spineVarName, lambdaParamVar);
+            return replaceFreeVar(bodyToWrapInLambda, spineVarName, lambdaParamVar);
         });
     }
-    return currentBody;
+    return resultingLambda;
 } 
