@@ -33,6 +33,7 @@ export function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]
  * @param patternVarDecls Declared pattern variables for this rule.
  * @param currentSubst Current substitution (for accumulating matches).
  * @param stackDepth Recursion depth.
+ * @param patternLocalBinders Names of variables bound by Lam/Pi in the pattern structure itself.
  * @returns A substitution if matching succeeds, null otherwise.
  */
 export function matchPattern(
@@ -41,7 +42,8 @@ export function matchPattern(
     ctx: Context,
     patternVarDecls: PatternVarDecl[],
     currentSubst?: Substitution,
-    stackDepth = 0
+    stackDepth = 0,
+    patternLocalBinders: Set<string> = new Set<string>()
 ): Substitution | null {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`matchPattern stack depth exceeded for pattern ${printTerm(pattern)} vs term ${printTerm(termToMatch)}`);
 
@@ -50,7 +52,7 @@ export function matchPattern(
 
     const subst = currentSubst ? new Map(currentSubst) : new Map<string, Term>();
 
-    // Pattern variable matching
+    // Pattern variable matching (Var)
     if (rtPattern.tag === 'Var' && isPatternVarName(rtPattern.name, patternVarDecls)) {
         const pvarName = rtPattern.name;
         if (pvarName === '_') return subst; // Wildcard matches anything without binding
@@ -58,28 +60,55 @@ export function matchPattern(
         if (existing) { // If already bound, check for consistency
             return areEqual(rtTermToMatch, getTermRef(existing), ctx, stackDepth + 1) ? subst : null;
         }
+        // NOTE: Scope check for Var pattern variables is typically not done with patternAllowedLocalBinders.
+        // If needed, it would be similar to Hole, but Var doesn't carry patternAllowedLocalBinders.
         subst.set(pvarName, rtTermToMatch);
         return subst;
     }
 
-    // Hole as pattern variable (e.g. in implicit args of kernel terms in rules)
-    if (rtPattern.tag === 'Hole') {
-        if (rtPattern.id === '_') return subst; // Wildcard hole
-        if (isPatternVarName(rtPattern.id, patternVarDecls)) {
-            const pvarId = rtPattern.id;
-            const existing = subst.get(pvarId);
-            if (existing) {
-                return areEqual(rtTermToMatch, getTermRef(existing), ctx, stackDepth + 1) ? subst : null;
-            }
-            subst.set(pvarId, rtTermToMatch);
-            return subst;
+    // Hole as pattern variable (e.g. $F)
+    if (rtPattern.tag === 'Hole' && isPatternVarName(rtPattern.id, patternVarDecls)) {
+        const pVarHole = rtPattern as Term & { tag: 'Hole' };
+        const pvarId = pVarHole.id;
+        if (pvarId === '_') return subst; // Wildcard hole
+
+        const existing = subst.get(pvarId);
+        if (existing) {
+            return areEqual(rtTermToMatch, getTermRef(existing), ctx, stackDepth + 1) ? subst : null;
         }
-        // If not a pattern var, then it's a specific hole, must match exactly.
+
+        // Scope Check for Hole pattern variables
+        if (pVarHole.patternAllowedLocalBinders !== undefined) {
+            const actualMatchedTerm = rtTermToMatch;
+            const freeVarsInActualMatchedTerm = getFreeVariables(actualMatchedTerm, new Set());
+
+            let scopeCheckFailed = false;
+            for (const patternBinderName of patternLocalBinders) {
+                if (!pVarHole.patternAllowedLocalBinders.includes(patternBinderName)) {
+                    // This patternBinderName is bound in the pattern context but NOT allowed for this $Hole.
+                    // So, the actualMatchedTerm must NOT contain patternBinderName as free.
+                    if (freeVarsInActualMatchedTerm.has(patternBinderName)) {
+                        consoleLog(`[matchPattern SCOPE FAIL] Pattern variable ${pvarId} matched term '${printTerm(actualMatchedTerm)}' which freely contains '${patternBinderName}'. '${patternBinderName}' is bound in pattern but not in ${pvarId}.patternAllowedLocalBinders = [${pVarHole.patternAllowedLocalBinders.join(', ')}]. Pattern local binders: [${Array.from(patternLocalBinders).join(', ')}]`);
+                        scopeCheckFailed = true;
+                        break;
+                    }
+                }
+            }
+            if (scopeCheckFailed) return null;
+        }
+
+        subst.set(pvarId, rtTermToMatch);
+        return subst;
+    }
+
+    // If rtPattern is a specific Hole (not a pattern var), it must match an identical hole.
+    if (rtPattern.tag === 'Hole') { // Not a pattern variable, because isPatternVarName was false
         if (rtTermToMatch.tag === 'Hole' && rtPattern.id === rtTermToMatch.id) return subst;
         return null; // Specific hole in pattern didn't match term
     }
 
     // If termToMatch is a hole but pattern is not a var/hole pattern, no match.
+    // (Unless the hole in termToMatch is bound to something that matches the pattern)
     if (rtTermToMatch.tag === 'Hole') return null;
     if (rtPattern.tag !== rtTermToMatch.tag) return null;
 
@@ -96,59 +125,77 @@ export function matchPattern(
             return rtPattern.name === (rtTermToMatch as Term & {tag:'Var'}).name ? subst : null;
         case 'App': {
             const termApp = rtTermToMatch as Term & {tag:'App'};
-            const s1 = matchPattern(rtPattern.func, termApp.func, ctx, patternVarDecls, subst, stackDepth + 1);
+            const s1 = matchPattern(rtPattern.func, termApp.func, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders);
             if (!s1) return null;
-            return matchPattern(rtPattern.arg, termApp.arg, ctx, patternVarDecls, s1, stackDepth + 1);
+            return matchPattern(rtPattern.arg, termApp.arg, ctx, patternVarDecls, s1, stackDepth + 1, patternLocalBinders);
         }
         case 'Lam': {
             const lamP = rtPattern; const lamT = rtTermToMatch as Term & {tag:'Lam'};
             if (lamP._isAnnotated !== lamT._isAnnotated) return null;
-            let tempSubst = subst;
+            // Icit already checked above for Lam/Pi/App
+
+            let s: Substitution | null = subst;
             if (lamP._isAnnotated) {
-                if (!lamP.paramType || !lamT.paramType) return null; // Should not happen if well-typed
-                 const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, tempSubst, stackDepth + 1);
+                if (!lamP.paramType || !lamT.paramType) return null; 
+                 const sType = matchPattern(lamP.paramType, lamT.paramType, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
                  if (!sType) return null;
-                 tempSubst = sType;
+                 s = sType;
             }
-            // For Lam/Pi bodies, we need alpha-equivalence. Instantiating with a fresh var and checking equality is a common way.
-            const freshV = Var(freshVarName(lamP.paramName), true, "pattern_var");
-            const paramTypeForCtx = (lamP._isAnnotated && lamP.paramType) ? getTermRef(lamP.paramType) : Hole(freshHoleName() + "_match_lam_body_ctx");
-            const extendedCtx = extendCtx(ctx, freshV.name, paramTypeForCtx, lamP.icit);
-            // The bodies themselves are not matched for further pattern variables here; structural equality is sufficient.
-            return areEqual(lamP.body(freshV), lamT.body(freshV), extendedCtx, stackDepth + 1) ? tempSubst : null;
+            
+            const commonVarName = lamP.paramName; // Use pattern's param name for instantiation
+            const commonVar = Var(commonVarName, true);
+
+            const patternBodyInst = lamP.body(commonVar);
+            // Instantiate term's body with the same commonVar to handle alpha-equivalence during matching.
+            // This relies on the HOAS nature of body functions.
+            const termBodyInst = lamT.body(commonVar); 
+
+            const newPatternLocalBinders = new Set(patternLocalBinders);
+            newPatternLocalBinders.add(commonVarName);
+
+            return matchPattern(patternBodyInst, termBodyInst, ctx, patternVarDecls, s, stackDepth + 1, newPatternLocalBinders);
         }
         case 'Pi': {
             const piP = rtPattern; const piT = rtTermToMatch as Term & {tag:'Pi'};
-            const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1);
+            // Icit already checked above for Lam/Pi/App
+            const sType = matchPattern(piP.paramType, piT.paramType, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders);
             if (!sType) return null;
-            const freshV = Var(freshVarName(piP.paramName), true, "pattern_var");
-            const extendedCtx = extendCtx(ctx, freshV.name, getTermRef(piP.paramType), piP.icit);
-            return areEqual(piP.bodyType(freshV), piT.bodyType(freshV), extendedCtx, stackDepth + 1) ? sType : null;
+
+            const commonVarName = piP.paramName; // Use pattern's param name
+            const commonVar = Var(commonVarName, true);
+
+            const patternBodyTypeInst = piP.bodyType(commonVar);
+            const termBodyTypeInst = piT.bodyType(commonVar);
+
+            const newPatternLocalBinders = new Set(patternLocalBinders);
+            newPatternLocalBinders.add(commonVarName);
+
+            return matchPattern(patternBodyTypeInst, termBodyTypeInst, ctx, patternVarDecls, sType, stackDepth + 1, newPatternLocalBinders);
         }
         case 'ObjTerm':
-            return matchPattern(rtPattern.cat, (rtTermToMatch as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1);
+            return matchPattern(rtPattern.cat, (rtTermToMatch as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders);
         case 'HomTerm': {
             const homP = rtPattern; const homT = rtTermToMatch as Term & {tag:'HomTerm'};
             let s: Substitution | null = subst;
-            s = matchPattern(homP.cat, homT.cat, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            s = matchPattern(homP.dom, homT.dom, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(homP.cod, homT.cod, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(homP.cat, homT.cat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            s = matchPattern(homP.dom, homT.dom, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(homP.cod, homT.cod, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'FunctorCategoryTerm':
         case 'FunctorTypeTerm': {
             const fcP = rtPattern as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'};
             const fcT = rtTermToMatch as Term & {tag:'FunctorCategoryTerm'|'FunctorTypeTerm'};
             let s: Substitution | null = subst;
-            s = matchPattern(fcP.domainCat, fcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(fcP.codomainCat, fcT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(fcP.domainCat, fcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(fcP.codomainCat, fcT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'FMap0Term': {
             const fm0P = rtPattern; const fm0T = rtTermToMatch as Term & {tag:'FMap0Term'};
             let s: Substitution | null = subst;
-            if (fm0P.catA_IMPLICIT) { if (!fm0T.catA_IMPLICIT) return null; s = matchPattern(fm0P.catA_IMPLICIT, fm0T.catA_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null; }
-            if (fm0P.catB_IMPLICIT) { if (!fm0T.catB_IMPLICIT) return null; s = matchPattern(fm0P.catB_IMPLICIT, fm0T.catB_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null; }
-            s = matchPattern(fm0P.functor, fm0T.functor, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(fm0P.objectX, fm0T.objectX, ctx, patternVarDecls, s, stackDepth + 1);
+            if (fm0P.catA_IMPLICIT) { if (!fm0T.catA_IMPLICIT) return null; s = matchPattern(fm0P.catA_IMPLICIT, fm0T.catA_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null; }
+            if (fm0P.catB_IMPLICIT) { if (!fm0T.catB_IMPLICIT) return null; s = matchPattern(fm0P.catB_IMPLICIT, fm0T.catB_IMPLICIT, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null; }
+            s = matchPattern(fm0P.functor, fm0T.functor, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(fm0P.objectX, fm0T.objectX, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'FMap1Term': {
             const fm1P = rtPattern; const fm1T = rtTermToMatch as Term & {tag:'FMap1Term'};
@@ -156,18 +203,18 @@ export function matchPattern(
             const implicitsP = [fm1P.catA_IMPLICIT, fm1P.catB_IMPLICIT, fm1P.objX_A_IMPLICIT, fm1P.objY_A_IMPLICIT];
             const implicitsT = [fm1T.catA_IMPLICIT, fm1T.catB_IMPLICIT, fm1T.objX_A_IMPLICIT, fm1T.objY_A_IMPLICIT];
             for(let i=0; i<implicitsP.length; i++) {
-                if (implicitsP[i]) { if (!implicitsT[i]) return null; s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null; }
+                if (implicitsP[i]) { if (!implicitsT[i]) return null; s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null; }
             }
-            s = matchPattern(fm1P.functor, fm1T.functor, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(fm1P.morphism_a, fm1T.morphism_a, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(fm1P.functor, fm1T.functor, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(fm1P.morphism_a, fm1T.morphism_a, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'NatTransTypeTerm': {
             const ntP = rtPattern; const ntT = rtTermToMatch as Term & {tag:'NatTransTypeTerm'};
             let s: Substitution | null = subst;
-            s = matchPattern(ntP.catA, ntT.catA, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            s = matchPattern(ntP.catB, ntT.catB, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            s = matchPattern(ntP.functorF, ntT.functorF, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(ntP.functorG, ntT.functorG, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(ntP.catA, ntT.catA, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            s = matchPattern(ntP.catB, ntT.catB, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            s = matchPattern(ntP.functorF, ntT.functorF, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(ntP.functorG, ntT.functorG, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'NatTransComponentTerm': {
             const ncP = rtPattern; const ncT = rtTermToMatch as Term & {tag:'NatTransComponentTerm'};
@@ -175,17 +222,17 @@ export function matchPattern(
             const implicitsP = [ncP.catA_IMPLICIT, ncP.catB_IMPLICIT, ncP.functorF_IMPLICIT, ncP.functorG_IMPLICIT];
             const implicitsT = [ncT.catA_IMPLICIT, ncT.catB_IMPLICIT, ncT.functorF_IMPLICIT, ncT.functorG_IMPLICIT];
             for(let i=0; i<implicitsP.length; i++) {
-                if (implicitsP[i]) { if (!implicitsT[i]) return null; s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null; }
+                if (implicitsP[i]) { if (!implicitsT[i]) return null; s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null; }
             }
-            s = matchPattern(ncP.transformation, ncT.transformation, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(ncP.objectX, ncT.objectX, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(ncP.transformation, ncT.transformation, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(ncP.objectX, ncT.objectX, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         case 'HomCovFunctorIdentity': {
             const hcP = rtPattern as Term & {tag:'HomCovFunctorIdentity'};
             const hcT = rtTermToMatch as Term & {tag:'HomCovFunctorIdentity'};
             let s: Substitution | null = subst;
-            s = matchPattern(hcP.domainCat, hcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1); if (!s) return null;
-            return matchPattern(hcP.objW_InDomainCat, hcT.objW_InDomainCat, ctx, patternVarDecls, s, stackDepth + 1);
+            s = matchPattern(hcP.domainCat, hcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders); if (!s) return null;
+            return matchPattern(hcP.objW_InDomainCat, hcT.objW_InDomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders);
         }
         default:
              const exhaustiveCheck: never = rtPattern;
@@ -547,4 +594,98 @@ export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {
         });
     }
     return resultingLambda;
+}
+
+/**
+ * Computes the set of free variable names in a term.
+ * @param term The term to analyze.
+ * @param initialBoundScope A set of variable names considered bound from the outset.
+ * @returns A Set of strings, where each string is the name of a free variable.
+ */
+export function getFreeVariables(term: Term, initialBoundScope: Set<string> = new Set()): Set<string> {
+    const freeVars = new Set<string>();
+    const visited = new Set<Term>(); // For handling shared subterms and cycles
+
+    function find(currentTerm: Term, currentLocallyBound: Set<string>) {
+        const termRef = getTermRef(currentTerm); 
+        if (visited.has(termRef) && termRef.tag !== 'Var') return; 
+        visited.add(termRef);
+
+        switch (termRef.tag) {
+            case 'Var':
+                if (!currentLocallyBound.has(termRef.name)) {
+                    freeVars.add(termRef.name);
+                }
+                break;
+            case 'Lam':
+                if (termRef.paramType) find(termRef.paramType, currentLocallyBound);
+                const newScopeLam = new Set(currentLocallyBound);
+                newScopeLam.add(termRef.paramName); 
+                find(termRef.body(Var(termRef.paramName, true)), newScopeLam); 
+                break;
+            case 'Pi':
+                find(termRef.paramType, currentLocallyBound);
+                const newScopePi = new Set(currentLocallyBound);
+                newScopePi.add(termRef.paramName); 
+                find(termRef.bodyType(Var(termRef.paramName, true)), newScopePi);
+                break;
+            case 'App':
+                find(termRef.func, currentLocallyBound);
+                find(termRef.arg, currentLocallyBound);
+                break;
+            case 'Hole':
+                if (termRef.elaboratedType) find(termRef.elaboratedType, currentLocallyBound);
+                // Do not descend into termRef.ref for free variable analysis of the hole itself.
+                break;
+            case 'Type': case 'CatTerm': case 'SetTerm': break; 
+            case 'ObjTerm': find(termRef.cat, currentLocallyBound); break;
+            case 'HomTerm':
+                find(termRef.cat, currentLocallyBound);
+                find(termRef.dom, currentLocallyBound);
+                find(termRef.cod, currentLocallyBound);
+                break;
+            case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
+                find(termRef.domainCat, currentLocallyBound);
+                find(termRef.codomainCat, currentLocallyBound);
+                break;
+            case 'FMap0Term':
+                find(termRef.functor, currentLocallyBound);
+                find(termRef.objectX, currentLocallyBound);
+                if (termRef.catA_IMPLICIT) find(termRef.catA_IMPLICIT, currentLocallyBound);
+                if (termRef.catB_IMPLICIT) find(termRef.catB_IMPLICIT, currentLocallyBound);
+                break;
+            case 'FMap1Term':
+                find(termRef.functor, currentLocallyBound);
+                find(termRef.morphism_a, currentLocallyBound);
+                if (termRef.catA_IMPLICIT) find(termRef.catA_IMPLICIT, currentLocallyBound);
+                if (termRef.catB_IMPLICIT) find(termRef.catB_IMPLICIT, currentLocallyBound);
+                if (termRef.objX_A_IMPLICIT) find(termRef.objX_A_IMPLICIT, currentLocallyBound);
+                if (termRef.objY_A_IMPLICIT) find(termRef.objY_A_IMPLICIT, currentLocallyBound);
+                break;
+            case 'NatTransTypeTerm':
+                find(termRef.catA, currentLocallyBound);
+                find(termRef.catB, currentLocallyBound);
+                find(termRef.functorF, currentLocallyBound);
+                find(termRef.functorG, currentLocallyBound);
+                break;
+            case 'NatTransComponentTerm':
+                find(termRef.transformation, currentLocallyBound);
+                find(termRef.objectX, currentLocallyBound);
+                if (termRef.catA_IMPLICIT) find(termRef.catA_IMPLICIT, currentLocallyBound);
+                if (termRef.catB_IMPLICIT) find(termRef.catB_IMPLICIT, currentLocallyBound);
+                if (termRef.functorF_IMPLICIT) find(termRef.functorF_IMPLICIT, currentLocallyBound);
+                if (termRef.functorG_IMPLICIT) find(termRef.functorG_IMPLICIT, currentLocallyBound);
+                break;
+            case 'HomCovFunctorIdentity':
+                find(termRef.domainCat, currentLocallyBound);
+                find(termRef.objW_InDomainCat, currentLocallyBound);
+                break;
+            default:
+                const _exhaustiveCheck: never = termRef;
+                throw new Error(`getFreeVariables: Unhandled term tag: ${(_exhaustiveCheck as any).tag}`);
+        }
+    }
+
+    find(term, new Set(initialBoundScope));
+    return freeVars;
 } 

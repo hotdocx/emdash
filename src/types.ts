@@ -12,7 +12,16 @@ export type BaseTerm =
     | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'App', func: Term, arg: Term, icit: Icit }
     | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term }
-    | { tag: 'Hole', id: string, ref?: Term, elaboratedType?: Term }
+    | { tag: 'Hole', 
+        id: string, 
+        ref?: Term, 
+        elaboratedType?: Term,
+        // For pattern variables: list of *names* of binders from the pattern's
+        // own scope that the matched term is allowed to freely refer to.
+        // If undefined: no restriction (classical pattern var).
+        // If empty array []: cannot refer to any local pattern binders (e.g., for $F.[]).
+        patternAllowedLocalBinders?: string[]
+      }
     // Emdash Phase 1: Core Categories
     | { tag: 'CatTerm' }
     | { tag: 'ObjTerm', cat: Term }
@@ -76,8 +85,13 @@ export const App = (func: Term, arg: Term, icit: Icit = Icit.Expl): Term & {tag:
 export const Pi = (paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term): Term & {tag: 'Pi'} =>
     ({ tag: 'Pi', paramName, icit, paramType, bodyType });
 
-export const Hole = (id: string): Term & { tag: 'Hole' } => {
-    return { tag: 'Hole', id: id, ref: undefined, elaboratedType: undefined };
+export const Hole = (id: string, patternAllowedLocalBinders?: string[]): Term & { tag: 'Hole' } => {
+    const holeTerm: Term & { tag: 'Hole' } = { tag: 'Hole', id };
+    if (patternAllowedLocalBinders !== undefined) {
+        holeTerm.patternAllowedLocalBinders = patternAllowedLocalBinders;
+    }
+    // ref and elaboratedType are typically set during unification/elaboration
+    return holeTerm;
 };
 
 // Category Theory Constructors
