@@ -141,19 +141,24 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
         if (visited.has(term)) return null;
         visited.add(term);
 
-        if (term.tag === 'Hole' && term.id === holeId) {
-            if (!term.elaboratedType) {
-                throw new Error(`Hole ${holeId} has no elaborated type. Ensure the proof term is elaborated first.`);
+        if (term.tag === 'Hole') {
+            if (term.id === holeId) {
+                if (!term.elaboratedType) {
+                    throw new Error(`Hole ${holeId} has no elaborated type. Ensure the proof term is elaborated first.`);
+                }
+                return { context: ctx, type: term.elaboratedType, hole: term };
             }
-            return { context: ctx, type: term.elaboratedType, hole: term };
+            return null; // Not the target hole, so stop searching this branch
         }
 
         // NEW: Handle Vars that are global definitions
         if (term.tag === 'Var') {
             const gdef = globalDefs.get(term.name);
             if (gdef && gdef.value) {
-                return find(gdef.value, ctx); // Context doesn't change
+                const foundInGdef = find(gdef.value, ctx); // Context doesn't change
+                if (foundInGdef) return foundInGdef;
             }
+            return null; // Var doesn't lead to the target hole
         }
 
         // Recursively search in sub-terms, extending the context where appropriate
@@ -203,6 +208,7 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
             case 'Type': case 'SetTerm': case 'CatTerm':
                 return null;
             default:
+                // This `_` will now correctly be of type `never` if all cases are handled above
                 const _: never = term;
                 return null;
         }
