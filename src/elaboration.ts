@@ -181,20 +181,34 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 throw new Error(`Type error in App: Function ${printTerm(funcAfterImplicits)} of type ${printTerm(whnfOfFuncTypeAfterImplicits)} expects a ${whnfOfFuncTypeAfterImplicits.icit === Icit.Expl ? "explicit" : "implicit"} argument, but an ${appNode.icit === Icit.Expl ? "explicit" : "implicit"} one was provided for ${printTerm(appNode.arg)}.`);
             } else {
                 // Function type is not a Pi or icit mismatches; try to unify it with a Pi type.
+                // We assume it could be a dependent Pi type, so we use HO unification.
                 const freshPiParamName = freshVarName("pi_param_app");
                 const paramTypeHole = Hole(freshHoleName() + "_app_paramT_infer");
                 (paramTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
-                const bodyTypeHole = Hole(freshHoleName() + "_app_bodyT_infer");
-                (bodyTypeHole as Term & {tag:'Hole'}).elaboratedType = Type();
-                const targetPiType = Pi(freshPiParamName, appNode.icit, paramTypeHole, (_arg: Term) => bodyTypeHole);
+
+                // The body type is represented by a higher-order hole, ?body_type_fun,
+                // which is a function from the parameter type to Type.
+                const bodyTypeFunHole = Hole(freshHoleName() + "_app_bodyT_fun_infer");
+                // Its type is Π (_:paramTypeHole). Type
+                (bodyTypeFunHole as Term & {tag:'Hole'}).elaboratedType = Pi(
+                    "_", Icit.Expl, paramTypeHole, _ => Type()
+                );
+
+                // The target Pi type has a body that is an application of this HO hole.
+                const targetPiType = Pi(
+                    freshPiParamName,
+                    appNode.icit,
+                    paramTypeHole,
+                    (arg: Term) => App(bodyTypeFunHole, arg, Icit.Expl) // body is ?F(arg)
+                );
 
                 addConstraint(typeFAfterImplicits, targetPiType, `App: func ${printTerm(funcAfterImplicits)} type needs to be Pi for arg ${printTerm(appNode.arg)}`);
                 // Attempt to solve constraints to refine function type.
-                // If this fails, the error will be caught by the top-level elaborate or by a later solveConstraints call.
+                // This may solve paramTypeHole and parts of bodyTypeFunHole.
                 solveConstraints(ctx, stackDepth + 1);
 
                 expectedParamTypeFromPi = paramTypeHole; // Use the hole as expected type
-                bodyTypeFnFromPi = (_argVal: Term) => bodyTypeHole; // Use the hole for body type
+                bodyTypeFnFromPi = (argVal: Term) => App(bodyTypeFunHole, argVal, Icit.Expl); // The body type is now dependent on the argument.
             }
 
             const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);

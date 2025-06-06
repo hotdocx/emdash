@@ -15,7 +15,7 @@ import {
 import { MAX_STACK_DEPTH } from './constants';
 import { whnf } from './reduction';
 import { areEqual, areAllArgsConvertible } from './equality';
-import { matchPattern, applySubst, collectPatternVars, getHeadAndSpine, abstractTermOverSpine } from './pattern';
+import { matchPattern, applySubst, collectPatternVars, getHeadAndSpine, abstractTermOverSpine, getFreeVariables } from './pattern';
 
 /**
  * Checks if a term contains a specific hole.
@@ -664,6 +664,26 @@ export function solveHoFlexRigid(
     if (termContainsHole(whnfRhs, hole.id, new Set(), depth + 1)) {
         consoleLog(`[solveHoFlexRigid] Occurs check failed for hole ${hole.id} in RHS ${printTerm(whnfRhs)}.`);
         return UnifyResult.Failed;
+    }
+
+    // 2.5. Scope Check
+    if (hole.patternAllowedLocalBinders) {
+        // This hole has scope restrictions. The free variables of the solution must be allowed.
+        // Free variables of solution = FV(rhsTerm) \ {spineVars}
+        const freeVarsRhs = getFreeVariables(whnfRhs);
+        const spineVarNames = new Set(spineVars.map(v => v.name));
+        
+        for (const freeVarName of freeVarsRhs) {
+            if (!spineVarNames.has(freeVarName)) {
+                // This variable will be free in the solution. Check if it's allowed.
+                // NOTE: This assumes binder names in the pattern and subject match, which is true
+                // for general unification but requires binderNameMapping in pattern matching (which is handled there).
+                if (!hole.patternAllowedLocalBinders.includes(freeVarName)) {
+                    consoleLog(`[solveHoFlexRigid] Scope check failed for hole ${hole.id}. Solution would contain free variable '${freeVarName}' which is not in the allowed list [${hole.patternAllowedLocalBinders.join(', ')}].`);
+                    return UnifyResult.Failed;
+                }
+            }
+        }
     }
 
     // 3. Construct Solution
