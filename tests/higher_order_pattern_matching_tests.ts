@@ -55,27 +55,33 @@ describe("Higher-Order Pattern Matching Tests", () => {
         const subst = matchPattern(pattern, termToMatch, baseCtx, patternVarDecls);
         assert(subst !== null, "Test 1: Match should succeed.");
         assert(subst!.has(pvarF), "Test 1: $F should be in substitution.");
+        
         const fSubst = getTermRef(subst!.get(pvarF)!);
-        // console.log("Test 1 $F:", printTerm(fSubst));
-        assert(areEqual(fSubst, Var("GlobalFunc"), baseCtx), "Test 1: $F should be GlobalFunc.");
+        const expectedF = Lam("y", Icit.Expl, Var("MyType"), (vy) => App(Var("GlobalFunc"), vy, Icit.Expl));
+
+        assert(areEqual(fSubst, expectedF, baseCtx), "Test 1: $F should be (λy. GlobalFunc y).");
     });
 
-    it("Test 2: Eta-like pattern (λx. $F.[] x) FAILS to match (λy. (λz.y) AnotherGlobalConst) due to scope", () => {
+    it("Test 2: Eta-like pattern (λx. $F.[] x) now PASSES to match (λy. y)", () => {
         // Pattern: (λx: MyType. $F.[] x)
         const pattern = Lam("x", Icit.Expl, Var("MyType"), 
             (vx) => App(Hole(pvarF, []), vx, Icit.Expl));
 
         // Term: (λy: MyType. (λz: AnotherType. y) AnotherGlobalConst)
-        // The body ( (λz.y) AnotherGlobalConst ) reduces to y.
-        // So, $F.[] x is trying to match y (where x and y are alpha-equivalent).
-        // $F would need to match (λz.y), but this term contains y freely (violating $F.[])
+        // The body normalizes to just `y`.
+        // So, $F.[] x matches y. HO Unification solves this to $F := (λv. v).
+        // This solution has no free variables, so the scope check $F.[] passes.
         const termToMatch = Lam("y", Icit.Expl, Var("MyType"), 
             (_vy) => App( Lam("z", Icit.Expl, Var("AnotherType"), (vz) => Var("y")), Var("AnotherGlobalConst"), Icit.Expl)
         );
 
         const subst = matchPattern(pattern, termToMatch, baseCtx, patternVarDecls);
-        // console.log("Test 2 Subst:", subst ? Array.from(subst.entries()).map(([k,v]) => [k, printTerm(v)]) : null);
-        assert(subst === null, "Test 2: Match should FAIL due to scope violation for $F.[].");
+        assert(subst !== null, "Test 2: Match should now SUCCEED.");
+        assert(subst!.has(pvarF), "Test 2: $F should be in substitution.");
+        const fSubst = getTermRef(subst!.get(pvarF)!);
+        const expectedF = Lam("v", Icit.Expl, Var("MyType"), v => v);
+        
+        assert(areEqual(fSubst, expectedF, baseCtx), "Test 2: $F should be the identity function.");
     });
 
     it("Test 3: Mixed scope (λx y. $G.[x] y) matches (λa b. (GFuncForT3 a) b)", () => {
@@ -100,21 +106,16 @@ describe("Higher-Order Pattern Matching Tests", () => {
         assert(subst!.has(pvarG), "Test 3: $G should be in substitution.");
         
         const gSubst = getTermRef(subst!.get(pvarG)!);
-        // gSubst should be App(Var("GFuncForT3"), Var("a")) 
-        // because $G.[x] (where x corresponds to 'a') matched App(Var("GFuncForT3"), Var("a")).
-        const expectedGSubst = App(Var("GFuncForT3"), Var("a"));
-        
-        console.log("Test 3 $G raw substitution:", printTerm(gSubst));
-        console.log("Test 3 Expected for $G:", printTerm(expectedGSubst));
+        // With HO matching, $G y matches (GFuncForT3 a) b.
+        // So, $G should be solved to λy. (GFuncForT3 a) y
+        const expectedGSubst = Lam("b", Icit.Expl, Var("AnotherType"), (vb) => App(App(Var("GFuncForT3"), Var("a"), Icit.Expl), vb, Icit.Expl));
         
         // We need to check areEqual(gSubst, expectedGSubst) in a context where 'a' is understood.
-        // Or, more simply, the printTerm output should be structurally identical if names line up.
-        // Since `gSubst` captures the term `App(Var("GFuncForT3"), Var("a"))` where "a" is the name from termT3,
-        // direct comparison should work.
-        assert(areEqual(gSubst, expectedGSubst, baseCtx), "Test 3: $G should be (GFuncForT3 a).");
+        const checkCtx = extendCtx(baseCtx, "a", Var("MyType"));
+        assert(areEqual(gSubst, expectedGSubst, checkCtx), "Test 3: $G should be (λb. (GFuncForT3 a) b).");
     });
 
-    it("Test 4: Mixed scope (λx y. $G.[x] y) FAILS (λa b. (GlobalFuncTakesTwo a b) b)", () => {
+    it("Test 4: Mixed scope (λx y. $G.[x] y) now PASSES (λa b. (GlobalFuncTakesTwo a b) b)", () => {
         // Pattern: (λx:MyType. λy:AnotherType. ($G.[x] y) )
         // $G.[x] allows x, forbids y.
         const pattern = Lam("x", Icit.Expl, Var("MyType"), 
@@ -123,17 +124,26 @@ describe("Higher-Order Pattern Matching Tests", () => {
             )
         );
         // Term: (λa:MyType. λb:AnotherType. ( (GlobalFuncTakesTwo a b) b) )
-        // $G.[x] (where x~a, y~b) would need to match (GlobalFuncTakesTwo a b). 
-        // This matched term `(GlobalFuncTakesTwo a b)` has 'b' (which corresponds to pattern's 'y') free in it.
-        // But 'y' is NOT in $G.[x]'s allowed list `["x"]`. So it should fail.
+        // HO matching: $G.[x] y matches ((GlobalFuncTakesTwo a b) b)
+        // Solution for $G$ is λv. ((GlobalFuncTakesTwo a v) v).
+        // Free vars of this solution is {'a'}. 'a' corresponds to 'x', which is in the allowed list for $G.[x].
+        // So the match should now succeed.
         const termToMatch = Lam("a", Icit.Expl, Var("MyType"),
             (va) => Lam("b", Icit.Expl, Var("AnotherType"),
                 (vb) => App( App(App(Var("GlobalFuncTakesTwo"), va, Icit.Expl), vb, Icit.Expl), vb, Icit.Expl) // Body: ((GlobalFuncTakesTwo a b) b)
             )
         );
         const subst = matchPattern(pattern, termToMatch, baseCtx, patternVarDecls);
-        // console.log("Test 4 Subst:", subst ? Array.from(subst.entries()).map(([k,v]) => [k, printTerm(v)]) : null);
-        assert(subst === null, "Test 4: Match should FAIL due to scope violation for $G.[x].");
+        assert(subst !== null, "Test 4: Match should now SUCCEED due to HO unification.");
+        assert(subst!.has(pvarG), "Test 4: $G should be in substitution.");
+
+        const gSubst = getTermRef(subst!.get(pvarG)!);
+        const expectedG = Lam("b_arg", Icit.Expl, Var("AnotherType"), (vb) => 
+            App( App(App(Var("GlobalFuncTakesTwo"), Var("a"), Icit.Expl), vb, Icit.Expl), vb, Icit.Expl)
+        );
+
+        const checkCtx = extendCtx(baseCtx, "a", Var("MyType"));
+        assert(areEqual(gSubst, expectedG, checkCtx), "Test 4: $G should be λb.((GlobalFuncTakesTwo a b) b)");
     });
 
     it("Test 5: Pattern var not in head (λx. GlobalFunc ($F.[x] GlobalConst))", () => {
@@ -157,7 +167,6 @@ describe("Higher-Order Pattern Matching Tests", () => {
         assert(subst !== null, "Test 5: Match should succeed.");
         assert(subst!.has(pvarF), "Test 5: $F should be in substitution.");
         const fSubst = getTermRef(subst!.get(pvarF)!);
-        // console.log("Test 5 $F:", printTerm(fSubst));
         assert(areEqual(fSubst, Var("SomeOtherGlobalFunc"), baseCtx), "Test 5: $F should be SomeOtherGlobalFunc.");
     });
 
@@ -171,7 +180,6 @@ describe("Higher-Order Pattern Matching Tests", () => {
         assert(subst !== null, "Test 6: Match should succeed.");
         assert(subst!.has(pvarF), "Test 6: $F should be in substitution.");
         const fSubst = getTermRef(subst!.get(pvarF)!);
-        // console.log("Test 6 $F:", printTerm(fSubst));
         assert(areEqual(fSubst, Var("GlobalFunc"), baseCtx), "Test 6: $F should be GlobalFunc.");
     });
 
@@ -184,15 +192,12 @@ describe("Higher-Order Pattern Matching Tests", () => {
         const termToMatch = Lam("y", Icit.Expl, Var("MyType"), (vy) => vy);
 
         const subst = matchPattern(pattern, termToMatch, baseCtx, patternVarDecls);
-        // $F.[] x matches y. So $F$ should match (λz.z) (Identity function for MyType)
-        // The term matched by $F$ is (λz.z), which does not contain x (pattern var) freely.
+        // $F.[] x matches y. HO Unification solves this to $F := (λz. z).
+        // This solution has no free variables, so the scope check $F.[] passes.
         assert(subst !== null, "Test 7: Match should succeed.");
         assert(subst!.has(pvarF), "Test 7: $F should be in substitution.");
         const fSubst = getTermRef(subst!.get(pvarF)!);
-        // Expected $F$ is Lam("z_id", Icit.Expl, Var("MyType"), id_vz => id_vz)
         const expectedF = Lam("z_id", Icit.Expl, Var("MyType"), id_vz => id_vz);
-        console.log("Test 7 $F:", printTerm(fSubst));
-        console.log("Test 7 Expected $F:", printTerm(expectedF));
         assert(areEqual(fSubst, expectedF, baseCtx), "Test 7: $F should be identity lambda.");
     });
 
