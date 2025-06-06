@@ -9,7 +9,7 @@ import {
     Term, Context, Hole, Icit, Var, Lam, Pi, Type, App,
 } from './types';
 import {
-    getTermRef, emptyCtx, extendCtx, printTerm,
+    getTermRef, emptyCtx, extendCtx, printTerm, globalDefs,
 } from './state';
 import { elaborate } from './elaboration';
 import { whnf } from './reduction';
@@ -39,6 +39,15 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.elaboratedType);
             }
             return;
+        }
+
+        // NEW: Handle Vars that are global definitions
+        if (current.tag === 'Var') {
+            const gdef = globalDefs.get(current.name);
+            if (gdef && gdef.value) {
+                traverse(gdef.value);
+            }
+            return; // Nothing more to do for a Var
         }
 
         // Recursive traversal for other term types
@@ -99,7 +108,11 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.domainCat);
                 traverse(current.objW_InDomainCat);
                 break;
-            // Type, Var, SetTerm, CatTerm have no sub-terms to traverse for holes
+            case 'Type': case 'SetTerm': case 'CatTerm':
+                return;
+            default:
+                const _: never = current;
+                return;
         }
     }
 
@@ -121,14 +134,26 @@ interface GoalInfo {
  * @returns The GoalInfo object if the hole is found, otherwise null.
  */
 export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
+    const visited = new Set<Term>();
     function find(currentTerm: Term, ctx: Context): GoalInfo | null {
         const term = getTermRef(currentTerm);
+
+        if (visited.has(term)) return null;
+        visited.add(term);
 
         if (term.tag === 'Hole' && term.id === holeId) {
             if (!term.elaboratedType) {
                 throw new Error(`Hole ${holeId} has no elaborated type. Ensure the proof term is elaborated first.`);
             }
             return { context: ctx, type: term.elaboratedType, hole: term };
+        }
+
+        // NEW: Handle Vars that are global definitions
+        if (term.tag === 'Var') {
+            const gdef = globalDefs.get(term.name);
+            if (gdef && gdef.value) {
+                return find(gdef.value, ctx); // Context doesn't change
+            }
         }
 
         // Recursively search in sub-terms, extending the context where appropriate
@@ -150,7 +175,35 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                 return find(term.bodyType(Var(term.paramName, true)), extendedCtx);
             }
             // Add other term types as needed for traversal...
+            case 'ObjTerm': return find(term.cat, ctx);
+            case 'HomTerm':
+                return find(term.cat, ctx) || find(term.dom, ctx) || find(term.cod, ctx);
+            case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
+                return find(term.domainCat, ctx) || find(term.codomainCat, ctx);
+            case 'FMap0Term':
+                return find(term.functor, ctx) || find(term.objectX, ctx) ||
+                       (term.catA_IMPLICIT ? find(term.catA_IMPLICIT, ctx) : null) ||
+                       (term.catB_IMPLICIT ? find(term.catB_IMPLICIT, ctx) : null);
+            case 'FMap1Term':
+                 return find(term.functor, ctx) || find(term.morphism_a, ctx) ||
+                        (term.catA_IMPLICIT ? find(term.catA_IMPLICIT, ctx) : null) ||
+                        (term.catB_IMPLICIT ? find(term.catB_IMPLICIT, ctx) : null) ||
+                        (term.objX_A_IMPLICIT ? find(term.objX_A_IMPLICIT, ctx) : null) ||
+                        (term.objY_A_IMPLICIT ? find(term.objY_A_IMPLICIT, ctx) : null);
+            case 'NatTransTypeTerm':
+                return find(term.catA, ctx) || find(term.catB, ctx) || find(term.functorF, ctx) || find(term.functorG, ctx);
+            case 'NatTransComponentTerm':
+                return find(term.transformation, ctx) || find(term.objectX, ctx) ||
+                       (term.catA_IMPLICIT ? find(term.catA_IMPLICIT, ctx) : null) ||
+                       (term.catB_IMPLICIT ? find(term.catB_IMPLICIT, ctx) : null) ||
+                       (term.functorF_IMPLICIT ? find(term.functorF_IMPLICIT, ctx) : null) ||
+                       (term.functorG_IMPLICIT ? find(term.functorG_IMPLICIT, ctx) : null);
+            case 'HomCovFunctorIdentity':
+                return find(term.domainCat, ctx) || find(term.objW_InDomainCat, ctx);
+            case 'Type': case 'SetTerm': case 'CatTerm':
+                return null;
             default:
+                const _: never = term;
                 return null;
         }
     }
@@ -307,4 +360,4 @@ export function apply(proofTerm: Term, holeId: string, funcTerm: Term): Term {
     }
 
     return refine(proofTerm, holeId, refinement);
-} 
+}

@@ -42,7 +42,7 @@ describe("Interactive Proof Mode Tests", () => {
         defineGlobal("proof_id_nat", IdNatType, Hole(goalHoleId));
         
         // The proof term starts as a variable pointing to our definition.
-        let proofTerm = Var("proof_id_nat");
+        let proofTerm : Term = Var("proof_id_nat");
 
         // 3. Check the initial state.
         let holes = findHoles(proofTerm);
@@ -95,7 +95,7 @@ describe("Interactive Proof Mode Tests", () => {
         // 2. Start the proof for the goal `Nat`.
         const goalHoleId = freshHoleName();
         defineGlobal("proof_of_one", Nat, Hole(goalHoleId));
-        let proofTerm = Var("proof_of_one");
+        let proofTerm : Term = Var("proof_of_one");
 
         // 3. Check initial state
         let holes = findHoles(proofTerm);
