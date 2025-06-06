@@ -5,13 +5,16 @@
 import { getDebugVerbose, setDebugVerbose } from '../src/state';
 
 // Import test files. The `node:test` runner will discover `describe` and `it` blocks in these files.
-// import './phase1_tests';
-// import './implicit_args_tests';
-// import './elaboration_options_tests';
-// import './church_encoding_tests';
-// import './church_encoding_implicit_tests';
+import './phase1_tests';
+import './implicit_args_tests';
+import './elaboration_options_tests';
+import './church_encoding_tests';
+import './church_encoding_implicit_tests';
 import './higher_order_unification_tests';
 import './higher_order_pattern_matching_tests';
+import './equality_tests';
+import './dependent_types_tests';
+import './error_reporting_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

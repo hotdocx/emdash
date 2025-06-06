@@ -10,6 +10,39 @@ import {
     Hole, Binding, BaseTerm, Var
 } from './types'; // Assuming all type constructors (Type, Var, etc.) are exported from types.ts
 
+// Global Flags
+const flags = {
+    etaEquality: false,
+    printImplicits: false,
+    printContexts: false,
+    printDomains: false,
+    printMetaTypes: false,
+    printMetaArgs: false,
+};
+
+export type FlagName = keyof typeof flags;
+
+export function setFlag(name: FlagName, value: boolean) {
+    if (name in flags) {
+        flags[name] = value;
+    } else {
+        console.warn(`Attempted to set unknown flag: ${name}`);
+    }
+}
+
+export function getFlag(name: FlagName): boolean {
+    return flags[name] ?? false;
+}
+
+export function resetFlags() {
+    flags.etaEquality = false;
+    flags.printImplicits = false;
+    flags.printContexts = false;
+    flags.printDomains = false;
+    flags.printMetaTypes = false;
+    flags.printMetaArgs = false;
+}
+
 // Global context for definitions and rules
 export let globalDefs: Map<string, GlobalDef> = new Map();
 export let userRewriteRules: StoredRewriteRule[] = [];

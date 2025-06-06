@@ -13,8 +13,7 @@ import {
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
-    resetVarId, resetHoleId, setDebugVerbose,
-    FH // FH (Fresh Hole) shorthand
+    resetVarId, resetHoleId, getTermRef, setDebugVerbose, consoleLog, resetFlags
 } from './state';
 import { defineGlobal, addRewriteRule, addUnificationRule } from './globals';
 
@@ -23,14 +22,16 @@ import { defineGlobal, addRewriteRule, addUnificationRule } from './globals';
  * Clears all global definitions, rules, constraints, and resets ID generators.
  */
 export function resetMyLambdaPi() {
-    constraints.length = 0;
     globalDefs.clear();
     userRewriteRules.length = 0;
     userUnificationRules.length = 0;
+    constraints.length = 0;
     resetVarId();
     resetHoleId();
-    setDebugVerbose(false); // Default to non-verbose
-    // solveConstraintsControl.depth = 0; // This is reset by solveConstraints itself.
+    resetFlags();
+    setDebugVerbose(false);
+
+    setupPhase1GlobalsAndRules();
 }
 
 /**

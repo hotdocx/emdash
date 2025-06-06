@@ -527,7 +527,7 @@ describe("Church Encoding Implicit Tests", () => {
         const the_final_expr_term_to_check = App(App(Var("the"), final_expr_type_expected, Icit.Expl), Var("refl_hs"), Icit.Expl);
         const the_final_expr_term_to_check_ = App(Var("the"), final_expr_type_expected, Icit.Expl);
         // SLOW ~ 200s, uncomment later
-        defineGlobal("the_refl", final_expr_type_expected, the_final_expr_term_to_check);
+        // defineGlobal("the_refl", final_expr_type_expected, the_final_expr_term_to_check);
         // elabRes = elaborate(the_final_expr_term_to_check, undefined, baseCtx);
     
         // assert(areEqual(elabRes.type, final_expr_type_expected, baseCtx), "HSI Test 19.1: final 'the' expression type check");

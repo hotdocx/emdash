@@ -9,10 +9,10 @@ import {
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
-    freshVarName, freshHoleName, extendCtx
+    freshVarName, freshHoleName, extendCtx, getFlag
 } from './state';
 import { MAX_STACK_DEPTH } from './constants';
-import { matchPattern, applySubst } from './pattern';
+import { matchPattern, applySubst, getFreeVariables } from './pattern';
 import { areStructurallyEqualNoWhnf } from './structural';
 
 export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to prevent infinite loops.
@@ -79,6 +79,27 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 } else if (getTermRef(current.func) !== func_whnf_ref) {
                     current = App(func_whnf_ref, current.arg, current.icit);
                     reducedInKernelBlock = true;
+                }
+                break;
+            }
+            case 'Lam': { // Eta-contraction
+                if (getFlag('etaEquality')) {
+                    const lam = current;
+                    // Instantiate body to inspect it. The var must be marked as lambda-bound.
+                    const body = getTermRef(lam.body(Var(lam.paramName, true))); 
+                    if (body.tag === 'App' && body.icit === lam.icit) {
+                        const appArg = getTermRef(body.arg);
+                        if (appArg.tag === 'Var' && appArg.name === lam.paramName && appArg.isLambdaBound) {
+                            const funcPart = getTermRef(body.func);
+                            // Check that the lambda's parameter is not free in the function part.
+                            const freeVarsInF = getFreeVariables(funcPart);
+                            if (!freeVarsInF.has(lam.paramName)) {
+                                // This is a valid eta-contraction: λx. F x  -->  F
+                                current = funcPart;
+                                reducedInKernelBlock = true;
+                            }
+                        }
+                    }
                 }
                 break;
             }
