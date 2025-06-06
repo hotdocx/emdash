@@ -302,11 +302,12 @@ export function intro(proofTerm: Term, holeId: string, varName?: string): Term {
     const introVarName = varName || goalType.paramName;
     // The refinement term is a lambda with a new hole in its body.
     // `elaborate` will create and type this new hole for us.
+    const bodyHole = Hole(`?h_intro_body_${introVarName}`);
     const refinement = Lam(
         introVarName,
         goalType.icit,
         goalType.paramType,
-        _ => Hole(`?h_intro_body_${introVarName}`)
+        _ => bodyHole
     );
 
     return refine(proofTerm, holeId, refinement);
