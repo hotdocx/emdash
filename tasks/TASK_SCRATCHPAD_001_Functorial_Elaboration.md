@@ -46,6 +46,11 @@ This verification is performed by constructing the two sides of the functorialit
     -   After some trouble with the file being corrupted by previous edits, the file was restored to a clean state.
     -   A new user-facing global constant, `mkFunctor_`, was defined.
     -   `mkFunctor_` is a curried function that takes the object and arrow maps and wraps them in the kernel `MkFunctorTerm`. Its type uses implicit Pi binders (`{A:Cat} {B:Cat}`), so the domain and codomain categories can be inferred by the elaborator from the types of the maps. This provides a convenient, high-level way for users to create functors while benefiting from the underlying kernel verification.
+    -   Added kernel-level rewrite rules for `fmap0` and `fmap1` applied to a `MkFunctorTerm` to project out the corresponding map. This allows the system to correctly reduce terms like `fmap0 (mkFunctor_ ...) X` to `(fmap0 ...) X`.
+    -   Added a unification rule for the associativity of `compose_morph`, i.e., `(g ∘ f) ∘ a` unifies with `g ∘ (f ∘ a)`. This will be crucial for coherence checks involving more complex compositions.
+
+-   **`src/reduction.ts`**:
+    -   To complement the rewrite rules and improve efficiency, direct reduction rules were added to `whnf` for `FMap0Term` and `FMap1Term` when applied to a `MkFunctorTerm`. This ensures the projections are handled directly within the kernel's primary reduction engine.
 
 -   **`tests/dependent_types_tests.ts`**:
     -   A new test suite, "Functorial Elaboration", was added to verify the feature.
@@ -64,6 +69,6 @@ The core implementation for `MkFunctorTerm` is complete and tested. The same pat
     -   Similarly, this would add a `MkTransfTerm` and update all related functions.
     -   The elaboration logic `infer_mkTransf` would verify the naturality condition for the transformation.
 
-Once these are complete, the core "computational category theory" features of the kernel will be fully realized. We are ready to archive this task file and move on to the next main task, which would be implementing `MkCatTerm`.
+Once these are complete, the core "computational category theory" features of the kernel will be fully realized. We are ready to archive this task file and move on to the next main Task, which would be implementing `MkCatTerm`.
 
 **Suggestion for next prompt:** "Now, let's implement `MkCatTerm` following the same design pattern we used for `MkFunctorTerm`. This will involve adding the term to the kernel and implementing the elaboration logic to verify the category laws (identity and associativity) by computation." 

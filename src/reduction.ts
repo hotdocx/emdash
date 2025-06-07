@@ -146,6 +146,10 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     // Rule: fapp0 (hom_cov A W) Y  ↪  Hom A W Y
                     current = HomTerm(functor_whnf.domainCat, functor_whnf.objW_InDomainCat, current.objectX);
                     reducedInKernelBlock = true;
+                } else if (functor_whnf.tag === 'MkFunctorTerm') {
+                    // Rule: fmap0 (mkFunctor fmap0 fmap1) X  ↪  fmap0 X
+                    current = App(functor_whnf.fmap0, current.objectX, Icit.Expl);
+                    reducedInKernelBlock = true;
                 } else {
                     const objectX_whnf = getTermRef(whnf(current.objectX, ctx, stackDepth + 1));
                     const catA_IMPLICIT_whnf = current.catA_IMPLICIT ? getTermRef(whnf(current.catA_IMPLICIT, ctx, stackDepth + 1)) : undefined;
@@ -160,6 +164,20 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                         reducedInKernelBlock = true;
                     }
                 }
+                break;
+            }
+            case 'FMap1Term': {
+                const functor_whnf = getTermRef(whnf(current.functor, ctx, stackDepth + 1));
+                if (functor_whnf.tag === 'MkFunctorTerm') {
+                    // Rule: fmap1 (mkFunctor fmap0 fmap1) {X} {Y} a  ↪  fmap1 {X} {Y} a
+                    const fmap1 = functor_whnf.fmap1;
+                    const X = current.objX_A_IMPLICIT!;
+                    const Y = current.objY_A_IMPLICIT!;
+                    const a = current.morphism_a;
+                    current = App(App(App(fmap1, X, Icit.Impl), Y, Icit.Impl), a, Icit.Expl);
+                    reducedInKernelBlock = true;
+                }
+                // No further reduction for FMap1Term in this pass
                 break;
             }
             case 'FunctorTypeTerm': {
