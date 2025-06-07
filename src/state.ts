@@ -184,20 +184,6 @@ export function consoleLog(message?: any, ...optionalParams: any[]): void {
     }
 }
 
-/**
- * Clones a term. Currently, this is a shallow clone (returns the term itself)
- * as terms are largely immutable or use functional updates for bodies.
- * TODO: Review if deep cloning is ever necessary.
- * @param term The term to clone.
- * @returns The "cloned" term.
- */
-export function cloneTerm(term: Term): Term {
-    // This was the original implementation. If deep cloning becomes necessary,
-    // it needs to handle function bodies (Lam, Pi) correctly,
-    // possibly by reconstructing them or by a more involved cloning mechanism.
-    return term;
-}
-
 // Term Printing
 const PRINT_TERM_MAX_STACK_DEPTH = 40;
 
