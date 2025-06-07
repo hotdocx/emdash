@@ -525,8 +525,8 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
     
     // 4. Construct Functoriality Law
     const compose_morph_def = globalDefs.get("compose_morph");
-    if (!compose_morph_def || !compose_morph_def.value) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
-    const compose_morph = getTermRef(compose_morph_def.value);
+    if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
+    const compose_morph = Var("compose_morph");
     
     // Create a fresh context for the law
     const X_name = freshVarName("X");

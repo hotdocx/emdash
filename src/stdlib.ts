@@ -141,11 +141,20 @@ export function setupPhase1GlobalsAndRules() {
         Pi("B", Icit.Impl, CatTerm(), catB =>
         Pi("F", Icit.Impl, FunctorTypeTerm(catA, catB), F =>
         Pi("G", Icit.Impl, FunctorTypeTerm(catA, catB), G =>
-        Pi("eps", Icit.Expl, Var("Transf",true), _ =>
+        Pi("eps", Icit.Expl, NatTransTypeTerm(catA, catB, F, G), _ =>
         Pi("X", Icit.Expl, ObjTerm(catA), X =>
             HomTerm(catB, FMap0Term(F, X), FMap0Term(G, X))
         )))))),
         undefined, false, false
+    );
+
+    defineGlobal("identity_morph",
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
+                HomTerm(A_val, X_val, X_val)
+            )
+        ),
+        undefined, true, true
     );
 
     defineGlobal("compose_morph",
