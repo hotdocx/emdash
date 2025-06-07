@@ -34,6 +34,7 @@ type HomCovFunctorIdentityType = Extract<BaseTerm, { tag: 'HomCovFunctorIdentity
 
 export interface ElaborationOptions {
     normalizeResultTerm?: boolean; // Whether to fully normalize the elaborated term.
+    skipCoherenceCheck?: boolean;
 }
 
 /**
@@ -118,7 +119,7 @@ function insertImplicitApps(ctx: Context, term: Term, type: Term, stackDepth: nu
  * @param stackDepth Recursion depth.
  * @returns An InferResult containing the elaborated term and its inferred type.
  */
-export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferResult {
+export function infer(ctx: Context, term: Term, stackDepth: number = 0, options: ElaborationOptions = {}): InferResult {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`Infer stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
 
     const originalTerm = term;
@@ -159,7 +160,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'App': {
             const appNode = current;
-            let { elaboratedTerm: inferredFuncElab, type: inferredFuncType } = infer(ctx, appNode.func, stackDepth + 1);
+            let { elaboratedTerm: inferredFuncElab, type: inferredFuncType } = infer(ctx, appNode.func, stackDepth + 1, options);
 
             let funcAfterImplicits = inferredFuncElab;
             let typeFAfterImplicits = whnf(inferredFuncType, ctx, stackDepth + 1);
@@ -212,7 +213,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 bodyTypeFnFromPi = (argVal: Term) => App(bodyTypeFunHole, argVal, Icit.Expl); // The body type is now dependent on the argument.
             }
 
-            const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1);
+            const elaboratedArg = check(ctx, appNode.arg, expectedParamTypeFromPi, stackDepth + 1, options);
             const finalAppTerm = App(getTermRef(funcAfterImplicits), getTermRef(elaboratedArg), appNode.icit);
             const resultType = whnf(bodyTypeFnFromPi(getTermRef(elaboratedArg)), ctx, stackDepth + 1);
 
@@ -223,7 +224,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             let actualParamType: Term;
 
             if (lamNode._isAnnotated && lamNode.paramType) {
-                actualParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1);
+                actualParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, options);
             } else {
                 // Infer parameter type if not annotated
                 actualParamType = Hole(freshHoleName() + "_lam_" + lamNode.paramName + "_paramT_infer");
@@ -239,7 +240,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                     // Context for inferring body's type: extend with param name, its type, and the placeholder argument
                     const body_infer_ctx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, pi_body_argument_term);
                     const lambda_body_structure = lamNode.body(Var(lamNode.paramName, true)); // Instantiate body with a Var
-                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1);
+                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, options);
                     // Insert implicits for the body if needed
                     const insertedBody = insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.type; // The type of the body becomes the result type of the Pi
@@ -251,10 +252,10 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
                 lamNode.paramName,
                 lamNode.icit,
                 getTermRef(actualParamType),
-                (v: Term) => { // v is the argument placeholder for the lambda body
+                (v: Term): Term => {
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
                     const bodyTermRaw = lamNode.body(Var(lamNode.paramName, true));
-                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1);
+                    let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, options);
                     const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term; // Return the elaborated body
                 }
@@ -264,73 +265,73 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'Pi': {
             const piNode = current;
-            const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1);
+            const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, options);
             // Context for checking the body type: extend with param name and its elaborated type
             const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
             const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName, true)); // Instantiate with a Var
             // Check that the body type itself is a Type
-            check(extendedCtxForBody, bodyTypeInstance, Type(), stackDepth + 1);
+            check(extendedCtxForBody, bodyTypeInstance, Type(), stackDepth + 1, options);
 
             // Reconstruct the Pi with elaborated components for the elaborated term
             const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), (v: Term) => {
                 const bodyCtx = extendCtx(ctx, piNode.paramName, getTermRef(elaboratedParamType), piNode.icit, v);
                 const piNodeBodyInstance = piNode.bodyType(Var(piNode.paramName, true));
-                return check(bodyCtx, piNodeBodyInstance, Type(), stackDepth+1); // Elaborate body type
+                return check(bodyCtx, piNodeBodyInstance, Type(), stackDepth+1, options); // Elaborate body type
             });
             return { elaboratedTerm: finalPi, type: Type() }; // A Pi type itself has type Type
         }
         // Category Theory Primitives
         case 'CatTerm': return { elaboratedTerm: current, type: Type() };
         case 'ObjTerm': {
-            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1);
+            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1, options);
             return { elaboratedTerm: ObjTerm(elabCat), type: Type() };
         }
         case 'HomTerm': {
-            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1);
+            const elabCat = check(ctx, current.cat, CatTerm(), stackDepth + 1, options);
             const catForHom = getTermRef(elabCat); // Use the elaborated category
-            const elabDom = check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1);
-            const elabCod = check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1);
+            const elabDom = check(ctx, current.dom, ObjTerm(catForHom), stackDepth + 1, options);
+            const elabCod = check(ctx, current.cod, ObjTerm(catForHom), stackDepth + 1, options);
             return { elaboratedTerm: HomTerm(elabCat, elabDom, elabCod), type: Type() };
         }
         case 'FunctorCategoryTerm': {
             const fcTerm = current as Term & FunctorCategoryTermType;
-            const elabDomainCat = check(ctx, fcTerm.domainCat, CatTerm(), stackDepth + 1);
-            const elabCodomainCat = check(ctx, fcTerm.codomainCat, CatTerm(), stackDepth + 1);
+            const elabDomainCat = check(ctx, fcTerm.domainCat, CatTerm(), stackDepth + 1, options);
+            const elabCodomainCat = check(ctx, fcTerm.codomainCat, CatTerm(), stackDepth + 1, options);
             return { elaboratedTerm: FunctorCategoryTerm(elabDomainCat, elabCodomainCat), type: CatTerm() }; // Functor category is a category
         }
         case 'FunctorTypeTerm': {
             const fttTerm = current as Term & FunctorTypeTermType;
-            const elabDomainCat = check(ctx, fttTerm.domainCat, CatTerm(), stackDepth + 1);
-            const elabCodomainCat = check(ctx, fttTerm.codomainCat, CatTerm(), stackDepth + 1);
+            const elabDomainCat = check(ctx, fttTerm.domainCat, CatTerm(), stackDepth + 1, options);
+            const elabCodomainCat = check(ctx, fttTerm.codomainCat, CatTerm(), stackDepth + 1, options);
             return { elaboratedTerm: FunctorTypeTerm(elabDomainCat, elabCodomainCat), type: Type() }; // Functor type is a type
         }
         case 'FMap0Term': { // Functor application to an object
             const fm0Term = current as Term & FMap0TermType;
             // Ensure implicit category arguments are elaborated if present (they should be after ensureKernelImplicitsPresent)
-            const elabCatA = check(ctx, fm0Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1);
-            const elabCatB = check(ctx, fm0Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1);
+            const elabCatA = check(ctx, fm0Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabCatB = check(ctx, fm0Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, options);
 
             const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
-            const elabFunctor = check(ctx, fm0Term.functor, expectedFunctorType, stackDepth + 1);
+            const elabFunctor = check(ctx, fm0Term.functor, expectedFunctorType, stackDepth + 1, options);
 
             const expectedObjectType = ObjTerm(elabCatA); // Object must be in the domain category
-            const elabObjectX = check(ctx, fm0Term.objectX, expectedObjectType, stackDepth + 1);
+            const elabObjectX = check(ctx, fm0Term.objectX, expectedObjectType, stackDepth + 1, options);
 
             const finalFMap0 = FMap0Term(elabFunctor, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB));
             return { elaboratedTerm: finalFMap0, type: ObjTerm(getTermRef(elabCatB)) }; // Result is an object in the codomain category
         }
         case 'FMap1Term': { // Functor application to a morphism
             const fm1Term = current as Term & FMap1TermType;
-            const elabCatA = check(ctx, fm1Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1);
-            const elabCatB = check(ctx, fm1Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1);
-            const elabObjX_A = check(ctx, fm1Term.objX_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1);
-            const elabObjY_A = check(ctx, fm1Term.objY_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1);
+            const elabCatA = check(ctx, fm1Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabCatB = check(ctx, fm1Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabObjX_A = check(ctx, fm1Term.objX_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, options);
+            const elabObjY_A = check(ctx, fm1Term.objY_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, options);
 
             const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
-            const elabFunctor = check(ctx, fm1Term.functor, expectedFunctorType, stackDepth + 1);
+            const elabFunctor = check(ctx, fm1Term.functor, expectedFunctorType, stackDepth + 1, options);
 
             const expectedMorphismType = HomTerm(elabCatA, elabObjX_A, elabObjY_A); // Morphism is in domain category
-            const elabMorphism_a = check(ctx, fm1Term.morphism_a, expectedMorphismType, stackDepth + 1);
+            const elabMorphism_a = check(ctx, fm1Term.morphism_a, expectedMorphismType, stackDepth + 1, options);
 
             // Result type: Hom catB (FMap0 F X) (FMap0 F Y)
             const fmap0_X = FMap0Term(elabFunctor, elabObjX_A, getTermRef(elabCatA), getTermRef(elabCatB));
@@ -341,27 +342,27 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'NatTransTypeTerm': { // Type of a natural transformation
             const ntTerm = current as Term & NatTransTypeTermType;
-            const elabCatA = check(ctx, ntTerm.catA, CatTerm(), stackDepth + 1);
-            const elabCatB = check(ctx, ntTerm.catB, CatTerm(), stackDepth + 1);
+            const elabCatA = check(ctx, ntTerm.catA, CatTerm(), stackDepth + 1, options);
+            const elabCatB = check(ctx, ntTerm.catB, CatTerm(), stackDepth + 1, options);
             const expectedFunctorType = FunctorTypeTerm(elabCatA, elabCatB);
-            const elabFunctorF = check(ctx, ntTerm.functorF, expectedFunctorType, stackDepth + 1);
-            const elabFunctorG = check(ctx, ntTerm.functorG, expectedFunctorType, stackDepth + 1);
+            const elabFunctorF = check(ctx, ntTerm.functorF, expectedFunctorType, stackDepth + 1, options);
+            const elabFunctorG = check(ctx, ntTerm.functorG, expectedFunctorType, stackDepth + 1, options);
 
             const finalNatTransType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
             return { elaboratedTerm: finalNatTransType, type: Type() }; // NatTrans type is a type
         }
         case 'NatTransComponentTerm': { // Component of a natural transformation
             const ncTerm = current as Term & NatTransComponentTermType;
-            const elabCatA = check(ctx, ncTerm.catA_IMPLICIT!, CatTerm(), stackDepth + 1);
-            const elabCatB = check(ctx, ncTerm.catB_IMPLICIT!, CatTerm(), stackDepth + 1);
-            const elabFunctorF = check(ctx, ncTerm.functorF_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1);
-            const elabFunctorG = check(ctx, ncTerm.functorG_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1);
+            const elabCatA = check(ctx, ncTerm.catA_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabCatB = check(ctx, ncTerm.catB_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabFunctorF = check(ctx, ncTerm.functorF_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, options);
+            const elabFunctorG = check(ctx, ncTerm.functorG_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, options);
 
             const expectedTransformationType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
-            const elabTransformation = check(ctx, ncTerm.transformation, expectedTransformationType, stackDepth + 1);
+            const elabTransformation = check(ctx, ncTerm.transformation, expectedTransformationType, stackDepth + 1, options);
 
             const expectedObjectType = ObjTerm(elabCatA); // Object is in domain category CatA
-            const elabObjectX = check(ctx, ncTerm.objectX, expectedObjectType, stackDepth + 1);
+            const elabObjectX = check(ctx, ncTerm.objectX, expectedObjectType, stackDepth + 1, options);
 
             // Result type: Hom catB (FMap0 F X) (FMap0 G X)
             const fmap0_F_X = FMap0Term(elabFunctorF, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB));
@@ -372,8 +373,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'HomCovFunctorIdentity': { // Hom_A(W, -) functor
             const hciTerm = current as Term & HomCovFunctorIdentityType;
-            const elabDomainCat = check(ctx, hciTerm.domainCat, CatTerm(), stackDepth + 1);
-            const elabObjW = check(ctx, hciTerm.objW_InDomainCat, ObjTerm(elabDomainCat), stackDepth + 1);
+            const elabDomainCat = check(ctx, hciTerm.domainCat, CatTerm(), stackDepth + 1, options);
+            const elabObjW = check(ctx, hciTerm.objW_InDomainCat, ObjTerm(elabDomainCat), stackDepth + 1, options);
 
             const setGlobal = globalDefs.get("Set");
             if (!setGlobal || !setGlobal.value) throw new Error("Global 'Set' category not defined for HomCovFunctorIdentity type inference.");
@@ -385,7 +386,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
         }
         case 'SetTerm': return { elaboratedTerm: current, type: CatTerm() }; // Set is a category
         case 'MkFunctorTerm':
-            return infer_mkFunctor(current as Term & {tag: 'MkFunctorTerm'}, ctx, stackDepth + 1);
+            return infer_mkFunctor(current as Term & {tag: 'MkFunctorTerm'}, ctx, stackDepth + 1, options);
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`Infer: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -401,7 +402,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
  * @returns The elaborated term if it checks against the expected type.
  * @throws Error if type checking fails.
  */
-export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0): Term {
+export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: number = 0, options: ElaborationOptions = {}): Term {
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
@@ -429,7 +430,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                     const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl, v_actual_arg);
                     const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(v_actual_arg), bodyCheckCtx);
                     // The original term `termRef` is checked against the expected body type in the new context
-                    return check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1);
+                    return check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1, options);
                 }
             );
             return newLam; // Return the new lambda
@@ -445,7 +446,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         if (!lamNode._isAnnotated) { // Lambda is not annotated, take type from Pi
             lamParamType = expectedPiNode.paramType;
         } else if (lamNode.paramType) { // Lambda is annotated, check its type against Pi's domain type
-            const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1);
+            const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, options);
             addConstraint(elabLamParamType, expectedPiNode.paramType, `Lam param type vs Pi param type for ${lamNode.paramName}`);
             solveConstraints(ctx, stackDepth + 1); // <<< This was marked as RESTORED THIS CALL
             lamParamType = elabLamParamType; // Use the elaborated type
@@ -463,7 +464,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 const extendedCtx = extendCtx(ctx, lamNode.paramName, finalLamParamType, lamNode.icit, v_arg);
                 const actualBodyTerm = lamNode.body(Var(lamNode.paramName, true)); // Instantiate body with Var
                 const expectedBodyPiType = whnf(expectedPiNode.bodyType(v_arg), extendedCtx); // Get expected type for body
-                return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1); // Check body
+                return check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, options); // Check body
             }
         );
         // The Lam factory function sets ._isAnnotated = true because finalLamParamType is provided.
@@ -484,7 +485,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     }
 
     // Default case: infer type, insert implicits, then check against expected
-    let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1);
+    let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1, options);
 
     // Insert implicit applications based on the inferred type before comparing with expectedTypeWhnf
     const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
@@ -504,14 +505,14 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
  * @returns An InferResult with the elaborated term and its FunctorTypeTerm type.
  * @throws CoherenceError if the functoriality law does not hold.
  */
-function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stackDepth: number): InferResult {
+function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stackDepth: number, options: ElaborationOptions = {}): InferResult {
     // 1. Elaborate Categories
-    const elabA = check(ctx, term.domainCat, CatTerm(), stackDepth + 1);
-    const elabB = check(ctx, term.codomainCat, CatTerm(), stackDepth + 1);
+    const elabA = check(ctx, term.domainCat, CatTerm(), stackDepth + 1, options);
+    const elabB = check(ctx, term.codomainCat, CatTerm(), stackDepth + 1, options);
 
     // 2. Elaborate fmap0
     const expected_fmap0_type = Pi("x", Icit.Expl, ObjTerm(elabA), _ => ObjTerm(elabB));
-    const elab_fmap0 = check(ctx, term.fmap0, expected_fmap0_type, stackDepth + 1);
+    const elab_fmap0 = check(ctx, term.fmap0, expected_fmap0_type, stackDepth + 1, options);
     
     // 3. Elaborate fmap1
     const expected_fmap1_type = Pi("X", Icit.Impl, ObjTerm(elabA), X =>
@@ -521,7 +522,7 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
             )
         )
     );
-    const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1);
+    const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
     
     // 4. Construct Functoriality Law
     const compose_morph_def = globalDefs.get("compose_morph");
@@ -579,7 +580,7 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
     const normLhs = normalize(lhs, lawCtx);
     const normRhs = normalize(rhs, lawCtx);
 
-    if (!areEqual(normLhs, normRhs, lawCtx)) {
+    if (!options.skipCoherenceCheck && !areEqual(normLhs, normRhs, lawCtx)) {
         throw new CoherenceError("Functoriality check", lhs, rhs, normLhs, normRhs, lawCtx);
     }
     
@@ -643,12 +644,12 @@ export function elaborate(
     try {
         if (expectedType) {
             // First, ensure the expectedType itself is well-formed (i.e., it is a Type)
-            const elaboratedExpectedType = check(initialCtx, expectedType, Type(), 0);
-            finalTermToReport = check(initialCtx, term, elaboratedExpectedType);
+            const elaboratedExpectedType = check(initialCtx, expectedType, Type(), 0, options);
+            finalTermToReport = check(initialCtx, term, elaboratedExpectedType, 0, options);
             finalTypeToReport = elaboratedExpectedType; // The type of the result is the (elaborated) expected type
         } else {
             // No expected type, so infer, then insert implicits
-            const inferResult = infer(initialCtx, term);
+            const inferResult = infer(initialCtx, term, 0, options);
             const afterInsert = insertImplicitApps(initialCtx, inferResult.elaboratedTerm, inferResult.type, 0);
             finalTermToReport = afterInsert.term;
             finalTypeToReport = afterInsert.type;

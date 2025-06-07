@@ -125,8 +125,10 @@ export function addRewriteRule(
             lhsElabCtx = extendCtx(lhsElabCtx, pVarName, Hole(freshHoleName() + "_type_pvar_" + pVarName.substring(1)), Icit.Expl);
         }
 
+        const elabOptions = { skipCoherenceCheck: true };
+
         // Infer the types within the LHS and solve for pattern variable types
-        infer(lhsElabCtx, lhsToElaborate, 0); // This will generate constraints
+        infer(lhsElabCtx, lhsToElaborate, 0, elabOptions); // This will generate constraints
 
         if (!solveConstraints(lhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
@@ -158,7 +160,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for RHS
         // Infer the type of the elaborated LHS in the *global* context (or rule's definition context)
         // to determine the target type for the RHS.
-        const typeOfGlobalLhsResult = infer(lhsElabCtx, elaboratedLhs, 0); // Use lhsElabCtx, not original ctx
+        const typeOfGlobalLhsResult = infer(lhsElabCtx, elaboratedLhs, 0, elabOptions); // Use lhsElabCtx, not original ctx
          if (!solveConstraints(ctx)) { // Solve constraints that arose from inferring type of elaboratedLhs
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
         }
