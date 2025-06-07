@@ -9,7 +9,7 @@ import {
     Term, Context, Icit, Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm
+    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -45,92 +45,64 @@ export function setupPhase1GlobalsAndRules() {
     defineGlobal("BoolType", Type(), undefined, true, true);
 
     // Core Category Theory Primitives
-    // `Cat` itself is a type. Its "value" CatTerm() is also a type.
-    // This means CatTerm() is a specific term of type Type().
     defineGlobal("Cat", Type(), CatTerm(), false, true);
-
-    // `Set` is a specific category (a term of type Cat). Its value is SetTerm().
     defineGlobal("Set", CatTerm(), SetTerm(), false, true);
 
-    // `Obj` is a function from Cat to Type.
-    // The type given to defineGlobal needs to be elaborated itself.
     defineGlobal("Obj",
-        Pi("A", Icit.Expl, CatTerm(), _A => Type()), // Obj : Cat -> Type
-        Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)), // A |-> Obj A
+        Pi("A", Icit.Expl, CatTerm(), _A => Type()),
+        Lam("A_val", Icit.Expl, CatTerm(), A_term => ObjTerm(A_term)),
         false, true
     );
 
-    // `Hom` is a function {A:Cat} -> Obj A -> Obj A -> Type.
     defineGlobal("Hom",
-        Pi("A", Icit.Impl, CatTerm(), A_val =>      // {A : Cat}
-            Pi("X", Icit.Expl, ObjTerm(A_val), _X =>  // (X : Obj A)
-                Pi("Y", Icit.Expl, ObjTerm(A_val), _Y => Type()))), // (Y : Obj A) -> Type
+        Pi("A", Icit.Impl, CatTerm(), A_val =>
+            Pi("X", Icit.Expl, ObjTerm(A_val), _X =>
+                Pi("Y", Icit.Expl, ObjTerm(A_val), _Y => Type()))),
         Lam("A_val", Icit.Impl, CatTerm(), A_term =>
             Lam("X_val", Icit.Expl, ObjTerm(A_term), X_term =>
                 Lam("Y_val", Icit.Expl, ObjTerm(A_term), Y_term =>
-                    HomTerm(A_term, X_term, Y_term)))), // {A} X Y |-> Hom A X Y
+                    HomTerm(A_term, X_term, Y_term)))),
         false, true
     );
 
-    // `Functor` is a function Cat -> Cat -> Type (the type of functors).
     defineGlobal("Functor",
-        Pi("A", Icit.Expl, CatTerm(), _A =>      // (A : Cat)
-            Pi("B", Icit.Expl, CatTerm(), _B => Type())), // (B : Cat) -> Type
+        Pi("A", Icit.Expl, CatTerm(), _A =>
+            Pi("B", Icit.Expl, CatTerm(), _B => Type())),
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
-                FunctorTypeTerm(A_term, B_term))), // A B |-> FunctorType A B
+                FunctorTypeTerm(A_term, B_term))),
         false, true
     );
 
-    // `Functor_cat` is a function Cat -> Cat -> Cat (the functor category).
     defineGlobal("Functor_cat",
-        Pi("A", Icit.Expl, CatTerm(), _A =>      // (A : Cat)
-            Pi("B", Icit.Expl, CatTerm(), _B => CatTerm())), // (B : Cat) -> Cat
+        Pi("A", Icit.Expl, CatTerm(), _A =>
+            Pi("B", Icit.Expl, CatTerm(), _B => CatTerm())),
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
-                FunctorCategoryTerm(A_term, B_term))), // A B |-> FunctorCategory A B
+                FunctorCategoryTerm(A_term, B_term))),
         false, true
     );
 
-    // `Transf` is the type of natural transformations.
     defineGlobal("Transf",
-        Pi("A", Icit.Impl, CatTerm(), A_val =>          // {A : Cat}
-            Pi("B", Icit.Impl, CatTerm(), B_val =>      // {B : Cat}
-                Pi("F", Icit.Expl, FunctorTypeTerm(A_val, B_val), _F => // (F : Functor A B)
-                    Pi("G", Icit.Expl, FunctorTypeTerm(A_val, B_val), _G => Type())))), // (G : Functor A B) -> Type
-        Lam("A_val", Icit.Impl, CatTerm(), A_term =>
-            Lam("B_val", Icit.Impl, CatTerm(), B_term =>
-                Lam("F_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), F_term =>
-                    Lam("G_val", Icit.Expl, FunctorTypeTerm(A_term, B_term), G_term =>
-                        NatTransTypeTerm(A_term, B_term, F_term, G_term))))),
-        false, true
+        Pi("A", Icit.Impl, CatTerm(), A =>
+        Pi("B", Icit.Impl, CatTerm(), B =>
+        Pi("F", Icit.Expl, FunctorTypeTerm(A, B), _ =>
+        Pi("G", Icit.Expl, FunctorTypeTerm(A, B), _ =>
+            Type()
+        )))),
+        undefined, true, false
     );
 
-    // Category constructor `mkCat_`.
-    defineGlobal("mkCat_",
-        Pi("Obj_repr", Icit.Expl, Type(), O_repr =>
-            Pi("Hom_repr", Icit.Expl, Pi("X", Icit.Expl, O_repr, _ => Pi("Y", Icit.Expl, O_repr, _ => Type())), H_repr =>
-                Pi("compose_impl", Icit.Expl,
-                    Pi("X_obj", Icit.Impl, O_repr, Xobj_term =>
-                    Pi("Y_obj", Icit.Impl, O_repr, Yobj_term =>
-                    Pi("Z_obj", Icit.Impl, O_repr, Zobj_term =>
-                    Pi("g_morph", Icit.Expl, App(App(H_repr, Yobj_term, Icit.Expl), Zobj_term, Icit.Expl), _ =>
-                    Pi("f_morph", Icit.Expl, App(App(H_repr, Xobj_term, Icit.Expl), Yobj_term, Icit.Expl), _ =>
-                    App(App(H_repr, Xobj_term, Icit.Expl), Zobj_term, Icit.Expl)
-                    ))))), _ => CatTerm()
-                )
-            )
-        ),
-        undefined, true, true
-    );
-
-    defineGlobal("identity_morph",
-        Pi("A", Icit.Impl, CatTerm(), A_val =>
-            Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>
-                HomTerm(A_val, X_val, X_val)
-            )
-        ),
-        undefined, true, true
+    defineGlobal("tapp",
+        Pi("A", Icit.Impl, CatTerm(), catA =>
+        Pi("B", Icit.Impl, CatTerm(), catB =>
+        Pi("F", Icit.Impl, FunctorTypeTerm(catA, catB), F =>
+        Pi("G", Icit.Impl, FunctorTypeTerm(catA, catB), G =>
+        Pi("eps", Icit.Expl, Var("Transf",true), _ =>
+        Pi("X", Icit.Expl, ObjTerm(catA), X =>
+            HomTerm(catB, FMap0Term(F, X), FMap0Term(G, X))
+        )))))),
+        undefined, false, false, true
     );
 
     defineGlobal("compose_morph",
@@ -149,77 +121,6 @@ export function setupPhase1GlobalsAndRules() {
         ),
         undefined
     );
-
-    // Rewrite Rules for mkCat_
-    addRewriteRule(
-        "Obj_mkCat_eval",
-        ["$O", "$H", "$C"],
-        ObjTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl)),
-        Var("$O"),
-        emptyCtx
-    );
-
-    addRewriteRule(
-        "Hom_mkCat_eval",
-        ["$O", "$H", "$C", "$X", "$Y"],
-        HomTerm(App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Var("$X"), Var("$Y")),
-        App(App(Var("$H"), Var("$X"), Icit.Expl), Var("$Y"), Icit.Expl),
-        emptyCtx
-    );
-
-    addRewriteRule(
-        "compose_mkCat_eval",
-        ["$O", "$H", "$C"],
-        App(Var("compose_morph"), App(App(App(Var("mkCat_"), Var("$O"), Icit.Expl), Var("$H"), Icit.Expl), Var("$C"), Icit.Expl), Icit.Impl),
-        Var("$C"),
-        emptyCtx
-    );
-
-    // Identity and Composition Axioms as rewrite rules
-    addRewriteRule(
-        "comp_f_idX_fwd",
-        ["$A_cat", "$X_obj", "$Y_obj", "$f_morph"],
-        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl),
-            Var("$f_morph"), Icit.Expl),
-            App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Expl), Icit.Expl),
-        Var("$f_morph"),
-        emptyCtx
-    );
-
-    addRewriteRule(
-        "comp_idY_f_fwd_new",
-        ["$A_cat", "$X_obj", "$Y_obj", "$f_morph"],
-        App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl),
-            App(App(Var("identity_morph"), Var("$A_cat"), Icit.Impl), Var("$Y_obj"), Icit.Expl), Icit.Expl),
-            Var("$f_morph"), Icit.Expl),
-        Var("$f_morph"),
-        emptyCtx
-    );
-
-    // Unification rule: (fapp1 (hom_cov $W) $a) $f  ≡  compose_morph $a $f
-    const unifRule_homCov_compose_PatternVars = ["$A_cat", "$W_obj", "$X_obj", "$Y_obj", "$Z_obj", "$a_morph", "$f_morph"];
-    const unifRule_LHS1 = App(
-        FMap1Term(
-            HomCovFunctorIdentity(Var("$A_cat"), Var("$W_obj")), // hom_cov $A_cat $W_obj
-            Var("$a_morph"),                                   // $a_morph
-            Var("$A_cat"),                                     // catA_IMPLICIT
-            SetTerm(),                                         // catB_IMPLICIT
-            Var("$Y_obj"),                                     // objX_A_IMPLICIT (domain of $a_morph)
-            Var("$Z_obj")                                      // objY_A_IMPLICIT (codomain of $a_morph)
-        ),
-        Var("$f_morph")                                        // argument $f_morph
-    );
-    const unifRule_LHS2 = App(App(App(App(App(App(Var("compose_morph"), Var("$A_cat"), Icit.Impl), Var("$X_obj"), Icit.Impl), Var("$Y_obj"), Icit.Impl), Var("$Z_obj"), Icit.Impl),
-        Var("$a_morph"), Icit.Expl),
-        Var("$f_morph"), Icit.Expl);
-
-    addUnificationRule({
-        name: "unif_hom_cov_fapp1_compose",
-        patternVars: unifRule_homCov_compose_PatternVars,
-        lhsPattern1: unifRule_LHS1,
-        lhsPattern2: unifRule_LHS2,
-        rhsNewConstraints: [{ t1: Type(), t2: Type() }] // Placeholder for "these are equal"
-    });
 }
 
 /**
@@ -241,71 +142,62 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         ),
     );
 
-    // Naturality Rewrite Rule (Direct version from LambdAPI spec)
-    // rule fapp1 (hom_cov _) (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
-    //   ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
-    // This translates to:
-    // (tapp ϵ X) _∘> (G a)  ↪  (F a) _∘> (tapp ϵ X')
-    // The explicit pattern variables for categories ensure the correct hom_cov is used.
-
-    const userPatternVars_NatDirect = [
-        "$A_cat", "$B_cat",         // Domain and Codomain categories for F, G
-        "$F_func", "$G_func",       // Functors F, G : A -> B
-        "$eps_transf",             // Natural transformation epsilon : F => G
-        "$X_obj", "$X_prime_obj",   // Objects X, X' in A (domain of epsilon)
-        "$a_morph"                 // Morphism a : X -> X' in A
-    ];
-
-    // LHS: (tapp eps X) _∘> (G a)
-    // = fapp1( hom_cov B (F X) , G a , tapp eps X )
-    const LHS_NatDirect = App(
-        FMap1Term( // This is the outer application, representing `_∘>`
-            HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"))), // Functor part of _∘>: hom_cov B (F X)
-            FMap1Term( // First argument to _∘>: G a
-                Var("$G_func"), Var("$a_morph"),
-                Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")
-            ),
-            // Implicit args for the outer FMap1Term (representing _∘>)
-            Var("$B_cat"), // catA for hom_cov B (F X) is B (codomain of F, G)
-            SetTerm(),     // catB for hom_cov B (F X) is Set
-            FMap0Term(Var("$G_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat")),      // objX_A for (G a) (domain in B)
-            FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")) // objY_A for (G a) (codomain in B)
-        ),
-        NatTransComponentTerm( // Second argument to _∘>: tapp eps X
-            Var("$eps_transf"), Var("$X_obj"),
-            Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")
-        )
+    // Functorial Elaboration Makers
+    defineGlobal("mkFunctor_",
+        Pi("A", Icit.Impl, CatTerm(), A =>
+        Pi("B", Icit.Impl, CatTerm(), B =>
+        Pi("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0_val =>
+        Pi("fmap1", Icit.Expl,
+            Pi("X", Icit.Impl, ObjTerm(A), X =>
+            Pi("Y", Icit.Impl, ObjTerm(A), Y =>
+            Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
+                HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
+            ))), _ =>
+            FunctorTypeTerm(A, B)
+        )))),
+        // Value: λ {A} {B} fmap0 fmap1. MkFunctorTerm(A, B, fmap0, fmap1)
+        Lam("A", Icit.Impl, CatTerm(), A =>
+        Lam("B", Icit.Impl, CatTerm(), B =>
+        Lam("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0_val =>
+        Lam("fmap1", Icit.Expl,
+            Pi("X", Icit.Impl, ObjTerm(A), X =>
+            Pi("Y", Icit.Impl, ObjTerm(A), Y =>
+            Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
+                HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
+            ))),
+            fmap1_val => MkFunctorTerm(A, B, fmap0_val, fmap1_val)
+        )))),
+        false, false, true
     );
 
-    // RHS: (F a) _∘> (tapp eps X')
-    // = fapp1( hom_cov B (F X) , tapp eps X' , F a )
-    // Correction: The LambdAPI rule is `fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a)`
-    // This means the functor for `_∘>` is `hom_cov _ (F X)`.
-    const RHS_NatDirect = App(
-        FMap1Term( // Outer application
-            HomCovFunctorIdentity(Var("$B_cat"), FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"))), // Functor part of _∘>: hom_cov B (F X)
-            NatTransComponentTerm( // First argument to _∘>: tapp eps X'
-                Var("$eps_transf"), Var("$X_prime_obj"),
-                Var("$A_cat"), Var("$B_cat"), Var("$F_func"), Var("$G_func")
-            ),
-             // Implicit args for the outer FMap1Term (representing _∘>)
-            Var("$B_cat"), // catA for hom_cov B (F X) is B
-            SetTerm(),     // catB for hom_cov B (F X) is Set
-            FMap0Term(Var("$F_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat")), // objX_A for (tapp eps X') (domain in B is F X)
-            FMap0Term(Var("$G_func"), Var("$X_prime_obj"), Var("$A_cat"), Var("$B_cat"))  // objY_A for (tapp eps X') (codomain in B is G X)
-        ),
-        FMap1Term( // Second argument to _∘>: F a
-            Var("$F_func"), Var("$a_morph"),
-            Var("$A_cat"), Var("$B_cat"), Var("$X_obj"), Var("$X_prime_obj")
-        )
-    );
 
+    // --- Set Category Primitives ---
+    // Set is a category where objects are types and morphisms are functions
+    const Set = Var("Set");
+
+    // Obj Set should be Type
+    addRewriteRule("Obj_Set_eval", [], ObjTerm(Set), Type(), ctx);
+
+    // Hom Set T U should be T -> U (Pi type)
     addRewriteRule(
-        "naturality_direct_hom_cov_fapp1_tapp",
-        userPatternVars_NatDirect,
-        LHS_NatDirect,
-        RHS_NatDirect,
-        ctx // Rule defined in this context
+        "Hom_Set_eval", ["$T", "$U"],
+        HomTerm(Set, Var("$T"), Var("$U")),
+        Pi("_", Icit.Expl, Var("$T"), _ => Var("$U")),
+        ctx
+    );
+
+    // compose_morph in Set is function composition: λ g f x. g (f x)
+    addRewriteRule(
+        "compose_Set_eval", ["$T", "$U", "$V"],
+        App(App(App(App(Var("compose_morph"), Set, Icit.Impl), Var("$T"), Icit.Impl), Var("$U"), Icit.Impl), Var("$V"), Icit.Impl),
+        Lam("g", Icit.Expl, Pi("_", Icit.Expl, Var("$U"), _ => Var("$V")), g_val =>
+            Lam("f", Icit.Expl, Pi("_", Icit.Expl, Var("$T"), _ => Var("$U")), f_val =>
+                Lam("x", Icit.Expl, Var("$T"), x_val =>
+                    App(g_val, App(f_val, x_val, Icit.Expl), Icit.Expl)
+                )
+            )
+        ),
+        ctx
     );
 }
 
@@ -317,4 +209,4 @@ export function resetMyLambdaPi_Emdash() {
     resetMyLambdaPi();
     setupPhase1GlobalsAndRules();
     setupCatTheoryPrimitives(emptyCtx); // Primitives are typically defined in an empty context
-}
+} 

@@ -6,7 +6,7 @@
 import {
     Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, CatTerm, SetTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FunctorTypeTerm, FMap0Term, FMap1Term,
-    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule
+    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm
 } from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
@@ -304,6 +304,15 @@ export function matchPattern(
             s = matchPattern(hcP.domainCat, hcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
             return matchPattern(hcP.objW_InDomainCat, hcT.objW_InDomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
         }
+        case 'MkFunctorTerm': {
+            const mftP = rtPattern as Term & {tag:'MkFunctorTerm'};
+            const mftT = rtTermToMatch as Term & {tag:'MkFunctorTerm'};
+            let s: Substitution | null = subst;
+            s = matchPattern(mftP.domainCat, mftT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(mftP.codomainCat, mftT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(mftP.fmap0, mftT.fmap0, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            return matchPattern(mftP.fmap1, mftT.fmap1, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+        }
         default:
              const exhaustiveCheck: never = rtPattern;
              console.warn(`matchPattern: Unhandled pattern tag: ${(exhaustiveCheck as any).tag}.`);
@@ -431,6 +440,13 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.objW_InDomainCat, subst, patternVarDecls)
             );
+        case 'MkFunctorTerm':
+            return MkFunctorTerm(
+                applySubst(current.domainCat, subst, patternVarDecls),
+                applySubst(current.codomainCat, subst, patternVarDecls),
+                applySubst(current.fmap0, subst, patternVarDecls),
+                applySubst(current.fmap1, subst, patternVarDecls)
+            );
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`applySubst: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -513,6 +529,12 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
         case 'HomCovFunctorIdentity':
             collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.objW_InDomainCat, patternVarDecls, collectedVars, visited);
+            break;
+        case 'MkFunctorTerm':
+            collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.fmap0, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.fmap1, patternVarDecls, collectedVars, visited);
             break;
         // Terminals like Type, Var (non-pattern), Hole (non-pattern), CatTerm, SetTerm have no subterms or are handled.
     }
@@ -639,6 +661,13 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
             return HomCovFunctorIdentity(
                 replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
                 replaceFreeVar(current.objW_InDomainCat, freeVarName, replacementVar, boundInScope)
+            );
+        case 'MkFunctorTerm':
+            return MkFunctorTerm(
+                replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.codomainCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.fmap0, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.fmap1, freeVarName, replacementVar, boundInScope)
             );
         default:
             const exhaustiveCheck: never = current;
@@ -769,6 +798,12 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
             case 'HomCovFunctorIdentity':
                 find(termRef.domainCat, currentLocallyBound);
                 find(termRef.objW_InDomainCat, currentLocallyBound);
+                break;
+            case 'MkFunctorTerm':
+                find(termRef.domainCat, currentLocallyBound);
+                find(termRef.codomainCat, currentLocallyBound);
+                find(termRef.fmap0, currentLocallyBound);
+                find(termRef.fmap1, currentLocallyBound);
                 break;
             default:
                 const _exhaustiveCheck: never = termRef;

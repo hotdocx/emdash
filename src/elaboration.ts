@@ -8,7 +8,8 @@
 import {
     Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
-    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm
+    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
+    MkFunctorTerm
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
@@ -383,6 +384,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0): InferRe
             return { elaboratedTerm: finalHCITerm, type: FunctorTypeTerm(elabDomainCat, globalSetTerm) };
         }
         case 'SetTerm': return { elaboratedTerm: current, type: CatTerm() }; // Set is a category
+        case 'MkFunctorTerm':
+            return infer_mkFunctor(current as Term & {tag: 'MkFunctorTerm'}, ctx, stackDepth + 1);
         default:
             const exhaustiveCheck: never = current;
             throw new Error(`Infer: Unhandled term tag: ${(exhaustiveCheck as any).tag}`);
@@ -491,6 +494,128 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     solveConstraints(ctx, stackDepth + 1); // This was the commented out line, now restored as per previous state.
 
     return afterInsert.term; // Return the term after potential implicit applications
+}
+
+/**
+ * Infers the type of a MkFunctorTerm and verifies its functoriality law.
+ * @param term The MkFunctorTerm to infer and check.
+ * @param ctx The context.
+ * @param stackDepth The recursion depth.
+ * @returns An InferResult with the elaborated term and its FunctorTypeTerm type.
+ * @throws CoherenceError if the functoriality law does not hold.
+ */
+function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stackDepth: number): InferResult {
+    // 1. Elaborate Categories
+    const elabA = check(ctx, term.domainCat, CatTerm(), stackDepth + 1);
+    const elabB = check(ctx, term.codomainCat, CatTerm(), stackDepth + 1);
+
+    // 2. Elaborate fmap0
+    const expected_fmap0_type = Pi("x", Icit.Expl, ObjTerm(elabA), _ => ObjTerm(elabB));
+    const elab_fmap0 = check(ctx, term.fmap0, expected_fmap0_type, stackDepth + 1);
+    
+    // 3. Elaborate fmap1
+    const expected_fmap1_type = Pi("X", Icit.Impl, ObjTerm(elabA), X =>
+        Pi("Y", Icit.Impl, ObjTerm(elabA), Y =>
+            Pi("a", Icit.Expl, HomTerm(elabA, X, Y), _ => 
+                HomTerm(elabB, App(elab_fmap0, X, Icit.Expl), App(elab_fmap0, Y, Icit.Expl))
+            )
+        )
+    );
+    const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1);
+    
+    // 4. Construct Functoriality Law
+    const compose_morph_def = globalDefs.get("compose_morph");
+    if (!compose_morph_def || !compose_morph_def.value) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
+    const compose_morph = getTermRef(compose_morph_def.value);
+    
+    // Create a fresh context for the law
+    const X_name = freshVarName("X");
+    const Y_name = freshVarName("Y");
+    const Z_name = freshVarName("Z");
+    const a_name = freshVarName("a");
+    const a_prime_name = freshVarName("a_prime");
+
+    const X = Var(X_name, true);
+    const Y = Var(Y_name, true);
+    const Z = Var(Z_name, true);
+
+    let lawCtx = extendCtx(ctx, X_name, ObjTerm(elabA));
+    lawCtx = extendCtx(lawCtx, Y_name, ObjTerm(elabA));
+    lawCtx = extendCtx(lawCtx, Z_name, ObjTerm(elabA));
+    
+    const a_prime = Var(a_prime_name, true); // a' : Hom X Y
+    lawCtx = extendCtx(lawCtx, a_prime_name, HomTerm(elabA, X, Y));
+    
+    const a = Var(a_name, true); // a : Hom Y Z
+    lawCtx = extendCtx(lawCtx, a_name, HomTerm(elabA, Y, Z));
+
+    // LHS: compose_B (fmap1 a) (fmap1 a')
+    const fmap1_a = App(App(App(elab_fmap1, Y, Icit.Impl), Z, Icit.Impl), a, Icit.Expl);
+    const fmap1_a_prime = App(App(App(elab_fmap1, X, Icit.Impl), Y, Icit.Impl), a_prime, Icit.Expl);
+
+    const lhs = App(App(App(App(App(App(compose_morph, 
+        elabB, Icit.Impl), 
+        App(elab_fmap0, X, Icit.Expl), Icit.Impl),
+        App(elab_fmap0, Y, Icit.Expl), Icit.Impl),
+        App(elab_fmap0, Z, Icit.Expl), Icit.Impl),
+        fmap1_a, Icit.Expl),
+        fmap1_a_prime, Icit.Expl);
+
+    // RHS: fmap1 (compose_A a a')
+    const compose_A_a_a_prime = App(App(App(App(App(App(compose_morph,
+        elabA, Icit.Impl),
+        X, Icit.Impl),
+        Y, Icit.Impl),
+        Z, Icit.Impl),
+        a, Icit.Expl),
+        a_prime, Icit.Expl);
+
+    const rhs = App(App(App(elab_fmap1,
+        X, Icit.Impl),
+        Z, Icit.Impl),
+        compose_A_a_a_prime, Icit.Expl);
+        
+    // 5. Verify by Computation
+    const normLhs = normalize(lhs, lawCtx);
+    const normRhs = normalize(rhs, lawCtx);
+
+    if (!areEqual(normLhs, normRhs, lawCtx)) {
+        throw new CoherenceError("Functoriality check", lhs, rhs, normLhs, normRhs, lawCtx);
+    }
+    
+    // 6. Return Result
+    const finalTerm = MkFunctorTerm(elabA, elabB, elab_fmap0, elab_fmap1);
+    return {
+        elaboratedTerm: finalTerm,
+        type: FunctorTypeTerm(elabA, elabB)
+    };
+}
+
+export class CoherenceError extends Error {
+    constructor(
+        public title: string,
+        public lhs: Term,
+        public rhs: Term,
+        public normLhs: Term,
+        public normRhs: Term,
+        public ctx: Context
+    ) {
+        const message = `
+${title} failed.
+The following equality could not be established:
+  LHS: ${printTerm(lhs)}
+  RHS: ${printTerm(rhs)}
+
+After normalization, the two sides were not convertible:
+  Normalized LHS: ${printTerm(normLhs)}
+  Normalized RHS: ${printTerm(normRhs)}
+
+Hint: This may be because a definition does not respect the required laws,
+or a required rewrite rule for a custom category is missing.
+`;
+        super(message);
+        this.name = 'CoherenceError';
+    }
 }
 
 /**

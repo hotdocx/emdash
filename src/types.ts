@@ -60,6 +60,13 @@ export type BaseTerm =
     // Emdash Phase 3: Yoneda and Set Category Primitives
     | { tag: 'HomCovFunctorIdentity', domainCat: Term, objW_InDomainCat: Term }
     | { tag: 'SetTerm' }
+    // Emdash Phase 4: Functorial Elaboration Primitives
+    | { tag: 'MkFunctorTerm', 
+        domainCat: Term, 
+        codomainCat: Term, 
+        fmap0: Term, 
+        fmap1: Term 
+      }
     ;
 
 export type Term = BaseTerm;
@@ -123,6 +130,9 @@ export const HomCovFunctorIdentity = (domainCat: Term, objW_InDomainCat: Term): 
     ({ tag: 'HomCovFunctorIdentity', domainCat, objW_InDomainCat });
 
 export const SetTerm = (): Term & { tag: 'SetTerm' } => ({ tag: 'SetTerm' });
+
+export const MkFunctorTerm = (domainCat: Term, codomainCat: Term, fmap0: Term, fmap1: Term): Term & { tag: 'MkFunctorTerm' } =>
+    ({ tag: 'MkFunctorTerm', domainCat, codomainCat, fmap0, fmap1 });
 
 
 // Context and Global Definitions

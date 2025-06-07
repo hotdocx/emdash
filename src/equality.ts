@@ -176,6 +176,13 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
                    areEqual(rt1.objW_InDomainCat, hc2.objW_InDomainCat, ctx, depth + 1);
         }
         case 'SetTerm': return true;
+        case 'MkFunctorTerm': {
+            const mft2 = rt2 as Term & {tag:'MkFunctorTerm'};
+            return areEqual(rt1.domainCat, mft2.domainCat, ctx, depth + 1) &&
+                   areEqual(rt1.codomainCat, mft2.codomainCat, ctx, depth + 1) &&
+                   areEqual(rt1.fmap0, mft2.fmap0, ctx, depth + 1) &&
+                   areEqual(rt1.fmap1, mft2.fmap1, ctx, depth + 1);
+        }
         default: const exhaustiveCheck: never = rt1; return false;
     }
 } 
