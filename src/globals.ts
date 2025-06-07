@@ -13,7 +13,7 @@ import {
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
     freshHoleName,
-    cloneTerm, getTermRef, extendCtx, consoleLog, printTerm, lookupCtx
+    getTermRef, extendCtx, consoleLog, printTerm, lookupCtx
 } from './state';
 import { whnf } from './reduction';
 import { solveConstraints } from './unification';
@@ -61,7 +61,7 @@ export function defineGlobal(
         elaboratedType = toElaborateType ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
 
         if (value !== undefined) {
-            const valueToCheck = cloneTerm(value); // Clone to avoid modifying the original
+            const valueToCheck = value
             constraints.length = 0; // Fresh constraints for checking the value
             const checkedValueResult = check(elabCtx, valueToCheck, elaboratedType, 0);
 
@@ -116,7 +116,7 @@ export function addRewriteRule(
 
     try {
         // --- Elaborate LHS ---
-        const lhsToElaborate = cloneTerm(rawLhsTerm);
+        const lhsToElaborate = rawLhsTerm;
         let lhsElabCtx: Context = [...ctx]; // Start with the provided context
         // Extend context with pattern variables, typed by holes
         for (const pVarName of userPatternVars) {
@@ -147,7 +147,7 @@ export function addRewriteRule(
         }
 
         // --- Elaborate RHS ---
-        const rhsToElaborate = cloneTerm(rawRhsTerm);
+        const rhsToElaborate = rawRhsTerm;
         let rhsElabCtx: Context = [...ctx]; // Start with the provided context again
         // Extend context with pattern variables, now using their solved types from LHS elaboration
         for (const pVarName of userPatternVars) {
