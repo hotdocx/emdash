@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -267,6 +267,13 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             return HomCovFunctorIdentity(
                 normalize(current.domainCat, ctx, stackDepth + 1),
                 normalize(current.objW_InDomainCat, ctx, stackDepth + 1)
+            );
+        case 'MkFunctorTerm':
+            return MkFunctorTerm(
+                normalize(current.domainCat, ctx, stackDepth + 1),
+                normalize(current.codomainCat, ctx, stackDepth + 1),
+                normalize(current.fmap0, ctx, stackDepth + 1),
+                normalize(current.fmap1, ctx, stackDepth + 1)
             );
         case 'Lam': {
             const currentLam = current;

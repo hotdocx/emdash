@@ -121,7 +121,7 @@ export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
     'Type',  'Var', 'CatTerm', 'ObjTerm', 'HomTerm',
     'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
-    'FunctorTypeTerm'
+    'FunctorTypeTerm', 'MkFunctorTerm'
 ]);
 
 /**
@@ -144,6 +144,7 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'HomCovFunctorIdentity':
         case 'SetTerm':
         case 'FunctorTypeTerm':
+        case 'MkFunctorTerm':
             return true;
         case 'FMap0Term':
         case 'FMap1Term':
@@ -280,6 +281,8 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomCovFunctorIdentity':
             return `(HomCovFunctor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objW_InDomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'MkFunctorTerm':
+            return `(mkFunctor_kernel ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.fmap0, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.fmap1, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'SetTerm': return 'Set';
         default:
             const exhaustiveCheck: never = current;

@@ -102,6 +102,11 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
         case 'HomCovFunctorIdentity':
             return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.objW_InDomainCat, holeId, visited, depth + 1);
+        case 'MkFunctorTerm':
+            return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
+                    termContainsHole(current.codomainCat, holeId, visited, depth + 1) ||
+                    termContainsHole(current.fmap0, holeId, visited, depth + 1) ||
+                    termContainsHole(current.fmap1, holeId, visited, depth + 1);
         default: const exhaustiveCheck: never = current; return false; // Should be unreachable
     }
 }
@@ -439,6 +444,19 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             } else {
                 return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
             }
+        }
+        case 'MkFunctorTerm': { // INJECTIVE
+            const mft1 = rt1_final as Term & {tag:'MkFunctorTerm'};
+            const mft2 = rt2_final as Term & {tag:'MkFunctorTerm'};
+            let unifRuleResult = tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            if (unifRuleResult === UnifyResult.RewrittenByRule) {
+                return unifRuleResult;
+            }
+            return unifyArgs(
+                [mft1.domainCat, mft1.codomainCat, mft1.fmap0, mft1.fmap1],
+                [mft2.domainCat, mft2.codomainCat, mft2.fmap0, mft2.fmap1],
+                ctx, depth + 1
+            );
         }
         default:
             const unhandledTag = (rt1_final as any)?.tag || 'unknown_tag';

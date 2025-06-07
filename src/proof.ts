@@ -108,6 +108,12 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.domainCat);
                 traverse(current.objW_InDomainCat);
                 break;
+            case 'MkFunctorTerm':
+                traverse(current.domainCat);
+                traverse(current.codomainCat);
+                traverse(current.fmap0);
+                traverse(current.fmap1);
+                break;
             case 'Type': case 'SetTerm': case 'CatTerm':
                 return;
             default:
@@ -205,6 +211,8 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                        (term.functorG_IMPLICIT ? find(term.functorG_IMPLICIT, ctx) : null);
             case 'HomCovFunctorIdentity':
                 return find(term.domainCat, ctx) || find(term.objW_InDomainCat, ctx);
+            case 'MkFunctorTerm':
+                return find(term.domainCat, ctx) || find(term.codomainCat, ctx) || find(term.fmap0, ctx) || find(term.fmap1, ctx);
             case 'Type': case 'SetTerm': case 'CatTerm':
                 return null;
             default:
