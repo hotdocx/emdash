@@ -671,6 +671,9 @@ export function elaborate(
     } catch (e) {
         // Restore constraints before re-throwing
         constraints.splice(0, constraints.length, ...originalConstraintsBackup);
+        if (e instanceof CoherenceError) { // Explicitly re-throw CoherenceError
+            throw e;
+        }
         if (e instanceof Error && (e.message.startsWith("Type error:") || e.message.includes("Unbound variable:") || e.message.includes("Cannot apply non-function:") || e.message.includes("Constant symbol") || e.message.includes("stack depth exceeded"))) {
             throw e; // Re-throw known elaboration errors
         }

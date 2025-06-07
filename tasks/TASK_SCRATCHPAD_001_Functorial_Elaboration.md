@@ -57,6 +57,28 @@ This verification is performed by constructing the two sides of the functorialit
     -   **Success Case**: A test was created that defines a valid (constant) functor from a discrete category to `Set`. It asserts that calling `elaborate` on `mkFunctor_` with the correct maps succeeds and produces a term of the expected `Functor` type.
     -   **Failure Case**: A second test was added to ensure the coherence check works correctly. It defines a category `C3` with a composition law and an "arrow map" that provably violates this law (by always returning the successor function `s`, for which `s ∘ s ≠ s`). It asserts that `elaborate` correctly throws a `CoherenceError` when given this invalid functor definition.
 
+## Task: Functorial Elaboration Test Reporting Fix
+
+### What has already been implemented (and where, and how):
+
+- **Identified Root Cause:** The `elaborate` function in `src/elaboration.ts` was re-wrapping `CoherenceError` exceptions into generic `Error` objects, causing `assert.throws` in `tests/functorial_elaboration.ts` to fail, even when the correct `CoherenceError` was thrown by the kernel.
+
+- **Implemented Fix:** Modified `src/elaboration.ts` (specifically lines 677-679) to explicitly re-throw `CoherenceError` instances without wrapping them in a generic `Error`.
+
+```677:679:src/elaboration.ts
+        if (e instanceof CoherenceError) { // Explicitly re-throw CoherenceError
+            throw e;
+        }
+```
+
+### What remains to be implemented to finish the current main Task:
+
+- **Verification:** The user needs to re-run the tests in `tests/functorial_elaboration.ts` to confirm that the test expecting `CoherenceError` now passes correctly, indicating the test reporting issue is resolved.
+
+### Next user prompt suggestion:
+
+"I have re-run the tests, and they are now reporting correctly. Thank you! We can archive this task and move on to the next one."
+
 ## Remaining Tasks & Next Steps
 
 The core implementation for `MkFunctorTerm` is complete and tested. The same pattern can now be applied to the other categorical constructors.
