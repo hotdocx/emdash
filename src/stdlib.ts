@@ -517,7 +517,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     // );
 
     // This rule was failing, now it is OK because the insertion of implicits in the `check` function
-    // is now conditioned using `options.skipCoherenceCheck` or similar option
+    // is now conditioned using options.disableMaximallyInsertedImplicits for the LHS of a rewrite rule
     addRewriteRule(
         "fmap1_of_mkFunctor",
         ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
