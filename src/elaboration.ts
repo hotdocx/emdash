@@ -529,9 +529,9 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
             )
         )
     );
-    console.log("infer_mkFunctor: printTerm(term.fmap1)>>>", printTerm(term.fmap1));
+    // console.log("infer_mkFunctor: printTerm(term.fmap1)>>>", printTerm(term.fmap1));
     const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
-    console.log("infer_mkFunctor: printTerm(elab_fmap1)>>>", printTerm(elab_fmap1));
+    // console.log("infer_mkFunctor: printTerm(elab_fmap1)>>>", printTerm(elab_fmap1));
     if (!options.skipCoherenceCheck) {
     // 4. Construct Functoriality Law
     const compose_morph_def = globalDefs.get("compose_morph");

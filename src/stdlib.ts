@@ -30,8 +30,6 @@ export function resetMyLambdaPi() {
     resetHoleId();
     resetFlags();
     setDebugVerbose(false);
-
-    setupPhase1GlobalsAndRules();
 }
 
 /**
@@ -415,32 +413,16 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         ctx
     );
 
-    // // Morphism Composition (g ∘ f)
-    // const compose_morph_type = Pi("C", Icit.Impl, CatTerm(), C =>
-    //     Pi("X", Icit.Impl, ObjTerm(C), X =>
-    //         Pi("Y", Icit.Impl, ObjTerm(C), Y =>
-    //             Pi("Z", Icit.Impl, ObjTerm(C), Z =>
-    //                 Pi("g", Icit.Expl, HomTerm(C, Y, Z), _ =>
-    //                     Pi("f", Icit.Expl, HomTerm(C, X, Y), _ =>
-    //                         HomTerm(C, X, Z)
-    //                     )
-    //                 )
-    //             )
-    //         )
-    //     )
-    // );
-    // defineGlobal("compose_morph", compose_morph_type, undefined, true, false);
-
     // Associativity of composition (for unification)
     const assoc_pvars = ['$C', '$X', '$Y', '$Z', '$W', '$a', '$f', '$g'];
-    const p_C_assoc = Hole('$C');
-    const p_X_assoc = Hole('$X');
-    const p_Y_assoc = Hole('$Y');
-    const p_Z_assoc = Hole('$Z');
-    const p_W_assoc = Hole('$W');
-    const p_a_assoc = Hole('$a');
-    const p_f_assoc = Hole('$f');
-    const p_g_assoc = Hole('$g');
+    const p_C_assoc = Var('$C');
+    const p_X_assoc = Var('$X');
+    const p_Y_assoc = Var('$Y');
+    const p_Z_assoc = Var('$Z');
+    const p_W_assoc = Var('$W');
+    const p_a_assoc = Var('$a');
+    const p_f_assoc = Var('$f');
+    const p_g_assoc = Var('$g');
     const v_compose_morph_assoc = Var("compose_morph");
 
     // g : Z -> W, f : Y -> Z  => g o f : Y -> W
@@ -461,37 +443,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         rhsNewConstraints: [], // Corresponds to [ tt = tt ]
     });
 
-    // // Identity Morphism
-    // const id_morph_type = Pi("C", Icit.Impl, CatTerm(), C =>
-    //     Pi("X", Icit.Impl, ObjTerm(C), X => HomTerm(C, X, X))
-    // );
-    // defineGlobal("id_morph", id_morph_type, undefined, true, true);
-
-    // --- Phase 2: Functors ---
-    
-    // // Functorial Elaboration Makers
-    // defineGlobal("mkFunctor_",
-    //     Pi("A", Icit.Impl, CatTerm(), A =>
-    //     Pi("B", Icit.Impl, CatTerm(), B =>
-    //     Pi("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0_val =>
-    //     Pi("fmap1", Icit.Expl,
-    //         Pi("X", Icit.Impl, ObjTerm(A), X =>
-    //         Pi("Y", Icit.Impl, ObjTerm(A), Y =>
-    //         Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
-    //             HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
-    //         ))), _ =>
-    //         FunctorTypeTerm(A, B)
-    //     )))),
-    //     // Value: λ {A} {B} fmap0 fmap1. MkFunctorTerm(A, B, fmap0, fmap1)
-    //     Lam("A", Icit.Impl, CatTerm(), A =>
-    //     Lam("B", Icit.Impl, CatTerm(), B =>
-    //     Lam("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0 =>
-    //     Lam("fmap1", Icit.Expl, Pi("X", Icit.Impl, ObjTerm(A), X => Pi("Y", Icit.Impl, ObjTerm(A), Y => Pi("a", Icit.Expl, HomTerm(A, X, Y), _ => HomTerm(B, App(fmap0, X), App(fmap0, Y))))), fmap1 =>
-    //         MkFunctorTerm(A, B, fmap0, fmap1)
-    //     )))),
-    //     false, true
-    // );
-
     // Rewrite rules for projecting from a functor created with the kernel primitive
     addRewriteRule(
         "fmap0_of_mkFunctor",
@@ -500,21 +451,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         App(Var('$fmap0'), Var('$X'), Icit.Expl),
         ctx
     );
-
-    // addRewriteRule(
-    //     "fmap1_of_mkFunctor",
-    //     ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
-    //     FMap1Term(
-    //         MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => (Var('$fmap1'))))), 
-    //         Var('$a'), 
-    //         Var('$A'), 
-    //         Var('$B'), 
-    //         Var('$X'), 
-    //         Var('$Y')
-    //     ),
-    //     App(App(App(Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => Var('$fmap1'))), Var('$X'), Icit.Impl), Var('$Y'), Icit.Impl), Var('$a'), Icit.Expl),
-    //     ctx
-    // );
 
     // This rule was failing, now it is OK because the insertion of implicits in the `check` function
     // is now conditioned using options.disableMaximallyInsertedImplicits for the LHS of a rewrite rule
@@ -533,21 +469,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         ctx
     );
 
-    // This rule succeeds
-    addRewriteRule(
-        "fmap1_of_mkFunctor_v2_OK",
-        ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
-        FMap1Term(
-            MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => App(App(Var('$fmap1'), X, Icit.Impl), Y, Icit.Impl)))), 
-            Var('$a'), 
-            Var('$A'), 
-            Var('$B'), 
-            Var('$X'), 
-            Var('$Y')
-        ),
-        App(App(App(Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => App(App(Var('$fmap1'), X, Icit.Impl), Y, Icit.Impl))), Var('$X'), Icit.Impl), Var('$Y'), Icit.Impl), Var('$a'), Icit.Expl),
-        ctx
-    );
 
     // --- Phase 3: Yoneda Primitives ---
     
@@ -572,5 +493,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
  */
 export function resetMyLambdaPi_Emdash() {
     resetMyLambdaPi();
+    setupPhase1GlobalsAndRules();
     setupCatTheoryPrimitives(emptyCtx); // Primitives are typically defined in an empty context
 } 
