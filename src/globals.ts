@@ -27,7 +27,7 @@ import { infer, check } from './elaboration';
  * @param value Optional definition/value for the symbol.
  * @param isConstantSymbol True if the symbol is a primitive constant (affects rewriting and unfolding).
  * @param isInjective True if the symbol is an injective constructor (for unification).
- * @param toElaborateType True if the provided type itself needs to be elaborated and checked against Type.
+ * @param shouldElaborateTypeBecauseInnerImplicits True if the provided type itself needs to be elaborated and checked against Type.
  */
 export function defineGlobal(
     name: string,
@@ -35,7 +35,7 @@ export function defineGlobal(
     value?: Term,
     isConstantSymbol: boolean = false,
     isInjective?: boolean,
-    toElaborateType: boolean = false // If true, `type` is elaborated; otherwise, it's taken as already valid.
+    shouldElaborateTypeBecauseInnerImplicits: boolean = false // If true, `type` is elaborated; otherwise, it's taken as already valid.
 ) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
@@ -58,7 +58,7 @@ export function defineGlobal(
 
     try {
         elaboratedType = check(elabCtx, type, Type());
-        elaboratedType = toElaborateType ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
+        elaboratedType = shouldElaborateTypeBecauseInnerImplicits ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
 
         if (value !== undefined) {
             const valueToCheck = value

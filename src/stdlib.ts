@@ -38,7 +38,6 @@ export function resetMyLambdaPi() {
  * and rules for evaluating mkCat_ constructs.
  */
 export function setupPhase1GlobalsAndRules() {
-    // Basic Types (assumed to be Type itself, not elaborated here, so toElaborateType = false)
     defineGlobal("NatType", Type(), undefined, true, true);
     defineGlobal("BoolType", Type(), undefined, true, true);
 
