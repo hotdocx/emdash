@@ -87,7 +87,7 @@ describe("Dependent Types Tests: Length-Indexed Vectors (Vec)", () => {
     it("should elaborate a Vec of length 1", () => {
         defineGlobal("Bool", Type(), undefined, true, true);
         const Bool = Var("Bool");
-        defineGlobal("true", Bool, undefined, true);
+        defineGlobal("true", Bool, undefined, true, true);
         const vcons = Var("vcons");
         const z = Var("z");
         const s = Var("s");
@@ -141,8 +141,8 @@ describe("Dependent Types Tests: Length-Indexed Vectors (Vec)", () => {
         it("should correctly type-check an application of append", () => {
             defineGlobal("Bool", Type(), undefined, true, true);
             const Bool = Var("Bool");
-            defineGlobal("true", Bool, undefined, true);
-            defineGlobal("false", Bool, undefined, true);
+            defineGlobal("true", Bool, undefined, true, true);
+            defineGlobal("false", Bool, undefined, true, true);
             const s = Var("s");
             const z = Var("z");
             const vcons = Var("vcons");

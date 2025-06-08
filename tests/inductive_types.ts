@@ -175,4 +175,163 @@ describe("Inductive Types Tests", () => {
             assert.ok(areEqual(res1.term, bfalse, emptyCtx), `not_rw true should be false, got ${printTerm(res1.term)}`);
         });
     });
+
+    describe("Polymorphic Lists (List A)", () => {
+        let ListType: Term, nilTerm: Term, consTerm: Term;
+        let Nat: Term, Bool: Term, z: Term, s: Term, one: Term, two: Term, three: Term;
+        let list12_nat: Term, list23_nat: Term, list123_nat: Term;
+
+        beforeEach(() => {
+            // Pre-define Nat and some numbers for testing with List Nat
+            defineGlobal("Nat", Type(), undefined, true, true);
+            Nat = Var("Nat");
+            defineGlobal("z", Nat, undefined, true, true);
+            z = Var("z");
+            defineGlobal("s", Pi("n", Icit.Expl, Nat, _ => Nat), undefined, true, true);
+            s = Var("s");
+            one = App(s, z, Icit.Expl);
+            two = App(s, one, Icit.Expl);
+            three = App(s, two, Icit.Expl);
+            defineGlobal("one", Nat, one);
+            defineGlobal("two", Nat, two);
+            defineGlobal("three", Nat, three);
+
+            defineGlobal("Bool", Type(), undefined, true, true);
+            Bool = Var("Bool");
+
+            // List :: Type -> Type
+            defineGlobal("List", Pi("A", Icit.Expl, Type(), _ => Type()), undefined, true, true);
+            ListType = Var("List");
+
+            // nil :: Π {A:Type}. List A
+            defineGlobal("nil", Pi("A", Icit.Impl, Type(), A => App(ListType, A, Icit.Expl)), undefined, true, true);
+            nilTerm = Var("nil");
+
+            // cons :: Π {A:Type}. A -> List A -> List A
+            defineGlobal("cons", Pi("A", Icit.Impl, Type(), A => Pi("h", Icit.Expl, A, _ => Pi("t", Icit.Expl, App(ListType, A, Icit.Expl), _ => App(ListType, A, Icit.Expl)))), undefined, true, true);
+            consTerm = Var("cons");
+
+            // Helper to create a cons cell
+            const mkCons = (A: Term, h: Term, t: Term) => App(App(App(consTerm, A, Icit.Impl), h, Icit.Expl), t, Icit.Expl);
+            const nilNat = App(nilTerm, Nat, Icit.Impl);
+            
+            // Sample list: [1, 2]
+            list12_nat = mkCons(Nat, Var("one"), mkCons(Nat, Var("two"), nilNat));
+            defineGlobal("list12_nat", App(ListType, Nat, Icit.Expl), list12_nat);
+            
+            // Sample list: [2, 3]
+            const list23_nat_val = mkCons(Nat, Var("two"), mkCons(Nat, Var("three"), nilNat));
+            list23_nat = Var("list23_nat");
+            defineGlobal("list23_nat", App(ListType, Nat, Icit.Expl), list23_nat_val);
+
+            // Sample list: [1, 2, 3]
+            const list123_nat_val = mkCons(Nat, Var("one"), mkCons(Nat, Var("two"), mkCons(Nat, Var("three"), nilNat)));
+            list123_nat = Var("list123_nat");
+            defineGlobal("list123_nat", App(ListType, Nat, Icit.Expl), list123_nat_val);
+        });
+
+        describe("Induction via Eliminator", () => {
+            beforeEach(() => {
+                const List_elim_type =
+                    Pi("A", Icit.Impl, Type(), A =>
+                    Pi("P", Icit.Expl, Pi("_", Icit.Expl, App(ListType, A, Icit.Expl), _ => Type()), P =>
+                        Pi("p_nil", Icit.Expl, App(P, App(nilTerm, A, Icit.Impl), Icit.Expl), _ =>
+                            Pi("p_cons", Icit.Expl,
+                                Pi("h", Icit.Expl, A, h =>
+                                Pi("t", Icit.Expl, App(ListType, A, Icit.Expl), t =>
+                                Pi("rec", Icit.Expl, App(P, t, Icit.Expl), _ =>
+                                    App(P, App(App(App(consTerm, A, Icit.Impl), h, Icit.Expl), t, Icit.Expl), Icit.Expl)
+                                ))), _ =>
+                            Pi("l", Icit.Expl, App(ListType, A, Icit.Expl), l => App(P, l, Icit.Expl))
+                        ))
+                    ));
+                defineGlobal("List_elim", List_elim_type);
+
+                // Add rewrite rule for nil case
+                addRewriteRule("List_elim_nil", ["$A", "$P", "$p_nil", "$p_cons"],
+                    App(App(App(App(App(Var("List_elim"), Var("$A"), Icit.Impl), Var("$P"), Icit.Expl), Var("$p_nil"), Icit.Expl), Var("$p_cons"), Icit.Expl), App(nilTerm, Var("$A"), Icit.Impl), Icit.Expl),
+                    Var("$p_nil"),
+                    emptyCtx
+                );
+
+                // Add rewrite rule for cons case
+                const elimOnCons = App(App(App(App(App(Var("List_elim"), Var("$A"), Icit.Impl), Var("$P"), Icit.Expl), Var("$p_nil"), Icit.Expl), Var("$p_cons"), Icit.Expl), App(App(App(consTerm, Var("$A"), Icit.Impl), Var("$h"), Icit.Expl), Var("$t"), Icit.Expl), Icit.Expl);
+                const consStep = App(
+                    App(App(Var("$p_cons"), Var("$h"), Icit.Expl), Var("$t"), Icit.Expl),
+                    // recursive call: (List_elim A P p_nil p_cons t)
+                    App(App(App(App(App(Var("List_elim"), Var("$A"), Icit.Impl), Var("$P"), Icit.Expl), Var("$p_nil"), Icit.Expl), Var("$p_cons"), Icit.Expl), Var("$t"), Icit.Expl),
+                    Icit.Expl
+                );
+                addRewriteRule("List_elim_cons", ["$A", "$P", "$p_nil", "$p_cons", "$h", "$t"], elimOnCons, consStep, emptyCtx);
+            });
+
+            it("should define a map function using List_elim and compute correctly", () => {
+                const map_elim_type =
+                    Pi("A", Icit.Impl, Type(), A =>
+                    Pi("B", Icit.Impl, Type(), B =>
+                        Pi("f", Icit.Expl, Pi("_", Icit.Expl, A, _ => B), _ =>
+                        Pi("l", Icit.Expl, App(ListType, A, Icit.Expl), _ => App(ListType, B, Icit.Expl))
+                    )));
+
+                const map_elim_val =
+                    Lam("A", Icit.Impl, Type(), A =>
+                    Lam("B", Icit.Impl, Type(), B =>
+                    Lam("f", Icit.Expl, Pi("_", Icit.Expl, A, _ => B), f_val =>
+                    Lam("l", Icit.Expl, App(ListType, A, Icit.Expl), l_val =>
+                        App(
+                            App(App(App(App(Var("List_elim"), A, Icit.Impl),
+                                Lam("_", Icit.Expl, App(ListType, A, Icit.Expl), _ => App(ListType, B, Icit.Expl)), // P, the motive
+                                Icit.Expl),
+                                App(nilTerm, B, Icit.Impl), Icit.Expl), // nil case
+                                Lam("h", Icit.Expl, A, h_val => // cons case
+                                Lam("t", Icit.Expl, App(ListType, A, Icit.Expl), _ =>
+                                Lam("rec", Icit.Expl, App(ListType, B, Icit.Expl), rec_val =>
+                                    App(App(App(consTerm, B, Icit.Impl), App(f_val, h_val, Icit.Expl), Icit.Expl), rec_val, Icit.Expl) // cons B (f h) rec
+                                ))), Icit.Expl
+                            ),
+                            l_val, Icit.Expl
+                        )
+                    ))));
+                defineGlobal("map_elim", map_elim_type, map_elim_val);
+                
+                // test map s [1,2] -> [2,3]
+                const term_to_eval = App(App(App(App(Var("map_elim"), Nat, Icit.Impl), Nat, Icit.Impl), s, Icit.Expl), list12_nat, Icit.Expl);
+                const result = elaborate(term_to_eval);
+                
+                const expected_type = App(ListType, Nat, Icit.Expl);
+                assert.ok(areEqual(result.type, expected_type, emptyCtx), `map_elim s [1,2] should have type List Nat. Got ${printTerm(result.type)}`);
+                assert.ok(areEqual(result.term, list23_nat, emptyCtx), `map_elim s [1,2] should be [2,3]. Got ${printTerm(result.term)}`);
+            });
+        });
+
+        describe("Induction via Rewrite Rules", () => {
+            beforeEach(() => {
+                const append_type = Pi("A", Icit.Impl, Type(), A => Pi("l1", Icit.Expl, App(ListType, A, Icit.Expl), _ => Pi("l2", Icit.Expl, App(ListType, A, Icit.Expl), _ => App(ListType, A, Icit.Expl))));
+                defineGlobal("append_rw", append_type);
+
+                // append nil l2 = l2
+                addRewriteRule("append_rw_nil", ["$A", "$l2"],
+                    App(App(App(Var("append_rw"), Var("$A"), Icit.Impl), App(nilTerm, Var("$A"), Icit.Impl), Icit.Expl), Var("$l2"), Icit.Expl),
+                    Var("$l2"),
+                    emptyCtx
+                );
+
+                // append (cons h t) l2 = cons h (append t l2)
+                const append_cons_lhs = App(App(App(Var("append_rw"), Var("$A"), Icit.Impl), App(App(App(consTerm, Var("$A"), Icit.Impl), Var("$h"), Icit.Expl), Var("$t"), Icit.Expl), Icit.Expl), Var("$l2"), Icit.Expl);
+                const append_cons_rhs = App(App(App(consTerm, Var("$A"), Icit.Impl), Var("$h"), Icit.Expl), App(App(App(Var("append_rw"), Var("$A"), Icit.Impl), Var("$t"), Icit.Expl), Var("$l2"), Icit.Expl), Icit.Expl);
+                addRewriteRule("append_rw_cons", ["$A", "$h", "$t", "$l2"], append_cons_lhs, append_cons_rhs, emptyCtx);
+            });
+
+            it("should define append using rewrite rules and compute correctly", () => {
+                const list1_val = App(App(App(consTerm, Nat, Icit.Impl), Var("one"), Icit.Expl), App(nilTerm, Nat, Icit.Impl), Icit.Expl);
+                const list1 = Var("list1");
+                defineGlobal("list1", App(ListType, Nat, Icit.Expl), list1_val);
+
+                const term_to_eval = App(App(App(Var("append_rw"), Nat, Icit.Impl), list1, Icit.Expl), list23_nat, Icit.Expl);
+                const result = elaborate(term_to_eval);
+
+                assert.ok(areEqual(result.term, list123_nat, emptyCtx), `append [1] [2,3] should be [1,2,3]. Got ${printTerm(result.term)}`);
+            });
+        });
+    });
 }); 
