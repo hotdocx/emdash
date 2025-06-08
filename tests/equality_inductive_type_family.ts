@@ -8,7 +8,8 @@ import {
     Term, Icit, Type, Var, Lam, App, Pi, Hole
 } from '../src/types';
 import {
-    emptyCtx, printTerm
+    emptyCtx, printTerm,
+    setDebugVerbose
 } from '../src/state';
 import {
     defineGlobal, addRewriteRule
@@ -23,6 +24,7 @@ import assert from 'node:assert';
 import { describe, it, beforeEach } from 'node:test';
 import { areEqual } from '../src/equality';
 import { normalize } from '../src/reduction';
+setDebugVerbose(true);
 
 describe("Equality Inductive Type Family (Eq)", () => {
     beforeEach(() => {
@@ -196,8 +198,9 @@ describe("Equality Inductive Type Family (Eq)", () => {
                 App(App(App(App(Var("trans_elim"), Nat, Icit.Impl), Var("one"), Icit.Impl), Var("one"), Icit.Impl), Var("one"), Icit.Impl),
                 reflNat(Var("one")), Icit.Expl
             ), reflNat(Var("one")), Icit.Expl);
+            setDebugVerbose(true);
             const result = elaborate(term_to_eval);
-
+            console.log("printTerm(result.term)", printTerm(result.term));
             assert.ok(areEqual(result.type, EqNat(Var("one"), Var("one")), emptyCtx));
             assert.ok(areEqual(result.term, reflNat(Var("one")), emptyCtx), `trans_elim (refl 1) (refl 1) should be (refl 1). Got ${printTerm(result.term)}`);
         });

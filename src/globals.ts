@@ -129,6 +129,7 @@ export function addRewriteRule(
         const elabOptions = { skipCoherenceCheck: true, disableMaximallyInsertedImplicits: true };
 
         // Infer the types within the LHS and solve for pattern variable types
+        // [TODO] no need for second call to `infer` later below, use the returned result from this first call.
         infer(lhsElabCtx, lhsToElaborate, 0, elabOptions); // This will generate constraints
 
         if (!solveConstraints(lhsElabCtx)) {
@@ -161,6 +162,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for RHS
         // Infer the type of the elaborated LHS in the *global* context (or rule's definition context)
         // to determine the target type for the RHS.
+        // [TODO] no need for second call to `infer`, use the returned result from the first call.
         const typeOfGlobalLhsResult = infer(lhsElabCtx, elaboratedLhs, 0, elabOptions); // Use lhsElabCtx, not original ctx
          if (!solveConstraints(ctx)) { // Solve constraints that arose from inferring type of elaboratedLhs
             throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
