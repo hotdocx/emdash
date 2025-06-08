@@ -168,9 +168,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // If current application is explicit, try inserting implicit apps to the function part.
             if (appNode.icit === Icit.Expl) {
-                const inserted = options.patternMode
-                    ? { term: funcAfterImplicits, type: typeFAfterImplicits }
-                    : insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true); // Unconditional insertion
+                // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
+                const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true); // Unconditional insertion
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
             }
@@ -245,9 +244,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const lambda_body_structure = lamNode.body(Var(lamNode.paramName, true)); // Instantiate body with a Var
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, options);
                     // Insert implicits for the body if needed
-                    const insertedBody = options.patternMode
-                        ? { term: inferredBodyElab, type: inferredBodyType }
-                        : insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
+                    // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
+                    const insertedBody = insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.type; // The type of the body becomes the result type of the Pi
                 }
             );
@@ -261,9 +259,8 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
                     const bodyTermRaw = lamNode.body(Var(lamNode.paramName, true));
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, options);
-                    const insertedBody = options.patternMode
-                        ? { term: inferredBodyElab, type: inferredBodyType }
-                        : insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
+                    // [TODO] Review carefully whether `options.skipCoherenceCheck` should skip the `insertImplicitApps` call 
+                    const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term; // Return the elaborated body
                 }
             );
@@ -659,9 +656,7 @@ export function elaborate(
         } else {
             // No expected type, so infer, then insert implicits
             const inferResult = infer(initialCtx, term, 0, options);
-            const afterInsert = options.patternMode
-                ? { term: inferResult.elaboratedTerm, type: inferResult.type }
-                : insertImplicitApps(initialCtx, inferResult.elaboratedTerm, inferResult.type, 0);
+            const afterInsert = insertImplicitApps(initialCtx, inferResult.elaboratedTerm, inferResult.type, 0);
             finalTermToReport = afterInsert.term;
             finalTypeToReport = afterInsert.type;
         }

@@ -169,7 +169,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for checking RHS against target type
         // Check the RHS against this target type
         console.log("rhsElabCtx>>>", rhsElabCtx.map(b => `${b.name}: ${printTerm(b.type)}`).join('; '));
-        check(rhsElabCtx, rhsToElaborate, targetRhsType, 0, elabOptions);
+        check(rhsElabCtx, rhsToElaborate, targetRhsType, 0);
 
         if (!solveConstraints(rhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
