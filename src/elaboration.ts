@@ -35,6 +35,7 @@ type HomCovFunctorIdentityType = Extract<BaseTerm, { tag: 'HomCovFunctorIdentity
 export interface ElaborationOptions {
     normalizeResultTerm?: boolean; // Whether to fully normalize the elaborated term.
     skipCoherenceCheck?: boolean;
+    patternMode?: boolean;
 }
 
 /**
@@ -167,8 +168,9 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // If current application is explicit, try inserting implicit apps to the function part.
             if (appNode.icit === Icit.Expl) {
-                // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
-                const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true); // Unconditional insertion
+                const inserted = options.patternMode
+                    ? { term: funcAfterImplicits, type: typeFAfterImplicits }
+                    : insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true); // Unconditional insertion
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
             }
@@ -243,8 +245,9 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const lambda_body_structure = lamNode.body(Var(lamNode.paramName, true)); // Instantiate body with a Var
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, options);
                     // Insert implicits for the body if needed
-                    // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
-                    const insertedBody = insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
+                    const insertedBody = options.patternMode
+                        ? { term: inferredBodyElab, type: inferredBodyType }
+                        : insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.type; // The type of the body becomes the result type of the Pi
                 }
             );
@@ -258,8 +261,9 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
                     const bodyTermRaw = lamNode.body(Var(lamNode.paramName, true));
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, options);
-                    // [TODO] Review carefully whether `options.skipCoherenceCheck` should skip the `insertImplicitApps` call 
-                    const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
+                    const insertedBody = options.patternMode
+                        ? { term: inferredBodyElab, type: inferredBodyType }
+                        : insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term; // Return the elaborated body
                 }
             );
@@ -419,7 +423,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
     // Rule for implicit lambda insertion (eta-expansion for implicit Pi types)
     // If expecting Π {x:A}.B and term is not an implicit lambda, wrap term in λ {x:A}. (check term B[x])
-    if (expectedTypeWhnf.tag === 'Pi' && expectedTypeWhnf.icit === Icit.Impl && !options.skipCoherenceCheck ) {
+    if (expectedTypeWhnf.tag === 'Pi' && expectedTypeWhnf.icit === Icit.Impl && !options.patternMode ) {
         const termRef = getTermRef(currentTerm);
         if (!(termRef.tag === 'Lam' && termRef.icit === Icit.Impl)) {
             const lamParamName = expectedTypeWhnf.paramName;
@@ -491,7 +495,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1, options);
 
     // Insert implicit applications based on the inferred type before comparing with expectedTypeWhnf
-    const afterInsert = options.skipCoherenceCheck ? {term: inferredElabTerm, type: inferredType} : insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
+    const afterInsert = options.patternMode ? {term: inferredElabTerm, type: inferredType} : insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
 
     // Add constraint: (type of term after implicit insertion) should be equal to (expected type)
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
@@ -655,7 +659,9 @@ export function elaborate(
         } else {
             // No expected type, so infer, then insert implicits
             const inferResult = infer(initialCtx, term, 0, options);
-            const afterInsert = insertImplicitApps(initialCtx, inferResult.elaboratedTerm, inferResult.type, 0);
+            const afterInsert = options.patternMode
+                ? { term: inferResult.elaboratedTerm, type: inferResult.type }
+                : insertImplicitApps(initialCtx, inferResult.elaboratedTerm, inferResult.type, 0);
             finalTermToReport = afterInsert.term;
             finalTypeToReport = afterInsert.type;
         }

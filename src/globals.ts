@@ -125,7 +125,7 @@ export function addRewriteRule(
             lhsElabCtx = extendCtx(lhsElabCtx, pVarName, Hole(freshHoleName() + "_type_pvar_" + pVarName.substring(1)), Icit.Expl);
         }
 
-        const elabOptions = { skipCoherenceCheck: true };
+        const elabOptions = { skipCoherenceCheck: true, patternMode: true };
 
         // Infer the types within the LHS and solve for pattern variable types
         infer(lhsElabCtx, lhsToElaborate, 0, elabOptions); // This will generate constraints
@@ -169,7 +169,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for checking RHS against target type
         // Check the RHS against this target type
         console.log("rhsElabCtx>>>", rhsElabCtx.map(b => `${b.name}: ${printTerm(b.type)}`).join('; '));
-        check(rhsElabCtx, rhsToElaborate, targetRhsType, 0);
+        check(rhsElabCtx, rhsToElaborate, targetRhsType, 0, elabOptions);
 
         if (!solveConstraints(rhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
