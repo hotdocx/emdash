@@ -496,23 +496,55 @@ export function setupCatTheoryPrimitives(ctx: Context) {
     addRewriteRule(
         "fmap0_of_mkFunctor",
         ['$A', '$B', '$fmap0', '$fmap1', '$X'],
-        FMap0Term(MkFunctorTerm(Hole('$A'), Hole('$B'), Hole('$fmap0'), Hole('$fmap1')), Hole('$X')),
-        App(Hole('$fmap0'), Hole('$X'), Icit.Expl),
+        FMap0Term(MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Var('$fmap1')), Var('$X')),
+        App(Var('$fmap0'), Var('$X'), Icit.Expl),
         ctx
     );
 
+    // addRewriteRule(
+    //     "fmap1_of_mkFunctor",
+    //     ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
+    //     FMap1Term(
+    //         MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => (Var('$fmap1'))))), 
+    //         Var('$a'), 
+    //         Var('$A'), 
+    //         Var('$B'), 
+    //         Var('$X'), 
+    //         Var('$Y')
+    //     ),
+    //     App(App(App(Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => Var('$fmap1'))), Var('$X'), Icit.Impl), Var('$Y'), Icit.Impl), Var('$a'), Icit.Expl),
+    //     ctx
+    // );
+
+    // This rule fails
     addRewriteRule(
         "fmap1_of_mkFunctor",
         ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
         FMap1Term(
-            MkFunctorTerm(Hole('$A'), Hole('$B'), Hole('$fmap0'), Hole('$fmap1')), 
-            Hole('$a'), 
-            Hole('$A'), 
-            Hole('$B'), 
-            Hole('$X'), 
-            Hole('$Y')
+            MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Var('$fmap1')), 
+            Var('$a'), 
+            Var('$A'), 
+            Var('$B'), 
+            Var('$X'), 
+            Var('$Y')
         ),
-        App(App(App(Hole('$fmap1'), Hole('$X'), Icit.Impl), Hole('$Y'), Icit.Impl), Hole('$a'), Icit.Expl),
+        App(App(App(Var('$fmap1'), Var('$X'), Icit.Impl), Var('$Y'), Icit.Impl), Var('$a'), Icit.Expl),
+        ctx
+    );
+
+    // This rule succeeds
+    addRewriteRule(
+        "fmap1_of_mkFunctor_v2_OK",
+        ['$A', '$B', '$fmap0', '$fmap1', '$a', '$X', '$Y'],
+        FMap1Term(
+            MkFunctorTerm(Var('$A'), Var('$B'), Var('$fmap0'), Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => App(App(Var('$fmap1'), X, Icit.Impl), Y, Icit.Impl)))), 
+            Var('$a'), 
+            Var('$A'), 
+            Var('$B'), 
+            Var('$X'), 
+            Var('$Y')
+        ),
+        App(App(App(Lam("X", Icit.Impl, ObjTerm(Var('$A')), X => Lam("Y", Icit.Impl, ObjTerm(Var('$A')), Y => App(App(Var('$fmap1'), X, Icit.Impl), Y, Icit.Impl))), Var('$X'), Icit.Impl), Var('$Y'), Icit.Impl), Var('$a'), Icit.Expl),
         ctx
     );
 

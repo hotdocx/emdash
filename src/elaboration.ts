@@ -167,6 +167,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // If current application is explicit, try inserting implicit apps to the function part.
             if (appNode.icit === Icit.Expl) {
+                // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
                 const inserted = insertImplicitApps(ctx, funcAfterImplicits, typeFAfterImplicits, stackDepth + 1, true); // Unconditional insertion
                 funcAfterImplicits = inserted.term;
                 typeFAfterImplicits = inserted.type;
@@ -242,6 +243,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const lambda_body_structure = lamNode.body(Var(lamNode.paramName, true)); // Instantiate body with a Var
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(body_infer_ctx, lambda_body_structure, stackDepth + 1, options);
                     // Insert implicits for the body if needed
+                    // [TODO] Review carefully whether `options.skipCoherenceCheck` (or similar options.patternCheckSkipOuterImplicits) should skip the `insertImplicitApps` call 
                     const insertedBody = insertImplicitApps(body_infer_ctx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.type; // The type of the body becomes the result type of the Pi
                 }
@@ -256,6 +258,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                     const bodyInferCtx = extendCtx(ctx, lamNode.paramName, getTermRef(actualParamType), lamNode.icit, v);
                     const bodyTermRaw = lamNode.body(Var(lamNode.paramName, true));
                     let { elaboratedTerm: inferredBodyElab, type: inferredBodyType } = infer(bodyInferCtx, bodyTermRaw, stackDepth +1, options);
+                    // [TODO] Review carefully whether `options.skipCoherenceCheck` should skip the `insertImplicitApps` call 
                     const insertedBody = insertImplicitApps(bodyInferCtx, inferredBodyElab, inferredBodyType, stackDepth + 1);
                     return insertedBody.term; // Return the elaborated body
                 }
@@ -416,7 +419,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
 
     // Rule for implicit lambda insertion (eta-expansion for implicit Pi types)
     // If expecting Π {x:A}.B and term is not an implicit lambda, wrap term in λ {x:A}. (check term B[x])
-    if (expectedTypeWhnf.tag === 'Pi' && expectedTypeWhnf.icit === Icit.Impl) {
+    if (expectedTypeWhnf.tag === 'Pi' && expectedTypeWhnf.icit === Icit.Impl && !options.skipCoherenceCheck ) {
         const termRef = getTermRef(currentTerm);
         if (!(termRef.tag === 'Lam' && termRef.icit === Icit.Impl)) {
             const lamParamName = expectedTypeWhnf.paramName;
@@ -488,7 +491,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     let { elaboratedTerm: inferredElabTerm, type: inferredType } = infer(ctx, currentTerm, stackDepth + 1, options);
 
     // Insert implicit applications based on the inferred type before comparing with expectedTypeWhnf
-    const afterInsert = insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
+    const afterInsert = options.skipCoherenceCheck ? {term: inferredElabTerm, type: inferredType} : insertImplicitApps(ctx, inferredElabTerm, inferredType, stackDepth + 1, true);
 
     // Add constraint: (type of term after implicit insertion) should be equal to (expected type)
     addConstraint(whnf(afterInsert.type, ctx), expectedTypeWhnf, `check general: inferredType(${printTerm(afterInsert.term)}) vs expectedType(${printTerm(expectedTypeWhnf)})`);
@@ -522,8 +525,10 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
             )
         )
     );
+    console.log("infer_mkFunctor: printTerm(term.fmap1)>>>", printTerm(term.fmap1));
     const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
-    
+    console.log("infer_mkFunctor: printTerm(elab_fmap1)>>>", printTerm(elab_fmap1));
+    if (!options.skipCoherenceCheck) {
     // 4. Construct Functoriality Law
     const compose_morph_def = globalDefs.get("compose_morph");
     if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
@@ -583,7 +588,7 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
     if (!options.skipCoherenceCheck && !areEqual(normLhs, normRhs, lawCtx)) {
         throw new CoherenceError("Functoriality check", lhs, rhs, normLhs, normRhs, lawCtx);
     }
-    
+    }
     // 6. Return Result
     const finalTerm = MkFunctorTerm(elabA, elabB, elab_fmap0, elab_fmap1);
     return {
