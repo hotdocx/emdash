@@ -8,76 +8,40 @@ The goal was to enhance the emdash kernel to support "functorial elaboration". T
 
 This verification is performed by constructing the two sides of the functoriality equation (`F(g ∘ f)` and `F(g) ∘ F(f)`) with abstract inputs and checking if they are definitionally equal via normalization, leveraging the existing `areEqual` function.
 
-## Implementation Details
+## Task: Explicit Functoriality Proofs
 
-### Phase 1: Core Data Structures & Utilities
-
--   **`src/types.ts`**:
-    -   A new term variant `MkFunctorTerm` was added to the `BaseTerm` union type. It stores the domain category, codomain category, object map (`fmap0`), and arrow map (`fmap1`).
-    -   A corresponding factory function `MkFunctorTerm(...)` was created.
-
--   **`src/equality.ts`**:
-    -   The `areEqual` function was updated to handle `MkFunctorTerm`. It performs a structural comparison, checking if the respective fields of two `MkFunctorTerm`s are equal.
-
--   **`src/pattern.ts`**:
-    -   All relevant pattern-matching and term-manipulation utilities (`matchPattern`, `applySubst`, `collectPatternVars`, `replaceFreeVar`, `getFreeVariables`) were updated to correctly traverse and handle the new `MkFunctorTerm`.
-
-### Phase 2: Elaboration Logic
-
--   **`src/elaboration.ts`**:
-    -   This was the core of the implementation.
-    -   A new `CoherenceError` class was introduced to provide detailed error messages when a law (like functoriality) fails to hold. It reports the LHS, RHS, and their normal forms.
-    -   A new case was added to the main `infer` function's switch statement for `MkFunctorTerm`.
-    -   This case delegates to a new helper function, `infer_mkFunctor`.
-    -   **`infer_mkFunctor` Logic**:
-        1.  It first elaborates the domain and codomain categories to ensure they are valid `CatTerm`s.
-        2.  It then elaborates `fmap0` and `fmap1` against their expected types (e.g., `fmap0` must have type `Obj A -> Obj B`).
-        3.  It programmatically constructs the functoriality law to be checked:
-            `compose_B (fmap1 g) (fmap1 f) =?= fmap1 (compose_A g f)`
-            This is done in a fresh local context with abstract variables for the objects (`X`, `Y`, `Z`) and morphisms (`f`, `g`). The user-facing `compose_morph` global is used for composition.
-        4.  It normalizes both the left-hand side (LHS) and right-hand side (RHS) of the equation.
-        5.  It uses `areEqual` to check if the normalized terms are convertible.
-        6.  If they are not equal, it throws the `CoherenceError`.
-        7.  If they are equal, it returns the fully elaborated `MkFunctorTerm` and its inferred type, which is `FunctorTypeTerm A B`.
-
-### Phase 3: Standard Library and Testing
-
--   **`src/stdlib.ts`**:
-    -   After some trouble with the file being corrupted by previous edits, the file was restored to a clean state.
-    -   A new user-facing global constant, `mkFunctor_`, was defined.
-    -   `mkFunctor_` is a curried function that takes the object and arrow maps and wraps them in the kernel `MkFunctorTerm`. Its type uses implicit Pi binders (`{A:Cat} {B:Cat}`), so the domain and codomain categories can be inferred by the elaborator from the types of the maps. This provides a convenient, high-level way for users to create functors while benefiting from the underlying kernel verification.
-    -   Added kernel-level rewrite rules for `fmap0` and `fmap1` applied to a `MkFunctorTerm` to project out the corresponding map. This allows the system to correctly reduce terms like `fmap0 (mkFunctor_ ...) X` to `(fmap0 ...) X`.
-    -   Added a unification rule for the associativity of `compose_morph`, i.e., `(g ∘ f) ∘ a` unifies with `g ∘ (f ∘ a)`. This will be crucial for coherence checks involving more complex compositions.
-
--   **`src/reduction.ts`**:
-    -   To complement the rewrite rules and improve efficiency, direct reduction rules were added to `whnf` for `FMap0Term` and `FMap1Term` when applied to a `MkFunctorTerm`. This ensures the projections are handled directly within the kernel's primary reduction engine.
-
--   **`tests/dependent_types_tests.ts`**:
-    -   A new test suite, "Functorial Elaboration", was added to verify the feature.
-    -   **Success Case**: A test was created that defines a valid (constant) functor from a discrete category to `Set`. It asserts that calling `elaborate` on `mkFunctor_` with the correct maps succeeds and produces a term of the expected `Functor` type.
-    -   **Failure Case**: A second test was added to ensure the coherence check works correctly. It defines a category `C3` with a composition law and an "arrow map" that provably violates this law (by always returning the successor function `s`, for which `s ∘ s ≠ s`). It asserts that `elaborate` correctly throws a `CoherenceError` when given this invalid functor definition.
-
-## Task: Functorial Elaboration Test Reporting Fix
+The `MkFunctorTerm` feature has been enhanced to allow users to provide an explicit proof of the functoriality law, rather than relying solely on the kernel's computational verification.
 
 ### What has already been implemented (and where, and how):
 
-- **Identified Root Cause:** The `elaborate` function in `src/elaboration.ts` was re-wrapping `CoherenceError` exceptions into generic `Error` objects, causing `assert.throws` in `tests/functorial_elaboration.ts` to fail, even when the correct `CoherenceError` was thrown by the kernel.
+-   **`src/types.ts`**:
+    -   The `MkFunctorTerm` type was modified to include a new optional field: `proof?: Term`.
+    -   The corresponding factory function `MkFunctorTerm(...)` was updated to accept this optional proof.
 
-- **Implemented Fix:** Modified `src/elaboration.ts` (specifically lines 677-679) to explicitly re-throw `CoherenceError` instances without wrapping them in a generic `Error`.
+-   **`src/equality.ts` & `src/pattern.ts`**:
+    -   The `areEqual` function in `src/equality.ts` was updated to correctly compare `MkFunctorTerm` instances by also checking their `proof` fields.
+    -   All relevant pattern-matching and term-manipulation utilities (`matchPattern`, `applySubst`, `collectPatternVars`, `replaceFreeVar`, `getFreeVariables`) in `src/pattern.ts` were updated to correctly traverse and handle the new `proof` field.
 
-```677:679:src/elaboration.ts
-        if (e instanceof CoherenceError) { // Explicitly re-throw CoherenceError
-            throw e;
-        }
-```
+-   **`src/stdlib.ts`**:
+    -   The indexed inductive type family for propositional equality (`Eq`), its constructor (`refl`), and its eliminator (`Eq_elim` with its rewrite rule `Eq_elim_refl`), were moved from a test file into the main standard library file. This makes them globally available for constructing and using proofs.
+    -   The user-facing `mkFunctor_` global was redefined. Its new signature now requires an additional `functoriality` proof argument. The type of this argument is a proposition using the `Eq` type, asserting that the functor laws hold.
+
+-   **`src/elaboration.ts`**:
+    -   The `infer_mkFunctor` function was significantly refactored to handle the new `proof` field.
+    -   **If a proof is provided**: The function now type-checks the provided proof term. The expected type for the proof is constructed programmatically as a dependent proposition asserting the functoriality law: `∀(X,Y,Z,a,a'), Eq (Hom_B (F X) (F Z)) (compose_B (fmap1 a) (fmap1 a')) (fmap1 (compose_A a a'))`. If the proof is valid, the computational check is skipped.
+    -   **If no proof is provided**: The function falls back to the original behavior of computationally verifying the law by normalizing the two sides of the equation and checking for definitional equality.
+    -   The final elaborated `MkFunctorTerm` now includes the elaborated proof if one was provided.
 
 ### What remains to be implemented to finish the current main Task:
 
-- **Verification:** The user needs to re-run the tests in `tests/functorial_elaboration.ts` to confirm that the test expecting `CoherenceError` now passes correctly, indicating the test reporting issue is resolved.
+- **Testing**: We need to create a new test file or update an existing one to verify the new explicit proof functionality. This should include:
+    1.  A test case where a valid functor is created with a correct, explicit proof (`refl` of a computationally valid law).
+    2.  A test case that asserts elaboration fails if an *incorrect* proof is provided for a valid functor.
+    3.  A test case that asserts elaboration fails if a correct proof is provided for an *invalid* functor definition (where the law doesn't actually hold).
 
 ### Next user prompt suggestion:
 
-"I have re-run the tests, and they are now reporting correctly. Thank you! We can archive this task and move on to the next one."
+"The implementation of the explicit functoriality proof mechanism looks complete. Now, let's create a new test file `tests/functor_proofs.ts` to thoroughly test this new functionality."
 
 ## Remaining Tasks & Next Steps
 

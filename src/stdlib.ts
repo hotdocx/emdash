@@ -353,36 +353,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         ctx
     );
 
-    // // Functorial Elaboration Makers
-    // // TODO only later, after adding an identity/equation in context
-    // defineGlobal("mkFunctor_",
-    //     Pi("A", Icit.Impl, CatTerm(), A =>
-    //     Pi("B", Icit.Impl, CatTerm(), B =>
-    //     Pi("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0_val =>
-    //     Pi("fmap1", Icit.Expl,
-    //         Pi("X", Icit.Impl, ObjTerm(A), X =>
-    //         Pi("Y", Icit.Impl, ObjTerm(A), Y =>
-    //         Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
-    //             HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
-    //         ))), _ =>
-    //         FunctorTypeTerm(A, B)
-    //     )))),
-    //     // Value: λ {A} {B} fmap0 fmap1. MkFunctorTerm(A, B, fmap0, fmap1)
-    //     Lam("A", Icit.Impl, CatTerm(), A =>
-    //     Lam("B", Icit.Impl, CatTerm(), B =>
-    //     Lam("fmap0", Icit.Expl, Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B)), fmap0_val =>
-    //     Lam("fmap1", Icit.Expl,
-    //         Pi("X", Icit.Impl, ObjTerm(A), X =>
-    //         Pi("Y", Icit.Impl, ObjTerm(A), Y =>
-    //         Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
-    //             HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
-    //         ))),
-    //         fmap1_val => MkFunctorTerm(A, B, fmap0_val, fmap1_val)
-    //     )))),
-    //     false, true
-    // );
-
-
     // --- Set Category Primitives ---
     // Set is a category where objects are types and morphisms are functions
     const Set = Var("Set");
@@ -442,6 +412,50 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         rhsNewConstraints: [], // Corresponds to [ tt = tt ]
     });
 
+    // --- Equality Primitives ---
+    const Eq_type = Pi("A", Icit.Impl, Type(), A =>
+        Pi("x", Icit.Expl, A, _ =>
+        Pi("y", Icit.Expl, A, _ => Type()))
+    );
+    defineGlobal("Eq", Eq_type, undefined, true, true);
+    const Eq = Var("Eq");
+
+    const refl_type = Pi("A", Icit.Impl, Type(), A =>
+        Pi("x", Icit.Impl, A, x =>
+            App(App(App(Eq, A, Icit.Impl), x, Icit.Expl), x, Icit.Expl))
+    );
+    defineGlobal("refl", refl_type, undefined, true, true);
+    const refl = Var("refl");
+
+    const Eq_elim_type =
+        Pi("A", Icit.Impl, Type(), A =>
+        Pi("x", Icit.Impl, A, x =>
+        Pi("P", Icit.Expl, Pi("y", Icit.Expl, A, y => Pi("p", Icit.Expl, App(App(App(Eq, A, Icit.Impl), x, Icit.Expl), y, Icit.Expl), _ => Type())), P =>
+        Pi("p_refl", Icit.Expl, App(App(P, x, Icit.Expl), App(App(refl, A, Icit.Impl), x, Icit.Impl), Icit.Expl), _ =>
+        Pi("y", Icit.Impl, A, y =>
+        Pi("p", Icit.Expl, App(App(App(Eq, A, Icit.Impl), x, Icit.Expl), y, Icit.Expl), p_term =>
+            App(App(P, y, Icit.Expl), p_term, Icit.Expl)
+        ))))));
+    defineGlobal("Eq_elim", Eq_elim_type, undefined, true, true);
+
+    addRewriteRule("Eq_elim_refl", ["$A", "$x", "$P", "$p_refl"],
+        App(
+            App(
+                App(
+                    App(
+                        App(App(Var("Eq_elim"), Var("$A"), Icit.Impl), Var("$x"), Icit.Impl),
+                        Var("$P"), Icit.Expl
+                    ),
+                    Var("$p_refl"), Icit.Expl
+                ),
+                Var("$x"), Icit.Impl
+            ),
+            App(App(refl, Var("$A"), Icit.Impl), Var("$x"), Icit.Impl), Icit.Expl
+        ),
+        Var("$p_refl"),
+        ctx
+    );
+
     // Rewrite rules for projecting from a functor created with the kernel primitive
     addRewriteRule(
         "fmap0_of_mkFunctor",
@@ -468,22 +482,70 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         ctx
     );
 
+    // Functorial Elaboration Makers
+    const Functor_A_B = (A: Term, B: Term) => FunctorTypeTerm(A, B);
+    const fmap0_type = (A: Term, B: Term) => Pi("_", Icit.Expl, ObjTerm(A), _ => ObjTerm(B));
+    const fmap1_type = (A: Term, B: Term, fmap0_val: Term) => Pi("X", Icit.Impl, ObjTerm(A), X =>
+        Pi("Y", Icit.Impl, ObjTerm(A), Y =>
+            Pi("a", Icit.Expl, HomTerm(A, X, Y), _ =>
+                HomTerm(B, App(fmap0_val, X, Icit.Expl), App(fmap0_val, Y, Icit.Expl))
+            )
+        )
+    );
 
-    // --- Phase 3: Yoneda Primitives ---
-    
-    // // Hom-functor: Hom_A(W, -)
-    // defineGlobal("hom_cov",
-    //     Pi("A", Icit.Impl, CatTerm(), A_cat_val =>
-    //         Pi("W", Icit.Expl, ObjTerm(A_cat_val), _W_obj_val =>
-    //             FunctorTypeTerm(A_cat_val, SetTerm())
-    //         )
-    //     ),
-    //     Lam("A_cat_impl_arg", Icit.Impl, CatTerm(), A_cat_term =>
-    //         Lam("W_obj_expl_arg", Icit.Expl, ObjTerm(A_cat_term), W_obj_term =>
-    //             HomCovFunctorIdentity(A_cat_term, W_obj_term)
-    //         )
-    //     ),
-    // );
+    const functoriality_proof_type = (A: Term, B: Term, fmap0: Term, fmap1: Term) =>
+        Pi("X", Icit.Impl, ObjTerm(A), X =>
+        Pi("Y", Icit.Impl, ObjTerm(A), Y =>
+        Pi("Z", Icit.Impl, ObjTerm(A), Z =>
+        Pi("g", Icit.Expl, HomTerm(A, Y, Z), g_val =>
+        Pi("f", Icit.Expl, HomTerm(A, X, Y), f_val => {
+            const compose_morph = Var("compose_morph");
+            
+            // LHS: compose_B (fmap1 g) (fmap1 f)
+            const fmap1_g = App(App(App(fmap1, Y, Icit.Impl), Z, Icit.Impl), g_val, Icit.Expl);
+            const fmap1_f = App(App(App(fmap1, X, Icit.Impl), Y, Icit.Impl), f_val, Icit.Expl);
+            const lhs = App(App(App(App(App(App(compose_morph,
+                B, Icit.Impl),
+                App(fmap0, X, Icit.Expl), Icit.Impl),
+                App(fmap0, Y, Icit.Expl), Icit.Impl),
+                App(fmap0, Z, Icit.Expl), Icit.Impl),
+                fmap1_g, Icit.Expl),
+                fmap1_f, Icit.Expl);
+
+            // RHS: fmap1 (compose_A g f)
+            const compose_A_g_f = App(App(App(App(App(App(compose_morph,
+                A, Icit.Impl),
+                X, Icit.Impl),
+                Y, Icit.Impl),
+                Z, Icit.Impl),
+                g_val, Icit.Expl),
+                f_val, Icit.Expl);
+            const rhs = App(App(App(fmap1,
+                X, Icit.Impl),
+                Z, Icit.Impl),
+                compose_A_g_f, Icit.Expl);
+            
+            return App(App(App(Eq, B, Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
+        })))));
+
+    defineGlobal("mkFunctor_",
+        Pi("A", Icit.Impl, CatTerm(), A =>
+        Pi("B", Icit.Impl, CatTerm(), B =>
+        Pi("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
+        Pi("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
+        Pi("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), _ =>
+            Functor_A_B(A, B)
+        ))))),
+        // Value: λ {A} {B} fmap0 fmap1 proof. MkFunctorTerm(A, B, fmap0, fmap1, proof)
+        Lam("A", Icit.Impl, CatTerm(), A =>
+        Lam("B", Icit.Impl, CatTerm(), B =>
+        Lam("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
+        Lam("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
+        Lam("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), fproof_val =>
+            MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
+        ))))),
+        false, true
+    );
 }
 
 /**

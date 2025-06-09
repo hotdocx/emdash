@@ -529,72 +529,96 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
             )
         )
     );
-    // console.log("infer_mkFunctor: printTerm(term.fmap1)>>>", printTerm(term.fmap1));
     const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
-    // console.log("infer_mkFunctor: printTerm(elab_fmap1)>>>", printTerm(elab_fmap1));
+    
+    let final_elab_proof: Term | undefined = undefined;
+
     if (!options.skipCoherenceCheck) {
-    // 4. Construct Functoriality Law
-    const compose_morph_def = globalDefs.get("compose_morph");
-    if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
-    const compose_morph = Var("compose_morph");
-    
-    // Create a fresh context for the law
-    const X_name = freshVarName("X");
-    const Y_name = freshVarName("Y");
-    const Z_name = freshVarName("Z");
-    const a_name = freshVarName("a");
-    const a_prime_name = freshVarName("a_prime");
+        const compose_morph_def = globalDefs.get("compose_morph");
+        if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
+        const compose_morph = Var("compose_morph");
 
-    const X = Var(X_name, true);
-    const Y = Var(Y_name, true);
-    const Z = Var(Z_name, true);
+        // Helper to construct the LHS and RHS of the functoriality law to avoid code duplication.
+        const buildLawComponents = (X: Term, Y: Term, Z: Term, a: Term, a_prime: Term) => {
+            const fmap0X = App(elab_fmap0, X, Icit.Expl);
+            const fmap0Y = App(elab_fmap0, Y, Icit.Expl);
+            const fmap0Z = App(elab_fmap0, Z, Icit.Expl);
+            
+            const fmap1_a = App(App(App(elab_fmap1, Y, Icit.Impl), Z, Icit.Impl), a, Icit.Expl);
+            const fmap1_a_prime = App(App(App(elab_fmap1, X, Icit.Impl), Y, Icit.Impl), a_prime, Icit.Expl);
 
-    let lawCtx = extendCtx(ctx, X_name, ObjTerm(elabA));
-    lawCtx = extendCtx(lawCtx, Y_name, ObjTerm(elabA));
-    lawCtx = extendCtx(lawCtx, Z_name, ObjTerm(elabA));
-    
-    const a_prime = Var(a_prime_name, true); // a' : Hom X Y
-    lawCtx = extendCtx(lawCtx, a_prime_name, HomTerm(elabA, X, Y));
-    
-    const a = Var(a_name, true); // a : Hom Y Z
-    lawCtx = extendCtx(lawCtx, a_name, HomTerm(elabA, Y, Z));
+            const lhs = App(App(App(App(App(App(compose_morph, 
+                elabB, Icit.Impl), fmap0X, Icit.Impl), fmap0Y, Icit.Impl), fmap0Z, Icit.Impl),
+                fmap1_a, Icit.Expl), fmap1_a_prime, Icit.Expl);
 
-    // LHS: compose_B (fmap1 a) (fmap1 a')
-    const fmap1_a = App(App(App(elab_fmap1, Y, Icit.Impl), Z, Icit.Impl), a, Icit.Expl);
-    const fmap1_a_prime = App(App(App(elab_fmap1, X, Icit.Impl), Y, Icit.Impl), a_prime, Icit.Expl);
+            const compose_A_a_a_prime = App(App(App(App(App(App(compose_morph,
+                elabA, Icit.Impl), X, Icit.Impl), Y, Icit.Impl), Z, Icit.Impl),
+                a, Icit.Expl), a_prime, Icit.Expl);
 
-    const lhs = App(App(App(App(App(App(compose_morph, 
-        elabB, Icit.Impl), 
-        App(elab_fmap0, X, Icit.Expl), Icit.Impl),
-        App(elab_fmap0, Y, Icit.Expl), Icit.Impl),
-        App(elab_fmap0, Z, Icit.Expl), Icit.Impl),
-        fmap1_a, Icit.Expl),
-        fmap1_a_prime, Icit.Expl);
+            const rhs = App(App(App(elab_fmap1, X, Icit.Impl), Z, Icit.Impl),
+                compose_A_a_a_prime, Icit.Expl);
+            
+            return { lhs, rhs, fmap0X, fmap0Z };
+        };
 
-    // RHS: fmap1 (compose_A a a')
-    const compose_A_a_a_prime = App(App(App(App(App(App(compose_morph,
-        elabA, Icit.Impl),
-        X, Icit.Impl),
-        Y, Icit.Impl),
-        Z, Icit.Impl),
-        a, Icit.Expl),
-        a_prime, Icit.Expl);
+        if (term.proof) {
+            // 5a. Verify by Provided Proof
+            const Eq_def = globalDefs.get("Eq");
+            if (!Eq_def) throw new Error("Functoriality proof checking requires 'Eq' to be defined in globals.");
+            const Eq_var = Var("Eq");
+            
+            const X_name = "X"; const Y_name = "Y"; const Z_name = "Z";
+            const a_name = "a"; const a_prime_name = "a_prime";
 
-    const rhs = App(App(App(elab_fmap1,
-        X, Icit.Impl),
-        Z, Icit.Impl),
-        compose_A_a_a_prime, Icit.Expl);
+            const expectedProofType =
+                Pi(X_name, Icit.Impl, ObjTerm(elabA), X =>
+                Pi(Y_name, Icit.Impl, ObjTerm(elabA), Y =>
+                Pi(Z_name, Icit.Impl, ObjTerm(elabA), Z =>
+                Pi(a_prime_name, Icit.Impl, HomTerm(elabA, X, Y), a_prime =>
+                Pi(a_name, Icit.Impl, HomTerm(elabA, Y, Z), a => {
+                    const { lhs, rhs, fmap0X, fmap0Z } = buildLawComponents(X, Y, Z, a, a_prime);
+                    const homType = HomTerm(elabB, fmap0X, fmap0Z);
+                    // The type of the equality proposition is Eq {type} (lhs) (rhs)
+                    return App(App(App(Eq_var, homType, Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
+                })))));
+            
+            final_elab_proof = check(ctx, term.proof, expectedProofType, stackDepth + 1, options);
+
+        } else {
+            // 5b. Verify by Computation
+            const X_name = freshVarName("X");
+            const Y_name = freshVarName("Y");
+            const Z_name = freshVarName("Z");
+            const a_name = freshVarName("a");
+            const a_prime_name = freshVarName("a_prime");
+
+            const X = Var(X_name, true);
+            const Y = Var(Y_name, true);
+            const Z = Var(Z_name, true);
+
+            let lawCtx = extendCtx(ctx, X_name, ObjTerm(elabA));
+            lawCtx = extendCtx(lawCtx, Y_name, ObjTerm(elabA));
+            lawCtx = extendCtx(lawCtx, Z_name, ObjTerm(elabA));
+            
+            const a_prime = Var(a_prime_name, true); // a' : Hom X Y
+            lawCtx = extendCtx(lawCtx, a_prime_name, HomTerm(elabA, X, Y));
+            
+            const a = Var(a_name, true); // a : Hom Y Z
+            lawCtx = extendCtx(lawCtx, a_name, HomTerm(elabA, Y, Z));
+
+            const { lhs, rhs } = buildLawComponents(X, Y, Z, a, a_prime);
         
-    // 5. Verify by Computation
-    const normLhs = normalize(lhs, lawCtx);
-    const normRhs = normalize(rhs, lawCtx);
+            const normLhs = normalize(lhs, lawCtx);
+            const normRhs = normalize(rhs, lawCtx);
 
-    if (!options.skipCoherenceCheck && !areEqual(normLhs, normRhs, lawCtx)) {
-        throw new CoherenceError("Functoriality check", lhs, rhs, normLhs, normRhs, lawCtx);
+            if (!areEqual(normLhs, normRhs, lawCtx)) {
+                throw new CoherenceError("Functoriality check", lhs, rhs, normLhs, normRhs, lawCtx);
+            }
+        }
     }
-    }
+    
     // 6. Return Result
-    const finalTerm = MkFunctorTerm(elabA, elabB, elab_fmap0, elab_fmap1);
+    const finalTerm = MkFunctorTerm(elabA, elabB, elab_fmap0, elab_fmap1, final_elab_proof);
     return {
         elaboratedTerm: finalTerm,
         type: FunctorTypeTerm(elabA, elabB)

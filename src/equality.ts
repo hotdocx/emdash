@@ -178,10 +178,15 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
         case 'SetTerm': return true;
         case 'MkFunctorTerm': {
             const mft2 = rt2 as Term & {tag:'MkFunctorTerm'};
+            const proofsMatch = (p1?: Term, p2?: Term): boolean => {
+                if (p1 && p2) return areEqual(p1, p2, ctx, depth + 1);
+                return p1 === p2; // Both must be undefined or they are not equal
+            };
             return areEqual(rt1.domainCat, mft2.domainCat, ctx, depth + 1) &&
                    areEqual(rt1.codomainCat, mft2.codomainCat, ctx, depth + 1) &&
                    areEqual(rt1.fmap0, mft2.fmap0, ctx, depth + 1) &&
-                   areEqual(rt1.fmap1, mft2.fmap1, ctx, depth + 1);
+                   areEqual(rt1.fmap1, mft2.fmap1, ctx, depth + 1) &&
+                   proofsMatch(rt1.proof, mft2.proof);
         }
         default: const exhaustiveCheck: never = rt1; return false;
     }

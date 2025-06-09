@@ -311,7 +311,16 @@ export function matchPattern(
             s = matchPattern(mftP.domainCat, mftT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
             s = matchPattern(mftP.codomainCat, mftT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
             s = matchPattern(mftP.fmap0, mftT.fmap0, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
-            return matchPattern(mftP.fmap1, mftT.fmap1, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+            s = matchPattern(mftP.fmap1, mftT.fmap1, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            
+            if (mftP.proof) {
+                if (!mftT.proof) return null; // Mismatch if one has a proof and the other doesn't
+                s = matchPattern(mftP.proof, mftT.proof, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+                if (!s) return null;
+            } else if (mftT.proof) {
+                return null; // Mismatch
+            }
+            return s;
         }
         default:
              const exhaustiveCheck: never = rtPattern;
@@ -445,7 +454,8 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.codomainCat, subst, patternVarDecls),
                 applySubst(current.fmap0, subst, patternVarDecls),
-                applySubst(current.fmap1, subst, patternVarDecls)
+                applySubst(current.fmap1, subst, patternVarDecls),
+                current.proof ? applySubst(current.proof, subst, patternVarDecls) : undefined
             );
         default:
             const exhaustiveCheck: never = current;
@@ -535,6 +545,7 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.fmap0, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.fmap1, patternVarDecls, collectedVars, visited);
+            if (current.proof) collectPatternVars(current.proof, patternVarDecls, collectedVars, visited);
             break;
         // Terminals like Type, Var (non-pattern), Hole (non-pattern), CatTerm, SetTerm have no subterms or are handled.
     }
@@ -665,7 +676,8 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                 replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
                 replaceFreeVar(current.codomainCat, freeVarName, replacementVar, boundInScope),
                 replaceFreeVar(current.fmap0, freeVarName, replacementVar, boundInScope),
-                replaceFreeVar(current.fmap1, freeVarName, replacementVar, boundInScope)
+                replaceFreeVar(current.fmap1, freeVarName, replacementVar, boundInScope),
+                current.proof ? replaceFreeVar(current.proof, freeVarName, replacementVar, boundInScope) : undefined
             );
         default:
             const exhaustiveCheck: never = current;
@@ -802,6 +814,7 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
                 find(termRef.codomainCat, currentLocallyBound);
                 find(termRef.fmap0, currentLocallyBound);
                 find(termRef.fmap1, currentLocallyBound);
+                if (termRef.proof) find(termRef.proof, currentLocallyBound);
                 break;
             default:
                 const _exhaustiveCheck: never = termRef;

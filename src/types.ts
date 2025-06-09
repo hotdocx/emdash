@@ -65,7 +65,8 @@ export type BaseTerm =
         domainCat: Term, 
         codomainCat: Term, 
         fmap0: Term, 
-        fmap1: Term 
+        fmap1: Term,
+        proof?: Term
       }
     ;
 
@@ -131,8 +132,8 @@ export const HomCovFunctorIdentity = (domainCat: Term, objW_InDomainCat: Term): 
 
 export const SetTerm = (): Term & { tag: 'SetTerm' } => ({ tag: 'SetTerm' });
 
-export const MkFunctorTerm = (domainCat: Term, codomainCat: Term, fmap0: Term, fmap1: Term): Term & { tag: 'MkFunctorTerm' } =>
-    ({ tag: 'MkFunctorTerm', domainCat, codomainCat, fmap0, fmap1 });
+export const MkFunctorTerm = (domainCat: Term, codomainCat: Term, fmap0: Term, fmap1: Term, proof?: Term): Term & { tag: 'MkFunctorTerm' } =>
+    ({ tag: 'MkFunctorTerm', domainCat, codomainCat, fmap0, fmap1, proof });
 
 
 // Context and Global Definitions
