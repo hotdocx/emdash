@@ -28,6 +28,9 @@ export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to pre
  */
 export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
+    if (stackDepth > 30) {
+        console.log("whnf: stackDepth > 30", {stackDepth, term: printTerm(term)});
+    }
     let current = term;
     for (let i = 0; i < MAX_WHNF_ITERATIONS; i++) {
         let changedInThisPass = false;

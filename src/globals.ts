@@ -58,9 +58,13 @@ export function defineGlobal(
 
     let elaboratedType: Term;
     let elaboratedValue: Term | undefined = undefined;
-
+    if (value !== undefined) {
+        let myterm = value as Term;
+        console.log("defineGlobal: value", printTerm(myterm));
+    }
     try {
         elaboratedType = check(elabCtx, type, Type());
+        console.log("defineGlobal: elaboratedType", printTerm(elaboratedType));
         elaboratedType = shouldElaborateTypeBecauseInnerImplicits ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
 
         if (value !== undefined) {

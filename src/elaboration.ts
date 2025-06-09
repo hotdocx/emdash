@@ -413,7 +413,9 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
-
+    if (stackDepth > 30) {
+        console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
+    }
     const originalTerm = term;
     const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
     let currentTerm = getTermRef(termWithKernelImplicits);
@@ -532,7 +534,8 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
     const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
     
     let final_elab_proof: Term | undefined = undefined;
-
+    console.log("elab_fmap0", printTerm(elab_fmap0));
+    console.log("elab_fmap1", printTerm(elab_fmap1));
     if (!options.skipCoherenceCheck) {
         const compose_morph_def = globalDefs.get("compose_morph");
         if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");

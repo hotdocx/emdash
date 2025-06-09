@@ -13,7 +13,8 @@ import {
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
-    resetVarId, resetHoleId, getTermRef, setDebugVerbose, consoleLog, resetFlags
+    resetVarId, resetHoleId, getTermRef, setDebugVerbose, consoleLog, resetFlags,
+    printTerm
 } from './state';
 import { defineGlobal, addRewriteRule, addUnificationRule } from './globals';
 
@@ -436,7 +437,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         Pi("p", Icit.Expl, App(App(App(Eq, A, Icit.Impl), x, Icit.Expl), y, Icit.Expl), p_term =>
             App(App(P, y, Icit.Expl), p_term, Icit.Expl)
         ))))));
-    defineGlobal("Eq_elim", Eq_elim_type, undefined, true, true);
+    defineGlobal("Eq_elim", Eq_elim_type);
 
     addRewriteRule("Eq_elim_refl", ["$A", "$x", "$P", "$p_refl"],
         App(
@@ -525,9 +526,10 @@ export function setupCatTheoryPrimitives(ctx: Context) {
                 Z, Icit.Impl),
                 compose_A_g_f, Icit.Expl);
             
-            return App(App(App(Eq, B, Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
+            return App(App(App(Eq, HomTerm(B, App(fmap0, X, Icit.Expl), App(fmap0, Z, Icit.Expl)), Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
         })))));
 
+    console.log("before mkFunctor_ fmap0_type", printTerm(fmap0_type(Var("$A"), Var("$B"))));
     defineGlobal("mkFunctor_",
         Pi("A", Icit.Impl, CatTerm(), A =>
         Pi("B", Icit.Impl, CatTerm(), B =>
@@ -542,7 +544,11 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         Lam("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
         Lam("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
         Lam("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), fproof_val =>
-            MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
+            {console.log("fmap0_val", printTerm(fmap0_val));
+            console.log("fmap1_val", printTerm(fmap1_val));
+            console.log("fproof_val", printTerm(fproof_val));
+            return MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
+            }
         ))))),
         false, true
     );
