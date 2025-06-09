@@ -577,10 +577,9 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
             return (current.name === freeVarName && !boundInScope.has(freeVarName)) ? replacementVar : current;
         case 'Lam': {
             const newBoundInScope = new Set(boundInScope);
-            if (!current._isAnnotated || current.paramName !== freeVarName) { // if annotated, paramType can have freeVarName
-                 newBoundInScope.add(current.paramName);
-            }
-            const newParamType = current.paramType ? replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope) : undefined; // freeVarName can be in type, use original boundInScope
+            newBoundInScope.add(current.paramName); // ALWAYS add the parameter name to the new scope
+
+            const newParamType = current.paramType ? replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope) : undefined; 
             
             const newBodyFn = (v_arg: Term): Term => {
                 return replaceFreeVar(current.body(v_arg), freeVarName, replacementVar, newBoundInScope);
@@ -591,10 +590,9 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
         }
         case 'Pi': {
             const newBoundInScope = new Set(boundInScope);
-            if (current.paramName !== freeVarName) {
-                newBoundInScope.add(current.paramName);
-            }
-            const newParamType = replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope); // freeVarName can be in type, use original boundInScope
+            newBoundInScope.add(current.paramName); // ALWAYS add the parameter name to the new scope
+
+            const newParamType = replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope);
 
             const newBodyTypeFn = (v_arg: Term) => {
                 return replaceFreeVar(current.bodyType(v_arg), freeVarName, replacementVar, newBoundInScope);
