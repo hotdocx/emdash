@@ -515,6 +515,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
  * @throws CoherenceError if the functoriality law does not hold.
  */
 function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stackDepth: number, options: ElaborationOptions = {}): InferResult {
+    console.log("infer_mkFunctor: stackDepth", {stackDepth}, {term: printTerm(term)});
     // 1. Elaborate Categories
     const elabA = check(ctx, term.domainCat, CatTerm(), stackDepth + 1, options);
     const elabB = check(ctx, term.codomainCat, CatTerm(), stackDepth + 1, options);
