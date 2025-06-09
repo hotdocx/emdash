@@ -10,6 +10,7 @@ import './dependent_types_tests';
 import './error_reporting_tests';
 import './rewrite_rules_tests';
 import './inductive_types';
+import './equality_inductive_type_family';
 import './elaboration_options_tests';
 import './higher_order_unification_tests';
 import './higher_order_pattern_matching_tests';

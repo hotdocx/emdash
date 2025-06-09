@@ -23,19 +23,21 @@ import { infer, check } from './elaboration';
 /**
  * Defines a new global symbol.
  * @param name The name of the global symbol.
- * @param type The type of the global symbol.
+ * @param type The type of the global symbol. It is akways checked to be of type Type()
  * @param value Optional definition/value for the symbol.
  * @param isConstantSymbol True if the symbol is a primitive constant (affects rewriting and unfolding).
  * @param isInjective True if the symbol is an injective constructor (for unification).
- * @param shouldElaborateTypeBecauseInnerImplicits True if the provided type itself needs to be elaborated and checked against Type.
+ * @param shouldElaborateTypeBecauseInnerImplicits True means it is the automatic-carefully deeply elaborated result of `type : Type()` which should be stored
  */
 export function defineGlobal(
     name: string,
-    type: Term,
+    type: Term,  // `type` is always checked to be of type Type()
     value?: Term,
     isConstantSymbol: boolean = false,
     isInjective?: boolean,
-    shouldElaborateTypeBecauseInnerImplicits: boolean = false // If true, `type` is elaborated; otherwise, it's taken as already valid.
+    // True means that besides checking that `type : Type()`, 
+    // it is the automatic-carefully deeply elaborated result of `type : Type()` which should be stored
+    shouldElaborateTypeBecauseInnerImplicits: boolean = false
 ) {
     if (globalDefs.has(name)) console.warn(`Warning: Redefining global ${name}`);
     if (isConstantSymbol && value !== undefined) {
@@ -75,8 +77,8 @@ export function defineGlobal(
         console.log('defineGlobal> ', { name: name + (isConstantSymbol ? ' (constant symbol)' : '')
             + (isInjective ? ' (injective)' : ''),
             type: printTerm(elaboratedType), value: elaboratedValue ? printTerm(elaboratedValue) : 'undefined' });
-
-        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective });
+        // note: a constant symbol is also automatically an injective constructor
+        globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective: isConstantSymbol || isInjective });
 
     } catch (e) {
         const error = e as Error;

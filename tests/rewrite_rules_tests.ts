@@ -31,7 +31,7 @@ describe("Rewrite Rule Tests", () => {
         const Nat = Var("Nat");
         defineGlobal("z", Nat, undefined, true, true);
         defineGlobal("s", Pi("n", Icit.Expl, Nat, _ => Nat), undefined, true, true);
-        defineGlobal("add", Pi("n", Icit.Expl, Nat, _ => Pi("m", Icit.Expl, Nat, _ => Nat)), undefined, true, true);
+        defineGlobal("add", Pi("n", Icit.Expl, Nat, _ => Pi("m", Icit.Expl, Nat, _ => Nat)));
     });
 
     it("Test 1: Simple rewrite rule add(z, n) -> n", () => {
