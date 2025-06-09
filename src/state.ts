@@ -132,12 +132,18 @@ export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
  */
 export function isKernelConstantSymbolStructurally(term: Term): boolean {
     const rt = getTermRef(term);
+
+    if (rt.tag === 'App') {
+        return isKernelConstantSymbolStructurally(rt.func);
+    }
+
     if (rt.tag === 'Var') {
         const gdef = globalDefs.get(rt.name);
         return !!(gdef && gdef.isConstantSymbol); // True if it's a Var defined as a constant
     }
 
     switch (rt.tag) {
+        case 'Type':
         case 'CatTerm':
         case 'FunctorCategoryTerm':
         case 'NatTransTypeTerm':
@@ -152,8 +158,6 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'ObjTerm':
         case 'HomTerm':
             return false;
-        case 'Type':
-            return true;
         default:
             return false;
     }

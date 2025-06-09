@@ -129,14 +129,13 @@ export function addRewriteRule(
         const elabOptions = { skipCoherenceCheck: true, disableMaximallyInsertedImplicits: true };
 
         // Infer the types within the LHS and solve for pattern variable types
-        // [TODO] no need for second call to `infer` later below, use the returned result from this first call.
-        infer(lhsElabCtx, lhsToElaborate, 0, elabOptions); // This will generate constraints
+        const { elaboratedTerm: elabLhsForType, type: typeOfLhs } = infer(lhsElabCtx, lhsToElaborate, 0, elabOptions); // This will generate constraints
 
         if (!solveConstraints(lhsElabCtx)) {
             const remaining = constraints.map(c => `${printTerm(getTermRef(c.t1))} vs ${printTerm(getTermRef(c.t2))} (orig: ${c.origin})`).join('; ');
             throw new Error(`Rule '${ruleName}' LHS pattern (${printTerm(rawLhsTerm)}) is ill-typed or inconsistent. Unsolved constraints: ${remaining}`);
         }
-        elaboratedLhs = getTermRef(lhsToElaborate); // Store the elaborated LHS
+        elaboratedLhs = getTermRef(elabLhsForType); // Store the elaborated LHS
 
         // Retrieve the solved types for pattern variables from the elaboration context
         for (const pVarName of userPatternVars) {
@@ -162,12 +161,7 @@ export function addRewriteRule(
         constraints.length = 0; // Fresh constraints for RHS
         // Infer the type of the elaborated LHS in the *global* context (or rule's definition context)
         // to determine the target type for the RHS.
-        // [TODO] no need for second call to `infer`, use the returned result from the first call.
-        const typeOfGlobalLhsResult = infer(lhsElabCtx, elaboratedLhs, 0, elabOptions); // Use lhsElabCtx, not original ctx
-         if (!solveConstraints(ctx)) { // Solve constraints that arose from inferring type of elaboratedLhs
-            throw new Error(`Rule '${ruleName}': Could not establish a consistent global type for the elaborated LHS ${printTerm(elaboratedLhs)}.`);
-        }
-        const targetRhsType = whnf(getTermRef(typeOfGlobalLhsResult.type), ctx); // Target type for RHS
+        const targetRhsType = whnf(getTermRef(typeOfLhs), ctx); // Target type for RHS
 
         constraints.length = 0; // Fresh constraints for checking RHS against target type
         // Check the RHS against this target type
