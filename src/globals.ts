@@ -13,12 +13,13 @@ import {
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
     freshHoleName,
-    getTermRef, extendCtx, consoleLog, printTerm, lookupCtx
+    getTermRef, extendCtx, consoleLog, printTerm, lookupCtx, isKernelConstantSymbolStructurally
 } from './state';
 import { whnf } from './reduction';
 import { solveConstraints } from './unification';
 import { areEqual } from './equality';
 import { infer, check } from './elaboration';
+import { getHeadAndSpine } from './pattern';
 
 /**
  * Defines a new global symbol.
@@ -117,6 +118,12 @@ export function addRewriteRule(
     const solvedPatVarTypes = new Map<PatternVarDecl, Term>(); // To store types of pattern variables
 
     try {
+        // --- Reject rule if LHS head is a constant symbol ---
+        const { head: lhsHead } = getHeadAndSpine(rawLhsTerm);
+        if (isKernelConstantSymbolStructurally(lhsHead)) {
+            throw new Error(`Rewrite rule '${ruleName}' cannot have a kernel constant symbol (${printTerm(lhsHead)}) as its head on the Left Hand Side.`);
+        }
+
         // --- Elaborate LHS ---
         const lhsToElaborate = rawLhsTerm;
         let lhsElabCtx: Context = [...ctx]; // Start with the provided context
