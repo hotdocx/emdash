@@ -544,12 +544,7 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         Lam("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
         Lam("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
         Lam("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), fproof_val =>
-            {
-            // console.log("fmap0_val", printTerm(fmap0_val));
-            // console.log("fmap1_val", printTerm(fmap1_val));
-            // console.log("fproof_val", printTerm(fproof_val));
-            return MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
-            }
+            MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
         ))))),
         false, true
     );

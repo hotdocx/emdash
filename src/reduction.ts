@@ -28,8 +28,8 @@ export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to pre
  */
 export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
-    if (stackDepth > 3) {
-        console.log("whnf: stackDepth > 3", {stackDepth, term: printTerm(term)});
+    if (stackDepth > 30) {
+        console.log("whnf: stackDepth > 30", {stackDepth, term: printTerm(term)});
     }
     let current = term;
     for (let i = 0; i < MAX_WHNF_ITERATIONS; i++) {
@@ -60,7 +60,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             for (const rule of userRewriteRules) {
                 const subst = matchPattern(rule.elaboratedLhs, termBeforeInnerReductions, ctx, rule.patternVars, undefined, stackDepth + 1);
                 if (subst) {
-                    if (stackDepth > 3) {
+                    if (stackDepth > 30) {
                         console.log("whnf matchPattern subst: stackDepth", {stackDepth}, {pattern: printTerm(rule.elaboratedLhs), termToMatch: printTerm(termBeforeInnerReductions)});
                     }
                     const rhsApplied = getTermRef(applySubst(rule.elaboratedRhs, subst, rule.patternVars));

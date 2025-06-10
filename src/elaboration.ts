@@ -422,8 +422,8 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
-    if (stackDepth > 3) {
-        console.log("check: stackDepth > 3", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
+    if (stackDepth > 30) {
+        console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
     }
     const originalTerm = term;
     const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
@@ -440,16 +440,23 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             const lamParamName = expectedTypeWhnf.paramName;
             const lamParamType = getTermRef(expectedTypeWhnf.paramType);
 
+            // Create a placeholder for the implicitly bound variable
+            const placeholderVar = Var(lamParamName, true);
+            const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl); // No definition
+            
+            // Determine the expected type for the body, instantiated with the placeholder
+            const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(placeholderVar), bodyCheckCtx);
+
+            // Check the original term ONCE against the expected body type to get the elaborated body structure
+            const elaboratedBody = check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1, options);
+            
+            // Construct the new lambda with a simple substitution body
             const newLam = Lam(
                 lamParamName,
                 Icit.Impl,
                 lamParamType,
-                (v_actual_arg: Term) => { // v_actual_arg is the placeholder for the implicitly bound variable
-                    const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl, v_actual_arg);
-                    const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(v_actual_arg), bodyCheckCtx);
-                    // The original term `termRef` is applied to the new implicit argument and then checked.
-                    const termToPassToInnerCheck = App(termRef, v_actual_arg, Icit.Impl);
-                    return check(bodyCheckCtx, termToPassToInnerCheck, bodyExpectedTypeInner, stackDepth + 1, options);
+                (v_actual_arg: Term): Term => {
+                    return replaceFreeVar(elaboratedBody, placeholderVar.name, v_actual_arg);
                 }
             );
             return newLam; // Return the new lambda

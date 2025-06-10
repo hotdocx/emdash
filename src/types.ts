@@ -66,7 +66,7 @@ export type BaseTerm =
         codomainCat: Term, 
         fmap0: Term, 
         fmap1: Term,
-        proof?: Term
+        proof?: Term // [TODO] definitional proof-irrelevance: discard this field for all elaborations, after type checking the provided proof
       }
     ;
 
