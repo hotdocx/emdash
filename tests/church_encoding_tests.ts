@@ -327,21 +327,6 @@ describe("Church Encoding Tests", () => {
         defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
         elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
     
-        // const eqTest_val_term = Var("eqTest_val");
-        // const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-        // const gdef = globalDefs.get("eqTest_val");
-        // console.log(`[DEBUG TEST 18.1] gdef type: ${printTerm(gdef.type)}`);
-        // console.log(`[DEBUG TEST 18.1] gdef value: ${printTerm(gdef.value)}`);
-        // console.log(`[DEBUG TEST 18.1] eqTest_val_term: ${printTerm(normalize(Var("eqTest_val"), baseCtx))}`);
-        // console.log(`[DEBUG TEST 18.1] elabRes.type: ${printTerm(elabRes.type)}`);
-        // console.log(`[DEBUG TEST 18.1] eqTest_val_type_expected: ${printTerm(eqTest_val_type_expected)}`);
-        // const n1_debug_18_1 = whnf(elabRes.type, baseCtx);
-        // const n2_debug_18_1 = whnf(eqTest_val_type_expected, baseCtx);
-        // console.log(`[DEBUG TEST 18.1] whnf(elabRes.type): ${printTerm(n1_debug_18_1)}`);
-        // console.log(`[DEBUG TEST 18.1] whnf(eqTest_val_type_expected): ${printTerm(n2_debug_18_1)}`);
-        // const isEqualDebug_18_1 = areEqual(elabRes.type, eqTest_val_type_expected, baseCtx);
-        // console.log(`[DEBUG TEST 18.1] areEqual result: ${isEqualDebug_18_1}`);
-    
         assert(areEqual(elabRes.type, eqTest_val_type_original, baseCtx), "Church Test 18.1: eqTest_val type check");
     
         // U

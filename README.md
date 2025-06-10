@@ -1,86 +1,83 @@
-# emdash - A Dependently Typed Language Core with a Categorical Focus
+# Emdash — A Dependently Typed Logical Framework for Computational Category Theory
 
 ## Overview
+`emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
 
-`emdash` is a TypeScript project implementing the core of a dependently typed language. It is designed with a strong emphasis on integrating concepts from category theory as first-class citizens. The system provides a robust type theory kernel featuring:
+## Core Features Implemented in Detail
 
-*   **Dependent Types:** Full support for Pi-types (dependent functions), Lambda abstractions, and a `Type` universe.
-*   **Elaboration Engine:** A sophisticated bidirectional type checking and inference system (`check` and `infer`) that drives the entire process. It handles:
-    *   Creation and solving of unification constraints.
-    *   Automatic insertion of implicit arguments.
-    *   Specialized handling for "kernel-defined" implicit arguments for category theory constructors.
-*   **Unification:** A constraint-based unification algorithm capable of solving higher-order problems (via Miller's pattern unification) and using meta-variables (holes).
-*   **Reduction and Equality:**
-    *   Term evaluation to Weak Head Normal Form (WHNF) and full normalization.
-    *   Term convertibility (equality) checking, supporting α, β, and η-equivalence.
-*   **Extensibility:**
-    *   A global context for defining constants and functions.
-    *   User-defined rewrite rules for equational reasoning.
-    *   User-defined unification rules to provide hints to the solver.
-*   **First-Class Category Theory:**
-    *   Core notions: `Cat` (the type of categories), `Obj C`, `Hom C X Y`.
-    *   Functors and Functor Categories: `Functor C D`, `Functor_cat C D`.
-    *   Natural Transformations: `Transf F G`, `tapp α X`.
-    *   Built-in `Set` category and the covariant Hom-functor.
+### 1. Dependent Types and Type Theory Kernel
+-   **Dependent Functions (Pi-types)** and **Lambda Abstractions**: The core language supports full dependent function types (`Pi`) and lambda abstractions (`Lam`), allowing for types to depend on values.
+-   **Type Universe (`Type`)**: `emdash` adheres to the "types-are-terms" principle, meaning types themselves are represented as terms within the system, with `Type` being the type of all types (up to a single universe level for simplicity).
+-   **Elaboration Engine (`elaboration.ts`)**:
+    -   **Bidirectional Type Checking**: The `check(term, expectedType)` and `infer(term)` functions are the pillars of the elaboration process, guiding type validation and inference. `check` verifies if a term conforms to a given type, while `infer` deduces a term's type.
+    -   **Unification Constraints**: During the elaboration traversal, the system automatically generates unification constraints (e.g., `?h1 === NatType`) whenever two terms must be equal. These constraints are collected and solved later.
+    -   **Implicit Arguments**: The elaborator automatically inserts implicit arguments (e.g., for `f : Π {A:Type}. A -> A`, `f 42` becomes `f {Nat} 42`) based on the `Icit.Impl` (implicit) flag in Pi-types. This significantly reduces verbosity.
+    -   **Kernel-defined Implicit Arguments (`constants.ts`)**: Special category theory constructors (like `FMap0Term`, `FMap1Term`, `NatTransComponentTerm`) have "kernel implicits" (e.g., source/target categories) that `ensureKernelImplicitsPresent` automatically fills with fresh holes if omitted, further streamlining term construction.
+-   **Unification (`unification.ts`)**:
+    -   **Constraint-based Algorithm**: The `solveConstraints()` function iteratively attempts to solve pending constraints using the `unify()` function.
+    -   **Higher-Order Pattern Unification**: `unify()` is capable of solving higher-order problems (flex-rigid problems like `?M x y === f x`) using Miller's pattern unification (`solveHoFlexRigid`), finding appropriate lambda abstractions for meta-variables (holes).
+    -   **Meta-variables (Holes)**: Unassigned holes (`Hole` terms) act as meta-variables, representing unknown parts of a term or type that can be solved by unification. They are crucial for incremental elaboration and type inference.
+    -   **Occurs Check**: Prevents infinite types during unification by ensuring a hole is not unified with a term containing itself.
+    -   **User-defined Unification Rules**: The `addUnificationRule` function (via `globals.ts`) allows users to provide hints to the solver for specific equality patterns, guiding the unification process beyond built-in decomposition rules.
+-   **Reduction and Equality (`reduction.ts`, `equality.ts`)**:
+    -   **Weak Head Normal Form (WHNF)**: The `whnf()` function performs β-reduction, unfolds global definitions (unless marked as opaque constants), and applies user-defined rewrite rules at the head of the term.
+    -   **Full Normalization**: The `normalize()` function recursively applies `whnf()` to all subterms, yielding a fully reduced form.
+    -   **β-reduction, η-contraction**: Supported for functions. Eta-contraction (`λx. F x ~> F`) can be enabled via a global flag.
+    -   **Term Convertibility (`areEqual`)**: The `areEqual()` function determines if two terms are convertible by reducing both to WHNF and then structurally comparing their forms, respecting α-equivalence for binders.
+-   **Pattern Matching (`pattern.ts`)**:
+    -   **Higher-Order Patterns**: The `matchPattern()` function is the core of rewrite rule application. It supports **higher-order patterns**, where pattern variables (e.g., `$F`) can stand for functions, enabling flexible matching.
+    -   **Scope Annotations**: Pattern variables can carry scope annotations (`$F.[x]`), specifying which locally bound variables from the pattern's context they are allowed to capture, ensuring correct matching under binders (e.g., `λx. $F x` matches `λx. K x` to `$F = K`).
+    -   **Capture-Avoiding Substitution**: The `applySubst` and `replaceFreeVar` functions ensure that substitutions are performed correctly without unintended variable capture.
 
-The design is heavily inspired by systems like Agda and Lambdapi, aiming to provide a powerful and flexible foundation for computational type theory and functorial programming.
+### 2. First-Class Category Theory Integration (Functorial Elaboration Emphasis)
+-   **Core Notions**: The system natively supports fundamental category theory concepts:
+    -   `CatTerm`: The type of categories.
+    -   `ObjTerm C`: The type of objects in a category `C`.
+    -   `HomTerm C X Y`: The type of morphisms from object `X` to object `Y` in category `C`.
+-   **Functors**:
+    -   `FunctorTypeTerm C D`: Represents the type of functors from category `C` to category `D`.
+    -   `MkFunctorTerm`: This is a **kernel primitive for functor construction**. Unlike a simple lambda abstraction, `MkFunctorTerm` explicitly bundles a functor's data (`domainCat`, `codomainCat`, `fmap0`, `fmap1`) and optionally a `proof` of its functoriality laws (identity and composition preservation). Its elaboration, handled by `infer_mkFunctor` in `elaboration.ts`, rigorously checks the functoriality proof (if provided) or attempts to *compute* the equality by normalizing both sides of the functoriality law if no proof is explicitly given. This ensures that only mathematically sound functors can be constructed.
+    -   `FMap0Term` (`fmap0 F X`): Represents the application of a functor `F` to an object `X`. It returns an object in the codomain category.
+    -   `FMap1Term` (`fmap1 F a`): Represents the application of a functor `F` to a morphism `a`. It returns a morphism in the codomain category.
+-   **Natural Transformations**:
+    -   `NatTransTypeTerm F G`: Represents the type of a natural transformation between two functors `F` and `G` (which must have the same domain and codomain categories).
+    -   `NatTransComponentTerm (`tapp alpha X`): Represents the component of a natural transformation `alpha` at object `X`, which is a morphism in the codomain category.
+-   **Built-in Categories and Functors**:
+    -   `SetTerm`: The initial standard library defines `Set` as a built-in category, representing the category of sets and functions. Its `Hom` type (i.e., `Hom Set X Y`) is reduced to a `Pi` type (`Π (_:X). Y`), aligning with the set-theoretic interpretation of functions.
+    -   `HomCovFunctorIdentity`: Represents the covariant Hom-functor `Hom_A(W, -)`. Its application (`fmap0 (HomCovFunctor A W) Y`) reduces to `Hom A W Y`, showcasing how functorial concepts are integrated into the core reduction rules.
+-   **Standard Library (`stdlib.ts`)**: This module is crucial for setting up the initial categorical environment. It defines core category theory primitives like `identity_morph` (identity morphism) and `compose_morph` (composition of morphisms). More importantly for functorial elaboration, it also sets up key rewrite rules, including the **naturality law** for natural transformations and the **functoriality of composition** for functors. These rules are integral to proving properties in the system and are automatically applied during reduction.
 
-## Core Concepts and Workflow
+### 3. Extensibility and System Management
+-   **Global Context (`state.ts`, `globals.ts`)**: `defineGlobal` provides the mechanism to introduce new constants, functions, and types into the global environment, making them available throughout the system.
+-   **User-defined Rewrite Rules (`globals.ts`)**: The `addRewriteRule` function allows users to extend the system's equational reasoning capabilities by defining custom rewrite rules. A crucial constraint is that the Left Hand Side (LHS) of a rewrite rule cannot have a kernel constant symbol as its head, ensuring that core system behavior remains predictable.
+-   **User-defined Unification Rules (`globals.ts`)**: `addUnificationRule` enables users to provide specific hints to the unification solver, which can be invaluable for complex unification problems (e.g., encoding associativity of composition as a unification hint).
+-   **System Initialization (`stdlib.ts`)**: The `resetMyLambdaPi_Emdash` function provides a clean slate, fully resetting the global state and re-initializing the standard library, including all built-in category theory definitions and rules.
+-   **Proof Mode Support (`proof.ts` - preliminary)**: This module lays the groundwork for an interactive proof assistant. It includes utilities such as `findHoles` (to locate unsolved subgoals), `getHoleGoal` (to inspect a specific subgoal's context and type), and core tactics like `refine`, `intro` (for introducing lambda/Pi binders), `exact` (for direct solutions), and `apply` (for applying functions to goals). This indicates a path towards a more interactive and user-guided theorem proving experience.
 
-The system revolves around a central elaboration process that validates and transforms raw terms into fully typed and consistent expressions.
+## Project Structure (src/)
+-   `types.ts`: Defines all core data structures, including `Term` (the abstract syntax tree for all expressions), `Context`, `Icit` (implicitness), `Binding`, and various term constructors (e.g., `App`, `Lam`, `Pi`, `Hole`). It also defines interfaces for global definitions, rewrite rules, and unification rules.
+-   `state.ts`: Manages the global state of the `emdash` system, including `globalDefs`, `userRewriteRules`, `userUnificationRules`, `constraints`, and global flags. It also provides utilities for fresh name generation (`freshVarName`, `freshHoleName`), context manipulation (`extendCtx`, `lookupCtx`), term reference resolution (`getTermRef`), and pretty-printing (`printTerm`). It includes logic for identifying kernel constant symbols and injective constructors.
+-   `constants.ts`: Defines shared constants like `MAX_STACK_DEPTH` and specifies metadata for "kernel-defined" implicit arguments (e.g., categories for functors) that the elaborator uses to ensure their presence.
+-   `elaboration.ts`: The central module implementing the core type checking (`check`) and inference (`infer`) algorithms. It orchestrates the entire elaboration process, including implicit argument insertion and the initial setup of constraints. It also contains specific logic for `infer_mkFunctor` which embodies the "functorial elaboration" process.
+-   `unification.ts`: Implements the constraint solving mechanism (`solveConstraints`) and the core unification algorithm (`unify`). It handles higher-order unification (`solveHoFlexRigid`), occurs checks, and the application of user-defined unification rules.
+-   `reduction.ts`: Contains the term evaluation logic, including `whnf` (Weak Head Normal Form) and `normalize` (full normalization), β-reduction, η-contraction, unfolding of global definitions, and application of rewrite rules. This module is critical for establishing convertibility.
+-   `equality.ts`: Implements the `areEqual` function for checking term convertibility (equality) by reducing terms to WHNF and performing structural comparison. It also contains a helper for comparing lists of arguments.
+-   `pattern.ts`: Provides functions for higher-order pattern matching (`matchPattern`), applying substitutions (`applySubst`), collecting free variables (`getFreeVariables`), and transforming terms by abstracting over variables (`abstractTermOverSpine`). This module is foundational for rewrite rules and higher-order unification.
+-   `globals.ts`: Offers the user-facing API for extending the system's global environment, including `defineGlobal`, `addRewriteRule`, and `addUnificationRule`.
+-   `stdlib.ts`: Defines the standard library, providing the initial set of types, terms, and rules for fundamental category theory concepts and basic logical constructs. It's where the system's "axioms" and initial definitions are set up.
+-   `structural.ts`: Provides utility functions for checking raw structural equality between terms without performing any reduction or unification. This is used for quick, shallow comparisons.
+-   `proof.ts`: (Partial) Contains the infrastructure for an interactive proof mode, allowing users to inspect the proof state (holes) and refine them using various tactics. This module directly interacts with the `elaboration.ts` and `state.ts` to manage subgoals.
 
-1.  **Terms and Types (`types.ts`)**: The foundation is the `Term` data type, representing every expression, including types. The system is built on a "types-are-terms" principle.
-
-2.  **Global State (`state.ts`)**: All global state, including definitions (`globalDefs`), rules, and constraints, is managed centrally. This module also provides utilities for context manipulation, fresh name generation, and term printing.
-
-3.  **Elaboration (`elaboration.ts`)**: This is the system's entry point. When a term is processed by `elaborate()`:
-    *   It is passed to `check()` (if an expected type is given) or `infer()` (to deduce the type).
-    *   During this traversal, the system generates **unification constraints** (e.g., `?h1 === NatType`) whenever two terms must be equal.
-    *   **Implicit arguments** are automatically inserted where needed based on Pi-types. For example, if `f` has type `Π {A:Type}. A -> A`, then checking `f 42` against `Nat` will transform the term to `f {Nat} 42`.
-    *   **Kernel Implicits (`constants.ts`)**: Special category theory terms (like `FMap0Term` for functor application) have certain arguments declared as "kernel implicits" (e.g., the source and target categories). `ensureKernelImplicitsPresent` fills these with fresh holes if they are not provided, allowing for less verbose term construction.
-
-4.  **Unification (`unification.ts`)**: After the initial traversal, `solveConstraints()` is called.
-    *   It iteratively tries to solve pending constraints using the `unify()` function.
-    *   `unify()` is a powerful algorithm that can decompose problems on injective constructors (e.g., `(F X) === (F Y)` becomes `X === Y`), solve for meta-variables (holes), and perform occurs-checks.
-    *   For flex-rigid problems (e.g., `?M x y === f x`), it uses **higher-order pattern unification** (`solveHoFlexRigid`) to find a lambda abstraction that solves the hole (e.g., `?M = λa b. f a`).
-    *   The process can be guided by user-defined unification rules.
-
-5.  **Reduction (`reduction.ts`)**: The `whnf()` function is used pervasively to reduce terms to their head normal form. This involves:
-    *   β-reduction: `(λx. e) a  ~>  e[a/x]`.
-    *   Unfolding global definitions (unless they are marked as opaque constants).
-    *   Applying user-defined **rewrite rules**.
-    *   η-contraction (if enabled): `λx. F x  ~>  F`.
-    *   `normalize()` recursively calls `whnf()` for full normalization.
-
-6.  **Equality (`equality.ts`)**: The `areEqual()` function determines if two terms are convertible by reducing both to WHNF and then comparing their structure, respecting α-equivalence for binders.
-
-7.  **Pattern Matching (`pattern.ts`)**: The `matchPattern()` function is the engine for rewrite rules. It supports **higher-order patterns**, where pattern variables can stand for functions. It also respects scope annotations on pattern variables (e.g., `$F.[x]` means `$F` can contain the binder `x`), which is crucial for correct matching under binders.
-
-## File Structure
-
-The `src/` directory is organized into the following key modules:
-
-*   `types.ts`: Defines all core data structures, including `Term`, `Context`, `Icit`, and the various term constructors.
-*   `state.ts`: Manages all global state: definitions, rules, constraints, flags, and utilities for context manipulation and term printing.
-*   `constants.ts`: Defines metadata for kernel-level implicit arguments, used by the elaborator.
-*   `elaboration.ts`: The heart of the system. Implements `elaborate`, `check`, `infer`, and handles implicit argument insertion.
-*   `unification.ts`: Implements the unification algorithm, constraint solver, and higher-order unification logic.
-*   `reduction.ts`: Implements term reduction (`whnf`, `normalize`) and the application of rewrite rules.
-*   `equality.ts`: Implements the term convertibility checking algorithm (`areEqual`).
-*   `pattern.ts`: Implements higher-order pattern matching (`matchPattern`) used by rewrite rules.
-*   `globals.ts`: Provides the user-facing API (`defineGlobal`, `addRewriteRule`) for extending the system.
-*   `stdlib.ts`: Defines the standard library, setting up primitives for category theory.
-*   `structural.ts`: Provides functions for checking raw structural equality without reduction.
-
-## Testing Strategy
-
-The project is accompanied by a growing suite of unit tests in the `tests/` directory to ensure the correctness and stability of the core logic. The tests are written using Node.js's native test runner.
-
-Key test suites include:
-*   `equality_tests.ts`: Verifies α, β, and η equivalence.
-*   `dependent_types_tests.ts`: Tests dependent type checking using length-indexed vectors (`Vec`).
-*   `error_reporting_tests.ts`: Ensures sensible errors are thrown for common mistakes like unbound variables and type mismatches.
-*   `higher_order_unification_tests.ts`: Contains specific tests for the higher-order unification solver.
-*   `higher_order_pattern_matching_tests.ts`: Tests the higher-order pattern matcher with various scope restrictions.
-*   `kernel_implicits_tests.ts`: Validates the automatic insertion and checking of implicit arguments for category theory constructors.
-*   `rewrite_rules_tests.ts`: Checks the elaboration and application of user-defined rewrite rules.
+## Testing
+The `tests/` directory contains a comprehensive suite of unit tests, designed to ensure the correctness, stability, and adherence to type-theoretic principles of the `emdash` core logic. Key test suites include:
+-   `equality_tests.ts`: Verifies α, β, and η equivalence, and other term convertibility properties.
+-   `dependent_types_tests.ts`: Tests the type checking of dependent types, notably using length-indexed vectors (`Vec`) as an example.
+-   `error_reporting_tests.ts`: Ensures that the system throws sensible and informative errors for common mistakes like unbound variables or type mismatches.
+-   `higher_order_unification_tests.ts`: Contains specific tests for the higher-order unification solver, verifying its ability to solve flex-rigid and other complex unification problems.
+-   `higher_order_pattern_matching_tests.ts`: Tests the higher-order pattern matcher with various patterns and scope restrictions.
+-   `implicit_args_tests.ts`: Validates the automatic insertion and checking of implicit arguments.
+-   `kernel_implicits_tests.ts`: Specifically tests the handling of "kernel implicits" for category theory constructors, ensuring they are correctly inserted and typed.
+-   `rewrite_rules_tests.ts`: Checks the elaboration and application of user-defined rewrite rules, including cases with higher-order patterns.
+-   `functorial_elaboration.ts`: Focuses on testing the `MkFunctorTerm` and its associated `infer_mkFunctor` logic, verifying that the functoriality laws (identity and composition preservation) are correctly checked, whether by explicit proof or computational verification.
+-   `proof_mode_tests.ts`: Tests the preliminary proof mode functionalities, such as finding holes, reporting goal states, and applying basic tactics.
+-   `church_encoding_tests.ts`: Verifies the correctness of Church encodings for natural numbers and booleans, demonstrating the system's ability to handle encoding-based representations. 
