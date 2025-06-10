@@ -422,7 +422,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
-    if (stackDepth > 30) console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
+    // if (stackDepth > 30) console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
     const originalTerm = term;
     const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
     let currentTerm = getTermRef(termWithKernelImplicits);
@@ -600,7 +600,6 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
                 })))));
             
             final_elab_proof = check(ctx, term.proof, expectedProofType, stackDepth + 1, options);
-            // console.log("infer_mkFunctor: final_elab_proof", printTerm(final_elab_proof));
 
         } else {
             // 5b. Verify by Computation

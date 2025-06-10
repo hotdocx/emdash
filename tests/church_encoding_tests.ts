@@ -321,11 +321,11 @@ describe("Church Encoding Tests", () => {
     
         // [TODO] uncomment later
         // // let eqTest : Eq _ hundred hundred = refl _ _;
-        // const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
-        // const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), FH(), Icit.Expl);
-        // // SLOW ~ 100s, uncomment later
-        // defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
-        // elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
+        const eqTest_val_type_original = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
+        const eqTest_val_val = App(App(Var("refl_func"), Var("Nat_type"), Icit.Expl), FH(), Icit.Expl);
+        // SLOW ~ 100s, uncomment later
+        defineGlobal("eqTest_val", eqTest_val_type_original, eqTest_val_val);
+        elabRes = elaborate(Var("eqTest_val"), undefined, baseCtx);
     
         // const eqTest_val_term = Var("eqTest_val");
         // const eqTest_val_type_expected = App(App(App(Var("Eq_type"), Var("Nat_type"), Icit.Expl), Var("hundred_val"), Icit.Expl), Var("hundred_val"), Icit.Expl);
@@ -342,7 +342,7 @@ describe("Church Encoding Tests", () => {
         // const isEqualDebug_18_1 = areEqual(elabRes.type, eqTest_val_type_expected, baseCtx);
         // console.log(`[DEBUG TEST 18.1] areEqual result: ${isEqualDebug_18_1}`);
     
-        // assert(isEqualDebug_18_1, "Church Test 18.1: eqTest_val type check");
+        assert(areEqual(elabRes.type, eqTest_val_type_original, baseCtx), "Church Test 18.1: eqTest_val type check");
     
         // U
         elabRes = elaborate(Type(), undefined, baseCtx);

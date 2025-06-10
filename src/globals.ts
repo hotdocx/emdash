@@ -84,9 +84,9 @@ export function defineGlobal(
             elaboratedValue = getTermRef(checkedValueResult); // Store the elaborated and dereferenced value
         }
 
-        console.log('defineGlobal> ', { name: name + (isConstantSymbol ? ' (constant symbol)' : '')
-            + (isInjective ? ' (injective)' : ''),
-            type: printTerm(elaboratedType), value: elaboratedValue ? printTerm(elaboratedValue) : 'undefined' });
+        console.log(`defineGlobal:  Declaration '${name}' added and elaborated successfully.`, { name: name + (isConstantSymbol ? '    (constant)' : '')
+            + (isInjective ? '    (injective)' : ''),
+            type: printTerm(elaboratedType), definition: elaboratedValue ? printTerm(elaboratedValue) : undefined });
         // note: a constant symbol is also automatically an injective constructor
         globalDefs.set(name, { name, type: elaboratedType, value: elaboratedValue, isConstantSymbol, isInjective: isConstantSymbol || isInjective });
 
@@ -194,9 +194,8 @@ export function addRewriteRule(
 
         // Add the fully elaborated rule
         userRewriteRules.push({ name: ruleName, patternVars: userPatternVars, elaboratedLhs, elaboratedRhs });
-        console.log(`Rule '${ruleName}' added and elaborated successfully.`,
-            `LHS: ${printTerm(elaboratedLhs)}`,
-            `RHS: ${printTerm(elaboratedRhs)}`
+        console.log(`addRewriteRule:  Rule '${ruleName}' added and elaborated successfully.`,
+            { LHS: printTerm(elaboratedLhs), RHS: printTerm(elaboratedRhs) }
         );
 
     } catch (e) {
@@ -222,5 +221,5 @@ export function addUnificationRule(rule: UnificationRule) {
     // for type consistency and resolving pattern variable types.
     // For now, they are added as is.
     userUnificationRules.push(rule);
-    console.log(`Unification rule '${rule.name}' added.`);
+    console.log(`addUnificationRule: Unification rule '${rule.name}' added.`);
 }

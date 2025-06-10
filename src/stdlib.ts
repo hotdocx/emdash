@@ -529,7 +529,6 @@ export function setupCatTheoryPrimitives(ctx: Context) {
             return App(App(App(Eq, HomTerm(B, App(fmap0, X, Icit.Expl), App(fmap0, Z, Icit.Expl)), Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
         })))));
 
-    console.log("before mkFunctor_ fmap0_type", printTerm(fmap0_type(Var("$A"), Var("$B"))));
     defineGlobal("mkFunctor_",
         Pi("A", Icit.Impl, CatTerm(), A =>
         Pi("B", Icit.Impl, CatTerm(), B =>

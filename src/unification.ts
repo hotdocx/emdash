@@ -197,7 +197,7 @@ export function unifyArgs(args1: (Term | undefined)[], args2: (Term | undefined)
  */
 export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult {
     if (depth > MAX_STACK_DEPTH) throw new Error(`Unification stack depth exceeded (Unify depth: ${depth}, ${printTerm(t1)} vs ${printTerm(t2)})`);
-    if (depth > 30) console.log("unify: depth > 30", {depth}, {t1: printTerm(t1)}, {t2: printTerm(t2)});
+    // if (depth > 30) console.log("unify: depth > 30", {depth}, {t1: printTerm(t1)}, {t2: printTerm(t2)});
     let current_t1 = getTermRef(t1);
     let current_t2 = getTermRef(t2);
 
