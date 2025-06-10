@@ -380,9 +380,17 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
         case 'Lam': {
             const lam = current;
             const appliedParamType = lam.paramType ? applySubst(lam.paramType, subst, patternVarDecls) : undefined;
+
+            // Instantiate the body with a placeholder
+            const placeholderVar = Var(lam.paramName, true);
+            const bodyInstance = lam.body(placeholderVar);
+
+            // Apply the substitution to the body structure ONCE.
+            const appliedBodyInstance = applySubst(bodyInstance, subst, patternVarDecls);
+
+            // Create the new lambda with a simple substitution body to re-abstract the placeholder
             const newBodyFn = (v_arg: Term): Term => {
-                const bodyCtxSubst = new Map(subst);  // is such cloning of substnecessary?
-                return applySubst(lam.body(v_arg), bodyCtxSubst, patternVarDecls);
+                return replaceFreeVar(appliedBodyInstance, placeholderVar.name, v_arg);
             };
 
             const newLam = Lam(lam.paramName, lam.icit, appliedParamType, newBodyFn);
@@ -391,11 +399,19 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
         }
         case 'Pi': {
             const pi = current;
+            const appliedParamType = applySubst(pi.paramType, subst, patternVarDecls);
+            
+            // Instantiate the body with a placeholder
+            const placeholderVar = Var(pi.paramName, true);
+            const bodyTypeInstance = pi.bodyType(placeholderVar);
+            
+            // Apply substitution to the body structure ONCE
+            const appliedBodyTypeInstance = applySubst(bodyTypeInstance, subst, patternVarDecls);
+
             const newBodyTypeFn = (v_arg: Term) => {
-                const bodyCtxSubst = new Map(subst);  // is such cloning of subst necessary?
-                return applySubst(pi.bodyType(v_arg), bodyCtxSubst, patternVarDecls);
+                return replaceFreeVar(appliedBodyTypeInstance, placeholderVar.name, v_arg);
             };
-            return Pi(pi.paramName, pi.icit, applySubst(pi.paramType, subst, patternVarDecls), newBodyTypeFn);
+            return Pi(pi.paramName, pi.icit, appliedParamType, newBodyTypeFn);
         }
         case 'ObjTerm': return ObjTerm(applySubst(current.cat, subst, patternVarDecls));
         case 'HomTerm':
@@ -589,28 +605,53 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
             // Replace if name matches AND it's not shadowed by an inner binder within the current term being processed.
             return (current.name === freeVarName && !boundInScope.has(freeVarName)) ? replacementVar : current;
         case 'Lam': {
+            const currentLam = current;
             const newBoundInScope = new Set(boundInScope);
-            newBoundInScope.add(current.paramName); // ALWAYS add the parameter name to the new scope
+            newBoundInScope.add(currentLam.paramName);
 
-            const newParamType = current.paramType ? replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope) : undefined; 
+            const paramTypeReplaced = currentLam.paramType ? replaceFreeVar(currentLam.paramType, freeVarName, replacementVar, boundInScope) : undefined;
             
+            // If the variable is bound by this lambda, we stop substituting in the body.
+            if (currentLam.paramName === freeVarName) {
+                return Lam(currentLam.paramName, currentLam.icit, paramTypeReplaced, currentLam.body);
+            }
+            
+            // The variable is not bound, so recurse on the body using the new pattern.
+            const placeholder = Var(currentLam.paramName, true);
+            const bodyInstance = currentLam.body(placeholder);
+            const replacedBodyInstance = replaceFreeVar(bodyInstance, freeVarName, replacementVar, newBoundInScope);
+
             const newBodyFn = (v_arg: Term): Term => {
-                return replaceFreeVar(current.body(v_arg), freeVarName, replacementVar, newBoundInScope);
+                // This second call to replaceFreeVar is safe because it's replacing a placeholder in a static term structure, not re-evaluating a closure.
+                return replaceFreeVar(replacedBodyInstance, placeholder.name, v_arg);
             };
-            const resLam = Lam(current.paramName, current.icit, newParamType, newBodyFn);
-            (resLam as Term & { tag: 'Lam' })._isAnnotated = current._isAnnotated && newParamType !== undefined;
+
+            const resLam = Lam(currentLam.paramName, currentLam.icit, paramTypeReplaced, newBodyFn);
+            (resLam as Term & { tag: 'Lam' })._isAnnotated = currentLam._isAnnotated && paramTypeReplaced !== undefined;
             return resLam;
         }
         case 'Pi': {
+            const currentPi = current;
             const newBoundInScope = new Set(boundInScope);
-            newBoundInScope.add(current.paramName); // ALWAYS add the parameter name to the new scope
+            newBoundInScope.add(currentPi.paramName);
 
-            const newParamType = replaceFreeVar(current.paramType, freeVarName, replacementVar, boundInScope);
+            const newParamType = replaceFreeVar(currentPi.paramType, freeVarName, replacementVar, boundInScope);
 
+            // If the variable is bound by this lambda, we stop substituting in the body.
+            if (currentPi.paramName === freeVarName) {
+                return Pi(currentPi.paramName, currentPi.icit, newParamType, currentPi.bodyType);
+            }
+
+            const placeholder = Var(currentPi.paramName, true);
+            const bodyTypeInstance = currentPi.bodyType(placeholder);
+            const replacedBodyTypeInstance = replaceFreeVar(bodyTypeInstance, freeVarName, replacementVar, newBoundInScope);
+            
             const newBodyTypeFn = (v_arg: Term) => {
-                return replaceFreeVar(current.bodyType(v_arg), freeVarName, replacementVar, newBoundInScope);
+                // Safe for the same reason as in the Lam case.
+                return replaceFreeVar(replacedBodyTypeInstance, placeholder.name, v_arg);
             };
-            return Pi(current.paramName, current.icit, newParamType, newBodyTypeFn);
+
+            return Pi(currentPi.paramName, currentPi.icit, newParamType, newBodyTypeFn);
         }
         case 'App':
             return App(

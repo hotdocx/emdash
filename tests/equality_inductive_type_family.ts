@@ -171,10 +171,10 @@ describe("Equality Inductive Type Family (Eq)", () => {
                 Lam("z", Icit.Impl, A, z =>
                 Lam("p", Icit.Expl, App(App(App(Eq, A, Icit.Impl), x, Icit.Expl), y, Icit.Expl), p_val =>
                 Lam("q", Icit.Expl, App(App(App(Eq, A, Icit.Impl), y, Icit.Expl), z, Icit.Expl), q_val =>
-                    App(
-                        App(
-                            App(
-                                App(
+                                   App(
+                                       App(
+                                           App(
+                                               App(
                                     App(App(Var("Eq_elim"), A, Icit.Impl), y, Icit.Impl),
                                     // Motive P for induction on `q`: λ (z':A) (q': Eq y z') -> Eq x z'
                                     Lam("z_prime", Icit.Expl, A, z_prime =>
@@ -249,8 +249,8 @@ describe("Equality Inductive Type Family (Eq)", () => {
 
             // trans (refl x) q = q
             addRewriteRule("trans_rw_refl", ["$A", "$x", "$z", "$q"],
-                App(
-                    App(
+                                                   App(
+                                                       App(
                         App(App(App(App(Var("trans_rw"), Var("$A"), Icit.Impl), Var("$x"), Icit.Impl), Var("$x"), Icit.Impl), Var("$z"), Icit.Impl),
                         App(App(refl, Var("$A"), Icit.Impl), Var("$x"), Icit.Impl), Icit.Expl
                     ),

@@ -20,6 +20,7 @@ import { solveConstraints } from './unification';
 import { areEqual } from './equality';
 import { infer, check } from './elaboration';
 import { getHeadAndSpine } from './pattern';
+import { normalize } from './reduction';
 
 /**
  * Defines a new global symbol.
@@ -60,11 +61,9 @@ export function defineGlobal(
     let elaboratedValue: Term | undefined = undefined;
     if (value !== undefined) {
         let myterm = value as Term;
-        console.log("defineGlobal: value", printTerm(myterm));
     }
     try {
         elaboratedType = check(elabCtx, type, Type());
-        console.log("defineGlobal: elaboratedType (after initial check)", printTerm(elaboratedType));
         // Only perform an additional WHNF if 'shouldElaborateTypeBecauseInnerImplicits' is true.
         // Otherwise, the type has already been sufficiently elaborated by the check function.
         if (shouldElaborateTypeBecauseInnerImplicits) {

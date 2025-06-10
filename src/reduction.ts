@@ -12,7 +12,7 @@ import {
     freshVarName, freshHoleName, extendCtx, getFlag
 } from './state';
 import { MAX_STACK_DEPTH } from './constants';
-import { matchPattern, applySubst, getFreeVariables } from './pattern';
+import { matchPattern, applySubst, getFreeVariables, replaceFreeVar } from './pattern';
 import { areStructurallyEqualNoWhnf } from './structural';
 
 export const MAX_WHNF_ITERATIONS = 10000; // Max steps for WHNF reduction to prevent infinite loops.
@@ -309,12 +309,20 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             const normLamParamType = (currentLam._isAnnotated && currentLam.paramType)
                                      ? normalize(currentLam.paramType, ctx, stackDepth + 1)
                                      : undefined;
+            
+            // Instantiate body with a fresh variable to normalize its structure
+            const placeholderVar = Var(currentLam.paramName, true);
+            const paramTypeForBodyCtx = normLamParamType || (currentLam.paramType ? getTermRef(currentLam.paramType) : Hole(freshHoleName()+"_norm_lam_body_ctx"));
+            const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit);
+            
+            // Normalize the body structure ONCE
+            const normalizedBody = normalize(currentLam.body(placeholderVar), bodyCtx, stackDepth + 1);
+
+            // Create the new lambda with a simple substitution body
             const newBodyFn = (v_arg_placeholder: Term): Term => {
-                const paramTypeForBodyCtx = normLamParamType ||
-                                            (currentLam.paramType ? getTermRef(currentLam.paramType) : Hole(freshHoleName()+"_norm_lam_body_ctx"));
-                const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit);
-                return normalize(currentLam.body(v_arg_placeholder), bodyCtx, stackDepth + 1);
+                return replaceFreeVar(normalizedBody, placeholderVar.name, v_arg_placeholder);
             };
+
             const normLam = Lam(currentLam.paramName, currentLam.icit, normLamParamType, newBodyFn) as Term & {tag: 'Lam'};
             normLam._isAnnotated = currentLam._isAnnotated && normLamParamType !== undefined;
             return normLam;
@@ -344,9 +352,17 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
         case 'Pi': {
             const currentPi = current;
             const normPiParamType = normalize(currentPi.paramType, ctx, stackDepth + 1);
+
+            // Instantiate body with a fresh variable to normalize its structure
+            const placeholderVar = Var(currentPi.paramName, true);
+            const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit);
+
+            // Normalize the body structure ONCE
+            const normalizedBodyType = normalize(currentPi.bodyType(placeholderVar), bodyTypeCtx, stackDepth + 1);
+            
+            // Create the new Pi with a simple substitution body
             const newBodyTypeFn = (v_arg_placeholder: Term): Term => {
-                const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit);
-                return normalize(currentPi.bodyType(v_arg_placeholder), bodyTypeCtx, stackDepth + 1);
+                return replaceFreeVar(normalizedBodyType, placeholderVar.name, v_arg_placeholder);
             };
             return Pi(currentPi.paramName, currentPi.icit, normPiParamType, newBodyTypeFn);
         }
