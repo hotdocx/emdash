@@ -19,7 +19,7 @@ import { whnf, normalize } from './reduction';
 import { areEqual } from './equality';
 import { solveConstraints } from './unification';
 import { MAX_STACK_DEPTH } from './constants';
-import { matchPattern, applySubst, isPatternVarName } from './pattern';
+import { matchPattern, applySubst, isPatternVarName, replaceFreeVar } from './pattern';
 import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './constants';
 
 // Type aliases for specific term kinds, useful for casting
@@ -273,19 +273,23 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
         case 'Pi': {
             const piNode = current;
             const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, options);
-
-            // To check the body, we need a context with the parameter and a placeholder variable
-            const freshV = Var(piNode.paramName, true);
-            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit, freshV);
-            const bodyTypeInstance = piNode.bodyType(freshV);
             
-            // Check that the body is a valid type. This is the crucial part that might loop.
-            // The result of this check isn't directly used to reconstruct, it's for validation.
-            check(extendedCtxForBody, bodyTypeInstance, Type(), stackDepth + 1, options);
+            // To check the body, we need a context with the parameter and a placeholder variable.
+            const freshV = Var(piNode.paramName, true);
+            // The context is extended with the param type, but not a `let` definition for the variable itself.
+            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
+            const bodyTypeInstance = piNode.bodyType(freshV); // Instantiate body with the placeholder
+            
+            // Check that the body is a valid type and get its elaborated form.
+            const elaboratedBodyType = check(extendedCtxForBody, bodyTypeInstance, Type(), stackDepth + 1, options);
 
-            // Reconstruct the Pi with the now-elaborated parameter type.
-            // The body function remains the same, as it will be elaborated on-demand when applied.
-            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), piNode.bodyType);
+            // Reconstruct the Pi with the elaborated parameter type and a new body function
+            // that correctly substitutes the placeholder in the elaborated body.
+            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), (v_arg: Term) => {
+                // The elaboratedBodyType has `freshV` as a free variable.
+                // We must replace it with `v_arg` to produce the final body type.
+                return replaceFreeVar(elaboratedBodyType, freshV.name, v_arg);
+            });
 
             return { elaboratedTerm: finalPi, type: Type() }; // A Pi type itself has type Type
         }
