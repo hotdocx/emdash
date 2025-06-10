@@ -535,8 +535,7 @@ describe("Church Encoding Implicit Tests", () => {
         elabRes = elaborate(the_final_expr_term_to_check, final_expr_type_expected, baseCtx);
     
         assert(areEqual(elabRes.type, final_expr_type_expected, baseCtx), "HSI Test 19.1: final 'the' expression type check");
-        // // [TODO] apparently this last line fails; to investigate inside plain test file
-        // // assert(areEqual(elabRes.term, the_final_expr_term_to_check, baseCtx), "HSI Test 19.2: final 'the' expression value check");
+        assert(areEqual(elabRes.term, check(baseCtx, the_final_expr_term_to_check, final_expr_type_expected), baseCtx), "HSI Test 19.2: final 'the' expression value check");
     
         console.log("Church-Style Implicit Argument Tests Completed.");
     });

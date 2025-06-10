@@ -52,8 +52,8 @@ export function areAllArgsConvertible(args1: (Term | undefined)[], args2: (Term 
  */
 export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
     if (depth > MAX_STACK_DEPTH) throw new Error(`Equality check depth exceeded (areEqual depth: ${depth})`);
-    if (depth > 30) {
-        console.log("areEqual: depth > 30", {depth}, {t1: printTerm(t1)}, {t2: printTerm(t2)});
+    if (depth > 3) {
+        console.log("areEqual: depth > 3", {depth}, {t1: printTerm(t1)}, {t2: printTerm(t2)});
     }
     const rt1 = getTermRef(whnf(t1, ctx, depth + 1));
     const rt2 = getTermRef(whnf(t2, ctx, depth + 1));

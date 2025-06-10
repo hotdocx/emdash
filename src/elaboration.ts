@@ -422,8 +422,8 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
-    if (stackDepth > 30) {
-        console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
+    if (stackDepth > 3) {
+        console.log("check: stackDepth > 3", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
     }
     const originalTerm = term;
     const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
@@ -447,8 +447,9 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
                 (v_actual_arg: Term) => { // v_actual_arg is the placeholder for the implicitly bound variable
                     const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl, v_actual_arg);
                     const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(v_actual_arg), bodyCheckCtx);
-                    // The original term `termRef` is checked against the expected body type in the new context
-                    return check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1, options);
+                    // The original term `termRef` is applied to the new implicit argument and then checked.
+                    const termToPassToInnerCheck = App(termRef, v_actual_arg, Icit.Impl);
+                    return check(bodyCheckCtx, termToPassToInnerCheck, bodyExpectedTypeInner, stackDepth + 1, options);
                 }
             );
             return newLam; // Return the new lambda
@@ -468,6 +469,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         if (lamNode._isAnnotated && lamNode.paramType) {
             const elabLamParamType = check(ctx, lamNode.paramType, Type(), stackDepth + 1, options);
             addConstraint(elabLamParamType, lamParamType, `Lam param type annotation vs Pi param type for ${lamNode.paramName}`);
+            solveConstraints(ctx, stackDepth + 1);
             // We then proceed using the Pi's parameter type for the body context.
         }
 
@@ -575,27 +577,29 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
         };
 
         if (term.proof) {
+            console.log("infer_mkFunctor: using provided proof");
             // 5a. Verify by Provided Proof
             const Eq_def = globalDefs.get("Eq");
             if (!Eq_def) throw new Error("Functoriality proof checking requires 'Eq' to be defined in globals.");
             const Eq_var = Var("Eq");
             
             const X_name = "X"; const Y_name = "Y"; const Z_name = "Z";
-            const a_name = "a"; const a_prime_name = "a_prime";
+            const g_name = "g"; const f_name = "f";
 
             const expectedProofType =
                 Pi(X_name, Icit.Impl, ObjTerm(elabA), X =>
                 Pi(Y_name, Icit.Impl, ObjTerm(elabA), Y =>
                 Pi(Z_name, Icit.Impl, ObjTerm(elabA), Z =>
-                Pi(a_prime_name, Icit.Impl, HomTerm(elabA, X, Y), a_prime =>
-                Pi(a_name, Icit.Impl, HomTerm(elabA, Y, Z), a => {
-                    const { lhs, rhs, fmap0X, fmap0Z } = buildLawComponents(X, Y, Z, a, a_prime);
+                Pi(g_name, Icit.Expl, HomTerm(elabA, Y, Z), g =>
+                Pi(f_name, Icit.Expl, HomTerm(elabA, X, Y), f => {
+                    const { lhs, rhs, fmap0X, fmap0Z } = buildLawComponents(X, Y, Z, g, f);
                     const homType = HomTerm(elabB, fmap0X, fmap0Z);
                     // The type of the equality proposition is Eq {type} (lhs) (rhs)
                     return App(App(App(Eq_var, homType, Icit.Impl), lhs, Icit.Expl), rhs, Icit.Expl);
                 })))));
             
             final_elab_proof = check(ctx, term.proof, expectedProofType, stackDepth + 1, options);
+            // console.log("infer_mkFunctor: final_elab_proof", printTerm(final_elab_proof));
 
         } else {
             // 5b. Verify by Computation

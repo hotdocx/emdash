@@ -538,19 +538,20 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         Pi("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), _ =>
             Functor_A_B(A, B)
         ))))),
-        // // Value: λ {A} {B} fmap0 fmap1 proof. MkFunctorTerm(A, B, fmap0, fmap1, proof)
-        // Lam("A", Icit.Impl, CatTerm(), A =>
-        // Lam("B", Icit.Impl, CatTerm(), B =>
-        // Lam("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
-        // Lam("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
-        // Lam("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), fproof_val =>
-        //     {console.log("fmap0_val", printTerm(fmap0_val));
-        //     console.log("fmap1_val", printTerm(fmap1_val));
-        //     console.log("fproof_val", printTerm(fproof_val));
-        //     return MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
-        //     }
-        // ))))),
-        // false, true
+        // Value: λ {A} {B} fmap0 fmap1 proof. MkFunctorTerm(A, B, fmap0, fmap1, proof)
+        Lam("A", Icit.Impl, CatTerm(), A =>
+        Lam("B", Icit.Impl, CatTerm(), B =>
+        Lam("fmap0", Icit.Expl, fmap0_type(A,B), fmap0_val =>
+        Lam("fmap1", Icit.Expl, fmap1_type(A, B, fmap0_val), fmap1_val =>
+        Lam("functoriality", Icit.Expl, functoriality_proof_type(A, B, fmap0_val, fmap1_val), fproof_val =>
+            {
+            // console.log("fmap0_val", printTerm(fmap0_val));
+            // console.log("fmap1_val", printTerm(fmap1_val));
+            // console.log("fproof_val", printTerm(fproof_val));
+            return MkFunctorTerm(A, B, fmap0_val, fmap1_val, fproof_val)
+            }
+        ))))),
+        false, true
     );
 }
 

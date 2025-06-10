@@ -48,7 +48,7 @@ export function matchPattern(
     binderNameMapping: Map<string, string> = new Map()
 ): Substitution | null {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`matchPattern stack depth exceeded for pattern ${printTerm(pattern)} vs term ${printTerm(termToMatch)}`);
-    // if (stackDepth > 30) {
+    // if (stackDepth > 3) {
     //     console.log("matchPattern: stackDepth", {stackDepth}, {pattern: printTerm(pattern), termToMatch: printTerm(termToMatch)});
     // }
     const rtPattern = getTermRef(pattern);
