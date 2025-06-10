@@ -64,8 +64,14 @@ export function defineGlobal(
     }
     try {
         elaboratedType = check(elabCtx, type, Type());
-        console.log("defineGlobal: elaboratedType", printTerm(elaboratedType));
-        elaboratedType = shouldElaborateTypeBecauseInnerImplicits ? whnf(getTermRef(elaboratedType), elabCtx) : whnf(getTermRef(type), elabCtx);
+        console.log("defineGlobal: elaboratedType (after initial check)", printTerm(elaboratedType));
+        // Only perform an additional WHNF if 'shouldElaborateTypeBecauseInnerImplicits' is true.
+        // Otherwise, the type has already been sufficiently elaborated by the check function.
+        if (shouldElaborateTypeBecauseInnerImplicits) {
+            elaboratedType = whnf(getTermRef(elaboratedType), elabCtx);
+        } else {
+            elaboratedType = getTermRef(elaboratedType); // Just ensure it's dereferenced
+        }
 
         if (value !== undefined) {
             const valueToCheck = value

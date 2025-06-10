@@ -60,6 +60,9 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             for (const rule of userRewriteRules) {
                 const subst = matchPattern(rule.elaboratedLhs, termBeforeInnerReductions, ctx, rule.patternVars, undefined, stackDepth + 1);
                 if (subst) {
+                    if (stackDepth > 30) {
+                        console.log("whnf matchPattern subst: stackDepth", {stackDepth}, {pattern: printTerm(rule.elaboratedLhs), termToMatch: printTerm(termBeforeInnerReductions)});
+                    }
                     const rhsApplied = getTermRef(applySubst(rule.elaboratedRhs, subst, rule.patternVars));
                     // Check for actual change to prevent non-terminating rule applications like X -> X
                     if (rhsApplied !== termBeforeInnerReductions && !areStructurallyEqualNoWhnf(rhsApplied, termBeforeInnerReductions, ctx, stackDepth + 1)) {
@@ -80,7 +83,10 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     // Beta reduction
                     current = func_whnf_ref.body(current.arg);
                     reducedInKernelBlock = true;
-                } else if (getTermRef(current.func) !== func_whnf_ref) {
+                } else if (!areStructurallyEqualNoWhnf(getTermRef(current.func), func_whnf_ref, ctx, stackDepth + 1)) {
+                    if (stackDepth > 30) {
+                        console.log("whnf App: stackDepth", {stackDepth}, {func: printTerm(current.func), func_whnf_ref: printTerm(func_whnf_ref)});
+                    }
                     current = App(func_whnf_ref, current.arg, current.icit);
                     reducedInKernelBlock = true;
                 }

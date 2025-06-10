@@ -129,7 +129,7 @@ describe("Church Encoding Implicit Tests", () => {
         assert(unify(elabRes.type, App(Var("List_hs"), FH(), Icit.Expl), baseCtx) === UnifyResult.Solved, "HSI Test 6.1: nil_hs type check");
         const globalNilHsDef = globalDefs.get("nil_hs")!
         // console.log({globalNilHsDef});
-        assert(areEqual(globalNilHsDef.value,  nil_func_val_elab_expected, baseCtx), "HSI Test 6.2: nil_hs value check against non-fully elaborated form (no implicit insertions) ");
+        assert(areEqual(globalNilHsDef.value,  nil_func_val_elab_expected, baseCtx), "HSI Test 6.2: nil_hs value check against non-fully elaborated form (no implicit insertions). Expected: " + printTerm(nil_func_val_elab_expected) + ". Actual: " + printTerm(globalNilHsDef.value));
     
         // let cons : {A} -> A -> List A -> List A
         // = \x xs L cons nil. cons x (xs L cons nil);

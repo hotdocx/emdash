@@ -273,18 +273,20 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
         case 'Pi': {
             const piNode = current;
             const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, options);
-            // Context for checking the body type: extend with param name and its elaborated type
-            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
-            const bodyTypeInstance = piNode.bodyType(Var(piNode.paramName, true)); // Instantiate with a Var
-            // Check that the body type itself is a Type
+
+            // To check the body, we need a context with the parameter and a placeholder variable
+            const freshV = Var(piNode.paramName, true);
+            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit, freshV);
+            const bodyTypeInstance = piNode.bodyType(freshV);
+            
+            // Check that the body is a valid type. This is the crucial part that might loop.
+            // The result of this check isn't directly used to reconstruct, it's for validation.
             check(extendedCtxForBody, bodyTypeInstance, Type(), stackDepth + 1, options);
 
-            // Reconstruct the Pi with elaborated components for the elaborated term
-            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), (v: Term) => {
-                const bodyCtx = extendCtx(ctx, piNode.paramName, getTermRef(elaboratedParamType), piNode.icit, v);
-                const piNodeBodyInstance = piNode.bodyType(Var(piNode.paramName, true));
-                return check(bodyCtx, piNodeBodyInstance, Type(), stackDepth+1, options); // Elaborate body type
-            });
+            // Reconstruct the Pi with the now-elaborated parameter type.
+            // The body function remains the same, as it will be elaborated on-demand when applied.
+            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), piNode.bodyType);
+
             return { elaboratedTerm: finalPi, type: Type() }; // A Pi type itself has type Type
         }
         // Category Theory Primitives

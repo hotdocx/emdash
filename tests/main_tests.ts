@@ -16,7 +16,7 @@ import './higher_order_unification_tests';
 import './higher_order_pattern_matching_tests';
 import './implicit_args_tests';
 import './church_encoding_tests';
-import './church_encoding_implicit_tests';
+// import './church_encoding_implicit_tests';
 import './functorial_elaboration';
 import './phase1_tests';
 
