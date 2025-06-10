@@ -605,53 +605,90 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
             // Replace if name matches AND it's not shadowed by an inner binder within the current term being processed.
             return (current.name === freeVarName && !boundInScope.has(freeVarName)) ? replacementVar : current;
         case 'Lam': {
-            const currentLam = current;
-            const newBoundInScope = new Set(boundInScope);
-            newBoundInScope.add(currentLam.paramName);
+            const lam = current;
+            const paramTypeReplaced = lam.paramType ? replaceFreeVar(lam.paramType, freeVarName, replacementVar, boundInScope) : undefined;
 
-            const paramTypeReplaced = currentLam.paramType ? replaceFreeVar(currentLam.paramType, freeVarName, replacementVar, boundInScope) : undefined;
-            
-            // If the variable is bound by this lambda, we stop substituting in the body.
-            if (currentLam.paramName === freeVarName) {
-                return Lam(currentLam.paramName, currentLam.icit, paramTypeReplaced, currentLam.body);
+            // If this lambda binds the variable we want to replace, substitution stops here for the body.
+            if (lam.paramName === freeVarName) {
+                return Lam(lam.paramName, lam.icit, paramTypeReplaced, lam.body);
             }
-            
-            // The variable is not bound, so recurse on the body using the new pattern.
-            const placeholder = Var(currentLam.paramName, true);
-            const bodyInstance = currentLam.body(placeholder);
-            const replacedBodyInstance = replaceFreeVar(bodyInstance, freeVarName, replacementVar, newBoundInScope);
 
-            const newBodyFn = (v_arg: Term): Term => {
-                // This second call to replaceFreeVar is safe because it's replacing a placeholder in a static term structure, not re-evaluating a closure.
-                return replaceFreeVar(replacedBodyInstance, placeholder.name, v_arg);
-            };
+            // Check for variable capture.
+            const freeVarsInReplacement = getFreeVariables(replacementVar);
+            if (freeVarsInReplacement.has(lam.paramName)) {
+                // CAPTURE DETECTED: Rename the binder.
+                const freshName = freshVarName(lam.paramName);
+                const freshVar = Var(freshName, true);
+                const bodyWithFreshVar = lam.body(freshVar); // Instantiate old body with NEW fresh var
 
-            const resLam = Lam(currentLam.paramName, currentLam.icit, paramTypeReplaced, newBodyFn);
-            (resLam as Term & { tag: 'Lam' })._isAnnotated = currentLam._isAnnotated && paramTypeReplaced !== undefined;
-            return resLam;
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(freshName);
+                
+                // Recurse into the renamed body.
+                const newBody = replaceFreeVar(bodyWithFreshVar, freeVarName, replacementVar, newBoundInScope);
+
+                const newLam = Lam(freshName, lam.icit, paramTypeReplaced, (v_arg) => {
+                    return replaceFreeVar(newBody, freshName, v_arg);
+                });
+                (newLam as Term & {tag: 'Lam'})._isAnnotated = lam._isAnnotated && paramTypeReplaced !== undefined;
+                return newLam;
+            } else {
+                // NO CAPTURE: Proceed with substitution in the body.
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(lam.paramName);
+
+                const placeholder = Var(lam.paramName, true);
+                const bodyInstance = lam.body(placeholder);
+                const replacedBodyInstance = replaceFreeVar(bodyInstance, freeVarName, replacementVar, newBoundInScope);
+
+                const newBodyFn = (v_arg: Term): Term => {
+                    return replaceFreeVar(replacedBodyInstance, placeholder.name, v_arg);
+                };
+                const resLam = Lam(lam.paramName, lam.icit, paramTypeReplaced, newBodyFn);
+                (resLam as Term & { tag: 'Lam' })._isAnnotated = lam._isAnnotated && paramTypeReplaced !== undefined;
+                return resLam;
+            }
         }
         case 'Pi': {
-            const currentPi = current;
-            const newBoundInScope = new Set(boundInScope);
-            newBoundInScope.add(currentPi.paramName);
+            const pi = current;
+            const newParamType = replaceFreeVar(pi.paramType, freeVarName, replacementVar, boundInScope);
 
-            const newParamType = replaceFreeVar(currentPi.paramType, freeVarName, replacementVar, boundInScope);
-
-            // If the variable is bound by this lambda, we stop substituting in the body.
-            if (currentPi.paramName === freeVarName) {
-                return Pi(currentPi.paramName, currentPi.icit, newParamType, currentPi.bodyType);
+            // If this Pi binds the variable we want to replace, substitution stops here for the body.
+            if (pi.paramName === freeVarName) {
+                return Pi(pi.paramName, pi.icit, newParamType, pi.bodyType);
             }
 
-            const placeholder = Var(currentPi.paramName, true);
-            const bodyTypeInstance = currentPi.bodyType(placeholder);
-            const replacedBodyTypeInstance = replaceFreeVar(bodyTypeInstance, freeVarName, replacementVar, newBoundInScope);
-            
-            const newBodyTypeFn = (v_arg: Term) => {
-                // Safe for the same reason as in the Lam case.
-                return replaceFreeVar(replacedBodyTypeInstance, placeholder.name, v_arg);
-            };
+            // Check for variable capture.
+            const freeVarsInReplacement = getFreeVariables(replacementVar);
+            if (freeVarsInReplacement.has(pi.paramName)) {
+                // CAPTURE DETECTED: Rename the binder.
+                const freshName = freshVarName(pi.paramName);
+                const freshVar = Var(freshName, true);
+                const bodyTypeWithFreshVar = pi.bodyType(freshVar);
 
-            return Pi(currentPi.paramName, currentPi.icit, newParamType, newBodyTypeFn);
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(freshName);
+
+                const newBodyType = replaceFreeVar(bodyTypeWithFreshVar, freeVarName, replacementVar, newBoundInScope);
+
+                return Pi(freshName, pi.icit, newParamType, (v_arg: Term) => {
+                    return replaceFreeVar(newBodyType, freshName, v_arg);
+                });
+            } else {
+                // NO CAPTURE: Proceed with substitution in the body.
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(pi.paramName);
+
+                const placeholder = Var(pi.paramName, true);
+                const bodyTypeInstance = pi.bodyType(placeholder);
+                const replacedBodyTypeInstance = replaceFreeVar(bodyTypeInstance, freeVarName, replacementVar, newBoundInScope);
+                
+                const newBodyTypeFn = (v_arg: Term) => {
+                    return replaceFreeVar(replacedBodyTypeInstance, placeholder.name, v_arg);
+                };
+
+                return Pi(pi.paramName, pi.icit, newParamType, newBodyTypeFn);
+            }
         }
         case 'App':
             return App(

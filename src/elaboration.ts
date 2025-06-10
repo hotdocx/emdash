@@ -239,7 +239,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // To infer the body, we need a context with the parameter and a placeholder variable
             const freshV = Var(lamNode.paramName, true);
-            const bodyInferCtx = extendCtx(ctx, lamNode.paramName, elaboratedParamType, lamNode.icit, freshV);
+            const bodyInferCtx = extendCtx(ctx, lamNode.paramName, elaboratedParamType, lamNode.icit);
             const lambdaBodyStructure = lamNode.body(freshV); // Instantiate body with a Var
             
             // Infer the body structure ONCE.
