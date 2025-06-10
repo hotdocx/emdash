@@ -422,9 +422,7 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
     if (stackDepth > MAX_STACK_DEPTH) {
         throw new Error(`check: Max stack depth exceeded. Term: ${printTerm(term)}, Expected: ${printTerm(expectedType)}`);
     }
-    if (stackDepth > 30) {
-        console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
-    }
+    if (stackDepth > 30) console.log("check: stackDepth > 30", {stackDepth, term: printTerm(term), expectedType: printTerm(expectedType)});
     const originalTerm = term;
     const termWithKernelImplicits = ensureKernelImplicitsPresent(originalTerm);
     let currentTerm = getTermRef(termWithKernelImplicits);
@@ -533,7 +531,6 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
  * @throws CoherenceError if the functoriality law does not hold.
  */
 function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stackDepth: number, options: ElaborationOptions = {}): InferResult {
-    console.log("infer_mkFunctor: stackDepth", {stackDepth}, {term: printTerm(term)});
     // 1. Elaborate Categories
     const elabA = check(ctx, term.domainCat, CatTerm(), stackDepth + 1, options);
     const elabB = check(ctx, term.codomainCat, CatTerm(), stackDepth + 1, options);
@@ -553,8 +550,6 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
     const elab_fmap1 = check(ctx, term.fmap1, expected_fmap1_type, stackDepth + 1, options);
     
     let final_elab_proof: Term | undefined = undefined;
-    console.log("elab_fmap0", printTerm(elab_fmap0));
-    console.log("elab_fmap1", printTerm(elab_fmap1));
     if (!options.skipCoherenceCheck) {
         const compose_morph_def = globalDefs.get("compose_morph");
         if (!compose_morph_def) throw new Error("Functoriality check requires 'compose_morph' to be defined in globals.");
@@ -584,7 +579,6 @@ function infer_mkFunctor(term: Term & {tag: 'MkFunctorTerm'}, ctx: Context, stac
         };
 
         if (term.proof) {
-            console.log("infer_mkFunctor: using provided proof");
             // 5a. Verify by Provided Proof
             const Eq_def = globalDefs.get("Eq");
             if (!Eq_def) throw new Error("Functoriality proof checking requires 'Eq' to be defined in globals.");
