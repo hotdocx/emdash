@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "transform": "ts-macros",
+        "features": ["macros", "template"]
+      }
+    ]
+  },
+  "ts-node": {
+    "compiler": "ts-patch/compiler"
+  }
+} 
