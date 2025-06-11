@@ -47,7 +47,6 @@ describe("Rewrite Rule Tests", () => {
             Var("$n"), // -> $n
             ctx
         );
-        
         const one = App(Var("s"), z, Icit.Expl);
         // Term to test: add z (s z)
         const termToReduce = App(App(add, z, Icit.Expl), one, Icit.Expl);
