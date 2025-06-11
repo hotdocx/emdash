@@ -601,7 +601,7 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
     switch (current.tag) {
         case 'Var':
             // Replace if name matches AND it's not shadowed by an inner binder within the current term being processed.
-            return (current.name === freeVarName && !boundInScope.has(freeVarName)) ? replacementVar : current;
+            return (current.name === freeVarName && !boundInScope.has(freeVarName) && current.isLambdaBound) ? replacementVar : current;
         case 'Lam': {
             const lam = current;
             const paramTypeReplaced = lam.paramType ? replaceFreeVar(lam.paramType, freeVarName, replacementVar, boundInScope) : undefined;

@@ -78,6 +78,9 @@ export type PatternVarDecl = string; // e.g., "$x", "$myVar"
 
 export const Type = (): Term & { tag: 'Type' } => ({ tag: 'Type' });
 export const Var = (name: string, isLambdaBound: boolean = false, origin?: "occurs_check" | "pattern_var"): Term & { tag: 'Var' } => ({ tag: 'Var', name, isLambdaBound, origin });
+export const boundVar = (name: string): Term & { tag: 'Var' } => Var(name, true);
+export const defVar = (name: string): Term & { tag: 'Var' } => Var(name, false);
+export const patVar = (name: string): Term & { tag: 'Var' } => Var(name, false, "pattern_var");
 
 export const Lam = (paramName: string, icit: Icit, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
     if (typeof paramTypeOrBody === 'function' && bodyOrNothing === undefined) { // Unannotated: Lam(name, icit, body)
