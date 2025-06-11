@@ -341,7 +341,19 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 // Beta reduction during normalization
                 return normalize(finalNormFunc.body(normArg), ctx, stackDepth + 1);
             }
-            return App(normFunc, normArg, current.icit);
+            // If it's not a beta-redex, reconstruct the application.
+            const reconstructedApp = App(normFunc, normArg, current.icit);
+
+            // The original `current` is the result of whnf(term).
+            // If normalizing the sub-terms didn't change the structure, then there's nothing more to do.
+            if (areStructurallyEqualNoWhnf(normFunc, current.func, ctx, stackDepth + 1)) {
+                return reconstructedApp;
+            }
+
+            // If normalizing the children *did* change the structure (e.g., `one` became `s z`),
+            // the new `reconstructedApp` might be a redex for a rewrite rule.
+            // We must therefore re-run normalize on it to achieve a full normal form.
+            return normalize(reconstructedApp, ctx, stackDepth + 1);
         }
         case 'Pi': {
             const currentPi = current;
