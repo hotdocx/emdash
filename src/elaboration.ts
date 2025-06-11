@@ -6,7 +6,7 @@
  */
 
 import {
-    Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, CatTerm,
+    Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, Let, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
     MkFunctorTerm
@@ -133,9 +133,9 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
     if (current.tag === 'Var') {
         const localBinding = lookupCtx(ctx, current.name);
         if (localBinding) {
-            // If it's a local let-binding with a definition, use the definition.
-            // The type is already known from the binding.
-            return { elaboratedTerm: localBinding.definition || current, type: localBinding.type };
+            // A local binding (from a Lam, Pi, or Let) gives the type.
+            // The `whnf` function handles unfolding let-definitions.
+            return { elaboratedTerm: current, type: localBinding.type };
         }
 
         const gdef = globalDefs.get(current.name);
@@ -295,6 +295,39 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             });
 
             return { elaboratedTerm: finalPi, type: Type() }; // A Pi type itself has type Type
+        }
+        case 'Let': {
+            const letNode = current;
+            
+            // Infer the definition's type.
+            const { elaboratedTerm: elabDef, type: elabDefType } = infer(ctx, letNode.letDef, stackDepth + 1, options);
+            let finalDefType = getTermRef(elabDefType);
+
+            // If the let-binding is annotated, check the definition against the annotation.
+            let elabLetType: Term | undefined = undefined;
+            if (letNode._isAnnotated && letNode.letType) {
+                elabLetType = check(ctx, letNode.letType, Type(), stackDepth + 1, options);
+                addConstraint(finalDefType, elabLetType, `Let-binding type annotation mismatch for '${letNode.letName}'`);
+                solveConstraints(ctx, stackDepth + 1);
+                finalDefType = getTermRef(elabLetType); // The annotated type is authoritative.
+            }
+
+            // Infer the body's type in a context extended with the let-bound variable.
+            const placeholderVar = Var(letNode.letName, true);
+            // Crucially, we do NOT pass the definition `elabDef` here.
+            // The context for type checking just knows `letName : finalDefType`.
+            // The reduction of the `Let` term itself is handled by `whnf`.
+            const bodyCtx = extendCtx(ctx, letNode.letName, finalDefType, Icit.Expl);
+            const { elaboratedTerm: elabBody, type: bodyType } = infer(bodyCtx, letNode.body(placeholderVar), stackDepth + 1, options);
+            
+            // Reconstruct the `Let` term with elaborated components.
+            const newLet = Let(
+                letNode.letName,
+                finalDefType, // Use the now-known type as the annotation
+                elabDef,
+                (v: Term) => replaceFreeVar(elabBody, placeholderVar.name, v)
+            );
+            return { elaboratedTerm: newLet, type: bodyType };
         }
         // Category Theory Primitives
         case 'CatTerm': return { elaboratedTerm: current, type: Type() };

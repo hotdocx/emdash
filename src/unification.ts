@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Context, UnifyResult, Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm,
+    Term, Context, UnifyResult, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
     HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, Substitution, PatternVarDecl, UnificationRule
 } from './types';
@@ -52,6 +52,13 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
         case 'App':
             return termContainsHole(current.func, holeId, visited, depth + 1) ||
                    termContainsHole(current.arg, holeId, visited, depth + 1);
+        case 'Let': {
+            const letNode = current;
+            if (letNode.letType && termContainsHole(letNode.letType, holeId, visited, depth + 1)) return true;
+            if (termContainsHole(letNode.letDef, holeId, visited, depth + 1)) return true;
+            const freshVLet = Var(letNode.letName, true, "occurs_check");
+            return termContainsHole(letNode.body(freshVLet), holeId, new Set(visited), depth + 1);
+        }
         case 'Lam': {
             const lam = current;
             if (lam.paramType && termContainsHole(lam.paramType, holeId, visited, depth + 1)) return true;
@@ -354,6 +361,29 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             if(bodyTypeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
 
             if(paramTypeStatus === UnifyResult.Solved && bodyTypeStatus === UnifyResult.Solved) return UnifyResult.Solved;
+            return UnifyResult.Progress;
+        }
+        case 'Let': {
+            const let1 = rt1_final; const let2 = rt2_final as Term & {tag:'Let'};
+            if (let1._isAnnotated !== let2._isAnnotated) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+
+            let typeStatus = UnifyResult.Solved;
+            if (let1._isAnnotated) {
+                if (!let1.letType || !let2.letType) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+                typeStatus = unify(let1.letType, let2.letType, ctx, depth + 1);
+                if (typeStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
+
+            const defStatus = unify(let1.letDef, let2.letDef, ctx, depth + 1);
+            if (defStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+
+            const freshV = Var(freshVarName(let1.letName), true);
+            const CtxDefType = (let1._isAnnotated && let1.letType) ? getTermRef(let1.letType) : Hole(freshHoleName() + "_unif_let_ctx");
+            const extendedCtx = extendCtx(ctx, freshV.name, CtxDefType, Icit.Expl);
+            const bodyStatus = unify(let1.body(freshV), let2.body(freshV), extendedCtx, depth + 1);
+            if(bodyStatus === UnifyResult.Failed) return tryUnificationRules(rt1_final, rt2_final, ctx, depth +1);
+
+            if (typeStatus === UnifyResult.Solved && defStatus === UnifyResult.Solved && bodyStatus === UnifyResult.Solved) return UnifyResult.Solved;
             return UnifyResult.Progress;
         }
         case 'ObjTerm': { // INJECTIVE
@@ -724,4 +754,4 @@ export function solveHoFlexRigid(
         console.error(`[solveHoFlexRigid] Error constructing solution for ${hole.id}: ${(e as Error).message}. Stack: ${(e as Error).stack}`);
         return UnifyResult.Failed;
     }
-} 
+}

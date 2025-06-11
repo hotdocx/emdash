@@ -12,6 +12,7 @@ export type BaseTerm =
     | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'App', func: Term, arg: Term, icit: Icit }
     | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term }
+    | { tag: 'Let', letName: string, letType?: Term, letDef: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'Hole', 
         id: string, 
         ref?: Term, 
@@ -78,23 +79,50 @@ export type PatternVarDecl = string; // e.g., "$x", "$myVar"
 
 export const Type = (): Term & { tag: 'Type' } => ({ tag: 'Type' });
 export const Var = (name: string, isLambdaBound: boolean = false, origin?: "occurs_check" | "pattern_var"): Term & { tag: 'Var' } => ({ tag: 'Var', name, isLambdaBound, origin });
+/** A locally bound variable (by a lambda or let). */
 export const boundVar = (name: string): Term & { tag: 'Var' } => Var(name, true);
-export const defVar = (name: string): Term & { tag: 'Var' } => Var(name, false);
-export const patVar = (name: string): Term & { tag: 'Var' } => Var(name, false, "pattern_var");
+/** A global definition variable. */
+export const Def = (name: string): Term & { tag: 'Var' } => Var(name, false);
 
-export const Lam = (paramName: string, icit: Icit, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } => {
+export function Lam(paramName: string, icit: Icit, body: (v: Term) => Term): Term & { tag: 'Lam' };
+export function Lam(paramName: string, icit: Icit, paramType: Term, body: (v: Term) => Term): Term & { tag: 'Lam' };
+export function Lam(paramName: string, icit: Icit, paramTypeOrBody: Term | ((v: Term) => Term), bodyOrNothing?: (v: Term) => Term): Term & { tag: 'Lam' } {
     if (typeof paramTypeOrBody === 'function' && bodyOrNothing === undefined) { // Unannotated: Lam(name, icit, body)
-        return { tag: 'Lam', paramName, icit, paramType: undefined, body: paramTypeOrBody, _isAnnotated: false };
-    } else if (paramTypeOrBody && typeof paramTypeOrBody !== 'function' && bodyOrNothing && typeof bodyOrNothing === 'function') { // Annotated: Lam(name, icit, type, body)
-        return { tag: 'Lam', paramName, icit, paramType: paramTypeOrBody as Term, body: bodyOrNothing, _isAnnotated: true };
+        const bodyFn = paramTypeOrBody;
+        return { tag: 'Lam', paramName, icit, paramType: undefined, body: bodyFn, _isAnnotated: false };
+    } else if (typeof paramTypeOrBody !== 'function' && typeof bodyOrNothing === 'function') { // Annotated: Lam(name, icit, type, body)
+        const paramType = paramTypeOrBody as Term;
+        const bodyFn = bodyOrNothing;
+        return { tag: 'Lam', paramName, icit, paramType, body: bodyFn, _isAnnotated: true };
     }
     throw new Error(`Invalid Lam arguments: name=${paramName}, icit=${icit}, paramTypeOrBody=${paramTypeOrBody}, bodyOrNothing=${bodyOrNothing}`);
-};
+}
 
 export const App = (func: Term, arg: Term, icit: Icit = Icit.Expl): Term & {tag: 'App'} => ({ tag: 'App', func, arg, icit });
 
 export const Pi = (paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term): Term & {tag: 'Pi'} =>
     ({ tag: 'Pi', paramName, icit, paramType, bodyType });
+
+export function Let(letName: string, letDef: Term, body: (v: Term) => Term): Term & { tag: 'Let' };
+export function Let(letName: string, letType: Term, letDef: Term, body: (v: Term) => Term): Term & { tag: 'Let' };
+export function Let(letName: string, secondParam: Term, thirdParam: Term | ((v: Term) => Term), fourthParam?: (v: Term) => Term): Term & { tag: 'Let' } {
+    // Case 1: Unannotated Let(name, def, body)
+    // Here, secondParam is the letDef (Term), thirdParam is the body function ((v: Term) => Term), and fourthParam is undefined.
+    if (typeof thirdParam === 'function' && fourthParam === undefined) {
+        const letDef = secondParam;
+        const bodyFn = thirdParam;
+        return { tag: 'Let', letName, letType: undefined, letDef, body: bodyFn, _isAnnotated: false };
+    }
+    // Case 2: Annotated Let(name, type, def, body)
+    // Here, secondParam is the letType (Term), thirdParam is the letDef (Term), and fourthParam is the body function ((v: Term) => Term).
+    else if (typeof thirdParam !== 'function' && typeof fourthParam === 'function') {
+        const letType = secondParam;
+        const letDef = thirdParam as Term;
+        const bodyFn = fourthParam;
+        return { tag: 'Let', letName, letType, letDef, body: bodyFn, _isAnnotated: true };
+    }
+    throw new Error(`Invalid Let arguments: name=${letName}, secondParam=${secondParam}, thirdParam=${thirdParam}, fourthParam=${fourthParam}`);
+}
 
 export const Hole = (id: string, patternAllowedLocalBinders?: string[]): Term & { tag: 'Hole' } => {
     const holeTerm: Term & { tag: 'Hole' } = { tag: 'Hole', id };

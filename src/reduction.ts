@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi,
+    Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
     Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm
 } from './types';
 import {
@@ -42,17 +42,6 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
         const termBeforeInnerReductions = current;
 
-        // Check for local definitions first
-        // Be careful of name shadowing with global definitions
-        if (current.tag === 'Var' && current.isLambdaBound) {
-            const binding = lookupCtx(ctx, current.name);
-            if (binding && binding.definition) {
-                    current = binding.definition; // Substitute with the definition
-                    changedInThisPass = true;
-                    continue; // Restart the whnf loop with the new term
-                }
-        }
-
         // Apply user rewrite rules (if not a kernel constant symbol)
         if (!isKernelConstantSymbolStructurally(current)) {
             for (const rule of userRewriteRules) {
@@ -83,6 +72,13 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     current = App(func_whnf_ref, current.arg, current.icit);
                     reducedInKernelBlock = true;
                 }
+                break;
+            }
+            case 'Let': {
+                // Let reduction: (let x=d in b) reduces to b[d/x]
+                // In HOAS, this is simply body(def).
+                current = current.body(current.letDef);
+                reducedInKernelBlock = true;
                 break;
             }
             case 'Lam': { // Eta-contraction
@@ -135,8 +131,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
-            case 'Var': { // Global definition unfolding (if no local definition was found)
-                // here we know that current.isLambdaBound is false
+            case 'Var': { // Global definition unfolding (if not a local definition was found)
                 const gdef = globalDefs.get(current.name);
                 if (gdef && gdef.value !== undefined && !gdef.isConstantSymbol) {
                     current = gdef.value;
@@ -193,7 +188,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
-             // Other cases (Lam, Pi, Type, CatTerm, SetTerm, etc.) are already in WHNF or do not reduce further at head.
+             // Other cases (Pi, Type, CatTerm, SetTerm, etc.) are already in WHNF or do not reduce further at head.
         }
 
         if (reducedInKernelBlock) {
@@ -320,6 +315,24 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             normLam._isAnnotated = currentLam._isAnnotated && normLamParamType !== undefined;
             return normLam;
         }
+        case 'Let': {
+            const letNode = current;
+            const normLetType = (letNode._isAnnotated && letNode.letType) ? normalize(letNode.letType, ctx, stackDepth + 1) : undefined;
+            const normLetDef = normalize(letNode.letDef, ctx, stackDepth + 1);
+            
+            const placeholderVar = Var(letNode.letName, true);
+            const defType = letNode.letType ? getTermRef(letNode.letType) : Hole(freshHoleName() + "_norm_let_body_ctx");
+            const bodyCtx = extendCtx(ctx, letNode.letName, defType, Icit.Expl);
+            
+            const normalizedBody = normalize(letNode.body(placeholderVar), bodyCtx, stackDepth + 1);
+
+            const newBodyFn = (v_arg_placeholder: Term): Term => {
+                return replaceFreeVar(normalizedBody, placeholderVar.name, v_arg_placeholder);
+            };
+            const normLet = Let(letNode.letName, normLetType, normLetDef, newBodyFn);
+            (normLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && normLetType !== undefined;
+            return normLet;
+        }
         case 'App': {
             const normFunc = normalize(current.func, ctx, stackDepth + 1);
             const normArg = normalize(current.arg, ctx, stackDepth + 1);
@@ -327,18 +340,7 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
 
             if (finalNormFunc.tag === 'Lam' && finalNormFunc.icit === current.icit) {
                 // Beta reduction during normalization
-                const bodyParamType = finalNormFunc.paramType ?
-                                      getTermRef(finalNormFunc.paramType) :
-                                      Hole(freshHoleName() + "_beta_param_type_");
-                const extendedCtxForBody = extendCtx(
-                    ctx,
-                    finalNormFunc.paramName,
-                    bodyParamType,
-                    finalNormFunc.icit,
-                    normArg // Definition for the parameter
-                );
-                // The body needs to be instantiated with Var(paramName) which will be substituted by whnf
-                return normalize(finalNormFunc.body(Var(finalNormFunc.paramName, true)), extendedCtxForBody, stackDepth + 1);
+                return normalize(finalNormFunc.body(normArg), ctx, stackDepth + 1);
             }
             return App(normFunc, normArg, current.icit);
         }
@@ -361,4 +363,4 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
         }
         default: const exhaustiveCheck: never = current; throw new Error(`Normalize: Unhandled term: ${(exhaustiveCheck as any).tag }`);
     }
-} 
+}

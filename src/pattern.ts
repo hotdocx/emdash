@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, CatTerm, SetTerm,
+    Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, Let, CatTerm, SetTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FunctorTypeTerm, FMap0Term, FMap1Term,
     NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm
 } from './types';
@@ -33,7 +33,7 @@ export function isPatternVarName(name: string, patternVarDecls: PatternVarDecl[]
  * @param patternVarDecls Declared pattern variables for this rule.
  * @param currentSubst Current substitution (for accumulating matches).
  * @param stackDepth Recursion depth.
- * @param patternLocalBinders Names of variables bound by Lam/Pi in the pattern structure itself.
+ * @param patternLocalBinders Names of variables bound by Lam/Pi/Let in the pattern structure itself.
  * @param binderNameMapping A map to track binder name mappings.
  * @returns A substitution if matching succeeds, null otherwise.
  */
@@ -242,6 +242,36 @@ export function matchPattern(
 
             return matchPattern(patternBodyTypeInst, termBodyTypeInst, newCtx, patternVarDecls, sType, stackDepth + 1, newPatternLocalBinders, newBinderNameMapping);
         }
+        case 'Let': {
+            const letP = rtPattern; const letT = rtTermToMatch as Term & {tag:'Let'};
+            if (letP._isAnnotated !== letT._isAnnotated) return null;
+
+            let s: Substitution | null = subst;
+            if (letP._isAnnotated) {
+                if (!letP.letType || !letT.letType) return null;
+                const sType = matchPattern(letP.letType, letT.letType, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+                if (!sType) return null;
+                s = sType;
+            }
+            const sDef = matchPattern(letP.letDef, letT.letDef, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+            if (!sDef) return null;
+            
+            const commonVarName = letT.letName;
+            const commonVar = Var(commonVarName, true);
+
+            const patternBodyInst = letP.body(commonVar);
+            const termBodyInst = letT.body(commonVar);
+
+            const newPatternLocalBinders = new Set(patternLocalBinders);
+            newPatternLocalBinders.add(letP.letName);
+            
+            const newBinderNameMapping = new Map(binderNameMapping);
+            newBinderNameMapping.set(letP.letName, letT.letName);
+
+            const newCtx = letT.letType ? extendCtx(ctx, letT.letName, letT.letType, Icit.Expl, letT.letDef) : ctx;
+
+            return matchPattern(patternBodyInst, termBodyInst, newCtx, patternVarDecls, sDef, stackDepth + 1, newPatternLocalBinders, newBinderNameMapping);
+        }
         case 'ObjTerm':
             return matchPattern(rtPattern.cat, (rtTermToMatch as Term & {tag:'ObjTerm'}).cat, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders, binderNameMapping);
         case 'HomTerm': {
@@ -411,6 +441,22 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             };
             return Pi(pi.paramName, pi.icit, appliedParamType, newBodyTypeFn);
         }
+        case 'Let': {
+            const letNode = current;
+            const appliedLetType = letNode.letType ? applySubst(letNode.letType, subst, patternVarDecls) : undefined;
+            const appliedLetDef = applySubst(letNode.letDef, subst, patternVarDecls);
+            
+            const placeholderVar = Var(letNode.letName, true);
+            const bodyInstance = letNode.body(placeholderVar);
+            const appliedBodyInstance = applySubst(bodyInstance, subst, patternVarDecls);
+
+            const newBodyFn = (v_arg: Term): Term => {
+                return replaceFreeVar(appliedBodyInstance, placeholderVar.name, v_arg);
+            };
+            const newLet = Let(letNode.letName, appliedLetType, appliedLetDef, newBodyFn);
+            (newLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && appliedLetType !== undefined;
+            return newLet;
+        }
         case 'ObjTerm': return ObjTerm(applySubst(current.cat, subst, patternVarDecls));
         case 'HomTerm':
             return HomTerm(
@@ -514,6 +560,10 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             collectPatternVars(current.paramType, patternVarDecls, collectedVars, visited);
             // Similar to Lam for bodyType.
             break;
+        case 'Let':
+            if (current.letType) collectPatternVars(current.letType, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.letDef, patternVarDecls, collectedVars, visited);
+            break;
         case 'ObjTerm': collectPatternVars(current.cat, patternVarDecls, collectedVars, visited); break;
         case 'HomTerm':
             collectPatternVars(current.cat, patternVarDecls, collectedVars, visited);
@@ -592,7 +642,7 @@ export function getHeadAndSpine(term: Term): { head: Term, spine: Term[] } {
  * @param term The term to perform substitution in.
  * @param freeVarName The name of the free variable to replace.
  * @param replacementVar The variable term to substitute with.
- * @param boundInScope Set of names currently bound by lambdas/pis in the traversal path.
+ * @param boundInScope Set of names currently bound by lambdas/pis/lets in the traversal path.
  * @returns The term with free occurrences of the variable replaced.
  */
 export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: Term, boundInScope: Set<string> = new Set()): Term {
@@ -600,7 +650,7 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
     switch (current.tag) {
         case 'Var':
-            // Replace if name matches AND it's not shadowed by an inner binder within the current term being processed.
+            // Replace if name matches AND it's not shadowed by an inner binder AND it's a locally-bound var.
             return (current.name === freeVarName && !boundInScope.has(freeVarName) && current.isLambdaBound) ? replacementVar : current;
         case 'Lam': {
             const lam = current;
@@ -686,6 +736,49 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                 };
 
                 return Pi(pi.paramName, pi.icit, newParamType, newBodyTypeFn);
+            }
+        }
+        case 'Let': {
+            const letNode = current;
+            const newLetType = letNode.letType ? replaceFreeVar(letNode.letType, freeVarName, replacementVar, boundInScope) : undefined;
+            const newLetDef = replaceFreeVar(letNode.letDef, freeVarName, replacementVar, boundInScope);
+
+            if (letNode.letName === freeVarName) {
+                const newLet = Let(letNode.letName, newLetType, newLetDef, letNode.body);
+                (newLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && newLetType !== undefined;
+                return newLet;
+            }
+
+            const freeVarsInReplacement = getFreeVariables(replacementVar);
+            if (freeVarsInReplacement.has(letNode.letName)) {
+                const freshName = freshVarName(letNode.letName);
+                const freshVar = Var(freshName, true);
+                const bodyWithFreshVar = letNode.body(freshVar);
+
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(freshName);
+
+                const newBody = replaceFreeVar(bodyWithFreshVar, freeVarName, replacementVar, newBoundInScope);
+
+                const newLet = Let(freshName, newLetType, newLetDef, (v_arg) => {
+                    return replaceFreeVar(newBody, freshName, v_arg);
+                });
+                (newLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && newLetType !== undefined;
+                return newLet;
+            } else {
+                const newBoundInScope = new Set(boundInScope);
+                newBoundInScope.add(letNode.letName);
+
+                const placeholder = Var(letNode.letName, true);
+                const bodyInstance = letNode.body(placeholder);
+                const replacedBodyInstance = replaceFreeVar(bodyInstance, freeVarName, replacementVar, newBoundInScope);
+
+                const newBodyFn = (v_arg: Term): Term => {
+                    return replaceFreeVar(replacedBodyInstance, placeholder.name, v_arg);
+                };
+                const newLet = Let(letNode.letName, newLetType, newLetDef, newBodyFn);
+                (newLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && newLetType !== undefined;
+                return newLet;
             }
         }
         case 'App':
@@ -820,7 +913,7 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
 
         switch (termRef.tag) {
             case 'Var':
-                if (!currentLocallyBound.has(termRef.name)) {
+                if (termRef.isLambdaBound && !currentLocallyBound.has(termRef.name)) {
                     freeVars.add(termRef.name);
                 }
                 break;
@@ -835,6 +928,13 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
                 const newScopePi = new Set(currentLocallyBound);
                 newScopePi.add(termRef.paramName); 
                 find(termRef.bodyType(Var(termRef.paramName, true)), newScopePi);
+                break;
+            case 'Let':
+                if (termRef.letType) find(termRef.letType, currentLocallyBound);
+                find(termRef.letDef, currentLocallyBound);
+                const newScopeLet = new Set(currentLocallyBound);
+                newScopeLet.add(termRef.letName);
+                find(termRef.body(Var(termRef.letName, true)), newScopeLet);
                 break;
             case 'App':
                 find(termRef.func, currentLocallyBound);
@@ -902,4 +1002,4 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
 
     find(term, new Set(initialBoundScope));
     return freeVars;
-} 
+}

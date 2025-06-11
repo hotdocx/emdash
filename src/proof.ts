@@ -6,7 +6,7 @@
  */
 
 import {
-    Term, Context, Hole, Icit, Var, Lam, Pi, Type, App,
+    Term, Context, Hole, Icit, Var, Lam, Pi, Let, Type, App,
 } from './types';
 import {
     getTermRef, emptyCtx, extendCtx, printTerm, globalDefs,
@@ -65,6 +65,11 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.paramType);
                 // Instantiate body with a dummy var to find holes inside
                 traverse(current.bodyType(Var('_find_holes_dummy')));
+                break;
+            case 'Let':
+                if (current.letType) traverse(current.letType);
+                traverse(current.letDef);
+                traverse(current.body(Var('_find_holes_dummy')));
                 break;
             case 'ObjTerm': traverse(current.cat); break;
             case 'HomTerm':
@@ -185,6 +190,20 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                 const extendedCtx = extendCtx(ctx, term.paramName, term.paramType, term.icit);
                 return find(term.bodyType(Var(term.paramName, true)), extendedCtx);
             }
+            case 'Let': {
+                if (term.letType) {
+                    const foundInType = find(term.letType, ctx);
+                    if (foundInType) return foundInType;
+                }
+                const foundInDef = find(term.letDef, ctx);
+                if (foundInDef) return foundInDef;
+                
+                // For the body, we must extend the context with the let-binding.
+                // The context should know both the type and the definition for reduction purposes.
+                const letType = term.letType || Hole('_let_type_goal_finder');
+                const extendedCtx = extendCtx(ctx, term.letName, letType, Icit.Expl, term.letDef);
+                return find(term.body(Var(term.letName, true)), extendedCtx);
+            }
             // Add other term types as needed for traversal...
             case 'ObjTerm': return find(term.cat, ctx);
             case 'HomTerm':
@@ -245,7 +264,8 @@ export function reportProofState(proofTerm: Term): string {
     const goalInfo = getHoleGoal(proofTerm, hole.id);
     if (goalInfo) {
         goalInfo.context.forEach(v => {
-            reportStr += `  ${v.name} : ${printTerm(v.type)}\n`;
+            const defStr = v.definition ? ` = ${printTerm(v.definition)}` : '';
+            reportStr += `  ${v.name} : ${printTerm(v.type)}${defStr}\n`;
         });
         reportStr += `  ⊢ ${printTerm(goalInfo.type)}\n`;
     } else {

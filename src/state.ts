@@ -152,6 +152,7 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'FunctorTypeTerm':
         case 'MkFunctorTerm':
             return true;
+        case 'Let':
         case 'FMap0Term':
         case 'FMap1Term':
         case 'NatTransComponentTerm':
@@ -266,6 +267,18 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             const bodyTypeTerm = current.bodyType(Var(current.paramName, true));
             const binder = current.icit === Icit.Impl ? `{${paramDisplayName} : ${paramTypeStr}}` : `(${paramDisplayName} : ${paramTypeStr})`;
             return `(Π ${binder}. ${printTerm(bodyTypeTerm, newBoundVars, stackDepth + 1)})`;
+        }
+        case 'Let': {
+            const letNameDisplay = getUniqueName(current.letName);
+            const newBoundVars = new Map(boundVarsMap);
+            newBoundVars.set(current.letName, letNameDisplay);
+
+            const typeAnnotation = (current._isAnnotated && current.letType)
+                ? ` : ${printTerm(current.letType, new Map(boundVarsMap), stackDepth + 1)}`
+                : '';
+            const defStr = printTerm(current.letDef, new Map(boundVarsMap), stackDepth + 1);
+            const bodyTerm = current.body(Var(current.letName, true));
+            return `(let ${letNameDisplay}${typeAnnotation} = ${defStr} in ${printTerm(bodyTerm, newBoundVars, stackDepth + 1)})`;
         }
         case 'CatTerm': return 'Cat';
         case 'ObjTerm': return `(Obj ${printTerm(current.cat, new Map(boundVarsMap), stackDepth + 1)})`;
