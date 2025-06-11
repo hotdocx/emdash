@@ -130,37 +130,6 @@ describe("Let-Binding (Local Definition) Tests", () => {
         assert(areEqual(finalResult.term, Var("two"), emptyCtx), "Final result of (λy. let x=add y y in x) 1 should be 2");
     });
 
-    // it("should work with dependent types", () => {
-    //     // let n : Nat = two in v : Vec A n
-    //     const Nat = Var("Nat");
-    //     const two = Var("two");
-    //     defineGlobal("A_type", Type(), undefined, true, true);
-    //     const A = Var("A_type");
-    //     const VecType = Pi("n", Icit.Expl, Nat, _ => Type());
-    //     defineGlobal("Vec", Pi("A", Icit.Impl, Type(), _ => VecType));
-    //     const Vec = Var("Vec");
-
-    //     const VecA = App(Vec, A, Icit.Impl);
-    //     const VecA2 = App(VecA, two);
-
-    //     // We check the type of a placeholder term `v_dep` which is typed by `Vec A n`
-    //     // where `n` is the let-bound variable.
-    //     const letTerm = Let("n", Nat, two, n_bv => {
-    //         // Define a term inside the let body whose type depends on `n_bv`
-    //         const v_dep_type = App(VecA, n_bv);
-    //         defineGlobal("v_dep", v_dep_type);
-    //         return Var("v_dep");
-    //     });
-
-    //     const result = elaborate(letTerm);
-        
-    //     // The type of the `let` expression is the type of its body.
-    //     // The body is `v_dep`. Inside the `let`, `v_dep` has type `Vec A n`.
-    //     // When the `let` is evaluated, `n` becomes `two`.
-    //     // So the type of `v_dep` becomes `Vec A two`.
-    //     assert(areEqual(result.type, VecA2, emptyCtx), "Let-binding should be unfolded in dependent types");
-    // });
-
     it("should handle nested let-bindings", () => {
         console.log("TEST>> should handle nested let-bindings: (normalize(App(App(Var(add), two), two), emptyCtx)):", 
             printTerm(normalize(App(App(Var("add"), Var("two")), Var("two")), emptyCtx)));
@@ -183,7 +152,7 @@ describe("Let-Binding (Local Definition) Tests", () => {
                         )
                     );
         
-        const result = elaborate(term, undefined, emptyCtx, { normalizeResultTerm: true });
+        const result = elaborate(term, undefined, emptyCtx);
         // x=1. y = add 1 1 = 2. body = add 2 1 = 3.
         console.log("TEST>> should handle nested let-bindings: normalize(result.term, emptyCtx)", printTerm(normalize(result.term, emptyCtx)));
         assert(areEqual(result.term, three, emptyCtx), "Nested let-bindings should evaluate correctly. Expected 3, got " + printTerm(result.term));
