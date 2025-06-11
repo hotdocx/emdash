@@ -42,6 +42,17 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
         const termBeforeInnerReductions = current;
 
+        // Check for local definitions first
+        // Be careful of name shadowing with global definitions
+        if (current.tag === 'Var' && current.isLambdaBound) {
+            const binding = lookupCtx(ctx, current.name);
+            if (binding && binding.definition) {
+                    current = binding.definition; // Substitute with the definition
+                    changedInThisPass = true;
+                    continue; // Restart the whnf loop with the new term
+                }
+        }
+
         // Apply user rewrite rules (if not a kernel constant symbol)
         if (!isKernelConstantSymbolStructurally(current)) {
             for (const rule of userRewriteRules) {

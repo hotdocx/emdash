@@ -133,9 +133,9 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
     if (current.tag === 'Var') {
         const localBinding = lookupCtx(ctx, current.name);
         if (localBinding) {
-            // A local binding (from a Lam, Pi, or Let) gives the type.
-            // The `whnf` function handles unfolding let-definitions.
-            return { elaboratedTerm: current, type: localBinding.type };
+            // If it's a local let-binding with a definition, use the definition.
+            // The type is already known from the binding.
+            return { elaboratedTerm: localBinding.definition || current, type: localBinding.type };
         }
 
         const gdef = globalDefs.get(current.name);

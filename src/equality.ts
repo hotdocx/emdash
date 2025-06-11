@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Context, Hole, Var, App, Lam, Pi, Type, CatTerm, ObjTerm, HomTerm,
+    Term, Context, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit
 } from './types';
@@ -97,6 +97,26 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
             const freshV = Var(freshVName, true);
             const extendedCtx = extendCtx(ctx, freshVName, getTermRef(rt1.paramType), rt1.icit); // No definition for freshV
             return areEqual(rt1.bodyType(freshV), pi2.bodyType(freshV), extendedCtx, depth + 1);
+        }
+        case 'Let': {
+            const let2 = rt2 as Term & {tag:'Let'};
+            if (rt1._isAnnotated !== let2._isAnnotated) return false;
+            
+            let typeOk = true;
+            if (rt1._isAnnotated) {
+                if (!rt1.letType || !let2.letType || !areEqual(rt1.letType, let2.letType, ctx, depth + 1)) {
+                    typeOk = false;
+                }
+            }
+            if (!typeOk) return false;
+            
+            if (!areEqual(rt1.letDef, let2.letDef, ctx, depth + 1)) return false;
+
+            const freshVName = rt1.letName;
+            const freshV = Var(freshVName, true);
+            const letDefTypeForCtx = (rt1._isAnnotated && rt1.letType) ? getTermRef(rt1.letType) : Hole(freshHoleName()+"_areEqual_unannot_let_param");
+            const extendedCtx = extendCtx(ctx, freshVName, letDefTypeForCtx, Icit.Expl);
+            return areEqual(rt1.body(freshV), let2.body(freshV), extendedCtx, depth + 1);
         }
         case 'ObjTerm': return areEqual(rt1.cat, (rt2 as Term & {tag:'ObjTerm'}).cat, ctx, depth + 1);
         case 'HomTerm': {
@@ -191,4 +211,4 @@ export function areEqual(t1: Term, t2: Term, ctx: Context, depth = 0): boolean {
         }
         default: const exhaustiveCheck: never = rt1; return false;
     }
-} 
+}

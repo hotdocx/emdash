@@ -144,6 +144,7 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
 
     switch (rt.tag) {
         case 'Type':
+        case 'Let':
         case 'CatTerm':
         case 'FunctorCategoryTerm':
         case 'NatTransTypeTerm':
@@ -152,7 +153,6 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'FunctorTypeTerm':
         case 'MkFunctorTerm':
             return true;
-        case 'Let':
         case 'FMap0Term':
         case 'FMap1Term':
         case 'NatTransComponentTerm':
