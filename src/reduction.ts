@@ -328,21 +328,9 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
         }
         case 'Let': {
             const letNode = current;
-            const normLetType = (letNode._isAnnotated && letNode.letType) ? normalize(letNode.letType, ctx, stackDepth + 1) : undefined;
-            const normLetDef = normalize(letNode.letDef, ctx, stackDepth + 1);
-            
-            const placeholderVar = Var(letNode.letName, true);
-            const defType = letNode.letType ? getTermRef(letNode.letType) : Hole(freshHoleName() + "_norm_let_body_ctx");
-            const bodyCtx = extendCtx(ctx, letNode.letName, defType, Icit.Expl);
-            
-            const normalizedBody = normalize(letNode.body(placeholderVar), bodyCtx, stackDepth + 1);
-
-            const newBodyFn = (v_arg_placeholder: Term): Term => {
-                return replaceFreeVar(normalizedBody, placeholderVar.name, v_arg_placeholder);
-            };
-            const normLet = Let(letNode.letName, normLetType, normLetDef, newBodyFn);
-            (normLet as Term & {tag:'Let'})._isAnnotated = letNode._isAnnotated && normLetType !== undefined;
-            return normLet;
+            const normalizedDef = normalize(letNode.letDef, ctx, stackDepth + 1);
+            const substitutedBody = letNode.body(normalizedDef);
+            return normalize(substitutedBody, ctx, stackDepth + 1);
         }
         case 'App': {
             const normFunc = normalize(current.func, ctx, stackDepth + 1);
