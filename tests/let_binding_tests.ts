@@ -46,6 +46,26 @@ describe("Let-Binding (Local Definition) Tests", () => {
         addRewriteRule("add_z", ["$m"], App(App(Var("add"), z), Var("$m")), Var("$m"), emptyCtx);
         addRewriteRule("add_s", ["$n", "$m"], App(App(Var("add"), App(s, Var("$n"))), Var("$m")), App(s, App(App(Var("add"), Var("$n")), Var("$m"))), emptyCtx);
 
+        // Define Vec for dependent type tests
+        const VecType = Pi("A", Icit.Impl, Type(), A => Pi("n", Icit.Expl, Nat, _ => Type()));
+        defineGlobal("Vec", VecType);
+        const Vec = Var("Vec");
+
+        // vnil : {A:Type} -> Vec A z
+        const vnilType = Pi("A", Icit.Impl, Type(), A => App(App(Vec, A, Icit.Impl), z, Icit.Expl));
+        defineGlobal("vnil", vnilType);
+
+        // vcons : {A:Type} -> {n:Nat} -> A -> Vec A n -> Vec A (s n)
+        const vconsType = Pi("A", Icit.Impl, Type(), A =>
+            Pi("n", Icit.Impl, Nat, n =>
+                Pi("head", Icit.Expl, A, _ =>
+                    Pi("tail", Icit.Expl, App(App(Vec, A, Icit.Impl), n, Icit.Expl), _ =>
+                        App(App(Vec, A, Icit.Impl), App(s, n, Icit.Expl), Icit.Expl)
+                    )
+                )
+            )
+        );
+        defineGlobal("vcons", vconsType);
         
         // Test: add (s z) (s z)  ==> s (add z (s z)) ==> s (s z)
         console.log("TEST>> beforeEach: (normalize(App(App(Var(add), two), two), emptyCtx)):", printTerm(normalize(App(App(Var("add"), two), two), emptyCtx)));
@@ -169,5 +189,84 @@ describe("Let-Binding (Local Definition) Tests", () => {
 
         assert(areEqual(result.term, two, emptyCtx), "Unannotated let should evaluate correctly");
         assert(areEqual(result.type, Var("Nat"), emptyCtx), "Type of unannotated let should be inferred correctly");
+    });
+
+    it("should handle let-bindings within type expressions (Pi)", () => {
+        // Π (x : let T = Nat in T). let T = Nat in T
+        const Nat = Var("Nat");
+        
+        const term = Pi("x", Icit.Expl,
+            Let("T", Type(), Nat, T_bv => T_bv),
+            _ => Let("T", Type(), Nat, T_bv => T_bv)
+        );
+
+        // This term is a type, so we elaborate it against Type
+        const result = elaborate(term, Type());
+
+        // The elaborated term should be equivalent to Π (x:Nat).Nat
+        const expectedType = Pi("x", Icit.Expl, Nat, _ => Nat);
+
+        assert(areEqual(result.term, expectedType, emptyCtx), "Let-bindings in Pi types should be unfolded");
+        assert(areEqual(result.type, Type(), emptyCtx), "The type of this Pi-with-lets should be Type");
+    });
+
+    it("should work with dependent types in let-bindings", () => {
+        // let n = two in Vec Nat n
+        const Nat = Var("Nat");
+        const two = Var("two");
+        const Vec = Var("Vec");
+
+        // The term is a type, so we check it against Type()
+        const term = Let("n", Nat, two, n_bv => App(App(Vec, Nat, Icit.Impl), n_bv));
+        const result = elaborate(term, Type());
+
+        const expectedType = App(App(Vec, Nat, Icit.Impl), two);
+        assert(areEqual(result.term, expectedType, emptyCtx), "let n=2 in Vec Nat n should be equal to Vec Nat 2");
+        assert(areEqual(result.type, Type(), emptyCtx), "The type of (let n=2 in Vec Nat n) should be Type");
+    });
+
+    it("should unfold let-binding for a dependent-typed term", () => {
+        // let my_one_vec = vcons {Nat} {z} one (vnil {Nat}) in my_one_vec
+        const Nat = Var("Nat");
+        const one = Var("one");
+        const z = Var("z");
+        const s = Var("s");
+        const Vec = Var("Vec");
+        const vnil = Var("vnil");
+        const vcons = Var("vcons");
+
+        const one_vec_def = App(App(App(App(vcons, Nat, Icit.Impl), z, Icit.Impl), one, Icit.Expl), App(vnil, Nat, Icit.Impl), Icit.Expl);
+        const one_vec_type = App(App(Vec, Nat, Icit.Impl), App(s, z));
+
+        const term = Let("my_one_vec", one_vec_type, one_vec_def, vec_bv => vec_bv);
+        const result = elaborate(term);
+
+        assert(areEqual(result.term, one_vec_def, emptyCtx), "let vec = ... in vec should evaluate to the vector definition");
+        assert(areEqual(result.type, one_vec_type, emptyCtx), "The type of the let-bound vector should be correct");
+    });
+
+    it("let-binding definition can refer to outer binders in a more complex way", () => {
+        // λ(y:Nat). let x:Nat = add y y in add x y
+        const Nat = Var("Nat");
+        const add = Var("add");
+        const one = Var("one");
+        const two = Var("two");
+        const three = App(Var("s"), two);
+        
+        const term = Lam("y", Icit.Expl, Nat, 
+            y_bv => Let("x", Nat, App(App(add, y_bv), y_bv), 
+                x_bv => App(App(add, x_bv), y_bv)
+            )
+        );
+        const elabLam = elaborate(term);
+
+        // Apply this lambda to `one`. 
+        // y becomes one.
+        // let-def becomes `add one one` => x is `two`. 
+        // body becomes `add x y` => `add two one` => `three`.
+        const finalTerm = App(elabLam.term, one);
+        const finalResult = elaborate(finalTerm);
+
+        assert(areEqual(finalResult.term, three, emptyCtx), "Final result of (λy. let x=add y y in add x y) 1 should be 3");
     });
 });

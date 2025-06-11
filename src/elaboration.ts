@@ -276,11 +276,12 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
         case 'Pi': {
             const piNode = current;
             const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, options);
+            const canonicalParamType = whnf(elaboratedParamType, ctx, stackDepth + 1);
             
             // To check the body, we need a context with the parameter and a placeholder variable.
             const freshV = Var(piNode.paramName, true);
             // The context is extended with the param type, but not a `let` definition for the variable itself.
-            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, elaboratedParamType, piNode.icit);
+            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, canonicalParamType, piNode.icit);
             const bodyTypeInstance = piNode.bodyType(freshV); // Instantiate body with the placeholder
             
             // Check that the body is a valid type and get its elaborated form.
@@ -288,7 +289,7 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // Reconstruct the Pi with the elaborated parameter type and a new body function
             // that correctly substitutes the placeholder in the elaborated body.
-            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(elaboratedParamType), (v_arg: Term) => {
+            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(canonicalParamType), (v_arg: Term) => {
                 // The elaboratedBodyType has `freshV` as a free variable.
                 // We must replace it with `v_arg` to produce the final body type.
                 return replaceFreeVar(elaboratedBodyType, freshV.name, v_arg);
