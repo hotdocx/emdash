@@ -48,8 +48,7 @@ describe("Let-Binding (Local Definition) Tests", () => {
 
         
         // Test: add (s z) (s z)  ==> s (add z (s z)) ==> s (s z)
-        console.log("normalize(top level, emptyCtx)", printTerm(normalize(App(App(Var("add"), two, Icit.Expl), two, Icit.Expl), emptyCtx)));
-
+        console.log("TEST>> beforeEach: (normalize(App(App(Var(add), two), two), emptyCtx)):", printTerm(normalize(App(App(Var("add"), two), two), emptyCtx)));
         const termToReduce = App(App(Var("add"), two, Icit.Expl), two, Icit.Expl);
         const reducedTerm = normalize(termToReduce, emptyCtx);
         assert(areEqual(reducedTerm, App(s,App(s,two)), emptyCtx), `Test 0: add(2, 2) should reduce to 4. Got ${printTerm(reducedTerm)}`);
@@ -163,13 +162,20 @@ describe("Let-Binding (Local Definition) Tests", () => {
     // });
 
     it("should handle nested let-bindings", () => {
+        console.log("TEST>> should handle nested let-bindings: (normalize(App(App(Var(add), two), two), emptyCtx)):", 
+            printTerm(normalize(App(App(Var("add"), Var("two")), Var("two")), emptyCtx)));
+        
         // let x=1 in let y = add x x in add y x
         const Nat = Var("Nat");
+        const z = Var("z");
+        const s = Var("s");
+        
+        // const one = App(s, z);
+        // const two = App(s, one);
         const one = Var("one");
         const two = Var("two");
         const three = App(Var("s"), two);
         const add = Var("add");
-        const s = Var("s");
 
         const term = Let("x", Nat, one, x_bv => 
                         Let("y", Nat, App(App(add, x_bv), x_bv), y_bv =>
@@ -179,11 +185,7 @@ describe("Let-Binding (Local Definition) Tests", () => {
         
         const result = elaborate(term, undefined, emptyCtx, { normalizeResultTerm: true });
         // x=1. y = add 1 1 = 2. body = add 2 1 = 3.
-        addRewriteRule("add_s", ["$n", "$m"], App(App(Var("add"), App(s, Var("$n"))), Var("$m")), App(s, App(App(Var("add"), Var("$n")), Var("$m"))), emptyCtx);
-
-        console.log("normalize(four, emptyCtx)", printTerm(normalize(App(App(Var("add"), two, Icit.Expl), two, Icit.Expl), emptyCtx)));
-
-        console.log("normalize(result.term, emptyCtx)", printTerm(normalize(result.term, emptyCtx)));
+        console.log("TEST>> should handle nested let-bindings: normalize(result.term, emptyCtx)", printTerm(normalize(result.term, emptyCtx)));
         assert(areEqual(result.term, three, emptyCtx), "Nested let-bindings should evaluate correctly. Expected 3, got " + printTerm(result.term));
     });
 

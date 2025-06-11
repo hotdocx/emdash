@@ -14,6 +14,7 @@ import {
 } from './state';
 import { areEqual } from './equality';
 import { MAX_STACK_DEPTH } from './constants';
+import { whnf } from './reduction';
 
 /**
  * Checks if a string is a declared pattern variable.
@@ -377,6 +378,10 @@ function matchPatternStructural(
     const s1 = matchPattern(rtPattern.func, rtTermToMatch.func, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders, binderNameMapping);
     if (!s1) return null;
     return matchPattern(rtPattern.arg, rtTermToMatch.arg, ctx, patternVarDecls, s1, stackDepth + 1, patternLocalBinders, binderNameMapping);
+    // const s1 = matchPattern(rtPattern.func, whnf(rtTermToMatch.func, ctx), ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders, binderNameMapping);
+    // if (!s1) return null;
+    // return matchPattern(rtPattern.arg, whnf(rtTermToMatch.arg, ctx), ctx, patternVarDecls, s1, stackDepth + 1, patternLocalBinders, binderNameMapping);
+
 }
 
 /**
