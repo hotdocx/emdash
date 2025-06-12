@@ -1,65 +1,13 @@
 import * as P from 'parsimmon';
 import { Term, Icit, Type, Var, Lam, App, Pi, Let } from './types';
+import { replaceFreeVar } from './pattern';
 
 // Helper to create a parser that consumes trailing whitespace
 function token<T>(parser: P.Parser<T>): P.Parser<T> {
     return parser.skip(P.optWhitespace);
 }
 
-function replaceFreeVar(term: Term, name: string, repl: Term, bound: Set<string> = new Set()): Term {
-    switch (term.tag) {
-        case 'Var':
-            return term.name === name && !bound.has(name) ? repl : term;
-        case 'App':
-            return App(
-                replaceFreeVar(term.func, name, repl, bound),
-                replaceFreeVar(term.arg, name, repl, bound),
-                term.icit
-            );
-        case 'Lam': {
-            const newBound = new Set(bound);
-            if (term.paramName === name) return term; // Shadowing
-            newBound.add(term.paramName);
-            const ptype = term.paramType ? replaceFreeVar(term.paramType, name, repl, bound) : undefined;
-            const body = term.body(Var(term.paramName, true));
-            const newBody = replaceFreeVar(body, name, repl, newBound);
-            if (ptype) {
-                return Lam(term.paramName, term.icit, ptype, (v) => replaceFreeVar(newBody, term.paramName, v));
-            }
-            return Lam(term.paramName, term.icit, (v) => replaceFreeVar(newBody, term.paramName, v));
-        }
-        case 'Pi': {
-            const newBound = new Set(bound);
-            if (term.paramName === name) return term; // Shadowing
-            newBound.add(term.paramName);
-            const ptype = replaceFreeVar(term.paramType, name, repl, bound);
-            const body = term.bodyType(Var(term.paramName, true));
-            const newBody = replaceFreeVar(body, name, repl, newBound);
-            return Pi(term.paramName, term.icit, ptype, (v) => replaceFreeVar(newBody, term.paramName, v));
-        }
-        case 'Let': {
-            const ltype = term.letType ? replaceFreeVar(term.letType, name, repl, bound) : undefined;
-            const ldef = replaceFreeVar(term.letDef, name, repl, bound);
-            const newBound = new Set(bound);
-            if (term.letName === name) { // Shadowing for body
-                 if (ltype) return Let(term.letName, ltype, ldef, term.body);
-                 return Let(term.letName, ldef, term.body);
-            }
-            newBound.add(term.letName);
-            const body = term.body(Var(term.letName, true));
-            const newBody = replaceFreeVar(body, name, repl, newBound);
-            const bodyFn = (v: Term) => replaceFreeVar(newBody, term.letName, v);
-            if (ltype) {
-                return Let(term.letName, ltype, ldef, bodyFn);
-            }
-            return Let(term.letName, ldef, bodyFn);
-        }
-        case 'Type':
-            return term;
-        default:
-            return term;
-    }
-}
+
 
 // Language definition for Parsimmon.
 const lang = P.createLanguage({
