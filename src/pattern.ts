@@ -10,7 +10,7 @@ import {
 } from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
-    addConstraint, userUnificationRules, consoleLog, lookupCtx, isKernelConstantSymbolStructurally
+    addConstraint, userUnificationRules, consoleLog, lookupCtx
 } from './state';
 import { areEqual } from './equality';
 import { MAX_STACK_DEPTH } from './constants';
@@ -655,14 +655,8 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
     switch (current.tag) {
         case 'Var':
-            // Replace if name matches AND it's not shadowed by an inner binder
-            // AND it's not a kernel constant symbol. This prevents replacing e.g. "Type".
-            if (current.name === freeVarName && !boundInScope.has(freeVarName)) {
-                if (!isKernelConstantSymbolStructurally(current)) {
-                    return replacementVar;
-                }
-            }
-            return current;
+            // Replace if name matches AND it's not shadowed by an inner binder AND it's a locally-bound var.
+            return (current.name === freeVarName && !boundInScope.has(freeVarName) && current.isLambdaBound) ? replacementVar : current;
         case 'Lam': {
             const lam = current;
             const paramTypeReplaced = lam.paramType ? replaceFreeVar(lam.paramType, freeVarName, replacementVar, boundInScope) : undefined;
