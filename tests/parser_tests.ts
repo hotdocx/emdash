@@ -2,7 +2,7 @@
  * @file tests/parser_tests.ts
  * @description Tests for the parser logic in `src/parser.ts`.
  */
-import { Term, Icit, Type, Var, Lam, App, Pi } from '../src/types';
+import { Term, Icit, Type, Var, Lam, App, Pi, Let } from '../src/types';
 import { emptyCtx, globalDefs } from '../src/state';
 import { defineGlobal } from '../src/globals';
 import { resetMyLambdaPi } from '../src/stdlib';
@@ -123,6 +123,41 @@ describe('Parser Macro: `parseToSyntaxTree`', () => {
             const manualTerm: Term = Pi("_", Icit.Expl,
                 App(Var("f"), Var("x"), Icit.Expl),
                 _ => App(Var("g"), Var("A"), Icit.Impl)
+            );
+            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        });
+    });
+
+    describe('Let Expressions', () => {
+        it('should parse a simple typed let expression', () => {
+            const source = "let x : Nat = Nat in x";
+            const parsedTerm = parseToSyntaxTree(source);
+            const manualTerm = Let("x", Var("Nat"), Var("Nat"), (v) => v);
+            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        });
+
+        it('should parse a simple untyped let expression', () => {
+            const source = "let x = Nat in x";
+            const parsedTerm = parseToSyntaxTree(source);
+            const manualTerm = Let("x", Var("Nat"), (v) => v);
+            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        });
+
+        it('should parse nested let expressions', () => {
+            const source = "let A = Type in let x : A = Nat in x";
+            const parsedTerm = parseToSyntaxTree(source);
+            const manualTerm = Let("A", Type(), (A_var) =>
+                Let("x", A_var, Var("Nat"), (x_var) => x_var)
+            );
+            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        });
+
+        it('should parse let with a lambda body', () => {
+            const source = "let id = λ (y:Nat). y in id x";
+            const parsedTerm = parseToSyntaxTree(source);
+            const manualTerm = Let("id",
+                Lam("y", Icit.Expl, Var("Nat"), (y_var) => y_var),
+                (id_var) => App(id_var, Var("x"), Icit.Expl)
             );
             assert(areEqual(parsedTerm, manualTerm, emptyCtx));
         });

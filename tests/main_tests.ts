@@ -20,6 +20,7 @@ import './church_encoding_implicit_tests';
 import './let_binding_tests';
 import './functorial_elaboration';
 import './phase1_tests';
+import './parser_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
