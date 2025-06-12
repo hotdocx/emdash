@@ -1,22 +1,22 @@
 /**
- * @file tests/parser_tests.ts
- * @description Tests for the parser logic in `src/parser.ts`.
+ * @file tests/parser_tests2.ts
+ * @description Tests for the new parser logic in `src/parser2.ts`.
  */
-import { Term, Icit, Type, Var, Lam, App, Pi, Let } from '../src/types';
-import { emptyCtx, globalDefs } from '../src/state';
+import { Term, Icit, Type, Var, Lam, App, Pi, Let, Hole } from '../src/types';
+import { emptyCtx, globalDefs, resetHoleId } from '../src/state';
 import { defineGlobal } from '../src/globals';
 import { resetMyLambdaPi } from '../src/stdlib';
 import { areEqual } from '../src/equality';
-import { parseToSyntaxTree } from '../src/parser';
+import { parse } from '../src/parser';
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';
 
-describe('Parser Macro: `parseToSyntaxTree`', () => {
+describe('Parser 2: New Syntax (`parse`)', () => {
 
     beforeEach(() => {
         resetMyLambdaPi();
+        resetHoleId(); // Reset hole counter for predictable hole names in tests
         // Define some basic globals that will be used across tests.
-        // The parser doesn't need them, but areEqual does for elaboration.
         defineGlobal("Nat", Type());
         defineGlobal("Bool", Type());
         defineGlobal("f", Pi("_", Icit.Expl, Var("Nat"), _ => Var("Nat")));
@@ -28,147 +28,202 @@ describe('Parser Macro: `parseToSyntaxTree`', () => {
 
     describe('Primitives and Variables', () => {
         it('should parse Type', () => {
-            const parsedTerm: Term = parseToSyntaxTree('Type');
-            const manualTerm: Term = Type();
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx), '`Type` should parse to Type()');
+            const parsed = parse('Type');
+            const manual = Type();
+            assert(areEqual(parsed, manual, emptyCtx), '`Type` should parse to Type()');
         });
 
         it('should parse a simple variable', () => {
-            const parsedTerm: Term = parseToSyntaxTree('Nat');
-            const manualTerm: Term = Var("Nat");
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx), '`Nat` should parse to Var("Nat")');
+            const parsed = parse('Nat');
+            const manual = Var("Nat");
+            assert(areEqual(parsed, manual, emptyCtx), '`Nat` should parse to Var("Nat")');
+        });
+
+        it('should parse _ as a hole', () => {
+            const parsed = parse('_');
+            // The exact hole name doesn't matter, just that it's a hole.
+            assert.strictEqual(parsed.tag, 'Hole', "Parsed term should be a Hole");
         });
     });
 
-    describe('Lambdas and Pi Types', () => {
-        it('should parse a typed lambda: λ (x : Nat). x', () => {
-            const parsedTerm: Term = parseToSyntaxTree('λ (x : Nat). x');
-            const manualTerm: Term = Lam("x", Icit.Expl, Var("Nat"), (v) => v);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+    describe('Lambdas (\\ or fun)', () => {
+        it('should parse a typed lambda with \\ keyword : \\ (x : Nat). x', () => {
+            const parsed = parse('\\ (x : Nat). x');
+            const manual = Lam("x", Icit.Expl, Var("Nat"), (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse an untyped lambda: λ x. x', () => {
-            // Note: Elaboration will later infer the type of 'x' as a hole.
-            const parsedTerm: Term = parseToSyntaxTree('λ x. x');
-            const manualTerm: Term = Lam("x", Icit.Expl, (v) => v);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        it('should parse a typed lambda with fun keyword: fun (x : Nat). x', () => {
+            const parsed = parse('fun (x : Nat). x');
+            const manual = Lam("x", Icit.Expl, Var("Nat"), (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse multiple binders: λ (x : Nat) y. y', () => {
-            const parsedTerm: Term = parseToSyntaxTree('λ (x : Nat) y. y');
-            const manualTerm: Term = Lam("x", Icit.Expl, Var("Nat"), _ => Lam("y", Icit.Expl, v => v));
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        it('should parse an untyped lambda: fun x. x', () => {
+            const parsed = parse('fun x. x');
+            const manual = Lam("x", Icit.Expl, (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse an implicit lambda binder: λ {A : Type}. A', () => {
-            const parsedTerm: Term = parseToSyntaxTree('λ {A : Type}. A');
-            const manualTerm: Term = Lam("A", Icit.Impl, Type(), v => v);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        it('should parse multiple binders: fun (x : Nat) y. y', () => {
+            const parsed = parse('fun (x : Nat) y. y');
+            const manual = Lam("x", Icit.Expl, Var("Nat"), _ => Lam("y", Icit.Expl, v => v));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse a Pi type: Π (x : Nat). Nat', () => {
-            const parsedTerm: Term = parseToSyntaxTree('Π (x : Nat). Nat');
-            const manualTerm: Term = Pi("x", Icit.Expl, Var("Nat"), _ => Var("Nat"));
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        it('should parse grouped explicit binders: fun (x y : Nat). y', () => {
+            const parsed = parse('fun (x y : Nat). y');
+            const manual = Lam("x", Icit.Expl, Var("Nat"), _ => Lam("y", Icit.Expl, Var("Nat"), v => v));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
+        it('should parse an implicit lambda binder: fun {A : Type}. A', () => {
+            const parsed = parse('fun {A : Type}. A');
+            const manual = Lam("A", Icit.Impl, Type(), v => v);
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse grouped implicit binders: fun {A B : Type}. A', () => {
+            const parsed = parse('fun {A B : Type}. A');
+            const manual = Lam("A", Icit.Impl, Type(), vA => Lam("B", Icit.Impl, Type(), _ => vA));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse untyped implicit binders with \\ keyword: \\ {A B}. A', () => {
+            const parsed = parse('\\ {A B}. A');
+            const manual = Lam("A", Icit.Impl, vA => Lam("B", Icit.Impl, _ => vA));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+        it('should parse untyped implicit binders with fun keyword: fun {A B}. A', () => {
+            const parsed = parse('fun {A B}. A');
+            const manual = Lam("A", Icit.Impl, vA => Lam("B", Icit.Impl, _ => vA));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+    });
+
+    describe('Pi Types and Arrows (->)', () => {
         it('should parse a non-dependent Pi as an arrow: Nat -> Bool', () => {
-            const parsedTerm: Term = parseToSyntaxTree('Nat -> Bool');
-            const manualTerm: Term = Pi("_", Icit.Expl, Var("Nat"), _ => Var("Bool"));
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('Nat -> Bool');
+            const manual = Pi("_", Icit.Expl, Var("Nat"), _ => Var("Bool"));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should handle right-associativity of arrows: A -> B -> Nat', () => {
-            const parsedTerm: Term = parseToSyntaxTree('A -> B -> Nat');
-            const manualTerm: Term = Pi("_", Icit.Expl, Var("A"), _ => Pi("_", Icit.Expl, Var("B"), _ => Var("Nat")));
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('A -> B -> Nat');
+            const manual = Pi("_", Icit.Expl, Var("A"), _ => Pi("_", Icit.Expl, Var("B"), _ => Var("Nat")));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse an implicit Pi binder: Π {A : Type}. A -> A', () => {
-            const parsedTerm: Term = parseToSyntaxTree('Π {A : Type}. A -> A');
-            const manualTerm: Term = Pi("A", Icit.Impl, Type(), A_ => Pi("_", Icit.Expl, A_, _ => A_));
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+        it('should parse a dependent Pi type: (x : Nat) -> Nat', () => {
+            const parsed = parse('(x : Nat) -> Nat');
+            const manual = Pi("x", Icit.Expl, Var("Nat"), _ => Var("Nat"));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse grouped dependent Pi binders: (x y : Nat) -> Nat', () => {
+            const parsed = parse('(x y : Nat) -> Nat');
+            const manual = Pi("x", Icit.Expl, Var("Nat"), _ => Pi("y", Icit.Expl, Var("Nat"), _ => Var("Nat")));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse an implicit Pi binder: {A : Type} -> A -> A', () => {
+            const parsed = parse('{A : Type} -> A -> A');
+            const manual = Pi("A", Icit.Impl, Type(), A_ => Pi("_", Icit.Expl, A_, _ => A_));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse mixed grouped binders: {A B : Type} (x : A) -> B', () => {
+            const parsed = parse('{A B : Type} (x : A) -> B');
+            const manual = Pi("A", Icit.Impl, Type(), _ => Pi("B", Icit.Impl, Type(), B_ => Pi("x", Icit.Expl, _, _ => B_)));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
     });
 
     describe('Application and Precedence', () => {
         it('should parse simple application: f x', () => {
-            const parsedTerm: Term = parseToSyntaxTree('f x');
-            const manualTerm: Term = App(Var("f"), Var("x"), Icit.Expl);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('f x');
+            const manual = App(Var("f"), Var("x"), Icit.Expl);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should handle left-associativity of application: f x Nat', () => {
-            const parsedTerm: Term = parseToSyntaxTree('f x Nat');
-            const manualTerm: Term = App(App(Var("f"), Var("x"), Icit.Expl), Var("Nat"), Icit.Expl);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('f x Nat');
+            const manual = App(App(Var("f"), Var("x"), Icit.Expl), Var("Nat"), Icit.Expl);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should parse implicit application: g {Nat}', () => {
-            const parsedTerm: Term = parseToSyntaxTree('g {Nat}');
-            const manualTerm: Term = App(Var("g"), Var("Nat"), Icit.Impl);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('g {Nat}');
+            const manual = App(Var("g"), Var("Nat"), Icit.Impl);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should respect parentheses: f (g {A})', () => {
-            const parsedTerm: Term = parseToSyntaxTree('f (g {A})');
-            const manualTerm: Term = App(Var("f"), App(Var("g"), Var("A"), Icit.Impl), Icit.Expl);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse('f (g {A})');
+            const manual = App(Var("f"), App(Var("g"), Var("A"), Icit.Impl), Icit.Expl);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should give application higher precedence than arrows: f x -> g {A}', () => {
-            const parsedTerm: Term = parseToSyntaxTree('f x -> g {A}');
-
-            // This should parse as (f x) -> (g {A})
-            const manualTerm: Term = Pi("_", Icit.Expl,
+            const parsed = parse('f x -> g {A}');
+            const manual = Pi("_", Icit.Expl,
                 App(Var("f"), Var("x"), Icit.Expl),
                 _ => App(Var("g"), Var("A"), Icit.Impl)
             );
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should handle parentheses in arrow types: (A -> B) -> Nat', () => {
+            const parsed = parse('(A -> B) -> Nat');
+            const manual = Pi("_", Icit.Expl,
+                Pi("_", Icit.Expl, Var("A"), _ => Var("B")),
+                _ => Var("Nat")
+            );
+            assert(areEqual(parsed, manual, emptyCtx));
         });
     });
 
     describe('Let Expressions', () => {
         it('should parse a simple typed let expression', () => {
             const source = "let x : Nat = Nat in x";
-            const parsedTerm = parseToSyntaxTree(source);
-            const manualTerm = Let("x", Var("Nat"), Var("Nat"), (v) => v);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse(source);
+            const manual = Let("x", Var("Nat"), Var("Nat"), (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should parse a simple untyped let expression', () => {
             const source = "let x = Nat in x";
-            const parsedTerm = parseToSyntaxTree(source);
-            const manualTerm = Let("x", Var("Nat"), (v) => v);
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            const parsed = parse(source);
+            const manual = Let("x", Var("Nat"), (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should parse nested let expressions', () => {
             const source = "let A = Type in let x : A = Nat in x";
-            const parsedTerm = parseToSyntaxTree(source);
-            const manualTerm = Let("A", Type(), (A_var) =>
+            const parsed = parse(source);
+            const manual = Let("A", Type(), (A_var) =>
                 Let("x", A_var, Var("Nat"), (x_var) => x_var)
             );
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
 
         it('should parse let with a lambda body', () => {
-            const source = "let id = λ (y:Nat). y in id x";
-            const parsedTerm = parseToSyntaxTree(source);
-            const manualTerm = Let("id",
+            const source = "let id = \\ (y:Nat). y in id x";
+            const parsed = parse(source);
+            const manual = Let("id",
                 Lam("y", Icit.Expl, Var("Nat"), (y_var) => y_var),
                 (id_var) => App(id_var, Var("x"), Icit.Expl)
             );
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            assert(areEqual(parsed, manual, emptyCtx));
         });
     });
 
     describe('Complex Examples', () => {
         it('should parse a complex nested term correctly', () => {
-            const source = "λ (f : Nat -> Nat) (x : Nat). f (f x)";
-            const parsedTerm: Term = parseToSyntaxTree(source);
+            const source = "\\ (f : Nat -> Nat) (x : Nat). f (f x)";
+            const parsed = parse(source);
 
-            const manualTerm: Term = Lam("f", Icit.Expl,
+            const manual = Lam("f", Icit.Expl,
                 Pi("_", Icit.Expl, Var("Nat"), _ => Var("Nat")),
                 (f_var) => Lam("x", Icit.Expl, Var("Nat"),
                     (x_var) => App(
@@ -178,23 +233,38 @@ describe('Parser Macro: `parseToSyntaxTree`', () => {
                     )
                 )
             );
-
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx), 'Complex term did not parse as expected.');
+            assert(areEqual(parsed, manual, emptyCtx), 'Complex term did not parse as expected.');
         });
 
         it('should parse the type of the `const` function', () => {
-            const source = "Π {A : Type} {B : Type}. A -> B -> A";
-            const parsedTerm: Term = parseToSyntaxTree(source);
+            const source = "{A : Type} -> {B : Type} -> A -> B -> A";
+            const parsed = parse(source);
 
-            const manualTerm: Term = Pi("A", Icit.Impl, Type(), (A_var) =>
-                Pi("B", Icit.Impl, Type(), (_B_var) =>
+            const manual = Pi("A", Icit.Impl, Type(), (A_var) =>
+                Pi("B", Icit.Impl, Type(), (B_var) =>
                     Pi("_", Icit.Expl, A_var, _ =>
-                        Pi("_", Icit.Expl, _B_var, _ => A_var)
+                        Pi("_", Icit.Expl, B_var, _ => A_var)
                     )
                 )
             );
 
-            assert(areEqual(parsedTerm, manualTerm, emptyCtx));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse complex grouped binders', () => {
+            const source = "{A B : Type} (x y : A) -> {z : B} -> A";
+             const parsed = parse(source);
+
+            const manual = Pi("A", Icit.Impl, Type(), A_ =>
+                Pi("B", Icit.Impl, Type(), B_ =>
+                    Pi("x", Icit.Expl, A_, _ =>
+                        Pi("y", Icit.Expl, A_, _ =>
+                            Pi("z", Icit.Impl, B_, _ => A_)
+                        )
+                    )
+                )
+            );
+            assert(areEqual(parsed, manual, emptyCtx));
         });
     });
-});
+}); 
