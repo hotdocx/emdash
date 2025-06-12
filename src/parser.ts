@@ -1,4 +1,3 @@
-// src/parser-logic.ts
 import * as P from 'parsimmon';
 import { Term, Icit, Type, Var, Lam, App, Pi } from './types';
 
