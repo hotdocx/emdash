@@ -46,45 +46,56 @@ describe('Parser 2: New Syntax (`parseToSyntaxTree2`)', () => {
         });
     });
 
-    describe('Lambdas (\\ or lambda)', () => {
-        it('should parse a typed lambda: \\ (x : Nat). x', () => {
+    describe('Lambdas (\\ or fun)', () => {
+        it('should parse a typed lambda with \\ keyword : \\ (x : Nat). x', () => {
             const parsed = parseToSyntaxTree2('\\ (x : Nat). x');
             const manual = Lam("x", Icit.Expl, Var("Nat"), (v) => v);
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse an untyped lambda: \\ x. x', () => {
-            const parsed = parseToSyntaxTree2('\\ x. x');
+        it('should parse a typed lambda with fun keyword: fun (x : Nat). x', () => {
+            const parsed = parseToSyntaxTree2('fun (x : Nat). x');
+            const manual = Lam("x", Icit.Expl, Var("Nat"), (v) => v);
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+
+        it('should parse an untyped lambda: fun x. x', () => {
+            const parsed = parseToSyntaxTree2('fun x. x');
             const manual = Lam("x", Icit.Expl, (v) => v);
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse multiple binders: \\ (x : Nat) y. y', () => {
-            const parsed = parseToSyntaxTree2('\\ (x : Nat) y. y');
+        it('should parse multiple binders: fun (x : Nat) y. y', () => {
+            const parsed = parseToSyntaxTree2('fun (x : Nat) y. y');
             const manual = Lam("x", Icit.Expl, Var("Nat"), _ => Lam("y", Icit.Expl, v => v));
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse grouped explicit binders: \\ (x y : Nat). y', () => {
-            const parsed = parseToSyntaxTree2('\\ (x y : Nat). y');
+        it('should parse grouped explicit binders: fun (x y : Nat). y', () => {
+            const parsed = parseToSyntaxTree2('fun (x y : Nat). y');
             const manual = Lam("x", Icit.Expl, Var("Nat"), _ => Lam("y", Icit.Expl, Var("Nat"), v => v));
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse an implicit lambda binder: \\ {A : Type}. A', () => {
-            const parsed = parseToSyntaxTree2('\\ {A : Type}. A');
+        it('should parse an implicit lambda binder: fun {A : Type}. A', () => {
+            const parsed = parseToSyntaxTree2('fun {A : Type}. A');
             const manual = Lam("A", Icit.Impl, Type(), v => v);
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse grouped implicit binders: \\ {A B : Type}. A', () => {
-            const parsed = parseToSyntaxTree2('\\ {A B : Type}. A');
+        it('should parse grouped implicit binders: fun {A B : Type}. A', () => {
+            const parsed = parseToSyntaxTree2('fun {A B : Type}. A');
             const manual = Lam("A", Icit.Impl, Type(), vA => Lam("B", Icit.Impl, Type(), _ => vA));
             assert(areEqual(parsed, manual, emptyCtx));
         });
 
-        it('should parse untyped implicit binders: \\ {A B}. A', () => {
+        it('should parse untyped implicit binders with \\ keyword: \\ {A B}. A', () => {
             const parsed = parseToSyntaxTree2('\\ {A B}. A');
+            const manual = Lam("A", Icit.Impl, vA => Lam("B", Icit.Impl, _ => vA));
+            assert(areEqual(parsed, manual, emptyCtx));
+        });
+        it('should parse untyped implicit binders with fun keyword: fun {A B}. A', () => {
+            const parsed = parseToSyntaxTree2('fun {A B}. A');
             const manual = Lam("A", Icit.Impl, vA => Lam("B", Icit.Impl, _ => vA));
             assert(areEqual(parsed, manual, emptyCtx));
         });

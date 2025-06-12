@@ -14,7 +14,7 @@ function token<T>(parser: P.Parser<T>): P.Parser<T> {
     return parser.skip(P.optWhitespace);
 }
 
-const keywords = ['let', 'in', 'Type', 'lambda'];
+const keywords = ['let', 'in', 'Type', 'fun'];
 
 // We need to pass the list of bound variables down the recursive calls
 // to correctly parse variables. A variable is either a local bound variable
@@ -47,7 +47,7 @@ function buildParser(boundVars: string[]) {
         }),
         
         Lam: r => P.seq(
-            token(P.alt(P.string('\\'), P.string('lambda'))),
+            token(P.alt(P.string('\\'), P.string('fun'))),
             r.LamBinderList,
             token(P.string('.'))
         ).chain(([_lam, binders, _dot]) => {
