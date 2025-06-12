@@ -8,7 +8,7 @@ export enum Icit { Impl, Expl }
 
 export type BaseTerm =
     | { tag: 'Type' }
-    | { tag: 'Var', name: string, isLambdaBound?: boolean, origin?: "occurs_check" | "pattern_var" }
+    | { tag: 'Var', name: string, isBound?: boolean, origin?: "occurs_check" | "pattern_var" }
     | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'App', func: Term, arg: Term, icit: Icit }
     | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term }
@@ -78,7 +78,7 @@ export type PatternVarDecl = string; // e.g., "$x", "$myVar"
 // These functions create instances of the term types defined in BaseTerm.
 
 export const Type = (): Term & { tag: 'Type' } => ({ tag: 'Type' });
-export const Var = (name: string, isLambdaBound: boolean = false, origin?: "occurs_check" | "pattern_var"): Term & { tag: 'Var' } => ({ tag: 'Var', name, isLambdaBound, origin });
+export const Var = (name: string, isBound: boolean = false, origin?: "occurs_check" | "pattern_var"): Term & { tag: 'Var' } => ({ tag: 'Var', name, isBound, origin });
 /** A locally bound variable (by a lambda or let). */
 export const boundVar = (name: string): Term & { tag: 'Var' } => Var(name, true);
 /** A global definition variable. */

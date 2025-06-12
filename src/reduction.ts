@@ -44,7 +44,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
 
         // Check for local definitions first
         // Be careful of name shadowing with global definitions
-        if (current.tag === 'Var' && current.isLambdaBound) {
+        if (current.tag === 'Var' && current.isBound) {
             const binding = lookupCtx(ctx, current.name);
             if (binding && binding.definition) {
                     current = binding.definition; // Substitute with the definition
@@ -99,7 +99,7 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     const body = getTermRef(lam.body(Var(lam.paramName, true))); 
                     if (body.tag === 'App' && body.icit === lam.icit) {
                         const appArg = getTermRef(body.arg);
-                        if (appArg.tag === 'Var' && appArg.name === lam.paramName && appArg.isLambdaBound) {
+                        if (appArg.tag === 'Var' && appArg.name === lam.paramName && appArg.isBound) {
                             const funcPart = getTermRef(body.func);
                             // Check that the lambda's parameter is not free in the function part.
                             const freeVarsInF = getFreeVariables(funcPart);

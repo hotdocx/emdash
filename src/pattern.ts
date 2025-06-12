@@ -656,7 +656,7 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
     switch (current.tag) {
         case 'Var':
             // Replace if name matches AND it's not shadowed by an inner binder AND it's a locally-bound var.
-            return (current.name === freeVarName && !boundInScope.has(freeVarName) && current.isLambdaBound) ? replacementVar : current;
+            return (current.name === freeVarName && !boundInScope.has(freeVarName) && current.isBound) ? replacementVar : current;
         case 'Lam': {
             const lam = current;
             const paramTypeReplaced = lam.paramType ? replaceFreeVar(lam.paramType, freeVarName, replacementVar, boundInScope) : undefined;
@@ -882,7 +882,7 @@ export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {
         const binding = lookupCtx(ctx, spineVarName);
         // Ensure the variable from the spine is indeed the one bound in the current context as expected.
         // This check might need refinement if spineVar objects don't have perfect identity with context-bound vars.
-        if (!binding || !binding.type || !spineVar.isLambdaBound /* Spine vars must be bound vars */) {
+        if (!binding || !binding.type || !spineVar.isBound /* Spine vars must be bound vars */) {
             throw new Error(`Spine variable ${spineVarName} is not a recognized bound variable in context or has no type.`);
         }
         const spineVarType = binding.type; // Use type from context for the lambda parameter
@@ -891,7 +891,7 @@ export function abstractTermOverSpine(termToAbstract: Term, spineVars: (Term & {
         const bodyToWrapInLambda = resultingLambda; // This is the term that will become the body of Lam(spineVarName, ...)
                                              // It might contain spineVarName as a free variable (and also other spineVars[j] for j > i).
         resultingLambda = Lam(spineVarName, icitForLambda, spineVarType, (lambdaParamVar) => {
-            // lambdaParamVar is Var(spineVarName, isLambdaBound=true)
+            // lambdaParamVar is Var(spineVarName, isBound=true)
             // We need to transform `bodyToWrapInLambda` such that its free occurrences of `spineVarName`
             // (which correspond to the original spineVar that was free in bodyToWrapInLambda w.r.t this new Lam)
             // are now correctly bound by `lambdaParamVar`.
@@ -918,7 +918,7 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
 
         switch (termRef.tag) {
             case 'Var':
-                if (termRef.isLambdaBound && !currentLocallyBound.has(termRef.name)) {
+                if (termRef.isBound && !currentLocallyBound.has(termRef.name)) {
                     freeVars.add(termRef.name);
                 }
                 break;

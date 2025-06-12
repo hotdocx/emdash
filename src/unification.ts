@@ -694,7 +694,7 @@ export function solveHoFlexRigid(
     const distinctVarNames = new Set<string>();
     for (const arg of spineArgs) {
         const argRef = getTermRef(arg);
-        if (argRef.tag !== 'Var' || !argRef.isLambdaBound) {
+        if (argRef.tag !== 'Var' || !argRef.isBound) {
             consoleLog(`[solveHoFlexRigid] Spine validation failed: arg ${printTerm(argRef)} is not a lambda-bound variable.`);
             return UnifyResult.Failed; // Not a valid Miller fragment spine arg
         }
