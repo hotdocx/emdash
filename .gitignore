@@ -11,9 +11,4 @@ yarn-error.log*
 /out/
 emdash-template/dist/
 emdash-template/node_modules/
-index2.ts
-code2.ts
 backups/
-lambdapi_core/
-lambdapi_core
-emdash_v2_tests.ts
