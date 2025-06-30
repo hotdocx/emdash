@@ -53,39 +53,4 @@ The key challenge is that Sandpack operates on a flat virtual file system and ca
     *   For each line, replace the relative path `../../src/` with a path relative to the Sandpack `/src` directory, which is `./`. For example, `export * from '../../src/types.js';` becomes `export * from './types.js';`.
     *   Add this modified content to the Sandpack file map as `/src/emdash_api.ts`.
 
-**Example Sandpack File Map Construction (Conceptual):**
-
-```javascript
-// This is a conceptual script to illustrate the process of building the file map.
-
-// In your application (e.g., hotdocx):
-// 1. You would use file system APIs (like Node.js 'fs' or a bundler's import feature) 
-//    to read the raw text content of the necessary files.
-
-async function createEmdashSandpackFiles() {
-    const sandpackFiles = {};
-
-    // 1. Add template files (paths relative to Sandpack root)
-    sandpackFiles['/index.html'] = await readLocalFile('emdash-template/index.html');
-    sandpackFiles['/package.json'] = await readLocalFile('emdash-template/package.json');
-    sandpackFiles['/tsconfig.json'] = await readLocalFile('emdash-template/tsconfig.json');
-    sandpackFiles['/src/App.tsx'] = await readLocalFile('emdash-template/src/App.tsx');
-    sandpackFiles['/src/index.tsx'] = await readLocalFile('emdash-template/src/index.tsx');
-    sandpackFiles['/src/styles.css'] = await readLocalFile('emdash-template/src/styles.css');
-
-    // 2. Add emdash kernel files
-    const kernelFileNames = [/* 'types.ts', 'state.ts', ... */]; 
-    for (const fileName of kernelFileNames) {
-        sandpackFiles[`/src/${fileName}`] = await readLocalFile(`src/${fileName}`);
-    }
-
-    // 3. Modify and add emdash_api.ts
-    let apiFileContent = await readLocalFile('emdash-template/src/emdash_api.ts');
-    apiFileContent = apiFileContent.replace(/\.\.\/\.\.\/src\//g, './');
-    sandpackFiles['/src/emdash_api.ts'] = apiFileContent;
-
-    // 'sandpackFiles' is now ready to be passed to the <SandpackProvider files={sandpackFiles}> component.
-    return sandpackFiles;
-}
-```
 This process creates a self-contained project within Sandpack where the React UI can import and interact with the full `emdash` kernel. 
