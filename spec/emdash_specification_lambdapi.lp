@@ -1,24 +1,5 @@
 /*
     m— emdash functorial programming
-    NOTES: for implementing this specification of emdash into typescript:
-    - the Lambdapi's `τ` decoder and `ABC_Type` versions of `ABC` need not be present in the Typescript implementation
-    - any argument enclosed in brackets (such as `[A : Cat]` ) to mark it as Lamdapi's implicit argument
-        means that in the typescript implementation too it should be treated as an implicit argument
-       (either as implicit input of a kernel term constructor or an implicit argument of a global/local variable which has an implicit Pi type)
-    - a Lambdapi symbol marked as `constant symbol` means the corresponsing emdash symbol should be registered as `constant` and `injective`
-    - a Lambdapi symbol marked as `injective symbol` means the corresponsing emdash symbol should be registered as `injective`
-    - an ordinary Lambdapi symbol `symbol XYZ (without marking such as `constant symbol` or `injective symbol`)
-      means that the corresponsing emdash symbol SHOULD NOT be registered as `constant` nor `injective.
-    - sometimes a Lambdapi rewrite rule ( `rule ... ↪ ... ;` ) or unification rule ( `unif_rule ... ≡ ... ↪ [ ... ≡ ... ; ... ≡ ... ];` ) will either:
-      + be directly implementad inside the kernel ( `whnf`, `areEqual`, `unify`, etc...) if it belongs very-much to the kernel
-      + or be implemented via the mechanism of `user-provided rewrite rules` or `user-provided unification rules`
-        if it belongs very-much to the standard library or for convenience reasons.
-    - when implementing a rewrite rule or unification rule, 
-      if a construct has both a kernel-term implementation and a convenience-alias as a global,
-      such as for example `defineGlobal("Hom", ..., Lam("A_val", Icit.Impl, CatTerm(), A_term => ... HomTerm(A_term, X_term, Y_term)))`
-      then (even though both constructions are convertible) it is understood that it is the true kernel-term version which
-      should be used syntactically to express the rewrite/unification rule
-    - Note that to get Lambdapi to accept empty conditions for unif_rule we use a trick such as `unif_rule A $x ≡ B $x ↪ [ tt ≡ tt ]`
 */
 
 // ===== START OF BASIC KERNEL SPECIFICATION  =====
@@ -262,6 +243,7 @@ notation = infix 10;
 
 constant symbol eq_refl : Π [a: Type], Π x: τ a, τ (x = x);
 symbol ind_eq : Π [a: Type], Π [x: τ a], Π [y: τ a], τ (x = y) → Π p: (τ a → Type), τ (p y) → τ (p x);
+rule ind_eq (eq_refl $x) $p $u ↪ $u;
 builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;
 builtin "eqind" ≔ ind_eq;
@@ -478,6 +460,54 @@ symbol hom_cov_cat_total_proj [A : Cat] (M: Functor A Cat_cat) (W : Obj (Total_c
   Transf (@hom_cov_cat (Total_cat M) W) (fapp1 (@hom_cov Cat_cat _) (@hom_cov_cat A (fapp0 (Total_cat_proj M) W)) (Total_cat_proj M));
 
 
+// # --- TODO: iso-univalent category : eq IS iso
+
+// property of iso/equiv arrows; alternative formulations are possible
+// when `Obj Set` this becomes groupoid/set equivalence/bijection via our conversion rules for `@= (@Hom_Type Set $X $Y)`
+// when `Obj Cat` this becomes categorial equivalence via our conversion rules `@= (@Hom_Type Cat_cat $X $Y)` (TODO?)
+constant symbol isEquiv [A : Cat] [X Y : Obj A] (f : Hom X Y): TYPE;
+injective symbol isEquiv_inv_Hom [A : Cat] [X Y : Obj A] [f : Hom X Y]: isEquiv f → Hom Y X;
+injective symbol isEquiv_coUnit_Eq [A : Cat] [X Y : Obj A] [f : Hom X Y]: Π f_isEquiv : isEquiv f,  
+  τ (compose_morph (isEquiv_inv_Hom f_isEquiv) f = identity_morph X);
+injective symbol isEquiv_unit_Eq [A : Cat] [X Y : Obj A] [f : Hom X Y]: Π f_isEquiv : isEquiv f,  
+  τ (identity_morph Y = compose_morph f (isEquiv_inv_Hom f_isEquiv) );
+
+// `=` IS already those Hom which are equivalences;
+// extract Hom canonically via `ind_eq`
+// note ind_eq is contravariant (so involves predicate `(λ Z, Hom_Type Z Y)` on contravariant argument)... 
+// note use `Hom_family` so we have non higher-order rules involving `ind_eq` on LHS
+injective symbol Hom_family [A : Cat] (Y : Obj A): Obj A → Type;
+rule Hom_family $Y $W ↪ Hom_Type $W $Y;
+injective symbol Eq_Hom [A : Cat] [X Y : Obj A]: τ (X = Y) → Hom X Y
+  ≔ λ e, ind_eq e (Hom_family Y) /*(λ W, Hom_Type W Y)*/ (@identity_morph A Y);
+
+// therefore `=` is coinductively re-using `=` via `isEquiv`
+constant symbol Eq_Hom_isEquiv [A : Cat] [X Y : Obj A] (e : τ (X = Y)):
+  isEquiv (Eq_Hom e);
+
+symbol sym_Eq [A : Type] [X Y : τ A]: τ (X = Y) → τ (Y = X)
+  ≔ λ e, ind_eq e (λ W, Y = W) (eq_refl _);
+symbol trans_Eq [A : Type] [X Y Z : τ A]: τ (X = Y) → τ (Y = Z) → τ (X = Z)
+  ≔ λ xy yz, ind_eq xy (λ W, W = Z) yz;
+
+rule isEquiv_inv_Hom (Eq_Hom_isEquiv $e) ↪ Eq_Hom (sym_Eq $e);
+
+// [TODO] unfold `Eq_Hom` as `ind_eq`, using `Hom_family`
+rule compose_morph (Eq_Hom $yz) (Eq_Hom $xy) 
+ ↪ Eq_Hom (trans_Eq $xy $yz);
+
+// [TODO] then should be able to compute isEquiv_coUnit_Eq
+// because (... eq_refl) : trans_Eq (sym_Eq $e) $e = eq_refl
+symbol general_ind_eq : Π [a: Type], Π [x: τ a], Π [y: τ a] (e : τ (x = y)), 
+  Π P: (Π w : τ a, τ (x = w) → Type), τ (P x (eq_refl x)) → τ (P y e);
+symbol coh_sym_Eq [A : Type] [X Y : τ A] (e: τ (X = Y)): τ (trans_Eq e (sym_Eq e) = eq_refl X)
+≔ begin 
+assume A X Y e; refine (general_ind_eq e (λ z e', (trans_Eq e' (sym_Eq e') = eq_refl X)) _ );
+simplify; refine (eq_refl (eq_refl X));
+end;
+// rule isEquiv_coUnit_Eq (Eq_Hom_isEquiv $e) ↪ coh_sym_Eq ...
+
+
 // # --- TODO: Modules/profunctors without Set classifier vs functors to Set ---
 
 // evidence that the map (λ f, m _∘> f) is transf 
@@ -559,3 +589,4 @@ injective symbol rule_naturality_direct_TYPE [A : Cat] [B : Cat] (F G : Functor 
 symbol rule_naturality_direct [A : Cat] [B : Cat] [F : Functor A B] [G : Functor A B]
 (ϵ : Transf F G) 
 : rule_naturality_direct_TYPE F G (tapp ( ϵ)) ≔ λ X X' a , eq_refl _;
+

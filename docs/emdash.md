@@ -4,11 +4,11 @@
 
 **Keywords:** Dependent Type Theory, Logical Frameworks, Category Theory, Functorial Programming, Synthetic Mathematics, Interactive Theorem Proving, AI-Assisted Formalization, Lambdapi, TypeScript.
 
-## 1. Introduction
+## 1. Introduction: Bridging the Chasm
 
-A deep chasm has long existed between the fluid, intuitive world of informal mathematical creativity and the rigid, explicit world of formal computational rigor. While modern mathematics, particularly category theory, thrives on abstraction and structural reasoning, its translation into machine-verifiable artifacts remains a formidable challenge. The dominant approach has been to encode these rich structures within powerful but foundational proof assistants like Coq, Agda, or Lean. In such systems, a category is not a primitive notion but a record or a structure built from set-theoretic or type-theoretic components, and its laws are propositions to be proven as separate lemmas.
+A deep chasm has long existed between the fluid, intuitive world of informal mathematical creativity and the rigid, explicit world of formal computational rigor. While modern mathematics, particularly category theory, thrives on abstraction and structural reasoning, its translation into machine-verifiable artifacts remains a formidable challenge. The dominant approach has been to encode these rich structures within powerful but foundational proof assistants like Coq, Agda, or Lean. In such systems, a category is not a primitive notion but a record or a structure built from set-theoretic or type-theoretic components, and its laws are propositions to be proven as separate lemmas. This approach, while tremendously successful, creates a conceptual gap: the mathematician thinks in terms of "functors" and "natural transformations," but the machine sees only "records satisfying certain proven predicates." The structural properties feel tacked on, rather than intrinsic.
 
-An alternative vision, championed by Kosta Dosen and his collaborators in works on "functorial programming" and "proof-theoretical coherence" [1, 2], suggests a different path. This paradigm advocates for a substructural and inherently computational approach to logic where the core entities of a mathematical domain—such as categories and functors—are not merely encoded but are themselves the primitive building blocks of the formal language. In such a system, proofs of structural integrity would not be separate objects but would manifest as computations, governed by a disciplined rewrite system that is part of the theory's definitional equality.
+An alternative vision, championed by Kosta Dosen and his collaborators in works on "functorial programming" and "proof-theoretical coherence" [1, 2], suggests a different path. This paradigm advocates for a substructural and inherently computational approach to logic where the core entities of a mathematical domain—such as categories and functors—are not merely encoded but are themselves the primitive building blocks of the formal language. In such a system, proofs of structural integrity would not be separate objects but would manifest as computations, governed by a disciplined rewrite system that is part of the theory's definitional equality. The very act of constructing an object would guarantee its coherence.
 
 This paper introduces **Emdash**, a dependently typed logical framework developed in TypeScript, with the explicit goal of exploring and implementing these functorial programming principles. Emdash distinguishes itself by adopting a *synthetic* methodology: fundamental categorical notions are treated as primitive types and term constructors within its λΠ-calculus core. This approach, combined with the expressive power of dependent types, allows for a more direct and natural articulation of categorical arguments and constructions. The design and implementation of Emdash are systematically guided by a formal specification written in a Lambdapi dialect [3], a logical framework well-suited for prototyping type systems modulo rewrite rules. This ensures a close correspondence between the intended semantics and the behavior of the practical system, a significant portion of which is generated directly from this specification.
 
@@ -18,11 +18,12 @@ The impetus for Emdash, however, extends beyond theoretical exploration. It is a
 
 This paper provides a comprehensive and didactic introduction to the Emdash logical framework.
 *   In Section 2, we detail the core type theory and the synthetic categorical primitives that form its foundation.
-*   In Section 3, we dissect the elaboration engine, explaining the interplay of bidirectional type checking, implicit argument handling, and unification-based constraint solving.
-*   Section 4 is dedicated to our central contribution, functorial elaboration, providing a deep dive into the `MkFunctorTerm` primitive and its coherence-checking mechanism.
-*   In Section 5, we describe the system's full-featured interactive proof mode, demonstrating how users can construct proofs by refining holes with a suite of tactics.
-*   Section 6 provides a crucial overview of the system's validation through its comprehensive test suite, confirming the correct behavior of all major features.
-*   Finally, in Sections 7 and 8, we situate Emdash within the landscape of related work and outline the ambitious roadmap for its future development.
+*   In Section 3, we present the formal specification of Emdash in the Lambdapi logical framework, which guides the entire implementation.
+*   In Section 4, we dissect the elaboration engine, explaining the interplay of bidirectional type checking, implicit argument handling, and unification-based constraint solving.
+*   Section 5 is dedicated to our central contribution, functorial elaboration, providing a deep dive into the `MkFunctorTerm` primitive and its coherence-checking mechanism.
+*   In Section 6, we describe the system's full-featured interactive proof mode, demonstrating how users can construct proofs by refining holes with a suite of tactics.
+*   In Section 7, we provide a crucial overview of the system's validation through its comprehensive test suite, confirming the correct behavior of all major features.
+*   Finally, in Sections 8 and 9, we situate Emdash within the landscape of related work and outline the ambitious roadmap for its future development.
 
 ## 2. The Emdash Logical Framework
 
@@ -56,17 +57,18 @@ The syntax of terms, defined in `src/types.ts`, is built around the `Term` data 
 *   **η-contraction**: `λx. F x ↪ F`, performed if the `etaEquality` flag is enabled and `x` is not free in `F`.
 *   **Hole Dereferencing**: Following the `ref` chain of solved `Hole`s via the `getTermRef` utility.
 
-### 2.2. Synthetic Categorical Primitives
+### 2.2. The Emdash Parser
 
-Emdash provides categorical structures as first-class citizens, closely mirroring its Lambdapi specification. These are not defined in terms of other structures but are primitive term constructors. The `stdlib.ts` file initializes the system with these primitives.
+To enhance usability, Emdash employs a custom parser, implemented using the `parsimmon` library in `src/parser.ts`. This parser supports a more elaborate and user-friendly syntax than a minimal kernel might provide, moving closer to the syntax of languages like Agda or Lean. Key features include:
 
-*   `CatTerm()`: The type of categories. This corresponds to `constant symbol Cat : TYPE;` in the Lambdapi specification. It is defined as a global constant via `defineGlobal("Cat", Type(), CatTerm(), true)`.
-*   `ObjTerm(cat)`: The type of objects in a category `cat`. This corresponds to the injective symbol `Obj : Cat → TYPE;`. Its global definition has the dependent type `Π (A : Cat), Type` and a value that is a lambda wrapping the `ObjTerm` constructor.
-*   `HomTerm(cat, dom, cod)`: The type of morphisms between objects `dom` and `cod` in category `cat`. Its global definition has the type `Π {A:Cat} (X:Obj A) (Y:Obj A), Type`, making the category an implicit argument.
-*   `compose_morph`: A global symbol for morphism composition, with the expected dependent type: `Π {A:Cat} {X,Y,Z:Obj A}. Hom Y Z → Hom X Y → Hom X Z`.
-*   `identity_morph`: A global constant symbol for the identity morphism: `Π {A:Cat} (X:Obj A), Hom X X`.
-*   `FunctorTypeTerm(domain, codomain)`: The primitive type for functors.
-*   `FMap0Term(functor, objectX)` / `FMap1Term(functor, morphism_a)`: Primitive terms representing functor application to objects and morphisms, respectively. These constructors include optional implicit fields for their domain and codomain categories, which are handled by the elaboration engine.
+*   **Keywords:** Recognizes keywords like `let`, `in`, `Type`, and `fun` (as an alternative to `\`) for lambda abstractions.
+*   **Flexible Binders:** It supports multiple binders in a single construct. For example, `fun x y. body` is parsed as `Lam("x", ..., _ => Lam("y", ..., ...))`.
+*   **Grouped Typed Binders:** It allows grouping variables of the same type, such as `(x y : Nat) -> Type`, which is parsed into a nested Pi-type `(x : Nat) -> (y : Nat) -> Type`. This applies to both explicit `()` and implicit `{}` binders.
+*   **Implicit Binders:** Implicit arguments in lambdas and Pi-types are denoted with curly braces, e.g., `fun {A : Type}. ...` or `{A : Type} -> ...`.
+*   **Untyped Binders:** In lambda expressions, binder types are optional (e.g., `fun x. x`), leaving them to be inferred by the bidirectional type checker.
+*   **Operator Precedence:** The parser correctly handles standard operator precedence, with function application binding more tightly than the function arrow `->`. For example, `f x -> g y` is parsed as `(f x) -> (g y)`.
+
+This parser provides a crucial layer of syntactic sugar, making the formal language more ergonomic without complicating the core term structure.
 
 ### 2.3. Extensibility: Rules and Globals
 
@@ -78,112 +80,173 @@ A key feature of Emdash as a logical framework is its extensibility. The user ca
 
 This three-pronged approach to extensibility allows Emdash to be tailored to specific mathematical domains, with custom equational theories and unification heuristics.
 
-## 3. The Elaboration Engine: From Raw Terms to Typed Expressions
+## 3. A Blueprint for Synthetic Reasoning: The Lambdapi Specification
 
-The heart of Emdash is its elaboration engine, which transforms raw, potentially ambiguous user input into fully typed, unambiguous terms. This process is driven by a bidirectional type checking algorithm and a powerful unification-based constraint solver.
+The implementation of Emdash is not ad-hoc; it is guided by a formal specification written in a dialect of Lambdapi [3], a logical framework based on the λΠ-calculus modulo theory. This specification, found in `emdash_specification_lambdapi.lp.txt`, serves as a precise, executable blueprint for the system's core logic. Using Lambdapi allows us to define the types, constants, and computational behavior of our synthetic primitives in a high-level, declarative style. This section provides a didactic walkthrough of this specification, explaining not just *what* is specified, but *why* it is specified in this particular way.
 
-### 3.1. Bidirectional Type Checking: The `infer` and `check` Dance
+### 3.1. Why Lambdapi?
 
-Elaboration is orchestrated by the `elaborate(term, expectedType?)` function, which dispatches to one of two modes:
+Lambdapi is an ideal choice for specifying a system like Emdash for several reasons. It is a logical framework, meaning it is designed to define other logical systems. Its core, the λΠ-calculus, provides dependent types, which are essential for expressing the relationships between our categorical primitives. Most importantly, its "modulo theory" aspect means that definitional equality is not fixed but can be extended with user-defined rewrite rules. This aligns perfectly with our goal of building a system where coherence laws are computational. The commands `constant symbol`, `rule`, and `unif_rule` provide a clear, declarative language for capturing the essence of our synthetic theory.
 
-*   **Inference Mode (`infer(Γ, t)`):** When no type is expected, `infer` attempts to synthesize the type of a term `t`. It returns both the elaborated term `t'` and its inferred type `T`.
-*   **Checking Mode (`check(Γ, t, T)`):** When a type `T` is expected, `check` verifies that `t` is a valid inhabitant of `T`. It returns only the elaborated term `t'`, as the type is already known.
+### 3.2. The Basic Building Blocks
 
-This bidirectional approach is highly effective. For example, when inferring the type of an unannotated lambda `λx. e`, the system cannot know the type of `x`. It therefore creates a fresh hole `?A` for its type, extends the context with `x : ?A`, infers the type `B` of the body `e`, and returns the Pi-type `Π (x : ?A), B` as the type of the lambda. Conversely, when checking `λx. e` against an expected type `Π (y : A), B`, the system can use `A` as the type for `x`, extend the context with `x : A`, and recursively check `e` against `B`. The main typing rules are summarized in Figure 1.
+At the foundation of any category theory are the notions of categories, objects, and morphisms. In our synthetic approach, these are not constructed from sets; they are primitive notions of the theory, introduced with the `constant symbol` command, which declares a symbol without giving it a definition.
 
-> **Figure 1: Key Bidirectional Typing Rules**
-> ```
-> ------ (Type-Inf)
-> Γ ⊢ Type ⇒ Type
->
-> Γ, x:A ⊢ B ⇒ Type
-> ---------------- (Pi-Inf)
-> Γ ⊢ Π(x:A),B ⇒ Type
->
-> Γ ⊢ A ⇒ Type     Γ, x:A ⊢ t ⇒ B
-> ----------------------------------- (Lam-Inf, unannotated)
-> Γ ⊢ λx.t ⇒ Π(x:?A),B'
-> (where ?A is a fresh hole, and B' is the inferred type of t in Γ, x:?A)
->
-> Γ ⊢ f ⇒ Π(x:A),B     Γ ⊢ a ⇐ A
-> ---------------------------------- (App-Inf)
-> Γ ⊢ f a ⇒ B[a/x]
->
-> Γ ⊢ t ⇒ T'     T' ≡ T
-> ------------------------ (Check-from-Inf)
-> Γ ⊢ t ⇐ T
->
-> Γ ⊢ A ⇐ Type     Γ, x:A ⊢ B ⇐ Type
-> ------------------------------------- (Pi-Chk)
-> Γ ⊢ Π(x:A),B ⇐ Type
->
-> Γ, x:A ⊢ e ⇐ B
-> ------------------- (Lam-Chk)
-> Γ ⊢ λx.e ⇐ Π(x:A),B
-> ```
+```lambdapi
+constant symbol Cat : TYPE;
+injective symbol Obj : Cat → TYPE;
+injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
+```
 
-### 3.2. Implicit Argument Handling
+Let's break this down:
+*   `Cat : TYPE;` declares that `Cat` is a type. An inhabitant of `Cat` is a category.
+*   `Obj : Cat → TYPE;` declares that `Obj` is a function that takes a category and returns a type. `Obj C` is the type whose inhabitants are the objects of the category `C`. The `injective` keyword is a crucial hint to the type checker's unification engine: if it needs to solve `Obj A ≡ Obj B`, it can safely conclude that `A ≡ B`.
+*   `Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;` defines the type of morphisms. It is a dependent type: it takes a category `A` (as an implicit argument, denoted by `[]`), and two objects `X` and `Y` of that category, and returns the type `Hom X Y` of morphisms from `X` to `Y`.
 
-A key aspect of usability in a dependently typed language is the handling of implicit arguments. Emdash employs two mechanisms for this:
+These three declarations form the static, non-computational bedrock of our theory. The computational aspects arise when we define how these structures relate and compose.
 
-1.  **Implicit Application Insertion (`insertImplicitApps`):** When the elaborator is in `infer` mode and encounters an application `f a` where `f` has an implicit Pi-type `Π {x:A}. B`, it knows an implicit argument is missing. The `insertImplicitApps` function is called, which transforms the term into `(f {?h}) a`, where `?h` is a fresh hole. The type of this new term is `B[?h/x]`, and elaboration continues. This process repeats until the function's type is no longer an implicit Pi-type.
+### 3.3. The Synthetic Leap: Defining Structure by Fiat
 
-2.  **Implicit Lambda Insertion (Eta-Expansion):** When in `check` mode, if the expected type is an implicit Pi-type `Π {x:A}. B` but the term `t` being checked is not an implicit lambda, the elaborator wraps `t` in one. It effectively transforms the goal `Γ ⊢ t ⇐ Π {x:A}. B` into a new goal `Γ, x:A ⊢ t ⇐ B`. The final elaborated term is `λ {x:A}. t'`.
+The true power of the synthetic approach becomes apparent when we define more complex structures like the functor category. In a traditional setting, one would define a functor as a record containing an object map and an arrow map, then define a natural transformation, and finally prove that these constructions form a category. In Emdash, we take a more direct route: we declare that the structure of the functor category *is* the structure of functors and natural transformations.
 
-3.  **Kernel Implicit Handling (`ensureKernelImplicitsPresent`):** Certain primitive term constructors, like `FMap0Term` or `FMap1Term`, have implicit arguments that are essential for their well-formedness (e.g., the domain and codomain categories). The `constants.ts` file contains a specification `KERNEL_IMPLICIT_SPECS` listing these. Before elaboration begins, `ensureKernelImplicitsPresent` traverses the raw term and inserts fresh holes for any of these specified implicit fields that are undefined. This allows for more concise user input, as these arguments are almost always inferable from the context.
+```lambdapi
+constant symbol Functor_cat : Π(A : Cat), Π(B : Cat), Cat;
 
-### 3.3. Unification and Constraint Solving
+// Objects of the functor category ARE functors
+unif_rule Obj $Z ≡ (Functor $A $B) ↪ [ $Z ≡ (Functor_cat $A $B) ];
 
-The elegance of the bidirectional algorithm rests on a powerful unification engine to solve the constraints generated during elaboration.
+// Morphisms in the functor category ARE natural transformations
+rule @Hom (Functor_cat _ _) $F $G ↪ Transf $F $G;
+```
 
-**Constraint Generation.** Whenever the elaborator requires two terms to be equal, it does not fail immediately. Instead, it adds a `Constraint` object `{ t1, t2, origin }` to a global list. This happens, for example, when `check(Γ, t, T)` finishes by inferring that `t` has type `T'`, leading to the constraint `T' ≡ T`.
+This is a profound statement. The `unif_rule` tells the unifier: "If you are ever trying to make the type `Obj Z` equal to the type `Functor A B`, you can solve this by unifying `Z` with `Functor_cat A B`." This essentially equates being an object in the functor category with being a functor. The `rule` is even more direct: it states that the type of morphisms between two functors `F` and `G` in the functor category *is definitionally equal to* the type of natural transformations between them. We do not prove this; we *define* it to be so. This is the synthetic leap.
 
-**Constraint Solving (`solveConstraints`).** After the main elaboration traversal, `solveConstraints` is called. It operates in a loop, iteratively attempting to solve the constraints until no more progress can be made:
-1.  For each constraint `t₁ ≡ t₂`, it first checks if the terms are already definitionally equal via `areEqual`. If so, the constraint is removed.
-2.  If not, it calls `unify(t₁, t₂, Γ)`.
-3.  `unify` returns a `UnifyResult`:
-    *   `Solved`: The constraint is considered solved and removed.
-    *   `Progress`: A hole was instantiated but the terms may not be fully equal yet. The constraint is kept for the next iteration.
-    *   `RewrittenByRule`: A user-defined unification rule was applied, replacing the current constraint with new ones.
-    *   `Failed`: Unification is impossible. `solveConstraints` halts and reports failure.
-4.  The loop continues as long as the set of constraints shrinks or `Progress` is reported.
+A similar move is made for the category of sets, `Set`, which is foundational for many categorical constructions.
 
-**The `unify` Algorithm.** The `unify` function, located in `unification.ts`, is the core of the solver. Its strategy is as follows:
-1.  **Hole Handling:** If one term is a hole, `unifyHole` is called. It performs an `occurs check` (`termContainsHole`) to prevent circular definitions (e.g., `?h := f(?h)`) and then solves the hole by setting its `ref` field.
-2.  **Higher-Order Unification:** If one term is a flexible-rigid pair (e.g., `?M x y ≡ g x y`, where `x` and `y` are bound variables), it calls `solveHoFlexRigid`. This function implements Miller's pattern unification. It validates that the spine of the flexible term consists of distinct bound variables, then solves for the hole by abstracting the rigid term over that spine (e.g., `?M := λa b. g a b`).
-3.  **Structural Decomposition:** If the terms have the same structurally injective head (e.g., they are both `ObjTerm` or both applications of an injective global `f_inj`), `unify` recursively unifies their arguments.
-4.  **Fallback to Reduction:** If all else fails, the terms are reduced to WHNF and the unification process is retried. If this still fails, the unification attempt is deemed impossible.
+```lambdapi
+constant symbol Set : Cat;
+unif_rule Obj $A ≡ Type ↪ [ $A ≡ Set ];
+rule @Hom Set $X $Y ↪ (τ $X → τ $Y);
+```
+Here, we declare that the objects of `Set` are simply the system's base types (`Type`), and the morphisms are functions (`τ $X → τ $Y`). This makes `Set` a computational model of the category of types (or small groupoids) inside our theory.
+
+### 3.4. The Computational Core: Coherence as Rewriting
+
+The philosophy of making properties computational is realized through rewrite rules.
+
+**Functoriality:** A functor `F` must preserve composition: `F(g ∘ f) = F(g) ∘ F(f)`. In Emdash, this is not a proposition to be proven for each functor. It is a global rewrite rule that is part of the definition of composition itself.
+
+```lambdapi
+symbol compose_morph : Π [A : Cat] ...; // Morphism composition
+
+// F a' ∘> F a  ↪  F (a' ∘> a)
+rule compose_morph (@fapp1 _ _ $F $Y $Z $a) (@fapp1 _ _ $F $X $Y $a')
+  ↪ fapp1 $F (compose_morph $a $a');
+```
+This rule instructs the normalization engine: "Any time you see a composition of two morphisms that are themselves the result of applying a functor `F`, rewrite it to `F` applied to the composition of the original morphisms." This makes functoriality a computational reduction, not a logical deduction.
+
+**Naturality and the Yoneda Insight:** The naturality law for a transformation `ϵ : F ⇒ G` is `ϵ_Y ∘ F(f) = G(f) ∘ ϵ_X`. Simply adding this as a rewrite rule is problematic, as it's not obvious which direction is simplifying. This is where Dosen's key insight comes into play. The composition `G(f) ∘ ϵ_X` can be viewed not as a standard composition, but as the *action* of the morphism `G(f)` on the element `ϵ_X` in the hom-set `Hom(F(X), G(Y))`. This action is precisely what the Yoneda embedding `Hom(-, c)` provides.
+
+Our specification captures this by defining the Yoneda embedding `hom_cov` and orienting the naturality rule accordingly.
+
+```lambdapi
+// The Yoneda embedding as a primitive functor
+constant symbol hom_cov : Π [A : Cat], Π (W: Obj A), Functor A Set;
+
+// The action of the Yoneda functor is composition
+unif_rule (fapp1 (hom_cov $W) $a) $f ≡ compose_morph $a $f ↪ [ tt ≡ tt ];
+
+// The naturality rule, oriented using the Yoneda action
+//  ϵ._X ∘> G a  ↪  (F a) _∘> ϵ._X'
+rule compose_morph (@fapp1 _ _ $G $X $X' $a) (@tapp _ _ $F $G $ϵ $X)
+  ↪ fapp1 (hom_cov _) (tapp $ϵ $X') (fapp1 $F $a);
+```
+The left-hand side is a standard composition. The right-hand side is rewritten into the form `fapp1 (hom_cov _) ...`, which represents the Yoneda action. This rule is not just a statement of equality; it is a directed computation that replaces a standard composition with a more primitive action, effectively implementing the naturality check as a reduction step. The benchmark for this specification is its ability to prove that the "super Yoneda functor" is indeed a functor using only definitional equality (`reflexivity`), which has been successfully verified.
+
+### 3.5. Glimpsing the Future: Specifying Higher Structures
+
+This specification methodology extends naturally to higher-categorical structures. The path towards ω-categories is paved by internalizing the comma category construction. Given a functor `M : A -> Cat`, the total category `Total_cat M` (the Grothendieck construction) can be specified. Its objects are pairs `(X, f)` where `X` is an object of `A` and `f` is an object of `M(X)`.
+
+```lambdapi
+constant symbol Total_cat [A : Cat] (M: Functor A Cat_cat): Cat;
+rule Obj (Total_cat $M) ↪ `τΣ_ X : Obj _, Obj_Type (fapp0 $M X);
+```
+Here, `τΣ_` is the dependent sum type. This rule defines the objects of the total category synthetically. A similar, more complex rule defines the morphisms. This allows us to represent fibrations and, by iteration, higher-categorical structures in a purely computational and synthetic manner. This specification-driven approach provides a solid formal foundation for Emdash, ensuring that its implementation is a faithful realization of a well-defined and computationally-oriented synthetic type theory.
+
+## 4. Breathing Life into Syntax: The Elaboration Engine
+
+The heart of Emdash is its elaboration engine, which transforms raw, potentially ambiguous user input into fully typed, unambiguous terms. This process is a sophisticated dance between type inference, type checking, and constraint solving, designed to make the formal language feel as natural as possible.
+
+### 4.1. The Bidirectional Dialogue: `infer` and `check`
+
+Imagine a dialogue between a user and the system. Sometimes the user provides a term and asks, "What is this?" This is **inference**. Other times, the user provides a term and a type, asserting, "This thing has this type." This is **checking**. Emdash's elaborator, driven by the `elaborate(term, expectedType?)` function, formalizes this dialogue.
+
+*   **Inference Mode (`infer(Γ, t)`):** When no `expectedType` is given, `elaborate` calls `infer`. The `infer` function acts like a detective, examining the term `t` to deduce its type. For example, if it sees a variable `x`, it looks up its type in the context `Γ`. If it sees an application `f a`, it first infers the type of `f`, ensures it's a function type `Π(x:A), B`, checks that the argument `a` has type `A`, and concludes that the whole application has type `B` (with `a` substituted for `x`).
+
+*   **Checking Mode (`check(Γ, t, T)`):** When an `expectedType` `T` is provided, `elaborate` calls `check`. Here, the system's job is verification. It uses the `expectedType` as a guide. For instance, to check if an unannotated lambda `λx. e` has the type `Π(y:A), B`, it doesn't need to guess the type of `x`. It knows `x` must have type `A`. It then extends its context with `x:A` and recursively checks if the body `e` has the type `B`.
+
+This bidirectional approach is not just an implementation detail; it is fundamental to the system's usability. It allows the user to omit redundant type annotations, as the system can often infer them in checking mode, while still providing the power to synthesize types from first principles in inference mode.
+
+### 4.2. The Art of Implicitness
+
+A dependently typed language without good support for implicit arguments can become overwhelmingly verbose. Emdash employs three mechanisms to manage this, making interaction feel more natural.
+
+1.  **Implicit Application Insertion:** Consider a function `const : {A B : Type} -> A -> B -> A`. A user would prefer to write `const true 5` rather than the fully explicit `const {Bool} {Nat} true 5`. When the elaborator infers the type of `const`, it sees it begins with implicit Π-binders (`{A : Type}` and `{B : Type}`). Before proceeding to check the application to `true`, the `insertImplicitApps` function automatically inserts holes for these implicit arguments, effectively transforming the user's term into `const {?h0} {?h1} true 5`. These holes, `?h0` and `?h1`, are metavariables that the unification engine will later solve to be `Bool` and `Nat`, respectively, based on the types of the subsequent explicit arguments.
+
+2.  **Implicit Lambda Insertion (Eta-Expansion):** The converse situation also occurs. Suppose the system *expects* a function that takes an implicit argument, for instance, a term of type `Π {A:Type}. List A`. If the user provides a term `t` that is not an implicit lambda, the elaborator doesn't immediately fail. Instead, it helpfully wraps the term, transforming the goal from `Γ ⊢ t ⇐ Π {A:Type}. List A` into a new goal of checking `t` in a context where `A` is known: `Γ, A:Type ⊢ t ⇐ List A`. The final elaborated term becomes `λ {A:Type}. t'`, where `t'` is the result of checking `t` in the extended context. This is a form of eta-expansion that makes the system more flexible.
+
+3.  **Kernel Implicit Handling:** Some of Emdash's primitive term constructors, like `FMap0Term` (functor application on objects), have implicit arguments that are structurally necessary but tedious to write (e.g., the domain and codomain categories of the functor). The `ensureKernelImplicitsPresent` function, guided by the `KERNEL_IMPLICIT_SPECS` specification, automatically inserts holes for these missing arguments before the main elaboration process even begins. This allows the user to write `FMap0Term(F, X)` and have the system automatically fill in the details to `FMap0Term(F, X, catA_IMPLICIT: ?h2, catB_IMPLICIT: ?h3)`.
+
+### 4.3. The Unification Engine: Solving for '?'
+
+The elegance of the bidirectional algorithm and implicit argument handling rests on a powerful unification engine to solve for the unknown holes (`?h...`) that are generated.
+
+**Constraint Generation and Solving.** The elaborator is optimistic. When it requires two terms to be equal, it doesn't fail immediately. Instead, it adds a `Constraint` object `{ t1, t2 }` to a global list. The `solveConstraints` function is then called, which loops through the constraints, attempting to solve them using the `unify` function until no more progress can be made.
+
+**The `unify` Algorithm.** The `unify` function is the heart of the solver. Its strategy is a cascade of techniques:
+1.  **Hole Unification:** The simplest case is unifying a hole `?h` with a term `t`. The engine first performs an **occurs check** to ensure `t` does not contain `?h`, preventing circular definitions like `?h := f(?h)`. If the check passes, it solves the hole by setting its internal reference to `t`.
+2.  **Higher-Order Unification:** Emdash supports a decidable fragment of higher-order unification known as **Miller's pattern unification**. This is triggered for "flex-rigid" pairs, such as `?M x y ≡ g x y`, where `?M` is a hole (the "flexible" part) applied to a spine of distinct bound variables (`x`, `y`), and the other side is a "rigid" term. The `solveHoFlexRigid` procedure can solve for `?M` by abstracting the rigid term over the spine, yielding the solution `?M := λa b. g a b`. This is crucial for matching and applying rewrite rules with higher-order pattern variables.
+3.  **Structural Decomposition:** For terms with the same "injective" head symbol (e.g., `Obj A ≡ Obj B`), the unifier can decompose the problem, creating a new constraint for their arguments (`A ≡ B`).
+4.  **Reduction and Rules:** If direct structural methods fail, `unify` reduces both terms to their Weak Head Normal Form (WHNF) and retries. If that still fails, it consults the user-defined `unificationRules` for guidance before finally admitting failure.
 
 This combination of bidirectional checking and unification-based constraint solving gives Emdash a powerful and flexible elaboration engine capable of inferring a great deal of information, making the surface language more ergonomic for the user.
 
-## 4. Functorial Elaboration: Definitional Coherence
+## 5. The Payoff: Coherence as a Definitional Check
 
-A central and novel contribution of Emdash is its mechanism for enforcing coherence laws as part of definitional equality. Traditionally, when defining an algebraic structure like a category or a functor, one provides the components (objects, morphisms, composition, etc.) and then separately proves that these components satisfy the required laws (associativity, identity, functoriality). In Emdash, these laws can be checked *during elaboration*, making them a definitional property of the term itself.
+A central and novel contribution of Emdash is its mechanism for enforcing coherence laws as part of definitional equality. This section delves into this concept of "functorial elaboration," which represents the practical payoff of the system's synthetic, computation-first philosophy.
 
-This is achieved through specialized kernel term constructors. The primary example is `MkFunctorTerm`.
+### 5.1. The Problem: Separating Data from Proof
 
-**The `MkFunctorTerm` Primitive.** While a user might interact with a high-level helper function like `mkFunctor`, the core of the system uses the primitive `MkFunctorTerm(domainCat, codomainCat, fmap0, fmap1, proof?)`. This term is not just a container for data; it is an instruction to the elaborator to perform a coherence check.
+In traditional formalizations, defining a structured object is a two-step process. First, you provide the data (the components), and second, you provide the proofs (the laws). For a functor `F : C → D`, you would define:
+1.  **Data:** An object map `F₀ : Ob(C) → Ob(D)` and a morphism map `F₁ : Hom(X,Y) → Hom(F₀X, F₀Y)`.
+2.  **Proof:** A separate lemma, say `F_preserves_comp`, proving that `F₁(g ∘ f) = F₁(g) ∘ F₁(f)`.
 
-**The `infer_mkFunctor` Process.** When the elaborator's `infer` function encounters a `MkFunctorTerm`, it triggers a special procedure, `infer_mkFunctor`, detailed in `elaboration.ts`:
+This separation, while logically sound, feels artificial. To a mathematician, a functor *is* a structure-preserving map; the preservation of composition is part of its essence, not an afterthought. Emdash aims to close this gap.
 
-1.  **Component Elaboration:** First, it elaborates the components. It checks that `domainCat` and `codomainCat` are of type `CatTerm()`. It then checks `fmap0` against the expected object-map type `Π (x: Obj domainCat), Obj codomainCat`, and `fmap1` against the expected morphism-map type `Π {X Y} (a: Hom X Y), Hom (fmap0 X) (fmap0 Y)`.
+### 5.2. The Solution: The `MkFunctorTerm` Primitive
 
-2.  **Law Synthesis:** If no explicit proof term is provided and coherence checking is not skipped, the engine synthesizes the two sides of the functoriality law for composition. It creates a fresh context `lawCtx` containing generic objects `X, Y, Z` and morphisms `f : Hom X Y`, `g : Hom Y Z`. In this context, it constructs the two terms to be compared:
-    *   `LHS := compose_morph {B} (fmap1 g) (fmap1 f)`
-    *   `RHS := fmap1 (compose_morph {A} g f)`
+Emdash introduces a special kernel term constructor, `MkFunctorTerm(domainCat, codomainCat, fmap0, fmap1, proof?)`. This term is not just a passive container for data; it is an active instruction to the elaboration engine to perform a coherence check.
 
-3.  **Computational Verification:** The core of the check lies in the next step. The system computes the normal forms of both `LHS` and `RHS` within `lawCtx`:
-    *   `normLhs := normalize(lhs, lawCtx)`
-    *   `normRhs := normalize(rhs, lawCtx)`
-    This normalization process will unfold the definitions of `fmap1` and `compose_morph` and apply any relevant rewrite rules.
+When the elaborator's `infer` function encounters a `MkFunctorTerm`, it triggers a special procedure, `infer_mkFunctor`, detailed in `elaboration.ts`. This procedure is the heart of functorial elaboration. Let's walk through its steps with a narrative lens.
 
-4.  **Equality Assertion:** It then asserts their equality using `areEqual(normLhs, normRhs, lawCtx)`.
+**Step 1: Checking the Components.** First, the system acts as a diligent student, checking that the provided components have the correct types. It verifies that `domainCat` and `codomainCat` are indeed categories. It then checks that `fmap0` is a valid object map (`Obj domainCat → Obj codomainCat`) and that `fmap1` is a valid, dependently-typed morphism map.
 
-5.  **Error or Success:** If `areEqual` returns `false`, the elaboration process is aborted, and a `CoherenceError` is thrown. This error is specific and informative, indicating which law failed and printing the non-equal normal forms. If the check passes, the `infer` function successfully returns the elaborated `MkFunctorTerm` with its type, `FunctorTypeTerm(domainCat, codomainCat)`.
+**Step 2: Staging the Coherence Law.** If the components are well-typed, the system prepares to test the functoriality law. If no explicit proof term is provided, it synthesizes the two sides of the equation it needs to verify. It creates a hypothetical scenario—a fresh context `lawCtx` containing generic objects `X, Y, Z` and generic morphisms `f : Hom X Y` and `g : Hom Y Z`. In this hypothetical world, it constructs the two terms to be compared:
+*   `LHS := compose_morph (fmap1 g) (fmap1 f)`  (The image of the composition)
+*   `RHS := fmap1 (compose_morph g f)` (The composition of the images)
 
-This "functorial elaboration" mechanism is a powerful design pattern. It shifts the burden of proving structural integrity from the user (who would otherwise need to provide a separate proof term) to the system's computation engine. A term's well-formedness now includes not just its type signature but also its adherence to definitional laws. This is particularly valuable in a synthetic setting, where the goal is to work directly with structures that are correct-by-construction.
+**Step 3: The Moment of Truth - Computational Verification.** This is the core of the check. The system does not try to *prove* `LHS = RHS`. Instead, it *computes* their normal forms within the hypothetical context `lawCtx`.
+*   `normLhs := normalize(lhs, lawCtx)`
+*   `normRhs := normalize(rhs, lawCtx)`
+This normalization process is the ultimate test. It will unfold the definitions of `fmap1` and `compose_morph` provided by the user and apply any relevant rewrite rules. If the definitions of `fmap1` and `compose_morph` are correct and work in harmony, the two terms should compute to the exact same normal form.
 
-## 5. Interactive Theorem Proving
+**Step 4: The Verdict.** The system then asserts their equality using `areEqual(normLhs, normRhs, lawCtx)`.
+*   **Success:** If `areEqual` returns `true`, the check passes. The elaborator successfully returns the `MkFunctorTerm`, now certified as coherent, with its type `FunctorTypeTerm(domainCat, codomainCat)`. The term is accepted into the system.
+*   **Failure:** If `areEqual` returns `false`, the provided maps do not respect functoriality. The elaboration process is immediately aborted, and a specific `CoherenceError` is thrown. This error is not a generic type error; it is highly informative, indicating that the "Functoriality check failed" and printing the two non-equal normal forms, allowing the user to debug their definitions.
+
+This "functorial elaboration" mechanism is a powerful design pattern. It shifts the burden of proving structural integrity from the user to the system's computation engine. A term's well-formedness now includes not just its type signature but also its adherence to definitional laws. This is particularly valuable in a synthetic setting, where the goal is to work directly with structures that are correct-by-construction.
+
+## 6. Interactive Theorem Proving
 
 Beyond its role in elaborating complete terms, Emdash is also designed for interactive theorem proving, where a user constructs a proof term step-by-step. A proof-in-progress is represented by a term containing unsolved `Hole`s, each representing a subgoal. The `src/proof.ts` module provides a lightweight but effective API for this workflow.
 
@@ -212,35 +275,35 @@ Beyond its role in elaborating complete terms, Emdash is also designed for inter
 
 This interactive workflow, built on the same elaboration engine as the core type checker, provides a powerful and consistent environment for both defining and proving.
 
-## 6. Implementation and Validation
+## 7. From Theory to Practice: Validation and Testing
 
-The Emdash system is not merely a theoretical design; it is a working implementation whose correctness and robustness have been verified through a comprehensive suite of tests.
+The Emdash system is not merely a theoretical design; it is a working implementation whose correctness and robustness have been verified through a comprehensive suite of tests. This section highlights how our testing strategy validates the core claims of the paper.
 
-### 6.1. System Architecture
+### 7.1. System Architecture
 
-The TypeScript implementation is organized into a set of loosely coupled modules, each with a clear responsibility, as detailed in Section 3.1. This modularity was crucial for managing the complexity of the system and for enabling targeted testing. The use of TypeScript's static typing was invaluable in maintaining consistency across the different parts of the codebase, from term definitions in `types.ts` to the logic in `unification.ts` and `elaboration.ts`.
+The TypeScript implementation is organized into a set of loosely coupled modules, each with a clear responsibility. This modularity was crucial for managing the complexity of the system and for enabling targeted testing. The use of TypeScript's static typing was invaluable in maintaining consistency across the different parts of the codebase, from term definitions in `types.ts` to the logic in `unification.ts` and `elaboration.ts`.
 
-### 6.2. Validation Through Testing
+### 7.2. Validation Through Testing
 
 The correctness of Emdash is demonstrated by an extensive test suite located in the `tests/` directory. These tests are not mere unit tests of isolated functions; they are integration tests that exercise the entire elaboration pipeline, from raw term construction to final type and value verification. All tests currently pass successfully.
 
-*   **Inductive and Dependent Types:**
+*   **Validating the Foundations: Inductive and Dependent Types:**
     *   The `inductive_types.ts` suite validates the definition and use of `Nat`, `Bool`, and polymorphic `List`. It confirms that functions like `add` and `map` can be defined both via a primitive eliminator with rewrite rules and via direct rewrite rules on the function symbol, demonstrating the flexibility of the equational reasoning system.
     *   The `dependent_types_tests.ts` suite uses length-indexed vectors (`Vec A n`) to stress-test the dependent type checker, confirming that terms like `vcons {Bool} {z} true (vnil {Bool})` are correctly elaborated to have type `Vec Bool (s z)`.
     *   The `equality_inductive_type_family.ts` suite successfully defines propositional equality (`Eq`, `refl`) and proves fundamental properties like symmetry (`symm`) and transitivity (`trans`), both with a J-like eliminator and with rewrite rules. This demonstrates that the framework is powerful enough to encode and reason about its own meta-theory.
 
-*   **Elaboration and Unification Engine:**
-    *   The `implicit_args_tests.ts` suite verifies numerous scenarios of implicit argument insertion and inference, from simple `const` and `id` functions to more complex higher-order applications.
+*   **Stress-Testing the Elaboration and Unification Engine:**
+    *   The `implicit_args_tests.ts` and `church_encoding_implicit_tests.ts` suites verify numerous scenarios of implicit argument insertion and inference, from simple `const` and `id` functions to more complex higher-order applications and Church encodings.
     *   `higher_order_unification_tests.ts` contains a battery of tests for the `solveHoFlexRigid` component, confirming that it correctly solves flex-rigid problems (e.g., `?M x = f x` ⇒ `?M = λy. f y`), handles multiple spine variables, and correctly fails the occurs check.
     *   `higher_order_pattern_matching_tests.ts` validates the `matchPattern` function, including its ability to handle patterns with higher-order variables and, crucially, to respect scope restrictions on those variables (e.g., `$F.[x]`).
 
-*   **Functorial Elaboration and Proof Mode:**
-    *   The `functorial_elaboration.ts` suite provides the key validation for our definitional coherence-checking mechanism. It confirms that a correctly defined functor is successfully elaborated. More importantly, it asserts that a deliberately ill-defined functor (one whose `fmap1` violates the composition law) correctly causes the elaborator to throw a `CoherenceError`, as expected.
+*   **Confirming the Central Thesis: Functorial Elaboration and Proof Mode:**
+    *   The `functorial_elaboration.ts` suite provides the key validation for our definitional coherence-checking mechanism. It confirms that a correctly defined functor is successfully elaborated. More importantly, it asserts that a deliberately ill-defined functor (one whose `fmap1` violates the composition law) correctly causes the elaborator to throw a `CoherenceError`. The successful throwing of this error is not a failure of the test, but a confirmation of the system's design principle: coherence is a check, not a proof.
     *   The `proof_mode_tests.ts` suite contains complete, successful proof constructions using the interactive API. It demonstrates that a sequence of calls to `intro`, `apply`, and `exact` correctly navigates the proof state, solves all subgoals, and produces a final, fully elaborated proof term that is definitionally correct.
 
 The successful execution of this diverse and challenging test suite provides strong evidence for the correctness and stability of the Emdash framework and its novel features.
 
-## 7. Discussion and Related Work
+## 8. Related Work
 
 Emdash situates itself within a rich landscape of logical frameworks and proof assistants, yet carves out a unique niche through its specific design choices and goals.
 
@@ -254,17 +317,16 @@ Emdash situates itself within a rich landscape of logical frameworks and proof a
 
 *   **Relation to AI-Assisted Formalization:** The ultimate goal of Emdash is to power the hotdocX platform. There is a growing body of work on using LLMs for theorem proving [5, 6]. hotdocX and Emdash aim to integrate these capabilities from the ground up, focusing on the human-AI collaboration loop. The interactive proof mode is designed to be driven by either a human or an AI, and the structured nature of Emdash's terms and errors provides a clear interface for AI interaction.
 
-## 8. Conclusion and Future Work
+## 9. Conclusion and Future Work
 
 Emdash, in its current state, successfully realizes its initial goal: to establish a dependently typed logical framework with integrated primitives for synthetic category theory. Its core type theory, powered by a bidirectional type checker, unification-based hole solving, and a computationally-driven definitional equality, has been validated through a comprehensive suite of tests. The framework's key innovations—the concept of functorial elaboration for definitional coherence and a full-featured interactive proof mode—demonstrate its potential as both a theoretical tool and a practical engine for formalization.
 
 The development of Emdash will proceed along several interconnected axes:
 
-*   **Phase 2 Implementation and Library Expansion:** The immediate priority is to implement and test the remaining primitives from the standard library specification. This includes:
-    *   **Natural Transformations:** Fully integrating `NatTransTypeTerm` and `NatTransComponentTerm` and validating the naturality square rewrite rules.
-    *   **The `Set` Category:** Finalizing the implementation of `SetTerm()` as a primitive category where `Obj Set` is `Type` and `Hom {Set} X Y` is `Π(x:X), Y`, and verifying all associated rewrite rules.
+*   **Deepening the Categorical Synthesis:** The immediate priority is to implement and test the remaining primitives from the standard library specification, moving towards a complete synthetic theory of (higher) categories. This includes:
+    *   **Higher Categories and Schemes:** The long-term goal is to realize the full vision of the Lambdapi specification, including primitives for ω-categories via dependent comma categories (`Total_cat`) and a computational interface for algebraic schemes. This involves implementing the dependent sum (`τΣ_`) and product types within the categorical setting and leveraging the `Total_cat_proj` functor to reason about fibrations.
     *   **Advanced Categorical Structures:** Introducing primitives for profunctors, adjunctions, limits, and colimits, continuing the synthetic approach and leveraging functorial elaboration to handle their coherence laws definitionally.
-    *   **Dependent Category Theory:** Begin implementing the structures necessary for fibrations and dependent functors, guided by the more abstract parts of the Lambdapi specification (`Context_cat`, `Sigma_catd`, etc.).
+    *   **Univalence:** Formalizing and implementing the `isEquiv` primitive and the rules connecting it to the identity type (`=`), thereby realizing a univalent category of types within the framework, where `eq` is `iso`.
 
 *   **Framework Enhancements:**
     *   **Universe Management:** Evolve from the `Type:Type` axiom to a predicative hierarchy of universes (`Type₀ : Type₁ : ...`) to soundly support constructions like a category of all small categories.
@@ -272,7 +334,7 @@ The development of Emdash will proceed along several interconnected axes:
     *   **Tactic Language:** Expand the proof mode with a more expressive tactic language, allowing for the composition of primitive tactics into more powerful, automated proof strategies.
 
 *   **hotdocX Integration and AI Capabilities:**
-    *   Continue developing the pipeline for transforming mathematical documents into Emdash scripts.
+    *   Continue developing the pipeline for transforming mathematical documents into Emdash scripts, including the use of OCR and multimodal models to parse LaTeX, PDF, and images.
     *   Refine AI models for suggesting definitions, types, lemmas, and rewrite rules based on informal input and the current Emdash context.
     *   Develop tools for visualizing Emdash terms and computations, especially for categorical diagrams and rewrite sequences, to be embedded within the hotdocX platform.
 
@@ -281,68 +343,130 @@ Emdash, while still in its early stages, offers a unique and powerful combinatio
 ## References
 
 [1] Dosen, K., & Petrić, Z. (1999). *Cut-Elimination in Categories*.  
+
 [2] Dosen, K., & Petrić, Z. (2004). *Proof-Theoretical Coherence*. KCL Publications.  
-[3] Blanqui, F. (Ongoing). *Lambdapi Logical Framework*. Deducteam. [https://github.com/Deducteam/lambdapi](https://github.com/Deducteam/lambdapi)  
+
+[3] Blanqui, F. (Ongoing). *Lambdapi Logical Framework*. Deducteam. [https://github.com/Deducteam/lambdapi](https://github.com/Deducteam/lambdapi)
+
 [4] The Univalent Foundations Program. (2013). *Homotopy Type Theory: Univalent Foundations of Mathematics*. Institute for Advanced Study.  
+
 [5] Polu, S., et al. (2022). *Formal Mathematics Statement Curriculum Learning*. arXiv:2202.01344.  
+
 [6] OpenAI et al. (Various). Research on models like GPT-f for formal mathematics.  
+
 [7] hotdocX Project. [https://hotdocx.github.io](https://hotdocx.github.io)  
+
 [8] emdash Project. [https://github.com/hotdocx/emdash](https://github.com/hotdocx/emdash)  
 
-## Appendix: Formal Typing Rules (Selection)
+[9] 1337777. (2024). *Cartier Solution 16 (Schemes)*. [https://github.com/1337777/cartier/blob/master/cartierSolution16.lp](https://github.com/1337777/cartier/blob/master/cartierSolution16.lp)
 
-This appendix provides a more formal summary of the key judgments in Emdash's bidirectional type system.
+[10] 1337777. (2024). *Cartier Solution 18 (Emdash Spec)*. [https://github.com/1337777/cartier/blob/master/cartierSolution18.lp](https://github.com/1337777/cartier/blob/master/cartierSolution18.lp)
 
-**Contexts and Judgments:**
-*   A context `Γ` is a list of bindings `x:T` or `x:T=t`.
-*   `Γ ⊢ t ⇒ T`: In context `Γ`, term `t` is inferred to have type `T`.
-*   `Γ ⊢ t ⇐ T`: In context `Γ`, term `t` is checked to have type `T`.
-*   `Γ ⊢ t ≡ u : T`: In context `Γ`, terms `t` and `u` are definitionally equal at type `T`.
+[11] hotdocX. (2024). *jsCoq Template Example*. [https://hotdocx.github.io/#/hdx/25191CHRI43000](https://hotdocx.github.io/#/hdx/25191CHRI43000)
 
-**Core Rules:**
+[12] hotdocX. (2024). *Arrowgram AI Template Example*. [https://hotdocx.github.io/#/hdx/25188CHRI26000](https://hotdocx.github.io/#/hdx/25188CHRI26000) 
 
-*   **Formation:**
-    ```
-    ----------- (Type-Form)
-    Γ ⊢ Type ⇒ Type
+[13] hotdocX. (2024). *Emdash Re-formattable Example*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004) 
 
-    Γ ⊢ A ⇐ Type     Γ, x:A ⊢ B ⇐ Type
-    ------------------------------------- (Pi-Form)
-    Γ ⊢ Π(x:A), B ⇒ Type
-    ```
-*   **Inference (`⇒`):**
-    ```
-    x:T ∈ Γ
-    ----------- (Var-Inf)
-    Γ ⊢ x ⇒ T
+[14] hotdocX. (2024). *Emdash Experiment-able Example*. [https://hotdocx.github.io/#/hdx/25188CHRI27000](https://hotdocx.github.io/#/hdx/25188CHRI27000) 
 
-    Γ ⊢ f ⇒ Π(x:A),B     Γ ⊢ a ⇐ A
-    ---------------------------------- (App-Inf)
-    Γ ⊢ f a ⇒ B[a/x]
+[15] Arrowgram Project. [https://github.com/hotdocx/arrowgram](https://github.com/hotdocx/arrowgram)
 
-    Γ ⊢ A ⇐ Type     Γ, x:A ⊢ t ⇒ B
-    ----------------------------------- (Lam-Inf)
-    Γ ⊢ λ(x:A).t ⇒ Π(x:A),B
-    ```
-*   **Checking (`⇐`):**
-    ```
-    Γ ⊢ t ⇒ T'     Γ ⊢ T' ≡ T : Type
-    ----------------------------------- (Switch)
-    Γ ⊢ t ⇐ T
+[16] hotdocX Sponsorship. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
 
-    Γ, x:A ⊢ t ⇐ B
-    ------------------------- (Lam-Chk)
-    Γ ⊢ λx.t ⇐ Π(x:A),B
+[17] Bertot, Y. (2019). *Coq Exchange*. [https://project.inria.fr/coqexchange/news/](https://project.inria.fr/coqexchange/news/)
 
-    Expected: Π{x:A}.B    Γ,x:A ⊢ t ⇐ B
-    --------------------------------------- (Implicit-Lam-Ins)
-    Γ ⊢ t ⇐ Π{x:A}.B
-    (where the elaborated term becomes λ{x:A}.t')
-    ```
-*   **Equality:**
-    ```
-    Γ ⊢ t₁ ⇒ T     Γ ⊢ t₂ ⇒ T     whnf(t₁) ≡ₛ whnf(t₂)
-    ------------------------------------------------- (Eq)
-    Γ ⊢ t₁ ≡ t₂ : T
-    (where ≡ₛ denotes recursive structural equality)
-    ```
+[18] Lamiaux, T. (2025). *Coq Platform Docs*. [https://coq.inria.fr/docs/platform-docs](https://coq.inria.fr/docs/platform-docs)
+
+[19] 1337777. (2024). *Simplicial-cubical functorial programming*. [https://cutt.cx/fTL](https://cutt.cx/fTL)
+
+
+## Appendix: Emdash Kernel Specification in Lambdapi (Selection)
+
+This appendix contains a selection of the formal specification for Emdash's core categorical primitives, written in Lambdapi.
+
+```lambdapi
+// ===== START OF BASIC KERNEL SPECIFICATION  =====
+
+flag "eta_equality" on;
+
+constant symbol Type : TYPE;
+injective symbol τ : Type → TYPE;
+builtin "T" ≔ τ;
+builtin "Prop" ≔ Type;
+builtin "P" ≔ τ;
+
+// # --- Categories ---
+
+constant symbol Cat : TYPE;
+
+injective symbol Obj : Cat → TYPE;
+
+constant symbol Obj_Type : Cat → Type;
+rule τ (Obj_Type $A) ↪ Obj $A;
+
+injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
+
+constant symbol Hom_Type : Π [A : Cat] (X: Obj A) (Y: Obj A), Type;
+rule τ (@Hom_Type $A $X $Y) ↪ @Hom $A $X $Y;
+
+
+// # --- Functors ---
+
+constant symbol Functor : Π(A : Cat), Π(B : Cat), TYPE;
+
+constant symbol Functor_Type : Π(A : Cat), Π(B : Cat), Type;
+rule τ (@Functor_Type $A $B) ↪ @Functor $A $B;
+
+symbol fapp0 : Π[A : Cat], Π[B : Cat], Π(F : Functor A B), Obj A → Obj B;
+symbol fapp1 : Π[A : Cat], Π[B : Cat], Π(F : Functor A B),
+  Π[X: Obj A], Π[Y: Obj A], Π(a: Hom X Y), Hom (fapp0 F X) (fapp0 F Y);
+
+
+// # --- Natural Transformations ---
+
+constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : Functor A B), Π (G : Functor A B), TYPE;
+
+constant symbol Transf_Type : Π [A : Cat], Π [B : Cat], Π (F : Functor A B), Π (G : Functor A B), Type;
+rule τ (@Transf_Type $A $B $F $G) ↪ @Transf $A $B $F $G;
+
+symbol tapp : Π [A : Cat], Π [B : Cat], Π [F : Functor A B], Π [G : Functor A B],
+  Π (ϵ : Transf F G), Π (X: Obj A), Hom (fapp0 F X) (fapp0 G X);
+
+
+// # --- Functor category ---
+
+constant symbol Functor_cat : Π(A : Cat), Π(B : Cat), Cat;
+
+unif_rule Obj $Z ≡ (Functor $A $B) ↪ [ $Z ≡ (Functor_cat $A $B) ];
+
+rule @Hom (Functor_cat _ _) $F $G ↪ Transf $F $G;
+  
+
+// # --- Set category classifier, discrete fibrations, yoneda representable Functor ---
+
+constant symbol Set : Cat;
+
+unif_rule Obj $A ≡ Type ↪ [ $A ≡ Set ];
+
+rule @Hom Set $X $Y ↪ (τ $X → τ $Y);
+
+constant symbol hom_cov : Π [A : Cat], Π (W: Obj A), Functor A Set;
+
+rule fapp0 (hom_cov $X) $Y ↪ Hom_Type $X $Y;
+
+// # --- Cat category classifier, fibrations, isofibrations, yoneda representable Functor ---
+
+constant symbol Cat_cat : Cat;
+
+unif_rule Obj $A ≡ Cat ↪ [ $A ≡ Cat_cat ];
+
+rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
+
+constant symbol hom_cov_cat : Π [A : Cat], Π (W: Obj A), Functor A Cat_cat;
+
+rule Obj (fapp0 (hom_cov_cat $W) $Y) ↪ Hom $W $Y;
+rule fapp0 (fapp1 (hom_cov_cat $W) $a) $f ↪ (fapp1 (hom_cov $W) $a) $f;
+
+// ===== END OF BASIC KERNEL SPECIFICATION =====
+```
