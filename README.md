@@ -23,6 +23,8 @@
 
 [8] *hotdocX GitHub Sponsored Profile*. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
 
+![emdash.png](./emdash.png)
+
 ## Core Features Implemented in Detail
 
 ### 1. Dependent Types and Type Theory Kernel
