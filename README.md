@@ -13,7 +13,7 @@
 
 ### Other links
 
-[4] *emdash Re-formattable Technical Report*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004) 
+[4] *emdash Re-formattable Technical Report in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004) 
 
 [5] *arrowgram App for Commutative Arrow Diagrams*. [https://github.com/hotdocx/arrowgram](https://github.com/hotdocx/arrowgram)
 
@@ -24,6 +24,12 @@
 [8] *hotdocX GitHub Sponsored Profile*. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
 
 ![emdash.png](./emdash.png)
+
+### Past/Future Work
+
+[9] *emdash further Lambapi-specifications for ω-categories, sheaves and schemes*. [https://github.com/1337777/cartier/](https://github.com/1337777/cartier/)
+
+TLDR: for the functoriality rule  `(F b) ∘> (F a)  ↪  F (b ∘> a)` it is clear that the size of the composition term `(b ∘> a)` in the RHS is smaller/decreasing; but for the naturality rule  `(ϵ._X) ∘> (G a)  ↪  (F a) _∘> (ϵ._Y)` it is not clear how to make the computation progress towards a smaller RHS, and the key insight by Kosta Dosen is that the RHS `_∘>` is actually a Yoneda/hom action/transport which is syntactically distinct than (but semantically equivalent to) the usual composition `∘>` ... Then extensionality/univalence is directly expressible via rules such as `@Hom Set $X $Y ↪ (τ $X → τ $Y)`. The prerequisite benchmark is whether `symbol super_yoneda_functor : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Functor (Functor_cat B A) (Functor_cat B Set)` becomes computationally expressible by `reflexivity` proofs alone. Furthermore simplicial-cubical ω-categories become expressible via an elementary insight: given the usual triangle simplex `{0,1,2}` with arrows `f : 0 -> 1`, `g: 1 -> 2` and `h: 0 -> 2`, then the `projection functor` which maps a surface `σ: f -> h over g` to its base line `g` will indeed also functorially map a volume from `σ` down to a base surface from `g`... visually:  [https://cutt.cx/fTL](https://cutt.cx/fTL) — Ultimately it becomes expressible to extend the sheafification-functor given a site-topology closure-operator, and to specify a co-inductive computational logic interface for algebraic-geometry schemes, as outlined in [https://github.com/1337777/cartier/blob/master/cartierSolution16.lp](https://github.com/1337777/cartier/blob/master/cartierSolution16.lp)
 
 ## Core Features Implemented in Detail
 
