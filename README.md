@@ -3,6 +3,26 @@
 ## Overview
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
 
+### Quick links
+
+[1] *emdash Experiment-able Testing Playground in hotdocx Web App*. [https://hotdocx.github.io/#/hdx/25188CHRI27000](https://hotdocx.github.io/#/hdx/25188CHRI27000) 
+
+[2] *emdash Kernel Specification Written in the Lambdapi Proof Assistant*. [./spec/emdash_specification_lambdapi.lp](./spec/emdash_specification_lambdapi.lp)
+
+[3] *emdash Technical Report*. [./docs/emdash.pdf](./docs/emdash.pdf) 
+
+### Other links
+
+[4] *emdash Re-formattable Technical Report*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004) 
+
+[5] *arrowgram App for Commutative Arrow Diagrams*. [https://github.com/hotdocx/arrowgram](https://github.com/hotdocx/arrowgram)
+
+[6] *arrowgram AI Template in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI26000](https://hotdocx.github.io/#/hdx/25188CHRI26000) 
+
+[7] *jsCoq AI Template for Coq in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25191CHRI43000](https://hotdocx.github.io/#/hdx/25191CHRI43000)
+
+[8] *hotdocX GitHub Sponsored Profile*. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
+
 ## Core Features Implemented in Detail
 
 ### 1. Dependent Types and Type Theory Kernel
