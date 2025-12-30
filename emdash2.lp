@@ -102,6 +102,11 @@ constant symbol Catd : Π(A : Cat), TYPE;
 
 constant symbol identity_Catd : Π(A : Cat), Catd A;
 
+// Grothendieck construction / “category of elements” for Cat-valued functors:
+// a (cartesian) fibration E : A → Cat gives an (iso)fibration ∫E → A, i.e. an element of Catd A.
+constant symbol grothendieck_Catd :
+  Π [A : Cat], τ (Obj (Functor A Cat_cat)) → Catd A;
+
 
 
 // `Fibre E xB` is the fibre of the fibration E at xB : B
