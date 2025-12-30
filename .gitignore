@@ -5,3 +5,5 @@
 _build/
 .lambdapi/
 .cache/
+logs/
+*.log

@@ -16,5 +16,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Check everything: `make check`
 - Check just ω version: `lambdapi check -w emdash2.lp`
 
+## Watch mode (auto typecheck on save)
+- Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
+- Tail the log in another terminal: `tail -f logs/typecheck.log`.
+- One-shot check: `python3 scripts/watch_typecheck.py --once`.
+- Tuning: `python3 scripts/watch_typecheck.py --interval 0.2` / `--no-clear`.
+- Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
+
 ## Notes
 - Alternative/related approaches exist in `cartierSolution13.lp` and `cartierSolution16_short.lp` (see `Kosta_Dosen_omega_categories.pdf`).
