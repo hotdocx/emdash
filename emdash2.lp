@@ -123,17 +123,18 @@ symbol compose_functorsd [Z : Cat] [A:Catd Z] [B:Catd Z] [C:Catd Z] (F: τ ( Obj
 τ ( Obj (Functord A C));
 
 
-// `Fibre E xB` is the fibre of the fibration E at xB : B
-symbol Fibre : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
+// `Fibre_cat E xB` is the fibre of the fibration E at xB : B
+// TODO: review `injective` here
+injective symbol Fibre_cat : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
 
-// Fibre of the Grothendieck construction recovers the original Cat-valued functor.
-rule Fibre (grothendieck_Catd $M) $x ↪ fapp0 $M $x;
+// Fibre_cat of the Grothendieck construction recovers the original Cat-valued functor.
+rule Fibre_cat (grothendieck_Catd $M) $x ↪ fapp0 $M $x;
 
 // Pullback of a dependent category / fibration:
 // Pullback_catd E F is the pullback of E : Catd B along F : Functor(A,B).
 constant symbol Pullback_catd :
   Π [A : Cat] [B : Cat], Catd B → τ (Obj (Functor A B)) → Catd A;
-rule Fibre (Pullback_catd $E $F) $xA ↪ Fibre $E (fapp0 $F $xA);
+rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);
 
 // # --- Natural Transformations ---
 
@@ -164,19 +165,9 @@ rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
 injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 
-// Total_cat is the total space of a fibration M : A -> Cat_cat
-// it is also known as `Context_cat` in `cartierSolution13.lp`, the context extension of A by the dependent type/category M over A
-symbol Total_cat [A : Cat] (M: τ (Obj (Functor A Cat_cat))): Cat;
 
-// first projection of Total_cat to base category
-injective symbol Total_cat_proj [A : Cat] (M: τ (Obj (Functor A Cat_cat))): τ (Obj (Functor (Total_cat M) A));
 
-// second dependent projection of Total_cat to the fibre at the first projection
-injective symbol Total_cat_projd [A : Cat] (M: τ (Obj (Functor A Cat_cat))):
-  τ (Obj (Functord (identity_Catd (Total_cat M)) (Pullback_catd (grothendieck_Catd M) (Total_cat_proj M))));
-
-// TODO: alternative Total_cat' for Catd instead of Functor(A, Cat_cat); then former Total_cat will be definable in terms of Total_cat' and grothendieck_Catd
-// Total_cat' is the total space of a fibration M : A -> Cat_cat
+// Total_cat' is the total space of a isofibration `M : Catd A` that is a Functor(M, A) 
 // it is also known as `Context_cat` in `cartierSolution13.lp`, the context extension of A by the dependent type/category M over A
 constant symbol Total_cat' [A : Cat] (M: Catd A): Cat;
 
@@ -188,7 +179,18 @@ injective symbol Total_cat'_projd [A : Cat] (M: Catd A):
   τ (Obj (Functord (identity_Catd (Total_cat' M)) (Pullback_catd M (Total_cat'_proj M))));
 
 // objects of the total category: Σ x:A, (objects in the fibre over x)
-rule τ (Obj (Total_cat' $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre $M X);
+rule τ (Obj (Total_cat' $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);
+
+
+// Total_cat is the total space of a fibration M : A -> Cat_cat and is definable via Total_cat' and the Grothendieck construction.
+symbol Total_cat [A : Cat] (M: τ (Obj (Functor A Cat_cat))): Cat;
+
+// first projection of Total_cat to base category
+injective symbol Total_cat_proj [A : Cat] (M: τ (Obj (Functor A Cat_cat))): τ (Obj (Functor (Total_cat M) A));
+
+// second dependent projection of Total_cat to the fibre at the first projection
+injective symbol Total_cat_projd [A : Cat] (M: τ (Obj (Functor A Cat_cat))):
+  τ (Obj (Functord (identity_Catd (Total_cat M)) (Pullback_catd (grothendieck_Catd M) (Total_cat_proj M))));
 
 // Total_cat is definable via Total_cat' and the Grothendieck construction.
 rule Total_cat $M ↪ Total_cat' (grothendieck_Catd $M);
@@ -210,7 +212,7 @@ injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor I 
 injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;
 
 // Fibred product (over the same base Z): computed fibrewise.
-rule Fibre (Product_catd $U $A) $xZ ↪ Product_cat (Fibre $U $xZ) (Fibre $A $xZ);
+rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibre_cat $A $xZ);
 
 // Dependent projections / pairing (fibred functoriality).
 symbol Product_projL_functord :
@@ -228,17 +230,17 @@ injective symbol Product_pair_functord :
 // attempt 1: yoneda/hom for dependent category
 constant symbol homd_cov :  Π [Z : Cat], Π [A : Catd Z],  Π (W: τ (Obj (Functord (identity_Catd Z) A))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))), τ (Obj (Functor (Functord (identity_Catd Z) B) Cat_cat));
 
-// symbol fapp0d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π(xZ : τ (Obj Z)), τ (Obj (Fibre A xZ)) → τ (Obj (Fibre B xZ));
-
 // fapp0d is just an instance of `compose_functorsd` the dependent/fibred composition of functors
+// TODO: redo: symbol fapp0d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π(xZ : τ (Obj Z)), τ (Obj (Fibre_cat A xZ)) → τ (Obj (Fibre_cat B xZ));
+
 
 // keep both fapp1d and fapp1 ?
 symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
   Π[X: τ (Obj A)], τ (Obj (Functord (grothendieck_Catd (hom_cov X (@identity_functor A))) (grothendieck_Catd (hom_cov (fapp0 F X) F))));
 
-
 symbol fapp1d' : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))),
   Π[X: τ (Obj (Functord (identity_Catd Z) A))], τ (Obj (Functord (grothendieck_Catd (homd_cov X (@identity_functord _ A))) (grothendieck_Catd (homd_cov (compose_functorsd F X) F))));
 
 // // attempt 2: yoneda/hom for dependent category
-// constant symbol homd_cov' :  Π [Z : Cat], Π [A : Catd Z],  Π (W: τ (Obj (Functord (identity_Catd Z) A))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))), τ (Obj (Functor (Functord (identity_Catd Z) B) Cat_cat));
+constant symbol homd_cov' :  Π [Z : Cat], Π [A : Catd Z] [W_: τ (Obj Z)] (W: τ (Obj (Fibre_cat A W_))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))),
+τ (Obj (Functor (Total_cat' (Product_catd B (grothendieck_Catd (hom_cov W_ (@identity_functor Z))))) Cat_cat));
