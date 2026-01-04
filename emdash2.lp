@@ -83,6 +83,7 @@ rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
 // this can and will be defined in terms of `identity_morph` of Cat_cat
 constant symbol identity_functor [A:Cat]: τ ( Obj (Functor A A));
 // composition of functors
+// TODO: define in terms of `compose_morph` of Cat_cat
 symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C));
 
 // yoneda/hom covariant embedding functor to Cat_cat; also TODO: contravariant Yoneda
@@ -223,8 +224,15 @@ symbol Product_projR_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A
 injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor I A1))) (G : τ (Obj (Functor I A2))),
   τ (Obj (Functor I (Product_cat A1 A2)));
 
+// Product category: object-level projections/pairing (usual category theory interface).
+// (Rewrite/computation rules deferred for now.)
+symbol Product_projL : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A1);
+symbol Product_projR : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A2);
+injective symbol Product_pair : Π [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)),
+  τ (Obj (Product_cat A1 A2));
 
-  
+
+
 // fibred product category
 injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;
 
@@ -271,5 +279,4 @@ symbol dfapp0 : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Fun
 // `dfapp1d` is the application of a fibred/dependent functor to a morphism
 symbol dfapp1d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),
    τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A))) (IsoFibration_catd (homd_cov (dfapp0 F X) F))));
-
 
