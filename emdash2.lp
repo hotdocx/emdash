@@ -89,8 +89,8 @@ constant symbol identity_functor [A:Cat]: τ ( Obj (Functor A A));
 // composition of functors
 symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C));
 
-// yoneda covarient embedding functor to Cat_cat; also TODO: contravariant Yoneda
-// so `hom_cov W F` (which is a functor in `Functor (A, Cat_cat)`)  is the usual-notations `Hom_A(W, F -)` 
+// yoneda/hom covariant embedding functor to Cat_cat; also TODO: contravariant Yoneda
+// so `@hom_cov A W _ F` (which is a functor in `Functor (A, Cat_cat)`)  is in the usual-notation the same as `Hom_A(W, F -)` 
 // that is Hom precomposed with F at the covariant argument
 constant symbol hom_cov : Π [A : Cat], Π (W: τ (Obj A)), Π [B : Cat], Π (F : τ (Obj (Functor B A))), τ (Obj (Functor B Cat_cat));
 
@@ -111,11 +111,6 @@ constant symbol grothendieck_Catd :
 
 
 
-// `Fibre E xB` is the fibre of the fibration E at xB : B
-symbol Fibre : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
-
-// TODO: Fibre of grothendieck_Catd is grothendieck_Catd of composition_functors
-
 // `Functord F E ` is a dependent functor, which is a section of E (of shape F);
 // so it is the usual Pi-Product Π in the context of proof assistants:
 // so if F was B (identity fibration), then `Functord F E` is `Π(xB : B) E(xB)`
@@ -126,6 +121,14 @@ constant symbol identity_functord [Z : Cat] [A:Catd Z]: τ ( Obj (Functord A A))
 // dependent/fibred composition of functors
 symbol compose_functorsd [Z : Cat] [A:Catd Z] [B:Catd Z] [C:Catd Z] (F: τ ( Obj (Functord B C))) (G: τ (Obj (Functord A B))) : 
 τ ( Obj (Functord A C));
+
+
+// `Fibre E xB` is the fibre of the fibration E at xB : B
+symbol Fibre : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
+
+// TODO: Fibre of grothendieck_Catd is grothendieck_Catd of composition_functors
+
+// TODO: Pullback_catd E F the pullback of E : Catd B along F : Functor(A, B)
 
 // # --- Natural Transformations ---
 
@@ -168,15 +171,31 @@ injective symbol Total_cat_projd [A : Cat] (M: τ (Obj (Functor A Cat_cat))): τ
 
 rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (fapp0 $M X);
 
-// PRODUCT CATEGORY
+// TODO: alternative Total_cat' for Catd instead of Functor(A, Cat_cat); then former Total_cat will be definable in terms of Total_cat' and grothendieck_Catd
+// Total_cat' is the total space of a fibration M : A -> Cat_cat
+// it is also known as `Context_cat` in `cartierSolution13.lp`, the context extension of A by the dependent type/category M over A
+constant symbol Total_cat' [A : Cat] (M: Catd A): Cat;
 
+// first projection of Total_cat' to base category
+injective symbol Total_cat'_proj [A : Cat] (M: Catd A): τ (Obj (Functor (Total_cat' M) A));
+
+// second dependent projection of Total_cat' to the fibre at the first projection
+injective symbol Total_cat'_projd [A : Cat] (M: Catd A): τ (Obj (Functord (identity_Catd (Total_cat' M)) (Pullback_catd (grothendieck_Catd M) (Total_cat'_proj M))));
+
+// rule τ (Obj (Total_cat' $M)) ↪ `τΣ_ X : τ (Obj _), Obj (fapp0 $M X);
+
+// product category
 injective symbol Product_cat : Π (U : Cat) (A : Cat), Cat;
 
+// first/left projection of the product category
 symbol Product_projL_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) → τ (Obj (Functor B A1));
+// second/right projection of the product category
 symbol Product_projR_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) → τ (Obj (Functor B A2));
+// pairing of the product category
 injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor I A1))) (G : τ (Obj (Functor I A2))),
   τ (Obj (Functor I (Product_cat A1 A2)));
 
+// fibred product category
 injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;
 
 // Fibred product (over the same base Z): computed fibrewise.
@@ -192,11 +211,15 @@ injective symbol Product_pair_functord :
     (F : τ (Obj (Functord B U))) (G : τ (Obj (Functord B A))),
     τ (Obj (Functord B (Product_catd U A)));
 
+
 // --- draft experiments from here ---
 
+// attempt 1: yoneda/hom for dependent category
 constant symbol homd_cov :  Π [Z : Cat], Π [A : Catd Z],  Π (W: τ (Obj (Functord (identity_Catd Z) A))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))), τ (Obj (Functor (Functord (identity_Catd Z) B) Cat_cat));
 
 // symbol fapp0d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π(xZ : τ (Obj Z)), τ (Obj (Fibre A xZ)) → τ (Obj (Fibre B xZ));
+
+// fapp0d is just an instance of `compose_functorsd` the dependent/fibred composition of functors
 
 // keep both fapp1d and fapp1 ?
 symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
@@ -205,3 +228,6 @@ symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
 
 symbol fapp1d' : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))),
   Π[X: τ (Obj (Functord (identity_Catd Z) A))], τ (Obj (Functord (grothendieck_Catd (homd_cov X (@identity_functord _ A))) (grothendieck_Catd (homd_cov (compose_functorsd F X) F))));
+
+// // attempt 2: yoneda/hom for dependent category
+// constant symbol homd_cov' :  Π [Z : Cat], Π [A : Catd Z],  Π (W: τ (Obj (Functord (identity_Catd Z) A))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))), τ (Obj (Functor (Functord (identity_Catd Z) B) Cat_cat));
