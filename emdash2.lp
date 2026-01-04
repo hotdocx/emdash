@@ -47,7 +47,7 @@ injective symbol Hom : Π [A : Cat] (X:  τ (Obj A)) (Y: τ (Obj A)), Cat;
 
 // notation: id
 // `identity_morph` is the identity in categories
-injective symbol identity_morph : Π[A : Cat], Π(X: τ (Obj A)), τ (Obj (Hom X X));
+injective symbol identity_morph : Π(A : Cat), Π(X: τ (Obj A)), τ (Obj (Hom X X));
 
 // composition morphism, the `fapp0` part
 // notation:  `f ∘> g`   or   `g <∘ f`   for  `compose_morph_fapp0 g f`
@@ -91,6 +91,8 @@ rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
 symbol identity_functor [A: Cat]: τ ( Obj (Functor A A))
 ≔ @identity_morph Cat_cat A;
 
+rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;
+
 // yoneda/hom covariant embedding functor to Cat_cat; also TODO: contravariant Yoneda
 // so `@hom_cov A W _ F` (which is a functor in `Functor (A, Cat_cat)`)  is in the usual-notation the same as `Hom_A(W, F -)` 
 // that is Hom precomposed with F at the covariant argument
@@ -124,13 +126,17 @@ constant symbol identity_functord [Z : Cat] [A:Catd Z]: τ ( Obj (Functord A A))
 symbol compose_functorsd [Z : Cat] [A:Catd Z] [B:Catd Z] [C:Catd Z] (F: τ ( Obj (Functord B C))) (G: τ (Obj (Functord A B))) : 
 τ ( Obj (Functord A C));
 
-
 // `Fibre_cat E xB` is the fibre of the fibration E at xB : B
+// in type theory notations, it is `E(xB)`
 // TODO: review `injective` here
 injective symbol Fibre_cat : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
 
 // Fibre_cat of the Grothendieck construction recovers the original Cat-valued functor.
 rule Fibre_cat (IsoFibration_catd $M) $x ↪ fapp0 $M $x;
+
+// this depends on the rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;
+rule Fibre_cat (IsoFibration_catd (hom_cov $X $F)) $xZ ↪ Hom $X (fapp0 $F $xZ);
+
 
 // Pullback of a dependent category / fibration:
 // Pullback_catd E F is the pullback of E : Catd B along F : Functor(A,B).
@@ -244,8 +250,6 @@ injective symbol Product_pair_functord :
     (F : τ (Obj (Functord B U))) (G : τ (Obj (Functord B A))),
     τ (Obj (Functord B (Product_catd U A)));
 
-
-
 // composition morphism, the general version
 symbol compose_morph : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)], τ (Obj (Functor (Product_cat (Hom Y Z) (Hom X Y)) (Hom X Z)));
 
@@ -261,16 +265,34 @@ symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: 
 constant symbol homd_cov :  Π [Z : Cat], Π [A : Catd Z] [W_: τ (Obj Z)] (W: τ (Obj (Fibre_cat A W_))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))),
 τ (Obj (Functor (Total_cat (Product_catd B (IsoFibration_catd (hom_cov W_ (@identity_functor Z))) /*TODO: ^op */ )) Cat_cat));
 
-// keep both fapp1d and fapp1 ? fapp1 is the fapp0 of the result of fapp1d
-symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
-  Π[X: τ (Obj A)], τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A))) (IsoFibration_catd (hom_cov (fapp0 F X) F))));
-
 // `dfapp0` is the application of a fibred/dependent functor to an object
 symbol dfapp0 : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π[xZ : τ (Obj Z)], τ (Obj (Fibre_cat A xZ)) → τ (Obj (Fibre_cat B xZ));
 
+// keep both fapp1d and fapp1 ? fapp1 is the fapp0 of the result of fapp1d
+// fapp1d is the slice-category version of fapp1; it is important to be able to iterate to omega-categories (besides the "globular"-style iteration)
+// it makes things look simplicial  (see @dependent-category-2-simplex.png @dependent-category-3-simplex.png and )
+// so overall our omega-categories have both simplicial and globular styles
+symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
+  Π[X: τ (Obj A)], τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A))) (IsoFibration_catd (hom_cov (fapp0 F X) F))));
+
+// this says `fapp1` is essentially the object-level part of `fapp1d` when we deal with omega-categories
+// this depends on the rule Fibre_cat (IsoFibration_catd (hom_cov $X $F)) $xZ ↪ Hom $X (fapp0 $F $xZ);
+rule dfapp0 (@fapp1d $A $B $F $X) $f ↪ fapp0 (@fapp1 _ _ $F _ _) $f;
+
 // `dfapp1d` is the application of a fibred/dependent functor to a morphism
+// it is the version of dfapp1 for dependent/fibred functors as input... it is necessary syntactically to account for presence of type-theory context,
+// but it is semantically the same as `fapp1d` 
 symbol dfapp1d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),
    τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A))) (IsoFibration_catd (homd_cov (dfapp0 F X) F))));
+
+// dTransf(F,G) version of Transf(F, G) when input functors F, G are fibred/dependent functors
+// review is dTransf and Transf necessary ? 
+constant symbol dTransf : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π (F : τ (Obj (Functord A B))), Π (G : τ (Obj (Functord A B))), Cat;
+// version `dtapp` of `tapp` for dependent/fibred input functor  
+symbol dtapp : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],
+  Π (ϵ : τ (Obj (dTransf F G))), Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))), 
+  τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A))) (IsoFibration_catd (homd_cov (dfapp0 F X) G))));
+
 
 // ultimate goal: 
 /// - to express the interchange law for omega-categories, and more generally
