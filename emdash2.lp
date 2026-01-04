@@ -86,6 +86,8 @@ rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
 // `identity_functor` is the identity functor
 // this can and will be defined in terms of `identity_morph` of Cat_cat
 constant symbol identity_functor [A:Cat]: τ ( Obj (Functor A A));
+// composition of functors
+symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C));
 
 // yoneda covarient embedding functor to Cat_cat; also TODO: contravariant Yoneda
 // so `hom_cov W F` (which is a functor in `Functor (A, Cat_cat)`)  is the usual-notations `Hom_A(W, F -)` 
@@ -112,20 +114,94 @@ constant symbol grothendieck_Catd :
 // `Fibre E xB` is the fibre of the fibration E at xB : B
 symbol Fibre : Π[B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;
 
+// TODO: Fibre of grothendieck_Catd is grothendieck_Catd of composition_functors
+
 // `Functord F E ` is a dependent functor, which is a section of E (of shape F);
 // so it is the usual Pi-Product Π in the context of proof assistants:
 // so if F was B (identity fibration), then `Functord F E` is `Π(xB : B) E(xB)`
-constant symbol Functord : Π(B : Cat), Π(F : Catd B), Π(E : Catd B), Catd B;
+constant symbol Functord : Π[B : Cat], Π(F : Catd B), Π(E : Catd B), Cat;
+
+// dependent/fibred identity functor
+constant symbol identity_functord [Z : Cat] [A:Catd Z]: τ ( Obj (Functord A A));
+// dependent/fibred composition of functors
+symbol compose_functorsd [Z : Cat] [A:Catd Z] [B:Catd Z] [C:Catd Z] (F: τ ( Obj (Functord B C))) (G: τ (Obj (Functord A B))) : 
+τ ( Obj (Functord A C));
 
 // # --- Natural Transformations ---
 
 // `Transf` is the category of natural transformations between functors
 constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))), Π (G : τ (Obj (Functor A B))), Cat;
 
-// Technical Goal:
-// To iterate `Transf` so to get omega-categories, we need to "see"/reinterpret a natural transformation somehow as a functor...
+// To iterate `Transf` so to get omega-categories, we need to be able to "see"/reinterpret a natural transformation somehow as a (fibred/dependent) functor so that we can again iterate `Transf` of `Transf`-as-functor...
+// notation:  (ϵ)._X  for  tapp ϵ X
+symbol tapp : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],
+  Π (ϵ : τ (Obj (Transf F G))), Π (X: τ (Obj A)), 
+  τ (Obj (Functord (grothendieck_Catd (hom_cov X (@identity_functor A))) (grothendieck_Catd (hom_cov (fapp0 F X) G))));
 
-// // notation:  (ϵ)._X  for  tapp ϵ X
-// symbol tapp : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],
-//   Π (ϵ : τ (Obj (Transf F G))), Π (X: τ (Obj A)), 
-//   τ (Obj (Transf (hom_cov X (@identity_functor A)) (hom_cov (fapp0 F X) G)));
+rule @Hom (Functor _ _) $F $G ↪ Transf $F $G;
+
+
+// dependent sum/sigma type
+inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
+| Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst) ), @τΣ_ a P;
+notation τΣ_ quantifier;
+constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd; notation Σ_ quantifier;
+rule τ (Σ_ $P) ↪ τΣ_ $P;
+
+// first projection of dependent sum/sigma type
+injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
+rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
+
+// second projection of dependent sum/sigma type
+injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
+rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
+
+// Total_cat is the total space of a fibration M : A -> Cat_cat
+// it is also known as `Context_cat` in `cartierSolution13.lp`, the context extension of A by the dependent type/category M over A
+constant symbol Total_cat [A : Cat] (M: τ (Obj (Functor A Cat_cat))): Cat;
+
+// first projection of Total_cat to base category
+injective symbol Total_cat_proj [A : Cat] (M: τ (Obj (Functor A Cat_cat))): τ (Obj (Functor (Total_cat M) A));
+
+// second dependent projection of Total_cat to the fibre at the first projection
+injective symbol Total_cat_projd [A : Cat] (M: τ (Obj (Functor A Cat_cat))): τ (Obj (Functord (identity_Catd (Total_cat M)) (grothendieck_Catd (compose_functors M (Total_cat_proj M)))));
+
+rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (fapp0 $M X);
+
+// PRODUCT CATEGORY
+
+injective symbol Product_cat : Π (U : Cat) (A : Cat), Cat;
+
+symbol Product_projL_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) → τ (Obj (Functor B A1));
+symbol Product_projR_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) → τ (Obj (Functor B A2));
+injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor I A1))) (G : τ (Obj (Functor I A2))),
+  τ (Obj (Functor I (Product_cat A1 A2)));
+
+injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;
+
+// Fibred product (over the same base Z): computed fibrewise.
+rule Fibre (Product_catd $U $A) $xZ ↪ Product_cat (Fibre $U $xZ) (Fibre $A $xZ);
+
+// Dependent projections / pairing (fibred functoriality).
+symbol Product_projL_functord :
+  Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord (Product_catd U A) U));
+symbol Product_projR_functord :
+  Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord (Product_catd U A) A));
+injective symbol Product_pair_functord :
+  Π [Z : Cat] [U A B : Catd Z]
+    (F : τ (Obj (Functord B U))) (G : τ (Obj (Functord B A))),
+    τ (Obj (Functord B (Product_catd U A)));
+
+// --- draft experiments from here ---
+
+constant symbol homd_cov :  Π [Z : Cat], Π [A : Catd Z],  Π (W: τ (Obj (Functord (identity_Catd Z) A))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))), τ (Obj (Functor (Functord (identity_Catd Z) B) Cat_cat));
+
+// symbol fapp0d : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))), Π(xZ : τ (Obj Z)), τ (Obj (Fibre A xZ)) → τ (Obj (Fibre B xZ));
+
+// keep both fapp1d and fapp1 ?
+symbol fapp1d : Π[A : Cat], Π[B : Cat], Π(F : τ (Obj (Functor A B))),
+  Π[X: τ (Obj A)], τ (Obj (Functord (grothendieck_Catd (hom_cov X (@identity_functor A))) (grothendieck_Catd (hom_cov (fapp0 F X) F))));
+
+
+symbol fapp1d' : Π[Z : Cat], Π[A : Catd Z], Π[B : Catd Z], Π(F : τ (Obj (Functord A B))),
+  Π[X: τ (Obj (Functord (identity_Catd Z) A))], τ (Obj (Functord (grothendieck_Catd (homd_cov X (@identity_functord _ A))) (grothendieck_Catd (homd_cov (compose_functorsd F X) F))));

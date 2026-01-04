@@ -2,7 +2,7 @@
 .PHONY: check clean
 
 check:
-> lambdapi check -w emdash.lp
+# > lambdapi check -w emdash.lp
 > lambdapi check -w emdash2.lp
 
 watch:

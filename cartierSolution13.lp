@@ -187,19 +187,19 @@ rule if true  $x _ ↪ $x
 with if false _ $y ↪ $y;
 
 inductive nat : TYPE ≔
-| 0 : nat
+| z0 : nat
 | +1 : nat → nat; notation +1 postfix 100;
-builtin "0"  ≔ 0;
+builtin "0"  ≔ z0;
 builtin "+1" ≔ +1;
 
 constant symbol nat_type : Type;
 rule τ nat_type ↪ nat;
 
 symbol eqn : nat → nat → bool;
-rule eqn 0 0 ↪ true
+rule eqn z0 z0 ↪ true
 with eqn ($x +1) ($y +1) ↪ eqn $x $y
-with eqn 0 (_ +1) ↪ false
-with eqn (_ +1) 0 ↪ false;
+with eqn z0 (_ +1) ↪ false
+with eqn (_ +1) z0 ↪ false;
 
 (a:Type) inductive list:TYPE ≔
 | □ : list a // \Box
@@ -1569,7 +1569,7 @@ opaque symbol Comma_homd'_lemma1 : Π [A B I : cat] [R : mod A B] [x : func I A]
 Π [K0] [F' : func K0 J0] [x'' : func I K0] (x''x' : hom x'' (Unit_mod F' x') Id_func) , 
 τ (( x'x '∘  ((F)_'∘> t) ) = r) → τ (( ( x''x' '∘ ( (F')_'∘> x'x) ) '∘  ((_)_'∘> t) ) = (x''x' '∘ ((F')_'∘> r))) ≔
 begin 
-  assume _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _; assume prf;
+  assume A B I R x y J0 F x' x'x t r K0 F' x'' x''x'; assume prf;
   rewrite left prf; reflexivity;
 end;
 
