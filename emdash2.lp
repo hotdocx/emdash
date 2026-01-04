@@ -45,6 +45,13 @@ injective symbol Obj : Cat → Grpd;
 // `Hom` is the category of morphisms of a (omega-)category
 injective symbol Hom : Π [A : Cat] (X:  τ (Obj A)) (Y: τ (Obj A)), Cat;
 
+// notation: id
+// `identity_morph` is the identity in categories
+injective symbol identity_morph : Π[A : Cat], Π(X: τ (Obj A)), τ (Obj (Hom X X));
+
+// composition morphism, the `fapp0` part
+// notation:  `f ∘> g`   or   `g <∘ f`   for  `compose_morph_fapp0 g f`
+symbol compose_morph_fapp0 : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)], Π (g: τ (Obj (Hom Y Z))), Π (f: τ (Obj (Hom X Y))),  τ (Obj (Hom X Z));
 
 // # --- Functors ---
 
@@ -80,11 +87,9 @@ unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];
 rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;
 
 // `identity_functor` is the identity functor
-// this can and will be defined in terms of `identity_morph` of Cat_cat
-constant symbol identity_functor [A:Cat]: τ ( Obj (Functor A A));
-// composition of functors
-// TODO: define in terms of `compose_morph` of Cat_cat
-symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C));
+// it is defined in terms of `identity_morph` of Cat_cat
+symbol identity_functor [A: Cat]: τ ( Obj (Functor A A))
+≔ @identity_morph Cat_cat A;
 
 // yoneda/hom covariant embedding functor to Cat_cat; also TODO: contravariant Yoneda
 // so `@hom_cov A W _ F` (which is a functor in `Functor (A, Cat_cat)`)  is in the usual-notation the same as `Hom_A(W, F -)` 
@@ -231,7 +236,9 @@ symbol Product_projR : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Ob
 injective symbol Product_pair : Π [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)),
   τ (Obj (Product_cat A1 A2));
 
-
+rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Product_pair $X $Y);
+rule Product_projL_func (Obj_func $XY) ↪ Obj_func (Product_projL $XY);
+rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);
 
 // fibred product category
 injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;
@@ -250,18 +257,15 @@ injective symbol Product_pair_functord :
     τ (Obj (Functord B (Product_catd U A)));
 
 
-    // notation: id
-// `identity_morph` is the identity in categories
-injective symbol identity_morph : Π[A : Cat], Π(X: τ (Obj A)), τ (Obj (Hom X X));
 
-// composition morphism
-// notation:  `f ∘> g`   or   `g <∘ f`   for  `compose_morph g f`
+// composition morphism, the general version
 symbol compose_morph : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)], τ (Obj (Functor (Product_cat (Hom Y Z) (Hom X Y)) (Hom X Z)));
 
-// composition morphism, the `fapp0` part
-symbol compose_morph_fapp0 : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)], Π (g: τ (Obj (Hom Y Z))), Π (f: τ (Obj (Hom X Y))),  τ (Obj (Hom X Z));
+rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f;
 
-// TODO: redo: rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f;
+// composition of functors
+symbol compose_functors [A:Cat] [B:Cat] [C:Cat] (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C))
+ ≔ @compose_morph_fapp0 Cat_cat _ _ _ F G; 
 
 // --- draft experiments from here ---
 
