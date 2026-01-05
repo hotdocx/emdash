@@ -190,8 +190,13 @@ rule Fibre_cat (IsoFibration_catd $M) $x ↪ fapp0 $M $x;                       
 rule Fibre_cat (IsoFibration_catd (hom_cov $X $F)) $xZ ↪ Hom $X (fapp0 $F $xZ);                       // fibre(∫Hom(X,F-),x) ↪ Hom(X,Fx)
 
 // Pullback of a dependent category along a functor (reindexing/substitution).                       // substitution / base change
-constant symbol Pullback_catd : Π [A : Cat] [B : Cat], Catd B → τ (Obj (Functor A B)) → Catd A;      // F^*E : Catd(A)
+symbol Pullback_catd : Π [A : Cat] [B : Cat], Catd B → τ (Obj (Functor A B)) → Catd A;               // F^*E : Catd(A)
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
+
+// Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
+// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `compose_functors`
+rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
+  ↪ @IsoFibration_catd $A (@compose_morph_fapp0 Cat_cat $A $B Cat_cat $E $F);
 
 // -------------------------------------------------------------------------------------------------
 // 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
@@ -466,3 +471,8 @@ assert [Z : Cat] [A : Catd Z] [B : Catd Z] [F G : τ (Obj (Functord A B))]
   (X_ : τ (Obj Z)) (X : τ (Obj (Fibre_cat A X_)))
   (ϵ : τ (Obj (dTransf F G))) (ϵ' : τ (Obj (dTransf F G))) ⊢
   @fapp1 _ _ (dtapp_func X_ X) ϵ ϵ' ≡ @dtapp_fapp1 Z A B F G X_ X ϵ ϵ';
+
+// Pullback of a Grothendieck isofibration reduces to Grothendieck of precomposition.                 // checks Pullback_catd/∫ rewrite fires
+assert [A : Cat] [B : Cat] (E : τ (Obj (Functor B Cat_cat))) (F : τ (Obj (Functor A B))) ⊢
+  @Pullback_catd A B (@IsoFibration_catd B E) F
+    ≡ @IsoFibration_catd A (@compose_morph_fapp0 Cat_cat A B Cat_cat E F);
