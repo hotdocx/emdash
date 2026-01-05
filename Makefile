@@ -4,6 +4,7 @@
 check:
 # > lambdapi check -w emdash.lp
 > lambdapi check -w emdash2.lp
+> lambdapi check -w emdash3.lp
 
 watch:
 > python3 scripts/watch_typecheck.py --log logs/typecheck.log

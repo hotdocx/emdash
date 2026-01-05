@@ -1,0 +1,352 @@
+/*
+  m— / emdash2                                                                 // project name (“m—” / “emdash”), version 2
+  Functorial programming for (strict/lax) ω-categories in Lambdapi.             // overall intent: ω-categories, ω-functors, ω-transformations
+
+  Design note: this file is intentionally “kernel-like”.                        // we keep primitives small and rewrite/unif rules explicit
+  Comments aim to align names with standard category-theory terms.              // helps IDE autocompletion and cross-referencing textbooks/wikis
+*/                                                                              // end header
+
+flag "eta_equality" on;                                                         // enable η-reduction in definitional equality (normalization)
+
+// -------------------------------------------------------------------------------------------------
+// 0. Universes / “underlying ∞-groupoids” (sets-as-groupoids)                                     // foundational layer
+// -------------------------------------------------------------------------------------------------
+
+// `TYPE` is Lambdapi's meta-universe of collections.                                               // meta-level “type of types”
+// In the object-language (emdash), any `ABC : TYPE` is a collection/classifier.                    // object-language classifiers
+constant symbol Grpd : TYPE;                                                                        // classifier of “∞-groupoids” (think: types/sets)
+injective symbol τ : Grpd → TYPE;                                                                   // decoding: underlying Lambdapi type of elements
+builtin "T" ≔ τ;                                                                                   // Lambdapi builtin: interpret object-language types
+builtin "Prop" ≔ Grpd;                                                                             // Lambdapi builtin: propositions live in `Grpd` here
+builtin "P" ≔ τ;                                                                                   // Lambdapi builtin: interpretation of propositions-as-types
+
+// -------------------------------------------------------------------------------------------------
+// 1. Equality / path groupoid (Id-type valued in `Grpd`)                                           // HoTT-style equality
+// -------------------------------------------------------------------------------------------------
+
+// Equality is valued in `Grpd` (not a separate `Prop`), i.e. “paths form a groupoid”.              // equality as ∞-groupoid
+constant symbol = : Π [a: Grpd], τ a → τ a → Grpd;                                                  // identity type: x = y : Grpd
+notation = infix 10;                                                                               // infix notation for `=`
+
+// Reflexivity (identity path).                                                                      // refl
+constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);                                         // eq_refl x : x = x
+
+// Path induction / J eliminator (dependent elimination for equality).                               // eqind / ind_eq
+symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],                                                // parameters: type a and endpoints x,y
+  τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);                                                  // eliminate equality into a family p
+rule ind_eq (eq_refl $x) $p $u ↪ $u;                                                               // computation rule: J refl reduces
+
+// Hook equality primitives into Lambdapi's standard names.                                          // interop with tactics/notations
+builtin "eq"    ≔ =;                                                                               // builtin equality symbol
+builtin "refl"  ≔ eq_refl;                                                                         // builtin reflexivity proof
+builtin "eqind" ≔ ind_eq;                                                                          // builtin equality induction
+
+// -------------------------------------------------------------------------------------------------
+// 2. Tiny inhabited type (for “always-true” unif_rule side conditions)                              // unification hack
+// -------------------------------------------------------------------------------------------------
+
+// Pattern: `unif_rule ... ↪ [ tt ≡ tt ]` gives an unconditional unification hint.                   // used in cartierSolution13.lp
+inductive unit : TYPE ≔ | tt : unit;                                                               // unit type with sole inhabitant
+
+// -------------------------------------------------------------------------------------------------
+// 3. Natural numbers (used as a dimension/index type in drafts)                                     // globular/simplicial indices
+// -------------------------------------------------------------------------------------------------
+
+inductive Nat : TYPE ≔                                                                              // Peano naturals as an index object
+| Z : Nat                                                                                           // zero (dimension 0)
+| S : Nat → Nat;                                                                                    // successor (dimension n+1)
+
+// -------------------------------------------------------------------------------------------------
+// 4. Categories as a classifier `Cat : TYPE` with `Obj : Cat → Grpd` and `Hom : ... → Cat`          // strict ω-category skeleton
+// -------------------------------------------------------------------------------------------------
+
+constant symbol Cat : TYPE;                                                                         // classifier of (strict/lax) ω-categories
+
+// Objects of a category form a groupoid (`Grpd`), not just a set.                                   // higher-categorical “objects up to paths”
+injective symbol Obj : Cat → Grpd;                                                                  // object classifier of a category
+
+// Hom is itself a category: for X,Y : Obj(A), Hom_A(X,Y) : Cat.                                     // hom-categories (enriched/globular view)
+injective symbol Hom : Π [A : Cat] (X: τ (Obj A)) (Y: τ (Obj A)), Cat;                              // hom-category as a Cat
+
+// Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
+injective symbol identity_morph : Π (A : Cat), Π (X: τ (Obj A)), τ (Obj (Hom X X));                 // id_X : Obj(Hom(X,X))
+
+// Composition at object-level in a hom-category: (g : Hom(Y,Z)) and (f : Hom(X,Y)) compose to Hom(X,Z). // 1-level composition operator
+symbol compose_morph_fapp0 : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)],     // ambient A and objects X,Y,Z
+  Π (g: τ (Obj (Hom Y Z))), Π (f: τ (Obj (Hom X Y))),                                                // composable morphisms g ∘ f
+  τ (Obj (Hom X Z));                                                                                // composite morphism in Hom(X,Z)
+
+// -------------------------------------------------------------------------------------------------
+// 5. Functors (as objects of a functor-category `Functor A B : Cat`)                                // ω-functors
+// -------------------------------------------------------------------------------------------------
+
+// The “functor category” between A and B (objects are functors, morphisms are transformations).     // internal functor category
+constant symbol Functor : Π (A : Cat), Π (B : Cat), Cat;                                            // Functor(A,B) : Cat
+
+// Action of a functor on objects.                                                                   // F₀ : Obj(A) → Obj(B)
+symbol fapp0 : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))),                              // functor object F ∈ Obj(Functor(A,B))
+  τ (Obj A) → τ (Obj B);                                                                            // send X ↦ F(X)
+
+// Action of a functor on hom-categories: gives a functor Hom_A(X,Y) → Hom_B(FX,FY).                 // F₁ as a functor (ω-level)
+symbol fapp1 : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))),                              // functor object F
+  Π [X: τ (Obj A)], Π [Y: τ (Obj A)],                                                               // endpoints X,Y
+  τ (Obj (Functor (Hom X Y) (Hom (fapp0 F X) (fapp0 F Y))));                                         // functor on the hom-category
+
+// -------------------------------------------------------------------------------------------------
+// 6. Classifier categories: `Grpd_cat` and `Cat_cat` (categories of groupoids and categories)       // “universes as categories”
+// -------------------------------------------------------------------------------------------------
+
+// `Grpd_cat` plays the role of the category of groupoids/sets (discrete fibrations classifier).     // analogue of Set/Type-as-a-category
+constant symbol Grpd_cat : Cat;                                                                     // category of ∞-groupoids
+unif_rule τ (Obj $A) ≡ Grpd ↪ [ $A ≡ Grpd_cat ];                                                     // infer A ≡ Grpd_cat when Obj(A) decodes to Grpd
+rule τ (Obj (@Hom Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);                                                  // morphisms in Grpd_cat are functions
+
+// `Cat_cat` is the category of categories (fibrations classifier).                                  // Cat of categories
+constant symbol Cat_cat : Cat;                                                                      // category of categories
+unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
+rule @Hom Cat_cat $X $Y ↪ Functor $X $Y;                                                            // morphisms in Cat_cat are functors
+
+// Identity functor on a category A (as an object in Functor(A,A)).                                  // 1-category identity, lifted to ω setting
+symbol identity_functor [A: Cat] : τ (Obj (Functor A A))                                             // identity functor id_A : Obj(Functor(A,A))
+≔ @identity_morph Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
+rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
+
+// Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
+constant symbol hom_cov : Π [A : Cat], Π (W: τ (Obj A)), Π [B : Cat],                                // W ∈ Obj(A), F : Functor(B,A)
+  Π (F : τ (Obj (Functor B A))), τ (Obj (Functor B Cat_cat));                                       // result: B → Cat_cat (a Cat-valued functor)
+rule fapp0 (hom_cov $X $F) $Y ↪ Hom $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
+
+
+// -------------------------------------------------------------------------------------------------
+// 7. Dependent categories (isofibrations / fibrations)                                              // Cat-valued type families
+// -------------------------------------------------------------------------------------------------
+
+// `Catd A` is the type of “categories dependent on A” (a fibration over A).                         // a.k.a. displayed categories / fibrations
+constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
+
+// Terminal dependent category over A (constant fibration with terminal fibres).                     // unit family / trivial fibration
+constant symbol Terminal_catd : Π (A : Cat), Catd A;                                                 // terminal displayed category
+
+// Grothendieck construction: a Cat-valued functor A → Cat_cat gives an isofibration over A.         // category of elements / ∫ construction
+constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor A Cat_cat)) → Catd A;               // ∫M : Catd(A) for M : A → Cat
+
+// `Functord A B` is the category of dependent functors (sections / displayed functors).             // Π-type / dependent function space
+// Intuition: if E : Catd(B) is a family over B and F is the “shape”, then Functord(F,E) is Π-sections. // categorical dependent product
+constant symbol Functord : Π [B : Cat], Π (F : Catd B), Π (E : Catd B), Cat;                         // Functord(F,E) : Cat
+
+// Dependent identity functor (identity section).                                                    // id in the Π-category
+constant symbol identity_functord [Z : Cat] [A:Catd Z] : τ (Obj (Functord A A));                     // id : Obj(Functord(A,A))
+
+// Dependent composition of dependent functors.                                                      // composition in Π-category
+symbol compose_functorsd [Z : Cat] [A:Catd Z] [B:Catd Z] [C:Catd Z]                                  // base Z and displayed categories A,B,C
+  (F: τ (Obj (Functord B C))) (G: τ (Obj (Functord A B))) : τ (Obj (Functord A C));                 // compose : (B→C) × (A→B) → (A→C)
+
+// Fibre of a dependent category E over x:B (displayed category at a base object).                   // E(x) in type theory
+injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (xB : τ (Obj B)), Cat;                         // fibre category at xB
+
+// Fibre of a Grothendieck construction is the original value (strictly, on objects).                // ∫M fibre at x is M(x)
+rule Fibre_cat (IsoFibration_catd $M) $x ↪ fapp0 $M $x;                                              // fibre(∫M,x) ↪ M(x)
+
+// Special case: fibre of ∫(Hom(X, F-)) is the hom-category Hom(X, F(x)).                             // representable fibration
+rule Fibre_cat (IsoFibration_catd (hom_cov $X $F)) $xZ ↪ Hom $X (fapp0 $F $xZ);                       // fibre(∫Hom(X,F-),x) ↪ Hom(X,Fx)
+
+// Pullback of a dependent category along a functor (reindexing/substitution).                       // substitution / base change
+constant symbol Pullback_catd : Π [A : Cat] [B : Cat], Catd B → τ (Obj (Functor A B)) → Catd A;      // F^*E : Catd(A)
+rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
+
+// -------------------------------------------------------------------------------------------------
+// 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
+// -------------------------------------------------------------------------------------------------
+
+// `Transf(F,G)` is the category of natural transformations between F and G (and higher cells).      // 2-cells (and beyond)
+constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))), Π (G : τ (Obj (Functor A B))), Cat; // Transf(F,G) : Cat
+
+// Component application: a transformation evaluated at an object X : Obj(A).                         // ϵ_X : (F X) ⇒ (G X)
+// Here the component is expressed as a *dependent functor* between representable fibrations.         // prepares iteration to ω-transformations
+symbol tapp : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                             // domain/codomain categories and functors F,G
+  Π (ϵ : τ (Obj (Transf F G))), Π (X: τ (Obj A)),                                                    // transformation ϵ and object X
+  τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A)))                              // source: Hom(X,-) over A (identity)
+                  (IsoFibration_catd (hom_cov (fapp0 F X) G))));                                     // target: Hom(FX, G(-)) over A
+
+// Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor(A,B)}(F,G) ≅ Transf(F,G)
+rule @Hom (Functor _ _) $F $G ↪ Transf $F $G;                                                        // definitional equality of homs
+
+
+// -------------------------------------------------------------------------------------------------
+// 9. Dependent sum / Σ-type (Grothendieck sum at the level of types)                                // Σ, projections
+// -------------------------------------------------------------------------------------------------
+
+// Dependent sum as an inductive “structure” type (σ : Σ x:a, P(x)).                                  // Σ-type as a record
+inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔                                                   // τΣ_(P) is the decoded type of Σ_(P)
+| Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), @τΣ_ a P;                  // constructor: (x, px)
+notation τΣ_ quantifier;                                                                             // allow `τΣ_ x, ...` binder syntax
+
+// `Σ_` is the code-level Σ-type (a classifier in `Grpd`); decoding maps it to `τΣ_`.                 // encoded Σ in the universe
+constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd; notation Σ_ quantifier;                        // Σ_ P : Grpd
+rule τ (Σ_ $P) ↪ τΣ_ $P;                                                                              // decoding computation rule: τ(Σ P) ↪ τΣ P
+
+// First projection.                                                                                 // fst : Σ x, P x → a
+injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;                                                // σ₁ : τ(a)
+rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;                                                             // fst(x,px) ↪ x
+
+// Second projection (dependent).                                                                     // snd : Σ x, P x → P(fst σ)
+injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));                               // σ₂ : τ(P(σ₁))
+rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                                             // snd(x,px) ↪ px
+
+
+
+// -------------------------------------------------------------------------------------------------
+// 10. Total category / comprehension (Grothendieck category of elements)                             // ∫ / context extension
+// -------------------------------------------------------------------------------------------------
+
+// `Total_cat(M)` is the total category (a.k.a. category of elements / comprehension).               // Σ at the level of categories
+constant symbol Total_cat [A : Cat] (M: Catd A) : Cat;                                               // ∫M : Cat
+
+// Projection π₁ : Total_cat(M) → A (the “base” projection).                                          // comprehension projection
+injective symbol Total_cat_proj [A : Cat] (M: Catd A) : τ (Obj (Functor (Total_cat M) A));           // functor object in Functor(∫M, A)
+
+// Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
+injective symbol Total_cat_projd [A : Cat] (M: Catd A) :                                             // dependent object: section over ∫M
+  τ (Obj (Functord (Terminal_catd (Total_cat M)) (Pullback_catd M (Total_cat_proj M))));            // π₂ : 1_{∫M} ⇒ (π₁)^*M
+
+// Objects of ∫M are Σ (x : Obj(A)), Obj(fibre(M,x)).                                                 // Σ-object description of total objects
+rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);                               // τ Obj(∫M) ↪ Σ x:A, Obj(M(x))
+
+// -------------------------------------------------------------------------------------------------
+// 11. Opposite category (involution)                                                                 // A ↦ Aᵒᵖ
+// -------------------------------------------------------------------------------------------------
+
+injective symbol Op_cat : Cat → Cat;                                                                 // opposite category operation
+rule Op_cat (Op_cat $A) ↪ $A;                                                                        // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
+
+// -------------------------------------------------------------------------------------------------
+// 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
+// -------------------------------------------------------------------------------------------------
+
+// The terminal category 1 (one object, one morphism).                                                // categorical unit
+constant symbol Terminal_cat : Cat;                                                                  // 1 : Cat
+
+// The unique functor A → 1 (terminal functor).                                                       // ! : A → 1
+injective symbol Terminal_func : Π (A : Cat), τ (Obj (Functor A Terminal_cat));                      // object of Functor(A,1)
+
+// Distinguished object * : Obj(1) (everything is definitionally equal to it via rules if desired).  // point of the terminal category
+constant symbol Terminal_obj : τ (Obj Terminal_cat);                                                 // * : Obj(1)
+
+// “Object as functor”: an object y:Obj(Y) induces a functor 1 → Y selecting y.                       // points as functors
+injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor Terminal_cat Y));               // y ↦ (1→Y) picking y
+
+// Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
+rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
+
+
+// -------------------------------------------------------------------------------------------------
+// 13. Binary products of categories                                                                  // A×B
+// -------------------------------------------------------------------------------------------------
+
+// Product of categories (binary product in Cat).                                                     // categorical product
+injective symbol Product_cat : Π (A1 : Cat) (A2 : Cat), Cat;                                         // A1 × A2 : Cat
+
+// Functorial projections (as functors out of any B): precomposition with π₁, π₂.                     // (−)∘πᵢ on functor categories
+symbol Product_projL_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) →               // given H : B → (A1×A2)
+  τ (Obj (Functor B A1));                                                                            // obtain π₁∘H : B → A1
+symbol Product_projR_func : Π [A1 A2 B: Cat], τ (Obj (Functor B (Product_cat A1 A2))) →               // given H : B → (A1×A2)
+  τ (Obj (Functor B A2));                                                                            // obtain π₂∘H : B → A2
+
+// Pairing of functors: given F:B→A1 and G:B→A2, build ⟨F,G⟩:B→A1×A2.                                 // universal property at functor level
+injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor I A1))) (G : τ (Obj (Functor I A2))), // inputs functors
+  τ (Obj (Functor I (Product_cat A1 A2)));                                                           // paired functor to product
+
+// Object-level projections/pairing (objects of A1×A2 are pairs).                                     // components of product objects
+symbol Product_projL : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A1);                     // π₁ on objects
+symbol Product_projR : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A2);                     // π₂ on objects
+injective symbol Product_pair : Π [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)),                    // constructor on objects
+  τ (Obj (Product_cat A1 A2));                                                                       // ⟨X,Y⟩ : Obj(A1×A2)
+
+// Compatibility between Obj_func (points) and product structure (pointwise pairing/projections).     // evaluation coherence
+rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Product_pair $X $Y);                  // ⟨x,y⟩ as functor from 1
+rule Product_projL_func (Obj_func $XY) ↪ Obj_func (Product_projL $XY);                               // π₁ on points-as-functors
+rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);                               // π₂ on points-as-functors
+
+// -------------------------------------------------------------------------------------------------
+// 14. Fibrewise products (products of displayed categories)                                         // displayed/product fibrations
+// -------------------------------------------------------------------------------------------------
+
+// Product of dependent categories over the same base Z (fibrewise product).                          // displayed product
+injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;                       // U×A : Catd(Z)
+rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibre_cat $A $xZ);         // fibre(U×A,x) ↪ fibre(U,x)×fibre(A,x)
+
+// Displayed projections/pairing (dependent functors witnessing product structure).                   // displayed πᵢ and pairing
+symbol Product_projL_functord : Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord (Product_catd U A) U));  // π₁ : U×A → U
+symbol Product_projR_functord : Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord (Product_catd U A) A));  // π₂ : U×A → A
+injective symbol Product_pair_functord : Π [Z : Cat] [U A B : Catd Z]                                 // pairing in displayed world
+  (F : τ (Obj (Functord B U))) (G : τ (Obj (Functord B A))),                                         // sections into U and A
+  τ (Obj (Functord B (Product_catd U A)));                                                           // paired section into U×A
+
+// -------------------------------------------------------------------------------------------------
+// 15. Composition as a functor (uncurried / product form)                                           // internal composition map
+// -------------------------------------------------------------------------------------------------
+
+// The “composition morphism” as a functor out of a product of hom-categories.                        // ∘ : Hom(Y,Z)×Hom(X,Y) → Hom(X,Z)
+symbol compose_morph : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)],            // ambient A and objects
+  τ (Obj (Functor (Product_cat (Hom Y Z) (Hom X Y)) (Hom X Z)));                                      // an object in the functor-category
+
+// Computation: applying the composition functor to a pair (g,f) returns the composite g∘f.           // β-rule for composition functor
+rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
+
+// Composition of functors is composition in Cat_cat (a special case of compose_morph_fapp0).         // categorical composition in Cat
+symbol compose_functors [A:Cat] [B:Cat] [C:Cat]                                                       // A,B,C : Cat
+  (F: τ (Obj (Functor B C))) (G: τ (Obj (Functor A B))) : τ (Obj (Functor A C))                      // F∘G : Functor(A,C)
+≔ @compose_morph_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
+
+// -------------------------------------------------------------------------------------------------
+// 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
+// -------------------------------------------------------------------------------------------------
+
+// TODO: implement contravariant hom (`hom_con`) and opposites coherently (requires Op_cat functoriality). // dual Yoneda
+// TODO: add explicit “globular” source/target operations and interchange/composition laws.          // ω-category axioms
+// TODO: connect with Kosta Došen's “stacking” (horizontal composition of 2-cells along a 1-cell).   // 2-simplex / 3-simplex diagrams
+
+// Dependent Yoneda/hom for a dependent category: “Hom in the fibre / in a slice”.                   // placeholder (signature likely evolves)
+constant symbol homd_cov : Π [Z : Cat], Π [A : Catd Z], Π [W_: τ (Obj Z)]                             // base Z, displayed A, base object W_
+  (W : τ (Obj (Fibre_cat A W_))), Π [B : Catd Z], Π (F : τ (Obj (Functord B A))),                    // W in fibre, B another displayed cat, F : B→A
+  τ (Obj (Functor (Total_cat (Product_catd B (IsoFibration_catd (hom_cov W_ (@identity_functor Z))))) // source category (a total category)
+                Cat_cat));                                                                            // target category Cat_cat (Cat-valued functors)
+
+// Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
+symbol dfapp0 : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π (F : τ (Obj (Functord A B))),          // dependent functor F : A→B
+  Π [xZ : τ (Obj Z)], τ (Obj (Fibre_cat A xZ)) → τ (Obj (Fibre_cat B xZ));                            // map objects in each fibre
+
+// “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
+// Motivation: complements the globular iteration (Hom(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
+symbol fapp1d : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))), Π [X: τ (Obj A)],             // functor F and object X
+  τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A)))                               // source displayed: Hom(X,-)
+                  (IsoFibration_catd (hom_cov (fapp0 F X) F))));                                       // target displayed: Hom(FX, F-)
+
+// Link: the object-action dfapp0 of fapp1d reduces to applying fapp1 on a morphism-object.           // coherence rule between globular & simplicial views
+rule dfapp0 (@fapp1d $A $B $F $X) $f ↪ fapp0 (@fapp1 _ _ $F _ _) $f;                                  // dfapp0(fapp1d(F,X),f) ↪ fapp0(fapp1(F,_,_),f)
+
+// Application of a dependent functor on morphisms (still draft: depends on `homd_cov`).              // fibred fapp1
+symbol dfapp1d : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π (F : τ (Obj (Functord A B))),          // dependent functor F : A→B
+  Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),                                                    // base object X_ and fibre object X
+  τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A)))                            // source hom in fibre (placeholder)
+                  (IsoFibration_catd (homd_cov (dfapp0 F X) F))));                                     // target hom in fibre (placeholder)
+
+// Dependent transformations between dependent functors (displayed natural transformations).          // displayed transfors
+constant symbol dTransf : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z],                                 // base and displayed categories
+  Π (F : τ (Obj (Functord A B))), Π (G : τ (Obj (Functord A B))), Cat;                                 // dTransf(F,G) : Cat
+
+// Component application for dependent transformations (still draft).                                  // displayed tapp
+symbol dtapp : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],          // dependent functors F,G
+  Π (ϵ : τ (Obj (dTransf F G))), Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))),                     // component at fibre object X
+  τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A)))                            // source hom (placeholder)
+                  (IsoFibration_catd (homd_cov (dfapp0 F X) G))));                                     // target hom (placeholder)
+
+// -------------------------------------------------------------------------------------------------
+// 17. Sanity checks (lightweight “unit tests” for rewrite normalization)                             // keep small, avoids proof noise
+// -------------------------------------------------------------------------------------------------
+
+// Op_cat involution reduces by rewriting.                                                            // checks Op_cat rule fires
+assert ⊢ Op_cat (Op_cat Cat_cat) ≡ Cat_cat;                                                          // (Cat_catᵒᵖ)ᵒᵖ ≡ Cat_cat
+
+// Identity functor on objects reduces by rewriting.                                                  // checks fapp0(identity_functor) β-rule
+compute fapp0 (@identity_morph Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
