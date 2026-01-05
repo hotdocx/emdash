@@ -71,7 +71,35 @@ injective symbol Hom : Π [A : Cat] (X: τ (Obj A)) (Y: τ (Obj A)), Cat;       
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
 injective symbol identity_morph : Π (A : Cat), Π (X: τ (Obj A)), τ (Obj (Hom X X));                 // id_X : Obj(Hom(X,X))
 
-// Composition at object-level in a hom-category: (g : Hom(Y,Z)) and (f : Hom(X,Y)) compose to Hom(X,Z). // 1-level composition operator
+/*
+  OBSERVATION (cartierSolution13.lp vs emdash.lp, and why emdash2/emdash3 keep *both* forms):
+
+  - In cartierSolution13.lp, many core constructions are "objects in functor categories", i.e. functors
+    `A → B` (and then transformations between them). This is the "parametric/object-in-context" view:
+      F : Obj(Functor(A,B))  behaves like "an object of B in the context A".
+
+  - In emdash.lp (1-category draft), one often works directly with "pointwise" data:
+      a : Hom(X,Y)   (a single 1-cell, 0-dimensional as data),
+    and then adds rewrite/unification rules so computation is easy.
+
+  - In emdash2/emdash3 (ω-categories), `Hom_A(X,Y)` is itself a category, so a "morphism" X→Y is
+    an *object* of that hom-category: `Obj(Hom_A(X,Y))`. Higher morphisms live in the hom-category too.
+
+  This creates a useful tension:
+  (1) the *internal/semantic* composition is best packaged as a *functor*
+        ∘ : Hom(Y,Z) × Hom(X,Y) → Hom(X,Z)
+      i.e. an object of `Functor(Product_cat(Hom Y Z)(Hom X Y)) (Hom X Z)`.
+      This is faithful to the ω-story: functoriality (and hence higher coherence) is "baked in" by typing.
+
+  (2) the *computational/pointwise* composition is the "application at objects" of that functor:
+        compose_morph_fapp0 g f : Obj(Hom(X,Z)).
+      This is the handle on which we can hang rewrite/unification rules (as we did in emdash.lp).
+
+  Below, `compose_morph_fapp0` is the pointwise operation, and `compose_morph` is the functorial packaging.
+  The rewrite rule later ("β-rule for composition functor") connects them.
+*/
+
+// Composition at object-level in a hom-category: (g : Hom(Y,Z)) and (f : Hom(X,Y)) compose to Hom(X,Z). // pointwise / computational
 symbol compose_morph_fapp0 : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)],     // ambient A and objects X,Y,Z
   Π (g: τ (Obj (Hom Y Z))), Π (f: τ (Obj (Hom X Y))),                                                // composable morphisms g ∘ f
   τ (Obj (Hom X Z));                                                                                // composite morphism in Hom(X,Z)
@@ -286,12 +314,19 @@ injective symbol Product_pair_functord : Π [Z : Cat] [U A B : Catd Z]          
 // 15. Composition as a functor (uncurried / product form)                                           // internal composition map
 // -------------------------------------------------------------------------------------------------
 
-// The “composition morphism” as a functor out of a product of hom-categories.                        // ∘ : Hom(Y,Z)×Hom(X,Y) → Hom(X,Z)
+// The “composition morphism” as a functor out of a product of hom-categories.                        // functorial / internal
+// Think: this is the cartierSolution13-style "parametric object in a context", but now in ω-form:
+// it packages the entire operation as an object in a functor-category, so it can itself have higher structure.
 symbol compose_morph : Π [A : Cat], Π [X: τ (Obj A)], Π [Y: τ (Obj A)], Π [Z: τ (Obj A)],            // ambient A and objects
   τ (Obj (Functor (Product_cat (Hom Y Z) (Hom X Y)) (Hom X Z)));                                      // an object in the functor-category
 
 // Computation: applying the composition functor to a pair (g,f) returns the composite g∘f.           // β-rule for composition functor
 rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
+
+// Sanity check: the β-rule is visible at the level of definitional equality / conversion.            // exercise the rule
+assert [A : Cat] [X : τ (Obj A)] [Y : τ (Obj A)] [Z : τ (Obj A)]
+  (g : τ (Obj (Hom Y Z))) (f : τ (Obj (Hom X Y))) ⊢
+  fapp0 (@compose_morph A X Y Z) (Product_pair g f) ≡ @compose_morph_fapp0 A X Y Z g f;
 
 // Composition of functors is composition in Cat_cat (a special case of compose_morph_fapp0).         // categorical composition in Cat
 symbol compose_functors [A:Cat] [B:Cat] [C:Cat]                                                       // A,B,C : Cat
