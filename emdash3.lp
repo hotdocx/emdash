@@ -214,6 +214,9 @@ symbol tapp_fapp0 : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))
   τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A)))                              // source: Hom(X,-) over A (identity)
                   (IsoFibration_catd (hom_cov (fapp0 F X) G))));                                     // target: Hom(FX, G(-)) over A
 
+// β-rule: `tapp_fapp0` is definitionally the object-action of the functor `tapp_func`.               // unpack tapp_func at objects
+rule fapp0 (@tapp_func $A $B $F $G $X) $ϵ ↪ @tapp_fapp0 $A $B $F $G $X $ϵ;
+
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor(A,B)}(F,G) ≅ Transf(F,G)
 rule @Hom (Functor _ _) $F $G ↪ Transf $F $G;                                                        // definitional equality of homs
 
@@ -402,6 +405,9 @@ symbol dtapp_fapp0 : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : �
   τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A)))                            // source hom (placeholder)
                   (IsoFibration_catd (homd_cov (dfapp0 F X) G))));                                     // target hom (placeholder)
 
+// β-rule: `dtapp_fapp0` is definitionally the object-action of the functor `dtapp_func`.             // unpack dtapp_func at objects
+rule fapp0 (@dtapp_func $Z $A $B $F $G $X_ $X) $ϵ ↪ @dtapp_fapp0 $Z $A $B $F $G $X_ $X $ϵ;
+
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor(A,B)}(F,G) ≅ Transf(F,G)
 rule @Hom (Functord _ _) $F $G ↪ dTransf $F $G;                                                        // definitional equality of homs
 
@@ -416,3 +422,12 @@ assert ⊢ Op_cat (Op_cat Cat_cat) ≡ Cat_cat;                                 
 
 // Identity functor on objects reduces by rewriting.                                                  // checks fapp0(identity_functor) β-rule
 compute fapp0 (@identity_morph Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
+
+// tapp_func object-action reduces to tapp_fapp0 by rewriting.                                         // checks tapp β-rule fires
+assert [A : Cat] [B : Cat] [F G : τ (Obj (Functor A B))] (X : τ (Obj A)) (ϵ : τ (Obj (Transf F G))) ⊢
+  fapp0 (tapp_func X) ϵ ≡ tapp_fapp0 X ϵ;
+
+// dtapp_func object-action reduces to dtapp_fapp0 by rewriting.                                       // checks dtapp β-rule fires
+assert [Z : Cat] [A : Catd Z] [B : Catd Z] [F G : τ (Obj (Functord A B))]
+  (X_ : τ (Obj Z)) (X : τ (Obj (Fibre_cat A X_))) (ϵ : τ (Obj (dTransf F G))) ⊢
+  fapp0 (dtapp_func X_ X) ϵ ≡ dtapp_fapp0 X_ X ϵ;
