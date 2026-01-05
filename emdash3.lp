@@ -144,6 +144,17 @@ constant symbol hom_cov : Π [A : Cat], Π (W: τ (Obj A)), Π [B : Cat],       
   Π (F : τ (Obj (Functor B A))), τ (Obj (Functor B Cat_cat));                                       // result: B → Cat_cat (a Cat-valued functor)
 rule fapp0 (hom_cov $X $F) $Y ↪ Hom $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
 
+// Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
+// Note: we express functor composition via `compose_morph_fapp0` in `Cat_cat` (not via `compose_functors`, which is defined later). // computational-friendly
+rule @compose_morph_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
+  ↪ @hom_cov $A $W $C (@compose_morph_fapp0 Cat_cat $C $B $A $F $G);
+
+// Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
+assert [A : Cat] [B : Cat] [C : Cat] (W : τ (Obj A))
+  (F : τ (Obj (Functor B A))) (G : τ (Obj (Functor C B))) ⊢
+  @compose_morph_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
+    ≡ @hom_cov A W C (@compose_morph_fapp0 Cat_cat C B A F G);
+
 
 // -------------------------------------------------------------------------------------------------
 // 7. Dependent categories (isofibrations / fibrations)                                              // Cat-valued type families
