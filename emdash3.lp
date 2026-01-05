@@ -411,6 +411,19 @@ rule fapp0 (@dtapp_func $Z $A $B $F $G $X_ $X) $ϵ ↪ @dtapp_fapp0 $Z $A $B $F 
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor(A,B)}(F,G) ≅ Transf(F,G)
 rule @Hom (Functord _ _) $F $G ↪ dTransf $F $G;                                                        // definitional equality of homs
 
+// The action of a (2-)transformation on a (3-)modification: fapp1-part of `tapp_func`.               // “components of components”
+// If α : Hom_{Transf(F,G)}(ϵ,ϵ') is a modification, then `tapp_fapp1 X ϵ ϵ'` transports α to a        // functoriality of component-evaluation
+// dependent transformation between the dependent functors `tapp_fapp0 X ϵ` and `tapp_fapp0 X ϵ'`.     // (codomain hom is dTransf by the rule above)
+symbol tapp_fapp1 : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                          // base categories and functors F,G
+  Π (X : τ (Obj A)),                                                                                   // component index X
+  Π [ϵ : τ (Obj (Transf F G))], Π [ϵ' : τ (Obj (Transf F G))],                                         // transformations ϵ ⇒ ϵ'
+  τ (Obj (Functor (@Hom (Transf F G) ϵ ϵ')                                                            // modifications between ϵ and ϵ'
+                 (dTransf (tapp_fapp0 X ϵ) (tapp_fapp0 X ϵ'))));                                       // dependent transf between components
+
+// β-rule: `tapp_fapp1` is definitionally the hom-action of the functor `tapp_func`.                  // unpack tapp_func at homs
+rule @fapp1 _ _ (@tapp_func $A $B $F $G $X) $ϵ $ϵ'
+  ↪ @tapp_fapp1 $A $B $F $G $X $ϵ $ϵ';
+
 
 
 // -------------------------------------------------------------------------------------------------
@@ -431,3 +444,8 @@ assert [A : Cat] [B : Cat] [F G : τ (Obj (Functor A B))] (X : τ (Obj A)) (ϵ :
 assert [Z : Cat] [A : Catd Z] [B : Catd Z] [F G : τ (Obj (Functord A B))]
   (X_ : τ (Obj Z)) (X : τ (Obj (Fibre_cat A X_))) (ϵ : τ (Obj (dTransf F G))) ⊢
   fapp0 (dtapp_func X_ X) ϵ ≡ dtapp_fapp0 X_ X ϵ;
+
+// tapp_func hom-action reduces to tapp_fapp1 by rewriting (uses @Hom(Functord..) ≡ dTransf).         // checks tapp fapp1 β-rule fires
+assert [A : Cat] [B : Cat] [F G : τ (Obj (Functor A B))] (X : τ (Obj A))
+  (ϵ : τ (Obj (Transf F G))) (ϵ' : τ (Obj (Transf F G))) ⊢
+  @fapp1 _ _ (tapp_func X) ϵ ϵ' ≡ @tapp_fapp1 A B F G X ϵ ϵ';
