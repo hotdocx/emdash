@@ -205,8 +205,34 @@ rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
 // `Transf(F,G)` is the category of natural transformations between F and G (and higher cells).      // 2-cells (and beyond)
 constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A B))), Π (G : τ (Obj (Functor A B))), Cat; // Transf(F,G) : Cat
 
-// Component application: a transformation evaluated at an object X : Obj(A).                         // ϵ_X : (F X) ⇒ (G X)
-// Here the component is expressed as a *dependent functor* between representable fibrations.         // prepares iteration to ω-transformations
+/*
+  tapp_func (outer component / “superscript” viewpoint)
+
+  Caution about notation: the binder `X : Obj(A)` here is an *external* projection index, not the usual
+  “subscript object” of a natural transformation component.
+
+  - Usual 1-categorical notation: for ϵ : Nat(F,G) and Y : Obj(A), we write ϵ_Y : Hom(FY, GY).
+    In our encoding, that *inner* index (Y) lives inside the representable `Hom_A(X,-)` and is not the
+    explicit binder of `tapp_func`.
+
+  - Here `X` is better thought of as a superscript: ϵ ↦ ϵ^X, a map that takes a transformation ϵ and
+    returns a dependent functor between representables:
+      ϵ^X : Hom_A(X,-)  ⇒  Hom_B(FX, G(-)).
+    The “subscript” can then be either:
+      * an object Y (identity arrow), giving a component ϵ^X_Y,
+      * or more generally an arrow f : Y₁ → Y₂, giving ϵ^X_f (naturality along f).
+
+  - In the strict (non-lax) 1-categorical case, the familiar equation is:
+      ϵ_{Y₂} ∘ F(f)  =  G(f) ∘ ϵ_{Y₁}.
+    This is what “2-cell data” should satisfy; in the ω-setting it iterates inside hom-categories.
+
+  Why package this as a functor (Transf F G → Functord(...))?
+  - A modification α : ϵ ⇒ ϵ' (a 3-cell) has components expressed in terms of transformations, so after
+    fixing the external index X, the source/target (ϵ, ϵ') become *functor-like* data (`tapp_fapp0 X ϵ`),
+    letting us iterate: modifications → transformations between those component-functors → higher cells.
+  - Extreme visualization: if A is Terminal_cat (only one X), then “projecting at X” is trivial and
+    tapp becomes close to the idea that a natural transformation can be presented as a functorial object.
+*/
 symbol tapp_func : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                             // domain/codomain categories and functors F,G
   Π (X: τ (Obj A)),                                                                                   // component at object X
   τ (Obj (Functor (Transf F G)
@@ -396,7 +422,17 @@ symbol dfapp1d : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π (F : τ (Obj
 constant symbol dTransf : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z],                                 // base and displayed categories
   Π (F : τ (Obj (Functord A B))), Π (G : τ (Obj (Functord A B))), Cat;                                 // dTransf(F,G) : Cat
 
-// Component application for dependent transformations (still draft).                                  // displayed tapp
+/*
+  dtapp_func is the displayed analogue of tapp_func.
+
+  Again, the binders (X_, X) are *external* projection indices:
+  - X_ : Obj(Z) picks a fibre of the displayed category A : Catd(Z),
+  - X : Obj(Fibre_cat A X_) is the point *inside that fibre* at which we project components.
+
+  Think “superscripted component”: for ϵ : dTransf(F,G), we get ϵ^(X_,X) as a dependent functor between
+  displayed representables. This is the step that makes iteration possible:
+  modifications between displayed transfors project to transfors between these component-functors, etc.
+*/
 symbol dtapp_func : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],          // dependent functors F,G
 Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))),                                                      // component at fibre object X
    τ (Obj (Functor (dTransf F G)
