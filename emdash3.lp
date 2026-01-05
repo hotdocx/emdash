@@ -202,8 +202,15 @@ constant symbol Transf : Π [A : Cat], Π [B : Cat], Π (F : τ (Obj (Functor A 
 
 // Component application: a transformation evaluated at an object X : Obj(A).                         // ϵ_X : (F X) ⇒ (G X)
 // Here the component is expressed as a *dependent functor* between representable fibrations.         // prepares iteration to ω-transformations
-symbol tapp : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                             // domain/codomain categories and functors F,G
-  Π (ϵ : τ (Obj (Transf F G))), Π (X: τ (Obj A)),                                                    // transformation ϵ and object X
+symbol tapp_func : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                             // domain/codomain categories and functors F,G
+  Π (X: τ (Obj A)),                                                                                   // component at object X
+  τ (Obj (Functor (Transf F G)
+         (Functord (IsoFibration_catd (hom_cov X (@identity_functor A)))                              // source: Hom(X,-) over A (identity)
+                  (IsoFibration_catd (hom_cov (fapp0 F X) G)))));                                     // target: Hom(FX, G(-)) over A
+
+// `tapp_fapp0` is the fapp0 part of `tapp_func`
+symbol tapp_fapp0 : Π [A : Cat], Π [B : Cat], Π [F G : τ (Obj (Functor A B))],                             // domain/codomain categories and functors F,G
+  Π (X: τ (Obj A)), Π (ϵ : τ (Obj (Transf F G))),                                                    // transformation ϵ and object X
   τ (Obj (Functord (IsoFibration_catd (hom_cov X (@identity_functor A)))                              // source: Hom(X,-) over A (identity)
                   (IsoFibration_catd (hom_cov (fapp0 F X) G))));                                     // target: Hom(FX, G(-)) over A
 
@@ -382,10 +389,23 @@ constant symbol dTransf : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z],       
   Π (F : τ (Obj (Functord A B))), Π (G : τ (Obj (Functord A B))), Cat;                                 // dTransf(F,G) : Cat
 
 // Component application for dependent transformations (still draft).                                  // displayed tapp
-symbol dtapp : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],          // dependent functors F,G
-  Π (ϵ : τ (Obj (dTransf F G))), Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))),                     // component at fibre object X
+symbol dtapp_func : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],          // dependent functors F,G
+Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))),                                                      // component at fibre object X
+   τ (Obj (Functor (dTransf F G)
+          (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A)))                            // source hom (placeholder)
+                    (IsoFibration_catd (homd_cov (dfapp0 F X) G)))));                                     // target hom (placeholder)
+
+// `dtapp_fapp0` is the fapp0 part of `dtapp_func`
+symbol dtapp_fapp0 : Π [Z : Cat], Π [A : Catd Z], Π [B : Catd Z], Π [F G : τ (Obj (Functord A B))],          // dependent functors F,G
+Π (X_: τ (Obj Z)) (X: τ (Obj (Fibre_cat A X_))),                                                      // component at fibre object X
+  Π (ϵ : τ (Obj (dTransf F G))), 
   τ (Obj (Functord (IsoFibration_catd (homd_cov X (@identity_functord _ A)))                            // source hom (placeholder)
                   (IsoFibration_catd (homd_cov (dfapp0 F X) G))));                                     // target hom (placeholder)
+
+// Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor(A,B)}(F,G) ≅ Transf(F,G)
+rule @Hom (Functord _ _) $F $G ↪ dTransf $F $G;                                                        // definitional equality of homs
+
+
 
 // -------------------------------------------------------------------------------------------------
 // 17. Sanity checks (lightweight “unit tests” for rewrite normalization)                             // keep small, avoids proof noise
