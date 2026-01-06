@@ -87,7 +87,7 @@ constant symbol Cat : TYPE;                                                     
 injective symbol Obj : Cat → Grpd;                                                                  // object classifier of a category
 
 // Hom_cat is itself a category: for X,Y : Obj(A), Hom_A(X,Y) : Cat.                                     // hom-categories (enriched/globular view)
-injective symbol Hom_cat : Π [A : Cat] (X_A: τ (Obj A)) (Y_A: τ (Obj A)), Cat;                            // hom-category as a Cat
+injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;                            // hom-category as a Cat
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
 injective symbol identity_morph : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (Hom_cat X_A X_A));            // id_X : Obj(Hom_cat(X,X))
@@ -171,7 +171,7 @@ rule @compose_morph_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ @hom_cov $A $W $C (@compose_morph_fapp0 Cat_cat $C $B $A $F $G);
 
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
-assert [A : Cat] [B : Cat] [C : Cat] (W : τ (Obj A))
+assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
   @compose_morph_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
     ≡ @hom_cov A W C (@compose_morph_fapp0 Cat_cat C B A F G);
@@ -252,7 +252,7 @@ constant symbol Functord_cat : Π [B : Cat], Π (E D : Catd B), Cat;            
 constant symbol Id_funcd [B : Cat] [E:Catd B] : τ (Obj (Functord_cat E E));                      // id : Obj(Functord_cat(E,E))
 
 // Dependent composition of dependent functors.                                                      // composition in the slice Cat/B
-symbol comp_funcd [B : Cat] [E:Catd B] [D:Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
+symbol comp_funcd [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
   (FF: τ (Obj (Functord_cat D C))) (GG: τ (Obj (Functord_cat E D))) : τ (Obj (Functord_cat E C));               // compose : (D→C) × (E→D) → (E→C)
 
 // Fibre of a dependent category E over X_B : Obj(B) (displayed category at a base object).          // E[X_B] in type theory
@@ -350,7 +350,6 @@ injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));       
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                                             // snd(x,px) ↪ px
 
 
-
 // -------------------------------------------------------------------------------------------------
 // 10. Total category / comprehension (Grothendieck category of elements)                             // ∫ / context extension
 // -------------------------------------------------------------------------------------------------
@@ -428,7 +427,7 @@ rule fapp0 (Obj_func $F) $M ↪ $F;                                             
 // -------------------------------------------------------------------------------------------------
 
 // Product of categories (binary product in Cat).                                                     // categorical product
-injective symbol Product_cat : Π (A1 : Cat) (A2 : Cat), Cat;                                         // A1 × A2 : Cat
+injective symbol Product_cat : Π (A1 A2 : Cat), Cat;                                         // A1 × A2 : Cat
 
 // Functorial projections (as functors out of any B): precomposition with π₁, π₂.                     // (−)∘πᵢ on functor categories
 symbol Product_projL_func : Π [A1 A2 B: Cat], τ (Obj (Functor_cat B (Product_cat A1 A2))) →               // given H : B → (A1×A2)
@@ -456,7 +455,7 @@ rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);        
 // -------------------------------------------------------------------------------------------------
 
 // Product of dependent categories over the same base Z (fibrewise product).                          // displayed product
-injective symbol Product_catd : Π [Z : Cat] (U : Catd Z) (A : Catd Z), Catd Z;                       // U×A : Catd(Z)
+injective symbol Product_catd : Π [Z : Cat] (U A : Catd Z), Catd Z;                       // U×A : Catd(Z)
 rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibre_cat $A $xZ);         // fibre(U×A,x) ↪ fibre(U,x)×fibre(A,x)
 
 // Displayed projections/pairing (dependent functors witnessing product structure).                   // displayed πᵢ and pairing
@@ -480,12 +479,12 @@ symbol compose_morph : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj
 rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
 
 // Sanity check: the β-rule is visible at the level of definitional equality / conversion.            // exercise the rule
-assert [A : Cat] [X : τ (Obj A)] [Y : τ (Obj A)] [Z : τ (Obj A)]
+assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   (g : τ (Obj (Hom_cat Y Z))) (f : τ (Obj (Hom_cat X Y))) ⊢
   fapp0 (@compose_morph A X Y Z) (Product_pair g f) ≡ @compose_morph_fapp0 A X Y Z g f;
 
 // Composition of functors is composition in Cat_cat (a special case of compose_morph_fapp0).         // categorical composition in Cat
-symbol comp_func [A:Cat] [B:Cat] [C:Cat]                                                       // A,B,C : Cat
+symbol comp_func [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
   (F: τ (Obj (Functor_cat B C))) (G: τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))                      // F∘G : Functor_cat(A,C)
 ≔ @compose_morph_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
 
@@ -579,7 +578,6 @@ symbol tapp_fapp1 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
 // β-rule: `tapp_fapp1` is definitionally the hom-action of the functor `tapp_func`.                  // unpack tapp_func at homs
 rule @fapp1 _ _ (@tapp_func $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
   ↪ @tapp_fapp1 $A $B $F_AB $G_AB $X_A $ϵ $ϵ';
-
 
 
 // -------------------------------------------------------------------------------------------------
