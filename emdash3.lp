@@ -160,7 +160,7 @@ assert [A : Cat] [B : Cat] [C : Cat] (W : τ (Obj A))
 // 7. Dependent categories (isofibrations / fibrations)                                              // Cat-valued type families
 // -------------------------------------------------------------------------------------------------
 
-// `Catd A` is the type of “categories dependent on A” (a fibration over A).                         // a.k.a. displayed categories / fibrations
+// `Catd A` is the type of “categories dependent on A” (a (iso)fibration over A).                         // a.k.a. displayed categories / fibrations
 constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
 
 // Terminal dependent category over A (constant fibration with terminal fibres).                     // unit family / trivial fibration
