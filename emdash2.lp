@@ -553,7 +553,8 @@ symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat 
 
 ///---here----
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
-// rule fdapp0 (Lift_funcd1 $F) _ $x ↪ fapp0 $F $x;
+// NOTE: the base point in Z is an *implicit* argument of `fdapp0`, hence the `[ _ ]`.
+rule fdapp0 (Lift_funcd1 $F) $x ↪ fapp0 $F $x;
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
@@ -668,6 +669,5 @@ assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_
 assert [A : Cat] ⊢ Total_cat (Lift_catd1 A) ≡ A;
 assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd1 A) x1 ≡ A;
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) ⊢ Unlift_func1 (Lift_funcd1 F) ≡ F;
-// ----here---
-// assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
-//   fdapp0 (Lift_funcd1 F) x1 x ≡ fapp0 F x;
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
+  fdapp0 (Lift_funcd1 F) [x1] x ≡ fapp0 F x;
