@@ -315,6 +315,10 @@ injective symbol Total_cat_proj [A : Cat] (M: Catd A) : τ (Obj (Functor (Total_
 injective symbol Total_cat_projd [A : Cat] (M: Catd A) :                                             // dependent object: section over ∫M
   τ (Obj (Functord (Terminal_catd (Total_cat M)) (Pullback_catd M (Total_cat_proj M))));            // π₂ : 1_{∫M} ⇒ (π₁)^*M
 
+injective symbol Total_cat_intro_func : Π [X : Cat] [A : Catd X] [B : Catd X],
+τ (Obj (Functord A B)) → τ (Obj (Functor (Total_cat A) (Total_cat B)));
+
+// TODO: Review this claim: such additional rewrite rules are for convenience:
 // Objects of ∫M are Σ (x : Obj(A)), Obj(fibre(M,x)).                                                 // Σ-object description of total objects
 rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);                               // τ Obj(∫M) ↪ Σ x:A, Obj(M(x))
 
@@ -323,7 +327,10 @@ rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);   
 // -------------------------------------------------------------------------------------------------
 
 injective symbol Op_cat : Cat → Cat;                                                                 // opposite category operation
-rule Op_cat (Op_cat $A) ↪ $A;                                                                        // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
+rule Op_cat (Op_cat $A) ↪ $A;                     
+                                                   // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
+injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
+rule Op_catd (Op_catd $A) ↪ $A;                     
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
