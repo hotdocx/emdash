@@ -306,7 +306,7 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                     
 // -------------------------------------------------------------------------------------------------
 
 // `Total_cat(M)` is the total category (a.k.a. category of elements / comprehension).               // Σ at the level of categories
-constant symbol Total_cat [A : Cat] (M: Catd A) : Cat;                                               // ∫M : Cat
+symbol Total_cat [A : Cat] (M: Catd A) : Cat;                                                        // ∫M : Cat
 
 // Projection π₁ : Total_cat(M) → A (the “base” projection).                                          // comprehension projection
 injective symbol Total_cat_proj [A : Cat] (M: Catd A) : τ (Obj (Functor (Total_cat M) A));           // functor object in Functor(∫M, A)
@@ -317,6 +317,27 @@ injective symbol Total_cat_projd [A : Cat] (M: Catd A) :                        
 
 injective symbol Total_cat_intro_func : Π [X : Cat] [A : Catd X] [B : Catd X],
 τ (Obj (Functord A B)) → τ (Obj (Functor (Total_cat A) (Total_cat B)));
+
+// Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
+injective symbol Terminal_functord : Π [X : Cat] (A : Catd X), τ (Obj (Functord A (Terminal_catd X)));
+
+// Terminal comprehension laws (cartierSolution13: Context_cat/Context_elimCat/Context_intro).        // ∫(1_X) ≡ X, π₁ ≡ id
+rule Total_cat (Terminal_catd $A) ↪ $A;                                                               // ∫(1_A) ↪ A
+rule Total_cat_proj (Terminal_catd $A) ↪ @identity_functor $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
+
+// Pullback preserves terminal displayed categories.                                                  // F^*(1_B) ≡ 1_A
+rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
+
+// The dependent projection π₂ is the identity section when M is terminal.                            // π₂ : 1_{∫1} ⇒ (π₁)^*1  ↪ id
+rule Total_cat_projd (Terminal_catd $A) ↪ @identity_functord $A (Terminal_catd $A);
+
+// Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
+rule @Total_cat_intro_func $X $A $A (@identity_functord $X $A) ↪ @identity_functor (Total_cat $A);     // ∫id ↪ id
+rule @Total_cat_intro_func $X $A (Terminal_catd $X) (Terminal_functord $A) ↪ Total_cat_proj $A;        // ∫(!) ↪ π₁
+
+// β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
+rule @compose_morph_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_cat_proj $B) (@Total_cat_intro_func $X $A $B $FF)
+  ↪ Total_cat_proj $A;
 
 // TODO: Review this claim: such additional rewrite rules are for convenience:
 // Objects of ∫M are Σ (x : Obj(A)), Obj(fibre(M,x)).                                                 // Σ-object description of total objects
