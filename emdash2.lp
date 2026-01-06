@@ -421,6 +421,51 @@ injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor_cat Te
 // Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
 rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
 
+// -------------------------------------------------------------------------------------------------
+// 12b. Constant displayed categories over the terminal base                                         // “cast” Cat ↦ Catd(1)
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Goal (architecture):
+
+  - We keep *both*:
+      Functor_cat(A,B)    : Cat          (ordinary functors)
+      Functord_cat(E,D)   : Cat          (displayed functors over a fixed base)
+    because they support different primitive operations (`fapp0/fapp1` vs `dfapp0/...`).
+
+  - But we want a cheap way to *embed* the ordinary world into the displayed world,
+    so that later we can define special cases (like Transf_cat) via the general dependent notion
+    (dTransf_cat), avoiding duplicate “parallel” definitions.
+
+  The terminal base 1 is the simplest bridge:
+    A : Cat    ↦    Lift_catd1(A) : Catd(1)
+  i.e. the constant fibration over the terminal category.
+*/
+
+// View an ordinary category as a displayed category over the terminal base.                          // constant family over 1
+injective symbol Lift_catd1 : Cat → Catd Terminal_cat;                                                // A ↦ const_1(A)
+
+// The Grothendieck construction of a constant family over 1 is definitionally the original category. // ∫(const_1(A)) ≡ A
+rule Total_cat (Lift_catd1 $A) ↪ $A;
+
+// The base projection of ∫(const_1(A)) → 1 is the terminal functor A → 1.                            // π₁ ↪ !
+rule Total_proj_func (Lift_catd1 $A) ↪ Terminal_func $A;
+
+// Fibres of a constant family are constant (independent of the base point in 1).                    // fibre(const_1(A),*) ≡ A
+rule Fibre_cat (Lift_catd1 $A) _ ↪ $A;
+
+// Lift an ordinary functor to a displayed functor between constant families over 1.                 // Functor ↦ displayed Functor over 1
+injective symbol Lift_funcd1 : Π [A B : Cat],
+  τ (Obj (Functor_cat A B)) → τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)));
+
+// Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
+symbol Unlift_func1 [A B : Cat]
+  (FF : τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)))) : τ (Obj (Functor_cat A B))
+≔ @Total_intro_func Terminal_cat (Lift_catd1 A) (Lift_catd1 B) FF;
+
+// β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
+rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (Lift_funcd1 $F) ↪ $F;
+
 
 // -------------------------------------------------------------------------------------------------
 // 13. Binary products of categories                                                                  // A×B
@@ -505,6 +550,9 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z: τ (Obj Z)]  
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol dfapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (Obj (Fibre_cat E X_Z)) → τ (Obj (Fibre_cat D X_Z));                         // map objects in each fibre
+
+// Special case: dfapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // dfapp0(lift(F)) ↪ fapp0(F)
+rule dfapp0 (Lift_funcd1 $F) _ $x ↪ fapp0 $F $x;
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
@@ -614,3 +662,10 @@ assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
 assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_cat A B))) ⊢
   @Pullback_catd A B (@IsoFibration_catd B E) F
     ≡ @IsoFibration_catd A (@compose_morph_fapp0 Cat_cat A B Cat_cat E F);
+
+// Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd1/Lift_funcd1 rules fire
+assert [A : Cat] ⊢ Total_cat (Lift_catd1 A) ≡ A;
+assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd1 A) x1 ≡ A;
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) ⊢ Unlift_func1 (Lift_funcd1 F) ≡ F;
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
+  dfapp0 (Lift_funcd1 F) x1 x ≡ fapp0 F x;
