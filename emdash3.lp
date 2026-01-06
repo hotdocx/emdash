@@ -163,6 +163,35 @@ assert [A : Cat] [B : Cat] [C : Cat] (W : τ (Obj A))
 // `Catd A` is the type of “categories dependent on A” (a (iso)fibration over A).                         // a.k.a. displayed categories / fibrations
 constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
 
+/*
+  Visualization: (iso)fibrations as “simplicial” shapes (edges / surfaces / volumes / …)
+
+  A helpful mental model in this development is to think of a (covariant) (iso)fibration `E → B` as
+  a classifier of “arrows in B”, i.e. *edges*.
+
+  Prototypical example (representable / co-slice codomain fibration):
+  - Given `xB : Obj(B)`, the representable functor `Hom_B(xB,-)` is (in our notations) `hom_cov xB`,
+    or explicitly `hom_cov xB (@identity_functor B) : Obj(Functor B Cat_cat)`.
+  - Its Grothendieck construction `IsoFibration_catd (hom_cov xB (@identity_functor B)) : Catd B`
+    has fibre at `y : Obj(B)` equal to `Hom_B(xB,y)` (by the rewrite rule for `Fibre_cat`).
+    So an “element” over `y` can be visualized as an arrow `xB → y` (an *edge*).
+
+  Iteration suggests higher simplices:
+  - A fibration `S → E` (i.e. a displayed category over `Total_cat E`) can be visualized as classifying
+    “2-arrows”, i.e. *surfaces*. In our notations this is approximated by `homd_cov`.
+    Notice in the type of `homd_cov` the base product
+      `Product_catd B (IsoFibration_catd (hom_cov W_ (@identity_functor Z)))`,
+    which formalizes that a “surface” is fibred over (at least) two “edges”: the usual codomain edge,
+    plus an extra base edge coming from the fact that `E` itself already lies over `B`.
+    This matches the 2-simplex picture in `dependent-category-2-simplex.png`.
+
+  - A further fibration `V → S` would similarly classify “3-arrows”, i.e. *volumes*, now fibred over
+    (recursively) several surface-like faces, matching `dependent-category-3-simplex.png`.
+
+  This is one way the “simplicial” aspects of ω-categories emerge from iterating dependent categories
+  and Grothendieck constructions.
+*/
+
 // Terminal dependent category over A (constant fibration with terminal fibres).                     // unit family / trivial fibration
 constant symbol Terminal_catd : Π (A : Cat), Catd A;                                                 // terminal displayed category
 
