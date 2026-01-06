@@ -169,6 +169,31 @@ constant symbol Terminal_catd : Π (A : Cat), Catd A;                           
 // Grothendieck construction: a Cat-valued functor A → Cat_cat gives an isofibration over A.         // category of elements / ∫ construction
 constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor A Cat_cat)) → Catd A;               // ∫M : Catd(A) for M : A → Cat
 
+/*
+  Displayed/dependent functors: slice-style vs general base functor
+
+  - In cartierSolution13.lp, a displayed functor can be "over an arbitrary base functor":
+      funcd A F B   (A : catd X, B : catd Y, F : func X Y)
+    so a displayed morphism remembers a base map F : X → Y.
+    Composition then produces a displayed functor over the composite base map (F∘G).
+
+  - In emdash3.lp we choose the *slice-style* presentation:
+      Functord(F,E) where both displayed categories live over the same base B : Cat.
+    Concretely, this corresponds to working in a slice Cat/B (or the fibration over B):
+      objects: Catd B
+      morphisms: displayed functors over id_B (sections / maps over the identity).
+    This has a pragmatic benefit: composition stays over the identity automatically, so we get a plain
+    category of displayed functors with easy closure under composition.
+
+  - We can still *simulate* “displayed over an arbitrary base functor” using pullback:
+      given B : Catd(Y) and F : X → Y, first form the reindexed family F^*B : Catd(X),
+      then a displayed functor over F becomes an ordinary slice-style displayed functor
+      (over id_X) into the pullback:
+        funcd_over(F) : A → B     ~    (A → Pullback_catd B F).
+    For isofibrations coming from Grothendieck constructions, the rule below expresses exactly this:
+      Pullback_catd (IsoFibration_catd E) F  ↪  IsoFibration_catd (E ∘ F).
+*/
+
 // `Functord A B` is the category of dependent functors (sections / displayed functors).             // Π-type / dependent function space
 // Intuition: if E : Catd(B) is a family over B and F is the “shape”, then Functord(F,E) is Π-sections. // categorical dependent product
 constant symbol Functord : Π [B : Cat], Π (F : Catd B), Π (E : Catd B), Cat;                         // Functord(F,E) : Cat
@@ -195,6 +220,7 @@ rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);       
 
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
 // Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `compose_functors`
+// This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord. // simulate funcd-over-F
 rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
   ↪ @IsoFibration_catd $A (@compose_morph_fapp0 Cat_cat $A $B Cat_cat $E $F);
 
