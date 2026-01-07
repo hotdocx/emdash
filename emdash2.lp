@@ -158,6 +158,7 @@ rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                              
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
 symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
 ≔ @identity_morph Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
+// NOTE: `Id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `Id_func`, switch to `symbol Id_func ...;` + `rule Id_func ... ↪ ...` (cf. tapp0_fapp0).
 rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
 
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
@@ -484,6 +485,7 @@ injective symbol Lift_funcd1 : Π [A B : Cat],
 symbol Unlift_func1 [A B : Cat]
   (FF : τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)))) : τ (Obj (Functor_cat A B))
 ≔ @Total_intro_func Terminal_cat (Lift_catd1 A) (Lift_catd1 B) FF;
+// NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func1 ...`.
 
 // // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
 rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (Lift_funcd1 $F) ↪ $F;
@@ -554,6 +556,7 @@ assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
 symbol comp_func [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
   (F: τ (Obj (Functor_cat B C))) (G: τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))                      // F∘G : Functor_cat(A,C)
 ≔ @compose_morph_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
+// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_func`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
 
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
@@ -599,13 +602,53 @@ symbol tapp0_func : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
          (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A))));
 
 // Object-action of `tapp0_func`: compute the 1-cell component ϵ_Y by evaluating ϵ^Y at id_Y.         // component extraction
-symbol tapp0_fapp0 [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))]
-  (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB)))
-  : τ (Obj (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A)))
-≔ fdapp0 (tapp_fapp0 Y_A ϵ) [Y_A] (identity_morph A Y_A);
+symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (Y_A : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  τ (Obj (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A)));
+
+/*
+  Design note: `tapp0_fapp0` is intentionally *not* defined by `≔ ...`.
+
+  Motivation:
+  - In the 1-category development (emdash.lp), the “pointwise” operations (like component extraction)
+    are *rewrite heads*, so we can later add computation rules directly on them (and keep proof scripts small).
+  - If we made `tapp0_fapp0` a definitional abbreviation (`≔ fdapp0 ...`), then rewriting would first unfold it,
+    and we would lose the ability to conveniently attach further rewrite rules to the head symbol `tapp0_fapp0`.
+
+  Hence, we declare `tapp0_fapp0` as a primitive operation and give its current computation as a rewrite rule.
+*/
+
+// Computation: ϵ_Y is obtained by evaluating ϵ^Y at id_Y.                                             // tapp0_fapp0 ↪ eval(tapp_fapp0, id_Y)
+rule @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ
+  ↪ fdapp0 (@tapp_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ) [$Y_A] (identity_morph $A $Y_A);
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
+
+/*
+  Placeholder for lax naturality (triangle 2-cell).
+
+  In a lax natural transformation, the “naturality square” is replaced by a 2-cell whose boundary
+  compares a composite (two 1-cells) with the chosen component at the composite arrow. In our ω-style
+  encoding, such a witness is itself a *2-cell*, hence an object in a hom-category *between* two
+  1-cells in B.
+
+  This symbol is a placeholder name for that witness. Eventually, it should be *derivable* from the
+  iterable packaging `tapp_func` together with the displayed hom `homd_cov` (once `homd_cov` is implemented),
+  because `homd_cov` is precisely where non-identity “triangle generators” live (fibred over a product of
+  a base edge and a displayed edge).
+*/
+constant symbol tapp0_lax_triangle :
+  Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π [Y1 Y2 : τ (Obj A)], Π (f : τ (Obj (Hom_cat Y1 Y2))), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  τ (Obj
+      (@Hom_cat (Hom_cat (fapp0 F_AB Y1) (fapp0 G_AB Y2))
+         (@compose_morph_fapp0 B (fapp0 F_AB Y1) (fapp0 F_AB Y2) (fapp0 G_AB Y2)
+            (tapp0_fapp0 Y2 ϵ)
+            (fapp0 (@fapp1 A B F_AB Y1 Y2) f))
+         (@compose_morph_fapp0 B (fapp0 F_AB Y1) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
+            (fapp0 (@fapp1 A B G_AB Y1 Y2) f)
+            (tapp0_fapp0 Y1 ϵ))));
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures

@@ -9,6 +9,11 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 - Typecheck only 1-category version: `lambdapi check -w emdash.lp`
 - Remove compilation artefacts: `make clean`
 
+## SOP: Avoid hung typechecks (timeouts)
+During early development, a “hung” typecheck usually indicates a rewrite/unification issue. Prefer a short timeout (≤ 60s) and investigate if it fires:
+- One-shot with timeout: `EMDASH_TYPECHECK_TIMEOUT=60s make check`
+- Watch mode already uses `scripts/check.sh` (with the same timeout mechanism).
+
 ## SOP: Continuous typecheck (watch mode)
 Recommended workflow (2 terminals):
 - Terminal A: `make watch`

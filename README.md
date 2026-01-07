@@ -15,6 +15,7 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 - Check everything: `make check`
 - Check just ω version: `lambdapi check -w emdash2.lp`
+- Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
 - Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
@@ -25,3 +26,4 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 ## Notes
 - Alternative/related approaches exist in `cartierSolution13.lp` and `cartierSolution16_short.lp` (see `Kosta_Dosen_omega_categories.pdf`).
+- If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.

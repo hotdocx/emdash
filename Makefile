@@ -3,7 +3,7 @@
 
 check:
 # > lambdapi check -w emdash.lp
-> lambdapi check -w emdash2.lp
+> ./scripts/check.sh
 
 watch:
 > python3 scripts/watch_typecheck.py --log logs/typecheck.log
