@@ -633,6 +633,15 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
   encoding, such a witness is itself a *2-cell*, hence an object in a hom-category *between* two
   1-cells in B.
 
+  Concretely, for ϵ : Transf_cat(F,G) and f : Y₁ → Y₂ in A, write the (1-cell) components
+    ηᵋ_Y  :  F(Y) → G(Y)
+  extracted by `tapp0_fapp0`. Then the (lax) naturality witness should live in the hom-category
+  Hom_B(F(Y₁), G(Y₂)) and have the usual “triangle” boundary:
+
+      ηᵋ_{Y₂} ∘ F(f)   ⇒   G(f) ∘ ηᵋ_{Y₁}
+
+  (where `⇒` denotes a 2-cell, i.e. an object of the hom-category between these two 1-cells).
+
   This symbol is a placeholder name for that witness. Eventually, it should be *derivable* from the
   iterable packaging `tapp_func` together with the displayed hom `homd_cov` (once `homd_cov` is implemented),
   because `homd_cov` is precisely where non-identity “triangle generators” live (fibred over a product of
