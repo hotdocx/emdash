@@ -637,10 +637,10 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
     ηᵋ_{g∘f}  : FX → G(Y₂)     (obtained by evaluating ϵ^X at g∘f)
   Then laxness provides a *non-identity 2-cell* (a “triangle”) in the hom-category Hom_B(FX, G(Y₂)):
 
-      ηᵋ_{g ∘ f}   ⇒   G(g) ∘ ηᵋ_f
+      G(g) ∘ ηᵋ_f   ⇒   ηᵋ_{g ∘ f}
 
   This is the shape that `homd_cov` is meant to support: it is fibred over a base product whose points
-  include (at least) the edge g and the 1-cell ηᵋ_f, so a 2-arrow witnessing the triangle is “over g”.
+  include (at least) the edge g and the 1-cell ηᵋ_{g∘f}, so a 2-arrow witnessing the triangle is “over g”.
 
   The earlier textbook boundary
       ηᵋ_{Y₂} ∘ F(g) ⇒ G(g) ∘ ηᵋ_{Y₁}
@@ -652,13 +652,6 @@ constant symbol tapp_lax_triangle :
   Π (f : τ (Obj (Hom_cat X Y1))), Π (g : τ (Obj (Hom_cat Y1 Y2))), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj
       (@Hom_cat (Hom_cat (fapp0 F_AB X) (fapp0 G_AB Y2))
-        // source 1-cell: ηᵋ_{g∘f}
-        (@fdapp0 A
-          (IsoFibration_catd (hom_cov X (@Id_func A)))
-          (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
-          (@tapp_fapp0 A B F_AB G_AB X ϵ)
-          Y2
-          (@compose_morph_fapp0 A X Y1 Y2 g f))
         // target 1-cell: G(g) ∘ ηᵋ_f
         (@compose_morph_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
           (fapp0 (@fapp1 A B G_AB Y1 Y2) g)
@@ -667,7 +660,14 @@ constant symbol tapp_lax_triangle :
             (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
             (@tapp_fapp0 A B F_AB G_AB X ϵ)
             Y1
-            f))));
+            f))
+        // source 1-cell: ηᵋ_{g∘f}
+        (@fdapp0 A
+          (IsoFibration_catd (hom_cov X (@Id_func A)))
+          (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
+          (@tapp_fapp0 A B F_AB G_AB X ϵ)
+          Y2
+          (@compose_morph_fapp0 A X Y1 Y2 g f))));
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
