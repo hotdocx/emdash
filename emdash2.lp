@@ -569,7 +569,7 @@ symbol comp_func [A B : Cat] [C:Cat]                                            
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // placeholder (signature likely evolves)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z: τ (Obj Z)]                             // base Z, displayed E, base object W_Z
   (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),               // W in fibre, D another displayed cat, FF : D→E
-  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd (hom_cov W_Z (@Id_func Z))))) // source category (a total category)
+  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( /*TODO: op ∘ */ hom_cov W_Z (@Id_func Z) )))) // source category (a total category)
                 Cat_cat));                                                                            // target category Cat_cat (Cat-valued functors)
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
