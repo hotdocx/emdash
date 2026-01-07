@@ -628,36 +628,46 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
 /*
   Placeholder for lax naturality (triangle 2-cell).
 
-  In a lax natural transformation, the “naturality square” is replaced by a 2-cell whose boundary
-  compares a composite (two 1-cells) with the chosen component at the composite arrow. In our ω-style
-  encoding, such a witness is itself a *2-cell*, hence an object in a hom-category *between* two
-  1-cells in B.
+  The formulation we ultimately want for computation is the one expressed by the *dependent* packaging
+  `tapp_func`, i.e. by the “superscripted” components
+    ϵ^X : Hom_A(X,-) ⇒ Hom_B(FX, G(-)).
 
-  Concretely, for ϵ : Transf_cat(F,G) and f : Y₁ → Y₂ in A, write the (1-cell) components
-    ηᵋ_Y  :  F(Y) → G(Y)
-  extracted by `tapp0_fapp0`. Then the (lax) naturality witness should live in the hom-category
-  Hom_B(F(Y₁), G(Y₂)) and have the usual “triangle” boundary:
+  For fixed X and for composable arrows f : X → Y₁ and g : Y₁ → Y₂ in A, write the induced 1-cells
+    ηᵋ_f      : FX → G(Y₁)     (obtained by evaluating ϵ^X at f)
+    ηᵋ_{g∘f}  : FX → G(Y₂)     (obtained by evaluating ϵ^X at g∘f)
+  Then laxness provides a *non-identity 2-cell* (a “triangle”) in the hom-category Hom_B(FX, G(Y₂)):
 
-      ηᵋ_{Y₂} ∘ F(f)   ⇒   G(f) ∘ ηᵋ_{Y₁}
+      ηᵋ_{g ∘ f}   ⇒   G(g) ∘ ηᵋ_f
 
-  (where `⇒` denotes a 2-cell, i.e. an object of the hom-category between these two 1-cells).
+  This is the shape that `homd_cov` is meant to support: it is fibred over a base product whose points
+  include (at least) the edge g and the 1-cell ηᵋ_f, so a 2-arrow witnessing the triangle is “over g”.
 
-  This symbol is a placeholder name for that witness. Eventually, it should be *derivable* from the
-  iterable packaging `tapp_func` together with the displayed hom `homd_cov` (once `homd_cov` is implemented),
-  because `homd_cov` is precisely where non-identity “triangle generators” live (fibred over a product of
-  a base edge and a displayed edge).
+  The earlier textbook boundary
+      ηᵋ_{Y₂} ∘ F(g) ⇒ G(g) ∘ ηᵋ_{Y₁}
+  is still a useful semantic sanity check, but it is not the computational driver for iteration here.
 */
-constant symbol tapp0_lax_triangle :
+constant symbol tapp_lax_triangle :
   Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
-  Π [Y1 Y2 : τ (Obj A)], Π (f : τ (Obj (Hom_cat Y1 Y2))), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  Π [X Y1 Y2 : τ (Obj A)],
+  Π (f : τ (Obj (Hom_cat X Y1))), Π (g : τ (Obj (Hom_cat Y1 Y2))), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj
-      (@Hom_cat (Hom_cat (fapp0 F_AB Y1) (fapp0 G_AB Y2))
-         (@compose_morph_fapp0 B (fapp0 F_AB Y1) (fapp0 F_AB Y2) (fapp0 G_AB Y2)
-            (tapp0_fapp0 Y2 ϵ)
-            (fapp0 (@fapp1 A B F_AB Y1 Y2) f))
-         (@compose_morph_fapp0 B (fapp0 F_AB Y1) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
-            (fapp0 (@fapp1 A B G_AB Y1 Y2) f)
-            (tapp0_fapp0 Y1 ϵ))));
+      (@Hom_cat (Hom_cat (fapp0 F_AB X) (fapp0 G_AB Y2))
+        // source 1-cell: ηᵋ_{g∘f}
+        (@fdapp0 A
+          (IsoFibration_catd (hom_cov X (@Id_func A)))
+          (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
+          (@tapp_fapp0 A B F_AB G_AB X ϵ)
+          Y2
+          (@compose_morph_fapp0 A X Y1 Y2 g f))
+        // target 1-cell: G(g) ∘ ηᵋ_f
+        (@compose_morph_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
+          (fapp0 (@fapp1 A B G_AB Y1 Y2) g)
+          (@fdapp0 A
+            (IsoFibration_catd (hom_cov X (@Id_func A)))
+            (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
+            (@tapp_fapp0 A B F_AB G_AB X ϵ)
+            Y1
+            f))));
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
