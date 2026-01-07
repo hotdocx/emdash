@@ -639,8 +639,21 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
 
       G(g) ∘ ηᵋ_f   ⇒   ηᵋ_{g ∘ f}
 
+  Important syntactic remark (why the left side says “G(g) ∘ …”):
+  - In the *ambient* 2-category B, a 2-cell compares two parallel 1-cells with the same source/target.
+    Here both sides must live in Hom_B(FX, G(Y₂)).
+  - But ηᵋ_f has codomain G(Y₁), so to compare it with ηᵋ_{g∘f} (codomain G(Y₂)) we must first
+    “transport along g” using G(g) : G(Y₁) → G(Y₂), yielding the composite G(g) ∘ ηᵋ_f : FX → G(Y₂).
+
+  This is why the displayed/fibred reading is often better written with an explicit “over g” marker:
+
+      ηᵋ_f   ⇒_g   ηᵋ_{g ∘ f}
+
+  where “⇒_g” means: a 2-arrow in the fibre over the base edge g, whose *ambient* boundary is the
+  transported comparison G(g) ∘ ηᵋ_f ⇒ ηᵋ_{g∘f}.
+
   This is the shape that `homd_cov` is meant to support: it is fibred over a base product whose points
-  include (at least) the edge g and the 1-cell ηᵋ_{g∘f}, so a 2-arrow witnessing the triangle is “over g”.
+  include (at least) the edge g and the 1-cell ηᵋ_{g∘f}, so the 2-arrow witnessing the triangle is “over g”.
 
   The earlier textbook boundary
       ηᵋ_{Y₂} ∘ F(g) ⇒ G(g) ∘ ηᵋ_{Y₁}
@@ -652,7 +665,7 @@ constant symbol tapp_lax_triangle :
   Π (f : τ (Obj (Hom_cat X Y1))), Π (g : τ (Obj (Hom_cat Y1 Y2))), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj
       (@Hom_cat (Hom_cat (fapp0 F_AB X) (fapp0 G_AB Y2))
-        // target 1-cell: G(g) ∘ ηᵋ_f
+        // source 1-cell: G(g) ∘ ηᵋ_f  (transport ηᵋ_f along g so it lands in Hom_B(FX, GY₂))
         (@compose_morph_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
           (fapp0 (@fapp1 A B G_AB Y1 Y2) g)
           (@fdapp0 A
@@ -661,7 +674,7 @@ constant symbol tapp_lax_triangle :
             (@tapp_fapp0 A B F_AB G_AB X ϵ)
             Y1
             f))
-        // source 1-cell: ηᵋ_{g∘f}
+        // target 1-cell: ηᵋ_{g∘f}
         (@fdapp0 A
           (IsoFibration_catd (hom_cov X (@Id_func A)))
           (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
