@@ -599,14 +599,10 @@ symbol tapp0_func : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
          (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A))));
 
 // Object-action of `tapp0_func`: compute the 1-cell component ϵ_Y by evaluating ϵ^Y at id_Y.         // component extraction
-symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
-  Π (Y_A : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
-  τ (Obj (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A)))
-≔ fdapp0
-     [A]
-     [IsoFibration_catd (hom_cov Y_A (@Id_func A))]
-     [IsoFibration_catd (hom_cov (fapp0 F_AB Y_A) G_AB)]
-     (tapp_fapp0 Y_A ϵ) [Y_A] (identity_morph A Y_A);
+symbol tapp0_fapp0 [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))]
+  (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB)))
+  : τ (Obj (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A)))
+≔ fdapp0 (tapp_fapp0 Y_A ϵ) [Y_A] (identity_morph A Y_A);
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
