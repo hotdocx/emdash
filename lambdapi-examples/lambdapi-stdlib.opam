@@ -1,0 +1,18 @@
+opam-version: "2.0"
+synopsis: "Standard library of Lambdapi"
+description: """
+This Lambdapi library provides modules for defining logics, metatheorems of
+classical logic, functions and properties on basic inductive types like
+natural numbers (in base 1 and 2), integers and polymorphic lists.
+"""
+maintainer: ["frederic.blanqui@inria.fr"]
+authors: ["https://github.com/Deducteam/lambdapi-stdlib/blob/master/AUTHORS.md"]
+license: "CECILL-2.1"
+homepage: "https://github.com/Deducteam/lambdapi-stdlib"
+bug-reports: "https://github.com/Deducteam/lambdapi-stdlib/issues"
+dev-repo: "git+https://github.com/Deducteam/lambdapi-stdlib.git"
+build: [ make ]
+install: [ make "install" ]
+depends: [
+  "lambdapi" {>= "3.0.0"}
+]

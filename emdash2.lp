@@ -324,6 +324,28 @@ symbol tapp_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
 // β-rule: `tapp_fapp0` is definitionally the object-action of the functor `tapp_func`.               // unpack tapp_func at objects
 rule fapp0 (@tapp_func $A $B $F_AB $G_AB $X_A) $ϵ ↪ @tapp_fapp0 $A $B $F_AB $G_AB $X_A $ϵ;
 
+/*
+  tapp0_func / tapp0_fapp0 (ordinary “component at Y”)
+
+  In ordinary 1-category theory, a natural transformation ϵ : F ⇒ G has pointwise components
+    ϵ_Y : Hom_B(FY, GY)
+  (just a 1-cell in B).
+
+  In this ω-development, we *derive* that 1-cell from the packaged/iterable viewpoint `tapp_func`:
+    - First specialize the external/superscript index to X := Y, giving ϵ^Y : Hom_A(Y,-) ⇒ Hom_B(FY,G(-)).
+    - Then evaluate this dependent functor at the identity arrow id_Y : Hom_A(Y,Y).
+
+  Important: `tapp0_fapp0` intentionally forgets the extra (lax) naturality *witnesses*.
+  The laxness is carried by how ϵ^X acts on non-identity “2-arrow data” in the source representable,
+  which in our framework is mediated by `homd_cov` (a displayed hom that is fibred over a product of
+  a base edge and a displayed edge). Concretely, once `homd_cov` is implemented, ϵ^X will transport
+  a non-identity 2-cell like “g : f ⇒ (g∘f)” to a non-identity 2-cell in the target encoding the
+  lax naturality triangle (comparing something like (G g)∘(…) with (…) for the composite g∘f).
+
+  The actual extracted “pointwise component” operation `tapp0_fapp0` is defined later in the file,
+  after `fdapp0` is introduced (since it is implemented by evaluating `tapp_fapp0` at the identity arrow).
+*/
+
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor_cat(A,B)}(F,G) ≅ Transf_cat(F,G)
 rule @Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;                                                        // definitional equality of homs
 
@@ -554,7 +576,40 @@ symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat 
 ///---here----
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: the base point in Z is an *implicit* argument of `fdapp0`, hence the `[ _ ]`.
-rule fdapp0 (Lift_funcd1 $F) $x ↪ fapp0 $F $x;
+rule fdapp0 (Lift_funcd1 $F) [_] $x ↪ fapp0 $F $x;
+
+/*
+  tapp0_func / tapp0_fapp0 (ordinary “component at Y”)
+
+  This is the “textbook” projection that extracts, from a (lax) transfor ϵ : Transf_cat(F,G),
+  its underlying 1-cell component at Y:
+    ϵ_Y : Hom_cat(FY, GY).
+
+  Implementation: evaluate the packaged dependent functor ϵ^Y (given by `tapp_fapp0 Y ϵ`) at the
+  identity arrow id_Y : Hom_cat(Y,Y) (which is an object in the fibre of Hom_A(Y,-) over Y).
+
+  Note: this only extracts the 1-cell component. The lax naturality *2-cell data* lives in the
+  higher/fibred part of the story (via `homd_cov` and the action of ϵ^X on non-identity 2-cells).
+*/
+
+// For fixed Y, “evaluate at Y” is functorial in ϵ (a 3-cell/modification acts componentwise).        // evaluation at id_Y
+symbol tapp0_func : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (Y_A : τ (Obj A)),
+  τ (Obj (Functor_cat (Transf_cat F_AB G_AB)
+         (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A))));
+
+// Object-action of `tapp0_func`: compute the 1-cell component ϵ_Y by evaluating ϵ^Y at id_Y.         // component extraction
+symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (Y_A : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  τ (Obj (Hom_cat (fapp0 F_AB Y_A) (fapp0 G_AB Y_A)))
+≔ fdapp0
+     [A]
+     [IsoFibration_catd (hom_cov Y_A (@Id_func A))]
+     [IsoFibration_catd (hom_cov (fapp0 F_AB Y_A) G_AB)]
+     (tapp_fapp0 Y_A ϵ) [Y_A] (identity_morph A Y_A);
+
+// β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
+rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 // “Slice-category” / simplicial action: fapp1d packages fapp1 as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
@@ -643,6 +698,10 @@ compute fapp0 (@identity_morph Cat_cat Terminal_cat) Terminal_obj;              
 // tapp_func object-action reduces to tapp_fapp0 by rewriting.                                         // checks tapp β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (tapp_func X_A) ϵ ≡ tapp_fapp0 X_A ϵ;
+
+// tapp0_fapp0 is the derived “component at Y” (evaluation at id_Y) and reduces by rewriting.          // checks tapp0 β-rule fires
+assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
+  fapp0 (tapp0_func Y_A) ϵ ≡ tapp0_fapp0 Y_A ϵ;
 
 // tdapp_func object-action reduces to tdapp_fapp0 by rewriting.                                       // checks tdapp β-rule fires
 assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]

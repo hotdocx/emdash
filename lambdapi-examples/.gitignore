@@ -1,0 +1,5 @@
+*.log
+*.lpo
+*~
+log-lp.txt
+log-lsp.txt
