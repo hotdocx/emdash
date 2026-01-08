@@ -92,6 +92,19 @@ injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;            
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
 injective symbol identity_morph : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (Hom_cat X_A X_A));            // id_X : Obj(Hom_cat(X,X))
 
+// -------------------------------------------------------------------------------------------------
+// 4b. Opposite category (core)                                                                      // A ↦ Aᵒᵖ (objects fixed, arrows reversed)
+// -------------------------------------------------------------------------------------------------
+
+injective symbol Op_cat : Cat → Cat;                                                                 // opposite category operation
+rule Op_cat (Op_cat $A) ↪ $A;                                                                        // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
+
+// Objects are unchanged by opposite.                                                                // Obj(Aᵒᵖ) ≡ Obj(A)
+rule Obj (Op_cat $A) ↪ Obj $A;
+
+// Homs are reversed by opposite.                                                                    // Hom_{Aᵒᵖ}(X,Y) ≡ Hom_A(Y,X)
+rule @Hom_cat (Op_cat $A) $X $Y ↪ @Hom_cat $A $Y $X;
+
 /*
   OBSERVATION (cartierSolution13.lp vs emdash.lp, and why emdash2/emdash3 keep *both* forms):
 
@@ -176,6 +189,21 @@ assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
   @compose_morph_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
     ≡ @hom_cov A W C (@compose_morph_fapp0 Cat_cat C B A F G);
+
+// Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
+// In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
+constant symbol hom_cov_func : Π [A : Cat], Π [B : Cat],
+  Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat (Op_cat A) (Functor_cat B Cat_cat)));
+
+// β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_func(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_func(F),X) ↪ hom_cov(X,F)
+rule fapp0 (@hom_cov_func $A $B $F) $X ↪ @hom_cov $A $X $B $F;
+
+// Sanity: the β-rule fires, and the resulting functor still computes pointwise via hom_cov.         // exercise both rewrites
+assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) ⊢
+  fapp0 (hom_cov_func F) X ≡ @hom_cov A X B F;
+
+assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
+  fapp0 (fapp0 (hom_cov_func F) X) Y ≡ @Hom_cat A X (fapp0 F Y);
 
 
 // -------------------------------------------------------------------------------------------------
@@ -419,9 +447,6 @@ rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);   
 // 11. Opposite category (involution)                                                                 // A ↦ Aᵒᵖ
 // -------------------------------------------------------------------------------------------------
 
-injective symbol Op_cat : Cat → Cat;                                                                 // opposite category operation
-rule Op_cat (Op_cat $A) ↪ $A;                     
-                                                   // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
 injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
 rule Op_catd (Op_catd $A) ↪ $A;                     
 
