@@ -228,6 +228,24 @@ constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],     
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
 rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
 
+// Computation (representables act by postcomposition):                                                // (Hom_A(W,-))(f)(g) ↪ f∘g
+// For the representable Hom_A(W,−) (i.e. `hom_cov W (Id_func A)`), the induced action on objects is
+// just postcomposition: given f : X→Y and g : W→X, we have g ↦ f ∘ g.
+//
+// To keep rewriting predictable (and typechecking fast), we expose the “postcomposition-by-f” functor
+// as an explicit symbol, and relate it to `fapp1_func` by rewrite rules.
+injective symbol hom_cov_postcomp_func : Π [A : Cat], Π (W : τ (Obj A)), Π [X Y : τ (Obj A)],
+  τ (Obj (Hom_cat X Y)) → τ (Obj (Functor_cat (Hom_cat W X) (Hom_cat W Y)));
+
+// Extract the postcomposition functor from the hom_cov functoriality (representable case).           // (hom_cov W)_1(f) ↪ postcomp(f)
+rule @fapp0 (Hom_cat $X $Y) (Functor_cat (Hom_cat $W $X) (Hom_cat $W $Y))
+  (@fapp1_func $A Cat_cat (@hom_cov $A $W $A (@identity_morph Cat_cat $A)) $X $Y) $f
+  ↪ @hom_cov_postcomp_func $A $W $X $Y $f;
+
+// Evaluate postcomposition at g : W→X gives ordinary composition f∘g.                                 // postcomp(f)(g) ↪ f∘g
+rule @fapp0 (Hom_cat $W $X) (Hom_cat $W $Y) (@hom_cov_postcomp_func $A $W $X $Y $f) $g
+  ↪ @compose_morph_fapp0 $A $W $X $Y $f $g;
+
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
 rule @fapp0 $B Cat_cat (@compose_morph_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
   ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
@@ -247,6 +265,14 @@ assert [A B : Cat] [C : Cat] (W : τ (Obj A))
 assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@compose_morph_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
     ≡ Op_cat (@fapp0 B Cat_cat E b);
+
+// Sanity: representable action computes to composition.                                               // ((hom_cov W Id) f) g ↪ f∘g
+assert [A : Cat] (W : τ (Obj A)) (X Y : τ (Obj A))
+  (f : τ (Obj (Hom_cat X Y))) (g : τ (Obj (Hom_cat W X))) ⊢
+  @fapp0 (Hom_cat W X) (Hom_cat W Y)
+    (@fapp0 (Hom_cat X Y) (Functor_cat (Hom_cat W X) (Hom_cat W Y))
+      (@fapp1_func A Cat_cat (@hom_cov A W A (@identity_morph Cat_cat A)) X Y) f) g
+    ≡ @compose_morph_fapp0 A W X Y f g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
