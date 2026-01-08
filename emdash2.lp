@@ -242,6 +242,13 @@ rule @fapp0 (Hom_cat $X $Y) (Functor_cat (Hom_cat $W $X) (Hom_cat $W $Y))
   (@fapp1_func $A Cat_cat (@hom_cov $A $W $A (@identity_morph Cat_cat $A)) $X $Y) $f
   ↪ @hom_cov_postcomp_func $A $W $X $Y $f;
 
+rule @fapp0 (Hom_cat $X $Y)
+    _
+     (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f
+      ↪ @hom_cov_postcomp_func $A $W (fapp0 $F $X) (fapp0 $F $Y)
+          (@fapp0 (Hom_cat $X $Y) (Hom_cat (fapp0 $F $X) (fapp0 $F $Y))
+            (@fapp1_func $B $A $F $X $Y) $f);
+
 // Evaluate postcomposition at g : W→X gives ordinary composition f∘g.                                 // postcomp(f)(g) ↪ f∘g
 rule @fapp0 (Hom_cat $W $X) (Hom_cat $W $Y) (@hom_cov_postcomp_func $A $W $X $Y $f) $g
   ↪ @compose_morph_fapp0 $A $W $X $Y $f $g;
