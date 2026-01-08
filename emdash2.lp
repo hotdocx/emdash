@@ -186,6 +186,18 @@ rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                              
 rule Op_cat Grpd_cat ↪ Grpd_cat;
 rule Op_cat Cat_cat ↪ Cat_cat;
 
+// Internalized opposite as a functor in Cat: op : Cat_cat → Cat_cat.                                 // A ↦ Aᵒᵖ, F ↦ Fᵒᵖ
+// This is the “usual” dualization, but packaged as an object of Functor_cat(Cat_cat,Cat_cat),
+// so we can postcompose Cat-valued fibrations E : B → Cat_cat with `op`.
+constant symbol op : τ (Obj (Functor_cat Cat_cat Cat_cat));
+
+// Object-action: op₀(A) ≡ Aᵒᵖ.                                                                       // fapp0(op,A) ↪ Op_cat(A)
+rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
+
+// Morphism-action on objects (functors): op₁(F) ≡ Fᵒᵖ.                                               // fapp0(fapp1_func(op),F) ↪ Op_func(F)
+rule @fapp0 (Functor_cat $A1 $A2) (Functor_cat (Op_cat $A1) (Op_cat $A2))
+  (@fapp1_func Cat_cat Cat_cat op $A1 $A2) $F ↪ @Op_func $A1 $A2 $F;
+
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
 symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
 ≔ @identity_morph Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
@@ -200,6 +212,10 @@ constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],     
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
 rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
 
+// Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
+rule @fapp0 $B Cat_cat (@compose_morph_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
+  ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
+
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
 // Note: we express functor composition via `compose_morph_fapp0` in `Cat_cat` (not via `comp_func`, which is defined later). // computational-friendly
 rule @compose_morph_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
@@ -210,6 +226,11 @@ assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
   @compose_morph_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
     ≡ @hom_cov A W C (@compose_morph_fapp0 Cat_cat C B A F G);
+
+// Sanity: postcomposition by op normalizes pointwise.                                                // exercise `op ∘ E` computation
+assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
+  @fapp0 B Cat_cat (@compose_morph_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
+    ≡ Op_cat (@fapp0 B Cat_cat E b);
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
