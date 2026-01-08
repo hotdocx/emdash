@@ -154,6 +154,20 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),     
   Π [X_A Y_A : τ (Obj A)],                                                            // endpoints
   τ (Obj (Functor_cat (Hom_cat X_A Y_A) (Hom_cat (fapp0 F_AB X_A) (fapp0 F_AB Y_A))));                            // functor on the hom-category
 
+// Opposite of a functor: F : A→B  ↦  Fᵒᵖ : Aᵒᵖ → Bᵒᵖ (same object-map, reversed hom-action).        // dualization of functors
+injective symbol Op_func : Π [A B : Cat],
+  τ (Obj (Functor_cat A B)) → τ (Obj (Functor_cat (Op_cat A) (Op_cat B)));
+
+// Involution: (Fᵒᵖ)ᵒᵖ ≡ F (definitionally, up to Op_cat involution).                                 // (−)ᵒᵖ is involutive
+rule Op_func (@Op_func $A $B $F) ↪ $F;
+
+// Object-action is unchanged by opposite.                                                            // Fᵒᵖ₀ = F₀
+rule @fapp0 (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
+
+// Hom-action is reversed by opposite (uses definitional Hom_{Aᵒᵖ}(X,Y) ≡ Hom_A(Y,X)).                // Fᵒᵖ₁(X,Y) = F₁(Y,X)
+rule @fapp1_func (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F) $X $Y
+  ↪ @fapp1_func $A $B $F $Y $X;
+
 // -------------------------------------------------------------------------------------------------
 // 6. Classifier categories: `Grpd_cat` and `Cat_cat` (categories of groupoids and categories)       // “universes as categories”
 // -------------------------------------------------------------------------------------------------
@@ -168,11 +182,18 @@ constant symbol Cat_cat : Cat;                                                  
 unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
 rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                                                            // morphisms in Cat_cat are functors
 
+// Opposites fix the classifier categories (definitionally).                                          // Grpdᵒᵖ ≡ Grpd, Catᵒᵖ ≡ Cat
+rule Op_cat Grpd_cat ↪ Grpd_cat;
+rule Op_cat Cat_cat ↪ Cat_cat;
+
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
 symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
 ≔ @identity_morph Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
 // NOTE: `Id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `Id_func`, switch to `symbol Id_func ...;` + `rule Id_func ... ↪ ...` (cf. tapp0_fapp0).
 rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
+
+// Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
+rule @Op_func $A $A (@Id_func $A) ↪ @Id_func (Op_cat $A);
 
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
 constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
@@ -450,6 +471,31 @@ rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);   
 injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
 rule Op_catd (Op_catd $A) ↪ $A;                     
 
+// Opposite preserves terminal displayed categories.                                                  // (1_X)ᵒᵖ ≡ 1_{Xᵒᵖ}
+rule @Op_catd $X (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
+
+// Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
+rule @Op_catd $A (@Pullback_catd $A $B $E $F)
+  ↪ @Pullback_catd (Op_cat $A) (Op_cat $B) (@Op_catd $B $E) (@Op_func $A $B $F);
+
+// Opposite of a total category is the total of the opposite displayed category.                      // (∫E)ᵒᵖ ≡ ∫(Eᵒᵖ)
+rule Op_cat (Total_cat $E) ↪ Total_cat (Op_catd $E);
+
+// The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
+rule @Op_func (Total_cat $E) $B (@Total_proj_func $B $E)
+  ↪ @Total_proj_func (Op_cat $B) (@Op_catd $B $E);
+
+// Sanity: opposites interact with core constructions by definitional rewriting.                      // exercise Op rules
+assert [A B : Cat] (E : Catd B) (F : τ (Obj (Functor_cat A B))) ⊢
+  @Op_catd A (@Pullback_catd A B E F)
+    ≡ @Pullback_catd (Op_cat A) (Op_cat B) (@Op_catd B E) (@Op_func A B F);
+
+assert [B : Cat] (E : Catd B) ⊢ Op_cat (Total_cat E) ≡ Total_cat (Op_catd E);
+
+assert [B : Cat] (E : Catd B) ⊢
+  @Op_func (Total_cat E) B (@Total_proj_func B E)
+    ≡ @Total_proj_func (Op_cat B) (@Op_catd B E);
+
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
 // -------------------------------------------------------------------------------------------------
@@ -457,14 +503,23 @@ rule Op_catd (Op_catd $A) ↪ $A;
 // The terminal category 1 (one object, one morphism).                                                // categorical unit
 constant symbol Terminal_cat : Cat;                                                                  // 1 : Cat
 
+// Terminal category is self-dual.                                                                    // 1ᵒᵖ ≡ 1
+rule Op_cat Terminal_cat ↪ Terminal_cat;
+
 // The unique functor A → 1 (terminal functor).                                                       // ! : A → 1
 injective symbol Terminal_func : Π (A : Cat), τ (Obj (Functor_cat A Terminal_cat));                      // object of Functor_cat(A,1)
+
+// Opposite of the terminal functor is the terminal functor out of Aᵒᵖ.                                // (!:A→1)ᵒᵖ ≡ !:Aᵒᵖ→1
+rule @Op_func $A Terminal_cat (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 
 // Distinguished object * : Obj(1) (everything is definitionally equal to it via rules if desired).  // point of the terminal category
 constant symbol Terminal_obj : τ (Obj Terminal_cat);                                                 // * : Obj(1)
 
 // “Object as functor”: an object y:Obj(Y) induces a functor 1 → Y selecting y.                       // points as functors
 injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor_cat Terminal_cat Y));               // y ↦ (1→Y) picking y
+
+// Opposite of a point-functor is the point-functor into the opposite category.                       // (y:1→Y)ᵒᵖ : 1→Yᵒᵖ
+rule @Op_func Terminal_cat $Y (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
 
 // Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
 rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
@@ -492,6 +547,9 @@ rule fapp0 (Obj_func $F) $M ↪ $F;                                             
 
 // View an ordinary category as a displayed category over the terminal base.                          // constant family over 1
 injective symbol Lift_catd1 : Cat → Catd Terminal_cat;                                                // A ↦ const_1(A)
+
+// Opposite of a constant family is constant on the opposite category.                                // const(A)ᵒᵖ ≡ const(Aᵒᵖ)
+rule @Op_catd Terminal_cat (Lift_catd1 $A) ↪ Lift_catd1 (Op_cat $A);
 
 // The Grothendieck construction of a constant family over 1 is definitionally the original category. // ∫(const_1(A)) ≡ A
 rule Total_cat (Lift_catd1 $A) ↪ $A;
@@ -523,6 +581,9 @@ rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (Lift_funcd1
 // Product of categories (binary product in Cat).                                                     // categorical product
 injective symbol Product_cat : Π (A1 A2 : Cat), Cat;                                         // A1 × A2 : Cat
 
+// Opposite distributes over binary products.                                                         // (A×B)ᵒᵖ ≡ Aᵒᵖ×Bᵒᵖ
+rule Op_cat (Product_cat $A1 $A2) ↪ Product_cat (Op_cat $A1) (Op_cat $A2);
+
 // Functorial projections (as functors out of any B): precomposition with π₁, π₂.                     // (−)∘πᵢ on functor categories
 symbol Product_projL_func : Π [A1 A2 B: Cat], τ (Obj (Functor_cat B (Product_cat A1 A2))) →               // given H : B → (A1×A2)
   τ (Obj (Functor_cat B A1));                                                                            // obtain π₁∘H : B → A1
@@ -551,6 +612,10 @@ rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);        
 // Product of dependent categories over the same base Z (fibrewise product).                          // displayed product
 injective symbol Product_catd : Π [Z : Cat] (U A : Catd Z), Catd Z;                       // U×A : Catd(Z)
 rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibre_cat $A $xZ);         // fibre(U×A,x) ↪ fibre(U,x)×fibre(A,x)
+
+// Opposite distributes over fibrewise products.                                                      // (U×A)ᵒᵖ ≡ Uᵒᵖ×Aᵒᵖ
+rule @Op_catd $Z (Product_catd $U $A)
+  ↪ @Product_catd (Op_cat $Z) (@Op_catd $Z $U) (@Op_catd $Z $A);
 
 // Displayed projections/pairing (dependent functors witnessing product structure).                   // displayed πᵢ and pairing
 symbol Product_projL_functord : Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord_cat (Product_catd U A) U));  // π₁ : U×A → U
