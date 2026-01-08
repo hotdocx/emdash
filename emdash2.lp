@@ -189,6 +189,22 @@ rule Op_cat Cat_cat ↪ Cat_cat;
 // Internalized opposite as a functor in Cat: op : Cat_cat → Cat_cat.                                 // A ↦ Aᵒᵖ, F ↦ Fᵒᵖ
 // This is the “usual” dualization, but packaged as an object of Functor_cat(Cat_cat,Cat_cat),
 // so we can postcompose Cat-valued fibrations E : B → Cat_cat with `op`.
+//
+// Terminology / intent (“twisted fibration”):
+//
+// - A (pseudo)functor E : B → Cat corresponds (via Grothendieck construction / unstraightening) to a
+//   Grothendieck *opfibration* p : ∫E → B.  Concretely:
+//     • objects of ∫E are pairs (b, e) with b : Obj(B) and e : Obj(E(b));
+//     • a morphism (b,e) → (b',e') lying over f : b→b' in B is (informally) a morphism
+//           E(f)(e) → e'   in the fibre category E(b').
+//
+// - Postcomposing with opposite yields Eᵒᵖ : B → Cat, where Eᵒᵖ(b) ≔ (E(b))ᵒᵖ, still covariant in b,
+//   hence still an opfibration.  But it “twists” the direction *inside fibres*:
+//     a morphism over f : b→b' from (b,e) to (b',e') in ∫(Eᵒᵖ) is equivalently a morphism
+//           e' → E(f)(e)   in E(b')           (since arrows in E(b')ᵒᵖ are reversed).
+//
+// This matches the intended reading: transport along base arrows stays covariant, while fibre arrows
+// are read in the opposite direction (“target-to-transport(source)”).
 constant symbol op : τ (Obj (Functor_cat Cat_cat Cat_cat));
 
 // Object-action: op₀(A) ≡ Aᵒᵖ.                                                                       // fapp0(op,A) ↪ Op_cat(A)
