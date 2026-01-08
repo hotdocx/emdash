@@ -9,6 +9,25 @@
 flag "eta_equality" on;                                                         // enable η-reduction in definitional equality (normalization)
 
 /*
+  Rewriting hygiene (important for performance and robustness)
+
+  Lambdapi rewrite rules are matched modulo conversion and are typechecked for subject reduction.
+  A common pitfall is to over-specify inferred/implicit arguments on the LHS of a rule, especially
+  when they are “complex” terms rather than pattern variables.
+
+  Rule of thumb:
+  - In the LHS, keep inferred arguments as `_` unless they are essential discriminators.
+    Even if you “know” what an implicit argument should be, forcing it can trigger expensive
+    conversion/unification work (or timeouts) when Lambdapi tries to prove it definitionally equal
+    to the inferred one.
+
+  - Prefer small-step computation rules with stable heads (introduce a helper symbol when useful),
+    rather than a single giant nested redex.
+
+  We use these principles repeatedly below (e.g. for `hom_cov` computation rules).
+*/
+
+/*
   Naming conventions (emdash5.lp)
 
   Goal: keep “what lives where?” obvious at a glance, while preserving the standard CT habit that
@@ -280,6 +299,17 @@ assert [A : Cat] (W : τ (Obj A)) (X Y : τ (Obj A))
     (@fapp0 (Hom_cat X Y) (Functor_cat (Hom_cat W X) (Hom_cat W Y))
       (@fapp1_func A Cat_cat (@hom_cov A W A (@identity_morph Cat_cat A)) X Y) f) g
     ≡ @compose_morph_fapp0 A W X Y f g;
+
+// Sanity: general hom_cov action computes to postcomposition by F(f).                                 // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
+assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
+  (X Y : τ (Obj B)) (f : τ (Obj (Hom_cat X Y))) (g : τ (Obj (Hom_cat W (fapp0 F X)))) ⊢
+  @fapp0 (Hom_cat W (fapp0 F X)) (Hom_cat W (fapp0 F Y))
+    (@fapp0 (Hom_cat X Y)
+      (Functor_cat (Hom_cat W (fapp0 F X)) (Hom_cat W (fapp0 F Y)))
+      (@fapp1_func B Cat_cat (@hom_cov A W B F) X Y) f) g
+    ≡ @compose_morph_fapp0 A W (fapp0 F X) (fapp0 F Y)
+        (@fapp0 (Hom_cat X Y) (Hom_cat (fapp0 F X) (fapp0 F Y))
+          (@fapp1_func B A F X Y) f) g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
