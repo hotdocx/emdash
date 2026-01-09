@@ -247,30 +247,21 @@ constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],     
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
 rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
 
-// Computation (representables act by postcomposition):                                                // (Hom_A(W,-))(f)(g) ↪ f∘g
-// For the representable Hom_A(W,−) (i.e. `hom_cov W (Id_func A)`), the induced action on objects is
-// just postcomposition: given f : X→Y and g : W→X, we have g ↦ f ∘ g.
+// Computation (hom_cov acts by postcomposition):                                                      // ((Hom_A(W,F-))_1 f)_0 g ↪ (Ff)∘g
+// If f : Hom_B(X,Y) and g : Hom_A(W,F(X)), then `hom_cov W F : B → Cat` induces a functor
+//   Hom_A(W,F(X)) → Hom_A(W,F(Y))
+// which sends g ↦ (F f) ∘ g.
 //
-// To keep rewriting predictable (and typechecking fast), we expose the “postcomposition-by-f” functor
-// as an explicit symbol, and relate it to `fapp1_func` by rewrite rules.
-injective symbol hom_cov_postcomp_func : Π [A : Cat], Π (W : τ (Obj A)), Π [X Y : τ (Obj A)],
-  τ (Obj (Hom_cat X Y)) → τ (Obj (Functor_cat (Hom_cat W X) (Hom_cat W Y)));
-
-// Extract the postcomposition functor from the hom_cov functoriality (representable case).           // (Hom_A(W,-))_1(f) ↪ postcomp(f)
-rule @fapp0 (Hom_cat $X $Y) (Functor_cat (Hom_cat $W $X) (Hom_cat $W $Y))
-  (@fapp1_func $A Cat_cat (@hom_cov $A $W $A (@identity_morph Cat_cat $A)) $X $Y) $f
-  ↪ @hom_cov_postcomp_func $A $W $X $Y $f;
-
-rule @fapp0 (Hom_cat $X $Y)
+// Key point: keep inferred arguments on the LHS underspecified (`_`) to avoid conversion blowups.
+rule @fapp0 _
     _
-     (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f
-      ↪ @hom_cov_postcomp_func $A $W (fapp0 $F $X) (fapp0 $F $Y)
-          (@fapp0 (Hom_cat $X $Y) (Hom_cat (fapp0 $F $X) (fapp0 $F $Y))
-            (@fapp1_func $B $A $F $X $Y) $f);
-
-// Evaluate postcomposition at g : W→X gives ordinary composition f∘g.                                 // postcomp(f)(g) ↪ f∘g
-rule @fapp0 (Hom_cat $W $X) (Hom_cat $W $Y) (@hom_cov_postcomp_func $A $W $X $Y $f) $g
-  ↪ @compose_morph_fapp0 $A $W $X $Y $f $g;
+    (@fapp0 (Hom_cat $X $Y)
+      _
+      (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f) $g
+  ↪ @compose_morph_fapp0 $A $W (fapp0 $F $X) (fapp0 $F $Y)
+      (@fapp0 (Hom_cat $X $Y)
+        _
+        (@fapp1_func $B $A $F $X $Y) $f) $g;
 
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
 rule @fapp0 $B Cat_cat (@compose_morph_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
@@ -292,14 +283,6 @@ assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@compose_morph_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
     ≡ Op_cat (@fapp0 B Cat_cat E b);
 
-// Sanity: representable action computes to composition.                                               // ((hom_cov W Id) f) g ↪ f∘g
-assert [A : Cat] (W : τ (Obj A)) (X Y : τ (Obj A))
-  (f : τ (Obj (Hom_cat X Y))) (g : τ (Obj (Hom_cat W X))) ⊢
-  @fapp0 (Hom_cat W X) (Hom_cat W Y)
-    (@fapp0 (Hom_cat X Y) (Functor_cat (Hom_cat W X) (Hom_cat W Y))
-      (@fapp1_func A Cat_cat (@hom_cov A W A (@identity_morph Cat_cat A)) X Y) f) g
-    ≡ @compose_morph_fapp0 A W X Y f g;
-
 // Sanity: general hom_cov action computes to postcomposition by F(f).                                 // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
 assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
   (X Y : τ (Obj B)) (f : τ (Obj (Hom_cat X Y))) (g : τ (Obj (Hom_cat W (fapp0 F X)))) ⊢
@@ -318,14 +301,6 @@ constant symbol hom_cov_func : Π [A : Cat], Π [B : Cat],
 
 // β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_func(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_func(F),X) ↪ hom_cov(X,F)
 rule fapp0 (@hom_cov_func $A $B $F) $X ↪ @hom_cov $A $X $B $F;
-
-// Link (representable case): extracting `fapp1_func` from `hom_cov_func Id` yields our postcomp functor. // keep hom_cov_func and hom_cov_postcomp_func synchronized
-rule @fapp0 (Hom_cat $X $Y) (Functor_cat (Hom_cat $W $X) (Hom_cat $W $Y))
-  (@fapp1_func $A Cat_cat
-    (@fapp0 (Op_cat $A) (Functor_cat $A Cat_cat)
-      (@hom_cov_func $A $A (@identity_morph Cat_cat $A)) $W)
-    $X $Y) $f
-  ↪ @hom_cov_postcomp_func $A $W $X $Y $f;
 
 // Sanity: the β-rule fires, and the resulting functor still computes pointwise via hom_cov.         // exercise both rewrites
 assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) ⊢
