@@ -21,6 +21,14 @@ flag "eta_equality" on;                                                         
     conversion/unification work (or timeouts) when Lambdapi tries to prove it definitionally equal
     to the inferred one.
 
+  - Often there are *multiple* such inferred arguments in nested applications (e.g. multiple `fapp0`s).
+    Omitting only one may not be enough: any remaining explicit “complex” implicit argument can still
+    force costly conversions.
+
+  - Be extra cautious when an implicit argument contains a “cut” (a reducible subterm), e.g. an
+    expression like `Hom_cat W (fapp0 F X)` on the LHS: since `fapp0 F X` may itself reduce, spelling
+    out the whole implicit argument can make matching/typechecking much harder than using `_`.
+
   - Prefer small-step computation rules with stable heads (introduce a helper symbol when useful),
     rather than a single giant nested redex.
 
@@ -252,7 +260,8 @@ rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                     
 //   Hom_A(W,F(X)) → Hom_A(W,F(Y))
 // which sends g ↦ (F f) ∘ g.
 //
-// Key point: keep inferred arguments on the LHS underspecified (`_`) to avoid conversion blowups.
+// Key point: keep *multiple* inferred arguments on the LHS underspecified (`_`) to avoid conversion blowups,
+// especially when an implicit argument would contain reducible subterms like `fapp0 $F $X`.
 rule @fapp0 _
     _
     (@fapp0 (Hom_cat $X $Y)
