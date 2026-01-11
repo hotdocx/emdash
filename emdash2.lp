@@ -837,6 +837,16 @@ rule Product_projL (Product_pair $X $Y) ↪ $X
 with Product_projR (Product_pair $X $Y) ↪ $Y;
 rule Product_pair (Product_projL $XY) (Product_projR $XY) ↪ $XY;
 
+// Internalized binary product as a functor in Cat: × : Cat_cat×Cat_cat → Cat_cat.                     // (A,B) ↦ A×B
+// Usual notation: `× : Cat × Cat → Cat`, with (A,B) ↦ A×B.
+// Packaged as an object of Functor_cat(Cat_cat×Cat_cat, Cat_cat) so we can postcompose Cat-valued
+// functors `E,D : Z → Cat_cat` to get their pointwise product `z ↦ E(z)×D(z)`.
+constant symbol prod_cat : τ (Obj (Functor_cat (Product_cat Cat_cat Cat_cat) Cat_cat));
+
+// Object-action: prod_cat₀(A,B) ≡ A×B.                                                                // fapp0(prod_cat,(A,B)) ↪ Product_cat(A,B)
+rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Product_pair $A $B)
+  ↪ Product_cat $A $B;
+
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
 rule @Hom_cat (Product_cat $A1 $A2) $P $Q
   ↪ Product_cat (@Hom_cat $A1 (Product_projL $P) (Product_projL $Q))
@@ -900,6 +910,20 @@ rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibr
 // Opposite distributes over fibrewise products.                                                      // (U×A)ᵒᵖ ≡ Uᵒᵖ×Aᵒᵖ
 rule @Op_catd $Z (Product_catd $U $A)
   ↪ @Product_catd (Op_cat $Z) (@Op_catd $Z $U) (@Op_catd $Z $A);
+
+// Pointwise product of Cat-valued functors.                                                           // (E⊗D)(z) = E(z)×D(z)
+// Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
+symbol prod_func [Z : Cat]
+  (E D : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat Z Cat_cat))
+≔ @compose_morph_fapp0 Cat_cat Z (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Product_pair_func E D);
+
+// Fibrewise product of Grothendieck displayed categories is Grothendieck of pointwise product.        // ∫E ×_Z ∫D  ≅  ∫(E×D)
+// If `E,D : Z ⟶ Cat` are Cat-valued functors, then their Grothendieck constructions are displayed
+// categories `IsoFibration_catd E, IsoFibration_catd D : Catd Z`. Their fibrewise product over `Z`
+// is again a Grothendieck displayed category, classified by the pointwise product functor:
+//   (E ⊗ D)(z) = E(z) × D(z).
+rule @Product_catd $Z (@IsoFibration_catd $Z $E) (@IsoFibration_catd $Z $D)
+  ↪ @IsoFibration_catd $Z (prod_func $E $D);
 
 // Displayed projections/pairing (dependent functors witnessing product structure).                   // displayed πᵢ and pairing
 symbol Product_projL_functord : Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord_cat (Product_catd U A) U));  // π₁ : U×A → U
