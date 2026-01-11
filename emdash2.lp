@@ -597,12 +597,19 @@ rule τ (Obj (Total_cat (@IsoFibration_catd $B $M)))
 // The base projection π₁ : ∫M → B sends (x,u) ↦ x.                                                    // compute π₁ on objects (Grothendieck)
 rule fapp0 (Total_proj_func (IsoFibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 
-// 1-cells in the Grothendieck total (opfibration convention).                                         // Σ-arrow description (Grothendieck only)
-// A 1-cell (x,u) → (y,v) is a pair (f : x→y,  α : M(f)(u) → v) in the fibre at y.
-rule τ (Obj (@Hom_cat (Total_cat (@IsoFibration_catd $B $M))
-  (Struct_sigma $x $u) (Struct_sigma $y $v)))
-  ↪ `τΣ_ f : τ (Obj (Hom_cat $x $y)),
-       Obj (@Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y f $u) $v);
+// Grothendieck hom family (opfibration convention).                                                   // f ↦ Hom_{M(y)}(M(f)(u),v)
+// For fixed (x,u) and (y,v), this is a Cat-valued functor on the hom-category Hom_B(x,y).
+symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+  Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))),
+  τ (Obj (Functor_cat (Hom_cat x y) Cat_cat));
+
+// β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).       // compute family at a base arrow
+rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
+  ↪ @Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y $f $u) $v;
+
+// Grothendieck hom-category is itself a Grothendieck total.                                           // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
+rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Total_cat (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
 
 // Identity in the Grothendieck total is (id_x, id_u).                                                 // id_{(x,u)} = (id_x, id_u)
 rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
