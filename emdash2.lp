@@ -542,13 +542,9 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
 */
 
 // Transport objects in the fibre along a base 1-cell (covariant).                                    // M(f) on objects
-symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+sequential symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (f : τ (Obj (Hom_cat x y))), Π (u : τ (Obj (fapp0 M x))),
   τ (Obj (fapp0 M y));
-
-// Computation: isoFib_transport0(M,f,u) ↪ (M(f))(u).                                                  // unfold transport0
-rule @isoFib_transport0 $B $M $x $y $f $u
-  ↪ fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u;
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
 rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
@@ -556,6 +552,10 @@ rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
 // Strict functoriality on objects: M(g∘f)(u) ↪ M(g)(M(f)(u)).                                         // preserves composition on objects
 rule @isoFib_transport0 $B $M $x $z (@compose_morph_fapp0 $B $x $y $z $g $f) $u
   ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
+
+// Computation: isoFib_transport0(M,f,u) ↪ (M(f))(u).                                                  // unfold transport0 (default case)
+rule @isoFib_transport0 $B $M $x $y $f $u
+  ↪ fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u;
 
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
 injective symbol Total_proj_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
@@ -601,6 +601,27 @@ rule τ (Obj (@Hom_cat (Total_cat (@IsoFibration_catd $B $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v)))
   ↪ `τΣ_ f : τ (Obj (Hom_cat $x $y)),
        Obj (@Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y f $u) $v);
+
+// Identity in the Grothendieck total is (id_x, id_u).                                                 // id_{(x,u)} = (id_x, id_u)
+rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
+  ↪ Struct_sigma (identity_morph $B $x) (identity_morph (fapp0 $M $x) $u);
+
+// Composition in the Grothendieck total.                                                              // (g,β) ∘ (f,α) = (g∘f, β ∘ M(g)(α))
+rule @compose_morph_fapp0 (Total_cat (@IsoFibration_catd $B $M))
+  (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
+  (Struct_sigma $g $β) (Struct_sigma $f $α)
+  ↪ Struct_sigma
+      (@compose_morph_fapp0 $B $x $y $z $g $f)
+      (@compose_morph_fapp0 (fapp0 $M $z)
+        (@isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u))
+        (@isoFib_transport0 $B $M $y $z $g $v)
+        $w
+        $β
+        (fapp0
+          (@fapp1_func (fapp0 $M $y) (fapp0 $M $z)
+            (fapp0 (@fapp1_func $B Cat_cat $M $y $z) $g)
+            (@isoFib_transport0 $B $M $x $y $f $u) $v)
+          $α));
 
 // -------------------------------------------------------------------------------------------------
 // 11. Opposite category (involution)                                                                 // A ↦ Aᵒᵖ
