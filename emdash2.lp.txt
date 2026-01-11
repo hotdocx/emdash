@@ -914,7 +914,8 @@ rule @Op_catd $Z (Product_catd $U $A)
 // Pointwise product of Cat-valued functors.                                                           // (E⊗D)(z) = E(z)×D(z)
 // Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
 symbol prod_func [Z : Cat]
-  (E D : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat Z Cat_cat));
+  (E D : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat Z Cat_cat))
+≔ @compose_morph_fapp0 Cat_cat Z (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Product_pair_func E D);
 
 // Pointwise computation on objects: (E×D)(z) ↦ E(z)×D(z).                                             // fapp0(prod_func(E,D),z) ↪ Product_cat(E(z),D(z))
 rule fapp0 (prod_func $E $D) $z ↪ Product_cat (fapp0 $E $z) (fapp0 $D $z);
@@ -993,7 +994,7 @@ rule fdapp0 (Lift_funcd1 $F) [_] $x ↪ fapp0 $F $x;
 rule fapp0 (@homd_cov $Z (@IsoFibration_catd $Z $E0) $W_Z $W
               (@IsoFibration_catd $Z $D0) $FF)
             (Struct_sigma $z (Product_pair $d $f))
-  ↪ Hom_cat
+  ↪ @Hom_cat (fapp0 $E0 $z)
       (@isoFib_transport0 $Z $E0 $W_Z $z $f $W)
       (fdapp0 $FF [$z] $d);
 
