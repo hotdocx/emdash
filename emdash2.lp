@@ -533,6 +533,13 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
     - objects: (x : Obj(B), u : Obj(M(x)))
     - 1-cells: (f : x → y in B,  α : M(f)(u) → v in M(y))
 
+  Usual notation (covariant / opfibration-style):
+    - write `M : B ⟶ Cat` (a strict functor for now),
+    - write `∫ M` for the Grothendieck construction (category of elements / total category),
+    - objects: `(x,u)` with `x ∈ Ob(B)` and `u ∈ Ob(M(x))`,
+    - morphisms: `(f,α) : (x,u) → (y,v)` with `f : x → y` in `B` and `α : f_!(u) → v` in `M(y)`,
+      where `f_!(u)` denotes the transported object `M(f)(u)` in the fibre over `y`.
+
   To make identity and composition *typecheck* by definitional equality, we introduce an explicit
   “transport on objects” operation `isoFib_transport0` and give it strict functoriality rules on
   objects (preservation of identities and composition).
@@ -542,20 +549,24 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
 */
 
 // Transport objects in the fibre along a base 1-cell (covariant).                                    // M(f) on objects
+// Usual notation: `f_!(u)` or `M(f)(u)` (opfibration / covariant transport on objects).               // f_! : M(x) → M(y) (on objects)
 sequential symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (f : τ (Obj (Hom_cat x y))), Π (u : τ (Obj (fapp0 M x))),
   τ (Obj (fapp0 M y));
 
 // Canonicalization: compute (M(f))(u) *towards* `isoFib_transport0 M f u`.                             // fold transport0
+// Usual notation: `M(f)(u) ↦ f_!(u)`.                                                                 // fold to the transport head
 // This keeps `isoFib_transport0` as the stable head symbol (like `compose_morph_fapp0`), so later
 // object-level functoriality rules apply without unfolding.
 rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
   ↪ @isoFib_transport0 $B $M $x $y $f $u;
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
+// Usual notation: `(id_x)_!(u) = u`.                                                                  // id_! = id
 rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
 
 // Strict functoriality on objects: M(g∘f)(u) ↪ M(g)(M(f)(u)).                                         // preserves composition on objects
+// Usual notation: `(g ∘ f)_!(u) = g_!(f_!(u))`.                                                       // (g∘f)_! = g_!∘f_! (on objects)
 rule @isoFib_transport0 $B $M $x $z (@compose_morph_fapp0 $B $x $y $z $g $f) $u
   ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
 
@@ -599,19 +610,28 @@ rule fapp0 (Total_proj_func (IsoFibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 
 // Grothendieck hom family (opfibration convention).                                                   // f ↦ Hom_{M(y)}(M(f)(u),v)
 // For fixed (x,u) and (y,v), this is a Cat-valued functor on the hom-category Hom_B(x,y).
+// Usual notation: for fixed `u ∈ M(x)` and `v ∈ M(y)`, define
+//   H_{u,v} : Hom_B(x,y) ⟶ Cat
+//   H_{u,v}(f) = Hom_{M(y)}(f_!(u), v).                                                               // H_{u,v}(f) = Hom_{M(y)}(M(f)(u),v)
 symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))),
   τ (Obj (Functor_cat (Hom_cat x y) Cat_cat));
 
 // β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).       // compute family at a base arrow
+// Usual notation: `H_{u,v}(f) = Hom_{M(y)}(f_!(u), v)`.                                               // expand on objects
 rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
   ↪ @Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y $f $u) $v;
 
 // Grothendieck hom-category is itself a Grothendieck total.                                           // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
+// Usual notation (opfibration Grothendieck formula):
+//   Hom_{∫M}((x,u),(y,v))  ≅  ∫_{f : x→y} Hom_{M(y)}(f_!(u), v).                                       // homs in ∫M as another ∫
 rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Total_cat (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                              // π₁₁ : Hom_{∫M} → Hom_B
+// Usual notation: `π₁ : ∫M → B` induces on homs a functor
+//   (π₁)_{1} : Hom_{∫M}((x,u),(y,v)) ⟶ Hom_B(x,y),
+//   sending `(f,α)` to `f`.                                                                           // forget the fibre component
 rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (IsoFibration_catd $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Total_proj_func (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
