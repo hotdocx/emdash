@@ -524,6 +524,39 @@ symbol Total_cat [B : Cat] (E: Catd B) : Cat;                                   
 // Projection π₁ : Total_cat(M) → A (the “base” projection).                                          // comprehension projection
 injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (Total_cat E) B));           // functor object in Functor_cat(∫E, B)
 
+// -------------------------------------------------------------------------------------------------
+// 10a. Grothendieck opfibration transport (object-level)                                             // M(f)(u) in the fibre
+// -------------------------------------------------------------------------------------------------
+
+/*
+  For `M : B → Cat`, its Grothendieck total ∫M has:
+    - objects: (x : Obj(B), u : Obj(M(x)))
+    - 1-cells: (f : x → y in B,  α : M(f)(u) → v in M(y))
+
+  To make identity and composition *typecheck* by definitional equality, we introduce an explicit
+  “transport on objects” operation `isoFib_transport0` and give it strict functoriality rules on
+  objects (preservation of identities and composition).
+
+  This is intentionally strict for now (non-lax), as requested; later we can relax it by replacing
+  these rules with higher-cell data (laxity 2-cells).
+*/
+
+// Transport objects in the fibre along a base 1-cell (covariant).                                    // M(f) on objects
+symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+  Π [x y : τ (Obj B)], Π (f : τ (Obj (Hom_cat x y))), Π (u : τ (Obj (fapp0 M x))),
+  τ (Obj (fapp0 M y));
+
+// Computation: isoFib_transport0(M,f,u) ↪ (M(f))(u).                                                  // unfold transport0
+rule @isoFib_transport0 $B $M $x $y $f $u
+  ↪ fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u;
+
+// Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
+rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
+
+// Strict functoriality on objects: M(g∘f)(u) ↪ M(g)(M(f)(u)).                                         // preserves composition on objects
+rule @isoFib_transport0 $B $M $x $z (@compose_morph_fapp0 $B $x $y $z $g $f) $u
+  ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
+
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
 injective symbol Total_proj_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
   τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
@@ -553,8 +586,21 @@ rule @compose_morph_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj_f
   ↪ Total_proj_func $A;
 
 // TODO: Review this claim: such additional rewrite rules are for convenience:
-// Objects of ∫M are Σ (x : Obj(A)), Obj(fibre(M,x)).                                                 // Σ-object description of total objects
-rule τ (Obj (Total_cat $M)) ↪ `τΣ_ X : τ (Obj _), Obj (Fibre_cat $M X);                               // τ Obj(∫M) ↪ Σ x:A, Obj(M(x))
+// Objects of ∫M are Σ (x : Obj(B)), Obj(M(x)), but **only** for Grothendieck totals.                 // Σ-object description (Grothendieck only)
+// For a general `E : Catd B` (semantic “category over B”), objects of `Total_cat E` are not
+// definitionally a Σ-type: `Total_cat` is primitive data carried by `E`.
+rule τ (Obj (Total_cat (@IsoFibration_catd $B $M)))
+  ↪ `τΣ_ x : τ (Obj $B), Obj (fapp0 $M x);                                                            // τ Obj(∫M) ↪ Σ x:B, Obj(M(x))
+
+// The base projection π₁ : ∫M → B sends (x,u) ↦ x.                                                    // compute π₁ on objects (Grothendieck)
+rule fapp0 (Total_proj_func (IsoFibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
+
+// 1-cells in the Grothendieck total (opfibration convention).                                         // Σ-arrow description (Grothendieck only)
+// A 1-cell (x,u) → (y,v) is a pair (f : x→y,  α : M(f)(u) → v) in the fibre at y.
+rule τ (Obj (@Hom_cat (Total_cat (@IsoFibration_catd $B $M))
+  (Struct_sigma $x $u) (Struct_sigma $y $v)))
+  ↪ `τΣ_ f : τ (Obj (Hom_cat $x $y)),
+       Obj (@Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y f $u) $v);
 
 // -------------------------------------------------------------------------------------------------
 // 11. Opposite category (involution)                                                                 // A ↦ Aᵒᵖ
