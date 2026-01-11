@@ -611,6 +611,29 @@ rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
 rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Total_cat (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
 
+// Functoriality of the base projection on hom-categories (Grothendieck).                              // π₁₁ : Hom_{∫M} → Hom_B
+rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (IsoFibration_catd $M))
+  (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Total_proj_func (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
+
+// Sanity: objects of hom-categories in ∫M are Σ (base arrow, fibre arrow).                            // recovers the 1-cell description
+assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
+  τ (Obj (@Hom_cat (Total_cat (IsoFibration_catd M)) (Struct_sigma x u) (Struct_sigma y v)))
+    ≡ `τΣ_ f : τ (Obj (Hom_cat x y)),
+         Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v);
+
+// Sanity: π₁ sends a 1-cell (f,α) to its base arrow f.                                                // projection on 1-cells
+assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  (f : τ (Obj (Hom_cat x y)))
+  (α : τ (Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v))) ⊢
+  fapp0
+    (@fapp1_func (Total_cat (IsoFibration_catd M)) B (Total_proj_func (IsoFibration_catd M))
+      (Struct_sigma x u) (Struct_sigma y v))
+    (Struct_sigma f α)
+    ≡ f;
+
 // Identity in the Grothendieck total is (id_x, id_u).                                                 // id_{(x,u)} = (id_x, id_u)
 rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
   ↪ Struct_sigma (identity_morph $B $x) (identity_morph (fapp0 $M $x) $u);
