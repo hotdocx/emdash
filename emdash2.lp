@@ -673,6 +673,27 @@ rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (Lift_funcd1
 // Product of categories (binary product in Cat).                                                     // categorical product
 injective symbol Product_cat : Π (A1 A2 : Cat), Cat;                                         // A1 × A2 : Cat
 
+/*
+  Product_cat design notes (emdash2)
+
+  We intentionally keep *two* views of products simultaneously:
+
+  (1) Object/arrow (“singleton object”) view:
+      - objects are paired by `Product_pair`
+      - arrows (objects of hom-categories) are paired by *the same* `Product_pair`,
+        once we compute Hom-categories of the product:
+            Hom_{A×B}((X1,X2),(Y1,Y2))  ≡  Hom_A(X1,Y1) × Hom_B(X2,Y2)
+
+  (2) Functor/transformation view (universal property):
+      - on objects in functor categories: `Product_pair_func` and `Product_proj{L,R}_func`
+      - on 2-cells / transfors: `Product_pair_transf` and `Product_proj{L,R}_transf`
+
+  Both are kernel-useful:
+  - the object/arrow view supports pointwise computation rules (identities/composition, etc.)
+  - the functor/transformation view supports “Hom_Cat(X, A×B) ≃ Hom_Cat(X,A)×Hom_Cat(X,B)” reasoning
+    while keeping `Functor_cat` primitive (so `fapp0/fapp1_func` remain well-typed).
+*/
+
 // Opposite distributes over binary products.                                                         // (A×B)ᵒᵖ ≡ Aᵒᵖ×Bᵒᵖ
 rule Op_cat (Product_cat $A1 $A2) ↪ Product_cat (Op_cat $A1) (Op_cat $A2);
 
@@ -692,10 +713,62 @@ symbol Product_projR : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Ob
 injective symbol Product_pair : Π [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)),                    // constructor on objects
   τ (Obj (Product_cat A1 A2));                                                                       // ⟨X,Y⟩ : Obj(A1×A2)
 
+// β/η laws on objects.                                                                               // projections and pairing
+rule Product_projL (Product_pair $X $Y) ↪ $X
+with Product_projR (Product_pair $X $Y) ↪ $Y;
+rule Product_pair (Product_projL $XY) (Product_projR $XY) ↪ $XY;
+
+// Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
+rule @Hom_cat (Product_cat $A1 $A2) $P $Q
+  ↪ Product_cat (@Hom_cat $A1 (Product_projL $P) (Product_projL $Q))
+                (@Hom_cat $A2 (Product_projR $P) (Product_projR $Q));
+
+// Identity and composition in a product category are computed componentwise (on paired endpoints).   // id and ∘ in A×B
+rule @identity_morph (Product_cat $A1 $A2) (Product_pair $X1 $X2)
+  ↪ Product_pair (@identity_morph $A1 $X1) (@identity_morph $A2 $X2);
+
+rule @compose_morph_fapp0 (Product_cat $A1 $A2)
+  (Product_pair $X1 $X2) (Product_pair $Y1 $Y2) (Product_pair $Z1 $Z2)
+  (Product_pair $g1 $g2) (Product_pair $f1 $f2)
+  ↪ Product_pair (@compose_morph_fapp0 $A1 $X1 $Y1 $Z1 $g1 $f1)
+                 (@compose_morph_fapp0 $A2 $X2 $Y2 $Z2 $g2 $f2);
+
 // Compatibility between Obj_func (points) and product structure (pointwise pairing/projections).     // evaluation coherence
 rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Product_pair $X $Y);                  // ⟨x,y⟩ as functor from 1
 rule Product_projL_func (Obj_func $XY) ↪ Obj_func (Product_projL $XY);                               // π₁ on points-as-functors
 rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);                               // π₂ on points-as-functors
+
+// β/η laws at the functor level (universal property in Cat, object part).                            // proj∘pair, pair∘⟨proj⟩
+rule Product_projL_func (Product_pair_func $F $G) ↪ $F
+with Product_projR_func (Product_pair_func $F $G) ↪ $G;
+rule Product_pair_func (Product_projL_func $H) (Product_projR_func $H) ↪ $H;
+
+// Pointwise action on objects/homs for paired/projection functors.                                    // compute fapp0/fapp1_func through products
+rule fapp0 (Product_pair_func $F $G) $x ↪ Product_pair (fapp0 $F $x) (fapp0 $G $x);
+rule fapp0 (Product_projL_func $H) $x ↪ Product_projL (fapp0 $H $x);
+rule fapp0 (Product_projR_func $H) $x ↪ Product_projR (fapp0 $H $x);
+
+rule @fapp1_func _ _ (Product_pair_func $F $G) $X $Y
+  ↪ Product_pair_func (@fapp1_func _ _ $F $X $Y) (@fapp1_func _ _ $G $X $Y);
+rule @fapp1_func _ _ (Product_projL_func $H) $X $Y
+  ↪ Product_projL_func (@fapp1_func _ _ $H $X $Y);
+rule @fapp1_func _ _ (Product_projR_func $H) $X $Y
+  ↪ Product_projR_func (@fapp1_func _ _ $H $X $Y);
+
+// Transfor (natural transformation) operations: project/pair transfors pointwise.                   // 2-cells in Functor categories
+symbol Product_projL_transf : Π [A1 A2 I : Cat],
+  Π [F G : τ (Obj (Functor_cat I (Product_cat A1 A2)))],
+  τ (Obj (Transf_cat F G)) → τ (Obj (Transf_cat (Product_projL_func F) (Product_projL_func G)));
+
+symbol Product_projR_transf : Π [A1 A2 I : Cat],
+  Π [F G : τ (Obj (Functor_cat I (Product_cat A1 A2)))],
+  τ (Obj (Transf_cat F G)) → τ (Obj (Transf_cat (Product_projR_func F) (Product_projR_func G)));
+
+symbol Product_pair_transf : Π [A1 A2 I : Cat],
+  Π [F1 G1 : τ (Obj (Functor_cat I A1))],
+  Π [F2 G2 : τ (Obj (Functor_cat I A2))],
+  τ (Obj (Transf_cat F1 G1)) → τ (Obj (Transf_cat F2 G2))
+    → τ (Obj (Transf_cat (Product_pair_func F1 F2) (Product_pair_func G1 G2)));
 
 // -------------------------------------------------------------------------------------------------
 // 14. Fibrewise products (products of displayed categories)                                         // displayed/product fibrations
@@ -751,7 +824,7 @@ symbol comp_func [A B : Cat] [C:Cat]                                            
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // placeholder (signature likely evolves)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z: τ (Obj Z)]                             // base Z, displayed E, base object W_Z
   (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),               // W in fibre, D another displayed cat, FF : D→E
-  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( /*TODO: op ∘ */ hom_cov W_Z (@Id_func Z) )))) // source category (a total category)
+  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( comp_func op (hom_cov W_Z (@Id_func Z)) )))) // source category (a total category)
                 Cat_cat));                                                                            // target category Cat_cat (Cat-valued functors)
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
@@ -806,6 +879,31 @@ rule @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
+
+/*
+  Product_cat and transfors (componentwise computation)
+
+  The following rules implement the expected “pairing/projection is pointwise” behavior at the level
+  of 1-cell components of transfors (extracted by `tapp0_fapp0`):
+
+    - projecting a transfor into A1×A2 yields a transfor into A1/A2 whose components are obtained by
+      projecting the original components;
+    - pairing transfors yields a transfor into A1×A2 whose components are paired.
+
+  This is the minimal interface we need for later developments (exchange laws, adjunctions, etc.),
+  even before the higher (lax) naturality 2-cell data is fully implemented.
+*/
+
+rule Product_projL (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
+  ↪ @tapp0_fapp0 $I $A1 (Product_projL_func $F) (Product_projL_func $G) $X (Product_projL_transf $ϵ);
+
+rule Product_projR (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
+  ↪ @tapp0_fapp0 $I $A2 (Product_projR_func $F) (Product_projR_func $G) $X (Product_projR_transf $ϵ);
+
+rule @tapp0_fapp0 $I (Product_cat $A1 $A2)
+  (Product_pair_func $F1 $F2) (Product_pair_func $G1 $G2) $X (Product_pair_transf $ϵ1 $ϵ2)
+  ↪ Product_pair (@tapp0_fapp0 $I $A1 $F1 $G1 $X $ϵ1)
+                (@tapp0_fapp0 $I $A2 $F2 $G2 $X $ϵ2);
 
 /*
   Placeholder for lax naturality (triangle 2-cell).
