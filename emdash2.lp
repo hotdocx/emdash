@@ -546,16 +546,18 @@ sequential symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B C
   Π [x y : τ (Obj B)], Π (f : τ (Obj (Hom_cat x y))), Π (u : τ (Obj (fapp0 M x))),
   τ (Obj (fapp0 M y));
 
+// Canonicalization: compute (M(f))(u) *towards* `isoFib_transport0 M f u`.                             // fold transport0
+// This keeps `isoFib_transport0` as the stable head symbol (like `compose_morph_fapp0`), so later
+// object-level functoriality rules apply without unfolding.
+rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
+  ↪ @isoFib_transport0 $B $M $x $y $f $u;
+
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
 rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
 
 // Strict functoriality on objects: M(g∘f)(u) ↪ M(g)(M(f)(u)).                                         // preserves composition on objects
 rule @isoFib_transport0 $B $M $x $z (@compose_morph_fapp0 $B $x $y $z $g $f) $u
   ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
-
-// Computation: isoFib_transport0(M,f,u) ↪ (M(f))(u).                                                  // unfold transport0 (default case)
-rule @isoFib_transport0 $B $M $x $y $f $u
-  ↪ fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u;
 
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
 injective symbol Total_proj_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
