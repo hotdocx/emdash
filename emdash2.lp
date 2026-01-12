@@ -36,7 +36,7 @@ flag "eta_equality" on;                                                         
 */
 
 /*
-  Naming conventions (emdash5.lp)
+  Naming conventions (emdash2.lp)
 
   Goal: keep “what lives where?” obvious at a glance, while preserving the standard CT habit that
   lowercase letters are morphisms/cells and uppercase letters are objects/structures.
@@ -51,9 +51,6 @@ flag "eta_equality" on;                                                         
   - Fibre objects (objects of `Fibre_cat E X_B`): uppercase like `U_EX` (read: U in E over X).
   - Displayed functors in the slice (objects of `Functord_cat E D` over the same base): use `FF GG ...`.
   - 2-cells/transformations: Greek `ϵ η ...`; 3-cells/modifications: `α μ ν ...` (when used).
-
-  This file keeps the *symbol* names from emdash3.lp (to remain compatible),
-  but adjusts binder names and comments to follow the convention above.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -133,7 +130,7 @@ rule Obj (Op_cat $A) ↪ Obj $A;
 rule @Hom_cat (Op_cat $A) $X $Y ↪ @Hom_cat $A $Y $X;
 
 /*
-  OBSERVATION (cartierSolution13.lp vs emdash.lp, and why emdash2/emdash3 keep *both* forms):
+  OBSERVATION (cartierSolution13.lp vs emdash.lp, and why emdash2 keep *both* forms):
 
   - In cartierSolution13.lp, many core constructions are "objects in functor categories", i.e. functors
     `A → B` (and then transformations between them). This is the "parametric/object-in-context" view:
@@ -143,7 +140,7 @@ rule @Hom_cat (Op_cat $A) $X $Y ↪ @Hom_cat $A $Y $X;
       a : Hom_cat(X,Y)   (a single 1-cell, 0-dimensional as data),
     and then adds rewrite/unification rules so computation is easy.
 
-  - In emdash2/emdash3 (ω-categories), `Hom_A(X,Y)` is itself a category, so a "morphism" X→Y is
+  - In emdash2 (ω-categories), `Hom_A(X,Y)` is itself a category, so a "morphism" X→Y is
     an *object* of that hom-category: `Obj(Hom_A(X,Y))`. Higher morphisms live in the hom-category too.
 
   This creates a useful tension:
@@ -323,7 +320,10 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y
 // 7. Dependent categories (isofibrations / fibrations)                                              // Cat-valued type families
 // -------------------------------------------------------------------------------------------------
 
-// `Catd A` is the type of “categories dependent on A” (a (iso)fibration over A).                         // a.k.a. displayed categories / fibrations
+// `Catd B` is the type of displayed categories over `B` in the “category over a base” sense.          // Cat/B objects
+// Usual notation/terminology: an element `E : Catd B` should be thought of as a functor `p : E ⟶ B`
+// (a category equipped with a projection to `B`), possibly with extra structure later (e.g. isofibration,
+// opfibration, cartesian lifts).                                                                      // p : E → B
 constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
 
 /*
@@ -369,7 +369,7 @@ constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat
     so a displayed morphism remembers a base map F : X → Y.
     Composition then produces a displayed functor over the composite base map (F∘G).
 
-  - In emdash5.lp we choose the *slice-style* presentation:
+  - In emdash2.lp we choose the *slice-style* presentation:
       Functord_cat(F,E) where both displayed categories live over the same base B : Cat.
     Concretely, this corresponds to working in a slice Cat/B (or the fibration over B):
       objects: Catd B
@@ -386,8 +386,9 @@ constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat
       Pullback_catd (IsoFibration_catd E) F  ↪  IsoFibration_catd (E ∘ F).
 */
 
-// `Functord_cat E D` is the category of displayed functors over a fixed base B.                          // slice Cat/B morphisms
-// Intuition: if E,D : Catd(B) are families over B, then Functord_cat(E,D) is the category of sections/maps over id_B. // displayed Π-morphisms
+// `Functord_cat E D` is the category of functors over a fixed base `B`.                                 // Fun_B(E,D) / hom in Cat/B
+// Usual notation: if `p:E⟶B` and `q:D⟶B`, then an object of `Functord_cat(E,D)` is a functor `F:E⟶D`
+// such that `q ∘ F = p` (i.e. a morphism in the slice category `Cat/B`).                               // commuting triangle
 constant symbol Functord_cat : Π [B : Cat], Π (E D : Catd B), Cat;                          // Functord_cat(E,D) : Cat
 
 // Dependent identity functor (identity section).                                                    // id in the slice category
@@ -403,8 +404,11 @@ injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat; 
 // Fibre of a Grothendieck construction is the original value (strictly, on objects).                // ∫M fibre at x is M(x)
 rule Fibre_cat (IsoFibration_catd $M) $x ↪ fapp0 $M $x;                                              // fibre(∫M,x) ↪ M(x)
 
-// Special case: fibre of ∫(Hom_cat(X, F-)) is the hom-category Hom_cat(X, F(x)).                             // representable fibration
-rule Fibre_cat (IsoFibration_catd (hom_cov $X $F)) $xZ ↪ Hom_cat $X (fapp0 $F $xZ);                       // fibre(∫Hom_cat(X,F-),x) ↪ Hom_cat(X,Fx)
+// Sanity (derived instance): representable fibration.                                                 // fibre(∫Hom(X,F-),x) ≡ Hom(X,Fx)
+// This is not an extra computation rule: it follows by rewriting with the general Grothendieck fibre
+// rule above and the `hom_cov` object-action rule `fapp0 (hom_cov X F) x ↪ Hom_cat X (fapp0 F x)`.
+assert [B A : Cat] (X_A : τ (Obj A)) (F : τ (Obj (Functor_cat B A))) (x : τ (Obj B)) ⊢
+  Fibre_cat (IsoFibration_catd (hom_cov X_A F)) x ≡ Hom_cat X_A (fapp0 F x);
 
 // Pullback of a dependent category along a functor (reindexing/substitution).                       // substitution / base change
 symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) → Catd A;               // F^*(E) : Catd(A)
@@ -847,6 +851,9 @@ constant symbol prod_cat : τ (Obj (Functor_cat (Product_cat Cat_cat Cat_cat) Ca
 rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Product_pair $A $B)
   ↪ Product_cat $A $B;
 
+// Sanity: prod_cat acts pointwise as categorical product.                                             // prod_cat(A,B) = A×B
+assert (A B : Cat) ⊢ fapp0 prod_cat (Product_pair A B) ≡ Product_cat A B;
+
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
 rule @Hom_cat (Product_cat $A1 $A2) $P $Q
   ↪ Product_cat (@Hom_cat $A1 (Product_projL $P) (Product_projL $Q))
@@ -903,6 +910,26 @@ symbol Product_pair_transf : Π [A1 A2 I : Cat],
 // 14. Fibrewise products (products of displayed categories)                                         // displayed/product fibrations
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Recent addition (emdash2): making fibrewise products computable in the Grothendieck case.
+
+  Semantics:
+    - For general `U,A : Catd Z` (categories over Z), `Product_catd U A` is only a *fibrewise* product:
+        (U×_Z A)(z) = U(z) × A(z)                                              (on fibres)
+      but there is no canonical description of *morphisms over non-identity base arrows* unless we
+      assume extra opfibration structure.
+
+    - For Grothendieck displayed categories `IsoFibration_catd E` coming from `E : Z ⟶ Cat`, we do
+      have canonical Σ-descriptions of objects and morphisms in their total categories ∫E.
+
+  Implementation:
+    - We internalize categorical product as `prod_cat : Cat×Cat ⟶ Cat` and introduce a primitive
+      head `prod_func` for pointwise product of Cat-valued functors.
+    - Then we add the key computation rule:
+        Product_catd( IsoFibration_catd E, IsoFibration_catd D )  ↪  IsoFibration_catd (prod_func E D)
+      i.e. (∫E) ×_Z (∫D) is again a Grothendieck construction of the pointwise product functor.
+*/
+
 // Product of dependent categories over the same base Z (fibrewise product).                          // displayed product
 injective symbol Product_catd : Π [Z : Cat] (U A : Catd Z), Catd Z;                       // U×A : Catd(Z)
 rule Fibre_cat (Product_catd $U $A) $xZ ↪ Product_cat (Fibre_cat $U $xZ) (Fibre_cat $A $xZ);         // fibre(U×A,x) ↪ fibre(U,x)×fibre(A,x)
@@ -913,11 +940,22 @@ rule @Op_catd $Z (Product_catd $U $A)
 
 // Pointwise product of Cat-valued functors.                                                           // (E⊗D)(z) = E(z)×D(z)
 // Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
+// Design note: `prod_func` is a primitive *rewrite head* (not a definitional abbreviation).           // keep a stable head for rewriting
+// Motivation (same pattern as `tapp0_fapp0` and `isoFib_transport0`):
+//   - A definition `prod_func E D ≔ (prod_cat) ∘ ⟨E,D⟩` would expand to a large `compose_morph_fapp0`
+//     term in `Cat_cat`, which is expensive/fragile to unfold inside other rewrite rules.
+//   - Making `prod_func` primitive gives a small, stable head so rules like
+//       Product_catd(∫E,∫D) ↪ ∫(E×D)
+//     can fire without forcing Lambdapi to normalize a big functor-composition expression.
 symbol prod_func [Z : Cat]
   (E D : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat Z Cat_cat));
 
 // Pointwise computation on objects: (E×D)(z) ↦ E(z)×D(z).                                             // fapp0(prod_func(E,D),z) ↪ Product_cat(E(z),D(z))
 rule fapp0 (prod_func $E $D) $z ↪ Product_cat (fapp0 $E $z) (fapp0 $D $z);
+
+// Sanity: prod_func agrees pointwise with postcomposition by prod_cat.                                // (E×D)(z) = prod_cat(E(z),D(z))
+assert [Z : Cat] (E D : τ (Obj (Functor_cat Z Cat_cat))) (z : τ (Obj Z)) ⊢
+  fapp0 (prod_func E D) z ≡ fapp0 prod_cat (Product_pair (fapp0 E z) (fapp0 D z));
 
 // Fibrewise product of Grothendieck displayed categories is Grothendieck of pointwise product.        // ∫E ×_Z ∫D  ≅  ∫(E×D)
 // If `E,D : Z ⟶ Cat` are Cat-valued functors, then their Grothendieck constructions are displayed
@@ -990,6 +1028,17 @@ rule fdapp0 (Lift_funcd1 $F) [_] $x ↪ fapp0 $F $x;
 //   - FF : ∫D → ∫E over Z (displayed functor / morphism over id_Z),
 // then the fibrewise “triangle” category at (z,d,f) is:
 //   Hom_{E(z)}( f_!(W),  FF_z(d) ).
+//
+// Scope/intent:
+//   This computation is only asserted when both E and D come from Grothendieck constructions
+//   (`IsoFibration_catd E0`, `IsoFibration_catd D0`), because the transport `f_!(W)` uses the strict
+//   opfibration-style object transport `isoFib_transport0` induced by a Cat-valued functor.           // keep Catd semantic, compute only for ∫(−)
+//
+// Here the input object is written in the normal form produced by the Grothendieck/product rules:
+//   (z,(d,f)) is encoded as `Struct_sigma z (Product_pair d f)`, where
+//     • `z : Ob(Z)`,
+//     • `d : Ob(D(z))`,
+//     • `f : Ob(Hom_Z(W_Z, z))` (the base edge along which we transport W).
 rule fapp0 (@homd_cov $Z (@IsoFibration_catd $Z $E0) $W_Z $W
               (@IsoFibration_catd $Z $D0) $FF)
             (Struct_sigma $z (Product_pair $d $f))
