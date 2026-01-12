@@ -2,6 +2,24 @@
 ## Goal
 This repo contains Lambdapi developments for “m— / emdash” functorial programming, focusing on strict/lax ω-categories, ω-functors, ω-transformations (transfors), and normalization via rewrite/unification rules.
 
+## Advices
+
+Our project is `emdash` version 2, whose goal is to write a Lambdapi specification @emdash2.lp for a programming language (and proof assistant) for ω-categories...  @README.md @emdash2.lp
+
+The baseline "inspiration" is in @emdash.lp and @cartierSolution13.lp Ensure you have read those files into your memory before starting.
+
+Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
+
+The file we are editing @emdash2.lp is draft work in progress. The immediate first milestone is to be able to express the definition/declaration of a ω-category such as its usual horizontal composition of higher (2-)arrows, its usual horizontal-vertical composition "exchange law", the “stacking” (generalized horizontal composition) of  higher (2-)cells along a (1-)cell instead of along the usual 0-cell. The second milestone is to be able to express the adjunction of functors. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories"
+
+Advice: although we are interested in ω-categories (that is infinity/ω hierarchy of arrow, arrows of arrow, etc), as a rule of thumb, being able to express the 2-category version of what we want will, without extra efforts, also apply/extend to the ω-categories.
+
+Advice: you should proceed and typecheck progressively/incrementally, and try and see how far you can go and how much is feasible presently. Note: always remember that we may be lacking infrastructure, concepts, symbols, rewrite/unification rules to directly express what we want right now; so you can try but keep in mind that what you want might not be feasible yet... Also try to identify whether there are some pre-requisites side-tasks, to develop the necessary concepts and rewrite/unification rules, before starting the main task.
+
+Advice: you should try to write comments/explanations/doc about what you have implemented.
+
+Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
+
 ## Fast commands
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
@@ -892,3 +910,361 @@ to 1.
 ::
 
    verbose 3;
+
+
+---
+
+
+Lambdapi tutorial (copied from `lambdapi-examples/lambdapi-examples-1-tutorial.lp`)
+===============
+
+// Learn the basics of Lambdapi in 15 minutes (this is a one-line comment).
+
+/* Install support for Lambdapi files in Emacs or VSCode to better
+visualize this file and the generated subgoals in proofs
+(this is a multi-lines comment). */
+
+/* Put this file and
+https://github.com/Deducteam/lambdapi/blob/master/tests/lambdapi.pkg
+in the same directory, and run emacs or vscode from this
+directory. Make sure that lambdapi is in your path (do "eval `opam
+env`" if you installed lambdapi with opam). */
+
+/* In Lambdapi, you can declare type and object symbols. Symbol names
+can contain unicode characters (utf8). */
+
+/* Convention: identifiers starting with an uppercase letter denote
+types, while identifiers starting with a lowercase letter denote objects. */
+
+symbol ℕ : TYPE; // is a type declaration
+
+// Commands are separated by semi-colons.
+
+symbol zero : ℕ; // is an object declaration
+
+symbol succ : ℕ → ℕ; /* means that "succ" takes an argument of type ℕ
+  and returns something of type ℕ. */
+
+// We can make definitions as follows:
+symbol one ≔ succ zero;
+
+// We can ask Lambdapi the type of a term:
+type one;
+
+// We can check that a term has a given type:
+assert ⊢ one : ℕ;
+
+// or that a term does not have a given type:
+assertnot ⊢ succ : ℕ;
+
+symbol + : ℕ → ℕ → ℕ;
+notation + infix right 10;
+/* means that + is declared as infix.
+"right" means that "x + y + z" is the same as "x + (y + z)".
+10 is the priority level of +. It is useful to parse expressions
+with various infix operators (see below). */
+
+symbol × : ℕ → ℕ → ℕ;
+notation × infix right 20;
+/* The priority level of × is higher than the one of +.
+So "x + y × z" is parsed as "x + (y × z)". We can check it as follows: */
+
+assert x y z ⊢ x + y × z ≡ x + (y × z);
+assertnot x y z ⊢ x + y × z ≡ (x + y) × z;
+
+/* We can now tell Lambdapi to identify any term of the form "t + 0" with "t"
+by simply declaring the following rewrite rule: */
+rule $x + zero ↪ $x; // rule variables must be prefixed by "$"
+
+// We can also ask Lambdapi to evaluate a term using the declared rules:
+compute zero + zero;
+// and check the result:
+assert ⊢ zero + zero ≡ zero;
+  /* ≡ is the equational theory generated by the user-defined rules
+     and β-reduction + η-reduction if the flag "eta_equality" is on. */
+
+// The definition of + can be completed by adding a new rule later:
+rule $x + succ $y ↪ succ ($x + $y);
+
+// Several rules can also be given at once:
+rule zero × $y ↪ zero
+with succ $x × $y ↪ $y + $x × $y;
+
+/* We now would like to prove some theorem about +. To this end, since
+Lambdapi does not come with a pre-defined logic, we first need to
+define what is a proposition and what is a proof.
+
+You usually just need to install a package defining some logics and
+require it in your development. For instance, using Opam, you can do:
+
+opam repository -a --set-default add lambdapi https://github.com/deducteam/opam-lambdapi-repository.git # once
+opam install lambdapi-stdlib
+
+Then, in your development, you can use one of the logics defined in
+this package (see https://github.com/Deducteam/lambdapi-stdlib for
+more details) as follows:
+
+require Stdlib.FOL;
+
+This tells Lambdapi to load in the environment the symbols, rules,
+etc.  declared in the package Stdlib.FOL, which defines polymorphic
+first-order logic. A symbol f of Stdlib.FOL can then be refered to by
+Stdlib.FOL.f.  To avoid writing Stdlib.FOL every time, you can do:
+
+open Stdlib.FOL;
+
+The two operations can also be done at the same time by simply writing;
+
+require open Stdlib.FOL;
+
+But we are going to define our own logic hereafter to show that it is
+simple. */
+
+// We first declare a type for propositions:
+symbol Prop : TYPE;
+
+// and symbols for building propositions:
+symbol = : ℕ → ℕ → Prop;
+notation = infix 1;
+
+/* We then use the "proposition-as-type" technique to reduce
+proof-checking to type-checking. To this end, we define a type for the
+proofs of a proposition: */
+injective symbol Prf : Prop → TYPE;
+  /* Note that this is a type-level function, that is, a function that
+     takes as argument a term of type Prop and return a term of type TYPE.
+
+     Moreover, we declare Prf as injective. This means that Prf
+     should satisfy the following property:
+       if Prf(p) ≡ Prf(q) then p ≡ q.
+     The verification of this property is left to the user.
+     This information is used by Lambdapi to simplify a unification constraint
+     of the form Prf(p) ≡ Prf(q) into p ≡ q (see below). */
+
+/* We then say that a proof of a proposition "p" is any term of type
+"Prf(p)". We therefore need to declare axioms saying which
+propositions are true. For instance, a usual axiom for equality is
+that it is a reflexive relation: */
+symbol =-refl x : Prf(x = x);
+  /* For all x, "=-refl x" is a proof of the proposition "x = x".
+     Note that Lambdapi can infer the type of "x" automatically:
+     the user does not need to write "symbol =-refl (x : ℕ) : Prf(x = x)". */
+
+/* Another usual axiom is that function application preserves equality: */
+symbol =-succ x y : Prf(x = y) → Prf(succ x = succ y);
+
+/* We also need to declare that we can prove any proposition "p" on natural
+numbers by induction: */
+symbol ind_ℕ (p : ℕ → Prop)
+  (case-zero : Prf(p zero))
+  (case-succ : Π x : ℕ, Prf(p x) → Prf(p (succ x)))
+     /* While "A → B" is the Lambdapi type of functions from "A" to "B",
+        "Π x : A, B(x)" is the Lambdapi type of so-called "dependent" functions
+        since x may occur in B(x). This is the type of functions mapping
+        any element a of type A to some element of type B(a).
+        It boils down to "A → B" if x does not occur in B.
+        Hence, case-succ is a function that takes as arguments a natural
+        number x and a proof that "p x" is true, and returns a proof that
+        "p (succ x)" is true. */
+  (n : ℕ)
+  : Prf(p n);
+
+/* We will later see that this induction principle can in fact be
+automatically generated by Lambdapi by using the "inductive" command
+when declaring ℕ, zero and succ. */
+ 
+/* We are now ready to prove that, for any natural number "x",
+"zero + x" is equal to "x", that is, to show that there exists a term, that
+we will call "zero_is_neutral_for_+", of type "Π x : ℕ, Prf (zero + x = x)".
+To this end, Lambdapi provides an interactive mode (launched by the keyword
+"begin") to enable users to define this term step by step using tactics. */
+
+opaque /* We declare the symbol as opaque as we do not want Lambdapi
+to unfold it later. */
+symbol zero_is_neutral_for_+ x : Prf (zero + x = x) ≔
+
+begin
+/* Here, in Emacs or VSCode, the system prints the following goal to prove:
+?zero_is_neutral_for_+: Π x: ℕ, Prf ((zero + x) = x) */
+
+/* To proceed by induction on x, we simply need to say that
+?zero_is_neutral_for_+ should be of the form "ind_ℕ _ _ _"
+where "_" stands for a term to be built.
+This can be done by using the "refine" tactic: */
+
+/* However, if we simply write "refine ind_ℕ _ _ _",
+Lambdapi will complain with the following error message:
+"Missing subproofs (0 subproofs for 2 subgoals)."
+This is because we gave no subproof for the case-zero and case-succ arguments.
+Indeed, in Lambdapi, proofs must be well structured, that is, a tactic
+must be followed by as many subproofs enclosed between curly brackets
+as the number of subgoals generated by the tactic. So, here, we need to write
+"refine nat _ _ _ {} {}" and then write the missing subproofs. */
+
+/* Remark: if we hadn't declared Prf as injective, we would have gotten
+  4 subgoals. the first generated subgoal would not have been a typing goal
+  but the following unification goal:
+  "Prf (?4 n) ≡ Prf ((zero + n) = n)"
+  where "?4" stands for the unknown predicate "p" that we try to prove,
+  which would have been the second goal, the third goal being the case for
+  zero, and the fourth goal being the case for succ.
+  This is one of the interesting features of Lambdapi to have unification
+  goals. However, currently, Lambdapi has only one tactic for unification
+  goals, namely "solve", which is applied automatically and thus didn't work
+  here. However, we can see that, to simplify this unification goal to
+  "?4 n ≡ (zero + n) = n"
+  we need Prf to be injective. */
+
+refine ind_ℕ _ _ _
+  { /* Here comes the proof of the first generated subgoal:
+    "Prf ((zero + zero) = zero)".
+
+    Note that Lambdapi infered the predicate to prove automatically.
+
+    To prove the first subgoal, we can first ask Lambdapi to simplify it
+    by applying user-defined rewriting rules with the tactic "simplify": */
+    simplify;
+
+    /* We then get the following goal:
+    "Prf (zero = zero)"
+    which can be solved by using =-refl: */
+    refine =-refl zero;
+  }
+  { /* Here comes the proof of the second generated subgoal:
+    "Π x: ℕ, Prf ((zero + x) = x) → Prf ((zero + succ x) = succ x)"
+
+    We start by assuming a given x : ℕ such that "zero + x = x"
+    using the tactic "assume": */
+    assume x hyp_on_x;
+    /* Again, we can simplify the goal: */
+    simplify;
+    /* We can then conclude by using the axiom =-succ and the assumption
+    hyp_on_x: */
+    refine =-succ (zero + x) x hyp_on_x;
+    /* Alternatively, we could use the "rewrite" tactic of Lambdapi,
+    to replace "zero + x" by "x", but this requires to set up a number
+    of "builtins" (see below). */
+  };
+end;
+
+/* Remark: now that we proved that "zero + x" is equal to "x", we can turn
+this equality into a rewrite rule to reason modulo this rule automatically. */
+rule zero + $y ↪ $y;
+
+/* We are going to see below how this first proof can be simplified
+by using more advanced features of Lambdapi. */
+
+/* First, the induction principle on natural numbers can be automatically
+generated by Lambdapi by using the command "inductive",
+as long as the builtins "Prop" and "P" are set: */
+builtin "Prop" ≔ Prop;
+builtin "P" ≔ Prf;
+inductive Nat : TYPE ≔ z : Nat | s : Nat → Nat;
+
+/* To see what has been generated, you can write: */
+print Nat;
+/* prints:
+
+constant symbol Nat: TYPE 
+
+constructors:
+  z: Nat
+  s: Nat → Nat
+
+induction principle:
+  ind_Nat: Π p0: (Nat → Prop), P (p0 z) → (Π x0: Nat, P (p0 x0) → P (p0 (s x0))) → Π x0: Nat, P (p0 x0)
+*/
+print ind_Nat;
+/* prints:
+
+symbol ind_Nat
+: Π p0: (Nat → Prop), P (p0 z) → (Π x0: Nat, P (p0 x0) → P (p0 (s x0))) → Π x0: Nat, P (p0 x0)
+
+rules:
+  ind_Nat $v0_p0 $v1_z $v2_s z ↪ $v1_z
+  ind_Nat $v0_p0 $v1_z $v2_s (s $v3_x0) ↪ $v2_s $v3_x0 (ind_Nat $v0_p0 $v1_z $v2_s $v3_x0)
+*/
+print one; // to see the definition of ten
+print +; // to see the type, notation and rules of +
+
+/* It is also possible now to replace the tactic "refine ind_Nat _ _ _"
+by a call to the tactic "induction" (see below). */
+
+/* Similarly, we can define a type for lists of natural numbers: */
+inductive List_Nat : TYPE ≔
+| nil_Nat : List_Nat
+| cons_Nat : Nat → List_Nat → List_Nat;
+
+/* But what if we want to have lists of booleans, or lists of lists of
+natural numbers, etc.? Lambdapi does not allow to quantify over
+types. On the other hand, it is possible to interpret objects as types
+using type-level rewriting rules, in the same way the function Prf
+maps terms of type Prop to types. We can define polymorphic objects by
+defining a type for type codes, and quantify over type codes instead
+of types: */
+
+symbol Set : TYPE; // type for type codes
+injective symbol τ : Set → TYPE; // function interpreting type codes as types
+
+// For instance, we can define a code for Nat:
+symbol nat : Set;
+rule τ nat ↪ Nat;
+
+// We can now define polymorphic lists:
+
+(a:Set) inductive 𝕃:TYPE ≔
+| □ /* \Box */ : 𝕃 a
+| ⸬ /* :: */ : τ a → 𝕃 a → 𝕃 a;
+
+/* We are now going to see how to use tactics related to equality like
+"reflexivity", "symmetry" and "rewrite". To this end, we need to use a
+polymorphic equality and define a few more builtins that are necessary
+for Lambdapi to generate the corresponding proofs. */
+
+constant // means that we cannot add rules later
+symbol ≃ [a] /* arguments between square brackets are implicit
+and must not be written later, unless they are enclosed between square brackets
+or if the symbol is prefixed by "@". */ 
+: τ a → τ a → Prop;
+
+notation ≃ infix 1;
+
+constant symbol ≃-refl [a] (x:τ a) : Prf(x ≃ x);
+constant symbol ≃-ind [a] [x y:τ a] : Prf(x ≃ y) → Π p, Prf(p y) → Prf(p x);
+  // Leibniz principle.
+
+builtin "T" ≔ τ;
+builtin "eq" ≔ ≃;
+builtin "refl"  ≔ ≃-refl;
+builtin "eqind" ≔ ≃-ind;
+
+/* We now reprove our theorem on the inductive type Nat instead of ℕ,
+using the tactics "induction", "reflexivity" and "rewrite".
+To this end, we first need to define addition on Nat: */
+
+symbol ⊕ : Nat → Nat → Nat;
+notation ⊕ infix right 10;
+rule $x ⊕ z ↪ $x
+with $x ⊕ s $y ↪ s ($x ⊕ $y);
+
+opaque symbol zero_is_neutral_for_⊕ x : Prf(z ⊕ x ≃ x) ≔
+begin
+induction
+  { simplify; reflexivity; }
+  { assume x hyp_on_x; simplify; rewrite hyp_on_x; reflexivity; }
+end;
+
+/* Note finally that a development can be split into several
+files. For instance, imagine that your development is made of file1.lp
+and file2.lp, and that file2.lp uses symbols defined in
+file1.lp. Then, you should create a file lambdapi.pkg with the
+following two lines:
+
+package_name = my_package
+root_path = my_package
+
+where my_package is the name of your package. Then, at the beginning
+of file2.lp, you should add:
+
+require my_package.file1;
+*/
