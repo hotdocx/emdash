@@ -517,7 +517,6 @@ rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;                                     
 injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));                               // σ₂ : τ(P(σ₁))
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                                             // snd(x,px) ↪ px
 
-
 // -------------------------------------------------------------------------------------------------
 // 10. Total category / comprehension (Grothendieck category of elements)                             // ∫ / context extension
 // -------------------------------------------------------------------------------------------------
@@ -796,14 +795,18 @@ rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (Lift_funcd1
 // Product of categories (binary product in Cat).                                                     // categorical product
 injective symbol Product_cat : Π (A1 A2 : Cat), Cat;                                         // A1 × A2 : Cat
 
+// Objects of a product category are definitionally Σ-pairs.                                          // Obj(A×B) ≡ Obj(A)×Obj(B)
+rule Obj (Product_cat $A1 $A2)
+  ↪ @Σ_ (Obj $A1) (λ _ : τ (Obj $A1), Obj $A2);
+
 /*
   Product_cat design notes (emdash2)
 
   We intentionally keep *two* views of products simultaneously:
 
   (1) Object/arrow (“singleton object”) view:
-      - objects are paired by `Product_pair`
-      - arrows (objects of hom-categories) are paired by *the same* `Product_pair`,
+      - objects are Σ-pairs (constructor `Struct_sigma`, projections `sigma_{Fst,Snd}`)
+      - arrows (objects of hom-categories) are paired by *the same* Σ-structure,
         once we compute Hom-categories of the product:
             Hom_{A×B}((X1,X2),(Y1,Y2))  ≡  Hom_A(X1,Y1) × Hom_B(X2,Y2)
 
@@ -830,16 +833,14 @@ symbol Product_projR_func : Π [A1 A2 B: Cat], τ (Obj (Functor_cat B (Product_c
 injective symbol Product_pair_func : Π [A1 A2 I : Cat] (F : τ (Obj (Functor_cat I A1))) (G : τ (Obj (Functor_cat I A2))), // inputs functors
   τ (Obj (Functor_cat I (Product_cat A1 A2)));                                                           // paired functor to product
 
-// Object-level projections/pairing (objects of A1×A2 are pairs).                                     // components of product objects
-symbol Product_projL : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A1);                     // π₁ on objects
-symbol Product_projR : Π [A1 A2 : Cat], τ (Obj (Product_cat A1 A2)) → τ (Obj A2);                     // π₂ on objects
-injective symbol Product_pair : Π [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)),                    // constructor on objects
-  τ (Obj (Product_cat A1 A2));                                                                       // ⟨X,Y⟩ : Obj(A1×A2)
-
-// β/η laws on objects.                                                                               // projections and pairing
-rule Product_projL (Product_pair $X $Y) ↪ $X
-with Product_projR (Product_pair $X $Y) ↪ $Y;
-rule Product_pair (Product_projL $XY) (Product_projR $XY) ↪ $XY;
+// Object-level projections/pairing (implemented by Σ-structure operations).                           // components of product objects
+symbol Product_projL [A1 A2 : Cat] (XY : τ (Obj (Product_cat A1 A2))) : τ (Obj A1)                     // π₁ on objects
+≔ sigma_Fst XY;
+symbol Product_projR [A1 A2 : Cat] (XY : τ (Obj (Product_cat A1 A2))) : τ (Obj A2)                     // π₂ on objects
+≔ sigma_Snd XY;
+injective symbol Product_pair [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2))                          // ⟨X,Y⟩ : Obj(A1×A2)
+  : τ (Obj (Product_cat A1 A2))
+≔ @Struct_sigma (Obj A1) (λ _ : τ (Obj A1), Obj A2) X Y;
 
 // Internalized binary product as a functor in Cat: × : Cat_cat×Cat_cat → Cat_cat.                     // (A,B) ↦ A×B
 // Usual notation: `× : Cat × Cat → Cat`, with (A,B) ↦ A×B.
@@ -848,7 +849,7 @@ rule Product_pair (Product_projL $XY) (Product_projR $XY) ↪ $XY;
 constant symbol prod_cat : τ (Obj (Functor_cat (Product_cat Cat_cat Cat_cat) Cat_cat));
 
 // Object-action: prod_cat₀(A,B) ≡ A×B.                                                                // fapp0(prod_cat,(A,B)) ↪ Product_cat(A,B)
-rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Product_pair $A $B)
+rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Struct_sigma $A $B)
   ↪ Product_cat $A $B;
 
 // Sanity: prod_cat acts pointwise as categorical product.                                             // prod_cat(A,B) = A×B
@@ -856,23 +857,23 @@ assert (A B : Cat) ⊢ fapp0 prod_cat (Product_pair A B) ≡ Product_cat A B;
 
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
 rule @Hom_cat (Product_cat $A1 $A2) $P $Q
-  ↪ Product_cat (@Hom_cat $A1 (Product_projL $P) (Product_projL $Q))
-                (@Hom_cat $A2 (Product_projR $P) (Product_projR $Q));
+  ↪ Product_cat (@Hom_cat $A1 (sigma_Fst $P) (sigma_Fst $Q))
+                (@Hom_cat $A2 (sigma_Snd $P) (sigma_Snd $Q));
 
 // Identity and composition in a product category are computed componentwise (on paired endpoints).   // id and ∘ in A×B
-rule @identity_morph (Product_cat $A1 $A2) (Product_pair $X1 $X2)
-  ↪ Product_pair (@identity_morph $A1 $X1) (@identity_morph $A2 $X2);
+rule @identity_morph (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
+  ↪ Struct_sigma (@identity_morph $A1 $X1) (@identity_morph $A2 $X2);
 
 rule @compose_morph_fapp0 (Product_cat $A1 $A2)
-  (Product_pair $X1 $X2) (Product_pair $Y1 $Y2) (Product_pair $Z1 $Z2)
-  (Product_pair $g1 $g2) (Product_pair $f1 $f2)
-  ↪ Product_pair (@compose_morph_fapp0 $A1 $X1 $Y1 $Z1 $g1 $f1)
+  (Struct_sigma $X1 $X2) (Struct_sigma $Y1 $Y2) (Struct_sigma $Z1 $Z2)
+  (Struct_sigma $g1 $g2) (Struct_sigma $f1 $f2)
+  ↪ Struct_sigma (@compose_morph_fapp0 $A1 $X1 $Y1 $Z1 $g1 $f1)
                  (@compose_morph_fapp0 $A2 $X2 $Y2 $Z2 $g2 $f2);
 
 // Compatibility between Obj_func (points) and product structure (pointwise pairing/projections).     // evaluation coherence
-rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Product_pair $X $Y);                  // ⟨x,y⟩ as functor from 1
-rule Product_projL_func (Obj_func $XY) ↪ Obj_func (Product_projL $XY);                               // π₁ on points-as-functors
-rule Product_projR_func (Obj_func $XY) ↪ Obj_func (Product_projR $XY);                               // π₂ on points-as-functors
+rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Struct_sigma $X $Y);                  // ⟨x,y⟩ as functor from 1
+rule Product_projL_func (Obj_func $XY) ↪ Obj_func (sigma_Fst $XY);                                   // π₁ on points-as-functors
+rule Product_projR_func (Obj_func $XY) ↪ Obj_func (sigma_Snd $XY);                                   // π₂ on points-as-functors
 
 // β/η laws at the functor level (universal property in Cat, object part).                            // proj∘pair, pair∘⟨proj⟩
 rule Product_projL_func (Product_pair_func $F $G) ↪ $F
@@ -880,9 +881,9 @@ with Product_projR_func (Product_pair_func $F $G) ↪ $G;
 rule Product_pair_func (Product_projL_func $H) (Product_projR_func $H) ↪ $H;
 
 // Pointwise action on objects/homs for paired/projection functors.                                    // compute fapp0/fapp1_func through products
-rule fapp0 (Product_pair_func $F $G) $x ↪ Product_pair (fapp0 $F $x) (fapp0 $G $x);
-rule fapp0 (Product_projL_func $H) $x ↪ Product_projL (fapp0 $H $x);
-rule fapp0 (Product_projR_func $H) $x ↪ Product_projR (fapp0 $H $x);
+rule fapp0 (Product_pair_func $F $G) $x ↪ Struct_sigma (fapp0 $F $x) (fapp0 $G $x);
+rule fapp0 (Product_projL_func $H) $x ↪ sigma_Fst (fapp0 $H $x);
+rule fapp0 (Product_projR_func $H) $x ↪ sigma_Snd (fapp0 $H $x);
 
 rule @fapp1_func _ _ (Product_pair_func $F $G) $X $Y
   ↪ Product_pair_func (@fapp1_func _ _ $F $X $Y) (@fapp1_func _ _ $G $X $Y);
@@ -955,7 +956,7 @@ rule fapp0 (prod_func $E $D) $z ↪ Product_cat (fapp0 $E $z) (fapp0 $D $z);
 
 // Sanity: prod_func agrees pointwise with postcomposition by prod_cat.                                // (E×D)(z) = prod_cat(E(z),D(z))
 assert [Z : Cat] (E D : τ (Obj (Functor_cat Z Cat_cat))) (z : τ (Obj Z)) ⊢
-  fapp0 (prod_func E D) z ≡ fapp0 prod_cat (Product_pair (fapp0 E z) (fapp0 D z));
+  fapp0 (prod_func E D) z ≡ fapp0 prod_cat (Struct_sigma (fapp0 E z) (fapp0 D z));
 
 // Fibrewise product of Grothendieck displayed categories is Grothendieck of pointwise product.        // ∫E ×_Z ∫D  ≅  ∫(E×D)
 // If `E,D : Z ⟶ Cat` are Cat-valued functors, then their Grothendieck constructions are displayed
@@ -983,12 +984,12 @@ symbol compose_morph : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj
   τ (Obj (Functor_cat (Product_cat (Hom_cat Y_A Z_A) (Hom_cat X_A Y_A)) (Hom_cat X_A Z_A)));                           // an object in the functor-category
 
 // Computation: applying the composition functor to a pair (g,f) returns the composite g∘f.           // β-rule for composition functor
-rule (fapp0 (@compose_morph $A $X $Y $Z)) (Product_pair $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
+rule (fapp0 (@compose_morph $A $X $Y $Z)) (Struct_sigma $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
 
 // Sanity check: the β-rule is visible at the level of definitional equality / conversion.            // exercise the rule
 assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   (g : τ (Obj (Hom_cat Y Z))) (f : τ (Obj (Hom_cat X Y))) ⊢
-  fapp0 (@compose_morph A X Y Z) (Product_pair g f) ≡ @compose_morph_fapp0 A X Y Z g f;
+  fapp0 (@compose_morph A X Y Z) (Struct_sigma g f) ≡ @compose_morph_fapp0 A X Y Z g f;
 
 // Composition of functors is composition in Cat_cat (a special case of compose_morph_fapp0).         // categorical composition in Cat
 symbol comp_func [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
@@ -1035,13 +1036,13 @@ rule fdapp0 (Lift_funcd1 $F) [_] $x ↪ fapp0 $F $x;
 //   opfibration-style object transport `isoFib_transport0` induced by a Cat-valued functor.           // keep Catd semantic, compute only for ∫(−)
 //
 // Here the input object is written in the normal form produced by the Grothendieck/product rules:
-//   (z,(d,f)) is encoded as `Struct_sigma z (Product_pair d f)`, where
+//   (z,(d,f)) is encoded as `Struct_sigma z (Struct_sigma d f)`, where
 //     • `z : Ob(Z)`,
 //     • `d : Ob(D(z))`,
 //     • `f : Ob(Hom_Z(W_Z, z))` (the base edge along which we transport W).
 rule fapp0 (@homd_cov $Z (@IsoFibration_catd $Z $E0) $W_Z $W
               (@IsoFibration_catd $Z $D0) $FF)
-            (Struct_sigma $z (Product_pair $d $f))
+            (Struct_sigma $z (Struct_sigma $d $f))
   ↪ Hom_cat
       (@isoFib_transport0 $Z $E0 $W_Z $z $f $W)
       (fdapp0 $FF [$z] $d);
@@ -1104,16 +1105,16 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
   even before the higher (lax) naturality 2-cell data is fully implemented.
 */
 
-rule Product_projL (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
+rule sigma_Fst (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
   ↪ @tapp0_fapp0 $I $A1 (Product_projL_func $F) (Product_projL_func $G) $X (Product_projL_transf $ϵ);
 
-rule Product_projR (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
+rule sigma_Snd (@tapp0_fapp0 $I (Product_cat $A1 $A2) $F $G $X $ϵ)
   ↪ @tapp0_fapp0 $I $A2 (Product_projR_func $F) (Product_projR_func $G) $X (Product_projR_transf $ϵ);
 
 rule @tapp0_fapp0 $I (Product_cat $A1 $A2)
   (Product_pair_func $F1 $F2) (Product_pair_func $G1 $G2) $X (Product_pair_transf $ϵ1 $ϵ2)
-  ↪ Product_pair (@tapp0_fapp0 $I $A1 $F1 $G1 $X $ϵ1)
-                (@tapp0_fapp0 $I $A2 $F2 $G2 $X $ϵ2);
+  ↪ Struct_sigma (@tapp0_fapp0 $I $A1 $F1 $G1 $X $ϵ1)
+                 (@tapp0_fapp0 $I $A2 $F2 $G2 $X $ϵ2);
 
 /*
   Placeholder for lax naturality (triangle 2-cell).
