@@ -812,18 +812,61 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
 
 
 // Sanity: π₁ sends a 1-cell (f,α) to its base arrow f.                                                // projection on 1-cells
-// (We will reintroduce a projection sanity check once `Groth_hom_fam` is *defined* (not axiomatic),
-// and once we decide on a canonical normal form for objects of
-//   Total_cat(Op_catd(IsoFibration_catd(...))).
-// The object-level statement remains true semantically: it is still the first Σ-projection.)
+// This is the key “forget the fibre component” behavior of the Grothendieck projection on morphisms:
+//   π₁(f,α) = f.
+assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  (f : τ (Obj (@Hom_cat B x y)))
+  (α : τ (Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v))) ⊢
+  fapp0
+    (@fapp1_func (Total_cat (@IsoFibration_catd B M)) B (Total_proj_func (IsoFibration_catd M))
+      (Struct_sigma x u) (Struct_sigma y v))
+    (Struct_sigma f α)
+    ≡ f;
 
 // Sanity: objects of Hom_{∫M}((x,u),(y,v)) reduce to Σ-pairs, via the previous rule + τ(Σ_) ↪ τΣ_.     // normalization smoke-test
 
-// Identity/composition in ∫M (DEFERRED):
-// With the contravariant hom-formula, hom-categories are totals of the form
-//   Total_cat(Op_catd(IsoFibration_catd ...)).
-// Once we settle a stable normal form for those objects (Σ-pairs), we can re-enable computational rules
-// for `id_{(x,u)}` and for composition `(g,β) ∘ (f,α)`.
+// Identity/composition in ∫M (Grothendieck case, strict).                                              // id and ∘ on 1-cells of ∫M
+//
+// Objects of the hom-categories of ∫M are Σ-pairs (f,α) where:
+//   - f : x → y is a 1-cell in the base B (i.e. an object of Hom_cat(B,x,y)),
+//   - α : Hom_{M(y)}(f_!(u), v) is a 1-cell in the fibre over y.
+//
+// The rules below give the expected strict opfibration behavior:
+//   id_(x,u)       = (id_x, id_u)
+//   (g,β) ∘ (f,α)  = (g∘f,  β ∘ M(g)(α)).
+
+rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
+  ↪ Struct_sigma
+      (@identity_morph $B $x)
+      (@identity_morph (fapp0 $M $x) $u);
+
+rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
+  (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
+  (Struct_sigma $g $β) (Struct_sigma $f $α)
+  ↪ Struct_sigma
+      (@comp_fapp0 $B $x $y $z $g $f)
+      (@comp_fapp0 (fapp0 $M $z)
+        (@isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
+        (@isoFib_transport0 $B $M $y $z $g $v)
+        $w
+        $β
+        (@fapp0
+          (@Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y $f $u) $v)
+          (@Hom_cat (fapp0 $M $z)
+            (@isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
+            (@isoFib_transport0 $B $M $y $z $g $v))
+          (@fapp1_func
+            (fapp0 $M $y)
+            (fapp0 $M $z)
+            (@fapp0
+              (@Hom_cat $B $y $z)
+              (Functor_cat (fapp0 $M $y) (fapp0 $M $z))
+              (@fapp1_func $B Cat_cat $M $y $z)
+              $g)
+            (@isoFib_transport0 $B $M $x $y $f $u)
+            $v)
+          $α));
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
