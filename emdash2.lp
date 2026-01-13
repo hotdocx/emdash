@@ -779,7 +779,7 @@ rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
 rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat
       (
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v))));
+        (@IsoFibration_catd _ (@Groth_hom_fam $B $M $x $y $u $v))));
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                              // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
@@ -789,13 +789,13 @@ rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (Iso
   (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_func (Total_proj_func
       (
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v))));
+        (@IsoFibration_catd _ (@Groth_hom_fam $B $M $x $y $u $v))));
 
 // The base projection on objects is the first Σ-projection.                                           // π₁(f,α)=f
 rule fapp0
     (Total_proj_func
-      (@Op_catd (Op_cat (@Hom_cat $B $x $y))
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) $H)))
+      (@Op_catd _
+        (@IsoFibration_catd _ $H)))
     (Struct_sigma $f $α)
   ↪ $f;
 
