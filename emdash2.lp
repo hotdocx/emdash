@@ -167,15 +167,15 @@ rule @Hom_cat (Op_cat $A) $X $Y ↪ @Hom_cat $A $Y $X;
       This is faithful to the ω-story: functoriality (and hence higher coherence) is "baked in" by typing.
 
   (2) the *computational/pointwise* composition is the "application at objects" of that functor:
-        compose_morph_fapp0 g f : Obj(Hom_cat(X,Z)).
+        comp_fapp0 g f : Obj(Hom_cat(X,Z)).
       This is the handle on which we can hang rewrite/unification rules (as we did in emdash.lp).
 
-  Below, `compose_morph_fapp0` is the pointwise operation, and `compose_morph` is the functorial packaging.
+  Below, `comp_fapp0` is the pointwise operation, and `comp_func` is the functorial packaging.
   The rewrite rule later ("β-rule for composition functor") connects them.
 */
 
 // Composition at object-level in a hom-category: (g : Hom_cat(Y,Z)) and (f : Hom_cat(X,Y)) compose to Hom_cat(X,Z). // pointwise / computational
-symbol compose_morph_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)], // ambient A and objects
+symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)], // ambient A and objects
   Π (g: τ (Obj (Hom_cat Y_A Z_A))), Π (f: τ (Obj (Hom_cat X_A Y_A))),                                        // composable morphisms g ∘ f
   τ (Obj (Hom_cat X_A Z_A));                                                                             // composite morphism in Hom_cat(X,Z)
 
@@ -281,29 +281,29 @@ rule @fapp0 _
     (@fapp0 (Hom_cat $X $Y)
       _
       (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f) $g
-  ↪ @compose_morph_fapp0 $A $W (fapp0 $F $X) (fapp0 $F $Y)
+  ↪ @comp_fapp0 $A $W (fapp0 $F $X) (fapp0 $F $Y)
       (@fapp0 (Hom_cat $X $Y)
         _
         (@fapp1_func $B $A $F $X $Y) $f) $g;
 
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
-rule @fapp0 $B Cat_cat (@compose_morph_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
+rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
   ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
 
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
-// Note: we express functor composition via `compose_morph_fapp0` in `Cat_cat` (not via `comp_func`, which is defined later). // computational-friendly
-rule @compose_morph_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
-  ↪ @hom_cov $A $W $C (@compose_morph_fapp0 Cat_cat $C $B $A $F $G);
+// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `compFunc`, which is defined later). // computational-friendly
+rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
+  ↪ @hom_cov $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
 
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
-  @compose_morph_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
-    ≡ @hom_cov A W C (@compose_morph_fapp0 Cat_cat C B A F G);
+  @comp_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
+    ≡ @hom_cov A W C (@comp_fapp0 Cat_cat C B A F G);
 
 // Sanity: postcomposition by op normalizes pointwise.                                                // exercise `op ∘ E` computation
 assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
-  @fapp0 B Cat_cat (@compose_morph_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
+  @fapp0 B Cat_cat (@comp_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
     ≡ Op_cat (@fapp0 B Cat_cat E b);
 
 // Sanity: general hom_cov action computes to postcomposition by F(f).                                 // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
@@ -313,7 +313,7 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
     (@fapp0 (Hom_cat X Y)
       (Functor_cat (Hom_cat W (fapp0 F X)) (Hom_cat W (fapp0 F Y)))
       (@fapp1_func B Cat_cat (@hom_cov A W B F) X Y) f) g
-    ≡ @compose_morph_fapp0 A W (fapp0 F X) (fapp0 F Y)
+    ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
         (@fapp0 (Hom_cat X Y) (Hom_cat (fapp0 F X) (fapp0 F Y))
           (@fapp1_func B A F X Y) f) g;
 
@@ -432,10 +432,10 @@ symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) →
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
 
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
-// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_func`
+// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `compFunc`
 // This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord_cat. // simulate funcd-over-F
 rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
-  ↪ @IsoFibration_catd $A (@compose_morph_fapp0 Cat_cat $A $B Cat_cat $E $F);
+  ↪ @IsoFibration_catd $A (@comp_fapp0 Cat_cat $A $B Cat_cat $E $F);
 
 // -------------------------------------------------------------------------------------------------
 // 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
@@ -576,7 +576,7 @@ sequential symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B C
 
 // Canonicalization: compute (M(f))(u) *towards* `isoFib_transport0 M f u`.                             // fold transport0
 // Usual notation: `M(f)(u) ↦ f_!(u)`.                                                                 // fold to the transport head
-// This keeps `isoFib_transport0` as the stable head symbol (like `compose_morph_fapp0`), so later
+// This keeps `isoFib_transport0` as the stable head symbol (like `comp_fapp0`), so later
 // object-level functoriality rules apply without unfolding.
 rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
   ↪ @isoFib_transport0 $B $M $x $y $f $u;
@@ -587,7 +587,7 @@ rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
 
 // Strict functoriality on objects: M(g∘f)(u) ↪ M(g)(M(f)(u)).                                         // preserves composition on objects
 // Usual notation: `(g ∘ f)_!(u) = g_!(f_!(u))`.                                                       // (g∘f)_! = g_!∘f_! (on objects)
-rule @isoFib_transport0 $B $M $x $z (@compose_morph_fapp0 $B $x $y $z $g $f) $u
+rule @isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u
   ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
 
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
@@ -615,7 +615,7 @@ rule @Total_intro_func $X $A $A (@Id_funcd $X $A) ↪ @Id_func (Total_cat $A);  
 rule @Total_intro_func $X $A (Terminal_catd $X) (Terminal_funcd $A) ↪ Total_proj_func $A;        // ∫(!) ↪ π₁
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
-rule @compose_morph_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj_func $B) (@Total_intro_func $X $A $B $FF)
+rule @comp_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj_func $B) (@Total_intro_func $X $A $B $FF)
   ↪ Total_proj_func $A;
 
 // TODO: Review this claim: such additional rewrite rules are for convenience:
@@ -679,12 +679,12 @@ rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
   ↪ Struct_sigma (identity_morph $B $x) (identity_morph (fapp0 $M $x) $u);
 
 // Composition in the Grothendieck total.                                                              // (g,β) ∘ (f,α) = (g∘f, β ∘ M(g)(α))
-rule @compose_morph_fapp0 (Total_cat (@IsoFibration_catd $B $M))
+rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
   (Struct_sigma $g $β) (Struct_sigma $f $α)
   ↪ Struct_sigma
-      (@compose_morph_fapp0 $B $x $y $z $g $f)
-      (@compose_morph_fapp0 (fapp0 $M $z)
+      (@comp_fapp0 $B $x $y $z $g $f)
+      (@comp_fapp0 (fapp0 $M $z)
         (@isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u))
         (@isoFib_transport0 $B $M $y $z $g $v)
         $w
@@ -881,11 +881,11 @@ rule @Hom_cat (Product_cat $A1 $A2) $P $Q
 rule @identity_morph (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
   ↪ Struct_sigma (@identity_morph $A1 $X1) (@identity_morph $A2 $X2);
 
-rule @compose_morph_fapp0 (Product_cat $A1 $A2)
+rule @comp_fapp0 (Product_cat $A1 $A2)
   (Struct_sigma $X1 $X2) (Struct_sigma $Y1 $Y2) (Struct_sigma $Z1 $Z2)
   (Struct_sigma $g1 $g2) (Struct_sigma $f1 $f2)
-  ↪ Struct_sigma (@compose_morph_fapp0 $A1 $X1 $Y1 $Z1 $g1 $f1)
-                 (@compose_morph_fapp0 $A2 $X2 $Y2 $Z2 $g2 $f2);
+  ↪ Struct_sigma (@comp_fapp0 $A1 $X1 $Y1 $Z1 $g1 $f1)
+                 (@comp_fapp0 $A2 $X2 $Y2 $Z2 $g2 $f2);
 
 // Compatibility between Obj_func (points) and product structure (pointwise pairing/projections).     // evaluation coherence
 rule Product_pair_func (Obj_func $X) (Obj_func $Y) ↪ Obj_func (Struct_sigma $X $Y);                  // ⟨x,y⟩ as functor from 1
@@ -960,7 +960,7 @@ rule @Op_catd $Z (Product_catd $U $A)
 // Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
 // Design note: `prod_func` is a primitive *rewrite head* (not a definitional abbreviation).           // keep a stable head for rewriting
 // Motivation (same pattern as `tapp0_fapp0` and `isoFib_transport0`):
-//   - A definition `prod_func E D ≔ (prod_cat) ∘ ⟨E,D⟩` would expand to a large `compose_morph_fapp0`
+//   - A definition `prod_func E D ≔ (prod_cat) ∘ ⟨E,D⟩` would expand to a large `comp_fapp0`
 //     term in `Cat_cat`, which is expensive/fragile to unfold inside other rewrite rules.
 //   - Making `prod_func` primitive gives a small, stable head so rules like
 //       Product_catd(∫E,∫D) ↪ ∫(E×D)
@@ -997,22 +997,22 @@ injective symbol Product_pair_functord : Π [Z : Cat] [U A B : Catd Z]          
 // The “composition morphism” as a functor out of a product of hom-categories.                        // functorial / internal
 // Think: this is the cartierSolution13-style "parametric object in a context", but now in ω-form:
 // it packages the entire operation as an object in a functor-category, so it can itself have higher structure.
-symbol compose_morph : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)],        // ambient A and objects
+symbol comp_func : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)],        // ambient A and objects
   τ (Obj (Functor_cat (Product_cat (Hom_cat Y_A Z_A) (Hom_cat X_A Y_A)) (Hom_cat X_A Z_A)));                           // an object in the functor-category
 
 // Computation: applying the composition functor to a pair (g,f) returns the composite g∘f.           // β-rule for composition functor
-rule (fapp0 (@compose_morph $A $X $Y $Z)) (Struct_sigma $g $f) ↪ @compose_morph_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
+rule (fapp0 (@comp_func $A $X $Y $Z)) (Struct_sigma $g $f) ↪ @comp_fapp0 $A $X $Y $Z $g $f; // compose(g,f) ↪ g∘f
 
 // Sanity check: the β-rule is visible at the level of definitional equality / conversion.            // exercise the rule
 assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   (g : τ (Obj (Hom_cat Y Z))) (f : τ (Obj (Hom_cat X Y))) ⊢
-  fapp0 (@compose_morph A X Y Z) (Struct_sigma g f) ≡ @compose_morph_fapp0 A X Y Z g f;
+  fapp0 (@comp_func A X Y Z) (Struct_sigma g f) ≡ @comp_fapp0 A X Y Z g f;
 
-// Composition of functors is composition in Cat_cat (a special case of compose_morph_fapp0).         // categorical composition in Cat
-symbol comp_func [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
+// Composition of functors is composition in Cat_cat (a special case of comp_fapp0).         // categorical composition in Cat
+symbol compFunc [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
   (F: τ (Obj (Functor_cat B C))) (G: τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))                      // F∘G : Functor_cat(A,C)
-≔ @compose_morph_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
-// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_func`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
+// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `compFunc`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
 
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
@@ -1025,7 +1025,7 @@ symbol comp_func [A B : Cat] [C:Cat]                                            
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z: τ (Obj Z)]                             // base Z, displayed E, base object W_Z
   (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),               // W in fibre, D another displayed cat, FF : D→E
-  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( comp_func op (hom_cov W_Z (@Id_func Z)) )))) // source category (a total category)
+  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( compFunc op (hom_cov W_Z (@Id_func Z)) )))) // source category (a total category)
                 Cat_cat));                                                                            // target category Cat_cat (Cat-valued functors)
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
@@ -1173,7 +1173,7 @@ constant symbol tapp_lax_triangle :
   τ (Obj
       (@Hom_cat (Hom_cat (fapp0 F_AB X) (fapp0 G_AB Y2))
         // source 1-cell: G(g) ∘ ηᵋ_f  (transport ηᵋ_f along g so it lands in Hom_B(FX, GY₂))
-        (@compose_morph_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
+        (@comp_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
           (fapp0 (@fapp1_func A B G_AB Y1 Y2) g)
           (@fdapp0 A
             (IsoFibration_catd (hom_cov X (@Id_func A)))
@@ -1187,7 +1187,7 @@ constant symbol tapp_lax_triangle :
           (IsoFibration_catd (hom_cov (fapp0 F_AB X) G_AB))
           (@tapp1_fapp0_funcd A B F_AB G_AB X ϵ)
           Y2
-          (@compose_morph_fapp0 A X Y1 Y2 g f))));
+          (@comp_fapp0 A X Y1 Y2 g f))));
 
 // “Slice-category” / simplicial action: fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
@@ -1305,7 +1305,7 @@ assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
 // Pullback of a Grothendieck isofibration reduces to Grothendieck of precomposition.                 // checks Pullback_catd/∫ rewrite fires
 assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_cat A B))) ⊢
   @Pullback_catd A B (@IsoFibration_catd B E) F
-    ≡ @IsoFibration_catd A (@compose_morph_fapp0 Cat_cat A B Cat_cat E F);
+    ≡ @IsoFibration_catd A (@comp_fapp0 Cat_cat A B Cat_cat E F);
 
 // Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd1/Lift_funcd1 rules fire
 assert [A : Cat] ⊢ Total_cat (Lift_catd1 A) ≡ A;
