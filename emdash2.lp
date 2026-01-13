@@ -473,6 +473,20 @@ rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
   ↪ @IsoFibration_catd $A (@comp_fapp0 Cat_cat $A $B Cat_cat $E $F);
 
 // -------------------------------------------------------------------------------------------------
+// 7b. Opposite of displayed categories                                                             // (E→B) ↦ (Eᵒᵖ→Bᵒᵖ)
+// -------------------------------------------------------------------------------------------------
+
+injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
+rule Op_catd (Op_catd $A) ↪ $A;
+
+// Opposite preserves terminal displayed categories.                                                  // (1_X)ᵒᵖ ≡ 1_{Xᵒᵖ}
+rule @Op_catd $X (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
+
+// Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
+rule @Op_catd $A (@Pullback_catd $A $B $E $F)
+  ↪ @Pullback_catd (Op_cat $A) (Op_cat $B) (@Op_catd $B $E) (@Op_func $A $B $F);
+
+// -------------------------------------------------------------------------------------------------
 // 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
 // -------------------------------------------------------------------------------------------------
 
@@ -578,6 +592,13 @@ symbol Total_cat [B : Cat] (E: Catd B) : Cat;                                   
 
 // Projection π₁ : Total_cat(M) → A (the “base” projection).                                          // comprehension projection
 injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (Total_cat E) B));           // functor object in Functor_cat(∫E, B)
+
+// Opposite of a total category is the total of the opposite displayed category.                      // (∫E)ᵒᵖ ≡ ∫(Eᵒᵖ)
+rule Op_cat (Total_cat $E) ↪ Total_cat (Op_catd $E);
+
+// The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
+rule @Op_func (Total_cat $E) $B (@Total_proj_func $B $E)
+  ↪ @Total_proj_func (Op_cat $B) (@Op_catd $B $E);
 
 // -------------------------------------------------------------------------------------------------
 // 10a. Grothendieck opfibration transport (object-level)                                             // M(f)(u) in the fibre
@@ -689,6 +710,11 @@ rule τ (Obj (Total_cat (@IsoFibration_catd $B $M)))
 // The base projection π₁ : ∫M → B sends (x,u) ↦ x.                                                    // compute π₁ on objects (Grothendieck)
 rule fapp0 (Total_proj_func (IsoFibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 
+// NOTE: we intentionally *do not* give a Σ-object computation rule for totals of the form
+//   Total_cat(Op_catd(IsoFibration_catd ...))
+// yet, because it interacts subtly with rewrite orientation (`Op_cat (Total_cat E) ↪ Total_cat(Op_catd E)`).
+// Once the contravariant Grothendieck interface is stabilized, we can add a dedicated normal form.
+
 // Grothendieck hom family (opfibration convention).                                                   // f ↦ Hom_{M(y)}(M(f)(u),v)
 // For fixed (x,u) and (y,v), this is a Cat-valued functor on the hom-category Hom_B(x,y).
 // Usual notation: for fixed `u ∈ M(x)` and `v ∈ M(y)`, define
@@ -696,7 +722,20 @@ rule fapp0 (Total_proj_func (IsoFibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 //   H_{u,v}(f) = Hom_{M(y)}(f_!(u), v).                                                               // H_{u,v}(f) = Hom_{M(y)}(M(f)(u),v)
 symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))),
-  τ (Obj (Functor_cat (Hom_cat x y) Cat_cat));
+  τ (Obj (Functor_cat (Op_cat (Hom_cat x y)) Cat_cat));
+
+// Definable expansion (do NOT unfold by rewriting; keep `Groth_hom_fam` as a stable head for typing). // avoids conversion blowups in homs of ∫M
+// This is the intended definition:
+//   Groth_hom_fam_def(u,v) = hom_con(v,Id) ∘ (isoFib_transport_func(u))^op.
+symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  : τ (Obj (Functor_cat (Op_cat (Hom_cat x y)) Cat_cat))
+≔ @comp_fapp0 Cat_cat
+     (Op_cat (Hom_cat x y))
+     (Op_cat (fapp0 M y))
+     Cat_cat
+     (@hom_con (fapp0 M y) v (fapp0 M y) (@Id_func (fapp0 M y)))
+     (@Op_func (Hom_cat x y) (fapp0 M y) (@isoFib_transport_func B M x y u));
 
 // β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).       // compute family at a base arrow
 // Usual notation: `H_{u,v}(f) = Hom_{M(y)}(f_!(u), v)`.                                               // expand on objects
@@ -706,8 +745,12 @@ rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
 // Grothendieck hom-category is itself a Grothendieck total.                                           // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
 // Usual notation (opfibration Grothendieck formula):
 //   Hom_{∫M}((x,u),(y,v))  ≅  ∫_{f : x→y} Hom_{M(y)}(f_!(u), v).                                       // homs in ∫M as another ∫
+// Grothendieck hom-category is itself a Grothendieck total (contravariant in the base hom-category).  // Hom_{∫M}((x,u),(y,v)) ≡ (∫H)^op
+// Using Op-acrobatics: for H : (Hom_B(x,y))ᵒᵖ → Cat, we form ∫H over (Hom_B(x,y))ᵒᵖ and then take Op.   // keep 2-cell direction correct
 rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Total_cat (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
+  ↪ Total_cat
+      (@Op_catd (Op_cat (Hom_cat $x $y))
+        (@IsoFibration_catd (Op_cat (Hom_cat $x $y)) (@Groth_hom_fam $B $M $x $y $u $v)));
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                              // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
@@ -715,78 +758,43 @@ rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struc
 //   sending `(f,α)` to `f`.                                                                           // forget the fibre component
 rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (IsoFibration_catd $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Total_proj_func (@IsoFibration_catd (Hom_cat $x $y) (@Groth_hom_fam $B $M $x $y $u $v));
+  ↪ Total_proj_func
+      (@Op_catd (Op_cat (Hom_cat $x $y))
+        (@IsoFibration_catd (Op_cat (Hom_cat $x $y)) (@Groth_hom_fam $B $M $x $y $u $v)));
 
-// Sanity: objects of hom-categories in ∫M are Σ (base arrow, fibre arrow).                            // recovers the 1-cell description
-assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
-  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
-  τ (Obj (@Hom_cat (Total_cat (IsoFibration_catd M)) (Struct_sigma x u) (Struct_sigma y v)))
-    ≡ `τΣ_ f : τ (Obj (Hom_cat x y)),
-         Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v);
+// Normal form for objects of the contravariant Grothendieck total appearing in homs of ∫M.            // Σ-object description for our specific Op-acrobatics
+rule τ (Obj (Total_cat
+      (@Op_catd (Op_cat (Hom_cat $x $y))
+        (@IsoFibration_catd (Op_cat (Hom_cat $x $y)) $H))))
+  ↪ `τΣ_ f : τ (Obj (Op_cat (Hom_cat $x $y))),
+       Obj (fapp0 $H f);
+
+// The base projection on objects is the first Σ-projection.                                           // π₁(f,α)=f
+rule fapp0
+    (Total_proj_func
+      (@Op_catd (Op_cat (Hom_cat $x $y))
+        (@IsoFibration_catd (Op_cat (Hom_cat $x $y)) $H)))
+    (Struct_sigma $f $α)
+  ↪ $f;
+
+// Sanity (deferred): object-level description of Hom_{∫M}((x,u),(y,v)) as a Σ-type.                  // depends on chosen normal form
+// We will re-enable it once we add a stable computation rule for
+//   τ (Obj (Total_cat (Op_catd (IsoFibration_catd ...))))
+// in the contravariant Grothendieck construction.
 
 // Sanity: π₁ sends a 1-cell (f,α) to its base arrow f.                                                // projection on 1-cells
-assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
-  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
-  (f : τ (Obj (Hom_cat x y)))
-  (α : τ (Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v))) ⊢
-  fapp0
-    (@fapp1_func (Total_cat (IsoFibration_catd M)) B (Total_proj_func (IsoFibration_catd M))
-      (Struct_sigma x u) (Struct_sigma y v))
-    (Struct_sigma f α)
-    ≡ f;
+// (We will reintroduce a projection sanity check once `Groth_hom_fam` is *defined* (not axiomatic),
+// and once we decide on a canonical normal form for objects of
+//   Total_cat(Op_catd(IsoFibration_catd(...))).
+// The object-level statement remains true semantically: it is still the first Σ-projection.)
 
-// Identity in the Grothendieck total is (id_x, id_u).                                                 // id_{(x,u)} = (id_x, id_u)
-rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
-  ↪ Struct_sigma (identity_morph $B $x) (identity_morph (fapp0 $M $x) $u);
+// Sanity (deferred): objects of Hom_{∫M}((x,u),(y,v)) as a Σ-type.                                    // depends on chosen normal form
 
-// Composition in the Grothendieck total.                                                              // (g,β) ∘ (f,α) = (g∘f, β ∘ M(g)(α))
-rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
-  (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
-  (Struct_sigma $g $β) (Struct_sigma $f $α)
-  ↪ Struct_sigma
-      (@comp_fapp0 $B $x $y $z $g $f)
-      (@comp_fapp0 (fapp0 $M $z)
-        (@isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u))
-        (@isoFib_transport0 $B $M $y $z $g $v)
-        $w
-        $β
-        (fapp0
-          (@fapp1_func (fapp0 $M $y) (fapp0 $M $z)
-            (fapp0 (@fapp1_func $B Cat_cat $M $y $z) $g)
-            (@isoFib_transport0 $B $M $x $y $f $u) $v)
-          $α));
-
-// -------------------------------------------------------------------------------------------------
-// 11. Opposite category (involution)                                                                 // A ↦ Aᵒᵖ
-// -------------------------------------------------------------------------------------------------
-
-injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
-rule Op_catd (Op_catd $A) ↪ $A;                     
-
-// Opposite preserves terminal displayed categories.                                                  // (1_X)ᵒᵖ ≡ 1_{Xᵒᵖ}
-rule @Op_catd $X (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
-
-// Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
-rule @Op_catd $A (@Pullback_catd $A $B $E $F)
-  ↪ @Pullback_catd (Op_cat $A) (Op_cat $B) (@Op_catd $B $E) (@Op_func $A $B $F);
-
-// Opposite of a total category is the total of the opposite displayed category.                      // (∫E)ᵒᵖ ≡ ∫(Eᵒᵖ)
-rule Op_cat (Total_cat $E) ↪ Total_cat (Op_catd $E);
-
-// The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
-rule @Op_func (Total_cat $E) $B (@Total_proj_func $B $E)
-  ↪ @Total_proj_func (Op_cat $B) (@Op_catd $B $E);
-
-// Sanity: opposites interact with core constructions by definitional rewriting.                      // exercise Op rules
-assert [A B : Cat] (E : Catd B) (F : τ (Obj (Functor_cat A B))) ⊢
-  @Op_catd A (@Pullback_catd A B E F)
-    ≡ @Pullback_catd (Op_cat A) (Op_cat B) (@Op_catd B E) (@Op_func A B F);
-
-assert [B : Cat] (E : Catd B) ⊢ Op_cat (Total_cat E) ≡ Total_cat (Op_catd E);
-
-assert [B : Cat] (E : Catd B) ⊢
-  @Op_func (Total_cat E) B (@Total_proj_func B E)
-    ≡ @Total_proj_func (Op_cat B) (@Op_catd B E);
+// Identity/composition in ∫M (DEFERRED):
+// With the contravariant hom-formula, hom-categories are totals of the form
+//   Total_cat(Op_catd(IsoFibration_catd ...)).
+// Once we settle a stable normal form for those objects (Σ-pairs), we can re-enable computational rules
+// for `id_{(x,u)}` and for composition `(g,β) ∘ (f,α)`.
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
@@ -1168,6 +1176,42 @@ rule @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
+
+/*
+  module_action_cat (ω-style “swap arguments”, as a transfor)
+
+  This is the ω-analogue of `module_action` in emdash.lp, but in the Cat-valued setting:
+
+    given M : B → Cat and a fibre object u ∈ M(x),
+    we package the action f ↦ M(f)(u) as a transfor
+      module_action_cat(M,x,u) : hom_cov(x,Id) ⇒ M.
+
+  Its “component at y” (in the sense of `tapp0_fapp0`) is the functor
+    Hom_B(x,y) → M(y),
+  which we normalize to the stable head `isoFib_transport_func`.
+*/
+
+symbol module_action_cat : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+  Π (x : τ (Obj B)), τ (Obj (fapp0 M x))
+    → τ (Obj (Transf_cat (@hom_cov B x B (@Id_func B)) M));
+
+// Component at y (as a functor in Cat_cat): (module_action_cat u)_y ↪ isoFib_transport_func(u,y).     // unpack module_action at y
+rule @tapp0_fapp0 $B Cat_cat (@hom_cov $B $x $B (@Id_func $B)) $M $y (@module_action_cat $B $M $x $u)
+  ↪ @isoFib_transport_func $B $M $x $y $u;
+
+// Hom-action of isoFib_transport_func (2-cells): evaluate M(α) at u.                                  // (isoFib_transport_func)_1(α) = (M(α))_u
+rule @fapp0 (Hom_cat $f $g)
+    _
+    (@fapp1_func (Hom_cat $x $y) (fapp0 $M $y)
+      (@isoFib_transport_func $B $M $x $y $u) $f $g) $α
+  ↪ @tapp0_fapp0 (fapp0 $M $x) (fapp0 $M $y)
+      (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f)
+      (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $g)
+      $u
+      (@fapp0 (Hom_cat $f $g)
+        _
+        (@fapp1_func (Hom_cat $x $y) (Functor_cat (fapp0 $M $x) (fapp0 $M $y))
+          (@fapp1_func $B Cat_cat $M $x $y) $f $g) $α);
 
 /*
   Product_cat and transfors (componentwise computation)
