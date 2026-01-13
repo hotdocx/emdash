@@ -1142,6 +1142,14 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
   Its “component at y” (in the sense of `tapp0_fapp0`) is the functor
     Hom_B(x,y) → M(y),
   and we define the derived helper `isoFib_transport_func` to be precisely that component.
+
+  Architecture note (subject to review):
+  - `module_action_cat` is the primitive/naturality-style package (good for ω-iteration).
+  - `isoFib_transport_func` is *not* the “real content”; it is a stable-head *normal form* for the
+    component functor, so we can attach object-/hom-action computation rules without forcing expansion
+    of `tapp0_fapp0` into `fdapp0 ...` during conversion/subject-reduction checks.
+  - If/when the transfor infrastructure becomes robust enough, we may be able to drop this extra head
+    and compute directly on `tapp0_fapp0 (... module_action_cat ...)` instead.
 */
 
 symbol module_action_cat : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
