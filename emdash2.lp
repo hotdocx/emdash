@@ -135,7 +135,7 @@ symbol Obj : Cat → Grpd;                                                      
 injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;                            // hom-category as a Cat
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
-injective symbol identity_morph : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_A X_A));        // id_X : Obj(Hom_cat_A(X,X))
+injective symbol Id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_A X_A));        // id_X : Obj(Hom_cat_A(X,X))
 
 // -------------------------------------------------------------------------------------------------
 // 4b. Opposite category (core)                                                                      // A ↦ Aᵒᵖ (objects fixed, arrows reversed)
@@ -264,9 +264,9 @@ rule @fapp0 (Functor_cat $A1 $A2) _
 
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
 symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
-≔ @identity_morph Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
+≔ @Id Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
 // NOTE: `Id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `Id_func`, switch to `symbol Id_func ...;` + `rule Id_func ... ↪ ...` (cf. tapp0_fapp0).
-rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
+rule fapp0 (@Id Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
 
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@Id_func $A) ↪ @Id_func (Op_cat $A);
@@ -671,7 +671,7 @@ rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
 // Usual notation: `(id_x)_!(u) = u`.                                                                  // id_! = id
-rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
+rule @isoFib_transport0 $B $M $x $x (Id $B $x) $u ↪ $u;
 
 // Strict functoriality on objects (cut-elimination direction): M(g)(M(f)(u)) ↪ M(g∘f)(u).             // fold transport along ∘
 // Usual notation: `g_!(f_!(u)) = (g ∘ f)_!(u)`.                                                       // g_!∘f_! ↪ (g∘f)_!
@@ -893,8 +893,8 @@ rule @Hom_cat (Product_cat $A1 $A2) $P $Q
                 (@Hom_cat $A2 (sigma_Snd $P) (sigma_Snd $Q));
 
 // Identity and composition in a product category are computed componentwise (on paired endpoints).   // id and ∘ in A×B
-rule @identity_morph (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
-  ↪ Struct_sigma (@identity_morph $A1 $X1) (@identity_morph $A2 $X2);
+rule @Id (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
+  ↪ Struct_sigma (@Id $A1 $X1) (@Id $A2 $X2);
 
 rule @comp_fapp0 (Product_cat $A1 $A2)
   (Struct_sigma $X1 $X2) (Struct_sigma $Y1 $Y2) (Struct_sigma $Z1 $Z2)
@@ -1128,7 +1128,7 @@ rule @fdapp0 $A
       (@IsoFibration_catd $A (@hom_cov $B (fapp0 $F_AB $Y_A) $A $G_AB))
       (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $Y_A $ϵ)
       $Y_A
-      (@identity_morph $A $Y_A)
+      (@Id $A $Y_A)
   ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
@@ -1284,10 +1284,10 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
 //   id_(x,u)       = (id_x, id_u)
 //   (g,β) ∘ (f,α)  = (g∘f,  β ∘ M(g)(α)).
 
-rule @identity_morph (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
+rule @Id (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u)
   ↪ Struct_sigma
-      (@identity_morph $B $x)
-      (@identity_morph (fapp0 $M $x) $u);
+      (@Id $B $x)
+      (@Id (fapp0 $M $x) $u);
 
 rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
@@ -1504,7 +1504,7 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
 assert ⊢ Op_cat (Op_cat Cat_cat) ≡ Cat_cat;                                                          // (Cat_catᵒᵖ)ᵒᵖ ≡ Cat_cat
 
 // Identity functor on objects reduces by rewriting.                                                  // checks fapp0(Id_func) β-rule
-compute fapp0 (@identity_morph Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
+compute fapp0 (@Id Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
 
 // tapp1_func_funcd object-action reduces to tapp1_fapp0_funcd by rewriting.                                         // checks tapp β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
