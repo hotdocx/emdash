@@ -301,8 +301,8 @@ rule @hom_con $A $W $B $F ↪ @hom_cov (Op_cat $A) $W (Op_cat $B) (@Op_func $B $
   (especially when implicit arguments would contain reducible subterms like `fapp0 $F $X`).
 */
 
-rule @fapp0 (@Hom_cat $A $W (fapp0 $F $X))
-    (@Hom_cat $A $W (fapp0 $F $Y))
+rule @fapp0 (@Hom_cat $A $W _)
+    (@Hom_cat $A $W _)
     (@fapp0 (@Hom_cat $B $X $Y)
       _
       (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f) $g
