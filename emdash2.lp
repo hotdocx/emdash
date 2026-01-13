@@ -252,7 +252,7 @@ rule Op_cat Cat_cat ↪ Cat_cat;
 constant symbol op : τ (Obj (Functor_cat Cat_cat Cat_cat));
 
 // Object-action: op₀(A) ≡ Aᵒᵖ.                                                                       // fapp0(op,A) ↪ Op_cat(A)
-rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
+rule @fapp0 _ _ op $A ↪ Op_cat $A;
 
 // Morphism-action on objects (functors): op₁(F) ≡ Fᵒᵖ.                                               // fapp0(fapp1_func(op),F) ↪ Op_func(F)
 rule @fapp0 (Functor_cat $A1 $A2) _
@@ -265,10 +265,10 @@ symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                            
 rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
 
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
-rule @Op_func $A $A (@Id_func $A) ↪ @Id_func (Op_cat $A);
+rule @Op_func _ _ (@Id_func $A) ↪ @Id_func (Op_cat $A);
 
 // Opposite respects composition of functors (in Cat_cat).                                            // (F∘G)ᵒᵖ ≡ Fᵒᵖ∘Gᵒᵖ
-rule @Op_func $A1 $A3 (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
+rule @Op_func _ _ (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
   ↪ @comp_fapp0 Cat_cat (Op_cat $A1) (Op_cat $A2) (Op_cat $A3) (@Op_func $A2 $A3 $F) (@Op_func $A1 $A2 $G);
 
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
@@ -323,7 +323,7 @@ rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
 
 // Naturality w.r.t. precomposition in the argument functor (contravariant case):                    // accumulate the functor (with Op)
 // Hom_A(F(-),W) ∘ (Gᵒᵖ)  ≡  Hom_A((F∘G)(-), W), where Gᵒᵖ : Cᵒᵖ → Bᵒᵖ.                                  // variance bookkeeping
-rule @comp_fapp0 Cat_cat (Op_cat $C) (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
+rule @comp_fapp0 Cat_cat _ _ Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
   ↪ @hom_con $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
 
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
@@ -882,7 +882,7 @@ rule Op_cat Terminal_cat ↪ Terminal_cat;
 injective symbol Terminal_func : Π (A : Cat), τ (Obj (Functor_cat A Terminal_cat));                      // object of Functor_cat(A,1)
 
 // Opposite of the terminal functor is the terminal functor out of Aᵒᵖ.                                // (!:A→1)ᵒᵖ ≡ !:Aᵒᵖ→1
-rule @Op_func $A Terminal_cat (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
+rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 
 // Distinguished object * : Obj(1) (everything is definitionally equal to it via rules if desired).  // point of the terminal category
 constant symbol Terminal_obj : τ (Obj Terminal_cat);                                                 // * : Obj(1)
@@ -891,7 +891,7 @@ constant symbol Terminal_obj : τ (Obj Terminal_cat);                           
 injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor_cat Terminal_cat Y));               // y ↦ (1→Y) picking y
 
 // Opposite of a point-functor is the point-functor into the opposite category.                       // (y:1→Y)ᵒᵖ : 1→Yᵒᵖ
-rule @Op_func Terminal_cat $Y (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
+rule @Op_func _ _ (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
 
 // Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
 rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
