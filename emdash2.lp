@@ -625,6 +625,32 @@ rule @isoFib_transport0 $B $M $x $x (identity_morph $B $x) $u ↪ $u;
 rule @isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u
   ↪ @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u);
 
+/*
+  Fibre action as a functor (swap arguments / “module action”, ω-style)
+
+  Given a Cat-valued functor M : B → Cat_cat, a base object x : Obj(B), and a fibre object u : Obj(M(x)),
+  we want the induced functor
+
+    isoFib_transport_func(M,x,u,y) : Hom_B(x,y) → M(y)
+
+  sending f : x→y to M(f)(u). In our encoding, M(f)(u) is normalized to the stable head
+  `isoFib_transport0 M f u` (see the folding rule above).
+
+  Crucially, this *is* functorial in higher cells: a 2-cell α : f ⇒ g in the hom-category Hom_B(x,y)
+  is mapped to the morphism in M(y) obtained by:
+    (1) transporting α along M's hom-action to get a natural transformation M(f) ⇒ M(g),
+    (2) evaluating that transformation at u (using `tapp0_fapp0`).
+*/
+
+// Functorial “action on a fixed fibre object”: (y ↦ (f ↦ M(f)(u))).                                 // u ↦ (Hom(x,-) → M(-))
+symbol isoFib_transport_func : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+  Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))),
+  τ (Obj (Functor_cat (Hom_cat x y) (fapp0 M y)));
+
+// Object-action: apply M to f, then to u (folded to `isoFib_transport0`).                             // f ↦ f_!(u)
+rule fapp0 (@isoFib_transport_func $B $M $x $y $u) $f
+  ↪ @isoFib_transport0 $B $M $x $y $f $u;
+
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
 injective symbol Total_proj_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
   τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
