@@ -503,7 +503,7 @@ rule @Op_catd _ (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
 
 // Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
 rule @Op_catd _ (@Pullback_catd $A $B $E $F)
-  ↪ @Pullback_catd (Op_cat $A) (Op_cat $B) (@Op_catd $B $E) (@Op_func $A $B $F);
+  ↪ @Pullback_catd _ _ (@Op_catd $B $E) (@Op_func $A $B $F);
 
 // -------------------------------------------------------------------------------------------------
 // 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
