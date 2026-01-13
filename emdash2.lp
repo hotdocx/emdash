@@ -616,7 +616,7 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
 //   We normalize totals-of-opposites *outwards*, so that terms like `Total_cat (Op_catd E)` reduce to
 //   `Op_cat (Total_cat E)`. This makes it easier to reuse the Grothendieck Σ-object rule for
 //   `Total_cat (IsoFibration_catd ...)` and then forget that `Op_cat` does not change objects.
-rule @Total_cat (Op_cat $B) (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
+rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
 
 // The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
 rule @Op_func (Total_cat $E) $B (@Total_proj_func $B $E)
@@ -774,9 +774,9 @@ rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
 // Grothendieck hom-category is itself a Grothendieck total (contravariant in the base hom-category).  // Hom_{∫M}((x,u),(y,v)) ≡ (∫H)^op
 // Using Op-acrobatics: for H : (Hom_B(x,y))ᵒᵖ → Cat, we form ∫H over (Hom_B(x,y))ᵒᵖ and then take Op.   // keep 2-cell direction correct
 rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Total_cat
-      (@Op_catd (Op_cat (@Hom_cat $B $x $y))
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v)));
+  ↪ Op_cat (Total_cat
+      (
+        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v))));
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                              // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
@@ -784,9 +784,9 @@ rule @Hom_cat (Total_cat (@IsoFibration_catd $B $M)) (Struct_sigma $x $u) (Struc
 //   sending `(f,α)` to `f`.                                                                           // forget the fibre component
 rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (IsoFibration_catd $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Total_proj_func
-      (@Op_catd (Op_cat (@Hom_cat $B $x $y))
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v)));
+  ↪ Op_func (Total_proj_func
+      (
+        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) (@Groth_hom_fam $B $M $x $y $u $v))));
 
 // Shortcut (performance): objects of the contravariant Grothendieck total appearing in homs of ∫M.     // Σ-object description
 // This is derivable from:
@@ -794,11 +794,11 @@ rule @fapp1_func (Total_cat (@IsoFibration_catd $B $M)) $B (Total_proj_func (Iso
 //   - `Obj(Op_cat A) ↪ Obj A` (objects fixed by opposite),
 //   - the Grothendieck Σ-object rule for `Total_cat(IsoFibration_catd ...)`.
 // But keeping the combined rule avoids expensive intermediate Cat-level normalization under `Op_cat`.
-rule τ (Obj (Total_cat
-      (@Op_catd (Op_cat (@Hom_cat $B $x $y))
-        (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) $H))))
-  ↪ `τΣ_ f : τ (Obj (Op_cat (@Hom_cat $B $x $y))),
-       Obj (fapp0 $H f);
+// rule τ (Obj (Total_cat
+//       (@Op_catd (Op_cat (@Hom_cat $B $x $y))
+//         (@IsoFibration_catd (Op_cat (@Hom_cat $B $x $y)) $H))))
+//   ↪ `τΣ_ f : τ (Obj (Op_cat (@Hom_cat $B $x $y))),
+//        Obj (fapp0 $H f);
 
 // The base projection on objects is the first Σ-projection.                                           // π₁(f,α)=f
 rule fapp0
