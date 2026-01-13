@@ -114,9 +114,9 @@ inductive unit : TYPE ≔ | tt : unit;                                          
 // 3. Natural numbers (used as a dimension/index type in drafts)                                     // globular/simplicial indices
 // -------------------------------------------------------------------------------------------------
 
-inductive Nat : TYPE ≔                                                                              // Peano naturals as an index object
-| Z : Nat                                                                                           // zero (dimension 0)
-| S : Nat → Nat;                                                                                    // successor (dimension n+1)
+inductive nat : TYPE ≔                                                                              // Peano naturals as an index object
+| zero : nat                                                                                           // zero (dimension 0)
+| succ : nat → nat;                                                                                    // successor (dimension n+1)
 
 // -------------------------------------------------------------------------------------------------
 // 4. Categories as a classifier `Cat : TYPE` with `Obj : Cat → Grpd` and `Hom_cat : ... → Cat`          // strict ω-category skeleton
@@ -1048,11 +1048,6 @@ symbol comp_func_cat [A B : Cat] [C : Cat]                                      
   (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
 ≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
 // NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_func_cat`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
-
-// Legacy alias (kept for continuity with older drafts).                                             // prefer snake_case name above
-symbol compFunc [A B : Cat] [C : Cat]
-  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))
-≔ comp_func_cat F G;
 
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
