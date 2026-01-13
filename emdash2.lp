@@ -275,11 +275,11 @@ rule fapp0 (hom_cov $W $F) $Y ↪ Hom_cat $W (fapp0 $F $Y);                     
 
 // Contravariant “hom functor”: Hom_A(F(-), W), packaged as a covariant functor on Bᵒᵖ.               // hom-contravariant / dual representable
 // Usual notation: `Hom_A(F(-),W) : Bᵒᵖ → Cat` (or Set/Grpd in 1-categorical cases).                   // variance reminder
-constant symbol hom_con : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
+symbol hom_con : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                                        // W_A ∈ Obj(A), F : Functor_cat(B,A)
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat (Op_cat B) Cat_cat));                            // result: Bᵒᵖ → Cat_cat
 
-// Object-action: Y ↦ Hom_A(F(Y), W).                                                                  // contravariant representable
-rule @fapp0 (Op_cat $B) _ (@hom_con $A $W $B $F) $Y ↪ @Hom_cat $A (@fapp0 $B $A $F $Y) $W;
+// Definition: Hom_A(F(-),W) is the same as Hom_{Aᵒᵖ}(W,(Fᵒᵖ)(-)), pointwise.                           // implement hom_con via hom_cov + opposites
+rule @hom_con $A $W $B $F ↪ @hom_cov (Op_cat $A) $W (Op_cat $B) (@Op_func $B $A $F);
 
 // Computation (hom_cov acts by postcomposition):                                                      // ((Hom_A(W,F-))_1 f)_0 g ↪ (Ff)∘g
 // If f : Hom_B(X,Y) and g : Hom_A(W,F(X)), then `hom_cov W F : B → Cat` induces a functor
