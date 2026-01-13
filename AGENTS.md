@@ -16,6 +16,8 @@ Advice: although we are interested in ω-categories (that is infinity/ω hierarc
 
 Advice: you should proceed and typecheck progressively/incrementally, and try and see how far you can go and how much is feasible presently. Note: always remember that we may be lacking infrastructure, concepts, symbols, rewrite/unification rules to directly express what we want right now; so you can try but keep in mind that what you want might not be feasible yet... Also try to identify whether there are some pre-requisites side-tasks, to develop the necessary concepts and rewrite/unification rules, before starting the main task.
 
+Advice: if while implementing a new feature/task you find that you need to temporarily remove/comment some other parts of the codebase, do it, but try to keep track of what you removed (e.g. only comment out the code, do not delete it) and why, so that you can restore it later.
+
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...

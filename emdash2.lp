@@ -285,15 +285,31 @@ symbol hom_con : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],              
 rule @hom_con $A $W $B $F ↪ @hom_cov (Op_cat $A) $W (Op_cat $B) (@Op_func $B $A $F);
 
 /*
-  TODO (performance / refactor after dropping `injective Obj`):
+  Computation (hom_cov acts by postcomposition):
 
-  Computation (hom_cov acts by postcomposition): ((Hom_A(W,F-))_1 f)_0 g ↪ (Ff)∘g.
+    ((Hom_A(W,F-))_1 f)_0 g  ↪  (F f) ∘ g.
 
-  This rule used to be written with many inferred arguments; after dropping `injective Obj`, making all
-  categories explicit can cause expensive typechecking/compilation. The core ∫M/Grothendieck layer does
-  not currently depend on this computation rule, so we defer it and will reintroduce it once the new
-  inference conventions have stabilized.
+  Concretely:
+    - f : Hom_B(X,Y)
+    - g : Hom_A(W,F(X))
+  then hom_cov(W,F) : B → Cat induces the functor
+    Hom_A(W,F(X)) → Hom_A(W,F(Y))
+  sending g ↦ (F f) ∘ g.
+
+  Performance note:
+  We intentionally keep some category arguments on the LHS as `_` to avoid expensive conversions
+  (especially when implicit arguments would contain reducible subterms like `fapp0 $F $X`).
 */
+
+rule @fapp0 (@Hom_cat $A $W (fapp0 $F $X))
+    (@Hom_cat $A $W (fapp0 $F $Y))
+    (@fapp0 (@Hom_cat $B $X $Y)
+      _
+      (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f) $g
+  ↪ @comp_fapp0 $A $W (fapp0 $F $X) (fapp0 $F $Y)
+      (@fapp0 (@Hom_cat $B $X $Y)
+        (@Hom_cat $A (fapp0 $F $X) (fapp0 $F $Y))
+        (@fapp1_func $B $A $F $X $Y) $f) $g;
 
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
 rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
@@ -335,7 +351,18 @@ assert [A B C : Cat] (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat 
   @Op_func A C (@comp_fapp0 Cat_cat A B C F G)
     ≡ @comp_fapp0 Cat_cat (Op_cat A) (Op_cat B) (Op_cat C) (@Op_func B C F) (@Op_func A B G);
 
-// Sanity (deferred with the computation rule above): general hom_cov action computes to postcomposition. // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
+// Sanity: general hom_cov action computes to postcomposition.                                          // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
+assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
+  (X Y : τ (Obj B)) (f : τ (Obj (@Hom_cat B X Y))) (g : τ (Obj (@Hom_cat A W (fapp0 F X)))) ⊢
+  @fapp0 (@Hom_cat A W (fapp0 F X))
+    (@Hom_cat A W (fapp0 F Y))
+    (@fapp0 (@Hom_cat B X Y)
+      _
+      (@fapp1_func B Cat_cat (@hom_cov A W B F) X Y) f) g
+    ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
+        (@fapp0 (@Hom_cat B X Y)
+          (@Hom_cat A (fapp0 F X) (fapp0 F Y))
+          (@fapp1_func B A F X Y) f) g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
