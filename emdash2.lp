@@ -1112,17 +1112,20 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))]
   - If we made `tapp0_fapp0` a definitional abbreviation (`≔ fdapp0 ...`), then rewriting would first unfold it,
     and we would lose the ability to conveniently attach further rewrite rules to the head symbol `tapp0_fapp0`.
 
+  Key point: being a rewrite head doesn’t force it to unfold; it just means we can attach rules to it.
+
   Hence, we declare `tapp0_fapp0` as a primitive operation and give its current computation as a rewrite rule.
 */
 
-// Computation: ϵ_Y is obtained by evaluating ϵ^Y at id_Y.                                             // tapp0_fapp0 ↪ eval(tapp1_fapp0_funcd, id_Y)
-rule @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ
-  ↪ @fdapp0 $A
+// Canonicalization: fold "evaluate ϵ^Y at id_Y" *towards* `tapp0_fapp0`.                               // fold component extraction
+// This keeps `tapp0_fapp0` as the stable head, avoiding conversion blowups in later developments.
+rule @fdapp0 $A
       (@IsoFibration_catd $A (@hom_cov $A $Y_A $A (@Id_func $A)))
       (@IsoFibration_catd $A (@hom_cov $B (fapp0 $F_AB $Y_A) $A $G_AB))
       (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $Y_A $ϵ)
       $Y_A
-      (@identity_morph $A $Y_A);
+      (@identity_morph $A $Y_A)
+  ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
