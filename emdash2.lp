@@ -206,10 +206,10 @@ injective symbol Op_func : Π [A B : Cat],
 rule Op_func (@Op_func $A $B $F) ↪ $F;
 
 // Object-action is unchanged by opposite.                                                            // Fᵒᵖ₀ = F₀
-rule @fapp0 (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
+rule @fapp0 _ _ (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
 
 // Hom-action is reversed by opposite (uses definitional Hom_{Aᵒᵖ}(X,Y) ≡ Hom_A(Y,X)).                // Fᵒᵖ₁(X,Y) = F₁(Y,X)
-rule @fapp1_func (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F) $X $Y
+rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y
   ↪ @fapp1_func $A $B $F $Y $X;
 
 // -------------------------------------------------------------------------------------------------
@@ -255,7 +255,7 @@ constant symbol op : τ (Obj (Functor_cat Cat_cat Cat_cat));
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 
 // Morphism-action on objects (functors): op₁(F) ≡ Fᵒᵖ.                                               // fapp0(fapp1_func(op),F) ↪ Op_func(F)
-rule @fapp0 (Functor_cat $A1 $A2) (Functor_cat (Op_cat $A1) (Op_cat $A2))
+rule @fapp0 (Functor_cat $A1 $A2) _
   (@fapp1_func Cat_cat Cat_cat op $A1 $A2) $F ↪ @Op_func $A1 $A2 $F;
 
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
