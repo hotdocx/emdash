@@ -125,6 +125,10 @@ inductive nat : TYPE ≔                                                        
 constant symbol Cat : TYPE;                                                                         // classifier of (strict/lax) ω-categories
 
 // Objects of a category form a groupoid (`Grpd`), not just a set.                                   // higher-categorical “objects up to paths”
+//
+// IMPORTANT (design): `Obj` is intentionally *not* injective in this development.
+// Reason: we want definitional equalities like `Obj (Op_cat A) ↪ Obj A` (and `τ` is injective),
+// so making `Obj` injective would collapse `Op_cat A ≡ A` by conversion, which is not intended.
 symbol Obj : Cat → Grpd;                                                                            // object classifier of a category
 
 // Hom_cat is itself a category: for X,Y : Obj(A), Hom_A(X,Y) : Cat.                                     // hom-categories (enriched/globular view)
