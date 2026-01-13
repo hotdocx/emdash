@@ -183,6 +183,92 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   Π (g: τ (Obj (@Hom_cat A Y_A Z_A))), Π (f: τ (Obj (@Hom_cat A X_A Y_A))),                                // composable morphisms g ∘ f
   τ (Obj (@Hom_cat A X_A Z_A));                                                                           // composite morphism in Hom_cat_A(X,Z)
 
+/*
+  MAINTENANCE INVENTORY (emdash2.lp)
+
+  Goal: for each *Cat-valued construction* C (e.g. `Product_cat A B`), decide which core projections
+  should compute definitionally (via rewrite rules), versus which should remain abstract / inferred
+  (via `unif_rule`s or explicit lemmas).
+
+  Core projections we care about for any `C : Cat`:
+    - `Obj C                 : Grpd`                (and often a decoding rule for `τ (Obj C)`),
+    - `Hom_cat C X Y         : Cat`,
+    - `Id C X                : Obj(Hom_cat C X X)`,
+    - `comp_fapp0 C g f      : Obj(Hom_cat C X Z)` (pointwise composition),
+    - `Op_cat C              : Cat`                (when relevant).
+
+  Legend (current state in this file):
+    - [OK]   there is a rewrite rule giving definitional computation
+    - [INF]  no rewrite, but there is a unification rule that *infers* the intended constructor
+    - [TODO] no rewrite/unif rule yet; behavior is currently abstract/unspecified
+    - [HARD] needs new infrastructure (typically “universe objects” like `U : Grpd` with `τ U ↪ Grpd`)
+
+  (A) Core / generic
+    - `Cat`, `Obj`, `Hom_cat`, `Id`, `comp_fapp0`: primitives of the kernel.
+
+  (B) `Op_cat A` (opposite category)
+    - `Obj (Op_cat A)`: [OK] `Obj (Op_cat A) ↪ Obj A`.
+    - `Hom_cat (Op_cat A) X Y`: [OK] `Hom_cat (Op_cat A) X Y ↪ Hom_cat A Y X`.
+    - `Id (Op_cat A) X`: [TODO] expected: `Id (Op_cat A) X ↪ Id A X`.
+    - `comp_fapp0 (Op_cat A) g f`: [TODO] expected “reverse order” computation:
+        if `g : Hom_{Aᵒᵖ}(Y,Z)` and `f : Hom_{Aᵒᵖ}(X,Y)`, then
+        `comp_fapp0 (Op_cat A) X Y Z g f` should compute to `comp_fapp0 A Z Y X f g`.
+
+  (C) `Terminal_cat`
+    - `Obj Terminal_cat`: [TODO/HARD] if we want definitional computation, we likely need a “unit groupoid”
+      code `Unit_grpd : Grpd` with `τ Unit_grpd ↪ unit`, then set `Obj Terminal_cat ↪ Unit_grpd`.
+    - `Hom_cat Terminal_cat _ _`: [TODO] expected: always `Terminal_cat` (terminal hom-category).
+    - `Id Terminal_cat _`: [TODO] expected: always `Terminal_obj`.
+    - `comp_fapp0 Terminal_cat _ _ _ _ _`: [TODO] expected: always `Terminal_obj`.
+    - (baseline note) In `cartierSolution13.lp`, there are also special-case computation rules like
+      `Terminal_func Terminal_cat ↪ Id_func`. In emdash2, this is still [TODO] (and depends on how we
+      decide to represent `Obj Terminal_cat`).
+
+  (D) `Product_cat A1 A2`
+    - `Obj (Product_cat A1 A2)`: [OK] Σ-pairs (`Obj(A1×A2) ↪ Σ Obj(A1), Obj(A2)`).
+    - `Hom_cat (Product_cat A1 A2) P Q`: [OK] pointwise product of hom-categories.
+    - `Id (Product_cat A1 A2) X`: [OK] computed componentwise.
+    - `comp_fapp0 (Product_cat A1 A2) g f`: [OK] computed componentwise.
+    - `Op_cat (Product_cat A1 A2)`: [OK] distributes pointwise.
+    - (baseline note) In `cartierSolution13.lp`, there are also definitional “unit laws” like
+      `Product_cat Terminal_cat A ↪ A` and `Product_cat A Terminal_cat ↪ A`. In emdash2, adding such
+      definitional equalities likely requires first making `Obj Terminal_cat` compute (so that Σ over
+      the unit groupoid can reduce).
+
+  (E) `Functor_cat A B` (functor category, objects = functors)
+    - `Obj (Functor_cat A B)`: [HARD/TODO] currently abstract (by design); no definitional encoding of
+      “functor data” as a Σ-type is provided in emdash2 yet.
+    - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
+    - `Id/comp_fapp0` inside `Functor_cat A B`: [TODO] depends on deciding computations for `Transf_cat`.
+
+  (F) `Transf_cat F G` (transformations / transfors)
+    - `Obj (Transf_cat F G)`: [TODO] currently abstract; only “application” operations (`tapp*`) are provided.
+    - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [TODO] (modifications, etc.) not specified yet.
+    - `Id/comp_fapp0` in `Transf_cat`: [TODO] not specified yet.
+
+  (G) Classifier categories `Grpd_cat` and `Cat_cat`
+    - Intended: `τ (Obj Grpd_cat) ≡ Grpd` and `τ (Obj Cat_cat) ≡ Cat`.
+    - Current mechanism: [INF] only via `unif_rule τ (Obj A) ≡ Grpd ↪ [A ≡ Grpd_cat]` and
+      `unif_rule τ (Obj A) ≡ Cat ↪ [A ≡ Cat_cat]`.
+    - `Obj Grpd_cat` / `Obj Cat_cat`: [HARD/TODO] definitional computation likely requires “universe objects”
+      `U_Grpd U_Cat : Grpd` with `τ U_Grpd ↪ Grpd` and `τ U_Cat ↪ Cat`.
+    - `Hom_cat Grpd_cat X Y`: [OK] decoding computes to function types via `τ (Obj (Hom_cat ...)) ↪ (τ X → τ Y)`.
+    - `Hom_cat Cat_cat X Y`: [OK] computes to `Functor_cat X Y`.
+
+  (H) Displayed-category layer (`Catd`) and related Cat constructions
+    - `Fibre_cat (IsoFibration_catd M) x`: [OK] computes to `fapp0 M x`.
+    - `Pullback_catd (IsoFibration_catd E) F`: [OK] computes to `IsoFibration_catd (E ∘ F)` (via `comp_fapp0` in `Cat_cat`).
+    - `Total_cat (IsoFibration_catd M)`: [OK] object decoding `τ (Obj (Total_cat ...))` is Σ-shaped.
+    - `Total_cat E` for general `E : Catd B`: [TODO] no definitional object/hom computation (kept semantic/primitive).
+    - `Hom_cat (Total_cat (IsoFibration_catd M)) ...`: [TODO/HARD] ω-categorical Grothendieck hom-categories
+      still need a design (compare with `emdash.lp`’s Σ-description of `Hom (Total_cat M)` in the 1-cat case).
+
+  (I) `Fibre_cat E x` (as a Cat-valued construction)
+    - For `E = Lift_catd1 A`: [OK] `Fibre_cat (Lift_catd1 A) _ ↪ A`.
+    - For `E = IsoFibration_catd M`: [OK] `Fibre_cat (IsoFibration_catd M) x ↪ fapp0 M x`.
+    - In general: [TODO] keep abstract until a general `Catd` semantics is fixed.
+*/
+
 // -------------------------------------------------------------------------------------------------
 // 5. Functors (as objects of a functor-category `Functor_cat A B : Cat`)                                // ω-functors
 // -------------------------------------------------------------------------------------------------
