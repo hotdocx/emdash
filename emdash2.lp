@@ -264,6 +264,10 @@ rule fapp0 (@identity_morph Cat_cat $A) $xA ↪ $xA;                            
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func $A $A (@Id_func $A) ↪ @Id_func (Op_cat $A);
 
+// Opposite respects composition of functors (in Cat_cat).                                            // (F∘G)ᵒᵖ ≡ Fᵒᵖ∘Gᵒᵖ
+rule @Op_func $A1 $A3 (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
+  ↪ @comp_fapp0 Cat_cat (Op_cat $A1) (Op_cat $A2) (Op_cat $A3) (@Op_func $A2 $A3 $F) (@Op_func $A1 $A2 $G);
+
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
 constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
@@ -306,6 +310,11 @@ assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@comp_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
     ≡ Op_cat (@fapp0 B Cat_cat E b);
 
+// Sanity: opposite distributes over functor composition in Cat_cat.                                  // (F∘G)ᵒᵖ = Fᵒᵖ∘Gᵒᵖ
+assert [A B C : Cat] (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) ⊢
+  @Op_func A C (@comp_fapp0 Cat_cat A B C F G)
+    ≡ @comp_fapp0 Cat_cat (Op_cat A) (Op_cat B) (Op_cat C) (@Op_func B C F) (@Op_func A B G);
+
 // Sanity: general hom_cov action computes to postcomposition by F(f).                                 // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
 assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
   (X Y : τ (Obj B)) (f : τ (Obj (Hom_cat X Y))) (g : τ (Obj (Hom_cat W (fapp0 F X)))) ⊢
@@ -334,7 +343,7 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y
 
 
 // -------------------------------------------------------------------------------------------------
-// 7. Dependent categories (isofibrations / fibrations)                                              // Cat-valued type families
+// 7. Dependent categories (displayed categories over a base)                                        // Cat-valued type families
 // -------------------------------------------------------------------------------------------------
 
 // `Catd B` is the type of displayed categories over `B` in the “category over a base” sense.          // Cat/B objects
@@ -375,7 +384,9 @@ constant symbol Catd : Π (A : Cat), TYPE;                                      
 // Terminal dependent category over A (constant fibration with terminal fibres).                     // unit family / trivial fibration
 constant symbol Terminal_catd : Π (A : Cat), Catd A;                                                 // terminal displayed category
 
-// Grothendieck construction: a Cat-valued functor A → Cat_cat gives an isofibration over A.         // category of elements / ∫ construction
+// Grothendieck construction: a Cat-valued functor A → Cat_cat gives a Grothendieck-style display over A. // category of elements / ∫ construction
+// Terminology note: a covariant functor A → Cat typically corresponds to an *opfibration* ∫E → A.    // naming vs semantics
+// We keep the historical name `IsoFibration_catd` for now; we can rename once the (op)fibration interface is stabilized.
 constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat)) → Catd A;               // ∫M : Catd(A) for M : A → Cat
 
 /*
