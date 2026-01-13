@@ -271,7 +271,7 @@ rule @Op_func $A1 $A3 (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
 constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
-rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
+rule fapp0 (hom_cov $W $F) $Y ↪ Hom_cat $W (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(W, F(Y))
 
 // Contravariant “hom functor”: Hom_A(F(-), W), packaged as a covariant functor on Bᵒᵖ.               // hom-contravariant / dual representable
 // Usual notation: `Hom_A(F(-),W) : Bᵒᵖ → Cat` (or Set/Grpd in 1-categorical cases).                   // variance reminder
@@ -303,7 +303,7 @@ rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
   ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
 
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
-// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `compFunc`, which is defined later). // computational-friendly
+// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `comp_func_cat`, which is defined later). // computational-friendly
 rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ @hom_cov $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
 
@@ -467,7 +467,7 @@ symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) →
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
 
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
-// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `compFunc`
+// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_func_cat`
 // This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord_cat. // simulate funcd-over-F
 rule @Pullback_catd $A $B (@IsoFibration_catd $B $E) $F
   ↪ @IsoFibration_catd $A (@comp_fapp0 Cat_cat $A $B Cat_cat $E $F);
@@ -1043,25 +1043,31 @@ assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   (g : τ (Obj (Hom_cat Y Z))) (f : τ (Obj (Hom_cat X Y))) ⊢
   fapp0 (@comp_func A X Y Z) (Struct_sigma g f) ≡ @comp_fapp0 A X Y Z g f;
 
-// Composition of functors is composition in Cat_cat (a special case of comp_fapp0).         // categorical composition in Cat
-symbol compFunc [A B : Cat] [C:Cat]                                                       // A,B,C : Cat
-  (F: τ (Obj (Functor_cat B C))) (G: τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))                      // F∘G : Functor_cat(A,C)
-≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                             // compose in Cat_cat
-// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `compFunc`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+// Composition of functors is composition in Cat_cat (a special case of comp_fapp0).                 // categorical composition in Cat
+symbol comp_func_cat [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
+  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
+≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
+// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_func_cat`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+
+// Legacy alias (kept for continuity with older drafts).                                             // prefer snake_case name above
+symbol compFunc [A B : Cat] [C : Cat]
+  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))
+≔ comp_func_cat F G;
 
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
 // -------------------------------------------------------------------------------------------------
 
-// TODO: implement contravariant hom (`hom_con`) and opposites coherently (requires Op_cat functoriality). // dual Yoneda
+// TODO: add morphism-action computation rules for `hom_con` (dual of the `hom_cov` postcomposition rule). // dual Yoneda, computational interface
 // TODO: add explicit “globular” source/target operations and interchange/composition laws.          // ω-category axioms
 // TODO: connect with Kosta Došen's “stacking” (horizontal composition of 2-cells along a 1-cell).   // 2-simplex / 3-simplex diagrams
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
-constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z: τ (Obj Z)]                             // base Z, displayed E, base object W_Z
-  (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),               // W in fibre, D another displayed cat, FF : D→E
-  τ (Obj (Functor_cat (Total_cat (Product_catd D (IsoFibration_catd ( compFunc op (hom_cov W_Z (@Id_func Z)) )))) // source category (a total category)
-                Cat_cat));                                                                            // target category Cat_cat (Cat-valued functors)
+constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
+  (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),                 // W in fibre, D another displayed cat, FF : D→E
+  τ (Obj (Functor_cat
+    (Total_cat (Product_catd D (IsoFibration_catd (comp_func_cat op (hom_cov W_Z (@Id_func Z))))))
+    Cat_cat));                                                                                            // target category Cat_cat (Cat-valued functors)
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
