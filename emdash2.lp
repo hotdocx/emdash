@@ -499,10 +499,10 @@ injective symbol Op_catd : Π [X : Cat] (A : Catd X), Catd (Op_cat X);
 rule Op_catd (Op_catd $A) ↪ $A;
 
 // Opposite preserves terminal displayed categories.                                                  // (1_X)ᵒᵖ ≡ 1_{Xᵒᵖ}
-rule @Op_catd $X (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
+rule @Op_catd _ (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
 
 // Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
-rule @Op_catd $A (@Pullback_catd $A $B $E $F)
+rule @Op_catd _ (@Pullback_catd $A $B $E $F)
   ↪ @Pullback_catd (Op_cat $A) (Op_cat $B) (@Op_catd $B $E) (@Op_func $A $B $F);
 
 // -------------------------------------------------------------------------------------------------
@@ -625,7 +625,7 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
 rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
 
 // The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
-rule @Op_func (Total_cat $E) $B (@Total_proj_func $B $E)
+rule @Op_func _ $B (@Total_proj_func $B $E)
   ↪ @Total_proj_func (Op_cat $B) (@Op_catd $B $E);
 
 // -------------------------------------------------------------------------------------------------
