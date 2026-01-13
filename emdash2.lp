@@ -273,6 +273,14 @@ constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],     
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat B Cat_cat));                                     // result: B → Cat_cat (a Cat-valued functor)
 rule fapp0 (hom_cov $X $F) $Y ↪ Hom_cat $X (fapp0 $F $Y);                                                // object action: Y ↦ Hom_A(X, F(Y))
 
+// Contravariant “hom functor”: Hom_A(F(-), W), packaged as a covariant functor on Bᵒᵖ.               // hom-contravariant / dual representable
+// Usual notation: `Hom_A(F(-),W) : Bᵒᵖ → Cat` (or Set/Grpd in 1-categorical cases).                   // variance reminder
+constant symbol hom_con : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
+  Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat (Op_cat B) Cat_cat));                            // result: Bᵒᵖ → Cat_cat
+
+// Object-action: Y ↦ Hom_A(F(Y), W).                                                                  // contravariant representable
+rule @fapp0 (Op_cat $B) _ (@hom_con $A $W $B $F) $Y ↪ @Hom_cat $A (@fapp0 $B $A $F $Y) $W;
+
 // Computation (hom_cov acts by postcomposition):                                                      // ((Hom_A(W,F-))_1 f)_0 g ↪ (Ff)∘g
 // If f : Hom_B(X,Y) and g : Hom_A(W,F(X)), then `hom_cov W F : B → Cat` induces a functor
 //   Hom_A(W,F(X)) → Hom_A(W,F(Y))
@@ -299,11 +307,26 @@ rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
 rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ @hom_cov $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
 
+// Naturality w.r.t. precomposition in the argument functor (contravariant case):                    // accumulate the functor (with Op)
+// Hom_A(F(-),W) ∘ (Gᵒᵖ)  ≡  Hom_A((F∘G)(-), W), where Gᵒᵖ : Cᵒᵖ → Bᵒᵖ.                                  // variance bookkeeping
+rule @comp_fapp0 Cat_cat (Op_cat $C) (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
+  ↪ @hom_con $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
+
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
   @comp_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
     ≡ @hom_cov A W C (@comp_fapp0 Cat_cat C B A F G);
+
+assert [A B : Cat] [C : Cat] (W : τ (Obj A))
+  (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
+  @comp_fapp0 Cat_cat (Op_cat C) (Op_cat B) Cat_cat (@hom_con A W B F) (@Op_func C B G)
+    ≡ @hom_con A W C (@comp_fapp0 Cat_cat C B A F G);
+
+// Sanity: hom_con is definitional to hom_cov in the opposite category, pointwise.                     // Hom_{Aᵒᵖ}(W, Fᵒᵖ(-)) = Hom_A(F(-),W)
+assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A))) (x : τ (Obj (Op_cat B))) ⊢
+  fapp0 (hom_con W F) x
+    ≡ fapp0 (@hom_cov (Op_cat A) W (Op_cat B) (@Op_func B A F)) x;
 
 // Sanity: postcomposition by op normalizes pointwise.                                                // exercise `op ∘ E` computation
 assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
@@ -346,10 +369,11 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y
 // 7. Dependent categories (displayed categories over a base)                                        // Cat-valued type families
 // -------------------------------------------------------------------------------------------------
 
-// `Catd B` is the type of displayed categories over `B` in the “category over a base” sense.          // Cat/B objects
-// Usual notation/terminology: an element `E : Catd B` should be thought of as a functor `p : E ⟶ B`
-// (a category equipped with a projection to `B`), possibly with extra structure later (e.g. isofibration,
-// opfibration, cartesian lifts).                                                                      // p : E → B
+// `Catd B` is the type of (mere) isofibrations over `B` (a.k.a. displayed categories with iso-lifts). // isofibration objects over B
+// Concretely, an element `E : Catd B` should be thought of as a functor `p : Total_cat(E) ⟶ B`        // p : E → B
+// together with an implicit/axiomatized “iso-lifting” interface (to be made explicit later).          // iso-lifts interface (future)
+// It is therefore sound to *talk about* Cat/B intuition in comments, but the intended subtype is:     // Catd ⊆ Cat/B
+//   Catd B  ⊆  Cat/B   (objects in the slice whose projection is an isofibration).
 constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
 
 /*
@@ -397,11 +421,11 @@ constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat
     so a displayed morphism remembers a base map F : X → Y.
     Composition then produces a displayed functor over the composite base map (F∘G).
 
-  - In emdash2.lp we choose the *slice-style* presentation:
-      Functord_cat(F,E) where both displayed categories live over the same base B : Cat.
-    Concretely, this corresponds to working in a slice Cat/B (or the fibration over B):
-      objects: Catd B
-      morphisms: displayed functors over id_B (sections / maps over the identity).
+	  - In emdash2.lp we choose the *slice-style* presentation (within isofibrations over a fixed base):
+	      Functord_cat(F,E) where both displayed categories live over the same base B : Cat.
+	    Concretely, this corresponds to working in a slice Cat/B (or the fibration over B):
+	      objects: Catd B
+	      morphisms: displayed functors over id_B (sections / maps over the identity).
     This has a pragmatic benefit: composition stays over the identity automatically, so we get a plain
     category of displayed functors with easy closure under composition.
 
@@ -414,7 +438,7 @@ constant symbol IsoFibration_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat
       Pullback_catd (IsoFibration_catd E) F  ↪  IsoFibration_catd (E ∘ F).
 */
 
-// `Functord_cat E D` is the category of functors over a fixed base `B`.                                 // Fun_B(E,D) / hom in Cat/B
+// `Functord_cat E D` is the category of functors over a fixed base `B` (in the isofibration slice).    // Fun_B(E,D) / hom in Cat/B
 // Usual notation: if `p:E⟶B` and `q:D⟶B`, then an object of `Functord_cat(E,D)` is a functor `F:E⟶D`
 // such that `q ∘ F = p` (i.e. a morphism in the slice category `Cat/B`).                               // commuting triangle
 constant symbol Functord_cat : Π [B : Cat], Π (E D : Catd B), Cat;                          // Functord_cat(E,D) : Cat
