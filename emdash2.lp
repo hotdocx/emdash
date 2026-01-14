@@ -359,13 +359,13 @@ rule τ Cat_grpd  ↪ Cat;
 // `Grpd_cat` plays the role of the category of groupoids/sets (discrete fibrations classifier).     // analogue of Set/Type-as-a-category
 constant symbol Grpd_cat : Cat;                                                                     // category of ∞-groupoids
 rule Obj Grpd_cat ↪ Grpd_grpd;                                                                        // objects of Grpd_cat decode to Grpd
-unif_rule τ (Obj $A) ≡ Grpd ↪ [ $A ≡ Grpd_cat ];                                                     // infer A ≡ Grpd_cat when Obj(A) decodes to Grpd
+// unif_rule τ (Obj $A) ≡ Grpd ↪ [ $A ≡ Grpd_cat ];                                                     // infer A ≡ Grpd_cat when Obj(A) decodes to Grpd
 rule τ (Obj (@Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);                                                  // morphisms in Grpd_cat are functions
 
 // `Cat_cat` is the category of categories (fibrations classifier).                                  // Cat of categories
 constant symbol Cat_cat : Cat;                                                                      // category of categories
 rule Obj Cat_cat ↪ Cat_grpd;                                                                          // objects of Cat_cat decode to Cat
-unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
+// unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
 rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                                                            // morphisms in Cat_cat are functors
 
 // Sanity: the intended decoding holds by definitional computation.                                   // τ(Obj Grpd_cat) ≡ Grpd, τ(Obj Cat_cat) ≡ Cat
@@ -1041,9 +1041,8 @@ rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Struct_sigma $A $B)
   ↪ Product_cat $A $B;
 
 // Sanity: prod_cat acts pointwise as categorical product.                                             // prod_cat(A,B) = A×B
-// NOTE: write this with explicit parameters to avoid relying on heuristic inference of `Cat_cat`.     // robust against future tweaks to unif_rules
-assert (A B : τ (Obj Cat_cat)) ⊢
-  @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (@Product_pair Cat_cat Cat_cat A B)
+assert (A B : Cat) ⊢
+  fapp0 prod_cat (@Product_pair Cat_cat Cat_cat A B)
     ≡ Product_cat A B;
 
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
