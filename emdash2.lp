@@ -217,6 +217,9 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   (C) `Terminal_cat`
     - `Obj Terminal_cat`: [TODO/HARD] if we want definitional computation, we likely need a “unit groupoid”
       code `Unit_grpd : Grpd` with `τ Unit_grpd ↪ unit`, then set `Obj Terminal_cat ↪ Unit_grpd`.
+      (Then `Terminal_obj : τ (Obj Terminal_cat)` lives in `unit`; we can either *define*
+      `Terminal_obj ≔ tt` or keep `Terminal_obj` primitive and add a computation rule
+      `Terminal_obj ↪ tt` if we want evaluation-by-rewriting to collapse it to `tt`.)
     - `Hom_cat Terminal_cat _ _`: [TODO] expected: always `Terminal_cat` (terminal hom-category).
     - `Id Terminal_cat _`: [TODO] expected: always `Terminal_obj`.
     - `comp_fapp0 Terminal_cat _ _ _ _ _`: [TODO] expected: always `Terminal_obj`.
@@ -236,22 +239,35 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
       the unit groupoid can reduce).
 
   (E) `Functor_cat A B` (functor category, objects = functors)
-    - `Obj (Functor_cat A B)`: [HARD/TODO] currently abstract (by design); no definitional encoding of
-      “functor data” as a Σ-type is provided in emdash2 yet.
+    - `Obj (Functor_cat A B)`: [TODO/by-design] intentionally abstract: we do *not* aim for a general
+      computation rule exposing “functor data” as a Σ/record in emdash2 (so there is no global
+      `τ (Obj (Functor_cat A B)) ↪ ...` rule).
     - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
-    - `Id/comp_fapp0` inside `Functor_cat A B`: [TODO] depends on deciding computations for `Transf_cat`.
+    - `Id/comp_fapp0` inside `Functor_cat A B`: [TODO] should be the usual “vertical” identity/composition
+      of transfors; operationally this is most useful when expressed as computation rules for projections:
+        • components of `Id` / `comp_fapp0` computed by `tapp0_fapp0` (pointwise in `B`),
+        • higher components (modifications) computed by `tapp1_fapp1_func` / displayed analogues.
 
   (F) `Transf_cat F G` (transformations / transfors)
-    - `Obj (Transf_cat F G)`: [TODO] currently abstract; only “application” operations (`tapp*`) are provided.
-    - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [TODO] (modifications, etc.) not specified yet.
-    - `Id/comp_fapp0` in `Transf_cat`: [TODO] not specified yet.
+    - Main computational interface (what we *do* have):
+        [OK] the projection/evaluation functors given by `tapp*` (and later `tapp0_fapp0`, `tapp1_*`)
+        are the intended way to *use* a transfor without exposing its internal object encoding.
+      In that sense, deciding `Obj(Transf_cat F G)` and `Hom_cat(Transf_cat F G) ϵ ϵ'` is not urgent
+      unless we want definitional `Id/comp_fapp0` in `Functor_cat A B` (since its homs reduce to transfors).
+    - `Obj (Transf_cat F G)`: [TODO/by-design] kept abstract for now (no Σ/record encoding).
+    - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [TODO] will matter once we formalize modifications/3-cells explicitly.
+    - `Id/comp_fapp0` in `Transf_cat`: [TODO] when we introduce these, we should simultaneously decide the
+      computation behavior of the projection functors (`tapp*` / displayed `tdapp*`) on identities and
+      composites, i.e. “components of (ϵ₂ ∘ ϵ₁) are (components of ϵ₂) ∘ (components of ϵ₁)”.
 
   (G) Classifier categories `Grpd_cat` and `Cat_cat`
     - Intended: `τ (Obj Grpd_cat) ≡ Grpd` and `τ (Obj Cat_cat) ≡ Cat`.
     - Current mechanism: [INF] only via `unif_rule τ (Obj A) ≡ Grpd ↪ [A ≡ Grpd_cat]` and
       `unif_rule τ (Obj A) ≡ Cat ↪ [A ≡ Cat_cat]`.
-    - `Obj Grpd_cat` / `Obj Cat_cat`: [HARD/TODO] definitional computation likely requires “universe objects”
-      `U_Grpd U_Cat : Grpd` with `τ U_Grpd ↪ Grpd` and `τ U_Cat ↪ Cat`.
+    - `Obj Grpd_cat` / `Obj Cat_cat`: [TODO] currently only *inferable* via the unif_rules above (no rewrite).
+      If we later want definitional computation for these objects (rather than inference), we can introduce
+      explicit codes in `Grpd` whose decoding is `Grpd` / `Cat` and rewrite `Obj Grpd_cat` / `Obj Cat_cat`
+      to those codes (same pattern as `Σ_` with `τ (Σ_ P) ↪ ...`).
     - `Hom_cat Grpd_cat X Y`: [OK] decoding computes to function types via `τ (Obj (Hom_cat ...)) ↪ (τ X → τ Y)`.
     - `Hom_cat Cat_cat X Y`: [OK] computes to `Functor_cat X Y`.
 
@@ -260,13 +276,16 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
     - `Pullback_catd (IsoFibration_catd E) F`: [OK] computes to `IsoFibration_catd (E ∘ F)` (via `comp_fapp0` in `Cat_cat`).
     - `Total_cat (IsoFibration_catd M)`: [OK] object decoding `τ (Obj (Total_cat ...))` is Σ-shaped.
     - `Total_cat E` for general `E : Catd B`: [TODO] no definitional object/hom computation (kept semantic/primitive).
-    - `Hom_cat (Total_cat (IsoFibration_catd M)) ...`: [TODO/HARD] ω-categorical Grothendieck hom-categories
-      still need a design (compare with `emdash.lp`’s Σ-description of `Hom (Total_cat M)` in the 1-cat case).
+    - `Hom_cat (Total_cat (IsoFibration_catd M)) (x,u) (y,v)`: [OK] reduces to an (opposite of a) Grothendieck
+      total category via `Groth_hom_fam` (so object-level morphisms become Σ-pairs `(f,α)` definitionally).
 
   (I) `Fibre_cat E x` (as a Cat-valued construction)
     - For `E = Lift_catd1 A`: [OK] `Fibre_cat (Lift_catd1 A) _ ↪ A`.
     - For `E = IsoFibration_catd M`: [OK] `Fibre_cat (IsoFibration_catd M) x ↪ fapp0 M x`.
-    - In general: [TODO] keep abstract until a general `Catd` semantics is fixed.
+    - In general: [TODO/by-design] `Catd B` is already intended to classify *isofibrations* (not mere `Cat/B`),
+      but we have not yet introduced the explicit “iso-transport / cleavage” operations witnessing that
+      isofibration structure. Until that interface is added, we keep general `Catd` computations abstract
+      and only add concrete rewrite rules for special constructors (`Terminal_catd`, `IsoFibration_catd`, etc.).
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -1134,6 +1153,27 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (Obj (Fibre_cat E X_Z)) → τ (Obj (Fibre_cat D X_Z));                         // map objects in each fibre
 
+/*
+  Fibre_func (extract the induced functor on a fibre)
+
+  A displayed functor `FF : Obj(Functord_cat(E,D))` lives over a *fixed* base `Z` (slice-style: over id_Z).
+  It therefore induces, for every base object `X_Z : Obj(Z)`, an ordinary functor between the fibres:
+
+    Fibre_func(FF, X_Z) : Fibre_cat(E, X_Z) ⟶ Fibre_cat(D, X_Z).
+
+  We keep this as a *separate* head from `fdapp0`:
+  - `fdapp0` is the fibrewise object-map (computational handle);
+  - `Fibre_func` packages that map as an object of `Functor_cat`, so we can state equalities
+    between functors (e.g. `fapp1_func` as a fibre of `fapp1_funcd`) without requiring extensionality.
+*/
+symbol Fibre_func : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),
+  Π (X_Z : τ (Obj Z)),
+  τ (Obj (Functor_cat (Fibre_cat E X_Z) (Fibre_cat D X_Z)));
+
+// β-rule (objects): applying the extracted fibre functor is exactly fdapp0.                           // unpack Fibre_func at objects
+rule @fapp0 (Fibre_cat $E $X_Z) (Fibre_cat $D $X_Z) (@Fibre_func $Z $E $D $FF $X_Z) $u
+  ↪ @fdapp0 $Z $E $D $FF $X_Z $u;
+
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: after dropping injectivity of `Obj`, the implicit base/category parameters of `fdapp0`
 // are no longer reliably inferred from `Lift_funcd1 $F`, so we pin down the intended specialization
@@ -1501,6 +1541,10 @@ symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π 
   τ (Obj (Functord_cat (IsoFibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (IsoFibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
 
+// Fibrewise identification: the fibre of the displayed packaging is the usual hom-action functor.     // fapp1_func = Fibre_func(fapp1_funcd)
+rule @Fibre_func $A _ _ (@fapp1_funcd $A $B $F_AB $X_A) $Y_A
+  ↪ @fapp1_func $A $B $F_AB $X_A $Y_A;
+
 // Link: the object-action fdapp0 of fapp1_funcd reduces to applying fapp1_func on a morphism-object.           // coherence rule between globular & simplicial views
 rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
   ↪ @fapp0 (@Hom_cat $A $X $Y)
@@ -1511,6 +1555,10 @@ rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
 // Sanity: the link rule fires at the level of definitional equality.                                            // exercise the rule
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) (f : τ (Obj (@Hom_cat A X Y))) ⊢
   fdapp0 (fapp1_funcd F [X]) [Y] f ≡ fapp0 (fapp1_func F [X] [Y]) f;
+
+// Sanity: functor-level identification (needs Fibre_func; not derivable from pointwise equality alone).          // exercise Fibre_func rule
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) ⊢
+  Fibre_func (fapp1_funcd F [X]) Y ≡ fapp1_func F [X] [Y];
 
 // Application of a dependent functor on morphisms (still draft: depends on `homd_cov`).              // fibred fapp1_func
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),          // dependent functor F : A→B
