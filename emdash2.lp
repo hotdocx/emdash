@@ -286,12 +286,9 @@ assert (A : Cat) (X Y Z : τ (Obj A))
 
   (G) Classifier categories `Grpd_cat` and `Cat_cat`
     - Intended: `τ (Obj Grpd_cat) ≡ Grpd` and `τ (Obj Cat_cat) ≡ Cat`.
-    - Current mechanism:
-        • [OK] definitional computation via codes `Grpd_grpd` / `Cat_grpd` with `τ Grpd_grpd ↪ Grpd` and `τ Cat_grpd ↪ Cat`,
-          and rewrite rules `Obj Grpd_cat ↪ Grpd_grpd`, `Obj Cat_cat ↪ Cat_grpd`.
-        • [INF] unification hints (still useful when `A` is a metavariable): `unif_rule τ (Obj A) ≡ Grpd ↪ [A ≡ Grpd_cat]`
-          and `unif_rule τ (Obj A) ≡ Cat ↪ [A ≡ Cat_cat]`.
-    - `Obj Grpd_cat` / `Obj Cat_cat`: [OK] now computes by rewriting (not merely inferable).
+    - Current mechanism: [OK] definitional computation via codes `Grpd_grpd` / `Cat_grpd` with
+      `τ Grpd_grpd ↪ Grpd`, `τ Cat_grpd ↪ Cat`, and `Obj Grpd_cat ↪ Grpd_grpd`, `Obj Cat_cat ↪ Cat_grpd`.
+    - `Obj Grpd_cat` / `Obj Cat_cat`: [OK] computes by rewriting.
     - `Hom_cat Grpd_cat X Y`: [OK] decoding computes to function types via `τ (Obj (Hom_cat ...)) ↪ (τ X → τ Y)`.
     - `Hom_cat Cat_cat X Y`: [OK] computes to `Functor_cat X Y`.
 
@@ -359,13 +356,11 @@ rule τ Cat_grpd  ↪ Cat;
 // `Grpd_cat` plays the role of the category of groupoids/sets (discrete fibrations classifier).     // analogue of Set/Type-as-a-category
 constant symbol Grpd_cat : Cat;                                                                     // category of ∞-groupoids
 rule Obj Grpd_cat ↪ Grpd_grpd;                                                                        // objects of Grpd_cat decode to Grpd
-// unif_rule τ (Obj $A) ≡ Grpd ↪ [ $A ≡ Grpd_cat ];                                                     // infer A ≡ Grpd_cat when Obj(A) decodes to Grpd
 rule τ (Obj (@Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);                                                  // morphisms in Grpd_cat are functions
 
 // `Cat_cat` is the category of categories (fibrations classifier).                                  // Cat of categories
 constant symbol Cat_cat : Cat;                                                                      // category of categories
 rule Obj Cat_cat ↪ Cat_grpd;                                                                          // objects of Cat_cat decode to Cat
-// unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
 rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                                                            // morphisms in Cat_cat are functors
 
 // Sanity: the intended decoding holds by definitional computation.                                   // τ(Obj Grpd_cat) ≡ Grpd, τ(Obj Cat_cat) ≡ Cat
