@@ -183,6 +183,18 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   Π (g: τ (Obj (@Hom_cat A Y_A Z_A))), Π (f: τ (Obj (@Hom_cat A X_A Y_A))),                                // composable morphisms g ∘ f
   τ (Obj (@Hom_cat A X_A Z_A));                                                                           // composite morphism in Hom_cat_A(X,Z)
 
+// Id and composition in the opposite category compute by forgetting the `Op_cat` wrapper.             // (Aᵒᵖ) has same identities, reversed composition
+rule @Id (Op_cat $A) $X ↪ @Id $A $X;
+
+// If g : Hom_{Aᵒᵖ}(Y,Z) and f : Hom_{Aᵒᵖ}(X,Y), then g∘f in Aᵒᵖ is f∘g in A.                             // reverse order
+rule @comp_fapp0 (Op_cat $A) $X $Y $Z $g $f ↪ @comp_fapp0 $A $Z $Y $X $f $g;
+
+// Sanity: identities/composition of Aᵒᵖ compute to those of A (with reversed order).                   // unit tests for the rewrite rules above
+assert (A : Cat) (X : τ (Obj A)) ⊢ @Id (Op_cat A) X ≡ @Id A X;
+assert (A : Cat) (X Y Z : τ (Obj A))
+  (g : τ (Obj (@Hom_cat (Op_cat A) Y Z))) (f : τ (Obj (@Hom_cat (Op_cat A) X Y))) ⊢
+  @comp_fapp0 (Op_cat A) X Y Z g f ≡ @comp_fapp0 A Z Y X f g;
+
 /*
   MAINTENANCE INVENTORY (emdash2.lp)
 
@@ -209,8 +221,8 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   (B) `Op_cat A` (opposite category)
     - `Obj (Op_cat A)`: [OK] `Obj (Op_cat A) ↪ Obj A`.
     - `Hom_cat (Op_cat A) X Y`: [OK] `Hom_cat (Op_cat A) X Y ↪ Hom_cat A Y X`.
-    - `Id (Op_cat A) X`: [TODO] expected: `Id (Op_cat A) X ↪ Id A X`.
-    - `comp_fapp0 (Op_cat A) g f`: [TODO] expected “reverse order” computation:
+    - `Id (Op_cat A) X`: [OK] `Id (Op_cat A) X ↪ Id A X`.
+    - `comp_fapp0 (Op_cat A) g f`: [OK] “reverse order” computation:
         if `g : Hom_{Aᵒᵖ}(Y,Z)` and `f : Hom_{Aᵒᵖ}(X,Y)`, then
         `comp_fapp0 (Op_cat A) X Y Z g f` should compute to `comp_fapp0 A Z Y X f g`.
 
