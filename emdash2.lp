@@ -110,6 +110,10 @@ builtin "eqind" ≔ ind_eq;                                                     
 // Pattern: `unif_rule ... ↪ [ tt ≡ tt ]` gives an unconditional unification hint.                   // used in cartierSolution13.lp
 inductive unit : TYPE ≔ | tt : unit;                                                               // unit type with sole inhabitant
 
+// Universe code for the unit type (so we can make `Obj Terminal_cat` compute definitionally).       // unit as a Grpd-code
+constant symbol Unit_grpd : Grpd;
+rule τ Unit_grpd ↪ unit;
+
 // -------------------------------------------------------------------------------------------------
 // 3. Natural numbers (used as a dimension/index type in drafts)                                     // globular/simplicial indices
 // -------------------------------------------------------------------------------------------------
@@ -227,14 +231,12 @@ assert (A : Cat) (X Y Z : τ (Obj A))
         `comp_fapp0 (Op_cat A) X Y Z g f` should compute to `comp_fapp0 A Z Y X f g`.
 
   (C) `Terminal_cat`
-    - `Obj Terminal_cat`: [TODO/HARD] if we want definitional computation, we likely need a “unit groupoid”
-      code `Unit_grpd : Grpd` with `τ Unit_grpd ↪ unit`, then set `Obj Terminal_cat ↪ Unit_grpd`.
-      (Then `Terminal_obj : τ (Obj Terminal_cat)` lives in `unit`; we can either *define*
-      `Terminal_obj ≔ tt` or keep `Terminal_obj` primitive and add a computation rule
-      `Terminal_obj ↪ tt` if we want evaluation-by-rewriting to collapse it to `tt`.)
-    - `Hom_cat Terminal_cat _ _`: [TODO] expected: always `Terminal_cat` (terminal hom-category).
-    - `Id Terminal_cat _`: [TODO] expected: always `Terminal_obj`.
-    - `comp_fapp0 Terminal_cat _ _ _ _ _`: [TODO] expected: always `Terminal_obj`.
+    - `Obj Terminal_cat`: [OK] `Obj Terminal_cat ↪ Unit_grpd` with `τ Unit_grpd ↪ unit`.
+      (Then `Terminal_obj : τ (Obj Terminal_cat)` lives in `unit`. We keep `Terminal_obj` as a stable
+       constant head (no `Terminal_obj ↪ tt` rule yet) to avoid collapsing normal forms to `tt`.)
+    - `Hom_cat Terminal_cat _ _`: [OK] `Hom_cat Terminal_cat _ _ ↪ Terminal_cat`.
+    - `Id Terminal_cat _`: [OK] `Id Terminal_cat _ ↪ Terminal_obj`.
+    - `comp_fapp0 Terminal_cat _ _ _ _ _`: [OK] `comp_fapp0 Terminal_cat ... ↪ Terminal_obj`.
     - (baseline note) In `cartierSolution13.lp`, there are also special-case computation rules like
       `Terminal_func Terminal_cat ↪ Id_func`. In emdash2, this is still [TODO] (and depends on how we
       decide to represent `Obj Terminal_cat`).
@@ -251,7 +253,7 @@ assert (A : Cat) (X Y Z : τ (Obj A))
       the unit groupoid can reduce).
 
   (E) `Functor_cat A B` (functor category, objects = functors)
-    - `Obj (Functor_cat A B)`: [TODO/by-design] intentionally abstract: we do *not* aim for a general
+    - `Obj (Functor_cat A B)`: [OK/by-design] intentionally abstract: we do *not* aim for a general
       computation rule exposing “functor data” as a Σ/record in emdash2 (so there is no global
       `τ (Obj (Functor_cat A B)) ↪ ...` rule).
     - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
@@ -276,9 +278,9 @@ assert (A : Cat) (X Y Z : τ (Obj A))
         are the intended way to *use* a transfor without exposing its internal object encoding.
       In that sense, deciding `Obj(Transf_cat F G)` and `Hom_cat(Transf_cat F G) ϵ ϵ'` is not urgent
       unless we want definitional `Id/comp_fapp0` in `Functor_cat A B` (since its homs reduce to transfors).
-    - `Obj (Transf_cat F G)`: [TODO/by-design] kept abstract for now (no Σ/record encoding).
-    - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [TODO] will matter once we formalize modifications/3-cells explicitly.
-    - `Id/comp_fapp0` in `Transf_cat`: [TODO] when we introduce these, we should simultaneously decide the
+    - `Obj (Transf_cat F G)`: [OK/by-design] kept abstract for now (no Σ/record encoding).
+    - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [OK] will matter once we formalize modifications/3-cells explicitly.
+    - `Id/comp_fapp0` in `Transf_cat`: [OK] when we introduce these, we should simultaneously decide the
       computation behavior of the projection functors (`tapp*` / displayed `tdapp*`) on identities and
       composites, i.e. “components of (ϵ₂ ∘ ϵ₁) are (components of ϵ₂) ∘ (components of ϵ₁)”
       at the level of `tapp0_fapp0` / `tdapp0_fapp0` (and, for higher cells, via `tapp1_fapp1_func`
@@ -903,6 +905,12 @@ constant symbol Terminal_cat : Cat;                                             
 // Terminal category is self-dual.                                                                    // 1ᵒᵖ ≡ 1
 rule Op_cat Terminal_cat ↪ Terminal_cat;
 
+// Objects of the terminal category are definitionally the unit type.                                 // Obj(1) ≡ 1
+rule Obj Terminal_cat ↪ Unit_grpd;
+
+// Every hom-category in the terminal category is terminal.                                           // Hom_1(*,*) ≡ 1
+rule @Hom_cat Terminal_cat _ _ ↪ Terminal_cat;
+
 // The unique functor A → 1 (terminal functor).                                                       // ! : A → 1
 injective symbol Terminal_func : Π (A : Cat), τ (Obj (Functor_cat A Terminal_cat));                      // object of Functor_cat(A,1)
 
@@ -912,6 +920,10 @@ rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 // Distinguished object * : Obj(1) (everything is definitionally equal to it via rules if desired).  // point of the terminal category
 constant symbol Terminal_obj : τ (Obj Terminal_cat);                                                 // * : Obj(1)
 
+// Identities and composition in the terminal category are the unique object.                         // id_* = * and *∘* = *
+rule @Id Terminal_cat _ ↪ Terminal_obj;
+rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
+
 // “Object as functor”: an object y:Obj(Y) induces a functor 1 → Y selecting y.                       // points as functors
 injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor_cat Terminal_cat Y));               // y ↦ (1→Y) picking y
 
@@ -920,6 +932,14 @@ rule @Op_func _ _ (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
 
 // Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
 rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
+
+// Sanity: the intended definitional computations for `Terminal_cat` fire.                            // unit tests
+assert ⊢ τ (Obj Terminal_cat) ≡ unit;
+assert (x y : τ (Obj Terminal_cat)) ⊢ @Hom_cat Terminal_cat x y ≡ Terminal_cat;
+assert (x : τ (Obj Terminal_cat)) ⊢ @Id Terminal_cat x ≡ Terminal_obj;
+assert (x y z : τ (Obj Terminal_cat))
+  (g : τ (Obj (@Hom_cat Terminal_cat y z))) (f : τ (Obj (@Hom_cat Terminal_cat x y))) ⊢
+  @comp_fapp0 Terminal_cat x y z g f ≡ Terminal_obj;
 
 // -------------------------------------------------------------------------------------------------
 // 12b. Constant displayed categories over the terminal base                                         // “cast” Cat ↦ Catd(1)
