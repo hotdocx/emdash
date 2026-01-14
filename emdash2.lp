@@ -802,7 +802,7 @@ rule @Op_func _ $B (@Total_proj_func $B $E)
       where `f_!(u)` denotes the transported object `M(f)(u)` in the fibre over `y`.
 
   To make identity and composition *typecheck* by definitional equality, we introduce an explicit
-  “transport on objects” operation `isoFib_transport0` and give it strict functoriality rules on
+  “transport on objects” operation `fib_cov_tapp0_fapp0` and give it strict functoriality rules on
   objects (preservation of identities and composition).
 
   This is intentionally strict for now (non-lax), as requested; later we can relax it by replacing
@@ -811,25 +811,25 @@ rule @Op_func _ $B (@Total_proj_func $B $E)
 
 // Transport objects in the fibre along a base 1-cell (covariant).                                    // M(f) on objects
 // Usual notation: `f_!(u)` or `M(f)(u)` (opfibration / covariant transport on objects).               // f_! : M(x) → M(y) (on objects)
-sequential symbol isoFib_transport0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+sequential symbol fib_cov_tapp0_fapp0 : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (f : τ (Obj (@Hom_cat B x y))), Π (u : τ (Obj (fapp0 M x))),
   τ (Obj (fapp0 M y));
 
-// Canonicalization: compute (M(f))(u) *towards* `isoFib_transport0 M f u`.                             // fold transport0
+// Canonicalization: compute (M(f))(u) *towards* `fib_cov_tapp0_fapp0 M f u`.                             // fold transport0
 // Usual notation: `M(f)(u) ↦ f_!(u)`.                                                                 // fold to the transport head
-// This keeps `isoFib_transport0` as the stable head symbol (like `comp_fapp0`), so later
+// This keeps `fib_cov_tapp0_fapp0` as the stable head symbol (like `comp_fapp0`), so later
 // object-level functoriality rules apply without unfolding.
 rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
-  ↪ @isoFib_transport0 $B $M $x $y $f $u;
+  ↪ @fib_cov_tapp0_fapp0 $B $M $x $y $f $u;
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
 // Usual notation: `(id_x)_!(u) = u`.                                                                  // id_! = id
-rule @isoFib_transport0 $B $M $x $x (Id $B $x) $u ↪ $u;
+rule @fib_cov_tapp0_fapp0 $B $M $x $x (Id $B $x) $u ↪ $u;
 
 // Strict functoriality on objects (cut-elimination direction): M(g)(M(f)(u)) ↪ M(g∘f)(u).             // fold transport along ∘
 // Usual notation: `g_!(f_!(u)) = (g ∘ f)_!(u)`.                                                       // g_!∘f_! ↪ (g∘f)_!
-rule @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u)
-  ↪ @isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u;
+rule @fib_cov_tapp0_fapp0 $B $M $y $z $g (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u)
+  ↪ @fib_cov_tapp0_fapp0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u;
 
 /*
   Fibre action as a functor (swap arguments / “module action”, ω-style)
@@ -837,10 +837,10 @@ rule @isoFib_transport0 $B $M $y $z $g (@isoFib_transport0 $B $M $x $y $f $u)
   Given a Cat-valued functor M : B → Cat_cat, a base object x : Obj(B), and a fibre object u : Obj(M(x)),
   we want the induced functor
 
-    isoFib_transport_func(M,x,u,y) : Hom_B(x,y) → M(y)
+    fib_cov_tapp0_func(M,x,u,y) : Hom_B(x,y) → M(y)
 
   sending f : x→y to M(f)(u). In our encoding, M(f)(u) is normalized to the stable head
-  `isoFib_transport0 M f u` (see the folding rule above).
+  `fib_cov_tapp0_fapp0 M f u` (see the folding rule above).
 
   Crucially, this *is* functorial in higher cells: a 2-cell α : f ⇒ g in the hom-category Hom_B(x,y)
   is mapped to the morphism in M(y) obtained by:
@@ -1147,7 +1147,7 @@ rule @Op_catd $Z (Product_catd $U $A)
 // Pointwise product of Cat-valued functors.                                                           // (E⊗D)(z) = E(z)×D(z)
 // Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
 // Design note: `prod_func` is a primitive *rewrite head* (not a definitional abbreviation).           // keep a stable head for rewriting
-// Motivation (same pattern as `tapp0_fapp0` and `isoFib_transport0`):
+// Motivation (same pattern as `tapp0_fapp0` and `fib_cov_tapp0_fapp0`):
 //   - A definition `prod_func E D ≔ (prod_cat) ∘ ⟨E,D⟩` would expand to a large `comp_fapp0`
 //     term in `Cat_cat`, which is expensive/fragile to unfold inside other rewrite rules.
 //   - Making `prod_func` primitive gives a small, stable head so rules like
@@ -1262,7 +1262,7 @@ rule @fdapp0 Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@Lift_funcd1 $A $B $F
 // Scope/intent:
 //   This computation is only asserted when both E and D come from Grothendieck constructions
 //   (`IsoFibration_catd E0`, `IsoFibration_catd D0`), because the transport `f_!(W)` uses the strict
-//   opfibration-style object transport `isoFib_transport0` induced by a Cat-valued functor.           // keep Catd semantic, compute only for ∫(−)
+//   opfibration-style object transport `fib_cov_tapp0_fapp0` induced by a Cat-valued functor.           // keep Catd semantic, compute only for ∫(−)
 //
 // Here the input object is written in the normal form produced by the Grothendieck/product rules:
 //   (z,(d,f)) is encoded as `Struct_sigma z (Struct_sigma d f)`, where
@@ -1273,7 +1273,7 @@ rule fapp0 (@homd_cov $Z (@IsoFibration_catd $Z $E0) $W_Z $W
 		              (@IsoFibration_catd $Z $D0) $FF)
 		            (Struct_sigma $z (Struct_sigma $d $f))
   ↪ @Hom_cat (fapp0 $E0 $z)
-      (@isoFib_transport0 $Z $E0 $W_Z $z $f $W)
+      (@fib_cov_tapp0_fapp0 $Z $E0 $W_Z $z $f $W)
       (@fdapp0 $Z (@IsoFibration_catd $Z $D0) (@IsoFibration_catd $Z $E0) $FF $z $d);
 
 /*
@@ -1356,51 +1356,51 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
 /*
-  module_action_cat (ω-style “swap arguments”, as a transfor)
+  fib_cov_transf (ω-style “swap arguments”, as a transfor)
 
   This is the ω-analogue of `module_action` in emdash.lp, but in the Cat-valued setting:
 
     given M : B → Cat and a fibre object u ∈ M(x),
     we package the action f ↦ M(f)(u) as a transfor
-      module_action_cat(M,x,u) : hom_cov(x,Id) ⇒ M.
+      fib_cov_transf(M,x,u) : hom_cov(x,Id) ⇒ M.
 
   Its “component at y” (in the sense of `tapp0_fapp0`) is the functor
     Hom_B(x,y) → M(y),
-  and we define the derived helper `isoFib_transport_func` to be precisely that component.
+  and we define the derived helper `fib_cov_tapp0_func` to be precisely that component.
 
   Architecture note (subject to review):
-  - `module_action_cat` is the primitive/naturality-style package (good for ω-iteration).
-  - `isoFib_transport_func` is *not* the “real content”; it is a stable-head *normal form* for the
+  - `fib_cov_transf` is the primitive/naturality-style package (good for ω-iteration).
+  - `fib_cov_tapp0_func` is *not* the “real content”; it is a stable-head *normal form* for the
     component functor, so we can attach object-/hom-action computation rules without forcing expansion
     of `tapp0_fapp0` into `fdapp0 ...` during conversion/subject-reduction checks.
   - If/when the transfor infrastructure becomes robust enough, we may be able to drop this extra head
-    and compute directly on `tapp0_fapp0 (... module_action_cat ...)` instead.
+    and compute directly on `tapp0_fapp0 (... fib_cov_transf ...)` instead.
 */
 
-symbol module_action_cat : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+symbol fib_cov_transf : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π (x : τ (Obj B)), τ (Obj (fapp0 M x))
     → τ (Obj (Transf_cat (@hom_cov B x B (@Id_func B)) M));
 
 // Functorial “action on a fixed fibre object”: (y ↦ (f ↦ M(f)(u))).                                  // u ↦ (Hom(x,-) → M(-))
-// NOTE: we keep `isoFib_transport_func` as a *stable head* (like `isoFib_transport0`) so we can attach
+// NOTE: we keep `fib_cov_tapp0_func` as a *stable head* (like `fib_cov_tapp0_fapp0`) so we can attach
 // object-/hom-action computation rules to it without forcing expansion of the underlying transfor.
-symbol isoFib_transport_func : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
+symbol fib_cov_tapp0_func : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))),
   τ (Obj (Functor_cat (@Hom_cat B x y) (fapp0 M y)));
 
-// Component at y (as a functor in Cat_cat): (module_action_cat u)_y ↪ isoFib_transport_func(u,y).      // unpack module_action at y
-rule @tapp0_fapp0 $B Cat_cat (@hom_cov $B $x $B (@Id_func $B)) $M $y (@module_action_cat $B $M $x $u)
-  ↪ @isoFib_transport_func $B $M $x $y $u;
+// Component at y (as a functor in Cat_cat): (fib_cov_transf u)_y ↪ fib_cov_tapp0_func(u,y).      // unpack module_action at y
+rule @tapp0_fapp0 $B Cat_cat (@hom_cov $B $x $B (@Id_func $B)) $M $y (@fib_cov_transf $B $M $x $u)
+  ↪ @fib_cov_tapp0_func $B $M $x $y $u;
 
-// Object-action: apply M to f, then to u (folded to `isoFib_transport0`).                              // f ↦ f_!(u)
-rule fapp0 (@isoFib_transport_func $B $M $x $y $u) $f
-  ↪ @isoFib_transport0 $B $M $x $y $f $u;
+// Object-action: apply M to f, then to u (folded to `fib_cov_tapp0_fapp0`).                              // f ↦ f_!(u)
+rule fapp0 (@fib_cov_tapp0_func $B $M $x $y $u) $f
+  ↪ @fib_cov_tapp0_fapp0 $B $M $x $y $f $u;
 
-// Hom-action of isoFib_transport_func (2-cells): evaluate M(α) at u.                                  // (isoFib_transport_func)_1(α) = (M(α))_u
+// Hom-action of fib_cov_tapp0_func (2-cells): evaluate M(α) at u.                                  // (fib_cov_tapp0_func)_1(α) = (M(α))_u
 rule @fapp0 (@Hom_cat (@Hom_cat $B $x $y) $f $g)
     _
     (@fapp1_func (@Hom_cat $B $x $y) (fapp0 $M $y)
-      (@isoFib_transport_func $B $M $x $y $u) $f $g) $α
+      (@fib_cov_tapp0_func $B $M $x $y $u) $f $g) $α
   ↪ @tapp0_fapp0 (fapp0 $M $x) (fapp0 $M $y)
       (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f)
       (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $g)
@@ -1425,7 +1425,7 @@ symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
 
 // Definable expansion (do NOT unfold by rewriting; keep `Groth_hom_fam` as a stable head for typing).  // avoids conversion blowups in homs of ∫M
 // This is the intended definition:
-//   Groth_hom_fam_def(u,v) = hom_con(v,Id) ∘ (isoFib_transport_func(u))^op.
+//   Groth_hom_fam_def(u,v) = hom_con(v,Id) ∘ (fib_cov_tapp0_func(u))^op.
 symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
   : τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat))
@@ -1434,12 +1434,12 @@ symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
      (Op_cat (fapp0 M y))
      Cat_cat
      (@hom_con (fapp0 M y) v (fapp0 M y) (@Id_func (fapp0 M y)))
-     (@Op_func (@Hom_cat B x y) (fapp0 M y) (@isoFib_transport_func B M x y u));
+     (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u));
 
 // β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).        // compute family at a base arrow
 // Usual notation: `H_{u,v}(f) = Hom_{M(y)}(f_!(u), v)`.                                                // expand on objects
 rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
-  ↪ @Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y $f $u) $v;
+  ↪ @Hom_cat (fapp0 $M $y) (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u) $v;
 
 // Grothendieck hom-category is itself a Grothendieck total.                                            // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
 // Usual notation (opfibration Grothendieck formula):
@@ -1478,7 +1478,7 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
   τ (Obj (@Hom_cat (Total_cat (@IsoFibration_catd B M)) (Struct_sigma x u) (Struct_sigma y v)))
     ≡ `τΣ_ f : τ (Obj (@Hom_cat B x y)),
-         Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v);
+         Obj (@Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v);
 
 // Sanity: π₁ sends a 1-cell (f,α) to its base arrow f.                                                 // projection on 1-cells
 // This is the key “forget the fibre component” behavior of the Grothendieck projection on morphisms:
@@ -1486,7 +1486,7 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
 assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
   (f : τ (Obj (@Hom_cat B x y)))
-  (α : τ (Obj (@Hom_cat (fapp0 M y) (@isoFib_transport0 B M x y f u) v))) ⊢
+  (α : τ (Obj (@Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v))) ⊢
   fapp0
     (@fapp1_func (Total_cat (@IsoFibration_catd B M)) B (Total_proj_func (IsoFibration_catd M))
       (Struct_sigma x u) (Struct_sigma y v))
@@ -1516,15 +1516,15 @@ rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
   ↪ Struct_sigma
       (@comp_fapp0 $B $x $y $z $g $f)
       (@comp_fapp0 (fapp0 $M $z)
-        (@isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
-        (@isoFib_transport0 $B $M $y $z $g $v)
+        (@fib_cov_tapp0_fapp0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
+        (@fib_cov_tapp0_fapp0 $B $M $y $z $g $v)
         $w
         $β
         (@fapp0
-          (@Hom_cat (fapp0 $M $y) (@isoFib_transport0 $B $M $x $y $f $u) $v)
+          (@Hom_cat (fapp0 $M $y) (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u) $v)
           (@Hom_cat (fapp0 $M $z)
-            (@isoFib_transport0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
-            (@isoFib_transport0 $B $M $y $z $g $v))
+            (@fib_cov_tapp0_fapp0 $B $M $x $z (@comp_fapp0 $B $x $y $z $g $f) $u)
+            (@fib_cov_tapp0_fapp0 $B $M $y $z $g $v))
           (@fapp1_func
             (fapp0 $M $y)
             (fapp0 $M $z)
@@ -1533,7 +1533,7 @@ rule @comp_fapp0 (Total_cat (@IsoFibration_catd $B $M))
               (Functor_cat (fapp0 $M $y) (fapp0 $M $z))
               (@fapp1_func $B Cat_cat $M $y $z)
               $g)
-            (@isoFib_transport0 $B $M $x $y $f $u)
+            (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u)
             $v)
           $α));
 
