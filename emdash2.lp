@@ -244,9 +244,16 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
       `τ (Obj (Functor_cat A B)) ↪ ...` rule).
     - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
     - `Id/comp_fapp0` inside `Functor_cat A B`: [TODO] should be the usual “vertical” identity/composition
-      of transfors; operationally this is most useful when expressed as computation rules for projections:
-        • components of `Id` / `comp_fapp0` computed by `tapp0_fapp0` (pointwise in `B`),
-        • higher components (modifications) computed by `tapp1_fapp1_func` / displayed analogues.
+      of transfors. We currently do *not* expose these by definitional rules on `Id` / `comp_fapp0` directly.
+      Instead, the operational interface is via projections/packagings:
+        • (Id-instantiation at the “superscripted component” level)
+            `tapp1_fapp0_funcd ... (Id (Functor_cat A B) F)` folds to `fapp1_funcd ...` (stable head).
+        • (pointwise 1-cell components of transfors)
+            extracted by `tapp0_fapp0` (ordinary) and `tdapp0_fapp0` (displayed).
+        • (higher components / modifications)
+            a modification α : Hom_{Transf_cat(F,G)}(ϵ,ϵ') is *repackaged* by `tapp1_fapp1_func`
+            (and `tdapp1_fapp1_func`) as a displayed transformation in `Transfd_cat`,
+            whose pointwise components are then extracted by `tdapp0_fapp0`.
 
   (F) `Transf_cat F G` (transformations / transfors)
     - Main computational interface (what we *do* have):
@@ -258,7 +265,9 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
     - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [TODO] will matter once we formalize modifications/3-cells explicitly.
     - `Id/comp_fapp0` in `Transf_cat`: [TODO] when we introduce these, we should simultaneously decide the
       computation behavior of the projection functors (`tapp*` / displayed `tdapp*`) on identities and
-      composites, i.e. “components of (ϵ₂ ∘ ϵ₁) are (components of ϵ₂) ∘ (components of ϵ₁)”.
+      composites, i.e. “components of (ϵ₂ ∘ ϵ₁) are (components of ϵ₂) ∘ (components of ϵ₁)”
+      at the level of `tapp0_fapp0` / `tdapp0_fapp0` (and, for higher cells, via `tapp1_fapp1_func`
+      landing in `Transfd_cat` + component extraction by `tdapp0_fapp0`).
 
   (G) Classifier categories `Grpd_cat` and `Cat_cat`
     - Intended: `τ (Obj Grpd_cat) ≡ Grpd` and `τ (Obj Cat_cat) ≡ Cat`.
@@ -1756,6 +1765,16 @@ rule @tdapp1_fapp0_funcd $Z $E $D $FF $FF $X_Z $U_EX (Id (Functord_cat $E $D) $F
   ↪ @fdapp1_funcd $Z $E $D $FF $X_Z $U_EX;
 
 // The action of a displayed (2-)transformation on a displayed (3-)modification: fapp1_func-part of `tdapp1_func_funcd`. // displayed “components of components”
+//
+// Conceptual note (why this matters):
+// A “displayed modification” is, by definition, a 3-cell between displayed transfors:
+//   α : Hom_{Transfd_cat(FF,GG)}(ϵ,ϵ').
+// Instead of introducing a separate bespoke notion of “components of modifications”, we *repackage* α
+// as an ordinary (displayed) transformation between the already-packaged component functors:
+//   fapp0 (tdapp1_fapp1_func ... X U ϵ ϵ') α
+//     : Obj(Transfd_cat( tdapp1_fapp0_funcd ... ϵ,  tdapp1_fapp0_funcd ... ϵ')).
+// Once in `Transfd_cat`, all the existing projection infrastructure applies uniformly (notably `tdapp0_fapp0`
+// to extract pointwise components), so “modification” becomes “dependent transformation data” operationally.
 symbol tdapp1_fapp1_func : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],       // base+displayed cats and functors
   Π (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))),                                                  // external projection index (in a fibre)
   Π [ϵ : τ (Obj (Transfd_cat FF GG))], Π [ϵ' : τ (Obj (Transfd_cat FF GG))],                                        // displayed transfors ϵ ⇒ ϵ'
@@ -1769,8 +1788,22 @@ rule @fapp1_func _ _ (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ $ϵ'
   ↪ @tdapp1_fapp1_func $Z $E $D $FF $GG $X_Z $U_EX $ϵ $ϵ';
 
 // The action of a (2-)transformation on a (3-)modification: fapp1_func-part of `tapp1_func_funcd`.               // “components of components”
-// If α : Hom_{Transf_cat(F,G)}(ϵ,ϵ') is a modification, then `tapp1_fapp1_func X ϵ ϵ'` transports α to a        // functoriality of component-evaluation
-// dependent transformation between the dependent functors `tapp1_fapp0_funcd X ϵ` and `tapp1_fapp0_funcd X ϵ'`.     // (codomain hom is Transfd_cat by the rule above)
+//
+// Conceptual note (no new primitive notion of “modification” needed operationally):
+//
+// A “modification” between transfors is, by definition, a 3-cell
+//   α : Hom_{Transf_cat(F,G)}(ϵ,ϵ').
+// After fixing the external index X, we already have the component-packaging functors
+//   ϵ^X, (ϵ')^X : Obj(Functord_cat(Hom_A(X,−), Hom_B(FX,G−))).
+//
+// `tapp1_fapp1_func` is precisely the functorial map that *repackages* a modification α into a
+// displayed transformation between those packaged component functors:
+//   fapp0 (tapp1_fapp1_func ... X ϵ ϵ') α
+//     : Obj(Transfd_cat( tapp1_fapp0_funcd ... X ϵ,  tapp1_fapp0_funcd ... X ϵ')).
+//
+// In other words, “modification” is not treated as a standalone computational primitive here:
+// it is converted into (dependent) transformation data (`Transfd_cat`), and then all existing
+// operations/projections for transformations apply (notably `tdapp0_fapp0` to extract pointwise components).
 symbol tapp1_fapp1_func : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],                     // base categories and functors
   Π (X_A : τ (Obj A)),                                                                                   // external projection index
   Π [ϵ : τ (Obj (Transf_cat F_AB G_AB))], Π [ϵ' : τ (Obj (Transf_cat F_AB G_AB))],                               // transformations ϵ ⇒ ϵ'
