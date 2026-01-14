@@ -1149,6 +1149,16 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
     (Total_cat (Product_catd D (IsoFibration_catd (comp_func_cat op (hom_cov W_Z (@Id_func Z))))))
     Cat_cat));                                                                                            // target category Cat_cat (Cat-valued functors)
 
+// Base category for the Grothendieck totals used by `homd_cov` in the common “D := A” specialization. // stable head for big base
+// This is the category whose objects are “(z, (d, f))” with:
+//   - z : Obj(Z),
+//   - d : Obj(Fibre_cat A z),
+//   - f : Obj(Hom_cat Z X_ z)  (the extra “base edge” along which we transport).
+// Keeping this as a named head helps keep later `Fibre_func` extractions readable and stable.
+symbol homd_base_cat : Π [Z : Cat], Π (A : Catd Z), Π (X_ : τ (Obj Z)), Cat;
+rule @homd_base_cat $Z $A $X_
+  ↪ Total_cat (Product_catd $A (IsoFibration_catd (comp_func_cat op (hom_cov $X_ (@Id_func $Z)))));
+
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (Obj (Fibre_cat E X_Z)) → τ (Obj (Fibre_cat D X_Z));                         // map objects in each fibre
@@ -1535,13 +1545,17 @@ constant symbol tapp_lax_triangle :
           Y2
           (@comp_fapp0 A X Y1 Y2 g f))));
 
-// “Slice-category” / simplicial action: fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
+// “Slice-category” / simplicial action (warm-up): fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
+// NOTE: the “simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (IsoFibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (IsoFibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
 
 // Fibrewise identification: the fibre of the displayed packaging is the usual hom-action functor.     // fapp1_func = Fibre_func(fapp1_funcd)
+// Design note:
+//   This is a functor-level slogan (“fapp1_func is the fibre of fapp1_funcd”), not just a pointwise fact.
+//   It matters when later constructions expect functor objects as inputs (transfors/modifications), not merely their object-action.
 rule @Fibre_func $A _ _ (@fapp1_funcd $A $B $F_AB $X_A) $Y_A
   ↪ @fapp1_func $A $B $F_AB $X_A $Y_A;
 
@@ -1561,11 +1575,36 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) ⊢
   Fibre_func (fapp1_funcd F [X]) Y ≡ fapp1_func F [X] [Y];
 
 // Application of a dependent functor on morphisms (still draft: depends on `homd_cov`).              // fibred fapp1_func
+// If `homd_cov` is the “triangle/surface classifier”, then `fdapp1_funcd` is where the simplicial story starts in earnest:
+// it should act on dependent-hom data that lives over base edges (and later higher simplices).
+//
+// A fibrewise ordinary functor can always be extracted by `Fibre_func (fdapp1_funcd F X_) p`, for a chosen base point `p`
+// of the base category of those `IsoFibration_catd (homd_cov ...)` terms. If this becomes too verbose inside rewrite rules,
+// introduce a stable head specialized to the intended base point normal form (same “stable head” pattern as `tapp0_fapp0`, `prod_func`, etc.).
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),          // dependent functor F : A→B
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),                                                    // base object X_ and fibre object X
   τ (Obj (Functord_cat
     (IsoFibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A)))                                       // source hom in fibre (placeholder)
     (IsoFibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F))));                              // target hom in fibre (placeholder)
+
+// Stable-head fibre functor extracted from `fdapp1_funcd` (for uniformity and readability).           // Fibre_func(fdapp1_funcd)
+// This packages the fibrewise action as an ordinary functor between the corresponding fibre categories.
+symbol fdapp1_func : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),
+  Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),
+  Π (p : τ (Obj (@homd_base_cat Z A X_))),
+  τ (Obj (Functor_cat
+     (Fibre_cat (IsoFibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A))) p)
+     (Fibre_cat (IsoFibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F)) p)));
+
+// β-rule: `fdapp1_func` is definitionally the fibre functor of `fdapp1_funcd`.                         // unpack fdapp1_func
+rule @fdapp1_func $Z $A $B $F $X_ $X $p
+  ↪ @Fibre_func (@homd_base_cat $Z $A $X_) _ _
+      (@fdapp1_funcd $Z $A $B $F $X_ $X) $p;
+
+// Sanity: `fdapp1_func` is just `Fibre_func` of `fdapp1_funcd` (stable-head view).                     // exercise fdapp1_func rule
+assert [Z : Cat] [A B : Catd Z] (F : τ (Obj (Functord_cat A B)))
+  [X_ : τ (Obj Z)] (X : τ (Obj (Fibre_cat A X_))) (p : τ (Obj (@homd_base_cat Z A X_))) ⊢
+  @fdapp1_func Z A B F X_ X p ≡ @Fibre_func (@homd_base_cat Z A X_) _ _ (@fdapp1_funcd Z A B F X_ X) p;
 
 // Dependent transformations between dependent functors (displayed natural transformations).          // displayed transfors
 constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                                 // base and displayed categories
