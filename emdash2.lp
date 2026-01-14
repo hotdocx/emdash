@@ -648,6 +648,20 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Obj (Functor_cat A B)
     letting us iterate: modifications → transformations between those component-functors → higher cells.
   - Extreme visualization: if A is Terminal_cat (only one X), then “projecting at X” is trivial and
     tapp becomes close to the idea that a natural transformation can be presented as a functorial object.
+
+  Observation (common generalization; guided by types):
+
+  `tapp1_func_funcd` is a “single ancestor” of:
+  - `fapp1_funcd` (functorial action on homs, packaged as a displayed functor):
+      specialize to the identity transfor ϵ := 1_F : Nat(F,F),
+      then the packaged component (1_F)^X is definitionally `fapp1_funcd F [X]` (by the Id-folding rule).
+
+  - `tapp0_func` (ordinary pointwise component evaluation):
+      specialize the external index to X := Y and then evaluate ϵ^Y at the identity arrow id_Y,
+      yielding the usual component ϵ_Y : Hom_B(FY,GY), packaged as a functor in ϵ.
+
+  So `tapp1_func_funcd` plays the role “project-to-a-functor between representables”, from which both
+  “apply F to a 1-cell” and “extract the component ϵ_Y” arise as specializations.
 */
 symbol tapp1_func_funcd : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],                      // domain/codomain categories and functors
   Π (X_A: τ (Obj A)),                                                                                   // external/superscript projection index
@@ -1640,10 +1654,26 @@ constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                  
   Think “superscripted component”: for ϵ : Transfd_cat(F,G), we get ϵ^(X_,X) as a dependent functor between
   displayed representables. This is the step that makes iteration possible:
   modifications between displayed transfors project to transfors between these component-functors, etc.
+
+  Observation (common generalization; guided by types):
+
+  `tdapp1_func_funcd` is a “single ancestor” of:
+  - `fdapp1_funcd` (displayed functorial action on dependent-homs, packaged as a displayed functor):
+      specialize to the identity displayed transfor ϵ := 1_FF : Transf_Z(FF,FF),
+      then the packaged component (1_FF)^(X,U) is definitionally `fdapp1_funcd FF [X] U`
+      (by the Id-folding rule).
+
+  - `tdapp0_func` (displayed pointwise component evaluation), which we define below:
+      specialize the external indices to (X,U) := (Y,V) and then evaluate ϵ^(Y,V) at the “identity”
+      in the corresponding displayed representable, yielding the component
+        ϵ_{(Y,V)} : Hom_{D_Y}(FF_Y(V), GG_Y(V)).
+
+  So `tdapp1_func_funcd` is the displayed “project-to-a-functor between displayed representables” operation,
+  from which both “apply FF to dependent-hom data” and “extract the component ϵ_{(Y,V)}” arise.
 */
 symbol tdapp1_func_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
-	   τ (Obj (Functor_cat (Transfd_cat FF GG)
+		   τ (Obj (Functor_cat (Transfd_cat FF GG)
 	          (Functord_cat (IsoFibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (placeholder)
 	                    (IsoFibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)))));        // target hom (placeholder)
 
@@ -1656,6 +1686,47 @@ symbol tdapp1_fapp0_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj
 
 // β-rule: `tdapp1_fapp0_funcd` is definitionally the object-action of the functor `tdapp1_func_funcd`.             // unpack tdapp1_func_funcd at objects
 rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp0_funcd $Z $E $D $FF $GG $X_Z $U_EX $ϵ;
+
+/*
+  tdapp0_func / tdapp0_fapp0 (displayed “component at (Y,V)”)
+
+  This is the displayed analogue of `tapp0_func` / `tapp0_fapp0`.
+
+  Usual notation (displayed categories over a base Z):
+    - FF, GG : E ⟶_Z D  (displayed functors / morphisms in the slice Cat/Z),
+    - ϵ : Transf_Z(FF,GG) (a displayed natural transformation),
+    - choose a base object Y ∈ Obj(Z) and a fibre object V ∈ Obj(E_Y).
+
+  Then the displayed transfor has a pointwise component in the fibre D_Y:
+      ϵ_{(Y,V)} : Hom_{D_Y}( FF_Y(V), GG_Y(V) ).
+
+  In the long-term architecture, this component should be obtained by:
+    (1) forming the packaged “superscripted component” functor ϵ^(Y,V) via `tdapp1_func_funcd`,
+    (2) evaluating it at the “identity” element of the source displayed representable (analogue of id_Y),
+        exactly as `tapp0_fapp0` evaluates ϵ^Y at id_Y.
+
+  However, since `homd_cov` is still a placeholder outside the Grothendieck/Grothendieck case, we
+  currently expose this component as its own stable-head projection `tdapp0_fapp0`, packaged functorially
+  as `tdapp0_func` (so modifications act componentwise, mirroring `tapp0_func`).
+*/
+
+// For fixed (Y,V), “evaluate at (Y,V)” is functorial in ϵ (a displayed modification acts componentwise). // displayed evaluation
+symbol tdapp0_func : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],
+  Π (Y_Z : τ (Obj Z)), Π (V_EY : τ (Obj (Fibre_cat E Y_Z))),
+  τ (Obj (Functor_cat (Transfd_cat FF GG)
+         (@Hom_cat (Fibre_cat D Y_Z)
+           (@fdapp0 Z E D FF Y_Z V_EY)
+           (@fdapp0 Z E D GG Y_Z V_EY))));
+
+// Object-action of `tdapp0_func`: the pointwise displayed component ϵ_{(Y,V)}.                          // displayed component extraction
+symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],
+  Π (Y_Z : τ (Obj Z)), Π (V_EY : τ (Obj (Fibre_cat E Y_Z))), Π (ϵ : τ (Obj (Transfd_cat FF GG))),
+  τ (Obj (@Hom_cat (Fibre_cat D Y_Z)
+         (@fdapp0 Z E D FF Y_Z V_EY)
+         (@fdapp0 Z E D GG Y_Z V_EY)));
+
+// β-rule: `tdapp0_fapp0` is definitionally the object-action of the functor `tdapp0_func`.              // unpack tdapp0_func at objects
+rule fapp0 (@tdapp0_func $Z $E $D $FF $GG $Y_Z $V_EY) $ϵ ↪ @tdapp0_fapp0 $Z $E $D $FF $GG $Y_Z $V_EY $ϵ;
 
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor_cat(A,B)}(F,G) ≅ Transf_cat(F,G)
 rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;                                                        // definitional equality of homs
@@ -1748,6 +1819,11 @@ assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
 assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) ⊢
   fapp0 (@tdapp1_func_funcd Z E D FF FF X_Z U_EX) (Id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
+
+// tdapp0_fapp0 is the displayed “component at (Y,V)” and is the object-action of tdapp0_func.                  // checks tdapp0 β-rule fires
+assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
+  (Y_Z : τ (Obj Z)) (V_EY : τ (Obj (Fibre_cat E Y_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
+  fapp0 (@tdapp0_func Z E D FF GG Y_Z V_EY) ϵ ≡ @tdapp0_fapp0 Z E D FF GG Y_Z V_EY ϵ;
 
 // tapp1_func_funcd hom-action reduces to tapp1_fapp1_func by rewriting (uses @Hom_cat(Functord_cat..) ≡ Transfd_cat).        // checks tapp fapp1_func β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A))
