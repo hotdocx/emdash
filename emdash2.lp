@@ -767,7 +767,7 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                     
 symbol Total_cat [B : Cat] (E: Catd B) : Cat;                                                        // ∫E : Cat
 
 // Projection π₁ : Total_cat(M) → A (the “base” projection).                                          // comprehension projection
-injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (Total_cat E) B));           // functor object in Functor_cat(∫E, B)
+injective symbol Total_proj1_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (Total_cat E) B));           // functor object in Functor_cat(∫E, B)
 
 // Total of the opposite displayed category is the opposite of the total category.                    // ∫(Eᵒᵖ) ≡ (∫E)ᵒᵖ
 // Orientation choice:
@@ -782,8 +782,8 @@ injective symbol Total_proj_func [B : Cat] (E: Catd B) : τ (Obj (Functor_cat (T
 rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
 
 // The projection of the opposite total is the opposite of the projection.                            // (π₁)ᵒᵖ ≡ π₁
-rule @Op_func _ $B (@Total_proj_func $B $E)
-  ↪ @Total_proj_func (Op_cat $B) (@Op_catd $B $E);
+rule @Op_func _ $B (@Total_proj1_func $B $E)
+  ↪ @Total_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
 // -------------------------------------------------------------------------------------------------
 // 10a. Grothendieck opfibration transport (object-level)                                             // M(f)(u) in the fibre
@@ -859,7 +859,7 @@ rule τ (Obj (Total_cat (@Fibration_catd $B $M)))
   ↪ `τΣ_ x : τ (Obj $B), Obj (fapp0 $M x);                                                             // τ Obj(∫M) ↪ Σ x:B, Obj(M(x))
 
 // The base projection π₁ : ∫M → B sends (x,u) ↦ x.                                                     // compute π₁ on objects (Grothendieck)
-rule fapp0 (Total_proj_func (Fibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
+rule fapp0 (Total_proj1_func (Fibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 
 // NOTE (orientation update):
 // With the outward normalization `Total_cat(Op_catd E) ↪ Op_cat(Total_cat E)` and `Obj(Op_cat A) ↪ Obj A`,
@@ -868,8 +868,8 @@ rule fapp0 (Total_proj_func (Fibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 // rule for this shape can be reintroduced here.
 
 // Dependent projection π₂ as a dependent functor into the pulled-back family over ∫M.               // second projection (displayed)
-injective symbol Total_proj_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
-  τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
+injective symbol Total_proj2_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
+  τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj1_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
 
 injective symbol Total_intro_func : Π [B : Cat] [E D : Catd B],
 τ (Obj (Functord_cat E D)) → τ (Obj (Functor_cat (Total_cat E) (Total_cat D)));
@@ -879,21 +879,21 @@ injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Obj (Functord_c
 
 // Terminal comprehension laws (cartierSolution13: Context_cat/Context_elimCat/Context_intro).        // ∫(1_X) ≡ X, π₁ ≡ id
 rule Total_cat (Terminal_catd $A) ↪ $A;                                                               // ∫(1_A) ↪ A
-rule Total_proj_func (Terminal_catd $A) ↪ @Id_func $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
+rule Total_proj1_func (Terminal_catd $A) ↪ @Id_func $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
 
 // Pullback preserves terminal displayed categories.                                                  // F^*(1_B) ≡ 1_A
 rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
 
 // The dependent projection π₂ is the identity section when M is terminal.                            // π₂ : 1_{∫1} ⇒ (π₁)^*1  ↪ id
-rule Total_proj_funcd (Terminal_catd $A) ↪ @Id_funcd $A (Terminal_catd $A);
+rule Total_proj2_funcd (Terminal_catd $A) ↪ @Id_funcd $A (Terminal_catd $A);
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
 rule @Total_intro_func $X $A $A (@Id_funcd $X $A) ↪ @Id_func (Total_cat $A);     // ∫id ↪ id
-rule @Total_intro_func $X $A (Terminal_catd $X) (Terminal_funcd $A) ↪ Total_proj_func $A;        // ∫(!) ↪ π₁
+rule @Total_intro_func $X $A (Terminal_catd $X) (Terminal_funcd $A) ↪ Total_proj1_func $A;        // ∫(!) ↪ π₁
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
-rule @comp_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj_func $B) (@Total_intro_func $X $A $B $FF)
-  ↪ Total_proj_func $A;
+rule @comp_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj1_func $B) (@Total_intro_func $X $A $B $FF)
+  ↪ Total_proj1_func $A;
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
@@ -972,7 +972,7 @@ rule @Op_catd Terminal_cat (Lift_catd1 $A) ↪ Lift_catd1 (Op_cat $A);
 rule Total_cat (Lift_catd1 $A) ↪ $A;
 
 // The base projection of ∫(const_1(A)) → 1 is the terminal functor A → 1.                            // π₁ ↪ !
-rule Total_proj_func (Lift_catd1 $A) ↪ Terminal_func $A;
+rule Total_proj1_func (Lift_catd1 $A) ↪ Terminal_func $A;
 
 // Fibres of a constant family are constant (independent of the base point in 1).                    // fibre(const_1(A),*) ≡ A
 rule Fibre_cat (Lift_catd1 $A) _ ↪ $A;
@@ -1207,8 +1207,8 @@ symbol comp_func_cat [A B : Cat] [C : Cat]                                      
 // -------------------------------------------------------------------------------------------------
 
 // TODO: add morphism-action computation rules for `hom_con` (dual of the `hom_cov` postcomposition rule). // dual Yoneda, computational interface
-// TODO: add explicit “globular” source/target operations and interchange/composition laws.          // ω-category axioms
-// TODO: connect with Kosta Došen's “stacking” (horizontal composition of 2-cells along a 1-cell).   // 2-simplex / 3-simplex diagrams
+// TODO: add  interchange/composition laws.          // ω-category axioms
+// TODO: generalize to “stacking” (horizontal composition of 2-cells along a 1-cell).   // 2-simplex / 3-simplex diagrams
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -1455,15 +1455,15 @@ rule @Hom_cat (Total_cat (@Fibration_catd $B $M)) (Struct_sigma $x $u) (Struct_s
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
 //   (π₁)_{1} : Hom_{∫M}((x,u),(y,v)) ⟶ Hom_B(x,y),
 //   sending `(f,α)` to `f`.                                                                            // forget the fibre component
-rule @fapp1_func (Total_cat (@Fibration_catd $B $M)) $B (Total_proj_func (Fibration_catd $M))
+rule @fapp1_func (Total_cat (@Fibration_catd $B $M)) $B (Total_proj1_func (Fibration_catd $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_func (Total_proj_func
+  ↪ Op_func (Total_proj1_func
       (
         (@Fibration_catd _ (@Groth_hom_fam $B $M $x $y $u $v))));
 
 // The base projection on objects is the first Σ-projection.                                            // π₁(f,α)=f
 rule fapp0
-    (Total_proj_func
+    (Total_proj1_func
       (@Op_catd _
         (@Fibration_catd _ $H)))
     (Struct_sigma $f $α)
@@ -1488,7 +1488,7 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   (f : τ (Obj (@Hom_cat B x y)))
   (α : τ (Obj (@Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v))) ⊢
   fapp0
-    (@fapp1_func (Total_cat (@Fibration_catd B M)) B (Total_proj_func (Fibration_catd M))
+    (@fapp1_func (Total_cat (@Fibration_catd B M)) B (Total_proj1_func (Fibration_catd M))
       (Struct_sigma x u) (Struct_sigma y v))
     (Struct_sigma f α)
     ≡ f;
@@ -1632,7 +1632,7 @@ constant symbol tapp_lax_triangle :
 
 // “Slice-category” / simplicial action (warm-up): fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
-// NOTE: the “simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
+// NOTE: the “higher (3-)simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (Fibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
