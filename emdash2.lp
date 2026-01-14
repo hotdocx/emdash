@@ -1604,8 +1604,8 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) ⊢
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),          // dependent functor F : A→B
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),                                                    // base object X_ and fibre object X
   τ (Obj (Functord_cat
-    (IsoFibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A)))                                       // source hom in fibre (placeholder)
-    (IsoFibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F))));                              // target hom in fibre (placeholder)
+    (IsoFibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A)))                                       // source hom in fibre (draft; homd_cov computes mainly in Grothendieck case)
+    (IsoFibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F))));                              // target hom in fibre (draft; pending general homd_cov computation rules)
 
 // Stable-head fibre functor extracted from `fdapp1_funcd` (for uniformity and readability).           // Fibre_func(fdapp1_funcd)
 // This packages the fibrewise action as an ordinary functor between the corresponding fibre categories.
@@ -1674,15 +1674,15 @@ constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                  
 symbol tdapp1_func_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
 		   τ (Obj (Functor_cat (Transfd_cat FF GG)
-	          (Functord_cat (IsoFibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (placeholder)
-	                    (IsoFibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)))));        // target hom (placeholder)
+		          (Functord_cat (IsoFibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
+		                    (IsoFibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)))));        // target hom (draft; pending full homd_cov normalization)
 
 // `tdapp1_fapp0_funcd` is the fapp0 part of `tdapp1_func_funcd`
 symbol tdapp1_fapp0_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
   Π (ϵ : τ (Obj (Transfd_cat FF GG))),
-  τ (Obj (Functord_cat (IsoFibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (placeholder)
-                  (IsoFibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG))));         // target hom (placeholder)
+  τ (Obj (Functord_cat (IsoFibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
+                  (IsoFibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG))));         // target hom (draft; pending full homd_cov normalization)
 
 // β-rule: `tdapp1_fapp0_funcd` is definitionally the object-action of the functor `tdapp1_func_funcd`.             // unpack tdapp1_func_funcd at objects
 rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp0_funcd $Z $E $D $FF $GG $X_Z $U_EX $ϵ;
@@ -1705,9 +1705,14 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
     (2) evaluating it at the “identity” element of the source displayed representable (analogue of id_Y),
         exactly as `tapp0_fapp0` evaluates ϵ^Y at id_Y.
 
-  However, since `homd_cov` is still a placeholder outside the Grothendieck/Grothendieck case, we
-  currently expose this component as its own stable-head projection `tdapp0_fapp0`, packaged functorially
-  as `tdapp0_func` (so modifications act componentwise, mirroring `tapp0_func`).
+  Implementation status note:
+    - `homd_cov` is already usable, and it has a key pointwise computation rule in the
+      Grothendieck/Grothendieck case.
+    - Outside that case, we have not yet committed to a full suite of computation rules / normal forms
+      for the relevant displayed representables (and their “identity” base points).
+
+  Therefore, for now we expose the displayed component as its own stable-head projection `tdapp0_fapp0`,
+  packaged functorially as `tdapp0_func` (so displayed modifications act componentwise, mirroring `tapp0_func`).
 */
 
 // For fixed (Y,V), “evaluate at (Y,V)” is functorial in ϵ (a displayed modification acts componentwise). // displayed evaluation
