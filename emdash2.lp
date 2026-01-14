@@ -1556,9 +1556,19 @@ rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
       (@fapp1_func $A $B $F $X $Y)
       $f;                                                        // fdapp0(fapp1_funcd(F,X),f) ↪ fapp0(fapp1_func(F,X,Y),f)
 
-// Id-instantiation (key normalization): tapp1_fapp0_funcd at identity transfor folds to fapp1_funcd.           // stable head for "ϵ = id"
-// This ensures that specializing the packaged transfor-action `tapp1_func_funcd` at `Id` normalizes to the
-// stable head `fapp1_funcd` (functor's action on homs, packaged as a displayed functor over representables).
+// Id-instantiation (key normalization): identity natural transformation folds to functorial action on homs.     // stable head for "ϵ = id"
+//
+// Usual 1-categorical notation:
+//   - Let F : A ⟶ B be a functor.
+//   - Let 1_F : Nat(F,F) be the identity natural transformation.
+//   - Fix X ∈ Obj(A). Then the “superscripted component packaging” gives a functor between representables:
+//         (1_F)^X : Hom_A(X,−) ⟶ Hom_B(FX,F−)
+//     and it sends an arrow f : X ⟶ Y to the arrow F(f) : FX ⟶ FY.
+//
+// In emdash2 notation:
+//   - `tapp1_fapp0_funcd A B F F X (Id (Functor_cat A B) F)` is the packaged (1_F)^X,
+//   - `fapp1_funcd A B F [X]` is the stable-head packaging of “F on homs” with the same type,
+// so we canonically rewrite the former to the latter.
 rule @tapp1_fapp0_funcd $A $B $F $F $X (Id (Functor_cat $A $B) $F)
   ↪ @fapp1_funcd $A $B $F $X;
 
@@ -1650,9 +1660,22 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor_cat(A,B)}(F,G) ≅ Transf_cat(F,G)
 rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;                                                        // definitional equality of homs
 
-// Id-instantiation (key normalization): tdapp1_fapp0_funcd at identity displayed transfor folds to fdapp1_funcd. // stable head for "ϵ = id"
-// This ensures that specializing the packaged displayed-transfor-action `tdapp1_func_funcd` at `Id` normalizes to
-// the stable head `fdapp1_funcd` (displayed functor's action on dependent-homs, packaged as a displayed functor).
+// Id-instantiation (key normalization): identity displayed transfor folds to displayed action on dependent-homs.  // stable head for "ϵ = id"
+//
+// Usual displayed-category / slice notation (informal):
+//   - Fix a base category Z.
+//   - Let E,D be displayed categories over Z (objects in Cat/Z), and let FF : E ⟶_Z D be a displayed functor
+//     (a morphism in the slice / a section in our “slice-style” encoding).
+//   - Let 1_FF : Transf_Z(FF,FF) be the identity displayed natural transformation.
+//   - Fix a fibre point (X_Z ∈ Obj(Z), U ∈ Obj(E_{X_Z})).
+//     Then the “superscripted component packaging” gives a displayed functor between displayed representables:
+//         (1_FF)^(X_Z,U) : Homd_E(U,−) ⟶ Homd_D(FF(U),−)
+//     and this is exactly the action of FF on dependent-hom data, i.e. the stable head `fdapp1_funcd`.
+//
+// In emdash2 notation:
+//   - `tdapp1_fapp0_funcd ... (Id (Functord_cat E D) FF)` is the packaged (1_FF)^(X_Z,U),
+//   - `fdapp1_funcd ... FF [X_Z] U` is the stable-head packaging of FF’s action on dependent-homs,
+// so we canonically rewrite the former to the latter.
 rule @tdapp1_fapp0_funcd $Z $E $D $FF $FF $X_Z $U_EX (Id (Functord_cat $E $D) $FF)
   ↪ @fdapp1_funcd $Z $E $D $FF $X_Z $U_EX;
 
