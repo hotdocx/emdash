@@ -1149,16 +1149,6 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
     (Total_cat (Product_catd D (IsoFibration_catd (comp_func_cat op (hom_cov W_Z (@Id_func Z))))))
     Cat_cat));                                                                                            // target category Cat_cat (Cat-valued functors)
 
-// Base category for the Grothendieck totals used by `homd_cov` in the common “D := A” specialization. // stable head for big base
-// This is the category whose objects are “(z, (d, f))” with:
-//   - z : Obj(Z),
-//   - d : Obj(Fibre_cat A z),
-//   - f : Obj(Hom_cat Z X_ z)  (the extra “base edge” along which we transport).
-// Keeping this as a named head helps keep later `Fibre_func` extractions readable and stable.
-symbol homd_base_cat : Π [Z : Cat], Π (A : Catd Z), Π (X_ : τ (Obj Z)), Cat;
-rule @homd_base_cat $Z $A $X_
-  ↪ Total_cat (Product_catd $A (IsoFibration_catd (comp_func_cat op (hom_cov $X_ (@Id_func $Z)))));
-
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (Obj (Fibre_cat E X_Z)) → τ (Obj (Fibre_cat D X_Z));                         // map objects in each fibre
@@ -1591,20 +1581,47 @@ symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord
 // This packages the fibrewise action as an ordinary functor between the corresponding fibre categories.
 symbol fdapp1_func : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),
-  Π (p : τ (Obj (@homd_base_cat Z A X_))),
+  Π (p : τ (Obj (Total_cat (Product_catd A (IsoFibration_catd (comp_func_cat op (hom_cov X_ (@Id_func Z)))))))),
   τ (Obj (Functor_cat
      (Fibre_cat (IsoFibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A))) p)
      (Fibre_cat (IsoFibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F)) p)));
 
-// β-rule: `fdapp1_func` is definitionally the fibre functor of `fdapp1_funcd`.                         // unpack fdapp1_func
-rule @fdapp1_func $Z $A $B $F $X_ $X $p
-  ↪ @Fibre_func (@homd_base_cat $Z $A $X_) _ _
-      (@fdapp1_funcd $Z $A $B $F $X_ $X) $p;
+// Folding rule (canonical head): the fibre functor extracted from `fdapp1_funcd` is named `fdapp1_func`. // fold Fibre_func(fdapp1_funcd)
+// This mirrors the “warm-up” rule `Fibre_func(fapp1_funcd ...) ↪ fapp1_func ...`.
+// Matching/perf note: we spell out the base/source/target displayed categories to reduce inference/search. // rewrite hygiene
+rule @Fibre_func
+    _
+    _
+    _
+    (@fdapp1_funcd $Z $A $B $F $X_ $X)
+    $p
+  ↪ @fdapp1_func $Z $A $B $F $X_ $X $p;
 
-// Sanity: `fdapp1_func` is just `Fibre_func` of `fdapp1_funcd` (stable-head view).                     // exercise fdapp1_func rule
-assert [Z : Cat] [A B : Catd Z] (F : τ (Obj (Functord_cat A B)))
-  [X_ : τ (Obj Z)] (X : τ (Obj (Fibre_cat A X_))) (p : τ (Obj (@homd_base_cat Z A X_))) ⊢
-  @fdapp1_func Z A B F X_ X p ≡ @Fibre_func (@homd_base_cat Z A X_) _ _ (@fdapp1_funcd Z A B F X_ X) p;
+// β-rule (objects): object-action of `fdapp1_func` is `fdapp0` of `fdapp1_funcd` in the corresponding fibre. // unpack fdapp1_func at objects
+rule @fapp0
+    (Fibre_cat (IsoFibration_catd (@homd_cov $Z $A $X_ $X $A (@Id_funcd $Z $A))) $p)
+    (Fibre_cat (IsoFibration_catd (@homd_cov $Z $B $X_ (@fdapp0 $Z $A $B $F $X_ $X) $A $F)) $p)
+    (@fdapp1_func $Z $A $B $F $X_ $X $p)
+    $u
+  ↪ @fdapp0
+      _
+      (IsoFibration_catd (@homd_cov $Z $A $X_ $X $A (@Id_funcd $Z $A)))
+      (IsoFibration_catd (@homd_cov $Z $B $X_ (@fdapp0 $Z $A $B $F $X_ $X) $A $F))
+      (@fdapp1_funcd $Z $A $B $F $X_ $X)
+      $p
+      $u;
+
+/*
+  Sanity (deferred): folding is visible at the functor level.
+
+  This is a good unit test in principle, but in early development it can be expensive for the typechecker
+  because it forces conversion in large dependent types involving `homd_cov`. Re-enable once `homd_cov`
+  and the corresponding total/fibre normal forms are more stable.
+
+  assert [Z : Cat] [A B : Catd Z] (F : τ (Obj (Functord_cat A B)))
+    [X_ : τ (Obj Z)] (X : τ (Obj (Fibre_cat A X_))) (p : τ (Obj (@homd_base_cat Z A X_))) ⊢
+    @Fibre_func (@homd_base_cat Z A X_) _ _ (@fdapp1_funcd Z A B F X_ X) p ≡ @fdapp1_func Z A B F X_ X p;
+*/
 
 // Dependent transformations between dependent functors (displayed natural transformations).          // displayed transfors
 constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                                 // base and displayed categories
