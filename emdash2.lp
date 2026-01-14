@@ -286,12 +286,12 @@ assert (A : Cat) (X Y Z : τ (Obj A))
 
   (G) Classifier categories `Grpd_cat` and `Cat_cat`
     - Intended: `τ (Obj Grpd_cat) ≡ Grpd` and `τ (Obj Cat_cat) ≡ Cat`.
-    - Current mechanism: [INF] only via `unif_rule τ (Obj A) ≡ Grpd ↪ [A ≡ Grpd_cat]` and
-      `unif_rule τ (Obj A) ≡ Cat ↪ [A ≡ Cat_cat]`.
-    - `Obj Grpd_cat` / `Obj Cat_cat`: [TODO] currently only *inferable* via the unif_rules above (no rewrite).
-      If we later want definitional computation for these objects (rather than inference), we can introduce
-      explicit codes in `Grpd` whose decoding is `Grpd` / `Cat` and rewrite `Obj Grpd_cat` / `Obj Cat_cat`
-      to those codes (same pattern as `Σ_` with `τ (Σ_ P) ↪ ...`).
+    - Current mechanism:
+        • [OK] definitional computation via codes `Grpd_grpd` / `Cat_grpd` with `τ Grpd_grpd ↪ Grpd` and `τ Cat_grpd ↪ Cat`,
+          and rewrite rules `Obj Grpd_cat ↪ Grpd_grpd`, `Obj Cat_cat ↪ Cat_grpd`.
+        • [INF] unification hints (still useful when `A` is a metavariable): `unif_rule τ (Obj A) ≡ Grpd ↪ [A ≡ Grpd_cat]`
+          and `unif_rule τ (Obj A) ≡ Cat ↪ [A ≡ Cat_cat]`.
+    - `Obj Grpd_cat` / `Obj Cat_cat`: [OK] now computes by rewriting (not merely inferable).
     - `Hom_cat Grpd_cat X Y`: [OK] decoding computes to function types via `τ (Obj (Hom_cat ...)) ↪ (τ X → τ Y)`.
     - `Hom_cat Cat_cat X Y`: [OK] computes to `Functor_cat X Y`.
 
@@ -349,15 +349,28 @@ rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y
 // 6. Classifier categories: `Grpd_cat` and `Cat_cat` (categories of groupoids and categories)       // “universes as categories”
 // -------------------------------------------------------------------------------------------------
 
+// Universe codes for classifier objects (so τ(Obj Grpd_cat) and τ(Obj Cat_cat) compute).              // definitional computation for “objects are groupoids/categories”
+// Design: we keep these as explicit codes in `Grpd` (like `Σ_`) rather than as special-cased τ-rules.  // extensible, uniform pattern
+constant symbol Grpd_grpd : Grpd;                                                                     // code whose decoding is Grpd
+constant symbol Cat_grpd  : Grpd;                                                                     // code whose decoding is Cat
+rule τ Grpd_grpd ↪ Grpd;
+rule τ Cat_grpd  ↪ Cat;
+
 // `Grpd_cat` plays the role of the category of groupoids/sets (discrete fibrations classifier).     // analogue of Set/Type-as-a-category
 constant symbol Grpd_cat : Cat;                                                                     // category of ∞-groupoids
+rule Obj Grpd_cat ↪ Grpd_grpd;                                                                        // objects of Grpd_cat decode to Grpd
 unif_rule τ (Obj $A) ≡ Grpd ↪ [ $A ≡ Grpd_cat ];                                                     // infer A ≡ Grpd_cat when Obj(A) decodes to Grpd
 rule τ (Obj (@Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);                                                  // morphisms in Grpd_cat are functions
 
 // `Cat_cat` is the category of categories (fibrations classifier).                                  // Cat of categories
 constant symbol Cat_cat : Cat;                                                                      // category of categories
+rule Obj Cat_cat ↪ Cat_grpd;                                                                          // objects of Cat_cat decode to Cat
 unif_rule τ (Obj $A) ≡ Cat ↪ [ $A ≡ Cat_cat ];                                                       // infer A ≡ Cat_cat when Obj(A) decodes to Cat
 rule @Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                                                            // morphisms in Cat_cat are functors
+
+// Sanity: the intended decoding holds by definitional computation.                                   // τ(Obj Grpd_cat) ≡ Grpd, τ(Obj Cat_cat) ≡ Cat
+assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
+assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 
 // Opposites fix the classifier categories (definitionally).                                          // Grpdᵒᵖ ≡ Grpd, Catᵒᵖ ≡ Cat
 rule Op_cat Grpd_cat ↪ Grpd_cat;
@@ -1028,7 +1041,10 @@ rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Struct_sigma $A $B)
   ↪ Product_cat $A $B;
 
 // Sanity: prod_cat acts pointwise as categorical product.                                             // prod_cat(A,B) = A×B
-assert (A B : Cat) ⊢ fapp0 prod_cat (Product_pair A B) ≡ Product_cat A B;
+// NOTE: write this with explicit parameters to avoid relying on heuristic inference of `Cat_cat`.     // robust against future tweaks to unif_rules
+assert (A B : τ (Obj Cat_cat)) ⊢
+  @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (@Product_pair Cat_cat Cat_cat A B)
+    ≡ Product_cat A B;
 
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
 rule @Hom_cat (Product_cat $A1 $A2) $P $Q
