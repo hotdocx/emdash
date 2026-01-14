@@ -243,13 +243,16 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
       computation rule exposing “functor data” as a Σ/record in emdash2 (so there is no global
       `τ (Obj (Functor_cat A B)) ↪ ...` rule).
     - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
-    - `Id/comp_fapp0` inside `Functor_cat A B`: [TODO] should be the usual “vertical” identity/composition
+    - `Id/comp_fapp0` inside `Functor_cat A B`: [PARTIAL] should be the usual “vertical” identity/composition
       of transfors. We currently do *not* expose these by definitional rules on `Id` / `comp_fapp0` directly.
       Instead, the operational interface is via projections/packagings:
-        • (Id-instantiation at the “superscripted component” level)
+        • (Id-instantiation at the “superscripted component” level): [OK]
             `tapp1_fapp0_funcd ... (Id (Functor_cat A B) F)` folds to `fapp1_funcd ...` (stable head).
-        • (pointwise 1-cell components of transfors)
+        • (pointwise 1-cell components of transfors): [OK]
             extracted by `tapp0_fapp0` (ordinary) and `tdapp0_fapp0` (displayed).
+          In particular, the vertical Id/composition *of components* is definitional via rewrite rules:
+            (1_F)_Y ↪ id_{F(Y)}  and  (η∘ϵ)_Y ↪ η_Y ∘ ϵ_Y,
+          and similarly in the displayed case via `tdapp0_fapp0`.
         • (higher components / modifications)
             a modification α : Hom_{Transf_cat(F,G)}(ϵ,ϵ') is *repackaged* by `tapp1_fapp1_func`
             (and `tdapp1_fapp1_func`) as a displayed transformation in `Transfd_cat`,
