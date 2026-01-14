@@ -1556,6 +1556,12 @@ rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
       (@fapp1_func $A $B $F $X $Y)
       $f;                                                        // fdapp0(fapp1_funcd(F,X),f) ↪ fapp0(fapp1_func(F,X,Y),f)
 
+// Id-instantiation (key normalization): tapp1_fapp0_funcd at identity transfor folds to fapp1_funcd.           // stable head for "ϵ = id"
+// This ensures that specializing the packaged transfor-action `tapp1_func_funcd` at `Id` normalizes to the
+// stable head `fapp1_funcd` (functor's action on homs, packaged as a displayed functor over representables).
+rule @tapp1_fapp0_funcd $A $B $F $F $X (Id (Functor_cat $A $B) $F)
+  ↪ @fapp1_funcd $A $B $F $X;
+
 // Sanity: the link rule fires at the level of definitional equality.                                            // exercise the rule
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) (f : τ (Obj (@Hom_cat A X Y))) ⊢
   fdapp0 (fapp1_funcd F [X]) [Y] f ≡ fapp0 (fapp1_func F [X] [Y]) f;
@@ -1644,6 +1650,12 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
 // Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor_cat(A,B)}(F,G) ≅ Transf_cat(F,G)
 rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;                                                        // definitional equality of homs
 
+// Id-instantiation (key normalization): tdapp1_fapp0_funcd at identity displayed transfor folds to fdapp1_funcd. // stable head for "ϵ = id"
+// This ensures that specializing the packaged displayed-transfor-action `tdapp1_func_funcd` at `Id` normalizes to
+// the stable head `fdapp1_funcd` (displayed functor's action on dependent-homs, packaged as a displayed functor).
+rule @tdapp1_fapp0_funcd $Z $E $D $FF $FF $X_Z $U_EX (Id (Functord_cat $E $D) $FF)
+  ↪ @fdapp1_funcd $Z $E $D $FF $X_Z $U_EX;
+
 // The action of a displayed (2-)transformation on a displayed (3-)modification: fapp1_func-part of `tdapp1_func_funcd`. // displayed “components of components”
 symbol tdapp1_fapp1_func : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],       // base+displayed cats and functors
   Π (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))),                                                  // external projection index (in a fibre)
@@ -1687,6 +1699,14 @@ compute fapp0 (@Id Cat_cat Terminal_cat) Terminal_obj;                          
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp1_func_funcd A B F_AB G_AB X_A) ϵ ≡ @tapp1_fapp0_funcd A B F_AB G_AB X_A ϵ;
 
+// Id-instantiation: tapp1_fapp0_funcd at identity transfor folds to the stable head fapp1_funcd.                  // checks tapp-id fold fires
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
+  @tapp1_fapp0_funcd A B F F X_A (Id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
+
+// Id-instantiation (packaged view): specialization of tapp1_func_funcd at identity transfor folds to fapp1_funcd. // checks packaged-id fold fires
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
+  fapp0 (@tapp1_func_funcd A B F F X_A) (Id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
+
 // tapp0_fapp0 is the derived “component at Y” (evaluation at id_Y) and reduces by rewriting.          // checks tapp0 β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp0_func A B F_AB G_AB Y_A) ϵ ≡ @tapp0_fapp0 A B F_AB G_AB Y_A ϵ;
@@ -1695,6 +1715,16 @@ assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (
 assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
   fapp0 (@tdapp1_func_funcd Z E D FF GG X_Z U_EX) ϵ ≡ @tdapp1_fapp0_funcd Z E D FF GG X_Z U_EX ϵ;
+
+// Id-instantiation: tdapp1_fapp0_funcd at identity displayed transfor folds to the stable head fdapp1_funcd.      // checks tdapp-id fold fires
+assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
+  (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) ⊢
+  @tdapp1_fapp0_funcd Z E D FF FF X_Z U_EX (Id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
+
+// Id-instantiation (packaged view): specialization of tdapp1_func_funcd at identity displayed transfor folds.     // checks packaged-id fold fires
+assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
+  (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) ⊢
+  fapp0 (@tdapp1_func_funcd Z E D FF FF X_Z U_EX) (Id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
 
 // tapp1_func_funcd hom-action reduces to tapp1_fapp1_func by rewriting (uses @Hom_cat(Functord_cat..) ≡ Transfd_cat).        // checks tapp fapp1_func β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A))
