@@ -1588,7 +1588,6 @@ symbol fdapp1_func : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_
 
 // Folding rule (canonical head): the fibre functor extracted from `fdapp1_funcd` is named `fdapp1_func`. // fold Fibre_func(fdapp1_funcd)
 // This mirrors the “warm-up” rule `Fibre_func(fapp1_funcd ...) ↪ fapp1_func ...`.
-// Matching/perf note: we spell out the base/source/target displayed categories to reduce inference/search. // rewrite hygiene
 rule @Fibre_func
     _
     _
@@ -1599,29 +1598,17 @@ rule @Fibre_func
 
 // β-rule (objects): object-action of `fdapp1_func` is `fdapp0` of `fdapp1_funcd` in the corresponding fibre. // unpack fdapp1_func at objects
 rule @fapp0
-    (Fibre_cat (IsoFibration_catd (@homd_cov $Z $A $X_ $X $A (@Id_funcd $Z $A))) $p)
-    (Fibre_cat (IsoFibration_catd (@homd_cov $Z $B $X_ (@fdapp0 $Z $A $B $F $X_ $X) $A $F)) $p)
+    (Fibre_cat _ $p)
+    (Fibre_cat _ $p)
     (@fdapp1_func $Z $A $B $F $X_ $X $p)
     $u
   ↪ @fdapp0
       _
-      (IsoFibration_catd (@homd_cov $Z $A $X_ $X $A (@Id_funcd $Z $A)))
-      (IsoFibration_catd (@homd_cov $Z $B $X_ (@fdapp0 $Z $A $B $F $X_ $X) $A $F))
+      (IsoFibration_catd _)
+      (IsoFibration_catd _)
       (@fdapp1_funcd $Z $A $B $F $X_ $X)
       $p
       $u;
-
-/*
-  Sanity (deferred): folding is visible at the functor level.
-
-  This is a good unit test in principle, but in early development it can be expensive for the typechecker
-  because it forces conversion in large dependent types involving `homd_cov`. Re-enable once `homd_cov`
-  and the corresponding total/fibre normal forms are more stable.
-
-  assert [Z : Cat] [A B : Catd Z] (F : τ (Obj (Functord_cat A B)))
-    [X_ : τ (Obj Z)] (X : τ (Obj (Fibre_cat A X_))) (p : τ (Obj (@homd_base_cat Z A X_))) ⊢
-    @Fibre_func (@homd_base_cat Z A X_) _ _ (@fdapp1_funcd Z A B F X_ X) p ≡ @fdapp1_func Z A B F X_ X p;
-*/
 
 // Dependent transformations between dependent functors (displayed natural transformations).          // displayed transfors
 constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                                 // base and displayed categories
