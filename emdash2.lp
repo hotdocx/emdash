@@ -1284,6 +1284,33 @@ rule @fdapp0 $A
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 /*
+  Vertical identity/composition of transfors, computed pointwise.
+
+  Even without committing to a Σ/record encoding of `Obj(Transf_cat F G)`, we can still ensure that
+  the *components* of identities/composites normalize in the expected way by giving rewrite rules for
+  the projection `tapp0_fapp0`.
+
+  Usual notation:
+    - For ϵ : Nat(F,G), its component is ϵ_Y : Hom_B(FY, GY).
+    - For vertical composition η ∘ ϵ : Nat(F,H) with ϵ : Nat(F,G), η : Nat(G,H),
+      we have (η ∘ ϵ)_Y = η_Y ∘ ϵ_Y.
+    - For the identity 1_F : Nat(F,F), we have (1_F)_Y = id_{F(Y)}.
+*/
+
+// Components of the identity transfor compute to identity morphisms in B.                              // (1_F)_Y ↪ id_{F(Y)}
+rule @tapp0_fapp0 $A $B $F $F $Y (Id (Functor_cat $A $B) $F)
+  ↪ @Id $B (@fapp0 $A $B $F $Y);
+
+// Components of vertical composite transfors compute to vertical composition in B.                     // (η∘ϵ)_Y ↪ η_Y ∘ ϵ_Y
+rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
+  ↪ @comp_fapp0 $B
+      (@fapp0 $A $B $F $Y)
+      (@fapp0 $A $B $G $Y)
+      (@fapp0 $A $B $H $Y)
+      (@tapp0_fapp0 $A $B $G $H $Y $η)
+      (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
+
+/*
   module_action_cat (ω-style “swap arguments”, as a transfor)
 
   This is the ω-analogue of `module_action` in emdash.lp, but in the Cat-valued setting:
@@ -1653,6 +1680,10 @@ rule @fapp0
 constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                                 // base and displayed categories
   Π (FF GG : τ (Obj (Functord_cat E D))), Cat;                               // Transfd_cat(FF,GG) : Cat
 
+// Key identification: the hom-category of the displayed-functor category is the displayed-transformation category.
+// Hom_{Functord_cat(E,D)}(FF,GG) ≡ Transfd_cat(FF,GG) definitionally.                                  // definitional equality of homs
+rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;
+
 /*
   tdapp1_func_funcd is the displayed analogue of tapp1_func_funcd.
 
@@ -1742,8 +1773,29 @@ symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Func
 // β-rule: `tdapp0_fapp0` is definitionally the object-action of the functor `tdapp0_func`.              // unpack tdapp0_func at objects
 rule fapp0 (@tdapp0_func $Z $E $D $FF $GG $Y_Z $V_EY) $ϵ ↪ @tdapp0_fapp0 $Z $E $D $FF $GG $Y_Z $V_EY $ϵ;
 
-// Key identification: the hom-category of the functor-category is the transformation-category.      // Hom_{Functor_cat(A,B)}(F,G) ≅ Transf_cat(F,G)
-rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;                                                        // definitional equality of homs
+/*
+  Displayed vertical identity/composition of displayed transfors, computed pointwise in fibres.
+
+  Usual notation:
+    - For ϵ : Transf_Z(FF,GG), its component at (Y,V) is a morphism in the fibre D_Y:
+        ϵ_{(Y,V)} : Hom_{D_Y}( FF_Y(V), GG_Y(V) ).
+    - For vertical composition η ∘ ϵ : Transf_Z(FF,HH) with ϵ : Transf_Z(FF,GG), η : Transf_Z(GG,HH),
+      we have (η ∘ ϵ)_{(Y,V)} = η_{(Y,V)} ∘ ϵ_{(Y,V)} (composition in the fibre D_Y).
+    - For the identity 1_FF : Transf_Z(FF,FF), we have (1_FF)_{(Y,V)} = id_{FF_Y(V)}.
+*/
+
+// Components of the identity displayed transfor compute to identity morphisms in the fibre.             // (1_FF)_{(Y,V)} ↪ id_{FF_Y(V)}
+rule @tdapp0_fapp0 $Z $E $D $FF $FF $Y $V (Id (Functord_cat $E $D) $FF)
+  ↪ @Id (Fibre_cat $D $Y) (@fdapp0 $Z $E $D $FF $Y $V);
+
+// Components of vertical composite displayed transfors compute to vertical composition in the fibre.    // (η∘ϵ)_{(Y,V)} ↪ η_{(Y,V)} ∘ ϵ_{(Y,V)}
+rule @tdapp0_fapp0 $Z $E $D $FF $HH $Y $V (@comp_fapp0 (Functord_cat $E $D) $FF $GG $HH $η $ϵ)
+  ↪ @comp_fapp0 (Fibre_cat $D $Y)
+      (@fdapp0 $Z $E $D $FF $Y $V)
+      (@fdapp0 $Z $E $D $GG $Y $V)
+      (@fdapp0 $Z $E $D $HH $Y $V)
+      (@tdapp0_fapp0 $Z $E $D $GG $HH $Y $V $η)
+      (@tdapp0_fapp0 $Z $E $D $FF $GG $Y $V $ϵ);
 
 // Id-instantiation (key normalization): identity displayed transfor folds to displayed action on dependent-homs.  // stable head for "ϵ = id"
 //
@@ -1843,6 +1895,20 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp0_func A B F_AB G_AB Y_A) ϵ ≡ @tapp0_fapp0 A B F_AB G_AB Y_A ϵ;
 
+// Id/comp in Functor_cat compute pointwise via tapp0_fapp0.                                            // checks vertical laws for components
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (Y : τ (Obj A)) ⊢
+  @tapp0_fapp0 A B F F Y (Id (Functor_cat A B) F) ≡ @Id B (@fapp0 A B F Y);
+
+assert [A B : Cat] (F G H : τ (Obj (Functor_cat A B))) (Y : τ (Obj A))
+  (ϵ : τ (Obj (Transf_cat F G))) (η : τ (Obj (Transf_cat G H))) ⊢
+  @tapp0_fapp0 A B F H Y (@comp_fapp0 (Functor_cat A B) F G H η ϵ)
+    ≡ @comp_fapp0 B
+        (@fapp0 A B F Y)
+        (@fapp0 A B G Y)
+        (@fapp0 A B H Y)
+        (@tapp0_fapp0 A B G H Y η)
+        (@tapp0_fapp0 A B F G Y ϵ);
+
 // tdapp1_func_funcd object-action reduces to tdapp1_fapp0_funcd by rewriting.                                       // checks tdapp β-rule fires
 assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
@@ -1862,6 +1928,23 @@ assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
 assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (Y_Z : τ (Obj Z)) (V_EY : τ (Obj (Fibre_cat E Y_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
   fapp0 (@tdapp0_func Z E D FF GG Y_Z V_EY) ϵ ≡ @tdapp0_fapp0 Z E D FF GG Y_Z V_EY ϵ;
+
+// Id/comp in Functord_cat compute pointwise in fibres via tdapp0_fapp0.                               // checks vertical laws for displayed components
+assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
+  (Y : τ (Obj Z)) (V : τ (Obj (Fibre_cat E Y))) ⊢
+  @tdapp0_fapp0 Z E D FF FF Y V (Id (Functord_cat E D) FF)
+    ≡ @Id (Fibre_cat D Y) (@fdapp0 Z E D FF Y V);
+
+assert [Z : Cat] [E D : Catd Z] (FF GG HH : τ (Obj (Functord_cat E D)))
+  (Y : τ (Obj Z)) (V : τ (Obj (Fibre_cat E Y)))
+  (ϵ : τ (Obj (Transfd_cat FF GG))) (η : τ (Obj (Transfd_cat GG HH))) ⊢
+  @tdapp0_fapp0 Z E D FF HH Y V (@comp_fapp0 (Functord_cat E D) FF GG HH η ϵ)
+    ≡ @comp_fapp0 (Fibre_cat D Y)
+        (@fdapp0 Z E D FF Y V)
+        (@fdapp0 Z E D GG Y V)
+        (@fdapp0 Z E D HH Y V)
+        (@tdapp0_fapp0 Z E D GG HH Y V η)
+        (@tdapp0_fapp0 Z E D FF GG Y V ϵ);
 
 // tapp1_func_funcd hom-action reduces to tapp1_fapp1_func by rewriting (uses @Hom_cat(Functord_cat..) ≡ Transfd_cat).        // checks tapp fapp1_func β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A))
