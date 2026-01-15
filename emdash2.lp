@@ -628,6 +628,10 @@ assert [B A : Cat] (X_A : τ (Obj A)) (F : τ (Obj (Functor_cat B A))) (x : τ (
 symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) → Catd A;               // F^*(E) : Catd(A)
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
 
+// Pullback along the identity functor is definitional identity.                                       // (id)^*(E) ≡ E
+// NOTE: we pattern-match on `Id Cat_cat A` (not on `Id_func A`) because `Id_func` is a definitional abbreviation. // stable matching
+rule @Pullback_catd $A $A $E (@Id Cat_cat $A) ↪ $E;
+
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
 // Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_func_cat`
 // This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord_cat. // simulate funcd-over-F
@@ -871,8 +875,12 @@ rule fapp0 (Total_proj1_func (Fibration_catd $M)) (Struct_sigma $x $u) ↪ $x;
 injective symbol Total_proj2_funcd [B : Cat] (E: Catd B) :                                             // dependent object: section over ∫E
   τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj1_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
 
-injective symbol Total_intro_func : Π [B : Cat] [E D : Catd B],
-τ (Obj (Functord_cat E D)) → τ (Obj (Functor_cat (Total_cat E) (Total_cat D)));
+// General “context intro” for totals: a displayed functor over a base functor xy induces a functor between totals. // ∫-intro over xy
+// Slice-style (over a fixed base) is recovered by taking xy := Id_func and using Pullback_catd _ xy ↪ _.          // over-id specialization
+injective symbol Total_intro_func :
+  Π [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Obj (Functor_cat X Y))),
+    τ (Obj (Functord_cat E (Pullback_catd D xy)))
+      → τ (Obj (Functor_cat (Total_cat E) (Total_cat D)));
 
 // Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
 injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Obj (Functord_cat E (Terminal_catd B)));
@@ -888,12 +896,19 @@ rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
 rule Total_proj2_funcd (Terminal_catd $A) ↪ @Id_funcd $A (Terminal_catd $A);
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
-rule @Total_intro_func $X $A $A (@Id_funcd $X $A) ↪ @Id_func (Total_cat $A);     // ∫id ↪ id
-rule @Total_intro_func $X $A (Terminal_catd $X) (Terminal_funcd $A) ↪ Total_proj1_func $A;        // ∫(!) ↪ π₁
+// Identity: over id_X, the induced functor on totals is identity.                                      // ∫(id) ↪ id
+// NOTE: we match on `Id Cat_cat X` (not `Id_func X`) because `Id_func` is a definitional abbreviation.  // stable matching
+rule @Total_intro_func $X $X $A $A (@Id Cat_cat $X) (@Id_funcd $X $A) ↪ @Id_func (Total_cat $A);
+
+// Terminal: over xy : X→Y, the induced functor into ∫(1_Y)≡Y is xy ∘ π₁.                               // ∫(!) ↪ xy∘π₁
+rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
+  ↪ @comp_fapp0 Cat_cat (Total_cat $A) $X $Y $xy (Total_proj1_func $A);
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
-rule @comp_fapp0 Cat_cat (Total_cat $A) (Total_cat $B) $X (Total_proj1_func $B) (@Total_intro_func $X $A $B $FF)
-  ↪ Total_proj1_func $A;
+// General projection law: (∫FF);π₁_D = (xy)∘(π₁_E).                                                     // projection naturality
+rule @comp_fapp0 Cat_cat (Total_cat $E) (Total_cat $D) $Y (Total_proj1_func $D)
+    (@Total_intro_func $X $Y $E $D $xy $FF)
+  ↪ @comp_fapp0 Cat_cat (Total_cat $E) $X $Y $xy (Total_proj1_func $E);
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
@@ -998,11 +1013,12 @@ injective symbol Lift_funcd1 : Π [A B : Cat],
 // Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
 symbol Unlift_func1 [A B : Cat]
   (FF : τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)))) : τ (Obj (Functor_cat A B))
-≔ @Total_intro_func Terminal_cat (Lift_catd1 A) (Lift_catd1 B) FF;
+≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 A) (Lift_catd1 B) (@Id Cat_cat Terminal_cat) FF;
 // NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func1 ...`.
 
 // // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
-rule @Total_intro_func Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@Lift_funcd1 $A $B $F) ↪ $F;
+rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@Id Cat_cat Terminal_cat) (@Lift_funcd1 $A $B $F)
+  ↪ $F;
 
 
 // -------------------------------------------------------------------------------------------------
