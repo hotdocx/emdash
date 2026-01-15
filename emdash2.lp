@@ -901,6 +901,31 @@ injective symbol Total_intro_func_func :
       (Functord_cat E (Pullback_catd D xy))
       (Functor_cat (Total_cat E) (Total_cat D))));
 
+/*
+  Important design note (what computes so far, and what is still TODO):
+
+  There are two different “hom-actions” one might want to compute for total-introduction:
+
+  (1) Functoriality in the *displayed functor argument* FF:
+      Total_intro_func_func(xy) : Functord_cat(E, xy^*D) ⟶ Functor_cat(∫E, ∫D).
+      Its hom-action sends a displayed transfor ϵ : FF ⇒ GG to a transfor between induced functors
+        (∫FF) ⇒ (∫GG).
+      This will be the right place to connect later to `Transfd_cat` / `tapp*`/`tdapp*`.
+
+  (2) Functoriality of the *induced functor on totals* (in the base category X):
+      For fixed xy and FF, the object (∫FF) : Functor_cat(∫E,∫D) has a hom-action
+        fapp1_func(∫FF) : Hom_{∫E} → Hom_{∫D}.
+      In particular, in the “section into a Grothendieck total” case (E = 1_X, D = ∫M),
+      we currently have an object-level computation rule for fapp0(∫FF),
+      but we do NOT yet have a corresponding computation rule for fapp1_func(∫FF).
+
+  The missing ingredient for (2) is a stable-head projection extracting, from
+    FF : 1_X → xy^*(∫M),
+  the “fibre component over a base arrow g:x→x'”, i.e. the α in the Grothendieck Σ-morphism (f,α).
+  This is *not* what the current `fdapp1_funcd` provides: `fdapp1_funcd` is about action on dependent-hom
+  (via `homd_cov`) and belongs to the higher/simplicial layer.
+*/
+
 // β-rule: object-action of Total_intro_func_func is Total_intro_func.                                  // unpack Total_intro_func_func at objects
 rule @fapp0
     _
