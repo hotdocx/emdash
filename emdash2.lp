@@ -154,6 +154,9 @@ rule Obj (Op_cat $A) ↪ Obj $A;
 // Homs are reversed by opposite.                                                                    // Hom_{Aᵒᵖ}(X,Y) ≡ Hom_A(Y,X)
 rule @Hom_cat (Op_cat $A) $X $Y ↪ @Hom_cat $A $Y $X;
 
+// Forward declaration: terminal category (used by displayed-category rules below).                   // 1 : Cat
+constant symbol Terminal_cat : Cat;
+
 /*
   OBSERVATION (cartierSolution13.lp vs emdash.lp, and why emdash2 keep *both* forms):
 
@@ -407,6 +410,10 @@ symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                            
 // NOTE: `Id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `Id_func`, switch to `symbol Id_func ...;` + `rule Id_func ... ↪ ...` (cf. tapp0_fapp0).
 rule fapp0 (@Id Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
 
+// Composition of functors (as morphisms in Cat_cat) computes pointwise on objects.                     // (F∘G)(x) ↪ F(G(x))
+rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x
+  ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
+
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@Id_func $A) ↪ @Id_func (Op_cat $A);
 
@@ -617,6 +624,10 @@ injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat; 
 
 // Fibre of a Grothendieck construction is the original value (strictly, on objects).                // ∫M fibre at x is M(x)
 rule Fibre_cat (Fibration_catd $M) $x ↪ fapp0 $M $x;                                              // fibre(∫M,x) ↪ M(x)
+
+// Fibre of the terminal displayed category is the terminal category.                                  // fibre(1_B, x) ≡ 1
+// This is the displayed analogue of cartierSolution13's `Fibre_catd (Terminal_catd _) _ ↪ Terminal_catd _`. // terminal fibres
+rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
 
 // Sanity (derived instance): representable fibration.                                                 // fibre(∫Hom(X,F-),x) ≡ Hom(X,Fx)
 // This is not an extra computation rule: it follows by rewriting with the general Grothendieck fibre
@@ -882,6 +893,32 @@ injective symbol Total_intro_func :
     τ (Obj (Functord_cat E (Pullback_catd D xy)))
       → τ (Obj (Functor_cat (Total_cat E) (Total_cat D)));
 
+// Packaged version: Total_intro as a functor in the displayed-functor argument FF.                     // FF ↦ (∫FF)
+// This is the direct analogue of the tapp/tdapp “packaging + β-rule” pattern used elsewhere.          // stable head for higher structure in FF
+injective symbol Total_intro_func_func :
+  Π [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Obj (Functor_cat X Y))),
+    τ (Obj (Functor_cat
+      (Functord_cat E (Pullback_catd D xy))
+      (Functor_cat (Total_cat E) (Total_cat D))));
+
+// β-rule: object-action of Total_intro_func_func is Total_intro_func.                                  // unpack Total_intro_func_func at objects
+rule @fapp0
+    _
+    _
+    (@Total_intro_func_func $X $Y $E $D $xy)
+    $FF
+  ↪ @Total_intro_func $X $Y $E $D $xy $FF;
+
+// Sanity: the β-rule is visible as definitional equality.                                               // exercise Total_intro_func_func β-rule
+assert [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Obj (Functor_cat X Y)))
+  (FF : τ (Obj (Functord_cat E (Pullback_catd D xy)))) ⊢
+  @fapp0
+    (Functord_cat E (Pullback_catd D xy))
+    (Functor_cat (Total_cat E) (Total_cat D))
+    (@Total_intro_func_func X Y E D xy)
+    FF
+  ≡ @Total_intro_func X Y E D xy FF;
+
 // Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
 injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Obj (Functord_cat E (Terminal_catd B)));
 
@@ -915,7 +952,7 @@ rule @comp_fapp0 Cat_cat (Total_cat $E) (Total_cat $D) $Y (Total_proj1_func $D)
 // -------------------------------------------------------------------------------------------------
 
 // The terminal category 1 (one object, one morphism).                                                // categorical unit
-constant symbol Terminal_cat : Cat;                                                                  // 1 : Cat
+// (Declared earlier as a forward declaration.)
 
 // Terminal category is self-dual.                                                                    // 1ᵒᵖ ≡ 1
 rule Op_cat Terminal_cat ↪ Terminal_cat;
@@ -1250,6 +1287,32 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat E D))),          // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (Obj (Fibre_cat E X_Z)) → τ (Obj (Fibre_cat D X_Z));                         // map objects in each fibre
+
+// Section into a Grothendieck total (object-level computation).                                       // (x ↦ (xy(x), FF_x(*)))
+// If D = ∫M is Grothendieck and FF : 1_X → xy^*(D) is a displayed functor over xy : X→B, then ∫FF sends:
+//   x ↦ (xy(x), u_x)  where u_x = (FF on the unique terminal fibre object at x).                      // uses Fibre_cat(Terminal_catd,_) ≡ 1
+rule @fapp0 $X (Total_cat (@Fibration_catd $B $M))
+    (@Total_intro_func $X $B (Terminal_catd $X) (@Fibration_catd $B $M) $xy $FF) $x
+  ↪ Struct_sigma
+      (fapp0 $xy $x)
+      (@fdapp0 $X (Terminal_catd $X) (@Pullback_catd $X $B (@Fibration_catd $B $M) $xy) $FF $x Terminal_obj);
+
+// Sanity: the computed object-level section satisfies π₁∘(∫FF) = xy definitionally.                   // projection on introduced Σ-pair
+assert [X B : Cat]
+  (M  : τ (Obj (Functor_cat B Cat_cat)))
+  (xy : τ (Obj (Functor_cat X B)))
+  (FF : τ (Obj (Functord_cat (Terminal_catd X) (Pullback_catd (Fibration_catd M) xy))))
+  (x  : τ (Obj X)) ⊢
+  @fapp0
+    (Total_cat (Fibration_catd M))
+    B
+    (Total_proj1_func (Fibration_catd M))
+    (@fapp0
+      X
+      (Total_cat (Fibration_catd M))
+      (@Total_intro_func X B (Terminal_catd X) (Fibration_catd M) xy FF)
+      x)
+  ≡ @fapp0 X B xy x;
 
 /*
   Fibre_func (extract the induced functor on a fibre)
