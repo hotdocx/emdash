@@ -927,11 +927,25 @@ rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 // “Object as functor”: an object y:Obj(Y) induces a functor 1 → Y selecting y.                       // points as functors
 injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Obj (Functor_cat Terminal_cat Y));               // y ↦ (1→Y) picking y
 
+// Packaged version: y ↦ Obj_func(y) as an object in a functor category.                               // Y → Functor_cat(1,Y)
+// Motivation: consistent with the “stable head” pattern used throughout emdash2 (e.g. tapp0_func),
+// and useful once we want to talk about higher structure (transformations) *between* point-functors
+// uniformly as morphisms in functor categories.
+injective symbol Obj_func_func : Π [Y : Cat],
+  τ (Obj (Functor_cat Y (Functor_cat Terminal_cat Y)));
+
+// β-rule: applying Obj_func_func at y gives the point-functor Obj_func(y).                            // unpack Obj_func_func at objects
+rule @fapp0 $Y (Functor_cat Terminal_cat $Y) (@Obj_func_func $Y) $y ↪ @Obj_func $Y $y;
+
 // Opposite of a point-functor is the point-functor into the opposite category.                       // (y:1→Y)ᵒᵖ : 1→Yᵒᵖ
 rule @Op_func _ _ (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
 
 // Computation: applying the point-functor to the unique object of 1 yields the point.                // evaluation at *
 rule fapp0 (Obj_func $F) $M ↪ $F;                                                                    // (const F)(*) ↪ F (for any * in 1)
+
+// Sanity: Obj_func_func is definitionally the packaging of Obj_func.                                  // exercise Obj_func_func β-rule
+assert [Y : Cat] (y : τ (Obj Y)) ⊢
+  @fapp0 Y (Functor_cat Terminal_cat Y) (@Obj_func_func Y) y ≡ @Obj_func Y y;
 
 // Sanity: the intended definitional computations for `Terminal_cat` fire.                            // unit tests
 assert ⊢ τ (Obj Terminal_cat) ≡ unit;
