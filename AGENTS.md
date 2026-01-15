@@ -20,6 +20,8 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
+Advice: you should start by reading the entire file @emdash2.lp into your context.
+
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
 ## Fast commands
