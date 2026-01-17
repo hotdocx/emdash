@@ -190,13 +190,46 @@ into a displayed modification between the outer transformations yielded by `tdap
 This section is a concrete plan for implementing the “more internal” version incrementally while
 keeping `make check` working.
 
-### Step A — Introduce internal postcomposition (derived from `comp_func` + currying)
+### Step A — Introduce internal postcomposition using `comp_func` specialized to `Cat_cat` (curried)
 
-Add a stable-head “postcompose on functor categories” helper (or derive it from a curried form of
-`comp_func` specialized to `Cat_cat`) so we can define:
+Goal: define *functorial* postcomposition on functor categories, so that “pointwise opposite”
+on Cat-valued functors becomes a genuine functor object (not merely a definitional abbreviation).
 
-- `op2_Z : Obj(Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))`
-  with `fapp0 op2_Z F ↪ comp_func_cat op F`.
+What we already have:
+
+- `comp_func` (uncurried composition-as-functor) for any category `A : Cat`:
+  - `comp_func A X Y Z : Obj(Functor_cat (Product_cat (Hom_cat A Y Z) (Hom_cat A X Y)) (Hom_cat A X Z))`
+  - β-rule: `fapp0 (comp_func ...) (Struct_sigma g f) ↪ comp_fapp0 ... g f`.
+
+Specialize to `A := Cat_cat`, where:
+
+- objects of `Cat_cat` are categories,
+- `Hom_cat Cat_cat B C ↪ Functor_cat B C` (already in `emdash2.lp`).
+
+Then `comp_func Cat_cat X Y Z` is (definitionally) the composition functor:
+
+- `Functor_cat Y Z × Functor_cat X Y → Functor_cat X Z`.
+
+We want the *curried* postcomposition operator (stable head is fine):
+
+```text
+postcomp_cat :
+  Π [X Y Z : Cat],
+  τ (Obj (Functor_cat Y Z))
+    → τ (Obj (Functor_cat (Functor_cat X Y) (Functor_cat X Z)))
+
+β (objects):
+  fapp0 (postcomp_cat G) F ↪ comp_fapp0 Cat_cat X Y Z G F
+```
+
+With this, define pointwise opposite-on-values for Cat-valued functors:
+
+```text
+op2_Z := postcomp_cat (X:=Z) (Y:=Cat_cat) (Z:=Cat_cat) op
+       : Obj(Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))
+```
+
+and `fapp0 op2_Z F ↪ comp_func_cat op F` computes by the β-rule above.
 
 ### Step B — Introduce a fully internalized pointwise product functor
 
@@ -207,25 +240,135 @@ Package `prod_func` as a curried functor object:
 
 with β-rule `fapp0 (fapp0 prod_func5 D) E ↪ prod_func D E`.
 
-### Step C — Introduce internalized Total and Fib (types first, computation later)
+### Step C — Introduce internalized `Total_Z` and `Fib` (choose variance so compositions typecheck)
 
-Add stable-head functor objects:
+We want to build a functor `Op_cat Z → Cat_cat` from the pipeline
+`hom_cov_func(Id)` → `op2_Z` → `prod_func5` → `Total_Z`, and then optionally lift it to a “fibration classifier”
+level via `Fib`.
 
-- `Total_Z : Obj(Functor_cat (Functor_cat Z Cat_cat) Cat_cat)`
-  with object β-rule `fapp0 Total_Z M ↪ Total_cat (Fibration_catd M)`.
+#### (C1) Internalized Grothendieck total (object-level β-rule is enough initially)
 
-- `Fib` with a consistent variance convention:
-  pick one and stick to it so `Fib ∘ Total ∘ ...` typechecks.
+Add (stable head) for each base `Z`:
 
-### Step D — Define `homd_cov5` using only functor composition
+```text
+Total_Z :
+  τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat))
 
-Define `homd_cov5` as either:
+β (objects):
+  fapp0 Total_Z M ↪ Total_cat (Fibration_catd M)
+```
 
-- a displayed morphism over `Z^op` (preferred if we keep `E : Catd Z`):
-  `homd_cov5 : Obj(Functor_cat (Functord_cat ...) ...)` style, or
-- a strict transfor (if committing to `E : Z⇒Cat`).
+This makes `Total_Z` usable in functor composition inside `Cat_cat`.
 
-The key requirement: `W_Z` must be internalized as the outer index of a functor out of `Z^op`.
+#### (C2) Internalized fibration classifier (`Fib`) — pick a convention that composes cleanly
+
+Semantics: “fibrations over B” should be the functor category `Functor_cat B Cat_cat`.
+Functoriality in `B` is contravariant (pullback/precomposition).
+
+Two equivalent conventions:
+
+- **Convention 1 (preferred for composing after `Total_Z` without extra `Op_func` gymnastics)**:
+  take `Fib` as *covariant into the opposite*:
+
+  ```text
+  Fib :
+    τ (Obj (Functor_cat Cat_cat (Op_cat Cat_cat)))
+
+  object action (intended):
+    fapp0 Fib B ↪ Functor_cat B Cat_cat
+  ```
+
+  Then if `Base : Op_cat Z → Cat_cat` (covariant), we can form
+  `Fib ∘ Base : Op_cat Z → Op_cat Cat_cat`, and since `Op_cat Cat_cat ↪ Cat_cat` in `emdash2.lp`,
+  the codomain is definitionally acceptable as “a category of fibrations” (up to that definitional identification).
+
+- **Convention 2**:
+  take `Fib : Op_cat Cat_cat → Cat_cat` and insert the needed `Op_func` when composing with `Base`.
+
+In this outline we assume Convention 1.
+
+### Step D — Define `homd_cov5` explicitly (the consolidated formula)
+
+This step records the consolidated “earlier approach” formula: internalize the former external
+`W_Z : Obj(Z)` by making it the *outer index* of a functor out of `Op_cat Z`, exactly as `hom_cov_func`
+already does for `hom_cov`.
+
+Fix a base category `Z : Cat` and a Cat-valued functor (for computations) `D : Obj(Functor_cat Z Cat_cat)`
+(in applications you can take `D` to be the Cat-valued data underlying a Grothendieck displayed category).
+
+1) Start from the already internalized representable-in-context:
+
+```text
+HId := hom_cov_func (@Id_func Z)
+    : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
+```
+
+2) Apply pointwise opposite on values (postcompose inside `Cat_cat` by `op2_Z`):
+
+```text
+HOp := comp_func_cat op2_Z HId
+    : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
+```
+
+3) Multiply pointwise by `D` using the fully internalized curried product:
+
+Let `prodD := fapp0 prod_func5 D` so
+`prodD : Obj(Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))` and
+`fapp0 prodD E ↪ prod_func D E`.
+
+Then:
+
+```text
+HProd := comp_func_cat prodD HOp
+     : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
+```
+
+4) Totalize pointwise (postcompose by `Total_Z`):
+
+```text
+Base := comp_func_cat Total_Z HProd
+     : Obj(Functor_cat (Op_cat Z) Cat_cat)
+```
+
+This `Base` is the “true functor” version of the former `W_Z ↦ Dom(W_Z)` story:
+the old external parameter `W_Z` is now the object argument of `Base : Z^op → Cat`.
+
+5) (Optional) lift to “fibration classifier level”:
+
+```text
+BaseFib := comp_func_cat Fib Base
+       : Obj(Functor_cat (Op_cat Z) (Op_cat Cat_cat))
+```
+
+(with Convention 1 for `Fib`; recall `Op_cat Cat_cat ↪ Cat_cat` definitionally in `emdash2.lp`).
+
+Now define `homd_cov5` as either:
+
+- **Strict Grothendieck form** (if one works with `E : Obj(Functor_cat Z Cat_cat))`):
+
+  ```text
+  homd_cov5 :
+    Π (E : Obj(Functor_cat Z Cat_cat)),
+    τ (Obj (Transf_cat (Op_func Z Cat_cat E) BaseFib))
+  ```
+
+  i.e. a natural transformation (outer-indexed by `W_Z : Obj(Z^op)`) from `E^op` to the target classifier.
+
+- **Displayed/slice form** (if one keeps `E : Catd Z`):
+
+  use `Op_catd E : Catd (Op_cat Z)` and define
+  `Target := Fibration_catd BaseFib : Catd (Op_cat Z)` (after the definitional simplification of codomain),
+  then take a displayed functor object:
+
+  ```text
+  homd_cov5 :
+    Π [E : Catd Z],
+    Π (FF : Obj(Functord_cat D E)),   // optional semantic input; may be `Id` in early phases
+    τ (Obj (Functord_cat (Op_catd E) (Fibration_catd BaseFib)))
+  ```
+
+The key property is the same in both cases: `W_Z` is internalized as the component index
+of the outer functor/transformations out of `Z^op`.
 
 ### Step E — Define `tapp1_func_funcd5` (ordinary)
 
@@ -236,10 +379,43 @@ Implement:
 
 Then add “sanity assertions” exercising the intended component extraction via `tapp0_*` twice.
 
-### Step F — Define `tdapp1_func_funcd5` (displayed)
+### Step F — Define `tdapp1_func_funcd5` explicitly (nested-`Transfd_cat`, non-circular)
 
-Mirror Step E in the dependent setting, using `homd_cov5` and ensuring that components are extractable
-by `tdapp0_*` followed by `tapp0_*`.
+We aim to “internalize the outer index” in the displayed analogue exactly as in the ordinary case:
+the target should be a (displayed) transfor whose outer component index is a displayed/fibre object,
+and whose inner component index is then accessed by `tapp0_*`.
+
+Let `Z : Cat`, `E D : Catd Z`, and `FF GG : Obj(Functord_cat E D)`.
+
+Assume we have a strict/Grothendieck-style `homd_cov5` producing an outer classifier over `Z^op`
+(either as a strict transfor if `E,D` are Cat-valued functors, or as a displayed functor into a Grothendieck
+displayed category over `Z^op`).
+
+Then the “more internal” `tdapp1` should have the nested form:
+
+```text
+tdapp1_func_funcd5 FF GG :
+  Obj(Functor_cat (Transfd_cat FF GG)
+      (Transfd_cat (homd_cov5 Id) ((homd_cov5 GG) ∘ (FF^op))))
+```
+
+where:
+
+- `homd_cov5 Id` denotes the “identity/special case” used on the source side (the analogue of `H0`),
+- `homd_cov5 GG` denotes the target-side classifier depending on `GG`,
+- `FF^op` is the appropriate “opposite/precomposition” on the outer index side (depending on which variant
+  of `homd_cov5` is adopted: strict `Op_func` when `FF` is an ordinary functor, or the displayed analogue
+  realized via `Op_catd`/pullback simulation when staying in `Catd`).
+
+Operational semantics (the important part):
+
+- Given `ϵ : Obj(Transfd_cat FF GG)`, applying `fapp0` yields an *outer* displayed transfor.
+- Apply `tdapp0_*` once to project the outer component at the displayed object (outer index).
+- Apply `tapp0_*` once to project the inner component at the base/simplex index living in the
+  “surface base” (typically a total category encoding `E ×_Z hom(X_,−)` in the intended semantics).
+
+This “`tdapp0_*` then `tapp0_*`” projection sequence is the non-circular mechanism for accessing nested
+components in the displayed setting.
 
 ### Step G — Add the corresponding hom-actions (`*_fapp1_func5`)
 
@@ -258,4 +434,3 @@ mirroring the existing β-rule pattern:
 
 - The nested `Transf_cat` / `Transfd_cat` approach is conceptually correct and not circular because
   components are accessed via `tapp0_*` / `tdapp0_*`, not via the `tapp1_fapp1_func*` layer.
-
