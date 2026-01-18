@@ -2573,6 +2573,36 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp0_func A B F_AB G_AB Y_A) ϵ ≡ @tapp0_fapp0 A B F_AB G_AB Y_A ϵ;
 
+// Sanity (nested component extraction): applying tapp0 twice yields a functor between hom-categories.  // outer component at X, inner at Y
+//
+// Operationally:
+//   - outer: ϵ ↦ fapp0(tapp1_func_transf(F,G), ϵ) : Transf_cat(H0,H1) (outer index X ∈ Obj(A)),
+//   - inner: project at X using tapp0_fapp0 (in Op_cat A),
+//   - then project at Y using tapp0_fapp0 (in A),
+// obtaining a functor Hom_A(X,Y) → Hom_B(FX, GY) as a 1-cell in Cat_cat (i.e. an object of Functor_cat).
+assert [A B : Cat]
+  (F_AB G_AB : τ (Obj (Functor_cat A B)))
+  (ϵ : τ (Obj (Transf_cat F_AB G_AB)))
+  (X Y : τ (Obj A)) ⊢
+  let H0 ≔ @hom_cov_func A A (@Id_func A) in
+  let H1 ≔ @comp_fapp0
+    Cat_cat
+    (Op_cat A)
+    (Op_cat B)
+    (Functor_cat A Cat_cat)
+    (@hom_cov_func B A G_AB)
+    (@Op_func A B F_AB) in
+  let outer ≔ fapp0 (@tapp1_func_transf A B F_AB G_AB) ϵ in
+  let innerX ≔ @tapp0_fapp0 (Op_cat A) (Functor_cat A Cat_cat) H0 H1 X outer in
+  @tapp0_fapp0
+    A
+    Cat_cat
+    (fapp0 H0 X)
+    (fapp0 H1 X)
+    Y
+    innerX
+  : τ (Obj (Functor_cat (@Hom_cat A X Y) (@Hom_cat B (fapp0 F_AB X) (fapp0 G_AB Y))));
+
 // Id/comp in Functor_cat compute pointwise via tapp0_fapp0.                                            // checks vertical laws for components
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (Y : τ (Obj A)) ⊢
   @tapp0_fapp0 A B F F Y (Id (Functor_cat A B) F) ≡ @Id B (@fapp0 A B F Y);
