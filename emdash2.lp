@@ -118,6 +118,18 @@ rule τ Unit_grpd ↪ unit;
 // 3. Natural numbers (used as a dimension/index type in drafts)                                     // globular/simplicial indices
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Relative “dimension” convention (important in emdash2)
+
+  When we say “1-cell”, “2-cell”, etc. in comments, this is always *relative* to the ambient category:
+
+  - a “1-cell in A” is an object of the hom-category `Hom_cat A X Y`;
+  - a “2-cell in A” is a morphism in such a hom-category (i.e. a 1-cell in `Hom_cat A X Y`), etc.
+
+  Semantically, the ambient `A : Cat` could itself encode higher structure (e.g. `A = Total_cat E`),
+  so a “1-cell relative to A” may correspond to a higher-dimensional cell in an absolute semantics.
+*/
+
 inductive nat : TYPE ≔                                                                              // Peano naturals as an index object
 | zero : nat                                                                                           // zero (dimension 0)
 | succ : nat → nat;                                                                                    // successor (dimension n+1)
@@ -329,8 +341,12 @@ symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),          
   τ (Obj A) → τ (Obj B);                                                                            // send X_A ↦ F_AB(X_A)
 
 // Action of a functor on hom-categories: gives a functor Hom_A(X,Y) → Hom_B(FX,FY).                 // F₁ as a functor (ω-level)
-// `fapp1_func` is definable from `fapp1_funcd`; but `fapp1_func` concerns itself only with the higher (2-cell) arrows over the (1-cell) identity arrow in the base,
-// i.e. it is concerned with the "globular" viewpoint only, instead of the general "simplicial" viewpoint (when the (2-cell) arrow is over any general (1-cell) in the base)
+// Globular vs simplicial viewpoint (for the same underlying functorial action):
+// - `fapp1_func` is the *globular* action: it acts on the hom-category `Hom_cat A X Y`.
+//   In the standard globular reading, a morphism in `Hom_cat A X Y` is a higher (2-)arrow “over”
+//   an identity 1-arrow (i.e. it compares parallel 1-cells with fixed boundary (X,Y)).
+// - Later, `fapp1_funcd` packages this action in a more *simplicial/Grothendieck* style over representables,
+//   where higher arrows are presented “over” a chosen base 1-cell.
 symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),                            // functor object F
   Π [X_A Y_A : τ (Obj A)],                                                            // endpoints
   τ (Obj (Functor_cat (@Hom_cat A X_A Y_A) (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A))));        // functor on the hom-category
@@ -348,9 +364,20 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),     
   For `F := forget_strict(Fs)`, we add computational rewrite rules stating that `F` preserves
   identities and composition *on the nose* at the level of 1-cells (objects of hom-categories).
 
-  NOTE (deferred): for strict functors, we also want the simplicial packaging `fapp1_funcd` to be
-  cartesian (i.e. map the canonical/cartesian 2-arrow σ to an identity 2-arrow, so laxness evidence
-  becomes definitional identity). We defer that step until later.
+  NOTE (deferred; “laxness evidence becomes identity”):
+  The simplicial/Grothendieck packaging `fapp1_funcd` lives over the representable total
+  `Total_cat (Fibration_catd (hom_cov X (@Id_func A)))`. In that total, for any base arrow
+  `g : Y₁ → Y₂` there is a canonical/cartesian morphism over `g`:
+
+    σ_{g,f} : (Y₁,f) → (Y₂, g∘f)
+
+  whose fibre component is an *identity* 2-arrow.
+  For a general (not-necessarily-strict) functor, the image of such a σ under `fapp1_funcd` need not
+  be cartesian/identity: it can carry nontrivial 2-cell data, i.e. the usual “laxness witness” that
+  compares `F(g) ∘ F(f)` with `F(g∘f)`.
+
+  For a strict functor `forget_strict Fs`, we want that laxness witness to reduce to an identity 2-arrow
+  (so the corresponding triangle 2-cell is definitional). We defer implementing this cartesianness rule.
 */
 constant symbol StrictFunctor_cat : Π (A B : Cat), Cat;
 
@@ -802,26 +829,34 @@ rule fapp0 (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ ↪ @tapp1_fapp0_funcd
   just like the existing `tapp1_*` packaging.
 */
 
-symbol tapp1_transf_H0 [A : Cat] : τ (Obj (Functor_cat (Op_cat A) (Functor_cat A Cat_cat)))
-≔ @hom_cov_func A A (@Id_func A);
-
-symbol tapp1_transf_H1 [A B : Cat] (F_AB G_AB : τ (Obj (Functor_cat A B)))
-  : τ (Obj (Functor_cat (Op_cat A) (Functor_cat A Cat_cat)))
-≔ @comp_fapp0
-    Cat_cat
-    (Op_cat A)
-    (Op_cat B)
-    (Functor_cat A Cat_cat)
-    (@hom_cov_func B A G_AB)
-    (@Op_func A B F_AB);
-
 symbol tapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
-  τ (Obj (Functor_cat (Transf_cat F_AB G_AB)
-         (Transf_cat (tapp1_transf_H0 [A]) (tapp1_transf_H1 F_AB G_AB))));
+  τ (Obj (Functor_cat
+    (@Transf_cat A B F_AB G_AB)
+    (@Transf_cat
+      (Op_cat A)
+      (Functor_cat A Cat_cat)
+      (@hom_cov_func A A (@Id_func A))
+      (@comp_fapp0
+        Cat_cat
+        (Op_cat A)
+        (Op_cat B)
+        (Functor_cat A Cat_cat)
+        (@hom_cov_func B A G_AB)
+        (@Op_func A B F_AB)))));
 
 symbol tapp1_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
   Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
-  τ (Obj (Transf_cat (tapp1_transf_H0 [A]) (tapp1_transf_H1 F_AB G_AB)));
+  τ (Obj (@Transf_cat
+    (Op_cat A)
+    (Functor_cat A Cat_cat)
+    (@hom_cov_func A A (@Id_func A))
+    (@comp_fapp0
+      Cat_cat
+      (Op_cat A)
+      (Op_cat B)
+      (Functor_cat A Cat_cat)
+      (@hom_cov_func B A G_AB)
+      (@Op_func A B F_AB))));
 
 // β-rule: object-action of tapp1_func_transf folds to tapp1_fapp0_transf.                            // unpack tapp1_func_transf at objects
 rule fapp0 (@tapp1_func_transf $A $B $F_AB $G_AB) $ϵ ↪ @tapp1_fapp0_transf $A $B $F_AB $G_AB $ϵ;
@@ -831,7 +866,17 @@ symbol tapp1_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functo
   Π (ϵ ϵ' : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj (Functor_cat
     (@Hom_cat (Transf_cat F_AB G_AB) ϵ ϵ')
-    (@Hom_cat (Transf_cat (tapp1_transf_H0 [A]) (tapp1_transf_H1 F_AB G_AB))
+    (@Hom_cat (@Transf_cat
+      (Op_cat A)
+      (Functor_cat A Cat_cat)
+      (@hom_cov_func A A (@Id_func A))
+      (@comp_fapp0
+        Cat_cat
+        (Op_cat A)
+        (Op_cat B)
+        (Functor_cat A Cat_cat)
+        (@hom_cov_func B A G_AB)
+        (@Op_func A B F_AB)))
       (tapp1_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ)
       (tapp1_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ'))));
 
@@ -1988,9 +2033,18 @@ constant symbol tapp_lax_triangle :
           (@comp_fapp0 A X Y1 Y2 g f))));
 
 // “Slice-category” / simplicial action (warm-up): fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
-// Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
-// NOTE: this `fapp1_funcd` mainly concerns the higher (1-cell and 2-cell, relatively) simplicial viewpoint,
-//       while the “higher (2-cell and 3-cell, relatively) simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
+// Motivation: complements the globular iteration `Hom_cat(X,Y) : Cat` with a Grothendieck/simplicial presentation. // 2- and 3-simplex pictures
+//
+// In the Grothendieck total of `hom_cov X (@Id_func A)`:
+// - objects are arrows `f : X → Y` (relative 1-cells, with endpoint Y varying),
+// - morphisms are pairs `(g : Y₁ → Y₂, α)` where α is a 2-arrow comparing `g∘f` with another arrow into Y₂,
+//   i.e. a “2-arrow over g” in the simplicial sense.
+//
+// Thus `fapp1_funcd` is not “higher-dimensional” than `fapp1_func`; it is a different *presentation*
+// (globular vs simplicial) of the same functorial action on 1-cells.
+//
+// The genuine next simplicial iteration is `fdapp1_funcd`, which uses `homd_cov` (surfaces over base edges),
+// and is where the higher simplicial story becomes essential.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (Fibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
