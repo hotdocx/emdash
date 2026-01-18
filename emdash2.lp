@@ -2309,6 +2309,43 @@ rule fapp0 (@tdapp1_func_transfd $Z $E0 $D $FF $GG) $ϵ
   ↪ @tdapp1_fapp0_transfd $Z $E0 $D $FF $GG $ϵ;
 
 /*
+  fdapp1_func_transfd (more internal displayed hom-action)
+
+  Displayed analogue of `fapp1_func_transf`.
+
+  This is the “more internal / transfor” version of the displayed hom-action stable head `fdapp1_funcd`,
+  obtained by specializing `tdapp1_func_transfd` at the identity displayed transfor `1_FF`:
+
+    fdapp1_func_transfd(FF) := (tdapp1_func_transfd(FF,FF)) (1_FF).
+
+  TODO: once we have the Grothendieck “morphism-action” bridge (turning a displayed transfor into a displayed functor
+  between totals / representables), the older external-index packaging `fdapp1_funcd` should be derived from this.
+*/
+symbol fdapp1_func_transfd : Π [Z : Cat],
+  Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
+  Π [D : Catd Z],
+  Π (FF : τ (Obj (Functord_cat (Fibration_catd E0) D))),
+  τ (Obj (@Transfd_cat (Op_cat Z)
+    (Op_catd (Fibration_catd E0))
+    (@Op_catd Z (@Fibration_catd Z
+      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+        (comp_func_cat Fib_func (homd_cov_base E0)))))
+    (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+    (@comp_funcd
+      (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (Op_catd D)
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z D E0 FF)
+      (@Op_funcd Z (Fibration_catd E0) D FF))));
+
+// Folding rule: tdapp1 at identity transfor is the internal displayed hom-action stable head.         // normalize “apply tdapp1 to 1_FF”
+rule fapp0 (@tdapp1_func_transfd $Z $E0 $D $FF $FF) (Id (Functord_cat (Fibration_catd $E0) $D) $FF)
+  ↪ @fdapp1_func_transfd $Z $E0 $D $FF;
+
+/*
   tdapp0_func / tdapp0_fapp0 (displayed “component at (Y,V)”)
 
   This is the displayed analogue of `tapp0_func` / `tapp0_fapp0`.
