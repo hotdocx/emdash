@@ -705,6 +705,17 @@ constant symbol Id_funcd [B : Cat] [E:Catd B] : τ (Obj (Functord_cat E E));    
 symbol comp_funcd [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
   (FF: τ (Obj (Functord_cat D C))) (GG: τ (Obj (Functord_cat E D))) : τ (Obj (Functord_cat E C));               // compose : (D→C) × (E→D) → (E→C)
 
+// Universe code for displayed categories over a fixed base (so we can form `Cat` objects whose decoded objects are `Catd Z`). // Catd as a Grpd-code
+constant symbol Catd_grpd : Π (Z : Cat), Grpd;
+rule τ (Catd_grpd $Z) ↪ Catd $Z;
+
+// Category of displayed categories over a fixed base Z, with morphisms the slice-style displayed functors. // Catd_cat(Z)
+constant symbol Catd_cat : Π (Z : Cat), Cat;
+rule Obj (Catd_cat $Z) ↪ Catd_grpd $Z;
+rule @Hom_cat (Catd_cat $Z) $E $D ↪ @Functord_cat $Z $E $D;
+rule @Id (Catd_cat $Z) $E ↪ @Id_funcd $Z $E;
+rule @comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG ↪ @comp_funcd $Z $E $D $C $FF $GG;
+
 // Fibre of a dependent category E over X_B : Obj(B) (displayed category at a base object).          // E[X_B] in type theory
 injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat;                          // fibre category at X_B
 
@@ -748,6 +759,13 @@ rule @Op_catd _ (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
 // Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
 rule @Op_catd _ (@Pullback_catd $A $B $E $F)
   ↪ @Pullback_catd _ _ (@Op_catd $B $E) (@Op_func $A $B $F);
+
+// Opposite of a displayed functor (slice-style; base map is implicitly id).                           // displayed dualization
+injective symbol Op_funcd : Π [Z : Cat], Π [E D : Catd Z],
+  τ (Obj (Functord_cat E D)) → τ (Obj (Functord_cat (Op_catd E) (Op_catd D)));
+
+// Involution: (FFᵒᵖ)ᵒᵖ ≡ FF (up to Op_cat/Op_catd involutions).                                      // (−)ᵒᵖ is involutive
+rule Op_funcd (@Op_funcd $Z $E $D $FF) ↪ $FF;
 
 // -------------------------------------------------------------------------------------------------
 // 8. Natural transformations (2-cells) as morphisms in functor categories                            // transfors
@@ -2224,6 +2242,71 @@ symbol tdapp1_fapp0_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj
 
 // β-rule: `tdapp1_fapp0_funcd` is definitionally the object-action of the functor `tdapp1_func_funcd`.             // unpack tdapp1_func_funcd at objects
 rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp0_funcd $Z $E $D $FF $GG $X_Z $U_EX $ϵ;
+
+/*
+  tdapp1_func_transfd (more internal, displayed analogue; restricted Grothendieck probe domain)
+
+  This is the displayed analogue of `tapp1_func_transf` (nested `Transfd_cat`, non-circular),
+  in the restricted situation where the domain displayed category is a Grothendieck construction:
+
+    E := Fibration_catd E0  for some E0 : Z ⟶ Cat.
+
+  This restriction matches the “computational probe” discipline used by `homd_cov_int`:
+  the displayed functors `FF, GG : E ⟶_Z D` are then probes into `D`.
+
+  Target shape (OUTLINE_MORE_INTERNAL_CORRECTED.md, Step F):
+    tdapp1_func_transfd FF GG :
+      Transfd_cat(FF,GG) ⇒ Transfd_cat( homd_cov_int(Id), (homd_cov_int(GG)) ∘ (FFᵒᵖ) ).
+
+  Here `FFᵒᵖ` is `Op_funcd FF`, and composition is the slice-style displayed composition `comp_funcd`
+  over the base `Op_cat Z`.
+*/
+symbol tdapp1_func_transfd : Π [Z : Cat],
+  Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
+  Π [D : Catd Z],
+  Π [FF GG : τ (Obj (Functord_cat (Fibration_catd E0) D))],
+  τ (Obj (Functor_cat
+    (@Transfd_cat Z (Fibration_catd E0) D FF GG)
+    (@Transfd_cat (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+      (@comp_funcd
+        (Op_cat Z)
+        (Op_catd (Fibration_catd E0))
+        (Op_catd D)
+        (@Op_catd Z (@Fibration_catd Z
+          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+            (comp_func_cat Fib_func (homd_cov_base E0)))))
+        (@homd_cov_int Z D E0 GG)
+        (@Op_funcd Z (Fibration_catd E0) D FF)))));
+
+symbol tdapp1_fapp0_transfd : Π [Z : Cat],
+  Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
+  Π [D : Catd Z],
+  Π [FF GG : τ (Obj (Functord_cat (Fibration_catd E0) D))],
+  Π (ϵ : τ (Obj (@Transfd_cat Z (Fibration_catd E0) D FF GG))),
+  τ (Obj (@Transfd_cat (Op_cat Z)
+    (Op_catd (Fibration_catd E0))
+    (@Op_catd Z (@Fibration_catd Z
+      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+        (comp_func_cat Fib_func (homd_cov_base E0)))))
+    (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+    (@comp_funcd
+      (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (Op_catd D)
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z D E0 GG)
+      (@Op_funcd Z (Fibration_catd E0) D FF))));
+
+// β-rule: object-action of tdapp1_func_transfd folds to tdapp1_fapp0_transfd.                         // unpack tdapp1_func_transfd at objects
+rule fapp0 (@tdapp1_func_transfd $Z $E0 $D $FF $GG) $ϵ
+  ↪ @tdapp1_fapp0_transfd $Z $E0 $D $FF $GG $ϵ;
 
 /*
   tdapp0_func / tdapp0_fapp0 (displayed “component at (Y,V)”)
