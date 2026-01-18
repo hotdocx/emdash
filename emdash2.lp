@@ -862,7 +862,7 @@ rule fapp0 (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ ↪ @tapp1_fapp0_funcd
   tapp1_func_transf (more internal, outer index internalized)
 
   This refines `tapp1_func_funcd` by internalizing the external index `X_A` using nested `Transf_cat`,
-  following OUTLINE_MORE_INTERNAL_CORRECTED.md.
+  following the nested-`Transf_cat` internalization plan.
 
   Define:
     H0 := hom_cov_func(Id_A)                      : Aᵒᵖ ⇒ (A ⇒ Cat)
@@ -907,6 +907,9 @@ symbol tapp1_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat
 rule fapp0 (@tapp1_func_transf $A $B $F_AB $G_AB) $ϵ ↪ @tapp1_fapp0_transf $A $B $F_AB $G_AB $ϵ;
 
 // Hom-action packaging (modifications/3-cells), matching the existing tapp1 pattern.                 // unpack tapp1_func_transf at homs
+// Design contract (non-circularity):
+//   - `tapp1_fapp1_func_transf` is only the hom-action of the packaged functor on modifications,
+//   - access to “nested components” is done via `tapp0_*` / `tapp1_fapp0_transf`, not by reusing `tapp1_*`.
 symbol tapp1_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
   Π (ϵ ϵ' : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj (Functor_cat
@@ -1625,7 +1628,7 @@ assert [Z : Cat] (F : τ (Obj (Functor_cat Z Cat_cat))) ⊢
 /*
   homd_cov_int (more internal; consolidated pipeline)
 
-  This follows OUTLINE_MORE_INTERNAL_CORRECTED.md:
+  This follows the consolidated “more internal” pipeline:
 
     - internalize the former external base object parameter by building a functor out of Zᵒᵖ,
     - use only stable-head building blocks (`op_val_func`, `prod_func_func`, `Total_func`, `Fib_func`) so the expression
@@ -2127,6 +2130,10 @@ constant symbol tapp_lax_triangle :
 //
 // This is why the difference between `fapp1_func` and `fapp1_funcd` is *globular vs simplicial presentation*,
 // while the difference between `fapp1_funcd` and `fdapp1_funcd` is the *next simplicial iteration*.
+//
+// [EXTERNAL] This simplicial packaging is a stable head we keep for now, but it is intended to become *derived*
+// from the more-internal transfor-based packaging (`fapp1_func_transf`) once the “transfor ⇒ displayed functor”
+// Grothendieck morphism-action bridge is implemented.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (Fibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
@@ -2185,6 +2192,10 @@ symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord
   τ (Obj (Functord_cat
     (Fibration_catd (@homd_cov Z A X_ X A (@Id_funcd Z A)))                                       // source hom in fibre (draft; homd_cov computes mainly in Grothendieck case)
     (Fibration_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F))));                              // target hom in fibre (draft; pending general homd_cov computation rules)
+
+// [EXTERNAL] This simplicial packaging is a stable head we keep for now. In the long-term, it is intended to be derived
+// from the more-internal transfor-based displayed packaging (`fdapp1_func_transfd`), once the missing morphism-action bridge
+// (“displayed transfor ⇒ displayed functor between Grothendieck totals/representables”) is implemented.
 
 // Stable-head fibre functor extracted from `fdapp1_funcd` (for uniformity and readability).           // Fibre_func(fdapp1_funcd)
 // This packages the fibrewise action as an ordinary functor between the corresponding fibre categories.
@@ -2254,10 +2265,11 @@ rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;
   So `tdapp1_func_funcd` is the displayed “project-to-a-functor between displayed representables” operation,
   from which both “apply FF to dependent-hom data” and “extract the component ϵ_{(Y,V)}” arise.
 */
+// [EXTERNAL] Stable head (displayed simplicial projection packaging). Intended to become *derived* later. // external packaging marker
 symbol tdapp1_func_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
-		   τ (Obj (Functor_cat (Transfd_cat FF GG)
-		          (Functord_cat (Fibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
+			   τ (Obj (Functor_cat (Transfd_cat FF GG)
+			          (Functord_cat (Fibration_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
 		                    (Fibration_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)))));        // target hom (draft; pending full homd_cov normalization)
 
 // `tdapp1_fapp0_funcd` is the fapp0 part of `tdapp1_func_funcd`
@@ -2281,7 +2293,7 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
   This restriction matches the “computational probe” discipline used by `homd_cov_int`:
   the displayed functors `FF, GG : E ⟶_Z D` are then probes into `D`.
 
-  Target shape (OUTLINE_MORE_INTERNAL_CORRECTED.md, Step F):
+  Target shape (nested `Transfd_cat`, outer index internalized):
     tdapp1_func_transfd FF GG :
       Transfd_cat(FF,GG) ⇒ Transfd_cat( homd_cov_int(Id), (homd_cov_int(GG)) ∘ (FFᵒᵖ) ).
 
@@ -2301,6 +2313,10 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
       • then, inside the resulting ordinary functor-category data, with `tapp0_*` (inner / base-simplex index),
     rather than by reusing `tdapp1_*` itself. This mirrors the ordinary story with `tapp1_func_transf`
     and keeps the nested-`Transfd_cat` formulation non-circular.
+
+  TODO (missing piece; hom-action on modifications):
+    Add the `fapp1_func`-part for `tdapp1_func_transfd`, mirroring `tapp1_fapp1_func_transf` (ordinary/internal)
+    and `tdapp1_fapp1_func` (displayed/external).
 */
 symbol tdapp1_func_transfd : Π [Z : Cat],
   Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
@@ -2495,6 +2511,9 @@ symbol tdapp1_fapp1_func : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj 
                    (@tdapp1_fapp0_funcd Z E D FF GG X_Z U_EX ϵ'))));                             // displayed transfors between components
 
 // β-rule: `tdapp1_fapp1_func` is definitionally the hom-action of the functor `tdapp1_func_funcd`.                // unpack tdapp1_func_funcd at homs
+// Design contract (non-circularity):
+//   - `tdapp1_fapp1_func` is only the hom-action on displayed modifications,
+//   - access to “nested components” is done via `tdapp0_*` then `tapp0_*`, not by reusing `tdapp1_*`.
 rule @fapp1_func _ _ (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ $ϵ'
   ↪ @tdapp1_fapp1_func $Z $E $D $FF $GG $X_Z $U_EX $ϵ $ϵ';
 
