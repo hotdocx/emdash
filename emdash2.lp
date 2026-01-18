@@ -883,6 +883,37 @@ symbol tapp1_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functo
 rule @fapp1_func _ _ (@tapp1_func_transf $A $B $F_AB $G_AB) $ϵ $ϵ'
   ↪ @tapp1_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ';
 
+/*
+  fapp1_func_transf (more internal hom-action)
+
+  This is the “more internal” version of the hom-action of a functor, obtained by specializing
+  `tapp1_func_transf` to the identity transfor `1_F : Transf_cat(F,F)`:
+
+    fapp1_func_transf(F)  :=  (tapp1_func_transf(F,F)) (1_F).
+
+  It internalizes the external index `X : Obj(A)` as the outer index of a transfor out of `Aᵒᵖ`.
+
+  TODO: the older external-index packaging `fapp1_funcd F [X] : Functord_cat(∫Hom_A(X,-), ∫Hom_B(FX,F-))`
+  should eventually be derived from `fapp1_func_transf F` once we implement the Grothendieck
+  “morphism-action” bridge that turns a transfor `E ⇒ D` into a displayed functor `∫E ⟶ ∫D`.
+*/
+symbol fapp1_func_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
+  τ (Obj (@Transf_cat
+    (Op_cat A)
+    (Functor_cat A Cat_cat)
+    (@hom_cov_func A A (@Id_func A))
+    (@comp_fapp0
+      Cat_cat
+      (Op_cat A)
+      (Op_cat B)
+      (Functor_cat A Cat_cat)
+      (@hom_cov_func B A F_AB)
+      (@Op_func A B F_AB))));
+
+// Folding rule: tapp1 at identity transfor is the internal hom-action stable head.                   // normalize “apply tapp1 to 1_F”
+rule fapp0 (@tapp1_func_transf $A $B $F $F) (Id (Functor_cat $A $B) $F)
+  ↪ @fapp1_func_transf $A $B $F;
+
 // Sanity: the β-rule for the new “more internal” packaging fires by rewriting.                       // exercise tapp1_func_transf β-rule
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp1_func_transf A B F_AB G_AB) ϵ ≡ @tapp1_fapp0_transf A B F_AB G_AB ϵ;
@@ -2043,11 +2074,21 @@ constant symbol tapp_lax_triangle :
 // Thus `fapp1_funcd` is not “higher-dimensional” than `fapp1_func`; it is a different *presentation*
 // (globular vs simplicial) of the same functorial action on 1-cells.
 //
-// The genuine next simplicial iteration is `fdapp1_funcd`, which uses `homd_cov` (surfaces over base edges),
-// and is where the higher simplicial story becomes essential.
+// Crisp slogan (relative dimensions; see the convention near `nat`):
+// - `fapp1_funcd` (via `hom_cov`) presents “(relative) 1-cells as objects + (relative) 2-cells as arrows”
+//   in a simplicial/Grothendieck style (2-simplex level).
+// - `fdapp1_funcd` (via `homd_cov`) is the next simplicial iteration: it presents “(relative) 2-cells as objects
+//   + (relative) 3-cells as arrows” (surface/triangle classifier; 3-simplex level).
+//
+// This is why the difference between `fapp1_func` and `fapp1_funcd` is *globular vs simplicial presentation*,
+// while the difference between `fapp1_funcd` and `fdapp1_funcd` is the *next simplicial iteration*.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (Fibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
+
+// TODO (architecture): `fapp1_funcd` should eventually be derived (not primitive) from the more-internal
+// `fapp1_func_transf` once we implement the Grothendieck “morphism-action” bridge:
+//   (E ⇒ D)  ↦  (∫E ⟶ ∫D).
 
 // Fibrewise identification: the fibre of the displayed packaging is the usual hom-action functor.     // fapp1_func = Fibre_func(fapp1_funcd)
 // Design note:
