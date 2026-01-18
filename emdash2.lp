@@ -648,26 +648,6 @@ rule Fibre_cat (Fibration_catd $M) $x ↪ fapp0 $M $x;                          
 // This is the displayed analogue of cartierSolution13's `Fibre_catd (Terminal_catd _) _ ↪ Terminal_catd _`. // terminal fibres
 rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
 
-/*
-  Fibre_functor_catd
-
-  A displayed category `E : Catd Z` determines, at least on objects, a Cat-valued “fibre classifier”
-  `z ↦ Fibre_cat E z`.
-
-  We package this as an *object* of `Functor_cat Z Cat_cat` so it can be used in functor-composition
-  pipelines (e.g. in `homd_cov5_Target` below).
-
-  For now, we only give computation rules for the constructors where the fibre is already computable
-  definitionally (`Terminal_catd` and `Fibration_catd`).
-*/
-symbol Fibre_functor_catd : Π [Z : Cat], Π (E : Catd Z), τ (Obj (Functor_cat Z Cat_cat));
-
-// Grothendieck case: the fibre functor is the original Cat-valued functor.                            // Fibre_functor_catd(∫M) ↪ M
-rule @Fibre_functor_catd $Z (@Fibration_catd $Z $M) ↪ $M;
-
-// Terminal case: constant terminal fibres.                                                           // Fibre_functor_catd(1_Z) ↪ const(1)
-rule fapp0 (@Fibre_functor_catd $Z (Terminal_catd $Z)) $z ↪ Terminal_cat;
-
 // Sanity (derived instance): representable fibration.                                                 // fibre(∫Hom(X,F-),x) ≡ Hom(X,Fx)
 // This is not an extra computation rule: it follows by rewriting with the general Grothendieck fibre
 // rule above and the `hom_cov` object-action rule `fapp0 (hom_cov X F) x ↪ Hom_cat X (fapp0 F x)`.
@@ -1494,35 +1474,33 @@ assert [Z : Cat] (F : τ (Obj (Functor_cat Z Cat_cat))) ⊢
   the main goal at this stage is to expose the *target* displayed category over Zᵒᵖ as a definable object.
 */
 
-// The Cat-valued functor of fibres associated to D : Catd Z.                                         // z ↦ Fibre_cat(D,z), packaged
-symbol homd_cov5_D0 [Z : Cat] (D : Catd Z) : τ (Obj (Functor_cat Z Cat_cat))
-≔ Fibre_functor_catd D;
-
 // Base : Zᵒᵖ ⇒ Cat, built from representables, pointwise op, pointwise product and totalization.      // consolidated Base pipeline
-symbol homd_cov5_Base [Z : Cat] (D : Catd Z) : τ (Obj (Functor_cat (Op_cat Z) Cat_cat))
+symbol homd_cov5_Base [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat (Op_cat Z) Cat_cat))
 ≔ comp_func_cat
     (Total [Z])
     (comp_func_cat
-      (fapp0 (prod_func5 [Z]) (homd_cov5_D0 D))
+      (fapp0 (prod_func5 [Z]) D0)
       (comp_func_cat
         (op2_Z [Z])
         (@hom_cov_func Z Z (@Id_func Z))));
 
 // Base lifted through the explicit fibration classifier.                                              // BaseFib : Zᵒᵖ ⇒ Catᵒᵖ
-symbol homd_cov5_BaseFib [Z : Cat] (D : Catd Z) : τ (Obj (Functor_cat (Op_cat Z) (Op_cat Cat_cat)))
-≔ comp_func_cat Fib (homd_cov5_Base D);
+symbol homd_cov5_BaseFib [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat (Op_cat Z) (Op_cat Cat_cat)))
+≔ comp_func_cat Fib (homd_cov5_Base D0);
 
 // Target displayed category over Zᵒᵖ (variance made explicit via Op_func then Op_catd).               // Target : Catd(Zᵒᵖ)
-symbol homd_cov5_Target [Z : Cat] (D : Catd Z) : Catd (Op_cat Z)
-≔ @Op_catd Z (@Fibration_catd Z (@Op_func (Op_cat Z) (Op_cat Cat_cat) (homd_cov5_BaseFib D)));
+symbol homd_cov5_Target [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat))) : Catd (Op_cat Z)
+≔ @Op_catd Z (@Fibration_catd Z (@Op_func (Op_cat Z) (Op_cat Cat_cat) (homd_cov5_BaseFib D0)));
 
-// The displayed “dependent hom” packaging (kept abstract for now).                                   // source: (Op_catd E)  target: homd_cov5_Target(D)
-constant symbol homd_cov5 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),
-  τ (Obj (Functord_cat (Op_catd E) (homd_cov5_Target D)));
-
-// Sanity: in the Grothendieck case, the fibre functor used in the pipeline reduces definitionally.   // Fibre_functor_catd(∫M) ≡ M
-assert [Z : Cat] (M : τ (Obj (Functor_cat Z Cat_cat))) ⊢
-  Fibre_functor_catd (Fibration_catd M) ≡ M;
+// The displayed “dependent hom” packaging (kept abstract for now).                                   // source: (Op_catd E)  target: homd_cov5_Target(D0)
+// Engineering convention:
+//   - we treat the “probe” into E as a Grothendieck displayed category `Fibration_catd D0`,
+//     with `D0 : Z ⟶ Cat` (computational/combinatorial input),
+//   - and only then take a displayed functor `FF : Fibration_catd D0 ⟶ E`.
+constant symbol homd_cov5 : Π [Z : Cat], Π [E : Catd Z],
+  Π (D0 : τ (Obj (Functor_cat Z Cat_cat))),
+  Π (FF : τ (Obj (Functord_cat (Fibration_catd D0) E))),
+  τ (Obj (Functord_cat (Op_catd E) (homd_cov5_Target D0)));
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
