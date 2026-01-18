@@ -329,6 +329,8 @@ symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),          
   τ (Obj A) → τ (Obj B);                                                                            // send X_A ↦ F_AB(X_A)
 
 // Action of a functor on hom-categories: gives a functor Hom_A(X,Y) → Hom_B(FX,FY).                 // F₁ as a functor (ω-level)
+// `fapp1_func` is definable from `fapp1_funcd`; but `fapp1_func` concerns itself only with the higher (2-cell) arrows over the (1-cell) identity arrow in the base,
+// i.e. it is concerned with the "globular" viewpoint only, instead of the general "simplicial" viewpoint (when the (2-cell) arrow is over any general (1-cell) in the base)
 symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),                            // functor object F
   Π [X_A Y_A : τ (Obj A)],                                                            // endpoints
   τ (Obj (Functor_cat (@Hom_cat A X_A Y_A) (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A))));        // functor on the hom-category
@@ -1950,7 +1952,8 @@ constant symbol tapp_lax_triangle :
 
 // “Slice-category” / simplicial action (warm-up): fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration (Hom_cat(X,Y) : Cat) with a simplicial iteration (fibrewise). // 2- and 3-simplex pictures
-// NOTE: the “higher (3-)simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
+// NOTE: this `fapp1_funcd` mainly concerns the higher (1-cell and 2-cell, relatively) simplicial viewpoint,
+//       while the “higher (2-cell and 3-cell, relatively) simplicial” viewpoint becomes most relevant later, once `homd_cov` is involved (see `fdapp1_funcd`). // relevance note
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
   τ (Obj (Functord_cat (Fibration_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
