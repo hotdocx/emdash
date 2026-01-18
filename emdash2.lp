@@ -2368,6 +2368,37 @@ symbol tdapp1_fapp0_transfd : Π [Z : Cat],
 rule fapp0 (@tdapp1_func_transfd $Z $E0 $D $FF $GG) $ϵ
   ↪ @tdapp1_fapp0_transfd $Z $E0 $D $FF $GG $ϵ;
 
+// Hom-action packaging (displayed modifications/4-cells), matching the existing tapp/tdapp pattern.    // unpack tdapp1_func_transfd at homs
+// This is the `fapp1_func` part of the functor `tdapp1_func_transfd`.                                  // component-of-components (internal/displayed)
+symbol tdapp1_fapp1_func_transfd : Π [Z : Cat],
+  Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
+  Π [D : Catd Z],
+  Π [FF GG : τ (Obj (Functord_cat (Fibration_catd E0) D))],
+  Π (ϵ ϵ' : τ (Obj (@Transfd_cat Z (Fibration_catd E0) D FF GG))),
+  τ (Obj (Functor_cat
+    (@Hom_cat (@Transfd_cat Z (Fibration_catd E0) D FF GG) ϵ ϵ')
+    (@Hom_cat (@Transfd_cat (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+      (@comp_funcd
+        (Op_cat Z)
+        (Op_catd (Fibration_catd E0))
+        (Op_catd D)
+        (@Op_catd Z (@Fibration_catd Z
+          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+            (comp_func_cat Fib_func (homd_cov_base E0)))))
+        (@homd_cov_int Z D E0 GG)
+        (@Op_funcd Z (Fibration_catd E0) D FF)))
+      (tdapp1_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ)
+      (tdapp1_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ'))));
+
+// β-rule: `tdapp1_fapp1_func_transfd` is definitionally the hom-action of `tdapp1_func_transfd`.        // unpack tdapp1_func_transfd at homs
+rule @fapp1_func _ _ (@tdapp1_func_transfd $Z $E0 $D $FF $GG) $ϵ $ϵ'
+  ↪ @tdapp1_fapp1_func_transfd $Z $E0 $D $FF $GG $ϵ $ϵ';
+
 /*
   fdapp1_func_transfd (more internal displayed hom-action)
 
@@ -2761,6 +2792,16 @@ assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z)))
   (ϵ : τ (Obj (Transfd_cat FF GG))) (ϵ' : τ (Obj (Transfd_cat FF GG))) ⊢
   @fapp1_func _ _ (@tdapp1_func_funcd Z E D FF GG X_Z U_EX) ϵ ϵ' ≡ @tdapp1_fapp1_func Z E D FF GG X_Z U_EX ϵ ϵ';
+
+// tdapp1_func_transfd hom-action reduces to tdapp1_fapp1_func_transfd by rewriting.                               // checks tdapp1_transfd fapp1_func β-rule fires
+assert [Z : Cat]
+  (E0 : τ (Obj (Functor_cat Z Cat_cat)))
+  [D : Catd Z]
+  [FF GG : τ (Obj (Functord_cat (Fibration_catd E0) D))]
+  (ϵ : τ (Obj (@Transfd_cat Z (Fibration_catd E0) D FF GG)))
+  (ϵ' : τ (Obj (@Transfd_cat Z (Fibration_catd E0) D FF GG))) ⊢
+  @fapp1_func _ _ (@tdapp1_func_transfd Z E0 D FF GG) ϵ ϵ'
+    ≡ @tdapp1_fapp1_func_transfd Z E0 D FF GG ϵ ϵ';
 
 // Pullback of a Grothendieck isofibration reduces to Grothendieck of precomposition.                 // checks Pullback_catd/∫ rewrite fires
 assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_cat A B))) ⊢
