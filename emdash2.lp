@@ -716,6 +716,33 @@ rule @Hom_cat (Catd_cat $Z) $E $D ↪ @Functord_cat $Z $E $D;
 rule @Id (Catd_cat $Z) $E ↪ @Id_funcd $Z $E;
 rule @comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG ↪ @comp_funcd $Z $E $D $C $FF $GG;
 
+/*
+  Catd_func (isofibration / displayed-category classifier, contravariant in the base)
+
+  Mirrors `Fib_func` (which classifies Grothendieck fibrations as Cat-valued functors):
+
+    Fib_func : Cat ⟶ Catᵒᵖ,    Fib_func(B) ↪ (B ⟶ Cat)
+
+  Here we classify *all* displayed categories (isofibrations) over a base, packaged as a functor:
+
+    Catd_func : Catᵒᵖ ⟶ Cat,   Catd_func(B) ↪ Catd_cat(B)
+
+  where `Catd_cat(B)` is the category whose objects are `Catd B` and whose morphisms are slice-style
+  displayed functors `Functord_cat`.
+
+  Note: we only fix the object-action (as with `Fib_func`); the morphism-action is left abstract for now.
+  Later, we expect it to be reindexing/pullback along base functors (a genuine contravariant action),
+  but we postpone committing to those computation rules until the “Grothendieck morphism-action” bridge
+  is fully stabilized.
+*/
+constant symbol Catd_func : τ (Obj (Functor_cat (Op_cat Cat_cat) Cat_cat));
+
+// Object-action: Catd_func(B) ≡ Catd_cat(B).                                                         // fapp0(Catd_func,B) ↪ Catd_cat(B)
+rule fapp0 Catd_func $B ↪ Catd_cat $B;
+
+// Sanity: Catd_func computes on objects by definitional equality.                                     // exercise Catd_func β-rule
+assert (B : Cat) ⊢ fapp0 Catd_func B ≡ Catd_cat B;
+
 // Fibre of a dependent category E over X_B : Obj(B) (displayed category at a base object).          // E[X_B] in type theory
 injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat;                          // fibre category at X_B
 
@@ -2260,6 +2287,20 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
 
   Here `FFᵒᵖ` is `Op_funcd FF`, and composition is the slice-style displayed composition `comp_funcd`
   over the base `Op_cat Z`.
+
+  Operational semantics (important for iteration / normalization):
+
+  - Input: ϵ : Obj(Transfd_cat(FF,GG)) is a displayed 2-cell (a displayed transfor) between displayed functors.
+  - Apply the packaged map:
+      fapp0 (tdapp1_func_transfd FF GG) ϵ : Obj(Transfd_cat( homd_cov_int(Id), (homd_cov_int GG) ∘ (FFᵒᵖ) )).
+    This is an *outer* displayed transfor whose outer index ranges over objects in the base `Op_cat Z`,
+    and whose fibrewise components range over displayed objects in the corresponding fibres.
+
+  - Components are then accessed via projections (non-circular):
+      • first with the displayed component evaluator `tdapp0_*` (outer / fibre index),
+      • then, inside the resulting ordinary functor-category data, with `tapp0_*` (inner / base-simplex index),
+    rather than by reusing `tdapp1_*` itself. This mirrors the ordinary story with `tapp1_func_transf`
+    and keeps the nested-`Transfd_cat` formulation non-circular.
 */
 symbol tdapp1_func_transfd : Π [Z : Cat],
   Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
