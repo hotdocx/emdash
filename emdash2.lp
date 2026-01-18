@@ -2637,6 +2637,74 @@ assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (Y_Z : τ (Obj Z)) (V_EY : τ (Obj (Fibre_cat E Y_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
   fapp0 (@tdapp0_func Z E D FF GG Y_Z V_EY) ϵ ≡ @tdapp0_fapp0 Z E D FF GG Y_Z V_EY ϵ;
 
+// Sanity (nested component extraction, displayed/internal – first projection step):                    // tdapp0 on the outer transfor
+//
+// For the more-internal displayed packaging `tdapp1_func_transfd`, the intended component access is:
+//   (1) apply `tdapp0_*` to project the outer displayed component at a fibre object (outer index),
+//   (2) then, inside the resulting ordinary functor-category data, apply `tapp0_*` to project the inner component.
+//
+// At the moment, step (2) is harder to state uniformly as a type assertion because fibres of `Op_catd(...)`
+// are not definitionally computed to a canonical functor-category form; so we at least assert (1) typechecks:
+// projecting the outer component yields a morphism in the appropriate fibre category.
+assert [Z : Cat]
+  (E0 : τ (Obj (Functor_cat Z Cat_cat)))
+  [D : Catd Z]
+  [FF GG : τ (Obj (Functord_cat (Fibration_catd E0) D))]
+  (ϵ : τ (Obj (@Transfd_cat Z (Fibration_catd E0) D FF GG)))
+  (Y : τ (Obj (Op_cat Z)))
+  (V : τ (Obj (Fibre_cat (Op_catd (Fibration_catd E0)) Y))) ⊢
+  @tdapp0_fapp0
+    (Op_cat Z)
+    (Op_catd (Fibration_catd E0))
+    (@Op_catd Z (@Fibration_catd Z
+      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+        (comp_func_cat Fib_func (homd_cov_base E0)))))
+    (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+    (@comp_funcd
+      (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (Op_catd D)
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z D E0 GG)
+      (@Op_funcd Z (Fibration_catd E0) D FF))
+    Y
+    V
+    (fapp0 (@tdapp1_func_transfd Z E0 D FF GG) ϵ)
+  : τ (Obj (@Hom_cat
+    (Fibre_cat
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      Y)
+    (@fdapp0
+      (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@homd_cov_int Z (Fibration_catd E0) E0 (@Id_funcd Z (Fibration_catd E0)))
+      Y
+      V)
+    (@fdapp0
+      (Op_cat Z)
+      (Op_catd (Fibration_catd E0))
+      (@Op_catd Z (@Fibration_catd Z
+        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+          (comp_func_cat Fib_func (homd_cov_base E0)))))
+      (@comp_funcd
+        (Op_cat Z)
+        (Op_catd (Fibration_catd E0))
+        (Op_catd D)
+        (@Op_catd Z (@Fibration_catd Z
+          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
+            (comp_func_cat Fib_func (homd_cov_base E0)))))
+        (@homd_cov_int Z D E0 GG)
+        (@Op_funcd Z (Fibration_catd E0) D FF))
+      Y
+      V)));
+
 // Id/comp in Functord_cat compute pointwise in fibres via tdapp0_fapp0.                               // checks vertical laws for displayed components
 assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
   (Y : τ (Obj Z)) (V : τ (Obj (Fibre_cat E Y))) ⊢
