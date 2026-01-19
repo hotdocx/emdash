@@ -602,19 +602,19 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
           (@fapp1_func B A F X Y) f) g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
-// In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
-constant symbol hom_cov_func : Π [A : Cat], Π [B : Cat],
+// In ordinary notation: hom_cov_int(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
+constant symbol hom_cov_int : Π [A : Cat], Π [B : Cat],
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat (Op_cat A) (Functor_cat B Cat_cat)));
 
-// β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_func(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_func(F),X) ↪ hom_cov(X,F)
-rule fapp0 (@hom_cov_func $A $B $F) $X ↪ @hom_cov $A $X $B $F;
+// β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_int(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_int(F),X) ↪ hom_cov(X,F)
+rule fapp0 (@hom_cov_int $A $B $F) $X ↪ @hom_cov $A $X $B $F;
 
 // Sanity: the β-rule fires, and the resulting functor still computes pointwise via hom_cov.         // exercise both rewrites
 assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) ⊢
-  fapp0 (hom_cov_func F) X ≡ @hom_cov A X B F;
+  fapp0 (hom_cov_int F) X ≡ @hom_cov A X B F;
 
 assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
-  fapp0 (fapp0 (hom_cov_func F) X) Y ≡ @Hom_cat A X (fapp0 F Y);
+  fapp0 (fapp0 (hom_cov_int F) X) Y ≡ @Hom_cat A X (fapp0 F Y);
 
 
 // -------------------------------------------------------------------------------------------------
@@ -868,8 +868,8 @@ rule fapp0 (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ ↪ @tapp1_fapp0_funcd
   following the nested-`Transf_cat` internalization plan.
 
   Define:
-    H0 := hom_cov_func(Id_A)                      : Aᵒᵖ ⇒ (A ⇒ Cat)
-    H1 := (hom_cov_func(G)) ∘ (Fᵒᵖ)               : Aᵒᵖ ⇒ (A ⇒ Cat)
+    H0 := hom_cov_int(Id_A)                      : Aᵒᵖ ⇒ (A ⇒ Cat)
+    H1 := (hom_cov_int(G)) ∘ (Fᵒᵖ)               : Aᵒᵖ ⇒ (A ⇒ Cat)
   then:
     tapp1_int_func_transf(F,G) : Transf_cat(F,G) ⇒ Transf_cat(H0,H1).
 
@@ -883,13 +883,13 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_
     (@Transf_cat
       (Op_cat A)
       (Functor_cat A Cat_cat)
-      (@hom_cov_func A A (@Id_func A))
+      (@hom_cov_int A A (@Id_func A))
       (@comp_fapp0
         Cat_cat
         (Op_cat A)
         (Op_cat B)
         (Functor_cat A Cat_cat)
-        (@hom_cov_func B A G_AB)
+        (@hom_cov_int B A G_AB)
         (@Op_func A B F_AB)))));
 
 symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
@@ -897,13 +897,13 @@ symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor
   τ (Obj (@Transf_cat
     (Op_cat A)
     (Functor_cat A Cat_cat)
-    (@hom_cov_func A A (@Id_func A))
+    (@hom_cov_int A A (@Id_func A))
     (@comp_fapp0
       Cat_cat
       (Op_cat A)
       (Op_cat B)
       (Functor_cat A Cat_cat)
-      (@hom_cov_func B A G_AB)
+      (@hom_cov_int B A G_AB)
       (@Op_func A B F_AB))));
 
 // β-rule: object-action of tapp1_int_func_transf folds to tapp1_int_fapp0_transf.                            // unpack tapp1_int_func_transf at objects
@@ -920,13 +920,13 @@ symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Fu
     (@Hom_cat (@Transf_cat
       (Op_cat A)
       (Functor_cat A Cat_cat)
-      (@hom_cov_func A A (@Id_func A))
+      (@hom_cov_int A A (@Id_func A))
       (@comp_fapp0
         Cat_cat
         (Op_cat A)
         (Op_cat B)
         (Functor_cat A Cat_cat)
-        (@hom_cov_func B A G_AB)
+        (@hom_cov_int B A G_AB)
         (@Op_func A B F_AB)))
       (tapp1_int_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ)
       (tapp1_int_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ'))));
@@ -952,13 +952,13 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B)))
   τ (Obj (@Transf_cat
     (Op_cat A)
     (Functor_cat A Cat_cat)
-    (@hom_cov_func A A (@Id_func A))
+    (@hom_cov_int A A (@Id_func A))
     (@comp_fapp0
       Cat_cat
       (Op_cat A)
       (Op_cat B)
       (Functor_cat A Cat_cat)
-      (@hom_cov_func B A F_AB)
+      (@hom_cov_int B A F_AB)
       (@Op_func A B F_AB))));
 
 // Folding rule: tapp1 at identity transfor is the internal hom-action stable head.                   // normalize “apply tapp1 to 1_F”
@@ -1653,7 +1653,7 @@ symbol homd_cov_int_base [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat)))
       (fapp0 (prod_func_func [Z]) D0)
       (comp_func_cat
         (op_val_func [Z])
-        (@hom_cov_func Z Z (@Id_func Z))));
+        (@hom_cov_int Z Z (@Id_func Z))));
 
 // The displayed “dependent hom” packaging (kept abstract for now).                                   // source: (Op_catd E)  target: inlined
 // Engineering convention:
@@ -2618,13 +2618,13 @@ assert [A B : Cat]
   (F_AB G_AB : τ (Obj (Functor_cat A B)))
   (ϵ : τ (Obj (Transf_cat F_AB G_AB)))
   (X Y : τ (Obj A)) ⊢
-  let H0 ≔ @hom_cov_func A A (@Id_func A) in
+  let H0 ≔ @hom_cov_int A A (@Id_func A) in
   let H1 ≔ @comp_fapp0
     Cat_cat
     (Op_cat A)
     (Op_cat B)
     (Functor_cat A Cat_cat)
-    (@hom_cov_func B A G_AB)
+    (@hom_cov_int B A G_AB)
     (@Op_func A B F_AB) in
   let outer ≔ fapp0 (@tapp1_int_func_transf A B F_AB G_AB) ϵ in
   let innerX ≔ @tapp0_fapp0 (Op_cat A) (Functor_cat A Cat_cat) H0 H1 X outer in

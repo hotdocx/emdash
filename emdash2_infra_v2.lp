@@ -516,19 +516,19 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
           (@fapp1_func B A F X Y) f) g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
-// In ordinary notation: hom_cov_func(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
-constant symbol hom_cov_func : Π [A : Cat], Π [B : Cat],
+// In ordinary notation: hom_cov_int(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
+constant symbol hom_cov_int : Π [A : Cat], Π [B : Cat],
   Π (F_BA : τ (Obj (Functor_cat B A))), τ (Obj (Functor_cat (Op_cat A) (Functor_cat B Cat_cat)));
 
-// β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_func(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_func(F),X) ↪ hom_cov(X,F)
-rule fapp0 (@hom_cov_func $A $B $F) $X ↪ @hom_cov $A $X $B $F;
+// β-rule for object-action: at X : Obj(Aᵒᵖ) (i.e. X : Obj(A)), hom_cov_int(F)(X) ≡ hom_cov(X,F).   // fapp0(hom_cov_int(F),X) ↪ hom_cov(X,F)
+rule fapp0 (@hom_cov_int $A $B $F) $X ↪ @hom_cov $A $X $B $F;
 
 // Sanity: the β-rule fires, and the resulting functor still computes pointwise via hom_cov.         // exercise both rewrites
 assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) ⊢
-  fapp0 (hom_cov_func F) X ≡ @hom_cov A X B F;
+  fapp0 (hom_cov_int F) X ≡ @hom_cov A X B F;
 
 assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
-  fapp0 (fapp0 (hom_cov_func F) X) Y ≡ @Hom_cat A X (fapp0 F Y);
+  fapp0 (fapp0 (hom_cov_int F) X) Y ≡ @Hom_cat A X (fapp0 F Y);
 
 
 // -------------------------------------------------------------------------------------------------

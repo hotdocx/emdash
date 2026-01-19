@@ -1,4 +1,4 @@
-# OUTLINE: More-internal formulation (corrected) — `hom_cov_func` / nested `Transf_cat` / `homd_cov5`
+# OUTLINE: More-internal formulation (corrected) — `hom_cov_int` / nested `Transf_cat` / `homd_cov5`
 
 This note is a corrected handover plan for enhancing `emdash2.lp` toward a more “internal”
 formulation of:
@@ -20,9 +20,9 @@ The file already contains:
   - `hom_cov A W B F : Obj(Functor_cat B Cat_cat)`
   - with computation `fapp0 (hom_cov A W B F) Y ↪ Hom_cat A W (fapp0 F Y)`.
 
-- `hom_cov_func` (already internalizes `W`):
-  - `hom_cov_func : Π [A] [B] (F : Obj(Functor_cat B A)), Obj(Functor_cat (Op_cat A) (Functor_cat B Cat_cat))`
-  - with β-rule `fapp0 (hom_cov_func F) X ↪ hom_cov A X B F`.
+- `hom_cov_int` (already internalizes `W`):
+  - `hom_cov_int : Π [A] [B] (F : Obj(Functor_cat B A)), Obj(Functor_cat (Op_cat A) (Functor_cat B Cat_cat))`
+  - with β-rule `fapp0 (hom_cov_int F) X ↪ hom_cov A X B F`.
 
 So the “make `W` internal” step is already solved for `hom_cov`.
 
@@ -53,15 +53,15 @@ so that nested `Transf_cat` / `Transfd_cat` formulations are not circular: compo
 
 Goal: avoid an explicit binder `X_A : Obj(A)` in `tapp1_func_funcd`.
 
-Key observation: `hom_cov_func` already gives:
+Key observation: `hom_cov_int` already gives:
 
-- for `Id_A : A⇒A`, a functor `H0 := hom_cov_func (Id_A) : A^op ⇒ (A ⇒ Cat)`.
-- for `G : A⇒B`, a functor `hom_cov_func G : B^op ⇒ (A ⇒ Cat)`.
+- for `Id_A : A⇒A`, a functor `H0 := hom_cov_int (Id_A) : A^op ⇒ (A ⇒ Cat)`.
+- for `G : A⇒B`, a functor `hom_cov_int G : B^op ⇒ (A ⇒ Cat)`.
 
-To get a functor of shape `A^op ⇒ (A ⇒ Cat)` from `hom_cov_func G`, precompose by `F^op`:
+To get a functor of shape `A^op ⇒ (A ⇒ Cat)` from `hom_cov_int G`, precompose by `F^op`:
 
 - `F^op : A^op ⇒ B^op` is `Op_func A B F`.
-- define `H1 := (hom_cov_func G) ∘ F^op : A^op ⇒ (A ⇒ Cat)`.
+- define `H1 := (hom_cov_int G) ∘ F^op : A^op ⇒ (A ⇒ Cat)`.
 
 Then the “more internal” `tapp1` target is:
 
@@ -71,7 +71,7 @@ tapp1_func_funcd5 F G :
 ```
 
 This is the correct replacement for earlier ill-typed attempts like
-`FibrationOp_catd (hom_cov_func ...)` (those are ill-typed because `FibrationOp_catd` expects a functor
+`FibrationOp_catd (hom_cov_int ...)` (those are ill-typed because `FibrationOp_catd` expects a functor
 `A⇒Cat`, not `A^op⇒(A⇒Cat)`).
 
 ### 1.2 How components are accessed (non-circular operational semantics)
@@ -133,7 +133,7 @@ The dependent part is where `homd_cov` matters. The key design decision in this 
 
 We want an internalized version `homd_cov5` built functorially from:
 
-- `hom_cov_func (Id_Z) : Z^op ⇒ (Z ⇒ Cat)`,
+- `hom_cov_int (Id_Z) : Z^op ⇒ (Z ⇒ Cat)`,
 - a pointwise opposite-on-values operation `op2_Z` (derived from `op : Cat⇒Cat` by internal postcomposition),
 - a fully-internalized pointwise product on Cat-valued functors:
   `prod_func5 : (Z⇒Cat) ⇒ (Z⇒Cat) ⇒ (Z⇒Cat)`,
@@ -143,7 +143,7 @@ We want an internalized version `homd_cov5` built functorially from:
   but chosen so the composites typecheck).
 
 The intention is that the old “external parameter” `W_Z : Obj(Z)` becomes the **outer index**
-of a functor out of `Z^op` (i.e. it is internalized exactly the way `hom_cov_func` internalizes `W`).
+of a functor out of `Z^op` (i.e. it is internalized exactly the way `hom_cov_int` internalizes `W`).
 
 There are two equivalent viewpoints:
 
@@ -254,7 +254,7 @@ with β-rule `fapp0 (fapp0 prod_func5 D) E ↪ prod_func D E`.
 ### Step C — Introduce internalized `Total_Z` and `Fib` (choose variance so compositions typecheck)
 
 We want to build a functor `Op_cat Z → Cat_cat` from the pipeline
-`hom_cov_func(Id)` → `op2_Z` → `prod_func5` → `Total_Z`, and then optionally lift it to a “fibration classifier”
+`hom_cov_int(Id)` → `op2_Z` → `prod_func5` → `Total_Z`, and then optionally lift it to a “fibration classifier”
 level via `Fib`.
 
 #### (C1) Internalized Grothendieck total (object-level β-rule is enough initially)
@@ -310,7 +310,7 @@ This final object is the target displayed category over `Op_cat Z` we will use i
 ### Step D — Define `homd_cov5` explicitly (the consolidated formula)
 
 This step records the consolidated “earlier approach” formula: internalize the former external
-`W_Z : Obj(Z)` by making it the *outer index* of a functor out of `Op_cat Z`, exactly as `hom_cov_func`
+`W_Z : Obj(Z)` by making it the *outer index* of a functor out of `Op_cat Z`, exactly as `hom_cov_int`
 already does for `hom_cov`.
 
 Fix a base category `Z : Cat` and a Cat-valued functor (for computations) `D : Obj(Functor_cat Z Cat_cat)`
@@ -319,7 +319,7 @@ Fix a base category `Z : Cat` and a Cat-valued functor (for computations) `D : O
 1) Start from the already internalized representable-in-context:
 
 ```text
-HId := hom_cov_func (@Id_func Z)
+HId := hom_cov_int (@Id_func Z)
     : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
 ```
 
@@ -387,7 +387,7 @@ object argument of the resulting displayed functor on fibres.
 Implement:
 
 - `tapp1_func_funcd5 F G : Obj(Functor_cat (Transf_cat F G) (Transf_cat H0 H1))`
-  with `H0 := hom_cov_func (Id_func A)` and `H1 := (hom_cov_func G) ∘ F^op`.
+  with `H0 := hom_cov_int (Id_func A)` and `H1 := (hom_cov_int G) ∘ F^op`.
 
 Then add “sanity assertions” exercising the intended component extraction via `tapp0_*` twice.
 
