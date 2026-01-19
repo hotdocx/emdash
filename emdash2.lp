@@ -572,13 +572,13 @@ rule @comp_fapp0 Cat_cat _ _ Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
-  @comp_fapp0 Cat_cat C B Cat_cat (@hom_cov A W B F) G
-    ≡ @hom_cov A W C (@comp_fapp0 Cat_cat C B A F G);
+  comp_cat_fapp0 (@hom_cov A W B F) G
+    ≡ @hom_cov A W C (comp_cat_fapp0 F G);
 
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
   (F : τ (Obj (Functor_cat B A))) (G : τ (Obj (Functor_cat C B))) ⊢
-  @comp_fapp0 Cat_cat (Op_cat C) (Op_cat B) Cat_cat (@hom_con A W B F) (@Op_func C B G)
-    ≡ @hom_con A W C (@comp_fapp0 Cat_cat C B A F G);
+  comp_cat_fapp0 (@hom_con A W B F) (@Op_func C B G)
+    ≡ @hom_con A W C (comp_cat_fapp0 F G);
 
 // Sanity: hom_con is definitional to hom_cov in the opposite category, pointwise.                     // Hom_{Aᵒᵖ}(W, Fᵒᵖ(-)) = Hom_A(F(-),W)
 assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A))) (x : τ (Obj (Op_cat B))) ⊢
@@ -592,8 +592,8 @@ assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
 
 // Sanity: opposite distributes over functor composition in Cat_cat.                                  // (F∘G)ᵒᵖ = Fᵒᵖ∘Gᵒᵖ
 assert [A B C : Cat] (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) ⊢
-  @Op_func A C (@comp_fapp0 Cat_cat A B C F G)
-    ≡ @comp_fapp0 Cat_cat (Op_cat A) (Op_cat B) (Op_cat C) (@Op_func B C F) (@Op_func A B G);
+  @Op_func A C (comp_cat_fapp0 F G)
+    ≡ comp_cat_fapp0 (@Op_func B C F) (@Op_func A B G);
 
 // Sanity: general hom_cov action computes to postcomposition.                                          // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
 assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A)))
@@ -1596,7 +1596,7 @@ rule @fapp0 (Functor_cat $X $Y) (Functor_cat $X $Z) (@comp_cat_cov_func $X $Y $Z
 
 // Sanity: the β-rule fires by definitional equality.                                                 // exercise comp_cat_cov_func β-rule
 assert [X Y Z : Cat] (G : τ (Obj (Functor_cat Y Z))) (F : τ (Obj (Functor_cat X Y))) ⊢
-  fapp0 (@comp_cat_cov_func X Y Z G) F ≡ @comp_fapp0 Cat_cat X Y Z G F;
+  fapp0 (@comp_cat_cov_func X Y Z G) F ≡ comp_cat_fapp0 G F;
 
 // Pointwise opposite on values for Cat-valued functors, as a functor object.                         // (−)ᵒᵖ pointwise : (Z⟶Cat) ⟶ (Z⟶Cat)
 symbol op_val_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat)))
@@ -1604,7 +1604,7 @@ symbol op_val_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) (Fun
 
 // Sanity: op_val_func acts as postcomposition by op.                                                 // op_val_func(F) ≡ op∘F
 assert [Z : Cat] (F : τ (Obj (Functor_cat Z Cat_cat))) ⊢
-  fapp0 (op_val_func [Z]) F ≡ @comp_fapp0 Cat_cat Z Cat_cat Cat_cat op F;
+  fapp0 (op_val_func [Z]) F ≡ comp_cat_fapp0 op F;
 
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
@@ -1902,10 +1902,7 @@ symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
 symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
   : τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat))
-≔ @comp_fapp0 Cat_cat
-     (Op_cat (@Hom_cat B x y))
-     (Op_cat (fapp0 M y))
-     Cat_cat
+≔ comp_cat_fapp0
      (@hom_con (fapp0 M y) v (fapp0 M y) (@id_func (fapp0 M y)))
      (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u));
 
@@ -2779,7 +2776,7 @@ assert [Z : Cat]
 // Pullback of a Grothendieck isofibration reduces to Grothendieck of precomposition.                 // checks Pullback_catd/∫ rewrite fires
 assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_cat A B))) ⊢
   @Pullback_catd A B (@Fibration_cov_catd B E) F
-    ≡ @Fibration_cov_catd A (@comp_fapp0 Cat_cat A B Cat_cat E F);
+    ≡ @Fibration_cov_catd A (comp_cat_fapp0 E F);
 
 // Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd/Lift_funcd rules fire
 assert [A : Cat] ⊢ Total_cat (Lift_catd A) ≡ A;
