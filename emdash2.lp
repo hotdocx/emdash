@@ -979,9 +979,20 @@ rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ $ϵ'
 
   It internalizes the external index `X : Obj(A)` as the outer index of a transfor out of `Aᵒᵖ`.
 
-  TODO: the older external-index packaging `fapp1_funcd F [X] : Functord_cat(∫Hom_A(X,-), ∫Hom_B(FX,F-))`
-  should eventually be derived from `fapp1_int_transf F` once we implement the Grothendieck
-  “morphism-action” bridge that turns a transfor `E ⇒ D` into a displayed functor `∫E ⟶ ∫D`.
+  TODO (Groth bridge / untruncated ω-form):
+
+  The older external-index packaging
+    `fapp1_funcd F [X] : Functord_cat(∫Hom_A(X,-), ∫Hom_B(FX,F-))`
+  should be derived from `fapp1_int_transf F` using the Grothendieck morphism-action of ∫.
+
+  With `Fibration_cov_func` and its hom-action stable head `Fibration_cov_fapp1_func` (i.e. `(∫)_1`),
+  the intended derivation mirrors the `tapp1_*` story:
+    - first evaluate the internal outer transfor at X (outer index),
+    - then apply `(∫)_1` to obtain a displayed functor between Grothendieck totals,
+    - finally fold to the stable head `fapp1_funcd`.
+
+  Also, for ω-friendly normalization, prefer the functor-level (untruncated) fold:
+    identify the induced functor object, and only apply `fapp0` later when given a concrete higher cell.
 */
 symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
   τ (Obj (Transf_cat
@@ -2468,6 +2479,19 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
   TODO (missing piece; hom-action on modifications):
     Add the `fapp1_func`-part for `tdapp1_int_func_transfd`, mirroring `tapp1_int_fapp1_func_transf` (ordinary/internal)
     and `tdapp1_fapp1_func` (displayed/external).
+
+  TODO (Groth correspondence / link to external displayed packagings):
+
+  The displayed “external” packaging (`tdapp1_func_funcd`, `tdapp1_fapp1_func`) is currently kept as a stable head.
+  We ultimately want the same bridge pattern as in the ordinary case:
+    - define the relevant Grothendieck constructor as a functor object (here: ∫ on Cat-valued functors, living in `Catd_cat Z`),
+    - use its hom-action (an analogue of `Fibration_cov_fapp1_func`) to turn displayed transfors into displayed functors
+      between Grothendieck totals of the displayed representables (built from `homd_cov` / `homd_cov_int_*`),
+    - fold the resulting composite functor object to the stable heads `tdapp1_*`.
+
+  As with the ordinary case, we expect two layers:
+    (1) a functor-level (untruncated) fold that identifies the induced functor on displayed modifications/4-cells,
+    (2) optional derived “capped” computations obtained by applying `fapp0` later.
 */
 symbol tdapp1_int_func_transfd : Π [Z : Cat],
   Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
@@ -2532,6 +2556,12 @@ rule @fapp1_func _ _ (@tdapp1_int_func_transfd $Z $E0 $D $FF $GG) $ϵ $ϵ'
 
   TODO: once we have the Grothendieck “morphism-action” bridge (turning a displayed transfor into a displayed functor
   between totals / representables), the older external-index packaging `fdapp1_funcd` should be derived from this.
+
+  TODO (check correspondence point):
+  This is the displayed analogue of `fapp1_int_transf`. Once the displayed Groth bridge is in place,
+  we should review whether the derived external packaging should fold directly from:
+    (∫)_1 applied to the internal displayed transfor at identity (and then evaluated at the chosen base point),
+  in the same way `fapp1_funcd` is expected to fold from `fapp1_int_transf` in the ordinary case.
 */
 symbol fdapp1_int_transfd : Π [Z : Cat],
   Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
