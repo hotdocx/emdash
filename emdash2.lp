@@ -2673,18 +2673,36 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
   - then evaluate at the external index X (via `tapp0_func` in the outer index category Op_cat A),
   - then apply Grothendieck morphism-action on homs (via `fapp1_func` of `Fibration_cov_func`),
   - finally fold to the external stable-head hom-action `tapp1_fapp1_func`.
+
+  IMPORTANT (ω-friendly normalization vs truncation):
+
+  In emdash2, “(n+1)-cells” are always represented as *relative 1-cells* in an iterated hom-category.
+  Operationally, this means that ω-iteration is performed by repeatedly taking hom-actions (`fapp1_func`)
+  in ever-deeper ambient categories (Hom_cat, Hom_cat(Hom_cat …), …).
+
+  A rewrite rule whose *result* is an element produced by applying a functor to an argument, i.e. of the shape
+      fapp0 ( … ) $α  ↪  ...
+  is a **dimension-capped** (truncating) computation: it computes the image of the specific cell $α and yields
+  a cell, but it does not leave behind a functor object that can still be fed to `fapp1_func` for the next
+  dimension (4-cells between modifications, etc.).
+
+  Therefore, for the “Groth∘tapp1_int” pipeline we prefer an *untruncated* rewrite:
+  we rewrite the whole composite **functor object** (built using `comp_cat_fapp0` on functors between hom-categories)
+  to the stable head `tapp1_fapp1_func …`, and only apply `fapp0` later when/if a concrete higher cell is supplied.
 */
 
 /*
   Groth∘tapp1_int fold (functor-level; untruncated ω-potential)
 
-  The cell-level fold below rewrites the *application* of the induced functor to a specific
-  modification `α`. To keep the ω-potential (so we can still apply `fapp1_func` again on 4-cells),
-  we also provide a functor-level fold identifying the whole composite functor:
+  Untruncated (ω-friendly) statement:
+  identify the whole composite functor on modifications:
 
     Hom(Transf_cat(F,G))(ϵ,ϵ')  ⟶  Transfd_cat(tapp1_fapp0_funcd(X,ϵ), tapp1_fapp0_funcd(X,ϵ'))
 
   as the stable head `tapp1_fapp1_func(X,ϵ,ϵ')`.
+
+  Once this fold exists, the “truncated/capped” computation on an explicit modification α is *derivable*
+  by applying `fapp0` to both sides; we keep the rewrite layer focused on the functor-level normal form.
 */
 
 rule @comp_cat_fapp0
