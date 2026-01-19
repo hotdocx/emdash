@@ -1003,6 +1003,29 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B)))
 rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
+/*
+  fapp1_int_at_X (evaluate the internal hom-action transfor at X)
+
+  `fapp1_int_transf F` is a transfor out of `Op_cat A`:
+
+    fapp1_int_transf F : hom_cov_int(id_A) ⇒ (hom_cov_int(F) ∘ (Fᵒᵖ)).
+
+  To relate it to the external packaging `fapp1_funcd F [X]`, we first evaluate this outer transfor
+  at a chosen object `X : Obj(A)` (i.e. apply `tapp0_fapp0` in the index `Op_cat A`).
+
+  As in other parts of the kernel, we keep this evaluation as a stable head so later Groth-bridges
+  can fold at the functor level (ω-friendly, untruncated) and only cap with `fapp0` when required.
+*/
+
+// Stable head: evaluate `fapp1_int_transf F` at X (outer index in Op_cat A).                             // (fapp1_int_transf F)_X
+symbol fapp1_int_fapp0_tapp0_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
+  Π (X_A : τ (Obj A)),
+  τ (Obj (Transf_cat
+    (@hom_cov A X_A A (@id_func A))
+    (@hom_cov B (fapp0 F_AB X_A) A F_AB)));
+
+// Canonicalization rule for this stable head is stated later, after `tapp0_fapp0` is introduced.
+
 // Sanity: the β-rule for the new “more internal” packaging fires by rewriting.                       // exercise tapp1_int_func_transf β-rule
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp1_int_func_transf A B F_AB G_AB) ϵ ≡ @tapp1_int_fapp0_transf A B F_AB G_AB ϵ;
@@ -1878,6 +1901,16 @@ rule @tapp0_fapp0
       (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
   ↪ @tapp1_int_fapp0_tapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
 
+// Canonicalization: evaluate `fapp1_int_transf F` at X and fold to the stable head.                    // fold (fapp1_int_transf F)_X
+rule @tapp0_fapp0
+      (Op_cat $A)
+      (Functor_cat $A Cat_cat)
+      (@hom_cov_int $A $A (@id_func $A))
+      (comp_cat_fapp0 (hom_cov_int $F_AB) (Op_func $F_AB))
+      $X_A
+      (@fapp1_int_transf $A $B $F_AB)
+  ↪ @fapp1_int_fapp0_tapp0_transf $A $B $F_AB $X_A;
+
 // Sanity: folding rule is visible by definitional equality.                                           // outer(ϵ)_X folds
 assert [A B : Cat]
   [F_AB G_AB : τ (Obj (Functor_cat A B))]
@@ -2300,9 +2333,21 @@ symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π 
   τ (Obj (Functord_cat (Fibration_cov_catd (hom_cov X_A (@id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (Fibration_cov_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
 
-// TODO (architecture): `fapp1_funcd` should eventually be derived (not primitive) from the more-internal
-// `fapp1_int_transf` once we implement the Grothendieck “morphism-action” bridge:
-//   (E ⇒ D)  ↦  (∫E ⟶ ∫D).
+// Architecture note:
+// `fapp1_funcd` is a stable head we keep for readability, but we do provide a fold rule deriving it
+// from the more-internal transfor packaging `fapp1_int_transf` using the Grothendieck morphism-action
+// bridge (implemented earlier via `Fibration_cov_func` / `Fibration_cov_fapp1_func`).
+//
+// Long-term goal: make `fapp1_funcd` fully *derived* (not primitive) once the surrounding infrastructure
+// is stable (and similarly for displayed analogues).
+
+// Bridge (identity specialization): Groth of the internal hom-action at X folds to `fapp1_funcd`.       // fold Groth∘fapp1_int ↪ fapp1_funcd
+rule fapp0
+    (@Fibration_cov_fapp1_func $A
+      (@hom_cov $A $X_A $A (@id_func $A))
+      (@hom_cov $B (fapp0 $F_AB $X_A) $A $F_AB))
+    (@fapp1_int_fapp0_tapp0_transf $A $B $F_AB $X_A)
+  ↪ @fapp1_funcd $A $B $F_AB $X_A;
 
 // Fibrewise identification: the fibre of the displayed packaging is the usual hom-action functor.     // fapp1_func = Fibre_func(fapp1_funcd)
 // Design note:
