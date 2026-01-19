@@ -500,6 +500,13 @@ rule fapp0 (@id Cat_cat $A) $xA ↪ $xA;                                        
 rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x
   ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
+// Composition of functors (special case): categorical composition in Cat, as a compact abbreviation.   // F∘G in Cat
+// Note: definitional abbreviation; if we later want pointwise computation rules with head `comp_cat_fapp0`,
+// refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+symbol comp_cat_fapp0 [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
+  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
+≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
+
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 
@@ -900,25 +907,13 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_
     (Transf_cat F_AB G_AB)
     (Transf_cat
       (hom_cov_int (@id_func A))
-      (@comp_fapp0
-        Cat_cat
-        (Op_cat A)
-        (Op_cat B)
-        (Functor_cat A Cat_cat)
-        (hom_cov_int G_AB)
-        (Op_func F_AB)))));
+      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)))));
 
 symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
   Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj (Transf_cat
     (hom_cov_int (@id_func A))
-    (@comp_fapp0
-      Cat_cat
-      (Op_cat A)
-      (Op_cat B)
-      (Functor_cat A Cat_cat)
-      (hom_cov_int G_AB)
-      (Op_func F_AB))));
+    (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB))));
 
 // β-rule: object-action of tapp1_int_func_transf folds to tapp1_int_fapp0_transf.                            // unpack tapp1_int_func_transf at objects
 rule fapp0 (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ ↪ @tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ;
@@ -933,13 +928,7 @@ symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Fu
     (@Hom_cat (Transf_cat F_AB G_AB) ϵ ϵ')
     (@Hom_cat (Transf_cat
       (hom_cov_int (@id_func A))
-      (@comp_fapp0
-        Cat_cat
-        (Op_cat A)
-        (Op_cat B)
-        (Functor_cat A Cat_cat)
-        (hom_cov_int G_AB)
-        (Op_func F_AB)))
+      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)))
       (tapp1_int_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ)
       (tapp1_int_fapp0_transf [A] [B] [F_AB] [G_AB] ϵ'))));
 
@@ -963,13 +952,7 @@ rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ $ϵ'
 symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
   τ (Obj (Transf_cat
     (hom_cov_int (@id_func A))
-    (@comp_fapp0
-      Cat_cat
-      (Op_cat A)
-      (Op_cat B)
-      (Functor_cat A Cat_cat)
-      (hom_cov_int F_AB)
-      (Op_func F_AB))));
+    (comp_cat_fapp0 (hom_cov_int F_AB) (Op_func F_AB))));
 
 // Folding rule: tapp1 at identity transfor is the internal hom-action stable head.                   // normalize “apply tapp1 to 1_F”
 rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
@@ -1586,11 +1569,8 @@ assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   (g : τ (Obj (@Hom_cat A Y Z))) (f : τ (Obj (@Hom_cat A X Y))) ⊢
   fapp0 (@comp_func A X Y Z) (Struct_sigma g f) ≡ @comp_fapp0 A X Y Z g f;
 
-// Composition of functors is composition in Cat_cat (a special case of comp_fapp0).                 // categorical composition in Cat
-symbol comp_cat_fapp0 [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
-  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
-≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
-// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_cat_fapp0`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+// Note: `comp_cat_fapp0` is defined earlier (right after the pointwise computation rule for functor composition),
+// so it can be used in “internal” sections as well.
 
 // -------------------------------------------------------------------------------------------------
 // 15a. Curried postcomposition in Cat                                                              // stable-head internal “postcompose”
