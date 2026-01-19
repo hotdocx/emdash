@@ -1962,6 +1962,14 @@ rule @Fibre_func $A
       $x
   ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
 
+// Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
+rule fapp0
+    (@Groth_transf_funcd_func $A
+      (@hom_cov $A $X_A $A (@id_func $A))
+      (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+    (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+  ↪ @tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ;
+
 // Sanity: fibrewise action is component evaluation.                                                   // (Groth(ϵ))_x(u) = (ϵ_x)(u)
 assert [A : Cat]
   (E D : τ (Obj (Functor_cat A Cat_cat)))
