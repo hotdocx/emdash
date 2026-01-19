@@ -30,7 +30,7 @@ So the “make `W` internal” step is already solved for `hom_cov`.
 
 Currently (simplified) the file has:
 
-- `tapp1_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (FibrationOp_catd (hom_cov X id)) (FibrationOp_catd (hom_cov (F X) G))))`
+- `tapp1_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (Fibration_cov_catd (hom_cov X id)) (Fibration_cov_catd (hom_cov (F X) G))))`
 
 so `X_A` is a *binder* (external index) in the type.
 
@@ -71,7 +71,7 @@ tapp1_func_funcd5 F G :
 ```
 
 This is the correct replacement for earlier ill-typed attempts like
-`FibrationOp_catd (hom_cov_int ...)` (those are ill-typed because `FibrationOp_catd` expects a functor
+`Fibration_cov_catd (hom_cov_int ...)` (those are ill-typed because `Fibration_cov_catd` expects a functor
 `A⇒Cat`, not `A^op⇒(A⇒Cat)`).
 
 ### 1.2 How components are accessed (non-circular operational semantics)
@@ -150,7 +150,7 @@ There are two equivalent viewpoints:
 - (Functor-valued / strict Grothendieck) work with `E : Obj(Functor_cat Z Cat_cat)` and build
   a target `Z^op ⇒ Cat_cat` and then a transfor into it.
 - (Displayed / slice) work with `E : Catd Z`, take `Op_catd E : Catd(Z^op)`, and map into a Grothendieck
-  displayed category `FibrationOp_catd(...) : Catd(Z^op)`.
+  displayed category `Fibration_cov_catd(...) : Catd(Z^op)`.
 
 ### 2.2 Interaction with `tdapp1` (nested projection story)
 
@@ -267,7 +267,7 @@ Total :
   τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat))
 
 β (objects):
-  fapp0 (Total [Z]) M ↪ Total_cat (FibrationOp_catd M)
+  fapp0 (Total [Z]) M ↪ Total_cat (Fibration_cov_catd M)
 ```
 
 This makes `Total_Z` usable in functor composition inside `Cat_cat`.
@@ -300,10 +300,10 @@ to obtain a displayed category over `Op_cat Z`:
    - `Op_func (Fib∘Base) : Obj(Functor_cat Z Cat_cat)`.
 
 3) Grothendieck-totalize to a displayed category over `Z`:
-   - `FibrationOp_catd (Op_func (Fib∘Base)) : Catd Z`.
+   - `Fibration_cov_catd (Op_func (Fib∘Base)) : Catd Z`.
 
 4) Opposite the displayed category to get a displayed category over `Op_cat Z`:
-   - `Op_catd (FibrationOp_catd (Op_func (Fib∘Base))) : Catd (Op_cat Z)`.
+   - `Op_catd (Fibration_cov_catd (Op_func (Fib∘Base))) : Catd (Op_cat Z)`.
 
 This final object is the target displayed category over `Op_cat Z` we will use in `homd_cov5`.
 
@@ -364,7 +364,7 @@ Then define the target displayed category over `Op_cat Z` as:
 
 ```text
 Target :=
-  Op_catd (FibrationOp_catd (Op_func BaseFib))
+  Op_catd (Fibration_cov_catd (Op_func BaseFib))
   : Catd (Op_cat Z)
 ```
 

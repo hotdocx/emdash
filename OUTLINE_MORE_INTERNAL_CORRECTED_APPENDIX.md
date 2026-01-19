@@ -88,8 +88,8 @@ Key implementation refinements:
 1) **Probe restriction (simple, not a new “probe notion”)**
    To align with the current `homd_cov_int` discipline, restrict the domain displayed category to be Grothendieck:
 
-   - `E := FibrationOp_catd E0` for some `E0 : Z ⟶ Cat_cat`.
-   - Then `GG : Functord_cat (FibrationOp_catd E0) D` matches the intended “computational probe into D”.
+   - `E := Fibration_cov_catd E0` for some `E0 : Z ⟶ Cat_cat`.
+   - Then `GG : Functord_cat (Fibration_cov_catd E0) D` matches the intended “computational probe into D”.
 
 2) **Need displayed opposite and composition**
    For the Step F form
