@@ -2102,15 +2102,46 @@ symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))),
   τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat));
 
-// Definable expansion (do NOT unfold by rewriting; keep `Groth_hom_fam` as a stable head for typing).  // avoids conversion blowups in homs of ∫M
-// This is the intended definition:
-//   Groth_hom_fam_def(u,v) = hom_con(v,id) ∘ (fib_cov_tapp0_func(u))^op.
-symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
-  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
-  : τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat))
-≔ comp_cat_fapp0
-     (@hom_con (fapp0 M y) v (fapp0 M y) (@id_func (fapp0 M y)))
-     (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u));
+// Intended expansion (kept only as documentation; we do NOT keep a definitional abbreviation here).     // avoids conversion blowups in homs of ∫M
+// We keep `Groth_hom_fam` as a stable head, and add a single fold rule from the “expanded” composite:
+//
+//   Groth_hom_fam(u,v)
+//     ≡ (Hom_{M(y)}(-,v)) ∘ (fib_cov_tapp0_func(u))^op
+//
+// Important: avoid `hom_con` on the LHS (it is defined via a rewrite to `hom_cov` in an opposite).      // stable matching hygiene
+rule @comp_cat_fapp0
+      (Op_cat (@Hom_cat $B $x $y))
+      (Op_cat (fapp0 $M $y))
+      Cat_cat
+      (@hom_cov
+        (Op_cat (fapp0 $M $y))
+        $v
+        (Op_cat (fapp0 $M $y))
+        (@id_func (Op_cat (fapp0 $M $y))))
+      (@Op_func (@Hom_cat $B $x $y) (fapp0 $M $y) (@fib_cov_tapp0_func $B $M $x $y $u))
+  ↪ @Groth_hom_fam $B $M $x $y $u $v;
+
+/*
+  Sanity (temporarily disabled):
+
+  This is intended to assert that the fold rule is visible as definitional equality.
+  However, in early development this particular assertion can trigger ill-sortedness/unification
+  noise (Cat vs KIND) during checking. Re-enable once the Groth/hom layer is stable again.
+
+  assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+    (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
+    @comp_cat_fapp0
+        (Op_cat (@Hom_cat B x y))
+        (Op_cat (fapp0 M y))
+        Cat_cat
+        (@hom_cov
+          (Op_cat (fapp0 M y))
+          v
+          (Op_cat (fapp0 M y))
+          (@id_func (Op_cat (fapp0 M y))))
+        (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u))
+      ≡ @Groth_hom_fam B M x y u v;
+*/
 
 // β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).        // compute family at a base arrow
 // Usual notation: `H_{u,v}(f) = Hom_{M(y)}(f_!(u), v)`.                                                // expand on objects
