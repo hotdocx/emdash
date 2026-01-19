@@ -665,6 +665,17 @@ constant symbol Terminal_catd : Π (A : Cat), Catd A;                           
 // We keep the historical name `Fibration_cov_catd` for now; we can rename once the (op)fibration interface is stabilized.
 constant symbol Fibration_cov_catd : Π [A : Cat], τ (Obj (Functor_cat A Cat_cat)) → Catd A;               // ∫M : Catd(A) for M : A → Cat
 
+// Contravariant Grothendieck construction (a “fibration” over A, i.e. an opfibration over Aᵒᵖ).      // ∫ᵒᵖ / variance-flipped Grothendieck
+//
+// Definition (by explicit variance flip):
+//   Fibration_con_catd(A,F)  ≔  Fibration_cov_catd(Aᵒᵖ, Op_func(F)).
+//
+// Note: `Fibration_cov_catd` is declared `constant`, so we cannot add a folding rewrite rule with head
+// `Fibration_cov_catd`. We therefore make `Fibration_con_catd` a definitional abbreviation.
+symbol Fibration_con_catd [A : Cat]
+  (F : τ (Obj (Functor_cat A (Op_cat Cat_cat)))) : Catd (Op_cat A)
+≔ @Fibration_cov_catd (Op_cat A) (@Op_func A (Op_cat Cat_cat) F);
+
 /*
   Displayed/dependent functors: slice-style vs general base functor
 
@@ -748,6 +759,13 @@ injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat; 
 
 // Fibre of a Grothendieck construction is the original value (strictly, on objects).                // ∫M fibre at x is M(x)
 rule Fibre_cat (Fibration_cov_catd $M) $x ↪ fapp0 $M $x;                                              // fibre(∫M,x) ↪ M(x)
+
+// Fibre of a contravariant Grothendieck construction computes pointwise as well.                      // fibre(∫ᵒᵖF,x) ↪ F(x)
+rule Fibre_cat (Fibration_con_catd $F) $x ↪ fapp0 $F $x;
+
+// Sanity: `Fibration_con_catd` is the canonical head for `Fibration_cov_catd (Op_func F)`.            // fold rule exercise
+assert [A : Cat] (F : τ (Obj (Functor_cat A (Op_cat Cat_cat)))) ⊢
+  @Fibration_cov_catd (Op_cat A) (@Op_func A (Op_cat Cat_cat) F) ≡ @Fibration_con_catd A F;
 
 // Fibre of the terminal displayed category is the terminal category.                                  // fibre(1_B, x) ≡ 1
 // This is the displayed analogue of cartierSolution13's `Fibre_catd (Terminal_catd _) _ ↪ Terminal_catd _`. // terminal fibres
@@ -1664,9 +1682,8 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   Π (D0 : τ (Obj (Functor_cat Z Cat_cat))),
   Π (FF : τ (Obj (Functord_cat (Fibration_cov_catd D0) E))),
   τ (Obj (Functord_cat (Op_catd E)
-    (@Op_catd Z (@Fibration_cov_catd Z
-      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))))));
+    (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+      (comp_cat_fapp0 Fib_func (homd_cov_int_base D0))))));
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -2329,17 +2346,15 @@ symbol tdapp1_int_func_transfd : Π [Z : Cat],
     (@Transfd_cat Z (Fibration_cov_catd E0) D FF GG)
     (@Transfd_cat (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
       (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
         (Op_catd D)
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (Fibration_cov_catd E0) D FF)))));
 
@@ -2350,17 +2365,15 @@ symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
   Π (ϵ : τ (Obj (@Transfd_cat Z (Fibration_cov_catd E0) D FF GG))),
   τ (Obj (@Transfd_cat (Op_cat Z)
     (Op_catd (Fibration_cov_catd E0))
-    (@Op_catd Z (@Fibration_cov_catd Z
-      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+    (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+      (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
     (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
     (@comp_catd_fapp0
       (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
       (Op_catd D)
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z D E0 GG)
       (@Op_funcd Z (Fibration_cov_catd E0) D FF))));
 
@@ -2379,17 +2392,15 @@ symbol tdapp1_int_fapp1_func_transfd : Π [Z : Cat],
     (@Hom_cat (@Transfd_cat Z (Fibration_cov_catd E0) D FF GG) ϵ ϵ')
     (@Hom_cat (@Transfd_cat (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
       (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
         (Op_catd D)
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (Fibration_cov_catd E0) D FF)))
       (tdapp1_int_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ)
@@ -2418,17 +2429,15 @@ symbol fdapp1_int_transfd : Π [Z : Cat],
   Π (FF : τ (Obj (Functord_cat (Fibration_cov_catd E0) D))),
   τ (Obj (@Transfd_cat (Op_cat Z)
     (Op_catd (Fibration_cov_catd E0))
-    (@Op_catd Z (@Fibration_cov_catd Z
-      (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+    (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+      (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
     (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
     (@comp_catd_fapp0
       (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
       (Op_catd D)
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z D E0 FF)
       (@Op_funcd Z (Fibration_cov_catd E0) D FF))));
 
@@ -2690,16 +2699,14 @@ assert [Z : Cat]
     (@fdapp0
       (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
         (Op_catd D)
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (Fibration_cov_catd E0) D FF))
       Y
@@ -2707,9 +2714,8 @@ assert [Z : Cat]
     (@fdapp0
       (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
       Y
       V)
@@ -2717,17 +2723,15 @@ assert [Z : Cat]
     (@tdapp0_fapp0
       (Op_cat Z)
       (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_cov_catd Z
-        (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
       (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
         (Op_catd D)
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (Fibration_cov_catd E0) D FF))
       Y
@@ -2738,16 +2742,14 @@ assert [Z : Cat]
       (@fdapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@comp_catd_fapp0
           (Op_cat Z)
           (Op_catd (Fibration_cov_catd E0))
           (Op_catd D)
-          (@Op_catd Z (@Fibration_cov_catd Z
-            (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-              (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+          (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
           (@homd_cov_int Z D E0 GG)
           (@Op_funcd Z (Fibration_cov_catd E0) D FF))
         Y
@@ -2757,9 +2759,8 @@ assert [Z : Cat]
       (@fdapp0
         (Op_cat Z)
         (Op_catd (Fibration_cov_catd E0))
-        (@Op_catd Z (@Fibration_cov_catd Z
-          (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
         (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
         Y
         V)
