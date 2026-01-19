@@ -1835,6 +1835,104 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $G $H $Y $η)
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
+// -------------------------------------------------------------------------------------------------
+// 10b. Grothendieck morphism-action bridge (ordinary)                                               // (E ⇒ D) ↦ (∫E ⟶_A ∫D)
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Goal (ordinary / non-displayed):
+
+  Given a transfor ϵ between Cat-valued functors
+
+    ϵ : Obj(Transf_cat E D)     where   E, D : Obj(Functor_cat A Cat_cat),
+
+  build the induced slice-style displayed functor between their Grothendieck constructions:
+
+    Groth_transf_funcd ϵ : Obj(Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D)).
+
+  This is the missing “morphism-action” bridge referenced earlier in the file, and is a prerequisite
+  for deriving external stable-head packagings like `fapp1_funcd` / `tapp1_func_funcd` from their
+  more-internal transfor-based forms via Grothendieck construction.
+
+  Computation we commit to for now:
+    - fibrewise object-action is definitional:
+
+        (Groth_transf_funcd ϵ)_x (u)  ↪  (ϵ_x)(u)
+
+      where ϵ_x is the pointwise component extracted by `tapp0_fapp0` (and in Cat_cat,
+      `Hom_cat Cat_cat (E x) (D x)` is definitionally `Functor_cat (E x) (D x)`).
+
+  We intentionally do NOT yet add computation rules for action on higher cells in the fibres.
+*/
+
+// The induced displayed functor between Grothendieck constructions (stable head).                   // Groth(ϵ) : ∫E ⟶_A ∫D
+symbol Groth_transf_funcd : Π [A : Cat],
+  Π [E D : τ (Obj (Functor_cat A Cat_cat))],
+  Π (ϵ : τ (Obj (Transf_cat E D))),
+  τ (Obj (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D)));
+
+// Packaged version: Groth_transf_funcd as a functor in ϵ.                                             // ϵ ↦ Groth(ϵ)
+symbol Groth_transf_funcd_func : Π [A : Cat],
+  Π [E D : τ (Obj (Functor_cat A Cat_cat))],
+  τ (Obj (Functor_cat
+    (Transf_cat E D)
+    (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D))));
+
+// β-rule: object-action of Groth_transf_funcd_func is Groth_transf_funcd.                             // unpack Groth_transf_funcd_func at objects
+rule fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ
+  ↪ @Groth_transf_funcd $A $E $D $ϵ;
+
+// Computation: fibrewise object-action is pointwise component evaluation in Cat_cat.                 // (Groth(ϵ))_x(u) ↪ (ϵ_x)(u)
+rule @fdapp0 $A
+      (Fibration_cov_catd $E)
+      (Fibration_cov_catd $D)
+      (@Groth_transf_funcd $A $E $D $ϵ)
+      $x
+      $u
+  ↪ @fapp0
+      (fapp0 $E $x)
+      (fapp0 $D $x)
+      (@tapp0_fapp0 $A Cat_cat $E $D $x $ϵ)
+      $u;
+
+// Canonicalization: the extracted fibre functor is the component ϵ_x.                                 // Fibre_func(Groth(ϵ),x) ↪ ϵ_x
+rule @Fibre_func $A
+      (Fibration_cov_catd $E)
+      (Fibration_cov_catd $D)
+      (@Groth_transf_funcd $A $E $D $ϵ)
+      $x
+  ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
+
+// Sanity: fibrewise action is component evaluation.                                                   // (Groth(ϵ))_x(u) = (ϵ_x)(u)
+assert [A : Cat]
+  (E D : τ (Obj (Functor_cat A Cat_cat)))
+  (ϵ : τ (Obj (Transf_cat E D)))
+  (x : τ (Obj A))
+  (u : τ (Obj (fapp0 E x))) ⊢
+  @fdapp0 A
+      (Fibration_cov_catd E)
+      (Fibration_cov_catd D)
+      (@Groth_transf_funcd A E D ϵ)
+      x
+      u
+    ≡ @fapp0
+        (fapp0 E x)
+        (fapp0 D x)
+        (@tapp0_fapp0 A Cat_cat E D x ϵ)
+        u;
+
+// Sanity: fibre functor extracted from Groth(ϵ) is the component ϵ_x.                                 // Fibre_func(Groth(ϵ),x) = ϵ_x
+assert [A : Cat]
+  (E D : τ (Obj (Functor_cat A Cat_cat)))
+  (ϵ : τ (Obj (Transf_cat E D)))
+  (x : τ (Obj A)) ⊢
+  @Fibre_func A
+      (Fibration_cov_catd E)
+      (Fibration_cov_catd D)
+      (@Groth_transf_funcd A E D ϵ)
+      x
+    ≡ @tapp0_fapp0 A Cat_cat E D x ϵ;
+
 /*
   fib_cov_transf (ω-style “swap arguments”, as a transfor)
 
