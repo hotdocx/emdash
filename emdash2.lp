@@ -2662,6 +2662,84 @@ symbol tapp1_fapp1_func : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A
 rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
   ↪ @tapp1_fapp1_func $A $B $F_AB $G_AB $X_A $ϵ $ϵ';
 
+/*
+  Groth∘tapp1_int fold for hom-action (modifications).
+
+  This is the “follow user suggestion” bridge:
+  - first map a modification α : ϵ ⇒ ϵ' through the internal packaging `tapp1_int_fapp1_func_transf`,
+  - then evaluate at the external index X (via `tapp0_func` in the outer index category Op_cat A),
+  - then apply Grothendieck morphism-action on homs (via `fapp1_func` of `Groth_transf_funcd_func`),
+  - finally fold to the external stable-head hom-action `tapp1_fapp1_func`.
+*/
+
+rule @fapp0
+      (@Hom_cat
+        (Transf_cat
+          (@hom_cov $A $X_A $A (@id_func $A))
+          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
+      (@Hom_cat
+        (Functord_cat
+          (Fibration_cov_catd (@hom_cov $A $X_A $A (@id_func $A)))
+          (Fibration_cov_catd (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB)))
+        (fapp0
+          (@Groth_transf_funcd_func $A
+            (@hom_cov $A $X_A $A (@id_func $A))
+            (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+          (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ))
+        (fapp0
+          (@Groth_transf_funcd_func $A
+            (@hom_cov $A $X_A $A (@id_func $A))
+            (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+          (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ')))
+      (@fapp1_func
+        (Transf_cat
+          (@hom_cov $A $X_A $A (@id_func $A))
+          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+        (Functord_cat
+          (Fibration_cov_catd (@hom_cov $A $X_A $A (@id_func $A)))
+          (Fibration_cov_catd (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB)))
+        (@Groth_transf_funcd_func $A
+          (@hom_cov $A $X_A $A (@id_func $A))
+          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
+      (@fapp0
+        (@Hom_cat
+          (Transf_cat
+            (@hom_cov_int $A $A (@id_func $A))
+            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
+              (@hom_cov_int $B $A $G_AB)
+              (@Op_func $A $B $F_AB)))
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
+        _
+        (@fapp1_func
+          (Transf_cat
+            (@hom_cov_int $A $A (@id_func $A))
+            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
+              (@hom_cov_int $B $A $G_AB)
+              (@Op_func $A $B $F_AB)))
+          (Transf_cat
+            (@hom_cov $A $X_A $A (@id_func $A))
+            (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+          (@tapp0_func
+            (Op_cat $A)
+            (Functor_cat $A Cat_cat)
+            (@hom_cov_int $A $A (@id_func $A))
+            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
+              (@hom_cov_int $B $A $G_AB)
+              (@Op_func $A $B $F_AB))
+            $X_A)
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
+        (fapp0
+          (@tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ')
+          $α))
+  ↪ fapp0
+      (@tapp1_fapp1_func $A $B $F_AB $G_AB $X_A $ϵ $ϵ')
+      $α;
 
 // -------------------------------------------------------------------------------------------------
 // 17. Sanity checks (lightweight “unit tests” for rewrite normalization)                             // keep small, avoids proof noise
