@@ -491,10 +491,14 @@ rule @fapp0 (Functor_cat $A1 $A2) _
   (@fapp1_func Cat_cat Cat_cat op $A1 $A2) $F ↪ @Op_func $A1 $A2 $F;
 
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
-symbol id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
-≔ @id Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
-// NOTE: `id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `id_func`, switch to `symbol id_func ...;` + `rule id_func ... ↪ ...` (cf. tapp0_fapp0).
-rule fapp0 (@id Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
+// Design (stable head): we keep `id_func` as the canonical normal form for identities in `Cat_cat`.
+symbol id_func [A: Cat] : τ (Obj (Functor_cat A A));                                            // identity functor id_A : Obj(Functor_cat(A,A))
+
+// Canonicalization: identity in `Cat_cat` folds to `id_func`.                                           // id_{Cat}(A) ↪ id_A
+rule @id Cat_cat $A ↪ @id_func $A;
+
+// Computation: (id_A)(x) ↪ x.                                                                          // pointwise identity
+rule fapp0 (@id_func $A) $xA ↪ $xA;
 
 // Composition of functors (as morphisms in Cat_cat) computes pointwise on objects.                     // (F∘G)(x) ↪ F(G(x))
 rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x
@@ -789,8 +793,8 @@ symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) →
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
 
 // Pullback along the identity functor is definitional identity.                                       // (id)^*(E) ≡ E
-// NOTE: we pattern-match on `id Cat_cat A` (not on `id_func A`) because `id_func` is a definitional abbreviation. // stable matching
-rule @Pullback_catd $A $A $E (@id Cat_cat $A) ↪ $E;
+// NOTE: we pattern-match on the stable head `id_func`.                                                // stable matching
+rule @Pullback_catd $A $A $E (@id_func $A) ↪ $E;
 
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
 // Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_cat_fapp0`
@@ -1218,8 +1222,8 @@ rule Total_proj2_funcd (Terminal_catd $A) ↪ @id_funcd $A (Terminal_catd $A);
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
 // Identity: over id_X, the induced functor on totals is identity.                                      // ∫(id) ↪ id
-// NOTE: we match on `id Cat_cat X` (not `id_func X`) because `id_func` is a definitional abbreviation.  // stable matching
-rule @Total_intro_func $X $X $A $A (@id Cat_cat $X) (@id_funcd $X $A) ↪ @id_func (Total_cat $A);
+// NOTE: we match on `id_func`.                                                                        // stable matching
+rule @Total_intro_func $X $X $A $A (@id_func $X) (@id_funcd $X $A) ↪ @id_func (Total_cat $A);
 
 // Terminal: over xy : X→Y, the induced functor into ∫(1_Y)≡Y is xy ∘ π₁.                               // ∫(!) ↪ xy∘π₁
 rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
@@ -1334,11 +1338,11 @@ injective symbol Lift_funcd : Π [A B : Cat],
 // Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
 symbol Unlift_func [A B : Cat]
   (FF : τ (Obj (Functord_cat (Lift_catd A) (Lift_catd B)))) : τ (Obj (Functor_cat A B))
-≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd A) (Lift_catd B) (@id Cat_cat Terminal_cat) FF;
+≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd A) (Lift_catd B) (@id_func Terminal_cat) FF;
 // NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func ...`.
 
 // // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
-rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B) (@id Cat_cat Terminal_cat) (@Lift_funcd $A $B $F)
+rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B) (@id_func Terminal_cat) (@Lift_funcd $A $B $F)
   ↪ $F;
 
 
@@ -2567,7 +2571,7 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
 assert ⊢ Op_cat (Op_cat Cat_cat) ≡ Cat_cat;                                                          // (Cat_catᵒᵖ)ᵒᵖ ≡ Cat_cat
 
 // Identity functor on objects reduces by rewriting.                                                  // checks fapp0(id_func) β-rule
-compute fapp0 (@id Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
+compute fapp0 (id_func [Terminal_cat]) Terminal_obj;                                    // normal form should be `Terminal_obj`
 
 // tapp1_func_funcd object-action reduces to tapp1_fapp0_funcd by rewriting.                                         // checks tapp β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
