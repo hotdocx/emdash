@@ -3060,6 +3060,20 @@ rule @fdapp0 $A
       $f
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f;
 
+// Stable head: apply a functor’s hom-action to a 1-cell (globular presentation).                      // F(g) as a 1-cell
+symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
+  Π (X_A Y_A : τ (Obj A)),
+  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
+  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
+
+// Canonicalization: fold “apply fapp1_func at f” toward the stable head `fapp1_fapp0`.                // fapp0(fapp1_func(F),f) ↪ fapp1_fapp0
+rule @fapp0
+      (@Hom_cat $A $X_A $Y_A)
+      (@Hom_cat $B (@fapp0 $A $B $F_AB $X_A) (@fapp0 $A $B $F_AB $Y_A))
+      (@fapp1_func $A $B $F_AB $X_A $Y_A)
+      $f
+  ↪ @fapp1_fapp0 $A $B $F_AB $X_A $Y_A $f;
+
 /*
   Strict naturality laws (draft):
 
@@ -3071,20 +3085,20 @@ rule @fdapp0 $A
 
 // Postcomposition naturality (codomain-side).                                                        // (G g) ∘ ϵ_f ↪ ϵ_(g∘f)
 rule @comp_fapp0 $B
-      (fapp0 $F_AB $X_A)
-      (fapp0 $G_AB $Y_A)
-      (fapp0 $G_AB $Z_A)
-      (fdapp0 (fapp1_funcd $G_AB [$Y_A]) [$Z_A] $g)
+      (@fapp0 $A $B $F_AB $X_A)
+      (@fapp0 $A $B $G_AB $Y_A)
+      (@fapp0 $A $B $G_AB $Z_A)
+      (@fapp1_fapp0 $A $B $G_AB $Y_A $Z_A $g)
       (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f)
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Z_A $ϵ
       (@comp_fapp0 $A $X_A $Y_A $Z_A $g $f);
 
 // Precomposition naturality (domain-side).                                                           // ϵ_f ∘ (F g) ↪ ϵ_(f∘g)
 rule @comp_fapp0 $B
-      (fapp0 $F_AB $X2_A)
-      (fapp0 $F_AB $X_A)
-      (fapp0 $G_AB $Y_A)
+      (@fapp0 $A $B $F_AB $X2_A)
+      (@fapp0 $A $B $F_AB $X_A)
+      (@fapp0 $A $B $G_AB $Y_A)
       (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f)
-      (fdapp0 (fapp1_funcd $F_AB [$X2_A]) [$X_A] $g)
+      (@fapp1_fapp0 $A $B $F_AB $X2_A $X_A $g)
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
       (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g);
