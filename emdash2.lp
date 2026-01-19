@@ -1924,12 +1924,6 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
   We intentionally do NOT yet add computation rules for action on higher cells in the fibres.
 */
 
-// The induced displayed functor between Grothendieck constructions (stable head).                   // Groth(ϵ) : ∫E ⟶_A ∫D
-symbol Groth_transf_funcd : Π [A : Cat],
-  Π [E D : τ (Obj (Functor_cat A Cat_cat))],
-  Π (ϵ : τ (Obj (Transf_cat E D))),
-  τ (Obj (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D)));
-
 // Packaged version: Groth_transf_funcd as a functor in ϵ.                                             // ϵ ↦ Groth(ϵ)
 symbol Groth_transf_funcd_func : Π [A : Cat],
   Π [E D : τ (Obj (Functor_cat A Cat_cat))],
@@ -1937,15 +1931,11 @@ symbol Groth_transf_funcd_func : Π [A : Cat],
     (Transf_cat E D)
     (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D))));
 
-// β-rule: object-action of Groth_transf_funcd_func is Groth_transf_funcd.                             // unpack Groth_transf_funcd_func at objects
-rule fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ
-  ↪ @Groth_transf_funcd $A $E $D $ϵ;
-
 // Computation: fibrewise object-action is pointwise component evaluation in Cat_cat.                 // (Groth(ϵ))_x(u) ↪ (ϵ_x)(u)
 rule @fdapp0 $A
       (Fibration_cov_catd $E)
       (Fibration_cov_catd $D)
-      (@Groth_transf_funcd $A $E $D $ϵ)
+      (fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ)
       $x
       $u
   ↪ @fapp0
@@ -1958,7 +1948,7 @@ rule @fdapp0 $A
 rule @Fibre_func $A
       (Fibration_cov_catd $E)
       (Fibration_cov_catd $D)
-      (@Groth_transf_funcd $A $E $D $ϵ)
+      (fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ)
       $x
   ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
 
@@ -1969,36 +1959,6 @@ rule fapp0
       (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
     (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
   ↪ @tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ;
-
-// Sanity: fibrewise action is component evaluation.                                                   // (Groth(ϵ))_x(u) = (ϵ_x)(u)
-assert [A : Cat]
-  (E D : τ (Obj (Functor_cat A Cat_cat)))
-  (ϵ : τ (Obj (Transf_cat E D)))
-  (x : τ (Obj A))
-  (u : τ (Obj (fapp0 E x))) ⊢
-  @fdapp0 A
-      (Fibration_cov_catd E)
-      (Fibration_cov_catd D)
-      (@Groth_transf_funcd A E D ϵ)
-      x
-      u
-    ≡ @fapp0
-        (fapp0 E x)
-        (fapp0 D x)
-        (@tapp0_fapp0 A Cat_cat E D x ϵ)
-        u;
-
-// Sanity: fibre functor extracted from Groth(ϵ) is the component ϵ_x.                                 // Fibre_func(Groth(ϵ),x) = ϵ_x
-assert [A : Cat]
-  (E D : τ (Obj (Functor_cat A Cat_cat)))
-  (ϵ : τ (Obj (Transf_cat E D)))
-  (x : τ (Obj A)) ⊢
-  @Fibre_func A
-      (Fibration_cov_catd E)
-      (Fibration_cov_catd D)
-      (@Groth_transf_funcd A E D ϵ)
-      x
-    ≡ @tapp0_fapp0 A Cat_cat E D x ϵ;
 
 /*
   fib_cov_transf (ω-style “swap arguments”, as a transfor)
