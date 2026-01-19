@@ -3025,3 +3025,75 @@ assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd A) x1 ≡
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) ⊢ Unlift_func (Lift_funcd F) ≡ F;
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
   @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ @fapp0 A B F x;
+
+// -------------------------------------------------------------------------------------------------
+// Phase 2 (draft): strict naturality for arrow-indexed components                                   // strict (temporary) 2-categorical laws
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Goal (strict naturality, arrow-indexed components).
+
+  For ϵ : Transf_cat(F,G), we can “apply” the packaged functor ϵ^X to a 1-cell f : X→Y and obtain
+  a 1-cell ϵ_f : FX → GY.
+
+  In this phase-2 draft, we postulate strict naturality laws for these arrow-indexed components.
+  (Long-term, these should be recovered as higher/lax data via `homd_cov`.)
+
+  Why keep a stable head?
+  - We fold the raw `fdapp0 (tapp1_fapp0_funcd ...) ...` to `tapp1_fapp0` so later rewrite rules
+    match cheaply and avoid conversion blowups.
+*/
+
+// Stable head: arrow-indexed component of a transfor (the “ϵ_f” part of ϵ^X).                         // ϵ_f : FX → GY
+symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (X_A Y_A : τ (Obj A)),
+  Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
+  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 G_AB Y_A)));
+
+// Canonicalization: fold “apply ϵ^X at f” toward the stable head `tapp1_fapp0`.                       // fdapp0(tapp1_fapp0_funcd, f) ↪ tapp1_fapp0
+rule @fdapp0 $A
+      (Fibration_cov_catd (hom_cov $X_A (@id_func $A)))
+      (Fibration_cov_catd (hom_cov (fapp0 $F_AB $X_A) $G_AB))
+      (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ)
+      $Y_A
+      $f
+  ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f;
+
+/*
+  Strict naturality laws (draft):
+
+    (1) (G g) ∘ ϵ_f   ↪  ϵ_(g∘f)
+    (2) ϵ_f ∘ (F g)   ↪  ϵ_(f∘g)
+*/
+
+// We orient strict naturality in the “expand composites” direction:
+// compute ϵ_(g∘f) (resp. ϵ_(f∘g)) into a composite in B. This avoids adding rewrite rules for `comp_fapp0`.
+
+// Postcomposition naturality (codomain-side).                                                        // ϵ_(g∘f) ↪ (G g) ∘ ϵ_f
+rule @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Z_A $ϵ
+      (@comp_fapp0 $A $X_A $Y_A $Z_A $g $f)
+  ↪ @comp_fapp0 $B
+      (fapp0 $F_AB $X_A)
+      (fapp0 $G_AB $Y_A)
+      (fapp0 $G_AB $Z_A)
+      (@fapp0
+        (@Hom_cat $A $Y_A $Z_A)
+        (@Hom_cat $B (fapp0 $G_AB $Y_A) (fapp0 $G_AB $Z_A))
+        (@fapp1_func $A $B $G_AB $Y_A $Z_A)
+        $g)
+      (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f);
+
+// Precomposition naturality (domain-side).                                                           // ϵ_(f∘g) ↪ ϵ_f ∘ (F g)
+rule @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
+      (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g)
+  ↪ @comp_fapp0 $B
+      (fapp0 $F_AB $X2_A)
+      (fapp0 $F_AB $X_A)
+      (fapp0 $G_AB $Y_A)
+      (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f)
+      (@fapp0
+        (@Hom_cat $A $X2_A $X_A)
+        (@Hom_cat $B (fapp0 $F_AB $X2_A) (fapp0 $F_AB $X_A))
+        (@fapp1_func $A $B $F_AB $X2_A $X_A)
+        $g);
