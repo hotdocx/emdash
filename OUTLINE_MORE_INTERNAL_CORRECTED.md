@@ -244,12 +244,12 @@ as functors) become cleaner if we introduce general-purpose curry/uncurry stable
 
 ### Step B — Introduce a fully internalized pointwise product functor
 
-Package `prod_func` as a curried functor object:
+Package `prodFib` as a curried functor object:
 
 - `prod_func5 : Obj(Functor_cat (Functor_cat Z Cat_cat)
                     (Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat)))`
 
-with β-rule `fapp0 (fapp0 prod_func5 D) E ↪ prod_func D E`.
+with β-rule `fapp0 (fapp0 prod_func5 D) E ↪ prodFib D E`.
 
 ### Step C — Introduce internalized `Total_Z` and `Fib` (choose variance so compositions typecheck)
 
@@ -334,7 +334,7 @@ HOp := comp_cat_fapp0 op2_Z HId
 
 Let `prodD := fapp0 prod_func5 D` so
 `prodD : Obj(Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))` and
-`fapp0 prodD E ↪ prod_func D E`.
+`fapp0 prodD E ↪ prodFib D E`.
 
 Then:
 

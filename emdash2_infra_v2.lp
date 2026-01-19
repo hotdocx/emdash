@@ -1141,15 +1141,15 @@ injective symbol Product_pair [A1 A2 : Cat] (X : τ (Obj A1)) (Y : τ (Obj A2)) 
 // Usual notation: `× : Cat × Cat → Cat`, with (A,B) ↦ A×B.
 // Packaged as an object of Functor_cat(Cat_cat×Cat_cat, Cat_cat) so we can postcompose Cat-valued
 // functors `E,D : Z → Cat_cat` to get their pointwise product `z ↦ E(z)×D(z)`.
-constant symbol prod_cat : τ (Obj (Functor_cat (Product_cat Cat_cat Cat_cat) Cat_cat));
+constant symbol prodCat_func : τ (Obj (Functor_cat (Product_cat Cat_cat Cat_cat) Cat_cat));
 
-// Object-action: prod_cat₀(A,B) ≡ A×B.                                                                // fapp0(prod_cat,(A,B)) ↪ Product_cat(A,B)
-rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prod_cat (Struct_sigma $A $B)
+// Object-action: prodCat_func₀(A,B) ≡ A×B.                                                                // fapp0(prodCat_func,(A,B)) ↪ Product_cat(A,B)
+rule @fapp0 (Product_cat Cat_cat Cat_cat) Cat_cat prodCat_func (Struct_sigma $A $B)
   ↪ Product_cat $A $B;
 
-// Sanity: prod_cat acts pointwise as categorical product.                                             // prod_cat(A,B) = A×B
+// Sanity: prodCat_func acts pointwise as categorical product.                                             // prodCat_func(A,B) = A×B
 assert (A B : Cat) ⊢
-  fapp0 prod_cat (@Product_pair Cat_cat Cat_cat A B)
+  fapp0 prodCat_func (@Product_pair Cat_cat Cat_cat A B)
     ≡ Product_cat A B;
 
 // Hom-categories of the product compute pointwise on projections.                                   // Hom_{A×B}(P,Q) ≡ Hom_A(π₁P,π₁Q) × Hom_B(π₂P,π₂Q)
@@ -1221,10 +1221,10 @@ symbol Product_pair_transf : Π [A1 A2 I : Cat],
       have canonical Σ-descriptions of objects and morphisms in their total categories ∫E.
 
   Implementation:
-    - We internalize categorical product as `prod_cat : Cat×Cat ⟶ Cat` and introduce a primitive
-      head `prod_func` for pointwise product of Cat-valued functors.
+    - We internalize categorical product as `prodCat_func : Cat×Cat ⟶ Cat` and introduce a primitive
+      head `prodFib` for pointwise product of Cat-valued functors.
     - Then we add the key computation rule:
-        Product_catd( FibrationOp_catd E, FibrationOp_catd D )  ↪  FibrationOp_catd (prod_func E D)
+        Product_catd( FibrationOp_catd E, FibrationOp_catd D )  ↪  FibrationOp_catd (prodFib E D)
       i.e. (∫E) ×_Z (∫D) is again a Grothendieck construction of the pointwise product functor.
 */
 
@@ -1238,22 +1238,22 @@ rule @Op_catd $Z (Product_catd $U $A)
 
 // Pointwise product of Cat-valued functors.                                                           // (E⊗D)(z) = E(z)×D(z)
 // Usual notation: for `E,D : Z ⟶ Cat`, define `(E × D) : Z ⟶ Cat` by `(E×D)(z) = E(z) × D(z)`.
-// Design note: `prod_func` is a primitive *rewrite head* (not a definitional abbreviation).           // keep a stable head for rewriting
+// Design note: `prodFib` is a primitive *rewrite head* (not a definitional abbreviation).           // keep a stable head for rewriting
 // Motivation (same pattern as `tapp0_fapp0` and `fib_cov_tapp0_fapp0`):
-//   - A definition `prod_func E D ≔ (prod_cat) ∘ ⟨E,D⟩` would expand to a large `comp_fapp0`
+//   - A definition `prodFib E D ≔ (prodCat_func) ∘ ⟨E,D⟩` would expand to a large `comp_fapp0`
 //     term in `Cat_cat`, which is expensive/fragile to unfold inside other rewrite rules.
-//   - Making `prod_func` primitive gives a small, stable head so rules like
+//   - Making `prodFib` primitive gives a small, stable head so rules like
 //       Product_catd(∫E,∫D) ↪ ∫(E×D)
 //     can fire without forcing Lambdapi to normalize a big functor-composition expression.
-symbol prod_func [Z : Cat]
+symbol prodFib [Z : Cat]
   (E D : τ (Obj (Functor_cat Z Cat_cat))) : τ (Obj (Functor_cat Z Cat_cat));
 
-// Pointwise computation on objects: (E×D)(z) ↦ E(z)×D(z).                                             // fapp0(prod_func(E,D),z) ↪ Product_cat(E(z),D(z))
-rule fapp0 (prod_func $E $D) $z ↪ Product_cat (fapp0 $E $z) (fapp0 $D $z);
+// Pointwise computation on objects: (E×D)(z) ↦ E(z)×D(z).                                             // fapp0(prodFib(E,D),z) ↪ Product_cat(E(z),D(z))
+rule fapp0 (prodFib $E $D) $z ↪ Product_cat (fapp0 $E $z) (fapp0 $D $z);
 
-// Sanity: prod_func agrees pointwise with postcomposition by prod_cat.                                // (E×D)(z) = prod_cat(E(z),D(z))
+// Sanity: prodFib agrees pointwise with postcomposition by prodCat_func.                                // (E×D)(z) = prodCat_func(E(z),D(z))
 assert [Z : Cat] (E D : τ (Obj (Functor_cat Z Cat_cat))) (z : τ (Obj Z)) ⊢
-  fapp0 (prod_func E D) z ≡ fapp0 prod_cat (Struct_sigma (fapp0 E z) (fapp0 D z));
+  fapp0 (prodFib E D) z ≡ fapp0 prodCat_func (Struct_sigma (fapp0 E z) (fapp0 D z));
 
 // Fibrewise product of Grothendieck displayed categories is Grothendieck of pointwise product.        // ∫E ×_Z ∫D  ≅  ∫(E×D)
 // If `E,D : Z ⟶ Cat` are Cat-valued functors, then their Grothendieck constructions are displayed
@@ -1261,7 +1261,7 @@ assert [Z : Cat] (E D : τ (Obj (Functor_cat Z Cat_cat))) (z : τ (Obj Z)) ⊢
 // is again a Grothendieck displayed category, classified by the pointwise product functor:
 //   (E ⊗ D)(z) = E(z) × D(z).
 rule @Product_catd $Z (@FibrationOp_catd $Z $E) (@FibrationOp_catd $Z $D)
-  ↪ @FibrationOp_catd $Z (prod_func $E $D);
+  ↪ @FibrationOp_catd $Z (prodFib $E $D);
 
 // Displayed projections/pairing (dependent functors witnessing product structure).                   // displayed πᵢ and pairing
 symbol Product_projL_functord : Π [Z : Cat] [U A : Catd Z], τ (Obj (Functord_cat (Product_catd U A) U));  // π₁ : U×A → U
@@ -1799,7 +1799,7 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) ⊢
 //
 // A fibrewise ordinary functor can always be extracted by `Fibre_func (fdapp1_funcd F X_) p`, for a chosen base point `p`
 // of the base category of those `FibrationOp_catd (homd_cov ...)` terms. If this becomes too verbose inside rewrite rules,
-// introduce a stable head specialized to the intended base point normal form (same “stable head” pattern as `tapp0_fapp0`, `prod_func`, etc.).
+// introduce a stable head specialized to the intended base point normal form (same “stable head” pattern as `tapp0_fapp0`, `prodFib`, etc.).
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),          // dependent functor F : A→B
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),                                                    // base object X_ and fibre object X
   τ (Obj (Functord_cat
