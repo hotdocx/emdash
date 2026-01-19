@@ -342,7 +342,7 @@ assert (A : Cat) (X Y Z : τ (Obj A))
     - `Total_cat (Fibration_cov_catd M)`: [OK] object decoding `τ (Obj (Total_cat ...))` is Σ-shaped.
     - `Total_cat E` for general `E : Catd B`: [TODO] no definitional object/hom computation (kept semantic/primitive).
     - `Hom_cat (Total_cat (Fibration_cov_catd M)) (x,u) (y,v)`: [OK] reduces to an (opposite of a) Grothendieck
-      total category via `Groth_hom_fam` (so object-level morphisms become Σ-pairs `(f,α)` definitionally).
+      total category via `fib_hom_con_func` (so object-level morphisms become Σ-pairs `(f,α)` definitionally).
 
   (I) `Fibre_cat E x` (as a Cat-valued construction)
     - For `E = Lift_catd A`: [OK] `Fibre_cat (Lift_catd A) _ ↪ A`.
@@ -2098,55 +2098,23 @@ rule @fapp0 (@Hom_cat (@Hom_cat $B $x $y) $f $g)
 // Usual notation: for fixed `u ∈ M(x)` and `v ∈ M(y)`, define
 //   H_{u,v} : Hom_B(x,y) ⟶ Cat
 //   H_{u,v}(f) = Hom_{M(y)}(f_!(u), v).                                                                // H_{u,v}(f) = Hom_{M(y)}(M(f)(u),v)
-symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
-  Π [x y : τ (Obj B)], Π (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))),
-  τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat));
-
-// Intended expansion (kept only as documentation; we do NOT keep a definitional abbreviation here).     // avoids conversion blowups in homs of ∫M
-// We keep `Groth_hom_fam` as a stable head, and add a single fold rule from the “expanded” composite:
 //
-//   Groth_hom_fam(u,v)
-//     ≡ (Hom_{M(y)}(-,v)) ∘ (fib_cov_tapp0_func(u))^op
-//
-// Important: avoid `hom_con` on the LHS (it is defined via a rewrite to `hom_cov` in an opposite).      // stable matching hygiene
-rule @comp_cat_fapp0
-      (Op_cat (@Hom_cat $B $x $y))
-      (Op_cat (fapp0 $M $y))
-      Cat_cat
-      (@hom_cov
-        (Op_cat (fapp0 $M $y))
-        $v
-        (Op_cat (fapp0 $M $y))
-        (@id_func (Op_cat (fapp0 $M $y))))
-      (@Op_func (@Hom_cat $B $x $y) (fapp0 $M $y) (@fib_cov_tapp0_func $B $M $x $y $u))
-  ↪ @Groth_hom_fam $B $M $x $y $u $v;
+// Design choice (exception to the usual “stable head” pattern):
+// We make `fib_hom_con_func` a definitional abbreviation so it inherits any computations available for the
+// underlying composite (in particular when used in RHS/types), rather than requiring extra fold rules. // δ-reducible convenience
+symbol fib_hom_con_func [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  : τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat))
+≔ comp_cat_fapp0
+     (hom_con v (@id_func (fapp0 M y)))
+     (Op_func (@fib_cov_tapp0_func B M x y u));
 
-/*
-  Sanity (temporarily disabled):
-
-  This is intended to assert that the fold rule is visible as definitional equality.
-  However, in early development this particular assertion can trigger ill-sortedness/unification
-  noise (Cat vs KIND) during checking. Re-enable once the Groth/hom layer is stable again.
-
-  assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
-    (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
-    @comp_cat_fapp0
-        (Op_cat (@Hom_cat B x y))
-        (Op_cat (fapp0 M y))
-        Cat_cat
-        (@hom_cov
-          (Op_cat (fapp0 M y))
-          v
-          (Op_cat (fapp0 M y))
-          (@id_func (Op_cat (fapp0 M y))))
-        (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u))
-      ≡ @Groth_hom_fam B M x y u v;
-*/
-
-// β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).        // compute family at a base arrow
-// Usual notation: `H_{u,v}(f) = Hom_{M(y)}(f_!(u), v)`.                                                // expand on objects
-rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
-  ↪ @Hom_cat (fapp0 $M $y) (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u) $v;
+// Sanity: object-action matches the intended fibre hom-category.                                       // (fib_hom_con_func)_0(f) = Hom_{M(y)}(f_!(u),v)
+assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
+  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  (f : τ (Obj (@Hom_cat B x y))) ⊢
+  fapp0 (@fib_hom_con_func B M x y u v) f
+    ≡ @Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
 // Grothendieck hom-category is itself a Grothendieck total.                                            // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
 // Usual notation (opfibration Grothendieck formula):
@@ -2156,7 +2124,7 @@ rule fapp0 (@Groth_hom_fam $B $M $x $y $u $v) $f
 rule @Hom_cat (Total_cat (@Fibration_cov_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat
       (
-        (@Fibration_cov_catd _ (@Groth_hom_fam $B $M $x $y $u $v))));
+        (@Fibration_cov_catd _ (@fib_hom_con_func $B $M $x $y $u $v))));
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                               // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
@@ -2166,7 +2134,7 @@ rule @fapp1_func (Total_cat (@Fibration_cov_catd $B $M)) $B (Total_proj1_func (F
   (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_func (Total_proj1_func
       (
-        (@Fibration_cov_catd _ (@Groth_hom_fam $B $M $x $y $u $v))));
+        (@Fibration_cov_catd _ (@fib_hom_con_func $B $M $x $y $u $v))));
 
 // The base projection on objects is the first Σ-projection.                                            // π₁(f,α)=f
 rule fapp0
