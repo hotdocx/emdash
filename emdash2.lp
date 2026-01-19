@@ -1018,7 +1018,7 @@ rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
 */
 
 // Stable head: evaluate `fapp1_int_transf F` at X (outer index in Op_cat A).                             // (fapp1_int_transf F)_X
-symbol fapp1_int_fapp0_tapp0_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
+symbol fapp1_int_tapp0_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
   Π (X_A : τ (Obj A)),
   τ (Obj (Transf_cat
     (@hom_cov A X_A A (@id_func A))
@@ -1909,7 +1909,7 @@ rule @tapp0_fapp0
       (comp_cat_fapp0 (hom_cov_int $F_AB) (Op_func $F_AB))
       $X_A
       (@fapp1_int_transf $A $B $F_AB)
-  ↪ @fapp1_int_fapp0_tapp0_transf $A $B $F_AB $X_A;
+  ↪ @fapp1_int_tapp0_transf $A $B $F_AB $X_A;
 
 // Sanity: folding rule is visible by definitional equality.                                           // outer(ϵ)_X folds
 assert [A B : Cat]
@@ -2346,7 +2346,7 @@ rule fapp0
     (@Fibration_cov_fapp1_func $A
       (@hom_cov $A $X_A $A (@id_func $A))
       (@hom_cov $B (fapp0 $F_AB $X_A) $A $F_AB))
-    (@fapp1_int_fapp0_tapp0_transf $A $B $F_AB $X_A)
+    (@fapp1_int_tapp0_transf $A $B $F_AB $X_A)
   ↪ @fapp1_funcd $A $B $F_AB $X_A;
 
 // Fibrewise identification: the fibre of the displayed packaging is the usual hom-action functor.     // fapp1_func = Fibre_func(fapp1_funcd)
