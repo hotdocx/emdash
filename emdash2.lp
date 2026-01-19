@@ -1809,6 +1809,65 @@ rule @fdapp0 $A
 rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 /*
+  tapp1_int_at_* (outer evaluation at X, derived helper)
+
+  For later derivations (notably `tapp1_func_funcd`), we frequently need the “outer component at X”
+  of the nested/internal packaging:
+
+    given ϵ : Transf_cat(F,G) and X : Obj(A),
+    outer(ϵ) : Transf_cat(H0,H1)   where H0,H1 : Aᵒᵖ ⇒ (A ⇒ Cat)
+    then:
+      outer(ϵ)_X : Transf_cat(H0(X), H1(X)).
+
+  This is `tapp0_fapp0` applied in the index category `Op_cat A`.
+*/
+
+// Packaged: for fixed X, “evaluate outer component at X” is functorial in ϵ.                          // ϵ ↦ outer(ϵ)_X
+symbol tapp1_int_at_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (X_A : τ (Obj A)),
+  τ (Obj (Functor_cat
+    (Transf_cat F_AB G_AB)
+    (Transf_cat
+      (@hom_cov A X_A A (@id_func A))
+      (@hom_cov B (fapp0 F_AB X_A) A G_AB))));
+
+// Stable head: object-action of tapp1_int_at_func_transf.                                             // outer(ϵ)_X
+symbol tapp1_int_at_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (X_A : τ (Obj A)),
+  Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  τ (Obj (Transf_cat
+    (@hom_cov A X_A A (@id_func A))
+    (@hom_cov B (fapp0 F_AB X_A) A G_AB)));
+
+// β-rule: tapp1_int_at_fapp0_transf is the object-action of tapp1_int_at_func_transf.                  // unpack tapp1_int_at_func_transf at objects
+rule fapp0 (@tapp1_int_at_func_transf $A $B $F_AB $G_AB $X_A) $ϵ
+  ↪ @tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
+
+// Canonicalization: evaluate the internal outer transfor at X and fold to the stable head.            // fold outer(ϵ)_X
+rule @tapp0_fapp0
+      (Op_cat $A)
+      (Functor_cat $A Cat_cat)
+      (@hom_cov_int $A $A (@id_func $A))
+      (comp_cat_fapp0 (hom_cov_int $G_AB) (Op_func $F_AB))
+      $X_A
+      (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
+  ↪ @tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
+
+// Sanity: folding rule is visible by definitional equality.                                           // outer(ϵ)_X folds
+assert [A B : Cat]
+  [F_AB G_AB : τ (Obj (Functor_cat A B))]
+  (X : τ (Obj A))
+  (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
+  @tapp0_fapp0
+      (Op_cat A)
+      (Functor_cat A Cat_cat)
+      (@hom_cov_int A A (@id_func A))
+      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB))
+      X
+      (@tapp1_int_fapp0_transf A B F_AB G_AB ϵ)
+    ≡ @tapp1_int_at_fapp0_transf A B F_AB G_AB X ϵ;
+
+/*
   Vertical identity/composition of transfors, computed pointwise.
 
   Even without committing to a Σ/record encoding of `Obj(Transf_cat F G)`, we can still ensure that
