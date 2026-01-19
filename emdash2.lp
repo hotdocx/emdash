@@ -3067,33 +3067,24 @@ rule @fdapp0 $A
     (2) ϵ_f ∘ (F g)   ↪  ϵ_(f∘g)
 */
 
-// We orient strict naturality in the “expand composites” direction:
-// compute ϵ_(g∘f) (resp. ϵ_(f∘g)) into a composite in B. This avoids adding rewrite rules for `comp_fapp0`.
+// Strict naturality as cut-elimination: composites in B fold to a component at the composite in A.
 
-// Postcomposition naturality (codomain-side).                                                        // ϵ_(g∘f) ↪ (G g) ∘ ϵ_f
-rule @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Z_A $ϵ
-      (@comp_fapp0 $A $X_A $Y_A $Z_A $g $f)
-  ↪ @comp_fapp0 $B
+// Postcomposition naturality (codomain-side).                                                        // (G g) ∘ ϵ_f ↪ ϵ_(g∘f)
+rule @comp_fapp0 $B
       (fapp0 $F_AB $X_A)
       (fapp0 $G_AB $Y_A)
       (fapp0 $G_AB $Z_A)
-      (@fapp0
-        (@Hom_cat $A $Y_A $Z_A)
-        (@Hom_cat $B (fapp0 $G_AB $Y_A) (fapp0 $G_AB $Z_A))
-        (@fapp1_func $A $B $G_AB $Y_A $Z_A)
-        $g)
-      (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f);
+      (fdapp0 (fapp1_funcd $G_AB [$Y_A]) [$Z_A] $g)
+      (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f)
+  ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Z_A $ϵ
+      (@comp_fapp0 $A $X_A $Y_A $Z_A $g $f);
 
-// Precomposition naturality (domain-side).                                                           // ϵ_(f∘g) ↪ ϵ_f ∘ (F g)
-rule @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
-      (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g)
-  ↪ @comp_fapp0 $B
+// Precomposition naturality (domain-side).                                                           // ϵ_f ∘ (F g) ↪ ϵ_(f∘g)
+rule @comp_fapp0 $B
       (fapp0 $F_AB $X2_A)
       (fapp0 $F_AB $X_A)
       (fapp0 $G_AB $Y_A)
       (@tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f)
-      (@fapp0
-        (@Hom_cat $A $X2_A $X_A)
-        (@Hom_cat $B (fapp0 $F_AB $X2_A) (fapp0 $F_AB $X_A))
-        (@fapp1_func $A $B $F_AB $X2_A $X_A)
-        $g);
+      (fdapp0 (fapp1_funcd $F_AB [$X2_A]) [$X_A] $g)
+  ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
+      (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g);
