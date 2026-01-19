@@ -2325,14 +2325,7 @@ symbol tdapp1_int_func_transfd : Π [Z : Cat],
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (homd_cov_int E0 id_funcd)
-      (@comp_catd_fapp0
-        (Op_cat Z)
-        (Op_catd (Fibration_cov_catd E0))
-        (Op_catd D)
-        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-        (homd_cov_int E0 GG)
-        (Op_funcd FF)))));
+      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF)))));
 
 symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
   Π (E0 : τ (Obj (Functor_cat Z Cat_cat))),
@@ -2344,14 +2337,7 @@ symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
     (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
       (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
     (homd_cov_int E0 id_funcd)
-    (@comp_catd_fapp0
-      (Op_cat Z)
-      (Op_catd (Fibration_cov_catd E0))
-      (Op_catd D)
-      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-      (homd_cov_int E0 GG)
-      (Op_funcd FF))));
+    (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))));
 
 // β-rule: object-action of tdapp1_int_func_transfd folds to tdapp1_int_fapp0_transfd.                         // unpack tdapp1_int_func_transfd at objects
 rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $GG) $ϵ
@@ -2371,14 +2357,7 @@ symbol tdapp1_int_fapp1_func_transfd : Π [Z : Cat],
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (homd_cov_int E0 id_funcd)
-      (@comp_catd_fapp0
-        (Op_cat Z)
-        (Op_catd (Fibration_cov_catd E0))
-        (Op_catd D)
-        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-        (homd_cov_int E0 GG)
-        (Op_funcd FF)))
+      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF)))
       (tdapp1_int_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ)
       (tdapp1_int_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ'))));
 
@@ -2408,14 +2387,7 @@ symbol fdapp1_int_transfd : Π [Z : Cat],
     (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
       (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
     (homd_cov_int E0 id_funcd)
-    (@comp_catd_fapp0
-      (Op_cat Z)
-      (Op_catd (Fibration_cov_catd E0))
-      (Op_catd D)
-      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-      (homd_cov_int E0 FF)
-      (Op_funcd FF))));
+    (comp_catd_fapp0 (homd_cov_int E0 FF) (Op_funcd FF))));
 
 // Folding rule: tdapp1 at identity transfor is the internal displayed hom-action stable head.         // normalize “apply tdapp1 to 1_FF”
 rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $FF) (id (Functord_cat (Fibration_cov_catd $E0) $D) $FF)
@@ -2677,14 +2649,7 @@ assert [Z : Cat]
       (Op_catd (Fibration_cov_catd E0))
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-      (@comp_catd_fapp0
-        (Op_cat Z)
-        (Op_catd (Fibration_cov_catd E0))
-        (Op_catd D)
-        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-        (@homd_cov_int Z D E0 GG)
-        (@Op_funcd Z (Fibration_cov_catd E0) D FF))
+      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))
       Y
       V)
     (@fdapp0
@@ -2702,14 +2667,7 @@ assert [Z : Cat]
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
       (@homd_cov_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
-      (@comp_catd_fapp0
-        (Op_cat Z)
-        (Op_catd (Fibration_cov_catd E0))
-        (Op_catd D)
-        (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-        (@homd_cov_int Z D E0 GG)
-        (@Op_funcd Z (Fibration_cov_catd E0) D FF))
+      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))
       Y
       V
       (fapp0 (@tdapp1_int_func_transfd Z E0 D FF GG) ϵ))
@@ -2720,14 +2678,7 @@ assert [Z : Cat]
         (Op_catd (Fibration_cov_catd E0))
         (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
           (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-        (@comp_catd_fapp0
-          (Op_cat Z)
-          (Op_catd (Fibration_cov_catd E0))
-          (Op_catd D)
-          (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-          (@homd_cov_int Z D E0 GG)
-          (@Op_funcd Z (Fibration_cov_catd E0) D FF))
+        (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))
         Y
         V)
       p)
