@@ -30,7 +30,7 @@ So the “make `W` internal” step is already solved for `hom_cov`.
 
 Currently (simplified) the file has:
 
-- `tapp1_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (Fibration_catd (hom_cov X Id)) (Fibration_catd (hom_cov (F X) G))))`
+- `tapp1_fib_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (Fibration_catd (hom_cov X Id)) (Fibration_catd (hom_cov (F X) G))))`
 
 so `X_A` is a *binder* (external index) in the type.
 
@@ -41,7 +41,7 @@ The file already uses *projection* operations to access components:
 - ordinary components (inner/subscript level): `tapp0_func` / `tapp0_fapp0`
 - displayed components: `tdapp0_func` / `tdapp0_fapp0`
 
-These projections are intended to be “more primitive” than `tapp1_fapp1_func` / `tdapp1_fapp1_func`,
+These projections are intended to be “more primitive” than `tapp1_fib_fapp1_func` / `tdapp1_fapp1_func`,
 so that nested `Transf_cat` / `Transfd_cat` formulations are not circular: components are obtained by
 `tapp0_*` / `tdapp0_*`, not by “re-using `tapp1`”.
 
@@ -51,7 +51,7 @@ so that nested `Transf_cat` / `Transfd_cat` formulations are not circular: compo
 
 ### 1.1 The type-correct internalization for `tapp1` (ordinary case)
 
-Goal: avoid an explicit binder `X_A : Obj(A)` in `tapp1_func_funcd`.
+Goal: avoid an explicit binder `X_A : Obj(A)` in `tapp1_fib_func_funcd`.
 
 Key observation: `hom_cov_func` already gives:
 
@@ -105,10 +105,10 @@ Importantly, this is **not circular**: we do not use `tapp1_*` to define inner c
 
 ### 1.3 Optional: packaging for hom-action (`tapp1_fapp1_func5`)
 
-In the file, the `tapp1_fapp1_func` layer provides the hom-action of `tapp1_func_funcd`
+In the file, the `tapp1_fib_fapp1_func` layer provides the hom-action of `tapp1_fib_func_funcd`
 on modifications (3-cells):
 
-`fapp1_func (tapp1_func_funcd ...) ϵ ϵ' ↪ tapp1_fapp1_func ... ϵ ϵ'`.
+`fapp1_func (tapp1_fib_func_funcd ...) ϵ ϵ' ↪ tapp1_fib_fapp1_func ... ϵ ϵ'`.
 
 For the “more internal” `tapp1_func_funcd5`, the analogous goal is:
 
@@ -446,4 +446,4 @@ mirroring the existing β-rule pattern:
   + small β-rules) to keep rewriting robust and avoid conversion blowups.
 
 - The nested `Transf_cat` / `Transfd_cat` approach is conceptually correct and not circular because
-  components are accessed via `tapp0_*` / `tdapp0_*`, not via the `tapp1_fapp1_func*` layer.
+  components are accessed via `tapp0_*` / `tdapp0_*`, not via the `tapp1_fib_fapp1_func*` layer.

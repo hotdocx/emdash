@@ -1,7 +1,7 @@
 # Appendix — next internal steps (recorded discussion)
 
 This appendix records the agreed design points for continuing the “more internal” development,
-as discussed after implementing `homd_cov_int`, `tapp1_func_transf`, and `fapp1_func_transf`.
+as discussed after implementing `homd_cov_int`, `tapp1_func_transf`, and `fapp1_transf`.
 
 It is intended as a handover note for the next implementation steps; it is not executable code.
 
@@ -23,20 +23,20 @@ Semantically, the ambient `A` can itself encode higher structure (e.g. `A = Tota
 
 ## B) Globular vs simplicial (key interface distinction)
 
-### `fapp1_func` vs `fapp1_funcd`
+### `fapp1_func` vs `fapp1_fib_funcd`
 
 - `fapp1_func` is the **globular** action: it acts on the hom-category `Hom_cat A X Y`.
   In the intended globular reading, morphisms in `Hom_cat A X Y` are higher (2-)arrows “over” an
   identity 1-arrow (they compare parallel 1-cells with fixed boundary `(X,Y)`).
 
-- `fapp1_funcd` is the **simplicial/Grothendieck packaging** of (a piece of) the same action,
+- `fapp1_fib_funcd` is the **simplicial/Grothendieck packaging** of (a piece of) the same action,
   using representables and Grothendieck totals to present higher arrows “over” a chosen base 1-cell.
-  The difference between `fapp1_func` and `fapp1_funcd` is therefore presentation (globular vs simplicial),
+  The difference between `fapp1_func` and `fapp1_fib_funcd` is therefore presentation (globular vs simplicial),
   not a change of relative dimension.
 
 ### “1/2 vs 2/3” slogan (relative)
 
-- `fapp1_funcd` (built from `hom_cov`) presents “(relative) 1-cells as objects + (relative) 2-cells as arrows”
+- `fapp1_fib_funcd` (built from `hom_cov`) presents “(relative) 1-cells as objects + (relative) 2-cells as arrows”
   in a simplicial style (2-simplex level).
 
 - `fdapp1_funcd` (built from `homd_cov`) is the next simplicial iteration: it presents “(relative) 2-cells as objects
@@ -56,7 +56,7 @@ and strictness rewrite rules for identities and composition on 1-cells:
 - `F(g∘f) ↪ F(g)∘F(f)`
 
 However, this is only the prerequisite. For a strict functor `F = forget_strict Fs`, we also want the
-**simplicial packaging** `fapp1_funcd` to be *cartesian* in the sense that it maps the canonical/cartesian
+**simplicial packaging** `fapp1_fib_funcd` to be *cartesian* in the sense that it maps the canonical/cartesian
 2-arrow (over a base edge) to an **identity** 2-arrow. Equivalently: the usual “laxness evidence”
 2-cell that would witness non-commutativity / non-strictness should reduce to an identity 2-cell.
 
@@ -72,9 +72,9 @@ We now have a very-internal ordinary “superscript component packaging”:
 
 and a derived stable head:
 
-- `fapp1_func_transf`, obtained by specializing `tapp1_func_transf` at the identity transfor.
+- `fapp1_transf`, obtained by specializing `tapp1_func_transf` at the identity transfor.
 
-The older external-index packaging `fapp1_funcd` is intended to become **derived** later, once we add the
+The older external-index packaging `fapp1_fib_funcd` is intended to become **derived** later, once we add the
 Grothendieck morphism-action bridge that turns a transfor `E ⇒ D` into a displayed functor `∫E ⟶ ∫D`.
 
 ---
