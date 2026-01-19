@@ -318,7 +318,7 @@ assert (A : Cat) (X Y Z : τ (Obj A))
       total category via `Groth_hom_fam` (so object-level morphisms become Σ-pairs `(f,α)` definitionally).
 
   (I) `Fibre_cat E x` (as a Cat-valued construction)
-    - For `E = Lift_catd1 A`: [OK] `Fibre_cat (Lift_catd1 A) _ ↪ A`.
+    - For `E = Lift_catd A`: [OK] `Fibre_cat (Lift_catd A) _ ↪ A`.
     - For `E = FibrationOp_catd M`: [OK] `Fibre_cat (FibrationOp_catd M) x ↪ fapp0 M x`.
     - In general: [TODO/by-design] `Catd B` is already intended to classify *isofibrations* (not mere `Cat/B`),
       but we have not yet introduced the explicit “iso-transport / cleavage” operations witnessing that
@@ -1315,37 +1315,37 @@ assert (x y z : τ (Obj Terminal_cat))
     (Transfd_cat), avoiding duplicate “parallel” definitions.
 
   The terminal base 1 is the simplest bridge:
-    A : Cat    ↦    Lift_catd1(A) : Catd(1)
+    A : Cat    ↦    Lift_catd(A) : Catd(1)
   i.e. the constant fibration over the terminal category.
 */
 
 // View an ordinary category as a displayed category over the terminal base.                          // constant family over 1
-injective symbol Lift_catd1 : Cat → Catd Terminal_cat;                                                // A ↦ const_1(A)
+injective symbol Lift_catd : Cat → Catd Terminal_cat;                                                // A ↦ const_1(A)
 
 // Opposite of a constant family is constant on the opposite category.                                // const(A)ᵒᵖ ≡ const(Aᵒᵖ)
-rule @Op_catd Terminal_cat (Lift_catd1 $A) ↪ Lift_catd1 (Op_cat $A);
+rule @Op_catd Terminal_cat (Lift_catd $A) ↪ Lift_catd (Op_cat $A);
 
 // The Grothendieck construction of a constant family over 1 is definitionally the original category. // ∫(const_1(A)) ≡ A
-rule Total_cat (Lift_catd1 $A) ↪ $A;
+rule Total_cat (Lift_catd $A) ↪ $A;
 
 // The base projection of ∫(const_1(A)) → 1 is the terminal functor A → 1.                            // π₁ ↪ !
-rule Total_proj1_func (Lift_catd1 $A) ↪ Terminal_func $A;
+rule Total_proj1_func (Lift_catd $A) ↪ Terminal_func $A;
 
 // Fibres of a constant family are constant (independent of the base point in 1).                    // fibre(const_1(A),*) ≡ A
-rule Fibre_cat (Lift_catd1 $A) _ ↪ $A;
+rule Fibre_cat (Lift_catd $A) _ ↪ $A;
 
 // Lift an ordinary functor to a displayed functor between constant families over 1.                 // Functor ↦ displayed Functor over 1
-injective symbol Lift_funcd1 : Π [A B : Cat],
-  τ (Obj (Functor_cat A B)) → τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)));
+injective symbol Lift_funcd : Π [A B : Cat],
+  τ (Obj (Functor_cat A B)) → τ (Obj (Functord_cat (Lift_catd A) (Lift_catd B)));
 
 // Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
-symbol Unlift_func1 [A B : Cat]
-  (FF : τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)))) : τ (Obj (Functor_cat A B))
-≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 A) (Lift_catd1 B) (@id Cat_cat Terminal_cat) FF;
-// NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func1 ...`.
+symbol Unlift_func [A B : Cat]
+  (FF : τ (Obj (Functord_cat (Lift_catd A) (Lift_catd B)))) : τ (Obj (Functor_cat A B))
+≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd A) (Lift_catd B) (@id Cat_cat Terminal_cat) FF;
+// NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func ...`.
 
 // // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
-rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@id Cat_cat Terminal_cat) (@Lift_funcd1 $A $B $F)
+rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B) (@id Cat_cat Terminal_cat) (@Lift_funcd $A $B $F)
   ↪ $F;
 
 
@@ -1728,9 +1728,9 @@ rule @fapp0 (Fibre_cat $E $X_Z) (Fibre_cat $D $X_Z) (@Fibre_func $Z $E $D $FF $X
 
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: after dropping injectivity of `Obj`, the implicit base/category parameters of `fdapp0`
-// are no longer reliably inferred from `Lift_funcd1 $F`, so we pin down the intended specialization
-// explicitly: base = Terminal_cat, E/D are constant families Lift_catd1 A/B.
-rule @fdapp0 Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@Lift_funcd1 $A $B $F) _ $x
+// are no longer reliably inferred from `Lift_funcd $F`, so we pin down the intended specialization
+// explicitly: base = Terminal_cat, E/D are constant families Lift_catd A/B.
+rule @fdapp0 Terminal_cat (Lift_catd $A) (Lift_catd $B) (@Lift_funcd $A $B $F) _ $x
   ↪ @fapp0 $A $B $F $x;
 
 // Pointwise computation rule for homd_cov (Grothendieck/Grothendieck case).                            // (z,(d,f)) ↦ Hom_{E(z)}(f_!(W), FF(d))
@@ -2808,9 +2808,9 @@ assert [A B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (F : τ (Obj (Functor_
   @Pullback_catd A B (@FibrationOp_catd B E) F
     ≡ @FibrationOp_catd A (@comp_fapp0 Cat_cat A B Cat_cat E F);
 
-// Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd1/Lift_funcd1 rules fire
-assert [A : Cat] ⊢ Total_cat (Lift_catd1 A) ≡ A;
-assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd1 A) x1 ≡ A;
-assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) ⊢ Unlift_func1 (Lift_funcd1 F) ≡ F;
+// Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd/Lift_funcd rules fire
+assert [A : Cat] ⊢ Total_cat (Lift_catd A) ≡ A;
+assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd A) x1 ≡ A;
+assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) ⊢ Unlift_func (Lift_funcd F) ≡ F;
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
-  @fdapp0 Terminal_cat (Lift_catd1 A) (Lift_catd1 B) (@Lift_funcd1 A B F) x1 x ≡ @fapp0 A B F x;
+  @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ @fapp0 A B F x;
