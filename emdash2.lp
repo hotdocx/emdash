@@ -2673,25 +2673,14 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
 */
 
 rule @fapp0
+      _
       (@Hom_cat
-        (Transf_cat
-          (@hom_cov $A $X_A $A (@id_func $A))
-          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
-      (@Hom_cat
-        (Functord_cat
-          (Fibration_cov_catd (@hom_cov $A $X_A $A (@id_func $A)))
-          (Fibration_cov_catd (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB)))
+        _
         (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ)
         (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ'))
       (@fapp1_func
-        (Transf_cat
-          (@hom_cov $A $X_A $A (@id_func $A))
-          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-        (Functord_cat
-          (Fibration_cov_catd (@hom_cov $A $X_A $A (@id_func $A)))
-          (Fibration_cov_catd (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB)))
+        _
+        _
         (@Groth_transf_funcd_func $A
           (@hom_cov $A $X_A $A (@id_func $A))
           (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
