@@ -504,19 +504,23 @@ rule fapp0 (@id_func $A) $xA ↪ $xA;
 rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x
   ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
-// Composition of functors (special case): categorical composition in Cat, as a compact abbreviation.   // F∘G in Cat
-// Note: definitional abbreviation; if we later want pointwise computation rules with head `comp_cat_fapp0`,
-// refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+// Composition of functors (special case): categorical composition in Cat.                              // F∘G in Cat
+// Design (stable head): we keep `comp_cat_fapp0` as the canonical normal form for composition in `Cat_cat`.
 symbol comp_cat_fapp0 [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
-  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
-≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
+  (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C)); // F∘G : Functor_cat(A,C)
+
+// Canonicalization: composition in `Cat_cat` folds to `comp_cat_fapp0`.                                 // comp_{Cat}(F,G) ↪ F∘G
+rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
+
+// Computation: (F∘G)(x) ↪ F(G(x)) (stable-head form).                                                  // pointwise composition
+rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 
 // Opposite respects composition of functors (in Cat_cat).                                            // (F∘G)ᵒᵖ ≡ Fᵒᵖ∘Gᵒᵖ
-rule @Op_func _ _ (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
-  ↪ @comp_fapp0 Cat_cat (Op_cat $A1) (Op_cat $A2) (Op_cat $A3) (@Op_func $A2 $A3 $F) (@Op_func $A1 $A2 $G);
+rule @Op_func _ _ (@comp_cat_fapp0 $A1 $A2 $A3 $F $G)
+  ↪ @comp_cat_fapp0 (Op_cat $A1) (Op_cat $A2) (Op_cat $A3) (@Op_func $A2 $A3 $F) (@Op_func $A1 $A2 $G);
 
 // Covariant “hom functor” / Yoneda-style precomposition: Hom_A(W, F(-)).                             // hom-covariant / representable functor core
 constant symbol hom_cov : Π [A : Cat], Π (W_A: τ (Obj A)), Π [B : Cat],                               // W_A ∈ Obj(A), F : Functor_cat(B,A)
@@ -560,18 +564,17 @@ rule @fapp0 (@Hom_cat $A $W _)
         (@fapp1_func $B $A $F $X $Y) $f) $g;
 
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
-rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
+rule @fapp0 $B Cat_cat (@comp_cat_fapp0 $B Cat_cat Cat_cat op $E) $b
   ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
 
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
-// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `comp_cat_fapp0`, which is defined later). // computational-friendly
-rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
-  ↪ @hom_cov $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
+rule @comp_cat_fapp0 $C $B Cat_cat (@hom_cov $A $W $B $F) $G
+  ↪ @hom_cov $A $W $C (@comp_cat_fapp0 $C $B $A $F $G);
 
 // Naturality w.r.t. precomposition in the argument functor (contravariant case):                    // accumulate the functor (with Op)
 // Hom_A(F(-),W) ∘ (Gᵒᵖ)  ≡  Hom_A((F∘G)(-), W), where Gᵒᵖ : Cᵒᵖ → Bᵒᵖ.                                  // variance bookkeeping
-rule @comp_fapp0 Cat_cat _ _ Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
-  ↪ @hom_con $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
+rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
+  ↪ @hom_con $A $W $C (@comp_cat_fapp0 $C $B $A $F $G);
 
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
@@ -591,7 +594,7 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Obj (Functor_cat B A))) (x : τ (Ob
 
 // Sanity: postcomposition by op normalizes pointwise.                                                // exercise `op ∘ E` computation
 assert [B : Cat] (E : τ (Obj (Functor_cat B Cat_cat))) (b : τ (Obj B)) ⊢
-  @fapp0 B Cat_cat (@comp_fapp0 Cat_cat B Cat_cat Cat_cat op E) b
+  @fapp0 B Cat_cat (@comp_cat_fapp0 B Cat_cat Cat_cat op E) b
     ≡ Op_cat (@fapp0 B Cat_cat E b);
 
 // Sanity: opposite distributes over functor composition in Cat_cat.                                  // (F∘G)ᵒᵖ = Fᵒᵖ∘Gᵒᵖ
@@ -800,7 +803,7 @@ rule @Pullback_catd $A $A $E (@id_func $A) ↪ $E;
 // Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_cat_fapp0`
 // This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord_cat. // simulate funcd-over-F
 rule @Pullback_catd $A $B (@Fibration_cov_catd $B $E) $F
-  ↪ @Fibration_cov_catd $A (@comp_fapp0 Cat_cat $A $B Cat_cat $E $F);
+  ↪ @Fibration_cov_catd $A (@comp_cat_fapp0 $A $B Cat_cat $E $F);
 
 // -------------------------------------------------------------------------------------------------
 // 7b. Opposite of displayed categories                                                             // (E→B) ↦ (Eᵒᵖ→Bᵒᵖ)
@@ -1227,13 +1230,13 @@ rule @Total_intro_func $X $X $A $A (@id_func $X) (@id_funcd $X $A) ↪ @id_func 
 
 // Terminal: over xy : X→Y, the induced functor into ∫(1_Y)≡Y is xy ∘ π₁.                               // ∫(!) ↪ xy∘π₁
 rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
-  ↪ @comp_fapp0 Cat_cat (Total_cat $A) $X $Y $xy (Total_proj1_func $A);
+  ↪ @comp_cat_fapp0 (Total_cat $A) $X $Y $xy (Total_proj1_func $A);
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
 // General projection law: (∫FF);π₁_D = (xy)∘(π₁_E).                                                     // projection naturality
-rule @comp_fapp0 Cat_cat (Total_cat $E) (Total_cat $D) $Y (Total_proj1_func $D)
+rule @comp_cat_fapp0 (Total_cat $E) (Total_cat $D) $Y (Total_proj1_func $D)
     (@Total_intro_func $X $Y $E $D $xy $FF)
-  ↪ @comp_fapp0 Cat_cat (Total_cat $E) $X $Y $xy (Total_proj1_func $E);
+  ↪ @comp_cat_fapp0 (Total_cat $E) $X $Y $xy (Total_proj1_func $E);
 
 // -------------------------------------------------------------------------------------------------
 // 12. Terminal category and “constant functors from the terminal”                                   // 1 and points as functors
@@ -1596,7 +1599,7 @@ symbol comp_cat_cov_func : Π [X Y Z : Cat],
 
 // β-rule (objects): postcompose by G via composition in Cat_cat.                                     // fapp0(comp_cat_cov_func(G),F) ↪ G∘F
 rule @fapp0 (Functor_cat $X $Y) (Functor_cat $X $Z) (@comp_cat_cov_func $X $Y $Z $G) $F
-  ↪ @comp_fapp0 Cat_cat $X $Y $Z $G $F;
+  ↪ @comp_cat_fapp0 $X $Y $Z $G $F;
 
 // Sanity: the β-rule fires by definitional equality.                                                 // exercise comp_cat_cov_func β-rule
 assert [X Y Z : Cat] (G : τ (Obj (Functor_cat Y Z))) (F : τ (Obj (Functor_cat X Y))) ⊢
