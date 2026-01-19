@@ -83,7 +83,7 @@ builtin "Prop" ≔ Grpd;                                                        
 builtin "P" ≔ τ;                                                                                   // Lambdapi builtin: interpretation of propositions-as-types
 
 // -------------------------------------------------------------------------------------------------
-// 1. Equality / path groupoid (Id-type valued in `Grpd`)                                           // HoTT-style equality
+// 1. Equality / path groupoid (id-type valued in `Grpd`)                                           // HoTT-style equality
 // -------------------------------------------------------------------------------------------------
 
 // Equality is valued in `Grpd` (not a separate `Prop`), i.e. “paths form a groupoid”.              // equality as ∞-groupoid
@@ -151,7 +151,7 @@ symbol Obj : Cat → Grpd;                                                      
 injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;                            // hom-category as a Cat
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
-injective symbol Id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_A X_A));        // id_X : Obj(Hom_cat_A(X,X))
+injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_A X_A));        // id_X : Obj(Hom_cat_A(X,X))
 
 // -------------------------------------------------------------------------------------------------
 // 4b. Opposite category (core)                                                                      // A ↦ Aᵒᵖ (objects fixed, arrows reversed)
@@ -202,14 +202,14 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   Π (g: τ (Obj (@Hom_cat A Y_A Z_A))), Π (f: τ (Obj (@Hom_cat A X_A Y_A))),                                // composable morphisms g ∘ f
   τ (Obj (@Hom_cat A X_A Z_A));                                                                           // composite morphism in Hom_cat_A(X,Z)
 
-// Id and composition in the opposite category compute by forgetting the `Op_cat` wrapper.             // (Aᵒᵖ) has same identities, reversed composition
-rule @Id (Op_cat $A) $X ↪ @Id $A $X;
+// id and composition in the opposite category compute by forgetting the `Op_cat` wrapper.             // (Aᵒᵖ) has same identities, reversed composition
+rule @id (Op_cat $A) $X ↪ @id $A $X;
 
 // If g : Hom_{Aᵒᵖ}(Y,Z) and f : Hom_{Aᵒᵖ}(X,Y), then g∘f in Aᵒᵖ is f∘g in A.                             // reverse order
 rule @comp_fapp0 (Op_cat $A) $X $Y $Z $g $f ↪ @comp_fapp0 $A $Z $Y $X $f $g;
 
 // Sanity: identities/composition of Aᵒᵖ compute to those of A (with reversed order).                   // unit tests for the rewrite rules above
-assert (A : Cat) (X : τ (Obj A)) ⊢ @Id (Op_cat A) X ≡ @Id A X;
+assert (A : Cat) (X : τ (Obj A)) ⊢ @id (Op_cat A) X ≡ @id A X;
 assert (A : Cat) (X Y Z : τ (Obj A))
   (g : τ (Obj (@Hom_cat (Op_cat A) Y Z))) (f : τ (Obj (@Hom_cat (Op_cat A) X Y))) ⊢
   @comp_fapp0 (Op_cat A) X Y Z g f ≡ @comp_fapp0 A Z Y X f g;
@@ -224,7 +224,7 @@ assert (A : Cat) (X Y Z : τ (Obj A))
   Core projections we care about for any `C : Cat`:
     - `Obj C                 : Grpd`                (and often a decoding rule for `τ (Obj C)`),
     - `Hom_cat C X Y         : Cat`,
-    - `Id C X                : Obj(Hom_cat C X X)`,
+    - `id C X                : Obj(Hom_cat C X X)`,
     - `comp_fapp0 C g f      : Obj(Hom_cat C X Z)` (pointwise composition),
     - `Op_cat C              : Cat`                (when relevant).
 
@@ -235,12 +235,12 @@ assert (A : Cat) (X Y Z : τ (Obj A))
     - [HARD] needs new infrastructure (typically “universe objects” like `U : Grpd` with `τ U ↪ Grpd`)
 
   (A) Core / generic
-    - `Cat`, `Obj`, `Hom_cat`, `Id`, `comp_fapp0`: primitives of the kernel.
+    - `Cat`, `Obj`, `Hom_cat`, `id`, `comp_fapp0`: primitives of the kernel.
 
   (B) `Op_cat A` (opposite category)
     - `Obj (Op_cat A)`: [OK] `Obj (Op_cat A) ↪ Obj A`.
     - `Hom_cat (Op_cat A) X Y`: [OK] `Hom_cat (Op_cat A) X Y ↪ Hom_cat A Y X`.
-    - `Id (Op_cat A) X`: [OK] `Id (Op_cat A) X ↪ Id A X`.
+    - `id (Op_cat A) X`: [OK] `id (Op_cat A) X ↪ id A X`.
     - `comp_fapp0 (Op_cat A) g f`: [OK] “reverse order” computation:
         if `g : Hom_{Aᵒᵖ}(Y,Z)` and `f : Hom_{Aᵒᵖ}(X,Y)`, then
         `comp_fapp0 (Op_cat A) X Y Z g f` should compute to `comp_fapp0 A Z Y X f g`.
@@ -250,16 +250,16 @@ assert (A : Cat) (X Y Z : τ (Obj A))
       (Then `Terminal_obj : τ (Obj Terminal_cat)` lives in `unit`. We keep `Terminal_obj` as a stable
        constant head (no `Terminal_obj ↪ tt` rule yet) to avoid collapsing normal forms to `tt`.)
     - `Hom_cat Terminal_cat _ _`: [OK] `Hom_cat Terminal_cat _ _ ↪ Terminal_cat`.
-    - `Id Terminal_cat _`: [OK] `Id Terminal_cat _ ↪ Terminal_obj`.
+    - `id Terminal_cat _`: [OK] `id Terminal_cat _ ↪ Terminal_obj`.
     - `comp_fapp0 Terminal_cat _ _ _ _ _`: [OK] `comp_fapp0 Terminal_cat ... ↪ Terminal_obj`.
     - (baseline note) In `cartierSolution13.lp`, there are also special-case computation rules like
-      `Terminal_func Terminal_cat ↪ Id_func`. In emdash2, this is still [TODO] (and depends on how we
+      `Terminal_func Terminal_cat ↪ id_func`. In emdash2, this is still [TODO] (and depends on how we
       decide to represent `Obj Terminal_cat`).
 
   (D) `Product_cat A1 A2`
     - `Obj (Product_cat A1 A2)`: [OK] Σ-pairs (`Obj(A1×A2) ↪ Σ Obj(A1), Obj(A2)`).
     - `Hom_cat (Product_cat A1 A2) P Q`: [OK] pointwise product of hom-categories.
-    - `Id (Product_cat A1 A2) X`: [OK] computed componentwise.
+    - `id (Product_cat A1 A2) X`: [OK] computed componentwise.
     - `comp_fapp0 (Product_cat A1 A2) g f`: [OK] computed componentwise.
     - `Op_cat (Product_cat A1 A2)`: [OK] distributes pointwise.
     - (baseline note) In `cartierSolution13.lp`, there are also definitional “unit laws” like
@@ -272,14 +272,14 @@ assert (A : Cat) (X Y Z : τ (Obj A))
       computation rule exposing “functor data” as a Σ/record in emdash2 (so there is no global
       `τ (Obj (Functor_cat A B)) ↪ ...` rule).
     - `Hom_cat (Functor_cat A B) F G`: [OK] definitional identification with `Transf_cat F G`.
-    - `Id/comp_fapp0` inside `Functor_cat A B`: [PARTIAL] should be the usual “vertical” identity/composition
-      of transfors. We currently do *not* expose these by definitional rules on `Id` / `comp_fapp0` directly.
+    - `id/comp_fapp0` inside `Functor_cat A B`: [PARTIAL] should be the usual “vertical” identity/composition
+      of transfors. We currently do *not* expose these by definitional rules on `id` / `comp_fapp0` directly.
       Instead, the operational interface is via projections/packagings:
-        • (Id-instantiation at the “superscripted component” level): [OK]
-            `tapp1_fapp0_funcd ... (Id (Functor_cat A B) F)` folds to `fapp1_funcd ...` (stable head).
+        • (id-instantiation at the “superscripted component” level): [OK]
+            `tapp1_fapp0_funcd ... (id (Functor_cat A B) F)` folds to `fapp1_funcd ...` (stable head).
         • (pointwise 1-cell components of transfors): [OK]
             extracted by `tapp0_fapp0` (ordinary) and `tdapp0_fapp0` (displayed).
-          In particular, the vertical Id/composition *of components* is definitional via rewrite rules:
+          In particular, the vertical id/composition *of components* is definitional via rewrite rules:
             (1_F)_Y ↪ id_{F(Y)}  and  (η∘ϵ)_Y ↪ η_Y ∘ ϵ_Y,
           and similarly in the displayed case via `tdapp0_fapp0`.
         • (higher components / modifications)
@@ -292,10 +292,10 @@ assert (A : Cat) (X Y Z : τ (Obj A))
         [OK] the projection/evaluation functors given by `tapp*` (and later `tapp0_fapp0`, `tapp1_*`)
         are the intended way to *use* a transfor without exposing its internal object encoding.
       In that sense, deciding `Obj(Transf_cat F G)` and `Hom_cat(Transf_cat F G) ϵ ϵ'` is not urgent
-      unless we want definitional `Id/comp_fapp0` in `Functor_cat A B` (since its homs reduce to transfors).
+      unless we want definitional `id/comp_fapp0` in `Functor_cat A B` (since its homs reduce to transfors).
     - `Obj (Transf_cat F G)`: [OK/by-design] kept abstract for now (no Σ/record encoding).
     - `Hom_cat (Transf_cat F G) ϵ ϵ'`: [OK] will matter once we formalize modifications/3-cells explicitly.
-    - `Id/comp_fapp0` in `Transf_cat`: [OK] when we introduce these, we should simultaneously decide the
+    - `id/comp_fapp0` in `Transf_cat`: [OK] when we introduce these, we should simultaneously decide the
       computation behavior of the projection functors (`tapp*` / displayed `tdapp*`) on identities and
       composites, i.e. “components of (ϵ₂ ∘ ϵ₁) are (components of ϵ₂) ∘ (components of ϵ₁)”
       at the level of `tapp0_fapp0` / `tdapp0_fapp0` (and, for higher cells, via `tapp1_fapp1_func`
@@ -356,17 +356,17 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),     
 // -------------------------------------------------------------------------------------------------
 
 /*
-  StrictFunctor_cat / forget_strict
+  StrictFunctor_cat / sfunc_func
 
   We treat strictness as *extra structure* on an underlying functor:
-    forget_strict : StrictFunctor_cat(A,B) → Functor_cat(A,B).
+    sfunc_func : StrictFunctor_cat(A,B) → Functor_cat(A,B).
 
-  For `F := forget_strict(Fs)`, we add computational rewrite rules stating that `F` preserves
+  For `F := sfunc_func(Fs)`, we add computational rewrite rules stating that `F` preserves
   identities and composition *on the nose* at the level of 1-cells (objects of hom-categories).
 
   NOTE (deferred; “laxness evidence becomes identity”):
   The simplicial/Grothendieck packaging `fapp1_funcd` lives over the representable total
-  `Total_cat (FibrationOp_catd (hom_cov X (@Id_func A)))`. In that total, for any base arrow
+  `Total_cat (FibrationOp_catd (hom_cov X (@id_func A)))`. In that total, for any base arrow
   `g : Y₁ → Y₂` there is a canonical/cartesian morphism over `g`:
 
     σ_{g,f} : (Y₁,f) → (Y₂, g∘f)
@@ -376,7 +376,7 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),     
   be cartesian/identity: it can carry nontrivial 2-cell data, i.e. the usual “laxness witness” that
   compares `F(g) ∘ F(f)` with `F(g∘f)`.
 
-  For a strict functor `forget_strict Fs`, we want that laxness witness to reduce to an identity 2-arrow
+  For a strict functor `sfunc_func Fs`, we want that laxness witness to reduce to an identity 2-arrow
   (so the corresponding triangle 2-cell is definitional). We defer implementing this cartesianness rule.
 */
 constant symbol StrictFunctor_cat : Π (A B : Cat), Cat;
@@ -384,21 +384,21 @@ constant symbol StrictFunctor_cat : Π (A B : Cat), Cat;
 // Inference helper (since `Obj` is not injective): recover A,B from an equality of strict-functor object classifiers.
 unif_rule Obj (StrictFunctor_cat $A $B) ≡ Obj (StrictFunctor_cat $A' $B') ↪ [ $A ≡ $A'; $B ≡ $B' ];
 
-injective symbol forget_strict : Π [A B : Cat],
+injective symbol sfunc_func : Π [A B : Cat],
   τ (Obj (StrictFunctor_cat A B)) → τ (Obj (Functor_cat A B));
 
 // Strictness (identity): F(id_X) ↪ id_{F(X)}.                                                       // preserves identities on the nose
-rule fapp0 (@fapp1_func $A $B (@forget_strict $A $B $Fs) $X $X) (@Id $A $X)
-  ↪ @Id $B (fapp0 (@forget_strict $A $B $Fs) $X);
+rule fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $X) (@id $A $X)
+  ↪ @id $B (fapp0 (@sfunc_func $A $B $Fs) $X);
 
 // Strictness (composition): F(g∘f) ↪ F(g)∘F(f).                                                     // preserves composition on the nose
-rule fapp0 (@fapp1_func $A $B (@forget_strict $A $B $Fs) $X $Z) (@comp_fapp0 $A $X $Y $Z $g $f)
+rule fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $Z) (@comp_fapp0 $A $X $Y $Z $g $f)
   ↪ @comp_fapp0 $B
-      (fapp0 (@forget_strict $A $B $Fs) $X)
-      (fapp0 (@forget_strict $A $B $Fs) $Y)
-      (fapp0 (@forget_strict $A $B $Fs) $Z)
-      (fapp0 (@fapp1_func $A $B (@forget_strict $A $B $Fs) $Y $Z) $g)
-      (fapp0 (@fapp1_func $A $B (@forget_strict $A $B $Fs) $X $Y) $f);
+      (fapp0 (@sfunc_func $A $B $Fs) $X)
+      (fapp0 (@sfunc_func $A $B $Fs) $Y)
+      (fapp0 (@sfunc_func $A $B $Fs) $Z)
+      (fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $Y $Z) $g)
+      (fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $Y) $f);
 
 // Opposite of a functor: F : A→B  ↦  Fᵒᵖ : Aᵒᵖ → Bᵒᵖ (same object-map, reversed hom-action).        // dualization of functors
 injective symbol Op_func : Π [A B : Cat],
@@ -491,17 +491,17 @@ rule @fapp0 (Functor_cat $A1 $A2) _
   (@fapp1_func Cat_cat Cat_cat op $A1 $A2) $F ↪ @Op_func $A1 $A2 $F;
 
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
-symbol Id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
-≔ @Id Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
-// NOTE: `Id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `Id_func`, switch to `symbol Id_func ...;` + `rule Id_func ... ↪ ...` (cf. tapp0_fapp0).
-rule fapp0 (@Id Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
+symbol id_func [A: Cat] : τ (Obj (Functor_cat A A))                                             // identity functor id_A : Obj(Functor_cat(A,A))
+≔ @id Cat_cat A;                                                                        // defined as identity morphism in Cat_cat
+// NOTE: `id_func` is currently a definitional abbreviation; if we ever need rewrite rules with head `id_func`, switch to `symbol id_func ...;` + `rule id_func ... ↪ ...` (cf. tapp0_fapp0).
+rule fapp0 (@id Cat_cat $A) $xA ↪ $xA;                                                   // computation: (id_A)(x) ↪ x
 
 // Composition of functors (as morphisms in Cat_cat) computes pointwise on objects.                     // (F∘G)(x) ↪ F(G(x))
 rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x
   ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
-rule @Op_func _ _ (@Id_func $A) ↪ @Id_func (Op_cat $A);
+rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 
 // Opposite respects composition of functors (in Cat_cat).                                            // (F∘G)ᵒᵖ ≡ Fᵒᵖ∘Gᵒᵖ
 rule @Op_func _ _ (@comp_fapp0 Cat_cat $A1 $A2 $A3 $F $G)
@@ -553,7 +553,7 @@ rule @fapp0 $B Cat_cat (@comp_fapp0 Cat_cat $B Cat_cat Cat_cat op $E) $b
   ↪ Op_cat (@fapp0 $B Cat_cat $E $b);
 
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
-// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `comp_func_cat`, which is defined later). // computational-friendly
+// Note: we express functor composition via `comp_fapp0` in `Cat_cat` (not via `comp_cat_fapp0`, which is defined later). // computational-friendly
 rule @comp_fapp0 Cat_cat $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ @hom_cov $A $W $C (@comp_fapp0 Cat_cat $C $B $A $F $G);
 
@@ -636,8 +636,8 @@ constant symbol Catd : Π (A : Cat), TYPE;                                      
 
   Prototypical example (representable / co-slice codomain fibration):
   - Given `X_B : Obj(B)`, the representable functor `Hom_B(X_B,-)` is (in our notations) `hom_cov X_B`,
-    or explicitly `hom_cov X_B (@Id_func B) : Obj(Functor_cat B Cat_cat)`.
-  - Its Grothendieck construction `FibrationOp_catd (hom_cov X_B (@Id_func B)) : Catd B`
+    or explicitly `hom_cov X_B (@id_func B) : Obj(Functor_cat B Cat_cat)`.
+  - Its Grothendieck construction `FibrationOp_catd (hom_cov X_B (@id_func B)) : Catd B`
     has fibre at `Y_B : Obj(B)` equal to `Hom_B(X_B,Y_B)` (by the rewrite rule for `Fibre_cat`).
     So an “element” over `Y_B` can be visualized as an arrow `X_B → Y_B` (an *edge*).
 
@@ -645,7 +645,7 @@ constant symbol Catd : Π (A : Cat), TYPE;                                      
   - A fibration `S → E` (i.e. a displayed category over `Total_cat E`) can be visualized as classifying
     “2-arrows”, i.e. *surfaces*. In our notations this is approximated by `homd_cov`.
     Notice in the type of `homd_cov` the base product
-      `Product_catd B (FibrationOp_catd (hom_cov W_Z (@Id_func Z)))`,
+      `Product_catd B (FibrationOp_catd (hom_cov W_Z (@id_func Z)))`,
     which formalizes that a “surface” is fibred over (at least) two “edges”: the usual codomain edge,
     plus an extra base edge coming from the fact that `E` itself already lies over `B`.
     This matches the 2-simplex picture in `dependent-category-2-simplex.png`.
@@ -699,10 +699,10 @@ constant symbol Functord_cat : Π [B : Cat], Π (E D : Catd B), Cat;            
 unif_rule Obj (@Functord_cat $B $E $D) ≡ Obj (@Functord_cat $B' $E' $D') ↪ [ $B ≡ $B'; $E ≡ $E'; $D ≡ $D' ];
 
 // Dependent identity functor (identity section).                                                    // id in the slice category
-constant symbol Id_funcd [B : Cat] [E:Catd B] : τ (Obj (Functord_cat E E));                      // id : Obj(Functord_cat(E,E))
+constant symbol id_funcd [B : Cat] [E:Catd B] : τ (Obj (Functord_cat E E));                      // id : Obj(Functord_cat(E,E))
 
 // Dependent composition of dependent functors.                                                      // composition in the slice Cat/B
-symbol comp_funcd [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
+symbol comp_catd_fapp0 [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
   (FF: τ (Obj (Functord_cat D C))) (GG: τ (Obj (Functord_cat E D))) : τ (Obj (Functord_cat E C));               // compose : (D→C) × (E→D) → (E→C)
 
 // Universe code for displayed categories over a fixed base (so we can form `Cat` objects whose decoded objects are `Catd Z`). // Catd as a Grpd-code
@@ -713,8 +713,8 @@ rule τ (Catd_grpd $Z) ↪ Catd $Z;
 constant symbol Catd_cat : Π (Z : Cat), Cat;
 rule Obj (Catd_cat $Z) ↪ Catd_grpd $Z;
 rule @Hom_cat (Catd_cat $Z) $E $D ↪ @Functord_cat $Z $E $D;
-rule @Id (Catd_cat $Z) $E ↪ @Id_funcd $Z $E;
-rule @comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG ↪ @comp_funcd $Z $E $D $C $FF $GG;
+rule @id (Catd_cat $Z) $E ↪ @id_funcd $Z $E;
+rule @comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG ↪ @comp_catd_fapp0 $Z $E $D $C $FF $GG;
 
 /*
   Catd_func (isofibration / displayed-category classifier, contravariant in the base)
@@ -764,11 +764,11 @@ symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Obj (Functor_cat A B)) →
 rule Fibre_cat (Pullback_catd $E $F) $xA ↪ Fibre_cat $E (fapp0 $F $xA);                              // fibre(F^*E,x) ↪ fibre(E,Fx)
 
 // Pullback along the identity functor is definitional identity.                                       // (id)^*(E) ≡ E
-// NOTE: we pattern-match on `Id Cat_cat A` (not on `Id_func A`) because `Id_func` is a definitional abbreviation. // stable matching
-rule @Pullback_catd $A $A $E (@Id Cat_cat $A) ↪ $E;
+// NOTE: we pattern-match on `id Cat_cat A` (not on `id_func A`) because `id_func` is a definitional abbreviation. // stable matching
+rule @Pullback_catd $A $A $E (@id Cat_cat $A) ↪ $E;
 
 // Pullback of an isofibration (Grothendieck construction) is isofibration of the precomposition.    // ∫(E∘F) ≅ F^*(∫E)
-// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_func_cat`
+// Here `E : B → Cat_cat` and `F : A → B`, and we express `E∘F` via composition in `Cat_cat`.         // avoids relying on later `comp_cat_fapp0`
 // This is the key bridge for “general base functor” displayed maps: reindex first, then use Functord_cat. // simulate funcd-over-F
 rule @Pullback_catd $A $B (@FibrationOp_catd $B $E) $F
   ↪ @FibrationOp_catd $A (@comp_fapp0 Cat_cat $A $B Cat_cat $E $F);
@@ -837,7 +837,7 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Obj (Functor_cat A B)
   `tapp1_func_funcd` is a “single ancestor” of:
   - `fapp1_funcd` (functorial action on homs, packaged as a displayed functor):
       specialize to the identity transfor ϵ := 1_F : Nat(F,F),
-      then the packaged component (1_F)^X is definitionally `fapp1_funcd F [X]` (by the Id-folding rule).
+      then the packaged component (1_F)^X is definitionally `fapp1_funcd F [X]` (by the id-folding rule).
 
   - `tapp0_func` (ordinary pointwise component evaluation):
       specialize the external index to X := Y and then evaluate ϵ^Y at the identity arrow id_Y,
@@ -849,13 +849,13 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Obj (Functor_cat A B)
 symbol tapp1_func_funcd : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],                      // domain/codomain categories and functors
   Π (X_A: τ (Obj A)),                                                                                   // external/superscript projection index
   τ (Obj (Functor_cat (Transf_cat F_AB G_AB)
-         (Functord_cat (FibrationOp_catd (hom_cov X_A (@Id_func A)))                             // source: Hom_A(X_A,-) over A
+         (Functord_cat (FibrationOp_catd (hom_cov X_A (@id_func A)))                             // source: Hom_A(X_A,-) over A
                   (FibrationOp_catd (hom_cov (fapp0 F_AB X_A) G_AB)))));                               // target: Hom_B(FX_A, G_AB(-)) over A
 
 // `tapp1_fapp0_funcd` is the fapp0 part of `tapp1_func_funcd`
 symbol tapp1_fapp0_funcd : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],                      // domain/codomain categories and functors
   Π (X_A: τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),                                              // ϵ : Obj(Transf_cat(F,G))
-  τ (Obj (Functord_cat (FibrationOp_catd (hom_cov X_A (@Id_func A)))                             // source: Hom_A(X_A,-)
+  τ (Obj (Functord_cat (FibrationOp_catd (hom_cov X_A (@id_func A)))                             // source: Hom_A(X_A,-)
                   (FibrationOp_catd (hom_cov (fapp0 F_AB X_A) G_AB))));                                // target: Hom_B(FX_A, G_AB(-))
 
 // β-rule: `tapp1_fapp0_funcd` is definitionally the object-action of the functor `tapp1_func_funcd`.               // unpack tapp1_func_funcd at objects
@@ -883,7 +883,7 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_
     (@Transf_cat
       (Op_cat A)
       (Functor_cat A Cat_cat)
-      (@hom_cov_int A A (@Id_func A))
+      (@hom_cov_int A A (@id_func A))
       (@comp_fapp0
         Cat_cat
         (Op_cat A)
@@ -897,7 +897,7 @@ symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor
   τ (Obj (@Transf_cat
     (Op_cat A)
     (Functor_cat A Cat_cat)
-    (@hom_cov_int A A (@Id_func A))
+    (@hom_cov_int A A (@id_func A))
     (@comp_fapp0
       Cat_cat
       (Op_cat A)
@@ -920,7 +920,7 @@ symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Fu
     (@Hom_cat (@Transf_cat
       (Op_cat A)
       (Functor_cat A Cat_cat)
-      (@hom_cov_int A A (@Id_func A))
+      (@hom_cov_int A A (@id_func A))
       (@comp_fapp0
         Cat_cat
         (Op_cat A)
@@ -952,7 +952,7 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B)))
   τ (Obj (@Transf_cat
     (Op_cat A)
     (Functor_cat A Cat_cat)
-    (@hom_cov_int A A (@Id_func A))
+    (@hom_cov_int A A (@id_func A))
     (@comp_fapp0
       Cat_cat
       (Op_cat A)
@@ -962,7 +962,7 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B)))
       (@Op_func A B F_AB))));
 
 // Folding rule: tapp1 at identity transfor is the internal hom-action stable head.                   // normalize “apply tapp1 to 1_F”
-rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (Id (Functor_cat $A $B) $F)
+rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
 // Sanity: the β-rule for the new “more internal” packaging fires by rewriting.                       // exercise tapp1_int_func_transf β-rule
@@ -1105,7 +1105,7 @@ rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
 // Usual notation: `(id_x)_!(u) = u`.                                                                  // id_! = id
-rule @fib_cov_tapp0_fapp0 $B $M $x $x (Id $B $x) $u ↪ $u;
+rule @fib_cov_tapp0_fapp0 $B $M $x $x (id $B $x) $u ↪ $u;
 
 // Strict functoriality on objects (cut-elimination direction): M(g)(M(f)(u)) ↪ M(g∘f)(u).             // fold transport along ∘
 // Usual notation: `g_!(f_!(u)) = (g ∘ f)_!(u)`.                                                       // g_!∘f_! ↪ (g∘f)_!
@@ -1153,7 +1153,7 @@ injective symbol Total_proj2_funcd [B : Cat] (E: Catd B) :                      
   τ (Obj (Functord_cat (Terminal_catd (Total_cat E)) (Pullback_catd E (Total_proj1_func E))));            // π₂ : 1_{∫E} ⇒ (π₁)^*E
 
 // General “context intro” for totals: a displayed functor over a base functor xy induces a functor between totals. // ∫-intro over xy
-// Slice-style (over a fixed base) is recovered by taking xy := Id_func and using Pullback_catd _ xy ↪ _.          // over-id specialization
+// Slice-style (over a fixed base) is recovered by taking xy := id_func and using Pullback_catd _ xy ↪ _.          // over-id specialization
 injective symbol Total_intro_func :
   Π [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Obj (Functor_cat X Y))),
     τ (Obj (Functord_cat E (Pullback_catd D xy)))
@@ -1215,18 +1215,18 @@ injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Obj (Functord_c
 
 // Terminal comprehension laws (cartierSolution13: Context_cat/Context_elimCat/Context_intro).        // ∫(1_X) ≡ X, π₁ ≡ id
 rule Total_cat (Terminal_catd $A) ↪ $A;                                                               // ∫(1_A) ↪ A
-rule Total_proj1_func (Terminal_catd $A) ↪ @Id_func $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
+rule Total_proj1_func (Terminal_catd $A) ↪ @id_func $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
 
 // Pullback preserves terminal displayed categories.                                                  // F^*(1_B) ≡ 1_A
 rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
 
 // The dependent projection π₂ is the identity section when M is terminal.                            // π₂ : 1_{∫1} ⇒ (π₁)^*1  ↪ id
-rule Total_proj2_funcd (Terminal_catd $A) ↪ @Id_funcd $A (Terminal_catd $A);
+rule Total_proj2_funcd (Terminal_catd $A) ↪ @id_funcd $A (Terminal_catd $A);
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
 // Identity: over id_X, the induced functor on totals is identity.                                      // ∫(id) ↪ id
-// NOTE: we match on `Id Cat_cat X` (not `Id_func X`) because `Id_func` is a definitional abbreviation.  // stable matching
-rule @Total_intro_func $X $X $A $A (@Id Cat_cat $X) (@Id_funcd $X $A) ↪ @Id_func (Total_cat $A);
+// NOTE: we match on `id Cat_cat X` (not `id_func X`) because `id_func` is a definitional abbreviation.  // stable matching
+rule @Total_intro_func $X $X $A $A (@id Cat_cat $X) (@id_funcd $X $A) ↪ @id_func (Total_cat $A);
 
 // Terminal: over xy : X→Y, the induced functor into ∫(1_Y)≡Y is xy ∘ π₁.                               // ∫(!) ↪ xy∘π₁
 rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
@@ -1264,7 +1264,7 @@ rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 constant symbol Terminal_obj : τ (Obj Terminal_cat);                                                 // * : Obj(1)
 
 // Identities and composition in the terminal category are the unique object.                         // id_* = * and *∘* = *
-rule @Id Terminal_cat _ ↪ Terminal_obj;
+rule @id Terminal_cat _ ↪ Terminal_obj;
 rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 
 // “Object as functor”: an object y:Obj(Y) induces a functor 1 → Y selecting y.                       // points as functors
@@ -1293,7 +1293,7 @@ assert [Y : Cat] (y : τ (Obj Y)) ⊢
 // Sanity: the intended definitional computations for `Terminal_cat` fire.                            // unit tests
 assert ⊢ τ (Obj Terminal_cat) ≡ unit;
 assert (x y : τ (Obj Terminal_cat)) ⊢ @Hom_cat Terminal_cat x y ≡ Terminal_cat;
-assert (x : τ (Obj Terminal_cat)) ⊢ @Id Terminal_cat x ≡ Terminal_obj;
+assert (x : τ (Obj Terminal_cat)) ⊢ @id Terminal_cat x ≡ Terminal_obj;
 assert (x y z : τ (Obj Terminal_cat))
   (g : τ (Obj (@Hom_cat Terminal_cat y z))) (f : τ (Obj (@Hom_cat Terminal_cat x y))) ⊢
   @comp_fapp0 Terminal_cat x y z g f ≡ Terminal_obj;
@@ -1341,11 +1341,11 @@ injective symbol Lift_funcd1 : Π [A B : Cat],
 // Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
 symbol Unlift_func1 [A B : Cat]
   (FF : τ (Obj (Functord_cat (Lift_catd1 A) (Lift_catd1 B)))) : τ (Obj (Functor_cat A B))
-≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 A) (Lift_catd1 B) (@Id Cat_cat Terminal_cat) FF;
+≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 A) (Lift_catd1 B) (@id Cat_cat Terminal_cat) FF;
 // NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func1 ...`.
 
 // // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
-rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@Id Cat_cat Terminal_cat) (@Lift_funcd1 $A $B $F)
+rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd1 $A) (Lift_catd1 $B) (@id Cat_cat Terminal_cat) (@Lift_funcd1 $A $B $F)
   ↪ $F;
 
 
@@ -1424,8 +1424,8 @@ rule @Hom_cat (Product_cat $A1 $A2) $P $Q
                 (@Hom_cat $A2 (sigma_Snd $P) (sigma_Snd $Q));
 
 // Identity and composition in a product category are computed componentwise (on paired endpoints).   // id and ∘ in A×B
-rule @Id (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
-  ↪ Struct_sigma (@Id $A1 $X1) (@Id $A2 $X2);
+rule @id (Product_cat $A1 $A2) (Struct_sigma $X1 $X2)
+  ↪ Struct_sigma (@id $A1 $X1) (@id $A2 $X2);
 
 rule @comp_fapp0 (Product_cat $A1 $A2)
   (Struct_sigma $X1 $X2) (Struct_sigma $Y1 $Y2) (Struct_sigma $Z1 $Z2)
@@ -1577,10 +1577,10 @@ assert [A : Cat] [X Y : τ (Obj A)] [Z : τ (Obj A)]
   fapp0 (@comp_func A X Y Z) (Struct_sigma g f) ≡ @comp_fapp0 A X Y Z g f;
 
 // Composition of functors is composition in Cat_cat (a special case of comp_fapp0).                 // categorical composition in Cat
-symbol comp_func_cat [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
+symbol comp_cat_fapp0 [A B : Cat] [C : Cat]                                                     // A,B,C : Cat
   (F : τ (Obj (Functor_cat B C))) (G : τ (Obj (Functor_cat A B))) : τ (Obj (Functor_cat A C))  // F∘G : Functor_cat(A,C)
 ≔ @comp_fapp0 Cat_cat _ _ _ F G;                                                               // compose in Cat_cat
-// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_func_cat`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
+// NOTE: definitional abbreviation; if we later want pointwise computation rules with head `comp_cat_fapp0`, refactor to an uninterpreted symbol + rewrite rules (cf. tapp0_fapp0).
 
 // -------------------------------------------------------------------------------------------------
 // 15a. Curried postcomposition in Cat                                                              // stable-head internal “postcompose”
@@ -1647,13 +1647,13 @@ assert [Z : Cat] (F : τ (Obj (Functor_cat Z Cat_cat))) ⊢
 // Base : Zᵒᵖ ⇒ Cat, built from representables, pointwise op, pointwise product and totalization.      // consolidated Base pipeline
 symbol homd_cov_int_base [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat)))
   : τ (Obj (Functor_cat (Op_cat Z) Cat_cat))
-≔ comp_func_cat
+≔ comp_cat_fapp0
     (Total_func [Z])
-    (comp_func_cat
+    (comp_cat_fapp0
       (fapp0 (prod_func_func [Z]) D0)
-      (comp_func_cat
+      (comp_cat_fapp0
         (op_val_func [Z])
-        (@hom_cov_int Z Z (@Id_func Z))));
+        (@hom_cov_int Z Z (@id_func Z))));
 
 // The displayed “dependent hom” packaging (kept abstract for now).                                   // source: (Op_catd E)  target: inlined
 // Engineering convention:
@@ -1666,13 +1666,13 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   τ (Obj (Functord_cat (Op_catd E)
     (@Op_catd Z (@FibrationOp_catd Z
       (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_func_cat Fib_func (homd_cov_int_base D0)))))));
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))))));
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
   (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),                 // W in fibre, D another displayed cat, FF : D→E
   τ (Obj (Functor_cat
-    (Total_cat (Product_catd D (FibrationOp_catd (comp_func_cat op (hom_cov W_Z (@Id_func Z))))))
+    (Total_cat (Product_catd D (FibrationOp_catd (comp_cat_fapp0 op (hom_cov W_Z (@id_func Z))))))
     Cat_cat));                                                                                            // target category Cat_cat (Cat-valued functors)
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
@@ -1802,11 +1802,11 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))]
 // Canonicalization: fold "evaluate ϵ^Y at id_Y" *towards* `tapp0_fapp0`.                               // fold component extraction
 // This keeps `tapp0_fapp0` as the stable head, avoiding conversion blowups in later developments.
 rule @fdapp0 $A
-      (@FibrationOp_catd $A (@hom_cov $A $Y_A $A (@Id_func $A)))
+      (@FibrationOp_catd $A (@hom_cov $A $Y_A $A (@id_func $A)))
       (@FibrationOp_catd $A (@hom_cov $B (fapp0 $F_AB $Y_A) $A $G_AB))
       (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $Y_A $ϵ)
       $Y_A
-      (@Id $A $Y_A)
+      (@id $A $Y_A)
   ↪ @tapp0_fapp0 $A $B $F_AB $G_AB $Y_A $ϵ;
 
 // β-rule: `tapp0_fapp0` is definitionally the object-action of the functor `tapp0_func`.            // unpack tapp0_func at objects
@@ -1827,8 +1827,8 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
 */
 
 // Components of the identity transfor compute to identity morphisms in B.                              // (1_F)_Y ↪ id_{F(Y)}
-rule @tapp0_fapp0 $A $B $F $F $Y (Id (Functor_cat $A $B) $F)
-  ↪ @Id $B (@fapp0 $A $B $F $Y);
+rule @tapp0_fapp0 $A $B $F $F $Y (id (Functor_cat $A $B) $F)
+  ↪ @id $B (@fapp0 $A $B $F $Y);
 
 // Components of vertical composite transfors compute to vertical composition in B.                     // (η∘ϵ)_Y ↪ η_Y ∘ ϵ_Y
 rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
@@ -1846,7 +1846,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
 
     given M : B → Cat and a fibre object u ∈ M(x),
     we package the action f ↦ M(f)(u) as a transfor
-      fib_cov_transf(M,x,u) : hom_cov(x,Id) ⇒ M.
+      fib_cov_transf(M,x,u) : hom_cov(x,id) ⇒ M.
 
   Its “component at y” (in the sense of `tapp0_fapp0`) is the functor
     Hom_B(x,y) → M(y),
@@ -1863,7 +1863,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
 
 symbol fib_cov_transf : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   Π (x : τ (Obj B)), τ (Obj (fapp0 M x))
-    → τ (Obj (Transf_cat (@hom_cov B x B (@Id_func B)) M));
+    → τ (Obj (Transf_cat (@hom_cov B x B (@id_func B)) M));
 
 // Functorial “action on a fixed fibre object”: (y ↦ (f ↦ M(f)(u))).                                  // u ↦ (Hom(x,-) → M(-))
 // NOTE: we keep `fib_cov_tapp0_func` as a *stable head* (like `fib_cov_tapp0_fapp0`) so we can attach
@@ -1873,7 +1873,7 @@ symbol fib_cov_tapp0_func : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
   τ (Obj (Functor_cat (@Hom_cat B x y) (fapp0 M y)));
 
 // Component at y (as a functor in Cat_cat): (fib_cov_transf u)_y ↪ fib_cov_tapp0_func(u,y).      // unpack module_action at y
-rule @tapp0_fapp0 $B Cat_cat (@hom_cov $B $x $B (@Id_func $B)) $M $y (@fib_cov_transf $B $M $x $u)
+rule @tapp0_fapp0 $B Cat_cat (@hom_cov $B $x $B (@id_func $B)) $M $y (@fib_cov_transf $B $M $x $u)
   ↪ @fib_cov_tapp0_func $B $M $x $y $u;
 
 // Object-action: apply M to f, then to u (folded to `fib_cov_tapp0_fapp0`).                              // f ↦ f_!(u)
@@ -1909,7 +1909,7 @@ symbol Groth_hom_fam : Π [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat))),
 
 // Definable expansion (do NOT unfold by rewriting; keep `Groth_hom_fam` as a stable head for typing).  // avoids conversion blowups in homs of ∫M
 // This is the intended definition:
-//   Groth_hom_fam_def(u,v) = hom_con(v,Id) ∘ (fib_cov_tapp0_func(u))^op.
+//   Groth_hom_fam_def(u,v) = hom_con(v,id) ∘ (fib_cov_tapp0_func(u))^op.
 symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
   [x y : τ (Obj B)] (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
   : τ (Obj (Functor_cat (Op_cat (@Hom_cat B x y)) Cat_cat))
@@ -1917,7 +1917,7 @@ symbol Groth_hom_fam_def [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
      (Op_cat (@Hom_cat B x y))
      (Op_cat (fapp0 M y))
      Cat_cat
-     (@hom_con (fapp0 M y) v (fapp0 M y) (@Id_func (fapp0 M y)))
+     (@hom_con (fapp0 M y) v (fapp0 M y) (@id_func (fapp0 M y)))
      (@Op_func (@Hom_cat B x y) (fapp0 M y) (@fib_cov_tapp0_func B M x y u));
 
 // β-rule: on objects f:x→y, Groth_hom_fam returns the fibre hom-category Hom_{M(y)}(M(f)(u),v).        // compute family at a base arrow
@@ -1989,10 +1989,10 @@ assert [B : Cat] (M : τ (Obj (Functor_cat B Cat_cat)))
 //   id_(x,u)       = (id_x, id_u)
 //   (g,β) ∘ (f,α)  = (g∘f,  β ∘ M(g)(α)).
 
-rule @Id (Total_cat (@FibrationOp_catd $B $M)) (Struct_sigma $x $u)
+rule @id (Total_cat (@FibrationOp_catd $B $M)) (Struct_sigma $x $u)
   ↪ Struct_sigma
-      (@Id $B $x)
-      (@Id (fapp0 $M $x) $u);
+      (@id $B $x)
+      (@id (fapp0 $M $x) $u);
 
 rule @comp_fapp0 (Total_cat (@FibrationOp_catd $B $M))
   (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
@@ -2101,14 +2101,14 @@ constant symbol tapp_lax_triangle :
         (@comp_fapp0 B (fapp0 F_AB X) (fapp0 G_AB Y1) (fapp0 G_AB Y2)
           (fapp0 (@fapp1_func A B G_AB Y1 Y2) g)
           (@fdapp0 A
-            (FibrationOp_catd (hom_cov X (@Id_func A)))
+            (FibrationOp_catd (hom_cov X (@id_func A)))
             (FibrationOp_catd (hom_cov (fapp0 F_AB X) G_AB))
             (@tapp1_fapp0_funcd A B F_AB G_AB X ϵ)
             Y1
             f))
         // target 1-cell: ηᵋ_{g∘f}
         (@fdapp0 A
-          (FibrationOp_catd (hom_cov X (@Id_func A)))
+          (FibrationOp_catd (hom_cov X (@id_func A)))
           (FibrationOp_catd (hom_cov (fapp0 F_AB X) G_AB))
           (@tapp1_fapp0_funcd A B F_AB G_AB X ϵ)
           Y2
@@ -2117,7 +2117,7 @@ constant symbol tapp_lax_triangle :
 // “Slice-category” / simplicial action (warm-up): fapp1_funcd packages fapp1_func as a dependent functor over representables. // 2-simplex intuition
 // Motivation: complements the globular iteration `Hom_cat(X,Y) : Cat` with a Grothendieck/simplicial presentation. // 2- and 3-simplex pictures
 //
-// In the Grothendieck total of `hom_cov X (@Id_func A)`:
+// In the Grothendieck total of `hom_cov X (@id_func A)`:
 // - objects are arrows `f : X → Y` (relative 1-cells, with endpoint Y varying),
 // - morphisms are pairs `(g : Y₁ → Y₂, α)` where α is a 2-arrow comparing `g∘f` with another arrow into Y₂,
 //   i.e. a “2-arrow over g” in the simplicial sense.
@@ -2138,7 +2138,7 @@ constant symbol tapp_lax_triangle :
 // from the more-internal transfor-based packaging (`fapp1_int_transf`) once the “transfor ⇒ displayed functor”
 // Grothendieck morphism-action bridge is implemented.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))), Π [X_A: τ (Obj A)],         // functor and outer index
-  τ (Obj (Functord_cat (FibrationOp_catd (hom_cov X_A (@Id_func A)))                              // source displayed: Hom_A(X_A,-)
+  τ (Obj (Functord_cat (FibrationOp_catd (hom_cov X_A (@id_func A)))                              // source displayed: Hom_A(X_A,-)
                   (FibrationOp_catd (hom_cov (fapp0 F_AB X_A) F_AB))));                                // target displayed: Hom_B(FX_A, F_AB(-))
 
 // TODO (architecture): `fapp1_funcd` should eventually be derived (not primitive) from the more-internal
@@ -2159,7 +2159,7 @@ rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
       (@fapp1_func $A $B $F $X $Y)
       $f;                                                        // fdapp0(fapp1_funcd(F,X),f) ↪ fapp0(fapp1_func(F,X,Y),f)
 
-// Id-instantiation (key normalization): identity natural transformation folds to functorial action on homs.     // stable head for "ϵ = id"
+// id-instantiation (key normalization): identity natural transformation folds to functorial action on homs.     // stable head for "ϵ = id"
 //
 // Usual 1-categorical notation:
 //   - Let F : A ⟶ B be a functor.
@@ -2169,10 +2169,10 @@ rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
 //     and it sends an arrow f : X ⟶ Y to the arrow F(f) : FX ⟶ FY.
 //
 // In emdash2 notation:
-//   - `tapp1_fapp0_funcd A B F F X (Id (Functor_cat A B) F)` is the packaged (1_F)^X,
+//   - `tapp1_fapp0_funcd A B F F X (id (Functor_cat A B) F)` is the packaged (1_F)^X,
 //   - `fapp1_funcd A B F [X]` is the stable-head packaging of “F on homs” with the same type,
 // so we canonically rewrite the former to the latter.
-rule @tapp1_fapp0_funcd $A $B $F $F $X (Id (Functor_cat $A $B) $F)
+rule @tapp1_fapp0_funcd $A $B $F $F $X (id (Functor_cat $A $B) $F)
   ↪ @fapp1_funcd $A $B $F $X;
 
 // Sanity: the link rule fires at the level of definitional equality.                                            // exercise the rule
@@ -2193,7 +2193,7 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X Y : τ (Obj A)) ⊢
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),          // dependent functor F : A→B
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),                                                    // base object X_ and fibre object X
   τ (Obj (Functord_cat
-    (FibrationOp_catd (@homd_cov Z A X_ X A (@Id_funcd Z A)))                                       // source hom in fibre (draft; homd_cov computes mainly in Grothendieck case)
+    (FibrationOp_catd (@homd_cov Z A X_ X A (@id_funcd Z A)))                                       // source hom in fibre (draft; homd_cov computes mainly in Grothendieck case)
     (FibrationOp_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F))));                              // target hom in fibre (draft; pending general homd_cov computation rules)
 
 // [EXTERNAL] This simplicial packaging is a stable head we keep for now. In the long-term, it is intended to be derived
@@ -2204,9 +2204,9 @@ symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord
 // This packages the fibrewise action as an ordinary functor between the corresponding fibre categories.
 symbol fdapp1_func : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Obj (Functord_cat A B))),
   Π [X_: τ (Obj Z)] (X: τ (Obj (Fibre_cat A X_))),
-  Π (p : τ (Obj (Total_cat (Product_catd A (FibrationOp_catd (comp_func_cat op (hom_cov X_ (@Id_func Z)))))))),
+  Π (p : τ (Obj (Total_cat (Product_catd A (FibrationOp_catd (comp_cat_fapp0 op (hom_cov X_ (@id_func Z)))))))),
   τ (Obj (Functor_cat
-     (Fibre_cat (FibrationOp_catd (@homd_cov Z A X_ X A (@Id_funcd Z A))) p)
+     (Fibre_cat (FibrationOp_catd (@homd_cov Z A X_ X A (@id_funcd Z A))) p)
      (Fibre_cat (FibrationOp_catd (@homd_cov Z B X_ (@fdapp0 Z A B F X_ X) A F)) p)));
 
 // Folding rule (canonical head): the fibre functor extracted from `fdapp1_funcd` is named `fdapp1_func`. // fold Fibre_func(fdapp1_funcd)
@@ -2258,7 +2258,7 @@ rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;
   - `fdapp1_funcd` (displayed functorial action on dependent-homs, packaged as a displayed functor):
       specialize to the identity displayed transfor ϵ := 1_FF : Transf_Z(FF,FF),
       then the packaged component (1_FF)^(X,U) is definitionally `fdapp1_funcd FF [X] U`
-      (by the Id-folding rule).
+      (by the id-folding rule).
 
   - `tdapp0_func` (displayed pointwise component evaluation), which we define below:
       specialize the external indices to (X,U) := (Y,V) and then evaluate ϵ^(Y,V) at the “identity”
@@ -2272,14 +2272,14 @@ rule @Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;
 symbol tdapp1_func_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
 			   τ (Obj (Functor_cat (Transfd_cat FF GG)
-			          (Functord_cat (FibrationOp_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
+			          (Functord_cat (FibrationOp_catd (@homd_cov Z E X_Z U_EX E (@id_funcd Z E)))               // source hom (draft; see homd_cov notes)
 		                    (FibrationOp_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)))));        // target hom (draft; pending full homd_cov normalization)
 
 // `tdapp1_fapp0_funcd` is the fapp0 part of `tdapp1_func_funcd`
 symbol tdapp1_fapp0_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],        // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Obj (Fibre_cat E X_Z))),                                                  // component at fibre object U_EX
   Π (ϵ : τ (Obj (Transfd_cat FF GG))),
-  τ (Obj (Functord_cat (FibrationOp_catd (@homd_cov Z E X_Z U_EX E (@Id_funcd Z E)))               // source hom (draft; see homd_cov notes)
+  τ (Obj (Functord_cat (FibrationOp_catd (@homd_cov Z E X_Z U_EX E (@id_funcd Z E)))               // source hom (draft; see homd_cov notes)
                   (FibrationOp_catd (@homd_cov Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG))));         // target hom (draft; pending full homd_cov normalization)
 
 // β-rule: `tdapp1_fapp0_funcd` is definitionally the object-action of the functor `tdapp1_func_funcd`.             // unpack tdapp1_func_funcd at objects
@@ -2298,16 +2298,16 @@ rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp
 
   Target shape (nested `Transfd_cat`, outer index internalized):
     tdapp1_int_func_transfd FF GG :
-      Transfd_cat(FF,GG) ⇒ Transfd_cat( homd_cov_int(Id), (homd_cov_int(GG)) ∘ (FFᵒᵖ) ).
+      Transfd_cat(FF,GG) ⇒ Transfd_cat( homd_cov_int(id), (homd_cov_int(GG)) ∘ (FFᵒᵖ) ).
 
-  Here `FFᵒᵖ` is `Op_funcd FF`, and composition is the slice-style displayed composition `comp_funcd`
+  Here `FFᵒᵖ` is `Op_funcd FF`, and composition is the slice-style displayed composition `comp_catd_fapp0`
   over the base `Op_cat Z`.
 
   Operational semantics (important for iteration / normalization):
 
   - Input: ϵ : Obj(Transfd_cat(FF,GG)) is a displayed 2-cell (a displayed transfor) between displayed functors.
   - Apply the packaged map:
-      fapp0 (tdapp1_int_func_transfd FF GG) ϵ : Obj(Transfd_cat( homd_cov_int(Id), (homd_cov_int GG) ∘ (FFᵒᵖ) )).
+      fapp0 (tdapp1_int_func_transfd FF GG) ϵ : Obj(Transfd_cat( homd_cov_int(id), (homd_cov_int GG) ∘ (FFᵒᵖ) )).
     This is an *outer* displayed transfor whose outer index ranges over objects in the base `Op_cat Z`,
     and whose fibrewise components range over displayed objects in the corresponding fibres.
 
@@ -2331,15 +2331,15 @@ symbol tdapp1_int_func_transfd : Π [Z : Cat],
       (Op_catd (FibrationOp_catd E0))
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
-      (@comp_funcd
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
+      (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (FibrationOp_catd E0))
         (Op_catd D)
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (FibrationOp_catd E0) D FF)))));
 
@@ -2352,15 +2352,15 @@ symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
     (Op_catd (FibrationOp_catd E0))
     (@Op_catd Z (@FibrationOp_catd Z
       (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-    (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
-    (@comp_funcd
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+    (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
+    (@comp_catd_fapp0
       (Op_cat Z)
       (Op_catd (FibrationOp_catd E0))
       (Op_catd D)
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
       (@homd_cov_int Z D E0 GG)
       (@Op_funcd Z (FibrationOp_catd E0) D FF))));
 
@@ -2381,15 +2381,15 @@ symbol tdapp1_int_fapp1_func_transfd : Π [Z : Cat],
       (Op_catd (FibrationOp_catd E0))
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
-      (@comp_funcd
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
+      (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (FibrationOp_catd E0))
         (Op_catd D)
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (FibrationOp_catd E0) D FF)))
       (tdapp1_int_fapp0_transfd [Z] E0 [D] [FF] [GG] ϵ)
@@ -2420,20 +2420,20 @@ symbol fdapp1_int_transfd : Π [Z : Cat],
     (Op_catd (FibrationOp_catd E0))
     (@Op_catd Z (@FibrationOp_catd Z
       (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-        (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-    (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
-    (@comp_funcd
+        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+    (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
+    (@comp_catd_fapp0
       (Op_cat Z)
       (Op_catd (FibrationOp_catd E0))
       (Op_catd D)
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
       (@homd_cov_int Z D E0 FF)
       (@Op_funcd Z (FibrationOp_catd E0) D FF))));
 
 // Folding rule: tdapp1 at identity transfor is the internal displayed hom-action stable head.         // normalize “apply tdapp1 to 1_FF”
-rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $FF) (Id (Functord_cat (FibrationOp_catd $E0) $D) $FF)
+rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $FF) (id (Functord_cat (FibrationOp_catd $E0) $D) $FF)
   ↪ @fdapp1_int_transfd $Z $E0 $D $FF;
 
 /*
@@ -2494,8 +2494,8 @@ rule fapp0 (@tdapp0_func $Z $E $D $FF $GG $Y_Z $V_EY) $ϵ ↪ @tdapp0_fapp0 $Z $
 */
 
 // Components of the identity displayed transfor compute to identity morphisms in the fibre.             // (1_FF)_{(Y,V)} ↪ id_{FF_Y(V)}
-rule @tdapp0_fapp0 $Z $E $D $FF $FF $Y $V (Id (Functord_cat $E $D) $FF)
-  ↪ @Id (Fibre_cat $D $Y) (@fdapp0 $Z $E $D $FF $Y $V);
+rule @tdapp0_fapp0 $Z $E $D $FF $FF $Y $V (id (Functord_cat $E $D) $FF)
+  ↪ @id (Fibre_cat $D $Y) (@fdapp0 $Z $E $D $FF $Y $V);
 
 // Components of vertical composite displayed transfors compute to vertical composition in the fibre.    // (η∘ϵ)_{(Y,V)} ↪ η_{(Y,V)} ∘ ϵ_{(Y,V)}
 rule @tdapp0_fapp0 $Z $E $D $FF $HH $Y $V (@comp_fapp0 (Functord_cat $E $D) $FF $GG $HH $η $ϵ)
@@ -2506,7 +2506,7 @@ rule @tdapp0_fapp0 $Z $E $D $FF $HH $Y $V (@comp_fapp0 (Functord_cat $E $D) $FF 
       (@tdapp0_fapp0 $Z $E $D $GG $HH $Y $V $η)
       (@tdapp0_fapp0 $Z $E $D $FF $GG $Y $V $ϵ);
 
-// Id-instantiation (key normalization): identity displayed transfor folds to displayed action on dependent-homs.  // stable head for "ϵ = id"
+// id-instantiation (key normalization): identity displayed transfor folds to displayed action on dependent-homs.  // stable head for "ϵ = id"
 //
 // Usual displayed-category / slice notation (informal):
 //   - Fix a base category Z.
@@ -2519,10 +2519,10 @@ rule @tdapp0_fapp0 $Z $E $D $FF $HH $Y $V (@comp_fapp0 (Functord_cat $E $D) $FF 
 //     and this is exactly the action of FF on dependent-hom data, i.e. the stable head `fdapp1_funcd`.
 //
 // In emdash2 notation:
-//   - `tdapp1_fapp0_funcd ... (Id (Functord_cat E D) FF)` is the packaged (1_FF)^(X_Z,U),
+//   - `tdapp1_fapp0_funcd ... (id (Functord_cat E D) FF)` is the packaged (1_FF)^(X_Z,U),
 //   - `fdapp1_funcd ... FF [X_Z] U` is the stable-head packaging of FF’s action on dependent-homs,
 // so we canonically rewrite the former to the latter.
-rule @tdapp1_fapp0_funcd $Z $E $D $FF $FF $X_Z $U_EX (Id (Functord_cat $E $D) $FF)
+rule @tdapp1_fapp0_funcd $Z $E $D $FF $FF $X_Z $U_EX (id (Functord_cat $E $D) $FF)
   ↪ @fdapp1_funcd $Z $E $D $FF $X_Z $U_EX;
 
 // The action of a displayed (2-)transformation on a displayed (3-)modification: fapp1_func-part of `tdapp1_func_funcd`. // displayed “components of components”
@@ -2588,20 +2588,20 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
 // Op_cat involution reduces by rewriting.                                                            // checks Op_cat rule fires
 assert ⊢ Op_cat (Op_cat Cat_cat) ≡ Cat_cat;                                                          // (Cat_catᵒᵖ)ᵒᵖ ≡ Cat_cat
 
-// Identity functor on objects reduces by rewriting.                                                  // checks fapp0(Id_func) β-rule
-compute fapp0 (@Id Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
+// Identity functor on objects reduces by rewriting.                                                  // checks fapp0(id_func) β-rule
+compute fapp0 (@id Cat_cat Terminal_cat) Terminal_obj;                                    // normal form should be `Terminal_obj`
 
 // tapp1_func_funcd object-action reduces to tapp1_fapp0_funcd by rewriting.                                         // checks tapp β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (X_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
   fapp0 (@tapp1_func_funcd A B F_AB G_AB X_A) ϵ ≡ @tapp1_fapp0_funcd A B F_AB G_AB X_A ϵ;
 
-// Id-instantiation: tapp1_fapp0_funcd at identity transfor folds to the stable head fapp1_funcd.                  // checks tapp-id fold fires
+// id-instantiation: tapp1_fapp0_funcd at identity transfor folds to the stable head fapp1_funcd.                  // checks tapp-id fold fires
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
-  @tapp1_fapp0_funcd A B F F X_A (Id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
+  @tapp1_fapp0_funcd A B F F X_A (id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
 
-// Id-instantiation (packaged view): specialization of tapp1_func_funcd at identity transfor folds to fapp1_funcd. // checks packaged-id fold fires
+// id-instantiation (packaged view): specialization of tapp1_func_funcd at identity transfor folds to fapp1_funcd. // checks packaged-id fold fires
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (X_A : τ (Obj A)) ⊢
-  fapp0 (@tapp1_func_funcd A B F F X_A) (Id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
+  fapp0 (@tapp1_func_funcd A B F F X_A) (id (Functor_cat A B) F) ≡ @fapp1_funcd A B F X_A;
 
 // tapp0_fapp0 is the derived “component at Y” (evaluation at id_Y) and reduces by rewriting.          // checks tapp0 β-rule fires
 assert [A B : Cat] [F_AB G_AB : τ (Obj (Functor_cat A B))] (Y_A : τ (Obj A)) (ϵ : τ (Obj (Transf_cat F_AB G_AB))) ⊢
@@ -2618,7 +2618,7 @@ assert [A B : Cat]
   (F_AB G_AB : τ (Obj (Functor_cat A B)))
   (ϵ : τ (Obj (Transf_cat F_AB G_AB)))
   (X Y : τ (Obj A)) ⊢
-  let H0 ≔ @hom_cov_int A A (@Id_func A) in
+  let H0 ≔ @hom_cov_int A A (@id_func A) in
   let H1 ≔ @comp_fapp0
     Cat_cat
     (Op_cat A)
@@ -2637,9 +2637,9 @@ assert [A B : Cat]
     innerX
   : τ (Obj (Functor_cat (@Hom_cat A X Y) (@Hom_cat B (fapp0 F_AB X) (fapp0 G_AB Y))));
 
-// Id/comp in Functor_cat compute pointwise via tapp0_fapp0.                                            // checks vertical laws for components
+// id/comp in Functor_cat compute pointwise via tapp0_fapp0.                                            // checks vertical laws for components
 assert [A B : Cat] (F : τ (Obj (Functor_cat A B))) (Y : τ (Obj A)) ⊢
-  @tapp0_fapp0 A B F F Y (Id (Functor_cat A B) F) ≡ @Id B (@fapp0 A B F Y);
+  @tapp0_fapp0 A B F F Y (id (Functor_cat A B) F) ≡ @id B (@fapp0 A B F Y);
 
 assert [A B : Cat] (F G H : τ (Obj (Functor_cat A B))) (Y : τ (Obj A))
   (ϵ : τ (Obj (Transf_cat F G))) (η : τ (Obj (Transf_cat G H))) ⊢
@@ -2656,15 +2656,15 @@ assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) (ϵ : τ (Obj (Transfd_cat FF GG))) ⊢
   fapp0 (@tdapp1_func_funcd Z E D FF GG X_Z U_EX) ϵ ≡ @tdapp1_fapp0_funcd Z E D FF GG X_Z U_EX ϵ;
 
-// Id-instantiation: tdapp1_fapp0_funcd at identity displayed transfor folds to the stable head fdapp1_funcd.      // checks tdapp-id fold fires
+// id-instantiation: tdapp1_fapp0_funcd at identity displayed transfor folds to the stable head fdapp1_funcd.      // checks tdapp-id fold fires
 assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) ⊢
-  @tdapp1_fapp0_funcd Z E D FF FF X_Z U_EX (Id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
+  @tdapp1_fapp0_funcd Z E D FF FF X_Z U_EX (id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
 
-// Id-instantiation (packaged view): specialization of tdapp1_func_funcd at identity displayed transfor folds.     // checks packaged-id fold fires
+// id-instantiation (packaged view): specialization of tdapp1_func_funcd at identity displayed transfor folds.     // checks packaged-id fold fires
 assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
   (X_Z : τ (Obj Z)) (U_EX : τ (Obj (Fibre_cat E X_Z))) ⊢
-  fapp0 (@tdapp1_func_funcd Z E D FF FF X_Z U_EX) (Id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
+  fapp0 (@tdapp1_func_funcd Z E D FF FF X_Z U_EX) (id (Functord_cat E D) FF) ≡ @fdapp1_funcd Z E D FF X_Z U_EX;
 
 // tdapp0_fapp0 is the displayed “component at (Y,V)” and is the object-action of tdapp0_func.                  // checks tdapp0 β-rule fires
 assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Obj (Functord_cat E D))]
@@ -2692,14 +2692,14 @@ assert [Z : Cat]
       (Op_catd (FibrationOp_catd E0))
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-      (@comp_funcd
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (FibrationOp_catd E0))
         (Op_catd D)
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (FibrationOp_catd E0) D FF))
       Y
@@ -2709,8 +2709,8 @@ assert [Z : Cat]
       (Op_catd (FibrationOp_catd E0))
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
       Y
       V)
     p
@@ -2719,15 +2719,15 @@ assert [Z : Cat]
       (Op_catd (FibrationOp_catd E0))
       (@Op_catd Z (@FibrationOp_catd Z
         (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-          (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
-      (@comp_funcd
+          (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+      (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
+      (@comp_catd_fapp0
         (Op_cat Z)
         (Op_catd (FibrationOp_catd E0))
         (Op_catd D)
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
         (@homd_cov_int Z D E0 GG)
         (@Op_funcd Z (FibrationOp_catd E0) D FF))
       Y
@@ -2740,14 +2740,14 @@ assert [Z : Cat]
         (Op_catd (FibrationOp_catd E0))
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-        (@comp_funcd
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@comp_catd_fapp0
           (Op_cat Z)
           (Op_catd (FibrationOp_catd E0))
           (Op_catd D)
           (@Op_catd Z (@FibrationOp_catd Z
             (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-              (comp_func_cat Fib_func (homd_cov_int_base E0)))))
+              (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
           (@homd_cov_int Z D E0 GG)
           (@Op_funcd Z (FibrationOp_catd E0) D FF))
         Y
@@ -2759,17 +2759,17 @@ assert [Z : Cat]
         (Op_catd (FibrationOp_catd E0))
         (@Op_catd Z (@FibrationOp_catd Z
           (@Op_func (Op_cat Z) (Op_cat Cat_cat)
-            (comp_func_cat Fib_func (homd_cov_int_base E0)))))
-        (@homd_cov_int Z (FibrationOp_catd E0) E0 (@Id_funcd Z (FibrationOp_catd E0)))
+            (comp_cat_fapp0 Fib_func (homd_cov_int_base E0)))))
+        (@homd_cov_int Z (FibrationOp_catd E0) E0 (@id_funcd Z (FibrationOp_catd E0)))
         Y
         V)
       p)));
 
-// Id/comp in Functord_cat compute pointwise in fibres via tdapp0_fapp0.                               // checks vertical laws for displayed components
+// id/comp in Functord_cat compute pointwise in fibres via tdapp0_fapp0.                               // checks vertical laws for displayed components
 assert [Z : Cat] [E D : Catd Z] (FF : τ (Obj (Functord_cat E D)))
   (Y : τ (Obj Z)) (V : τ (Obj (Fibre_cat E Y))) ⊢
-  @tdapp0_fapp0 Z E D FF FF Y V (Id (Functord_cat E D) FF)
-    ≡ @Id (Fibre_cat D Y) (@fdapp0 Z E D FF Y V);
+  @tdapp0_fapp0 Z E D FF FF Y V (id (Functord_cat E D) FF)
+    ≡ @id (Fibre_cat D Y) (@fdapp0 Z E D FF Y V);
 
 assert [Z : Cat] [E D : Catd Z] (FF GG HH : τ (Obj (Functord_cat E D)))
   (Y : τ (Obj Z)) (V : τ (Obj (Fibre_cat E Y)))

@@ -48,14 +48,14 @@ Semantically, the ambient `A` can itself encode higher structure (e.g. `A = Tota
 
 We introduced `StrictFunctor_cat` with an injective forgetful map:
 
-- `forget_strict : StrictFunctor_cat(A,B) → Functor_cat(A,B)`
+- `sfunc_func : StrictFunctor_cat(A,B) → Functor_cat(A,B)`
 
 and strictness rewrite rules for identities and composition on 1-cells:
 
 - `F(id_X) ↪ id_{F(X)}`
 - `F(g∘f) ↪ F(g)∘F(f)`
 
-However, this is only the prerequisite. For a strict functor `F = forget_strict Fs`, we also want the
+However, this is only the prerequisite. For a strict functor `F = sfunc_func Fs`, we also want the
 **simplicial packaging** `fapp1_funcd` to be *cartesian* in the sense that it maps the canonical/cartesian
 2-arrow (over a base edge) to an **identity** 2-arrow. Equivalently: the usual “laxness evidence”
 2-cell that would witness non-commutativity / non-strictness should reduce to an identity 2-cell.
@@ -94,7 +94,7 @@ Key implementation refinements:
 2) **Need displayed opposite and composition**
    For the Step F form
 
-   - `… (homd_cov_int Id) … ((homd_cov_int GG) ∘ (FF^op)) …`
+   - `… (homd_cov_int id) … ((homd_cov_int GG) ∘ (FF^op)) …`
 
    we need:
 
@@ -104,7 +104,7 @@ Key implementation refinements:
 
    - a clean composition operator for displayed functors, ideally paralleling ordinary composition by
      instantiating the ordinary `comp_func` story at a category `Catd_cat Z` (to be introduced later if needed).
-     In the short term, we can use the existing term-level `comp_funcd`.
+     In the short term, we can use the existing term-level `comp_catd_fapp0`.
 
 3) The nested-`Transfd_cat` target is already the displayed analogue of “internalizing the outer index”.
    The remaining missing pieces are the displayed `^op` and displayed composition packaging.

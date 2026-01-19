@@ -30,7 +30,7 @@ So the “make `W` internal” step is already solved for `hom_cov`.
 
 Currently (simplified) the file has:
 
-- `tapp1_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (FibrationOp_catd (hom_cov X Id)) (FibrationOp_catd (hom_cov (F X) G))))`
+- `tapp1_func_funcd : Π X_A, Obj(Functor_cat (Transf_cat F G) (Functord_cat (FibrationOp_catd (hom_cov X id)) (FibrationOp_catd (hom_cov (F X) G))))`
 
 so `X_A` is a *binder* (external index) in the type.
 
@@ -229,7 +229,7 @@ op2_Z := postcomp_cat (X:=Z) (Y:=Cat_cat) (Z:=Cat_cat) op
        : Obj(Functor_cat (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))
 ```
 
-and `fapp0 op2_Z F ↪ comp_func_cat op F` computes by the β-rule above.
+and `fapp0 op2_Z F ↪ comp_cat_fapp0 op F` computes by the β-rule above.
 
 Note (general curry/uncurry mechanism):
 This step is one instance of a broader interface we will likely want to introduce explicitly:
@@ -254,7 +254,7 @@ with β-rule `fapp0 (fapp0 prod_func5 D) E ↪ prod_func D E`.
 ### Step C — Introduce internalized `Total_Z` and `Fib` (choose variance so compositions typecheck)
 
 We want to build a functor `Op_cat Z → Cat_cat` from the pipeline
-`hom_cov_int(Id)` → `op2_Z` → `prod_func5` → `Total_Z`, and then optionally lift it to a “fibration classifier”
+`hom_cov_int(id)` → `op2_Z` → `prod_func5` → `Total_Z`, and then optionally lift it to a “fibration classifier”
 level via `Fib`.
 
 #### (C1) Internalized Grothendieck total (object-level β-rule is enough initially)
@@ -319,14 +319,14 @@ Fix a base category `Z : Cat` and a Cat-valued functor (for computations) `D : O
 1) Start from the already internalized representable-in-context:
 
 ```text
-HId := hom_cov_int (@Id_func Z)
+HId := hom_cov_int (@id_func Z)
     : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
 ```
 
 2) Apply pointwise opposite on values (postcompose inside `Cat_cat` by `op2_Z`):
 
 ```text
-HOp := comp_func_cat op2_Z HId
+HOp := comp_cat_fapp0 op2_Z HId
     : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
 ```
 
@@ -339,14 +339,14 @@ Let `prodD := fapp0 prod_func5 D` so
 Then:
 
 ```text
-HProd := comp_func_cat prodD HOp
+HProd := comp_cat_fapp0 prodD HOp
      : Obj(Functor_cat (Op_cat Z) (Functor_cat Z Cat_cat))
 ```
 
 4) Totalize pointwise (postcompose by `Total_Z`):
 
 ```text
-Base := comp_func_cat (Total [Z]) HProd
+Base := comp_cat_fapp0 (Total [Z]) HProd
      : Obj(Functor_cat (Op_cat Z) Cat_cat)
 ```
 
@@ -356,7 +356,7 @@ the old external parameter `W_Z` is now the object argument of `Base : Z^op → 
 5) Lift to “fibration classifier level” (explicitly; no definitional shortcut):
 
 ```text
-BaseFib := comp_func_cat Fib Base
+BaseFib := comp_cat_fapp0 Fib Base
        : Obj(Functor_cat (Op_cat Z) (Op_cat Cat_cat))
 ```
 
@@ -376,7 +376,7 @@ homd_cov5 :
   Obj(Functord_cat (Op_catd E) Target)
 ```
 
-(In early phases one can take `D := E` and `FF := Id_funcd` for intuition and to reduce typing noise.)
+(In early phases one can take `D := E` and `FF := id_funcd` for intuition and to reduce typing noise.)
 
 Key property: the former external `W_Z : Obj(Z)` is now internalized as the component index of
 the outer base `Op_cat Z` (i.e. as part of `Op_catd E`), while `W_EW` is internalized as the
@@ -387,7 +387,7 @@ object argument of the resulting displayed functor on fibres.
 Implement:
 
 - `tapp1_func_funcd5 F G : Obj(Functor_cat (Transf_cat F G) (Transf_cat H0 H1))`
-  with `H0 := hom_cov_int (Id_func A)` and `H1 := (hom_cov_int G) ∘ F^op`.
+  with `H0 := hom_cov_int (id_func A)` and `H1 := (hom_cov_int G) ∘ F^op`.
 
 Then add “sanity assertions” exercising the intended component extraction via `tapp0_*` twice.
 
@@ -404,12 +404,12 @@ Then the “more internal” `tdapp1` should have the nested form:
 ```text
 tdapp1_func_funcd5 FF GG :
   Obj(Functor_cat (Transfd_cat FF GG)
-      (Transfd_cat (homd_cov5 Id) ((homd_cov5 GG) ∘ (FF^op))))
+      (Transfd_cat (homd_cov5 id) ((homd_cov5 GG) ∘ (FF^op))))
 ```
 
 where:
 
-- `homd_cov5 Id` denotes the “identity/special case” used on the source side (the analogue of `H0`),
+- `homd_cov5 id` denotes the “identity/special case” used on the source side (the analogue of `H0`),
 - `homd_cov5 GG` denotes the target-side classifier depending on `GG`,
 - `FF^op` is the appropriate “opposite/precomposition” on the outer index side (depending on which variant
   of `homd_cov5` is adopted: strict `Op_func` when `FF` is an ordinary functor, or the displayed analogue
