@@ -36,6 +36,33 @@ flag "eta_equality" on;                                                         
 */
 
 /*
+  ω-friendly normalization principle (untruncated rewriting)
+
+  In emdash2, ω-structure is represented *relatively*:
+  - “(n+1)-cells” are represented as *relative 1-cells* in an iterated hom-category,
+      Hom_cat( ... Hom_cat(A, -,-) ... ).
+  - ω-iteration is performed operationally by repeatedly taking hom-actions (`fapp1_func`) in ever-deeper
+    ambient categories.
+
+  Consequence for rewrite-rule design:
+
+  - A rewrite rule whose result is a *capped application*, i.e. produces a term of the form
+        fapp0 (…some functor-object…) $cell
+    computes the image of the specific cell `$cell` and yields a cell. This is often useful, but it is
+    **dimension-capped** (truncating): after rewriting, the result is no longer a functor object, so one
+    cannot immediately take another hom-action (`fapp1_func`) to keep iterating to higher dimensions
+    (e.g. 4-cells between 3-cells).
+
+  - For ω-friendly normalization, prefer *functor-level folds*:
+      rewrite a composite functor object (typically expressed using `comp_cat_fapp0` and/or `fapp1_func`)
+      to a stable-head functor symbol, and only apply `fapp0` later when a concrete cell is supplied.
+
+  This principle applies throughout the development (not just to Grothendieck/∫):
+  it is the same reason we keep stable heads like `comp_cat_fapp0`, `fib_cov_tapp0_func`, `tapp1_*`,
+  and fold complex composites toward them.
+*/
+
+/*
   Naming conventions (emdash2.lp)
 
   Goal: keep “what lives where?” obvious at a glance, while preserving the standard CT habit that
@@ -2676,19 +2703,13 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
 
   IMPORTANT (ω-friendly normalization vs truncation):
 
-  In emdash2, “(n+1)-cells” are always represented as *relative 1-cells* in an iterated hom-category.
-  Operationally, this means that ω-iteration is performed by repeatedly taking hom-actions (`fapp1_func`)
-  in ever-deeper ambient categories (Hom_cat, Hom_cat(Hom_cat …), …).
+  This section is an instance of the general “ω-friendly normalization principle” stated near the top
+  of the file. Concretely, we avoid a rewrite whose result is a capped application `fapp0 (…) $α`,
+  because that would compute the image of the specific modification `$α` and return a cell, losing the
+  functor object needed for further ω-iteration (e.g. acting on 4-cells between modifications).
 
-  A rewrite rule whose *result* is an element produced by applying a functor to an argument, i.e. of the shape
-      fapp0 ( … ) $α  ↪  ...
-  is a **dimension-capped** (truncating) computation: it computes the image of the specific cell $α and yields
-  a cell, but it does not leave behind a functor object that can still be fed to `fapp1_func` for the next
-  dimension (4-cells between modifications, etc.).
-
-  Therefore, for the “Groth∘tapp1_int” pipeline we prefer an *untruncated* rewrite:
-  we rewrite the whole composite **functor object** (built using `comp_cat_fapp0` on functors between hom-categories)
-  to the stable head `tapp1_fapp1_func …`, and only apply `fapp0` later when/if a concrete higher cell is supplied.
+  Instead, we fold the whole composite **functor object** (built using `comp_cat_fapp0` and `fapp1_func`)
+  to the stable head `tapp1_fapp1_func …`. Applying it to a concrete `$α` can then be done later via `fapp0`.
 */
 
 /*
