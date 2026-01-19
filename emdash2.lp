@@ -1895,7 +1895,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
 // -------------------------------------------------------------------------------------------------
-// 10b. Grothendieck morphism-action bridge (ordinary)                                               // (E ⇒ D) ↦ (∫E ⟶_A ∫D)
+// 10b. Grothendieck morphism-action (ordinary)                                                      // ∫ : (A⟶Cat) ⟶ Catd(A)
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -1905,9 +1905,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
 
     ϵ : Obj(Transf_cat E D)     where   E, D : Obj(Functor_cat A Cat_cat),
 
-  build the induced slice-style displayed functor between their Grothendieck constructions:
-
-    Groth_transf_funcd ϵ : Obj(Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D)).
+  build the induced slice-style displayed functor between their Grothendieck constructions.
 
   This is the missing “morphism-action” bridge referenced earlier in the file, and is a prerequisite
   for deriving external stable-head packagings like `fapp1_funcd` / `tapp1_func_funcd` from their
@@ -1922,14 +1920,32 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       `Hom_cat Cat_cat (E x) (D x)` is definitionally `Functor_cat (E x) (D x)`).
 
   We intentionally do NOT yet add computation rules for action on higher cells in the fibres.
+
+  Implementation discipline:
+  - `Fibration_cov_catd` is the object-level Grothendieck constructor (M ↦ ∫M).
+  - `Fibration_cov_func` packages this as a functor object
+        ∫ : (A ⟶ Cat) ⟶ Catd(A).
+  - We keep the hom-action stable head `Groth_transf_funcd_func` for the morphism-action:
+        (∫)_1(E,D) : Transf_cat(E,D) ⟶ Functord_cat(∫E, ∫D).
 */
 
-// Packaged version: Groth_transf_funcd as a functor in ϵ.                                             // ϵ ↦ Groth(ϵ)
+// Grothendieck construction as a functor object: ∫ : (A ⟶ Cat) ⟶ Catd(A).                             // object-action is Fibration_cov_catd
+symbol Fibration_cov_func [A : Cat]
+  : τ (Obj (Functor_cat (Functor_cat A Cat_cat) (Catd_cat A)));
+
+// Object-action: ∫(M) ↪ Fibration_cov_catd(M).                                                        // β-rule for ∫ on objects
+rule fapp0 (@Fibration_cov_func $A) $M ↪ @Fibration_cov_catd $A $M;
+
+// Stable head: hom-action (morphism-action) of ∫ on transfors.                                         // (∫)_1 : Transf(E,D) → Functord(∫E,∫D)
 symbol Groth_transf_funcd_func : Π [A : Cat],
   Π [E D : τ (Obj (Functor_cat A Cat_cat))],
   τ (Obj (Functor_cat
     (Transf_cat E D)
     (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D))));
+
+// Canonicalization: the hom-action of ∫ folds to the stable head.                                      // fapp1_func(∫) ↪ Groth_transf_funcd_func
+rule @fapp1_func _ _ (@Fibration_cov_func $A) $E $D
+  ↪ @Groth_transf_funcd_func $A $E $D;
 
 // Computation: fibrewise object-action is pointwise component evaluation in Cat_cat.                 // (Groth(ϵ))_x(u) ↪ (ϵ_x)(u)
 rule @fdapp0 $A
@@ -2668,9 +2684,42 @@ rule @fapp1_func _ _ (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ $ϵ'
   This is the “follow user suggestion” bridge:
   - first map a modification α : ϵ ⇒ ϵ' through the internal packaging `tapp1_int_fapp1_func_transf`,
   - then evaluate at the external index X (via `tapp0_func` in the outer index category Op_cat A),
-  - then apply Grothendieck morphism-action on homs (via `fapp1_func` of `Groth_transf_funcd_func`),
+  - then apply Grothendieck morphism-action on homs (via `fapp1_func` of `Fibration_cov_func`),
   - finally fold to the external stable-head hom-action `tapp1_fapp1_func`.
 */
+
+/*
+  Groth∘tapp1_int fold (functor-level; untruncated ω-potential)
+
+  The cell-level fold below rewrites the *application* of the induced functor to a specific
+  modification `α`. To keep the ω-potential (so we can still apply `fapp1_func` again on 4-cells),
+  we also provide a functor-level fold identifying the whole composite functor:
+
+    Hom(Transf_cat(F,G))(ϵ,ϵ')  ⟶  Transfd_cat(tapp1_fapp0_funcd(X,ϵ), tapp1_fapp0_funcd(X,ϵ'))
+
+  as the stable head `tapp1_fapp1_func(X,ϵ,ϵ')`.
+*/
+
+rule @comp_cat_fapp0
+      _
+      _
+      _
+      (@fapp1_func _ _
+        (@Groth_transf_funcd_func $A
+          (@hom_cov $A $X_A $A (@id_func $A))
+          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
+      (@comp_cat_fapp0
+        _
+        _
+        _
+        (@fapp1_func _ _
+          (@tapp0_func _ _ _ _ $X_A)
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
+          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
+        (@tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ'))
+  ↪ @tapp1_fapp1_func $A $B $F_AB $G_AB $X_A $ϵ $ϵ';
 
 rule @fapp0
       _
