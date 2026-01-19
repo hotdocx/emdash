@@ -1822,26 +1822,13 @@ rule fapp0 (@tapp0_func $A $B $F_AB $G_AB $Y_A) $ϵ ↪ @tapp0_fapp0 $A $B $F_AB
   This is `tapp0_fapp0` applied in the index category `Op_cat A`.
 */
 
-// Packaged: for fixed X, “evaluate outer component at X” is functorial in ϵ.                          // ϵ ↦ outer(ϵ)_X
-symbol tapp1_int_at_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
-  Π (X_A : τ (Obj A)),
-  τ (Obj (Functor_cat
-    (Transf_cat F_AB G_AB)
-    (Transf_cat
-      (@hom_cov A X_A A (@id_func A))
-      (@hom_cov B (fapp0 F_AB X_A) A G_AB))));
-
-// Stable head: object-action of tapp1_int_at_func_transf.                                             // outer(ϵ)_X
-symbol tapp1_int_at_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+// Stable head: evaluate the internal outer transfor at X.                                             // outer(ϵ)_X
+symbol tapp1_int_fapp0_tapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
   Π (X_A : τ (Obj A)),
   Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   τ (Obj (Transf_cat
     (@hom_cov A X_A A (@id_func A))
     (@hom_cov B (fapp0 F_AB X_A) A G_AB)));
-
-// β-rule: tapp1_int_at_fapp0_transf is the object-action of tapp1_int_at_func_transf.                  // unpack tapp1_int_at_func_transf at objects
-rule fapp0 (@tapp1_int_at_func_transf $A $B $F_AB $G_AB $X_A) $ϵ
-  ↪ @tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
 
 // Canonicalization: evaluate the internal outer transfor at X and fold to the stable head.            // fold outer(ϵ)_X
 rule @tapp0_fapp0
@@ -1851,7 +1838,7 @@ rule @tapp0_fapp0
       (comp_cat_fapp0 (hom_cov_int $G_AB) (Op_func $F_AB))
       $X_A
       (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
-  ↪ @tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
+  ↪ @tapp1_int_fapp0_tapp0_transf $A $B $F_AB $G_AB $X_A $ϵ;
 
 // Sanity: folding rule is visible by definitional equality.                                           // outer(ϵ)_X folds
 assert [A B : Cat]
@@ -1865,7 +1852,7 @@ assert [A B : Cat]
       (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB))
       X
       (@tapp1_int_fapp0_transf A B F_AB G_AB ϵ)
-    ≡ @tapp1_int_at_fapp0_transf A B F_AB G_AB X ϵ;
+    ≡ @tapp1_int_fapp0_tapp0_transf A B F_AB G_AB X ϵ;
 
 /*
   Vertical identity/composition of transfors, computed pointwise.
@@ -1925,7 +1912,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
   - `Fibration_cov_catd` is the object-level Grothendieck constructor (M ↦ ∫M).
   - `Fibration_cov_func` packages this as a functor object
         ∫ : (A ⟶ Cat) ⟶ Catd(A).
-  - We keep the hom-action stable head `Groth_transf_funcd_func` for the morphism-action:
+  - We keep the hom-action stable head `Fibration_cov_fapp1_func` for the morphism-action:
         (∫)_1(E,D) : Transf_cat(E,D) ⟶ Functord_cat(∫E, ∫D).
 */
 
@@ -1937,21 +1924,21 @@ symbol Fibration_cov_func [A : Cat]
 rule fapp0 (@Fibration_cov_func $A) $M ↪ @Fibration_cov_catd $A $M;
 
 // Stable head: hom-action (morphism-action) of ∫ on transfors.                                         // (∫)_1 : Transf(E,D) → Functord(∫E,∫D)
-symbol Groth_transf_funcd_func : Π [A : Cat],
+symbol Fibration_cov_fapp1_func : Π [A : Cat],
   Π [E D : τ (Obj (Functor_cat A Cat_cat))],
   τ (Obj (Functor_cat
     (Transf_cat E D)
     (Functord_cat (Fibration_cov_catd E) (Fibration_cov_catd D))));
 
-// Canonicalization: the hom-action of ∫ folds to the stable head.                                      // fapp1_func(∫) ↪ Groth_transf_funcd_func
+// Canonicalization: the hom-action of ∫ folds to the stable head.                                      // fapp1_func(∫) ↪ Fibration_cov_fapp1_func
 rule @fapp1_func _ _ (@Fibration_cov_func $A) $E $D
-  ↪ @Groth_transf_funcd_func $A $E $D;
+  ↪ @Fibration_cov_fapp1_func $A $E $D;
 
 // Computation: fibrewise object-action is pointwise component evaluation in Cat_cat.                 // (Groth(ϵ))_x(u) ↪ (ϵ_x)(u)
 rule @fdapp0 $A
       (Fibration_cov_catd $E)
       (Fibration_cov_catd $D)
-      (fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ)
+      (fapp0 (@Fibration_cov_fapp1_func $A $E $D) $ϵ)
       $x
       $u
   ↪ @fapp0
@@ -1964,16 +1951,16 @@ rule @fdapp0 $A
 rule @Fibre_func $A
       (Fibration_cov_catd $E)
       (Fibration_cov_catd $D)
-      (fapp0 (@Groth_transf_funcd_func $A $E $D) $ϵ)
+      (fapp0 (@Fibration_cov_fapp1_func $A $E $D) $ϵ)
       $x
   ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0
-    (@Groth_transf_funcd_func $A
+    (@Fibration_cov_fapp1_func $A
       (@hom_cov $A $X_A $A (@id_func $A))
       (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-    (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+    (@tapp1_int_fapp0_tapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
   ↪ @tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ;
 
 /*
@@ -2705,11 +2692,11 @@ rule @comp_cat_fapp0
       _
       _
       (@fapp1_func _ _
-        (@Groth_transf_funcd_func $A
+        (@Fibration_cov_fapp1_func $A
           (@hom_cov $A $X_A $A (@id_func $A))
           (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
+        (@tapp1_int_fapp0_tapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
+        (@tapp1_int_fapp0_tapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
       (@comp_cat_fapp0
         _
         _
@@ -2720,27 +2707,6 @@ rule @comp_cat_fapp0
           (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
         (@tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ'))
   ↪ @tapp1_fapp1_func $A $B $F_AB $G_AB $X_A $ϵ $ϵ';
-
-rule @fapp0
-      _
-      (@Hom_cat
-        _
-        (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ)
-        (@tapp1_fapp0_funcd $A $B $F_AB $G_AB $X_A $ϵ'))
-      (@fapp1_func
-        _
-        _
-        (@Groth_transf_funcd_func $A
-          (@hom_cov $A $X_A $A (@id_func $A))
-          (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
-        (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
-      (@fapp0 _ _
-        (@fapp1_func _ _ (@tapp0_func _ _ _ _ $X_A)
-          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
-          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
-        (fapp0 (@tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ') $α))
-  ↪ fapp0 (@tapp1_fapp1_func $A $B $F_AB $G_AB $X_A $ϵ $ϵ') $α;
 
 // -------------------------------------------------------------------------------------------------
 // 17. Sanity checks (lightweight “unit tests” for rewrite normalization)                             // keep small, avoids proof noise
