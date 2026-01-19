@@ -2697,33 +2697,8 @@ rule @fapp0
           (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
         (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ)
         (@tapp1_int_at_fapp0_transf $A $B $F_AB $G_AB $X_A $ϵ'))
-      (@fapp0
-        (@Hom_cat
-          (Transf_cat
-            (@hom_cov_int $A $A (@id_func $A))
-            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
-              (@hom_cov_int $B $A $G_AB)
-              (@Op_func $A $B $F_AB)))
-          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
-          (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
-        _
-        (@fapp1_func
-          (Transf_cat
-            (@hom_cov_int $A $A (@id_func $A))
-            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
-              (@hom_cov_int $B $A $G_AB)
-              (@Op_func $A $B $F_AB)))
-          (Transf_cat
-            (@hom_cov $A $X_A $A (@id_func $A))
-            (@hom_cov $B (fapp0 $F_AB $X_A) $A $G_AB))
-          (@tapp0_func
-            (Op_cat $A)
-            (Functor_cat $A Cat_cat)
-            (@hom_cov_int $A $A (@id_func $A))
-            (@comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Functor_cat $A Cat_cat)
-              (@hom_cov_int $B $A $G_AB)
-              (@Op_func $A $B $F_AB))
-            $X_A)
+      (@fapp0 _ _
+        (@fapp1_func _ _ (@tapp0_func _ _ _ _ $X_A)
           (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ)
           (@tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ'))
         (fapp0 (@tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ') $α))
