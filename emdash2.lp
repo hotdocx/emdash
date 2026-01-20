@@ -3186,6 +3186,19 @@ unif_rule @RightAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $RAdj ↪ [ tt ≡ tt ];
 unif_rule @UnitAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $η ↪ [ tt ≡ tt ];
 unif_rule @CoUnitAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $ϵ ↪ [ tt ≡ tt ];
 
+// Propositional bridge (groupoid equality), for use with the `rewrite` tactic in proofs.              // LeftAdj a = LAdj
+symbol LeftAdj_eq :
+  Π [R L : Cat],
+  Π [LAdj : τ (Obj (Functor_cat R L))],
+  Π [RAdj : τ (Obj (Functor_cat L R))],
+  Π [η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))],
+  Π [ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))],
+  Π (a : @adj R L LAdj RAdj η ϵ),
+  τ (@LeftAdj R L LAdj RAdj η ϵ a = LAdj)
+≔ begin
+     reflexivity;
+   end;
+
 // Sanity: the identity-silent naturality rule is visible by definitional equality (conversion).      // g ∘ ϵ_f ↪ ϵ_(g∘f)
 assert [A : Cat] (F : τ (Obj (Functor_cat A A))) (X Y Z : τ (Obj A))
   (ϵ : τ (Obj (Transf_cat F (@id_func A))))
