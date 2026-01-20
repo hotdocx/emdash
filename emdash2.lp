@@ -3198,3 +3198,74 @@ assert [A : Cat] (F : τ (Obj (Functor_cat A A))) (X Y Z : τ (Obj A))
     (@tapp1_fapp0 A A F (@id_func A) X Y ϵ f)
   ≡ @tapp1_fapp0 A A F (@id_func A) X Z ϵ
       (@comp_fapp0 A X Y Z g f);
+
+// Triangle cut-elimination (Kosta Došen style, component-level; draft; 1 rule for now).               // ϵ_f ∘ L(η_g) ↪ f ∘ L(g)
+//
+// Context/typing (intended reading):
+//   LAdj : R ⟶ L        RAdj : L ⟶ R
+//   η : Id_R ⇒ RAdj∘LAdj    (unit)
+//   ϵ : LAdj∘RAdj ⇒ Id_L    (counit)
+//
+//   g : X → X'     in R
+//   f : LAdj(X') → Y   in L
+//
+// Then:
+//   η_g : X → (RAdj∘LAdj)(X')                    (arrow-indexed component, in R)
+//   LAdj(η_g) : LAdj(X) → LAdj(RAdj(LAdj(X')))   (functorial action of LAdj on η_g, in L)
+//   ϵ_f : (LAdj∘RAdj)(LAdj(X')) → Y              (arrow-indexed component, in L)
+//
+// and the cut-elimination rule says:
+//   ϵ_f ∘ LAdj(η_g)  ↪  f ∘ LAdj(g).
+//
+// Matching note:
+//   We keep the intermediate object arguments of `comp_fapp0` and `fapp1_fapp0` as `_` to avoid
+//   fragile dependence on definitional computations like `fapp0 (id_func) _ ↪ _`.
+rule @comp_fapp0 $L
+      (@fapp0 $R $L $LAdj $X)
+      _
+      $Y
+      (@tapp1_fapp0 $L $L
+        (@comp_cat_fapp0 $L $R $L $LAdj $RAdj)
+        (@id_func $L)
+        (@fapp0 $R $L $LAdj $X')
+        $Y
+        $ϵ
+        $f)
+      (@fapp1_fapp0 $R $L $LAdj
+        $X
+        _
+        (@tapp1_fapp0 $R $R
+          (@id_func $R)
+          (@comp_cat_fapp0 $R $L $R $RAdj $LAdj)
+          $X
+          $X'
+          $η
+          $g))
+  ↪ @comp_fapp0 $L
+      (@fapp0 $R $L $LAdj $X)
+      (@fapp0 $R $L $LAdj $X')
+      $Y
+      $f
+      (@fapp1_fapp0 $R $L $LAdj $X $X' $g);
+
+// Sanity: the triangle cut-elimination rule is visible by definitional equality (conversion).        // exercise triangle rule
+assert [R L : Cat]
+  (LAdj : τ (Obj (Functor_cat R L))) (RAdj : τ (Obj (Functor_cat L R)))
+  (η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj))))
+  (ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L))))
+  (X X' : τ (Obj R)) (Y : τ (Obj L))
+  (g : τ (Obj (@Hom_cat R X X')))
+  (f : τ (Obj (@Hom_cat L (fapp0 LAdj X') Y))) ⊢
+  @comp_fapp0 L
+    (fapp0 LAdj X)
+    (fapp0 LAdj (fapp0 RAdj (fapp0 LAdj X')))
+    Y
+    (@tapp1_fapp0 L L (comp_cat_fapp0 LAdj RAdj) (@id_func L) (fapp0 LAdj X') Y ϵ f)
+    (@fapp1_fapp0 R L LAdj X (fapp0 RAdj (fapp0 LAdj X'))
+      (@tapp1_fapp0 R R (@id_func R) (comp_cat_fapp0 RAdj LAdj) X X' η g))
+  ≡ @comp_fapp0 L
+      (fapp0 LAdj X)
+      (fapp0 LAdj X')
+      Y
+      f
+      (@fapp1_fapp0 R L LAdj X X' g);
