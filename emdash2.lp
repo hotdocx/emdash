@@ -438,6 +438,52 @@ rule @fapp0 (@Hom_cat $A $X_A $Y_A) _
   ↪ @fapp1_fapp0 $A $B $F_AB $X_A $Y_A $f;
 
 // -------------------------------------------------------------------------------------------------
+// 5.1 Paths-as-morphisms (bridge out of Path_cat / Core_cat)                                         // groupoids ↪ categories
+// -------------------------------------------------------------------------------------------------
+
+/*
+  path_to_hom_func / Core_incl_func (interface only; univalence comes later)
+
+  We now have `Path_cat : Grpd → Cat` and `Core_cat(C) := Path_cat(Obj C)`.
+
+  To relate paths (equalities in `Obj C`) to actual 1-cells in `C`, we introduce a *functorial*
+  “paths-as-morphisms” interface:
+
+    path_to_hom_func(C,x,y) : Functor_cat( Path_cat(x=y), Hom_cat(C,x,y) ).
+
+  This is the intended `fapp1_func` part of the (future) functor `Core_incl_func C : Core_cat(C) → C`.
+
+  Important: no univalence is assumed here. This only provides the direction “path ⇒ 1-cell”.
+*/
+
+// For fixed C and endpoints x,y, a functor from paths x=y to morphisms x→y in C.                     // (x=y) ↦ Hom_C(x,y)
+constant symbol path_to_hom_func : Π [C : Cat],
+  Π (x y : τ (Obj C)),
+  τ (Obj (Functor_cat (Path_cat (x = y)) (@Hom_cat C x y)));
+
+// Stable head: apply the above functor to a concrete path p : x=y, producing a 1-cell x→y in C.     // p ↦ (x→y)
+symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)),
+  Π (p : τ (x = y)),
+  τ (Obj (@Hom_cat C x y));
+
+// Canonicalization: fold application of path_to_hom_func toward the stable head.                     // fapp0(path_to_hom_func,p) ↪ path_to_hom_fapp0
+rule @fapp0 (Path_cat ($x = $y)) _ (@path_to_hom_func $C $x $y) $p
+  ↪ @path_to_hom_fapp0 $C $x $y $p;
+
+// The “core inclusion” functor object: Core_cat(C) → C.                                              // Core(C) ↪ C
+// This provides an object-map (identity on objects) and a hom-action compatible with path_to_hom_func.
+constant symbol Core_incl_func : Π (C : Cat), τ (Obj (Functor_cat (Core_cat C) C));
+
+// Object-action is the identity on objects.                                                          // Core_incl(x)=x
+rule fapp0 (Core_incl_func $C) $x ↪ $x;
+
+// Hom-action is the paths-as-morphisms functor.                                                      // (Core_incl)_1 = path_to_hom_func
+rule @fapp1_func _ _ (@Core_incl_func $C) $x $y ↪ @path_to_hom_func $C $x $y;
+
+// Pointwise hom-action folds to the stable head.                                                     // (Core_incl)(p) ↪ path_to_hom_fapp0(p)
+rule @fapp1_fapp0 _ _ (@Core_incl_func $C) $x $y $p ↪ @path_to_hom_fapp0 $C $x $y $p;
+
+// -------------------------------------------------------------------------------------------------
 // 5a. Strict functors (strictness as computational rewrite rules)                                   // optional discipline
 // -------------------------------------------------------------------------------------------------
 
