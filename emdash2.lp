@@ -3093,6 +3093,54 @@ rule @comp_fapp0 $B
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
       (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g);
 
+// Precomposition naturality (domain-side), when the domain functor is a composite (2-deep).           // ϵ_k ∘ F1(F2 f) ↪ ϵ_(k∘f)
+//
+// Motivation (same phenomenon as the “identity-silent” hack):
+// if F ≔ F1∘F2, then `fapp0 F X` reduces to `fapp0 F1 (fapp0 F2 X)`, so rewrite heads mentioning
+// the composite functor can disappear from the surrounding `comp_fapp0` redex. This rule matches the
+// common nested form `F1(F2 f)` directly.
+rule @comp_fapp0 $B
+      (@fapp0 $M $B $F1_MB (@fapp0 $A $M $F2_AM $X2_A))
+      (@fapp0 $M $B $F1_MB (@fapp0 $A $M $F2_AM $X_A))
+      (@fapp0 $A $B $G_AB $Y_A)
+      (@tapp1_fapp0 $A $B
+        (@comp_cat_fapp0 $A $M $B $F1_MB $F2_AM)
+        $G_AB
+        $X_A
+        $Y_A
+        $ϵ
+        $k)
+      (@fapp1_fapp0 $M $B $F1_MB
+        (@fapp0 $A $M $F2_AM $X2_A)
+        (@fapp0 $A $M $F2_AM $X_A)
+        (@fapp1_fapp0 $A $M $F2_AM $X2_A $X_A $f))
+  ↪ @tapp1_fapp0 $A $B
+      (@comp_cat_fapp0 $A $M $B $F1_MB $F2_AM)
+      $G_AB
+      $X2_A
+      $Y_A
+      $ϵ
+      (@comp_fapp0 $A $X2_A $X_A $Y_A $k $f);
+
+// Sanity: composite-domain precomposition naturality fires definitionally (conversion).              // exercise the rule above
+assert [A M B : Cat]
+  (F1_MB : τ (Obj (Functor_cat M B)))
+  (F2_AM : τ (Obj (Functor_cat A M)))
+  (G_AB : τ (Obj (Functor_cat A B)))
+  (X2 X Y : τ (Obj A))
+  (ϵ : τ (Obj (Transf_cat (@comp_cat_fapp0 A M B F1_MB F2_AM) G_AB)))
+  (f : τ (Obj (@Hom_cat A X2 X)))
+  (k : τ (Obj (@Hom_cat A X Y))) ⊢
+  @comp_fapp0 B
+    (fapp0 F1_MB (fapp0 F2_AM X2))
+    (fapp0 F1_MB (fapp0 F2_AM X))
+    (fapp0 G_AB Y)
+    (@tapp1_fapp0 A B (@comp_cat_fapp0 A M B F1_MB F2_AM) G_AB X Y ϵ k)
+    (@fapp1_fapp0 M B F1_MB (fapp0 F2_AM X2) (fapp0 F2_AM X)
+      (@fapp1_fapp0 A M F2_AM X2 X f))
+  ≡ @tapp1_fapp0 A B (@comp_cat_fapp0 A M B F1_MB F2_AM) G_AB X2 Y ϵ
+      (@comp_fapp0 A X2 X Y k f);
+
 // Identity-silent postcomposition naturality (special case for G = id).                               // g ∘ ϵ_f ↪ ϵ_(g∘f)
 //
 // Motivation (Kosta Došen style; matches earlier discussion):
