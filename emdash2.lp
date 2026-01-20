@@ -3092,3 +3092,109 @@ rule @comp_fapp0 $B
       (@fapp1_fapp0 $A $B $F_AB $X2_A $X_A $g)
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X2_A $Y_A $ϵ
       (@comp_fapp0 $A $X2_A $X_A $Y_A $f $g);
+
+// Identity-silent postcomposition naturality (special case for G = id).                               // g ∘ ϵ_f ↪ ϵ_(g∘f)
+//
+// Motivation (Kosta Došen style; matches earlier discussion):
+// For a transfor ϵ : F ⇒ Id_A, the postcomposition naturality law is usually written as
+//     g ∘ ϵ_f  ↪  ϵ_(g ∘ f)
+// where the identity functor is “silent”.
+//
+// If we only had the general rule
+//     (G g) ∘ ϵ_f ↪ ϵ_(g∘f),
+// then specializing to G := Id_A would *not* match in practice, because `fapp0 (id_func) Y ↪ Y`
+// erases the syntactic evidence of Id in the ambient `comp_fapp0` redex (matching is not modulo such
+// definitional erasures). Hence this dedicated cut-elimination rule.
+rule @comp_fapp0 $A
+      (@fapp0 $A $A $F_AB $X_A)
+      $Y_A
+      $Z_A
+      $g
+      (@tapp1_fapp0 $A $A $F_AB (@id_func $A) $X_A $Y_A $ϵ $f)
+  ↪ @tapp1_fapp0 $A $A $F_AB (@id_func $A) $X_A $Z_A $ϵ
+      (@comp_fapp0 $A $X_A $Y_A $Z_A $g $f);
+
+// Unification bridge (not rewriting): arrow-indexed component at id ↔ object-indexed component.       // ϵ_(1_X) ≡ ϵ_X
+//
+// This is intentionally a unification rule, not a rewrite rule, so the stable head `tapp1_fapp0`
+// remains the canonical normal form for arrow-indexed components.
+unif_rule @tapp1_fapp0 $A $B $F_AB $G_AB $X $X $ϵ (@id $A $X)
+  ≡ @tapp0_fapp0 $A $B $F_AB $G_AB $X $ϵ
+  ↪ [ tt ≡ tt ];
+
+// -------------------------------------------------------------------------------------------------
+// Phase 3 (draft): Adjunctions (Kosta Došen / cut-elimination interface)                              // adjoints, unit, counit
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Adjunction (interface only; draft)
+
+  We follow the cartierSolution13.lp interface shape, but in emdash2:
+  - categories are `Cat`,
+  - functors are objects of `Functor_cat`,
+  - unit/counit are transfors in `Transf_cat`.
+
+  Naming: we keep the historical `R`/`L` convention from cartierSolution13:
+    LAdj : R ⟶ L    and    RAdj : L ⟶ R.
+*/
+
+// Core classifier: an adjunction datum (LAdj ⊣ RAdj) with explicit unit/counit.                       // adj(R,L,LAdj,RAdj,η,ϵ) : TYPE
+constant symbol adj :
+  Π [R L : Cat],
+  Π (LAdj : τ (Obj (Functor_cat R L))),
+  Π (RAdj : τ (Obj (Functor_cat L R))),
+  Π (η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))),
+  Π (ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))),
+  TYPE;
+
+// Syntactic projections (stable heads).                                                              // reification hooks
+symbol LeftAdj :
+  Π [R L : Cat],
+  Π [LAdj : τ (Obj (Functor_cat R L))],
+  Π [RAdj : τ (Obj (Functor_cat L R))],
+  Π [η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))],
+  Π [ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))],
+  @adj R L LAdj RAdj η ϵ → τ (Obj (Functor_cat R L));
+
+symbol RightAdj :
+  Π [R L : Cat],
+  Π [LAdj : τ (Obj (Functor_cat R L))],
+  Π [RAdj : τ (Obj (Functor_cat L R))],
+  Π [η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))],
+  Π [ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))],
+  @adj R L LAdj RAdj η ϵ → τ (Obj (Functor_cat L R));
+
+symbol UnitAdj :
+  Π [R L : Cat],
+  Π [LAdj : τ (Obj (Functor_cat R L))],
+  Π [RAdj : τ (Obj (Functor_cat L R))],
+  Π [η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))],
+  Π [ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))],
+  @adj R L LAdj RAdj η ϵ → τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)));
+
+symbol CoUnitAdj :
+  Π [R L : Cat],
+  Π [LAdj : τ (Obj (Functor_cat R L))],
+  Π [RAdj : τ (Obj (Functor_cat L R))],
+  Π [η : τ (Obj (Transf_cat (@id_func R) (comp_cat_fapp0 RAdj LAdj)))],
+  Π [ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)))],
+  @adj R L LAdj RAdj η ϵ → τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (@id_func L)));
+
+// Unification rules: recover the semantic data from the syntactic projections.                        // LeftAdj a ≡ LAdj, etc.
+unif_rule @LeftAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $LAdj ↪ [ tt ≡ tt ];
+unif_rule @RightAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $RAdj ↪ [ tt ≡ tt ];
+unif_rule @UnitAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $η ↪ [ tt ≡ tt ];
+unif_rule @CoUnitAdj $R $L $LAdj $RAdj $η $ϵ $a ≡ $ϵ ↪ [ tt ≡ tt ];
+
+// Sanity: the identity-silent naturality rule is visible by definitional equality (conversion).      // g ∘ ϵ_f ↪ ϵ_(g∘f)
+assert [A : Cat] (F : τ (Obj (Functor_cat A A))) (X Y Z : τ (Obj A))
+  (ϵ : τ (Obj (Transf_cat F (@id_func A))))
+  (f : τ (Obj (@Hom_cat A X Y))) (g : τ (Obj (@Hom_cat A Y Z))) ⊢
+  @comp_fapp0 A
+    (@fapp0 A A F X)
+    Y
+    Z
+    g
+    (@tapp1_fapp0 A A F (@id_func A) X Y ϵ f)
+  ≡ @tapp1_fapp0 A A F (@id_func A) X Z ϵ
+      (@comp_fapp0 A X Y Z g f);
