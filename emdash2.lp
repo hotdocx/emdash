@@ -378,6 +378,18 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),     
   Π [X_A Y_A : τ (Obj A)],                                                            // endpoints
   τ (Obj (Functor_cat (@Hom_cat A X_A Y_A) (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A))));        // functor on the hom-category
 
+// Stable head: apply a functor’s hom-action to a 1-cell (globular presentation).                      // F(f) as a 1-cell
+symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
+  Π [X_A Y_A : τ (Obj A)],
+  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
+  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
+
+// Canonicalization: fold “apply fapp1_func at f” toward the stable head `fapp1_fapp0`.                // fapp0(fapp1_func(F),f) ↪ fapp1_fapp0
+rule @fapp0 (@Hom_cat $A $X_A $Y_A) _
+      (@fapp1_func $A $B $F_AB $X_A $Y_A)
+      $f
+  ↪ @fapp1_fapp0 $A $B $F_AB $X_A $Y_A $f;
+
 // -------------------------------------------------------------------------------------------------
 // 5a. Strict functors (strictness as computational rewrite rules)                                   // optional discipline
 // -------------------------------------------------------------------------------------------------
@@ -415,17 +427,17 @@ injective symbol sfunc_func : Π [A B : Cat],
   τ (Obj (StrictFunctor_cat A B)) → τ (Obj (Functor_cat A B));
 
 // Strictness (identity): F(id_X) ↪ id_{F(X)}.                                                       // preserves identities on the nose
-rule fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $X) (@id $A $X)
+rule @fapp1_fapp0 $A $B (@sfunc_func $A $B $Fs) $X $X (@id $A $X)
   ↪ @id $B (fapp0 (@sfunc_func $A $B $Fs) $X);
 
 // Strictness (composition): F(g∘f) ↪ F(g)∘F(f).                                                     // preserves composition on the nose
-rule fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $Z) (@comp_fapp0 $A $X $Y $Z $g $f)
+rule @fapp1_fapp0 $A $B (@sfunc_func $A $B $Fs) $X $Z (@comp_fapp0 $A $X $Y $Z $g $f)
   ↪ @comp_fapp0 $B
       (fapp0 (@sfunc_func $A $B $Fs) $X)
       (fapp0 (@sfunc_func $A $B $Fs) $Y)
       (fapp0 (@sfunc_func $A $B $Fs) $Z)
-      (fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $Y $Z) $g)
-      (fapp0 (@fapp1_func $A $B (@sfunc_func $A $B $Fs) $X $Y) $f);
+      (@fapp1_fapp0 $A $B (@sfunc_func $A $B $Fs) $Y $Z $g)
+      (@fapp1_fapp0 $A $B (@sfunc_func $A $B $Fs) $X $Y $f);
 
 // Opposite of a functor: F : A→B  ↦  Fᵒᵖ : Aᵒᵖ → Bᵒᵖ (same object-map, reversed hom-action).        // dualization of functors
 injective symbol Op_func : Π [A B : Cat],
@@ -514,8 +526,7 @@ constant symbol op : τ (Obj (Functor_cat Cat_cat Cat_cat));
 rule @fapp0 _ _ op $A ↪ Op_cat $A;
 
 // Morphism-action on objects (functors): op₁(F) ≡ Fᵒᵖ.                                               // fapp0(fapp1_func(op),F) ↪ Op_func(F)
-rule @fapp0 (Functor_cat $A1 $A2) _
-  (@fapp1_func Cat_cat Cat_cat op $A1 $A2) $F ↪ @Op_func $A1 $A2 $F;
+rule @fapp1_fapp0 Cat_cat Cat_cat op $A1 $A2 $F ↪ @Op_func $A1 $A2 $F;
 
 // Identity functor on a category A (as an object in Functor_cat(A,A)).                                  // 1-category identity, lifted to ω setting
 // Design (stable head): we keep `id_func` as the canonical normal form for identities in `Cat_cat`.
@@ -582,13 +593,9 @@ rule @hom_con $A $W $B $F ↪ @hom_cov (Op_cat $A) $W (Op_cat $B) (@Op_func $B $
 
 rule @fapp0 (@Hom_cat $A $W _)
     (@Hom_cat $A $W _)
-    (@fapp0 (@Hom_cat $B $X $Y)
-      _
-      (@fapp1_func $B Cat_cat (@hom_cov $A $W $B $F) $X $Y) $f) $g
+    (@fapp1_fapp0 $B Cat_cat (@hom_cov $A $W $B $F) $X $Y $f) $g
   ↪ @comp_fapp0 $A $W (fapp0 $F $X) (fapp0 $F $Y)
-      (@fapp0 (@Hom_cat $B $X $Y)
-        (@Hom_cat $A (fapp0 $F $X) (fapp0 $F $Y))
-        (@fapp1_func $B $A $F $X $Y) $f) $g;
+      (@fapp1_fapp0 $B $A $F $X $Y $f) $g;
 
 // Postcomposition by op computes pointwise: (op ∘ E)(b) ≡ (E(b))ᵒᵖ.                                   // key for “twisted” fibrations
 rule @fapp0 $B Cat_cat (@comp_cat_fapp0 $B Cat_cat Cat_cat op $E) $b
@@ -1161,7 +1168,7 @@ sequential symbol fib_cov_tapp0_fapp0 : Π [B : Cat] (M : τ (Obj (Functor_cat B
 // Usual notation: `M(f)(u) ↦ f_!(u)`.                                                                 // fold to the transport head
 // This keeps `fib_cov_tapp0_fapp0` as the stable head symbol (like `comp_fapp0`), so later
 // object-level functoriality rules apply without unfolding.
-rule fapp0 (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f) $u
+rule fapp0 (@fapp1_fapp0 $B Cat_cat $M $x $y $f) $u
   ↪ @fib_cov_tapp0_fapp0 $B $M $x $y $f $u;
 
 // Strict functoriality on objects: M(id)(u) ↪ u.                                                      // preserves identities on objects
@@ -2081,8 +2088,8 @@ rule @fapp0 (@Hom_cat (@Hom_cat $B $x $y) $f $g)
     (@fapp1_func (@Hom_cat $B $x $y) (fapp0 $M $y)
       (@fib_cov_tapp0_func $B $M $x $y $u) $f $g) $α
   ↪ @tapp0_fapp0 (fapp0 $M $x) (fapp0 $M $y)
-      (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $f)
-      (fapp0 (@fapp1_func $B Cat_cat $M $x $y) $g)
+      (@fapp1_fapp0 $B Cat_cat $M $x $y $f)
+      (@fapp1_fapp0 $B Cat_cat $M $x $y $g)
       $u
       (@fapp0 (@Hom_cat (@Hom_cat $B $x $y) $f $g)
         _
@@ -2357,10 +2364,7 @@ rule @Fibre_func $A _ _ (@fapp1_funcd $A $B $F_AB $X_A) $Y_A
 
 // Link: the object-action fdapp0 of fapp1_funcd reduces to applying fapp1_func on a morphism-object.           // coherence rule between globular & simplicial views
 rule fdapp0 (@fapp1_funcd $A $B $F $X) [$Y] $f
-  ↪ @fapp0 (@Hom_cat $A $X $Y)
-      (@Hom_cat $B (fapp0 $F $X) (fapp0 $F $Y))
-      (@fapp1_func $A $B $F $X $Y)
-      $f;                                                        // fdapp0(fapp1_funcd(F,X),f) ↪ fapp0(fapp1_func(F,X,Y),f)
+  ↪ @fapp1_fapp0 $A $B $F $X $Y $f;                             // fdapp0(fapp1_funcd(F,X),f) ↪ fapp1_fapp0(F,X,Y,f)
 
 // id-instantiation (key normalization): identity natural transformation folds to functorial action on homs.     // stable head for "ϵ = id"
 //
@@ -3059,20 +3063,6 @@ rule @fdapp0 $A
       $Y_A
       $f
   ↪ @tapp1_fapp0 $A $B $F_AB $G_AB $X_A $Y_A $ϵ $f;
-
-// Stable head: apply a functor’s hom-action to a 1-cell (globular presentation).                      // F(g) as a 1-cell
-symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),
-  Π (X_A Y_A : τ (Obj A)),
-  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
-  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
-
-// Canonicalization: fold “apply fapp1_func at f” toward the stable head `fapp1_fapp0`.                // fapp0(fapp1_func(F),f) ↪ fapp1_fapp0
-rule @fapp0
-      (@Hom_cat $A $X_A $Y_A)
-      (@Hom_cat $B (@fapp0 $A $B $F_AB $X_A) (@fapp0 $A $B $F_AB $Y_A))
-      (@fapp1_func $A $B $F_AB $X_A $Y_A)
-      $f
-  ↪ @fapp1_fapp0 $A $B $F_AB $X_A $Y_A $f;
 
 /*
   Strict naturality laws (draft):
