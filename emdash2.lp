@@ -125,6 +125,13 @@ symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],                       
   τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);                                                  // eliminate equality into a family p
 rule ind_eq (eq_refl $x) $p $u ↪ $u;                                                               // computation rule: J refl reduces
 
+// Equality composition (path concatenation).                                                         // eq_trans
+// This is the standard “transport along equality” composition, definable from ind_eq (J).
+// Note: we keep it as a named symbol since it will be used as the composition law in Path_cat.      // used by Path_cat comp
+symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],
+  τ (x = y) → τ (y = z) → τ (x = z)
+≔ λ a x y z p q, ind_eq p (λ t : τ a, t = z) q;
+
 // Hook equality primitives into Lambdapi's standard names.                                          // interop with tactics/notations
 builtin "eq"    ≔ =;                                                                               // builtin equality symbol
 builtin "refl"  ≔ eq_refl;                                                                         // builtin reflexivity proof
@@ -240,6 +247,46 @@ assert (A : Cat) (X : τ (Obj A)) ⊢ @id (Op_cat A) X ≡ @id A X;
 assert (A : Cat) (X Y Z : τ (Obj A))
   (g : τ (Obj (@Hom_cat (Op_cat A) Y Z))) (f : τ (Obj (@Hom_cat (Op_cat A) X Y))) ⊢
   @comp_fapp0 (Op_cat A) X Y Z g f ≡ @comp_fapp0 A Z Y X f g;
+
+// -------------------------------------------------------------------------------------------------
+// 4c. Path category / “discrete groupoid” as a category (Path_cat)                                   // groupoids-as-cats
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Path_cat
+
+  `Obj C : Grpd` already makes objects of a category C groupoidal.
+  `Path_cat` turns any groupoid code `A : Grpd` into a category whose:
+    - objects are elements of A,
+    - 1-cells x→y are paths `x = y`,
+    - higher cells iterate as paths between paths.
+
+  This is our “discrete/groupoidal category” constructor (NOT the set-theoretic discrete category).
+*/
+injective symbol Path_cat : Grpd → Cat;
+
+// Objects are definitionally the underlying groupoid.                                                // Obj(Path_cat A) ≡ A
+rule Obj (Path_cat $A) ↪ $A;
+
+// Homs are paths, iterated.                                                                          // Hom(x,y) ≡ Path_cat(x=y)
+rule @Hom_cat (Path_cat $A) $x $y ↪ Path_cat ($x = $y);
+
+// Identities are reflexivity paths.                                                                  // id_x ≡ refl_x
+rule @id (Path_cat $A) $x ↪ eq_refl $x;
+
+// Composition is path concatenation.                                                                 // q∘p ≡ p·q
+rule @comp_fapp0 (Path_cat $A) $x $y $z $q $p ↪ eq_trans $p $q;
+
+// Path categories are self-dual (groupoids).                                                         // (Path_cat A)ᵒᵖ ≡ Path_cat A
+rule Op_cat (Path_cat $A) ↪ Path_cat $A;
+
+/*
+  Core_cat (alias)
+
+  For a category `C`, we define its “core/discrete/groupoidal” category to be the path category on its
+  object groupoid.
+*/
+symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 
 /*
   MAINTENANCE INVENTORY (emdash2.lp)
