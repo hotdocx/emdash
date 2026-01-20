@@ -3234,36 +3234,36 @@ assert [A : Cat] (F : τ (Obj (Functor_cat A A))) (X Y Z : τ (Obj A))
 //   We keep the intermediate object arguments of `comp_fapp0` and `fapp1_fapp0` as `_` to avoid
 //   fragile dependence on definitional computations like `fapp0 (id_func) _ ↪ _`.
 rule @comp_fapp0 $L
-      (@fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a) $X)
+      (@fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X)
       _
       $Y
       (@tapp1_fapp0 $L $L
         (comp_cat_fapp0
-          (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a)
-          (@RightAdj $R $L $LAdj $RAdj $η $ϵ $a))
+          (@LeftAdj $R $L _ _ _ _ $a)
+          (@RightAdj $R $L _ _ _ _ $a))
         (@id_func $L)
-        (@fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a) $X')
+        (@fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X')
         $Y
-        (@CoUnitAdj $R $L $LAdj $RAdj $η $ϵ $a)
+        (@CoUnitAdj $R $L _ _ _ _ $a)
         $f)
-      (@fapp1_fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a)
+      (@fapp1_fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a)
         $X
         _
         (@tapp1_fapp0 $R $R
           (@id_func $R)
           (comp_cat_fapp0
-            (@RightAdj $R $L $LAdj $RAdj $η $ϵ $a)
-            (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a))
+            (@RightAdj $R $L _ _ _ _ $a)
+            (@LeftAdj $R $L _ _ _ _ $a))
           $X
           $X'
-          (@UnitAdj $R $L $LAdj $RAdj $η $ϵ $a)
+          (@UnitAdj $R $L _ _ _ _ $a)
           $g))
   ↪ @comp_fapp0 $L
-      (@fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a) $X)
-      (@fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a) $X')
+      (@fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X)
+      (@fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X')
       $Y
       $f
-      (@fapp1_fapp0 $R $L (@LeftAdj $R $L $LAdj $RAdj $η $ϵ $a) $X $X' $g);
+      (@fapp1_fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X $X' $g);
 
 // Sanity: the triangle cut-elimination rule is visible by definitional equality (conversion).        // exercise triangle rule
 /*
