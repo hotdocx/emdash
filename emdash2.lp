@@ -770,6 +770,33 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y
 constant symbol Catd : Π (A : Cat), TYPE;                                                           // classifier of dependent categories over A
 
 /*
+  isEquiv (ω-equivalence / invertibility predicate, packaged as a displayed category)
+
+  For later univalence work, we want a notion of “equivalence/isomorphism” of 1-cells in an ω-category,
+  proof-relevant and recursive (left/right inverses need not coincide, and higher witnesses exist).
+
+  We *do not* assume up-front that “isEquiv(f) is a mere proposition / groupoid”; that should be proved
+  later (possibly meta-theoretically or via additional principles).
+
+  Therefore, we package isEquiv as a displayed category over the hom-category:
+
+    isEquiv C x y : Catd(Hom_cat C x y).
+
+  Intuition:
+    - the base object is a 1-cell f : x→y (an object of Hom_cat C x y),
+    - the fibre category over f contains witnesses that f is an equivalence.
+
+  A “witness for every f” is then a *section* (a displayed functor from the terminal family over the base):
+
+    section : Obj(Functord_cat( Terminal_catd(Hom_cat C x y), isEquiv C x y )).
+
+  This integrates with the rest of the emdash2 internal story (displayed categories, sections, Groth totals).
+*/
+constant symbol isEquiv : Π [C : Cat],
+  Π (x y : τ (Obj C)),
+  Catd (@Hom_cat C x y);
+
+/*
   Visualization: (iso)fibrations as “simplicial” shapes (edges / surfaces / volumes / …)
 
   A helpful mental model in this development is to think of a (covariant) (iso)fibration `E → B` as
