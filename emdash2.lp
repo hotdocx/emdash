@@ -288,6 +288,14 @@ rule Op_cat (Path_cat $A) ↪ Path_cat $A;
 */
 symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 
+// Sanity: Path_cat computes as intended (objects, homs, id, comp, opposite).                         // smoke tests
+assert [A : Grpd] ⊢ Obj (Path_cat A) ≡ A;
+assert [A : Grpd] (x y : τ A) ⊢ @Hom_cat (Path_cat A) x y ≡ Path_cat (x = y);
+assert [A : Grpd] (x : τ A) ⊢ @id (Path_cat A) x ≡ eq_refl x;
+assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
+  @comp_fapp0 (Path_cat A) x y z q p ≡ eq_trans p q;
+assert [A : Grpd] ⊢ Op_cat (Path_cat A) ≡ Path_cat A;
+
 /*
   MAINTENANCE INVENTORY (emdash2.lp)
 
