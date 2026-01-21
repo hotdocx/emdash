@@ -1,0 +1,57 @@
+% CATEGORY THEORY 2026
+% Abstract template
+% See https://ct2026.com/ct/submit/ for instructions
+% 1. one-page limit
+% 2. avoid loading additional packages
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{tikz-cd} % for commutative diagrams
+\usepackage{etoolbox}\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+% WARNING: Hyperlinks will be stripped from PDF program booklet and will only appear on web.
+\usepackage[allcolors=black,pdfborder={0 0 0}]{hyperref}
+
+\newcommand{\coauthors}[1]{\par\noindent{\small\textbf{Joint work with:} #1}\par\medskip}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\title{Title of Your Talk Goes Here}
+% PRESENTER NAME ONLY - do not list coauthors here
+\author{Your Name}
+% LEAVE THE DATE BLANK
+\date{}\maketitle
+
+% ADDITIONAL CO-AUTHORS (delete line if not applicable)
+\coauthors{First Coauthor, Second Coauthor}
+
+This is where you write the main body of your abstract.
+Replace this text with a description of your work.
+You can use standard mathematical notation and symbols.
+Here is an example of a displayed equation:
+\[
+\hom_{\mathcal{C}}(F(X), Y) \cong \hom_{\mathcal{D}}(X, G(Y))
+\]
+where $F \colon \mathcal{C} \to \mathcal{D}$ and $G \colon \mathcal{D} \to \mathcal{C}$ are functors.
+Remember that your abstract must fit on one page, including the bibliography, which should only include explicitly cited items, pointing either to the present work \cite{preprint} or to relevant background material \cite{eilenberg-kelly,maclane}.
+
+% DELETE IF NOT INCLUDING REFERENCES
+\begin{thebibliography}{1}
+
+\bibitem{eilenberg-kelly}
+S.~Eilenberg and G.~M.~Kelly, \emph{A generalization of the functorial calculus}, J.\ Algebra~\textbf{3} (1966), 366--375.
+
+\bibitem{maclane}
+S.~Mac Lane, \emph{Categories for the Working Mathematician}, second ed., Grad.\ Texts in Math., vol.~5, Springer, 1998.
+
+\bibitem{preprint}
+A.~Person, \emph{Full name of preprint}, preprint \href{https://arxiv.org/abs/1234.56789}{arXiv:1234.56789}, 2024.
+
+\end{thebibliography}
+
+\end{document}
