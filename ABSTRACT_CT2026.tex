@@ -58,6 +58,30 @@ it internalizes the idea that higher structure can be accessed by varying along 
 tracking how fibrewise homs change. Iterating it yields a \emph{simplicial} presentation of higher
 cells (triangles, ``surfaces'', and higher simplices) that makes horizontal ``stacking'' of $2$-cells
 along a $1$-cell particularly direct.
+In particular, ``stacking'' is organized by $2$-cells living over a chosen base edge:
+{\scriptsize
+\[
+\begin{tikzcd}
+	&&&&& {1 \ \bullet} \\
+	\\
+	\\
+	\\
+	{0 \ \bullet} &&&&& {\bullet \ 2} \\
+	\\
+	\\
+	&&&&&&&& {\bullet \ 3}
+	\arrow["b"{description}, from=1-6, to=5-6]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{b'}"{description}, dashed, from=1-6, to=8-9]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "f"{description}, from=5-1, to=1-6]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{f'}"{description}, from=5-1, to=5-6]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{f''}"{description}, dashed, from=5-1, to=8-9]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "t"{description}, dashed, from=5-6, to=8-9]
+	\arrow["{\beta^{op}}", between={0.1}{0.9}, Rightarrow, from=0, to=4]
+	\arrow["\sigma"', between={0.1}{0.9}, Rightarrow, from=1, to=2]
+	\arrow["\phi"', between={0.2}{0.8}, Rightarrow, from=2, to=3]
+\end{tikzcd}
+\]
+}
 Compared with parametricity-based formalisations of semi-simplicial structures, we aim to keep the
 interface conceptual and type-theoretic rather than explicitly combinatorial \cite{herbelin-ramachandra24}.
 
