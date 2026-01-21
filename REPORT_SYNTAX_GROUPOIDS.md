@@ -133,6 +133,17 @@ Surface reading:
 
 This is a “dependent function on fibre objects” reading, with `z` *not* assumed functorial.
 
+### 3.2b. Simplicial / “over a base arrow” displayed morphisms (Grothendieck-style)
+
+We use the notation:
+
+- `f : z → z'` for a base 1-cell in `Z`,
+- `σ : e →_f e'` for a displayed 1-cell in `E : Catd Z` lying over `f`,
+  where `e : E[z]` and `e' : E[z']`.
+
+This is the simplicial/Grothendieck notion of “a morphism over a base edge” used throughout `emdash2.lp`
+(2-simplex / 3-simplex intuition).
+
 ### 3.3 Transfors: object-indexed vs arrow-indexed components
 
 Internal:
@@ -164,6 +175,48 @@ The contravariant accumulation in `x :^- A` is reflected computationally by rewr
 
 In `emdash2.lp` these are currently implemented as Phase-2 “strict naturality” rewrite rules for the
 stable head `tapp1_fapp0`.
+
+### 3.4 Dependent-hom (simplicial) syntax: `homd_cov_int`
+
+Kernel symbol (simplified):
+
+- `homd_cov_int : (D0 : Z ⟶ Cat), (FF : (∫D0) ⟶_Z E) ⟼ (Op_catd E) ⟶_Z ...`
+
+Surface reading for `σ : homd_cov_int ...`:
+
+```
+Z : Cat
+E : Catd Z
+D0 : (z:Z ⊢ D0[z] : Cat)
+FF : (z:^o Z, d:D0[z] ⊢ FF[d] : E[z])
+
+z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]
+```
+
+Note the binder correction: because `E` forces `z:^o Z` (object-only) in the surface language,
+we write the `FF` fibrewise typing with `z:^o Z` as well, even though `D0` itself varies functorially.
+
+### 3.5 Displayed transfors: simplicial arrow-indexed components via `tdapp1_int_fapp0_transfd`
+
+For `ϵ : Transfd_cat FF GG`, the diagonal component is already covered by the classifier reading:
+
+`z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]`
+
+What we need explicitly (analogue of ordinary `ϵ_(f)`) is the “over-a-base-arrow” component:
+
+```
+z:^o Z,
+e  : E0[z],
+z' : Z,
+f  : z → z',
+e' : E0[z'],
+σ  : e →_f e'
+⊢
+ϵ_(σ) : FF[e] →_f GG[e']
+```
+
+This is the surface reading of the internal packaging `tdapp1_int_fapp0_transfd` (and related `tdapp1_int_*` family),
+which turns a displayed transfor into its simplicial/off-diagonal components indexed by displayed arrows over `f`.
 
 
 ## 4. Groupoids and “univalence”: current understanding
@@ -283,3 +336,6 @@ explicit surface constructors (e.g. `ϵ_(f)` reduction/accumulation via `tapp1_f
 4. (Infrastructure, later) Introduce `isEquiv` (preferred as `Catd(Hom_cat C x y)`), then univalence
    bridges using rewrite+unif split.
 
+5. (Syntax, next) Add surface syntax docstrings for the simplicial layer:
+   - `homd_cov_int` (σ : e →_f FF[d]),
+   - `tdapp1_int_fapp0_transfd` (ϵ_(σ) : FF[e] →_f GG[e']).

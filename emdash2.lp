@@ -963,6 +963,13 @@ rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
     - paths `p : x = y` in `Obj C`,
     - 1-cells `f : Hom_cat C x y` (via `path_to_hom_fapp0`),
     - and witnesses in the fibre `Fibre_cat (isEquiv C x y) f`.
+
+  TODO (review internal packaging):
+  The current interface is written in a pointwise “external Π” style.
+  It may be preferable to repackage it in the same internal style as the rest of emdash2:
+    - `univ_equiv_of_path` as a section / displayed functor out of `Terminal_catd (Path_cat (x=y))`,
+    - `univ_path_of_equiv` as a functor out of `Total_cat (isEquiv x y)` into `Path_cat (x=y)`,
+  while keeping the rewrite-vs-unif direction split to avoid loops.
 */
 
 // From a path p : x=y, build a canonical witness that the induced 1-cell is an equivalence.           // path ⇒ isEquiv
