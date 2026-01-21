@@ -111,7 +111,8 @@ Internal:
 
 Surface reading:
 
-- `⊢ A,B : Cat`
+- `⊢ A : Cat`
+- `⊢ B : Cat`
 - `x : A ⊢ F[x] : B`
 
 (`x:A` indicates functorial variation; no additional “preservation laws” are stated at the surface
@@ -153,7 +154,8 @@ Internal:
 
 Surface facade (NOT a projection rule; just the meaning of `ϵ : Obj(Transf_cat F G)`):
 
-- `⊢ A,B : Cat`
+- `⊢ A : Cat`
+- `⊢ B : Cat`
 - `x : A ⊢ F[x] : B`
 - `x : A ⊢ G[x] : B`
 - `x : A ⊢ ϵ[x] : F[x] → G[x]`

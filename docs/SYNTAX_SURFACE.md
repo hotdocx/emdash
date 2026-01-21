@@ -68,9 +68,41 @@ For a generic displayed category `E : Catd Z` (not known to be Grothendieck), we
 
 ## 3. Core judgments (ω-categorical reading)
 
-- `C : Cat`
-- `x : C` means `x : Obj(C)` (internally `x : τ(Obj C)`)
-- `f : x →_C y` means `f : Obj(Hom_cat C x y)` (internally `f : τ(Obj(Hom_cat C x y))`)
+Judgments are written in a TT style using `⊢` lines.
+
+Core formation:
+
+```
+⊢ C : Cat
+⊢ x : C
+⊢ y : C
+⊢ Hom_C(x,y) : Cat
+```
+
+Arrow (1-cell) binder discipline:
+
+```
+⊢ C : Cat
+x :^- C, y : C ⊢ f : x → y
+```
+
+Internally, `x : C` abbreviates `x : τ(Obj C)` and `f : x → y` abbreviates
+`f : τ(Obj(Hom_cat C x y))`.
+
+Identity and composition (surface):
+
+```
+⊢ C : Cat
+⊢ x : C
+⊢ id_x : x → x
+
+⊢ C : Cat
+⊢ x, y, z : C
+g : y → z, f : x → y ⊢ g ∘ f : x → z
+```
+
+In the kernel, `comp_fapp0` is the pointwise constructor for `g∘f`, while `comp_func` is its internal
+functorial packaging `∘ : Hom(y,z)×Hom(x,y) → Hom(x,z)`.
 
 Higher cells iterate by taking hom-categories again:
 
@@ -80,8 +112,12 @@ Higher cells iterate by taking hom-categories again:
 
 Classifier reading:
 
-- `F : A → B` means:
-  - `x : A ⊢ F[x] : B`
+```
+⊢ A : Cat
+⊢ B : Cat
+⊢ F : A → B
+x : A ⊢ F[x] : B
+```
 
 The action on arrows `F[f]` is **surface-silent**: writing `x:A` already conveys functoriality.
 
@@ -89,13 +125,21 @@ The action on arrows `F[f]` is **surface-silent**: writing `x:A` already conveys
 
 Displayed categories:
 
-- `E : Catd Z` means:
-  - `z:^o Z ⊢ E[z] : Cat`
+```
+⊢ Z : Cat
+⊢ E : Catd Z
+z :^o Z ⊢ E[z] : Cat
+```
 
 Displayed functors (slice-style over the same base):
 
-- `FF : E ⟶_Z D` means:
-  - `z:^o Z, e : E[z] ⊢ FF[e] : D[z]`
+```
+⊢ Z : Cat
+⊢ E : Catd Z
+⊢ D : Catd Z
+⊢ FF : E ⟶_Z D
+z :^o Z, e : E[z] ⊢ FF[e] : D[z]
+```
 
 Internally, this elaborates to:
 
@@ -106,12 +150,25 @@ Internally, this elaborates to:
 
 Classifier reading:
 
-- `ϵ : F ⇒ G` (i.e. `ϵ : Transf_cat(F,G)`) means:
-  - `x : A ⊢ ϵ[x] : F[x] → G[x]`
+```
+⊢ A : Cat
+⊢ B : Cat
+⊢ F : A → B
+⊢ G : A → B
+⊢ ϵ : Transf(F,G)
+x : A ⊢ ϵ[x] : F[x] → G[x]
+```
 
 Explicit off-diagonal (arrow-indexed) component:
 
-- `x :^- A, y : A, f : x → y ⊢ ϵ_(f) : F[x] → G[y]`
+```
+⊢ A : Cat
+⊢ B : Cat
+⊢ F : A → B
+⊢ G : A → B
+⊢ ϵ : Transf(F,G)
+x :^- A, y : A, f : x → y ⊢ ϵ_(f) : F[x] → G[y]
+```
 
 This is the surface form of the internal stable head `tapp1_fapp0` (via `tapp1_*` packaging).
 
@@ -136,7 +193,9 @@ Given:
 
 For `σ : homd_cov_int(Z,E,D0,FF)`, we read:
 
-`z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]`.
+```
+z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]
+```
 
 ## 9. Displayed transfors and explicit simplicial/off-diagonal components
 
@@ -148,12 +207,15 @@ Let:
 
 Classifier reading (diagonal component; silent `tdapp0_*`):
 
-- `z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]`
+```
+z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]
+```
 
 Explicit simplicial/off-diagonal component (analogue of ordinary `ϵ_(f)`):
 
-`z:^o Z, e:E0[z], z':Z, f:z→z', e':E0[z'], σ:e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`.
+```
+z:^o Z, e:E0[z], z':Z, f:z→z', e':E0[z'], σ:e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']
+```
 
 This is the surface reading of the internal `tdapp1_int_*` packaging (in particular `tdapp1_int_fapp0_transfd`)
 that turns a displayed transfor into its over-a-base-arrow components.
-
