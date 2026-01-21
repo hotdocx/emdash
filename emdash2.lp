@@ -9,6 +9,31 @@
 flag "eta_equality" on;                                                         // enable η-reduction in definitional equality (normalization)
 
 /*
+  Surface syntax legend (emdash; see also docs/SYNTAX_SURFACE.md)
+
+  The emdash surface language is intended to look like ordinary dependent type theory, but with an
+  explicit binder discipline for variance.
+
+  Binder modes (objects of a category A):
+    - `x : A`     functorial index (varies functorially; e.g. arises from F : Obj(Functor_cat A B))
+    - `x :^- A`   contravariant index (used for “accumulation” / arrow-indexed components like ϵ_(f))
+    - `x :^o A`   object-only index (default for generic displayed categories E : Catd A)
+
+  Silent elaborations (surface sugar; inserted by elaboration):
+    - `τ` is silent.
+    - `E[x]` elaborates to `Fibre_cat E x` (fibre of a displayed category).
+    - `F[x]` elaborates to `fapp0 F x` (object-action of a functor).
+    - “Diagonal components” are silent:
+        * `ϵ[x]` is the surface reading of `ϵ : Obj(Transf_cat F G)`,
+        * `ϵ[e]` is the surface reading of `ϵ : Obj(Transfd_cat FF GG)`.
+      The explicit constructor is the off-diagonal/arrow-indexed component ϵ_(…).
+
+  Silent Grothendieck coercion:
+    if `D0 : Z ⟶ Cat` (i.e. `D0 : Obj(Functor_cat Z Cat_cat)`), then `Fibration_cov_catd D0 : Catd Z`
+    is treated as a silent coercion, and we keep the functorial binder `z : Z` for `D0[z]`.
+*/
+
+/*
   Rewriting hygiene (important for performance and robustness)
 
   Lambdapi rewrite rules are matched modulo conversion and are typechecked for subject reduction.
@@ -175,6 +200,7 @@ inductive nat : TYPE ≔                                                        
 constant symbol Cat : TYPE;                                                                         // classifier of (strict/lax) ω-categories
 
 // Objects of a category form a groupoid (`Grpd`), not just a set.                                   // higher-categorical “objects up to paths”
+// Surface: C:Cat ⊢ (x:C) means x : τ(Obj C)                                                          // binder convention
 //
 // IMPORTANT (design): `Obj` is intentionally *not* injective in this development.
 // Reason: we want definitional equalities like `Obj (Op_cat A) ↪ Obj A` (and `τ` is injective),
@@ -182,9 +208,11 @@ constant symbol Cat : TYPE;                                                     
 symbol Obj : Cat → Grpd;                                                                            // object classifier of a category
 
 // Hom_cat is itself a category: for X,Y : Obj(A), Hom_A(X,Y) : Cat.                                     // hom-categories (enriched/globular view)
+// Surface: C:Cat, x:C, y:C ⊢ Hom_C(x,y) : Cat                                                        // f : x→_C y abbreviates f : Obj(Hom_C(x,y))
 injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;                            // hom-category as a Cat
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
+// Surface: C:Cat, x:C ⊢ id_x : x →_C x
 injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_A X_A));        // id_X : Obj(Hom_cat_A(X,X))
 
 // -------------------------------------------------------------------------------------------------
@@ -192,6 +220,7 @@ injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Obj (@Hom_cat A X_
 // -------------------------------------------------------------------------------------------------
 
 injective symbol Op_cat : Cat → Cat;                                                                 // opposite category operation
+// Surface: C:Cat ⊢ C^op : Cat                                                                        // opposite category
 rule Op_cat (Op_cat $A) ↪ $A;                                                                        // involutive law: (Aᵒᵖ)ᵒᵖ ≡ A
 
 // Objects are unchanged by opposite.                                                                // Obj(Aᵒᵖ) ≡ Obj(A)
@@ -232,6 +261,7 @@ constant symbol Terminal_cat : Cat;
 */
 
 // Composition at object-level in a hom-category: (g : Hom_cat(Y,Z)) and (f : Hom_cat(X,Y)) compose to Hom_cat(X,Z). // pointwise / computational
+// Surface: C:Cat, x,y,z:C, g:y→z, f:x→y ⊢ g∘f : x→z                                                   // stable head comp_fapp0
 symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)], // ambient A and objects
   Π (g: τ (Obj (@Hom_cat A Y_A Z_A))), Π (f: τ (Obj (@Hom_cat A X_A Y_A))),                                // composable morphisms g ∘ f
   τ (Obj (@Hom_cat A X_A Z_A));                                                                           // composite morphism in Hom_cat_A(X,Z)
@@ -413,12 +443,14 @@ assert [A : Grpd] ⊢ Op_cat (Path_cat A) ≡ Path_cat A;
 // -------------------------------------------------------------------------------------------------
 
 // The “functor category” between A and B (objects are functors, morphisms are transformations).     // internal functor category
+// Surface: ⊢ A,B:Cat,  F:A→B  means  x:A ⊢ F[x] : B                                                  // classifier reading
 constant symbol Functor_cat : Π (A B : Cat), Cat;                                            // Functor_cat(A,B) : Cat
 
 // Inference helper (since `Obj` is not injective): allow recovering the domain/codomain cats from an equality of functor-object classifiers. // replaces prior convenience
 unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'; $B ≡ $B' ];
 
 // Action of a functor on objects.                                                                   // F₀ : Obj(A) → Obj(B)
+// Surface (silent elaboration): F[x] elaborates to fapp0 F x                                          // no explicit F[f] term former
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Obj (Functor_cat A B))),                            // functor object F ∈ Obj(Functor_cat(A,B))
   τ (Obj A) → τ (Obj B);                                                                            // send X_A ↦ F_AB(X_A)
 
@@ -771,6 +803,7 @@ assert [A B : Cat] (F : τ (Obj (Functor_cat B A))) (X : τ (Obj (Op_cat A))) (Y
 // -------------------------------------------------------------------------------------------------
 
 // `Catd B` is the type of (mere) isofibrations over `B` (a.k.a. displayed categories with iso-lifts). // isofibration objects over B
+// Surface: ⊢ Z:Cat, E:Catd Z  means  z:^o Z ⊢ E[z] : Cat                                             // object-only by default
 // Concretely, an element `E : Catd B` should be thought of as a functor `p : Total_cat(E) ⟶ B`        // p : E → B
 // together with an implicit/axiomatized “iso-lifting” interface (to be made explicit later).          // iso-lifts interface (future)
 // It is therefore sound to *talk about* Cat/B intuition in comments, but the intended subtype is:     // Catd ⊆ Cat/B
@@ -880,6 +913,7 @@ symbol Fibration_con_catd [A : Cat]
 // `Functord_cat E D` is the category of functors over a fixed base `B` (in the isofibration slice).    // Fun_B(E,D) / hom in Cat/B
 // Usual notation: if `p:E⟶B` and `q:D⟶B`, then an object of `Functord_cat(E,D)` is a functor `F:E⟶D`
 // such that `q ∘ F = p` (i.e. a morphism in the slice category `Cat/B`).                               // commuting triangle
+// Surface: ⊢ Z:Cat, E,D:Catd Z, FF:E⟶_Z D  means  z:^o Z, e:E[z] ⊢ FF[e] : D[z]                      // fibrewise action
 constant symbol Functord_cat : Π [B : Cat], Π (E D : Catd B), Cat;                          // Functord_cat(E,D) : Cat
 
 // Inference helper (since `Obj` is not injective): allow recovering the base and displayed cats from an equality of displayed-functor classifiers. // replaces prior convenience
@@ -1047,6 +1081,7 @@ rule Op_funcd (@Op_funcd $Z $E $D $FF) ↪ $FF;
 // -------------------------------------------------------------------------------------------------
 
 // `Transf_cat(F,G)` is the category of natural transformations between F and G (and higher cells).      // 2-cells (and beyond)
+// Surface: ⊢ A,B:Cat, F,G:A→B, ϵ:Transf(F,G)  means  x:A ⊢ ϵ[x] : F[x] → G[x]                         // diagonal is silent
 constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Obj (Functor_cat A B))), Cat; // Transf_cat(F,G) : Cat
 
 /*
@@ -1963,6 +1998,21 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
     (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
       (comp_cat_fapp0 Fib_func (homd_cov_int_base D0))))));
 
+/*
+  Surface (simplicial / “over a base arrow”) reading of homd_cov_int:
+
+    Z : Cat
+    E : Catd Z
+    D0 : (z:Z ⊢ D0[z] : Cat)                      // functorial family (Grothendieck probe domain)
+    FF : (z:^o Z, d:D0[z] ⊢ FF[d] : E[z])         // probe into E (note: E forces z:^o)
+
+  For σ : homd_cov_int(Z,E,D0,FF):
+
+    z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]
+
+  where `→_f` means a displayed arrow in E lying over the base edge f.
+*/
+
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
   (W_EW : τ (Obj (Fibre_cat E W_Z))), Π [D : Catd Z], Π (FF : τ (Obj (Functord_cat D E))),                 // W in fibre, D another displayed cat, FF : D→E
@@ -2797,6 +2847,22 @@ symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
     (homd_cov_int E0 id_funcd)
     (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))));
 
+/*
+  Surface reading (displayed analogue of ordinary ϵ_(f), using simplicial displayed arrows):
+
+    Z : Cat
+    E0 : (z:Z ⊢ E0[z] : Cat)                      // functorial probe domain (Grothendieck)
+    D  : Catd Z
+    FF,GG : (z:^o Z, e:E0[z] ⊢ FF[e] : D[z])
+    ϵ : Transfd(FF,GG)  means  z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]        // diagonal (silent)
+
+  Explicit off-diagonal / over-a-base-arrow component:
+
+    z:^o Z, e:E0[z], z':Z, f:z→z', e':E0[z'], σ:e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e'].
+
+  This is the intended surface meaning of the internal packaging `tdapp1_int_fapp0_transfd` (and friends).
+*/
+
 // β-rule: object-action of tdapp1_int_func_transfd folds to tdapp1_int_fapp0_transfd.                         // unpack tdapp1_int_func_transfd at objects
 rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $GG) $ϵ
   ↪ @tdapp1_int_fapp0_transfd $Z $E0 $D $FF $GG $ϵ;
@@ -3285,6 +3351,16 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))]
   Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
   Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
   τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 G_AB Y_A)));
+
+/*
+  Surface (explicit off-diagonal / arrow-indexed component):
+
+    ⊢ A,B:Cat, F,G:A→B, ϵ:Transf(F,G)
+    x:^-A, y:A, f:x→y ⊢ ϵ_(f) : F[x] → G[y]
+
+  This is the unique explicit “component constructor” for ordinary transfors in the surface language.
+  Diagonal `x:A ⊢ ϵ[x] : F[x] → G[x]` is the classifier reading of `ϵ : Obj(Transf_cat F G)` and is silent.
+*/
 
 // Canonicalization: fold “apply ϵ^X at f” toward the stable head `tapp1_fapp0`.                       // fdapp0(tapp1_fapp0_funcd, f) ↪ tapp1_fapp0
 rule @fdapp0 $A

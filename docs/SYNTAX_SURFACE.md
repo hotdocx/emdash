@@ -1,0 +1,159 @@
+# SYNTAX_SURFACE.md
+
+Surface type-theoretic syntax for **emdash2** (ω-categories, displayed categories, transfors).
+
+This document describes the *intended surface language* and how it is meant to elaborate to the
+kernel implemented in `emdash2.lp`.
+
+Important discipline:
+
+- Functoriality / naturality / contravariance are carried by **binder notation** and by *classifier*
+  declarations (e.g. “`ϵ : Transf_cat(F,G)`”), not by explicit “naturality proof terms” in typing rules.
+- Many kernel projections are **silent** at the surface level (like `τ` in Lambdapi).
+
+Operational semantics (reductions) are implemented by Lambdapi rewrite rules and are documented
+separately; this file focuses on surface *formation/typing*.
+
+## 1. Binder modes (variance)
+
+We use three binder annotations for variables ranging over objects of categories.
+
+### 1.1 Functorial binder: `x : A`
+
+`x : A ⊢ …`
+
+Meaning: `x` is a *functorial index* (a variable meant to vary functorially). This is the default
+when the dependency arises from a functor object (an object of a functor-category).
+
+Example:
+
+- `F : A → B` means “`x : A ⊢ F[x] : B`”.
+
+### 1.2 Contravariant binder: `x :^- A`
+
+`x :^- A ⊢ …`
+
+Meaning: `x` is a *contravariant index*, used for “accumulation”/composition laws of arrow-indexed
+components (e.g. `ϵ_(f)`).
+
+This binder is preferred over writing `A^op` in surface syntax.
+
+### 1.3 Object-only binder: `x :^o A`
+
+`x :^o A ⊢ …`
+
+Meaning: `x` is **object-only**: substitution is only along *paths* (equalities) in `Obj(A)`; we do
+**not** assume any implicit transport along base arrows `f : x → y` in `A`.
+
+This is the default binder for variables ranging over generic displayed categories `E : Catd A`.
+
+## 2. Silent elaborations (“τ-like” behavior)
+
+The following are expected to be silent in surface syntax and inserted by elaboration:
+
+- `τ` (decoding a `Grpd`-code to an actual type)
+- `Fibre_cat` (fibre of a displayed category): we write `E[x]` and elaborate to `Fibre_cat E x`
+- `fapp0` (object-action of a functor): we write `F[x]` and elaborate to `fapp0 F x`
+- “diagonal components” of transfors:
+  - `ϵ[x]` is the surface reading of `ϵ : Transf_cat(F,G)` (no explicit `tapp0_fapp0`)
+  - `ϵ[e]` is the surface reading of `ϵ : Transfd_cat(FF,GG)` (no explicit `tdapp0_fapp0`)
+
+Special silent coercion (Grothendieck):
+
+- If the user has a functorial family `D0 : (z:Z ⊢ D0[z] : Cat)` (i.e. `D0 : Z ⟶ Cat`),
+  then the displayed category `Fibration_cov_catd D0 : Catd Z` is *silently* available at the surface,
+  and we keep the functorial binder `z:Z` for `D0[z]`.
+
+For a generic displayed category `E : Catd Z` (not known to be Grothendieck), we use `z:^o Z`.
+
+## 3. Core judgments (ω-categorical reading)
+
+- `C : Cat`
+- `x : C` means `x : Obj(C)` (internally `x : τ(Obj C)`)
+- `f : x →_C y` means `f : Obj(Hom_cat C x y)` (internally `f : τ(Obj(Hom_cat C x y))`)
+
+Higher cells iterate by taking hom-categories again:
+
+- 2-cells between `f,g : x→y` are objects of `Hom_cat (Hom_cat C x y) f g`, etc.
+
+## 4. Functors
+
+Classifier reading:
+
+- `F : A → B` means:
+  - `x : A ⊢ F[x] : B`
+
+The action on arrows `F[f]` is **surface-silent**: writing `x:A` already conveys functoriality.
+
+## 5. Displayed categories and displayed functors
+
+Displayed categories:
+
+- `E : Catd Z` means:
+  - `z:^o Z ⊢ E[z] : Cat`
+
+Displayed functors (slice-style over the same base):
+
+- `FF : E ⟶_Z D` means:
+  - `z:^o Z, e : E[z] ⊢ FF[e] : D[z]`
+
+Internally, this elaborates to:
+
+- `E[z]` ↦ `Fibre_cat E z`
+- `FF[e]` ↦ `fdapp0 FF z e`
+
+## 6. Transfors (ordinary) and explicit arrow-indexed components
+
+Classifier reading:
+
+- `ϵ : F ⇒ G` (i.e. `ϵ : Transf_cat(F,G)`) means:
+  - `x : A ⊢ ϵ[x] : F[x] → G[x]`
+
+Explicit off-diagonal (arrow-indexed) component:
+
+- `x :^- A, y : A, f : x → y ⊢ ϵ_(f) : F[x] → G[y]`
+
+This is the surface form of the internal stable head `tapp1_fapp0` (via `tapp1_*` packaging).
+
+## 7. “Over a base arrow” displayed morphisms (`→_f`)
+
+Let `Z : Cat`, `E : Catd Z`.
+
+- Base arrow: `f : z → z'` in `Z`
+- Displayed arrow over `f`: `σ : e →_f e'` where `e : E[z]` and `e' : E[z']`
+
+This is the Grothendieck/simplicial “morphism over a base edge” notion used by the `homd_cov_*`
+layer.
+
+## 8. Dependent-hom (simplicial) components: `homd_cov_int`
+
+Given:
+
+- `Z : Cat`
+- `E : Catd Z`
+- `D0 : (z:Z ⊢ D0[z] : Cat)` (a functorial family, `Z ⟶ Cat`)
+- `FF : (z:^o Z, d : D0[z] ⊢ FF[d] : E[z])` (a probe into `E`)
+
+For `σ : homd_cov_int(Z,E,D0,FF)`, we read:
+
+`z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]`.
+
+## 9. Displayed transfors and explicit simplicial/off-diagonal components
+
+Let:
+
+- `E0 : (z:Z ⊢ E0[z] : Cat)` (i.e. `E0 : Z ⟶ Cat`)
+- `FF, GG : (z:^o Z, e:E0[z] ⊢ FF[e] : D[z])` (displayed functors out of `∫E0`)
+- `ϵ : Transfd_cat(FF,GG)`
+
+Classifier reading (diagonal component; silent `tdapp0_*`):
+
+- `z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]`
+
+Explicit simplicial/off-diagonal component (analogue of ordinary `ϵ_(f)`):
+
+`z:^o Z, e:E0[z], z':Z, f:z→z', e':E0[z'], σ:e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`.
+
+This is the surface reading of the internal `tdapp1_int_*` packaging (in particular `tdapp1_int_fapp0_transfd`)
+that turns a displayed transfor into its over-a-base-arrow components.
+
