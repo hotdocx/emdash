@@ -947,6 +947,50 @@ assert [A : Cat] (F : τ (Obj (Functor_cat A (Op_cat Cat_cat)))) ⊢
 // This is the displayed analogue of cartierSolution13's `Fibre_catd (Terminal_catd _) _ ↪ Terminal_catd _`. // terminal fibres
 rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
 
+/*
+  Univalence bridge (interface only; moved here because it depends on Fibre_cat)
+
+  Long-term goal: “equivalences in C ARE paths in Obj C”, as computationally/definitionally as possible.
+
+  We implement the bridge with:
+    - a *rewrite* direction (β): path ⇒ equivalence witness (canonical constructor),
+    - a *unification* direction (η-ish): equivalence witness ⇒ path, used as a typing/elaboration hint,
+      to avoid rewrite loops.
+
+  Important: this is only an interface now. It does not yet *define* what an equivalence is.
+
+  It links:
+    - paths `p : x = y` in `Obj C`,
+    - 1-cells `f : Hom_cat C x y` (via `path_to_hom_fapp0`),
+    - and witnesses in the fibre `Fibre_cat (isEquiv C x y) f`.
+*/
+
+// From a path p : x=y, build a canonical witness that the induced 1-cell is an equivalence.           // path ⇒ isEquiv
+constant symbol univ_equiv_of_path : Π [C : Cat], Π (x y : τ (Obj C)),
+  Π (p : τ (x = y)),
+  τ (Obj (@Fibre_cat (@Hom_cat C x y) (isEquiv x y) (@path_to_hom_fapp0 C x y p)));
+
+// From an equivalence witness for f, extract the corresponding path x=y.                              // isEquiv ⇒ path
+symbol univ_path_of_equiv : Π [C : Cat], Π (x y : τ (Obj C)),
+  Π (f : τ (Obj (@Hom_cat C x y))),
+  τ (Obj (@Fibre_cat (@Hom_cat C x y) (isEquiv x y) f)) → τ (x = y);
+
+// β: extracting the path of the canonical path-witness returns the original path.                    // univ_path(univ_equiv(p)) ↪ p
+rule @univ_path_of_equiv $C $x $y (@path_to_hom_fapp0 $C $x $y $p) (@univ_equiv_of_path $C $x $y $p)
+  ↪ $p;
+
+// Unification hint (η-ish):
+// if a witness w : isEquiv(f) yields path p, then f is (definitionally) the path-induced 1-cell,
+// and w is the canonical witness for that path.                                                      // avoid rewrite loops; guides elaboration
+unif_rule @univ_path_of_equiv $C $x $y $f $w ≡ $p
+  ↪ [ $f ≡ @path_to_hom_fapp0 $C $x $y $p;
+      $w ≡ @univ_equiv_of_path $C $x $y $p ];
+
+// Sanity: β-rule for the univalence bridge is visible by definitional equality.                      // univ_path(univ_equiv(p)) = p
+assert [C : Cat] (x y : τ (Obj C)) (p : τ (x = y)) ⊢
+  @univ_path_of_equiv C x y (@path_to_hom_fapp0 C x y p) (@univ_equiv_of_path C x y p)
+    ≡ p;
+
 // Sanity (derived instance): representable fibration.                                                 // fibre(∫Hom(X,F-),x) ≡ Hom(X,Fx)
 // This is not an extra computation rule: it follows by rewriting with the general Grothendieck fibre
 // rule above and the `hom_cov` object-action rule `fapp0 (hom_cov X F) x ↪ Hom_cat X (fapp0 F x)`.
