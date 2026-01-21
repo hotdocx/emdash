@@ -1257,6 +1257,58 @@ injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));       
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;                                                             // snd(x,px) ↪ px
 
 // -------------------------------------------------------------------------------------------------
+// 9a. Draft: ω-style equivalence witnesses for 1-cells (isEquiv fibres)                              // invertibility interface
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Goal (first concrete witness structure; still draft):
+
+  We want `isEquiv C x y : Catd(Hom_cat C x y)` to have fibres containing witness data that a 1-cell
+  `f : x→y` is an ω-equivalence/isomorphism.
+
+  Important constraints / current state:
+  - We do NOT yet have the full “whiskering / triangle / higher coherence” interface needed to state
+    adjoint-equivalence triangle identities computationally in full generality.
+  - We therefore start with a minimal-but-ω-typed witness record that already distinguishes left and
+    right inverses, and includes unit/counit 2-cells (as genuine 2-cells, not as equalities).
+
+  Current witness data (for f : x→y):
+    - gL : y→x   (left inverse candidate)
+    - gR : y→x   (right inverse candidate)
+    - η  : id_x  ⇒  gL∘f      (unit 2-cell)
+    - ε  : f∘gR  ⇒  id_y      (counit 2-cell)
+    - δ  : gL    ⇒  gR        (2-cell relating the two inverses)
+
+  We package the fibre category as a path category on this witness type. This makes the witness
+  category groupoidal by construction (morphisms are paths between witness records).
+
+  TODO (later):
+    - replace the Path_cat wrapper by a richer witness category if needed (proof-relevant non-groupoidal
+      witness morphisms),
+    - add triangle / coherence data using simplicial/whiskering infrastructure (likely via tapp/tdapp
+      style packagings and homd_cov),
+    - connect to the univalence bridge symbols `univ_equiv_of_path` / `univ_path_of_equiv`.
+*/
+
+// Code-level witness type (in Grpd) for “f is an equivalence”.                                      // witness classifier
+symbol isEquiv_grpd : Π [C : Cat],
+  Π (x y : τ (Obj C)),
+  Π (f : τ (Obj (@Hom_cat C x y))),
+  Grpd
+≔ λ C x y f,
+    let hom_yx ≔ Obj (@Hom_cat C y x) in
+    @Σ_ hom_yx (λ gL,
+    @Σ_ hom_yx (λ gR,
+      let end_x ≔ @comp_fapp0 C x y x gL f in
+      let end_y ≔ @comp_fapp0 C y x y f gR in
+      @Σ_ (Obj (@Hom_cat (@Hom_cat C x x) (@id C x) end_x)) (λ η,
+      @Σ_ (Obj (@Hom_cat (@Hom_cat C y y) end_y (@id C y))) (λ ε,
+        Obj (@Hom_cat (@Hom_cat C y x) gL gR)))));
+
+// Fibre computation: witnesses for f live in the path category of the witness type.                 // fibre(isEquiv,f) ↪ Path_cat(witness)
+rule @Fibre_cat (@Hom_cat $C $x $y) (@isEquiv $C $x $y) $f ↪ Path_cat (@isEquiv_grpd $C $x $y $f);
+
+// -------------------------------------------------------------------------------------------------
 // 10. Total category / comprehension (Grothendieck category of elements)                             // ∫ / context extension
 // -------------------------------------------------------------------------------------------------
 
