@@ -21,36 +21,63 @@
 \begin{document}
 \pagenumbering{gobble}
 
-\title{Title of Your Talk Goes Here}
+\title{Functorial Programming for $\omega$-Categories in Lambdapi:\\
+Internal Dependent Homs and Computational Adjunctions}
 % PRESENTER NAME ONLY - do not list coauthors here
-\author{Your Name}
+\author{m--- / emdash project}
 % LEAVE THE DATE BLANK
 \date{}\maketitle
 
-% ADDITIONAL CO-AUTHORS (delete line if not applicable)
-\coauthors{First Coauthor, Second Coauthor}
+We report on an ongoing experiment, \texttt{emdash2.lp}, aimed at an \emph{internal} and
+\emph{computational} specification of (strict/lax) $\omega$-categorical structures inside the
+Lambdapi logical framework \cite{lambdapi}. The guiding principle is ``functorial programming'' in the
+sense that typing expresses variance and higher coherence, while normalization is driven by a
+carefully oriented rewrite/unification layer. This perspective is inspired by the proof-theoretic
+reading of categorical structure advocated by Do{\v{s}}en and Petri{\'c} \cite{dosen-petric99}.
 
-This is where you write the main body of your abstract.
-Replace this text with a description of your work.
-You can use standard mathematical notation and symbols.
-Here is an example of a displayed equation:
+A recurring technical obstacle for $\omega$-categorical computation is \emph{iteration}: operations on
+cells should not collapse higher structure prematurely. In \texttt{emdash2}, cells are represented
+relatively (an $(n{+}1)$-cell is a relative $1$-cell in an iterated hom-category), and rewrite rules
+are designed to preserve ``functor-headed'' normal forms whenever further iteration may be needed.
+This is reflected in an explicit split between (i) pointwise evaluation symbols and (ii) packaged
+``stable heads'' whose $\beta$-rules unfold only when a concrete cell is supplied.
+
+Within this discipline, we emphasize a simplicial/Grothendieck presentation of higher data.
+The internal covariant hom construction
+\texttt{hom\_cov\_int} packages the bifunctorial hom as a functor
+$A^{\mathrm{op}}\to (B\to \mathbf{Cat})$.
+Its dependent analogue \texttt{homd\_cov\_int} (built from a base \texttt{homd\_cov\_int\_base})
+internalizes a ``triangle/surface classifier'' for displayed categories:
+it organizes $2$-cell-like data as morphisms \emph{over a base arrow} (the start of a $3$-simplex),
+while remaining amenable to definitional computation in the Grothendieck/Grothendieck case.
+This makes it possible to express and iterate ``components of components'' uniformly, via the
+\texttt{tapp1*}/\texttt{tdapp1*} projection packagings for transfors and displayed transfors, and the
+component extractors \texttt{tapp0\_fapp0}/\texttt{tdapp0\_fapp0}.
+
+As an application, we outline a computational treatment of adjunctions in which unit and counit are
+transfors and the triangle identities are oriented as \emph{cut-elimination} steps on composites.
+Concretely, \texttt{emdash2} defines an adjunction datum \texttt{adj} together with arrow-indexed
+components (via \texttt{tapp1\_fapp0}), and includes a prototype ``triangle cut'' rewrite
+implementing the reduction
 \[
-\hom_{\mathcal{C}}(F(X), Y) \cong \hom_{\mathcal{D}}(X, G(Y))
+\varepsilon_f \circ L(\eta_g)\;\;\rightsquigarrow\;\; f \circ L(g),
 \]
-where $F \colon \mathcal{C} \to \mathcal{D}$ and $G \colon \mathcal{D} \to \mathcal{C}$ are functors.
-Remember that your abstract must fit on one page, including the bibliography, which should only include explicitly cited items, pointing either to the present work \cite{preprint} or to relevant background material \cite{eilenberg-kelly,maclane}.
+mirroring the eliminations studied in \cite{dosen-petric99}. The long-term goal is to extend this
+normalization story from the $2$-categorical core to the full $\omega$-setting by replacing strict
+naturality postulates with higher (simplicial) data mediated by \texttt{homd\_cov\_int}.
 
 % DELETE IF NOT INCLUDING REFERENCES
 \begin{thebibliography}{1}
 
-\bibitem{eilenberg-kelly}
-S.~Eilenberg and G.~M.~Kelly, \emph{A generalization of the functorial calculus}, J.\ Algebra~\textbf{3} (1966), 366--375.
+\bibitem{dosen-petric99}
+K.~Do{\v{s}}en and Z.~Petri{\'c},
+\emph{Cut-Elimination in Categories},
+Kluwer Academic Publishers, 1999.
 
-\bibitem{maclane}
-S.~Mac Lane, \emph{Categories for the Working Mathematician}, second ed., Grad.\ Texts in Math., vol.~5, Springer, 1998.
-
-\bibitem{preprint}
-A.~Person, \emph{Full name of preprint}, preprint \href{https://arxiv.org/abs/1234.56789}{arXiv:1234.56789}, 2024.
+\bibitem{lambdapi}
+F.~Blanqui \emph{et al.},
+\emph{The Lambdapi Logical Framework},
+\href{https://github.com/Deducteam/lambdapi}{https://github.com/Deducteam/lambdapi}.
 
 \end{thebibliography}
 
