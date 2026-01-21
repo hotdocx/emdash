@@ -21,50 +21,52 @@
 \begin{document}
 \pagenumbering{gobble}
 
-\title{Functorial Programming for $\omega$-Categories in Lambdapi:\\
-Internal Dependent Homs and Computational Adjunctions}
+\title{Bridge-Type Inspired $\omega$-Categories:\\
+Dependent Comma Objects, Simplicial Presentation, and Cut-Elimination}
 % PRESENTER NAME ONLY - do not list coauthors here
 \author{m--- / emdash project}
 % LEAVE THE DATE BLANK
 \date{}\maketitle
 
-We report on an ongoing experiment, \texttt{emdash2.lp}, aimed at an \emph{internal} and
-\emph{computational} specification of (strict/lax) $\omega$-categorical structures inside the
-Lambdapi logical framework \cite{lambdapi}. The guiding principle is ``functorial programming'' in the
-sense that typing expresses variance and higher coherence, while normalization is driven by a
-carefully oriented rewrite/unification layer. This perspective is inspired by the proof-theoretic
-reading of categorical structure advocated by Do{\v{s}}en and Petri{\'c} \cite{dosen-petric99}.
+We report on an ongoing experiment, \texttt{emdash2.lp}, whose goal is a new \emph{type-theoretical}
+definition of $\omega$-categories that is both \emph{internal} (expressed inside dependent type
+theory) and \emph{computational} (amenable to normalization by rewriting).
+The implementation target is the Lambdapi logical framework \cite{lambdapi}, and the broader
+methodological inspiration is the proof-theoretic viewpoint that categorical equalities should be
+presented as normalization steps (``cut-elimination'') \cite{dosen-petric99}.
 
-A recurring technical obstacle for $\omega$-categorical computation is \emph{iteration}: operations on
-cells should not collapse higher structure prematurely. In \texttt{emdash2}, cells are represented
-relatively (an $(n{+}1)$-cell is a relative $1$-cell in an iterated hom-category), and rewrite rules
-are designed to preserve ``functor-headed'' normal forms whenever further iteration may be needed.
-This is reflected in an explicit split between (i) pointwise evaluation symbols and (ii) packaged
-``stable heads'' whose $\beta$-rules unfold only when a concrete cell is supplied.
+The central construction is inspired by the recent ``bridge type'' approach to internal parametricity
+without an interval \cite{altenkirch-chamoun-kaposi-shulman24} and, at the same time, by
+type-theoretic accounts of weak higher categories \cite{finster-mimram17}.
+Instead of starting from a globular presentation and then postulating a large family of coherence
+cells, we use a \emph{dependent comma/arrow (dependent hom) construction} that directly organizes
+``cells over a base arrow'' in a simplicial manner.
 
-Within this discipline, we emphasize a simplicial/Grothendieck presentation of higher data.
-The internal covariant hom construction
-\texttt{hom\_cov\_int} packages the bifunctorial hom as a functor
-$A^{\mathrm{op}}\to (B\to \mathbf{Cat})$.
-Its dependent analogue \texttt{homd\_cov\_int} (built from a base \texttt{homd\_cov\_int\_base})
-internalizes a ``triangle/surface classifier'' for displayed categories:
-it organizes $2$-cell-like data as morphisms \emph{over a base arrow} (the start of a $3$-simplex),
-while remaining amenable to definitional computation in the Grothendieck/Grothendieck case.
-This makes it possible to express and iterate ``components of components'' uniformly, via the
-\texttt{tapp1*}/\texttt{tdapp1*} projection packagings for transfors and displayed transfors, and the
-component extractors \texttt{tapp0\_fapp0}/\texttt{tdapp0\_fapp0}.
+Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally, a fibration
+$E\colon B\to \mathbf{Cat}$). Fix a base object $b\in B$ and a fibre object $e\in E(b)$.
+We construct a Cat-valued functor that assigns to a base arrow $f:b\to b'$ and a fibre object
+$x\in E(b')$ a category of ``morphisms from the transport of $e$ along $f$ to $x$ in the fibre over
+$b'$''. In slogan form, this is a dependent arrow/comma object
+\[
+\mathrm{Hom}^{\mathrm{d}}_E(e,-)\;:\; E \times \bigl(\mathrm{Hom}_B(b,-)\bigr)^{\mathrm{op}} \longrightarrow \mathbf{Cat}.
+\]
+This construction plays the role of a bridge/logical-relations principle for fibrations:
+it internalizes the idea that higher structure can be accessed by varying along a base morphism and
+tracking how fibrewise homs change. Iterating it yields a \emph{simplicial} presentation of higher
+cells (triangles, ``surfaces'', and higher simplices) that makes horizontal ``stacking'' of $2$-cells
+along a $1$-cell particularly direct.
+Compared with parametricity-based formalisations of semi-simplicial structures, we aim to keep the
+interface conceptual and type-theoretic rather than explicitly combinatorial \cite{herbelin-ramachandra24}.
 
-As an application, we outline a computational treatment of adjunctions in which unit and counit are
-transfors and the triangle identities are oriented as \emph{cut-elimination} steps on composites.
-Concretely, \texttt{emdash2} defines an adjunction datum \texttt{adj} together with arrow-indexed
-components (via \texttt{tapp1\_fapp0}), and includes a prototype ``triangle cut'' rewrite
-implementing the reduction
+As an application, we outline a computational formulation of adjunctions in which unit and counit are
+first-class $2$-cell data and the triangle identities are oriented as cut-elimination reductions on
+composites, following \cite{dosen-petric99}. In particular, reductions of the form
 \[
 \varepsilon_f \circ L(\eta_g)\;\;\rightsquigarrow\;\; f \circ L(g),
 \]
-mirroring the eliminations studied in \cite{dosen-petric99}. The long-term goal is to extend this
-normalization story from the $2$-categorical core to the full $\omega$-setting by replacing strict
-naturality postulates with higher (simplicial) data mediated by \texttt{homd\_cov\_int}.
+are definitional computation steps rather than external equalities. The long-term goal is to replace
+strict naturality axioms by higher simplicial data generated by the dependent comma construction,
+scaling cut-elimination for adjunctions from the $2$-categorical core to the full $\omega$-setting.
 
 % DELETE IF NOT INCLUDING REFERENCES
 \begin{thebibliography}{1}
@@ -73,6 +75,24 @@ naturality postulates with higher (simplicial) data mediated by \texttt{homd\_co
 K.~Do{\v{s}}en and Z.~Petri{\'c},
 \emph{Cut-Elimination in Categories},
 Kluwer Academic Publishers, 1999.
+
+\bibitem{altenkirch-chamoun-kaposi-shulman24}
+T.~Altenkirch, Y.~Chamoun, A.~Kaposi, and M.~Shulman,
+\emph{Internal Parametricity, without an Interval},
+Proc.\ ACM Program.\ Lang.\ \textbf{8} (POPL), 2024.
+\href{https://arxiv.org/abs/2307.06448}{arXiv:2307.06448}.
+
+\bibitem{finster-mimram17}
+E.~Finster and S.~Mimram,
+\emph{A Type-Theoretical Definition of Weak $\omega$-Categories},
+2017.
+\href{https://arxiv.org/abs/1706.02866}{arXiv:1706.02866}.
+
+\bibitem{herbelin-ramachandra24}
+H.~Herbelin and R.~Ramachandra,
+\emph{A parametricity-based formalization of semi-simplicial and semi-cubical sets},
+2024.
+\href{https://arxiv.org/abs/2401.00512}{arXiv:2401.00512}.
 
 \bibitem{lambdapi}
 F.~Blanqui \emph{et al.},
