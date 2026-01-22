@@ -167,6 +167,38 @@ body {
   break-inside: avoid;
 }
 
+/* LICS-style overview tables (wide, compact, readable in 2-column). */
+.emdash-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 10.5pt;
+  line-height: 1.3;
+}
+
+.emdash-table th,
+.emdash-table td {
+  border: 1px solid #999;
+  padding: 4px 6px;
+  vertical-align: top;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.emdash-table thead th {
+  background: #f7f7f7;
+}
+
+.emdash-table tr {
+  break-inside: avoid;
+}
+
+.emdash-table code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 9.5pt;
+  white-space: normal;
+}
+
 /* optional */
 /* .layout-two-column .mermaid-container, .layout-two-column .katex-display, .layout-two-column .vega-container { column-span: all; } */
 .layout-two-column .abstract {

@@ -24,7 +24,7 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
         const processAndRender = async () => {
             let processedText = markdown;
 
-            // 1. Pre-process Vega-Lite charts directly to SVG strings
+            // 0. Pre-process Vega-Lite charts directly to SVG strings
             const vegaRegex = /<div class="vega-lite"([^>]*)>([\s\S]*?)<\/div>/g;
             const vegaMatches = Array.from(processedText.matchAll(vegaRegex));
             const vegaResults = await Promise.all(
@@ -42,7 +42,7 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
             );
             for (const result of vegaResults) { processedText = processedText.replace(result.original, result.replacement); }
 
-            // 2. Pre-process Mermaid diagrams
+            // 1. Pre-process Mermaid diagrams
             mermaid.initialize({ startOnLoad: false, theme: 'base' });
             const mermaidRegex = /<div class="mermaid"([^>]*)>([\s\S]*?)<\/div>/g;
             const mermaidMatches = Array.from(processedText.matchAll(mermaidRegex));
@@ -56,7 +56,7 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
             );
             for (const result of mermaidResults) { processedText = processedText.replace(result.original, result.replacement); }
 
-            // 3. Pre-process Arrowgram diagrams
+            // 2. Pre-process Arrowgram diagrams
             const arrowgramRegex = /<div class="arrowgram"([^>]*)>([\s\S]*?)<\/div>/g;
             const arrowgramMatches = Array.from(processedText.matchAll(arrowgramRegex));
             const arrowgramResults = arrowgramMatches.map((match) => {
@@ -72,6 +72,24 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
             });
             for (const result of arrowgramResults) { processedText = processedText.replace(result.original, result.replacement); }
 
+            // 3. Protect raw LaTeX blocks from the Markdown parser.
+            // Showdown may interpret underscores inside `$...$` / `$$...$$` as emphasis, producing `<em>` tags
+            // and breaking KaTeX input. We replace math blocks with placeholders before Markdown,
+            // then restore them right after conversion.
+            const protectedMathBlocks = new Map<string, string>();
+            let mathPlaceholderId = 0;
+            const protectMath = (block: string) => {
+                // Avoid `_` in placeholders: Markdown may interpret underscores as emphasis and mutate them.
+                const placeholder = `AGPROTMATH${mathPlaceholderId++}AGPROT`;
+                protectedMathBlocks.set(placeholder, block);
+                return placeholder;
+            };
+
+            // Protect display math first (can span lines).
+            processedText = processedText.replace(/\$\$[\s\S]+?\$\$/g, protectMath);
+            // Protect inline math (keep it on one line, avoid $$...$$).
+            processedText = processedText.replace(/\$(?!\$)(?:\\.|[^$\\\n])+\$/g, protectMath);
+
             // 4. Convert Markdown to HTML with KaTeX-safe options
             const converter = new showdown.Converter({
                 metadata: true,
@@ -81,11 +99,16 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
             let html = converter.makeHtml(processedText);
             const metadata = converter.getMetadata() as any;
 
+            // Restore protected LaTeX blocks (so the KaTeX pass can see $$...$$ again).
+            for (const [placeholder, originalBlock] of protectedMathBlocks.entries()) {
+                html = html.split(placeholder).join(originalBlock);
+            }
+
             // 5. Process LaTeX math with KaTeX, correctly ignoring code blocks.
             const protectedBlocks = new Map();
             let placeholderId = 0;
             const protectBlock = (block: string) => {
-                const placeholder = `__AG_PROTECTED_BLOCK_${placeholderId++}__`;
+                const placeholder = `AGPROTCODE${placeholderId++}AGPROT`;
                 protectedBlocks.set(placeholder, block);
                 return placeholder;
             };
@@ -96,13 +119,25 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
 
             // Process LaTeX math on the "unprotected" HTML.
             // Display mode: $$...$$
-            html = html.replace(/\$\$([\s\S]+?)\$\$/g, (_match, latex) => katex.renderToString(latex.trim(), { throwOnError: false, displayMode: true }));
+            html = html.replace(/\$\$([\s\S]+?)\$\$/g, (_match, latex) => {
+                const cleaned = latex
+                    .trim()
+                    .replace(/\\\\([A-Za-z_])/g, '\\$1')
+                    .replace(/\\\\([,;:.!])/g, '\\$1');
+                return katex.renderToString(cleaned, { throwOnError: false, displayMode: true });
+            });
             // Inline mode: $...$ (non-greedy)
-            html = html.replace(/\$([^$]+?)\$/g, (_match, latex) => katex.renderToString(latex.trim(), { throwOnError: false, displayMode: false }));
+            html = html.replace(/\$([^$]+?)\$/g, (_match, latex) => {
+                const cleaned = latex
+                    .trim()
+                    .replace(/\\\\([A-Za-z_])/g, '\\$1')
+                    .replace(/\\\\([,;:.!])/g, '\\$1');
+                return katex.renderToString(cleaned, { throwOnError: false, displayMode: false });
+            });
 
             // Restore the protected code blocks.
             for (const [placeholder, originalBlock] of protectedBlocks.entries()) {
-                html = html.replace(placeholder, originalBlock);
+                html = html.split(placeholder).join(originalBlock);
             }
 
             // 6. Assemble final HTML for Paged.js
