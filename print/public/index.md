@@ -27,18 +27,16 @@ We distinguish between "sets/types" and "categories":
 *   `Cat`: The classifier of $\omega$-categories.
 
 
-
 Unlike standard set-theoretic foundations, objects of a category $C : Cat$ form a groupoid `Obj(C) : Grpd`, not a set. This reflects the $\infty$-categorical principle that one should never talk about equality of objects, only paths/isomorphisms.
-
 
 
 The hom-structure is recursive:
 
-$
+$$
 
 \text{Hom}_C(x, y) : \text{Cat}
 
-$
+$$
 
 This means that for any two objects $x, y$, the collection of arrows between them is itself an $\omega$-category.
 
@@ -69,20 +67,18 @@ symbol f : Obj (Hom_cat C x y);
 ```
 
 
-
 A 2-cell $\alpha : f \Rightarrow g$ is an object of the hom-category of the hom-category, and so on.
-
 
 
 ## 2.2 Functors as First-Class Objects
 
 A functor $F : A \to B$ is not a meta-level map, but an object of the functor category:
 
-$
+$$
 
 F : \text{Obj}(\text{Functor\_cat}(A, B))
 
-$
+$$
 
 Its action on objects ($F_0$) and homs ($F_1$) are derived operations `fapp0` and `fapp1`.
 
@@ -109,7 +105,6 @@ symbol fapp1 : Π (F : Functor_cat A B) (x y : Obj A),
   Functor_cat (Hom_cat A x y) (Hom_cat B (F x) (F y));
 
 ```
-
 
 
 <div class="arrowgram">
@@ -162,9 +157,11 @@ The central innovation in `emdash` is the **dependent hom** construction, `homd_
 
 Given a base category $Z$ and a displayed category $E$ over it, we define a "triangle classifier". For a base arrow $f : x \to y$ and a fibre object $u \in E(x)$, we form a category of "morphisms over $f$ starting from $u$".
 
-$$
-\text{Homd}_E(u, -) : E \times (\text{Hom}_Z(x, -))^{\text{op}} \longrightarrow \text{Cat}
-$$
+$$ 
+
+\text{Homd}_E(u, -) : E \times (\text{Hom}_Z(x, -))^{\text{op}} \longrightarrow \text{Cat} 
+
+$$ 
 
 This structure classifies **2-simplices** (triangles). By iterating this construction, we obtain higher simplices. A 2-cell is not a globe, but a section of this dependent hom fibration.
 
@@ -234,7 +231,9 @@ Following the philosophy of Došen and Petrić, we treat adjunctions not just as
 The triangle identities of an adjunction $(L \dashv R, \eta, \epsilon)$ are oriented as **cut-elimination** rules:
 
 $$ 
+
 \epsilon_{L(A)} \circ L(\eta_A) \rightsquigarrow id_{L(A)} 
+
 $$ 
 
 In `emdash`, these are implemented as rewrite rules on the composition of the relevant transfor components. This means that large diagrams involving adjoints can be simplified automatically by the type checker.
