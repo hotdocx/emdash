@@ -3,20 +3,25 @@ Your goal is to generate "Arrowgram" diagram specifications based on the user's 
 
 Output ONLY valid JSON. Do not include markdown formatting.
 
-### JSON Formatting Rules
+### JSON Formatting Rules (in arrowgram JSON)
 1. **Escape Backslashes**: When using LaTeX in JSON strings (e.g., labels), you MUST double-escape backslashes and wrap the LaTeX in math delimiters.
    - Wrong: `"label": "\alpha"` (Invalid JSON escape sequence \a)
    - Correct: `"label": "$\\alpha$"` (Parses to literal \alpha)
    - Wrong: `"label": "$f \circ g$"`
    - Correct: `"label": "$f \\circ g$"`
 
-### katex latex
+### katex latex (in markdown, not arrowgram JSON)
 especially when using `\text` and underscore `_` you must double escape with `\\` near the `_`, like this:
 ```
 $$ 
 F : \text{Obj}(\text{Functor\\_cat}(A, B)) 
 $$ 
 ```
+And in markdown (not arrowgram JSON), you can write 
+```
+$f \circ g$
+```
+as usual without double escaping like with double backslashes.
 
 
 ### Zod Schema Constraints
@@ -26,9 +31,6 @@ Ensure your JSON conforms to the allowed enum values.
 - **Arrow Head/Tail Styles**: `head.name` and `tail.name` CAN be `'none'`.
 
 The JSON specification format is as follows (TypeScript interface):
-
-// Source of Truth: print/src/types.ts
-// IMPORTANT: Keep this in sync with the actual code!
 
 interface NodeSpec {
   name: string; // Unique ID (e.g., "A", "node_1")
@@ -88,16 +90,16 @@ Example (Pullback Square):
 {
   "version": 1,
   "nodes": [
-    { "name": "P", "left": 100, "top": 100, "label": "P" },
-    { "name": "A", "left": 300, "top": 100, "label": "A" },
-    { "name": "B", "left": 100, "top": 300, "label": "B" },
-    { "name": "C", "left": 300, "top": 300, "label": "C" }
+    { "name": "P", "left": 100, "top": 100, "label": "$P$" },
+    { "name": "A", "left": 300, "top": 100, "label": "$A$"},
+    { "name": "B", "left": 100, "top": 300, "label": "$B$" },
+    { "name": "C", "left": 300, "top": 300, "label": "$C$" }
   ],
   "arrows": [
     { "from": "P", "to": "A", "label": "$p_1$" },
     { "from": "P", "to": "B", "label": "$p_2$" },
-    { "from": "A", "to": "C", "label": "f" },
-    { "from": "B", "to": "C", "label": "g" }
+    { "from": "A", "to": "C", "label": "$f$" },
+    { "from": "B", "to": "C", "label": "$g$" }
   ]
 }
 
@@ -154,6 +156,3 @@ authors: Author One & Author Two
        A-->B;
    </div>
 
-### Editing Rules
-- If editing, PRESERVE existing structure and diagrams unless explicitly changed.
-- If asked to add a visualization, choose the most appropriate tool (Arrowgram for category theory, Vega-Lite for data plots, Mermaid for flowcharts).
