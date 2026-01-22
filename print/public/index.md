@@ -118,7 +118,7 @@ symbol fapp1 : Π (F : Functor_cat A B) (x y : Obj A),
   "arrows": [
     { "from": "A", "to": "B", "label": "F" },
     { "from": "B", "to": "C", "label": "G" },
-    { "from": "A", "to": "C", "label": "G \circ F" }
+    { "from": "A", "to": "C", "label": "G \\circ F" }
   ]
 }
 </div>
@@ -141,12 +141,12 @@ Given a functor $M : Z \to Cat$, we construct a displayed category $\int M : Cat
 {
   "version": 1,
   "nodes": [
-    { "name": "Total", "left": 300, "top": 100, "label": "$\int M$" },
+    { "name": "Total", "left": 300, "top": 100, "label": "$\\int M$" },
     { "name": "Base", "left": 300, "top": 300, "label": "Z" },
     { "name": "Fibre", "left": 500, "top": 200, "label": "M(z)" }
   ],
   "arrows": [
-    { "from": "Total", "to": "Base", "label": "$\pi$", "style": { "head": { "name": "maps_to" } } },
+    { "from": "Total", "to": "Base", "label": "$\\pi$", "style": { "head": { "name": "maps_to" } } },
     { "from": "Fibre", "to": "Total", "label": "incl", "style": { "body": { "name": "dashed" }, "head": { "name": "hook" } } }
   ]
 }
@@ -213,11 +213,11 @@ Crucially, because we work with $\omega$-categories, naturality is **lax**. The 
     { "name": "GY", "left": 400, "top": 400, "label": "GY" }
   ],
   "arrows": [
-    { "from": "FX", "to": "GX", "label": "$\epsilon_X$" },
+    { "from": "FX", "to": "GX", "label": "$\\epsilon_X$" },
     { "from": "FX", "to": "FY", "label": "Ff", "label_alignment": "left" },
     { "from": "GX", "to": "GY", "label": "Gf" },
-    { "from": "FY", "to": "GY", "label": "$\epsilon_Y$", "style": { "head": { "side": "top" } } },
-    { "from": "FX", "to": "GY", "label": "$\alpha$", "style": { "mode": "arrow", "body": { "name": "none" }, "level": 2 }, "label_alignment": "over" }
+    { "from": "FY", "to": "GY", "label": "$\\epsilon_Y$", "style": { "head": { "side": "top" } } },
+    { "from": "FX", "to": "GY", "label": "$\\alpha$", "style": { "mode": "arrow", "body": { "name": "none" }, "level": 2 }, "label_alignment": "over" }
   ]
 }
 </div>
@@ -247,8 +247,8 @@ In `emdash`, these are implemented as rewrite rules on the composition of the re
     { "name": "LA2", "left": 500, "top": 200, "label": "L(A)" }
   ],
   "arrows": [
-    { "from": "LA", "to": "LRLA", "label": "L(\eta_A)" },
-    { "from": "LRLA", "to": "LA2", "label": "$\epsilon_{L(A)}$" },
+    { "from": "LA", "to": "LRLA", "label": "L(\\eta_A)" },
+    { "from": "LRLA", "to": "LA2", "label": "$\\epsilon_{L(A)}$" },
     { "from": "LA", "to": "LA2", "label": "id", "style": { "body": { "name": "dashed" } }, "shift": 20 }
   ]
 }
