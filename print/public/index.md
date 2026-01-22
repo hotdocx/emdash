@@ -32,11 +32,11 @@ Unlike standard set-theoretic foundations, objects of a category $C : Cat$ form 
 
 The hom-structure is recursive:
 
+<div class="math-block">
 $$
-
 \text{Hom}_C(x, y) : \text{Cat}
-
-$$
+$$ 
+</div>
 
 This means that for any two objects $x, y$, the collection of arrows between them is itself an $\omega$-category.
 
@@ -66,7 +66,6 @@ symbol f : Obj (Hom_cat C x y);
 
 ```
 
-
 A 2-cell $\alpha : f \Rightarrow g$ is an object of the hom-category of the hom-category, and so on.
 
 
@@ -74,11 +73,11 @@ A 2-cell $\alpha : f \Rightarrow g$ is an object of the hom-category of the hom-
 
 A functor $F : A \to B$ is not a meta-level map, but an object of the functor category:
 
-$$
-
-F : \text{Obj}(\text{Functor\_cat}(A, B))
-
-$$
+<div class="math-block">
+$$ 
+F : \text{Obj}(\text{Functor\_cat}(A, B)) 
+$$ 
+</div>
 
 Its action on objects ($F_0$) and homs ($F_1$) are derived operations `fapp0` and `fapp1`.
 
@@ -118,7 +117,7 @@ symbol fapp1 : Π (F : Functor_cat A B) (x y : Obj A),
   "arrows": [
     { "from": "A", "to": "B", "label": "F" },
     { "from": "B", "to": "C", "label": "G" },
-    { "from": "A", "to": "C", "label": "G \\circ F" }
+    { "from": "A", "to": "C", "label": "G \circ F" }
   ]
 }
 </div>
@@ -141,12 +140,12 @@ Given a functor $M : Z \to Cat$, we construct a displayed category $\int M : Cat
 {
   "version": 1,
   "nodes": [
-    { "name": "Total", "left": 300, "top": 100, "label": "$\\int M$" },
+    { "name": "Total", "left": 300, "top": 100, "label": "$\int M$" },
     { "name": "Base", "left": 300, "top": 300, "label": "Z" },
     { "name": "Fibre", "left": 500, "top": 200, "label": "M(z)" }
   ],
   "arrows": [
-    { "from": "Total", "to": "Base", "label": "$\\pi$", "style": { "head": { "name": "maps_to" } } },
+    { "from": "Total", "to": "Base", "label": "$\pi$", "style": { "head": { "name": "maps_to" } } },
     { "from": "Fibre", "to": "Total", "label": "incl", "style": { "body": { "name": "dashed" }, "head": { "name": "hook" } } }
   ]
 }
@@ -157,11 +156,11 @@ The central innovation in `emdash` is the **dependent hom** construction, `homd_
 
 Given a base category $Z$ and a displayed category $E$ over it, we define a "triangle classifier". For a base arrow $f : x \to y$ and a fibre object $u \in E(x)$, we form a category of "morphisms over $f$ starting from $u$".
 
+<div class="math-block">
 $$ 
-
 \text{Homd}_E(u, -) : E \times (\text{Hom}_Z(x, -))^{\text{op}} \longrightarrow \text{Cat} 
-
 $$ 
+</div>
 
 This structure classifies **2-simplices** (triangles). By iterating this construction, we obtain higher simplices. A 2-cell is not a globe, but a section of this dependent hom fibration.
 
@@ -172,10 +171,11 @@ symbol homd_cov : Π [Z : Cat] [E : Catd Z]
   (u : Fibre_cat E x)     // Source object in fibre
   (D : Catd Z)            // Another displayed category (often E)
   (FF : Functord_cat D E) // Displayed functor (often id)
-  → Functor_cat ... Cat_cat; // Returns a Cat-valued functor
+  → Functor_cat ... Cat_cat;
 ```
 
-<div class="arrowgram">{
+<div class="arrowgram">
+{
   "version": 1,
   "nodes": [
     { "name": "X", "left": 200, "top": 100, "label": "x" },
@@ -213,11 +213,11 @@ Crucially, because we work with $\omega$-categories, naturality is **lax**. The 
     { "name": "GY", "left": 400, "top": 400, "label": "GY" }
   ],
   "arrows": [
-    { "from": "FX", "to": "GX", "label": "$\\epsilon_X$" },
+    { "from": "FX", "to": "GX", "label": "$\epsilon_X$" },
     { "from": "FX", "to": "FY", "label": "Ff", "label_alignment": "left" },
     { "from": "GX", "to": "GY", "label": "Gf" },
-    { "from": "FY", "to": "GY", "label": "$\\epsilon_Y$", "style": { "head": { "side": "top" } } },
-    { "from": "FX", "to": "GY", "label": "$\\alpha$", "style": { "mode": "arrow", "body": { "name": "none" }, "level": 2 }, "label_alignment": "over" }
+    { "from": "FY", "to": "GY", "label": "$\epsilon_Y$", "style": { "head": { "side": "top" } } },
+    { "from": "FX", "to": "GY", "label": "$\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "over" }
   ]
 }
 </div>
@@ -230,11 +230,11 @@ Following the philosophy of Došen and Petrić, we treat adjunctions not just as
 
 The triangle identities of an adjunction $(L \dashv R, \eta, \epsilon)$ are oriented as **cut-elimination** rules:
 
+<div class="math-block">
 $$ 
-
 \epsilon_{L(A)} \circ L(\eta_A) \rightsquigarrow id_{L(A)} 
-
 $$ 
+</div>
 
 In `emdash`, these are implemented as rewrite rules on the composition of the relevant transfor components. This means that large diagrams involving adjoints can be simplified automatically by the type checker.
 
@@ -247,8 +247,8 @@ In `emdash`, these are implemented as rewrite rules on the composition of the re
     { "name": "LA2", "left": 500, "top": 200, "label": "L(A)" }
   ],
   "arrows": [
-    { "from": "LA", "to": "LRLA", "label": "L(\\eta_A)" },
-    { "from": "LRLA", "to": "LA2", "label": "$\\epsilon_{L(A)}$" },
+    { "from": "LA", "to": "LRLA", "label": "L(\eta_A)" },
+    { "from": "LRLA", "to": "LA2", "label": "$\epsilon_{L(A)}$" },
     { "from": "LA", "to": "LA2", "label": "id", "style": { "body": { "name": "dashed" } }, "shift": 20 }
   ]
 }

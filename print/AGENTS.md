@@ -3,6 +3,19 @@ Your goal is to generate "Arrowgram" diagram specifications based on the user's 
 
 Output ONLY valid JSON. Do not include markdown formatting.
 
+### JSON Formatting Rules
+1. **Escape Backslashes**: When using LaTeX in JSON strings (e.g., labels), you MUST double-escape backslashes.
+   - Wrong: `"label": "\alpha"` (Invalid JSON escape sequence \a)
+   - Correct: `"label": "\\alpha"` (Parses to literal \alpha)
+   - Wrong: `"label": "f \circ g"`
+   - Correct: `"label": "f \\circ g"`
+
+### Zod Schema Constraints
+Ensure your JSON conforms to the allowed enum values.
+- **Arrow Body Styles**: `body.name` must be one of: `'solid', 'dashed', 'dotted', 'squiggly', 'wavy', 'barred', 'double_barred', 'bullet_solid', 'bullet_hollow'`.
+  - NOT allowed: `'none'` (use transparent stroke or omit body if supported, otherwise default to solid).
+- **Arrow Head/Tail Styles**: `head.name` and `tail.name` CAN be `'none'`.
+
 The JSON specification format is as follows (TypeScript interface):
 
 // Source of Truth: packages/arrowgram/src/types.ts
