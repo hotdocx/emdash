@@ -5,7 +5,7 @@ authors: m— / emdash project
 
 # Abstract
 
-`emdash2.lp` is an experiment in *functorial programming* for strict/lax $\\omega$-categories inside the Lambdapi logical framework. The guiding principle is proof-theoretic: many categorical equalities (units, associativity, triangle identities, functoriality laws) are best treated as *normalization* (“cut-elimination”) rather than as external propositions. The technical focus of this paper is a *dependent arrow/comma (dependent hom)* construction for a dependent category $E$ over a base category $Z$. In the kernel this appears as `homd_cov` and its more internal, base-parametrized variant `homd_cov_int`. These constructions organize “cells over a base arrow” in a simplicial (triangle/surface) manner, and they serve as the substrate for computational treatments of higher structure such as lax naturality and adjunctions. We explain the design of the emdash kernel, relate it to standard category-theoretic and type-theoretic notions, and show how (a draft of) adjunction triangle identities becomes a rewrite rule.
+`emdash2.lp` is an experiment in *functorial programming* for strict/lax $\\omega$-categories inside the Lambdapi logical framework. The guiding principle is proof-theoretic: many categorical equalities (units, associativity, triangle identities, functoriality laws) are best treated as *normalization* (“cut-elimination”) rather than as external propositions. The technical focus of this paper is a *dependent arrow/comma (dependent hom)* construction for a dependent category $E$ over a base category $Z$. In the kernel this appears as `homd_cov` and its more internal, base-parametrized variant `homd_cov_int`. These constructions organize “cells over a base arrow” in a simplicial (triangle/surface) manner, and they are intended to support exchange/stacking laws and higher coherence by iterating the same pattern. Separately (but in the same computational spirit), we explain how (a draft of) adjunction triangle identities becomes a rewrite rule via the “off-diagonal” component infrastructure for transfors.
 
 # 1. Introduction (what problem are we solving?)
 
@@ -35,6 +35,18 @@ In standard proof assistants you typically have:
 
 In emdash we deliberately push a large part of the “categorical equational theory” into definitional equality, using Lambdapi’s rewriting and (carefully!) its unification rules.
 
+# 2.1 Background: emdash v1 (TypeScript kernel) and “functorial elaboration”
+
+Before `emdash2.lp`, the project developed a 1-categorical prototype (`emdash.lp`) together with an executable kernel in TypeScript (a bidirectional elaborator, unification-based hole solving, and normalization). The report `emdash_cpp2026.md` documents this first version as a *real* programming language / proof assistant, not only as a Lambdapi specification.
+
+Two takeaways from v1 matter for the v2 story:
+
+1. **Feasibility of an implementation pipeline.** The kernel concepts in the Lambdapi spec can be implemented as an interactive system with holes, bidirectional checking, and a normalization-driven definitional equality. This strongly suggests that `emdash2.lp` can likewise be turned into a usable assistant once the surface syntax and elaboration layer is designed.
+2. **Coherence as computation (“functorial elaboration”).** In the v1 TypeScript kernel, the constructor of a structured object (e.g. a functor) can *compute-check* its laws during elaboration: the system normalizes both sides of functoriality equations in a generic context, and throws a dedicated `CoherenceError` if they do not match definitionally. This is the same philosophical stance as v2’s rewrite-head style: coherence is enforced by computation, not by a separately managed library of lemmas.
+
+The present paper focuses on the v2 Lambdapi kernel itself, but we treat the v1 implementation as evidence that the “specification-first → executable kernel” path is realistic.
+
+# 3. The kernel in one page: `Grpd`, `Cat`, and homs-as-categories
 # 3. The kernel in one page: `Grpd`, `Cat`, and homs-as-categories
 
 ## 3.1 Two classifiers: groupoids vs directed structure
@@ -349,16 +361,18 @@ This matches the abstract’s goal: make the triangle identity a *definitional c
 
 In `emdash2.lp` the rule is implemented at the level of the stable heads for composition (`comp_fapp0`), functor action on morphisms (`fapp1_fapp0`), and arrow-indexed transfor components (`tapp1_fapp0`). The result is that normalizing a composite term *performs* the triangle reduction.
 
-## 8.3 Why the dependent arrow category matters for adjunctions
+## 8.3 Why this is primarily about `tapp1_*` / `tdapp1_*` (not `homd_cov`)
 
-Adjunction identities are 2-dimensional: they compare composites of 2-cells (unit/counit whiskered by functors) with 1-cells. In an $\\omega$-setting, the correct statement is not only about components at identities (the $\\epsilon_{L(A)}\\circ L(\\eta_A)$ triangle), but also about how these components behave over non-identity base arrows.
+The computational adjunction story in v2 is best viewed as a general application of the *off-diagonal component infrastructure for transfors*, not as a special application of the dependent-hom layer.
 
-This is exactly where the dependent arrow construction enters:
+Concretely, emdash distinguishes two ways to “read” a transfor $\\epsilon : F \\Rightarrow G$:
 
-- it provides a place where “whiskering along a 1-cell” is represented as a displayed morphism over that 1-cell;
-- it sets up the infrastructure needed for higher triangle/exchange laws as further normalizations.
+- **Diagonal (object-indexed) components** $\\epsilon_X : F(X) \\to G(X)$, extracted by `tapp0_fapp0` (surface-silent as `ϵ[x]`).
+- **Off-diagonal (arrow-indexed) components** $\\epsilon_{(f)} : F(X) \\to G(Y)$ for $f:X\\to Y$, represented by the stable head `tapp1_fapp0` and its packaging `tapp1_fapp0_funcd` (surface form `ϵ_(f)` with the contravariant binder `x :^- A`).
 
-The current kernel contains only the first cut-elimination rule, but it is designed to scale as the simplicial machinery (`homd_cov`, `fdapp1_funcd`, …) is completed.
+This off-diagonal interface is exactly what you need to express “whiskering” and the triangle composites that appear in adjunctions. The draft triangle cut-elimination rule in `emdash2.lp` is formulated directly using these stable heads (`tapp1_fapp0`, `fapp1_fapp0`, `comp_fapp0`), and does not require `homd_cov` to state or to run.
+
+The dependent-hom layer (`homd_cov`, `homd_cov_int`) is aimed at a different (orthogonal) problem: providing a simplicial organization of higher cells “over a base arrow” that can later support exchange/stacking laws and higher coherence in a uniform way.
 
 # 9. Engineering notes: unification rules, rewrite hygiene, and timeouts
 

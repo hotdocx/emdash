@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "validate:paper": "node scripts/validate_paper.mjs"
+    "validate:paper": "node scripts/validate_paper.mjs",
+    "check:console": "node scripts/check_console.mjs",
+    "check:render": "npm run validate:paper && npm run build && npm run check:console"
   },
   "dependencies": {
     "arrowgram": "*",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19.0.0",
     "@types/showdown": "^2.0.6",
     "@vitejs/plugin-react": "^4.2.1",
+    "playwright": "^1.55.0",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",
     "zod": "^4.3.5"
