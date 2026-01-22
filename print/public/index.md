@@ -553,27 +553,24 @@ The “stacking” operation (horizontal composition of 2-cells along a 1-cell r
 {
   "version": 1,
   "nodes": [
-    { "name": "v0", "left": 90,  "top": 230, "label": "$0\\,\\bullet$" },
-    { "name": "v1", "left": 320, "top": 80,  "label": "$1\\,\\bullet$" },
-    { "name": "v2", "left": 320, "top": 240, "label": "$\\bullet\\,2$" },
-    { "name": "v3", "left": 560, "top": 340, "label": "$\\bullet\\,3$" }
+    { "name": "n0", "left": 100, "top": 240, "label": "$0\\ \\bullet$" },
+    { "name": "n1", "left": 420, "top": 80,  "label": "$1\\ \\bullet$" },
+    { "name": "n2", "left": 420, "top": 240, "label": "$\\bullet\\ 2$" },
+    { "name": "n3", "left": 740, "top": 380, "label": "$\\bullet\\ 3$" }
   ],
   "arrows": [
-    { "from": "v0", "to": "v1", "name": "f",   "label": "$f$",   "label_alignment": "left" },
-    { "from": "v1", "to": "v2", "name": "b",   "label": "$b$",   "label_alignment": "right" },
-    { "from": "v0", "to": "v2", "name": "fp",  "label": "$f'$",  "label_alignment": "left", "curve": -20 },
-    { "from": "v0", "to": "v2", "name": "bf",  "label": "$b\\circ f$", "label_alignment": "right", "curve": 70, "style": { "body": { "name": "dotted" } } },
+    { "from": "n1", "to": "n2", "label": "$b$", "label_alignment": "left" },
+    { "from": "n1", "to": "n3", "name": "bprime", "label": "$b'$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "v2", "to": "v3", "name": "t",   "label": "$t$",   "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
-    { "from": "v1", "to": "v3", "name": "bp",  "label": "$b'$",  "label_alignment": "left", "curve": -30, "style": { "body": { "name": "dashed" } } },
-    { "from": "v1", "to": "v3", "name": "tb",  "label": "$t\\circ b$", "label_alignment": "right", "curve": 50, "style": { "body": { "name": "dotted" } } },
+    { "from": "n0", "to": "n1", "name": "f", "label": "$f$", "label_alignment": "left" },
+    { "from": "n0", "to": "n2", "name": "fprime", "label": "$f'$", "label_alignment": "right" },
+    { "from": "n0", "to": "n3", "name": "f2prime", "label": "$f''$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "v0", "to": "v3", "name": "fpp", "label": "$f''$", "label_alignment": "left", "curve": -10, "style": { "body": { "name": "dashed" } } },
-    { "from": "v0", "to": "v3", "name": "tfp", "label": "$t\\circ f'$", "label_alignment": "right", "curve": 80, "style": { "body": { "name": "dotted" } } },
+    { "from": "n2", "to": "n3", "name": "t", "label": "$t$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "bf",  "to": "fp",  "label": "$\\sigma$",        "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
-    { "from": "tfp", "to": "fpp", "label": "$\\phi$",          "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
-    { "from": "tb",  "to": "bp",  "label": "$\\beta^{op}$",    "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
+    { "from": "bprime", "to": "t", "label": "$\\beta^{op}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
+    { "from": "f", "to": "fprime", "label": "$\\sigma$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" },
+    { "from": "fprime", "to": "f2prime", "label": "$\\phi$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" }
   ]
 }
 </div>
