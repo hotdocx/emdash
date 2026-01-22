@@ -81,6 +81,31 @@ Several kernel projections are intended to be *silent* in surface syntax:
 
 The explicit, computationally important data is typically **off-diagonal**: $\\epsilon_{(f)}$ (ordinary) and $\\epsilon_{(\\sigma)}$ (displayed) for “over-a-base-arrow” components. Those correspond to stable heads like `tapp1_fapp0` and `tdapp1_*`.
 
+## 2.3 Technical overview (kernel ↔ surface ↔ mathematics)
+
+| Kernel head | Surface reading (intended) | Standard meaning |
+|---|---|---|
+| `Cat` | `⊢ C : Cat` | category / ω-category classifier |
+| `Obj : Cat → Grpd` | `⊢ x : C` | object groupoid of a category |
+| `Hom_cat C x y` | `x :^- C, y : C ⊢ f : x → y` | hom-category (so 1-cells are its objects) |
+| `Functor_cat A B` | `⊢ F : A → B` | functor category |
+| `fapp0 F x` | `F[x]` | object action $F_0$ |
+| `fapp1_fapp0 F f` | `F[f]` (silent) | arrow action $F_1(f)$ (as a 1-cell) |
+| `Transf_cat F G` | `⊢ ϵ : Transf(F,G)` | transformations / transfors |
+| `tapp0_fapp0 Y ϵ` | `ϵ[Y]` (silent) | component $ϵ_Y$ |
+| `tapp1_fapp0 … ϵ f` | `ϵ_(f)` | off-diagonal component “over $f$” |
+| `Catd Z` | `⊢ E : Catd Z` | displayed category / (iso)fibration over $Z$ |
+| `Fibre_cat E z` | `E[z]` | fibre category over $z$ |
+| `Functord_cat E D` | `⊢ FF : E ⟶_Z D` | displayed functors over fixed base |
+| `fdapp0 … FF z e` | `FF[e]` | fibrewise object action of displayed functor |
+| `Fibration_cov_catd M` | (silent if `M: Z ⟶ Cat`) | Grothendieck construction $∫M$ |
+| `Total_cat E` | `∫E` (informal) | total category of a displayed category |
+| `fib_cov_tapp0_fapp0 M f u` | `$f_!(u)$` | Grothendieck transport on fibre objects (strict today) |
+| `homd_cov` | `Homd_E(w,−)` (informal) | dependent arrow/comma category (triangle classifier) |
+| `Transfd_cat FF GG` | `⊢ ϵ : Transfd(FF,GG)` | displayed transfors |
+| `tdapp0_fapp0 … ϵ` | `ϵ[e]` (silent) | displayed component in a fibre |
+| `tdapp1_*` | `ϵ_(σ)` | displayed off-diagonal component over $σ:e→_f e'$ |
+
 # 3. Core Type Theory: `Grpd`, `Cat`, and homs-as-categories
 
 ## 3.1 Two classifiers: groupoids vs directed structure
@@ -626,16 +651,6 @@ The kernel is intentionally “small but sharp”. Some parts compute definition
 - **Abstract / TODO** (examples): full computation rules for general displayed categories `E : Catd Z`, full simplicial iteration (`fdapp1_funcd` depends on more `homd_cov` infrastructure), and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
 
 This division is deliberate: the kernel tries to avoid committing to heavy encodings (Σ-records for functors/transfors) until the rewrite story is stable.
-
-## 10.1 Reproducibility and rendering checks
-
-The paper is rendered from `print/public/index.md` by a small pipeline (Showdown → Mermaid/Vega/Arrowgram preprocessing → KaTeX → Paged.js). The repo includes automated checks:
-
-- `npm run validate:paper -w print`: validates Arrowgram and Vega-Lite blocks are valid JSON (and Arrowgrams satisfy the Zod schema used by the renderer).
-- `npm run check:console -w print`: launches the built app headlessly (Playwright) and fails on browser `console.error`, `pageerror`, network request failures, and KaTeX “LaTeX-incompatible input” warnings.
-- `npm run check:render -w print`: runs `validate:paper`, then `build`, then `check:console`.
-
-These checks are intentionally lightweight: they do not attempt pixel-perfect layout regression, but they reliably catch the kinds of “silent breakage” (bad JSON, bad TeX, runtime exceptions) that derail iterative writing.
 
 ## 10.2 Typechecking the kernel
 
