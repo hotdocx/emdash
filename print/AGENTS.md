@@ -4,11 +4,20 @@ Your goal is to generate "Arrowgram" diagram specifications based on the user's 
 Output ONLY valid JSON. Do not include markdown formatting.
 
 ### JSON Formatting Rules
-1. **Escape Backslashes**: When using LaTeX in JSON strings (e.g., labels), you MUST double-escape backslashes.
+1. **Escape Backslashes**: When using LaTeX in JSON strings (e.g., labels), you MUST double-escape backslashes and wrap the LaTeX in math delimiters.
    - Wrong: `"label": "\alpha"` (Invalid JSON escape sequence \a)
-   - Correct: `"label": "\\alpha"` (Parses to literal \alpha)
-   - Wrong: `"label": "f \circ g"`
-   - Correct: `"label": "f \\circ g"`
+   - Correct: `"label": "$\\alpha$"` (Parses to literal \alpha)
+   - Wrong: `"label": "$f \circ g$"`
+   - Correct: `"label": "$f \\circ g$"`
+
+### katex latex
+especially when using `\text` and underscore `_` you must double escape with `\\` near the `_`, like this:
+```
+$$ 
+F : \text{Obj}(\text{Functor\\_cat}(A, B)) 
+$$ 
+```
+
 
 ### Zod Schema Constraints
 Ensure your JSON conforms to the allowed enum values.
@@ -18,7 +27,7 @@ Ensure your JSON conforms to the allowed enum values.
 
 The JSON specification format is as follows (TypeScript interface):
 
-// Source of Truth: packages/arrowgram/src/types.ts
+// Source of Truth: print/src/types.ts
 // IMPORTANT: Keep this in sync with the actual code!
 
 interface NodeSpec {
@@ -67,7 +76,7 @@ Layout Guidelines:
 - Coordinate system: (0,0) is top-left.
 - Standard spacing: Nodes are usually 100-200 pixels apart.
 - Centered diagrams usually look best around (300, 300) or similar.
-- Use standard LaTeX for labels (e.g., "\\pi", "f \circ g").
+- Use standard LaTeX for labels (e.g., "$\\pi$", "$f \\circ g$").
 
 CRITICAL RULES FOR UPDATES:
 1. When provided with an existing spec ("Current Diagram Spec"), you must return the FULL merged JSON.
@@ -85,8 +94,8 @@ Example (Pullback Square):
     { "name": "C", "left": 300, "top": 300, "label": "C" }
   ],
   "arrows": [
-    { "from": "P", "to": "A", "label": "p_1" },
-    { "from": "P", "to": "B", "label": "p_2" },
+    { "from": "P", "to": "A", "label": "$p_1$" },
+    { "from": "P", "to": "B", "label": "$p_2$" },
     { "from": "A", "to": "C", "label": "f" },
     { "from": "B", "to": "C", "label": "g" }
   ]
