@@ -1,5 +1,5 @@
 ---
-title: "emdash: Computational ω-Category Theory via Dependent Arrow Categories in Lambdapi"
+title: "emdash — Computational ω-Category Theory via Dependent Arrow Categories in Lambdapi"
 authors: m— / emdash project
 ---
 
@@ -150,10 +150,10 @@ This is the main place where the kernel commits to concrete computations for `Ca
     { "name": "bx", "left": 460, "top": 240, "label": "$(b',x)$" }
   ],
   "arrows": [
-    { "from": "b",  "to": "bp", "label": "$f$" },
-    { "from": "be", "to": "bx", "label": "$(f,\\sigma)$" },
-    { "from": "be", "to": "b",  "label": "$p$", "style": { "body": { "name": "dashed" } } },
-    { "from": "bx", "to": "bp", "label": "$p$", "style": { "body": { "name": "dashed" } } }
+    { "from": "b",  "to": "bp", "label": "$f$", "label_alignment": "left" },
+    { "from": "be", "to": "bx", "label": "$(f,\\sigma)$", "label_alignment": "left" },
+    { "from": "be", "to": "b",  "label": "$p$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "from": "bx", "to": "bp", "label": "$p$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } }
   ]
 }
 </div>
@@ -199,10 +199,10 @@ This is precisely the “dependent arrow/comma” intuition.
     { "name": "bp", "left": 520, "top": 240, "label": "$b'$" }
   ],
   "arrows": [
-    { "from": "b",  "to": "bp", "label": "$f$" },
-    { "from": "e",  "to": "x",  "label": "$\\sigma : f_!e \\to x$", "curve": 40 },
-    { "from": "e",  "to": "b",  "label": "$p$", "style": { "body": { "name": "dashed" } } },
-    { "from": "x",  "to": "bp", "label": "$p$", "style": { "body": { "name": "dashed" } } }
+    { "from": "b",  "to": "bp", "label": "$f$", "label_alignment": "left" },
+    { "from": "e",  "to": "x",  "label": "$\\sigma : f_!e \\to x$", "curve": 40, "label_alignment": "left" },
+    { "from": "e",  "to": "b",  "label": "$p$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "from": "x",  "to": "bp", "label": "$p$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } }
   ]
 }
 </div>
@@ -226,6 +226,7 @@ Conceptually, `homd_cov_int_base D0` is a Cat-valued functor on $Z^{op}$ whose v
 
 The point is not the exact combinatorics but the *shape*: we are building a simplicial indexing category (objects $z$ together with base edges into $z$) in a way that remains computationally stable.
 
+<div class="fullwidth">
 <div class="mermaid">
 flowchart LR
   Zop["Z^op"] --> H["representable (hom_cov_int)"]
@@ -234,6 +235,7 @@ flowchart LR
   Op --> Prod
   Prod --> Tot["totalization (Total_func)"]
   Tot --> Base["homd_cov_int_base(D0): Z^op -> Cat"]
+</div>
 </div>
 
 ## 6.4 `homd_cov_int` as a displayed functor (current status)
@@ -279,10 +281,10 @@ The kernel contains the beginnings of this “simplicial engine”:
     { "name": "Z", "left": 270, "top": 320, "label": "$Z$" }
   ],
   "arrows": [
-    { "from": "X", "to": "Y", "label": "$f$" },
-    { "from": "Y", "to": "Z", "label": "$g$" },
-    { "from": "X", "to": "Z", "label": "$g\\circ f$", "label_alignment": "left" },
-    { "from": "X", "to": "Z", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "over", "shift": 18 }
+    { "from": "X", "to": "Y", "name": "f", "label": "$f$", "curve": -30,"label_alignment": "right" },
+    { "from": "Y", "to": "Z", "name": "g", "label": "$g$", "label_alignment": "right" },
+    { "from": "X", "to": "Z", "name": "h", "label": "$h$", "curve": -30, "label_alignment": "left" },
+    { "from": "f", "to": "g", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
   ]
 }
 </div>
@@ -338,9 +340,9 @@ This matches the abstract’s goal: make the triangle identity a *definitional c
     { "name": "LA2",  "left": 540, "top": 160, "label": "$L(A)$" }
   ],
   "arrows": [
-    { "from": "LA",   "to": "LRLA", "label": "$L(\\eta_A)$" },
-    { "from": "LRLA", "to": "LA2",  "label": "$\\epsilon_{L(A)}$" },
-    { "from": "LA",   "to": "LA2",  "label": "$\\mathrm{id}$", "style": { "body": { "name": "dashed" } }, "shift": 18 }
+    { "from": "LA",   "to": "LRLA", "label": "$L(\\eta_A)$", "label_alignment": "left" },
+    { "from": "LRLA", "to": "LA2",  "label": "$\\epsilon_{L(A)}$", "label_alignment": "right" },
+    { "from": "LA",   "to": "LA2",  "label": "$\\mathrm{id}$", "label_alignment": "left", "style": { "body": { "name": "dashed" } }, "shift": 18 }
   ]
 }
 </div>

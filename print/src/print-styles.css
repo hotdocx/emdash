@@ -161,6 +161,12 @@ body {
   column-span: all;
 }
 
+/* Utility: force an element to span both columns (LICS-style wide figures). */
+.layout-two-column .fullwidth {
+  column-span: all;
+  break-inside: avoid;
+}
+
 /* optional */
 /* .layout-two-column .mermaid-container, .layout-two-column .katex-display, .layout-two-column .vega-container { column-span: all; } */
 .layout-two-column .abstract {
