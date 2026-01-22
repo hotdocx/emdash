@@ -1,0 +1,14 @@
+{
+    "name": "emdash2",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "workspaces": [
+        "print"
+    ],
+    "scripts": {
+        "dev": "npm run dev -w print",
+        "build": "npm run build --workspaces",
+        "test": "npm run test --workspaces"
+    }
+}
