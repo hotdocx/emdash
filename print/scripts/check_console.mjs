@@ -90,7 +90,14 @@ async function main() {
     const type = msg.type();
     const text = msg.text();
     if (type === 'error') errors.push(`console.error: ${text}`);
-    if (type === 'warning') warnings.push(`console.warn: ${text}`);
+    if (type === 'warning') {
+      // Treat KaTeX strict-mode warnings as failures: they indicate malformed TeX input.
+      if (text.includes('LaTeX-incompatible input') || text.includes('[mathVsTextAccents]')) {
+        errors.push(`console.warn (katex): ${text}`);
+      } else {
+        warnings.push(`console.warn: ${text}`);
+      }
+    }
   });
 
   page.on('requestfailed', (req) => {
@@ -130,4 +137,3 @@ main().catch((e) => {
   console.error(`Console check failed: ${e?.message || e}`);
   process.exit(1);
 });
-

@@ -21,9 +21,25 @@ The emdash project explores a kernel design in which:
 
 This paper is a narrative tour of the current `emdash2.lp` kernel. It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_cov_int_base`) we also provide a traditional reading.
 
-# 2. Why Lambdapi, and why rewriting?
+# 1.1 Contributions (what is new here?)
 
-Lambdapi is a logical framework with user-defined rewrite rules and a higher-order unification engine. This matters because emdash wants two things simultaneously:
+This paper’s contributions are primarily expository (the kernel is ongoing work), but the kernel already embodies several concrete design/engineering commitments:
+
+1. **A rewrite-head discipline for categorical computation.** Most “structural equalities” are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
+2. **A simplicial triangle classifier for higher cells over base arrows.** The dependent arrow/comma construction `homd_cov` (and the internal pipeline `homd_cov_int_base`) provides a computational home for “triangles/surfaces” in the Grothendieck case, and a compositional target for iteration.
+3. **An explicit off-diagonal interface for transfors (ordinary and displayed).** Instead of encoding transfors as records with a naturality law, we expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal components over arrows (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
+4. **Executable feasibility evidence.** The v1 project (`emdash.lp` plus the TypeScript kernel reported in `emdash_cpp2026.md`) demonstrates that this “kernel spec → elaborating proof assistant” pipeline is realistic; the v2 paper build includes automated rendering/console checks for reproducible artifacts.
+
+# 2. Technical Overview and Design Principles
+
+emdash is designed around a small set of kernel principles:
+
+1. **Internalization.** Categories, functors, and (higher) transformations are first-class terms, not meta-level structures.
+2. **Normalization-first.** Many categorical equalities are oriented as rewrite rules on canonical head symbols.
+3. **Stable heads.** Large composite expressions are folded to small “rewrite heads” so normalization is predictable and performant.
+4. **Variance by binders.** Functorial/contravariant/object-only dependencies are carried by binder notation at the surface level (see `docs/SYNTAX_SURFACE.md`).
+
+Lambdapi is a natural implementation target because it provides user-defined rewrite rules and higher-order unification. This matters because emdash wants two things simultaneously:
 
 - **Internal definitions**: a functor is not a meta-level function; it is an *object* of a functor category.
 - **Computation**: categorical equalities are implemented as *rewrites on stable head symbols*, so they are available during typechecking.
@@ -35,7 +51,7 @@ In standard proof assistants you typically have:
 
 In emdash we deliberately push a large part of the “categorical equational theory” into definitional equality, using Lambdapi’s rewriting and (carefully!) its unification rules.
 
-# 2.1 Background: emdash v1 (TypeScript kernel) and “functorial elaboration”
+## 2.1 Background: emdash v1 (TypeScript kernel) and “functorial elaboration”
 
 Before `emdash2.lp`, the project developed a 1-categorical prototype (`emdash.lp`) together with an executable kernel in TypeScript (a bidirectional elaborator, unification-based hole solving, and normalization). The report `emdash_cpp2026.md` documents this first version as a *real* programming language / proof assistant, not only as a Lambdapi specification.
 
@@ -46,7 +62,7 @@ Two takeaways from v1 matter for the v2 story:
 
 The present paper focuses on the v2 Lambdapi kernel itself, but we treat the v1 implementation as evidence that the “specification-first → executable kernel” path is realistic.
 
-# 2.2 How to read kernel vs surface syntax
+## 2.2 How to read kernel vs surface syntax
 
 `emdash2.lp` is “kernel-first”: it chooses canonical internal heads and rewrite rules. The intended *surface language* (the syntax a user would actually type) is described separately in `docs/SYNTAX_SURFACE.md`. The crucial idea is that **variance is tracked by binder notation**, not by explicit “naturality proof terms”.
 
@@ -65,7 +81,7 @@ Several kernel projections are intended to be *silent* in surface syntax:
 
 The explicit, computationally important data is typically **off-diagonal**: $\\epsilon_{(f)}$ (ordinary) and $\\epsilon_{(\\sigma)}$ (displayed) for “over-a-base-arrow” components. Those correspond to stable heads like `tapp1_fapp0` and `tdapp1_*`.
 
-# 3. The kernel in one page: `Grpd`, `Cat`, and homs-as-categories
+# 3. Core Type Theory: `Grpd`, `Cat`, and homs-as-categories
 
 ## 3.1 Two classifiers: groupoids vs directed structure
 
@@ -131,10 +147,8 @@ This provides a clean place to talk about univalence later: one can add bridges 
 Concretely, `path_to_hom_func` and its stable-head application `path_to_hom_fapp0` give the direction “path ⇒ morphism”:
 
 ```lambdapi
-constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)),
-  τ (Obj (Functor_cat (Path_cat (x = y)) (Hom_cat C x y)));
-symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)),
-  τ (Obj (Hom_cat C x y));
+constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)), τ (Obj (Functor_cat (Path_cat (x = y)) (Hom_cat C x y)));
+symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)), τ (Obj (Hom_cat C x y));
 ```
 
 This is intentionally one-way at the definitional level: the reverse direction (morphisms ⇒ paths) is the dangerous one that can create rewrite loops unless handled by a carefully controlled unification rule (as in the draft univalence bridge in `emdash2.lp`).
@@ -149,7 +163,7 @@ emdash internalizes “the category of groupoids” and “the category of categ
 
 This lets us write constructions like “postcompose by opposite” or “compose functors” as ordinary morphisms in `Cat_cat`, and then reuse the same functorial action machinery (`fapp0`, `fapp1_func`) uniformly.
 
-# 4. Functorial programming: functors and transfors as objects
+# 4. Functors and Transfors (ordinary)
 
 ## 4.1 Functors are objects of a functor category
 
@@ -158,9 +172,7 @@ For categories $A,B : \\texttt{Cat}$, the category of functors is `Functor_cat A
 ```lambdapi
 constant symbol Functor_cat : Π (A B : Cat), Cat;
 symbol fapp0 : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), τ (Obj A) → τ (Obj B);
-symbol fapp1_func : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))),
-  Π [X Y : τ (Obj A)],
-  τ (Obj (Functor_cat (Hom_cat A X Y) (Hom_cat B (fapp0 F X) (fapp0 F Y))));
+symbol fapp1_func : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), Π [X Y : τ (Obj A)], τ (Obj (Functor_cat (Hom_cat A X Y) (Hom_cat B (fapp0 F X) (fapp0 F Y))));
 ```
 
 Here `fapp0` is the object action $F_0$, and `fapp1_func` is the induced functor on hom-categories $F_1$ (so it already “knows” about higher cells).
@@ -170,9 +182,7 @@ Here `fapp0` is the object action $F_0$, and `fapp1_func` is the induced functor
 In `emdash2.lp`, many operations are *declared* as symbols (not definitional abbreviations) so that rewrite rules can canonically fold large expressions into small stable heads. For example, applying `fapp1_func` and then `fapp0` is folded into a stable head `fapp1_fapp0`:
 
 ```lambdapi
-symbol fapp1_fapp0 : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))),
-  Π [X Y : τ (Obj A)], Π (f : τ (Obj (Hom_cat A X Y))),
-  τ (Obj (Hom_cat B (fapp0 F X) (fapp0 F Y)));
+symbol fapp1_fapp0 : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), Π [X Y : τ (Obj A)], Π (f : τ (Obj (Hom_cat A X Y))), τ (Obj (Hom_cat B (fapp0 F X) (fapp0 F Y)));
 ```
 
 This “stable head discipline” is crucial for performance and for avoiding brittle matching against huge expanded terms.
@@ -186,9 +196,7 @@ $$
 In the kernel this is a *primitive head* `tapp0_fapp0` with rewrite rules connecting it to the internal packaging:
 
 ```lambdapi
-symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Obj (Functor_cat A B))],
-  Π (Y : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F G))),
-  τ (Obj (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
+symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Obj (Functor_cat A B))], Π (Y : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F G))), τ (Obj (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
 ```
 
 The philosophy is: *do not bake “components” into a record definition of transfors*. Instead, compute components by normalization of projection heads.
@@ -248,7 +256,7 @@ injective symbol sfunc_func : Π [A B : Cat], τ (Obj (StrictFunctor_cat A B)) �
 
 This is a pragmatic move: strictness gives stable computation rules, and later “laxness witnesses reduce to identities” can be recovered as special cases once the simplicial machinery is strong enough.
 
-# 5. Dependent categories (`Catd`) and Grothendieck constructions
+# 5. Dependent Categories (`Catd`) and Grothendieck Constructions
 
 ## 5.1 Displayed categories as isofibrations
 
@@ -312,7 +320,7 @@ The kernel still supports the “general base map” intuition via pullback: a f
 Given $M : Z \\to \\mathbf{Cat}$, the Grothendieck total category $\\int M$ is represented as `Total_cat (Fibration_cov_catd M)`. The kernel commits to a definitional Σ-description of objects *only in this Grothendieck case*:
 
 $$
-\\mathrm{Ob}(\\textstyle\\int M) \\;\u2248\\; \\sum_{z\\in \\mathrm{Ob}(Z)} \\mathrm{Ob}(M(z)).
+\\mathrm{Ob}(\\textstyle\\int M) \\;\\simeq\\; \\sum_{z\\in \\mathrm{Ob}(Z)} \\mathrm{Ob}(M(z)).
 $$
 
 This is a key engineering boundary: for a generic displayed category $E : \\mathrm{Catd}(Z)$ we do **not** force `Total_cat E` to be definitionally a Σ-type; it remains semantic data carried by `E`.
@@ -345,7 +353,7 @@ $$
 $$
 implemented via a stable-head functor `prodFib` for pointwise product of Cat-valued functors. This is a representative example of “rewrite hygiene”: we introduce a small head so later rules can match without normalizing a huge composed expression in `Cat_cat`.
 
-# 6. The dependent arrow/comma construction: `homd_cov` and `homd_cov_int`
+# 6. Dependent Arrow/Comma Categories: `homd_cov` and `homd_cov_int`
 
 This section is the technical center of the paper. It explains the kernel constructions that we use to model “cells over a base arrow” without starting from a raw globular presentation.
 
@@ -442,7 +450,7 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
 
 The important message for the reader is: *emdash organizes higher cells by iterating dependent arrow categories*; `homd_cov_int` is the internalized, compositional version of the triangle classifier.
 
-# 7. Displayed transfors, triangles, and simplicial iteration
+# 7. Displayed Transfors and Simplicial Iteration
 
 ## 7.1 Displayed transfors: pointwise (`tdapp0_*`) and off-diagonal (`tdapp1_*`)
 
@@ -453,11 +461,7 @@ If $FF,GG : E \\to_Z D$ are displayed functors (objects of `Functord_cat E D`), 
 - `tdapp0_fapp0` extracts the **diagonal component** at a base point $(Y,V)$, i.e. a morphism in the fibre $D[Y]$:
 
 ```lambdapi
-symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],
-  Π (Y_Z : τ (Obj Z)), Π (V : τ (Obj (Fibre_cat E Y_Z))), Π (ϵ : τ (Obj (Transfd_cat FF GG))),
-  τ (Obj (Hom_cat (Fibre_cat D Y_Z)
-         (fdapp0 FF Y_Z V)
-         (fdapp0 GG Y_Z V)));
+symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))], Π (Y_Z : τ (Obj Z)), Π (V : τ (Obj (Fibre_cat E Y_Z))), Π (ϵ : τ (Obj (Transfd_cat FF GG))), τ (Obj (Hom_cat (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V)));
 ```
 
 - `tdapp1_fapp0_funcd` (and internal variants like `tdapp1_int_*`) package the **off-diagonal component** over a displayed arrow $\\sigma : e \\to_f e'$ (surface syntax `ϵ_(σ)`), mirroring the ordinary `tapp1_*` story.
@@ -505,7 +509,7 @@ The kernel contains the beginnings of this “simplicial engine”:
 
 This is the common 2-categorical picture (a 2-cell between parallel composites). The kernel aim is to recover such cells as objects of a dependent hom construction, so that “stacking” and exchange laws can be derived from functoriality of the indexing.
 
-# 8. Computational adjunctions: triangle identities as cut-elimination
+# 8. Computational Adjunctions (cut-elimination rules)
 
 The `emdash2.lp` file contains a draft interface for adjunctions inspired by Došen–Petrić’s proof-theoretic view of categories.
 
@@ -576,17 +580,45 @@ This off-diagonal interface is exactly what you need to express “whiskering”
 
 The dependent-hom layer (`homd_cov`, `homd_cov_int`) is aimed at a different (orthogonal) problem: providing a simplicial organization of higher cells “over a base arrow” that can later support exchange/stacking laws and higher coherence in a uniform way.
 
-# 9. Engineering notes: unification rules, rewrite hygiene, and timeouts
+# 9. Metatheory and Normalization Discipline
 
-The file `emdash2.lp` contains extensive comments about “rewrite hygiene”. The short version is:
+emdash relies on Lambdapi’s core metatheoretic contract: typechecking is done modulo a conversion relation generated by β-reduction plus user-supplied rewrite rules (and some built-in definitional equalities). Lambdapi checks subject-reduction for each rewrite rule; global termination/confluence are left to the user.
 
-1. **Prefer stable heads**: introduce a named symbol (a rewrite head) for the normal form you want, and add a canonicalization rule folding big redexes into that head.
-2. **Keep LHS implicit arguments minimal**: over-specifying implicit arguments in rule left-hand sides forces expensive conversion work and may cause timeouts.
-3. **Use unification rules for inference, not computation**: when an equation is a *typing/elaboration hint* (e.g. identifying the component at an identity with the object-indexed component), encode it as `unif_rule` rather than `rule` to keep normal forms stable.
+The practical question, therefore, is not “can we state the equations?” but “can we orient a useful subset as a terminating, robust normalization strategy?” The kernel comments call this **rewrite hygiene**.
 
-This is also why the repo’s recommended workflow uses short timeouts for typechecking: a hung typecheck is treated as a signal of a rewrite/unification loop.
+## 9.1 Stable heads and canonicalization
 
-# 10. Implementation status and roadmap (January 2026 snapshot)
+The most frequent move is to introduce a *stable-head* symbol for a conceptually important operation and add a canonicalization rule that folds a large redex into that head. Examples:
+
+- `fapp1_fapp0` folds “apply `fapp1_func` then `fapp0`” into a single head.
+- `tapp0_fapp0` is the head for “component at $Y$”, rather than unfolding it as an evaluation of a packaged functor.
+- `fib_cov_tapp0_fapp0` is the head for Grothendieck-style object transport.
+
+This makes rewriting predictable (matching sees the head) and keeps later rewrite rules small.
+
+## 9.2 Rewriting vs unification rules
+
+emdash uses both:
+
+- `rule` for *computation* (normalization steps that should fire during reduction),
+- `unif_rule` for *inference hints* (guiding elaboration/conversion without changing normal forms).
+
+The slogan is: if a law should not change canonical normal forms (e.g. “the component at an identity arrow agrees with the diagonal component”), prefer `unif_rule` over `rule`.
+
+## 9.3 Avoiding rewrite explosions
+
+Two common failure modes for rewrite-based kernels are:
+
+- **conversion blowups** caused by matching against too much inferred structure in a rule LHS;
+- **non-termination** caused by loops between “expanding” and “folding” rules.
+
+`emdash2.lp` mitigates this by (i) keeping inferred arguments as `_` on LHS patterns unless essential, and (ii) orienting many laws in a cut-elimination direction (nested structure folds to a single constructor).
+
+## 9.4 Timeouts as a diagnostic tool
+
+Because a hung typecheck often indicates rewrite/unification pathology, the repo’s workflow treats a short timeout as a diagnostic: a timeout is a bug signal, not a reason to increase the timeout.
+
+# 10. Implementation and Evaluation (January 2026 snapshot)
 
 The kernel is intentionally “small but sharp”. Some parts compute definitionally today; others are interfaces intended to be refined.
 
@@ -595,9 +627,32 @@ The kernel is intentionally “small but sharp”. Some parts compute definition
 
 This division is deliberate: the kernel tries to avoid committing to heavy encodings (Σ-records for functors/transfors) until the rewrite story is stable.
 
-Practical note (this paper’s build pipeline): the repo includes lightweight automated checks that the rendered document has no Arrowgram/Vega JSON parse errors and no browser console errors during Paged.js rendering (`npm run check:render -w print`).
+## 10.1 Reproducibility and rendering checks
 
-# 11. Related ideas and influences
+The paper is rendered from `print/public/index.md` by a small pipeline (Showdown → Mermaid/Vega/Arrowgram preprocessing → KaTeX → Paged.js). The repo includes automated checks:
+
+- `npm run validate:paper -w print`: validates Arrowgram and Vega-Lite blocks are valid JSON (and Arrowgrams satisfy the Zod schema used by the renderer).
+- `npm run check:console -w print`: launches the built app headlessly (Playwright) and fails on browser `console.error`, `pageerror`, network request failures, and KaTeX “LaTeX-incompatible input” warnings.
+- `npm run check:render -w print`: runs `validate:paper`, then `build`, then `check:console`.
+
+These checks are intentionally lightweight: they do not attempt pixel-perfect layout regression, but they reliably catch the kinds of “silent breakage” (bad JSON, bad TeX, runtime exceptions) that derail iterative writing.
+
+## 10.2 Typechecking the kernel
+
+The Lambdapi development is designed to typecheck quickly; long typechecks are treated as a symptom of rewrite/unification pathologies. The repo provides a timeout-protected check (`EMDASH_TYPECHECK_TIMEOUT=60s make check`) and a watch mode that logs to `logs/typecheck.log`.
+
+# 11. Limitations, Related Work, and Future Directions
+
+## 11.1 Limitations (current kernel snapshot)
+
+The current kernel is intentionally incomplete; some gaps are design choices, others are pending infrastructure.
+
+- **No global record encoding for functors/transfors.** Objects of `Functor_cat` and `Transf_cat` are intentionally abstract; the user-facing interface is via projection heads (`fapp0`, `tapp0_*`, `tapp1_*`, etc.).
+- **Displayed categories are semantic except for Grothendieck constructors.** Computation rules for `Catd` focus on special constructors like `Fibration_cov_catd`; generic `Catd` is meant to model isofibrations, but the explicit cleavage/iso-lift interface is not yet exposed.
+- **Strictness placeholders.** Some computation rules (e.g. Grothendieck object transport) are strict today and are intended to be relaxed to a lax/weak story with higher cells.
+- **“Metatheory by engineering.”** Termination/confluence are managed by rewrite discipline and tests rather than by a formal metatheorem at this stage.
+
+## 11.2 Related ideas and influences
 
 emdash draws on three complementary threads:
 
@@ -605,7 +660,13 @@ emdash draws on three complementary threads:
 2. **Type-theoretic higher categories** (e.g. Finster–Mimram): define weak $\\omega$-categories by internal type-theoretic structure.
 3. **Parametricity-inspired internalization** (e.g. “bridge types”): avoid explicit interval objects while retaining internal reasoning principles reminiscent of parametricity.
 
-Our distinctive emphasis is *computational organization of higher cells over base arrows* via a dependent arrow/comma construction inside a rewrite-based kernel.
+Our distinctive emphasis is *computational organization of higher cells over base arrows* via dependent arrow/comma categories, combined with an explicit off-diagonal component interface for transfors that supports computation-first coherence laws.
+
+## 11.3 Next steps
+
+- Finish the simplicial iteration story (derive/justify the external heads like `fdapp1_funcd` from internal `tdapp1_int_*` pipelines; extend computation beyond the Grothendieck case).
+- Add the missing user-facing layer: a variance-aware elaborator that makes `docs/SYNTAX_SURFACE.md` executable (as in v1’s TypeScript kernel, but for the v2 primitives).
+- Extend the adjunction interface from the first triangle cut-elimination rule to a robust set of whiskering/triangle/exchange normalizations.
 
 # 12. Conclusion
 
