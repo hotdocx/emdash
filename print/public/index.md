@@ -46,7 +46,25 @@ Two takeaways from v1 matter for the v2 story:
 
 The present paper focuses on the v2 Lambdapi kernel itself, but we treat the v1 implementation as evidence that the “specification-first → executable kernel” path is realistic.
 
-# 3. The kernel in one page: `Grpd`, `Cat`, and homs-as-categories
+# 2.2 How to read kernel vs surface syntax
+
+`emdash2.lp` is “kernel-first”: it chooses canonical internal heads and rewrite rules. The intended *surface language* (the syntax a user would actually type) is described separately in `docs/SYNTAX_SURFACE.md`. The crucial idea is that **variance is tracked by binder notation**, not by explicit “naturality proof terms”.
+
+We will use the following surface-style conventions (matching `docs/SYNTAX_SURFACE.md`):
+
+- **Functorial index** `x : A`: a variable intended to vary functorially (e.g. when you have a functor $F : A\\to B$, you write $x:A \\vdash F[x] : B$).
+- **Contravariant index** `x :^- A`: used for arrow-indexed components like $\\epsilon_{(f)}$ (it makes “accumulation” rules orient correctly).
+- **Object-only index** `x :^o A`: the default for a generic displayed category $E : \\mathrm{Catd}(A)$; you may substitute along *paths* in $\\mathrm{Obj}(A)$, but you do not assume transport along base arrows unless the structure provides it.
+
+Several kernel projections are intended to be *silent* in surface syntax:
+
+- `τ` (decoding a `Grpd`-code to a type),
+- `F[x]` for `fapp0 F x`,
+- `E[x]` for `Fibre_cat E x`,
+- diagonal components `ϵ[x]` / `ϵ[e]` for transfors and displayed transfors.
+
+The explicit, computationally important data is typically **off-diagonal**: $\\epsilon_{(f)}$ (ordinary) and $\\epsilon_{(\\sigma)}$ (displayed) for “over-a-base-arrow” components. Those correspond to stable heads like `tapp1_fapp0` and `tdapp1_*`.
+
 # 3. The kernel in one page: `Grpd`, `Cat`, and homs-as-categories
 
 ## 3.1 Two classifiers: groupoids vs directed structure
@@ -83,6 +101,53 @@ injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;
 ```
 
 So a “1-cell” $f:x\\to y$ is an *object* of `Hom_cat C x y`. A “2-cell” between parallel 1-cells is then a 1-cell *in that hom-category*, etc. This is the standard globular iteration, but the rest of the paper emphasizes a *simplicial* reorganization of this data.
+
+# 3.4 Opposites and pointwise composition
+
+The kernel treats the opposite category as a primitive constructor `Op_cat : Cat → Cat` with definitional computation rules:
+
+- objects are unchanged: `Obj (Op_cat A) ↪ Obj A`;
+- homs are reversed: `Hom_cat (Op_cat A) X Y ↪ Hom_cat A Y X`;
+- identities and composition compute by “forgetting” `Op_cat` and reversing the order.
+
+This is a small example of a general engineering pattern in emdash: if an operation is *structural* (opposite, projections, products), we try to make it compute definitionally so that later constructions can rely on normalization rather than on lemmas.
+
+Similarly, composition in a category $A$ is exposed in two complementary ways:
+
+- a pointwise constructor `comp_fapp0` for composing 1-cells $g : y\\to z$ and $f : x\\to y$;
+- an internal packaging `comp_func` (not shown here) that treats composition itself as a functor out of a product of hom-categories, so that it can carry higher structure when needed.
+
+The pointwise head is what most rewrite rules target: it is the stable normal form for “$g\\circ f$”.
+
+# 3.5 Paths as morphisms: `Path_cat` and `Core_cat`
+
+The universe `Obj C : Grpd` means objects come with a path/equality structure. To relate that path structure to actual *directed* morphisms, emdash introduces:
+
+- `Path_cat : Grpd → Cat`, the category whose objects are elements of a groupoid and whose morphisms are paths;
+- `Core_cat C := Path_cat (Obj C)`, the “core” (groupoidal) category of $C$ built from object paths.
+
+This provides a clean place to talk about univalence later: one can add bridges between paths in `Obj C` and equivalences/isomorphisms in $C$ without collapsing the whole directed structure into paths.
+
+Concretely, `path_to_hom_func` and its stable-head application `path_to_hom_fapp0` give the direction “path ⇒ morphism”:
+
+```lambdapi
+constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)),
+  τ (Obj (Functor_cat (Path_cat (x = y)) (Hom_cat C x y)));
+symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)),
+  τ (Obj (Hom_cat C x y));
+```
+
+This is intentionally one-way at the definitional level: the reverse direction (morphisms ⇒ paths) is the dangerous one that can create rewrite loops unless handled by a carefully controlled unification rule (as in the draft univalence bridge in `emdash2.lp`).
+
+# 3.6 The “universe categories” `Grpd_cat` and `Cat_cat`
+
+emdash internalizes “the category of groupoids” and “the category of categories” as actual categories:
+
+- `Grpd_cat : Cat` with `τ (Obj Grpd_cat) ≡ Grpd`,
+- `Cat_cat : Cat` with `τ (Obj Cat_cat) ≡ Cat`,
+- and `Hom_cat Cat_cat A B` computing to `Functor_cat A B`.
+
+This lets us write constructions like “postcompose by opposite” or “compose functors” as ordinary morphisms in `Cat_cat`, and then reuse the same functorial action machinery (`fapp0`, `fapp1_func`) uniformly.
 
 # 4. Functorial programming: functors and transfors as objects
 
@@ -128,6 +193,61 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Obj (Functor_cat A B))],
 
 The philosophy is: *do not bake “components” into a record definition of transfors*. Instead, compute components by normalization of projection heads.
 
+## 4.4 Off-diagonal components: `tapp1_fapp0` and “lax naturality data”
+
+In ordinary category theory, a natural transformation $\\epsilon : F \\Rightarrow G$ is often presented by its *diagonal* components $\\epsilon_X : F(X) \\to G(X)$, plus a *naturality equation* for every $f : X \\to Y$:
+$$
+G(f) \\circ \\epsilon_X = \\epsilon_Y \\circ F(f).
+$$
+
+emdash aims at a more $\\omega$-friendly view: the “naturality square” is not necessarily an equality; it can carry higher cell data. Operationally, the kernel therefore exposes an explicit **off-diagonal / arrow-indexed component**
+$$
+\\epsilon_{(f)} : F(X) \\to G(Y)
+$$
+as a stable-head operation `tapp1_fapp0`. The intended surface syntax is `ϵ_(f)` and it uses the contravariant binder discipline `x :^- A` described in `docs/SYNTAX_SURFACE.md`.
+
+Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that lives over the base arrow $f$”. This is exactly the kind of interface we need for cut-elimination style rewrites: we can orient coherence laws as reductions on expressions built from `comp_fapp0`, `fapp1_fapp0`, and `tapp1_fapp0`, without committing to any record encoding of transfors.
+
+### Figure 1a: an off-diagonal component as a triangle
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "FX", "left": 120, "top": 120, "label": "$F(X)$" },
+    { "name": "FY", "left": 320, "top": 220, "label": "$F(Y)$" },
+    { "name": "GY", "left": 520, "top": 220, "label": "$G(Y)$" }
+  ],
+  "arrows": [
+    { "from": "FX", "to": "FY", "label": "$F(f)$", "label_alignment": "left" },
+    { "from": "FY", "to": "GY", "label": "$\\epsilon_Y$", "label_alignment": "right" },
+    { "from": "FX", "to": "GY", "label": "$\\epsilon_{(f)}$", "curve": -20, "label_alignment": "left" }
+  ]
+}
+</div>
+
+In a strict 1-category, you may take $\\epsilon_{(f)} := \\epsilon_Y \\circ F(f)$ (or equivalently $G(f)\\circ\\epsilon_X$) and prove the two definitions equal. In emdash, we keep $\\epsilon_{(f)}$ as explicit data because it is the correct home for higher “laxness” witnesses.
+
+## 4.5 Representables and the Yoneda-style heads `hom_cov` / `hom_con`
+
+emdash provides covariant and contravariant representables in a Cat-valued setting:
+
+- `hom_cov` models $\\mathrm{Hom}_A(W, F(-))$ (covariant in the variable, with postcomposition behavior);
+- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$, implemented by a definitional reduction to `hom_cov` in the opposite category.
+
+These are not just for “doing Yoneda”; they are also the glue behind the internal packaging of `tapp*` and `homd_cov_int_base`. A recurring kernel tactic is: *encode a textbook naturality statement as a rewrite rule about postcomposition by functors*, so that “naturality” becomes normalization.
+
+## 4.6 Strictness as optional structure: `StrictFunctor_cat`
+
+While the global goal includes lax/weak structure, the kernel often begins with strict computation rules and relaxes them later. For example, `StrictFunctor_cat A B` classifies functors equipped with rewrite rules stating that identities and composition are preserved *on the nose* at the level of 1-cells:
+
+```lambdapi
+constant symbol StrictFunctor_cat : Π (A B : Cat), Cat;
+injective symbol sfunc_func : Π [A B : Cat], τ (Obj (StrictFunctor_cat A B)) → τ (Obj (Functor_cat A B));
+```
+
+This is a pragmatic move: strictness gives stable computation rules, and later “laxness witnesses reduce to identities” can be recovered as special cases once the simplicial machinery is strong enough.
+
 # 5. Dependent categories (`Catd`) and Grothendieck constructions
 
 ## 5.1 Displayed categories as isofibrations
@@ -171,6 +291,59 @@ This is the main place where the kernel commits to concrete computations for `Ca
 </div>
 
 Here $(f,\\sigma)$ is the usual Grothendieck idea: a morphism in the total category contains a base arrow $f$ plus a fibre morphism $\\sigma$ with the correct transported source.
+
+## 5.3 Slice-style displayed functors: `Functord_cat`
+
+There are (at least) two common ways to formalize displayed functors:
+
+1. **General base map**: a displayed functor can live “over” an arbitrary base functor $F:X\\to Y$.
+2. **Slice-style**: fix a base $Z$, and consider only functors over $\\mathrm{id}_Z$ between objects of the slice $\\mathbf{Cat}/Z$.
+
+emdash2 chooses the slice-style presentation because it makes composition and normalization stable:
+
+- displayed categories over $Z$ are terms of `Catd Z`,
+- displayed functors over $Z$ are objects of `Functord_cat E D`,
+- composition stays in the same base automatically.
+
+The kernel still supports the “general base map” intuition via pullback: a functor over $F$ becomes an ordinary slice-style functor into a pullback `Pullback_catd D F`.
+
+## 5.4 Totals, projections, and “internalized” totalization
+
+Given $M : Z \\to \\mathbf{Cat}$, the Grothendieck total category $\\int M$ is represented as `Total_cat (Fibration_cov_catd M)`. The kernel commits to a definitional Σ-description of objects *only in this Grothendieck case*:
+
+$$
+\\mathrm{Ob}(\\textstyle\\int M) \\;\u2248\\; \\sum_{z\\in \\mathrm{Ob}(Z)} \\mathrm{Ob}(M(z)).
+$$
+
+This is a key engineering boundary: for a generic displayed category $E : \\mathrm{Catd}(Z)$ we do **not** force `Total_cat E` to be definitionally a Σ-type; it remains semantic data carried by `E`.
+
+For composing constructions inside `Cat_cat`, emdash also packages “totalization” as a functor object:
+
+```lambdapi
+symbol Total_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat));
+```
+
+with a β-rule on objects `fapp0 (Total_func[Z]) M ↪ Total_cat (Fibration_cov_catd M)`. This is the same stable-head pattern as elsewhere: we want *a small head symbol* we can compose with, rather than unfolding a large definition every time.
+
+## 5.5 Strict Grothendieck transport on fibre objects: `fib_cov_tapp0_fapp0`
+
+If $M : Z\\to \\mathbf{Cat}$ is Cat-valued, then for a base arrow $f:z\\to z'$ we can “transport” a fibre object $u\\in M(z)$ to $f_!(u) := M(f)(u)\\in M(z')$. emdash exposes this as a stable head `fib_cov_tapp0_fapp0` with strict functoriality on objects:
+
+- $(\\mathrm{id})_!(u) \\rightsquigarrow u$,
+- $g_!(f_!(u)) \\rightsquigarrow (g\\circ f)_!(u)$.
+
+The orientation is cut-elimination style: nested transports fold to one transport along the composite. This strictness is explicitly temporary; it is a placeholder for the later lax/weak story where “functoriality of transport” comes with higher cells rather than with definitional equalities.
+
+## 5.6 Fibrewise products of displayed categories: `Product_catd` and `prodFib`
+
+Displayed categories over the same base admit a fibrewise product `Product_catd U A : Catd Z`, with fibres
+$$(U\\times A)[z] \\equiv U[z]\\times A[z].$$
+
+For Grothendieck displayed categories $\\int E$ and $\\int D$, emdash includes a definitional rule
+$$
+(\\textstyle\\int E) \\times_Z (\\textstyle\\int D) \\;\\rightsquigarrow\\; \\textstyle\\int(E\\times D),
+$$
+implemented via a stable-head functor `prodFib` for pointwise product of Cat-valued functors. This is a representative example of “rewrite hygiene”: we introduce a small head so later rules can match without normalizing a huge composed expression in `Cat_cat`.
 
 # 6. The dependent arrow/comma construction: `homd_cov` and `homd_cov_int`
 
@@ -269,7 +442,35 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
 
 The important message for the reader is: *emdash organizes higher cells by iterating dependent arrow categories*; `homd_cov_int` is the internalized, compositional version of the triangle classifier.
 
-# 7. From globes to simplices: triangles, surfaces, and “stacking”
+# 7. Displayed transfors, triangles, and simplicial iteration
+
+## 7.1 Displayed transfors: pointwise (`tdapp0_*`) and off-diagonal (`tdapp1_*`)
+
+In addition to ordinary transfors between ordinary functors, the kernel includes **displayed transfors**: transformations between displayed functors over the same base $Z$.
+
+If $FF,GG : E \\to_Z D$ are displayed functors (objects of `Functord_cat E D`), then `Transfd_cat FF GG` is the category of displayed transfors. As with ordinary transfors, emdash provides stable-head projections rather than a record encoding:
+
+- `tdapp0_fapp0` extracts the **diagonal component** at a base point $(Y,V)$, i.e. a morphism in the fibre $D[Y]$:
+
+```lambdapi
+symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))],
+  Π (Y_Z : τ (Obj Z)), Π (V : τ (Obj (Fibre_cat E Y_Z))), Π (ϵ : τ (Obj (Transfd_cat FF GG))),
+  τ (Obj (Hom_cat (Fibre_cat D Y_Z)
+         (fdapp0 FF Y_Z V)
+         (fdapp0 GG Y_Z V)));
+```
+
+- `tdapp1_fapp0_funcd` (and internal variants like `tdapp1_int_*`) package the **off-diagonal component** over a displayed arrow $\\sigma : e \\to_f e'$ (surface syntax `ϵ_(σ)`), mirroring the ordinary `tapp1_*` story.
+
+This mirrors the surface discipline in `docs/SYNTAX_SURFACE.md`: diagonal components are silent (`ϵ[e]`), while off-diagonal components are explicit computational interfaces.
+
+One particularly important normalization rule connects identity displayed transfors to the *action on dependent homs*. Informally:
+
+> the identity transfor $1_{FF}$ induces exactly the “functorial action of $FF$ on homd-data”.
+
+In the kernel this is a fold from `tdapp1_*` at an identity to the stable head `fdapp1_funcd`. This is the displayed analogue of the philosophy “coherence is computation”: functorial action on higher structure is obtained by normalizing a canonical expression rather than by proving a lemma.
+
+## 7.2 From globes to simplices: triangles, surfaces, and “stacking”
 
 Classically, $\\omega$-categories are presented globularly: $0$-cells, $1$-cells, $2$-cells between $1$-cells, etc. emdash keeps the globular core (homs are categories), but it tries to *use simplicial indexing for computation*:
 
@@ -282,7 +483,7 @@ The kernel contains the beginnings of this “simplicial engine”:
 - `homd_cov` (triangle/surface classifier),
 - and draft operations like `fdapp1_funcd` (dependent action on morphisms), intended to iterate the construction.
 
-### Figure 3: a lax naturality triangle as a 2-cell over a base edge
+### Figure 3: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
 
 <div class="arrowgram">
 {
@@ -293,10 +494,11 @@ The kernel contains the beginnings of this “simplicial engine”:
     { "name": "Z", "left": 270, "top": 320, "label": "$Z$" }
   ],
   "arrows": [
-    { "from": "X", "to": "Y", "name": "f", "label": "$f$", "curve": -30,"label_alignment": "right" },
+    { "from": "X", "to": "Y", "name": "f", "label": "$f$", "label_alignment": "left" },
     { "from": "Y", "to": "Z", "name": "g", "label": "$g$", "label_alignment": "right" },
-    { "from": "X", "to": "Z", "name": "h", "label": "$h$", "curve": -30, "label_alignment": "left" },
-    { "from": "f", "to": "g", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
+    { "from": "X", "to": "Z", "name": "h", "label": "$h$", "curve": 100, "label_alignment": "left" },
+    { "from": "X", "to": "Z", "name": "gf", "label": "$g\\circ f$", "curve": -150, "label_alignment": "right" },
+    { "from": "gf", "to": "h", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
   ]
 }
 </div>
@@ -388,10 +590,12 @@ This is also why the repo’s recommended workflow uses short timeouts for typec
 
 The kernel is intentionally “small but sharp”. Some parts compute definitionally today; others are interfaces intended to be refined.
 
-- **Computational today** (examples): opposites (`Op_cat`), products, Grothendieck fibres for `Fibration_cov_catd`, pointwise computation for `homd_cov` in the Grothendieck–Grothendieck case, pointwise component extraction for transfors (`tapp0_fapp0`), and a draft triangle cut-elimination rule for adjunctions.
+- **Computational today** (examples): opposites (`Op_cat`), products, Grothendieck fibres for `Fibration_cov_catd`, strict Grothendieck object transport (`fib_cov_tapp0_fapp0`), pointwise computation for `homd_cov` in the Grothendieck–Grothendieck case, pointwise component extraction for transfors (`tapp0_fapp0`) and displayed transfors (`tdapp0_fapp0`), and a draft triangle cut-elimination rule for adjunctions.
 - **Abstract / TODO** (examples): full computation rules for general displayed categories `E : Catd Z`, full simplicial iteration (`fdapp1_funcd` depends on more `homd_cov` infrastructure), and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
 
 This division is deliberate: the kernel tries to avoid committing to heavy encodings (Σ-records for functors/transfors) until the rewrite story is stable.
+
+Practical note (this paper’s build pipeline): the repo includes lightweight automated checks that the rendered document has no Arrowgram/Vega JSON parse errors and no browser console errors during Paged.js rendering (`npm run check:render -w print`).
 
 # 11. Related ideas and influences
 
@@ -426,6 +630,7 @@ The most concrete result so far is a faithful computational core for (parts of) 
 - `Cat`, `Obj`, `Hom_cat`: category classifier, object groupoid, hom-category (iterated for higher cells).
 - `Functor_cat`, `fapp0`, `fapp1_func`, `fapp1_fapp0`: functors as objects; object and hom action; stable-head application.
 - `Transf_cat`, `tapp0_fapp0`, `tapp1_fapp0`: transfors; object-indexed and arrow-indexed components (lax naturality lives “off-diagonal”).
+- `Transfd_cat`, `tdapp0_fapp0`, `tdapp1_fapp0_funcd`, `fdapp1_funcd`: displayed transfors; pointwise components in fibres; packaged off-diagonal components over displayed arrows; action on dependent-hom data.
 - `Catd`, `Fibre_cat`, `Functord_cat`: displayed categories (isofibrations); fibres; displayed functors over a fixed base.
 - `Fibration_cov_catd`: Grothendieck construction $\\int M$ for $M:Z\\to\\mathbf{Cat}$ (this is where definitional computation for fibres exists).
 - `hom_cov`, `hom_cov_int`: (co)representables / internalized hom functors.
