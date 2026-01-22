@@ -3,84 +3,62 @@ title: Functorial Programming for Strict/Lax $\omega$-Categories in Lambdapi
 authors: m— / emdash project
 ---
 
+# Abstract
+
+We report on an ongoing experiment, `emdash`, whose goal is a new **type-theoretical** definition of $\omega$-categories that is both **internal** (expressed inside dependent type theory) and **computational** (amenable to normalization by rewriting). The implementation target is the **Lambdapi** logical framework, and the broader methodological inspiration is the proof-theoretic viewpoint that categorical equalities should be presented as normalization steps ("cut-elimination"). In this sense, the Lambdapi specification itself behaves like a small programming language and proof assistant for $\omega$-categories: the theory is formulated internally, and computations are performed by normalization; what remains is chiefly elaboration and user-facing syntax.
+
 # 1. Introduction
 
-We report on an ongoing experiment, `emdash2.lp`, whose goal is a new **type-theoretical** definition of $\omega$-categories that is both **internal** (expressed inside dependent type theory) and **computational** (amenable to normalization by rewriting). 
+The formalization of higher category theory is notoriously difficult. Traditional approaches often flounder in the "coherence hell" of infinite hierarchies of equations (pentagons, hexagons, and beyond). When defining weak $\omega$-categories, one must typically postulate an infinite set of coherence cells and equations governing them. In a standard proof assistant, managing these hierarchies manually is intractable.
 
-The implementation target is the **Lambdapi** logical framework, and the broader methodological inspiration is the proof-theoretic viewpoint that categorical equalities should be presented as normalization steps ("cut-elimination"). In this sense, the Lambdapi specification itself acts as a small programming language and proof assistant for $\omega$-categories: the theory is formulated internally, and computations are performed by the rewrite engine.
+Our approach, implemented in the `emdash2.lp` kernel, sidesteps this by adopting a **functorial programming** paradigm. Instead of building categories out of raw sets and imposing axioms, we define a universe of categories where the primary objects of study are **functors** and **transformations** (transfors).
 
-Traditional approaches to higher category theory often flounder in the "coherence hell" of infinite hierarchies of equations (pentagons, hexagons, etc.). Our approach sidesteps this by adopting a **functorial programming** paradigm:
-1.  We define 1-categorical structures (functors, natural transformations) as first-class citizens (objects in a "category of functors").
-2.  We impose strict definitional equalities (via rewrite rules) for the 1-categorical layer.
-3.  We represent higher weak structures (laxness) as *data* carried by the fibers of **dependent categories** (simplicial objects), rather than as properties.
+The key design choices are:
+1.  **Internalization**: We do not define "a category" as a structure *within* a type theory (like a record of sets and functions). Instead, we define a universe `Cat` *of* categories.
+2.  **Strict 1-Skeleton**: We impose **strict** definitional equalities for the 1-categorical layer (functor composition is associative on the nose). This provides a rigid scaffold.
+3.  **Weakness via Fibrations**: We represent higher weak structures (laxness) not as properties, but as *data* carried by the fibers of **dependent categories** (simplicial objects).
+4.  **Computation**: We use the rewriting engine of Lambdapi to operationalize categorical equalities. For instance, the triangle identities of an adjunction are not axioms to be proved, but reduction rules that simplify terms.
+
+This paper outlines the type-theoretic foundations of `emdash`, the simplicial mechanism for higher cells ("dependent homs"), and the computational treatment of adjunctions.
 
 # 2. The Internal Type Theory
 
-The core of `emdash` is built on a few primitive classifiers (universes).
+The core of `emdash` is built on a few primitive classifiers (universes). We distinguish sharply between "types/sets" (which form $\infty$-groupoids) and "directed categories".
 
 ## 2.1 Universes: Grpd and Cat
 
-We distinguish between "sets/types" and "categories":
-
-*   `Grpd`: The classifier of $\infty$-groupoids (types). Equality types $x = y$ live here.
-
+We posit two universes:
+*   `Grpd`: The classifier of $\infty$-groupoids (types). This is where "equality" lives.
 *   `Cat`: The classifier of $\omega$-categories.
 
-
-Unlike standard set-theoretic foundations, objects of a category $C : Cat$ form a groupoid `Obj(C) : Grpd`, not a set. This reflects the $\infty$-categorical principle that one should never talk about equality of objects, only paths/isomorphisms.
-
-
-The hom-structure is recursive:
-
-$$
-\text{Hom}_C(x, y) : \text{Cat}
-$$ 
-
-This means that for any two objects $x, y$, the collection of arrows between them is itself an $\omega$-category.
-
-
+Crucially, the "objects" of a category $C$ do not form a Set, but a Groupoid.
 
 ```lambdapi
-// Core primitives in emdash2.lp
 constant symbol Cat : TYPE;
 symbol Obj : Cat → Grpd;
-
-// Hom-categories are categories themselves (recursive)
-symbol Hom_cat : Π [C : Cat] (X Y : Obj C), Cat;
-
-// 1-cells are objects of the Hom-category
-// f : x → y
-symbol f : Obj (Hom_cat C x y);
 ```
 
-A 2-cell $\alpha : f \Rightarrow g$ is an object of the hom-category of the hom-category, and so on.
+This reflects the $\infty$-categorical principle that one should never talk about equality of objects, only paths or isomorphisms. If $x, y$ are objects of $C$, the type $x = y$ is a path in `Grpd`.
 
+## 2.2 Recursive Hom-Structure
 
-## 2.2 Functors as First-Class Objects
+The hom-structure is recursive. For any category $C$ and objects $x, y$, the collection of arrows between them is itself an $\omega$-category:
 
-A functor $F : A \to B$ is not a meta-level map, but an object of the functor category:
+$$ 
+\text{Hom\\_cat}\_C(x, y) : \text{Cat} 
+$$ 
+
+A 1-cell $f : x \to y$ is an object of this hom-category. A 2-cell $\alpha : f \Rightarrow g$ is an object of the hom-category of the hom-category, $\text{Hom}\_\text{Hom}(x,y)(f, g)$, and so on. This inductive definition naturally captures the globular structure of $\omega$-categories, though as we shall see, we essentially treat them simplicially using dependent sums.
+
+## 2.3 Functors as First-Class Citizens
+
+In `emdash`, a functor is not a meta-level map between types. It is an object of a dedicated functor category.
 
 $$ 
 F : \text{Obj}(\text{Functor\\_cat}(A, B)) 
 $$ 
 
-Its action on objects ($F_0$) and homs ($F_1$) are derived operations `fapp0` and `fapp1`.
-
-
-
-```lambdapi
-// Functor category classifier
-symbol Functor_cat (A B : Cat) : Cat;
-
-// Application on objects (F_0)
-symbol fapp0 : Functor_cat A B → Obj A → Obj B;
-
-// Application on homs (F_1) - returns a functor between hom-categories
-symbol fapp1 : Π (F : Functor_cat A B) (x y : Obj A),
-  Functor_cat (Hom_cat A x y) (Hom_cat B (F x) (F y));
-
-```
-
+The application of a functor to objects ($F_0$) and homs ($F_1$) are derived operations, `fapp0` and `fapp1`.
 
 <div class="arrowgram">
 {
@@ -98,19 +76,25 @@ symbol fapp1 : Π (F : Functor_cat A B) (x y : Obj A),
 }
 </div>
 
-Crucially, composition is strict: $G \circ F$ is defined by a rewrite rule such that $(G \circ F)(x)$ definitionally reduces to $G(F(x))$. This strictness at the 1-cell level provides a rigid skeleton upon which weak higher structures can hang.
+By using rewrite rules, we enforce strictness at the 1-categorical level. The composition $G \circ F$ is defined such that its action on an object $x$ reduces definitionally:
 
-# 3. Displayed Categories and Simplicial Nerves
+$$ (G \circ F)(x) \hookrightarrow G(F(x)) 
+$$ 
 
-To handle higher dimensions without explicit globular coordinates, we use **Dependent Categories** (also known as Displayed Categories or Fibrations).
+This eliminates the need to carry "associators" for 1-cell composition, significantly simplifying the higher coherence handling.
 
-A dependent category $E$ over a base $Z$ (denoted $E : \text{Catd}(Z)$) can be thought of as a family of categories indexed by $Z$, or geometrically, as a bundle $E \to Z$.
+# 3. Dependent Categories: The Simplicial Engine
+
+To handle higher dimensions without getting lost in globular coordinates, we rely heavily on **Dependent Categories** (also known as Displayed Categories or Fibrations). This is the "simplicial engine" of `emdash`.
+
+A dependent category $E$ over a base $Z$ (denoted $E : \text{Catd}(Z)$) can be thought of as a family of categories indexed by $Z$. Geometrically, it is a bundle $p: E \to Z$.
 
 ## 3.1 The Grothendieck Construction
-The bridge between the internal world (functors $Z \to Cat$) and the external world (fibrations) is the Grothendieck construction.
-Given a functor $M : Z \to Cat$, we construct a displayed category $\int M : Catd(Z)$.
-*   **Fibre**: The category over an object $z : Z$ is simply $M(z)$.
-*   **Total Space**: The total category $\text{Total\\_cat}(\int M)$ has pairs $(z, u)$ as objects, where $u \in M(z)$.
+
+The bridge between the internal world (functors $Z \to \text{Cat}$) and the external world (fibrations) is the Grothendieck construction. Given a functor $M : Z \to \text{Cat}$, we construct a displayed category $\int M$.
+
+*   **Fibre**: The category over an object $z : Z$ is definitionally $M(z)$.
+*   **Total Space**: The total category $\text{Total\\_cat}(\int M)$ has pairs $(z, u)$ as objects, where $u \in \text{Obj}(M(z))$.
 
 <div class="arrowgram">
 {
@@ -127,26 +111,36 @@ Given a functor $M : Z \to Cat$, we construct a displayed category $\int M : Cat
 }
 </div>
 
-## 3.2 The Simplicial Core: Dependent Hom
-The central innovation in `emdash` is the **dependent hom** construction, `homd_cov`. Instead of postulating globular cells directly, we construct them simplicially.
-
-Given a base category $Z$ and a displayed category $E$ over it, we define a "triangle classifier". For a base arrow $f : x \to y$ and a fibre object $u \in E(x)$, we form a category of "morphisms over $f$ starting from $u$".
-
+The morphism structure in the total category is what gives us the simplicial "shape". A morphism in $\int M$ from $(x, u)$ to $(y, v)$ lying over $f : x \to y$ corresponds to a morphism in the fibre $M(y)$:
 $$ 
-\text{Homd}_E(u, -) : E \times (\text{Hom}_Z(x, -))^{\text{op}} \longrightarrow \text{Cat} 
+\alpha : M(f)(u) \longrightarrow v 
+$$ 
+Here, $M(f)(u)$ represents the transport of $u$ along $f$.
+
+## 3.2 The Dependent Hom (`homd_cov`)
+
+The central innovation in `emdash` for representing higher cells is the **dependent hom** construction, `homd_cov`.
+
+In a simplicial set, a 2-simplex is a triangle bounded by three edges ($f, g, h$) and filled by a surface. In `emdash`, we internalize this via a classifier for "morphisms over a base arrow".
+
+Given:
+*   A base category $Z$ (often itself a total category of a lower dimension).
+*   A base arrow $f : x \to y$ in $Z$.
+*   A displayed category $E$ over $Z$.
+*   A starting object $u$ in the fibre $E(x)$.
+
+We construct a functor (which classifies the fibre categories):
+$$ 
+\text{homd\\_cov}(u) : \text{Hom}\_Z(x, -) \longrightarrow \text{Cat} 
 $$ 
 
-This structure classifies **2-simplices** (triangles). By iterating this construction, we obtain higher simplices. A 2-cell is not a globe, but a section of this dependent hom fibration.
+The value of this functor at a target object $z$ and an arrow $g : x \to z$ is the category of "lifts of $g$ starting at $u$". More specifically, it classifies triangles.
 
 ```lambdapi
-// The "Dependent Hom" / Simplicial Nerve construction
-// Classifies "triangles" over a base arrow f: x → y
-symbol homd_cov : Π [Z : Cat] [E : Catd Z]
-  (u : Fibre_cat E x)     // Source object in fibre
-  (D : Catd Z)            // Another displayed category (often E)
-  (FF : Functord_cat D E) // Displayed functor (often id)
-  → Functor_cat ... Cat_cat; // Returns a Cat-valued functor
+constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] ...
 ```
+
+This construction is iterated. A 2-cell $\alpha: f \Rightarrow g$ is not a primitive "globe"; it is a section of this dependent hom fibration.
 
 <div class="arrowgram">
 {
@@ -159,23 +153,29 @@ symbol homd_cov : Π [Z : Cat] [E : Catd Z]
   "arrows": [
     { "from": "X", "to": "Y", "label": "f" },
     { "from": "Y", "to": "Z", "label": "g" },
-    { "from": "X", "to": "Z", "label": "h", "label_alignment": "left" }
+    { "from": "X", "to": "Z", "label": "h", "label_alignment": "left" },
+    { "from": "X", "to": "Z", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "over", "shift": 15 }
   ]
 }
 </div>
 
-In the diagram above, the "dependent hom" construction allows us to define the space of "fillers" (2-cells) $\alpha : g \circ f \Rightarrow h$ as objects in a specific fibre.
+By taking the Grothendieck construction of `homd_cov`, we effectively build the "space of triangles" over the base category. A section of this bundle picks out a consistent choice of 2-cells.
 
 # 4. Transfors and Lax Naturality
 
 We use the term **Transfor** (from "Transformation/Functor") to encompass natural transformations, modifications, and higher mappings.
 
-In `emdash`, a transfor $\epsilon : F \Rightarrow G$ is an object of `Transf_cat(F, G)`. Its components are extracted computationally:
-1.  **Project to Functor**: We view $\epsilon$ as a dependent functor $\epsilon^X : \text{Hom}(X, -) \to \text{Hom}(FX, G-)$.
+In `emdash`, a transfor $\epsilon : F \Rightarrow G$ is an object of `Transf_cat(F, G)`. Its components are extracted computationally via a "projection and evaluation" strategy.
+
+1.  **Project to Dependent Functor**: We view $\epsilon$ as a dependent functor parameterized by an external index $X$.
+    $$ 
+    \epsilon^X : \text{Hom}\_A(X, -) \longrightarrow \text{Hom}\_B(FX, G(-)) 
+    $$ 
 2.  **Evaluate**: We evaluate this functor at the identity $id_X$ to get the 1-cell component $\epsilon_X : FX \to GX$.
 
 ## 4.1 Lax Squares
-Crucially, because we work with $\omega$-categories, naturality is **lax**. The square does not commute on the nose; there is a non-trivial 2-cell filling it.
+
+Crucially, because we work with $\omega$-categories, naturality is **lax**. The square formed by a 1-cell $f: X \to Y$ does not commute on the nose. Instead, there is a non-trivial 2-cell filling it.
 
 <div class="arrowgram">
 {
@@ -196,19 +196,22 @@ Crucially, because we work with $\omega$-categories, naturality is **lax**. The 
 }
 </div>
 
-This 2-cell $\alpha$ (the "laxness witness") is carried by the higher structure of the transfor object. In the strict case, we can impose rewrite rules that force $\alpha$ to be an identity.
+This 2-cell $\alpha$ (the "laxness witness") is carried by the higher structure of the transfor object. In the strict case, we can impose rewrite rules that force $\alpha$ to be an identity, but the framework is designed to handle the general lax case natively.
 
 # 5. Adjunctions as Computation
 
-Following the philosophy of Došen and Petrić, we treat adjunctions not just as properties but as computational reductions. 
+Following the philosophy of Došen and Petrić, we treat adjunctions not just as properties but as computational reductions. The triangle identities of an adjunction $(L \dashv R, \eta, \epsilon)$ are oriented as **cut-elimination** rules.
 
-The triangle identities of an adjunction $(L \dashv R, \eta, \epsilon)$ are oriented as **cut-elimination** rules:
+Consider the unit-counit equation:
+$$ 
+\epsilon_{L(A)} \circ L(\eta_A) = id_{L(A)} 
+$$ 
+
+In `emdash`, we implement this as a rewrite rule on the stable head symbols for composition and transfor application.
 
 $$ 
 \epsilon_{L(A)} \circ L(\eta_A) \rightsquigarrow id_{L(A)} 
 $$ 
-
-In `emdash`, these are implemented as rewrite rules on the composition of the relevant transfor components. This means that large diagrams involving adjoints can be simplified automatically by the type checker.
 
 <div class="arrowgram">
 {
@@ -226,7 +229,35 @@ In `emdash`, these are implemented as rewrite rules on the composition of the re
 }
 </div>
 
-# 6. Implementation Status
+This approach has profound implications for the automation of category theory. Large diagrams involving adjoints can often be simplified automatically by the type checker simply by normalizing the term. The user does not need to manually apply the triangle identities; the system "computes" the simplified form.
+
+# 6. The Univalence Bridge
+
+One of the most challenging aspects of type-theoretic category theory is the treatment of "equality of objects". In `emdash`, we enforce a strict discipline:
+*   **Paths**: Equality in `Obj(C)` is a path in the groupoid `Obj(C)`.
+*   **Equivalences**: Isomorphism in `C` is a structure in `Hom_cat(C)`.
+
+We are developing a **Univalence Bridge** to connect these two concepts without inducing rewrite loops (a common peril when equating paths and equivalences).
+
+We define a canonical map from paths to equivalences (the "rewrite" direction, $\beta$):
+```lambdapi
+constant symbol univ_equiv_of_path : Π [C : Cat], Π (x y : τ (Obj C)),
+  Π (p : τ (x = y)),
+  τ (Obj (@Fibre_cat (@Hom_cat C x y) (isEquiv x y) (@path_to_hom_fapp0 C x y p)));
+```
+
+And we use **unification rules** to guide the system in the reverse direction (the "inference" direction, $\eta$), treating equivalences as paths during elaboration where safe.
+
+```lambdapi
+// Unification hint
+unif_rule @univ_path_of_equiv $C $x $y $f $w ≡ $p
+  ↪ [ $f ≡ @path_to_hom_fapp0 $C $x $y $p;
+      $w ≡ @univ_equiv_of_path $C $x $y $p ];
+```
+
+This ensures that we can "prove" univalence constructively without getting stuck in infinite reduction cycles in the kernel.
+
+# 7. Implementation Status
 
 The current kernel (`emdash2.lp`) successfully implements:
 *   The hierarchy of universes (`Grpd`, `Cat`).
@@ -234,10 +265,11 @@ The current kernel (`emdash2.lp`) successfully implements:
 *   The Grothendieck construction for displayed categories.
 *   The simplicial "dependent hom" packaging (`homd_cov`).
 *   Pointwise computation of transfor components.
+*   Prototype strictness rules for functors (preserving `id` and `comp` on the nose).
 
-Work is ongoing to fully implement the **Univalence Bridge**, which relates the path groupoid in `Obj(C)` to the equivalence 1-cells in `Hom(C)`. This will allow the system to treat "equality of objects" as "isomorphism" in a fully mechanized way.
+The next phase of development focuses on the `Path_cat` infrastructure—treating discrete groupoids as full $\omega$-categories—and populating the `isEquiv` witnesses with higher coherent data.
 
-# 7. Conclusion
+# 8. Conclusion
 
 `emdash` represents a shift from "checking" category theory to "running" it. By embedding the rules of $\omega$-categories into the computational core of a logical framework, we move closer to the dream of an AI assistant that can not only verify categorical proofs but actively construct them through normalization.
 
