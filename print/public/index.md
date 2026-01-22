@@ -83,28 +83,39 @@ The explicit, computationally important data is typically **off-diagonal**: $\\e
 
 ## 2.3 Technical overview (kernel ↔ surface ↔ mathematics)
 
-| Kernel head | Surface reading (intended) | Standard meaning |
-|---|---|---|
-| `Cat` | `⊢ C : Cat` | category / ω-category classifier |
-| `Obj : Cat → Grpd` | `⊢ x : C` | object groupoid of a category |
-| `Hom_cat C x y` | `x :^- C, y : C ⊢ f : x → y` | hom-category (so 1-cells are its objects) |
-| `Functor_cat A B` | `⊢ F : A → B` | functor category |
-| `fapp0 F x` | `F[x]` | object action $F_0$ |
-| `fapp1_fapp0 F f` | `F[f]` (silent) | arrow action $F_1(f)$ (as a 1-cell) |
-| `Transf_cat F G` | `⊢ ϵ : Transf(F,G)` | transformations / transfors |
-| `tapp0_fapp0 Y ϵ` | `ϵ[Y]` (silent) | component $ϵ_Y$ |
-| `tapp1_fapp0 … ϵ f` | `ϵ_(f)` | off-diagonal component “over $f$” |
-| `Catd Z` | `⊢ E : Catd Z` | displayed category / (iso)fibration over $Z$ |
-| `Fibre_cat E z` | `E[z]` | fibre category over $z$ |
-| `Functord_cat E D` | `⊢ FF : E ⟶_Z D` | displayed functors over fixed base |
-| `fdapp0 … FF z e` | `FF[e]` | fibrewise object action of displayed functor |
-| `Fibration_cov_catd M` | (silent if `M: Z ⟶ Cat`) | Grothendieck construction $∫M$ |
-| `Total_cat E` | `∫E` (informal) | total category of a displayed category |
-| `fib_cov_tapp0_fapp0 M f u` | `$f_!(u)$` | Grothendieck transport on fibre objects (strict today) |
-| `homd_cov` | `Homd_E(w,−)` (informal) | dependent arrow/comma category (triangle classifier) |
-| `Transfd_cat FF GG` | `⊢ ϵ : Transfd(FF,GG)` | displayed transfors |
-| `tdapp0_fapp0 … ϵ` | `ϵ[e]` (silent) | displayed component in a fibre |
-| `tdapp1_*` | `ϵ_(σ)` | displayed off-diagonal component over $σ:e→_f e'$ |
+<div class="fullwidth">
+<table class="emdash-table">
+  <thead>
+    <tr>
+      <th>Kernel head</th>
+      <th>Surface reading (intended)</th>
+      <th>Standard meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Cat</code></td><td><code>⊢ C : Cat</code></td><td>category / ω-category classifier</td></tr>
+    <tr><td><code>Obj : Cat → Grpd</code></td><td><code>⊢ x : C</code></td><td>object groupoid of a category</td></tr>
+    <tr><td><code>Hom_cat C x y</code></td><td><code>x :^- C, y : C ⊢ f : x → y</code></td><td>hom-category (so 1-cells are its objects)</td></tr>
+    <tr><td><code>Functor_cat A B</code></td><td><code>⊢ F : A → B</code></td><td>functor category</td></tr>
+    <tr><td><code>fapp0 F x</code></td><td><code>F[x]</code></td><td>object action $F_0$</td></tr>
+    <tr><td><code>fapp1_fapp0 F f</code></td><td><code>F[f]</code> (silent)</td><td>arrow action $F_1(f)$ (as a 1-cell)</td></tr>
+    <tr><td><code>Transf_cat F G</code></td><td><code>⊢ ϵ : Transf(F,G)</code></td><td>transformations / transfors</td></tr>
+    <tr><td><code>tapp0_fapp0 Y ϵ</code></td><td><code>ϵ[Y]</code> (silent)</td><td>component $ϵ_Y$</td></tr>
+    <tr><td><code>tapp1_fapp0 … ϵ f</code></td><td><code>ϵ_(f)</code></td><td>off-diagonal component “over $f$”</td></tr>
+    <tr><td><code>Catd Z</code></td><td><code>⊢ E : Catd Z</code></td><td>displayed category / (iso)fibration over $Z$</td></tr>
+    <tr><td><code>Fibre_cat E z</code></td><td><code>E[z]</code></td><td>fibre category over $z$</td></tr>
+    <tr><td><code>Functord_cat E D</code></td><td><code>⊢ FF : E ⟶_Z D</code></td><td>displayed functors over fixed base</td></tr>
+    <tr><td><code>fdapp0 … FF z e</code></td><td><code>FF[e]</code></td><td>fibrewise object action of displayed functor</td></tr>
+    <tr><td><code>Fibration_cov_catd M</code></td><td>(silent if <code>M: Z ⟶ Cat</code>)</td><td>Grothendieck construction $∫M$</td></tr>
+    <tr><td><code>Total_cat E</code></td><td><code>∫E</code> (informal)</td><td>total category of a displayed category</td></tr>
+    <tr><td><code>fib_cov_tapp0_fapp0 M f u</code></td><td>$f_!(u)$</td><td>Grothendieck transport on fibre objects (strict today)</td></tr>
+    <tr><td><code>homd_cov</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (triangle classifier)</td></tr>
+    <tr><td><code>Transfd_cat FF GG</code></td><td><code>⊢ ϵ : Transfd(FF,GG)</code></td><td>displayed transfors</td></tr>
+    <tr><td><code>tdapp0_fapp0 … ϵ</code></td><td><code>ϵ[e]</code> (silent)</td><td>displayed component in a fibre</td></tr>
+    <tr><td><code>tdapp1_*</code></td><td><code>ϵ_(σ)</code></td><td>displayed off-diagonal component over $σ:e→_f e'$</td></tr>
+  </tbody>
+</table>
+</div>
 
 # 3. Core Type Theory: `Grpd`, `Cat`, and homs-as-categories
 
@@ -534,6 +545,41 @@ The kernel contains the beginnings of this “simplicial engine”:
 
 This is the common 2-categorical picture (a 2-cell between parallel composites). The kernel aim is to recover such cells as objects of a dependent hom construction, so that “stacking” and exchange laws can be derived from functoriality of the indexing.
 
+### Figure 3b: stacking 2-cells along a 1-cell (a tetrahedral “over-a-base-edge” picture)
+
+The “stacking” operation (horizontal composition of 2-cells along a 1-cell rather than along a 0-cell) is easiest to see as a tetrahedron of base edges, with 2-cells comparing *direct* edges with *composite* edges:
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "v0", "left": 90,  "top": 230, "label": "$0\\,\\bullet$" },
+    { "name": "v1", "left": 320, "top": 80,  "label": "$1\\,\\bullet$" },
+    { "name": "v2", "left": 320, "top": 240, "label": "$\\bullet\\,2$" },
+    { "name": "v3", "left": 560, "top": 340, "label": "$\\bullet\\,3$" }
+  ],
+  "arrows": [
+    { "from": "v0", "to": "v1", "name": "f",   "label": "$f$",   "label_alignment": "left" },
+    { "from": "v1", "to": "v2", "name": "b",   "label": "$b$",   "label_alignment": "right" },
+    { "from": "v0", "to": "v2", "name": "fp",  "label": "$f'$",  "label_alignment": "left", "curve": -20 },
+    { "from": "v0", "to": "v2", "name": "bf",  "label": "$b\\circ f$", "label_alignment": "right", "curve": 70, "style": { "body": { "name": "dotted" } } },
+
+    { "from": "v2", "to": "v3", "name": "t",   "label": "$t$",   "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "from": "v1", "to": "v3", "name": "bp",  "label": "$b'$",  "label_alignment": "left", "curve": -30, "style": { "body": { "name": "dashed" } } },
+    { "from": "v1", "to": "v3", "name": "tb",  "label": "$t\\circ b$", "label_alignment": "right", "curve": 50, "style": { "body": { "name": "dotted" } } },
+
+    { "from": "v0", "to": "v3", "name": "fpp", "label": "$f''$", "label_alignment": "left", "curve": -10, "style": { "body": { "name": "dashed" } } },
+    { "from": "v0", "to": "v3", "name": "tfp", "label": "$t\\circ f'$", "label_alignment": "right", "curve": 80, "style": { "body": { "name": "dotted" } } },
+
+    { "from": "bf",  "to": "fp",  "label": "$\\sigma$",        "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
+    { "from": "tfp", "to": "fpp", "label": "$\\phi$",          "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
+    { "from": "tb",  "to": "bp",  "label": "$\\beta^{op}$",    "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
+  ]
+}
+</div>
+
+In emdash terms, this is the kind of geometry the kernel is aiming to make *computational*: rather than proving a separate “exchange law”, one wants an interface where these higher comparisons arise by functoriality/transport in a suitably internalized indexing.
+
 # 8. Computational Adjunctions (cut-elimination rules)
 
 The `emdash2.lp` file contains a draft interface for adjunctions inspired by Došen–Petrić’s proof-theoretic view of categories.
@@ -592,18 +638,7 @@ This matches the abstract’s goal: make the triangle identity a *definitional c
 
 In `emdash2.lp` the rule is implemented at the level of the stable heads for composition (`comp_fapp0`), functor action on morphisms (`fapp1_fapp0`), and arrow-indexed transfor components (`tapp1_fapp0`). The result is that normalizing a composite term *performs* the triangle reduction.
 
-## 8.3 Why this is primarily about `tapp1_*` / `tdapp1_*` (not `homd_cov`)
-
-The computational adjunction story in v2 is best viewed as a general application of the *off-diagonal component infrastructure for transfors*, not as a special application of the dependent-hom layer.
-
-Concretely, emdash distinguishes two ways to “read” a transfor $\\epsilon : F \\Rightarrow G$:
-
-- **Diagonal (object-indexed) components** $\\epsilon_X : F(X) \\to G(X)$, extracted by `tapp0_fapp0` (surface-silent as `ϵ[x]`).
-- **Off-diagonal (arrow-indexed) components** $\\epsilon_{(f)} : F(X) \\to G(Y)$ for $f:X\\to Y$, represented by the stable head `tapp1_fapp0` and its packaging `tapp1_fapp0_funcd` (surface form `ϵ_(f)` with the contravariant binder `x :^- A`).
-
-This off-diagonal interface is exactly what you need to express “whiskering” and the triangle composites that appear in adjunctions. The draft triangle cut-elimination rule in `emdash2.lp` is formulated directly using these stable heads (`tapp1_fapp0`, `fapp1_fapp0`, `comp_fapp0`), and does not require `homd_cov` to state or to run.
-
-The dependent-hom layer (`homd_cov`, `homd_cov_int`) is aimed at a different (orthogonal) problem: providing a simplicial organization of higher cells “over a base arrow” that can later support exchange/stacking laws and higher coherence in a uniform way.
+This computational adjunction story is best viewed as an application of the *off-diagonal component infrastructure for transfors* (`tapp1_*` / `tdapp1_*` and their “functional” packaging), rather than as a special application of the dependent-hom layer. The dependent-hom constructions (`homd_cov`, `homd_cov_int`) target a different goal: simplicial organization of higher cells over chosen base arrows, so that stacking/exchange phenomena can later be obtained uniformly.
 
 # 9. Metatheory and Normalization Discipline
 
