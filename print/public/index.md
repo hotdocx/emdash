@@ -553,24 +553,21 @@ The “stacking” operation (horizontal composition of 2-cells along a 1-cell r
 {
   "version": 1,
   "nodes": [
-    { "name": "b0", "left": 100, "top": 240, "label": "$b_0\\ \\bullet$" },
-    { "name": "b1", "left": 420, "top": 80,  "label": "$b_1\\ \\bullet$" },
-    { "name": "b2", "left": 420, "top": 240, "label": "$\\bullet\\ b_2$" },
-    { "name": "b3", "left": 740, "top": 380, "label": "$\\bullet\\ b_3$" }
+    { "name": "v0", "label": "$\\bullet$", "left": 0, "top": 150 },
+    { "name": "v1", "label": "$b_0 \\ \\bullet$", "left": 190, "top": 0 },
+    { "name": "v2", "label": "$\\bullet \\ b_1$", "left": 190, "top": 150 },
+    { "name": "v3", "label": "$\\bullet \\ b_2$", "left": 300, "top": 265 }
   ],
   "arrows": [
-    { "from": "b1", "to": "b2", "label": "$b_{12}$", "label_alignment": "left" },
-    { "from": "b1", "to": "b3", "name": "b13", "label": "$b_{13}$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
-
-    { "from": "b0", "to": "b1", "name": "e0", "label": "$e_0$", "label_alignment": "right" },
-    { "from": "b0", "to": "b2", "name": "e1", "label": "$e_1$", "label_alignment": "left" },
-    { "from": "b0", "to": "b3", "name": "e2", "label": "$e_2$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
-
-    { "from": "b2", "to": "b3", "name": "b23", "label": "$b_{23}$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
-
-    { "from": "b13", "to": "b23", "label": "$b_{123}^{op}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
-    { "from": "e0", "to": "e1", "label": "$e_{01}", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" },
-    { "from": "e1", "to": "e2", "label": "$e_{12}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" }
+    { "name": "e0", "label": "$e_0$", "from": "v0", "to": "v1", "curve": 0, "shift": 0, "label_alignment": "right", "style": { "level": 1 } },
+    { "name": "e1", "label": "$e_1$", "from": "v0", "to": "v2", "curve": 0, "shift": 0, "label_alignment": "left", "style": { "level": 1 } },
+    { "name": "e2", "label": "$b_{12}$", "from": "v2", "to": "v3", "curve": 0, "shift": 0, "label_alignment": "left", "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e3", "label": "$b_{01}$", "from": "v1", "to": "v2", "curve": 0, "shift": 0, "label_alignment": "left", "style": { "level": 1 } },
+    { "name": "e4", "label": "$b_{02}$", "from": "v1", "to": "v3", "curve": 0, "shift": 0, "label_alignment": "right", "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e5", "label": "$e_2$", "from": "v0", "to": "v3", "curve": 0, "shift": 0, "label_alignment": "left", "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e6", "label": "$e_{01}$", "from": "e0", "to": "e1", "curve": 0, "shift": 0, "label_alignment": "right", "style": { "level": 2 } },
+    { "name": "e7", "label": "$e_{12}$", "from": "e1", "to": "e5", "curve": 0, "shift": 0, "label_alignment": "right", "style": { "level": 2 } },
+    { "name": "e8", "label": "$b_{012}^{op}$", "from": "e4", "to": "e2", "curve": 0, "shift": 0, "label_alignment": "left", "style": { "level": 2 } }
   ]
 }
 </div>
