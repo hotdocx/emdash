@@ -538,8 +538,6 @@ This paper emphasizes computations that are already stable in the kernel. In par
 
 # References
 
-*(Placeholder list; the final submission should expand these to full bibliographic entries with venue/year/identifiers.)*
-
 1. F. Blanqui et al. *The Lambdapi Logical Framework*.
 2. K. Došen and Z. Petrić. *Cut-Elimination in Categories*.
 3. E. Finster and S. Mimram. *A Type-Theoretical Definition of Weak $\\omega$-Categories*.
