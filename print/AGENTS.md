@@ -156,3 +156,13 @@ authors: Author One & Author Two
        A-->B;
    </div>
 
+---
+
+# Paper production SOP (emdash / `print/` pipeline)
+
+This repo contains a small “paper renderer” that turns `print/public/index.md` into a paged, 2-column, LICS-style PDF via a browser pipeline (Showdown → KaTeX/Mermaid/Vega/Arrowgram → Paged.js).
+
+Start here:
+
+- `print/DEV_SOP.md` (authoring conventions, debugging playbook, validation commands, file map).
+
