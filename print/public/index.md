@@ -29,7 +29,7 @@ The emdash project explores a kernel design in which:
 
 This paper is a narrative tour of the current `emdash2.lp` kernel. It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_cov_int_base`) we also provide a traditional reading.
 
-# 1.1 Contributions (what is new here?)
+## 1.1 Contributions (what is new here?)
 
 This paper’s contributions are primarily expository (the kernel is ongoing work), but the kernel already embodies several concrete design/engineering commitments:
 
@@ -136,6 +136,8 @@ The explicit, computationally important data is typically **off-diagonal**: $\\e
 </table>
 </div>
 
+**Notation convention.** In surface typing examples, we write `⊢ x : C` as shorthand for `⊢ x : τ (Obj C)` (and similarly `f : x → y` abbreviates `f : τ (Obj (Hom_cat C x y))`).
+
 # 3. Core Type Theory: `Grpd`, `Cat`, and homs-as-categories
 
 ## 3.1 Two classifiers: groupoids vs directed structure
@@ -173,7 +175,7 @@ injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;
 
 So a “1-cell” $f:x\\to y$ is an *object* of `Hom_cat C x y`. A “2-cell” between parallel 1-cells is then a 1-cell *in that hom-category*, etc. This is the standard globular iteration, but the rest of the paper emphasizes a *simplicial* reorganization of this data.
 
-# 3.4 Opposites and pointwise composition
+## 3.4 Opposites and pointwise composition
 
 The kernel treats the opposite category as a primitive constructor `Op_cat : Cat → Cat` with definitional computation rules:
 
@@ -190,7 +192,7 @@ Similarly, composition in a category $A$ is exposed in two complementary ways:
 
 The pointwise head is what most rewrite rules target: it is the stable normal form for “$g\\circ f$”.
 
-# 3.5 Paths as morphisms: `Path_cat` and `Core_cat`
+## 3.5 Paths as morphisms: `Path_cat` and `Core_cat`
 
 The universe `Obj C : Grpd` means objects come with a path/equality structure. To relate that path structure to actual *directed* morphisms, emdash introduces:
 
@@ -208,7 +210,7 @@ symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = 
 
 This is intentionally one-way at the definitional level: the reverse direction (morphisms ⇒ paths) is the dangerous one that can create rewrite loops unless handled by a carefully controlled unification rule (as in the draft univalence bridge in `emdash2.lp`).
 
-# 3.6 The “universe categories” `Grpd_cat` and `Cat_cat`
+## 3.6 The “universe categories” `Grpd_cat` and `Cat_cat`
 
 emdash internalizes “the category of groupoids” and “the category of categories” as actual categories:
 
@@ -271,7 +273,7 @@ as a stable-head operation `tapp1_fapp0`. The intended surface syntax is `ϵ_(f)
 
 Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that lives over the base arrow $f$”. This is exactly the kind of interface we need for cut-elimination style rewrites: we can orient coherence laws as reductions on expressions built from `comp_fapp0`, `fapp1_fapp0`, and `tapp1_fapp0`, without committing to any record encoding of transfors.
 
-### Figure 1a: an off-diagonal component as a triangle
+### Figure 1: an off-diagonal component as a triangle
 
 <div class="arrowgram">
 {
@@ -291,7 +293,7 @@ Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that live
 
 In a strict 1-category, you may take $\\epsilon_{(f)} := \\epsilon_Y \\circ F(f)$ (or equivalently $G(f)\\circ\\epsilon_X$) and prove the two definitions equal. In emdash, we keep $\\epsilon_{(f)}$ as explicit data because it is the correct home for higher “laxness” witnesses.
 
-### Figure 1b: the composite case and “accumulation” over base arrows
+### Figure 2: the composite case and “accumulation” over base arrows
 
 The same idea becomes more informative when we look at a composite base arrow. If we have $f:X\\to Y$ and $g:Y\\to Z$, then an “off-diagonal” component can be presented directly over $g\\circ f$:
 
@@ -305,7 +307,7 @@ The same idea becomes more informative when we look at a composite base arrow. I
   ],
   "arrows": [
     { "label": "$F(f)$", "from": "FX", "to": "FY", "label_alignment": "left" },
-    { "label": "$\\epsilon_g$", "from": "FY", "to": "GZ", "label_alignment": "right" },
+    { "label": "$\\epsilon_{(g)}$", "from": "FY", "to": "GZ", "label_alignment": "right" },
     { "label": "$\\epsilon_{(g \\circ f)}$", "from": "FX", "to": "GZ", "curve": -20, "label_alignment": "right" }
   ]
 }
@@ -316,6 +318,16 @@ $$
 (\\epsilon_{(g)}) \\circ F(f) \\;\\rightsquigarrow\\; \\epsilon_{(g\\circ f)},
 $$
 so that normalization *accumulates* the base-arrow index instead of repeatedly expanding/contracting naturality squares.
+
+For reference, the stable head has the following kernel type (here `@` just disables implicit arguments):
+
+```lambdapi
+symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
+  Π (X_A Y_A : τ (Obj A)),
+  Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
+  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
+  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 G_AB Y_A)));
+```
 
 ## 4.5 Representables and the Yoneda-style heads `hom_cov` / `hom_con`
 
@@ -359,7 +371,7 @@ constant symbol Fibration_cov_catd : Π [Z : Cat], τ (Obj (Functor_cat Z Cat_ca
 
 This is the main place where the kernel commits to concrete computations for `Catd`: general displayed categories are abstract, but Grothendieck ones compute.
 
-### Figure 1: Grothendieck morphisms lie over base arrows
+### Figure 3: Grothendieck morphisms lie over base arrows
 
 <div class="arrowgram">
 {
@@ -461,7 +473,18 @@ The kernel symbol `homd_cov` is declared abstractly, but it has a key computatio
 
 This is precisely the “dependent arrow/comma” intuition.
 
-### Figure 2: a displayed arrow over a base arrow
+At the definitional level, the key pointwise computation rule in `emdash2.lp` is (Grothendieck–Grothendieck case):
+
+```lambdapi
+rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
+              (@Fibration_cov_catd $Z $D0) $FF)
+            (Struct_sigma $z (Struct_sigma $d $f))
+  ↪ @Hom_cat (fapp0 $E0 $z)
+      (@fib_cov_tapp0_fapp0 $Z $E0 $W_Z $z $f $W)
+      (@fdapp0 $Z (@Fibration_cov_catd $Z $D0) (@Fibration_cov_catd $Z $E0) $FF $z $d);
+```
+
+### Figure 4: a displayed arrow over a base arrow
 
 <div class="arrowgram">
 {
@@ -568,7 +591,7 @@ The kernel contains the beginnings of this “simplicial engine”:
 - `homd_cov` (triangle/surface classifier),
 - and draft operations like `fdapp1_funcd` (dependent action on morphisms), intended to iterate the construction.
 
-### Figure 3: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
+### Figure 5: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
 
 <div class="arrowgram">
 {
@@ -590,14 +613,15 @@ The kernel contains the beginnings of this “simplicial engine”:
 
 This is the common 2-categorical picture (a 2-cell between parallel composites). The kernel aim is to recover such cells as objects of a dependent hom construction, so that “stacking” and exchange laws can be derived from functoriality of the indexing.
 
-### Figure 3b: stacking 2-cells along a 1-cell (a tetrahedral “over-a-base-edge” picture)
+### Figure 6: stacking 2-cells along a 1-cell (a tetrahedral “over-a-base-edge” picture)
 
-The “stacking” operation (horizontal composition of 2-cells along a 1-cell rather than along a 0-cell) is easiest to see as a tetrahedron of base edges, with 2-cells comparing *direct* edges with *composite* edges:
+The “stacking” operation (horizontal composition of 2-cells along a 1-cell rather than along a 0-cell) is easiest to see as a tetrahedron of base edges, with 2-cells comparing *direct* edges with *composite* edges.
 
-Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally, a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}:b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ a category of morphisms from the transport of $e_0$ along $b_{01}$ to $e_1$ in the fibre over $b_1$. In slogan form, this is a dependent arrow/comma object:
+Recall from §6 that the dependent arrow/comma classifier organizes “2-cells over a chosen base edge” via a functor
 $$
 \\mathrm{Homd}_E(e_0,--) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
 $$
+Stacking then corresponds to composing such base edges and asking for a *computational* interface where normalization re-associates and “exchanges” these simplicial indices.
 
 <div class="arrowgram">
 {
@@ -662,7 +686,7 @@ $$
 
 This matches the abstract’s goal: make the triangle identity a *definitional computation step* rather than a lemma.
 
-### Figure 4: the familiar triangle identity (as reduction)
+### Figure 7: the familiar triangle identity (as reduction)
 
 <div class="arrowgram">
 {
@@ -735,6 +759,11 @@ This division is deliberate: the kernel tries to avoid committing to heavy encod
 
 The Lambdapi development is designed to typecheck quickly; long typechecks are treated as a symptom of rewrite/unification pathologies. The repo provides a timeout-protected check (`EMDASH_TYPECHECK_TIMEOUT=60s make check`) and a watch mode that logs to `logs/typecheck.log`.
 
+The paper renderer is also exercised as a reproducible artifact:
+
+- `npm run validate:paper -w print` validates all embedded Arrowgram/Vega-Lite JSON blocks.
+- `npm run check:render -w print` runs validation + build + a headless browser console check (fails on KaTeX warnings and rendering errors).
+
 # 11. Limitations, Related Work, and Future Directions
 
 ## 11.1 Limitations (current kernel snapshot)
@@ -774,6 +803,8 @@ emdash is an attempt to make a small computational kernel in which:
 The most concrete result so far is a faithful computational core for (parts of) Grothendieck-style dependent categories and a first computational adjunction rule. The next step is to finish the simplicial iteration so that exchange/stacking laws and higher triangle identities can also become normalization steps.
 
 # References
+
+*(Placeholder list; the final submission should expand these to full bibliographic entries with venue/year/identifiers.)*
 
 1. F. Blanqui et al. *The Lambdapi Logical Framework*.
 2. K. Došen and Z. Petrić. *Cut-Elimination in Categories*.
