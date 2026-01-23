@@ -51,7 +51,7 @@ function killProcess(child) {
 async function main() {
   const host = '127.0.0.1';
   const port = await findOpenPort(host, 4173, 30);
-  const url = `http://${host}:${port}/`;
+  const baseUrl = `http://${host}:${port}/`;
 
   // Start a preview server for the built output.
   const preview = spawn(
@@ -76,39 +76,47 @@ async function main() {
   }
 
   const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
+  const runs = [
+    { name: 'index.md (default)', query: '' },
+    { name: 'index_0.md', query: '?paper=index_0.md' },
+  ];
 
   const errors = [];
   const warnings = [];
   const requestFailures = [];
 
-  page.on('pageerror', (err) => {
-    errors.push(`pageerror: ${err.message || String(err)}`);
-  });
+  for (const run of runs) {
+    const page = await browser.newPage();
 
-  page.on('console', (msg) => {
-    const type = msg.type();
-    const text = msg.text();
-    if (type === 'error') errors.push(`console.error: ${text}`);
-    if (type === 'warning') {
-      // Treat KaTeX strict-mode warnings as failures: they indicate malformed TeX input.
-      if (text.includes('LaTeX-incompatible input') || text.includes('[mathVsTextAccents]')) {
-        errors.push(`console.warn (katex): ${text}`);
-      } else {
-        warnings.push(`console.warn: ${text}`);
+    page.on('pageerror', (err) => {
+      errors.push(`[${run.name}] pageerror: ${err.message || String(err)}`);
+    });
+
+    page.on('console', (msg) => {
+      const type = msg.type();
+      const text = msg.text();
+      if (type === 'error') errors.push(`[${run.name}] console.error: ${text}`);
+      if (type === 'warning') {
+        // Treat KaTeX strict-mode warnings as failures: they indicate malformed TeX input.
+        if (text.includes('LaTeX-incompatible input') || text.includes('[mathVsTextAccents]')) {
+          errors.push(`[${run.name}] console.warn (katex): ${text}`);
+        } else {
+          warnings.push(`[${run.name}] console.warn: ${text}`);
+        }
       }
-    }
-  });
+    });
 
-  page.on('requestfailed', (req) => {
-    const failure = req.failure();
-    requestFailures.push(`requestfailed: ${req.url()} ${failure?.errorText || ''}`.trim());
-  });
+    page.on('requestfailed', (req) => {
+      const failure = req.failure();
+      requestFailures.push(`[${run.name}] requestfailed: ${req.url()} ${failure?.errorText || ''}`.trim());
+    });
 
-  // Navigate and wait for paged.js to render pages.
-  await page.goto(url, { waitUntil: 'domcontentloaded' });
-  await page.waitForSelector('.pagedjs_pages', { timeout: 30_000 });
-  await sleep(1500);
+    // Navigate and wait for paged.js to render pages.
+    await page.goto(`${baseUrl}${run.query}`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.pagedjs_pages', { timeout: 30_000 });
+    await sleep(1500);
+    await page.close();
+  }
 
   await browser.close();
   killProcess(preview);

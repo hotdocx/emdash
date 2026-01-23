@@ -169,8 +169,20 @@ export default function App() {
     const [isTwoColumn, setIsTwoColumn] = useState(false);
 
     useEffect(() => {
-        // Fetch index.md from public folder
-        fetch('/index.md')
+        const params = new URLSearchParams(window.location.search);
+        const requested = (params.get('paper') || '').trim();
+        const normalized =
+            requested === '' || requested === 'index' || requested === 'index.md'
+                ? 'index.md'
+                : requested === '0' || requested === 'index_0' || requested === 'index_0.md'
+                    ? 'index_0.md'
+                    : requested;
+
+        const safe = /^[A-Za-z0-9_.-]+\.md$/.test(normalized) ? normalized : 'index.md';
+        const paperPath = `/${safe}`;
+
+        // Fetch the selected paper from public folder (default: /index.md).
+        fetch(paperPath)
             .then(response => {
                 if (!response.ok) throw new Error('Failed to load content');
                 return response.text();
@@ -178,7 +190,7 @@ export default function App() {
             .then(text => setMarkdown(text))
             .catch(err => {
                 console.error(err);
-                setMarkdown("# Error: Could not load index.md\n\nPlease ensure 'public/index.md' exists.");
+                setMarkdown(`# Error: Could not load ${paperPath}\n\nPlease ensure \`print/public/${safe}\` exists, or open with \`?paper=index.md\` / \`?paper=index_0.md\`.`);
             });
     }, []);
 

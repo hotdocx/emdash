@@ -48,39 +48,57 @@ function extractBlocks(markdown, klass) {
   return [...markdown.matchAll(re)].map(m => m[1].trim()).filter(Boolean);
 }
 
-const mdPath = new URL('../public/index.md', import.meta.url);
-const md = fs.readFileSync(mdPath, 'utf8');
+const publicDir = new URL('../public/', import.meta.url);
+const publicPath = new URL('.', publicDir);
+const mdFiles = fs
+  .readdirSync(publicPath, { withFileTypes: true })
+  .filter((d) => d.isFile() && /^index(?:_[0-9]+)?\.md$/.test(d.name))
+  .map((d) => d.name)
+  .sort((a, b) => a.localeCompare(b));
 
-let ok = true;
+if (mdFiles.length === 0) {
+  console.error('validate_paper: no public/index*.md found');
+  process.exit(1);
+}
 
-const arrowgrams = extractBlocks(md, 'arrowgram');
-arrowgrams.forEach((raw, i) => {
-  let parsed;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (e) {
-    console.error(`Arrowgram #${i + 1}: JSON parse error: ${e.message}`);
-    ok = false;
-    return;
-  }
+let okAll = true;
 
-  const res = DiagramSpecSchema.safeParse(parsed);
-  if (!res.success) {
-    console.error(`Arrowgram #${i + 1}: schema error`);
-    console.error(res.error.issues);
-    ok = false;
-  }
-});
+for (const file of mdFiles) {
+  const mdPath = new URL(`../public/${file}`, import.meta.url);
+  const md = fs.readFileSync(mdPath, 'utf8');
 
-const vegas = extractBlocks(md, 'vega-lite');
-vegas.forEach((raw, i) => {
-  try {
-    JSON.parse(raw);
-  } catch (e) {
-    console.error(`Vega-Lite #${i + 1}: JSON parse error: ${e.message}`);
-    ok = false;
-  }
-});
+  let ok = true;
+  const arrowgrams = extractBlocks(md, 'arrowgram');
+  arrowgrams.forEach((raw, i) => {
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      console.error(`${file}: Arrowgram #${i + 1}: JSON parse error: ${e.message}`);
+      ok = false;
+      return;
+    }
 
-console.log(`validate_paper: arrowgram blocks=${arrowgrams.length}, vega-lite blocks=${vegas.length}, status=${ok ? 'OK' : 'FAIL'}`);
-process.exit(ok ? 0 : 1);
+    const res = DiagramSpecSchema.safeParse(parsed);
+    if (!res.success) {
+      console.error(`${file}: Arrowgram #${i + 1}: schema error`);
+      console.error(res.error.issues);
+      ok = false;
+    }
+  });
+
+  const vegas = extractBlocks(md, 'vega-lite');
+  vegas.forEach((raw, i) => {
+    try {
+      JSON.parse(raw);
+    } catch (e) {
+      console.error(`${file}: Vega-Lite #${i + 1}: JSON parse error: ${e.message}`);
+      ok = false;
+    }
+  });
+
+  console.log(`validate_paper: file=${file}, arrowgram blocks=${arrowgrams.length}, vega-lite blocks=${vegas.length}, status=${ok ? 'OK' : 'FAIL'}`);
+  okAll = okAll && ok;
+}
+
+process.exit(okAll ? 0 : 1);
