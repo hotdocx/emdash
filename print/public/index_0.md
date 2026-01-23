@@ -188,6 +188,8 @@ Lambdapi rewriting is powerful but fragile if rewrite rules must match against h
 
 This keeps normalization predictable (matching sees the head) and makes it realistic to orient coherence as cut-elimination steps.
 
+Rewriting is complemented by unification guidance: emdash uses `rule` for normalization steps that should change terms, and `unif_rule` for inference hints that should guide conversion/elaboration without changing canonical normal forms. This distinction is part of the kernel architecture (not merely tooling).
+
 ## 4.2 Off-diagonal components: `tapp1_fapp0`
 
 Instead of treating naturality as a proposition, emdash exposes an explicit arrow-indexed component
@@ -261,6 +263,10 @@ emdash also provides Cat-valued representables:
 
 These heads are not only for “doing Yoneda”; they are also glue in the internal packaging of transfors and dependent homs, where “naturality” is recorded as postcomposition behavior and exposed as normalization on stable heads.
 
+## 4.5 Strictness as optional structure: `StrictFunctor_cat` (brief)
+
+While the long-term goal includes lax/weak structure, the kernel often begins with strict computation rules and relaxes them later. In particular, `StrictFunctor_cat A B` classifies functors equipped with definitional computation laws expressing preservation of identities and composition *on the nose* at the 1-cell level, and is related to ordinary functors via `sfunc_func`. This provides a pragmatic “strict core” that can later be embedded into the simplicial/lax story.
+
 # 5. Dependent categories (`Catd`) and Grothendieck constructions
 
 The kernel has a classifier `Catd Z` of dependent categories over a base $Z$ (intended: displayed categories / isofibrations).
@@ -278,6 +284,10 @@ Concretely (Grothendieck case), `emdash2.lp` gives:
 symbol Total_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat));
 rule @fapp0 _ _ (@Total_func $Z) $M ↪ @Total_cat $Z (@Fibration_cov_catd $Z $M);
 ```
+
+## 5.1 Fibrewise products: `Product_catd` and `prodFib` (why it appears in `homd_cov_int_base`)
+
+Displayed categories over a fixed base admit a fibrewise product `Product_catd U A : Catd Z`, whose fibre over $z$ is (informally) the product category $U[z]\\times A[z]$. For Grothendieck displayed categories $\\int E$ and $\\int D$, emdash also introduces a stable-head `prodFib` for pointwise product of Cat-valued functors, so that composite constructions can match on a small head rather than on a large expanded product/total expression.
 
 ### Figure 3: Grothendieck morphisms lie over base arrows
 
@@ -384,6 +394,8 @@ symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z],
   Π (ϵ : τ (Obj (Transfd_cat FF GG))),
   τ (Obj (Hom_cat (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V)));
 ```
+
+As with ordinary transfors, the kernel also provides **off-diagonal** displayed components over displayed arrows (stable heads `tdapp1_*`), intended to be the home for higher “lax naturality” data in the displayed setting (surface syntax `ϵ_(σ)` for $σ:e\\to_f e'$).
 
 The intended geometric reading is simplicial: triangles over base edges, and higher simplices obtained by iterating “dependent hom” layers. The current kernel snapshot contains the beginning of this machinery (enough to state and normalize many pointwise computations in the Grothendieck case), while leaving general iteration as an interface to be refined.
 
