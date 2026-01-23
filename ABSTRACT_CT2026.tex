@@ -46,37 +46,35 @@ cells, we use a \emph{dependent comma/arrow (dependent hom) construction} that d
 ``cells over a base arrow'' in a simplicial manner.
 
 Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally, a fibration
-$E\colon B\to \mathbf{Cat}$). Fix a base object $b\in B$ and a fibre object $e\in E(b)$.
-We construct a Cat-valued functor that assigns to a base arrow $f:b\to b'$ and a fibre object
-$x\in E(b')$ a category of ``morphisms from the transport of $e$ along $f$ to $x$ in the fibre over
-$b'$''. In slogan form, this is a dependent arrow/comma object
+$E\colon B\to \mathbf{Cat}$). Fix a base object $b_0\in B$ and a fibre object $e_0\in E(b_0)$.
+We construct a Cat-valued functor that assigns to a base arrow $b_{01}:b_0\to b_1$ and a fibre object
+$e_1\in E(b_1)$ a category of ``morphisms from the transport of $e_0$ along $b_{01}$ to $e_1$ in the fibre over
+$b_1$''. In slogan form, this is a dependent arrow/comma object
 \[
-\mathrm{Homd}_E(e,-)\;:\; E \times \bigl(\mathrm{Hom}_B(b,-)\bigr)^{\mathrm{op}} \longrightarrow \mathbf{Cat}.
+\mathrm{Homd}_E(e_0,--)\;:\; E \times_B \bigl(\mathrm{Hom}_B(b_0,-)\bigr)^{\mathrm{op}} \longrightarrow \mathbf{Cat}.
 \]
 Iterating it yields a simplicial presentation of higher cells (triangles, ``surfaces'', and higher
 simplices) where ``stacking'' of $2$-cells along a $1$-cell is expressed over a chosen base edge:
 {\scriptsize
-\[
-\begin{tikzcd}
-	&&&&& {1 \ \bullet} \\
+\[\begin{tikzcd}
+	&&&&& {b_0 \ \bullet} \\
 	\\
 	\\
 	\\
-	{0 \ \bullet} &&&&& {\bullet \ 2} \\
+	\bullet &&&&& {\bullet \ b_1} \\
 	\\
 	\\
-	&&&&&&&& {\bullet \ 3}
-	\arrow["b"{description}, from=1-6, to=5-6]
-	\arrow[""{name=0, anchor=center, inner sep=0}, "{b'}"{description}, dashed, from=1-6, to=8-9]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "f"{description}, from=5-1, to=1-6]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "{f'}"{description}, from=5-1, to=5-6]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "{f''}"{description}, dashed, from=5-1, to=8-9]
-	\arrow[""{name=4, anchor=center, inner sep=0}, "t"{description}, dashed, from=5-6, to=8-9]
-	\arrow["{\beta^{op}}", between={0.1}{0.9}, Rightarrow, from=0, to=4]
-	\arrow["\sigma"', between={0.1}{0.9}, Rightarrow, from=1, to=2]
-	\arrow["\phi"', between={0.2}{0.8}, Rightarrow, from=2, to=3]
-\end{tikzcd}
-\]
+	&&&&&&&& {\bullet \ b_2}
+	\arrow["{b_{01}}"{description}, from=1-6, to=5-6]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{b_{02}}"{description}, dashed, from=1-6, to=8-9]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{e_0}"{description}, from=5-1, to=1-6]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{e_1}"{description}, from=5-1, to=5-6]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{e_2}"{description}, dashed, from=5-1, to=8-9]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "{b_{12}}"{description}, dashed, from=5-6, to=8-9]
+	\arrow["{b_{012}^{op}}", between={0.1}{0.9}, Rightarrow, from=0, to=4]
+	\arrow["{e_{01}}"', between={0.1}{0.9}, Rightarrow, from=1, to=2]
+	\arrow["{e_{12}}"', between={0.2}{0.8}, Rightarrow, from=2, to=3]
+\end{tikzcd}\]
 }
 Compared with parametricity-based formalisations of semi-simplicial structures, we aim to keep the
 interface conceptual and type-theoretic rather than explicitly combinatorial \cite{herbelin-ramachandra24}.

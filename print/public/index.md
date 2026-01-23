@@ -1,5 +1,5 @@
 ---
-title: "emdash — Computational ω-Category Theory via Dependent Arrow Categories in Lambdapi"
+title: emdash — Functorial programming for strict/lax ω-categories in Lambdapi
 authors: m— / emdash project
 ---
 
@@ -553,24 +553,24 @@ The “stacking” operation (horizontal composition of 2-cells along a 1-cell r
 {
   "version": 1,
   "nodes": [
-    { "name": "n0", "left": 100, "top": 240, "label": "$0\\ \\bullet$" },
-    { "name": "n1", "left": 420, "top": 80,  "label": "$1\\ \\bullet$" },
-    { "name": "n2", "left": 420, "top": 240, "label": "$\\bullet\\ 2$" },
-    { "name": "n3", "left": 740, "top": 380, "label": "$\\bullet\\ 3$" }
+    { "name": "b0", "left": 100, "top": 240, "label": "$b_0\\ \\bullet$" },
+    { "name": "b1", "left": 420, "top": 80,  "label": "$b_1\\ \\bullet$" },
+    { "name": "b2", "left": 420, "top": 240, "label": "$\\bullet\\ b_2$" },
+    { "name": "b3", "left": 740, "top": 380, "label": "$\\bullet\\ b_3$" }
   ],
   "arrows": [
-    { "from": "n1", "to": "n2", "label": "$b$", "label_alignment": "left" },
-    { "from": "n1", "to": "n3", "name": "bprime", "label": "$b'$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "from": "b1", "to": "b2", "label": "$b_{12}$", "label_alignment": "left" },
+    { "from": "b1", "to": "b3", "name": "b13", "label": "$b_{13}$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "n0", "to": "n1", "name": "f", "label": "$f$", "label_alignment": "left" },
-    { "from": "n0", "to": "n2", "name": "fprime", "label": "$f'$", "label_alignment": "right" },
-    { "from": "n0", "to": "n3", "name": "f2prime", "label": "$f''$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
+    { "from": "b0", "to": "b1", "name": "e0", "label": "$e_0$", "label_alignment": "right" },
+    { "from": "b0", "to": "b2", "name": "e1", "label": "$e_1$", "label_alignment": "left" },
+    { "from": "b0", "to": "b3", "name": "e2", "label": "$e_2$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "n2", "to": "n3", "name": "t", "label": "$t$", "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "from": "b2", "to": "b3", "name": "b23", "label": "$b_{23}$", "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
 
-    { "from": "bprime", "to": "t", "label": "$\\beta^{op}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
-    { "from": "f", "to": "fprime", "label": "$\\sigma$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" },
-    { "from": "fprime", "to": "f2prime", "label": "$\\phi$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" }
+    { "from": "b13", "to": "b23", "label": "$b_{123}^{op}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" },
+    { "from": "e0", "to": "e1", "label": "$e_{01}", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" },
+    { "from": "e1", "to": "e2", "label": "$e_{12}$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "right" }
   ]
 }
 </div>
