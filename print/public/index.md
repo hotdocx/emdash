@@ -36,7 +36,8 @@ This paper’s contributions are primarily expository (the kernel is ongoing wor
 1. **A rewrite-head discipline for categorical computation.** Most “structural equalities” are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
 2. **A simplicial triangle classifier for higher cells over base arrows.** The dependent arrow/comma construction `homd_cov` (and the internal pipeline `homd_cov_int_base`) provides a computational home for “triangles/surfaces” in the Grothendieck case, and a compositional target for iteration.
 3. **An explicit off-diagonal interface for transfors (ordinary and displayed).** Instead of encoding transfors as records with a naturality law, we expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal components over arrows (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
-4. **Executable feasibility evidence.** The v1 project (`emdash.lp` plus the TypeScript kernel reported in `emdash_cpp2026.md`) demonstrates that this “kernel spec → elaborating proof assistant” pipeline is realistic; the v2 paper build includes automated rendering/console checks for reproducible artifacts.
+4. **Executable feasibility evidence.** The v1 executable kernel (reported in `emdash_cpp2026.md`) demonstrates that this “kernel spec → elaborating proof assistant” pipeline is realistic; the v2 paper build includes automated rendering/console checks for reproducible artifacts.
+5. **Continuity with prior Lambdapi warm-ups.** Earlier Lambdapi developments (`cartierSolution14.lp.txt`, `cartierSolution16.lp.txt`) already validate the *style* of emdash: large categorical interfaces presented with computational rules (products/exponentials/adjunction transposes; sieves/sites/sheafification; scheme interfaces). A key claim of the v2 design is that these developments are now largely portable into the `emdash2.lp` kernel discipline, and therefore count as prior progress rather than speculative future work.
 
 # 2. Technical Overview and Design Principles
 
@@ -69,6 +70,16 @@ Two takeaways from v1 matter for the v2 story:
 2. **Coherence as computation (“functorial elaboration”).** In the v1 TypeScript kernel, the constructor of a structured object (e.g. a functor) can *compute-check* its laws during elaboration: the system normalizes both sides of functoriality equations in a generic context, and throws a dedicated `CoherenceError` if they do not match definitionally. This is the same philosophical stance as v2’s rewrite-head style: coherence is enforced by computation, not by a separately managed library of lemmas.
 
 The present paper focuses on the v2 Lambdapi kernel itself, but we treat the v1 implementation as evidence that the “specification-first → executable kernel” path is realistic.
+
+## 2.1.1 Warm-up Lambdapi developments: from arithmetic to schemes
+
+In parallel to the v1 executable kernel, the project produced two “warm-up” Lambdapi developments that are worth crediting explicitly because they already instantiate the intended methodological stance.
+
+**(i) `cartierSolution14.lp.txt`: computation by universal properties.** This file develops (in a more ad hoc kernel than v2) internal products/exponentials/adjunction machinery and uses it to compute with familiar constructions. A guiding demo is that even a toy statement like “$1+2=3$” can be realized *three ways*—via an intrinsic datatype of naturals, via a natural numbers object presented by internal adjunctions, and via finite sets with colimits—so that the result is obtained by normalization of the categorical interface rather than by external equational reasoning. The point is not the arithmetic itself but the principle: “universal property = computation rule”.
+
+**(ii) `cartierSolution16.lp.txt`: a computational interface for sieves, sheaves, and schemes.** This file specifies a large amount of categorical infrastructure for Grothendieck-style geometry (sieves, sites, closure/sheafification operations, subobjects, and a schematic interface for ringed sites and localizations), again in the proof-theoretic spirit that core equalities should compute. For example, pullback stability of sieve classifiers and basic glue/closure interactions are recorded as rewrite rules so that a “sheafiness” interface is operational.
+
+These warm-ups are not presented in this paper as *the* final kernel: they rely on earlier encodings (categories/functors/profunctors as primitive records) and therefore do not match the v2 stable-head discipline. Their significance is different: they show that the emdash approach scales to large libraries, and they provide a backlog of definitions and computational laws that can be re-expressed inside `emdash2.lp` (with `Cat`, `Catd`, and the transfor heads) rather than re-invented.
 
 ## 2.2 How to read kernel vs surface syntax
 
@@ -719,6 +730,7 @@ Our distinctive emphasis is *computational organization of higher cells over bas
 - Finish the simplicial iteration story (derive/justify the external heads like `fdapp1_funcd` from internal `tdapp1_int_*` pipelines; extend computation beyond the Grothendieck case).
 - Add the missing user-facing layer: a variance-aware elaborator that makes `docs/SYNTAX_SURFACE.md` executable (as in v1’s TypeScript kernel, but for the v2 primitives).
 - Extend the adjunction interface from the first triangle cut-elimination rule to a robust set of whiskering/triangle/exchange normalizations.
+- Port the warm-up libraries: re-express the `cartierSolution14` “compute by adjunction/colimit” patterns and the `cartierSolution16` sieve/site/sheafification interfaces within the v2 heads (`Functor_cat`, `Transf_cat`, and eventually a displayed-profunctor layer), so they become stable regression tests for the kernel discipline.
 
 # 12. Conclusion
 
