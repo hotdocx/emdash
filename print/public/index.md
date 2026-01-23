@@ -5,7 +5,15 @@ authors: m— / emdash project
 
 # Abstract
 
-`emdash2.lp` is an experiment in *functorial programming* for strict/lax $\\omega$-categories inside the Lambdapi logical framework. The guiding principle is proof-theoretic: many categorical equalities (units, associativity, triangle identities, functoriality laws) are best treated as *normalization* (“cut-elimination”) rather than as external propositions. The technical focus of this paper is a *dependent arrow/comma (dependent hom)* construction for a dependent category $E$ over a base category $Z$. In the kernel this appears as `homd_cov` and its more internal, base-parametrized variant `homd_cov_int`. These constructions organize “cells over a base arrow” in a simplicial (triangle/surface) manner, and they are intended to support exchange/stacking laws and higher coherence by iterating the same pattern. Separately (but in the same computational spirit), we explain how (a draft of) adjunction triangle identities becomes a rewrite rule via the “off-diagonal” component infrastructure for transfors.
+We report on an ongoing experiment, `emdash2.lp`, whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+
+The central construction is a dependent comma/arrow (“dependent hom”) operation that directly organizes “cells over a base arrow” in a simplicial manner. Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}: b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ the category of morphisms in the fibre over $b_1$ from the transport of $e_0$ along $b_{01}$ to $e_1$. In slogan form, this is a dependent arrow/comma object
+$$
+\\mathrm{Homd}_E(e_0,--) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
+$$
+Iterating this construction yields a simplicial presentation of higher cells (triangles, surfaces, higher simplices), where “stacking” of $2$-cells along a $1$-cell is expressed *over a chosen base edge*.
+
+As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations.
 
 # 1. Introduction (what problem are we solving?)
 
