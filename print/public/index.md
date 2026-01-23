@@ -548,16 +548,16 @@ The kernel contains the beginnings of this “simplicial engine”:
 {
   "version": 1,
   "nodes": [
-    { "name": "X", "left": 120, "top": 120, "label": "$X$" },
-    { "name": "Y", "left": 420, "top": 120, "label": "$Y$" },
-    { "name": "Z", "left": 270, "top": 320, "label": "$Z$" }
+    { "name": "X", "label": "$X$", "left": 120, "top": 120 },
+    { "name": "Y", "label": "$Y$", "left": 420, "top": 120 },
+    { "name": "Z", "label": "$Z$", "left": 270, "top": 320 }
   ],
   "arrows": [
-    { "from": "X", "to": "Y", "name": "f", "label": "$f$", "label_alignment": "left" },
-    { "from": "Y", "to": "Z", "name": "g", "label": "$g$", "label_alignment": "right" },
-    { "from": "X", "to": "Z", "name": "h", "label": "$h$", "curve": 100, "label_alignment": "left" },
-    { "from": "X", "to": "Z", "name": "gf", "label": "$g\\circ f$", "curve": -150, "label_alignment": "right" },
-    { "from": "gf", "to": "h", "label": "$\\alpha$", "style": { "mode": "arrow", "level": 2 }, "label_alignment": "left" }
+    { "name": "f", "label": "$f$", "from": "X", "to": "Y", "label_alignment": "right" },
+    { "name": "g", "label": "$g$", "from": "Y", "to": "Z", "label_alignment": "right" },
+    { "name": "h", "label": "$h$", "from": "X", "to": "Z", "curve": 100, "label_alignment": "left" },
+    { "name": "gf", "label": "$g\\circ f$", "from": "X", "to": "Z", "curve": -200, "label_alignment": "right" },
+    { "label": "$\\alpha$", "from": "f", "to": "h", "label_alignment": "left", "style": { "level": 2, "mode": "arrow" } }
   ]
 }
 </div>
@@ -742,7 +742,7 @@ emdash is an attempt to make a small computational kernel in which:
 
 The most concrete result so far is a faithful computational core for (parts of) Grothendieck-style dependent categories and a first computational adjunction rule. The next step is to finish the simplicial iteration so that exchange/stacking laws and higher triangle identities can also become normalization steps.
 
-# References (informal)
+# References
 
 1. F. Blanqui et al. *The Lambdapi Logical Framework*.
 2. K. Došen and Z. Petrić. *Cut-Elimination in Categories*.
