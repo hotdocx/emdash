@@ -291,6 +291,32 @@ Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that live
 
 In a strict 1-category, you may take $\\epsilon_{(f)} := \\epsilon_Y \\circ F(f)$ (or equivalently $G(f)\\circ\\epsilon_X$) and prove the two definitions equal. In emdash, we keep $\\epsilon_{(f)}$ as explicit data because it is the correct home for higher “laxness” witnesses.
 
+### Figure 1b: the composite case and “accumulation” over base arrows
+
+The same idea becomes more informative when we look at a composite base arrow. If we have $f:X\\to Y$ and $g:Y\\to Z$, then an “off-diagonal” component can be presented directly over $g\\circ f$:
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "FX", "label": "$F(X)$", "left": 120, "top": 120 },
+    { "name": "FY", "label": "$F(Y)$", "left": 320, "top": 220 },
+    { "name": "GZ", "label": "$G(Z)$", "left": 520, "top": 220 }
+  ],
+  "arrows": [
+    { "label": "$F(f)$", "from": "FX", "to": "FY", "label_alignment": "left" },
+    { "label": "$\\epsilon_g$", "from": "FY", "to": "GZ", "label_alignment": "right" },
+    { "label": "$\\epsilon_{(g \\circ f)}$", "from": "FX", "to": "GZ", "curve": -20, "label_alignment": "right" }
+  ]
+}
+</div>
+
+Kernel-wise, this is exactly where the “contravariant binder / accumulation” discipline pays off: one can orient a coherence law as a rewrite of the form
+$$
+(\\epsilon_{(g)}) \\circ F(f) \\;\\rightsquigarrow\\; \\epsilon_{(g\\circ f)},
+$$
+so that normalization *accumulates* the base-arrow index instead of repeatedly expanding/contracting naturality squares.
+
 ## 4.5 Representables and the Yoneda-style heads `hom_cov` / `hom_con`
 
 emdash provides covariant and contravariant representables in a Cat-valued setting:
@@ -567,6 +593,11 @@ This is the common 2-categorical picture (a 2-cell between parallel composites).
 ### Figure 3b: stacking 2-cells along a 1-cell (a tetrahedral “over-a-base-edge” picture)
 
 The “stacking” operation (horizontal composition of 2-cells along a 1-cell rather than along a 0-cell) is easiest to see as a tetrahedron of base edges, with 2-cells comparing *direct* edges with *composite* edges:
+
+Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally, a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}:b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ a category of morphisms from the transport of $e_0$ along $b_{01}$ to $e_1$ in the fibre over $b_1$. In slogan form, this is a dependent arrow/comma object:
+$$
+\\mathrm{Homd}_E(e_0,--) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
+$$
 
 <div class="arrowgram">
 {
