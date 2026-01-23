@@ -7,6 +7,7 @@ title: emdash paper pipeline SOP (`print/`)
 The `print/` workspace renders the research paper from a single Markdown source:
 
 - Paper source: `print/public/index.md`
+- Short/conference variant: `print/public/index_0.md`
 - Renderer app: `print/src/App.tsx`
 - Output: “Print / Save PDF” in the preview UI (Paged.js paginates the HTML)
 
@@ -26,6 +27,9 @@ From the repo root:
 2. Dev preview:
    - `npm run dev -w print`
    - open the shown URL and use the UI toggle for 1-column / 2-column
+   - choose which paper to preview via query param:
+     - default (archive/full): `/?paper=index.md` (or just `/`)
+     - short (conference): `/?paper=index_0.md` (also accepts `?paper=0`)
 3. “Print / Save PDF”:
    - use the UI button (top-right) which triggers the browser print dialog
 
@@ -34,6 +38,7 @@ From the repo root:
 Paper content
 
 - `print/public/index.md`: the paper (YAML frontmatter + Markdown + embedded diagram blocks)
+- `print/public/index_0.md`: shorter paper variant (same renderer/pipeline)
 
 Renderer / parsing
 
@@ -50,7 +55,7 @@ Styling / layout
 Arrowgram schema + validation
 
 - `print/src/types.ts`: Zod schema for Arrowgram (used by validation tooling)
-- `print/scripts/validate_paper.mjs`: parses all Arrowgram / Vega-Lite blocks from `index.md` and validates JSON (Arrowgram via Zod)
+- `print/scripts/validate_paper.mjs`: parses all Arrowgram / Vega-Lite blocks from `print/public/index*.md` and validates JSON (Arrowgram via Zod)
 
 Browser console / end-to-end checks
 
@@ -59,12 +64,17 @@ Browser console / end-to-end checks
   - loads the app
   - fails on `console.error`, `pageerror`, request failures
   - treats KaTeX strict warnings (e.g. `[mathVsTextAccents]`) as failures
+  - checks both `index.md` (default) and `index_0.md` (via `?paper=index_0.md`)
 
 NPM scripts (most useful)
 
 - `npm run validate:paper -w print`: validate embedded JSON blocks
 - `npm run check:console -w print`: headless browser console check
 - `npm run check:render -w print`: validate + build + console check (recommended before sending a PDF)
+
+## Adding more variants
+
+You can add additional public paper variants as `print/public/index_<N>.md` (e.g. `index_1.md`). The renderer can load any `*.md` via `?paper=...`, but the validation script currently auto-discovers and validates only files matching `index*.md`.
 
 # Authoring conventions (important gotchas)
 
