@@ -48,7 +48,7 @@ We use the following surface-style conventions:
 
 Several kernel projections are intended to be *silent* at the surface: `τ`, `Fibre_cat`, `fapp0`, and diagonal components of transfors.
 
-## 2.1 Kernel ↔ surface ↔ mathematics (mini table)
+## 2.1 Kernel ↔ surface ↔ mathematics (overview table)
 
 <div class="fullwidth">
 <table class="emdash-table">
@@ -63,22 +63,41 @@ Several kernel projections are intended to be *silent* at the surface: `τ`, `Fi
     <tr><td><code>Cat</code></td><td><code>⊢ C : Cat</code></td><td>category / ω-category classifier</td></tr>
     <tr><td><code>Obj : Cat → Grpd</code></td><td><code>⊢ x : C</code></td><td>object groupoid of a category</td></tr>
     <tr><td><code>Hom_cat C x y</code></td><td><code>x :^- C, y : C ⊢ f : x → y</code></td><td>hom-category (so 1-cells are its objects)</td></tr>
+    <tr><td><code>Op_cat A</code></td><td><code>A^op</code> (surface)</td><td>opposite category (computes definitionally)</td></tr>
+    <tr><td><code>Path_cat G</code></td><td><code>Path(G)</code> (informal)</td><td>category of paths in a groupoid</td></tr>
+    <tr><td><code>Core_cat C</code></td><td><code>Core(C)</code> (informal)</td><td>groupoidal core from object paths</td></tr>
+    <tr><td><code>Grpd_cat</code></td><td><code>⊢ Grpd : Cat</code> (internal)</td><td>the category of groupoids</td></tr>
+    <tr><td><code>Cat_cat</code></td><td><code>⊢ Cat : Cat</code> (internal)</td><td>the category of categories</td></tr>
     <tr><td><code>Functor_cat A B</code></td><td><code>⊢ F : A → B</code></td><td>functor category</td></tr>
     <tr><td><code>fapp0 F x</code></td><td><code>F[x]</code></td><td>object action</td></tr>
     <tr><td><code>fapp1_fapp0 F f</code></td><td><code>F[f]</code> (silent)</td><td>arrow action (as a 1-cell)</td></tr>
     <tr><td><code>Transf_cat F G</code></td><td><code>⊢ ϵ : Transf(F,G)</code></td><td>transformations / transfors</td></tr>
     <tr><td><code>tapp0_fapp0 Y ϵ</code></td><td><code>ϵ[Y]</code> (silent)</td><td>diagonal component</td></tr>
     <tr><td><code>tapp1_fapp0 … ϵ f</code></td><td><code>ϵ_(f)</code></td><td>off-diagonal component “over <code>f</code>”</td></tr>
+    <tr><td><code>hom_cov</code></td><td><code>Hom(W,F[−])</code> (informal)</td><td>covariant Cat-valued representable</td></tr>
+    <tr><td><code>hom_con</code></td><td><code>Hom(F[−],W)</code> (informal)</td><td>contravariant representable (via opposite)</td></tr>
     <tr><td><code>Catd Z</code></td><td><code>⊢ E : Catd Z</code></td><td>displayed category / (iso)fibration over <code>Z</code></td></tr>
     <tr><td><code>Fibre_cat E z</code></td><td><code>E[z]</code></td><td>fibre category over <code>z</code></td></tr>
     <tr><td><code>Functord_cat E D</code></td><td><code>⊢ FF : E ⟶_Z D</code></td><td>displayed functors over fixed base</td></tr>
     <tr><td><code>Fibration_cov_catd M</code></td><td>(silent if <code>M: Z ⟶ Cat</code>)</td><td>Grothendieck construction <code>∫M</code></td></tr>
+    <tr><td><code>Total_cat E</code></td><td><code>∫E</code> (informal)</td><td>total category of a displayed category</td></tr>
+    <tr><td><code>Total_func</code></td><td>(internal)</td><td>internalized totalization <code>(Z→Cat)→Cat</code></td></tr>
+    <tr><td><code>fib_cov_tapp0_fapp0 M f u</code></td><td>$f_!(u)$</td><td>Grothendieck transport on fibre objects (strict today)</td></tr>
     <tr><td><code>homd_cov</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (“triangle classifier”)</td></tr>
+    <tr><td><code>homd_cov_int_base</code></td><td>(internal)</td><td>compositional “indexing” pipeline for <code>homd_cov</code></td></tr>
+    <tr><td><code>Transfd_cat FF GG</code></td><td><code>⊢ ϵ : Transfd(FF,GG)</code></td><td>displayed transfors</td></tr>
+    <tr><td><code>tdapp0_fapp0 … ϵ</code></td><td><code>ϵ[e]</code> (silent)</td><td>displayed component in a fibre</td></tr>
+    <tr><td><code>tdapp1_*</code></td><td><code>ϵ_(σ)</code></td><td>displayed off-diagonal component over $σ:e→_f e'$</td></tr>
+    <tr><td><code>adj</code></td><td>(kernel type former)</td><td>adjunction data (unit/counit) and triangle reduction</td></tr>
   </tbody>
 </table>
 </div>
 
 **Notation convention.** In surface typing examples, we write `⊢ x : C` as shorthand for `⊢ x : τ (Obj C)` (and similarly `f : x → y` abbreviates `f : τ (Obj (Hom_cat C x y))`).
+
+## 2.2 Executable feasibility evidence (v1)
+
+In parallel to the Lambdapi kernel, the project includes an earlier executable prototype (documented in `emdash_cpp2026.md`) whose key methodological takeaway is: the system can *compute-check coherence* during elaboration by normalizing both sides of functoriality/coherence constraints and rejecting mismatches. In the v2 story, the stable-head discipline plays the analogous role: instead of proving a growing library of “naturality lemmas”, we design primitives and rewrite rules so the relevant equalities are available by conversion.
 
 # 3. Core type theory: `Grpd`, `Cat`, and homs-as-categories
 
@@ -89,6 +108,14 @@ The kernel separates:
 
 Every category has an object classifier `Obj : Cat → Grpd`, so object equality is a *path in a groupoid*.
 
+Equality itself is valued in `Grpd`, so the “equality type” of an object classifier is another groupoid (and can be iterated):
+
+```lambdapi
+constant symbol = : Π [a: Grpd], τ a → τ a → Grpd;
+constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
+symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a], τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);
+```
+
 Instead of `Hom_C(x,y)` being a set/type, in emdash it is a category:
 
 ```lambdapi
@@ -98,6 +125,25 @@ injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;
 Thus a “1-cell” $f:x\\to y$ is an *object* of `Hom_cat C x y`. A “2-cell” between parallel 1-cells is then a 1-cell in that hom-category, etc.
 
 Opposites (`Op_cat`) compute definitionally (objects unchanged; homs reversed), and emdash also introduces `Path_cat` and `Core_cat` to relate object paths to directed morphisms (in a controlled, one-way direction).
+
+## 3.1 Paths as morphisms (one-way, by design)
+
+The object groupoid `Obj C : Grpd` gives a path/equality structure on objects. To connect this to *directed* morphisms without collapsing directed structure into paths, emdash introduces:
+
+- `Path_cat : Grpd → Cat`, the category of paths in a groupoid;
+- `Core_cat C := Path_cat (Obj C)`, the “groupoidal core” of $C$ induced by object paths;
+- a *one-way* map “path ⇒ morphism”:
+
+```lambdapi
+constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)),
+  τ (Obj (Functor_cat (Path_cat (x = y)) (Hom_cat C x y)));
+symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)),
+  τ (Obj (Hom_cat C x y));
+```
+
+This direction is safe for definitional computation (it does not create rewrite loops). The reverse direction (morphism ⇒ path) is the dangerous one and is treated as optional infrastructure (e.g. via carefully controlled `unif_rule` bridges) rather than as a primitive definitional equivalence.
+
+Finally, emdash internalizes “the category of groupoids” and “the category of categories” as categories `Grpd_cat` and `Cat_cat`, so that constructions about “categories of categories” can be expressed using the same functorial machinery (e.g. `Hom_cat Cat_cat A B` computing to `Functor_cat A B`).
 
 # 4. Functors and transfors (ordinary)
 
@@ -114,7 +160,17 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Obj (Functor_cat A B))], Π (
   Π (ϵ : τ (Obj (Transf_cat F G))), τ (Obj (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
 ```
 
-## 4.1 Off-diagonal components: `tapp1_fapp0`
+## 4.1 Stable heads and canonicalization (why this style?)
+
+Lambdapi rewriting is powerful but fragile if rewrite rules must match against huge expanded terms. emdash therefore makes a deliberate kernel commitment:
+
+- introduce *stable heads* like `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`, `fib_cov_tapp0_fapp0`;
+- add canonicalization rules that fold larger redexes into these heads;
+- state most computation laws directly on the stable heads.
+
+This keeps normalization predictable (matching sees the head) and makes it realistic to orient coherence as cut-elimination steps.
+
+## 4.2 Off-diagonal components: `tapp1_fapp0`
 
 Instead of treating naturality as a proposition, emdash exposes an explicit arrow-indexed component
 $$
@@ -174,11 +230,36 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))]
   τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 G_AB Y_A)));
 ```
 
+## 4.3 Diagonal components as evaluation-at-identity (intuition)
+
+Conceptually, the diagonal component $\\epsilon_Y : F(Y)\\to G(Y)$ is “the off-diagonal component over the identity edge”. In the kernel, `tapp0_fapp0` is implemented by evaluating a packaged arrow-indexed construction at `id_Y`. The stable head `tapp0_fapp0` is retained so later rewrite rules do not need to unfold that packaging.
+
+## 4.4 Representables: `hom_cov` / `hom_con` (Yoneda-style heads)
+
+emdash also provides Cat-valued representables:
+
+- `hom_cov` models $\\mathrm{Hom}_A(W, F(-))$ (covariant),
+- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$ (contravariant, by reduction to `hom_cov` in the opposite category).
+
+These heads are not only for “doing Yoneda”; they are also glue in the internal packaging of transfors and dependent homs, where “naturality” is recorded as postcomposition behavior and exposed as normalization on stable heads.
+
 # 5. Dependent categories (`Catd`) and Grothendieck constructions
 
 The kernel has a classifier `Catd Z` of dependent categories over a base $Z$ (intended: displayed categories / isofibrations).
 
 For a Cat-valued functor $M : Z \\to \\mathbf{Cat}$, emdash provides a displayed category `Fibration_cov_catd M : Catd Z` (Grothendieck construction). In this special case fibres and several structural operations compute definitionally.
+
+Two additional heads matter for compositionality:
+
+- `Total_cat E` packages the total category $\\int E$ of a displayed category,
+- `Total_func` internalizes totalization as an object in `Functor_cat (Functor_cat Z Cat_cat) Cat_cat`, so it can be composed inside `Cat_cat` without unfolding large definitions.
+
+Concretely (Grothendieck case), `emdash2.lp` gives:
+
+```lambdapi
+symbol Total_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat));
+rule @fapp0 _ _ (@Total_func $Z) $M ↪ @Total_cat $Z (@Fibration_cov_catd $Z $M);
+```
 
 ### Figure 3: Grothendieck morphisms lie over base arrows
 
@@ -202,6 +283,11 @@ For a Cat-valued functor $M : Z \\to \\mathbf{Cat}$, emdash provides a displayed
 
 emdash also exposes a stable head for (strict, placeholder) Grothendieck transport on fibre objects, so nested transports fold to one transport along a composite base arrow.
 
+Concretely, transport on fibre objects is strict today (as an engineering placeholder for a later lax story). Informally:
+
+- $(\\mathrm{id})_!(u) \\rightsquigarrow u$,
+- $g_!(f_!(u)) \\rightsquigarrow (g\\circ f)_!(u)$.
+
 # 6. Dependent arrow/comma categories: `homd_cov` and `homd_cov_int`
 
 Let $Z$ be a category, $E$ a dependent category over $Z$ (morally $E:Z\\to\\mathbf{Cat}$), and fix a base object $W\\in Z$ and a fibre object $w\\in E(W)$. Given a base arrow $f:W\\to z$ and a fibre object $x\\in E(z)$, we want the category of “arrows from the transported probe to the target”:
@@ -210,6 +296,16 @@ $$
 $$
 
 This is the basic “triangle classifier”: *a 2-cell is a 1-cell in a dependent arrow category*.
+
+## 6.1 Input shape and “over a base edge”
+
+In the Grothendieck case, the value of `homd_cov` at a point is indexed by:
+
+- a base target object $z \\in Z$,
+- a displayed target object $d \\in D(z)$ (in the probe family),
+- and a base edge $f:W\\to z$ (the edge along which we transport the probe object $w\\in E(W)$).
+
+In `emdash2.lp`, such points are represented in a canonical Σ-pair normal form `Struct_sigma z (Struct_sigma d f)`. This “syntactic normal form” is essential: it makes it possible for the computation rule of `homd_cov` to match and reduce without requiring additional definitional unfolding.
 
 In the Grothendieck–Grothendieck case, `emdash2.lp` contains a pointwise computation rule for `homd_cov`:
 
@@ -259,6 +355,17 @@ flowchart LR
 # 7. Displayed transfors and simplicial iteration (sketch)
 
 In addition to ordinary transfors, the kernel includes displayed transfors between displayed functors over a fixed base. As with ordinary transfors, the interface is via projection heads (pointwise components `tdapp0_*` and off-diagonal components `tdapp1_*`) rather than via a record encoding.
+
+The pointwise displayed component head has the shape:
+
+```lambdapi
+symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z],
+  Π [FF GG : τ (Obj (Functord_cat E D))],
+  Π (Y_Z : τ (Obj Z)),
+  Π (V : τ (Obj (Fibre_cat E Y_Z))),
+  Π (ϵ : τ (Obj (Transfd_cat FF GG))),
+  τ (Obj (Hom_cat (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V)));
+```
 
 The intended geometric reading is simplicial: triangles over base edges, and higher simplices obtained by iterating “dependent hom” layers. The current kernel snapshot contains the beginning of this machinery (enough to state and normalize many pointwise computations in the Grothendieck case), while leaving general iteration as an interface to be refined.
 
@@ -320,6 +427,40 @@ $$
 \\epsilon_f \\circ L(\\eta_g) \\;\\rightsquigarrow\\; f \\circ L(g).
 $$
 
+In `emdash2.lp` this is implemented as a rewrite rule at the level of stable heads (`comp_fapp0`, `fapp1_fapp0`, `tapp1_fapp0`). The key point is that normalization of a composite term *performs* the triangle reduction:
+
+```lambdapi
+rule @comp_fapp0 $L
+      (fapp0 (@LeftAdj $R $L _ _ _ _ $a) $X)
+      _
+      $Y
+      (@tapp1_fapp0 $L $L
+        (comp_cat_fapp0
+          (@LeftAdj $R $L _ _ _ _ $a)
+          (@RightAdj $R $L _ _ _ _ $a))
+        (@id_func $L)
+        (fapp0 (@LeftAdj $R $L _ _ _ _ $a) $X')
+        $Y
+        (@CoUnitAdj $R $L _ _ _ _ $a)
+        $f)
+      (fapp1_fapp0 (@LeftAdj $R $L _ _ _ _ $a)
+        (@tapp1_fapp0 $R $R
+          (@id_func $R)
+          (comp_cat_fapp0
+            (@RightAdj $R $L _ _ _ _ $a)
+            (@LeftAdj $R $L _ _ _ _ $a))
+          $X
+          $X'
+          (@UnitAdj $R $L _ _ _ _ $a)
+          $g))
+  ↪ @comp_fapp0 $L
+      (fapp0 (@LeftAdj $R $L _ _ _ _ $a) $X)
+      (fapp0 (@LeftAdj $R $L _ _ _ _ $a) $X')
+      $Y
+      $f
+      (@fapp1_fapp0 $R $L (@LeftAdj $R $L _ _ _ _ $a) $X $X' $g);
+```
+
 ### Figure 7: the familiar triangle identity (as reduction)
 
 <div class="arrowgram">
@@ -342,7 +483,20 @@ The point is methodological: coherence can be enforced by computation (normaliza
 
 # 9. Status (January 2026 snapshot)
 
-The kernel is intentionally “small but sharp”: concrete definitional computation is provided for a subset (notably Grothendieck constructions and selected stable-head projections), while the general simplicial iteration story is exposed as an interface to be refined.
+## 9.1 Metatheory and rewrite hygiene
+
+emdash relies on Lambdapi’s core metatheoretic contract: conversion is generated by β-reduction plus user-defined rewrite rules, and each rule is checked for subject reduction. Global termination/confluence are managed by design discipline.
+
+The practical methodology is **rewrite hygiene**:
+
+- introduce *stable heads* for key operations, so later rules match on small constructors rather than on huge expanded terms,
+- fold composite expressions into those heads by canonicalization rules,
+- keep non-essential inferred arguments as `_` in LHS patterns to avoid conversion blowups,
+- reserve `unif_rule` (unification hints) for “bridges” that should guide elaboration without changing normal forms.
+
+## 9.2 Snapshot
+
+The kernel is intentionally “small but sharp”: concrete definitional computation is provided for a subset (notably Grothendieck constructions, representables, stable-head projections, and the pointwise `homd_cov` rule), while the general simplicial iteration story is exposed as an interface to be refined.
 
 Reproducible checks:
 
