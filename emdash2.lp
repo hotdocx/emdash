@@ -833,8 +833,8 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Functor B A)) (x : τ (Obj (Op_cat 
 
 // Sanity: postcomposition by op normalizes pointwise.                                                // exercise `op ∘ E` computation
 assert [B : Cat] (E : τ (Functor B Cat_cat)) (b : τ (Obj B)) ⊢
-  @fapp0 B Cat_cat (@comp_cat_fapp0 B Cat_cat Cat_cat op E) b
-    ≡ Op_cat (@fapp0 B Cat_cat E b);
+  fapp0 (@comp_cat_fapp0 B Cat_cat Cat_cat op E) b
+    ≡ Op_cat (fapp0 E b);
 
 // Sanity: opposite distributes over functor composition in Cat_cat.                                  // (F∘G)ᵒᵖ = Fᵒᵖ∘Gᵒᵖ
 assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢
@@ -844,15 +844,11 @@ assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢
 // Sanity: general hom_cov action computes to postcomposition.                                          // ((hom_cov W F)_1 f)_0 g ↪ (Ff)∘g
 assert [A B : Cat] (W : τ (Obj A)) (F : τ (Functor B A))
   (X Y : τ (Obj B)) (f : τ (@Hom B X Y)) (g : τ (@Hom A W (fapp0 F X))) ⊢
-  @fapp0 (@Hom_cat A W (fapp0 F X))
-    (@Hom_cat A W (fapp0 F Y))
-    (@fapp0 (@Hom_cat B X Y)
+  fapp0 (@fapp0 (@Hom_cat B X Y)
       _
       (@fapp1_func B Cat_cat (@hom_cov A W B F) X Y) f) g
     ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
-        (@fapp0 (@Hom_cat B X Y)
-          (@Hom_cat A (fapp0 F X) (fapp0 F Y))
-          (@fapp1_func B A F X Y) f) g;
+        (fapp0 (@fapp1_func B A F X Y) f) g;
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_cov_int(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
@@ -1647,11 +1643,7 @@ rule @fapp0
 // Sanity: the β-rule is visible as definitional equality.                                               // exercise Total_intro_func_func β-rule
 assert [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Functor X Y))
   (FF : τ (Functord E (Pullback_catd D xy))) ⊢
-  @fapp0
-    (Functord_cat E (Pullback_catd D xy))
-    (Functor_cat (Total_cat E) (Total_cat D))
-    (@Total_intro_func_func X Y E D xy)
-    FF
+  fapp0 (@Total_intro_func_func X Y E D xy) FF
   ≡ @Total_intro_func X Y E D xy FF;
 
 // Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
@@ -1732,7 +1724,7 @@ rule fapp0 (Obj_func $F) $M ↪ $F;                                             
 
 // Sanity: Obj_func_func is definitionally the packaging of Obj_func.                                  // exercise Obj_func_func β-rule
 assert [Y : Cat] (y : τ (Obj Y)) ⊢
-  @fapp0 Y (Functor_cat Terminal_cat Y) (@Obj_func_func Y) y ≡ @Obj_func Y y;
+  fapp0 (@Obj_func_func Y) y ≡ @Obj_func Y y;
 
 // Sanity: the intended definitional computations for `Terminal_cat` fire.                            // unit tests
 assert ⊢ τ (Obj Terminal_cat) ≡ unit;
@@ -2153,16 +2145,12 @@ assert [X B : Cat]
   (xy : τ (Functor X B))
   (FF : τ (Functord (Terminal_catd X) (Pullback_catd (Fibration_cov_catd M) xy)))
   (x  : τ (Obj X)) ⊢
-  @fapp0
-    (Total_cat (Fibration_cov_catd M))
-    B
-    (Total_proj1_func (Fibration_cov_catd M))
-    (@fapp0
+  fapp0 (Total_proj1_func (Fibration_cov_catd M)) (@fapp0
       X
       (Total_cat (Fibration_cov_catd M))
       (@Total_intro_func X B (Terminal_catd X) (Fibration_cov_catd M) xy FF)
       x)
-  ≡ @fapp0 X B xy x;
+  ≡ fapp0 xy x;
 
 /*
   Fibre_func (extract the induced functor on a fibre)
@@ -3302,15 +3290,15 @@ assert [A B : Cat]
 
 // id/comp in Functor_cat compute pointwise via tapp0_fapp0.                                            // checks vertical laws for components
 assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢
-  @tapp0_fapp0 A B F F Y (id (Functor_cat A B) F) ≡ @id B (@fapp0 A B F Y);
+  @tapp0_fapp0 A B F F Y (id (Functor_cat A B) F) ≡ @id B (fapp0 F Y);
 
 assert [A B : Cat] (F G H : τ (Functor A B)) (Y : τ (Obj A))
   (ϵ : τ (Transf F G)) (η : τ (Transf G H)) ⊢
   @tapp0_fapp0 A B F H Y (@comp_fapp0 (Functor_cat A B) F G H η ϵ)
     ≡ @comp_fapp0 B
-        (@fapp0 A B F Y)
-        (@fapp0 A B G Y)
-        (@fapp0 A B H Y)
+        (fapp0 F Y)
+        (fapp0 G Y)
+        (fapp0 H Y)
         (@tapp0_fapp0 A B G H Y η)
         (@tapp0_fapp0 A B F G Y ϵ);
 
@@ -3447,7 +3435,7 @@ assert [A : Cat] ⊢ Total_cat (Lift_catd A) ≡ A;
 assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd A) x1 ≡ A;
 assert [A B : Cat] (F : τ (Functor A B)) ⊢ Unlift_func (Lift_funcd F) ≡ F;
 assert [A B : Cat] (F : τ (Functor A B)) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
-  @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ @fapp0 A B F x;
+  @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ fapp0 F x;
 
 // -------------------------------------------------------------------------------------------------
 // Phase 2 (draft): strict naturality for arrow-indexed components                                   // strict (temporary) 2-categorical laws
@@ -3685,7 +3673,7 @@ assert [A : Cat] (F : τ (Functor A A)) (X Y Z : τ (Obj A))
   (ϵ : τ (Transf F (@id_func A)))
   (f : τ (@Hom A X Y)) (g : τ (@Hom A Y Z)) ⊢
   @comp_fapp0 A
-    (@fapp0 A A F X)
+    (fapp0 F X)
     Y
     Z
     g

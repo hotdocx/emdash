@@ -23,12 +23,33 @@ ALLOW_BRACKET_HEADS_PHASE_A = {
 }
 
 
-# Phase B (bigger win): stable-head “@K …” -> “K …” dropping obvious indices.
-ALLOW_AT_REWRITES_PHASE_B: dict[str, int] = {
-    "@Functord": 1,  # @Functord B E D -> Functord E D
-    "@FibreObj": 1,  # @FibreObj B E X -> FibreObj E X
-    "@Transf": 2,  # @Transf A B F G -> Transf F G
-    "@Transfd": 3,  # @Transfd Z E D FF GG -> Transfd FF GG
+# Phase B (bigger win): `@K i1 ... in a1 ... am` -> `K a1 ... am` dropping leading implicit indices.
+# Each entry is: head -> (drop_n_args, total_args)
+ALLOW_AT_REWRITES_PHASE_B_SAFE: dict[str, tuple[int, int]] = {
+    "@Functord": (1, 3),  # @Functord B E D -> Functord E D
+    "@FibreObj": (1, 3),  # @FibreObj B E X -> FibreObj E X
+    "@Transf": (2, 4),  # @Transf A B F G -> Transf F G
+    "@Transfd": (3, 5),  # @Transfd Z E D FF GG -> Transfd FF GG
+    "@fapp0": (2, 4),  # @fapp0 A B F x -> fapp0 F x
+}
+
+# More aggressive rewrites: can increase metavariables and slow typechecking.
+ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TAPP: dict[str, tuple[int, int]] = {
+    "@tapp1_func_funcd": (4, 5),  # @tapp1_func_funcd A B F G X -> tapp1_func_funcd X
+    "@tapp1_fapp0_funcd": (4, 6),  # @tapp1_fapp0_funcd A B F G X ϵ -> tapp1_fapp0_funcd X ϵ
+    "@tapp0_func": (4, 5),  # @tapp0_func A B F G Y -> tapp0_func Y
+    "@tapp0_fapp0": (4, 6),  # @tapp0_fapp0 A B F G Y ϵ -> tapp0_fapp0 Y ϵ
+}
+
+ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TAPP1_COMPONENT: dict[str, tuple[int, int]] = {
+    "@tapp1_fapp0": (4, 8),  # @tapp1_fapp0 A B F G X Y ϵ f -> tapp1_fapp0 X Y ϵ f
+}
+
+ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TDAPP: dict[str, tuple[int, int]] = {
+    "@tdapp1_func_funcd": (5, 7),  # @tdapp1_func_funcd Z E D FF GG X U -> tdapp1_func_funcd X U
+    "@tdapp1_fapp0_funcd": (5, 8),  # @tdapp1_fapp0_funcd Z E D FF GG X U ϵ -> tdapp1_fapp0_funcd X U ϵ
+    "@tdapp0_func": (5, 7),  # @tdapp0_func Z E D FF GG Y V -> tdapp0_func Y V
+    "@tdapp0_fapp0": (5, 8),  # @tdapp0_fapp0 Z E D FF GG Y V ϵ -> tdapp0_fapp0 Y V ϵ
 }
 
 
@@ -279,6 +300,7 @@ def rewrite_at_head_application(
     i: int,
     head: str,
     drop_n: int,
+    total_args: int,
     declared: set[str],
 ) -> tuple[str, int] | None:
     """
@@ -294,24 +316,9 @@ def rewrite_at_head_application(
 
     pos = i + len(head)
     args: list[str] = []
-    for _ in range(drop_n + 1):  # need at least drop_n args, plus one to keep
-        t = consume_term(text, pos)
-        if t is None:
-            return None
-        term, pos = t
-        args.append(term.strip())
-
-    # Now consume remaining args needed by the head kind:
-    # @Hom needs 3 args total; @Functord 3; @FibreObj 3; @Transf 4; @Transfd 5.
-    needed_total = {
-        "@Functord": 3,
-        "@FibreObj": 3,
-        "@Transf": 4,
-        "@Transfd": 5,
-    }.get(head)
-    if needed_total is None:
+    if total_args <= drop_n:
         return None
-    while len(args) < needed_total:
+    for _ in range(total_args):
         t = consume_term(text, pos)
         if t is None:
             return None
@@ -324,7 +331,13 @@ def rewrite_at_head_application(
     return (replacement, pos)
 
 
-def rewrite_text(text: str, phase_b: bool) -> tuple[str, dict[str, int]]:
+def rewrite_text(
+    text: str,
+    phase_b: bool,
+    aggressive_tapp: bool,
+    aggressive_tapp1_component: bool,
+    aggressive_tdapp: bool,
+) -> tuple[str, dict[str, int]]:
     declared = collect_declared_symbols(text)
     code_spans = iter_code_spans(text)
     skip_spans = build_skip_spans_for_commands(text)
@@ -364,13 +377,20 @@ def rewrite_text(text: str, phase_b: bool) -> tuple[str, dict[str, int]]:
 
         # Phase B: rewrite @StableHead applications to StableHead dropping index args.
         if phase_b:
-            for at_head, drop_n in ALLOW_AT_REWRITES_PHASE_B.items():
+            mapping = dict(ALLOW_AT_REWRITES_PHASE_B_SAFE)
+            if aggressive_tapp:
+                mapping.update(ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TAPP)
+            if aggressive_tapp1_component:
+                mapping.update(ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TAPP1_COMPONENT)
+            if aggressive_tdapp:
+                mapping.update(ALLOW_AT_REWRITES_PHASE_B_AGGRESSIVE_TDAPP)
+            for at_head, (drop_n, total_args) in mapping.items():
                 if (
                     text.startswith(at_head, i)
                     and (i == 0 or not is_ident_char(text[i - 1]))
                     and (i + len(at_head) >= len(text) or not is_ident_char(text[i + len(at_head)]))
                 ):
-                    r2 = rewrite_at_head_application(text, i, at_head, drop_n, declared)
+                    r2 = rewrite_at_head_application(text, i, at_head, drop_n, total_args, declared)
                     if r2 is not None:
                         rep, next_pos = r2
                         out.append(rep)
@@ -402,6 +422,26 @@ def main() -> int:
         help="Also rewrite stable heads: `@Hom A X Y` -> `Hom X Y`, etc.",
     )
     ap.add_argument(
+        "--aggressive",
+        action="store_true",
+        help="Enable more aggressive Phase-B rewrites (may slow typechecking).",
+    )
+    ap.add_argument(
+        "--aggressive-tapp",
+        action="store_true",
+        help="Enable Phase-B rewrites for `tapp0_*` / `tapp1_*` packaging heads.",
+    )
+    ap.add_argument(
+        "--aggressive-tapp1-component",
+        action="store_true",
+        help="Enable Phase-B rewrites for `tapp1_fapp0` (arrow-indexed components).",
+    )
+    ap.add_argument(
+        "--aggressive-tdapp",
+        action="store_true",
+        help="Enable Phase-B rewrites for displayed `tdapp0_*` / `tdapp1_*` heads.",
+    )
+    ap.add_argument(
         "--check",
         action="store_true",
         help="Do not write; exit 1 if changes would be made.",
@@ -410,7 +450,17 @@ def main() -> int:
 
     path: Path = args.path
     before = read_file(path)
-    after, stats = rewrite_text(before, phase_b=args.phase_b)
+    # `--aggressive` enables all aggressive groups; otherwise groups can be enabled individually.
+    aggressive_tapp = args.aggressive or args.aggressive_tapp
+    aggressive_tapp1_component = args.aggressive or args.aggressive_tapp1_component
+    aggressive_tdapp = args.aggressive or args.aggressive_tdapp
+    after, stats = rewrite_text(
+        before,
+        phase_b=args.phase_b,
+        aggressive_tapp=aggressive_tapp,
+        aggressive_tapp1_component=aggressive_tapp1_component,
+        aggressive_tdapp=aggressive_tdapp,
+    )
     if after == before:
         print(f"{path}: no changes.")
         return 0
