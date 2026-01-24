@@ -6,7 +6,11 @@
   Comments aim to align names with standard category-theory terms.              // helps IDE autocompletion and cross-referencing textbooks/wikis
 */                                                                              // end header
 
-flag "eta_equality" on;                                                         // enable η-reduction in definitional equality (normalization)
+flag "eta_equality" on; // default is off                                                     // enable η-reduction in definitional equality (normalization)
+flag "print_implicits" on; // default is off
+flag "print_contexts" on; // default is off
+flag "print_domains" on; // default is off
+flag "print_meta_args" on; // default is off
 
 /*
   Surface syntax legend (emdash; see also docs/SYNTAX_SURFACE.md)
@@ -226,6 +230,8 @@ injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;            
 // Instead, we introduce stable *aliases* (definitions) and keep inference via unification rules when needed.   // performance note
 symbol Hom [A : Cat] (X_A Y_A : τ (Obj A)) : Grpd                                                     // classifier of 1-cells X→Y in A
 ≔ Obj (@Hom_cat A X_A Y_A);
+
+unif_rule Obj (@Hom_cat $A $X $Y) ≡ Obj (@Hom_cat $A' $X' $Y') ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
 // Surface:
@@ -503,14 +509,12 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Functor A B)),               
 // Stable head: apply a functor’s hom-action to a 1-cell (globular presentation).                      // F(f) as a 1-cell
 symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   Π [X_A Y_A : τ (Obj A)],
-  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
-  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
+  Π (f : τ (@Hom A X_A Y_A)),
+  τ (@Hom B (fapp0 F_AB X_A) (fapp0 F_AB Y_A));
 
 // Canonicalization: fold “apply fapp1_func at f” toward the stable head `fapp1_fapp0`.                // fapp0(fapp1_func(F),f) ↪ fapp1_fapp0
-rule @fapp0 (@Hom_cat $A $X_A $Y_A) _
-      (@fapp1_func $A $B $F_AB $X_A $Y_A)
-      $f
-  ↪ @fapp1_fapp0 $A $B $F_AB $X_A $Y_A $f;
+rule fapp0 (fapp1_func $F_AB) $f
+  ↪ fapp1_fapp0 $F_AB $f;
 
 // -------------------------------------------------------------------------------------------------
 // 5.1 Paths-as-morphisms (bridge out of Path_cat / Core_cat)                                         // groupoids ↪ categories
