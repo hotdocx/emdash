@@ -1,4 +1,16 @@
-# Emdash — A Dependently Typed Logical Framework for Computational Category Theory
+# emdash — Functorial programming for strict/lax ω-categories in Lambdapi
+
+## NEW UPDATED VERSION EMDASH 2 — [./spec/emdash2.lp](./spec/emdash2.lp) 
+
+*GO TO: [./spec/emdash2.lp](./spec/emdash2.lp)*
+
+We report on `emdash2.lp`, an ongoing experiment whose goal is a *type-theoretical* account of strict/lax ω-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The implementation target is the Lambdapi lo`emdash2.lp` is an experiment in *functorial programming* for strict/lax ω-categories inside the Lambdapi logical framework. The guiding principle is proof-theoretic: many categorical equalities (units, associativity, triangle identities, functoriality laws) are best treated as *normalization* (“cut-elimination”) rather than as external propositions. The technical focus of this paper is a *dependent arrow/comma (dependent hom)* construction for a dependent category $E$ over a base category $Z$. In the kernel this appears as `homd_cov` and its more internal, base-parametrized variant `homd_cov_int`. These constructions organize “cells over a base arrow” in a simplicial (triangle/surface) manner, and they are intended to support exchange/stacking laws and higher coherence by iterating the same pattern. Separately (but in the same computational spirit), we explain how (a draft of) adjunction triangle identities becomes a rewrite rule via the “off-diagonal” component infrastructure for transfors.gical framework, and the guiding stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+
+The core construction is a dependent comma/arrow (“dependent hom”) operation that organizes “cells over a base arrow” in a simplicial manner. Concretely, for a base category $B$ and a dependent category over it (morally a functor $E: B\to \mathbf{Cat}$), we define a Cat-valued functor classifying fibre morphisms from a transported probe object to a target object:
+$$
+\mathrm{Homd}_E(e_0,--) : E \times_B \bigl(\mathrm{Hom}_B(b_0,-)\bigr)^{\mathrm{op}} \to \mathbf{Cat}.
+$$
+As a complementary application, we outline a computational adjunction interface where unit/counit are first-class 2-cell data and a triangle identity is oriented as a definitional reduction on composites.
 
 ## Overview
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
