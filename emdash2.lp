@@ -232,6 +232,7 @@ symbol Hom [A : Cat] (X_A Y_A : τ (Obj A)) : Grpd                              
 ≔ Obj (@Hom_cat A X_A Y_A);
 
 unif_rule Obj (@Hom_cat $A $X $Y) ≡ Obj (@Hom_cat $A' $X' $Y') ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
+unif_rule Hom $A $X $Y ≡ Hom $A' $X' $Y' ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 
 // Identity morphism: an object in the hom-category Hom_A(X,X).                                      // identity 1-cell (and higher units implicitly)
 // Surface:
@@ -1032,6 +1033,10 @@ injective symbol Fibre_cat : Π [B : Cat] (E : Catd B) (X_B : τ (Obj B)), Cat; 
 symbol FibreObj [B : Cat] (E : Catd B) (X_B : τ (Obj B)) : Grpd                                         // classifier of objects in the fibre E[X_B]
 ≔ Obj (Fibre_cat E X_B);
 
+// Controlled “associativity” of Obj on fibres: only for the chosen head `Fibre_cat`.                   // inference helper
+unif_rule Obj (@Fibre_cat $B $E $X) ≡ Obj (@Fibre_cat $B' $E' $X') ↪ [ $B ≡ $B'; $E ≡ $E'; $X ≡ $X' ];
+unif_rule FibreObj $E $X ≡ FibreObj $E' $X' ↪ [ $E ≡ $E'; $X ≡ $X' ];
+
 // Fibre of a Grothendieck construction is the original value (strictly, on objects).                // ∫M fibre at x is M(x)
 rule Fibre_cat (Fibration_cov_catd $M) $x ↪ fapp0 $M $x;                                              // fibre(∫M,x) ↪ M(x)
 
@@ -1158,6 +1163,11 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;  
 // Stable head for objects of `Transf_cat`.                                                            // Transf… abbreviates Obj(Transf_cat…)
 symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd                                                  // classifier of transfors F⇒G
 ≔ Obj (@Transf_cat A B F G);
+
+// Controlled “associativity” of Obj on transformations: only for the chosen head `Transf_cat`.          // inference helper
+unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
+  ↪ [ $A ≡ $A'; $B ≡ $B'; $F ≡ $F'; $G ≡ $G' ];
+unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
 
 /*
   tapp1_func_funcd (outer component / “superscript” viewpoint)
@@ -2815,6 +2825,11 @@ constant symbol Transfd_cat : Π [Z : Cat], Π [E D : Catd Z],                  
 // Stable head for objects of `Transfd_cat`.                                                           // Transfd… abbreviates Obj(Transfd_cat…)
 symbol Transfd [Z : Cat] [E D : Catd Z] (FF GG : τ (Functord E D)) : Grpd                         // classifier of displayed transfors FF⇒GG
 ≔ Obj (@Transfd_cat Z E D FF GG);
+
+// Controlled “associativity” of Obj on displayed transformations: only for the chosen head `Transfd_cat`. // inference helper
+unif_rule Obj (@Transfd_cat $Z $E $D $FF $GG) ≡ Obj (@Transfd_cat $Z' $E' $D' $FF' $GG')
+  ↪ [ $Z ≡ $Z'; $E ≡ $E'; $D ≡ $D'; $FF ≡ $FF'; $GG ≡ $GG' ];
+unif_rule Transfd $FF $GG ≡ Transfd $FF' $GG' ↪ [ $FF ≡ $FF'; $GG ≡ $GG' ];
 
 // Key identification: the hom-category of the displayed-functor category is the displayed-transformation category.
 // Hom_{Functord_cat(E,D)}(FF,GG) ≡ Transfd_cat(FF,GG) definitionally.                                  // definitional equality of homs
