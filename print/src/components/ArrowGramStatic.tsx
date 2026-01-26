@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ArrowGramDiagram, computeDiagram } from 'arrowgram';
+import { ArrowGramDiagram, computeDiagram } from '@hotdocx/arrowgram';
 import { Edit2 } from 'lucide-react';
 
 interface ArrowGramStaticProps {
