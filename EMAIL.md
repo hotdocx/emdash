@@ -8,6 +8,12 @@ I read arXiv:2601.03298. A related perspective from our ongoing emdash experimen
 
 We use displayed/dependent categories over a base `Z` (morally `E : Z → Cat`). In the Grothendieck case `E = ∫E0` with `E0 : Z → Cat`, the dependent comma/arrow construction `homd_cov` computes pointwise as:
 \[
+\mathrm{Homd}_E(W,-)\;:\;E \times_Z \bigl(\mathrm{Hom}_Z(W_Z,-)\bigr)^{\mathrm{op}} \to \mathbf{Cat},
+\qquad
+((z,x),(f:W_Z\to z)) \mapsto \mathrm{Hom}_{E(z)}(f_!(W),x),
+\]
+where $W_Z\in Z$ and $W\in E(W_Z)$ are fixed.
+\[
 \mathrm{homd\_cov}(z,d,f)\;\equiv\;\mathrm{Hom}_{E_0(z)}(f_!(W),\,FF_z(d)),
 \]
 with `f : W_Z → z` and `d ∈ D[z]`. This packages “cells over a chosen base arrow” as objects of a category, in a form meant to iterate (simplicial indexing) and normalize by rewriting.
