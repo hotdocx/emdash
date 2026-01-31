@@ -1,6 +1,6 @@
-Subject: Re: [FOM] Autoformalization getting easy? — definitions via dependent comma categories (`homd_cov`) and why strict ω-cats can be *easier*
+Subject: GPT 5.2 vs ω-categories — Re: [FOM] Autoformalization getting easy?
 
-Dear Josef, dear all,
+Dear Josef Urban, dear FOM,
 
 many thanks for your note and for posting “130k Lines of Formal Topology in Two Weeks: Simple and Cheap Autoformalization for Everyone?” (arXiv:2601.03298). The “LLM ↔ fast checker” feedback loop you describe resonates strongly with what we have been exploring in the emdash project, albeit in a rather different direction (higher categories and rewrite-based normalization).
 
@@ -98,8 +98,8 @@ Notes:
   "arrows": [
     { "name": "f",  "label": "$f$",       "from": "X", "to": "Y", "label_alignment": "right" },
     { "name": "g",  "label": "$g$",       "from": "Y", "to": "Z", "label_alignment": "right" },
-    { "name": "h",  "label": "$h$",       "from": "X", "to": "Z", "curve": 100,  "label_alignment": "left" },
-    { "name": "gf", "label": "$g\\circ f$", "from": "X", "to": "Z", "curve": -200, "label_alignment": "right" },
+    { "name": "h",  "label": "$h$",       "from": "X", "to": "Z", "curve": -200,  "label_alignment": "left" },
+    { "name": "gf", "label": "$g\\circ f$", "from": "X", "to": "Z", "curve": 200, "label_alignment": "right" },
     { "from": "gf", "to": "h", "label": "$\\alpha$", "label_alignment": "left", "style": { "level": 2, "mode": "arrow" } }
   ]
 }
