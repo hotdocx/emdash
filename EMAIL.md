@@ -2,68 +2,32 @@ Subject: GPT 5.2 vs ω-categories — Re: [FOM] Autoformalization getting easy?
 
 Dear Josef Urban, dear FOM,
 
-many thanks for your note and for posting “130k Lines of Formal Topology in Two Weeks: Simple and Cheap Autoformalization for Everyone?” (arXiv:2601.03298). The “LLM ↔ fast checker” feedback loop you describe resonates strongly with what we have been exploring in the emdash project, albeit in a rather different direction (higher categories and rewrite-based normalization).
+I read arXiv:2601.03298. A related perspective from our ongoing emdash experiment (`emdash2.lp` in Lambdapi; public narrative `print/public/index.md`):
 
-I’m writing to highlight one specific design pattern from our current public write-up (`print/public/index.md`) that seems relevant to Kevin Buzzard’s “Definitions / technical debt” concerns, and to your “autoformalization getting easy?” intuition:
+## 1) Dependent comma/arrow for a dependent category (`homd_cov`)
 
-1) A *definition* that makes later coherence “compute”: dependent arrow/comma (`homd_cov`)
-2) An observation that surprised us in practice: in a rewrite-oriented type-theoretic kernel, *strict ω-categories can actually be easier to express than 1-categories*, because higher coherence lives as higher cells (data) rather than as propositional equality (proofs).
+We use displayed/dependent categories over a base `Z` (morally `E : Z → Cat`). In the Grothendieck case `E = ∫E0` with `E0 : Z → Cat`, the dependent comma/arrow construction `homd_cov` computes pointwise as:
+\[
+\mathrm{homd\_cov}(z,d,f)\;\equiv\;\mathrm{Hom}_{E_0(z)}(f_!(W),\,FF_z(d)),
+\]
+with `f : W_Z → z` and `d ∈ D[z]`. This packages “cells over a chosen base arrow” as objects of a category, in a form meant to iterate (simplicial indexing) and normalize by rewriting.
 
-## 1) The dependent comma/arrow of a dependent category (`homd_cov`)
+## 2) Why strict/lax ω-cats can be easier than 1-cats (for TT + rewriting + AI)
 
-In `emdash2.lp` (a Lambdapi specification), we work with **displayed / dependent categories** over a base `Z` (morally a fibration `E : Z → Cat`). In the special (computational) case where such a dependent category is given by a Grothendieck construction `∫E0` for a Cat-valued functor `E0 : Z → Cat`, we have strict transport on fibre objects along base arrows (currently strict, intended to become lax later).
+In a 1-category formalization, 2D structure tends to get forced into propositional equality of 1-cells (or setoids), which is where agent-generated code often becomes long and brittle (transport/equality glue). In a strict/lax ω-categorical presentation with `Hom(x,y)` itself a category (recursively), coherence can be explicit higher-cell data, and many “diagram chases” can be oriented as normalization on stable rewrite heads. That uniformity is unexpectedly agent-friendly.
 
-Fix:
+## 3) Arrowgram + LastRevision: machine-checkable diagrams/papers
 
-- a base category `Z`,
-- a dependent category `E` over `Z`,
-- a chosen base object `W_Z : Ob(Z)` and chosen fibre object `W ∈ E[W_Z]`,
-- a “probe” displayed category `D` over `Z` together with a displayed functor `FF : D → E` (over `id_Z`).
-
-Then the central “triangle classifier” is a Cat-valued functor called `homd_cov`. In the Grothendieck–Grothendieck case, it has a pointwise *computation rule* which, informally, says:
-
-- given `f : W_Z → z` in `Z` and `d ∈ D[z]` (so `FF_z(d) ∈ E[z]`),
-- the value of `homd_cov` at `(z, d, f)` reduces definitionally to the hom-category in the fibre:
-  \[
-    \mathrm{Hom}_{E_0(z)}(f_!(W), FF_z(d)).
-  \]
-
-This is exactly the **dependent arrow / dependent comma** construction: it is the category of “displayed arrows over a chosen base arrow”, i.e. triangles whose base edge is fixed to be `f`.
-
-Why this matters for autoformalization is that it gives a *canonical, compositional home* for “2-cells over a base edge”, from which one can iterate:
-
-- a 2-cell becomes an object in a dependent hom category (“a triangle over a base edge”),
-- a 3-cell becomes an object in an iterated dependent hom (“a tetrahedron over a base triangle”),
-- etc., yielding a simplicial organization of higher cells that is friendly to computation by rewriting.
-
-In other words: instead of encoding naturality/exchange/coherence as separate propositions, we try to design *stable head symbols + rewrite rules* so that diagram chasing becomes normalization.
-
-## 2) Why ω-categories can be easier than 1-categories (for type theory + rewriting + AI)
-
-This may sound backwards, but in a rewrite-driven kernel the “1-categorical” stopping point is often the annoying one:
-
-- In a 1-category formalization, “2-dimensional structure” typically gets forced into propositional equality of morphisms (or setoid equality), which is exactly where proof assistants (and LLM-driven code generation) can accumulate debt: you end up with large proof terms, fragile rewrite/unification behavior, and lots of transport bookkeeping.
-- In an ω-categorical presentation where `Hom(x,y)` is itself a category (and recursively so), higher coherence is represented as *directed higher cells* instead of *equations that must be proved*. For a computational account, this is a feature: you can orient coherence as rewrite rules on stable heads.
-
-So, while *weak* ω-categories are of course conceptually deep, a *strict/lax ω-category kernel with explicit higher-cell interfaces* can be structurally uniform in a way that is particularly amenable to “AI coding assistant” workflows: the agent repeatedly instantiates the same patterns (stable-head application, functoriality folding, dependent-hom iteration) rather than inventing bespoke proof scripts for each coherence lemma.
-
-This is one sense in which “autoformalization getting easy?” might first become true for domains where:
-
-- the definitions can be engineered so that major equalities compute (normalization),
-- and higher structure is made explicit as data (cells) rather than implicit as equality proofs.
-
-If useful, the best “single page” overview of these ideas is currently our public narrative (`print/public/index.md`), especially §6 “Dependent Arrow/Comma Categories: `homd_cov`”.
+Separately, we built **Arrowgram**: a strict JSON `DiagramSpec` for commutative diagrams (validated by `@arrowgram/core`), a web editor (`packages/web`) exporting SVG/PNG/TikZ, and a paper viewer (`packages/paged`) that renders Markdown with KaTeX + Arrowgram + Mermaid + Vega-Lite via Paged.js. **LastRevision** (`packages/lastrevision`) is the private SaaS host adding remote persistence/auth/attachments + an AI proxy while keeping the same diagram core. The appendix JSON blocks are valid Arrowgram specs (paste into the editor, or embed in Markdown).
 
 Best regards,
 — m— / emdash project
 
 ---
 
-Appendix: Arrowgram JSON specs (copy/paste into the Arrowgram editor)
+Appendix: Arrowgram JSON specs
 
-Notes:
-- Labels use KaTeX/LaTeX; JSON strings require `\\` for backslashes.
-- You can rename node IDs freely as long as arrows reference them consistently.
+Note: JSON strings require `\\` for LaTeX backslashes.
 
 1) A displayed arrow over a base arrow (triangle over a base edge)
 
