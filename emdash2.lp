@@ -3506,22 +3506,16 @@ assert [B : Cat] (M N L : τ (Obj B))
   (X Y Z : τ (Hom B M N))
   (a : τ (Hom (Hom_cat B M N) X Y)) (a' : τ (Hom (Hom_cat B M N) Y Z)) ⊢
   (let PostComp ≔ @fapp1_func B Cat_cat (@hom_cov B M B (@id_func B)) N L in
-   let F ≔ @fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp f in
-   let G ≔ @fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp g in
-   let ϵ ≔ @fapp1_fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp f g e in
-   @comp_fapp0 (Hom_cat B M L)
-      (@fapp0 (Hom_cat B M N) (Hom_cat B M L) F X)
-      (@fapp0 (Hom_cat B M N) (Hom_cat B M L) G Y)
-      (@fapp0 (Hom_cat B M N) (Hom_cat B M L) G Z)
-      (@fapp1_fapp0 (Hom_cat B M N) (Hom_cat B M L) G Y Z a')
-      (@tapp1_fapp0 (Hom_cat B M N) (Hom_cat B M L) F G X Y ϵ a))
+   let F ≔ fapp0 PostComp f in
+   let G ≔ fapp0 PostComp g in
+   let ϵ ≔ fapp1_fapp0 PostComp e in
+   comp_fapp0 (fapp1_fapp0 G a') (tapp1_fapp0 ϵ a))
   ≡
   (let PostComp ≔ @fapp1_func B Cat_cat (@hom_cov B M B (@id_func B)) N L in
-   let F ≔ @fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp f in
-   let G ≔ @fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp g in
-   let ϵ ≔ @fapp1_fapp0 (Hom_cat B N L) (Functor_cat (Hom_cat B M N) (Hom_cat B M L)) PostComp f g e in
-   @tapp1_fapp0 (Hom_cat B M N) (Hom_cat B M L) F G X Z ϵ
-      (@comp_fapp0 (Hom_cat B M N) X Y Z a' a));
+   let F ≔ fapp0 PostComp f in
+   let G ≔ fapp0 PostComp g in
+   let ϵ ≔ fapp1_fapp0 PostComp e in
+   tapp1_fapp0 ϵ (comp_fapp0 a' a));
 
 // -------------------------------------------------------------------------------------------------
 // Phase 3 (draft): Adjunctions (Kosta Došen / cut-elimination interface)                              // adjoints, unit, counit
