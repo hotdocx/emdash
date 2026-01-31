@@ -3500,22 +3500,38 @@ unif_rule @tapp1_fapp0 $A $B $F_AB $G_AB $X $X $ϵ (@id $A $X)
   ≡ @tapp0_fapp0 $A $B $F_AB $G_AB $X $ϵ
   ↪ [ tt ≡ tt ];
 
-// Sanity: Exchange law instance for hom-functor natural transformation (accumulation)
+// Sanity: Exchange law instance for the Cat-valued representable `hom_cov` (postcomposition).         // whiskering / exchange
+//
+// Fix B and M. The covariant representable
+//   hom_cov B M B (id_func B) : B → Cat_cat
+// sends N : Obj(B) to the hom-category Hom_cat(B,M,N).
+//
+// For f : N → L it provides postcomposition as a functor:
+//   postcomp(f) : Hom_cat(B,M,N) → Hom_cat(B,M,L).
+// This functor is obtained as `fapp0 PostComp f`, where
+//   PostComp := fapp1_func (hom_cov B M B (id_func B)) N L
+// is the action of hom_cov on the hom-category Hom_cat(B,N,L).
+//
+// For a 2-cell e : f ⇒ g (a morphism in Hom_cat(B,N,L)), functoriality gives a transfor
+//   ϵ := fapp1_fapp0 PostComp e : postcomp(f) ⇒ postcomp(g),
+// and we can form its *off-diagonal* component over a 2-cell α : X ⇒ Y in Hom_cat(B,M,N):
+//   tapp1_fapp0 ϵ α : (f ∘ X) ⇒ (g ∘ Y)   in Hom_cat(B,M,L).
+//
+// The exchange law here says that “applying ϵ to a composite 2-cell” is the same as pasting:
+//   (g ⋆ β) ∘ (ϵ_α)  ≡  ϵ_(β∘α)
+// where β : Y ⇒ Z and g⋆β is whiskering by postcomp(g) (i.e. fapp1_fapp0 postcomp(g) β).
 assert [B : Cat] (M N L : τ (Obj B))
-  (f g : τ (Hom B N L)) (e : τ (Hom (Hom_cat B N L) f g))
+  (f g : τ (Hom B N L)) (e_fg : τ (Hom (Hom_cat B N L) f g))
   (X Y Z : τ (Hom B M N))
-  (a : τ (Hom (Hom_cat B M N) X Y)) (a' : τ (Hom (Hom_cat B M N) Y Z)) ⊢
+  (α : τ (Hom (Hom_cat B M N) X Y)) (β : τ (Hom (Hom_cat B M N) Y Z)) ⊢
   (let PostComp ≔ @fapp1_func B Cat_cat (@hom_cov B M B (@id_func B)) N L in
-   let F ≔ fapp0 PostComp f in
-   let G ≔ fapp0 PostComp g in
-   let ϵ ≔ fapp1_fapp0 PostComp e in
-   comp_fapp0 (fapp1_fapp0 G a') (tapp1_fapp0 ϵ a))
+   let postcomp_g ≔ fapp0 PostComp g in
+   let ϵ ≔ fapp1_fapp0 PostComp e_fg in
+   comp_fapp0 (fapp1_fapp0 postcomp_g β) (tapp1_fapp0 ϵ α))
   ≡
   (let PostComp ≔ @fapp1_func B Cat_cat (@hom_cov B M B (@id_func B)) N L in
-   let F ≔ fapp0 PostComp f in
-   let G ≔ fapp0 PostComp g in
-   let ϵ ≔ fapp1_fapp0 PostComp e in
-   tapp1_fapp0 ϵ (comp_fapp0 a' a));
+   let ϵ ≔ fapp1_fapp0 PostComp e_fg in
+   tapp1_fapp0 ϵ (comp_fapp0 β α));
 
 // -------------------------------------------------------------------------------------------------
 // Phase 3 (draft): Adjunctions (Kosta Došen / cut-elimination interface)                              // adjoints, unit, counit

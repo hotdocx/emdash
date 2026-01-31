@@ -319,6 +319,41 @@ $$
 $$
 so that normalization *accumulates* the base-arrow index instead of repeatedly expanding/contracting naturality squares.
 
+### Exchange law sanity: postcomposition and pasting
+
+Once we expose off-diagonal components, we can also express the familiar $2$-categorical **exchange**/pasting phenomenon as an *internal equality between normal forms*.
+
+Fix a category $B$, an object $M\\in B$, and objects $N,L\\in B$. Consider the covariant representable `hom_cov B M B (id_func B) : B → Cat_cat`. For $f:N\\to L$ it yields the postcomposition functor
+$$
+\\mathrm{postcomp}(f) : \\mathrm{Hom}_B(M,N) \\to \\mathrm{Hom}_B(M,L),
+$$
+and for a $2$-cell $e:f\\Rightarrow g$ it yields a transfor $\\epsilon : \\mathrm{postcomp}(f) \\Rightarrow \\mathrm{postcomp}(g)$.
+
+Now take composable $2$-cells $\\alpha:X\\Rightarrow Y$ and $\\beta:Y\\Rightarrow Z$ in $\\mathrm{Hom}_B(M,N)$. The exchange law instance we sanity-check in `emdash2.lp` is the equation
+$$
+\\mathrm{postcomp}(g)(\\beta) \\circ \\epsilon_{(\\alpha)} \\;=\\; \\epsilon_{(\\beta\\circ\\alpha)}.
+$$
+In kernel heads, this is exactly the shape
+`comp_fapp0 (fapp1_fapp0 postcomp_g β) (tapp1_fapp0 ϵ α) ≡ tapp1_fapp0 ϵ (comp_fapp0 β α)`.
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "M", "left": 140, "top": 200, "label": "$M$" },
+    { "name": "L", "left": 540, "top": 200, "label": "$L$" }
+  ],
+  "arrows": [
+    { "name": "fX", "from": "M", "to": "L", "label": "$f \\circ X$", "curve": 140, "label_alignment": "left" },
+    { "name": "gY", "from": "M", "to": "L", "label": "$g \\circ Y$", "curve": 0, "label_alignment": "over" },
+    { "name": "gZ", "from": "M", "to": "L", "label": "$g \\circ Z$", "curve": -140, "label_alignment": "right" },
+    { "from": "fX", "to": "gY", "label": "$\\epsilon_{(\\alpha)}$", "style": { "level": 2 }, "label_alignment": "left" },
+    { "from": "gY", "to": "gZ", "label": "$g(\\beta)$", "style": { "level": 2 }, "label_alignment": "right" },
+    { "from": "fX", "to": "gZ", "label": "$\\epsilon_{(\\beta\\circ\\alpha)}$", "style": { "level": 2 }, "label_alignment": "over" }
+  ]
+}
+</div>
+
 For reference, the stable head has the following kernel type (here `@` just disables implicit arguments):
 
 ```lambdapi
