@@ -43,7 +43,7 @@ interface ArrowSpec {
   label_alignment?: "over" | "left" | "right"; // "over" is default.
   color?: string; // Hex color for arrow stroke.
   label_color?: string; // Hex color for label.
-  curve?: number; // Curvature (-100 to 100), 0 is straight
+  curve?: number; // Curvature (e.g positive 150 curves to the left of the arrow direction, and negative -150 curves to its right), 0 is straight
   shift?: number; // Parallel shift
   radius?: number; // For loops
   angle?: number; // For loops (degrees)
@@ -108,8 +108,8 @@ EXAMPLES:
     { "name": "B", "left": 400, "top": 200, "label": "$B$" }
   ],
   "arrows": [
-    { "name": "F", "from": "A", "to": "B", "label": "$F$", "curve": -40 },
-    { "name": "G", "from": "A", "to": "B", "label": "$G$", "curve": 40 },
+    { "name": "F", "from": "A", "to": "B", "label": "$F$", "curve": 150 },
+    { "name": "G", "from": "A", "to": "B", "label": "$G$", "curve": -150 },
     { "from": "F", "to": "G", "label": "$\\alpha$", "style": { "level": 2 } }
   ]
 }
