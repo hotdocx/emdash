@@ -1,10 +1,10 @@
-Subject: GPT 5.2 vs ω-categories — Re: [FOM] Autoformalization getting easy?
+Subject: GPT-5.2 vs ω-categories — Re: [FOM] Autoformalization getting easy?
 
 Dear Josef Urban, dear FOM,
 
 Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineering) for a long-running “LLM ↔ proof-checker” feedback loop (fast checker + minimal trusted core library) then your “≈130k lines in two weeks” as reported in arXiv:2601.03298 is totally feasible. 
 
-Emdash v2 — Functorial programming for strict/lax ω-categories in Lambdapi [ `https://github.com/hotdocx/emdash` ] is such a "core library", and once that loop is tight, GPT 5.2 with Codex CLI can sustain large formal developments. Key learning: "mathops/devops engineering" matters: Gemini 3 Pro + Gemini CLI was bad (even if maybe Gemini 3 Pro defeats GPT 5.2 in "pure thinking").
+Emdash v2 — Functorial programming for strict/lax ω-categories in Lambdapi [ `https://github.com/hotdocx/emdash` ] is such a "core library", and once that loop is tight, GPT-5.2 with Codex CLI can sustain large formal developments. Key learning: "mathops/devops engineering" matters: Gemini 3 Pro + Gemini CLI was bad (even if maybe Gemini 3 Pro defeats GPT-5.2 in "pure thinking").
 
 ## 1) Dependent comma/arrow for a dependent category and “stacking” (`homd_cov` in emdash2.lp)
 
@@ -55,7 +55,7 @@ Best regards,
 
 Appendix: Arrowgram JSON specs
 
-1) “Stacking along a 1-cell” as a tetrahedral over-a-base-edge picture (schematic)
+1) “Stacking along a 1-cell” as a tetrahedral over-a-base-edge
 
 ```json
 {
@@ -95,15 +95,15 @@ Appendix: Arrowgram JSON specs
     { "name": "y", "label": "$y$", "from": "M", "to": "N", "curve": 0, "label_alignment": "over" },
     { "name": "z", "label": "$z$", "from": "M", "to": "N", "curve": -250, "label_alignment": "right" },
     { "name": "f", "label": "$f$", "from": "N", "to": "L", "curve": 250, "label_alignment": "left" },
-    { "name": "g", "label": "$g$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
-    { "name": "fx", "label": "$f∘x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
+    { "name": "g", "label": "$G ≔ g ∘ —$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
+    { "name": "fx", "label": "$f\\circ x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
     { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "none" } } },
-    { "name": "gz", "label": "$g∘z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
-    { "label": "$α$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
-    { "label": "$β$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
-    { "label": "$ϵ := e∘—$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
-    { "label": "$ϵ_(α)$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
-    { "label": "$g⋆β$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
+    { "name": "gz", "label": "$g\\circ z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "label": "$\\alpha$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$\\beta$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
+    { "label": "$\\epsilon ≔ e ∘ —$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
+    { "label": "$\\epsilon_{(\\alpha)}$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$g(\\beta)$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
   ]
 }
 ```
