@@ -88,35 +88,30 @@ Appendix: Arrowgram JSON specs
 }
 ```
 
-2) Exchange law (pasting not pre-composed): two vertical 2-cells plus one horizontal 2-cell
+2) Exchange law (pasting diagram): two vertical 2-cells plus one horizontal 2-cell
 
 ```json
 {
   "version": 1,
   "nodes": [
-    { "name": "M", "left": 80,  "top": 220, "label": "$M$" },
-    { "name": "N", "left": 320, "top": 220, "label": "$N$" },
-    { "name": "L", "left": 560, "top": 220, "label": "$L$" }
+    { "name": "M", "label": "$M$", "left": 80, "top": 220 },
+    { "name": "N", "label": "$N$", "left": 320, "top": 220 },
+    { "name": "L", "label": "$L$", "left": 560, "top": 220 }
   ],
   "arrows": [
-    { "name": "X", "from": "M", "to": "N", "label": "$X$", "curve": 140,  "label_alignment": "left" },
-    { "name": "Y", "from": "M", "to": "N", "label": "$Y$", "curve": 0,    "label_alignment": "over" },
-    { "name": "Z", "from": "M", "to": "N", "label": "$Z$", "curve": -140, "label_alignment": "right" },
-
-    { "name": "f", "from": "N", "to": "L", "label": "$f$", "curve": 80,   "label_alignment": "left" },
-    { "name": "g", "from": "N", "to": "L", "label": "$g$", "curve": -80,  "label_alignment": "right" },
-
-    { "name": "fX", "from": "M", "to": "L", "label": "$f\\circ X$", "curve": 180, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
-    { "name": "gY", "from": "M", "to": "L", "label": "$g\\circ Y$", "curve": 20,  "label_alignment": "over", "style": { "body": { "name": "dashed" } } },
-    { "name": "gZ", "from": "M", "to": "L", "label": "$g\\circ Z$", "curve": -160, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
-
-    { "from": "X", "to": "Y", "label": "$\\alpha$", "style": { "level": 2 }, "label_alignment": "left" },
-    { "from": "Y", "to": "Z", "label": "$\\beta$",  "style": { "level": 2 }, "label_alignment": "right" },
-    { "from": "f", "to": "g", "label": "$\\epsilon$", "style": { "level": 2 }, "label_alignment": "over" },
-
-    { "from": "fX", "to": "gY", "label": "$\\epsilon_{(\\alpha)}$", "style": { "level": 2 }, "label_alignment": "left" },
-    { "from": "gY", "to": "gZ", "label": "$g(\\beta)$", "style": { "level": 2 }, "label_alignment": "right" },
-    { "from": "fX", "to": "gZ", "label": "$\\epsilon_{(\\beta\\circ\\alpha)}$", "style": { "level": 2 }, "label_alignment": "over" }
+    { "name": "x", "label": "$x$", "from": "M", "to": "N", "curve": 250, "label_alignment": "left" },
+    { "name": "y", "label": "$y$", "from": "M", "to": "N", "curve": 0, "label_alignment": "over" },
+    { "name": "z", "label": "$z$", "from": "M", "to": "N", "curve": -250, "label_alignment": "right" },
+    { "name": "f", "label": "$f$", "from": "N", "to": "L", "curve": 250, "label_alignment": "left" },
+    { "name": "g", "label": "$g$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
+    { "name": "fx", "label": "$f\\circ x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
+    { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "none" } } },
+    { "name": "gz", "label": "$g\\circ z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "label": "$\\alpha$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$\\beta$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
+    { "label": "$\\epsilon ≔ e ∘ —$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
+    { "label": "$\\epsilon_{(\\alpha)}$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$g(\\beta)$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
   ]
 }
 ```
