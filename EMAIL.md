@@ -24,8 +24,8 @@ For:
 Then the dependent comma/arrow (“dependent hom”, triangle classifier) is the functor
 - Homd_E(e₀, –) : E ×_B (Hom_B(b₀, –))ᵒᵖ → Cat.
 
-On a base arrow b₀₁ : b₀ → b₁ and a fibre object e₁ ∈ E(b₁), it returns the fibre hom-category
-- Hom_{E(b₁)}( (b₀₁)! e₀ , e₁ ).
+On a base arrow b₀₁ : b₀ → b₁ and a fibre object e₁ ∈ E(b₁), it returns the fibre hom-category:
+- morphisms in the fibre E(b₁) from (b₀₁)! e₀ to e₁.
 
 This is the entry point for iterating simplicially (triangles → tetrahedra → …) with rewriting as normalization.
 
@@ -37,19 +37,25 @@ And the functoriality of `Homd_E(e₀, –)`, especially in the second argument 
 
 In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (these are to build "concrete" transformations), but via *projection heads* for components:
 
-- diagonal components on objects: `tapp0_fapp0 … ϵ X` (think: $\\epsilon_X$),
-- off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ α` (think: $\\epsilon_{(\\alpha)}$ over a 2-cell/base-arrow $\\alpha$).
+- diagonal components on objects: `tapp0_fapp0 … ϵ X` (surface reading: ϵ[X]),
+- off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ f` (surface reading: ϵ_(f)).
 
-The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components, in the style of Kosta Dosen "cut-elimination in categories", e.g. schematically:
-$$
-(\\epsilon_{(g)}) \\circ F(f) \\;\\rightsquigarrow\\; \\epsilon_{(g\\circ f)}.
-$$
+The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components (cut-elimination style), so normalization *accumulates* the base-arrow index instead of forcing the user to expand/contract naturality squares. In `emdash2.lp` this is spelled as draft strict naturality rules:
+
+```
+/*
+  Strict naturality laws (draft):
+
+    (1) (G g) ∘ ϵ_f   ↪  ϵ_(g∘f)
+    (2) ϵ_f ∘ (F g)   ↪  ϵ_(f∘g)
+*/
+```
+
 This makes “pasting diagrams” *computationally unambiguous*: you do not need to choose a parenthesization up front; normalization accumulates the base-arrow index as you compose.
 
-An important sanity check is a concrete **exchange law** instance for postcomposition. In the notations of the paper (`print/public/index.md`), with two vertically composable 2-cells $\\alpha:X\\Rightarrow Y$ and $\\beta:Y\\Rightarrow Z$ in a hom-category and a horizontal 2-cell coming from postcomposition, we normalize the same pasted diagram in two ways and get the same normal form:
-$$
-\\mathrm{postcomp}(g)(\\beta) \\circ \\epsilon_{(\\alpha)} \\;=\\; \\epsilon_{(\\beta\\circ\\alpha)}.
-$$
+An important sanity check is a concrete **exchange law** instance: a pasted diagram with two vertical 2-cells (α then β) and one horizontal 2-cell (ϵ, coming from functoriality/whiskering by composition) normalizes to a unique form. Kernel-wise, the “pasting is unambiguous” statement becomes a normalization statement on stable heads, e.g. of the shape:
+
+`comp_fapp0 (fapp1_fapp0 … β) (tapp1_fapp0 ϵ α) ↪ tapp1_fapp0 ϵ (comp_fapp0 β α)`
 
 ## 3) MathOps and arrowgram diagrams specification
 
@@ -69,21 +75,21 @@ Appendix: Arrowgram JSON specs
 {
   "version": 1,
   "nodes": [
-    { "name": "v0", "label": "$\\bullet$",      "left": 0,   "top": 150 },
-    { "name": "v1", "label": "$b_0\\ \\bullet$", "left": 190, "top": 0   },
-    { "name": "v2", "label": "$\\bullet\\ b_1$", "left": 190, "top": 150 },
-    { "name": "v3", "label": "$\\bullet\\ b_2$", "left": 300, "top": 265 }
+    { "name": "v0", "label": "$•$",   "left": 0,   "top": 150 },
+    { "name": "v1", "label": "$b₀•$", "left": 190, "top": 0   },
+    { "name": "v2", "label": "$•b₁$", "left": 190, "top": 150 },
+    { "name": "v3", "label": "$•b₂$", "left": 300, "top": 265 }
   ],
   "arrows": [
-    { "name": "e0", "label": "$e_0$",    "from": "v0", "to": "v1", "label_alignment": "right", "style": { "level": 1 } },
-    { "name": "e1", "label": "$e_1$",    "from": "v0", "to": "v2", "label_alignment": "left",  "style": { "level": 1 } },
-    { "name": "e3", "label": "$b_{01}$", "from": "v1", "to": "v2", "label_alignment": "left",  "style": { "level": 1 } },
-    { "name": "e2", "label": "$b_{12}$", "from": "v2", "to": "v3", "label_alignment": "left",  "style": { "level": 1, "body": { "name": "dashed" } } },
-    { "name": "e4", "label": "$b_{02}$", "from": "v1", "to": "v3", "label_alignment": "right", "style": { "level": 1, "body": { "name": "dashed" } } },
-    { "name": "e5", "label": "$e_2$",    "from": "v0", "to": "v3", "label_alignment": "left",  "style": { "level": 1, "body": { "name": "dashed" } } },
-    { "name": "e01", "label": "$e_{01}$", "from": "e0", "to": "e1", "label_alignment": "right", "style": { "level": 2 } },
-    { "name": "e12", "label": "$e_{12}$", "from": "e1", "to": "e5", "label_alignment": "right", "style": { "level": 2 } },
-    { "name": "b012op", "label": "$b_{012}^{op}$", "from": "e4", "to": "e2", "label_alignment": "left", "style": { "level": 2 } }
+    { "name": "e0", "label": "$e₀$",  "from": "v0", "to": "v1", "label_alignment": "right", "style": { "level": 1 } },
+    { "name": "e1", "label": "$e₁$",  "from": "v0", "to": "v2", "label_alignment": "left",  "style": { "level": 1 } },
+    { "name": "e3", "label": "$b₀₁$", "from": "v1", "to": "v2", "label_alignment": "left",  "style": { "level": 1 } },
+    { "name": "e2", "label": "$b₁₂$", "from": "v2", "to": "v3", "label_alignment": "left",  "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e4", "label": "$b₀₂$", "from": "v1", "to": "v3", "label_alignment": "right", "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e5", "label": "$e₂$",  "from": "v0", "to": "v3", "label_alignment": "left",  "style": { "level": 1, "body": { "name": "dashed" } } },
+    { "name": "e01", "label": "$e₀₁$", "from": "e0", "to": "e1", "label_alignment": "right", "style": { "level": 2 } },
+    { "name": "e12", "label": "$e₁₂$", "from": "e1", "to": "e5", "label_alignment": "right", "style": { "level": 2 } },
+    { "name": "b012op", "label": "$b₀₁₂ᵒᵖ$", "from": "e4", "to": "e2", "label_alignment": "left", "style": { "level": 2 } }
   ]
 }
 ```
@@ -104,14 +110,14 @@ Appendix: Arrowgram JSON specs
     { "name": "z", "label": "$z$", "from": "M", "to": "N", "curve": -250, "label_alignment": "right" },
     { "name": "f", "label": "$f$", "from": "N", "to": "L", "curve": 250, "label_alignment": "left" },
     { "name": "g", "label": "$g$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
-    { "name": "fx", "label": "$f\\circ x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
+    { "name": "fx", "label": "$f∘x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
     { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "none" } } },
-    { "name": "gz", "label": "$g\\circ z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
-    { "label": "$\\alpha$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
-    { "label": "$\\beta$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
-    { "label": "$\\epsilon ≔ e ∘ —$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
-    { "label": "$\\epsilon_{(\\alpha)}$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
-    { "label": "$g(\\beta)$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
+    { "name": "gz", "label": "$g∘z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+    { "label": "$α$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$β$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
+    { "label": "$ϵ := e∘—$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
+    { "label": "$ϵ_(α)$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
+    { "label": "$g⋆β$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
   ]
 }
 ```
