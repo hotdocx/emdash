@@ -351,7 +351,7 @@ To emphasize that the **pasting diagram is not pre-composed**, Figure 3 draws th
     { "name": "y", "label": "$y$", "from": "M", "to": "N", "curve": 0, "label_alignment": "over" },
     { "name": "z", "label": "$z$", "from": "M", "to": "N", "curve": -250, "label_alignment": "right" },
     { "name": "f", "label": "$f$", "from": "N", "to": "L", "curve": 250, "label_alignment": "left" },
-    { "name": "g", "label": "$g$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
+    { "name": "g", "label": "$G ≔ g ∘ —$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
     { "name": "fx", "label": "$f\\circ x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
     { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "none" } } },
     { "name": "gz", "label": "$g\\circ z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },

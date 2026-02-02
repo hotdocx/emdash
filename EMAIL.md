@@ -6,15 +6,7 @@ Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineerin
 
 Emdash v2 — Functorial programming for strict/lax ω-categories in Lambdapi [ `https://github.com/hotdocx/emdash` ] is such a "core library", and once that loop is tight, GPT 5.2 with Codex CLI can sustain large formal developments. Key learning: "mathops/devops engineering" matters: Gemini 3 Pro + Gemini CLI was bad (even if maybe Gemini 3 Pro defeats GPT 5.2 in "pure thinking").
 
-## 0) “Internal” kernel aspects: why this scales to a real language / proof assistant
-
-The core v2 idea is to treat large swaths of “diagram chasing” as **normalization** rather than as external propositions. Concretely, `emdash2.lp` is written in a *rewrite-head discipline*: we expose stable head symbols for categorical computation (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`), and then orient coherence as rewrite rules and unification hints on those heads. This has two practical consequences for a future user-facing proof assistant:
-
-- **Traditional surface syntax becomes an elaboration problem**. You can write textbook terms with implicit arguments, binder sugar, and “pasting-like” expressions; elaboration compiles them down to a small set of stable heads, and definitional equality is decided by normalization.
-- **Definitions/technical-debt concerns are shifted to the kernel interfaces**. Instead of auto-generated proofs that are 10× longer than necessary, normalization compresses composites into canonical stable heads, and many coherence steps become one-step reductions. This is exactly the direction we took in the v1 prototype kernel (TypeScript) described in `emdash_cpp2026.md`; v2 extends that pipeline with the ω-category-facing stable heads and rewriting discipline specified in `emdash2.lp` and documented in `print/public/index.md`.
-
-
-## 1) Dependent comma/arrow for a dependent category (`homd_cov` in emdash2.lp)
+## 1) Dependent comma/arrow for a dependent category and “stacking” (`homd_cov` in emdash2.lp)
 
 We use displayed/dependent categories over a base category B (morally a fibration E : B → Cat, i.e. a displayed category over B).
 
@@ -31,33 +23,27 @@ This is the entry point for iterating simplicially (triangles → tetrahedra →
 
 And the functoriality of `Homd_E(e₀, –)`, especially in the second argument  `(Hom_B(b₀, –))ᵒᵖ`, espresses precisely the "stacking" of 2-cells along 1-cells (generalized horizontal composition of 2-cells).
 
-- A key learning is that an **internal** computational-logic for lax ω-categories is easier to express, by Lambdapi and AI agents, than for only strict 1-categories; because the hom-part of a category `Hom(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom(x,–) → Hom(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor. (`fapp1_funcd` in emdash2.lp)
+## 2) Functorial elaboration, “accumulation” computational-logic (`fapp1_funcd` in emdash2.lp)
 
-## 2) Naturality as “accumulation” (rewrite rules) and the exchange law as normalization
+- A key learning is that an **internal** computational-logic for lax ω-categories is easier to express, by Lambdapi and AI agents, than for only strict 1-categories; because the hom-part of a category `Hom(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom(x,–) → Hom(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor. (`fapp1_funcd` in emdash2.lp)
+- TODO: categories of families; This emdash2.lp Lambdapi specification can be translated as a traditional programming-language/proof-assistant surface syntax whose elaboration/engineering becomes routine work, because of the "internalized" formulations of all the categorical kernel constructions, but which come with a *rewrite-head discipline*: we expose stable head symbols (besides the "internalized" symbols) for categorical computation.
+- TODO: kimi code
+
+## 3) Naturality and the exchange law as “accumulation” (rewrite rules) (`tapp0_fapp0` in emdash2.lp)
 
 In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (these are to build "concrete" transformations), but via *projection heads* for components:
 
 - diagonal components on objects: `tapp0_fapp0 … ϵ X` (surface reading: ϵ[X]),
 - off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ f` (surface reading: ϵ_(f)).
 
-The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components (cut-elimination style), so normalization *accumulates* the base-arrow index instead of forcing the user to expand/contract naturality squares. In `emdash2.lp` this is spelled as draft strict naturality rules:
+The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components (cut-elimination style):
+- (G b) ⋅ ϵ_a   ↪  ϵ_(b⋅a)
+- ϵ_b ⋅ (F a)   ↪  ϵ_(b⋅a)
 
-```
-/*
-  Strict naturality laws (draft):
+An instance of this accumulation rule is the **exchange law** between horizontal and vertical compositions: an unambiguous pasted diagram with two vertical 2-cells (`α ≔ a` then `β ≔ b`) and one horizontal 2-cell (`ϵ ≔ (e ∘ —)` for `e : f → g`, where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering) will normalize to a unique form:
+- (g ∘ β) ⋅ (e ∘ α)   ↪  e ∘ (β⋅α)
 
-    (1) (G g) ∘ ϵ_f   ↪  ϵ_(g∘f)
-    (2) ϵ_f ∘ (F g)   ↪  ϵ_(f∘g)
-*/
-```
-
-This makes “pasting diagrams” *computationally unambiguous*: you do not need to choose a parenthesization up front; normalization accumulates the base-arrow index as you compose.
-
-An important sanity check is a concrete **exchange law** instance: a pasted diagram with two vertical 2-cells (α then β) and one horizontal 2-cell (ϵ, coming from functoriality/whiskering by composition) normalizes to a unique form. Kernel-wise, the “pasting is unambiguous” statement becomes a normalization statement on stable heads, e.g. of the shape:
-
-`comp_fapp0 (fapp1_fapp0 … β) (tapp1_fapp0 ϵ α) ↪ tapp1_fapp0 ϵ (comp_fapp0 β α)`
-
-## 3) MathOps and arrowgram diagrams specification
+## 4) MathOps and arrowgram diagrams specification
 
 One MathOps requirement was to enable the AI coding agent to (natively) understand and generate commutative diagrams; therefore I built **arrowgram**: a strict JSON specification for commutative diagrams, meant to be understood and generated by AI coding agents. `arrowgram` https://github.com/hotdocx/arrowgram/ is open-source and comes with an AI diagram editor/generator exporting JSON/SVG/PNG/TikZ, and a paper document editor that renders markdown with embedded arrowgram diagrams (and with KaTeX + Mermaid + Vega-Lite via Paged.js). And the host app `LastRevision` https://hotdocx.github.io adds an extra academic-publisher (i.e. "sharing") layer on top of this new `arrowgram` paper format.
 
