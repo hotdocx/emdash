@@ -336,17 +336,32 @@ $$
 In kernel heads, this is exactly the shape
 `comp_fapp0 (fapp1_fapp0 postcomp_g β) (tapp1_fapp0 ϵ α) ≡ tapp1_fapp0 ϵ (comp_fapp0 β α)`.
 
+To emphasize that the **pasting diagram is not pre-composed**, Figure 3 draws the generating $1$-cells $X,Y,Z : M\\to N$ and $f,g : N\\to L$ together with the $2$-cells $\\alpha$, $\\beta$ (vertical) and $\\epsilon$ (horizontal). The dashed arrows are the *composites* $f\\circ X$, $g\\circ Y$, $g\\circ Z$ in $\\mathrm{Hom}_B(M,L)$; the exchange law says that the same pasted $2$-cell from $f\\circ X$ to $g\\circ Z$ is obtained whether we first “whisker/horizontally compose” to form $\\epsilon_{(\\alpha)}$ and then postcompose by $g(\\beta)$, or whether we first vertically compose $\\beta\\circ\\alpha$ and then take the off-diagonal component $\\epsilon_{(\\beta\\circ\\alpha)}$.
+
 <div class="arrowgram">
 {
   "version": 1,
   "nodes": [
-    { "name": "M", "left": 140, "top": 200, "label": "$M$" },
-    { "name": "L", "left": 540, "top": 200, "label": "$L$" }
+    { "name": "M", "left": 80, "top": 220, "label": "$M$" },
+    { "name": "N", "left": 320, "top": 220, "label": "$N$" },
+    { "name": "L", "left": 560, "top": 220, "label": "$L$" }
   ],
   "arrows": [
-    { "name": "fX", "from": "M", "to": "L", "label": "$f \\circ X$", "curve": 140, "label_alignment": "left" },
-    { "name": "gY", "from": "M", "to": "L", "label": "$g \\circ Y$", "curve": 0, "label_alignment": "over" },
-    { "name": "gZ", "from": "M", "to": "L", "label": "$g \\circ Z$", "curve": -140, "label_alignment": "right" },
+    { "name": "X", "from": "M", "to": "N", "label": "$X$", "curve": 140, "label_alignment": "left" },
+    { "name": "Y", "from": "M", "to": "N", "label": "$Y$", "curve": 0, "label_alignment": "over" },
+    { "name": "Z", "from": "M", "to": "N", "label": "$Z$", "curve": -140, "label_alignment": "right" },
+
+    { "name": "f", "from": "N", "to": "L", "label": "$f$", "curve": 80, "label_alignment": "left" },
+    { "name": "g", "from": "N", "to": "L", "label": "$g$", "curve": -80, "label_alignment": "right" },
+
+    { "name": "fX", "from": "M", "to": "L", "label": "$f\\circ X$", "curve": 180, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
+    { "name": "gY", "from": "M", "to": "L", "label": "$g\\circ Y$", "curve": 20, "label_alignment": "over", "style": { "body": { "name": "dashed" } } },
+    { "name": "gZ", "from": "M", "to": "L", "label": "$g\\circ Z$", "curve": -160, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
+
+    { "from": "X", "to": "Y", "label": "$\\alpha$", "style": { "level": 2 }, "label_alignment": "left" },
+    { "from": "Y", "to": "Z", "label": "$\\beta$", "style": { "level": 2 }, "label_alignment": "right" },
+    { "from": "f", "to": "g", "label": "$\\epsilon$", "style": { "level": 2 }, "label_alignment": "over" },
+
     { "from": "fX", "to": "gY", "label": "$\\epsilon_{(\\alpha)}$", "style": { "level": 2 }, "label_alignment": "left" },
     { "from": "gY", "to": "gZ", "label": "$g(\\beta)$", "style": { "level": 2 }, "label_alignment": "right" },
     { "from": "fX", "to": "gZ", "label": "$\\epsilon_{(\\beta\\circ\\alpha)}$", "style": { "level": 2 }, "label_alignment": "over" }
