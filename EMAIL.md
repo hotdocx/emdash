@@ -1,22 +1,23 @@
 Subject: GPT 5.2 vs ω-categories — Re: [FOM] Autoformalization getting easy?
 
-Dear Josef Urban, dear FOM,
+I read arXiv:2601.03298. A striking (and actionable) data point is the reported “≈130k lines in two weeks” at low subscription cost, driven by coding agents inside a tight loop against a fast checker. One key practical insight that matches our experience: the long-running “LLM ↔ proof-checker” feedback loop (fast checker + minimal trusted core library) is the main multiplier; once that loop is tight, the assistant can sustain large formal developments.
 
-I read arXiv:2601.03298. A related perspective from our ongoing emdash experiment (`emdash2.lp` in Lambdapi; public narrative `print/public/index.md`):
+A related perspective from our ongoing emdash experiment (`emdash2.lp` in Lambdapi; public narrative `print/public/index.md`):
 
 ## 1) Dependent comma/arrow for a dependent category (`homd_cov`)
 
-We use displayed/dependent categories over a base `Z` (morally `E : Z → Cat`). In the Grothendieck case `E = ∫E0` with `E0 : Z → Cat`, the dependent comma/arrow construction `homd_cov` computes pointwise as:
-\[
-\mathrm{Homd}_E(W,-)\;:\;E \times_Z \bigl(\mathrm{Hom}_Z(W_Z,-)\bigr)^{\mathrm{op}} \to \mathbf{Cat},
-\qquad
-((z,x),(f:W_Z\to z)) \mapsto \mathrm{Hom}_{E(z)}(f_!(W),x),
-\]
-where $W_Z\in Z$ and $W\in E(W_Z)$ are fixed.
-\[
-\mathrm{homd\_cov}(z,d,f)\;\equiv\;\mathrm{Hom}_{E_0(z)}(f_!(W),\,FF_z(d)),
-\]
-with `f : W_Z → z` and `d ∈ D[z]`. This packages “cells over a chosen base arrow” as objects of a category, in a form meant to iterate (simplicial indexing) and normalize by rewriting.
+We use displayed/dependent categories over a base category B (morally a fibration E : B → Cat, i.e. a displayed category over B).
+
+Fix (notation as in our Figure 6 / abstract):
+- b₀ ∈ B and e₀ ∈ E(b₀).
+
+Then the dependent comma/arrow (“dependent hom”, triangle classifier) is the functor
+- Homd_E(e₀, –) : E ×_B (Hom_B(b₀, –))ᵒᵖ → Cat.
+
+On a base arrow b₀₁ : b₀ → b₁ and a fibre object e₁ ∈ E(b₁), it returns the fibre hom-category
+- Hom_{E(b₁)}( (b₀₁)! e₀ , e₁ ).
+
+In the current kernel snapshot, when E is a Grothendieck total ∫E₀ (and similarly for the probe), this is a definitional computation rule: evaluating `homd_cov` at the triple (b₁, e₁, b₀₁) normalizes to that fibre hom. This is the entry point for iterating simplicially (triangles → tetrahedra → …) with rewriting as normalization.
 
 ## 2) Why strict/lax ω-cats can be easier than 1-cats (for TT + rewriting + AI)
 
