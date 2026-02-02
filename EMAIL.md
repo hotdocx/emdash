@@ -35,12 +35,12 @@ And the functoriality of `Homd_E(e₀, –)`, especially in the second argument 
 
 ## 2) Naturality as “accumulation” (rewrite rules) and the exchange law as normalization
 
-In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation”, but via *projection heads* for components:
+In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (these are to build "concrete" transformations), but via *projection heads* for components:
 
 - diagonal components on objects: `tapp0_fapp0 … ϵ X` (think: $\\epsilon_X$),
 - off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ α` (think: $\\epsilon_{(\\alpha)}$ over a 2-cell/base-arrow $\\alpha$).
 
-The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components, e.g. schematically:
+The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components, in the style of Kosta Dosen "cut-elimination in categories", e.g. schematically:
 $$
 (\\epsilon_{(g)}) \\circ F(f) \\;\\rightsquigarrow\\; \\epsilon_{(g\\circ f)}.
 $$
