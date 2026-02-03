@@ -4,13 +4,13 @@ Dear Josef Urban, dear FOM,
 
 Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineering) for a long-running “LLM ↔ proof-checker” feedback loop then your claimed “≈130k lines in two weeks” is expected.
 
-For category theory, the "proof-checker" (i.e. computational logic) question has been solved since Kosta Dosen "cut-elimination in categories" (1999), but the tools to specify/implement it were not available until:
+For category theory, the "proof-checker" (i.e. computational logic) question has been solved since Kosta Dosen "Cut-Elimination in Categories" (1999), but the tools to easily specify/implement it were not available until Frédéric Blanqui's Lambdapi logical framework (rewrite/unification rules) and:
 
 emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
 https://github.com/1337777/cartier/blob/master/cartierSolution19.lp
 https://hotdocx.github.io/r/--------TODO-------
 
-And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at the "dependent hom/arrow category" construction.
+And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at the "dependent hom/arrow category" construction. A good question is whether this loop “LLM ↔ proof-checker” can be collapsed into a single very-specialized "machine learning/programming"? i.e. "symbolic AI"...
 
 ## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams (`homd_cov` in emdash2.lp)
 
@@ -26,18 +26,19 @@ That is, this syntactic triangle/simplicial classifier `homd_cov`, reduces to `g
 
 Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its second argument  `(Hom_B(b₀, –))ᵒᵖ`, espresses precisely the "stacking" of 2-cells along 1-cells (i.e. generalized horizontal composition of 2-cells).
 
+    https://hotdocx.github.io/r/--------TODO-------STACKING
+
 This dependent comma/arrow/hom category `homd_cov` is analoguous to the "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an **internalized** type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
 
 ## 2) Internalized computational-logic and “syntax elaboration” (`fapp1_funcd` in emdash2.lp)
 
-- A key learning is that an **internal** computational-logic for lax ω-categories is easier to express, by Lambdapi and AI agents, than for only strict 1-categories; because the hom-part of a category `Hom(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom(x,–) → Hom(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
+`emdash2.lp` is a Lambdapi specification which looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
 
-- TODO: categories of families; This emdash2.lp Frederik Blanqui Lambdapi specification can be translated as a traditional programming-language/proof-assistant surface syntax  ( https://github.com/hotdocx/emdash ) whose elaboration/engineering becomes routine work, because of the "internalized" formulations of all the categorical kernel constructions, but which come with a *rewrite-head discipline*: we expose stable head symbols (besides the "internalized" symbols) for categorical computation.
-- TODO: kimi code, blanqui
+In reality, the **internal** computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom-part of a category `Hom_C(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom_C(x,–) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
 
 ## 3) Naturality as “cut accumulation” and the exchange law (`tapp1_fapp0` in emdash2.lp)
 
-In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (these are to build "concrete" transformations), but via *projection heads* for components:
+In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (i.e. "concrete" transformations), but via *projection heads* for components:
 
 - diagonal components on objects: `tapp0_fapp0 … ϵ X` (surface reading: ϵ[X]),
 - off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ f` (surface reading: ϵ_(f)).
@@ -49,25 +50,33 @@ The key point is that **naturality can be oriented as an “accumulation” rewr
 An instance of this accumulation rule is the **exchange law** between horizontal and vertical compositions: an unambiguous pasted diagram with two vertical 2-cells (`α ≔ a` then `β ≔ b`) and one horizontal 2-cell (`ϵ ≔ (e ∘ —)` for `e : f → g`, where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering) will normalize to a unique form:
 - (g ∘ β) ⋅ (e ∘ α)   ↪  e ∘ (β⋅α)
 
+    https://hotdocx.github.io/r/--------TODO-------EXCHANGE
+
 ## 4) GPT-5.2 diagrammatic prompting via `arrowgram` and “MathOps”
 
 Good MathOps matters!
 
 How to enable the GPT-5.2 + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A new solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with a paper/diagram AI-editor that generates and renders templated `markdown` code with embedded diagrams specs from uploaded source references.
 
-While the `arrowgram` app works offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative mathops from idea to sharing and community review!
+While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative mathops from idea, to sharing, to community peer review!
 
-Wait, there is more. MathOps includes the ability to share workspace sessions, with pre-installed running AI coding agents + proof-checkers, for real-time "vibe coding", and the ability for the "community" to get paid and funded for large-scale workspaces:
-- https://GetPaidX.com 
-- https://www.meetup.com/dubai-ai
+Wait, there is more. MathOps includes the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses. This is the idea implemented by the marketplace https://GetPaidX.com (which is a Dubai AI https://www.meetup.com/dubai-ai community project)
 
-e.g. project: how to collapse this loop “LLM ↔ proof-checker” into a single specialized "machine learning/programming"? i.e. "symbolic AI"...
+OK, thank you Josef for your attention to these documents, and I am looking forward for your ai4reason.eu institute to join!
+
+---
 
 References:
-[1] Kosta Dosen, Zoran Petrić (1999). Cut-Elimination in Categories
-[2] This summer visit to Ambrus Kaposi in Budapest
+[1] Kosta Dosen, Zoran Petric (1999). "Cut-Elimination in Categories"
+[2] This summer visit to Ambrus Kaposi in Budapest, lol
 [3] GPT-5.2
 
+
+
+
+
+
+- TODO: kimi code, gemini 3
 
 ---
 
