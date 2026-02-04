@@ -42,7 +42,7 @@ Similarly from the usual "diagonal" components `z :^o Z, e : E[z] ⊢ ϵ[e] : FF
 
 These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary functorially/naturally. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
 
-In reality, the *internal* computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom/comma-part of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-part of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
+In reality, the *internal* computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
 
 ## 3) Naturality as “cut accumulation” and the exchange law
 
