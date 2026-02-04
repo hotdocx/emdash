@@ -55,6 +55,9 @@ An instance of this accumulation rule is the *exchange law* between horizontal a
 
     https://hotdocx.github.io/r/--------TODO-------EXCHANGE
 
+Moreover such formulations of naturality are useful to express computationally the triangular identities of *adjoint functors*:
+- `ϵ_(f) ∘ LAdj(η_(g))  ↪  f ∘ LAdj(g)`
+
 ## 4) GPT-5.2 diagrammatic prompting via `arrowgram` and “MathOps”
 
 Good MathOps matters!
