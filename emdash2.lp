@@ -2093,8 +2093,8 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   Π (D0 : τ (Functor Z Cat_cat)),
   Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
   τ (Functord (Op_catd E)
-    (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-      (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))));
+              (Op_catd (Fibration_con_catd
+                (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))));
 
 /*
   Surface (simplicial / “over a base arrow”) reading of homd_cov_int:

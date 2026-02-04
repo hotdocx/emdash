@@ -34,21 +34,24 @@ This dependent comma/arrow/hom category `homd_cov` is analoguous to the "bridge 
 
 `emdash2.lp` is a Lambdapi specification which looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
 
+For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^o Z, e : E[z] ⊢ FF[e] : D[z]` (where the `z :^o Z` variance is objects-only non-functorial). Thus `Functord` is the traditional Π-type, but with a construction, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
+- `z :^o Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`.
+
+Similarly from the usual "diagonal" components `z :^o Z, e : E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
+- `z :^o  Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`
+
+These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary naturally/functorially. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
+
 In reality, the **internal** computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom-part of a category `Hom_C(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom_C(x,–) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
 
 ## 3) Naturality as “cut accumulation” and the exchange law (`tapp1_fapp0` in emdash2.lp)
 
-In emdash, transfors (transformations) are not primarily exposed as records “with a naturality equation” (i.e. "concrete" transformations), but via *projection heads* for components:
+The key point is that **naturality can be oriented as an “accumulation” rewrite** on these transfor's "off-diagonal" components `ϵ_(–)` (cut-elimination style, where `⋅` is the vertical compositon/cut):
+- `(G b) ⋅ ϵ_(a)   ↪  ϵ_(b⋅a)`
+- `ϵ_(b) ⋅ (F a)   ↪  ϵ_(b⋅a)`
 
-- diagonal components on objects: `tapp0_fapp0 … ϵ X` (surface reading: ϵ[X]),
-- off-diagonal / arrow-indexed components: `tapp1_fapp0 … ϵ f` (surface reading: ϵ_(f)).
-
-The key point is that **naturality can be oriented as an “accumulation” rewrite** on these off-diagonal components (cut-elimination style):
-- (G b) ⋅ ϵ_a   ↪  ϵ_(b⋅a)
-- ϵ_b ⋅ (F a)   ↪  ϵ_(b⋅a)
-
-An instance of this accumulation rule is the **exchange law** between horizontal and vertical compositions: an unambiguous pasted diagram with two vertical 2-cells (`α ≔ a` then `β ≔ b`) and one horizontal 2-cell (`ϵ ≔ (e ∘ —)` for `e : f → g`, where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering) will normalize to a unique form:
-- (g ∘ β) ⋅ (e ∘ α)   ↪  e ∘ (β⋅α)
+An instance of this accumulation rule is the **exchange law** between horizontal and vertical compositions: an unambiguous "pasting diagram" with two vertical 2-cells `α ≔ a` then `β ≔ b`, and one horizontal 2-cell `ϵ ≔ (e ∘ —)` for `e : f → g` (where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering), will normalize to a unique form (where `∘` is horizontal composition):
+- `(g ∘ β) ⋅ (e ∘ α)   ↪  e ∘ (β⋅α)`
 
     https://hotdocx.github.io/r/--------TODO-------EXCHANGE
 
@@ -76,7 +79,7 @@ References:
 
 
 
-- TODO: kimi code, gemini 3
+- TODO: kimi code, gemini 3, getpaidx container
 
 ---
 
