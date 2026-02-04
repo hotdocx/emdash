@@ -28,7 +28,7 @@ Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its secon
 
     https://hotdocx.github.io/r/--------TODO-------STACKING
 
-This dependent comma/arrow/hom category `homd_cov` is analoguous to the "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an **internalized** type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
+This dependent comma/arrow/hom category `homd_cov` is analoguous to the (directed) "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an *internalized* type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
 
 ## 2) Internalized computational-logic and “syntax elaboration”
 
