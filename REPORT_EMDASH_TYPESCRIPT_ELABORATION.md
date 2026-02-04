@@ -69,20 +69,25 @@ new binders appear whose controlling category is not the original `A` but a deri
 
 ---
 
-## 2. “Functorial vs natural” modes: what is the right decomposition?
+## 2. `:^func` vs `:^nat`: what is the right decomposition?
 
 We discovered an important distinction:
 
-- **`:^nat`** (natural index) is best understood as a **formation/intro discipline**: it is what
-  authorizes internal discharge of diagonal component families into a `Transf`.
-- **`:^func`** (functorial index) is best understood as “this binder is an argument to a functor object”,
-  i.e. the next binder is functorial because it ranges over the **domain category of some functor**.
+- **`:^func`** (functorial index) is a **standalone, primitive binder mode** for functorial variation.
+  Intuitively: variables marked `:^func` may be acted on along arrows of their controlling category
+  via stable-head arrow-action operators (functor hom-actions, etc.). This mode applies whenever a
+  binder ranges over some index category `K : Cat` (including hom-categories like `Hom_cat A x y`).
+
+- **`:^nat`** (natural index) is **independent of `:^func`** and is best understood as a
+  **formation/intro (discharge) discipline for transformations/transfors**: it is what authorizes
+  internal discharge of diagonal component families into a `Transf`.
 
 In particular:
 
-- The binder `f` in an off-diagonal component `ϵ_(f)` is functorial not because of “accumulation”, but
-  because it is an object of the hom-category `Hom_cat A x y` which is the domain of a functor produced
-  by the internalization pipeline (e.g. `tapp1_int_func_transf`).
+- `:^func` appears in off-diagonal constructions for transformations because the internalization
+  packagers (e.g. `tapp1_int_func_transf`) produce *functors* whose domains are hom-categories; the
+  arrow/cell argument `f` is then a functorial binder ranging over that hom-category.
+  This does **not** make `:^func` derived from `:^nat`: `:^func` remains a standalone concept.
 
 ### 2.1. Accumulation/cut is *rewrite theory*, not the meaning of `:^func`
 
@@ -145,8 +150,9 @@ Explanation:
 
 - `x` and `y` are *natural indices* in `A`, because the object-indexed diagonal family
   `x :^nat A ⊢ ϵ[x] : Hom B (F[x]) (G[x])` is the data that can be discharged into `Transf F G`.
-- `f` is *functorial* because (after nested internalization) the elimination pipeline produces a **functor**
-  whose domain is the **hom-category** `Hom_cat A x y`, and `f` is an object of that category.
+- `f` is `:^func` because (after nested internalization) the elimination pipeline produces a **functor**
+  whose domain is the **hom-category** `Hom_cat A x y`, and `f` is an object of that category. Here `:^func`
+  is used in its standalone sense (“binder varies functorially over its controlling category”).
 
 So `:^func` on `f` means “argument to a functor object whose domain is `Hom_cat A x y`”.
 
@@ -161,23 +167,30 @@ We verified by inspection that:
 - `emdash2.lp` contains comments emphasizing “no explicit `F[f]` term former”.
 - `EMAIL.md` mentions both `FF₁(σ)` and `ϵ_(σ)` as intended surface notations.
 
-This is an asymmetry, because once off-diagonal components are first-class and computational, we can
-define functor arrow-action via identity transfors:
+This is an asymmetry. For conceptual uniformity, we want functor arrow-action and transfor off-diagonal
+to sit in the same computational universe. In particular:
 
-> `F₁(f)` can be understood as `(1_F)_(f)`.
+> `F₁(f)` can be understood as `(1_F)_(f)` where `1_F` is the identity transfor on `F`.
 
 emdash2.lp itself comments about instantiating `tapp1_int_*` at identity transfors (e.g. “apply
 `tapp1_int_func_transf` to the identity transfor `1_F`”), which supports this uniformity.
 
 ### 5.1. Consequence for TS kernel design
 
-Even if surface syntax remains minimal, the TS kernel should expose a uniform internal interface:
+Even if surface syntax remains minimal, the TS kernel should expose a uniform internal interface with
+**both** stable-head primitives:
 
-- either provide a derived head for `F₁` in terms of `tapp1` at identity transfors, or
-- provide both as stable heads with rewrite rules relating them.
+- a stable head for functor hom-action at a cell (surface-intended `F₁(f)`), and
+- a stable head for transfor off-diagonal (surface-intended `ϵ_(f)`).
 
-This removes a conceptual inconsistency and makes the “transfor machinery” subsume functor arrow-action
-uniformly.
+Then we relate the two *computationally* by either:
+
+- a **unification rule** equating them (treating them as definitionally convertible), or
+- a **rewrite rule** that orients one toward the other, e.g. `(1_F)_(f) ↪ F₁(f)` (or the opposite),
+  depending on which head you want as canonical normal form.
+
+This mirrors the emdash2 approach: keep stable heads explicit, and add small conversion/rewriting bridges
+between equivalent presentations, so normalization is predictable.
 
 ---
 
@@ -248,9 +261,11 @@ either as a definitional rewrite or as a derived macro at the TS level.
 1) Don’t add special variable nodes (`CVar`, `FVar`); keep `Var` simple.
 2) Do add **mode-annotated binders/context entries** (and track controlling categories).
 3) Treat emdash2 `*_int_*` symbols as **explicit named discharge/abstraction operators** with rewrite theory.
-4) Under the intended meaning of `:^nat`, introducing a `Transf` needs only diagonal data;
+4) Keep `:^func` as a **standalone** binder mode for functorial variation (independent of `:^nat`).
+5) Under the intended meaning of `:^nat`, introducing a `Transf` needs only diagonal data;
    off-diagonal is derived by eliminators (`tapp1_int_*`) and computes by rewrite.
-5) Off-diagonal binder `f` is `:^func` because it is an argument to a functor whose domain is a hom-category
+6) Off-diagonal binder `f` is `:^func` because it is an argument to a functor whose domain is a hom-category
    (`Hom_cat A x y`), not because of accumulation.
-6) For uniformity, support `F₁(f)` as definable from identity transfors: `F₁(f) := (1_F)_(f)`.
-
+7) For uniformity, keep **both** primitives `F₁(f)` and `ϵ_(f)`, and relate them computationally at
+   identity transfors (e.g. by a unification rule `F₁(f) ≡ (1_F)_(f)` or an oriented rewrite such as
+   `(1_F)_(f) ↪ F₁(f)`), choosing a canonical head for normal forms.
