@@ -1260,16 +1260,16 @@ rule fapp0 (@tapp1_func_funcd $A $B $F_AB $G_AB $X_A) $ϵ ↪ @tapp1_fapp0_funcd
 
 symbol tapp1_int_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
   τ (Functor
-    (Transf_cat F_AB G_AB)
-    (Transf_cat
-      (hom_cov_int (@id_func A))
-      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB))));
+      (Transf_cat F_AB G_AB)
+      (Transf_cat
+        (hom_cov_int (@id_func A))
+        (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB))));
 
 symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
   Π (ϵ : τ (Transf F_AB G_AB)),
   τ (Transf
-    (hom_cov_int (@id_func A))
-    (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)));
+      (hom_cov_int (@id_func A))
+      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)));
 
 // β-rule: object-action of tapp1_int_func_transf folds to tapp1_int_fapp0_transf.                            // unpack tapp1_int_func_transf at objects
 rule fapp0 (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ ↪ @tapp1_int_fapp0_transf $A $B $F_AB $G_AB $ϵ;
@@ -1281,12 +1281,12 @@ rule fapp0 (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ ↪ @tapp1_int_fapp0_t
 symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
   Π (ϵ ϵ' : τ (Transf F_AB G_AB)),
   τ (Functor
-    (Hom_cat (Transf_cat F_AB G_AB) ϵ ϵ')
-    (Hom_cat (Transf_cat
-      (hom_cov_int (@id_func A))
-      (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)))
-      (tapp1_int_fapp0_transf ϵ)
-      (tapp1_int_fapp0_transf ϵ')));
+      (Hom_cat (Transf_cat F_AB G_AB) ϵ ϵ')
+      (Hom_cat (Transf_cat
+                  (hom_cov_int (@id_func A))
+                  (comp_cat_fapp0 (hom_cov_int G_AB) (Op_func F_AB)))
+          (tapp1_int_fapp0_transf ϵ)
+          (tapp1_int_fapp0_transf ϵ')));
 
 rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ $ϵ'
   ↪ @tapp1_int_fapp1_func_transf $A $B $F_AB $G_AB $ϵ $ϵ';
@@ -1317,9 +1317,7 @@ rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F_AB $G_AB) $ϵ $ϵ'
     identify the induced functor object, and only apply `fapp0` later when given a concrete higher cell.
 */
 symbol fapp1_int_transf : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
-  τ (Transf
-    (hom_cov_int (@id_func A))
-    (comp_cat_fapp0 (hom_cov_int F_AB) (Op_func F_AB)));
+  τ (Transf (hom_cov_int (@id_func A)) (comp_cat_fapp0 (hom_cov_int F_AB) (Op_func F_AB)));
 
 // Folding rule: tapp1 at identity transfor is the internal hom-action stable head.                   // normalize “apply tapp1 to 1_F”
 rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
@@ -2102,11 +2100,11 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
     Z : Cat
     E : Catd Z
     D0 : (z:Z ⊢ D0[z] : Cat)                      // functorial family (Grothendieck probe domain)
-    FF : (z:^o Z, d:D0[z] ⊢ FF[d] : E[z])         // probe into E (note: E forces z:^o)
+    FF : (z :^o Z, d:D0[z] ⊢ FF[d] : E[z])         // probe into E (note: E forces z :^o)
 
   For σ : homd_cov_int(Z,E,D0,FF):
 
-    z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]
+    z :^o Z, e : E[z], z' :^o Z, f : z→z', d : D0[z'] ⊢ σ : e →_f FF[d]
 
   where `→_f` means a displayed arrow in E lying over the base edge f.
 */
@@ -2904,13 +2902,10 @@ symbol tdapp1_int_func_transfd : Π [Z : Cat],
   Π [D : Catd Z],
   Π [FF GG : τ (Functord (Fibration_cov_catd E0) D)],
   τ (Functor
-    (Transfd_cat FF GG)
-    (@Transfd_cat (Op_cat Z)
-      (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-      (homd_cov_int E0 id_funcd)
-      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))));
+      (Transfd_cat FF GG)
+      (Transfd_cat
+          (homd_cov_int E0 id_funcd)
+          (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF))));
 
 symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
   Π (E0 : τ (Functor Z Cat_cat)),
@@ -2925,14 +2920,14 @@ symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
     ⊢ Z : Cat
     ⊢ E0 : Z → Cat                                // i.e. E0 : Obj(Functor_cat Z Cat_cat)
     ⊢ D  : Catd Z
-    ⊢ FF : (∫E0) ⟶_Z D                            // i.e. z:^o Z, e:E0[z] ⊢ FF[e] : D[z]
+    ⊢ FF : (∫E0) ⟶_Z D                            // i.e. z :^o Z, e : E0[z] ⊢ FF[e] : D[z]
     ⊢ GG : (∫E0) ⟶_Z D
     ⊢ ϵ  : Transfd(FF,GG)
-    z:^o Z, e:E0[z] ⊢ ϵ[e] : FF[e] → GG[e]        // diagonal component; silent `tdapp0_fapp0`
+    z :^o Z, e : E0[z] ⊢ ϵ[e] : FF[e] → GG[e]        // diagonal component; silent `tdapp0_fapp0`
 
   Explicit off-diagonal / over-a-base-arrow component:
 
-    z:^o Z, e:E0[z], z':Z, f:z→z', e':E0[z'], σ:e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']
+    z :^o Z, e : E0[z], z' :^o Z, f : z→z', e' : E0[z'], σ : e→_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']
 
   This is the intended surface meaning of the internal packaging `tdapp1_int_fapp0_transfd` (and friends).
 */
@@ -2949,15 +2944,12 @@ symbol tdapp1_int_fapp1_func_transfd : Π [Z : Cat],
   Π [FF GG : τ (Functord (Fibration_cov_catd E0) D)],
   Π (ϵ ϵ' : τ (Transfd FF GG)),
   τ (Functor
-    (Hom_cat (Transfd_cat FF GG) ϵ ϵ')
-    (Hom_cat (@Transfd_cat (Op_cat Z)
-      (Op_catd (Fibration_cov_catd E0))
-      (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
-        (comp_cat_fapp0 Fib_func (homd_cov_int_base E0))))
-      (homd_cov_int E0 id_funcd)
-      (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF)))
-      (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ)
-      (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ')));
+      (Hom_cat (Transfd_cat FF GG) ϵ ϵ')
+      (Hom_cat (Transfd_cat
+                  (homd_cov_int E0 id_funcd)
+                  (comp_catd_fapp0 (homd_cov_int E0 GG) (Op_funcd FF)))
+          (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ)
+          (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ')));
 
 // β-rule: `tdapp1_int_fapp1_func_transfd` is definitionally the hom-action of `tdapp1_int_func_transfd`.        // unpack tdapp1_int_func_transfd at homs
 rule @fapp1_func _ _ (@tdapp1_int_func_transfd $Z $E0 $D $FF $GG) $ϵ $ϵ'
