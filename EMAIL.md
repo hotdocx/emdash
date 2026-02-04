@@ -10,9 +10,9 @@ emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
 https://github.com/1337777/cartier/blob/master/cartierSolution19.lp
 https://hotdocx.github.io/r/--------TODO-------
 
-And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at the "dependent hom/arrow category" construction. A good question is whether this loop “LLM ↔ proof-checker” can be collapsed into a single very-specialized "machine learning/programming"? i.e. "symbolic AI"...
+And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at the "dependent hom/arrow/comma category" construction. A good question is whether this loop “LLM ↔ proof-checker” can be collapsed into a single very-specialized "machine learning/programming"? i.e. "symbolic AI"...
 
-## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams (`homd_cov` in emdash2.lp)
+## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams
 
 We use displayed/dependent categories over a base category `B` (morally a fibration `E : B → Cat`, i.e. a displayed category over `B`).
 
@@ -30,27 +30,27 @@ Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its secon
 
 This dependent comma/arrow/hom category `homd_cov` is analoguous to the "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an **internalized** type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
 
-## 2) Internalized computational-logic and “syntax elaboration” (`fapp1_funcd` in emdash2.lp)
+## 2) Internalized computational-logic and “syntax elaboration”
 
-`emdash2.lp` is a Lambdapi specification which looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
+The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
 
-For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^o Z, e : E[z] ⊢ FF[e] : D[z]` (where the `z :^o Z` variance is objects-only non-functorial). Thus `Functord` is the traditional Π-type, but with a construction, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
+For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^o Z, e : E[z] ⊢ FF[e] : D[z]` (where the `z :^o Z` variance is objects-only non-functorial). Thus `Functord` is the traditional Π-type, but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
 - `z :^o Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`.
 
-Similarly from the usual "diagonal" components `z :^o Z, e : E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
+Similarly from the usual "diagonal" components `z :^o Z, e : E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction `tapp1_fapp0` for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
 - `z :^o  Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`
 
-These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary naturally/functorially. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
+These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary functorially/naturally. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
 
-In reality, the **internal** computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom-part of a category `Hom_C(x,–)` is recursively a (fibred) category and the hom-part of a functor `F₁ : Hom_C(x,–) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
+In reality, the *internal* computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom/comma-part of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-part of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
 
-## 3) Naturality as “cut accumulation” and the exchange law (`tapp1_fapp0` in emdash2.lp)
+## 3) Naturality as “cut accumulation” and the exchange law
 
-The key point is that **naturality can be oriented as an “accumulation” rewrite** on these transfor's "off-diagonal" components `ϵ_(–)` (cut-elimination style, where `⋅` is the vertical compositon/cut):
+The key point is that *naturality can be oriented as an “accumulation” rewrite* on these transfor's "off-diagonal" components `ϵ_(–)` (cut-elimination style, where `⋅` is the vertical compositon/cut):
 - `(G b) ⋅ ϵ_(a)   ↪  ϵ_(b⋅a)`
 - `ϵ_(b) ⋅ (F a)   ↪  ϵ_(b⋅a)`
 
-An instance of this accumulation rule is the **exchange law** between horizontal and vertical compositions: an unambiguous "pasting diagram" with two vertical 2-cells `α ≔ a` then `β ≔ b`, and one horizontal 2-cell `ϵ ≔ (e ∘ —)` for `e : f → g` (where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering), will normalize to a unique form (where `∘` is horizontal composition):
+An instance of this accumulation rule is the *exchange law* between horizontal and vertical compositions: an unambiguous "pasting diagram" with two vertical 2-cells `α ≔ a` then `β ≔ b`, and one horizontal 2-cell `ϵ ≔ (e ∘ —)` for `e : f → g` (where `G ≔ (g ∘ —)` and `F ≔ (f ∘ —)` are horizontal post-composition/whiskering), will normalize to a unique form (where `∘` is horizontal composition):
 - `(g ∘ β) ⋅ (e ∘ α)   ↪  e ∘ (β⋅α)`
 
     https://hotdocx.github.io/r/--------TODO-------EXCHANGE
