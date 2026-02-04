@@ -2370,9 +2370,7 @@ rule @fdapp0 $A
       (fapp0 (@Fibration_cov_fapp1_func $A $E $D) $ϵ)
       $x
       $u
-  ↪ @fapp0
-      (fapp0 $E $x)
-      (fapp0 $D $x)
+  ↪ fapp0
       (@tapp0_fapp0 $A Cat_cat $E $D $x $ϵ)
       $u;
 
