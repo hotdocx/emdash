@@ -35,12 +35,12 @@ This dependent comma/arrow/hom category `homd_cov` is analoguous to the (directe
 The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
 
 For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^o Z, e : E[z] ⊢ FF[e] : D[z]` (where the `z :^o Z` variance is objects-only non-functorial). Thus `Functord` is the traditional Π-type, but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
-- `z :^o Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`.
+- `z :^o Z, e :^n E[z], z' :^o Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`.
 
 Similarly from the usual "diagonal" components `z :^o Z, e : E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction `tapp1_fapp0` for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
-- `z :^o  Z, e : E[z], z' :^o Z, f : z → z', e' : E[z'], σ : e →_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`
+- `z :^o  Z, e :^n E[z], z' :^o Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`
 
-These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary functorially/naturally. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
+These constructions are expressed *internally* (as `fdapp1_int_transfd` and `tdapp1_int_func_transfd`), therefore their new variables themselves vary functorially/naturally (binders `:^f` and `:^n`). And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for a fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
 
 In reality, the *internal* computational-logic for lax ω-categories is easier to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F₀ –)` is recursively a (non-cartesian) fibred functor.
 
