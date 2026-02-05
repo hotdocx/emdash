@@ -291,12 +291,12 @@ Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that live
   "nodes": [
     { "name": "FX", "left": 120, "top": 120, "label": "$F(X)$" },
     { "name": "FY", "left": 320, "top": 220, "label": "$F(Y)$" },
-    { "name": "GY", "left": 520, "top": 220, "label": "$G(Y)$" }
+    { "name": "GY", "left": 420, "top": 220, "label": "$G(Y)$" }
   ],
   "arrows": [
-    { "from": "FX", "to": "FY", "label": "$F(f)$", "label_alignment": "left" },
+    { "from": "FX", "to": "FY", "label": "$F(f)$", "label_alignment": "right" },
     { "from": "FY", "to": "GY", "label": "$\\epsilon_Y$", "label_alignment": "right" },
-    { "from": "FX", "to": "GY", "label": "$\\epsilon_{(f)}$", "curve": -20, "label_alignment": "left" }
+    { "from": "FX", "to": "GY", "label": "$\\epsilon_{(f)}$", "curve": 50, "label_alignment": "left" }
   ]
 }
 </div>
@@ -313,12 +313,12 @@ The same idea becomes more informative when we look at a composite base arrow. I
   "nodes": [
     { "name": "FX", "label": "$F(X)$", "left": 120, "top": 120 },
     { "name": "FY", "label": "$F(Y)$", "left": 320, "top": 220 },
-    { "name": "GZ", "label": "$G(Z)$", "left": 520, "top": 220 }
+    { "name": "GZ", "label": "$G(Z)$", "left": 420, "top": 220 }
   ],
   "arrows": [
-    { "label": "$F(f)$", "from": "FX", "to": "FY", "label_alignment": "left" },
+    { "label": "$F(f)$", "from": "FX", "to": "FY", "label_alignment": "right" },
     { "label": "$\\epsilon_{(g)}$", "from": "FY", "to": "GZ", "label_alignment": "right" },
-    { "label": "$\\epsilon_{(g \\circ f)}$", "from": "FX", "to": "GZ", "curve": -20, "label_alignment": "right" }
+    { "label": "$\\epsilon_{(g \\circ f)}$", "from": "FX", "to": "GZ", "curve": 50, "label_alignment": "left" }
   ]
 }
 </div>
@@ -688,10 +688,10 @@ Stacking then corresponds to composing such base edges and asking for a *computa
 {
   "version": 1,
   "nodes": [
-    { "name": "v0", "label": "$\\bullet$", "left": 0, "top": 150 },
-    { "name": "v1", "label": "$b_0 \\ \\bullet$", "left": 190, "top": 0 },
-    { "name": "v2", "label": "$\\bullet \\ b_1$", "left": 190, "top": 150 },
-    { "name": "v3", "label": "$\\bullet \\ b_2$", "left": 300, "top": 265 }
+    { "name": "v0", "label": "$\\bullet$", "left": 0, "top": 250 },
+    { "name": "v1", "label": "$b_0 \\ \\bullet$", "left": 290, "top": 0 },
+    { "name": "v2", "label": "$\\bullet \\ b_1$", "left": 290, "top": 250 },
+    { "name": "v3", "label": "$\\bullet \\ b_2$", "left": 500, "top": 365 }
   ],
   "arrows": [
     { "name": "e0", "label": "$e_0$", "from": "v0", "to": "v1", "curve": 0, "shift": 0, "label_alignment": "right", "style": { "level": 1 } },
