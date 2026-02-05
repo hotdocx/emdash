@@ -4,7 +4,8 @@
     "private": true,
     "type": "module",
     "workspaces": [
-        "print"
+        "print",
+        "emdash1"
     ],
     "scripts": {
         "dev": "npm run dev -w print",
