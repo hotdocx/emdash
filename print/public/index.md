@@ -5,7 +5,7 @@ authors: m— / emdash project
 
 # Abstract
 
-We report on an ongoing experiment, `emdash2.lp`, whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+We report on **emdash**, an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
 The central construction is a dependent comma/arrow (“dependent hom”) operation that directly organizes “cells over a base arrow” in a simplicial manner. Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}: b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ the category of morphisms in the fibre over $b_1$ from the transport of $e_0$ along $b_{01}$ to $e_1$. In slogan form, this is a dependent arrow/comma object
 $$
@@ -13,7 +13,7 @@ $$
 $$
 Iterating this construction yields a simplicial presentation of higher cells (triangles, surfaces, higher simplices), where “stacking” of $2$-cells along a $1$-cell is expressed *over a chosen base edge*.
 
-As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations.
+As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations. The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram) and rendered/checked as part of a reproducible paper artifact.
 
 # 1. Introduction (what problem are we solving?)
 
@@ -27,7 +27,7 @@ The emdash project explores a kernel design in which:
 - “Category theory” is internal: we work *inside* a dependent type theory that has a classifier `Cat` of categories and a classifier `Grpd` of (∞-)groupoids.
 - Many categorical laws are definitional: they are enforced by rewrite rules and unification hints, so that normalization *is* diagram chasing.
 
-This paper is a narrative tour of the current `emdash2.lp` kernel. It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_cov_int_base`) we also provide a traditional reading.
+This paper is a narrative tour of the current kernel snapshot (a Lambdapi specification). It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_cov_int_base`) we also provide a traditional reading.
 
 ## 1.1 Contributions (what is new here?)
 
@@ -36,8 +36,8 @@ This paper’s contributions are primarily expository (the kernel is ongoing wor
 1. **A rewrite-head discipline for categorical computation.** Most “structural equalities” are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
 2. **A simplicial triangle classifier for higher cells over base arrows.** The dependent arrow/comma construction `homd_cov` (and the internal pipeline `homd_cov_int_base`) provides a computational home for “triangles/surfaces” in the Grothendieck case, and a compositional target for iteration.
 3. **An explicit off-diagonal interface for transfors (ordinary and displayed).** Instead of encoding transfors as records with a naturality law, we expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal components over arrows (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
-4. **Executable feasibility evidence.** The v1 executable kernel (reported in `emdash_cpp2026.md`) demonstrates that this “kernel spec → elaborating proof assistant” pipeline is realistic; the v2 paper build includes automated rendering/console checks for reproducible artifacts.
-5. **Continuity with prior Lambdapi warm-ups.** Earlier Lambdapi developments (`cartierSolution14.lp.txt`, `cartierSolution16.lp.txt`) already validate the *style* of emdash: large categorical interfaces presented with computational rules (products/exponentials/adjunction transposes; sieves/sites/sheafification; scheme interfaces). A key claim of the v2 design is that these developments are now largely portable into the `emdash2.lp` kernel discipline, and therefore count as prior progress rather than speculative future work.
+4. **Executable feasibility evidence.** An earlier executable prototype (bidirectional elaboration with holes + normalization-driven definitional equality) demonstrates that the “kernel spec → elaborating proof assistant” pipeline is realistic.
+5. **Continuity with prior warm-ups.** Earlier large-scale rewrite-centric developments already validate the *style* of emdash: categorical interfaces presented with computational rules (universal properties / adjunction transposes; Grothendieck-style geometry interfaces). A key claim of the v2 design is that these interfaces are largely portable into the v2 stable-head discipline, and therefore count as prior progress rather than speculative future work.
 
 # 2. Technical Overview and Design Principles
 
@@ -46,7 +46,7 @@ emdash is designed around a small set of kernel principles:
 1. **Internalization.** Categories, functors, and (higher) transformations are first-class terms, not meta-level structures.
 2. **Normalization-first.** Many categorical equalities are oriented as rewrite rules on canonical head symbols.
 3. **Stable heads.** Large composite expressions are folded to small “rewrite heads” so normalization is predictable and performant.
-4. **Variance by binders.** Functorial/contravariant/object-only dependencies are carried by binder notation at the surface level (see `docs/SYNTAX_SURFACE.md`).
+4. **Variance by binders.** Functorial/contravariant/object-only dependencies are carried by binder notation at the surface level.
 
 Lambdapi is a natural implementation target because it provides user-defined rewrite rules and higher-order unification. This matters because emdash wants two things simultaneously:
 
@@ -62,30 +62,22 @@ In emdash we deliberately push a large part of the “categorical equational the
 
 ## 2.1 Background: emdash v1 (TypeScript kernel) and “functorial elaboration”
 
-Before `emdash2.lp`, the project developed a 1-categorical prototype (`emdash.lp`) together with an executable kernel in TypeScript (a bidirectional elaborator, unification-based hole solving, and normalization). The report `emdash_cpp2026.md` documents this first version as a *real* programming language / proof assistant, not only as a Lambdapi specification.
+Before the current v2 kernel, the project developed a 1-categorical prototype together with an executable kernel in TypeScript (a bidirectional elaborator with holes, unification-based hole solving, and normalization-driven definitional equality).
 
 Two takeaways from v1 matter for the v2 story:
 
-1. **Feasibility of an implementation pipeline.** The kernel concepts in the Lambdapi spec can be implemented as an interactive system with holes, bidirectional checking, and a normalization-driven definitional equality. This strongly suggests that `emdash2.lp` can likewise be turned into a usable assistant once the surface syntax and elaboration layer is designed.
+1. **Feasibility of an implementation pipeline.** The kernel concepts can be implemented as an interactive system with holes, bidirectional checking, and a normalization-driven definitional equality. This strongly suggests that the v2 kernel can likewise be turned into a usable assistant once the surface syntax and elaboration layer is designed.
 2. **Coherence as computation (“functorial elaboration”).** In the v1 TypeScript kernel, the constructor of a structured object (e.g. a functor) can *compute-check* its laws during elaboration: the system normalizes both sides of functoriality equations in a generic context, and throws a dedicated `CoherenceError` if they do not match definitionally. This is the same philosophical stance as v2’s rewrite-head style: coherence is enforced by computation, not by a separately managed library of lemmas.
 
 The present paper focuses on the v2 Lambdapi kernel itself, but we treat the v1 implementation as evidence that the “specification-first → executable kernel” path is realistic.
 
-## 2.1.1 Warm-up Lambdapi developments: from arithmetic to schemes
-
-In parallel to the v1 executable kernel, the project produced two “warm-up” Lambdapi developments that are worth crediting explicitly because they already instantiate the intended methodological stance.
-
-**(i) `cartierSolution14.lp.txt`: computation by universal properties.** This file develops (in a more ad hoc kernel than v2) internal products/exponentials/adjunction machinery and uses it to compute with familiar constructions. A guiding demo is that even a toy statement like “$1+2=3$” can be realized *three ways*—via an intrinsic datatype of naturals, via a natural numbers object presented by internal adjunctions, and via finite sets with colimits—so that the result is obtained by normalization of the categorical interface rather than by external equational reasoning. The point is not the arithmetic itself but the principle: “universal property = computation rule”.
-
-**(ii) `cartierSolution16.lp.txt`: a computational interface for sieves, sheaves, and schemes.** This file specifies a large amount of categorical infrastructure for Grothendieck-style geometry (sieves, sites, closure/sheafification operations, subobjects, and a schematic interface for ringed sites and localizations), again in the proof-theoretic spirit that core equalities should compute. For example, pullback stability of sieve classifiers and basic glue/closure interactions are recorded as rewrite rules so that a “sheafiness” interface is operational.
-
-These warm-ups are not presented in this paper as *the* final kernel: they rely on earlier encodings (categories/functors/profunctors as primitive records) and therefore do not match the v2 stable-head discipline. Their significance is different: they show that the emdash approach scales to large libraries, and they provide a backlog of definitions and computational laws that can be re-expressed inside `emdash2.lp` (with `Cat`, `Catd`, and the transfor heads) rather than re-invented.
+Warm-up developments (not discussed in detail here) already stress-test the rewrite-centric style at scale, including interfaces for computation by universal properties (products/exponentials/adjunction transposes) and for Grothendieck-style geometry (sieves/sites/sheafification and related constructions). These serve as a backlog of definitions and computation laws to port into the v2 stable-head discipline.
 
 ## 2.2 How to read kernel vs surface syntax
 
-`emdash2.lp` is “kernel-first”: it chooses canonical internal heads and rewrite rules. The intended *surface language* (the syntax a user would actually type) is described separately in `docs/SYNTAX_SURFACE.md`. The crucial idea is that **variance is tracked by binder notation**, not by explicit “naturality proof terms”.
+The v2 kernel is “kernel-first”: it chooses canonical internal heads and rewrite rules. The intended *surface language* (the syntax a user would actually type) is designed so that **variance is tracked by binder notation**, not by explicit “naturality proof terms”.
 
-We will use the following surface-style conventions (matching `docs/SYNTAX_SURFACE.md`):
+We will use the following surface-style conventions:
 
 - **Functorial index** `x : A`: a variable intended to vary functorially (e.g. when you have a functor $F : A\\to B$, you write $x:A \\vdash F[x] : B$).
 - **Contravariant index** `x :^- A`: used for arrow-indexed components like $\\epsilon_{(f)}$ (it makes “accumulation” rules orient correctly).
@@ -136,7 +128,9 @@ The explicit, computationally important data is typically **off-diagonal**: $\\e
 </table>
 </div>
 
-**Notation convention.** In surface typing examples, we write `⊢ x : C` as shorthand for `⊢ x : τ (Obj C)` (and similarly `f : x → y` abbreviates `f : τ (Obj (Hom_cat C x y))`).
+The kernel also defines stable aliases for “objects of a category” (since `Obj` is not injective in this development): `Hom`, `Functor`, `Transf`, and their displayed analogues (`FibreObj`, `Functord`, `Transfd`). We use these aliases in code snippets below.
+
+**Notation convention.** In surface typing examples, we write `⊢ x : C` as shorthand for `⊢ x : τ (Obj C)` (and similarly `f : x → y` abbreviates `f : τ (Hom C x y)`).
 
 # 3. Core Type Theory: `Grpd`, `Cat`, and homs-as-categories
 
@@ -170,7 +164,8 @@ This is an explicit design choice: object “equality” in a category is *not* 
 Instead of `Hom_C(x,y)` being a set/type, in emdash it is a category:
 
 ```lambdapi
-injective symbol Hom_cat : Π [A : Cat] (X_A Y_A : τ (Obj A)), Cat;
+injective symbol Hom_cat : Π (A : Cat) (X_A Y_A : τ (Obj A)), Cat;
+symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd ≔ Obj (Hom_cat A X_A Y_A);
 ```
 
 So a “1-cell” $f:x\\to y$ is an *object* of `Hom_cat C x y`. A “2-cell” between parallel 1-cells is then a 1-cell *in that hom-category*, etc. This is the standard globular iteration, but the rest of the paper emphasizes a *simplicial* reorganization of this data.
@@ -204,11 +199,13 @@ This provides a clean place to talk about univalence later: one can add bridges 
 Concretely, `path_to_hom_func` and its stable-head application `path_to_hom_fapp0` give the direction “path ⇒ morphism”:
 
 ```lambdapi
-constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)), τ (Obj (Functor_cat (Path_cat (x = y)) (Hom_cat C x y)));
-symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)), τ (Obj (Hom_cat C x y));
+constant symbol path_to_hom_func : Π [C : Cat], Π (x y : τ (Obj C)),
+  τ (Functor (Path_cat (x = y)) (Hom_cat C x y));
+symbol path_to_hom_fapp0 : Π [C : Cat], Π (x y : τ (Obj C)), Π (p : τ (x = y)),
+  τ (Hom C x y);
 ```
 
-This is intentionally one-way at the definitional level: the reverse direction (morphisms ⇒ paths) is the dangerous one that can create rewrite loops unless handled by a carefully controlled unification rule (as in the draft univalence bridge in `emdash2.lp`).
+This is intentionally one-way at the definitional level: the reverse direction (morphisms ⇒ paths) is the dangerous one that can create rewrite loops unless handled by a carefully controlled unification rule (as in the draft univalence bridge present in the current kernel development).
 
 ## 3.6 The “universe categories” `Grpd_cat` and `Cat_cat`
 
@@ -228,18 +225,23 @@ For categories $A,B : \\texttt{Cat}$, the category of functors is `Functor_cat A
 
 ```lambdapi
 constant symbol Functor_cat : Π (A B : Cat), Cat;
-symbol fapp0 : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), τ (Obj A) → τ (Obj B);
-symbol fapp1_func : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), Π [X Y : τ (Obj A)], τ (Obj (Functor_cat (Hom_cat A X Y) (Hom_cat B (fapp0 F X) (fapp0 F Y))));
+symbol Functor (A B : Cat) : Grpd ≔ Obj (Functor_cat A B);
+symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)), τ (Obj A) → τ (Obj B);
+symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Functor A B)), Π [X_A Y_A : τ (Obj A)],
+  τ (Functor (Hom_cat A X_A Y_A) (Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
 ```
 
 Here `fapp0` is the object action $F_0$, and `fapp1_func` is the induced functor on hom-categories $F_1$ (so it already “knows” about higher cells).
 
 ## 4.2 Stability by “rewrite heads”
 
-In `emdash2.lp`, many operations are *declared* as symbols (not definitional abbreviations) so that rewrite rules can canonically fold large expressions into small stable heads. For example, applying `fapp1_func` and then `fapp0` is folded into a stable head `fapp1_fapp0`:
+In the kernel, many operations are *declared* as symbols (not definitional abbreviations) so that rewrite rules can canonically fold large expressions into small stable heads. For example, applying `fapp1_func` and then `fapp0` is folded into a stable head `fapp1_fapp0`:
 
 ```lambdapi
-symbol fapp1_fapp0 : Π [A B : Cat], Π (F : τ (Obj (Functor_cat A B))), Π [X Y : τ (Obj A)], Π (f : τ (Obj (Hom_cat A X Y))), τ (Obj (Hom_cat B (fapp0 F X) (fapp0 F Y)));
+symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
+  Π [X_A Y_A : τ (Obj A)],
+  Π (f : τ (Hom A X_A Y_A)),
+  τ (Hom B (fapp0 F_AB X_A) (fapp0 F_AB Y_A));
 ```
 
 This “stable head discipline” is crucial for performance and for avoiding brittle matching against huge expanded terms.
@@ -253,7 +255,9 @@ $$
 In the kernel this is a *primitive head* `tapp0_fapp0` with rewrite rules connecting it to the internal packaging:
 
 ```lambdapi
-symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Obj (Functor_cat A B))], Π (Y : τ (Obj A)), Π (ϵ : τ (Obj (Transf_cat F G))), τ (Obj (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
+symbol tapp0_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
+  Π (Y_A : τ (Obj A)), Π (ϵ : τ (Transf F_AB G_AB)),
+  τ (Hom B (fapp0 F_AB Y_A) (fapp0 G_AB Y_A));
 ```
 
 The philosophy is: *do not bake “components” into a record definition of transfors*. Instead, compute components by normalization of projection heads.
@@ -269,7 +273,7 @@ emdash aims at a more $\\omega$-friendly view: the “naturality square” is no
 $$
 \\epsilon_{(f)} : F(X) \\to G(Y)
 $$
-as a stable-head operation `tapp1_fapp0`. The intended surface syntax is `ϵ_(f)` and it uses the contravariant binder discipline `x :^- A` described in `docs/SYNTAX_SURFACE.md`.
+as a stable-head operation `tapp1_fapp0`. The intended surface syntax is `ϵ_(f)` and it uses the contravariant binder discipline `x :^- A`.
 
 Informally, `tapp1_fapp0` is a way to *name* “the part of a transfor that lives over the base arrow $f$”. This is exactly the kind of interface we need for cut-elimination style rewrites: we can orient coherence laws as reductions on expressions built from `comp_fapp0`, `fapp1_fapp0`, and `tapp1_fapp0`, without committing to any record encoding of transfors.
 
@@ -329,7 +333,7 @@ $$
 $$
 and for a $2$-cell $e:f\\Rightarrow g$ it yields a transfor $\\epsilon : \\mathrm{postcomp}(f) \\Rightarrow \\mathrm{postcomp}(g)$.
 
-Now take composable $2$-cells $\\alpha:x\\Rightarrow y$ and $\\beta:y\\Rightarrow z$ in $\\mathrm{Hom}_B(M,N)$. The exchange law instance we sanity-check in `emdash2.lp` is the equation
+Now take composable $2$-cells $\\alpha:x\\Rightarrow y$ and $\\beta:y\\Rightarrow z$ in $\\mathrm{Hom}_B(M,N)$. The exchange law instance we sanity-check in the kernel is the equation
 $$
 \\mathrm{postcomp}(g)(\\beta) \\circ \\epsilon_{(\\alpha)} \\;=\\; \\epsilon_{(\\beta\\circ\\alpha)}.
 $$
@@ -351,13 +355,13 @@ To emphasize that the **pasting diagram is not pre-composed**, Figure 3 draws th
     { "name": "y", "label": "$y$", "from": "M", "to": "N", "curve": 0, "label_alignment": "over" },
     { "name": "z", "label": "$z$", "from": "M", "to": "N", "curve": -250, "label_alignment": "right" },
     { "name": "f", "label": "$f$", "from": "N", "to": "L", "curve": 250, "label_alignment": "left" },
-    { "name": "g", "label": "$G ≔ g ∘ —$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
+    { "name": "g", "label": "$G ≔ g ∘ \\_$", "from": "N", "to": "L", "curve": 0, "label_alignment": "right" },
     { "name": "fx", "label": "$f\\circ x$", "from": "M", "to": "L", "curve": 400, "label_alignment": "left", "style": { "body": { "name": "dashed" } } },
-    { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "none" } } },
+    { "name": "gy", "label": "", "from": "M", "to": "L", "curve": 0, "label_alignment": "over", "style": { "body": { "name": "dotted" } } },
     { "name": "gz", "label": "$g\\circ z$", "from": "M", "to": "L", "curve": -400, "label_alignment": "right", "style": { "body": { "name": "dashed" } } },
     { "label": "$\\alpha$", "from": "x", "to": "y", "label_alignment": "left", "style": { "level": 2 } },
     { "label": "$\\beta$", "from": "y", "to": "z", "label_alignment": "right", "style": { "level": 2 } },
-    { "label": "$\\epsilon ≔ e ∘ —$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
+    { "label": "$\\epsilon ≔ e ∘ \\_$", "from": "f", "to": "g", "label_alignment": "left", "style": { "level": 2, "body": { "name": "solid" } }, "shorten": { "source": 0 } },
     { "label": "$\\epsilon_{(\\alpha)}$", "from": "fx", "to": "gy", "label_alignment": "left", "style": { "level": 2 } },
     { "label": "$g(\\beta)$", "from": "gy", "to": "gz", "label_alignment": "right", "style": { "level": 2 } }
   ]
@@ -367,11 +371,11 @@ To emphasize that the **pasting diagram is not pre-composed**, Figure 3 draws th
 For reference, the stable head has the following kernel type (here `@` just disables implicit arguments):
 
 ```lambdapi
-symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Obj (Functor_cat A B))],
-  Π (X_A Y_A : τ (Obj A)),
-  Π (ϵ : τ (Obj (Transf_cat F_AB G_AB))),
-  Π (f : τ (Obj (@Hom_cat A X_A Y_A))),
-  τ (Obj (@Hom_cat B (fapp0 F_AB X_A) (fapp0 G_AB Y_A)));
+symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
+  Π [X_A Y_A : τ (Obj A)],
+  Π (ϵ : τ (Transf F_AB G_AB)),
+  Π (f : τ (Hom A X_A Y_A)),
+  τ (Hom B (fapp0 F_AB X_A) (fapp0 G_AB Y_A));
 ```
 
 ## 4.5 Representables and the Yoneda-style heads `hom_cov` / `hom_con`
@@ -389,7 +393,8 @@ While the global goal includes lax/weak structure, the kernel often begins with 
 
 ```lambdapi
 constant symbol StrictFunctor_cat : Π (A B : Cat), Cat;
-injective symbol sfunc_func : Π [A B : Cat], τ (Obj (StrictFunctor_cat A B)) → τ (Obj (Functor_cat A B));
+symbol StrictFunctor (A B : Cat) : Grpd ≔ Obj (StrictFunctor_cat A B);
+injective symbol sfunc_func : Π [A B : Cat], τ (StrictFunctor A B) → τ (Functor A B);
 ```
 
 This is a pragmatic move: strictness gives stable computation rules, and later “laxness witnesses reduce to identities” can be recovered as special cases once the simplicial machinery is strong enough.
@@ -411,7 +416,7 @@ In the paper we write $E : \\texttt{Catd}\\;Z$ and read it as a fibration-like s
 For an honest Cat-valued functor $M : Z \\to \\mathbf{Cat}$, emdash provides a displayed category `Fibration_cov_catd M : Catd Z` (think “the Grothendieck construction” $\\int M$), and in this special case fibres compute definitionally:
 
 ```lambdapi
-constant symbol Fibration_cov_catd : Π [Z : Cat], τ (Obj (Functor_cat Z Cat_cat)) → Catd Z;
+constant symbol Fibration_cov_catd : Π [Z : Cat], τ (Functor Z Cat_cat) → Catd Z;
 ```
 
 This is the main place where the kernel commits to concrete computations for `Catd`: general displayed categories are abstract, but Grothendieck ones compute.
@@ -466,7 +471,7 @@ This is a key engineering boundary: for a generic displayed category $E : \\math
 For composing constructions inside `Cat_cat`, emdash also packages “totalization” as a functor object:
 
 ```lambdapi
-symbol Total_func [Z : Cat] : τ (Obj (Functor_cat (Functor_cat Z Cat_cat) Cat_cat));
+symbol Total_func [Z : Cat] : τ (Functor (Functor_cat Z Cat_cat) Cat_cat);
 ```
 
 with a β-rule on objects `fapp0 (Total_func[Z]) M ↪ Total_cat (Fibration_cov_catd M)`. This is the same stable-head pattern as elsewhere: we want *a small head symbol* we can compose with, rather than unfolding a large definition every time.
@@ -518,13 +523,13 @@ The kernel symbol `homd_cov` is declared abstractly, but it has a key computatio
 
 This is precisely the “dependent arrow/comma” intuition.
 
-At the definitional level, the key pointwise computation rule in `emdash2.lp` is (Grothendieck–Grothendieck case):
+At the definitional level, the key pointwise computation rule is (Grothendieck–Grothendieck case):
 
 ```lambdapi
 rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
               (@Fibration_cov_catd $Z $D0) $FF)
             (Struct_sigma $z (Struct_sigma $d $f))
-  ↪ @Hom_cat (fapp0 $E0 $z)
+  ↪ Hom_cat (fapp0 $E0 $z)
       (@fib_cov_tapp0_fapp0 $Z $E0 $W_Z $z $f $W)
       (@fdapp0 $Z (@Fibration_cov_catd $Z $D0) (@Fibration_cov_catd $Z $E0) $FF $z $d);
 ```
@@ -553,11 +558,11 @@ The slogan is: *a 2-cell is a 1-cell in a dependent arrow category*.
 
 ## 6.3 The “more internal” pipeline: `homd_cov_int_base`
 
-The file `emdash2.lp` contains a more internal version of the dependent hom construction, designed to be composed with other internal operations without exploding rewriting. It is built from stable-head building blocks (pointwise opposite, pointwise product, totalization, etc.). The key helper is:
+The kernel contains a more internal version of the dependent hom construction, designed to be composed with other internal operations without exploding rewriting. It is built from stable-head building blocks (pointwise opposite, pointwise product, totalization, etc.). The key helper is:
 
 ```lambdapi
-symbol homd_cov_int_base [Z : Cat] (D0 : τ (Obj (Functor_cat Z Cat_cat)))
-  : τ (Obj (Functor_cat (Op_cat Z) Cat_cat));
+symbol homd_cov_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
+  : τ (Functor (Op_cat Z) Cat_cat);
 ```
 
 Conceptually, `homd_cov_int_base D0` is a Cat-valued functor on $Z^{op}$ whose value at $z$ packages:
@@ -588,13 +593,13 @@ The kernel exposes `homd_cov_int` as a displayed functor object (currently witho
 - a displayed functor $FF : \\int D0 \\to E$,
 - and returns a displayed functor over $E^{op}$ whose fibre over $(z,e)$ classifies arrows “from $e$ to $FF(d)$ over a base arrow”.
 
-In the source:
-
 ```lambdapi
 constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
-  Π (D0 : τ (Obj (Functor_cat Z Cat_cat))),
-  Π (FF : τ (Obj (Functord_cat (Fibration_cov_catd D0) E))),
-  τ (Obj (Functord_cat (Op_catd E) ... ));
+  Π (D0 : τ (Functor Z Cat_cat)),
+  Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
+  τ (Functord (Op_catd E)
+              (Op_catd (Fibration_con_catd
+                (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))));
 ```
 
 The important message for the reader is: *emdash organizes higher cells by iterating dependent arrow categories*; `homd_cov_int` is the internalized, compositional version of the triangle classifier.
@@ -610,12 +615,17 @@ If $FF,GG : E \\to_Z D$ are displayed functors (objects of `Functord_cat E D`), 
 - `tdapp0_fapp0` extracts the **diagonal component** at a base point $(Y,V)$, i.e. a morphism in the fibre $D[Y]$:
 
 ```lambdapi
-symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Obj (Functord_cat E D))], Π (Y_Z : τ (Obj Z)), Π (V : τ (Obj (Fibre_cat E Y_Z))), Π (ϵ : τ (Obj (Transfd_cat FF GG))), τ (Obj (Hom_cat (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V)));
+symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z],
+  Π [FF GG : τ (Functord E D)],
+  Π (Y_Z : τ (Obj Z)),
+  Π (V : τ (FibreObj E Y_Z)),
+  Π (ϵ : τ (Transfd FF GG)),
+  τ (Hom (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V));
 ```
 
 - `tdapp1_fapp0_funcd` (and internal variants like `tdapp1_int_*`) package the **off-diagonal component** over a displayed arrow $\\sigma : e \\to_f e'$ (surface syntax `ϵ_(σ)`), mirroring the ordinary `tapp1_*` story.
 
-This mirrors the surface discipline in `docs/SYNTAX_SURFACE.md`: diagonal components are silent (`ϵ[e]`), while off-diagonal components are explicit computational interfaces.
+This mirrors the surface discipline: diagonal components are silent (`ϵ[e]`), while off-diagonal components are explicit computational interfaces.
 
 One particularly important normalization rule connects identity displayed transfors to the *action on dependent homs*. Informally:
 
@@ -695,7 +705,7 @@ In emdash terms, this is the kind of geometry the kernel is aiming to make *comp
 
 # 8. Computational Adjunctions (cut-elimination rules)
 
-The `emdash2.lp` file contains a draft interface for adjunctions inspired by Došen–Petrić’s proof-theoretic view of categories.
+The kernel contains a draft interface for adjunctions inspired by Došen–Petrić’s proof-theoretic view of categories.
 
 ## 8.1 Adjunction data as first-class terms
 
@@ -715,10 +725,10 @@ In the kernel this is a type former:
 ```lambdapi
 constant symbol adj :
   Π [R L : Cat],
-  Π (LAdj : τ (Obj (Functor_cat R L))),
-  Π (RAdj : τ (Obj (Functor_cat L R))),
-  Π (η : τ (Obj (Transf_cat (id_func R) (comp_cat_fapp0 RAdj LAdj)))),
-  Π (ϵ : τ (Obj (Transf_cat (comp_cat_fapp0 LAdj RAdj) (id_func L)))),
+  Π (LAdj : τ (Functor R L)),
+  Π (RAdj : τ (Functor L R)),
+  Π (η : τ (Transf (@id_func R) (comp_cat_fapp0 RAdj LAdj))),
+  Π (ϵ : τ (Transf (comp_cat_fapp0 LAdj RAdj) (@id_func L))),
   TYPE;
 ```
 
@@ -749,7 +759,7 @@ This matches the abstract’s goal: make the triangle identity a *definitional c
 }
 </div>
 
-In `emdash2.lp` the rule is implemented at the level of the stable heads for composition (`comp_fapp0`), functor action on morphisms (`fapp1_fapp0`), and arrow-indexed transfor components (`tapp1_fapp0`). The result is that normalizing a composite term *performs* the triangle reduction.
+The rule is implemented at the level of the stable heads for composition (`comp_fapp0`), functor action on morphisms (`fapp1_fapp0`), and arrow-indexed transfor components (`tapp1_fapp0`). The result is that normalizing a composite term *performs* the triangle reduction.
 
 This computational adjunction story is best viewed as an application of the *off-diagonal component infrastructure for transfors* (`tapp1_*` / `tdapp1_*` and their “functional” packaging), rather than as a special application of the dependent-hom layer. The dependent-hom constructions (`homd_cov`, `homd_cov_int`) target a different goal: simplicial organization of higher cells over chosen base arrows, so that stacking/exchange phenomena can later be obtained uniformly.
 
@@ -785,7 +795,7 @@ Two common failure modes for rewrite-based kernels are:
 - **conversion blowups** caused by matching against too much inferred structure in a rule LHS;
 - **non-termination** caused by loops between “expanding” and “folding” rules.
 
-`emdash2.lp` mitigates this by (i) keeping inferred arguments as `_` on LHS patterns unless essential, and (ii) orienting many laws in a cut-elimination direction (nested structure folds to a single constructor).
+The kernel mitigates this by (i) keeping inferred arguments as `_` on LHS patterns unless essential, and (ii) orienting many laws in a cut-elimination direction (nested structure folds to a single constructor).
 
 ## 9.4 Timeouts as a diagnostic tool
 
@@ -833,9 +843,9 @@ Our distinctive emphasis is *computational organization of higher cells over bas
 ## 11.3 Next steps
 
 - Finish the simplicial iteration story (derive/justify the external heads like `fdapp1_funcd` from internal `tdapp1_int_*` pipelines; extend computation beyond the Grothendieck case).
-- Add the missing user-facing layer: a variance-aware elaborator that makes `docs/SYNTAX_SURFACE.md` executable (as in v1’s TypeScript kernel, but for the v2 primitives).
+- Add the missing user-facing layer: a variance-aware elaborator for the intended surface language (as in the v1 TypeScript kernel, but for the v2 primitives).
 - Extend the adjunction interface from the first triangle cut-elimination rule to a robust set of whiskering/triangle/exchange normalizations.
-- Port the warm-up libraries: re-express the `cartierSolution14` “compute by adjunction/colimit” patterns and the `cartierSolution16` sieve/site/sheafification interfaces within the v2 heads (`Functor_cat`, `Transf_cat`, and eventually a displayed-profunctor layer), so they become stable regression tests for the kernel discipline.
+- Port the warm-up libraries: re-express the universal-property and geometry interfaces within the v2 heads (`Functor_cat`, `Transf_cat`, and eventually a displayed-profunctor layer), so they become stable regression tests for the kernel discipline.
 
 # 12. Conclusion
 
