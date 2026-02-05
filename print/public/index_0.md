@@ -1,11 +1,11 @@
 ---
 title: emdash — Functorial programming for strict/lax ω-categories in Lambdapi
-authors: m— / emdash project
+authors: https://github.com/hotdocx/emdash
 ---
 
 # Abstract
 
-We report on **emdash**, an ongoing experiment whose goal is a *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
 The core mathematical construction is a dependent comma/arrow (“dependent hom”) operation that organizes “cells over a chosen base arrow” in a simplicial manner. Concretely, for a base category $B$ and a dependent category over it (morally a fibration $E: B\\to \\mathbf{Cat}$), fix $b_0\\in B$ and $e_0\\in E(b_0)$ and define a Cat-valued functor:
 $$
