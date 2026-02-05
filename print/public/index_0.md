@@ -15,6 +15,8 @@ Its value at $(e_1 : E(b_1),\\; b_{01}:b_0\\to b_1)$ is the fibre hom-category $
 
 On the transformation side, we expose explicit off-diagonal components $\\epsilon_{(f)} : F(X)\\to G(Y)$ (indexed by arrows $f:X\\to Y$) and orient naturality as *cut accumulation* rewrites, yielding exchange-law normal forms. As a complementary application, we outline a computational adjunction interface where unit/counit are first-class $2$-cell data and a triangle identity is oriented as a definitional reduction on composites (schematically $\\epsilon_f\\circ L(\\eta_g) \\rightsquigarrow f\\circ L(g)$). The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram), enabling rendering, checking, and AI-assisted editing as part of a reproducible paper artifact.
 
+From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
+
 # 1. Introduction
 
 Formalizing higher categories in proof assistants is hard for two intertwined reasons:
@@ -104,6 +106,21 @@ The kernel also defines stable aliases for “objects of a category” (since `O
 In parallel to the Lambdapi kernel, the project includes an earlier executable prototype (a bidirectional elaborator with holes and normalization-driven definitional equality). Its key methodological takeaway is: the system can *compute-check coherence* during elaboration by normalizing both sides of functoriality/coherence constraints and rejecting mismatches (reporting dedicated errors, rather than producing proof obligations).
 
 In the v2 story, the stable-head discipline plays the analogous role: instead of proving a growing library of “naturality lemmas”, we design primitives and rewrite rules so the relevant equalities are available by conversion.
+
+## 2.3 Internalized computational logic and surface elaboration
+
+The kernel is engineered so that it can serve as an internal computational logic for a surface programming language / proof assistant. A reference implementation effort for such a surface layer (parsing + elaboration + rendering) lives at `https://github.com/hotdocx/emdash`.
+
+The essential idea is that *elaboration is guided by binder modes* and by stable-head elimination operators, rather than by asking the user for separate naturality/coherence proof terms. For example, for displayed categories `E,D : Catd Z` a displayed functor is read schematically as:
+$$
+z : Z,\ e : E[z] \\vdash FF[e] : D[z],
+$$
+and for a displayed transfor $\\epsilon$ between displayed functors, diagonal components are silent while the off-diagonal component over a displayed arrow $\\sigma : e \\to_f e'$ is explicit:
+$$
+\\epsilon_{(\\sigma)} : FF[e] \\to_f GG[e'].
+$$
+
+This reflects the kernel architecture: “internalization” operators (the `*_int_*` family) are treated as named discharge/abstraction principles whose computation is governed by rewrite rules, so that higher functoriality/naturality is available by normalization.
 
 ## 2.3 Contextual developments (evidence of scale)
 
@@ -233,6 +250,18 @@ $$
 $$
 so normalization *accumulates* the base-arrow index.
 
+Equivalently (and closer to a 2-categorical reading), accumulation can be presented as two rewrite orientations on off-diagonal components:
+$$
+(G(b))\\,\\cdot\\,\\epsilon_{(a)} \\;\\rightsquigarrow\\; \\epsilon_{(b\\cdot a)},
+\\qquad
+\\epsilon_{(b)}\\,\\cdot\\,(F(a)) \\;\\rightsquigarrow\\; \\epsilon_{(b\\cdot a)}.
+$$
+An instance is the **exchange law** for pasting (vertical cut $\\cdot$ and horizontal composition $\\circ$):
+$$
+(g \\circ \\beta)\\,\\cdot\\,(e \\circ \\alpha) \\;\\rightsquigarrow\\; e \\circ (\\beta\\cdot\\alpha),
+$$
+so that normalization yields a canonical pasted 2-cell.
+
 For reference, the stable head has the following kernel type (here `@` just disables implicit arguments):
 
 ```lambdapi
@@ -317,6 +346,8 @@ $$
 $$
 
 This is the basic “triangle classifier”: *a 2-cell is a 1-cell in a dependent arrow category*.
+
+This “dependent arrow/comma” construction is also reminiscent of directed “bridge type” constructions in internal parametricity: it internalizes a relation indexed by a base arrow without introducing an external interval object.
 
 ## 6.1 Input shape and “over a base edge”
 

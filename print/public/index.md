@@ -15,6 +15,8 @@ Iterating this construction yields a simplicial presentation of higher cells (tr
 
 As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations. The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram) and rendered/checked as part of a reproducible paper artifact.
 
+From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
+
 # 1. Introduction (what problem are we solving?)
 
 Higher category theory is hard to formalize for two intertwined reasons:
@@ -64,6 +66,8 @@ In emdash we deliberately push a large part of the “categorical equational the
 
 Before the current v2 kernel, the project developed a 1-categorical prototype together with an executable kernel in TypeScript (a bidirectional elaborator with holes, unification-based hole solving, and normalization-driven definitional equality).
 
+The project also maintains a reference codebase for a surface language and its tooling (parsing + elaboration + rendering): `https://github.com/hotdocx/emdash`. This is where the binder-annotated surface reading is meant to become executable.
+
 Two takeaways from v1 matter for the v2 story:
 
 1. **Feasibility of an implementation pipeline.** The kernel concepts can be implemented as an interactive system with holes, bidirectional checking, and a normalization-driven definitional equality. This strongly suggests that the v2 kernel can likewise be turned into a usable assistant once the surface syntax and elaboration layer is designed.
@@ -91,6 +95,8 @@ Several kernel projections are intended to be *silent* in surface syntax:
 - diagonal components `ϵ[x]` / `ϵ[e]` for transfors and displayed transfors.
 
 The explicit, computationally important data is typically **off-diagonal**: $\\epsilon_{(f)}$ (ordinary) and $\\epsilon_{(\\sigma)}$ (displayed) for “over-a-base-arrow” components. Those correspond to stable heads like `tapp1_fapp0` and `tdapp1_*`.
+
+Conceptually, the kernel can be read as a computational internalization of a categorical semantics for a programming language (a categories-with-families–like stance). The point of the stable-head and binder-mode discipline is that this internal logic is suitable for a bidirectional HOAS-style elaboration engine: coherence is enforced by normalization on kernel primitives, rather than discharged as external proof obligations.
 
 ## 2.3 Technical overview (kernel ↔ surface ↔ mathematics)
 
@@ -702,6 +708,17 @@ Stacking then corresponds to composing such base edges and asking for a *computa
 </div>
 
 In emdash terms, this is the kind of geometry the kernel is aiming to make *computational*: rather than proving a separate “exchange law”, one wants an interface where these higher comparisons arise by functoriality/transport in a suitably internalized indexing.
+
+In slogan form, this matches a cut-accumulation reading of naturality on off-diagonal components:
+$$
+(G(b))\\,\\cdot\\,\\epsilon_{(a)} \\;\\rightsquigarrow\\; \\epsilon_{(b\\cdot a)},
+\\qquad
+\\epsilon_{(b)}\\,\\cdot\\,(F(a)) \\;\\rightsquigarrow\\; \\epsilon_{(b\\cdot a)},
+$$
+and a familiar exchange-law instance can be summarized as a normalization:
+$$
+(g \\circ \\beta)\\,\\cdot\\,(e \\circ \\alpha) \\;\\rightsquigarrow\\; e \\circ (\\beta\\cdot\\alpha).
+$$
 
 # 8. Computational Adjunctions (cut-elimination rules)
 
