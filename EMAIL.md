@@ -10,7 +10,7 @@ emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
 https://github.com/1337777/cartier/blob/master/cartierSolution19.lp
 https://hotdocx.github.io/r/--------TODO-------
 
-And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at the "dependent hom/arrow/comma category" construction. A good question is whether this loop “LLM ↔ proof-checker” can be collapsed into a single very-specialized "machine learning/programming"? i.e. "symbolic AI"...
+And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at this "dependent hom/arrow/comma category" construction:
 
 ## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams
 
@@ -60,21 +60,22 @@ Moreover such formulations of naturality are useful to express computationally t
 
 ## 4) GPT-5.2 diagrammatic prompting via `arrowgram` and “MathOps”
 
-Good MathOps matters!
+What is MathOps? Example: How to enable the GPT-5.2 + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A MathOps solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with an AI-editor that generates and renders `markdown` papers documents and slides presentations with embedded diagrams specs, from any uploaded source references.
 
-How to enable the GPT-5.2 + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A new solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with a paper/diagram AI-editor that generates and renders templated `markdown` code with embedded diagrams specs from uploaded source references.
+While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative MathOps from idea, to sharing, to community peer review!
 
-While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative mathops from idea, to sharing, to community peer review!
+MathOps is what happens after you get "desk-rejected" by POPL 2026, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities in Dubai, Mumbai, Shanghai https://www.meetup.com/dubai-ai https://www.meetup.com/mumbai-ai https://www.meetup.com/shanghai-ai ...)
 
-Wait, there is more. MathOps includes the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses. This is the idea implemented by the marketplace https://GetPaidX.com (which is a Dubai AI https://www.meetup.com/dubai-ai community project)
+Try the MathOps workspace for `emdash` here:
+https://GetPaidX.com/r/--------TODO---------
 
-OK, thank you Josef for your attention to these documents, and I am looking forward for your ai4reason.eu institute to join!
+OK, thank you Josef Urban for your attention to these documents, and I am looking forward for your ai4reason.eu institute to join the workspaces, and try and collapse the “LLM ↔ proof-checker” loop together, i.e. "symbolic AI"...
 
 ---
 
 References:
 [1] Kosta Dosen, Zoran Petric (1999). "Cut-Elimination in Categories"
-[2] This summer visit to Ambrus Kaposi in Budapest, and insightful feedback at RHPL@FSTTCS 2025 India, and moral from the "desk-rejection" by POPL 2026, lol
+[2] This summer visit to Ambrus Kaposi in Budapest, and insightful feedback at RHPL@FSTTCS 2025 in India
 [3] GPT-5.2
 
 
