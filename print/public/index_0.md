@@ -9,7 +9,7 @@ We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment 
 
 The core mathematical construction is a dependent comma/arrow (“dependent hom”) operation that organizes “cells over a chosen base arrow” in a simplicial manner. Concretely, for a base category $B$ and a dependent category over it (morally a fibration $E: B\\to \\mathbf{Cat}$), fix $b_0\\in B$ and $e_0\\in E(b_0)$ and define a Cat-valued functor:
 $$
-\\mathrm{Homd}_E(e_0,--) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
+\\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
 $$
 Its value at $(e_1 : E(b_1),\\; b_{01}:b_0\\to b_1)$ is the fibre hom-category $\\mathrm{Hom}_{E(b_1)}\\bigl((b_{01})_!e_0,\\,e_1\\bigr)$, and functoriality in the representable argument expresses *stacking* of $2$-cells along a $1$-cell “over the base edge”.
 
