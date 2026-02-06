@@ -2412,6 +2412,10 @@ rule fapp0
     and compute directly on `tapp0_fapp0 (... fib_cov_transf ...)` instead.
 */
 
+// TODO: exchange arguments of hom_cov and introduce Transf_catd
+// so that fib_cov_transf becomes typed as: 
+// Transf M (Transf_catd (hom_cov (@id_func B)) M)
+// and try to generalize (@id_func B) to any F : A -> B
 symbol fib_cov_transf : Π [B : Cat] (M : τ (Functor B Cat_cat)),
   Π (x : τ (Obj B)), τ (Obj (fapp0 M x))
     → τ (Transf (hom_cov x (@id_func B)) M);

@@ -32,15 +32,18 @@ This dependent comma/arrow/hom category `homd_cov` is analoguous to the (directe
 
 ## 2) Internalized computational-logic and “syntax elaboration”
 
-The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is guaranteed.
+The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is easily guaranteed.
 
 For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^f Z, e :^f E[z] ⊢ FF[e] : D[z]` (where binders `:^f` are functorial and `:^n` are natural). Thus `Functord` is the traditional Π-type, but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
-- `z :^f Z, e :^n E[z], z' :^f Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`.
+- `z :^f Z, e :^n E[z], z' :^f Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`
 
 Similarly from the usual "diagonal" components `z :^f Z, e :^n E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction `tapp1_fapp0` for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
 - `ϵ :^f Transfd FF GG, z :^f Z, e :^n E[z], z' :^f Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ ϵ_(σ) : FF[e] →_f GG[e']`
 
-These constructions are expressed *internally* (as stable head symbols `fdapp1_int_transfd` and `tdapp1_int_func_transfd`, etc... the full/partial discharge/abstraction/lambda of the context-patterns above), therefore their new variables themselves vary functorially/naturally. And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
+These constructions are expressed *internally* (as stable head symbols `fdapp1_int_transfd` and `tdapp1_int_func_transfd`, etc... the discharge/abstraction/lambda of the full (or partial) list of variables in the context-patterns above), therefore those newly introduced variables vary functorially/naturally. Note that when `E : Functor Z Cat` is a module/profunctor, then the exchange of the order of binder variables (i.e. "module-transport" vs "functor-action") must be an explicit operation:
+- `z :^n Z, e :^f E[z], z' :^n Z, f :^f z → z' ⊢ (f)_!(e) ≔ E₁(f)(e) : E[z']`
+
+And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
 
 In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a (non-cartesian) fibred functor.
 
