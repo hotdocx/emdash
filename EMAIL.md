@@ -67,7 +67,7 @@ What is MathOps? Example: How to enable the GPT-5.2 + Codex CLI coding agent to 
 
 While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative MathOps from idea, to sharing, to community peer review!
 
-MathOps is what happens after you get "desk-rejected" by POPL 2026, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities in Dubai, Mumbai, Shanghai https://www.meetup.com/dubai-ai https://www.meetup.com/mumbai-ai https://www.meetup.com/shanghai-ai ...)
+MathOps is what happens after you get "desk-rejected" by POPL 2026, with no transcript records, no appeal, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ...)
 
 Try the MathOps workspace for `emdash` here:
 https://GetPaidX.com/r/--------TODO---------
