@@ -45,10 +45,20 @@ Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (
 $E\colon B\to \mathbf{Cat}$). Fix a base object $b_0\in B$ and a fibre object $e_0\in E(b_0)$.
 We construct a Cat-valued functor that assigns to a base arrow $b_{01}:b_0\to b_1$ and a fibre object
 $e_1\in E(b_1)$ a category of ``morphisms from the transport of $e_0$ along $b_{01}$ to $e_1$ in the fibre over
-$b_1$''. In slogan form, this is a dependent arrow/comma object
+$b_1$''. In curried notation (writing $E[b]$ for $E(b)$), this is
+\[
+\mathrm{Homd}_E\;:\;\Pi b_0,\;E[b_0]^{\mathrm{op}}\to
+\bigl(\Sigma b_1,\;E[b_1]\times \mathrm{Hom}_B(b_0,b_1)^{\mathrm{op}}\bigr)\to \mathbf{Cat}.
+\]
+At fixed $(b_0,e_0)$, in slogan form this is the dependent arrow/comma object
 \[
 \mathrm{Homd}_E(e_0,(-,-))\;:\; E \times_B \bigl(\mathrm{Hom}_B(b_0,-)\bigr)^{\mathrm{op}} \longrightarrow \mathbf{Cat}.
 \]
+Its value is the fibre hom-category
+\[
+\mathrm{Homd}_E(e_0,(e_1,b_{01}))\;\coloneqq\;\mathrm{Hom}_{E(b_1)}\bigl((b_{01})!\,e_0,\;e_1\bigr),
+\]
+where $(b_{01})!\,e_0$ denotes the $E$-action/transport of $e_0$ along $b_{01}$.
 Iterating it yields a simplicial presentation of higher cells (triangles, ``surfaces'', and higher
 simplices) where ``stacking'' of $2$-cells along a $1$-cell is expressed over a chosen base edge:
 {\scriptsize
