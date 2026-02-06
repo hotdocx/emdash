@@ -18,13 +18,14 @@ We use displayed/dependent categories over a base category `B` (morally a fibrat
 
 For `b₀ ∈ B` and `e₀ ∈ E(b₀)`, the dependent hom/comma/arrow-category is the functor:
 - `Homd_E(e₀, (–,–)) : E ×_B (Hom_B(b₀, –))ᵒᵖ → Cat`
+- notations: `Homd_E : Π b₀, E[b₀]ᵒᵖ → (Σ b₁, E[b₁] × Hom_B(b₀, b₁)ᵒᵖ) → Cat`
 
 On a fibre object `e₁ ∈ E(b₁)` and a base arrow `b₀₁ : b₀ → b₁`, it returns the fibre hom-category, where `(b₀₁)! e₀` is the `E`-action/transport of `e₀` along `b₀₁`:
 - `Homd_E(e₀, (e₁ , b₀₁)) ≔ Hom_{E(b₁)}( (b₀₁)! e₀ , e₁ )`
 
 That is, this syntactic triangle/simplicial classifier `homd_cov`, reduces to `globular` semantics, but is necessary for iterating simplicially (triangles → tetrahedra → …) and for expressing non-cartesian lax ω-functors and lax ω-transfors.
 
-Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its second argument  `(Hom_B(b₀, –))ᵒᵖ`, espresses precisely the "stacking" of 2-cells along 1-cells (i.e. generalized horizontal composition of 2-cells).
+Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its second argument  `(Hom_B(b₀, –))ᵒᵖ`, espresses precisely the "stacking" of 2-cells along a 1-cell (i.e. generalization of horizontal composition of 2-cells meeting at a 0-cell).
 
     https://hotdocx.github.io/r/--------TODO-------STACKING
 
@@ -34,7 +35,7 @@ This dependent comma/arrow/hom category `homd_cov` is analoguous to the (directe
 
 The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is easily guaranteed.
 
-For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^f Z, e :^f E[z] ⊢ FF[e] : D[z]` (where binders `:^f` are functorial and `:^n` are natural). Thus `Functord` is the traditional Π-type, but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
+For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^f Z, e :^f E[z] ⊢ FF[e] : D[z]` (where binders `:^f` are functorial and `:^n` are natural). Thus `Functord` is the traditional Π-type (`Functord_(Z) E D ≡ Π_(Z) (Functor_catd E D)`), but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
 - `z :^f Z, e :^n E[z], z' :^f Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`
 
 Similarly from the usual "diagonal" components `z :^f Z, e :^n E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction `tapp1_fapp0` for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:
@@ -43,7 +44,8 @@ Similarly from the usual "diagonal" components `z :^f Z, e :^n E[z] ⊢ ϵ[e] : 
 These constructions are expressed *internally* (as stable head symbols `fdapp1_int_transfd` and `tdapp1_int_func_transfd`, etc... the discharge/abstraction/lambda of the full (or partial) list of variables in the context-patterns above), therefore those newly introduced variables vary functorially/naturally. Note that when `E : Functor Z Cat` is a module/profunctor, then the exchange of the order of binder variables (i.e. "module-transport" vs "functor-action") must be an explicit operation:
 - `z :^n Z, e :^f E[z], z' :^n Z, f :^f z → z' ⊢ (f)_!(e) ≔ E₁(f)(e) : E[z']`
 
-And because there is available a "context-extension" / total-category construction `Total_cat E : Cat` for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`)
+And because there is available a "context-extension" / total-category / Sigma-category construction `Total_cat E : Cat` (a.k.a. `Σ_(B) E : Cat`) for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`). And the usual logic fact that the Sigma/total-category `Σ b, –` is left-adjoint to context-weakening/lift `–[b]`, means that the dependent hom/arrow-category has an alternative formulation:
+- `Homd_E : Π b₀, E[b₀]ᵒᵖ → Π b₁, Hom_B(b₀, b₁)ᵒᵖ → E[b₁] → Cat[b₁]`
 
 In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a (non-cartesian) fibred functor.
 
