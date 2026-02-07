@@ -263,6 +263,42 @@ codomain compute to the target `Op_catd(Fibration_con_catd(... hom_cov ...))` sh
   and the earlier `unif_rule`-based convertibility hint: they are no longer necessary once the
   above rewrite principles exist.
 
+## Misc Rewrite Rules Added (Verbatim)
+
+These are the “misc” rewrite rules added to make the `TotalΣ_uncurry_eval` / `homd_cov_int_alt_from_alt4`
+pipeline typecheck by definitional equality (convertibility).
+
+```lambdapi
+// Functor-level associativity normalization for comp_cat_fapp0.
+rule @comp_cat_fapp0 $A $B $D (@comp_cat_fapp0 $B $C $D $F $G) $H
+  ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);
+
+// Right identity for comp_cat_fapp0.
+rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
+
+// Left identity for comp_cat_fapp0.
+rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
+
+// Contravariant (Op_func) naturality: (Op_func(hom_cov ...)) ∘ H accumulates H into the hom_cov argument.
+rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
+      (@Op_func $B Cat_cat (@hom_cov $A $W $B $F))
+      $H
+  ↪ @Op_func $C Cat_cat
+      (@hom_cov $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));
+
+// Pullback of Op_catd(Grothendieck) reduces by precomposing the base functor by Op_func(F).
+rule @Pullback_catd $A $B
+      (@Op_catd (Op_cat $B)
+        (@Fibration_cov_catd (Op_cat $B) $H))
+      $F
+  ↪ @Op_catd (Op_cat $A)
+      (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));
+
+// Double opposite of the Σ-total projection collapses back to the original projection.
+rule @Op_func _ _ (@TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E))
+  ↪ @TotalΣ_proj1_func $B $E;
+```
+
 1. Introduce `homd_cov_int_alt` as a symbol with a type expressed as a composition of existing stable-head internal functors.
 2. Do not add general computation rules yet.
 3. Add computation rules only for the Grothendieck/Grothendieck case (mirroring the existing `homd_cov` pointwise rule), ensuring they reduce to:

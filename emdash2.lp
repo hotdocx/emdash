@@ -1592,8 +1592,8 @@ rule @Op_func _ $B (@TotalΣ_proj1_func $B $E)
   ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
 // Double opposite of the Σ-total projection collapses back to the original projection.                 // (π₁)ᵒᵖᵒᵖ ↪ π₁
-rule @Op_func _ _ (@TotalΣ_proj1_func $B $E)
-  ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
+rule @Op_func _ _ (@TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E))
+  ↪ @TotalΣ_proj1_func $B $E;
 
 // Objects of TotalΣ_cat are always definitional Σ-pairs (x,u) with x:Obj(B) and u:Obj(E[x]).          // τ Obj(∫ΣE) ↪ Σ x:B, Obj(E[x])
 rule τ (Obj (@TotalΣ_cat $B $E))
@@ -2880,6 +2880,36 @@ symbol swap_homd_cov_int_alt4_section :
   τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
     → τ (Functord (Terminal_catd Z) (Functor_catd E (homd_cov_int_alt4_eval_base_catd W_Z)));
 
+// Displayed swap for Functor_catd (primitive).                                                          // fibrewise version of swap_functor_func
+constant symbol swap_functord_func :
+  Π [Z : Cat], Π [A B C : Catd Z],
+  τ (Functord
+      (Functor_catd A (Functor_catd B C))
+      (Functor_catd B (Functor_catd A C)));
+
+// More direct (type-driven) swap specialized to the alt4 family at W_Z (returns the “obvious” swapped family). // uses swap_functord_func + comp_catd_fapp0
+symbol Edge_catd_at [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
+≔ @fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z;
+
+symbol homd_cov_int_alt4_eval_base_catd2 [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
+≔ Functor_catd (Edge_catd_at W_Z) (CatCat_catd Z);
+
+symbol swap_homd_cov_int_alt4_section2 [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
+  : τ (Functord
+        (Terminal_catd Z)
+        (Functor_catd (Edge_catd_at W_Z) (Cod_catd E)))
+    → τ (Functord
+          (Terminal_catd Z)
+          (Functor_catd E (homd_cov_int_alt4_eval_base_catd2 W_Z)))
+≔ λ SS,
+    @comp_catd_fapp0
+      Z
+      (Terminal_catd Z)
+      (Functor_catd (Edge_catd_at W_Z) (Cod_catd E))
+      (Functor_catd E (homd_cov_int_alt4_eval_base_catd2 W_Z))
+      (@swap_functord_func Z (Edge_catd_at W_Z) E (CatCat_catd Z))
+      SS;
+
 // Primitive Sigma-uncurry evaluator on sections (no outer Functor object needed).                       // section(z') ↦ section(y,v)
 symbol TotalΣ_uncurry_eval [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
   (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
@@ -2895,6 +2925,18 @@ symbol TotalΣ_uncurry_eval [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
     E
     (homd_cov_int_alt4_eval_base_catd W_Z)
     (@swap_homd_cov_int_alt4_section Z E W_Z SS);
+
+// Alternative uncurry that keeps the pullback codomain explicit (no forced identification with the Groth/Op form). // migration-friendly
+symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
+  (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
+     τ (Functord
+          (Terminal_catd (TotalΣ_cat E))
+          (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 W_Z) (TotalΣ_proj1_func E)))
+≔ @Sigma_uncurry_section_funcd
+    Z
+    E
+    (homd_cov_int_alt4_eval_base_catd2 W_Z)
+    (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
 
 // Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
 rule @fdapp0
