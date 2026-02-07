@@ -2826,38 +2826,6 @@ symbol reindex_section_funcd [A B : Cat] (F : τ (Functor A B)) [D : Catd B]
     (@Pullback_funcd A B F (Terminal_catd B) D SS)
     (@id_funcd A (Terminal_catd A));
 
-// Pointwise evaluator over TotalΣ: apply a functor-valued object to the second projection v.           // (y,v,F) ↦ (f ↦ F(f)(v))
-symbol homd_cov_int_alt4_eval_funcd [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
-  : τ (Functord
-      (Pullback_catd
-        (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z)
-        (TotalΣ_proj1_func E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
-
-rule @fdapp0
-      (@TotalΣ_cat $Z $E)
-      (Pullback_catd
-        (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
-        (TotalΣ_proj1_func $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt4_eval_funcd $Z $E $W_Z)
-      (Struct_sigma $y $v)
-      $FF
-  ↪ @comp_cat_fapp0
-        (Op_cat (Hom_cat $Z $W_Z $y))
-        (Functor_cat (Fibre_cat $E $y) Cat_cat)
-        Cat_cat
-        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
-        $FF;
-
 symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z))
@@ -2867,25 +2835,39 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
         (Fibration_con_catd
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
-              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-≔ @comp_catd_fapp0
-    (@TotalΣ_cat Z E)
-    (Terminal_catd (@TotalΣ_cat Z E))
-    (Pullback_catd
-      (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z)
-      (TotalΣ_proj1_func E))
-    (Op_catd
-      (Fibration_con_catd
-        (comp_cat_fapp0 Fib_func
-          (comp_cat_fapp0 op
-            (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E))))))
-    (@homd_cov_int_alt4_eval_funcd Z E W_Z)
-    (@reindex_section_funcd
-      (@TotalΣ_cat Z E)
-      Z
-      (TotalΣ_proj1_func E)
-      (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z)
-      (@homd_cov_int_alt4_sec Z E W_Z W));
+              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
+
+// Object-action of the alt4-derived wrapper (inlined; no extra evaluator head).                        // (y,v) ↦ (f ↦ (sec_y)(f)(v))
+rule @fdapp0
+      (@TotalΣ_cat $Z $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
+      (@homd_cov_int_alt_from_alt4 $Z $E $W_Z $W)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @comp_cat_fapp0
+        (Op_cat (Hom_cat $Z $W_Z $y))
+        (Functor_cat (Fibre_cat $E $y) Cat_cat)
+        Cat_cat
+        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
+        (@fdapp0
+          (@TotalΣ_cat $Z $E)
+          (Terminal_catd (TotalΣ_cat $E))
+          (Pullback_catd
+            (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
+            (TotalΣ_proj1_func $E))
+          (@reindex_section_funcd
+            (@TotalΣ_cat $Z $E)
+            $Z
+            (TotalΣ_proj1_func $E)
+            (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
+            (@homd_cov_int_alt4_sec $Z $E $W_Z $W))
+          (Struct_sigma $y $v)
+          Terminal_obj);
 
 // Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
 rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;

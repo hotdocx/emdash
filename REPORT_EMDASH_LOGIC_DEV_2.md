@@ -514,18 +514,16 @@ Current implementation approach in `emdash2.lp`:
   to the Grothendieck construction.
 - Define a helper `homd_cov_int_alt4_sec` that extracts, from `homd_cov_int_alt4` at `(W_Z,W)`,
   the induced section over `z' : Z`.
-- Introduce a bridge combinator
-  `homd_cov_int_alt4_to_totalsigma`:
-  from a section over `Z`, produce the section over `TotalΣ_cat E` expected by the binder wrapper.
-- Give the object-action rule on this bridge combinator:
-  evaluate section at `y`, then postcompose by `eval0_func v`.
-- Define `homd_cov_int_alt_from_alt4` as a **δ-abbreviation**:
-  `homd_cov_int_alt_from_alt4 ... ≔ homd_cov_int_alt4_to_totalsigma ... (homd_cov_int_alt4_sec ...)`.
+- Define `reindex_section_funcd` compositionally (from `Pullback_funcd`, `comp_catd_fapp0`, `id_funcd`)
+  so sections over `Z` can be pulled back along `TotalΣ_proj1_func`.
+- Keep `homd_cov_int_alt_from_alt4` as a stable wrapper head and give a direct `fdapp0` computation rule
+  that inlines the two-stage evaluation:
+  section-at-`y` (via reindexing) then postcompose by `eval0_func v`.
 - Keep `homd_cov_int_alt` as the legacy surface head, with rewrite:
   `homd_cov_int_alt ... ↪ homd_cov_int_alt_from_alt4 ...`.
 
-This satisfies the requirement that the relation is not only an `fdapp0` behavior rule: the wrapper
-is now directly defined from the internal `alt4` pipeline.
+This removes the previous problematic dependency on a separate evaluator head
+(`homd_cov_int_alt4_eval_funcd`) that only had an `fdapp0` rule.
 
 Target shape (blueprint; names adjusted to the emdash2 kernel):
 
@@ -550,10 +548,11 @@ Target principle (from this report):
 
 Important refinement (from later review):
 
-- If we keep a separate warm-up symbol `TotalΣ_hom_func_alt`, it should be a **definitional abbreviation**
-  (a `symbol ... ≔ ...`) rather than a “folding rewrite rule” that makes `TotalΣ_hom_func_alt` a stable head.
-  The stable-head discipline is still useful for big categorical constructors, but here the goal is precisely
-  to expose the specialization/evaluation shape so it computes as the underlying pipeline computes.
+- Two valid stagings exist for `TotalΣ_hom_func_alt`:
+  - definitional abbreviation (more direct when no forward-reference/circularity constraints appear),
+  - or declared stable head with a direct computation rule to the intended specialization/evaluation shape.
+- Current implementation uses the second staging (stable head + direct rewrite), while still ensuring
+  normalization proceeds through `homd_cov_int_alt` and then `homd_cov_int_alt_from_alt4`.
 
 Engineering allowance:
 
