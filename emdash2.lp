@@ -2806,27 +2806,6 @@ rule @fdapp0
       (@fapp0 $A $B $F $x)
       Terminal_obj;
 
-// Map a section through a displayed functor over the same base (generic).                              // GG∘SS at section level
-symbol section_map_funcd : Π [A : Cat], Π [D C : Catd A],
-  Π (GG : τ (Functord D C)),
-  Π (SS : τ (Functord (Terminal_catd A) D)),
-  τ (Functord (Terminal_catd A) C);
-
-rule @fdapp0
-      $A
-      (Terminal_catd $A)
-      $C
-      (@section_map_funcd $A $D $C $GG $SS)
-      $x
-      Terminal_obj
-  ↪ @fdapp0
-      $A
-      $D
-      $C
-      $GG
-      $x
-      (@fdapp0 $A (Terminal_catd $A) $D $SS $x Terminal_obj);
-
 // Pointwise evaluator over TotalΣ: apply a functor-valued object to the second projection v.           // (y,v,F) ↦ (f ↦ F(f)(v))
 symbol homd_cov_int_alt4_eval_funcd [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
   : τ (Functord
@@ -2869,8 +2848,9 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-≔ @section_map_funcd
+≔ @comp_catd_fapp0
     (@TotalΣ_cat Z E)
+    (Terminal_catd (@TotalΣ_cat Z E))
     (Pullback_catd
       (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z)
       (TotalΣ_proj1_func E))
@@ -2900,7 +2880,7 @@ rule @TotalΣ_hom_func_alt $Z $E $x $u $y $v
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
               (@hom_cov $Z $x (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt_from_alt4 $Z $E $x $u)
+      (@homd_cov_int_alt $Z $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 

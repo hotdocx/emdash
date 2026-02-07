@@ -560,6 +560,14 @@ Engineering allowance:
 - keep (or reintroduce) a Grothendieck-specific computation rule for `TotalΣ_hom_func (Fibration_cov_catd M) ...` as a
   **confluent shortcut**, once joinability with the pipeline is visible (via `assert` sanity equalities).
 
+Practical staging currently used in `emdash2.lp`:
+
+- `TotalΣ_hom_func_alt` is kept as a declared stable head.
+- A direct rewrite computes it via `homd_cov_int_alt_from_alt4`:
+  evaluate the derived wrapper at `(y,v)` and `Terminal_obj`.
+- This lets the end-goal head normalize through the alt4 path now, while deferring the full
+  equivalence analysis between legacy wrapper presentations.
+
 ### Phase 6: connect `TotalΣ_hom_func` to `homd_cov_int_alt`
 
 Define (by rewrite or by a definitional abbreviation, depending on subject-reduction constraints) that:
