@@ -2197,6 +2197,12 @@ rule fapp0 (Pi_func $Z) $E ↪ Functord_cat (Terminal_catd $Z) $E;
 assert (Z : Cat) (E : Catd Z) ⊢
   fapp0 (Pi_func Z) E ≡ Functord_cat (Terminal_catd Z) E;
 
+// Generic swap/currying combinator (logic primitive): (A→(B→C)) → (B→(A→C)).                          // future internal pipeline helper
+constant symbol swap_functor_func : Π [A B C : Cat],
+  τ (Functor
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat B (Functor_cat A C)));
+
 // -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
 // -------------------------------------------------------------------------------------------------
@@ -2814,17 +2820,56 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
     - and then evaluating the resulting functor at v : Obj(E[y]) by postcomposition with eval0_func(v).
 */
 
-// Reindex a section along a base functor (generic).                                                     // SS over B  ↦  F^*SS over A
-symbol reindex_section_funcd [A B : Cat] (F : τ (Functor A B)) [D : Catd B]
-  (SS : τ (Functord (Terminal_catd B) D))
-  : τ (Functord (Terminal_catd A) (Pullback_catd D F))
-≔ @comp_catd_fapp0
-    A
-    (Terminal_catd A)
-    (Pullback_catd (Terminal_catd B) F)
-    (Pullback_catd D F)
-    (@Pullback_funcd A B F (Terminal_catd B) D SS)
-    (@id_funcd A (Terminal_catd A));
+// Primitive Sigma-uncurry evaluator (direct section-level bridge).                                      // section(z') ↦ section(y,v)
+constant symbol TotalΣ_uncurry_eval_funcd : Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
+  τ (Functor
+      (Functord_cat
+        (Terminal_catd Z)
+        (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+      (Functord_cat
+        (Terminal_catd (TotalΣ_cat E))
+        (Op_catd
+          (Fibration_con_catd
+            (comp_cat_fapp0 Fib_func
+              (comp_cat_fapp0 op
+                (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E))))))));
+
+// Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
+rule @fdapp0
+      (@TotalΣ_cat $Z $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
+      (@fapp0
+        (Functord_cat
+          (Terminal_catd $Z)
+          (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z))
+        (Functord_cat
+          (Terminal_catd (TotalΣ_cat $E))
+          (Op_catd
+            (Fibration_con_catd
+              (comp_cat_fapp0 Fib_func
+                (comp_cat_fapp0 op
+                  (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E)))))))
+        (@TotalΣ_uncurry_eval_funcd $Z $E $W_Z)
+        $SS)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @comp_cat_fapp0
+        (Op_cat (Hom_cat $Z $W_Z $y))
+        (Functor_cat (Fibre_cat $E $y) Cat_cat)
+        Cat_cat
+        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
+        (@fdapp0
+          $Z
+          (Terminal_catd $Z)
+          (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
+          $SS
+          $y
+          Terminal_obj);
 
 symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
@@ -2835,39 +2880,20 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
         (Fibration_con_catd
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
-              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
-
-// Object-action of the alt4-derived wrapper (inlined; no extra evaluator head).                        // (y,v) ↦ (f ↦ (sec_y)(f)(v))
-rule @fdapp0
-      (@TotalΣ_cat $Z $E)
-      (Terminal_catd (TotalΣ_cat $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt_from_alt4 $Z $E $W_Z $W)
-      (Struct_sigma $y $v)
-      Terminal_obj
-  ↪ @comp_cat_fapp0
-        (Op_cat (Hom_cat $Z $W_Z $y))
-        (Functor_cat (Fibre_cat $E $y) Cat_cat)
-        Cat_cat
-        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
-        (@fdapp0
-          (@TotalΣ_cat $Z $E)
-          (Terminal_catd (TotalΣ_cat $E))
-          (Pullback_catd
-            (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
-            (TotalΣ_proj1_func $E))
-          (@reindex_section_funcd
-            (@TotalΣ_cat $Z $E)
-            $Z
-            (TotalΣ_proj1_func $E)
-            (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
-            (@homd_cov_int_alt4_sec $Z $E $W_Z $W))
-          (Struct_sigma $y $v)
-          Terminal_obj);
+              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
+≔ @fapp0
+      (Functord_cat
+        (Terminal_catd Z)
+        (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+      (Functord_cat
+        (Terminal_catd (TotalΣ_cat E))
+        (Op_catd
+          (Fibration_con_catd
+            (comp_cat_fapp0 Fib_func
+              (comp_cat_fapp0 op
+                (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
+      (@TotalΣ_uncurry_eval_funcd Z E W_Z)
+      (@homd_cov_int_alt4_sec Z E W_Z W);
 
 // Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
 rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;

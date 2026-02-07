@@ -591,6 +591,40 @@ Interpretation:
 - This isolates the “missing universal-property infrastructure” to one clear primitive (`Pullback_funcd`),
   rather than encoding reindexing behavior directly inside `reindex_section_funcd`.
 
+## Update (2026-02-07, latest): primitive Sigma-uncurry + swap and definitional bridge
+
+Clarification adopted:
+
+- The needed “Sigma-uncurry of sections” and nested-functor swap are treated as **logic primitives** for now
+  (declared symbols), not as derived constructions from existing infrastructure.
+
+### New primitive layer (implemented/staged)
+
+1. Add a generic swap primitive (currying symmetry):
+   - `swap_functor_func : (A ⟶ (B ⟶ C)) ⟶ (B ⟶ (A ⟶ C))`.
+2. Add a direct Sigma-uncurry primitive on sections:
+   - `TotalΣ_uncurry_eval_funcd` mapping
+     `sections over Z of z' ↦ Functor_cat(Hom(z,z')^op, Functor_cat(E[z'],Cat))`
+     directly to sections over `TotalΣ_cat E` of the target displayed family.
+3. Keep its essential object-action computation rule (`fdapp0`), so normalization proceeds
+   through compositional heads.
+
+### Main architectural correction
+
+- `homd_cov_int_alt_from_alt4` is no longer encoded only by an `fdapp0` rewrite.
+- It is redefined as a **definitional abbreviation (`≔`)** by direct application:
+  - `homd_cov_int_alt_from_alt4 ... ≔ fapp0 (TotalΣ_uncurry_eval_funcd ...) (homd_cov_int_alt4_sec ...)`.
+- This avoids routing the bridge through `reindex_section_funcd` / `Pullback_catd` / an extra auxiliary bridge symbol.
+
+### Updated task list (next implementation slice)
+
+1. Keep `homd_cov_int_alt_from_alt4` as the canonical definitional bridge from `alt4`.
+2. Keep `homd_cov_int_alt` as the legacy surface head rewriting to this bridge.
+3. Optionally add a direct relation/sanity between `homd_cov_int_alt` and the older `...from_alt`
+   via the same Sigma-uncurry principle once missing equalities are available.
+4. Preserve `TotalΣ_hom_func_alt` normalization through this path and keep the Grothendieck shortcut
+   only as a confluent optimization.
+
 ### Phase 6: connect `TotalΣ_hom_func` to `homd_cov_int_alt`
 
 Define (by rewrite or by a definitional abbreviation, depending on subject-reduction constraints) that:
