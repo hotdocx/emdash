@@ -1121,23 +1121,6 @@ assert (B : Cat) (E D : Catd B) ⊢
   fapp0 (fapp0 (Functor_catd_func B) E) D ≡ Functor_catd E D;
 
 /*
-  Functor_catd_func_cov (covariant-domain variant)
-
-  For some internal pipelines it is more convenient to have the domain be `Catd_cat B` (rather than
-  `Op_cat (Catd_cat B)`) so we can compose directly in `Cat_cat`.
-
-  Object-action is the same currying: Functor_catd_func_cov(B)(E)(D) ↪ Functor_catd(E,D).
-*/
-constant symbol Functor_catd_func_cov :
-  Π (B : Cat),
-  τ (Functor (Catd_cat B) (Functor_cat (Catd_cat B) (Catd_cat B)));
-
-rule @fapp0 _ _ (@Functor_catd_func_cov $B) $E ↪ @Functor_catd_fapp0_func $B $E;
-
-assert (B : Cat) (E D : Catd B) ⊢
-  fapp0 (fapp0 (Functor_catd_func_cov B) E) D ≡ Functor_catd E D;
-
-/*
   Univalence bridge (interface only; moved here because it depends on Fibre_cat)
 
   Long-term goal: “equivalences in C ARE paths in Obj C”, as computationally/definitionally as possible.
@@ -2750,36 +2733,42 @@ symbol Edge_catd_fam [Z : Cat]
        (@op_val_func Z)
        (@hom_cov_int Z Z (@id_func Z)));
 
-// Fix the right argument of Functor_catd at D, as a functor object on the left argument.              // E ↦ Functor_catd(E,D)
+// Fix the right argument of Functor_catd at D, as a functor object on the (contravariant) left argument. // E ↦ Functor_catd(E,D), with E in Op_cat(Catd_cat Z)
 symbol Functor_catd_fixR_func [Z : Cat] (D : Catd Z)
-  : τ (Functor (Catd_cat Z) (Catd_cat Z))
+  : τ (Functor (Op_cat (Catd_cat Z)) (Catd_cat Z))
 ≔ @comp_cat_fapp0
-     (Catd_cat Z)
+     (Op_cat (Catd_cat Z))
      (Functor_cat (Catd_cat Z) (Catd_cat Z))
      (Catd_cat Z)
      (@eval0_func (Catd_cat Z) (Catd_cat Z) D)
-     (@Functor_catd_func_cov Z);
+     (@Functor_catd_func Z);
 
-// Family z ↦ Functor_catd(Edge_catd(z), Cod_catd(E)), as a functor object Op(Z) ⟶ Catd_cat(Z).        // z ↦ (z' ↦ Hom(z,z')^op → (E[z']→Cat))
+// Edge family in the contravariant domain expected by Functor_catd_fixR_func.                          // Op_func turns Op(Z)→Catd into Z→Op(Catd)
+symbol Edge_catd_fam_op [Z : Cat]
+  : τ (Functor Z (Op_cat (Catd_cat Z)))
+≔ @Op_func (Op_cat Z) (Catd_cat Z) (Edge_catd_fam);
+
+// Family z ↦ Functor_catd(Edge_catd(z), Cod_catd(E)), as a functor object Z ⟶ Catd_cat(Z).             // z ↦ (z' ↦ Hom(z,z')^op → (E[z']→Cat))
 symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
-  : τ (Functor (Op_cat Z) (Catd_cat Z))
+  : τ (Functor Z (Catd_cat Z))
 ≔ let Cod : Catd Z ≔ Cod_catd E in
    @comp_cat_fapp0
-     (Op_cat Z)
-     (Catd_cat Z)
+     Z
+     (Op_cat (Catd_cat Z))
      (Catd_cat Z)
      (Functor_catd_fixR_func Cod)
-     (Edge_catd_fam);
+     (Edge_catd_fam_op);
 
 // Base functor: z ↦ sections over Z of the family above.                                               // base(z) = Π_{z':Z} Fam(z)(z')
 symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
   : τ (Functor (Op_cat Z) Cat_cat)
-≔ @comp_cat_fapp0
-     (Op_cat Z)
-     (Catd_cat Z)
-     Cat_cat
-     (@Pi_func Z)
-     (homd_cov_int_alt4_fam E);
+≔ @Op_func Z Cat_cat
+     (@comp_cat_fapp0
+       Z
+       (Catd_cat Z)
+       Cat_cat
+       (@Pi_func Z)
+       (homd_cov_int_alt4_fam E));
 
 // Fully internal packaging: Op_catd(E) → ∫(homd_cov_int_alt4_base(E)).                                 // Op_catd(E) ⟶_OpZ ∫(base)
 constant symbol homd_cov_int_alt4 : Π [Z : Cat], Π (E : Catd Z),
