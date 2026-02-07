@@ -2966,7 +2966,10 @@ rule @fdapp0
 // New, more direct derived section over TotalΣ(E), keeping the pullback codomain explicit.             // do not force legacy homd target head
 symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
-  (W : τ (FibreObj E W_Z))
+  (W : τ (FibreObj E W_Z)):
+  τ (Functord 
+        (Terminal_catd (@TotalΣ_cat Z E)) 
+        (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (TotalΣ_proj1_func E)))
 ≔ @TotalΣ_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
 // Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
