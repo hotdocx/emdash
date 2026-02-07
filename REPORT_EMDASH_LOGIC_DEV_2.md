@@ -371,3 +371,81 @@ This plan gives:
   - computational in the Grothendieck subcase immediately,
   - extensible to the general semantic `Catd` case once `homd_cov_int_alt` and internal currying tools mature,
 - a clean migration path toward the “always-Sigma `Total_cat`” future without forcing a single disruptive refactor step.
+
+## Update (2026-02-07): `homd_cov_int_alt` vs “fully internal” and interaction with `TotalΣ_hom_func`
+
+After implementing Phases 1–4 and adding a first version of:
+
+- `homd_cov_int_alt : Π W_Z W, sections over TotalΣ_cat(E) ...`,
+
+we identified a useful refinement of the plan, and a key overlap risk.
+
+### 1) Warm-up: connect homs via `TotalΣ_hom_func`, not by rewriting `Hom_cat` directly
+
+The architectural hook for hom computation is the stable head:
+
+- `TotalΣ_hom_func E x u y v : (Hom_Z(x,y))ᵒᵖ ⟶ Cat`.
+
+If we want “homs in `TotalΣ_cat` reduce to something involving `homd_cov`”, the right place to plug
+the computation is a rewrite/definition for `TotalΣ_hom_func`, not the `Hom_cat (TotalΣ_cat ...)` rule.
+
+### 2) Overlap/joinability risk with the Grothendieck computation rule
+
+`TotalΣ_hom_func` already has a specialized computation rule for the Grothendieck probe case:
+
+- `TotalΣ_hom_func (Fibration_cov_catd M) ... ↪ comp_hom_con_fib_cov ...`.
+
+Adding a general rewrite
+
+- `TotalΣ_hom_func E ... ↪ (fdapp0 (homd_cov_int_alt ...) (Struct_sigma y v) Terminal_obj)` (schematically),
+
+would overlap when `E = Fibration_cov_catd M`. Since `homd_cov_int_alt` is currently abstract in that case,
+the overlap would likely not be joinable yet (and risks breaking confluence/robustness).
+
+Therefore, the safe incremental approach is:
+
+- keep the specialized Grothendieck rule as the computation engine,
+- add a *separate* derived symbol (e.g. `TotalΣ_hom_func_from_alt`) or an `assert`-level sanity equality
+  expressing the intended equation in terms of `homd_cov_int_alt`, until the join can be made computational.
+
+### 3) “Fully internal” `homd_cov_int_alt2`: recommended staging
+
+The current `homd_cov_int_alt` still has external Lambdapi binders:
+
+```lambdapi
+Π (W_Z : τ (Obj Z)),
+Π (W : τ (FibreObj E W_Z)),
+```
+
+From a global “internalization” perspective, we want those to be supplied by `fdapp0` application
+of an internal object (as in the style of `homd_cov_int`).
+
+Recommendation:
+
+1. Introduce `homd_cov_int_alt2` as a stable head that is *fully internal* (no explicit `W_Z`, `W` binders),
+   even if it requires 1–2 intermediate stable-head helpers (analogous to `homd_cov_int_base`).
+2. Derive the current convenient binder form `homd_cov_int_alt` from `homd_cov_int_alt2`
+   (definition or fold rule), so the external binder variant becomes a wrapper/view.
+3. Only later attempt to express `homd_cov_int_alt2` purely from generic internal combinators
+   (e.g. using `Functor_catd_func`/`Pi_func`/evaluation functors) once those are available and stable.
+
+### 4) Relation to `Functor_catd` / `Transf_catd` (Option A)
+
+The “fully internal” blueprint you sketched uses pointwise functor-category families over `Z` and their
+internal combinators. Independently, `REPORT_EMDASH_LOGIC_DEV.md` proposes adding:
+
+- `Functor_catd`, `Transf_catd`, and `Fibre_transf` (fibrewise-only constructors),
+
+to support “partial discharge” surface syntax.
+
+These additions remain orthogonal and useful, and are a natural prerequisite for later internalization
+work; they do not themselves require committing to “sections = displayed functors” definitional equalities.
+
+### 5) Updated next-step order (implementation)
+
+Next implementation turn should proceed in this order:
+
+1. Implement Option A (`Functor_catd`, `Transf_catd`, `Fibre_transf`) as fibrewise constructors (per `REPORT_EMDASH_LOGIC_DEV.md`).
+2. Add `homd_cov_int_alt2` (fully internal; stable head; no computation rules yet), plus a wrapper/derivation back to `homd_cov_int_alt`.
+3. Add a non-overlapping warm-up artifact connecting `TotalΣ_hom_func` to the `homd_cov_int_alt*` story
+   (separate symbol or `assert`), without weakening the existing Grothendieck computation rule.
