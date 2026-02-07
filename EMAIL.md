@@ -14,7 +14,7 @@ And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with C
 
 ## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams
 
-We use displayed/dependent categories over a base category `B` (morally a fibration `E : B → Cat`, i.e. a displayed category over `B`).
+We use displayed/dependent categories over a base category `B` (i.e. a fibration `E : B → Cat`, or a more general isofibration `E → B` without transport/arrow-action).
 
 For `b₀ ∈ B` and `e₀ ∈ E(b₀)`, the dependent hom/comma/arrow-category is the functor:
 - `Homd_E(e₀, (–,–)) : E ×_B (Hom_B(b₀, –))ᵒᵖ → Cat`
@@ -69,7 +69,7 @@ What is MathOps? Example: How to enable the GPT-5.2 + Codex CLI coding agent to 
 
 While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative MathOps from idea, to sharing, to community peer review!
 
-MathOps is what happens after you get "desk-rejected" by POPL 2026, with no transcript records, no appeal, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ...)
+MathOps is what happens after you get "desk-rejected" by POPL 2026, with no transcript records, no appeal, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities of 20,000+ developers in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ...)
 
 Try the MathOps workspace for `emdash` here:
 https://GetPaidX.com/r/--------TODO---------
