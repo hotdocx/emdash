@@ -47,12 +47,29 @@ symbol TotalΣ_cat [B : Cat] (E : Catd B) : Cat;
 injective symbol TotalΣ_proj1_func [B : Cat] (E : Catd B) : τ (Functor (TotalΣ_cat E) B);
 ```
 
+### Normalization on opposites (recommended; matches `Total_cat`)
+
+`emdash2.lp` already normalizes totals-of-opposites *outwards* for `Total_cat`:
+
+```lambdapi
+rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
+```
+
+For `TotalΣ_cat` we should mirror the same convention to avoid later “variance acrobatics” duplications:
+
+```lambdapi
+rule @TotalΣ_cat _ (@Op_catd $B $E) ↪ Op_cat (@TotalΣ_cat $B $E);
+```
+
+This is not logically required for Phase 1, but it is a cheap normalization rule that tends to reduce
+the number of distinct normal forms we need to reason about.
+
 ### Object computation rule (always)
 
 For *every* displayed category `E : Catd B`, objects of `TotalΣ_cat E` are definitional Sigma pairs:
 
 ```lambdapi
-rule τ (Obj (TotalΣ_cat $E))
+rule τ (Obj (@TotalΣ_cat $B $E))
   ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
 ```
 
@@ -101,7 +118,7 @@ symbol TotalΣ_hom_func : Π [Z : Cat],
 Then define hom-categories of `TotalΣ_cat` in terms of Grothendieck totalization of this functor:
 
 ```lambdapi
-rule Hom_cat (TotalΣ_cat $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+rule Hom_cat (@TotalΣ_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat (Fibration_cov_catd (TotalΣ_hom_func $E $x $u $y $v)));
 ```
 
@@ -241,6 +258,26 @@ In practice, this suggests:
   - switching `Total_cat` object computation to always-Sigma,
   - replacing legacy collapses (`Total_cat (Lift_catd A) ↪ A`) by derived equivalences or by additional normalization rules that make the two normal forms join.
 
+### Note on “Sigma with unit” normalization
+
+If/when we later want `Total_cat` itself to become always-Sigma on objects, we will need joinability between:
+
+- legacy collapses like `Total_cat (Lift_catd A) ↪ A`, and
+- the always-Sigma normal form `Σ (_:Obj(1)), Obj(A)`.
+
+The user intent is to add rewrite rules such as `Product_cat C Terminal_cat ↪ C` (and similar), and to
+add other rules to normalize away redundant “unit factors”.
+
+Engineering recommendation:
+
+- First add *category-level* normalizations (`Product_cat _ Terminal_cat ↪ _`, etc.) and any *targeted*
+  `Obj`/`Hom_cat` shortcuts needed for those exact shapes.
+- Delay global eta/cancellation rules on decoded Sigma (`τΣ_`) unless they can be scoped to a stable head
+  (to avoid nontermination).
+
+This keeps the rewrite system closer to the existing emdash2 style: normalize by stable-head constructors,
+not by generic “algebraic simplification” on decoded types.
+
 ## Proposed incremental implementation plan
 
 ### Phase 0: baseline safety checks
@@ -255,6 +292,7 @@ In practice, this suggests:
 Add:
 
 - `TotalΣ_cat`, `TotalΣ_proj1_func`
+- (recommended) outward normalization on opposites for `TotalΣ_cat`
 - object Sigma computation rule
 - projection on objects computation rule
 
@@ -325,4 +363,3 @@ This plan gives:
   - computational in the Grothendieck subcase immediately,
   - extensible to the general semantic `Catd` case once `homd_cov_int_alt` and internal currying tools mature,
 - a clean migration path toward the “always-Sigma `Total_cat`” future without forcing a single disruptive refactor step.
-
