@@ -2820,19 +2820,64 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
     - and then evaluating the resulting functor at v : Obj(E[y]) by postcomposition with eval0_func(v).
 */
 
-// Primitive Sigma-uncurry evaluator (direct section-level bridge).                                      // section(z') ↦ section(y,v)
-constant symbol TotalΣ_uncurry_eval_funcd : Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
-  τ (Functor
-      (Functord_cat
-        (Terminal_catd Z)
-        (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
-      (Functord_cat
-        (Terminal_catd (TotalΣ_cat E))
-        (Op_catd
-          (Fibration_con_catd
-            (comp_cat_fapp0 Fib_func
-              (comp_cat_fapp0 op
-                (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E))))))));
+// Generic Sigma-uncurry on sections (primitive): section of Functor_catd(E,D) → section over TotalΣ(E). // Π z,e. D[z]  ≈  Π (z,e). pullback D
+symbol Sigma_uncurry_section_funcd :
+  Π [Z : Cat], Π [E D : Catd Z],
+  τ (Functord (Terminal_catd Z) (Functor_catd E D))
+    → τ (Functord
+          (Terminal_catd (TotalΣ_cat E))
+          (Pullback_catd D (TotalΣ_proj1_func E)));
+
+// Base displayed family used in the alt4 uncurry pipeline (over Z).                                     // z ↦ Functor_cat(Hom(W_Z,z)^op,Cat)
+symbol homd_cov_int_alt4_eval_base_catd [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
+≔ @Op_catd (Op_cat Z)
+    (@Fibration_con_catd Z
+      (comp_cat_fapp0 Fib_func
+        (comp_cat_fapp0 op
+          (@hom_cov Z W_Z Z (@id_func Z)))));
+
+// Pointwise swap of section orientation for alt4 (primitive bridge, driven by swap_functor_func).       // (Edge→(E→Cat)) ↦ (E→(Edge→Cat))
+symbol swap_homd_cov_int_alt4_section :
+  Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
+  τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+    → τ (Functord (Terminal_catd Z) (Functor_catd E (homd_cov_int_alt4_eval_base_catd W_Z)));
+
+// Bridge from pullback-codomain sections to the existing homd target codomain on TotalΣ(E).            // aligns generic Sigma-uncurry output with current target head
+symbol pullback_homd_cov_int_alt4_to_target_section :
+  Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
+  τ (Functord
+      (Terminal_catd (TotalΣ_cat E))
+      (Pullback_catd (homd_cov_int_alt4_eval_base_catd W_Z) (TotalΣ_proj1_func E)))
+    → τ (Functord
+          (Terminal_catd (TotalΣ_cat E))
+          (Op_catd
+            (Fibration_con_catd
+              (comp_cat_fapp0 Fib_func
+                (comp_cat_fapp0 op
+                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
+
+// Primitive Sigma-uncurry evaluator on sections (no outer Functor object needed).                       // section(z') ↦ section(y,v)
+symbol TotalΣ_uncurry_eval : Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
+  τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+    → τ (Functord
+          (Terminal_catd (TotalΣ_cat E))
+          (Op_catd
+            (Fibration_con_catd
+              (comp_cat_fapp0 Fib_func
+                (comp_cat_fapp0 op
+                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
+
+// Derivation: TotalΣ_uncurry_eval is assembled from swap + generic Sigma-uncurry + pullback bridge.     // direct object-level bridge
+rule @TotalΣ_uncurry_eval $Z $E $W_Z $SS
+  ↪ @pullback_homd_cov_int_alt4_to_target_section
+      $Z
+      $E
+      $W_Z
+      (@Sigma_uncurry_section_funcd
+        $Z
+        $E
+        (homd_cov_int_alt4_eval_base_catd $W_Z)
+        (@swap_homd_cov_int_alt4_section $Z $E $W_Z $SS));
 
 // Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
 rule @fdapp0
@@ -2843,19 +2888,7 @@ rule @fdapp0
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
               (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@fapp0
-        (Functord_cat
-          (Terminal_catd $Z)
-          (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z))
-        (Functord_cat
-          (Terminal_catd (TotalΣ_cat $E))
-          (Op_catd
-            (Fibration_con_catd
-              (comp_cat_fapp0 Fib_func
-                (comp_cat_fapp0 op
-                  (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E)))))))
-        (@TotalΣ_uncurry_eval_funcd $Z $E $W_Z)
-        $SS)
+      (@TotalΣ_uncurry_eval $Z $E $W_Z $SS)
       (Struct_sigma $y $v)
       Terminal_obj
   ↪ @comp_cat_fapp0
@@ -2881,19 +2914,7 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-≔ @fapp0
-      (Functord_cat
-        (Terminal_catd Z)
-        (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
-      (Functord_cat
-        (Terminal_catd (TotalΣ_cat E))
-        (Op_catd
-          (Fibration_con_catd
-            (comp_cat_fapp0 Fib_func
-              (comp_cat_fapp0 op
-                (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-      (@TotalΣ_uncurry_eval_funcd Z E W_Z)
-      (@homd_cov_int_alt4_sec Z E W_Z W);
+≔ @TotalΣ_uncurry_eval Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
 // Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
 rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;

@@ -603,7 +603,7 @@ Clarification adopted:
 1. Add a generic swap primitive (currying symmetry):
    - `swap_functor_func : (A ⟶ (B ⟶ C)) ⟶ (B ⟶ (A ⟶ C))`.
 2. Add a direct Sigma-uncurry primitive on sections:
-   - `TotalΣ_uncurry_eval_funcd` mapping
+   - `TotalΣ_uncurry_eval` mapping
      `sections over Z of z' ↦ Functor_cat(Hom(z,z')^op, Functor_cat(E[z'],Cat))`
      directly to sections over `TotalΣ_cat E` of the target displayed family.
 3. Keep its essential object-action computation rule (`fdapp0`), so normalization proceeds
@@ -613,7 +613,7 @@ Clarification adopted:
 
 - `homd_cov_int_alt_from_alt4` is no longer encoded only by an `fdapp0` rewrite.
 - It is redefined as a **definitional abbreviation (`≔`)** by direct application:
-  - `homd_cov_int_alt_from_alt4 ... ≔ fapp0 (TotalΣ_uncurry_eval_funcd ...) (homd_cov_int_alt4_sec ...)`.
+  - `homd_cov_int_alt_from_alt4 ... ≔ TotalΣ_uncurry_eval ... (homd_cov_int_alt4_sec ...)`.
 - This avoids routing the bridge through `reindex_section_funcd` / `Pullback_catd` / an extra auxiliary bridge symbol.
 
 ### Updated task list (next implementation slice)
