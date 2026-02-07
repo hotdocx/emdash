@@ -563,10 +563,17 @@ Engineering allowance:
 Practical staging currently used in `emdash2.lp`:
 
 - `TotalΣ_hom_func_alt` is kept as a declared stable head.
-- A direct rewrite computes it via `homd_cov_int_alt_from_alt4`:
-  evaluate the derived wrapper at `(y,v)` and `Terminal_obj`.
+- A direct rewrite computes it via `homd_cov_int_alt` at `(y,v)` and `Terminal_obj`.
+  Since `homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4`, this still normalizes through the alt4 path,
+  while deferring explicit wrapper-equivalence bookkeeping.
 - This lets the end-goal head normalize through the alt4 path now, while deferring the full
   equivalence analysis between legacy wrapper presentations.
+
+Refinement applied:
+
+- The temporary helper `section_map_funcd` was removed.
+- Its role is now handled directly by the generic displayed composition operator `comp_catd_fapp0`
+  in the definition of `homd_cov_int_alt_from_alt4`.
 
 ### Phase 6: connect `TotalΣ_hom_func` to `homd_cov_int_alt`
 
