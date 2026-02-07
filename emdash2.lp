@@ -2337,75 +2337,17 @@ symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
             (comp_cat_fapp0 op
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
 
-/*
-  homd_cov_int_alt3 (fully internal; W_Z and W are supplied by application)
-
-  We internalize the external binders of `homd_cov_int_alt` by defining a δ-reducible base functor
-  (built from functor objects / combinators), so that the functorial structure is not left opaque.
-
-  - building a Cat-valued functor on the base `Op_cat Z`:
-      W_Z ↦ sections over TotalΣ_cat(E) of the family (y,v) ↦ Functor_cat((Hom_Z(W_Z,y))ᵒᵖ, Cat),
-  - then taking its Grothendieck construction as a displayed category over `Op_cat Z`,
-  - and finally defining a displayed functor out of `Op_catd E` into that Grothendieck total.
-*/
-
-// Postcompose a Cat-valued functor by Fib_func, as a functor object.                                   // (A⟶Cat) ⟶ (A⟶(Catᵒᵖ))
-symbol Fibpost_val_func [A : Cat]
-  : τ (Functor (Functor_cat A Cat_cat) (Functor_cat A (Op_cat Cat_cat)))
-≔ @comp_cat_cov_func A Cat_cat (Op_cat Cat_cat) Fib_func;
-
-// Contravariant Grothendieck construction (plus outward Op_catd), as a functor object on functors.     // (A⟶Catᵒᵖ) ⟶ Catd_cat(A)
-symbol Groth_con_func [A : Cat]
-  : τ (Functor (Functor_cat A (Op_cat Cat_cat)) (Catd_cat A));
-
-rule fapp0 (@Groth_con_func $A) $F ↪ @Op_catd (Op_cat $A) (@Fibration_con_catd $A $F);
-
-// Family of displayed categories over TotalΣ_cat(E), indexed by W_Z : Obj(Z).                          // W_Z ↦ (y,v) ↦ Functor_cat((Hom_Z(W_Z,y))ᵒᵖ,Cat)
-symbol homd_cov_int_alt3_fam [Z : Cat] (E : Catd Z)
-  : τ (Functor (Op_cat Z) (Catd_cat (TotalΣ_cat E)))
-≔ let T : Cat ≔ TotalΣ_cat E in
-   @comp_cat_fapp0
-     (Op_cat Z)
-     (Functor_cat T (Op_cat Cat_cat))
-     (Catd_cat T)
-     (@Groth_con_func T)
-     (@comp_cat_fapp0
-       (Op_cat Z)
-       (Functor_cat T Cat_cat)
-       (Functor_cat T (Op_cat Cat_cat))
-       (@Fibpost_val_func T)
-       (@comp_cat_fapp0
-         (Op_cat Z)
-         (Functor_cat T Cat_cat)
-         (Functor_cat T Cat_cat)
-         (@op_val_func T)
-         (@hom_cov_int Z T (TotalΣ_proj1_func E))));
-
-// Base : (Op_cat Z) ⇒ Cat_cat, sending W_Z to the category of sections described above.               // internalize W_Z as an index (δ-defined)
-symbol homd_cov_int_alt3_base [Z : Cat] (E : Catd Z)
-  : τ (Functor (Op_cat Z) Cat_cat)
-≔ let T : Cat ≔ TotalΣ_cat E in
-   @comp_cat_fapp0
-     (Op_cat Z)
-     (Catd_cat T)
-     Cat_cat
-     (@Pi_func T)
-     (homd_cov_int_alt3_fam E);
-
-// The fully-internal curried dependent hom packaging.                                                 // Op_catd(E) → ∫(base)
-constant symbol homd_cov_int_alt3 : Π [Z : Cat], Π (E : Catd Z),
-  τ (Functord (Op_catd E)
-              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt3_base E)));
+// NOTE: older “alt3” internalization attempts have been removed in favor of the `alt4` pipeline.       // cleanup: keep only alt4
 
 /*
-  TotalΣ_hom_func_alt (warm-up bridge)
+  TotalΣ_hom_func (warm-up bridge)
 
   For fixed (x,u) and (y,v) in `TotalΣ_cat E`, the “dependent hom over base edges” classifier should
   produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `TotalΣ_hom_func`
-  is intended to be expressed via the fully-internal pipeline (`homd_cov_int_alt3`), but during early
-  development it is useful to keep an explicit stable head for the bridge:
+  is intended to be expressed via the `alt4` internal pipeline (`homd_cov_int_alt4`), but during early
+  development we keep the definition close to the section-level uncurry/eval primitives.
 
-    TotalΣ_hom_func_alt(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
+    TotalΣ_hom_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
 
   We define it as the result of evaluating the binder wrapper `homd_cov_int_alt` at the point (y,v)
   of `TotalΣ_cat E`, on the unique terminal fibre object.
@@ -2439,12 +2381,6 @@ rule @fdapp0
       $GG
       (@fapp0 $A $B $F $x)
       $u;
-
-symbol TotalΣ_hom_func_alt [Z : Cat]
-  (E : Catd Z)
-  (x : τ (Obj Z)) (u : τ (FibreObj E x))
-  (y : τ (Obj Z)) (v : τ (FibreObj E y))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -2524,15 +2460,7 @@ rule Fibre_cat (Transf_catd $FF $GG) $z
 assert [Z : Cat] [E D : Catd Z] (FF GG : τ (Functord E D)) (z : τ (Obj Z)) ⊢
   Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z);
 
-// Derive the binder-style `homd_cov_int_alt` by applying the internal packaging on the fibre.         // fold Fibre_func(homd_cov_int_alt3) ↪ homd_cov_int_alt
-rule fapp0
-      (@Fibre_func (Op_cat $Z)
-        (@Op_catd $Z $E)
-        (@Fibration_cov_catd (Op_cat $Z) (homd_cov_int_alt3_base $E))
-        (@homd_cov_int_alt3 $Z $E)
-        $W_Z)
-      $W
-  ↪ @homd_cov_int_alt $Z $E $W_Z $W;
+// NOTE: older folding rules relating `homd_cov_int_alt` to alt3 have been removed.                     // cleanup
 
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: after dropping injectivity of `Obj`, the implicit base/category parameters of `fdapp0`
@@ -2866,20 +2794,6 @@ symbol Sigma_uncurry_section_funcd :
           (Terminal_catd (TotalΣ_cat E))
           (Pullback_catd D (TotalΣ_proj1_func E)));
 
-// Base displayed family used in the alt4 uncurry pipeline (over Z).                                     // z ↦ Functor_cat(Hom(W_Z,z)^op,Cat)
-symbol homd_cov_int_alt4_eval_base_catd [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
-≔ @Op_catd (Op_cat Z)
-    (@Fibration_con_catd Z
-      (comp_cat_fapp0 Fib_func
-        (comp_cat_fapp0 op
-          (@hom_cov Z W_Z Z (@id_func Z)))));
-
-// Pointwise swap of section orientation for alt4 (primitive bridge, driven by swap_functor_func).       // (Edge→(E→Cat)) ↦ (E→(Edge→Cat))
-symbol swap_homd_cov_int_alt4_section :
-  Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
-  τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
-    → τ (Functord (Terminal_catd Z) (Functor_catd E (homd_cov_int_alt4_eval_base_catd W_Z)));
-
 // Displayed swap for Functor_catd (primitive).                                                          // fibrewise version of swap_functor_func
 constant symbol swap_functord_func :
   Π [Z : Cat], Π [A B C : Catd Z],
@@ -2910,22 +2824,6 @@ symbol swap_homd_cov_int_alt4_section2 [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
       (@swap_functord_func Z (Edge_catd_at W_Z) E (CatCat_catd Z))
       SS;
 
-// Primitive Sigma-uncurry evaluator on sections (no outer Functor object needed).                       // section(z') ↦ section(y,v)
-symbol TotalΣ_uncurry_eval [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
-  (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
-     τ (Functord
-          (Terminal_catd (TotalΣ_cat E))
-          (Op_catd
-            (Fibration_con_catd
-              (comp_cat_fapp0 Fib_func
-                (comp_cat_fapp0 op
-                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-≔ @Sigma_uncurry_section_funcd
-    Z
-    E
-    (homd_cov_int_alt4_eval_base_catd W_Z)
-    (@swap_homd_cov_int_alt4_section Z E W_Z SS);
-
 // Alternative uncurry that keeps the pullback codomain explicit (no forced identification with the Groth/Op form). // migration-friendly
 symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
   (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
@@ -2938,31 +2836,6 @@ symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
     (homd_cov_int_alt4_eval_base_catd2 W_Z)
     (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
 
-// Primitive object-action for Sigma-uncurry/eval2 at (y,v).                                            // (y,v) ↦ eval_v( swapped_section(y) )
-rule @fdapp0
-      (@TotalΣ_cat $Z $E)
-      (Terminal_catd (TotalΣ_cat $E))
-      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $W_Z) (TotalΣ_proj1_func $E))
-      (@TotalΣ_uncurry_eval2 $Z $E $W_Z $SS)
-      (Struct_sigma $y $v)
-      Terminal_obj
-  ↪ @fapp0
-        (Functor_cat
-          (Fibre_cat $E $y)
-          (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y))
-        (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y)
-        (@eval0_func
-          (Fibre_cat $E $y)
-          (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y)
-          $v)
-        (@fdapp0
-          $Z
-          (Terminal_catd $Z)
-          (Functor_catd $E (homd_cov_int_alt4_eval_base_catd2 $W_Z))
-          (@swap_homd_cov_int_alt4_section2 $Z $E $W_Z $SS)
-          $y
-          Terminal_obj);
-
 // New, more direct derived section over TotalΣ(E), keeping the pullback codomain explicit.             // do not force legacy homd target head
 symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
@@ -2972,47 +2845,10 @@ symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
         (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (TotalΣ_proj1_func E)))
 ≔ @TotalΣ_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
-// Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
-rule @fdapp0
-      (@TotalΣ_cat $Z $E)
-      (Terminal_catd (TotalΣ_cat $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@TotalΣ_uncurry_eval $Z $E $W_Z $SS)
-      (Struct_sigma $y $v)
-      Terminal_obj
-  ↪ @comp_cat_fapp0
-        (Op_cat (Hom_cat $Z $W_Z $y))
-        (Functor_cat (Fibre_cat $E $y) Cat_cat)
-        Cat_cat
-        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
-        (@fdapp0
-          $Z
-          (Terminal_catd $Z)
-          (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
-          $SS
-          $y
-          Terminal_obj);
-
-symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
-  (W_Z : τ (Obj Z))
-  (W : τ (FibreObj E W_Z))
-  : τ (Functord
-      (Terminal_catd (TotalΣ_cat E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
-≔ @TotalΣ_uncurry_eval Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
-
 // NOTE: we no longer rewrite `homd_cov_int_alt` to an alt4-derived view by default.                    // keep binder wrapper abstract
 
-// Direct normalization of TotalΣ_hom_func_alt through the alt4-derived wrapper.                        // defer wrapper analysis, keep end-goal head
-rule @TotalΣ_hom_func_alt $Z $E $x $u $y $v
+// Direct definition of TotalΣ_hom_func through the alt4-derived wrapper.                               // keep only one stable head
+rule @TotalΣ_hom_func $Z $E $x $u $y $v
   ↪ @fdapp0
       (@TotalΣ_cat $Z $E)
       (Terminal_catd (TotalΣ_cat $E))
@@ -3115,10 +2951,6 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
-// TotalΣ_hom_func computes to the standard Grothendieck hom-family in the Grothendieck probe case.      // Phase 3: Groth computation
-rule TotalΣ_hom_func (@Fibration_cov_catd $B $M) $x $u $y $v
-  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
-
 // Grothendieck hom-category is itself a Grothendieck total.                                            // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
 // Usual notation (opfibration Grothendieck formula):
 //   Hom_{∫M}((x,u),(y,v))  ≅  ∫_{f : x→y} Hom_{M(y)}(f_!(u), v).                                        // homs in ∫M as another ∫
@@ -3126,12 +2958,6 @@ rule TotalΣ_hom_func (@Fibration_cov_catd $B $M) $x $u $y $v
 // Using Op-acrobatics: for H : (Hom_B(x,y))ᵒᵖ → Cat, we form ∫H over (Hom_B(x,y))ᵒᵖ and then take Op.    // keep 2-cell direction correct
 rule Hom_cat (Total_cat (@Fibration_cov_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat ((Fibration_cov_catd (@comp_hom_con_fib_cov $B $M $x $y $u $v))));
-
-// Sanity: for Grothendieck totals, TotalΣ_cat homs normalize to the same normal form as Total_cat homs. // smoke-test for Phase 2–3
-assert [B : Cat] (M : τ (Functor B Cat_cat))
-  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
-  Hom_cat (TotalΣ_cat (Fibration_cov_catd M)) (Struct_sigma x u) (Struct_sigma y v)
-    ≡ Hom_cat (Total_cat (Fibration_cov_catd M)) (Struct_sigma x u) (Struct_sigma y v);
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                               // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
