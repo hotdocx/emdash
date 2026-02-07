@@ -427,7 +427,8 @@ Therefore:
 - keep `homd_cov_int_alt3*` (if already implemented) as a useful warm-up artifact,
 - introduce a new target pipeline `homd_cov_int_alt4*` that internalizes `z'` directly
   (by taking Π/sections over the base `Z`, not over `TotalΣ_cat E`),
-- and derive the “section over `TotalΣ_cat E`” wrapper only afterwards by evaluating at `v : E[z']`.
+- and optionally derive the existing binder wrapper `homd_cov_int_alt` as a *view* afterwards
+  (but this derivation is not required to proceed with `homd_cov_int_alt4*` itself).
 
 #### Proposed internal pipeline (blueprint)
 
@@ -464,6 +465,8 @@ This matches the intended “logic-manipulation pipeline” style (and is on-par
 
    Internally, the functor object mapping `z ↦ Edge_catd(z)` is built using
    `hom_cov_int`, `op_val_func`, and `Fibration_cov_func` (no `TotalΣ_proj1_func`).
+   This is exactly the engineering constraint we want: `Edge_catd` must be packaged as a functor
+   so it can participate in `comp_cat_fapp0` pipelines.
 
 3. Pointwise functor categories via `Functor_catd` and its internalized form `Functor_catd_func`.
    Define:
@@ -474,6 +477,9 @@ This matches the intended “logic-manipulation pipeline” style (and is on-par
    To build `z ↦ Fam(z)` as an internal functor object, use:
 
    - `Functor_catd_func` + `eval0_func` to “fix the second argument” of `Functor_catd`.
+   Practical note: depending on variance conventions, it may be helpful to also provide a covariant
+   domain variant `Functor_catd_func_cov : Functor (Catd_cat Z) (...)` so the composition
+   `EdgeFamily ; fixR(Cod)` can be expressed directly in `Cat_cat` without inserting `Op_func`.
 
 4. Π/sections as an internal functor object (`Pi_func`).
    Finally:

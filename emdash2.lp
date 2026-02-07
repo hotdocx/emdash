@@ -1121,6 +1121,23 @@ assert (B : Cat) (E D : Catd B) ⊢
   fapp0 (fapp0 (Functor_catd_func B) E) D ≡ Functor_catd E D;
 
 /*
+  Functor_catd_func_cov (covariant-domain variant)
+
+  For some internal pipelines it is more convenient to have the domain be `Catd_cat B` (rather than
+  `Op_cat (Catd_cat B)`) so we can compose directly in `Cat_cat`.
+
+  Object-action is the same currying: Functor_catd_func_cov(B)(E)(D) ↪ Functor_catd(E,D).
+*/
+constant symbol Functor_catd_func_cov :
+  Π (B : Cat),
+  τ (Functor (Catd_cat B) (Functor_cat (Catd_cat B) (Catd_cat B)));
+
+rule @fapp0 _ _ (@Functor_catd_func_cov $B) $E ↪ @Functor_catd_fapp0_func $B $E;
+
+assert (B : Cat) (E D : Catd B) ⊢
+  fapp0 (fapp0 (Functor_catd_func_cov B) E) D ≡ Functor_catd E D;
+
+/*
   Univalence bridge (interface only; moved here because it depends on Fibre_cat)
 
   Long-term goal: “equivalences in C ARE paths in Obj C”, as computationally/definitionally as possible.
@@ -2695,6 +2712,79 @@ rule @Fibre_func $A
       (fapp0 (@Fibration_cov_fapp1_func $A $E $D) $ϵ)
       $x
   ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
+
+/*
+  homd_cov_int_alt4 (fully internal; target shape closer to “Π z' , hom(z,z')^op → (E[z'] → Cat)”)
+
+  This is the revised internal pipeline (Phase 8bis in REPORT_EMDASH_LOGIC_DEV_2.md):
+
+    z ↦ sections over z' : Z of  Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat_cat)).
+
+  It is indexed directly over `Z` (not over `TotalΣ_cat E`), so it does not bake in `TotalΣ_proj1_func`.
+*/
+
+// Constant Cat-family over Z (weakening of Cat_cat to Catd Z).                                         // CatCat_catd(Z)[z] = Cat_cat
+symbol CatCat_catd (Z : Cat) : Catd Z
+≔ Pullback_catd (Lift_catd Cat_cat) (Terminal_func Z);
+
+// Sanity: fibres are definitionally Cat_cat.                                                          // fibre(CatCat_catd(Z),z) ≡ Cat_cat
+assert (Z : Cat) (z : τ (Obj Z)) ⊢
+  Fibre_cat (CatCat_catd Z) z ≡ Cat_cat;
+
+// Codomain family at each z': functors E[z'] ⟶ Cat_cat.                                               // Cod_catd(E)[z'] = Functor_cat(E[z'],Cat)
+symbol Cod_catd [Z : Cat] (E : Catd Z) : Catd Z
+≔ Functor_catd E (CatCat_catd Z);
+
+// Edge family indexed by z : Obj(Z): z' ↦ Hom_Z(z,z')^op, as a displayed category over Z.              // Edge family as functor object
+symbol Edge_catd_fam [Z : Cat]
+  : τ (Functor (Op_cat Z) (Catd_cat Z))
+≔ @comp_cat_fapp0
+     (Op_cat Z)
+     (Functor_cat Z Cat_cat)
+     (Catd_cat Z)
+     (@Fibration_cov_func Z)
+     (@comp_cat_fapp0
+       (Op_cat Z)
+       (Functor_cat Z Cat_cat)
+       (Functor_cat Z Cat_cat)
+       (@op_val_func Z)
+       (@hom_cov_int Z Z (@id_func Z)));
+
+// Fix the right argument of Functor_catd at D, as a functor object on the left argument.              // E ↦ Functor_catd(E,D)
+symbol Functor_catd_fixR_func [Z : Cat] (D : Catd Z)
+  : τ (Functor (Catd_cat Z) (Catd_cat Z))
+≔ @comp_cat_fapp0
+     (Catd_cat Z)
+     (Functor_cat (Catd_cat Z) (Catd_cat Z))
+     (Catd_cat Z)
+     (@eval0_func (Catd_cat Z) (Catd_cat Z) D)
+     (@Functor_catd_func_cov Z);
+
+// Family z ↦ Functor_catd(Edge_catd(z), Cod_catd(E)), as a functor object Op(Z) ⟶ Catd_cat(Z).        // z ↦ (z' ↦ Hom(z,z')^op → (E[z']→Cat))
+symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
+  : τ (Functor (Op_cat Z) (Catd_cat Z))
+≔ let Cod : Catd Z ≔ Cod_catd E in
+   @comp_cat_fapp0
+     (Op_cat Z)
+     (Catd_cat Z)
+     (Catd_cat Z)
+     (Functor_catd_fixR_func Cod)
+     (Edge_catd_fam);
+
+// Base functor: z ↦ sections over Z of the family above.                                               // base(z) = Π_{z':Z} Fam(z)(z')
+symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
+  : τ (Functor (Op_cat Z) Cat_cat)
+≔ @comp_cat_fapp0
+     (Op_cat Z)
+     (Catd_cat Z)
+     Cat_cat
+     (@Pi_func Z)
+     (homd_cov_int_alt4_fam E);
+
+// Fully internal packaging: Op_catd(E) → ∫(homd_cov_int_alt4_base(E)).                                 // Op_catd(E) ⟶_OpZ ∫(base)
+constant symbol homd_cov_int_alt4 : Π [Z : Cat], Π (E : Catd Z),
+  τ (Functord (Op_catd E)
+              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt4_base E)));
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0
