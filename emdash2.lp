@@ -2307,36 +2307,6 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   where `→_f` means a displayed arrow in E lying over the base edge f.
 */
 
-/*
-  homd_cov_int_alt (curried; target for TotalΣ_hom_func in the future)
-
-  Intended reading (informal, curried form):
-
-    Z : Cat,  E : Catd Z,  W_Z : Obj(Z),  W : Obj(E[W_Z])
-
-  Then `homd_cov_int_alt E W_Z W` is a *section over* `TotalΣ_cat E` assigning, for each
-  target object (z, v) in the total (i.e. z : Obj(Z), v : Obj(E[z])), an ordinary Cat-valued functor
-  on the base hom-category:
-
-    (Hom_Z(W_Z, z))ᵒᵖ ⟶ Cat.
-
-  This is a staging interface:
-  - the codomain displayed category is “(z,v) ↦ Functor_cat((Hom_Z(W_Z,z))ᵒᵖ, Cat)”,
-    implemented as a contravariant Grothendieck construction via `Fib_func`;
-  - we keep `homd_cov_int_alt` itself abstract for now (no computation rules yet),
-    mirroring the “probe discipline” used for `homd_cov_int`.
-*/
-symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
-  Π (W_Z : τ (Obj Z)),
-  Π (W : τ (FibreObj E W_Z)),
-  τ (Functord
-      (Terminal_catd (TotalΣ_cat E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
-
 // NOTE: older “alt3” internalization attempts have been removed in favor of the `alt4` pipeline.       // cleanup: keep only alt4
 
 /*
@@ -2349,10 +2319,7 @@ symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
 
     TotalΣ_hom_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
 
-  We define it as the result of evaluating the binder wrapper `homd_cov_int_alt` at the point (y,v)
-  of `TotalΣ_cat E`, on the unique terminal fibre object.
-
-  This does NOT replace the existing Grothendieck shortcut computation for `TotalΣ_hom_func`.
+  We currently define it via the `alt4` pipeline (see below), without a separate binder-style wrapper.
 */
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
@@ -2460,7 +2427,7 @@ rule Fibre_cat (Transf_catd $FF $GG) $z
 assert [Z : Cat] [E D : Catd Z] (FF GG : τ (Functord E D)) (z : τ (Obj Z)) ⊢
   Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z);
 
-// NOTE: older folding rules relating `homd_cov_int_alt` to alt3 have been removed.                     // cleanup
+// NOTE: older folding rules relating the binder wrapper to alt3 have been removed.                    // cleanup
 
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: after dropping injectivity of `Obj`, the implicit base/category parameters of `fdapp0`
@@ -2777,13 +2744,10 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
      W;
 
 /*
-  Relating homd_cov_int_alt4 to the legacy binder wrapper homd_cov_int_alt.
+  Projecting the internal `alt4` package to a section over the Σ-total.
 
-  homd_cov_int_alt remains a useful surface wrapper (section over TotalΣ_cat(E)).
-  We define it as a view derived from the internal alt4 pipeline by:
-    - extracting the section over Z (homd_cov_int_alt4_sec),
-    - evaluating it at y : Obj(Z) (via fdapp0),
-    - and then evaluating the resulting functor at v : Obj(E[y]) by postcomposition with eval0_func(v).
+  For (W_Z,W) in the fibre of E, `homd_cov_int_altproj E W_Z W` is the induced *section over*
+  `TotalΣ_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
 // Generic Sigma-uncurry on sections (primitive): section of Functor_catd(E,D) → section over TotalΣ(E). // Π z,e. D[z]  ≈  Π (z,e). pullback D
@@ -2837,7 +2801,7 @@ symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
     (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
 
 // New, more direct derived section over TotalΣ(E), keeping the pullback codomain explicit.             // do not force legacy homd target head
-symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
+symbol homd_cov_int_altproj [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z)):
   τ (Functord 
@@ -2845,15 +2809,13 @@ symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
         (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (TotalΣ_proj1_func E)))
 ≔ @TotalΣ_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
-// NOTE: we no longer rewrite `homd_cov_int_alt` to an alt4-derived view by default.                    // keep binder wrapper abstract
-
 // Direct definition of TotalΣ_hom_func through the alt4-derived wrapper.                               // keep only one stable head
 rule @TotalΣ_hom_func $Z $E $x $u $y $v
   ↪ @fdapp0
       (@TotalΣ_cat $Z $E)
       (Terminal_catd (TotalΣ_cat $E))
       (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (TotalΣ_proj1_func $E))
-      (@homd_cov_int_alt_from_alt4b $Z $E $x $u)
+      (@homd_cov_int_altproj $Z $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 
