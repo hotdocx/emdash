@@ -680,10 +680,6 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;                               
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
 assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 
-// Opposites fix the classifier categories (definitionally).                                          // Grpdᵒᵖ ≡ Grpd, Catᵒᵖ ≡ Cat
-rule Op_cat Grpd_cat ↪ Grpd_cat;
-rule Op_cat Cat_cat ↪ Cat_cat;
-
 /*
   Fib_func (fibration classifier, contravariant in the base)
 
@@ -2761,9 +2757,8 @@ symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
 
 // Base functor: z ↦ sections over Z of the family above.                                               // base(z) = Π_{z':Z} Fam(z)(z')
 symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
-  : τ (Functor (Op_cat Z) Cat_cat)
-≔ @Op_func Z Cat_cat
-     (@comp_cat_fapp0
+  : τ (Functor Z Cat_cat)
+≔   (@comp_cat_fapp0
        Z
        (Catd_cat Z)
        Cat_cat
@@ -2773,7 +2768,73 @@ symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
 // Fully internal packaging: Op_catd(E) → ∫(homd_cov_int_alt4_base(E)).                                 // Op_catd(E) ⟶_OpZ ∫(base)
 constant symbol homd_cov_int_alt4 : Π [Z : Cat], Π (E : Catd Z),
   τ (Functord (Op_catd E)
-              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt4_base E)));
+              (Op_catd (@Fibration_cov_catd Z (homd_cov_int_alt4_base E))));
+
+// Extract the section over Z produced by homd_cov_int_alt4 at (W_Z,W).                                 // warm helper: (W_Z,W) ↦ section over z'
+symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
+  (W_Z : τ (Obj Z))
+  (W : τ (FibreObj E W_Z))
+  : τ (Functord
+      (Terminal_catd Z)
+      (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+≔ @fapp0
+     (Fibre_cat (@Op_catd Z E) W_Z)
+     (Fibre_cat (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_int_alt4_base E))) W_Z)
+     (@Fibre_func (Op_cat Z)
+       (@Op_catd Z E)
+       (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_int_alt4_base E)))
+       (@homd_cov_int_alt4 Z E)
+       W_Z)
+     W;
+
+/*
+  Relating homd_cov_int_alt4 to the legacy binder wrapper homd_cov_int_alt.
+
+  homd_cov_int_alt remains a useful surface wrapper (section over TotalΣ_cat(E)).
+  We define it as a view derived from the internal alt4 pipeline by:
+    - extracting the section over Z (homd_cov_int_alt4_sec),
+    - evaluating it at y : Obj(Z) (via fdapp0),
+    - and then evaluating the resulting functor at v : Obj(E[y]) by postcomposition with eval0_func(v).
+*/
+
+symbol homd_cov_int_alt_from_alt4 : Π [Z : Cat], Π (E : Catd Z),
+  Π (W_Z : τ (Obj Z)),
+  Π (W : τ (FibreObj E W_Z)),
+  τ (Functord
+      (Terminal_catd (TotalΣ_cat E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
+
+// Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
+rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;
+
+// Object-action on the derived wrapper: evaluate the section at (y,v) and then evaluate at v.          // (y,v) ↦ (f ↦ (sec_y)(f)(v))
+rule @fdapp0
+      (@TotalΣ_cat $Z $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
+      (@homd_cov_int_alt_from_alt4 $Z $E $W_Z $W)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @comp_cat_fapp0
+        (Op_cat (Hom_cat $Z $W_Z $y))
+        (Functor_cat (Fibre_cat $E $y) Cat_cat)
+        Cat_cat
+        (@eval0_func (Fibre_cat $E $y) Cat_cat $v)
+        (@fdapp0
+          $Z
+          (Terminal_catd $Z)
+          (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
+          (@homd_cov_int_alt4_sec $Z $E $W_Z $W)
+          $y
+          Terminal_obj);
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0

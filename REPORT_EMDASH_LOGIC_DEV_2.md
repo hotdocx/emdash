@@ -492,7 +492,7 @@ Once `homd_cov_int_alt4` exists, the existing binder wrapper
 
 - `homd_cov_int_alt : Π W_Z W, Functord( Terminal_catd(TotalΣ_cat E), ... )`
 
-should be derived as a view by:
+can be derived as a view by:
 
 - extracting the section-in-`z'` produced by applying `homd_cov_int_alt4` at `W_Z` and `W`,
 - then evaluating that section at `z'` and evaluating the resulting functor at `v : E[z']`
@@ -500,6 +500,24 @@ should be derived as a view by:
 
 This is exactly where `TotalΣ_cat E` is a convenient *wrapper* (pairing `z'` with `v`), rather than
 the core index of the internal pipeline.
+
+Engineering note (important for correctness):
+
+- Do **not** rely on “`Op_cat Cat_cat ↪ Cat_cat`” as a semantic principle. If the kernel does not
+  identify `Cat_cat` with its opposite definitionally, then the pipeline must explicitly wrap/unwrap
+  opposites using `Op_func`/`Op_catd` and place `Op_catd` at the correct layer (as in `homd_cov_int`).
+
+Current implementation approach in `emdash2.lp`:
+
+- Keep `homd_cov_int_alt4_base : Z ⟶ Cat_cat` (covariant in `z`), then package
+  `homd_cov_int_alt4 : Op_catd(E) ⟶ Op_catd(∫(homd_cov_int_alt4_base(E)))` by applying `Op_catd`
+  to the Grothendieck construction.
+- Define a helper `homd_cov_int_alt4_sec` that extracts, from `homd_cov_int_alt4` at `(W_Z,W)`,
+  the induced section over `z' : Z`.
+- Define `homd_cov_int_alt_from_alt4` (same type as the legacy binder wrapper) by a single
+  `fdapp0` computation rule:
+  evaluate the section at `y`, then postcompose by `eval0_func v`.
+  Finally, define `homd_cov_int_alt` by rewriting to `homd_cov_int_alt_from_alt4`.
 
 Target shape (blueprint; names adjusted to the emdash2 kernel):
 
