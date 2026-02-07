@@ -1187,6 +1187,11 @@ rule @Pullback_catd $A $A $E (@id_func $A) ↪ $E;
 rule @Pullback_catd $A $B (@Fibration_cov_catd $B $E) $F
   ↪ @Fibration_cov_catd $A (comp_cat_fapp0 $E $F);
 
+// Pullback action on displayed functors (generic reindexing of morphisms).                            // F^* on Functord
+symbol Pullback_funcd : Π [A B : Cat], Π (F : τ (Functor A B)),
+  Π [E D : Catd B],
+  τ (Functord E D) → τ (Functord (Pullback_catd E F) (Pullback_catd D F));
+
 // -------------------------------------------------------------------------------------------------
 // 7b. Opposite of displayed categories                                                             // (E→B) ↦ (Eᵒᵖ→Bᵒᵖ)
 // -------------------------------------------------------------------------------------------------
@@ -2368,6 +2373,29 @@ constant symbol homd_cov_int_alt3 : Π [Z : Cat], Π (E : Catd Z),
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),                     // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (FibreObj E X_Z) → τ (FibreObj D X_Z);                         // map objects in each fibre
 
+// Generic computation: identity displayed functor acts as identity on fibre objects.                 // fdapp0(id_funcd) ↪ id
+rule @fdapp0 $Z $E $E (@id_funcd $Z $E) $x $u ↪ $u;
+
+// Generic computation: dependent composition acts by nested fibrewise application.                    // fdapp0(FF∘GG) ↪ fdapp0 FF ∘ fdapp0 GG
+rule @fdapp0 $Z $E $C (@comp_catd_fapp0 $Z $E $D $C $FF $GG) $x $u
+  ↪ @fdapp0 $Z $D $C $FF $x (@fdapp0 $Z $E $D $GG $x $u);
+
+// Generic computation: pullback/reindexing on displayed functors is precomposition on base objects.   // fdapp0(F^*GG,x,u) ↪ fdapp0(GG,Fx,u)
+rule @fdapp0
+      $A
+      (Pullback_catd $E $F)
+      (Pullback_catd $D $F)
+      (@Pullback_funcd $A $B $F $E $D $GG)
+      $x
+      $u
+  ↪ @fdapp0
+      $B
+      $E
+      $D
+      $GG
+      (@fapp0 $A $B $F $x)
+      $u;
+
 symbol TotalΣ_hom_func_alt [Z : Cat]
   (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (FibreObj E x))
@@ -2787,24 +2815,16 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
 */
 
 // Reindex a section along a base functor (generic).                                                     // SS over B  ↦  F^*SS over A
-symbol reindex_section_funcd : Π [A B : Cat], Π (F : τ (Functor A B)), Π [D : Catd B],
-  Π (SS : τ (Functord (Terminal_catd B) D)),
-  τ (Functord (Terminal_catd A) (Pullback_catd D F));
-
-rule @fdapp0
-      $A
-      (Terminal_catd $A)
-      (Pullback_catd $D $F)
-      (@reindex_section_funcd $A $B $F $D $SS)
-      $x
-      Terminal_obj
-  ↪ @fdapp0
-      $B
-      (Terminal_catd $B)
-      $D
-      $SS
-      (@fapp0 $A $B $F $x)
-      Terminal_obj;
+symbol reindex_section_funcd [A B : Cat] (F : τ (Functor A B)) [D : Catd B]
+  (SS : τ (Functord (Terminal_catd B) D))
+  : τ (Functord (Terminal_catd A) (Pullback_catd D F))
+≔ @comp_catd_fapp0
+    A
+    (Terminal_catd A)
+    (Pullback_catd (Terminal_catd B) F)
+    (Pullback_catd D F)
+    (@Pullback_funcd A B F (Terminal_catd B) D SS)
+    (@id_funcd A (Terminal_catd A));
 
 // Pointwise evaluator over TotalΣ: apply a functor-valued object to the second projection v.           // (y,v,F) ↦ (f ↦ F(f)(v))
 symbol homd_cov_int_alt4_eval_funcd [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))

@@ -575,6 +575,23 @@ Refinement applied:
 - Its role is now handled directly by the generic displayed composition operator `comp_catd_fapp0`
   in the definition of `homd_cov_int_alt_from_alt4`.
 
+Further refinement (reindexing side):
+
+- `reindex_section_funcd` is no longer an ad-hoc computation head.
+- We introduced the more basic primitive
+  `Pullback_funcd : Functord(E,D) -> Functord(Pullback_catd E F, Pullback_catd D F)`,
+  i.e. pullback action on displayed functors.
+- Then `reindex_section_funcd` is defined compositionally from:
+  `Pullback_funcd`, `comp_catd_fapp0`, and `id_funcd`, using
+  `Pullback_catd (Terminal_catd B) F ↪ Terminal_catd A`.
+- To support actual reduction through these derived definitions, we added generic `fdapp0` rules for:
+  `id_funcd`, `comp_catd_fapp0`, and `Pullback_funcd`.
+
+Interpretation:
+
+- This isolates the “missing universal-property infrastructure” to one clear primitive (`Pullback_funcd`),
+  rather than encoding reindexing behavior directly inside `reindex_section_funcd`.
+
 ### Phase 6: connect `TotalΣ_hom_func` to `homd_cov_int_alt`
 
 Define (by rewrite or by a definitional abbreviation, depending on subject-reduction constraints) that:
