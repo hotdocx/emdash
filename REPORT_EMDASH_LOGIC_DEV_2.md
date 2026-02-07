@@ -233,6 +233,14 @@ when all inputs are Grothendieck.
 This is consistent with the “computational probe discipline” already used in `homd_cov_int`:
 the final symbol is abstract, but key pointwise reductions exist in the concrete Grothendieck subcases.
 
+Implementation note (important for typing):
+
+- In `emdash2.lp`, `Fibration_con_catd [A] (F : A ⟶ Catᵒᵖ)` has type `Catd (Op_cat A)` (it flips the base).
+- Therefore, if we build the “(z,v) ↦ Functor_cat((Hom_Z(W_Z,z))ᵒᵖ, Cat)” family via `Fibration_con_catd`,
+  and we want it as a displayed category over the original base `A`, we must wrap it by `Op_catd`:
+
+  `Op_catd (Fibration_con_catd ...) : Catd A`.
+
 ## Normalization and confluence discipline
 
 The user intent is to add rules like:

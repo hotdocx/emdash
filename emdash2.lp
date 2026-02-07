@@ -1474,6 +1474,70 @@ rule @Op_func _ $B (@Total_proj1_func $B $E)
   ↪ @Total_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
 // -------------------------------------------------------------------------------------------------
+// 10a. Always-Σ total category (parallel development; migration target for Total_cat)                // TotalΣ_cat
+// -------------------------------------------------------------------------------------------------
+
+/*
+  TotalΣ_cat (always-Σ)
+
+  `Total_cat` is currently only definitionally Σ-shaped on objects/homs for Grothendieck totals
+  `E = Fibration_cov_catd M` (and it has legacy definitional collapses like `Total_cat (Lift_catd A) ↪ A`).
+
+  In the next milestones (REPORT_EMDASH_LOGIC_DEV_2.md), we want a total construction that is *always*
+  Σ-shaped on objects, for arbitrary displayed categories `E : Catd B`, without destabilizing the
+  existing rewrite system.
+
+  We therefore introduce `TotalΣ_cat` in parallel, with a computable object layer and a projection.
+  Hom computation is introduced later via a stable-head functor `TotalΣ_hom_func`.
+*/
+
+symbol TotalΣ_cat [B : Cat] (E : Catd B) : Cat;
+
+// Projection π₁ : TotalΣ_cat(E) → B (base projection).                                                // Σ-projection (first component)
+injective symbol TotalΣ_proj1_func [B : Cat] (E : Catd B) : τ (Functor (TotalΣ_cat E) B);
+
+// Normalization on opposites (mirror of Total_cat convention).                                        // ∫Σ(Eᵒᵖ) ≡ (∫ΣE)ᵒᵖ
+rule @TotalΣ_cat _ (@Op_catd $B $E) ↪ Op_cat (@TotalΣ_cat $B $E);
+
+// Projection of the opposite total is the opposite projection.                                        // (π₁)ᵒᵖ ≡ π₁
+rule @Op_func _ $B (@TotalΣ_proj1_func $B $E)
+  ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
+
+// Objects of TotalΣ_cat are always definitional Σ-pairs (x,u) with x:Obj(B) and u:Obj(E[x]).          // τ Obj(∫ΣE) ↪ Σ x:B, Obj(E[x])
+rule τ (Obj (@TotalΣ_cat $B $E))
+  ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
+
+// π₁ on objects: (x,u) ↦ x.                                                                           // fapp0(π₁,(x,u)) ↪ x
+rule fapp0 (TotalΣ_proj1_func $E) (Struct_sigma $x $u) ↪ $x;
+
+// Sanity: π₁ computes by definitional equality.                                                        // exercise the rule
+assert [B : Cat] (E : Catd B) (x : τ (Obj B)) (u : τ (FibreObj E x)) ⊢
+  fapp0 (TotalΣ_proj1_func E) (Struct_sigma x u) ≡ x;
+
+/*
+  TotalΣ_hom_func (stable head)
+
+  For `TotalΣ_cat E`, we define hom-categories by *another* Grothendieck total over the base hom-category:
+
+    Hom_{∫ΣE}((x,u),(y,v))  ≔  ( ∫ (f ↦ (u →_f v)) )ᵒᵖ
+
+  where the Cat-valued functor `f ↦ (u →_f v)` is provided by the stable head `TotalΣ_hom_func`.
+
+  In Phase 2 we only commit to the *shape* of homs; computation for `TotalΣ_hom_func` is added later
+  (first in the Grothendieck probe case, mirroring existing `Total_cat` hom computation).
+*/
+
+symbol TotalΣ_hom_func : Π [Z : Cat],
+  Π (E : Catd Z),
+  Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
+  Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
+  τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+
+// Hom-category in TotalΣ_cat is (the opposite of) a Grothendieck total over TotalΣ_hom_func.           // Hom_{∫ΣE}((x,u),(y,v)) ↪ (∫ TotalΣ_hom_func)ᵒᵖ
+rule Hom_cat (@TotalΣ_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Op_cat (Total_cat (Fibration_cov_catd (TotalΣ_hom_func $E $x $u $y $v)));
+
+// -------------------------------------------------------------------------------------------------
 // 10b. Internalized Grothendieck total (curried)                                                     // Total_func : (Z⟶Cat) ⟶ Cat
 // -------------------------------------------------------------------------------------------------
 
@@ -2047,6 +2111,31 @@ assert [Z : Cat] (F : τ (Functor Z Cat_cat)) ⊢
   fapp0 (op_val_func) F ≡ comp_cat_fapp0 op F;
 
 // -------------------------------------------------------------------------------------------------
+// 15b. Internal evaluation + sections over Catd                                                     // minimal stable heads
+// -------------------------------------------------------------------------------------------------
+
+// Evaluate a functor at a chosen object, packaged as a functor object.                                 // eval_x : (A⟶B) → B
+symbol eval0_func : Π [A B : Cat],
+  τ (Obj A) → τ (Functor (Functor_cat A B) B);
+
+// β-rule: evaluation computes by applying the functor to the object.                                   // fapp0(eval0_func x,F) ↪ F[x]
+rule fapp0 (eval0_func $x) $F ↪ fapp0 $F $x;
+
+// Sanity: the β-rule fires by definitional equality.                                                   // exercise eval0_func β-rule
+assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢
+  fapp0 (eval0_func x) F ≡ fapp0 F x;
+
+// Internal “Π over displayed categories”: E ↦ sections(1_Z → E), packaged as a functor to Cat_cat.     // Pi_func : Catd_cat(Z) → Cat
+symbol Pi_func : Π (Z : Cat), τ (Functor (Catd_cat Z) Cat_cat);
+
+// β-rule: Pi_func(Z)(E) is the slice-style category of displayed functors from the terminal family.    // fapp0(Pi_func Z,E) ↪ Functord_cat(1_Z,E)
+rule fapp0 (Pi_func $Z) $E ↪ Functord_cat (Terminal_catd $Z) $E;
+
+// Sanity: the β-rule fires by definitional equality.                                                   // exercise Pi_func β-rule
+assert (Z : Cat) (E : Catd Z) ⊢
+  fapp0 (Pi_func Z) E ≡ Functord_cat (Terminal_catd Z) E;
+
+// -------------------------------------------------------------------------------------------------
 // 16. Draft: “simplicial” view on higher morphisms via slice-like dependent functors                // experiments / TODO zone
 // -------------------------------------------------------------------------------------------------
 
@@ -2111,6 +2200,36 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
 
   where `→_f` means a displayed arrow in E lying over the base edge f.
 */
+
+/*
+  homd_cov_int_alt (curried; target for TotalΣ_hom_func in the future)
+
+  Intended reading (informal, curried form):
+
+    Z : Cat,  E : Catd Z,  W_Z : Obj(Z),  W : Obj(E[W_Z])
+
+  Then `homd_cov_int_alt E W_Z W` is a *section over* `TotalΣ_cat E` assigning, for each
+  target object (z, v) in the total (i.e. z : Obj(Z), v : Obj(E[z])), an ordinary Cat-valued functor
+  on the base hom-category:
+
+    (Hom_Z(W_Z, z))ᵒᵖ ⟶ Cat.
+
+  This is a staging interface:
+  - the codomain displayed category is “(z,v) ↦ Functor_cat((Hom_Z(W_Z,z))ᵒᵖ, Cat)”,
+    implemented as a contravariant Grothendieck construction via `Fib_func`;
+  - we keep `homd_cov_int_alt` itself abstract for now (no computation rules yet),
+    mirroring the “probe discipline” used for `homd_cov_int`.
+*/
+symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
+  Π (W_Z : τ (Obj Z)),
+  Π (W : τ (FibreObj E W_Z)),
+  τ (Functord
+      (Terminal_catd (TotalΣ_cat E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -2479,6 +2598,10 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
+// TotalΣ_hom_func computes to the standard Grothendieck hom-family in the Grothendieck probe case.      // Phase 3: Groth computation
+rule TotalΣ_hom_func (@Fibration_cov_catd $B $M) $x $u $y $v
+  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
+
 // Grothendieck hom-category is itself a Grothendieck total.                                            // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
 // Usual notation (opfibration Grothendieck formula):
 //   Hom_{∫M}((x,u),(y,v))  ≅  ∫_{f : x→y} Hom_{M(y)}(f_!(u), v).                                        // homs in ∫M as another ∫
@@ -2486,6 +2609,12 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
 // Using Op-acrobatics: for H : (Hom_B(x,y))ᵒᵖ → Cat, we form ∫H over (Hom_B(x,y))ᵒᵖ and then take Op.    // keep 2-cell direction correct
 rule Hom_cat (Total_cat (@Fibration_cov_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat ((Fibration_cov_catd (@comp_hom_con_fib_cov $B $M $x $y $u $v))));
+
+// Sanity: for Grothendieck totals, TotalΣ_cat homs normalize to the same normal form as Total_cat homs. // smoke-test for Phase 2–3
+assert [B : Cat] (M : τ (Functor B Cat_cat))
+  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
+  Hom_cat (TotalΣ_cat (Fibration_cov_catd M)) (Struct_sigma x u) (Struct_sigma y v)
+    ≡ Hom_cat (Total_cat (Fibration_cov_catd M)) (Struct_sigma x u) (Struct_sigma y v);
 
 // Functoriality of the base projection on hom-categories (Grothendieck).                               // π₁₁ : Hom_{∫M} → Hom_B
 // Usual notation: `π₁ : ∫M → B` induces on homs a functor
