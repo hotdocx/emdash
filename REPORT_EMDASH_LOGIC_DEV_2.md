@@ -514,10 +514,18 @@ Current implementation approach in `emdash2.lp`:
   to the Grothendieck construction.
 - Define a helper `homd_cov_int_alt4_sec` that extracts, from `homd_cov_int_alt4` at `(W_Z,W)`,
   the induced section over `z' : Z`.
-- Define `homd_cov_int_alt_from_alt4` (same type as the legacy binder wrapper) by a single
-  `fdapp0` computation rule:
-  evaluate the section at `y`, then postcompose by `eval0_func v`.
-  Finally, define `homd_cov_int_alt` by rewriting to `homd_cov_int_alt_from_alt4`.
+- Introduce a bridge combinator
+  `homd_cov_int_alt4_to_totalsigma`:
+  from a section over `Z`, produce the section over `TotalΣ_cat E` expected by the binder wrapper.
+- Give the object-action rule on this bridge combinator:
+  evaluate section at `y`, then postcompose by `eval0_func v`.
+- Define `homd_cov_int_alt_from_alt4` as a **δ-abbreviation**:
+  `homd_cov_int_alt_from_alt4 ... ≔ homd_cov_int_alt4_to_totalsigma ... (homd_cov_int_alt4_sec ...)`.
+- Keep `homd_cov_int_alt` as the legacy surface head, with rewrite:
+  `homd_cov_int_alt ... ↪ homd_cov_int_alt_from_alt4 ...`.
+
+This satisfies the requirement that the relation is not only an `fdapp0` behavior rule: the wrapper
+is now directly defined from the internal `alt4` pipeline.
 
 Target shape (blueprint; names adjusted to the emdash2 kernel):
 

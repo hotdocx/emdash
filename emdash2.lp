@@ -2797,9 +2797,12 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
     - and then evaluating the resulting functor at v : Obj(E[y]) by postcomposition with eval0_func(v).
 */
 
-symbol homd_cov_int_alt_from_alt4 : Π [Z : Cat], Π (E : Catd Z),
+// Bridge combinator: evaluate a Z-section at y, then evaluate the resulting functor at v in E[y].      // sec ↦ ((y,v) ↦ (f ↦ sec(y)(f)(v)))
+symbol homd_cov_int_alt4_to_totalsigma : Π [Z : Cat], Π (E : Catd Z),
   Π (W_Z : τ (Obj Z)),
-  Π (W : τ (FibreObj E W_Z)),
+  Π (SS : τ (Functord
+      (Terminal_catd Z)
+      (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))),
   τ (Functord
       (Terminal_catd (TotalΣ_cat E))
       (Op_catd
@@ -2808,10 +2811,22 @@ symbol homd_cov_int_alt_from_alt4 : Π [Z : Cat], Π (E : Catd Z),
             (comp_cat_fapp0 op
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
 
+symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
+  (W_Z : τ (Obj Z))
+  (W : τ (FibreObj E W_Z))
+  : τ (Functord
+      (Terminal_catd (TotalΣ_cat E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
+≔ @homd_cov_int_alt4_to_totalsigma Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
+
 // Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
 rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;
 
-// Object-action on the derived wrapper: evaluate the section at (y,v) and then evaluate at v.          // (y,v) ↦ (f ↦ (sec_y)(f)(v))
+// Object-action for the bridge combinator: evaluate section at (y,v) by two-stage evaluation.          // (y,v) ↦ (f ↦ (sec_y)(f)(v))
 rule @fdapp0
       (@TotalΣ_cat $Z $E)
       (Terminal_catd (TotalΣ_cat $E))
@@ -2820,7 +2835,7 @@ rule @fdapp0
           (comp_cat_fapp0 Fib_func
             (comp_cat_fapp0 op
               (@hom_cov $Z $W_Z (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt_from_alt4 $Z $E $W_Z $W)
+      (@homd_cov_int_alt4_to_totalsigma $Z $E $W_Z $SS)
       (Struct_sigma $y $v)
       Terminal_obj
   ↪ @comp_cat_fapp0
@@ -2832,7 +2847,7 @@ rule @fdapp0
           $Z
           (Terminal_catd $Z)
           (@fapp0 $Z (Catd_cat $Z) (homd_cov_int_alt4_fam $E) $W_Z)
-          (@homd_cov_int_alt4_sec $Z $E $W_Z $W)
+          $SS
           $y
           Terminal_obj);
 
