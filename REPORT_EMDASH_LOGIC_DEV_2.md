@@ -407,6 +407,94 @@ In `emdash2.lp` we expect such auxiliary helpers to look like:
 - `Groth_con_func` (contravariant Grothendieck + outward `Op_catd`, as a functor object),
 - and an explicit intermediate `..._fam` functor that is then postcomposed by `Pi_func`.
 
+### Phase 8bis (revision): prefer `homd_cov_int_alt4*` (no `TotalΣ_proj1_func` in the internal pipeline)
+
+After the first implementation attempt, we found that an “alt3” pipeline built over `TotalΣ_cat E` is
+non-idiomatic for the intended surface meaning, because it necessarily threads the base index through the
+projection `TotalΣ_proj1_func`:
+
+- it yields a shape like `Π z, E[z]^op → Π (z',v) : TotalΣ_cat(E), hom(z, π₁(z',v))^op → Cat`,
+  i.e. the target base object is only accessible as `π₁(z',v)`.
+
+What we want instead is the more internal / more direct curried form:
+
+- `Π z, E[z]^op → Π z', hom(z, z')^op → (E[z'] → Cat[z'])`,
+
+where “`Cat[z']`” is the constant Cat-family over `Z` (a weakening/lift of `Cat_cat` to `Catd Z`).
+
+Therefore:
+
+- keep `homd_cov_int_alt3*` (if already implemented) as a useful warm-up artifact,
+- introduce a new target pipeline `homd_cov_int_alt4*` that internalizes `z'` directly
+  (by taking Π/sections over the base `Z`, not over `TotalΣ_cat E`),
+- and derive the “section over `TotalΣ_cat E`” wrapper only afterwards by evaluating at `v : E[z']`.
+
+#### Proposed internal pipeline (blueprint)
+
+We want `homd_cov_int_alt4_base` to be a δ-definition (combinator-built) functor:
+
+- `homd_cov_int_alt4_base [Z] (E : Catd Z) : τ (Functor (Op_cat Z) Cat_cat)`
+
+such that, informally:
+
+- `homd_cov_int_alt4_base(E)(z)` is the category of sections over `z' : Z` of the family
+  `Functor_cat( Hom_Z(z,z')^op , Functor_cat(E[z'], Cat) )`.
+
+Then package the dependent hom as a fully internal displayed functor:
+
+- `homd_cov_int_alt4 [Z] (E : Catd Z) : τ (Functord (Op_catd E) (Op_catd (Fibration_cov_catd (homd_cov_int_alt4_base E))))`
+
+This matches the intended “logic-manipulation pipeline” style (and is on-par with the existing `homd_cov_int`).
+
+#### Ingredients required for `homd_cov_int_alt4_base`
+
+1. Constant Cat-family over `Z`.
+   We need a displayed category over `Z` whose fibre is `Cat_cat`:
+
+   - `CatCat_catd [Z : Cat] : Catd Z`
+
+   Recommended δ-definition:
+
+   - `CatCat_catd Z ≔ Pullback_catd (Lift_catd Cat_cat) (Terminal_func Z)`
+
+2. Edge classifier over `Z` indexed by a source object `z`.
+   For each `z : Obj(Z)` we want the displayed category over `Z` whose fibre at `z'` is `Hom_Z(z,z')^op`:
+
+   - `Edge_catd(z) ≔ Fibration_cov_catd (comp_cat_fapp0 op (hom_cov z (id_Z)))`.
+
+   Internally, the functor object mapping `z ↦ Edge_catd(z)` is built using
+   `hom_cov_int`, `op_val_func`, and `Fibration_cov_func` (no `TotalΣ_proj1_func`).
+
+3. Pointwise functor categories via `Functor_catd` and its internalized form `Functor_catd_func`.
+   Define:
+
+   - `Cod_catd(E) ≔ Functor_catd E (CatCat_catd Z)` (so fibres are `Functor_cat(E[z'], Cat)`),
+   - `Fam(z) ≔ Functor_catd (Edge_catd(z)) (Cod_catd(E))`.
+
+   To build `z ↦ Fam(z)` as an internal functor object, use:
+
+   - `Functor_catd_func` + `eval0_func` to “fix the second argument” of `Functor_catd`.
+
+4. Π/sections as an internal functor object (`Pi_func`).
+   Finally:
+
+   - `homd_cov_int_alt4_base(E)(z) ≔ fapp0 (Pi_func Z) (Fam(z))`.
+
+#### Relation back to the binder wrapper `homd_cov_int_alt`
+
+Once `homd_cov_int_alt4` exists, the existing binder wrapper
+
+- `homd_cov_int_alt : Π W_Z W, Functord( Terminal_catd(TotalΣ_cat E), ... )`
+
+should be derived as a view by:
+
+- extracting the section-in-`z'` produced by applying `homd_cov_int_alt4` at `W_Z` and `W`,
+- then evaluating that section at `z'` and evaluating the resulting functor at `v : E[z']`
+  (using `eval0_func`), yielding a functor on `Hom_Z(W_Z,z')^op`.
+
+This is exactly where `TotalΣ_cat E` is a convenient *wrapper* (pairing `z'` with `v`), rather than
+the core index of the internal pipeline.
+
 Target shape (blueprint; names adjusted to the emdash2 kernel):
 
 - `homd_cov_int_alt3_base : Π [Z] (E : Catd Z), τ (Functor (Op_cat Z) Cat_cat)`
