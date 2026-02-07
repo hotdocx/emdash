@@ -751,6 +751,18 @@ rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
 // Computation: (F∘G)(x) ↪ F(G(x)) (stable-head form).                                                  // pointwise composition
 rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
+// Functor-level associativity/identity for the stable-head composition symbol.                         // normalize composition spine
+// We orient associativity to the right to avoid loops and to expose opportunities for specialized
+// rewrite rules (e.g. `hom_cov` precomposition accumulation). Such rule OK only for functors in Cat_cat
+rule @comp_cat_fapp0 $A $B $D (@comp_cat_fapp0 $B $C $D $F $G) $H
+  ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);
+
+// Right identity: F ∘ id = F.                                                                          // normalize away trailing identities
+rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
+
+// Left identity: id ∘ F = F.                                                                           // normalize away leading identities
+rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
+
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 
@@ -799,6 +811,19 @@ rule @fapp0 $B Cat_cat (@comp_cat_fapp0 $B Cat_cat Cat_cat op $E) $b
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
 rule @comp_cat_fapp0 $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ hom_cov $W (comp_cat_fapp0 $F $G);
+
+// Naturality under precomposition, in the *contravariant* (Op_func) view.                               // Op(Hom(W,F-)) ∘ H  ≡  Op(Hom(W,F∘Op(H)-))
+// This is the form that actually appears once `Fibration_con_catd` unfolds and `Op_func` distributes
+// over compositions: we get a composition of the shape `(Op_func (hom_cov ...)) ∘ H` (both living over
+// opposite bases).  We reduce it back to a single `Op_func (hom_cov ...)` with the accumulated base map.
+rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
+      (@Op_func $B Cat_cat (@hom_cov $A $W $B $F))
+      $H
+  ↪ @Op_func $C Cat_cat
+      (@hom_cov $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));
+// rule @Op_func _ _
+//       (@comp_cat_fapp0 $A $B $C $F $G)
+//        ↪  @comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Op_cat $C) (Op_func $F) (Op_func $G);
 
 // TODO: review this; should be derivable from similar rule for `hom_cov` 
 // Naturality w.r.t. precomposition in the argument functor (contravariant case):                    // accumulate the functor (with Op)
@@ -1209,6 +1234,15 @@ rule @Op_catd _ (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
 rule @Op_catd _ (@Pullback_catd $A $B $E $F)
   ↪ @Pullback_catd _ _ (@Op_catd $B $E) (@Op_func $A $B $F);
 
+// Pullback of an Op_catd(Grothendieck) reduces by precomposing the base functor by Op_func(F).         // F^*(Op(∫H)) ≡ Op(∫(H∘Fᵒᵖ))
+// This is the convertibility bridge needed by the `Sigma_uncurry_section_funcd` pipeline (alt4).
+rule @Pullback_catd $A $B
+      (@Op_catd (Op_cat $B)
+        (@Fibration_cov_catd (Op_cat $B) $H))
+      $F
+  ↪ @Op_catd (Op_cat $A)
+      (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));
+
 // Opposite of a displayed functor (slice-style; base map is implicitly id).                           // displayed dualization
 injective symbol Op_funcd : Π [Z : Cat], Π [E D : Catd Z],
   τ (Functord E D) → τ (Functord (Op_catd E) (Op_catd D));
@@ -1555,6 +1589,10 @@ rule @TotalΣ_cat _ (@Op_catd $B $E) ↪ Op_cat (@TotalΣ_cat $B $E);
 
 // Projection of the opposite total is the opposite projection.                                        // (π₁)ᵒᵖ ≡ π₁
 rule @Op_func _ $B (@TotalΣ_proj1_func $B $E)
+  ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
+
+// Double opposite of the Σ-total projection collapses back to the original projection.                 // (π₁)ᵒᵖᵒᵖ ↪ π₁
+rule @Op_func _ _ (@TotalΣ_proj1_func $B $E)
   ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
 // Objects of TotalΣ_cat are always definitional Σ-pairs (x,u) with x:Obj(B) and u:Obj(E[x]).          // τ Obj(∫ΣE) ↪ Σ x:B, Obj(E[x])
@@ -2842,42 +2880,21 @@ symbol swap_homd_cov_int_alt4_section :
   τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
     → τ (Functord (Terminal_catd Z) (Functor_catd E (homd_cov_int_alt4_eval_base_catd W_Z)));
 
-// Bridge from pullback-codomain sections to the existing homd target codomain on TotalΣ(E).            // aligns generic Sigma-uncurry output with current target head
-symbol pullback_homd_cov_int_alt4_to_target_section :
-  Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
-  τ (Functord
-      (Terminal_catd (TotalΣ_cat E))
-      (Pullback_catd (homd_cov_int_alt4_eval_base_catd W_Z) (TotalΣ_proj1_func E)))
-    → τ (Functord
-          (Terminal_catd (TotalΣ_cat E))
-          (Op_catd
-            (Fibration_con_catd
-              (comp_cat_fapp0 Fib_func
-                (comp_cat_fapp0 op
-                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
-
 // Primitive Sigma-uncurry evaluator on sections (no outer Functor object needed).                       // section(z') ↦ section(y,v)
-symbol TotalΣ_uncurry_eval : Π [Z : Cat], Π [E : Catd Z], Π (W_Z : τ (Obj Z)),
-  τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
-    → τ (Functord
+symbol TotalΣ_uncurry_eval [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
+  (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
+     τ (Functord
           (Terminal_catd (TotalΣ_cat E))
           (Op_catd
             (Fibration_con_catd
               (comp_cat_fapp0 Fib_func
                 (comp_cat_fapp0 op
-                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
-
-// Derivation: TotalΣ_uncurry_eval is assembled from swap + generic Sigma-uncurry + pullback bridge.     // direct object-level bridge
-rule @TotalΣ_uncurry_eval $Z $E $W_Z $SS
-  ↪ @pullback_homd_cov_int_alt4_to_target_section
-      $Z
-      $E
-      $W_Z
-      (@Sigma_uncurry_section_funcd
-        $Z
-        $E
-        (homd_cov_int_alt4_eval_base_catd $W_Z)
-        (@swap_homd_cov_int_alt4_section $Z $E $W_Z $SS));
+                  (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
+≔ @Sigma_uncurry_section_funcd
+    Z
+    E
+    (homd_cov_int_alt4_eval_base_catd W_Z)
+    (@swap_homd_cov_int_alt4_section Z E W_Z SS);
 
 // Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
 rule @fdapp0

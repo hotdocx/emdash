@@ -218,6 +218,51 @@ We need:
 
 ### Proposed approach
 
+## Update (2026-02-07): `homd_cov_int_alt` from `homd_cov_int_alt4` now typechecks definitionally
+
+We implemented the intended pipeline where the legacy binder-style wrapper
+`homd_cov_int_alt` is obtained (definitionally) from the more internal `homd_cov_int_alt4`,
+using only two new primitives at the section level:
+
+- `Sigma_uncurry_section_funcd` (primitive)
+  - type: takes a section over `Z` of `Functor_catd E D` and produces a section over `TotalΣ_cat E`
+    of `Pullback_catd D (TotalΣ_proj1_func E)`.
+- `swap_homd_cov_int_alt4_section` (currently kept abstract, but its type is the intended
+  `swap_functor_func`-driven orientation change on sections).
+
+Concretely, we defined (in `emdash2.lp`) the derived section:
+
+- `TotalΣ_uncurry_eval Z E W_Z SS ≔ Sigma_uncurry_section_funcd Z E (homd_cov_int_alt4_eval_base_catd W_Z) (swap_homd_cov_int_alt4_section Z E W_Z SS)`
+
+and this now *typechecks without any unification hack* (no `unif_rule` bridge needed), because we
+added the missing “basic logic” rewrite principles that make the required `Pullback_catd(...)`
+codomain compute to the target `Op_catd(Fibration_con_catd(... hom_cov ...))` shape.
+
+### Key rewrite principles added (engineering-critical)
+
+1. Functor-level normalization for `comp_cat_fapp0`:
+   - right-associativity normalization
+   - left/right identity simplifications
+
+2. Pullback computation for `Op_catd` of Grothendieck totals:
+   - `Pullback_catd (Op_catd (Op_cat B) (Fibration_cov_catd (Op_cat B) H)) F`
+     reduces to
+     `Op_catd (Op_cat A) (Fibration_cov_catd (Op_cat A) (H ∘ Op_func F))`
+
+3. The missing contravariant “accumulate the functor” rule for `hom_cov` under `Op_func`:
+   - a stable-head rule rewriting `(Op_func (hom_cov ...)) ∘ H` into a single `Op_func (hom_cov ...)`
+     with the accumulated base map `(F ∘ Op_func H)`
+
+4. A definitional involution for `TotalΣ_proj1_func` under `Op_func`:
+   - ensures `Op_func` of the already-normalized opposite projection collapses back to the original
+     projection, which is needed when the pullback rule introduces `Op_func` on that projection.
+
+### Cleanups
+
+- Removed the previously attempted bridge symbol `pullback_homd_cov_int_alt4_to_target_section`
+  and the earlier `unif_rule`-based convertibility hint: they are no longer necessary once the
+  above rewrite principles exist.
+
 1. Introduce `homd_cov_int_alt` as a symbol with a type expressed as a composition of existing stable-head internal functors.
 2. Do not add general computation rules yet.
 3. Add computation rules only for the Grothendieck/Grothendieck case (mirroring the existing `homd_cov` pointwise rule), ensuring they reduce to:
