@@ -2372,18 +2372,7 @@ symbol TotalΣ_hom_func_alt [Z : Cat]
   (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (FibreObj E x))
   (y : τ (Obj Z)) (v : τ (FibreObj E y))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ @fdapp0
-      (@TotalΣ_cat _ E)
-      (Terminal_catd (TotalΣ_cat E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov _ x (@TotalΣ_cat _ E) (TotalΣ_proj1_func E))))))
-      (@homd_cov_int_alt _ E x u)
-      (Struct_sigma y v)
-      Terminal_obj;
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -2900,6 +2889,20 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
 
 // Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
 rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;
+
+// Direct normalization of TotalΣ_hom_func_alt through the alt4-derived wrapper.                        // defer wrapper analysis, keep end-goal head
+rule @TotalΣ_hom_func_alt $Z $E $x $u $y $v
+  ↪ @fdapp0
+      (@TotalΣ_cat $Z $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov $Z $x (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
+      (@homd_cov_int_alt_from_alt4 $Z $E $x $u)
+      (Struct_sigma $y $v)
+      Terminal_obj;
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0
