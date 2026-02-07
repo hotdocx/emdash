@@ -1067,6 +1067,32 @@ assert [A : Cat] (F : τ (Functor A (Op_cat Cat_cat))) ⊢
 // This is the displayed analogue of cartierSolution13's `Fibre_catd (Terminal_catd _) _ ↪ Terminal_catd _`. // terminal fibres
 rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
 
+// -------------------------------------------------------------------------------------------------
+// 7c. Pointwise functor-category as a displayed category                                             // Functor_catd (fibrewise)
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Functor_catd (pointwise, fibrewise)
+
+  This is the displayed category over Z whose fibre at z is the ordinary functor category:
+
+    (Functor_catd E D)[z]  ≡  Functor_cat(E[z], D[z]).
+
+  This is intentionally fibrewise-only: we do not (yet) commit to how these fibres vary along base arrows
+  for general `Catd Z` (that would require a transport/cleavage interface).
+
+  See `REPORT_EMDASH_LOGIC_DEV.md` (Option A) for the motivation (partial discharge / pointwise syntax).
+*/
+constant symbol Functor_catd : Π [Z : Cat], Π (E D : Catd Z), Catd Z;
+
+// Fibre computation: functors between fibres.                                                         // fibre(Functor_catd(E,D),z) ↪ Functor_cat(E[z],D[z])
+rule Fibre_cat (Functor_catd $E $D) $z
+  ↪ Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z);
+
+// Sanity: the fibre computation rule is visible by definitional equality.                             // exercise Functor_catd fibre rule
+assert [Z : Cat] (E D : Catd Z) (z : τ (Obj Z)) ⊢
+  Fibre_cat (Functor_catd E D) z ≡ Functor_cat (Fibre_cat E z) (Fibre_cat D z);
+
 /*
   Univalence bridge (interface only; moved here because it depends on Fibre_cat)
 
@@ -2231,6 +2257,59 @@ symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
             (comp_cat_fapp0 op
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
 
+/*
+  homd_cov_int_alt2 (fully internal; W_Z and W are supplied by application)
+
+  We internalize the external binders of `homd_cov_int_alt` by:
+
+  - building a Cat-valued functor on the base `Op_cat Z`:
+      W_Z ↦ sections over TotalΣ_cat(E) of the family (y,v) ↦ Functor_cat((Hom_Z(W_Z,y))ᵒᵖ, Cat),
+  - then taking its Grothendieck construction as a displayed category over `Op_cat Z`,
+  - and finally defining a displayed functor out of `Op_catd E` into that Grothendieck total.
+
+  As with `homd_cov_int`, we only fix object-action computation for the base functor for now.
+*/
+
+// Base : (Op_cat Z) ⇒ Cat_cat, sending W_Z to the category of sections described above.               // internalize W_Z as an index
+constant symbol homd_cov_int_alt2_base : Π [Z : Cat], Π (E : Catd Z),
+  τ (Functor (Op_cat Z) Cat_cat);
+
+// Object-action: at W_Z, produce the section category over TotalΣ_cat(E).                             // fapp0(base,W_Z) ↪ sections(...)
+rule fapp0 (homd_cov_int_alt2_base $E) $W_Z
+  ↪ Functord_cat
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov _ $W_Z (@TotalΣ_cat _ $E) (TotalΣ_proj1_func $E))))));
+
+// The fully-internal curried dependent hom packaging.                                                 // Op_catd(E) → ∫(base)
+constant symbol homd_cov_int_alt2 : Π [Z : Cat], Π (E : Catd Z),
+  τ (Functord (Op_catd E)
+              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt2_base E)));
+
+/*
+  TotalΣ_hom_func_alt (warm-up bridge)
+
+  For fixed (x,u) and (y,v) in `TotalΣ_cat E`, the “dependent hom over base edges” classifier should
+  produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `TotalΣ_hom_func`
+  is intended to be expressed via the fully-internal pipeline (`homd_cov_int_alt2`), but during early
+  development it is useful to keep an explicit stable head for the bridge:
+
+    TotalΣ_hom_func_alt(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
+
+  We define it as the result of evaluating the binder wrapper `homd_cov_int_alt` at the point (y,v)
+  of `TotalΣ_cat E`, on the unique terminal fibre object.
+
+  This does NOT replace the existing Grothendieck shortcut computation for `TotalΣ_hom_func`.
+*/
+symbol TotalΣ_hom_func_alt : Π [Z : Cat],
+  Π (E : Catd Z),
+  Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
+  Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
+  τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
   (W_EW : τ (FibreObj E W_Z)), Π [D : Catd Z], Π (FF : τ (Functord D E)),                           // W in fibre, D another displayed cat, FF : D→E
@@ -2241,6 +2320,20 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),                     // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (FibreObj E X_Z) → τ (FibreObj D X_Z);                         // map objects in each fibre
+
+// Folding rule: evaluate the section at (y,v) and fold to the stable head.                            // fdapp0(section,(y,v),*) ↪ TotalΣ_hom_func_alt
+rule @fdapp0
+      (@TotalΣ_cat _ $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov _ $x (@TotalΣ_cat _ $E) (TotalΣ_proj1_func $E))))))
+      (@homd_cov_int_alt _ $E $x $u)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @TotalΣ_hom_func_alt _ $E $x $u $y $v;
 
 // Section into a Grothendieck total (object-level computation).                                       // (x ↦ (xy(x), FF_x(*)))
 // If D = ∫M is Grothendieck and FF : 1_X → xy^*(D) is a displayed functor over xy : X→B, then ∫FF sends:
@@ -2284,6 +2377,44 @@ symbol Fibre_func : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D))
 // β-rule (objects): applying the extracted fibre functor is exactly fdapp0.                           // unpack Fibre_func at objects
 rule @fapp0 (Fibre_cat $E $X_Z) (Fibre_cat $D $X_Z) (@Fibre_func $Z $E $D $FF $X_Z) $u
   ↪ @fdapp0 $Z $E $D $FF $X_Z $u;
+
+// -------------------------------------------------------------------------------------------------
+// 16a'. Pointwise transfors as a displayed category                                                  // Transf_catd (fibrewise)
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Transf_catd (pointwise, fibrewise)
+
+  For fixed displayed functors FF, GG : E ⟶_Z D, `Transf_catd FF GG` is the displayed category over Z
+  whose fibre at z is the ordinary transfor category between the induced fibre functors:
+
+    (Transf_catd FF GG)[z]  ≡  Transf_cat(FF_z, GG_z)
+
+  where FF_z := Fibre_func FF z and GG_z := Fibre_func GG z.
+
+  This is a fibrewise-only constructor, like `Functor_catd`.
+*/
+constant symbol Transf_catd : Π [Z : Cat], Π [E D : Catd Z],
+  Π (FF GG : τ (Functord E D)),
+  Catd Z;
+
+// Fibre computation: transfors between fibre functors.                                                // fibre(Transf_catd(FF,GG),z) ↪ Transf_cat(FF_z,GG_z)
+rule Fibre_cat (Transf_catd $FF $GG) $z
+  ↪ Transf_cat (Fibre_func $FF $z) (Fibre_func $GG $z);
+
+// Sanity: the fibre computation rule is visible by definitional equality.                             // exercise Transf_catd fibre rule
+assert [Z : Cat] [E D : Catd Z] (FF GG : τ (Functord E D)) (z : τ (Obj Z)) ⊢
+  Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z);
+
+// Derive the binder-style `homd_cov_int_alt` by applying the internal packaging on the fibre.         // fold Fibre_func(homd_cov_int_alt2) ↪ homd_cov_int_alt
+rule fapp0
+      (@Fibre_func (Op_cat $Z)
+        (@Op_catd $Z $E)
+        (@Fibration_cov_catd (Op_cat $Z) (homd_cov_int_alt2_base $E))
+        (@homd_cov_int_alt2 $Z $E)
+        $W_Z)
+      $W
+  ↪ @homd_cov_int_alt $Z $E $W_Z $W;
 
 // Special case: fdapp0 of a lifted ordinary functor is ordinary object-application (fibrewise).      // fdapp0(lift(F)) ↪ fapp0(F)
 // NOTE: after dropping injectivity of `Obj`, the implicit base/category parameters of `fdapp0`
@@ -3156,6 +3287,32 @@ symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Functord 
 
 // β-rule: `tdapp0_fapp0` is definitionally the object-action of the functor `tdapp0_func`.              // unpack tdapp0_func at objects
 rule fapp0 (@tdapp0_func $Z $E $D $FF $GG $Y_Z $V_EY) $ϵ ↪ @tdapp0_fapp0 $Z $E $D $FF $GG $Y_Z $V_EY $ϵ;
+
+// Project a displayed transfor to an ordinary fibre transfor.                                          // Fibre_transf : Transfd(FF,GG) → (z ↦ Transf(FF_z,GG_z))
+symbol Fibre_transf : Π [Z : Cat], Π [E D : Catd Z],
+  Π [FF GG : τ (Functord E D)],
+  Π (ϵ : τ (Transfd FF GG)),
+  Π (z : τ (Obj Z)),
+  τ (Transf (Fibre_func FF z) (Fibre_func GG z));
+
+// β-rule: pointwise components of Fibre_transf are the displayed diagonal components.                 // (Fibre_transf ϵ z)_u ↪ ϵ_{(z,u)}
+rule @tapp0_fapp0
+    (Fibre_cat $E $z)
+    (Fibre_cat $D $z)
+    (@Fibre_func $Z $E $D $FF $z)
+    (@Fibre_func $Z $E $D $GG $z)
+    $u
+    (@Fibre_transf $Z $E $D $FF $GG $ϵ $z)
+  ↪ @tdapp0_fapp0 $Z $E $D $FF $GG $z $u $ϵ;
+
+// Sanity: Fibre_transf components compute to displayed components.                                    // (Fibre_transf ϵ z)_u = ϵ_{(z,u)}
+assert [Z : Cat] [E D : Catd Z] [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG)) (z : τ (Obj Z)) (u : τ (FibreObj E z)) ⊢
+  @tapp0_fapp0 (Fibre_cat E z) (Fibre_cat D z)
+      (Fibre_func FF z) (Fibre_func GG z)
+      u
+      (Fibre_transf ϵ z)
+    ≡ @tdapp0_fapp0 Z E D FF GG z u ϵ;
 
 /*
   Displayed vertical identity/composition of displayed transfors, computed pointwise in fibres.
