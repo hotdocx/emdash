@@ -395,18 +395,28 @@ the computation is a rewrite/definition for `TotalΣ_hom_func`, not the `Hom_cat
 
 - `TotalΣ_hom_func (Fibration_cov_catd M) ... ↪ comp_hom_con_fib_cov ...`.
 
-Adding a general rewrite
+Long-term target (preferred): `TotalΣ_hom_func` should be *expressed in terms of* `homd_cov_int_alt2`
+(and/or the binder wrapper `homd_cov_int_alt`), and then the Grothendieck computation should follow because
+`homd_cov_int_alt2` computes when `E = Fibration_cov_catd M`.
+
+However, during incremental development it is acceptable (and often desirable) to keep the above
+Grothendieck-specific rule as a **confluent shortcut**, provided we verify joinability with the
+eventual “definition via `homd_cov_int_alt2`” (e.g. by `assert` sanity terms once the join is expressible).
+
+In particular, we do not necessarily need an extra symbol like `TotalΣ_hom_func_from_alt` if we keep:
+
+- one general-definition path (via `homd_cov_int_alt2`), and
+- one Grothendieck shortcut path,
+
+and we can later show they normalize to the same term in the Grothendieck case.
+
+Adding a general rewrite (too early)
 
 - `TotalΣ_hom_func E ... ↪ (fdapp0 (homd_cov_int_alt ...) (Struct_sigma y v) Terminal_obj)` (schematically),
 
-would overlap when `E = Fibration_cov_catd M`. Since `homd_cov_int_alt` is currently abstract in that case,
-the overlap would likely not be joinable yet (and risks breaking confluence/robustness).
-
-Therefore, the safe incremental approach is:
-
-- keep the specialized Grothendieck rule as the computation engine,
-- add a *separate* derived symbol (e.g. `TotalΣ_hom_func_from_alt`) or an `assert`-level sanity equality
-  expressing the intended equation in terms of `homd_cov_int_alt`, until the join can be made computational.
+would overlap when `E = Fibration_cov_catd M`. If `homd_cov_int_alt*` is still abstract in that case,
+the overlap may not be joinable yet and risks breaking robustness. Hence the staging discipline:
+delay the general rewrite until `homd_cov_int_alt2` is computational enough that joinability is visible.
 
 ### 3) “Fully internal” `homd_cov_int_alt2`: recommended staging
 
@@ -438,8 +448,18 @@ internal combinators. Independently, `REPORT_EMDASH_LOGIC_DEV.md` proposes addin
 
 to support “partial discharge” surface syntax.
 
-These additions remain orthogonal and useful, and are a natural prerequisite for later internalization
-work; they do not themselves require committing to “sections = displayed functors” definitional equalities.
+Clarification:
+
+- These additions are *not* merely orthogonal “syntax sugar” once we aim to make `homd_cov_int_alt2`
+  internal and inter-derivable (on-par) with the existing `homd_cov_int`.
+- In practice, the same internal toolkit is reused across both developments:
+  - internalized “Π/sections” operators (like `Pi_func`),
+  - evaluation/currying operators (like `eval0_func`),
+  - and pointwise functor-category families (`Functor_catd` and its internalized functor-object forms).
+
+So, while Option A still avoids the strong definitional equation “displayed functor = section”, it is
+expected that the *availability* of `Functor_catd`-level structure becomes a prerequisite for expressing
+the fully-internal `homd_cov_int_alt2` pipeline in a reusable, “logic-manipulation” style.
 
 ### 5) Updated next-step order (implementation)
 
