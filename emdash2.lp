@@ -1094,6 +1094,33 @@ assert [Z : Cat] (E D : Catd Z) (z : τ (Obj Z)) ⊢
   Fibre_cat (Functor_catd E D) z ≡ Functor_cat (Fibre_cat E z) (Fibre_cat D z);
 
 /*
+  Functor_catd_func (internalized “currying” of Functor_catd)
+
+  For internal pipelines (definitions built from functor objects), it is useful to have a functor object
+  whose object-action is the currying:
+
+    Functor_catd_func(B)(E)(D)  ↪  Functor_catd(E,D).
+
+  Note: this only fixes object-action for now (consistent with Functor_catd being fibrewise-only).
+*/
+constant symbol Functor_catd_func :
+  Π (B : Cat),
+  τ (Functor (Op_cat (Catd_cat B)) (Functor_cat (Catd_cat B) (Catd_cat B)));
+
+// Unpack the first argument E (object-action of the outer functor).                                   // fapp0(Functor_catd_func,E) ↪ (D ↦ Functor_catd(E,D))
+symbol Functor_catd_fapp0_func [B : Cat] (E : Catd B)
+  : τ (Functor (Catd_cat B) (Catd_cat B));
+
+rule @fapp0 _ _ (@Functor_catd_func $B) $E ↪ @Functor_catd_fapp0_func $B $E;
+
+// Unpack the second argument D (object-action of the inner functor).                                   // fapp0(Functor_catd_fapp0_func(E),D) ↪ Functor_catd(E,D)
+rule @fapp0 _ _ (@Functor_catd_fapp0_func $B $E) $D ↪ @Functor_catd $B $E $D;
+
+// Sanity: the curried object-action computes as intended.                                              // Functor_catd_func(B)(E)(D) = Functor_catd(E,D)
+assert (B : Cat) (E D : Catd B) ⊢
+  fapp0 (fapp0 (Functor_catd_func B) E) D ≡ Functor_catd E D;
+
+/*
   Univalence bridge (interface only; moved here because it depends on Fibre_cat)
 
   Long-term goal: “equivalences in C ARE paths in Obj C”, as computationally/definitionally as possible.
@@ -2140,6 +2167,14 @@ assert [Z : Cat] (F : τ (Functor Z Cat_cat)) ⊢
 // 15b. Internal evaluation + sections over Catd                                                     // minimal stable heads
 // -------------------------------------------------------------------------------------------------
 
+// Abbreviation: Cat-valued functors out of Z (for readability in types/definitions).                   // Fib_cat(Z) ≔ (Z⟶Cat)
+symbol Fib_cat (Z : Cat) : Cat
+≔ Functor_cat Z Cat_cat;
+
+// Abbreviation: sections of a displayed category E over Z (for readability in types/definitions).      // Pi_cat(Z,E) ≔ Functord_cat(1_Z,E)
+symbol Pi_cat [Z : Cat] (E : Catd Z) : Cat
+≔ Functord_cat (Terminal_catd Z) E;
+
 // Evaluate a functor at a chosen object, packaged as a functor object.                                 // eval_x : (A⟶B) → B
 symbol eval0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
@@ -2258,43 +2293,71 @@ symbol homd_cov_int_alt : Π [Z : Cat], Π [E : Catd Z],
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))));
 
 /*
-  homd_cov_int_alt2 (fully internal; W_Z and W are supplied by application)
+  homd_cov_int_alt3 (fully internal; W_Z and W are supplied by application)
 
-  We internalize the external binders of `homd_cov_int_alt` by:
+  We internalize the external binders of `homd_cov_int_alt` by defining a δ-reducible base functor
+  (built from functor objects / combinators), so that the functorial structure is not left opaque.
 
   - building a Cat-valued functor on the base `Op_cat Z`:
       W_Z ↦ sections over TotalΣ_cat(E) of the family (y,v) ↦ Functor_cat((Hom_Z(W_Z,y))ᵒᵖ, Cat),
   - then taking its Grothendieck construction as a displayed category over `Op_cat Z`,
   - and finally defining a displayed functor out of `Op_catd E` into that Grothendieck total.
-
-  As with `homd_cov_int`, we only fix object-action computation for the base functor for now.
 */
 
-// Base : (Op_cat Z) ⇒ Cat_cat, sending W_Z to the category of sections described above.               // internalize W_Z as an index
-constant symbol homd_cov_int_alt2_base : Π [Z : Cat], Π (E : Catd Z),
-  τ (Functor (Op_cat Z) Cat_cat);
+// Postcompose a Cat-valued functor by Fib_func, as a functor object.                                   // (A⟶Cat) ⟶ (A⟶(Catᵒᵖ))
+symbol Fibpost_val_func [A : Cat]
+  : τ (Functor (Functor_cat A Cat_cat) (Functor_cat A (Op_cat Cat_cat)))
+≔ @comp_cat_cov_func A Cat_cat (Op_cat Cat_cat) Fib_func;
 
-// Object-action: at W_Z, produce the section category over TotalΣ_cat(E).                             // fapp0(base,W_Z) ↪ sections(...)
-rule fapp0 (homd_cov_int_alt2_base $E) $W_Z
-  ↪ Functord_cat
-      (Terminal_catd (TotalΣ_cat $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov _ $W_Z (@TotalΣ_cat _ $E) (TotalΣ_proj1_func $E))))));
+// Contravariant Grothendieck construction (plus outward Op_catd), as a functor object on functors.     // (A⟶Catᵒᵖ) ⟶ Catd_cat(A)
+symbol Groth_con_func [A : Cat]
+  : τ (Functor (Functor_cat A (Op_cat Cat_cat)) (Catd_cat A));
+
+rule fapp0 (@Groth_con_func $A) $F ↪ @Op_catd (Op_cat $A) (@Fibration_con_catd $A $F);
+
+// Family of displayed categories over TotalΣ_cat(E), indexed by W_Z : Obj(Z).                          // W_Z ↦ (y,v) ↦ Functor_cat((Hom_Z(W_Z,y))ᵒᵖ,Cat)
+symbol homd_cov_int_alt3_fam [Z : Cat] (E : Catd Z)
+  : τ (Functor (Op_cat Z) (Catd_cat (TotalΣ_cat E)))
+≔ let T : Cat ≔ TotalΣ_cat E in
+   @comp_cat_fapp0
+     (Op_cat Z)
+     (Functor_cat T (Op_cat Cat_cat))
+     (Catd_cat T)
+     (@Groth_con_func T)
+     (@comp_cat_fapp0
+       (Op_cat Z)
+       (Functor_cat T Cat_cat)
+       (Functor_cat T (Op_cat Cat_cat))
+       (@Fibpost_val_func T)
+       (@comp_cat_fapp0
+         (Op_cat Z)
+         (Functor_cat T Cat_cat)
+         (Functor_cat T Cat_cat)
+         (@op_val_func T)
+         (@hom_cov_int Z T (TotalΣ_proj1_func E))));
+
+// Base : (Op_cat Z) ⇒ Cat_cat, sending W_Z to the category of sections described above.               // internalize W_Z as an index (δ-defined)
+symbol homd_cov_int_alt3_base [Z : Cat] (E : Catd Z)
+  : τ (Functor (Op_cat Z) Cat_cat)
+≔ let T : Cat ≔ TotalΣ_cat E in
+   @comp_cat_fapp0
+     (Op_cat Z)
+     (Catd_cat T)
+     Cat_cat
+     (@Pi_func T)
+     (homd_cov_int_alt3_fam E);
 
 // The fully-internal curried dependent hom packaging.                                                 // Op_catd(E) → ∫(base)
-constant symbol homd_cov_int_alt2 : Π [Z : Cat], Π (E : Catd Z),
+constant symbol homd_cov_int_alt3 : Π [Z : Cat], Π (E : Catd Z),
   τ (Functord (Op_catd E)
-              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt2_base E)));
+              (@Fibration_cov_catd (Op_cat Z) (homd_cov_int_alt3_base E)));
 
 /*
   TotalΣ_hom_func_alt (warm-up bridge)
 
   For fixed (x,u) and (y,v) in `TotalΣ_cat E`, the “dependent hom over base edges” classifier should
   produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `TotalΣ_hom_func`
-  is intended to be expressed via the fully-internal pipeline (`homd_cov_int_alt2`), but during early
+  is intended to be expressed via the fully-internal pipeline (`homd_cov_int_alt3`), but during early
   development it is useful to keep an explicit stable head for the bridge:
 
     TotalΣ_hom_func_alt(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
@@ -2304,11 +2367,27 @@ constant symbol homd_cov_int_alt2 : Π [Z : Cat], Π (E : Catd Z),
 
   This does NOT replace the existing Grothendieck shortcut computation for `TotalΣ_hom_func`.
 */
-symbol TotalΣ_hom_func_alt : Π [Z : Cat],
-  Π (E : Catd Z),
-  Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
-  Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
-  τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+
+// Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
+symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),                     // dependent functor FF : E→D
+  Π [X_Z : τ (Obj Z)], τ (FibreObj E X_Z) → τ (FibreObj D X_Z);                         // map objects in each fibre
+
+symbol TotalΣ_hom_func_alt [Z : Cat]
+  (E : Catd Z)
+  (x : τ (Obj Z)) (u : τ (FibreObj E x))
+  (y : τ (Obj Z)) (v : τ (FibreObj E y))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @fdapp0
+      (@TotalΣ_cat _ E)
+      (Terminal_catd (TotalΣ_cat E))
+      (Op_catd
+        (Fibration_con_catd
+          (comp_cat_fapp0 Fib_func
+            (comp_cat_fapp0 op
+              (@hom_cov _ x (@TotalΣ_cat _ E) (TotalΣ_proj1_func E))))))
+      (@homd_cov_int_alt _ E x u)
+      (Struct_sigma y v)
+      Terminal_obj;
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
 constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
@@ -2316,24 +2395,6 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
   τ (Functor
       (Total_cat (Product_catd D (Fibration_cov_catd (comp_cat_fapp0 op (hom_cov W_Z (@id_func Z))))))
       Cat_cat);                                                                                            // target category Cat_cat (Cat-valued functors)
-
-// Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
-symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),                     // dependent functor FF : E→D
-  Π [X_Z : τ (Obj Z)], τ (FibreObj E X_Z) → τ (FibreObj D X_Z);                         // map objects in each fibre
-
-// Folding rule: evaluate the section at (y,v) and fold to the stable head.                            // fdapp0(section,(y,v),*) ↪ TotalΣ_hom_func_alt
-rule @fdapp0
-      (@TotalΣ_cat _ $E)
-      (Terminal_catd (TotalΣ_cat $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov _ $x (@TotalΣ_cat _ $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt _ $E $x $u)
-      (Struct_sigma $y $v)
-      Terminal_obj
-  ↪ @TotalΣ_hom_func_alt _ $E $x $u $y $v;
 
 // Section into a Grothendieck total (object-level computation).                                       // (x ↦ (xy(x), FF_x(*)))
 // If D = ∫M is Grothendieck and FF : 1_X → xy^*(D) is a displayed functor over xy : X→B, then ∫FF sends:
@@ -2406,12 +2467,12 @@ rule Fibre_cat (Transf_catd $FF $GG) $z
 assert [Z : Cat] [E D : Catd Z] (FF GG : τ (Functord E D)) (z : τ (Obj Z)) ⊢
   Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z);
 
-// Derive the binder-style `homd_cov_int_alt` by applying the internal packaging on the fibre.         // fold Fibre_func(homd_cov_int_alt2) ↪ homd_cov_int_alt
+// Derive the binder-style `homd_cov_int_alt` by applying the internal packaging on the fibre.         // fold Fibre_func(homd_cov_int_alt3) ↪ homd_cov_int_alt
 rule fapp0
       (@Fibre_func (Op_cat $Z)
         (@Op_catd $Z $E)
-        (@Fibration_cov_catd (Op_cat $Z) (homd_cov_int_alt2_base $E))
-        (@homd_cov_int_alt2 $Z $E)
+        (@Fibration_cov_catd (Op_cat $Z) (homd_cov_int_alt3_base $E))
+        (@homd_cov_int_alt3 $Z $E)
         $W_Z)
       $W
   ↪ @homd_cov_int_alt $Z $E $W_Z $W;
