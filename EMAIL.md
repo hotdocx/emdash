@@ -1,4 +1,4 @@
-Subject: GPT-5.2 AI vs ω-categories — Re: [FOM] Autoformalization getting easy?
+Subject: GPT-5.3-Codex AI vs ω-categories — Re: [FOM] Autoformalization getting easy?
 
 Dear Josef Urban, dear FOM,
 
@@ -10,7 +10,7 @@ emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
 https://github.com/1337777/cartier/blob/master/cartierSolution19.lp
 https://hotdocx.github.io/r/--------TODO-------
 
-And with good "mathops/devops engineering", a general LLM such as GPT-5.2 with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at this "dependent hom/arrow/comma category" construction:
+And with good "mathops/devops engineering", a general LLM such as GPT-5.3-Codex with Codex CLI has succeeded in coding this whole ≈4k lines file `cartierSolution19.lp` from just text prompts containing `arrowgram` commutative diagrams which hinted at this "dependent hom/arrow/comma category" construction:
 
 ## 1) Dependent arrow/comma/hom for a dependent category and “stacking” pasting diagrams
 
@@ -63,9 +63,9 @@ An instance of this accumulation rule is the *exchange law* between horizontal a
 Moreover such formulations of naturality are useful to express computationally the triangular identities of *adjoint functors*:
 - `ϵ_(f) ∘ LAdj(η_(g))  ↪  f ∘ LAdj(g)`
 
-## 4) GPT-5.2 diagrammatic prompting via `arrowgram` and “MathOps”
+## 4) GPT-5.3-Codex diagrammatic prompting via `arrowgram` and “MathOps”
 
-What is MathOps? Example: How to enable the GPT-5.2 + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A MathOps solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with an AI-editor that generates and renders `markdown` papers documents and slides presentations with embedded diagrams specs, from any uploaded source references.
+What is MathOps? Example: How to enable the GPT-5.3-Codex + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A MathOps solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with an AI-editor that generates and renders `markdown` papers documents and slides presentations with embedded diagrams specs, from any uploaded source references.
 
 While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative MathOps from idea, to sharing, to community peer review!
 
@@ -81,11 +81,12 @@ OK, thank you Josef Urban for your attention to these documents, and I am lookin
 References:
 [1] Kosta Dosen, Zoran Petric (1999). "Cut-Elimination in Categories"
 [2] This summer visit to Ambrus Kaposi in Budapest, and insightful feedback at RHPL@FSTTCS 2025 in India
-[3] GPT-5.2
+[3] GPT-5.3-Codex
 
 
 
-
+gpt report
+@tcs
 
 
 - TODO: kimi code, gemini 3, getpaidx container

@@ -2938,6 +2938,37 @@ symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
     (homd_cov_int_alt4_eval_base_catd2 W_Z)
     (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
 
+// Primitive object-action for Sigma-uncurry/eval2 at (y,v).                                            // (y,v) ↦ eval_v( swapped_section(y) )
+rule @fdapp0
+      (@TotalΣ_cat $Z $E)
+      (Terminal_catd (TotalΣ_cat $E))
+      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $W_Z) (TotalΣ_proj1_func $E))
+      (@TotalΣ_uncurry_eval2 $Z $E $W_Z $SS)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @fapp0
+        (Functor_cat
+          (Fibre_cat $E $y)
+          (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y))
+        (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y)
+        (@eval0_func
+          (Fibre_cat $E $y)
+          (Fibre_cat (homd_cov_int_alt4_eval_base_catd2 $W_Z) $y)
+          $v)
+        (@fdapp0
+          $Z
+          (Terminal_catd $Z)
+          (Functor_catd $E (homd_cov_int_alt4_eval_base_catd2 $W_Z))
+          (@swap_homd_cov_int_alt4_section2 $Z $E $W_Z $SS)
+          $y
+          Terminal_obj);
+
+// New, more direct derived section over TotalΣ(E), keeping the pullback codomain explicit.             // do not force legacy homd target head
+symbol homd_cov_int_alt_from_alt4b [Z : Cat] (E : Catd Z)
+  (W_Z : τ (Obj Z))
+  (W : τ (FibreObj E W_Z))
+≔ @TotalΣ_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
+
 // Primitive object-action for Sigma-uncurry/eval at (y,v).                                               // (y,v) ↦ eval_v( section(y) )
 rule @fdapp0
       (@TotalΣ_cat $Z $E)
@@ -2975,20 +3006,15 @@ symbol homd_cov_int_alt_from_alt4 [Z : Cat] (E : Catd Z)
               (@hom_cov Z W_Z (@TotalΣ_cat Z E) (TotalΣ_proj1_func E)))))))
 ≔ @TotalΣ_uncurry_eval Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
-// Define the legacy binder wrapper by the alt4-derived view.                                           // homd_cov_int_alt ↪ homd_cov_int_alt_from_alt4
-rule @homd_cov_int_alt $Z $E $W_Z $W ↪ @homd_cov_int_alt_from_alt4 $Z $E $W_Z $W;
+// NOTE: we no longer rewrite `homd_cov_int_alt` to an alt4-derived view by default.                    // keep binder wrapper abstract
 
 // Direct normalization of TotalΣ_hom_func_alt through the alt4-derived wrapper.                        // defer wrapper analysis, keep end-goal head
 rule @TotalΣ_hom_func_alt $Z $E $x $u $y $v
   ↪ @fdapp0
       (@TotalΣ_cat $Z $E)
       (Terminal_catd (TotalΣ_cat $E))
-      (Op_catd
-        (Fibration_con_catd
-          (comp_cat_fapp0 Fib_func
-            (comp_cat_fapp0 op
-              (@hom_cov $Z $x (@TotalΣ_cat $Z $E) (TotalΣ_proj1_func $E))))))
-      (@homd_cov_int_alt $Z $E $x $u)
+      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (TotalΣ_proj1_func $E))
+      (@homd_cov_int_alt_from_alt4b $Z $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 
