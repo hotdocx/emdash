@@ -339,11 +339,106 @@ Add:
 
 Sanity: ensure beta rules fire by definitional equality.
 
-### Phase 5: add `homd_cov_int_alt` (stable head only)
+### Phase 5: internalize pointwise functor categories (needed for fully internal `homd_cov_int_alt3*`)
 
-Add `homd_cov_int_alt` with a type expressed using existing stable heads (`Catd_func`, `Fib_func`, `Total_func`, `eval0_func`, `Pi_func`, `Fibration_cov_func`, `op_val_func`, etc.).
+Add the “pointwise functor category family” from `REPORT_EMDASH_LOGIC_DEV.md` (Option A):
 
-Do not attempt to fully compute it. Ensure it typechecks.
+- `Functor_catd` and its fibre computation rule.
+
+Then add the **internalized functor-object** version (needed for combinator-style internal pipelines):
+
+```lambdapi
+constant symbol Functor_catd_func :
+  Π (B : Cat),
+  τ (Functor (Op_cat (Catd_cat B)) (Functor_cat (Catd_cat B) (Catd_cat B)));
+```
+
+with a β-rule (object-action) expressing the intended currying:
+
+- `fapp0 (fapp0 (Functor_catd_func Z) E) D ↪ Functor_catd E D`.
+
+Also add the pointwise transfor family if needed for later steps:
+
+- `Transf_catd` and `Fibre_transf` (Option A).
+
+### Phase 6: add lightweight abbreviations for clarity (no rewrites)
+
+For readability/uniformity in *types* and *definitions* (but avoid using them in LHS patterns):
+
+- `Fib_cat (Z : Cat) : Cat ≔ Functor_cat Z Cat_cat`
+- `Pi_cat [Z : Cat] (E : Catd Z) : Cat ≔ Functord_cat (Terminal_catd Z) E`
+
+Optional (to reduce the “Π vs section tension” in notation):
+
+- `Fibre_func_alt : Π [Z] [E D] (FF : τ (Functord E D)), τ (Functord (Terminal_catd Z) (Functor_catd E D))`
+
+so that `Fibre_func FF z` is derived (conceptually) from `fdapp0 (Fibre_func_alt FF) z Terminal_obj`.
+This does **not** force the definitional equation `Functord E D ≡ Pi_cat (Functor_catd E D)`; it merely
+provides an explicit section-view when convenient for internal reasoning.
+
+### Phase 7: add `homd_cov_int_alt` (binder wrapper; convenience view)
+
+Keep the binder-style wrapper as a *convenience* interface:
+
+- `homd_cov_int_alt : Π W_Z, Π W, sections over TotalΣ_cat(E) ...`
+
+This is useful for warm-ups and for stating intended equations, but it is not the final “fully internal”
+pipeline.
+
+### Phase 8: add a *fully internal* `homd_cov_int_alt3_base` and `homd_cov_int_alt3`
+
+The key correction (vs an object-only rewrite for a new `..._base`) is:
+
+- `homd_cov_int_alt3_base` should be a **definitional abbreviation built from functor objects / combinators**
+  (so its functorial structure is present “internally”), not merely a symbol with only a `fapp0` rewrite.
+
+Concrete engineering guideline:
+
+- Prefer a *δ-definition* (using `≔` and `comp_cat_fapp0`) for `homd_cov_int_alt3_base` and its auxiliary
+  functor-valued subexpressions, so that both `fapp0` and `fapp1_func` can reduce by generic computation rules
+  for `comp_cat_fapp0` (rather than being stuck on an opaque constant).
+- It is acceptable to introduce 1–2 small “stable head” helpers (e.g. postcomposition-by-`Fib_func`, or the
+  contravariant Grothendieck constructor as a functor object) if they make the δ-definition readable and
+  keep rewrite heads small, but do not revert to “object-only computation rules” for the main base.
+
+In `emdash2.lp` we expect such auxiliary helpers to look like:
+
+- `Fibpost_val_func` (postcompose by `Fib_func` at the functor-category level),
+- `Groth_con_func` (contravariant Grothendieck + outward `Op_catd`, as a functor object),
+- and an explicit intermediate `..._fam` functor that is then postcomposed by `Pi_func`.
+
+Target shape (blueprint; names adjusted to the emdash2 kernel):
+
+- `homd_cov_int_alt3_base : Π [Z] (E : Catd Z), τ (Functor (Op_cat Z) Cat_cat)`
+- `homd_cov_int_alt3 : Π [Z] (E : Catd Z), τ (Functord (Op_catd E) (Op_catd (Fibration_cov_catd (homd_cov_int_alt3_base E))))`
+
+And the intended definition of `homd_cov_int_alt3_base` is the “logic-manipulation” pipeline sketched by the user,
+using internal combinators such as:
+
+- `Pi_func`
+- `eval0_func` (user’s `fapp0_eval_func`)
+- `Functor_catd` and `Functor_catd_func`
+- `Fibration_cov_func`
+- `op_val_func`, `hom_cov_int`
+
+### Phase 9: define `TotalΣ_hom_func` as an abbreviation via `homd_cov_int_alt*` (plus optional Groth shortcut)
+
+Target principle (from this report):
+
+- `TotalΣ_hom_func E x u y v` should be a suitable specialization/evaluation of the internal dependent-hom pipeline,
+  so the Grothendieck case computes because the pipeline computes.
+
+Important refinement (from later review):
+
+- If we keep a separate warm-up symbol `TotalΣ_hom_func_alt`, it should be a **definitional abbreviation**
+  (a `symbol ... ≔ ...`) rather than a “folding rewrite rule” that makes `TotalΣ_hom_func_alt` a stable head.
+  The stable-head discipline is still useful for big categorical constructors, but here the goal is precisely
+  to expose the specialization/evaluation shape so it computes as the underlying pipeline computes.
+
+Engineering allowance:
+
+- keep (or reintroduce) a Grothendieck-specific computation rule for `TotalΣ_hom_func (Fibration_cov_catd M) ...` as a
+  **confluent shortcut**, once joinability with the pipeline is visible (via `assert` sanity equalities).
 
 ### Phase 6: connect `TotalΣ_hom_func` to `homd_cov_int_alt`
 
@@ -395,13 +490,13 @@ the computation is a rewrite/definition for `TotalΣ_hom_func`, not the `Hom_cat
 
 - `TotalΣ_hom_func (Fibration_cov_catd M) ... ↪ comp_hom_con_fib_cov ...`.
 
-Long-term target (preferred): `TotalΣ_hom_func` should be *expressed in terms of* `homd_cov_int_alt2`
-(and/or the binder wrapper `homd_cov_int_alt`), and then the Grothendieck computation should follow because
-`homd_cov_int_alt2` computes when `E = Fibration_cov_catd M`.
+Long-term target (preferred): `TotalΣ_hom_func` should be *expressed in terms of* a fully internal
+pipeline (here renamed `homd_cov_int_alt3*`), and then the Grothendieck computation should follow because
+that pipeline computes when `E = Fibration_cov_catd M`.
 
 However, during incremental development it is acceptable (and often desirable) to keep the above
 Grothendieck-specific rule as a **confluent shortcut**, provided we verify joinability with the
-eventual “definition via `homd_cov_int_alt2`” (e.g. by `assert` sanity terms once the join is expressible).
+eventual “definition via `homd_cov_int_alt3*`” (e.g. by `assert` sanity terms once the join is expressible).
 
 In particular, we do not necessarily need an extra symbol like `TotalΣ_hom_func_from_alt` if we keep:
 
@@ -416,9 +511,9 @@ Adding a general rewrite (too early)
 
 would overlap when `E = Fibration_cov_catd M`. If `homd_cov_int_alt*` is still abstract in that case,
 the overlap may not be joinable yet and risks breaking robustness. Hence the staging discipline:
-delay the general rewrite until `homd_cov_int_alt2` is computational enough that joinability is visible.
+delay the general rewrite until `homd_cov_int_alt3*` is computational enough that joinability is visible.
 
-### 3) “Fully internal” `homd_cov_int_alt2`: recommended staging
+### 3) “Fully internal” `homd_cov_int_alt3*`: recommended staging
 
 The current `homd_cov_int_alt` still has external Lambdapi binders:
 
@@ -432,12 +527,14 @@ of an internal object (as in the style of `homd_cov_int`).
 
 Recommendation:
 
-1. Introduce `homd_cov_int_alt2` as a stable head that is *fully internal* (no explicit `W_Z`, `W` binders),
-   even if it requires 1–2 intermediate stable-head helpers (analogous to `homd_cov_int_base`).
-2. Derive the current convenient binder form `homd_cov_int_alt` from `homd_cov_int_alt2`
+1. Introduce `homd_cov_int_alt3` as a stable head that is *fully internal* (no explicit `W_Z`, `W` binders),
+   supported by a definitional-abbreviation base `homd_cov_int_alt3_base` built from combinators (analogous
+   in spirit to `homd_cov_int_base`).
+2. Derive the current convenient binder form `homd_cov_int_alt` from `homd_cov_int_alt3`
    (definition or fold rule), so the external binder variant becomes a wrapper/view.
-3. Only later attempt to express `homd_cov_int_alt2` purely from generic internal combinators
-   (e.g. using `Functor_catd_func`/`Pi_func`/evaluation functors) once those are available and stable.
+3. Implementing `homd_cov_int_alt3_base` *is* the “generic internal combinator” approach: it should be written
+   directly as a composition of functor objects (requiring `Functor_catd_func`, `Pi_func`, `eval0_func`, etc.),
+   so that the functorial structure is internal rather than being left as an uninterpreted constant.
 
 ### 4) Relation to `Functor_catd` / `Transf_catd` (Option A)
 
@@ -450,7 +547,7 @@ to support “partial discharge” surface syntax.
 
 Clarification:
 
-- These additions are *not* merely orthogonal “syntax sugar” once we aim to make `homd_cov_int_alt2`
+- These additions are *not* merely orthogonal “syntax sugar” once we aim to make `homd_cov_int_alt3*`
   internal and inter-derivable (on-par) with the existing `homd_cov_int`.
 - In practice, the same internal toolkit is reused across both developments:
   - internalized “Π/sections” operators (like `Pi_func`),
@@ -458,14 +555,18 @@ Clarification:
   - and pointwise functor-category families (`Functor_catd` and its internalized functor-object forms).
 
 So, while Option A still avoids the strong definitional equation “displayed functor = section”, it is
-expected that the *availability* of `Functor_catd`-level structure becomes a prerequisite for expressing
-the fully-internal `homd_cov_int_alt2` pipeline in a reusable, “logic-manipulation” style.
+expected that the *availability* of `Functor_catd`-level structure (and especially `Functor_catd_func`)
+becomes a prerequisite for expressing the fully-internal `homd_cov_int_alt3*` pipeline in a reusable,
+“logic-manipulation” style.
 
 ### 5) Updated next-step order (implementation)
 
 Next implementation turn should proceed in this order:
 
 1. Implement Option A (`Functor_catd`, `Transf_catd`, `Fibre_transf`) as fibrewise constructors (per `REPORT_EMDASH_LOGIC_DEV.md`).
-2. Add `homd_cov_int_alt2` (fully internal; stable head; no computation rules yet), plus a wrapper/derivation back to `homd_cov_int_alt`.
-3. Add a non-overlapping warm-up artifact connecting `TotalΣ_hom_func` to the `homd_cov_int_alt*` story
+2. Add `Functor_catd_func` (internalized functor-object form of `Functor_catd`) and any small abbreviations needed in types.
+3. Add `homd_cov_int_alt3_base` (as a definitional abbreviation from combinators) and `homd_cov_int_alt3` (fully internal),
+   plus a wrapper/derivation back to `homd_cov_int_alt`.
+4. Define `TotalΣ_hom_func` (or an explicit alias) via specialization/evaluation of the `homd_cov_int_alt3*` pipeline,
+   keeping any Grothendieck-specific rewrite as an optional shortcut once joinability is visible.
    (separate symbol or `assert`), without weakening the existing Grothendieck computation rule.
