@@ -11,13 +11,13 @@ Added generic rules:
 - `rule τ (Obj (@Total_cat $B $E)) ↪ \`τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);`
 - `rule fapp0 (Total_proj1_func $E) (Struct_sigma $x $u) ↪ $x;`
 - `rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
-    ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));`
+    ↪ Op_cat (Total_cat (Fibration_cov_catd (Homd_func $E $x $u $y $v)));`
 
 with the canonical head:
 
-- `symbol Total_hom_func ... ≔ Total_hom_func_head ...;`
+- `sequential symbol Homd_func ...;`
 
-So `Total_cat` now normalizes through the internal alt4/uncurry pipeline instead of relying on the old Groth-only hom shortcut.
+So `Total_cat` now normalizes through the internal `homd_cov_curry`/uncurry pipeline instead of relying on the old Groth-only hom shortcut.
 
 ### 2) Removed collapse-dependent shortcuts
 
@@ -48,7 +48,7 @@ Deferred/removed rules that conflicted with the always-Σ path:
 
 ## Next Cleanup Step
 
-Once stable, remove the remaining `TotalΣ_*` naming indirection by folding `TotalΣ_hom_func` into `Total_hom_func`
+Once stable, remove the remaining `TotalΣ_*` naming indirection by folding `TotalΣ_hom_func` into `Homd_func`
 and pruning duplicate parallel symbols/rules.
 
 ## Inventory: Rules Lost When Removing `Total_cat (Terminal_catd _)` / `Total_cat (Lift_catd _)` Collapses
@@ -83,7 +83,7 @@ Recoverability if collapses are reintroduced progressively:
 - **Progressive strategy**:
   first re-add only `Total_cat (Terminal_catd A) ↪ A` + `Total_proj1_func` collapse;
   then add `Total_proj2_funcd` and terminal `Total_intro_func` shortcut after checking joinability
-  against the always-`Σ` rules and the `Total_hom_func` path.
+  against the always-`Σ` rules and the `Homd_func` path.
 
 ### B) Lift-collapse family (`Total_cat (Lift_catd A) ↪ A`)
 
@@ -121,7 +121,7 @@ If we decide to restore collapses, safest order is:
 4. Re-enable `Unlift_func` and its β-rule last.
 
 This order minimizes critical-pair pressure with the always-`Σ` `Total_cat` rules and with the new
-`Total_hom_func`/alt4 normalization pipeline.
+`Homd_func`/`homd_cov_curry` normalization pipeline.
 
 ## Rewrite Cleanup Pass (from REPORT_EMDASH_LOGIC_DEV_2.md "Key rewrite principles")
 
@@ -149,7 +149,7 @@ We revisited the extra engineering rules that were introduced during the earlier
       (@Op_catd (Op_cat $B) (@Fibration_cov_catd (Op_cat $B) $H)) $F
     ↪ @Op_catd (Op_cat $A)
         (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));`
-  - Removed (no longer required by current alt4/uncurry normalization chain).
+  - Removed (no longer required by current `homd_cov_curry`/uncurry normalization chain).
 
 ### Kept as genuinely useful / currently required
 
@@ -167,14 +167,14 @@ We revisited the extra engineering rules that were introduced during the earlier
 - We now keep only the rules that are either broadly canonical simplifications or demonstrably required
   by existing assertions/computations.
 
-## Alt4 Consolidation Pass (Naming/Glue Cleanup)
+## homd_cov_curry Consolidation Pass (Naming/Glue Cleanup)
 
 Date: 2026-02-08 (same session)
 
 Goal:
-- reduce one-off `homd_cov_int_alt4*` wrappers,
+- reduce one-off `homd_cov_curry*` wrappers,
 - keep only semantic/reused heads,
-- preserve computation and current `Total_hom_func` behavior.
+- preserve computation and current `Homd_func` behavior.
 
 ### Removed one-off glue symbols
 
@@ -183,45 +183,45 @@ The following intermediate wrappers were removed:
 - `Functor_catd_fixR_func`
 - `Edge_catd_fam_op`
 - `Edge_catd_at`
-- `swap_homd_cov_int_alt4_section2`
+- `swap_homd_cov_curry_section2`
 - `Total_uncurry_eval2`
 
-All were single-purpose plumbing around `swap_functord_func` + `Sigma_uncurry_section_funcd` and are now inlined.
+All were single-purpose plumbing around the swap/uncurry primitives (now named
+`logic_swap_funcd` and `logic_uncurry_total`) and are now inlined.
 
 ### Kept semantic/reused symbols
 
-Retained heads in the alt4 path:
+Retained heads in the `homd_cov_curry` path:
 
 - `CatCat_catd`
-- `Cod_catd`
 - `Edge_catd_fam`
-- `homd_cov_int_alt4_fam`
-- `homd_cov_int_alt4_base`
-- `homd_cov_int_alt4`
-- `homd_cov_int_alt4_sec`
-- `swap_functord_func` (primitive)
-- `Sigma_uncurry_section_funcd` (primitive)
+- `homd_cov_curry_fam`
+- `homd_cov_curry_base`
+- `homd_cov_curry`
+- `homd_cov_curry_sec`
+- `logic_swap_funcd` (primitive)
+- `logic_uncurry_total` (primitive)
 
 ### Renames
 
-- `homd_cov_int_alt4_eval_base_catd2` → `homd_cov_int_alt4_target_catd`
-- `homd_cov_int_altproj` → `homd_cov_int_alt4_total_section`
+- `homd_cov_curry_target_catd`-style wrapper → (inlined)
+- `homd_cov_int_altproj` → `homd_cov_curry_total_section`
 
 This removes migration suffixes (`*2`, `*proj`) and makes the role explicit.
 
 ### Structural change
 
-`homd_cov_int_alt4_total_section` is now defined directly as:
-- swap the section using `swap_functord_func` via `comp_catd_fapp0`,
-- uncurry to the total using `Sigma_uncurry_section_funcd`.
+`homd_cov_curry_total_section` is now defined directly as:
+- swap the section using `logic_swap_funcd` via `comp_catd_fapp0`,
+- uncurry to the total using `logic_uncurry_total`.
 
 No auxiliary wrapper symbol is needed between these two steps.
 
-### Total_hom_func integration update
+### Homd_func integration update
 
-The generic `Total_hom_func` rule now uses:
-- `Pullback_catd (homd_cov_int_alt4_target_catd x) (Total_proj1_func E)`
-- `homd_cov_int_alt4_total_section E x u`
+The generic `Homd_func` rule now uses:
+- `Pullback_catd (Functor_catd (fapp0 Edge_catd_fam x) (CatCat_catd Z)) (Total_proj1_func E)`
+- `homd_cov_curry_total_section E x u`
 
 Groth shortcut behavior is unchanged.
 

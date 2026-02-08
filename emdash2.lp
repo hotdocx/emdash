@@ -2225,19 +2225,19 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   where `→_f` means a displayed arrow in E lying over the base edge f.
 */
 
-// NOTE: older “alt3” internalization attempts have been removed in favor of the `alt4` pipeline.       // cleanup: keep only alt4
+// NOTE: older internalization attempts have been removed in favor of the `homd_cov_curry` pipeline.
 
 /*
-  Total_hom_func (warm-up bridge)
+  Homd_func (dependent hom bridge)
 
   For fixed (x,u) and (y,v) in `Total_cat E`, the “dependent hom over base edges” classifier should
-  produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `Total_hom_func`
-  is intended to be expressed via the `alt4` internal pipeline (`homd_cov_int_alt4`), but during early
+  produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `Homd_func`
+  is intended to be expressed via the `homd_cov_curry` internal pipeline, but during early
   development we keep the definition close to the section-level uncurry/eval primitives.
 
-    Total_hom_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
+    Homd_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
 
-  We currently define it via the `alt4` pipeline (see below), without a separate binder-style wrapper.
+  We currently define it via the `homd_cov_curry` pipeline (see below), without a separate binder-style wrapper.
 */
 
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
@@ -2566,7 +2566,7 @@ rule @Fibre_func $A
   ↪ @tapp0_fapp0 $A Cat_cat $E $D $x $ϵ;
 
 /*
-  homd_cov_int_alt4 (fully internal; target shape closer to “Π z' , hom(z,z')^op → (E[z'] → Cat)”)
+  homd_cov_curry (fully internal; target shape closer to “Π z' , hom(z,z')^op → (E[z'] → Cat)”)
 
   This is the revised internal pipeline (Phase 8bis in REPORT_EMDASH_LOGIC_DEV_2.md):
 
@@ -2604,9 +2604,9 @@ symbol Edge_catd_fam [Z : Cat]
 
 // Family z ↦ Functor_catd(Edge(z), (z' ↦ Functor_cat(E[z'],Cat))).
 // Mathematical notation:
-//   H4_fam(E) : Z ⟶ Catd(Z),
-//   H4_fam(E)(z)(z') = Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat)).
-symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
+//   Hc_fam(E) : Z ⟶ Catd(Z),
+//   Hc_fam(E)(z)(z') = Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat)).
+symbol homd_cov_curry_fam [Z : Cat] (E : Catd Z)
   : τ (Functor Z (Catd_cat Z))
 ≔ @comp_cat_fapp0
      Z
@@ -2622,46 +2622,46 @@ symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
 
 // Base functor: z ↦ sections over Z of the family above.
 // Mathematical notation:
-//   H4_base(E)(z) = Π_{z' : Z} H4_fam(E)(z)(z').
-symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
+//   Hc_base(E)(z) = Π_{z' : Z} Hc_fam(E)(z)(z').
+symbol homd_cov_curry_base [Z : Cat] (E : Catd Z)
   : τ (Functor Z Cat_cat)
 ≔   (@comp_cat_fapp0
        Z
        (Catd_cat Z)
        Cat_cat
        (@Pi_func Z)
-       (homd_cov_int_alt4_fam E));
+       (homd_cov_curry_fam E));
 
 // Fully internal displayed map.
 // Mathematical notation:
-//   homd_cov_int_alt4(E) : E^op ⟶_Z (∫ H4_base(E))^op.
-constant symbol homd_cov_int_alt4 : Π [Z : Cat], Π (E : Catd Z),
+//   homd_cov_curry(E) : E^op ⟶_Z (∫ Hc_base(E))^op.
+constant symbol homd_cov_curry : Π [Z : Cat], Π (E : Catd Z),
   τ (Functord (Op_catd E)
-              (Op_catd (@Fibration_cov_catd Z (homd_cov_int_alt4_base E))));
+              (Op_catd (@Fibration_cov_catd Z (homd_cov_curry_base E))));
 
 // Section at a fixed fibre object (W_Z,W).
 // Mathematical notation:
-//   homd_cov_int_alt4_sec(E,W_Z,W) : 1_Z ⟶ H4_fam(E)(W_Z).
-symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
+//   homd_cov_curry_sec(E,W_Z,W) : 1_Z ⟶ Hc_fam(E)(W_Z).
+symbol homd_cov_curry_sec [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z))
   : τ (Functord
       (Terminal_catd Z)
-      (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))
+      (@fapp0 Z (Catd_cat Z) (homd_cov_curry_fam E) W_Z))
 ≔ @fapp0
      (Fibre_cat (@Op_catd Z E) W_Z)
-     (Fibre_cat (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_int_alt4_base E))) W_Z)
+     (Fibre_cat (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_curry_base E))) W_Z)
      (@Fibre_func (Op_cat Z)
        (@Op_catd Z E)
-       (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_int_alt4_base E)))
-       (@homd_cov_int_alt4 Z E)
+       (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_curry_base E)))
+       (@homd_cov_curry Z E)
        W_Z)
      W;
 
 /*
-  Projecting the internal `alt4` package to a section over the Σ-total.
+  Projecting the internal `homd_cov_curry` package to a section over the Σ-total.
 
-  For (W_Z,W) in the fibre of E, `homd_cov_int_alt4_total_section E W_Z W` is the induced *section over*
+  For (W_Z,W) in the fibre of E, `homd_cov_curry_total_section E W_Z W` is the induced *section over*
   `Total_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
@@ -2684,11 +2684,11 @@ constant symbol logic_swap_funcd :
       (Functor_catd A (Functor_catd B C))
       (Functor_catd B (Functor_catd A C)));
 
-// New direct projection of alt4 to a section over Total(E), using only swap+Sigma-uncurry primitives. // no extra one-off wrappers
+// New direct projection of homd_cov_curry to a section over Total(E), using only swap+uncurry primitives.
 // Mathematical notation:
-//   homd_cov_int_alt4_total_section(E,W_Z,W)
+//   homd_cov_curry_total_section(E,W_Z,W)
 //     : 1_{∫E} ⟶ (π1)^*( z' ↦ Functor_cat(Hom_Z(W_Z,z')^op, Cat) ).
-symbol homd_cov_int_alt4_total_section [Z : Cat] (E : Catd Z)
+symbol homd_cov_curry_total_section [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z)):
   τ (Functord 
@@ -2708,32 +2708,32 @@ symbol homd_cov_int_alt4_total_section [Z : Cat] (E : Catd Z)
         (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z)
         E
         (CatCat_catd Z))
-      (@homd_cov_int_alt4_sec Z E W_Z W));
+      (@homd_cov_curry_sec Z E W_Z W));
 
-// TODO (Groth case still missing on the alt4 path):
-//   add direct computation rules for `homd_cov_int_alt4` / `homd_cov_int_alt4_total_section` when
+// TODO (Groth case still missing on the homd_cov_curry path):
+//   add direct computation rules for `homd_cov_curry` / `homd_cov_curry_total_section` when
 //   `E = Fibration_cov_catd M`, so the generic Total-hom pipeline computes without relying on
-//   the dedicated `Total_hom_func` Groth shortcut below.
-//   Current status: `Hom_cat (Total_cat E) ...` is defined through `Total_hom_func`; for Groth E we
-//   temporarily shortcut at `Total_hom_func` to `comp_hom_con_fib_cov`.
+//   the dedicated `Homd_func` Groth shortcut below.
+//   Current status: `Hom_cat (Total_cat E) ...` is defined through `Homd_func`; for Groth E we
+//   temporarily shortcut at `Homd_func` to `comp_hom_con_fib_cov`.
 
 // Single stable head for total homs.                                                                    // sequential: Groth shortcut first
-sequential symbol Total_hom_func [Z : Cat] (E : Catd Z)
+sequential symbol Homd_func [Z : Cat] (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (FibreObj E x))
   (y : τ (Obj Z)) (v : τ (FibreObj E y))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
-// Rewrite rules for `Total_hom_func` are placed later (after `comp_hom_con_fib_cov` is declared).
+// Rewrite rules for `Homd_func` are placed later (after `comp_hom_con_fib_cov` is declared).
 
-// Hom-category in Total_cat is (the opposite of) a Grothendieck total over Total_hom_func.
+// Hom-category in Total_cat is (the opposite of) a Grothendieck total over Homd_func.
 // Usual Grothendieck formula recovered when `E = Fibration_cov_catd M`:
 //   Hom_{∫M}((x,u),(y,v))
 //     ≅ (∫_{f:x→y} Hom_{M(y)}(f_!(u), v))^op.
-// Here this is routed uniformly through `Total_hom_func`; during migration we still keep a
-// Groth-specific shortcut on `Total_hom_func` until alt4/altproj receive
+// Here this is routed uniformly through `Homd_func`; during migration we still keep a
+// Groth-specific shortcut on `Homd_func` until homd_cov_curry direct Groth rules exist
 // their own direct Groth computation rules.
 rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
+  ↪ Op_cat (Total_cat (Fibration_cov_catd (Homd_func $E $x $u $y $v)));
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0
@@ -2829,19 +2829,19 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
-// Rule order matters because `Total_hom_func` is `sequential`:
+// Rule order matters because `Homd_func` is `sequential`:
 //   1) Groth-specific shortcut (temporary migration bridge),
-//   2) generic alt4-projection definition.
-rule @Total_hom_func _ (@Fibration_cov_catd $B $M) $x $u $y $v
+//   2) generic homd_cov_curry projection definition.
+rule @Homd_func _ (@Fibration_cov_catd $B $M) $x $u $y $v
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v
-with @Total_hom_func $Z $E $x $u $y $v
+with @Homd_func $Z $E $x $u $y $v
   ↪ @fdapp0
       (Total_cat $E)
       (Terminal_catd (Total_cat $E))
       (Pullback_catd
         (Functor_catd (@fapp0 (Op_cat $Z) (Catd_cat $Z) (Edge_catd_fam) $x) (CatCat_catd $Z))
         (Total_proj1_func $E))
-      (homd_cov_int_alt4_total_section $E $x $u)
+      (homd_cov_curry_total_section $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 
