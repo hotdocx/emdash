@@ -1846,7 +1846,11 @@ injective symbol Lift_catd : Cat → Catd Terminal_cat;                         
 // Opposite of a constant family is constant on the opposite category.                                // const(A)ᵒᵖ ≡ const(Aᵒᵖ)
 rule @Op_catd Terminal_cat (Lift_catd $A) ↪ Lift_catd (Op_cat $A);
 
-// Constant-family total/projection collapses are deferred (same migration reason as terminal shortcuts).
+// The Grothendieck construction of a constant family over 1 is definitionally the original category. // ∫(const_1(A)) ≡ A
+rule Total_cat (Lift_catd $A) ↪ $A;
+
+// The base projection of ∫(const_1(A)) → 1 is the terminal functor A → 1.                            // π₁ ↪ !
+rule Total_proj1_func (Lift_catd $A) ↪ Terminal_func $A;
 
 // Fibres of a constant family are constant (independent of the base point in 1).                    // fibre(const_1(A),*) ≡ A
 rule Fibre_cat (Lift_catd $A) _ ↪ $A;
@@ -1855,8 +1859,14 @@ rule Fibre_cat (Lift_catd $A) _ ↪ $A;
 injective symbol Lift_funcd : Π [A B : Cat],
   τ (Functor A B) → τ (Functord (Lift_catd A) (Lift_catd B));
 
-// `Unlift_func` (and its β-shortcut) depended on the collapsed `Total_cat(Lift_catd _)` behavior.
-// We defer it during the always-Σ migration.
+// Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
+symbol Unlift_func [A B : Cat]
+  (FF : τ (Functord (Lift_catd A) (Lift_catd B))) : τ (Functor A B)
+≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd A) (Lift_catd B) (@id_func Terminal_cat) FF;
+
+// β-law: unlift∘lift is definitional (on functors).                                                   // ∫(lift(F)) ↪ F
+rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B) (@id_func Terminal_cat) (@Lift_funcd $A $B $F)
+  ↪ $F;
 
 
 // -------------------------------------------------------------------------------------------------
@@ -3697,6 +3707,7 @@ assert [A B : Cat] (E : τ (Functor B Cat_cat)) (F : τ (Functor A B)) ⊢
 
 // Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd/Lift_funcd rules fire
 assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd A) x1 ≡ A;
+assert [A B : Cat] (F : τ (Functor A B)) ⊢ Unlift_func (Lift_funcd F) ≡ F;
 assert [A B : Cat] (F : τ (Functor A B)) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
   @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ fapp0 F x;
 
