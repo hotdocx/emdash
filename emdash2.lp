@@ -737,6 +737,7 @@ rule @fapp1_fapp0 Cat_cat Cat_cat op $A1 $A2 $F ↪ @Op_func $A1 $A2 $F;
 symbol id_func [A: Cat] : τ (Functor A A);                                                          // identity functor id_A : Obj(Functor_cat(A,A))
 
 // Canonicalization: identity in `Cat_cat` folds to `id_func`.                                           // id_{Cat}(A) ↪ id_A
+// TODO : maybe adjust id_func as a defined symbol
 rule @id Cat_cat $A ↪ @id_func $A;
 
 // Computation: (id_A)(x) ↪ x.                                                                          // pointwise identity
@@ -754,17 +755,22 @@ symbol comp_cat_fapp0 [A B : Cat] [C : Cat]                                     
 // Canonicalization: composition in `Cat_cat` folds to `comp_cat_fapp0`.                                 // comp_{Cat}(F,G) ↪ F∘G
 rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
 
+// Operational strictness convention: composition/identity is normalized on the canonical head `comp_fapp0`. // category-law normalization
+// Right identity: g ∘ id = g.                                                                          // normalize away trailing identities
+rule @comp_fapp0 $A $Y $Y $Z $g (@id $A $Y) ↪ $g;
+
+// Left identity: id ∘ f = f.                                                                           // normalize away leading identities
+rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
+
 // Computation: (F∘G)(x) ↪ F(G(x)) (stable-head form).                                                  // pointwise composition
 rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
-// Functor-level identity simplifications for the stable-head composition symbol.                       // normalize composition spine
+// Sanity on the canonical head: identity simplifications compute directly on `comp_fapp0`.            // check strictness convention
+assert [A : Cat] (X Y : τ (Obj A)) (f : τ (Hom A X Y)) ⊢
+  comp_fapp0 f (@id A X) ≡ f;
 
-// TODO: review whether already derivable from other rules
-// Right identity: F ∘ id = F.                                                                          // normalize away trailing identities
-rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
-
-// Left identity: id ∘ F = F.                                                                           // normalize away leading identities
-rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
+assert [A : Cat] (X Y : τ (Obj A)) (f : τ (Hom A X Y)) ⊢
+  comp_fapp0 (@id A Y) f ≡ f;
 
 // Opposite of identity is identity.                                                                  // (id_A)ᵒᵖ ≡ id_{Aᵒᵖ}
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
