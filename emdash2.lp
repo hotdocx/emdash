@@ -1531,6 +1531,14 @@ rule @Op_func _ $B (@Total_proj1_func $B $E)
   ↪ @Total_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
 // Always-Σ object layer for totals (migration target): Obj(∫E) is definitionally a Σ over the base.
+// Mathematical reading (restoring the Groth note from earlier organization):
+//   - In the classical Grothendieck case `E = Fibration_cov_catd M`, this specializes to
+//       Obj(∫M) ≡ Σ (x : Obj(B)), Obj(M(x)).
+//   - In the current architecture we keep one connective `Total_cat` with one object rule,
+//     so the Grothendieck shape is now obtained as a definitional specialization of this
+//     general Σ rule, rather than by a separate Groth-only object rule.
+//   - This preserves the usual notation `(x,u)` (encoded by `Struct_sigma x u`) used in the
+//     transport formulas and hom descriptions below.
 rule τ (Obj (@Total_cat $B $E))
   ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
 
@@ -2747,6 +2755,12 @@ rule @Total_hom_func_head $Z $E $x $u $y $v
       Terminal_obj;
 
 // Hom-category in Total_cat is (the opposite of) a Grothendieck total over Total_hom_func.
+// Usual Grothendieck formula recovered when `E = Fibration_cov_catd M`:
+//   Hom_{∫M}((x,u),(y,v))
+//     ≅ (∫_{f:x→y} Hom_{M(y)}(f_!(u), v))^op.
+// Here this is routed uniformly through `Total_hom_func`; during migration we still keep a
+// Groth-specific shortcut on `Total_hom_func_head` (see below) until alt4/altproj receive
+// their own direct Groth computation rules.
 rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
 
