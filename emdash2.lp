@@ -2834,12 +2834,7 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
 //
 // Direct Groth bridge on the fully applied curry path:
 // this makes the generic branch computational in the Groth case as well.
-rule @fdapp0
-      (Total_cat (@Fibration_cov_catd $B $M))
-      (Terminal_catd (Total_cat (@Fibration_cov_catd $B $M)))
-      (Pullback_catd
-        (Functor_catd (@fapp0 (Op_cat $B) (Catd_cat $B) (Edge_catd_fam) $x) (CatCat_catd $B))
-        (Total_proj1_func (@Fibration_cov_catd $B $M)))
+rule @fdapp0 _ _ _
       (homd_cov_curry_total_section (@Fibration_cov_catd $B $M) $x $u)
       (Struct_sigma $y $v)
       Terminal_obj
