@@ -2575,7 +2575,9 @@ rule @Fibre_func $A
   It is indexed directly over `Z` (not over `Total_cat E`), so it does not bake in `Total_proj1_func`.
 */
 
-// Constant Cat-family over Z (weakening of Cat_cat to Catd Z).                                         // CatCat_catd(Z)[z] = Cat_cat
+// Constant Cat-family over Z (weakening of Cat_cat to Catd Z).
+// Mathematical notation:
+//   CatCat_Z : Z ⟶ Catd,  with  CatCat_Z(z) = Cat.
 symbol CatCat_catd (Z : Cat) : Catd Z
 ≔ Pullback_catd (Lift_catd Cat_cat) (Terminal_func Z);
 
@@ -2583,11 +2585,9 @@ symbol CatCat_catd (Z : Cat) : Catd Z
 assert (Z : Cat) (z : τ (Obj Z)) ⊢
   Fibre_cat (CatCat_catd Z) z ≡ Cat_cat;
 
-// Codomain family at each z': functors E[z'] ⟶ Cat_cat.                                               // Cod_catd(E)[z'] = Functor_cat(E[z'],Cat)
-symbol Cod_catd [Z : Cat] (E : Catd Z) : Catd Z
-≔ Functor_catd E (CatCat_catd Z);
-
-// Edge family indexed by z : Obj(Z): z' ↦ Hom_Z(z,z')^op, as a displayed category over Z.              // Edge family as functor object
+// Edge family indexed by z : Obj(Z): z' ↦ Hom_Z(z,z')^op, as a displayed category over Z.
+// Mathematical notation:
+//   Edge : Z^op ⟶ Catd(Z),   Edge(z)(z') = Hom_Z(z,z')^op.
 symbol Edge_catd_fam [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ @comp_cat_fapp0
@@ -2602,11 +2602,13 @@ symbol Edge_catd_fam [Z : Cat]
        (@op_val_func Z)
        (@hom_cov_int Z Z (@id_func Z)));
 
-// Family z ↦ Functor_catd(Edge_catd(z), Cod_catd(E)), as a functor object Z ⟶ Catd_cat(Z).             // z ↦ (z' ↦ Hom(z,z')^op → (E[z']→Cat))
+// Family z ↦ Functor_catd(Edge(z), (z' ↦ Functor_cat(E[z'],Cat))).
+// Mathematical notation:
+//   H4_fam(E) : Z ⟶ Catd(Z),
+//   H4_fam(E)(z)(z') = Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat)).
 symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
   : τ (Functor Z (Catd_cat Z))
-≔ let Cod : Catd Z ≔ Cod_catd E in
-   @comp_cat_fapp0
+≔ @comp_cat_fapp0
      Z
      (Op_cat (Catd_cat Z))
      (Catd_cat Z)
@@ -2614,11 +2616,13 @@ symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
        (Op_cat (Catd_cat Z))
        (Functor_cat (Catd_cat Z) (Catd_cat Z))
        (Catd_cat Z)
-       (@eval0_func (Catd_cat Z) (Catd_cat Z) Cod)
+       (@eval0_func (Catd_cat Z) (Catd_cat Z) (Functor_catd E (CatCat_catd Z)))
        (@Functor_catd_func Z))
      (@Op_func (Op_cat Z) (Catd_cat Z) (Edge_catd_fam));
 
-// Base functor: z ↦ sections over Z of the family above.                                               // base(z) = Π_{z':Z} Fam(z)(z')
+// Base functor: z ↦ sections over Z of the family above.
+// Mathematical notation:
+//   H4_base(E)(z) = Π_{z' : Z} H4_fam(E)(z)(z').
 symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
   : τ (Functor Z Cat_cat)
 ≔   (@comp_cat_fapp0
@@ -2628,12 +2632,16 @@ symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
        (@Pi_func Z)
        (homd_cov_int_alt4_fam E));
 
-// Fully internal packaging: Op_catd(E) → ∫(homd_cov_int_alt4_base(E)).                                 // Op_catd(E) ⟶_OpZ ∫(base)
+// Fully internal displayed map.
+// Mathematical notation:
+//   homd_cov_int_alt4(E) : E^op ⟶_Z (∫ H4_base(E))^op.
 constant symbol homd_cov_int_alt4 : Π [Z : Cat], Π (E : Catd Z),
   τ (Functord (Op_catd E)
               (Op_catd (@Fibration_cov_catd Z (homd_cov_int_alt4_base E))));
 
-// Extract the section over Z produced by homd_cov_int_alt4 at (W_Z,W).                                 // warm helper: (W_Z,W) ↦ section over z'
+// Section at a fixed fibre object (W_Z,W).
+// Mathematical notation:
+//   homd_cov_int_alt4_sec(E,W_Z,W) : 1_Z ⟶ H4_fam(E)(W_Z).
 symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z))
@@ -2657,43 +2665,45 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
   `Total_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
-// Generic Sigma-uncurry on sections (primitive): section of Functor_catd(E,D) → section over Total(E). // Π z,e. D[z]  ≈  Π (z,e). pullback D
-symbol Sigma_uncurry_section_funcd :
+// Logical primitive: Σ-uncurry on displayed sections.
+// Mathematical notation:
+//   logic_uncurry_total : (Π z:Z, (E[z] ⟶ D[z])) → (Π (z,e):∫E, D[z]).
+symbol logic_uncurry_total :
   Π [Z : Cat], Π [E D : Catd Z],
   τ (Functord (Terminal_catd Z) (Functor_catd E D))
     → τ (Functord
           (Terminal_catd (Total_cat E))
           (Pullback_catd D (Total_proj1_func E)));
 
-// Displayed swap for Functor_catd (primitive).                                                          // fibrewise version of swap_functor_func
-constant symbol swap_functord_func :
+// Logical primitive: swap internal arguments in displayed functor categories.
+// Mathematical notation:
+//   logic_swap_funcd : (A ⟶ (B ⟶ C)) → (B ⟶ (A ⟶ C)).
+constant symbol logic_swap_funcd :
   Π [Z : Cat], Π [A B C : Catd Z],
   τ (Functord
       (Functor_catd A (Functor_catd B C))
       (Functor_catd B (Functor_catd A C)));
 
-// Family targeted by the alt4 section after fixing W_Z:
-// z' ↦ Functor_cat(Hom_Z(W_Z,z')^op, Cat_cat).                                                          // codomain for uncurry
-symbol homd_cov_int_alt4_target_catd [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
-≔ Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (CatCat_catd Z);
-
 // New direct projection of alt4 to a section over Total(E), using only swap+Sigma-uncurry primitives. // no extra one-off wrappers
+// Mathematical notation:
+//   homd_cov_int_alt4_total_section(E,W_Z,W)
+//     : 1_{∫E} ⟶ (π1)^*( z' ↦ Functor_cat(Hom_Z(W_Z,z')^op, Cat) ).
 symbol homd_cov_int_alt4_total_section [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z)):
   τ (Functord 
         (Terminal_catd (@Total_cat Z E)) 
-        (Pullback_catd (@homd_cov_int_alt4_target_catd Z W_Z) (Total_proj1_func E)))
-≔ @Sigma_uncurry_section_funcd
+        (Pullback_catd (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (CatCat_catd Z)) (Total_proj1_func E)))
+≔ @logic_uncurry_total
     Z
     E
-    (homd_cov_int_alt4_target_catd W_Z)
+    (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (CatCat_catd Z))
     (@comp_catd_fapp0
       Z
       (Terminal_catd Z)
-      (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (Cod_catd E))
-      (Functor_catd E (homd_cov_int_alt4_target_catd W_Z))
-      (@swap_functord_func
+      (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (Functor_catd E (CatCat_catd Z)))
+      (Functor_catd E (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (CatCat_catd Z)))
+      (@logic_swap_funcd
         Z
         (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z)
         E
@@ -2828,7 +2838,9 @@ with @Total_hom_func $Z $E $x $u $y $v
   ↪ @fdapp0
       (Total_cat $E)
       (Terminal_catd (Total_cat $E))
-      (Pullback_catd (homd_cov_int_alt4_target_catd $x) (Total_proj1_func $E))
+      (Pullback_catd
+        (Functor_catd (@fapp0 (Op_cat $Z) (Catd_cat $Z) (Edge_catd_fam) $x) (CatCat_catd $Z))
+        (Total_proj1_func $E))
       (homd_cov_int_alt4_total_section $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
