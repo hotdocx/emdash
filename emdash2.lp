@@ -2729,37 +2729,24 @@ symbol homd_cov_int_altproj [Z : Cat] (E : Catd Z)
 // TODO (Groth case still missing on the alt4 path):
 //   add direct computation rules for `homd_cov_int_alt4` / `homd_cov_int_altproj` when
 //   `E = Fibration_cov_catd M`, so the generic Total-hom pipeline computes without relying on
-//   the dedicated `Total_hom_func_head` Groth shortcut below.
+//   the dedicated `Total_hom_func` Groth shortcut below.
 //   Current status: `Hom_cat (Total_cat E) ...` is defined through `Total_hom_func`; for Groth E we
-//   temporarily shortcut at `Total_hom_func_head` to `comp_hom_con_fib_cov`.
+//   temporarily shortcut at `Total_hom_func` to `comp_hom_con_fib_cov`.
 
-// Direct definition of Total_hom_func through the alt4-derived wrapper.                                 // keep only one stable head
-symbol Total_hom_func_head [Z : Cat] (E : Catd Z)
+// Single stable head for total homs.                                                                    // sequential: Groth shortcut first
+sequential symbol Total_hom_func [Z : Cat] (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (FibreObj E x))
   (y : τ (Obj Z)) (v : τ (FibreObj E y))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
-symbol Total_hom_func [Z : Cat] (E : Catd Z)
-  (x : τ (Obj Z)) (u : τ (FibreObj E x))
-  (y : τ (Obj Z)) (v : τ (FibreObj E y))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ Total_hom_func_head E x u y v;
-
-rule @Total_hom_func_head $Z $E $x $u $y $v
-  ↪ @fdapp0
-      (Total_cat $E)
-      (Terminal_catd (Total_cat $E))
-      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (Total_proj1_func $E))
-      (homd_cov_int_altproj $E $x $u)
-      (Struct_sigma $y $v)
-      Terminal_obj;
+// Rewrite rules for `Total_hom_func` are placed later (after `comp_hom_con_fib_cov` is declared).
 
 // Hom-category in Total_cat is (the opposite of) a Grothendieck total over Total_hom_func.
 // Usual Grothendieck formula recovered when `E = Fibration_cov_catd M`:
 //   Hom_{∫M}((x,u),(y,v))
 //     ≅ (∫_{f:x→y} Hom_{M(y)}(f_!(u), v))^op.
 // Here this is routed uniformly through `Total_hom_func`; during migration we still keep a
-// Groth-specific shortcut on `Total_hom_func_head` (see below) until alt4/altproj receive
+// Groth-specific shortcut on `Total_hom_func` until alt4/altproj receive
 // their own direct Groth computation rules.
 rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
@@ -2858,10 +2845,19 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
-// Grothendieck shortcut for the always-Σ head (kept while deeper alt4 Groth rules are deferred).
-// TODO: retire this shortcut once the TODO above is implemented and stable.
-rule @Total_hom_func_head _ (@Fibration_cov_catd $B $M) $x $u $y $v
-  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
+// Rule order matters because `Total_hom_func` is `sequential`:
+//   1) Groth-specific shortcut (temporary migration bridge),
+//   2) generic alt4-projection definition.
+rule @Total_hom_func _ (@Fibration_cov_catd $B $M) $x $u $y $v
+  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v
+with @Total_hom_func $Z $E $x $u $y $v
+  ↪ @fdapp0
+      (Total_cat $E)
+      (Terminal_catd (Total_cat $E))
+      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (Total_proj1_func $E))
+      (homd_cov_int_altproj $E $x $u)
+      (Struct_sigma $y $v)
+      Terminal_obj;
 
 // Legacy Groth-specific hom-level projection shortcuts are deferred during always-Σ migration.
 
