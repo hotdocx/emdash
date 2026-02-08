@@ -2207,7 +2207,7 @@ symbol homd_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
 //   the existing pointwise computation rule of `homd_`. For now `homd_int` is purely a
 //   typed packaging head with no reduction behavior.
 constant symbol homd_int : Π [Z : Cat], Π [E : Catd Z],
-  Π (D0 : τ (Functor Z Cat_cat)),
+  Π [D0 : τ (Functor Z Cat_cat)],
   Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
   τ (Functord (Op_catd E)
               (Op_catd (Fibration_con_catd
@@ -2221,7 +2221,7 @@ constant symbol homd_int : Π [Z : Cat], Π [E : Catd Z],
     D0 : (z:Z ⊢ D0[z] : Cat)                      // functorial family (Grothendieck probe domain)
     FF : (z :^o Z, d:D0[z] ⊢ FF[d] : E[z])         // probe into E (note: E forces z :^o)
 
-  For σ : homd_int(Z,E,D0,FF):
+  For σ : homd_int(Z,E,FF):   // with implicit D0 inferred from FF : Functord (Fibration_cov_catd D0) E
 
     z :^o Z, e : E[z], z' :^o Z, f : z→z', d : D0[z'] ⊢ σ : e →_f FF[d]
 
@@ -3204,15 +3204,15 @@ symbol tdapp1_int_func_transfd : Π [Z : Cat],
   τ (Functor
       (Transfd_cat FF GG)
       (Transfd_cat
-          (homd_int E0 id_funcd)
-          (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF))));
+          (homd_int (@id_funcd Z (Fibration_cov_catd E0)))
+          (comp_catd_fapp0 (homd_int GG) (Op_funcd FF))));
 
 symbol tdapp1_int_fapp0_transfd : Π [Z : Cat],
   Π (E0 : τ (Functor Z Cat_cat)),
   Π [D : Catd Z],
   Π [FF GG : τ (Functord (Fibration_cov_catd E0) D)],
   Π (ϵ : τ (Transfd FF GG)),
-  τ (Transfd (homd_int E0 id_funcd) (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF)));
+  τ (Transfd (homd_int (@id_funcd Z (Fibration_cov_catd E0))) (comp_catd_fapp0 (homd_int GG) (Op_funcd FF)));
 
 /*
   Surface reading (displayed analogue of ordinary ϵ_(f), using simplicial displayed arrows):
@@ -3246,8 +3246,8 @@ symbol tdapp1_int_fapp1_func_transfd : Π [Z : Cat],
   τ (Functor
       (Hom_cat (Transfd_cat FF GG) ϵ ϵ')
       (Hom_cat (Transfd_cat
-                  (homd_int E0 id_funcd)
-                  (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF)))
+                  (homd_int (@id_funcd Z (Fibration_cov_catd E0)))
+                  (comp_catd_fapp0 (homd_int GG) (Op_funcd FF)))
           (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ)
           (tdapp1_int_fapp0_transfd E0 [D] [FF] [GG] ϵ')));
 
@@ -3278,7 +3278,7 @@ symbol fdapp1_int_transfd : Π [Z : Cat],
   Π (E0 : τ (Functor Z Cat_cat)),
   Π [D : Catd Z],
   Π (FF : τ (Functord (Fibration_cov_catd E0) D)),
-  τ (Transfd (homd_int E0 id_funcd) (comp_catd_fapp0 (homd_int E0 FF) (Op_funcd FF)));
+  τ (Transfd (homd_int (@id_funcd Z (Fibration_cov_catd E0))) (comp_catd_fapp0 (homd_int FF) (Op_funcd FF)));
 
 // Folding rule: tdapp1 at identity transfor is the internal displayed hom-action stable head.         // normalize “apply tdapp1 to 1_FF”
 rule fapp0 (@tdapp1_int_func_transfd $Z $E0 $D $FF $FF) (id (Functord_cat (Fibration_cov_catd $E0) $D) $FF)
@@ -3608,7 +3608,7 @@ assert [Z : Cat]
       (Op_catd (Fibration_cov_catd E0))
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_int_base E0))))
-      (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF))
+      (comp_catd_fapp0 (homd_int GG) (Op_funcd FF))
       Y
       V)
     (@fdapp0
@@ -3626,7 +3626,7 @@ assert [Z : Cat]
       (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
         (comp_cat_fapp0 Fib_func (homd_int_base E0))))
       (@homd_int Z (Fibration_cov_catd E0) E0 (@id_funcd Z (Fibration_cov_catd E0)))
-      (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF))
+      (comp_catd_fapp0 (homd_int GG) (Op_funcd FF))
       Y
       V
       (fapp0 (@tdapp1_int_func_transfd Z E0 D FF GG) ϵ))
@@ -3637,7 +3637,7 @@ assert [Z : Cat]
         (Op_catd (Fibration_cov_catd E0))
         (@Op_catd Z (@Fibration_con_catd (Op_cat Z)
           (comp_cat_fapp0 Fib_func (homd_int_base E0))))
-        (comp_catd_fapp0 (homd_int E0 GG) (Op_funcd FF))
+        (comp_catd_fapp0 (homd_int GG) (Op_funcd FF))
         Y
         V)
       p)
