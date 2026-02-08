@@ -1005,10 +1005,6 @@ unif_rule Obj (@Functord_cat $B $E $D) ≡ Obj (@Functord_cat $B' $E' $D') ↪ [
 // Dependent identity functor (identity section).                                                    // id in the slice category
 constant symbol id_funcd [B : Cat] [E:Catd B] : τ (Functord E E);                                         // id : Obj(Functord_cat(E,E))
 
-// Dependent composition of dependent functors.                                                      // composition in the slice Cat/B
-symbol comp_catd_fapp0 [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
-  (FF: τ (Functord D C)) (GG: τ (Functord E D)) : τ (Functord E C);                                    // compose : (D→C) × (E→D) → (E→C)
-
 // Universe code for displayed categories over a fixed base (so we can form `Cat` objects whose decoded objects are `Catd Z`). // Catd as a Grpd-code
 constant symbol Catd_grpd : Π (Z : Cat), Grpd;
 rule τ (Catd_grpd $Z) ↪ Catd $Z;
@@ -1018,7 +1014,11 @@ constant symbol Catd_cat : Π (Z : Cat), Cat;
 rule Obj (Catd_cat $Z) ↪ Catd_grpd $Z;
 rule Hom_cat (Catd_cat $Z) $E $D ↪ @Functord_cat $Z $E $D;
 rule @id (Catd_cat $Z) $E ↪ @id_funcd $Z $E;
-rule @comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG ↪ @comp_catd_fapp0 $Z $E $D $C $FF $GG;
+
+// Dependent composition of dependent functors (readability alias of the canonical Cat-level head).  // composition in the slice Cat/B
+symbol comp_catd_fapp0 [B : Cat] [E D : Catd B] [C:Catd B]                                   // base B and displayed categories E,D,C
+  (FF: τ (Functord D C)) (GG: τ (Functord E D)) : τ (Functord E C)                                    // compose : (D→C) × (E→D) → (E→C)
+≔ @comp_fapp0 (Catd_cat B) E D C FF GG;
 
 /*
   Catd_func (isofibration / displayed-category classifier, contravariant in the base)
@@ -2274,7 +2274,7 @@ assert [X B : Cat]
 rule @fdapp0 $Z $E $E (@id_funcd $Z $E) $x $u ↪ $u;
 
 // Generic computation: dependent composition acts by nested fibrewise application.                    // fdapp0(FF∘GG) ↪ fdapp0 FF ∘ fdapp0 GG
-rule @fdapp0 $Z $E $C (@comp_catd_fapp0 $Z $E $D $C $FF $GG) $x $u
+rule @fdapp0 $Z $E $C (@comp_fapp0 (Catd_cat $Z) $E $D $C $FF $GG) $x $u
   ↪ @fdapp0 $Z $D $C $FF $x (@fdapp0 $Z $E $D $GG $x $u);
 
 // Generic computation: pullback/reindexing on displayed functors is precomposition on base objects.   // fdapp0(F^*GG,x,u) ↪ fdapp0(GG,Fx,u)
