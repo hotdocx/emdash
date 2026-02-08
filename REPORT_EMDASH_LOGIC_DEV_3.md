@@ -166,3 +166,65 @@ We revisited the extra engineering rules that were introduced during the earlier
 - The ad hoc rule set was reduced while preserving successful typecheck.
 - We now keep only the rules that are either broadly canonical simplifications or demonstrably required
   by existing assertions/computations.
+
+## Alt4 Consolidation Pass (Naming/Glue Cleanup)
+
+Date: 2026-02-08 (same session)
+
+Goal:
+- reduce one-off `homd_cov_int_alt4*` wrappers,
+- keep only semantic/reused heads,
+- preserve computation and current `Total_hom_func` behavior.
+
+### Removed one-off glue symbols
+
+The following intermediate wrappers were removed:
+
+- `Functor_catd_fixR_func`
+- `Edge_catd_fam_op`
+- `Edge_catd_at`
+- `swap_homd_cov_int_alt4_section2`
+- `Total_uncurry_eval2`
+
+All were single-purpose plumbing around `swap_functord_func` + `Sigma_uncurry_section_funcd` and are now inlined.
+
+### Kept semantic/reused symbols
+
+Retained heads in the alt4 path:
+
+- `CatCat_catd`
+- `Cod_catd`
+- `Edge_catd_fam`
+- `homd_cov_int_alt4_fam`
+- `homd_cov_int_alt4_base`
+- `homd_cov_int_alt4`
+- `homd_cov_int_alt4_sec`
+- `swap_functord_func` (primitive)
+- `Sigma_uncurry_section_funcd` (primitive)
+
+### Renames
+
+- `homd_cov_int_alt4_eval_base_catd2` → `homd_cov_int_alt4_target_catd`
+- `homd_cov_int_altproj` → `homd_cov_int_alt4_total_section`
+
+This removes migration suffixes (`*2`, `*proj`) and makes the role explicit.
+
+### Structural change
+
+`homd_cov_int_alt4_total_section` is now defined directly as:
+- swap the section using `swap_functord_func` via `comp_catd_fapp0`,
+- uncurry to the total using `Sigma_uncurry_section_funcd`.
+
+No auxiliary wrapper symbol is needed between these two steps.
+
+### Total_hom_func integration update
+
+The generic `Total_hom_func` rule now uses:
+- `Pullback_catd (homd_cov_int_alt4_target_catd x) (Total_proj1_func E)`
+- `homd_cov_int_alt4_total_section E x u`
+
+Groth shortcut behavior is unchanged.
+
+### Validation
+
+- `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes after consolidation.

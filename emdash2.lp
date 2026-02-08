@@ -2602,21 +2602,6 @@ symbol Edge_catd_fam [Z : Cat]
        (@op_val_func Z)
        (@hom_cov_int Z Z (@id_func Z)));
 
-// Fix the right argument of Functor_catd at D, as a functor object on the (contravariant) left argument. // E ↦ Functor_catd(E,D), with E in Op_cat(Catd_cat Z)
-symbol Functor_catd_fixR_func [Z : Cat] (D : Catd Z)
-  : τ (Functor (Op_cat (Catd_cat Z)) (Catd_cat Z))
-≔ @comp_cat_fapp0
-     (Op_cat (Catd_cat Z))
-     (Functor_cat (Catd_cat Z) (Catd_cat Z))
-     (Catd_cat Z)
-     (@eval0_func (Catd_cat Z) (Catd_cat Z) D)
-     (@Functor_catd_func Z);
-
-// Edge family in the contravariant domain expected by Functor_catd_fixR_func.                          // Op_func turns Op(Z)→Catd into Z→Op(Catd)
-symbol Edge_catd_fam_op [Z : Cat]
-  : τ (Functor Z (Op_cat (Catd_cat Z)))
-≔ @Op_func (Op_cat Z) (Catd_cat Z) (Edge_catd_fam);
-
 // Family z ↦ Functor_catd(Edge_catd(z), Cod_catd(E)), as a functor object Z ⟶ Catd_cat(Z).             // z ↦ (z' ↦ Hom(z,z')^op → (E[z']→Cat))
 symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
   : τ (Functor Z (Catd_cat Z))
@@ -2625,8 +2610,13 @@ symbol homd_cov_int_alt4_fam [Z : Cat] (E : Catd Z)
      Z
      (Op_cat (Catd_cat Z))
      (Catd_cat Z)
-     (Functor_catd_fixR_func Cod)
-     (Edge_catd_fam_op);
+     (@comp_cat_fapp0
+       (Op_cat (Catd_cat Z))
+       (Functor_cat (Catd_cat Z) (Catd_cat Z))
+       (Catd_cat Z)
+       (@eval0_func (Catd_cat Z) (Catd_cat Z) Cod)
+       (@Functor_catd_func Z))
+     (@Op_func (Op_cat Z) (Catd_cat Z) (Edge_catd_fam));
 
 // Base functor: z ↦ sections over Z of the family above.                                               // base(z) = Π_{z':Z} Fam(z)(z')
 symbol homd_cov_int_alt4_base [Z : Cat] (E : Catd Z)
@@ -2663,7 +2653,7 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
 /*
   Projecting the internal `alt4` package to a section over the Σ-total.
 
-  For (W_Z,W) in the fibre of E, `homd_cov_int_altproj E W_Z W` is the induced *section over*
+  For (W_Z,W) in the fibre of E, `homd_cov_int_alt4_total_section E W_Z W` is the induced *section over*
   `Total_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
@@ -2682,52 +2672,36 @@ constant symbol swap_functord_func :
       (Functor_catd A (Functor_catd B C))
       (Functor_catd B (Functor_catd A C)));
 
-// More direct (type-driven) swap specialized to the alt4 family at W_Z (returns the “obvious” swapped family). // uses swap_functord_func + comp_catd_fapp0
-symbol Edge_catd_at [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
-≔ @fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z;
+// Family targeted by the alt4 section after fixing W_Z:
+// z' ↦ Functor_cat(Hom_Z(W_Z,z')^op, Cat_cat).                                                          // codomain for uncurry
+symbol homd_cov_int_alt4_target_catd [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
+≔ Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (CatCat_catd Z);
 
-symbol homd_cov_int_alt4_eval_base_catd2 [Z : Cat] (W_Z : τ (Obj Z)) : Catd Z
-≔ Functor_catd (Edge_catd_at W_Z) (CatCat_catd Z);
-
-symbol swap_homd_cov_int_alt4_section2 [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
-  : τ (Functord
-        (Terminal_catd Z)
-        (Functor_catd (Edge_catd_at W_Z) (Cod_catd E)))
-    → τ (Functord
-          (Terminal_catd Z)
-          (Functor_catd E (homd_cov_int_alt4_eval_base_catd2 W_Z)))
-≔ λ SS,
-    @comp_catd_fapp0
-      Z
-      (Terminal_catd Z)
-      (Functor_catd (Edge_catd_at W_Z) (Cod_catd E))
-      (Functor_catd E (homd_cov_int_alt4_eval_base_catd2 W_Z))
-      (@swap_functord_func Z (Edge_catd_at W_Z) E (CatCat_catd Z))
-      SS;
-
-// Alternative uncurry that keeps the pullback codomain explicit (no forced identification with the Groth/Op form). // migration-friendly
-symbol Total_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
-  (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
-     τ (Functord
-          (Terminal_catd (Total_cat E))
-          (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 W_Z) (Total_proj1_func E)))
-≔ @Sigma_uncurry_section_funcd
-    Z
-    E
-    (homd_cov_int_alt4_eval_base_catd2 W_Z)
-    (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
-
-// New, more direct derived section over Total(E), keeping the pullback codomain explicit.               // do not force legacy homd target head
-symbol homd_cov_int_altproj [Z : Cat] (E : Catd Z)
+// New direct projection of alt4 to a section over Total(E), using only swap+Sigma-uncurry primitives. // no extra one-off wrappers
+symbol homd_cov_int_alt4_total_section [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z)):
   τ (Functord 
         (Terminal_catd (@Total_cat Z E)) 
-        (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (Total_proj1_func E)))
-≔ @Total_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
+        (Pullback_catd (@homd_cov_int_alt4_target_catd Z W_Z) (Total_proj1_func E)))
+≔ @Sigma_uncurry_section_funcd
+    Z
+    E
+    (homd_cov_int_alt4_target_catd W_Z)
+    (@comp_catd_fapp0
+      Z
+      (Terminal_catd Z)
+      (Functor_catd (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z) (Cod_catd E))
+      (Functor_catd E (homd_cov_int_alt4_target_catd W_Z))
+      (@swap_functord_func
+        Z
+        (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z)
+        E
+        (CatCat_catd Z))
+      (@homd_cov_int_alt4_sec Z E W_Z W));
 
 // TODO (Groth case still missing on the alt4 path):
-//   add direct computation rules for `homd_cov_int_alt4` / `homd_cov_int_altproj` when
+//   add direct computation rules for `homd_cov_int_alt4` / `homd_cov_int_alt4_total_section` when
 //   `E = Fibration_cov_catd M`, so the generic Total-hom pipeline computes without relying on
 //   the dedicated `Total_hom_func` Groth shortcut below.
 //   Current status: `Hom_cat (Total_cat E) ...` is defined through `Total_hom_func`; for Groth E we
@@ -2854,8 +2828,8 @@ with @Total_hom_func $Z $E $x $u $y $v
   ↪ @fdapp0
       (Total_cat $E)
       (Terminal_catd (Total_cat $E))
-      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (Total_proj1_func $E))
-      (homd_cov_int_altproj $E $x $u)
+      (Pullback_catd (homd_cov_int_alt4_target_catd $x) (Total_proj1_func $E))
+      (homd_cov_int_alt4_total_section $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 
