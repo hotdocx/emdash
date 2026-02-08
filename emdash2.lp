@@ -2291,8 +2291,8 @@ rule @fdapp0
       $u;
 
 // Dependent Yoneda/hom for a dependent category: “Hom_cat in the fibre / in a slice”.                   // dependent hom (2-simplex / triangle classifier)
-constant symbol homd_ : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)]                               // base Z, displayed E, base object W_Z
-  (W_EW : τ (Fibre E W_Z)), Π [D : Catd Z], Π (FF : τ (Functord D E)),                           // W in fibre, D another displayed cat, FF : D→E
+constant symbol homd_ : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord D E)),                      // base Z, displayed E,D, FF : D→E
+  Π [W_Z : τ (Obj Z)] (W_EW : τ (Fibre E W_Z)),                                                    // W in fibre over W_Z
   τ (Functor
       (Total_cat (Product_catd D (Fibration_cov_catd (comp_cat_fapp0 op (hom_ (@id_func Z) W_Z)))))
       Cat_cat);                                                                                            // target category Cat_cat (Cat-valued functors)
@@ -2376,8 +2376,8 @@ rule @fdapp0 Terminal_cat (Lift_catd $A) (Lift_catd $B) (@Lift_funcd $A $B $F) _
 //     • `z : Ob(Z)`,
 //     • `d : Ob(D(z))`,
 //     • `f : Ob(Hom_Z(W_Z, z))` (the base edge along which we transport W).
-rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
-		              (@Fibration_cov_catd $Z $D0) $FF)
+rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) (@Fibration_cov_catd $Z $D0) $FF
+                      $W_Z $W)
 		            (Struct_sigma $z (Struct_sigma $d $f))
   ↪ Hom_cat (fapp0 $E0 $z)
             (fapp0 (fapp1_fapp0 $E0 $f) $W)
@@ -3039,8 +3039,8 @@ assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢
 symbol fdapp1_funcd : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Functord A B)),                 // dependent functor F : A→B
   Π [X_: τ (Obj Z)] (X: τ (Fibre A X_)),                                                    // base object X_ and fibre object X
   τ (Functord
-    (Fibration_cov_catd (@homd_ Z A X_ X A (@id_funcd Z A)))                                       // source hom in fibre (draft; homd_ computes mainly in Grothendieck case)
-    (Fibration_cov_catd (@homd_ Z B X_ (@fdapp0 Z A B F X_ X) A F)));                              // target hom in fibre (draft; pending general homd_ computation rules)
+    (Fibration_cov_catd (@homd_ Z A A (@id_funcd Z A) X_ X))                                       // source hom in fibre (draft; homd_ computes mainly in Grothendieck case)
+    (Fibration_cov_catd (@homd_ Z B A F X_ (@fdapp0 Z A B F X_ X))));                              // target hom in fibre (draft; pending general homd_ computation rules)
 
 // [EXTERNAL] This simplicial packaging is a stable head we keep for now. In the long-term, it is intended to be derived
 // from the more-internal transfor-based displayed packaging (`fdapp1_int_transfd`), once the missing morphism-action bridge
@@ -3052,8 +3052,8 @@ symbol fdapp1_func : Π [Z : Cat], Π [A B : Catd Z], Π (F : τ (Functord A B))
   Π [X_: τ (Obj Z)] (X: τ (Fibre A X_)),
   Π (p : τ (Obj (Total_cat (Product_catd A (Fibration_cov_catd (comp_cat_fapp0 op (hom_ (@id_func Z) X_))))))),
   τ (Functor
-     (Fibre_cat (Fibration_cov_catd (@homd_ Z A X_ X A (@id_funcd Z A))) p)
-     (Fibre_cat (Fibration_cov_catd (@homd_ Z B X_ (@fdapp0 Z A B F X_ X) A F)) p));
+     (Fibre_cat (Fibration_cov_catd (@homd_ Z A A (@id_funcd Z A) X_ X)) p)
+     (Fibre_cat (Fibration_cov_catd (@homd_ Z B A F X_ (@fdapp0 Z A B F X_ X))) p));
 
 // Folding rule (canonical head): the fibre functor extracted from `fdapp1_funcd` is named `fdapp1_func`. // fold Fibre_func(fdapp1_funcd)
 // This mirrors the “warm-up” rule `Fibre_func(fapp1_funcd ...) ↪ fapp1_func ...`.
@@ -3134,16 +3134,16 @@ rule Hom_cat (Functord_cat _ _) $F $G ↪ Transfd_cat $F $G;
 // [EXTERNAL] Stable head (displayed simplicial projection packaging). Intended to become *derived* later. // external packaging marker
 symbol tdapp1_func_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Functord E D)],                  // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Fibre E X_Z)),                                                  // component at fibre object U_EX
-			   τ (Functor (Transfd_cat FF GG)
-			          (Functord_cat (Fibration_cov_catd (@homd_ Z E X_Z U_EX E (@id_funcd Z E)))               // source hom (draft; see homd_ notes)
-		                    (Fibration_cov_catd (@homd_ Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG))));        // target hom (draft; pending full homd_ normalization)
+				   τ (Functor (Transfd_cat FF GG)
+				          (Functord_cat (Fibration_cov_catd (@homd_ Z E E (@id_funcd Z E) X_Z U_EX))               // source hom (draft; see homd_ notes)
+			                    (Fibration_cov_catd (@homd_ Z D E GG X_Z (@fdapp0 Z E D FF X_Z U_EX)))));        // target hom (draft; pending full homd_ normalization)
 
 // `tdapp1_fapp0_funcd` is the fapp0 part of `tdapp1_func_funcd`
 symbol tdapp1_fapp0_funcd : Π [Z : Cat], Π [E D : Catd Z], Π [FF GG : τ (Functord E D)],                  // dependent functors FF,GG
 Π (X_Z: τ (Obj Z)) (U_EX: τ (Fibre E X_Z)),                                                  // component at fibre object U_EX
   Π (ϵ : τ (Transfd FF GG)),
-  τ (Functord (Fibration_cov_catd (@homd_ Z E X_Z U_EX E (@id_funcd Z E)))               // source hom (draft; see homd_ notes)
-                  (Fibration_cov_catd (@homd_ Z D X_Z (@fdapp0 Z E D FF X_Z U_EX) E GG)));         // target hom (draft; pending full homd_ normalization)
+  τ (Functord (Fibration_cov_catd (@homd_ Z E E (@id_funcd Z E) X_Z U_EX))               // source hom (draft; see homd_ notes)
+                  (Fibration_cov_catd (@homd_ Z D E GG X_Z (@fdapp0 Z E D FF X_Z U_EX))));         // target hom (draft; pending full homd_ normalization)
 
 // β-rule: `tdapp1_fapp0_funcd` is definitionally the object-action of the functor `tdapp1_func_funcd`.             // unpack tdapp1_func_funcd at objects
 rule fapp0 (@tdapp1_func_funcd $Z $E $D $FF $GG $X_Z $U_EX) $ϵ ↪ @tdapp1_fapp0_funcd $Z $E $D $FF $GG $X_Z $U_EX $ϵ;
