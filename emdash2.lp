@@ -61,6 +61,12 @@ flag "print_meta_args" on; // default is off
   - Prefer small-step computation rules with stable heads (introduce a helper symbol when useful),
     rather than a single giant nested redex.
 
+  Example (bad vs good):
+  - Bad (overspecified inferred category arguments):
+      @fdapp0 (Total_cat E) (Terminal_catd (Total_cat E)) (Pullback_catd D (Total_proj1_func E)) FF p u
+  - Good (same discriminant head, inferred categories left implicit):
+      @fdapp0 _ _ _ FF p u
+
   We use these principles repeatedly below (e.g. for `hom_cov` computation rules).
 */
 
@@ -2274,8 +2280,8 @@ rule @fdapp0 $Z $E $C (@comp_catd_fapp0 $Z $E $D $C $FF $GG) $x $u
 // Generic computation: pullback/reindexing on displayed functors is precomposition on base objects.   // fdapp0(F^*GG,x,u) ↪ fdapp0(GG,Fx,u)
 rule @fdapp0
       $A
-      (Pullback_catd $E $F)
-      (Pullback_catd $D $F)
+      _
+      _
       (@Pullback_funcd $A $B $F $E $D $GG)
       $x
       $u
@@ -2548,8 +2554,8 @@ rule @fapp1_func _ _ (@Fibration_cov_func $A) $E $D
 
 // Computation: fibrewise object-action is pointwise component evaluation in Cat_cat.                 // (Groth(ϵ))_x(u) ↪ (ϵ_x)(u)
 rule @fdapp0 $A
-      (Fibration_cov_catd $E)
-      (Fibration_cov_catd $D)
+      _
+      _
       (fapp0 (@Fibration_cov_fapp1_func $A $E $D) $ϵ)
       $x
       $u
@@ -2844,11 +2850,9 @@ rule @Homd_func _ (@Fibration_cov_catd $B $M) $x $u $y $v
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v
 with @Homd_func $Z $E $x $u $y $v
   ↪ @fdapp0
-      (Total_cat $E)
-      (Terminal_catd (Total_cat $E))
-      (Pullback_catd
-        (Functor_catd (@fapp0 (Op_cat $Z) (Catd_cat $Z) (Edge_catd_fam) $x) (CatCat_catd $Z))
-        (Total_proj1_func $E))
+      _
+      _
+      _
       (homd_cov_curry_total_section $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
