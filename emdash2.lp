@@ -2127,15 +2127,15 @@ symbol Pi_cat [Z : Cat] (E : Catd Z) : Cat
 ≔ Functord_cat (Terminal_catd Z) E;
 
 // Evaluate a functor at a chosen object, packaged as a functor object.                                 // eval_x : (A⟶B) → B
-symbol eval0_func : Π [A B : Cat],
+symbol fapp0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
 
-// β-rule: evaluation computes by applying the functor to the object.                                   // fapp0(eval0_func x,F) ↪ F[x]
-rule fapp0 (eval0_func $x) $F ↪ fapp0 $F $x;
+// β-rule: evaluation computes by applying the functor to the object.                                   // fapp0(fapp0_func x,F) ↪ F[x]
+rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 
-// Sanity: the β-rule fires by definitional equality.                                                   // exercise eval0_func β-rule
+// Sanity: the β-rule fires by definitional equality.                                                   // exercise fapp0_func β-rule
 assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢
-  fapp0 (eval0_func x) F ≡ fapp0 F x;
+  fapp0 (fapp0_func x) F ≡ fapp0 F x;
 
 // Internal “Π over displayed categories”: E ↦ sections(1_Z → E), packaged as a functor to Cat_cat.     // Pi_func : Catd_cat(Z) → Cat
 symbol Pi_func : Π (Z : Cat), τ (Functor (Catd_cat Z) Cat_cat);
@@ -2616,7 +2616,7 @@ symbol homd_cov_curry_fam [Z : Cat] (E : Catd Z)
        (Op_cat (Catd_cat Z))
        (Functor_cat (Catd_cat Z) (Catd_cat Z))
        (Catd_cat Z)
-       (@eval0_func (Catd_cat Z) (Catd_cat Z) (Functor_catd E (CatCat_catd Z)))
+       (@fapp0_func (Catd_cat Z) (Catd_cat Z) (Functor_catd E (CatCat_catd Z)))
        (@Functor_catd_func Z))
      (@Op_func (Op_cat Z) (Catd_cat Z) (Edge_catd_fam));
 
@@ -2710,12 +2710,11 @@ symbol homd_cov_curry_total_section [Z : Cat] (E : Catd Z)
         (CatCat_catd Z))
       (@homd_cov_curry_sec Z E W_Z W));
 
-// TODO (Groth case still missing on the homd_cov_curry path):
-//   add direct computation rules for `homd_cov_curry` / `homd_cov_curry_total_section` when
-//   `E = Fibration_cov_catd M`, so the generic Total-hom pipeline computes without relying on
-//   the dedicated `Homd_func` Groth shortcut below.
-//   Current status: `Hom_cat (Total_cat E) ...` is defined through `Homd_func`; for Groth E we
-//   temporarily shortcut at `Homd_func` to `comp_hom_con_fib_cov`.
+// NOTE on Groth bridge status:
+//   We now provide a direct computation rule on the fully applied curry path:
+//     fdapp0(..., homd_cov_curry_total_section(Fibration_cov_catd M, x, u), (y,v), tt)
+//       ↪ comp_hom_con_fib_cov(M,x,y,u,v).
+//   The dedicated Groth shortcut on `Homd_func` is still kept as a convenient fast path.
 
 // Single stable head for total homs.                                                                    // sequential: Groth shortcut first
 sequential symbol Homd_func [Z : Cat] (E : Catd Z)
@@ -2832,6 +2831,20 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
 // Rule order matters because `Homd_func` is `sequential`:
 //   1) Groth-specific shortcut (temporary migration bridge),
 //   2) generic homd_cov_curry projection definition.
+//
+// Direct Groth bridge on the fully applied curry path:
+// this makes the generic branch computational in the Groth case as well.
+rule @fdapp0
+      (Total_cat (@Fibration_cov_catd $B $M))
+      (Terminal_catd (Total_cat (@Fibration_cov_catd $B $M)))
+      (Pullback_catd
+        (Functor_catd (@fapp0 (Op_cat $B) (Catd_cat $B) (Edge_catd_fam) $x) (CatCat_catd $B))
+        (Total_proj1_func (@Fibration_cov_catd $B $M)))
+      (homd_cov_curry_total_section (@Fibration_cov_catd $B $M) $x $u)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
+
 rule @Homd_func _ (@Fibration_cov_catd $B $M) $x $u $y $v
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v
 with @Homd_func $Z $E $x $u $y $v

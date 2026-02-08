@@ -228,3 +228,63 @@ Groth shortcut behavior is unchanged.
 ### Validation
 
 - `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes after consolidation.
+
+## Naming Harmonization Pass (fapp0/eval)
+
+Date: 2026-02-08 (follow-up)
+
+Implemented:
+
+- Renamed `eval0_func` to `fapp0_func` in `emdash2.lp`.
+- Updated the associated β-rule and sanity assertion:
+  - `fapp0 (fapp0_func x) F ↪ fapp0 F x`.
+- Updated internal call sites (notably in the `homd_cov_curry_fam` definition).
+
+Comment harmonization:
+
+- Kept the current canonical terminology in code comments:
+  - `homd_cov_curry*` for the internal dependent-hom curry pipeline,
+  - `Homd_func` for the total-hom classifier head,
+  - `logic_uncurry_total` / `logic_swap_funcd` for logic primitives.
+
+Validation:
+
+- `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes.
+
+## Groth Bridge for `homd_cov_curry` (Direct Curry-Path Computation)
+
+Date: 2026-02-08 (follow-up)
+
+Implemented a direct Groth bridge on the fully applied curry-path expression, in addition to
+keeping the convenient `Homd_func` Groth shortcut.
+
+Added rewrite rule (engineering-critical):
+
+```lp
+rule @fdapp0
+      (Total_cat (@Fibration_cov_catd $B $M))
+      (Terminal_catd (Total_cat (@Fibration_cov_catd $B $M)))
+      (Pullback_catd
+        (Functor_catd (@fapp0 (Op_cat $B) (Catd_cat $B) (Edge_catd_fam) $x) (CatCat_catd $B))
+        (Total_proj1_func (@Fibration_cov_catd $B $M)))
+      (homd_cov_curry_total_section (@Fibration_cov_catd $B $M) $x $u)
+      (Struct_sigma $y $v)
+      Terminal_obj
+  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
+```
+
+Rationale:
+
+- This gives direct computation for the generic `homd_cov_curry_total_section` route in the Groth case,
+  so the curry path is no longer only “spec-level”; it now computes to the transported hom functor.
+- We still keep `Homd_func` as `sequential` with the explicit Groth shortcut first, because it remains
+  a useful fast head and preserves current normalization behavior.
+- We intentionally did **not** introduce additional partial-application stable heads for this bridge;
+  the single fully applied rule is enough for now and keeps the rule surface minimal.
+
+Note on validation shape:
+
+- We intentionally keep this bridge as a rewrite rule (without an additional explicit `assert`),
+  because explicit fully-applied `fdapp0` sanity terms at `Terminal_catd (Total_cat ...)` currently
+  trigger brittle implicit reconstruction for the fibre object argument.
+- End-to-end behavior remains covered by `make check` through the `Hom_cat`/`Homd_func` normalization path.
