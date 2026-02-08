@@ -2189,6 +2189,12 @@ symbol homd_cov_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
 //   - we treat the “probe” into E as a Grothendieck displayed category `Fibration_cov_catd D0`,
 //     with `D0 : Z ⟶ Cat` (computational/combinatorial input),
 //   - and only then take a displayed functor `FF : Fibration_cov_catd D0 ⟶ E`.
+//
+// TODO (missing computational bridge):
+//   add Groth-specific computation rules for `homd_cov_int` in the probe case
+//   (`E = Fibration_cov_catd E0`, `FF` built from Groth data), analogous in spirit to
+//   the existing pointwise computation rule of `homd_cov`. For now `homd_cov_int` is purely a
+//   typed packaging head with no reduction behavior.
 constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
   Π (D0 : τ (Functor Z Cat_cat)),
   Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
@@ -2712,6 +2718,13 @@ symbol homd_cov_int_altproj [Z : Cat] (E : Catd Z)
         (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (Total_proj1_func E)))
 ≔ @Total_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
+// TODO (Groth case still missing on the alt4 path):
+//   add direct computation rules for `homd_cov_int_alt4` / `homd_cov_int_altproj` when
+//   `E = Fibration_cov_catd M`, so the generic Total-hom pipeline computes without relying on
+//   the dedicated `Total_hom_func_head` Groth shortcut below.
+//   Current status: `Hom_cat (Total_cat E) ...` is defined through `Total_hom_func`; for Groth E we
+//   temporarily shortcut at `Total_hom_func_head` to `comp_hom_con_fib_cov`.
+
 // Direct definition of Total_hom_func through the alt4-derived wrapper.                                 // keep only one stable head
 symbol Total_hom_func_head [Z : Cat] (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (FibreObj E x))
@@ -2832,6 +2845,7 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
 // Grothendieck shortcut for the always-Σ head (kept while deeper alt4 Groth rules are deferred).
+// TODO: retire this shortcut once the TODO above is implemented and stable.
 rule @Total_hom_func_head _ (@Fibration_cov_catd $B $M) $x $u $y $v
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
 
