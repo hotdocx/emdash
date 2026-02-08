@@ -1568,84 +1568,9 @@ rule τ (Obj (@Total_cat $B $E))
 // Base projection computes on Σ-objects for arbitrary displayed categories.
 rule fapp0 (Total_proj1_func $E) (Struct_sigma $x $u) ↪ $x;
 
-// -------------------------------------------------------------------------------------------------
-// 10a. Always-Σ total category (parallel development; migration target for Total_cat)                // TotalΣ_cat
-// -------------------------------------------------------------------------------------------------
-
-/*
-  TotalΣ_cat (always-Σ)
-
-  `Total_cat` is currently only definitionally Σ-shaped on objects/homs for Grothendieck totals
-  `E = Fibration_cov_catd M` (and it has legacy definitional collapses like `Total_cat (Lift_catd A) ↪ A`).
-
-  In the next milestones (REPORT_EMDASH_LOGIC_DEV_2.md), we want a total construction that is *always*
-  Σ-shaped on objects, for arbitrary displayed categories `E : Catd B`, without destabilizing the
-  existing rewrite system.
-
-  We therefore introduce `TotalΣ_cat` in parallel, with a computable object layer and a projection.
-  Hom computation is introduced later via a stable-head functor `TotalΣ_hom_func`.
-*/
-
-symbol TotalΣ_cat [B : Cat] (E : Catd B) : Cat;
-
-// Projection π₁ : TotalΣ_cat(E) → B (base projection).                                                // Σ-projection (first component)
-injective symbol TotalΣ_proj1_func [B : Cat] (E : Catd B) : τ (Functor (TotalΣ_cat E) B);
-
-// Normalization on opposites (mirror of Total_cat convention).                                        // ∫Σ(Eᵒᵖ) ≡ (∫ΣE)ᵒᵖ
-rule @TotalΣ_cat _ (@Op_catd $B $E) ↪ Op_cat (@TotalΣ_cat $B $E);
-
-// Projection of the opposite total is the opposite projection.                                        // (π₁)ᵒᵖ ≡ π₁
-rule @Op_func _ $B (@TotalΣ_proj1_func $B $E)
-  ↪ @TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E);
-
-// Double opposite of the Σ-total projection collapses back to the original projection.                 // (π₁)ᵒᵖᵒᵖ ↪ π₁
-rule @Op_func _ _ (@TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E))
-  ↪ @TotalΣ_proj1_func $B $E;
-
-// Objects of TotalΣ_cat are always definitional Σ-pairs (x,u) with x:Obj(B) and u:Obj(E[x]).          // τ Obj(∫ΣE) ↪ Σ x:B, Obj(E[x])
-rule τ (Obj (@TotalΣ_cat $B $E))
-  ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
-
-// π₁ on objects: (x,u) ↦ x.                                                                           // fapp0(π₁,(x,u)) ↪ x
-rule fapp0 (TotalΣ_proj1_func $E) (Struct_sigma $x $u) ↪ $x;
-
-// Sanity: π₁ computes by definitional equality.                                                        // exercise the rule
+// Sanity: π₁ computes by definitional equality in the always-Σ total.
 assert [B : Cat] (E : Catd B) (x : τ (Obj B)) (u : τ (FibreObj E x)) ⊢
-  fapp0 (TotalΣ_proj1_func E) (Struct_sigma x u) ≡ x;
-
-/*
-  TotalΣ_hom_func (stable head)
-
-  For `TotalΣ_cat E`, we define hom-categories by *another* Grothendieck total over the base hom-category:
-
-    Hom_{∫ΣE}((x,u),(y,v))  ≔  ( ∫ (f ↦ (u →_f v)) )ᵒᵖ
-
-  where the Cat-valued functor `f ↦ (u →_f v)` is provided by the stable head `TotalΣ_hom_func`.
-
-  In Phase 2 we only commit to the *shape* of homs; computation for `TotalΣ_hom_func` is added later
-  (first in the Grothendieck probe case, mirroring existing `Total_cat` hom computation).
-*/
-
-symbol TotalΣ_hom_func : Π [Z : Cat],
-  Π (E : Catd Z),
-  Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
-  Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
-  τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
-
-// Canonical hom-functor head for always-Σ totals (kept distinct from legacy Groth shorthand names).
-symbol Total_hom_func [Z : Cat] (E : Catd Z)
-  (x : τ (Obj Z)) (u : τ (FibreObj E x))
-  (y : τ (Obj Z)) (v : τ (FibreObj E y))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ TotalΣ_hom_func E x u y v;
-
-// Hom-category for Total_cat now follows the always-Σ pipeline through Total_hom_func.
-rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
-
-// Hom-category in TotalΣ_cat is (the opposite of) a Grothendieck total over TotalΣ_hom_func.           // Hom_{∫ΣE}((x,u),(y,v)) ↪ (∫ TotalΣ_hom_func)ᵒᵖ
-rule Hom_cat (@TotalΣ_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_cat (Total_cat (Fibration_cov_catd (TotalΣ_hom_func $E $x $u $y $v)));
+  fapp0 (Total_proj1_func E) (Struct_sigma x u) ≡ x;
 
 // -------------------------------------------------------------------------------------------------
 // 10b. Internalized Grothendieck total (curried)                                                     // Total_func : (Z⟶Cat) ⟶ Cat
@@ -2306,14 +2231,14 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
 // NOTE: older “alt3” internalization attempts have been removed in favor of the `alt4` pipeline.       // cleanup: keep only alt4
 
 /*
-  TotalΣ_hom_func (warm-up bridge)
+  Total_hom_func (warm-up bridge)
 
-  For fixed (x,u) and (y,v) in `TotalΣ_cat E`, the “dependent hom over base edges” classifier should
-  produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `TotalΣ_hom_func`
+  For fixed (x,u) and (y,v) in `Total_cat E`, the “dependent hom over base edges” classifier should
+  produce a Cat-valued functor on the base hom-category Hom_Z(x,y). In the long-term, `Total_hom_func`
   is intended to be expressed via the `alt4` internal pipeline (`homd_cov_int_alt4`), but during early
   development we keep the definition close to the section-level uncurry/eval primitives.
 
-    TotalΣ_hom_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
+    Total_hom_func(E,x,u,y,v) : (Hom_Z(x,y))ᵒᵖ ⟶ Cat.
 
   We currently define it via the `alt4` pipeline (see below), without a separate binder-style wrapper.
 */
@@ -2630,7 +2555,7 @@ rule @Fibre_func $A
 
     z ↦ sections over z' : Z of  Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat_cat)).
 
-  It is indexed directly over `Z` (not over `TotalΣ_cat E`), so it does not bake in `TotalΣ_proj1_func`.
+  It is indexed directly over `Z` (not over `Total_cat E`), so it does not bake in `Total_proj1_func`.
 */
 
 // Constant Cat-family over Z (weakening of Cat_cat to Catd Z).                                         // CatCat_catd(Z)[z] = Cat_cat
@@ -2722,16 +2647,16 @@ symbol homd_cov_int_alt4_sec [Z : Cat] (E : Catd Z)
   Projecting the internal `alt4` package to a section over the Σ-total.
 
   For (W_Z,W) in the fibre of E, `homd_cov_int_altproj E W_Z W` is the induced *section over*
-  `TotalΣ_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
+  `Total_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
-// Generic Sigma-uncurry on sections (primitive): section of Functor_catd(E,D) → section over TotalΣ(E). // Π z,e. D[z]  ≈  Π (z,e). pullback D
+// Generic Sigma-uncurry on sections (primitive): section of Functor_catd(E,D) → section over Total(E). // Π z,e. D[z]  ≈  Π (z,e). pullback D
 symbol Sigma_uncurry_section_funcd :
   Π [Z : Cat], Π [E D : Catd Z],
   τ (Functord (Terminal_catd Z) (Functor_catd E D))
     → τ (Functord
-          (Terminal_catd (TotalΣ_cat E))
-          (Pullback_catd D (TotalΣ_proj1_func E)));
+          (Terminal_catd (Total_cat E))
+          (Pullback_catd D (Total_proj1_func E)));
 
 // Displayed swap for Functor_catd (primitive).                                                          // fibrewise version of swap_functor_func
 constant symbol swap_functord_func :
@@ -2764,35 +2689,50 @@ symbol swap_homd_cov_int_alt4_section2 [Z : Cat] (E : Catd Z) (W_Z : τ (Obj Z))
       SS;
 
 // Alternative uncurry that keeps the pullback codomain explicit (no forced identification with the Groth/Op form). // migration-friendly
-symbol TotalΣ_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
+symbol Total_uncurry_eval2 [Z : Cat] [E : Catd Z] (W_Z : τ (Obj Z))
   (SS : τ (Functord (Terminal_catd Z) (@fapp0 Z (Catd_cat Z) (homd_cov_int_alt4_fam E) W_Z))):
      τ (Functord
-          (Terminal_catd (TotalΣ_cat E))
-          (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 W_Z) (TotalΣ_proj1_func E)))
+          (Terminal_catd (Total_cat E))
+          (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 W_Z) (Total_proj1_func E)))
 ≔ @Sigma_uncurry_section_funcd
     Z
     E
     (homd_cov_int_alt4_eval_base_catd2 W_Z)
     (@swap_homd_cov_int_alt4_section2 Z E W_Z SS);
 
-// New, more direct derived section over TotalΣ(E), keeping the pullback codomain explicit.             // do not force legacy homd target head
+// New, more direct derived section over Total(E), keeping the pullback codomain explicit.               // do not force legacy homd target head
 symbol homd_cov_int_altproj [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (FibreObj E W_Z)):
   τ (Functord 
-        (Terminal_catd (@TotalΣ_cat Z E)) 
-        (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (TotalΣ_proj1_func E)))
-≔ @TotalΣ_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
+        (Terminal_catd (@Total_cat Z E)) 
+        (Pullback_catd (@homd_cov_int_alt4_eval_base_catd2 Z W_Z) (Total_proj1_func E)))
+≔ @Total_uncurry_eval2 Z E W_Z (@homd_cov_int_alt4_sec Z E W_Z W);
 
-// Direct definition of TotalΣ_hom_func through the alt4-derived wrapper.                               // keep only one stable head
-rule @TotalΣ_hom_func $Z $E $x $u $y $v
+// Direct definition of Total_hom_func through the alt4-derived wrapper.                                 // keep only one stable head
+symbol Total_hom_func_head [Z : Cat] (E : Catd Z)
+  (x : τ (Obj Z)) (u : τ (FibreObj E x))
+  (y : τ (Obj Z)) (v : τ (FibreObj E y))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+
+symbol Total_hom_func [Z : Cat] (E : Catd Z)
+  (x : τ (Obj Z)) (u : τ (FibreObj E x))
+  (y : τ (Obj Z)) (v : τ (FibreObj E y))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ Total_hom_func_head E x u y v;
+
+rule @Total_hom_func_head $Z $E $x $u $y $v
   ↪ @fdapp0
-      (@TotalΣ_cat $Z $E)
-      (Terminal_catd (TotalΣ_cat $E))
-      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (TotalΣ_proj1_func $E))
-      (@homd_cov_int_altproj $Z $E $x $u)
+      (Total_cat $E)
+      (Terminal_catd (Total_cat $E))
+      (Pullback_catd (homd_cov_int_alt4_eval_base_catd2 $x) (Total_proj1_func $E))
+      (homd_cov_int_altproj $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
+
+// Hom-category in Total_cat is (the opposite of) a Grothendieck total over Total_hom_func.
+rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
 
 // Bridge (external projection): Groth of the internal-at-X transfor is `tapp1_fapp0_funcd`.           // fold Groth∘tapp1_int ↪ tapp1_fapp0_funcd
 rule fapp0
@@ -2888,7 +2828,9 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
-// Legacy Groth-specific hom shortcut is superseded by always-Σ `Total_hom_func`.
+// Grothendieck shortcut for the always-Σ head (kept while deeper alt4 Groth rules are deferred).
+rule @Total_hom_func_head _ (@Fibration_cov_catd $B $M) $x $u $y $v
+  ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
 
 // Legacy Groth-specific hom-level projection shortcuts are deferred during always-Σ migration.
 
