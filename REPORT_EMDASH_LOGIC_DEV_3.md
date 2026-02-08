@@ -122,3 +122,47 @@ If we decide to restore collapses, safest order is:
 
 This order minimizes critical-pair pressure with the always-`Σ` `Total_cat` rules and with the new
 `Total_hom_func`/alt4 normalization pipeline.
+
+## Rewrite Cleanup Pass (from REPORT_EMDASH_LOGIC_DEV_2.md "Key rewrite principles")
+
+Date: 2026-02-08 (follow-up)
+
+We revisited the extra engineering rules that were introduced during the earlier `Total_uncurry_eval2` /
+`homd_cov_int_altproj` stabilization phase, and tested removal incrementally with
+`EMDASH_TYPECHECK_TIMEOUT=60s make check`.
+
+### Removed as non-essential (typecheck still passes)
+
+- `rule @comp_cat_fapp0 $A $B $D (@comp_cat_fapp0 $B $C $D $F $G) $H
+    ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);`
+  - Removed (associativity normalization at functor-composition head).
+- `rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
+      (@Op_func $B Cat_cat (@hom_cov $A $W $B $F)) $H
+    ↪ @Op_func $C Cat_cat
+        (@hom_cov $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));`
+  - Removed (special contravariant accumulation form).
+- `rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) Cat_cat
+      (@hom_con $A $W $B $F) (@Op_func $C $B $G)
+    ↪ @hom_con $A $W $C (@comp_cat_fapp0 $C $B $A $F $G);`
+  - Removed (derived from existing `hom_con` definition + remaining rules).
+- `rule @Pullback_catd $A $B
+      (@Op_catd (Op_cat $B) (@Fibration_cov_catd (Op_cat $B) $H)) $F
+    ↪ @Op_catd (Op_cat $A)
+        (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));`
+  - Removed (no longer required by current alt4/uncurry normalization chain).
+
+### Kept as genuinely useful / currently required
+
+- `rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;`
+- `rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;`
+  - Kept as mild identity simplifications on the stable composition head.
+- `rule @comp_cat_fapp0 $C $B Cat_cat (@hom_cov $A $W $B $F) $G
+    ↪ hom_cov $W (comp_cat_fapp0 $F $G);`
+  - Kept: removing it causes an immediate assertion failure in the current file (`hom_cov` precomposition
+    definitional behavior is relied upon).
+
+### Outcome
+
+- The ad hoc rule set was reduced while preserving successful typecheck.
+- We now keep only the rules that are either broadly canonical simplifications or demonstrably required
+  by existing assertions/computations.

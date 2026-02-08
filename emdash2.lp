@@ -751,11 +751,7 @@ rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
 // Computation: (F∘G)(x) ↪ F(G(x)) (stable-head form).                                                  // pointwise composition
 rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 
-// Functor-level associativity/identity for the stable-head composition symbol.                         // normalize composition spine
-// We orient associativity to the right to avoid loops and to expose opportunities for specialized
-// rewrite rules (e.g. `hom_cov` precomposition accumulation). Such rule OK only for functors in Cat_cat
-rule @comp_cat_fapp0 $A $B $D (@comp_cat_fapp0 $B $C $D $F $G) $H
-  ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);
+// Functor-level identity simplifications for the stable-head composition symbol.                       // normalize composition spine
 
 // Right identity: F ∘ id = F.                                                                          // normalize away trailing identities
 rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
@@ -811,25 +807,6 @@ rule @fapp0 $B Cat_cat (@comp_cat_fapp0 $B Cat_cat Cat_cat op $E) $b
 // Naturality w.r.t. precomposition in the argument functor: Hom_A(W, F(-)) ∘ G  ≡  Hom_A(W, (F∘G)(-)). // "accumulate the functor"
 rule @comp_cat_fapp0 $C $B Cat_cat (@hom_cov $A $W $B $F) $G
   ↪ hom_cov $W (comp_cat_fapp0 $F $G);
-
-// Naturality under precomposition, in the *contravariant* (Op_func) view.                               // Op(Hom(W,F-)) ∘ H  ≡  Op(Hom(W,F∘Op(H)-))
-// This is the form that actually appears once `Fibration_con_catd` unfolds and `Op_func` distributes
-// over compositions: we get a composition of the shape `(Op_func (hom_cov ...)) ∘ H` (both living over
-// opposite bases).  We reduce it back to a single `Op_func (hom_cov ...)` with the accumulated base map.
-rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
-      (@Op_func $B Cat_cat (@hom_cov $A $W $B $F))
-      $H
-  ↪ @Op_func $C Cat_cat
-      (@hom_cov $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));
-// rule @Op_func _ _
-//       (@comp_cat_fapp0 $A $B $C $F $G)
-//        ↪  @comp_cat_fapp0 (Op_cat $A) (Op_cat $B) (Op_cat $C) (Op_func $F) (Op_func $G);
-
-// TODO: review this; should be derivable from similar rule for `hom_cov` 
-// Naturality w.r.t. precomposition in the argument functor (contravariant case):                    // accumulate the functor (with Op)
-// Hom_A(F(-),W) ∘ (Gᵒᵖ)  ≡  Hom_A((F∘G)(-), W), where Gᵒᵖ : Cᵒᵖ → Bᵒᵖ.                                  // variance bookkeeping
-rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) (@Op_func $C $B $G)
-  ↪ @hom_con $A $W $C (@comp_cat_fapp0 $C $B $A $F $G);
 
 // Sanity: the above rewrite fires definitionally (conversion).                                        // exercise the rule
 assert [A B : Cat] [C : Cat] (W : τ (Obj A))
@@ -1233,15 +1210,6 @@ rule @Op_catd _ (Terminal_catd $X) ↪ Terminal_catd (Op_cat $X);
 // Opposite commutes with pullback (reindexing) via Op on the base functor.                            // (F^*E)ᵒᵖ ≡ (Fᵒᵖ)^*(Eᵒᵖ)
 rule @Op_catd _ (@Pullback_catd $A $B $E $F)
   ↪ @Pullback_catd _ _ (@Op_catd $B $E) (@Op_func $A $B $F);
-
-// Pullback of an Op_catd(Grothendieck) reduces by precomposing the base functor by Op_func(F).         // F^*(Op(∫H)) ≡ Op(∫(H∘Fᵒᵖ))
-// This is the convertibility bridge needed by the `Sigma_uncurry_section_funcd` pipeline (alt4).
-rule @Pullback_catd $A $B
-      (@Op_catd (Op_cat $B)
-        (@Fibration_cov_catd (Op_cat $B) $H))
-      $F
-  ↪ @Op_catd (Op_cat $A)
-      (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));
 
 // Opposite of a displayed functor (slice-style; base map is implicitly id).                           // displayed dualization
 injective symbol Op_funcd : Π [Z : Cat], Π [E D : Catd Z],
