@@ -1561,6 +1561,13 @@ rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
 rule @Op_func _ $B (@Total_proj1_func $B $E)
   ↪ @Total_proj1_func (Op_cat $B) (@Op_catd $B $E);
 
+// Always-Σ object layer for totals (migration target): Obj(∫E) is definitionally a Σ over the base.
+rule τ (Obj (@Total_cat $B $E))
+  ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
+
+// Base projection computes on Σ-objects for arbitrary displayed categories.
+rule fapp0 (Total_proj1_func $E) (Struct_sigma $x $u) ↪ $x;
+
 // -------------------------------------------------------------------------------------------------
 // 10a. Always-Σ total category (parallel development; migration target for Total_cat)                // TotalΣ_cat
 // -------------------------------------------------------------------------------------------------
@@ -1624,6 +1631,17 @@ symbol TotalΣ_hom_func : Π [Z : Cat],
   Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
   Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
   τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+
+// Canonical hom-functor head for always-Σ totals (kept distinct from legacy Groth shorthand names).
+symbol Total_hom_func [Z : Cat] (E : Catd Z)
+  (x : τ (Obj Z)) (u : τ (FibreObj E x))
+  (y : τ (Obj Z)) (v : τ (FibreObj E y))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ TotalΣ_hom_func E x u y v;
+
+// Hom-category for Total_cat now follows the always-Σ pipeline through Total_hom_func.
+rule Hom_cat (@Total_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Op_cat (Total_cat (Fibration_cov_catd (Total_hom_func $E $x $u $y $v)));
 
 // Hom-category in TotalΣ_cat is (the opposite of) a Grothendieck total over TotalΣ_hom_func.           // Hom_{∫ΣE}((x,u),(y,v)) ↪ (∫ TotalΣ_hom_func)ᵒᵖ
 rule Hom_cat (@TotalΣ_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
@@ -1723,14 +1741,7 @@ rule @fib_cov_tapp0_fapp0 $B $M $y $z $g (@fib_cov_tapp0_fapp0 $B $M $x $y $f $u
 // 10b. Grothendieck totals: objects and π₁ (needed early for other computation rules)                 // ∫M objects
 // -------------------------------------------------------------------------------------------------
 
-// Objects of ∫M are Σ (x : Obj(B)), Obj(M(x)), but **only** for Grothendieck totals.                  // Σ-object description (Grothendieck only)
-// For a general `E : Catd B` (semantic “category over B”), objects of `Total_cat E` are not
-// definitionally a Σ-type: `Total_cat` is primitive data carried by `E`.
-rule τ (Obj (Total_cat (@Fibration_cov_catd $B $M)))
-  ↪ `τΣ_ x : τ (Obj $B), Obj (fapp0 $M x);                                                             // τ Obj(∫M) ↪ Σ x:B, Obj(M(x))
-
-// The base projection π₁ : ∫M → B sends (x,u) ↦ x.                                                     // compute π₁ on objects (Grothendieck)
-rule fapp0 (Total_proj1_func (Fibration_cov_catd $M)) (Struct_sigma $x $u) ↪ $x;
+// Legacy Groth-specific object/projection shortcuts are superseded by the always-Σ rules above.
 
 // NOTE (orientation update):
 // With the outward normalization `Total_cat(Op_catd E) ↪ Op_cat(Total_cat E)` and `Obj(Op_cat A) ↪ Obj A`,
@@ -1799,24 +1810,20 @@ assert [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Functor X Y))
 // Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
 injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Functord E (Terminal_catd B));
 
-// Terminal comprehension laws (cartierSolution13: Context_cat/Context_elimCat/Context_intro).        // ∫(1_X) ≡ X, π₁ ≡ id
-rule Total_cat (Terminal_catd $A) ↪ $A;                                                               // ∫(1_A) ↪ A
-rule Total_proj1_func (Terminal_catd $A) ↪ @id_func $A;                                        // π₁ : ∫(1_A)→A ↪ id_A
+// Terminal comprehension shortcuts are intentionally deferred while `Total_cat` is migrated to the
+// always-Σ connective behavior.                                                                      // keep only generic rules for now
 
 // Pullback preserves terminal displayed categories.                                                  // F^*(1_B) ≡ 1_A
 rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
 
-// The dependent projection π₂ is the identity section when M is terminal.                            // π₂ : 1_{∫1} ⇒ (π₁)^*1  ↪ id
-rule Total_proj2_funcd (Terminal_catd $A) ↪ @id_funcd $A (Terminal_catd $A);
+// The terminal-instance shortcut for π₂ is deferred for the same reason (no `Total_cat(1) ↪ _`).      // will be reintroduced as derived/equivalence
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
 // Identity: over id_X, the induced functor on totals is identity.                                      // ∫(id) ↪ id
 // NOTE: we match on `id_func`.                                                                        // stable matching
 rule @Total_intro_func $X $X $A $A (@id_func $X) (@id_funcd $X $A) ↪ @id_func (Total_cat $A);
 
-// Terminal: over xy : X→Y, the induced functor into ∫(1_Y)≡Y is xy ∘ π₁.                               // ∫(!) ↪ xy∘π₁
-rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
-  ↪ comp_cat_fapp0 $xy (Total_proj1_func $A);
+// The terminal-target shortcut for `Total_intro_func` is deferred while total-terminal collapse is absent.
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
 // General projection law: (∫FF);π₁_D = (xy)∘(π₁_E).                                                     // projection naturality
@@ -1910,11 +1917,7 @@ injective symbol Lift_catd : Cat → Catd Terminal_cat;                         
 // Opposite of a constant family is constant on the opposite category.                                // const(A)ᵒᵖ ≡ const(Aᵒᵖ)
 rule @Op_catd Terminal_cat (Lift_catd $A) ↪ Lift_catd (Op_cat $A);
 
-// The Grothendieck construction of a constant family over 1 is definitionally the original category. // ∫(const_1(A)) ≡ A
-rule Total_cat (Lift_catd $A) ↪ $A;
-
-// The base projection of ∫(const_1(A)) → 1 is the terminal functor A → 1.                            // π₁ ↪ !
-rule Total_proj1_func (Lift_catd $A) ↪ Terminal_func $A;
+// Constant-family total/projection collapses are deferred (same migration reason as terminal shortcuts).
 
 // Fibres of a constant family are constant (independent of the base point in 1).                    // fibre(const_1(A),*) ≡ A
 rule Fibre_cat (Lift_catd $A) _ ↪ $A;
@@ -1923,15 +1926,8 @@ rule Fibre_cat (Lift_catd $A) _ ↪ $A;
 injective symbol Lift_funcd : Π [A B : Cat],
   τ (Functor A B) → τ (Functord (Lift_catd A) (Lift_catd B));
 
-// Forget a displayed functor between constant families by taking its induced functor on totals.     // displayed-over-1 ↦ ordinary
-symbol Unlift_func [A B : Cat]
-  (FF : τ (Functord (Lift_catd A) (Lift_catd B))) : τ (Functor A B)
-≔ @Total_intro_func Terminal_cat Terminal_cat (Lift_catd A) (Lift_catd B) (@id_func Terminal_cat) FF;
-// NOTE: definitional abbreviation; keep in mind the same “rewrite head” principle as for `tapp0_fapp0` if we later want to normalize by rewriting at `Unlift_func ...`.
-
-// // β-law: unlift∘lift is definitional (on functors).                                                  // ∫(lift(F)) ↪ F
-rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B) (@id_func Terminal_cat) (@Lift_funcd $A $B $F)
-  ↪ $F;
+// `Unlift_func` (and its β-shortcut) depended on the collapsed `Total_cat(Lift_catd _)` behavior.
+// We defer it during the always-Σ migration.
 
 
 // -------------------------------------------------------------------------------------------------
@@ -2356,27 +2352,6 @@ constant symbol homd_cov : Π [Z : Cat], Π [E : Catd Z], Π [W_Z : τ (Obj Z)] 
       (Total_cat (Product_catd D (Fibration_cov_catd (comp_cat_fapp0 op (hom_cov W_Z (@id_func Z))))))
       Cat_cat);                                                                                            // target category Cat_cat (Cat-valued functors)
 
-// Section into a Grothendieck total (object-level computation).                                       // (x ↦ (xy(x), FF_x(*)))
-// If D = ∫M is Grothendieck and FF : 1_X → xy^*(D) is a displayed functor over xy : X→B, then ∫FF sends:
-//   x ↦ (xy(x), u_x)  where u_x = (FF on the unique terminal fibre object at x).                      // uses Fibre_cat(Terminal_catd,_) ≡ 1
-rule @fapp0 $X (Total_cat (@Fibration_cov_catd $B $M))
-    (@Total_intro_func $X $B (Terminal_catd $X) (@Fibration_cov_catd $B $M) $xy $FF) $x
-  ↪ Struct_sigma
-      (fapp0 $xy $x)
-      (@fdapp0 $X (Terminal_catd $X) (@Pullback_catd $X $B (@Fibration_cov_catd $B $M) $xy) $FF $x Terminal_obj);
-
-// Sanity: the computed object-level section satisfies π₁∘(∫FF) = xy definitionally.                   // projection on introduced Σ-pair
-assert [X B : Cat]
-  (M  : τ (Functor B Cat_cat))
-  (xy : τ (Functor X B))
-  (FF : τ (Functord (Terminal_catd X) (Pullback_catd (Fibration_cov_catd M) xy)))
-  (x  : τ (Obj X)) ⊢
-  fapp0 (Total_proj1_func (Fibration_cov_catd M)) (@fapp0
-      X
-      (Total_cat (Fibration_cov_catd M))
-      (@Total_intro_func X B (Terminal_catd X) (Fibration_cov_catd M) xy FF)
-      x)
-  ≡ fapp0 xy x;
 
 /*
   Fibre_func (extract the induced functor on a fibre)
@@ -2913,83 +2888,13 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
   fapp0 (@comp_hom_con_fib_cov B M x y u v) f
     ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
 
-// Grothendieck hom-category is itself a Grothendieck total.                                            // Hom_{∫M}((x,u),(y,v)) ≡ ∫(f ↦ Hom_{M(y)}(M(f)(u),v))
-// Usual notation (opfibration Grothendieck formula):
-//   Hom_{∫M}((x,u),(y,v))  ≅  ∫_{f : x→y} Hom_{M(y)}(f_!(u), v).                                        // homs in ∫M as another ∫
-// Grothendieck hom-category is itself a Grothendieck total (contravariant in the base hom-category).   // Hom_{∫M}((x,u),(y,v)) ≡ (∫H)^op
-// Using Op-acrobatics: for H : (Hom_B(x,y))ᵒᵖ → Cat, we form ∫H over (Hom_B(x,y))ᵒᵖ and then take Op.    // keep 2-cell direction correct
-rule Hom_cat (Total_cat (@Fibration_cov_catd $B $M)) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_cat (Total_cat ((Fibration_cov_catd (@comp_hom_con_fib_cov $B $M $x $y $u $v))));
+// Legacy Groth-specific hom shortcut is superseded by always-Σ `Total_hom_func`.
 
-// Functoriality of the base projection on hom-categories (Grothendieck).                               // π₁₁ : Hom_{∫M} → Hom_B
-// Usual notation: `π₁ : ∫M → B` induces on homs a functor
-//   (π₁)_{1} : Hom_{∫M}((x,u),(y,v)) ⟶ Hom_B(x,y),
-//   sending `(f,α)` to `f`.                                                                            // forget the fibre component
-rule @fapp1_func (Total_cat (@Fibration_cov_catd $B $M)) $B (Total_proj1_func (Fibration_cov_catd $M))
-  (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_func (Total_proj1_func
-               ((@Fibration_cov_catd _ (@comp_hom_con_fib_cov $B $M $x $y $u $v))));
+// Legacy Groth-specific hom-level projection shortcuts are deferred during always-Σ migration.
 
-// The base projection on objects is the first Σ-projection.                                            // π₁(f,α)=f
-rule fapp0
-      (Total_proj1_func (Op_catd (Fibration_cov_catd $H)))
-      (Struct_sigma $f $α)
-  ↪ $f;
+// Legacy Groth-only sanity assertions for total homs are deferred while `Total_cat` migrates to always-Σ.
 
-// Sanity: object-level description of Hom_{∫M}((x,u),(y,v)) as a Σ-type.                                // 1-cells are pairs (f,α)
-// NOTE (performance): this “fully expanded” assertion can be expensive to normalize during early development
-// (it forces several layers of rewriting through totals/opposites/Grothendieck). Re-enable once the rewrite
-// layer is stable enough that `make check` stays comfortably below the timeout.
-
-assert [B : Cat] (M : τ (Functor B Cat_cat))
-  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y))) ⊢
-  τ (Hom (Total_cat (@Fibration_cov_catd B M)) (Struct_sigma x u) (Struct_sigma y v))
-    ≡ `τΣ_ f : τ (Hom B x y),
-         Hom (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v;
-
-// Sanity: π₁ sends a 1-cell (f,α) to its base arrow f.                                                 // projection on 1-cells
-// This is the key “forget the fibre component” behavior of the Grothendieck projection on morphisms:
-//   π₁(f,α) = f.
-assert [B : Cat] (M : τ (Functor B Cat_cat))
-  (x y : τ (Obj B)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
-  (f : τ (Hom B x y))
-  (α : τ (Hom (fapp0 M y) (@fib_cov_tapp0_fapp0 B M x y f u) v)) ⊢
-  fapp0
-    (@fapp1_func (Total_cat (@Fibration_cov_catd B M)) B (Total_proj1_func (Fibration_cov_catd M))
-      (Struct_sigma x u) (Struct_sigma y v))
-    (Struct_sigma f α)
-    ≡ f;
-
-// Sanity: objects of Hom_{∫M}((x,u),(y,v)) reduce to Σ-pairs, via the previous rule + τ(Σ_) ↪ τΣ_.      // normalization smoke-test
-
-// Identity/composition in ∫M (Grothendieck case, strict).                                               // id and ∘ on 1-cells of ∫M
-//
-// Objects of the hom-categories of ∫M are Σ-pairs (f,α) where:
-//   - f : x → y is a 1-cell in the base B (i.e. an object of Hom_cat(B,x,y)),
-//   - α : Hom_{M(y)}(f_!(u), v) is a 1-cell in the fibre over y.
-//
-// The rules below give the expected strict opfibration behavior:
-//   id_(x,u)       = (id_x, id_u)
-//   (g,β) ∘ (f,α)  = (g∘f,  β ∘ M(g)(α)).
-
-rule @id (Total_cat (@Fibration_cov_catd $B $M)) (Struct_sigma $x $u)
-  ↪ Struct_sigma
-      (@id $B $x)
-      (@id (fapp0 $M $x) $u);
-
-rule @comp_fapp0 (Total_cat (@Fibration_cov_catd $B $M))
-  (Struct_sigma $x $u) (Struct_sigma $y $v) (Struct_sigma $z $w)
-  (Struct_sigma $g $β) (Struct_sigma $f $α)
-  ↪ Struct_sigma
-      (comp_fapp0 $g $f)
-      (comp_fapp0
-        $β
-        (fapp0
-          (fapp1_func
-            (fapp0
-              (@fapp1_func $B Cat_cat $M $y $z)
-              $g))
-          $α));
+// Legacy Groth-specific identity/composition shortcuts are deferred during always-Σ migration.
 
 /*
   Product_cat and transfors (componentwise computation)
@@ -3825,9 +3730,7 @@ assert [A B : Cat] (E : τ (Functor B Cat_cat)) (F : τ (Functor A B)) ⊢
     ≡ @Fibration_cov_catd A (comp_cat_fapp0 E F);
 
 // Casting Cat to Catd(1) behaves as expected.                                                        // checks Lift_catd/Lift_funcd rules fire
-assert [A : Cat] ⊢ Total_cat (Lift_catd A) ≡ A;
 assert [A : Cat] (x1 : τ (Obj Terminal_cat)) ⊢ Fibre_cat (Lift_catd A) x1 ≡ A;
-assert [A B : Cat] (F : τ (Functor A B)) ⊢ Unlift_func (Lift_funcd F) ≡ F;
 assert [A B : Cat] (F : τ (Functor A B)) (x1 : τ (Obj Terminal_cat)) (x : τ (Obj A)) ⊢
   @fdapp0 Terminal_cat (Lift_catd A) (Lift_catd B) (@Lift_funcd A B F) x1 x ≡ fapp0 F x;
 
