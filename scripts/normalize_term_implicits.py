@@ -27,7 +27,7 @@ ALLOW_BRACKET_HEADS_PHASE_A = {
 # Each entry is: head -> (drop_n_args, total_args)
 ALLOW_AT_REWRITES_PHASE_B_SAFE: dict[str, tuple[int, int]] = {
     "@Functord": (1, 3),  # @Functord B E D -> Functord E D
-    "@FibreObj": (1, 3),  # @FibreObj B E X -> FibreObj E X
+    "@Fibre": (1, 3),  # @Fibre B E X -> Fibre E X
     "@Transf": (2, 4),  # @Transf A B F G -> Transf F G
     "@Transfd": (3, 5),  # @Transfd Z E D FF GG -> Transfd FF GG
     "@fapp0": (2, 4),  # @fapp0 A B F x -> fapp0 F x
@@ -58,7 +58,7 @@ STABLE_HEADS = {
     "Functor",
     "StrictFunctor",
     "Functord",
-    "FibreObj",
+    "Fibre",
     "Transf",
     "Transfd",
 }

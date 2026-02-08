@@ -76,7 +76,7 @@ rule τ (Obj (@TotalΣ_cat $B $E))
 Notes:
 
 - This rule should pattern-match in a way consistent with existing conventions around implicit base arguments (some heads use `_` on the base to avoid missed matches after dropping `injective Obj`).
-- Use `Obj (Fibre_cat E x)` (a `Grpd` code) rather than `FibreObj` to keep the rule uniform with the Grothendieck object rule style. Either is acceptable, but choose one and keep it consistent.
+- Use `Obj (Fibre_cat E x)` (a `Grpd` code) rather than `Fibre` to keep the rule uniform with the Grothendieck object rule style. Either is acceptable, but choose one and keep it consistent.
 
 ### Projection computation on objects
 
@@ -110,8 +110,8 @@ Introduce:
 ```lambdapi
 symbol TotalΣ_hom_func : Π [Z : Cat],
   Π (E : Catd Z),
-  Π (x : τ (Obj Z)) (u : τ (FibreObj E x)),
-  Π (y : τ (Obj Z)) (v : τ (FibreObj E y)),
+  Π (x : τ (Obj Z)) (u : τ (Fibre E x)),
+  Π (y : τ (Obj Z)) (v : τ (Fibre E y)),
   τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 ```
 
@@ -388,7 +388,7 @@ Add:
 Add a small sanity assertion:
 
 ```lambdapi
-assert [B : Cat] (E : Catd B) (x : τ (Obj B)) (u : τ (FibreObj E x)) ⊢
+assert [B : Cat] (E : Catd B) (x : τ (Obj B)) (u : τ (Fibre E x)) ⊢
   fapp0 (TotalΣ_proj1_func E) (Struct_sigma x u) ≡ x;
 ```
 
@@ -785,7 +785,7 @@ The current `homd_cov_int_alt` still has external Lambdapi binders:
 
 ```lambdapi
 Π (W_Z : τ (Obj Z)),
-Π (W : τ (FibreObj E W_Z)),
+Π (W : τ (Fibre E W_Z)),
 ```
 
 From a global “internalization” perspective, we want those to be supplied by `fdapp0` application

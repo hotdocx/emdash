@@ -97,7 +97,7 @@ Several kernel projections are intended to be *silent* at the surface: `τ`, `Fi
 </table>
 </div>
 
-The kernel also defines stable aliases for “objects of a category” (since `Obj` is not injective in this development): `Hom`, `Functor`, `Transf`, and their displayed analogues (`FibreObj`, `Functord`, `Transfd`). We use these aliases in code snippets below.
+The kernel also defines stable aliases for “objects of a category” (since `Obj` is not injective in this development): `Hom`, `Functor`, `Transf`, and their displayed analogues (`Fibre`, `Functord`, `Transfd`). We use these aliases in code snippets below.
 
 **Notation convention.** In surface typing examples, we write `⊢ x : C` as shorthand for `⊢ x : τ (Obj C)` (and similarly `f : x → y` abbreviates `f : τ (Hom C x y)`).
 
@@ -414,7 +414,7 @@ The pointwise displayed component head has the shape:
 symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z],
   Π [FF GG : τ (Functord E D)],
   Π (Y_Z : τ (Obj Z)),
-  Π (V : τ (FibreObj E Y_Z)),
+  Π (V : τ (Fibre E Y_Z)),
   Π (ϵ : τ (Transfd FF GG)),
   τ (Hom (Fibre_cat D Y_Z) (fdapp0 FF Y_Z V) (fdapp0 GG Y_Z V));
 ```
