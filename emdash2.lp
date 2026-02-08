@@ -753,6 +753,7 @@ rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp
 
 // Functor-level identity simplifications for the stable-head composition symbol.                       // normalize composition spine
 
+// TODO: review whether already derivable from other rules
 // Right identity: F ∘ id = F.                                                                          // normalize away trailing identities
 rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
 
