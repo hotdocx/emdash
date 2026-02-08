@@ -15,7 +15,7 @@ Added generic rules:
 
 with the canonical head:
 
-- `symbol Total_hom_func ... ≔ TotalΣ_hom_func ...;`
+- `symbol Total_hom_func ... ≔ Total_hom_func_head ...;`
 
 So `Total_cat` now normalizes through the internal alt4/uncurry pipeline instead of relying on the old Groth-only hom shortcut.
 
@@ -50,3 +50,75 @@ Deferred/removed rules that conflicted with the always-Σ path:
 
 Once stable, remove the remaining `TotalΣ_*` naming indirection by folding `TotalΣ_hom_func` into `Total_hom_func`
 and pruning duplicate parallel symbols/rules.
+
+## Inventory: Rules Lost When Removing `Total_cat (Terminal_catd _)` / `Total_cat (Lift_catd _)` Collapses
+
+Reference baseline: `emdash2.backup.lp`.
+
+### A) Terminal-collapse family (`Total_cat (Terminal_catd A) ↪ A`)
+
+Removed rules:
+
+- `rule Total_cat (Terminal_catd $A) ↪ $A;`
+- `rule Total_proj1_func (Terminal_catd $A) ↪ @id_func $A;`
+- `rule Total_proj2_funcd (Terminal_catd $A) ↪ @id_funcd $A (Terminal_catd $A);`
+- `rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
+    ↪ comp_cat_fapp0 $xy (Total_proj1_func $A);`
+
+Also removed (collapse-dependent usage form):
+
+- `rule @fapp0 $X (Total_cat (@Fibration_cov_catd $B $M))
+      (@Total_intro_func $X $B (Terminal_catd $X) (@Fibration_cov_catd $B $M) $xy $FF) $x
+    ↪ Struct_sigma (fapp0 $xy $x) (...);`
+- with the companion sanity assert `π₁ ∘ (∫FF) ≡ xy`.
+
+Recoverability if collapses are reintroduced progressively:
+
+- **Direct definitional recovery**:
+  re-add the four terminal-collapse rules above exactly.
+- **Equivalent non-collapse form (already possible now)**:
+  keep always-`Σ` `Total_cat`, and use formulas over
+  `Total_cat (Terminal_catd X)` objects as `Struct_sigma x Terminal_obj`
+  (or equivalent normalized fibre terminal object), instead of collapsing to `x : Obj X`.
+- **Progressive strategy**:
+  first re-add only `Total_cat (Terminal_catd A) ↪ A` + `Total_proj1_func` collapse;
+  then add `Total_proj2_funcd` and terminal `Total_intro_func` shortcut after checking joinability
+  against the always-`Σ` rules and the `Total_hom_func` path.
+
+### B) Lift-collapse family (`Total_cat (Lift_catd A) ↪ A`)
+
+Removed rules/symbol path:
+
+- `rule Total_cat (Lift_catd $A) ↪ $A;`
+- `rule Total_proj1_func (Lift_catd $A) ↪ Terminal_func $A;`
+- `symbol Unlift_func ... ≔ @Total_intro_func Terminal_cat Terminal_cat ...;`
+- `rule @Total_intro_func Terminal_cat Terminal_cat (Lift_catd $A) (Lift_catd $B)
+    (@id_func Terminal_cat) (@Lift_funcd $A $B $F) ↪ $F;`
+
+Also removed collapse-era sanity assertion:
+
+- `assert [A B : Cat] (F : τ (Functor A B)) ⊢ Unlift_func (Lift_funcd F) ≡ F;`
+
+Recoverability if collapses are reintroduced progressively:
+
+- **Direct definitional recovery**:
+  re-add the two lift collapse rules and re-enable `Unlift_func` + its β-shortcut.
+- **Equivalent semantic recovery without collapse**:
+  keep `Lift_funcd` + `fdapp0` computation (already present) and work fibrewise;
+  use equivalence lemmas/asserts instead of definitional collapse (`∫const ≃ A` behavior).
+- **Progressive strategy**:
+  reintroduce `Total_cat (Lift_catd A) ↪ A` first, postpone `Total_proj1_func (Lift_catd A)` and
+  `Unlift_func` β-shortcut until overlaps with terminal and hom rules are validated.
+
+### C) Practical recommendation for staged reintroduction
+
+If we decide to restore collapses, safest order is:
+
+1. Reintroduce terminal collapse only:
+   `Total_cat (Terminal_catd A) ↪ A` and `Total_proj1_func (Terminal_catd A) ↪ id`.
+2. Recheck all `Total_intro_func` rewrite rules and only then re-enable terminal-target shortcut.
+3. Reintroduce lift collapse (`Total_cat (Lift_catd A) ↪ A`) next.
+4. Re-enable `Unlift_func` and its β-rule last.
+
+This order minimizes critical-pair pressure with the always-`Σ` `Total_cat` rules and with the new
+`Total_hom_func`/alt4 normalization pipeline.

@@ -1735,20 +1735,24 @@ assert [X Y : Cat] [E : Catd X] [D : Catd Y] (xy : τ (Functor X Y))
 // Terminal displayed functor into the terminal family (slice-style).                                 // unique map A → 1_X in Catd(X)
 injective symbol Terminal_funcd : Π [B : Cat] (E : Catd B), τ (Functord E (Terminal_catd B));
 
-// Terminal comprehension shortcuts are intentionally deferred while `Total_cat` is migrated to the
-// always-Σ connective behavior.                                                                      // keep only generic rules for now
+// Terminal comprehension shortcuts.                                                                  // ∫(1_A) ↪ A, π₁ ↪ id
+rule Total_cat (Terminal_catd $A) ↪ $A;
+rule Total_proj1_func (Terminal_catd $A) ↪ @id_func $A;
 
 // Pullback preserves terminal displayed categories.                                                  // F^*(1_B) ≡ 1_A
 rule @Pullback_catd $A $B (Terminal_catd $B) $F ↪ Terminal_catd $A;
 
-// The terminal-instance shortcut for π₂ is deferred for the same reason (no `Total_cat(1) ↪ _`).      // will be reintroduced as derived/equivalence
+// Terminal-instance shortcut for π₂.                                                                 // π₂ on terminal family is identity
+rule Total_proj2_funcd (Terminal_catd $A) ↪ @id_funcd $A (Terminal_catd $A);
 
 // Intro rules: functor between totals induced by a displayed functor in the slice.                   // Context_intro_func analogues
 // Identity: over id_X, the induced functor on totals is identity.                                      // ∫(id) ↪ id
 // NOTE: we match on `id_func`.                                                                        // stable matching
 rule @Total_intro_func $X $X $A $A (@id_func $X) (@id_funcd $X $A) ↪ @id_func (Total_cat $A);
 
-// The terminal-target shortcut for `Total_intro_func` is deferred while total-terminal collapse is absent.
+// Terminal target shortcut for `Total_intro_func`.                                                   // ∫(!) ↪ xy∘π₁
+rule @Total_intro_func $X $Y $A (Terminal_catd $Y) $xy (Terminal_funcd $A)
+  ↪ comp_cat_fapp0 $xy (Total_proj1_func $A);
 
 // β-like law: composing the induced functor with the projection of B gives the projection of A.      // (∫FF);π₁_B = π₁_A
 // General projection law: (∫FF);π₁_D = (xy)∘(π₁_E).                                                     // projection naturality
@@ -2246,6 +2250,26 @@ constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
 // Application of a dependent functor on objects, fibrewise.                                         // fibred fapp0
 symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),                     // dependent functor FF : E→D
   Π [X_Z : τ (Obj Z)], τ (FibreObj E X_Z) → τ (FibreObj D X_Z);                         // map objects in each fibre
+
+// Section into a Grothendieck total (object-level computation), terminal-domain collapsed form.      // x ↦ (xy(x), FF_x(*))
+rule @fapp0 $X (Total_cat (@Fibration_cov_catd $B $M))
+    (@Total_intro_func $X $B (Terminal_catd $X) (@Fibration_cov_catd $B $M) $xy $FF) $x
+  ↪ Struct_sigma
+      (fapp0 $xy $x)
+      (@fdapp0 $X (Terminal_catd $X) (@Pullback_catd $X $B (@Fibration_cov_catd $B $M) $xy) $FF $x Terminal_obj);
+
+// Sanity: π₁ of the induced section is definitionally xy at objects (with terminal-domain collapse).
+assert [X B : Cat]
+  (M  : τ (Functor B Cat_cat))
+  (xy : τ (Functor X B))
+  (FF : τ (Functord (Terminal_catd X) (Pullback_catd (Fibration_cov_catd M) xy)))
+  (x  : τ (Obj X)) ⊢
+  fapp0 (Total_proj1_func (Fibration_cov_catd M)) (@fapp0
+      X
+      (Total_cat (Fibration_cov_catd M))
+      (@Total_intro_func X B (Terminal_catd X) (Fibration_cov_catd M) xy FF)
+      x)
+  ≡ fapp0 xy x;
 
 // Generic computation: identity displayed functor acts as identity on fibre objects.                 // fdapp0(id_funcd) ↪ id
 rule @fdapp0 $Z $E $E (@id_funcd $Z $E) $x $u ↪ $u;
