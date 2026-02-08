@@ -195,23 +195,23 @@ Retained heads in the `homd_cov_curry` path:
 
 - `CatCat_catd`
 - `Edge_catd_fam`
-- `homd_cov_curry_fam`
+- `homd_cov_curry_base_fam`
 - `homd_cov_curry_base`
 - `homd_cov_curry`
-- `homd_cov_curry_sec`
+- `homd_cov_curry_fapp0`
 - `logic_swap_funcd` (primitive)
 - `logic_uncurry_total` (primitive)
 
 ### Renames
 
 - `homd_cov_curry_target_catd`-style wrapper → (inlined)
-- `homd_cov_int_altproj` → `homd_cov_curry_total_section`
+- `homd_cov_int_altproj` → `homd_cov_curry_fapp0_uncurry`
 
 This removes migration suffixes (`*2`, `*proj`) and makes the role explicit.
 
 ### Structural change
 
-`homd_cov_curry_total_section` is now defined directly as:
+`homd_cov_curry_fapp0_uncurry` is now defined directly as:
 - swap the section using `logic_swap_funcd` via `comp_catd_fapp0`,
 - uncurry to the total using `logic_uncurry_total`.
 
@@ -221,7 +221,7 @@ No auxiliary wrapper symbol is needed between these two steps.
 
 The generic `Homd_func` rule now uses:
 - `Pullback_catd (Functor_catd (fapp0 Edge_catd_fam x) (CatCat_catd Z)) (Total_proj1_func E)`
-- `homd_cov_curry_total_section E x u`
+- `homd_cov_curry_fapp0_uncurry E x u`
 
 Groth shortcut behavior is unchanged.
 
@@ -238,7 +238,7 @@ Implemented:
 - Renamed `eval0_func` to `fapp0_func` in `emdash2.lp`.
 - Updated the associated β-rule and sanity assertion:
   - `fapp0 (fapp0_func x) F ↪ fapp0 F x`.
-- Updated internal call sites (notably in the `homd_cov_curry_fam` definition).
+- Updated internal call sites (notably in the `homd_cov_curry_base_fam` definition).
 
 Comment harmonization:
 
@@ -267,7 +267,7 @@ rule @fdapp0
       (Pullback_catd
         (Functor_catd (@fapp0 (Op_cat $B) (Catd_cat $B) (Edge_catd_fam) $x) (CatCat_catd $B))
         (Total_proj1_func (@Fibration_cov_catd $B $M)))
-      (homd_cov_curry_total_section (@Fibration_cov_catd $B $M) $x $u)
+      (homd_cov_curry_fapp0_uncurry (@Fibration_cov_catd $B $M) $x $u)
       (Struct_sigma $y $v)
       Terminal_obj
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
@@ -275,7 +275,7 @@ rule @fdapp0
 
 Rationale:
 
-- This gives direct computation for the generic `homd_cov_curry_total_section` route in the Groth case,
+- This gives direct computation for the generic `homd_cov_curry_fapp0_uncurry` route in the Groth case,
   so the curry path is no longer only “spec-level”; it now computes to the transported hom functor.
 - We still keep `Homd_func` as `sequential` with the explicit Groth shortcut first, because it remains
   a useful fast head and preserves current normalization behavior.

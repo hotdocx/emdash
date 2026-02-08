@@ -2610,7 +2610,7 @@ symbol Edge_catd_fam [Z : Cat]
 // Mathematical notation:
 //   Hc_fam(E) : Z ⟶ Catd(Z),
 //   Hc_fam(E)(z)(z') = Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat)).
-symbol homd_cov_curry_fam [Z : Cat] (E : Catd Z)
+symbol homd_cov_curry_base_fam [Z : Cat] (E : Catd Z)
   : τ (Functor Z (Catd_cat Z))
 ≔ @comp_cat_fapp0
      Z
@@ -2634,7 +2634,7 @@ symbol homd_cov_curry_base [Z : Cat] (E : Catd Z)
        (Catd_cat Z)
        Cat_cat
        (@Pi_func Z)
-       (homd_cov_curry_fam E));
+       (homd_cov_curry_base_fam E));
 
 // Fully internal displayed map.
 // Mathematical notation:
@@ -2645,13 +2645,13 @@ constant symbol homd_cov_curry : Π [Z : Cat], Π (E : Catd Z),
 
 // Section at a fixed fibre object (W_Z,W).
 // Mathematical notation:
-//   homd_cov_curry_sec(E,W_Z,W) : 1_Z ⟶ Hc_fam(E)(W_Z).
-symbol homd_cov_curry_sec [Z : Cat] (E : Catd Z)
+//   homd_cov_curry_fapp0(E,W_Z,W) : 1_Z ⟶ Hc_fam(E)(W_Z).
+symbol homd_cov_curry_fapp0 [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (Fibre E W_Z))
   : τ (Functord
       (Terminal_catd Z)
-      (@fapp0 Z (Catd_cat Z) (homd_cov_curry_fam E) W_Z))
+      (@fapp0 Z (Catd_cat Z) (homd_cov_curry_base_fam E) W_Z))
 ≔ @fapp0
      (Fibre_cat (@Op_catd Z E) W_Z)
      (Fibre_cat (@Op_catd Z (@Fibration_cov_catd Z (homd_cov_curry_base E))) W_Z)
@@ -2665,7 +2665,7 @@ symbol homd_cov_curry_sec [Z : Cat] (E : Catd Z)
 /*
   Projecting the internal `homd_cov_curry` package to a section over the Σ-total.
 
-  For (W_Z,W) in the fibre of E, `homd_cov_curry_total_section E W_Z W` is the induced *section over*
+  For (W_Z,W) in the fibre of E, `homd_cov_curry_fapp0_uncurry E W_Z W` is the induced *section over*
   `Total_cat E` landing in a pullback family (so we do not force the Groth/Op normal form here).
 */
 
@@ -2690,9 +2690,9 @@ constant symbol logic_swap_funcd :
 
 // New direct projection of homd_cov_curry to a section over Total(E), using only swap+uncurry primitives.
 // Mathematical notation:
-//   homd_cov_curry_total_section(E,W_Z,W)
+//   homd_cov_curry_fapp0_uncurry(E,W_Z,W)
 //     : 1_{∫E} ⟶ (π1)^*( z' ↦ Functor_cat(Hom_Z(W_Z,z')^op, Cat) ).
-symbol homd_cov_curry_total_section [Z : Cat] (E : Catd Z)
+symbol homd_cov_curry_fapp0_uncurry [Z : Cat] (E : Catd Z)
   (W_Z : τ (Obj Z))
   (W : τ (Fibre E W_Z)):
   τ (Functord 
@@ -2712,11 +2712,11 @@ symbol homd_cov_curry_total_section [Z : Cat] (E : Catd Z)
         (@fapp0 (Op_cat Z) (Catd_cat Z) (Edge_catd_fam) W_Z)
         E
         (CatCat_catd Z))
-      (@homd_cov_curry_sec Z E W_Z W));
+      (@homd_cov_curry_fapp0 Z E W_Z W));
 
 // NOTE on Groth bridge status:
 //   We now provide a direct computation rule on the fully applied curry path:
-//     fdapp0(..., homd_cov_curry_total_section(Fibration_cov_catd M, x, u), (y,v), tt)
+//     fdapp0(..., homd_cov_curry_fapp0_uncurry(Fibration_cov_catd M, x, u), (y,v), tt)
 //       ↪ comp_hom_con_fib_cov(M,x,y,u,v).
 //   The dedicated Groth shortcut on `Homd_func` is still kept as a convenient fast path.
 
@@ -2839,7 +2839,7 @@ assert [B : Cat] (M : τ (Functor B Cat_cat))
 // Direct Groth bridge on the fully applied curry path:
 // this makes the generic branch computational in the Groth case as well.
 rule @fdapp0 _ _ _
-      (homd_cov_curry_total_section (@Fibration_cov_catd $B $M) $x $u)
+      (homd_cov_curry_fapp0_uncurry (@Fibration_cov_catd $B $M) $x $u)
       (Struct_sigma $y $v)
       Terminal_obj
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
@@ -2851,7 +2851,7 @@ with @Homd_func $Z $E $x $u $y $v
       _
       _
       _
-      (homd_cov_curry_total_section $E $x $u)
+      (homd_cov_curry_fapp0_uncurry $E $x $u)
       (Struct_sigma $y $v)
       Terminal_obj;
 
