@@ -32,7 +32,7 @@ emdash explores a kernel design where:
 ## 1.1 Contributions
 
 1. **Rewrite-head discipline for categorical computation.** Structural equalities are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
-2. **A simplicial “triangle classifier” over base arrows.** The dependent arrow/comma construction `homd_cov` (and the internal pipeline `homd_cov_int_base`) provides a computational home for “cells over a chosen base edge” (triangles/surfaces), and a compositional target for iteration.
+2. **A simplicial “triangle classifier” over base arrows.** The dependent arrow/comma construction `homd_` (and the internal pipeline `homd_int_base`) provides a computational home for “cells over a chosen base edge” (triangles/surfaces), and a compositional target for iteration.
 3. **Explicit off-diagonal interfaces for transfors (ordinary and displayed).** We expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal arrow-indexed components (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
 
 # 2. Kernel principles and surface reading
@@ -78,7 +78,7 @@ Several kernel projections are intended to be *silent* at the surface: `τ`, `Fi
     <tr><td><code>Transf_cat F G</code></td><td><code>⊢ ϵ : Transf(F,G)</code></td><td>transformations / transfors</td></tr>
     <tr><td><code>tapp0_fapp0 Y ϵ</code></td><td><code>ϵ[Y]</code> (silent)</td><td>diagonal component</td></tr>
     <tr><td><code>tapp1_fapp0 … ϵ f</code></td><td><code>ϵ_(f)</code></td><td>off-diagonal component “over <code>f</code>”</td></tr>
-    <tr><td><code>hom_cov</code></td><td><code>Hom(W,F[−])</code> (informal)</td><td>covariant Cat-valued representable</td></tr>
+    <tr><td><code>hom_</code></td><td><code>Hom(W,F[−])</code> (informal)</td><td>covariant Cat-valued representable</td></tr>
     <tr><td><code>hom_con</code></td><td><code>Hom(F[−],W)</code> (informal)</td><td>contravariant representable (via opposite)</td></tr>
     <tr><td><code>Catd Z</code></td><td><code>⊢ E : Catd Z</code></td><td>displayed category / (iso)fibration over <code>Z</code></td></tr>
     <tr><td><code>Fibre_cat E z</code></td><td><code>E[z]</code></td><td>fibre category over <code>z</code></td></tr>
@@ -87,8 +87,8 @@ Several kernel projections are intended to be *silent* at the surface: `τ`, `Fi
     <tr><td><code>Total_cat E</code></td><td><code>∫E</code> (informal)</td><td>total category of a displayed category</td></tr>
     <tr><td><code>Total_func</code></td><td>(internal)</td><td>internalized totalization <code>(Z→Cat)→Cat</code></td></tr>
     <tr><td><code>fib_cov_tapp0_fapp0 M f u</code></td><td>$f_!(u)$</td><td>Grothendieck transport on fibre objects (strict today)</td></tr>
-    <tr><td><code>homd_cov</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (“triangle classifier”)</td></tr>
-    <tr><td><code>homd_cov_int_base</code></td><td>(internal)</td><td>compositional “indexing” pipeline for <code>homd_cov</code></td></tr>
+    <tr><td><code>homd_</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (“triangle classifier”)</td></tr>
+    <tr><td><code>homd_int_base</code></td><td>(internal)</td><td>compositional “indexing” pipeline for <code>homd_</code></td></tr>
     <tr><td><code>Transfd_cat FF GG</code></td><td><code>⊢ ϵ : Transfd(FF,GG)</code></td><td>displayed transfors</td></tr>
     <tr><td><code>tdapp0_fapp0 … ϵ</code></td><td><code>ϵ[e]</code> (silent)</td><td>displayed component in a fibre</td></tr>
     <tr><td><code>tdapp1_*</code></td><td><code>ϵ_(σ)</code></td><td>displayed off-diagonal component over $σ:e→_f e'$</td></tr>
@@ -276,12 +276,12 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
 
 Conceptually, the diagonal component $\\epsilon_Y : F(Y)\\to G(Y)$ is “the off-diagonal component over the identity edge”. In the kernel, `tapp0_fapp0` is implemented by evaluating a packaged arrow-indexed construction at `id_Y`. The stable head `tapp0_fapp0` is retained so later rewrite rules do not need to unfold that packaging.
 
-## 4.4 Representables: `hom_cov` / `hom_con` (Yoneda-style heads)
+## 4.4 Representables: `hom_` / `hom_con` (Yoneda-style heads)
 
 emdash also provides Cat-valued representables:
 
-- `hom_cov` models $\\mathrm{Hom}_A(W, F(-))$ (covariant),
-- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$ (contravariant, by reduction to `hom_cov` in the opposite category).
+- `hom_` models $\\mathrm{Hom}_A(W, F(-))$ (covariant),
+- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$ (contravariant, by reduction to `hom_` in the opposite category).
 
 These heads are not only for “doing Yoneda”; they are also glue in the internal packaging of transfors and dependent homs, where “naturality” is recorded as postcomposition behavior and exposed as normalization on stable heads.
 
@@ -307,7 +307,7 @@ symbol Total_func [Z : Cat] : τ (Functor (Functor_cat Z Cat_cat) Cat_cat);
 rule @fapp0 _ _ (@Total_func $Z) $M ↪ @Total_cat $Z (@Fibration_cov_catd $Z $M);
 ```
 
-## 5.1 Fibrewise products: `Product_catd` and `prodFib` (why it appears in `homd_cov_int_base`)
+## 5.1 Fibrewise products: `Product_catd` and `prodFib` (why it appears in `homd_int_base`)
 
 Displayed categories over a fixed base admit a fibrewise product `Product_catd U A : Catd Z`, whose fibre over $z$ is (informally) the product category $U[z]\\times A[z]$. For Grothendieck displayed categories $\\int E$ and $\\int D$, emdash also introduces a stable-head `prodFib` for pointwise product of Cat-valued functors, so that composite constructions can match on a small head rather than on a large expanded product/total expression.
 
@@ -338,7 +338,7 @@ Concretely, transport on fibre objects is strict today (as an engineering placeh
 - $(\\mathrm{id})_!(u) \\rightsquigarrow u$,
 - $g_!(f_!(u)) \\rightsquigarrow (g\\circ f)_!(u)$.
 
-# 6. Dependent arrow/comma categories: `homd_cov` and `homd_cov_int`
+# 6. Dependent arrow/comma categories: `homd_` and `homd_int`
 
 Let $Z$ be a category, $E$ a dependent category over $Z$ (morally $E:Z\\to\\mathbf{Cat}$), and fix a base object $W\\in Z$ and a fibre object $w\\in E(W)$. Given a base arrow $f:W\\to z$ and a fibre object $x\\in E(z)$, we want the category of “arrows from the transported probe to the target”:
 $$
@@ -351,18 +351,18 @@ This “dependent arrow/comma” construction is also reminiscent of directed �
 
 ## 6.1 Input shape and “over a base edge”
 
-In the Grothendieck case, the value of `homd_cov` at a point is indexed by:
+In the Grothendieck case, the value of `homd_` at a point is indexed by:
 
 - a base target object $z \\in Z$,
 - a displayed target object $d \\in D(z)$ (in the probe family),
 - and a base edge $f:W\\to z$ (the edge along which we transport the probe object $w\\in E(W)$).
 
-In the current kernel snapshot, such points are represented in a canonical Σ-pair normal form `Struct_sigma z (Struct_sigma d f)`. This “syntactic normal form” is essential: it makes it possible for the computation rule of `homd_cov` to match and reduce without requiring additional definitional unfolding.
+In the current kernel snapshot, such points are represented in a canonical Σ-pair normal form `Struct_sigma z (Struct_sigma d f)`. This “syntactic normal form” is essential: it makes it possible for the computation rule of `homd_` to match and reduce without requiring additional definitional unfolding.
 
-In the Grothendieck–Grothendieck case, the kernel contains a pointwise computation rule for `homd_cov`:
+In the Grothendieck–Grothendieck case, the kernel contains a pointwise computation rule for `homd_`:
 
 ```lambdapi
-rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
+rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
               (@Fibration_cov_catd $Z $D0) $FF)
             (Struct_sigma $z (Struct_sigma $d $f))
   ↪ Hom_cat (fapp0 $E0 $z)
@@ -390,17 +390,17 @@ rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
 }
 </div>
 
-For compositionality, the kernel also contains a “more internal” pipeline `homd_cov_int_base` built from stable-head building blocks (opposite, fibrewise products, totalization). It is designed so later constructions can range over base arrows explicitly without rewriting blowups.
+For compositionality, the kernel also contains a “more internal” pipeline `homd_int_base` built from stable-head building blocks (opposite, fibrewise products, totalization). It is designed so later constructions can range over base arrows explicitly without rewriting blowups.
 
 <div class="fullwidth">
 <div class="mermaid">
 flowchart LR
-  Zop["Z^op"] --> H["representable (hom_cov_int)"]
+  Zop["Z^op"] --> H["representable (hom_int)"]
   H --> Op["pointwise op (op_val_func)"]
   D0["probe D0: Z -> Cat"] --> Prod["pointwise product (prodFib)"]
   Op --> Prod
   Prod --> Tot["totalization (Total_func)"]
-  Tot --> Base["homd_cov_int_base(D0): Z^op -> Cat"]
+  Tot --> Base["homd_int_base(D0): Z^op -> Cat"]
 </div>
 </div>
 
@@ -544,7 +544,7 @@ This paper emphasizes computations that are already stable in the kernel. In par
 
 - **Generic displayed categories are semantic.** Outside special constructors like `Fibration_cov_catd`, a term `E : Catd Z` is intended to model isofibrations/displayed categories abstractly, and the cleavage/iso-lift interface is not yet exposed as computational structure.
 - **Strictness placeholders exist.** Some computations (e.g. Grothendieck transport on fibre objects) are strict today as a normalization placeholder; the long-term goal is a lax/weak story where functoriality/transport come with higher cells rather than definitional equalities.
-- **Full simplicial iteration is still an interface.** `homd_cov` computes pointwise in the Grothendieck–Grothendieck case, and `homd_cov_int_base` provides a compositional indexing pipeline, but deriving robust exchange/stacking normalizations uniformly remains ongoing work.
+- **Full simplicial iteration is still an interface.** `homd_` computes pointwise in the Grothendieck–Grothendieck case, and `homd_int_base` provides a compositional indexing pipeline, but deriving robust exchange/stacking normalizations uniformly remains ongoing work.
 
 # References
 
@@ -561,4 +561,4 @@ This paper emphasizes computations that are already stable in the kernel. In par
 - `Transf_cat`, `tapp0_fapp0`, `tapp1_fapp0`: transfors; diagonal and arrow-indexed components.
 - `Catd`, `Fibre_cat`, `Functord_cat`: displayed categories, fibres, displayed functors over a fixed base.
 - `Fibration_cov_catd`: Grothendieck construction `∫M` for `M:Z→Cat` (main computation boundary).
-- `homd_cov`, `homd_cov_int_base`, `homd_cov_int`: dependent arrow/comma construction and internal pipeline (triangle classifier and iteration target).
+- `homd_`, `homd_int_base`, `homd_int`: dependent arrow/comma construction and internal pipeline (triangle classifier and iteration target).

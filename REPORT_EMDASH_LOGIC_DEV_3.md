@@ -17,7 +17,7 @@ with the canonical head:
 
 - `sequential symbol Homd_func ...;`
 
-So `Total_cat` now normalizes through the internal `homd_cov_curry`/uncurry pipeline instead of relying on the old Groth-only hom shortcut.
+So `Total_cat` now normalizes through the internal `homd_curry`/uncurry pipeline instead of relying on the old Groth-only hom shortcut.
 
 ### 2) Removed collapse-dependent shortcuts
 
@@ -121,14 +121,14 @@ If we decide to restore collapses, safest order is:
 4. Re-enable `Unlift_func` and its β-rule last.
 
 This order minimizes critical-pair pressure with the always-`Σ` `Total_cat` rules and with the new
-`Homd_func`/`homd_cov_curry` normalization pipeline.
+`Homd_func`/`homd_curry` normalization pipeline.
 
 ## Rewrite Cleanup Pass (from REPORT_EMDASH_LOGIC_DEV_2.md "Key rewrite principles")
 
 Date: 2026-02-08 (follow-up)
 
 We revisited the extra engineering rules that were introduced during the earlier `Total_uncurry_eval2` /
-`homd_cov_int_altproj` stabilization phase, and tested removal incrementally with
+`homd_int_altproj` stabilization phase, and tested removal incrementally with
 `EMDASH_TYPECHECK_TIMEOUT=60s make check`.
 
 ### Removed as non-essential (typecheck still passes)
@@ -137,9 +137,9 @@ We revisited the extra engineering rules that were introduced during the earlier
     ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);`
   - Removed (associativity normalization at functor-composition head).
 - `rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
-      (@Op_func $B Cat_cat (@hom_cov $A $W $B $F)) $H
+      (@Op_func $B Cat_cat (@hom_ $A $W $B $F)) $H
     ↪ @Op_func $C Cat_cat
-        (@hom_cov $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));`
+        (@hom_ $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));`
   - Removed (special contravariant accumulation form).
 - `rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) Cat_cat
       (@hom_con $A $W $B $F) (@Op_func $C $B $G)
@@ -149,16 +149,16 @@ We revisited the extra engineering rules that were introduced during the earlier
       (@Op_catd (Op_cat $B) (@Fibration_cov_catd (Op_cat $B) $H)) $F
     ↪ @Op_catd (Op_cat $A)
         (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));`
-  - Removed (no longer required by current `homd_cov_curry`/uncurry normalization chain).
+  - Removed (no longer required by current `homd_curry`/uncurry normalization chain).
 
 ### Kept as genuinely useful / currently required
 
 - `rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;`
 - `rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;`
   - Kept as mild identity simplifications on the stable composition head.
-- `rule @comp_cat_fapp0 $C $B Cat_cat (@hom_cov $A $W $B $F) $G
-    ↪ hom_cov $W (comp_cat_fapp0 $F $G);`
-  - Kept: removing it causes an immediate assertion failure in the current file (`hom_cov` precomposition
+- `rule @comp_cat_fapp0 $C $B Cat_cat (@hom_ $A $W $B $F) $G
+    ↪ hom_ $W (comp_cat_fapp0 $F $G);`
+  - Kept: removing it causes an immediate assertion failure in the current file (`hom_` precomposition
     definitional behavior is relied upon).
 
 ### Outcome
@@ -167,12 +167,12 @@ We revisited the extra engineering rules that were introduced during the earlier
 - We now keep only the rules that are either broadly canonical simplifications or demonstrably required
   by existing assertions/computations.
 
-## homd_cov_curry Consolidation Pass (Naming/Glue Cleanup)
+## homd_curry Consolidation Pass (Naming/Glue Cleanup)
 
 Date: 2026-02-08 (same session)
 
 Goal:
-- reduce one-off `homd_cov_curry*` wrappers,
+- reduce one-off `homd_curry*` wrappers,
 - keep only semantic/reused heads,
 - preserve computation and current `Homd_func` behavior.
 
@@ -183,7 +183,7 @@ The following intermediate wrappers were removed:
 - `Functor_catd_fixR_func`
 - `Edge_catd_fam_op`
 - `Edge_catd_at`
-- `swap_homd_cov_curry_section2`
+- `swap_homd_curry_section2`
 - `Total_uncurry_eval2`
 
 All were single-purpose plumbing around the swap/uncurry primitives (now named
@@ -191,27 +191,27 @@ All were single-purpose plumbing around the swap/uncurry primitives (now named
 
 ### Kept semantic/reused symbols
 
-Retained heads in the `homd_cov_curry` path:
+Retained heads in the `homd_curry` path:
 
 - `CatCat_catd`
 - `Edge_catd_fam`
-- `homd_cov_curry_base_fam`
-- `homd_cov_curry_base`
-- `homd_cov_curry`
-- `homd_cov_curry_fapp0`
+- `homd_curry_base_fam`
+- `homd_curry_base`
+- `homd_curry`
+- `homd_curry_fapp0`
 - `logic_swap_funcd` (primitive)
 - `logic_uncurry_total` (primitive)
 
 ### Renames
 
-- `homd_cov_curry_target_catd`-style wrapper → (inlined)
-- `homd_cov_int_altproj` → `homd_cov_curry_fapp0_uncurry`
+- `homd_curry_target_catd`-style wrapper → (inlined)
+- `homd_int_altproj` → `homd_curry_fapp0_uncurry`
 
 This removes migration suffixes (`*2`, `*proj`) and makes the role explicit.
 
 ### Structural change
 
-`homd_cov_curry_fapp0_uncurry` is now defined directly as:
+`homd_curry_fapp0_uncurry` is now defined directly as:
 - swap the section using `logic_swap_funcd` via `comp_catd_fapp0`,
 - uncurry to the total using `logic_uncurry_total`.
 
@@ -221,7 +221,7 @@ No auxiliary wrapper symbol is needed between these two steps.
 
 The generic `Homd_func` rule now uses:
 - `Pullback_catd (Functor_catd (fapp0 Edge_catd_fam x) (CatCat_catd Z)) (Total_proj1_func E)`
-- `homd_cov_curry_fapp0_uncurry E x u`
+- `homd_curry_fapp0_uncurry E x u`
 
 Groth shortcut behavior is unchanged.
 
@@ -238,12 +238,12 @@ Implemented:
 - Renamed `eval0_func` to `fapp0_func` in `emdash2.lp`.
 - Updated the associated β-rule and sanity assertion:
   - `fapp0 (fapp0_func x) F ↪ fapp0 F x`.
-- Updated internal call sites (notably in the `homd_cov_curry_base_fam` definition).
+- Updated internal call sites (notably in the `homd_curry_base_fam` definition).
 
 Comment harmonization:
 
 - Kept the current canonical terminology in code comments:
-  - `homd_cov_curry*` for the internal dependent-hom curry pipeline,
+  - `homd_curry*` for the internal dependent-hom curry pipeline,
   - `Homd_func` for the total-hom classifier head,
   - `logic_uncurry_total` / `logic_swap_funcd` for logic primitives.
 
@@ -251,7 +251,7 @@ Validation:
 
 - `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes.
 
-## Groth Bridge for `homd_cov_curry` (Direct Curry-Path Computation)
+## Groth Bridge for `homd_curry` (Direct Curry-Path Computation)
 
 Date: 2026-02-08 (follow-up)
 
@@ -267,7 +267,7 @@ rule @fdapp0
       (Pullback_catd
         (Functor_catd (@fapp0 (Op_cat $B) (Catd_cat $B) (Edge_catd_fam) $x) (CatCat_catd $B))
         (Total_proj1_func (@Fibration_cov_catd $B $M)))
-      (homd_cov_curry_fapp0_uncurry (@Fibration_cov_catd $B $M) $x $u)
+      (homd_curry_fapp0_uncurry (@Fibration_cov_catd $B $M) $x $u)
       (Struct_sigma $y $v)
       Terminal_obj
   ↪ @comp_hom_con_fib_cov $B $M $x $y $u $v;
@@ -275,7 +275,7 @@ rule @fdapp0
 
 Rationale:
 
-- This gives direct computation for the generic `homd_cov_curry_fapp0_uncurry` route in the Groth case,
+- This gives direct computation for the generic `homd_curry_fapp0_uncurry` route in the Groth case,
   so the curry path is no longer only “spec-level”; it now computes to the transported hom functor.
 - We still keep `Homd_func` as `sequential` with the explicit Groth shortcut first, because it remains
   a useful fast head and preserves current normalization behavior.

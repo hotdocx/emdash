@@ -179,10 +179,10 @@ Let `Z : Cat`, `E : Catd Z`.
 - Base arrow: `f : z → z'` in `Z`
 - Displayed arrow over `f`: `σ : e →_f e'` where `e : E[z]` and `e' : E[z']`
 
-This is the Grothendieck/simplicial “morphism over a base edge” notion used by the `homd_cov_*`
+This is the Grothendieck/simplicial “morphism over a base edge” notion used by the `homd_*`
 layer.
 
-## 8. Dependent-hom (simplicial) components: `homd_cov_int`
+## 8. Dependent-hom (simplicial) components: `homd_int`
 
 Given:
 
@@ -191,7 +191,7 @@ Given:
 - `D0 : (z:Z ⊢ D0[z] : Cat)` (a functorial family, `Z ⟶ Cat`)
 - `FF : (z:^o Z, d : D0[z] ⊢ FF[d] : E[z])` (a probe into `E`)
 
-For `σ : homd_cov_int(Z,E,D0,FF)`, we read:
+For `σ : homd_int(Z,E,D0,FF)`, we read:
 
 ```
 z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]

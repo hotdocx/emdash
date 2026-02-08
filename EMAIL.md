@@ -23,19 +23,19 @@ For `b₀ ∈ B` and `e₀ ∈ E(b₀)`, the dependent hom/comma/arrow-category 
 On a fibre object `e₁ ∈ E(b₁)` and a base arrow `b₀₁ : b₀ → b₁`, it returns the fibre hom-category, where `(b₀₁)! e₀` is the `E`-action/transport of `e₀` along `b₀₁`:
 - `Homd_E(e₀, (e₁ , b₀₁)) ≔ Hom_{E(b₁)}( (b₀₁)! e₀ , e₁ )`
 
-That is, this syntactic triangle/simplicial classifier `homd_cov`, reduces to `globular` semantics, but is necessary for iterating simplicially (triangles → tetrahedra → …) and for expressing non-cartesian lax ω-functors and lax ω-transfors.
+That is, this syntactic triangle/simplicial classifier `homd_`, reduces to `globular` semantics, but is necessary for iterating simplicially (triangles → tetrahedra → …) and for expressing non-cartesian lax ω-functors and lax ω-transfors.
 
 Moreover the functoriality of `Homd_E(e₀, (–,–))`, especially in its second argument  `(Hom_B(b₀, –))ᵒᵖ`, espresses precisely the "stacking" of 2-cells along a 1-cell (i.e. generalization of horizontal composition of 2-cells meeting at a 0-cell).
 
     https://hotdocx.github.io/r/--------TODO-------STACKING
 
-This dependent comma/arrow/hom category `homd_cov` is analoguous to the (directed) "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an *internalized* type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
+This dependent comma/arrow/hom category `homd_` is analoguous to the (directed) "bridge type" construction in the technique of logical relations/parametricity, i.e. Ambrus Kaposi "Internal parametricity, without an interval"; and it is really an *internalized* type-theory/computational-logic as contrasted from Hugo Herbelin “A parametricity-based formalization of semi-simplicial and semi-cubical sets” which is merely a (formalized) combinatorial analysis.
 
 ## 2) Internalized computational-logic and “syntax elaboration”
 
 The `emdash` Lambdapi specification looks like the categorical semantics ("categories-with-families") of a programming language; but because it is carefully formulated to be "computational" and its dependent-types/logic is "internalized", then it can actually be translated as a traditional programming-language/proof-assistant surface syntax ( https://github.com/hotdocx/emdash ) whose HOAS bidirectional type-checking and elaboration/engineering in TypeScript is easily guaranteed.
 
-For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^f Z, e :^f E[z] ⊢ FF[e] : D[z]` (where binders `:^f` are functorial and `:^n` are natural). Thus `Functord` is the traditional Π-type (`Functord_(Z) E D ≡ Π_(Z) (Functor_catd E D)`), but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_cov`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
+For example, the fibred/displayed functor `FF : Functord_(Z) E D` between isofibrations `E D : Catd Z` over `Z` is read as `z :^f Z, e :^f E[z] ⊢ FF[e] : D[z]` (where binders `:^f` are functorial and `:^n` are natural). Thus `Functord` is the traditional Π-type (`Functord_(Z) E D ≡ Π_(Z) (Functor_catd E D)`), but with a construction `fapp1_funcd`, to express *lax* functoriality in the `e : E[z]` variable (where `→_` is dependent hom `homd_`, is used to express that this expression may be non-cartesian in general, i.e. *lax* functor): 
 - `z :^f Z, e :^n E[z], z' :^f Z, f :^n z → z', e' :^n E[z'], σ :^f e →_f e' ⊢ FF₁(σ) : FF[e] →_f FF[e']`
 
 Similarly from the usual "diagonal" components `z :^f Z, e :^n E[z] ⊢ ϵ[e] : FF[e] → GG[e]` for a displayed transfor/transformation `ϵ : Transfd_(Z) FF GG`, there is a construction `tapp1_fapp0` for "off-diagonal" components (i.e. the index/subscript is an arrow instead of an object), to express *lax* naturality/functoriality in the `e : E[z]` variable:

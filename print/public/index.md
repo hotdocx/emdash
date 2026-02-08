@@ -29,14 +29,14 @@ The emdash project explores a kernel design in which:
 - “Category theory” is internal: we work *inside* a dependent type theory that has a classifier `Cat` of categories and a classifier `Grpd` of (∞-)groupoids.
 - Many categorical laws are definitional: they are enforced by rewrite rules and unification hints, so that normalization *is* diagram chasing.
 
-This paper is a narrative tour of the current kernel snapshot (a Lambdapi specification). It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_cov_int_base`) we also provide a traditional reading.
+This paper is a narrative tour of the current kernel snapshot (a Lambdapi specification). It aims to be readable to a non-specialist, while staying faithful to the code. When we mention a kernel identifier (e.g. `homd_int_base`) we also provide a traditional reading.
 
 ## 1.1 Contributions (what is new here?)
 
 This paper’s contributions are primarily expository (the kernel is ongoing work), but the kernel already embodies several concrete design/engineering commitments:
 
 1. **A rewrite-head discipline for categorical computation.** Most “structural equalities” are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
-2. **A simplicial triangle classifier for higher cells over base arrows.** The dependent arrow/comma construction `homd_cov` (and the internal pipeline `homd_cov_int_base`) provides a computational home for “triangles/surfaces” in the Grothendieck case, and a compositional target for iteration.
+2. **A simplicial triangle classifier for higher cells over base arrows.** The dependent arrow/comma construction `homd_` (and the internal pipeline `homd_int_base`) provides a computational home for “triangles/surfaces” in the Grothendieck case, and a compositional target for iteration.
 3. **An explicit off-diagonal interface for transfors (ordinary and displayed).** Instead of encoding transfors as records with a naturality law, we expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal components over arrows (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
 4. **Executable feasibility evidence.** An earlier executable prototype (bidirectional elaboration with holes + normalization-driven definitional equality) demonstrates that the “kernel spec → elaborating proof assistant” pipeline is realistic.
 5. **Continuity with prior warm-ups.** Earlier large-scale rewrite-centric developments already validate the *style* of emdash: categorical interfaces presented with computational rules (universal properties / adjunction transposes; Grothendieck-style geometry interfaces). A key claim of the v2 design is that these interfaces are largely portable into the v2 stable-head discipline, and therefore count as prior progress rather than speculative future work.
@@ -126,7 +126,7 @@ Conceptually, the kernel can be read as a computational internalization of a cat
     <tr><td><code>Fibration_cov_catd M</code></td><td>(silent if <code>M: Z ⟶ Cat</code>)</td><td>Grothendieck construction $∫M$</td></tr>
     <tr><td><code>Total_cat E</code></td><td><code>∫E</code> (informal)</td><td>total category of a displayed category</td></tr>
     <tr><td><code>fib_cov_tapp0_fapp0 M f u</code></td><td>$f_!(u)$</td><td>Grothendieck transport on fibre objects (strict today)</td></tr>
-    <tr><td><code>homd_cov</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (triangle classifier)</td></tr>
+    <tr><td><code>homd_</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (triangle classifier)</td></tr>
     <tr><td><code>Transfd_cat FF GG</code></td><td><code>⊢ ϵ : Transfd(FF,GG)</code></td><td>displayed transfors</td></tr>
     <tr><td><code>tdapp0_fapp0 … ϵ</code></td><td><code>ϵ[e]</code> (silent)</td><td>displayed component in a fibre</td></tr>
     <tr><td><code>tdapp1_*</code></td><td><code>ϵ_(σ)</code></td><td>displayed off-diagonal component over $σ:e→_f e'$</td></tr>
@@ -333,7 +333,7 @@ so that normalization *accumulates* the base-arrow index instead of repeatedly e
 
 Once we expose off-diagonal components, we can also express the familiar $2$-categorical **exchange**/pasting phenomenon as an *internal equality between normal forms*.
 
-Fix a category $B$, an object $M\\in B$, and objects $N,L\\in B$. Consider the covariant representable `hom_cov B M B (id_func B) : B → Cat_cat`. For $f:N\\to L$ it yields the postcomposition functor
+Fix a category $B$, an object $M\\in B$, and objects $N,L\\in B$. Consider the covariant representable `hom_ B M B (id_func B) : B → Cat_cat`. For $f:N\\to L$ it yields the postcomposition functor
 $$
 \\mathrm{postcomp}(f) : \\mathrm{Hom}_B(M,N) \\to \\mathrm{Hom}_B(M,L),
 $$
@@ -384,14 +384,14 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],
   τ (Hom B (fapp0 F_AB X_A) (fapp0 G_AB Y_A));
 ```
 
-## 4.5 Representables and the Yoneda-style heads `hom_cov` / `hom_con`
+## 4.5 Representables and the Yoneda-style heads `hom_` / `hom_con`
 
 emdash provides covariant and contravariant representables in a Cat-valued setting:
 
-- `hom_cov` models $\\mathrm{Hom}_A(W, F(-))$ (covariant in the variable, with postcomposition behavior);
-- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$, implemented by a definitional reduction to `hom_cov` in the opposite category.
+- `hom_` models $\\mathrm{Hom}_A(W, F(-))$ (covariant in the variable, with postcomposition behavior);
+- `hom_con` models $\\mathrm{Hom}_A(F(-), W)$, implemented by a definitional reduction to `hom_` in the opposite category.
 
-These are not just for “doing Yoneda”; they are also the glue behind the internal packaging of `tapp*` and `homd_cov_int_base`. A recurring kernel tactic is: *encode a textbook naturality statement as a rewrite rule about postcomposition by functors*, so that “naturality” becomes normalization.
+These are not just for “doing Yoneda”; they are also the glue behind the internal packaging of `tapp*` and `homd_int_base`. A recurring kernel tactic is: *encode a textbook naturality statement as a rewrite rule about postcomposition by functors*, so that “naturality” becomes normalization.
 
 ## 4.6 Strictness as optional structure: `StrictFunctor_cat`
 
@@ -502,7 +502,7 @@ $$
 $$
 implemented via a stable-head functor `prodFib` for pointwise product of Cat-valued functors. This is a representative example of “rewrite hygiene”: we introduce a small head so later rules can match without normalizing a huge composed expression in `Cat_cat`.
 
-# 6. Dependent Arrow/Comma Categories: `homd_cov` and `homd_cov_int`
+# 6. Dependent Arrow/Comma Categories: `homd_` and `homd_int`
 
 This section is the technical center of the paper. It explains the kernel constructions that we use to model “cells over a base arrow” without starting from a raw globular presentation.
 
@@ -521,18 +521,18 @@ $$
 
 This is a *dependent arrow category*: its objects are “triangles” with base edge $f$ and a displayed edge in the fibre.
 
-## 6.2 What `homd_cov` computes (in the Grothendieck case)
+## 6.2 What `homd_` computes (in the Grothendieck case)
 
-The kernel symbol `homd_cov` is declared abstractly, but it has a key computation rule when the displayed categories involved are Grothendieck constructions. In words:
+The kernel symbol `homd_` is declared abstractly, but it has a key computation rule when the displayed categories involved are Grothendieck constructions. In words:
 
-> if $E = \\int E_0$ and $D = \\int D_0$ are Grothendieck displayed categories, then `homd_cov` evaluated at a triple $(z,d,f)$ reduces to the hom-category in the fibre $E_0(z)$ from the transported $w$ to the image of $d$ under the displayed functor.
+> if $E = \\int E_0$ and $D = \\int D_0$ are Grothendieck displayed categories, then `homd_` evaluated at a triple $(z,d,f)$ reduces to the hom-category in the fibre $E_0(z)$ from the transported $w$ to the image of $d$ under the displayed functor.
 
 This is precisely the “dependent arrow/comma” intuition.
 
 At the definitional level, the key pointwise computation rule is (Grothendieck–Grothendieck case):
 
 ```lambdapi
-rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
+rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
               (@Fibration_cov_catd $Z $D0) $FF)
             (Struct_sigma $z (Struct_sigma $d $f))
   ↪ Hom_cat (fapp0 $E0 $z)
@@ -562,18 +562,18 @@ rule fapp0 (@homd_cov $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
 
 The slogan is: *a 2-cell is a 1-cell in a dependent arrow category*.
 
-## 6.3 The “more internal” pipeline: `homd_cov_int_base`
+## 6.3 The “more internal” pipeline: `homd_int_base`
 
 The kernel contains a more internal version of the dependent hom construction, designed to be composed with other internal operations without exploding rewriting. It is built from stable-head building blocks (pointwise opposite, pointwise product, totalization, etc.). The key helper is:
 
 ```lambdapi
-symbol homd_cov_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
+symbol homd_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
   : τ (Functor (Op_cat Z) Cat_cat);
 ```
 
-Conceptually, `homd_cov_int_base D0` is a Cat-valued functor on $Z^{op}$ whose value at $z$ packages:
+Conceptually, `homd_int_base D0` is a Cat-valued functor on $Z^{op}$ whose value at $z$ packages:
 
-- a representable $\\mathrm{Hom}_Z(-,z)$ (built via `hom_cov_int` and then dualized),
+- a representable $\\mathrm{Hom}_Z(-,z)$ (built via `hom_int` and then dualized),
 - paired with the probe family $D0[z]$ (via `prodFib`),
 - then “totalized” (via `Total_func`) so that later constructions can range over *base arrows* explicitly.
 
@@ -582,33 +582,33 @@ The point is not the exact combinatorics but the *shape*: we are building a simp
 <div class="fullwidth">
 <div class="mermaid">
 flowchart LR
-  Zop["Z^op"] --> H["representable (hom_cov_int)"]
+  Zop["Z^op"] --> H["representable (hom_int)"]
   H --> Op["pointwise op (op_val_func)"]
   D0["probe D0: Z -> Cat"] --> Prod["pointwise product (prodFib)"]
   Op --> Prod
   Prod --> Tot["totalization (Total_func)"]
-  Tot --> Base["homd_cov_int_base(D0): Z^op -> Cat"]
+  Tot --> Base["homd_int_base(D0): Z^op -> Cat"]
 </div>
 </div>
 
-## 6.4 `homd_cov_int` as a displayed functor (current status)
+## 6.4 `homd_int` as a displayed functor (current status)
 
-The kernel exposes `homd_cov_int` as a displayed functor object (currently without computation rules). Informally it packages:
+The kernel exposes `homd_int` as a displayed functor object (currently without computation rules). Informally it packages:
 
 - a probe displayed category $\\int D0$,
 - a displayed functor $FF : \\int D0 \\to E$,
 - and returns a displayed functor over $E^{op}$ whose fibre over $(z,e)$ classifies arrows “from $e$ to $FF(d)$ over a base arrow”.
 
 ```lambdapi
-constant symbol homd_cov_int : Π [Z : Cat], Π [E : Catd Z],
+constant symbol homd_int : Π [Z : Cat], Π [E : Catd Z],
   Π (D0 : τ (Functor Z Cat_cat)),
   Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
   τ (Functord (Op_catd E)
               (Op_catd (Fibration_con_catd
-                (comp_cat_fapp0 Fib_func (homd_cov_int_base D0)))));
+                (comp_cat_fapp0 Fib_func (homd_int_base D0)))));
 ```
 
-The important message for the reader is: *emdash organizes higher cells by iterating dependent arrow categories*; `homd_cov_int` is the internalized, compositional version of the triangle classifier.
+The important message for the reader is: *emdash organizes higher cells by iterating dependent arrow categories*; `homd_int` is the internalized, compositional version of the triangle classifier.
 
 # 7. Displayed Transfors and Simplicial Iteration
 
@@ -649,7 +649,7 @@ Classically, $\\omega$-categories are presented globularly: $0$-cells, $1$-cells
 
 The kernel contains the beginnings of this “simplicial engine”:
 
-- `homd_cov` (triangle/surface classifier),
+- `homd_` (triangle/surface classifier),
 - and draft operations like `fdapp1_funcd` (dependent action on morphisms), intended to iterate the construction.
 
 ### Figure 5: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
@@ -778,7 +778,7 @@ This matches the abstract’s goal: make the triangle identity a *definitional c
 
 The rule is implemented at the level of the stable heads for composition (`comp_fapp0`), functor action on morphisms (`fapp1_fapp0`), and arrow-indexed transfor components (`tapp1_fapp0`). The result is that normalizing a composite term *performs* the triangle reduction.
 
-This computational adjunction story is best viewed as an application of the *off-diagonal component infrastructure for transfors* (`tapp1_*` / `tdapp1_*` and their “functional” packaging), rather than as a special application of the dependent-hom layer. The dependent-hom constructions (`homd_cov`, `homd_cov_int`) target a different goal: simplicial organization of higher cells over chosen base arrows, so that stacking/exchange phenomena can later be obtained uniformly.
+This computational adjunction story is best viewed as an application of the *off-diagonal component infrastructure for transfors* (`tapp1_*` / `tdapp1_*` and their “functional” packaging), rather than as a special application of the dependent-hom layer. The dependent-hom constructions (`homd_`, `homd_int`) target a different goal: simplicial organization of higher cells over chosen base arrows, so that stacking/exchange phenomena can later be obtained uniformly.
 
 # 9. Metatheory and Normalization Discipline
 
@@ -822,8 +822,8 @@ Because a hung typecheck often indicates rewrite/unification pathology, the repo
 
 The kernel is intentionally “small but sharp”. Some parts compute definitionally today; others are interfaces intended to be refined.
 
-- **Computational today** (examples): opposites (`Op_cat`), products, Grothendieck fibres for `Fibration_cov_catd`, strict Grothendieck object transport (`fib_cov_tapp0_fapp0`), pointwise computation for `homd_cov` in the Grothendieck–Grothendieck case, pointwise component extraction for transfors (`tapp0_fapp0`) and displayed transfors (`tdapp0_fapp0`), and a draft triangle cut-elimination rule for adjunctions.
-- **Abstract / TODO** (examples): full computation rules for general displayed categories `E : Catd Z`, full simplicial iteration (`fdapp1_funcd` depends on more `homd_cov` infrastructure), and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
+- **Computational today** (examples): opposites (`Op_cat`), products, Grothendieck fibres for `Fibration_cov_catd`, strict Grothendieck object transport (`fib_cov_tapp0_fapp0`), pointwise computation for `homd_` in the Grothendieck–Grothendieck case, pointwise component extraction for transfors (`tapp0_fapp0`) and displayed transfors (`tdapp0_fapp0`), and a draft triangle cut-elimination rule for adjunctions.
+- **Abstract / TODO** (examples): full computation rules for general displayed categories `E : Catd Z`, full simplicial iteration (`fdapp1_funcd` depends on more `homd_` infrastructure), and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
 
 This division is deliberate: the kernel tries to avoid committing to heavy encodings (Σ-records for functors/transfors) until the rewrite story is stable.
 
@@ -870,7 +870,7 @@ emdash is an attempt to make a small computational kernel in which:
 
 - higher categorical structure is *internal* (functors and transformations are first-class objects),
 - equalities are *operational* (rewrite rules),
-- and higher cells are organized *simplicially* via dependent arrow categories (`homd_cov`, `homd_cov_int`).
+- and higher cells are organized *simplicially* via dependent arrow categories (`homd_`, `homd_int`).
 
 The most concrete result so far is a faithful computational core for (parts of) Grothendieck-style dependent categories and a first computational adjunction rule. The next step is to finish the simplicial iteration so that exchange/stacking laws and higher triangle identities can also become normalization steps.
 
@@ -892,7 +892,7 @@ The most concrete result so far is a faithful computational core for (parts of) 
 - `Transfd_cat`, `tdapp0_fapp0`, `tdapp1_fapp0_funcd`, `fdapp1_funcd`: displayed transfors; pointwise components in fibres; packaged off-diagonal components over displayed arrows; action on dependent-hom data.
 - `Catd`, `Fibre_cat`, `Functord_cat`: displayed categories (isofibrations); fibres; displayed functors over a fixed base.
 - `Fibration_cov_catd`: Grothendieck construction $\\int M$ for $M:Z\\to\\mathbf{Cat}$ (this is where definitional computation for fibres exists).
-- `hom_cov`, `hom_cov_int`: (co)representables / internalized hom functors.
-- `homd_cov`: dependent arrow/comma construction (triangle classifier), with a computation rule in the Grothendieck case.
-- `homd_cov_int_base`, `homd_cov_int`: internalized pipeline and displayed packaging for the same idea.
+- `hom_`, `hom_int`: (co)representables / internalized hom functors.
+- `homd_`: dependent arrow/comma construction (triangle classifier), with a computation rule in the Grothendieck case.
+- `homd_int_base`, `homd_int`: internalized pipeline and displayed packaging for the same idea.
 - `adj` and the triangle rewrite: adjunction data and (draft) cut-elimination rule.

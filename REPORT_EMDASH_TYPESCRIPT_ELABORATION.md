@@ -18,7 +18,7 @@ We focus on:
 - the role of **mode-annotated context binders** (variance / “how a variable may vary”),
 - the meaning of emdash2’s `*_int_*` symbols as **explicit discharge/abstraction**,
 - the functor/transfor fragment as the minimal blueprint to extend later (displayed categories,
-  `homd_cov_int`, etc.).
+  `homd_int`, etc.).
 
 We explicitly do **not** focus on:
 
@@ -251,7 +251,7 @@ either as a definitional rewrite or as a derived macro at the TS level.
      (`f :^func (Hom_cat A x y)`).
 4) **Accumulation rewrite laws**:
    - add the “cut accumulation” rewrite rules on off-diagonal stable heads to normalize pasting/exchange.
-5) **Extend to displayed categories and `homd_cov_int`** once the binder discipline and discharge operators
+5) **Extend to displayed categories and `homd_int`** once the binder discipline and discharge operators
    are validated on the base functor/transfor fragment.
 
 ---
