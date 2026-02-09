@@ -238,6 +238,27 @@ export function setupPhase1GlobalsAndRules() {
         ), { mode: BinderMode.Natural, controllerCat: Z }
         ), { mode: BinderMode.Functorial, controllerCat: Z });
 
+    const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term =>
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var("homd_curry"), Z, Icit.Expl),
+                                E, Icit.Expl
+                            ),
+                            b0, Icit.Expl
+                        ),
+                        e0, Icit.Expl
+                    ),
+                    b1, Icit.Expl
+                ),
+                f, Icit.Expl
+            ),
+            e1, Icit.Expl
+        );
+
     defineGlobal("homd_curry",
         Pi("Z", Icit.Expl, CatTerm(), Z =>
         Pi("E", Icit.Expl, CatdOf(Z), E =>
@@ -250,6 +271,58 @@ export function setupPhase1GlobalsAndRules() {
         Pi("Z", Icit.Expl, CatTerm(), Z =>
         Pi("E", Icit.Expl, CatdOf(Z), E =>
             homdCurryBodyType(Z, E))),
+        undefined, true, true
+    );
+
+    // Displayed off-diagonal action of a displayed functor: FF1[sigma].
+    defineGlobal("fdapp1_fapp0",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), FF =>
+        Pi("z", Icit.Expl, ObjTerm(Z), z =>
+        Pi("e", Icit.Expl, ObjTerm(FibreOf(Z, E, z)), e =>
+        Pi("z'", Icit.Expl, ObjTerm(Z), zPrime =>
+        Pi("f", Icit.Expl, HomTerm(Z, z, zPrime), f =>
+        Pi("e'", Icit.Expl, ObjTerm(FibreOf(Z, E, zPrime)), ePrime =>
+        Pi("sigma", Icit.Expl, ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)), _sigma =>
+            ObjTerm(
+                homdCurryOf(
+                    Z, D,
+                    z,
+                    App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl),
+                    zPrime,
+                    f,
+                    App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), zPrime, Icit.Expl), ePrime, Icit.Expl)
+                )
+            ))))))))))),
+        undefined, true, true
+    );
+
+    // Displayed off-diagonal component of a displayed transfor: eps_(sigma).
+    defineGlobal("tdapp1_fapp0",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), FF =>
+        Pi("GG", Icit.Expl, FunctordOf(Z, E, D), GG =>
+        Pi("z", Icit.Expl, ObjTerm(Z), z =>
+        Pi("e", Icit.Expl, ObjTerm(FibreOf(Z, E, z)), e =>
+        Pi("z'", Icit.Expl, ObjTerm(Z), zPrime =>
+        Pi("f", Icit.Expl, HomTerm(Z, z, zPrime), f =>
+        Pi("e'", Icit.Expl, ObjTerm(FibreOf(Z, E, zPrime)), ePrime =>
+        Pi("sigma", Icit.Expl, ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)), _sigma =>
+        Pi("eps", Icit.Expl, App(App(App(App(App(Var("Transfd"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl), _eps =>
+            ObjTerm(
+                homdCurryOf(
+                    Z, D,
+                    z,
+                    App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl),
+                    zPrime,
+                    f,
+                    App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), GG, Icit.Expl), zPrime, Icit.Expl), ePrime, Icit.Expl)
+                )
+            ))))))))))))),
         undefined, true, true
     );
 

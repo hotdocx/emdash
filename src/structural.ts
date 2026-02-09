@@ -6,7 +6,7 @@
 import {
     Term, Context, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
-    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, TApp1FApp0Term
+    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, TApp1FApp0Term, FDApp1Term, TDApp1Term
 } from './types';
 import { getTermRef, freshHoleName, extendCtx } from './state';
 import { MAX_STACK_DEPTH } from './constants';
@@ -179,6 +179,50 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             }
             return areStructurallyEqualNoWhnf(rt1.transformation, t2.transformation, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.morphism_f, t2.morphism_f, ctx, depth + 1);
+        }
+        case 'FDApp1Term': {
+            const fd2 = rt2 as Term & {tag:'FDApp1Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catZ_IMPLICIT, fd2.catZ_IMPLICIT) ||
+                !implicitsMatch(rt1.catdE_IMPLICIT, fd2.catdE_IMPLICIT) ||
+                !implicitsMatch(rt1.catdD_IMPLICIT, fd2.catdD_IMPLICIT) ||
+                !implicitsMatch(rt1.objZ_IMPLICIT, fd2.objZ_IMPLICIT) ||
+                !implicitsMatch(rt1.objE_IMPLICIT, fd2.objE_IMPLICIT) ||
+                !implicitsMatch(rt1.objZPrime_IMPLICIT, fd2.objZPrime_IMPLICIT) ||
+                !implicitsMatch(rt1.homF_IMPLICIT, fd2.homF_IMPLICIT) ||
+                !implicitsMatch(rt1.objEPrime_IMPLICIT, fd2.objEPrime_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.displayedFunctor, fd2.displayedFunctor, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.morphism_sigma, fd2.morphism_sigma, ctx, depth + 1);
+        }
+        case 'TDApp1Term': {
+            const td2 = rt2 as Term & {tag:'TDApp1Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catZ_IMPLICIT, td2.catZ_IMPLICIT) ||
+                !implicitsMatch(rt1.catdE_IMPLICIT, td2.catdE_IMPLICIT) ||
+                !implicitsMatch(rt1.catdD_IMPLICIT, td2.catdD_IMPLICIT) ||
+                !implicitsMatch(rt1.functorFF_IMPLICIT, td2.functorFF_IMPLICIT) ||
+                !implicitsMatch(rt1.functorGG_IMPLICIT, td2.functorGG_IMPLICIT) ||
+                !implicitsMatch(rt1.objZ_IMPLICIT, td2.objZ_IMPLICIT) ||
+                !implicitsMatch(rt1.objE_IMPLICIT, td2.objE_IMPLICIT) ||
+                !implicitsMatch(rt1.objZPrime_IMPLICIT, td2.objZPrime_IMPLICIT) ||
+                !implicitsMatch(rt1.homF_IMPLICIT, td2.homF_IMPLICIT) ||
+                !implicitsMatch(rt1.objEPrime_IMPLICIT, td2.objEPrime_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.transformation, td2.transformation, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.morphism_sigma, td2.morphism_sigma, ctx, depth + 1);
         }
         case 'HomCovFunctorIdentity': {
             const hc2 = rt2 as Term & {tag:'HomCovFunctorIdentity'};

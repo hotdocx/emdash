@@ -9,7 +9,7 @@ import {
     Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, Let, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
-    MkFunctorTerm, TApp1FApp0Term, BinderMode, LamMode, PiMode
+    MkFunctorTerm, TApp1FApp0Term, BinderMode, LamMode, PiMode, FDApp1Term, TDApp1Term
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
@@ -30,6 +30,8 @@ type FMap1TermType = Extract<BaseTerm, { tag: 'FMap1Term' }>;
 type NatTransTypeTermType = Extract<BaseTerm, { tag: 'NatTransTypeTerm' }>;
 type NatTransComponentTermType = Extract<BaseTerm, { tag: 'NatTransComponentTerm' }>;
 type TApp1FApp0TermType = Extract<BaseTerm, { tag: 'TApp1FApp0Term' }>;
+type FDApp1TermType = Extract<BaseTerm, { tag: 'FDApp1Term' }>;
+type TDApp1TermType = Extract<BaseTerm, { tag: 'TDApp1Term' }>;
 type HomCovFunctorIdentityType = Extract<BaseTerm, { tag: 'HomCovFunctorIdentity' }>;
 
 
@@ -167,6 +169,63 @@ function validateBinderModeDiscipline(
 
     checkEndpoint(rType.dom, 'dom');
     checkEndpoint(rType.cod, 'cod');
+}
+
+const CatdOf = (Z: Term): Term => App(Var("Catd"), Z, Icit.Expl);
+const FibreOf = (Z: Term, E: Term, z: Term): Term =>
+    App(App(App(Var("Fibre"), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
+const FunctordOf = (Z: Term, E: Term, D: Term): Term =>
+    App(App(App(Var("Functord"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+const TransfdOf = (Z: Term, E: Term, D: Term, FF: Term, GG: Term): Term =>
+    App(App(App(App(App(Var("Transfd"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl);
+const fdapp0Of = (Z: Term, E: Term, D: Term, FF: Term, z: Term, e: Term): Term =>
+    App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl);
+const homdCurryOf = (Z: Term, E: Term, z: Term, e: Term, zPrime: Term, f: Term, ePrime: Term): Term =>
+    App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(Var("homd_curry"), Z, Icit.Expl),
+                            E, Icit.Expl
+                        ),
+                        z, Icit.Expl
+                    ),
+                    e, Icit.Expl
+                ),
+                zPrime, Icit.Expl
+            ),
+            f, Icit.Expl
+        ),
+        ePrime, Icit.Expl
+    );
+
+function assertBindingMode(
+    ctx: Context,
+    term: Term,
+    expectedMode: BinderMode,
+    roleLabel: string,
+    expectedController?: Term
+): void {
+    const rTerm = getTermRef(term);
+    if (rTerm.tag !== 'Var') return;
+
+    const binding = lookupCtx(ctx, rTerm.name);
+    if (!binding) return;
+
+    const mode = binding.mode ?? BinderMode.Functorial;
+    if (mode !== expectedMode) {
+        throw new Error(
+            `Mode error on ${roleLabel} '${rTerm.name}': expected ${modeLabel(expectedMode)} but got ${modeLabel(mode)}`
+        );
+    }
+    if (expectedController && binding.controllerCat && !areEqual(binding.controllerCat, expectedController, ctx)) {
+        throw new Error(
+            `Mode error on ${roleLabel} '${rTerm.name}': controller ${printTerm(binding.controllerCat)} ` +
+            `does not match expected ${printTerm(expectedController)}`
+        );
+    }
 }
 
 /**
@@ -545,6 +604,125 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             );
 
             return { elaboratedTerm: finalTApp1, type: HomTerm(getTermRef(elabCatB), fmap0_F_X, fmap0_G_Y) };
+        }
+        case 'FDApp1Term': { // Off-diagonal displayed functor component (fdapp1_fapp0 FF sigma)
+            const fdTerm = current as Term & FDApp1TermType;
+
+            const elabZ = check(ctx, fdTerm.catZ_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabE = check(ctx, fdTerm.catdE_IMPLICIT!, CatdOf(elabZ), stackDepth + 1, options);
+            const elabD = check(ctx, fdTerm.catdD_IMPLICIT!, CatdOf(elabZ), stackDepth + 1, options);
+            const elabZObj = check(ctx, fdTerm.objZ_IMPLICIT!, ObjTerm(elabZ), stackDepth + 1, options);
+            const elabEObj = check(ctx, fdTerm.objE_IMPLICIT!, ObjTerm(FibreOf(elabZ, elabE, elabZObj)), stackDepth + 1, options);
+            const elabZPrimeObj = check(ctx, fdTerm.objZPrime_IMPLICIT!, ObjTerm(elabZ), stackDepth + 1, options);
+            const elabBaseArrow = check(ctx, fdTerm.homF_IMPLICIT!, HomTerm(elabZ, elabZObj, elabZPrimeObj), stackDepth + 1, options);
+            const elabEPrimeObj = check(ctx, fdTerm.objEPrime_IMPLICIT!, ObjTerm(FibreOf(elabZ, elabE, elabZPrimeObj)), stackDepth + 1, options);
+
+            assertBindingMode(ctx, elabZObj, BinderMode.Functorial, "base object z", elabZ);
+            assertBindingMode(ctx, elabEObj, BinderMode.Natural, "fibre object e");
+            assertBindingMode(ctx, elabZPrimeObj, BinderMode.Functorial, "base object z'", elabZ);
+            assertBindingMode(ctx, elabBaseArrow, BinderMode.Natural, "base arrow f", elabZ);
+            assertBindingMode(ctx, elabEPrimeObj, BinderMode.Natural, "fibre object e'");
+
+            const expectedFunctordType = FunctordOf(elabZ, elabE, elabD);
+            const elabDisplayedFunctor = check(ctx, fdTerm.displayedFunctor, expectedFunctordType, stackDepth + 1, options);
+
+            const sigmaType = ObjTerm(homdCurryOf(elabZ, elabE, elabZObj, elabEObj, elabZPrimeObj, elabBaseArrow, elabEPrimeObj));
+            const elabSigma = check(ctx, fdTerm.morphism_sigma, sigmaType, stackDepth + 1, options);
+            assertBindingMode(ctx, elabSigma, BinderMode.Functorial, "displayed arrow witness sigma");
+
+            const ffAtZE = fdapp0Of(elabZ, elabE, elabD, elabDisplayedFunctor, elabZObj, elabEObj);
+            const ffAtZPrimeEPrime = fdapp0Of(elabZ, elabE, elabD, elabDisplayedFunctor, elabZPrimeObj, elabEPrimeObj);
+
+            const finalHead = App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(
+                                    App(
+                                        App(
+                                            App(Var("fdapp1_fapp0"), elabZ, Icit.Expl),
+                                            elabE, Icit.Expl
+                                        ),
+                                        elabD, Icit.Expl
+                                    ),
+                                    elabDisplayedFunctor, Icit.Expl
+                                ),
+                                elabZObj, Icit.Expl
+                            ),
+                            elabEObj, Icit.Expl
+                        ),
+                        elabZPrimeObj, Icit.Expl
+                    ),
+                    elabBaseArrow, Icit.Expl
+                ),
+                elabEPrimeObj, Icit.Expl
+            );
+            const finalTerm = App(finalHead, elabSigma, Icit.Expl);
+            const finalType = ObjTerm(homdCurryOf(elabZ, elabD, elabZObj, ffAtZE, elabZPrimeObj, elabBaseArrow, ffAtZPrimeEPrime));
+            return { elaboratedTerm: finalTerm, type: finalType };
+        }
+        case 'TDApp1Term': { // Off-diagonal displayed transfor component (tdapp1_fapp0 eps sigma)
+            const tdTerm = current as Term & TDApp1TermType;
+
+            const elabZ = check(ctx, tdTerm.catZ_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabE = check(ctx, tdTerm.catdE_IMPLICIT!, CatdOf(elabZ), stackDepth + 1, options);
+            const elabD = check(ctx, tdTerm.catdD_IMPLICIT!, CatdOf(elabZ), stackDepth + 1, options);
+            const elabFF = check(ctx, tdTerm.functorFF_IMPLICIT!, FunctordOf(elabZ, elabE, elabD), stackDepth + 1, options);
+            const elabGG = check(ctx, tdTerm.functorGG_IMPLICIT!, FunctordOf(elabZ, elabE, elabD), stackDepth + 1, options);
+            const elabZObj = check(ctx, tdTerm.objZ_IMPLICIT!, ObjTerm(elabZ), stackDepth + 1, options);
+            const elabEObj = check(ctx, tdTerm.objE_IMPLICIT!, ObjTerm(FibreOf(elabZ, elabE, elabZObj)), stackDepth + 1, options);
+            const elabZPrimeObj = check(ctx, tdTerm.objZPrime_IMPLICIT!, ObjTerm(elabZ), stackDepth + 1, options);
+            const elabBaseArrow = check(ctx, tdTerm.homF_IMPLICIT!, HomTerm(elabZ, elabZObj, elabZPrimeObj), stackDepth + 1, options);
+            const elabEPrimeObj = check(ctx, tdTerm.objEPrime_IMPLICIT!, ObjTerm(FibreOf(elabZ, elabE, elabZPrimeObj)), stackDepth + 1, options);
+
+            assertBindingMode(ctx, elabZObj, BinderMode.Functorial, "base object z", elabZ);
+            assertBindingMode(ctx, elabEObj, BinderMode.Natural, "fibre object e");
+            assertBindingMode(ctx, elabZPrimeObj, BinderMode.Functorial, "base object z'", elabZ);
+            assertBindingMode(ctx, elabBaseArrow, BinderMode.Natural, "base arrow f", elabZ);
+            assertBindingMode(ctx, elabEPrimeObj, BinderMode.Natural, "fibre object e'");
+
+            const sigmaType = ObjTerm(homdCurryOf(elabZ, elabE, elabZObj, elabEObj, elabZPrimeObj, elabBaseArrow, elabEPrimeObj));
+            const elabSigma = check(ctx, tdTerm.morphism_sigma, sigmaType, stackDepth + 1, options);
+            assertBindingMode(ctx, elabSigma, BinderMode.Functorial, "displayed arrow witness sigma");
+
+            const expectedTransfdType = TransfdOf(elabZ, elabE, elabD, elabFF, elabGG);
+            const elabTransformation = check(ctx, tdTerm.transformation, expectedTransfdType, stackDepth + 1, options);
+
+            const ffAtZE = fdapp0Of(elabZ, elabE, elabD, elabFF, elabZObj, elabEObj);
+            const ggAtZPrimeEPrime = fdapp0Of(elabZ, elabE, elabD, elabGG, elabZPrimeObj, elabEPrimeObj);
+
+            const finalHead = App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(
+                                    App(
+                                        App(
+                                            App(
+                                                App(Var("tdapp1_fapp0"), elabZ, Icit.Expl),
+                                                elabE, Icit.Expl
+                                            ),
+                                            elabD, Icit.Expl
+                                        ),
+                                        elabFF, Icit.Expl
+                                    ),
+                                    elabGG, Icit.Expl
+                                ),
+                                elabZObj, Icit.Expl
+                            ),
+                            elabEObj, Icit.Expl
+                        ),
+                        elabZPrimeObj, Icit.Expl
+                    ),
+                    elabBaseArrow, Icit.Expl
+                ),
+                elabEPrimeObj, Icit.Expl
+            );
+            const finalTerm = App(App(finalHead, elabSigma, Icit.Expl), elabTransformation, Icit.Expl);
+            const finalType = ObjTerm(homdCurryOf(elabZ, elabD, elabZObj, ffAtZE, elabZPrimeObj, elabBaseArrow, ggAtZPrimeEPrime));
+            return { elaboratedTerm: finalTerm, type: finalType };
         }
         case 'HomCovFunctorIdentity': { // Hom_A(W, -) functor
             const hciTerm = current as Term & HomCovFunctorIdentityType;

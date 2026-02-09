@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Var, Icit, CatTerm, ObjTerm, HomTerm, FunctorTypeTerm, NatTransTypeTerm, FMap0Term, TApp1FApp0Term, App, BinderMode
+    Term, Var, Icit, CatTerm, ObjTerm, HomTerm, FunctorTypeTerm, NatTransTypeTerm, FMap0Term, TApp1FApp0Term, App, BinderMode, FDApp1Term, TDApp1Term, LamMode, PiMode
 } from '../src/types';
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';
@@ -13,6 +13,37 @@ import { resetMyLambdaPi_Emdash } from '../src/stdlib';
 import { elaborate } from '../src/elaboration';
 import { areEqual } from '../src/equality';
 import { emptyCtx, extendCtx, lookupCtx, printTerm } from '../src/state';
+import { check } from '../src/elaboration';
+
+const catdOf = (Z: Term): Term => App(Var('Catd'), Z, Icit.Expl);
+const fibreOf = (Z: Term, E: Term, z: Term): Term =>
+    App(App(App(Var('Fibre'), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
+const functordOf = (Z: Term, E: Term, D: Term): Term =>
+    App(App(App(Var('Functord'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+const transfdOf = (Z: Term, E: Term, D: Term, FF: Term, GG: Term): Term =>
+    App(App(App(App(App(Var('Transfd'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl);
+const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term =>
+    App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(Var('homd_curry'), Z, Icit.Expl),
+                            E, Icit.Expl
+                        ),
+                        b0, Icit.Expl
+                    ),
+                    e0, Icit.Expl
+                ),
+                b1, Icit.Expl
+            ),
+            f, Icit.Expl
+        ),
+        e1, Icit.Expl
+    );
+const fdapp0Of = (Z: Term, E: Term, D: Term, FF: Term, z: Term, e: Term): Term =>
+    App(App(App(App(App(App(Var('fdapp0'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl);
 
 describe('Emdash2 Functor/Transfor Elaboration', () => {
     beforeEach(() => {
@@ -161,5 +192,216 @@ describe('Emdash2 Functor/Transfor Elaboration', () => {
             `Expected tdapp0_fapp0 type ${printTerm(expectedTdType)}, got ${printTerm(tdapp0Res.type)}`
         );
     });
-});
 
+    it('types displayed off-diagonal functor action fdapp1_fapp0 (FF1[sigma])', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+
+        const CatdZ = catdOf(Z);
+        defineGlobal('E', CatdZ);
+        defineGlobal('D', CatdZ);
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('z', ObjTerm(Z));
+        defineGlobal('z_prime', ObjTerm(Z));
+        const z = Var('z');
+        const zPrime = Var('z_prime');
+
+        defineGlobal('f', HomTerm(Z, z, zPrime));
+        const f = Var('f');
+
+        defineGlobal('e', ObjTerm(fibreOf(Z, E, z)));
+        defineGlobal('e_prime', ObjTerm(fibreOf(Z, E, zPrime)));
+        const e = Var('e');
+        const ePrime = Var('e_prime');
+
+        defineGlobal('sigma', ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)));
+        const sigma = Var('sigma');
+
+        defineGlobal('FF', functordOf(Z, E, D));
+        const FF = Var('FF');
+
+        const term = FDApp1Term(FF, sigma, Z, E, D, z, e, zPrime, f, ePrime);
+        const result = elaborate(term);
+
+        const ffAtZE = fdapp0Of(Z, E, D, FF, z, e);
+        const ffAtZPrimeEPrime = fdapp0Of(Z, E, D, FF, zPrime, ePrime);
+        const expectedType = ObjTerm(homdCurryOf(Z, D, z, ffAtZE, zPrime, f, ffAtZPrimeEPrime));
+        const expectedHead = App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(
+                                    App(
+                                        App(Var('fdapp1_fapp0'), Z, Icit.Expl),
+                                        E, Icit.Expl
+                                    ),
+                                    D, Icit.Expl
+                                ),
+                                FF, Icit.Expl
+                            ),
+                            z, Icit.Expl
+                        ),
+                        e, Icit.Expl
+                    ),
+                    zPrime, Icit.Expl
+                ),
+                f, Icit.Expl
+            ),
+            ePrime, Icit.Expl
+        );
+        const expectedTerm = App(expectedHead, sigma, Icit.Expl);
+
+        assert.ok(
+            areEqual(result.type, expectedType, emptyCtx),
+            `Expected fdapp1_fapp0 type ${printTerm(expectedType)}, got ${printTerm(result.type)}`
+        );
+        assert.ok(
+            areEqual(result.term, expectedTerm, emptyCtx),
+            `Expected fdapp1_fapp0 elaboration to canonical head.\nExpected: ${printTerm(expectedTerm)}\nGot: ${printTerm(result.term)}`
+        );
+    });
+
+    it('types displayed off-diagonal transfor component tdapp1_fapp0 (eps_(sigma))', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+
+        const CatdZ = catdOf(Z);
+        defineGlobal('E', CatdZ);
+        defineGlobal('D', CatdZ);
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('z', ObjTerm(Z));
+        defineGlobal('z_prime', ObjTerm(Z));
+        const z = Var('z');
+        const zPrime = Var('z_prime');
+
+        defineGlobal('f', HomTerm(Z, z, zPrime));
+        const f = Var('f');
+
+        defineGlobal('e', ObjTerm(fibreOf(Z, E, z)));
+        defineGlobal('e_prime', ObjTerm(fibreOf(Z, E, zPrime)));
+        const e = Var('e');
+        const ePrime = Var('e_prime');
+
+        defineGlobal('sigma', ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)));
+        const sigma = Var('sigma');
+
+        defineGlobal('FF', functordOf(Z, E, D));
+        defineGlobal('GG', functordOf(Z, E, D));
+        const FF = Var('FF');
+        const GG = Var('GG');
+
+        defineGlobal('epsd', transfdOf(Z, E, D, FF, GG));
+        const epsd = Var('epsd');
+
+        const term = TDApp1Term(epsd, sigma, Z, E, D, FF, GG, z, e, zPrime, f, ePrime);
+        const result = elaborate(term);
+
+        const ffAtZE = fdapp0Of(Z, E, D, FF, z, e);
+        const ggAtZPrimeEPrime = fdapp0Of(Z, E, D, GG, zPrime, ePrime);
+        const expectedType = ObjTerm(homdCurryOf(Z, D, z, ffAtZE, zPrime, f, ggAtZPrimeEPrime));
+
+        assert.ok(
+            areEqual(result.type, expectedType, emptyCtx),
+            `Expected tdapp1_fapp0 type ${printTerm(expectedType)}, got ${printTerm(result.type)}`
+        );
+    });
+
+    it('rejects fdapp1_fapp0 when the base arrow is in the wrong category', () => {
+        defineGlobal('Z', CatTerm());
+        defineGlobal('Z_bad', CatTerm());
+        const Z = Var('Z');
+        const Zbad = Var('Z_bad');
+
+        const CatdZ = catdOf(Z);
+        defineGlobal('E', CatdZ);
+        defineGlobal('D', CatdZ);
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('z', ObjTerm(Z));
+        defineGlobal('z_prime', ObjTerm(Z));
+        const z = Var('z');
+        const zPrime = Var('z_prime');
+
+        defineGlobal('e', ObjTerm(fibreOf(Z, E, z)));
+        defineGlobal('e_prime', ObjTerm(fibreOf(Z, E, zPrime)));
+        const e = Var('e');
+        const ePrime = Var('e_prime');
+
+        defineGlobal('f_ok', HomTerm(Z, z, zPrime));
+        const fOk = Var('f_ok');
+        defineGlobal('sigma', ObjTerm(homdCurryOf(Z, E, z, e, zPrime, fOk, ePrime)));
+        const sigma = Var('sigma');
+
+        defineGlobal('x_bad', ObjTerm(Zbad));
+        defineGlobal('y_bad', ObjTerm(Zbad));
+        const xBad = Var('x_bad');
+        const yBad = Var('y_bad');
+        defineGlobal('f_bad', HomTerm(Zbad, xBad, yBad));
+        const fBad = Var('f_bad');
+
+        defineGlobal('FF', functordOf(Z, E, D));
+        const FF = Var('FF');
+
+        assert.throws(
+            () => elaborate(FDApp1Term(FF, sigma, Z, E, D, z, e, zPrime, fBad, ePrime)),
+            /Type error|Could not solve constraints|Mode error|expectedType/,
+            'Expected fdapp1_fapp0 elaboration to fail when base arrow category mismatches'
+        );
+    });
+
+    it('enforces functorial base-object mode for fdapp1_fapp0 context', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+        const CatdZ = catdOf(Z);
+        defineGlobal('E', CatdZ);
+        defineGlobal('D', CatdZ);
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('FF', functordOf(Z, E, D));
+        const FF = Var('FF');
+
+        const expectedType = PiMode('z', Icit.Expl, ObjTerm(Z), z =>
+            PiMode('e', Icit.Expl, ObjTerm(fibreOf(Z, E, z)), e =>
+            PiMode('z_prime', Icit.Expl, ObjTerm(Z), zPrime =>
+            PiMode('f', Icit.Expl, HomTerm(Z, z, zPrime), f =>
+            PiMode('e_prime', Icit.Expl, ObjTerm(fibreOf(Z, E, zPrime)), ePrime =>
+            PiMode('sigma', Icit.Expl, ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)), _sigma =>
+                ObjTerm(homdCurryOf(Z, D, z, fdapp0Of(Z, E, D, FF, z, e), zPrime, f, fdapp0Of(Z, E, D, FF, zPrime, ePrime))),
+                { mode: BinderMode.Functorial, controllerCat: homdCurryOf(Z, E, z, e, zPrime, f, ePrime) }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Functorial, controllerCat: Z }
+            ), { mode: BinderMode.ObjectOnly, controllerCat: Z }
+        );
+
+        const badTerm = LamMode('z', Icit.Expl, ObjTerm(Z), z =>
+            LamMode('e', Icit.Expl, ObjTerm(fibreOf(Z, E, z)), e =>
+            LamMode('z_prime', Icit.Expl, ObjTerm(Z), zPrime =>
+            LamMode('f', Icit.Expl, HomTerm(Z, z, zPrime), f =>
+            LamMode('e_prime', Icit.Expl, ObjTerm(fibreOf(Z, E, zPrime)), ePrime =>
+            LamMode('sigma', Icit.Expl, ObjTerm(homdCurryOf(Z, E, z, e, zPrime, f, ePrime)), sigma =>
+                FDApp1Term(FF, sigma, Z, E, D, z, e, zPrime, f, ePrime),
+                { mode: BinderMode.Functorial, controllerCat: homdCurryOf(Z, E, z, e, zPrime, f, ePrime) }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Natural, controllerCat: Z }
+            ), { mode: BinderMode.Functorial, controllerCat: Z }
+            ), { mode: BinderMode.ObjectOnly, controllerCat: Z }
+        );
+
+        assert.throws(
+            () => check(emptyCtx, badTerm, expectedType),
+            /Mode error/,
+            'Expected fdapp1_fapp0 elaboration to reject object-only z in arrow-indexed context'
+        );
+    });
+});

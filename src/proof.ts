@@ -119,6 +119,32 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 if (current.objX_A_IMPLICIT) traverse(current.objX_A_IMPLICIT);
                 if (current.objY_A_IMPLICIT) traverse(current.objY_A_IMPLICIT);
                 break;
+            case 'FDApp1Term':
+                traverse(current.displayedFunctor);
+                traverse(current.morphism_sigma);
+                if (current.catZ_IMPLICIT) traverse(current.catZ_IMPLICIT);
+                if (current.catdE_IMPLICIT) traverse(current.catdE_IMPLICIT);
+                if (current.catdD_IMPLICIT) traverse(current.catdD_IMPLICIT);
+                if (current.objZ_IMPLICIT) traverse(current.objZ_IMPLICIT);
+                if (current.objE_IMPLICIT) traverse(current.objE_IMPLICIT);
+                if (current.objZPrime_IMPLICIT) traverse(current.objZPrime_IMPLICIT);
+                if (current.homF_IMPLICIT) traverse(current.homF_IMPLICIT);
+                if (current.objEPrime_IMPLICIT) traverse(current.objEPrime_IMPLICIT);
+                break;
+            case 'TDApp1Term':
+                traverse(current.transformation);
+                traverse(current.morphism_sigma);
+                if (current.catZ_IMPLICIT) traverse(current.catZ_IMPLICIT);
+                if (current.catdE_IMPLICIT) traverse(current.catdE_IMPLICIT);
+                if (current.catdD_IMPLICIT) traverse(current.catdD_IMPLICIT);
+                if (current.functorFF_IMPLICIT) traverse(current.functorFF_IMPLICIT);
+                if (current.functorGG_IMPLICIT) traverse(current.functorGG_IMPLICIT);
+                if (current.objZ_IMPLICIT) traverse(current.objZ_IMPLICIT);
+                if (current.objE_IMPLICIT) traverse(current.objE_IMPLICIT);
+                if (current.objZPrime_IMPLICIT) traverse(current.objZPrime_IMPLICIT);
+                if (current.homF_IMPLICIT) traverse(current.homF_IMPLICIT);
+                if (current.objEPrime_IMPLICIT) traverse(current.objEPrime_IMPLICIT);
+                break;
             case 'HomCovFunctorIdentity':
                 traverse(current.domainCat);
                 traverse(current.objW_InDomainCat);

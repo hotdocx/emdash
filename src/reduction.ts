@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode, FDApp1Term, TDApp1Term
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -208,6 +208,48 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 }
                 break;
             }
+            case 'FDApp1Term': {
+                const functor_whnf = getTermRef(whnf(current.displayedFunctor, ctx, stackDepth + 1));
+                const sigma_whnf = getTermRef(whnf(current.morphism_sigma, ctx, stackDepth + 1));
+                if (getTermRef(current.displayedFunctor) !== functor_whnf || getTermRef(current.morphism_sigma) !== sigma_whnf) {
+                    current = FDApp1Term(
+                        functor_whnf,
+                        sigma_whnf,
+                        current.catZ_IMPLICIT,
+                        current.catdE_IMPLICIT,
+                        current.catdD_IMPLICIT,
+                        current.objZ_IMPLICIT,
+                        current.objE_IMPLICIT,
+                        current.objZPrime_IMPLICIT,
+                        current.homF_IMPLICIT,
+                        current.objEPrime_IMPLICIT
+                    );
+                    reducedInKernelBlock = true;
+                }
+                break;
+            }
+            case 'TDApp1Term': {
+                const transformation_whnf = getTermRef(whnf(current.transformation, ctx, stackDepth + 1));
+                const sigma_whnf = getTermRef(whnf(current.morphism_sigma, ctx, stackDepth + 1));
+                if (getTermRef(current.transformation) !== transformation_whnf || getTermRef(current.morphism_sigma) !== sigma_whnf) {
+                    current = TDApp1Term(
+                        transformation_whnf,
+                        sigma_whnf,
+                        current.catZ_IMPLICIT,
+                        current.catdE_IMPLICIT,
+                        current.catdD_IMPLICIT,
+                        current.functorFF_IMPLICIT,
+                        current.functorGG_IMPLICIT,
+                        current.objZ_IMPLICIT,
+                        current.objE_IMPLICIT,
+                        current.objZPrime_IMPLICIT,
+                        current.homF_IMPLICIT,
+                        current.objEPrime_IMPLICIT
+                    );
+                    reducedInKernelBlock = true;
+                }
+                break;
+            }
             case 'FunctorTypeTerm': {
                 const domainCat_whnf = getTermRef(whnf(current.domainCat, ctx, stackDepth + 1));
                 const codomainCat_whnf = getTermRef(whnf(current.codomainCat, ctx, stackDepth + 1));
@@ -319,6 +361,34 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 current.functorG_IMPLICIT ? normalize(current.functorG_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.objX_A_IMPLICIT ? normalize(current.objX_A_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.objY_A_IMPLICIT ? normalize(current.objY_A_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'FDApp1Term':
+            return FDApp1Term(
+                normalize(current.displayedFunctor, ctx, stackDepth + 1),
+                normalize(current.morphism_sigma, ctx, stackDepth + 1),
+                current.catZ_IMPLICIT ? normalize(current.catZ_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catdE_IMPLICIT ? normalize(current.catdE_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catdD_IMPLICIT ? normalize(current.catdD_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objZ_IMPLICIT ? normalize(current.objZ_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objE_IMPLICIT ? normalize(current.objE_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objZPrime_IMPLICIT ? normalize(current.objZPrime_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.homF_IMPLICIT ? normalize(current.homF_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objEPrime_IMPLICIT ? normalize(current.objEPrime_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'TDApp1Term':
+            return TDApp1Term(
+                normalize(current.transformation, ctx, stackDepth + 1),
+                normalize(current.morphism_sigma, ctx, stackDepth + 1),
+                current.catZ_IMPLICIT ? normalize(current.catZ_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catdE_IMPLICIT ? normalize(current.catdE_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catdD_IMPLICIT ? normalize(current.catdD_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorFF_IMPLICIT ? normalize(current.functorFF_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorGG_IMPLICIT ? normalize(current.functorGG_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objZ_IMPLICIT ? normalize(current.objZ_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objE_IMPLICIT ? normalize(current.objE_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objZPrime_IMPLICIT ? normalize(current.objZPrime_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.homF_IMPLICIT ? normalize(current.homF_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objEPrime_IMPLICIT ? normalize(current.objEPrime_IMPLICIT, ctx, stackDepth + 1) : undefined
             );
         case 'HomCovFunctorIdentity':
             return HomCovFunctorIdentity(

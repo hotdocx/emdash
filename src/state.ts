@@ -134,7 +134,7 @@ export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
     'Type',  'Var', 'CatTerm', 'ObjTerm', 'HomTerm',
     'FunctorCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
-    'FunctorTypeTerm', 'MkFunctorTerm'
+    'FunctorTypeTerm', 'MkFunctorTerm', 'FDApp1Term', 'TDApp1Term'
 ]);
 
 /**
@@ -311,6 +311,10 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'TApp1FApp0Term':
             return `(tapp1_fapp0 ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_f, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'FDApp1Term':
+            return `(fdapp1_fapp0 ${printTerm(current.displayedFunctor, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_sigma, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'TDApp1Term':
+            return `(tdapp1_fapp0 ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_sigma, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomCovFunctorIdentity':
             return `(HomCovFunctor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objW_InDomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'MkFunctorTerm':

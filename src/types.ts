@@ -70,6 +70,32 @@ export type BaseTerm =
         objX_A_IMPLICIT?: Term,
         objY_A_IMPLICIT?: Term
       }
+    | { tag: 'FDApp1Term', // fdapp1_fapp0 FF sigma (displayed off-diagonal functor action)
+        displayedFunctor: Term,
+        morphism_sigma: Term,
+        catZ_IMPLICIT?: Term,
+        catdE_IMPLICIT?: Term,
+        catdD_IMPLICIT?: Term,
+        objZ_IMPLICIT?: Term,
+        objE_IMPLICIT?: Term,
+        objZPrime_IMPLICIT?: Term,
+        homF_IMPLICIT?: Term,
+        objEPrime_IMPLICIT?: Term
+      }
+    | { tag: 'TDApp1Term', // tdapp1_fapp0 eps sigma (displayed off-diagonal transfor component)
+        transformation: Term,
+        morphism_sigma: Term,
+        catZ_IMPLICIT?: Term,
+        catdE_IMPLICIT?: Term,
+        catdD_IMPLICIT?: Term,
+        functorFF_IMPLICIT?: Term,
+        functorGG_IMPLICIT?: Term,
+        objZ_IMPLICIT?: Term,
+        objE_IMPLICIT?: Term,
+        objZPrime_IMPLICIT?: Term,
+        homF_IMPLICIT?: Term,
+        objEPrime_IMPLICIT?: Term
+      }
     // Emdash Phase 3: Yoneda and Set Category Primitives
     | { tag: 'HomCovFunctorIdentity', domainCat: Term, objW_InDomainCat: Term }
     | { tag: 'SetTerm' }
@@ -219,6 +245,62 @@ export const TApp1FApp0Term = (
     objY_A_IMPLICIT?: Term
 ): Term & { tag: 'TApp1FApp0Term' } =>
     ({ tag: 'TApp1FApp0Term', transformation, morphism_f, catA_IMPLICIT, catB_IMPLICIT, functorF_IMPLICIT, functorG_IMPLICIT, objX_A_IMPLICIT, objY_A_IMPLICIT });
+
+export const FDApp1Term = (
+    displayedFunctor: Term,
+    morphism_sigma: Term,
+    catZ_IMPLICIT?: Term,
+    catdE_IMPLICIT?: Term,
+    catdD_IMPLICIT?: Term,
+    objZ_IMPLICIT?: Term,
+    objE_IMPLICIT?: Term,
+    objZPrime_IMPLICIT?: Term,
+    homF_IMPLICIT?: Term,
+    objEPrime_IMPLICIT?: Term
+): Term & { tag: 'FDApp1Term' } =>
+    ({
+        tag: 'FDApp1Term',
+        displayedFunctor,
+        morphism_sigma,
+        catZ_IMPLICIT,
+        catdE_IMPLICIT,
+        catdD_IMPLICIT,
+        objZ_IMPLICIT,
+        objE_IMPLICIT,
+        objZPrime_IMPLICIT,
+        homF_IMPLICIT,
+        objEPrime_IMPLICIT
+    });
+
+export const TDApp1Term = (
+    transformation: Term,
+    morphism_sigma: Term,
+    catZ_IMPLICIT?: Term,
+    catdE_IMPLICIT?: Term,
+    catdD_IMPLICIT?: Term,
+    functorFF_IMPLICIT?: Term,
+    functorGG_IMPLICIT?: Term,
+    objZ_IMPLICIT?: Term,
+    objE_IMPLICIT?: Term,
+    objZPrime_IMPLICIT?: Term,
+    homF_IMPLICIT?: Term,
+    objEPrime_IMPLICIT?: Term
+): Term & { tag: 'TDApp1Term' } =>
+    ({
+        tag: 'TDApp1Term',
+        transformation,
+        morphism_sigma,
+        catZ_IMPLICIT,
+        catdE_IMPLICIT,
+        catdD_IMPLICIT,
+        functorFF_IMPLICIT,
+        functorGG_IMPLICIT,
+        objZ_IMPLICIT,
+        objE_IMPLICIT,
+        objZPrime_IMPLICIT,
+        homF_IMPLICIT,
+        objEPrime_IMPLICIT
+    });
 
 // emdash2 naming aliases over existing kernel heads.
 export const FApp0Term = FMap0Term;

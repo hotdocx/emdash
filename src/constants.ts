@@ -27,6 +27,8 @@ type FMap0TermTypeExt = Extract<BaseTerm, { tag: 'FMap0Term' }>;
 type FMap1TermTypeExt = Extract<BaseTerm, { tag: 'FMap1Term' }>;
 type NatTransComponentTermTypeExt = Extract<BaseTerm, { tag: 'NatTransComponentTerm' }>;
 type TApp1FApp0TermTypeExt = Extract<BaseTerm, { tag: 'TApp1FApp0Term' }>;
+type FDApp1TermTypeExt = Extract<BaseTerm, { tag: 'FDApp1Term' }>;
+type TDApp1TermTypeExt = Extract<BaseTerm, { tag: 'TDApp1Term' }>;
 
 // Array of specs, easier to iterate and type-safe
 // We cast to 'any' for the T in KernelImplicitSpec<T> because T varies for each element.
@@ -47,5 +49,13 @@ export const KERNEL_IMPLICIT_SPECS: Array<KernelImplicitSpec<any>> = [
     {
         tag: 'TApp1FApp0Term',
         fields: ['catA_IMPLICIT', 'catB_IMPLICIT', 'functorF_IMPLICIT', 'functorG_IMPLICIT', 'objX_A_IMPLICIT', 'objY_A_IMPLICIT']
-    } as KernelImplicitSpec<TApp1FApp0TermTypeExt>
+    } as KernelImplicitSpec<TApp1FApp0TermTypeExt>,
+    {
+        tag: 'FDApp1Term',
+        fields: ['catZ_IMPLICIT', 'catdE_IMPLICIT', 'catdD_IMPLICIT', 'objZ_IMPLICIT', 'objE_IMPLICIT', 'objZPrime_IMPLICIT', 'homF_IMPLICIT', 'objEPrime_IMPLICIT']
+    } as KernelImplicitSpec<FDApp1TermTypeExt>,
+    {
+        tag: 'TDApp1Term',
+        fields: ['catZ_IMPLICIT', 'catdE_IMPLICIT', 'catdD_IMPLICIT', 'functorFF_IMPLICIT', 'functorGG_IMPLICIT', 'objZ_IMPLICIT', 'objE_IMPLICIT', 'objZPrime_IMPLICIT', 'homF_IMPLICIT', 'objEPrime_IMPLICIT']
+    } as KernelImplicitSpec<TDApp1TermTypeExt>
 ];
