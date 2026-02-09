@@ -80,7 +80,7 @@ OK, thank you Josef Urban for your attention to these documents, and I am lookin
 
 References:
 [1] Kosta Dosen, Zoran Petric (1999). "Cut-Elimination in Categories"
-[2] This summer visit to Ambrus Kaposi in Budapest, and insightful feedback at RHPL@FSTTCS 2025 in India
+[2] This summer visit to Ambrus Kaposi in Budapest, and discussions at RHPL@FSTTCS 2025 in India
 [3] GPT-5.3-Codex
 
 
