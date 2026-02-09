@@ -88,6 +88,118 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         return null;
     };
 
+    const tryReduceDisplayedVerticalTdapp0 = (appTerm: Term): Term | null => {
+        const args: Array<{ arg: Term; icit: Icit }> = [];
+        let head: Term = appTerm;
+        while (getTermRef(head).tag === 'App') {
+            const app = getTermRef(head) as Term & { tag: 'App' };
+            args.push({ arg: app.arg, icit: app.icit });
+            head = app.func;
+        }
+        args.reverse();
+
+        const headRef = getTermRef(head);
+        if (headRef.tag !== 'Var' || headRef.name !== 'tdapp0_fapp0') return null;
+        if (args.length !== 8) return null;
+        if (!args.every(a => a.icit === Icit.Expl)) return null;
+
+        const Z = args[0].arg;
+        const E = args[1].arg;
+        const D = args[2].arg;
+        const FF = args[3].arg;
+        const HH = args[4].arg;
+        const Y = args[5].arg;
+        const V = args[6].arg;
+        const compEtaEpsRaw = args[7].arg;
+        const compEtaEps = getTermRef(whnf(compEtaEpsRaw, ctx, stackDepth + 1));
+
+        const compArgs: Array<{ arg: Term; icit: Icit }> = [];
+        let compHead: Term = compEtaEps;
+        while (getTermRef(compHead).tag === 'App') {
+            const app = getTermRef(compHead) as Term & { tag: 'App' };
+            compArgs.push({ arg: app.arg, icit: app.icit });
+            compHead = app.func;
+        }
+        compArgs.reverse();
+
+        const compHeadRef = getTermRef(compHead);
+        if (compHeadRef.tag !== 'Var' || compHeadRef.name !== 'compose_morph') return null;
+        if (compArgs.length !== 6) return null;
+
+        const C = compArgs[0].arg;
+        const X = compArgs[1].arg;
+        const G = compArgs[2].arg;
+        const Zobj = compArgs[3].arg;
+        const eta = compArgs[4].arg;
+        const eps = compArgs[5].arg;
+
+        const functordCat = FunctordCategoryTerm(Z, E, D);
+        if (!areStructurallyEqualNoWhnf(C, functordCat, ctx, stackDepth + 1)) return null;
+        if (!areStructurallyEqualNoWhnf(X, FF, ctx, stackDepth + 1)) return null;
+        if (!areStructurallyEqualNoWhnf(Zobj, HH, ctx, stackDepth + 1)) return null;
+        const GG = G;
+
+        const tdHead = (fDom: Term, fCod: Term): Term =>
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(
+                                    App(Var('tdapp0_fapp0'), Z, Icit.Expl),
+                                    E, Icit.Expl
+                                ),
+                                D, Icit.Expl
+                            ),
+                            fDom, Icit.Expl
+                        ),
+                        fCod, Icit.Expl
+                    ),
+                    Y, Icit.Expl
+                ),
+                V, Icit.Expl
+            );
+
+        const tdEta = App(tdHead(GG, HH), eta, Icit.Expl);
+        const tdEps = App(tdHead(FF, GG), eps, Icit.Expl);
+
+        const fd = (Fobj: Term): Term =>
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var('fdapp0'), Z, Icit.Expl),
+                                E, Icit.Expl
+                            ),
+                            D, Icit.Expl
+                        ),
+                        Fobj, Icit.Expl
+                    ),
+                    Y, Icit.Expl
+                ),
+                V, Icit.Expl
+            );
+
+        const fibreDY = App(App(App(Var('Fibre'), Z, Icit.Expl), D, Icit.Expl), Y, Icit.Expl);
+        return App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(Var('compose_morph'), fibreDY, Icit.Impl),
+                            fd(FF), Icit.Impl
+                        ),
+                        fd(GG), Icit.Impl
+                    ),
+                    fd(HH), Icit.Impl
+                ),
+                tdEta, Icit.Expl
+            ),
+            tdEps, Icit.Expl
+        );
+    };
+
     for (let i = 0; i < MAX_WHNF_ITERATIONS; i++) {
         let changedInThisPass = false;
         const termAtStartOfOuterPass = current;
@@ -132,6 +244,13 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         let reducedInKernelBlock = false;
         switch (current.tag) {
             case 'App': {
+                const displayedVertical = tryReduceDisplayedVerticalTdapp0(current);
+                if (displayedVertical) {
+                    current = displayedVertical;
+                    reducedInKernelBlock = true;
+                    break;
+                }
+
                 const fibrePointwise = tryReduceFibreOfDisplayedFamily(current);
                 if (fibrePointwise) {
                     current = fibrePointwise;

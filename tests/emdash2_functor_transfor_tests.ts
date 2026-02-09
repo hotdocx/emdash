@@ -21,6 +21,8 @@ const fibreOf = (Z: Term, E: Term, z: Term): Term =>
     App(App(App(Var('Fibre'), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
 const functordOf = (Z: Term, E: Term, D: Term): Term =>
     App(App(App(Var('Functord'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+const functordCatOf = (Z: Term, E: Term, D: Term): Term =>
+    App(App(App(Var('Functord_cat'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
 const transfdOf = (Z: Term, E: Term, D: Term, FF: Term, GG: Term): Term =>
     App(App(App(App(App(Var('Transfd'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl);
 const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term =>
@@ -463,6 +465,119 @@ describe('Emdash2 Functor/Transfor Elaboration', () => {
         assert.ok(
             areEqual(result.type, expectedType, emptyCtx),
             `Expected tdapp1_fapp0 type ${printTerm(expectedType)}, got ${printTerm(result.type)}`
+        );
+    });
+
+    it('reduces displayed strict vertical composition: (η ∘ ϵ)_(Y,V) ↪ η_(Y,V) ∘ ϵ_(Y,V)', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+
+        const CatdZ = catdOf(Z);
+        defineGlobal('E', CatdZ);
+        defineGlobal('D', CatdZ);
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('Y', ObjTerm(Z));
+        const Y = Var('Y');
+        defineGlobal('V', ObjTerm(fibreOf(Z, E, Y)));
+        const V = Var('V');
+
+        defineGlobal('FF', functordOf(Z, E, D));
+        defineGlobal('GG', functordOf(Z, E, D));
+        defineGlobal('HH', functordOf(Z, E, D));
+        const FF = Var('FF');
+        const GG = Var('GG');
+        const HH = Var('HH');
+
+        defineGlobal('epsd', transfdOf(Z, E, D, FF, GG));
+        defineGlobal('etad', transfdOf(Z, E, D, GG, HH));
+        const epsd = Var('epsd');
+        const etad = Var('etad');
+
+        const functordCat = functordCatOf(Z, E, D);
+        const compEtaEps = composeOf(functordCat, FF, GG, HH, etad, epsd);
+
+        const tdHeadFFHH = App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var('tdapp0_fapp0'), Z, Icit.Expl),
+                                E, Icit.Expl
+                            ),
+                            D, Icit.Expl
+                        ),
+                        FF, Icit.Expl
+                    ),
+                    HH, Icit.Expl
+                ),
+                Y, Icit.Expl
+            ),
+            V, Icit.Expl
+        );
+        const tdHeadGGHH = App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var('tdapp0_fapp0'), Z, Icit.Expl),
+                                E, Icit.Expl
+                            ),
+                            D, Icit.Expl
+                        ),
+                        GG, Icit.Expl
+                    ),
+                    HH, Icit.Expl
+                ),
+                Y, Icit.Expl
+            ),
+            V, Icit.Expl
+        );
+        const tdHeadFFGG = App(
+            App(
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var('tdapp0_fapp0'), Z, Icit.Expl),
+                                E, Icit.Expl
+                            ),
+                            D, Icit.Expl
+                        ),
+                        FF, Icit.Expl
+                    ),
+                    GG, Icit.Expl
+                ),
+                Y, Icit.Expl
+            ),
+            V, Icit.Expl
+        );
+
+        const lhs = App(tdHeadFFHH, compEtaEps, Icit.Expl);
+
+        const fdFF = fdapp0Of(Z, E, D, FF, Y, V);
+        const fdGG = fdapp0Of(Z, E, D, GG, Y, V);
+        const fdHH = fdapp0Of(Z, E, D, HH, Y, V);
+        const rhs = composeOf(
+            fibreOf(Z, D, Y),
+            fdFF,
+            fdGG,
+            fdHH,
+            App(tdHeadGGHH, etad, Icit.Expl),
+            App(tdHeadFFGG, epsd, Icit.Expl)
+        );
+
+        const lhsElab = elaborate(lhs);
+        const rhsElab = elaborate(rhs);
+        const lhsNf = normalize(lhsElab.term, emptyCtx);
+        const rhsNf = normalize(rhsElab.term, emptyCtx);
+
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected displayed strict vertical reduction.\nLHS_nf: ${printTerm(lhsNf)}\nRHS_nf: ${printTerm(rhsNf)}`
         );
     });
 
