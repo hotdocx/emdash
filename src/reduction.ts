@@ -229,6 +229,22 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                     // Hom in functor category is NatTransType
                     current = NatTransTypeTerm(cat_whnf_ref.domainCat, cat_whnf_ref.codomainCat, current.dom, current.cod);
                     reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'FunctordCategoryTerm') {
+                    // Hom in displayed-functor category is displayed transfor type.
+                    current = App(
+                        App(
+                            App(
+                                App(
+                                    App(Var("Transfd"), cat_whnf_ref.baseCat, Icit.Expl),
+                                    cat_whnf_ref.displayedDom, Icit.Expl
+                                ),
+                                cat_whnf_ref.displayedCod, Icit.Expl
+                            ),
+                            current.dom, Icit.Expl
+                        ),
+                        current.cod, Icit.Expl
+                    );
+                    reducedInKernelBlock = true;
                 } else if (getTermRef(current.cat) !== cat_whnf_ref) {
                     current = HomTerm(cat_whnf_ref, current.dom, current.cod);
                     reducedInKernelBlock = true;

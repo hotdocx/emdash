@@ -18,6 +18,8 @@ const catdOf = (Z: Term): Term => App(Var('Catd'), Z, Icit.Expl);
 const fibreOf = (Z: Term, E: Term, z: Term): Term =>
     App(App(App(Var('Fibre'), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
 const catConstCatdOf = (Z: Term): Term => App(Var('CatConst_catd'), Z, Icit.Expl);
+const functorCatdOf = (Z: Term, E: Term, D: Term): Term =>
+    App(App(App(Var('Functor_catd'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
 const catAtOf = (Z: Term, z: Term): Term => ObjTerm(fibreOf(Z, catConstCatdOf(Z), z));
 const homdTypeWithModes = (Z: Term, E: Term): Term =>
     PiMode('b0', Icit.Expl, ObjTerm(Z), b0 =>
@@ -26,6 +28,19 @@ const homdTypeWithModes = (Z: Term, E: Term): Term =>
     PiMode('f', Icit.Expl, HomTerm(Z, b0, b1), _f =>
     PiMode('e1', Icit.Expl, ObjTerm(fibreOf(Z, E, b1)), _e1 =>
         catAtOf(Z, b1),
+        { mode: BinderMode.Natural, controllerCat: Z }
+    ), { mode: BinderMode.Natural, controllerCat: Z }
+    ), { mode: BinderMode.Functorial, controllerCat: Z }
+    ), { mode: BinderMode.Natural, controllerCat: Z }
+    ), { mode: BinderMode.Functorial, controllerCat: Z });
+
+const homdCatTypeWithModes = (Z: Term, E: Term): Term =>
+    PiMode('b0', Icit.Expl, ObjTerm(Z), b0 =>
+    PiMode('e0', Icit.Expl, ObjTerm(fibreOf(Z, E, b0)), _e0 =>
+    PiMode('b1', Icit.Expl, ObjTerm(Z), b1 =>
+    PiMode('f', Icit.Expl, HomTerm(Z, b0, b1), _f =>
+    PiMode('e1', Icit.Expl, ObjTerm(fibreOf(Z, E, b1)), _e1 =>
+        ObjTerm(fibreOf(Z, functorCatdOf(Z, E, catConstCatdOf(Z)), b1)),
         { mode: BinderMode.Natural, controllerCat: Z }
     ), { mode: BinderMode.Natural, controllerCat: Z }
     ), { mode: BinderMode.Functorial, controllerCat: Z }
@@ -52,6 +67,10 @@ function mkHomdApp(head: string, Z: Term, E: Term, b0: Term, e0: Term, b1: Term,
         ),
         e1, Icit.Expl
     );
+}
+
+function mkHomdCatApp(head: string, Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term {
+    return mkHomdApp(head, Z, E, b0, e0, b1, f, e1);
 }
 
 describe('Emdash2 homd_curry alias declaration', () => {
@@ -300,5 +319,93 @@ describe('Emdash2 homd_curry alias declaration', () => {
             /Mode error/,
             'Expected object-only endpoints to be rejected for Hom binders'
         );
+    });
+
+    it('declares categorical alias_homd_curry_cat with Functor_catd-nested codomain', () => {
+        const cat = globalDefs.get('homd_curry_cat');
+        const alias = globalDefs.get('alias_homd_curry_cat');
+        const etaCopy = globalDefs.get('homd_curry_cat_eta_copy');
+
+        assert.ok(cat?.type, 'homd_curry_cat must be declared in stdlib');
+        assert.ok(alias?.type, 'alias_homd_curry_cat must be declared in stdlib');
+        assert.ok(etaCopy?.type, 'homd_curry_cat_eta_copy must be declared in stdlib');
+        assert.ok(
+            areEqual(cat!.type, alias!.type, emptyCtx),
+            `alias_homd_curry_cat type must match homd_curry_cat.\nhomd_curry_cat: ${printTerm(cat!.type)}\nalias_homd_curry_cat: ${printTerm(alias!.type)}`
+        );
+        assert.ok(
+            areEqual(cat!.type, etaCopy!.type, emptyCtx),
+            `homd_curry_cat_eta_copy type must match homd_curry_cat.\nhomd_curry_cat: ${printTerm(cat!.type)}\neta_copy: ${printTerm(etaCopy!.type)}`
+        );
+    });
+
+    it('types categorical homd_curry_cat applications and eta-copy to Functor_catd fibre codomain', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+
+        defineGlobal('E', catdOf(Z));
+        const E = Var('E');
+
+        defineGlobal('b0', ObjTerm(Z));
+        defineGlobal('b1', ObjTerm(Z));
+        const b0 = Var('b0');
+        const b1 = Var('b1');
+
+        defineGlobal('e0', ObjTerm(fibreOf(Z, E, b0)));
+        defineGlobal('e1', ObjTerm(fibreOf(Z, E, b1)));
+        const e0 = Var('e0');
+        const e1 = Var('e1');
+
+        defineGlobal('f', HomTerm(Z, b0, b1));
+        const f = Var('f');
+
+        const catApp = mkHomdCatApp('homd_curry_cat', Z, E, b0, e0, b1, f, e1);
+        const aliasApp = mkHomdCatApp('alias_homd_curry_cat', Z, E, b0, e0, b1, f, e1);
+        const etaCopyApp = mkHomdCatApp('homd_curry_cat_eta_copy', Z, E, b0, e0, b1, f, e1);
+
+        const catRes = elaborate(catApp);
+        const aliasRes = elaborate(aliasApp);
+        const etaCopyRes = elaborate(etaCopyApp);
+        const expectedType = ObjTerm(fibreOf(Z, functorCatdOf(Z, E, catConstCatdOf(Z)), b1));
+
+        assert.ok(
+            areEqual(catRes.type, expectedType, emptyCtx),
+            `Expected homd_curry_cat application type ${printTerm(expectedType)}, got ${printTerm(catRes.type)}`
+        );
+        assert.ok(
+            areEqual(aliasRes.type, expectedType, emptyCtx),
+            `Expected alias_homd_curry_cat application type ${printTerm(expectedType)}, got ${printTerm(aliasRes.type)}`
+        );
+        assert.ok(
+            areEqual(etaCopyRes.type, expectedType, emptyCtx),
+            `Expected homd_curry_cat_eta_copy application type ${printTerm(expectedType)}, got ${printTerm(etaCopyRes.type)}`
+        );
+        assert.ok(
+            areEqual(etaCopyRes.term, catRes.term, emptyCtx),
+            `Expected categorical eta-copy application to be convertible with homd_curry_cat.\neta-copy: ${printTerm(etaCopyRes.term)}\nhomd_curry_cat: ${printTerm(catRes.term)}`
+        );
+    });
+
+    it('accepts mode-annotated categorical eta skeleton against explicit Functor_catd-based Pi type', () => {
+        defineGlobal('Z', CatTerm());
+        const Z = Var('Z');
+        defineGlobal('E', catdOf(Z));
+        const E = Var('E');
+
+        const expectedModeType = homdCatTypeWithModes(Z, E);
+        const skeleton = LamMode('b0', Icit.Expl, ObjTerm(Z), b0 =>
+            LamMode('e0', Icit.Expl, ObjTerm(fibreOf(Z, E, b0)), _e0 =>
+            LamMode('b1', Icit.Expl, ObjTerm(Z), b1 =>
+            LamMode('f', Icit.Expl, HomTerm(Z, b0, b1), _f =>
+            LamMode('e1', Icit.Expl, ObjTerm(fibreOf(Z, E, b1)), _e1 =>
+                Hole('alias_homd_cat_mode_body')
+            , { mode: BinderMode.Natural, controllerCat: Z })
+            , { mode: BinderMode.Natural, controllerCat: Z })
+            , { mode: BinderMode.Functorial, controllerCat: Z })
+            , { mode: BinderMode.Natural, controllerCat: Z })
+            , { mode: BinderMode.Functorial, controllerCat: Z });
+
+        const checked = check(emptyCtx, skeleton, expectedModeType);
+        assert.equal(checked.tag, 'Lam', 'expected mode-annotated categorical lambda skeleton to type-check');
     });
 });

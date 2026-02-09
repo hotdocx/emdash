@@ -179,6 +179,8 @@ export function setupPhase1GlobalsAndRules() {
         App(App(App(Var("Fibre"), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
     const FunctordOf = (Z: Term, E: Term, D: Term): Term =>
         App(App(App(Var("Functord"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+    const FunctorCatdOf = (Z: Term, E: Term, D: Term): Term =>
+        App(App(App(Var("Functor_catd"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
     const CatConstCatdOf = (Z: Term): Term =>
         App(Var("CatConst_catd"), Z, Icit.Expl);
     const CatAtOf = (Z: Term, z: Term): Term =>
@@ -335,6 +337,21 @@ export function setupPhase1GlobalsAndRules() {
         ), { mode: BinderMode.Natural, controllerCat: Z }
         ), { mode: BinderMode.Functorial, controllerCat: Z });
 
+    // More categorical stress-test shape: codomain is a fibre of Functor_catd(E, CatConst_catd(Z)).
+    // This mirrors the "nested implication as functor" intent from emdash2's homd_curry pipeline.
+    const homdCurryCategoricalBodyType = (Z: Term, E: Term): Term =>
+        PiMode("b0", Icit.Expl, ObjTerm(Z), b0 =>
+        PiMode("e0", Icit.Expl, ObjTerm(FibreOf(Z, E, b0)), _e0 =>
+        PiMode("b1", Icit.Expl, ObjTerm(Z), b1 =>
+        PiMode("f", Icit.Expl, HomTerm(Z, b0, b1), _f =>
+        PiMode("e1", Icit.Expl, ObjTerm(FibreOf(Z, E, b1)), _e1 =>
+            ObjTerm(FibreOf(Z, FunctorCatdOf(Z, E, CatConstCatdOf(Z)), b1)),
+            { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Functorial, controllerCat: Z }
+        ), { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Functorial, controllerCat: Z });
+
     const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term =>
         App(
             App(
@@ -471,6 +488,70 @@ export function setupPhase1GlobalsAndRules() {
         Pi("E", Icit.Expl, CatdOf(Z), E =>
             homdCurryBodyType(Z, E))),
         homdCurryEtaValue
+    );
+
+    // Categorical stress-test variant: a homd_curry-like declaration whose codomain uses Functor_catd.
+    defineGlobal("homd_curry_cat",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+            homdCurryCategoricalBodyType(Z, E))),
+        undefined, true, true
+    );
+
+    defineGlobal("alias_homd_curry_cat",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+            homdCurryCategoricalBodyType(Z, E))),
+        undefined, true, true
+    );
+
+    const homdCurryCatEtaValue =
+        LamMode("Z", Icit.Expl, CatTerm(), Z =>
+            LamMode("E", Icit.Expl, CatdOf(Z), E =>
+                LamMode("b0", Icit.Expl, ObjTerm(Z), b0 =>
+                    LamMode("e0", Icit.Expl, ObjTerm(FibreOf(Z, E, b0)), e0 =>
+                        LamMode("b1", Icit.Expl, ObjTerm(Z), b1 =>
+                            LamMode("f", Icit.Expl, HomTerm(Z, b0, b1), f =>
+                                LamMode("e1", Icit.Expl, ObjTerm(FibreOf(Z, E, b1)), e1 =>
+                                    App(
+                                        App(
+                                            App(
+                                                App(
+                                                    App(
+                                                        App(
+                                                            App(Var("homd_curry_cat"), Z, Icit.Expl),
+                                                            E, Icit.Expl
+                                                        ),
+                                                        b0, Icit.Expl
+                                                    ),
+                                                    e0, Icit.Expl
+                                                ),
+                                                b1, Icit.Expl
+                                            ),
+                                            f, Icit.Expl
+                                        ),
+                                        e1, Icit.Expl
+                                    ),
+                                    { mode: BinderMode.Natural, controllerCat: Z }
+                                ),
+                                { mode: BinderMode.Natural, controllerCat: Z }
+                            ),
+                            { mode: BinderMode.Functorial, controllerCat: Z }
+                        ),
+                        { mode: BinderMode.Natural, controllerCat: Z }
+                    ),
+                    { mode: BinderMode.Functorial, controllerCat: Z }
+                ),
+                { mode: BinderMode.Functorial, controllerCat: Z }
+            ),
+            { mode: BinderMode.Functorial }
+        );
+
+    defineGlobal("homd_curry_cat_eta_copy",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+            homdCurryCategoricalBodyType(Z, E))),
+        homdCurryCatEtaValue
     );
 
     defineGlobal("identity_morph",
