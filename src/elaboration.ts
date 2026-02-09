@@ -9,7 +9,7 @@ import {
     Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, Let, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
-    MkFunctorTerm, TApp1FApp0Term
+    MkFunctorTerm, TApp1FApp0Term, BinderMode, LamMode, PiMode
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
@@ -81,6 +81,92 @@ export function ensureKernelImplicitsPresent(term: Term): Term {
 export interface InferResult {
     elaboratedTerm: Term;
     type: Term;
+}
+
+const modeLabel = (mode: BinderMode): string => {
+    switch (mode) {
+        case BinderMode.Functorial: return ':^f';
+        case BinderMode.Natural: return ':^n';
+        case BinderMode.ObjectOnly: return ':^o';
+        default: return String(mode);
+    }
+};
+
+function resolveBinderMeta(
+    ctx: Context,
+    binderName: string,
+    lamMode?: BinderMode,
+    lamController?: Term,
+    piMode?: BinderMode,
+    piController?: Term
+): { mode: BinderMode, controllerCat?: Term } {
+    if (lamMode !== undefined && piMode !== undefined && lamMode !== piMode) {
+        throw new Error(
+            `Mode error on binder '${binderName}': lambda mode ${modeLabel(lamMode)} ` +
+            `conflicts with expected mode ${modeLabel(piMode)}`
+        );
+    }
+    if (lamController && piController && !areEqual(lamController, piController, ctx)) {
+        throw new Error(
+            `Mode error on binder '${binderName}': lambda controller ${printTerm(lamController)} ` +
+            `conflicts with expected controller ${printTerm(piController)}`
+        );
+    }
+    return {
+        mode: lamMode ?? piMode ?? BinderMode.Functorial,
+        controllerCat: lamController ?? piController
+    };
+}
+
+function validateBinderModeDiscipline(
+    ctx: Context,
+    binderName: string,
+    binderType: Term,
+    binderMode: BinderMode,
+    binderController?: Term
+): void {
+    const rType = getTermRef(binderType);
+    if (rType.tag !== 'HomTerm') return;
+
+    const homCat = getTermRef(rType.cat);
+
+    if (binderMode === BinderMode.ObjectOnly) {
+        throw new Error(
+            `Mode error on binder '${binderName}': ${modeLabel(BinderMode.ObjectOnly)} cannot bind arrows of type ${printTerm(rType)}`
+        );
+    }
+
+    if (binderController && !areEqual(getTermRef(binderController), homCat, ctx)) {
+        throw new Error(
+            `Mode error on binder '${binderName}': controller ${printTerm(binderController)} ` +
+            `does not match hom base category ${printTerm(homCat)}`
+        );
+    }
+
+    const checkEndpoint = (endpoint: Term, endpointLabel: 'dom' | 'cod') => {
+        const rEndpoint = getTermRef(endpoint);
+        if (rEndpoint.tag !== 'Var') return;
+        const endpointBinding = lookupCtx(ctx, rEndpoint.name);
+        if (!endpointBinding) return;
+
+        const endpointMode = endpointBinding.mode ?? BinderMode.Functorial;
+        if (endpointMode !== BinderMode.Functorial) {
+            throw new Error(
+                `Mode error on binder '${binderName}': Hom ${endpointLabel} endpoint '${rEndpoint.name}' ` +
+                `must be ${modeLabel(BinderMode.Functorial)} but is ${modeLabel(endpointMode)}`
+            );
+        }
+
+        if (endpointBinding.controllerCat && !areEqual(getTermRef(endpointBinding.controllerCat), homCat, ctx)) {
+            throw new Error(
+                `Mode error on binder '${binderName}': Hom ${endpointLabel} endpoint '${rEndpoint.name}' ` +
+                `has controller ${printTerm(endpointBinding.controllerCat)} not matching ${printTerm(homCat)}`
+            );
+        }
+    };
+
+    checkEndpoint(rType.dom, 'dom');
+    checkEndpoint(rType.cod, 'cod');
 }
 
 /**
@@ -237,10 +323,13 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
                 (actualParamType as Term & {tag:'Hole'}).elaboratedType = Type();
             }
             const elaboratedParamType = getTermRef(actualParamType);
+            const lamMode = lamNode.mode ?? BinderMode.Functorial;
+            const lamController = lamNode.controllerCat;
+            validateBinderModeDiscipline(ctx, lamNode.paramName, elaboratedParamType, lamMode, lamController);
 
             // To infer the body, we need a context with the parameter and a placeholder variable
             const freshV = Var(lamNode.paramName, true);
-            const bodyInferCtx = extendCtx(ctx, lamNode.paramName, elaboratedParamType, lamNode.icit);
+            const bodyInferCtx = extendCtx(ctx, lamNode.paramName, elaboratedParamType, lamNode.icit, undefined, lamMode, lamController);
             const lambdaBodyStructure = lamNode.body(freshV); // Instantiate body with a Var
             
             // Infer the body structure ONCE.
@@ -252,24 +341,26 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             const finalInferredBodyType = insertedBody.type;
 
             // Construct the elaborated lambda with a simple substitution body
-            const elaboratedLam = Lam(
+            const elaboratedLam = LamMode(
                 lamNode.paramName,
                 lamNode.icit,
                 elaboratedParamType,
                 (v: Term): Term => {
                     // The body function now only performs substitution
                     return replaceFreeVar(finalElaboratedBody, freshV.name, v);
-                }
+                },
+                { mode: lamMode, controllerCat: lamController }
             );
 
             // Construct the Pi type for the lambda, also with a simple substitution body
-            const piType = Pi(
+            const piType = PiMode(
                 lamNode.paramName,
                 lamNode.icit,
                 elaboratedParamType,
                 (pi_body_argument_term: Term): Term => {
                     return replaceFreeVar(finalInferredBodyType, freshV.name, pi_body_argument_term);
-                }
+                },
+                { mode: lamMode, controllerCat: lamController }
             );
             
             return { elaboratedTerm: elaboratedLam, type: piType };
@@ -278,11 +369,14 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             const piNode = current;
             const elaboratedParamType = check(ctx, piNode.paramType, Type(), stackDepth + 1, options);
             const canonicalParamType = whnf(elaboratedParamType, ctx, stackDepth + 1);
+            const piMode = piNode.mode ?? BinderMode.Functorial;
+            const piController = piNode.controllerCat;
+            validateBinderModeDiscipline(ctx, piNode.paramName, canonicalParamType, piMode, piController);
             
             // To check the body, we need a context with the parameter and a placeholder variable.
             const freshV = Var(piNode.paramName, true);
             // The context is extended with the param type, but not a `let` definition for the variable itself.
-            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, canonicalParamType, piNode.icit);
+            const extendedCtxForBody = extendCtx(ctx, piNode.paramName, canonicalParamType, piNode.icit, undefined, piMode, piController);
             const bodyTypeInstance = piNode.bodyType(freshV); // Instantiate body with the placeholder
             
             // Check that the body is a valid type and get its elaborated form.
@@ -290,11 +384,11 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             // Reconstruct the Pi with the elaborated parameter type and a new body function
             // that correctly substitutes the placeholder in the elaborated body.
-            const finalPi = Pi(piNode.paramName, piNode.icit, getTermRef(canonicalParamType), (v_arg: Term) => {
+            const finalPi = PiMode(piNode.paramName, piNode.icit, getTermRef(canonicalParamType), (v_arg: Term) => {
                 // The elaboratedBodyType has `freshV` as a free variable.
                 // We must replace it with `v_arg` to produce the final body type.
                 return replaceFreeVar(elaboratedBodyType, freshV.name, v_arg);
-            });
+            }, { mode: piMode, controllerCat: piController });
 
             return { elaboratedTerm: finalPi, type: Type() }; // A Pi type itself has type Type
         }
@@ -502,10 +596,13 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         if (!(termRef.tag === 'Lam' && termRef.icit === Icit.Impl)) {
             const lamParamName = expectedTypeWhnf.paramName;
             const lamParamType = getTermRef(expectedTypeWhnf.paramType);
+            const expectedMode = expectedTypeWhnf.mode ?? BinderMode.Functorial;
+            const expectedController = expectedTypeWhnf.controllerCat;
+            validateBinderModeDiscipline(ctx, lamParamName, lamParamType, expectedMode, expectedController);
 
             // Create a placeholder for the implicitly bound variable
             const placeholderVar = Var(lamParamName, true);
-            const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl); // No definition
+            const bodyCheckCtx = extendCtx(ctx, lamParamName, lamParamType, Icit.Impl, undefined, expectedMode, expectedController); // No definition
             
             // Determine the expected type for the body, instantiated with the placeholder
             const bodyExpectedTypeInner = whnf(expectedTypeWhnf.bodyType(placeholderVar), bodyCheckCtx);
@@ -514,13 +611,14 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
             const elaboratedBody = check(bodyCheckCtx, termRef, bodyExpectedTypeInner, stackDepth + 1, options);
             
             // Construct the new lambda with a simple substitution body
-            const newLam = Lam(
+            const newLam = LamMode(
                 lamParamName,
                 Icit.Impl,
                 lamParamType,
                 (v_actual_arg: Term): Term => {
                     return replaceFreeVar(elaboratedBody, placeholderVar.name, v_actual_arg);
-                }
+                },
+                { mode: expectedMode, controllerCat: expectedController }
             );
             return newLam; // Return the new lambda
         }
@@ -544,10 +642,19 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         }
 
         const finalLamParamType = getTermRef(lamParamType); // Ensure it's dereferenced
+        const { mode: finalBinderMode, controllerCat: finalControllerCat } = resolveBinderMeta(
+            ctx,
+            lamNode.paramName,
+            lamNode.mode,
+            lamNode.controllerCat,
+            expectedPiNode.mode,
+            expectedPiNode.controllerCat
+        );
+        validateBinderModeDiscipline(ctx, lamNode.paramName, finalLamParamType, finalBinderMode, finalControllerCat);
 
         // To check the body, instantiate both the lambda body and the expected pi-type body
         const placeholderVar = Var(lamNode.paramName, true);
-        const extendedCtx = extendCtx(ctx, lamNode.paramName, finalLamParamType, lamNode.icit); // NO definition
+        const extendedCtx = extendCtx(ctx, lamNode.paramName, finalLamParamType, lamNode.icit, undefined, finalBinderMode, finalControllerCat); // NO definition
         
         const actualBodyTerm = lamNode.body(placeholderVar);
         const expectedBodyPiType = whnf(expectedPiNode.bodyType(placeholderVar), extendedCtx);
@@ -556,9 +663,9 @@ export function check(ctx: Context, term: Term, expectedType: Term, stackDepth: 
         const elaboratedBody = check(extendedCtx, actualBodyTerm, expectedBodyPiType, stackDepth + 1, options);
         
         // Reconstruct the Lam with the elaborated components
-        return Lam(lamNode.paramName, lamNode.icit, finalLamParamType, (v: Term) => {
+        return LamMode(lamNode.paramName, lamNode.icit, finalLamParamType, (v: Term) => {
             return replaceFreeVar(elaboratedBody, placeholderVar.name, v);
-        });
+        }, { mode: finalBinderMode, controllerCat: finalControllerCat });
     }
 
     // Special handling for holes: if a hole is checked against a type,

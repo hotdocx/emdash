@@ -9,7 +9,7 @@ import {
     Term, Context, Icit, Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm
+    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -226,13 +226,17 @@ export function setupPhase1GlobalsAndRules() {
 
     // homd_curry-style dependent-hom declaration (type-only milestone).
     const homdCurryBodyType = (Z: Term, E: Term): Term =>
-        Pi("b0", Icit.Expl, ObjTerm(Z), b0 =>
-        Pi("e0", Icit.Expl, ObjTerm(FibreOf(Z, E, b0)), _e0 =>
-        Pi("b1", Icit.Expl, ObjTerm(Z), b1 =>
-        Pi("f", Icit.Expl, HomTerm(Z, b0, b1), _f =>
-        Pi("e1", Icit.Expl, ObjTerm(FibreOf(Z, E, b1)), _e1 =>
-            CatAtOf(Z, b1)
-        )))));
+        PiMode("b0", Icit.Expl, ObjTerm(Z), b0 =>
+        PiMode("e0", Icit.Expl, ObjTerm(FibreOf(Z, E, b0)), _e0 =>
+        PiMode("b1", Icit.Expl, ObjTerm(Z), b1 =>
+        PiMode("f", Icit.Expl, HomTerm(Z, b0, b1), _f =>
+        PiMode("e1", Icit.Expl, ObjTerm(FibreOf(Z, E, b1)), _e1 =>
+            CatAtOf(Z, b1),
+            { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Functorial, controllerCat: Z }
+        ), { mode: BinderMode.Natural, controllerCat: Z }
+        ), { mode: BinderMode.Functorial, controllerCat: Z });
 
     defineGlobal("homd_curry",
         Pi("Z", Icit.Expl, CatTerm(), Z =>
@@ -247,6 +251,56 @@ export function setupPhase1GlobalsAndRules() {
         Pi("E", Icit.Expl, CatdOf(Z), E =>
             homdCurryBodyType(Z, E))),
         undefined, true, true
+    );
+
+    // Eta-expanded stress-test copy with explicit mode-aware lambdas.
+    const homdCurryEtaValue =
+        LamMode("Z", Icit.Expl, CatTerm(), Z =>
+            LamMode("E", Icit.Expl, CatdOf(Z), E =>
+                LamMode("b0", Icit.Expl, ObjTerm(Z), b0 =>
+                    LamMode("e0", Icit.Expl, ObjTerm(FibreOf(Z, E, b0)), e0 =>
+                        LamMode("b1", Icit.Expl, ObjTerm(Z), b1 =>
+                            LamMode("f", Icit.Expl, HomTerm(Z, b0, b1), f =>
+                                LamMode("e1", Icit.Expl, ObjTerm(FibreOf(Z, E, b1)), e1 =>
+                                    App(
+                                        App(
+                                            App(
+                                                App(
+                                                    App(
+                                                        App(
+                                                            App(Var("homd_curry"), Z, Icit.Expl),
+                                                            E, Icit.Expl
+                                                        ),
+                                                        b0, Icit.Expl
+                                                    ),
+                                                    e0, Icit.Expl
+                                                ),
+                                                b1, Icit.Expl
+                                            ),
+                                            f, Icit.Expl
+                                        ),
+                                        e1, Icit.Expl
+                                    ),
+                                    { mode: BinderMode.Natural, controllerCat: Z }
+                                ),
+                                { mode: BinderMode.Natural, controllerCat: Z }
+                            ),
+                            { mode: BinderMode.Functorial, controllerCat: Z }
+                        ),
+                        { mode: BinderMode.Natural, controllerCat: Z }
+                    ),
+                    { mode: BinderMode.Functorial, controllerCat: Z }
+                ),
+                { mode: BinderMode.Functorial, controllerCat: Z }
+            ),
+            { mode: BinderMode.Functorial }
+        );
+
+    defineGlobal("homd_curry_eta_copy",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+            homdCurryBodyType(Z, E))),
+        homdCurryEtaValue
     );
 
     defineGlobal("identity_morph",

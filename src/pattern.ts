@@ -439,6 +439,8 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
 
             const newLam = Lam(lam.paramName, lam.icit, appliedParamType, newBodyFn);
             (newLam as Term & {tag: 'Lam'})._isAnnotated = lam._isAnnotated && appliedParamType !== undefined;
+            newLam.mode = lam.mode;
+            newLam.controllerCat = lam.controllerCat;
             return newLam;
         }
         case 'Pi': {
@@ -455,7 +457,10 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             const newBodyTypeFn = (v_arg: Term) => {
                 return replaceFreeVar(appliedBodyTypeInstance, placeholderVar.name, v_arg);
             };
-            return Pi(pi.paramName, pi.icit, appliedParamType, newBodyTypeFn);
+            const newPi = Pi(pi.paramName, pi.icit, appliedParamType, newBodyTypeFn);
+            newPi.mode = pi.mode;
+            newPi.controllerCat = pi.controllerCat;
+            return newPi;
         }
         case 'Let': {
             const letNode = current;
@@ -695,7 +700,10 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
             // If this lambda binds the variable we want to replace, substitution stops here for the body.
             if (lam.paramName === freeVarName) {
-                return Lam(lam.paramName, lam.icit, paramTypeReplaced, lam.body);
+                const sameLam = Lam(lam.paramName, lam.icit, paramTypeReplaced, lam.body);
+                sameLam.mode = lam.mode;
+                sameLam.controllerCat = lam.controllerCat;
+                return sameLam;
             }
 
             // Check for variable capture.
@@ -716,6 +724,8 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                     return replaceFreeVar(newBody, freshName, v_arg);
                 });
                 (newLam as Term & {tag: 'Lam'})._isAnnotated = lam._isAnnotated && paramTypeReplaced !== undefined;
+                newLam.mode = lam.mode;
+                newLam.controllerCat = lam.controllerCat;
                 return newLam;
             } else {
                 // NO CAPTURE: Proceed with substitution in the body.
@@ -731,6 +741,8 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                 };
                 const resLam = Lam(lam.paramName, lam.icit, paramTypeReplaced, newBodyFn);
                 (resLam as Term & { tag: 'Lam' })._isAnnotated = lam._isAnnotated && paramTypeReplaced !== undefined;
+                resLam.mode = lam.mode;
+                resLam.controllerCat = lam.controllerCat;
                 return resLam;
             }
         }
@@ -740,7 +752,10 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
             // If this Pi binds the variable we want to replace, substitution stops here for the body.
             if (pi.paramName === freeVarName) {
-                return Pi(pi.paramName, pi.icit, newParamType, pi.bodyType);
+                const samePi = Pi(pi.paramName, pi.icit, newParamType, pi.bodyType);
+                samePi.mode = pi.mode;
+                samePi.controllerCat = pi.controllerCat;
+                return samePi;
             }
 
             // Check for variable capture.
@@ -756,9 +771,12 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
 
                 const newBodyType = replaceFreeVar(bodyTypeWithFreshVar, freeVarName, replacementVar, newBoundInScope);
 
-                return Pi(freshName, pi.icit, newParamType, (v_arg: Term) => {
+                const freshPi = Pi(freshName, pi.icit, newParamType, (v_arg: Term) => {
                     return replaceFreeVar(newBodyType, freshName, v_arg);
                 });
+                freshPi.mode = pi.mode;
+                freshPi.controllerCat = pi.controllerCat;
+                return freshPi;
             } else {
                 // NO CAPTURE: Proceed with substitution in the body.
                 const newBoundInScope = new Set(boundInScope);
@@ -772,7 +790,10 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                     return replaceFreeVar(replacedBodyTypeInstance, placeholder.name, v_arg);
                 };
 
-                return Pi(pi.paramName, pi.icit, newParamType, newBodyTypeFn);
+                const resPi = Pi(pi.paramName, pi.icit, newParamType, newBodyTypeFn);
+                resPi.mode = pi.mode;
+                resPi.controllerCat = pi.controllerCat;
+                return resPi;
             }
         }
         case 'Let': {

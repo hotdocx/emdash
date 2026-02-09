@@ -6,13 +6,14 @@
 
 export enum Icit { Impl, Expl }
 export enum BinderMode { Functorial = 'functorial', Natural = 'natural', ObjectOnly = 'object_only' }
+export type BinderMeta = { mode?: BinderMode; controllerCat?: Term };
 
 export type BaseTerm =
     | { tag: 'Type' }
     | { tag: 'Var', name: string, isBound?: boolean, origin?: "occurs_check" | "pattern_var" }
-    | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean }
+    | { tag: 'Lam', paramName: string, icit: Icit, paramType?: Term, body: (v: Term) => Term, _isAnnotated: boolean, mode?: BinderMode, controllerCat?: Term }
     | { tag: 'App', func: Term, arg: Term, icit: Icit }
-    | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term }
+    | { tag: 'Pi', paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term, mode?: BinderMode, controllerCat?: Term }
     | { tag: 'Let', letName: string, letType?: Term, letDef: Term, body: (v: Term) => Term, _isAnnotated: boolean }
     | { tag: 'Hole', 
         id: string, 
@@ -113,6 +114,45 @@ export const App = (func: Term, arg: Term, icit: Icit = Icit.Expl): Term & {tag:
 
 export const Pi = (paramName: string, icit: Icit, paramType: Term, bodyType: (v: Term) => Term): Term & {tag: 'Pi'} =>
     ({ tag: 'Pi', paramName, icit, paramType, bodyType });
+
+export const LamMode = (
+    paramName: string,
+    icit: Icit,
+    bodyOrParamType: ((v: Term) => Term) | Term,
+    bodyOrMeta?: ((v: Term) => Term) | BinderMeta,
+    maybeMeta?: BinderMeta
+): Term & { tag: 'Lam' } => {
+    if (typeof bodyOrParamType === 'function') {
+        const lam = Lam(paramName, icit, bodyOrParamType);
+        const meta = (bodyOrMeta && typeof bodyOrMeta !== 'function') ? bodyOrMeta : undefined;
+        if (meta?.mode !== undefined) lam.mode = meta.mode;
+        if (meta?.controllerCat !== undefined) lam.controllerCat = meta.controllerCat;
+        return lam;
+    }
+
+    if (typeof bodyOrMeta !== 'function') {
+        throw new Error(`LamMode expected a body function for annotated lambda '${paramName}'.`);
+    }
+
+    const lam = Lam(paramName, icit, bodyOrParamType, bodyOrMeta);
+    const meta = maybeMeta;
+    if (meta?.mode !== undefined) lam.mode = meta.mode;
+    if (meta?.controllerCat !== undefined) lam.controllerCat = meta.controllerCat;
+    return lam;
+};
+
+export const PiMode = (
+    paramName: string,
+    icit: Icit,
+    paramType: Term,
+    bodyType: (v: Term) => Term,
+    meta?: BinderMeta
+): Term & { tag: 'Pi' } => {
+    const pi = Pi(paramName, icit, paramType, bodyType);
+    if (meta?.mode !== undefined) pi.mode = meta.mode;
+    if (meta?.controllerCat !== undefined) pi.controllerCat = meta.controllerCat;
+    return pi;
+};
 
 export function Let(letName: string, letDef: Term, body: (v: Term) => Term): Term & { tag: 'Let' };
 export function Let(letName: string, letType: Term, letDef: Term, body: (v: Term) => Term): Term & { tag: 'Let' };

@@ -113,7 +113,12 @@ export const extendCtx = (
     mode: BinderMode = BinderMode.Functorial,
     controllerCat?: Term
 ): Context => {
-    return [{ name, type, icit, definition, mode, controllerCat }, ...ctx];
+    let inferredController = controllerCat;
+    const rType = getTermRef(type);
+    if (!inferredController && rType.tag === 'ObjTerm') {
+        inferredController = rType.cat;
+    }
+    return [{ name, type, icit, definition, mode, controllerCat: inferredController }, ...ctx];
 };
 
 /**

@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -341,7 +341,15 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             // Instantiate body with a fresh variable to normalize its structure
             const placeholderVar = Var(currentLam.paramName, true);
             const paramTypeForBodyCtx = normLamParamType || (currentLam.paramType ? getTermRef(currentLam.paramType) : Hole(freshHoleName()+"_norm_lam_body_ctx"));
-            const bodyCtx = extendCtx(ctx, currentLam.paramName, paramTypeForBodyCtx, currentLam.icit);
+            const bodyCtx = extendCtx(
+                ctx,
+                currentLam.paramName,
+                paramTypeForBodyCtx,
+                currentLam.icit,
+                undefined,
+                currentLam.mode ?? BinderMode.Functorial,
+                currentLam.controllerCat
+            );
             
             // Normalize the body structure ONCE
             const normalizedBody = normalize(currentLam.body(placeholderVar), bodyCtx, stackDepth + 1);
@@ -353,6 +361,8 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
 
             const normLam = Lam(currentLam.paramName, currentLam.icit, normLamParamType, newBodyFn) as Term & {tag: 'Lam'};
             normLam._isAnnotated = currentLam._isAnnotated && normLamParamType !== undefined;
+            normLam.mode = currentLam.mode;
+            normLam.controllerCat = currentLam.controllerCat;
             return normLam;
         }
         case 'Let': {
@@ -389,7 +399,15 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
 
             // Instantiate body with a fresh variable to normalize its structure
             const placeholderVar = Var(currentPi.paramName, true);
-            const bodyTypeCtx = extendCtx(ctx, currentPi.paramName, normPiParamType, currentPi.icit);
+            const bodyTypeCtx = extendCtx(
+                ctx,
+                currentPi.paramName,
+                normPiParamType,
+                currentPi.icit,
+                undefined,
+                currentPi.mode ?? BinderMode.Functorial,
+                currentPi.controllerCat
+            );
 
             // Normalize the body structure ONCE
             const normalizedBodyType = normalize(currentPi.bodyType(placeholderVar), bodyTypeCtx, stackDepth + 1);
@@ -398,7 +416,10 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             const newBodyTypeFn = (v_arg_placeholder: Term): Term => {
                 return replaceFreeVar(normalizedBodyType, placeholderVar.name, v_arg_placeholder);
             };
-            return Pi(currentPi.paramName, currentPi.icit, normPiParamType, newBodyTypeFn);
+            const normPi = Pi(currentPi.paramName, currentPi.icit, normPiParamType, newBodyTypeFn);
+            normPi.mode = currentPi.mode;
+            normPi.controllerCat = currentPi.controllerCat;
+            return normPi;
         }
         default: const exhaustiveCheck: never = current; throw new Error(`Normalize: Unhandled term: ${(exhaustiveCheck as any).tag }`);
     }
