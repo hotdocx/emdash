@@ -36,6 +36,25 @@ Binder nuance captured from `EMAIL.md`:
 - `F_BA : Functor B A` (e.g. in `hom_int`-style signatures) stays a plain/object-level binder,
   i.e. `:` / `:^o` intent, not a functorial/natural varying binder.
 
+### 0.2 Strict Symbol Mapping Table (from `emdash2.lp` only)
+
+The following table is the authoritative mapping for TS elaboration updates.
+No inferred reinterpretation is used here.
+
+| Lambdapi symbol | Declared kind in `emdash2.lp` | Verified meaning | Key rule(s) in `emdash2.lp` | TS status |
+|---|---|---|---|---|
+| `Functor_cat` | `Π (A B:Cat), Cat` | ordinary functor category | `Hom_cat (Functor_cat _ _) F G ↪ Transf_cat F G` | implemented |
+| `Functord_cat` | `Π [B:Cat], Π (E D:Catd B), Cat` | displayed functors over fixed base | `Hom_cat (Catd_cat Z) E D ↪ Functord_cat Z E D` | implemented |
+| `Functor_catd` | `Π [Z:Cat], Π (E D:Catd Z), Catd Z` | **displayed** pointwise functor-category (fibrewise) | `Fibre_cat (Functor_catd E D) z ↪ Functor_cat (Fibre_cat E z) (Fibre_cat D z)` | implemented in TS |
+| `Transf_cat` | `Π [A B:Cat], Π (F G:Functor A B), Cat` | transfors between ordinary functors | stable head `Transf := Obj(Transf_cat ...)` + unif helper | implemented |
+| `Transf_catd` | `Π [Z:Cat] [E D:Catd Z], Π (FF GG:Functord E D), Catd Z` | **displayed** pointwise transfor-category (fibrewise) | `Fibre_cat (Transf_catd FF GG) z ↪ Transf_cat (Fibre_func FF z) (Fibre_func GG z)` | implemented in TS |
+| `Transfd_cat` | `Π [Z:Cat] [E D:Catd Z], Π (FF GG:Functord E D), Cat` | displayed-transformation category | `Hom_cat (Functord_cat _ _) F G ↪ Transfd_cat F G` | implemented |
+
+Important correction:
+
+- `Functor_catd` is **not** `Catd (Functor_cat A B)`.
+- It is `Catd Z` with fibre computation into an ordinary `Functor_cat` at each `z`.
+
 ---
 
 ## 1. Ground Truth From Current `emdash2.lp`

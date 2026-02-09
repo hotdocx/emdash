@@ -82,6 +82,23 @@ Special silent coercion (Grothendieck):
 
 For a generic displayed category `E : Catd Z` (not known to be Grothendieck), we use `z:^o Z`.
 
+### 2.1 Internalized category constructors (strict `emdash2.lp` alignment)
+
+Use these constructor meanings exactly:
+
+- `Functor_cat : Cat -> Cat -> Cat`
+- `Functord_cat : [Z:Cat] -> Catd Z -> Catd Z -> Cat`
+- `Functor_catd : [Z:Cat] -> Catd Z -> Catd Z -> Catd Z`
+- `Transf_cat : [A B:Cat] -> Functor A B -> Functor A B -> Cat`
+- `Transf_catd : [Z:Cat] [E D:Catd Z] -> Functord E D -> Functord E D -> Catd Z`
+- `Transfd_cat : [Z:Cat] [E D:Catd Z] -> Functord E D -> Functord E D -> Cat`
+
+Important correction:
+
+- `Functor_catd` is **not** a displayed category over `Functor_cat A B`.
+- It is displayed over the same base `Z`, with fibre rule:
+  `Fibre_cat (Functor_catd E D) z ↪ Functor_cat (Fibre_cat E z) (Fibre_cat D z)`.
+
 ## 3. Core judgments (ω-categorical reading)
 
 Judgments are written in a TT style using `⊢` lines.
