@@ -19,6 +19,7 @@ import './church_encoding_tests';
 import './church_encoding_implicit_tests';
 import './let_binding_tests';
 import './emdash2_functor_transfor_tests';
+import './emdash2_homd_curry_alias_tests';
 import './parser_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
