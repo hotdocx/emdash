@@ -16,6 +16,26 @@ Secondary target:
 
 - align the surface document (`docs/SYNTAX_SURFACE.md`) with the same decisions.
 
+### 0.1 Internalized category-layer implementation note (2026-02-09)
+
+The TS layer now treats these as first-class category objects:
+
+- `Cat_cat`
+- `Catd_cat`
+- `Functor_cat`
+- `Functord_cat`
+- `Transf_cat`
+- `Transfd_cat`
+
+So contexts of the form
+`A : Obj(Cat_cat), B : Obj(Cat_cat), F : Obj(Functor_cat A B), ...`
+are directly representable and tested.
+
+Binder nuance captured from `EMAIL.md`:
+
+- `F_BA : Functor B A` (e.g. in `hom_int`-style signatures) stays a plain/object-level binder,
+  i.e. `:` / `:^o` intent, not a functorial/natural varying binder.
+
 ---
 
 ## 1. Ground Truth From Current `emdash2.lp`
