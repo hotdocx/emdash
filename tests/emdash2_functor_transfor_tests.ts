@@ -4,7 +4,7 @@
  */
 
 import {
-    Term, Var, Icit, CatTerm, ObjTerm, HomTerm, FunctorTypeTerm, NatTransTypeTerm, FMap0Term, TApp1FApp0Term, App, BinderMode, FDApp1Term, TDApp1Term, LamMode, PiMode
+    Term, Var, Icit, CatTerm, ObjTerm, HomTerm, FunctorTypeTerm, NatTransTypeTerm, FMap0Term, FMap1Term, TApp1FApp0Term, App, BinderMode, FDApp1Term, TDApp1Term, LamMode, PiMode
 } from '../src/types';
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';
@@ -14,6 +14,7 @@ import { elaborate } from '../src/elaboration';
 import { areEqual } from '../src/equality';
 import { emptyCtx, extendCtx, lookupCtx, printTerm } from '../src/state';
 import { check } from '../src/elaboration';
+import { normalize } from '../src/reduction';
 
 const catdOf = (Z: Term): Term => App(Var('Catd'), Z, Icit.Expl);
 const fibreOf = (Z: Term, E: Term, z: Term): Term =>
@@ -44,6 +45,23 @@ const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1
     );
 const fdapp0Of = (Z: Term, E: Term, D: Term, FF: Term, z: Term, e: Term): Term =>
     App(App(App(App(App(App(Var('fdapp0'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl);
+const composeOf = (C: Term, X: Term, Y: Term, Z: Term, g: Term, f: Term): Term =>
+    App(
+        App(
+            App(
+                App(
+                    App(
+                        App(Var('compose_morph'), C, Icit.Impl),
+                        X, Icit.Impl
+                    ),
+                    Y, Icit.Impl
+                ),
+                Z, Icit.Impl
+            ),
+            g, Icit.Expl
+        ),
+        f, Icit.Expl
+    );
 
 describe('Emdash2 Functor/Transfor Elaboration', () => {
     beforeEach(() => {
@@ -124,6 +142,142 @@ describe('Emdash2 Functor/Transfor Elaboration', () => {
             () => elaborate(TApp1FApp0Term(eps, bArrow)),
             /Type error|Could not solve constraints|expectedType/,
             'Expected tapp1_fapp0 elaboration to fail with wrong morphism category'
+        );
+    });
+
+    it('reduces strict functoriality composition: F(f) ∘ F(g) ↪ F(f ∘ g)', () => {
+        defineGlobal('A', CatTerm());
+        defineGlobal('B', CatTerm());
+        const A = Var('A');
+        const B = Var('B');
+
+        defineGlobal('W', ObjTerm(A));
+        defineGlobal('X', ObjTerm(A));
+        defineGlobal('Y', ObjTerm(A));
+        const W = Var('W');
+        const X = Var('X');
+        const Y = Var('Y');
+
+        defineGlobal('F', FunctorTypeTerm(A, B));
+        const F = Var('F');
+
+        defineGlobal('g', HomTerm(A, W, X));
+        defineGlobal('f', HomTerm(A, X, Y));
+        const g = Var('g');
+        const f = Var('f');
+
+        const FW = FMap0Term(F, W, A, B);
+        const FX = FMap0Term(F, X, A, B);
+        const FY = FMap0Term(F, Y, A, B);
+        const FgArrow = FMap1Term(F, g, A, B, W, X);
+        const FfArrow = FMap1Term(F, f, A, B, X, Y);
+
+        const lhs = composeOf(B, FW, FX, FY, FfArrow, FgArrow);
+        const fg = composeOf(A, W, X, Y, f, g);
+        const rhs = FMap1Term(F, fg, A, B, W, Y);
+
+        const lhsElab = elaborate(lhs);
+        const rhsElab = elaborate(rhs);
+        const lhsNf = normalize(lhsElab.term, emptyCtx);
+        const rhsNf = normalize(rhsElab.term, emptyCtx);
+
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected strict functoriality reduction.\nLHS_nf: ${printTerm(lhsNf)}\nRHS_nf: ${printTerm(rhsNf)}`
+        );
+    });
+
+    it('reduces strict accumulation (postcomposition): G(g) ∘ ϵ_(f) ↪ ϵ_(g ∘ f)', () => {
+        defineGlobal('A', CatTerm());
+        defineGlobal('B', CatTerm());
+        const A = Var('A');
+        const B = Var('B');
+
+        defineGlobal('X', ObjTerm(A));
+        defineGlobal('Y', ObjTerm(A));
+        defineGlobal('Z', ObjTerm(A));
+        const X = Var('X');
+        const Y = Var('Y');
+        const Z = Var('Z');
+
+        defineGlobal('F', FunctorTypeTerm(A, B));
+        defineGlobal('G', FunctorTypeTerm(A, B));
+        const F = Var('F');
+        const G = Var('G');
+
+        defineGlobal('eps', NatTransTypeTerm(A, B, F, G));
+        const eps = Var('eps');
+
+        defineGlobal('f', HomTerm(A, X, Y));
+        defineGlobal('g', HomTerm(A, Y, Z));
+        const f = Var('f');
+        const g = Var('g');
+
+        const FX = FMap0Term(F, X, A, B);
+        const GY = FMap0Term(G, Y, A, B);
+        const GZ = FMap0Term(G, Z, A, B);
+        const eps_f = TApp1FApp0Term(eps, f, A, B, F, G, X, Y);
+        const Gg = FMap1Term(G, g, A, B, Y, Z);
+
+        const lhs = composeOf(B, FX, GY, GZ, Gg, eps_f);
+        const gf = composeOf(A, X, Y, Z, g, f);
+        const rhs = TApp1FApp0Term(eps, gf, A, B, F, G, X, Z);
+
+        const lhsElab = elaborate(lhs);
+        const rhsElab = elaborate(rhs);
+        const lhsNf = normalize(lhsElab.term, emptyCtx);
+        const rhsNf = normalize(rhsElab.term, emptyCtx);
+
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected postcomposition accumulation reduction.\nLHS_nf: ${printTerm(lhsNf)}\nRHS_nf: ${printTerm(rhsNf)}`
+        );
+    });
+
+    it('reduces strict accumulation (precomposition): ϵ_(f) ∘ F(g) ↪ ϵ_(f ∘ g)', () => {
+        defineGlobal('A', CatTerm());
+        defineGlobal('B', CatTerm());
+        const A = Var('A');
+        const B = Var('B');
+
+        defineGlobal('W', ObjTerm(A));
+        defineGlobal('X', ObjTerm(A));
+        defineGlobal('Y', ObjTerm(A));
+        const W = Var('W');
+        const X = Var('X');
+        const Y = Var('Y');
+
+        defineGlobal('F', FunctorTypeTerm(A, B));
+        defineGlobal('G', FunctorTypeTerm(A, B));
+        const F = Var('F');
+        const G = Var('G');
+
+        defineGlobal('eps', NatTransTypeTerm(A, B, F, G));
+        const eps = Var('eps');
+
+        defineGlobal('g', HomTerm(A, W, X));
+        defineGlobal('f', HomTerm(A, X, Y));
+        const g = Var('g');
+        const f = Var('f');
+
+        const FW = FMap0Term(F, W, A, B);
+        const FX = FMap0Term(F, X, A, B);
+        const GY = FMap0Term(G, Y, A, B);
+        const eps_f = TApp1FApp0Term(eps, f, A, B, F, G, X, Y);
+        const Fg = FMap1Term(F, g, A, B, W, X);
+
+        const lhs = composeOf(B, FW, FX, GY, eps_f, Fg);
+        const fg = composeOf(A, W, X, Y, f, g);
+        const rhs = TApp1FApp0Term(eps, fg, A, B, F, G, W, Y);
+
+        const lhsElab = elaborate(lhs);
+        const rhsElab = elaborate(rhs);
+        const lhsNf = normalize(lhsElab.term, emptyCtx);
+        const rhsNf = normalize(rhsElab.term, emptyCtx);
+
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected precomposition accumulation reduction.\nLHS_nf: ${printTerm(lhsNf)}\nRHS_nf: ${printTerm(rhsNf)}`
         );
     });
 

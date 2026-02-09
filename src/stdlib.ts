@@ -9,7 +9,7 @@ import {
     Term, Context, Icit, Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode
+    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode, TApp1FApp0Term
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -581,6 +581,213 @@ export function setupCatTheoryPrimitives(ctx: Context) {
         functoriality_vars,
         LHS_functoriality,
         RHS_functoriality,
+        ctx
+    );
+
+    // Strict accumulation (ordinary off-diagonal transfor components, stable head).
+    // Postcomposition: (G g) ∘ ϵ_(f) ↪ ϵ_(g ∘ f)
+    const accum_post_vars = [
+        "$A_cat", "$B_cat",
+        "$F_func", "$G_func",
+        "$eps_transf",
+        "$X_obj", "$Y_obj", "$Z_obj",
+        "$f_morph", "$g_morph"
+    ];
+
+    const FX_post = FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"));
+    const GY_post = FMap0Term(Var("$G_func"), Var("$Y_obj"), Var("$A_cat"), Var("$B_cat"));
+    const GZ_post = FMap0Term(Var("$G_func"), Var("$Z_obj"), Var("$A_cat"), Var("$B_cat"));
+
+    const tapp1_eps_f_post = TApp1FApp0Term(
+        Var("$eps_transf"),
+        Var("$f_morph"),
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$F_func"),
+        Var("$G_func"),
+        Var("$X_obj"),
+        Var("$Y_obj")
+    );
+    const fmap1_G_g_post = FMap1Term(
+        Var("$G_func"),
+        Var("$g_morph"),
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$Y_obj"),
+        Var("$Z_obj")
+    );
+
+    const lhs_accum_post = App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            Var("compose_morph"),
+                            Var("$B_cat"),
+                            Icit.Impl
+                        ),
+                        FX_post,
+                        Icit.Impl
+                    ),
+                    GY_post,
+                    Icit.Impl
+                ),
+                GZ_post,
+                Icit.Impl
+            ),
+            fmap1_G_g_post,
+            Icit.Expl
+        ),
+        tapp1_eps_f_post,
+        Icit.Expl
+    );
+
+    const compose_g_f_post = App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            Var("compose_morph"),
+                            Var("$A_cat"),
+                            Icit.Impl
+                        ),
+                        Var("$X_obj"),
+                        Icit.Impl
+                    ),
+                    Var("$Y_obj"),
+                    Icit.Impl
+                ),
+                Var("$Z_obj"),
+                Icit.Impl
+            ),
+            Var("$g_morph"),
+            Icit.Expl
+        ),
+        Var("$f_morph"),
+        Icit.Expl
+    );
+
+    const rhs_accum_post = TApp1FApp0Term(
+        Var("$eps_transf"),
+        compose_g_f_post,
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$F_func"),
+        Var("$G_func"),
+        Var("$X_obj"),
+        Var("$Z_obj")
+    );
+
+    addRewriteRule(
+        "strict_accumulation_post_tapp1",
+        accum_post_vars,
+        lhs_accum_post,
+        rhs_accum_post,
+        ctx
+    );
+
+    // Precomposition: ϵ_(f) ∘ (F g) ↪ ϵ_(f ∘ g)
+    const accum_pre_vars = [
+        "$A_cat", "$B_cat",
+        "$F_func", "$G_func",
+        "$eps_transf",
+        "$W_obj", "$X_obj", "$Y_obj",
+        "$g_morph", "$f_morph"
+    ];
+
+    const FW_pre = FMap0Term(Var("$F_func"), Var("$W_obj"), Var("$A_cat"), Var("$B_cat"));
+    const FX_pre = FMap0Term(Var("$F_func"), Var("$X_obj"), Var("$A_cat"), Var("$B_cat"));
+    const GY_pre = FMap0Term(Var("$G_func"), Var("$Y_obj"), Var("$A_cat"), Var("$B_cat"));
+
+    const tapp1_eps_f_pre = TApp1FApp0Term(
+        Var("$eps_transf"),
+        Var("$f_morph"),
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$F_func"),
+        Var("$G_func"),
+        Var("$X_obj"),
+        Var("$Y_obj")
+    );
+    const fmap1_F_g_pre = FMap1Term(
+        Var("$F_func"),
+        Var("$g_morph"),
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$W_obj"),
+        Var("$X_obj")
+    );
+
+    const lhs_accum_pre = App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            Var("compose_morph"),
+                            Var("$B_cat"),
+                            Icit.Impl
+                        ),
+                        FW_pre,
+                        Icit.Impl
+                    ),
+                    FX_pre,
+                    Icit.Impl
+                ),
+                GY_pre,
+                Icit.Impl
+            ),
+            tapp1_eps_f_pre,
+            Icit.Expl
+        ),
+        fmap1_F_g_pre,
+        Icit.Expl
+    );
+
+    const compose_f_g_pre = App(
+        App(
+            App(
+                App(
+                    App(
+                        App(
+                            Var("compose_morph"),
+                            Var("$A_cat"),
+                            Icit.Impl
+                        ),
+                        Var("$W_obj"),
+                        Icit.Impl
+                    ),
+                    Var("$X_obj"),
+                    Icit.Impl
+                ),
+                Var("$Y_obj"),
+                Icit.Impl
+            ),
+            Var("$f_morph"),
+            Icit.Expl
+        ),
+        Var("$g_morph"),
+        Icit.Expl
+    );
+
+    const rhs_accum_pre = TApp1FApp0Term(
+        Var("$eps_transf"),
+        compose_f_g_pre,
+        Var("$A_cat"),
+        Var("$B_cat"),
+        Var("$F_func"),
+        Var("$G_func"),
+        Var("$W_obj"),
+        Var("$Y_obj")
+    );
+
+    addRewriteRule(
+        "strict_accumulation_pre_tapp1",
+        accum_pre_vars,
+        lhs_accum_pre,
+        rhs_accum_pre,
         ctx
     );
 
