@@ -48,7 +48,9 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
 
     switch (current.tag) {
         case 'Hole': return current.id === holeId;
-        case 'Type': case 'Var': case 'CatTerm': case 'SetTerm': return false;
+        case 'Type': case 'Var': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': return false;
+        case 'CatdCategoryTerm':
+            return termContainsHole(current.baseCat, holeId, visited, depth + 1);
         case 'App':
             return termContainsHole(current.func, holeId, visited, depth + 1) ||
                    termContainsHole(current.arg, holeId, visited, depth + 1);
@@ -82,6 +84,21 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
         case 'FunctorTypeTerm':
             return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.codomainCat, holeId, visited, depth + 1);
+        case 'FunctordCategoryTerm':
+            return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedCod, holeId, visited, depth + 1);
+        case 'TransfCategoryTerm':
+            return termContainsHole(current.catA, holeId, visited, depth + 1) ||
+                   termContainsHole(current.catB, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorF, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorG, holeId, visited, depth + 1);
+        case 'TransfdCategoryTerm':
+            return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedCod, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorFF, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorGG, holeId, visited, depth + 1);
         case 'FMap0Term':
             return termContainsHole(current.functor, holeId, visited, depth + 1) ||
                    termContainsHole(current.objectX, holeId, visited, depth + 1) ||

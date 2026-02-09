@@ -27,11 +27,16 @@ export type BaseTerm =
       }
     // Emdash Phase 1: Core Categories
     | { tag: 'CatTerm' }
+    | { tag: 'CatCategoryTerm' } // Cat_cat
+    | { tag: 'CatdCategoryTerm', baseCat: Term } // Catd_cat baseCat
     | { tag: 'ObjTerm', cat: Term }
     | { tag: 'HomTerm', cat: Term, dom: Term, cod: Term }
     // Emdash Phase 2: Functors and Natural Transformations
     | { tag: 'FunctorTypeTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FunctorCategoryTerm', domainCat: Term, codomainCat: Term }
+    | { tag: 'FunctordCategoryTerm', baseCat: Term, displayedDom: Term, displayedCod: Term } // Functord_cat
+    | { tag: 'TransfCategoryTerm', catA: Term, catB: Term, functorF: Term, functorG: Term } // Transf_cat
+    | { tag: 'TransfdCategoryTerm', baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term } // Transfd_cat
     | { tag: 'FMap0Term', // fapp0 F X
         functor: Term, // Term of type FunctorTypeTerm(catA, catB)
         objectX: Term, // ObjTerm(catA)
@@ -212,6 +217,8 @@ export const Hole = (id: string, patternAllowedLocalBinders?: string[]): Term & 
 
 // Category Theory Constructors
 export const CatTerm = (): Term & { tag: 'CatTerm' } => ({ tag: 'CatTerm' });
+export const CatCategoryTerm = (): Term & { tag: 'CatCategoryTerm' } => ({ tag: 'CatCategoryTerm' });
+export const CatdCategoryTerm = (baseCat: Term): Term & { tag: 'CatdCategoryTerm' } => ({ tag: 'CatdCategoryTerm', baseCat });
 export const ObjTerm = (cat: Term): Term & { tag: 'ObjTerm' } => ({ tag: 'ObjTerm', cat });
 export const HomTerm = (cat: Term, dom: Term, cod: Term): Term & { tag: 'HomTerm' } => ({ tag: 'HomTerm', cat, dom, cod });
 
@@ -221,6 +228,15 @@ export const FunctorTypeTerm = (domainCat: Term, codomainCat: Term): Term & { ta
 
 export const FunctorCategoryTerm = (domainCat: Term, codomainCat: Term): Term & { tag: 'FunctorCategoryTerm' } =>
     ({ tag: 'FunctorCategoryTerm', domainCat, codomainCat });
+
+export const FunctordCategoryTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term): Term & { tag: 'FunctordCategoryTerm' } =>
+    ({ tag: 'FunctordCategoryTerm', baseCat, displayedDom, displayedCod });
+
+export const TransfCategoryTerm = (catA: Term, catB: Term, functorF: Term, functorG: Term): Term & { tag: 'TransfCategoryTerm' } =>
+    ({ tag: 'TransfCategoryTerm', catA, catB, functorF, functorG });
+
+export const TransfdCategoryTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term): Term & { tag: 'TransfdCategoryTerm' } =>
+    ({ tag: 'TransfdCategoryTerm', baseCat, displayedDom, displayedCod, functorFF, functorGG });
 
 export const FMap0Term = (functor: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term): Term & { tag: 'FMap0Term' } =>
     ({ tag: 'FMap0Term', functor, objectX, catA_IMPLICIT, catB_IMPLICIT });

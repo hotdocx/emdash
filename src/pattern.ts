@@ -6,7 +6,7 @@
 import {
     Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, Let, CatTerm, SetTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FunctorTypeTerm, FMap0Term, FMap1Term,
-    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm, TApp1FApp0Term, FDApp1Term, TDApp1Term
+    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm, TApp1FApp0Term, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
 } from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
@@ -136,7 +136,9 @@ export function matchPattern(
 
     // Structural matching
     switch (rtPattern.tag) {
-        case 'Type': case 'CatTerm': case 'SetTerm': return subst;
+        case 'Type': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': return subst;
+        case 'CatdCategoryTerm':
+            return matchPattern(rtPattern.baseCat, (rtTermToMatch as Term & {tag:'CatdCategoryTerm'}).baseCat, ctx, patternVarDecls, subst, stackDepth + 1, patternLocalBinders, binderNameMapping);
         case 'Var': // Non-pattern variable
             return rtPattern.name === (rtTermToMatch as Term & {tag:'Var'}).name ? subst : null;
         case 'App': {
@@ -290,6 +292,33 @@ export function matchPattern(
             s = matchPattern(fcP.domainCat, fcT.domainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
             return matchPattern(fcP.codomainCat, fcT.codomainCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
         }
+        case 'FunctordCategoryTerm': {
+            const fcP = rtPattern;
+            const fcT = rtTermToMatch as Term & {tag:'FunctordCategoryTerm'};
+            let s: Substitution | null = subst;
+            s = matchPattern(fcP.baseCat, fcT.baseCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(fcP.displayedDom, fcT.displayedDom, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            return matchPattern(fcP.displayedCod, fcT.displayedCod, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+        }
+        case 'TransfCategoryTerm': {
+            const tcP = rtPattern;
+            const tcT = rtTermToMatch as Term & {tag:'TransfCategoryTerm'};
+            let s: Substitution | null = subst;
+            s = matchPattern(tcP.catA, tcT.catA, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(tcP.catB, tcT.catB, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(tcP.functorF, tcT.functorF, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            return matchPattern(tcP.functorG, tcT.functorG, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+        }
+        case 'TransfdCategoryTerm': {
+            const tcP = rtPattern;
+            const tcT = rtTermToMatch as Term & {tag:'TransfdCategoryTerm'};
+            let s: Substitution | null = subst;
+            s = matchPattern(tcP.baseCat, tcT.baseCat, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(tcP.displayedDom, tcT.displayedDom, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(tcP.displayedCod, tcT.displayedCod, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            s = matchPattern(tcP.functorFF, tcT.functorFF, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            return matchPattern(tcP.functorGG, tcT.functorGG, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+        }
         case 'FMap0Term': {
             const fm0P = rtPattern; const fm0T = rtTermToMatch as Term & {tag:'FMap0Term'};
             let s: Substitution | null = subst;
@@ -440,7 +469,7 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
 
     // Recursive application for structured terms
     switch (current.tag) {
-        case 'Type': case 'Var': case 'Hole': case 'CatTerm': case 'SetTerm': return current; // Non-pattern Vars/Holes or primitives
+        case 'Type': case 'Var': case 'Hole': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': return current; // Non-pattern Vars/Holes or primitives
         case 'App':
             return App(applySubst(current.func, subst, patternVarDecls), applySubst(current.arg, subst, patternVarDecls), current.icit);
         case 'Lam': {
@@ -501,6 +530,8 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             return newLet;
         }
         case 'ObjTerm': return ObjTerm(applySubst(current.cat, subst, patternVarDecls));
+        case 'CatdCategoryTerm':
+            return CatdCategoryTerm(applySubst(current.baseCat, subst, patternVarDecls));
         case 'HomTerm':
             return HomTerm(
                 applySubst(current.cat, subst, patternVarDecls),
@@ -516,6 +547,27 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
             return FunctorTypeTerm(
                 applySubst(current.domainCat, subst, patternVarDecls),
                 applySubst(current.codomainCat, subst, patternVarDecls)
+            );
+        case 'FunctordCategoryTerm':
+            return FunctordCategoryTerm(
+                applySubst(current.baseCat, subst, patternVarDecls),
+                applySubst(current.displayedDom, subst, patternVarDecls),
+                applySubst(current.displayedCod, subst, patternVarDecls)
+            );
+        case 'TransfCategoryTerm':
+            return TransfCategoryTerm(
+                applySubst(current.catA, subst, patternVarDecls),
+                applySubst(current.catB, subst, patternVarDecls),
+                applySubst(current.functorF, subst, patternVarDecls),
+                applySubst(current.functorG, subst, patternVarDecls)
+            );
+        case 'TransfdCategoryTerm':
+            return TransfdCategoryTerm(
+                applySubst(current.baseCat, subst, patternVarDecls),
+                applySubst(current.displayedDom, subst, patternVarDecls),
+                applySubst(current.displayedCod, subst, patternVarDecls),
+                applySubst(current.functorFF, subst, patternVarDecls),
+                applySubst(current.functorGG, subst, patternVarDecls)
             );
         case 'FMap0Term':
             return FMap0Term(
@@ -647,6 +699,7 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             collectPatternVars(current.letDef, patternVarDecls, collectedVars, visited);
             break;
         case 'ObjTerm': collectPatternVars(current.cat, patternVarDecls, collectedVars, visited); break;
+        case 'CatdCategoryTerm': collectPatternVars(current.baseCat, patternVarDecls, collectedVars, visited); break;
         case 'HomTerm':
             collectPatternVars(current.cat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.dom, patternVarDecls, collectedVars, visited);
@@ -655,6 +708,24 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
         case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
             collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
             collectPatternVars(current.codomainCat, patternVarDecls, collectedVars, visited);
+            break;
+        case 'FunctordCategoryTerm':
+            collectPatternVars(current.baseCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.displayedDom, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.displayedCod, patternVarDecls, collectedVars, visited);
+            break;
+        case 'TransfCategoryTerm':
+            collectPatternVars(current.catA, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.catB, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorF, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorG, patternVarDecls, collectedVars, visited);
+            break;
+        case 'TransfdCategoryTerm':
+            collectPatternVars(current.baseCat, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.displayedDom, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.displayedCod, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorFF, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.functorGG, patternVarDecls, collectedVars, visited);
             break;
         case 'FMap0Term':
             collectPatternVars(current.functor, patternVarDecls, collectedVars, visited);
@@ -922,9 +993,11 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                 current.icit
             );
         // Base cases that don't bind variables or have no subterms with variables relevant here
-        case 'Type': case 'Hole': case 'CatTerm': case 'SetTerm': return current;
+        case 'Type': case 'Hole': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': return current;
         // Cases that have subterms but don't bind variables themselves
         case 'ObjTerm': return ObjTerm(replaceFreeVar(current.cat, freeVarName, replacementVar, boundInScope));
+        case 'CatdCategoryTerm':
+            return CatdCategoryTerm(replaceFreeVar(current.baseCat, freeVarName, replacementVar, boundInScope));
         case 'HomTerm':
             return HomTerm(
                 replaceFreeVar(current.cat, freeVarName, replacementVar, boundInScope),
@@ -938,6 +1011,27 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
             ) : FunctorTypeTerm(
                 replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
                 replaceFreeVar(current.codomainCat, freeVarName, replacementVar, boundInScope)
+            );
+        case 'FunctordCategoryTerm':
+            return FunctordCategoryTerm(
+                replaceFreeVar(current.baseCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.displayedDom, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.displayedCod, freeVarName, replacementVar, boundInScope)
+            );
+        case 'TransfCategoryTerm':
+            return TransfCategoryTerm(
+                replaceFreeVar(current.catA, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.catB, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorF, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorG, freeVarName, replacementVar, boundInScope)
+            );
+        case 'TransfdCategoryTerm':
+            return TransfdCategoryTerm(
+                replaceFreeVar(current.baseCat, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.displayedDom, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.displayedCod, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorFF, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.functorGG, freeVarName, replacementVar, boundInScope)
             );
         case 'FMap0Term':
             return FMap0Term(
@@ -1117,8 +1211,9 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
                 if (termRef.elaboratedType) find(termRef.elaboratedType, currentLocallyBound);
                 // Do not descend into termRef.ref for free variable analysis of the hole itself.
                 break;
-            case 'Type': case 'CatTerm': case 'SetTerm': break; 
+            case 'Type': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': break; 
             case 'ObjTerm': find(termRef.cat, currentLocallyBound); break;
+            case 'CatdCategoryTerm': find(termRef.baseCat, currentLocallyBound); break;
             case 'HomTerm':
                 find(termRef.cat, currentLocallyBound);
                 find(termRef.dom, currentLocallyBound);
@@ -1127,6 +1222,24 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
             case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
                 find(termRef.domainCat, currentLocallyBound);
                 find(termRef.codomainCat, currentLocallyBound);
+                break;
+            case 'FunctordCategoryTerm':
+                find(termRef.baseCat, currentLocallyBound);
+                find(termRef.displayedDom, currentLocallyBound);
+                find(termRef.displayedCod, currentLocallyBound);
+                break;
+            case 'TransfCategoryTerm':
+                find(termRef.catA, currentLocallyBound);
+                find(termRef.catB, currentLocallyBound);
+                find(termRef.functorF, currentLocallyBound);
+                find(termRef.functorG, currentLocallyBound);
+                break;
+            case 'TransfdCategoryTerm':
+                find(termRef.baseCat, currentLocallyBound);
+                find(termRef.displayedDom, currentLocallyBound);
+                find(termRef.displayedCod, currentLocallyBound);
+                find(termRef.functorFF, currentLocallyBound);
+                find(termRef.functorGG, currentLocallyBound);
                 break;
             case 'FMap0Term':
                 find(termRef.functor, currentLocallyBound);

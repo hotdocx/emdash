@@ -81,6 +81,29 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.domainCat);
                 traverse(current.codomainCat);
                 break;
+            case 'CatCategoryTerm':
+                break;
+            case 'CatdCategoryTerm':
+                traverse(current.baseCat);
+                break;
+            case 'FunctordCategoryTerm':
+                traverse(current.baseCat);
+                traverse(current.displayedDom);
+                traverse(current.displayedCod);
+                break;
+            case 'TransfCategoryTerm':
+                traverse(current.catA);
+                traverse(current.catB);
+                traverse(current.functorF);
+                traverse(current.functorG);
+                break;
+            case 'TransfdCategoryTerm':
+                traverse(current.baseCat);
+                traverse(current.displayedDom);
+                traverse(current.displayedCod);
+                traverse(current.functorFF);
+                traverse(current.functorGG);
+                break;
             case 'FMap0Term':
                 traverse(current.functor);
                 traverse(current.objectX);
@@ -246,6 +269,25 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                 return find(term.cat, ctx) || find(term.dom, ctx) || find(term.cod, ctx);
             case 'FunctorCategoryTerm': case 'FunctorTypeTerm':
                 return find(term.domainCat, ctx) || find(term.codomainCat, ctx);
+            case 'CatCategoryTerm':
+                return null;
+            case 'CatdCategoryTerm':
+                return find(term.baseCat, ctx);
+            case 'FunctordCategoryTerm':
+                return find(term.baseCat, ctx) ||
+                       find(term.displayedDom, ctx) ||
+                       find(term.displayedCod, ctx);
+            case 'TransfCategoryTerm':
+                return find(term.catA, ctx) ||
+                       find(term.catB, ctx) ||
+                       find(term.functorF, ctx) ||
+                       find(term.functorG, ctx);
+            case 'TransfdCategoryTerm':
+                return find(term.baseCat, ctx) ||
+                       find(term.displayedDom, ctx) ||
+                       find(term.displayedCod, ctx) ||
+                       find(term.functorFF, ctx) ||
+                       find(term.functorGG, ctx);
             case 'FMap0Term':
                 return find(term.functor, ctx) || find(term.objectX, ctx) ||
                        (term.catA_IMPLICIT ? find(term.catA_IMPLICIT, ctx) : null) ||

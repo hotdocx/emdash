@@ -9,7 +9,8 @@ import {
     Term, Context, Icit, Type, Var, Lam, App, Pi, Hole,
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode, TApp1FApp0Term
+    SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode, TApp1FApp0Term,
+    CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -45,6 +46,12 @@ export function setupPhase1GlobalsAndRules() {
     // Core Category Theory Primitives
     defineGlobal("Cat", Type(), CatTerm(), false, true);
     defineGlobal("Set", CatTerm(), SetTerm(), false, true);
+    defineGlobal("Cat_cat", CatTerm(), CatCategoryTerm(), false, true);
+    defineGlobal("Catd_cat",
+        Pi("Z", Icit.Expl, CatTerm(), Z => CatTerm()),
+        Lam("Z_val", Icit.Expl, CatTerm(), Z_term => CatdCategoryTerm(Z_term)),
+        false, true
+    );
 
     defineGlobal("Obj",
         Pi("A", Icit.Expl, CatTerm(), _A => Type()),
@@ -78,6 +85,21 @@ export function setupPhase1GlobalsAndRules() {
         Lam("A_val", Icit.Expl, CatTerm(), A_term =>
             Lam("B_val", Icit.Expl, CatTerm(), B_term =>
                 FunctorCategoryTerm(A_term, B_term))),
+        false, true
+    );
+
+    defineGlobal("Transf_cat",
+        Pi("A", Icit.Expl, CatTerm(), A =>
+        Pi("B", Icit.Expl, CatTerm(), B =>
+        Pi("F", Icit.Expl, ObjTerm(FunctorCategoryTerm(A, B)), F =>
+        Pi("G", Icit.Expl, ObjTerm(FunctorCategoryTerm(A, B)), G =>
+            CatTerm())))),
+        Lam("A_val", Icit.Expl, CatTerm(), A_term =>
+            Lam("B_val", Icit.Expl, CatTerm(), B_term =>
+                Lam("F_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), F_term =>
+                    Lam("G_val", Icit.Expl, ObjTerm(FunctorCategoryTerm(A_term, B_term)), G_term =>
+                        TransfCategoryTerm(A_term, B_term, F_term, G_term)
+                    )))),
         false, true
     );
 
@@ -186,6 +208,19 @@ export function setupPhase1GlobalsAndRules() {
         undefined, true, true
     );
 
+    defineGlobal("Functord_cat",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+            CatTerm()))),
+        Lam("Z_val", Icit.Expl, CatTerm(), Z_term =>
+            Lam("E_val", Icit.Expl, CatdOf(Z_term), E_term =>
+                Lam("D_val", Icit.Expl, CatdOf(Z_term), D_term =>
+                    FunctordCategoryTerm(Z_term, E_term, D_term)
+                ))),
+        false, true
+    );
+
     defineGlobal("fdapp0",
         Pi("Z", Icit.Expl, CatTerm(), Z =>
         Pi("E", Icit.Expl, CatdOf(Z), E =>
@@ -205,6 +240,23 @@ export function setupPhase1GlobalsAndRules() {
         Pi("GG", Icit.Expl, FunctordOf(Z, E, D), _GG =>
             Type()))))),
         undefined, true, true
+    );
+
+    defineGlobal("Transfd_cat",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z, E, D)), FF =>
+        Pi("GG", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z, E, D)), GG =>
+            CatTerm()))))),
+        Lam("Z_val", Icit.Expl, CatTerm(), Z_term =>
+            Lam("E_val", Icit.Expl, CatdOf(Z_term), E_term =>
+                Lam("D_val", Icit.Expl, CatdOf(Z_term), D_term =>
+                    Lam("FF_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), FF_term =>
+                        Lam("GG_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), GG_term =>
+                            TransfdCategoryTerm(Z_term, E_term, D_term, FF_term, GG_term)
+                        ))))),
+        false, true
     );
 
     defineGlobal("tdapp0_fapp0",

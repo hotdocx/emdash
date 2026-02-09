@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode, FDApp1Term, TDApp1Term
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -115,6 +115,43 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
             }
             case 'ObjTerm': {
                 const cat_whnf_ref = getTermRef(whnf(current.cat, ctx, stackDepth + 1));
+                if (cat_whnf_ref.tag === 'CatCategoryTerm') {
+                    // Objects of Cat_cat are categories.
+                    current = CatTerm();
+                    reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'CatdCategoryTerm') {
+                    // Objects of Catd_cat Z are displayed categories over Z.
+                    current = App(Var("Catd"), cat_whnf_ref.baseCat, Icit.Expl);
+                    reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'FunctorCategoryTerm') {
+                    // Objects of Functor_cat A B are functors A -> B.
+                    current = FunctorTypeTerm(cat_whnf_ref.domainCat, cat_whnf_ref.codomainCat);
+                    reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'FunctordCategoryTerm') {
+                    // Objects of Functord_cat Z E D are displayed functors E -> D over Z.
+                    current = App(App(App(Var("Functord"), cat_whnf_ref.baseCat, Icit.Expl), cat_whnf_ref.displayedDom, Icit.Expl), cat_whnf_ref.displayedCod, Icit.Expl);
+                    reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'TransfCategoryTerm') {
+                    // Objects of Transf_cat A B F G are ordinary transfors F => G.
+                    current = NatTransTypeTerm(cat_whnf_ref.catA, cat_whnf_ref.catB, cat_whnf_ref.functorF, cat_whnf_ref.functorG);
+                    reducedInKernelBlock = true;
+                } else if (cat_whnf_ref.tag === 'TransfdCategoryTerm') {
+                    // Objects of Transfd_cat Z E D FF GG are displayed transfors FF => GG.
+                    current = App(
+                        App(
+                            App(
+                                App(
+                                    App(Var("Transfd"), cat_whnf_ref.baseCat, Icit.Expl),
+                                    cat_whnf_ref.displayedDom, Icit.Expl
+                                ),
+                                cat_whnf_ref.displayedCod, Icit.Expl
+                            ),
+                            cat_whnf_ref.functorFF, Icit.Expl
+                        ),
+                        cat_whnf_ref.functorGG, Icit.Expl
+                    );
+                    reducedInKernelBlock = true;
+                } else
                 if (getTermRef(current.cat) !== cat_whnf_ref) {
                     current = ObjTerm(cat_whnf_ref);
                     reducedInKernelBlock = true;
@@ -301,7 +338,9 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
     const headReduced = whnf(term, ctx, stackDepth + 1);
     const current = getTermRef(headReduced);
     switch (current.tag) {
-        case 'Type': case 'Var' : case 'Hole': case 'CatTerm': case 'SetTerm': return current;
+        case 'Type': case 'Var' : case 'Hole': case 'CatTerm': case 'CatCategoryTerm': case 'SetTerm': return current;
+        case 'CatdCategoryTerm':
+            return CatdCategoryTerm(normalize(current.baseCat, ctx, stackDepth + 1));
         case 'ObjTerm': return ObjTerm(normalize(current.cat, ctx, stackDepth + 1));
         case 'HomTerm':
             return HomTerm(
@@ -313,6 +352,27 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
             return FunctorCategoryTerm(
                 normalize(current.domainCat, ctx, stackDepth + 1),
                 normalize(current.codomainCat, ctx, stackDepth + 1)
+            );
+        case 'FunctordCategoryTerm':
+            return FunctordCategoryTerm(
+                normalize(current.baseCat, ctx, stackDepth + 1),
+                normalize(current.displayedDom, ctx, stackDepth + 1),
+                normalize(current.displayedCod, ctx, stackDepth + 1)
+            );
+        case 'TransfCategoryTerm':
+            return TransfCategoryTerm(
+                normalize(current.catA, ctx, stackDepth + 1),
+                normalize(current.catB, ctx, stackDepth + 1),
+                normalize(current.functorF, ctx, stackDepth + 1),
+                normalize(current.functorG, ctx, stackDepth + 1)
+            );
+        case 'TransfdCategoryTerm':
+            return TransfdCategoryTerm(
+                normalize(current.baseCat, ctx, stackDepth + 1),
+                normalize(current.displayedDom, ctx, stackDepth + 1),
+                normalize(current.displayedCod, ctx, stackDepth + 1),
+                normalize(current.functorFF, ctx, stackDepth + 1),
+                normalize(current.functorGG, ctx, stackDepth + 1)
             );
         case 'FunctorTypeTerm':
             return FunctorTypeTerm(
