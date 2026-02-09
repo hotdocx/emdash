@@ -6,7 +6,7 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 Our project is `emdash` version 2, whose goal is to write a Lambdapi specification @emdash2.lp for a programming language (and proof assistant) for ω-categories...  @README.md @emdash2.lp
 
-The baseline "inspiration" is in @emdash.lp and @cartierSolution13.lp Ensure you have read those files into your memory before starting.
+The baseline "inspiration" is in the older files @emdash.lp (outdated) and @cartierSolution13.lp (has different architecture/goal). The older files, with different architectures/goals, @cartierSolution14.lp and @cartierSolution16.lp are also relevant to understand the broarder context/goal.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
