@@ -10,7 +10,7 @@ import {
     CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
     SetTerm, HomCovFunctorIdentity, FunctorTypeTerm, MkFunctorTerm, BinderMode, LamMode, PiMode, TApp1FApp0Term,
-    CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
+    CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, FunctorCatdTerm, TransfCategoryTerm, TransfCatdTerm, TransfdCategoryTerm
 } from './types';
 import {
     globalDefs, userRewriteRules, userUnificationRules, constraints, emptyCtx,
@@ -221,6 +221,34 @@ export function setupPhase1GlobalsAndRules() {
         false, true
     );
 
+    defineGlobal("Functor_catd",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+            CatdOf(Z)))),
+        Lam("Z_val", Icit.Expl, CatTerm(), Z_term =>
+            Lam("E_val", Icit.Expl, CatdOf(Z_term), E_term =>
+                Lam("D_val", Icit.Expl, CatdOf(Z_term), D_term =>
+                    FunctorCatdTerm(Z_term, E_term, D_term)
+                ))),
+        false, true
+    );
+
+    defineGlobal("Fibre_func",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), FF =>
+        Pi("z", Icit.Expl, ObjTerm(Z), z =>
+            ObjTerm(
+                FunctorCategoryTerm(
+                    FibreOf(Z, E, z),
+                    FibreOf(Z, D, z)
+                )
+            )))))),
+        undefined, true, true
+    );
+
     defineGlobal("fdapp0",
         Pi("Z", Icit.Expl, CatTerm(), Z =>
         Pi("E", Icit.Expl, CatdOf(Z), E =>
@@ -255,6 +283,23 @@ export function setupPhase1GlobalsAndRules() {
                     Lam("FF_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), FF_term =>
                         Lam("GG_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), GG_term =>
                             TransfdCategoryTerm(Z_term, E_term, D_term, FF_term, GG_term)
+                        ))))),
+        false, true
+    );
+
+    defineGlobal("Transf_catd",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z, E, D)), FF =>
+        Pi("GG", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z, E, D)), GG =>
+            CatdOf(Z)))))),
+        Lam("Z_val", Icit.Expl, CatTerm(), Z_term =>
+            Lam("E_val", Icit.Expl, CatdOf(Z_term), E_term =>
+                Lam("D_val", Icit.Expl, CatdOf(Z_term), D_term =>
+                    Lam("FF_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), FF_term =>
+                        Lam("GG_val", Icit.Expl, ObjTerm(FunctordCategoryTerm(Z_term, E_term, D_term)), GG_term =>
+                            TransfCatdTerm(Z_term, E_term, D_term, FF_term, GG_term)
                         ))))),
         false, true
     );

@@ -20,14 +20,32 @@ const catdCatOf = (Z: Term): Term => App(Var('Catd_cat'), Z, Icit.Expl);
 const functorCatOf = (A: Term, B: Term): Term => App(App(Var('Functor_cat'), A, Icit.Expl), B, Icit.Expl);
 const functordCatOf = (Z: Term, E: Term, D: Term): Term =>
     App(App(App(Var('Functord_cat'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+const functorCatdOf = (Z: Term, E: Term, D: Term): Term =>
+    App(App(App(Var('Functor_catd'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
 const transfCatOf = (A: Term, B: Term, F: Term, G: Term): Term =>
     App(App(App(App(Var('Transf_cat'), A, Icit.Expl), B, Icit.Expl), F, Icit.Expl), G, Icit.Expl);
+const transfCatdOf = (Z: Term, E: Term, D: Term, FF: Term, GG: Term): Term =>
+    App(App(App(App(App(Var('Transf_catd'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl);
 const transfdCatOf = (Z: Term, E: Term, D: Term, FF: Term, GG: Term): Term =>
     App(App(App(App(App(Var('Transfd_cat'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl);
 const fibreOf = (Z: Term, E: Term, z: Term): Term =>
     App(App(App(Var('Fibre'), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
 const fdapp0Of = (Z: Term, E: Term, D: Term, FF: Term, z: Term, e: Term): Term =>
     App(App(App(App(App(App(Var('fdapp0'), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl);
+const fibreFuncOf = (Z: Term, E: Term, D: Term, FF: Term, z: Term): Term =>
+    App(
+        App(
+            App(
+                App(
+                    App(Var('Fibre_func'), Z, Icit.Expl),
+                    E, Icit.Expl
+                ),
+                D, Icit.Expl
+            ),
+            FF, Icit.Expl
+        ),
+        z, Icit.Expl
+    );
 const homdCurryOf = (Z: Term, E: Term, b0: Term, e0: Term, b1: Term, f: Term, e1: Term): Term =>
     App(
         App(
@@ -55,7 +73,7 @@ describe('Emdash2 internalized category layer', () => {
     });
 
     it('declares internalized category objects and reduces Obj as expected', () => {
-        for (const name of ['Cat_cat', 'Catd_cat', 'Functord_cat', 'Transf_cat', 'Transfd_cat']) {
+        for (const name of ['Cat_cat', 'Catd_cat', 'Functord_cat', 'Functor_catd', 'Transf_cat', 'Transf_catd', 'Transfd_cat']) {
             assert.ok(globalDefs.get(name), `Missing stdlib global: ${name}`);
         }
 
@@ -155,6 +173,62 @@ describe('Emdash2 internalized category layer', () => {
         assert.ok(
             areEqual(res.type, expectedType, emptyCtx),
             `Expected ${printTerm(expectedType)}, got ${printTerm(res.type)}`
+        );
+    });
+
+    it('computes fibre of Functor_catd pointwise', () => {
+        defineGlobal('Z', ObjTerm(Var('Cat_cat')));
+        const Z = Var('Z');
+
+        defineGlobal('E', ObjTerm(catdCatOf(Z)));
+        defineGlobal('D', ObjTerm(catdCatOf(Z)));
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('z', ObjTerm(Z));
+        const z = Var('z');
+
+        const fibreFunctorCat = fibreOf(Z, functorCatdOf(Z, E, D), z);
+        const expected = functorCatOf(fibreOf(Z, E, z), fibreOf(Z, D, z));
+
+        const lhsNf = normalize(fibreFunctorCat, emptyCtx);
+        const rhsNf = normalize(expected, emptyCtx);
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected fibre(Functor_catd E D, z) to compute pointwise.\nLHS: ${printTerm(lhsNf)}\nRHS: ${printTerm(rhsNf)}`
+        );
+    });
+
+    it('computes fibre of Transf_catd pointwise via Fibre_func', () => {
+        defineGlobal('Z', ObjTerm(Var('Cat_cat')));
+        const Z = Var('Z');
+
+        defineGlobal('E', ObjTerm(catdCatOf(Z)));
+        defineGlobal('D', ObjTerm(catdCatOf(Z)));
+        const E = Var('E');
+        const D = Var('D');
+
+        defineGlobal('FF', ObjTerm(functordCatOf(Z, E, D)));
+        defineGlobal('GG', ObjTerm(functordCatOf(Z, E, D)));
+        const FF = Var('FF');
+        const GG = Var('GG');
+
+        defineGlobal('z', ObjTerm(Z));
+        const z = Var('z');
+
+        const fibreTransfCat = fibreOf(Z, transfCatdOf(Z, E, D, FF, GG), z);
+        const expected = transfCatOf(
+            fibreOf(Z, E, z),
+            fibreOf(Z, D, z),
+            fibreFuncOf(Z, E, D, FF, z),
+            fibreFuncOf(Z, E, D, GG, z)
+        );
+
+        const lhsNf = normalize(fibreTransfCat, emptyCtx);
+        const rhsNf = normalize(expected, emptyCtx);
+        assert.ok(
+            areEqual(lhsNf, rhsNf, emptyCtx),
+            `Expected fibre(Transf_catd FF GG, z) to compute pointwise.\nLHS: ${printTerm(lhsNf)}\nRHS: ${printTerm(rhsNf)}`
         );
     });
 

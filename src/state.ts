@@ -133,7 +133,7 @@ export const lookupCtx = (ctx: Context, name: string): Binding | undefined => ct
 export const EMDASH_CONSTANT_SYMBOLS_TAGS = new Set<string>(['CatTerm', 'SetTerm']);
 export const EMDASH_UNIFICATION_INJECTIVE_TAGS = new Set<string>([
     'Type',  'Var', 'CatTerm', 'CatCategoryTerm', 'CatdCategoryTerm', 'ObjTerm', 'HomTerm',
-    'FunctorCategoryTerm', 'FunctordCategoryTerm', 'TransfCategoryTerm', 'TransfdCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
+    'FunctorCategoryTerm', 'FunctordCategoryTerm', 'FunctorCatdTerm', 'TransfCategoryTerm', 'TransfCatdTerm', 'TransfdCategoryTerm', 'NatTransTypeTerm', 'SetTerm',
     'FunctorTypeTerm', 'MkFunctorTerm', 'FDApp1Term', 'TDApp1Term'
 ]);
 
@@ -163,7 +163,9 @@ export function isKernelConstantSymbolStructurally(term: Term): boolean {
         case 'CatdCategoryTerm':
         case 'FunctorCategoryTerm':
         case 'FunctordCategoryTerm':
+        case 'FunctorCatdTerm':
         case 'TransfCategoryTerm':
+        case 'TransfCatdTerm':
         case 'TransfdCategoryTerm':
         case 'NatTransTypeTerm':
         case 'HomCovFunctorIdentity':
@@ -310,8 +312,12 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(Functor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.codomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'FunctordCategoryTerm':
             return `(Functord_cat ${printTerm(current.baseCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedDom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedCod, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'FunctorCatdTerm':
+            return `(Functor_catd ${printTerm(current.baseCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedDom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedCod, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'TransfCategoryTerm':
             return `(Transf_cat ${printTerm(current.catA, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.catB, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorG, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'TransfCatdTerm':
+            return `(Transf_catd ${printTerm(current.baseCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedDom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedCod, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorFF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorGG, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'TransfdCategoryTerm':
             return `(Transfd_cat ${printTerm(current.baseCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedDom, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.displayedCod, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorFF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorGG, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'FMap0Term':

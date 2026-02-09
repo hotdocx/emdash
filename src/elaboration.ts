@@ -9,7 +9,7 @@ import {
     Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, Let, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
-    MkFunctorTerm, TApp1FApp0Term, BinderMode, LamMode, PiMode, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
+    MkFunctorTerm, TApp1FApp0Term, BinderMode, LamMode, PiMode, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, FunctorCatdTerm, TransfCategoryTerm, TransfCatdTerm, TransfdCategoryTerm
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
@@ -26,7 +26,9 @@ import { KERNEL_IMPLICIT_SPECS, KernelImplicitSpec } from './constants';
 type FunctorCategoryTermType = Extract<BaseTerm, { tag: 'FunctorCategoryTerm' }>;
 type CatdCategoryTermType = Extract<BaseTerm, { tag: 'CatdCategoryTerm' }>;
 type FunctordCategoryTermType = Extract<BaseTerm, { tag: 'FunctordCategoryTerm' }>;
+type FunctorCatdTermType = Extract<BaseTerm, { tag: 'FunctorCatdTerm' }>;
 type TransfCategoryTermType = Extract<BaseTerm, { tag: 'TransfCategoryTerm' }>;
+type TransfCatdTermType = Extract<BaseTerm, { tag: 'TransfCatdTerm' }>;
 type TransfdCategoryTermType = Extract<BaseTerm, { tag: 'TransfdCategoryTerm' }>;
 type FunctorTypeTermType = Extract<BaseTerm, { tag: 'FunctorTypeTerm' }>;
 type FMap0TermType = Extract<BaseTerm, { tag: 'FMap0Term' }>;
@@ -520,6 +522,13 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             const elabD = check(ctx, fdcTerm.displayedCod, CatdOf(elabZ), stackDepth + 1, options);
             return { elaboratedTerm: FunctordCategoryTerm(elabZ, elabE, elabD), type: CatTerm() };
         }
+        case 'FunctorCatdTerm': {
+            const fcdTerm = current as Term & FunctorCatdTermType;
+            const elabZ = check(ctx, fcdTerm.baseCat, CatTerm(), stackDepth + 1, options);
+            const elabE = check(ctx, fcdTerm.displayedDom, CatdOf(elabZ), stackDepth + 1, options);
+            const elabD = check(ctx, fcdTerm.displayedCod, CatdOf(elabZ), stackDepth + 1, options);
+            return { elaboratedTerm: FunctorCatdTerm(elabZ, elabE, elabD), type: CatdOf(elabZ) };
+        }
         case 'TransfCategoryTerm': {
             const tcTerm = current as Term & TransfCategoryTermType;
             const elabA = check(ctx, tcTerm.catA, CatTerm(), stackDepth + 1, options);
@@ -528,6 +537,16 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
             const elabF = check(ctx, tcTerm.functorF, ObjTerm(functorCatAB), stackDepth + 1, options);
             const elabG = check(ctx, tcTerm.functorG, ObjTerm(functorCatAB), stackDepth + 1, options);
             return { elaboratedTerm: TransfCategoryTerm(elabA, elabB, elabF, elabG), type: CatTerm() };
+        }
+        case 'TransfCatdTerm': {
+            const tcdTerm = current as Term & TransfCatdTermType;
+            const elabZ = check(ctx, tcdTerm.baseCat, CatTerm(), stackDepth + 1, options);
+            const elabE = check(ctx, tcdTerm.displayedDom, CatdOf(elabZ), stackDepth + 1, options);
+            const elabD = check(ctx, tcdTerm.displayedCod, CatdOf(elabZ), stackDepth + 1, options);
+            const functordCat = FunctordCategoryTerm(elabZ, elabE, elabD);
+            const elabFF = check(ctx, tcdTerm.functorFF, ObjTerm(functordCat), stackDepth + 1, options);
+            const elabGG = check(ctx, tcdTerm.functorGG, ObjTerm(functordCat), stackDepth + 1, options);
+            return { elaboratedTerm: TransfCatdTerm(elabZ, elabE, elabD, elabFF, elabGG), type: CatdOf(elabZ) };
         }
         case 'TransfdCategoryTerm': {
             const tdcTerm = current as Term & TransfdCategoryTermType;

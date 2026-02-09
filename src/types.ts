@@ -35,7 +35,9 @@ export type BaseTerm =
     | { tag: 'FunctorTypeTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FunctorCategoryTerm', domainCat: Term, codomainCat: Term }
     | { tag: 'FunctordCategoryTerm', baseCat: Term, displayedDom: Term, displayedCod: Term } // Functord_cat
+    | { tag: 'FunctorCatdTerm', baseCat: Term, displayedDom: Term, displayedCod: Term } // Functor_catd
     | { tag: 'TransfCategoryTerm', catA: Term, catB: Term, functorF: Term, functorG: Term } // Transf_cat
+    | { tag: 'TransfCatdTerm', baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term } // Transf_catd
     | { tag: 'TransfdCategoryTerm', baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term } // Transfd_cat
     | { tag: 'FMap0Term', // fapp0 F X
         functor: Term, // Term of type FunctorTypeTerm(catA, catB)
@@ -232,8 +234,14 @@ export const FunctorCategoryTerm = (domainCat: Term, codomainCat: Term): Term & 
 export const FunctordCategoryTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term): Term & { tag: 'FunctordCategoryTerm' } =>
     ({ tag: 'FunctordCategoryTerm', baseCat, displayedDom, displayedCod });
 
+export const FunctorCatdTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term): Term & { tag: 'FunctorCatdTerm' } =>
+    ({ tag: 'FunctorCatdTerm', baseCat, displayedDom, displayedCod });
+
 export const TransfCategoryTerm = (catA: Term, catB: Term, functorF: Term, functorG: Term): Term & { tag: 'TransfCategoryTerm' } =>
     ({ tag: 'TransfCategoryTerm', catA, catB, functorF, functorG });
+
+export const TransfCatdTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term): Term & { tag: 'TransfCatdTerm' } =>
+    ({ tag: 'TransfCatdTerm', baseCat, displayedDom, displayedCod, functorFF, functorGG });
 
 export const TransfdCategoryTerm = (baseCat: Term, displayedDom: Term, displayedCod: Term, functorFF: Term, functorGG: Term): Term & { tag: 'TransfdCategoryTerm' } =>
     ({ tag: 'TransfdCategoryTerm', baseCat, displayedDom, displayedCod, functorFF, functorGG });

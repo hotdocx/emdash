@@ -88,11 +88,21 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
             return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||
                    termContainsHole(current.displayedCod, holeId, visited, depth + 1);
+        case 'FunctorCatdTerm':
+            return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedCod, holeId, visited, depth + 1);
         case 'TransfCategoryTerm':
             return termContainsHole(current.catA, holeId, visited, depth + 1) ||
                    termContainsHole(current.catB, holeId, visited, depth + 1) ||
                    termContainsHole(current.functorF, holeId, visited, depth + 1) ||
                    termContainsHole(current.functorG, holeId, visited, depth + 1);
+        case 'TransfCatdTerm':
+            return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||
+                   termContainsHole(current.displayedCod, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorFF, holeId, visited, depth + 1) ||
+                   termContainsHole(current.functorGG, holeId, visited, depth + 1);
         case 'TransfdCategoryTerm':
             return termContainsHole(current.baseCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.displayedDom, holeId, visited, depth + 1) ||

@@ -91,11 +91,23 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 traverse(current.displayedDom);
                 traverse(current.displayedCod);
                 break;
+            case 'FunctorCatdTerm':
+                traverse(current.baseCat);
+                traverse(current.displayedDom);
+                traverse(current.displayedCod);
+                break;
             case 'TransfCategoryTerm':
                 traverse(current.catA);
                 traverse(current.catB);
                 traverse(current.functorF);
                 traverse(current.functorG);
+                break;
+            case 'TransfCatdTerm':
+                traverse(current.baseCat);
+                traverse(current.displayedDom);
+                traverse(current.displayedCod);
+                traverse(current.functorFF);
+                traverse(current.functorGG);
                 break;
             case 'TransfdCategoryTerm':
                 traverse(current.baseCat);
@@ -277,11 +289,21 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                 return find(term.baseCat, ctx) ||
                        find(term.displayedDom, ctx) ||
                        find(term.displayedCod, ctx);
+            case 'FunctorCatdTerm':
+                return find(term.baseCat, ctx) ||
+                       find(term.displayedDom, ctx) ||
+                       find(term.displayedCod, ctx);
             case 'TransfCategoryTerm':
                 return find(term.catA, ctx) ||
                        find(term.catB, ctx) ||
                        find(term.functorF, ctx) ||
                        find(term.functorG, ctx);
+            case 'TransfCatdTerm':
+                return find(term.baseCat, ctx) ||
+                       find(term.displayedDom, ctx) ||
+                       find(term.displayedCod, ctx) ||
+                       find(term.functorFF, ctx) ||
+                       find(term.functorGG, ctx);
             case 'TransfdCategoryTerm':
                 return find(term.baseCat, ctx) ||
                        find(term.displayedDom, ctx) ||

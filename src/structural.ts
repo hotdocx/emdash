@@ -6,7 +6,7 @@
 import {
     Term, Context, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
-    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, TApp1FApp0Term, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
+    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, TApp1FApp0Term, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, FunctorCatdTerm, TransfCategoryTerm, TransfCatdTerm, TransfdCategoryTerm
 } from './types';
 import { getTermRef, freshHoleName, extendCtx } from './state';
 import { MAX_STACK_DEPTH } from './constants';
@@ -108,12 +108,26 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
                    areStructurallyEqualNoWhnf(rt1.displayedDom, fc2.displayedDom, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.displayedCod, fc2.displayedCod, ctx, depth + 1);
         }
+        case 'FunctorCatdTerm': {
+            const fc2 = rt2 as Term & {tag:'FunctorCatdTerm'};
+            return areStructurallyEqualNoWhnf(rt1.baseCat, fc2.baseCat, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.displayedDom, fc2.displayedDom, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.displayedCod, fc2.displayedCod, ctx, depth + 1);
+        }
         case 'TransfCategoryTerm': {
             const tc2 = rt2 as Term & {tag:'TransfCategoryTerm'};
             return areStructurallyEqualNoWhnf(rt1.catA, tc2.catA, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.catB, tc2.catB, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.functorF, tc2.functorF, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.functorG, tc2.functorG, ctx, depth + 1);
+        }
+        case 'TransfCatdTerm': {
+            const tc2 = rt2 as Term & {tag:'TransfCatdTerm'};
+            return areStructurallyEqualNoWhnf(rt1.baseCat, tc2.baseCat, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.displayedDom, tc2.displayedDom, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.displayedCod, tc2.displayedCod, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.functorFF, tc2.functorFF, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.functorGG, tc2.functorGG, ctx, depth + 1);
         }
         case 'TransfdCategoryTerm': {
             const tc2 = rt2 as Term & {tag:'TransfdCategoryTerm'};

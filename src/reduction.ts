@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, TransfCategoryTerm, TransfdCategoryTerm
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term, BinderMode, FDApp1Term, TDApp1Term, CatCategoryTerm, CatdCategoryTerm, FunctordCategoryTerm, FunctorCatdTerm, TransfCategoryTerm, TransfCatdTerm, TransfdCategoryTerm
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -30,6 +30,64 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
     if (stackDepth > MAX_STACK_DEPTH) throw new Error(`WHNF stack depth exceeded (depth: ${stackDepth}, term: ${printTerm(term)})`);
     // if (stackDepth > 30) console.log("whnf: stackDepth > 30", {stackDepth, term: printTerm(term)});
     let current = term;
+
+    const tryReduceFibreOfDisplayedFamily = (appTerm: Term): Term | null => {
+        const args: Array<{ arg: Term; icit: Icit }> = [];
+        let head: Term = appTerm;
+        while (getTermRef(head).tag === 'App') {
+            const app = getTermRef(head) as Term & { tag: 'App' };
+            args.push({ arg: app.arg, icit: app.icit });
+            head = app.func;
+        }
+        args.reverse();
+
+        const headRef = getTermRef(head);
+        if (headRef.tag !== 'Var' || headRef.name !== 'Fibre') return null;
+        if (args.length !== 3) return null;
+        if (args[0].icit !== Icit.Expl || args[1].icit !== Icit.Expl || args[2].icit !== Icit.Expl) return null;
+
+        const zObj = args[2].arg;
+        const familyWhnf = getTermRef(whnf(args[1].arg, ctx, stackDepth + 1));
+
+        const fibreOf = (family: Term): Term =>
+            App(App(App(Var('Fibre'), args[0].arg, Icit.Expl), family, Icit.Expl), zObj, Icit.Expl);
+
+        if (familyWhnf.tag === 'FunctorCatdTerm') {
+            return FunctorCategoryTerm(
+                fibreOf(familyWhnf.displayedDom),
+                fibreOf(familyWhnf.displayedCod)
+            );
+        }
+
+        if (familyWhnf.tag === 'TransfCatdTerm') {
+            const fibreE = fibreOf(familyWhnf.displayedDom);
+            const fibreD = fibreOf(familyWhnf.displayedCod);
+            const fibreFunc = (ff: Term): Term =>
+                App(
+                    App(
+                        App(
+                            App(
+                                App(Var('Fibre_func'), familyWhnf.baseCat, Icit.Expl),
+                                familyWhnf.displayedDom, Icit.Expl
+                            ),
+                            familyWhnf.displayedCod, Icit.Expl
+                        ),
+                        ff, Icit.Expl
+                    ),
+                    zObj, Icit.Expl
+                );
+
+            return TransfCategoryTerm(
+                fibreE,
+                fibreD,
+                fibreFunc(familyWhnf.functorFF),
+                fibreFunc(familyWhnf.functorGG)
+            );
+        }
+
+        return null;
+    };
+
     for (let i = 0; i < MAX_WHNF_ITERATIONS; i++) {
         let changedInThisPass = false;
         const termAtStartOfOuterPass = current;
@@ -74,6 +132,13 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
         let reducedInKernelBlock = false;
         switch (current.tag) {
             case 'App': {
+                const fibrePointwise = tryReduceFibreOfDisplayedFamily(current);
+                if (fibrePointwise) {
+                    current = fibrePointwise;
+                    reducedInKernelBlock = true;
+                    break;
+                }
+
                 const func_whnf_ref = getTermRef(whnf(current.func, ctx, stackDepth + 1));
                 if (func_whnf_ref.tag === 'Lam' && func_whnf_ref.icit === current.icit) {
                     // Beta reduction
@@ -359,12 +424,26 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 normalize(current.displayedDom, ctx, stackDepth + 1),
                 normalize(current.displayedCod, ctx, stackDepth + 1)
             );
+        case 'FunctorCatdTerm':
+            return FunctorCatdTerm(
+                normalize(current.baseCat, ctx, stackDepth + 1),
+                normalize(current.displayedDom, ctx, stackDepth + 1),
+                normalize(current.displayedCod, ctx, stackDepth + 1)
+            );
         case 'TransfCategoryTerm':
             return TransfCategoryTerm(
                 normalize(current.catA, ctx, stackDepth + 1),
                 normalize(current.catB, ctx, stackDepth + 1),
                 normalize(current.functorF, ctx, stackDepth + 1),
                 normalize(current.functorG, ctx, stackDepth + 1)
+            );
+        case 'TransfCatdTerm':
+            return TransfCatdTerm(
+                normalize(current.baseCat, ctx, stackDepth + 1),
+                normalize(current.displayedDom, ctx, stackDepth + 1),
+                normalize(current.displayedCod, ctx, stackDepth + 1),
+                normalize(current.functorFF, ctx, stackDepth + 1),
+                normalize(current.functorGG, ctx, stackDepth + 1)
             );
         case 'TransfdCategoryTerm':
             return TransfdCategoryTerm(
