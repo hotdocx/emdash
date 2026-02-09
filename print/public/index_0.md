@@ -11,9 +11,9 @@ The core mathematical construction is a dependent comma/arrow (“dependent hom�
 $$
 \\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
 $$
-Its value at $(e_1 : E(b_1),\\; b_{01}:b_0\\to b_1)$ is the fibre hom-category $\\mathrm{Hom}_{E(b_1)}\\bigl((b_{01})_!e_0,\\,e_1\\bigr)$, and functoriality in the representable argument expresses *stacking* of $2$-cells along a $1$-cell “over the base edge”.
+Its value at $(e_1 : E(b_1),\\; b_{01}:b_0\\to b_1)$ is the fibre hom-category $\\mathrm{Hom}_{E(b_1)}\\bigl((b_{01})_!e_0,\\,e_1\\bigr)$. In the current kernel snapshot this is computational in the Grothendieck/Grothendieck probe case (`homd_` pointwise rule), while the full general normalization story is still in progress.
 
-On the transformation side, we expose explicit off-diagonal components $\\epsilon_{(f)} : F(X)\\to G(Y)$ (indexed by arrows $f:X\\to Y$) and orient naturality as *cut accumulation* rewrites, yielding exchange-law normal forms. As a complementary application, we outline a computational adjunction interface where unit/counit are first-class $2$-cell data and a triangle identity is oriented as a definitional reduction on composites (schematically $\\epsilon_f\\circ L(\\eta_g) \\rightsquigarrow f\\circ L(g)$). The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram), enabling rendering, checking, and AI-assisted editing as part of a reproducible paper artifact.
+On the transformation side, we expose explicit off-diagonal components $\\epsilon_{(f)} : F(X)\\to G(Y)$ (indexed by arrows $f:X\\to Y$) and orient naturality as *cut accumulation* rewrites. The current snapshot includes phase-2 draft strict naturality/exchange rules with sanity assertions. As a complementary application, we outline a computational adjunction interface where unit/counit are first-class $2$-cell data and a triangle identity is oriented as a definitional reduction on composites (schematically $\\epsilon_f\\circ L(\\eta_g) \\rightsquigarrow f\\circ L(g)$). The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram), enabling rendering, checking, and AI-assisted editing as part of a reproducible paper artifact.
 
 From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
 
@@ -34,6 +34,7 @@ emdash explores a kernel design where:
 1. **Rewrite-head discipline for categorical computation.** Structural equalities are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
 2. **A simplicial “triangle classifier” over base arrows.** The dependent arrow/comma construction `homd_` (and the internal pipeline `homd_int_base`) provides a computational home for “cells over a chosen base edge” (triangles/surfaces), and a compositional target for iteration.
 3. **Explicit off-diagonal interfaces for transfors (ordinary and displayed).** We expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal arrow-indexed components (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
+4. **New bridge rules in the current snapshot.** The kernel now includes explicit Grothendieck morphism-action heads (`Fibration_cov_func`, `Fibration_cov_fapp1_func`) and direct total-hom bridges (`homd_curry`, `Homd_func`) used in computational rules.
 
 # 2. Kernel principles and surface reading
 
@@ -84,10 +85,13 @@ Several kernel projections are intended to be *silent* at the surface: `τ`, `Fi
     <tr><td><code>Fibre_cat E z</code></td><td><code>E[z]</code></td><td>fibre category over <code>z</code></td></tr>
     <tr><td><code>Functord_cat E D</code></td><td><code>⊢ FF : E ⟶_Z D</code></td><td>displayed functors over fixed base</td></tr>
     <tr><td><code>Fibration_cov_catd M</code></td><td>(silent if <code>M: Z ⟶ Cat</code>)</td><td>Grothendieck construction <code>∫M</code></td></tr>
+    <tr><td><code>Fibration_cov_func</code></td><td>(internal)</td><td>functor object packaging <code>∫ : (Z→Cat)→Catd(Z)</code></td></tr>
+    <tr><td><code>Fibration_cov_fapp1_func</code></td><td>(internal)</td><td>Groth morphism-action bridge on transfors</td></tr>
     <tr><td><code>Total_cat E</code></td><td><code>∫E</code> (informal)</td><td>total category of a displayed category</td></tr>
     <tr><td><code>Total_func</code></td><td>(internal)</td><td>internalized totalization <code>(Z→Cat)→Cat</code></td></tr>
     <tr><td><code>fib_cov_tapp0_fapp0 M f u</code></td><td>$f_!(u)$</td><td>Grothendieck transport on fibre objects (strict today)</td></tr>
     <tr><td><code>homd_</code></td><td><code>Homd_E(w,−)</code> (informal)</td><td>dependent arrow/comma category (“triangle classifier”)</td></tr>
+    <tr><td><code>homd_curry</code>, <code>Homd_func</code></td><td>(internal)</td><td>direct curry/total-hom computational bridge</td></tr>
     <tr><td><code>homd_int_base</code></td><td>(internal)</td><td>compositional “indexing” pipeline for <code>homd_</code></td></tr>
     <tr><td><code>Transfd_cat FF GG</code></td><td><code>⊢ ϵ : Transfd(FF,GG)</code></td><td>displayed transfors</td></tr>
     <tr><td><code>tdapp0_fapp0 … ϵ</code></td><td><code>ϵ[e]</code> (silent)</td><td>displayed component in a fibre</td></tr>
@@ -299,6 +303,18 @@ Two additional heads matter for compositionality:
 
 - `Total_cat E` packages the total category $\\int E$ of a displayed category,
 - `Total_func` internalizes totalization as an object in `Functor_cat (Functor_cat Z Cat_cat) Cat_cat`, so it can be composed inside `Cat_cat` without unfolding large definitions.
+- `Fibration_cov_func` / `Fibration_cov_fapp1_func` package object- and morphism-action of Grothendieck construction as stable heads.
+
+In the current kernel snapshot, the object layer of totals is now computational for arbitrary displayed categories:
+$$
+\\tau\\bigl(\\mathrm{Obj}(\\mathrm{Total\\_cat}(E))\\bigr) \\;\\rightsquigarrow\\;
+\\sum_{z\\in \\mathrm{Ob}(Z)} \\mathrm{Obj}(E[z]).
+$$
+In the Grothendieck case this specializes to the expected
+$$
+\\mathrm{Ob}(\\textstyle\\int M) \\;\\simeq\\; \\sum_{z\\in \\mathrm{Ob}(Z)} \\mathrm{Ob}(M(z)).
+$$
+Hom-level computation for general `Total_cat E` remains mostly abstract, with dedicated computational bridges in Grothendieck-shaped cases.
 
 Concretely (Grothendieck case), the kernel includes:
 
@@ -362,12 +378,15 @@ In the current kernel snapshot, such points are represented in a canonical Σ-pa
 In the Grothendieck–Grothendieck case, the kernel contains a pointwise computation rule for `homd_`:
 
 ```lambdapi
-rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
-              (@Fibration_cov_catd $Z $D0) $FF)
+rule fapp0 (@homd_ $Z
+              (@Fibration_cov_catd $Z $E0)
+              (@Fibration_cov_catd $Z $D0)
+              $FF
+              $W_Z $W)
             (Struct_sigma $z (Struct_sigma $d $f))
   ↪ Hom_cat (fapp0 $E0 $z)
-      (@fib_cov_tapp0_fapp0 $Z $E0 $W_Z $z $f $W)
-      (@fdapp0 $Z (@Fibration_cov_catd $Z $D0) (@Fibration_cov_catd $Z $E0) $FF $z $d);
+      (fapp0 (fapp1_fapp0 $E0 $f) $W)
+      (@fdapp0 _ _ _ $FF $z $d);
 ```
 
 ### Figure 4: a displayed arrow over a base arrow
@@ -391,6 +410,8 @@ rule fapp0 (@homd_ $Z (@Fibration_cov_catd $Z $E0) $W_Z $W
 </div>
 
 For compositionality, the kernel also contains a “more internal” pipeline `homd_int_base` built from stable-head building blocks (opposite, fibrewise products, totalization). It is designed so later constructions can range over base arrows explicitly without rewriting blowups.
+
+In parallel, the current kernel includes a direct `homd_curry`/`Homd_func` path used as a computational bridge for homs of total categories in Grothendieck-shaped cases.
 
 <div class="fullwidth">
 <div class="mermaid">
@@ -421,7 +442,7 @@ symbol tdapp0_fapp0 : Π [Z : Cat], Π [E D : Catd Z],
 
 As with ordinary transfors, the kernel also provides **off-diagonal** displayed components over displayed arrows (stable heads `tdapp1_*`), intended to be the home for higher “lax naturality” data in the displayed setting (surface syntax `ϵ_(σ)` for $σ:e\\to_f e'$).
 
-The intended geometric reading is simplicial: triangles over base edges, and higher simplices obtained by iterating “dependent hom” layers. The current kernel snapshot contains the beginning of this machinery (enough to state and normalize many pointwise computations in the Grothendieck case), while leaving general iteration as an interface to be refined.
+The intended geometric reading is simplicial: triangles over base edges, and higher simplices obtained by iterating “dependent hom” layers. The current kernel snapshot contains the beginning of this machinery (enough to state and normalize many pointwise computations in the Grothendieck case), together with phase-2 draft strict naturality/exchange rewrite rules on `tapp1_fapp0` and a representable exchange-law sanity assertion; general iteration remains an interface to be refined.
 
 ### Figure 5: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
 
@@ -481,7 +502,7 @@ $$
 \\epsilon_f \\circ L(\\eta_g) \\;\\rightsquigarrow\\; f \\circ L(g).
 $$
 
-This is implemented as a rewrite rule at the level of stable heads (`comp_fapp0`, `fapp1_fapp0`, `tapp1_fapp0`). The key point is that normalization of a composite term *performs* the triangle reduction:
+This is implemented as a rewrite rule at the level of stable heads (`comp_fapp0`, `fapp1_fapp0`, `tapp1_fapp0`). The key point is that normalization of a composite term performs the triangle reduction. In the current snapshot this remains draft-level: the rewrite is present and typechecks, while a fully closed regression term is still marked TODO in the kernel comments.
 
 ```lambdapi
 rule comp_fapp0
@@ -542,9 +563,10 @@ The “general base map” viewpoint is recovered by pullback: a functor over $F
 
 This paper emphasizes computations that are already stable in the kernel. In particular:
 
-- **Generic displayed categories are semantic.** Outside special constructors like `Fibration_cov_catd`, a term `E : Catd Z` is intended to model isofibrations/displayed categories abstractly, and the cleavage/iso-lift interface is not yet exposed as computational structure.
+- **Displayed categories are only partially computational.** Generic `Catd` now has computational object-level structure in several places (e.g. fibres, pullback/opposite/terminal rules, and `τ (Obj (Total_cat E))`), but hom-level behavior remains mostly computational only in Grothendieck-shaped cases.
 - **Strictness placeholders exist.** Some computations (e.g. Grothendieck transport on fibre objects) are strict today as a normalization placeholder; the long-term goal is a lax/weak story where functoriality/transport come with higher cells rather than definitional equalities.
-- **Full simplicial iteration is still an interface.** `homd_` computes pointwise in the Grothendieck–Grothendieck case, and `homd_int_base` provides a compositional indexing pipeline, but deriving robust exchange/stacking normalizations uniformly remains ongoing work.
+- **Full simplicial iteration is still an interface.** `homd_` computes pointwise in the Grothendieck–Grothendieck case, `homd_curry`/`Homd_func` provide direct bridges for total homs in Groth-shaped cases, and `homd_int_base` provides compositional indexing, but uniform exchange/stacking normalization and full `homd_int` computation remain ongoing work.
+- **Adjunction layer remains draft-level.** A first triangle cut-elimination rewrite exists, but surrounding bridge infrastructure and closed regression terms are still incomplete.
 
 # References
 
@@ -560,5 +582,6 @@ This paper emphasizes computations that are already stable in the kernel. In par
 - `Functor_cat`, `fapp0`, `fapp1_fapp0`: functors as objects; object and (1-cell) arrow action.
 - `Transf_cat`, `tapp0_fapp0`, `tapp1_fapp0`: transfors; diagonal and arrow-indexed components.
 - `Catd`, `Fibre_cat`, `Functord_cat`: displayed categories, fibres, displayed functors over a fixed base.
-- `Fibration_cov_catd`: Grothendieck construction `∫M` for `M:Z→Cat` (main computation boundary).
-- `homd_`, `homd_int_base`, `homd_int`: dependent arrow/comma construction and internal pipeline (triangle classifier and iteration target).
+- `Fibration_cov_catd`, `Fibration_cov_func`, `Fibration_cov_fapp1_func`: Grothendieck construction and its object-/morphism-action bridge.
+- `homd_`, `homd_curry`, `Homd_func`: dependent arrow/comma constructions and direct total-hom computational bridges.
+- `homd_int_base`, `homd_int`: internalized indexing pipeline and displayed packaging (currently mostly interface-level).
