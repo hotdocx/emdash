@@ -14,6 +14,19 @@ Important discipline:
 Operational semantics (reductions) are implemented by Lambdapi rewrite rules and are documented
 separately; this file focuses on surface *formation/typing*.
 
+Status note (2026-02-09):
+
+- `homd_` has computational Grothendieck/Grothendieck pointwise rules.
+- `homd_curry` / `Homd_func` are active computational bridges for total-hom shapes.
+- `homd_int` remains partially interface-level.
+- strict naturality/exchange and adjunction triangle rules are present in draft phases.
+
+Notation compatibility (`EMAIL.md` terminology):
+
+- `:^f` corresponds to the functorial reading used here (default `x : A`).
+- `:^n` corresponds to “natural-index discipline”; in this document that role is split between
+  explicit context roles (`:^o`, `:^-`) and transfor-intro discipline.
+
 ## 1. Binder modes (variance)
 
 We use three binder annotations for variables ranging over objects of categories.
@@ -121,6 +134,14 @@ x : A ⊢ F[x] : B
 
 The action on arrows `F[f]` is **surface-silent**: writing `x:A` already conveys functoriality.
 
+Optional explicit form (recommended for debugging and paper examples):
+
+```
+x :^- A, y : A, f : x → y ⊢ F1[f] : F[x] → F[y]
+```
+
+This elaborates to the same kernel stable head as the silent form (`fapp1_fapp0`-style arrow action).
+
 ## 5. Displayed categories and displayed functors
 
 Displayed categories:
@@ -196,6 +217,11 @@ For `σ : homd_int(Z,E,D0,FF)`, we read:
 ```
 z:^o Z, e:E[z], z':Z, f:z→z', d:D0[z'] ⊢ σ : e →_f FF[d]
 ```
+
+Practical note:
+
+- In current kernel computation, many total-hom normalizations proceed through `homd_curry` / `Homd_func`.
+- Treat `homd_int` primarily as an internal interface/pipeline head unless a concrete computation rule is known.
 
 ## 9. Displayed transfors and explicit simplicial/off-diagonal components
 

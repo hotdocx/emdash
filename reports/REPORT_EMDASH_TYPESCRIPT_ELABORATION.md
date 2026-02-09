@@ -1,271 +1,359 @@
 # REPORT_EMDASH_TYPESCRIPT_ELABORATION.md
 
-This report consolidates the design discussion about **emdash2-style internal computational logic**
-and how to reflect it in the **TypeScript kernel** (the v1 executable kernel in `emdash1/`), while
-**ignoring string parsing** (i.e. not focusing on `emdash1/src/parser.ts`).
+Date: 2026-02-09
 
-The key point is that emdash2’s `_int_` constructions are *not parsing conveniences*: they are
-**new named discharge/abstraction operators of the type theory** whose rewrite theory makes
-functoriality/naturality *computational*.
+## 0. Purpose
 
----
+This report redesigns the TypeScript elaboration architecture in light of the current `emdash2.lp`
+status.
 
-## 0. Scope and intent
+Primary target:
 
-We focus on:
+- define a practical, implementable syntax+elaboration plan that matches current kernel reality,
+- keep the report as the reference for the next TS elaboration iteration.
 
-- the **core term/kind design starting at** `emdash1/src/types.ts`,
-- the role of **mode-annotated context binders** (variance / “how a variable may vary”),
-- the meaning of emdash2’s `*_int_*` symbols as **explicit discharge/abstraction**,
-- the functor/transfor fragment as the minimal blueprint to extend later (displayed categories,
-  `homd_int`, etc.).
+Secondary target:
 
-We explicitly do **not** focus on:
-
-- surface syntax parsing choices,
-- backward compatibility with the existing emdash1 categorical code (considered outdated).
+- align the surface document (`docs/SYNTAX_SURFACE.md`) with the same decisions.
 
 ---
 
-## 1. Why “mere variable type” is not enough: we must remember *how* variables vary
+## 1. Ground Truth From Current `emdash2.lp`
 
-In ordinary dependent type theory, “what a variable ranges over” is recorded by its type in the
-context. For emdash2, this is insufficient because emdash2 has an additional discipline:
+### 1.1 Computational today (relevant to elaboration design)
 
-> the kernel must know whether a dependency is allowed to use **arrow-indexed action**
-> (functorial/natural variation along a category), or only **object/path substitution**.
+- Stable-head discipline is central (`fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`, `tdapp0_fapp0`, etc.).
+- `Total_cat` object layer is always-Sigma:
+  - `tau (Obj (Total_cat E))` reduces to Sigma over base object + fibre object.
+- Groth bridges exist as first-class heads:
+  - `Fibration_cov_func` (object action of Groth construction),
+  - `Fibration_cov_fapp1_func` (morphism-action bridge on transfors).
+- `homd_` has a concrete Grothendieck/Grothendieck pointwise computation rule.
+- `homd_curry` and `Homd_func` are active computational bridges for total homs in Groth-shaped cases.
+- Phase-2 draft strict naturality/exchange rules on `tapp1_fapp0` exist and are typechecked.
+- Phase-3 draft adjunction triangle rewrite exists and is typechecked.
 
-This is the purpose of emdash2 binder annotations:
+### 1.2 Explicitly draft/partial
 
-- `x : A`     (functorial index)
-- `x :^o A`   (object-only index)
-- `x :^- A`   (contravariant / accumulation-friendly index)
+- `homd_int` is mostly interface-level (not full computation).
+- Full displayed Groth morphism-action bridge for deriving all external displayed heads is incomplete.
+- Adjunction layer still lacks closed regression terms around triangle normalization.
 
-Even if two binders have the same *underlying* object type (e.g. both are “objects of `A`”), they may
-have different admissible eliminations/normalizations depending on whether they are functorial/natural
-indices. This information must be carried by the **context/binders**, not by special `Var` nodes.
+Implication:
 
-### 1.1. No `CVar` / `FVar`
-
-We agreed that introducing special variable nodes like `CVar`/`FVar` is not the right move:
-
-- “variable-ness” does not carry the semantics; the semantics comes from the binder/context discipline.
-
-### 1.2. Yes: mode-annotated binders / context entries
-
-We need to extend the kernel notion of binders/context entries with:
-
-- a **binder mode** (e.g. `Functorial` / `ObjectOnly` / `Contravariant`), and
-- crucially, the **controlling category of variation** (the category whose arrows govern the allowed
-  arrow-indexed action).
-
-This controlling category is typically:
-
-- for `x :^nat A` (or `x : A` in emdash2 surface): the controlling category is `A`,
-- for `f :^func x → y`: the controlling category is `Hom_cat A x y` (a `Cat`).
-
-This is essential for internal “nested `Transf_cat`” constructions: after internalization,
-new binders appear whose controlling category is not the original `A` but a derived hom-category.
+- TS elaboration must separate what is canonical+computational now vs what is exposed as draft features.
 
 ---
 
-## 2. `:^func` vs `:^nat`: what is the right decomposition?
+## 2. Problem Statement (Syntax and Elaboration)
 
-We discovered an important distinction:
+We need a surface language that feels mathematical, but elaborates to stable kernel heads where
+normalization performs coherence.
 
-- **`:^func`** (functorial index) is a **standalone, primitive binder mode** for functorial variation.
-  Intuitively: variables marked `:^func` may be acted on along arrows of their controlling category
-  via stable-head arrow-action operators (functor hom-actions, etc.). This mode applies whenever a
-  binder ranges over some index category `K : Cat` (including hom-categories like `Hom_cat A x y`).
+The prior gap:
 
-- **`:^nat`** (natural index) is **independent of `:^func`** and is best understood as a
-  **formation/intro (discharge) discipline for transformations/transfors**: it is what authorizes
-  internal discharge of diagonal component families into a `Transf`.
+- syntax discussion focused too much on parser-level notation,
+- not enough on kernel-intent elaboration objects (`*_int_*`, stable heads, mode-aware context).
 
-In particular:
+Correct framing:
 
-- `:^func` appears in off-diagonal constructions for transformations because the internalization
-  packagers (e.g. `tapp1_int_func_transf`) produce *functors* whose domains are hom-categories; the
-  arrow/cell argument `f` is then a functorial binder ranging over that hom-category.
-  This does **not** make `:^func` derived from `:^nat`: `:^func` remains a standalone concept.
-
-### 2.1. Accumulation/cut is *rewrite theory*, not the meaning of `:^func`
-
-The “cut-accumulation” equations (exchange law normalizations, etc.) belong to the **rewrite theory of
-off-diagonal stable heads** like `ϵ_(–)` (and later displayed analogues). They are not the reason a binder
-is functorially annotated.
-
-So we keep two separate ideas:
-
-- binder-mode tells which *eliminations are admissible*;
-- rewrite rules tell how those eliminations compute/normalize (accumulation included).
+- syntax is a view,
+- elaboration chooses canonical kernel heads,
+- rewrite/unification in the kernel carries the computational logic.
 
 ---
 
-## 3. The key kernel interpretation: `*_int_*` are named discharge/abstraction operators
+## 3. Design Decisions
 
-This is the main finding.
+### 3.1 Two-layer surface strategy
 
-emdash2’s internal symbols like `tapp1_int_func_transf` are best understood as:
+We adopt two surface tiers:
 
-> explicit named operations in the kernel that **discharge structured, mode-annotated context fragments**
-> into stable-head objects (typically functors or transfors), and whose computation is governed by rewrite rules.
+1. Default ergonomic tier:
+- keep silent forms (`F[x]`, `E[z]`, `eps[x]`, `eps[e]`),
+- keep explicit off-diagonal forms (`eps_(f)`, `eps_(sigma)`).
 
-They play the same “structural role” as Π/λ in ordinary type theory, but specialized to the
-functorial/natural binder discipline.
+2. Explicit diagnostic tier:
+- allow explicit arrow-action notations (`F1[f]`, `FF1[sigma]`) as aliases,
+- elaborate them directly to stable heads (`fapp1_fapp0`, `fdapp1_*` family),
+- use this tier for debugging, tests, and documentation clarity.
 
-### 3.1. Analogy: `MkFunctorTerm` in emdash1 is already a discharge operator
+This removes the current asymmetry where `eps_(f)` is explicit but `F1[f]` is unavailable.
 
-`emdash1/src/elaboration.ts` contains `infer_mkFunctor`, where `MkFunctorTerm`:
+### 3.2 Context entries carry mode + controller
 
-- accepts `fmap0` and `fmap1`,
-- then checks the functoriality equation by normalization,
-- and produces a functor object.
+Do not introduce special variable term constructors (`CVar`, `FVar`, etc.).
 
-This is already a kernel-level “named discharge/intro” operator with computational coherence.
+Instead, each context binding stores:
 
-### 3.2. Missing sibling: a transfor discharge operator (intro for `Transf`)
+- variable name,
+- underlying type/category,
+- variation mode,
+- controlling category (for arrow-indexed action discipline).
 
-To make `ϵ : Transf F G` a *bound variable* in contexts (as required by internal `tapp1_int_*`),
-the TS kernel needs an intro/discharge operator for transfors, analogous to `MkFunctorTerm`.
+Minimal mode set:
 
-Crucially, under the intended meaning of `:^nat`, **the user does not need to supply off-diagonal data**:
+- `functorial` (default `x : A`),
+- `object_only` (`x :^o A`),
+- `contravariant` (`x :^- A`),
+- `natural_intro` (elaboration-only discipline for transfor introduction; optional surface syntax).
 
-- intro takes only diagonal components under a `:^nat` binder, and
-- off-diagonal components are *derived* by elimination/packaging operators (the `tapp1_int_*` pipeline).
+Note:
 
----
+- `natural_intro` is not a replacement for `functorial`; it is a formation/intro discipline.
+- compatibility with `EMAIL.md` wording:
+  - `:^f` maps to our functorial mode,
+  - `:^n` maps to the natural-intro discipline plus context-specific object/arrow roles.
 
-## 4. The “off-diagonal” typing discipline (the corrected, internalization-aligned form)
+### 3.3 Canonical heads policy
 
-We corrected a key point:
+Elaboration always picks canonical stable heads, not expanded expressions.
 
-The off-diagonal component of a transfor has the form
+Examples:
 
-```text
-x :^nat A, y :^nat A, f :^func (x → y)  ⊢  ϵ_(f) : Hom B (F[x]) (G[y]).
-```
+- arrow action: elaborate to `fapp1_fapp0`, not `fapp0 (fapp1_func ...) ...`,
+- transfor component: elaborate to `tapp0_fapp0`,
+- off-diagonal component: elaborate to `tapp1_fapp0`,
+- displayed analogues similarly (`tdapp0_fapp0`, `tdapp1_*` heads).
 
-Explanation:
+### 3.4 Feature flags for draft kernel regions
 
-- `x` and `y` are *natural indices* in `A`, because the object-indexed diagonal family
-  `x :^nat A ⊢ ϵ[x] : Hom B (F[x]) (G[x])` is the data that can be discharged into `Transf F G`.
-- `f` is `:^func` because (after nested internalization) the elimination pipeline produces a **functor**
-  whose domain is the **hom-category** `Hom_cat A x y`, and `f` is an object of that category. Here `:^func`
-  is used in its standalone sense (“binder varies functorially over its controlling category”).
+Expose draft computational regions behind explicit elaboration flags:
 
-So `:^func` on `f` means “argument to a functor object whose domain is `Hom_cat A x y`”.
+- `strict_naturality_phase2`,
+- `adjunction_phase3`,
+- `homd_int_experimental`.
 
----
+Default behavior:
 
-## 5. The surface-level inconsistency: `ϵ_(f)` exists but `F₁(f)` is absent
-
-We verified by inspection that:
-
-- `docs/SYNTAX_SURFACE.md` explicitly says arrow-action `F[f]` is surface-silent and does *not* provide
-  an explicit `F₁(f)` syntax.
-- `emdash2.lp` contains comments emphasizing “no explicit `F[f]` term former”.
-- `EMAIL.md` mentions both `FF₁(σ)` and `ϵ_(σ)` as intended surface notations.
-
-This is an asymmetry. For conceptual uniformity, we want functor arrow-action and transfor off-diagonal
-to sit in the same computational universe. In particular:
-
-> `F₁(f)` can be understood as `(1_F)_(f)` where `1_F` is the identity transfor on `F`.
-
-emdash2.lp itself comments about instantiating `tapp1_int_*` at identity transfors (e.g. “apply
-`tapp1_int_func_transf` to the identity transfor `1_F`”), which supports this uniformity.
-
-### 5.1. Consequence for TS kernel design
-
-Even if surface syntax remains minimal, the TS kernel should expose a uniform internal interface with
-**both** stable-head primitives:
-
-- a stable head for functor hom-action at a cell (surface-intended `F₁(f)`), and
-- a stable head for transfor off-diagonal (surface-intended `ϵ_(f)`).
-
-Then we relate the two *computationally* by either:
-
-- a **unification rule** equating them (treating them as definitionally convertible), or
-- a **rewrite rule** that orients one toward the other, e.g. `(1_F)_(f) ↪ F₁(f)` (or the opposite),
-  depending on which head you want as canonical normal form.
-
-This mirrors the emdash2 approach: keep stable heads explicit, and add small conversion/rewriting bridges
-between equivalent presentations, so normalization is predictable.
+- allow terms and typing,
+- do not promise strong normalization behavior beyond currently computational kernel regions.
 
 ---
 
-## 6. Proposed TS kernel changes (conceptual, not code yet)
+## 4. Proposed Surface Redesign
 
-Starting point: `emdash1/src/types.ts` and the existing elaboration mechanism.
+### 4.1 Keep existing base notation
 
-### 6.1. Add binder modes to core binders/context
+- `x : A`, `x :^o A`, `x :^- A`,
+- `F[x]`, `E[z]`,
+- `eps[x]`, `eps[e]`,
+- `eps_(f)`, `eps_(sigma)`.
 
-Add a binder-mode field to:
+### 4.2 Add explicit arrow-action forms (new)
 
-- context `Binding` entries, and
-- binder nodes (`Lam` / `Pi`), so the annotation survives discharge and can be consulted by `*_int_*`
-  operations and their rewrite theory.
+Recommended additions:
 
-Additionally, record (explicitly or derivably) the controlling category of variation.
+- `F1[f]`  as explicit ordinary functor arrow-action,
+- `FF1[sigma]` as explicit displayed functor dependent arrow-action (where available),
+- optional `eps1[alpha]` alias if needed for higher-level readability (desugars to `tapp1_*` usage).
 
-### 6.2. Introduce transfor intro/discharge operator(s)
+These are aliases, not new kernel primitives.
 
-Add a new core constructor (name TBD) analogous to `MkFunctorTerm`, which:
+### 4.3 Optional natural-intro binder syntax (new, optional)
 
-- takes `A B F G`,
-- takes a diagonal family under a `:^nat` binder,
-- produces a term of type `Transf F G`,
-- and makes naturality computational via the `tapp1_int_*` elimination/rewrite story (not by asking the
-  user for a separate naturality proof).
+To make transfor introduction readable, allow:
 
-### 6.3. Introduce elimination stable heads for transfors
+- `x :^n A` in intro blocks that build transfors from diagonal data.
 
-Add stable heads corresponding to emdash2’s projection/apply interface:
-
-- diagonal projection (`tapp0`-like),
-- off-diagonal projection (`tapp1`-like), and potentially packaged-as-functor variants (ω-friendly).
-
-Their computation rules should be rewrite rules that trigger on stable heads introduced by the new
-discharge operators.
-
-### 6.4. Align functor arrow-action with transfor off-diagonal
-
-Provide an internal derived operator:
-
-- `F₁(f) := (1_F)_(f)`
-
-either as a definitional rewrite or as a derived macro at the TS level.
+If omitted, elaborator can infer this in transfor-intro contexts.
 
 ---
 
-## 7. Practical roadmap (functors-only first, then transfors)
+## 5. Elaboration Architecture (TypeScript)
 
-1) **Kernel binder modes**: implement mode annotations in `types.ts` and context handling.
-2) **Functor packaging and ω-friendly hom-action**:
-   - keep `MkFunctorTerm` as the canonical introduction,
-   - add an explicit “packaged hom-action” head if needed (emdash2-style split between functor-level action
-     and capped application).
-3) **Transfor introduction (`:^nat` discharge)**:
-   - implement transfor intro operator + diagonal projection,
-   - implement the internal `tapp1_int_*`-style packaging that forces the off-diagonal binder discipline
-     (`f :^func (Hom_cat A x y)`).
-4) **Accumulation rewrite laws**:
-   - add the “cut accumulation” rewrite rules on off-diagonal stable heads to normalize pasting/exchange.
-5) **Extend to displayed categories and `homd_int`** once the binder discipline and discharge operators
-   are validated on the base functor/transfor fragment.
+### 5.1 Core data updates (`emdash1/src/types.ts`)
+
+Add:
+
+- `BinderMode` enum:
+  - `Functorial`,
+  - `ObjectOnly`,
+  - `Contravariant`,
+  - `NaturalIntro`.
+- `ContextEntry` extension with:
+  - `mode`,
+  - `controllerCat` (term id or normalized descriptor).
+
+Add/ensure stable-head term constructors exist for:
+
+- `fapp1_fapp0`,
+- `tapp0_fapp0`,
+- `tapp1_fapp0`,
+- displayed counterparts (`tdapp0_fapp0`, `tdapp1_*` wrappers),
+- optional explicit aliases (`F1`, etc.) as syntax nodes that desugar immediately.
+
+### 5.2 Elaboration phases
+
+Phase A: Parse to neutral CST/AST.
+
+Phase B: Scope + context mode assignment.
+
+Phase C: Desugar silent/explicit aliases to canonical kernel-headed AST.
+
+Phase D: Bidirectional typing with mode checks.
+
+Phase E: Insert implicit coercions/bridges only where policy allows:
+
+- Groth coercion style (`D0 : Z -> Cat` to displayed usage points),
+- no global aggressive coercions in draft regions.
+
+Phase F: Normalize/check via kernel conversion.
+
+### 5.3 Mode checks (key rules)
+
+- `object_only` variables cannot be implicitly transported along arbitrary base arrows.
+- `contravariant` variables are permitted in off-diagonal accumulation contexts.
+- `natural_intro` only appears in transfor-introduction contexts and discharges to transfor terms.
 
 ---
 
-## 8. Summary of the agreed core design principles
+## 6. Introduction and Elimination Plan
 
-1) Don’t add special variable nodes (`CVar`, `FVar`); keep `Var` simple.
-2) Do add **mode-annotated binders/context entries** (and track controlling categories).
-3) Treat emdash2 `*_int_*` symbols as **explicit named discharge/abstraction operators** with rewrite theory.
-4) Keep `:^func` as a **standalone** binder mode for functorial variation (independent of `:^nat`).
-5) Under the intended meaning of `:^nat`, introducing a `Transf` needs only diagonal data;
-   off-diagonal is derived by eliminators (`tapp1_int_*`) and computes by rewrite.
-6) Off-diagonal binder `f` is `:^func` because it is an argument to a functor whose domain is a hom-category
-   (`Hom_cat A x y`), not because of accumulation.
-7) For uniformity, keep **both** primitives `F₁(f)` and `ϵ_(f)`, and relate them computationally at
-   identity transfors (e.g. by a unification rule `F₁(f) ≡ (1_F)_(f)` or an oriented rewrite such as
-   `(1_F)_(f) ↪ F₁(f)`), choosing a canonical head for normal forms.
+### 6.1 Functor intro (already known pattern)
+
+Keep `MkFunctorTerm` style intro (or renamed equivalent):
+
+- accepts object action + arrow action skeleton,
+- coherence checked by normalization.
+
+### 6.2 Add transfor intro (new required kernel object in TS layer)
+
+Add `MkTransfTerm` (name placeholder):
+
+- input: diagonal component family under `natural_intro` discipline,
+- elaborates to canonical transfor object,
+- off-diagonal behavior is accessed by eliminators (`tapp1` pipeline), not required as intro input.
+
+This matches current emdash2 design intent: coherence from computation, not separate user lemmas.
+
+### 6.3 Displayed transfor intro (next step after ordinary transfor)
+
+Analogous constructor for displayed transfors:
+
+- diagonal displayed components as intro data,
+- off-diagonal displayed components through `tdapp1_*` eliminators.
+
+---
+
+## 7. Mapping to Current `emdash2.lp` Heads
+
+### 7.1 Ordinary
+
+- `F[x]` -> `fapp0 F x`
+- `F1[f]` -> `fapp1_fapp0 F f`
+- `eps[x]` -> `tapp0_fapp0 x eps`
+- `eps_(f)` -> `tapp1_fapp0 eps f`
+
+### 7.2 Displayed
+
+- `FF[e]` -> `fdapp0 FF z e` (with inferred `z`)
+- `eps[e]` -> `tdapp0_fapp0 z e eps`
+- `eps_(sigma)` -> `tdapp1_*` path (chosen canonical head by elaborator policy)
+
+### 7.3 Dependent hom layer
+
+Use two distinct elaboration routes:
+
+- computational route (preferred where applicable):
+  - `homd_` + `homd_curry` + `Homd_func` for total-hom shaped terms.
+- interface route:
+  - `homd_int` family where no strong computation is guaranteed yet.
+
+---
+
+## 8. Potential Solution to the Syntax Question
+
+Recommended answer:
+
+1. Keep current concise syntax as default.
+2. Add explicit arrow-action syntax (`F1[f]`, displayed analogues) as first-class aliases.
+3. Adopt mode-aware context as mandatory elaboration infrastructure.
+4. Treat `*_int_*` as elaboration targets (named discharge/abstraction operators), not parser sugar.
+5. Keep draft kernel regions behind feature flags in elaboration behavior.
+
+This yields:
+
+- user-readable terms,
+- predictable normalization (stable heads),
+- no artificial variable taxonomy,
+- architecture aligned with `emdash2.lp` as it exists today.
+
+---
+
+## 9. Implementation Plan (Incremental)
+
+M0:
+
+- add mode/controller in context,
+- no syntax changes yet,
+- ensure old tests pass.
+
+M1:
+
+- add explicit alias syntax forms `F1[f]` (and parser mapping),
+- desugar to canonical heads,
+- add unit tests for equivalence with silent forms.
+
+M2:
+
+- add `MkTransfTerm` intro path,
+- implement diagonal-only intro elaboration,
+- projection/elimination checks through `tapp0/tapp1` heads.
+
+M3:
+
+- add displayed transfor intro path,
+- enable explicit displayed off-diagonal alias where feasible.
+
+M4:
+
+- add draft feature flags (`strict_naturality_phase2`, `adjunction_phase3`, `homd_int_experimental`),
+- test matrix by feature profile.
+
+---
+
+## 10. Test Strategy
+
+### 10.1 Elaboration tests
+
+- silent vs explicit alias equivalence:
+  - `F[x]` and `F1[id_x]`-related scenarios,
+  - `eps[x]` vs `eps_(id_x)` bridge behavior where available.
+
+- mode safety:
+  - reject illegal arrow transport from `object_only`.
+
+### 10.2 Normalization-facing tests
+
+- transfor off-diagonal accumulation (phase-2 enabled).
+- representable exchange sanity shape.
+- adjunction triangle rewrite shape (phase-3 enabled).
+
+### 10.3 Regression gates
+
+- maintain compatibility with current `emdash2.lp` conversion behavior.
+- avoid introducing elaboration rewrites that assume unimplemented `homd_int` computation.
+
+---
+
+## 11. Updates Needed in `docs/SYNTAX_SURFACE.md`
+
+Minimum sync updates:
+
+- document explicit alias forms (`F1[f]`, displayed equivalent) as optional/debug-tier syntax,
+- clarify that `homd_curry`/`Homd_func` are active computational bridges while `homd_int` remains partial,
+- clarify draft status of strict naturality/exchange and adjunction triangle regions.
+
+---
+
+## 12. Final Recommendation
+
+Adopt the two-tier syntax + mode-aware elaboration architecture now, with canonical stable-head output
+and explicit draft feature flags.
+
+This is the shortest path that is:
+
+- faithful to current `emdash2.lp`,
+- implementable in the TypeScript kernel,
+- compatible with future completion of the `homd_int` and displayed bridge story.
