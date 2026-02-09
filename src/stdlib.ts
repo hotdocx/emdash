@@ -146,6 +146,72 @@ export function setupPhase1GlobalsAndRules() {
         undefined, false, false
     );
 
+    // Minimal displayed shell (emdash2-oriented typing interface).
+    defineGlobal("Catd",
+        Pi("Z", Icit.Expl, CatTerm(), _ => Type()),
+        undefined, true, true
+    );
+
+    const CatdOf = (Z: Term): Term => App(Var("Catd"), Z, Icit.Expl);
+    const FibreOf = (Z: Term, E: Term, z: Term): Term =>
+        App(App(App(Var("Fibre"), Z, Icit.Expl), E, Icit.Expl), z, Icit.Expl);
+    const FunctordOf = (Z: Term, E: Term, D: Term): Term =>
+        App(App(App(Var("Functord"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl);
+
+    defineGlobal("Fibre",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), _E =>
+        Pi("z", Icit.Expl, ObjTerm(Z), _z =>
+            CatTerm()))),
+        undefined, true, true
+    );
+
+    defineGlobal("Functord",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), _E =>
+        Pi("D", Icit.Expl, CatdOf(Z), _D =>
+            Type()))),
+        undefined, true, true
+    );
+
+    defineGlobal("fdapp0",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), _FF =>
+        Pi("z", Icit.Expl, ObjTerm(Z), z =>
+        Pi("e", Icit.Expl, ObjTerm(FibreOf(Z, E, z)), _e =>
+            ObjTerm(FibreOf(Z, D, z)))))))),
+        undefined, true, true
+    );
+
+    defineGlobal("Transfd",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), FF =>
+        Pi("GG", Icit.Expl, FunctordOf(Z, E, D), _GG =>
+            Type()))))),
+        undefined, true, true
+    );
+
+    defineGlobal("tdapp0_fapp0",
+        Pi("Z", Icit.Expl, CatTerm(), Z =>
+        Pi("E", Icit.Expl, CatdOf(Z), E =>
+        Pi("D", Icit.Expl, CatdOf(Z), D =>
+        Pi("FF", Icit.Expl, FunctordOf(Z, E, D), FF =>
+        Pi("GG", Icit.Expl, FunctordOf(Z, E, D), GG =>
+        Pi("z", Icit.Expl, ObjTerm(Z), z =>
+        Pi("e", Icit.Expl, ObjTerm(FibreOf(Z, E, z)), e =>
+        Pi("eps", Icit.Expl, App(App(App(App(App(Var("Transfd"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), GG, Icit.Expl), _eps =>
+            HomTerm(
+                FibreOf(Z, D, z),
+                App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), FF, Icit.Expl), z, Icit.Expl), e, Icit.Expl),
+                App(App(App(App(App(App(Var("fdapp0"), Z, Icit.Expl), E, Icit.Expl), D, Icit.Expl), GG, Icit.Expl), z, Icit.Expl), e, Icit.Expl)
+            ))))))))),
+        undefined, true, true
+    );
+
     defineGlobal("identity_morph",
         Pi("A", Icit.Impl, CatTerm(), A_val =>
             Pi("X", Icit.Expl, App(Var("Obj"), A_val, Icit.Expl), X_val =>

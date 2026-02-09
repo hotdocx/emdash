@@ -109,6 +109,16 @@ export function findHoles(term: Term, visited: Set<Term> = new Set()): (Term & {
                 if (current.functorF_IMPLICIT) traverse(current.functorF_IMPLICIT);
                 if (current.functorG_IMPLICIT) traverse(current.functorG_IMPLICIT);
                 break;
+            case 'TApp1FApp0Term':
+                traverse(current.transformation);
+                traverse(current.morphism_f);
+                if (current.catA_IMPLICIT) traverse(current.catA_IMPLICIT);
+                if (current.catB_IMPLICIT) traverse(current.catB_IMPLICIT);
+                if (current.functorF_IMPLICIT) traverse(current.functorF_IMPLICIT);
+                if (current.functorG_IMPLICIT) traverse(current.functorG_IMPLICIT);
+                if (current.objX_A_IMPLICIT) traverse(current.objX_A_IMPLICIT);
+                if (current.objY_A_IMPLICIT) traverse(current.objY_A_IMPLICIT);
+                break;
             case 'HomCovFunctorIdentity':
                 traverse(current.domainCat);
                 traverse(current.objW_InDomainCat);
@@ -228,6 +238,14 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                        (term.catB_IMPLICIT ? find(term.catB_IMPLICIT, ctx) : null) ||
                        (term.functorF_IMPLICIT ? find(term.functorF_IMPLICIT, ctx) : null) ||
                        (term.functorG_IMPLICIT ? find(term.functorG_IMPLICIT, ctx) : null);
+            case 'TApp1FApp0Term':
+                return find(term.transformation, ctx) || find(term.morphism_f, ctx) ||
+                       (term.catA_IMPLICIT ? find(term.catA_IMPLICIT, ctx) : null) ||
+                       (term.catB_IMPLICIT ? find(term.catB_IMPLICIT, ctx) : null) ||
+                       (term.functorF_IMPLICIT ? find(term.functorF_IMPLICIT, ctx) : null) ||
+                       (term.functorG_IMPLICIT ? find(term.functorG_IMPLICIT, ctx) : null) ||
+                       (term.objX_A_IMPLICIT ? find(term.objX_A_IMPLICIT, ctx) : null) ||
+                       (term.objY_A_IMPLICIT ? find(term.objY_A_IMPLICIT, ctx) : null);
             case 'HomCovFunctorIdentity':
                 return find(term.domainCat, ctx) || find(term.objW_InDomainCat, ctx);
             case 'MkFunctorTerm':

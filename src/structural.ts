@@ -6,7 +6,7 @@
 import {
     Term, Context, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
-    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit
+    NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, TApp1FApp0Term
 } from './types';
 import { getTermRef, freshHoleName, extendCtx } from './state';
 import { MAX_STACK_DEPTH } from './constants';
@@ -160,6 +160,25 @@ export function areStructurallyEqualNoWhnf(t1: Term, t2: Term, ctx: Context, dep
             }
             return areStructurallyEqualNoWhnf(rt1.transformation, nc2.transformation, ctx, depth + 1) &&
                    areStructurallyEqualNoWhnf(rt1.objectX, nc2.objectX, ctx, depth + 1);
+        }
+        case 'TApp1FApp0Term': {
+            const t2 = rt2 as Term & {tag:'TApp1FApp0Term'};
+            const implicitsMatch = (imp1?: Term, imp2?: Term): boolean => {
+                const rImp1 = imp1 ? getTermRef(imp1) : undefined;
+                const rImp2 = imp2 ? getTermRef(imp2) : undefined;
+                if (rImp1 && rImp2) return areStructurallyEqualNoWhnf(rImp1, rImp2, ctx, depth + 1);
+                return rImp1 === rImp2;
+            };
+            if (!implicitsMatch(rt1.catA_IMPLICIT, t2.catA_IMPLICIT) ||
+                !implicitsMatch(rt1.catB_IMPLICIT, t2.catB_IMPLICIT) ||
+                !implicitsMatch(rt1.functorF_IMPLICIT, t2.functorF_IMPLICIT) ||
+                !implicitsMatch(rt1.functorG_IMPLICIT, t2.functorG_IMPLICIT) ||
+                !implicitsMatch(rt1.objX_A_IMPLICIT, t2.objX_A_IMPLICIT) ||
+                !implicitsMatch(rt1.objY_A_IMPLICIT, t2.objY_A_IMPLICIT)) {
+                return false;
+            }
+            return areStructurallyEqualNoWhnf(rt1.transformation, t2.transformation, ctx, depth + 1) &&
+                   areStructurallyEqualNoWhnf(rt1.morphism_f, t2.morphism_f, ctx, depth + 1);
         }
         case 'HomCovFunctorIdentity': {
             const hc2 = rt2 as Term & {tag:'HomCovFunctorIdentity'};

@@ -18,8 +18,7 @@ import './implicit_args_tests';
 import './church_encoding_tests';
 import './church_encoding_implicit_tests';
 import './let_binding_tests';
-import './functorial_elaboration';
-import './phase1_tests';
+import './emdash2_functor_transfor_tests';
 import './parser_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,

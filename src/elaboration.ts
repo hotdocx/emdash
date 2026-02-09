@@ -9,7 +9,7 @@ import {
     Term, Context, ElaborationResult, Icit, Hole, Var, App, Lam, Pi, Type, Let, CatTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm,
     NatTransComponentTerm, HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, BaseTerm,
-    MkFunctorTerm
+    MkFunctorTerm, TApp1FApp0Term
 } from './types';
 import {
     emptyCtx, extendCtx, lookupCtx, globalDefs, addConstraint, getTermRef,
@@ -29,6 +29,7 @@ type FMap0TermType = Extract<BaseTerm, { tag: 'FMap0Term' }>;
 type FMap1TermType = Extract<BaseTerm, { tag: 'FMap1Term' }>;
 type NatTransTypeTermType = Extract<BaseTerm, { tag: 'NatTransTypeTerm' }>;
 type NatTransComponentTermType = Extract<BaseTerm, { tag: 'NatTransComponentTerm' }>;
+type TApp1FApp0TermType = Extract<BaseTerm, { tag: 'TApp1FApp0Term' }>;
 type HomCovFunctorIdentityType = Extract<BaseTerm, { tag: 'HomCovFunctorIdentity' }>;
 
 
@@ -420,6 +421,36 @@ export function infer(ctx: Context, term: Term, stackDepth: number = 0, options:
 
             const finalNatTransComp = NatTransComponentTerm(elabTransformation, elabObjectX, getTermRef(elabCatA), getTermRef(elabCatB), getTermRef(elabFunctorF), getTermRef(elabFunctorG));
             return { elaboratedTerm: finalNatTransComp, type: HomTerm(getTermRef(elabCatB), fmap0_F_X, fmap0_G_X) };
+        }
+        case 'TApp1FApp0Term': { // Off-diagonal component of a natural transformation (tapp1_fapp0 eps f)
+            const t1Term = current as Term & TApp1FApp0TermType;
+
+            const elabCatA = check(ctx, t1Term.catA_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabCatB = check(ctx, t1Term.catB_IMPLICIT!, CatTerm(), stackDepth + 1, options);
+            const elabFunctorF = check(ctx, t1Term.functorF_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, options);
+            const elabFunctorG = check(ctx, t1Term.functorG_IMPLICIT!, FunctorTypeTerm(elabCatA, elabCatB), stackDepth + 1, options);
+            const elabObjX_A = check(ctx, t1Term.objX_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, options);
+            const elabObjY_A = check(ctx, t1Term.objY_A_IMPLICIT!, ObjTerm(elabCatA), stackDepth + 1, options);
+
+            const expectedTransformationType = NatTransTypeTerm(elabCatA, elabCatB, elabFunctorF, elabFunctorG);
+            const elabTransformation = check(ctx, t1Term.transformation, expectedTransformationType, stackDepth + 1, options);
+            const elabMorphismF = check(ctx, t1Term.morphism_f, HomTerm(elabCatA, elabObjX_A, elabObjY_A), stackDepth + 1, options);
+
+            const fmap0_F_X = FMap0Term(elabFunctorF, elabObjX_A, getTermRef(elabCatA), getTermRef(elabCatB));
+            const fmap0_G_Y = FMap0Term(elabFunctorG, elabObjY_A, getTermRef(elabCatA), getTermRef(elabCatB));
+
+            const finalTApp1 = TApp1FApp0Term(
+                elabTransformation,
+                elabMorphismF,
+                getTermRef(elabCatA),
+                getTermRef(elabCatB),
+                getTermRef(elabFunctorF),
+                getTermRef(elabFunctorG),
+                getTermRef(elabObjX_A),
+                getTermRef(elabObjY_A)
+            );
+
+            return { elaboratedTerm: finalTApp1, type: HomTerm(getTermRef(elabCatB), fmap0_F_X, fmap0_G_Y) };
         }
         case 'HomCovFunctorIdentity': { // Hom_A(W, -) functor
             const hciTerm = current as Term & HomCovFunctorIdentityType;

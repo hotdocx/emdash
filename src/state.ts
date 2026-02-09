@@ -7,7 +7,7 @@
 
 import {
     Term, Context, GlobalDef, StoredRewriteRule, UnificationRule, Constraint, Icit,
-    Hole, Binding, BaseTerm, Var
+    Hole, Binding, BaseTerm, Var, BinderMode
 } from './types'; // Assuming all type constructors (Type, Var, etc.) are exported from types.ts
 
 // Global Flags
@@ -104,8 +104,16 @@ export function getTermRef(term: Term): Term {
  * @param definition Optional definition for the variable (for local lets).
  * @returns The new, extended context.
  */
-export const extendCtx = (ctx: Context, name: string, type: Term, icit: Icit = Icit.Expl, definition?: Term): Context => {
-    return [{ name, type, icit, definition }, ...ctx];
+export const extendCtx = (
+    ctx: Context,
+    name: string,
+    type: Term,
+    icit: Icit = Icit.Expl,
+    definition?: Term,
+    mode: BinderMode = BinderMode.Functorial,
+    controllerCat?: Term
+): Context => {
+    return [{ name, type, icit, definition, mode, controllerCat }, ...ctx];
 };
 
 /**
@@ -296,6 +304,8 @@ export function printTerm(term: Term, boundVarsMap: Map<string, string> = new Ma
             return `(Transf ${printTerm(current.catA, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.catB, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorF, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.functorG, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'NatTransComponentTerm':
             return `(tapp ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objectX, new Map(boundVarsMap), stackDepth + 1)})`;
+        case 'TApp1FApp0Term':
+            return `(tapp1_fapp0 ${printTerm(current.transformation, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.morphism_f, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'HomCovFunctorIdentity':
             return `(HomCovFunctor ${printTerm(current.domainCat, new Map(boundVarsMap), stackDepth + 1)} ${printTerm(current.objW_InDomainCat, new Map(boundVarsMap), stackDepth + 1)})`;
         case 'MkFunctorTerm':

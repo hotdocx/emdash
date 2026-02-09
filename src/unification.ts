@@ -6,7 +6,7 @@
 import {
     Term, Context, UnifyResult, Hole, Var, App, Lam, Pi, Let, Type, CatTerm, ObjTerm, HomTerm,
     FunctorCategoryTerm, FMap0Term, FMap1Term, NatTransTypeTerm, NatTransComponentTerm,
-    HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, Substitution, PatternVarDecl, UnificationRule
+    HomCovFunctorIdentity, SetTerm, FunctorTypeTerm, Icit, Substitution, PatternVarDecl, UnificationRule, TApp1FApp0Term
 } from './types';
 import {
     getTermRef, consoleLog, globalDefs, addConstraint, constraints, extendCtx, isEmdashUnificationInjectiveStructurally,
@@ -106,6 +106,15 @@ export function termContainsHole(term: Term, holeId: string, visited: Set<string
                    (current.catB_IMPLICIT && termContainsHole(current.catB_IMPLICIT, holeId, visited, depth + 1)) ||
                    (current.functorF_IMPLICIT && termContainsHole(current.functorF_IMPLICIT, holeId, visited, depth + 1)) ||
                    (current.functorG_IMPLICIT && termContainsHole(current.functorG_IMPLICIT, holeId, visited, depth + 1));
+        case 'TApp1FApp0Term':
+            return termContainsHole(current.transformation, holeId, visited, depth + 1) ||
+                   termContainsHole(current.morphism_f, holeId, visited, depth + 1) ||
+                   (current.catA_IMPLICIT && termContainsHole(current.catA_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.catB_IMPLICIT && termContainsHole(current.catB_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.functorF_IMPLICIT && termContainsHole(current.functorF_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.functorG_IMPLICIT && termContainsHole(current.functorG_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objX_A_IMPLICIT && termContainsHole(current.objX_A_IMPLICIT, holeId, visited, depth + 1)) ||
+                   (current.objY_A_IMPLICIT && termContainsHole(current.objY_A_IMPLICIT, holeId, visited, depth + 1));
         case 'HomCovFunctorIdentity':
             return termContainsHole(current.domainCat, holeId, visited, depth + 1) ||
                    termContainsHole(current.objW_InDomainCat, holeId, visited, depth + 1);
@@ -459,6 +468,17 @@ export function unify(t1: Term, t2: Term, ctx: Context, depth = 0): UnifyResult 
             const args1_nc = [nc1.transformation, nc1.objectX, nc1.catA_IMPLICIT, nc1.catB_IMPLICIT, nc1.functorF_IMPLICIT, nc1.functorG_IMPLICIT];
             const args2_nc = [nc2.transformation, nc2.objectX, nc2.catA_IMPLICIT, nc2.catB_IMPLICIT, nc2.functorF_IMPLICIT, nc2.functorG_IMPLICIT];
             if (areAllArgsConvertible(args1_nc, args2_nc, ctx, depth + 1)) {
+                return UnifyResult.Solved;
+            } else {
+                return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);
+            }
+        }
+        case 'TApp1FApp0Term': { // NON-INJECTIVE
+            const t1 = rt1_final as Term & {tag:'TApp1FApp0Term'};
+            const t2 = rt2_final as Term & {tag:'TApp1FApp0Term'};
+            const args1_t = [t1.transformation, t1.morphism_f, t1.catA_IMPLICIT, t1.catB_IMPLICIT, t1.functorF_IMPLICIT, t1.functorG_IMPLICIT, t1.objX_A_IMPLICIT, t1.objY_A_IMPLICIT];
+            const args2_t = [t2.transformation, t2.morphism_f, t2.catA_IMPLICIT, t2.catB_IMPLICIT, t2.functorF_IMPLICIT, t2.functorG_IMPLICIT, t2.objX_A_IMPLICIT, t2.objY_A_IMPLICIT];
+            if (areAllArgsConvertible(args1_t, args2_t, ctx, depth + 1)) {
                 return UnifyResult.Solved;
             } else {
                 return tryUnificationRules(rt1_final, rt2_final, ctx, depth + 1);

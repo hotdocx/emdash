@@ -6,7 +6,7 @@
 import {
     Term, Context, PatternVarDecl, Substitution, Hole, Var, App, Lam, Pi, Type, Let, CatTerm, SetTerm,
     ObjTerm, HomTerm, FunctorCategoryTerm, FunctorTypeTerm, FMap0Term, FMap1Term,
-    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm
+    NatTransTypeTerm, NatTransComponentTerm, HomCovFunctorIdentity, Icit, UnificationRule, MkFunctorTerm, TApp1FApp0Term
 } from './types';
 import {
     getTermRef, freshVarName, freshHoleName, extendCtx, printTerm,
@@ -328,6 +328,17 @@ export function matchPattern(
             s = matchPattern(ncP.transformation, ncT.transformation, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
             return matchPattern(ncP.objectX, ncT.objectX, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
         }
+        case 'TApp1FApp0Term': {
+            const tP = rtPattern; const tT = rtTermToMatch as Term & {tag:'TApp1FApp0Term'};
+            let s: Substitution | null = subst;
+            const implicitsP = [tP.catA_IMPLICIT, tP.catB_IMPLICIT, tP.functorF_IMPLICIT, tP.functorG_IMPLICIT, tP.objX_A_IMPLICIT, tP.objY_A_IMPLICIT];
+            const implicitsT = [tT.catA_IMPLICIT, tT.catB_IMPLICIT, tT.functorF_IMPLICIT, tT.functorG_IMPLICIT, tT.objX_A_IMPLICIT, tT.objY_A_IMPLICIT];
+            for(let i=0; i<implicitsP.length; i++) {
+                if (implicitsP[i]) { if (!implicitsT[i]) return null; s = matchPattern(implicitsP[i]!, implicitsT[i]!, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null; }
+            }
+            s = matchPattern(tP.transformation, tT.transformation, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping); if (!s) return null;
+            return matchPattern(tP.morphism_f, tT.morphism_f, ctx, patternVarDecls, s, stackDepth + 1, patternLocalBinders, binderNameMapping);
+        }
         case 'HomCovFunctorIdentity': {
             const hcP = rtPattern as Term & {tag:'HomCovFunctorIdentity'};
             const hcT = rtTermToMatch as Term & {tag:'HomCovFunctorIdentity'};
@@ -511,6 +522,17 @@ export function applySubst(term: Term, subst: Substitution, patternVarDecls: Pat
                 current.functorF_IMPLICIT ? applySubst(current.functorF_IMPLICIT, subst, patternVarDecls) : undefined,
                 current.functorG_IMPLICIT ? applySubst(current.functorG_IMPLICIT, subst, patternVarDecls) : undefined
             );
+        case 'TApp1FApp0Term':
+            return TApp1FApp0Term(
+                applySubst(current.transformation, subst, patternVarDecls),
+                applySubst(current.morphism_f, subst, patternVarDecls),
+                current.catA_IMPLICIT ? applySubst(current.catA_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.catB_IMPLICIT ? applySubst(current.catB_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.functorF_IMPLICIT ? applySubst(current.functorF_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.functorG_IMPLICIT ? applySubst(current.functorG_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.objX_A_IMPLICIT ? applySubst(current.objX_A_IMPLICIT, subst, patternVarDecls) : undefined,
+                current.objY_A_IMPLICIT ? applySubst(current.objY_A_IMPLICIT, subst, patternVarDecls) : undefined
+            );
         case 'HomCovFunctorIdentity':
             return HomCovFunctorIdentity(
                 applySubst(current.domainCat, subst, patternVarDecls),
@@ -606,6 +628,16 @@ export function collectPatternVars(term: Term, patternVarDecls: PatternVarDecl[]
             if(current.catB_IMPLICIT) collectPatternVars(current.catB_IMPLICIT, patternVarDecls, collectedVars, visited);
             if(current.functorF_IMPLICIT) collectPatternVars(current.functorF_IMPLICIT, patternVarDecls, collectedVars, visited);
             if(current.functorG_IMPLICIT) collectPatternVars(current.functorG_IMPLICIT, patternVarDecls, collectedVars, visited);
+            break;
+        case 'TApp1FApp0Term':
+            collectPatternVars(current.transformation, patternVarDecls, collectedVars, visited);
+            collectPatternVars(current.morphism_f, patternVarDecls, collectedVars, visited);
+            if(current.catA_IMPLICIT) collectPatternVars(current.catA_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.catB_IMPLICIT) collectPatternVars(current.catB_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.functorF_IMPLICIT) collectPatternVars(current.functorF_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.functorG_IMPLICIT) collectPatternVars(current.functorG_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objX_A_IMPLICIT) collectPatternVars(current.objX_A_IMPLICIT, patternVarDecls, collectedVars, visited);
+            if(current.objY_A_IMPLICIT) collectPatternVars(current.objY_A_IMPLICIT, patternVarDecls, collectedVars, visited);
             break;
         case 'HomCovFunctorIdentity':
             collectPatternVars(current.domainCat, patternVarDecls, collectedVars, visited);
@@ -842,6 +874,17 @@ export function replaceFreeVar(term: Term, freeVarName: string, replacementVar: 
                 current.functorF_IMPLICIT ? replaceFreeVar(current.functorF_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
                 current.functorG_IMPLICIT ? replaceFreeVar(current.functorG_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined
             );
+        case 'TApp1FApp0Term':
+            return TApp1FApp0Term(
+                replaceFreeVar(current.transformation, freeVarName, replacementVar, boundInScope),
+                replaceFreeVar(current.morphism_f, freeVarName, replacementVar, boundInScope),
+                current.catA_IMPLICIT ? replaceFreeVar(current.catA_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.catB_IMPLICIT ? replaceFreeVar(current.catB_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.functorF_IMPLICIT ? replaceFreeVar(current.functorF_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.functorG_IMPLICIT ? replaceFreeVar(current.functorG_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.objX_A_IMPLICIT ? replaceFreeVar(current.objX_A_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined,
+                current.objY_A_IMPLICIT ? replaceFreeVar(current.objY_A_IMPLICIT, freeVarName, replacementVar, boundInScope) : undefined
+            );
         case 'HomCovFunctorIdentity':
             return HomCovFunctorIdentity(
                 replaceFreeVar(current.domainCat, freeVarName, replacementVar, boundInScope),
@@ -987,6 +1030,16 @@ export function getFreeVariables(term: Term, initialBoundScope: Set<string> = ne
                 if (termRef.catB_IMPLICIT) find(termRef.catB_IMPLICIT, currentLocallyBound);
                 if (termRef.functorF_IMPLICIT) find(termRef.functorF_IMPLICIT, currentLocallyBound);
                 if (termRef.functorG_IMPLICIT) find(termRef.functorG_IMPLICIT, currentLocallyBound);
+                break;
+            case 'TApp1FApp0Term':
+                find(termRef.transformation, currentLocallyBound);
+                find(termRef.morphism_f, currentLocallyBound);
+                if (termRef.catA_IMPLICIT) find(termRef.catA_IMPLICIT, currentLocallyBound);
+                if (termRef.catB_IMPLICIT) find(termRef.catB_IMPLICIT, currentLocallyBound);
+                if (termRef.functorF_IMPLICIT) find(termRef.functorF_IMPLICIT, currentLocallyBound);
+                if (termRef.functorG_IMPLICIT) find(termRef.functorG_IMPLICIT, currentLocallyBound);
+                if (termRef.objX_A_IMPLICIT) find(termRef.objX_A_IMPLICIT, currentLocallyBound);
+                if (termRef.objY_A_IMPLICIT) find(termRef.objY_A_IMPLICIT, currentLocallyBound);
                 break;
             case 'HomCovFunctorIdentity':
                 find(termRef.domainCat, currentLocallyBound);

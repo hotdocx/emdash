@@ -5,7 +5,7 @@
 
 import {
     Term, Context, App, Lam, Var, ObjTerm, HomTerm, NatTransTypeTerm, FMap0Term, FunctorTypeTerm, Pi, Let,
-    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm
+    Type, Hole, CatTerm, SetTerm, FunctorCategoryTerm, FMap1Term, NatTransComponentTerm, HomCovFunctorIdentity, Icit, MkFunctorTerm, TApp1FApp0Term
 } from './types';
 import {
     getTermRef, globalDefs, userRewriteRules, lookupCtx, isKernelConstantSymbolStructurally, printTerm,
@@ -190,6 +190,24 @@ export function whnf(term: Term, ctx: Context, stackDepth: number = 0): Term {
                 // No further reduction for FMap1Term in this pass
                 break;
             }
+            case 'TApp1FApp0Term': {
+                const transformation_whnf = getTermRef(whnf(current.transformation, ctx, stackDepth + 1));
+                const morphism_whnf = getTermRef(whnf(current.morphism_f, ctx, stackDepth + 1));
+                if (getTermRef(current.transformation) !== transformation_whnf || getTermRef(current.morphism_f) !== morphism_whnf) {
+                    current = TApp1FApp0Term(
+                        transformation_whnf,
+                        morphism_whnf,
+                        current.catA_IMPLICIT,
+                        current.catB_IMPLICIT,
+                        current.functorF_IMPLICIT,
+                        current.functorG_IMPLICIT,
+                        current.objX_A_IMPLICIT,
+                        current.objY_A_IMPLICIT
+                    );
+                    reducedInKernelBlock = true;
+                }
+                break;
+            }
             case 'FunctorTypeTerm': {
                 const domainCat_whnf = getTermRef(whnf(current.domainCat, ctx, stackDepth + 1));
                 const codomainCat_whnf = getTermRef(whnf(current.codomainCat, ctx, stackDepth + 1));
@@ -290,6 +308,17 @@ export function normalize(term: Term, ctx: Context, stackDepth: number = 0): Ter
                 current.catB_IMPLICIT ? normalize(current.catB_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.functorF_IMPLICIT ? normalize(current.functorF_IMPLICIT, ctx, stackDepth + 1) : undefined,
                 current.functorG_IMPLICIT ? normalize(current.functorG_IMPLICIT, ctx, stackDepth + 1) : undefined
+            );
+        case 'TApp1FApp0Term':
+            return TApp1FApp0Term(
+                normalize(current.transformation, ctx, stackDepth + 1),
+                normalize(current.morphism_f, ctx, stackDepth + 1),
+                current.catA_IMPLICIT ? normalize(current.catA_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.catB_IMPLICIT ? normalize(current.catB_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorF_IMPLICIT ? normalize(current.functorF_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.functorG_IMPLICIT ? normalize(current.functorG_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objX_A_IMPLICIT ? normalize(current.objX_A_IMPLICIT, ctx, stackDepth + 1) : undefined,
+                current.objY_A_IMPLICIT ? normalize(current.objY_A_IMPLICIT, ctx, stackDepth + 1) : undefined
             );
         case 'HomCovFunctorIdentity':
             return HomCovFunctorIdentity(

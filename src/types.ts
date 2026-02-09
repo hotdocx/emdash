@@ -5,6 +5,7 @@
  */
 
 export enum Icit { Impl, Expl }
+export enum BinderMode { Functorial = 'functorial', Natural = 'natural', ObjectOnly = 'object_only' }
 
 export type BaseTerm =
     | { tag: 'Type' }
@@ -57,6 +58,16 @@ export type BaseTerm =
         catB_IMPLICIT?: Term,
         functorF_IMPLICIT?: Term,
         functorG_IMPLICIT?: Term
+      }
+    | { tag: 'TApp1FApp0Term', // tapp1_fapp0 eps f
+        transformation: Term, // Term of type NatTransTypeTerm
+        morphism_f: Term, // HomTerm(catA, objX_A, objY_A)
+        catA_IMPLICIT?: Term,
+        catB_IMPLICIT?: Term,
+        functorF_IMPLICIT?: Term,
+        functorG_IMPLICIT?: Term,
+        objX_A_IMPLICIT?: Term,
+        objY_A_IMPLICIT?: Term
       }
     // Emdash Phase 3: Yoneda and Set Category Primitives
     | { tag: 'HomCovFunctorIdentity', domainCat: Term, objW_InDomainCat: Term }
@@ -157,6 +168,23 @@ export const NatTransTypeTerm = (catA: Term, catB: Term, functorF: Term, functor
 export const NatTransComponentTerm = (transformation: Term, objectX: Term, catA_IMPLICIT?: Term, catB_IMPLICIT?: Term, functorF_IMPLICIT?: Term, functorG_IMPLICIT?: Term): Term & { tag: 'NatTransComponentTerm' } =>
     ({ tag: 'NatTransComponentTerm', transformation, objectX, catA_IMPLICIT, catB_IMPLICIT, functorF_IMPLICIT, functorG_IMPLICIT });
 
+export const TApp1FApp0Term = (
+    transformation: Term,
+    morphism_f: Term,
+    catA_IMPLICIT?: Term,
+    catB_IMPLICIT?: Term,
+    functorF_IMPLICIT?: Term,
+    functorG_IMPLICIT?: Term,
+    objX_A_IMPLICIT?: Term,
+    objY_A_IMPLICIT?: Term
+): Term & { tag: 'TApp1FApp0Term' } =>
+    ({ tag: 'TApp1FApp0Term', transformation, morphism_f, catA_IMPLICIT, catB_IMPLICIT, functorF_IMPLICIT, functorG_IMPLICIT, objX_A_IMPLICIT, objY_A_IMPLICIT });
+
+// emdash2 naming aliases over existing kernel heads.
+export const FApp0Term = FMap0Term;
+export const FApp1FApp0Term = FMap1Term;
+export const TApp0FApp0Term = NatTransComponentTerm;
+
 // Yoneda and Set Category Primitives Constructors
 export const HomCovFunctorIdentity = (domainCat: Term, objW_InDomainCat: Term): Term & { tag: 'HomCovFunctorIdentity' } =>
     ({ tag: 'HomCovFunctorIdentity', domainCat, objW_InDomainCat });
@@ -173,6 +201,8 @@ export type Binding = {
     type: Term;
     definition?: Term;
     icit?: Icit;
+    mode?: BinderMode;
+    controllerCat?: Term;
 };
 export type Context = Binding[];
 
