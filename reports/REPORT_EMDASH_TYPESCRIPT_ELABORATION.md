@@ -104,6 +104,8 @@ Note:
 - compatibility with `EMAIL.md` wording:
   - `:^f` maps to our functorial mode,
   - `:^n` maps to the natural-intro discipline plus context-specific object/arrow roles.
+- for arrow-indexed dependent contexts, default base-binder intent is `:^f` (functorial);
+  `:^o` is explicit/specialized.
 
 ### 3.3 Canonical heads policy
 
@@ -257,6 +259,8 @@ Use two distinct elaboration routes:
 
 - computational route (preferred where applicable):
   - `homd_` + `homd_curry` + `Homd_func` for total-hom shaped terms.
+  - in TS milestone M1, `Cat[b]` is represented through a dedicated constant displayed family
+    `CatConst_catd` (temporary hardcoded weakening surrogate; do not overload `Catd_cat` naming).
 - interface route:
   - `homd_int` family where no strong computation is guaranteed yet.
 

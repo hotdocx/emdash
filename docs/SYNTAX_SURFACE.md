@@ -26,6 +26,8 @@ Notation compatibility (`EMAIL.md` terminology):
 - `:^f` corresponds to the functorial reading used here (default `x : A`).
 - `:^n` corresponds to “natural-index discipline”; in this document that role is split between
   explicit context roles (`:^o`, `:^-`) and transfor-intro discipline.
+- For arrow-indexed dependent contexts (e.g. terms using `f : z → z'`), we currently default to
+  the `:^f` intent for base binders; `:^o` is explicit and specialized.
 
 ## 1. Binder modes (variance)
 
@@ -58,7 +60,8 @@ This binder is preferred over writing `A^op` in surface syntax.
 Meaning: `x` is **object-only**: substitution is only along *paths* (equalities) in `Obj(A)`; we do
 **not** assume any implicit transport along base arrows `f : x → y` in `A`.
 
-This is the default binder for variables ranging over generic displayed categories `E : Catd A`.
+This binder is used when we intentionally restrict to object-only reasoning. In current elaboration
+milestones, arrow-indexed dependent contexts default to functorial intent (`:^f`) unless stated otherwise.
 
 ## 2. Silent elaborations (“τ-like” behavior)
 
