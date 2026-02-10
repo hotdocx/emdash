@@ -47,7 +47,7 @@ These constructions are expressed *internally* (as stable head symbols `fdapp1_i
 And because there is available a "context-extension" / total-category / Sigma-category construction `Total_cat E : Cat` (a.k.a. `Σ_(B) E : Cat`) for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`). And the usual categorical-logic fact that the Sigma/total-category `Σ b, –` is left-adjoint to weakening/lift `–[b]`, means that the dependent hom/arrow-category has an alternative formulation (`homd_curry` in the lambdapi spec file `cartierSolution19.lp`):
 - `Homd_E : Π b₀, E[b₀]ᵒᵖ → Π b₁, Hom_B(b₀, b₁)ᵒᵖ → E[b₁] → Cat[b₁]`
 
-In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a (non-cartesian) fibred functor.
+In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` (i.e. comma vs hom, is necessary) is recursively a (non-cartesian) fibred functor.
 
 ## 3) Naturality as “cut accumulation” and the exchange law
 
@@ -63,13 +63,15 @@ An instance of this accumulation rule is the *exchange law* between horizontal a
 Moreover such formulations of naturality are useful to express computationally the triangular identities of *adjoint functors*:
 - `ϵ_(f) ∘ LAdj(η_(g))  ↪  f ∘ LAdj(g)`
 
+and for sheaves and schemes, polynomial functors, higher inductive types, etc... (ref: `cartierSolution16.lp`)
+
 ## 4) GPT-5.3-Codex diagrammatic prompting via `arrowgram` and “MathOps”
 
 What is MathOps? Example: How to enable the GPT-5.3-Codex + Codex CLI coding agent to (natively) understand and generate commutative diagrams? A MathOps solution is: `arrowgram` https://github.com/hotdocx/arrowgram/ an open-source strict JSON text specification for commutative diagrams with exporting to JSON/SVG/PNG/TikZ and with an AI-editor that generates and renders `markdown` papers documents and slides presentations with embedded diagrams specs, from any uploaded source references.
 
 While the `arrowgram` core app can be used offline, there is an academic-publishing overlay app: https://hotdocx.github.io to enable rapid/iterative MathOps from idea, to sharing, to community peer review!
 
-MathOps is what happens after you get "desk-rejected" by POPL 2026, with no transcript records, no appeal, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities of 20,000+ developers in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ...)
+MathOps is what happens after you get "desk-rejected" by POPL 2026, lol... A MathOps solution is the ability to share workspace sessions (docker), with pre-installed running AI coding agents + proof-checkers, for "vibe coding" live with co-workers, in a marketplace where large-scale community-workspaces can get paid and funded by fans and local businesses and governments; bypassing well-known falsifications and intoxications. This is the idea implemented by the marketplace https://GetPaidX.com (backed by Y Combinator and AI communities of 20,000+ developers in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ...)
 
 Try the MathOps workspace for `emdash` here:
 https://GetPaidX.com/r/--------TODO---------
