@@ -2,7 +2,7 @@ Subject: GPT-5.3-Codex AI vs ω-categories — Re: [FOM] Autoformalization getti
 
 Dear Josef Urban, dear FOM,
 
-Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineering) for a long-running “LLM ↔ proof-checker” feedback loop then your claimed “≈130k lines in two weeks” is expected.
+Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineering) for a long-running “LLM ↔ proof-checker” feedback loop then your claimed “≈130k lines in two weeks” is expected (strangely, Terminal-Bench 2.0 has no such benchmarks!).
 
 For category theory, the "proof-checker" (i.e. computational logic) question has been solved since Kosta Dosen "Cut-Elimination in Categories" (1999), but the tools to easily specify/implement it were not available until Frédéric Blanqui's Lambdapi logical framework (rewrite/unification rules) and:
 
