@@ -1289,6 +1289,7 @@ unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
   So `tapp1_func_funcd` plays the role “project-to-a-functor between representables”, from which both
   “apply F to a 1-cell” and “extract the component ϵ_Y” arise as specializations.
 */
+// NOTE: to see that this arrow-action is simplicial, use `fdapp1_funcd` applied to the return of `tapp1_fapp0_funcd` (or use `Total_intro_func`)
 symbol tapp1_func_funcd : Π [A B : Cat], Π [F_AB G_AB : τ (Functor A B)],                                // domain/codomain categories and functors
   Π (X_A: τ (Obj A)),                                                                                   // external/superscript projection index
   τ (Functor (Transf_cat F_AB G_AB)
@@ -2978,6 +2979,7 @@ constant symbol tapp_lax_triangle :
 // [EXTERNAL] This simplicial packaging is a stable head we keep for now, but it is intended to become *derived*
 // from the more-internal transfor-based packaging (`fapp1_int_transf`) once the “transfor ⇒ displayed functor”
 // Grothendieck morphism-action bridge is implemented.
+// NOTE: to see that this arrow-action is simplicial, use `fdapp1_funcd` applied to the return of `fapp1_funcd` (or use `Total_intro_func`)
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Functor A B)), Π [X_A: τ (Obj A)],                   // functor and outer index
   τ (Functord (Fibration_cov_catd (hom_ (@id_func A) X_A))                                        // source displayed: Hom_A(X_A,-)
              (Fibration_cov_catd (hom_ F_AB (fapp0 F_AB X_A))));                                  // target displayed: Hom_B(FX_A, F_AB(-))
