@@ -47,9 +47,7 @@ These constructions are expressed *internally* (as stable head symbols `fdapp1_i
 And because there is available a "context-extension" / total-category / Sigma-category construction `Total_cat E : Cat` (a.k.a. `Σ_(B) E : Cat`) for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`). And the usual categorical-logic fact that the Sigma/total-category `Σ b, –` is left-adjoint to weakening/lift `–[b]`, means that the dependent hom/arrow-category has an alternative formulation (`homd_curry` in the lambdapi spec file `cartierSolution19.lp`):
 - `Homd_E : Π b₀, E[b₀]ᵒᵖ → Π b₁, Hom_B(b₀, b₁)ᵒᵖ → E[b₁] → Cat[b₁]`
 
-In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` (i.e. comma vs hom, is necessary) is recursively a (non-cartesian) fibred functor.
-
-- TODO: the Grothendieck construction from a transformation to a functor between isofibrations, is what allows to iterate the hom between higher transfors (re: `tapp1_fapp0_funcd`)...
+In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` (i.e. comma vs hom, is necessary) is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a fibred functor (non-cartesian, i.e. a commuting triangle is mapped to a non-identity 2-arrow). But for ω-iteration of the natural n-transfors construction (i.e natural family rather than an individual n-arrow), there needs to be a way to re-interpret a natural transformation again as a functor (i.e. eta-expansion): this question is solved by the next section.
 
 ## 3) Naturality as “cut accumulation” and the exchange law
 
@@ -96,7 +94,7 @@ gpt report
 @tcs
 
 
-- TODO: kimi code, gemini 3, getpaidx container
+- TODO: tui, kimi code, gemini 3, getpaidx container
 
 ---
 
