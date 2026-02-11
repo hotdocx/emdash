@@ -850,6 +850,8 @@ assert [A B : Cat] (W : τ (Obj A)) (F : τ (Functor B A))
 
 // Internalized (bifunctorial) covariant hom: for fixed F:B→A, we get a functor Aᵒᵖ → (B → Cat).    // Hom_A(-,F(-)) as a functor
 // In ordinary notation: hom_int(F) : A^op ⇒ Functor_cat(B,Cat_cat), i.e. A^op ⇒ B ⇒ Cat.
+// TODO: use a product type instead of nested functor type, then `tapp1_fapp1_func` will become internalized too
+// and this might require the binary comma: hom(G ~ , F —) for later use
 constant symbol hom_int : Π [A : Cat], Π [B : Cat],
   Π (F_BA : τ (Functor B A)), τ (Functor (Op_cat A) (Functor_cat B Cat_cat));
 
@@ -2206,6 +2208,8 @@ symbol homd_int_base [Z : Cat] (D0 : τ (Functor Z Cat_cat))
 //   (`E = Fibration_cov_catd E0`, `FF` built from Groth data), analogous in spirit to
 //   the existing pointwise computation rule of `homd_`. For now `homd_int` is purely a
 //   typed packaging head with no reduction behavior.
+// TODO: use a fibred-product type instead of nested functord type, then `tdapp1_fapp1_func` will become internalized too
+// and this might require the binary comma: homd(GG ~ , FF —) for later use
 constant symbol homd_int : Π [Z : Cat], Π [E : Catd Z],
   Π [D0 : τ (Functor Z Cat_cat)],
   Π (FF : τ (Functord (Fibration_cov_catd D0) E)),
