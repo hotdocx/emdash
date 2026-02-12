@@ -40,7 +40,7 @@ This paper’s contributions are primarily expository (the kernel is ongoing wor
 3. **An explicit off-diagonal interface for transfors (ordinary and displayed).** Instead of encoding transfors as records with a naturality law, we expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal components over arrows (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
 4. **Executable feasibility evidence.** An earlier executable prototype (bidirectional elaboration with holes + normalization-driven definitional equality) demonstrates that the “kernel spec → elaborating proof assistant” pipeline is realistic.
 5. **Continuity with prior warm-ups.** Earlier large-scale rewrite-centric developments already validate the *style* of emdash: categorical interfaces presented with computational rules (universal properties / adjunction transposes; Grothendieck-style geometry interfaces). A key claim of the v2 design is that these interfaces are largely portable into the v2 stable-head discipline, and therefore count as prior progress rather than speculative future work.
-6. **New bridge rules in the current snapshot.** The kernel now includes an explicit Grothendieck morphism-action bridge (`Fibration_cov_func`, `Fibration_cov_fapp1_func`) and phase-2 draft strict naturality/exchange rewrites for arrow-indexed components (`tapp1_fapp0`), together with sanity assertions.
+6. **New bridge rules in the current snapshot.** The kernel now includes an explicit Grothendieck morphism-action bridge (`Fibration_cov_func`, `Fibration_cov_fapp1_func`) and phase-2 draft strict naturality/exchange rewrites for arrow-indexed components (`tapp1_fapp0`), together with sanity assertions. These bridges also make explicit a key laxness signal: under simplicial iteration, canonical/cartesian source triangles may be sent to non-cartesian target triangles.
 
 # 2. Technical Overview and Design Principles
 
@@ -662,6 +662,17 @@ The kernel contains the beginnings of this “simplicial engine”:
 - draft operations like `fdapp1_funcd` / `fdapp1_int_transfd` for iterating the construction,
 - and phase-2 draft strict accumulation rules on `tapp1_fapp0`, including a concrete exchange-law sanity assertion for representable postcomposition.
 
+A useful way to read the current `fapp1_funcd`/`fdapp1_funcd` comments is as follows. For a lax functor action
+$F_1 : \mathrm{Hom}_C(x,-)\to\mathrm{Hom}_D(F_0x,F-)$, the iterated action is fibred and can be non-cartesian:
+$$
+((F_1)_1)_0 :
+\mathrm{Homd}_{\mathrm{Hom}_C(x,-)}\bigl(f,(g\circ f,g)\bigr)
+\to
+\mathrm{Homd}_{\mathrm{Hom}_D(F_0x,F-)}
+\bigl((F_1)_0 f,\bigl((F_1)_0(g\circ f),(F_1)_0 g\bigr)\bigr).
+$$
+Conceptually, an identity-like (cartesian) source triangle over a base edge may normalize to a non-identity (non-cartesian) target triangle; that non-identity image is the laxness witness. In the strict case, the intended deferred rule would collapse this witness back to identity.
+
 ### Figure 5: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
 
 <div class="arrowgram">
@@ -833,7 +844,7 @@ Because a hung typecheck often indicates rewrite/unification pathology, the repo
 The kernel is intentionally “small but sharp”. Some parts compute definitionally today; others are interfaces intended to be refined.
 
 - **Computational today** (examples): opposites (`Op_cat`), products (`Product_cat`, `Product_catd` with Groth bridges via `prodFib`), total-object Σ-computation for arbitrary displayed categories (`τ (Obj (Total_cat E))`), Grothendieck fibres and transport (`Fibration_cov_catd`, `fib_cov_tapp0_fapp0`), Grothendieck morphism-action bridge (`Fibration_cov_func`, `Fibration_cov_fapp1_func`), direct total-hom bridges (`homd_curry`, `Homd_func`) in Grothendieck-shaped cases, pointwise computation for `homd_` in the Grothendieck–Grothendieck case, pointwise component extraction for transfors/displayed transfors (`tapp0_fapp0`, `tdapp0_fapp0`), phase-2 draft strict naturality/exchange rewrites for `tapp1_fapp0`, and a draft triangle cut-elimination rule for adjunctions.
-- **Abstract / TODO** (examples): full computation rules for `homd_int`, full hom-level computation for general displayed categories `E : Catd Z`, full displayed Groth morphism-action bridge needed to derive external heads like `fdapp1_funcd` from internal `tdapp1_int_*`/`fdapp1_int_*` pipelines, replacing temporary strict phase-2 laws by lax higher-cell data, and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
+- **Abstract / TODO** (examples): full computation rules for `homd_int`, full hom-level computation for general displayed categories `E : Catd Z`, full displayed Groth morphism-action bridge needed to derive external heads like `fdapp1_funcd` from internal `tdapp1_int_*`/`fdapp1_int_*` pipelines, replacing temporary strict phase-2 laws by lax higher-cell data (including explicit cartesian vs non-cartesian triangle behavior as rewrite-level infrastructure), and the user-facing surface syntax/elaboration layer (variance-aware binders, implicit coercions).
 
 This division is deliberate: the kernel tries to avoid committing to heavy encodings (Σ-records for functors/transfors) until the rewrite story is stable.
 

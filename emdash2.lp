@@ -617,7 +617,8 @@ rule @fapp1_fapp0 _ _ (@Core_incl_func $C) $x $y $p ↪ @path_to_hom_fapp0 $C $x
   whose fibre component is an *identity* 2-arrow.
   For a general (not-necessarily-strict) functor, the image of such a σ under `fapp1_funcd` need not
   be cartesian/identity: it can carry nontrivial 2-cell data, i.e. the usual “laxness witness” that
-  compares `F(g) ∘ F(f)` with `F(g∘f)`.
+  compares `F(g) ∘ F(f)` with `F(g∘f)`. This is the same phenomenon described later (schematically) by
+  the `((F₁)₁)₀` map between dependent-hom triangle classifiers.
 
   For a strict functor `sfunc_func Fs`, we want that laxness witness to reduce to an identity 2-arrow
   (so the corresponding triangle 2-cell is definitional). We defer implementing this cartesianness rule.
@@ -1426,8 +1427,8 @@ assert [A B : Cat] [F_AB G_AB : τ (Functor A B)] (ϵ : τ (Transf F_AB G_AB)) �
   The laxness is carried by how ϵ^X acts on non-identity “2-arrow data” in the source representable,
   which in our framework is mediated by `homd_` (a displayed hom that is fibred over a product of
   a base edge and a displayed edge). Concretely, once `homd_` is implemented, ϵ^X will transport
-  a non-identity 2-cell like “g : f ⇒ (g∘f)” to a non-identity 2-cell in the target encoding the
-  lax naturality triangle (comparing something like (G g)∘(…) with (…) for the composite g∘f).
+  a source triangle witness like `χ : f ⇒ (h∘f)` (over base edge `h`) to a target triangle witness
+  encoding lax naturality (comparing `(G h)∘(…)` with `(…)` for the composite `h∘f`).
 
   The actual extracted “pointwise component” operation `tapp0_fapp0` is defined later in the file,
   after `fdapp0` is introduced (since it is implemented by evaluating `tapp1_fapp0_funcd` at the identity arrow).
@@ -2979,11 +2980,17 @@ constant symbol tapp_lax_triangle :
 // [EXTERNAL] This simplicial packaging is a stable head we keep for now, but it is intended to become *derived*
 // from the more-internal transfor-based packaging (`fapp1_int_transf`) once the “transfor ⇒ displayed functor”
 // Grothendieck morphism-action bridge is implemented.
-// NOTE: to see that this arrow-action is simplicial, use `fdapp1_funcd` applied to the return of `fapp1_funcd` (or use `Total_intro_func`)
-// e.g. the arrow-action of a *lax* functor `F₁ : Hom_C(x, –) → Hom_D(F₀ x, F –)` is recursively a fibred functor 
-// which is non-cartesian (because of laxness), 
-// i.e. a commuting-triangle/identity 2-arrow is mapped to a non-identity 2-arrow by
-// `((F₁)₁)₀ : Homd_(Hom_C(x, –))(f, (g ∘ f, g)) → Homd_(_)((F₁)₀ f, ((F₁)₀ (g ∘ f), (F₁)₀ g))`.
+// NOTE (schematic reading; draft, not a rewrite rule):
+// Applying `fdapp1_funcd` to `fapp1_funcd` exhibits the next simplicial step of hom-action.
+// For a lax functor, the action
+//   `F₁ : Hom_C(x, –) → Hom_D(F₀ x, F –)`
+// lifts to a fibred action on dependent-hom triangle data. Schematic form:
+//   `((F₁)₁)₀ :
+//      Homd_(Hom_C(x, –))(f, (g ∘ f, g))
+//        → Homd_(Hom_D(F₀ x, F –))((F₁)₀ f, ((F₁)₀ (g ∘ f), (F₁)₀ g))`.
+// Intuition: a canonical/cartesian source triangle (often identity-like in the fibre) may map to a
+// non-cartesian/non-identity target triangle; this non-identity image is precisely the laxness witness.
+// For strict functors, we expect a deferred cartesianness rule forcing this image back to identity.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Functor A B)), Π [X_A: τ (Obj A)],                   // functor and outer index
   τ (Functord (Fibration_cov_catd (hom_ (@id_func A) X_A))                                        // source displayed: Hom_A(X_A,-)
              (Fibration_cov_catd (hom_ F_AB (fapp0 F_AB X_A))));                                  // target displayed: Hom_B(FX_A, F_AB(-))
