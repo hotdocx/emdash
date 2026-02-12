@@ -2980,6 +2980,10 @@ constant symbol tapp_lax_triangle :
 // from the more-internal transfor-based packaging (`fapp1_int_transf`) once the “transfor ⇒ displayed functor”
 // Grothendieck morphism-action bridge is implemented.
 // NOTE: to see that this arrow-action is simplicial, use `fdapp1_funcd` applied to the return of `fapp1_funcd` (or use `Total_intro_func`)
+// e.g. the arrow-action of a *lax* functor `F₁ : Hom_C(x, –) → Hom_D(F₀ x, F –)` is recursively a fibred functor 
+// which is non-cartesian (because of laxness), 
+// i.e. a commuting-triangle/identity 2-arrow is mapped to a non-identity 2-arrow by
+// `((F₁)₁)₀ : Homd_(Hom_C(x, –))(f, (g ∘ f, g)) → Homd_(_)((F₁)₀ f, ((F₁)₀ (g ∘ f), (F₁)₀ g))`.
 symbol fapp1_funcd : Π [A B : Cat], Π (F_AB : τ (Functor A B)), Π [X_A: τ (Obj A)],                   // functor and outer index
   τ (Functord (Fibration_cov_catd (hom_ (@id_func A) X_A))                                        // source displayed: Hom_A(X_A,-)
              (Fibration_cov_catd (hom_ F_AB (fapp0 F_AB X_A))));                                  // target displayed: Hom_B(FX_A, F_AB(-))
