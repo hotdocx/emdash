@@ -2,7 +2,7 @@ Subject: GPT-5.3-Codex AI vs ω-categories — Re: [FOM] Autoformalization getti
 
 Dear Josef Urban, dear FOM,
 
-TL;DR: I developed the `arrowgram` commutative-diagrams editor, then I setup GPT-5.3-Codex inside my AI workspace to read the JSON text of those diagrams and generate the `emdash` proof assistant for lax ω-categories, and you can try my shared AI workspace and fund it at `getpaidx.com`. Probably, you should disregard the rest of this email.
+TL;DR: I developed the `arrowgram` commutative-diagrams editor https://hotdocx.github.io/arrowgram then I setup GPT-5.3-Codex inside my AI workspace to read the JSON text of those diagrams and generate the `emdash` proof assistant for lax ω-categories, and you can try my shared AI workspace and fund it at GetPaidX.com a.k.a. https://LastRevision.pro/r/TODO — probably, you should disregard the rest of this email.
 
 Bye.
 
