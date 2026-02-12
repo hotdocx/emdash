@@ -53,9 +53,13 @@ These constructions are expressed *internally* (as stable head symbols `fdapp1_i
 And because there is available a "context-extension" / total-category / Sigma-category construction `Total_cat E : Cat` (a.k.a. `Σ_(B) E : Cat`) for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`). And the usual categorical-logic fact that the Sigma/total-category `Σ b, –` is left-adjoint to weakening/lift `–[b]`, means that the dependent hom/arrow-category has an alternative formulation (`homd_curry` in the lambdapi spec file `cartierSolution19.lp`):
 - `Homd_E : Π b₀, E[b₀]ᵒᵖ → Π b₁, Hom_B(b₀, b₁)ᵒᵖ → E[b₁] → Cat[b₁]`
 
-In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` (i.e. comma vs hom, is necessary) is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a fibred functor (non-cartesian, i.e. a commuting triangle is mapped to a non-identity 2-arrow). But for ω-iteration of the natural n-transfors construction (i.e natural family rather than an individual n-arrow), there needs to be a way to re-interpret a natural transformation again as a functor (i.e. eta-expansion): this question is solved by the next section.
+In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` (i.e. comma vs hom, is necessary) is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a fibred functor (non-cartesian, i.e. a commuting triangle is mapped to a non-identity 2-arrow).
+
+But for ω-iteration of the natural n-transfors construction (i.e natural family rather than an individual n-arrow), there needs to be a way to re-interpret a natural transformation again as a functor:  This is the question solved by the next section.
 
 ## 3) Naturality as “cut accumulation” and the exchange law
+
+A (fibred) transformation: `F ⇒ G`, is also a transformation from the unit/hom profunctor (i.e. "off-diagonal"): `hom(~, —) ⇒ hom(F ~, G —)`, and is back again as a fibred functor between isofibrations: `∫ hom(~, —) → ∫ hom(F ~, G —)`; thus we can continue the ω-iteration of this construction.
 
 The key point is that *naturality can be oriented as an “accumulation” rewrite* on these transfor's "off-diagonal" components `ϵ_(–)` (cut-elimination style, where `⋅` is the vertical compositon/cut):
 - `(G b) ⋅ ϵ_(a)   ↪  ϵ_(b⋅a)`
