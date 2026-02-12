@@ -8,6 +8,8 @@ Bye.
 
 ---
 
+    APPENDIX:
+
 Indeed, as soon as you can setup some « MathOps » (i.e. math DevOps engineering) for a long-running “LLM ↔ proof-checker” feedback loop then your claimed “≈130k lines in two weeks” is expected (strangely, Terminal-Bench 2.0 has no such benchmarks!).
 
 For category theory, the "proof-checker" (i.e. computational logic) question has been solved since Kosta Dosen "Cut-Elimination in Categories" (1999), but the tools to easily specify/implement it were not available until Frédéric Blanqui's Lambdapi logical framework (rewrite/unification rules) and:
@@ -53,9 +55,9 @@ These constructions are expressed *internally* (as stable head symbols `fdapp1_i
 And because there is available a "context-extension" / total-category / Sigma-category construction `Total_cat E : Cat` (a.k.a. `Σ_(B) E : Cat`) for any fibred category `E : Catd B`, all these surface syntax can actually happen within any ambient context `Γ, ⋯ ⊢` (i.e. the base `Z` is itself `Total_cat Z0` for `Z0 : Catd Γ`). And the usual categorical-logic fact that the Sigma/total-category `Σ b, –` is left-adjoint to weakening/lift `–[b]`, means that the dependent hom/arrow-category has an alternative formulation (`homd_curry` in the lambdapi spec file `cartierSolution19.lp`):
 - `Homd_E : Π b₀, E[b₀]ᵒᵖ → Π b₁, Hom_B(b₀, b₁)ᵒᵖ → E[b₁] → Cat[b₁]`
 
-In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` (i.e. comma vs hom, is necessary) is recursively a (fibred) category and the arrow-action of a lax functor `F₁ : Hom_C(x , –) → Hom_D(F₀ x, F –)` is recursively a fibred functor (non-cartesian, i.e. a commuting triangle is mapped to a non-identity 2-arrow).
+In reality, the *internal* computational-logic for lax ω-categories is *easier* to express than for only strict 1-categories; because the hom/comma of a category `Hom_D(y, F –)` (i.e. comma vs hom, is necessary) is recursively a (fibred) category, and the arrow-action of a *lax* functor `F₁ : Hom_C(x, –) → Hom_D(F₀ x, F –)` is recursively a fibred functor which is non-cartesian (because of laxness), i.e. a commuting-triangle/identity 2-arrow is mapped to a non-identity 2-arrow by `((F₁)₁)₀ : Homd_(Hom_C(x, –))(f, (g ∘ f, g)) → Homd_(_)((F₁)₀ f, ((F₁)₀ (g ∘ f), (F₁)₀ g))`.
 
-But for ω-iteration of the natural n-transfors construction (i.e natural family rather than an individual n-arrow), there needs to be a way to re-interpret a natural transformation again as a functor:  This is the question solved by the next section.
+But for ω-iteration of the natural n-transfors construction (i.e natural family rather than an individual n-arrow), there needs to be a way to re-interpret a natural transformation again as a functor: this is the question solved by the next section.
 
 ## 3) Naturality as “cut accumulation” and the exchange law
 
@@ -95,7 +97,7 @@ OK, thank you Josef Urban for your attention to these documents, and I am lookin
 
 References:
 [1] Kosta Dosen, Zoran Petric (1999). "Cut-Elimination in Categories"
-[2] This summer visit to Ambrus Kaposi in Budapest, and discussions at RHPL@FSTTCS 2025 in India
+[2] This summer visit to Ambrus Kaposi in Budapest, and `emdash` discussions at RHPL@FSTTCS 2025 in India
 [3] GPT-5.3-Codex
 
 
