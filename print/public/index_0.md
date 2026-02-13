@@ -13,7 +13,7 @@ $$
 $$
 Its value at $(e_1 : E(b_1),\\; b_{01}:b_0\\to b_1)$ is the fibre hom-category $\\mathrm{Hom}_{E(b_1)}\\bigl((b_{01})_!e_0,\\,e_1\\bigr)$. In the current kernel snapshot this is computational in the Grothendieck/Grothendieck probe case (`homd_` pointwise rule), while the full general normalization story is still in progress.
 
-On the transformation side, we expose explicit off-diagonal components $\\epsilon_{(f)} : F(X)\\to G(Y)$ (indexed by arrows $f:X\\to Y$) and orient naturality as *cut accumulation* rewrites. The current snapshot includes phase-2 draft strict naturality/exchange rules with sanity assertions. As a complementary application, we outline a computational adjunction interface where unit/counit are first-class $2$-cell data and a triangle identity is oriented as a definitional reduction on composites (schematically $\\epsilon_f\\circ L(\\eta_g) \\rightsquigarrow f\\circ L(g)$). The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram), enabling rendering, checking, and AI-assisted editing as part of a reproducible paper artifact.
+On the transformation side, we expose explicit off-diagonal components $\\epsilon_{(f)} : F(X)\\to G(Y)$ (indexed by arrows $f:X\\to Y$) and orient naturality as *cut accumulation* rewrites. The current snapshot includes phase-2 draft strict naturality/exchange rules with sanity assertions. A key interpretive signal in the current bridge layer is: under simplicial iteration, an identity-like/cartesian source triangle may be mapped to a non-identity/non-cartesian target triangle (the laxness witness). As a complementary application, we outline a computational adjunction interface where unit/counit are first-class $2$-cell data and a triangle identity is oriented as a definitional reduction on composites (schematically $\\epsilon_f\\circ L(\\eta_g) \\rightsquigarrow f\\circ L(g)$). The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram), enabling rendering, checking, and AI-assisted editing as part of a reproducible paper artifact.
 
 From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
 
@@ -34,7 +34,7 @@ emdash explores a kernel design where:
 1. **Rewrite-head discipline for categorical computation.** Structural equalities are oriented as normalization steps on stable head symbols (e.g. `comp_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`, `tapp1_fapp0`) rather than proved externally.
 2. **A simplicial “triangle classifier” over base arrows.** The dependent arrow/comma construction `homd_` (and the internal pipeline `homd_int_base`) provides a computational home for “cells over a chosen base edge” (triangles/surfaces), and a compositional target for iteration.
 3. **Explicit off-diagonal interfaces for transfors (ordinary and displayed).** We expose diagonal components (`tapp0_*`, `tdapp0_*`) and off-diagonal arrow-indexed components (`tapp1_*`, `tdapp1_*`) as first-class stable heads.
-4. **New bridge rules in the current snapshot.** The kernel now includes explicit Grothendieck morphism-action heads (`Fibration_cov_func`, `Fibration_cov_fapp1_func`) and direct total-hom bridges (`homd_curry`, `Homd_func`) used in computational rules.
+4. **New bridge rules in the current snapshot.** The kernel now includes explicit Grothendieck morphism-action heads (`Fibration_cov_func`, `Fibration_cov_fapp1_func`) and direct total-hom bridges (`homd_curry`, `Homd_func`) used in computational rules; these bridges also expose the laxness pattern where cartesian source triangles can map to non-cartesian target triangles.
 
 # 2. Kernel principles and surface reading
 
@@ -444,6 +444,20 @@ As with ordinary transfors, the kernel also provides **off-diagonal** displayed 
 
 The intended geometric reading is simplicial: triangles over base edges, and higher simplices obtained by iterating “dependent hom” layers. The current kernel snapshot contains the beginning of this machinery (enough to state and normalize many pointwise computations in the Grothendieck case), together with phase-2 draft strict naturality/exchange rewrite rules on `tapp1_fapp0` and a representable exchange-law sanity assertion; general iteration remains an interface to be refined.
 
+In compact schematic form (matching the `fapp1_funcd`/`fdapp1_funcd` comments), a lax action
+$$
+F_1 : \\mathrm{Hom}_C(x,-) \\to \\mathrm{Hom}_D(F_0x,F-)
+$$
+induces
+$$
+((F_1)_1)_0 :
+\\mathrm{Homd}_{\\mathrm{Hom}_C(x,-)}\\bigl(f,(g\\circ f,g)\\bigr)
+\\to
+\\mathrm{Homd}_{\\mathrm{Hom}_D(F_0x,F-)}
+\\bigl((F_1)_0 f,\\bigl((F_1)_0(g\\circ f),(F_1)_0 g\\bigr)\\bigr),
+$$
+and the image of an identity-like/cartesian source triangle may be non-identity/non-cartesian in the target. That non-identity image is the laxness witness.
+
 ### Figure 5: a 2-cell between parallel composites (Arrowgram arrow-to-arrow)
 
 <div class="arrowgram">
@@ -565,7 +579,7 @@ This paper emphasizes computations that are already stable in the kernel. In par
 
 - **Displayed categories are only partially computational.** Generic `Catd` now has computational object-level structure in several places (e.g. fibres, pullback/opposite/terminal rules, and `τ (Obj (Total_cat E))`), but hom-level behavior remains mostly computational only in Grothendieck-shaped cases.
 - **Strictness placeholders exist.** Some computations (e.g. Grothendieck transport on fibre objects) are strict today as a normalization placeholder; the long-term goal is a lax/weak story where functoriality/transport come with higher cells rather than definitional equalities.
-- **Full simplicial iteration is still an interface.** `homd_` computes pointwise in the Grothendieck–Grothendieck case, `homd_curry`/`Homd_func` provide direct bridges for total homs in Groth-shaped cases, and `homd_int_base` provides compositional indexing, but uniform exchange/stacking normalization and full `homd_int` computation remain ongoing work.
+- **Full simplicial iteration is still an interface.** `homd_` computes pointwise in the Grothendieck–Grothendieck case, `homd_curry`/`Homd_func` provide direct bridges for total homs in Groth-shaped cases, and `homd_int_base` provides compositional indexing, but uniform exchange/stacking normalization, full `homd_int` computation, and explicit rewrite-level cartesian-vs-non-cartesian triangle infrastructure remain ongoing work.
 - **Adjunction layer remains draft-level.** A first triangle cut-elimination rewrite exists, but surrounding bridge infrastructure and closed regression terms are still incomplete.
 
 # References
