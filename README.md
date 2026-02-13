@@ -4,13 +4,36 @@
 
 *GO TO: [./spec/emdash2.lp](./spec/emdash2.lp)*
 
-We report on `emdash2.lp`, an ongoing experiment whose goal is a *type-theoretical* account of strict/lax ω-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The implementation target is the Lambdapi lo`emdash2.lp` is an experiment in *functorial programming* for strict/lax ω-categories inside the Lambdapi logical framework. The guiding principle is proof-theoretic: many categorical equalities (units, associativity, triangle identities, functoriality laws) are best treated as *normalization* (“cut-elimination”) rather than as external propositions. The technical focus of this paper is a *dependent arrow/comma (dependent hom)* construction for a dependent category $E$ over a base category $Z$. In the kernel this appears as `homd_` and its more internal, base-parametrized variant `homd_int`. These constructions organize “cells over a base arrow” in a simplicial (triangle/surface) manner, and they are intended to support exchange/stacking laws and higher coherence by iterating the same pattern. Separately (but in the same computational spirit), we explain how (a draft of) adjunction triangle identities becomes a rewrite rule via the “off-diagonal” component infrastructure for transfors.gical framework, and the guiding stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
-The core construction is a dependent comma/arrow (“dependent hom”) operation that organizes “cells over a base arrow” in a simplicial manner. Concretely, for a base category $B$ and a dependent category over it (morally a functor $E: B\to \mathbf{Cat}$), we define a Cat-valued functor classifying fibre morphisms from a transported probe object to a target object:
+The central construction is a dependent comma/arrow (“dependent hom”) operation that directly organizes “cells over a base arrow” in a simplicial manner. Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}: b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ the category of morphisms in the fibre over $b_1$ from the transport of $e_0$ along $b_{01}$ to $e_1$. In slogan form, this is a dependent arrow/comma object
 $$
-\mathrm{Homd}_E(e_0,--) : E \times_B \bigl(\mathrm{Hom}_B(b_0,-)\bigr)^{\mathrm{op}} \to \mathbf{Cat}.
+\\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
 $$
-As a complementary application, we outline a computational adjunction interface where unit/counit are first-class 2-cell data and a triangle identity is oriented as a definitional reduction on composites.
+In the current kernel snapshot, this construction is computational in the Grothendieck/Grothendieck probe case (via a definitional rule for `homd_`), while full general normalization is still ongoing. The intended iteration yields a simplicial presentation of higher cells (triangles, surfaces, higher simplices), where “stacking” of $2$-cells along a $1$-cell is expressed *over a chosen base edge*.
+
+As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations. The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram) and rendered/checked as part of a reproducible paper artifact.
+
+From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
+
+
+## Start here
+
+The main entry point is the Lambdapi specification:
+
+- [`./spec/emdash2.lp`](./spec/emdash2.lp)
+
+If you land on this repository page, this is the first file to open.
+
+## What is emdash2?
+
+`emdash2.lp` is the current specification effort for a computational-logical account of strict/lax ω-categories in Lambdapi, driven by rewrite and unification rules (normalization/cut-elimination style).
+
+## Report and documentation
+
+- Markdown report (copy of `print/public/index.md`): [`./docs/emdash2.md`](./docs/emdash2.md)
+- PDF report (rendered from the markdown): [`./docs/emdash2.pdf`](./docs/emdash2.pdf)
+
 
 ## Overview
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
