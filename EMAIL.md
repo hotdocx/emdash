@@ -2,7 +2,7 @@ Subject: GPT-5.3-Codex AI vs ω-categories — Re: [FOM] Autoformalization getti
 
 Dear Josef Urban, dear FOM,
 
-TL;DR: I have developed the `arrowgram` commutative-diagrams editor https://hotdocx.github.io/arrowgram then I setup GPT-5.3-Codex inside my AI workspace to read the JSON text of those diagrams and generate the `emdash` proof assistant for lax ω-categories (and to generate its report https://hotdocx.github.io/r/26043CPAL64001 as a book/slides with embedeed `arrowgram` diagrams), and you can try my shared AI workspace and fund it at GetPaidX.com a.k.a. https://LastRevision.pro/r/TODO — probably, you should disregard the rest of this email.
+TL;DR: I have developed the `arrowgram` commutative-diagrams editor https://hotdocx.github.io/arrowgram then I setup GPT-5.3-Codex inside my AI workspace to read the JSON text of those diagrams and generate the `emdash` proof assistant for lax ω-categories https://github.com/hotdocx/emdash (and to generate its report https://hotdocx.github.io/r/26043CPAL64001 as a book/slides with embedeed `arrowgram` diagrams), and you can try (and clone) my shared AI workspace and fund it at GetPaidX.com a.k.a. https://LastRevision.pro/r/26044DLGJ77000 — probably, you should disregard the rest of this email.
 
 Bye.
 
@@ -89,7 +89,7 @@ This MathOps idea is implemented by
     https://GetPaidX.com — Publish and fund AI workspaces
 
 backed by AI communities of 20,000+ developers in Dubai, Mumbai, Shanghai https://meetup.com/dubai-ai https://meetup.com/mumbai-ai https://meetup.com/shanghai-ai ... Try and experiment the AI workspace for `emdash` here (e.g ask Codex “where is the dependent hom defined? is it correct”):
-https://GetPaidX.com/r/--------TODO---------
+https://GetPaidX.com/r/26044DLGJ77000
 
 OK, thank you Josef Urban for your attention to these documents, and I am looking forward for your ai4reason.eu and Terence Tao's SAIR institutes to join the AI workspaces, and try and collapse the “LLM ↔ proof-checker” loop together, i.e. “symbolic AI”...
 
@@ -99,3 +99,17 @@ References:
 [1] Kosta Dosen, Zoran Petric (1999). “Cut-Elimination in Categories”
 [2] This summer visit to Ambrus Kaposi in Budapest, and `emdash` discussions at RHPL@FSTTCS 2025 in India
 [3] GPT-5.3-Codex
+
+
+---
+
+
+emdash 2 ω-categories — AI workspace
+
+emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
+
+Try this AI workspace. Click the Workspace tab, then Click Codex tab, then ask Codex “where is the dependent hom defined? is it correct”
+
+TL;DR: I have developed the `arrowgram` commutative-diagrams editor https://hotdocx.github.io/arrowgram then I setup GPT-5.3-Codex inside my AI workspace to read the JSON text of those diagrams and generate the `emdash` proof assistant for lax ω-categories https://github.com/hotdocx/emdash (and to generate its report https://hotdocx.github.io/r/26043CPAL64001 as a book/slides with embedeed `arrowgram` diagrams), and you can try (and clone) my shared AI workspace and fund it...
+
+( you can test the funding feature with this other post https://getpaidx.com/posts/cmia9vpl9000yl9250ewnb6rk ...)
