@@ -1,8 +1,8 @@
 # emdash — Functorial programming for strict/lax ω-categories in Lambdapi
+emdash2
+## NEW UPDATED VERSION EMDASH 2 — [./emdash2/emdash2.lp](./emdash2/emdash2.lp) 
 
-## NEW UPDATED VERSION EMDASH 2 — [./spec/emdash2.lp](./spec/emdash2.lp) 
-
-*GO TO: [./spec/emdash2.lp](./spec/emdash2.lp)*
+*GO TO: [./emdash2/emdash2.lp](./emdash2/emdash2.lp)*
 
 We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
@@ -21,7 +21,7 @@ From an engineering perspective, this fits a “MathOps” workflow: a long-runn
 
 The main entry point is the Lambdapi specification:
 
-- [`./spec/emdash2.lp`](./spec/emdash2.lp)
+- [`./emdash2/emdash2.lp`](./emdash2/emdash2.lp)
 
 If you land on this repository page, this is the first file to open.
 
@@ -31,9 +31,10 @@ If you land on this repository page, this is the first file to open.
 
 ## Report and documentation
 
-- Markdown report (copy of `print/public/index.md`): [`./docs/emdash2.md`](./docs/emdash2.md)
+- Markdown report (copy of `./emdash2/print/public/index.md`): [`./docs/emdash2.md`](./docs/emdash2.md)
 - PDF report (rendered from the markdown): [`./docs/emdash2.pdf`](./docs/emdash2.pdf)
 
+---
 
 ## Overview
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
