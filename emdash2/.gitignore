@@ -1,0 +1,13 @@
+.scratchpad
+*.lpo
+*.lpi
+*.lpj
+_build/
+.lambdapi/
+.cache/
+logs/
+*.log
+
+node_modules
+print/node_modules
+print/dist

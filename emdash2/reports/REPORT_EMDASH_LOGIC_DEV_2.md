@@ -1,0 +1,838 @@
+# REPORT — emdash2 logical development: `TotalΣ_cat` + `homd_int_alt` (Incremental Path to Always-Σ `Total_cat`)
+
+Date: 2026-02-07  
+Repo: `/home/user1/emdash2`  
+Target (future edits): `emdash2.lp`  
+
+## Goal (restated)
+
+We want `emdash2.lp` to support computational-logical omega-categories in Lambdapi, using rewrite/unification rules as the computational layer.
+
+The specific design pivot addressed here:
+
+1. Make the *total category* / comprehension `Total_cat` computational for **general** `E : Catd Z`, not only Grothendieck totals `E = Fibration_cov_catd M`.
+2. Make the hom-categories of totals compute in a way that is compatible with the dependent hom classifier `homd_`, i.e.:
+   - objects of `Total` are definitional Sigma pairs `(z,u)`,
+   - morphisms between `(x,u)` and `(y,v)` are definitional Sigma pairs `(f, alpha)` where `f : x→y` and `alpha` is a displayed arrow over `f`.
+3. Do this without destabilizing the development while infrastructure is incomplete, by introducing **parallel** symbols:
+   - `TotalΣ_cat` as the intended always-Sigma total,
+   - `homd_int_alt` as the intended curried/internal formulation of dependent hom (related to the existing `homd_int`).
+
+Once stable, the plan is to migrate uses from `Total_cat` to `TotalΣ_cat`, then (optionally) delete/replace the legacy `Total_cat` computational shortcuts.
+
+## Current state (what the kernel commits to today)
+
+In `emdash2.lp`:
+
+- `Total_cat [B] (E:Catd B) : Cat` exists for any `E : Catd B`, but computation is **special-cased**:
+  - Objects compute to Sigma only for Grothendieck totals:
+    - `τ (Obj (Total_cat (Fibration_cov_catd M))) ↪ Σ x:B, Obj(M x)`.
+  - Homs compute only for Grothendieck totals:
+    - `Hom_cat (Total_cat (Fibration_cov_catd M)) (x,u) (y,v)` reduces to an opposite of a Grothendieck total over `comp_hom_con_fib_cov`.
+  - There are definitional collapses:
+    - `Total_cat (Terminal_catd A) ↪ A`
+    - `Total_cat (Lift_catd A) ↪ A`
+
+- `homd_ : ... → Functor (Total_cat(Product_catd ...)) Cat_cat` exists, with one key compute rule for the Grothendieck/Grothendieck case.
+- `homd_int` exists as an internal packaging (kept abstract).
+
+This split is intentional: for general `Catd` (semantic isofibrations), transport along base arrows is not yet exposed computationally.
+
+## Design decision: introduce an always-Sigma total in parallel
+
+We introduce a second total constructor, **without modifying `Total_cat` initially**:
+
+```lambdapi
+symbol TotalΣ_cat [B : Cat] (E : Catd B) : Cat;
+injective symbol TotalΣ_proj1_func [B : Cat] (E : Catd B) : τ (Functor (TotalΣ_cat E) B);
+```
+
+### Normalization on opposites (recommended; matches `Total_cat`)
+
+`emdash2.lp` already normalizes totals-of-opposites *outwards* for `Total_cat`:
+
+```lambdapi
+rule @Total_cat _ (@Op_catd $B $E) ↪ Op_cat (@Total_cat $B $E);
+```
+
+For `TotalΣ_cat` we should mirror the same convention to avoid later “variance acrobatics” duplications:
+
+```lambdapi
+rule @TotalΣ_cat _ (@Op_catd $B $E) ↪ Op_cat (@TotalΣ_cat $B $E);
+```
+
+This is not logically required for Phase 1, but it is a cheap normalization rule that tends to reduce
+the number of distinct normal forms we need to reason about.
+
+### Object computation rule (always)
+
+For *every* displayed category `E : Catd B`, objects of `TotalΣ_cat E` are definitional Sigma pairs:
+
+```lambdapi
+rule τ (Obj (@TotalΣ_cat $B $E))
+  ↪ `τΣ_ x : τ (Obj $B), Obj (Fibre_cat $E x);
+```
+
+Notes:
+
+- This rule should pattern-match in a way consistent with existing conventions around implicit base arguments (some heads use `_` on the base to avoid missed matches after dropping `injective Obj`).
+- Use `Obj (Fibre_cat E x)` (a `Grpd` code) rather than `Fibre` to keep the rule uniform with the Grothendieck object rule style. Either is acceptable, but choose one and keep it consistent.
+
+### Projection computation on objects
+
+```lambdapi
+rule fapp0 (TotalΣ_proj1_func $E) (Struct_sigma $x $u) ↪ $x;
+```
+
+This provides the standard comprehension projection on objects without requiring any further structure.
+
+## Hom computation: introduce a stable-head functor `TotalΣ_hom_func`
+
+We want:
+
+```
+Hom_{TotalΣ E}((x,u),(y,v))  ≃  ∫_{f : x→y} (u →_f v)
+```
+
+where `(u →_f v)` is classified by `homd_` (or by a future internal/curried formulation derived from it).
+
+### Engineering constraint
+
+We should not attempt to directly implement a full definitional formula for the hom-category in terms of `homd_` immediately, because:
+
+- it requires internal currying/evaluation infrastructure (to turn `homd_` into a functor on `Hom(x,y)^op`), and
+- we want to control rewriting by stable heads to avoid conversion blowups and to keep rewrite orientation manageable.
+
+### Proposed intermediate interface
+
+Introduce:
+
+```lambdapi
+symbol TotalΣ_hom_func : Π [Z : Cat],
+  Π (E : Catd Z),
+  Π (x : τ (Obj Z)) (u : τ (Fibre E x)),
+  Π (y : τ (Obj Z)) (v : τ (Fibre E y)),
+  τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+```
+
+Then define hom-categories of `TotalΣ_cat` in terms of Grothendieck totalization of this functor:
+
+```lambdapi
+rule Hom_cat (@TotalΣ_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Op_cat (Total_cat (Fibration_cov_catd (TotalΣ_hom_func $E $x $u $y $v)));
+```
+
+Key points:
+
+- This matches the already-established convention for Grothendieck homs:
+  - `Hom_{∫M}` was defined as `Op_cat (Total_cat (Fibration_cov_catd ...))`.
+- We keep `Op_cat` externally to enforce the chosen 2-cell direction convention (consistent with the existing Grothendieck opfibration story).
+- The only new “semantic commitment” is that homs in `TotalΣ_cat` are implemented by *another* Grothendieck total. Computation is controlled by rewriting `TotalΣ_hom_func`, not by rewriting `Hom_cat` more deeply.
+
+### First computation milestone: Grothendieck case
+
+Provide a computation rule for `TotalΣ_hom_func` when `E = Fibration_cov_catd M`:
+
+```lambdapi
+rule TotalΣ_hom_func (@Fibration_cov_catd $Z $M) $x $u $y $v
+  ↪ @comp_hom_con_fib_cov $Z $M $x $y $u $v;
+```
+
+Then:
+
+`Hom_cat (TotalΣ_cat (Fibration_cov_catd M)) (x,u) (y,v)` reduces definitionally to the same shape already used by `Total_cat (Fibration_cov_catd M)`.
+
+This allows incremental migration: any part of the codebase that relies on Grothendieck computations can move from `Total_cat` to `TotalΣ_cat` without losing definitional behavior (in the Grothendieck subcase).
+
+## Internal currying/evaluation toolkit (minimal stable heads)
+
+To express `TotalΣ_hom_func` for general `E` in terms of `homd_`/`homd_int_alt`, we introduce two small stable heads.
+
+### 1) Evaluation at an object as a functor object
+
+We want a functor:
+
+```
+eval_x : Functor_cat(A,B) -> B
+```
+
+with the beta rule:
+
+```
+eval_x(F) = F(x)
+```
+
+Proposed:
+
+```lambdapi
+symbol eval0_func : Π [A B : Cat],
+  τ (Obj A) → τ (Functor (Functor_cat A B) B);
+
+rule fapp0 (eval0_func $x) $F ↪ fapp0 $F $x;
+```
+
+This enables internal compositions without expanding `fapp0` chains everywhere.
+
+### 2) Internal Pi/sections over `Catd`
+
+We want to internalize the “sections” view:
+
+```
+Pi(Z)(E) = Functord_cat(Terminal_catd Z, E)
+```
+
+as a functor object in `Cat_cat`.
+
+Proposed:
+
+```lambdapi
+symbol Pi_func : Π (Z : Cat), τ (Functor (Catd_cat Z) Cat_cat);
+rule fapp0 (Pi_func $Z) $E ↪ Functord_cat (Terminal_catd $Z) $E;
+```
+
+This matches the style of `Total_func`, `Fibration_cov_func`, `Fib_func`, `Catd_func`, etc.
+
+## `homd_int_alt`: intended role and interface
+
+### Intended mathematical content
+
+We want the “curried” formulation of the dependent hom classifier:
+
+```
+homd_int_alt :
+  Π z, (E[z])^op -> Π z', Hom_Z(z,z')^op -> (E[z'] -> Cat[z'])
+```
+
+This is logically equivalent to the existing uncurried form that takes a Sigma-total argument (a “triangle with a chosen target fibre object and base edge”).
+
+### Engineering role
+
+We do **not** need `homd_int_alt` to compute for general `E : Catd Z` immediately.
+We need:
+
+- a stable head with a usable type that can be composed with:
+  - `Pi_func`,
+  - `eval0_func`,
+  - functor category constructors (and eventually `Functor_catd`/`Functor_catd_func`),
+- and later, computation rules that fire in the Grothendieck probe situation (where `E = Fibration_cov_catd E0`).
+
+### Proposed approach
+
+## Update (2026-02-07): `homd_int_alt` from `homd_int_alt4` now typechecks definitionally
+
+We implemented the intended pipeline where the legacy binder-style wrapper
+`homd_int_alt` is obtained (definitionally) from the more internal `homd_int_alt4`,
+using only two new primitives at the section level:
+
+- `Sigma_uncurry_section_funcd` (primitive)
+  - type: takes a section over `Z` of `Functor_catd E D` and produces a section over `TotalΣ_cat E`
+    of `Pullback_catd D (TotalΣ_proj1_func E)`.
+- `swap_homd_int_alt4_section` (currently kept abstract, but its type is the intended
+  `swap_functor_func`-driven orientation change on sections).
+
+Concretely, we defined (in `emdash2.lp`) the derived section:
+
+- `TotalΣ_uncurry_eval Z E W_Z SS ≔ Sigma_uncurry_section_funcd Z E (homd_int_alt4_eval_base_catd W_Z) (swap_homd_int_alt4_section Z E W_Z SS)`
+
+and this now *typechecks without any unification hack* (no `unif_rule` bridge needed), because we
+added the missing “basic logic” rewrite principles that make the required `Pullback_catd(...)`
+codomain compute to the target `Op_catd(Fibration_con_catd(... hom_ ...))` shape.
+
+### Key rewrite principles added (engineering-critical)
+
+1. Functor-level normalization for `comp_cat_fapp0`:
+   - right-associativity normalization
+   - left/right identity simplifications
+
+2. Pullback computation for `Op_catd` of Grothendieck totals:
+   - `Pullback_catd (Op_catd (Op_cat B) (Fibration_cov_catd (Op_cat B) H)) F`
+     reduces to
+     `Op_catd (Op_cat A) (Fibration_cov_catd (Op_cat A) (H ∘ Op_func F))`
+
+3. The missing contravariant “accumulate the functor” rule for `hom_` under `Op_func`:
+   - a stable-head rule rewriting `(Op_func (hom_ ...)) ∘ H` into a single `Op_func (hom_ ...)`
+     with the accumulated base map `(F ∘ Op_func H)`
+
+4. A definitional involution for `TotalΣ_proj1_func` under `Op_func`:
+   - ensures `Op_func` of the already-normalized opposite projection collapses back to the original
+     projection, which is needed when the pullback rule introduces `Op_func` on that projection.
+
+### Cleanups
+
+- Removed the previously attempted bridge symbol `pullback_homd_int_alt4_to_target_section`
+  and the earlier `unif_rule`-based convertibility hint: they are no longer necessary once the
+  above rewrite principles exist.
+
+## Misc Rewrite Rules Added (Verbatim)
+
+These are the “misc” rewrite rules added to make the `TotalΣ_uncurry_eval` / `homd_int_alt_from_alt4`
+pipeline typecheck by definitional equality (convertibility).
+
+```lambdapi
+// Functor-level associativity normalization for comp_cat_fapp0.
+rule @comp_cat_fapp0 $A $B $D (@comp_cat_fapp0 $B $C $D $F $G) $H
+  ↪ @comp_cat_fapp0 $A $C $D $F (@comp_cat_fapp0 $A $B $C $G $H);
+
+// Right identity for comp_cat_fapp0.
+rule @comp_cat_fapp0 $B $B $C $F (@id_func $B) ↪ $F;
+
+// Left identity for comp_cat_fapp0.
+rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
+
+// Contravariant (Op_func) naturality: (Op_func(hom_ ...)) ∘ H accumulates H into the hom_ argument.
+rule @comp_cat_fapp0 (Op_cat $C) (Op_cat $B) (Op_cat Cat_cat)
+      (@Op_func $B Cat_cat (@hom_ $A $W $B $F))
+      $H
+  ↪ @Op_func $C Cat_cat
+      (@hom_ $A $W $C (comp_cat_fapp0 $F (@Op_func (Op_cat $C) (Op_cat $B) $H)));
+
+// Pullback of Op_catd(Grothendieck) reduces by precomposing the base functor by Op_func(F).
+rule @Pullback_catd $A $B
+      (@Op_catd (Op_cat $B)
+        (@Fibration_cov_catd (Op_cat $B) $H))
+      $F
+  ↪ @Op_catd (Op_cat $A)
+      (@Fibration_cov_catd (Op_cat $A) (comp_cat_fapp0 $H (@Op_func $A $B $F)));
+
+// Double opposite of the Σ-total projection collapses back to the original projection.
+rule @Op_func _ _ (@TotalΣ_proj1_func (Op_cat $B) (@Op_catd $B $E))
+  ↪ @TotalΣ_proj1_func $B $E;
+```
+
+1. Introduce `homd_int_alt` as a symbol with a type expressed as a composition of existing stable-head internal functors.
+2. Do not add general computation rules yet.
+3. Add computation rules only for the Grothendieck/Grothendieck case (mirroring the existing `homd_` pointwise rule), ensuring they reduce to:
+
+```lambdapi
+Hom_cat (E0 z)
+  (E0(f)(W))
+  (FF_z(d))
+```
+
+when all inputs are Grothendieck.
+
+This is consistent with the “computational probe discipline” already used in `homd_int`:
+the final symbol is abstract, but key pointwise reductions exist in the concrete Grothendieck subcases.
+
+Implementation note (important for typing):
+
+- In `emdash2.lp`, `Fibration_con_catd [A] (F : A ⟶ Catᵒᵖ)` has type `Catd (Op_cat A)` (it flips the base).
+- Therefore, if we build the “(z,v) ↦ Functor_cat((Hom_Z(W_Z,z))ᵒᵖ, Cat)” family via `Fibration_con_catd`,
+  and we want it as a displayed category over the original base `A`, we must wrap it by `Op_catd`:
+
+  `Op_catd (Fibration_con_catd ...) : Catd A`.
+
+## Normalization and confluence discipline
+
+The user intent is to add rules like:
+
+- category-level: `Product_cat C Terminal_cat ↪ C`, `Product_cat Terminal_cat C ↪ C`,
+- object-level: `Obj (Product_cat C Terminal_cat) ↪ Obj C`, etc.,
+- and similarly “Sigma with unit” simplifications as needed.
+
+This can resolve overlaps that would otherwise appear when we later make `Total_cat` always-Sigma.
+
+However, the rewrite layer must still avoid the most common termination traps:
+
+1. Avoid global eta/cancellation rules on `τΣ_` (decoded Sigma type) unless extremely carefully scoped.
+   - Prefer categorical/product-level normalization and specialized `Obj`/`Hom_cat` shortcuts.
+2. Keep stable heads, and fold toward them (existing pattern: `tapp0_fapp0`, `Fibre_func`, `Fibration_cov_fapp1_func`, etc.).
+3. Prefer rules that reduce *structure* (`TotalΣ_cat`, `TotalΣ_hom_func`) rather than rules that expand arbitrary terms.
+
+In practice, this suggests:
+
+- Use `TotalΣ_cat` as the always-Sigma arena.
+- Keep `Total_cat` (legacy) computations until migration is mostly complete.
+- Only once the rewrite system is stable (and `make check` stays within timeout) consider:
+  - switching `Total_cat` object computation to always-Sigma,
+  - replacing legacy collapses (`Total_cat (Lift_catd A) ↪ A`) by derived equivalences or by additional normalization rules that make the two normal forms join.
+
+### Note on “Sigma with unit” normalization
+
+If/when we later want `Total_cat` itself to become always-Sigma on objects, we will need joinability between:
+
+- legacy collapses like `Total_cat (Lift_catd A) ↪ A`, and
+- the always-Sigma normal form `Σ (_:Obj(1)), Obj(A)`.
+
+The user intent is to add rewrite rules such as `Product_cat C Terminal_cat ↪ C` (and similar), and to
+add other rules to normalize away redundant “unit factors”.
+
+Engineering recommendation:
+
+- First add *category-level* normalizations (`Product_cat _ Terminal_cat ↪ _`, etc.) and any *targeted*
+  `Obj`/`Hom_cat` shortcuts needed for those exact shapes.
+- Delay global eta/cancellation rules on decoded Sigma (`τΣ_`) unless they can be scoped to a stable head
+  (to avoid nontermination).
+
+This keeps the rewrite system closer to the existing emdash2 style: normalize by stable-head constructors,
+not by generic “algebraic simplification” on decoded types.
+
+## Proposed incremental implementation plan
+
+### Phase 0: baseline safety checks
+
+- Keep using short timeouts during early rewrite work:
+  - `EMDASH_TYPECHECK_TIMEOUT=60s make check`
+- If a hang appears, investigate critical pairs and decision trees:
+  - `lambdapi decision-tree <Module>.<symbol>`
+
+### Phase 1: introduce `TotalΣ_cat` (objects + projection)
+
+Add:
+
+- `TotalΣ_cat`, `TotalΣ_proj1_func`
+- (recommended) outward normalization on opposites for `TotalΣ_cat`
+- object Sigma computation rule
+- projection on objects computation rule
+
+Add a small sanity assertion:
+
+```lambdapi
+assert [B : Cat] (E : Catd B) (x : τ (Obj B)) (u : τ (Fibre E x)) ⊢
+  fapp0 (TotalΣ_proj1_func E) (Struct_sigma x u) ≡ x;
+```
+
+### Phase 2: introduce hom shape via `TotalΣ_hom_func`
+
+Add:
+
+- `TotalΣ_hom_func` stable head
+- `Hom_cat (TotalΣ_cat E) ...` rewrite to `Op_cat (Total_cat (Fibration_cov_catd (TotalΣ_hom_func ...)))`
+
+Do not add computation for `TotalΣ_hom_func` yet.
+
+### Phase 3: Grothendieck computation for `TotalΣ_hom_func`
+
+Add the specialization:
+
+- `TotalΣ_hom_func (Fibration_cov_catd M) ... ↪ comp_hom_con_fib_cov ...`
+
+Sanity assertions:
+
+- For Grothendieck `E`, homs in `TotalΣ_cat E` normalize to the same Sigma-object story already used for `Total_cat (Fibration_cov_catd M)`.
+
+### Phase 4: add `eval0_func` and `Pi_func`
+
+Add:
+
+- `eval0_func` + beta rule
+- `Pi_func` + beta rule
+
+Sanity: ensure beta rules fire by definitional equality.
+
+### Phase 5: internalize pointwise functor categories (needed for fully internal `homd_int_alt3*`)
+
+Add the “pointwise functor category family” from `REPORT_EMDASH_LOGIC_DEV.md` (Option A):
+
+- `Functor_catd` and its fibre computation rule.
+
+Then add the **internalized functor-object** version (needed for combinator-style internal pipelines):
+
+```lambdapi
+constant symbol Functor_catd_func :
+  Π (B : Cat),
+  τ (Functor (Op_cat (Catd_cat B)) (Functor_cat (Catd_cat B) (Catd_cat B)));
+```
+
+with a β-rule (object-action) expressing the intended currying:
+
+- `fapp0 (fapp0 (Functor_catd_func Z) E) D ↪ Functor_catd E D`.
+
+Also add the pointwise transfor family if needed for later steps:
+
+- `Transf_catd` and `Fibre_transf` (Option A).
+
+### Phase 6: add lightweight abbreviations for clarity (no rewrites)
+
+For readability/uniformity in *types* and *definitions* (but avoid using them in LHS patterns):
+
+- `Fib_cat (Z : Cat) : Cat ≔ Functor_cat Z Cat_cat`
+- `Pi_cat [Z : Cat] (E : Catd Z) : Cat ≔ Functord_cat (Terminal_catd Z) E`
+
+Optional (to reduce the “Π vs section tension” in notation):
+
+- `Fibre_func_alt : Π [Z] [E D] (FF : τ (Functord E D)), τ (Functord (Terminal_catd Z) (Functor_catd E D))`
+
+so that `Fibre_func FF z` is derived (conceptually) from `fdapp0 (Fibre_func_alt FF) z Terminal_obj`.
+This does **not** force the definitional equation `Functord E D ≡ Pi_cat (Functor_catd E D)`; it merely
+provides an explicit section-view when convenient for internal reasoning.
+
+### Phase 7: add `homd_int_alt` (binder wrapper; convenience view)
+
+Keep the binder-style wrapper as a *convenience* interface:
+
+- `homd_int_alt : Π W_Z, Π W, sections over TotalΣ_cat(E) ...`
+
+This is useful for warm-ups and for stating intended equations, but it is not the final “fully internal”
+pipeline.
+
+### Phase 8: add a *fully internal* `homd_int_alt3_base` and `homd_int_alt3`
+
+The key correction (vs an object-only rewrite for a new `..._base`) is:
+
+- `homd_int_alt3_base` should be a **definitional abbreviation built from functor objects / combinators**
+  (so its functorial structure is present “internally”), not merely a symbol with only a `fapp0` rewrite.
+
+Concrete engineering guideline:
+
+- Prefer a *δ-definition* (using `≔` and `comp_cat_fapp0`) for `homd_int_alt3_base` and its auxiliary
+  functor-valued subexpressions, so that both `fapp0` and `fapp1_func` can reduce by generic computation rules
+  for `comp_cat_fapp0` (rather than being stuck on an opaque constant).
+- It is acceptable to introduce 1–2 small “stable head” helpers (e.g. postcomposition-by-`Fib_func`, or the
+  contravariant Grothendieck constructor as a functor object) if they make the δ-definition readable and
+  keep rewrite heads small, but do not revert to “object-only computation rules” for the main base.
+
+In `emdash2.lp` we expect such auxiliary helpers to look like:
+
+- `Fibpost_val_func` (postcompose by `Fib_func` at the functor-category level),
+- `Groth_con_func` (contravariant Grothendieck + outward `Op_catd`, as a functor object),
+- and an explicit intermediate `..._fam` functor that is then postcomposed by `Pi_func`.
+
+### Phase 8bis (revision): prefer `homd_int_alt4*` (no `TotalΣ_proj1_func` in the internal pipeline)
+
+After the first implementation attempt, we found that an “alt3” pipeline built over `TotalΣ_cat E` is
+non-idiomatic for the intended surface meaning, because it necessarily threads the base index through the
+projection `TotalΣ_proj1_func`:
+
+- it yields a shape like `Π z, E[z]^op → Π (z',v) : TotalΣ_cat(E), hom(z, π₁(z',v))^op → Cat`,
+  i.e. the target base object is only accessible as `π₁(z',v)`.
+
+What we want instead is the more internal / more direct curried form:
+
+- `Π z, E[z]^op → Π z', hom(z, z')^op → (E[z'] → Cat[z'])`,
+
+where “`Cat[z']`” is the constant Cat-family over `Z` (a weakening/lift of `Cat_cat` to `Catd Z`).
+
+Therefore:
+
+- keep `homd_int_alt3*` (if already implemented) as a useful warm-up artifact,
+- introduce a new target pipeline `homd_int_alt4*` that internalizes `z'` directly
+  (by taking Π/sections over the base `Z`, not over `TotalΣ_cat E`),
+- and optionally derive the existing binder wrapper `homd_int_alt` as a *view* afterwards
+  (but this derivation is not required to proceed with `homd_int_alt4*` itself).
+
+#### Proposed internal pipeline (blueprint)
+
+We want `homd_int_alt4_base` to be a δ-definition (combinator-built) functor:
+
+- `homd_int_alt4_base [Z] (E : Catd Z) : τ (Functor (Op_cat Z) Cat_cat)`
+
+such that, informally:
+
+- `homd_int_alt4_base(E)(z)` is the category of sections over `z' : Z` of the family
+  `Functor_cat( Hom_Z(z,z')^op , Functor_cat(E[z'], Cat) )`.
+
+Then package the dependent hom as a fully internal displayed functor:
+
+- `homd_int_alt4 [Z] (E : Catd Z) : τ (Functord (Op_catd E) (Op_catd (Fibration_cov_catd (homd_int_alt4_base E))))`
+
+This matches the intended “logic-manipulation pipeline” style (and is on-par with the existing `homd_int`).
+
+#### Ingredients required for `homd_int_alt4_base`
+
+1. Constant Cat-family over `Z`.
+   We need a displayed category over `Z` whose fibre is `Cat_cat`:
+
+   - `CatCat_catd [Z : Cat] : Catd Z`
+
+   Recommended δ-definition:
+
+   - `CatCat_catd Z ≔ Pullback_catd (Lift_catd Cat_cat) (Terminal_func Z)`
+
+2. Edge classifier over `Z` indexed by a source object `z`.
+   For each `z : Obj(Z)` we want the displayed category over `Z` whose fibre at `z'` is `Hom_Z(z,z')^op`:
+
+   - `Edge_catd(z) ≔ Fibration_cov_catd (comp_cat_fapp0 op (hom_ z (id_Z)))`.
+
+   Internally, the functor object mapping `z ↦ Edge_catd(z)` is built using
+   `hom_int`, `op_val_func`, and `Fibration_cov_func` (no `TotalΣ_proj1_func`).
+   This is exactly the engineering constraint we want: `Edge_catd` must be packaged as a functor
+   so it can participate in `comp_cat_fapp0` pipelines.
+
+3. Pointwise functor categories via `Functor_catd` and its internalized form `Functor_catd_func`.
+   Define:
+
+   - `Cod_catd(E) ≔ Functor_catd E (CatCat_catd Z)` (so fibres are `Functor_cat(E[z'], Cat)`),
+   - `Fam(z) ≔ Functor_catd (Edge_catd(z)) (Cod_catd(E))`.
+
+   To build `z ↦ Fam(z)` as an internal functor object, use:
+
+   - `Functor_catd_func` + `eval0_func` to “fix the second argument” of `Functor_catd`.
+   Practical note: depending on variance conventions, it may be helpful to also provide a covariant
+   domain variant `Functor_catd_func_cov : Functor (Catd_cat Z) (...)` so the composition
+   `EdgeFamily ; fixR(Cod)` can be expressed directly in `Cat_cat` without inserting `Op_func`.
+
+4. Π/sections as an internal functor object (`Pi_func`).
+   Finally:
+
+   - `homd_int_alt4_base(E)(z) ≔ fapp0 (Pi_func Z) (Fam(z))`.
+
+#### Relation back to the binder wrapper `homd_int_alt`
+
+Once `homd_int_alt4` exists, the existing binder wrapper
+
+- `homd_int_alt : Π W_Z W, Functord( Terminal_catd(TotalΣ_cat E), ... )`
+
+can be derived as a view by:
+
+- extracting the section-in-`z'` produced by applying `homd_int_alt4` at `W_Z` and `W`,
+- then evaluating that section at `z'` and evaluating the resulting functor at `v : E[z']`
+  (using `eval0_func`), yielding a functor on `Hom_Z(W_Z,z')^op`.
+
+This is exactly where `TotalΣ_cat E` is a convenient *wrapper* (pairing `z'` with `v`), rather than
+the core index of the internal pipeline.
+
+Engineering note (important for correctness):
+
+- Do **not** rely on “`Op_cat Cat_cat ↪ Cat_cat`” as a semantic principle. If the kernel does not
+  identify `Cat_cat` with its opposite definitionally, then the pipeline must explicitly wrap/unwrap
+  opposites using `Op_func`/`Op_catd` and place `Op_catd` at the correct layer (as in `homd_int`).
+
+Current implementation approach in `emdash2.lp`:
+
+- Keep `homd_int_alt4_base : Z ⟶ Cat_cat` (covariant in `z`), then package
+  `homd_int_alt4 : Op_catd(E) ⟶ Op_catd(∫(homd_int_alt4_base(E)))` by applying `Op_catd`
+  to the Grothendieck construction.
+- Define a helper `homd_int_alt4_sec` that extracts, from `homd_int_alt4` at `(W_Z,W)`,
+  the induced section over `z' : Z`.
+- Define `reindex_section_funcd` compositionally (from `Pullback_funcd`, `comp_catd_fapp0`, `id_funcd`)
+  so sections over `Z` can be pulled back along `TotalΣ_proj1_func`.
+- Keep `homd_int_alt_from_alt4` as a stable wrapper head and give a direct `fdapp0` computation rule
+  that inlines the two-stage evaluation:
+  section-at-`y` (via reindexing) then postcompose by `eval0_func v`.
+- Keep `homd_int_alt` as the legacy surface head, with rewrite:
+  `homd_int_alt ... ↪ homd_int_alt_from_alt4 ...`.
+
+This removes the previous problematic dependency on a separate evaluator head
+(`homd_int_alt4_eval_funcd`) that only had an `fdapp0` rule.
+
+Target shape (blueprint; names adjusted to the emdash2 kernel):
+
+- `homd_int_alt3_base : Π [Z] (E : Catd Z), τ (Functor (Op_cat Z) Cat_cat)`
+- `homd_int_alt3 : Π [Z] (E : Catd Z), τ (Functord (Op_catd E) (Op_catd (Fibration_cov_catd (homd_int_alt3_base E))))`
+
+And the intended definition of `homd_int_alt3_base` is the “logic-manipulation” pipeline sketched by the user,
+using internal combinators such as:
+
+- `Pi_func`
+- `eval0_func` (user’s `fapp0_eval_func`)
+- `Functor_catd` and `Functor_catd_func`
+- `Fibration_cov_func`
+- `op_val_func`, `hom_int`
+
+### Phase 9: define `TotalΣ_hom_func` as an abbreviation via `homd_int_alt*` (plus optional Groth shortcut)
+
+Target principle (from this report):
+
+- `TotalΣ_hom_func E x u y v` should be a suitable specialization/evaluation of the internal dependent-hom pipeline,
+  so the Grothendieck case computes because the pipeline computes.
+
+Important refinement (from later review):
+
+- Two valid stagings exist for `TotalΣ_hom_func_alt`:
+  - definitional abbreviation (more direct when no forward-reference/circularity constraints appear),
+  - or declared stable head with a direct computation rule to the intended specialization/evaluation shape.
+- Current implementation uses the second staging (stable head + direct rewrite), while still ensuring
+  normalization proceeds through `homd_int_alt` and then `homd_int_alt_from_alt4`.
+
+Engineering allowance:
+
+- keep (or reintroduce) a Grothendieck-specific computation rule for `TotalΣ_hom_func (Fibration_cov_catd M) ...` as a
+  **confluent shortcut**, once joinability with the pipeline is visible (via `assert` sanity equalities).
+
+Practical staging currently used in `emdash2.lp`:
+
+- `TotalΣ_hom_func_alt` is kept as a declared stable head.
+- A direct rewrite computes it via `homd_int_alt` at `(y,v)` and `Terminal_obj`.
+  Since `homd_int_alt ↪ homd_int_alt_from_alt4`, this still normalizes through the alt4 path,
+  while deferring explicit wrapper-equivalence bookkeeping.
+- This lets the end-goal head normalize through the alt4 path now, while deferring the full
+  equivalence analysis between legacy wrapper presentations.
+
+Refinement applied:
+
+- The temporary helper `section_map_funcd` was removed.
+- Its role is now handled directly by the generic displayed composition operator `comp_catd_fapp0`
+  in the definition of `homd_int_alt_from_alt4`.
+
+Further refinement (reindexing side):
+
+- `reindex_section_funcd` is no longer an ad-hoc computation head.
+- We introduced the more basic primitive
+  `Pullback_funcd : Functord(E,D) -> Functord(Pullback_catd E F, Pullback_catd D F)`,
+  i.e. pullback action on displayed functors.
+- Then `reindex_section_funcd` is defined compositionally from:
+  `Pullback_funcd`, `comp_catd_fapp0`, and `id_funcd`, using
+  `Pullback_catd (Terminal_catd B) F ↪ Terminal_catd A`.
+- To support actual reduction through these derived definitions, we added generic `fdapp0` rules for:
+  `id_funcd`, `comp_catd_fapp0`, and `Pullback_funcd`.
+
+Interpretation:
+
+- This isolates the “missing universal-property infrastructure” to one clear primitive (`Pullback_funcd`),
+  rather than encoding reindexing behavior directly inside `reindex_section_funcd`.
+
+## Update (2026-02-07, latest): primitive Sigma-uncurry + swap and definitional bridge
+
+Clarification adopted:
+
+- The needed “Sigma-uncurry of sections” and nested-functor swap are treated as **logic primitives** for now
+  (declared symbols), not as derived constructions from existing infrastructure.
+
+### New primitive layer (implemented/staged)
+
+1. Add a generic swap primitive (currying symmetry):
+   - `swap_functor_func : (A ⟶ (B ⟶ C)) ⟶ (B ⟶ (A ⟶ C))`.
+2. Add a direct Sigma-uncurry primitive on sections:
+   - `TotalΣ_uncurry_eval` mapping
+     `sections over Z of z' ↦ Functor_cat(Hom(z,z')^op, Functor_cat(E[z'],Cat))`
+     directly to sections over `TotalΣ_cat E` of the target displayed family.
+3. Keep its essential object-action computation rule (`fdapp0`), so normalization proceeds
+   through compositional heads.
+
+### Main architectural correction
+
+- `homd_int_alt_from_alt4` is no longer encoded only by an `fdapp0` rewrite.
+- It is redefined as a **definitional abbreviation (`≔`)** by direct application:
+  - `homd_int_alt_from_alt4 ... ≔ TotalΣ_uncurry_eval ... (homd_int_alt4_sec ...)`.
+- This avoids routing the bridge through `reindex_section_funcd` / `Pullback_catd` / an extra auxiliary bridge symbol.
+
+### Updated task list (next implementation slice)
+
+1. Keep `homd_int_alt_from_alt4` as the canonical definitional bridge from `alt4`.
+2. Keep `homd_int_alt` as the legacy surface head rewriting to this bridge.
+3. Optionally add a direct relation/sanity between `homd_int_alt` and the older `...from_alt`
+   via the same Sigma-uncurry principle once missing equalities are available.
+4. Preserve `TotalΣ_hom_func_alt` normalization through this path and keep the Grothendieck shortcut
+   only as a confluent optimization.
+
+### Phase 6: connect `TotalΣ_hom_func` to `homd_int_alt`
+
+Define (by rewrite or by a definitional abbreviation, depending on subject-reduction constraints) that:
+
+- `TotalΣ_hom_func E x u y v` is computed as a suitable specialization/evaluation of `homd_int_alt`.
+
+Initially, this may only be done in the Grothendieck probe case to keep computation contained.
+
+### Phase 7: migration and eventual replacement of `Total_cat`
+
+Once `TotalΣ_cat` is stable and widely used:
+
+1. Move call-sites of general “Σ-object reasoning” from `Total_cat` to `TotalΣ_cat`.
+2. Add normalization rules (products with terminal, unit Sigma cancellations) needed to make the rewrite system robust.
+3. Optionally redefine `Total_cat` to become definitionally equal to `TotalΣ_cat`, and delete legacy specialized computations.
+
+## Expected outcome
+
+This plan gives:
+
+- an always-Sigma total construction usable today (`TotalΣ_cat`) without destabilizing legacy rules,
+- a hom computation architecture that is:
+  - definitional in shape,
+  - computational in the Grothendieck subcase immediately,
+  - extensible to the general semantic `Catd` case once `homd_int_alt` and internal currying tools mature,
+- a clean migration path toward the “always-Sigma `Total_cat`” future without forcing a single disruptive refactor step.
+
+## Update (2026-02-07): `homd_int_alt` vs “fully internal” and interaction with `TotalΣ_hom_func`
+
+After implementing Phases 1–4 and adding a first version of:
+
+- `homd_int_alt : Π W_Z W, sections over TotalΣ_cat(E) ...`,
+
+we identified a useful refinement of the plan, and a key overlap risk.
+
+### 1) Warm-up: connect homs via `TotalΣ_hom_func`, not by rewriting `Hom_cat` directly
+
+The architectural hook for hom computation is the stable head:
+
+- `TotalΣ_hom_func E x u y v : (Hom_Z(x,y))ᵒᵖ ⟶ Cat`.
+
+If we want “homs in `TotalΣ_cat` reduce to something involving `homd_`”, the right place to plug
+the computation is a rewrite/definition for `TotalΣ_hom_func`, not the `Hom_cat (TotalΣ_cat ...)` rule.
+
+### 2) Overlap/joinability risk with the Grothendieck computation rule
+
+`TotalΣ_hom_func` already has a specialized computation rule for the Grothendieck probe case:
+
+- `TotalΣ_hom_func (Fibration_cov_catd M) ... ↪ comp_hom_con_fib_cov ...`.
+
+Long-term target (preferred): `TotalΣ_hom_func` should be *expressed in terms of* a fully internal
+pipeline (here renamed `homd_int_alt3*`), and then the Grothendieck computation should follow because
+that pipeline computes when `E = Fibration_cov_catd M`.
+
+However, during incremental development it is acceptable (and often desirable) to keep the above
+Grothendieck-specific rule as a **confluent shortcut**, provided we verify joinability with the
+eventual “definition via `homd_int_alt3*`” (e.g. by `assert` sanity terms once the join is expressible).
+
+In particular, we do not necessarily need an extra symbol like `TotalΣ_hom_func_from_alt` if we keep:
+
+- one general-definition path (via `homd_int_alt2`), and
+- one Grothendieck shortcut path,
+
+and we can later show they normalize to the same term in the Grothendieck case.
+
+Adding a general rewrite (too early)
+
+- `TotalΣ_hom_func E ... ↪ (fdapp0 (homd_int_alt ...) (Struct_sigma y v) Terminal_obj)` (schematically),
+
+would overlap when `E = Fibration_cov_catd M`. If `homd_int_alt*` is still abstract in that case,
+the overlap may not be joinable yet and risks breaking robustness. Hence the staging discipline:
+delay the general rewrite until `homd_int_alt3*` is computational enough that joinability is visible.
+
+### 3) “Fully internal” `homd_int_alt3*`: recommended staging
+
+The current `homd_int_alt` still has external Lambdapi binders:
+
+```lambdapi
+Π (W_Z : τ (Obj Z)),
+Π (W : τ (Fibre E W_Z)),
+```
+
+From a global “internalization” perspective, we want those to be supplied by `fdapp0` application
+of an internal object (as in the style of `homd_int`).
+
+Recommendation:
+
+1. Introduce `homd_int_alt3` as a stable head that is *fully internal* (no explicit `W_Z`, `W` binders),
+   supported by a definitional-abbreviation base `homd_int_alt3_base` built from combinators (analogous
+   in spirit to `homd_int_base`).
+2. Derive the current convenient binder form `homd_int_alt` from `homd_int_alt3`
+   (definition or fold rule), so the external binder variant becomes a wrapper/view.
+3. Implementing `homd_int_alt3_base` *is* the “generic internal combinator” approach: it should be written
+   directly as a composition of functor objects (requiring `Functor_catd_func`, `Pi_func`, `eval0_func`, etc.),
+   so that the functorial structure is internal rather than being left as an uninterpreted constant.
+
+### 4) Relation to `Functor_catd` / `Transf_catd` (Option A)
+
+The “fully internal” blueprint you sketched uses pointwise functor-category families over `Z` and their
+internal combinators. Independently, `REPORT_EMDASH_LOGIC_DEV.md` proposes adding:
+
+- `Functor_catd`, `Transf_catd`, and `Fibre_transf` (fibrewise-only constructors),
+
+to support “partial discharge” surface syntax.
+
+Clarification:
+
+- These additions are *not* merely orthogonal “syntax sugar” once we aim to make `homd_int_alt3*`
+  internal and inter-derivable (on-par) with the existing `homd_int`.
+- In practice, the same internal toolkit is reused across both developments:
+  - internalized “Π/sections” operators (like `Pi_func`),
+  - evaluation/currying operators (like `eval0_func`),
+  - and pointwise functor-category families (`Functor_catd` and its internalized functor-object forms).
+
+So, while Option A still avoids the strong definitional equation “displayed functor = section”, it is
+expected that the *availability* of `Functor_catd`-level structure (and especially `Functor_catd_func`)
+becomes a prerequisite for expressing the fully-internal `homd_int_alt3*` pipeline in a reusable,
+“logic-manipulation” style.
+
+### 5) Updated next-step order (implementation)
+
+Next implementation turn should proceed in this order:
+
+1. Implement Option A (`Functor_catd`, `Transf_catd`, `Fibre_transf`) as fibrewise constructors (per `REPORT_EMDASH_LOGIC_DEV.md`).
+2. Add `Functor_catd_func` (internalized functor-object form of `Functor_catd`) and any small abbreviations needed in types.
+3. Add `homd_int_alt3_base` (as a definitional abbreviation from combinators) and `homd_int_alt3` (fully internal),
+   plus a wrapper/derivation back to `homd_int_alt`.
+4. Define `TotalΣ_hom_func` (or an explicit alias) via specialization/evaluation of the `homd_int_alt3*` pipeline,
+   keeping any Grothendieck-specific rewrite as an optional shortcut once joinability is visible.
+   (separate symbol or `assert`), without weakening the existing Grothendieck computation rule.
