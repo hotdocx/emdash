@@ -14,7 +14,8 @@ This document is the contributor guide for the root repository. Use it to choose
 
 ## Guidance Index (Cross-References You Should Read)
 - `README.md`: top-level architecture and component overview for the full monorepo.
-- `emdash2/AGENTS.md`: core Lambdapi SOP; includes development goals, fast commands, timeout policy, and watch-mode workflow.
+- `emdash2/AGENTS.md`: core Lambdapi SOP (development goals, fast commands, timeout/watch workflow) plus a long embedded Lambdapi usage reference/tutorial.  
+  It explicitly includes copy-pasted sections from official/manual-style sources (for example syntax, commands, queries, and tutorial excerpts copied from local docs and `lambdapi-examples`).
 - `emdash2/README.md`: concise quickstart for daily `emdash2` typechecking.
 - `emdash2/print/AGENTS.md`: print pipeline SOP; how paper markdown is rendered and validated, plus Arrowgram authoring rules.
 - `emdash2/scripts/check.sh`: timeout-aware wrapper used by `make check`.
