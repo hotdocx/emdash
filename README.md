@@ -1,5 +1,5 @@
-# emdash — Functorial programming for strict/lax ω-categories in Lambdapi
-emdash2
+# emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
+
 ## NEW UPDATED VERSION EMDASH 2 — [./emdash2/emdash2.lp](./emdash2/emdash2.lp) 
 
 *GO TO: [./emdash2/emdash2.lp](./emdash2/emdash2.lp)*
@@ -7,32 +7,66 @@ emdash2
 We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
 The central construction is a dependent comma/arrow (“dependent hom”) operation that directly organizes “cells over a base arrow” in a simplicial manner. Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}: b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ the category of morphisms in the fibre over $b_1$ from the transport of $e_0$ along $b_{01}$ to $e_1$. In slogan form, this is a dependent arrow/comma object
-$$
-\\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.
-$$
+$\\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.$
 In the current kernel snapshot, this construction is computational in the Grothendieck/Grothendieck probe case (via a definitional rule for `homd_`), while full general normalization is still ongoing. The intended iteration yields a simplicial presentation of higher cells (triangles, surfaces, higher simplices), where “stacking” of $2$-cells along a $1$-cell is expressed *over a chosen base edge*.
 
 As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\varepsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations. The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram) and rendered/checked as part of a reproducible paper artifact.
 
 From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
 
-
 ## Start here
 
-The main entry point is the Lambdapi specification:
-
-- [`./emdash2/emdash2.lp`](./emdash2/emdash2.lp)
-
-If you land on this repository page, this is the first file to open.
-
-## What is emdash2?
-
-`emdash2.lp` is the current specification effort for a computational-logical account of strict/lax ω-categories in Lambdapi, driven by rewrite and unification rules (normalization/cut-elimination style).
-
-## Report and documentation
-
+- Lambdapi specification [`./emdash2/emdash2.lp`](./emdash2/emdash2.lp)
 - Markdown report (copy of `./emdash2/print/public/index.md`): [`./docs/emdash2.md`](./docs/emdash2.md)
 - PDF report (rendered from the markdown): [`./docs/emdash2.pdf`](./docs/emdash2.pdf)
+- Original source: [https://github.com/1337777/cartier/blob/master/cartierSolution19.lp](https://github.com/1337777/cartier/blob/master/cartierSolution19.lp)
+- Published report, editable: [https://hotdocx.github.io/r/26043CPAL64001](https://hotdocx.github.io/r/26043CPAL64001)
+- arrowgram commutative diagrams/books/slides editor: [https://github.com/hotdocx/arrowgram/](https://github.com/hotdocx/arrowgram/)
+- Attend Live Training on AI MathOps & AI workspaces: [https://hotdocx.github.io](https://hotdocx.github.io)
+- Try and run the emdash AI workspace online: [https://LastRevision.pro/r/26044DLGJ77000](https://LastRevision.pro/r/26044DLGJ77000)
+
+---
+
+## Arrowgram
+
+**Arrowgram** is a production-grade toolkit for creating commutative diagrams for the web and research papers. It is designed to be easily used by humans (via a sleek web editor) and AI coding agents (via a strictly typed JSON API).
+
+**Try it now at: [https://hotdocx.github.io/arrowgram](https://hotdocx.github.io/arrowgram)**
+
+## LastRevision on Hotdocx
+
+LastRevision offers live cohort training that helps professionals use AI tools in general and apply them directly to Arrowgram workflows for diagrams, books, and slide decks.
+
+No coding needed.
+
+You learn practical ChatGPT and 15+ AI-tool workflows for real work, then use the same stack to produce publish-ready technical outputs in days, not months.
+
+Weekly sessions focus on both:
+- General AI productivity and delivery workflows you can reuse across roles
+- Arrowgram-specific creation workflows for AI-assisted diagrams, papers/books, and slide decks
+
+Join professionals, instructors, and researchers in live sessions that convert ideas into publishable outputs.
+
+- 3 hours weekly Saturday cohorts, 7:30 PM GST (UTC+4)
+- Free for this intro cohort
+- 20,000+ community network
+- Weekly live Saturday cohorts
+- Hotdocx + LastRevision + Arrowgram stack
+
+**Enroll and launch your workspace: [https://hotdocx.github.io](https://hotdocx.github.io)**
+
+## LastRevision.pro
+
+Build and publish your professional AI agents that co-work for you 24/7, save you time, and get you funded by fans and local clients.
+
+- Dedicated 24/7 cloud computers
+- Webhook trigger events, scheduled automations
+- API tools, Gmail, Website, Latex, Excel, PDF tools
+- Agent-to-agent marketplace
+- Run your AI workspace from Telegram or WhatsApp chat
+- OpenClaw-compatible 🦞 for professionals
+
+**Explore LastRevision.pro: [https://LastRevision.pro/](https://LastRevision.pro/)**
 
 ---
 
