@@ -6,7 +6,9 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 Our project is `emdash` version 2, whose goal is to write a Lambdapi specification @emdash2.lp for a programming language (and proof assistant) for ω-categories...  @README.md @emdash2.lp
 
-The baseline "inspiration" is in the older files @emdash.lp (outdated) and @cartierSolution13.lp (has different architecture/goal). The older files, with different architectures/goals, @cartierSolution14.lp and @cartierSolution16.lp are also relevant to understand the broarder context/goal.
+In fact, now that we have made substantial progress in @emdash2.lp then we are now in the third iteration of the goal: `emdash` version 3, to be written into the file @emdash3.lp
+
+The baseline "inspiration" is in the older files `emdash.lp` (outdated) and there are also some older files:  `cartierSolution13.lp` (has different architecture/goal) and other older files, with different architectures/goals, `cartierSolution14.lp` and `cartierSolution16.lp` are also relevant to understand the broarder context/goal, but these files `emdash.lp`  `cartierSolution13.lp` `cartierSolution14.lp` and `cartierSolution16.lp` are no longer included in this repo codebase (they have been moved to the git-untracked `.scratchpad/` subfolder in the very rare case where we might want to have a look at them), because for simplicity and cleanliness of the context because @emdash2.lp has now progressed substantially enough and superseded them enough that there they would be distracting/confusing for our new goal/tasks.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 

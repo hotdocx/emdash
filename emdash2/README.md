@@ -6,7 +6,8 @@ The proof assistant is called `m—` (read “emdash”).
 
 ## Layout
 - `emdash.lp`: earlier 1-category-oriented development (baseline).
-- `emdash2.lp`: ω-category-oriented development (current focus).
+- `emdash2.lp`: ω-category-oriented development (v2, second iteration).
+- `emdash3.lp`: ω-category-oriented development (v3, current focus).
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 
@@ -14,7 +15,7 @@ The proof assistant is called `m—` (read “emdash”).
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 - Check everything: `make check`
-- Check just ω version: `lambdapi check -w emdash2.lp`
+- Check just ω version: `lambdapi check -w emdash3.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
@@ -25,5 +26,5 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
 
 ## Notes
-- Alternative/related approaches exist in `cartierSolution13.lp` and `cartierSolution16_short.lp` (see `Kosta_Dosen_omega_categories.pdf`).
+- Alternative/related approaches exist in (now less-relevant and deleted/moved/retired into the `.scratchpad/` subfolder) `cartierSolution13.lp` and `cartierSolution16_short.lp` (see `Kosta_Dosen_omega_categories.pdf`).
 - If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.
