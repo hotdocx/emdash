@@ -1,4 +1,4 @@
 {
     "makefile.configureOnOpen": false,
-    "lambdapi.path": "/home/user1/bin/lambdapi_wrapper.sh "
+    "lambdapi.path": "lambdapi_wrapper.sh"
 }
