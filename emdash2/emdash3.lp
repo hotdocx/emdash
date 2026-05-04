@@ -257,6 +257,24 @@ rule Fibre_cat (Terminal_catd $Z) _ ↪ Terminal_cat;
 constant symbol Fibration_cov_catd : Π [Z : Cat], τ (Functor Z Cat_cat) → Catd Z;
 rule Fibre_cat (Fibration_cov_catd $M) $z ↪ fapp0 $M $z;
 
+// Weakening / constant displayed category: a category A available in any base context Z.
+injective symbol Const_catd : Π (Z : Cat), Cat → Catd Z;
+rule Fibre_cat (Const_catd $Z $A) _ ↪ $A;
+
+symbol Lift_catd (A : Cat) : Catd Terminal_cat
+≔ Const_catd Terminal_cat A;
+
+symbol CatCat_catd (Z : Cat) : Catd Z
+≔ Const_catd Z Cat_cat;
+
+symbol Pullback_catd : Π [A B : Cat], Catd B → τ (Functor A B) → Catd A;
+rule Fibre_cat (Pullback_catd $E $F) $x ↪ Fibre_cat $E (fapp0 $F $x);
+
+injective symbol Op_catd : Π [Z : Cat] (E : Catd Z), Catd (Op_cat Z);
+rule Op_catd (Op_catd $E) ↪ $E;
+rule Fibre_cat (Op_catd $E) $z ↪ Op_cat (Fibre_cat $E $z);
+rule @Op_catd _ (Const_catd $Z $A) ↪ Const_catd (Op_cat $Z) (Op_cat $A);
+
 symbol Catd_catd [Z : Cat] (E : Catd Z) : Catd Z;
 rule Fibre_cat (Catd_catd $E) $z ↪ Catd_cat (Fibre_cat $E $z);
 
@@ -341,7 +359,7 @@ symbol Transfd [Z : Cat] [E D : Catd Z]
 rule @Hom_cat (@Functord_cat $Z $E $D) $FF $GG ↪ @Transfd_cat $Z $E $D $FF $GG;
 
 // -------------------------------------------------------------------------------------------------
-// 6. Grothendieck object transport and dependent hom over base arrows
+// 6. Internal dependent hom over base arrows
 // -------------------------------------------------------------------------------------------------
 
 sequential symbol fib_cov_tapp0_fapp0 : Π [Z : Cat] (M : τ (Functor Z Cat_cat)),
@@ -355,13 +373,45 @@ rule @fib_cov_tapp0_fapp0 $Z $M $x $x (id $Z $x) $u ↪ $u;
 rule @fib_cov_tapp0_fapp0 $Z $M $y $z $g (@fib_cov_tapp0_fapp0 $Z $M $x $y $f $u)
   ↪ @fib_cov_tapp0_fapp0 $Z $M $x $z (comp_fapp0 $g $f) $u;
 
-sequential symbol Homd_func [Z : Cat] (E : Catd Z)
+// Internal edge family: for a fixed source x, the fibre at y is Hom_Z(x,y)^op.
+symbol Edge_catd [Z : Cat] (x : τ (Obj (Op_cat Z))) : Catd Z;
+rule @Fibre_cat $Z (@Edge_catd $Z $x) $y ↪ Op_cat (Hom_cat $Z $x $y);
+
+// Family whose sections classify, internally, the curried dependent hom at source x.
+symbol homd_curry_base_fam [Z : Cat] (E : Catd Z)
+  (x : τ (Obj (Op_cat Z))) : Catd Z;
+rule @Fibre_cat $Z (@homd_curry_base_fam $Z $E $x) $y
+  ↪ Functor_cat
+      (@Fibre_cat $Z (@Edge_catd $Z $x) $y)
+      (Functor_cat (@Fibre_cat $Z $E $y) Cat_cat);
+
+// Base functor: x |-> Pi_y Functor(Hom_Z(x,y)^op, Functor(E[y],Cat)).
+symbol homd_curry_base [Z : Cat] (E : Catd Z)
+  : τ (Functor (Op_cat Z) Cat_cat);
+rule @fapp0 (Op_cat $Z) Cat_cat (@homd_curry_base $Z $E) $x
+  ↪ @Pi_cat $Z (@homd_curry_base_fam $Z $E $x);
+
+// Primary internal dependent hom object, suitable for iteration.
+constant symbol homd_int : Π [Z : Cat], Π (E : Catd Z),
+  τ (Functord
+      (@Op_catd Z E)
+      (@Fibration_cov_catd (Op_cat Z) (@homd_curry_base Z E)));
+
+// Endpoint projection/debugging head. The intended source is homd_int evaluated at x,u,y,v.
+sequential symbol homd_eval_func [Z : Cat] (E : Catd Z)
   (x : τ (Obj Z)) (u : τ (Fibre E x))
   (y : τ (Obj Z)) (v : τ (Fibre E y))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
+// Compatibility alias for the first v3 iteration name. It is not the internal primitive.
+symbol Homd_func [Z : Cat] (E : Catd Z)
+  (x : τ (Obj Z)) (u : τ (Fibre E x))
+  (y : τ (Obj Z)) (v : τ (Fibre E y))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @homd_eval_func Z E x u y v;
+
 rule @fapp0 (Op_cat (Hom_cat $Z $x $y)) Cat_cat
-      (@Homd_func $Z (@Fibration_cov_catd $Z $M) $x $u $y $v)
+      (@homd_eval_func $Z (@Fibration_cov_catd $Z $M) $x $u $y $v)
       $f
   ↪ Hom_cat (fapp0 $M $y)
        (@fib_cov_tapp0_fapp0 $Z $M $x $y $f $u)
@@ -373,14 +423,37 @@ rule Hom_cat (@Sigma_cat $Z $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
         (Op_cat (Hom_cat $Z $x $y))
         (@Fibration_cov_catd
           (Op_cat (Hom_cat $Z $x $y))
-          (@Homd_func $Z $E $x $u $y $v)));
+          (@homd_eval_func $Z $E $x $u $y $v)));
 
 // -------------------------------------------------------------------------------------------------
 // 7. Initial regression assertions for the v3 skeleton
 // -------------------------------------------------------------------------------------------------
 
+assert [Z : Cat] (A : Cat) (z : τ (Obj Z)) ⊢
+  Fibre_cat (Const_catd Z A) z ≡ A;
+
+assert [A B : Cat] (E : Catd B) (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
+  Fibre_cat (Pullback_catd E F) x ≡ Fibre_cat E (fapp0 F x);
+
+assert [Z : Cat] (E : Catd Z) (z : τ (Obj (Op_cat Z))) ⊢
+  Fibre_cat (Op_catd E) z ≡ Op_cat (Fibre_cat E z);
+
+assert [Z : Cat] (z : τ (Obj Z)) ⊢
+  Fibre_cat (CatCat_catd Z) z ≡ Cat_cat;
+
 assert (Z : Cat) (E : Catd Z) (z : τ (Obj Z)) ⊢
   Fibre_cat (Catd_catd E) z ≡ Catd_cat (Fibre_cat E z);
+
+assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
+  @Fibre_cat Z (@Edge_catd Z x) y ≡ Op_cat (Hom_cat Z x y);
+
+assert [Z : Cat] (E : Catd Z) (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
+  @Fibre_cat Z (@homd_curry_base_fam Z E x) y
+    ≡ Functor_cat (Op_cat (Hom_cat Z x y)) (Functor_cat (Fibre_cat E y) Cat_cat);
+
+assert [Z : Cat] (E : Catd Z) (x : τ (Obj (Op_cat Z))) ⊢
+  @fapp0 (Op_cat Z) Cat_cat (@homd_curry_base Z E) x
+    ≡ @Pi_cat Z (@homd_curry_base_fam Z E x);
 
 assert [Z : Cat] (E : Catd Z) (z : τ (Obj Z)) (u : τ (Fibre E z)) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma z u) ≡ z;
@@ -399,6 +472,12 @@ assert [Z : Cat] (E D : Catd Z) (FF : τ (Functord E D))
         (Fibre_cat D z)
         (@piapp0 Z (Functor_catd E D) FF z)
         u;
+
+assert [Z : Cat] (M : τ (Functor Z Cat_cat))
+  (x y : τ (Obj Z)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
+  (f : τ (Hom Z x y)) ⊢
+  fapp0 (homd_eval_func (Fibration_cov_catd M) x u y v) f
+    ≡ Hom_cat (fapp0 M y) (@fib_cov_tapp0_fapp0 Z M x y f u) v;
 
 assert [Z : Cat] (M : τ (Functor Z Cat_cat))
   (x y : τ (Obj Z)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))

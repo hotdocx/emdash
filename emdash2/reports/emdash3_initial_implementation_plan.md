@@ -1,5 +1,7 @@
 # emdash3 Clean Executable Skeleton
 
+> Superseded note: the `Homd_func E x u y v` item below was implemented in the first skeleton but then demoted by `reports/emdash3_internal_homd_reset_plan.md`. The current architecture treats endpoint `Homd_func` as a projection/debugging alias for `homd_eval_func`, while `homd_int` and its `homd_curry_base_*` family are the internal iteratable construction.
+
 ## Summary
 
 Build `emdash3.lp` as a fresh, typechecking Lambdapi kernel that keeps v2's stable-head rewrite discipline but reorganizes the theory around HoTT-style categorical type formers:
