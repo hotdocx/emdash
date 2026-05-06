@@ -180,6 +180,30 @@ symbol fapp0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
 rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 
+// Internalized opposite as a functor in Cat: A |-> A^op.
+constant symbol op : τ (Functor Cat_cat Cat_cat);
+rule @fapp0 _ _ op $A ↪ Op_cat $A;
+rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
+
+// Internalized ordinary functor-category formation.
+symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
+
+symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
+
+rule fapp0 Functor_cat_func $A ↪ Functor_cat_fapp0_func $A;
+rule fapp0 (Functor_cat_fapp0_func $A) $B ↪ Functor_cat $A $B;
+
+// Curried postcomposition in Cat, used to build constructor pipelines.
+symbol comp_cat_cov_func : Π [X Y Z : Cat],
+  Π (G : τ (Functor Y Z)),
+  τ (Functor (Functor_cat X Y) (Functor_cat X Z));
+
+rule fapp0 (@comp_cat_cov_func $X $Y $Z $G) $F
+  ↪ comp_cat_fapp0 $G $F;
+
+symbol op_val_func [Z : Cat] : τ (Functor (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat))
+≔ @comp_cat_cov_func Z Cat_cat Cat_cat op;
+
 // -------------------------------------------------------------------------------------------------
 // 3. Uniform binary internal hom
 // -------------------------------------------------------------------------------------------------
@@ -202,6 +226,10 @@ symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
 rule @fapp0 (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) $x
   ↪ Hom_cat $A (@fapp0 $B $A $F $x) $W;
 
+symbol hom_int [A B : Cat] (F : τ (Functor B A))
+  : τ (Functor (Op_cat A) (Functor_cat B Cat_cat))
+≔ @hom2_int A B A (@id_func A) F;
+
 assert [I J A : Cat] (G : τ (Functor I A)) (F : τ (Functor J A))
   (i : τ (Obj (Op_cat I))) (j : τ (Obj J)) ⊢
   @fapp0 J Cat_cat (@fapp0 (Op_cat I) (Functor_cat J Cat_cat) (@hom2_int I J A G F) i) j
@@ -212,6 +240,10 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
 
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (x : τ (Obj (Op_cat B))) ⊢
   @fapp0 (Op_cat B) Cat_cat (@hom_con A W B F) x ≡ Hom_cat A (@fapp0 B A F x) W;
+
+assert [A B : Cat] (F : τ (Functor B A)) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
+  @fapp0 B Cat_cat (@fapp0 (Op_cat A) (Functor_cat B Cat_cat) (@hom_int A B F) X) Y
+    ≡ Hom_cat A X (fapp0 F Y);
 
 // -------------------------------------------------------------------------------------------------
 // 4. Encoded Sigma types for object layers
@@ -256,6 +288,11 @@ rule Fibre_cat (Terminal_catd $Z) _ ↪ Terminal_cat;
 
 constant symbol Fibration_cov_catd : Π [Z : Cat], τ (Functor Z Cat_cat) → Catd Z;
 rule Fibre_cat (Fibration_cov_catd $M) $z ↪ fapp0 $M $z;
+
+symbol Fibration_cov_func [Z : Cat]
+  : τ (Functor (Functor_cat Z Cat_cat) (Catd_cat Z));
+
+rule fapp0 (@Fibration_cov_func $Z) $M ↪ @Fibration_cov_catd $Z $M;
 
 // Weakening / constant displayed category: a category A available in any base context Z.
 injective symbol Const_catd : Π (Z : Cat), Cat → Catd Z;
@@ -303,10 +340,29 @@ symbol Total_proj1_func [Z : Cat] (E : Catd Z) : τ (Functor (Total_cat E) Z)
 
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $z $u) ↪ $z;
 
+// Displayed family of total categories over the universe Catd_cat Z.
+symbol Totald_catd (Z : Cat) : Catd (Catd_cat Z);
+rule @Fibre_cat (Catd_cat $Z) (@Totald_catd $Z) $H ↪ @Total_cat $Z $H;
+
+symbol ConstZ_catd (Z : Cat) : Catd (Catd_cat Z)
+≔ Const_catd (Catd_cat Z) Z;
+
 // Sections into a displayed category are the categorical Pi type.
 symbol Functor_catd [Z : Cat] (E D : Catd Z) : Catd Z;
 rule Fibre_cat (Functor_catd $E $D) $z
   ↪ Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z);
+
+symbol Functor_catd_func (Z : Cat)
+  : τ (Functor (Op_cat (Catd_cat Z)) (Functor_cat (Catd_cat Z) (Catd_cat Z)));
+
+symbol Functor_catd_fapp0_func [Z : Cat] (E : Catd Z)
+  : τ (Functor (Catd_cat Z) (Catd_cat Z));
+
+rule fapp0 (Functor_catd_func $Z) $E ↪ Functor_catd_fapp0_func $E;
+rule fapp0 (Functor_catd_fapp0_func $E) $D ↪ Functor_catd $E $D;
+
+symbol Pi_func (Z : Cat) : τ (Functor (Catd_cat Z) Cat_cat);
+rule fapp0 (Pi_func $Z) $E ↪ @Pi_cat $Z $E;
 
 symbol Functord_cat [Z : Cat] (E D : Catd Z) : Cat
 ≔ Pi_cat (Functor_catd E D);
@@ -319,18 +375,107 @@ rule Hom_cat (Catd_cat $Z) $E $D ↪ Functord_cat $E $D;
 symbol id_funcd [Z : Cat] [E : Catd Z] : τ (Functord E E);
 rule @id (Catd_cat $Z) $E ↪ @id_funcd $Z $E;
 
+symbol Pullback_funcd : Π [A B : Cat], Π (F : τ (Functor A B)),
+  Π [E D : Catd B],
+  τ (Functord E D) → τ (Functord (Pullback_catd E F) (Pullback_catd D F));
+
 sequential symbol fdapp0 : Π [Z : Cat], Π [E D : Catd Z],
   Π (FF : τ (Functord E D)),
   Π (z : τ (Obj Z)), τ (Fibre E z) → τ (Fibre D z)
 ;
 
 rule @fdapp0 $Z $E $E (@id_funcd $Z $E) $z $u ↪ $u;
+rule @fdapp0
+      $A
+      (@Pullback_catd $A $B $E $F)
+      (@Pullback_catd $A $B $D $F)
+      (@Pullback_funcd $A $B $F $E $D $FF)
+      $x
+      $u
+  ↪ @fdapp0
+      $B
+      $E
+      $D
+      $FF
+      (@fapp0 $A $B $F $x)
+      $u;
 rule @fdapp0 $Z $E $D $FF $z $u
   ↪ @fapp0
       (Fibre_cat $E $z)
       (Fibre_cat $D $z)
       (@piapp0 $Z (@Functor_catd $Z $E $D) $FF $z)
       $u;
+
+symbol Fibre_func : Π [Z : Cat], Π [E D : Catd Z], Π (FF : τ (Functord E D)),
+  Π (z : τ (Obj Z)),
+  τ (Functor (Fibre_cat E z) (Fibre_cat D z));
+
+rule @fapp0 (Fibre_cat $E $z) (Fibre_cat $D $z) (@Fibre_func $Z $E $D $FF $z) $u
+  ↪ @fdapp0 $Z $E $D $FF $z $u;
+
+symbol Total_proj1_functord (Z : Cat)
+  : τ (Functord (Totald_catd Z) (ConstZ_catd Z));
+
+rule @Fibre_func (Catd_cat $Z) (@Totald_catd $Z) (@ConstZ_catd $Z) (@Total_proj1_functord $Z) $H
+  ↪ @Total_proj1_func $Z $H;
+
+symbol Catdd_cat [I : Cat] (B : Catd I) : Cat
+≔ @Pi_cat I (@Catd_catd I B);
+
+symbol Catdd [I : Cat] (B : Catd I) : Grpd
+≔ Obj (Catdd_cat B);
+
+symbol Const_catdd [I Z : Cat] (E : Catd Z)
+  : τ (Catdd (Const_catd I Z));
+
+rule @piapp0 $I (@Catd_catd $I (@Const_catd $I $Z)) (@Const_catdd $I $Z $E) $i
+  ↪ $E;
+
+symbol CatCat_catdd [I : Cat] (B : Catd I) : τ (Catdd B);
+
+rule @piapp0 $I (@Catd_catd $I $B) (@CatCat_catdd $I $B) $i
+  ↪ CatCat_catd (Fibre_cat $B $i);
+
+symbol Pullback_catdd [I : Cat] [A B : Catd I]
+  (F : τ (Functord A B)) (D : τ (Catdd B)) : τ (Catdd A);
+
+rule @piapp0 $I (@Catd_catd $I $A) (@Pullback_catdd $I $A $B $F $D) $i
+  ↪ @Pullback_catd
+      (Fibre_cat $A $i)
+      (Fibre_cat $B $i)
+      (@piapp0 $I (@Catd_catd $I $B) $D $i)
+      (@Fibre_func $I $A $B $F $i);
+
+symbol Functor_catdd [I : Cat] [B : Catd I]
+  (K L : τ (Catdd B)) : τ (Catdd B);
+
+rule @piapp0 $I (@Catd_catd $I $B) (@Functor_catdd $I $B $K $L) $i
+  ↪ @Functor_catd
+      (Fibre_cat $B $i)
+      (@piapp0 $I (@Catd_catd $I $B) $K $i)
+      (@piapp0 $I (@Catd_catd $I $B) $L $i);
+
+symbol Pi_catdd [I : Cat] [B : Catd I] (K : τ (Catdd B)) : Catd I;
+
+rule @Fibre_cat $I (@Pi_catdd $I $B $K) $i
+  ↪ @Pi_cat
+      (Fibre_cat $B $i)
+      (@piapp0 $I (@Catd_catd $I $B) $K $i);
+
+symbol PredPi_catd [Z : Cat] (E : Catd Z) : Catd (Catd_cat Z)
+≔ @Pi_catdd
+    (Catd_cat Z)
+    (@Totald_catd Z)
+    (@Functor_catdd
+      (Catd_cat Z)
+      (@Totald_catd Z)
+      (@Pullback_catdd
+        (Catd_cat Z)
+        (@Totald_catd Z)
+        (@ConstZ_catd Z)
+        (@Total_proj1_functord Z)
+        (@Const_catdd (Catd_cat Z) Z E))
+      (@CatCat_catdd (Catd_cat Z) (@Totald_catd Z)));
 
 constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 
@@ -373,29 +518,39 @@ rule @fib_cov_tapp0_fapp0 $Z $M $x $x (id $Z $x) $u ↪ $u;
 rule @fib_cov_tapp0_fapp0 $Z $M $y $z $g (@fib_cov_tapp0_fapp0 $Z $M $x $y $f $u)
   ↪ @fib_cov_tapp0_fapp0 $Z $M $x $z (comp_fapp0 $g $f) $u;
 
-// Internal edge family: for a fixed source x, the fibre at y is Hom_Z(x,y)^op.
-symbol Edge_catd [Z : Cat] (x : τ (Obj (Op_cat Z))) : Catd Z;
-rule @Fibre_cat $Z (@Edge_catd $Z $x) $y ↪ Op_cat (Hom_cat $Z $x $y);
+// Internal edge family: x |-> (y |-> Hom_Z(x,y)^op), as a functor into Catd_cat Z.
+symbol Edge_catd_fam [Z : Cat]
+  : τ (Functor (Op_cat Z) (Catd_cat Z))
+≔ @comp_cat_fapp0
+     (Op_cat Z)
+     (Functor_cat Z Cat_cat)
+     (Catd_cat Z)
+     (@Fibration_cov_func Z)
+     (@comp_cat_fapp0
+       (Op_cat Z)
+       (Functor_cat Z Cat_cat)
+       (Functor_cat Z Cat_cat)
+       (@op_val_func Z)
+       (@hom_int Z Z (@id_func Z)));
 
-// Family whose sections classify, internally, the curried dependent hom at source x.
-symbol homd_curry_base_fam [Z : Cat] (E : Catd Z)
-  (x : τ (Obj (Op_cat Z))) : Catd Z;
-rule @Fibre_cat $Z (@homd_curry_base_fam $Z $E $x) $y
-  ↪ Functor_cat
-      (@Fibre_cat $Z (@Edge_catd $Z $x) $y)
-      (Functor_cat (@Fibre_cat $Z $E $y) Cat_cat);
+symbol Edge_catd [Z : Cat] (x : τ (Obj (Op_cat Z))) : Catd Z
+≔ @fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_catd_fam Z) x;
 
-// Base functor: x |-> Pi_y Functor(Hom_Z(x,y)^op, Functor(E[y],Cat)).
-symbol homd_curry_base [Z : Cat] (E : Catd Z)
-  : τ (Functor (Op_cat Z) Cat_cat);
-rule @fapp0 (Op_cat $Z) Cat_cat (@homd_curry_base $Z $E) $x
-  ↪ @Pi_cat $Z (@homd_curry_base_fam $Z $E $x);
+// Predicate-indexed Pi target for dependent hom, pulled back along the edge family.
+symbol homd_curry_target_catd [Z : Cat] (E : Catd Z) : Catd (Op_cat Z)
+≔ @Pullback_catd
+     (Op_cat Z)
+     (Catd_cat Z)
+     (@PredPi_catd Z E)
+     (@Edge_catd_fam Z);
 
 // Primary internal dependent hom object, suitable for iteration.
-constant symbol homd_int : Π [Z : Cat], Π (E : Catd Z),
-  τ (Functord
-      (@Op_catd Z E)
-      (@Fibration_cov_catd (Op_cat Z) (@homd_curry_base Z E)));
+constant symbol homd_curry : Π [Z : Cat], Π (E : Catd Z),
+  τ (Functord (@Op_catd Z E) (@homd_curry_target_catd Z E));
+
+symbol homd_int [Z : Cat] (E : Catd Z)
+  : τ (Functord (@Op_catd Z E) (@homd_curry_target_catd Z E))
+≔ @homd_curry Z E;
 
 // Endpoint projection/debugging head. The intended source is homd_int evaluated at x,u,y,v.
 sequential symbol homd_eval_func [Z : Cat] (E : Catd Z)
@@ -444,16 +599,88 @@ assert [Z : Cat] (z : τ (Obj Z)) ⊢
 assert (Z : Cat) (E : Catd Z) (z : τ (Obj Z)) ⊢
   Fibre_cat (Catd_catd E) z ≡ Catd_cat (Fibre_cat E z);
 
+assert [A : Cat] (M : τ (Functor A Cat_cat)) ⊢
+  fapp0 (Fibration_cov_func) M ≡ Fibration_cov_catd M;
+
+assert [Z : Cat] (E : Catd Z) ⊢
+  fapp0 (Pi_func Z) E ≡ Pi_cat E;
+
+assert [Z : Cat] (E D : Catd Z) ⊢
+  fapp0 (fapp0 (Functor_catd_func Z) E) D ≡ Functor_catd E D;
+
+assert [Z : Cat] (H : Catd Z) ⊢
+  @Fibre_cat (Catd_cat Z) (@Totald_catd Z) H ≡ @Total_cat Z H;
+
+assert [Z : Cat] (H : Catd Z) ⊢
+  @Fibre_func
+    (Catd_cat Z)
+    (@Totald_catd Z)
+    (@ConstZ_catd Z)
+    (@Total_proj1_functord Z)
+    H
+    : τ (Functor (@Total_cat Z H) Z);
+
+assert [I Z : Cat] (E : Catd Z) (i : τ (Obj I)) ⊢
+  @piapp0
+    I
+    (@Catd_catd I (@Const_catd I Z))
+    (@Const_catdd I Z E)
+    i
+    ≡ E;
+
+assert [I : Cat] (B : Catd I) (i : τ (Obj I)) ⊢
+  @piapp0
+    I
+    (@Catd_catd I B)
+    (@CatCat_catdd I B)
+    i
+    ≡ CatCat_catd (@Fibre_cat I B i);
+
+assert [I : Cat] (A B : Catd I) (F : τ (Functord A B)) (D : τ (Catdd B)) (i : τ (Obj I)) ⊢
+  @piapp0 I (@Catd_catd I A) (@Pullback_catdd I A B F D) i
+    ≡ @Pullback_catd
+        (@Fibre_cat I A i)
+        (@Fibre_cat I B i)
+        (@piapp0 I (@Catd_catd I B) D i)
+        (@Fibre_func I A B F i);
+
+assert [I : Cat] (B : Catd I) (K L : τ (Catdd B)) (i : τ (Obj I)) ⊢
+  @piapp0 I (@Catd_catd I B) (@Functor_catdd I B K L) i
+    ≡ @Functor_catd
+        (@Fibre_cat I B i)
+        (@piapp0 I (@Catd_catd I B) K i)
+        (@piapp0 I (@Catd_catd I B) L i);
+
+assert [I : Cat] (B : Catd I) (K : τ (Catdd B)) (i : τ (Obj I)) ⊢
+  @Fibre_cat I (@Pi_catdd I B K) i
+    ≡ @Pi_cat
+        (@Fibre_cat I B i)
+        (@piapp0 I (@Catd_catd I B) K i);
+
+assert [Z : Cat] (E : Catd Z) (H : Catd Z) ⊢
+  @Fibre_cat (Catd_cat Z) (@PredPi_catd Z E) H
+    ≡ @Pi_cat
+        (@Total_cat Z H)
+        (@Functor_catd
+          (@Total_cat Z H)
+          (@Pullback_catd
+            (@Total_cat Z H)
+            Z
+            E
+            (@Fibre_func
+              (Catd_cat Z)
+              (@Totald_catd Z)
+              (@ConstZ_catd Z)
+              (@Total_proj1_functord Z)
+              H))
+          (@CatCat_catd (@Total_cat Z H)));
+
 assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
   @Fibre_cat Z (@Edge_catd Z x) y ≡ Op_cat (Hom_cat Z x y);
 
-assert [Z : Cat] (E : Catd Z) (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
-  @Fibre_cat Z (@homd_curry_base_fam Z E x) y
-    ≡ Functor_cat (Op_cat (Hom_cat Z x y)) (Functor_cat (Fibre_cat E y) Cat_cat);
-
 assert [Z : Cat] (E : Catd Z) (x : τ (Obj (Op_cat Z))) ⊢
-  @fapp0 (Op_cat Z) Cat_cat (@homd_curry_base Z E) x
-    ≡ @Pi_cat Z (@homd_curry_base_fam Z E x);
+  @Fibre_cat (Op_cat Z) (@homd_curry_target_catd Z E) x
+    ≡ @Fibre_cat (Catd_cat Z) (@PredPi_catd Z E) (@Edge_catd Z x);
 
 assert [Z : Cat] (E : Catd Z) (z : τ (Obj Z)) (u : τ (Fibre E z)) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma z u) ≡ z;
@@ -472,6 +699,26 @@ assert [Z : Cat] (E D : Catd Z) (FF : τ (Functord E D))
         (Fibre_cat D z)
         (@piapp0 Z (Functor_catd E D) FF z)
         u;
+
+assert [Z : Cat] (E D : Catd Z) (FF : τ (Functord E D))
+  (z : τ (Obj Z)) (u : τ (Fibre E z)) ⊢
+  @fapp0
+    (@Fibre_cat Z E z)
+    (@Fibre_cat Z D z)
+    (@Fibre_func Z E D FF z)
+    u
+    ≡ @fdapp0 Z E D FF z u;
+
+assert [A B : Cat] (F : τ (Functor A B)) (E D : Catd B) (FF : τ (Functord E D))
+  (x : τ (Obj A)) (u : τ (Fibre (Pullback_catd E F) x)) ⊢
+  @fdapp0
+    A
+    (@Pullback_catd A B E F)
+    (@Pullback_catd A B D F)
+    (@Pullback_funcd A B F E D FF)
+    x
+    u
+    ≡ @fdapp0 B E D FF (@fapp0 A B F x) u;
 
 assert [Z : Cat] (M : τ (Functor Z Cat_cat))
   (x y : τ (Obj Z)) (u : τ (Obj (fapp0 M x))) (v : τ (Obj (fapp0 M y)))
