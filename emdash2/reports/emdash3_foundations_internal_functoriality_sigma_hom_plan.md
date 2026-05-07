@@ -1,70 +1,179 @@
-# Plan: Clean v3 Foundations, Internalize Constructor Functoriality, and Rework Sigma Hom
+# Plan Draft: v3 Foundations, Internal Functoriality, and Sigma Hom
 
 ## Summary
 
-Refactor `emdash3.lp` toward the cleaner v3 architecture: make displayed functors the general evaluator layer, make `Pi_cat` its terminal-context instance, internalize pullback/composition/Catdd constructors as functor objects, and remove the temporary `homd_eval_func` / `Homd_func` endpoint bridge.
+This draft supersedes the previous Functord-first wording. The corrected v3 foundation keeps `Pi_cat` primitive and keeps fibrewise constructors such as `Functor_catd` primitive. The missing general principle is the displayed pointwise hom, currently represented by `PiHom_catd`, which should be promoted/renamed to the generic `Hom_catd`.
 
-`Pi` hom should be characterized first, because it gives the section/transfor/evaluation infrastructure needed for the later Sigma/dependent-hom story. Sigma hom should then use a `Catd` classifier over the base hom category, not a Cat-valued endpoint functor.
+The intended hierarchy is:
 
-## Key Changes
+```text
+Pi_cat        primitive
+Functor_catd  primitive
+Hom_catd      primitive/generic pointwise displayed hom
 
-- Consolidate documentation into `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`.
-  - Summarize the PRD, the current emdash2 lessons that still matter, the accepted v3 architecture, and the next implementation sequence.
-  - Include a “superseded reports” index for all existing `reports/*` files so old reports can be retired without losing context.
-  - Do not read or reference `.scratchpad/`.
+Functord_cat E D := Pi_cat (Functor_catd E D)
 
-- Rebase `Pi_cat` on displayed functor evaluation.
-  - Restore `Functord_cat [Z] E D` as the primitive slice hom category and `Functord E D := Obj (Functord_cat E D)`.
-  - Make `Catd_cat Z` use `Hom_cat (Catd_cat Z) E D ↪ Functord_cat E D`.
-  - Define `Pi_cat E` as the terminal displayed-functor instance: `Functord_cat (Terminal_catd Z) E`.
-  - Make `piapp0 s z` compute through `fdapp0 s z Terminal_obj`.
-  - Define generic `Transf_catd` / `Transfd_cat` for homs in `Functord_cat`, then add the terminal-source collapse so `Hom_cat (Pi_cat E) s t` reduces to `Pi_cat (PiHom_catd E s t)`.
+Transf_catd FF GG := stable canonical specialization of
+  Hom_catd (Functor_catd E D) FF GG
 
-- Internalize constructor functoriality.
-  - Add `Pullback_catd_func F : Functor (Catd_cat B) (Catd_cat A)` with object action `E ↦ Pullback_catd E F`; fold its hom action to `Pullback_funcd`.
-  - Add `comp_cat_func [X Y Z] : Functor (Functor_cat Y Z) (Functor_cat (Functor_cat X Y) (Functor_cat X Z))`; keep `comp_cat_cov_func G` as its object action.
-  - Update `op_val_func` and similar pipelines to use the functorial composition package.
-  - Add `Pullback_catdd_func F` and `Functor_catdd_func B` as functor-object versions of the current `Pullback_catdd` and `Functor_catdd`; keep the existing names as object-action aliases.
-  - Clarify `Const_catdd [I Z] E` as weakening both `Z` and `E` into the extra `I` context.
+Transfd_cat FF GG := Pi_cat (Transf_catd FF GG)
+```
 
-- Make `Totald_catd` semantically functorial in `H`.
-  - Add `Total_intro_func`, the induced functor on totals from a displayed functor.
-  - Add `Totald_func Z : Functor (Catd_cat Z) Cat_cat`, with object action `H ↦ Total_cat H` and hom action `FF ↦ Total_intro_func (id_func Z) FF`.
-  - Define `Totald_catd Z` via `Fibration_cov_catd (Totald_func Z)` instead of a bare fibre-only rule.
-  - Keep `Total_proj1_functord Z`, with fibre functor reducing to `Total_proj1_func H`.
+`Transf_catd` should remain a stable primitive head, not just a definitional alias. The canonical normalization should be a rule from the generic pointwise hom of a `Functor_catd` to this stable head:
 
-- Rework dependent hom endpoints and Sigma hom.
-  - Remove `homd_eval_func`, `Homd_func`, and their assertions.
-  - Keep `homd_curry` / `homd_int` as the internal primitive.
-  - Introduce `SigmaHom_catd E x u y v : Catd (Op_cat (Hom_cat Z x y))` as the Sigma-hom classifier.
-  - Define:
-    `Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v) ↪ Op_cat (Total_cat (SigmaHom_catd E x u y v))`.
-  - Add the Groth sanity rule for `E = Fibration_cov_catd M`:
-    the fibre at `f : x → y` reduces to `Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v`.
-  - Do not reintroduce a Cat-valued `Homd_func` unless later extraction from `homd_curry` proves it is the right normal form.
+```text
+Hom_catd (Functor_catd E D) FF GG ↪ Transf_catd FF GG
+```
+
+## Core Architecture
+
+- Promote `PiHom_catd` to `Hom_catd`.
+  - Current `PiHom_catd E s t` is already essentially the desired operation.
+  - Rename it or add a compatibility alias only temporarily.
+  - Fibre rule:
+    ```text
+    Fibre_cat (Hom_catd E s t) z
+      ↪ Hom_cat (Fibre_cat E z) (piapp0 s z) (piapp0 t z)
+    ```
+  - Pi hom rule:
+    ```text
+    Hom_cat (Pi_cat E) s t ↪ Pi_cat (Hom_catd E s t)
+    ```
+
+- Keep `Functor_catd` primitive.
+  - `Functor_catd E D` remains the fibrewise displayed functor-category constructor.
+  - `Functord_cat E D` remains a definition:
+    ```text
+    Functord_cat E D := Pi_cat (Functor_catd E D)
+    ```
+  - Therefore the hom of displayed functors is obtained from the generic Pi hom rule and the `Hom_catd (Functor_catd ...)` specialization.
+
+- Keep `Transf_catd` as a stable primitive head.
+  - Add or preserve:
+    ```text
+    Transf_catd [Z] [E D : Catd Z] (FF GG : Functord E D) : Catd Z
+    ```
+  - Its fibre rule should use extracted fibre functors:
+    ```text
+    Fibre_cat (Transf_catd FF GG) z
+      ↪ Transf_cat (Fibre_func FF z) (Fibre_func GG z)
+    ```
+  - Add canonical normalization:
+    ```text
+    Hom_catd (Functor_catd E D) FF GG ↪ Transf_catd FF GG
+    ```
+
+- Define `Transfd_cat` by Pi, not as an independent level.
+  - Use:
+    ```text
+    Transfd_cat FF GG := Pi_cat (Transf_catd FF GG)
+    ```
+  - Then:
+    ```text
+    Hom_cat (Functord_cat E D) FF GG
+      ↪ Transfd_cat FF GG
+    ```
+    should either follow by unfolding plus the generic rules, or be added as a shortcut that joins the same normal form.
+
+## Omega-Iteration Principle
+
+Do not introduce a fresh Lambdapi category constructor for each higher cell level, such as `Modf_catd`, `Modfd_cat`, `4Cell_catd`, etc.
+
+Higher cells are ordinary homs in already-formed categories:
+
+```text
+modifications between eps eps' : Transfd_cat FF GG
+  are Hom_cat (Transfd_cat FF GG) eps eps'
+```
+
+When these higher homs must be used functorially, they should be repackaged by operation-level heads into `Transfd_cat`-shaped data, following the emdash2 pattern:
+
+```text
+Hom_cat (Transfd_cat FF GG) eps eps'
+  --operation-level repackaging-->
+Transfd_cat (component_functor eps) (component_functor eps')
+```
+
+This is the role of later `tapp1_fapp1_func` / `tdapp1_fapp1_func`-style operations. They are stable heads for functorial operations, not new primitive cell levels. This preserves omega iteration without requiring an infinite sequence of Lambdapi symbols.
+
+## Internal Functoriality Work Still in Scope
+
+- Internalize pullback in the displayed-category argument.
+  - Add `Pullback_catd_func F : Functor (Catd_cat B) (Catd_cat A)`.
+  - Object action:
+    ```text
+    fapp0 (Pullback_catd_func F) E ↪ Pullback_catd E F
+    ```
+  - Hom action should fold to `Pullback_funcd F`.
+
+- Internalize ordinary composition more fully.
+  - Add a functorial composition package in the functor being postcomposed:
+    ```text
+    comp_cat_func [X Y Z]
+      : Functor
+          (Functor_cat Y Z)
+          (Functor_cat (Functor_cat X Y) (Functor_cat X Z))
+    ```
+  - Keep `comp_cat_cov_func G` as the object-action / stable postcomposition head.
+
+- Internalize `Catdd` constructors when needed.
+  - Current `Catdd`, `Pullback_catdd`, `Functor_catdd`, and `Pi_catdd` remain useful.
+  - Later functor-object versions should be added for constructors whose morphism action matters.
+  - `Const_catdd [I Z] E` means weakening both `Z` and `E` into the extra `I` context.
+
+- Make `Totald_catd` functorial in the displayed category variable.
+  - The current fibre-only form is useful but semantically incomplete.
+  - A later `Totald_func Z : Functor (Catd_cat Z) Cat_cat` should have object action `H ↦ Total_cat H`.
+  - Its hom action should be induced by a total-introduction operation on displayed functors.
+
+## Sigma Hom Direction
+
+The temporary endpoint heads `homd_eval_func` / `Homd_func` should not be treated as the v3 foundation. The better target is a displayed classifier over the base hom-category:
+
+```text
+SigmaHom_catd E x u y v : Catd (Op_cat (Hom_cat Z x y))
+```
+
+Then:
+
+```text
+Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
+  ↪ Op_cat (Total_cat (SigmaHom_catd E x u y v))
+```
+
+For the Grothendieck probe case:
+
+```text
+Fibre_cat (SigmaHom_catd (Fibration_cov_catd M) x u y v) f
+  ↪ Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v
+```
+
+The generic derivation from `homd_curry` / `homd_int` remains a later bridge. For the next feasible slice, `SigmaHom_catd` may be introduced as a stable classifier with the Groth beta rule, provided the plan later proves the rule joins the intended `homd_curry` path.
 
 ## Test Plan
 
-- Run after each slice:
+- Run after each implementation slice:
   - `lambdapi check -w emdash3.lp`
 - Final validation:
   - `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
-- Required assertions:
-  - `piapp0 s z ≡ fdapp0 s z Terminal_obj`.
-  - `Hom_cat (Pi_cat E) s t ≡ Pi_cat (PiHom_catd E s t)`.
-  - `fapp0 (Pullback_catd_func F) E ≡ Pullback_catd E F`.
-  - `fapp1_fapp0 (Pullback_catd_func F) FF ≡ Pullback_funcd F FF`.
-  - `fapp0 (fapp0 comp_cat_func G) F ≡ comp_cat_fapp0 G F`.
-  - `Fibre_cat (Totald_catd Z) H ≡ Total_cat H`.
-  - `fapp1_fapp0 (Totald_func Z) FF ≡ Total_intro_func (id_func Z) FF`.
-  - `Fibre_cat (SigmaHom_catd (Fibration_cov_catd M) x u y v) f ≡ Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v`.
-  - Existing `hom2_int`, `hom_`, `hom_con`, `Functor_catd`, `Catdd`, and `PredPi_catd` sanity checks still pass.
+Required assertions for this foundation:
+
+- `Fibre_cat (Hom_catd E s t) z ≡ Hom_cat (Fibre_cat E z) (piapp0 s z) (piapp0 t z)`.
+- `Hom_cat (Pi_cat E) s t ≡ Pi_cat (Hom_catd E s t)`.
+- `Hom_catd (Functor_catd E D) FF GG ≡ Transf_catd FF GG`.
+- `Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z)`.
+- `Transfd_cat FF GG ≡ Pi_cat (Transf_catd FF GG)`.
+- `Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG`.
+- No `Modf_catd` / `Modfd_cat` symbols are introduced.
+- Existing `hom2_int`, `hom_`, `hom_con`, `Functor_catd`, `Catdd`, `PredPi_catd`, and Groth transport sanity checks still pass.
 
 ## Assumptions
 
 - `emdash3.lp` is allowed to break compatibility with temporary v3 names from earlier iterations.
 - `emdash2.lp` remains read-only reference material.
-- `Functord_cat` becomes primitive again because it makes section evaluation and Pi hom a terminal-context instance of the general displayed-functor story.
-- Sigma hom is tested before attempting a fully derived generic endpoint extraction from `homd_curry`.
-- Old reports will not be moved by this implementation; the consolidated report will make them safe for the user to retire afterward.
+- `Pi_cat` and `Functor_catd` remain primitive in v3.
+- `Hom_catd` is the generic pointwise displayed hom; current `PiHom_catd` is its prototype.
+- `Transf_catd` is a stable primitive head with a canonical rule from `Hom_catd (Functor_catd ...)`.
+- Higher cells are represented by ordinary homs in existing categories and are made iterable by operation-level repackaging heads, not by an infinite family of new cell constructors.
+- Old reports will not be moved by this implementation; a future consolidated report will make them safe for the user to retire afterward.
