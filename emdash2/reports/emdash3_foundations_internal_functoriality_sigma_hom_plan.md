@@ -189,6 +189,23 @@ Pullback_catd
 Const_catd (Fibre_cat H z) (Fibre_cat E z).
 ```
 
+More precisely, this should follow from three generic computation principles:
+
+```text
+Pullback_catd (Pullback_catd E F) G
+  ↪ Pullback_catd E (comp_cat_fapp0 F G)
+
+comp_cat_fapp0
+  (Sigma_proj1_func H)
+  (piapp0 (sigma_intro_functord H) z)
+  ↪ const_func (Fibre_cat H z) Z z
+
+Pullback_catd E (const_func A Z z)
+  ↪ Const_catd A (Fibre_cat E z)
+```
+
+where `const_func A Z z : Functor A Z` is the ordinary constant functor at `z`. It can be implemented as a stable head or as the composite `Obj_func z ∘ Terminal_func A`, but a stable head may make the pullback rule easier to match.
+
 If a direct rewrite from the pullback expression to `Const_catd` is too aggressive for Lambdapi, keep a generic stable head for this compatibility case, but make it generic in `H`, `E`, and `z`; do not introduce an edge-only primitive.
 
 Similarly, section restriction should be a functoriality/substitution operation for `Pi_cat`, not an edge-specific construction:
@@ -435,6 +452,21 @@ Dxy :=
     (edge_at_func x y)
 ```
 
+Using pullback composition, projection-after-Sigma-introduction cancellation, and pullback-along-constant normalization, this family should reduce to:
+
+```text
+Dxy
+  ↪ Const_catd
+      (Fibre_cat (Edge_catd Z x) y)
+      (Fibre_cat E y)
+
+  ↪ Const_catd
+      (Op_cat (Hom_cat Z x y))
+      (Fibre_cat E y)
+```
+
+This does not make the transport section constant. It only says that all fibres of the indexed family are the same category `Fibre_cat E y`. The transport section can still vary with the arrow `f : x -> y`, which is exactly the intended Grothendieck behaviour.
+
 Construct two sections over `Dxy`:
 
 ```text
@@ -455,6 +487,17 @@ transport_xy :=
 const_v_xy :=
   edge_const_sec E x y v
   -- eventually: generic constant section after Sigma-introduction pullback compatibility
+```
+
+After `Dxy` normalizes to the constant family, the second line should become simply:
+
+```text
+const_v_xy :=
+  fapp0
+    (const_section_func
+      (Fibre_cat (Edge_catd Z x) y)
+      (Fibre_cat E y))
+    v
 ```
 
 Then the Sigma hom classifier is the generic displayed hom:
@@ -487,7 +530,7 @@ No primitive `SigmaHom_catd` should be added for this meaning. If a stable endpo
 
 1. Consolidate documentation into `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`, using this plan as the current source of truth and marking older reports as superseded where appropriate.
 2. Promote `PiHom_catd` to `Hom_catd`, add the `Hom_catd (Functor_catd ...) ↪ Transf_catd ...` specialization, and verify `Transfd_cat` remains a Pi-defined level.
-3. Add the generic Sigma/Pi/weakening adjunction fragments: `sigma_intro_functord`, `pi_eval_functord`, `const_section_func`, `section_pullback_func`, and only generic compatibility heads needed for pullback along Sigma introduction.
+3. Add the generic Sigma/Pi/weakening adjunction fragments: `const_func`, `sigma_intro_functord`, `pi_eval_functord`, `const_section_func`, `section_pullback_func`, pullback-composition normalization, and only generic compatibility heads needed for pullback along Sigma introduction.
 4. Add the internal functor-object versions of pullback, composition, `Catdd` constructors, and totalization, including the `Total_intro_func_func`-based hom action for `Totald_func`.
 5. Add directed displayed transport over `Edge_catd`, derive `edge_at_func` from `sigma_intro_functord`, derive or alias the fixed constant section from the generic constant-section machinery, and add the Sigma hom rule expressed through `Hom_catd`.
 6. Remove or demote `homd_eval_func` / `Homd_func` only after the new Sigma hom path has equivalent Grothendieck beta coverage.
@@ -512,6 +555,8 @@ Required assertions for this foundation:
 - `piapp0 (fapp0 (const_section_func Z A) a) z ≡ a`.
 - `piapp0 (fapp0 (section_pullback_func F E) s) a ≡ piapp0 s (fapp0 F a)`.
 - `piapp0 (sigma_intro_functord (Edge_catd Z x)) y` has the fixed-endpoint `edge_at_func` type.
+- `comp_cat_fapp0 (Sigma_proj1_func H) (piapp0 (sigma_intro_functord H) z) ≡ const_func (Fibre_cat H z) Z z`.
+- `Pullback_catd E (const_func A Z z) ≡ Const_catd A (Fibre_cat E z)`.
 - `fapp0 (Pullback_catd_func F) E ≡ Pullback_catd E F`.
 - `fapp1_fapp0 (Pullback_catd_func F) FF ≡ Pullback_funcd F FF`.
 - `fapp0 (fapp0 comp_cat_func G) F ≡ comp_cat_fapp0 G F`.
@@ -535,7 +580,7 @@ Required assertions for this foundation:
 - `Transf_catd` is a stable primitive head with a canonical rule from `Hom_catd (Functor_catd ...)`.
 - The older proposal to make `Functord_cat` primitive again is superseded by the current decision: `Functord_cat E D := Pi_cat (Functor_catd E D)`.
 - `Sigma_cat E` is context extension/totalization; the relative `Sigma_π` and `Pi_π` adjoints to pullback along `Sigma_proj1_func E` are separate displayed-category-level operations to add later if needed.
-- `sigma_intro_functord`, `pi_eval_functord`, `const_section_func`, and `section_pullback_func` are the immediate computational fragments of the Sigma/Pi/weakening adjunctions.
+- `const_func`, `sigma_intro_functord`, `pi_eval_functord`, `const_section_func`, and `section_pullback_func` are the immediate computational fragments of the Sigma/Pi/weakening adjunctions.
 - `transportd_sec` is a primitive directed displayed transport/induction operation for general `Catd`, with beta rules for `Fibration_cov_catd`.
 - `Edge_catd` is the existing source of the edge context; do not introduce a duplicate `HomFrom_catd`.
 - `edge_at_func` is provisional notation for the fixed-endpoint restriction map; it should be the `y`-component of `sigma_intro_functord (Edge_catd Z x)`, not a primitive.
