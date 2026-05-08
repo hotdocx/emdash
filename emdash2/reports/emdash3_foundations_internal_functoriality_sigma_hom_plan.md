@@ -5,55 +5,107 @@
 This report has been revised after the `Fam/Core` review. The current source of truth is no longer the older `Catd`-first plan below. The corrected v3 foundation should introduce a general directed family layer:
 
 ```text
-Fam_cat K := Functor_cat K Cat_cat
-Fam K     := Obj (Fam_cat K)
+Fam_cat (K : Cat) : Cat
+  := Functor_cat K Cat_cat
+
+Fam (K : Cat) : Grpd
+  := Obj (Fam_cat K)
 ```
 
 and then treat core displayed categories as the HoTT/path-specialized instance:
 
 ```text
-Catd_cat Z := Fam_cat (Core_cat Z)
-Catd Z     := Fam (Core_cat Z)
+Catd_cat (Z : Cat) : Cat
+  := Fam_cat (Core_cat Z)
+
+Catd (Z : Cat) : TYPE
+  := τ (Fam (Core_cat Z))
 ```
 
 Under this revision, core restriction and Grothendieck/Sigma totalization are separate operations:
 
 ```text
 core restriction:
-  M : Fam K
-  M|core := M ∘ Core_incl_func K : Fam (Core_cat K)
+  M : τ (Fam K)
+  M|core := M ∘ Core_incl_func K : τ (Fam (Core_cat K))
 
 Grothendieck / dependent sum:
   Sigma_cat M : Cat
-  Sigma_proj1_func M : Functor (Sigma_cat M) K
+  Sigma_proj1_func M : τ (Functor (Sigma_cat M) K)
 ```
 
-The old intuition that `Fibration_cov_catd M` is "the Grothendieck construction" is now superseded. In the new architecture, `Fibration_cov_catd M` is only a compatibility name for restriction of `M : Fam Z` along `Core_incl_func Z`. The actual total category preserving directed base-arrow data is `Sigma_cat M`.
+The old intuition that `Fibration_cov_catd M` is "the Grothendieck construction" is now superseded. In the new architecture, `Fibration_cov_catd M` is only a compatibility name for restriction of `M : τ (Fam Z)` along `Core_incl_func Z`. The actual total category preserving directed base-arrow data is `Sigma_cat M`.
 
-The earlier `tmp-2007.md` caution remains important but is resolved by this split: a pure `Catd Z := Fam (Core_cat Z)` layer alone would lose directed base-arrow structure if it replaced all directed families. Therefore the primary directed layer must be `Fam K`; `Catd Z` is only the core/path layer derived from it.
+The earlier `tmp-2007.md` caution remains important but is resolved by this split: a pure `Catd Z := τ (Fam (Core_cat Z))` layer alone would lose directed base-arrow structure if it replaced all directed families. Therefore the primary directed layer must be `Fam K`; `Catd Z` is only the core/path layer derived from it.
 
 Documentation consolidation is also in scope: before or alongside implementation, the stable v3 decisions should be summarized in a single consolidated report so older planning reports can be retired without losing useful context.
 
 ## Current Fam/Core Architecture
+
+### Implementation conventions and required interfaces
+
+Below, notation such as `E : Fam K` means `E : τ (Fam K)`. The `Fam K` head itself is a `Grpd` code, following the existing `Functor A B : Grpd := Obj (Functor_cat A B)` convention.
+
+The current section should remain readable without the historical/superseded material below. The implementation therefore depends on the following explicit interfaces:
+
+```text
+Fam_cat (K : Cat) : Cat
+Fam (K : Cat) : Grpd
+
+Transf_cat [A B] (F G : τ (Functor A B)) : Cat
+
+tapp0_fapp0 [A B] [F G : τ (Functor A B)]
+  (k : τ (Obj A)) (eta : τ (Obj (Transf_cat F G)))
+  : τ (Hom B (fapp0 F k) (fapp0 G k))
+
+tapp1_fapp0 [A B] [F G : τ (Functor A B)]
+  [x y : τ (Obj A)] (eta : τ (Obj (Transf_cat F G))) (f : τ (Hom A x y))
+  : τ (Hom B (fapp0 F x) (fapp0 G y))
+
+Core_incl_func Z : τ (Functor (Core_cat Z) Z)
+
+fapp0_func [A B] (u : τ (Obj A))
+  : τ (Functor (Functor_cat A B) B)
+
+fapp1_func [A B] (E : τ (Functor A B))
+  [x y : τ (Obj A)]
+  : τ (Functor (Hom_cat A x y) (Hom_cat B (fapp0 E x) (fapp0 E y)))
+
+hom_con [A] (v : τ (Obj A)) [B] (F : τ (Functor B A))
+  : τ (Functor (Op_cat B) Cat_cat)
+
+fib_cov_tapp0_fapp0 [K] (E : τ (Fam K))
+  [x y : τ (Obj K)] (f : τ (Hom K x y)) (u : τ (Obj (fapp0 E x)))
+  : τ (Obj (fapp0 E y))
+```
+
+`tapp0_fapp0` is the diagonal component of an ordinary transfor. `tapp1_fapp0` is the arrow-indexed/naturality component. The Sigma-map object beta only needs `tapp0_fapp0`; the Sigma-map arrow beta needs `tapp1_fapp0` or an equivalent strict-naturality stable head.
+
+For Cat-valued families, the codomain is `B = Cat_cat`, so these homs reduce through `Hom_cat Cat_cat A B ↪ Functor_cat A B`. Thus `tapp0_fapp0 k eta` and `tapp1_fapp0 eta f` can be used as ordinary functors between fibre categories.
+
+Do not make a category of "functors over `K`" a prerequisite for this foundation. In the v3 kernel, `Transf_cat` is the internal language for maps of families and for sections. Any later bridge between `Transf_cat (Terminal_fam K) E` and functors `K -> Sigma_cat E` over `K` is derived infrastructure, not the definition of `Pi_cat`.
 
 ### Generic directed families
 
 Use ordinary Cat-valued functors as the primary family/fibration interface:
 
 ```text
-Fam_cat K := Functor_cat K Cat_cat
-Fam K     := Obj (Fam_cat K)
+Fam_cat (K : Cat) : Cat
+  := Functor_cat K Cat_cat
 
-Fibre_cat [K] (E : Fam K) (k : Obj K) : Cat
+Fam (K : Cat) : Grpd
+  := Obj (Fam_cat K)
+
+Fibre_cat [K] (E : τ (Fam K)) (k : τ (Obj K)) : Cat
   ↪ fapp0 E k
 
-Pullback_fam [A B] (E : Fam B) (F : Functor A B) : Fam A
+Pullback_fam [A B] (E : τ (Fam B)) (F : τ (Functor A B)) : τ (Fam A)
   := comp_cat_fapp0 E F
 
-Const_fam K A : Fam K
+Const_fam K A : τ (Fam K)
   := comp_cat_fapp0 (Obj_func A) (Terminal_func K)
 
-Terminal_fam K : Fam K
+Terminal_fam K : τ (Fam K)
   := Const_fam K Terminal_cat
 ```
 
@@ -63,13 +115,15 @@ This means the everyday substitution and fibre operations become ordinary functo
 
 ### Pi as sections
 
-`Pi_cat` should be valid for any directed family `E : Fam K`, not only for a core-indexed family. Semantically:
+`Pi_cat` should be valid for any directed family `E : Fam K`, not only for a core-indexed family. Its foundation should be definitional/internal, not a later slice-category encoding:
 
 ```text
 Pi_cat E := Transf_cat (Terminal_fam K) E
 ```
 
-An object of `Pi_cat E` is a section of `Sigma_proj1_func E : Sigma_cat E -> K`: it contains objects `s_k : E[k]` and coherent action along every base arrow `f : k -> k'`. This is why `Pi_cat E` is meaningful over general directed `K`.
+In this plan, "section" means exactly a natural transformation from the terminal family into `E`. It contains objects `s_k : E[k]` and coherent action along every base arrow `f : k -> k'`. This is why `Pi_cat E` is meaningful over general directed `K`.
+
+There is a useful external reading of such an object as a functor `K -> Sigma_cat E` over `K`, but that should not be the source of truth. We do not yet need an internal category of "functors over `K`"; `Transf_cat (Terminal_fam K) E` is the available and intended expression of sections.
 
 The primitive eliminator can remain:
 
@@ -84,8 +138,8 @@ but its intended source is component evaluation of the natural transformation `T
 `Sigma_cat E` is the real Grothendieck/dependent-sum construction for any `E : Fam K`:
 
 ```text
-Sigma_cat [K] (E : Fam K) : Cat
-Sigma_proj1_func E : Functor (Sigma_cat E) K
+Sigma_cat [K] (E : τ (Fam K)) : Cat
+Sigma_proj1_func E : τ (Functor (Sigma_cat E) K)
 ```
 
 Objects compute as:
@@ -98,13 +152,13 @@ fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ↪ k
 For a transformation of directed families:
 
 ```text
-eta : Transf_cat E D
+eta : τ (Obj (Transf_cat E D))
 ```
 
 add the induced functor between total categories:
 
 ```text
-sigma_map_func eta : Functor (Sigma_cat E) (Sigma_cat D)
+sigma_map_func eta : τ (Functor (Sigma_cat E) (Sigma_cat D))
 ```
 
 with object computation:
@@ -121,27 +175,69 @@ comp_cat_fapp0 (Sigma_proj1_func D) (sigma_map_func eta)
   ↪ Sigma_proj1_func E
 ```
 
-The arrow action of `sigma_map_func eta` is where naturality/higher-cell data of `eta` preserves functoriality in `k`. This is the corrected replacement for the old statement that a transformation becomes a displayed functor between `Fibration_cov_catd` objects.
+The arrow action is also principled. A hom-object in `Sigma_cat E` can be read as:
+
+```text
+f     : τ (Hom K k k')
+alpha : τ (Hom (Fibre_cat E k') (fib_cov_tapp0_fapp0 E f u) u')
+```
+
+Then `sigma_map_func eta` should map it to the same base arrow with the fibre arrow obtained by applying the component of `eta` at the target:
+
+```text
+fapp1_fapp0 (sigma_map_func eta) (Struct_sigma f alpha)
+  ↪ Struct_sigma f (sigma_map_alpha eta f alpha)
+```
+
+where:
+
+```text
+sigma_map_alpha eta f alpha
+  : τ (Hom
+      (Fibre_cat D k')
+      (fib_cov_tapp0_fapp0 D f (fapp0 (tapp0_fapp0 k eta) u))
+      (fapp0 (tapp0_fapp0 k' eta) u'))
+```
+
+Conceptually:
+
+```text
+sigma_map_alpha eta f alpha
+  = fapp1_fapp0 (tapp0_fapp0 k' eta) alpha
+```
+
+with its source typed by ordinary transfor naturality. Both source expressions should normalize through the arrow-indexed component:
+
+```text
+fib_cov_tapp0_fapp0 D f (fapp0 (tapp0_fapp0 k eta) u)
+  ↔ fapp0 (tapp1_fapp0 eta f) u
+  ↔ fapp0 (tapp0_fapp0 k' eta) (fib_cov_tapp0_fapp0 E f u)
+```
+
+If these strict-naturality folds are not yet available when `sigma_map_func` is implemented, keep `sigma_map_alpha` as a stable primitive head and add the computation rule only after `tapp1_fapp0` and its naturality rules typecheck. This is the corrected replacement for the old statement that a transformation becomes a displayed functor between `Fibration_cov_catd` objects.
 
 ### Core displayed categories
 
 Core families are a specialization, not the main directed layer:
 
 ```text
-Catd_cat Z := Fam_cat (Core_cat Z)
-Catd Z     := Fam (Core_cat Z)
+Catd_cat (Z : Cat) : Cat
+  := Fam_cat (Core_cat Z)
+
+Catd (Z : Cat) : TYPE
+  := τ (Fam (Core_cat Z))
 ```
 
 Restore or preserve the core inclusion interface:
 
 ```text
-Core_incl_func Z : Functor (Core_cat Z) Z
+Core_incl_func Z : τ (Functor (Core_cat Z) Z)
 ```
 
 Then the compatibility spelling for a directed family restricted to paths/equivalences is:
 
 ```text
-Fibration_cov_catd [Z] (M : Fam Z) : Catd Z
+Fibration_cov_catd [Z] (M : τ (Fam Z)) : Catd Z
   := Pullback_fam M (Core_incl_func Z)
 ```
 
@@ -192,9 +288,9 @@ The general constructor should therefore be mixed variance:
 
 ```text
 Functor_fam [K]
-  (E : Fam (Op_cat K))
-  (D : Fam K)
-  : Fam K
+  (E : τ (Fam (Op_cat K)))
+  (D : τ (Fam K))
+  : τ (Fam K)
 
 Fibre_cat (Functor_fam E D) k
   ↪ Functor_cat (Fibre_cat E k) (Fibre_cat D k)
@@ -232,14 +328,14 @@ Catd_cat (Fibre_cat E k') -> Catd_cat (Fibre_cat E k)
 So promote the existing v2 idea:
 
 ```text
-Catd_func : Functor (Op_cat Cat_cat) Cat_cat
+Catd_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
 fapp0 Catd_func A ↪ Catd_cat A
 ```
 
 and define:
 
 ```text
-Catd_fam [K] (E : Fam K) : Fam (Op_cat K)
+Catd_fam [K] (E : τ (Fam K)) : τ (Fam (Op_cat K))
   := comp_cat_fapp0 Catd_func (Op_func E)
 
 Catd_catd [Z] (E : Catd Z) : Catd Z
@@ -253,10 +349,10 @@ This is the principled replacement for treating `Catd_catd` as a bare fibrewise 
 The generic directed Sigma hom should be formulated for:
 
 ```text
-E : Fam K
-x y : Obj K
-u : Obj (Fibre_cat E x)
-v : Obj (Fibre_cat E y)
+E : τ (Fam K)
+x y : τ (Obj K)
+u : τ (Obj (Fibre_cat E x))
+v : τ (Obj (Fibre_cat E y))
 ```
 
 not for arbitrary `E : Catd Z`. Its expected Grothendieck normal form is:
@@ -277,9 +373,9 @@ f : Hom_K(x,y)
 First define the action of a family on a fixed fibre object:
 
 ```text
-fam_tapp0_func [K] (E : Fam K)
-  [x y : Obj K] (u : Obj (fapp0 E x))
-  : Functor (Hom_cat K x y) (fapp0 E y)
+fam_tapp0_func [K] (E : τ (Fam K))
+  [x y : τ (Obj K)] (u : τ (Obj (fapp0 E x)))
+  : τ (Functor (Hom_cat K x y) (fapp0 E y))
 
 fam_tapp0_func E x y u
   := comp_cat_fapp0
@@ -294,16 +390,16 @@ fapp0 (fam_tapp0_func E x y u) f
   ↪ fib_cov_tapp0_fapp0 E f u
 
 fib_cov_tapp0_fapp0 E f u
-  : Obj (fapp0 E y)
+  : τ (Obj (fapp0 E y))
 ```
 
 Then define the fixed-endpoint hom functor by the existing contravariant hom helper:
 
 ```text
-sigma_hom_fam [K] (E : Fam K)
-  (x : Obj K) (u : Obj (fapp0 E x))
-  (y : Obj K) (v : Obj (fapp0 E y))
-  : Functor (Op_cat (Hom_cat K x y)) Cat_cat
+sigma_hom_fam [K] (E : τ (Fam K))
+  (x : τ (Obj K)) (u : τ (Obj (fapp0 E x)))
+  (y : τ (Obj K)) (v : τ (Obj (fapp0 E y)))
+  : τ (Functor (Op_cat (Hom_cat K x y)) Cat_cat)
 
 sigma_hom_fam E x u y v
   := hom_con v (fam_tapp0_func E x y u)
@@ -323,7 +419,7 @@ where `f : Obj (Op_cat (Hom_cat K x y))`, i.e. semantically an arrow `x -> y` in
 
 This is the directed formula that v2 was using under `Fibration_cov_catd`. In v3 it belongs directly to `Fam K` and `Sigma_cat E`; it should not be routed through core restriction.
 
-For the core case `E : Catd Z = Fam (Core_cat Z)`, the same Sigma-hom formula quantifies over core/path arrows. That gives the HoTT Sigma identity/equality story, not the full directed hom story of `Z`.
+For the core case `E : Catd Z = τ (Fam (Core_cat Z))`, the same Sigma-hom formula quantifies over core/path arrows. That gives the HoTT Sigma identity/equality story, not the full directed hom story of `Z`.
 
 ## Transport Packaging Status
 
@@ -333,7 +429,7 @@ The older report below proposes:
 transportd_sec [Z] (E : Catd Z) ...
 ```
 
-as directed transport over arbitrary base arrows. That is no longer valid under `Catd Z := Fam (Core_cat Z)`.
+as directed transport over arbitrary base arrows. That is no longer valid under `Catd Z := τ (Fam (Core_cat Z))`.
 
 For the directed `Fam` layer, a global transport section is optional packaging, not the primary Sigma-hom construction. The primary construction is:
 
@@ -345,18 +441,18 @@ sigma_hom_fam E x u y v := hom_con v (fam_tapp0_func E x y u)
 If section-level packaging is later useful, it can be added as a derived stable head:
 
 ```text
-transport_fam_sec [K] (E : Fam K)
-  (x : Obj K) (u : Obj (Fibre_cat E x))
-  : Obj
+transport_fam_sec [K] (E : τ (Fam K))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj
       (Pi_cat
         (Pullback_fam E
-          (Sigma_proj1_func (Edge_fam K x))))
+          (Sigma_proj1_func (Edge_fam K x)))))
 ```
 
 where:
 
 ```text
-Edge_fam K x : Fam K
+Edge_fam K x : τ (Fam K)
 Fibre_cat (Edge_fam K x) y ↪ Op_cat (Hom_cat K x y)
 ```
 
@@ -374,16 +470,16 @@ This should not block the first Sigma-hom implementation. If a core-only transpo
 ## Replacement Implementation Sequence
 
 1. Add `Fam_cat`, `Fam`, `Fibre_cat`/`Fam_app_cat`, `Const_fam`, `Terminal_fam`, and `Pullback_fam` as generic wrappers around existing functor-category infrastructure.
-2. Restore/add `Core_incl_func Z`, define `Catd_cat Z := Fam_cat (Core_cat Z)` and `Catd Z := Fam (Core_cat Z)`, then demote `Fibration_cov_catd M` to core restriction.
-3. Add the ordinary transfor component interface from v2: `tapp0_fapp0`, identity/composition component rules, and the beta rule from any `tapp0_func` packaging if that packaging is kept.
+2. Restore/add `Core_incl_func Z`, define `Catd_cat Z := Fam_cat (Core_cat Z)` and `Catd Z := τ (Fam (Core_cat Z))`, then demote `Fibration_cov_catd M` to core restriction.
+3. Add the ordinary transfor component interface from v2: `tapp0_fapp0`, `tapp1_fapp0`, identity/composition component rules, strict-naturality folds needed for arrow-indexed components, and the beta rule from any `tapp0_func`/`tapp1_*` packaging if that packaging is kept.
 4. Define `Pi_cat E := Transf_cat (Terminal_fam K) E`, keep `piapp0` as component evaluation, and define `Functord_cat E D := Transf_cat E D` for core families.
 5. Replace old `fdapp0`/`Fibre_func` usages with derived wrappers over `tapp0_fapp0` where a compatibility head is still helpful.
 6. Generalize `Sigma_cat`, `Sigma_proj1_func`, and object/projection beta rules from `Catd` inputs to `Fam K` inputs.
-7. Add `sigma_map_func eta` for `eta : Transf E D`, with object beta and projection law.
+7. Add `sigma_map_func eta` for `eta : τ (Obj (Transf_cat E D))`, with object beta and projection law. Add the arrow-action beta through `sigma_map_alpha` once `tapp1_fapp0` naturality folds are available; otherwise keep `sigma_map_alpha` as a stable head and postpone its computation rule.
 8. Add `fam_tapp0_func`, the optional stable object-action fold `fib_cov_tapp0_fapp0 E f u`, and the derived `sigma_hom_fam := hom_con v (fam_tapp0_func E x y u)`.
 9. Add the Sigma hom rule expressed through `sigma_hom_fam`.
 10. Add `Functor_fam` with mixed variance, then recover old `Functor_catd` as the core-specialized alias.
-11. Promote `Catd_func : Functor (Op_cat Cat_cat) Cat_cat`, define `Catd_fam E : Fam (Op_cat K)`, and recover old `Catd_catd` as the core-specialized alias.
+11. Promote `Catd_func : τ (Functor (Op_cat Cat_cat) Cat_cat)`, define `Catd_fam E : τ (Fam (Op_cat K))`, and recover old `Catd_catd` as the core-specialized alias.
 12. Add `Edge_fam K x` and `transport_fam_sec` only if a later section-level construction needs them.
 13. Revisit `Transf_catd`, `Transfd_cat`, `homd_curry`, and `PredPi_catd` only after the generic `Fam`/`Sigma`/`Pi` layer typechecks.
 
@@ -404,8 +500,10 @@ Required assertions for the revised foundation:
 - `Fibre_func FF k ≡ tapp0_fapp0 k FF` if the compatibility head is kept.
 - `fdapp0 FF k u ≡ fapp0 (tapp0_fapp0 k FF) u` if the compatibility head is kept.
 - `fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k`.
-- `fapp0 (Sigma_map_func eta) (Struct_sigma k u) ≡ Struct_sigma k (fapp0 (tapp0_fapp0 k eta) u)`.
+- `fapp0 (sigma_map_func eta) (Struct_sigma k u) ≡ Struct_sigma k (fapp0 (tapp0_fapp0 k eta) u)`.
 - `comp_cat_fapp0 (Sigma_proj1_func D) (sigma_map_func eta) ≡ Sigma_proj1_func E`.
+- Once `tapp1_fapp0` naturality is ported: `fapp1_fapp0 (sigma_map_func eta) (Struct_sigma f alpha) ≡ Struct_sigma f (sigma_map_alpha eta f alpha)`.
+- Once the source-normalization folds are stable: `sigma_map_alpha eta f alpha ≡ fapp1_fapp0 (tapp0_fapp0 k' eta) alpha`, with both source expressions normalized through `fapp0 (tapp1_fapp0 eta f) u`.
 - `fapp0 (fam_tapp0_func E x y u) f ≡ fib_cov_tapp0_fapp0 E f u`.
 - `sigma_hom_fam E x u y v ≡ hom_con v (fam_tapp0_func E x y u)`.
 - `fapp0 (sigma_hom_fam E x u y v) f ≡ Hom_cat (fapp0 E y) (fib_cov_tapp0_fapp0 E f u) v`.
@@ -421,13 +519,14 @@ Required assertions for the revised foundation:
 
 - `emdash3.lp` may break compatibility with temporary v3 names.
 - `emdash2.lp` remains read-only reference material.
-- `Fam K = Functor K Cat_cat` is the primary directed family layer.
-- `Catd Z = Fam (Core_cat Z)` is the HoTT/core displayed-family layer.
+- `Fam K = Obj (Functor_cat K Cat_cat)` is the primary directed family layer, with inhabitants `E : τ (Fam K)`.
+- `Catd Z = τ (Fam (Core_cat Z))` is the HoTT/core displayed-family layer.
 - `Sigma_cat E` is the real Grothendieck/dependent-sum total for `E : Fam K`.
 - `Fibration_cov_catd M` is compatibility notation for core restriction, not totalization.
-- `Pi_cat E` is the section category `Transf_cat (Terminal_fam K) E`.
+- `Pi_cat E` is definitionally the section category `Transf_cat (Terminal_fam K) E`. Do not require an internal category of functors over `K` to define sections.
 - `Functord_cat E D` for core families is `Transf_cat E D`.
-- `tapp0_fapp0` is the required component projection for ordinary transfors; `piapp0`, `fdapp0`, `Fibre_func`, and `sigma_map_func` should be expressed through it.
+- `tapp0_fapp0` is the required diagonal component projection for ordinary transfors; `piapp0`, `fdapp0`, `Fibre_func`, and the object-action of `sigma_map_func` should be expressed through it.
+- `tapp1_fapp0` or an equivalent arrow-indexed naturality head is required for the full arrow-action computation of `sigma_map_func`. Until those folds are stable, use `sigma_map_alpha` as the stable head for the fibre arrow of `sigma_map_func`.
 - Old `Functor_catd`, `Catd_catd`, `Transf_catd`, and `Transfd_cat` should be reintroduced as derived/core-specialized bridges only after the generic `Fam` layer is stable.
 - Do not introduce a primitive `SigmaHom_catd` for the foundational meaning. Use the derived composite `sigma_hom_fam E x u y v := hom_con v (fam_tapp0_func E x y u)`.
 - `transport_fam_sec` is optional section-level packaging, not a prerequisite for the Sigma-hom rule.
