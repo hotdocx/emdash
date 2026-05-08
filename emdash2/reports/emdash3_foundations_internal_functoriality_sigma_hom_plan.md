@@ -6,6 +6,8 @@ This draft supersedes the previous Functord-first wording. The corrected v3 foun
 
 For Sigma homs, the corrected source of truth is not a new primitive `SigmaHom_catd`. It is a directed displayed transport/induction section over the existing edge context `Edge_catd`, followed by the generic displayed hom `Hom_catd`.
 
+Documentation consolidation is also in scope: before or alongside implementation, the stable v3 decisions should be summarized in a single consolidated report so older planning reports can be retired without losing useful context.
+
 The intended hierarchy is:
 
 ```text
@@ -98,6 +100,14 @@ Transfd_cat (component_functor eps) (component_functor eps')
 
 This is the role of later `tapp1_fapp1_func` / `tdapp1_fapp1_func`-style operations. They are stable heads for functorial operations, not new primitive cell levels. This preserves omega iteration without requiring an infinite sequence of Lambdapi symbols.
 
+## Documentation Consolidation
+
+- Add `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`.
+  - Summarize `PRD_EMDASH_V3_INITIAL_IDEA.md`, the emdash2 lessons that still matter, the accepted v3 architecture in this plan, and the next implementation sequence.
+  - Include a superseded-reports index for existing `reports/*` files, distinguishing still-relevant references from outdated drafts.
+  - Do not read, summarize, or reference `.scratchpad/`.
+  - Treat `reports/emdash3_foundations_internal_functoriality_sigma_hom_plan.md` as the source of truth until the consolidated report exists.
+
 ## Internal Functoriality Work Still in Scope
 
 - Internalize pullback in the displayed-category argument.
@@ -117,14 +127,33 @@ This is the role of later `tapp1_fapp1_func` / `tdapp1_fapp1_func`-style operati
           (Functor_cat (Functor_cat X Y) (Functor_cat X Z))
     ```
   - Keep `comp_cat_cov_func G` as the object-action / stable postcomposition head.
+  - Object action should compute as:
+    ```text
+    fapp0 (fapp0 comp_cat_func G) F ↪ comp_cat_fapp0 G F
+    ```
+  - Once this is stable, update `op_val_func` and similar internal pipelines to use the general functorial composition package rather than ad hoc postcomposition-only plumbing.
 
 - Internalize `Catdd` constructors when needed.
   - Current `Catdd`, `Pullback_catdd`, `Functor_catdd`, and `Pi_catdd` remain useful.
-  - Later functor-object versions should be added for constructors whose morphism action matters.
+  - Add functor-object versions for constructors whose morphism action matters:
+    ```text
+    Pullback_catdd_func F
+    Functor_catdd_func B
+    ```
+  - Keep current `Pullback_catdd` and `Functor_catdd` as object-action aliases / stable object-level heads.
   - `Const_catdd [I Z] E` means weakening both `Z` and `E` into the extra `I` context.
 
 - Make `Totald_catd` functorial in the displayed category variable.
   - The current fibre-only form is useful but semantically incomplete.
+  - Keep `Total_intro_func` as the stable head for the induced functor on total categories:
+    ```text
+    Total_intro_func xy FF : Functor (Total_cat E) (Total_cat D)
+    ```
+    where `FF : Functord E (Pullback_catd D xy)`.
+  - Keep `Total_intro_func_func xy` as the functor-object packaging in the displayed-functor argument:
+    ```text
+    fapp0 (Total_intro_func_func xy) FF ↪ Total_intro_func xy FF
+    ```
   - A later `Totald_func Z : Functor (Catd_cat Z) Cat_cat` should have object action `H ↦ Sigma_cat H`.
   - Its hom action should be induced by the existing total-introduction package:
     ```text
@@ -136,6 +165,39 @@ This is the role of later `tapp1_fapp1_func` / `tdapp1_fapp1_func`-style operati
     Pullback_catd K (id_func Z) ↪ K
     ```
     so the domain of `Total_intro_func_func (id_func Z)` is definitionally `Functord_cat H K`.
+  - Once `Totald_func Z` exists, prefer defining or normalizing:
+    ```text
+    Totald_catd Z ↦ Fibration_cov_catd (Totald_func Z)
+    ```
+    rather than keeping `Totald_catd Z` as only a bare fibre rule.
+  - Keep `Total_proj1_functord Z : Functord (Totald_catd Z) (ConstZ_catd Z)`.
+    Its fibre functor should continue to compute to the ordinary projection:
+    ```text
+    Fibre_func (Total_proj1_functord Z) H ↪ Total_proj1_func H
+    ```
+    This remains important for `PredPi_catd` and for later generalized `Sigma`/weakening-pullback adjunction machinery.
+
+## Older Draft Material Intentionally Not Restored
+
+The older saved draft contains two major decisions that should remain superseded:
+
+- Do not restore the Functord-first foundation.
+  - `Functord_cat` should not become primitive again merely to make `Pi_cat` a terminal displayed-functor instance.
+  - Current decision:
+    ```text
+    Pi_cat primitive
+    Functor_catd primitive
+    Functord_cat E D := Pi_cat (Functor_catd E D)
+    ```
+  - `piapp0` can still later be related to general displayed-functor evaluation, but this should not force the foundation back to the older primitive `Functord_cat` plan.
+
+- Do not restore primitive `SigmaHom_catd`.
+  - The older draft used:
+    ```text
+    SigmaHom_catd E x u y v : Catd (Op_cat (Hom_cat Z x y))
+    ```
+  - Current decision: Sigma hom must be expressed by `transportd_sec`, restriction along the edge context, constant sections, and `Hom_catd`.
+  - A named endpoint head is allowed later only as a derived normal form for that expression.
 
 ## Directed Displayed Transport
 
@@ -276,6 +338,14 @@ Fibre_cat
 
 No primitive `SigmaHom_catd` should be added for this meaning. If a stable endpoint head is useful later, it must be a derived normal form for this `Hom_catd` expression, not an independent primitive hom concept.
 
+## Implementation Sequence
+
+1. Consolidate documentation into `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`, using this plan as the current source of truth and marking older reports as superseded where appropriate.
+2. Promote `PiHom_catd` to `Hom_catd`, add the `Hom_catd (Functor_catd ...) ↪ Transf_catd ...` specialization, and verify `Transfd_cat` remains a Pi-defined level.
+3. Add the internal functor-object versions of pullback, composition, `Catdd` constructors, and totalization, including the `Total_intro_func_func`-based hom action for `Totald_func`.
+4. Add directed displayed transport over `Edge_catd`, the section restriction helpers, and the Sigma hom rule expressed through `Hom_catd`.
+5. Remove or demote `homd_eval_func` / `Homd_func` only after the new Sigma hom path has equivalent Grothendieck beta coverage.
+
 ## Test Plan
 
 - Run after each implementation slice:
@@ -291,6 +361,11 @@ Required assertions for this foundation:
 - `Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z)`.
 - `Transfd_cat FF GG ≡ Pi_cat (Transf_catd FF GG)`.
 - `Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG`.
+- `fapp0 (Pullback_catd_func F) E ≡ Pullback_catd E F`.
+- `fapp1_fapp0 (Pullback_catd_func F) FF ≡ Pullback_funcd F FF`.
+- `fapp0 (fapp0 comp_cat_func G) F ≡ comp_cat_fapp0 G F`.
+- `Fibre_cat (Totald_catd Z) H ≡ Sigma_cat H`.
+- `fapp1_func (Totald_func Z) H K ≡ Total_intro_func_func (id_func Z)`.
 - `Fibre_cat (Edge_catd Z x) y ≡ Op_cat (Hom_cat Z x y)`.
 - `piapp0 (transportd_sec (Fibration_cov_catd M) x u) (Struct_sigma y f) ≡ fib_cov_tapp0_fapp0 M f u`.
 - Restricting `transportd_sec E x u` along `edge_at_func x y` yields a section over the fixed-arrow family `Dxy`.
@@ -307,6 +382,7 @@ Required assertions for this foundation:
 - `Pi_cat` and `Functor_catd` remain primitive in v3.
 - `Hom_catd` is the generic pointwise displayed hom; current `PiHom_catd` is its prototype.
 - `Transf_catd` is a stable primitive head with a canonical rule from `Hom_catd (Functor_catd ...)`.
+- The older proposal to make `Functord_cat` primitive again is superseded by the current decision: `Functord_cat E D := Pi_cat (Functor_catd E D)`.
 - `transportd_sec` is a primitive directed displayed transport/induction operation for general `Catd`, with beta rules for `Fibration_cov_catd`.
 - `Edge_catd` is the existing source of the edge context; do not introduce a duplicate `HomFrom_catd`.
 - `edge_at_func` is provisional notation for the fixed-endpoint restriction map and will later be generalized via the `Sigma`/weakening-pullback adjunction.
