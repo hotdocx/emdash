@@ -4,6 +4,8 @@
 
 This draft supersedes the previous Functord-first wording. The corrected v3 foundation keeps `Pi_cat` primitive and keeps fibrewise constructors such as `Functor_catd` primitive. The missing general principle is the displayed pointwise hom, currently represented by `PiHom_catd`, which should be promoted/renamed to the generic `Hom_catd`.
 
+For Sigma homs, the corrected source of truth is not a new primitive `SigmaHom_catd`. It is a directed displayed transport/induction section over the existing edge context `Edge_catd`, followed by the generic displayed hom `Hom_catd`.
+
 The intended hierarchy is:
 
 ```text
@@ -123,32 +125,156 @@ This is the role of later `tapp1_fapp1_func` / `tdapp1_fapp1_func`-style operati
 
 - Make `Totald_catd` functorial in the displayed category variable.
   - The current fibre-only form is useful but semantically incomplete.
-  - A later `Totald_func Z : Functor (Catd_cat Z) Cat_cat` should have object action `H ↦ Total_cat H`.
-  - Its hom action should be induced by a total-introduction operation on displayed functors.
+  - A later `Totald_func Z : Functor (Catd_cat Z) Cat_cat` should have object action `H ↦ Sigma_cat H`.
+  - Its hom action should be induced by the existing total-introduction package:
+    ```text
+    fapp1_func (Totald_func Z) H K
+      ↪ Total_intro_func_func (id_func Z)
+    ```
+  - This should be paired with the identity-pullback normalization:
+    ```text
+    Pullback_catd K (id_func Z) ↪ K
+    ```
+    so the domain of `Total_intro_func_func (id_func Z)` is definitionally `Functord_cat H K`.
+
+## Directed Displayed Transport
+
+The transport primitive should be global over the edge context. Do not introduce a parallel `HomFrom_catd`; reuse the existing edge family:
+
+```text
+Edge_catd Z x : Catd Z
+Fibre_cat (Edge_catd Z x) y ≡ Op_cat (Hom_cat Z x y)
+```
+
+Introduce a directed displayed transport/induction section:
+
+```text
+transportd_sec [Z] (E : Catd Z)
+  (x : Obj Z) (u : E[x])
+  : Obj
+      (Pi_cat
+        (Pullback_catd E
+          (Total_proj1_func (Edge_catd Z x))))
+```
+
+Read this as:
+
+```text
+transportd_sec E x u [y, f : x -> y] : E[y]
+```
+
+For the Grothendieck case, add the beta rule:
+
+```text
+piapp0
+  (transportd_sec (Fibration_cov_catd M) x u)
+  (Struct_sigma y f)
+↪ fib_cov_tapp0_fapp0 M f u
+```
+
+This is the directed analogue of HoTT transport/J for displayed categories. It is primitive for general `E : Catd Z`, with computation rules only for structured constructors such as `Fibration_cov_catd M`. It should not be derived from `homd_curry`; rather, `homd_curry` is later higher/off-diagonal packaging related to transport plus fibrewise hom.
+
+For fixed endpoint `y`, the old fixed-target section is only a restriction of this global section. Provisionally, that restriction can be expressed via:
+
+```text
+edge_at_func x y :
+  Functor (Op_cat (Hom_cat Z x y))
+          (Sigma_cat (Edge_catd Z x))
+
+edge_at_func x y f = Struct_sigma y f
+```
+
+The exact construction of `edge_at_func` should later be replaced or generalized by the usual logic adjunction between `Sigma` and weakening/pullback; for now it is only a named description of the needed restriction map.
+
+Two section-level helpers are needed to use this restriction:
+
+```text
+section_pullback F s
+  : Obj (Pi_cat (Pullback_catd E F))
+```
+
+where `s : Obj (Pi_cat E)` and `F : Functor A B`, with beta behavior:
+
+```text
+piapp0 (section_pullback F s) a
+  ↪ piapp0 s (fapp0 F a)
+```
+
+and a fixed-target section over the restricted family:
+
+```text
+edge_const_sec E x y v
+  : Obj
+      (Pi_cat
+        (Pullback_catd
+          (Pullback_catd E (Total_proj1_func (Edge_catd Z x)))
+          (edge_at_func x y)))
+```
+
+with beta behavior:
+
+```text
+piapp0 (edge_const_sec E x y v) f ↪ v
+```
+
+`edge_const_sec` may later be replaced by a more general weakening/constant-section operation once the `Sigma`/pullback adjunction machinery is introduced.
 
 ## Sigma Hom Direction
 
-The temporary endpoint heads `homd_eval_func` / `Homd_func` should not be treated as the v3 foundation. The better target is a displayed classifier over the base hom-category:
+The temporary endpoint heads `homd_eval_func` / `Homd_func` should not be treated as the v3 foundation. They may remain briefly as compatibility/debug heads, but the intended source of truth is:
 
 ```text
-SigmaHom_catd E x u y v : Catd (Op_cat (Hom_cat Z x y))
+transportd_sec + section restriction + const_section + Hom_catd + Sigma_cat
 ```
 
-Then:
+For fixed endpoints `(x,u)` and `(y,v)`, define the restricted displayed family over the base-arrow category:
+
+```text
+Dxy :=
+  Pullback_catd
+    (Pullback_catd E (Total_proj1_func (Edge_catd Z x)))
+    (edge_at_func x y)
+```
+
+Construct two sections over `Dxy`:
+
+```text
+transport_xy : Obj (Pi_cat Dxy)
+const_v_xy   : Obj (Pi_cat Dxy)
+```
+
+where:
+
+```text
+transport_xy := section_pullback (edge_at_func x y) (transportd_sec E x u)
+const_v_xy   := edge_const_sec E x y v
+```
+
+Then the Sigma hom classifier is the generic displayed hom:
+
+```text
+Hom_catd Dxy transport_xy const_v_xy
+```
+
+and the Sigma hom rule should be:
 
 ```text
 Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
-  ↪ Op_cat (Total_cat (SigmaHom_catd E x u y v))
+  ↪ Op_cat (Sigma_cat (Hom_catd Dxy transport_xy const_v_xy))
 ```
 
-For the Grothendieck probe case:
+The current orientation convention is to keep the fixed-arrow base as `Op_cat (Hom_cat Z x y)`, matching the existing `Edge_catd` and `Homd_func` orientation. This can be revisited only if the full Sigma hom normal form is changed consistently.
+
+For the Grothendieck probe case, the fibre of the displayed hom should compute to:
 
 ```text
-Fibre_cat (SigmaHom_catd (Fibration_cov_catd M) x u y v) f
-  ↪ Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v
+Fibre_cat
+  (Hom_catd Dxy transport_xy const_v_xy)
+  f
+↪ Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v
 ```
 
-The generic derivation from `homd_curry` / `homd_int` remains a later bridge. For the next feasible slice, `SigmaHom_catd` may be introduced as a stable classifier with the Groth beta rule, provided the plan later proves the rule joins the intended `homd_curry` path.
+No primitive `SigmaHom_catd` should be added for this meaning. If a stable endpoint head is useful later, it must be a derived normal form for this `Hom_catd` expression, not an independent primitive hom concept.
 
 ## Test Plan
 
@@ -165,8 +291,14 @@ Required assertions for this foundation:
 - `Fibre_cat (Transf_catd FF GG) z ≡ Transf_cat (Fibre_func FF z) (Fibre_func GG z)`.
 - `Transfd_cat FF GG ≡ Pi_cat (Transf_catd FF GG)`.
 - `Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG`.
+- `Fibre_cat (Edge_catd Z x) y ≡ Op_cat (Hom_cat Z x y)`.
+- `piapp0 (transportd_sec (Fibration_cov_catd M) x u) (Struct_sigma y f) ≡ fib_cov_tapp0_fapp0 M f u`.
+- Restricting `transportd_sec E x u` along `edge_at_func x y` yields a section over the fixed-arrow family `Dxy`.
+- The fixed-endpoint Sigma hom normalizes through `Hom_catd Dxy transport_xy const_v_xy`.
+- In the Grothendieck case, the Sigma hom fibre computes to `Hom_cat (M y) (fib_cov_tapp0_fapp0 M f u) v`.
 - No `Modf_catd` / `Modfd_cat` symbols are introduced.
-- Existing `hom2_int`, `hom_`, `hom_con`, `Functor_catd`, `Catdd`, `PredPi_catd`, and Groth transport sanity checks still pass.
+- No primitive `SigmaHom_catd` is introduced for the foundational meaning.
+- Existing `hom2_int`, `hom_`, `hom_con`, `Functor_catd`, `Catdd`, `PredPi_catd`, `Edge_catd`, and Groth transport sanity checks still pass.
 
 ## Assumptions
 
@@ -175,5 +307,9 @@ Required assertions for this foundation:
 - `Pi_cat` and `Functor_catd` remain primitive in v3.
 - `Hom_catd` is the generic pointwise displayed hom; current `PiHom_catd` is its prototype.
 - `Transf_catd` is a stable primitive head with a canonical rule from `Hom_catd (Functor_catd ...)`.
+- `transportd_sec` is a primitive directed displayed transport/induction operation for general `Catd`, with beta rules for `Fibration_cov_catd`.
+- `Edge_catd` is the existing source of the edge context; do not introduce a duplicate `HomFrom_catd`.
+- `edge_at_func` is provisional notation for the fixed-endpoint restriction map and will later be generalized via the `Sigma`/weakening-pullback adjunction.
+- Sigma hom is expressed by `Hom_catd` after restricting transport and adding a constant section, not by a primitive `SigmaHom_catd`.
 - Higher cells are represented by ordinary homs in existing categories and are made iterable by operation-level repackaging heads, not by an infinite family of new cell constructors.
 - Old reports will not be moved by this implementation; a future consolidated report will make them safe for the user to retire afterward.
