@@ -59,6 +59,8 @@ Terminal_fam K : Fam K
 
 This means the everyday substitution and fibre operations become ordinary functorial operations rather than special displayed-category operations.
 
+`Fibre_cat E k` is only a stable readability/inference head for `fapp0 E k`. It should not carry additional displayed-category structure in the `Fam` layer. If this name keeps causing semantic confusion, rename the generic head to something neutral such as `Fam_app_cat E k`, and reserve `Fibre_cat` for compatibility aliases.
+
 ### Pi as sections
 
 `Pi_cat` should be valid for any directed family `E : Fam K`, not only for a core-indexed family. Semantically:
@@ -161,6 +163,21 @@ Functord_cat E D := Pi_cat (Functor_catd E D)
 
 The `Pi(Functor_catd)` view can return later as an internal-hom/end-style bridge, but it should not be the foundation because it forces variance/coherence work before the basic `Fam` semantics is stable.
 
+Old application/projection heads become derived convenience wrappers:
+
+```text
+Fibre_func FF k
+  := tapp0_fapp0 k FF
+
+fdapp0 FF k u
+  := fapp0 (tapp0_fapp0 k FF) u
+
+Transfd_cat FF GG
+  := Hom_cat (Transf_cat E D) FF GG
+```
+
+So `fdapp0`, `Fibre_func`, `Transf_catd`, and `Transfd_cat` are not blockers for the `Fam/Core` migration. They may be reintroduced later only when a stable head is useful for rewriting or readability.
+
 ### Mixed variance and old `Functor_catd`
 
 For arbitrary directed `K`, the pointwise assignment:
@@ -246,24 +263,69 @@ not for arbitrary `E : Catd Z`. Its expected Grothendieck normal form is:
 
 ```text
 Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
-  ↪ Op_cat
-      (Sigma_cat
-        (SigmaHom_fam E x u y v))
+  ↪ Op_cat (Sigma_cat (sigma_hom_fam E x u y v))
+```
 
-Fibre_cat (SigmaHom_fam E x u y v) f
+Here `sigma_hom_fam` is not a new primitive constructor. It is a derived stable normal form for the composite:
+
+```text
+f : Hom_K(x,y)
+  |-> E(f)(u) : E[y]
+  |-> Hom_{E[y]}(E(f)(u), v) : Cat
+```
+
+First define the action of a family on a fixed fibre object:
+
+```text
+fam_tapp0_func [K] (E : Fam K)
+  [x y : Obj K] (u : Obj (fapp0 E x))
+  : Functor (Hom_cat K x y) (fapp0 E y)
+
+fam_tapp0_func E x y u
+  := comp_cat_fapp0
+       (fapp0_func u)
+       (fapp1_func E [x] [y])
+```
+
+with object computation folded to a stable head if useful:
+
+```text
+fapp0 (fam_tapp0_func E x y u) f
+  ↪ fib_cov_tapp0_fapp0 E f u
+
+fib_cov_tapp0_fapp0 E f u
+  : Obj (fapp0 E y)
+```
+
+Then define the fixed-endpoint hom functor by the existing contravariant hom helper:
+
+```text
+sigma_hom_fam [K] (E : Fam K)
+  (x : Obj K) (u : Obj (fapp0 E x))
+  (y : Obj K) (v : Obj (fapp0 E y))
+  : Functor (Op_cat (Hom_cat K x y)) Cat_cat
+
+sigma_hom_fam E x u y v
+  := hom_con v (fam_tapp0_func E x y u)
+```
+
+and its object computation is:
+
+```text
+fapp0 (sigma_hom_fam E x u y v) f
   ↪ Hom_cat
-      (Fibre_cat E y)
-      (fapp0 (fapp1_fapp0 E f) u)
+      (fapp0 E y)
+      (fib_cov_tapp0_fapp0 E f u)
       v
 ```
 
-where `f : Hom_cat K x y`, and the object transport term should fold to the stable `fib_cov_tapp0_fapp0 E f u` head if that head remains useful.
+where `f : Obj (Op_cat (Hom_cat K x y))`, i.e. semantically an arrow `x -> y` in `K`.
 
 This is the directed formula that v2 was using under `Fibration_cov_catd`. In v3 it belongs directly to `Fam K` and `Sigma_cat E`; it should not be routed through core restriction.
 
 For the core case `E : Catd Z = Fam (Core_cat Z)`, the same Sigma-hom formula quantifies over core/path arrows. That gives the HoTT Sigma identity/equality story, not the full directed hom story of `Z`.
 
-## Transport Correction
+## Transport Packaging Status
 
 The older report below proposes:
 
@@ -271,7 +333,16 @@ The older report below proposes:
 transportd_sec [Z] (E : Catd Z) ...
 ```
 
-as directed transport over arbitrary base arrows. That is no longer valid under `Catd Z := Fam (Core_cat Z)`. Replace it with:
+as directed transport over arbitrary base arrows. That is no longer valid under `Catd Z := Fam (Core_cat Z)`.
+
+For the directed `Fam` layer, a global transport section is optional packaging, not the primary Sigma-hom construction. The primary construction is:
+
+```text
+fam_tapp0_func E x y u
+sigma_hom_fam E x u y v := hom_con v (fam_tapp0_func E x y u)
+```
+
+If section-level packaging is later useful, it can be added as a derived stable head:
 
 ```text
 transport_fam_sec [K] (E : Fam K)
@@ -298,19 +369,23 @@ piapp0
 ↪ fib_cov_tapp0_fapp0 E f u
 ```
 
-If a core-only transport operation is needed, it should be a separate `transport_core_sec` or simply an instance of `transport_fam_sec` where `K = Core_cat Z`.
+This should not block the first Sigma-hom implementation. If a core-only transport operation is needed, it should be a separate `transport_core_sec` or simply an instance of the family action where `K = Core_cat Z`.
 
 ## Replacement Implementation Sequence
 
-1. Add `Fam_cat`, `Fam`, `Fibre_cat`, `Const_fam`, `Terminal_fam`, and `Pullback_fam` as generic wrappers around existing functor-category infrastructure.
+1. Add `Fam_cat`, `Fam`, `Fibre_cat`/`Fam_app_cat`, `Const_fam`, `Terminal_fam`, and `Pullback_fam` as generic wrappers around existing functor-category infrastructure.
 2. Restore/add `Core_incl_func Z`, define `Catd_cat Z := Fam_cat (Core_cat Z)` and `Catd Z := Fam (Core_cat Z)`, then demote `Fibration_cov_catd M` to core restriction.
-3. Define `Pi_cat E := Transf_cat (Terminal_fam K) E`, keep `piapp0` as component evaluation, and define `Functord_cat E D := Transf_cat E D` for core families.
-4. Generalize `Sigma_cat`, `Sigma_proj1_func`, and object/projection beta rules from `Catd` inputs to `Fam K` inputs.
-5. Add `sigma_map_func eta` for `eta : Transf E D`, with object beta and projection law.
-6. Add `Edge_fam K x`, `transport_fam_sec`, and the generic directed Sigma-hom normal form for `E : Fam K`.
-7. Add `Functor_fam` with mixed variance, then recover old `Functor_catd` as the core-specialized alias.
-8. Promote `Catd_func : Functor (Op_cat Cat_cat) Cat_cat`, define `Catd_fam E : Fam (Op_cat K)`, and recover old `Catd_catd` as the core-specialized alias.
-9. Revisit `Transf_catd`, `Transfd_cat`, `homd_curry`, and `PredPi_catd` only after the generic `Fam`/`Sigma`/`Pi` layer typechecks.
+3. Add the ordinary transfor component interface from v2: `tapp0_fapp0`, identity/composition component rules, and the beta rule from any `tapp0_func` packaging if that packaging is kept.
+4. Define `Pi_cat E := Transf_cat (Terminal_fam K) E`, keep `piapp0` as component evaluation, and define `Functord_cat E D := Transf_cat E D` for core families.
+5. Replace old `fdapp0`/`Fibre_func` usages with derived wrappers over `tapp0_fapp0` where a compatibility head is still helpful.
+6. Generalize `Sigma_cat`, `Sigma_proj1_func`, and object/projection beta rules from `Catd` inputs to `Fam K` inputs.
+7. Add `sigma_map_func eta` for `eta : Transf E D`, with object beta and projection law.
+8. Add `fam_tapp0_func`, the optional stable object-action fold `fib_cov_tapp0_fapp0 E f u`, and the derived `sigma_hom_fam := hom_con v (fam_tapp0_func E x y u)`.
+9. Add the Sigma hom rule expressed through `sigma_hom_fam`.
+10. Add `Functor_fam` with mixed variance, then recover old `Functor_catd` as the core-specialized alias.
+11. Promote `Catd_func : Functor (Op_cat Cat_cat) Cat_cat`, define `Catd_fam E : Fam (Op_cat K)`, and recover old `Catd_catd` as the core-specialized alias.
+12. Add `Edge_fam K x` and `transport_fam_sec` only if a later section-level construction needs them.
+13. Revisit `Transf_catd`, `Transfd_cat`, `homd_curry`, and `PredPi_catd` only after the generic `Fam`/`Sigma`/`Pi` layer typechecks.
 
 ## Replacement Test Plan
 
@@ -326,12 +401,17 @@ Required assertions for the revised foundation:
 - `Fibre_cat (Fibration_cov_catd M) z ≡ fapp0 M z`.
 - `Pi_cat E ≡ Transf_cat (Terminal_fam K) E`.
 - `Functord_cat E D ≡ Transf_cat E D`.
+- `Fibre_func FF k ≡ tapp0_fapp0 k FF` if the compatibility head is kept.
+- `fdapp0 FF k u ≡ fapp0 (tapp0_fapp0 k FF) u` if the compatibility head is kept.
 - `fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k`.
 - `fapp0 (Sigma_map_func eta) (Struct_sigma k u) ≡ Struct_sigma k (fapp0 (tapp0_fapp0 k eta) u)`.
 - `comp_cat_fapp0 (Sigma_proj1_func D) (sigma_map_func eta) ≡ Sigma_proj1_func E`.
-- `Fibre_cat (Edge_fam K x) y ≡ Op_cat (Hom_cat K x y)`.
-- `piapp0 (transport_fam_sec E x u) (Struct_sigma y f) ≡ fib_cov_tapp0_fapp0 E f u`.
-- Directed Sigma hom over `E : Fam K` computes to `Hom_cat (Fibre_cat E y) (fib_cov_tapp0_fapp0 E f u) v`.
+- `fapp0 (fam_tapp0_func E x y u) f ≡ fib_cov_tapp0_fapp0 E f u`.
+- `sigma_hom_fam E x u y v ≡ hom_con v (fam_tapp0_func E x y u)`.
+- `fapp0 (sigma_hom_fam E x u y v) f ≡ Hom_cat (fapp0 E y) (fib_cov_tapp0_fapp0 E f u) v`.
+- `Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v) ≡ Op_cat (Sigma_cat (sigma_hom_fam E x u y v))`.
+- Optional if section packaging is added: `Fibre_cat (Edge_fam K x) y ≡ Op_cat (Hom_cat K x y)`.
+- Optional if section packaging is added: `piapp0 (transport_fam_sec E x u) (Struct_sigma y f) ≡ fib_cov_tapp0_fapp0 E f u`.
 - `Fibre_cat (Functor_fam E D) k ≡ Functor_cat (Fibre_cat E k) (Fibre_cat D k)`.
 - `Fibre_cat (Functor_catd E D) z ≡ Functor_cat (Fibre_cat E z) (Fibre_cat D z)` for core families.
 - `fapp0 Catd_func A ≡ Catd_cat A`.
@@ -347,8 +427,10 @@ Required assertions for the revised foundation:
 - `Fibration_cov_catd M` is compatibility notation for core restriction, not totalization.
 - `Pi_cat E` is the section category `Transf_cat (Terminal_fam K) E`.
 - `Functord_cat E D` for core families is `Transf_cat E D`.
+- `tapp0_fapp0` is the required component projection for ordinary transfors; `piapp0`, `fdapp0`, `Fibre_func`, and `sigma_map_func` should be expressed through it.
 - Old `Functor_catd`, `Catd_catd`, `Transf_catd`, and `Transfd_cat` should be reintroduced as derived/core-specialized bridges only after the generic `Fam` layer is stable.
-- Do not introduce a primitive `SigmaHom_catd` for the foundational meaning; a stable endpoint head may be added later only as a derived normal form for the generic `Fam` Sigma-hom formula.
+- Do not introduce a primitive `SigmaHom_catd` for the foundational meaning. Use the derived composite `sigma_hom_fam E x u y v := hom_con v (fam_tapp0_func E x y u)`.
+- `transport_fam_sec` is optional section-level packaging, not a prerequisite for the Sigma-hom rule.
 - Higher cells remain ordinary homs in already-formed categories and are made iterable by operation-level repackaging heads, not by an infinite family of new cell constructors.
 
 ## Status of Earlier Sections
