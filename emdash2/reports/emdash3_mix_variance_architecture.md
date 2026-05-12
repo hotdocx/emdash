@@ -607,6 +607,78 @@ This is the fully internal source of:
 sigma_hom_fam E x u y v
 ```
 
+## Endpoint Normal Form: `sigma_hom_fam`
+
+The mixed-variance construction gives the fully internal source of the
+endpoint functor. The endpoint functor itself should keep the stable
+normal form already identified in
+`emdash3_foundations_internal_functoriality_sigma_hom_plan.md`.
+
+First define the action of a directed family on a fixed source fibre
+object:
+
+```text
+fam_tapp0_func [K] (E : tau (Fam K))
+  [x y : tau (Obj K)]
+  (u : tau (Obj (Fam_app_cat E x)))
+  : tau (Functor (Hom_cat K x y) (Fam_app_cat E y))
+```
+
+Semantically:
+
+```text
+fam_tapp0_func E x y u
+  := comp_cat_fapp0
+       (fapp0_func u)
+       (fapp1_func E [x] [y])
+```
+
+with object-action folded to the stable transport head:
+
+```text
+fapp0 (fam_tapp0_func E x y u) f
+  -> fib_cov_tapp0_fapp0 E f u
+```
+
+Then define the fixed-endpoint Sigma-hom family by contravariant hom:
+
+```text
+sigma_hom_fam [K] (E : tau (Fam K))
+  (x : tau (Obj K))
+  (u : tau (Obj (Fam_app_cat E x)))
+  (y : tau (Obj K))
+  (v : tau (Obj (Fam_app_cat E y)))
+  : tau (Functor (Op_cat (Hom_cat K x y)) Cat_cat)
+
+sigma_hom_fam E x u y v
+  := hom_con v (fam_tapp0_func E x y u)
+```
+
+Objectwise:
+
+```text
+fapp0 (sigma_hom_fam E x u y v) f
+  -> Hom_cat
+       (Fam_app_cat E y)
+       (fib_cov_tapp0_fapp0 E f u)
+       v
+```
+
+where `f : Obj (Op_cat (Hom_cat K x y))`, semantically a base arrow
+`x -> y`.
+
+This stable endpoint is the one used in the Sigma hom rule:
+
+```text
+Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
+  -> Op_cat (Sigma_cat (sigma_hom_fam E x u y v))
+```
+
+In the mixed-variance architecture, `homd_eval_func` should normalize to
+this `sigma_hom_fam` endpoint. The fully internal `Homd_int_cat` explains
+where the endpoint comes from; `sigma_hom_fam` remains the compact
+computational normal form for total-category homs.
+
 ## Endpoint Projection
 
 The endpoint projection should be a stable head, not the foundation:
@@ -814,7 +886,19 @@ The mixed-variance layer is the directed replacement for the part of
      := Transf_cat (comp_cat_fapp0 op E) (Homd_target_fam E)
    ```
 
-9. Add stable endpoint projections and connect them to
+9. Add the endpoint normal forms:
+
+   ```text
+   fam_tapp0_func E x y u
+     := comp_cat_fapp0
+          (fapp0_func u)
+          (fapp1_func E [x] [y])
+
+   sigma_hom_fam E x u y v
+     := hom_con v (fam_tapp0_func E x y u)
+   ```
+
+10. Add stable endpoint projections and connect them to
    `sigma_hom_fam` by rewrite rules only after the internal target
    typechecks.
 
@@ -861,6 +945,12 @@ fapp0 (Homd_target_fam E) x
        (Functor_fam
          E
          (fapp0 (HomPresheaf_fam Z) x))
+
+fapp0 (fam_tapp0_func E x y u) f
+  == fib_cov_tapp0_fapp0 E f u
+
+sigma_hom_fam E x u y v
+  == hom_con v (fam_tapp0_func E x y u)
 ```
 
 Endpoint/Grothendieck validation once projection heads are added:
@@ -892,4 +982,3 @@ Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
 - The old `Catd`/`Op_catd` path remains valid only for core/isofibration
   semantics or as a compatibility layer, not as the foundation for
   directed `Fam Z`.
-
