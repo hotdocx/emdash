@@ -164,6 +164,117 @@ fapp0 (Pi_func K) E
 
 This is the terminal-domain special case of a dependent function space.
 
+## Retained Ordinary Transfor Interface
+
+The previous Sigma-hom plan also identified the ordinary transfor
+component interface needed by the directed `Fam` layer. This remains in
+scope and should be kept independent of the mixed-variance `homd`
+construction.
+
+For ordinary functors:
+
+```text
+Transf_cat [A B] (F G : tau (Functor A B)) : Cat
+```
+
+the component projection is:
+
+```text
+tapp0_fapp0 [A B] [F G : tau (Functor A B)]
+  (k : tau (Obj A))
+  (eta : tau (Obj (Transf_cat F G)))
+  : tau (Hom B (fapp0 F k) (fapp0 G k))
+```
+
+For Cat-valued families this hom reduces to an ordinary functor between
+fibres:
+
+```text
+tapp0_fapp0 k eta
+  : tau (Functor (Fam_app_cat E k) (Fam_app_cat D k))
+```
+
+The arrow-indexed/naturality component is also required:
+
+```text
+tapp1_fapp0 [A B] [F G : tau (Functor A B)]
+  [x y : tau (Obj A)]
+  (eta : tau (Obj (Transf_cat F G)))
+  (f : tau (Hom A x y))
+  : tau (Hom B (fapp0 F x) (fapp0 G y))
+```
+
+For Cat-valued families, the source and target should normalize through
+the usual strict-naturality comparison:
+
+```text
+fib_cov_tapp0_fapp0 D f (fapp0 (tapp0_fapp0 x eta) u)
+  <-> fapp0 (tapp1_fapp0 eta f) u
+  <-> fapp0 (tapp0_fapp0 y eta) (fib_cov_tapp0_fapp0 E f u)
+```
+
+These heads are used by `Pi_cat` sections, by maps between Sigma totals,
+and by the later endpoint beta rules. They should be implemented before
+relying on full arrow-action computation for `Sigma_cat`.
+
+## Sigma Functoriality
+
+For a transformation of directed families:
+
+```text
+eta : tau (Obj (Transf_cat E D))
+```
+
+keep the induced total functor:
+
+```text
+sigma_map_func eta
+  : tau (Functor (Sigma_cat E) (Sigma_cat D))
+```
+
+with object beta:
+
+```text
+fapp0 (sigma_map_func eta) (Struct_sigma k u)
+  -> Struct_sigma k (fapp0 (tapp0_fapp0 k eta) u)
+```
+
+and projection law:
+
+```text
+comp_cat_fapp0 (Sigma_proj1_func D) (sigma_map_func eta)
+  -> Sigma_proj1_func E
+```
+
+The arrow beta should use a stable head until the `tapp1_fapp0`
+naturality folds are reliable:
+
+```text
+fapp1_fapp0 (sigma_map_func eta) (Struct_sigma f alpha)
+  -> Struct_sigma f (sigma_map_alpha eta f alpha)
+```
+
+where:
+
+```text
+sigma_map_alpha eta f alpha
+  : tau (Hom
+      (Fam_app_cat D k')
+      (fib_cov_tapp0_fapp0 D f (fapp0 (tapp0_fapp0 k eta) u))
+      (fapp0 (tapp0_fapp0 k' eta) u'))
+```
+
+Conceptually, after source normalization stabilizes:
+
+```text
+sigma_map_alpha eta f alpha
+  == fapp1_fapp0 (tapp0_fapp0 k' eta) alpha
+```
+
+This is the corrected replacement for treating transformations between
+directed families as displayed functors between `Fibration_cov_catd`
+objects.
+
 ## Mixed-Variance Family Functor
 
 For a directed base `K`, the pointwise category
@@ -797,8 +908,161 @@ foundation:
   Grothendieck construction for all purposes; for the revised v3
   architecture, the real directed total is `Sigma_cat M`.
 
+The corrected compatibility reading is:
+
+```text
+Catd_cat Z := Fam_cat (Core_cat Z)
+Catd Z     := tau (Fam (Core_cat Z))
+
+Core_incl_func Z : tau (Functor (Core_cat Z) Z)
+
+Fibration_cov_catd M
+  := Pullback_fam M (Core_incl_func Z)
+```
+
+Thus `Fibration_cov_catd M` is core restriction of the directed family
+`M`, while `Sigma_cat M` is the directed Grothendieck/dependent sum that
+retains base-arrow data.
+
 The mixed-variance layer is the directed replacement for the part of
 `Catd` that was previously doing too much implicit variance work.
+
+One additional compatibility idea from the previous report remains
+useful: the classifier of core/displayed families is contravariant in
+the base category. If this layer is needed, keep it as a generic
+functor-object:
+
+```text
+Catd_func : tau (Functor (Op_cat Cat_cat) Cat_cat)
+fapp0 Catd_func A -> Catd_cat A
+```
+
+For a directed family:
+
+```text
+Catd_fam [K] (E : tau (Fam K))
+  : tau (Fam (Op_cat K))
+  := comp_cat_fapp0 Catd_func (Op_func E)
+```
+
+Objectwise:
+
+```text
+Fam_app_cat (Catd_fam E) k
+  -> Catd_cat (Fam_app_cat E k)
+```
+
+This should be the source of any later `Catd_catd` compatibility alias.
+Do not reintroduce `Catd_catd` as a bare fibre-only rule in the directed
+foundation.
+
+## Generic Sigma/Pi Weakening Fragments
+
+The previous plan also contained useful Sigma/Pi/weakening fragments.
+They should be retained as generic infrastructure, not as edge-specific
+primitives.
+
+Sigma introduction in context:
+
+```text
+sigma_intro_transf E
+  : tau (Obj (Transf_cat E (Const_fam K (Sigma_cat E))))
+
+tapp0_fapp0 k (sigma_intro_transf E)
+  : tau (Functor (Fam_app_cat E k) (Sigma_cat E))
+
+fapp0 (tapp0_fapp0 k (sigma_intro_transf E)) u
+  -> Struct_sigma k u
+```
+
+Pi evaluation:
+
+```text
+pi_eval_transf E
+  : tau (Obj (Transf_cat (Const_fam K (Pi_cat E)) E))
+
+fapp0 (tapp0_fapp0 k (pi_eval_transf E)) s
+  -> piapp0 s k
+```
+
+Constant sections:
+
+```text
+const_section_func K A
+  : tau (Functor A (Pi_cat (Const_fam K A)))
+
+piapp0 (fapp0 (const_section_func K A) a) k
+  -> a
+```
+
+Section substitution:
+
+```text
+section_pullback_func [A B]
+  (F : tau (Functor A B))
+  (E : tau (Fam B))
+  : tau (Functor (Pi_cat E) (Pi_cat (Pullback_fam E F)))
+
+piapp0 (fapp0 (section_pullback_func F E) s) a
+  -> piapp0 s (fapp0 F a)
+```
+
+These generic operations subsume older edge-specific helpers:
+
+- `edge_at_func x y` should be a component of
+  `sigma_intro_transf (fapp0 (Edge_fam Z) x)`, not a primitive.
+- a constant endpoint section should come from `const_section_func`,
+  possibly after generic pullback normalization, not from an
+  edge-only `edge_const_sec`.
+- `transport_fam_sec E x u` is optional packaging of
+  `fam_tapp0_func`; it is not a prerequisite for the Sigma-hom rule.
+
+If needed later, the generic transport package should be:
+
+```text
+transport_fam_sec [K] (E : tau (Fam K))
+  (x : tau (Obj K))
+  (u : tau (Obj (Fam_app_cat E x)))
+  : tau (Obj
+      (Pi_cat
+        (Pullback_fam E
+          (Sigma_proj1_func (fapp0 (Edge_fam K) x)))))
+```
+
+with beta:
+
+```text
+piapp0 (transport_fam_sec E x u) (Struct_sigma y f)
+  -> fib_cov_tapp0_fapp0 E f u
+```
+
+This is section-level packaging for transport along all outgoing arrows
+from `x`; it should remain derived/optional in the directed `Fam` layer.
+
+## Material Not Restored from the Older Plan
+
+Some earlier sections remain useful only as historical context and should
+not be imported into the mixed-variance foundation:
+
+- Do not restore the old foundation
+  `Functord_cat E D := Pi_cat (Functor_catd E D)` for directed families.
+  The directed family layer uses `Transf_cat E D` as the map category;
+  mixed variance handles pointwise functor categories when they are
+  genuinely needed.
+- Do not add a primitive `SigmaHom_catd`. The Sigma hom classifier is
+  the derived endpoint normal form
+  `sigma_hom_fam E x u y v := hom_con v (fam_tapp0_func E x y u)`,
+  and the fully internal source is `Homd_int_cat E`.
+- Do not restore generic `transportd_sec : Catd Z -> ...` as directed
+  transport over all arrows of `Z`. For the directed `Fam` layer,
+  transport is ordinary functor action through `fam_tapp0_func`; optional
+  section packaging is `transport_fam_sec`.
+- `Hom_catd`, `Transf_catd`, and `Transfd_cat` may return later as
+  core-specialized compatibility heads, but they are not prerequisites
+  for the directed mixed-variance construction.
+- `Catdd`, `PredPi_catd`, and totalization-functor internals remain
+  useful implementation references, but the new approach does not need
+  them to express the directed `homd` target.
 
 ## Implementation Sequence
 
@@ -815,7 +1079,21 @@ The mixed-variance layer is the directed replacement for the part of
    Pi_func K
    ```
 
-2. Add `Functor_fam`:
+2. Add the ordinary transfor component interface:
+
+   ```text
+   tapp0_fapp0
+   tapp1_fapp0
+   fib_cov_tapp0_fapp0
+   ```
+
+   Keep `sigma_map_alpha` as a stable head until naturality folds are
+   robust enough for the full `sigma_map_func` arrow beta.
+
+3. Add `sigma_map_func` for transformations of directed families, with
+   object beta and projection law.
+
+4. Add `Functor_fam`:
 
    ```text
    Functor_fam [K]
@@ -831,7 +1109,7 @@ The mixed-variance layer is the directed replacement for the part of
      -> Functor_cat (Fam_app_cat A k) (Fam_app_cat B k)
    ```
 
-3. Add `Functor_mix_fam_func`:
+5. Add `Functor_mix_fam_func`:
 
    ```text
    Functor_mix_fam_func [K]
@@ -842,7 +1120,7 @@ The mixed-variance layer is the directed replacement for the part of
 
    with beta rules exposing `Functor_fam`.
 
-4. Define `Edge_fam` internally:
+6. Define `Edge_fam` internally:
 
    ```text
    Edge_fam Z
@@ -856,21 +1134,21 @@ The mixed-variance layer is the directed replacement for the part of
      == Op_cat (Hom_cat Z x y)
    ```
 
-5. Define `Presheaf_fam_func K` functorially:
+7. Define `Presheaf_fam_func K` functorially:
 
    ```text
    Presheaf_fam_func K
      := fapp0_func (Const_fam K Cat_cat) o Functor_mix_fam_func K
    ```
 
-6. Define:
+8. Define:
 
    ```text
    HomPresheaf_fam Z
      := Presheaf_fam_func (Op_cat Z) o Op_func (Edge_fam Z)
    ```
 
-7. Define:
+9. Define:
 
    ```text
    Homd_target_fam E
@@ -879,14 +1157,14 @@ The mixed-variance layer is the directed replacement for the part of
           o HomPresheaf_fam Z
    ```
 
-8. Define the outer internal category:
+10. Define the outer internal category:
 
    ```text
    Homd_int_cat E
      := Transf_cat (comp_cat_fapp0 op E) (Homd_target_fam E)
    ```
 
-9. Add the endpoint normal forms:
+11. Add the endpoint normal forms:
 
    ```text
    fam_tapp0_func E x y u
@@ -898,9 +1176,21 @@ The mixed-variance layer is the directed replacement for the part of
      := hom_con v (fam_tapp0_func E x y u)
    ```
 
-10. Add stable endpoint projections and connect them to
+12. Add stable endpoint projections and connect them to
    `sigma_hom_fam` by rewrite rules only after the internal target
    typechecks.
+
+13. Add the Sigma/Pi weakening fragments only when implementation needs
+    section-level packaging:
+
+    ```text
+    sigma_intro_transf
+    pi_eval_transf
+    const_section_func
+    section_pullback_func
+    ```
+
+    Keep these generic; do not introduce edge-only primitives.
 
 ## Test and Validation Plan
 
@@ -927,6 +1217,12 @@ Fam_app_cat (Pullback_fam E F) a
 
 fapp0 (Pi_func K) E
   == Pi_cat E
+
+fapp0 (sigma_map_func eta) (Struct_sigma k u)
+  == Struct_sigma k (fapp0 (tapp0_fapp0 k eta) u)
+
+comp_cat_fapp0 (Sigma_proj1_func D) (sigma_map_func eta)
+  == Sigma_proj1_func E
 
 Fam_app_cat (Functor_fam A B) k
   == Functor_cat (Fam_app_cat A k) (Fam_app_cat B k)
@@ -968,10 +1264,32 @@ Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
   == Op_cat (Sigma_cat (sigma_hom_fam E x u y v))
 ```
 
+Optional assertions if Sigma/Pi weakening fragments are added:
+
+```text
+fapp0 (tapp0_fapp0 k (sigma_intro_transf E)) u
+  == Struct_sigma k u
+
+fapp0 (tapp0_fapp0 k (pi_eval_transf E)) s
+  == piapp0 s k
+
+piapp0 (fapp0 (const_section_func K A) a) k
+  == a
+
+piapp0 (fapp0 (section_pullback_func F E) s) a
+  == piapp0 s (fapp0 F a)
+
+piapp0 (transport_fam_sec E x u) (Struct_sigma y f)
+  == fib_cov_tapp0_fapp0 E f u
+```
+
 ## Assumptions and Open Points
 
 - `Fam_cat K` is definitionally `Functor_cat K Cat_cat`.
 - `Pi_cat E` is definitionally or canonically `Transf_cat (Terminal_fam K) E`.
+- `tapp0_fapp0` is the required diagonal component projection for
+  ordinary transfors; `tapp1_fapp0` or an equivalent naturality head is
+  required for full `sigma_map_func` arrow computation.
 - `Functor_mix_fam_func` is added as real internal functorial
   infrastructure; object-level abbreviations are not enough.
 - `Edge_fam` is defined through `hom_int` and `op_val_func`, not through
@@ -979,6 +1297,14 @@ Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
 - The endpoint projection can remain a stable head for rewrite
   discipline, but the fully internal construction is the
   mixed-variance `Transf_cat` object above.
+- No primitive `SigmaHom_catd` should be introduced for the foundational
+  meaning; use `sigma_hom_fam` as the derived endpoint normal form.
+- Sigma/Pi weakening helpers should be generic (`sigma_intro_transf`,
+  `pi_eval_transf`, `const_section_func`, `section_pullback_func`) rather
+  than edge-specific.
+- Higher cells remain ordinary homs in already-formed categories and are
+  made iterable by operation-level repackaging heads, not by an infinite
+  family of new cell constructors.
 - The old `Catd`/`Op_catd` path remains valid only for core/isofibration
   semantics or as a compatibility layer, not as the foundation for
   directed `Fam Z`.
