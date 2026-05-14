@@ -20,8 +20,6 @@ The implemented architecture is:
 
 ```text
 homd_int E      : fully internal mixed-variance Homd object
-Homd_source_fam : stable name for op o E
-Homd_section_fam: stable name for Functor_fam E (HomPresheaf_fam x)
 homd_src_sec    : source-fixed section after evaluating homd_int at x,u
 homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 ```
@@ -38,15 +36,15 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   Keep the meaning of `sigma_hom_fam` by defining `homd_` directly as
   `hom_con v (fam_tapp0_func E x y u)`.
 
-- Declare stable helper heads for the two dependent families that otherwise
-  appear as compound inferred arguments:
+- Use existing canonical family builders in projection rules instead of
+  introducing new defined helper heads:
 
   ```text
-  Homd_source_fam E
-    := op o E
+  fapp0 (op_val_func Z) E
+    -- op o E
 
-  Homd_section_fam E x
-    := Functor_fam E (fapp0 (HomPresheaf_fam Z) x)
+  Functor_fam E (fapp0 (HomPresheaf_fam Z) x)
+    -- v |-> Functor(Hom_Z(x,v)^op, Cat)
   ```
 
 - Declare the source-fixed section head:
@@ -61,7 +59,7 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 - Fold the elementary projection of `homd_int` to `homd_src_sec`:
 
   ```text
-  fapp0 (tapp0_fapp0[Homd_source_fam E, Homd_target_fam E] x (homd_int E)) u
+  fapp0 (tapp0_fapp0[fapp0 (op_val_func Z) E, Homd_target_fam E] x (homd_int E)) u
     -> homd_src_sec E x u
   ```
 
@@ -76,7 +74,7 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 - Fold section evaluation to `homd_`:
 
   ```text
-  fapp0 (piapp0[Homd_section_fam E x] (homd_src_sec E x u) y) v
+  fapp0 (piapp0[Functor_fam E (fapp0 (HomPresheaf_fam Z) x)] (homd_src_sec E x u) y) v
     -> homd_ E x u y v
   ```
 
@@ -103,23 +101,28 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   ```
 
   were too under-constrained for subject reduction. The accepted compromise
-  is to name the relevant families first, then use those stable heads in the
-  LHS:
+  is to use the existing canonical heads that the natural terms reduce to:
+  `op_val_func` on the source side, and `Functor_fam` on the section side.
 
   ```text
   rule fapp0
-        (@tapp0_fapp0 Z Cat_cat (Homd_source_fam E) (Homd_target_fam E) x (homd_int E))
+        (@tapp0_fapp0 Z Cat_cat (fapp0 (op_val_func Z) E) (Homd_target_fam E) x (homd_int E))
         u
     -> homd_src_sec E x u
 
   rule fapp0
-        (@piapp0 (Op_cat Z) (Homd_section_fam E x) (homd_src_sec E x u) y)
+        (@piapp0
+          (Op_cat Z)
+          (Functor_fam E (fapp0 (HomPresheaf_fam Z) x))
+          (homd_src_sec E x u)
+          y)
         v
     -> homd_ E x u y v
   ```
 
-  This still avoids the problematic raw compound expressions
-  `comp_cat_fapp0 ...` and `Functor_fam ...` in inferred positions.
+  This avoids fresh defined helper heads in LHSs. In particular,
+  `Homd_section_fam` was removed because it would not be the normal head of
+  the family argument.
 
 ## Validation
 
