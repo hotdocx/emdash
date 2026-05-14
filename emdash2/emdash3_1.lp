@@ -458,6 +458,20 @@ symbol HomPresheaf_fam [Z : Cat]
 // 10. Directed homd target and internal homd category
 // -------------------------------------------------------------------------------------------------
 
+// Stable names for the families used in the homd projection rules. These
+// avoid putting raw compound expressions in inferred LHS positions.
+symbol Homd_source_fam [Z : Cat] (E : τ (Fam Z))
+  : τ (Fam Z)
+≔ @comp_cat_fapp0 Z Cat_cat Cat_cat op E;
+
+symbol Homd_section_fam [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
+  : τ (Fam (Op_cat Z))
+≔ @Functor_fam
+     (Op_cat Z)
+     E
+     (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x);
+
 symbol Homd_target_fam [Z : Cat] (E : τ (Fam Z))
   : τ (Fam Z)
 ≔ @comp_cat_fapp0
@@ -477,7 +491,7 @@ symbol Homd_target_fam [Z : Cat] (E : τ (Fam Z))
      (@HomPresheaf_fam Z);
 
 symbol Homd_cat [Z : Cat] (E : τ (Fam Z)) : Cat
-≔ @Transf_cat Z Cat_cat (@comp_cat_fapp0 Z Cat_cat Cat_cat op E) (@Homd_target_fam Z E);
+≔ @Transf_cat Z Cat_cat (@Homd_source_fam Z E) (@Homd_target_fam Z E);
 
 symbol Homd [Z : Cat] (E : τ (Fam Z)) : Grpd
 ≔ Obj (@Homd_cat Z E);
@@ -499,53 +513,45 @@ symbol fam_tapp0_func [K : Cat] (E : τ (Fam K))
      (@fapp0_func (Fam_app_cat E x) (Fam_app_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
+// Source-fixed projection of the fully internal homd object.
 symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   : τ (Obj (Fam_app_cat (@Homd_target_fam Z E) x));
 
-rule @fapp0
-      (Fam_app_cat (@comp_cat_fapp0 $Z Cat_cat Cat_cat op $E) $x)
-      (Fam_app_cat (@Homd_target_fam $Z $E) $x)
+rule fapp0
       (@tapp0_fapp0
         $Z
         Cat_cat
-        (@comp_cat_fapp0 $Z Cat_cat Cat_cat op $E)
+        (@Homd_source_fam $Z $E)
         (@Homd_target_fam $Z $E)
         $x
         (@homd_int $Z $E))
       $u
   ↪ @homd_src_sec $Z $E $x $u;
 
-sequential symbol homd_ [Z : Cat] (E : τ (Fam Z))
+// Endpoint normal form. This is intentionally the old sigma_hom_fam
+// definition, not an independent head with its own object-action rule.
+symbol homd_ [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (y : τ (Obj Z))
   (v : τ (Obj (Fam_app_cat E y)))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @hom_con
+     (Fam_app_cat E y)
+     v
+     (Hom_cat Z x y)
+     (@fam_tapp0_func Z E x y u);
 
-rule @fapp0
-      (Fam_app_cat $E $y)
-      (Fam_app_cat
-        (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x)
-        $y)
+rule fapp0
       (@piapp0
         (Op_cat $Z)
-        (@Functor_fam
-          (Op_cat $Z)
-          $E
-          (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x))
+        (@Homd_section_fam $Z $E $x)
         (@homd_src_sec $Z $E $x $u)
         $y)
       $v
   ↪ @homd_ $Z $E $x $u $y $v;
-
-rule @fapp0 (Op_cat (Hom_cat $Z $x $y)) Cat_cat
-      (@homd_ $Z $E $x $u $y $v)
-      $f
-  ↪ Hom_cat (Fam_app_cat $E $y)
-       (@fib_cov_tapp0_fapp0 $Z $E $x $y $f $u)
-       $v;
 
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat
@@ -653,6 +659,17 @@ assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
 assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢
   Fam_app_cat (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x) y
     ≡ Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat;
+
+assert [Z : Cat] (E : τ (Fam Z)) ⊢
+  @Homd_source_fam Z E
+    ≡ @comp_cat_fapp0 Z Cat_cat Cat_cat op E;
+
+assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
+  @Homd_section_fam Z E x
+    ≡ @Functor_fam
+        (Op_cat Z)
+        E
+        (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x);
 
 assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_fam Z E) x
