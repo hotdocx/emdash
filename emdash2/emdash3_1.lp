@@ -520,12 +520,12 @@ symbol homd_src_func [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   : τ (Functor
         (Fam_app_cat (@Homd_source_fam Z E) x)
-        (Fam_app_cat (@Homd_target_fam Z E) x));
+        (Pi_cat (@Homd_section_fam Z E x)));
 
 rule @tapp0_fapp0
       $Z
       Cat_cat
-      (@fapp0 (Functor_cat $Z Cat_cat) (Functor_cat $Z Cat_cat) (@op_val_func $Z) $E)
+      (fapp0 (@op_val_func $Z) $E)
       (@Homd_target_fam $Z $E)
       $x
       (@homd_int $Z $E)
@@ -535,7 +535,7 @@ rule @tapp0_fapp0
 symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
-  : τ (Obj (Fam_app_cat (@Homd_target_fam Z E) x));
+  : τ (Obj (Pi_cat (@Homd_section_fam Z E x)));
 
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
@@ -570,7 +570,7 @@ rule @piapp0
       (@Functor_fam
         (Op_cat $Z)
         $E
-        (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x))
+        (fapp0 (@HomPresheaf_fam $Z) $x))
       (@homd_src_sec $Z $E $x $u)
       $y
   ↪ @homd_tgt_func $Z $E $x $u $y;

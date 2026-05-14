@@ -101,8 +101,8 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   ```
 
   were still too under-constrained for subject reduction. The accepted
-  compromise is to make only the projection family arguments explicit, using
-  canonical heads rather than new abbreviation heads:
+  compromise is to make the necessary projection family arguments explicit,
+  while still hiding inferred subexpressions inside those arguments:
 
   ```text
   rule @tapp0_fapp0 Z Cat_cat (fapp0 (op_val_func Z) E) (Homd_target_fam E) x (homd_int E)
@@ -111,6 +111,16 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   rule @piapp0 (Op_cat Z) (Functor_fam E (fapp0 (HomPresheaf_fam Z) x)) (homd_src_sec E x u) y
     -> homd_tgt_func E x u y
   ```
+
+  The rejected variants were:
+
+  ```text
+  rule @tapp0_fapp0 Z Cat_cat _ (Homd_target_fam E) x (homd_int E) -> ...
+  rule @piapp0 (Op_cat Z) _ (homd_src_sec E x u) y -> ...
+  rule @piapp0 (Op_cat Z) (Functor_fam E _) (homd_src_sec E x u) y -> ...
+  ```
+
+  Those variants were too weak for subject reduction.
 
   The evaluation rules then have stable LHS heads:
 
