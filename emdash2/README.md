@@ -7,6 +7,7 @@ The proof assistant is called `m—` (read “emdash”).
 ## Layout
 - `emdash2.lp`: ω-category-oriented development (v2, second iteration).
 - `emdash3_1.lp`: active v3 directed-family mixed-variance development.
+- `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).

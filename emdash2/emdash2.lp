@@ -1086,7 +1086,8 @@ rule Fibre_cat (Terminal_catd $B) _ ↪ Terminal_cat;
   This is intentionally fibrewise-only: we do not (yet) commit to how these fibres vary along base arrows
   for general `Catd Z` (that would require a transport/cleavage interface).
 
-  See `REPORT_EMDASH_LOGIC_DEV.md` (Option A) for the motivation (partial discharge / pointwise syntax).
+  See `reports/REPORT_EMDASH2_CONSOLIDATED.md` for the retired Option A motivation
+  (partial discharge / pointwise syntax).
 */
 constant symbol Functor_catd : Π [Z : Cat], Π (E D : Catd Z), Catd Z;
 
@@ -2577,7 +2578,8 @@ rule @Fibre_func $A
 /*
   homd_curry (fully internal; target shape closer to “Π z' , hom(z,z')^op → (E[z'] → Cat)”)
 
-  This is the revised internal pipeline (Phase 8bis in REPORT_EMDASH_LOGIC_DEV_2.md):
+  This is the revised internal pipeline summarized in
+  reports/REPORT_EMDASH2_CONSOLIDATED.md:
 
     z ↦ sections over z' : Z of  Functor_cat(Hom_Z(z,z')^op, Functor_cat(E[z'], Cat_cat)).
 
