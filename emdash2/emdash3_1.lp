@@ -209,16 +209,8 @@ symbol op_val_func [Z : Cat] : τ (Functor (Functor_cat Z Cat_cat) (Functor_cat 
 ≔ @comp_cat_cov_func Z Cat_cat Cat_cat op;
 
 // -------------------------------------------------------------------------------------------------
-// 3. Uniform binary internal hom
+// 3. Curried internal hom
 // -------------------------------------------------------------------------------------------------
-
-constant symbol hom2_int : Π [I J A : Cat],
-  Π (G : τ (Functor I A)),
-  Π (F : τ (Functor J A)),
-  τ (Functor (Op_cat I) (Functor_cat J Cat_cat));
-
-rule @fapp0 $J Cat_cat (@fapp0 (Op_cat $I) (Functor_cat $J Cat_cat) (@hom2_int $I $J $A $G $F) $i) $j
-  ↪ Hom_cat $A (@fapp0 $I $A $G $i) (@fapp0 $J $A $F $j);
 
 symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
@@ -227,23 +219,24 @@ rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
 
 symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat B) Cat_cat);
-rule @fapp0 (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) $x
-  ↪ Hom_cat $A (@fapp0 $B $A $F $x) $W;
+rule @hom_con $A $W $B $F
+  ↪ @hom_ (Op_cat $A) (Op_cat $B) (@Op_func $B $A $F) $W;
 
 symbol hom_int [A B : Cat] (F : τ (Functor B A))
-  : τ (Functor (Op_cat A) (Functor_cat B Cat_cat))
-≔ @hom2_int A B A (@id_func A) F;
+  : τ (Functor (Op_cat A) (Functor_cat B Cat_cat));
 
-assert [I J A : Cat] (G : τ (Functor I A)) (F : τ (Functor J A))
-  (i : τ (Obj (Op_cat I))) (j : τ (Obj J)) ⊢
-  @fapp0 J Cat_cat (@fapp0 (Op_cat I) (Functor_cat J Cat_cat) (@hom2_int I J A G F) i) j
-    ≡ Hom_cat A (@fapp0 I A G i) (@fapp0 J A F j);
+rule @fapp0 (Op_cat $A) (Functor_cat $B Cat_cat) (@hom_int $A $B $F) $W
+  ↪ @hom_ $A $B $F $W;
 
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@hom_ A B F W) y ≡ Hom_cat A W (@fapp0 B A F y);
 
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (x : τ (Obj (Op_cat B))) ⊢
   @fapp0 (Op_cat B) Cat_cat (@hom_con A W B F) x ≡ Hom_cat A (@fapp0 B A F x) W;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj (Op_cat A))) ⊢
+  @fapp0 (Op_cat A) (Functor_cat B Cat_cat) (@hom_int A B F) W
+    ≡ @hom_ A B F W;
 
 assert [A B : Cat] (F : τ (Functor B A)) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@fapp0 (Op_cat A) (Functor_cat B Cat_cat) (@hom_int A B F) X) Y
@@ -346,6 +339,10 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Fam K)],
   τ (Obj (Fam_app_cat E k));
 
 // Stable head for applying a directed family along a base arrow.
+// These identity/composition rules are operational stable-head laws for
+// Cat-valued functor action. Semantically they are consequences of ordinary
+// functoriality; the skeleton keeps them explicit until generic functor laws
+// are represented as rewrite-normal forms.
 sequential symbol fib_cov_tapp0_fapp0 : Π [K : Cat] (E : τ (Fam K)),
   Π [x y : τ (Obj K)], Π (f : τ (Hom K x y)),
   Π (u : τ (Obj (Fam_app_cat E x))),
@@ -366,6 +363,9 @@ symbol Sigma_cat [K : Cat] (E : τ (Fam K)) : Cat;
 symbol Total_cat [K : Cat] (E : τ (Fam K)) : Cat
 ≔ Sigma_cat E;
 
+symbol Sigma_func (K : Cat) : τ (Functor (Fam_cat K) Cat_cat);
+rule fapp0 (@Sigma_func $K) $E ↪ @Sigma_cat $K $E;
+
 rule τ (Obj (@Sigma_cat $K $E))
   ↪ `τΣ_ k : τ (Obj $K), Obj (Fam_app_cat $E k);
 
@@ -381,6 +381,9 @@ rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 symbol sigma_map_func [K : Cat] [E D : τ (Fam K)]
   (η : τ (Obj (Transf_cat E D)))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
+
+rule @fapp1_fapp0 (Functor_cat $K Cat_cat) Cat_cat (@Sigma_func $K) $E $D $η
+  ↪ @sigma_map_func $K $E $D $η;
 
 rule @fapp0 (@Sigma_cat $K $E) (@Sigma_cat $K $D)
       (@sigma_map_func $K $E $D $η)
@@ -479,11 +482,13 @@ symbol Homd_target_fam [Z : Cat] (E : τ (Fam Z))
          E))
      (@HomPresheaf_fam Z);
 
-symbol Homd_int_cat [Z : Cat] (E : τ (Fam Z)) : Cat
+symbol Homd_cat [Z : Cat] (E : τ (Fam Z)) : Cat
 ≔ @Transf_cat Z Cat_cat (@comp_cat_fapp0 Z Cat_cat Cat_cat op E) (@Homd_target_fam Z E);
 
-symbol Homd_int [Z : Cat] (E : τ (Fam Z)) : Grpd
-≔ Obj (@Homd_int_cat Z E);
+symbol Homd [Z : Cat] (E : τ (Fam Z)) : Grpd
+≔ Obj (@Homd_cat Z E);
+
+constant symbol homd_int : Π [Z : Cat], Π (E : τ (Fam Z)), τ (Homd E);
 
 // -------------------------------------------------------------------------------------------------
 // 11. Endpoint normal forms for Sigma homs
@@ -512,22 +517,23 @@ symbol sigma_hom_fam [K : Cat] (E : τ (Fam K))
      (Hom_cat K x y)
      (@fam_tapp0_func K E x y u);
 
-sequential symbol homd_eval_func [Z : Cat] (E : τ (Fam Z))
+sequential symbol homd_eval_func [Z : Cat] [E : τ (Fam Z)]
+  (h : τ (Homd E))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (y : τ (Obj Z))
   (v : τ (Obj (Fam_app_cat E y)))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
-symbol Homd_func [Z : Cat] (E : τ (Fam Z))
+symbol homd_ [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (y : τ (Obj Z))
   (v : τ (Obj (Fam_app_cat E y)))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ @homd_eval_func Z E x u y v;
+≔ @homd_eval_func Z E (@homd_int Z E) x u y v;
 
-rule @homd_eval_func $Z $E $x $u $y $v
+rule @homd_eval_func $Z $E (@homd_int $Z $E) $x $u $y $v
   ↪ @sigma_hom_fam $Z $E $x $u $y $v;
 
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
@@ -541,10 +547,11 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
 // -------------------------------------------------------------------------------------------------
 
 /*
-  TODO(v3.1): these helpers are planned generic infrastructure, but their
-  beta rules need a separate rewrite-matching pass. They are optional for the
-  mixed-variance Homd target below, so they stay deferred until the core
-  directed-family architecture is stable.
+  TODO(v3.1): these helpers are planned generic infrastructure. Their
+  declarations and beta rules are syntactically plausible, but the intended
+  beta assertions did not validate as stable rewrite normal forms in the first
+  pass. They are optional for the mixed-variance Homd target below, so they
+  stay deferred until the canonical directed-family core is stable.
 
 symbol sigma_intro_transf [K : Cat] (E : τ (Fam K))
   : τ (Obj (@Transf_cat K Cat_cat E (@Const_fam K (@Sigma_cat K E))));
@@ -587,35 +594,7 @@ rule @piapp0 $A (@Pullback_fam $A $B $E $F)
 */
 
 // -------------------------------------------------------------------------------------------------
-// 13. Core/Catd compatibility layer
-// -------------------------------------------------------------------------------------------------
-
-constant symbol Core_incl_func : Π (Z : Cat), τ (Functor (Core_cat Z) Z);
-rule fapp0 (@Core_incl_func $Z) $z ↪ $z;
-
-symbol Catd_cat (Z : Cat) : Cat
-≔ Fam_cat (Core_cat Z);
-
-symbol Catd (Z : Cat) : Grpd
-≔ Fam (Core_cat Z);
-
-symbol Fibration_cov_catd [Z : Cat] (M : τ (Fam Z)) : τ (Catd Z)
-≔ @Pullback_fam (Core_cat Z) Z M (@Core_incl_func Z);
-
-symbol Catd_func : τ (Functor (Op_cat Cat_cat) Cat_cat);
-rule fapp0 Catd_func $A ↪ Catd_cat $A;
-
-symbol Catd_fam [K : Cat] (E : τ (Fam K))
-  : τ (Fam (Op_cat K))
-≔ @comp_cat_fapp0
-     (Op_cat K)
-     (Op_cat Cat_cat)
-     Cat_cat
-     Catd_func
-     (@Op_func K Cat_cat E);
-
-// -------------------------------------------------------------------------------------------------
-// 14. Regression assertions for the mixed-variance skeleton
+// 13. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
 
 assert [K : Cat] (E : τ (Fam K)) (k : τ (Obj K)) ⊢
@@ -629,6 +608,13 @@ assert [A B : Cat] (E : τ (Fam B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢
 
 assert [K : Cat] (E : τ (Fam K)) ⊢
   fapp0 (Pi_func K) E ≡ Pi_cat E;
+
+assert [K : Cat] (E : τ (Fam K)) ⊢
+  fapp0 (Sigma_func K) E ≡ Sigma_cat E;
+
+assert [K : Cat] (E D : τ (Fam K)) (η : τ (Obj (Transf_cat E D))) ⊢
+  @fapp1_fapp0 (Fam_cat K) Cat_cat (@Sigma_func K) E D η
+    ≡ @sigma_map_func K E D η;
 
 assert [K : Cat] (E : τ (Fam K)) (k : τ (Obj K)) (u : τ (Obj (Fam_app_cat E k))) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k;
@@ -663,6 +649,10 @@ assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
         (Functor_fam
           E
           (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x));
+
+assert [Z : Cat] (E : τ (Fam Z)) ⊢
+  @Homd_cat Z E
+    ≡ @Transf_cat Z Cat_cat (@comp_cat_fapp0 Z Cat_cat Cat_cat op E) (@Homd_target_fam Z E);
 
 assert [K : Cat] (E : τ (Fam K))
   (x y : τ (Obj K))
@@ -700,7 +690,13 @@ assert [Z : Cat] (E : τ (Fam Z))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (v : τ (Obj (Fam_app_cat E y))) ⊢
-  @homd_eval_func Z E x u y v ≡ @sigma_hom_fam Z E x u y v;
+  @homd_eval_func Z E (@homd_int Z E) x u y v ≡ @sigma_hom_fam Z E x u y v;
+
+assert [Z : Cat] (E : τ (Fam Z))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fam_app_cat E x)))
+  (v : τ (Obj (Fam_app_cat E y))) ⊢
+  @homd_ Z E x u y v ≡ @sigma_hom_fam Z E x u y v;
 
 assert [K : Cat] (E D : τ (Fam K)) (η : τ (Obj (Transf_cat E D)))
   (k : τ (Obj K)) (u : τ (Obj (Fam_app_cat E k))) ⊢
@@ -729,9 +725,3 @@ assert [K : Cat] (E D : τ (Fam K)) (η : τ (Obj (Transf_cat E D))) ⊢
   - const_section_func beta
   - section_pullback_func beta
 */
-
-assert [Z : Cat] (M : τ (Fam Z)) (z : τ (Obj (Core_cat Z))) ⊢
-  Fam_app_cat (Fibration_cov_catd M) z ≡ Fam_app_cat M z;
-
-assert [K : Cat] (E : τ (Fam K)) (k : τ (Obj (Op_cat K))) ⊢
-  Fam_app_cat (Catd_fam E) k ≡ Catd_cat (Fam_app_cat E k);
