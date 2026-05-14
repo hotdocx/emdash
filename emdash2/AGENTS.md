@@ -4,15 +4,15 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash` version 2, whose goal is to write a Lambdapi specification @emdash2.lp for a programming language (and proof assistant) for ω-categories...  @README.md @emdash2.lp
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3 iteration is @emdash3_1.lp, guided by @reports/REPORT_EMDASH_V3_CONSOLIDATED.md. The v2 reference remains @emdash2.lp.
 
-In fact, now that we have made substantial progress in @emdash2.lp then we are now in the third iteration of the goal: `emdash` version 3, to be written into the file @emdash3.lp
+For v3 work, start from @emdash3_1.lp and the consolidated report. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
 
-The baseline "inspiration" is in the older files `emdash.lp` (outdated) and there are also some older files:  `cartierSolution13.lp` (has different architecture/goal) and other older files, with different architectures/goals, `cartierSolution14.lp` and `cartierSolution16.lp` are also relevant to understand the broarder context/goal, but these files `emdash.lp`  `cartierSolution13.lp` `cartierSolution14.lp` and `cartierSolution16.lp` are no longer included in this repo codebase (they have been moved to the git-untracked `.scratchpad/` subfolder in the very rare case where we might want to have a look at them), because for simplicity and cleanliness of the context because @emdash2.lp has now progressed substantially enough and superseded them enough that there they would be distracting/confusing for our new goal/tasks.
+The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
-The file we are editing @emdash2.lp is draft work in progress. The immediate first milestone is to be able to express the definition/declaration of a ω-category such as its usual horizontal composition of higher (2-)arrows, its usual horizontal-vertical composition "exchange law", the “stacking” (generalized horizontal composition) of  higher (2-)cells along a (1-)cell instead of along the usual 0-cell. The second milestone is to be able to express the adjunction of functors. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories"
+The active v3 file @emdash3_1.lp is draft work in progress. The immediate milestone is to develop the directed-family mixed-variance foundation for Sigma categories and dependent homs, then iterate toward horizontal composition, exchange/stacking laws, and adjunctions. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories".
 
 Advice: although we are interested in ω-categories (that is infinity/ω hierarchy of arrow, arrows of arrow, etc), as a rule of thumb, being able to express the 2-category version of what we want will, without extra efforts, also apply/extend to the ω-categories.
 
@@ -22,15 +22,15 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: you should start by reading the entire file @emdash2.lp into your context.
+Advice: for v3 work, start by reading @emdash3_1.lp and @reports/REPORT_EMDASH_V3_CONSOLIDATED.md. Consult @emdash2.lp as a reference for rewrite/unification style and stable-head SOP.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
 ## Fast commands
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
-- Typecheck only omega version: `lambdapi check -w emdash2.lp`
-- Typecheck only 1-category version: `lambdapi check -w emdash.lp`
+- Typecheck only v3.1: `lambdapi check -w emdash3_1.lp`
+- Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Remove compilation artefacts: `make clean`
 
 ## SOP: Avoid hung typechecks (timeouts)

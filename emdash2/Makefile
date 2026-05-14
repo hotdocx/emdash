@@ -2,7 +2,7 @@
 .PHONY: check clean
 
 check:
-# > lambdapi check -w emdash.lp
+# scripts/check.sh checks emdash2.lp and the active v3.1 file.
 > ./scripts/check.sh
 
 watch:

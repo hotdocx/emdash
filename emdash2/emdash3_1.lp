@@ -1,11 +1,10 @@
 /*
   m- / emdash3.1
-  Directed-family mixed-variance implementation draft.
+  Active directed-family mixed-variance v3 architecture.
 
-  This file starts the architecture described in
-  reports/emdash3_mix_variance_architecture.md.  It reuses the stable
-  category/universe/internal-hom prefix from emdash3.lp, but replaces the
-  Catd foundation with directed Cat-valued families:
+  This file is the current v3 source file described in
+  reports/REPORT_EMDASH_V3_CONSOLIDATED.md.  It uses directed Cat-valued
+  families directly:
 
     Fam_cat K := Functor_cat K Cat_cat.
 */
@@ -41,7 +40,7 @@ flag "print_meta_args" on;
       recognize (`comp_cat_fapp0`, `fib_cov_tapp0_fapp0`, `homd_src_func`,
       `homd_src_sec`, `homd_tgt_func`).
     - The final endpoint `homd_` is not an independent opaque table of beta
-      rules: it is the old `sigma_hom_fam` formula
+      rules: it is the former sigma-hom endpoint formula
       `hom_con v (fam_tapp0_func E x y u)`.
 */
 
@@ -606,7 +605,7 @@ symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
-// Endpoint normal form. This is intentionally the old sigma_hom_fam
+// Endpoint normal form. This is intentionally the former sigma-hom
 // definition, not an independent head with its own object-action rule.
 symbol homd_ [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
@@ -657,52 +656,9 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
 // 12. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
-/*
-  TODO(v3.1): these helpers are planned generic infrastructure. Their
-  declarations and beta rules are syntactically plausible, but the intended
-  beta assertions did not validate as stable rewrite normal forms in the first
-  pass. They are optional for the mixed-variance Homd target below, so they
-  stay deferred until the canonical directed-family core is stable.
-
-symbol sigma_intro_transf [K : Cat] (E : τ (Fam K))
-  : τ (Obj (@Transf_cat K Cat_cat E (@Const_fam K (@Sigma_cat K E))));
-
-rule @fapp0 (Fam_app_cat $E $k) (Fam_app_cat (@Const_fam $K (@Sigma_cat $K $E)) $k)
-      (@tapp0_fapp0 $K Cat_cat $E (@Const_fam $K (@Sigma_cat $K $E)) $k (@sigma_intro_transf $K $E))
-      $u
-  ↪ @Struct_sigma
-      (Obj $K)
-      (λ kk : τ (Obj $K), Obj (Fam_app_cat $E kk))
-      $k
-      $u;
-
-symbol pi_eval_transf [K : Cat] (E : τ (Fam K))
-  : τ (Obj (@Transf_cat K Cat_cat (@Const_fam K (@Pi_cat K E)) E));
-
-rule @fapp0 (Fam_app_cat (@Const_fam $K (@Pi_cat $K $E)) $k) (Fam_app_cat $E $k)
-      (@tapp0_fapp0 $K Cat_cat (@Const_fam $K (@Pi_cat $K $E)) $E $k (@pi_eval_transf $K $E))
-      $s
-  ↪ @piapp0 $K $E $s $k;
-
-symbol const_section_func (K : Cat) (A : Cat)
-  : τ (Functor A (@Pi_cat K (@Const_fam K A)));
-
-rule @piapp0 $K (@Const_fam $K $A)
-      (@fapp0 $A (@Pi_cat $K (@Const_fam $K $A)) (@const_section_func $K $A) $a)
-      $k
-  ↪ $a;
-
-symbol section_pullback_func [A B : Cat]
-  (F : τ (Functor A B))
-  (E : τ (Fam B))
-  : τ (Functor (@Pi_cat B E) (@Pi_cat A (@Pullback_fam A B E F)));
-
-rule @piapp0 $A (@Pullback_fam $A $B $E $F)
-      (@fapp0 (@Pi_cat $B $E) (@Pi_cat $A (@Pullback_fam $A $B $E $F))
-        (@section_pullback_func $A $B $F $E) $s)
-      $a
-  ↪ @piapp0 $B $E $s (@fapp0 $A $B $F $a);
-*/
+// TODO(v3.1): generic Sigma/Pi helpers are deferred until the
+// directed-family core is stable enough for robust beta assertions. See the
+// backlog in reports/REPORT_EMDASH_V3_CONSOLIDATED.md.
 
 // -------------------------------------------------------------------------------------------------
 // 13. Regression assertions for the mixed-variance skeleton

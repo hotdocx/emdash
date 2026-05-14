@@ -5,17 +5,17 @@ The proof assistant is inspired by the functorial programming approach of Kosta 
 The proof assistant is called `m—` (read “emdash”).
 
 ## Layout
-- `emdash.lp`: earlier 1-category-oriented development (baseline).
 - `emdash2.lp`: ω-category-oriented development (v2, second iteration).
-- `emdash3.lp`: ω-category-oriented development (v3, current focus).
+- `emdash3_1.lp`: active v3 directed-family mixed-variance development.
+- `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 
 ## Quick start
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
-- Check everything: `make check`
-- Check just ω version: `lambdapi check -w emdash3.lp`
+- Check active developments: `make check`
+- Check just v3.1: `lambdapi check -w emdash3_1.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
@@ -26,5 +26,5 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
 
 ## Notes
-- Alternative/related approaches exist in (now less-relevant and deleted/moved/retired into the `.scratchpad/` subfolder) `cartierSolution13.lp` and `cartierSolution16_short.lp` (see `Kosta_Dosen_omega_categories.pdf`).
+- Alternative/related approaches exist in ignored `.scratchpad/` backups. Retired v3 material is under `.scratchpad/backup/2026-05-15_v3_retirement/`.
 - If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.

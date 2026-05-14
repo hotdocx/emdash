@@ -7,9 +7,14 @@ cd "$(dirname "$0")/.."
 # Default to a short timeout to avoid editor/CI lockups; override via EMDASH_TYPECHECK_TIMEOUT.
 : "${EMDASH_TYPECHECK_TIMEOUT:=60s}"
 
-# lambdapi check -w emdash.lp
-if command -v timeout >/dev/null 2>&1; then
-  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" lambdapi check -w emdash2.lp
-else
-  lambdapi check -w emdash2.lp
-fi
+check_file() {
+  local file="$1"
+  if command -v timeout >/dev/null 2>&1; then
+    timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" lambdapi check -w "$file"
+  else
+    lambdapi check -w "$file"
+  fi
+}
+
+check_file emdash2.lp
+check_file emdash3_1.lp
