@@ -269,6 +269,10 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);
 
+unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
+  ↪ [ $A ≡ $A'; $B ≡ $B'; $F ≡ $F'; $G ≡ $G' ];
+unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
+
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 
 symbol tapp0_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
@@ -525,8 +529,8 @@ symbol homd_src_func [Z : Cat] (E : τ (Fam Z))
 rule @tapp0_fapp0
       $Z
       Cat_cat
-      (fapp0 (@op_val_func $Z) $E)
-      (@Homd_target_fam $Z $E)
+      _
+      _
       $x
       (@homd_int $Z $E)
   ↪ @homd_src_func $Z $E $x;
@@ -567,10 +571,7 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Fam Z))
 
 rule @piapp0
       (Op_cat $Z)
-      (@Functor_fam
-        (Op_cat $Z)
-        $E
-        (fapp0 (@HomPresheaf_fam $Z) $x))
+      _
       (@homd_src_sec $Z $E $x $u)
       $y
   ↪ @homd_tgt_func $Z $E $x $u $y;
@@ -716,10 +717,34 @@ assert [Z : Cat] (E : τ (Fam Z)) ⊢
     ≡ @Transf_cat Z Cat_cat (@comp_cat_fapp0 Z Cat_cat Cat_cat op E) (@Homd_target_fam Z E);
 
 assert [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z)) ⊢
+  @tapp0_fapp0
+    Z
+    Cat_cat
+    (fapp0 (@op_val_func Z) E)
+    (@Homd_target_fam Z E)
+    x
+    (@homd_int Z E)
+    ≡ @homd_src_func Z E x;
+
+assert [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x))) ⊢
   fapp0 (@homd_src_func Z E x) u
     ≡ @homd_src_sec Z E x u;
+
+assert [Z : Cat] (E : τ (Fam Z))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fam_app_cat E x))) ⊢
+  @piapp0
+    (Op_cat Z)
+    (@Functor_fam
+      (Op_cat Z)
+      E
+      (fapp0 (@HomPresheaf_fam Z) x))
+    (@homd_src_sec Z E x u)
+    y
+    ≡ @homd_tgt_func Z E x u y;
 
 assert [Z : Cat] (E : τ (Fam Z))
   (x y : τ (Obj Z))

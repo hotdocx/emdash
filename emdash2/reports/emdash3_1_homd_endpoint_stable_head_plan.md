@@ -92,35 +92,34 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 - Keep `fam_tapp0_func` as the transport-functor component of `homd_`.
 - Do not add a direct object-action rule for `homd_`; the endpoint beta
   should reduce via the definition above.
-- In rewrite-rule LHSs, follow the `emdash2.lp` hygiene rule. The fully
-  minimal projection forms:
+- Restore the `emdash2.lp` inference helpers for `Transf_cat`:
 
   ```text
-  rule tapp0_fapp0 $x (@homd_int $Z $E) -> ...
-  rule piapp0 (@homd_src_sec $Z $E $x $u) $y -> ...
+  unif_rule Obj (Transf_cat F G) == Obj (Transf_cat F' G') -> ...
+  unif_rule Transf F G == Transf F' G' -> ...
   ```
 
-  were still too under-constrained for subject reduction. The accepted
-  compromise is to make the necessary projection family arguments explicit,
-  while still hiding inferred subexpressions inside those arguments:
+  Without these helpers, Lambdapi could not prove subject reduction for
+  projection rules with implicit source/target family arguments.
+
+- In rewrite-rule LHSs, follow the `emdash2.lp` hygiene rule. The projection
+  rules can now keep the truly implicit family arguments as `_`:
 
   ```text
-  rule @tapp0_fapp0 Z Cat_cat (fapp0 (op_val_func Z) E) (Homd_target_fam E) x (homd_int E)
+  rule @tapp0_fapp0 Z Cat_cat _ _ x (homd_int E)
     -> homd_src_func E x
 
-  rule @piapp0 (Op_cat Z) (Functor_fam E (fapp0 (HomPresheaf_fam Z) x)) (homd_src_sec E x u) y
+  rule @piapp0 (Op_cat Z) _ (homd_src_sec E x u) y
     -> homd_tgt_func E x u y
   ```
 
-  The rejected variants were:
+  The fully implicit surface forms remain too weak because they do not pin
+  the index category and transfor head:
 
   ```text
-  rule @tapp0_fapp0 Z Cat_cat _ (Homd_target_fam E) x (homd_int E) -> ...
-  rule @piapp0 (Op_cat Z) _ (homd_src_sec E x u) y -> ...
-  rule @piapp0 (Op_cat Z) (Functor_fam E _) (homd_src_sec E x u) y -> ...
+  rule tapp0_fapp0 x (homd_int E) -> ...
+  rule piapp0 (homd_src_sec E x u) y -> ...
   ```
-
-  Those variants were too weak for subject reduction.
 
   The evaluation rules then have stable LHS heads:
 
@@ -156,10 +155,7 @@ Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
   == Op_cat (Sigma_cat (homd_ E x u y v))
 ```
 
-Both should pass without a direct endpoint beta rule for `homd_`.
+Both pass without a direct endpoint beta rule for `homd_`.
 
-The raw projection fold assertions for `tapp0_fapp0` and `piapp0` remain
-deferred: the rules are accepted and appear in the decision trees, but
-Lambdapi's assertion conversion is still brittle on those projection terms.
-The stable-head evaluation assertions for `homd_src_func` and
-`homd_tgt_func` pass.
+The raw projection fold assertions for `tapp0_fapp0` and `piapp0` also pass
+after restoring the `Transf_cat` unification helpers.
