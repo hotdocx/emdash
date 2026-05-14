@@ -360,8 +360,6 @@ rule @fib_cov_tapp0_fapp0 $K $E $y $z $g (@fib_cov_tapp0_fapp0 $K $E $x $y $f $u
 // -------------------------------------------------------------------------------------------------
 
 symbol Sigma_cat [K : Cat] (E : τ (Fam K)) : Cat;
-symbol Total_cat [K : Cat] (E : τ (Fam K)) : Cat
-≔ Sigma_cat E;
 
 symbol Sigma_func (K : Cat) : τ (Functor (Fam_cat K) Cat_cat);
 rule fapp0 (@Sigma_func $K) $E ↪ @Sigma_cat $K $E;
@@ -371,10 +369,6 @@ rule τ (Obj (@Sigma_cat $K $E))
 
 injective symbol Sigma_proj1_func [K : Cat] (E : τ (Fam K))
   : τ (Functor (Sigma_cat E) K);
-
-symbol Total_proj1_func [K : Cat] (E : τ (Fam K))
-  : τ (Functor (Total_cat E) K)
-≔ Sigma_proj1_func E;
 
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 
@@ -505,42 +499,59 @@ symbol fam_tapp0_func [K : Cat] (E : τ (Fam K))
      (@fapp0_func (Fam_app_cat E x) (Fam_app_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
-symbol sigma_hom_fam [K : Cat] (E : τ (Fam K))
-  (x : τ (Obj K))
+symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
-  (y : τ (Obj K))
-  (v : τ (Obj (Fam_app_cat E y)))
-  : τ (Functor (Op_cat (Hom_cat K x y)) Cat_cat)
-≔ @hom_con
-     (Fam_app_cat E y)
-     v
-     (Hom_cat K x y)
-     (@fam_tapp0_func K E x y u);
+  : τ (Obj (Fam_app_cat (@Homd_target_fam Z E) x));
 
-sequential symbol homd_eval_func [Z : Cat] [E : τ (Fam Z)]
-  (h : τ (Homd E))
+rule @fapp0
+      (Fam_app_cat (@comp_cat_fapp0 $Z Cat_cat Cat_cat op $E) $x)
+      (Fam_app_cat (@Homd_target_fam $Z $E) $x)
+      (@tapp0_fapp0
+        $Z
+        Cat_cat
+        (@comp_cat_fapp0 $Z Cat_cat Cat_cat op $E)
+        (@Homd_target_fam $Z $E)
+        $x
+        (@homd_int $Z $E))
+      $u
+  ↪ @homd_src_sec $Z $E $x $u;
+
+sequential symbol homd_ [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (y : τ (Obj Z))
   (v : τ (Obj (Fam_app_cat E y)))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
-symbol homd_ [Z : Cat] (E : τ (Fam Z))
-  (x : τ (Obj Z))
-  (u : τ (Obj (Fam_app_cat E x)))
-  (y : τ (Obj Z))
-  (v : τ (Obj (Fam_app_cat E y)))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ @homd_eval_func Z E (@homd_int Z E) x u y v;
+rule @fapp0
+      (Fam_app_cat $E $y)
+      (Fam_app_cat
+        (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x)
+        $y)
+      (@piapp0
+        (Op_cat $Z)
+        (@Functor_fam
+          (Op_cat $Z)
+          $E
+          (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x))
+        (@homd_src_sec $Z $E $x $u)
+        $y)
+      $v
+  ↪ @homd_ $Z $E $x $u $y $v;
 
-rule @homd_eval_func $Z $E (@homd_int $Z $E) $x $u $y $v
-  ↪ @sigma_hom_fam $Z $E $x $u $y $v;
+rule @fapp0 (Op_cat (Hom_cat $Z $x $y)) Cat_cat
+      (@homd_ $Z $E $x $u $y $v)
+      $f
+  ↪ Hom_cat (Fam_app_cat $E $y)
+       (@fib_cov_tapp0_fapp0 $Z $E $x $y $f $u)
+       $v;
 
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat
       (@Sigma_cat
         (Op_cat (Hom_cat $K $x $y))
-        (@sigma_hom_fam $K $E $x $u $y $v));
+        (@homd_ $K $E $x $u $y $v));
 
 // -------------------------------------------------------------------------------------------------
 // 12. Generic Sigma/Pi weakening helpers
@@ -666,21 +677,10 @@ assert [K : Cat] (E : τ (Fam K))
 assert [K : Cat] (E : τ (Fam K))
   (x y : τ (Obj K))
   (u : τ (Obj (Fam_app_cat E x)))
-  (v : τ (Obj (Fam_app_cat E y))) ⊢
-  @sigma_hom_fam K E x u y v
-    ≡ @hom_con
-        (Fam_app_cat E y)
-        v
-        (Hom_cat K x y)
-        (@fam_tapp0_func K E x y u);
-
-assert [K : Cat] (E : τ (Fam K))
-  (x y : τ (Obj K))
-  (u : τ (Obj (Fam_app_cat E x)))
   (v : τ (Obj (Fam_app_cat E y)))
   (f : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
   @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
-    (@sigma_hom_fam K E x u y v)
+    (@homd_ K E x u y v)
     f
     ≡ Hom_cat (Fam_app_cat E y)
         (@fib_cov_tapp0_fapp0 K E x y f u)
@@ -690,13 +690,11 @@ assert [Z : Cat] (E : τ (Fam Z))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   (v : τ (Obj (Fam_app_cat E y))) ⊢
-  @homd_eval_func Z E (@homd_int Z E) x u y v ≡ @sigma_hom_fam Z E x u y v;
-
-assert [Z : Cat] (E : τ (Fam Z))
-  (x y : τ (Obj Z))
-  (u : τ (Obj (Fam_app_cat E x)))
-  (v : τ (Obj (Fam_app_cat E y))) ⊢
-  @homd_ Z E x u y v ≡ @sigma_hom_fam Z E x u y v;
+  Hom_cat (@Sigma_cat Z E) (Struct_sigma x u) (Struct_sigma y v)
+    ≡ Op_cat
+        (@Sigma_cat
+          (Op_cat (Hom_cat Z x y))
+          (@homd_ Z E x u y v));
 
 assert [K : Cat] (E D : τ (Fam K)) (η : τ (Obj (Transf_cat E D)))
   (k : τ (Obj K)) (u : τ (Obj (Fam_app_cat E k))) ⊢

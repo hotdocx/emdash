@@ -1,5 +1,10 @@
 # emdash3_1 Mixed-Variance Cleanup Plan
 
+> Superseded endpoint note: the Homd endpoint naming in this plan was
+> refined by `reports/emdash3_1_homd_endpoint_stable_head_plan.md`.
+> The current endpoint normal form is `homd_`; `homd_eval_func` and
+> `sigma_hom_fam` should not be reintroduced.
+
 ## Summary
 
 Refactor `emdash3_1.lp` into a cleaner v3.1 core by removing the
