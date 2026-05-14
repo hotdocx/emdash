@@ -51,11 +51,18 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   ```
 
 - Do not use those named abbreviations as rewrite-rule LHS heads when the
-  canonical reduced head is different. In particular, LHSs use
-  `fapp0 (op_val_func Z) E` and `Functor_fam ...`.
+  corresponding arguments are inferred implicit positions. After restoring the
+  `emdash2.lp` `Transf_cat` unification helpers, the robust rule shape is to
+  keep those source/target family positions as `_`.
+
+  The explicit canonical forms, such as `fapp0 (op_val_func Z) E` and
+  `Functor_fam ...`, are still useful in regression assertions because they
+  document what Lambdapi infers and checks by conversion.
 
 - Split the old wrapped projection/evaluation rules into progressive
-  stable-head steps:
+  stable-head steps. Conceptually the inferred families are the displayed
+  bracketed expressions below, while the actual Lambdapi LHS keeps those
+  positions implicit with `_`:
 
   ```text
   tapp0_fapp0[fapp0 (op_val_func Z) E, Homd_target_fam E] x (homd_int E)
@@ -159,3 +166,19 @@ Both pass without a direct endpoint beta rule for `homd_`.
 
 The raw projection fold assertions for `tapp0_fapp0` and `piapp0` also pass
 after restoring the `Transf_cat` unification helpers.
+
+## emdash2 SOP Port
+
+The immediately portable `emdash2.lp` lesson is not a larger Catd
+compatibility layer. It is the rewrite discipline:
+
+- avoid reducible compound expressions in inferred implicit LHS positions;
+- split nested projections into stable-head single steps;
+- keep source/target families readable as named helpers, but do not require
+  those helpers to be the syntactic LHS shape;
+- add local unification helpers only for chosen heads needed by elaboration
+  (`Hom_cat`, `Functor_cat`, `Transf_cat`, and the directed-family surface
+  helpers in this draft).
+
+This is now recorded in the preface and homd projection comments of
+`emdash3_1.lp`.

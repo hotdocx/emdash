@@ -16,6 +16,35 @@ flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
 
+/*
+  Ported working conventions from emdash2.lp
+
+  Surface reading for this directed-family draft:
+    - `E[x]` means `Fam_app_cat E x`, for `E : Fam Z`.
+    - `F[x]` means `fapp0 F x`, for an ordinary functor.
+    - `ϵ[x]` means the diagonal component extracted by `tapp0_fapp0 x ϵ`.
+    - `homd_int E`, after projection at x,u,y,v, normalizes through
+      `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then the endpoint `homd_`.
+
+  Rewrite hygiene:
+    - Keep inferred/implicit arguments on rule LHSs as `_` unless they are
+      essential discriminators.
+    - This matters most when an implicit argument would be a reducible compound
+      term, such as a family built from `Functor_fam`, `HomPresheaf_fam`, or
+      `comp_cat_fapp0`.
+    - Prefer small projection rules with stable heads over a single large nested
+      redex.  The homd endpoint is deliberately split into `tapp0_fapp0`,
+      `fapp0`, `piapp0`, and `fapp0` folds for this reason.
+
+  Normalization policy:
+    - Introduce stable heads for functor-level data that later rules need to
+      recognize (`comp_cat_fapp0`, `fib_cov_tapp0_fapp0`, `homd_src_func`,
+      `homd_src_sec`, `homd_tgt_func`).
+    - The final endpoint `homd_` is not an independent opaque table of beta
+      rules: it is the old `sigma_hom_fam` formula
+      `hom_con v (fam_tapp0_func E x y u)`.
+*/
+
 // -------------------------------------------------------------------------------------------------
 // 0. Groupoid universe and equality
 // -------------------------------------------------------------------------------------------------
@@ -65,6 +94,13 @@ injective symbol Hom_cat : Π (A : Cat) (X_A Y_A : τ (Obj A)), Cat;
 symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
 ≔ Obj (Hom_cat A X_A Y_A);
 
+/*
+  Inference-helper policy:
+  These unification rules are local elaboration aids for chosen heads such as
+  `Hom_cat`, `Functor_cat`, and `Transf_cat`. They should be read as controlled
+  "associativity of Obj" hints, not as global semantic injectivity claims for
+  arbitrary category constructors.
+*/
 unif_rule Obj (Hom_cat $A $X $Y) ≡ Obj (Hom_cat $A' $X' $Y') ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 unif_rule Hom $A $X $Y ≡ Hom $A' $X' $Y' ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 
@@ -269,6 +305,10 @@ constant symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);
 
+// Controlled Obj-inversion for transformation categories. This is the
+// emdash2 helper that lets projection rules keep source/target functors
+// implicit, e.g. `@tapp0_fapp0 ... _ _ ...`, without forcing reducible
+// compound family expressions into rewrite-rule LHSs.
 unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
   ↪ [ $A ≡ $A'; $B ≡ $B'; $F ≡ $F'; $G ≡ $G' ];
 unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
@@ -284,6 +324,11 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Obj (Transf_cat F G))),
   τ (Hom B (fapp0 F Y) (fapp0 G Y));
 
+/*
+  Design note: `tapp0_fapp0` is a primitive projection head, not a
+  definitional abbreviation.  This follows emdash2: the head must remain
+  visible so later rules can attach component computations directly to it.
+*/
 rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
   ↪ @tapp0_fapp0 $A $B $F $G $Y $ϵ;
 
@@ -318,6 +363,9 @@ symbol Fam (K : Cat) : Grpd
 symbol Fam_app_cat [K : Cat] (E : τ (Fam K)) (k : τ (Obj K)) : Cat
 ≔ @fapp0 K Cat_cat E k;
 
+// Directed-family inference helpers. As above, these are elaboration aids for
+// the surface reading `E[x]`; they are not a claim that every abbreviation
+// around `Fam_cat` should be globally injective.
 unif_rule Fam $K ≡ Fam $K' ↪ [ $K ≡ $K' ];
 unif_rule Obj (Fam_app_cat $E $k) ≡ Obj (Fam_app_cat $E' $k') ↪ [ $E ≡ $E'; $k ≡ $k' ];
 
@@ -462,6 +510,15 @@ symbol HomPresheaf_fam [Z : Cat]
 // 10. Directed homd target and internal homd category
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Homd architecture note:
+  `Homd_source_fam`, `Homd_section_fam`, and `Homd_target_fam` name the
+  intended source/target families for readability and assertions.  They are
+  not used as required discriminants in the projection-rule LHSs below, because
+  those positions are inferred implicit arguments and may reduce to canonical
+  compound terms before matching.
+*/
+
 symbol Homd_source_fam [Z : Cat] (E : τ (Fam Z))
   : τ (Fam Z)
 ≔ @fapp0
@@ -526,6 +583,10 @@ symbol homd_src_func [Z : Cat] (E : τ (Fam Z))
         (Fam_app_cat (@Homd_source_fam Z E) x)
         (Pi_cat (@Homd_section_fam Z E x)));
 
+// First projection fold. The source and target family arguments are
+// deliberately `_`: their canonical forms contain reducible expressions such
+// as `fapp0 (op_val_func Z) E` and `Homd_target_fam E`.  The Transf_cat
+// unification helper above supplies the needed endpoint information.
 rule @tapp0_fapp0
       $Z
       Cat_cat
@@ -541,6 +602,7 @@ symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
   (u : τ (Obj (Fam_app_cat E x)))
   : τ (Obj (Pi_cat (@Homd_section_fam Z E x)));
 
+// Second projection fold: externalize x,u and keep the y,v endpoint internal.
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
@@ -569,6 +631,10 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Fam Z))
           (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x)
           y));
 
+// Third projection fold. The family argument of `piapp0` is intentionally
+// implicit: its normal form is a mixed-variance `Functor_fam` involving
+// `HomPresheaf_fam`, and spelling that compound in the LHS makes matching
+// brittle.
 rule @piapp0
       (Op_cat $Z)
       _
@@ -576,6 +642,8 @@ rule @piapp0
       $y
   ↪ @homd_tgt_func $Z $E $x $u $y;
 
+// Final endpoint fold. At this point the stable head `homd_` is definitionally
+// the sigma-hom family formula, so no separate object-action shortcut is used.
 rule fapp0 (@homd_tgt_func $Z $E $x $u $y) $v
   ↪ @homd_ $Z $E $x $u $y $v;
 
