@@ -458,6 +458,22 @@ symbol HomPresheaf_fam [Z : Cat]
 // 10. Directed homd target and internal homd category
 // -------------------------------------------------------------------------------------------------
 
+symbol Homd_source_fam [Z : Cat] (E : τ (Fam Z))
+  : τ (Fam Z)
+≔ @fapp0
+     (Functor_cat Z Cat_cat)
+     (Functor_cat Z Cat_cat)
+     (@op_val_func Z)
+     E;
+
+symbol Homd_section_fam [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
+  : τ (Fam (Op_cat Z))
+≔ @Functor_fam
+     (Op_cat Z)
+     E
+     (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x);
+
 symbol Homd_target_fam [Z : Cat] (E : τ (Fam Z))
   : τ (Fam Z)
 ≔ @comp_cat_fapp0
@@ -477,9 +493,7 @@ symbol Homd_target_fam [Z : Cat] (E : τ (Fam Z))
      (@HomPresheaf_fam Z);
 
 symbol Homd_cat [Z : Cat] (E : τ (Fam Z)) : Cat
-≔ @Transf_cat Z Cat_cat
-     (@fapp0 (Functor_cat Z Cat_cat) (Functor_cat Z Cat_cat) (@op_val_func Z) E)
-     (@Homd_target_fam Z E);
+≔ @Transf_cat Z Cat_cat (@Homd_source_fam Z E) (@Homd_target_fam Z E);
 
 symbol Homd [Z : Cat] (E : τ (Fam Z)) : Grpd
 ≔ Obj (@Homd_cat Z E);
@@ -501,21 +515,29 @@ symbol fam_tapp0_func [K : Cat] (E : τ (Fam K))
      (@fapp0_func (Fam_app_cat E x) (Fam_app_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
-// Source-fixed projection of the fully internal homd object.
+// Component functor after projecting the fully internal homd object at x.
+symbol homd_src_func [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
+  : τ (Functor
+        (Fam_app_cat (@Homd_source_fam Z E) x)
+        (Fam_app_cat (@Homd_target_fam Z E) x));
+
+rule @tapp0_fapp0
+      $Z
+      Cat_cat
+      (@fapp0 (Functor_cat $Z Cat_cat) (Functor_cat $Z Cat_cat) (@op_val_func $Z) $E)
+      (@Homd_target_fam $Z $E)
+      $x
+      (@homd_int $Z $E)
+  ↪ @homd_src_func $Z $E $x;
+
+// Source-fixed projection after evaluating the component functor at u.
 symbol homd_src_sec [Z : Cat] (E : τ (Fam Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fam_app_cat E x)))
   : τ (Obj (Fam_app_cat (@Homd_target_fam Z E) x));
 
-rule fapp0
-      (@tapp0_fapp0
-        $Z
-        Cat_cat
-        (@fapp0 (Functor_cat $Z Cat_cat) (Functor_cat $Z Cat_cat) (@op_val_func $Z) $E)
-        (@Homd_target_fam $Z $E)
-        $x
-        (@homd_int $Z $E))
-      $u
+rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
 // Endpoint normal form. This is intentionally the old sigma_hom_fam
@@ -532,16 +554,28 @@ symbol homd_ [Z : Cat] (E : τ (Fam Z))
      (Hom_cat Z x y)
      (@fam_tapp0_func Z E x y u);
 
-rule fapp0
-      (@piapp0
+// Inner endpoint functor after projecting the source-fixed section at y.
+symbol homd_tgt_func [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fam_app_cat E x)))
+  (y : τ (Obj Z))
+  : τ (Functor
+        (Fam_app_cat E y)
+        (Fam_app_cat
+          (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x)
+          y));
+
+rule @piapp0
+      (Op_cat $Z)
+      (@Functor_fam
         (Op_cat $Z)
-        (@Functor_fam
-          (Op_cat $Z)
-          $E
-          (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x))
-        (@homd_src_sec $Z $E $x $u)
-        $y)
-      $v
+        $E
+        (@fapp0 $Z (Fam_cat (Op_cat $Z)) (@HomPresheaf_fam $Z) $x))
+      (@homd_src_sec $Z $E $x $u)
+      $y
+  ↪ @homd_tgt_func $Z $E $x $u $y;
+
+rule fapp0 (@homd_tgt_func $Z $E $x $u $y) $v
   ↪ @homd_ $Z $E $x $u $y $v;
 
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
@@ -651,6 +685,21 @@ assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢
   Fam_app_cat (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x) y
     ≡ Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat;
 
+assert [Z : Cat] (E : τ (Fam Z)) ⊢
+  @Homd_source_fam Z E
+    ≡ @fapp0
+        (Functor_cat Z Cat_cat)
+        (Functor_cat Z Cat_cat)
+        (@op_val_func Z)
+        E;
+
+assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
+  @Homd_section_fam Z E x
+    ≡ @Functor_fam
+        (Op_cat Z)
+        E
+        (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x);
+
 assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_fam Z E) x
     ≡ Pi_cat
@@ -658,9 +707,26 @@ assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
           E
           (@fapp0 Z (Fam_cat (Op_cat Z)) (@HomPresheaf_fam Z) x));
 
+assert [Z : Cat] (E : τ (Fam Z)) (x : τ (Obj Z)) ⊢
+  @fapp0 Z Cat_cat (@Homd_target_fam Z E) x
+    ≡ Pi_cat (@Homd_section_fam Z E x);
+
 assert [Z : Cat] (E : τ (Fam Z)) ⊢
   @Homd_cat Z E
     ≡ @Transf_cat Z Cat_cat (@comp_cat_fapp0 Z Cat_cat Cat_cat op E) (@Homd_target_fam Z E);
+
+assert [Z : Cat] (E : τ (Fam Z))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fam_app_cat E x))) ⊢
+  fapp0 (@homd_src_func Z E x) u
+    ≡ @homd_src_sec Z E x u;
+
+assert [Z : Cat] (E : τ (Fam Z))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fam_app_cat E x)))
+  (v : τ (Obj (Fam_app_cat E y))) ⊢
+  fapp0 (@homd_tgt_func Z E x u y) v
+    ≡ @homd_ Z E x u y v;
 
 assert [K : Cat] (E : τ (Fam K))
   (x y : τ (Obj K))

@@ -20,7 +20,11 @@ The implemented architecture is:
 
 ```text
 homd_int E      : fully internal mixed-variance Homd object
+Homd_source_fam : named source family op o E
+Homd_section_fam: named inner section family
+homd_src_func   : component functor after projecting homd_int at x
 homd_src_sec    : source-fixed section after evaluating homd_int at x,u
+homd_tgt_func   : endpoint functor after projecting homd_src_sec at y
 homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 ```
 
@@ -36,31 +40,35 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   Keep the meaning of `sigma_hom_fam` by defining `homd_` directly as
   `hom_con v (fam_tapp0_func E x y u)`.
 
-- Use existing canonical family builders in projection rules instead of
-  introducing new defined helper heads:
+- Keep named abbreviations for the source and inner section families:
 
   ```text
-  fapp0 (op_val_func Z) E
-    -- op o E
+  Homd_source_fam E
+    := fapp0 (op_val_func Z) E
 
-  Functor_fam E (fapp0 (HomPresheaf_fam Z) x)
-    -- v |-> Functor(Hom_Z(x,v)^op, Cat)
+  Homd_section_fam E x
+    := Functor_fam E (fapp0 (HomPresheaf_fam Z) x)
   ```
 
-- Declare the source-fixed section head:
+- Do not use those named abbreviations as rewrite-rule LHS heads when the
+  canonical reduced head is different. In particular, LHSs use
+  `fapp0 (op_val_func Z) E` and `Functor_fam ...`.
+
+- Split the old wrapped projection/evaluation rules into progressive
+  stable-head steps:
 
   ```text
-  homd_src_sec E x u
-    : Obj (Pi_cat (Functor_fam E (fapp0 (HomPresheaf_fam Z) x)))
-  ```
+  tapp0_fapp0[fapp0 (op_val_func Z) E, Homd_target_fam E] x (homd_int E)
+    -> homd_src_func E x
 
-  It externalizes only the source data `x,u` and keeps `y,v` internal.
-
-- Fold the elementary projection of `homd_int` to `homd_src_sec`:
-
-  ```text
-  fapp0 (tapp0_fapp0[fapp0 (op_val_func Z) E, Homd_target_fam E] x (homd_int E)) u
+  fapp0 (homd_src_func E x) u
     -> homd_src_sec E x u
+
+  piapp0[Functor_fam E (fapp0 (HomPresheaf_fam Z) x)] (homd_src_sec E x u) y
+    -> homd_tgt_func E x u y
+
+  fapp0 (homd_tgt_func E x u y) v
+    -> homd_ E x u y v
   ```
 
 - Define `homd_` as the final endpoint shortcut:
@@ -69,13 +77,6 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
   homd_ E x u y v
     : Functor (Op_cat (Hom_cat Z x y)) Cat_cat
     := hom_con v (fam_tapp0_func E x y u)
-  ```
-
-- Fold section evaluation to `homd_`:
-
-  ```text
-  fapp0 (piapp0[Functor_fam E (fapp0 (HomPresheaf_fam Z) x)] (homd_src_sec E x u) y) v
-    -> homd_ E x u y v
   ```
 
 - Route Sigma homs through `homd_`:
@@ -91,38 +92,32 @@ homd_           : final endpoint alias for hom_con v (fam_tapp0_func E x y u)
 - Keep `fam_tapp0_func` as the transport-functor component of `homd_`.
 - Do not add a direct object-action rule for `homd_`; the endpoint beta
   should reduce via the definition above.
-- In rewrite-rule LHSs, follow the `emdash2.lp` hygiene rule: avoid spelling
-  out inferred/implicit arguments with compound expressions. The fully
-  minimal forms:
+- In rewrite-rule LHSs, follow the `emdash2.lp` hygiene rule. The fully
+  minimal projection forms:
 
   ```text
-  rule fapp0 (tapp0_fapp0 $x (@homd_int $Z $E)) $u -> ...
-  rule fapp0 (piapp0 (@homd_src_sec $Z $E $x $u) $y) $v -> ...
+  rule tapp0_fapp0 $x (@homd_int $Z $E) -> ...
+  rule piapp0 (@homd_src_sec $Z $E $x $u) $y -> ...
   ```
 
-  were too under-constrained for subject reduction. The accepted compromise
-  is to use the existing canonical heads that the natural terms reduce to:
-  `op_val_func` on the source side, and `Functor_fam` on the section side.
+  were still too under-constrained for subject reduction. The accepted
+  compromise is to make only the projection family arguments explicit, using
+  canonical heads rather than new abbreviation heads:
 
   ```text
-  rule fapp0
-        (@tapp0_fapp0 Z Cat_cat (fapp0 (op_val_func Z) E) (Homd_target_fam E) x (homd_int E))
-        u
-    -> homd_src_sec E x u
+  rule @tapp0_fapp0 Z Cat_cat (fapp0 (op_val_func Z) E) (Homd_target_fam E) x (homd_int E)
+    -> homd_src_func E x
 
-  rule fapp0
-        (@piapp0
-          (Op_cat Z)
-          (Functor_fam E (fapp0 (HomPresheaf_fam Z) x))
-          (homd_src_sec E x u)
-          y)
-        v
-    -> homd_ E x u y v
+  rule @piapp0 (Op_cat Z) (Functor_fam E (fapp0 (HomPresheaf_fam Z) x)) (homd_src_sec E x u) y
+    -> homd_tgt_func E x u y
   ```
 
-  This avoids fresh defined helper heads in LHSs. In particular,
-  `Homd_section_fam` was removed because it would not be the normal head of
-  the family argument.
+  The evaluation rules then have stable LHS heads:
+
+  ```text
+  rule fapp0 (homd_src_func E x) u -> homd_src_sec E x u
+  rule fapp0 (homd_tgt_func E x u y) v -> homd_ E x u y v
+  ```
 
 ## Validation
 
@@ -153,6 +148,8 @@ Hom_cat (Sigma_cat E) (Struct_sigma x u) (Struct_sigma y v)
 
 Both should pass without a direct endpoint beta rule for `homd_`.
 
-The raw projection fold assertions remain deferred: the rules are accepted
-and usable as rewrite infrastructure, but Lambdapi's assertion conversion is
-still brittle on these transfor/Pi projections.
+The raw projection fold assertions for `tapp0_fapp0` and `piapp0` remain
+deferred: the rules are accepted and appear in the decision trees, but
+Lambdapi's assertion conversion is still brittle on those projection terms.
+The stable-head evaluation assertions for `homd_src_func` and
+`homd_tgt_func` pass.
