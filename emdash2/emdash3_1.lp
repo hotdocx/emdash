@@ -18,6 +18,11 @@ flag "print_meta_args" on;
 /*
   Ported working conventions from emdash2.lp
 
+  This file is intentionally kernel-like: primitives stay small, and
+  computational behavior is made explicit by rewrite and unification rules.
+  Comments should name the categorical intent, but rules should stay close to
+  the stable heads actually used by Lambdapi.
+
   Surface reading for this directed-family draft:
     - `E[x]` means `Fam_app_cat E x`, for `E : Fam Z`.
     - `F[x]` means `fapp0 F x`, for an ordinary functor.
@@ -26,22 +31,82 @@ flag "print_meta_args" on;
       `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then the endpoint `homd_`.
 
   Rewrite hygiene:
+    - Lambdapi rule LHSs are matched and typechecked modulo conversion.
+      Over-specifying inferred/implicit arguments can force expensive
+      conversion problems, or make a rule fail to match after the inferred term
+      reduces to a canonical expression.
     - Keep inferred/implicit arguments on rule LHSs as `_` unless they are
       essential discriminators.
-    - This matters most when an implicit argument would be a reducible compound
-      term, such as a family built from `Functor_fam`, `HomPresheaf_fam`, or
-      `comp_cat_fapp0`.
-    - Prefer small projection rules with stable heads over a single large nested
+    - If there are multiple inferred arguments in a nested expression, check
+      all of them.  Omitting only one brittle argument is often not enough.
+    - Be especially cautious when an implicit argument contains a reducible
+      subterm such as `fapp0 F x`, `comp_cat_fapp0 F G`, `Functor_fam ...`,
+      `HomPresheaf_fam ...`, or `Homd_target_fam ...`.
+    - Prefer small projection rules with stable heads over one large nested
       redex.  The homd endpoint is deliberately split into `tapp0_fapp0`,
       `fapp0`, `piapp0`, and `fapp0` folds for this reason.
 
-  Normalization policy:
-    - Introduce stable heads for functor-level data that later rules need to
-      recognize (`comp_cat_fapp0`, `fib_cov_tapp0_fapp0`, `homd_src_func`,
-      `homd_src_sec`, `homd_tgt_func`).
-    - The final endpoint `homd_` is not an independent opaque table of beta
-      rules: it is the former sigma-hom endpoint formula
+  Stable heads and unification helpers:
+    - Stable heads are the intended normal forms for operations that later
+      rules need to recognize (`comp_cat_fapp0`, `fib_cov_tapp0_fapp0`,
+      `tapp0_fapp0`, `homd_src_func`, `homd_src_sec`, `homd_tgt_func`).
+    - Controlled `Obj`-inversion unification rules for chosen heads
+      (`Hom_cat`, `Functor_cat`, `Transf_cat`, `Fam_app_cat`) are elaboration
+      aids.  They are not semantic claims that `Obj` is globally injective.
+    - If a concrete constructor does not reduce early enough and needs one of
+      these unification helpers, that is usually a signal to add a computation
+      rule or introduce a smaller stable head.
+
+  Omega-friendly normalization:
+    - Prefer functor-level folds over capped pointwise rewrites when the result
+      must remain iterable to higher cells.  A rule whose RHS is just
+      `fapp0 (...) cell` computes one selected cell but can lose the functor
+      object that would support another hom-action.
+    - Use pointwise endpoint heads only when the current construction genuinely
+      needs an endpoint.  Here `homd_` is such an endpoint, and it is
+      definitionally the sigma-hom formula
       `hom_con v (fam_tapp0_func E x y u)`.
+
+  Naming conventions:
+    - Categories use uppercase letters (`A B C K Z`), with `Z` often the base.
+    - Directed Cat-valued families use `E D A B` depending on variance; fibre
+      objects are usually lowercase `u v`.
+    - Ordinary functors use `F G`; transfors use Greek names such as `ϵ η`.
+    - Projection/application heads follow the v2 pattern:
+      `fapp*` for ordinary functors, `tapp*` for transfors, `piapp0` for a
+      section of a `Pi_cat`, and `homd_*` for the dependent-hom projection
+      pipeline.
+*/
+
+/*
+  Maintenance inventory (v3.1)
+
+  For each Cat-valued constructor, decide which projections compute by rewrite
+  and which remain abstract.  Use this as a checklist before adding new rules.
+
+    - Core `Op_cat`, `Path_cat`, `Terminal_cat`, `Cat_cat`: object/hom and
+      basic identity/composition behavior compute by rewrite.
+    - `Functor_cat`: object encoding is abstract; homs reduce to `Transf_cat`.
+      Use `fapp0`, `fapp1_func`, `fapp1_fapp0`, and `tapp*` projections rather
+      than exposing a record of functor data.
+    - `Transf_cat`: object encoding is abstract; diagonal components compute
+      through `tapp0_fapp0`, including identity and vertical composition.
+    - `Fam_cat K`: an abbreviation for `Functor_cat K Cat_cat`; `Fam_app_cat`
+      is the stable surface reading of `E[k]`.
+    - `Pi_cat E`: currently represented as `Transf_cat (Terminal_fam K) E`;
+      `piapp0` is the projection head used by `homd_int`.
+    - `Sigma_cat E`: object decoding is Sigma-shaped; homs between total
+      objects route through the endpoint `homd_`.
+    - `Functor_fam` / `Functor_mix_fam_func`: mixed-variance family formation
+      is functorial in family arguments, not just an object-level recipe.
+    - `Edge_fam` / `HomPresheaf_fam`: internal representable/presheaf-family
+      classifiers.  Keep them as named constructor pipelines; do not inline
+      them into rewrite-rule LHSs.
+    - `Homd_*`: source/section/target family names are readability and
+      assertion handles.  Projection-rule LHSs should keep those inferred
+      source/target family arguments implicit.
+    - Generic Sigma/Pi weakening helpers are deferred until the directed-family
+      core has enough stable beta assertions.
 */
 
 // -------------------------------------------------------------------------------------------------
