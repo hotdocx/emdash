@@ -854,8 +854,8 @@ The Lambdapi development is designed to typecheck quickly; long typechecks are t
 
 The paper renderer is also exercised as a reproducible artifact:
 
-- `npm run validate:paper -w print` validates all embedded Arrowgram/Vega-Lite JSON blocks.
-- `npm run check:render -w print` runs validation + build + a headless browser console check (fails on KaTeX warnings and rendering errors).
+- `npm run validate:paper` validates all embedded Arrowgram/Vega-Lite JSON blocks.
+- `npm run check:render` runs validation + build + a headless browser console check (fails on KaTeX warnings and rendering errors).
 
 # 11. Limitations, Related Work, and Future Directions
 

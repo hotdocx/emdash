@@ -31,6 +31,8 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.1: `lambdapi check -w emdash3_1.lp`
 - Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
+- Print preview: `npm run dev`
+- Print render check: `npm run check:render`
 - Remove compilation artefacts: `make clean`
 
 ## SOP: Avoid hung typechecks (timeouts)

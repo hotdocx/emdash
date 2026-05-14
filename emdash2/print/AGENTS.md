@@ -20,12 +20,12 @@ The pipeline supports:
 
 # Quickstart
 
-From the repo root:
+From the `emdash2/` project folder:
 
 1. Install deps (once):
-   - `npm install -w print`
+   - `npm run install:print`
 2. Dev preview:
-   - `npm run dev -w print`
+   - `npm run dev`
    - open the shown URL and use the UI toggle for 1-column / 2-column
    - choose which paper to preview via query param:
      - default (archive/full): `/?paper=index.md` (or just `/`)
@@ -68,9 +68,9 @@ Browser console / end-to-end checks
 
 NPM scripts (most useful)
 
-- `npm run validate:paper -w print`: validate embedded JSON blocks
-- `npm run check:console -w print`: headless browser console check
-- `npm run check:render -w print`: validate + build + console check (recommended before sending a PDF)
+- `npm run validate:paper`: validate embedded JSON blocks
+- `npm run check:console`: headless browser console check
+- `npm run check:render`: validate + build + console check (recommended before sending a PDF)
 
 ## Adding more variants
 
@@ -154,7 +154,7 @@ This uses `.layout-two-column .fullwidth { column-span: all; }` in `print/src/pr
 
 Run:
 
-- `npm run validate:paper -w print`
+- `npm run validate:paper`
 
 If Arrowgram JSON fails schema validation:
 - check `style.body.name` is one of the allowed enums
@@ -169,7 +169,7 @@ If Arrowgram JSON fails schema validation:
 
 Run:
 
-- `npm run check:console -w print`
+- `npm run check:console`
 
 Typical causes:
 - invalid math commands
@@ -206,7 +206,7 @@ These are “infrastructure” edits made while authoring the current paper; the
 
 # Minimal checklist before sending a PDF
 
-- `npm run check:render -w print`
+- `npm run check:render`
 - Open preview, toggle 2-column, scroll for:
   - missing diagrams
   - “Diagram Error” boxes

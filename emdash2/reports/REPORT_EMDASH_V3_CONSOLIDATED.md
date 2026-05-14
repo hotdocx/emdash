@@ -104,6 +104,10 @@ The retired files are historical context only. Their `Catd`, `Catdd`,
 `PredPi_catd`, `homd_curry`, and `homd_eval_func` designs are superseded by
 the directed-family mixed-variance architecture above.
 
+The repository cleanup implementation plan and other stale project notes were
+also archived under `.scratchpad/backup/2026-05-15_project_docs_retirement/`
+after consolidation. They are not current v3 guidance.
+
 ## Validation SOP
 
 For v3.1 work, run:

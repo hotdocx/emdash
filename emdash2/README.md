@@ -11,6 +11,7 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
+- `print/`: project-local paper renderer and Arrowgram validation tools.
 
 ## Quick start
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
@@ -26,6 +27,15 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Tuning: `python3 scripts/watch_typecheck.py --interval 0.2` / `--no-clear`.
 - Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
 
+## Print pipeline
+Run these from this folder (`emdash2/`), independent of the parent repo workspace:
+
+- Install print deps: `npm run install:print`
+- Preview paper: `npm run dev`
+- Validate diagrams/charts: `npm run validate:paper`
+- Full print render check: `npm run check:render`
+
 ## Notes
 - Alternative/related approaches exist in ignored `.scratchpad/` backups. Retired v3 material is under `.scratchpad/backup/2026-05-15_v3_retirement/`.
+- Retired v2 surface-syntax notes, old email copy, and stale paper stubs are archived under `.scratchpad/backup/2026-05-15_project_docs_retirement/`.
 - If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.

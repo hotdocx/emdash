@@ -1,15 +1,14 @@
 {
-    "name": "emdash2",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "workspaces": [
-        "print",
-        "emdash1"
-    ],
-    "scripts": {
-        "dev": "npm run dev -w print",
-        "build": "npm run build --workspaces",
-        "test": "npm run test --workspaces"
-    }
+  "name": "emdash2",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix print run dev",
+    "build": "npm --prefix print run build",
+    "validate:paper": "npm --prefix print run validate:paper",
+    "check:console": "npm --prefix print run check:console",
+    "check:render": "npm --prefix print run check:render",
+    "install:print": "npm --prefix print install"
+  }
 }

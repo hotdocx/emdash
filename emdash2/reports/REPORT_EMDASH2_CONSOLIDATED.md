@@ -11,6 +11,11 @@ The old `PLAN_*.md` and emdash2 `REPORT_EMDASH_LOGIC_DEV*.md` files were
 development-time plans. Their useful lessons are consolidated here; the files
 themselves are retired into `.scratchpad/backup/2026-05-15_emdash2_reports_retirement/`.
 
+The older surface-syntax note `docs/SYNTAX_SURFACE.md` was v2-specific and
+pre-v3.1. It is retired into
+`.scratchpad/backup/2026-05-15_project_docs_retirement/SYNTAX_SURFACE.md`;
+recover it only when revisiting the v2 surface elaboration story.
+
 ## Stable Kernel Discipline
 
 - Keep primitives small and make computational behavior explicit through
