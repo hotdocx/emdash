@@ -1193,24 +1193,29 @@ of ordinary `hom_int` / `hom_`. Do not force the existing arity into those
 rules if doing so requires object-level shortcuts or loses the internal arrow
 action.
 
-Concrete candidate for the next implementation pass:
+Concrete candidate for the next implementation pass, corrected after review:
 
 ```text
 Op_funcd [K] [E D : Catd K] (FF : Functord E D)
   : Functord (Op_catd E) (Op_catd D)
 
-homd_int_funcd [K] [D E : Catd K] (FF : Functord D E)
+homd_int [K] [D E : Catd K] (FF : Functord D E)
   : Functord (Op_catd E) (Homd_target_catd D)
 ```
 
 Here `D` is the probe/source family and `E` is the target family of `FF`.
 This order mirrors ordinary `hom_int [A B] (F : Functor B A)`, where the
 hom object is contravariant in the target of the functor and remembers the
-probe/domain in the displayed target family. The existing one-family
-`homd_int E` should be treated as the identity specialization:
+probe/domain in the displayed target family.
+
+The final architecture should use one generalized `homd_int` symbol, not a
+permanent pair `homd_int` / `homd_int_funcd`. During incremental migration,
+the existing one-family `homd_int E` may be kept temporarily as an
+identity-specialization alias or compatibility head, but permanent rewrite
+rules should be written against the generalized `homd_int ... FF` shape:
 
 ```text
-homd_int_funcd (id_funcd E) --> homd_int E
+old/compat homd_int E  :=  generalized homd_int (id_funcd E)
 Op_funcd (id_funcd E) --> id_funcd (Op_catd E)
 ```
 
@@ -1222,16 +1227,16 @@ tdapp1_int_func_transfd [K] [E D : Catd K] [FF GG : Functord E D]
   : Functor
       (Transfd_cat FF GG)
       (Transfd_cat
-        (homd_int_funcd (id_funcd E))
+        (homd_int (id_funcd E))
         (comp_catd_fapp0
-          (homd_int_funcd GG)
+          (homd_int GG)
           (Op_funcd FF)))
 
 fdapp1_int_transfd [K] [E D : Catd K] (FF : Functord E D)
   : Transfd
-      (homd_int_funcd (id_funcd E))
+      (homd_int (id_funcd E))
       (comp_catd_fapp0
-        (homd_int_funcd FF)
+        (homd_int FF)
         (Op_funcd FF))
 
 fapp0 (tdapp1_int_func_transfd FF FF) (id (Functord_cat E D) FF)
@@ -1242,10 +1247,10 @@ Type alignment check for the target composite:
 
 ```text
 GG : Functord E D
-homd_int_funcd GG : Functord (Op_catd D) (Homd_target_catd E)
-Op_funcd FF       : Functord (Op_catd E) (Op_catd D)
+homd_int GG : Functord (Op_catd D) (Homd_target_catd E)
+Op_funcd FF : Functord (Op_catd E) (Op_catd D)
 
-comp_catd_fapp0 (homd_int_funcd GG) (Op_funcd FF)
+comp_catd_fapp0 (homd_int GG) (Op_funcd FF)
   : Functord (Op_catd E) (Homd_target_catd E)
 ```
 
@@ -1254,39 +1259,37 @@ hom-action packaging heads (`tdapp1_int_fapp1_*`, external `tdapp1_*`,
 external `fdapp1_*`) in the same pass unless a typechecking blocker proves
 that one is needed as a named projection.
 
-### Endpoint Projection Feasibility for `fdapp1_int_transfd`
+### Internal Endpoint Rule for `fapp1_int_transf (homd_ ...)`
 
-The tempting phrase "`fdapp1_int_transfd (... homd_ ...)` computes to
-`homd_semantic_func`" should not be implemented as a raw rewrite pattern on
-`fdapp1_int_transfd` itself. In the internal design, `fdapp1_int_transfd`
-takes a displayed functor `FF`; it does not take an endpoint functor
-`homd_ E x u y v` as an argument. The well-typed redex is therefore a
-projection/evaluation of the internal transfd at endpoint data.
+In addition to the less-internal endpoint rules for `fapp1_func` and
+`fapp1_fapp0`, there is an ordinary internal endpoint rule to consider:
+`fapp1_int_transf` applied to the endpoint functor `homd_ ...`.
 
-Schematic identity-endpoint rule:
+For the current one-family endpoint shape, the intended rule is simply:
 
 ```text
-endpoint_project
-  (fdapp1_int_transfd (id_funcd E))
-  x u y v
-  --> fapp1_int_transf
-        (homd_semantic_func E x u y v)
+fapp1_int_transf (homd_ E x u y v)
+  --> fapp1_int_transf (homd_semantic_func E x u y v)
 ```
 
-The exact spelling of `endpoint_project` is still to be chosen. It may be a
-cascade of the general projection heads (`tapp0_fapp0`, later displayed
-component projection, `piapp0`, and endpoint `fapp0`), or a small stable
-bridge head introduced only if Lambdapi needs a visible discriminator. In
-either case, the rule should mean:
+With explicit Lambdapi applications, the LHS should keep the source category
+implicit, just like the `fapp1_func (homd_ ...)` rule:
 
 ```text
-the endpoint projection of displayed hom-action
-  =
-the ordinary internal hom-action of the semantic endpoint functor
+rule @fapp1_int_transf _ Cat_cat (@homd_ $K $E $x $u $y $v)
+  ↪ @fapp1_int_transf
+        (Op_cat (Hom_cat $K $x $y))
+        Cat_cat
+        (@homd_semantic_func $K $E $x $u $y $v)
 ```
 
-At the less-internal component level, this should join with the rules already
-planned for `homd_`:
+After `homd_` is generalized with an explicit displayed functor argument, the
+identity specialization should have the same shape, with
+`homd_ (id_funcd E) x u y v` on the LHS. This rule is enough for the ordinary
+internal endpoint action: it says that the stable endpoint head behaves
+exactly as the semantic `hom_con` endpoint when used by `fapp1_int_transf`.
+
+It should join with the already-planned component endpoint rules:
 
 ```text
 fapp1_func (homd_ E x u y v) f g
@@ -1296,19 +1299,14 @@ fapp1_fapp0 (homd_ E x u y v) f g alpha
   --> fapp1_fapp0 (homd_semantic_func E x u y v) f g alpha
 ```
 
-For a non-identity displayed functor `FF : Functord E D`, the analogous
-endpoint projection should target the semantic endpoint for `D`, with endpoint
-objects obtained by the fibre action of `FF`. That will probably require a
-separate displayed-functor transport/naturality rule saying that applying
-`FF` after base transport in `E` joins with base transport in `D` after
-applying `FF`. For the identity `FF`, this prerequisite collapses to the
-existing identity folds, so the identity-endpoint rule above is the safer
-first sanity check.
+This is not yet the fully displayed `fdapp1_int_transfd` story. The displayed
+rule will be about the generalized `homd_int ... FF` layer and its component
+projections. For now, the endpoint `fapp1_int_transf` rule is the correct
+less-internal semantic joining rule.
 
-Rewrite-SOP constraint for this future rule: keep compound categories such as
+Rewrite-SOP constraint: keep compound categories such as
 `Op_cat (Hom_cat K x y)` out of implicit LHS slots. The LHS should
-discriminate on the explicit stable data (`fdapp1_int_transfd`, the endpoint
-projection head if one is introduced, and the endpoint variables), while the
+discriminate on the explicit stable functor argument `homd_ ...`, while the
 RHS may use the fully explicit semantic expression.
 
 ## How We Arrived Here
@@ -1523,11 +1521,10 @@ fib_cov_tapp0_fapp0
   `homd_int` and `homd_` carry a displayed functor argument. The likely v3
   generalized arity is schematic `FF : Obj (Functord_cat D E)`, with the
   current one-family forms kept as identity/ambient specializations if useful.
-- The concrete first pass should introduce the generalized internal head
-  `homd_int_funcd`, plus `Op_funcd`, and should fold identity specializations
-  back to the current one-family `homd_int` / `Op_catd` shapes. Endpoint
-  generalized `homd_` should remain design-only until the internal heads and
-  their endpoint projections are typechecked.
+- The concrete first pass should generalize the existing `homd_int` head
+  itself, plus introduce `Op_funcd`. If the current one-family `homd_int E`
+  is kept during migration, it should be temporary compatibility structure,
+  not a second permanent head used by new rewrite-rule LHSs.
 - Keep `homd_int` / `homd_` as primitive stable heads only if full internal
   action rules are added. The endpoint-level minimum includes object and arrow
   action: `fapp0`, `fapp1_func`, and `fapp1_fapp0` should compute as if the
@@ -1550,7 +1547,7 @@ adapted v3 tapp1_int_func_transf / fapp1_int_transf
 adapted v3 tdapp1_int_func_transfd / fdapp1_int_transfd
 ```
 
-- For the displayed pair, use the concrete `homd_int_funcd` / `Op_funcd`
+- For the displayed pair, use the concrete generalized `homd_int` / `Op_funcd`
   target shape described in the open-arity section before adding any
   less-internal endpoint packaging.
 - Prioritize the fully-internal heads. The v2 pattern is:
