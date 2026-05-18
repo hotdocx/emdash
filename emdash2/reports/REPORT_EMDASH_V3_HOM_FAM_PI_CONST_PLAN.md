@@ -1141,6 +1141,95 @@ push those endpoint parameters inside, analogously to the effort that produced
 more-internal `fib_cov` package is a TODO and should not block the present
 endpoint semantic cleanup.
 
+The most-internal feasible shape is not the external package
+
+```text
+fib_cov_transf E x u : Transf (hom_ (id_func Z) x) E
+```
+
+but rather a new internal object whose projections recover that package.
+
+The key target family should be:
+
+```text
+FibCov_target_catd [Z] (E : Catd Z)
+  := hom_con
+       (Catd_cat Z)
+       E
+       (Op_cat Z)
+       (hom_int Z Z (id_func Z))
+```
+
+Why this works:
+
+```text
+FibCov_target_catd E at x
+  ~= Hom_{Catd_cat Z}(hom_ (id_Z) x, E)
+  ~= Transf_cat (hom_ (id_Z) x) E
+```
+
+Important detail: do not use `Edge_catd_fam` here, because current
+`Edge_catd_fam` is pointwise-op:
+
+```text
+x,y |-> Op_cat (Hom_cat Z x y)
+```
+
+For covariant fibre transport we want the raw representable
+`hom_ (id_func Z) x`, so the right ingredient is
+`hom_int Z Z (id_func Z)`.
+
+Then the most-internal package can mirror `Homd`:
+
+```text
+FibCov_cat [Z] (E : Catd Z)
+  := Transf_cat Z Cat_cat E (FibCov_target_catd E)
+
+FibCov [Z] (E : Catd Z)
+  := Obj (FibCov_cat E)
+
+fib_cov_int [Z] (E : Catd Z) : FibCov E
+```
+
+Projection cascade:
+
+```text
+tapp0_fapp0 x (fib_cov_int E)
+  : Functor (E[x]) (Transf_cat (hom_ (id_func Z) x) E)
+
+fapp0 (tapp0_fapp0 x (fib_cov_int E)) u
+  : Transf_cat (hom_ (id_func Z) x) E
+```
+
+So the old external head becomes a projection normal form:
+
+```text
+fib_cov_transf E x u
+  : Transf (hom_ (id_func Z) x) E
+```
+
+with rules shaped like:
+
+```text
+rule @tapp0_fapp0 $Z Cat_cat _ _ $x (@fib_cov_int $Z $E)
+  ↪ @fib_cov_src_func $Z $E $x
+
+rule fapp0 (@fib_cov_src_func $Z $E $x) $u
+  ↪ @fib_cov_transf $Z $E $x $u
+```
+
+Then the component rule remains:
+
+```text
+rule @tapp0_fapp0 $Z Cat_cat _ _ $y
+      (@fib_cov_transf $Z $E $x $u)
+  ↪ @fib_cov_tapp0_func $Z $E $x $y $u
+```
+
+This is on par with `homd_int`: it internalizes `x,u` into the source family
+of a transfor. The variance also looks correct: source is `E`, not
+`Op_catd E`, because transport is covariant in the fibre object `u`.
+
 With a generalized displayed functor argument `FF : Functord D E`, the
 endpoint semantic helper should be read as:
 
