@@ -1108,6 +1108,63 @@ foundation should be a future `fib_cov_transf`-based formulation. Keeping the
 `homd_` object rule as a semantic delegation prevents the endpoint rule from
 depending directly on the provisional transport helper.
 
+The immediate `fib_cov_transf` shape, following v2, is expected to be:
+
+```text
+fib_cov_transf [Z] (E : Catd Z)
+  (x : Obj Z)
+  (u : Obj (Fibre_cat E x))
+  : Transf
+      (hom_ (id_func Z) x)
+      E
+```
+
+and the component stable head should be the `tapp0_fapp0` projection:
+
+```text
+tapp0_fapp0 y (fib_cov_transf E x u)
+  --> fib_cov_tapp0_func E x y u
+```
+
+with Lambdapi LHSs keeping the inferred source/target functors implicit:
+
+```text
+rule @tapp0_fapp0 $Z Cat_cat _ _ $y
+      (@fib_cov_transf $Z $E $x $u)
+  ↪ @fib_cov_tapp0_func $Z $E $x $y $u
+```
+
+This is still not the most-internal transport package. The variables `x` and
+`u` remain external Lambdapi arguments. A later, more-internal version should
+push those endpoint parameters inside, analogously to the effort that produced
+`homd_int`, but with the argument order rearranged for covariance/action. That
+more-internal `fib_cov` package is a TODO and should not block the present
+endpoint semantic cleanup.
+
+With a generalized displayed functor argument `FF : Functord D E`, the
+endpoint semantic helper should be read as:
+
+```text
+homd_semantic_func FF x u y v
+  := hom_con
+       (Fibre_cat E y)
+       (FF_y v)
+       (Hom_cat Z x y)
+       (fib_cov_tapp0_func E x y u)
+```
+
+where the endpoint-level fibre action is:
+
+```text
+FF_y v :=
+  fapp0 (@tapp0_fapp0 Z Cat_cat D E y FF) v
+```
+
+This `FF_y v` projection is endpoint-level, not the fully-internal displayed
+action. That is acceptable for `homd_semantic_func`, which is itself an
+endpoint semantic helper. The fully-internal action remains the job of
+generalized `homd_int`, `tdapp1_int_func_transfd`, and `fdapp1_int_transfd`.
+
 The object rule must still be accompanied, or justified by, the corresponding
 internal arrow-level action. Schematic endpoint-level joining rules are:
 
@@ -1526,6 +1583,10 @@ fib_cov_tapp0_fapp0
   from v2 and may be based on the wrong primitive. New `homd_` rules should
   delegate through `homd_semantic_func` so the later replacement by
   `fib_cov_transf` is localized.
+  The immediate `fib_cov_transf E x u` transfor still has external `x,u`
+  parameters. Record it as an intermediate package only; the most-internal
+  version should eventually push `x,u` inside, in the same spirit as
+  `homd_int`.
 
 - Port `homd_int` and `homd_` to the new `Catd` vocabulary as a pair.
 - Before committing to the current v3 arity, review the v2 pattern where both
