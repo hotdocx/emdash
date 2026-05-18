@@ -363,8 +363,9 @@ fib_cov_tapp0_func
 fib_cov_tapp0_fapp0
 
 Pi_cat
-section-action folds (`piapp1*`) only if needed, derived from the
-section-as-`Functord` presentation
+full section-action folds (`piapp1*`) only if needed for normalization;
+these are not ordinary `tapp1_fapp0` aliases, but derived/specialized folds
+of the section-as-`Functord` dependent action
 
 homd_
 homd_int / related internal homd projections
@@ -687,7 +688,10 @@ piapp1_fapp0 F f
 ```
 
 in the constant-family case, plus functor-level variants if the final
-section-action design supports them.
+section-action design supports them. This line is the degenerate
+constant-family collapse of the full section-action fold. It should not be
+used to infer that the general `piapp1*` operation is merely ordinary
+`tapp*`/`fapp*` notation.
 
 ### General Pi Projection Through `homd_`
 
@@ -720,6 +724,50 @@ which reduces morally to:
 ```text
 Hom_cat (E[y]) (E(f)(s[x])) (s[y])
 ```
+
+There are two operations one might be tempted to call `piapp1`, and they must
+be kept separate.
+
+The weak off-diagonal object obtained from the ordinary transfor projection is
+definable from `tapp1_fapp0` and terminal-object evaluation:
+
+```text
+piapp1_obj s f
+  := fapp0
+       (@tapp1_fapp0 K Cat_cat (Terminal_catd K) E x y s f)
+       Terminal_obj
+  : Obj (fapp0 E y)
+```
+
+This uses only that `Pi_cat E` is a `Transf_cat (Terminal_catd K) E`
+instance. It produces an object in the target fibre. It does not produce the
+dependent hom object:
+
+```text
+Hom_cat (E[y]) (E(f)(s[x])) (s[y])
+```
+
+The full section-action component is the homd-valued object:
+
+```text
+piapp1_fapp0 s f
+  : Obj (fapp0 (homd_ E x (piapp0 s x) y (piapp0 s y)) f)
+```
+
+This is not a simple alias for `tapp1_fapp0` or `fapp1_fapp0`. Conceptually it
+is the specialization of the full dependent action of the section-as-
+`Functord`:
+
+```text
+s : Obj (Functord_cat (Terminal_catd K) E)
+```
+
+applied to the unique terminal dependent hom over the base arrow `f`. In the
+same sense as full `fdapp1_*`, it sees base motion and fibre motion together.
+If rewrite rules need this component as a matchable normal form, it should be
+a stable derived fold/specialized projection whose ancestor is the dependent
+action layer (`fdapp1_*`, or the corresponding internal `tdapp1_*` identity
+fold once available), not ordinary `tapp*`/`fapp*` alone.
 
 Thus the next Pi projection layer should be shaped around `homd_`, for
 example:
@@ -852,7 +900,7 @@ Hom_catd
 ```
 
 but its final endpoint role remains the same. It supplies the dependent hom
-over base arrows used by `Sigma_cat`, the eventual section-action folds,
+over base arrows used by `Sigma_cat`, the eventual full section-action folds,
 `fdapp1_*`, and `tdapp1_*`.
 
 ## How We Arrived Here
@@ -1016,10 +1064,12 @@ piapp0_func E k
        (@tapp0_func K Cat_cat (Terminal_catd K) E k)
 ```
 
-- Design the section-action layer through `homd_`. It may expose `piapp1*`
-  notation or stable folds if needed for normalization, but it should not
-  duplicate an operation already supplied by the section-as-`Functord`
-  presentation.
+- Design the section-action layer through `homd_`. The weak off-diagonal
+  object projection is definable from `tapp1_fapp0` plus `Terminal_obj` if it
+  is useful as notation. The full homd-valued `piapp1*` component is different:
+  if rewrite rules need it as a normal form, expose it as a stable
+  derived/specialized fold from the section-as-`Functord` dependent action,
+  not as an ordinary `tapp*`/`fapp*` alias.
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
@@ -1120,10 +1170,12 @@ Hom_catd
 - Can `Functor_cat` and `Transf_cat` remain marked `injective` after the
   special contractions, or should injectivity be represented only through
   controlled unification helpers?
-- What is the exact functor-level shape for the section-action layer beyond
-  the capped projection into `homd_`, and should any `piapp1*` notation be a
-  stable fold or only a definition from the section-as-`Functord`
-  presentation?
+- What is the exact functor-level shape for the full homd-valued
+  section-action layer beyond the capped projection into `homd_`: a direct
+  `piapp1*` stable fold, or a displayed specialization of `fdapp1_*` /
+  identity-specialized `tdapp1_*`? The weak off-diagonal object obtained from
+  ordinary `tapp1_fapp0` is already definable and should not be confused with
+  this question.
 - Should `Hom_cat (Pi_cat E) s t` reduce directly to `Transfd_cat s t`, or
   should that be reached through a more explicit section-as-`Functord`
   coercion/fold?
