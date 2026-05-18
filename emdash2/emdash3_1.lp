@@ -734,8 +734,8 @@ symbol homd_src_func [Z : Cat] (E : τ (Catd Z))
 rule @tapp0_fapp0
       $Z
       Cat_cat
-      (@Homd_source_catd $Z $E)
-      (@Homd_target_catd $Z $E)
+      _
+      _
       $x
       (@homd_int $Z $E)
   ↪ @homd_src_func $Z $E $x;
@@ -892,10 +892,9 @@ assert [Z : Cat] (E : τ (Catd Z)) ⊢
         (@Homd_target_catd Z E);
 
 /*
-  TODO(v3 Catd spine): this projection rule is accepted above, but the old
-  assertion is brittle after `Transf_cat K Cat_cat` contracts through
-  `Functord_cat`. Restore a focused assertion after Pi/Functord joins are
-  promoted in Phase 4.
+  TODO(v3 Catd spine): this projection rule is accepted above, after correction. Now TODO: review the
+  old comment "Restore a focused assertion after Pi/Functord joins are
+  promoted in Phase 4."*/
 
   assert [Z : Cat] (E : τ (Catd Z))
     (x : τ (Obj Z)) ⊢
@@ -907,7 +906,7 @@ assert [Z : Cat] (E : τ (Catd Z)) ⊢
       x
       (@homd_int Z E)
       ≡ @homd_src_func Z E x;
-*/
+
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
