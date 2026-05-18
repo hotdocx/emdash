@@ -75,9 +75,10 @@ This SOP also applies to `fdapp0_*` and `tdapp0_*`: if they are definitions
 from ordinary `tapp0`/`fapp1` operations, they should not appear in kernel
 rewrite LHSs as if they were primitive constructors.
 
-## Current v3.1 Facts To Be Replaced
+## Pre-Migration v3.1 Facts Already Replaced
 
-The current `emdash3_1.lp` still uses the earlier family vocabulary:
+At the time this plan was first written, `emdash3_1.lp` still used the earlier
+family vocabulary:
 
 ```text
 Fam_cat K := Functor_cat K Cat_cat
@@ -87,8 +88,10 @@ Const_fam K A := Obj_func A . Terminal_func K
 Pi_cat E := Transf_cat (Terminal_fam K) E
 ```
 
-These definitions are semantically suggestive but operationally too
-reducible for the intended final kernel:
+The live `emdash3_1.lp` has since migrated this layer to the `Catd`
+vocabulary. The following notes remain as rationale for why the old `Fam_*`
+shape should not be reintroduced. These definitions were semantically
+suggestive but operationally too reducible for the intended final kernel:
 
 - `Fam_cat` is currently an alias, not the canonical family category head.
 - `Const_fam` is currently a composite, not a matchable constructor.
@@ -104,10 +107,10 @@ reducible for the intended final kernel:
 - `Functor_cat` and `Transf_cat` are currently declared `constant`, which
   blocks the intended special-case contractions.
 
-Those assumptions are allowed to change. Finding the final architecture is
-allowed to relax/remove `constant` qualifiers and replace them with
-rewrite-capable symbols, likely still with controlled injectivity and
-unification helpers where appropriate.
+Those assumptions were allowed to change, and the current implementation has
+already relaxed the relevant `constant` qualifiers and replaced the public
+family layer with rewrite-capable `Catd` heads plus controlled unification
+helpers.
 
 ## Lessons From v2
 
@@ -376,15 +379,21 @@ fib_cov_tapp0_func
 fib_cov_tapp0_fapp0
 
 Pi_cat
-piapp1_func / piapp1_fapp0 as stable terminal-specialization heads for full
-section action; these are not ordinary `tapp1_fapp0` aliases, but canonical
-fold targets for the section-as-`Functord` dependent action
+piapp1_func / piapp1_fapp0, or a close variation, as later
+terminal-specialization heads for full section action; these are not ordinary
+`tapp1_fapp0` aliases, and their exact shape should be settled after the
+internal dependent-action layer
 
 homd_
 homd_int / related internal homd projections
 
-fdapp1_*
-tdapp1_*
+tapp1_int_func_transf
+fapp1_int_transf
+tdapp1_int_func_transfd
+fdapp1_int_transfd
+
+eventual fdapp1_* / tdapp1_* surface heads or folds, derived after the
+internal layer is settled
 ```
 
 The `fib_cov_*` heads remain necessary because they express a reordered,
@@ -1205,11 +1214,11 @@ tdapp0_func:
 fibrewise fdapp1:
   alias of fapp1_func applied to the component functor
 
-full fdapp1_*:
-  stable dependent hom-action head
+full internal fdapp1:
+  fdapp1_int_transfd first; surface fdapp1_* later if needed
 
-full tdapp1_*:
-  stable dependent transformation-action head
+full internal tdapp1:
+  tdapp1_int_func_transfd first; surface tdapp1_* later if needed
 ```
 
 The contrast is important:
@@ -1338,11 +1347,11 @@ piapp0_func E k
 - Design the section-action layer through `homd_`. The weak off-diagonal
   object projection is definable from `tapp1_fapp0` plus `Terminal_obj` if it
   is useful as notation. The full homd-valued `piapp1*` component is different:
-  implement it as stable primitive heads `piapp1_func` and, if needed,
-  `piapp1_fapp0`, alongside the `fdapp1_*` / `tdapp1_*` layer. The packaged
-  fold from the terminal specialization of `fdapp1_*` should target
-  `piapp1_func`; `piapp1_fapp0` is then its section evaluation at a base
-  arrow. This is not an ordinary `tapp*`/`fapp*` alias.
+  implement `piapp1_func`, or a close variation, only after the internal
+  dependent-action layer is settled. The packaged fold should come from the
+  terminal specialization of the internal/derived dependent action; any
+  `piapp1_fapp0` is then section evaluation at a base arrow. This is not an
+  ordinary `tapp*`/`fapp*` alias.
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
@@ -1480,9 +1489,10 @@ Hom_catd
   special contractions, or should injectivity be represented only through
   controlled unification helpers?
 - What is the exact functor-level shape for the full homd-valued
-  section-action fold from `fdapp1_*` to `piapp1_func`, especially if the final
-  `fdapp1_*` signature keeps the target point `(y, piapp0 s y)` internal and
-  therefore needs an extra projection before the terminal-specialization fold?
+  section-action fold from the internal/derived dependent action to
+  `piapp1_func`, especially if a later `fdapp1_*` surface signature keeps the
+  target point `(y, piapp0 s y)` internal and therefore needs an extra
+  projection before the terminal-specialization fold?
   The weak off-diagonal object obtained from ordinary `tapp1_fapp0` is already
   definable and should not be confused with this question.
 - Should `Hom_cat (Pi_cat E) s t` reduce directly to `Transfd_cat s t`, or

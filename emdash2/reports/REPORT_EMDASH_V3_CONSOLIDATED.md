@@ -10,36 +10,36 @@ in `AGENTS.md`.
 
 The design goal is a Lambdapi specification for functorial programming over
 omega-categories, using stable rewrite heads and unification helpers to make
-normalization computational. The current checked v3.1 file still uses the
-`Fam_*` directed-family vocabulary, but the agreed next architecture migrates
-that vocabulary to canonical `Catd` names with the corrected semantics
+normalization computational. The current checked v3.1 file uses the canonical
+`Catd` directed-family vocabulary with the corrected semantics
 `Catd_cat K ~= Functor_cat K Cat_cat`.
 
 ## Current v3.1 Baseline
 
-- In the current file, directed families are ordinary functors into `Cat_cat`:
-  `Fam_cat K := Functor_cat K Cat_cat`, with `Fam_app_cat E k` as the
-  surface reading of `E[k]`.
+- In the current file, directed families are ordinary functors into `Cat_cat`
+  normalized through `Catd_cat K`, with `Fibre_cat E k` as the surface reading
+  of `E[k]`.
 - `Sigma_cat E` is the directed total category. Its object layer is
   `Sigma k : Obj K, Obj (E[k])`, and its hom-category is routed through the
   final dependent-hom endpoint `homd_`.
-- `Functor_fam A B` internalizes the mixed-variance pointwise functor family:
-  from `A : Fam (Op_cat K)` and `B : Fam K` it builds a family over `K` whose
+- `Functor_catd A B` internalizes the mixed-variance pointwise functor family:
+  from `A : Catd (Op_cat K)` and `B : Catd K` it builds a family over `K` whose
   fibre is `Functor_cat (A[k]) (B[k])`.
-- `Functor_mix_fam_func` packages this mixed-variance constructor as a functor
+- `Functor_catd_mix_func` packages this mixed-variance constructor as a functor
   so it is functorial in family arguments, not merely an object-level recipe.
-- `Edge_fam Z : Functor (Op_cat Z) (Fam_cat Z)` is the internal edge family:
+- `Edge_catd_fam Z : Functor (Op_cat Z) (Catd_cat Z)` is the internal edge family:
   at `x,y` it computes to `Op_cat (Hom_cat Z x y)`.
-- `Presheaf_fam_func` and `HomPresheaf_fam` build the family
+- `Presheaf_catd_func` and `HomPresheaf_catd` build the family
   `x |-> y |-> (Hom_Z(x,y)^op -> Cat)` using only internal functorial
   constructors.
-- `Homd_source_fam`, `Homd_section_fam`, and `Homd_target_fam` name the
+- `Homd_source_catd`, `Homd_section_catd`, and `Homd_target_catd` name the
   source/target family expressions for the fully internal mixed-variance
   object `homd_int E : Homd E`.
 - Endpoint projection is split into stable heads:
   `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then `homd_`.
-- The final endpoint is definitionally the former sigma-hom formula:
-  `homd_ E x u y v := hom_con v (fam_tapp0_func E x y u)`.
+- The final endpoint `homd_` is now a primitive stable head. Its object action
+  computes to the former sigma-hom formula, and its functor action delegates to
+  the semantic `hom_con` endpoint.
 
 ## Rewrite and Naming Discipline
 
@@ -47,7 +47,7 @@ that vocabulary to canonical `Catd` names with the corrected semantics
   current endpoint names. The current endpoint name is `homd_`.
 - Avoid reducible compound expressions in inferred implicit positions of
   rewrite-rule LHSs. Use `_` for source/target family arguments when the
-  actual inferred term contains `Functor_fam`, `HomPresheaf_fam`,
+  actual inferred term contains `Functor_catd`, `HomPresheaf_catd`,
   `op_val_func`, or `comp_cat_fapp0`.
 - Keep small stable-head projection steps instead of wrapping multiple
   projections in a single rewrite rule.
@@ -55,7 +55,7 @@ that vocabulary to canonical `Catd` names with the corrected semantics
   let rules such as `@tapp0_fapp0 ... _ _ ...` typecheck without forcing
   brittle family expressions into the LHS.
 - Treat unification helpers for `Hom_cat`, `Functor_cat`, `Transf_cat`,
-  `Fam`, and `Fam_app_cat` as controlled inference helpers, not broad semantic
+  `Catd`, and `Fibre_cat` as controlled inference helpers, not broad semantic
   claims about every possible category constructor.
 
 ## Deferred Backlog
@@ -67,13 +67,13 @@ that vocabulary to canonical `Catd` names with the corrected semantics
 
   ```text
   sigma_intro_transf E
-    : Transf E (Const_fam K (Sigma_cat E))
+    : Transf E (Const_catd K (Sigma_cat E))
   pi_eval_transf E
-    : Transf (Const_fam K (Pi_cat E)) E
+    : Transf (Const_catd K (Pi_cat E)) E
   const_section_func K A
-    : A -> Pi_cat (Const_fam K A)
+    : A -> Pi_cat (Const_catd K A)
   section_pullback_func F E
-    : Pi_cat E -> Pi_cat (Pullback_fam E F)
+    : Pi_cat E -> Pi_cat (Pullback_catd E F)
   ```
 
 - These helpers should be reintroduced only after the directed-family core is
@@ -109,12 +109,14 @@ The next implementation pass is governed by
 - Keep `Functord_cat` as the canonical category of natural/displayed functors
   between directed Cat-valued families, and `Transfd_cat` as the canonical
   category of displayed transfors/modifications.
-- Keep `fdapp1_*` and `tdapp1_*` as genuine dependent stable heads. Fibrewise
-  `fdapp1` notation can be derived, but the full dependent action over
-  `homd_` cannot be replaced by ordinary fibrewise `fapp1_func`.
+- Prioritize the internal dependent-action heads
+  `tapp1_int_func_transf`, `fapp1_int_transf`, `tdapp1_int_func_transfd`, and
+  `fdapp1_int_transfd`. Fibrewise `fdapp1` notation can be derived, but the
+  full dependent action over `homd_` cannot be replaced by ordinary fibrewise
+  `fapp1_func`.
 - Make `Pi_cat` a stable section category, with `piapp0` as derived
-  section-evaluation notation and `piapp1_func` / `piapp1_fapp0` as stable
-  terminal-specialization heads for full section action.
+  section-evaluation notation and `piapp1_func` / `piapp1_fapp0`, or close
+  variants, as later terminal-specialization heads for full section action.
 - Add terminal `homd_` normal forms needed by `piapp1_func`, especially:
 
   ```text

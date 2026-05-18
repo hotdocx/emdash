@@ -71,7 +71,8 @@ flag "print_meta_args" on;
     - Use pointwise endpoint heads only when the current construction genuinely
       needs an endpoint.  Here `homd_` is such an endpoint: its object-action
       computes to the sigma-hom formula
-      `Hom(E[y])(fib_cov_tapp0_fapp0 E f u, v)`.
+      `Hom(E[y])(fib_cov_tapp0_fapp0 E f u, v)`, while its functor action
+      delegates to the semantic `hom_con` endpoint.
 
   Naming conventions:
     - Categories use uppercase letters (`A B C K Z`), with `Z` often the base.
@@ -113,6 +114,9 @@ flag "print_meta_args" on;
     - `Homd_*`: source/section/target family names are readability and
       assertion handles.  Projection-rule LHSs should keep those inferred
       source/target family arguments implicit.
+    - `tapp1_int_func_transf` / `fapp1_int_transf`: ordinary internal
+      hom-action heads ported from v2.  The displayed analogues are deferred
+      until the generalized `homd_int` arity is settled.
     - Generic Sigma/Pi weakening helpers are deferred until the directed-family
       core has enough stable beta assertions.
 */
@@ -384,6 +388,11 @@ symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
 rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
   ↪ Hom_cat $A $W (@fapp0 $B $A $F $y);
 
+// Ordinary hom-action computes by postcomposition:
+// ((Hom_A(W,F-))_1 f)_0 g ↪ (F f) ∘ g.
+rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
+  ↪ comp_fapp0 (fapp1_fapp0 $F $f) $g;
+
 symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat B) Cat_cat);
 rule @hom_con $A $W $B $F
@@ -408,6 +417,12 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj (Op_cat A))) ⊢
 assert [A B : Cat] (F : τ (Functor B A)) (X : τ (Obj (Op_cat A))) (Y : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@fapp0 (Op_cat A) (Catd_cat B) (@hom_int A B F) X) Y
     ≡ Hom_cat A X (fapp0 F Y);
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (f : τ (Hom B X Y)) (g : τ (Hom A W (fapp0 F X))) ⊢
+  fapp0 (@fapp1_fapp0 B Cat_cat (@hom_ A B F W) X Y f) g
+    ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
+        (fapp0 (@fapp1_func B A F X Y) f) g;
 
 // -------------------------------------------------------------------------------------------------
 // 4. Encoded Sigma types for object layers
@@ -481,6 +496,44 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Obj (Transf_cat F G))),
   Π (f : τ (Hom A X Y)),
   τ (Hom B (fapp0 F X) (fapp0 G Y));
+
+/*
+  More-internal ordinary hom-action.
+
+  This ports the settled v2 core without also committing to the later
+  hom-action packaging heads.  The functor sends a transfor ϵ : F ⇒ G to the
+  internalized action
+
+    hom_int(id_A) ⇒ hom_int(G) ∘ F^op.
+*/
+symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
+  τ (Functor
+      (Transf_cat F G)
+      (Transf_cat
+        (@hom_int A A (@id_func A))
+        (@comp_cat_fapp0
+          (Op_cat A)
+          (Op_cat B)
+          (Catd_cat A)
+          (@hom_int B A G)
+          (@Op_func A B F))));
+
+symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
+  τ (Transf
+      (@hom_int A A (@id_func A))
+      (@comp_cat_fapp0
+        (Op_cat A)
+        (Op_cat B)
+        (Catd_cat A)
+        (@hom_int B A F)
+        (@Op_func A B F)));
+
+rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
+  ↪ @fapp1_int_transf $A $B $F;
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  fapp0 (@tapp1_int_func_transf A B F F) (id (Functor_cat A B) F)
+    ≡ @fapp1_int_transf A B F;
 
 // -------------------------------------------------------------------------------------------------
 // 6. Directed Cat-valued family constructors
@@ -759,6 +812,20 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
      (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
+// Semantic endpoint used by the primitive `homd_` action rules. This is kept
+// off rewrite LHSs; it records the former definitional sigma-hom endpoint.
+symbol homd_semantic_func [Z : Cat] (E : τ (Catd Z))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj Z))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @hom_con
+     (Fibre_cat E y)
+     v
+     (Hom_cat Z x y)
+     (@fib_cov_tapp0_func Z E x y u);
+
 // Component functor after projecting the fully internal homd object at x.
 symbol homd_src_func [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
@@ -804,6 +871,26 @@ rule @fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f
       (Fibre_cat $E $y)
       (@fib_cov_tapp0_fapp0 $K $E $x $y $f $u)
       $v;
+
+// The source category is explicit here, as in the object-action rule above:
+// Lambdapi needs it for subject reduction, and it is the stable Op/Hom spine,
+// not a defined family alias.
+rule @fapp1_func (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f $g
+  ↪ @fapp1_func
+      (Op_cat (Hom_cat $K $x $y))
+      Cat_cat
+      (@homd_semantic_func $K $E $x $u $y $v)
+      $f
+      $g;
+
+rule @fapp1_fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f $g $alpha
+  ↪ @fapp1_fapp0
+      (Op_cat (Hom_cat $K $x $y))
+      Cat_cat
+      (@homd_semantic_func $K $E $x $u $y $v)
+      $f
+      $g
+      $alpha;
 
 rule @homd_ $K (@Const_catd $K $A) $x $u $y $v
   ↪ @Const_catd (Op_cat (Hom_cat $K $x $y)) (Hom_cat $A $u $v);
@@ -1026,12 +1113,90 @@ assert [K : Cat] (A : Cat)
   @homd_ K (Const_catd K A) x u y v
     ≡ @Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v);
 
+assert [K : Cat] (A : Cat)
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (Const_catd K A) x)))
+  (v : τ (Obj (Fibre_cat (Const_catd K A) y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
+  @fapp1_func
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K (Const_catd K A) x u y v)
+    f
+    g
+    ≡ @fapp1_func
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v))
+        f
+        g;
+
+assert [K : Cat] (A : Cat)
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (Const_catd K A) x)))
+  (v : τ (Obj (Fibre_cat (Const_catd K A) y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y))))
+  (alpha : τ (Hom (Op_cat (Hom_cat K x y)) f g)) ⊢
+  @fapp1_fapp0
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K (Const_catd K A) x u y v)
+    f
+    g
+    alpha
+    ≡ @fapp1_fapp0
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v))
+        f
+        g
+        alpha;
+
 assert [K : Cat]
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Terminal_catd K) x)))
   (v : τ (Obj (Fibre_cat (Terminal_catd K) y))) ⊢
   @homd_ K (Terminal_catd K) x u y v
     ≡ @Terminal_catd (Op_cat (Hom_cat K x y));
+
+assert [K : Cat]
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (Terminal_catd K) x)))
+  (v : τ (Obj (Fibre_cat (Terminal_catd K) y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
+  @fapp1_func
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K (Terminal_catd K) x u y v)
+    f
+    g
+    ≡ @fapp1_func
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@Terminal_catd (Op_cat (Hom_cat K x y)))
+        f
+        g;
+
+assert [K : Cat]
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (Terminal_catd K) x)))
+  (v : τ (Obj (Fibre_cat (Terminal_catd K) y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y))))
+  (alpha : τ (Hom (Op_cat (Hom_cat K x y)) f g)) ⊢
+  @fapp1_fapp0
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K (Terminal_catd K) x u y v)
+    f
+    g
+    alpha
+    ≡ @fapp1_fapp0
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@Terminal_catd (Op_cat (Hom_cat K x y)))
+        f
+        g
+        alpha;
 
 assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
@@ -1048,11 +1213,62 @@ assert [K : Cat] (E : τ (Catd K))
   (v : τ (Obj (Fibre_cat E y)))
   (f : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
   @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
+    (@homd_semantic_func K E x u y v)
+    f
+    ≡ Hom_cat (Fibre_cat E y)
+        (@fib_cov_tapp0_fapp0 K E x y f u)
+        v;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (f : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
+  @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
     (@homd_ K E x u y v)
     f
     ≡ Hom_cat (Fibre_cat E y)
         (@fib_cov_tapp0_fapp0 K E x y f u)
         v;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
+  @fapp1_func
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K E x u y v)
+    f
+    g
+    ≡ @fapp1_func
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@homd_semantic_func K E x u y v)
+        f
+        g;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y))))
+  (alpha : τ (Hom (Op_cat (Hom_cat K x y)) f g)) ⊢
+  @fapp1_fapp0
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (@homd_ K E x u y v)
+    f
+    g
+    alpha
+    ≡ @fapp1_fapp0
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@homd_semantic_func K E x u y v)
+        f
+        g
+        alpha;
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))
