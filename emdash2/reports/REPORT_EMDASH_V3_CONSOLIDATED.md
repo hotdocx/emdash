@@ -4,17 +4,20 @@
 
 `emdash3_1.lp` is the active v3 iteration. The old tracked `emdash3.lp`
 attempt is retired. Future v3 work should start from `emdash3_1.lp`, this
-report, and the repository SOP in `AGENTS.md`.
+report, the detailed next-step plan
+`reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`, and the repository SOP
+in `AGENTS.md`.
 
 The design goal is a Lambdapi specification for functorial programming over
 omega-categories, using stable rewrite heads and unification helpers to make
-normalization computational. The current v3.1 foundation deliberately avoids
-the earlier `Catd`/`Catdd` compatibility layer and instead works directly with
-directed Cat-valued families.
+normalization computational. The current checked v3.1 file still uses the
+`Fam_*` directed-family vocabulary, but the agreed next architecture migrates
+that vocabulary to canonical `Catd` names with the corrected semantics
+`Catd_cat K ~= Functor_cat K Cat_cat`.
 
-## Active Architecture
+## Current v3.1 Baseline
 
-- Directed families are ordinary functors into `Cat_cat`:
+- In the current file, directed families are ordinary functors into `Cat_cat`:
   `Fam_cat K := Functor_cat K Cat_cat`, with `Fam_app_cat E k` as the
   surface reading of `E[k]`.
 - `Sigma_cat E` is the directed total category. Its object layer is
@@ -78,8 +81,49 @@ directed Cat-valued families.
 - When reintroduced, their rewrite rules should follow the same LHS hygiene:
   keep inferred family/category arguments implicit unless they are the actual
   discriminator.
-- Future cleanup may rename or regroup symbols in `emdash3_1.lp`, but no
-  symbol rename is part of the repository retirement pass.
+
+The names above are the current v3.1 baseline names. During the next
+architecture migration, translate them to the canonical `Catd` vocabulary
+unless the detailed plan explicitly keeps a name as notation.
+
+## Next Architecture Plan
+
+The next implementation pass is governed by
+`REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`. Its main decisions are:
+
+- Reuse the `Catd` suffix vocabulary, but with corrected directed-family
+  semantics: `Catd_cat K` is the canonical contraction of
+  `Functor_cat K Cat_cat`, not the older v2 isofibration reading.
+- Keep aliases/definitions out of rewrite-rule LHSs. LHSs should use primitive
+  stable heads and real discriminators.
+- Make `Functor_cat` and `Transf_cat` rewrite-capable where needed, rather
+  than keeping special contractions blocked by `constant`.
+- Introduce stable contractions:
+
+  ```text
+  Functor_cat K Cat_cat --> Catd_cat K
+  @Transf_cat K Cat_cat E D --> Functord_cat E D
+  Hom_cat (Functord_cat E D) FF GG --> Transfd_cat FF GG
+  ```
+
+- Keep `Functord_cat` as the canonical category of natural/displayed functors
+  between directed Cat-valued families, and `Transfd_cat` as the canonical
+  category of displayed transfors/modifications.
+- Keep `fdapp1_*` and `tdapp1_*` as genuine dependent stable heads. Fibrewise
+  `fdapp1` notation can be derived, but the full dependent action over
+  `homd_` cannot be replaced by ordinary fibrewise `fapp1_func`.
+- Make `Pi_cat` a stable section category, with `piapp0` as derived
+  section-evaluation notation and `piapp1_func` / `piapp1_fapp0` as stable
+  terminal-specialization heads for full section action.
+- Add terminal `homd_` normal forms needed by `piapp1_func`, especially:
+
+  ```text
+  homd_ (Terminal_catd K) x Terminal_obj y Terminal_obj
+    --> Terminal_catd (Op_cat (Hom_cat K x y))
+  ```
+
+Future cleanup may rename or regroup symbols in `emdash3_1.lp`, but it should
+follow the detailed phase order in the next-step plan.
 
 ## Retired v3 Material
 
@@ -100,9 +144,11 @@ current implementation guidance:
 - `reports/REPORT_EMDASH_TYPESCRIPT_ELABORATION.md`
 - `reports/REPORT_EMDASH_LOGIC_DEV_3.md`
 
-The retired files are historical context only. Their `Catd`, `Catdd`,
-`PredPi_catd`, `homd_curry`, and `homd_eval_func` designs are superseded by
-the directed-family mixed-variance architecture above.
+The retired files are historical context only. Their old `Catd`, `Catdd`,
+`PredPi_catd`, `homd_curry`, and `homd_eval_func` designs are superseded. The
+new use of `Catd` terminology in the next-step plan is a corrected
+directed-family contraction of `Functor _ Cat_cat`, not a return to the older
+isofibration-style interpretation.
 
 The repository cleanup implementation plan and other stale project notes were
 also archived under `.scratchpad/backup/2026-05-15_project_docs_retirement/`

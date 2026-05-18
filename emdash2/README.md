@@ -9,6 +9,8 @@ The proof assistant is called `m—` (read “emdash”).
 - `emdash3_1.lp`: active v3 directed-family mixed-variance development.
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
+- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`: detailed next v3
+  implementation plan for the `Catd`/Pi/dependent-hom migration.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
