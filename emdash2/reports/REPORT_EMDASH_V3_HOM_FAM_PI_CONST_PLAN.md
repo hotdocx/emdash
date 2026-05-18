@@ -1092,19 +1092,24 @@ then decide which less-internal or capped operations should be promoted from
 notation/derived structure to stable heads. Do not make the less-internal
 `fapp1_func (homd_ ...)` rules the architectural foundation.
 
-Endpoint rules remain useful as sanity and joining rules. The object rule may
-contract directly:
+Endpoint rules remain useful as sanity and joining rules. The object rule
+should delegate to the semantic endpoint rather than duplicating the current
+transport formula:
 
 ```text
 fapp0 (homd_ E x u y v) f
-  --> Hom_cat
-        (Fibre_cat E y)
-        (fib_cov_tapp0_fapp0 E x y f u)
-        v
+  --> fapp0 (homd_semantic_func E x u y v) f
 ```
 
-but it must be accompanied, or justified by, the corresponding internal
-arrow-level action. Schematic endpoint-level joining rules are:
+At the moment `homd_semantic_func` still reduces through
+`fib_cov_tapp0_func` / `fib_cov_tapp0_fapp0`, so this joins with the old
+sigma-hom formula. That transport layer is provisional: the more correct
+foundation should be a future `fib_cov_transf`-based formulation. Keeping the
+`homd_` object rule as a semantic delegation prevents the endpoint rule from
+depending directly on the provisional transport helper.
+
+The object rule must still be accompanied, or justified by, the corresponding
+internal arrow-level action. Schematic endpoint-level joining rules are:
 
 ```text
 fapp1_func (homd_ E x u y v) f g
@@ -1515,6 +1520,12 @@ fib_cov_transf
 fib_cov_tapp0_func
 fib_cov_tapp0_fapp0
 ```
+
+  Audit the `fib_cov_tapp0_func` / `fib_cov_tapp0_fapp0` layer while doing this.
+  It is presently good enough for endpoint normalization, but it was inherited
+  from v2 and may be based on the wrong primitive. New `homd_` rules should
+  delegate through `homd_semantic_func` so the later replacement by
+  `fib_cov_transf` is localized.
 
 - Port `homd_int` and `homd_` to the new `Catd` vocabulary as a pair.
 - Before committing to the current v3 arity, review the v2 pattern where both

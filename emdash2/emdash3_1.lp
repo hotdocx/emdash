@@ -70,10 +70,8 @@ flag "print_meta_args" on;
       `fapp0 (...) cell` computes one selected cell but can lose the functor
       object that would support another hom-action.
     - Use pointwise endpoint heads only when the current construction genuinely
-      needs an endpoint.  Here `homd_` is such an endpoint: its object-action
-      computes to the sigma-hom formula
-      `Hom(E[y])(fib_cov_tapp0_fapp0 E f u, v)`, while its functor action
-      delegates to the semantic `hom_con` endpoint.
+      needs an endpoint.  Here `homd_` is such an endpoint: its object and
+      arrow actions delegate to the semantic `hom_con` endpoint.
 
   Naming conventions:
     - Categories use uppercase letters (`A B C K Z`), with `Z` often the base.
@@ -857,9 +855,10 @@ symbol homd_src_sec [Z : Cat] (E : τ (Catd Z))
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
-// Endpoint normal form. This is a stable head whose object-action is the
-// former sigma-hom formula. Keeping the head visible lets constant/terminal
-// family cases normalize before pointwise evaluation.
+// Endpoint normal form. This stable head delegates actions to the semantic
+// endpoint instead of duplicating its transport formula. Keeping the head
+// visible lets constant/terminal family cases normalize before pointwise
+// evaluation.
 symbol homd_ [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
@@ -868,10 +867,11 @@ symbol homd_ [Z : Cat] (E : τ (Catd Z))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
 rule @fapp0 _ Cat_cat (@homd_ $K $E $x $u $y $v) $f
-  ↪ Hom_cat
-      (Fibre_cat $E $y)
-      (@fib_cov_tapp0_fapp0 $K $E $x $y $f $u)
-      $v;
+  ↪ @fapp0
+      (Op_cat (Hom_cat $K $x $y))
+      Cat_cat
+      (@homd_semantic_func $K $E $x $u $y $v)
+      $f;
 
 // The source category is intentionally implicit. Even the stable compound
 // `Op_cat (Hom_cat ...)` is brittle when it appears in an inferred LHS slot.
@@ -1218,6 +1218,18 @@ assert [K : Cat] (E : τ (Catd K))
     ≡ Hom_cat (Fibre_cat E y)
         (@fib_cov_tapp0_fapp0 K E x y f u)
         v;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (f : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
+  @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
+    (@homd_ K E x u y v)
+    f
+    ≡ @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
+        (@homd_semantic_func K E x u y v)
+        f;
 
 assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
