@@ -867,7 +867,7 @@ symbol homd_ [Z : Cat] (E : τ (Catd Z))
   (v : τ (Obj (Fibre_cat E y)))
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat);
 
-rule @fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f
+rule @fapp0 _ Cat_cat (@homd_ $K $E $x $u $y $v) $f
   ↪ Hom_cat
       (Fibre_cat $E $y)
       (@fib_cov_tapp0_fapp0 $K $E $x $y $f $u)
