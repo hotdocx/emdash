@@ -75,6 +75,12 @@ This SOP also applies to `fdapp0_*` and `tdapp0_*`: if they are definitions
 from ordinary `tapp0`/`fapp1` operations, they should not appear in kernel
 rewrite LHSs as if they were primitive constructors.
 
+It also applies to compound expressions in inferred/implicit positions even
+when every head in the expression is stable. For example, avoid spelling
+`Op_cat (Hom_cat K x y)` in an implicit source-category slot of a rule headed
+by `fapp1_func` or `fapp1_fapp0`; use `_` there and keep the discriminating
+argument as the explicit functor head, such as `homd_ ...`.
+
 ## Pre-Migration v3.1 Facts Already Replaced
 
 At the time this plan was first written, `emdash3_1.lp` still used the earlier
@@ -1124,6 +1130,10 @@ The exact Lambdapi rules should use explicit `@...` applications and `_` in
 implicit category positions unless the category is an actual discriminator.
 Do not spell reducible compound expressions in implicit LHS slots merely to
 make the rule typecheck.
+For the endpoint action rules specifically, the source category of
+`fapp1_func` / `fapp1_fapp0` should be `_`, not the compound
+`Op_cat (Hom_cat K x y)`, because the functor argument `homd_ ...` is the real
+discriminator.
 
 The same principle applies one level up: rules for internal heads such as
 adapted v3 versions of `fapp1_int_transf`, `tapp1_int_func_transf`,
@@ -1405,7 +1415,8 @@ fib_cov_tapp0_fapp0
   after checking that they join with the general internal and endpoint action
   rules.
 - Keep endpoint rules small and stable; avoid matching large reducible
-  composites in implicit arguments.
+  composites, or stable-but-compound expressions such as
+  `Op_cat (Hom_cat ...)`, in implicit arguments.
 
 ### Phase 7: Arrow-Level Dependent Heads
 

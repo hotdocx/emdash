@@ -49,6 +49,10 @@ normalization computational. The current checked v3.1 file uses the canonical
   rewrite-rule LHSs. Use `_` for source/target family arguments when the
   actual inferred term contains `Functor_catd`, `HomPresheaf_catd`,
   `op_val_func`, or `comp_cat_fapp0`.
+- This also includes stable-but-compound expressions in implicit category
+  slots, such as `Op_cat (Hom_cat K x y)` in rules for `fapp1_func` or
+  `fapp1_fapp0`. Prefer `_` and let the explicit functor argument be the
+  discriminator.
 - Keep small stable-head projection steps instead of wrapping multiple
   projections in a single rewrite rule.
 - Keep `Transf_cat` unification helpers. They are local elaboration aids that

@@ -47,7 +47,8 @@ flag "print_meta_args" on;
       all of them.  Omitting only one brittle argument is often not enough.
     - Be especially cautious when an implicit argument contains a reducible
       subterm such as `fapp0 F x`, `comp_cat_fapp0 F G`, `Functor_catd ...`,
-      `HomPresheaf_catd ...`, or `Homd_target_catd ...`.
+      `HomPresheaf_catd ...`, or `Homd_target_catd ...`, or a compound
+      canonical expression such as `Op_cat (Hom_cat ...)`.
     - Prefer small projection rules with stable heads over one large nested
       redex.  The homd endpoint is deliberately split into `tapp0_fapp0`,
       `fapp0`, `piapp0`, and `fapp0` folds for this reason.
@@ -872,9 +873,8 @@ rule @fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f
       (@fib_cov_tapp0_fapp0 $K $E $x $y $f $u)
       $v;
 
-// The source category is explicit here, as in the object-action rule above:
-// Lambdapi needs it for subject reduction, and it is the stable Op/Hom spine,
-// not a defined family alias.
+// The source category is intentionally implicit. Even the stable compound
+// `Op_cat (Hom_cat ...)` is brittle when it appears in an inferred LHS slot.
 rule @fapp1_func _ Cat_cat (@homd_ $K $E $x $u $y $v) $f $g
   ↪ @fapp1_func
       (Op_cat (Hom_cat $K $x $y))
@@ -912,8 +912,8 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
 // Third projection fold. The family argument of `piapp0` is intentionally
 // implicit: its normal form is a mixed-variance `Functor_catd` involving
 // `HomPresheaf_catd`, and spelling that compound in the LHS makes matching
-// brittle. The base is kept explicit because it is a stable `Op_cat` head and
-// is needed for subject reduction.
+// brittle. The base argument is also kept implicit: spelling the compound
+// `Op_cat Z` in an inferred slot can make an accepted rule fail to match later.
 rule @piapp0
       _
       _
