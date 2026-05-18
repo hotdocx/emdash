@@ -232,6 +232,9 @@ fdapp0_func E D z
 
 fdapp0_fapp0 FF z
   := @tapp0_fapp0 K Cat_cat E D z FF
+
+Fibre_func FF z
+  := @tapp0_fapp0 K Cat_cat E D z FF
 ```
 
 This was one of the main simplifications discovered during review.
@@ -276,6 +279,20 @@ Hom_cat (Functor_cat (E[z]) (D[z])) (FF[z]) (GG[z])
 Thus `tdapp0_func` is not primitive kernel structure. It may be introduced
 later as notation, but rewrite LHSs should use the canonical expression unless
 we intentionally promote a fold head for normalization convenience.
+
+The corresponding object-action notation is also derived:
+
+```text
+tdapp0_fapp0 Xi z
+  := fapp0 (tdapp0_func z FF GG) Xi
+
+Fibre_transf Xi z
+  := fapp0 (tdapp0_func z FF GG) Xi
+```
+
+If the v2 names `tdapp0_fapp0` or `Fibre_transf` are reused, they should be
+notation or folds for this derived object-action, not independent primitive
+operations.
 
 ### Primitive: Full Arrow-Level Dependent Operations
 
@@ -325,7 +342,8 @@ ordinary `tapp1_*` versus `fapp1_*`.
 
 ## Stable Heads Still Needed
 
-The following remain genuine stable infrastructure:
+The following remain genuine stable infrastructure, plus explicitly noted
+derived folds that may be introduced for normalization convenience:
 
 ```text
 Catd_cat
@@ -345,8 +363,8 @@ fib_cov_tapp0_func
 fib_cov_tapp0_fapp0
 
 Pi_cat
-piapp0
-piapp1*
+section-action folds (`piapp1*`) only if needed, derived from the
+section-as-`Functord` presentation
 
 homd_
 homd_int / related internal homd projections
@@ -496,8 +514,10 @@ The source endpoint is a section of `Op_catd E` because source position is
 contravariant. Since `Obj (Op_cat A)` reduces to `Obj A`, this still gives an
 object of the original fibre at each point.
 
-The base-arrow action of `Hom_catd` should be expressed using `piapp1*` and
-`homd_`, not by inventing an isolated object-level transport head.
+The base-arrow action of `Hom_catd` should be expressed using the eventual
+section-action layer and `homd_`, not by inventing an isolated object-level
+transport head. The notation `piapp0 X k` below should be read as section
+evaluation notation, not as a primitive rewrite head.
 
 ### `Functor_catd` As A Constant-`Cat_cat` Instance
 
@@ -651,17 +671,23 @@ Projection compatibility should align with ordinary functor application:
 
 ```text
 piapp0 F k
-  --> fapp0 F k
+  := fapp0 F k
 ```
 
-and similarly at the arrow/higher layer:
+in the constant-family case after `Pi_cat (Const_catd K A)` reduces to
+`Functor_cat K A`. This is definitional/notation-level compatibility, not a
+new rewrite rule headed by `piapp0`.
+
+Similarly, any arrow/higher projection notation should align with ordinary
+functor action:
 
 ```text
 piapp1_fapp0 F f
-  --> fapp1_fapp0 F f
+  := fapp1_fapp0 F f
 ```
 
-plus functor-level variants if the final `piapp1` design supports them.
+in the constant-family case, plus functor-level variants if the final
+section-action design supports them.
 
 ### General Pi Projection Through `homd_`
 
@@ -706,15 +732,33 @@ piapp1_fapp0 s f
 and preferably an iterable section-level or functor-level head should
 accompany it, rather than only this capped object projection.
 
-The object projection should also have a packaged functor form if feasible:
+The object projection should also have a packaged functor form if feasible,
+but this package should itself be a definition/composite, not a separate
+primitive with a β-rule to `piapp0`.
 
 ```text
-piapp0_func k : Functor (Pi_cat E) (fapp0 E k)
-fapp0 (piapp0_func k) s --> piapp0 s k
+piapp0_func E k
+  := comp_cat_fapp0
+       (fapp0_func Terminal_obj)
+       (@tapp0_func K Cat_cat (Terminal_catd K) E k)
+
+piapp0 s k
+  := fapp0 (piapp0_func E k) s
 ```
 
-The exact type may need adjustment once `Fibre_cat` is either notation-only or
-promoted, but the old plan's functorial-projection requirement should be kept.
+Equivalently, object-level section evaluation is terminal-object evaluation of
+the ordinary component:
+
+```text
+piapp0 s k
+  := fapp0
+       (@tapp0_fapp0 K Cat_cat (Terminal_catd K) E k s)
+       Terminal_obj
+```
+
+The exact type may need adjustment after the `Pi_cat` joining rules are tested,
+but the old plan's functorial-projection requirement should be kept in this
+derived/definitional form.
 
 ### Hom Of A Pi Category: Deferred Issue
 
@@ -808,7 +852,8 @@ Hom_catd
 ```
 
 but its final endpoint role remains the same. It supplies the dependent hom
-over base arrows used by `Sigma_cat`, `piapp1*`, `fdapp1_*`, and `tdapp1_*`.
+over base arrows used by `Sigma_cat`, the eventual section-action folds,
+`fdapp1_*`, and `tdapp1_*`.
 
 ## How We Arrived Here
 
@@ -959,14 +1004,22 @@ fapp0 (Pi_func K) E --> Pi_cat E
 Pi_cat (Const_catd K A) --> Functor_cat K A
 ```
 
-- Add `piapp0`, then design `piapp1*` through `homd_`.
-- Add `piapp0_func k` as the functorial projection at a base object, if
-  feasible:
+- Add derived section-evaluation notation, not a primitive `piapp0` rewrite
+  head.
+- Add `piapp0_func E k` as a definitional packaged projection at a base object,
+  if feasible:
 
 ```text
-fapp0 (piapp0_func k) s --> piapp0 s k
+piapp0_func E k
+  := comp_cat_fapp0
+       (fapp0_func Terminal_obj)
+       (@tapp0_func K Cat_cat (Terminal_catd K) E k)
 ```
 
+- Design the section-action layer through `homd_`. It may expose `piapp1*`
+  notation or stable folds if needed for normalization, but it should not
+  duplicate an operation already supplied by the section-as-`Functord`
+  presentation.
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
@@ -1067,8 +1120,10 @@ Hom_catd
 - Can `Functor_cat` and `Transf_cat` remain marked `injective` after the
   special contractions, or should injectivity be represented only through
   controlled unification helpers?
-- What is the exact functor-level shape for `piapp1*` beyond the capped
-  projection into `homd_`?
+- What is the exact functor-level shape for the section-action layer beyond
+  the capped projection into `homd_`, and should any `piapp1*` notation be a
+  stable fold or only a definition from the section-as-`Functord`
+  presentation?
 - Should `Hom_cat (Pi_cat E) s t` reduce directly to `Transfd_cat s t`, or
   should that be reached through a more explicit section-as-`Functord`
   coercion/fold?
