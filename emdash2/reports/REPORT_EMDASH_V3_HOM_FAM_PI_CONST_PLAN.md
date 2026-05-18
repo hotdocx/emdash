@@ -88,6 +88,11 @@ reducible for the intended final kernel:
   constructors.
 - `Pi_cat` is represented through `Transf_cat`, while `piapp0` is already a
   primitive projection.
+- `Functor_mix_fam_func K` currently packages `Functor_fam` as an internal
+  curried two-argument constructor:
+  `Op(Fam(Op K)) -> (Fam K -> Fam K)`. This role should not be lost; it
+  should be migrated to the corrected `Catd` vocabulary if internal pipelines
+  still need the packaged constructor.
 - `Functor_cat` and `Transf_cat` are currently declared `constant`, which
   blocks the intended special-case contractions.
 
@@ -421,6 +426,16 @@ Op_catd (Const_catd K A)
 operational dependency. Future homd source types should use the stable
 pointwise-opposite constructor directly.
 
+If internal pipelines need the pointwise-opposite operation as a functor
+object, add a packaged operation such as:
+
+```text
+Op_catd_func K : Functor (Catd_cat K) (Catd_cat K)
+```
+
+but keep the primitive constructor `Op_catd E` as the normal form that future
+rules target.
+
 ### Mixed-Variance Functor Families
 
 The current `Functor_fam` should be migrated to:
@@ -441,6 +456,20 @@ fapp0 (Functor_catd A B) k
 
 This is the corrected mixed-variance successor of v3 `Functor_fam`, not the
 old v2 same-base fibrewise-only `Functor_catd`.
+
+The current `Functor_mix_fam_func K` packaging should be migrated if it remains
+needed for internal constructor pipelines. The corrected analogue should package
+the same mixed-variance operation in `Catd` vocabulary, schematically:
+
+```text
+Functor_catd_mix_func K
+  : Functor
+      (Op_cat (Catd_cat (Op_cat K)))
+      (Functor_cat (Catd_cat K) (Catd_cat K))
+```
+
+with object-action reducing to a curried form whose second object-action
+normalizes to `Functor_catd A B`.
 
 ### Mixed-Variance Hom Families
 
@@ -514,6 +543,15 @@ The corrected pointwise transformation-family constructor is:
 
 ```text
 Transf_catd A B FF GG
+```
+
+with intended context:
+
+```text
+A  : Catd (Op_cat K)
+B  : Catd K
+FF : Obj (Pi_cat (Op_catd (Functor_catd A B)))
+GG : Obj (Pi_cat (Functor_catd A B))
 ```
 
 with bridge:
@@ -600,6 +638,15 @@ Pi_cat (Const_catd K A)
 This states the non-dependent Pi principle directly: a section of the constant
 family at `A` is a functor `K -> A`.
 
+This category-level reduction is preferable to an object-only bridge such as:
+
+```text
+Pi_const_to_func : Obj (Pi_cat (Const_catd K A)) -> Obj (Functor_cat K A)
+```
+
+because the whole section category reduces and the ordinary functor-category
+infrastructure remains available.
+
 Projection compatibility should align with ordinary functor application:
 
 ```text
@@ -658,6 +705,16 @@ piapp1_fapp0 s f
 
 and preferably an iterable section-level or functor-level head should
 accompany it, rather than only this capped object projection.
+
+The object projection should also have a packaged functor form if feasible:
+
+```text
+piapp0_func k : Functor (Pi_cat E) (fapp0 E k)
+fapp0 (piapp0_func k) s --> piapp0 s k
+```
+
+The exact type may need adjustment once `Fibre_cat` is either notation-only or
+promoted, but the old plan's functorial-projection requirement should be kept.
 
 ### Hom Of A Pi Category: Deferred Issue
 
@@ -812,6 +869,8 @@ not arbitrary displayed isofibrations.
 
 - Treat this report as the design target before editing `emdash3_1.lp`.
 - Keep `emdash3_1.lp` typechecking before each implementation phase.
+- Add temporary assertions only as needed to probe Lambdapi elaboration, then
+  keep the useful ones as regression checks.
 - Run:
 
 ```bash
@@ -901,6 +960,13 @@ Pi_cat (Const_catd K A) --> Functor_cat K A
 ```
 
 - Add `piapp0`, then design `piapp1*` through `homd_`.
+- Add `piapp0_func k` as the functorial projection at a base object, if
+  feasible:
+
+```text
+fapp0 (piapp0_func k) s --> piapp0 s k
+```
+
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
@@ -974,9 +1040,10 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 
 For every new stable head, add at least one assertion exercising its intended
 normal form. For every rewrite involving `Functor_cat`, `Transf_cat`,
-`Catd_cat`, `Functord_cat`, `Transfd_cat`, `Const_catd`, `Op_catd`, or
-`Pi_cat`, add a focused assertion for the generic case and, where relevant, a
-constant-family case.
+`Catd_cat`, `Functord_cat`, `Transfd_cat`, `Const_catd`, `Op_catd`,
+`Functor_catd`, `Hom_catd`, `Transf_catd`, `Pi_cat`, `fib_cov_*`,
+`fdapp1_*`, or `tdapp1_*`, add a focused assertion for the generic case and,
+where relevant, a constant-family case.
 
 If a typecheck hangs, inspect the most recent rewrite LHS first, especially
 rules involving:
