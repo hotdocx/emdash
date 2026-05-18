@@ -12,6 +12,14 @@ implementation, including which symbols should be primitive stable heads,
 which should be rewrite contracta, and which should be mere notation or
 definitions that must not appear on rewrite-rule left-hand sides.
 
+Update 2026-05-19: the dependent-hom endpoint `homd_` should be treated as a
+primitive stable head only together with its full functor action. An
+object-action rule for `fapp0 (homd_ ...)` is necessary but not sufficient:
+the arrow/higher action rules must compute as if `homd_` were the semantic
+`hom_con` construction described below. The previous object-only primitive
+experiment is therefore an incomplete implementation strategy, not the final
+design.
+
 ## Semantic Reset: `Catd` Means Directed Cat-Valued Family
 
 The v3 design may keep the v2-style `catd` terminology, but only with a hard
@@ -1010,6 +1018,110 @@ extra reduction of `Hom_cat Terminal_cat Terminal_obj Terminal_obj`. If
 `Terminal_catd` remains its own canonical stable head, keep the direct
 terminal rule as the operational normal form.
 
+### `homd_` Must Be A Full Functor Head
+
+There are two viable implementation shapes for `homd_`.
+
+The first is the old definitional endpoint:
+
+```text
+homd_ E x u y v
+  := hom_con
+       (Fibre_cat E y)
+       v
+       (Hom_cat K x y)
+       (fib_cov_tapp0_func E x y u)
+```
+
+This automatically inherits whatever object, arrow, and higher action is
+available for `hom_con` and `hom_`. Its downside is that `homd_` is not a
+primitive stable head for family-level normal forms such as terminal and
+constant dependent homs.
+
+The preferred v3 direction is therefore the second shape: keep `homd_` as a
+primitive stable head, but make its computation observationally equal to the
+semantic `hom_con` endpoint at every functorial level. The object rule may
+contract directly:
+
+```text
+fapp0 (homd_ E x u y v) f
+  --> Hom_cat
+        (Fibre_cat E y)
+        (fib_cov_tapp0_fapp0 E x y f u)
+        v
+```
+
+but this must be accompanied by arrow-level rules. Schematic intended rules:
+
+```text
+fapp1_func (homd_ E x u y v) f g
+  --> fapp1_func
+        (hom_con
+           (Fibre_cat E y)
+           v
+           (Hom_cat K x y)
+           (fib_cov_tapp0_func E x y u))
+        f g
+
+fapp1_fapp0 (homd_ E x u y v) [f] [g] alpha
+  --> fapp1_fapp0
+        (hom_con
+           (Fibre_cat E y)
+           v
+           (Hom_cat K x y)
+           (fib_cov_tapp0_func E x y u))
+        [f] [g] alpha
+```
+
+The exact Lambdapi rules should use explicit `@...` applications and `_` in
+implicit category positions unless the category is an actual discriminator.
+Do not spell reducible compound expressions in implicit LHS slots merely to
+make the rule typecheck.
+
+If v3 later adds names such as `fapp1_int_transf` or a more internal
+hom-action package, the same principle applies: the rule for the primitive
+`homd_` head should delegate to the corresponding action of the semantic
+`hom_con` endpoint, rather than inventing independent object-only transport.
+
+The terminal and constant-family normal forms above remain desired
+family-level normal forms, but they are acceptable only if they are full
+functor normal forms. Their `fapp0`, `fapp1_func`, and `fapp1_fapp0` behavior
+must join with the general `homd_` action rules and the action rules for
+`Terminal_catd` / `Const_catd`. If joinability is not immediate, implement the
+general full-action rules first and defer the terminal/constant whole-family
+rules until the critical pairs are understood.
+
+### Open Arity Issue: General Dependent Hom Action
+
+The current endpoint shape:
+
+```text
+homd_ [K] (E : Catd K) x u y v
+```
+
+is the dependent-hom family induced by the ambient action of one family `E`.
+By contrast, ordinary `hom_` has an explicit functor argument:
+
+```text
+hom_ [A B] (F : Functor B A) (W : Obj A)
+```
+
+For future `fdapp1_*` and `tdapp1_*` rules, this asymmetry may matter. A full
+dependent action along a family morphism may require either:
+
+```text
+homd_ [K] [D E : Catd K] (FF : Obj (Functord_cat D E)) ...
+```
+
+or a separate generalized head, with the current `homd_ E x u y v` kept as
+the identity/ambient-family specialization.
+
+This is not settled by the current report. Before implementing `fdapp1_*`,
+`tdapp1_*`, or the full `piapp1_*` fold, review whether the dependent hom
+endpoint must carry an explicit `FF` argument analogous to `hom_`'s functor
+argument. Do not force the existing arity into those rules if doing so
+requires object-level shortcuts or loses the internal arrow action.
+
 ## How We Arrived Here
 
 The earlier report focused on adding `Hom_fam` and `Transf_fam` after making
@@ -1218,6 +1330,12 @@ fib_cov_tapp0_fapp0
 ```
 
 - Port `homd_` and `homd_int` to the new `Catd` vocabulary.
+- Keep `homd_` as a primitive stable head only if full functor-action rules
+  are added. The minimum settled rule set is object action plus arrow action:
+  `fapp0`, `fapp1_func`, and `fapp1_fapp0` should compute as if `homd_` were
+  the semantic `hom_con (fib_cov_tapp0_func ...)` endpoint.
+- Add terminal/constant whole-family `homd_` normal forms only after checking
+  that they join with the general `homd_` object and arrow action rules.
 - Keep endpoint rules small and stable; avoid matching large reducible
   composites in implicit arguments.
 
@@ -1240,6 +1358,11 @@ tdapp1_* at identity --> fdapp1_*
 - Do not define `tdapp1_*` from `tapp1_fapp1_func` in the kernel. Later
   coherence bridges may relate them, but `tdapp1_*` is a dedicated stable head
   for the dependent/simplicial layer.
+- Before implementing these heads, settle whether the dependent hom endpoint
+  needs an explicit family morphism argument
+  `FF : Obj (Functord_cat D E)`, analogous to the functor argument of ordinary
+  `hom_`, or whether the current `homd_ E x u y v` remains only the
+  ambient/identity specialization used by a more general head.
 
 ## Validation Plan
 
