@@ -875,7 +875,7 @@ rule @fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f
 // The source category is explicit here, as in the object-action rule above:
 // Lambdapi needs it for subject reduction, and it is the stable Op/Hom spine,
 // not a defined family alias.
-rule @fapp1_func (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f $g
+rule @fapp1_func _ Cat_cat (@homd_ $K $E $x $u $y $v) $f $g
   ↪ @fapp1_func
       (Op_cat (Hom_cat $K $x $y))
       Cat_cat
@@ -883,7 +883,7 @@ rule @fapp1_func (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) 
       $f
       $g;
 
-rule @fapp1_fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat (@homd_ $K $E $x $u $y $v) $f $g $alpha
+rule @fapp1_fapp0 _ Cat_cat (@homd_ $K $E $x $u $y $v) $f $g $alpha
   ↪ @fapp1_fapp0
       (Op_cat (Hom_cat $K $x $y))
       Cat_cat
@@ -915,7 +915,7 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
 // brittle. The base is kept explicit because it is a stable `Op_cat` head and
 // is needed for subject reduction.
 rule @piapp0
-      (Op_cat $Z)
+      _
       _
       (@homd_src_sec $Z $E $x $u)
       $y
