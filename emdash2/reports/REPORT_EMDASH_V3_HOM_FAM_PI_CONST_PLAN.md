@@ -769,6 +769,19 @@ a stable derived fold/specialized projection whose ancestor is the dependent
 action layer (`fdapp1_*`, or the corresponding internal `tdapp1_*` identity
 fold once available), not ordinary `tapp*`/`fapp*` alone.
 
+Thus the full `piapp1*` layer should not be scheduled as independent primitive
+Pi theory. It should be implemented only after the dependent `fdapp1_*` /
+`tdapp1_*` infrastructure is available, by specializing that infrastructure to
+
+```text
+s : Functord_cat (Terminal_catd K) E
+```
+
+and then projecting the image of the unique terminal dependent hom over the
+base arrow `f`. This is exactly the same reason `fdapp1_*` cannot be replaced
+by a weak fibrewise `fapp1_func`: the desired section component lives in a
+dependent hom over a base arrow.
+
 Thus the next Pi projection layer should be shaped around `homd_`, for
 example:
 
@@ -1067,9 +1080,10 @@ piapp0_func E k
 - Design the section-action layer through `homd_`. The weak off-diagonal
   object projection is definable from `tapp1_fapp0` plus `Terminal_obj` if it
   is useful as notation. The full homd-valued `piapp1*` component is different:
-  if rewrite rules need it as a normal form, expose it as a stable
-  derived/specialized fold from the section-as-`Functord` dependent action,
-  not as an ordinary `tapp*`/`fapp*` alias.
+  do not implement it before `fdapp1_*` / `tdapp1_*`. If rewrite rules need it
+  as a normal form, expose it as a stable derived/specialized fold from the
+  section-as-`Functord` dependent action, not as an ordinary `tapp*`/`fapp*`
+  alias.
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
