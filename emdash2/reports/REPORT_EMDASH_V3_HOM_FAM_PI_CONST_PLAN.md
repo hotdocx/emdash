@@ -317,16 +317,21 @@ fibre_fdapp1 FF z u v
 But this only acts inside one fibre category. It does not see base arrows,
 dependent homs, or `homd_`-style data.
 
-The full `fdapp1_*` must remain a dedicated stable head because it acts on
-dependent hom data: base motion and fibre motion together. This is the next
-simplicial/dependent iteration, not merely ordinary `fapp1_func` in a fibre.
+The full dependent action must be represented by internal stable heads because
+it acts on dependent hom data: base motion and fibre motion together. This is
+the next simplicial/dependent iteration, not merely ordinary `fapp1_func` in a
+fibre.
 
-Likewise, full `tdapp1_*` must remain a dedicated stable head. The attempted
-derivation from `tapp1_fapp1_func` plus evaluation is not a clean
-non-circular kernel definition; it already needs the dependent
-projection/uncurrying machinery that `tdapp1_*` is meant to expose.
+The current v3 candidate heads for this role are the internal pair
+`tdapp1_int_func_transfd` / `fdapp1_int_transfd`, not yet arbitrary surface
+`tdapp1_*` / `fdapp1_*` names. Later, if less-internal or external
+`tdapp1_*` / `fdapp1_*` heads are introduced as projection/Groth bridges, they
+should inherit the same identity-specialization shape. They should not be
+defined by a direct shortcut from ordinary `tapp1_fapp1_func` plus evaluation;
+that would already need the dependent projection/uncurrying machinery the
+internal heads are meant to expose.
 
-Therefore the final mirror is:
+Therefore the settled internal mirror is:
 
 ```text
 non-dependent:
@@ -334,19 +339,19 @@ non-dependent:
   but both tapp1_* and fapp1_* are stable heads
 
 dependent:
-  tdapp1_* at identity --> fdapp1_*
-  but both tdapp1_* and fdapp1_* are stable heads
+  tdapp1_int_func_transfd at identity --> fdapp1_int_transfd
+  with any later tdapp1_* / fdapp1_* surface mirror deferred
 ```
 
-The identity specialization rule should be retained:
+The internal identity specialization rule should be retained:
 
 ```text
-tdapp1_* FF FF (id (Functord_cat E D) FF)
-  --> fdapp1_* FF
+tdapp1_int_func_transfd FF FF (id (Functord_cat E D) FF)
+  --> fdapp1_int_transfd FF
 ```
 
-This is not evidence that `fdapp1_*` is a mere alias; it is the same pattern as
-ordinary `tapp1_*` versus `fapp1_*`.
+This is not evidence that `fdapp1_int_transfd` is a mere alias; it is the same
+identity-specialization pattern as ordinary `tapp1_*` versus `fapp1_*`.
 
 ## Stable Heads Still Needed
 
@@ -840,15 +845,16 @@ over the base-arrow category; otherwise the joining rule
 `Functord_cat (Terminal_catd J) H --> Pi_cat H` will not expose the desired
 `Pi_cat` target for `piapp1_func`.
 
-If the final `fdapp1_*` signature still returns a larger displayed functor
+If a later derived `fdapp1_*` signature returns a larger displayed functor
 whose target point `(y, piapp0 s y)` is internal, the LHS may need one
-additional projection before the fold. But the RHS should still be
-`piapp1_func`, with `piapp1_fapp0` obtained afterward by section evaluation.
+additional projection before any fold to `piapp1_func`, with `piapp1_fapp0`
+obtained afterward by section evaluation.
 At the modification level the same normalization should also be reachable by
-first using the identity fold:
+first using the internal identity fold, and only later any derived surface
+fold if such a surface head is introduced:
 
 ```text
-tdapp1_* at identity --> fdapp1_*
+tdapp1_int_func_transfd at identity --> fdapp1_int_transfd
 ```
 
 and then applying the terminal-specialization fold above.
@@ -1052,25 +1058,24 @@ homd_
   the fixed-endpoint projection/evaluation layer, analogous to ordinary hom_
 ```
 
-The primary target is the internal layer. In the v2 reference, the ordinary
-and displayed stories are organized around heads such as:
+The primary target is the internal layer. At the current planning stage, the
+only v2 heads that are clearly candidates for adaptation are:
 
 ```text
 tapp1_int_func_transf
-tapp1_int_fapp1_func_transf
 fapp1_int_transf
 tdapp1_int_func_transfd
-tdapp1_int_fapp1_func_transfd
 fdapp1_int_transfd
 ```
 
-and the displayed internal heads use `homd_int` in their source and target
-types. The v3 port should preserve that direction: first settle the
-fully-internal `homd_int`-based statements and folds, then let endpoint and
-capped operations (`homd_`, `fapp1_func`, `fapp1_fapp0`, later external
-`fdapp1_*` / `tdapp1_*`) follow by projection, specialization, or bridge
-rules. Do not make the less-internal `fapp1_func (homd_ ...)` rules the
-architectural foundation.
+The v3 port should not yet commit to additional stable heads from v2. Symbols
+such as hom-action packagings, endpoint `fapp1_func` / `fapp1_fapp0` folds,
+and later external `fdapp1_*` / `tdapp1_*` heads may become useful as a
+cascade derived from these four internal heads, but that is a later design
+choice. First settle the fully-internal `homd_int`-based statements and folds;
+then decide which less-internal or capped operations should be promoted from
+notation/derived structure to stable heads. Do not make the less-internal
+`fapp1_func (homd_ ...)` rules the architectural foundation.
 
 Endpoint rules remain useful as sanity and joining rules. The object rule may
 contract directly:
@@ -1400,7 +1405,6 @@ fib_cov_tapp0_fapp0
 ```text
 adapted v3 tapp1_int_func_transf / fapp1_int_transf
 adapted v3 tdapp1_int_func_transfd / fdapp1_int_transfd
-then derived fdapp1_* / tdapp1_* surface heads
 ```
 
 - Prioritize the fully-internal heads. The v2 pattern is:
@@ -1413,19 +1417,21 @@ fdapp1_int_transfd FF
   := tdapp1_int_func_transfd FF FF (id FF)
 ```
 
-  and the less-internal/external packagings are derived later by
-  Grothendieck or projection bridges.
+  Any less-internal/external packagings should be considered only afterward,
+  as Grothendieck, projection, or normalization bridges derived in cascade
+  from these four heads.
 - Keep fibrewise or capped `fdapp1` forms as notation/derived structure only
   unless a later review identifies a genuine primitive role.
 - Add the identity fold:
 
 ```text
-tdapp1_* at identity --> fdapp1_*
+tdapp1_int_func_transfd at identity --> fdapp1_int_transfd
 ```
 
-- Do not define `tdapp1_*` from `tapp1_fapp1_func` in the kernel. Later
-  coherence bridges may relate them, but `tdapp1_*` is a dedicated stable head
-  for the dependent/simplicial layer.
+- Do not define the internal displayed heads from ordinary `tapp1_fapp1_func`
+  in the kernel. Later coherence or projection bridges may relate the layers,
+  but those bridges should be designed only after the four internal heads are
+  settled.
 - Before implementing these heads, settle whether the dependent hom package
   needs an explicit family morphism argument
   `FF : Obj (Functord_cat D E)`, analogous to the functor argument of ordinary
@@ -1446,9 +1452,10 @@ For every new stable head, add at least one assertion exercising its intended
 normal form. For every rewrite involving `Functor_cat`, `Transf_cat`,
 `Catd_cat`, `Functord_cat`, `Transfd_cat`, `Const_catd`, `Op_catd`,
 `Functor_catd`, `Hom_catd`, `Transf_catd`, `Pi_cat`, `fib_cov_*`,
-`homd_int`, `homd_`, `tapp1_int_*`, `fapp1_int_*`, `tdapp1_int_*`,
-`fdapp1_int_*`, `fdapp1_*`, or `tdapp1_*`, add a focused assertion for the
-generic case and, where relevant, a constant-family case.
+`homd_int`, `homd_`, `tapp1_int_func_transf`, `fapp1_int_transf`,
+`tdapp1_int_func_transfd`, `fdapp1_int_transfd`, or any later explicitly
+introduced derived cascade head, add a focused assertion for the generic case
+and, where relevant, a constant-family case.
 
 If a typecheck hangs, inspect the most recent rewrite LHS first, especially
 rules involving:
