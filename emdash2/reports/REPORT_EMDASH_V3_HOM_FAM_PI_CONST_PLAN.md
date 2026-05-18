@@ -799,9 +799,9 @@ s : Obj (Functord_cat (Terminal_catd K) E)
 applied to the unique terminal dependent hom over the base arrow `f`. In the
 same sense as full `fdapp1_*`, it sees base motion and fibre motion together.
 If rewrite rules need this component as a matchable normal form, it should be
-a stable derived fold/specialized projection whose ancestor is the dependent
-action layer (`fdapp1_*`, or the corresponding internal `tdapp1_*` identity
-fold once available), not ordinary `tapp*`/`fapp*` alone.
+a stable terminal-specialization head whose computation is justified by the
+dependent action layer (`fdapp1_*`, or the corresponding internal `tdapp1_*`
+identity fold once available), not ordinary `tapp*`/`fapp*` alone.
 
 Thus the full `piapp1*` layer should be a primitive stable head with its own
 type, but not an independent primitive theory. It should be introduced with,
@@ -825,6 +825,12 @@ terminal-specialization of fdapp1_* for
   and Terminal_obj in the source fibre
   --> piapp1_func s x y
 ```
+
+This fold requires terminal `homd_` computation. The source dependent-hom
+family of the `fdapp1_*` specialization must normalize to the terminal family
+over the base-arrow category; otherwise the joining rule
+`Functord_cat (Terminal_catd J) H --> Pi_cat H` will not expose the desired
+`Pi_cat` target for `piapp1_func`.
 
 If the final `fdapp1_*` signature still returns a larger displayed functor
 whose target point `(y, piapp0 s y)` is internal, the LHS may need one
@@ -972,6 +978,37 @@ Hom_catd
 but its final endpoint role remains the same. It supplies the dependent hom
 over base arrows used by `Sigma_cat`, the eventual full section-action folds,
 `fdapp1_*`, and `tdapp1_*`.
+
+For the Pi section-action fold, `homd_` also needs terminal-family normal
+forms. At minimum:
+
+```text
+homd_ (Terminal_catd K) x Terminal_obj y Terminal_obj
+  --> Terminal_catd (Op_cat (Hom_cat K x y))
+```
+
+Semantically every fibre is:
+
+```text
+Hom_cat Terminal_cat Terminal_obj Terminal_obj
+  --> Terminal_cat
+```
+
+but the family-level rule is the useful one: `fdapp1_*` needs its source
+dependent-hom family to become a `Terminal_catd` head before the packaged fold
+to `piapp1_func` can be stated cleanly.
+
+A more general constant-family rule would also be coherent:
+
+```text
+homd_ (Const_catd K A) x u y v
+  --> Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v)
+```
+
+The terminal rule is then the `A = Terminal_cat` instance, possibly with an
+extra reduction of `Hom_cat Terminal_cat Terminal_obj Terminal_obj`. If
+`Terminal_catd` remains its own canonical stable head, keep the direct
+terminal rule as the operational normal form.
 
 ## How We Arrived Here
 
