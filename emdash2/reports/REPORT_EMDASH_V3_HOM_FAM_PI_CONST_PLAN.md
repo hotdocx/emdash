@@ -363,9 +363,9 @@ fib_cov_tapp0_func
 fib_cov_tapp0_fapp0
 
 Pi_cat
-full section-action folds (`piapp1*`) only if needed for normalization;
-these are not ordinary `tapp1_fapp0` aliases, but derived/specialized folds
-of the section-as-`Functord` dependent action
+piapp1_func / piapp1_fapp0 as stable terminal-specialization heads for full
+section action; these are not ordinary `tapp1_fapp0` aliases, but canonical
+fold targets for the section-as-`Functord` dependent action
 
 homd_
 homd_int / related internal homd projections
@@ -754,9 +754,43 @@ piapp1_fapp0 s f
   : Obj (fapp0 (homd_ E x (piapp0 s x) y (piapp0 s y)) f)
 ```
 
-This is not a simple alias for `tapp1_fapp0` or `fapp1_fapp0`. Conceptually it
-is the specialization of the full dependent action of the section-as-
-`Functord`:
+The packaged head should be a section over the base-arrow category:
+
+```text
+piapp1_func [K] [E : Catd K]
+  (s : Obj (Pi_cat E))
+  (x y : Obj K)
+  : Obj (Pi_cat
+      (homd_ E x (piapp0 s x) y (piapp0 s y)))
+```
+
+Equivalently, exposing the silent terminal source family:
+
+```text
+piapp1_func s x y
+  : Functord
+      (Terminal_catd (Op_cat (Hom_cat K x y)))
+      (homd_ E x (piapp0 s x) y (piapp0 s y))
+```
+
+where the second type contracts to the first by the joining rule
+`Functord_cat (Terminal_catd J) H --> Pi_cat H`.
+
+Then the capped object projection is evaluation of this section at the base
+arrow:
+
+```text
+piapp1_fapp0 s f
+  := piapp0 (piapp1_func s x y) f
+```
+
+or, if `piapp0` remains only notation, the same rule should be written with
+the unfolded `tapp0_fapp0` plus `Terminal_obj` evaluation rather than with
+`piapp0` on the rewrite-rule LHS.
+
+This is not a simple alias for `tapp1_fapp0` or `fapp1_fapp0`. Conceptually
+`piapp1_func` is the specialization of the full dependent action of the
+section-as-`Functord`:
 
 ```text
 s : Obj (Functord_cat (Terminal_catd K) E)
@@ -769,9 +803,10 @@ a stable derived fold/specialized projection whose ancestor is the dependent
 action layer (`fdapp1_*`, or the corresponding internal `tdapp1_*` identity
 fold once available), not ordinary `tapp*`/`fapp*` alone.
 
-Thus the full `piapp1*` layer should not be scheduled as independent primitive
-Pi theory. It should be implemented only after the dependent `fdapp1_*` /
-`tdapp1_*` infrastructure is available, by specializing that infrastructure to
+Thus the full `piapp1*` layer should be a primitive stable head with its own
+type, but not an independent primitive theory. It should be introduced with,
+or immediately after, the dependent `fdapp1_*` / `tdapp1_*` infrastructure by
+specializing that infrastructure to
 
 ```text
 s : Functord_cat (Terminal_catd K) E
@@ -781,6 +816,28 @@ and then projecting the image of the unique terminal dependent hom over the
 base arrow `f`. This is exactly the same reason `fdapp1_*` cannot be replaced
 by a weak fibrewise `fapp1_func`: the desired section component lives in a
 dependent hom over a base arrow.
+
+The preferred rewrite should be packaged, not merely capped:
+
+```text
+terminal-specialization of fdapp1_* for
+  s : Functord_cat (Terminal_catd K) E
+  and Terminal_obj in the source fibre
+  --> piapp1_func s x y
+```
+
+If the final `fdapp1_*` signature still returns a larger displayed functor
+whose target point `(y, piapp0 s y)` is internal, the LHS may need one
+additional projection before the fold. But the RHS should still be
+`piapp1_func`, with `piapp1_fapp0` obtained afterward by section evaluation.
+At the modification level the same normalization should also be reachable by
+first using the identity fold:
+
+```text
+tdapp1_* at identity --> fdapp1_*
+```
+
+and then applying the terminal-specialization fold above.
 
 Thus the next Pi projection layer should be shaped around `homd_`, for
 example:
@@ -1080,10 +1137,11 @@ piapp0_func E k
 - Design the section-action layer through `homd_`. The weak off-diagonal
   object projection is definable from `tapp1_fapp0` plus `Terminal_obj` if it
   is useful as notation. The full homd-valued `piapp1*` component is different:
-  do not implement it before `fdapp1_*` / `tdapp1_*`. If rewrite rules need it
-  as a normal form, expose it as a stable derived/specialized fold from the
-  section-as-`Functord` dependent action, not as an ordinary `tapp*`/`fapp*`
-  alias.
+  implement it as stable primitive heads `piapp1_func` and, if needed,
+  `piapp1_fapp0`, alongside the `fdapp1_*` / `tdapp1_*` layer. The packaged
+  fold from the terminal specialization of `fdapp1_*` should target
+  `piapp1_func`; `piapp1_fapp0` is then its section evaluation at a base
+  arrow. This is not an ordinary `tapp*`/`fapp*` alias.
 - Defer the full `Hom_cat (Pi_cat E) s t` rule except for documenting the
   likely `Transfd_cat s t` joining direction.
 
@@ -1185,11 +1243,11 @@ Hom_catd
   special contractions, or should injectivity be represented only through
   controlled unification helpers?
 - What is the exact functor-level shape for the full homd-valued
-  section-action layer beyond the capped projection into `homd_`: a direct
-  `piapp1*` stable fold, or a displayed specialization of `fdapp1_*` /
-  identity-specialized `tdapp1_*`? The weak off-diagonal object obtained from
-  ordinary `tapp1_fapp0` is already definable and should not be confused with
-  this question.
+  section-action fold from `fdapp1_*` to `piapp1_func`, especially if the final
+  `fdapp1_*` signature keeps the target point `(y, piapp0 s y)` internal and
+  therefore needs an extra projection before the terminal-specialization fold?
+  The weak off-diagonal object obtained from ordinary `tapp1_fapp0` is already
+  definable and should not be confused with this question.
 - Should `Hom_cat (Pi_cat E) s t` reduce directly to `Transfd_cat s t`, or
   should that be reached through a more explicit section-as-`Functord`
   coercion/fold?
