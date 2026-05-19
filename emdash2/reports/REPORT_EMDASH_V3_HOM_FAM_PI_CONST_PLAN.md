@@ -12,13 +12,12 @@ implementation, including which symbols should be primitive stable heads,
 which should be rewrite contracta, and which should be mere notation or
 definitions that must not appear on rewrite-rule left-hand sides.
 
-Update 2026-05-19: the dependent-hom pair `homd_int` / `homd_` should be
-treated as primitive stable heads only together with their full internal
-action. An object-action rule for `fapp0 (homd_ ...)` is necessary but not
-sufficient: the internal arrow/higher action rules must compute as if the
-endpoint were the semantic `hom_con` construction described below. The
-previous object-only primitive experiment is therefore an incomplete
-implementation strategy, not the final design.
+Update 2026-05-19: the dependent-hom endpoint must compute with full internal
+action, not only object action. The final pre-implementation review refines this
+as follows: keep `homd_int` as the primitive/internal package, but make endpoint
+`homd_` a defined symbol whose body is the semantic `hom_con` construction
+described below. The previous object-only primitive endpoint experiment is
+therefore an incomplete implementation strategy, not the final design.
 
 ## Semantic Reset: `Catd` Means Directed Cat-Valued Family
 
@@ -79,7 +78,8 @@ It also applies to compound expressions in inferred/implicit positions even
 when every head in the expression is stable. For example, avoid spelling
 `Op_cat (Hom_cat K x y)` in an implicit source-category slot of a rule headed
 by `fapp1_func` or `fapp1_fapp0`; use `_` there and keep the discriminating
-argument as the explicit functor head, such as `homd_ ...`.
+argument as a genuine explicit primitive head. Under the final endpoint
+decision, `homd_` is not such a primitive discriminator.
 
 ## Pre-Migration v3.1 Facts Already Replaced
 
@@ -1239,11 +1239,11 @@ be an alias of `Const_catd K Terminal_cat`, do not keep a direct terminal
 
 ### Terminal and Constant Semantic Joinability
 
-The direct terminal `homd_` rule is still useful, but the semantic path through
-the defined helper `homd_semantic_func` should also reduce to the same
-functor-level normal form. Since `homd_semantic_func` is a definition, the
-joinability must come from the symbols it unfolds through, not from a rewrite
-rule headed by `homd_semantic_func`.
+The old direct terminal `homd_` rule remains a useful semantic slogan, but the
+implementation should prefer the semantic path through the defined endpoint
+`homd_`. Any temporary `homd_semantic_func` helper should be a compatibility
+alias only. Joinability must come from the symbols the endpoint unfolds through,
+not from a rewrite rule headed by `homd_` or by a second semantic helper.
 
 The better route is not a special `hom_ Terminal_cat ...` rule for arbitrary
 terminal-valued functors. The better route is a constant-functor calculus,
@@ -1373,12 +1373,12 @@ normal form: it would create avoidable critical pairs with generic
 `Const_catd` rules. With the alias approach, rules should be written against
 the unfolded `Const_catd K Terminal_cat` form when they must be operational.
 
-This lets the semantic terminal path end at the same canonical functor-level
-result as the direct terminal `homd_` rule:
+This lets the defined terminal endpoint end at the same canonical functor-level
+result promised by the old direct terminal `homd_` reading:
 
 ```text
-homd_semantic_func Terminal
-  unfolds to hom_con Terminal ... (fib_cov_tapp0_func Terminal ...)
+homd_ Terminal
+  unfolds through hom_con Terminal ... (fib_cov_tapp0_func Terminal ...)
   fib_cov_tapp0_func Terminal -> Const_func ... Terminal ...
   hom_con/hom_ over Const_func -> Const_catd ... Terminal_cat
   Const_catd ... Terminal_cat, read as Terminal_catd ...
@@ -1386,15 +1386,26 @@ homd_semantic_func Terminal
 
 Avoid a broad unification rule saying every terminal object is
 `Terminal_obj` unless later evidence shows it is necessary. The
-constant-functor route gives functor-level joining for the semantic and direct
-terminal paths, and also solves the `Const_catd` case at the same time.
+constant-functor route gives the desired terminal endpoint computation, and
+also solves the `Const_catd` case at the same time.
 
-### `homd_int` / `homd_` Must Be Full Internal Heads
+### `homd_int` Primitive; Endpoint `homd_` Definitional
 
-There are two viable implementation shapes for the dependent-hom endpoint
-layer.
+Final pre-implementation review changed the endpoint preference in this report.
+The better design is now:
 
-The first is the old definitional endpoint:
+- Keep `homd_int` as the primitive/internal package.
+- Make endpoint `homd_` a defined symbol, with the current
+  `homd_semantic_func` body.
+- Delete `homd_semantic_func` as a separate permanent symbol, or keep it only as
+  a temporary compatibility alias during migration.
+- Remove the simulation rules:
+  `fapp0` / `fapp1_func` / `fapp1_fapp0 ... homd_ ... -->
+  ... homd_semantic_func ...`.
+- Remove direct `homd_ Const_catd` and `homd_ Terminal_catd` rules once the
+  indirect cascade works.
+
+The endpoint should therefore be:
 
 ```text
 homd_ E x u y v
@@ -1406,22 +1417,64 @@ homd_ E x u y v
 ```
 
 This automatically inherits whatever object, arrow, and higher action is
-available for `hom_con` and `hom_`. Its downside is that `homd_` is not a
-primitive stable head for family-level normal forms such as terminal and
-constant dependent homs.
+available for `hom_con` and `hom_`. It removes the need to simulate those
+actions through a separate primitive endpoint head. The real primitive stable
+discriminator should be generalized `homd_int`, plus later
+`tdapp1_int_func_transfd` / `fdapp1_int_transfd`. Endpoint `homd_` is more like
+`piapp0`: useful notation and a useful normal form in statements, but better as
+a definition once the underlying projection calculus is strong enough.
 
-The preferred v3 direction is therefore the second shape: keep the dependent
-hom package as primitive stable heads, but make their computation
-observationally equal to the semantic `hom_con` endpoint at every internal
-level. This applies to both:
+The required indirect cascade is plausible and mathematically cleaner.
+
+For constant families, the target reduction should be:
 
 ```text
-homd_int
-  the internal dependent-hom package, analogous to ordinary hom_int
+homd_ (Const_catd K A) x u y v
+:= hom_con A v (Hom_cat K x y)
+     (fib_cov_tapp0_func (Const_catd K A) x y u)
 
-homd_
-  the fixed-endpoint projection/evaluation layer, analogous to ordinary hom_
+fib_cov_tapp0_func (Const_catd K A) x y u
+→ Const_func (Hom_cat K x y) A u
+
+hom_con A v H (Const_func H A u)
+→ Const_catd (Op_cat H) (Hom_cat A u v)
 ```
+
+The key supporting rules are exactly the constant-functor calculus already
+listed above:
+
+```text
+fapp1_func (Const_func A B b) x y
+  -> Const_func (Hom_cat A x y) (Hom_cat B b b) (id B b)
+
+Op_func (Const_func A B b)
+  -> Const_func (Op_cat A) (Op_cat B) b
+
+comp_cat_fapp0 F (Const_func A B b)
+  -> Const_func A C (fapp0 F b)
+
+hom_ A B (Const_func B A u) w
+  -> Const_catd B (Hom_cat A w u)
+```
+
+Terminal then becomes just the `A = Terminal_cat` instance, plus:
+
+```text
+Hom_cat Terminal_cat _ _ -> Terminal_cat
+Terminal_catd K := Const_catd K Terminal_cat
+```
+
+So the direct terminal rule is not needed:
+
+```text
+homd_ (Terminal_catd K) ... -> Terminal_catd ...
+```
+
+This is better because endpoint action is inherited from `hom_` / `hom_con` by
+definition, rather than simulated by a parallel family of rewrite rules. It also
+removes one source of future joinability obligations: there is no longer a
+primitive `homd_` behavior that must be proven to agree with its semantic
+helper.
 
 The primary target is the internal layer. At the current planning stage, the
 only v2 heads that are clearly candidates for adaptation are:
@@ -1442,18 +1495,10 @@ then decide which less-internal or capped operations should be promoted from
 notation/derived structure to stable heads. Do not make the less-internal
 `fapp1_func (homd_ ...)` rules the architectural foundation.
 
-Endpoint rules remain useful as sanity and joining rules. The object rule
-should delegate to the semantic endpoint rather than duplicating the current
-transport formula:
-
-```text
-fapp0 (homd_ E x u y v) f
-  --> fapp0 (homd_semantic_func E x u y v) f
-```
-
-At the moment `homd_semantic_func` should reduce through the semantic
-definition of `fib_cov_tapp0_func`; the object-level `fib_cov_tapp0_fapp0`
-should be only the projection
+The caveat is operational: `homd_` will no longer be a stable rewrite
+discriminator. This is acceptable for the endpoint layer. The endpoint formula
+should instead reduce through the semantic definition of `fib_cov_tapp0_func`;
+the object-level `fib_cov_tapp0_fapp0` should be only the projection
 
 ```text
 fapp0 (fib_cov_tapp0_func E x y u) f
@@ -1461,9 +1506,7 @@ fapp0 (fib_cov_tapp0_func E x y u) f
 
 not an independent transport primitive. This keeps the endpoint formula tied to
 `fapp1_func E x y`, while still giving constant/terminal reductions by cascade
-once the constant-functor calculus is present. Keeping the `homd_` object rule
-as a semantic delegation prevents the endpoint rule from depending directly on
-a provisional pointwise transport shortcut.
+once the constant-functor calculus is present.
 
 The immediate `fib_cov_transf` shape, following v2, is expected to be:
 
@@ -1588,10 +1631,10 @@ of a transfor. The variance also looks correct: source is `E`, not
 `Op_catd E`, because transport is covariant in the fibre object `u`.
 
 With a generalized displayed functor argument `FF : Functord D E`, the
-endpoint semantic helper should be read as:
+endpoint definition should be read as:
 
 ```text
-homd_semantic_func FF x u y v
+homd_ FF x u y v
   := hom_con
        (Fibre_cat E y)
        (FF_y v)
@@ -1607,41 +1650,23 @@ FF_y v :=
 ```
 
 This `FF_y v` projection is endpoint-level, not the fully-internal displayed
-action. That is acceptable for `homd_semantic_func`, which is itself an
-endpoint semantic helper. The fully-internal action remains the job of
+action. That is acceptable for `homd_`, which is now only the endpoint
+definition. The fully-internal action remains the job of
 generalized `homd_int`, `tdapp1_int_func_transfd`, and `fdapp1_int_transfd`.
 
-The object rule must still be accompanied, or justified by, the corresponding
-internal arrow-level action. Schematic endpoint-level joining rules are:
+Because `homd_` is a definition, do not add endpoint-level simulation rewrite
+rules for:
 
 ```text
-fapp1_func (homd_ E x u y v) f g
-  --> fapp1_func
-        (hom_con
-           (Fibre_cat E y)
-           v
-           (Hom_cat K x y)
-           (fib_cov_tapp0_func E x y u))
-        f g
-
-fapp1_fapp0 (homd_ E x u y v) [f] [g] alpha
-  --> fapp1_fapp0
-        (hom_con
-           (Fibre_cat E y)
-           v
-           (Hom_cat K x y)
-           (fib_cov_tapp0_func E x y u))
-        [f] [g] alpha
+fapp0 (homd_ ...)
+fapp1_func (homd_ ...)
+fapp1_fapp0 (homd_ ...)
 ```
 
-The exact Lambdapi rules should use explicit `@...` applications and `_` in
-implicit category positions unless the category is an actual discriminator.
-Do not spell reducible compound expressions in implicit LHS slots merely to
-make the rule typecheck.
-For the endpoint action rules specifically, the source category of
-`fapp1_func` / `fapp1_fapp0` should be `_`, not the compound
-`Op_cat (Hom_cat K x y)`, because the functor argument `homd_ ...` is the real
-discriminator.
+Those computations should reduce by unfolding `homd_` to the `hom_con` /
+`hom_` expression and then using the ordinary action rules. If a temporary
+`homd_semantic_func` compatibility name is retained during migration, it should
+be a definitional alias only and should not become a second rewrite target.
 
 The same principle applies one level up: rules for internal heads such as
 adapted v3 versions of `fapp1_int_transf`, `tapp1_int_func_transf`,
@@ -1651,12 +1676,13 @@ compute through, the corresponding action of the semantic `hom_int` /
 object-only transport.
 
 The terminal and constant-family normal forms above remain desired
-family-level normal forms, but they are acceptable only if they are full
-internal normal forms. Their `homd_int`, `homd_`, `fapp0`, `fapp1_func`, and
-`fapp1_fapp0` behavior must join with the general action rules and the action
-rules for `Terminal_catd` / `Const_catd`. If joinability is not immediate,
-implement the general full-action rules first and defer the terminal/constant
-whole-family rules until the critical pairs are understood.
+family-level normal forms, but they should be consequences of the defined
+endpoint plus the constant-functor calculus. Their `homd_int`, `homd_`,
+`fapp0`, `fapp1_func`, and `fapp1_fapp0` behavior must join with the general
+action rules and the action rules for `Terminal_catd` / `Const_catd`. If the
+cascade does not fire, fix the missing indirect rule first; reintroduce a
+direct endpoint rule only as a last-resort probe after the critical pairs are
+understood.
 
 ### Open Arity Issue: General Dependent Hom Action
 
@@ -1767,55 +1793,37 @@ hom-action packaging heads (`tdapp1_int_fapp1_*`, external `tdapp1_*`,
 external `fdapp1_*`) in the same pass unless a typechecking blocker proves
 that one is needed as a named projection.
 
-### Internal Endpoint Rule for `fapp1_int_transf (homd_ ...)`
+### No Separate Internal Endpoint Rule for `fapp1_int_transf (homd_ ...)`
 
-In addition to the less-internal endpoint rules for `fapp1_func` and
-`fapp1_fapp0`, there is an ordinary internal endpoint rule to consider:
-`fapp1_int_transf` applied to the endpoint functor `homd_ ...`.
-
-For the current one-family endpoint shape, the intended rule is simply:
+Under the final endpoint decision, do not add a rule of the form:
 
 ```text
 fapp1_int_transf (homd_ E x u y v)
   --> fapp1_int_transf (homd_semantic_func E x u y v)
 ```
 
-With explicit Lambdapi applications, the LHS should keep the source category
-implicit, just like the `fapp1_func (homd_ ...)` rule:
+Since `homd_` is defined as the semantic `hom_con` endpoint, ordinary
+`fapp1_int_transf (homd_ ...)` should reduce by unfolding `homd_` and then
+using the existing `hom_con` / `hom_` action rules. If a temporary
+`homd_semantic_func` name remains during migration, it is only an alias for the
+same body, not a second rewrite target.
 
-```text
-rule @fapp1_int_transf _ Cat_cat (@homd_ $K $E $x $u $y $v)
-  ↪ @fapp1_int_transf
-        (Op_cat (Hom_cat $K $x $y))
-        Cat_cat
-        (@homd_semantic_func $K $E $x $u $y $v)
-```
-
-After `homd_` is generalized with an explicit displayed functor argument, the
-identity specialization should have the same shape, with
-`homd_ (id_funcd E) x u y v` on the LHS. This rule is enough for the ordinary
-internal endpoint action: it says that the stable endpoint head behaves
-exactly as the semantic `hom_con` endpoint when used by `fapp1_int_transf`.
-
-It should join with the already-planned component endpoint rules:
+The same applies to the component endpoint rules that were previously planned:
 
 ```text
 fapp1_func (homd_ E x u y v) f g
-  --> fapp1_func (homd_semantic_func E x u y v) f g
-
 fapp1_fapp0 (homd_ E x u y v) f g alpha
-  --> fapp1_fapp0 (homd_semantic_func E x u y v) f g alpha
 ```
 
-This is not yet the fully displayed `fdapp1_int_transfd` story. The displayed
-rule will be about the generalized `homd_int ... FF` layer and its component
-projections. For now, the endpoint `fapp1_int_transf` rule is the correct
-less-internal semantic joining rule.
+Do not implement these as simulation rules into `homd_semantic_func`. They
+should compute by definitional unfolding of `homd_`.
 
-Rewrite-SOP constraint: keep compound categories such as
-`Op_cat (Hom_cat K x y)` out of implicit LHS slots. The LHS should
-discriminate on the explicit stable functor argument `homd_ ...`, while the
-RHS may use the fully explicit semantic expression.
+This is separate from the fully displayed `fdapp1_int_transfd` story. The
+displayed rule will be about the generalized `homd_int ... FF` layer and its
+component projections. Keep compound categories such as
+`Op_cat (Hom_cat K x y)` out of implicit LHS slots for any internal rules that
+are still needed; the discriminator should be generalized `homd_int`, not
+endpoint `homd_`.
 
 ## How We Arrived Here
 
@@ -2052,9 +2060,9 @@ fib_cov_tapp0_fapp0
   `comp_cat_fapp0 (fapp0_func u) (fapp1_func E x y)`. Convert
   `fib_cov_tapp0_fapp0` away from the current v2-style primitive/stable
   transport rule and into the defined projection
-  `fapp0 (fib_cov_tapp0_func E x y u) f`. New `homd_` rules should delegate
-  through `homd_semantic_func`, so the later projection from `fib_cov_transf`
-  remains localized.
+  `fapp0 (fib_cov_tapp0_func E x y u) f`. The defined `homd_` endpoint should
+  unfold through `fib_cov_tapp0_func`, so the later projection from
+  `fib_cov_transf` remains localized.
   Current `emdash3_1.lp` still has the old primitive and its projection rule;
   remove them in the conversion pass to avoid the loop described above.
   The immediate `fib_cov_transf E x u` transfor still has external `x,u`
@@ -2062,7 +2070,8 @@ fib_cov_tapp0_fapp0
   version should eventually push `x,u` inside, in the same spirit as
   `homd_int`.
 
-- Port `homd_int` and `homd_` to the new `Catd` vocabulary as a pair.
+- Generalize `homd_int` in the new `Catd` vocabulary; keep endpoint `homd_` as
+  a defined endpoint using the semantic `hom_con` body.
 - Before committing to the current v3 arity, review the v2 pattern where both
   `homd_int` and `homd_` carry a displayed functor argument. The likely v3
   generalized arity is schematic `FF : Obj (Functord_cat D E)`, with the
@@ -2071,15 +2080,13 @@ fib_cov_tapp0_fapp0
   itself, plus introduce `Op_funcd`. If the current one-family `homd_int E`
   is kept during migration, it should be temporary compatibility structure,
   not a second permanent head used by new rewrite-rule LHSs.
-- Keep `homd_int` / `homd_` as primitive stable heads only if full internal
-  action rules are added. The endpoint-level minimum includes object and arrow
-  action: `fapp0`, `fapp1_func`, and `fapp1_fapp0` should compute as if the
-  endpoint were the semantic `hom_con (fib_cov_tapp0_func ...)` endpoint.
-  The internal `homd_int` rules are the real foundation; endpoint rules are
-  projections or joining checks.
-- Add terminal/constant whole-family `homd_int` / `homd_` normal forms only
-  after checking that they join with the general internal and endpoint action
-  rules.
+- Keep only `homd_int` as the primitive stable internal head. Endpoint-level
+  `fapp0`, `fapp1_func`, and `fapp1_fapp0` should compute by unfolding
+  `homd_` to `hom_con` / `hom_`, not by simulation rules.
+- Add terminal/constant whole-family `homd_int` normal forms only after
+  checking that they join with the defined endpoint and constant-functor
+  cascade. Do not add direct endpoint `homd_` terminal/constant rules unless a
+  concrete probe proves the cascade insufficient.
 - Keep endpoint rules small and stable; avoid matching large reducible
   composites, or stable-but-compound expressions such as
   `Op_cat (Hom_cat ...)`, in implicit arguments.
