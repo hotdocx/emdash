@@ -1391,6 +1391,43 @@ and identity/composition rules. That is the old working skeleton. The next pass
 should convert it to the defined projection in the same edit that removes the
 old rule.
 
+Strict functoriality clarification:
+
+The v2 file has a `StrictFunctor_cat` layer, but it is explicit extra structure:
+only functors of the form `sfunc_func Fs` get strict identity/composition
+rewrite rules. That is not the same as the current v3.1 generic transport
+shortcut, whose identity/composition rules apply to every
+`E : Functor K Cat_cat`.
+
+Therefore the v3.2 migration should not import or adapt `StrictFunctor_cat`
+before the main plan is implemented. The immediate architecture only needs the
+narrow constant/terminal cascades:
+
+```text
+fib_cov_tapp0_fapp0 (Const_catd K A) x y f u
+  --> u
+
+homd_ (Const_catd K A) x u y v
+  --> Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v)
+```
+
+After `fib_cov_tapp0_fapp0` becomes a definition, do not expect the old generic
+transport reductions to remain definitional for arbitrary `E`:
+
+```text
+fib_cov_tapp0_fapp0 E x x (id K x) u
+  --> u
+
+fib_cov_tapp0_fapp0 E y z g (fib_cov_tapp0_fapp0 E x y f u)
+  --> fib_cov_tapp0_fapp0 E x z (comp_fapp0 g f) u
+```
+
+That loss is intentional for the v3.2 core migration. Generic strict transport
+coherence should be revisited later as an explicit strictness layer, for
+example by adapting v2's `StrictFunctor_cat` / `sfunc_func` pattern and possibly
+adding a Cat-valued specialization such as `StrictCatd_cat K`. Do not make all
+ordinary `Functor_cat` or `Catd` objects strict by global rewrite rules.
+
 For `Terminal_catd`, derive through the `Const_catd K Terminal_cat` alias
 whenever possible. The analogous direct terminal readings are:
 
@@ -2144,6 +2181,9 @@ fib_cov_tapp0_fapp0    defined object-level projection
   Current `emdash3_1.lp` still has the old primitive and its projection rule;
   remove them from `emdash3_2.lp` in the conversion pass to avoid the loop
   described above.
+  Do not import v2 `StrictFunctor_cat` or add broad generic functoriality laws in
+  this phase. The conversion should be validated by constant/terminal cascades
+  and focused assertions, not by global strictness for every `Catd` object.
   The immediate `fib_cov_transf E x u` transfor still has external `x,u`
   parameters. Record it as an intermediate package only; the most-internal
   version should eventually push `x,u` inside, in the same spirit as
@@ -2272,6 +2312,11 @@ Hom_catd
 - Should `Hom_cat (Pi_cat E) s t` reduce directly to `Transfd_cat s t`, or
   should that be reached through a more explicit section-as-`Functord`
   coercion/fold?
+- Post-v3.2 strictness question: should generic strict transport laws be
+  introduced through an explicit `StrictFunctor_cat`/`sfunc_func` layer, a
+  Cat-valued specialization such as `StrictCatd_cat K`, or a different
+  coherence interface? This is deferred and should not block the v3.2
+  constant/terminal and dependent-hom migration.
 - What exact name should distinguish pointwise-opposite `Op_catd E : Catd K`
   from any future base-opposite operation?
 - Which convenience aliases, if any, belong in a later standard-library layer
