@@ -1039,6 +1039,101 @@ extra reduction of `Hom_cat Terminal_cat Terminal_obj Terminal_obj`. If
 `Terminal_catd` remains its own canonical stable head, keep the direct
 terminal rule as the operational normal form.
 
+### Terminal and Constant Semantic Joinability
+
+The direct terminal `homd_` rule is still useful, but the semantic path through
+the defined helper `homd_semantic_func` should also reduce to the same
+functor-level normal form. Since `homd_semantic_func` is a definition, the
+joinability must come from the symbols it unfolds through, not from a rewrite
+rule headed by `homd_semantic_func`.
+
+The better route is not a special `hom_ Terminal_cat ...` rule for arbitrary
+terminal-valued functors. The better route is a constant-functor calculus,
+because both `Terminal_catd` and `Const_catd` cases should be instances of the
+same phenomenon.
+
+Missing rule inventory:
+
+```text
+fapp1_func (Const_func A B b) x y
+  --> Const_func (Hom_cat A x y) (Hom_cat B b b) (id B b)
+
+fapp1_fapp0 (Const_func A B b) f
+  --> id B b
+
+Op_func (Const_func A B b)
+  --> Const_func (Op_cat A) (Op_cat B) b
+```
+
+Composition with constant functors is also needed:
+
+```text
+comp_cat_fapp0 F (Const_func A B b)
+  --> Const_func A C (fapp0 F b)
+
+comp_cat_fapp0 (Const_func B C c) G
+  --> Const_func A C c
+```
+
+The first composition rule is especially important because the current
+`fib_cov_tapp0_func` is defined as a composition.
+
+Constant-family transport should compute at the functor level:
+
+```text
+fib_cov_tapp0_func (Const_catd K A) x y u
+  --> Const_func (Hom_cat K x y) A u
+
+fib_cov_tapp0_fapp0 (Const_catd K A) x y f u
+  --> u
+```
+
+For `Terminal_catd`, either derive it via `Const_catd K Terminal_cat`, or add
+the analogous direct rules:
+
+```text
+fib_cov_tapp0_func (Terminal_catd K) x y u
+  --> Const_func (Hom_cat K x y) Terminal_cat u
+
+fib_cov_tapp0_fapp0 (Terminal_catd K) x y f u
+  --> u
+```
+
+Returning `u`, not necessarily `Terminal_obj`, avoids needing terminal-object
+eta immediately.
+
+The semantic endpoint also needs the hom of a constant functor to collapse:
+
+```text
+hom_ A B (Const_func B A u) w
+  --> Const_catd B (Hom_cat A w u)
+```
+
+Then `hom_con` gets the desired constant behavior by unfolding through `hom_`
+plus `Op_func (Const_func ...)`.
+
+Finally, the terminal family should be the canonical constant terminal family:
+
+```text
+Const_catd K Terminal_cat --> Terminal_catd K
+```
+
+This lets the semantic terminal path end at the same canonical functor-level
+result as the direct terminal `homd_` rule:
+
+```text
+homd_semantic_func Terminal
+  unfolds to hom_con Terminal ... (fib_cov_tapp0_func Terminal ...)
+  fib_cov_tapp0_func Terminal -> Const_func ... Terminal ...
+  hom_con/hom_ over Const_func -> Const_catd ... Terminal_cat
+  Const_catd ... Terminal_cat -> Terminal_catd ...
+```
+
+Avoid a broad unification rule saying every terminal object is
+`Terminal_obj` unless later evidence shows it is necessary. The
+constant-functor route gives functor-level joining for the semantic and direct
+terminal paths, and also solves the `Const_catd` case at the same time.
+
 ### `homd_int` / `homd_` Must Be Full Internal Heads
 
 There are two viable implementation shapes for the dependent-hom endpoint
