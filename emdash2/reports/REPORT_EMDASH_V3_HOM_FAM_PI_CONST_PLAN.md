@@ -1021,6 +1021,80 @@ The exact type may need adjustment after the `Pi_cat` joining rules are tested,
 but the old plan's functorial-projection requirement should be kept in this
 derived/definitional form.
 
+Implementation clarification after final pre-implementation review:
+
+The planned `homd_int` generalization is not a design gap in this report. It is
+a gap only in the current live code state: `emdash3_1.lp` still has the
+one-family `homd_int E`, while this plan already says to generalize it with an
+explicit family morphism argument. This should therefore be treated as a
+plan/codebase delta, not as missing architecture.
+
+For `piapp0`, the current obstacle is not definability. The obstacle is that
+the live code currently has a rewrite rule headed by primitive `piapp0`:
+
+```text
+rule @piapp0 _ _ (@homd_src_sec $Z $E $x $u) $y
+  ↪ @homd_tgt_func $Z $E $x $u $y;
+```
+
+If `piapp0` becomes a defined symbol, this rule should be replaced by an
+indirect rule on the unfolded component evaluator. The likely replacement shape
+is:
+
+```text
+rule @tapp0_fapp0 _ Cat_cat _ _ $y
+      (@homd_src_sec $Z $E $x $u)
+  ↪ @Obj_func
+      (Fibre_cat (@Homd_section_catd Z E x) $y)
+      (@homd_tgt_func $Z $E $x $u $y);
+```
+
+Then the proposed `piapp0` body reduces as:
+
+```text
+piapp0 (homd_src_sec Z E x u) y
+→ fapp0
+    (@tapp0_fapp0 ... y (homd_src_sec Z E x u))
+    Terminal_obj
+→ fapp0 (Obj_func (homd_tgt_func Z E x u y)) Terminal_obj
+→ homd_tgt_func Z E x u y
+```
+
+So this can be done without keeping `piapp0` primitive, provided the right
+`tapp0_fapp0`-level component rule is added.
+
+There is a second indirect rule probably needed for constant families:
+
+```text
+rule @tapp0_fapp0 $K Cat_cat
+      (@Const_catd $K Terminal_cat)
+      (@Const_catd $K $A)
+      $k
+      $F
+  ↪ @Obj_func $A (@fapp0 $K $A $F $k);
+```
+
+This gives the desired constant-family compatibility:
+
+```text
+piapp0 F k → fapp0 F k
+```
+
+without a rule headed by `piapp0`. It also helps the
+`Hom_catd (Const_catd K Cat_cat)` bridge join with the pointwise `Hom_catd`
+rule, which is exactly where the current warning at `emdash3_1.lp:709` is
+pointing.
+
+Revised implementation position:
+
+- `piapp0` should become defined, as above.
+- Existing `piapp0` rewrite rules should move one layer down to `tapp0_fapp0`
+  rules returning `Obj_func ...`.
+- `piapp1*` is different and should remain planned as primitive/stable
+  higher-action infrastructure.
+- Warning cleanup can wait, but these `piapp0` changes are likely part of the
+  architecture that will naturally remove some warnings later.
+
 ### Hom Of A Pi Category: Deferred Issue
 
 The tempting rule:
