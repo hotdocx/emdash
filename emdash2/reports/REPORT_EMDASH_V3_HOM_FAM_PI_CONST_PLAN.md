@@ -1285,6 +1285,19 @@ comp_cat_fapp0
 so that fibre transport remains definitionally tied to the ordinary functor
 action of the family `E`.
 
+Final pre-implementation clarification: `fib_cov_tapp0_func` should be a
+defined semantic helper, not a primitive rewrite head. The rule
+
+```text
+tapp0_fapp0 y (fib_cov_transf E x u)
+  --> fib_cov_tapp0_func E x y u
+```
+
+is still valid, because the rewrite head is `tapp0_fapp0`, not
+`fib_cov_tapp0_func`. The right-hand side may be a defined symbol. After this
+projection contracts, `fib_cov_tapp0_func` can unfold to the semantic
+`comp_cat_fapp0 (fapp0_func u) (fapp1_func E x y)` composite.
+
 Under this design, do not add direct constant/terminal rules headed by
 `fib_cov_tapp0_func`. Instead, the following should be desired normal forms
 obtained by unfolding `fib_cov_tapp0_func` and applying the constant-functor
@@ -1293,6 +1306,32 @@ calculus above:
 ```text
 fib_cov_tapp0_func (Const_catd K A) x y u
   --> Const_func (Hom_cat K x y) A u
+```
+
+The intended constant-family computation is therefore a cascade:
+
+```text
+fib_cov_tapp0_func (Const_catd K A) x y u
+≔ comp_cat_fapp0
+    (fapp0_func u)
+    (fapp1_func (Const_catd K A) x y)
+
+fapp1_func (Const_catd K A) x y
+↪ Const_func (Hom_cat K x y) (Functor_cat A A) (id_func A)
+
+comp_cat_fapp0 (fapp0_func u) (Const_func ... (id_func A))
+↪ Const_func (Hom_cat K x y) A (fapp0 (fapp0_func u) (id_func A))
+
+fapp0 (fapp0_func u) (id_func A)
+↪ fapp0 (id_func A) u
+↪ u
+```
+
+So the desired normal form follows indirectly:
+
+```text
+fib_cov_tapp0_func (Const_catd K A) x y u
+↪* Const_func (Hom_cat K x y) A u
 ```
 
 The corresponding object-level helper should also be semantic, not an
@@ -1426,7 +1465,9 @@ a definition once the underlying projection calculus is strong enough.
 
 The required indirect cascade is plausible and mathematically cleaner.
 
-For constant families, the target reduction should be:
+For constant families, the target reduction should be obtained by unfolding
+`homd_` and the defined `fib_cov_tapp0_func`, not by adding a direct rule
+headed by either endpoint:
 
 ```text
 homd_ (Const_catd K A) x u y v
@@ -2050,9 +2091,9 @@ Hom_catd (Functor_catd A B) FF GG
 - Add or preserve:
 
 ```text
-fib_cov_transf
-fib_cov_tapp0_func
-fib_cov_tapp0_fapp0
+fib_cov_transf         primitive/projection package
+fib_cov_tapp0_func     defined semantic helper and tapp0_fapp0 contractum
+fib_cov_tapp0_fapp0    defined object-level projection
 ```
 
   Audit the `fib_cov_tapp0_func` / `fib_cov_tapp0_fapp0` layer while doing this.
