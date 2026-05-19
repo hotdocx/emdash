@@ -463,6 +463,20 @@ rules. Those terminal-specific formulations remain useful as explanatory
 readings, but implementation rules should usually be written on
 `Const_catd K Terminal_cat` so they fire after unfolding the alias.
 
+The terminal-specific behavior should then follow from the `Const_catd` rules
+plus the ordinary terminal-category rules:
+
+```text
+Hom_cat Terminal_cat _ _
+  --> Terminal_cat
+
+Op_cat Terminal_cat
+  --> Terminal_cat
+```
+
+This is the same reason direct terminal-specific `homd_` and `Op_catd` rules
+should usually be unnecessary once the constant route is implemented.
+
 ### Opposite Families
 
 The operational role currently played by `op_val_func K` should become a
@@ -697,6 +711,25 @@ constant-terminal source:
 Functord_cat (Const_catd K Terminal_cat) E
   --> Pi_cat E
 ```
+
+The essential bridge is the `Functord_cat` one. The existing general
+contraction
+
+```text
+@Transf_cat K Cat_cat E D
+  --> Functord_cat E D
+```
+
+then sends the terminal-source transformation category through:
+
+```text
+@Transf_cat K Cat_cat (Const_catd K Terminal_cat) E
+  --> Functord_cat (Const_catd K Terminal_cat) E
+  --> Pi_cat E
+```
+
+A direct `@Transf_cat ... --> Pi_cat` rule is therefore optional/redundant as
+an operational shortcut; if kept, it must join with this general path.
 
 The displayed `Terminal_catd K` form is still useful documentation, but a rule
 whose LHS mentions the alias directly is brittle. A Lambdapi probe showed that
@@ -1845,6 +1878,11 @@ Operational LHSs should use the unfolded source:
 @Transf_cat K Cat_cat (Const_catd K Terminal_cat) E --> Pi_cat E
 Functord_cat (Const_catd K Terminal_cat) E --> Pi_cat E
 ```
+
+The `Functord_cat` bridge is the necessary one. The direct `@Transf_cat`
+bridge can be omitted if the general `@Transf_cat K Cat_cat E D -->
+Functord_cat E D` contraction is present, because the terminal-source case then
+reaches `Pi_cat E` through `Functord_cat (Const_catd K Terminal_cat) E`.
 
 - Add or preserve a section-category functor:
 
