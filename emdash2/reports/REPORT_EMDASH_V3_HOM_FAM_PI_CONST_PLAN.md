@@ -228,6 +228,12 @@ notation/a definitional alias for `Const_catd K Terminal_cat`, not a separate
 canonical rewrite head. Write operational rules against the unfolded
 `Const_catd K Terminal_cat` form whenever the rule must fire after reduction.
 
+Live-code delta before the next implementation pass: `emdash3_1.lp` still has
+`Terminal_catd` as a primitive head with terminal-specific `fapp0`,
+`fapp1_func`, `fapp1_fapp0`, `Op_catd`, `Transf_cat`, `Functord_cat`, and
+`homd_` rules. This is the old working state, not the target architecture.
+Migrating those rules to the `Const_catd K Terminal_cat` route is intentional.
+
 The name `Op_catd` must be documented carefully: in this v3 directed-family
 layer it means pointwise opposite of fibres over the same base. If a future
 base-opposite operation is needed, it should be introduced separately or
@@ -1242,6 +1248,12 @@ must be removed when `fib_cov_tapp0_fapp0` becomes a definition: the definition
 expands back through `fib_cov_tapp0_func` to the same functor-action
 projection, so keeping both directions would create a bad loop/overlap.
 
+Live-code delta before the next implementation pass: `emdash3_1.lp` still has
+`fib_cov_tapp0_fapp0` as a sequential primitive/stable head with the rule above
+and identity/composition rules. That is the old working skeleton. The next pass
+should convert it to the defined projection in the same edit that removes the
+old rule.
+
 For `Terminal_catd`, derive through the `Const_catd K Terminal_cat` alias
 whenever possible. The analogous direct terminal readings are:
 
@@ -1859,6 +1871,9 @@ Op_catd E
   `fapp0`, `fapp1_func`, `fapp1_fapp0`, or `Op_catd` rules unless a local
   Lambdapi probe shows a concrete matching failure that cannot be solved by
   writing the rule on `Const_catd K Terminal_cat`.
+  Current `emdash3_1.lp` still has those terminal-specific rules; remove or
+  replace them during this phase, after adding the constant-functor calculus
+  needed for the alias path to typecheck.
 - Replace uses of `op_val_func`/`Homd_source_fam` in future operational rules
   with the stable pointwise-opposite constructor.
 
@@ -1966,6 +1981,8 @@ fib_cov_tapp0_fapp0
   `fapp0 (fib_cov_tapp0_func E x y u) f`. New `homd_` rules should delegate
   through `homd_semantic_func`, so the later projection from `fib_cov_transf`
   remains localized.
+  Current `emdash3_1.lp` still has the old primitive and its projection rule;
+  remove them in the conversion pass to avoid the loop described above.
   The immediate `fib_cov_transf E x u` transfor still has external `x,u`
   parameters. Record it as an intermediate package only; the most-internal
   version should eventually push `x,u` inside, in the same spirit as
