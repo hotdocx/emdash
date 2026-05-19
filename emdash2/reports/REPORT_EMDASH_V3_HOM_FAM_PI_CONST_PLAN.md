@@ -113,13 +113,23 @@ suggestive but operationally too reducible for the intended final kernel:
   `Op(Fam(Op K)) -> (Fam K -> Fam K)`. This role should not be lost; it
   should be migrated to the corrected `Catd` vocabulary if internal pipelines
   still need the packaged constructor.
-- `Functor_cat` and `Transf_cat` are currently declared `constant`, which
-  blocks the intended special-case contractions.
+- In the older snapshot, `Functor_cat` and `Transf_cat` were declared
+  `constant`, which blocked the intended special-case contractions. This is no
+  longer true in the live v3.1 baseline: both are already declared with
+  rewrite-capable `symbol` declarations, and the relevant contractions already
+  typecheck there.
 
 Those assumptions were allowed to change, and the current implementation has
 already relaxed the relevant `constant` qualifiers and replaced the public
 family layer with rewrite-capable `Catd` heads plus controlled unification
 helpers.
+
+Implementation clarification: Phase 1 below should therefore be read mostly as
+an audit/preservation phase for the `emdash3_2.lp` fork. Do not reintroduce
+`Fam_*` vocabulary, do not re-apply an obsolete `constant`-to-`symbol`
+migration, and do not duplicate contractions already present in `emdash3_1.lp`.
+The goal is to preserve the checked v3.1 canonical spine while making later
+v3.2 rewrites use it consistently.
 
 ## Lessons From v2
 
@@ -2006,7 +2016,7 @@ lambdapi check -w emdash3_2.lp
 - In `emdash3_2.lp`, preserve the already-migrated canonical `Catd_*`
   vocabulary from v3.1 and continue removing any remaining old `Fam_*`
   assumptions from planned rules or comments.
-- Introduce stable:
+- Verify/preserve the already-present stable heads:
 
 ```text
 Catd_cat K
@@ -2015,27 +2025,30 @@ Functord_cat E D
 Transfd_cat FF GG
 ```
 
-- Relax `Functor_cat` from `constant` to rewrite-capable, then add:
+- Confirm that `Functor_cat` is rewrite-capable in the v3.2 fork and that the
+  existing contraction is preserved:
 
 ```text
 Functor_cat K Cat_cat --> Catd_cat K
 ```
 
-- Relax `Transf_cat` from `constant` to rewrite-capable, then add:
+- Confirm that `Transf_cat` is rewrite-capable in the v3.2 fork and that the
+  existing contraction is preserved:
 
 ```text
 @Transf_cat K Cat_cat E D --> Functord_cat E D
 ```
 
-- Add:
+- Confirm that these existing canonical hom contractions are preserved:
 
 ```text
 Hom_cat (Catd_cat K) E D --> Functord_cat E D
 Hom_cat (Functord_cat E D) FF GG --> Transfd_cat FF GG
 ```
 
-- Add controlled unification helpers analogous to the existing
-  `Functor_cat`/`Transf_cat` helpers.
+- Confirm that the controlled unification helpers from v3.1 are still present
+  and adequate before adding any new ones. Add new helpers only for a concrete
+  elaboration failure observed during the v3.2 migration.
 
 ### Phase 2: Migrate Current Directed-Family Code
 
