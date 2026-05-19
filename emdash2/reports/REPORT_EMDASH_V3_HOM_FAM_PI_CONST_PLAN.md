@@ -1075,21 +1075,58 @@ comp_cat_fapp0 (Const_func B C c) G
   --> Const_func A C c
 ```
 
-The first composition rule is especially important because the current
-`fib_cov_tapp0_func` is defined as a composition.
+The first composition rule is especially important because
+`fib_cov_tapp0_func` should stay defined as the semantic functor
 
-Constant-family transport should compute at the functor level:
+```text
+comp_cat_fapp0
+  (fapp0_func u)
+  (fapp1_func E x y)
+```
+
+so that fibre transport remains definitionally tied to the ordinary functor
+action of the family `E`.
+
+Under this design, do not add direct constant/terminal rules headed by
+`fib_cov_tapp0_func`. Instead, the following should be desired normal forms
+obtained by unfolding `fib_cov_tapp0_func` and applying the constant-functor
+calculus above:
 
 ```text
 fib_cov_tapp0_func (Const_catd K A) x y u
   --> Const_func (Hom_cat K x y) A u
+```
 
+The corresponding object-level helper should also be semantic, not an
+independent v2-style stable transport primitive:
+
+```text
+fib_cov_tapp0_fapp0 E x y f u
+  := fapp0 (fib_cov_tapp0_func E x y u) f
+```
+
+Then constant-family object transport computes by cascade:
+
+```text
 fib_cov_tapp0_fapp0 (Const_catd K A) x y f u
+  --> fapp0 (Const_func (Hom_cat K x y) A u) f
   --> u
 ```
 
-For `Terminal_catd`, either derive it via `Const_catd K Terminal_cat`, or add
-the analogous direct rules:
+This means the old current v3 rule
+
+```text
+fapp0 (fapp1_fapp0 E f) u
+  --> fib_cov_tapp0_fapp0 E x y f u
+```
+
+must be removed when `fib_cov_tapp0_fapp0` becomes a definition: the definition
+expands back through `fib_cov_tapp0_func` to the same functor-action
+projection, so keeping both directions would create a bad loop/overlap.
+
+For `Terminal_catd`, either derive it via `Const_catd K Terminal_cat`, or keep
+the analogous direct terminal rules temporarily until the terminal-vs-constant
+canonicalization question is settled:
 
 ```text
 fib_cov_tapp0_func (Terminal_catd K) x y u
@@ -1117,6 +1154,11 @@ Finally, the terminal family should be the canonical constant terminal family:
 ```text
 Const_catd K Terminal_cat --> Terminal_catd K
 ```
+
+This rewrite may instead become a definition of `Terminal_catd` as
+`Const_catd K Terminal_cat`, or a carefully tested unification bridge, but defer
+that choice until the next implementation step. Do not duplicate terminal rules
+unnecessarily if the constant-family route can supply them.
 
 This lets the semantic terminal path end at the same canonical functor-level
 result as the direct terminal `homd_` rule:
@@ -1196,12 +1238,19 @@ fapp0 (homd_ E x u y v) f
   --> fapp0 (homd_semantic_func E x u y v) f
 ```
 
-At the moment `homd_semantic_func` still reduces through
-`fib_cov_tapp0_func` / `fib_cov_tapp0_fapp0`, so this joins with the old
-sigma-hom formula. That transport layer is provisional: the more correct
-foundation should be a future `fib_cov_transf`-based formulation. Keeping the
-`homd_` object rule as a semantic delegation prevents the endpoint rule from
-depending directly on the provisional transport helper.
+At the moment `homd_semantic_func` should reduce through the semantic
+definition of `fib_cov_tapp0_func`; the object-level `fib_cov_tapp0_fapp0`
+should be only the projection
+
+```text
+fapp0 (fib_cov_tapp0_func E x y u) f
+```
+
+not an independent transport primitive. This keeps the endpoint formula tied to
+`fapp1_func E x y`, while still giving constant/terminal reductions by cascade
+once the constant-functor calculus is present. Keeping the `homd_` object rule
+as a semantic delegation prevents the endpoint rule from depending directly on
+a provisional pointwise transport shortcut.
 
 The immediate `fib_cov_transf` shape, following v2, is expected to be:
 
@@ -1763,10 +1812,13 @@ fib_cov_tapp0_fapp0
 ```
 
   Audit the `fib_cov_tapp0_func` / `fib_cov_tapp0_fapp0` layer while doing this.
-  It is presently good enough for endpoint normalization, but it was inherited
-  from v2 and may be based on the wrong primitive. New `homd_` rules should
-  delegate through `homd_semantic_func` so the later replacement by
-  `fib_cov_transf` is localized.
+  Keep `fib_cov_tapp0_func` as a defined semantic helper based on
+  `comp_cat_fapp0 (fapp0_func u) (fapp1_func E x y)`. Convert
+  `fib_cov_tapp0_fapp0` away from the current v2-style primitive/stable
+  transport rule and into the defined projection
+  `fapp0 (fib_cov_tapp0_func E x y u) f`. New `homd_` rules should delegate
+  through `homd_semantic_func`, so the later projection from `fib_cov_transf`
+  remains localized.
   The immediate `fib_cov_transf E x u` transfor still has external `x,u`
   parameters. Record it as an intermediate package only; the most-internal
   version should eventually push `x,u` inside, in the same spirit as
