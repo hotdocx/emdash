@@ -2,15 +2,18 @@
 
 ## Status
 
-Draft planning report for the next `emdash3_1.lp` iteration. This document
-updates and supersedes the earlier `Hom_fam` / `Transf_fam` framing.
+Draft planning report for the next v3 iteration. This document updates and
+supersedes the earlier `Hom_fam` / `Transf_fam` framing.
 
-The active source remains `emdash3_1.lp`, guided by
-`REPORT_EMDASH_V3_CONSOLIDATED.md`. This report is intentionally
-decision-oriented: it records the intended final architecture before
-implementation, including which symbols should be primitive stable heads,
-which should be rewrite contracta, and which should be mere notation or
-definitions that must not appear on rewrite-rule left-hand sides.
+Implementation target: create a fresh `emdash3_2.lp` from the current checked
+baseline `emdash3_1.lp`, then implement this plan in `emdash3_2.lp`. Keep
+`emdash3_1.lp` intact as the v3.1 baseline/reference during the incremental
+migration. The current baseline remains guided by
+`REPORT_EMDASH_V3_CONSOLIDATED.md`; this report is intentionally
+decision-oriented and records the intended v3.2 architecture before
+implementation, including which symbols should be primitive stable heads, which
+should be rewrite contracta, and which should be mere notation or definitions
+that must not appear on rewrite-rule left-hand sides.
 
 Update 2026-05-19: the dependent-hom endpoint must compute with full internal
 action, not only object action. The final pre-implementation review refines this
@@ -202,7 +205,8 @@ Const_catd K A
   constant directed family at A
 
 Terminal_catd K
-  terminal directed family, likely Const_catd K Terminal_cat
+  readable notation/definition for Const_catd K Terminal_cat; not an
+  operational rewrite head
 
 Op_catd E
   pointwise opposite family over the same base
@@ -373,10 +377,9 @@ tdapp1_int_func_transfd FF FF (id (Functord_cat E D) FF)
 This is not evidence that `fdapp1_int_transfd` is a mere alias; it is the same
 identity-specialization pattern as ordinary `tapp1_*` versus `fapp1_*`.
 
-## Stable Heads Still Needed
+## Stable Heads And Derived Notation Still Needed
 
-The following remain genuine stable infrastructure, plus explicitly noted
-derived folds that may be introduced for normalization convenience:
+The following remain genuine primitive/stable infrastructure:
 
 ```text
 Catd_cat
@@ -384,7 +387,6 @@ Functord_cat
 Transfd_cat
 
 Const_catd
-Terminal_catd
 Op_catd
 
 Functor_catd
@@ -392,8 +394,6 @@ Hom_catd
 Transf_catd
 
 fib_cov_transf
-fib_cov_tapp0_func
-fib_cov_tapp0_fapp0
 
 Pi_cat
 piapp1_func / piapp1_fapp0, or a close variation, as later
@@ -401,7 +401,6 @@ terminal-specialization heads for full section action; these are not ordinary
 `tapp1_fapp0` aliases, and their exact shape should be settled after the
 internal dependent-action layer
 
-homd_
 homd_int / related internal homd projections
 
 tapp1_int_func_transf
@@ -413,10 +412,31 @@ eventual fdapp1_* / tdapp1_* surface heads or folds, derived after the
 internal layer is settled
 ```
 
-The `fib_cov_*` heads remain necessary because they express a reordered,
+The following are intentionally not primitive rewrite heads in the target
+architecture, even though they remain useful names in statements and comments:
+
+```text
+Terminal_catd K
+  := Const_catd K Terminal_cat
+
+piapp0
+  defined section-evaluation notation through the unfolded component evaluator
+
+fib_cov_tapp0_func
+  defined semantic helper and `tapp0_fapp0` contractum
+
+fib_cov_tapp0_fapp0
+  defined object-level projection from `fib_cov_tapp0_func`
+
+homd_
+  defined endpoint notation using the semantic `hom_con` body
+```
+
+The `fib_cov_*` layer remains necessary because it expresses a reordered,
 internal family action: fix a fibre object and obtain a functor/transfor in the
 base-arrow variable. Lambdapi will not derive that argument reordering
-internally from ordinary `fapp1`.
+internally from ordinary `fapp1`. In the target architecture, only the package
+head is primitive; the component helpers are defined projections/cascade names.
 
 ## Family Constructors
 
@@ -1080,10 +1100,13 @@ This gives the desired constant-family compatibility:
 piapp0 F k → fapp0 F k
 ```
 
-without a rule headed by `piapp0`. It also helps the
+without a rule headed by `piapp0`. It should also help the
 `Hom_catd (Const_catd K Cat_cat)` bridge join with the pointwise `Hom_catd`
-rule, which is exactly where the current warning at `emdash3_1.lp:709` is
-pointing.
+rule. Earlier drafts of this report referred here to a current warning near the
+`Hom_catd` bridge in `emdash3_1.lp`; that note is stale. The checked v3.1
+baseline currently emits no such warning, so this should be treated as a
+joinability/design concern to preserve with assertions, not as an observed
+diagnostic.
 
 Revised implementation position:
 
@@ -1092,8 +1115,9 @@ Revised implementation position:
   rules returning `Obj_func ...`.
 - `piapp1*` is different and should remain planned as primitive/stable
   higher-action infrastructure.
-- Warning cleanup can wait, but these `piapp0` changes are likely part of the
-  architecture that will naturally remove some warnings later.
+- Warning cleanup is not the reason for this change. The reason is to align
+  `piapp0` with the target alias/definition discipline and preserve the relevant
+  joins by regression assertions.
 
 ### Hom Of A Pi Category: Deferred Issue
 
@@ -1921,23 +1945,30 @@ not arbitrary displayed isofibrations.
 
 ## Proposed Implementation Order
 
-### Phase 0: Baseline And Report Lock
+### Phase 0: Baseline, v3.2 Fork, And Report Lock
 
-- Treat this report as the design target before editing `emdash3_1.lp`.
-- Keep `emdash3_1.lp` typechecking before each implementation phase.
+- Treat this report as the design target before editing Lambdapi code.
+- Create `emdash3_2.lp` as a copy/fork of the checked `emdash3_1.lp` baseline.
+- Implement the migration in `emdash3_2.lp`; do not edit `emdash3_1.lp` during
+  the v3.2 iteration except for an explicit baseline-maintenance task.
+- Keep both the preserved v3.1 baseline and the evolving v3.2 file typechecking
+  before each implementation phase.
 - Add temporary assertions only as needed to probe Lambdapi elaboration, then
   keep the useful ones as regression checks.
 - Run:
 
 ```bash
 lambdapi check -w emdash3_1.lp
+lambdapi check -w emdash3_2.lp
 ```
 
 - Avoid `.scratchpad/` unless explicitly doing historical recovery.
 
 ### Phase 1: Canonical `Catd` Spine
 
-- Replace the `Fam_*` layer with canonical `Catd_*` vocabulary.
+- In `emdash3_2.lp`, preserve the already-migrated canonical `Catd_*`
+  vocabulary from v3.1 and continue removing any remaining old `Fam_*`
+  assumptions from planned rules or comments.
 - Introduce stable:
 
 ```text
@@ -1971,7 +2002,8 @@ Hom_cat (Functord_cat E D) FF GG --> Transfd_cat FF GG
 
 ### Phase 2: Migrate Current Directed-Family Code
 
-- Rename/rework existing `Fam_*` uses in `emdash3_1.lp` to `Catd_*`.
+- Rename/rework any remaining `Fam_*` uses or assumptions in `emdash3_2.lp` to
+  `Catd_*`.
 - Do not keep `Fam_*` as public compatibility vocabulary.
 - Ensure definitions used only as notation do not appear in rewrite LHSs.
 - Preserve current working assertions by translating them to the canonical
@@ -1979,12 +2011,17 @@ Hom_cat (Functord_cat E D) FF GG --> Transfd_cat FF GG
 
 ### Phase 3: Constant And Opposite Families
 
-- Add stable:
+- Add primitive/stable:
 
 ```text
 Const_catd K A
-Terminal_catd K
 Op_catd E
+```
+
+- Add readable definitional notation:
+
+```text
+Terminal_catd K := Const_catd K Terminal_cat
 ```
 
 - Add pointwise computation and constant-action rules.
@@ -2105,7 +2142,8 @@ fib_cov_tapp0_fapp0    defined object-level projection
   unfold through `fib_cov_tapp0_func`, so the later projection from
   `fib_cov_transf` remains localized.
   Current `emdash3_1.lp` still has the old primitive and its projection rule;
-  remove them in the conversion pass to avoid the loop described above.
+  remove them from `emdash3_2.lp` in the conversion pass to avoid the loop
+  described above.
   The immediate `fib_cov_transf E x u` transfor still has external `x,u`
   parameters. Record it as an intermediate package only; the most-internal
   version should eventually push `x,u` inside, in the same spirit as
@@ -2181,15 +2219,21 @@ tdapp1_int_func_transfd at identity --> fdapp1_int_transfd
 After each phase, run:
 
 ```bash
-lambdapi check -w emdash3_1.lp
+lambdapi check -w emdash3_2.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-For every new stable head, add at least one assertion exercising its intended
-normal form. For every rewrite involving `Functor_cat`, `Transf_cat`,
-`Catd_cat`, `Functord_cat`, `Transfd_cat`, `Const_catd`, `Op_catd`,
-`Functor_catd`, `Hom_catd`, `Transf_catd`, `Pi_cat`, `fib_cov_*`,
-`homd_int`, `homd_`, `tapp1_int_func_transf`, `fapp1_int_transf`,
+`make check` currently validates `emdash2.lp` and the preserved `emdash3_1.lp`
+baseline. Until the repository check script is deliberately updated to include
+or replace the active v3 file, run `lambdapi check -w emdash3_2.lp` explicitly
+for the v3.2 implementation branch.
+
+For every new primitive/stable head, add at least one assertion exercising its
+intended normal form. For every rewrite or definition cascade involving
+`Functor_cat`, `Transf_cat`, `Catd_cat`, `Functord_cat`, `Transfd_cat`,
+`Const_catd`, `Terminal_catd` as an alias, `Op_catd`, `Functor_catd`,
+`Hom_catd`, `Transf_catd`, `Pi_cat`, `fib_cov_*`, `homd_int`, defined endpoint
+`homd_`, `tapp1_int_func_transf`, `fapp1_int_transf`,
 `tdapp1_int_func_transfd`, `fdapp1_int_transfd`, or any later explicitly
 introduced derived cascade head, add a focused assertion for the generic case
 and, where relevant, a constant-family case.
