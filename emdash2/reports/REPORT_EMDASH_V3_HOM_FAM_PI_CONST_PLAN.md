@@ -223,6 +223,11 @@ Transfd_cat FF GG
   category of natural families of transformations, i.e. modifications
 ```
 
+Current preferred implementation decision: `Terminal_catd K` should be readable
+notation/a definitional alias for `Const_catd K Terminal_cat`, not a separate
+canonical rewrite head. Write operational rules against the unfolded
+`Const_catd K Terminal_cat` form whenever the rule must fire after reduction.
+
 The name `Op_catd` must be documented carefully: in this v3 directed-family
 layer it means pointwise opposite of fibres over the same base. If a future
 base-opposite operation is needed, it should be introduced separately or
@@ -446,6 +451,18 @@ The exact implicit arguments should be settled by a Lambdapi probe, but the
 principle is functor-level computation first, capped object-level computation
 second.
 
+Terminal families should be the `A = Terminal_cat` instance of this constant
+family machinery. Prefer:
+
+```text
+Terminal_catd K := Const_catd K Terminal_cat
+```
+
+over separate terminal-specific `fapp0`, `fapp1_func`, and `fapp1_fapp0`
+rules. Those terminal-specific formulations remain useful as explanatory
+readings, but implementation rules should usually be written on
+`Const_catd K Terminal_cat` so they fire after unfolding the alias.
+
 ### Opposite Families
 
 The operational role currently played by `op_val_func K` should become a
@@ -468,6 +485,18 @@ and constant compatibility:
 Op_catd (Const_catd K A)
   --> Const_catd K (Op_cat A)
 ```
+
+The terminal opposite should then be inherited from the constant case:
+
+```text
+Op_catd (Terminal_catd K)
+  unfolds to Op_catd (Const_catd K Terminal_cat)
+  --> Const_catd K (Op_cat Terminal_cat)
+  --> Const_catd K Terminal_cat
+```
+
+Do not add a separate `Op_catd (Terminal_catd K)` rule unless a later
+typechecking probe shows the alias path is insufficient.
 
 `Homd_source_fam` from the current file should disappear as a current
 operational dependency. Future homd source types should use the stable
@@ -658,10 +687,33 @@ Functord_cat (Terminal_catd K) E
   --> Pi_cat E
 ```
 
+With the preferred alias decision, these should be implemented on the unfolded
+constant-terminal source:
+
+```text
+@Transf_cat K Cat_cat (Const_catd K Terminal_cat) E
+  --> Pi_cat E
+
+Functord_cat (Const_catd K Terminal_cat) E
+  --> Pi_cat E
+```
+
+The displayed `Terminal_catd K` form is still useful documentation, but a rule
+whose LHS mentions the alias directly is brittle. A Lambdapi probe showed that
+unification rules do not make rewrite rules fire during ordinary reduction, and
+rules should be written on the unfolded canonical head when an alias is defined.
+
 Probably also directly or indirectly:
 
 ```text
 Hom_cat (Catd_cat K) (Terminal_catd K) E
+  --> Pi_cat E
+```
+
+Canonical implementation form:
+
+```text
+Hom_cat (Catd_cat K) (Const_catd K Terminal_cat) E
   --> Pi_cat E
 ```
 
@@ -804,6 +856,12 @@ piapp1_func s x y
 where the second type contracts to the first by the joining rule
 `Functord_cat (Terminal_catd J) H --> Pi_cat H`.
 
+Implementation note under the alias decision: the operational joining rule
+should be written as
+`Functord_cat (Const_catd J Terminal_cat) H --> Pi_cat H`. The
+`Terminal_catd J` notation in this section is retained to explain the intended
+section-source semantics.
+
 Then the capped object projection is evaluation of this section at the base
 arrow:
 
@@ -845,6 +903,9 @@ base arrow `f`. This is exactly the same reason `fdapp1_*` cannot be replaced
 by a weak fibrewise `fapp1_func`: the desired section component lives in a
 dependent hom over a base arrow.
 
+Operationally, after `Terminal_catd K` becomes an alias, these specializations
+should match the source as `Const_catd K Terminal_cat`.
+
 The preferred rewrite should be packaged, not merely capped:
 
 ```text
@@ -859,6 +920,9 @@ family of the `fdapp1_*` specialization must normalize to the terminal family
 over the base-arrow category; otherwise the joining rule
 `Functord_cat (Terminal_catd J) H --> Pi_cat H` will not expose the desired
 `Pi_cat` target for `piapp1_func`.
+
+Again, the implementation form of that joining rule should use
+`Const_catd J Terminal_cat` on the LHS.
 
 If a later derived `fdapp1_*` signature returns a larger displayed functor
 whose target point `(y, piapp0 s y)` is internal, the LHS may need one
@@ -909,6 +973,11 @@ piapp0 s k
        Terminal_obj
 ```
 
+With `Terminal_catd K := Const_catd K Terminal_cat`, these `tapp0_*` source
+arguments may be written/read using `Terminal_catd`, but any rewrite rule that
+must match them should use the unfolded `Const_catd K Terminal_cat` source or
+keep the source argument implicit if it is inferred.
+
 The exact type may need adjustment after the `Pi_cat` joining rules are tested,
 but the old plan's functorial-projection requirement should be kept in this
 derived/definitional form.
@@ -942,6 +1011,9 @@ Functord_cat (Terminal_catd K) E
 ```
 
 and the hom category of `Functord_cat` is `Transfd_cat`.
+Under the alias decision, the operational source is
+`Functord_cat (Const_catd K Terminal_cat) E`; the displayed `Terminal_catd`
+form is explanatory.
 
 This is also why the bridge:
 
@@ -1016,6 +1088,19 @@ homd_ (Terminal_catd K) x Terminal_obj y Terminal_obj
   --> Terminal_catd (Op_cat (Hom_cat K x y))
 ```
 
+With the preferred terminal-as-constant alias, the implementation should
+instead rely on the constant-family rule:
+
+```text
+homd_ (Const_catd K Terminal_cat) x u y v
+  --> Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat Terminal_cat u v)
+  --> Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat
+```
+
+which is definitionally/readably `Terminal_catd (Op_cat (Hom_cat K x y))`.
+Keep the terminal-specific display above as a useful semantic slogan, but do
+not prefer it as the rewrite-rule LHS.
+
 Semantically every fibre is:
 
 ```text
@@ -1034,10 +1119,10 @@ homd_ (Const_catd K A) x u y v
   --> Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v)
 ```
 
-The terminal rule is then the `A = Terminal_cat` instance, possibly with an
-extra reduction of `Hom_cat Terminal_cat Terminal_obj Terminal_obj`. If
-`Terminal_catd` remains its own canonical stable head, keep the direct
-terminal rule as the operational normal form.
+The terminal rule is then the `A = Terminal_cat` instance, plus the category
+rule `Hom_cat Terminal_cat _ _ --> Terminal_cat`. Since `Terminal_catd` should
+be an alias of `Const_catd K Terminal_cat`, do not keep a direct terminal
+`homd_` rule unless a later probe shows that the constant route fails.
 
 ### Terminal and Constant Semantic Joinability
 
@@ -1124,9 +1209,8 @@ must be removed when `fib_cov_tapp0_fapp0` becomes a definition: the definition
 expands back through `fib_cov_tapp0_func` to the same functor-action
 projection, so keeping both directions would create a bad loop/overlap.
 
-For `Terminal_catd`, either derive it via `Const_catd K Terminal_cat`, or keep
-the analogous direct terminal rules temporarily until the terminal-vs-constant
-canonicalization question is settled:
+For `Terminal_catd`, derive through the `Const_catd K Terminal_cat` alias
+whenever possible. The analogous direct terminal readings are:
 
 ```text
 fib_cov_tapp0_func (Terminal_catd K) x y u
@@ -1137,7 +1221,8 @@ fib_cov_tapp0_fapp0 (Terminal_catd K) x y f u
 ```
 
 Returning `u`, not necessarily `Terminal_obj`, avoids needing terminal-object
-eta immediately.
+eta immediately. These should be consequences of the constant-family route,
+not preferred direct rules.
 
 The semantic endpoint also needs the hom of a constant functor to collapse:
 
@@ -1149,16 +1234,25 @@ hom_ A B (Const_func B A u) w
 Then `hom_con` gets the desired constant behavior by unfolding through `hom_`
 plus `Op_func (Const_func ...)`.
 
-Finally, the terminal family should be the canonical constant terminal family:
+Finally, the terminal family should be a readable definitional alias for the
+canonical constant terminal family:
+
+```text
+Terminal_catd K := Const_catd K Terminal_cat
+```
+
+Do not use a unification bridge as the normalization strategy. A minimal
+Lambdapi probe showed that a `unif_rule c ≡ d` does not make a rewrite rule
+headed on `d` fire on `c` during ordinary reduction. Also avoid a rewrite
 
 ```text
 Const_catd K Terminal_cat --> Terminal_catd K
 ```
 
-This rewrite may instead become a definition of `Terminal_catd` as
-`Const_catd K Terminal_cat`, or a carefully tested unification bridge, but defer
-that choice until the next implementation step. Do not duplicate terminal rules
-unnecessarily if the constant-family route can supply them.
+unless there is a strong later reason to make `Terminal_catd` the printed stable
+normal form: it would create avoidable critical pairs with generic
+`Const_catd` rules. With the alias approach, rules should be written against
+the unfolded `Const_catd K Terminal_cat` form when they must be operational.
 
 This lets the semantic terminal path end at the same canonical functor-level
 result as the direct terminal `homd_` rule:
@@ -1168,7 +1262,7 @@ homd_semantic_func Terminal
   unfolds to hom_con Terminal ... (fib_cov_tapp0_func Terminal ...)
   fib_cov_tapp0_func Terminal -> Const_func ... Terminal ...
   hom_con/hom_ over Const_func -> Const_catd ... Terminal_cat
-  Const_catd ... Terminal_cat -> Terminal_catd ...
+  Const_catd ... Terminal_cat, read as Terminal_catd ...
 ```
 
 Avoid a broad unification rule saying every terminal object is
@@ -1727,6 +1821,11 @@ Op_catd E
 
 - Add pointwise computation and constant-action rules.
 - Ensure constant action is functor-level before adding capped object rules.
+- Implement `Terminal_catd K` as the definitional alias
+  `Const_catd K Terminal_cat`. Do not add separate terminal-specific
+  `fapp0`, `fapp1_func`, `fapp1_fapp0`, or `Op_catd` rules unless a local
+  Lambdapi probe shows a concrete matching failure that cannot be solved by
+  writing the rule on `Const_catd K Terminal_cat`.
 - Replace uses of `op_val_func`/`Homd_source_fam` in future operational rules
   with the stable pointwise-opposite constructor.
 
@@ -1738,6 +1837,13 @@ Op_catd E
 ```text
 @Transf_cat K Cat_cat (Terminal_catd K) E --> Pi_cat E
 Functord_cat (Terminal_catd K) E --> Pi_cat E
+```
+
+Operational LHSs should use the unfolded source:
+
+```text
+@Transf_cat K Cat_cat (Const_catd K Terminal_cat) E --> Pi_cat E
+Functord_cat (Const_catd K Terminal_cat) E --> Pi_cat E
 ```
 
 - Add or preserve a section-category functor:
@@ -1764,6 +1870,9 @@ piapp0_func E k
        (fapp0_func Terminal_obj)
        (@tapp0_func K Cat_cat (Terminal_catd K) E k)
 ```
+
+As above, this is readable notation. If the source family appears in a
+rewrite-rule LHS, use `Const_catd K Terminal_cat` or keep the source implicit.
 
 - Design the section-action layer through `homd_`. The weak off-diagonal
   object projection is definable from `tapp1_fapp0` plus `Terminal_obj` if it
@@ -1925,8 +2034,10 @@ Hom_catd
 
 ## Open Design Questions
 
-- Should `Terminal_catd K` be a separate canonical head, or should
-  `Const_catd K Terminal_cat` be the canonical normal form?
+- Resolved for the next implementation pass: `Terminal_catd K` should be a
+  readable definitional alias for `Const_catd K Terminal_cat`; operational
+  rewrite LHSs should use the unfolded constant-terminal form or keep inferred
+  source arguments implicit.
 - Can `Functor_cat` and `Transf_cat` remain marked `injective` after the
   special contractions, or should injectivity be represented only through
   controlled unification helpers?
