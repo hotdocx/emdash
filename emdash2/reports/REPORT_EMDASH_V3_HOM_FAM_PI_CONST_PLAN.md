@@ -487,6 +487,26 @@ The exact implicit arguments should be settled by a Lambdapi probe, but the
 principle is functor-level computation first, capped object-level computation
 second.
 
+Implementation clarification: the arrow-level part of `Const_func` itself looks
+mathematically immediate. The expected functor-level rule is:
+
+```text
+fapp1_func (Const_func A B b) x y
+  --> Const_func (Hom_cat A x y) (Hom_cat B b b) (id B b)
+```
+
+The capped object-level rule:
+
+```text
+fapp1_fapp0 (Const_func A B b) f
+  --> id B b
+```
+
+is still useful and should join with the generic fold
+`fapp0 (fapp1_func F) f --> fapp1_fapp0 F f`. It is not a substitute for the
+functor-level rule, because by itself it computes only one selected arrow
+action and does not preserve the higher/omega iteration path.
+
 Terminal families should be the `A = Terminal_cat` instance of this constant
 family machinery. Prefer:
 
@@ -1297,6 +1317,12 @@ Op_func (Const_func A B b)
   --> Const_func (Op_cat A) (Op_cat B) b
 ```
 
+The first two rules should be added as a pair or at least probed together:
+the functor-level rule preserves iterability, while the capped rule records the
+normal form reached after applying the generic `fapp1_func`/`fapp1_fapp0` fold.
+The main risk is joinability with existing generic action rules, not the
+mathematical shape of the constant functor.
+
 Composition with constant functors is also needed:
 
 ```text
@@ -1306,6 +1332,12 @@ comp_cat_fapp0 F (Const_func A B b)
 comp_cat_fapp0 (Const_func B C c) G
   --> Const_func A C c
 ```
+
+The composition, opposite, and `hom_` constant rules can be staged after the
+basic arrow-action pair typechecks, but they are part of the same constant
+calculus: the terminal and `homd_` cascades should be fixed by adding missing
+indirect constant rules first, not by reintroducing direct terminal or endpoint
+shortcuts.
 
 The first composition rule is especially important because
 `fib_cov_tapp0_func` should stay defined as the semantic functor
