@@ -82,6 +82,27 @@ Fifth continuation update: the 2026-05-21 pass typechecks after the
 `Op_funcd` LHS correction, the stable `comp_catd_fapp0` promotion, and new
 assertions covering displayed composition folding and identity reductions.
 
+Review correction update 2026-05-21: the displayed-composition fibre-projection
+probes should be treated as exploratory and premature, not as plan-critical
+blockers. The plan's generalized `homd_int` requirement is already the simpler
+stable-head projection:
+
+```text
+tapp0_fapp0 x (homd_int D E FF) -> homd_src_funcd D E FF x
+```
+
+The attempted rule for the composite
+`comp_catd_fapp0 (homd_int FF) (Op_funcd FF)` was only trying to expose a later
+fibrewise convenience normal form for the target of `fdapp1_int_transfd`; it is
+not needed to implement the generalized `homd_int` design. Also, `Fibre_func`
+is deliberately defined notation over `tapp0_fapp0`, so computations involving
+`Fibre_func` should happen by unfolding and by indirect rules on primitive or
+stable heads, not by making `Fibre_func` a new primitive head. Finally,
+`homd_funcd_` should be considered a migration artifact: the cleaner next step
+is to refactor toward the plan's generalized endpoint arity by making `homd_`
+itself carry the displayed functor argument, with the old one-family endpoint as
+the identity-specialized form.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -233,7 +254,7 @@ homd_ E x u y v :=
   - `homd_ (Terminal_catd K) ...`
 - Preserved those normal forms as assertions reached by the indirect cascade.
 
-### Generalized Endpoint `homd_funcd_`
+### Generalized Endpoint Migration Head `homd_funcd_`
 
 - Added the explicit-displayed-functor endpoint:
 
@@ -244,6 +265,19 @@ homd_funcd_ [D E] (FF : Functord D E) x u y v
 where `u : E[x]` and `v : D[y]`. Its target object is computed by the fibre
 component of `FF` at `y`, while transport still uses the ambient target family
 `E`.
+
+Correction: this name should not be treated as the intended final API. The plan
+allows separate generalized heads during migration, but its cleaner final shape
+is a generalized `homd_` itself:
+
+```text
+homd_ [D E] (FF : Functord D E) x u y v
+```
+
+The old `homd_ E x u y v` should become the identity-specialized form, i.e. the
+case `homd_ E E (id_funcd E) x u y v`. The next implementation pass should
+therefore plan to eliminate or rename/promote `homd_funcd_` rather than adding
+more permanent rules around that migration-only name.
 
 - Generalized the internal projection path:
   - `homd_src_funcd`
@@ -368,18 +402,13 @@ Fibre_func (homd_int FF) x -> homd_src_funcd FF x
 fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_secd FF x u
 ```
 
-- Probed the analogous displayed-composition projection, but the probe is now
-  classified as non-conclusive because it over-specified inferred LHS slots.
-  A rule headed by `comp_catd_fapp0` typechecked but did not give the desired
-  assertion because Lambdapi unfolds the alias before matching. Moving the rule
-  to the unfolded `comp_fapp0 (Catd_cat K)` shape caused `lambdapi check` to
-  time out, but that attempted rule still explicitly pinned the source/target
-  family arguments of `tapp0_fapp0`. A narrower rule for the
-  `homd_int FF ∘ Op_funcd FF` target composite also typechecked, but an exact
-  assertion did not reduce; it had the same LHS-shape problem and was not kept.
-  The corrected recommendation is to retry the projection with the
-  `tapp0_fapp0` source/target family slots written as `_ _`, following the
-  `homd_int` projection style.
+- Probed the analogous displayed-composition projection, but this is now
+  classified as exploratory and not required for the current plan step. The
+  generalized `homd_int` projection itself is already implemented by the
+  stable-head `tapp0_fapp0 ... (homd_int D E FF)` rule above. The composite
+  target `comp_catd_fapp0 (homd_int FF) (Op_funcd FF)` belongs to the later
+  internal displayed-action target, and its fibrewise simplification should not
+  be chased until a concrete later fold requires it.
 
 ### Section Action `piapp1*`
 
@@ -438,7 +467,7 @@ typed stable package plus definitional projection. The new `piapp1_src_obj`
 helper clarifies the endpoint hom category, but it is not the missing packaged
 section fold.
 
-### 2. General Endpoint Exists, But Surface Arity Is Still A Design Choice
+### 2. General Endpoint Exists, But Should Be Promoted To `homd_`
 
 The current old endpoint remains:
 
@@ -452,10 +481,17 @@ The generalized endpoint now exists under the explicit name:
 homd_funcd_ FF x u y v
 ```
 
-where `FF : Functord D E`. The remaining design choice is whether to keep both
-names permanently, rename/promote `homd_funcd_` to the main surface `homd_`
-arity, or continue treating `homd_ E x u y v` as the identity-specialized
-notation used by Sigma homs and `piapp1*`.
+where `FF : Functord D E`. Review correction: keeping both names permanently is
+not the preferred reading of the plan. The next implementation should favor the
+plan's cleaner generalized endpoint arity:
+
+```text
+homd_ [D E] (FF : Functord D E) x u y v
+```
+
+and then rewrite the current one-family uses as the identity-specialized case
+`homd_ E E (id_funcd E) x u y v`. The current `homd_funcd_` name is useful only
+as a migration handle.
 
 ### 3. Most-Internal `fib_cov` Package Is Now Implemented
 
@@ -524,7 +560,7 @@ less-internal external heads only after the internal layer is better understood.
 The derived `fdapp1_int_fibre_*` names added later remain internal projection
 notation and do not settle the external API question.
 
-### 8. Displayed Composition Stable Head Added; Fibre Projection Deferred
+### 8. Displayed Composition Stable Head Added; Fibre Projection Not A Current Blocker
 
 The desired rule shape is:
 
@@ -533,12 +569,16 @@ Fibre_func (comp_catd_fapp0 FF GG) x
   -> comp_cat_fapp0 (Fibre_func FF x) (Fibre_func GG x)
 ```
 
-This pass did not keep such a rule. The first probes should not be treated as a
-real blocker because they violated the local rewrite hygiene rule: they
-explicitly wrote compound/reducible source and target family expressions in the
-inferred slots of `tapp0_fapp0`. The correct next probe should keep those slots
-implicit and discriminate on the explicit composed morphism argument, as in the
-existing `homd_int` projection rule:
+This pass did not keep such a rule, and this should not block the current plan.
+The plan's generalized `homd_int` step does not require this displayed
+composition projection. That projection would only be a later convenience for
+normalizing the fibre of a composed displayed functor, especially the target
+composite inside `fdapp1_int_transfd`.
+
+The earlier probes were also not good evidence for or against the final design:
+some violated the local rewrite hygiene rule by spelling compound/reducible
+source and target family expressions in inferred `tapp0_fapp0` slots, and the
+later SOP-shaped retries still timed out. A schematic SOP-shaped form would be:
 
 ```text
 rule @tapp0_fapp0 K Cat_cat _ _ x
@@ -556,10 +596,13 @@ stable `comp_catd_fapp0` head still timed out. A narrower rule for the concrete
 as discriminators, also timed out once placed after the `homd_int` projection
 heads. Both rules were removed. A rule headed by `Fibre_func` is not available
 while `Fibre_func` remains defined notation over `tapp0_fapp0`: Lambdapi rejects
-rules on symbols already defined with `≔`. The next attempt should therefore
-either introduce a fresh primitive fibre-level composition/projection head, or
-refactor `Fibre_func` itself from defined notation into a primitive projection
-head with carefully staged rules.
+rules on symbols already defined with `≔`.
+
+Correction: do not refactor `Fibre_func` into a primitive head just to solve
+this. The plan explicitly treats `Fibre_func` as derived notation. If this
+projection is eventually needed, solve it by the cascade after unfolding
+`Fibre_func` to `tapp0_fapp0`, or introduce a separate purpose-built bridge only
+after a later fold concretely requires it.
 
 ## Assessment
 
@@ -571,7 +614,8 @@ implements the main architecture changes:
 - `fib_cov_tapp0_fapp0` as a defined projection.
 - most-internal `fib_cov_int` projection package.
 - endpoint `homd_` as a defined `hom_con` endpoint.
-- generalized endpoint/projection path `homd_funcd_`.
+- generalized endpoint/projection path currently named `homd_funcd_`, to be
+  refactored toward generalized `homd_`.
 - generalized `homd_int`.
 - internal ordinary/displayed object and hom action heads.
 - derived `tdapp0_func` / `tdapp0_fapp0` notation.
@@ -585,8 +629,9 @@ implements the main architecture changes:
 It does not complete the full plan. The next work should focus on the unresolved
 arity and action questions, especially:
 
-1. whether to promote/rename `homd_funcd_` as the main surface `homd_` arity,
+1. refactor `homd_funcd_` into the plan's generalized `homd_` arity,
 2. how to derive the terminal-specialization fold to `piapp1_func`,
-3. how to expose displayed-composition fibre projections without a timeout,
+3. only if needed later, how to expose displayed-composition fibre projections
+   through the `tapp0_fapp0` cascade without making `Fibre_func` primitive,
 4. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
