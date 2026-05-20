@@ -138,6 +138,25 @@ with the actual Lambdapi type written explicitly/readably enough for
 typechecking, and with implicit arguments omitted in use where local style
 allows.
 
+Follow-up clarification 2026-05-21: the fold from
+`fdapp1_int_transfd K (Const_catd K Terminal_cat) E s` to `piapp1_int E s`
+does not require a terminal/constant whole-family `homd_int` normal form,
+because `piapp1_int E s` will be declared with the same type as that specialized
+internal witness. A later projection from `piapp1_int E s` to `piapp1_func E s x
+y` may require the planned terminal/constant `homd_int` normal forms, or an
+equivalent projected cascade, to expose the desired `Pi_cat` target. Therefore
+that projection should be deferred until the later phase that handles the
+inter-related `homd_int` rules for `Const_catd` / `Terminal_catd`.
+
+Eighth continuation update: `piapp1_int` has now been added to `emdash3_2.lp` as
+the fully applied terminal-source specialization of the internal displayed
+hom-action witness. The fold
+`fdapp1_int_transfd K (Const_catd K Terminal_cat) E s -> piapp1_int E s`
+typechecks, with focused assertions for both the direct `fdapp1_int_transfd`
+path and the `tdapp1_int` identity-specialization path through `id_transfd`.
+Projection from `piapp1_int` to `piapp1_func` remains intentionally deferred to
+the later constant/terminal `homd_int` phase.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -500,6 +519,22 @@ homd_ (Const_catd K Terminal_cat) E s x (piapp0 s x) y Terminal_obj
 - Added an assertion that the terminal-source `tdapp1_int` identity
   specialization folds to `fdapp1_int_transfd` when the displayed identity is
   written with `id_transfd`.
+- Added the internal terminal-source Pi-action witness:
+
+```text
+piapp1_int E s
+  : type of fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
+```
+
+- Added the stable fold:
+
+```text
+fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
+  -> piapp1_int E s
+```
+
+- Added assertions that both the direct `fdapp1_int_transfd` specialization and
+  the `tdapp1_int` identity-specialized path compute to `piapp1_int E s`.
 - Added the constant-family sanity assertion:
 
 ```text
@@ -543,7 +578,7 @@ rule loops. The next fold should instead use the already-validated
 Terminal_obj-applied projection, or introduce a nonrecursive purpose-built
 projection only if an exact later LHS requires it.
 
-Clarified next design target: add a stable internal Pi-action witness
+Implemented clarified design target: add a stable internal Pi-action witness
 `piapp1_int` by specializing the existing internal displayed action:
 
 ```text
@@ -567,8 +602,9 @@ rule @fdapp1_int_transfd
 ```
 
 This is an internal witness fold only. Projection rules from `piapp1_int` down
-to `piapp1_func` should be added afterward, using focused assertion probes to
-identify the exact stable projection LHS.
+to `piapp1_func` remain intentionally deferred. They may need the planned
+terminal/constant whole-family `homd_int` rules, or equivalent projection-level
+cascades, before the LHS and RHS types expose the same `Pi_cat` target.
 
 ### 2. General Endpoint Promotion Is Complete
 
@@ -775,29 +811,31 @@ The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
    and terminal-source `tdapp1_int` identity specialization through
    `id_transfd`.
 
-7. Next: declare the fully applied internal Pi-action witness:
+7. Completed: declared the fully applied internal Pi-action witness:
 
 ```text
 piapp1_int [K] (E : Catd K) (s : Obj (Pi_cat E))
   : type of fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
 ```
 
-Use a readable explicit Lambdapi type for the declaration, but omit implicit
-arguments in applications according to local style. Then add the stable fold:
+The declaration uses a readable explicit Lambdapi type, with implicit arguments
+omitted in applications according to local style. The stable fold is:
 
 ```text
 fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
   -> piapp1_int E s
 ```
 
-Validate immediately with a focused assertion that the fold fires.
+Focused assertions now validate that the direct specialization and the
+`tdapp1_int` identity-specialization path both compute to `piapp1_int E s`.
 
-8. After `piapp1_int` exists, add projection/fold assertions from
-   `piapp1_int E s` toward the existing external package `piapp1_func E s x y`.
-   Add rewrite rules only after the exact stable projection LHS is identified.
-   Avoid a general terminal-source `tapp0_fapp0 -> piapp0` rule because it has
-   already timed out by recursive unfolding.
+8. Defer the planned projection/fold from `piapp1_int E s` to the existing
+   external package `piapp1_func E s x y` until the later phase that deals with
+   the inter-related `homd_int` rules for `Const_catd` / `Terminal_catd`. That
+   phase should decide whether a whole-family terminal/constant `homd_int`
+   normal form is needed, or whether the existing projection cascade is enough
+   to expose the same `Pi_cat` target.
 
-9. Only after the endpoint and `piapp1` folds are stable, consider whole-family
+9. After the internal `piapp1_int` witness fold is stable, consider the planned
    constant/terminal `homd_int` normal forms and any external `fdapp1_*` /
-   `tdapp1_*` surface heads.
+   `tdapp1_*` surface heads in a separate pass.

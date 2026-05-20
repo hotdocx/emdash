@@ -1306,6 +1306,35 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (@homd_int K E D FF)
         (@Op_funcd K E D FF)));
 
+// Internal Pi-action witness: terminal-source specialization of the internal
+// displayed hom-action. This packages the fold only; projection to piapp1_func
+// is deferred until the constant/terminal homd_int normal forms are settled.
+symbol piapp1_int [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (@Transfd
+      K
+      (@Op_catd K (@Const_catd K Terminal_cat))
+      (@Homd_target_catd K (@Const_catd K Terminal_cat))
+      (@homd_int
+        K
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K Terminal_cat)
+        (@id_funcd K (@Const_catd K Terminal_cat)))
+      (@comp_catd_fapp0
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Op_catd K E)
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@homd_int K (@Const_catd K Terminal_cat) E s)
+        (@Op_funcd K (@Const_catd K Terminal_cat) E s)));
+
+rule @fdapp1_int_transfd
+      $K
+      (@Const_catd $K Terminal_cat)
+      $E
+      $s
+  ↪ @piapp1_int $K $E $s;
+
 // Identity-specialization fold for the internal displayed hom-action.
 rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
       (@id_transfd $K $E $D $FF)
@@ -1722,6 +1751,10 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
     ≡ @fdapp1_int_transfd K E D FF;
 
 assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
+  @fdapp1_int_transfd K (@Const_catd K Terminal_cat) E s
+    ≡ @piapp1_int K E s;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
   @tdapp1_int_fapp0_transfd
     K
     (@Const_catd K Terminal_cat)
@@ -1730,6 +1763,16 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
     s
     (@id_transfd K (@Const_catd K Terminal_cat) E s)
     ≡ @fdapp1_int_transfd K (@Const_catd K Terminal_cat) E s;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
+  @tdapp1_int_fapp0_transfd
+    K
+    (@Const_catd K Terminal_cat)
+    E
+    s
+    s
+    (@id_transfd K (@Const_catd K Terminal_cat) E s)
+    ≡ @piapp1_int K E s;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢
