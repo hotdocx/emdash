@@ -39,6 +39,10 @@ Second continuation update: a later 2026-05-20 pass also typechecks after
 adding the generalized endpoint/projection path for `homd_int FF` and the
 derived `tdapp0` component notation.
 
+Third continuation update: the next 2026-05-20 pass also typechecks after
+adding derived fibre-level projections and derived fibre projections of
+`fdapp1_int_transfd`.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -276,6 +280,28 @@ tdapp0_fapp0 z ϵ := fapp0 (tdapp0_func z) ϵ
 - Added an assertion that `fapp0 (tdapp0_func z) ϵ` computes to
   `tdapp0_fapp0 z ϵ`.
 
+### Derived Fibre-Level Projections
+
+- Added notation-only fibre projections:
+
+```text
+Fibre_func FF z := tapp0_fapp0 z FF
+Fibre_transf ϵ z := tdapp0_fapp0 z ϵ
+Fibre_transf_app ϵ z u := tapp0_fapp0 u (Fibre_transf ϵ z)
+```
+
+- Added assertions that these unfold through the canonical `tapp0` /
+  `tdapp0` projection path.
+- Added derived projections of the internal displayed hom-action:
+
+```text
+fdapp1_int_fibre_transf FF x
+fdapp1_int_fibre_app FF x u
+```
+
+These are projections of `fdapp1_int_transfd`; they are not external
+`fdapp1_*` surface heads.
+
 ### Section Action `piapp1*`
 
 - Added the planned section-level action head:
@@ -393,6 +419,8 @@ The following were intentionally not introduced:
 The internal object/hom action packagings from v2 have now been introduced for
 both ordinary and displayed internal heads. The plan still says to promote
 less-internal external heads only after the internal layer is better understood.
+The derived `fdapp1_int_fibre_*` names added later remain internal projection
+notation and do not settle the external API question.
 
 ## Assessment
 
@@ -408,6 +436,8 @@ implements the main architecture changes:
 - generalized `homd_int`.
 - internal ordinary/displayed object and hom action heads.
 - derived `tdapp0_func` / `tdapp0_fapp0` notation.
+- derived `Fibre_func` / `Fibre_transf` / `Fibre_transf_app` notation.
+- derived `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app` projections.
 - initial `piapp1_func` / `piapp1_fapp0` stable package.
 
 It does not complete the full plan. The next work should focus on the unresolved
