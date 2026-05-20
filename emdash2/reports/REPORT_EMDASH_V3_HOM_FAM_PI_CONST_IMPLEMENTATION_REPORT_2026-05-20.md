@@ -35,6 +35,10 @@ Continuation update: the 2026-05-20 follow-up pass also typechecks with the
 same two commands after adding the internal `fib_cov_int` package, internal
 object/hom action packagings, and the first `piapp1*` declarations.
 
+Second continuation update: a later 2026-05-20 pass also typechecks after
+adding the generalized endpoint/projection path for `homd_int FF` and the
+derived `tdapp0` component notation.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -181,6 +185,43 @@ homd_ E x u y v :=
   - `homd_ (Terminal_catd K) ...`
 - Preserved those normal forms as assertions reached by the indirect cascade.
 
+### Generalized Endpoint `homd_funcd_`
+
+- Added the explicit-displayed-functor endpoint:
+
+```text
+homd_funcd_ [D E] (FF : Functord D E) x u y v
+```
+
+where `u : E[x]` and `v : D[y]`. Its target object is computed by the fibre
+component of `FF` at `y`, while transport still uses the ambient target family
+`E`.
+
+- Generalized the internal projection path:
+  - `homd_src_funcd`
+  - `homd_src_secd`
+  - `homd_tgt_funcd`
+- Changed the `homd_int` first projection rule to target the generalized
+  `homd_src_funcd` head.
+- Kept the old identity-only heads as stable compatibility normal forms:
+  - `homd_src_func`
+  - `homd_src_sec`
+  - `homd_tgt_func`
+  - `homd_`
+- Added the displayed identity component fold:
+
+```text
+tapp0_fapp0 y (id_funcd E) -> id_func (E[y])
+```
+
+- Added assertions that:
+  - `homd_int FF` projects to `homd_src_funcd FF`,
+  - `homd_src_funcd FF` projects to `homd_src_secd FF`,
+  - `piapp0 (homd_src_secd FF) y` projects to `homd_tgt_funcd FF`,
+  - `fapp0 (homd_tgt_funcd FF) v` projects to `homd_funcd_ FF`,
+  - the identity specialization `homd_funcd_ (id_funcd E)` joins the old
+    `homd_ E` endpoint.
+
 ### Generalized `homd_int` And Displayed Internal Action
 
 - Generalized `homd_int` to carry an explicit family morphism argument:
@@ -220,6 +261,21 @@ tapp1_int_fapp0_transf F F (id (Functor_cat A B) F)
 
 No external surface `fdapp1_*` or `tdapp1_*` heads were added in this pass.
 
+### Derived Displayed Components `tdapp0*`
+
+- Added derived component notation:
+
+```text
+tdapp0_func z := fapp1_func (tapp0_func z)
+tdapp0_fapp0 z ϵ := fapp0 (tdapp0_func z) ϵ
+```
+
+- This follows the plan's decision that `tdapp0` is not primitive kernel
+  structure; it is ordinary hom-action of component evaluation through the
+  canonical `Transfd_cat` spine.
+- Added an assertion that `fapp0 (tdapp0_func z) ϵ` computes to
+  `tdapp0_fapp0 z ϵ`.
+
 ### Section Action `piapp1*`
 
 - Added the planned section-level action head:
@@ -255,25 +311,24 @@ dependent action to `piapp1_func`. That fold remains the most important next
 implementation target for making `piapp1*` computational rather than only a
 typed stable package plus definitional projection.
 
-### 2. `homd_` Is Still Ambient/Identity-Arity Only
+### 2. General Endpoint Exists, But Surface Arity Is Still A Design Choice
 
-The current `homd_` endpoint remains:
+The current old endpoint remains:
 
 ```text
 homd_ E x u y v
 ```
 
-It does not yet have the possible generalized endpoint shape discussed in the
-plan:
+The generalized endpoint now exists under the explicit name:
 
 ```text
-homd_ FF x u y v
+homd_funcd_ FF x u y v
 ```
 
-where `FF : Functord D E`. The plan allows this as an open arity issue. Before
-implementing richer surface displayed actions, decide whether the endpoint itself
-must carry the family morphism argument or whether generalized `homd_int` is
-sufficient and endpoint generalization should remain deferred.
+where `FF : Functord D E`. The remaining design choice is whether to keep both
+names permanently, rename/promote `homd_funcd_` to the main surface `homd_`
+arity, or continue treating `homd_ E x u y v` as the identity-specialized
+notation used by Sigma homs and `piapp1*`.
 
 ### 3. Most-Internal `fib_cov` Package Is Now Implemented
 
@@ -349,14 +404,16 @@ implements the main architecture changes:
 - `fib_cov_tapp0_fapp0` as a defined projection.
 - most-internal `fib_cov_int` projection package.
 - endpoint `homd_` as a defined `hom_con` endpoint.
+- generalized endpoint/projection path `homd_funcd_`.
 - generalized `homd_int`.
 - internal ordinary/displayed object and hom action heads.
+- derived `tdapp0_func` / `tdapp0_fapp0` notation.
 - initial `piapp1_func` / `piapp1_fapp0` stable package.
 
 It does not complete the full plan. The next work should focus on the unresolved
 arity and action questions, especially:
 
-1. whether to generalize endpoint `homd_` with an explicit `FF`,
+1. whether to promote/rename `homd_funcd_` as the main surface `homd_` arity,
 2. how to derive the terminal-specialization fold to `piapp1_func`,
 3. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.

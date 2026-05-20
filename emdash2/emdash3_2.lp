@@ -29,6 +29,9 @@ flag "print_meta_args" on;
     - `ϵ[x]` means the diagonal component extracted by `tapp0_fapp0 x ϵ`.
     - `homd_int (id_funcd E)`, after projection at x,u,y,v, normalizes through
       `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then the endpoint `homd_`.
+    - `homd_int FF`, for `FF : Functord D E`, follows the generalized
+      `homd_src_funcd`, `homd_src_secd`, `homd_tgt_funcd`, then
+      `homd_funcd_` projection path.
 
   Rewrite hygiene:
     - Lambdapi rule LHSs are matched and typechecked modulo conversion.
@@ -114,6 +117,9 @@ flag "print_meta_args" on;
     - `Homd_*`: source/section/target family names are readability and
       assertion handles.  Projection-rule LHSs should keep those inferred
       source/target family arguments implicit.
+    - `homd_funcd_` is the generalized endpoint with an explicit displayed
+      functor argument. The old `homd_` endpoint remains the identity-family
+      specialization used by Sigma homs and section action.
     - `FibCov_*`: the internal covariant fibre-transport package; it projects
       through `fib_cov_src_func` to the external `fib_cov_transf`, then to
       `fib_cov_tapp0_func`.
@@ -123,6 +129,8 @@ flag "print_meta_args" on;
     - `tdapp1_int_func_transfd` / `fdapp1_int_transfd`: displayed internal
       analogues targeting the generalized `homd_int` arity, also with stable
       object/hom action package heads.
+    - `tdapp0_func` / `tdapp0_fapp0`: derived notation, not primitive
+      structure; it is ordinary `fapp1_func` of component evaluation.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
       capped component is a definition by `piapp0`; the terminal-specialization
       fold from displayed internal action is still deferred.
@@ -506,6 +514,9 @@ rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
 
 rule @tapp0_fapp0 $A $B $F $F $Y (@id (Functor_cat $A $B) $F)
   ↪ @id $B (@fapp0 $A $B $F $Y);
+
+rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id_funcd $K $E)
+  ↪ @id_func (@fapp0 $K Cat_cat $E $Y);
 
 rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
   ↪ @comp_fapp0
@@ -946,12 +957,43 @@ symbol fib_cov_tapp0_fapp0 [K : Cat] (E : τ (Catd K))
      (@fib_cov_tapp0_func K E x y u)
      f;
 
+// General endpoint notation for dependent homs along a displayed functor.
+// The old `homd_ E x u y v` below is the identity-family specialization.
+symbol homd_funcd_ [Z : Cat] [D E : τ (Catd Z)]
+  (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj Z))
+  (v : τ (Obj (Fibre_cat D y)))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @hom_con
+     (Fibre_cat E y)
+     (@fapp0
+       (Fibre_cat D y)
+       (Fibre_cat E y)
+       (@tapp0_fapp0 Z Cat_cat D E y FF)
+       v)
+     (Hom_cat Z x y)
+     (@fib_cov_tapp0_func Z E x y u);
+
+// General first projection of `homd_int`: externalize x and the source fibre
+// object in E, while the probe family D remains internal.
+symbol homd_src_funcd [Z : Cat] [D E : τ (Catd Z)]
+  (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  : τ (Functor
+        (Fibre_cat (@Op_catd Z E) x)
+        (Pi_cat (@Homd_section_catd Z D x)));
+
 // Component functor after projecting the fully internal homd object at x.
 symbol homd_src_func [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   : τ (Functor
         (Fibre_cat (@Homd_source_catd Z E) x)
         (Pi_cat (@Homd_section_catd Z E x)));
+
+rule @homd_src_funcd $Z $E $E (@id_funcd $Z $E) $x
+  ↪ @homd_src_func $Z $E $x;
 
 // First projection fold. The source and target family arguments are
 // deliberately `_`: their canonical forms contain reducible expressions such
@@ -963,16 +1005,32 @@ rule @tapp0_fapp0
       _
       _
       $x
-      (@homd_int $Z $E $E (@id_funcd $Z $E))
-  ↪ @homd_src_func $Z $E $x;
+      (@homd_int $Z $D $E $FF)
+  ↪ @homd_src_funcd $Z $D $E $FF $x;
 
-// Source-fixed projection after evaluating the component functor at u.
+// General source-fixed projection after evaluating the component functor at u.
+symbol homd_src_secd [Z : Cat] [D E : τ (Catd Z)]
+  (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj (Pi_cat (@Homd_section_catd Z D x)));
+
+// Source-fixed projection after evaluating the identity-specialized component
+// functor at u.
 symbol homd_src_sec [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
   : τ (Obj (Pi_cat (@Homd_section_catd Z E x)));
 
+rule @homd_src_secd $Z $E $E (@id_funcd $Z $E) $x $u
+  ↪ @homd_src_sec $Z $E $x $u;
+
 // Second projection fold: externalize x,u and keep the y,v endpoint internal.
+rule fapp0 (@homd_src_funcd $Z $D $E $FF $x) $u
+  ↪ @homd_src_secd $Z $D $E $FF $x $u;
+
+// Identity-specialized compatibility fold retained for stable old normal
+// forms and assertions.
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
@@ -991,7 +1049,20 @@ symbol homd_ [Z : Cat] (E : τ (Catd Z))
      (Hom_cat Z x y)
      (@fib_cov_tapp0_func Z E x y u);
 
-// Inner endpoint functor after projecting the source-fixed section at y.
+// General inner endpoint functor after projecting the source-fixed section at y.
+symbol homd_tgt_funcd [Z : Cat] [D E : τ (Catd Z)]
+  (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj Z))
+  : τ (Functor
+        (Fibre_cat D y)
+        (Fibre_cat
+          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x)
+          y));
+
+// Inner endpoint functor after projecting the identity-specialized
+// source-fixed section at y.
 symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
@@ -1002,10 +1073,26 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
           (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x)
           y));
 
+rule @homd_tgt_funcd $Z $E $E (@id_funcd $Z $E) $x $u $y
+  ↪ @homd_tgt_func $Z $E $x $u $y;
+
 // Third projection fold. In v3.2 `piapp0` is a definition through ordinary
 // terminal-source component evaluation, so this rule lives one layer down at
 // the `tapp0_fapp0` component. The inferred source/target family arguments are
 // deliberately `_` for the same stable-head hygiene as the other homd folds.
+rule @tapp0_fapp0
+      (Op_cat $Z)
+      Cat_cat
+      (@Const_catd (Op_cat $Z) Terminal_cat)
+      _
+      $y
+      (@homd_src_secd $Z $D $E $FF $x $u)
+  ↪ @Obj_func
+      (Fibre_cat (@Homd_section_catd $Z $D $x) $y)
+      (@homd_tgt_funcd $Z $D $E $FF $x $u $y);
+
+// Identity-specialized compatibility fold retained for stable old normal
+// forms and assertions.
 rule @tapp0_fapp0
       (Op_cat $Z)
       Cat_cat
@@ -1029,6 +1116,11 @@ rule @tapp0_fapp0
 
 // Final endpoint fold. At this point the stable head `homd_` carries the
 // endpoint family; pointwise object-action is handled by the rule on `homd_`.
+rule fapp0 (@homd_tgt_funcd $Z $D $E $FF $x $u $y) $v
+  ↪ @homd_funcd_ $Z $D $E $FF $x $u $y $v;
+
+// Identity-specialized compatibility fold retained for stable old normal
+// forms and assertions.
 rule fapp0 (@homd_tgt_func $Z $E $x $u $y) $v
   ↪ @homd_ $Z $E $x $u $y $v;
 
@@ -1157,7 +1249,44 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
 // -------------------------------------------------------------------------------------------------
-// 14. Generic Sigma/Pi weakening helpers
+// 14. Derived displayed component notation
+// -------------------------------------------------------------------------------------------------
+
+/*
+  `tdapp0_func` is not primitive kernel structure. It is the hom-action of
+  ordinary component evaluation `tapp0_func` specialized to Cat-valued
+  families. Its object action is a fibrewise ordinary transfor.
+*/
+symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (z : τ (Obj K))
+  : τ (Functor
+      (@Transfd_cat K E D FF GG)
+      (@Transf_cat
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@tapp0_fapp0 K Cat_cat E D z FF)
+        (@tapp0_fapp0 K Cat_cat E D z GG)))
+≔ @fapp1_func
+     (@Transf_cat K Cat_cat E D)
+     (@Hom_cat Cat_cat (Fibre_cat E z) (Fibre_cat D z))
+     (@tapp0_func K Cat_cat E D z)
+     FF
+     GG;
+
+symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (z : τ (Obj K))
+  (ϵ : τ (@Transfd K E D FF GG))
+  : τ (@Transf
+      (Fibre_cat E z)
+      (Fibre_cat D z)
+      (@tapp0_fapp0 K Cat_cat E D z FF)
+      (@tapp0_fapp0 K Cat_cat E D z GG))
+≔ fapp0 (@tdapp0_func K E D FF GG z) ϵ;
+
+// -------------------------------------------------------------------------------------------------
+// 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
 // TODO(v3.2): generic Sigma/Pi helpers are deferred until the
@@ -1165,7 +1294,7 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
 // backlog in reports/REPORT_EMDASH_V3_CONSOLIDATED.md.
 
 // -------------------------------------------------------------------------------------------------
-// 15. Regression assertions for the mixed-variance skeleton
+// 16. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
 
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢
@@ -1344,6 +1473,10 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K E D FF)
     ≡ FF;
 
+assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E)
+    ≡ @id_func (Fibre_cat E y);
+
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (ϵ : τ (@Transfd K E D FF GG)) ⊢
   fapp0 (@tdapp1_int_func_transfd K E D FF GG) ϵ
@@ -1358,6 +1491,22 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @tdapp1_int_fapp0_transfd K E D FF FF
     (@id (@Functord_cat K E D) FF)
     ≡ @fdapp1_int_transfd K E D FF;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢
+  fapp0 (@tdapp0_func K E D FF GG z) ϵ
+    ≡ @tdapp0_fapp0 K E D FF GG z ϵ;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x : τ (Obj Z)) ⊢
+  @tapp0_fapp0
+    Z
+    Cat_cat
+    (@Op_catd Z E)
+    (@Homd_target_catd Z D)
+    x
+    (@homd_int Z D E FF)
+    ≡ @homd_src_funcd Z D E FF x;
 
 // Regression for the `homd_int` first projection. The rule itself keeps the
 // source/target family arguments implicit; this assertion may spell them out
@@ -1378,11 +1527,30 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
     (@id (@Functord_cat K E D) FF)
     ≡ @fdapp1_int_transfd K E D FF;
 
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0 (@homd_src_funcd Z D E FF x) u
+    ≡ @homd_src_secd Z D E FF x u;
+
 assert [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   fapp0 (@homd_src_func Z E x) u
     ≡ @homd_src_sec Z E x u;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @piapp0
+    (Op_cat Z)
+    (@Functor_catd
+      (Op_cat Z)
+      D
+      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x))
+    (@homd_src_secd Z D E FF x u)
+    y
+    ≡ @homd_tgt_funcd Z D E FF x u y;
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))
@@ -1402,6 +1570,20 @@ assert [Z : Cat] (E : τ (Catd Z))
   (u : τ (Obj (Fibre_cat E x)))
   (v : τ (Obj (Fibre_cat E y))) ⊢
   fapp0 (@homd_tgt_func Z E x u y) v
+    ≡ @homd_ Z E x u y v;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat D y))) ⊢
+  fapp0 (@homd_tgt_funcd Z D E FF x u y) v
+    ≡ @homd_funcd_ Z D E FF x u y v;
+
+assert [Z : Cat] (E : τ (Catd Z))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @homd_funcd_ Z E E (@id_funcd Z E) x u y v
     ≡ @homd_ Z E x u y v;
 
 assert [K : Cat] (A : Cat)
