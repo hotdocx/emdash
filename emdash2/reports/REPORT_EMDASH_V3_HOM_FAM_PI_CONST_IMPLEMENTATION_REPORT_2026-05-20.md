@@ -119,6 +119,25 @@ removed because it recursed through the definition of `piapp0` and timed out.
 The focused `timeout 30s lambdapi check -w emdash3_2.lp` pass and full
 `EMDASH_TYPECHECK_TIMEOUT=60s make check` pass succeed.
 
+Clarification update 2026-05-21: the next implementation step should introduce
+`piapp1_int` as the terminal-source specialization of the whole internal action
+witness `fdapp1_int_transfd`, not as a replacement for only the target displayed
+functor inside that witness. Since the section `s` is the specialized external
+`FF` argument of `fdapp1_int_transfd`, the fully applied version is preferred:
+
+```text
+piapp1_int [K] (E : Catd K) (s : Obj (Pi_cat E))
+  : Transfd
+      (homd_int (id_funcd (Const_catd K Terminal_cat)))
+      (comp_catd_fapp0
+        (homd_int s)
+        (Op_funcd s))
+```
+
+with the actual Lambdapi type written explicitly/readably enough for
+typechecking, and with implicit arguments omitted in use where local style
+allows.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -524,6 +543,33 @@ rule loops. The next fold should instead use the already-validated
 Terminal_obj-applied projection, or introduce a nonrecursive purpose-built
 projection only if an exact later LHS requires it.
 
+Clarified next design target: add a stable internal Pi-action witness
+`piapp1_int` by specializing the existing internal displayed action:
+
+```text
+fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
+  : I K E s
+```
+
+where `s : Obj (Pi_cat E)` is the specialized `FF` argument. Prefer the fully
+applied `I` version, because it matches the existing stable-head rewrite style:
+
+```text
+symbol piapp1_int [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E))) : I K E s;
+
+rule @fdapp1_int_transfd
+      $K
+      (@Const_catd $K Terminal_cat)
+      $E
+      $s
+  ↪ @piapp1_int $K $E $s;
+```
+
+This is an internal witness fold only. Projection rules from `piapp1_int` down
+to `piapp1_func` should be added afterward, using focused assertion probes to
+identify the exact stable projection LHS.
+
 ### 2. General Endpoint Promotion Is Complete
 
 The old endpoint shape:
@@ -729,13 +775,29 @@ The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
    and terminal-source `tdapp1_int` identity specialization through
    `id_transfd`.
 
-7. Next: identify the exact additional projection, if any, from the internal
-   `fdapp1_int_transfd` / `fdapp1_int_fibre_app` package to the packaged
-   section head `piapp1_func`. Add only focused assertions first; add a rewrite
-   rule only after the exact stable LHS is known. Avoid a general terminal-source
-   `tapp0_fapp0 -> piapp0` rule because it has already timed out by recursive
-   unfolding.
+7. Next: declare the fully applied internal Pi-action witness:
 
-8. Only after the endpoint and `piapp1` folds are stable, consider whole-family
+```text
+piapp1_int [K] (E : Catd K) (s : Obj (Pi_cat E))
+  : type of fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
+```
+
+Use a readable explicit Lambdapi type for the declaration, but omit implicit
+arguments in applications according to local style. Then add the stable fold:
+
+```text
+fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
+  -> piapp1_int E s
+```
+
+Validate immediately with a focused assertion that the fold fires.
+
+8. After `piapp1_int` exists, add projection/fold assertions from
+   `piapp1_int E s` toward the existing external package `piapp1_func E s x y`.
+   Add rewrite rules only after the exact stable projection LHS is identified.
+   Avoid a general terminal-source `tapp0_fapp0 -> piapp0` rule because it has
+   already timed out by recursive unfolding.
+
+9. Only after the endpoint and `piapp1` folds are stable, consider whole-family
    constant/terminal `homd_int` normal forms and any external `fdapp1_*` /
    `tdapp1_*` surface heads.
