@@ -4,15 +4,15 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3 iteration is @emdash3_1.lp, guided by @reports/REPORT_EMDASH_V3_CONSOLIDATED.md and the detailed next implementation plan @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The v3.2 implementation fork is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. The preserved v3.1 baseline is @emdash3_1.lp, summarized by @reports/REPORT_EMDASH_V3_CONSOLIDATED.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
 
-For v3 work, start from @emdash3_1.lp and the consolidated report. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
+For v3.2 work, start from @emdash3_2.lp, the preserved @emdash3_1.lp baseline, and the consolidated reports. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
 
 The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
-The active v3 file @emdash3_1.lp is draft work in progress. The immediate milestone is to develop the directed-family mixed-variance foundation for Sigma categories and dependent homs, then iterate toward horizontal composition, exchange/stacking laws, and adjunctions. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories".
+The active v3.2 file @emdash3_2.lp is draft work in progress. The immediate milestone is to develop the directed-family mixed-variance foundation for Sigma categories and dependent homs, then iterate toward horizontal composition, exchange/stacking laws, and adjunctions. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories".
 
 Advice: although we are interested in ω-categories (that is infinity/ω hierarchy of arrow, arrows of arrow, etc), as a rule of thumb, being able to express the 2-category version of what we want will, without extra efforts, also apply/extend to the ω-categories.
 
@@ -22,14 +22,15 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: for v3 work, start by reading @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
+Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
 ## Fast commands
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
-- Typecheck only v3.1: `lambdapi check -w emdash3_1.lp`
+- Typecheck only v3.1 baseline: `lambdapi check -w emdash3_1.lp`
+- Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
 - Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`

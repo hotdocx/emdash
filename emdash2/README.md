@@ -7,6 +7,8 @@ The proof assistant is called `m—` (read “emdash”).
 ## Layout
 - `emdash2.lp`: ω-category-oriented development (v2, second iteration).
 - `emdash3_1.lp`: active v3 directed-family mixed-variance development.
+- `emdash3_2.lp`: v3.2 fork implementing the Catd/Hom/Pi/constant-family
+  migration plan.
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
 - `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`: detailed next v3
@@ -19,7 +21,8 @@ The proof assistant is called `m—` (read “emdash”).
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 - Check active developments: `make check`
-- Check just v3.1: `lambdapi check -w emdash3_1.lp`
+- Check just v3.1 baseline: `lambdapi check -w emdash3_1.lp`
+- Check just v3.2: `lambdapi check -w emdash3_2.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
