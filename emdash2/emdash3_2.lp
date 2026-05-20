@@ -114,9 +114,18 @@ flag "print_meta_args" on;
     - `Homd_*`: source/section/target family names are readability and
       assertion handles.  Projection-rule LHSs should keep those inferred
       source/target family arguments implicit.
+    - `FibCov_*`: the internal covariant fibre-transport package; it projects
+      through `fib_cov_src_func` to the external `fib_cov_transf`, then to
+      `fib_cov_tapp0_func`.
     - `tapp1_int_func_transf` / `fapp1_int_transf`: ordinary internal
-      hom-action heads ported from v2. Displayed analogues target the generalized
-      `homd_int` arity.
+      hom-action heads ported from v2, including stable object/hom action
+      package heads.
+    - `tdapp1_int_func_transfd` / `fdapp1_int_transfd`: displayed internal
+      analogues targeting the generalized `homd_int` arity, also with stable
+      object/hom action package heads.
+    - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
+      capped component is a definition by `piapp0`; the terminal-specialization
+      fold from displayed internal action is still deferred.
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
@@ -534,6 +543,41 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
           (@hom_int B A G)
           (@Op_func A B F))));
 
+symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
+  Π (ϵ : τ (Transf F G)),
+  τ (Transf
+      (@hom_int A A (@id_func A))
+      (@comp_cat_fapp0
+        (Op_cat A)
+        (Op_cat B)
+        (Catd_cat A)
+        (@hom_int B A G)
+        (@Op_func A B F)));
+
+rule fapp0 (@tapp1_int_func_transf $A $B $F $G) $ϵ
+  ↪ @tapp1_int_fapp0_transf $A $B $F $G $ϵ;
+
+symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
+  Π (ϵ ϵ' : τ (Transf F G)),
+  τ (Functor
+      (Hom_cat (@Transf_cat A B F G) ϵ ϵ')
+      (Hom_cat
+        (@Transf_cat
+          (Op_cat A)
+          (Catd_cat A)
+          (@hom_int A A (@id_func A))
+          (@comp_cat_fapp0
+            (Op_cat A)
+            (Op_cat B)
+            (Catd_cat A)
+            (@hom_int B A G)
+            (@Op_func A B F)))
+        (@tapp1_int_fapp0_transf A B F G ϵ)
+        (@tapp1_int_fapp0_transf A B F G ϵ')));
+
+rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F $G) $ϵ $ϵ'
+  ↪ @tapp1_int_fapp1_func_transf $A $B $F $G $ϵ $ϵ';
+
 symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
   τ (Transf
       (@hom_int A A (@id_func A))
@@ -544,8 +588,21 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
         (@hom_int B A F)
         (@Op_func A B F)));
 
-rule fapp0 (@tapp1_int_func_transf $A $B $F $F) (id (Functor_cat $A $B) $F)
+rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
+
+assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) ⊢
+  fapp0 (@tapp1_int_func_transf A B F G) ϵ
+    ≡ @tapp1_int_fapp0_transf A B F G ϵ;
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ ϵ' : τ (Transf F G)) ⊢
+  @fapp1_func _ _ (@tapp1_int_func_transf A B F G) ϵ ϵ'
+    ≡ @tapp1_int_fapp1_func_transf A B F G ϵ ϵ';
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @tapp1_int_fapp0_transf A B F F (id (Functor_cat A B) F)
+    ≡ @fapp1_int_transf A B F;
 
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
   fapp0 (@tapp1_int_func_transf A B F F) (id (Functor_cat A B) F)
@@ -836,6 +893,39 @@ symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
   (u : τ (Obj (Fibre_cat E x)))
   : τ (@Transf K Cat_cat (@hom_ K K (@id_func K) x) E);
 
+symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
+≔ @hom_con
+    (@Catd_cat K)
+    E
+    (Op_cat K)
+    (@hom_int K K (@id_func K));
+
+symbol FibCov_cat [K : Cat] (E : τ (Catd K)) : Cat
+≔ @Transf_cat K Cat_cat E (@FibCov_target_catd K E);
+
+symbol FibCov [K : Cat] (E : τ (Catd K)) : Grpd
+≔ Obj (@FibCov_cat K E);
+
+constant symbol fib_cov_int : Π [K : Cat], Π (E : τ (Catd K)), τ (FibCov E);
+
+symbol fib_cov_src_func [K : Cat] (E : τ (Catd K))
+  (x : τ (Obj K))
+  : τ (Functor
+      (Fibre_cat E x)
+      (@Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E));
+
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      _
+      _
+      $x
+      (@fib_cov_int $K $E)
+  ↪ @fib_cov_src_func $K $E $x;
+
+rule fapp0 (@fib_cov_src_func $K $E $x) $u
+  ↪ @fib_cov_transf $K $E $x $u;
+
 rule @tapp0_fapp0
       $K
       Cat_cat
@@ -949,7 +1039,42 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
         (@homd_ $K $E $x $u $y $v));
 
 // -------------------------------------------------------------------------------------------------
-// 12. Internal displayed hom-action heads
+// 12. Section action over dependent homs
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Full section action over a base arrow.
+
+  `piapp1_func` is the section-level package over the base-arrow category.
+  The capped object component is defined by ordinary section evaluation, so it
+  remains iterable through `Pi_cat` rather than becoming only an object-level
+  shortcut.  The later terminal-specialization fold from displayed internal
+  action to this head is intentionally left for the next bridge pass.
+*/
+symbol piapp1_func [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  : τ (Obj (Pi_cat
+      (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))));
+
+symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y))
+  : τ (Obj
+      (@fapp0
+        (Op_cat (Hom_cat K x y))
+        Cat_cat
+        (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+        f))
+≔ @piapp0
+     (Op_cat (Hom_cat K x y))
+     (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+     (@piapp1_func K E s x y)
+     f;
+
+// -------------------------------------------------------------------------------------------------
+// 13. Internal displayed hom-action heads
 // -------------------------------------------------------------------------------------------------
 
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
@@ -969,6 +1094,49 @@ symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
           (@homd_int K E D GG)
           (@Op_funcd K E D FF))));
 
+symbol tdapp1_int_fapp0_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
+  Π [FF GG : τ (Functord E D)],
+  Π (ϵ : τ (@Transfd K E D FF GG)),
+  τ (@Transfd
+      K
+      (@Op_catd K E)
+      (@Homd_target_catd K E)
+      (@homd_int K E E (@id_funcd K E))
+      (@comp_catd_fapp0
+        K
+        (@Op_catd K E)
+        (@Op_catd K D)
+        (@Homd_target_catd K E)
+        (@homd_int K E D GG)
+        (@Op_funcd K E D FF)));
+
+rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ
+  ↪ @tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ;
+
+symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
+  Π [FF GG : τ (Functord E D)],
+  Π (ϵ ϵ' : τ (@Transfd K E D FF GG)),
+  τ (Functor
+      (Hom_cat (@Transfd_cat K E D FF GG) ϵ ϵ')
+      (Hom_cat
+        (@Transfd_cat
+          K
+          (@Op_catd K E)
+          (@Homd_target_catd K E)
+          (@homd_int K E E (@id_funcd K E))
+          (@comp_catd_fapp0
+            K
+            (@Op_catd K E)
+            (@Op_catd K D)
+            (@Homd_target_catd K E)
+            (@homd_int K E D GG)
+            (@Op_funcd K E D FF)))
+        (@tdapp1_int_fapp0_transfd K E D FF GG ϵ)
+        (@tdapp1_int_fapp0_transfd K E D FF GG ϵ')));
+
+rule @fapp1_func _ _ (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ $ϵ'
+  ↪ @tdapp1_int_fapp1_func_transfd $K $E $D $FF $GG $ϵ $ϵ';
+
 symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π (FF : τ (Functord E D)),
   τ (@Transfd
@@ -984,12 +1152,12 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (@homd_int K E D FF)
         (@Op_funcd K E D FF)));
 
-rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $FF)
+rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
       (@id (@Functord_cat $K $E $D) $FF)
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
 // -------------------------------------------------------------------------------------------------
-// 13. Generic Sigma/Pi weakening helpers
+// 14. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
 // TODO(v3.2): generic Sigma/Pi helpers are deferred until the
@@ -997,7 +1165,7 @@ rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $FF)
 // backlog in reports/REPORT_EMDASH_V3_CONSOLIDATED.md.
 
 // -------------------------------------------------------------------------------------------------
-// 14. Regression assertions for the mixed-variance skeleton
+// 15. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
 
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢
@@ -1131,6 +1299,43 @@ assert [Z : Cat] (E : τ (Catd Z)) ⊢
         (@Op_catd Z E)
         (@Homd_target_catd Z E);
 
+assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
+  Fibre_cat (@FibCov_target_catd K E) x
+    ≡ @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E;
+
+assert [K : Cat] (E : τ (Catd K)) ⊢
+  @FibCov_cat K E
+    ≡ @Transf_cat K Cat_cat E (@FibCov_target_catd K E);
+
+assert [K : Cat] (E : τ (Catd K))
+  (x : τ (Obj K)) ⊢
+  @tapp0_fapp0
+    K
+    Cat_cat
+    E
+    (@FibCov_target_catd K E)
+    x
+    (@fib_cov_int K E)
+    ≡ @fib_cov_src_func K E x;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0 (@fib_cov_src_func K E x) u
+    ≡ @fib_cov_transf K E x u;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tapp0_fapp0
+    K
+    Cat_cat
+    (@hom_ K K (@id_func K) x)
+    E
+    y
+    (@fib_cov_transf K E x u)
+    ≡ @fib_cov_tapp0_func K E x y u;
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Op_funcd K E E (@id_funcd K E)
     ≡ @id_funcd K (@Op_catd K E);
@@ -1138,6 +1343,21 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K E D FF)
     ≡ FF;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (@Transfd K E D FF GG)) ⊢
+  fapp0 (@tdapp1_int_func_transfd K E D FF GG) ϵ
+    ≡ @tdapp1_int_fapp0_transfd K E D FF GG ϵ;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ ϵ' : τ (@Transfd K E D FF GG)) ⊢
+  @fapp1_func _ _ (@tdapp1_int_func_transfd K E D FF GG) ϵ ϵ'
+    ≡ @tdapp1_int_fapp1_func_transfd K E D FF GG ϵ ϵ';
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
+  @tdapp1_int_fapp0_transfd K E D FF FF
+    (@id (@Functord_cat K E D) FF)
+    ≡ @fdapp1_int_transfd K E D FF;
 
 // Regression for the `homd_int` first projection. The rule itself keeps the
 // source/target family arguments implicit; this assertion may spell them out
@@ -1356,6 +1576,17 @@ assert [K : Cat] (E : τ (Catd K))
         f
         g
         alpha;
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @piapp1_fapp0 K E s x y f
+    ≡ @piapp0
+        (Op_cat (Hom_cat K x y))
+        (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+        (@piapp1_func K E s x y)
+        f;
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))

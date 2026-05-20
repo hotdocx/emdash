@@ -31,6 +31,10 @@ emdash3_1.lp
 emdash3_2.lp
 ```
 
+Continuation update: the 2026-05-20 follow-up pass also typechecks with the
+same two commands after adding the internal `fib_cov_int` package, internal
+object/hom action packagings, and the first `piapp1*` declarations.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -134,6 +138,26 @@ fib_cov_tapp0_fapp0 E x y f u :=
   - `fib_cov_tapp0_func (Const_catd K A) x y u -> Const_func ... A u`
   - `fib_cov_tapp0_fapp0 (Const_catd K A) x y f u -> u`
 
+### Most-Internal `fib_cov` Package
+
+- Added the internal fibre-transport package requested by the plan:
+  - `FibCov_target_catd`
+  - `FibCov_cat`
+  - `FibCov`
+  - `fib_cov_int`
+  - `fib_cov_src_func`
+- Added projection folds:
+
+```text
+tapp0_fapp0 x (fib_cov_int E) -> fib_cov_src_func E x
+fapp0 (fib_cov_src_func E x) u -> fib_cov_transf E x u
+```
+
+- Added assertions showing that `FibCov_target_catd E` has fibres
+  `Transf_cat (hom_ (id_func K) x) E`, and that the internal projection path
+  reaches the already-existing external `fib_cov_transf` and component
+  `fib_cov_tapp0_func`.
+
 ### Endpoint `homd_`
 
 - Deleted `homd_semantic_func` as a permanent symbol.
@@ -177,29 +201,59 @@ homd_int (id_funcd E)
 - Added the involution rule for nested `Op_funcd`.
 - Added internal displayed action heads:
   - `tdapp1_int_func_transfd`
+  - `tdapp1_int_fapp0_transfd`
+  - `tdapp1_int_fapp1_func_transfd`
   - `fdapp1_int_transfd`
-- Added the identity fold:
+- Added the same internal object/hom action packaging for the ordinary
+  `tapp1_int_func_transf` head:
+  - `tapp1_int_fapp0_transf`
+  - `tapp1_int_fapp1_func_transf`
+- Routed identity folds through the object-action stable heads:
 
 ```text
-fapp0 (tdapp1_int_func_transfd FF FF) (id (Functord_cat E D) FF)
+tdapp1_int_fapp0_transfd FF FF (id (Functord_cat E D) FF)
   -> fdapp1_int_transfd FF
+
+tapp1_int_fapp0_transf F F (id (Functor_cat A B) F)
+  -> fapp1_int_transf F
 ```
 
-No surface `fdapp1_*`, `tdapp1_*`, or `piapp1_*` heads were added in this pass.
+No external surface `fdapp1_*` or `tdapp1_*` heads were added in this pass.
+
+### Section Action `piapp1*`
+
+- Added the planned section-level action head:
+
+```text
+piapp1_func E s x y
+  : Obj (Pi_cat (homd_ E x (piapp0 s x) y (piapp0 s y)))
+```
+
+- Added the capped component as a definition by section evaluation:
+
+```text
+piapp1_fapp0 E s f
+  := piapp0 (piapp1_func E s x y) f
+```
+
+- Added an assertion for this definitional projection.
+- The terminal-specialization fold from displayed internal action to
+  `piapp1_func` remains deferred.
 
 ## Remaining Gaps And Divergences
 
-### 1. Full `piapp1*` Section Action Is Still Missing
+### 1. Terminal-Specialization Fold To `piapp1_func` Is Still Missing
 
 The plan expects full homd-valued section action only after the internal
-dependent-action layer is settled. The current v3.2 file has the internal
-displayed heads and identity fold, but it does not yet define:
+dependent-action layer is settled. The current v3.2 file now defines:
 
 - `piapp1_func`
 - `piapp1_fapp0`
-- a terminal-specialization fold from displayed dependent action to `piapp1_func`
 
-This remains the most important next implementation target.
+It does not yet define the terminal-specialization fold from displayed
+dependent action to `piapp1_func`. That fold remains the most important next
+implementation target for making `piapp1*` computational rather than only a
+typed stable package plus definitional projection.
 
 ### 2. `homd_` Is Still Ambient/Identity-Arity Only
 
@@ -221,24 +275,14 @@ implementing richer surface displayed actions, decide whether the endpoint itsel
 must carry the family morphism argument or whether generalized `homd_int` is
 sufficient and endpoint generalization should remain deferred.
 
-### 3. Most-Internal `fib_cov` Package Is Not Implemented
+### 3. Most-Internal `fib_cov` Package Is Now Implemented
 
-The external package exists:
+This gap is closed in the follow-up pass. The internal package
+`fib_cov_int E` projects to `fib_cov_src_func E x`, then to the existing
+external `fib_cov_transf E x u`, and then to `fib_cov_tapp0_func E x y u`.
 
-```text
-fib_cov_transf E x u
-```
-
-The more internal package discussed in the plan is not yet present:
-
-- `FibCov_target_catd`
-- `FibCov_cat`
-- `FibCov`
-- `fib_cov_int`
-- projection folds recovering `fib_cov_transf E x u`
-
-This was marked as a TODO in the plan and should not block the current endpoint
-cleanup.
+Remaining work in this area is not the package itself, but possible future
+integration with richer displayed action folds.
 
 ### 4. No Constant/Terminal Whole-Family `homd_int` Normal Forms Yet
 
@@ -284,18 +328,16 @@ Hom_cat (Pi_cat E) s t
 The plan explicitly defers this, with `Transfd_cat s t` as the likely joining
 direction. This remains open.
 
-### 7. Convenience Surface Heads Remain Deferred
+### 7. External Surface Heads Remain Deferred
 
 The following were intentionally not introduced:
 
 - external `fdapp1_*`
 - external `tdapp1_*`
-- `tdapp1_int_fapp0_transfd`
-- `tdapp1_int_fapp1_func_transfd`
-- hom-action packaging heads from v2
 
-The plan says to keep the fully internal heads first and only promote
-less-internal or capped heads after the internal layer is better understood.
+The internal object/hom action packagings from v2 have now been introduced for
+both ordinary and displayed internal heads. The plan still says to promote
+less-internal external heads only after the internal layer is better understood.
 
 ## Assessment
 
@@ -305,17 +347,16 @@ implements the main architecture changes:
 - `Terminal_catd` as a `Const_catd` alias.
 - `piapp0` as defined notation.
 - `fib_cov_tapp0_fapp0` as a defined projection.
+- most-internal `fib_cov_int` projection package.
 - endpoint `homd_` as a defined `hom_con` endpoint.
 - generalized `homd_int`.
-- internal displayed action heads and identity fold.
+- internal ordinary/displayed object and hom action heads.
+- initial `piapp1_func` / `piapp1_fapp0` stable package.
 
 It does not complete the full plan. The next work should focus on the unresolved
 arity and action questions, especially:
 
 1. whether to generalize endpoint `homd_` with an explicit `FF`,
-2. how to derive or introduce `piapp1_func`,
-3. whether to add the most-internal `fib_cov_int` package before or after the
-   first `piapp1*` fold,
-4. whether constant/terminal whole-family `homd_int` normal forms are now safe
+2. how to derive the terminal-specialization fold to `piapp1_func`,
+3. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
-
