@@ -103,6 +103,13 @@ is to refactor toward the plan's generalized endpoint arity by making `homd_`
 itself carry the displayed functor argument, with the old one-family endpoint as
 the identity-specialized form.
 
+Sixth continuation update: the `homd_funcd_` migration artifact has now been
+removed from `emdash3_2.lp`. The endpoint `homd_` itself carries the generalized
+displayed-functor argument, and old one-family endpoint uses have been rewritten
+as identity-specialized uses of `homd_ E E (id_funcd E) ...`. The focused
+`lambdapi check -w emdash3_2.lp` pass and the full bounded `make check` pass
+succeed after this refactor.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -254,30 +261,32 @@ homd_ E x u y v :=
   - `homd_ (Terminal_catd K) ...`
 - Preserved those normal forms as assertions reached by the indirect cascade.
 
-### Generalized Endpoint Migration Head `homd_funcd_`
+### Generalized Endpoint `homd_`
 
-- Added the explicit-displayed-functor endpoint:
+- Added the explicit-displayed-functor endpoint. It was initially introduced as
+  the migration name:
 
 ```text
 homd_funcd_ [D E] (FF : Functord D E) x u y v
+```
+
+and has now been promoted to the intended generalized endpoint:
+
+```text
+homd_ [D E] (FF : Functord D E) x u y v
 ```
 
 where `u : E[x]` and `v : D[y]`. Its target object is computed by the fibre
 component of `FF` at `y`, while transport still uses the ambient target family
 `E`.
 
-Correction: this name should not be treated as the intended final API. The plan
-allows separate generalized heads during migration, but its cleaner final shape
-is a generalized `homd_` itself:
+Correction implemented: the separate `homd_funcd_` name is no longer present in
+`emdash3_2.lp`. The old `homd_ E x u y v` shape is represented as the
+identity-specialized case:
 
 ```text
-homd_ [D E] (FF : Functord D E) x u y v
+homd_ E E (id_funcd E) x u y v
 ```
-
-The old `homd_ E x u y v` should become the identity-specialized form, i.e. the
-case `homd_ E E (id_funcd E) x u y v`. The next implementation pass should
-therefore plan to eliminate or rename/promote `homd_funcd_` rather than adding
-more permanent rules around that migration-only name.
 
 - Generalized the internal projection path:
   - `homd_src_funcd`
@@ -300,9 +309,9 @@ tapp0_fapp0 y (id_funcd E) -> id_func (E[y])
   - `homd_int FF` projects to `homd_src_funcd FF`,
   - `homd_src_funcd FF` projects to `homd_src_secd FF`,
   - `piapp0 (homd_src_secd FF) y` projects to `homd_tgt_funcd FF`,
-  - `fapp0 (homd_tgt_funcd FF) v` projects to `homd_funcd_ FF`,
-  - the identity specialization `homd_funcd_ (id_funcd E)` joins the old
-    `homd_ E` endpoint.
+  - `fapp0 (homd_tgt_funcd FF) v` projects to generalized `homd_ FF`,
+  - the identity specialization `homd_ (id_funcd E)` unfolds to the old endpoint
+    body.
 
 ### Generalized `homd_int` And Displayed Internal Action
 
@@ -467,31 +476,23 @@ typed stable package plus definitional projection. The new `piapp1_src_obj`
 helper clarifies the endpoint hom category, but it is not the missing packaged
 section fold.
 
-### 2. General Endpoint Exists, But Should Be Promoted To `homd_`
+### 2. General Endpoint Promotion Is Complete
 
-The current old endpoint remains:
+The old endpoint shape:
 
 ```text
 homd_ E x u y v
 ```
 
-The generalized endpoint now exists under the explicit name:
-
-```text
-homd_funcd_ FF x u y v
-```
-
-where `FF : Functord D E`. Review correction: keeping both names permanently is
-not the preferred reading of the plan. The next implementation should favor the
-plan's cleaner generalized endpoint arity:
+has been replaced by the generalized endpoint:
 
 ```text
 homd_ [D E] (FF : Functord D E) x u y v
 ```
 
-and then rewrite the current one-family uses as the identity-specialized case
-`homd_ E E (id_funcd E) x u y v`. The current `homd_funcd_` name is useful only
-as a migration handle.
+Old one-family uses are now written as `homd_ E E (id_funcd E) x u y v`.
+Remaining work in this area is not the endpoint arity itself, but using the
+generalized endpoint in the later `piapp1` terminal-specialization fold.
 
 ### 3. Most-Internal `fib_cov` Package Is Now Implemented
 
@@ -614,8 +615,7 @@ implements the main architecture changes:
 - `fib_cov_tapp0_fapp0` as a defined projection.
 - most-internal `fib_cov_int` projection package.
 - endpoint `homd_` as a defined `hom_con` endpoint.
-- generalized endpoint/projection path currently named `homd_funcd_`, to be
-  refactored toward generalized `homd_`.
+- generalized endpoint/projection path through `homd_ [D E] FF`.
 - generalized `homd_int`.
 - internal ordinary/displayed object and hom action heads.
 - derived `tdapp0_func` / `tdapp0_fapp0` notation.
@@ -626,12 +626,59 @@ implements the main architecture changes:
 - initial `piapp1_func` / `piapp1_fapp0` stable package plus
   `piapp1_src_obj`.
 
-It does not complete the full plan. The next work should focus on the unresolved
-arity and action questions, especially:
+It does not complete the full plan. The next work should focus on the remaining
+action questions, especially:
 
-1. refactor `homd_funcd_` into the plan's generalized `homd_` arity,
-2. how to derive the terminal-specialization fold to `piapp1_func`,
-3. only if needed later, how to expose displayed-composition fibre projections
+1. how to derive the terminal-specialization fold to `piapp1_func`,
+2. only if needed later, how to expose displayed-composition fibre projections
    through the `tapp0_fapp0` cascade without making `Fibre_func` primitive,
-4. whether constant/terminal whole-family `homd_int` normal forms are now safe
+3. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
+
+## Recommended Resume Order
+
+1. Checkpoint the current typechecked state with:
+
+```bash
+timeout 30s lambdapi check -w emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+2. Completed: refactor the migration endpoint `homd_funcd_` into the generalized
+   `homd_` arity:
+
+```text
+homd_ [Z] [D E : Catd Z] (FF : Functord D E) x u y v
+```
+
+The current `homd_funcd_` body was promoted to the generalized endpoint body.
+All old one-family endpoint uses were rewritten as the identity-specialized case
+`homd_ E E (id_funcd E) x u y v`, the projection folds and assertions were
+updated, and the `homd_funcd_` symbol was removed.
+
+3. Revalidate the constant and terminal endpoint cascades after the endpoint
+   refactor. They should still compute indirectly through `hom_con`,
+   `fib_cov_tapp0_func`, `Const_func`, and `hom_`. Do not add direct endpoint
+   rewrite rules unless that cascade fails in a concrete typechecked probe.
+
+4. Preserve the generalized `homd_int` projection chain as the stable internal
+   computation spine:
+
+```text
+homd_int -> homd_src_funcd -> homd_src_secd -> homd_tgt_funcd -> homd_
+```
+
+The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
+`homd_tgt_func` remain compatibility normal forms only.
+
+5. Do not chase displayed-composition fibre projection in the next pass. If the
+   computation is needed later, solve it by the unfolded `tapp0_fapp0` cascade;
+   keep `Fibre_func` as derived notation.
+
+6. After generalized `homd_` is clean, resume the terminal-specialization fold
+   from the internal displayed action to `piapp1_func`, with focused assertion
+   probes before adding rewrite rules.
+
+7. Only after the endpoint and `piapp1` folds are stable, consider whole-family
+   constant/terminal `homd_int` normal forms and any external `fdapp1_*` /
+   `tdapp1_*` surface heads.

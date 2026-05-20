@@ -28,10 +28,10 @@ flag "print_meta_args" on;
     - `F[x]` means `fapp0 F x`, for an ordinary functor.
     - `ϵ[x]` means the diagonal component extracted by `tapp0_fapp0 x ϵ`.
     - `homd_int (id_funcd E)`, after projection at x,u,y,v, normalizes through
-      `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then the endpoint `homd_`.
+      `homd_src_func`, `homd_src_sec`, `homd_tgt_func`, then generalized
+      `homd_` at the identity displayed functor.
     - `homd_int FF`, for `FF : Functord D E`, follows the generalized
-      `homd_src_funcd`, `homd_src_secd`, `homd_tgt_funcd`, then
-      `homd_funcd_` projection path.
+      `homd_src_funcd`, `homd_src_secd`, `homd_tgt_funcd`, then `homd_`.
 
   Rewrite hygiene:
     - Lambdapi rule LHSs are matched and typechecked modulo conversion.
@@ -117,9 +117,9 @@ flag "print_meta_args" on;
     - `Homd_*`: source/section/target family names are readability and
       assertion handles.  Projection-rule LHSs should keep those inferred
       source/target family arguments implicit.
-    - `homd_funcd_` is the generalized endpoint with an explicit displayed
-      functor argument. The old `homd_` endpoint remains the identity-family
-      specialization used by Sigma homs and section action.
+    - `homd_` is the generalized endpoint with an explicit displayed functor
+      argument. The old one-family endpoint is represented by the identity
+      specialization `homd_ (id_funcd E)`.
     - `FibCov_*`: the internal covariant fibre-transport package; it projects
       through `fib_cov_src_func` to the external `fib_cov_transf`, then to
       `fib_cov_tapp0_func`.
@@ -989,9 +989,9 @@ symbol fib_cov_tapp0_fapp0 [K : Cat] (E : τ (Catd K))
      (@fib_cov_tapp0_func K E x y u)
      f;
 
-// General endpoint notation for dependent homs along a displayed functor.
-// The old `homd_ E x u y v` below is the identity-family specialization.
-symbol homd_funcd_ [Z : Cat] [D E : τ (Catd Z)]
+// General endpoint notation for dependent homs along a displayed functor. The
+// old one-family endpoint is the identity-family specialization.
+symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
@@ -1066,21 +1066,6 @@ rule fapp0 (@homd_src_funcd $Z $D $E $FF $x) $u
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
-// Endpoint notation for dependent homs over base arrows. The endpoint is a
-// definition, so object and higher actions reduce through `hom_con` / `hom_`
-// instead of through endpoint-specific simulation rules.
-symbol homd_ [Z : Cat] (E : τ (Catd Z))
-  (x : τ (Obj Z))
-  (u : τ (Obj (Fibre_cat E x)))
-  (y : τ (Obj Z))
-  (v : τ (Obj (Fibre_cat E y)))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ @hom_con
-     (Fibre_cat E y)
-     v
-     (Hom_cat Z x y)
-     (@fib_cov_tapp0_func Z E x y u);
-
 // General inner endpoint functor after projecting the source-fixed section at y.
 symbol homd_tgt_funcd [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
@@ -1147,20 +1132,20 @@ rule @tapp0_fapp0
   ↪ @Obj_func $A (@fapp0 $K $A $F $k);
 
 // Final endpoint fold. At this point the stable head `homd_` carries the
-// endpoint family; pointwise object-action is handled by the rule on `homd_`.
+// endpoint family; pointwise object-action is handled by unfolding `homd_`.
 rule fapp0 (@homd_tgt_funcd $Z $D $E $FF $x $u $y) $v
-  ↪ @homd_funcd_ $Z $D $E $FF $x $u $y $v;
+  ↪ @homd_ $Z $D $E $FF $x $u $y $v;
 
 // Identity-specialized compatibility fold retained for stable old normal
 // forms and assertions.
 rule fapp0 (@homd_tgt_func $Z $E $x $u $y) $v
-  ↪ @homd_ $Z $E $x $u $y $v;
+  ↪ @homd_ $Z $E $E (@id_funcd $Z $E) $x $u $y $v;
 
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat
       (@Sigma_cat
         (Op_cat (Hom_cat $K $x $y))
-        (@homd_ $K $E $x $u $y $v));
+        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v));
 
 // -------------------------------------------------------------------------------------------------
 // 12. Section action over dependent homs
@@ -1186,7 +1171,15 @@ symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
   : τ (Obj (Pi_cat
-      (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))));
+      (@homd_
+        K
+        E
+        E
+        (@id_funcd K E)
+        x
+        (@piapp0 K E s x)
+        y
+        (@piapp0 K E s y))));
 
 symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1196,11 +1189,27 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
       (@fapp0
         (Op_cat (Hom_cat K x y))
         Cat_cat
-        (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+        (@homd_
+          K
+          E
+          E
+          (@id_funcd K E)
+          x
+          (@piapp0 K E s x)
+          y
+          (@piapp0 K E s y))
         f))
 ≔ @piapp0
      (Op_cat (Hom_cat K x y))
-     (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+     (@homd_
+       K
+       E
+       E
+       (@id_funcd K E)
+       x
+       (@piapp0 K E s x)
+       y
+       (@piapp0 K E s y))
      (@piapp1_func K E s x y)
      f;
 
@@ -1877,27 +1886,50 @@ assert [Z : Cat] (E : τ (Catd Z))
   (u : τ (Obj (Fibre_cat E x)))
   (v : τ (Obj (Fibre_cat E y))) ⊢
   fapp0 (@homd_tgt_func Z E x u y) v
-    ≡ @homd_ Z E x u y v;
+    ≡ @homd_ Z E E (@id_funcd Z E) x u y v;
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
   (v : τ (Obj (Fibre_cat D y))) ⊢
   fapp0 (@homd_tgt_funcd Z D E FF x u y) v
-    ≡ @homd_funcd_ Z D E FF x u y v;
+    ≡ @homd_ Z D E FF x u y v;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x y : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat D y))) ⊢
+  @homd_ Z D E FF x u y v
+    ≡ @hom_con
+        (Fibre_cat E y)
+        (@fapp0
+          (Fibre_cat D y)
+          (Fibre_cat E y)
+          (@tapp0_fapp0 Z Cat_cat D E y FF)
+          v)
+        (Hom_cat Z x y)
+        (@fib_cov_tapp0_func Z E x y u);
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
   (v : τ (Obj (Fibre_cat E y))) ⊢
-  @homd_funcd_ Z E E (@id_funcd Z E) x u y v
-    ≡ @homd_ Z E x u y v;
+  @homd_ Z E E (@id_funcd Z E) x u y v
+    ≡ @hom_con
+        (Fibre_cat E y)
+        v
+        (Hom_cat Z x y)
+        (@fib_cov_tapp0_func Z E x y u);
 
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x)))
   (v : τ (Obj (Fibre_cat (Const_catd K A) y))) ⊢
-  @homd_ K (Const_catd K A) x u y v
+  @homd_ K
+    (Const_catd K A)
+    (Const_catd K A)
+    (@id_funcd K (Const_catd K A))
+    x u y v
     ≡ @Const_catd (Op_cat (Hom_cat K x y)) (Hom_cat A u v);
 
 assert [K : Cat] (A : Cat)
@@ -1908,7 +1940,11 @@ assert [K : Cat] (A : Cat)
   @fapp1_func
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K (Const_catd K A) x u y v)
+    (@homd_ K
+      (Const_catd K A)
+      (Const_catd K A)
+      (@id_funcd K (Const_catd K A))
+      x u y v)
     f
     g
     ≡ @fapp1_func
@@ -1927,7 +1963,11 @@ assert [K : Cat] (A : Cat)
   @fapp1_fapp0
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K (Const_catd K A) x u y v)
+    (@homd_ K
+      (Const_catd K A)
+      (Const_catd K A)
+      (@id_funcd K (Const_catd K A))
+      x u y v)
     f
     g
     alpha
@@ -1943,7 +1983,11 @@ assert [K : Cat]
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Terminal_catd K) x)))
   (v : τ (Obj (Fibre_cat (Terminal_catd K) y))) ⊢
-  @homd_ K (Terminal_catd K) x u y v
+  @homd_ K
+    (Terminal_catd K)
+    (Terminal_catd K)
+    (@id_funcd K (Terminal_catd K))
+    x u y v
     ≡ @Terminal_catd (Op_cat (Hom_cat K x y));
 
 assert [K : Cat]
@@ -1954,7 +1998,11 @@ assert [K : Cat]
   @fapp1_func
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K (Terminal_catd K) x u y v)
+    (@homd_ K
+      (Terminal_catd K)
+      (Terminal_catd K)
+      (@id_funcd K (Terminal_catd K))
+      x u y v)
     f
     g
     ≡ @fapp1_func
@@ -1973,7 +2021,11 @@ assert [K : Cat]
   @fapp1_fapp0
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K (Terminal_catd K) x u y v)
+    (@homd_ K
+      (Terminal_catd K)
+      (Terminal_catd K)
+      (@id_funcd K (Terminal_catd K))
+      x u y v)
     f
     g
     alpha
@@ -2013,7 +2065,7 @@ assert [K : Cat] (E : τ (Catd K))
   (v : τ (Obj (Fibre_cat E y)))
   (f : τ (Obj (Op_cat (Hom_cat K x y)))) ⊢
   @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
-    (@homd_ K E x u y v)
+    (@homd_ K E E (@id_funcd K E) x u y v)
     f
     ≡ Hom_cat (Fibre_cat E y)
         (@fib_cov_tapp0_fapp0 K E x y f u)
@@ -2031,7 +2083,15 @@ assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
   (f : τ (Hom K x y)) ⊢
   @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
-    (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+    (@homd_
+      K
+      E
+      E
+      (@id_funcd K E)
+      x
+      (@piapp0 K E s x)
+      y
+      (@piapp0 K E s y))
     f
     ≡ Hom_cat (Fibre_cat E y)
         (@piapp1_src_obj K E s x y f)
@@ -2052,7 +2112,7 @@ assert [K : Cat] (E : τ (Catd K))
   @fapp1_func
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K E x u y v)
+    (@homd_ K E E (@id_funcd K E) x u y v)
     f
     g
     ≡ @fapp1_func
@@ -2075,7 +2135,7 @@ assert [K : Cat] (E : τ (Catd K))
   @fapp1_fapp0
     (Op_cat (Hom_cat K x y))
     Cat_cat
-    (@homd_ K E x u y v)
+    (@homd_ K E E (@id_funcd K E) x u y v)
     f
     g
     alpha
@@ -2098,7 +2158,15 @@ assert [K : Cat] (E : τ (Catd K))
   @piapp1_fapp0 K E s x y f
     ≡ @piapp0
         (Op_cat (Hom_cat K x y))
-        (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+        (@homd_
+          K
+          E
+          E
+          (@id_funcd K E)
+          x
+          (@piapp0 K E s x)
+          y
+          (@piapp0 K E s y))
         (@piapp1_func K E s x y)
         f;
 
@@ -2110,7 +2178,7 @@ assert [Z : Cat] (E : τ (Catd Z))
     ≡ Op_cat
         (@Sigma_cat
           (Op_cat (Hom_cat Z x y))
-          (@homd_ Z E x u y v));
+          (@homd_ Z E E (@id_funcd Z E) x u y v));
 
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
   (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢
