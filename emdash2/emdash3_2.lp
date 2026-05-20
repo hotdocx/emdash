@@ -1080,6 +1080,14 @@ rule fapp0 (@homd_src_funcd $Z $D $E $FF $x) $u
 rule fapp0 (@homd_src_func $Z $E $x) $u
   ↪ @homd_src_sec $Z $E $x $u;
 
+// Terminal-source normal form for the first homd projection. This is the
+// projected form needed by Pi-action; it avoids a broad whole-family homd_int
+// rewrite while exposing the unique terminal source object.
+rule @homd_src_func $Z (@Const_catd $Z Terminal_cat) $x
+  ↪ @Obj_func
+      (Pi_cat (@Homd_section_catd $Z (@Const_catd $Z Terminal_cat) $x))
+      (@homd_src_sec $Z (@Const_catd $Z Terminal_cat) $x Terminal_obj);
+
 // General inner endpoint functor after projecting the source-fixed section at y.
 symbol homd_tgt_funcd [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
@@ -1106,6 +1114,16 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
 
 rule @homd_tgt_funcd $Z $E $E (@id_funcd $Z $E) $x $u $y
   ↪ @homd_tgt_func $Z $E $x $u $y;
+
+// Terminal-source normal form for the inner endpoint functor. Applying the
+// resulting Obj_func at Terminal_obj joins with the generic fapp0 fold through
+// homd_ and the constant terminal endpoint cascade.
+rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $x Terminal_obj $y
+  ↪ @Obj_func
+      (Fibre_cat
+        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd $Z) $x)
+        $y)
+      (@Terminal_catd (Op_cat (Hom_cat $Z $x $y)));
 
 // Third projection fold. In v3.2 `piapp0` is a definition through ordinary
 // terminal-source component evaluation, so this rule lives one layer down at
@@ -1933,6 +1951,27 @@ assert [Z : Cat] (E : τ (Catd Z))
   fapp0 (@homd_src_func Z E x) u
     ≡ @homd_src_sec Z E x u;
 
+assert [K : Cat] (x : τ (Obj K)) ⊢
+  @homd_src_func K (@Const_catd K Terminal_cat) x
+    ≡ @Obj_func
+        (Pi_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x))
+        (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj);
+
+assert [K : Cat] (x : τ (Obj K)) ⊢
+  @Fibre_func
+    K
+    (@Op_catd K (@Const_catd K Terminal_cat))
+    (@Homd_target_catd K (@Const_catd K Terminal_cat))
+    (@homd_int
+      K
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K Terminal_cat)
+      (@id_funcd K (@Const_catd K Terminal_cat)))
+    x
+    ≡ @Obj_func
+        (Pi_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x))
+        (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj);
+
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x))) ⊢
@@ -1965,6 +2004,20 @@ assert [Z : Cat] (E : τ (Catd Z))
   (v : τ (Obj (Fibre_cat E y))) ⊢
   fapp0 (@homd_tgt_func Z E x u y) v
     ≡ @homd_ Z E E (@id_funcd Z E) x u y v;
+
+assert [K : Cat] (x y : τ (Obj K)) ⊢
+  @homd_tgt_func K (@Const_catd K Terminal_cat) x Terminal_obj y
+    ≡ @Obj_func
+        (Fibre_cat
+          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd K) x)
+          y)
+        (@Terminal_catd (Op_cat (Hom_cat K x y)));
+
+assert [K : Cat] (x y : τ (Obj K)) ⊢
+  fapp0
+    (@homd_tgt_func K (@Const_catd K Terminal_cat) x Terminal_obj y)
+    Terminal_obj
+    ≡ @Terminal_catd (Op_cat (Hom_cat K x y));
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x y : τ (Obj Z))

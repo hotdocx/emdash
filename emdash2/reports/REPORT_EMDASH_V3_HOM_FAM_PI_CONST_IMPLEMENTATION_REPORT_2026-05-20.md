@@ -157,6 +157,19 @@ path and the `tdapp1_int` identity-specialization path through `id_transfd`.
 Projection from `piapp1_int` to `piapp1_func` remains intentionally deferred to
 the later constant/terminal `homd_int` phase.
 
+Ninth continuation update: the terminal/constant `homd_int` phase has started
+with narrow projected terminal-source normal forms, not a broad whole-family
+rewrite for `homd_int`. The new rules expose
+`homd_src_func (Const_catd K Terminal_cat) x` as the object functor at
+`homd_src_sec ... Terminal_obj`, and expose
+`homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y` as the object
+functor at `Terminal_catd (Op_cat (Hom_cat K x y))`. Focused assertions confirm
+that `Fibre_func (homd_int (id_funcd (Const_catd K Terminal_cat))) x` reduces
+through the first normal form and that applying the inner endpoint functor at
+`Terminal_obj` reaches the terminal displayed family. No direct endpoint
+`homd_` terminal rule and no broad `homd_int -> ...` whole-family rule were
+introduced.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -535,6 +548,20 @@ fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
 
 - Added assertions that both the direct `fdapp1_int_transfd` specialization and
   the `tdapp1_int` identity-specialized path compute to `piapp1_int E s`.
+- Added projected terminal-source normal forms for the homd spine:
+
+```text
+homd_src_func (Const_catd K Terminal_cat) x
+  -> Obj_func (homd_src_sec ... Terminal_obj)
+
+homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
+  -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
+```
+
+- Added assertions that the terminal source of
+  `homd_int (id_funcd (Const_catd K Terminal_cat))` reduces through these
+  projected normal forms. These are intentionally not direct whole-family
+  `homd_int` or endpoint `homd_` rewrite rules.
 - Added the constant-family sanity assertion:
 
 ```text
@@ -836,6 +863,23 @@ Focused assertions now validate that the direct specialization and the
    normal form is needed, or whether the existing projection cascade is enough
    to expose the same `Pi_cat` target.
 
-9. After the internal `piapp1_int` witness fold is stable, consider the planned
-   constant/terminal `homd_int` normal forms and any external `fdapp1_*` /
-   `tdapp1_*` surface heads in a separate pass.
+9. Partially completed: after the internal `piapp1_int` witness fold became
+   stable, add narrow projected terminal-source normal forms for the existing
+   `homd_int` spine. The current file now reduces:
+
+```text
+homd_src_func (Const_catd K Terminal_cat) x
+  -> Obj_func (homd_src_sec ... Terminal_obj)
+
+homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
+  -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
+```
+
+These rules are enough to expose the terminal source and inner terminal
+endpoint through projections, while avoiding a broad whole-family `homd_int`
+rule.
+
+10. Next: decide whether `piapp1_int` needs a named target-section projection
+    before any fold to `piapp1_func`, or whether an external `fdapp1_*` /
+    `tdapp1_*` surface head should be introduced first. Keep direct
+    `piapp1_int -> piapp1_func` deferred until that projection shape is clear.
