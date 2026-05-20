@@ -50,6 +50,38 @@ displayed-composition fibre projection was probed but remains deferred after a
 timeout on the lower-level rule shape; a narrower `homd_int FF ∘ Op_funcd FF`
 probe was also removed because an exact assertion did not reduce.
 
+Correction update 2026-05-21: the displayed-composition probe above was
+overstated. The failed probe did not follow the plan's rewrite SOP because it
+spelled compound/reducible source and target families in inferred LHS slots of
+`tapp0_fapp0`. The result should be treated as inconclusive evidence about that
+particular bad rule shape, not as evidence that the planned projection is
+impossible. The next code pass should retry with the source/target functor
+arguments kept implicit (`_ _`), using the explicit data argument
+`comp_fapp0 (Catd_cat K) ...` or another stable head as the discriminator. The
+same review applies to the retained `Op_funcd` fibre-projection rule: it should
+be re-probed with implicit source/target family slots.
+
+Follow-up correction update 2026-05-21: the retained `Op_funcd` projection was
+corrected to keep the source/target family slots implicit and the file still
+typechecks. The displayed-composition projection was then retried with those
+same implicit slots, both as a standalone `tapp0_fapp0` rule and as a `with`
+sibling of the ordinary natural-transformation composition rule. Both
+SOP-compliant forms still timed out in bounded checking, so the next route is no
+longer another broad `tapp0_fapp0` pattern over unfolded
+`comp_fapp0 (Catd_cat K) ...`; it is to promote `comp_catd_fapp0` from a
+definitional alias into a stable displayed-composition head, with small fold and
+identity rules attached to that head. That stable-head promotion typechecks.
+However, a broad fibre projection attached to `comp_catd_fapp0`, and then a
+narrow `homd_int FF ∘ Op_funcd FF` specialization attached to the same stable
+head, both still timed out in bounded checking and were not kept. A subsequent
+attempt to attach the projection to the derived `Fibre_func` notation was also
+not viable because `Fibre_func` is a defined symbol, and Lambdapi rejected adding
+rewrite rules to it.
+
+Fifth continuation update: the 2026-05-21 pass typechecks after the
+`Op_funcd` LHS correction, the stable `comp_catd_fapp0` promotion, and new
+assertions covering displayed composition folding and identity reductions.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -68,6 +100,11 @@ probe was also removed because an exact assertion did not reduce.
   - `Hom_cat (Catd_cat K) E D -> Functord_cat E D`
   - `@Transf_cat K Cat_cat E D -> Functord_cat E D`
   - `Hom_cat (Functord_cat E D) FF GG -> Transfd_cat FF GG`
+- Promoted `comp_catd_fapp0` from a definitional alias into a stable displayed
+  composition head:
+  - `comp_fapp0 (Catd_cat K) E D C FF GG -> comp_catd_fapp0 FF GG`
+  - `comp_catd_fapp0 FF (id_funcd E) -> FF`
+  - `comp_catd_fapp0 (id_funcd D) GG -> GG`
 - Did not reintroduce `Fam_*` vocabulary.
 - Did not import the v2 `StrictFunctor_cat` / `sfunc_func` layer.
 
@@ -331,13 +368,18 @@ Fibre_func (homd_int FF) x -> homd_src_funcd FF x
 fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_secd FF x u
 ```
 
-- Probed the analogous displayed-composition projection. A rule headed by
-  `comp_catd_fapp0` typechecked but did not give the desired assertion because
-  Lambdapi unfolds the alias before matching. Moving the rule to the unfolded
-  `comp_fapp0 (Catd_cat K)` shape caused `lambdapi check` to time out, so the
-  composition bridge remains deferred. A narrower rule for the
+- Probed the analogous displayed-composition projection, but the probe is now
+  classified as non-conclusive because it over-specified inferred LHS slots.
+  A rule headed by `comp_catd_fapp0` typechecked but did not give the desired
+  assertion because Lambdapi unfolds the alias before matching. Moving the rule
+  to the unfolded `comp_fapp0 (Catd_cat K)` shape caused `lambdapi check` to
+  time out, but that attempted rule still explicitly pinned the source/target
+  family arguments of `tapp0_fapp0`. A narrower rule for the
   `homd_int FF ∘ Op_funcd FF` target composite also typechecked, but an exact
-  assertion did not reduce, so it was not kept.
+  assertion did not reduce; it had the same LHS-shape problem and was not kept.
+  The corrected recommendation is to retry the projection with the
+  `tapp0_fapp0` source/target family slots written as `_ _`, following the
+  `homd_int` projection style.
 
 ### Section Action `piapp1*`
 
@@ -482,7 +524,7 @@ less-internal external heads only after the internal layer is better understood.
 The derived `fdapp1_int_fibre_*` names added later remain internal projection
 notation and do not settle the external API question.
 
-### 8. Displayed Composition Fibre Projection Remains Deferred
+### 8. Displayed Composition Stable Head Added; Fibre Projection Deferred
 
 The desired rule shape is:
 
@@ -491,12 +533,33 @@ Fibre_func (comp_catd_fapp0 FF GG) x
   -> comp_cat_fapp0 (Fibre_func FF x) (Fibre_func GG x)
 ```
 
-This pass did not keep such a rule. The direct `comp_catd_fapp0` version did not
-support the target assertion because `comp_catd_fapp0` unfolds before matching;
-the unfolded `comp_fapp0 (Catd_cat K)` version caused the bounded check to time
-out. A narrower `homd_int FF ∘ Op_funcd FF` version also failed to fire on an
-exact assertion. This is now a concrete blocker for further simplification of
-the target of `fdapp1_int_fibre_app`.
+This pass did not keep such a rule. The first probes should not be treated as a
+real blocker because they violated the local rewrite hygiene rule: they
+explicitly wrote compound/reducible source and target family expressions in the
+inferred slots of `tapp0_fapp0`. The correct next probe should keep those slots
+implicit and discriminate on the explicit composed morphism argument, as in the
+existing `homd_int` projection rule:
+
+```text
+rule @tapp0_fapp0 K Cat_cat _ _ x
+      (comp_fapp0 (Catd_cat K) E D C FF GG)
+  -> comp_cat_fapp0 (Fibre_func FF x) (Fibre_func GG x)
+```
+
+This continuation promoted `comp_catd_fapp0` into that smaller stable head and
+added fold/identity rules for displayed composition. That part typechecks and is
+now validated by assertions.
+
+The fibre projection itself still remains deferred. A broad rule over the new
+stable `comp_catd_fapp0` head still timed out. A narrower rule for the concrete
+`homd_int FF ∘ Op_funcd FF` composite, using only explicit morphism arguments
+as discriminators, also timed out once placed after the `homd_int` projection
+heads. Both rules were removed. A rule headed by `Fibre_func` is not available
+while `Fibre_func` remains defined notation over `tapp0_fapp0`: Lambdapi rejects
+rules on symbols already defined with `≔`. The next attempt should therefore
+either introduce a fresh primitive fibre-level composition/projection head, or
+refactor `Fibre_func` itself from defined notation into a primitive projection
+head with carefully staged rules.
 
 ## Assessment
 
@@ -524,6 +587,6 @@ arity and action questions, especially:
 
 1. whether to promote/rename `homd_funcd_` as the main surface `homd_` arity,
 2. how to derive the terminal-specialization fold to `piapp1_func`,
-3. how to add a non-timeout displayed-composition fibre projection,
+3. how to expose displayed-composition fibre projections without a timeout,
 4. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.

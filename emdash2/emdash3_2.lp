@@ -308,8 +308,16 @@ symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E);
 rule @id (@Catd_cat $K) $E ↪ @id_funcd $K $E;
 
 symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)] [C : τ (Catd K)]
-  (FF : τ (Functord D C)) (GG : τ (Functord E D)) : τ (Functord E C)
-≔ @comp_fapp0 (@Catd_cat K) E D C FF GG;
+  (FF : τ (Functord D C)) (GG : τ (Functord E D)) : τ (Functord E C);
+
+// Stable displayed-composition head, parallel to `comp_cat_fapp0`.
+rule @comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG
+  ↪ @comp_catd_fapp0 $K $E $D $C $FF $GG;
+
+rule @comp_catd_fapp0 $K $E $E $C $FF (@id_funcd $K $E)
+  ↪ $FF;
+rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
+  ↪ $GG;
 
 
 // Natural families of transformations, i.e. modifications between
@@ -677,20 +685,14 @@ rule @Op_funcd $K (@Op_catd $K $E) (@Op_catd $K $D) (@Op_funcd $K $E $D $FF)
 rule @Op_funcd $K $E $E (@id_funcd $K $E)
   ↪ @id_funcd $K (@Op_catd $K $E);
 
-// Pointwise projection of displayed opposite. This rule keeps `Fibre_func`
-// definitional while still exposing the ordinary opposite functor calculus
-// needed by later displayed hom-action folds.
-// TODO(v3.2): a direct displayed-composition projection was probed both at
-// `comp_catd_fapp0` and at its unfolded `comp_fapp0 (Catd_cat K)` form. The
-// unfolded form caused a timeout in `lambdapi check`, so keep that bridge
-// deferred until there is a smaller stable composition head. A narrower
-// `homd_int FF ∘ Op_funcd FF` probe typechecked as a rule but did not fire on
-// an exact assertion, so it is not kept either.
+// Pointwise projection of displayed opposite. The source/target family slots
+// are deliberately implicit; the explicit `Op_funcd` argument is the
+// discriminator.
 rule @tapp0_fapp0
       $K
       Cat_cat
-      (@Op_catd $K $E)
-      (@Op_catd $K $D)
+      _
+      _
       $x
       (@Op_funcd $K $E $D $FF)
   ↪ @Op_func
@@ -1635,6 +1637,22 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K E D FF)
     ≡ FF;
+
+assert [K : Cat] (E D C : τ (Catd K))
+  (FF : τ (Functord D C))
+  (GG : τ (Functord E D)) ⊢
+  @comp_fapp0 (@Catd_cat K) E D C FF GG
+    ≡ @comp_catd_fapp0 K E D C FF GG;
+
+assert [K : Cat] (E C : τ (Catd K))
+  (FF : τ (Functord E C)) ⊢
+  @comp_catd_fapp0 K E E C FF (@id_funcd K E)
+    ≡ FF;
+
+assert [K : Cat] (E D : τ (Catd K))
+  (GG : τ (Functord E D)) ⊢
+  @comp_catd_fapp0 K E D D (@id_funcd K D) GG
+    ≡ GG;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x : τ (Obj K)) ⊢
