@@ -110,6 +110,15 @@ as identity-specialized uses of `homd_ E E (id_funcd E) ...`. The focused
 `lambdapi check -w emdash3_2.lp` pass and the full bounded `make check` pass
 succeed after this refactor.
 
+Seventh continuation update: the 2026-05-21 pass also typechecks after adding
+the stable displayed identity `id_transfd`, routing the `tdapp1_int` identity
+fold through that head, and adding focused terminal-source probes for the
+`piapp0`/`homd_` cascade needed by the eventual fold to `piapp1_func`. A direct
+general terminal-source `tapp0_fapp0` rule returning `piapp0` was tested and
+removed because it recursed through the definition of `piapp0` and timed out.
+The focused `timeout 30s lambdapi check -w emdash3_2.lp` pass and full
+`EMDASH_TYPECHECK_TIMEOUT=60s make check` pass succeed.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -340,10 +349,18 @@ homd_int (id_funcd E)
   `tapp1_int_func_transf` head:
   - `tapp1_int_fapp0_transf`
   - `tapp1_int_fapp1_func_transf`
-- Routed identity folds through the object-action stable heads:
+- Added the stable displayed identity head:
 
 ```text
-tdapp1_int_fapp0_transfd FF FF (id (Functord_cat E D) FF)
+id_transfd FF : Transfd FF FF
+id (Functord_cat E D) FF -> id_transfd FF
+```
+
+- Routed displayed identity folds through `id_transfd` rather than matching
+  only ordinary `id` directly:
+
+```text
+tdapp1_int_fapp0_transfd FF FF (id_transfd FF)
   -> fdapp1_int_transfd FF
 
 tapp1_int_fapp0_transf F F (id (Functor_cat A B) F)
@@ -448,6 +465,22 @@ piapp1_src_obj E s f
 Hom_cat (Fibre_cat E y) (piapp1_src_obj E s f) (piapp0 s y)
 ```
 
+- Added terminal-source cascade probes showing:
+
+```text
+fapp0 (tapp0_fapp0 (Const_catd K Terminal_cat) E k s) Terminal_obj
+  ≡ piapp0 s k
+
+homd_ (Const_catd K Terminal_cat) E s x (piapp0 s x) y Terminal_obj
+  ≡ homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)
+```
+
+- Added an endpoint-object assertion that applying the terminal-source
+  generalized endpoint to a base arrow exposes the same hom category used by
+  `piapp1_fapp0`.
+- Added an assertion that the terminal-source `tdapp1_int` identity
+  specialization folds to `fdapp1_int_transfd` when the displayed identity is
+  written with `id_transfd`.
 - Added the constant-family sanity assertion:
 
 ```text
@@ -475,6 +508,21 @@ implementation target for making `piapp1*` computational rather than only a
 typed stable package plus definitional projection. The new `piapp1_src_obj`
 helper clarifies the endpoint hom category, but it is not the missing packaged
 section fold.
+
+The latest pass settled two prerequisites for this fold:
+
+- terminal-source endpoint normalization from `homd_ (Const_catd K Terminal_cat)
+  E s ... Terminal_obj` to the identity-specialized `homd_ E E (id_funcd E)
+  ...` succeeds by cascade;
+- terminal-source identity specialization of `tdapp1_int` succeeds when the
+  displayed identity is written as `id_transfd`.
+
+Do not add a general terminal-source component rule
+`tapp0_fapp0 (Const_catd K Terminal_cat) E k s -> Obj_func ... (piapp0 s k)` in
+the current architecture: with `piapp0` defined through the same projection, that
+rule loops. The next fold should instead use the already-validated
+Terminal_obj-applied projection, or introduce a nonrecursive purpose-built
+projection only if an exact later LHS requires it.
 
 ### 2. General Endpoint Promotion Is Complete
 
@@ -675,10 +723,19 @@ The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
    computation is needed later, solve it by the unfolded `tapp0_fapp0` cascade;
    keep `Fibre_func` as derived notation.
 
-6. After generalized `homd_` is clean, resume the terminal-specialization fold
-   from the internal displayed action to `piapp1_func`, with focused assertion
-   probes before adding rewrite rules.
+6. Partially completed: after generalized `homd_`, validate the
+   terminal-source cascade toward `piapp1_func`. The current file now has
+   focused probes for Terminal_obj-applied `piapp0`, terminal-source `homd_`,
+   and terminal-source `tdapp1_int` identity specialization through
+   `id_transfd`.
 
-7. Only after the endpoint and `piapp1` folds are stable, consider whole-family
+7. Next: identify the exact additional projection, if any, from the internal
+   `fdapp1_int_transfd` / `fdapp1_int_fibre_app` package to the packaged
+   section head `piapp1_func`. Add only focused assertions first; add a rewrite
+   rule only after the exact stable LHS is known. Avoid a general terminal-source
+   `tapp0_fapp0 -> piapp0` rule because it has already timed out by recursive
+   unfolding.
+
+8. Only after the endpoint and `piapp1` folds are stable, consider whole-family
    constant/terminal `homd_int` normal forms and any external `fdapp1_*` /
    `tdapp1_*` surface heads.

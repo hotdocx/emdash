@@ -336,11 +336,25 @@ unif_rule Obj (@Transfd_cat $K $E $D $FF $GG) ≡ Obj (@Transfd_cat $K' $E' $D' 
 rule Hom_cat (@Functord_cat $K $E $D) $FF $GG
   ↪ @Transfd_cat $K $E $D $FF $GG;
 
+// Stable displayed identity. The ordinary identity at a displayed-functor
+// category folds here when that category is still visible; terminal-source
+// section cases can use this head directly after Functord_cat contracts to
+// Pi_cat.
+symbol id_transfd [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  : τ (@Transfd K E D FF FF);
+
+rule @id (@Functord_cat $K $E $D) $FF
+  ↪ @id_transfd $K $E $D $FF;
+
 assert [K : Cat] ⊢ Functor_cat K Cat_cat ≡ Catd_cat K;
 assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Catd_cat K) E D ≡ Functord_cat E D;
 assert [K : Cat] [E D : τ (Catd K)] (FF GG : τ (Functord E D)) ⊢
   Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG;
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
+  @id (@Functord_cat K E D) FF
+    ≡ @id_transfd K E D FF;
 
 symbol id_func [A: Cat] : τ (Functor A A);
 rule @id Cat_cat $A ↪ @id_func $A;
@@ -1292,8 +1306,9 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (@homd_int K E D FF)
         (@Op_funcd K E D FF)));
 
+// Identity-specialization fold for the internal displayed hom-action.
 rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
-      (@id (@Functord_cat $K $E $D) $FF)
+      (@id_transfd $K $E $D $FF)
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
 // -------------------------------------------------------------------------------------------------
@@ -1507,6 +1522,16 @@ assert [K : Cat] (A : Cat)
   @piapp0 K (@Const_catd K A) F k
     ≡ @fapp0 K A F k;
 
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @fapp0
+    Terminal_cat
+    (Fibre_cat E k)
+    (@tapp0_fapp0 K Cat_cat (@Const_catd K Terminal_cat) E k s)
+    Terminal_obj
+    ≡ @piapp0 K E s k;
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
 
@@ -1695,6 +1720,16 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @tdapp1_int_fapp0_transfd K E D FF FF
     (@id (@Functord_cat K E D) FF)
     ≡ @fdapp1_int_transfd K E D FF;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
+  @tdapp1_int_fapp0_transfd
+    K
+    (@Const_catd K Terminal_cat)
+    E
+    s
+    s
+    (@id_transfd K (@Const_catd K Terminal_cat) E s)
+    ≡ @fdapp1_int_transfd K (@Const_catd K Terminal_cat) E s;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢
@@ -1921,6 +1956,28 @@ assert [Z : Cat] (E : τ (Catd Z))
         (Hom_cat Z x y)
         (@fib_cov_tapp0_func Z E x y u);
 
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K)) ⊢
+  @homd_
+    K
+    (@Const_catd K Terminal_cat)
+    E
+    s
+    x
+    (@piapp0 K E s x)
+    y
+    Terminal_obj
+    ≡ @homd_
+        K
+        E
+        E
+        (@id_funcd K E)
+        x
+        (@piapp0 K E s x)
+        y
+        (@piapp0 K E s y);
+
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x)))
@@ -2092,6 +2149,25 @@ assert [K : Cat] (E : τ (Catd K))
       (@piapp0 K E s x)
       y
       (@piapp0 K E s y))
+    f
+    ≡ Hom_cat (Fibre_cat E y)
+        (@piapp1_src_obj K E s x y f)
+        (@piapp0 K E s y);
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
+    (@homd_
+      K
+      (@Const_catd K Terminal_cat)
+      E
+      s
+      x
+      (@piapp0 K E s x)
+      y
+      Terminal_obj)
     f
     ≡ Hom_cat (Fibre_cat E y)
         (@piapp1_src_obj K E s x y f)
