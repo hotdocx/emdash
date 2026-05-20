@@ -134,6 +134,9 @@ flag "print_meta_args" on;
     - `Fibre_func` / `Fibre_transf` / `Fibre_transf_app`: derived fibre-level
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
+    - Pointwise displayed-functor calculus: `Op_funcd` projects through
+      `tapp0_fapp0` to ordinary fibre opposites. The analogous displayed
+      composition projection is deferred after a timeout probe.
     - `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app`: derived projections
       of the internal displayed hom-action, still below any external
       `fdapp1_*` surface API.
@@ -674,6 +677,27 @@ rule @Op_funcd $K (@Op_catd $K $E) (@Op_catd $K $D) (@Op_funcd $K $E $D $FF)
 rule @Op_funcd $K $E $E (@id_funcd $K $E)
   ↪ @id_funcd $K (@Op_catd $K $E);
 
+// Pointwise projection of displayed opposite. This rule keeps `Fibre_func`
+// definitional while still exposing the ordinary opposite functor calculus
+// needed by later displayed hom-action folds.
+// TODO(v3.2): a direct displayed-composition projection was probed both at
+// `comp_catd_fapp0` and at its unfolded `comp_fapp0 (Catd_cat K)` form. The
+// unfolded form caused a timeout in `lambdapi check`, so keep that bridge
+// deferred until there is a smaller stable composition head. A narrower
+// `homd_int FF ∘ Op_funcd FF` probe typechecked as a rule but did not fire on
+// an exact assertion, so it is not kept either.
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      (@Op_catd $K $E)
+      (@Op_catd $K $D)
+      $x
+      (@Op_funcd $K $E $D $FF)
+  ↪ @Op_func
+      (Fibre_cat $E $x)
+      (Fibre_cat $D $x)
+      (@tapp0_fapp0 $K Cat_cat $E $D $x $FF);
+
 symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
 rule @Functord_cat $K (@Const_catd $K Terminal_cat) $E ↪ @Pi_cat $K $E;
@@ -1149,6 +1173,13 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   shortcut.  The later terminal-specialization fold from displayed internal
   action to this head is intentionally left for the next bridge pass.
 */
+symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y))
+  : τ (Obj (Fibre_cat E y))
+≔ @fib_cov_tapp0_fapp0 K E x y f (@piapp0 K E s x);
+
 symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
@@ -1605,6 +1636,20 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K E D FF)
     ≡ FF;
 
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x : τ (Obj K)) ⊢
+  @tapp0_fapp0
+    K
+    Cat_cat
+    (@Op_catd K E)
+    (@Op_catd K D)
+    x
+    (@Op_funcd K E D FF)
+    ≡ @Op_func
+        (Fibre_cat E x)
+        (Fibre_cat D x)
+        (@tapp0_fapp0 K Cat_cat E D x FF);
+
 assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢
   @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E)
     ≡ @id_func (Fibre_cat E y);
@@ -1633,6 +1678,37 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (z : τ (Obj K)) ⊢
   @Fibre_func K E D FF z
     ≡ @tapp0_fapp0 K Cat_cat E D z FF;
+
+assert [K : Cat] (E : τ (Catd K)) (z : τ (Obj K)) ⊢
+  @Fibre_func K E E (@id_funcd K E) z
+    ≡ @id_func (Fibre_cat E z);
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (z : τ (Obj K)) ⊢
+  @Fibre_func
+    K
+    (@Op_catd K E)
+    (@Op_catd K D)
+    (@Op_funcd K E D FF)
+    z
+    ≡ @Op_func
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D FF z);
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (z : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (@Op_catd K E) z))) ⊢
+  @fapp0
+    (Fibre_cat (@Op_catd K E) z)
+    (Fibre_cat (@Op_catd K D) z)
+    (@Fibre_func K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K E D FF) z)
+    u
+    ≡ @fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D FF z)
+        u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (ϵ : τ (@Transfd K E D FF GG)) (z : τ (Obj K)) ⊢
@@ -1700,6 +1776,26 @@ assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
     x
     (@homd_int Z D E FF)
     ≡ @homd_src_funcd Z D E FF x;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x : τ (Obj Z)) ⊢
+  @Fibre_func
+    Z
+    (@Op_catd Z E)
+    (@Homd_target_catd Z D)
+    (@homd_int Z D E FF)
+    x
+    ≡ @homd_src_funcd Z D E FF x;
+
+assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat (@Op_catd Z E) x))) ⊢
+  @fapp0
+    (Fibre_cat (@Op_catd Z E) x)
+    (Fibre_cat (@Homd_target_catd Z D) x)
+    (@Fibre_func Z (@Op_catd Z E) (@Homd_target_catd Z D) (@homd_int Z D E FF) x)
+    u
+    ≡ @homd_src_secd Z D E FF x u;
 
 // Regression for the `homd_int` first projection. The rule itself keeps the
 // source/target family arguments implicit; this assertion may spell them out
@@ -1904,6 +2000,31 @@ assert [K : Cat] (E : τ (Catd K))
     ≡ Hom_cat (Fibre_cat E y)
         (@fib_cov_tapp0_fapp0 K E x y f u)
         v;
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @piapp1_src_obj K E s x y f
+    ≡ @fib_cov_tapp0_fapp0 K E x y f (@piapp0 K E s x);
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
+    (@homd_ K E x (@piapp0 K E s x) y (@piapp0 K E s y))
+    f
+    ≡ Hom_cat (Fibre_cat E y)
+        (@piapp1_src_obj K E s x y f)
+        (@piapp0 K E s y);
+
+assert [K : Cat] (A : Cat)
+  (s : τ (Obj (Pi_cat (Const_catd K A))))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @piapp1_src_obj K (@Const_catd K A) s x y f
+    ≡ @fapp0 K A s x;
 
 assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))

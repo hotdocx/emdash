@@ -43,6 +43,13 @@ Third continuation update: the next 2026-05-20 pass also typechecks after
 adding derived fibre-level projections and derived fibre projections of
 `fdapp1_int_transfd`.
 
+Fourth continuation update: the next 2026-05-20 pass also typechecks after
+adding the pointwise `Op_funcd` fibre projection, extra `Fibre_func` /
+`homd_int` source-projection assertions, and the `piapp1_src_obj` helper. A
+displayed-composition fibre projection was probed but remains deferred after a
+timeout on the lower-level rule shape; a narrower `homd_int FF ∘ Op_funcd FF`
+probe was also removed because an exact assertion did not reduce.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -302,6 +309,36 @@ fdapp1_int_fibre_app FF x u
 These are projections of `fdapp1_int_transfd`; they are not external
 `fdapp1_*` surface heads.
 
+### Pointwise Opposite And `homd_int` Fibre Source Projections
+
+- Added the pointwise displayed-opposite projection:
+
+```text
+tapp0_fapp0 x (Op_funcd FF)
+  -> Op_func (tapp0_fapp0 x FF)
+```
+
+- Added assertions that:
+  - `Fibre_func (id_funcd E) z` computes to `id_func (Fibre_cat E z)`,
+  - `Fibre_func (Op_funcd FF) z` computes to `Op_func (Fibre_func FF z)`,
+  - object action of the opposite fibre functor computes back to object action
+    of `Fibre_func FF z`.
+- Added assertions exposing the first fibre projection of generalized
+  `homd_int`:
+
+```text
+Fibre_func (homd_int FF) x -> homd_src_funcd FF x
+fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_secd FF x u
+```
+
+- Probed the analogous displayed-composition projection. A rule headed by
+  `comp_catd_fapp0` typechecked but did not give the desired assertion because
+  Lambdapi unfolds the alias before matching. Moving the rule to the unfolded
+  `comp_fapp0 (Catd_cat K)` shape caused `lambdapi check` to time out, so the
+  composition bridge remains deferred. A narrower rule for the
+  `homd_int FF ∘ Op_funcd FF` target composite also typechecked, but an exact
+  assertion did not reduce, so it was not kept.
+
 ### Section Action `piapp1*`
 
 - Added the planned section-level action head:
@@ -318,6 +355,25 @@ piapp1_fapp0 E s f
   := piapp0 (piapp1_func E s x y) f
 ```
 
+- Added the source object of the dependent hom component:
+
+```text
+piapp1_src_obj E s f
+  := fib_cov_tapp0_fapp0 E f (piapp0 s x)
+```
+
+- Added assertions that the endpoint category of `piapp1_fapp0` unfolds to:
+
+```text
+Hom_cat (Fibre_cat E y) (piapp1_src_obj E s f) (piapp0 s y)
+```
+
+- Added the constant-family sanity assertion:
+
+```text
+piapp1_src_obj (Const_catd K A) s f -> fapp0 s x
+```
+
 - Added an assertion for this definitional projection.
 - The terminal-specialization fold from displayed internal action to
   `piapp1_func` remains deferred.
@@ -331,11 +387,14 @@ dependent-action layer is settled. The current v3.2 file now defines:
 
 - `piapp1_func`
 - `piapp1_fapp0`
+- `piapp1_src_obj`
 
 It does not yet define the terminal-specialization fold from displayed
 dependent action to `piapp1_func`. That fold remains the most important next
 implementation target for making `piapp1*` computational rather than only a
-typed stable package plus definitional projection.
+typed stable package plus definitional projection. The new `piapp1_src_obj`
+helper clarifies the endpoint hom category, but it is not the missing packaged
+section fold.
 
 ### 2. General Endpoint Exists, But Surface Arity Is Still A Design Choice
 
@@ -367,10 +426,11 @@ integration with richer displayed action folds.
 
 ### 4. No Constant/Terminal Whole-Family `homd_int` Normal Forms Yet
 
-The endpoint `homd_` has constant and terminal assertions by cascade. The
-internal package `homd_int` does not yet have whole-family constant or terminal
-normal forms. The plan says to add these only after checking they join with the
-defined endpoint and constant-functor cascade.
+The endpoint `homd_` has constant and terminal assertions by cascade. The first
+fibre projection of generalized `homd_int` is now exposed through
+`Fibre_func`, but the internal package does not yet have whole-family constant
+or terminal normal forms. The plan says to add these only after checking they
+join with the defined endpoint and constant-functor cascade.
 
 ### 5. `piapp0` Replacement LHS Is More Explicit Than The Plan Sketch
 
@@ -422,6 +482,22 @@ less-internal external heads only after the internal layer is better understood.
 The derived `fdapp1_int_fibre_*` names added later remain internal projection
 notation and do not settle the external API question.
 
+### 8. Displayed Composition Fibre Projection Remains Deferred
+
+The desired rule shape is:
+
+```text
+Fibre_func (comp_catd_fapp0 FF GG) x
+  -> comp_cat_fapp0 (Fibre_func FF x) (Fibre_func GG x)
+```
+
+This pass did not keep such a rule. The direct `comp_catd_fapp0` version did not
+support the target assertion because `comp_catd_fapp0` unfolds before matching;
+the unfolded `comp_fapp0 (Catd_cat K)` version caused the bounded check to time
+out. A narrower `homd_int FF ∘ Op_funcd FF` version also failed to fire on an
+exact assertion. This is now a concrete blocker for further simplification of
+the target of `fdapp1_int_fibre_app`.
+
 ## Assessment
 
 The first implementation pass is successful as a typechecked core migration. It
@@ -437,13 +513,17 @@ implements the main architecture changes:
 - internal ordinary/displayed object and hom action heads.
 - derived `tdapp0_func` / `tdapp0_fapp0` notation.
 - derived `Fibre_func` / `Fibre_transf` / `Fibre_transf_app` notation.
+- pointwise `Op_funcd` fibre projection and related `Fibre_func` assertions.
+- `Fibre_func (homd_int FF)` source-projection assertions.
 - derived `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app` projections.
-- initial `piapp1_func` / `piapp1_fapp0` stable package.
+- initial `piapp1_func` / `piapp1_fapp0` stable package plus
+  `piapp1_src_obj`.
 
 It does not complete the full plan. The next work should focus on the unresolved
 arity and action questions, especially:
 
 1. whether to promote/rename `homd_funcd_` as the main surface `homd_` arity,
 2. how to derive the terminal-specialization fold to `piapp1_func`,
-3. whether constant/terminal whole-family `homd_int` normal forms are now safe
+3. how to add a non-timeout displayed-composition fibre projection,
+4. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
