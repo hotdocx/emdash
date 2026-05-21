@@ -1513,6 +1513,30 @@ Implemented policy:
   `Functor_cat`, `Transf_cat`, `Functord_cat`, `Pi_cat`, or the family
   constructors with pointwise rules.
 
+Follow-up Sigma review, 2026-05-22: the same modifier policy was applied to the
+Sigma totalization block after the line-by-line review reached it. A focused
+probe marking the Sigma package heads injective passed quickly:
+
+```text
+injective Sigma_cat
+injective Sigma_func
+injective sigma_map_func
+```
+
+`sigma_map_func η : Functor (Sigma_cat E) (Sigma_cat D)` is injective as a
+stable constructor for the total functor induced by the displayed functor `η`.
+This is the same syntactic-kernel reading as the other package heads: equality
+of packaged constructors may recover the displayed-family data. It is not a
+claim about equality of total categories or total functors modulo categorical
+equivalence.
+
+The existing `Sigma_proj1_func E : Functor (Sigma_cat E) K` injectivity remains
+appropriate under the same reading. It is a projection package whose source
+category already contains the displayed family parameter. As with the rest of
+v3.2, this should be understood as strict constructor injectivity in the
+Lambdapi normalization layer, not as an isomorphism-invariant categorical
+statement.
+
 The whole-family terminal/constant `homd_int` question was also probed directly:
 
 ```text

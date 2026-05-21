@@ -758,9 +758,12 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
 // 7. Directed Sigma categories and maps between totals
 // -------------------------------------------------------------------------------------------------
 
-symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
+// Sigma totalization is a stable constructor package. Its map/projection heads
+// are injective in the syntactic kernel sense: equality of these packaged
+// constructors may recover their displayed-family data.
+injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
-symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
+injective symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E
   ↪ @Sigma_cat $K $E;
 
@@ -772,7 +775,7 @@ injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
 
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 
-symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
+injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
