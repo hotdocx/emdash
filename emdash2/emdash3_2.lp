@@ -739,10 +739,7 @@ rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
 
 symbol piapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Pi_cat E) (Fibre_cat E k))
-≔ @comp_cat_fapp0
-     (@Transf_cat K Cat_cat (@Const_catd K Terminal_cat) E)
-     (Functor_cat Terminal_cat (Fibre_cat E k))
-     (Fibre_cat E k)
+≔ comp_cat_fapp0
      (@fapp0_func Terminal_cat (Fibre_cat E k) Terminal_obj)
      (@tapp0_func K Cat_cat (@Const_catd K Terminal_cat) E k);
 
@@ -785,12 +782,9 @@ rule @fapp1_fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E $D $η
 rule @fapp0 _ _
       (@sigma_map_func $K $E $D $η)
       (Struct_sigma $k $u)
-  ↪ @Struct_sigma
-      (Obj $K)
-      (λ kk : τ (Obj $K), Obj (Fibre_cat $D kk))
+  ↪ Struct_sigma
       $k
-      (@fapp0 (Fibre_cat $E $k) (Fibre_cat $D $k)
-        (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
+      (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
 
 rule @comp_cat_fapp0 _ _ _
       (@Sigma_proj1_func $K $D)
