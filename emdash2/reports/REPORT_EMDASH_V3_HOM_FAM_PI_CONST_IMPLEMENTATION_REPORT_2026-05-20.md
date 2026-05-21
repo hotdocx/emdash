@@ -1448,6 +1448,71 @@ Future work that promotes the external ordinary naturality API should add this
 cascade with focused assertions, instead of leaving `tapp1_fapp0` as a bare
 declaration indefinitely.
 
+Review cleanup note, 2026-05-22, injectivity pass: a modifier review compared
+the current v3.2 declarations with the working v2 style and probed which
+`constant` / `injective` choices are appropriate after the v3.2 rewrite-capable
+spine.
+
+Relevant v2 facts:
+
+- `Hom_cat`, `Op_cat`, `Op_func`, `Fibre_cat`, `Fibre`, `Op_catd`, and
+  `Op_funcd` were injective in `emdash2.lp`.
+- `Functor_cat`, `Transf_cat`, `Functord_cat`, and `Transfd_cat` were
+  `constant` in v2, because v2 did not need the v3.2 contractions
+  `Functor_cat K Cat_cat -> Catd_cat K`,
+  `Transf_cat K Cat_cat E D -> Functord_cat E D`, and
+  `Hom_cat (Functord_cat E D) FF GG -> Transfd_cat FF GG`.
+- The classifier wrappers `Hom`, `Functor`, `Functord`, `Transf`, and
+  `Transfd` were not injective in v2; v2 used direct wrapper-level
+  `unif_rule`s.
+- `Pi_cat` was definitional in v2. In v3.2 it is a primitive stable head with
+  rewrites, so it must not be `constant`.
+
+The v3.2 probe results were:
+
+```text
+injective wrappers replacing direct wrapper unif_rules:
+  Hom, Functor, Catd, Functord, Transf, Transfd
+  -> accepted and typechecked
+
+injective stable rewrite-capable heads:
+  Functor_cat, Catd_cat, Functord_cat, Transf_cat, Transfd_cat,
+  Const_catd, Op_catd, Op_funcd, Pi_cat
+  -> accepted and typechecked
+
+remove controlled Obj-inversion helpers:
+  Obj (Hom_cat ...) ≡ Obj (Hom_cat ...)
+  Obj (Functor_cat ...) ≡ Obj (Functor_cat ...)
+  ...
+  -> rejected by check; first failure is the basic functor action rule
+     fapp0 (fapp1_func F) f -> fapp1_fapp0 F f
+
+constant injective symbol:
+  -> rejected by Lambdapi as incompatible properties
+```
+
+Implemented policy:
+
+- Mark the classifier wrappers `Hom`, `Functor`, `Catd`, `Functord`, `Transf`,
+  and `Transfd` as `injective symbol`.
+- Remove the now-redundant direct wrapper-level unification rules for those
+  heads.
+- Mark the stable rewrite-capable heads `Functor_cat`, `Catd_cat`,
+  `Functord_cat`, `Transf_cat`, `Transfd_cat`, `Const_catd`, `Op_catd`,
+  `Op_funcd`, and `Pi_cat` as `injective symbol`.
+- Remove the direct `Pi_cat` unification rule, because `Pi_cat` is now
+  injective.
+- Keep the controlled `Obj (..._cat)` unification helpers. They are still
+  needed because `Obj` itself is not injective, and Lambdapi can get stuck on
+  goals headed by `Obj (Hom_cat ...)` rather than by the classifier wrapper
+  `Hom`.
+- Do not make notation-only heads such as `Fibre_cat` injective in v3.2.
+  Unlike v2, v3.2 defines `Fibre_cat E k` as `fapp0 E k`, so injectivity would
+  assert more than the notation justifies.
+- Do not use `constant` for v3.2 heads that own rewrite rules, such as
+  `Functor_cat`, `Transf_cat`, `Functord_cat`, `Pi_cat`, or the family
+  constructors with pointwise rules.
+
 The whole-family terminal/constant `homd_int` question was also probed directly:
 
 ```text

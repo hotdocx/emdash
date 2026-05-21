@@ -73,12 +73,15 @@ flag "print_meta_args" on;
     - Stable heads are the intended normal forms for operations that later
       rules need to recognize (`comp_cat_fapp0`, `tapp0_fapp0`,
       `homd_src_func`, `homd_src_sec`, `homd_tgt_func`).
-    - Controlled `Obj`-inversion unification rules for chosen heads
-      (`Hom_cat`, `Functor_cat`, `Transf_cat`) are elaboration aids.  They are
-      not semantic claims that `Obj` is globally injective. Avoid adding this
-      style of rule for notation-only heads such as `Fibre_cat`: equality of
-      fibre object categories should not force equality of the whole family and
-      base index.
+    - Classifier wrappers such as `Hom`, `Functor`, `Catd`, `Functord`,
+      `Transf`, and `Transfd` are injective heads.  This replaces direct
+      wrapper-level unification rules.
+    - Controlled `Obj`-inversion unification rules for chosen category heads
+      (`Hom_cat`, `Functor_cat`, `Catd_cat`, `Functord_cat`, `Transf_cat`,
+      `Transfd_cat`, `Pi_cat`) are elaboration aids.  They are not semantic
+      claims that `Obj` is globally injective. Avoid adding this style of rule
+      for notation-only heads such as `Fibre_cat`: equality of fibre object
+      categories should not force equality of the whole family and base index.
     - If a concrete constructor does not reduce early enough and needs one of
       these unification helpers, that is usually a signal to add a computation
       rule or introduce a smaller stable head.
@@ -216,7 +219,7 @@ symbol Obj : Cat → Grpd;
 
 injective symbol Hom_cat : Π (A : Cat) (X_A Y_A : τ (Obj A)), Cat;
 
-symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
+injective symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
 ≔ Obj (Hom_cat A X_A Y_A);
 
 /*
@@ -227,7 +230,6 @@ symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
   arbitrary category constructors.
 */
 unif_rule Obj (Hom_cat $A $X $Y) ≡ Obj (Hom_cat $A' $X' $Y') ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
-unif_rule Hom $A $X $Y ≡ Hom $A' $X' $Y' ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 
 injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Hom A X_A X_A);
 
@@ -262,12 +264,11 @@ assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
 // 2. Ordinary functors and universe categories
 // -------------------------------------------------------------------------------------------------
 
-symbol Functor_cat : Π (A B : Cat), Cat;
+injective symbol Functor_cat : Π (A B : Cat), Cat;
 
-symbol Functor (A B : Cat) : Grpd
+injective symbol Functor (A B : Cat) : Grpd
 ≔ Obj (Functor_cat A B);
 
-unif_rule Functor $A $B ≡ Functor $A' $B' ↪ [ $A ≡ $A'; $B ≡ $B' ];
 unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'; $B ≡ $B' ];
 
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
@@ -302,23 +303,21 @@ assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 assert (A B : Cat) ⊢ Hom_cat Cat_cat A B ≡ Functor_cat A B;
 
 // Directed Cat-valued families are canonical Cat-valued functors.
-symbol Catd_cat (K : Cat) : Cat;
+injective symbol Catd_cat (K : Cat) : Cat;
 
-symbol Catd (K : Cat) : Grpd
+injective symbol Catd (K : Cat) : Grpd
 ≔ Obj (Catd_cat K);
 
 rule Functor_cat $K Cat_cat ↪ @Catd_cat $K;
 
-unif_rule Catd $K ≡ Catd $K' ↪ [ $K ≡ $K' ];
 unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
 
 // Natural families of functors between directed Cat-valued families.
-symbol Functord_cat [K : Cat] (E D : τ (Catd K)) : Cat;
+injective symbol Functord_cat [K : Cat] (E D : τ (Catd K)) : Cat;
 
-symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
+injective symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
 ≔ Obj (@Functord_cat K E D);
 
-unif_rule Functord $E $D ≡ Functord $E' $D' ↪ [ $E ≡ $E'; $D ≡ $D' ];
 unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D' ];
 
@@ -342,14 +341,13 @@ rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
 
 // Natural families of transformations, i.e. modifications between
 // directed-family functors.
-symbol Transfd_cat [K : Cat] [E D : τ (Catd K)]
+injective symbol Transfd_cat [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Cat;
 
-symbol Transfd [K : Cat] [E D : τ (Catd K)]
+injective symbol Transfd [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Grpd
 ≔ Obj (@Transfd_cat K E D FF GG);
 
-unif_rule Transfd $FF $GG ≡ Transfd $FF' $GG' ↪ [ $FF ≡ $FF'; $GG ≡ $GG' ];
 unif_rule Obj (@Transfd_cat $K $E $D $FF $GG) ≡ Obj (@Transfd_cat $K' $E' $D' $FF' $GG')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D'; $FF ≡ $FF'; $GG ≡ $GG' ];
 
@@ -530,9 +528,9 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 // 5. Ordinary transfors
 // -------------------------------------------------------------------------------------------------
 
-symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
+injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 
-symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
+injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);
 
 // Controlled Obj-inversion for transformation categories. This is the
@@ -541,7 +539,6 @@ symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 // compound family expressions into rewrite-rule LHSs.
 unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
   ↪ [ $A ≡ $A'; $B ≡ $B'; $F ≡ $F'; $G ≡ $G' ];
-unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
 
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
@@ -676,7 +673,7 @@ symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
   : τ (Catd A)
 ≔ @comp_cat_fapp0 A B Cat_cat E F;
 
-symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
+injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
 rule @hom_ $A $B (@Const_func $B $A $u) $w
@@ -693,7 +690,7 @@ rule @fapp1_fapp0 $K Cat_cat (@Const_catd $K $A) $x $y $_ ↪ @id_func $A;
 symbol Terminal_catd (K : Cat) : τ (Catd K)
 ≔ @Const_catd K Terminal_cat;
 
-symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
+injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
   ↪ Op_cat (@fapp0 $K Cat_cat $E $k);
@@ -701,7 +698,7 @@ rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
 rule @Op_catd $K (@Op_catd $K $E) ↪ $E;
 rule @Op_catd $K (@Const_catd $K $A) ↪ @Const_catd $K (Op_cat $A);
 
-symbol Op_funcd [K : Cat] [E D : τ (Catd K)]
+injective symbol Op_funcd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   : τ (Functord (Op_catd E) (Op_catd D));
 
@@ -726,12 +723,11 @@ rule @tapp0_fapp0
       (Fibre_cat $D $x)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $FF);
 
-symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
+injective symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
 rule @Functord_cat $K (@Const_catd $K Terminal_cat) $E ↪ @Pi_cat $K $E;
 rule @Pi_cat $K (@Const_catd $K $A) ↪ Functor_cat $K $A;
 
-unif_rule @Pi_cat $K $E ≡ @Pi_cat $K' $E' ↪ [ $K ≡ $K'; $E ≡ $E' ];
 unif_rule Obj (@Pi_cat $K $E) ≡ Obj (@Pi_cat $K' $E') ↪ [ $K ≡ $K'; $E ≡ $E' ];
 
 rule Hom_cat (@Pi_cat $K $E) $s $t
