@@ -570,11 +570,7 @@ rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id_funcd $K $E)
   ↪ @id_func (@fapp0 $K Cat_cat $E $Y);
 
 rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
-  ↪ @comp_fapp0
-      $B
-      (@fapp0 $A $B $F $Y)
-      (@fapp0 $A $B $G $Y)
-      (@fapp0 $A $B $H $Y)
+  ↪ comp_fapp0
       (@tapp0_fapp0 $A $B $G $H $Y $η)
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
@@ -598,10 +594,7 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
       (Transf_cat F G)
       (Transf_cat
         (@hom_int A A (@id_func A))
-        (@comp_cat_fapp0
-          (Op_cat A)
-          (Op_cat B)
-          (Catd_cat A)
+        (comp_cat_fapp0
           (@hom_int B A G)
           (@Op_func A B F))));
 
@@ -609,10 +602,7 @@ symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Transf F G)),
   τ (Transf
       (@hom_int A A (@id_func A))
-      (@comp_cat_fapp0
-        (Op_cat A)
-        (Op_cat B)
-        (Catd_cat A)
+      (comp_cat_fapp0
         (@hom_int B A G)
         (@Op_func A B F)));
 
@@ -622,16 +612,11 @@ rule fapp0 (@tapp1_int_func_transf $A $B $F $G) $ϵ
 symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ ϵ' : τ (Transf F G)),
   τ (Functor
-      (Hom_cat (@Transf_cat A B F G) ϵ ϵ')
+      (Hom_cat (Transf_cat F G) ϵ ϵ')
       (Hom_cat
-        (@Transf_cat
-          (Op_cat A)
-          (Catd_cat A)
+        (Transf_cat
           (@hom_int A A (@id_func A))
-          (@comp_cat_fapp0
-            (Op_cat A)
-            (Op_cat B)
-            (Catd_cat A)
+          (comp_cat_fapp0
             (@hom_int B A G)
             (@Op_func A B F)))
         (@tapp1_int_fapp0_transf A B F G ϵ)
@@ -643,10 +628,7 @@ rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F $G) $ϵ $ϵ'
 symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
   τ (Transf
       (@hom_int A A (@id_func A))
-      (@comp_cat_fapp0
-        (Op_cat A)
-        (Op_cat B)
-        (Catd_cat A)
+      (comp_cat_fapp0
         (@hom_int B A F)
         (@Op_func A B F)));
 
@@ -676,9 +658,6 @@ assert [A B : Cat] (F : τ (Functor A B)) ⊢
 
 symbol Fibre_cat [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) : Cat
 ≔ @fapp0 K Cat_cat E k;
-
-// Directed-family inference helper for surface notation `E[x]`.
-unif_rule Obj (Fibre_cat $E $k) ≡ Obj (Fibre_cat $E' $k') ↪ [ $E ≡ $E'; $k ≡ $k' ];
 
 symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
   : τ (Catd A)
