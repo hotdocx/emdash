@@ -310,6 +310,72 @@ final `piapp1_int -> piapp1_func` fold. After this update,
 `timeout 30s lambdapi check -w emdash3_2.lp`,
 `EMDASH_TYPECHECK_TIMEOUT=60s make check`, and `git diff --check` all pass.
 
+Fourteenth continuation update, corrected 2026-05-22: the surface
+`Fibre_transf_app` diagnostic was useful for identifying the desired target, but
+it was a design detour and should not remain in `emdash3_2.lp`. The diagnostic
+showed that projecting the specialized `fdapp1_int_fibre_app` morphism at `y`
+and then at `Terminal_obj` produced a term whose type was exactly the object
+type of the existing stable package `piapp1_func E s x y`:
+
+```text
+tapp0_fapp0 Terminal_obj
+  (Fibre_transf_app
+    (fdapp1_int_fibre_app
+      (Const_catd K Terminal_cat) E s x Terminal_obj)
+    y
+    Terminal_obj)
+  : Obj (Pi_cat (homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)))
+```
+
+The correction is that this surface expression is not an acceptable rewrite
+interface. `Fibre_transf_app` remains a reducible defined abbreviation, and a
+rule that matches it is brittle and plan-divergent. The assertion using that
+surface has therefore been removed. The implemented route is the plan-compatible
+stable-head route recorded below: promote `tdapp0_func` / `tdapp0_fapp0` to
+primitive projection heads, introduce stable projections from `piapp1_int`, and
+fold the last stable target object to `piapp1_func`.
+
+Fifteenth continuation update, 2026-05-22: the stable-head route has now been
+implemented and typechecked.
+
+- `tdapp0_func` and `tdapp0_fapp0` were promoted from definitions to primitive
+  stable projection heads, matching the emdash2 architecture. Their computation
+  is now provided by:
+
+```text
+fapp0 (tdapp0_func z) eps -> tdapp0_fapp0 z eps
+```
+
+- A terminal ordinary-transfor collapse was installed:
+
+```text
+Transf_cat Terminal_cat Y (Obj_func Y u) (Obj_func Y v)
+  -> Hom_cat Y u v
+```
+
+- The `piapp1_int -> piapp1_func` path now uses stable intermediate projection
+  heads rather than any reducible `Fibre_transf_app` surface:
+
+```text
+piapp1_int
+  -> piapp1_int_src_transf
+  -> piapp1_int_src_app
+  -> piapp1_int_tgt_transf
+  -> piapp1_int_tgt_app
+  -> piapp1_func
+```
+
+The new `piapp1_int_*` names are not migration aliases and are not definitions:
+they are the stable projection heads needed to express this section-action
+cascade in the same style as
+`homd_int -> homd_src_funcd -> homd_src_secd -> homd_tgt_funcd -> homd_`.
+The rules are placed after the late displayed-composition fibre projection,
+because earlier insertion had caused timeout during previous probes while the
+late placement typechecks quickly. Probe assertions for the individual
+projection equalities were not kept: the rules themselves typecheck, while those
+extra equality assertions triggered elaboration/unification noise that is not
+needed for the implementation.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -739,6 +805,10 @@ Hom_cat (Pi_cat E) s t -> Transfd_cat (Const_catd K Terminal_cat) E s t
   outer slots, plus assertions that the specialized `piapp1` target object first
   reduces to `homd_src_secd ... (piapp0 s x)` and then evaluates to the
   `homd_ E E (id_funcd E) ...` family used by `piapp1_func`.
+- Added a type assertion showing that the next projected component,
+  `tapp0_fapp0 Terminal_obj (Fibre_transf_app (fdapp1_int_fibre_app ...) y
+  Terminal_obj)`, has exactly the `Obj (Pi_cat (homd_ ...))` type of
+  `piapp1_func E s x y`.
 - The terminal-specialization fold from displayed internal action to
   `piapp1_func` remains deferred.
 
@@ -777,6 +847,8 @@ The latest passes settled these prerequisites for this fold:
   `homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)`, and evaluating
   that section at `y` and `Terminal_obj` reaches the `homd_` family used by
   `piapp1_func`.
+- the next projected component has the exact `Obj (Pi_cat (homd_ ...))` type of
+  `piapp1_func E s x y`.
 
 Do not add a general terminal-source component rule
 `tapp0_fapp0 (Const_catd K Terminal_cat) E k s -> Obj_func ... (piapp0 s k)` in
@@ -960,20 +1032,22 @@ implements the main architecture changes:
 - generalized endpoint/projection path through `homd_ [D E] FF`.
 - generalized `homd_int`.
 - internal ordinary/displayed object and hom action heads.
-- derived `tdapp0_func` / `tdapp0_fapp0` notation.
+- stable primitive `tdapp0_func` / `tdapp0_fapp0` projection heads.
 - derived `Fibre_func` / `Fibre_transf` / `Fibre_transf_app` notation.
 - pointwise `Op_funcd` fibre projection and related `Fibre_func` assertions.
 - `Fibre_func (homd_int FF)` source-projection assertions.
 - derived `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app` projections.
 - initial `piapp1_func` / `piapp1_fapp0` stable package plus
   `piapp1_src_obj`.
+- stable `piapp1_int` projection chain down to `piapp1_func`.
 
 It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
 
-1. how to derive the terminal-specialization fold to `piapp1_func`,
-2. when to install the correct displayed-composition fibre projection, likely
-   late or near its first concrete use, without making `Fibre_func` primitive,
+1. how far to extend the new `piapp1_func` fold through `piapp1_fapp0` and later
+   beta rules,
+2. whether additional displayed-composition projection rules should be installed
+   beyond the late concrete rule now used by the `piapp1_int` cascade,
 3. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
 
@@ -1013,13 +1087,11 @@ homd_int -> homd_src_funcd -> homd_src_secd -> homd_tgt_funcd -> homd_
 The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
 `homd_tgt_func` remain compatibility normal forms only.
 
-5. Deferred: do not keep the `D`/`C` displayed-composition projection rule. It
-   can be accepted as a rewrite command, but it does not type as the intended
-   general fibre assertion. The semantically correct `E`/`C` outer-slot version
-   validates when appended late, including with the intended `E[x] -> C[x]`
-   assertion, but times out when inserted early near the projection-rule block.
-   Keep `Fibre_func` as derived notation and add the rule only when a concrete
-   later use provides a safe insertion point.
+5. Completed for the current concrete use: do not keep the rejected `D`/`C`
+   displayed-composition projection rule. The semantically correct `E`/`C`
+   outer-slot version is installed late, where it supports the `piapp1_int`
+   cascade and typechecks quickly. Keep `Fibre_func` as derived notation; do not
+   promote it to primitive just to expose this rule.
 
 6. Partially completed: after generalized `homd_`, validate the
    terminal-source cascade toward `piapp1_func`. The current file now has
@@ -1045,12 +1117,10 @@ fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
 Focused assertions now validate that the direct specialization and the
 `tdapp1_int` identity-specialization path both compute to `piapp1_int E s`.
 
-8. Defer the planned projection/fold from `piapp1_int E s` to the existing
-   external package `piapp1_func E s x y` until the later phase that deals with
-   the inter-related `homd_int` rules for `Const_catd` / `Terminal_catd`. That
-   phase should decide whether a whole-family terminal/constant `homd_int`
-   normal form is needed, or whether the existing projection cascade is enough
-   to expose the same `Pi_cat` target.
+8. Completed for the object-level package: the planned projection/fold from
+   `piapp1_int E s` to the existing external package `piapp1_func E s x y` is
+   now implemented by stable intermediate heads. No broad whole-family
+   terminal/constant `homd_int` rule was needed for this fold.
 
 9. Partially completed: after the internal `piapp1_int` witness fold became
    stable, add narrow projected terminal-source normal forms for the existing
@@ -1075,9 +1145,10 @@ through the `piapp0 (homd_src_secd ...) y` cascade.
 10. Removed: do not keep the plan-divergent `piapp1_int_tgt_sec`,
     `piapp1_int_fibre_transf`, or `piapp1_int_fibre_app` aliases, and do not keep
     the capped terminal-source bridge that matched a displayed-composition
-    subterm. The intended stable route is the existing plan-backed projections
-    plus the late displayed-composition projection that passes a meaningful
-    `E[x] -> C[x]` assertion.
+    subterm. The implemented stable route is the plan-backed projection chain
+    `piapp1_int_src_transf`, `piapp1_int_src_app`,
+    `piapp1_int_tgt_transf`, `piapp1_int_tgt_app`, followed by the final
+    `piapp1_func` fold.
 
 11. Completed prerequisite: install the packaged section-hom bridge:
 
@@ -1094,10 +1165,9 @@ Hom_cat (Pi_cat (Const_catd K A)) s t
   -> Transf_cat s t
 ```
 
-12. Next: resume the `piapp1_int -> piapp1_func` work only from stable plan
-    heads. First try exact assertions showing that the target of the specialized
-    `piapp1_int` projection reaches the `Pi_cat` target used by `piapp1_func`
-    via:
+12. Completed: the `piapp1_int -> piapp1_func` work now proceeds only from
+    stable heads. The specialized `piapp1_int` projection reaches the `Pi_cat`
+    target used by `piapp1_func` via:
 
 ```text
 fdapp1_int_transfd
@@ -1107,15 +1177,16 @@ fdapp1_int_transfd
   -> homd_int terminal/constant projected normal forms
 ```
 
-    The generalized terminal-source `homd_tgt_funcd` step and the
-    `Hom_cat (Pi_cat E)` section-hom bridge are now implemented, and the concrete
-    target object of the specialized `piapp1_int` projection reaches the expected
-    `homd_src_secd ... (piapp0 s x)` normal form. Its section evaluation reaches
-    the `homd_ E E (id_funcd E) ...` family used by `piapp1_func`. The next work
-    is therefore no longer this target-object reduction, but the remaining
-    packaged fold from the internal displayed action component to the stable
-    external `piapp1_func` / `piapp1_fapp0` surface. If the cascade still does not
-    expose that package, evaluate whether a principled constant/terminal
-    whole-family `homd_int` rule is required. Do not introduce new `piapp1_int_*`
-    migration names unless a typechecked probe shows that a primitive stable head
-    is genuinely needed.
+    The generalized terminal-source `homd_tgt_funcd` step, the `Hom_cat
+    (Pi_cat E)` section-hom bridge, the terminal `Transf_cat` collapse, and the
+    late displayed-composition projection together expose the target. The final
+    object-level fold is:
+
+```text
+piapp1_int_tgt_app E s x y -> piapp1_func E s x y
+```
+
+    Remaining work should continue to the next planned beta/action rules, in
+    particular how `piapp1_fapp0` and the later section/evaluation transfors
+    should compute. Do not add direct rules over the reducible
+    `Fibre_transf_app` abbreviation.
