@@ -47,8 +47,8 @@ Fourth continuation update: the next 2026-05-20 pass also typechecks after
 adding the pointwise `Op_funcd` fibre projection, extra `Fibre_func` /
 `homd_int` source-projection assertions, and the `piapp1_src_obj` helper. The
 initial displayed-composition fibre projection probes were inconclusive and were
-revisited later; no displayed-composition fibre projection rule is currently
-kept.
+revisited later; no displayed-composition fibre projection rule was kept at that
+point.
 
 Correction update 2026-05-21: the displayed-composition probe above was
 overstated. The failed probe did not follow the plan's rewrite SOP because it
@@ -82,12 +82,14 @@ not a `D[x] -> C[x]` one. The semantically aligned `E`/`C` outer-slot version is
 the correct rule shape. It timed out when inserted early near the other
 projection rules, but it typechecked quickly when appended at the end of the
 file, together with the intended `Fibre_func (comp_catd_fapp0 FF GG)` assertion.
-Therefore no displayed-composition fibre projection rule is currently retained:
-it should be added only when a concrete later use justifies choosing a safe
-insertion point. The useful SOP is narrower: when adding explicit outer slots to
-recover variables hidden inside non-injective subterms, those slots must still be
-the actual source/target slots of the head being projected, and rule placement
-can materially affect bounded checking.
+At that point no displayed-composition fibre projection rule was retained: the
+rule was to be added only when a concrete later use justified choosing a safe
+insertion point. A later `piapp1` target-object probe supplied that use, and the
+semantically aligned `E`/`C` outer-slot version is now retained late in the file.
+The useful SOP is narrower: when adding explicit outer slots to recover variables
+hidden inside non-injective subterms, those slots must still be the actual
+source/target slots of the head being projected, and rule placement can
+materially affect bounded checking.
 
 Fifth continuation update: the 2026-05-21 pass typechecks after the
 `Op_funcd` LHS correction, the stable `comp_catd_fapp0` promotion, and new
@@ -239,6 +241,74 @@ installing the deferred displayed-composition projection. The focused
 `timeout 30s lambdapi check -w emdash3_2.lp`, full
 `EMDASH_TYPECHECK_TIMEOUT=60s make check`, and `git diff --check` validations
 pass after this change.
+
+Twelfth continuation update: the previously deferred section-hom bridge has now
+been implemented by the principled `Pi_cat` rule:
+
+```text
+Hom_cat (Pi_cat E) s t
+  -> Transfd_cat (Const_catd K Terminal_cat) E s t
+```
+
+Focused assertions validate both the generic bridge and the constant-family
+join:
+
+```text
+Hom_cat (Pi_cat (Const_catd K A)) s t
+  -> Transf_cat s t
+```
+
+This is not the displayed-composition fibre projection and does not add any
+`piapp1_int_*` migration aliases. It is a packaged section-category hom bridge
+needed for the clean route from Pi-level morphisms to terminal-specialized
+displayed transfors. A direct exploratory assertion for the eventual
+`fdapp1_int_fibre_app` / `piapp1_func` component did not infer its type in the
+implicit form tried, so the next fold should be pursued with explicit
+projection sources/targets or a carefully packaged existing-plan fold rather
+than by introducing ad hoc aliases. The focused
+`timeout 30s lambdapi check -w emdash3_2.lp` validation passes after this
+change.
+
+Thirteenth continuation update: the semantically correct displayed-composition
+fibre projection is now installed late in `emdash3_2.lp`, near the concrete
+`piapp1` target-object assertions that need it:
+
+```text
+tapp0_fapp0 K Cat_cat E C x (comp_catd_fapp0 K E D C FF GG)
+  -> comp_cat_fapp0
+       (Fibre_cat E x) (Fibre_cat D x) (Fibre_cat C x)
+       (tapp0_fapp0 K Cat_cat D C x FF)
+       (tapp0_fapp0 K Cat_cat E D x GG)
+```
+
+This is not the earlier rejected `D`/`C` outer-slot variant and not a capped
+bridge with a composite subterm tailored to `piapp1`. The concrete assertion now
+validated is the specialized target-object cascade:
+
+```text
+fapp0
+  (Fibre_func
+    (comp_catd_fapp0
+      (homd_int (Const_catd K Terminal_cat) E s)
+      (Op_funcd s))
+    x)
+  Terminal_obj
+  -> homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+```
+
+A second assertion validates that evaluating this target section at `y` and then
+at `Terminal_obj` reaches exactly the endpoint family used by `piapp1_func`:
+
+```text
+homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)
+```
+
+This settles the previously anticipated `Fibre_func (comp_catd_fapp0 ...)`
+blocker for this concrete terminal-source path. It still does not define the
+final `piapp1_int -> piapp1_func` fold. After this update,
+`timeout 30s lambdapi check -w emdash3_1.lp`,
+`timeout 30s lambdapi check -w emdash3_2.lp`,
+`EMDASH_TYPECHECK_TIMEOUT=60s make check`, and `git diff --check` all pass.
 
 ## Files Changed
 
@@ -549,7 +619,7 @@ Fibre_func (homd_int FF) x -> homd_src_funcd FF x
 fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_secd FF x u
 ```
 
-- Probed the pointwise displayed-composition projection:
+- Probed and later retained the pointwise displayed-composition projection:
 
 ```text
 Fibre_func (comp_catd_fapp0 E D C FF GG) x
@@ -559,11 +629,11 @@ Fibre_func (comp_catd_fapp0 E D C FF GG) x
        (tapp0_fapp0 K Cat_cat E D x GG)
 ```
 
-  No such rule is currently kept. The `D`/`C` outer-slot variant accepted as a
-  rewrite command but failed a meaningful standalone assertion. The `E`/`C`
-  semantic variant is correct and validated when appended late, including with
-  the intended `Fibre_func` assertion, but timed out when inserted early near the
-  other projection rules.
+  The `D`/`C` outer-slot variant accepted as a rewrite command but failed a
+  meaningful standalone assertion. The `E`/`C` semantic variant is correct and is
+  now retained late in `emdash3_2.lp`, where it validates the concrete
+  terminal-source `piapp1` target-object cascade without affecting earlier
+  assertions.
 
 ### Section Action `piapp1*`
 
@@ -657,6 +727,18 @@ piapp1_src_obj (Const_catd K A) s f -> fapp0 s x
 ```
 
 - Added an assertion for this definitional projection.
+- Added the section-hom bridge:
+
+```text
+Hom_cat (Pi_cat E) s t -> Transfd_cat (Const_catd K Terminal_cat) E s t
+```
+
+- Added assertions validating the generic bridge and its constant-family join
+  with `Transf_cat s t`.
+- Added the late displayed-composition fibre projection with the correct `E`/`C`
+  outer slots, plus assertions that the specialized `piapp1` target object first
+  reduces to `homd_src_secd ... (piapp0 s x)` and then evaluates to the
+  `homd_ E E (id_funcd E) ...` family used by `piapp1_func`.
 - The terminal-specialization fold from displayed internal action to
   `piapp1_func` remains deferred.
 
@@ -678,7 +760,7 @@ typed stable package plus definitional projection. The new `piapp1_src_obj`
 helper clarifies the endpoint hom category, but it is not the missing packaged
 section fold.
 
-The latest pass settled two prerequisites for this fold:
+The latest passes settled these prerequisites for this fold:
 
 - terminal-source endpoint normalization from `homd_ (Const_catd K Terminal_cat)
   E s ... Terminal_obj` to the identity-specialized `homd_ E E (id_funcd E)
@@ -687,6 +769,14 @@ The latest pass settled two prerequisites for this fold:
   displayed identity is written as `id_transfd`.
 - the terminal-source `piapp1_int` witness exists as a stable fold target, but
   the later `piapp1_int_*` projection aliases were removed as plan-divergent.
+- `Hom_cat (Pi_cat E) s t` now unfolds to the terminal-source displayed transfor
+  category, giving the section-hom package a principled bridge into the existing
+  `Transfd_cat` infrastructure.
+- the concrete displayed-composition target object needed by the terminal-source
+  path now reduces through the late pointwise projection to
+  `homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)`, and evaluating
+  that section at `y` and `Terminal_obj` reaches the `homd_` family used by
+  `piapp1_func`.
 
 Do not add a general terminal-source component rule
 `tapp0_fapp0 (Const_catd K Terminal_cat) E k s -> Obj_func ... (piapp0 s k)` in
@@ -700,8 +790,8 @@ were removed. They were plan-divergent derived names, and the capped bridge
 matched the kind of composite/cut subterm that this development is trying to
 avoid. The next clean fold toward `piapp1_func` should be resumed from existing
 stable heads: `piapp1_int`, `fdapp1_int_fibre_*`, `homd_int` projections, and
-any future principled displayed-composition projection if one can pass both
-typechecking and a meaningful assertion.
+the now-retained principled displayed-composition projection. Do not replace
+this with a capped composite bridge.
 
 Implemented clarified design target: add a stable internal Pi-action witness
 `piapp1_int` by specializing the existing internal displayed action:
@@ -792,16 +882,18 @@ rule @tapp0_fapp0
 This still follows the unfolded `Const_catd` discipline, but it is a minor
 operational divergence and should be watched for matching brittleness.
 
-### 6. `Hom_cat (Pi_cat E) s t` Remains Deferred
+### 6. `Hom_cat (Pi_cat E) s t` Is Implemented
 
-No rule was added for:
+The previously deferred rule is now implemented:
 
 ```text
 Hom_cat (Pi_cat E) s t
+  -> Transfd_cat (Const_catd K Terminal_cat) E s t
 ```
 
-The plan explicitly defers this, with `Transfd_cat s t` as the likely joining
-direction. This remains open.
+Assertions validate both the generic rule and the constant-family join to
+`Transf_cat s t`. Remaining work is not this bridge itself, but the later
+terminal-specialization fold from internal displayed action to `piapp1_func`.
 
 ### 7. External Surface Heads Remain Deferred
 
@@ -984,10 +1076,25 @@ through the `piapp0 (homd_src_secd ...) y` cascade.
     `piapp1_int_fibre_transf`, or `piapp1_int_fibre_app` aliases, and do not keep
     the capped terminal-source bridge that matched a displayed-composition
     subterm. The intended stable route is the existing plan-backed projections
-    plus any future displayed-composition projection that passes a meaningful
+    plus the late displayed-composition projection that passes a meaningful
     `E[x] -> C[x]` assertion.
 
-11. Next: resume the `piapp1_int -> piapp1_func` work only from stable plan
+11. Completed prerequisite: install the packaged section-hom bridge:
+
+```text
+Hom_cat (Pi_cat E) s t
+  -> Transfd_cat (Const_catd K Terminal_cat) E s t
+```
+
+    This is separate from displayed-composition fibre projection. It validates
+    the expected constant-family join:
+
+```text
+Hom_cat (Pi_cat (Const_catd K A)) s t
+  -> Transf_cat s t
+```
+
+12. Next: resume the `piapp1_int -> piapp1_func` work only from stable plan
     heads. First try exact assertions showing that the target of the specialized
     `piapp1_int` projection reaches the `Pi_cat` target used by `piapp1_func`
     via:
@@ -996,23 +1103,19 @@ through the `piapp0 (homd_src_secd ...) y` cascade.
 fdapp1_int_transfd
   -> piapp1_int
   -> tapp0_fapp0/Fibre_func projections
-  -> future principled comp_catd_fapp0 pointwise projection, if needed
+  -> late comp_catd_fapp0 pointwise projection
   -> homd_int terminal/constant projected normal forms
 ```
 
-    The generalized terminal-source `homd_tgt_funcd` step in this cascade is now
-    implemented. The next likely blocker is the target object of the specialized
-    `piapp1_int` projection, which contains
-    `Fibre_func (comp_catd_fapp0 (homd_int s) (Op_funcd s))`. If a concrete
-    assertion needs that reduction, install the semantically correct
-    displayed-composition projection late/near that first use, not in the early
-    projection-rule block. If the cascade still does not expose the target after
-    that, evaluate whether a principled constant/terminal whole-family
-    `homd_int` rule is required. Do not introduce new `piapp1_int_*` migration
-    names unless a typechecked probe shows that a primitive stable head is
-    genuinely needed.
-
-12. Keep the deferred `Hom_cat (Pi_cat H) a b -> Transfd_cat ...` question
-    separate. It may become necessary for a later section-level hom fold, but it
-    should not be conflated with the already-corrected displayed-composition
-    fibre projection.
+    The generalized terminal-source `homd_tgt_funcd` step and the
+    `Hom_cat (Pi_cat E)` section-hom bridge are now implemented, and the concrete
+    target object of the specialized `piapp1_int` projection reaches the expected
+    `homd_src_secd ... (piapp0 s x)` normal form. Its section evaluation reaches
+    the `homd_ E E (id_funcd E) ...` family used by `piapp1_func`. The next work
+    is therefore no longer this target-object reduction, but the remaining
+    packaged fold from the internal displayed action component to the stable
+    external `piapp1_func` / `piapp1_fapp0` surface. If the cascade still does not
+    expose that package, evaluate whether a principled constant/terminal
+    whole-family `homd_int` rule is required. Do not introduce new `piapp1_int_*`
+    migration names unless a typechecked probe shows that a primitive stable head
+    is genuinely needed.

@@ -725,6 +725,9 @@ rule @Pi_cat $K (@Const_catd $K $A) ↪ Functor_cat $K $A;
 unif_rule @Pi_cat $K $E ≡ @Pi_cat $K' $E' ↪ [ $K ≡ $K'; $E ≡ $E' ];
 unif_rule Obj (@Pi_cat $K $E) ≡ Obj (@Pi_cat $K' $E') ↪ [ $K ≡ $K'; $E ≡ $E' ];
 
+rule Hom_cat (@Pi_cat $K $E) $s $t
+  ↪ @Transfd_cat $K (@Const_catd $K Terminal_cat) $E $s $t;
+
 symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
@@ -1583,6 +1586,15 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
 
 assert [K : Cat] (A : Cat) ⊢
   Pi_cat (Const_catd K A) ≡ Functor_cat K A;
+
+assert [K : Cat] (E : τ (Catd K)) (s t : τ (Obj (Pi_cat E))) ⊢
+  Hom_cat (Pi_cat E) s t
+    ≡ @Transfd_cat K (@Const_catd K Terminal_cat) E s t;
+
+assert [K : Cat] (A : Cat)
+  (s t : τ (Obj (Pi_cat (@Const_catd K A)))) ⊢
+  Hom_cat (Pi_cat (@Const_catd K A)) s t
+    ≡ Transf_cat s t;
 
 assert [K : Cat] (A : Cat)
   (F : τ (Obj (Pi_cat (Const_catd K A))))
@@ -2470,6 +2482,86 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
     (@Sigma_proj1_func K D)
     (@sigma_map_func K E D η)
     ≡ @Sigma_proj1_func K E;
+
+// Late displayed-composition fibre projection. Early insertion near the
+// projection-rule block caused timeout during earlier probes; placed here it
+// supports the concrete piapp1 target-object cascade without using a composite
+// capped bridge as a rewrite LHS.
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      $E
+      $C
+      $x
+      (@comp_catd_fapp0 $K $E $D $C $FF $GG)
+  ↪ @comp_cat_fapp0
+      (Fibre_cat $E $x)
+      (Fibre_cat $D $x)
+      (Fibre_cat $C $x)
+      (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
+      (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @fapp0
+    (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
+    (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+    (@Fibre_func
+      K
+      (@Op_catd K (@Const_catd K Terminal_cat))
+      (@Homd_target_catd K (@Const_catd K Terminal_cat))
+      (@comp_catd_fapp0
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Op_catd K E)
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@homd_int K (@Const_catd K Terminal_cat) E s)
+        (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+      x)
+    Terminal_obj
+    ≡ @homd_src_secd
+        K
+        (@Const_catd K Terminal_cat)
+        E
+        s
+        x
+        (@piapp0 K E s x);
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K)) ⊢
+  fapp0
+    (@piapp0
+      (Op_cat K)
+      (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+      (@fapp0
+        (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
+        (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+        (@Fibre_func
+          K
+          (@Op_catd K (@Const_catd K Terminal_cat))
+          (@Homd_target_catd K (@Const_catd K Terminal_cat))
+          (@comp_catd_fapp0
+            K
+            (@Op_catd K (@Const_catd K Terminal_cat))
+            (@Op_catd K E)
+            (@Homd_target_catd K (@Const_catd K Terminal_cat))
+            (@homd_int K (@Const_catd K Terminal_cat) E s)
+            (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+          x)
+        Terminal_obj)
+      y)
+    Terminal_obj
+    ≡ @homd_
+        K
+        E
+        E
+        (@id_funcd K E)
+        x
+        (@piapp0 K E s x)
+        y
+        (@piapp0 K E s y);
 
 /*
   Deferred with the helper declarations above:
