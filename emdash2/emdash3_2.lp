@@ -140,6 +140,10 @@ flag "print_meta_args" on;
     - `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app`: derived projections
       of the internal displayed hom-action, still below any external
       `fdapp1_*` surface API.
+    - `piapp1_int_tgt_sec` / `piapp1_int_fibre_transf` /
+      `piapp1_int_fibre_app`: terminal-source projections of `piapp1_int`.
+      The target-section bridge to `homd_src_secd ... (piapp0 s x)` is a narrow
+      capped rule, not a broad displayed-composition projection.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
       capped component is a definition by `piapp0`; the terminal-specialization
       fold from displayed internal action is still deferred.
@@ -1061,6 +1065,34 @@ symbol homd_src_secd [Z : Cat] [D E : τ (Catd Z)]
   (u : τ (Obj (Fibre_cat E x)))
   : τ (Obj (Pi_cat (@Homd_section_catd Z D x)));
 
+// Purpose-built terminal-source bridge for the target section of piapp1_int.
+// This avoids a broad displayed-composition fibre projection while exposing the
+// generalized homd source section needed by later Pi-action folds.
+rule @fapp0
+      _
+      _
+      (@tapp0_fapp0
+        $K
+        Cat_cat
+        _
+        _
+        $x
+        (@comp_catd_fapp0
+          $K
+          _
+          _
+          _
+          (@homd_int $K (@Const_catd $K Terminal_cat) $E $s)
+          (@Op_funcd $K (@Const_catd $K Terminal_cat) $E $s)))
+      Terminal_obj
+  ↪ @homd_src_secd
+      $K
+      (@Const_catd $K Terminal_cat)
+      $E
+      $s
+      $x
+      (@piapp0 $K $E $s $x);
+
 // Source-fixed projection after evaluating the identity-specialized component
 // functor at u.
 symbol homd_src_sec [Z : Cat] (E : τ (Catd Z))
@@ -1521,6 +1553,106 @@ symbol fdapp1_int_fibre_app [K : Cat] [E D : τ (Catd K)]
      x
      u;
 
+// Terminal-source projection of piapp1_int. The target section is kept as a
+// named definition because the target displayed functor is still the internal
+// composite. A narrow capped bridge below exposes the target as
+// `homd_src_secd ... (piapp0 s x)` without adding a broad displayed-composition
+// fibre projection.
+symbol piapp1_int_tgt_sec [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  : τ (Obj (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x))
+≔ @fapp0
+   (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
+   (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+   (@Fibre_func
+     K
+     (@Op_catd K (@Const_catd K Terminal_cat))
+     (@Homd_target_catd K (@Const_catd K Terminal_cat))
+     (@comp_catd_fapp0
+       K
+       (@Op_catd K (@Const_catd K Terminal_cat))
+       (@Op_catd K E)
+       (@Homd_target_catd K (@Const_catd K Terminal_cat))
+       (@homd_int K (@Const_catd K Terminal_cat) E s)
+       (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+     x)
+   Terminal_obj;
+
+symbol piapp1_int_fibre_transf [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  : τ (@Transf
+      (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
+      (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+      (@Fibre_func
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@homd_int
+          K
+          (@Const_catd K Terminal_cat)
+          (@Const_catd K Terminal_cat)
+          (@id_funcd K (@Const_catd K Terminal_cat)))
+        x)
+      (@Fibre_func
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@comp_catd_fapp0
+          K
+          (@Op_catd K (@Const_catd K Terminal_cat))
+          (@Op_catd K E)
+          (@Homd_target_catd K (@Const_catd K Terminal_cat))
+          (@homd_int K (@Const_catd K Terminal_cat) E s)
+          (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+        x))
+≔ @Fibre_transf
+   K
+   (@Op_catd K (@Const_catd K Terminal_cat))
+   (@Homd_target_catd K (@Const_catd K Terminal_cat))
+   (@homd_int
+     K
+     (@Const_catd K Terminal_cat)
+     (@Const_catd K Terminal_cat)
+     (@id_funcd K (@Const_catd K Terminal_cat)))
+   (@comp_catd_fapp0
+     K
+     (@Op_catd K (@Const_catd K Terminal_cat))
+     (@Op_catd K E)
+     (@Homd_target_catd K (@Const_catd K Terminal_cat))
+     (@homd_int K (@Const_catd K Terminal_cat) E s)
+     (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+   (@piapp1_int K E s)
+   x;
+
+symbol piapp1_int_fibre_app [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  : τ (Hom
+      (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+      (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj)
+      (@piapp1_int_tgt_sec K E s x))
+≔ @Fibre_transf_app
+   K
+   (@Op_catd K (@Const_catd K Terminal_cat))
+   (@Homd_target_catd K (@Const_catd K Terminal_cat))
+   (@homd_int
+     K
+     (@Const_catd K Terminal_cat)
+     (@Const_catd K Terminal_cat)
+     (@id_funcd K (@Const_catd K Terminal_cat)))
+   (@comp_catd_fapp0
+     K
+     (@Op_catd K (@Const_catd K Terminal_cat))
+     (@Op_catd K E)
+     (@Homd_target_catd K (@Const_catd K Terminal_cat))
+     (@homd_int K (@Const_catd K Terminal_cat) E s)
+     (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+   (@piapp1_int K E s)
+   x
+   Terminal_obj;
+
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
@@ -1888,6 +2020,131 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
         (@fdapp1_int_transfd K E D FF)
         x
         u;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @piapp1_int_tgt_sec K E s x
+    ≡ @fapp0
+        (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
+        (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
+        (@Fibre_func
+          K
+          (@Op_catd K (@Const_catd K Terminal_cat))
+          (@Homd_target_catd K (@Const_catd K Terminal_cat))
+          (@comp_catd_fapp0
+            K
+            (@Op_catd K (@Const_catd K Terminal_cat))
+            (@Op_catd K E)
+            (@Homd_target_catd K (@Const_catd K Terminal_cat))
+            (@homd_int K (@Const_catd K Terminal_cat) E s)
+            (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+          x)
+        Terminal_obj;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @piapp1_int_fibre_transf K E s x
+    ≡ @Fibre_transf
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@homd_int
+          K
+          (@Const_catd K Terminal_cat)
+          (@Const_catd K Terminal_cat)
+          (@id_funcd K (@Const_catd K Terminal_cat)))
+        (@comp_catd_fapp0
+          K
+          (@Op_catd K (@Const_catd K Terminal_cat))
+          (@Op_catd K E)
+          (@Homd_target_catd K (@Const_catd K Terminal_cat))
+          (@homd_int K (@Const_catd K Terminal_cat) E s)
+          (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+        (@piapp1_int K E s)
+        x;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @fdapp1_int_fibre_transf K (@Const_catd K Terminal_cat) E s x
+    ≡ @piapp1_int_fibre_transf K E s x;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @piapp1_int_fibre_app K E s x
+    ≡ @Fibre_transf_app
+        K
+        (@Op_catd K (@Const_catd K Terminal_cat))
+        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+        (@homd_int
+          K
+          (@Const_catd K Terminal_cat)
+          (@Const_catd K Terminal_cat)
+          (@id_funcd K (@Const_catd K Terminal_cat)))
+        (@comp_catd_fapp0
+          K
+          (@Op_catd K (@Const_catd K Terminal_cat))
+          (@Op_catd K E)
+          (@Homd_target_catd K (@Const_catd K Terminal_cat))
+          (@homd_int K (@Const_catd K Terminal_cat) E s)
+          (@Op_funcd K (@Const_catd K Terminal_cat) E s))
+        (@piapp1_int K E s)
+        x
+        Terminal_obj;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @fdapp1_int_fibre_app K (@Const_catd K Terminal_cat) E s x Terminal_obj
+    ≡ @piapp1_int_fibre_app K E s x;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @piapp1_int_tgt_sec K E s x
+    ≡ @homd_src_secd
+        K
+        (@Const_catd K Terminal_cat)
+        E
+        s
+        x
+        (@piapp0 K E s x);
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K)) ⊢
+  @piapp0
+    (Op_cat K)
+    (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+    (@piapp1_int_tgt_sec K E s x)
+    y
+    ≡ @homd_tgt_funcd
+        K
+        (@Const_catd K Terminal_cat)
+        E
+        s
+        x
+        (@piapp0 K E s x)
+        y;
+
+assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K)) ⊢
+  @fapp0
+    Terminal_cat
+    (Fibre_cat
+      (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd K) x)
+      y)
+    (@piapp0
+      (Op_cat K)
+      (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+      (@piapp1_int_tgt_sec K E s x)
+      y)
+    Terminal_obj
+    ≡ @homd_
+        K
+        E
+        E
+        (@id_funcd K E)
+        x
+        (@piapp0 K E s x)
+        y
+        (@piapp0 K E s y);
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x : τ (Obj Z)) ⊢

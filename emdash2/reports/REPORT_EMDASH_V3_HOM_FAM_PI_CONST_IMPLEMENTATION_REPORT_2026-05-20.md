@@ -170,6 +170,40 @@ through the first normal form and that applying the inner endpoint functor at
 `homd_` terminal rule and no broad `homd_int -> ...` whole-family rule were
 introduced.
 
+Tenth continuation update: `piapp1_int` now has named terminal-source
+projection definitions:
+
+```text
+piapp1_int_tgt_sec E s x
+piapp1_int_fibre_transf E s x
+piapp1_int_fibre_app E s x
+```
+
+These are definitions over the already typechecked `Fibre_func` /
+`Fibre_transf` / `Fibre_transf_app` projections, not new rewrite heads. Focused
+assertions confirm that the direct terminal-source specializations of
+`fdapp1_int_fibre_transf` and `fdapp1_int_fibre_app` compute to these names.
+
+A deliberately narrow probe initially failed:
+
+```text
+piapp1_int_tgt_sec E s x
+  ≡ homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+```
+
+The broad functor-level version of the needed bridge,
+`tapp0_fapp0 x (comp_catd_fapp0 (homd_int s) (Op_funcd s))`, was then tested
+with inferred source/target slots kept implicit, but Lambdapi rejected it for
+subject reduction. The accepted bridge is narrower: it rewrites only the capped
+`Terminal_obj` projection of that target composite to
+`homd_src_secd ... (piapp0 s x)`. With that rule, the exact assertion above now
+typechecks. Additional assertions show that evaluating this target section at
+`y`, and then at `Terminal_obj`, exposes the generalized endpoint and the
+identity-specialized endpoint used by `piapp1_func`. The direct
+`piapp1_int -> piapp1_func` fold remains deferred because the next bridge is
+about projecting the `piapp1_int_fibre_app` morphism through the section/Pi hom
+layer, not about exposing the target section.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -562,6 +596,35 @@ homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
   `homd_int (id_funcd (Const_catd K Terminal_cat))` reduces through these
   projected normal forms. These are intentionally not direct whole-family
   `homd_int` or endpoint `homd_` rewrite rules.
+- Added named terminal-source projections of `piapp1_int`:
+
+```text
+piapp1_int_tgt_sec E s x
+piapp1_int_fibre_transf E s x
+piapp1_int_fibre_app E s x
+```
+
+- Added assertions that the corresponding direct specializations of
+  `fdapp1_int_fibre_transf` and `fdapp1_int_fibre_app` compute to the named
+  `piapp1_int` projections.
+- Added a narrow capped bridge exposing:
+
+```text
+piapp1_int_tgt_sec E s x
+  -> homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+```
+
+  This is intentionally not a broad displayed-composition fibre projection.
+- Added assertions that target-section evaluation exposes:
+
+```text
+piapp0 (piapp1_int_tgt_sec E s x) y
+  -> homd_tgt_funcd (Const_catd K Terminal_cat) E s x (piapp0 s x) y
+
+fapp0 (piapp0 (piapp1_int_tgt_sec E s x) y) Terminal_obj
+  -> homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)
+```
+
 - Added the constant-family sanity assertion:
 
 ```text
@@ -597,6 +660,9 @@ The latest pass settled two prerequisites for this fold:
   ...` succeeds by cascade;
 - terminal-source identity specialization of `tdapp1_int` succeeds when the
   displayed identity is written as `id_transfd`.
+- the terminal-source `piapp1_int` witness now has named fibre projections, and
+  direct specializations of the general `fdapp1_int_fibre_*` projections compute
+  to those names.
 
 Do not add a general terminal-source component rule
 `tapp0_fapp0 (Const_catd K Terminal_cat) E k s -> Obj_func ... (piapp0 s k)` in
@@ -604,6 +670,29 @@ the current architecture: with `piapp0` defined through the same projection, tha
 rule loops. The next fold should instead use the already-validated
 Terminal_obj-applied projection, or introduce a nonrecursive purpose-built
 projection only if an exact later LHS requires it.
+
+The latest pass closes the target-section bridge:
+
+```text
+piapp1_int_tgt_sec E s x
+  ≡ homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+```
+
+This succeeds by a purpose-built capped rule on the exact terminal-source target
+projection. A broader functor-level projection for
+`tapp0_fapp0 x (comp_catd_fapp0 (homd_int s) (Op_funcd s))` was rejected by
+subject reduction and was not kept.
+
+The target-section projection can now be evaluated further: at a base object
+`y` it reaches `homd_tgt_funcd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+y`, and after applying `Terminal_obj` it reaches the identity-specialized
+endpoint `homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)`.
+
+The next concrete blocker before a clean fold toward `piapp1_func` is one layer
+higher: `piapp1_int_fibre_app E s x` is a morphism in a `Pi_cat`, and the plan
+still defers the general `Hom_cat (Pi_cat H) a b -> Transfd_cat ...` rule. Do
+not add a broad `Hom_cat (Pi_cat ...)` rule casually, because it must join with
+the non-dependent `Pi_cat (Const_catd K A) -> Functor_cat K A` route.
 
 Implemented clarified design target: add a stable internal Pi-action witness
 `piapp1_int` by specializing the existing internal displayed action:
@@ -782,6 +871,9 @@ implements the main architecture changes:
 - derived `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app` projections.
 - initial `piapp1_func` / `piapp1_fapp0` stable package plus
   `piapp1_src_obj`.
+- named `piapp1_int_tgt_sec` / `piapp1_int_fibre_transf` /
+  `piapp1_int_fibre_app` projections and assertions connecting them to the
+  terminal-source `fdapp1_int_fibre_*` specializations.
 
 It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
@@ -879,7 +971,34 @@ These rules are enough to expose the terminal source and inner terminal
 endpoint through projections, while avoiding a broad whole-family `homd_int`
 rule.
 
-10. Next: decide whether `piapp1_int` needs a named target-section projection
-    before any fold to `piapp1_func`, or whether an external `fdapp1_*` /
-    `tdapp1_*` surface head should be introduced first. Keep direct
-    `piapp1_int -> piapp1_func` deferred until that projection shape is clear.
+10. Completed: add named terminal-source projections for `piapp1_int` before any
+    fold to `piapp1_func`:
+
+```text
+piapp1_int_tgt_sec E s x
+piapp1_int_fibre_transf E s x
+piapp1_int_fibre_app E s x
+```
+
+    These are definitions over the current `Fibre_*` projections, and assertions
+    validate that the terminal-source `fdapp1_int_fibre_*` specializations compute
+    to them.
+
+11. Completed: settle the remaining target-section bridge. The exact assertion
+
+```text
+piapp1_int_tgt_sec E s x
+  ≡ homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)
+```
+
+    now typechecks by a capped terminal-source bridge. The rejected
+    functor-level `comp_catd_fapp0` projection was not kept. Follow-up assertions
+    also validate evaluation of this target section at `y` and then at
+    `Terminal_obj`, reaching the endpoint family used by `piapp1_func`.
+
+12. Next: decide how to project the `piapp1_int_fibre_app` morphism, which lives
+    in a `Pi_cat`, toward the section-level `piapp1_func`. This probably requires
+    either a carefully joined `Hom_cat (Pi_cat H) a b -> Transfd_cat ...` bridge
+    or a narrower purpose-built projection for this exact `Homd_section_catd`
+    situation. Do not add the direct `piapp1_int -> piapp1_func` fold until this
+    Pi-hom projection route has a typechecked assertion.
