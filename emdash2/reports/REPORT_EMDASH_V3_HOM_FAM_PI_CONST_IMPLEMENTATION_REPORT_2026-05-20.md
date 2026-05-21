@@ -202,6 +202,44 @@ displayed-composition fibre projection deferred, both
 `timeout 30s lambdapi check -w emdash3_2.lp` and
 `EMDASH_TYPECHECK_TIMEOUT=60s make check` pass. `git diff --check` also passes.
 
+Resume clarification 2026-05-21: continue assertion-led from stable plan heads,
+not by reintroducing `piapp1_int_*`. The next useful stable projection is a
+terminal-source normal form for `homd_tgt_funcd`:
+
+```text
+homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+  -> Obj_func
+       (homd_ E E (id_funcd E) x u y (piapp0 s y))
+```
+
+This exposes, one layer below `homd_src_secd`, the same endpoint family used by
+`piapp1_func`, while avoiding a broad whole-family `homd_int` rewrite and
+avoiding the previously removed capped composite bridge. It should be validated
+with focused assertions for both the rule itself and the corresponding
+`piapp0 (homd_src_secd ...) y` cascade.
+
+Eleventh continuation update: the `homd_tgt_funcd` terminal-source normal form
+has now been implemented in `emdash3_2.lp`:
+
+```text
+homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+  -> Obj_func
+       (homd_ E E (id_funcd E) x u y (piapp0 s y))
+```
+
+Focused assertions validate the rule itself, the corresponding
+`piapp0 (homd_src_secd ...) y` cascade, and terminal-object evaluation back to
+the generalized endpoint used by `piapp1_func`. A final focused assertion fixes
+the `piapp1`-specific source object `u = piapp0 s x` and confirms that evaluating
+the projected target section at `y` and then at `Terminal_obj` reaches
+`homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)`. This continues the
+planned projection-level terminal/constant route without adding a whole-family
+`homd_int` rewrite, without adding any `piapp1_int_*` aliases, and without
+installing the deferred displayed-composition projection. The focused
+`timeout 30s lambdapi check -w emdash3_2.lp`, full
+`EMDASH_TYPECHECK_TIMEOUT=60s make check`, and `git diff --check` validations
+pass after this change.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -596,12 +634,22 @@ homd_src_func (Const_catd K Terminal_cat) x
 
 homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
   -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
+
+homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+  -> Obj_func (homd_ E E (id_funcd E) x u y (piapp0 s y))
 ```
 
 - Added assertions that the terminal source of
   `homd_int (id_funcd (Const_catd K Terminal_cat))` reduces through these
   projected normal forms. These are intentionally not direct whole-family
   `homd_int` or endpoint `homd_` rewrite rules.
+- Added assertions that `piapp0 (homd_src_secd (Const_catd K Terminal_cat) E s
+  x u) y` reduces through the generalized terminal-source normal form above,
+  and that applying the resulting `Obj_func` at `Terminal_obj` reaches the
+  endpoint family used by `piapp1_func`.
+- Added the piapp1-specific assertion for `u = piapp0 s x`, showing that the
+  target section evaluated at `y` and `Terminal_obj` reaches
+  `homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)`.
 - Added the constant-family sanity assertion:
 
 ```text
@@ -922,11 +970,15 @@ homd_src_func (Const_catd K Terminal_cat) x
 
 homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
   -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
+
+homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+  -> Obj_func (homd_ E E (id_funcd E) x u y (piapp0 s y))
 ```
 
 These rules are enough to expose the terminal source and inner terminal
 endpoint through projections, while avoiding a broad whole-family `homd_int`
-rule.
+rule. The generalized `homd_tgt_funcd` terminal-source rule is also validated
+through the `piapp0 (homd_src_secd ...) y` cascade.
 
 10. Removed: do not keep the plan-divergent `piapp1_int_tgt_sec`,
     `piapp1_int_fibre_transf`, or `piapp1_int_fibre_app` aliases, and do not keep
@@ -948,10 +1000,17 @@ fdapp1_int_transfd
   -> homd_int terminal/constant projected normal forms
 ```
 
-    If that cascade still does not expose the target, evaluate whether a
-    principled constant/terminal whole-family `homd_int` rule is required. Do
-    not introduce new `piapp1_int_*` migration names unless a typechecked probe
-    shows that a primitive stable head is genuinely needed.
+    The generalized terminal-source `homd_tgt_funcd` step in this cascade is now
+    implemented. The next likely blocker is the target object of the specialized
+    `piapp1_int` projection, which contains
+    `Fibre_func (comp_catd_fapp0 (homd_int s) (Op_funcd s))`. If a concrete
+    assertion needs that reduction, install the semantically correct
+    displayed-composition projection late/near that first use, not in the early
+    projection-rule block. If the cascade still does not expose the target after
+    that, evaluate whether a principled constant/terminal whole-family
+    `homd_int` rule is required. Do not introduce new `piapp1_int_*` migration
+    names unless a typechecked probe shows that a primitive stable head is
+    genuinely needed.
 
 12. Keep the deferred `Hom_cat (Pi_cat H) a b -> Transfd_cat ...` question
     separate. It may become necessary for a later section-level hom fold, but it
