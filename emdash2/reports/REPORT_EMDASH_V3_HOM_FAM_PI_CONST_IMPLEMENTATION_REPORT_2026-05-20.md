@@ -353,6 +353,26 @@ Transf_cat Terminal_cat Y (Obj_func Y u) (Obj_func Y v)
   -> Hom_cat Y u v
 ```
 
+This was not an explicit item in the original architecture plan. It was added
+as an implementation-discovered bridge during the stable `piapp1_int` projection
+route. Categorically, it is the expected collapse that a natural transformation
+between point functors `Terminal_cat -> Y` is exactly an arrow of `Y`.
+
+A later dependency audit confirmed that the rule is not dead code. Removing
+only this rule in a temporary copy makes `lambdapi check` fail at the final
+projection rule:
+
+```text
+tapp0_fapp0 Terminal_obj (piapp1_int_tgt_transf E s x y)
+  -> piapp1_func E s x y
+```
+
+The failed subject-reduction goal compares an object of the desired
+`Pi_cat (homd_ ...)` target with an object of
+`Transf_cat Terminal_cat ... (Obj_func ...) (Obj_func ...)`. The terminal
+ordinary-transfor collapse is the conversion step that identifies the latter
+with the ordinary hom category needed by the former.
+
 - The `piapp1_int -> piapp1_func` path now uses stable intermediate projection
   heads rather than any reducible `Fibre_transf_app` surface:
 
@@ -1376,6 +1396,14 @@ now been documented in `README.md` and in the rewrite-hygiene comments of
 4. only move the rule into `emdash3_2.lp` when both the rule and the assertion
    validate quickly.
 ```
+
+The same technique now also applies to dependency audits for existing rules:
+first search for likely downstream normal forms, then remove only the candidate
+rule in a temporary copy, run a bounded check, inspect the first failing
+rule/assertion, and record the dependency before deleting the temporary file.
+This was used to audit the terminal ordinary-transfor collapse above; the first
+failure localized the dependency to the `piapp1_int_tgt_transf -> piapp1_func`
+fold.
 
 The whole-family terminal/constant `homd_int` question was also probed directly:
 

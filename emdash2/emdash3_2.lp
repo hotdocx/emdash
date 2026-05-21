@@ -59,6 +59,11 @@ flag "print_meta_args" on;
       `lambdapi check` and a focused assertion for the expected normal form. A
       rule that typechecks but fails or times out on its intended assertion is
       not ready for this file.
+    - To audit whether an existing rule is still used, first search for likely
+      downstream redexes and normal forms, then remove only that rule in a
+      temporary copy and run a bounded check. Treat the first failing
+      rule/assertion as the concrete dependency to document before deleting the
+      temporary file.
 
   Stable heads and unification helpers:
     - Stable heads are the intended normal forms for operations that later
@@ -533,6 +538,11 @@ unif_rule Transf $F $G ≡ Transf $F' $G' ↪ [ $F ≡ $F'; $G ≡ $G' ];
 
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
+// Transformations between point functors from the terminal category are just
+// arrows in the target. This implementation-discovered bridge is used by the
+// late `piapp1_int_tgt_transf` projection chain: without it, the final
+// `tapp0_fapp0 Terminal_obj ... -> piapp1_func` fold cannot prove subject
+// reduction.
 rule @Transf_cat Terminal_cat $Y (@Obj_func $Y $u) (@Obj_func $Y $v)
   ↪ Hom_cat $Y $u $v;
 

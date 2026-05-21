@@ -42,6 +42,11 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   shape. Try a smaller stable-head rule, omit brittle implicit arguments, or
   move the rule later only if there is a concrete assertion showing why it is
   needed.
+- To audit whether an existing rule is actually used, combine static search
+  with a temporary-removal probe: copy `emdash3_2.lp`, remove only that rule,
+  run a bounded `lambdapi check`, and inspect the first failing rule/assertion.
+  Record the downstream dependency in the implementation report before deleting
+  the temporary copy.
 - Do not keep temporary probe files in the workspace. Move successful rules and
   their assertions into `emdash3_2.lp`, and document failed probes in the active
   implementation report when they influence the design.
