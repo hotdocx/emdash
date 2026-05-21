@@ -2506,38 +2506,26 @@ rule @tapp0_fapp0
 symbol piapp1_int_src_transf [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K))
-  : τ (@Transf
-      (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
-      (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
-      (@Fibre_func
-        K
-        (@Op_catd K (@Const_catd K Terminal_cat))
-        (@Homd_target_catd K (@Const_catd K Terminal_cat))
-        (@homd_int
-          K
-          (@Const_catd K Terminal_cat)
-          (@Const_catd K Terminal_cat)
-          (@id_funcd K (@Const_catd K Terminal_cat)))
-        x)
-      (@Fibre_func
-        K
-        (@Op_catd K (@Const_catd K Terminal_cat))
-        (@Homd_target_catd K (@Const_catd K Terminal_cat))
-        (@comp_catd_fapp0
-          K
-          (@Op_catd K (@Const_catd K Terminal_cat))
-          (@Op_catd K E)
-          (@Homd_target_catd K (@Const_catd K Terminal_cat))
-          (@homd_int K (@Const_catd K Terminal_cat) E s)
-          (@Op_funcd K (@Const_catd K Terminal_cat) E s))
-        x));
+  : τ (Transf
+      (Obj_func
+        (homd_src_sec (Const_catd K Terminal_cat) x Terminal_obj))
+      (comp_cat_fapp0
+        (@homd_src_funcd K (@Const_catd K Terminal_cat) E s x)
+        (Op_func
+          (@tapp0_fapp0
+            K
+            Cat_cat
+            (@Const_catd K Terminal_cat)
+            E
+            x
+            s))));
 
 symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K))
   : τ (Hom
-      (Pi_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x))
-      (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj)
+      (Pi_cat (Homd_section_catd (Const_catd K Terminal_cat) x))
+      (homd_src_sec (Const_catd K Terminal_cat) x Terminal_obj)
       (@homd_src_secd
         K
         (@Const_catd K Terminal_cat)
@@ -2549,133 +2537,50 @@ symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
 symbol piapp1_int_tgt_transf [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
-  : τ (@Transf
-      (Fibre_cat (@Const_catd (Op_cat K) Terminal_cat) y)
-      (Fibre_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x) y)
-      (@Fibre_func
-        (Op_cat K)
-        (@Const_catd (Op_cat K) Terminal_cat)
-        (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
-        (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj)
-        y)
-      (@Fibre_func
-        (Op_cat K)
-        (@Const_catd (Op_cat K) Terminal_cat)
-        (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
-        (@homd_src_secd
-          K
-          (@Const_catd K Terminal_cat)
-          E
-          s
-          x
-          (@piapp0 K E s x))
-        y));
+  : τ (Transf
+      (@Obj_func
+        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+        (Obj_func
+          (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)))
+      (@Obj_func
+        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+        (Obj_func
+          (@homd_
+            K
+            E
+            E
+            (@id_funcd K E)
+            x
+            (@piapp0 K E s x)
+            y
+            (@piapp0 K E s y)))));
 
-symbol piapp1_int_tgt_app [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x y : τ (Obj K))
-  : τ (Obj (Pi_cat
-      (@homd_
-        K
-        E
-        E
-        (@id_funcd K E)
-        x
-        (@piapp0 K E s x)
-        y
-        (@piapp0 K E s y))));
-
-rule @tdapp0_fapp0
-      $K
-      (@Op_catd $K (@Const_catd $K Terminal_cat))
-      (@Homd_target_catd $K (@Const_catd $K Terminal_cat))
-      (@homd_int
-        $K
-        (@Const_catd $K Terminal_cat)
-        (@Const_catd $K Terminal_cat)
-        (@id_funcd $K (@Const_catd $K Terminal_cat)))
-      (@comp_catd_fapp0
-        $K
-        (@Op_catd $K (@Const_catd $K Terminal_cat))
-        (@Op_catd $K $E)
-        (@Homd_target_catd $K (@Const_catd $K Terminal_cat))
-        (@homd_int $K (@Const_catd $K Terminal_cat) $E $s)
-        (@Op_funcd $K (@Const_catd $K Terminal_cat) $E $s))
+rule tdapp0_fapp0
       $x
       (@piapp1_int $K $E $s)
   ↪ @piapp1_int_src_transf $K $E $s $x;
 
-rule @tapp0_fapp0
-      (Fibre_cat (@Op_catd $K (@Const_catd $K Terminal_cat)) $x)
-      (Fibre_cat (@Homd_target_catd $K (@Const_catd $K Terminal_cat)) $x)
-      (@Fibre_func
-        $K
-        (@Op_catd $K (@Const_catd $K Terminal_cat))
-        (@Homd_target_catd $K (@Const_catd $K Terminal_cat))
-        (@homd_int
-          $K
-          (@Const_catd $K Terminal_cat)
-          (@Const_catd $K Terminal_cat)
-          (@id_funcd $K (@Const_catd $K Terminal_cat)))
-        $x)
-      (@Fibre_func
-        $K
-        (@Op_catd $K (@Const_catd $K Terminal_cat))
-        (@Homd_target_catd $K (@Const_catd $K Terminal_cat))
-        (@comp_catd_fapp0
-          $K
-          (@Op_catd $K (@Const_catd $K Terminal_cat))
-          (@Op_catd $K $E)
-          (@Homd_target_catd $K (@Const_catd $K Terminal_cat))
-          (@homd_int $K (@Const_catd $K Terminal_cat) $E $s)
-          (@Op_funcd $K (@Const_catd $K Terminal_cat) $E $s))
-        $x)
+rule tapp0_fapp0
       Terminal_obj
       (@piapp1_int_src_transf $K $E $s $x)
   ↪ @piapp1_int_src_app $K $E $s $x;
 
-rule @tdapp0_fapp0
-      (Op_cat $K)
-      (@Const_catd (Op_cat $K) Terminal_cat)
-      (@Homd_section_catd $K (@Const_catd $K Terminal_cat) $x)
-      (@homd_src_sec $K (@Const_catd $K Terminal_cat) $x Terminal_obj)
-      (@homd_src_secd
-        $K
-        (@Const_catd $K Terminal_cat)
-        $E
-        $s
-        $x
-        (@piapp0 $K $E $s $x))
+rule tdapp0_fapp0
       $y
       (@piapp1_int_src_app $K $E $s $x)
   ↪ @piapp1_int_tgt_transf $K $E $s $x $y;
 
 rule @tapp0_fapp0
-      (Fibre_cat (@Const_catd (Op_cat $K) Terminal_cat) $y)
-      (Fibre_cat (@Homd_section_catd $K (@Const_catd $K Terminal_cat) $x) $y)
-      (@Fibre_func
-        (Op_cat $K)
-        (@Const_catd (Op_cat $K) Terminal_cat)
-        (@Homd_section_catd $K (@Const_catd $K Terminal_cat) $x)
-        (@homd_src_sec $K (@Const_catd $K Terminal_cat) $x Terminal_obj)
-        $y)
-      (@Fibre_func
-        (Op_cat $K)
-        (@Const_catd (Op_cat $K) Terminal_cat)
-        (@Homd_section_catd $K (@Const_catd $K Terminal_cat) $x)
-        (@homd_src_secd
-          $K
-          (@Const_catd $K Terminal_cat)
-          $E
-          $s
-          $x
-          (@piapp0 $K $E $s $x))
-        $y)
+      Terminal_cat
+      _
+      (Obj_func
+        (Obj_func
+          _))
+      (Obj_func
+        (Obj_func
+          _))
       Terminal_obj
       (@piapp1_int_tgt_transf $K $E $s $x $y)
-  ↪ @piapp1_int_tgt_app $K $E $s $x $y;
-
-rule @piapp1_int_tgt_app $K $E $s $x $y
   ↪ @piapp1_func $K $E $s $x $y;
 
 assert [K : Cat] (E : τ (Catd K))

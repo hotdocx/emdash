@@ -361,7 +361,6 @@ piapp1_int
   -> piapp1_int_src_transf
   -> piapp1_int_src_app
   -> piapp1_int_tgt_transf
-  -> piapp1_int_tgt_app
   -> piapp1_func
 ```
 
@@ -375,6 +374,80 @@ late placement typechecks quickly. Probe assertions for the individual
 projection equalities were not kept: the rules themselves typecheck, while those
 extra equality assertions triggered elaboration/unification noise that is not
 needed for the implementation.
+
+Sixteenth continuation update, 2026-05-22: the `piapp1_int` projection rules
+were simplified where Lambdapi inference supports it. The first three
+projection rules now use the readable heads directly:
+
+```text
+tdapp0_fapp0 x piapp1_int -> piapp1_int_src_transf
+tapp0_fapp0 Terminal_obj piapp1_int_src_transf -> piapp1_int_src_app
+tdapp0_fapp0 y piapp1_int_src_app -> piapp1_int_tgt_transf
+```
+
+The fourth projection cannot be shortened to:
+
+```text
+tapp0_fapp0 Terminal_obj piapp1_int_tgt_transf -> piapp1_func
+```
+
+Even after simplifying the declaration of `piapp1_int_tgt_transf`, Lambdapi
+cannot recover enough endpoint-functor information for subject reduction from
+that two-argument surface. The useful computed normal forms are:
+
+```text
+Fibre_cat (Const_catd (Op_cat K) Terminal_cat) y
+  -> Terminal_cat
+
+Fibre_cat (Homd_section_catd K (Const_catd K Terminal_cat) x) y
+  -> Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y)))
+
+Fibre_func ... (homd_src_sec ... Terminal_obj) y
+  -> Obj_func
+       (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+       (Obj_func
+         (Catd_cat (Op_cat (Hom_cat K x y)))
+         (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat))
+
+Fibre_func ... (homd_src_secd ... (piapp0 s x)) y
+  -> Obj_func
+       (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+       (Obj_func
+         (Catd_cat (Op_cat (Hom_cat K x y)))
+         (homd_ E E (id_funcd E) x (piapp0 s x) y (piapp0 s y)))
+```
+
+Accordingly, `piapp1_int_tgt_transf` now uses this computed terminal/functor
+type directly, while keeping the stable semantic endpoint `homd_` rather than
+unfolding it all the way to `hom_`. The fourth rule now folds directly to
+`piapp1_func`; it still exposes the terminal source and nested `Obj_func`
+endpoint shape because the fully two-argument `tapp0_fapp0 Terminal_obj
+piapp1_int_tgt_transf` surface does not preserve typing. This is the minimum
+shape found that preserves typing without returning to the older
+`Fibre_func`/`Fibre_transf_app` surface.
+
+Seventeenth continuation update, 2026-05-22: the remaining `Fibre_func`
+expressions in `piapp1_int_src_transf` were computed away. The source endpoint
+is now the terminal object functor:
+
+```text
+Obj_func (homd_src_sec (Const_catd K Terminal_cat) x Terminal_obj)
+```
+
+The target endpoint is the computed stable composite:
+
+```text
+comp_cat_fapp0
+  (homd_src_funcd (Const_catd K Terminal_cat) E s x)
+  (Op_func (tapp0_fapp0 (Const_catd K Terminal_cat) E x s))
+```
+
+This is more readable than the previous `Fibre_func (homd_int ...) x` /
+`Fibre_func (comp_catd_fapp0 ...) x` type and avoids putting reducible
+abbreviations in the type of the stable projection head. Attempts to also omit
+the base/family indices of `homd_src_funcd`, `tapp0_fapp0`, and `piapp0` caused
+unsolved family-index constraints, so those indices remain explicit where
+needed.
 
 ## Files Changed
 
@@ -1147,8 +1220,7 @@ through the `piapp0 (homd_src_secd ...) y` cascade.
     the capped terminal-source bridge that matched a displayed-composition
     subterm. The implemented stable route is the plan-backed projection chain
     `piapp1_int_src_transf`, `piapp1_int_src_app`,
-    `piapp1_int_tgt_transf`, `piapp1_int_tgt_app`, followed by the final
-    `piapp1_func` fold.
+    `piapp1_int_tgt_transf`, followed by the final `piapp1_func` fold.
 
 11. Completed prerequisite: install the packaged section-hom bridge:
 
@@ -1183,7 +1255,8 @@ fdapp1_int_transfd
     object-level fold is:
 
 ```text
-piapp1_int_tgt_app E s x y -> piapp1_func E s x y
+tapp0_fapp0 Terminal_obj (piapp1_int_tgt_transf E s x y)
+  -> piapp1_func E s x y
 ```
 
     Remaining work should continue to the next planned beta/action rules, in
