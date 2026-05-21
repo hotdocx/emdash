@@ -145,7 +145,8 @@ flag "print_meta_args" on;
       `fdapp1_*` surface API.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
       capped component is a definition by `piapp0`; the terminal-specialization
-      fold from displayed internal action is still deferred.
+      fold from displayed internal action is installed near the late projection
+      block.
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
@@ -1215,8 +1216,8 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   `piapp1_func` is the section-level package over the base-arrow category.
   The capped object component is defined by ordinary section evaluation, so it
   remains iterable through `Pi_cat` rather than becoming only an object-level
-  shortcut.  The later terminal-specialization fold from displayed internal
-  action to this head is intentionally left for the next bridge pass.
+  shortcut. The terminal-specialization fold from displayed internal action is
+  installed later, after the concrete displayed-composition projection it needs.
 */
 symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1270,6 +1271,13 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
        (@piapp0 K E s y))
      (@piapp1_func K E s x y)
      f;
+
+rule @fapp0
+      (Op_cat (Hom_cat $K $x $y))
+      (Hom_cat $A (@fapp0 $K $A $s $x) (@fapp0 $K $A $s $y))
+      (@piapp1_func $K (@Const_catd $K $A) $s $x $y)
+      $f
+  ↪ @fapp1_fapp0 $K $A $s $x $y $f;
 
 // -------------------------------------------------------------------------------------------------
 // 13. Internal displayed hom-action heads
@@ -2452,6 +2460,13 @@ assert [K : Cat] (E : τ (Catd K))
           (@piapp0 K E s y))
         (@piapp1_func K E s x y)
         f;
+
+assert [K : Cat] (A : Cat)
+  (s : τ (Obj (Pi_cat (Const_catd K A))))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @piapp1_fapp0 K (@Const_catd K A) s x y f
+    ≡ @fapp1_fapp0 K A s x y f;
 
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))

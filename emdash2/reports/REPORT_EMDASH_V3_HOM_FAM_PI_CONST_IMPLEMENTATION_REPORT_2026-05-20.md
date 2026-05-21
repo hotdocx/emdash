@@ -449,6 +449,31 @@ the base/family indices of `homd_src_funcd`, `tapp0_fapp0`, and `piapp0` caused
 unsolved family-index constraints, so those indices remain explicit where
 needed.
 
+Eighteenth continuation update, 2026-05-22: the constant-family object action
+of `piapp1_func` has been installed at the primitive `fapp0` projection head,
+not as a rule headed by the defined `piapp1_fapp0` abbreviation:
+
+```text
+fapp0 (piapp1_func (Const_catd K A) s x y) f
+  -> fapp1_fapp0 s f
+```
+
+This follows the local stable-head SOP. The first direct assertion
+`piapp1_fapp0 (Const_catd K A) s f ≡ fapp1_fapp0 s f` failed before this rule,
+because `piapp1_fapp0` unfolds to section evaluation by `piapp0`, and the
+remaining stable head was exactly the object action of `piapp1_func` over a
+base arrow. After adding the `fapp0`-headed rule, the constant-family assertion
+typechecks:
+
+```text
+piapp1_fapp0 (Const_catd K A) s x y f
+  ≡ fapp1_fapp0 K A s x y f
+```
+
+This completes the currently planned constant-family bridge for
+`piapp1_fapp0` while preserving the design that `piapp1_fapp0` itself remains
+defined notation for section evaluation.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -1113,12 +1138,13 @@ implements the main architecture changes:
 - initial `piapp1_func` / `piapp1_fapp0` stable package plus
   `piapp1_src_obj`.
 - stable `piapp1_int` projection chain down to `piapp1_func`.
+- constant-family `piapp1_fapp0` object-action bridge to `fapp1_fapp0`.
 
 It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
 
-1. how far to extend the new `piapp1_func` fold through `piapp1_fapp0` and later
-   beta rules,
+1. later section/evaluation beta rules beyond the constant-family
+   `piapp1_fapp0` bridge,
 2. whether additional displayed-composition projection rules should be installed
    beyond the late concrete rule now used by the `piapp1_int` cascade,
 3. whether constant/terminal whole-family `homd_int` normal forms are now safe
@@ -1259,7 +1285,22 @@ tapp0_fapp0 Terminal_obj (piapp1_int_tgt_transf E s x y)
   -> piapp1_func E s x y
 ```
 
-    Remaining work should continue to the next planned beta/action rules, in
-    particular how `piapp1_fapp0` and the later section/evaluation transfors
-    should compute. Do not add direct rules over the reducible
-    `Fibre_transf_app` abbreviation.
+    The constant-family object action has now been added at the primitive
+    `fapp0` projection head:
+
+```text
+fapp0 (piapp1_func (Const_catd K A) s x y) f
+  -> fapp1_fapp0 s f
+```
+
+    This validates:
+
+```text
+piapp1_fapp0 (Const_catd K A) s x y f
+  -> fapp1_fapp0 K A s x y f
+```
+
+    Remaining work should continue to the next planned beta/action rules and
+    section/evaluation transfors. Do not add direct rules over the reducible
+    `Fibre_transf_app` abbreviation, and keep `piapp1_fapp0` itself as defined
+    notation rather than a rewrite-rule head.
