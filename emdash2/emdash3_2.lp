@@ -2768,3 +2768,24 @@ assert [K : Cat] (E : τ (Catd K))
 
   - sigma_intro_transf beta
 */
+
+injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
+  : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
+
+injective symbol sigma_intro_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
+  : τ (Functor (Fibre_cat E k) (Sigma_cat E));
+
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      $E
+      _
+      $k
+      (@sigma_intro_transf $K $E)
+  ↪ @sigma_intro_func $K $E $k;
+
+rule fapp0
+      (@sigma_intro_func $K $E $k)
+      $u
+  ↪ Struct_sigma $k
+      $u;
