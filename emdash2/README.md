@@ -32,6 +32,20 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Tuning: `python3 scripts/watch_typecheck.py --interval 0.2` / `--no-clear`.
 - Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
 
+## Probe-first rewrite development
+- Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
+  temporary copy such as `tmp_rule_probe.lp`, then run
+  `timeout 30s lambdapi check -w tmp_rule_probe.lp`.
+- Add at least one focused `assert` exercising the intended normal form in the
+  probe. A rule that typechecks but does not prove the assertion is not ready.
+- If a probe times out, treat that as evidence about rule placement or LHS
+  shape. Try a smaller stable-head rule, omit brittle implicit arguments, or
+  move the rule later only if there is a concrete assertion showing why it is
+  needed.
+- Do not keep temporary probe files in the workspace. Move successful rules and
+  their assertions into `emdash3_2.lp`, and document failed probes in the active
+  implementation report when they influence the design.
+
 ## Print pipeline
 Run these from this folder (`emdash2/`), independent of the parent repo workspace:
 

@@ -55,6 +55,10 @@ flag "print_meta_args" on;
     - Prefer small projection rules with stable heads over one large nested
       redex. The homd projection path is split into `tapp0_fapp0` and `fapp0`
       folds; surface `piapp0` notation unfolds through `tapp0_fapp0`.
+    - Probe nontrivial rules in a temporary copy first, with a bounded
+      `lambdapi check` and a focused assertion for the expected normal form. A
+      rule that typechecks but fails or times out on its intended assertion is
+      not ready for this file.
 
   Stable heads and unification helpers:
     - Stable heads are the intended normal forms for operations that later
@@ -150,8 +154,8 @@ flag "print_meta_args" on;
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
-    - Generic Sigma/Pi weakening helpers are deferred until the directed-family
-      core has enough stable beta assertions.
+    - Generic Sigma/Pi weakening helpers have basic stable beta assertions; any
+      richer coherence helpers remain deferred until needed.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -935,6 +939,10 @@ symbol Homd_cat [Z : Cat] (E : τ (Catd Z)) : Cat
 symbol Homd [Z : Cat] (E : τ (Catd Z)) : Grpd
 ≔ Obj (@Homd_cat Z E);
 
+// Keep homd_int constant: terminal-source behavior is exposed through stable
+// projection rules below. Whole-family rewrite probes either fail by type
+// mismatch, are rejected because this symbol is constant, or time out once the
+// constness is removed and the rewrite is added.
 constant symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   Π (FF : τ (Functord D E)),
   τ (Functord (Op_catd E) (@Homd_target_catd Z D));
@@ -1359,8 +1367,8 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (@Op_funcd K E D FF)));
 
 // Internal Pi-action witness: terminal-source specialization of the internal
-// displayed hom-action. This packages the fold only; projection to piapp1_func
-// is deferred until the constant/terminal homd_int normal forms are settled.
+// displayed hom-action. Projection to `piapp1_func` is installed later through
+// stable intermediate heads.
 symbol piapp1_int [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   : τ (@Transfd
@@ -1556,10 +1564,28 @@ symbol fdapp1_int_fibre_app [K : Cat] [E D : τ (Catd K)]
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
-// Generic Pi weakening/evaluation helpers. These reintroduce the stable parts of
-// the v3 backlog whose beta assertions are now robust. The sigma-introduction
-// object beta is still deferred: the direct `fapp0 sigma_intro_func` rule is not
-// yet a fast, stable rewrite.
+// Generic Sigma/Pi weakening/evaluation helpers. These reintroduce the stable
+// parts of the v3 backlog whose beta assertions are now robust.
+injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
+  : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
+
+injective symbol sigma_intro_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
+  : τ (Functor (Fibre_cat E k) (Sigma_cat E));
+
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      $E
+      _
+      $k
+      (@sigma_intro_transf $K $E)
+  ↪ @sigma_intro_func $K $E $k;
+
+rule fapp0
+      (@sigma_intro_func $K $E $k)
+      $u
+  ↪ Struct_sigma $k $u;
+
 symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord (@Const_catd K (@Pi_cat K E)) E);
 
@@ -1670,6 +1696,26 @@ assert [K : Cat] (E : τ (Catd K))
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
+
+assert [K : Cat] (E : τ (Catd K))
+  (k : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E k))) ⊢
+  @fapp0
+    (Fibre_cat E k)
+    (@Sigma_cat K E)
+    (@tapp0_fapp0
+      K
+      Cat_cat
+      E
+      (@Const_catd K (@Sigma_cat K E))
+      k
+      (@sigma_intro_transf K E))
+    u
+    ≡ @Struct_sigma
+        (Obj K)
+        (λ kk : τ (Obj K), Obj (Fibre_cat E kk))
+        k
+        u;
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -2762,30 +2808,3 @@ assert [K : Cat] (E : τ (Catd K))
         (@piapp0 K E s x)
         y
         (@piapp0 K E s y);
-
-/*
-  Still deferred after the current helper pass:
-
-  - sigma_intro_transf beta
-*/
-
-injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
-  : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
-
-injective symbol sigma_intro_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
-  : τ (Functor (Fibre_cat E k) (Sigma_cat E));
-
-rule @tapp0_fapp0
-      $K
-      Cat_cat
-      $E
-      _
-      $k
-      (@sigma_intro_transf $K $E)
-  ↪ @sigma_intro_func $K $E $k;
-
-rule fapp0
-      (@sigma_intro_func $K $E $k)
-      $u
-  ↪ Struct_sigma $k
-      $u;

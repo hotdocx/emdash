@@ -474,10 +474,13 @@ This completes the currently planned constant-family bridge for
 `piapp1_fapp0` while preserving the design that `piapp1_fapp0` itself remains
 defined notation for section evaluation.
 
-Nineteenth continuation update, 2026-05-22: the stable Pi-side generic helper
-backlog has been partially reintroduced with focused beta assertions:
+Nineteenth continuation update, 2026-05-22: the stable Sigma/Pi-side generic
+helper backlog has been reintroduced with focused beta assertions:
 
 ```text
+sigma_intro_transf E
+  : Functord E (Const_catd K (Sigma_cat E))
+
 pi_eval_transf E
   : Functord (Const_catd K (Pi_cat E)) E
 
@@ -491,6 +494,8 @@ section_pullback_func F E
 The installed computations are:
 
 ```text
+tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_func E k
+fapp0 (sigma_intro_func E k) u -> Struct_sigma k u
 tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
 fapp0 (const_section_func K A) a -> Const_func K A a
 fapp0 (section_pullback_func F E) s -> section_pullback_sec F E s
@@ -502,10 +507,10 @@ in the target-category slot. Probes with explicit `Pi_cat (Const_catd K A)` or
 `Pi_cat (Pullback_catd E F)` targets failed because those targets reduce before
 matching, so the explicit target slot was brittle.
 
-The `sigma_intro_transf` component head itself typechecked in a probe, but the
-object beta rule for `sigma_intro_func` was not robust: one form timed out and a
-more implicit form failed the focused assertion. It remains deferred rather than
-being added as a slow or unreliable rule.
+Correction: the earlier failed `sigma_intro_func` probe used a bad object-action
+shape. The accepted rule keeps `fapp0` implicit and returns `Struct_sigma k u`;
+the assertion uses the fully explicit constructor only where Lambdapi cannot
+infer the implicit Sigma-family arguments from the equality statement alone.
 
 ## Files Changed
 
@@ -1175,14 +1180,14 @@ implements the main architecture changes:
 - constant-family `piapp1_fapp0` object-action bridge to `fapp1_fapp0`.
 - stable Pi evaluation, constant-section, and section-pullback helper heads with
   focused beta assertions.
+- stable Sigma-introduction helper heads with focused beta assertions.
 
 It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
 
-1. the remaining `sigma_intro_transf` object beta,
-2. whether additional displayed-composition projection rules should be installed
+1. whether additional displayed-composition projection rules should be installed
    beyond the late concrete rule now used by the `piapp1_int` cascade,
-3. whether constant/terminal whole-family `homd_int` normal forms are now safe
+2. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
 
 ## Recommended Resume Order
@@ -1340,10 +1345,11 @@ piapp1_fapp0 (Const_catd K A) s x y f
     `Fibre_transf_app` abbreviation, and keep `piapp1_fapp0` itself as defined
     notation rather than a rewrite-rule head.
 
-13. Completed for the Pi-side generic helper backlog: reintroduce the stable
-    helpers whose beta rules now typecheck quickly:
+13. Completed for the Sigma/Pi-side generic helper backlog: reintroduce the
+    stable helpers whose beta rules now typecheck quickly:
 
 ```text
+sigma_intro_transf E
 pi_eval_transf E
 const_section_func K A
 section_pullback_func F E
@@ -1352,11 +1358,48 @@ section_pullback_func F E
     The validated beta assertions are:
 
 ```text
+tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_func E k
+fapp0 (sigma_intro_func E k) u -> Struct_sigma k u
 tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
 piapp0 (const_section_func K A a) k -> a
 piapp0 (section_pullback_func F E s) a -> piapp0 s (F a)
 ```
 
-    The remaining generic helper gap is `sigma_intro_transf` object beta. Keep it
-    deferred until a `sigma_intro_func` object-action rule can be made both
-    typable and fast; do not add the currently probed slow rule.
+Latest follow-up update, 2026-05-22: the probe-first rewrite workflow has
+now been documented in `README.md` and in the rewrite-hygiene comments of
+`emdash3_2.lp`. The intended discipline is:
+
+```text
+1. add the candidate rule to a temporary copy;
+2. run a bounded `timeout 30s lambdapi check -w ...`;
+3. include a focused assertion for the expected normal form;
+4. only move the rule into `emdash3_2.lp` when both the rule and the assertion
+   validate quickly.
+```
+
+The whole-family terminal/constant `homd_int` question was also probed directly:
+
+```text
+homd_int (id_funcd (Const_catd K Terminal_cat))
+  -> id_funcd (Const_catd K Terminal_cat)
+```
+
+is not typable. The left side has source `Op_catd (Const_catd K Terminal_cat)`
+and target `Homd_target_catd K (Const_catd K Terminal_cat)`, while the right
+side is an endofunctor of `Const_catd K Terminal_cat`. This is not just a
+missing rule; it is the wrong whole-family shape.
+
+A same-typed whole-family stable head,
+
+```text
+homd_int (Const_catd K Terminal_cat) E s
+  -> homd_int_terminal_src E s
+```
+
+cannot be added to the current file because `homd_int` is declared `constant`.
+Changing `homd_int` to an ordinary `symbol` by itself typechecks quickly, but
+adding the same-typed rewrite then times out under the 30s probe bound. So the
+current recommendation remains to keep `homd_int` constant and expose
+terminal/constant behavior through the existing stable projection rules. Any
+future whole-family form should be treated as a deliberate redesign, not as a
+mechanical completion of the current plan.
