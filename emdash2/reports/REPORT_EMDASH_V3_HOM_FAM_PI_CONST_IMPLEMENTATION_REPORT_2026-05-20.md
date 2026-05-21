@@ -474,6 +474,39 @@ This completes the currently planned constant-family bridge for
 `piapp1_fapp0` while preserving the design that `piapp1_fapp0` itself remains
 defined notation for section evaluation.
 
+Nineteenth continuation update, 2026-05-22: the stable Pi-side generic helper
+backlog has been partially reintroduced with focused beta assertions:
+
+```text
+pi_eval_transf E
+  : Functord (Const_catd K (Pi_cat E)) E
+
+const_section_func K A
+  : Functor A (Pi_cat (Const_catd K A))
+
+section_pullback_func F E
+  : Functor (Pi_cat E) (Pi_cat (Pullback_catd E F))
+```
+
+The installed computations are:
+
+```text
+tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
+fapp0 (const_section_func K A) a -> Const_func K A a
+fapp0 (section_pullback_func F E) s -> section_pullback_sec F E s
+piapp0 (section_pullback_sec F E s) a -> piapp0 s (fapp0 F a)
+```
+
+The `const_section_func` and `section_pullback_func` object-action rules use `_`
+in the target-category slot. Probes with explicit `Pi_cat (Const_catd K A)` or
+`Pi_cat (Pullback_catd E F)` targets failed because those targets reduce before
+matching, so the explicit target slot was brittle.
+
+The `sigma_intro_transf` component head itself typechecked in a probe, but the
+object beta rule for `sigma_intro_func` was not robust: one form timed out and a
+more implicit form failed the focused assertion. It remains deferred rather than
+being added as a slow or unreliable rule.
+
 ## Files Changed
 
 - `emdash3_2.lp`: new v3.2 implementation fork.
@@ -1078,7 +1111,7 @@ less-internal external heads only after the internal layer is better understood.
 The derived `fdapp1_int_fibre_*` names added later remain internal projection
 notation and do not settle the external API question.
 
-### 8. Displayed Composition Fibre Projection Is Still Deferred
+### 8. Displayed Composition Fibre Projection Is Retained Late
 
 The desired projection shape is:
 
@@ -1100,9 +1133,10 @@ rule @tapp0_fapp0 K Cat_cat E C x
 ```
 
 This `E`/`C` version is the correct semantic shape. It timed out when inserted
-early near the other projection rules, but when appended at the end of the file
-it typechecked quickly, including with a focused assertion for the intended
-`Fibre_func (comp_catd_fapp0 FF GG)` normal form. The proposed `D`/`C`
+early near the other projection rules, but it later typechecked quickly in the
+late projection block, including with focused assertions for the intended
+`Fibre_func (comp_catd_fapp0 FF GG)` normal forms needed by the `piapp1_int`
+cascade. The proposed `D`/`C`
 outer-slot version typechecked as a rule command, but a standalone assertion
 showed it is not the intended general projection: `tapp0_fapp0 ... D C ...
 (comp_catd_fapp0 E D C FF GG)` is not typable for arbitrary `E,D,C`, since the
@@ -1139,12 +1173,13 @@ implements the main architecture changes:
   `piapp1_src_obj`.
 - stable `piapp1_int` projection chain down to `piapp1_func`.
 - constant-family `piapp1_fapp0` object-action bridge to `fapp1_fapp0`.
+- stable Pi evaluation, constant-section, and section-pullback helper heads with
+  focused beta assertions.
 
 It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
 
-1. later section/evaluation beta rules beyond the constant-family
-   `piapp1_fapp0` bridge,
+1. the remaining `sigma_intro_transf` object beta,
 2. whether additional displayed-composition projection rules should be installed
    beyond the late concrete rule now used by the `piapp1_int` cascade,
 3. whether constant/terminal whole-family `homd_int` normal forms are now safe
@@ -1304,3 +1339,24 @@ piapp1_fapp0 (Const_catd K A) s x y f
     section/evaluation transfors. Do not add direct rules over the reducible
     `Fibre_transf_app` abbreviation, and keep `piapp1_fapp0` itself as defined
     notation rather than a rewrite-rule head.
+
+13. Completed for the Pi-side generic helper backlog: reintroduce the stable
+    helpers whose beta rules now typecheck quickly:
+
+```text
+pi_eval_transf E
+const_section_func K A
+section_pullback_func F E
+```
+
+    The validated beta assertions are:
+
+```text
+tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
+piapp0 (const_section_func K A a) k -> a
+piapp0 (section_pullback_func F E s) a -> piapp0 s (F a)
+```
+
+    The remaining generic helper gap is `sigma_intro_transf` object beta. Keep it
+    deferred until a `sigma_intro_func` object-action rule can be made both
+    typable and fast; do not add the currently probed slow rule.

@@ -1556,9 +1556,58 @@ symbol fdapp1_int_fibre_app [K : Cat] [E D : τ (Catd K)]
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
-// TODO(v3.2): generic Sigma/Pi helpers are deferred until the
-// directed-family core is stable enough for robust beta assertions. See the
-// backlog in reports/REPORT_EMDASH_V3_CONSOLIDATED.md.
+// Generic Pi weakening/evaluation helpers. These reintroduce the stable parts of
+// the v3 backlog whose beta assertions are now robust. The sigma-introduction
+// object beta is still deferred: the direct `fapp0 sigma_intro_func` rule is not
+// yet a fast, stable rewrite.
+symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
+  : τ (Functord (@Const_catd K (@Pi_cat K E)) E);
+
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      (@Const_catd $K (@Pi_cat $K $E))
+      $E
+      $k
+      (@pi_eval_transf $K $E)
+  ↪ @piapp0_func $K $E $k;
+
+symbol const_section_func (K : Cat) (A : Cat)
+  : τ (Functor A (@Pi_cat K (@Const_catd K A)));
+
+rule @fapp0
+      $A
+      _
+      (@const_section_func $K $A)
+      $a
+  ↪ @Const_func $K $A $a;
+
+symbol section_pullback_func [A B : Cat]
+  (F : τ (Functor A B)) (E : τ (Catd B))
+  : τ (Functor (@Pi_cat B E) (@Pi_cat A (@Pullback_catd A B E F)));
+
+symbol section_pullback_sec [A B : Cat]
+  (F : τ (Functor A B)) (E : τ (Catd B))
+  (s : τ (Obj (@Pi_cat B E)))
+  : τ (Obj (@Pi_cat A (@Pullback_catd A B E F)));
+
+rule @fapp0
+      (@Pi_cat $B $E)
+      _
+      (@section_pullback_func $A $B $F $E)
+      $s
+  ↪ @section_pullback_sec $A $B $F $E $s;
+
+rule @tapp0_fapp0
+      $A
+      Cat_cat
+      (@Const_catd $A Terminal_cat)
+      _
+      $a
+      (@section_pullback_sec $A $B $F $E $s)
+  ↪ @Obj_func
+      (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
+      (@piapp0 $B $E $s (@fapp0 $A $B $F $a));
 
 // -------------------------------------------------------------------------------------------------
 // 16. Regression assertions for the mixed-variance skeleton
@@ -1621,6 +1670,60 @@ assert [K : Cat] (E : τ (Catd K))
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @fapp0
+    (Pi_cat E)
+    (Fibre_cat E k)
+    (@tapp0_fapp0
+      K
+      Cat_cat
+      (@Const_catd K (@Pi_cat K E))
+      E
+      k
+      (@pi_eval_transf K E))
+    s
+    ≡ @piapp0 K E s k;
+
+assert [K : Cat] (A : Cat)
+  (a : τ (Obj A)) ⊢
+  @fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_section_func K A) a
+    ≡ @Const_func K A a;
+
+assert [K : Cat] (A : Cat)
+  (a : τ (Obj A))
+  (k : τ (Obj K)) ⊢
+  @piapp0
+    K
+    (@Const_catd K A)
+    (@fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_section_func K A) a)
+    k
+    ≡ a;
+
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
+  (s : τ (Obj (Pi_cat E))) ⊢
+  @fapp0
+    (@Pi_cat B E)
+    (@Pi_cat A (@Pullback_catd A B E F))
+    (@section_pullback_func A B F E)
+    s
+    ≡ @section_pullback_sec A B F E s;
+
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
+  (s : τ (Obj (Pi_cat E)))
+  (a : τ (Obj A)) ⊢
+  @piapp0
+    A
+    (@Pullback_catd A B E F)
+    (@fapp0
+      (@Pi_cat B E)
+      (@Pi_cat A (@Pullback_catd A B E F))
+      (@section_pullback_func A B F E)
+      s)
+    a
+    ≡ @piapp0 B E s (@fapp0 A B F a);
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Sigma_func K) E ≡ Sigma_cat E;
@@ -2661,10 +2764,7 @@ assert [K : Cat] (E : τ (Catd K))
         (@piapp0 K E s y);
 
 /*
-  Deferred with the helper declarations above:
+  Still deferred after the current helper pass:
 
   - sigma_intro_transf beta
-  - pi_eval_transf beta
-  - const_section_func beta
-  - section_pullback_func beta
 */
