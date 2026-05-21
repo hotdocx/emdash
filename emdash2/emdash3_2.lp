@@ -59,6 +59,10 @@ flag "print_meta_args" on;
       `lambdapi check` and a focused assertion for the expected normal form. A
       rule that typechecks but fails or times out on its intended assertion is
       not ready for this file.
+    - During probes and debugging, explicit implicit arguments are useful:
+      they make inferred categories, endpoints, and family indices visible in
+      error messages. After the rule is stable, prefer the minimal form that
+      still typechecks quickly and still matches the intended normal forms.
     - To audit whether an existing rule is still used, first search for likely
       downstream redexes and normal forms, then remove only that rule in a
       temporary copy and run a bounded check. Treat the first failing
@@ -70,8 +74,11 @@ flag "print_meta_args" on;
       rules need to recognize (`comp_cat_fapp0`, `tapp0_fapp0`,
       `homd_src_func`, `homd_src_sec`, `homd_tgt_func`).
     - Controlled `Obj`-inversion unification rules for chosen heads
-      (`Hom_cat`, `Functor_cat`, `Transf_cat`, `Fibre_cat`) are elaboration
-      aids.  They are not semantic claims that `Obj` is globally injective.
+      (`Hom_cat`, `Functor_cat`, `Transf_cat`) are elaboration aids.  They are
+      not semantic claims that `Obj` is globally injective. Avoid adding this
+      style of rule for notation-only heads such as `Fibre_cat`: equality of
+      fibre object categories should not force equality of the whole family and
+      base index.
     - If a concrete constructor does not reduce early enough and needs one of
       these unification helpers, that is usually a signal to add a computation
       rule or introduce a smaller stable head.
@@ -574,6 +581,12 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $G $H $Y $η)
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
+// Reserved capped ordinary hom-action surface. It is not used by v3.2 rules
+// yet. The intended computation is the projected endpoint of
+// `tapp1_int_func_transf`: evaluate the internal action at ϵ, project the
+// resulting transfor at X and then Y, and finally apply the resulting hom
+// functor to f. Keep it abstract until the external ordinary naturality API is
+// promoted.
 symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π [X Y : τ (Obj A)],
   Π (ϵ : τ (Obj (Transf_cat F G))),

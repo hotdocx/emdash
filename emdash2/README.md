@@ -42,6 +42,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   shape. Try a smaller stable-head rule, omit brittle implicit arguments, or
   move the rule later only if there is a concrete assertion showing why it is
   needed.
+- During debugging, keep inferred arguments explicit when that makes errors and
+  constraints easier to read. Before finalizing, clean up redundant explicit
+  arguments after a bounded check proves Lambdapi can infer them reliably.
+- Do not add unification helpers for notation-only heads just to make surface
+  syntax elaborate. If a helper would imply injectivity that is not semantically
+  valid, keep it only as a temporary probe and remove it before final cleanup.
 - To audit whether an existing rule is actually used, combine static search
   with a temporary-removal probe: copy `emdash3_2.lp`, remove only that rule,
   run a bounded `lambdapi check`, and inspect the first failing rule/assertion.

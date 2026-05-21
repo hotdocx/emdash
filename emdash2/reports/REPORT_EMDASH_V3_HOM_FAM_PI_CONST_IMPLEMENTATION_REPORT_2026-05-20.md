@@ -1405,6 +1405,49 @@ This was used to audit the terminal ordinary-transfor collapse above; the first
 failure localized the dependency to the `piapp1_int_tgt_transf -> piapp1_func`
 fold.
 
+Review cleanup note, 2026-05-22: the line-by-line review through the ordinary
+transfor block also produced a small final-cleanup pass. Redundant explicit
+arguments were removed from several already-stable `comp_fapp0`,
+`comp_cat_fapp0`, and `Transf_cat` expressions around the
+`tapp1_int_func_transf` block. This is the intended final style when bounded
+checking shows that Lambdapi inference recovers the omitted arguments reliably.
+During probes and debugging, however, spelling those implicit arguments remains
+useful because it exposes inferred categories, endpoints, and family indices in
+error messages.
+
+The same review removed the v3.1/v2-style helper:
+
+```text
+unif_rule Obj (Fibre_cat E k) ≡ Obj (Fibre_cat E' k')
+  -> [ E ≡ E'; k ≡ k' ]
+```
+
+The file still typechecks without it. The removal is semantically preferable:
+`Fibre_cat E k` is defined notation for `fapp0 E k`, and equality of the object
+categories of two fibres should not force equality of the whole family and the
+base index. If such a helper is reintroduced to unblock a probe, it should be
+treated as temporary scaffolding and removed or replaced by a smaller
+computation rule before final cleanup.
+
+The review also confirmed that `tapp1_fapp0` is currently only a reserved
+surface head in `emdash3_2.lp`; no later rule or assertion depends on it yet.
+Its intended meaning is still clear: it should be the capped endpoint obtained
+by projecting the internal ordinary action
+`tapp1_int_func_transf`. The expected cascade is:
+
+```text
+tapp1_int_func_transf
+  -> fapp0 at ϵ gives tapp1_int_fapp0_transf ϵ
+  -> project the resulting transfor at X
+  -> project the resulting transfor at Y
+  -> apply the resulting hom functor to f
+  -> tapp1_fapp0 ϵ f
+```
+
+Future work that promotes the external ordinary naturality API should add this
+cascade with focused assertions, instead of leaving `tapp1_fapp0` as a bare
+declaration indefinitely.
+
 The whole-family terminal/constant `homd_int` question was also probed directly:
 
 ```text
