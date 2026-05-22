@@ -603,10 +603,12 @@ for constant families.
 
 ### Mixed-Variance Constructors
 
-The already-present v3.1 mixed-variance constructors were preserved in v3.2:
+The already-present v3.1 mixed-variance constructors were preserved in v3.2,
+with current v3.2 names:
 
 - `Functor_catd`
-- `Functor_catd_mix_func`
+- `Functor_catd_func`
+- `Functor_catd_fapp0_func`
 - `Hom_catd`
 - `Transf_catd`
 - bridges:
@@ -1563,3 +1565,63 @@ current recommendation remains to keep `homd_int` constant and expose
 terminal/constant behavior through the existing stable projection rules. Any
 future whole-family form should be treated as a deliberate redesign, not as a
 mechanical completion of the current plan.
+
+Follow-up mixed-variance review, 2026-05-22: after the line-by-line review
+reached the internal edge/presheaf block, a focused probe marked the following
+heads injective and typechecked quickly:
+
+```text
+Functor_catd
+Functor_catd_func
+Functor_catd_fapp0_func
+Hom_catd
+Transf_catd
+Edge_catd_func
+Presheaf_catd_func
+HomPresheaf_catd_func
+```
+
+The implemented policy is deliberately narrower than the probe.  The primitive
+mixed-variance constructor heads are now `injective symbol`:
+
+```text
+Functor_catd
+Functor_catd_func
+Functor_catd_fapp0_func
+Hom_catd
+Transf_catd
+```
+
+This is the same syntactic-kernel reading used in the earlier injectivity pass:
+these heads are constructors/discriminators for the normalization layer, so
+unification may recover their displayed-family arguments from equality of
+constructor-headed terms.  This does not assert a categorical equivalence-level
+injectivity theorem.
+
+The edge/presheaf classifier names are intentionally kept as ordinary defined
+symbols for now:
+
+```text
+Edge_catd_func
+Presheaf_catd_func
+HomPresheaf_catd_func
+```
+
+They are named `comp_cat_fapp0` pipelines rather than primitive constructors.
+Even though the probe accepted injectivity, making them injective would add a
+stronger unification contract than the current rewrite path needs.
+
+Naming cleanup from this review:
+
+```text
+Functor_catd_mix_func       -> Functor_catd_func
+Functor_catd_mix_fapp0_func -> Functor_catd_fapp0_func
+Edge_catd_fam               -> Edge_catd_func
+HomPresheaf_catd            -> HomPresheaf_catd_func
+```
+
+The rename was applied only to `emdash3_2.lp`, not repo-wide, so the original
+plan remains an untouched historical baseline.  `Presheaf_catd_func` was kept
+as-is because it is already a functor-valued classifier; shortening it to
+`Presheaf_catd` would make it look like a displayed-family object rather than
+the functor package it actually denotes.

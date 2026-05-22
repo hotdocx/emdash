@@ -50,7 +50,7 @@ flag "print_meta_args" on;
       all of them.  Omitting only one brittle argument is often not enough.
     - Be especially cautious when an implicit argument contains a reducible
       subterm such as `fapp0 F x`, `comp_cat_fapp0 F G`, `Functor_catd ...`,
-      `HomPresheaf_catd ...`, or `Homd_target_catd ...`, or a compound
+      `HomPresheaf_catd_func ...`, or `Homd_target_catd ...`, or a compound
       canonical expression such as `Op_cat (Hom_cat ...)`.
     - Prefer small projection rules with stable heads over one large nested
       redex. The homd projection path is split into `tapp0_fapp0` and `fapp0`
@@ -128,9 +128,9 @@ flag "print_meta_args" on;
       contraction.
     - `Sigma_cat E`: object decoding is Sigma-shaped; homs between total
       objects route through the endpoint `homd_`.
-    - `Functor_catd` / `Functor_catd_mix_func`: mixed-variance family formation
+    - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
       is functorial in family arguments, not just an object-level recipe.
-    - `Edge_catd_fam` / `HomPresheaf_catd`: internal representable/presheaf-family
+    - `Edge_catd_func` / `HomPresheaf_catd_func`: internal representable/presheaf-family
       classifiers.  Keep them as named constructor pipelines; do not inline
       them into rewrite-rule LHSs.
     - `Homd_*`: source/section/target family names are readability and
@@ -798,7 +798,14 @@ rule @comp_cat_fapp0 _ _ _
 // 8. Mixed-variance family functor
 // -------------------------------------------------------------------------------------------------
 
-symbol Functor_catd [K : Cat]
+/*
+  These mixed-variance heads are stable syntactic constructors.  Their
+  injectivity is a kernel contract used by unification, not a claim that the
+  corresponding categorical data are invariantly recoverable up to equivalence.
+  The `_func` suffix is reserved for functor-valued constructor packages.
+*/
+
+injective symbol Functor_catd [K : Cat]
   (A : τ (Catd (Op_cat K)))
   (B : τ (Catd K))
   : τ (Catd K);
@@ -806,23 +813,23 @@ symbol Functor_catd [K : Cat]
 rule @fapp0 $K Cat_cat (@Functor_catd $K $A $B) $k
   ↪ Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k);
 
-symbol Functor_catd_mix_func (K : Cat)
+injective symbol Functor_catd_func (K : Cat)
   : τ (Functor
       (Op_cat (Catd_cat (Op_cat K)))
       (Functor_cat (Catd_cat K) (Catd_cat K)));
 
-symbol Functor_catd_mix_fapp0_func [K : Cat]
+injective symbol Functor_catd_fapp0_func [K : Cat]
   (A : τ (Catd (Op_cat K)))
   : τ (Functor (Catd_cat K) (Catd_cat K));
 
 rule @fapp0 _ _
-      (@Functor_catd_mix_func $K) $A
-  ↪ @Functor_catd_mix_fapp0_func $K $A;
+      (@Functor_catd_func $K) $A
+  ↪ @Functor_catd_fapp0_func $K $A;
 
-rule @fapp0 _ _ (@Functor_catd_mix_fapp0_func $K $A) $B
+rule @fapp0 _ _ (@Functor_catd_fapp0_func $K $A) $B
   ↪ @Functor_catd $K $A $B;
 
-symbol Hom_catd [K : Cat]
+injective symbol Hom_catd [K : Cat]
   (E : τ (Catd K))
   (X : τ (Obj (Pi_cat (Op_catd E))))
   (Y : τ (Obj (Pi_cat E)))
@@ -834,7 +841,7 @@ rule @fapp0 $K Cat_cat (@Hom_catd $K $E $X $Y) $k
       (@piapp0 $K (@Op_catd $K $E) $X $k)
       (@piapp0 $K $E $Y $k);
 
-symbol Transf_catd [K : Cat]
+injective symbol Transf_catd [K : Cat]
   (A : τ (Catd (Op_cat K)))
   (B : τ (Catd K))
   (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B)))))
@@ -856,7 +863,11 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 // 9. Internal edge and presheaf-family classifiers
 // -------------------------------------------------------------------------------------------------
 
-symbol Edge_catd_fam [Z : Cat]
+// These named classifiers are defined composition pipelines.  Keep them named
+// for readability, but do not use them as primitive discriminators unless a
+// later rule genuinely requires that stronger unification contract.
+
+symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ comp_cat_fapp0
      (@op_val_func Z)
@@ -868,13 +879,13 @@ symbol Presheaf_catd_func (K : Cat)
       (Catd_cat K))
 ≔ comp_cat_fapp0
      (@fapp0_func (Catd_cat K) (Catd_cat K) (@Const_catd K Cat_cat))
-     (@Functor_catd_mix_func K);
+     (@Functor_catd_func K);
 
-symbol HomPresheaf_catd [Z : Cat]
+symbol HomPresheaf_catd_func [Z : Cat]
   : τ (Functor Z (Catd_cat (Op_cat Z)))
 ≔ comp_cat_fapp0
      (@Presheaf_catd_func (Op_cat Z))
-     (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_fam Z));
+     (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z));
 
 // -------------------------------------------------------------------------------------------------
 // 10. Directed homd target and internal homd category
@@ -899,7 +910,7 @@ symbol Homd_section_catd [Z : Cat] (E : τ (Catd Z))
 ≔ @Functor_catd
      (Op_cat Z)
      E
-     (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x);
+     (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);
 
 symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
   : τ (Catd Z)
@@ -915,9 +926,9 @@ symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
        (@fapp0
          (Op_cat (Catd_cat Z))
          (Functor_cat (Catd_cat (Op_cat Z)) (Catd_cat (Op_cat Z)))
-         (@Functor_catd_mix_func (Op_cat Z))
+         (@Functor_catd_func (Op_cat Z))
          E))
-     (@HomPresheaf_catd Z);
+     (@HomPresheaf_catd_func Z);
 
 symbol Homd_cat [Z : Cat] (E : τ (Catd Z)) : Cat
 ≔ @Transf_cat Z Cat_cat (@Homd_source_catd Z E) (@Homd_target_catd Z E);
@@ -1100,7 +1111,7 @@ symbol homd_tgt_funcd [Z : Cat] [D E : τ (Catd Z)]
   : τ (Functor
         (Fibre_cat D y)
         (Fibre_cat
-          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x)
+          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x)
           y));
 
 // Inner endpoint functor after projecting the identity-specialized
@@ -1112,7 +1123,7 @@ symbol homd_tgt_func [Z : Cat] (E : τ (Catd Z))
   : τ (Functor
         (Fibre_cat E y)
         (Fibre_cat
-          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x)
+          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x)
           y));
 
 rule @homd_tgt_funcd $Z $E $E (@id_funcd $Z $E) $x $u $y
@@ -1124,7 +1135,7 @@ rule @homd_tgt_funcd $Z $E $E (@id_funcd $Z $E) $x $u $y
 rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $x Terminal_obj $y
   ↪ @Obj_func
       (Fibre_cat
-        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd $Z) $x)
+        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd_func $Z) $x)
         $y)
       (@Terminal_catd (Op_cat (Hom_cat $Z $x $y)));
 
@@ -1134,7 +1145,7 @@ rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $x Terminal_obj $y
 rule @homd_tgt_funcd $Z (@Const_catd $Z Terminal_cat) $E $s $x $u $y
   ↪ @Obj_func
       (Fibre_cat
-        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd $Z) $x)
+        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd_func $Z) $x)
         $y)
       (@homd_
         $Z
@@ -1776,7 +1787,7 @@ assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) ⊢
     (@fapp0
       (Op_cat (Catd_cat (Op_cat K)))
       (Functor_cat (Catd_cat K) (Catd_cat K))
-      (@Functor_catd_mix_func K)
+      (@Functor_catd_func K)
       A)
     B
     ≡ Functor_catd A B;
@@ -1814,12 +1825,12 @@ assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
 
 assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat
-    (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_catd_fam Z) x)
+    (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z) x)
     y
     ≡ Op_cat (Hom_cat Z x y);
 
 assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢
-  Fibre_cat (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x) y
+  Fibre_cat (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x) y
     ≡ Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat;
 
 assert [Z : Cat] (E : τ (Catd Z)) ⊢
@@ -1830,14 +1841,14 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
     ≡ @Functor_catd
         (Op_cat Z)
         E
-        (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x);
+        (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);
 
 assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
     ≡ Pi_cat
         (Functor_catd
           E
-          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x));
+          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x));
 
 assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
@@ -2155,7 +2166,7 @@ assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
     (@Functor_catd
       (Op_cat Z)
       D
-      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x))
+      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x))
     (@homd_src_secd Z D E FF x u)
     y
     ≡ @homd_tgt_funcd Z D E FF x u y;
@@ -2168,7 +2179,7 @@ assert [Z : Cat] (E : τ (Catd Z))
     (@Functor_catd
       (Op_cat Z)
       E
-      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd Z) x))
+      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x))
     (@homd_src_sec Z E x u)
     y
     ≡ @homd_tgt_func Z E x u y;
@@ -2184,7 +2195,7 @@ assert [K : Cat] (x y : τ (Obj K)) ⊢
   @homd_tgt_func K (@Const_catd K Terminal_cat) x Terminal_obj y
     ≡ @Obj_func
         (Fibre_cat
-          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd K) x)
+          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd_func K) x)
           y)
         (@Terminal_catd (Op_cat (Hom_cat K x y)));
 
@@ -2194,7 +2205,7 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
   @homd_tgt_funcd K (@Const_catd K Terminal_cat) E s x u y
     ≡ @Obj_func
         (Fibre_cat
-          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd K) x)
+          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd_func K) x)
           y)
         (@homd_
           K
@@ -2216,7 +2227,7 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
     y
     ≡ @Obj_func
         (Fibre_cat
-          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd K) x)
+          (@fapp0 K (Catd_cat (Op_cat K)) (@HomPresheaf_catd_func K) x)
           y)
         (@homd_
           K
