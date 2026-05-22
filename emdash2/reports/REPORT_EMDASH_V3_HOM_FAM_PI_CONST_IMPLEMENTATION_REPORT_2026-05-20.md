@@ -623,33 +623,38 @@ with current v3.2 names:
 comp_cat_fapp0 (fapp0_func u) (fapp1_func E x y)
 ```
 
-- Added external `fib_cov_transf E x u`.
+- Added external injective `fib_cov_transf E x u`.
 - Added its component fold:
 
 ```text
 tapp0_fapp0 y (fib_cov_transf E x u) -> fib_cov_tapp0_func E x y u
 ```
 
-- Converted `fib_cov_tapp0_fapp0` from the v3.1 primitive strict-transport head into a defined object projection:
+- Removed the v3.1 primitive strict-transport head. The object-level transport
+  is now kept inline as the projection:
 
 ```text
-fib_cov_tapp0_fapp0 E x y f u :=
-  fapp0 (fib_cov_tapp0_func E x y u) f
+fapp0 (fib_cov_tapp0_func E x y u) f
 ```
 
 - Removed the old generic strict identity/composition transport rules for arbitrary `E`.
 - Added constant-family regression assertions:
   - `fib_cov_tapp0_func (Const_catd K A) x y u -> Const_func ... A u`
-  - `fib_cov_tapp0_fapp0 (Const_catd K A) x y f u -> u`
+  - `fapp0 (fib_cov_tapp0_func (Const_catd K A) x y u) f -> u`
 
 ### Most-Internal `fib_cov` Package
 
 - Added the internal fibre-transport package requested by the plan:
   - `FibCov_target_catd`
-  - `FibCov_cat`
-  - `FibCov`
   - `fib_cov_int`
   - `fib_cov_src_func`
+- `fib_cov_int` is typed directly as:
+
+```text
+fib_cov_int E : Functord E (FibCov_target_catd E)
+```
+
+  The older `FibCov_cat` / `FibCov` aliases were removed as redundant wrappers.
 - Added projection folds:
 
 ```text
@@ -879,7 +884,7 @@ piapp1_fapp0 E s f
 
 ```text
 piapp1_src_obj E s f
-  := fib_cov_tapp0_fapp0 E f (piapp0 s x)
+  := fapp0 (fib_cov_tapp0_func E x y (piapp0 s x)) f
 ```
 
 - Added assertions that the endpoint category of `piapp1_fapp0` unfolds to:
@@ -1185,7 +1190,7 @@ implements the main architecture changes:
 
 - `Terminal_catd` as a `Const_catd` alias.
 - `piapp0` as defined notation.
-- `fib_cov_tapp0_fapp0` as a defined projection.
+- inline object-level fibre transport through `fapp0 (fib_cov_tapp0_func ...)`.
 - most-internal `fib_cov_int` projection package.
 - endpoint `homd_` as a defined `hom_con` endpoint.
 - generalized endpoint/projection path through `homd_ [D E] FF`.
@@ -1669,3 +1674,40 @@ The existing names `Edge_catd_func`, `Presheaf_catd_func`, and
 `Edge_catd_func` avoids collision with `Hom_catd`, `Presheaf_catd_func` remains
 generic, and `HomPresheaf_catd_func` names the hom-specific specialization used
 by the homd target block.
+
+Follow-up `fib_cov` cleanup, 2026-05-22: the later review reached the
+covariant fibre-transport block and applied the same alias policy as the homd
+cleanup.
+
+Deleted aliases from `emdash3_2.lp`:
+
+```text
+FibCov_cat E := Transf_cat E (FibCov_target_catd E)
+FibCov E     := Obj (FibCov_cat E)
+fib_cov_tapp0_fapp0 E x y f u
+             := fapp0 (fib_cov_tapp0_func E x y u) f
+```
+
+`fib_cov_int` is now typed directly as a displayed functor:
+
+```text
+fib_cov_int E : Functord E (FibCov_target_catd E)
+```
+
+The formal reading is documented locally in `emdash3_2.lp`:
+
+```text
+FibCovTarget_E[x]            = Transf_cat(hom_Z(x,-), E)
+fib_cov_int(E)               : E -> FibCovTarget_E
+fib_cov_src_func(E,x)        : E[x] -> FibCovTarget_E[x]
+fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
+fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) -> E[y]
+fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
+```
+
+`fib_cov_transf` is now `injective symbol`. This follows the strict
+constructor-package reading used elsewhere in v3.2: the external transfor is the
+eta-expansion package for `u`, and unification may recover its explicit
+parameters from equality of constructor-headed terms. The defined semantic
+helper `fib_cov_tapp0_func` remains non-injective because it unfolds to the
+ordinary functor-action composite.

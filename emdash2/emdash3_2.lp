@@ -938,6 +938,21 @@ constant symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
 // 11. Endpoint normal forms for Sigma homs
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Covariant fibre-transport architecture:
+
+    FibCovTarget_E[x]            = Transf_cat(hom_Z(x,-), E)
+    fib_cov_int(E)               : E -> FibCovTarget_E
+    fib_cov_src_func(E,x)        : E[x] -> FibCovTarget_E[x]
+    fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
+    fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) -> E[y]
+    fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
+
+  `fib_cov_tapp0_func` remains the functor-level normal form. The object-level
+  action is just `fapp0 (fib_cov_tapp0_func E x y u) f`, so it is not named by
+  a separate `fib_cov_tapp0_fapp0` alias in v3.2.
+*/
+
 symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (u : τ (Obj (Fibre_cat E x)))
@@ -946,7 +961,7 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
      (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
-symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
+injective symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   : τ (@Transf K Cat_cat (@hom_ K K (@id_func K) x) E);
@@ -958,13 +973,8 @@ symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
     (Op_cat K)
     (@hom_int K K (@id_func K));
 
-symbol FibCov_cat [K : Cat] (E : τ (Catd K)) : Cat
-≔ @Transf_cat K Cat_cat E (@FibCov_target_catd K E);
-
-symbol FibCov [K : Cat] (E : τ (Catd K)) : Grpd
-≔ Obj (@FibCov_cat K E);
-
-constant symbol fib_cov_int : Π [K : Cat], Π (E : τ (Catd K)), τ (FibCov E);
+constant symbol fib_cov_int : Π [K : Cat], Π (E : τ (Catd K)),
+  τ (Functord E (@FibCov_target_catd K E));
 
 symbol fib_cov_src_func [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
@@ -992,15 +1002,6 @@ rule @tapp0_fapp0
       $y
       (@fib_cov_transf $K $E $x $u)
   ↪ @fib_cov_tapp0_func $K $E $x $y $u;
-
-symbol fib_cov_tapp0_fapp0 [K : Cat] (E : τ (Catd K))
-  [x y : τ (Obj K)]
-  (f : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-  : τ (Obj (Fibre_cat E y))
-≔ fapp0
-     (@fib_cov_tapp0_func K E x y u)
-     f;
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -1212,7 +1213,9 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (f : τ (Hom K x y))
   : τ (Obj (Fibre_cat E y))
-≔ @fib_cov_tapp0_fapp0 K E x y f (@piapp0 K E s x);
+≔ fapp0
+     (@fib_cov_tapp0_func K E x y (@piapp0 K E s x))
+     f;
 
 symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1834,10 +1837,6 @@ assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
   Fibre_cat (@FibCov_target_catd K E) x
     ≡ @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E;
 
-assert [K : Cat] (E : τ (Catd K)) ⊢
-  @FibCov_cat K E
-    ≡ @Transf_cat K Cat_cat E (@FibCov_target_catd K E);
-
 assert [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K)) ⊢
   @tapp0_fapp0
@@ -2425,15 +2424,6 @@ assert [K : Cat]
         g
         alpha;
 
-assert [K : Cat] (E : τ (Catd K))
-  (x y : τ (Obj K))
-  (u : τ (Obj (Fibre_cat E x)))
-  (f : τ (Hom K x y)) ⊢
-  @fapp0 (Hom_cat K x y) (Fibre_cat E y)
-    (@fib_cov_tapp0_func K E x y u)
-    f
-    ≡ @fib_cov_tapp0_fapp0 K E x y f u;
-
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢
@@ -2444,7 +2434,7 @@ assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (f : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢
-  @fib_cov_tapp0_fapp0 K (@Const_catd K A) x y f u
+  fapp0 (@fib_cov_tapp0_func K (@Const_catd K A) x y u) f
     ≡ u;
 
 assert [K : Cat] (E : τ (Catd K))
@@ -2456,7 +2446,7 @@ assert [K : Cat] (E : τ (Catd K))
     (@homd_ K E E (@id_funcd K E) x u y v)
     f
     ≡ Hom_cat (Fibre_cat E y)
-        (@fib_cov_tapp0_fapp0 K E x y f u)
+        (fapp0 (@fib_cov_tapp0_func K E x y u) f)
         v;
 
 assert [K : Cat] (E : τ (Catd K))
@@ -2464,7 +2454,7 @@ assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
   (f : τ (Hom K x y)) ⊢
   @piapp1_src_obj K E s x y f
-    ≡ @fib_cov_tapp0_fapp0 K E x y f (@piapp0 K E s x);
+    ≡ fapp0 (@fib_cov_tapp0_func K E x y (@piapp0 K E s x)) f;
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
