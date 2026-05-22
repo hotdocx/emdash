@@ -942,10 +942,7 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (u : τ (Obj (Fibre_cat E x)))
   : τ (Functor (Hom_cat K x y) (Fibre_cat E y))
-≔ @comp_cat_fapp0
-     (Hom_cat K x y)
-     (Functor_cat (Fibre_cat E x) (Fibre_cat E y))
-     (Fibre_cat E y)
+≔ comp_cat_fapp0
      (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
@@ -1001,9 +998,7 @@ symbol fib_cov_tapp0_fapp0 [K : Cat] (E : τ (Catd K))
   (f : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
   : τ (Obj (Fibre_cat E y))
-≔ @fapp0
-     (Hom_cat K x y)
-     (Fibre_cat E y)
+≔ fapp0
      (@fib_cov_tapp0_func K E x y u)
      f;
 
@@ -1018,9 +1013,7 @@ symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
 ≔ @hom_con
      (Fibre_cat E y)
-     (@fapp0
-       (Fibre_cat D y)
-       (Fibre_cat E y)
+     (fapp0
        (@tapp0_fapp0 Z Cat_cat D E y FF)
        v)
      (Hom_cat Z x y)
