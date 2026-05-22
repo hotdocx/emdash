@@ -1711,19 +1711,38 @@ The formal reading is documented locally in `emdash3_2.lp`:
 
 ```text
 FibCovTarget_E[x]            = Transf_cat(hom_Z(x,-), E)
+                              ≡ Functord_cat(hom_Z(x,-), E)
 fib_cov_int(E)               : E -> FibCovTarget_E
 fib_cov_src_func(E,x)        : E[x] -> FibCovTarget_E[x]
-fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
+fib_cov_transf(E,x,u)        : Functord(hom_Z(x,-), E)
 fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) -> E[y]
 fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
 ```
 
+Locally, `->` denotes an ordinary functor and `=>` may still be used in prose
+for the mathematical transfor/natural-transformation reading. Formally, v3.2
+normalizes Cat-valued transfors to displayed functors:
+
+```text
+Transf_cat K Cat_cat F E -> Functord_cat K F E
+Transf     K Cat_cat F E -> Functord     K F E
+```
+
+So `fib_cov_src_func` and `fib_cov_transf` now expose the reduced
+`Functord_cat` / `Functord` heads directly in their Lambdapi declarations. The
+`FibCov_target_catd` fibre assertion was updated to the same reduced target:
+
+```text
+Fibre_cat (FibCov_target_catd E) x
+  ≡ Functord_cat(hom_Z(x,-), E)
+```
+
 `fib_cov_transf` is now `injective symbol`. This follows the strict
-constructor-package reading used elsewhere in v3.2: the external transfor is the
-eta-expansion package for `u`, and unification may recover its explicit
-parameters from equality of constructor-headed terms. The defined semantic
-helper `fib_cov_tapp0_func` remains non-injective because it unfolds to the
-ordinary functor-action composite.
+constructor-package reading used elsewhere in v3.2: the external displayed
+functor is the eta-expansion package for `u`, and unification may recover its
+explicit parameters from equality of constructor-headed terms. The defined
+semantic helper `fib_cov_tapp0_func` remains non-injective because it unfolds to
+the ordinary functor-action composite.
 
 Follow-up identity and homd projection cleanup, 2026-05-23: the review reached
 the identity-specialized dependent-hom projection block and removed the

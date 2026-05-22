@@ -939,11 +939,17 @@ constant symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   Covariant fibre-transport architecture:
 
     FibCovTarget_E[x]            = Transf_cat(hom_Z(x,-), E)
+                                  ≡ Functord_cat(hom_Z(x,-), E)
     fib_cov_int(E)               : E -> FibCovTarget_E
     fib_cov_src_func(E,x)        : E[x] -> FibCovTarget_E[x]
-    fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
+    fib_cov_transf(E,x,u)        : Functord(hom_Z(x,-), E)
     fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) -> E[y]
     fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
+
+  Locally, `->` denotes an ordinary functor and `=>` may still be used in
+  prose for the mathematical transfor/natural-transformation reading. In the
+  formal v3.2 normal form, a Cat-valued transfor is a displayed functor:
+  `Transf_cat K Cat_cat F E` reduces to `Functord_cat K F E`.
 
   `fib_cov_tapp0_func` remains the functor-level normal form. The object-level
   action is just `fapp0 (fib_cov_tapp0_func E x y u) f`, so it is not named by
@@ -961,7 +967,7 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
 injective symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
-  : τ (@Transf K Cat_cat (@hom_ K K (@id_func K) x) E);
+  : τ (@Functord K (@hom_ K K (@id_func K) x) E);
 
 symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
 ≔ @hom_con
@@ -977,7 +983,7 @@ symbol fib_cov_src_func [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   : τ (Functor
       (Fibre_cat E x)
-      (@Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E));
+      (@Functord_cat K (@hom_ K K (@id_func K) x) E));
 
 rule @tapp0_fapp0
       $K
@@ -1776,7 +1782,11 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
 
 assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
   Fibre_cat (@FibCov_target_catd K E) x
-    ≡ @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E;
+    ≡ @Functord_cat K (@hom_ K K (@id_func K) x) E;
+
+assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
+  @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E
+    ≡ @Functord_cat K (@hom_ K K (@id_func K) x) E;
 
 assert [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K)) ⊢
