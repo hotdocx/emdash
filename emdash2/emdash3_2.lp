@@ -858,10 +858,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 
 symbol Edge_catd_fam [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
-≔ @comp_cat_fapp0
-     (Op_cat Z)
-     (Functor_cat Z Cat_cat)
-     (Functor_cat Z Cat_cat)
+≔ comp_cat_fapp0
      (@op_val_func Z)
      (@hom_int Z Z (@id_func Z));
 
@@ -869,19 +866,13 @@ symbol Presheaf_catd_func (K : Cat)
   : τ (Functor
       (Op_cat (Catd_cat (Op_cat K)))
       (Catd_cat K))
-≔ @comp_cat_fapp0
-     (Op_cat (Catd_cat (Op_cat K)))
-     (Functor_cat (Catd_cat K) (Catd_cat K))
-     (Catd_cat K)
+≔ comp_cat_fapp0
      (@fapp0_func (Catd_cat K) (Catd_cat K) (@Const_catd K Cat_cat))
      (@Functor_catd_mix_func K);
 
 symbol HomPresheaf_catd [Z : Cat]
   : τ (Functor Z (Catd_cat (Op_cat Z)))
-≔ @comp_cat_fapp0
-     Z
-     (Op_cat (Catd_cat Z))
-     (Catd_cat (Op_cat Z))
+≔ comp_cat_fapp0
      (@Presheaf_catd_func (Op_cat Z))
      (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_fam Z));
 
