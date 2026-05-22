@@ -914,20 +914,10 @@ symbol Homd_section_catd [Z : Cat] (E : τ (Catd Z))
 
 symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
   : τ (Catd Z)
-≔ @comp_cat_fapp0
-     Z
-     (Catd_cat (Op_cat Z))
-     Cat_cat
-     (@comp_cat_fapp0
-       (Catd_cat (Op_cat Z))
-       (Catd_cat (Op_cat Z))
-       Cat_cat
+≔ comp_cat_fapp0
+     (comp_cat_fapp0
        (@Pi_func (Op_cat Z))
-       (@fapp0
-         (Op_cat (Catd_cat Z))
-         (Functor_cat (Catd_cat (Op_cat Z)) (Catd_cat (Op_cat Z)))
-         (@Functor_catd_func (Op_cat Z))
-         E))
+       (fapp0 (@Functor_catd_func (Op_cat Z)) E))
      (@HomPresheaf_catd_func Z);
 
 symbol Homd_cat [Z : Cat] (E : τ (Catd Z)) : Cat
