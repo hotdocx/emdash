@@ -717,17 +717,20 @@ identity-specialized case:
 homd_ E E (id_funcd E) x u y v
 ```
 
-- Generalized the internal projection path:
-  - `homd_src_funcd`
-  - `homd_src_secd`
-  - `homd_tgt_funcd`
-- Changed the `homd_int` first projection rule to target the generalized
-  `homd_src_funcd` head.
-- Kept the old identity-only heads as stable compatibility normal forms:
+- Generalized the internal projection path. After the later cleanup, the
+  generalized heads carry the simple names:
   - `homd_src_func`
   - `homd_src_sec`
   - `homd_tgt_func`
-  - `homd_`
+- Changed the `homd_int` first projection rule to target the generalized
+  `homd_src_func` head.
+- Removed the old identity-only compatibility heads and the migration suffix
+  names:
+  - `homd_src_funcd`
+  - `homd_src_secd`
+  - `homd_tgt_funcd`
+- Identity cases are now written explicitly by passing `id_funcd E` to the
+  generalized heads. The endpoint remains `homd_`.
 - Added the displayed identity component fold:
 
 ```text
@@ -735,10 +738,10 @@ tapp0_fapp0 y (id_funcd E) -> id_func (E[y])
 ```
 
 - Added assertions that:
-  - `homd_int FF` projects to `homd_src_funcd FF`,
-  - `homd_src_funcd FF` projects to `homd_src_secd FF`,
-  - `piapp0 (homd_src_secd FF) y` projects to `homd_tgt_funcd FF`,
-  - `fapp0 (homd_tgt_funcd FF) v` projects to generalized `homd_ FF`,
+  - `homd_int FF` projects to `homd_src_func FF`,
+  - `homd_src_func FF` projects to `homd_src_sec FF`,
+  - `piapp0 (homd_src_sec FF) y` projects to `homd_tgt_func FF`,
+  - `fapp0 (homd_tgt_func FF) v` projects to generalized `homd_ FF`,
   - the identity specialization `homd_ (id_funcd E)` unfolds to the old endpoint
     body.
 
@@ -788,6 +791,12 @@ tapp1_int_fapp0_transf F F (id (Functor_cat A B) F)
 ```
 
 No external surface `fdapp1_*` or `tdapp1_*` heads were added in this pass.
+
+- Later review promoted the stable identity-package heads to constants:
+  `id_funcd`, `id_transfd`, and `id_func` are now `constant symbol`s. The base
+  `id` head remains `injective symbol`, not `constant symbol`, because it is the
+  head of rewrite rules such as `id (Catd_cat K) E -> id_funcd E` and
+  `id Cat_cat A -> id_func A`.
 
 ### Derived Displayed Components `tdapp0*`
 
@@ -844,8 +853,8 @@ tapp0_fapp0 x (Op_funcd FF)
   `homd_int`:
 
 ```text
-Fibre_func (homd_int FF) x -> homd_src_funcd FF x
-fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_secd FF x u
+Fibre_func (homd_int FF) x -> homd_src_func FF x
+fapp0 (Fibre_func (homd_int FF) x) u -> homd_src_sec FF x u
 ```
 
 - Probed and later retained the pointwise displayed-composition projection:
@@ -928,13 +937,14 @@ fdapp1_int_transfd K (Const_catd K Terminal_cat) E s
 - Added projected terminal-source normal forms for the homd spine:
 
 ```text
-homd_src_func (Const_catd K Terminal_cat) x
-  -> Obj_func (homd_src_sec ... Terminal_obj)
+homd_src_func D (Const_catd K Terminal_cat) FF x
+  -> Obj_func (homd_src_sec D (Const_catd K Terminal_cat) FF x Terminal_obj)
 
-homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
+homd_tgt_func (Const_catd K Terminal_cat) (Const_catd K Terminal_cat)
+  (id_funcd (Const_catd K Terminal_cat)) x Terminal_obj y
   -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
 
-homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+homd_tgt_func (Const_catd K Terminal_cat) E s x u y
   -> Obj_func (homd_ E E (id_funcd E) x u y (piapp0 s y))
 ```
 
@@ -942,7 +952,7 @@ homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
   `homd_int (id_funcd (Const_catd K Terminal_cat))` reduces through these
   projected normal forms. These are intentionally not direct whole-family
   `homd_int` or endpoint `homd_` rewrite rules.
-- Added assertions that `piapp0 (homd_src_secd (Const_catd K Terminal_cat) E s
+- Added assertions that `piapp0 (homd_src_sec (Const_catd K Terminal_cat) E s
   x u) y` reduces through the generalized terminal-source normal form above,
   and that applying the resulting `Obj_func` at `Terminal_obj` reaches the
   endpoint family used by `piapp1_func`.
@@ -966,7 +976,7 @@ Hom_cat (Pi_cat E) s t -> Transfd_cat (Const_catd K Terminal_cat) E s t
   with `Transf_cat s t`.
 - Added the late displayed-composition fibre projection with the correct `E`/`C`
   outer slots, plus assertions that the specialized `piapp1` target object first
-  reduces to `homd_src_secd ... (piapp0 s x)` and then evaluates to the
+  reduces to `homd_src_sec ... (piapp0 s x)` and then evaluates to the
   `homd_ E E (id_funcd E) ...` family used by `piapp1_func`.
 - Added a type assertion showing that the next projected component,
   `tapp0_fapp0 Terminal_obj (Fibre_transf_app (fdapp1_int_fibre_app ...) y
@@ -1007,7 +1017,7 @@ The latest passes settled these prerequisites for this fold:
   `Transfd_cat` infrastructure.
 - the concrete displayed-composition target object needed by the terminal-source
   path now reduces through the late pointwise projection to
-  `homd_src_secd (Const_catd K Terminal_cat) E s x (piapp0 s x)`, and evaluating
+  `homd_src_sec (Const_catd K Terminal_cat) E s x (piapp0 s x)`, and evaluating
   that section at `y` and `Terminal_obj` reaches the `homd_` family used by
   `piapp1_func`.
 - the next projected component has the exact `Obj (Pi_cat (homd_ ...))` type of
@@ -1247,11 +1257,12 @@ updated, and the `homd_funcd_` symbol was removed.
    computation spine:
 
 ```text
-homd_int -> homd_src_funcd -> homd_src_secd -> homd_tgt_funcd -> homd_
+homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_
 ```
 
-The identity-specialized helper heads `homd_src_func`, `homd_src_sec`, and
-`homd_tgt_func` remain compatibility normal forms only.
+The previous identity-specialized helper heads with these short names were
+removed. The short names now refer to the generalized heads, and identity
+specializations are written explicitly with `id_funcd E`.
 
 5. Completed for the current concrete use: do not keep the rejected `D`/`C`
    displayed-composition projection rule. The semantically correct `E`/`C`
@@ -1288,25 +1299,27 @@ Focused assertions now validate that the direct specialization and the
    now implemented by stable intermediate heads. No broad whole-family
    terminal/constant `homd_int` rule was needed for this fold.
 
-9. Partially completed: after the internal `piapp1_int` witness fold became
-   stable, add narrow projected terminal-source normal forms for the existing
-   `homd_int` spine. The current file now reduces:
+9. Completed for the current object-level cascade: after the internal
+   `piapp1_int` witness fold became stable, add narrow projected
+   terminal-source normal forms for the existing `homd_int` spine. The current
+   file now reduces:
 
 ```text
-homd_src_func (Const_catd K Terminal_cat) x
-  -> Obj_func (homd_src_sec ... Terminal_obj)
+homd_src_func D (Const_catd K Terminal_cat) FF x
+  -> Obj_func (homd_src_sec D (Const_catd K Terminal_cat) FF x Terminal_obj)
 
-homd_tgt_func (Const_catd K Terminal_cat) x Terminal_obj y
+homd_tgt_func (Const_catd K Terminal_cat) (Const_catd K Terminal_cat)
+  (id_funcd (Const_catd K Terminal_cat)) x Terminal_obj y
   -> Obj_func (Terminal_catd (Op_cat (Hom_cat K x y)))
 
-homd_tgt_funcd (Const_catd K Terminal_cat) E s x u y
+homd_tgt_func (Const_catd K Terminal_cat) E s x u y
   -> Obj_func (homd_ E E (id_funcd E) x u y (piapp0 s y))
 ```
 
 These rules are enough to expose the terminal source and inner terminal
 endpoint through projections, while avoiding a broad whole-family `homd_int`
-rule. The generalized `homd_tgt_funcd` terminal-source rule is also validated
-through the `piapp0 (homd_src_secd ...) y` cascade.
+rule. The generalized `homd_tgt_func` terminal-source rule is also validated
+through the `piapp0 (homd_src_sec ...) y` cascade.
 
 10. Removed: do not keep the plan-divergent `piapp1_int_tgt_sec`,
     `piapp1_int_fibre_transf`, or `piapp1_int_fibre_app` aliases, and do not keep
@@ -1342,7 +1355,7 @@ fdapp1_int_transfd
   -> homd_int terminal/constant projected normal forms
 ```
 
-    The generalized terminal-source `homd_tgt_funcd` step, the `Hom_cat
+    The generalized terminal-source `homd_tgt_func` step, the `Hom_cat
     (Pi_cat E)` section-hom bridge, the terminal `Transf_cat` collapse, and the
     late displayed-composition projection together expose the target. The final
     object-level fold is:
@@ -1711,3 +1724,89 @@ eta-expansion package for `u`, and unification may recover its explicit
 parameters from equality of constructor-headed terms. The defined semantic
 helper `fib_cov_tapp0_func` remains non-injective because it unfolds to the
 ordinary functor-action composite.
+
+Follow-up identity and homd projection cleanup, 2026-05-23: the review reached
+the identity-specialized dependent-hom projection block and removed the
+remaining migration heads that existed only to bridge from `id_funcd` to the
+general displayed-functor form.
+
+Identity package heads:
+
+```text
+id_funcd    : Functord E E
+id_transfd  : Transfd FF FF
+id_func     : Functor A A
+```
+
+are now declared `constant symbol`. This is appropriate because they are stable
+constructor packages and are used on rewrite-rule left-hand sides. The ordinary
+category identity `id` remains `injective symbol`, not `constant symbol`,
+because it is itself a rewrite head:
+
+```text
+id (Catd_cat K) E -> id_funcd E
+id (Functord_cat E D) FF -> id_transfd FF
+id Cat_cat A -> id_func A
+```
+
+The old identity-only homd projection heads were deleted:
+
+```text
+homd_src_func E x
+homd_src_sec E x u
+homd_tgt_func E x u y
+```
+
+The generalized migration names were then promoted to the simple names:
+
+```text
+homd_src_funcd -> homd_src_func
+homd_src_secd  -> homd_src_sec
+homd_tgt_funcd -> homd_tgt_func
+```
+
+So the current projection spine is:
+
+```text
+homd_int FF
+  -> homd_src_func FF x
+  -> homd_src_sec FF x u
+  -> homd_tgt_func FF x u y
+  -> homd_ FF x u y v
+```
+
+Identity-specialized uses are no longer separate compatibility normal forms.
+They are written directly as applications of the generalized heads to
+`id_funcd E`, for example:
+
+```text
+homd_src_func E E (id_funcd E) x
+homd_src_sec E E (id_funcd E) x u
+homd_tgt_func E E (id_funcd E) x u y
+homd_ E E (id_funcd E) x u y v
+```
+
+The terminal-source source-projection rule was generalized from the old
+identity-only form:
+
+```text
+homd_src_func D (Const_catd K Terminal_cat) FF x
+  -> Obj_func
+       (Pi_cat (Homd_target_section_catd D x))
+       (homd_src_sec D (Const_catd K Terminal_cat) FF x Terminal_obj)
+```
+
+This keeps the useful projected terminal normal form while avoiding a broad
+whole-family `homd_int` rewrite. The existing terminal-source target projection
+now lives under the generalized `homd_tgt_func` name:
+
+```text
+homd_tgt_func (Const_catd K Terminal_cat) E s x u y
+  -> Obj_func (homd_ E E (id_funcd E) x u y (piapp0 s y))
+```
+
+Focused probes before the edit confirmed that promoting `id_funcd`,
+`id_transfd`, and `id_func` to constants typechecks; making `id` constant does
+not typecheck because a constant symbol cannot be used as a rewrite-rule head.
+The cleanup was then applied to `emdash3_2.lp`; the focused check
+`timeout 30s lambdapi check -w emdash3_2.lp` passes after the rename/removal.
