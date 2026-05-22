@@ -419,7 +419,7 @@ that two-argument surface. The useful computed normal forms are:
 Fibre_cat (Const_catd (Op_cat K) Terminal_cat) y
   -> Terminal_cat
 
-Fibre_cat (Homd_section_catd K (Const_catd K Terminal_cat) x) y
+Fibre_cat (Homd_target_section_catd K (Const_catd K Terminal_cat) x) y
   -> Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y)))
 
 Fibre_func ... (homd_src_sec ... Terminal_obj) y
@@ -1625,3 +1625,46 @@ plan remains an untouched historical baseline.  `Presheaf_catd_func` was kept
 as-is because it is already a functor-valued classifier; shortening it to
 `Presheaf_catd` would make it look like a displayed-family object rather than
 the functor package it actually denotes.
+
+Follow-up homd target naming cleanup, 2026-05-22: the later review reached the
+`homd_int` target block and removed the remaining v3.1-era aliases that no
+longer describe the v3.2 architecture.
+
+Deleted aliases from `emdash3_2.lp`:
+
+```text
+Homd_source_catd E := Op_catd E
+Homd_cat E        := Transf_cat (Op_catd E) (Homd_target_catd E)
+Homd E            := Obj (Homd_cat E)
+```
+
+`Homd_source_catd` was inlined as `Op_catd E`. `Homd_cat` and `Homd` were
+obsolete because v3.2 `homd_int` is typed directly as a displayed functor:
+
+```text
+homd_int [D E] (FF : Functord D E)
+  : Functord (Op_catd E) (Homd_target_catd D)
+```
+
+The section-family helper was renamed:
+
+```text
+Homd_section_catd -> Homd_target_section_catd
+```
+
+The formal relationship that should guide readers is now stated locally in
+`emdash3_2.lp` and checked by assertion:
+
+```text
+HomdTargetSection_E(x)(y) = Functor_cat(E[y], HomPsh_Z(x)(y))
+HomdTarget_E[x]           = Pi_y HomdTargetSection_E(x)(y)
+
+fapp0 (Homd_target_catd E) x
+  ≡ Pi_cat (Homd_target_section_catd E x)
+```
+
+The existing names `Edge_catd_func`, `Presheaf_catd_func`, and
+`HomPresheaf_catd_func` were kept. They are short classifier/pipeline names:
+`Edge_catd_func` avoids collision with `Hom_catd`, `Presheaf_catd_func` remains
+generic, and `HomPresheaf_catd_func` names the hom-specific specialization used
+by the homd target block.

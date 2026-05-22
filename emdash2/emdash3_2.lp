@@ -133,9 +133,9 @@ flag "print_meta_args" on;
     - `Edge_catd_func` / `HomPresheaf_catd_func`: internal representable/presheaf-family
       classifiers.  Keep them as named constructor pipelines; do not inline
       them into rewrite-rule LHSs.
-    - `Homd_*`: source/section/target family names are readability and
-      assertion handles.  Projection-rule LHSs should keep those inferred
-      source/target family arguments implicit.
+    - `Homd_target_section_catd` / `Homd_target_catd`: target-family
+      readability and assertion handles for `homd_int`.  Projection-rule LHSs
+      should keep inferred source/target family arguments implicit.
     - `homd_` is the generalized endpoint with an explicit displayed functor
       argument. The old one-family endpoint is represented by the identity
       specialization `homd_ (id_funcd E)`.
@@ -888,23 +888,25 @@ symbol HomPresheaf_catd_func [Z : Cat]
      (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z));
 
 // -------------------------------------------------------------------------------------------------
-// 10. Directed homd target and internal homd category
+// 10. Directed homd target and internal homd functor
 // -------------------------------------------------------------------------------------------------
 
 /*
-  Homd architecture note:
-  `Homd_source_catd`, `Homd_section_catd`, and `Homd_target_catd` name the
-  intended source/target families for readability and assertions.  They are
-  not used as required discriminants in the projection-rule LHSs below, because
-  those positions are inferred implicit arguments and may reduce to canonical
-  compound terms before matching.
+  Homd target architecture note:
+
+    Edge_Z(x)(y)              = Hom_Z(x,y)^op
+    HomPsh_Z(x)(y)            = Functor_cat(Hom_Z(x,y)^op, Cat)
+    HomdTargetSection_E(x)(y) = Functor_cat(E[y], HomPsh_Z(x)(y))
+    HomdTarget_E[x]           = Pi_y HomdTargetSection_E(x)(y)
+
+  `Homd_target_section_catd` and `Homd_target_catd` name these target-family
+  expressions for readability and assertions. They are not used as required
+  discriminants in the projection-rule LHSs below, because those positions are
+  inferred implicit arguments and may reduce to canonical compound terms before
+  matching.
 */
 
-symbol Homd_source_catd [Z : Cat] (E : τ (Catd Z))
-  : τ (Catd Z)
-≔ @Op_catd Z E;
-
-symbol Homd_section_catd [Z : Cat] (E : τ (Catd Z))
+symbol Homd_target_section_catd [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   : τ (Catd (Op_cat Z))
 ≔ @Functor_catd
@@ -919,12 +921,6 @@ symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
        (@Pi_func (Op_cat Z))
        (fapp0 (@Functor_catd_func (Op_cat Z)) E))
      (@HomPresheaf_catd_func Z);
-
-symbol Homd_cat [Z : Cat] (E : τ (Catd Z)) : Cat
-≔ @Transf_cat Z Cat_cat (@Homd_source_catd Z E) (@Homd_target_catd Z E);
-
-symbol Homd [Z : Cat] (E : τ (Catd Z)) : Grpd
-≔ Obj (@Homd_cat Z E);
 
 // Keep homd_int constant: terminal-source behavior is exposed through stable
 // projection rules below. Whole-family rewrite probes either fail by type
@@ -1033,14 +1029,14 @@ symbol homd_src_funcd [Z : Cat] [D E : τ (Catd Z)]
   (x : τ (Obj Z))
   : τ (Functor
         (Fibre_cat (@Op_catd Z E) x)
-        (Pi_cat (@Homd_section_catd Z D x)));
+        (Pi_cat (@Homd_target_section_catd Z D x)));
 
 // Component functor after projecting the fully internal homd object at x.
 symbol homd_src_func [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   : τ (Functor
-        (Fibre_cat (@Homd_source_catd Z E) x)
-        (Pi_cat (@Homd_section_catd Z E x)));
+        (Fibre_cat (@Op_catd Z E) x)
+        (Pi_cat (@Homd_target_section_catd Z E x)));
 
 rule @homd_src_funcd $Z $E $E (@id_funcd $Z $E) $x
   ↪ @homd_src_func $Z $E $x;
@@ -1063,14 +1059,14 @@ symbol homd_src_secd [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
-  : τ (Obj (Pi_cat (@Homd_section_catd Z D x)));
+  : τ (Obj (Pi_cat (@Homd_target_section_catd Z D x)));
 
 // Source-fixed projection after evaluating the identity-specialized component
 // functor at u.
 symbol homd_src_sec [Z : Cat] (E : τ (Catd Z))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
-  : τ (Obj (Pi_cat (@Homd_section_catd Z E x)));
+  : τ (Obj (Pi_cat (@Homd_target_section_catd Z E x)));
 
 rule @homd_src_secd $Z $E $E (@id_funcd $Z $E) $x $u
   ↪ @homd_src_sec $Z $E $x $u;
@@ -1089,7 +1085,7 @@ rule fapp0 (@homd_src_func $Z $E $x) $u
 // rewrite while exposing the unique terminal source object.
 rule @homd_src_func $Z (@Const_catd $Z Terminal_cat) $x
   ↪ @Obj_func
-      (Pi_cat (@Homd_section_catd $Z (@Const_catd $Z Terminal_cat) $x))
+      (Pi_cat (@Homd_target_section_catd $Z (@Const_catd $Z Terminal_cat) $x))
       (@homd_src_sec $Z (@Const_catd $Z Terminal_cat) $x Terminal_obj);
 
 // General inner endpoint functor after projecting the source-fixed section at y.
@@ -1159,7 +1155,7 @@ rule @tapp0_fapp0
       $y
       (@homd_src_secd $Z $D $E $FF $x $u)
   ↪ @Obj_func
-      (Fibre_cat (@Homd_section_catd $Z $D $x) $y)
+      (Fibre_cat (@Homd_target_section_catd $Z $D $x) $y)
       (@homd_tgt_funcd $Z $D $E $FF $x $u $y);
 
 // Identity-specialized compatibility fold retained for stable old normal
@@ -1172,7 +1168,7 @@ rule @tapp0_fapp0
       $y
       (@homd_src_sec $Z $E $x $u)
   ↪ @Obj_func
-      (Fibre_cat (@Homd_section_catd $Z $E $x) $y)
+      (Fibre_cat (@Homd_target_section_catd $Z $E $x) $y)
       (@homd_tgt_func $Z $E $x $u $y);
 
 // Constant-family section evaluation follows ordinary functor application.
@@ -1823,11 +1819,8 @@ assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢
   Fibre_cat (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x) y
     ≡ Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat;
 
-assert [Z : Cat] (E : τ (Catd Z)) ⊢
-  @Homd_source_catd Z E ≡ @Op_catd Z E;
-
 assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
-  @Homd_section_catd Z E x
+  @Homd_target_section_catd Z E x
     ≡ @Functor_catd
         (Op_cat Z)
         E
@@ -1842,13 +1835,7 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
 
 assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
-    ≡ Pi_cat (@Homd_section_catd Z E x);
-
-assert [Z : Cat] (E : τ (Catd Z)) ⊢
-  @Homd_cat Z E
-    ≡ @Transf_cat Z Cat_cat
-        (@Op_catd Z E)
-        (@Homd_target_catd Z E);
+    ≡ Pi_cat (@Homd_target_section_catd Z E x);
 
 assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
   Fibre_cat (@FibCov_target_catd K E) x
@@ -2104,7 +2091,7 @@ assert [Z : Cat] (E : τ (Catd Z))
   @tapp0_fapp0
     Z
     Cat_cat
-    (@Homd_source_catd Z E)
+    (@Op_catd Z E)
     (@Homd_target_catd Z E)
     x
     (@homd_int Z E E (@id_funcd Z E))
@@ -2130,7 +2117,7 @@ assert [Z : Cat] (E : τ (Catd Z))
 assert [K : Cat] (x : τ (Obj K)) ⊢
   @homd_src_func K (@Const_catd K Terminal_cat) x
     ≡ @Obj_func
-        (Pi_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x))
+        (Pi_cat (@Homd_target_section_catd K (@Const_catd K Terminal_cat) x))
         (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj);
 
 assert [K : Cat] (x : τ (Obj K)) ⊢
@@ -2145,7 +2132,7 @@ assert [K : Cat] (x : τ (Obj K)) ⊢
       (@id_funcd K (@Const_catd K Terminal_cat)))
     x
     ≡ @Obj_func
-        (Pi_cat (@Homd_section_catd K (@Const_catd K Terminal_cat) x))
+        (Pi_cat (@Homd_target_section_catd K (@Const_catd K Terminal_cat) x))
         (@homd_src_sec K (@Const_catd K Terminal_cat) x Terminal_obj);
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
@@ -2212,7 +2199,7 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   @piapp0
     (Op_cat K)
-    (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+    (@Homd_target_section_catd K (@Const_catd K Terminal_cat) x)
     (@homd_src_secd K (@Const_catd K Terminal_cat) E s x u)
     y
     ≡ @Obj_func
@@ -2248,7 +2235,7 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
   fapp0
     (@piapp0
       (Op_cat K)
-      (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+      (@Homd_target_section_catd K (@Const_catd K Terminal_cat) x)
       (@homd_src_secd
         K
         (@Const_catd K Terminal_cat)
@@ -2675,7 +2662,7 @@ symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K))
   : τ (Hom
-      (Pi_cat (Homd_section_catd (Const_catd K Terminal_cat) x))
+      (Pi_cat (Homd_target_section_catd (Const_catd K Terminal_cat) x))
       (homd_src_sec (Const_catd K Terminal_cat) x Terminal_obj)
       (@homd_src_secd
         K
@@ -2767,7 +2754,7 @@ assert [K : Cat] (E : τ (Catd K))
   fapp0
     (@piapp0
       (Op_cat K)
-      (@Homd_section_catd K (@Const_catd K Terminal_cat) x)
+      (@Homd_target_section_catd K (@Const_catd K Terminal_cat) x)
       (@fapp0
         (Fibre_cat (@Op_catd K (@Const_catd K Terminal_cat)) x)
         (Fibre_cat (@Homd_target_catd K (@Const_catd K Terminal_cat)) x)
