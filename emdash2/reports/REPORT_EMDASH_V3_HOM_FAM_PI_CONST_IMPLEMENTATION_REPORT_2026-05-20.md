@@ -1652,8 +1652,9 @@ The section-family helper was renamed:
 Homd_section_catd -> Homd_target_section_catd
 ```
 
-The formal relationship that should guide readers is now stated locally in
-`emdash3_2.lp` and checked by assertion:
+The formal relationship that should guide readers is now stated immediately
+after the `Homd_target_catd` declaration in `emdash3_2.lp` and checked by
+assertion:
 
 ```text
 HomdTargetSection_E(x)(y) = Functor_cat(E[y], HomPsh_Z(x)(y))

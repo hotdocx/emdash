@@ -922,6 +922,10 @@ symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
        (fapp0 (@Functor_catd_func (Op_cat Z)) E))
      (@HomPresheaf_catd_func Z);
 
+assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
+  @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
+    ≡ Pi_cat (@Homd_target_section_catd Z E x);
+
 // Keep homd_int constant: terminal-source behavior is exposed through stable
 // projection rules below. Whole-family rewrite probes either fail by type
 // mismatch, are rejected because this symbol is constant, or time out once the
@@ -1832,10 +1836,6 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
         (Functor_catd
           E
           (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x));
-
-assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
-  @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
-    ≡ Pi_cat (@Homd_target_section_catd Z E x);
 
 assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
   Fibre_cat (@FibCov_target_catd K E) x
