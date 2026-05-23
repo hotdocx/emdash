@@ -1965,3 +1965,15 @@ Focused probes before the edit confirmed that promoting `id_funcd`,
 not typecheck because a constant symbol cannot be used as a rewrite-rule head.
 The cleanup was then applied to `emdash3_2.lp`; the focused check
 `timeout 30s lambdapi check -w emdash3_2.lp` passes after the rename/removal.
+
+Twenty-fourth continuation update, 2026-05-24: a documentation-only notation
+pass added nearby mathematical-reading comments to the main projection and
+directed-family constructor packages in `emdash3_2.lp`. No Lambdapi symbols,
+rules, definitions, or assertions were changed.
+
+The new comments spell out the intended surface readings for ordinary functor
+projection (`F[x]`, `F[f]`), ordinary and displayed transfor components
+(`ϵ[x]`, `FF[z]`, `ϵ_z`), directed families (`E[k]`, `F^*E`, `Π_k E[k]`,
+`Σ_k E[k]`), mixed-variance family constructors, Sigma maps, the internal
+displayed hom-action package, and the terminal-specialized `piapp1_int` to
+`piapp1_func` projection chain.

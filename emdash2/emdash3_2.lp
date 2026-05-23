@@ -268,6 +268,13 @@ injective symbol Functor (A B : Cat) : Grpd
 
 unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'; $B ≡ $B' ];
 
+/*
+  Mathematical notation:
+    F : A → B                 means F : Functor(A,B)
+    F[x]                      = fapp0 F x
+    F₁[X,Y]                   = fapp1_func F : Hom_A(X,Y) → Hom_B(F[x],F[y])
+    F[f]                      = fapp1_fapp0 F f
+*/
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   τ (Obj A) → τ (Obj B);
 
@@ -558,6 +565,13 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
 rule @Transf_cat Terminal_cat $Y (@Obj_func $Y $u) (@Obj_func $Y $v)
   ↪ Hom_cat $Y $u $v;
 
+/*
+  Mathematical notation:
+    ϵ : F ⇒ G
+    tapp0_func(F,G,Y)         : Transf(F,G) → Hom_B(F[Y],G[Y])
+    ϵ[Y]                      = tapp0_fapp0 Y ϵ
+    (η ∘ ϵ)[Y]                = η[Y] ∘ ϵ[Y]
+*/
 symbol tapp0_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (Y : τ (Obj A)),
   τ (Functor (Transf_cat F G) (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
@@ -674,6 +688,17 @@ assert [A B : Cat] (F : τ (Functor A B)) ⊢
 // 6. Directed Cat-valued family constructors
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Mathematical notation:
+    E[k]                      = Fibre_cat E k
+    F^*E                      = Pullback_catd E F
+    F^*E[a]                   = E[F[a]]
+    Const_catd(K,A)[k]        = A
+    Terminal_catd(K)          = Const_catd(K,Terminal_cat)
+    Op_catd(E)[k]             = E[k]^op
+    Pi_cat(E)                 = Π_k E[k]
+    piapp0(s,k)               = s[k]
+*/
 symbol Fibre_cat [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) : Cat
 ≔ @fapp0 K Cat_cat E k;
 
@@ -782,6 +807,14 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
 // Sigma totalization is a stable constructor package. Its map/projection heads
 // are injective in the syntactic kernel sense: equality of these packaged
 // constructors may recover their displayed-family data.
+/*
+  Mathematical notation:
+    Sigma_cat(E)              = Σ_k E[k]
+    Obj(Sigma_cat(E))         = Σ (k : Obj K), Obj(E[k])
+    Sigma_proj1_func(E)(k,u)  = k
+    Sigma_func[K][E]          = Sigma_cat(E)
+    sigma_map_func(η)(k,u)    = (k, η_k(u))
+*/
 injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
 injective symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
@@ -824,6 +857,11 @@ rule @comp_cat_fapp0 _ _ _
   injectivity is a kernel contract used by unification, not a claim that the
   corresponding categorical data are invariantly recoverable up to equivalence.
   The `_func` suffix is reserved for functor-valued constructor packages.
+
+  Mathematical notation:
+    Functor_catd(A,B)[k]      = Functor_cat(A[k],B[k])
+    Hom_catd(E,X,Y)[k]        = Hom_cat(E[k],X[k],Y[k])
+    Transf_catd(A,B,FF,GG)[k] = Transf_cat(FF[k],GG[k])
 */
 
 injective symbol Functor_catd [K : Cat]
@@ -887,6 +925,12 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 // These named classifiers are defined composition pipelines.  Keep them named
 // for readability, but do not use them as primitive discriminators unless a
 // later rule genuinely requires that stronger unification contract.
+/*
+  Mathematical notation:
+    Edge_Z(x)[y]              = Hom_Z(x,y)^op
+    Presheaf_catd(K)(A)[k]    = Functor_cat(A[k],Cat)
+    HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
+*/
 
 symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -914,6 +958,8 @@ symbol HomPresheaf_catd_func [Z : Cat]
 
 /*
   Homd target architecture note:
+
+  Mathematical notation:
 
     Edge_Z(x)(y)              = Hom_Z(x,y)^op
     HomPsh_Z(x)(y)            = Functor_cat(Hom_Z(x,y)^op, Cat)
@@ -1167,6 +1213,12 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
 /*
   Full section action over a base arrow.
 
+  Mathematical notation:
+    s[x]                      = piapp0 s x
+    s[f]                      = piapp1_fapp0 s f : E(f)(s[x]) → s[y]
+    piapp1_func(s,x,y)[f]     = s[f]
+    piapp1_src_obj(s,f)       = E(f)(s[x])
+
   `piapp1_func` is the section-level package over the base-arrow category.
   The capped object component is defined by ordinary section evaluation, so it
   remains iterable through `Pi_cat` rather than becoming only an object-level
@@ -1208,6 +1260,20 @@ rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
 // 13. Internal displayed hom-action heads
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Mathematical notation:
+    tdapp1_int_func_transfd(FF,GG)
+      : Transfd(FF,GG) → Transfd(homd_int(id_E), homd_int(GG) ∘ FF^op)
+
+    tdapp1_int_fapp0_transfd(ϵ)
+      = the internal displayed hom-action of ϵ
+
+    fdapp1_int_transfd(FF)
+      = tdapp1_int_fapp0_transfd(id_FF)
+
+    piapp1_int(s)
+      = terminal-source specialization of fdapp1_int_transfd(s)
+*/
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
   τ (Functor
@@ -1281,6 +1347,8 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
 /*
   Fibre-level notation for displayed functors and displayed transfors.
 
+  Mathematical notation:
+
     Fibre_func(FF,z)          = FF[z] : E[z] → D[z]
     tdapp0_func(z)            : Transfd(FF,GG) → Transf(FF[z],GG[z])
     tdapp0_fapp0(z,ϵ)         = ϵ_z : FF[z] ⇒ GG[z]
@@ -1344,6 +1412,20 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
 // Stable projection chain from the internal dependent Pi transfor to the
 // external piapp1 package. The intermediate heads avoid rewriting over
 // reducible fibre abbreviations such as `Fibre_transf_app`.
+/*
+  Mathematical notation:
+    piapp1_int(s)[x]
+      -> piapp1_int_src_transf(E,s,x)
+
+    piapp1_int_src_transf(E,s,x)(Terminal_obj)
+      -> piapp1_int_src_app(E,s,x)
+
+    piapp1_int_src_app(E,s,x)[y]
+      -> piapp1_int_tgt_transf(E,s,x,y)
+
+    piapp1_int_tgt_transf(E,s,x,y)(Terminal_obj)
+      -> piapp1_func(E,s,x,y)
+*/
 symbol piapp1_int_src_transf [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K))
