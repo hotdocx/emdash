@@ -1977,3 +1977,46 @@ projection (`F[x]`, `F[f]`), ordinary and displayed transfor components
 `Σ_k E[k]`), mixed-variance family constructors, Sigma maps, the internal
 displayed hom-action package, and the terminal-specialized `piapp1_int` to
 `piapp1_func` projection chain.
+
+Twenty-fifth continuation update, 2026-05-24: the hom-constructor policy was
+made explicit in `emdash3_2.lp`. The ordinary and dependent hom package heads
+now consistently use syntactic recoverability where that recoverability is part
+of the intended surface constructor contract:
+
+```text
+hom_      : injective symbol
+hom_con   : injective defined alias
+hom_int   : injective symbol
+homd_     : injective defined alias
+homd_int  : injective symbol
+```
+
+The review clarified that `hom_con` was already not a stable discriminator: as
+an immediate rewrite head it reduced to `hom_` before downstream rules could
+meaningfully rely on the `hom_con` head. It is therefore cleaner as a defined
+alias while still carrying the intended injective surface contract.
+
+The review also clarified that `homd_` injectivity is not redundant with the
+injectivity of the unfolded `hom_con` / `hom_` expression. Once unfolded,
+the original dependent arguments occur inside non-injective expressions such as
+fibre projections, `tapp0_fapp0`, and `fib_cov_tapp0_func`. Declaring `homd_`
+injective gives a real intensional decomposition principle for the displayed
+endpoint notation.
+
+Small Lambdapi probes confirmed two mechanics used by this decision:
+
+```text
+injective symbol c x : T ≔ body
+```
+
+is accepted for defined aliases, and `constant symbol` heads do support
+decomposition during implicit inference. Lambdapi rejects combining
+`constant` and `injective` modifiers directly as duplicated/incompatible
+properties, so the `homd_int` declaration was changed from `constant` to
+`injective` to make the constructor policy visible and to permit future
+head-directed rules if the design later needs them. The nearby comment keeps
+the stable-head warning: broad whole-family `homd_int` rewrites should still be
+avoided unless they are explicitly justified.
+
+The focused check `timeout 30s lambdapi check -w emdash3_2.lp` passed
+immediately after this policy cleanup.

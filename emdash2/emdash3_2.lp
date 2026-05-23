@@ -474,7 +474,7 @@ symbol op_val_func [Z : Cat] : τ (Functor (Catd_cat Z) (Catd_cat Z))
 // 3. Curried internal hom
 // -------------------------------------------------------------------------------------------------
 
-symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+injective symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
 rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
   ↪ Hom_cat $A $W (@fapp0 $B $A $F $y);
@@ -484,12 +484,11 @@ rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
 rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
   ↪ comp_fapp0 (fapp1_fapp0 $F $f) $g;
 
-symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
-  : τ (Functor (Op_cat B) Cat_cat);
-rule @hom_con $A $W $B $F
-  ↪ @hom_ (Op_cat $A) (Op_cat $B) (@Op_func $B $A $F) $W;
+injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
+  : τ (Functor (Op_cat B) Cat_cat)
+≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
 
-symbol hom_int [A B : Cat] (F : τ (Functor B A))
+injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat A) (Catd_cat B));
 
 rule @fapp0 _ _ (@hom_int $A $B $F) $W
@@ -993,11 +992,11 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat (@Homd_target_catd Z E) x
     ≡ Pi_cat (@Homd_target_section_catd Z E x);
 
-// Keep homd_int constant: terminal-source behavior is exposed through stable
-// projection rules below. Whole-family rewrite probes either fail by type
-// mismatch, are rejected because this symbol is constant, or time out once the
-// constness is removed and the rewrite is added.
-constant symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
+// `homd_int` is a syntactic constructor package: its family arguments and
+// displayed functor are recoverable from the head. Terminal-source behavior is
+// still exposed through the stable projection rules below; avoid adding broad
+// whole-family `homd_int` rewrites unless a later design explicitly needs them.
+injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   Π (FF : τ (Functord D E)),
   τ (Functord (Op_catd E) (@Homd_target_catd Z D));
 
@@ -1080,7 +1079,7 @@ rule @tapp0_fapp0
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
-symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
+injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
