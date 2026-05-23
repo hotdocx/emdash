@@ -1198,97 +1198,58 @@ rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
   τ (Functor
-      (@Transfd_cat K E D FF GG)
-      (@Transfd_cat
-        K
-        (@Op_catd K E)
-        (@Homd_target_catd K E)
-        (@homd_int K E E (@id_funcd K E))
-        (@comp_catd_fapp0
-          K
-          (@Op_catd K E)
-          (@Op_catd K D)
-          (@Homd_target_catd K E)
-          (@homd_int K E D GG)
-          (@Op_funcd K E D FF))));
+      (Transfd_cat FF GG)
+      (Transfd_cat
+        (homd_int (@id_funcd K E))
+        (comp_catd_fapp0
+          (homd_int GG)
+          (Op_funcd FF))));
 
 symbol tdapp1_int_fapp0_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
-  Π (ϵ : τ (@Transfd K E D FF GG)),
-  τ (@Transfd
-      K
-      (@Op_catd K E)
-      (@Homd_target_catd K E)
-      (@homd_int K E E (@id_funcd K E))
-      (@comp_catd_fapp0
-        K
-        (@Op_catd K E)
-        (@Op_catd K D)
-        (@Homd_target_catd K E)
-        (@homd_int K E D GG)
-        (@Op_funcd K E D FF)));
+  Π (ϵ : τ (Transfd FF GG)),
+  τ (Transfd
+      (homd_int (@id_funcd K E))
+      (comp_catd_fapp0
+        (homd_int GG)
+        (Op_funcd FF)));
 
 rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ
   ↪ @tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ;
 
 symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
-  Π (ϵ ϵ' : τ (@Transfd K E D FF GG)),
+  Π (ϵ ϵ' : τ (Transfd FF GG)),
   τ (Functor
-      (Hom_cat (@Transfd_cat K E D FF GG) ϵ ϵ')
+      (Hom_cat (Transfd_cat FF GG) ϵ ϵ')
       (Hom_cat
-        (@Transfd_cat
-          K
-          (@Op_catd K E)
-          (@Homd_target_catd K E)
-          (@homd_int K E E (@id_funcd K E))
-          (@comp_catd_fapp0
-            K
-            (@Op_catd K E)
-            (@Op_catd K D)
-            (@Homd_target_catd K E)
-            (@homd_int K E D GG)
-            (@Op_funcd K E D FF)))
-        (@tdapp1_int_fapp0_transfd K E D FF GG ϵ)
-        (@tdapp1_int_fapp0_transfd K E D FF GG ϵ')));
+        (Transfd_cat
+          (homd_int (@id_funcd K E))
+          (comp_catd_fapp0
+            (homd_int GG)
+            (Op_funcd FF)))
+        (tdapp1_int_fapp0_transfd ϵ)
+        (tdapp1_int_fapp0_transfd ϵ')));
 
 rule @fapp1_func _ _ (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ $ϵ'
   ↪ @tdapp1_int_fapp1_func_transfd $K $E $D $FF $GG $ϵ $ϵ';
 
 symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π (FF : τ (Functord E D)),
-  τ (@Transfd
-      K
-      (@Op_catd K E)
-      (@Homd_target_catd K E)
-      (@homd_int K E E (@id_funcd K E))
-      (@comp_catd_fapp0
-        K
-        (@Op_catd K E)
-        (@Op_catd K D)
-        (@Homd_target_catd K E)
-        (@homd_int K E D FF)
-        (@Op_funcd K E D FF)));
+  τ (Transfd
+      (homd_int (@id_funcd K E))
+      (comp_catd_fapp0
+        (homd_int FF)
+        (Op_funcd FF)));
 
 // Internal Pi-action witness: terminal-source specialization of the internal
 // displayed hom-action. Projection to `piapp1_func` is installed later through
 // stable intermediate heads.
 symbol piapp1_int [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
-  : τ (@Transfd
-      K
-      (@Op_catd K (@Const_catd K Terminal_cat))
-      (@Homd_target_catd K (@Const_catd K Terminal_cat))
-      (@homd_int
-        K
-        (@Const_catd K Terminal_cat)
-        (@Const_catd K Terminal_cat)
-        (@id_funcd K (@Const_catd K Terminal_cat)))
-      (@comp_catd_fapp0
-        K
-        (@Op_catd K (@Const_catd K Terminal_cat))
-        (@Op_catd K E)
-        (@Homd_target_catd K (@Const_catd K Terminal_cat))
+  : τ (Transfd
+      (homd_int (@id_funcd K (@Const_catd K Terminal_cat)))
+      (comp_catd_fapp0
         (@homd_int K (@Const_catd K Terminal_cat) E s)
         (@Op_funcd K (@Const_catd K Terminal_cat) E s)));
 

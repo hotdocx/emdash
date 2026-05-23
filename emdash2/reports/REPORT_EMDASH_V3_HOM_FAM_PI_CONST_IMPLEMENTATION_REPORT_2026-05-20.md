@@ -786,6 +786,27 @@ homd_int (id_funcd E)
   - `tdapp1_int_fapp0_transfd`
   - `tdapp1_int_fapp1_func_transfd`
   - `fdapp1_int_transfd`
+- Later review simplified these declarations to use the reduced
+  `Transfd`/`Transfd_cat` forms directly, with implicit family arguments
+  inferred from their displayed-functor endpoints:
+
+```text
+tdapp1_int_func_transfd
+  : Functor
+      (Transfd_cat FF GG)
+      (Transfd_cat
+        (homd_int (id_funcd E))
+        (comp_catd_fapp0 (homd_int GG) (Op_funcd FF)))
+
+fdapp1_int_transfd FF
+  : Transfd
+      (homd_int (id_funcd E))
+      (comp_catd_fapp0 (homd_int FF) (Op_funcd FF))
+```
+
+  The terminal-source `piapp1_int` type keeps the source family of `s`
+  explicit where `s : Obj (Pi_cat E)` hides the `Const_catd K Terminal_cat`
+  source behind the `Pi_cat` contraction.
 - Added the same internal object/hom action packaging for the ordinary
   `tapp1_int_func_transf` head:
   - `tapp1_int_fapp0_transf`
