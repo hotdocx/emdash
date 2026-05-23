@@ -318,6 +318,11 @@ injective symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
 unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D' ];
 
+// `Catd_cat K` is the canonical normal form of `Functor_cat K Cat_cat`.
+// Therefore `Hom_cat (Catd_cat K) E D` does not route through a direct
+// `Transf_cat K Cat_cat E D` rewrite. The ordinary-functor route
+// `Hom_cat (Functor_cat K Cat_cat) E D -> Transf_cat K Cat_cat E D` and the
+// directed-family route below both join at `Functord_cat K E D`.
 rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 
 constant symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E);
@@ -539,6 +544,12 @@ unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
 
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
+
+assert [K : Cat] (E D : τ (Catd K)) ⊢
+  Hom_cat (Catd_cat K) E D ≡ @Transf_cat K Cat_cat E D;
+assert [K : Cat] (E D : τ (Catd K)) ⊢
+  Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;
+
 // Transformations between point functors from the terminal category are just
 // arrows in the target. This implementation-discovered bridge is used by the
 // late `piapp1_int_tgt_transf` projection chain: without it, the final

@@ -550,6 +550,24 @@ infer the implicit Sigma-family arguments from the equality statement alone.
   - `Hom_cat (Catd_cat K) E D -> Functord_cat E D`
   - `@Transf_cat K Cat_cat E D -> Functord_cat E D`
   - `Hom_cat (Functord_cat E D) FF GG -> Transfd_cat FF GG`
+- Clarified the join between ordinary and directed family homs. Since
+  `Catd_cat K` is the canonical normal form of `Functor_cat K Cat_cat`, there is
+  no direct rule
+  `Hom_cat (Catd_cat K) E D -> Transf_cat K Cat_cat E D`. Instead:
+
+```text
+Hom_cat (Functor_cat K Cat_cat) E D
+  -> Transf_cat K Cat_cat E D
+  -> Functord_cat K E D
+
+Hom_cat (Catd_cat K) E D
+  -> Functord_cat K E D
+```
+
+  The two routes are convertible because they join at `Functord_cat K E D`.
+  `emdash3_2.lp` now has assertions documenting both the
+  `Hom_cat (Catd_cat K) E D ≡ Transf_cat K Cat_cat E D` conversion and the
+  ordinary-functor route's reduction to `Functord_cat K E D`.
 - Promoted `comp_catd_fapp0` from a definitional alias into a stable displayed
   composition head:
   - `comp_fapp0 (Catd_cat K) E D C FF GG -> comp_catd_fapp0 FF GG`
