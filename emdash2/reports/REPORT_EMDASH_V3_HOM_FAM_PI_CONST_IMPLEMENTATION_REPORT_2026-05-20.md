@@ -517,8 +517,8 @@ section_pullback_func F E
 The installed computations are:
 
 ```text
-tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_func E k
-fapp0 (sigma_intro_func E k) u -> Struct_sigma k u
+tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_tapp0_func E k
+fapp0 (sigma_intro_tapp0_func E k) u -> Struct_sigma k u
 tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
 fapp0 (const_section_func K A) a -> Const_func K A a
 fapp0 (section_pullback_func F E) s -> section_pullback_sec F E s
@@ -530,10 +530,10 @@ in the target-category slot. Probes with explicit `Pi_cat (Const_catd K A)` or
 `Pi_cat (Pullback_catd E F)` targets failed because those targets reduce before
 matching, so the explicit target slot was brittle.
 
-Correction: the earlier failed `sigma_intro_func` probe used a bad object-action
-shape. The accepted rule keeps `fapp0` implicit and returns `Struct_sigma k u`;
-the assertion uses the fully explicit constructor only where Lambdapi cannot
-infer the implicit Sigma-family arguments from the equality statement alone.
+Correction: the earlier failed Sigma-intro probe used a bad object-action shape.
+The accepted rule keeps `fapp0` implicit and returns `Struct_sigma k u`; the
+assertion uses the fully explicit constructor only where Lambdapi cannot infer
+the implicit Sigma-family arguments from the equality statement alone.
 
 Twentieth continuation update, 2026-05-23: section 14 was cleaned up after the
 line-by-line review of the derived displayed component notation.
@@ -557,6 +557,26 @@ Fibre_transf_app(eps,z,u)= eps_z(u)
 - The right-hand side of `Fibre_transf_app` remains explicit. The public type is
   readable, but the explicit projection avoids unnecessary implicit search
   during bounded checking.
+
+Twenty-first continuation update, 2026-05-24: section 15 was cleaned up during
+manual review.
+
+- `sigma_intro_func` was renamed to `sigma_intro_tapp0_func` and downgraded from
+  `injective symbol` to ordinary `symbol`. The pointwise component
+  `E[k] -> Sigma_cat E` should not be a kernel-injective head: equality of such
+  functors does not justify recovering the base object `k`.
+- `pi_eval_transf` and `const_section_func` were promoted to `injective symbol`
+  as canonical syntactic constructor packages.
+- The arrow action of `sigma_intro_tapp0_func` remains deferred. The intended
+  mathematics is `(α : u -> v in E[k]) |-> (id_k, α)` in the Sigma total, but
+  the clean rule should wait for the identity/fibre-transport normal forms for
+  Sigma homs.
+- `section_pullback_func` remains the current surface helper and was not made
+  injective. The future internal package should be named `section_pullback_int`;
+  it can be indexed over the functor argument using the existing
+  `comp_cat_cov_func E` pullback-family functor, then composed with `Pi_func`
+  and the relevant functor-category packaging, following the same projection
+  style as `homd_int` and `piapp1_int`.
 
 ## Files Changed
 
@@ -1472,8 +1492,8 @@ section_pullback_func F E
     The validated beta assertions are:
 
 ```text
-tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_func E k
-fapp0 (sigma_intro_func E k) u -> Struct_sigma k u
+tapp0_fapp0 k (sigma_intro_transf E) -> sigma_intro_tapp0_func E k
+fapp0 (sigma_intro_tapp0_func E k) u -> Struct_sigma k u
 tapp0_fapp0 k (pi_eval_transf E) -> piapp0_func E k
 piapp0 (const_section_func K A a) k -> a
 piapp0 (section_pullback_func F E s) a -> piapp0 s (F a)

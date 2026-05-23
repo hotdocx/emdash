@@ -1328,48 +1328,58 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
-// Generic Sigma/Pi weakening/evaluation helpers. These reintroduce the stable
-// parts of the v3 backlog whose beta assertions are now robust.
+/*
+  Generic Sigma/Pi weakening/evaluation helpers.
+
+    sigma_intro_transf(E)             : E → const(ΣE)
+    sigma_intro_tapp0_func(E,k)       : E[k] → ΣE
+    sigma_intro_tapp0_func(E,k)(u)    = (k,u)
+
+    pi_eval_transf(E)                 : const(ΠE) → E
+    pi_eval_transf(E)[k]              = piapp0_func(E,k) : ΠE → E[k]
+
+    const_section_func(K,A)           : A → Π_k A
+    const_section_func(K,A)(a)        = const(a)
+
+    section_pullback_func(F,E)        : Π_B E → Π_A F^*E
+    section_pullback_func(F,E)(s)(a)  = s(Fa)
+
+  The arrow action of `sigma_intro_tapp0_func` is intentionally deferred. It
+  should eventually send a fibre arrow α : u → v in E[k] to the corresponding
+  total arrow (id_k, α), but the clean rule needs the identity/fibre-transport
+  normal forms for Sigma homs.
+
+  `section_pullback_func` remains the current surface helper. A future internal
+  version should be `section_pullback_int`, indexed over the functor argument F,
+  with the pullback-family functor built from `comp_cat_cov_func E` and then
+  composed with `Pi_func`, in the same style as the `homd_int`/`piapp1_int`
+  projection packages.
+*/
 injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
 
-injective symbol sigma_intro_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
+symbol sigma_intro_tapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Fibre_cat E k) (Sigma_cat E));
 
 rule @tapp0_fapp0
-      $K
-      Cat_cat
-      $E
-      _
-      $k
-      (@sigma_intro_transf $K $E)
-  ↪ @sigma_intro_func $K $E $k;
+      $K Cat_cat $E _ $k (@sigma_intro_transf $K $E)
+  ↪ @sigma_intro_tapp0_func $K $E $k;
 
-rule fapp0
-      (@sigma_intro_func $K $E $k)
-      $u
+rule fapp0 (@sigma_intro_tapp0_func $K $E $k) $u
   ↪ Struct_sigma $k $u;
 
-symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
+injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord (@Const_catd K (@Pi_cat K E)) E);
 
 rule @tapp0_fapp0
-      $K
-      Cat_cat
-      (@Const_catd $K (@Pi_cat $K $E))
-      $E
-      $k
+      $K Cat_cat (@Const_catd $K (@Pi_cat $K $E)) $E $k
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;
 
-symbol const_section_func (K : Cat) (A : Cat)
+injective symbol const_section_func (K : Cat) (A : Cat)
   : τ (Functor A (@Pi_cat K (@Const_catd K A)));
 
-rule @fapp0
-      $A
-      _
-      (@const_section_func $K $A)
-      $a
+rule @fapp0 $A _ (@const_section_func $K $A) $a
   ↪ @Const_func $K $A $a;
 
 symbol section_pullback_func [A B : Cat]
@@ -1381,19 +1391,11 @@ symbol section_pullback_sec [A B : Cat]
   (s : τ (Obj (@Pi_cat B E)))
   : τ (Obj (@Pi_cat A (@Pullback_catd A B E F)));
 
-rule @fapp0
-      (@Pi_cat $B $E)
-      _
-      (@section_pullback_func $A $B $F $E)
-      $s
+rule @fapp0 (@Pi_cat $B $E) _ (@section_pullback_func $A $B $F $E) $s
   ↪ @section_pullback_sec $A $B $F $E $s;
 
 rule @tapp0_fapp0
-      $A
-      Cat_cat
-      (@Const_catd $A Terminal_cat)
-      _
-      $a
+      $A Cat_cat (@Const_catd $A Terminal_cat) _ $a
       (@section_pullback_sec $A $B $F $E $s)
   ↪ @Obj_func
       (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
