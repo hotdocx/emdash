@@ -1373,22 +1373,15 @@ symbol piapp1_int_tgt_transf [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
   : τ (Transf
-      (@Obj_func
-        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+      (Obj_func
         (Obj_func
           (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)))
       (@Obj_func
         (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
         (Obj_func
-          (@homd_
-            K
-            E
-            E
-            (@id_funcd K E)
-            x
-            (piapp0 s x)
-            y
-            (piapp0 s y)))));
+          (@homd_ K E E (@id_funcd K E)
+            x (piapp0 s x)
+            y (piapp0 s y)))));
 
 rule tdapp0_fapp0 $x (@piapp1_int $K $E $s)
   ↪ @piapp1_int_src_transf $K $E $s $x;
