@@ -1181,51 +1181,29 @@ symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
   : τ (Obj (Pi_cat
-      (@homd_
-        K
-        E
-        E
+      (homd_
         (@id_funcd K E)
-        x
-        (@piapp0 K E s x)
-        y
-        (@piapp0 K E s y))));
+        x (@piapp0 K E s x)
+        y (@piapp0 K E s y))));
 
 symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   [x y : τ (Obj K)]
   (f : τ (Hom K x y))
   : τ (Obj
-      (@fapp0
-        (Op_cat (Hom_cat K x y))
-        Cat_cat
-        (@homd_
-          K
-          E
-          E
+      (fapp0
+        (homd_
           (@id_funcd K E)
           x
           (@piapp0 K E s x)
           y
           (@piapp0 K E s y))
         f))
-≔ @piapp0
-     (Op_cat (Hom_cat K x y))
-     (@homd_
-       K
-       E
-       E
-       (@id_funcd K E)
-       x
-       (@piapp0 K E s x)
-       y
-       (@piapp0 K E s y))
+≔ piapp0
      (@piapp1_func K E s x y)
      f;
 
-rule @fapp0
-      (Op_cat (Hom_cat $K $x $y))
-      (Hom_cat $A (@fapp0 $K $A $s $x) (@fapp0 $K $A $s $y))
+rule fapp0
       (@piapp1_func $K (@Const_catd $K $A) $s $x $y)
       $f
   ↪ @fapp1_fapp0 $K $A $s $x $y $f;
