@@ -151,18 +151,18 @@ flag "print_meta_args" on;
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
     - Pointwise displayed-functor calculus: `Op_funcd` projects through
-      `tapp0_fapp0` to ordinary fibre opposites. The displayed-composition
-      projection is retained late: the semantic E/C outer-slot form validates
-      there, while the D/C outer-slot form is not the intended general
-      E[x] -> C[x] projection.
+      `tapp0_fapp0` to ordinary fibre opposites, and `comp_catd_fapp0`
+      projects pointwise to ordinary fibre composition. The semantic E/C
+      outer-slot form validates; the D/C outer-slot form is not the intended
+      general E[x] -> C[x] projection.
     - Earlier diagnostic aliases `fdapp1_int_fibre_transf` /
       `fdapp1_int_fibre_app` have been retired. The final route uses the
       stable `piapp1_int_*` heads directly instead of adding another fibre
       surface API.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
       capped component is a definition by `piapp0`; the terminal-specialization
-      fold from displayed internal action is installed near the late projection
-      block.
+      fold from displayed internal action is installed in the final `piapp1_int`
+      projection block.
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
@@ -730,6 +730,19 @@ rule @tapp0_fapp0
       (Fibre_cat $E $x)
       (Fibre_cat $D $x)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $FF);
+
+// Pointwise projection of displayed composition. This belongs with the
+// displayed-functor calculus: at each base object x, the composite displayed
+// functor projects to the ordinary composite of fibre functors.
+rule @tapp0_fapp0
+      $K Cat_cat $E $C $x
+      (@comp_catd_fapp0 $K $E $D $C $FF $GG)
+  ↪ @comp_cat_fapp0
+      (Fibre_cat $E $x)
+      (Fibre_cat $D $x)
+      (Fibre_cat $C $x)
+      (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
+      (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
 injective symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
@@ -2364,24 +2377,6 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
     (@Sigma_proj1_func K D)
     (@sigma_map_func K E D η)
     ≡ @Sigma_proj1_func K E;
-
-// Late displayed-composition fibre projection. Early insertion near the
-// projection-rule block caused timeout during earlier probes; placed here it
-// supports the concrete piapp1 target-object cascade without using a composite
-// capped bridge as a rewrite LHS.
-rule @tapp0_fapp0
-      $K
-      Cat_cat
-      $E
-      $C
-      $x
-      (@comp_catd_fapp0 $K $E $D $C $FF $GG)
-  ↪ @comp_cat_fapp0
-      (Fibre_cat $E $x)
-      (Fibre_cat $D $x)
-      (Fibre_cat $C $x)
-      (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
-      (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
 // Stable projection chain from the internal dependent pi transfor to the
 // external piapp1 package. The intermediate heads avoid rewriting over

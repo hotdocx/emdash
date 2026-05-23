@@ -87,7 +87,9 @@ file, together with the intended `Fibre_func (comp_catd_fapp0 FF GG)` assertion.
 At that point no displayed-composition fibre projection rule was retained: the
 rule was to be added only when a concrete later use justified choosing a safe
 insertion point. A later `piapp1` target-object probe supplied that use, and the
-semantically aligned `E`/`C` outer-slot version is now retained late in the file.
+semantically aligned `E`/`C` outer-slot version was first retained late in the
+file. After the later cleanup passes, the same rule now typechecks in its
+natural section next to the other pointwise displayed-functor projections.
 The useful SOP is narrower: when adding explicit outer slots to recover variables
 hidden inside non-injective subterms, those slots must still be the actual
 source/target slots of the head being projected, and rule placement can
@@ -197,7 +199,7 @@ validated when appended at the end of the file with the intended fibre assertion
 but early insertion timed out. At that point no displayed-composition fibre rule
 was retained, and the direct `piapp1_int -> piapp1_func` fold remained deferred.
 This status was later superseded by the stable-head `piapp1_int_*` projection
-chain and late displayed-composition projection recorded below.
+chain and the displayed-composition projection recorded below.
 
 Latest validation update 2026-05-21: after removing the premature
 `piapp1_int_*` aliases, removing the capped bridge, and leaving the
@@ -391,12 +393,13 @@ The new `piapp1_int_*` names are not migration aliases and are not definitions:
 they are the stable projection heads needed to express this section-action
 cascade in the same style as
 `homd_int -> homd_src_funcd -> homd_src_secd -> homd_tgt_funcd -> homd_`.
-The rules are placed after the late displayed-composition fibre projection,
-because earlier insertion had caused timeout during previous probes while the
-late placement typechecks quickly. Probe assertions for the individual
-projection equalities were not kept: the rules themselves typecheck, while those
-extra equality assertions triggered elaboration/unification noise that is not
-needed for the implementation.
+At this pass the rules were placed after the displayed-composition fibre
+projection, because earlier insertion had caused timeout during previous probes
+while the late placement typechecked quickly. The displayed-composition rule was
+later moved up to section 6 after cleanup removed the bounded-check issue. Probe
+assertions for the individual projection equalities were not kept: the rules
+themselves typecheck, while those extra equality assertions triggered
+elaboration/unification noise that is not needed for the implementation.
 
 Sixteenth continuation update, 2026-05-22: the `piapp1_int` projection rules
 were simplified where Lambdapi inference supports it. The first three
@@ -577,6 +580,22 @@ manual review.
   `comp_cat_cov_func E` pullback-family functor, then composed with `Pi_func`
   and the relevant functor-category packaging, following the same projection
   style as `homd_int` and `piapp1_int`.
+
+Twenty-second continuation update, 2026-05-24: the displayed-composition fibre
+projection was moved from the late assertion/projection block to section 6, next
+to the pointwise `Op_funcd` projection. The old late placement was a workaround
+for earlier bounded-check timeouts; after the intervening cleanup passes, the
+same semantic `E`/`C` rule typechecks quickly in its natural location:
+
+```text
+tapp0_fapp0 x (comp_catd_fapp0 E D C FF GG)
+  -> comp_cat_fapp0
+       (tapp0_fapp0 x FF)
+       (tapp0_fapp0 x GG)
+```
+
+The `D`/`C` outer-slot variant remains rejected as the wrong source/target
+shape for a general composite component.
 
 ## Files Changed
 
@@ -953,9 +972,9 @@ Fibre_func (comp_catd_fapp0 E D C FF GG) x
 
   The `D`/`C` outer-slot variant accepted as a rewrite command but failed a
   meaningful standalone assertion. The `E`/`C` semantic variant is correct and is
-  now retained late in `emdash3_2.lp`, where it validates the concrete
-  terminal-source `piapp1` target-object cascade without affecting earlier
-  assertions.
+  now retained in section 6 next to the pointwise `Op_funcd` projection. It
+  validates the concrete terminal-source `piapp1` target-object cascade without
+  affecting earlier assertions.
 
 ### Section Action `piapp1*`
 
@@ -1069,10 +1088,12 @@ Hom_cat (Pi_cat E) s t -> Transfd_cat (Const_catd K Terminal_cat) E s t
 
 - Added assertions validating the generic bridge and its constant-family join
   with `Transf_cat s t`.
-- Added the late displayed-composition fibre projection with the correct `E`/`C`
+- Added the displayed-composition fibre projection with the correct `E`/`C`
   outer slots, plus assertions that the specialized `piapp1` target object first
   reduces to `homd_src_sec ... (piapp0 s x)` and then evaluates to the
-  `homd_ E E (id_funcd E) ...` family used by `piapp1_func`.
+  `homd_ E E (id_funcd E) ...` family used by `piapp1_func`. This rule was
+  later moved from the late assertion block to section 6, next to the pointwise
+  `Op_funcd` projection.
 - The earlier type assertion through
   `Fibre_transf_app (fdapp1_int_fibre_app ...)` was useful diagnostically but
   has been removed with the `fdapp1_int_fibre_*` aliases. It was replaced by
@@ -1246,7 +1267,7 @@ less-internal external heads only after the internal layer is better understood.
 The exploratory `fdapp1_int_fibre_*` aliases were later retired and therefore do
 not settle the external API question.
 
-### 8. Displayed Composition Fibre Projection Is Retained Late
+### 8. Displayed Composition Fibre Projection Is Retained With Displayed-Functor Calculus
 
 The desired projection shape is:
 
@@ -1267,11 +1288,12 @@ rule @tapp0_fapp0 K Cat_cat E C x
        (tapp0_fapp0 K Cat_cat E D x GG)
 ```
 
-This `E`/`C` version is the correct semantic shape. It timed out when inserted
-early near the other projection rules, but it later typechecked quickly in the
-late projection block, including with focused assertions for the intended
-`Fibre_func (comp_catd_fapp0 FF GG)` normal forms needed by the `piapp1_int`
-cascade. The proposed `D`/`C`
+This `E`/`C` version is the correct semantic shape. It timed out during earlier
+probes when inserted near the other projection rules, but it later typechecked
+quickly in a late projection block and, after the section cleanups, now
+typechecks in section 6 next to the pointwise `Op_funcd` projection. Focused
+assertions still validate the intended `Fibre_func (comp_catd_fapp0 FF GG)`
+normal forms needed by the `piapp1_int` cascade. The proposed `D`/`C`
 outer-slot version typechecked as a rule command, but a standalone assertion
 showed it is not the intended general projection: `tapp0_fapp0 ... D C ...
 (comp_catd_fapp0 E D C FF GG)` is not typable for arbitrary `E,D,C`, since the
@@ -1445,13 +1467,13 @@ Hom_cat (Pi_cat (Const_catd K A)) s t
 fdapp1_int_transfd
   -> piapp1_int
   -> tapp0_fapp0/Fibre_func projections
-  -> late comp_catd_fapp0 pointwise projection
+  -> comp_catd_fapp0 pointwise projection
   -> homd_int terminal/constant projected normal forms
 ```
 
     The generalized terminal-source `homd_tgt_func` step, the `Hom_cat
     (Pi_cat E)` section-hom bridge, the terminal `Transf_cat` collapse, and the
-    late displayed-composition projection together expose the target. The final
+    displayed-composition projection together expose the target. The final
     object-level fold is:
 
 ```text
