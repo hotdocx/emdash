@@ -151,14 +151,14 @@ flag "print_meta_args" on;
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
     - Pointwise displayed-functor calculus: `Op_funcd` projects through
-      `tapp0_fapp0` to ordinary fibre opposites. The analogous displayed
-      composition projection is deferred: the semantic E/C outer-slot form
-      validates when appended late but times out near the projection-rule block,
-      while the D/C outer-slot form is not the intended general E[x] -> C[x]
-      projection.
-    - `fdapp1_int_fibre_transf` / `fdapp1_int_fibre_app`: derived projections
-      of the internal displayed hom-action, still below any external
-      `fdapp1_*` surface API.
+      `tapp0_fapp0` to ordinary fibre opposites. The displayed-composition
+      projection is retained late: the semantic E/C outer-slot form validates
+      there, while the D/C outer-slot form is not the intended general
+      E[x] -> C[x] projection.
+    - Earlier diagnostic aliases `fdapp1_int_fibre_transf` /
+      `fdapp1_int_fibre_app` have been retired. The final route uses the
+      stable `piapp1_int_*` heads directly instead of adding another fibre
+      surface API.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
       capped component is a definition by `piapp0`; the terminal-specialization
       fold from displayed internal action is installed near the late projection
@@ -1266,63 +1266,56 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
 // -------------------------------------------------------------------------------------------------
 
 /*
-  `tdapp0_func` and `tdapp0_fapp0` are stable projection heads for the
-  displayed component of a displayed transfor. This mirrors emdash2: readable
-  fibre notation below remains definitional, while rewrite rules attach to
-  these primitive heads.
+  Fibre-level notation for displayed functors and displayed transfors.
+
+    Fibre_func(FF,z)          = FF[z] : E[z] → D[z]
+    tdapp0_func(z)            : Transfd(FF,GG) → Transf(FF[z],GG[z])
+    tdapp0_fapp0(z,ϵ)         = ϵ_z : FF[z] ⇒ GG[z]
+    Fibre_transf(ϵ,z)         = ϵ_z
+    Fibre_transf_app(ϵ,z,u)   = ϵ_z(u)
+
+  `tdapp0_func` and `tdapp0_fapp0` are stable projection heads: later rewrite
+  rules attach to them directly. The `Fibre_*` names are readable definitions
+  over these heads, not additional kernel rewrite surfaces.
 */
-symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
-  [FF GG : τ (Functord E D)]
-  (z : τ (Obj K))
-  : τ (Functor
-      (@Transfd_cat K E D FF GG)
-      (@Transf_cat
-        (Fibre_cat E z)
-        (Fibre_cat D z)
-        (@tapp0_fapp0 K Cat_cat E D z FF)
-        (@tapp0_fapp0 K Cat_cat E D z GG)));
-
-symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
-  [FF GG : τ (Functord E D)]
-  (z : τ (Obj K))
-  (ϵ : τ (@Transfd K E D FF GG))
-  : τ (@Transf
-      (Fibre_cat E z)
-      (Fibre_cat D z)
-      (@tapp0_fapp0 K Cat_cat E D z FF)
-      (@tapp0_fapp0 K Cat_cat E D z GG));
-
-rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
-  ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
-
-// Readable derived fibre-level notation. These are definitions over ordinary
-// transfor projection; they are not additional kernel rewrite heads.
 symbol Fibre_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (z : τ (Obj K))
   : τ (Functor (Fibre_cat E z) (Fibre_cat D z))
 ≔ @tapp0_fapp0 K Cat_cat E D z FF;
 
+symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (z : τ (Obj K))
+  : τ (Functor
+      (Transfd_cat FF GG)
+      (Transf_cat (Fibre_func FF z) (Fibre_func GG z)));
+
+symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (z : τ (Obj K))
+  (ϵ : τ (Transfd FF GG))
+  : τ (Transf (Fibre_func FF z) (Fibre_func GG z));
+
+rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
+  ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
+
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
-  (ϵ : τ (@Transfd K E D FF GG))
+  (ϵ : τ (Transfd FF GG))
   (z : τ (Obj K))
-  : τ (@Transf
-      (Fibre_cat E z)
-      (Fibre_cat D z)
-      (@Fibre_func K E D FF z)
-      (@Fibre_func K E D GG z))
+  : τ (Transf (Fibre_func FF z) (Fibre_func GG z))
 ≔ @tdapp0_fapp0 K E D FF GG z ϵ;
 
 symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
-  (ϵ : τ (@Transfd K E D FF GG))
+  (ϵ : τ (Transfd FF GG))
   (z : τ (Obj K))
   (u : τ (Obj (Fibre_cat E z)))
   : τ (Hom
       (Fibre_cat D z)
-      (@fapp0 (Fibre_cat E z) (Fibre_cat D z) (@Fibre_func K E D FF z) u)
-      (@fapp0 (Fibre_cat E z) (Fibre_cat D z) (@Fibre_func K E D GG z) u))
+      (fapp0 (Fibre_func FF z) u)
+      (fapp0 (Fibre_func GG z) u))
 ≔ @tapp0_fapp0
      (Fibre_cat E z)
      (Fibre_cat D z)
@@ -1330,96 +1323,6 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
      (@Fibre_func K E D GG z)
      u
      (@Fibre_transf K E D FF GG ϵ z);
-
-// Derived fibre projection of the internal displayed hom-action. This is a
-// named projection of `fdapp1_int_transfd`, not a separate external `fdapp1`
-// surface operation.
-symbol fdapp1_int_fibre_transf [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  : τ (@Transf
-      (Fibre_cat (@Op_catd K E) x)
-      (Fibre_cat (@Homd_target_catd K E) x)
-      (@Fibre_func
-        K
-        (@Op_catd K E)
-        (@Homd_target_catd K E)
-        (@homd_int K E E (@id_funcd K E))
-        x)
-      (@Fibre_func
-        K
-        (@Op_catd K E)
-        (@Homd_target_catd K E)
-        (@comp_catd_fapp0
-          K
-          (@Op_catd K E)
-          (@Op_catd K D)
-          (@Homd_target_catd K E)
-          (@homd_int K E D FF)
-          (@Op_funcd K E D FF))
-        x))
-≔ @Fibre_transf
-     K
-     (@Op_catd K E)
-     (@Homd_target_catd K E)
-     (@homd_int K E E (@id_funcd K E))
-     (@comp_catd_fapp0
-       K
-       (@Op_catd K E)
-       (@Op_catd K D)
-       (@Homd_target_catd K E)
-       (@homd_int K E D FF)
-       (@Op_funcd K E D FF))
-     (@fdapp1_int_transfd K E D FF)
-     x;
-
-symbol fdapp1_int_fibre_app [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat (@Op_catd K E) x)))
-  : τ (Hom
-      (Fibre_cat (@Homd_target_catd K E) x)
-      (@fapp0
-        (Fibre_cat (@Op_catd K E) x)
-        (Fibre_cat (@Homd_target_catd K E) x)
-        (@Fibre_func
-          K
-          (@Op_catd K E)
-          (@Homd_target_catd K E)
-          (@homd_int K E E (@id_funcd K E))
-          x)
-        u)
-      (@fapp0
-        (Fibre_cat (@Op_catd K E) x)
-        (Fibre_cat (@Homd_target_catd K E) x)
-        (@Fibre_func
-          K
-          (@Op_catd K E)
-          (@Homd_target_catd K E)
-          (@comp_catd_fapp0
-            K
-            (@Op_catd K E)
-            (@Op_catd K D)
-            (@Homd_target_catd K E)
-            (@homd_int K E D FF)
-            (@Op_funcd K E D FF))
-          x)
-        u))
-≔ @Fibre_transf_app
-     K
-     (@Op_catd K E)
-     (@Homd_target_catd K E)
-     (@homd_int K E E (@id_funcd K E))
-     (@comp_catd_fapp0
-       K
-       (@Op_catd K E)
-       (@Op_catd K D)
-       (@Homd_target_catd K E)
-       (@homd_int K E D FF)
-       (@Op_funcd K E D FF))
-     (@fdapp1_int_transfd K E D FF)
-     x
-     u;
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -1891,44 +1794,6 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
         (@Fibre_func K E D GG z)
         u
         (@Fibre_transf K E D FF GG ϵ z);
-
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
-  (x : τ (Obj K)) ⊢
-  @fdapp1_int_fibre_transf K E D FF x
-    ≡ @Fibre_transf
-        K
-        (@Op_catd K E)
-        (@Homd_target_catd K E)
-        (@homd_int K E E (@id_funcd K E))
-        (@comp_catd_fapp0
-          K
-          (@Op_catd K E)
-          (@Op_catd K D)
-          (@Homd_target_catd K E)
-          (@homd_int K E D FF)
-          (@Op_funcd K E D FF))
-        (@fdapp1_int_transfd K E D FF)
-        x;
-
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat (@Op_catd K E) x))) ⊢
-  @fdapp1_int_fibre_app K E D FF x u
-    ≡ @Fibre_transf_app
-        K
-        (@Op_catd K E)
-        (@Homd_target_catd K E)
-        (@homd_int K E E (@id_funcd K E))
-        (@comp_catd_fapp0
-          K
-          (@Op_catd K E)
-          (@Op_catd K D)
-          (@Homd_target_catd K E)
-          (@homd_int K E D FF)
-          (@Op_funcd K E D FF))
-        (@fdapp1_int_transfd K E D FF)
-        x
-        u;
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x : τ (Obj Z)) ⊢
