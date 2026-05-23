@@ -552,7 +552,7 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
 
 // Transformations between point functors from the terminal category are just
 // arrows in the target. This implementation-discovered bridge is used by the
-// late `piapp1_int_tgt_transf` projection chain: without it, the final
+// final `piapp1_int_tgt_transf` projection chain: without it, the final
 // `tapp0_fapp0 Terminal_obj ... -> piapp1_func` fold cannot prove subject
 // reduction.
 rule @Transf_cat Terminal_cat $Y (@Obj_func $Y $u) (@Obj_func $Y $v)
@@ -1172,8 +1172,8 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   remains iterable through `Pi_cat` rather than becoming only an object-level
   shortcut. `piapp1_src_obj` names the reduced source endpoint of that component;
   `piapp1_fapp0` uses it in its displayed hom type. The terminal-specialization
-  fold from displayed internal action is installed later, after the concrete
-  displayed-composition projection it needs.
+  fold from displayed internal action is installed after the displayed component
+  projections, where the stable `tdapp0_fapp0` head is available.
 */
 symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1256,7 +1256,7 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (Op_funcd FF)));
 
 // Internal Pi-action witness: terminal-source specialization of the internal
-// displayed hom-action. Projection to `piapp1_func` is installed later through
+// displayed hom-action. Projection to `piapp1_func` is installed below through
 // stable intermediate heads.
 symbol piapp1_int [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1336,6 +1336,81 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
      (@Fibre_func K E D GG z)
      u
      (@Fibre_transf K E D FF GG ϵ z);
+
+// -------------------------------------------------------------------------------------------------
+// 14b. Terminal-specialized piapp1 projection chain
+// -------------------------------------------------------------------------------------------------
+
+// Stable projection chain from the internal dependent Pi transfor to the
+// external piapp1 package. The intermediate heads avoid rewriting over
+// reducible fibre abbreviations such as `Fibre_transf_app`.
+symbol piapp1_int_src_transf [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  : τ (Transf
+      (Obj_func
+        (homd_src_sec
+          (@id_funcd K (@Const_catd K Terminal_cat))
+          x
+          Terminal_obj))
+      (comp_cat_fapp0
+        (homd_src_func s x)
+        (Op_func
+          (@tapp0_fapp0 K Cat_cat (@Const_catd K Terminal_cat) E x s))));
+
+symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  : τ (Hom
+      (Pi_cat (Homd_target_section_catd (Const_catd K Terminal_cat) x))
+      (homd_src_sec
+        (@id_funcd K (@Const_catd K Terminal_cat))
+        x
+        Terminal_obj)
+      (homd_src_sec s x (piapp0 s x)));
+
+symbol piapp1_int_tgt_transf [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  : τ (Transf
+      (@Obj_func
+        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+        (Obj_func
+          (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)))
+      (@Obj_func
+        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
+        (Obj_func
+          (@homd_
+            K
+            E
+            E
+            (@id_funcd K E)
+            x
+            (piapp0 s x)
+            y
+            (piapp0 s y)))));
+
+rule tdapp0_fapp0 $x (@piapp1_int $K $E $s)
+  ↪ @piapp1_int_src_transf $K $E $s $x;
+
+rule tapp0_fapp0 Terminal_obj (@piapp1_int_src_transf $K $E $s $x)
+  ↪ @piapp1_int_src_app $K $E $s $x;
+
+rule tdapp0_fapp0 $y (@piapp1_int_src_app $K $E $s $x)
+  ↪ @piapp1_int_tgt_transf $K $E $s $x $y;
+
+rule @tapp0_fapp0
+      Terminal_cat
+      _
+      (Obj_func
+        (Obj_func
+          _))
+      (Obj_func
+        (Obj_func
+          _))
+      Terminal_obj
+      (@piapp1_int_tgt_transf $K $E $s $x $y)
+  ↪ @piapp1_func $K $E $s $x $y;
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -2377,99 +2452,6 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
     (@Sigma_proj1_func K D)
     (@sigma_map_func K E D η)
     ≡ @Sigma_proj1_func K E;
-
-// Stable projection chain from the internal dependent pi transfor to the
-// external piapp1 package. The intermediate heads avoid rewriting over
-// reducible fibre abbreviations such as `Fibre_transf_app`.
-symbol piapp1_int_src_transf [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x : τ (Obj K))
-  : τ (Transf
-      (Obj_func
-        (@homd_src_sec K
-          (@Const_catd K Terminal_cat)
-          (@Const_catd K Terminal_cat)
-          (@id_funcd K (@Const_catd K Terminal_cat))
-          x
-          Terminal_obj))
-      (comp_cat_fapp0
-        (@homd_src_func K (@Const_catd K Terminal_cat) E s x)
-        (Op_func
-          (@tapp0_fapp0
-            K
-            Cat_cat
-            (@Const_catd K Terminal_cat)
-            E
-            x
-            s))));
-
-symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x : τ (Obj K))
-  : τ (Hom
-      (Pi_cat (Homd_target_section_catd (Const_catd K Terminal_cat) x))
-      (@homd_src_sec K
-        (@Const_catd K Terminal_cat)
-        (@Const_catd K Terminal_cat)
-        (@id_funcd K (@Const_catd K Terminal_cat))
-        x
-        Terminal_obj)
-      (@homd_src_sec
-        K
-        (@Const_catd K Terminal_cat)
-        E
-        s
-        x
-        (@piapp0 K E s x)));
-
-symbol piapp1_int_tgt_transf [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x y : τ (Obj K))
-  : τ (Transf
-      (@Obj_func
-        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
-        (Obj_func
-          (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)))
-      (@Obj_func
-        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
-        (Obj_func
-          (@homd_
-            K
-            E
-            E
-            (@id_funcd K E)
-            x
-            (@piapp0 K E s x)
-            y
-            (@piapp0 K E s y)))));
-
-rule tdapp0_fapp0
-      $x
-      (@piapp1_int $K $E $s)
-  ↪ @piapp1_int_src_transf $K $E $s $x;
-
-rule tapp0_fapp0
-      Terminal_obj
-      (@piapp1_int_src_transf $K $E $s $x)
-  ↪ @piapp1_int_src_app $K $E $s $x;
-
-rule tdapp0_fapp0
-      $y
-      (@piapp1_int_src_app $K $E $s $x)
-  ↪ @piapp1_int_tgt_transf $K $E $s $x $y;
-
-rule @tapp0_fapp0
-      Terminal_cat
-      _
-      (Obj_func
-        (Obj_func
-          _))
-      (Obj_func
-        (Obj_func
-          _))
-      Terminal_obj
-      (@piapp1_int_tgt_transf $K $E $s $x $y)
-  ↪ @piapp1_func $K $E $s $x $y;
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))

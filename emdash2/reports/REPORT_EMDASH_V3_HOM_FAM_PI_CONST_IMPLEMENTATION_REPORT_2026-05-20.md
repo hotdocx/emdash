@@ -273,8 +273,9 @@ than by introducing ad hoc aliases. The focused
 change.
 
 Thirteenth continuation update: the semantically correct displayed-composition
-fibre projection is now installed late in `emdash3_2.lp`, near the concrete
-`piapp1` target-object assertions that need it:
+fibre projection was first installed late in `emdash3_2.lp`, near the concrete
+`piapp1` target-object assertions that needed it. A later cleanup moved the
+same rule to section 6:
 
 ```text
 tapp0_fapp0 K Cat_cat E C x (comp_catd_fapp0 K E D C FF GG)
@@ -596,6 +597,15 @@ tapp0_fapp0 x (comp_catd_fapp0 E D C FF GG)
 
 The `D`/`C` outer-slot variant remains rejected as the wrong source/target
 shape for a general composite component.
+
+Twenty-third continuation update, 2026-05-24: the `piapp1_int -> piapp1_func`
+projection chain was moved out of the late regression/assertion area and into a
+new `14b` block immediately after the displayed component notation. This is the
+natural dependency point: `piapp1_int` is already declared, and
+`tdapp0_fapp0` is now available as the stable displayed-component projection
+head. The declaration types were also shortened where Lambdapi inference is now
+reliable; the final `piapp1_int_tgt_transf` target keeps the explicit outer
+`Obj_func` category because that argument is still needed for subject reduction.
 
 ## Files Changed
 
@@ -1141,7 +1151,7 @@ The supporting normal forms are:
   category, giving the section-hom package a principled bridge into the existing
   `Transfd_cat` infrastructure.
 - the concrete displayed-composition target object needed by the terminal-source
-  path now reduces through the late pointwise projection to
+  path now reduces through the pointwise displayed-composition projection to
   `homd_src_sec (Const_catd K Terminal_cat) E s x (piapp0 s x)`, and evaluating
   that section at `y` and `Terminal_obj` reaches the `homd_` family used by
   `piapp1_func`.
@@ -1339,7 +1349,7 @@ It does not complete the full plan. The next work should focus on the remaining
 action questions, especially:
 
 1. whether additional displayed-composition projection rules should be installed
-   beyond the late concrete rule now used by the `piapp1_int` cascade,
+   beyond the pointwise composition rule now used by the `piapp1_int` cascade,
 2. whether constant/terminal whole-family `homd_int` normal forms are now safe
    to add.
 
@@ -1382,9 +1392,9 @@ specializations are written explicitly with `id_funcd E`.
 
 5. Completed for the current concrete use: do not keep the rejected `D`/`C`
    displayed-composition projection rule. The semantically correct `E`/`C`
-   outer-slot version is installed late, where it supports the `piapp1_int`
-   cascade and typechecks quickly. Keep `Fibre_func` as derived notation; do not
-   promote it to primitive just to expose this rule.
+   outer-slot version is installed in section 6, where it supports the
+   `piapp1_int` cascade and typechecks quickly. Keep `Fibre_func` as derived
+   notation; do not promote it to primitive just to expose this rule.
 
 6. Partially completed: after generalized `homd_`, validate the
    terminal-source cascade toward `piapp1_func`. The current file now has
