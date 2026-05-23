@@ -1105,19 +1105,11 @@ symbol homd_tgt_func [Z : Cat] [D E : τ (Catd Z)]
 // the same homd-valued family used by piapp1_func without adding a broad
 // whole-family homd_int rewrite.
 rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $E $s $x $u $y
-  ↪ @Obj_func
-      (Fibre_cat
-        (@fapp0 $Z (Catd_cat (Op_cat $Z)) (@HomPresheaf_catd_func $Z) $x)
-        $y)
-      (@homd_
-        $Z
-        $E
-        $E
+  ↪ Obj_func
+      (homd_ 
         (@id_funcd $Z $E)
-        $x
-        $u
-        $y
-        (@piapp0 $Z $E $s $y));
+        $x $u
+        $y (@piapp0 $Z $E $s $y));
 
 // Third projection fold. In v3.2 `piapp0` is a definition through ordinary
 // terminal-source component evaluation, so this rule lives one layer down at
@@ -1175,9 +1167,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (f : τ (Hom K x y))
   : τ (Obj (Fibre_cat E y))
-≔ fapp0
-     (@fib_cov_tapp0_func K E x y (@piapp0 K E s x))
-     f;
+≔ fapp0 (@fib_cov_tapp0_func K E x y (@piapp0 K E s x)) f;
 
 symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1196,13 +1186,9 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
       (Fibre_cat E y)
       (@piapp1_src_obj K E s x y f)
       (@piapp0 K E s y))
-≔ piapp0
-     (@piapp1_func K E s x y)
-     f;
+≔ piapp0 (@piapp1_func K E s x y) f;
 
-rule fapp0
-      (@piapp1_func $K (@Const_catd $K $A) $s $x $y)
-      $f
+rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
   ↪ @fapp1_fapp0 $K $A $s $x $y $f;
 
 // -------------------------------------------------------------------------------------------------
