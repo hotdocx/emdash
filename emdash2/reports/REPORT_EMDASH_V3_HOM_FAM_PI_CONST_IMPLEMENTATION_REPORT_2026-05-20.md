@@ -920,6 +920,17 @@ piapp1_src_obj E s f
 Hom_cat (Fibre_cat E y) (piapp1_src_obj E s f) (piapp0 s y)
 ```
 
+- Later review made this reduced endpoint type explicit in the declaration of
+  `piapp1_fapp0` itself:
+
+```text
+piapp1_fapp0 E s f
+  : Hom (Fibre_cat E y) (piapp1_src_obj E s f) (piapp0 s y)
+```
+
+  So `piapp1_src_obj` is no longer only an assertion helper; it names the source
+  endpoint used by the component hom type.
+
 - Added terminal-source cascade probes showing:
 
 ```text
@@ -1017,9 +1028,9 @@ dependent-action layer is settled. The current v3.2 file now defines:
 It does not yet define the terminal-specialization fold from displayed
 dependent action to `piapp1_func`. That fold remains the most important next
 implementation target for making `piapp1*` computational rather than only a
-typed stable package plus definitional projection. The new `piapp1_src_obj`
-helper clarifies the endpoint hom category, but it is not the missing packaged
-section fold.
+typed stable package plus definitional projection. The `piapp1_src_obj` helper
+now clarifies the endpoint hom category and is reused in the reduced type of
+`piapp1_fapp0`, but it is not the missing packaged section fold.
 
 The latest passes settled these prerequisites for this fold:
 

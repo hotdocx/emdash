@@ -1165,8 +1165,10 @@ rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   `piapp1_func` is the section-level package over the base-arrow category.
   The capped object component is defined by ordinary section evaluation, so it
   remains iterable through `Pi_cat` rather than becoming only an object-level
-  shortcut. The terminal-specialization fold from displayed internal action is
-  installed later, after the concrete displayed-composition projection it needs.
+  shortcut. `piapp1_src_obj` names the reduced source endpoint of that component;
+  `piapp1_fapp0` uses it in its displayed hom type. The terminal-specialization
+  fold from displayed internal action is installed later, after the concrete
+  displayed-composition projection it needs.
 */
 symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -1190,15 +1192,10 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   [x y : τ (Obj K)]
   (f : τ (Hom K x y))
-  : τ (Obj
-      (fapp0
-        (homd_
-          (@id_funcd K E)
-          x
-          (@piapp0 K E s x)
-          y
-          (@piapp0 K E s y))
-        f))
+  : τ (Hom
+      (Fibre_cat E y)
+      (@piapp1_src_obj K E s x y f)
+      (@piapp0 K E s y))
 ≔ piapp0
      (@piapp1_func K E s x y)
      f;
@@ -2432,16 +2429,11 @@ assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
   (f : τ (Hom K x y)) ⊢
-  @fapp0 (Op_cat (Hom_cat K x y)) Cat_cat
-    (@homd_
-      K
-      E
-      E
+  fapp0
+    (homd_
       (@id_funcd K E)
-      x
-      (@piapp0 K E s x)
-      y
-      (@piapp0 K E s y))
+      x (@piapp0 K E s x)
+      y (@piapp0 K E s y))
     f
     ≡ Hom_cat (Fibre_cat E y)
         (@piapp1_src_obj K E s x y f)
@@ -2525,19 +2517,7 @@ assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
   (f : τ (Hom K x y)) ⊢
   @piapp1_fapp0 K E s x y f
-    ≡ @piapp0
-        (Op_cat (Hom_cat K x y))
-        (@homd_
-          K
-          E
-          E
-          (@id_funcd K E)
-          x
-          (@piapp0 K E s x)
-          y
-          (@piapp0 K E s y))
-        (@piapp1_func K E s x y)
-        f;
+    ≡ piapp0 (@piapp1_func K E s x y) f;
 
 assert [K : Cat] (A : Cat)
   (s : τ (Obj (Pi_cat (Const_catd K A))))
