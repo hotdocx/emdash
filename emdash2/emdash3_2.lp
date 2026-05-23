@@ -1251,13 +1251,9 @@ symbol piapp1_int [K : Cat] (E : τ (Catd K))
       (homd_int (@id_funcd K (@Const_catd K Terminal_cat)))
       (comp_catd_fapp0
         (@homd_int K (@Const_catd K Terminal_cat) E s)
-        (@Op_funcd K (@Const_catd K Terminal_cat) E s)));
+        (Op_funcd s)));
 
-rule @fdapp1_int_transfd
-      $K
-      (@Const_catd $K Terminal_cat)
-      $E
-      $s
+rule @fdapp1_int_transfd $K (@Const_catd $K Terminal_cat) $E $s
   ↪ @piapp1_int $K $E $s;
 
 // Identity-specialization fold for the internal displayed hom-action.
