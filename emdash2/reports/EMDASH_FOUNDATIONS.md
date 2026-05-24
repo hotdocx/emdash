@@ -443,10 +443,14 @@ Here `const(a)` is the constant functor/section with value `a`:
 const(a)[k] = a
 ```
 
-Morally, when `K = 1`, this is related to the ordinary object functor
-`Obj_func(a) : 1 → A`. The current implementation has `Obj_func` and
-`const_section_func`, but does not yet assert a definitional identification
-between `Const_func 1 A a` and `Obj_func a`.
+When `K = 1`, this specializes to the ordinary object functor:
+
+```text
+const_section_{1,A}(a) = Obj_func(a) : 1 → A
+```
+
+In the implementation, `Obj_func(a)` is a defined alias for the terminal-domain
+constant functor `Const_func(1,A,a)`.
 
 Pullback of sections along a base functor is also present:
 

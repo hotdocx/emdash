@@ -419,17 +419,13 @@ rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 injective symbol Terminal_func : Π (A : Cat), τ (Functor A Terminal_cat);
 rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 
-injective symbol Obj_func : Π [Y : Cat], τ (Obj Y) → τ (Functor Terminal_cat Y);
-rule fapp0 (Obj_func $y) _ ↪ $y;
-rule @Op_func _ _ (@Obj_func $Y $y) ↪ @Obj_func (Op_cat $Y) $y;
-
 symbol fapp0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
 rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 
 // Constant functor, used by constant directed families without capping the
 // hom-action too early.
-symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
+injective symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
 rule @fapp0 $A $B (@Const_func $A $B $b) $_ ↪ $b;
 rule @fapp1_func $A $B (@Const_func $A $B $b) $x $y
   ↪ @Const_func
@@ -443,6 +439,9 @@ rule @comp_cat_fapp0 $A $B $C $F (@Const_func $A $B $b)
   ↪ @Const_func $A $C (@fapp0 $B $C $F $b);
 rule @comp_cat_fapp0 $A $B $C (@Const_func $B $C $c) $G
   ↪ @Const_func $A $C $c;
+
+injective symbol Obj_func [Y : Cat] (y : τ (Obj Y)) : τ (Functor Terminal_cat Y)
+≔ @Const_func Terminal_cat Y y;
 
 // Internalized opposite as a functor in Cat: A |-> A^op.
 constant symbol op : τ (Functor Cat_cat Cat_cat);
@@ -561,7 +560,9 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
 // final `piapp1_int_tgt_transf` projection chain: without it, the final
 // `tapp0_fapp0 Terminal_obj ... -> piapp1_func` fold cannot prove subject
 // reduction.
-rule @Transf_cat Terminal_cat $Y (@Obj_func $Y $u) (@Obj_func $Y $v)
+rule @Transf_cat Terminal_cat $Y
+    (@Const_func Terminal_cat $Y $u)
+    (@Const_func Terminal_cat $Y $v)
   ↪ Hom_cat $Y $u $v;
 
 /*
@@ -1665,6 +1666,23 @@ assert [K : Cat] (A : Cat)
   (a : τ (Obj A)) ⊢
   @fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_section_func K A) a
     ≡ @Const_func K A a;
+
+assert [A : Cat] (a : τ (Obj A)) ⊢
+  @Obj_func A a ≡ @Const_func Terminal_cat A a;
+
+assert [A : Cat] (a : τ (Obj A)) ⊢
+  @fapp0 A (@Pi_cat Terminal_cat (@Const_catd Terminal_cat A))
+    (@const_section_func Terminal_cat A) a
+    ≡ @Obj_func A a;
+
+assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat)) ⊢
+  @fapp1_func Terminal_cat A (@Obj_func A a) x y
+    ≡ @Obj_func (Hom_cat A a a) (@id A a);
+
+assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat))
+  (f : τ (Hom Terminal_cat x y)) ⊢
+  @fapp1_fapp0 Terminal_cat A (@Obj_func A a) x y f
+    ≡ @id A a;
 
 assert [K : Cat] (A : Cat)
   (a : τ (Obj A))

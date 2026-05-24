@@ -355,7 +355,9 @@ fapp0 (tdapp0_func z) eps -> tdapp0_fapp0 z eps
 - A terminal ordinary-transfor collapse was installed:
 
 ```text
-Transf_cat Terminal_cat Y (Obj_func Y u) (Obj_func Y v)
+Transf_cat Terminal_cat Y
+  (Const_func Terminal_cat Y u)
+  (Const_func Terminal_cat Y v)
   -> Hom_cat Y u v
 ```
 
@@ -375,9 +377,11 @@ tapp0_fapp0 Terminal_obj (piapp1_int_tgt_transf E s x y)
 
 The failed subject-reduction goal compares an object of the desired
 `Pi_cat (homd_ ...)` target with an object of
-`Transf_cat Terminal_cat ... (Obj_func ...) (Obj_func ...)`. The terminal
-ordinary-transfor collapse is the conversion step that identifies the latter
-with the ordinary hom category needed by the former.
+`Transf_cat Terminal_cat ... (Const_func Terminal_cat ...) (Const_func
+Terminal_cat ...)`. The terminal ordinary-transfor collapse is the conversion
+step that identifies the latter with the ordinary hom category needed by the
+former. Earlier drafts wrote these point functors with the `Obj_func` alias;
+the canonical rule head is now the terminal-domain `Const_func` constructor.
 
 - The `piapp1_int -> piapp1_func` path now uses stable intermediate projection
   heads rather than any reducible `Fibre_transf_app` surface:
@@ -2020,3 +2024,41 @@ avoided unless they are explicitly justified.
 
 The focused check `timeout 30s lambdapi check -w emdash3_2.lp` passed
 immediately after this policy cleanup.
+
+Twenty-sixth continuation update, 2026-05-24: the point-functor/constant-functor
+policy was aligned with the `Terminal_catd := Const_catd _ Terminal_cat`
+discipline.
+
+The review clarified that Lambdapi `injective symbol` is an intensional
+constructor-decomposition commitment, not ordinary extensional injectivity of
+the represented mathematical function. Therefore the general constant functor
+constructor is allowed to be injective:
+
+```text
+Const_func [A B] b : Functor A B
+```
+
+The implementation now declares `Const_func` as `injective symbol` and makes
+`Obj_func` the terminal-domain alias:
+
+```text
+Obj_func [Y] y := Const_func Terminal_cat Y y
+```
+
+This avoids duplicating point-functor theory in parallel with constant-functor
+theory. The primitive `Obj_func` object/opposite action rules were removed; the
+corresponding computations now come from the existing `Const_func` rules. The
+terminal point-transformation collapse was also moved to the canonical
+constructor head:
+
+```text
+Transf_cat Terminal_cat Y
+  (Const_func Terminal_cat Y u)
+  (Const_func Terminal_cat Y v)
+  -> Hom_cat Y u v
+```
+
+Focused assertions were added for the alias, the `K = Terminal_cat`
+specialization of `const_section_func`, and the inherited `Obj_func` arrow
+action. The focused check `timeout 30s lambdapi check -w emdash3_2.lp` passed
+after the change.
