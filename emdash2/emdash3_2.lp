@@ -448,10 +448,12 @@ constant symbol op : τ (Functor Cat_cat Cat_cat);
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
-// Internalized ordinary functor-category formation.
-symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
+// Internalized ordinary functor-category formation. The total package has no
+// recoverable parameters; the partial stage is injective so equality of
+// packages can recover the fixed source category.
+constant symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
 
-symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
+injective symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
 
 rule @fapp0 _ _ Functor_cat_func $A
   ↪ Functor_cat_fapp0_func $A;
