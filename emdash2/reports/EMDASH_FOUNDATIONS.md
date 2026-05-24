@@ -10,22 +10,22 @@ categorical foundation, not a finished proof assistant surface language.
 
 ## 1. Reading Guide
 
-The central idea is to treat categories, functors, transformations, dependent
+The central idea is to treat categories, functors, transformations, functorial
 families of categories, dependent sums, dependent products, and dependent homs
 as one computational theory.
 
 The notation is intentionally close to dependent type theory:
 
 ```text
-F : A -> B              ordinary functor
+F : A → B              ordinary functor
 F[x]                    action of F on an object
 F[f]                    action of F on an arrow
-E : K -> Cat            directed family of categories over K
+E : K → Cat            functorial family of categories over K
 E[k]                    fibre category at k
-Sigma_k E[k]            total category of a family
-Pi_k E[k]               category of sections of a family
+Σ_k E[k]                total category of a family
+Π_k E[k]                category of sections of a family
 s[k]                    value of a section at k
-s[f]                    action of a section over f : x -> y
+s[f]                    action of a section over f : x → y
 ```
 
 The word "directed" matters. The base `K` is a category with real arrows, not
@@ -40,11 +40,11 @@ A category `A` has:
 Obj(A)                  objects of A
 Hom_A(x,y)              category of arrows from x to y
 id_x                    identity arrow
-g o f                   composition
+g ∘ f                   composition
 ```
 
 The hom between two objects is itself a category. This is the basic
-omega-categorical shape: arrows, higher arrows, and higher comparisons are
+ω-categorical shape: arrows, higher arrows, and higher comparisons are
 represented by iterating `Hom`.
 
 The opposite category reverses homs:
@@ -98,7 +98,7 @@ universe principle used throughout the development.
 Ordinary functors have object and arrow actions:
 
 ```text
-F : A -> B
+F : A → B
 F[x] : Obj(B)
 F[f] : Hom_B(F[x],F[y])
 ```
@@ -109,11 +109,11 @@ The theory also has transformation categories:
 Transf(F,G)
 ```
 
-whose objects are transformations from `F` to `G`. A transformation `epsilon :
-F => G` has point components:
+whose objects are transformations from `F` to `G`. A transformation
+`ϵ : F ⇒ G` has point components:
 
 ```text
-epsilon[x] : Hom_B(F[x],G[x])
+ϵ[x] : Hom_B(F[x],G[x])
 ```
 
 ## 5. Directed Families
@@ -121,7 +121,7 @@ epsilon[x] : Hom_B(F[x],G[x])
 A directed family of categories over `K` is a functor:
 
 ```text
-E : K -> Cat
+E : K → Cat
 ```
 
 The theory writes this as a category-valued family:
@@ -131,19 +131,32 @@ E : Catd(K)
 E[k] = fibre of E at k
 ```
 
-A morphism of directed families is a natural family of functors:
+Terminology used in this note:
+
+- A **functorial family** is a category-valued functor `E : K → Cat`.
+- A **natural family morphism** `FF : E → D` is a family of functors that is
+  natural in the base variable.
+- A **natural family transformation** `ϵ : FF ⇒ GG` is a family of
+  transformations that is natural in the base variable.
+
+The implementation names for these are `Catd`, `Functord`, and `Transfd`,
+respectively. The words "displayed" and "family" still occur in implementation
+names, but this document uses "functorial" and "natural" to emphasize the
+variance over base arrows.
+
+A natural family morphism has fibre functors:
 
 ```text
-FF : E -> D
-FF[k] : E[k] -> D[k]
+FF : E → D
+FF[k] : E[k] → D[k]
 ```
 
-A transformation between such family morphisms has fibrewise components:
+A natural family transformation has fibrewise components:
 
 ```text
-epsilon : FF => GG
-epsilon[k] : FF[k] => GG[k]
-epsilon[k](u) : Hom_{D[k]}(FF[k](u), GG[k](u))
+ϵ : FF ⇒ GG
+ϵ[k] : FF[k] ⇒ GG[k]
+ϵ[k](u) : Hom_{D[k]}(FF[k](u), GG[k](u))
 ```
 
 Basic family operations:
@@ -157,16 +170,16 @@ F^*E[a] = E[F[a]]
 
 ## 6. Dependent Sums: Total Categories
 
-For a directed family `E : K -> Cat`, the dependent sum or total category is:
+For a functorial family `E : K → Cat`, the dependent sum or total category is:
 
 ```text
-Sigma_K(E) = Sigma_k E[k]
+Σ_K E = Σ_k E[k]
 ```
 
 Its objects are dependent pairs:
 
 ```text
-Obj(Sigma_K(E)) = Sigma (k : Obj K), Obj(E[k])
+Obj(Σ_K E) = Σ (k : Obj K), Obj(E[k])
 ```
 
 An object is written `(k,u)` with `u : E[k]`.
@@ -175,52 +188,69 @@ The hom category between two total objects is a directed dependent hom over the
 base hom:
 
 ```text
-Hom_{Sigma E}((x,u),(y,v))
+Hom_{Σ E}((x,u),(y,v))
   = total category over Hom_K(x,y)
-    whose fibre at f : x -> y is
+    whose fibre at f : x → y is
       Hom_{E[y]}(E[f](u), v)
 ```
 
-Equivalently, an arrow `(x,u) -> (y,v)` consists of:
+Equivalently, an arrow `(x,u) → (y,v)` consists of:
 
 ```text
 f : Hom_K(x,y)
-alpha : Hom_{E[y]}(E[f](u), v)
+α : Hom_{E[y]}(E[f](u), v)
 ```
 
 The implementation presents this through an opposite-total convention, but the
 mathematical content is exactly the base arrow plus dependent fibre arrow.
 
-A family morphism `eta : E -> D` induces a map on totals:
+A natural family morphism `FF : E → D` induces a map on totals:
 
 ```text
-Sigma(eta)(k,u) = (k, eta[k](u))
+Σ(FF)(k,u) = (k, FF[k](u))
 ```
 
 The first projection is a functor:
 
 ```text
-pi1 : Sigma_k E[k] -> K
-pi1(k,u) = k
+π₁ : Σ_k E[k] → K
+π₁(k,u) = k
 ```
+
+For a constant family, the expected non-dependent sum is the product:
+
+```text
+Σ_K Const_K(A) ≃ K × A
+```
+
+The current v3.2 file has not yet reintroduced a `Product_cat` presentation for
+this case. When that is added, the expected projections are:
+
+```text
+π₁ : K × A → K
+π₂ : K × A → A
+```
+
+with `Σ_K Const_K(A)` reducing to, or at least being connected with,
+`Product_cat K A`.
 
 ## 7. Dependent Products: Section Categories
 
-For a directed family `E : K -> Cat`, the dependent product is the category of
+For a functorial family `E : K → Cat`, the dependent product is the category of
 sections:
 
 ```text
-Pi_K(E) = Pi_k E[k]
+Π_K E = Π_k E[k]
 ```
 
-An object `s : Pi_K(E)` assigns:
+An object `s : Π_K E` assigns:
 
 ```text
 s[k] : E[k]
 ```
 
-and carries coherent action over base arrows. For a base arrow `f : x -> y`,
-the section has a comparison arrow:
+and carries coherent action over base arrows. For a base arrow `f : x → y`, the
+section has a comparison arrow:
 
 ```text
 s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
@@ -229,21 +259,41 @@ s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 For a constant family, sections are ordinary functors:
 
 ```text
-Pi_K(Const_K(A)) = Functor(K,A)
+Π_K Const_K(A) = Functor(K,A)
 ```
 
-and section evaluation agrees with functor application:
+and evaluation of a section in the constant-family case agrees with ordinary
+functor application:
 
 ```text
-s[k] = s[k] as an ordinary functor value.
+F[k] as a section = F[k] as an ordinary functor value
 ```
+
+In `emdash3_2.lp`, this is represented by the rewrite
+`Pi_cat (Const_catd K A) ↪ Functor_cat K A` and by an assertion equating
+`piapp0 F k` with `fapp0 F k` in that case.
+
+Conceptually, a section should also determine a functor into the total
+category:
+
+```text
+section_total(s) : K → Σ_K E
+section_total(s)(k) = (k, s[k])
+π₁ ∘ section_total(s) = id_K
+```
+
+This construction is not currently exposed as a named primitive in v3.2. It is
+a useful future facade: it would let section action be understood through the
+same Sigma-category infrastructure used for total-category arrows. The current
+implementation instead exposes the direct section action `s[f]`, with the
+dependent hom construction as the shared internal architecture.
 
 ## 8. Arrows Between Sections
 
 In non-directed HoTT notation one might expect:
 
 ```text
-Hom_{Pi E}(s,t) = Pi_k Hom_{E[k]}(s[k],t[k])
+Hom_{Π E}(s,t) = Π_k Hom_{E[k]}(s[k],t[k])
 ```
 
 For a directed base `K`, this pointwise slogan is incomplete. The components
@@ -252,19 +302,19 @@ must be natural with respect to all arrows of `K`.
 The directed form used in v3.2 is:
 
 ```text
-Hom_{Pi E}(s,t)
-  = displayed natural transformations from s to t
+Hom_{Π E}(s,t)
+  = natural family transformations from s to t
 ```
 
-Pointwise, such a transformation `alpha : s => t` still has components:
+Pointwise, such a transformation `α : s ⇒ t` still has components:
 
 ```text
-alpha[k] : Hom_{E[k]}(s[k], t[k])
+α[k] : Hom_{E[k]}(s[k], t[k])
 ```
 
 but these components are constrained by naturality over every base arrow
-`f : x -> y`. This is why the implementation uses displayed transformations,
-not a naive pointwise dependent product of homs.
+`f : x → y`. This is why the implementation uses `Transfd`, not a naive
+pointwise dependent product of homs.
 
 When the base is non-directed or only path-like, the distinction between
 "functorial in k" and "natural in k" collapses. In the directed theory, it is
@@ -272,35 +322,44 @@ essential.
 
 ## 9. Dependent Homs And Fibre Transport
 
-Given a family `E : K -> Cat`, an object `u : E[x]`, and a base arrow
-`f : x -> y`, the theory has covariant fibre transport:
+Given a family `E : K → Cat`, an object `u : E[x]`, and a base arrow
+`f : x → y`, the theory has covariant fibre transport:
 
 ```text
 E[f](u) : E[y]
 ```
 
-This is represented internally by a functor:
+The covariant transport of the object `u` is represented by a functor:
 
 ```text
-Hom_K(x,y) -> E[y]
-f |-> E[f](u)
+transport_{E,x,u,y} : Hom_K(x,y) → E[y]
+transport_{E,x,u,y}(f) = E[f](u)
 ```
 
-The dependent hom construction packages the category of fibre arrows over a
-base arrow:
+The dependent hom construction is contravariant in the base hom. It is a
+category-valued functor:
 
 ```text
+homd_E(x,u,y,v) : Hom_K(x,y)^op → Cat
 homd_E(x,u,y,v)[f]
   = Hom_{E[y]}(E[f](u), v)
 ```
 
-More generally, dependent homs can be formed along a displayed/family morphism
-`FF : D -> E`, allowing endpoint data in different families. The endpoint form
+Here "packages" means that `homd_E(x,u,y,v)` is not merely a pointwise formula:
+it is one functorial object carrying the object, arrow, and higher action of
+dependent fibre arrows over the base hom.
+
+More generally, dependent homs can be formed along a natural family morphism
+`FF : D → E`, allowing endpoint data in different families. The endpoint form
 specializes to the identity-family case above.
 
-The section action formula is then:
+This same dependent hom architecture is shared by total-category homs and
+section action:
 
 ```text
+Hom_{Σ E}((x,u),(y,v))
+  uses the total category over homd_E(x,u,y,v)
+
 s[f] : homd_E(x,s[x],y,s[y])[f]
 ```
 
@@ -310,13 +369,17 @@ or, unfolded:
 s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 ```
 
+A future named `section_total(s) : K → Σ_K E` would make this sharing more
+visible at the presentation level, but the common core is already the
+dependent-hom construction.
+
 ## 10. Mixed-Variance Families
 
 Several useful families are mixed-variance. If:
 
 ```text
-A : K^op -> Cat
-B : K -> Cat
+A : K^op → Cat
+B : K → Cat
 ```
 
 then the pointwise functor family is:
@@ -325,11 +388,14 @@ then the pointwise functor family is:
 Functor_catd(A,B)[k] = Functor(A[k], B[k])
 ```
 
-For one family `E : K -> Cat` and two sections:
+The mixed variance is in the two inputs: precomposition in the source family is
+contravariant, while postcomposition in the target family is covariant.
+
+For one family `E : K → Cat` and two sections:
 
 ```text
-X : Pi_k E[k]^op
-Y : Pi_k E[k]
+X : Π_k E[k]^op
+Y : Π_k E[k]
 ```
 
 the fibrewise hom family is:
@@ -338,38 +404,63 @@ the fibrewise hom family is:
 Hom_catd(E,X,Y)[k] = Hom_{E[k]}(X[k], Y[k])
 ```
 
-For two families of functors `FF, GG`, the fibrewise transfor family is:
+For two families of functors, the fibrewise transformation family has the same
+mixed-variance shape. A source section `FF` is read in the opposite of the
+functor family, and a target section `GG` is read in the original functor
+family:
 
 ```text
+FF : Π_k Functor(A[k],B[k])^op
+GG : Π_k Functor(A[k],B[k])
 Transf_catd(A,B,FF,GG)[k] = Transf(FF[k], GG[k])
 ```
 
 These pointwise constructions are useful, but they do not replace the full
-displayed/natural transformation structure when arrows over the base must be
-tracked.
+natural transformation structure when arrows over the base must be tracked.
 
-## 11. Generic Sigma/Pi Operations
+## 11. Basic Sigma/Pi Operations And Adjunction Shadows
 
-The current theory includes the expected generic operations:
+The current theory includes the expected basic operations:
 
 ```text
-sigma_intro_E : E -> Const_K(Sigma_k E[k])
+sigma_intro_E : E → Const_K(Σ_k E[k])
 sigma_intro_E[k](u) = (k,u)
 ```
 
 ```text
-pi_eval_E : Const_K(Pi_k E[k]) -> E
+pi_eval_E : Const_K(Π_k E[k]) → E
 pi_eval_E[k](s) = s[k]
 ```
 
 ```text
-const_section : A -> Pi_k A
-const_section(a)[k] = a
+const_section_{K,A} : A → Π_K Const_K(A)
+const_section_{K,A}(a) = const(a)
 ```
 
+Here `const(a)` is the constant functor/section with value `a`:
+
 ```text
-section_pullback_F : Pi_b E[b] -> Pi_a E[F[a]]
+const(a)[k] = a
+```
+
+Morally, when `K = 1`, this is related to the ordinary object functor
+`Obj_func(a) : 1 → A`. The current implementation has `Obj_func` and
+`const_section_func`, but does not yet assert a definitional identification
+between `Const_func 1 A a` and `Obj_func a`.
+
+Pullback of sections along a base functor is also present:
+
+```text
+section_pullback_F : Π_b E[b] → Π_a E[F[a]]
 section_pullback_F(s)[a] = s[F[a]]
+```
+
+These are currently basic operations and beta laws, not a completed general
+adjunction package. They should be read as visible instances or shadows of the
+expected future dependent adjunctions along a functor `F : A → B`:
+
+```text
+Σ_F ⊣ F^* ⊣ Π_F
 ```
 
 Some higher action/coherence rules for these helpers remain future work. The
@@ -386,9 +477,14 @@ The current foundations intentionally do not yet include:
 - Pushouts, joins, or higher inductive categories.
 - A finalized surface syntax for the future proof assistant.
 - Full coherence APIs for every Sigma/Pi helper.
+- A named `section_total(s) : K → Σ_K E` construction and its projection laws.
+- A `Product_cat K A` presentation of `Σ_K Const_K(A)`, including product
+  projections, currying/uncurrying, and the projection `π₂ : K × A → A`.
+- General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
+  functors.
 
 These are compatible future directions. The current v3.2 milestone is the
-directed categorical foundation: universes as categories, directed
+directed categorical foundation: universes as categories, functorial
 Cat-valued families, total categories, section categories, dependent homs, and
 section action over base arrows.
 
@@ -406,26 +502,32 @@ vocabulary.
 | `F[x]` | `fapp0 F x` |
 | `F[f]` | `fapp1_fapp0 F f` |
 | `Transf(F,G)` | `Transf_cat F G` / `Transf F G` |
-| `epsilon[x]` | `tapp0_fapp0 x epsilon` |
+| `ϵ[x]` | `tapp0_fapp0 x ϵ` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
 | `E[k]` | `Fibre_cat E k` |
 | `F^*E` | `Pullback_catd E F` |
 | `Const_K(A)` | `Const_catd K A` |
 | `E^op` | `Op_catd E` |
-| `Pi_k E[k]` | `Pi_cat E` |
+| `Π_k E[k]` | `Pi_cat E` |
 | `s[k]` | `piapp0 s k` |
 | `s[f]` | `piapp1_fapp0 s f` |
-| `Sigma_k E[k]` | `Sigma_cat E` |
+| `Π_K Const_K(A) = Functor(K,A)` | rewrite for `Pi_cat (Const_catd K A)` |
+| `const_section_{K,A}` | `const_section_func K A` |
+| `const_section_{K,A}(a)` | `Const_func K A a` |
+| `Σ_k E[k]` | `Sigma_cat E` |
 | `(k,u)` | `Struct_sigma k u` |
-| `pi1` | `Sigma_proj1_func E` |
-| `Sigma(eta)` | `sigma_map_func eta` |
+| `π₁` | `Sigma_proj1_func E` |
+| `Σ(FF)` | `sigma_map_func FF` |
 | `E[f](u)` | `fapp0 (fib_cov_tapp0_func E x y u) f` |
 | `homd_E(x,u,y,v)` | `homd_ (id_funcd E) x u y v` |
-| Displayed family morphisms | `Functord_cat E D` / `Functord E D` |
-| Displayed transformations | `Transfd_cat FF GG` / `Transfd FF GG` |
+| Natural family morphisms | `Functord_cat E D` / `Functord E D` |
+| Natural family transformations | `Transfd_cat FF GG` / `Transfd FF GG` |
 | `Functor_catd(A,B)` | `Functor_catd A B` |
 | `Hom_catd(E,X,Y)` | `Hom_catd E X Y` |
 | `Transf_catd(A,B,FF,GG)` | `Transf_catd A B FF GG` |
+| `section_total(s)` | future presentation-level facade; not currently named |
+| `K × A` | future `Product_cat K A` connection for `Σ_K Const_K(A)` |
+| `π₂ : K × A → A` | future product/Sigma-constant projection |
 
 The implementation contains additional projection heads to make Lambdapi
 normalization reliable. They are part of the checked kernel engineering, not
