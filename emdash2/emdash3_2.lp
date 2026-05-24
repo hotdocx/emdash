@@ -792,7 +792,7 @@ unif_rule Obj (@Pi_cat $K $E) ≡ Obj (@Pi_cat $K' $E') ↪ [ $K ≡ $K'; $E ≡
 rule Hom_cat (@Pi_cat $K $E) $s $t
   ↪ @Transfd_cat $K (@Const_catd $K Terminal_cat) $E $s $t;
 
-symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
+injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
 
