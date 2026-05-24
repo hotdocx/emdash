@@ -2062,3 +2062,152 @@ Focused assertions were added for the alias, the `K = Terminal_cat`
 specialization of `const_section_func`, and the inherited `Obj_func` arrow
 action. The focused check `timeout 30s lambdapi check -w emdash3_2.lp` passed
 after the change.
+
+Twenty-seventh continuation update, 2026-05-25: a follow-up review clarified
+the boundary between canonical constructor heads, internal functorial packages,
+readability aliases, and generic evaluation/projection packages.
+
+The review first consolidated the planned user-facing syntax into a separate
+design report:
+
+```text
+reports/REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md
+```
+
+That report records the intended default surface syntax for the current
+`emdash3_2.lp` kernel, including:
+
+- typed, polarity-aware pretty-printing rather than raw kernel printing;
+- `z^-` as polarity inversion relative to the current binder;
+- canonical mixed-variance syntax such as
+  `D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)` under
+  `Π y :^f Z^op`;
+- ordinary arrows `A ⟶ B` and transfors `F ⇒ G` kept distinct from indexed
+  mixed-variance arrows `A[z^-] ⟶_[z] B[z]` and
+  `FF[z^-] ⇒_[z] GG[z]`;
+- compact placeholder syntax for internal hom-action, such as
+  `Hom_B(F^op ~, G —)` and `Homd_D(FF^op ~, GG —)`;
+- a section-by-section audit of the current `emdash3_2.lp` symbols, classifying
+  each as surface constructor, surface macro, projection notation, or
+  kernel/debug-only head.
+
+This syntax report is a design/documentation artifact only. It does not
+implement the future TypeScript parser, pretty-printer, elaborator, or
+typechecker.
+
+The same review adjusted a small number of ordinary constructor-package
+modifiers in `emdash3_2.lp`.
+
+The ordinary functor-category internal package now distinguishes the total
+zero-argument package from the partial package:
+
+```text
+constant symbol Functor_cat_func
+injective symbol Functor_cat_fapp0_func (A : Cat)
+```
+
+`Functor_cat_func` has no recoverable arguments and is a fixed internal package.
+`Functor_cat_fapp0_func A` is the partial constructor package
+`B ↦ Functor_cat A B`, so equality of such packages should recover the fixed
+source category `A`.
+
+The old name:
+
+```text
+op_val_func
+```
+
+was removed and replaced by the clearer internal package:
+
+```text
+injective symbol Op_catd_func (Z : Cat)
+  : Functor (Catd_cat Z) (Catd_cat Z)
+```
+
+This makes the relationship between ordinary opposite, pointwise family
+opposite, and the generic composition pipeline explicit:
+
+```text
+op                         : Cat ⟶ Cat
+Op_catd_func Z             : Catd_cat Z ⟶ Catd_cat Z
+Op_catd E                  : Catd Z
+comp_cat_cov_func ... op   -> Op_catd_func Z
+comp_cat_fapp0 op E        -> Op_catd E
+fapp0 (Op_catd_func Z) E   -> Op_catd E
+```
+
+`Edge_catd_func` now uses `Op_catd_func` directly:
+
+```text
+Edge_catd_func Z
+  := comp_cat_fapp0 (Op_catd_func Z) (hom_int id_Z)
+```
+
+The canonical object-level result remains `Op_catd E`; `Op_catd_func Z` is only
+the internal functorial package.
+
+`Pi_func` was promoted to match the already-injective Sigma package:
+
+```text
+injective symbol Pi_func (K : Cat)
+injective symbol Sigma_func (K : Cat)
+```
+
+This aligns the package/object constructor policy:
+
+```text
+Pi_func K     packages E ↦ Pi_cat E
+Pi_cat E      injective section-category constructor
+Sigma_func K  packages E ↦ Sigma_cat E
+Sigma_cat E   injective total-category constructor
+```
+
+Several proposed modifier changes were intentionally rejected and should remain
+part of the design record:
+
+- `Terminal_catd K` remains a plain definitional alias
+  `Const_catd K Terminal_cat`, not an injective constructor head. Although
+  `Terminal_catd K = Terminal_catd L` semantically forces `K = L`, the
+  canonical recoverable constructor is `Const_catd`, and operational rules
+  should continue to target the unfolded `Const_catd K Terminal_cat` form.
+- `comp_cat_cov_func` remains a plain `symbol`. It is a generic
+  postcomposition package, not a primitive constructor whose arguments should
+  always be syntactically recovered. The temporary thought that one can recover
+  `G` by applying to an identity only works in the `X = Y` specialization, not
+  for arbitrary `X`.
+- `tapp0_func` remains a plain `symbol`. It is a component-evaluation package
+  analogous to `fapp0_func`; the stable computation head for transfor
+  components remains `tapp0_fapp0`.
+- `fapp0_func`, `piapp0_func`, `tdapp0_func`, and similar evaluation/projection
+  packages remain non-injective unless a later focused use justifies promoting
+  a particular head.
+
+The resulting policy is:
+
+```text
+Injective:
+  stable syntactic constructors and selected internal packages whose arguments
+  are intended to be recovered by head decomposition.
+
+Plain symbol:
+  generic evaluation/projection packages, readability aliases, and semantic
+  helper pipelines whose arguments should not become part of the kernel
+  decomposition contract.
+
+Constant symbol:
+  fixed packages with no recoverable parameters and no intended defining rules.
+```
+
+Validation after these changes:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+passed for:
+
+```text
+emdash2.lp
+emdash3_1.lp
+emdash3_2.lp
+```
