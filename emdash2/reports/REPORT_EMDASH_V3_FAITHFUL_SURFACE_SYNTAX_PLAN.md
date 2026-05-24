@@ -1060,7 +1060,7 @@ piapp1_int_tgt_transf
 Functor_cat_func
 Functor_cat_fapp0_func
 comp_cat_cov_func
-op_val_func
+Op_catd_func
 ```
 
 Kernel/debug mode should still print these heads exactly enough to diagnose
@@ -1169,7 +1169,7 @@ op
 Functor_cat_func
 Functor_cat_fapp0_func
 comp_cat_cov_func
-op_val_func
+Op_catd_func
 ```
 
 Surface recommendations:
@@ -1205,7 +1205,7 @@ Surface recommendations:
 | `Functor_cat_func` | curried functor-category constructor | kernel/debug |
 | `Functor_cat_fapp0_func` | curried functor-category stage | kernel/debug |
 | `comp_cat_cov_func` | curried postcomposition | kernel/debug |
-| `op_val_func` | pointwise opposite package | kernel/debug |
+| `Op_catd_func` | pointwise opposite package | kernel/debug |
 
 Design lesson: `*_func` heads often package functoriality of an operation. They
 should normally disappear in surface syntax and reappear only when the user asks

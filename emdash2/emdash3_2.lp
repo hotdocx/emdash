@@ -468,8 +468,13 @@ symbol comp_cat_cov_func : Π [X Y Z : Cat],
 rule fapp0 (@comp_cat_cov_func $X $Y $Z $G) $F
   ↪ comp_cat_fapp0 $G $F;
 
-symbol op_val_func [Z : Cat] : τ (Functor (Catd_cat Z) (Catd_cat Z))
-≔ @comp_cat_cov_func Z Cat_cat Cat_cat op;
+// Internalized pointwise opposite on directed families. This is the packaged
+// functorial version of `Op_catd`; the object-level result remains the
+// canonical normal form.
+injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z));
+
+rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
+  ↪ @Op_catd_func $Z;
 
 // -------------------------------------------------------------------------------------------------
 // 3. Curried internal hom
@@ -727,6 +732,12 @@ symbol Terminal_catd (K : Cat) : τ (Catd K)
 
 injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 
+rule @fapp0 (@Catd_cat $K) (@Catd_cat $K) (@Op_catd_func $K) $E
+  ↪ @Op_catd $K $E;
+
+rule @comp_cat_fapp0 $K Cat_cat Cat_cat op $E
+  ↪ @Op_catd $K $E;
+
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
   ↪ Op_cat (@fapp0 $K Cat_cat $E $k);
 
@@ -937,7 +948,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ comp_cat_fapp0
-     (@op_val_func Z)
+     (@Op_catd_func Z)
      (@hom_int Z Z (@id_func Z));
 
 symbol Presheaf_catd_func (K : Cat)
@@ -1120,7 +1131,7 @@ symbol homd_src_func [Z : Cat] [D E : τ (Catd Z)]
 
 // First projection fold. The source and target family arguments are
 // deliberately `_`: their canonical forms contain reducible expressions such
-// as `fapp0 (op_val_func Z) E` and `Homd_target_catd E`.  The Transf_cat
+// as `fapp0 (Op_catd_func Z) E` and `Homd_target_catd E`.  The Transf_cat
 // unification helper above supplies the needed endpoint information.
 rule @tapp0_fapp0
       $Z
