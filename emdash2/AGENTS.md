@@ -4,9 +4,9 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md and @reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md. The preserved v3.1 baseline @emdash3_1.lp and the original @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md are historical references only. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md and @reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
 
-For v3.2 work, start from @emdash3_2.lp and the current v3.2 status/SOP reports. Consult @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md only for explicitly requested historical recovery or baseline comparison. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
+For v3.2 work, start from @emdash3_2.lp and the current v3.2 status/SOP reports. Consult @reports/REPORT_EMDASH_V3_CONSOLIDATED.md only for explicitly requested historical comparison. The v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report have been retired into the ignored `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/` folder. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
 
 The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
@@ -30,7 +30,6 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
-- Typecheck historical v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`

@@ -7,16 +7,11 @@ The proof assistant is called `m—` (read “emdash”).
 ## Layout
 - `emdash2.lp`: ω-category-oriented development (v2, second iteration).
 - `emdash3_2.lp`: active v3.2 directed-family mixed-variance development.
-- `emdash3_1.lp`: preserved historical v3.1 baseline. It is still checked by
-  `make check` for now, but should not be used as current design guidance unless
-  explicitly doing archaeology.
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
   v3.2 status and rewrite/debugging SOP.
 - `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`: current
   internalized path-induction plan.
-- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`: superseded historical
-  implementation plan, kept only until its useful facts are fully consolidated.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
@@ -24,9 +19,8 @@ The proof assistant is called `m—` (read “emdash”).
 ## Quick start
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
-- Check tracked Lambdapi files: `make check`
+- Check active Lambdapi files: `make check`
 - Check just v3.2: `lambdapi check -w emdash3_2.lp`
-- Check historical v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
@@ -80,5 +74,8 @@ Run these from this folder (`emdash2/`), independent of the parent repo workspac
 
 ## Notes
 - Alternative/related approaches exist in ignored `.scratchpad/` backups. Retired v3 material is under `.scratchpad/backup/2026-05-15_v3_retirement/`.
+- The retired v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report are in
+  `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/` for explicit
+  archaeology only.
 - Retired v2 surface-syntax notes, old email copy, and stale paper stubs are archived under `.scratchpad/backup/2026-05-15_project_docs_retirement/`.
 - If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.

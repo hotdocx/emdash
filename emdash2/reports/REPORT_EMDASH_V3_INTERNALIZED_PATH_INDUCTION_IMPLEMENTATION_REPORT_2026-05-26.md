@@ -363,7 +363,6 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 The full check covers:
 
 - `emdash2.lp`;
-- `emdash3_1.lp`;
 - `emdash3_2.lp`.
 
 ## Remaining Work

@@ -2,7 +2,7 @@
 .PHONY: check clean
 
 check:
-# scripts/check.sh checks emdash2.lp, the historical v3.1 baseline, and active v3.2.
+# scripts/check.sh checks the v2 reference and active v3.2 development.
 > ./scripts/check.sh
 
 watch:

@@ -95,10 +95,10 @@ The names above are the current v3.1 baseline names. During the next
 architecture migration, translate them to the canonical `Catd` vocabulary
 unless the detailed plan explicitly keeps a name as notation.
 
-## Next Architecture Plan
+## Historical Next Architecture Plan
 
-The next implementation pass is governed by
-`REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`. Its main decisions are:
+At the time this report was written, the next implementation pass was governed
+by the now-retired HOM/FAM/PI/CONST plan. Its main decisions were:
 
 - Reuse the `Catd` suffix vocabulary, but with corrected directed-family
   semantics: `Catd_cat K` is the canonical contraction of
@@ -133,8 +133,8 @@ The next implementation pass is governed by
     --> Terminal_catd (Op_cat (Hom_cat K x y))
   ```
 
-Future cleanup may rename or regroup symbols in `emdash3_1.lp`, but it should
-follow the detailed phase order in the next-step plan.
+That phase has since moved into `emdash3_2.lp`; use the current v3.2 status/SOP
+report and internalized path-induction plan for active work.
 
 ## Retired v3 Material
 
@@ -167,10 +167,9 @@ after consolidation. They are not current v3 guidance.
 
 ## Validation SOP
 
-For v3.1 work, run:
+For current v3.2 work, run:
 
 ```bash
-lambdapi check -w emdash3_1.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 

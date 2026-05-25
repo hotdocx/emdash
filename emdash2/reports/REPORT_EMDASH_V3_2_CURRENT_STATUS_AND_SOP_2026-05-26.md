@@ -16,13 +16,12 @@ path-induction work.
   `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`.
 - This report records repository-level SOP and retirement guidance.
 
-Historical references:
+Retired historical references:
 
-- `emdash3_1.lp` is a preserved v3.1 baseline, not active design guidance.
-- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md` is superseded.
-- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_IMPLEMENTATION_REPORT_2026-05-20.md`
-  is superseded as a chronological log, but still contains useful archaeology
-  until all lessons are extracted.
+- The old v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report have been
+  moved to ignored `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/`.
+- Do not consult those archived files during normal v3.2 work. Recover them
+  only for explicitly requested historical comparison.
 
 ## Current v3.2 Status
 
@@ -54,12 +53,10 @@ At the time of this report it checks:
 
 ```text
 emdash2.lp
-emdash3_1.lp
 emdash3_2.lp
 ```
 
-`emdash3_1.lp` remains in `make check` only because it has not yet been retired
-from the tracked workspace.
+The old v3.1 baseline is no longer part of the ordinary check path.
 
 ## SOP: Rewrite And Conversion Hygiene
 
@@ -132,17 +129,16 @@ Notation-only heads such as `Fibre_cat` should not receive broad injectivity or
 unification helpers. `Fibre_cat E k` is notation for `fapp0 E k`; equality of
 fibre categories should not generally recover the whole family and index.
 
-## Current Retirement Plan
+## Completed Retirement
 
-Do not delete or move tracked historical files until these steps are complete:
+Completed on 2026-05-26:
 
-1. Confirm this report and the current path-induction reports contain all
-   actively useful SOP from the older HOM/FAM/PI/CONST plan and implementation
-   log.
-2. Update `scripts/check.sh`, `Makefile`, `README.md`, and `AGENTS.md` so
-   `emdash3_1.lp` is no longer part of the ordinary check path.
-3. Move historical files to an ignored `.scratchpad/` subfolder in one focused
-   cleanup:
+1. This report and the current path-induction reports contain the actively
+   useful SOP from the older HOM/FAM/PI/CONST plan and implementation log.
+2. `scripts/check.sh`, `Makefile`, `README.md`, and `AGENTS.md` no longer put
+   `emdash3_1.lp` in the ordinary check path.
+3. The historical files were moved to
+   `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/`:
 
    ```text
    emdash3_1.lp
@@ -150,7 +146,8 @@ Do not delete or move tracked historical files until these steps are complete:
    reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_IMPLEMENTATION_REPORT_2026-05-20.md
    ```
 
-4. Run `EMDASH_TYPECHECK_TIMEOUT=60s make check`.
+4. Validation after the move:
 
-Until then, those files remain tracked but should be treated as historical.
-
+   ```bash
+   EMDASH_TYPECHECK_TIMEOUT=60s make check
+   ```

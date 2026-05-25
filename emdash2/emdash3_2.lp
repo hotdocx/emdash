@@ -2,9 +2,9 @@
   m- / emdash3.2
   Directed-family mixed-variance v3.2 migration draft.
 
-  This file began as a fork of emdash3_1.lp.  It is now the active v3.2
-  development; emdash3_1.lp and the original HOM/FAM/PI/CONST plan are
-  historical baselines rather than current design authorities.  This file uses
+  This file began as a fork of the retired v3.1 baseline.  It is now the active
+  v3.2 development; the v3.1 file and original HOM/FAM/PI/CONST plan are
+  archived historical baselines rather than current design authorities.  This file uses
   directed Cat-valued families directly:
 
     Functor_cat K Cat_cat --> Catd_cat K.

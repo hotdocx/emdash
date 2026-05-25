@@ -104,4 +104,5 @@ lambdapi check -w emdash2.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-`make check` also checks `emdash3_1.lp`, because v3.1 is now active.
+`make check` also checks the active v3.2 development, `emdash3_2.lp`. The old
+v3.1 baseline is retired from the ordinary workspace.
