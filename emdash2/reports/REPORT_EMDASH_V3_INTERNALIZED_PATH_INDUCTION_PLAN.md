@@ -815,21 +815,20 @@ CompTarget_catd Z x
 ```
 
 No CompTarget-specific `fapp0`, `fapp1_func`, or `fapp1_fapp0` rules are needed;
-the fibre and action computations come from the alias body. The action helper
-aliases are definitions through that semantic body:
+the fibre and action computations come from the alias body. The only retained
+action helper is the capped-action alias:
 
 ```text
-fapp1_func (CompTarget_catd Z x) a b
-  == CompTarget_fapp1_func_func Z x a b
-
 fapp1_fapp0 (CompTarget_catd Z x) p
   == CompTarget_fapp1_func Z x p
 ```
 
-The helper types use canonical endpoints
+No separate `CompTarget_fapp1_func_func` alias is needed; the full hom-action is
+the ordinary `fapp1_func (CompTarget_catd Z x) a b`. The helper type uses
+canonical endpoints
 `Functord_cat Z (Rep_Z a) (Rep_Z x)` and
-`Functord_cat Z (Rep_Z b) (Rep_Z x)`, so the present implementation is neither
-capped-only nor dependent on a primitive CompTarget action shortcut.
+`Functord_cat Z (Rep_Z b) (Rep_Z x)`, so the present implementation is not
+dependent on a primitive CompTarget action shortcut.
 
 Then pull it back along the projection:
 

@@ -1181,9 +1181,9 @@ injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
     (Op_cat Z)
     (@Rep_catd_func Z);
 
-// Readable aliases for the hom-action of `CompTarget_catd`.  Their endpoint
-// types use canonical `Functord_cat` forms rather than reducible `Fibre_cat`
-// wrappers, but their bodies are the semantic `hom_con` action.
+// Readable alias for the capped hom-action of `CompTarget_catd`.  Its endpoint
+// type uses canonical `Functord_cat` forms rather than reducible `Fibre_cat`
+// wrappers, but its body still goes through `CompTarget_catd` itself.
 symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
   (p : τ (Hom Z a b))
   : τ (Functor
@@ -1192,31 +1192,10 @@ symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
 ≔ @fapp1_fapp0
     Z
     Cat_cat
-    (@hom_con
-      (@Catd_cat Z)
-      (@Rep_catd Z x)
-      (Op_cat Z)
-      (@Rep_catd_func Z))
+    (@CompTarget_catd Z x)
     a
     b
     p;
-
-symbol CompTarget_fapp1_func_func [Z : Cat] [x a b : τ (Obj Z)]
-  : τ (Functor
-      (Hom_cat Z a b)
-      (Functor_cat
-        (@Functord_cat Z (@Rep_catd Z a) (@Rep_catd Z x))
-        (@Functord_cat Z (@Rep_catd Z b) (@Rep_catd Z x))))
-≔ @fapp1_func
-    Z
-    Cat_cat
-    (@hom_con
-      (@Catd_cat Z)
-      (@Rep_catd Z x)
-      (Op_cat Z)
-      (@Rep_catd_func Z))
-    a
-    b;
 
 symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@PathOut_cat Z x))
@@ -2195,22 +2174,6 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     (@CompMotive_catd Z x)
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_sec Z x;
-
-assert [Z : Cat] (x y : τ (Obj Z)) ⊢
-  @fapp1_func
-    Z
-    Cat_cat
-    (@CompTarget_catd Z x)
-    x
-    y
-    ≡ @CompTarget_fapp1_func_func Z x x y;
-
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  fapp0
-    (@CompTarget_fapp1_func_func Z x x y)
-    p
-    ≡ @CompTarget_fapp1_func Z x x y p;
 
 assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢

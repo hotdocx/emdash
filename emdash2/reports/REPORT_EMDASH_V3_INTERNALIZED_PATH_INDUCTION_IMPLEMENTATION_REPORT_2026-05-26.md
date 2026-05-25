@@ -320,24 +320,20 @@ With those two corrections, `CompTarget_catd` is implemented purely as the
 semantic `hom_con` alias, not as a primitive stable family head. No
 CompTarget-specific `fapp0`, `fapp1_func`, or `fapp1_fapp0` rules are retained;
 the fibre and hom-action computations are inherited from the alias body. The
-action helper names are retained only as readable aliases, and their types use
-the canonical `Functord_cat` endpoints:
+only retained action helper is the readable capped-action alias
+`CompTarget_fapp1_func`; its type uses canonical `Functord_cat` endpoints:
 
 ```lambdapi
 symbol CompTarget_fapp1_func [...]
   : Functor
       (Functord_cat Z (Rep_Z a) (Rep_Z x))
       (Functord_cat Z (Rep_Z b) (Rep_Z x))
-≔ fapp1_fapp0 (hom_con ...) p;
-
-symbol CompTarget_fapp1_func_func [...]
-  : Functor
-      (Hom_cat Z a b)
-      (Functor_cat
-        (Functord_cat Z (Rep_Z a) (Rep_Z x))
-        (Functord_cat Z (Rep_Z b) (Rep_Z x)))
-≔ fapp1_func (hom_con ...) a b;
+≔ fapp1_fapp0 (CompTarget_catd Z x) p;
 ```
+
+No separate `CompTarget_fapp1_func_func` alias is retained. The full hom-action
+is just the ordinary term `fapp1_func (CompTarget_catd Z x) a b`, reducing
+through the semantic `hom_con` definition when needed.
 
 The earlier CompTarget-specific shortcut:
 
