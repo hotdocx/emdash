@@ -6,13 +6,17 @@ The proof assistant is called `m—` (read “emdash”).
 
 ## Layout
 - `emdash2.lp`: ω-category-oriented development (v2, second iteration).
-- `emdash3_1.lp`: active v3 directed-family mixed-variance development.
-- `emdash3_2.lp`: v3.2 fork implementing the Catd/Hom/Pi/constant-family
-  migration plan.
+- `emdash3_2.lp`: active v3.2 directed-family mixed-variance development.
+- `emdash3_1.lp`: preserved historical v3.1 baseline. It is still checked by
+  `make check` for now, but should not be used as current design guidance unless
+  explicitly doing archaeology.
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
-- `reports/REPORT_EMDASH_V3_CONSOLIDATED.md`: current v3 architecture report.
-- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`: detailed next v3
-  implementation plan for the `Catd`/Pi/dependent-hom migration.
+- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
+  v3.2 status and rewrite/debugging SOP.
+- `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`: current
+  internalized path-induction plan.
+- `reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`: superseded historical
+  implementation plan, kept only until its useful facts are fully consolidated.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
@@ -20,9 +24,9 @@ The proof assistant is called `m—` (read “emdash”).
 ## Quick start
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
-- Check active developments: `make check`
-- Check just v3.1 baseline: `lambdapi check -w emdash3_1.lp`
+- Check tracked Lambdapi files: `make check`
 - Check just v3.2: `lambdapi check -w emdash3_2.lp`
+- Check historical v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
 ## Watch mode (auto typecheck on save)
@@ -56,6 +60,15 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Do not keep temporary probe files in the workspace. Move successful rules and
   their assertions into `emdash3_2.lp`, and document failed probes in the active
   implementation report when they influence the design.
+- Prefer semantic definitions before introducing new stable heads. If a semantic
+  construction fails to compute, first check for missing projection rules and for
+  brittle explicit source/target slots.
+- In explicit `fapp0` source/target arguments, prefer canonical normal forms
+  such as `Hom_cat ...` and `Functord_cat ...` over reducible readability
+  wrappers such as `Fibre_cat (DefinedAlias ...) k`. The wrapper may compute
+  alone but still trigger expensive conversion in nested assertions.
+- Keep readable helper aliases routed through the named semantic constructor;
+  avoid duplicating the same semantic body in multiple helper definitions.
 
 ## Print pipeline
 Run these from this folder (`emdash2/`), independent of the parent repo workspace:

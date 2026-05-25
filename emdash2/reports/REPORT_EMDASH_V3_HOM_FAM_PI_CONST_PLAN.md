@@ -2,6 +2,14 @@
 
 ## Status
 
+Supersession note, 2026-05-26: this plan is historical. Its implemented and
+corrected lessons have been consolidated into
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`, and
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`.
+Do not use this plan as current implementation guidance except for explicit
+archaeology.
+
 Draft planning report for the next v3 iteration. This document updates and
 supersedes the earlier `Hom_fam` / `Transf_fam` framing.
 

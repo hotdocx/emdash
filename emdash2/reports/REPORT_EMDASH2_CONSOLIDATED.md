@@ -4,8 +4,9 @@
 
 `emdash2.lp` is the v2 reference development. It remains important as the
 largest tested Lambdapi specification and as the source of rewrite/unification
-SOP used by `emdash3_1.lp`, but active v3 architecture work should use
-`emdash3_1.lp` and `REPORT_EMDASH_V3_CONSOLIDATED.md`.
+SOP, but active v3 architecture work should use `emdash3_2.lp`,
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`, and
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`.
 
 The old `PLAN_*.md` and emdash2 `REPORT_EMDASH_LOGIC_DEV*.md` files were
 development-time plans. Their useful lessons are consolidated here; the files

@@ -373,7 +373,8 @@ Near-term:
 - use the fixed-`x` composition result as the benchmark for future
   path-induction internalization;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
-  out before the stable `CompTarget_catd` redesign.
+  out before the root cause was narrowed to missing projection rules and
+  non-canonical explicit source/target slots.
 
 Later:
 

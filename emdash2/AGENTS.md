@@ -4,9 +4,9 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The v3.2 implementation fork is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. The preserved v3.1 baseline is @emdash3_1.lp, summarized by @reports/REPORT_EMDASH_V3_CONSOLIDATED.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md and @reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md. The preserved v3.1 baseline @emdash3_1.lp and the original @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md are historical references only. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
 
-For v3.2 work, start from @emdash3_2.lp, the preserved @emdash3_1.lp baseline, and the consolidated reports. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
+For v3.2 work, start from @emdash3_2.lp and the current v3.2 status/SOP reports. Consult @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md only for explicitly requested historical recovery or baseline comparison. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
 
 The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
@@ -22,15 +22,15 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
+Advice: for v3.2 work, start by reading @emdash3_2.lp, @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, and @reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
 ## Fast commands
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
-- Typecheck only v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
+- Typecheck historical v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`
@@ -40,6 +40,14 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 During early development, a “hung” typecheck usually indicates a rewrite/unification issue. Prefer a short timeout (≤ 60s) and investigate if it fires:
 - One-shot with timeout: `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 - Watch mode already uses `scripts/check.sh` (with the same timeout mechanism).
+
+## SOP: Rewrite-rule hygiene
+- Probe nontrivial rewrite/unification changes in a temporary copy with a focused assertion before editing the active file.
+- Keep inferred source/target arguments implicit on rule LHSs unless they are the actual discriminator.
+- When an explicit source/target category is needed in an assertion, prefer canonical forms such as `Hom_cat ...` and `Functord_cat ...` over reducible readability wrappers such as `Fibre_cat (DefinedAlias ...) k`.
+- Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
+- If a semantic definition fails to compute, first look for missing projection rules, such as a capped `fapp1_fapp0` rule corresponding to an existing `fapp1_func` rule.
+- Do not duplicate semantic bodies in helper aliases; route helper definitions through the named semantic constructor.
 
 ## SOP: Continuous typecheck (watch mode)
 Recommended workflow (2 terminals):

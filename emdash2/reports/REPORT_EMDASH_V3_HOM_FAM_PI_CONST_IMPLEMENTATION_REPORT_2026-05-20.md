@@ -2,6 +2,14 @@
 
 Date: 2026-05-20
 
+Supersession note, 2026-05-26: this is now a historical chronological log. For
+current v3.2 orientation and SOP, use
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`, and
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`.
+The useful lessons from this report are being consolidated there before this
+file is moved to `.scratchpad/`.
+
 ## Scope
 
 This report records the first implementation pass of
@@ -2211,3 +2219,38 @@ emdash2.lp
 emdash3_1.lp
 emdash3_2.lp
 ```
+
+## Consolidation Addendum, 2026-05-26
+
+This report is superseded as active guidance. Its remaining useful content has
+been distilled into the current v3.2 status/SOP report and the internalized
+path-induction plan/report. The main lessons extracted are:
+
+- Probe rewrite rules in temporary copies with focused assertions and bounded
+  checks before editing `emdash3_2.lp`.
+- Treat timeout during typechecking as evidence of rewrite/unification or
+  conversion-shape trouble, not as a reason to keep adding larger shortcuts.
+- Keep inferred source/target arguments implicit in rule LHSs unless they are
+  the actual discriminator.
+- When explicit source/target categories are needed, use canonical normal forms
+  such as `Hom_cat ...` and `Functord_cat ...`; avoid reducible readability
+  wrappers such as `Fibre_cat (DefinedAlias ...) k` in nested explicit `fapp0`
+  slots.
+- Prefer semantic definitions first. Introduce primitive stable heads only after
+  a focused probe shows a real discrimination or performance need.
+- Before replacing a semantic definition with a stable head, check for missing
+  projection rules. The `CompTarget_catd` issue was resolved by adding the
+  capped `fapp1_fapp0 (Op_func F)` rule and canonicalizing assertion slots, not
+  by keeping a primitive CompTarget head.
+- Do not duplicate semantic bodies in helper aliases. Helper definitions should
+  call the named semantic constructor.
+- Do not add broad injectivity/unification helpers for notation-only heads such
+  as `Fibre_cat`.
+- Keep full hom-action (`fapp1_func`) and capped action (`fapp1_fapp0`) coherent:
+  if a constructor has one projection, audit whether the other is required.
+- Record failed probes only when they affect design decisions; remove temporary
+  probe files from the workspace.
+
+Retirement status: keep this file tracked only until the current status/SOP
+report has been reviewed. After that, move it to an ignored `.scratchpad/`
+archive together with the superseded HOM/FAM/PI/CONST plan.

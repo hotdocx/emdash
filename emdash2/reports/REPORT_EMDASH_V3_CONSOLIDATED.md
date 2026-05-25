@@ -2,11 +2,16 @@
 
 ## Current Source of Truth
 
-`emdash3_1.lp` is the active v3 iteration. The old tracked `emdash3.lp`
-attempt is retired. Future v3 work should start from `emdash3_1.lp`, this
-report, the detailed next-step plan
-`reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md`, and the repository SOP
-in `AGENTS.md`.
+Supersession note, 2026-05-26: this report describes the v3.1 baseline and is
+historical for current v3.2 work. Use
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` and
+`REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md` as the current v3.2
+guides.
+
+At the time this report was written, `emdash3_1.lp` was the active v3
+iteration. The old tracked `emdash3.lp` attempt was retired, and this report
+served as the v3.1 architecture summary. Current v3.2 work should no longer
+start from this report except for historical comparison.
 
 The design goal is a Lambdapi specification for functorial programming over
 omega-categories, using stable rewrite heads and unification helpers to make

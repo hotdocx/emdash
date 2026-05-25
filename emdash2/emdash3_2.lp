@@ -2,8 +2,9 @@
   m- / emdash3.2
   Directed-family mixed-variance v3.2 migration draft.
 
-  This file is forked from emdash3_1.lp and implements
-  reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md incrementally.  It uses
+  This file began as a fork of emdash3_1.lp.  It is now the active v3.2
+  development; emdash3_1.lp and the original HOM/FAM/PI/CONST plan are
+  historical baselines rather than current design authorities.  This file uses
   directed Cat-valued families directly:
 
     Functor_cat K Cat_cat --> Catd_cat K.
@@ -49,9 +50,22 @@ flag "print_meta_args" on;
       subterm such as `fapp0 F x`, `comp_cat_fapp0 F G`, `Functor_catd ...`,
       `HomPresheaf_catd_func ...`, or `Homd_target_catd ...`, or a compound
       canonical expression such as `Op_cat (Hom_cat ...)`.
+    - When an explicit source/target category slot is needed for an assertion
+      or rule, prefer the canonical normal form (`Hom_cat ...`,
+      `Functord_cat ...`) over a reducible readability wrapper such as
+      `Fibre_cat (DefinedAlias ...) k`.  The wrapper may compute in isolation
+      but still make conversion search brittle in nested `fapp0` slots.
     - Prefer small projection rules with stable heads over one large nested
       redex. The homd projection path is split into `tapp0_fapp0` and `fapp0`
       folds; surface `piapp0` notation unfolds through `tapp0_fapp0`.
+    - Prefer semantic definitions first.  Add a primitive/stable head only
+      when a focused probe shows a real discrimination or performance need.
+      If the issue is a missing projection rule (for example capped
+      `fapp1_fapp0` for a constructor that already has `fapp1_func`), add that
+      smaller projection instead of replacing the semantic definition.
+    - Do not duplicate a semantic body in helper aliases.  Define readable
+      aliases through the named semantic constructor so later corrections have
+      one source of truth.
     - Probe nontrivial rules in a temporary copy first, with a bounded
       `lambdapi check` and a focused assertion for the expected normal form. A
       rule that typechecks but fails or times out on its intended assertion is
@@ -130,6 +144,10 @@ flag "print_meta_args" on;
       representable and outgoing-arrow total category notation for directed
       induction. `Edge_catd_func` remains the pointwise-opposite variant used
       by presheaf/dependent-hom contravariance.
+    - `CompTarget_catd`: the fixed-`x` composition target is a semantic
+      `hom_con` alias over `Catd_cat Z`, not a primitive stable family head.
+      Its readable capped-action helper `CompTarget_fapp1_func` is defined
+      through `CompTarget_catd` and uses canonical `Functord_cat` endpoints.
     - `Edge_catd_func` / `HomPresheaf_catd_func`: internal opposite-edge and
       presheaf-family classifiers. Keep them as named constructor pipelines;
       do not inline them into rewrite-rule LHSs.
