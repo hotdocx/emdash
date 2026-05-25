@@ -126,9 +126,13 @@ flag "print_meta_args" on;
       objects route through the endpoint `homd_`.
     - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
       is functorial in family arguments, not just an object-level recipe.
-    - `Edge_catd_func` / `HomPresheaf_catd_func`: internal representable/presheaf-family
-      classifiers.  Keep them as named constructor pipelines; do not inline
-      them into rewrite-rule LHSs.
+    - `Rep_catd_func` / `Rep_catd` / `PathOut_cat`: raw covariant
+      representable and outgoing-arrow total category notation for directed
+      induction. `Edge_catd_func` remains the pointwise-opposite variant used
+      by presheaf/dependent-hom contravariance.
+    - `Edge_catd_func` / `HomPresheaf_catd_func`: internal opposite-edge and
+      presheaf-family classifiers. Keep them as named constructor pipelines;
+      do not inline them into rewrite-rule LHSs.
     - `Homd_target_section_catd` / `Homd_target_catd`: target-family
       readability and assertion handles for `homd_int`.  Projection-rule LHSs
       should keep inferred source/target family arguments implicit.
@@ -155,13 +159,12 @@ flag "print_meta_args" on;
       outer-slot form validates; the D/C outer-slot form is not the intended
       general E[x] -> C[x] projection.
     - Earlier diagnostic aliases `fdapp1_int_fibre_transf` /
-      `fdapp1_int_fibre_app` have been retired. The final route uses the
-      stable `piapp1_int_*` heads directly instead of adding another fibre
-      surface API.
+      `fdapp1_int_fibre_app` and the terminal-specialized `piapp1_int_*`
+      projection chain have been retired. The displayed route now stays at the
+      generic `fdapp1_int_transfd`/`tdapp0_fapp0` layer.
     - `piapp1_func` / `piapp1_fapp0`: section action over a base arrow. The
-      capped component is a definition by `piapp0`; the terminal-specialization
-      fold from displayed internal action is installed in the final `piapp1_int`
-      projection block.
+      capped component is retained as surface notation; it is no longer a
+      terminal-specialized kernel projection target.
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
@@ -562,10 +565,9 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;
 
 // Transformations between point functors from the terminal category are just
-// arrows in the target. This implementation-discovered bridge is used by the
-// final `piapp1_int_tgt_transf` projection chain: without it, the final
-// `tapp0_fapp0 Terminal_obj ... -> piapp1_func` fold cannot prove subject
-// reduction.
+// arrows in the target. This bridge keeps terminal-source component projections
+// convertible to the corresponding target homs, including surface section-action
+// computations.
 rule @Transf_cat Terminal_cat $Y
     (@Const_func Terminal_cat $Y $u)
     (@Const_func Terminal_cat $Y $v)
@@ -966,10 +968,44 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 // later rule genuinely requires that stronger unification contract.
 /*
   Mathematical notation:
+    Rep_Z(x)[y]               = Hom_Z(x,y)
+    PathOut_Z(x)              = Σ_y Hom_Z(x,y)
     Edge_Z(x)[y]              = Hom_Z(x,y)^op
     Presheaf_catd(K)(A)[k]    = Functor_cat(A[k],Cat)
     HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
 */
+
+symbol Rep_catd_func [Z : Cat]
+  : τ (Functor (Op_cat Z) (Catd_cat Z))
+≔ @hom_int Z Z (@id_func Z);
+
+symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd Z)
+≔ @fapp0 (Op_cat Z) (Catd_cat Z) (@Rep_catd_func Z) x;
+
+symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
+≔ @Sigma_cat Z (@Rep_catd Z x);
+
+symbol pathout_obj [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  : τ (Obj (@PathOut_cat Z x))
+≔ Struct_sigma y p;
+
+symbol pathout_refl_obj [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (@PathOut_cat Z x))
+≔ @pathout_obj Z x x (@id Z x);
+
+constant symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  : τ (Hom
+      (@PathOut_cat Z x)
+      (@pathout_refl_obj Z x)
+      (@pathout_obj Z x y p));
+
+symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
+  : τ (Obj (Pi_cat E));
 
 symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -1116,6 +1152,33 @@ rule @tapp0_fapp0
       $y
       (@fib_cov_transf $K $E $x $u)
   ↪ @fib_cov_tapp0_func $K $E $x $y $u;
+
+rule @tapp0_fapp0
+      (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x))
+      Cat_cat
+      (@Const_catd (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x)) Terminal_cat)
+      $E
+      (Struct_sigma $y $p)
+      (@path_ind_sec $Z $x $E $u)
+  ↪ @Obj_func
+      (Fibre_cat $E (Struct_sigma $y $p))
+      (@fapp0
+        (Hom_cat (@PathOut_cat $Z $x)
+          (@pathout_refl_obj $Z $x)
+          (Struct_sigma $y $p))
+        (Fibre_cat $E (Struct_sigma $y $p))
+        (@fib_cov_tapp0_func
+          (@PathOut_cat $Z $x)
+          $E
+          (@pathout_refl_obj $Z $x)
+          (Struct_sigma $y $p)
+          $u)
+        (@pathout_refl_arrow $Z $x $y $p));
+
+rule @path_ind_sec $Z $x
+      (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id_func $Z) $x) $D)
+      $u
+  ↪ @fib_cov_transf $Z $D $x $u;
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -1310,8 +1373,6 @@ rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
     fdapp1_int_transfd(FF)
       = tdapp1_int_fapp0_transfd(id_FF)
 
-    piapp1_int(s)
-      = terminal-source specialization of fdapp1_int_transfd(s)
 */
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
@@ -1359,20 +1420,6 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
       (comp_catd_fapp0
         (homd_int FF)
         (Op_funcd FF)));
-
-// Internal Pi-action witness: terminal-source specialization of the internal
-// displayed hom-action. Projection to `piapp1_func` is installed below through
-// stable intermediate heads.
-symbol piapp1_int [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  : τ (Transfd
-      (homd_int (@id_funcd K (@Const_catd K Terminal_cat)))
-      (comp_catd_fapp0
-        (@homd_int K (@Const_catd K Terminal_cat) E s)
-        (Op_funcd s)));
-
-rule @fdapp1_int_transfd $K (@Const_catd $K Terminal_cat) $E $s
-  ↪ @piapp1_int $K $E $s;
 
 // Identity-specialization fold for the internal displayed hom-action.
 rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
@@ -1445,88 +1492,6 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
      (@Fibre_transf K E D FF GG ϵ z);
 
 // -------------------------------------------------------------------------------------------------
-// 14b. Terminal-specialized piapp1 projection chain
-// -------------------------------------------------------------------------------------------------
-
-// Stable projection chain from the internal dependent Pi transfor to the
-// external piapp1 package. The intermediate heads avoid rewriting over
-// reducible fibre abbreviations such as `Fibre_transf_app`.
-/*
-  Mathematical notation:
-    piapp1_int(s)[x]
-      -> piapp1_int_src_transf(E,s,x)
-
-    piapp1_int_src_transf(E,s,x)(Terminal_obj)
-      -> piapp1_int_src_app(E,s,x)
-
-    piapp1_int_src_app(E,s,x)[y]
-      -> piapp1_int_tgt_transf(E,s,x,y)
-
-    piapp1_int_tgt_transf(E,s,x,y)(Terminal_obj)
-      -> piapp1_func(E,s,x,y)
-*/
-symbol piapp1_int_src_transf [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x : τ (Obj K))
-  : τ (Transf
-      (Obj_func
-        (homd_src_sec
-          (@id_funcd K (@Const_catd K Terminal_cat))
-          x
-          Terminal_obj))
-      (comp_cat_fapp0
-        (homd_src_func s x)
-        (Op_func
-          (@tapp0_fapp0 K Cat_cat (@Const_catd K Terminal_cat) E x s))));
-
-symbol piapp1_int_src_app [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x : τ (Obj K))
-  : τ (Hom
-      (Pi_cat (Homd_target_section_catd (Const_catd K Terminal_cat) x))
-      (homd_src_sec
-        (@id_funcd K (@Const_catd K Terminal_cat))
-        x
-        Terminal_obj)
-      (homd_src_sec s x (piapp0 s x)));
-
-symbol piapp1_int_tgt_transf [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x y : τ (Obj K))
-  : τ (Transf
-      (Obj_func
-        (Obj_func
-          (Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)))
-      (@Obj_func
-        (Functor_cat Terminal_cat (Catd_cat (Op_cat (Hom_cat K x y))))
-        (Obj_func
-          (@homd_ K E E (@id_funcd K E)
-            x (piapp0 s x)
-            y (piapp0 s y)))));
-
-rule tdapp0_fapp0 $x (@piapp1_int $K $E $s)
-  ↪ @piapp1_int_src_transf $K $E $s $x;
-
-rule tapp0_fapp0 Terminal_obj (@piapp1_int_src_transf $K $E $s $x)
-  ↪ @piapp1_int_src_app $K $E $s $x;
-
-rule tdapp0_fapp0 $y (@piapp1_int_src_app $K $E $s $x)
-  ↪ @piapp1_int_tgt_transf $K $E $s $x $y;
-
-rule @tapp0_fapp0
-      Terminal_cat
-      _
-      (Obj_func
-        (Obj_func
-          _))
-      (Obj_func
-        (Obj_func
-          _))
-      Terminal_obj
-      (@piapp1_int_tgt_transf $K $E $s $x $y)
-  ↪ @piapp1_func $K $E $s $x $y;
-
-// -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
 
@@ -1554,8 +1519,8 @@ rule @tapp0_fapp0
   `section_pullback_func` remains the current surface helper. A future internal
   version should be `section_pullback_int`, indexed over the functor argument F,
   with the pullback-family functor built from `comp_cat_cov_func E` and then
-  composed with `Pi_func`, in the same style as the `homd_int`/`piapp1_int`
-  projection packages.
+  composed with `Pi_func`, in the same style as the remaining `homd_int` and
+  displayed-action projection packages.
 */
 injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
@@ -1836,6 +1801,72 @@ assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
   Hom_catd (Functor_catd A B) FF GG
     ≡ Transf_catd A B FF GG;
 
+assert [Z : Cat] (x y : τ (Obj Z)) ⊢
+  Fibre_cat (@Rep_catd Z x) y
+    ≡ Hom_cat Z x y;
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @PathOut_cat Z x
+    ≡ @Sigma_cat Z (@Rep_catd Z x);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @pathout_obj Z x y p
+    ≡ @Struct_sigma
+        (Obj Z)
+        (λ yy : τ (Obj Z), Obj (Fibre_cat (@Rep_catd Z x) yy))
+        y
+        p;
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @pathout_refl_obj Z x
+    ≡ @Struct_sigma
+        (Obj Z)
+        (λ yy : τ (Obj Z), Obj (Fibre_cat (@Rep_catd Z x) yy))
+        x
+        (@id Z x);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  fapp0 (@Sigma_proj1_func Z (@Rep_catd Z x)) (@pathout_obj Z x y p)
+    ≡ y;
+
+assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
+  @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
+    ≡ @Functord_cat Z (@Rep_catd Z x) D;
+
+assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat D x))) ⊢
+  @path_ind_sec
+    Z
+    x
+    (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
+    u
+    ≡ @fib_cov_transf Z D x u;
+
+assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
+  Fibre_cat (@FibCov_target_catd Z D) x
+    ≡ @Functord_cat Z (@Rep_catd Z x) D;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @piapp0
+    (@PathOut_cat Z x)
+    E
+    (@path_ind_sec Z x E u)
+    (@pathout_obj Z x y p)
+    ≡ @fapp0
+        (Hom_cat (@PathOut_cat Z x)
+          (@pathout_refl_obj Z x)
+          (@pathout_obj Z x y p))
+        (Fibre_cat E (@pathout_obj Z x y p))
+        (@fib_cov_tapp0_func
+          (@PathOut_cat Z x)
+          E
+          (@pathout_refl_obj Z x)
+          (@pathout_obj Z x y p)
+          u)
+        (@pathout_refl_arrow Z x y p);
+
 assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat
     (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z) x)
@@ -1959,10 +1990,6 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
     ≡ @fdapp1_int_transfd K E D FF;
 
 assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
-  @fdapp1_int_transfd K (@Const_catd K Terminal_cat) E s
-    ≡ @piapp1_int K E s;
-
-assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
   @tdapp1_int_fapp0_transfd
     K
     (@Const_catd K Terminal_cat)
@@ -1971,16 +1998,6 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
     s
     (@id_transfd K (@Const_catd K Terminal_cat) E s)
     ≡ @fdapp1_int_transfd K (@Const_catd K Terminal_cat) E s;
-
-assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
-  @tdapp1_int_fapp0_transfd
-    K
-    (@Const_catd K Terminal_cat)
-    E
-    s
-    s
-    (@id_transfd K (@Const_catd K Terminal_cat) E s)
-    ≡ @piapp1_int K E s;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢

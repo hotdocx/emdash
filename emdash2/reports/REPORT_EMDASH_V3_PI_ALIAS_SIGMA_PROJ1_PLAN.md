@@ -1,7 +1,8 @@
 # emdash v3.2 Pi Alias, Projection Pullback, And Directed Induction Plan
 
-Draft status: proposed implementation plan. This report is not yet implemented
-in `emdash3_2.lp`.
+Draft status: proposed implementation plan. As of 2026-05-25, the main kernel
+parts of this plan have been implemented in `emdash3_2.lp`; see
+`reports/REPORT_EMDASH_V3_PI_ALIAS_SIGMA_PROJ1_IMPLEMENTATION_REPORT_2026-05-25.md`.
 
 Date: 2026-05-25.
 
