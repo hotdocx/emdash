@@ -75,7 +75,7 @@ flag "print_meta_args" on;
       wrapper-level unification rules.
     - Controlled `Obj`-inversion unification rules for chosen category heads
       (`Hom_cat`, `Functor_cat`, `Catd_cat`, `Functord_cat`, `Transf_cat`,
-      `Transfd_cat`, `Pi_cat`) are elaboration aids.  They are not semantic
+      `Transfd_cat`) are elaboration aids.  They are not semantic
       claims that `Obj` is globally injective. Avoid adding this style of rule
       for notation-only heads such as `Fibre_cat`: equality of fibre object
       categories should not force equality of the whole family and base index.
@@ -119,10 +119,9 @@ flag "print_meta_args" on;
     - `Catd_cat K`: the canonical category of directed Cat-valued families,
       reached by reducing `Functor_cat K Cat_cat`; `Fibre_cat` is notation for
       the surface reading of `E[k]`.
-    - `Pi_cat E`: stable section category for a directed family. It joins
-      `Functord_cat (Const_catd K Terminal_cat) E`; the corresponding
-      `Transf_cat` source reaches it through the canonical `Functord_cat`
-      contraction.
+    - `Pi_cat E`: notation for the canonical section category
+      `Functord_cat (Const_catd K Terminal_cat) E`; section homs and
+      projections therefore use the displayed-functor normal form directly.
     - `Sigma_cat E`: object decoding is Sigma-shaped; homs between total
       objects route through the endpoint `homd_`.
     - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
@@ -782,15 +781,11 @@ rule @tapp0_fapp0
       (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
-injective symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
+symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat
+≔ @Functord_cat K (@Const_catd K Terminal_cat) E;
 
-rule @Functord_cat $K (@Const_catd $K Terminal_cat) $E ↪ @Pi_cat $K $E;
-rule @Pi_cat $K (@Const_catd $K $A) ↪ Functor_cat $K $A;
-
-unif_rule Obj (@Pi_cat $K $E) ≡ Obj (@Pi_cat $K' $E') ↪ [ $K ≡ $K'; $E ≡ $E' ];
-
-rule Hom_cat (@Pi_cat $K $E) $s $t
-  ↪ @Transfd_cat $K (@Const_catd $K Terminal_cat) $E $s $t;
+rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
+  ↪ Functor_cat $K $A;
 
 injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
@@ -825,6 +820,8 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
     Sigma_cat(E)              = Σ_k E[k]
     Obj(Sigma_cat(E))         = Σ (k : Obj K), Obj(E[k])
     Sigma_proj1_func(E)(k,u)  = k
+    Sigma_proj1_pullback(R,D) = D pulled back along Sigma_proj1_func(R)
+    Π_{(k,r):ΣR} D[k]         = Functord_cat(R,D)
     Sigma_func[K][E]          = Sigma_cat(E)
     sigma_map_func(η)(k,u)    = (k, η_k(u))
 */
@@ -841,6 +838,35 @@ injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
   : τ (Functor (Sigma_cat E) K);
 
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
+
+// Stable head for the computationally important projection pullback. General
+// `Pullback_catd` stays a definition by composition, but this special case is
+// discriminable so sections over the total category can contract to displayed
+// functors out of the displayed family.
+injective symbol Sigma_proj1_pullback_catd [K : Cat]
+  (R D : τ (Catd K))
+  : τ (Catd (@Sigma_cat K R));
+
+rule @comp_cat_fapp0
+      (@Sigma_cat $K $R)
+      $K
+      Cat_cat
+      $D
+      (@Sigma_proj1_func $K $R)
+  ↪ @Sigma_proj1_pullback_catd $K $R $D;
+
+rule @fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      (@Sigma_proj1_pullback_catd $K $R $D)
+      (Struct_sigma $k $r)
+  ↪ @Fibre_cat $K $D $k;
+
+rule @Functord_cat
+      (@Sigma_cat $K $R)
+      (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
+      (@Sigma_proj1_pullback_catd $K $R $D)
+  ↪ @Functord_cat $K $R $D;
 
 injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
@@ -1545,10 +1571,14 @@ rule fapp0 (@sigma_intro_tapp0_func $K $E $k) $u
   ↪ Struct_sigma $k $u;
 
 injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
-  : τ (Functord (@Const_catd K (@Pi_cat K E)) E);
+  : τ (Functord
+      (@Const_catd K (@Functord_cat K (@Const_catd K Terminal_cat) E))
+      E);
 
 rule @tapp0_fapp0
-      $K Cat_cat (@Const_catd $K (@Pi_cat $K $E)) $E $k
+      $K Cat_cat
+      (@Const_catd $K (@Functord_cat $K (@Const_catd $K Terminal_cat) $E))
+      $E $k
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;
 
@@ -1560,14 +1590,16 @@ rule @fapp0 $A _ (@const_section_func $K $A) $a
 
 symbol section_pullback_func [A B : Cat]
   (F : τ (Functor A B)) (E : τ (Catd B))
-  : τ (Functor (@Pi_cat B E) (@Pi_cat A (@Pullback_catd A B E F)));
+  : τ (Functor
+      (@Functord_cat B (@Const_catd B Terminal_cat) E)
+      (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F)));
 
 symbol section_pullback_sec [A B : Cat]
   (F : τ (Functor A B)) (E : τ (Catd B))
-  (s : τ (Obj (@Pi_cat B E)))
-  : τ (Obj (@Pi_cat A (@Pullback_catd A B E F)));
+  (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E)))
+  : τ (Obj (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F)));
 
-rule @fapp0 (@Pi_cat $B $E) _ (@section_pullback_func $A $B $F $E) $s
+rule @fapp0 _ _ (@section_pullback_func $A $B $F $E) $s
   ↪ @section_pullback_sec $A $B $F $E $s;
 
 rule @tapp0_fapp0
@@ -1708,23 +1740,23 @@ assert [K : Cat] (A : Cat)
     ≡ a;
 
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
-  (s : τ (Obj (Pi_cat E))) ⊢
+  (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E))) ⊢
   @fapp0
-    (@Pi_cat B E)
-    (@Pi_cat A (@Pullback_catd A B E F))
+    (@Functord_cat B (@Const_catd B Terminal_cat) E)
+    (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F))
     (@section_pullback_func A B F E)
     s
     ≡ @section_pullback_sec A B F E s;
 
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
-  (s : τ (Obj (Pi_cat E)))
+  (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E)))
   (a : τ (Obj A)) ⊢
   @piapp0
     A
     (@Pullback_catd A B E F)
     (@fapp0
-      (@Pi_cat B E)
-      (@Pi_cat A (@Pullback_catd A B E F))
+      (@Functord_cat B (@Const_catd B Terminal_cat) E)
+      (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F))
       (@section_pullback_func A B F E)
       s)
     a
@@ -1739,6 +1771,25 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
 
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k;
+
+assert [K : Cat] (R D : τ (Catd K)) ⊢
+  @Pullback_catd (@Sigma_cat K R) K D (@Sigma_proj1_func K R)
+    ≡ @Sigma_proj1_pullback_catd K R D;
+
+assert [K : Cat] (R D : τ (Catd K))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  Fibre_cat (@Sigma_proj1_pullback_catd K R D) (Struct_sigma k r)
+    ≡ Fibre_cat D k;
+
+assert [K : Cat] (R D : τ (Catd K)) ⊢
+  @Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)
+    ≡ @Functord_cat K R D;
+
+assert [K : Cat] (R D : τ (Catd K))
+  (s t : τ (Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)))) ⊢
+  Hom_cat (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)) s t
+    ≡ @Transfd_cat K R D s t;
 
 assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢
   Fibre_cat (Functor_catd A B) k
