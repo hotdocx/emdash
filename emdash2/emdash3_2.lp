@@ -462,6 +462,17 @@ rule @fapp0 _ _ Functor_cat_func $A
 rule @fapp0 Cat_cat Cat_cat (Functor_cat_fapp0_func $A) $B
   ↪ Functor_cat $A $B;
 
+// Internalized directed-family category formation.  This is the universe-level
+// functor K |-> Catd_cat K, obtained by evaluating the internalized ordinary
+// functor-category constructor at Cat_cat.
+symbol Catd_cat_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
+≔ @comp_cat_fapp0
+     (Op_cat Cat_cat)
+     (Functor_cat Cat_cat Cat_cat)
+     Cat_cat
+     (@fapp0_func Cat_cat Cat_cat Cat_cat)
+     Functor_cat_func;
+
 // Curried postcomposition in Cat, used to build constructor pipelines.
 symbol comp_cat_cov_func : Π [X Y Z : Cat],
   Π (G : τ (Functor Y Z)),
@@ -714,6 +725,18 @@ symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
   : τ (Catd A)
 ≔ @comp_cat_fapp0 A B Cat_cat E F;
 
+// Functorial package for pullback/reindexing of directed families along a base
+// functor.  The general `Pullback_catd` remains a composition definition; this
+// package is the stable functor-level action needed by internalized
+// base-varying constructors such as Pi.
+injective symbol Pullback_catd_func [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Functor (Catd_cat B) (Catd_cat A));
+
+rule @fapp0 (@Catd_cat $B) (@Catd_cat $A)
+      (@Pullback_catd_func $A $B $F) $E
+  ↪ @Pullback_catd $A $B $E $F;
+
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
@@ -792,6 +815,22 @@ rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
 injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
+
+// Global natural package for Pi over varying bases.  The base is Op(Cat)
+// because sections pull back contravariantly along functors.
+constant symbol Pi_int_funcd
+  : τ (Functord
+      Catd_cat_func
+      (@Const_catd (Op_cat Cat_cat) Cat_cat));
+
+rule @tapp0_fapp0
+      (Op_cat Cat_cat)
+      Cat_cat
+      _
+      _
+      $K
+      Pi_int_funcd
+  ↪ @Pi_func $K;
 
 symbol piapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Pi_cat E) (Fibre_cat E k))
@@ -986,6 +1025,24 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
 symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
 ≔ @Sigma_cat Z (@Rep_catd Z x);
 
+symbol PathOut_cat_func [Z : Cat]
+  : τ (Functor (Op_cat Z) Cat_cat)
+≔ @comp_cat_fapp0
+     (Op_cat Z)
+     (@Catd_cat Z)
+     Cat_cat
+     (@Sigma_func Z)
+     (@Rep_catd_func Z);
+
+symbol PathOutMotives_catd [Z : Cat]
+  : τ (Catd Z)
+≔ @comp_cat_fapp0
+     Z
+     (Op_cat Cat_cat)
+     Cat_cat
+     Catd_cat_func
+     (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
+
 symbol pathout_obj [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y))
   : τ (Obj (@PathOut_cat Z x))
@@ -1002,10 +1059,79 @@ constant symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
       (@pathout_refl_obj Z x)
       (@pathout_obj Z x y p));
 
+constant symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (Pi_cat
+      (@Rep_catd
+        (@PathOut_cat Z x)
+        (@pathout_refl_obj Z x))));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      (Struct_sigma $y $p)
+      (@pathout_refl_arrow_sec $Z $x)
+  ↪ @Obj_func
+      (Hom_cat
+        (@PathOut_cat $Z $x)
+        (@pathout_refl_obj $Z $x)
+        (Struct_sigma $y $p))
+      (@pathout_refl_arrow $Z $x $y $p);
+
 symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
   (E : τ (Catd (@PathOut_cat Z x)))
   (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
   : τ (Obj (Pi_cat E));
+
+symbol PathInd_src_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
+≔ @fapp0_func
+     (@PathOut_cat Z x)
+     Cat_cat
+     (@pathout_refl_obj Z x);
+
+symbol PathInd_tgt_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
+≔ @Pi_func (@PathOut_cat Z x);
+
+symbol path_ind_func_fapp0 [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat E (@pathout_refl_obj Z x))
+      (Pi_cat E));
+
+rule @fapp0 _ _ (@path_ind_func_fapp0 $Z $x $E) $u
+  ↪ @path_ind_sec $Z $x $E $u;
+
+constant symbol PathInd_func [Z : Cat] (x : τ (Obj Z))
+  : τ (Functord
+      (@PathInd_src_catd Z x)
+      (@PathInd_tgt_catd Z x));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $E
+      (@PathInd_func $Z $x)
+  ↪ @path_ind_func_fapp0 $Z $x $E;
+
+symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd Z)
+≔ @hom_con
+    (@Catd_cat Z)
+    (@Rep_catd Z x)
+    (Op_cat Z)
+    (@Rep_catd_func Z);
+
+symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@PathOut_cat Z x))
+≔ @Sigma_proj1_pullback_catd
+     Z
+     (@Rep_catd Z x)
+     (@CompTarget_catd Z x);
 
 symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -1179,6 +1305,14 @@ rule @path_ind_sec $Z $x
       (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id_func $Z) $x) $D)
       $u
   ↪ @fib_cov_transf $Z $D $x $u;
+
+symbol path_comp_sec [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (@Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x)))
+≔ @fib_cov_transf
+    Z
+    (@CompTarget_catd Z x)
+    x
+    (@id_funcd Z (@Rep_catd Z x));
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -1574,6 +1708,26 @@ rule @tapp0_fapp0
       (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
       (@piapp0 $B $E $s (@fapp0 $A $B $F $a));
 
+injective symbol section_pullback_transf [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Transf
+      (@Pi_func B)
+      (@comp_cat_fapp0
+        (@Catd_cat B)
+        (@Catd_cat A)
+        Cat_cat
+        (@Pi_func A)
+        (@Pullback_catd_func A B F)));
+
+rule @tapp0_fapp0
+      (@Catd_cat $B)
+      Cat_cat
+      _
+      _
+      $E
+      (@section_pullback_transf $A $B $F)
+  ↪ @section_pullback_func $A $B $F $E;
+
 // -------------------------------------------------------------------------------------------------
 // 16. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
@@ -1598,6 +1752,14 @@ assert [K : Cat] (A : Cat) ⊢
 
 assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢
   Fibre_cat (Pullback_catd E F) a ≡ Fibre_cat E (fapp0 F a);
+
+assert [K : Cat] ⊢
+  @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K
+    ≡ Catd_cat K;
+
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
+  @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func A B F) E
+    ≡ @Pullback_catd A B E F;
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;
@@ -1635,6 +1797,16 @@ assert [K : Cat] (E : τ (Catd K))
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
+
+assert [K : Cat] ⊢
+  @tapp0_fapp0
+    (Op_cat Cat_cat)
+    Cat_cat
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    K
+    Pi_int_funcd
+    ≡ @Pi_func K;
 
 assert [K : Cat] (E : τ (Catd K))
   (k : τ (Obj K))
@@ -1727,6 +1899,21 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
     a
     ≡ @piapp0 B E s (@fapp0 A B F a);
 
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
+  @tapp0_fapp0
+    (@Catd_cat B)
+    Cat_cat
+    (@Pi_func B)
+    (@comp_cat_fapp0
+      (@Catd_cat B)
+      (@Catd_cat A)
+      Cat_cat
+      (@Pi_func A)
+      (@Pullback_catd_func A B F))
+    E
+    (@section_pullback_transf A B F)
+    ≡ @section_pullback_func A B F E;
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Sigma_func K) E ≡ Sigma_cat E;
 
@@ -1809,6 +1996,14 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
   @PathOut_cat Z x
     ≡ @Sigma_cat Z (@Rep_catd Z x);
 
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @fapp0 (Op_cat Z) Cat_cat (@PathOut_cat_func Z) x
+    ≡ @PathOut_cat Z x;
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  Fibre_cat (@PathOutMotives_catd Z) x
+    ≡ @Catd_cat (@PathOut_cat Z x);
+
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   @pathout_obj Z x y p
     ≡ @Struct_sigma
@@ -1829,6 +2024,14 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   fapp0 (@Sigma_proj1_func Z (@Rep_catd Z x)) (@pathout_obj Z x y p)
     ≡ y;
 
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @piapp0
+    (@PathOut_cat Z x)
+    (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
+    (@pathout_refl_arrow_sec Z x)
+    (@pathout_obj Z x y p)
+    ≡ @pathout_refl_arrow Z x y p;
+
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
     ≡ @Functord_cat Z (@Rep_catd Z x) D;
@@ -1841,6 +2044,54 @@ assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
     (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
     u
     ≡ @fib_cov_transf Z D x u;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  Fibre_cat (@PathInd_src_catd Z x) E
+    ≡ Fibre_cat E (@pathout_refl_obj Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  Fibre_cat (@PathInd_tgt_catd Z x) E
+    ≡ Pi_cat E;
+
+assert [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat E (@pathout_refl_obj Z x))
+    (Pi_cat E)
+    (@path_ind_func_fapp0 Z x E)
+    u
+    ≡ @path_ind_sec Z x E u;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    Cat_cat
+    (@PathInd_src_catd Z x)
+    (@PathInd_tgt_catd Z x)
+    E
+    (@PathInd_func Z x)
+    ≡ @path_ind_func_fapp0 Z x E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) ⊢
+  Fibre_cat (@CompTarget_catd Z x) y
+    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  Fibre_cat (@CompMotive_catd Z x) (@pathout_obj Z x y p)
+    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x)
+    ≡ @Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @path_ind_sec
+    Z
+    x
+    (@CompMotive_catd Z x)
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_sec Z x;
 
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   Fibre_cat (@FibCov_target_catd Z D) x

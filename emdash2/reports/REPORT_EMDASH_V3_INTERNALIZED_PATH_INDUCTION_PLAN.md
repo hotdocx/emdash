@@ -1,6 +1,9 @@
 # emdash v3.2 Internalized Constructors And Path Induction Plan
 
-Draft status: proposed follow-up implementation plan.
+Draft status: proposed follow-up implementation plan. As of 2026-05-26, the
+first internalized-constructor and fixed-`x` path-induction layers have been
+implemented in `emdash3_2.lp`; see
+`reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`.
 
 Date: 2026-05-26.
 
