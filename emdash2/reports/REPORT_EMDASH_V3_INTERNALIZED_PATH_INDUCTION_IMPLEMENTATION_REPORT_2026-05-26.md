@@ -222,6 +222,65 @@ path_ind_sec Z x (CompMotive_catd Z x) (id_funcd Rep_x)
 
 typechecks.
 
+### Representable Precomposition Action
+
+Follow-up implementation added the missing narrow representable-action layer.
+
+Added:
+
+```lambdapi
+symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
+  (f : τ (Hom A X Y))
+  : τ (Functor (Hom_cat A Y Z) (Hom_cat A X Z));
+```
+
+with object action:
+
+```text
+hom_precomp_func(f)(g) == g ∘ f
+```
+
+Added a component rule for `hom_int` along its contravariant represented-object
+argument:
+
+```text
+(hom_int F)[f]_b == hom_precomp_func(f)
+```
+
+in the precise orientation:
+
+```text
+f : Hom_A(x,y)
+hom_int(F)[f]_b : Hom_A(y,F b) -> Hom_A(x,F b)
+```
+
+For the raw representable:
+
+```text
+Rep_catd_func Z : Op Z -> Catd_cat Z
+```
+
+this gives:
+
+```text
+Rep_catd_func[p]_z == hom_precomp_func(p)
+```
+
+Added:
+
+```lambdapi
+symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x));
+```
+
+defined as the representable action of `p`. The focused computation now
+typechecks:
+
+```text
+path_comp_func(p)[z](q) == q ∘ p
+```
+
 ## Probe Result: Full Composition Computation Deferred
 
 A temporary probe attempted the strict assertion:
@@ -245,10 +304,26 @@ timeout 60s lambdapi check -w tmp_comp_probe.lp
 
 timed out. The temporary file was removed.
 
-This suggests the next step should not be a broad path-induction rewrite. The
-likely missing piece is a narrower representable-action lemma/rule exposing the
-`hom_con`/`Rep_catd_func` action in `Catd_cat Z` enough for the final
-application to reduce to `comp_fapp0 q p`.
+The follow-up implementation above resolved the representable-action part of
+this problem, but not the full inline `path_comp_sec`/`fib_cov_tapp0_func`
+normalization.
+
+Two further temporary probes also timed out and were removed:
+
+```text
+path_comp_sec(x)[p] == path_comp_func(p)
+```
+
+and a rewrite rule trying to shortcut:
+
+```text
+fib_cov_tapp0_func(CompTarget_x, id)[p] -> path_comp_func(p)
+```
+
+The second probe shows that the obvious shortcut rule is still too expensive
+when written against the current reducible `CompTarget_catd`/`path_comp_sec`
+normal forms. The next step should inspect this bridge with a smaller stable
+head, not add a broader path-induction rule.
 
 ## Validation
 
@@ -269,9 +344,9 @@ The full check covers:
 
 Near-term:
 
-- inspect the representable-action path for `CompTarget_catd`;
-- add a narrow computation lemma/rule if needed for
-  `path_comp_sec(x)[p][z](q) == q ∘ p`;
+- inspect the bridge from `path_comp_sec(x)[p]` to `path_comp_func(p)`;
+- consider a smaller stable head for the composition-motive fibre transport if
+  the bridge remains expensive;
 - avoid broad underspecified `tapp0_fapp0` rules, since similar probes have
   timed out.
 

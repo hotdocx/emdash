@@ -503,6 +503,16 @@ rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
 rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
   ↪ comp_fapp0 (fapp1_fapp0 $F $f) $g;
 
+// Contravariant action in the represented object: precompose an arrow
+// g : Hom_A(Y,Z) by f : Hom_A(X,Y).
+symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
+  (f : τ (Hom A X Y))
+  : τ (Functor (Hom_cat A Y Z) (Hom_cat A X Z));
+
+rule @fapp0 (Hom_cat $A $Y $Z) (Hom_cat $A $X $Z)
+      (@hom_precomp_func $A $X $Y $Z $f) $g
+  ↪ @comp_fapp0 $A $X $Y $Z $g $f;
+
 injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat B) Cat_cat)
 ≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
@@ -532,6 +542,15 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   fapp0 (@fapp1_fapp0 B Cat_cat (@hom_ A B F W) X Y f) g
     ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
         (fapp0 (@fapp1_func B A F X Y) f) g;
+
+assert [A : Cat] (x y z : τ (Obj A))
+  (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
+  @fapp0
+    (Hom_cat A y z)
+    (Hom_cat A x z)
+    (@hom_precomp_func A x y z p)
+    q
+    ≡ @comp_fapp0 A x y z q p;
 
 // -------------------------------------------------------------------------------------------------
 // 4. Encoded Sigma types for object layers
@@ -618,6 +637,30 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
   ↪ comp_fapp0
       (@tapp0_fapp0 $A $B $G $H $Y $η)
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
+
+// Component of `hom_int` along its contravariant represented-object argument.
+// For f : X -> Y, the displayed functor Hom(Y,F-) -> Hom(X,F-) is
+// precomposition by f.
+rule @tapp0_fapp0
+      $B
+      Cat_cat
+      _
+      _
+      $b
+      (@fapp1_fapp0 (Op_cat $A) (@Catd_cat $B)
+        (@hom_int $A $B $F) $Y $X $f)
+  ↪ @hom_precomp_func $A $X $Y (@fapp0 $B $A $F $b) $f;
+
+assert [A B : Cat] (F : τ (Functor B A))
+  (x y : τ (Obj A)) (p : τ (Hom A x y)) (b : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    B
+    Cat_cat
+    (@hom_ A B F y)
+    (@hom_ A B F x)
+    b
+    (@fapp1_fapp0 (Op_cat A) (@Catd_cat B) (@hom_int A B F) y x p)
+    ≡ @hom_precomp_func A x y (@fapp0 B A F b) p;
 
 // Reserved capped ordinary hom-action surface. It is not used by v3.2 rules
 // yet. The intended computation is the projected endpoint of
@@ -1022,6 +1065,16 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd Z)
 ≔ @fapp0 (Op_cat Z) (Catd_cat Z) (@Rep_catd_func Z) x;
 
+assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @tapp0_fapp0
+    Z
+    Cat_cat
+    (@Rep_catd Z y)
+    (@Rep_catd Z x)
+    z
+    (@fapp1_fapp0 (Op_cat Z) (@Catd_cat Z) (@Rep_catd_func Z) y x p)
+    ≡ @hom_precomp_func Z x y z p;
+
 symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
 ≔ @Sigma_cat Z (@Rep_catd Z x);
 
@@ -1313,6 +1366,17 @@ symbol path_comp_sec [Z : Cat] (x : τ (Obj Z))
     (@CompTarget_catd Z x)
     x
     (@id_funcd Z (@Rep_catd Z x));
+
+symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
+≔ @fapp1_fapp0
+    (Op_cat Z)
+    (@Catd_cat Z)
+    (@Rep_catd_func Z)
+    y
+    x
+    p;
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -2092,6 +2156,22 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     (@CompMotive_catd Z x)
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_sec Z x;
+
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (Fibre_cat (@Rep_catd Z y) z)
+    (Fibre_cat (@Rep_catd Z x) z)
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z y)
+      (@Rep_catd Z x)
+      z
+      (@path_comp_func Z x y p))
+    q
+    ≡ @comp_fapp0 Z x y z q p;
 
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   Fibre_cat (@FibCov_target_catd Z D) x
