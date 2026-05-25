@@ -789,13 +789,18 @@ Rep_catd_func Z : Op Z -> Catd_cat Z
 Rep_Z(x)         : Obj(Catd_cat Z)
 ```
 
-use a `hom_con`-style family:
+use a `hom_con`-style family mathematically:
 
 ```text
 CompTarget_catd Z x [y]
   = Hom_{Catd_cat Z}(Rep_Z(y), Rep_Z(x))
   = Functord_cat (Rep_Z(y)) (Rep_Z(x))
 ```
+
+Implementation note added after the 2026-05-26 iteration: the raw `hom_con`
+alias was not a good enough rewrite discriminator for the full composition
+benchmark. The implemented kernel uses `CompTarget_catd` as a stable head with
+the same fibre meaning and a specific base-arrow action head.
 
 Then pull it back along the projection:
 
@@ -1223,9 +1228,10 @@ Treat this as a real source-side problem, not as notation.
 5. Does the fixed-`x` composition benchmark compute to `comp_fapp0` without new
    rewrite rules?
 
-   It should if the `hom_con`/representable action path is sufficiently exposed.
-   If not, add narrow rules around representable action, not broad path
-   induction rules.
+   Resolved for the current fixed-`x` benchmark: the raw `hom_con` path was too
+   brittle, so `CompTarget_catd` is implemented as a stable head with a narrow
+   arrow-action rule. The final assertion `path_comp_sec(x)[p][z](q) == q ∘ p`
+   now typechecks.
 
 6. When should full `forall x y z` transitivity be attempted?
 

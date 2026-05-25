@@ -188,7 +188,7 @@ This is the first genuinely more-internal version of the current
 Added:
 
 ```lambdapi
-symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z)) : τ (Catd Z);
+injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z)) : τ (Catd Z);
 symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@PathOut_cat Z x));
 ```
@@ -200,8 +200,10 @@ CompTarget_catd(Z,x)[y] == Functord_cat (Rep_Z(y)) (Rep_Z(x))
 CompMotive_catd(Z,x)[(y,p)] == Functord_cat (Rep_Z(y)) (Rep_Z(x))
 ```
 
-`CompTarget_catd` reuses `hom_con` in `Catd_cat Z`, as recommended in the
-plan, instead of introducing a primitive `Functord_cat_func`.
+The first implementation tried to keep `CompTarget_catd` as a readable
+`hom_con` alias in `Catd_cat Z`. The later root-cause analysis below changed
+it into a stable computational family head, while preserving the same fibre
+meaning.
 
 Added:
 
@@ -281,9 +283,75 @@ typechecks:
 path_comp_func(p)[z](q) == q ∘ p
 ```
 
-## Probe Result: Full Composition Computation Deferred
+### Root Cause And Composition Redesign
 
-A temporary probe attempted the strict assertion:
+Further review found that the remaining timeout was architectural.
+`CompTarget_catd` was a defined alias for a `hom_con` expression:
+
+```text
+CompTarget_catd Z x
+  := hom_con (Catd_cat Z) (Rep_Z x) (Op Z) (Rep_catd_func Z)
+```
+
+This was readable, but it was the wrong kernel shape once composition needed
+to compute through generic `fib_cov_tapp0_func`. The checker had to rediscover
+the arrow action of a reducible `hom_con` expression, then apply it to a
+polymorphic displayed identity. That was mathematically coherent but too
+expensive and too brittle as a rewrite normal form.
+
+The implemented redesign makes `CompTarget_catd` a stable family head:
+
+```lambdapi
+injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd Z);
+```
+
+with fibre rule:
+
+```text
+CompTarget_catd(Z,x)[y] == Functord_cat (Rep_Z(y)) (Rep_Z(x))
+```
+
+and a stable base-arrow action:
+
+```lambdapi
+symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
+  (p : τ (Hom Z a b))
+```
+
+with:
+
+```text
+CompTarget_catd(Z,x)[p] == CompTarget_fapp1_func(Z,x,p)
+```
+
+For the identity seed, the special object-action rule is:
+
+```text
+CompTarget_fapp1_func(Z,x,p)(id_{Rep_x}) == path_comp_func(p)
+```
+
+The rule intentionally matches the canonical unfolded representable
+
+```text
+hom_ Z Z (id_func Z) x
+```
+
+rather than the readability alias:
+
+```text
+Rep_catd Z x
+```
+
+The alias form was one of the sources of brittle matching.
+
+With this redesign, the previously timed-out bridge now typechecks:
+
+```text
+path_comp_sec(x)[p] == path_comp_func(p)
+```
+
+and the full fixed-`x` composition computation also typechecks:
 
 ```text
 path_comp_sec(x)[p][z](q) == q ∘ p
@@ -296,34 +364,10 @@ p : Hom_Z(x,y)
 q : Hom_Z(y,z)
 ```
 
-The bounded check:
-
-```bash
-timeout 60s lambdapi check -w tmp_comp_probe.lp
-```
-
-timed out. The temporary file was removed.
-
-The follow-up implementation above resolved the representable-action part of
-this problem, but not the full inline `path_comp_sec`/`fib_cov_tapp0_func`
-normalization.
-
-Two further temporary probes also timed out and were removed:
-
-```text
-path_comp_sec(x)[p] == path_comp_func(p)
-```
-
-and a rewrite rule trying to shortcut:
-
-```text
-fib_cov_tapp0_func(CompTarget_x, id)[p] -> path_comp_func(p)
-```
-
-The second probe shows that the obvious shortcut rule is still too expensive
-when written against the current reducible `CompTarget_catd`/`path_comp_sec`
-normal forms. The next step should inspect this bridge with a smaller stable
-head, not add a broader path-induction rule.
+Temporary probe files were used during this redesign and removed afterward.
+One failed direction was adding a direct shortcut rule against the reducible
+old `CompTarget_catd` alias. The successful direction was making the
+composition motive itself computational.
 
 ## Validation
 
@@ -344,11 +388,10 @@ The full check covers:
 
 Near-term:
 
-- inspect the bridge from `path_comp_sec(x)[p]` to `path_comp_func(p)`;
-- consider a smaller stable head for the composition-motive fibre transport if
-  the bridge remains expensive;
-- avoid broad underspecified `tapp0_fapp0` rules, since similar probes have
-  timed out.
+- use the fixed-`x` composition result as the benchmark for future
+  path-induction internalization;
+- avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
+  out before the stable `CompTarget_catd` redesign.
 
 Later:
 
