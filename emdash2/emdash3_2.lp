@@ -404,6 +404,8 @@ injective symbol Op_func : Π [A B : Cat],
 rule Op_func (@Op_func $A $B $F) ↪ $F;
 rule @fapp0 _ _ (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
 rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y ↪ @fapp1_func $A $B $F $Y $X;
+rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
+  ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
@@ -1182,6 +1184,23 @@ symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
   : τ (Functor
       (Fibre_cat (@CompTarget_catd Z x) a)
       (Fibre_cat (@CompTarget_catd Z x) b));
+
+symbol CompTarget_fapp1_func_func [Z : Cat] [x a b : τ (Obj Z)]
+  : τ (Functor
+      (Hom_cat Z a b)
+      (Functor_cat
+        (Fibre_cat (@CompTarget_catd Z x) a)
+        (Fibre_cat (@CompTarget_catd Z x) b)));
+
+rule @fapp1_func $Z Cat_cat (@CompTarget_catd $Z $x) $a $b
+  ↪ @CompTarget_fapp1_func_func $Z $x $a $b;
+
+rule @fapp0
+      _
+      _
+      (@CompTarget_fapp1_func_func $Z $x $a $b)
+      $p
+  ↪ @CompTarget_fapp1_func $Z $x $a $b $p;
 
 rule @fapp1_fapp0 $Z Cat_cat (@CompTarget_catd $Z $x) $a $b $p
   ↪ @CompTarget_fapp1_func $Z $x $a $b $p;
@@ -2169,6 +2188,22 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_sec Z x;
 
+assert [Z : Cat] (x y : τ (Obj Z)) ⊢
+  @fapp1_func
+    Z
+    Cat_cat
+    (@CompTarget_catd Z x)
+    x
+    y
+    ≡ @CompTarget_fapp1_func_func Z x x y;
+
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  fapp0
+    (@CompTarget_fapp1_func_func Z x x y)
+    p
+    ≡ @CompTarget_fapp1_func Z x x y p;
+
 assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢
   @fapp1_fapp0
@@ -2186,6 +2221,27 @@ assert [Z : Cat] (x y : τ (Obj Z))
     (Fibre_cat (@CompTarget_catd Z x) x)
     (Fibre_cat (@CompTarget_catd Z x) y)
     (@CompTarget_fapp1_func Z x x y p)
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_func Z x y p;
+
+// The semantic `hom_con` presentation of `CompTarget_catd` computes when the
+// surrounding source/target categories are kept in their canonical normal forms.
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (@Functord_cat Z (@Rep_catd Z x) (@Rep_catd Z x))
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+    (@fapp1_fapp0
+      Z
+      Cat_cat
+      (@hom_con
+        (@Catd_cat Z)
+        (@Rep_catd Z x)
+        (Op_cat Z)
+        (@Rep_catd_func Z))
+      x
+      y
+      p)
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_func Z x y p;
 

@@ -369,6 +369,57 @@ One failed direction was adding a direct shortcut rule against the reducible
 old `CompTarget_catd` alias. The successful direction was making the
 composition motive itself computational.
 
+### Follow-Up Review: `hom_con` Was Not Semantically Blocked
+
+A later focused probe corrected the diagnosis above. The raw `hom_con`
+presentation was not semantically wrong. Two narrower implementation issues were
+responsible for the bad behavior:
+
+1. v3.2 had a rule for the full hom-action of opposite functors,
+   `fapp1_func (Op_func F)`, but not the capped action
+   `fapp1_fapp0 (Op_func F)`. The `hom_con` route unfolds through `hom_` and
+   produces exactly this capped opposite-functor action. Adding the rule:
+
+   ```lambdapi
+   rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
+     ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
+   ```
+
+   makes the raw `hom_con` computation join.
+
+2. The alias route still times out if assertions or rule LHSs expose reducible
+   `Fibre_cat (CompTarget_catd Z x) y` expressions in explicit source/target
+   slots. The same computation typechecks quickly when those slots are written
+   in canonical normal form:
+
+   ```text
+   Functord_cat Z (Rep_Z y) (Rep_Z x)
+   ```
+
+The current file therefore keeps `CompTarget_catd` as a stable head for the
+passing benchmark, but it now also records a sanity assertion showing that the
+semantic `hom_con` expression computes to `path_comp_func` when the surrounding
+categories are canonical. This means the stable head should be read as a
+performance/discrimination bridge, not as evidence that `hom_con` cannot express
+the construction.
+
+The stable head was also extended with the full hom-action package:
+
+```lambdapi
+CompTarget_fapp1_func_func
+```
+
+and the rule:
+
+```text
+fapp1_func (CompTarget_catd Z x) a b
+  -> CompTarget_fapp1_func_func Z x a b
+```
+
+with object action folding to the existing capped
+`CompTarget_fapp1_func`. The object-action rule deliberately keeps the inferred
+source/target category slots implicit, following the local stable-head SOP.
+
 ## Validation
 
 Commands run successfully after the implemented changes:

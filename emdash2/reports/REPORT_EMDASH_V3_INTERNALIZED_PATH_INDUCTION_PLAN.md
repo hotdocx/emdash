@@ -797,10 +797,29 @@ CompTarget_catd Z x [y]
   = Functord_cat (Rep_Z(y)) (Rep_Z(x))
 ```
 
-Implementation note added after the 2026-05-26 iteration: the raw `hom_con`
-alias was not a good enough rewrite discriminator for the full composition
-benchmark. The implemented kernel uses `CompTarget_catd` as a stable head with
-the same fibre meaning and a specific base-arrow action head.
+Implementation note added after the 2026-05-26 iteration: the first passing
+kernel used `CompTarget_catd` as a stable head with the same fibre meaning and a
+specific base-arrow action head. A later review refined the diagnosis: the raw
+`hom_con` expression computes after adding the missing capped
+`fapp1_fapp0 (Op_func F)` rule, but only when surrounding source/target
+categories are kept in canonical forms such as
+`Functord_cat Z (Rep_Z y) (Rep_Z x)`. Explicit reducible slots such as
+`Fibre_cat (CompTarget_catd Z x) y` can still cause conversion timeouts in the
+alias experiment.
+
+Therefore the current stable `CompTarget_catd` should be read as a
+performance/discrimination bridge, not as a semantic replacement for the
+`hom_con` construction. It now exposes both:
+
+```text
+fapp1_func (CompTarget_catd Z x) a b
+  -> CompTarget_fapp1_func_func Z x a b
+
+fapp1_fapp0 (CompTarget_catd Z x) p
+  -> CompTarget_fapp1_func Z x p
+```
+
+so the present implementation is no longer capped-only.
 
 Then pull it back along the projection:
 
@@ -1228,10 +1247,13 @@ Treat this as a real source-side problem, not as notation.
 5. Does the fixed-`x` composition benchmark compute to `comp_fapp0` without new
    rewrite rules?
 
-   Resolved for the current fixed-`x` benchmark: the raw `hom_con` path was too
-   brittle, so `CompTarget_catd` is implemented as a stable head with a narrow
-   arrow-action rule. The final assertion `path_comp_sec(x)[p][z](q) == q ∘ p`
-   now typechecks.
+   Resolved for the current fixed-`x` benchmark: `CompTarget_catd` is implemented
+   as a stable head and the final assertion
+   `path_comp_sec(x)[p][z](q) == q ∘ p` now typechecks. Follow-up probing showed
+   the semantic `hom_con` route also computes once `Op_func` has a capped
+   `fapp1_fapp0` rule and reducible `Fibre_cat (CompTarget ...)` source/target
+   slots are replaced by canonical `Functord_cat` forms. This remains a candidate
+   for a later simplification/refactor.
 
 6. When should full `forall x y z` transitivity be attempted?
 
