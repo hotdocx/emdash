@@ -285,140 +285,75 @@ path_comp_func(p)[z](q) == q ∘ p
 
 ### Root Cause And Composition Redesign
 
-Further review found that the remaining timeout was architectural.
-`CompTarget_catd` was a defined alias for a `hom_con` expression:
+The final review corrected the earlier stable-head diagnosis. The semantic
+`hom_con` presentation is viable:
 
 ```text
 CompTarget_catd Z x
   := hom_con (Catd_cat Z) (Rep_Z x) (Op Z) (Rep_catd_func Z)
 ```
 
-This was readable, but it was the wrong kernel shape once composition needed
-to compute through generic `fib_cov_tapp0_func`. The checker had to rediscover
-the arrow action of a reducible `hom_con` expression, then apply it to a
-polymorphic displayed identity. That was mathematically coherent but too
-expensive and too brittle as a rewrite normal form.
-
-The implemented redesign makes `CompTarget_catd` a stable family head:
-
-```lambdapi
-injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd Z);
-```
-
-with fibre rule:
-
-```text
-CompTarget_catd(Z,x)[y] == Functord_cat (Rep_Z(y)) (Rep_Z(x))
-```
-
-and a stable base-arrow action:
-
-```lambdapi
-symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
-  (p : τ (Hom Z a b))
-```
-
-with:
-
-```text
-CompTarget_catd(Z,x)[p] == CompTarget_fapp1_func(Z,x,p)
-```
-
-For the identity seed, the special object-action rule is:
-
-```text
-CompTarget_fapp1_func(Z,x,p)(id_{Rep_x}) == path_comp_func(p)
-```
-
-The rule intentionally matches the canonical unfolded representable
-
-```text
-hom_ Z Z (id_func Z) x
-```
-
-rather than the readability alias:
-
-```text
-Rep_catd Z x
-```
-
-The alias form was one of the sources of brittle matching.
-
-With this redesign, the previously timed-out bridge now typechecks:
-
-```text
-path_comp_sec(x)[p] == path_comp_func(p)
-```
-
-and the full fixed-`x` composition computation also typechecks:
-
-```text
-path_comp_sec(x)[p][z](q) == q ∘ p
-```
-
-for:
-
-```text
-p : Hom_Z(x,y)
-q : Hom_Z(y,z)
-```
-
-Temporary probe files were used during this redesign and removed afterward.
-One failed direction was adding a direct shortcut rule against the reducible
-old `CompTarget_catd` alias. The successful direction was making the
-composition motive itself computational.
-
-### Follow-Up Review: `hom_con` Was Not Semantically Blocked
-
-A later focused probe corrected the diagnosis above. The raw `hom_con`
-presentation was not semantically wrong. Two narrower implementation issues were
-responsible for the bad behavior:
+The actual blockers were narrower:
 
 1. v3.2 had a rule for the full hom-action of opposite functors,
    `fapp1_func (Op_func F)`, but not the capped action
    `fapp1_fapp0 (Op_func F)`. The `hom_con` route unfolds through `hom_` and
-   produces exactly this capped opposite-functor action. Adding the rule:
+   produces exactly this capped opposite-functor action. The accepted rule is:
 
    ```lambdapi
    rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
      ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
    ```
 
-   makes the raw `hom_con` computation join.
-
-2. The alias route still times out if assertions or rule LHSs expose reducible
-   `Fibre_cat (CompTarget_catd Z x) y` expressions in explicit source/target
-   slots. The same computation typechecks quickly when those slots are written
-   in canonical normal form:
+2. Several benchmark assertions exposed reducible fibre expressions such as
+   `Fibre_cat (CompTarget_catd Z x) y` in explicit source/target slots of
+   `fapp0`. The fibre itself computes correctly, but those explicit slots can
+   make conversion search brittle. The assertions were rewritten to use the
+   canonical normal forms:
 
    ```text
+   Hom_cat Z x y
    Functord_cat Z (Rep_Z y) (Rep_Z x)
    ```
 
-The current file therefore keeps `CompTarget_catd` as a stable head for the
-passing benchmark, but it now also records a sanity assertion showing that the
-semantic `hom_con` expression computes to `path_comp_func` when the surrounding
-categories are canonical. This means the stable head should be read as a
-performance/discrimination bridge, not as evidence that `hom_con` cannot express
-the construction.
-
-The stable head was also extended with the full hom-action package:
+With those two corrections, `CompTarget_catd` is implemented purely as the
+semantic `hom_con` alias, not as a primitive stable family head. No
+CompTarget-specific `fapp0`, `fapp1_func`, or `fapp1_fapp0` rules are retained;
+the fibre and hom-action computations are inherited from the alias body. The
+action helper names are retained only as readable aliases, and their types use
+the canonical `Functord_cat` endpoints:
 
 ```lambdapi
-CompTarget_fapp1_func_func
+symbol CompTarget_fapp1_func [...]
+  : Functor
+      (Functord_cat Z (Rep_Z a) (Rep_Z x))
+      (Functord_cat Z (Rep_Z b) (Rep_Z x))
+≔ fapp1_fapp0 (hom_con ...) p;
+
+symbol CompTarget_fapp1_func_func [...]
+  : Functor
+      (Hom_cat Z a b)
+      (Functor_cat
+        (Functord_cat Z (Rep_Z a) (Rep_Z x))
+        (Functord_cat Z (Rep_Z b) (Rep_Z x)))
+≔ fapp1_func (hom_con ...) a b;
 ```
 
-and the rule:
+The earlier CompTarget-specific shortcut:
 
 ```text
-fapp1_func (CompTarget_catd Z x) a b
-  -> CompTarget_fapp1_func_func Z x a b
+CompTarget_fapp1_func(p)(id_{Rep_x}) -> path_comp_func(p)
 ```
 
-with object action folding to the existing capped
-`CompTarget_fapp1_func`. The object-action rule deliberately keeps the inferred
-source/target category slots implicit, following the local stable-head SOP.
+is no longer needed; the computation is inherited from the semantic `hom_con`
+body.
+
+The resulting fixed-`x` benchmark typechecks:
+
+```text
+path_comp_sec(x)[p]       == path_comp_func(p)
+path_comp_sec(x)[p][z](q) == q ∘ p
+```
 
 ## Validation
 

@@ -1174,36 +1174,49 @@ rule @tapp0_fapp0
   ↪ @path_ind_func_fapp0 $Z $x $E;
 
 injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd Z);
+  : τ (Catd Z)
+≔ @hom_con
+    (@Catd_cat Z)
+    (@Rep_catd Z x)
+    (Op_cat Z)
+    (@Rep_catd_func Z);
 
-rule @fapp0 $Z Cat_cat (@CompTarget_catd $Z $x) $y
-  ↪ @Functord_cat $Z (@Rep_catd $Z $y) (@Rep_catd $Z $x);
-
+// Readable aliases for the hom-action of `CompTarget_catd`.  Their endpoint
+// types use canonical `Functord_cat` forms rather than reducible `Fibre_cat`
+// wrappers, but their bodies are the semantic `hom_con` action.
 symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
   (p : τ (Hom Z a b))
   : τ (Functor
-      (Fibre_cat (@CompTarget_catd Z x) a)
-      (Fibre_cat (@CompTarget_catd Z x) b));
+      (@Functord_cat Z (@Rep_catd Z a) (@Rep_catd Z x))
+      (@Functord_cat Z (@Rep_catd Z b) (@Rep_catd Z x)))
+≔ @fapp1_fapp0
+    Z
+    Cat_cat
+    (@hom_con
+      (@Catd_cat Z)
+      (@Rep_catd Z x)
+      (Op_cat Z)
+      (@Rep_catd_func Z))
+    a
+    b
+    p;
 
 symbol CompTarget_fapp1_func_func [Z : Cat] [x a b : τ (Obj Z)]
   : τ (Functor
       (Hom_cat Z a b)
       (Functor_cat
-        (Fibre_cat (@CompTarget_catd Z x) a)
-        (Fibre_cat (@CompTarget_catd Z x) b)));
-
-rule @fapp1_func $Z Cat_cat (@CompTarget_catd $Z $x) $a $b
-  ↪ @CompTarget_fapp1_func_func $Z $x $a $b;
-
-rule @fapp0
-      _
-      _
-      (@CompTarget_fapp1_func_func $Z $x $a $b)
-      $p
-  ↪ @CompTarget_fapp1_func $Z $x $a $b $p;
-
-rule @fapp1_fapp0 $Z Cat_cat (@CompTarget_catd $Z $x) $a $b $p
-  ↪ @CompTarget_fapp1_func $Z $x $a $b $p;
+        (@Functord_cat Z (@Rep_catd Z a) (@Rep_catd Z x))
+        (@Functord_cat Z (@Rep_catd Z b) (@Rep_catd Z x))))
+≔ @fapp1_func
+    Z
+    Cat_cat
+    (@hom_con
+      (@Catd_cat Z)
+      (@Rep_catd Z x)
+      (Op_cat Z)
+      (@Rep_catd_func Z))
+    a
+    b;
 
 symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@PathOut_cat Z x))
@@ -1403,11 +1416,6 @@ symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
     y
     x
     p;
-
-rule fapp0
-      (@CompTarget_fapp1_func $Z $x $x $y $p)
-      (@id_funcd $Z (@hom_ $Z $Z (@id_func $Z) $x))
-  ↪ @path_comp_func $Z $x $y $p;
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -2218,19 +2226,17 @@ assert [Z : Cat] (x y : τ (Obj Z))
 assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢
   @fapp0
-    (Fibre_cat (@CompTarget_catd Z x) x)
-    (Fibre_cat (@CompTarget_catd Z x) y)
+    (@Functord_cat Z (@Rep_catd Z x) (@Rep_catd Z x))
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
     (@CompTarget_fapp1_func Z x x y p)
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_func Z x y p;
 
-// The semantic `hom_con` presentation of `CompTarget_catd` computes when the
-// surrounding source/target categories are kept in their canonical normal forms.
+// The semantic `hom_con` presentation of `CompTarget_catd` computes without a
+// CompTarget-specific identity shortcut.
 assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢
-  @fapp0
-    (@Functord_cat Z (@Rep_catd Z x) (@Rep_catd Z x))
-    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+  fapp0
     (@fapp1_fapp0
       Z
       Cat_cat
@@ -2249,7 +2255,7 @@ assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢
   @fapp0
     (Hom_cat Z x y)
-    (Fibre_cat (@CompTarget_catd Z x) y)
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
     (@fib_cov_tapp0_func
       Z
       (@CompTarget_catd Z x)
@@ -2262,8 +2268,8 @@ assert [Z : Cat] (x y : τ (Obj Z))
 assert [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y)) ⊢
   @fapp0
-    (Fibre_cat (@Rep_catd Z x) y)
-    (Fibre_cat (@CompTarget_catd Z x) y)
+    (Hom_cat Z x y)
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
     (@tapp0_fapp0
       Z
       Cat_cat
@@ -2278,8 +2284,8 @@ assert [Z : Cat] (x y z : τ (Obj Z))
   (p : τ (Hom Z x y))
   (q : τ (Hom Z y z)) ⊢
   @fapp0
-    (Fibre_cat (@Rep_catd Z y) z)
-    (Fibre_cat (@Rep_catd Z x) z)
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
     (@tapp0_fapp0
       Z
       Cat_cat
@@ -2294,8 +2300,8 @@ assert [Z : Cat] (x y z : τ (Obj Z))
   (p : τ (Hom Z x y))
   (q : τ (Hom Z y z)) ⊢
   @fapp0
-    (Fibre_cat (@Rep_catd Z y) z)
-    (Fibre_cat (@Rep_catd Z x) z)
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
     (@tapp0_fapp0
       Z
       Cat_cat
@@ -2303,8 +2309,8 @@ assert [Z : Cat] (x y z : τ (Obj Z))
       (@Rep_catd Z x)
       z
       (@fapp0
-        (Fibre_cat (@Rep_catd Z x) y)
-        (Fibre_cat (@CompTarget_catd Z x) y)
+        (Hom_cat Z x y)
+        (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
         (@tapp0_fapp0
           Z
           Cat_cat

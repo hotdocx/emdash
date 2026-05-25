@@ -797,29 +797,39 @@ CompTarget_catd Z x [y]
   = Functord_cat (Rep_Z(y)) (Rep_Z(x))
 ```
 
-Implementation note added after the 2026-05-26 iteration: the first passing
-kernel used `CompTarget_catd` as a stable head with the same fibre meaning and a
-specific base-arrow action head. A later review refined the diagnosis: the raw
-`hom_con` expression computes after adding the missing capped
-`fapp1_fapp0 (Op_func F)` rule, but only when surrounding source/target
-categories are kept in canonical forms such as
-`Functord_cat Z (Rep_Z y) (Rep_Z x)`. Explicit reducible slots such as
-`Fibre_cat (CompTarget_catd Z x) y` can still cause conversion timeouts in the
-alias experiment.
+Implementation note added after the 2026-05-26 iteration: the settled kernel now
+uses the semantic `hom_con` expression for `CompTarget_catd`. The earlier
+stable-head workaround was only needed before two smaller issues were fixed:
 
-Therefore the current stable `CompTarget_catd` should be read as a
-performance/discrimination bridge, not as a semantic replacement for the
-`hom_con` construction. It now exposes both:
+- `Op_func` needed the capped action rule
+  `fapp1_fapp0 (Op_func F) -> fapp1_fapp0 F` with endpoints reversed.
+- Benchmark assertions involving CompTarget action should use canonical
+  `Hom_cat` / `Functord_cat` source-target forms, not reducible
+  `Fibre_cat (CompTarget_catd Z x) y` wrappers in explicit `fapp0` slots.
+
+`CompTarget_catd` now has the semantic definition:
+
+```text
+CompTarget_catd Z x
+  := hom_con (Catd_cat Z) (Rep_Z x) (Op Z) (Rep_catd_func Z)
+```
+
+No CompTarget-specific `fapp0`, `fapp1_func`, or `fapp1_fapp0` rules are needed;
+the fibre and action computations come from the alias body. The action helper
+aliases are definitions through that semantic body:
 
 ```text
 fapp1_func (CompTarget_catd Z x) a b
-  -> CompTarget_fapp1_func_func Z x a b
+  == CompTarget_fapp1_func_func Z x a b
 
 fapp1_fapp0 (CompTarget_catd Z x) p
-  -> CompTarget_fapp1_func Z x p
+  == CompTarget_fapp1_func Z x p
 ```
 
-so the present implementation is no longer capped-only.
+The helper types use canonical endpoints
+`Functord_cat Z (Rep_Z a) (Rep_Z x)` and
+`Functord_cat Z (Rep_Z b) (Rep_Z x)`, so the present implementation is neither
+capped-only nor dependent on a primitive CompTarget action shortcut.
 
 Then pull it back along the projection:
 
@@ -1247,13 +1257,10 @@ Treat this as a real source-side problem, not as notation.
 5. Does the fixed-`x` composition benchmark compute to `comp_fapp0` without new
    rewrite rules?
 
-   Resolved for the current fixed-`x` benchmark: `CompTarget_catd` is implemented
-   as a stable head and the final assertion
-   `path_comp_sec(x)[p][z](q) == q ∘ p` now typechecks. Follow-up probing showed
-   the semantic `hom_con` route also computes once `Op_func` has a capped
-   `fapp1_fapp0` rule and reducible `Fibre_cat (CompTarget ...)` source/target
-   slots are replaced by canonical `Functord_cat` forms. This remains a candidate
-   for a later simplification/refactor.
+   Resolved for the current fixed-`x` benchmark: the final assertion
+   `path_comp_sec(x)[p][z](q) == q ∘ p` now typechecks using the semantic
+   `hom_con` route. The root fixes were the capped `Op_func` action rule and
+   canonical source/target forms in the benchmark assertions.
 
 6. When should full `forall x y z` transitivity be attempted?
 
