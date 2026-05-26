@@ -1193,6 +1193,17 @@ symbol PathOut_cat_func [Z : Cat]
      (@Sigma_func Z)
      (@Rep_catd_func Z);
 
+symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functor (@PathOut_cat Z y) (@PathOut_cat Z x))
+≔ @fapp1_fapp0
+    (Op_cat Z)
+    Cat_cat
+    (@PathOut_cat_func Z)
+    y
+    x
+    p;
+
 symbol PathOutMotives_catd [Z : Cat]
   : τ (Catd Z)
 ≔ @comp_cat_fapp0
@@ -2023,6 +2034,31 @@ rule @tapp0_fapp0
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
+// Target-side path-out transport. The transported motive remains canonically
+// `PathOutMotives[p](E)`; this helper exposes its pullback presentation so Pi
+// sections move by the generic section-pullback map.
+symbol pathout_pi_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (@Pi_cat (@PathOut_cat Z x) E)
+      (@Pi_cat (@PathOut_cat Z y) (@pathout_motive_transport_obj Z x y p E)))
+≔ @section_pullback_func
+    (@PathOut_cat Z y)
+    (@PathOut_cat Z x)
+    (@PathOut_transport_func Z x y p)
+    E;
+
+symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
+≔ @pathout_pi_transport_func Z x y p E;
+
 // -------------------------------------------------------------------------------------------------
 // 16. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
@@ -2362,6 +2398,33 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           p)
         E;
 
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @PathOut_transport_func Z x y p
+    ≡ @fapp1_fapp0
+        (Op_cat Z)
+        Cat_cat
+        (@PathOut_cat_func Z)
+        y
+        x
+        p;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @pathout_motive_transport_obj Z x y p E
+    ≡ @Pullback_catd
+        (@PathOut_cat Z y)
+        (@PathOut_cat Z x)
+        E
+        (@PathOut_transport_func Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (@PathOut_cat Z y)
+    (@PathOut_cat Z x)
+    (@PathOut_transport_func Z x y p)
+    (@pathout_refl_obj Z y)
+    ≡ @pathout_obj Z x y p;
+
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @pathout_refl_eval_base_func Z x y p E
@@ -2448,6 +2511,82 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           (@pathout_obj Z x y p)
           u)
         (@pathout_refl_arrow Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @pathout_pi_transport_func Z x y p E
+    ≡ @section_pullback_func
+        (@PathOut_cat Z y)
+        (@PathOut_cat Z x)
+        (@PathOut_transport_func Z x y p)
+        E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @PathIndTgt_transport_func Z x y p E
+    ≡ @pathout_pi_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathIndTgt_transport_func Z x y p E)
+    s
+    ≡ @section_pullback_sec
+        (@PathOut_cat Z y)
+        (@PathOut_cat Z x)
+        (@PathOut_transport_func Z x y p)
+        E
+        s;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E)))
+  (q : τ (Obj (@PathOut_cat Z y))) ⊢
+  @piapp0
+    (@PathOut_cat Z y)
+    (@pathout_motive_transport_obj Z x y p E)
+    (@fapp0
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+      (@PathIndTgt_transport_func Z x y p E)
+      s)
+    q
+    ≡ @piapp0
+        (@PathOut_cat Z x)
+        E
+        s
+        (@fapp0
+          (@PathOut_cat Z y)
+          (@PathOut_cat Z x)
+          (@PathOut_transport_func Z x y p)
+          q);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
+  @piapp0
+    (@PathOut_cat Z y)
+    (@pathout_motive_transport_obj Z x y p E)
+    (@fapp0
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+      (@PathIndTgt_transport_func Z x y p E)
+      s)
+    (@pathout_refl_obj Z y)
+    ≡ @piapp0
+        (@PathOut_cat Z x)
+        E
+        s
+        (@pathout_obj Z x y p);
 
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @tapp0_fapp0

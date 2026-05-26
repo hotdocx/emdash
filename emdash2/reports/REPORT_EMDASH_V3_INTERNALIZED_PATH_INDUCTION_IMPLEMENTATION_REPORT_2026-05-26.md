@@ -509,6 +509,50 @@ transported-motive total arrow. A direct `fapp1_fapp0 PathIndSrc_catd` rewrite
 for this arrow was intentionally not added; the helper avoids depending on a
 fragile rewrite match against the currently-defined total-family head.
 
+The target side now has the matching section-pullback helper:
+
+```lambdapi
+symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functor (PathOut_cat Z y) (PathOut_cat Z x));
+
+symbol pathout_pi_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (@Pi_cat (@PathOut_cat Z x) E)
+      (@Pi_cat (@PathOut_cat Z y) (@pathout_motive_transport_obj Z x y p E)));
+
+symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))));
+```
+
+with checked computation:
+
+```text
+PathOut_transport_func(Z,x,y,p) == PathOut_cat_func(Z)[p]
+pathout_motive_transport_obj(Z,x,y,p,E)
+  == Pullback_catd(E, PathOut_transport_func Z x y p)
+PathOut_transport_func(Z,x,y,p)(pathout_refl_obj Z y) == pathout_obj Z x y p
+PathIndTgt_transport_func(Z,x,y,p,E)
+  == section_pullback_func(PathOut_transport_func Z x y p,E)
+PathIndTgt_transport_func(Z,x,y,p,E)(s)[q]
+  == s[PathOut_transport_func(Z,x,y,p)(q)]
+PathIndTgt_transport_func(Z,x,y,p,E)(s)[pathout_refl_obj Z y]
+  == s[pathout_obj Z x y p]
+```
+
+This completes the current source/target transport pair for canonical
+transported-motive arrows. It is still not the full naturality proof for
+`PathInd_funcd`; it supplies the two sides that such a coherence statement must
+relate.
+
 Added the matching source family and outer path-induction displayed functor:
 
 ```lambdapi
@@ -561,10 +605,9 @@ Near-term:
 - use the fixed-`x` composition result as the benchmark for future
   path-induction internalization and outer-`x` refinements;
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
-  `PathIndSrc_catd`, and `PathInd_funcd`; the current package has checked
-  fibres/components, a source-side displayed-functor interface, and a checked
-  canonical source transport helper `PathIndSrc_transport_func`, but not the
-  full moving-refl coherence transfor;
+  `PathIndSrc_catd`, `PathIndTgt_catd`, and `PathInd_funcd`; the current package
+  has checked fibres/components plus canonical source and target transport
+  helpers, but not the full moving-refl/path-induction coherence transfor;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.

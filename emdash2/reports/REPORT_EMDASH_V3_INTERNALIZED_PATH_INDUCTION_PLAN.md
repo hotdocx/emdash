@@ -1061,7 +1061,10 @@ pathout_refl_eval_func Z x [E] == E[(x,id_x)]
 PathOutMotives_catd Z [p](E)[(y,id_y)] == E[(y,p)]
 pathout_refl_eval_base_func Z x y p E == E[pathout_refl_arrow Z x y p]
 pathout_motive_transport_obj Z x y p E == PathOutMotives_catd Z [p](E)
+PathOut_transport_func Z x y p [pathout_refl_obj Z y] == pathout_obj Z x y p
 PathIndSrc_transport_func Z x y p E == pathout_refl_eval_base_func Z x y p E
+PathIndTgt_transport_func Z x y p E == section_pullback_func(PathOut_transport_func Z x y p,E)
+PathIndTgt_transport_func Z x y p E(s)[pathout_refl_obj Z y] == s[pathout_obj Z x y p]
 PathIndSrc_catd Z [(x,E)] == E[(x,id_x)]
 PathIndTgt_catd Z [(x,E)] == Pi_cat E
 PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
@@ -1080,9 +1083,11 @@ source family `PathIndSrc_catd`. The checked map
 `pathout_refl_eval_base_func` now sends `E[(x,id_x)]` to `E[(y,p)]` by applying
 `E` to `pathout_refl_arrow Z x y p`. This map is now exposed through the stable
 helper `PathIndSrc_transport_func` for the canonical transported-motive total
-arrow, but the full moving-refl/coherence story is not yet packaged.
+arrow. The target side is exposed through `PathIndTgt_transport_func`, which is
+the generic `section_pullback_func` along `PathOut_transport_func Z x y p`.
+The full moving-refl/path-induction coherence story is not yet packaged.
 
-### Next Phase: Refine Moving-Source Functoriality
+### Next Phase: Refine Moving-Source Coherence
 
 The next implementation should avoid replacing the checked outer package. Use
 it as the interface, and probe smaller rules or helper packages that explain
@@ -1094,9 +1099,11 @@ the base-arrow action of:
 
 over arrows in `Sigma_cat Z (PathOutMotives_catd Z)`. The source-side object
 and component package is now explicit, and the base-arrow map exists as
-`PathIndSrc_transport_func` for canonical transported-motive arrows; the
-remaining problem is packaging this helper as the coherent action needed by
-`PathOutReflEval_funcd`, `PathIndSrc_catd`, and `PathInd_funcd`.
+`PathIndSrc_transport_func` for canonical transported-motive arrows. The target
+side map exists as `PathIndTgt_transport_func`. The remaining problem is
+packaging these helpers as the coherent action needed by
+`PathOutReflEval_funcd`, `PathIndSrc_catd`, `PathIndTgt_catd`, and
+`PathInd_funcd`.
 
 ## Validation Strategy
 
@@ -1128,7 +1135,12 @@ pathout_refl_eval_func(Z,x)[E] == Fibre_cat E (pathout_refl_obj Z x)
 PathOutMotives_catd(Z)[p](E)[pathout_refl_obj Z y] == Fibre_cat E (pathout_obj Z x y p)
 pathout_refl_eval_base_func(Z,x,y,p,E) == E[pathout_refl_arrow Z x y p]
 pathout_motive_transport_obj(Z,x,y,p,E) == PathOutMotives_catd(Z)[p](E)
+pathout_motive_transport_obj(Z,x,y,p,E) == Pullback_catd(E, PathOut_transport_func Z x y p)
+PathOut_transport_func(Z,x,y,p)(pathout_refl_obj Z y) == pathout_obj Z x y p
 PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
+PathIndTgt_transport_func(Z,x,y,p,E) == pathout_pi_transport_func Z x y p E
+PathIndTgt_transport_func(Z,x,y,p,E)(s)[q] == s[PathOut_transport_func(Z,x,y,p)(q)]
+PathIndTgt_transport_func(Z,x,y,p,E)(s)[pathout_refl_obj Z y] == s[pathout_obj Z x y p]
 PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
 PathIndSrc_catd(Z)[(x,E)] == Fibre_cat E (pathout_refl_obj Z x)
 PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
@@ -1250,11 +1262,12 @@ The next implementation should not try to replace `path_ind_sec` immediately
 with a single maximally internal symbol.
 
 The first outer-`x` package now exists and computes at fibres/components, with
-the source side routed through `PathOutReflEval_funcd`. A checked source-side
-base-arrow map now exists as `PathIndSrc_transport_func` over canonical
-transported-motive arrows. The best next move is to keep that package as the
-interface and refine the source-side arrow/coherence computation incrementally,
-without reintroducing broad or timeout-prone transfor rules.
+the source side routed through `PathOutReflEval_funcd`. Checked source and
+target base-arrow maps now exist as `PathIndSrc_transport_func` and
+`PathIndTgt_transport_func` over canonical transported-motive arrows. The best
+next move is to keep that package as the interface and refine the coherence
+computation incrementally, without reintroducing broad or timeout-prone
+transfor rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer
