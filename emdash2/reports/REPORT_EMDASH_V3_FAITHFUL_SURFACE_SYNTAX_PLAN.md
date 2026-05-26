@@ -18,7 +18,7 @@ implementation target is documentation and design consolidation:
   typechecker should relate to that syntax;
 - provide enough syntax examples to document the current internal constructors,
   especially `homd_int`, `fib_cov_int`, `tapp1_int_*`, `tdapp1_int_*`,
-  `fdapp1_int_transfd`, and `piapp1_int`;
+  `fdapp1_int_transfd`, `piapp1_func`, and `piapp1_fapp0`;
 - prepare follow-up edits to `emdash3_2.lp` and `reports/EMDASH_FOUNDATIONS.md`
   so important symbols are annotated with their faithful surface syntax.
 
@@ -794,19 +794,12 @@ fdapp1_int(FF) :
 
 This is the identity-specialized displayed internal action.
 
-### `piapp1_int`
+### Retired `piapp1_int` Projection Chain
 
-Kernel declaration:
-
-```lambdapi
-symbol piapp1_int [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  : τ (Transfd
-      (homd_int (@id_funcd K (@Const_catd K Terminal_cat)))
-      (comp_catd_fapp0
-        (@homd_int K (@Const_catd K Terminal_cat) E s)
-        (Op_funcd s)));
-```
+Earlier drafts used a terminal-specialized `piapp1_int` projection chain. The
+current `emdash3_2.lp` has retired those dedicated heads and keeps section
+action at the generic displayed-action/projection layer, with `piapp1_func` and
+`piapp1_fapp0` as the user-facing section-action package.
 
 Surface context:
 
@@ -819,7 +812,7 @@ s : Π z :^f K, E[z]
 Default surface type:
 
 ```text
-piapp1_int(s) :
+retired piapp1_int(s) :
   Homd_1(~, —) ⇛_K Homd_E(s^op ~, s —)
 ```
 
@@ -835,17 +828,10 @@ where:
 f : Hom_K(x,y)
 ```
 
-This should be the canonical user-facing interpretation of the `piapp1_int`
-projection chain. The intermediate kernel heads:
-
-```text
-piapp1_int_src_transf
-piapp1_int_src_app
-piapp1_int_tgt_transf
-```
-
-should normally be hidden in surface mode and printed only in kernel/debug mode
-or in a pedagogical expansion explaining the rewrite cascade.
+This remains the canonical user-facing interpretation, but current kernel/debug
+output should describe it through `piapp1_func`, `piapp1_fapp0`,
+`fdapp1_int_transfd`, `Fibre_func`, and `homd_src_sec`, not through the retired
+`piapp1_int_*` heads.
 
 ## Surface Expansion Of `HomdTarget`
 
@@ -1054,9 +1040,8 @@ piapp0_func
 homd_src_func
 homd_src_sec
 homd_tgt_func
-piapp1_int_src_transf
-piapp1_int_src_app
-piapp1_int_tgt_transf
+piapp1_func
+piapp1_fapp0
 Functor_cat_func
 Functor_cat_fapp0_func
 comp_cat_cov_func
@@ -1592,7 +1577,8 @@ tdapp1_int_func_transfd
 tdapp1_int_fapp0_transfd
 tdapp1_int_fapp1_func_transfd
 fdapp1_int_transfd
-piapp1_int
+piapp1_func
+piapp1_fapp0
 ```
 
 Surface recommendations:
@@ -1603,7 +1589,8 @@ Surface recommendations:
 | `tdapp1_int_fapp0_transfd ϵ` | `tdapp1_int(ϵ)` | surface macro |
 | `tdapp1_int_fapp1_func_transfd ϵ ϵ'` | `tdapp1_int[ϵ,ϵ']` | compact/debug |
 | `fdapp1_int_transfd FF` | `fdapp1_int(FF)` | surface macro |
-| `piapp1_int s` | `piapp1_int(s)` or hidden behind `s[f]` | surface macro |
+| `piapp1_func E s x y` | section-action package over `Hom_K(x,y)` | compact/debug |
+| `piapp1_fapp0 E s f` | `s[f]` | projection notation |
 
 Default compact types:
 
@@ -1615,8 +1602,8 @@ tdapp1_int(FF,GG) :
 fdapp1_int(FF) :
   Homd_E(~, —) ⇛_K Homd_D(FF^op ~, FF —)
 
-piapp1_int(s) :
-  Homd_1(~, —) ⇛_K Homd_E(s^op ~, s —)
+s[f] :
+  Hom_{E[y]}(E[f](s[x]), s[y])
 ```
 
 Design lesson: the compact placeholder syntax is not just abbreviation. It is
@@ -1662,9 +1649,9 @@ FF[z] : E[z] ⟶ D[z]
 `Fibre_func` and `Fibre_transf` are readable definitions over stable projection
 heads. They should not become new semantic surface constructors.
 
-### Section 14b: Terminal-Specialized `piapp1` Projection Chain
+### Section 14b: Retired Terminal-Specialized `piapp1` Projection Chain
 
-Kernel symbols:
+Retired kernel symbols:
 
 ```text
 piapp1_int_src_transf
@@ -1681,13 +1668,17 @@ Surface recommendations:
 | `piapp1_int_tgt_transf` | hidden staged projection | kernel/debug |
 
 These heads should not appear in default user syntax. Their whole purpose is to
-make the kernel route:
+make the older kernel route:
 
 ```text
 piapp1_int(s) ↦ piapp1_func(E,s,x,y) ↦ s[f]
 ```
 
 typecheck and normalize through stable intermediate heads.
+
+Current `emdash3_2.lp` no longer keeps these heads. Kernel/debug mode should
+show the generic route through `fdapp1_int_transfd`, `Fibre_func`,
+`homd_src_sec`, `piapp1_func`, and `piapp1_fapp0` when that detail is needed.
 
 Surface mode should print the result:
 
@@ -1698,7 +1689,7 @@ s[f]
 or, when the internal witness is the point:
 
 ```text
-piapp1_int(s) : Homd_1(~, —) ⇛_K Homd_E(s^op ~, s —)
+retired piapp1_int(s) : Homd_1(~, —) ⇛_K Homd_E(s^op ~, s —)
 ```
 
 ### Section 15: Generic Sigma/Pi Weakening Helpers
@@ -1752,9 +1743,8 @@ Many current symbols are stable heads needed by Lambdapi rewriting:
 homd_src_func
 homd_src_sec
 homd_tgt_func
-piapp1_int_src_transf
-piapp1_int_src_app
-piapp1_int_tgt_transf
+piapp1_func
+piapp1_fapp0
 ```
 
 Default surface syntax should hide these. Treating them as ordinary user-level
@@ -1857,7 +1847,8 @@ Recommended follow-up edits:
    - `fib_cov_int`;
    - `homd_` and `homd_int`;
    - ordinary `tapp1_int_*` constructors;
-   - displayed `tdapp1_int_*`, `fdapp1_int_transfd`, and `piapp1_int`.
+   - displayed `tdapp1_int_*`, `fdapp1_int_transfd`, `piapp1_func`, and
+     `piapp1_fapp0`.
 3. Keep those comments declarative and syntax-focused. Avoid changing rewrite
    rules just to match the surface syntax.
 4. Add a short note that surface syntax and kernel heads are intentionally not
@@ -1992,7 +1983,7 @@ Initial examples:
 - `fapp1_int_transf`;
 - `tdapp1_int_func_transfd`;
 - `fdapp1_int_transfd`;
-- `piapp1_int`;
+- `piapp1_func` / `piapp1_fapp0`;
 - `Functor_catd`;
 - `Transf_catd`;
 - `Pi_cat`;

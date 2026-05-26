@@ -800,6 +800,22 @@ rule @fapp0 (@Catd_cat $B) (@Catd_cat $A)
       (@Pullback_catd_func $A $B $F) $E
   ↪ @Pullback_catd $A $B $E $F;
 
+// Arrow action of the internalized Catd constructor. `Catd_cat_func` is a
+// definition, so the rule matches the canonical unfolded composition head.
+rule @fapp1_fapp0
+      (Op_cat Cat_cat)
+      Cat_cat
+      (@comp_cat_fapp0
+        (Op_cat Cat_cat)
+        (Catd_cat Cat_cat)
+        Cat_cat
+        (@fapp0_func Cat_cat Cat_cat Cat_cat)
+        Functor_cat_func)
+      $B
+      $A
+      $F
+  ↪ @Pullback_catd_func $A $B $F;
+
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
@@ -1856,6 +1872,16 @@ assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢
 assert [K : Cat] ⊢
   @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K
     ≡ Catd_cat K;
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @fapp1_fapp0
+    (Op_cat Cat_cat)
+    Cat_cat
+    Catd_cat_func
+    B
+    A
+    F
+    ≡ @Pullback_catd_func A B F;
 
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
   @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func A B F) E

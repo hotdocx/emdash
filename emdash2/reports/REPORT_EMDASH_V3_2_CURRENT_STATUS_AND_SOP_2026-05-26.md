@@ -32,7 +32,8 @@ Retired historical references:
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - internalized `Catd_cat_func`, `Pullback_catd_func`, and `Pi_int_funcd`
-  infrastructure;
+  infrastructure, including the checked arrow-action fold
+  `Catd_cat_func[F] == Pullback_catd_func F`;
 - fixed-`Z,x` path induction packages:
   `PathInd_src_catd`, `PathInd_tgt_catd`, and `PathInd_func`;
 - outgoing-path family infrastructure:

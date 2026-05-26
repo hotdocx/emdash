@@ -30,6 +30,17 @@ Added a focused assertion:
 Catd_cat_func[K] == Catd_cat K
 ```
 
+Follow-up implementation added the narrow arrow-action fold:
+
+```text
+Catd_cat_func[F] == Pullback_catd_func F
+```
+
+for `F : A -> B`, read as an arrow `B -> A` in `Op_cat Cat_cat`.
+Because `Catd_cat_func` is a definition, the accepted rule matches the
+canonical unfolded composition head with middle category `Catd_cat Cat_cat`,
+not the readability form `Functor_cat Cat_cat Cat_cat`.
+
 ### Pullback Functor Package
 
 Added:
@@ -364,6 +375,9 @@ The full check covers:
 
 - `emdash2.lp`;
 - `emdash3_2.lp`.
+
+The same validation was rerun after adding the `Catd_cat_func` arrow-action
+fold, and both commands still succeeded.
 
 ## Remaining Work
 

@@ -281,8 +281,8 @@ Pi_func B(E) -> Pi_func A(F^*E)
 
 implemented by `section_pullback_func F E`.
 
-The current file has `Pi_func K` and `section_pullback_func F E`, but it does
-not yet have this global `Pi_int_funcd` package.
+The current file now has this global `Pi_int_funcd` package, plus the
+specialized `section_pullback_transf` recording its naturality component.
 
 ## Relationship To Existing Universe Hom Infrastructure
 
@@ -346,6 +346,11 @@ and, if arrow action can be made to compute cleanly:
 ```text
 fapp1_fapp0 Catd_cat_func F == Pullback_catd_func F
 ```
+
+Current status: this arrow action now computes by a narrow rule matching the
+canonical unfolded composition head of `Catd_cat_func`. The middle category in
+that head is `Catd_cat Cat_cat`, because `Functor_cat Cat_cat Cat_cat` reduces
+to the directed-family category.
 
 ### `Functord_cat`
 
@@ -1011,111 +1016,27 @@ is a later context-engineering benchmark.
 
 ## Recommended Implementation Order
 
-### Phase 1: Add `Catd_cat_func`
+### Completed Layers
 
-Probe the definition by composition from `Functor_cat_func`.
+The following phases are implemented and checked in `emdash3_2.lp`:
 
-Add only object-action assertions first. If those pass, add
-`Pullback_catd_func` and a narrow arrow-action fold.
-
-Validation:
-
-```bash
-timeout 60s lambdapi check -w emdash3_2.lp
-```
-
-### Phase 2: Add `Pullback_catd_func`
-
-Introduce the functorial package:
+1. `Catd_cat_func` and `Pullback_catd_func`, including object action and the
+   narrow arrow-action fold `Catd_cat_func[F] == Pullback_catd_func F`.
+2. `Pi_int_funcd`, with `section_pullback_transf` documenting the naturality
+   component `Pi_B(E) -> Pi_A(F^*E)`.
+3. `PathOut_cat_func` and `PathOutMotives_catd`.
+4. Fixed-`x` internal path induction via `PathInd_src_catd`,
+   `PathInd_tgt_catd`, and `PathInd_func`.
+5. Packaging of the provisional `pathout_refl_arrow` as
+   `pathout_refl_arrow_sec`.
+6. The fixed-`x` composition benchmark:
 
 ```text
-F |-> F^*
+path_comp_sec(x)[p]       == path_comp_func(p)
+path_comp_sec(x)[p][z](q) == q ∘ p
 ```
 
-but only for the action on families:
-
-```text
-Pullback_catd_func(F)[E] == Pullback_catd E F
-```
-
-Do not make `Pullback_catd` itself an injective general constructor.
-
-### Phase 3: Add `Pi_int_funcd`
-
-Implement the global Pi natural/displayed package over `Op_cat Cat_cat`.
-
-If generic displayed naturality projections for `Functord` are not available,
-add a specialized `section_pullback_transf` first and document that it is the
-naturality data of `Pi_int_funcd`.
-
-### Phase 4: Add `PathOut_cat_func` And `PathOutMotives_catd`
-
-Package:
-
-```text
-x |-> PathOut_Z(x)
-x |-> Catd_cat(PathOut_Z(x))
-```
-
-as actual functor/family terms.
-
-This phase should include assertions that the object fibres reduce to the
-existing fixed-`x` symbols.
-
-### Phase 5: Add Fixed-`x` Internal `PathInd_func`
-
-For fixed `Z,x`, define:
-
-```text
-PathInd_src_catd Z x
-PathInd_tgt_catd Z x
-PathInd_func Z x
-```
-
-with component:
-
-```text
-PathInd_func(Z,x)[E](u) == path_ind_sec Z x E u
-```
-
-This is the next conceptual milestone.
-
-### Phase 6: Package `pathout_refl_arrow`
-
-Add:
-
-```text
-pathout_refl_arrow_sec Z x
-```
-
-as a section over `PathOut_Z(x)` whose pointwise value is the current
-`pathout_refl_arrow`.
-
-Do not force its construction from Sigma homs in the same phase unless the
-necessary normal forms are already straightforward.
-
-### Phase 7: Implement The Fixed-`x` Composition Benchmark
-
-Build:
-
-```text
-CompTarget_catd Z x [y] = Functord_cat (Rep_Z(y)) (Rep_Z(x))
-CompMotive_catd Z x     = pullback along Sigma_proj1_func(Rep_Z(x))
-```
-
-Use `path_ind_sec` at the identity natural transformation.
-
-Add assertions for:
-
-```text
-compose_from_x(y,p) : Functord_cat (Rep_Z(y)) (Rep_Z(x))
-compose_from_x(y,p)[z](q) == q ∘ p
-```
-
-If the final assertion does not reduce, inspect the representable/hom action
-path before adding new heads.
-
-### Phase 8: Attempt Outer-`x` Internalization
+### Next Phase: Attempt Outer-`x` Internalization
 
 Only after the fixed-`x` benchmark passes, define the total base:
 
@@ -1133,6 +1054,24 @@ PathInd_funcd Z
 
 This phase is expected to reveal missing infrastructure around moving
 evaluation points and context projections.
+
+The immediate design target is still:
+
+```text
+PathIndSrc_catd Z
+PathIndTgt_catd Z
+PathInd_funcd Z
+```
+
+with fibre computation:
+
+```text
+PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
+```
+
+but this should be probed incrementally. The known hard part is the source
+family: evaluating a motive at the moving object `(x,id_x)` in the varying
+category `PathOut_Z(x)`.
 
 ## Validation Strategy
 
@@ -1152,6 +1091,7 @@ Recommended focused assertions:
 
 ```text
 Catd_cat_func[K] == Catd_cat K
+Catd_cat_func[F] == Pullback_catd_func F
 Pullback_catd_func(F)[E] == Pullback_catd E F
 Pi_int_funcd[K] == Pi_func K
 section_pullback_transf(F)[E] == section_pullback_func F E
@@ -1233,14 +1173,16 @@ Treat this as a real source-side problem, not as notation.
 1. What is the cleanest generic projection for base-arrow naturality of a
    `Functord` object?
 
-   The current file has strong component projections at objects, but the global
-   `Pi_int_funcd` naturality may require an explicit projection or a specialized
-   `section_pullback_transf`.
+   Current local answer: `Pi_int_funcd` uses the specialized
+   `section_pullback_transf`. A generic projection for arbitrary base-arrow
+   naturality remains a later API question.
 
 2. Should `Catd_cat_func` be a definition or an injective stable head?
 
-   First preference: define it from `Functor_cat_func` and evaluation at
-   `Cat_cat`. Add a stable head only if rules involving it become too brittle.
+   Current answer: keep it as a definition from `Functor_cat_func` and
+   evaluation at `Cat_cat`. Its arrow-action rule matches the canonical unfolded
+   composition head rather than making `Catd_cat_func` a new primitive stable
+   head.
 
 3. How much of `Sigma_func` should be internalized in the base category?
 
@@ -1271,15 +1213,11 @@ Treat this as a real source-side problem, not as notation.
 The next implementation should not try to replace `path_ind_sec` immediately
 with a single maximally internal symbol.
 
-The best next move is:
-
-1. add `Catd_cat_func` and `Pullback_catd_func`;
-2. add `Pi_int_funcd` with `section_pullback_func` as its naturality;
-3. package `PathOut_cat_func` and `PathOutMotives_catd`;
-4. internalize fixed-`x` path induction as a displayed functor over the motive
-   category;
-5. use fixed-`x` directed composition as the computation benchmark;
-6. only then internalize the outer `x`.
+The best next move is to attempt the outer-`x` internalization incrementally,
+starting with the target side because it can reuse `PathOutMotives_catd` and
+`Pi_int_funcd`. The source side should be treated as the main discovery problem:
+it needs a reliable representation of evaluation at the moving object
+`(x,id_x)` in the varying category `PathOut_Z(x)`.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer
