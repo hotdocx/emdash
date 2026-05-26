@@ -320,6 +320,15 @@ rule Op_cat (Path_cat $A) ↪ Path_cat $A;
 //   Core_cat(C) = Path_cat(Obj(C)).
 symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 
+/*
+  Path-category computation laws.
+
+  Surface/formula:
+    Obj(Path(A)) = A
+    Hom_Path(A)(x,y) = Path(x,y)
+    id_x = refl_x
+    q ∘ p = eq_trans(p,q)
+*/
 assert [A : Grpd] ⊢ Obj (Path_cat A) ≡ A;
 assert [A : Grpd] (x y : τ A) ⊢ Hom_cat (Path_cat A) x y ≡ Path_cat (x = y);
 assert [A : Grpd] (x : τ A) ⊢ @id (Path_cat A) x ≡ eq_refl x;
@@ -391,6 +400,14 @@ constant symbol Cat_cat : Cat;
 rule Obj Cat_cat ↪ Cat_grpd;
 rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
 
+/*
+  Universe-category object and hom computations.
+
+  Surface/formula:
+    Obj(Grpd_cat) = Grpd
+    Obj(Cat_cat)  = Cat
+    Hom_Cat(A,B)  = A -> B.
+*/
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
 assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 assert (A B : Cat) ⊢ Hom_cat Cat_cat A B ≡ Functor_cat A B;
@@ -476,6 +493,14 @@ constant symbol id_transfd [K : Cat] [E D : τ (Catd K)]
 rule @id (@Functord_cat $K $E $D) $FF
   ↪ @id_transfd $K $E $D $FF;
 
+/*
+  Directed-family category and displayed-arrow normal forms.
+
+  Surface/formula:
+    K -> Cat = Catd_cat(K)
+    Hom_Catd(E,D) = (k :^n K) -> E[k] -> D[k]
+    Hom_Functord(FF,GG) = (k :^n K) -> FF[k] => GG[k].
+*/
 assert [K : Cat] ⊢ Functor_cat K Cat_cat ≡ Catd_cat K;
 assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Catd_cat K) E D ≡ Functord_cat E D;
@@ -715,6 +740,15 @@ injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
 rule @fapp0 _ _ (@hom_int $A $B $F) $W
   ↪ @hom_ $A $B $F $W;
 
+/*
+  Ordinary internal-hom computations.
+
+  Surface/formula:
+    hom_(F,W)[y] = Hom_A(W,F[y])
+    hom_con(W,F)[y] = Hom_A(F[y],W)
+    hom_int(F)[W][y] = Hom_A(W,F[y])
+    hom_precomp_func(p)[q] = q o p.
+*/
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
   @fapp0 B Cat_cat (@hom_ A B F W) y ≡ Hom_cat A W (@fapp0 B A F y);
 
@@ -818,6 +852,12 @@ unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
 
+/*
+  Cat-valued transfors reduce to displayed functors.
+
+  Surface/formula:
+    Transf(K,Cat,E,D) = Functord(E,D).
+*/
 assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Catd_cat K) E D ≡ @Transf_cat K Cat_cat E D;
 assert [K : Cat] (E D : τ (Catd K)) ⊢
@@ -884,6 +924,7 @@ rule @tapp0_fapp0
         (@hom_int $A $B $F) $Y $X $f)
   ↪ @hom_precomp_func $A $X $Y (@fapp0 $B $A $F $b) $f;
 
+// Component of `hom_int` in the represented object is precomposition.
 assert [A B : Cat] (F : τ (Functor B A))
   (x y : τ (Obj A)) (p : τ (Hom A x y)) (b : τ (Obj B)) ⊢
   @tapp0_fapp0
@@ -977,6 +1018,14 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
 rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
+/*
+  Ordinary internal hom-action package.
+
+  Surface/formula:
+    tapp1_int_func_transf(F,G)[epsilon]
+      = internal action Hom_A(~,-) => Hom_B(F^op ~, G -)
+    fapp1_int_transf(F) is the identity-specialized action.
+*/
 assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) ⊢
   fapp0 (@tapp1_int_func_transf A B F G) ϵ
     ≡ @tapp1_int_fapp0_transf A B F G ϵ;
@@ -3277,6 +3326,16 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   documentation of canonical normal forms.
 */
 
+/*
+  Directed-family constructor normal forms.
+
+  Surface/formula:
+    E[k] = Fibre_cat(E,k)
+    const_K(A)[k] = A
+    1_K[k] = 1
+    E^op[k] = E[k]^op
+    (F^*E)[a] = E[F[a]].
+*/
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢
   Fibre_cat E k ≡ @fapp0 K Cat_cat E k;
 
@@ -3298,6 +3357,15 @@ assert [K : Cat] (A : Cat) ⊢
 assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢
   Fibre_cat (Pullback_catd E F) a ≡ Fibre_cat E (fapp0 F a);
 
+/*
+  Internalized Catd/Pi over varying bases.
+
+  Surface/formula:
+    Catd_cat_func[K] = Catd(K)
+    Catd_cat_func[F] = F^*
+    Pi_int_funcd[K] = Pi_func(K)
+    Pi_pullback_funcd(G)[x] = Pi_func(G[x]).
+*/
 assert [K : Cat] ⊢
   @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K
     ≡ Catd_cat K;
@@ -3337,6 +3405,15 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
     (@Pi_pullback_funcd K G)
     ≡ @Pi_func (@fapp0 K (Op_cat Cat_cat) G x);
 
+/*
+  Section-category and section-evaluation normal forms.
+
+  Surface/formula:
+    Pi(E) = Transf(1_K,E)
+    Pi(const_K(A)) = K -> A
+    Hom_Pi(s,t) = Transfd(s,t)
+    s[k] = piapp0(s,k).
+*/
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;
 
@@ -3374,6 +3451,7 @@ assert [K : Cat] (E : τ (Catd K))
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
 
+// Component of the global internal Pi package at a fixed base.
 assert [K : Cat] ⊢
   @tapp0_fapp0
     (Op_cat Cat_cat)
@@ -3384,6 +3462,15 @@ assert [K : Cat] ⊢
     Pi_int_funcd
     ≡ @Pi_func K;
 
+/*
+  Generic Sigma/Pi helper computations.
+
+  Surface/formula:
+    sigma_intro(E)[k](u) = (k,u)
+    pi_eval(E)[k](s) = s[k]
+    const_section_K,A(a)[k] = a
+    Obj_func_A(a) = const_section_1,A(a).
+*/
 assert [K : Cat] (E : τ (Catd K))
   (k : τ (Obj K))
   (u : τ (Obj (Fibre_cat E k))) ⊢
@@ -3452,6 +3539,13 @@ assert [K : Cat] (A : Cat)
     k
     ≡ a;
 
+/*
+  Pullback of sections.
+
+  Surface/formula:
+    section_pullback(F,E)(s)[a] = s[F[a]]
+    section_pullback_transf(F)[E] = section_pullback(F,E).
+*/
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
   (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E))) ⊢
   @fapp0
@@ -3490,6 +3584,16 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
     (@section_pullback_transf A B F)
     ≡ @section_pullback_func A B F E;
 
+/*
+  Sigma total category and projection-pullback normal forms.
+
+  Surface/formula:
+    Sigma_func(K)[E] = Sigma(E)
+    Sigma_map(eta)(k,u) = (k, eta[k](u))
+    Sigma_proj1(E)(k,u) = k
+    (Sigma_proj1(R))^*D[(k,r)] = D[k]
+    Pi_{(k,r):Sigma(R)} D[k] = Functord(R,D).
+*/
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Sigma_func K) E ≡ Sigma_cat E;
 
@@ -3519,6 +3623,15 @@ assert [K : Cat] (R D : τ (Catd K))
   Hom_cat (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)) s t
     ≡ @Transfd_cat K R D s t;
 
+/*
+  Mixed-variance family constructors.
+
+  Surface/formula:
+    Functor_catd(A,B)[k] = A[k^-] -> B[k]
+    Hom_catd(E,X,Y)[k] = Hom_{E[k]}(X[k^-],Y[k])
+    Transf_catd(A,B,FF,GG)[k] = FF[k^-] => GG[k]
+    Hom_catd(const Cat, X, Y) = Functor_catd(Op_func(X),Y).
+*/
 assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢
   Fibre_cat (Functor_catd A B) k
     ≡ Functor_cat (Fibre_cat A k) (Fibre_cat B k);
@@ -3564,6 +3677,16 @@ assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
   Hom_catd (Functor_catd A B) FF GG
     ≡ Transf_catd A B FF GG;
 
+/*
+  PathOut category and moving-motive transport.
+
+  Surface/formula:
+    Rep_Z(x)[y] = Hom_Z(x,y)
+    PathOut_Z(x) = Sigma y :^f Z, Hom_Z(x,y)
+    PathOutMotives_Z[x] = Catd(PathOut_Z(x))
+    PathOut_Z(p) = precomposition/pullback along p
+    pathout_motive_transport(p,E) = PathOut_Z(p)^*E.
+*/
 assert [Z : Cat] (x y : τ (Obj Z)) ⊢
   Fibre_cat (@Rep_catd Z x) y
     ≡ Hom_cat Z x y;
@@ -3704,6 +3827,15 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           u)
         (@pathout_refl_arrow Z x y p);
 
+/*
+  Internalized path-induction source/target fibres.
+
+  Surface/formula:
+    PathOutPi_Z[x][E] = Pi(PathOut_Z(x),E)
+    PathIndTgt_Z[(x,E)] = Pi(PathOut_Z(x),E)
+    PathIndSrc_Z[(x,E)] = E[(x,id_x)]
+    PathIndSrc_transport(p,E)(u) = E[rho_{x,y,p}](u).
+*/
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
   @tapp0_fapp0
     Z
@@ -3775,6 +3907,15 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           u)
         (@pathout_refl_arrow Z x y p);
 
+/*
+  Object-level PathOut notation.
+
+  Surface/formula:
+    pathout_obj(x;y,p) = (y,p)
+    pathout_refl_obj(x) = (x,id_x)
+    Sigma_proj1(pathout_obj(x;y,p)) = y
+    pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
+*/
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   @pathout_obj Z x y p
     ≡ @Struct_sigma
@@ -3807,6 +3948,13 @@ assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
     ≡ @Functord_cat Z (@Rep_catd Z x) D;
 
+/*
+  Evaluation functors act on transformations by component evaluation.
+
+  Surface/formula:
+    fapp0_func(x)[eta] = eta[x]
+    pathout_refl_eval_func(x)[eta] = eta[(x,id_x)].
+*/
 assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B))
   (η : τ (Transf F G)) ⊢
   @fapp1_fapp0
@@ -3836,6 +3984,14 @@ assert [Z : Cat] (x : τ (Obj Z))
         (@pathout_refl_obj Z x)
         η;
 
+/*
+  Covariant fibre transport package.
+
+  Surface/formula:
+    FibCov_target(D)[x] = Functord(Rep_Z(x),D)
+    fib_cov_int(D)[x](u)[y][f] = D[f](u)
+    path_ind_sec(E,u)[(y,p)] = E[rho_{x,y,p}](u).
+*/
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   Fibre_cat (@FibCov_target_catd Z D) x
     ≡ @Functord_cat Z (@Rep_catd Z x) D;
@@ -3861,6 +4017,15 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           u)
         (@pathout_refl_arrow Z x y p);
 
+/*
+  Edge, hom-presheaf, and dependent-hom target classifiers.
+
+  Surface/formula:
+    Edge_Z(x)[y] = Hom_Z(x,y)^op
+    HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op -> Cat
+    HomdTargetSection_E[x] = E[y^-] -> HomPresheaf_Z(x)[y]
+    HomdTarget_E[x] = Pi_y HomdTargetSection_E[x][y].
+*/
 assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
   @fapp0 Z Cat_cat
     (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z) x)
@@ -3885,6 +4050,14 @@ assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢
           E
           (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x));
 
+/*
+  Internal covariant transport components.
+
+  Surface/formula:
+    FibCov_target(E)[x] = Functord(hom_K(x,-),E)
+    fib_cov_src(x)(u) = fib_cov_transf(x,u)
+    fib_cov_transf(x,u)[y] = fib_cov_tapp0_func(x,y,u).
+*/
 assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
   Fibre_cat (@FibCov_target_catd K E) x
     ≡ @Functord_cat K (@hom_ K K (@id_func K) x) E;
@@ -3926,6 +4099,16 @@ assert [K : Cat] (E : τ (Catd K))
     (@fib_cov_transf K E x u)
     ≡ @fib_cov_tapp0_func K E x y u;
 
+/*
+  Displayed functor calculus.
+
+  Surface/formula:
+    Op_funcd(id_E) = id_{E^op}
+    Op_funcd(Op_funcd(FF)) = FF
+    (FF o id_E) = FF
+    (id_D o GG) = GG
+    Fibre_func(FF,z) = FF[z].
+*/
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Op_funcd K E E (@id_funcd K E)
     ≡ @id_funcd K (@Op_catd K E);
@@ -3968,6 +4151,15 @@ assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢
   @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E)
     ≡ @id_func (Fibre_cat E y);
 
+/*
+  Displayed transfor application packages.
+
+  Surface/formula:
+    tdapp1_int_func_transfd(FF,GG)[epsilon] = tdapp1_int_fapp0(epsilon)
+    tdapp1_int_fapp0(id_FF) = fdapp1_int_transfd(FF)
+    tdapp0_func(z)[epsilon] = epsilon[z]
+    Fibre_transf(epsilon,z) = epsilon[z].
+*/
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (ϵ : τ (@Transfd K E D FF GG)) ⊢
   fapp0 (@tdapp1_int_func_transfd K E D FF GG) ϵ
@@ -4052,6 +4244,16 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
         u
         (@Fibre_transf K E D FF GG ϵ z);
 
+/*
+  Generic displayed transport routes.
+
+  Surface/formula:
+    catd_transport(E,p) = E[p]
+    functord_transport(FF,p) = FF[p]
+    functord_transport_lhs(FF,p)(u) = D[p](FF[x](u))
+    functord_transport_rhs(FF,p)(u) = FF[y](E[p](u))
+    Sigma_catd_transport(FF,p,r) = Sigma(FF)[sigma_transport(p,r)].
+*/
 assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj K))
   (p : τ (Hom K x y)) ⊢
@@ -4121,6 +4323,14 @@ assert [K : Cat] (R : τ (Catd K))
     (@sigma_transport_arrow K R x y p r)
     ≡ @Sigma_catd_transport_func K R FF x y p r;
 
+/*
+  Internal dependent-hom constructor projections.
+
+  Surface/formula:
+    homd_int(FF)[x](u) = homd_src_sec(FF,x,u)
+    homd_src_sec(FF,x,u)[y] = homd_tgt_func(FF,x,u,y)
+    homd_tgt_func(FF,x,u,y)(v) = homd_(FF,x,u,y,v).
+*/
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x : τ (Obj Z)) ⊢
   @tapp0_fapp0
@@ -4183,6 +4393,13 @@ assert [Z : Cat] (E : τ (Catd Z))
   fapp0 (@homd_src_func Z E E (@id_funcd Z E) x) u
     ≡ @homd_src_sec Z E E (@id_funcd Z E) x u;
 
+/*
+  Terminal-source specializations of the dependent-hom source projection.
+
+  Surface/formula:
+    homd_src_func(1,1,id)[x] = constant terminal section
+    Fibre_func(homd_int(id_1),x) = that same terminal section.
+*/
 assert [K : Cat] (x : τ (Obj K)) ⊢
   @homd_src_func K
     (@Const_catd K Terminal_cat)
@@ -4218,6 +4435,14 @@ assert [K : Cat] (x : τ (Obj K)) ⊢
           x
           Terminal_obj);
 
+/*
+  Dependent-hom target projection and element computation.
+
+  Surface/formula:
+    homd_src_sec(FF,x,u)[y] = homd_tgt_func(FF,x,u,y)
+    homd_tgt_func(FF,x,u,y)(v) = homd_(FF,x,u,y,v)
+    with the terminal-source case reducing to the displayed Pi-app source.
+*/
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x))) ⊢
@@ -4411,6 +4636,14 @@ assert [K : Cat] (E : τ (Catd K))
         y
         (@piapp0 K E s y);
 
+/*
+  Constant and terminal dependent-hom specializations.
+
+  Surface/formula:
+    homd_(const A, const A, id; x,u,y,v) = const(Hom_A(u,v))
+    homd_(1,1,id; x,u,y,v) = terminal
+    and their functor/action projections reduce to the same constants.
+*/
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x)))
@@ -4527,6 +4760,14 @@ assert [K : Cat]
         g
         alpha;
 
+/*
+  Fibre transport and section application source formulas.
+
+  Surface/formula:
+    fib_cov_tapp0(const A,x,y,u) = const_{Hom_K(x,y)}(u)
+    piapp1_src_obj(s,x,y,f) = E[f](s[x])
+    piapp1_fapp0(s,f) = piapp1_func(s)(f).
+*/
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢
@@ -4660,6 +4901,14 @@ assert [K : Cat] (A : Cat)
   @piapp1_fapp0 K (@Const_catd K A) s x y f
     ≡ @fapp1_fapp0 K A s x y f;
 
+/*
+  Sigma homs and Sigma-map action.
+
+  Surface/formula:
+    Hom_Sigma(E)((x,u),(y,v)) = Sigma_{f : Hom_Z(x,y)^op} homd(id_E,x,u,y,v)
+    Sigma_map(eta)(k,u) = (k, eta[k](u))
+    Sigma_proj1 o Sigma_map(eta) = Sigma_proj1.
+*/
 assert [Z : Cat] (E : τ (Catd Z))
   (x y : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E x)))
@@ -4689,6 +4938,13 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
     (@sigma_map_func K E D η)
     ≡ @Sigma_proj1_func K E;
 
+/*
+  Section-dependent-hom composition normal forms.
+
+  Surface/formula:
+    (homd_int(s) o Op_funcd(s))[x](*) = homd_src_sec(s,x,s[x])
+    evaluating at y and * gives homd_(id_E,x,s[x],y,s[y]).
+*/
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K)) ⊢
