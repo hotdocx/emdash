@@ -1065,6 +1065,11 @@ PathOut_transport_func Z x y p [pathout_refl_obj Z y] == pathout_obj Z x y p
 PathIndSrc_transport_func Z x y p E == pathout_refl_eval_base_func Z x y p E
 PathIndTgt_transport_func Z x y p E == section_pullback_func(PathOut_transport_func Z x y p,E)
 PathIndTgt_transport_func Z x y p E(s)[pathout_refl_obj Z y] == s[pathout_obj Z x y p]
+PathInd_transport_lhs_func Z x y p E(u)
+  == PathIndTgt_transport_func Z x y p E(path_ind_sec Z x E u)
+PathInd_transport_rhs_func Z x y p E(u)
+  == path_ind_sec Z y (pathout_motive_transport_obj Z x y p E)
+       (PathIndSrc_transport_func Z x y p E(u))
 PathIndSrc_catd Z [(x,E)] == E[(x,id_x)]
 PathIndTgt_catd Z [(x,E)] == Pi_cat E
 PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
@@ -1101,9 +1106,12 @@ over arrows in `Sigma_cat Z (PathOutMotives_catd Z)`. The source-side object
 and component package is now explicit, and the base-arrow map exists as
 `PathIndSrc_transport_func` for canonical transported-motive arrows. The target
 side map exists as `PathIndTgt_transport_func`. The remaining problem is
-packaging these helpers as the coherent action needed by
-`PathOutReflEval_funcd`, `PathIndSrc_catd`, `PathIndTgt_catd`, and
-`PathInd_funcd`.
+partly packaged by `PathInd_transport_lhs_func`,
+`PathInd_transport_rhs_func`, and `PathInd_transport_transf`. The remaining
+problem is making the component-level projection of that transfor cheap enough
+to use as a rewrite/proof surface, and eventually connecting it to the generic
+base-arrow naturality story for `PathOutReflEval_funcd`, `PathIndSrc_catd`,
+`PathIndTgt_catd`, and `PathInd_funcd`.
 
 ## Validation Strategy
 
@@ -1141,6 +1149,11 @@ PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
 PathIndTgt_transport_func(Z,x,y,p,E) == pathout_pi_transport_func Z x y p E
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[q] == s[PathOut_transport_func(Z,x,y,p)(q)]
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[pathout_refl_obj Z y] == s[pathout_obj Z x y p]
+PathInd_transport_lhs_func(Z,x,y,p,E)(u)
+  == PathIndTgt_transport_func(Z,x,y,p,E)(path_ind_sec Z x E u)
+PathInd_transport_rhs_func(Z,x,y,p,E)(u)
+  == path_ind_sec Z y (pathout_motive_transport_obj Z x y p E)
+       (PathIndSrc_transport_func(Z,x,y,p,E)(u))
 PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
 PathIndSrc_catd(Z)[(x,E)] == Fibre_cat E (pathout_refl_obj Z x)
 PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
@@ -1264,10 +1277,11 @@ with a single maximally internal symbol.
 The first outer-`x` package now exists and computes at fibres/components, with
 the source side routed through `PathOutReflEval_funcd`. Checked source and
 target base-arrow maps now exist as `PathIndSrc_transport_func` and
-`PathIndTgt_transport_func` over canonical transported-motive arrows. The best
-next move is to keep that package as the interface and refine the coherence
-computation incrementally, without reintroducing broad or timeout-prone
-transfor rules.
+`PathIndTgt_transport_func` over canonical transported-motive arrows. The
+coherence square now has functor-level endpoints and a named transfor. The best
+next move is to keep that package as the interface and refine the component
+projection incrementally, without reintroducing broad or timeout-prone transfor
+rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer

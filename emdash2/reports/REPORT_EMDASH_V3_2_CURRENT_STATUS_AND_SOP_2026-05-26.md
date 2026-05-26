@@ -41,12 +41,15 @@ Retired historical references:
   `pathout_refl_obj`, `pathout_refl_eval_func`,
   `pathout_refl_eval_base_func`, `pathout_motive_transport_obj`,
   `PathOut_transport_func`, `PathIndSrc_transport_func`,
-  `PathIndTgt_transport_func`, and the provisional `pathout_refl_arrow_sec`;
+  `PathIndTgt_transport_func`, `PathInd_transport_lhs_func`,
+  `PathInd_transport_rhs_func`, `PathInd_transport_transf`, and the provisional
+  `pathout_refl_arrow_sec`;
 - first outer-`x` path-induction packaging:
   `PathOutPi_funcd`, `PathOutReflEval_funcd`, `PathIndSrc_catd`,
   `PathIndTgt_catd`, and `PathInd_funcd`, with checked fibre/component rules over
-  `Sigma_cat Z (PathOutMotives_catd Z)` and checked source/target transport
-  helpers over canonical transported motives;
+  `Sigma_cat Z (PathOutMotives_catd Z)`, checked source/target transport
+  helpers over canonical transported motives, and a named path-induction
+  transport square;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a

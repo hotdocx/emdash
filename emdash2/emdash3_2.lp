@@ -2059,6 +2059,66 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
 ≔ @pathout_pi_transport_func Z x y p E;
 
+// Canonical path-induction transport square over `(x,E) -> (y,p_*E)`.
+// The two functors below are the induction-then-target-transport and
+// source-transport-then-induction routes. The transfor is kept abstract for now;
+// probing showed that exposing a fully expanded component/app helper is
+// conversion-heavy.
+symbol PathInd_transport_lhs_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
+≔ @comp_cat_fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathIndTgt_transport_func Z x y p E)
+    (@tapp0_fapp0
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      Cat_cat
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z)
+      (Struct_sigma x E)
+      (@PathInd_funcd Z));
+
+symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
+≔ @comp_cat_fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndSrc_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@tapp0_fapp0
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      Cat_cat
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+      (@PathInd_funcd Z))
+    (@PathIndSrc_transport_func Z x y p E);
+
+constant symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Transf
+      (@PathInd_transport_lhs_func Z x y p E)
+      (@PathInd_transport_rhs_func Z x y p E));
+
 // -------------------------------------------------------------------------------------------------
 // 16. Regression assertions for the mixed-variance skeleton
 // -------------------------------------------------------------------------------------------------
@@ -2587,6 +2647,46 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
         E
         s
         (@pathout_obj Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathInd_transport_lhs_func Z x y p E)
+    u
+    ≡ @fapp0
+        (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+        (Fibre_cat
+          (@PathIndTgt_catd Z)
+          (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+        (@PathIndTgt_transport_func Z x y p E)
+        (@path_ind_sec Z x E u);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathInd_transport_rhs_func Z x y p E)
+    u
+    ≡ @path_ind_sec
+        Z
+        y
+        (@pathout_motive_transport_obj Z x y p E)
+        (@fapp0
+          (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+          (Fibre_cat
+            (@PathIndSrc_catd Z)
+            (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+          (@PathIndSrc_transport_func Z x y p E)
+          u);
 
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @tapp0_fapp0

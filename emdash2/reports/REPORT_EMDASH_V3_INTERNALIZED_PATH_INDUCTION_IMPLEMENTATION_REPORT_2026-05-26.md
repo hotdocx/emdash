@@ -553,6 +553,47 @@ transported-motive arrows. It is still not the full naturality proof for
 `PathInd_funcd`; it supplies the two sides that such a coherence statement must
 relate.
 
+The path-induction coherence square has now been named at functor level:
+
+```text
+symbol PathInd_transport_lhs_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (PathIndSrc_catd Z [(x,E)])
+      (PathIndTgt_catd Z [(y,pathout_motive_transport_obj Z x y p E)]));
+
+symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (PathIndSrc_catd Z [(x,E)])
+      (PathIndTgt_catd Z [(y,pathout_motive_transport_obj Z x y p E)]));
+
+constant symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Transf
+      (PathInd_transport_lhs_func Z x y p E)
+      (PathInd_transport_rhs_func Z x y p E));
+```
+
+The checked object actions are:
+
+```text
+PathInd_transport_lhs_func(Z,x,y,p,E)(u)
+  == PathIndTgt_transport_func(Z,x,y,p,E)(path_ind_sec Z x E u)
+
+PathInd_transport_rhs_func(Z,x,y,p,E)(u)
+  == path_ind_sec Z y (pathout_motive_transport_obj Z x y p E)
+       (PathIndSrc_transport_func(Z,x,y,p,E)(u))
+```
+
+This is the current precise coherence boundary. A fully expanded
+`PathInd_transport_app` component was probed, but it made conversion search hit
+the bounded-check timeout, so it was not added. Future work should introduce a
+smaller stable projection head before exposing component-level coherence.
+
 Added the matching source family and outer path-induction displayed functor:
 
 ```lambdapi
@@ -575,7 +616,8 @@ PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 `Sigma_catd_functord_catd` total-family helper as `PathIndTgt_catd`, using
 `PathOutReflEval_funcd`. This gives the source side a displayed-functor
 interface. The concrete map along a base arrow is now represented by
-`PathIndSrc_transport_func`, while the full coherence package remains open.
+`PathIndSrc_transport_func`; the functor-level coherence square is named by
+`PathInd_transport_transf`, while the component-level projection remains open.
 
 The rule LHSs deliberately keep the total-base source category implicit. A probe
 with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
@@ -606,8 +648,9 @@ Near-term:
   path-induction internalization and outer-`x` refinements;
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
   `PathIndSrc_catd`, `PathIndTgt_catd`, and `PathInd_funcd`; the current package
-  has checked fibres/components plus canonical source and target transport
-  helpers, but not the full moving-refl/path-induction coherence transfor;
+  has checked fibres/components, canonical source and target transport helpers,
+  and the functor-level coherence square `PathInd_transport_transf`, but not a
+  cheap component-level coherence projection;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.
