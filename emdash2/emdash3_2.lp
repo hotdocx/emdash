@@ -1931,6 +1931,71 @@ rule @tapp0_fapp0
       (@PathInd_funcd $Z)
   ↪ @path_ind_func_fapp0 $Z $x $E;
 
+/*
+  Mathematical computation statements for fixed-x and outer-x path induction.
+
+  These describe the source/target fibres and the component of the packaged
+  eliminator. They are local theorem statements for the path-induction
+  interface, not generic rewrite-debug checks.
+*/
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  Fibre_cat (@PathInd_src_catd Z x) E
+    ≡ Fibre_cat E (@pathout_refl_obj Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @PathInd_src_catd Z x
+    ≡ @pathout_refl_eval_func Z x;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  Fibre_cat (@PathInd_tgt_catd Z x) E
+    ≡ Pi_cat E;
+
+assert [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat E (@pathout_refl_obj Z x))
+    (Pi_cat E)
+    (@path_ind_func_fapp0 Z x E)
+    u
+    ≡ @path_ind_sec Z x E u;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    Cat_cat
+    (@PathInd_src_catd Z x)
+    (@PathInd_tgt_catd Z x)
+    E
+    (@PathInd_func Z x)
+    ≡ @path_ind_func_fapp0 Z x E;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (Struct_sigma x E)
+    (@PathInd_funcd Z)
+    ≡ @path_ind_func_fapp0 Z x E;
+
+assert [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat E (@pathout_refl_obj Z x))
+    (Pi_cat E)
+    (@tapp0_fapp0
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      Cat_cat
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z)
+      (Struct_sigma x E)
+      (@PathInd_funcd Z))
+    u
+    ≡ @path_ind_sec Z x E u;
+
 // Transitivity benchmark layer: target family for composition out of a fixed
 // source x.
 //
@@ -2191,6 +2256,17 @@ rule @path_ind_sec $Z $x
       $u
   ↪ @fib_cov_transf $Z $D $x $u;
 
+// Mathematical computation statement: fixed-x path induction on a
+// Sigma-projection pullback motive reduces to covariant fibre transport.
+assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat D x))) ⊢
+  @path_ind_sec
+    Z
+    x
+    (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
+    u
+    ≡ @fib_cov_transf Z D x u;
+
 // Final desired transitivity benchmark theorem/object.
 //
 // Surface/formula:
@@ -2224,6 +2300,143 @@ symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
     y
     x
     p;
+
+/*
+  Mathematical computation statements for the fixed-x transitivity benchmark.
+
+  These are not merely regression probes: they state that fixed-x path
+  induction on the composition motive computes to representable
+  precomposition, and then to ordinary categorical composition.
+*/
+assert [Z : Cat] (x y : τ (Obj Z)) ⊢
+  Fibre_cat (@CompTarget_catd Z x) y
+    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  Fibre_cat (@CompMotive_catd Z x) (@pathout_obj Z x y p)
+    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x)
+    ≡ @Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @path_ind_sec
+    Z
+    x
+    (@CompMotive_catd Z x)
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_sec Z x;
+
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  @fapp1_fapp0
+    Z
+    Cat_cat
+    (@CompTarget_catd Z x)
+    x
+    y
+    p
+    ≡ @CompTarget_fapp1_func Z x x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (@Functord_cat Z (@Rep_catd Z x) (@Rep_catd Z x))
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+    (@CompTarget_fapp1_func Z x x y p)
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_func Z x y p;
+
+// The semantic `hom_con` presentation of `CompTarget_catd` computes without a
+// CompTarget-specific identity shortcut.
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  fapp0
+    (@fapp1_fapp0
+      Z
+      Cat_cat
+      (@hom_con
+        (@Catd_cat Z)
+        (@Rep_catd Z x)
+        (Op_cat Z)
+        (@Rep_catd_func Z))
+      x
+      y
+      p)
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_func Z x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (Hom_cat Z x y)
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+    (@fib_cov_tapp0_func
+      Z
+      (@CompTarget_catd Z x)
+      x
+      y
+      (@id_funcd Z (@Rep_catd Z x)))
+    p
+    ≡ @path_comp_func Z x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (Hom_cat Z x y)
+    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z x)
+      (@CompTarget_catd Z x)
+      y
+      (@path_comp_sec Z x))
+    p
+    ≡ @path_comp_func Z x y p;
+
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z y)
+      (@Rep_catd Z x)
+      z
+      (@path_comp_func Z x y p))
+    q
+    ≡ @comp_fapp0 Z x y z q p;
+
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z y)
+      (@Rep_catd Z x)
+      z
+      (@fapp0
+        (Hom_cat Z x y)
+        (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+        (@tapp0_fapp0
+          Z
+          Cat_cat
+          (@Rep_catd Z x)
+          (@CompTarget_catd Z x)
+          y
+          (@path_comp_sec Z x))
+        p))
+    q
+    ≡ @comp_fapp0 Z x y z q p;
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
@@ -2899,9 +3112,170 @@ symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
     (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
     (@pathout_motive_transport_arrow Z x y p E);
 
+/*
+  Mathematical computation statements for target transport and the
+  path-induction coherence square over the canonical transported-motive arrow.
+
+  These document the two functor-level routes that the still-missing
+  component-level coherence projection must relate.
+*/
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @pathout_pi_transport_func Z x y p E
+    ≡ @section_pullback_func
+        (@PathOut_cat Z y)
+        (@PathOut_cat Z x)
+        (@PathOut_transport_func Z x y p)
+        E;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
+  @Sigma_catd_transport_func
+    K
+    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+    (@Pi_pullback_funcd K G)
+    x
+    y
+    p
+    E
+    ≡ @section_pullback_func
+        (@fapp0 K (Op_cat Cat_cat) G y)
+        (@fapp0 K (Op_cat Cat_cat) G x)
+        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
+        E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @PathIndTgt_transport_func Z x y p E
+    ≡ @pathout_pi_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndTgt_catd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E)
+    ≡ @PathIndTgt_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathIndTgt_transport_func Z x y p E)
+    s
+    ≡ @section_pullback_sec
+        (@PathOut_cat Z y)
+        (@PathOut_cat Z x)
+        (@PathOut_transport_func Z x y p)
+        E
+        s;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E)))
+  (q : τ (Obj (@PathOut_cat Z y))) ⊢
+  @piapp0
+    (@PathOut_cat Z y)
+    (@pathout_motive_transport_obj Z x y p E)
+    (@fapp0
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+      (@PathIndTgt_transport_func Z x y p E)
+      s)
+    q
+    ≡ @piapp0
+        (@PathOut_cat Z x)
+        E
+        s
+        (@fapp0
+          (@PathOut_cat Z y)
+          (@PathOut_cat Z x)
+          (@PathOut_transport_func Z x y p)
+          q);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
+  @piapp0
+    (@PathOut_cat Z y)
+    (@pathout_motive_transport_obj Z x y p E)
+    (@fapp0
+      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndTgt_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+      (@PathIndTgt_transport_func Z x y p E)
+      s)
+    (@pathout_refl_obj Z y)
+    ≡ @piapp0
+        (@PathOut_cat Z x)
+        E
+        s
+        (@pathout_obj Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathInd_transport_lhs_func Z x y p E)
+    u
+    ≡ @fapp0
+        (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
+        (Fibre_cat
+          (@PathIndTgt_catd Z)
+          (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+        (@PathIndTgt_transport_func Z x y p E)
+        (@path_ind_sec Z x E u);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndTgt_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathInd_transport_rhs_func Z x y p E)
+    u
+    ≡ @path_ind_sec
+        Z
+        y
+        (@pathout_motive_transport_obj Z x y p E)
+        (@fapp0
+          (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+          (Fibre_cat
+            (@PathIndSrc_catd Z)
+            (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+          (@PathIndSrc_transport_func Z x y p E)
+          u);
+
 // -------------------------------------------------------------------------------------------------
-// 16. Regression assertions for the mixed-variance skeleton
+// 16. Remaining constructor/projection assertions
 // -------------------------------------------------------------------------------------------------
+
+/*
+  The main theorem-like computation statements for path induction,
+  target/source transport, and the fixed-x transitivity benchmark live next to
+  their motivating declarations above.
+
+  This section keeps lower-level constructor/projection checks and
+  dependency-delayed sanity assertions that are still useful as executable
+  documentation of canonical normal forms.
+*/
 
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢
   Fibre_cat E k ≡ @fapp0 K Cat_cat E k;
@@ -3401,176 +3775,6 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
           u)
         (@pathout_refl_arrow Z x y p);
 
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @pathout_pi_transport_func Z x y p E
-    ≡ @section_pullback_func
-        (@PathOut_cat Z y)
-        (@PathOut_cat Z x)
-        (@PathOut_transport_func Z x y p)
-        E;
-
-assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
-  (x y : τ (Obj K)) (p : τ (Hom K x y))
-  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
-  @Sigma_catd_transport_func
-    K
-    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
-    (@Pi_pullback_funcd K G)
-    x
-    y
-    p
-    E
-    ≡ @section_pullback_func
-        (@fapp0 K (Op_cat Cat_cat) G y)
-        (@fapp0 K (Op_cat Cat_cat) G x)
-        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
-        E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @PathIndTgt_transport_func Z x y p E
-    ≡ @pathout_pi_transport_func Z x y p E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @fapp1_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndTgt_catd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E)
-    ≡ @PathIndTgt_transport_func Z x y p E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
-  @fapp0
-    (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathIndTgt_transport_func Z x y p E)
-    s
-    ≡ @section_pullback_sec
-        (@PathOut_cat Z y)
-        (@PathOut_cat Z x)
-        (@PathOut_transport_func Z x y p)
-        E
-        s;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E)))
-  (q : τ (Obj (@PathOut_cat Z y))) ⊢
-  @piapp0
-    (@PathOut_cat Z y)
-    (@pathout_motive_transport_obj Z x y p E)
-    (@fapp0
-      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-      (Fibre_cat
-        (@PathIndTgt_catd Z)
-        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-      (@PathIndTgt_transport_func Z x y p E)
-      s)
-    q
-    ≡ @piapp0
-        (@PathOut_cat Z x)
-        E
-        s
-        (@fapp0
-          (@PathOut_cat Z y)
-          (@PathOut_cat Z x)
-          (@PathOut_transport_func Z x y p)
-          q);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (s : τ (Obj (@Pi_cat (@PathOut_cat Z x) E))) ⊢
-  @piapp0
-    (@PathOut_cat Z y)
-    (@pathout_motive_transport_obj Z x y p E)
-    (@fapp0
-      (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-      (Fibre_cat
-        (@PathIndTgt_catd Z)
-        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-      (@PathIndTgt_transport_func Z x y p E)
-      s)
-    (@pathout_refl_obj Z y)
-    ≡ @piapp0
-        (@PathOut_cat Z x)
-        E
-        s
-        (@pathout_obj Z x y p);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathInd_transport_lhs_func Z x y p E)
-    u
-    ≡ @fapp0
-        (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-        (Fibre_cat
-          (@PathIndTgt_catd Z)
-          (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-        (@PathIndTgt_transport_func Z x y p E)
-        (@path_ind_sec Z x E u);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathInd_transport_rhs_func Z x y p E)
-    u
-    ≡ @path_ind_sec
-        Z
-        y
-        (@pathout_motive_transport_obj Z x y p E)
-        (@fapp0
-          (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-          (Fibre_cat
-            (@PathIndSrc_catd Z)
-            (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-          (@PathIndSrc_transport_func Z x y p E)
-          u);
-
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @tapp0_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (Struct_sigma x E)
-    (@PathInd_funcd Z)
-    ≡ @path_ind_func_fapp0 Z x E;
-
-assert [Z : Cat] (x : τ (Obj Z))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat E (@pathout_refl_obj Z x))
-    (Pi_cat E)
-    (@tapp0_fapp0
-      (@Sigma_cat Z (@PathOutMotives_catd Z))
-      Cat_cat
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z)
-      (Struct_sigma x E)
-      (@PathInd_funcd Z))
-    u
-    ≡ @path_ind_sec Z x E u;
-
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   @pathout_obj Z x y p
     ≡ @Struct_sigma
@@ -3603,23 +3807,6 @@ assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
     ≡ @Functord_cat Z (@Rep_catd Z x) D;
 
-assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
-  (u : τ (Obj (Fibre_cat D x))) ⊢
-  @path_ind_sec
-    Z
-    x
-    (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
-    u
-    ≡ @fib_cov_transf Z D x u;
-
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  Fibre_cat (@PathInd_src_catd Z x) E
-    ≡ Fibre_cat E (@pathout_refl_obj Z x);
-
-assert [Z : Cat] (x : τ (Obj Z)) ⊢
-  @PathInd_src_catd Z x
-    ≡ @pathout_refl_eval_func Z x;
-
 assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B))
   (η : τ (Transf F G)) ⊢
   @fapp1_fapp0
@@ -3648,160 +3835,6 @@ assert [Z : Cat] (x : τ (Obj Z))
         D
         (@pathout_refl_obj Z x)
         η;
-
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  Fibre_cat (@PathInd_tgt_catd Z x) E
-    ≡ Pi_cat E;
-
-assert [Z : Cat] (x : τ (Obj Z))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat E (@pathout_refl_obj Z x))
-    (Pi_cat E)
-    (@path_ind_func_fapp0 Z x E)
-    u
-    ≡ @path_ind_sec Z x E u;
-
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @tapp0_fapp0
-    (@Catd_cat (@PathOut_cat Z x))
-    Cat_cat
-    (@PathInd_src_catd Z x)
-    (@PathInd_tgt_catd Z x)
-    E
-    (@PathInd_func Z x)
-    ≡ @path_ind_func_fapp0 Z x E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) ⊢
-  Fibre_cat (@CompTarget_catd Z x) y
-    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
-  Fibre_cat (@CompMotive_catd Z x) (@pathout_obj Z x y p)
-    ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
-
-assert [Z : Cat] (x : τ (Obj Z)) ⊢
-  @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x)
-    ≡ @Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x);
-
-assert [Z : Cat] (x : τ (Obj Z)) ⊢
-  @path_ind_sec
-    Z
-    x
-    (@CompMotive_catd Z x)
-    (@id_funcd Z (@Rep_catd Z x))
-    ≡ @path_comp_sec Z x;
-
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  @fapp1_fapp0
-    Z
-    Cat_cat
-    (@CompTarget_catd Z x)
-    x
-    y
-    p
-    ≡ @CompTarget_fapp1_func Z x x y p;
-
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  @fapp0
-    (@Functord_cat Z (@Rep_catd Z x) (@Rep_catd Z x))
-    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-    (@CompTarget_fapp1_func Z x x y p)
-    (@id_funcd Z (@Rep_catd Z x))
-    ≡ @path_comp_func Z x y p;
-
-// The semantic `hom_con` presentation of `CompTarget_catd` computes without a
-// CompTarget-specific identity shortcut.
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  fapp0
-    (@fapp1_fapp0
-      Z
-      Cat_cat
-      (@hom_con
-        (@Catd_cat Z)
-        (@Rep_catd Z x)
-        (Op_cat Z)
-        (@Rep_catd_func Z))
-      x
-      y
-      p)
-    (@id_funcd Z (@Rep_catd Z x))
-    ≡ @path_comp_func Z x y p;
-
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  @fapp0
-    (Hom_cat Z x y)
-    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-    (@fib_cov_tapp0_func
-      Z
-      (@CompTarget_catd Z x)
-      x
-      y
-      (@id_funcd Z (@Rep_catd Z x)))
-    p
-    ≡ @path_comp_func Z x y p;
-
-assert [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y)) ⊢
-  @fapp0
-    (Hom_cat Z x y)
-    (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-    (@tapp0_fapp0
-      Z
-      Cat_cat
-      (@Rep_catd Z x)
-      (@CompTarget_catd Z x)
-      y
-      (@path_comp_sec Z x))
-    p
-    ≡ @path_comp_func Z x y p;
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  @fapp0
-    (Hom_cat Z y z)
-    (Hom_cat Z x z)
-    (@tapp0_fapp0
-      Z
-      Cat_cat
-      (@Rep_catd Z y)
-      (@Rep_catd Z x)
-      z
-      (@path_comp_func Z x y p))
-    q
-    ≡ @comp_fapp0 Z x y z q p;
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  @fapp0
-    (Hom_cat Z y z)
-    (Hom_cat Z x z)
-    (@tapp0_fapp0
-      Z
-      Cat_cat
-      (@Rep_catd Z y)
-      (@Rep_catd Z x)
-      z
-      (@fapp0
-        (Hom_cat Z x y)
-        (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-        (@tapp0_fapp0
-          Z
-          Cat_cat
-          (@Rep_catd Z x)
-          (@CompTarget_catd Z x)
-          y
-          (@path_comp_sec Z x))
-        p))
-    q
-    ≡ @comp_fapp0 Z x y z q p;
 
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
   Fibre_cat (@FibCov_target_catd Z D) x
