@@ -1060,6 +1060,8 @@ PathOutReflEval_funcd Z [x] == pathout_refl_eval_func Z x
 pathout_refl_eval_func Z x [E] == E[(x,id_x)]
 PathOutMotives_catd Z [p](E)[(y,id_y)] == E[(y,p)]
 pathout_refl_eval_base_func Z x y p E == E[pathout_refl_arrow Z x y p]
+pathout_motive_transport_obj Z x y p E == PathOutMotives_catd Z [p](E)
+PathIndSrc_transport_func Z x y p E == pathout_refl_eval_base_func Z x y p E
 PathIndSrc_catd Z [(x,E)] == E[(x,id_x)]
 PathIndTgt_catd Z [(x,E)] == Pi_cat E
 PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
@@ -1076,8 +1078,9 @@ motive at the moving object `(x,id_x)` in the varying category `PathOut_Z(x)`.
 The current package records this through `PathOutReflEval_funcd` and the total
 source family `PathIndSrc_catd`. The checked map
 `pathout_refl_eval_base_func` now sends `E[(x,id_x)]` to `E[(y,p)]` by applying
-`E` to `pathout_refl_arrow Z x y p`, but the full moving-refl/coherence story
-is not yet packaged.
+`E` to `pathout_refl_arrow Z x y p`. This map is now exposed through the stable
+helper `PathIndSrc_transport_func` for the canonical transported-motive total
+arrow, but the full moving-refl/coherence story is not yet packaged.
 
 ### Next Phase: Refine Moving-Source Functoriality
 
@@ -1091,9 +1094,9 @@ the base-arrow action of:
 
 over arrows in `Sigma_cat Z (PathOutMotives_catd Z)`. The source-side object
 and component package is now explicit, and the base-arrow map exists as
-`pathout_refl_eval_base_func`; the remaining problem is packaging this map as
-the coherent action needed by `PathOutReflEval_funcd`, `PathIndSrc_catd`, and
-`PathInd_funcd`.
+`PathIndSrc_transport_func` for canonical transported-motive arrows; the
+remaining problem is packaging this helper as the coherent action needed by
+`PathOutReflEval_funcd`, `PathIndSrc_catd`, and `PathInd_funcd`.
 
 ## Validation Strategy
 
@@ -1124,6 +1127,8 @@ PathOutReflEval_funcd(Z)[x] == pathout_refl_eval_func Z x
 pathout_refl_eval_func(Z,x)[E] == Fibre_cat E (pathout_refl_obj Z x)
 PathOutMotives_catd(Z)[p](E)[pathout_refl_obj Z y] == Fibre_cat E (pathout_obj Z x y p)
 pathout_refl_eval_base_func(Z,x,y,p,E) == E[pathout_refl_arrow Z x y p]
+pathout_motive_transport_obj(Z,x,y,p,E) == PathOutMotives_catd(Z)[p](E)
+PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
 PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
 PathIndSrc_catd(Z)[(x,E)] == Fibre_cat E (pathout_refl_obj Z x)
 PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
@@ -1246,9 +1251,9 @@ with a single maximally internal symbol.
 
 The first outer-`x` package now exists and computes at fibres/components, with
 the source side routed through `PathOutReflEval_funcd`. A checked source-side
-base-arrow map now exists as `pathout_refl_eval_base_func`. The best next move
-is to keep that package as the interface and refine the source-side
-arrow/coherence computation incrementally, packaging the checked base-arrow map
+base-arrow map now exists as `PathIndSrc_transport_func` over canonical
+transported-motive arrows. The best next move is to keep that package as the
+interface and refine the source-side arrow/coherence computation incrementally,
 without reintroducing broad or timeout-prone transfor rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and

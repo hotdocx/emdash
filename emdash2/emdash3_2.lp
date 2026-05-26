@@ -1274,6 +1274,31 @@ symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
     (@pathout_obj Z x y p)
     (@pathout_refl_arrow Z x y p);
 
+symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Catd (@PathOut_cat Z y))
+≔ @fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    (@Catd_cat (@PathOut_cat Z y))
+    (@fapp1_fapp0
+      Z
+      Cat_cat
+      (@PathOutMotives_catd Z)
+      x
+      y
+      p)
+    E;
+
+constant symbol pathout_motive_transport_arrow [Z : Cat]
+  [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Hom
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      (Struct_sigma x E)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)));
+
 constant symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
   : τ (Obj (Pi_cat
       (@Rep_catd
@@ -1336,6 +1361,16 @@ symbol PathIndSrc_catd [Z : Cat]
     Z
     (@PathOutMotives_catd Z)
     (@PathOutReflEval_funcd Z);
+
+symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndSrc_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
+≔ @pathout_refl_eval_base_func Z x y p E;
 
 constant symbol PathInd_funcd [Z : Cat]
   : τ (Functord
@@ -2314,6 +2349,21 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @pathout_motive_transport_obj Z x y p E
+    ≡ @fapp0
+        (@Catd_cat (@PathOut_cat Z x))
+        (@Catd_cat (@PathOut_cat Z y))
+        (@fapp1_fapp0
+          Z
+          Cat_cat
+          (@PathOutMotives_catd Z)
+          x
+          y
+          p)
+        E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @pathout_refl_eval_base_func Z x y p E
     ≡ @fapp1_fapp0
         (@PathOut_cat Z x)
@@ -2362,6 +2412,42 @@ assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E)
     ≡ Fibre_cat E (@pathout_refl_obj Z x);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  Fibre_cat
+    (@PathIndSrc_catd Z)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    ≡ Fibre_cat E (@pathout_obj Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @PathIndSrc_transport_func Z x y p E
+    ≡ @pathout_refl_eval_base_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+    (Fibre_cat
+      (@PathIndSrc_catd Z)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+    (@PathIndSrc_transport_func Z x y p E)
+    u
+    ≡ @fapp0
+        (Hom_cat
+          (@PathOut_cat Z x)
+          (@pathout_refl_obj Z x)
+          (@pathout_obj Z x y p))
+        (Fibre_cat E (@pathout_obj Z x y p))
+        (@fib_cov_tapp0_func
+          (@PathOut_cat Z x)
+          E
+          (@pathout_refl_obj Z x)
+          (@pathout_obj Z x y p)
+          u)
+        (@pathout_refl_arrow Z x y p);
 
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @tapp0_fapp0

@@ -466,6 +466,49 @@ This is the checked source-side map required by moving reflexive evaluation.
 It is not yet packaged as the full naturality/coherence transfor for
 `PathOutReflEval_funcd`.
 
+Follow-up implementation added a canonical transported-motive helper and source
+transport package:
+
+```lambdapi
+symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Catd (@PathOut_cat Z y));
+
+constant symbol pathout_motive_transport_arrow [Z : Cat]
+  [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Hom
+      (Sigma_cat Z (PathOutMotives_catd Z))
+      (Struct_sigma x E)
+      (Struct_sigma y (pathout_motive_transport_obj Z x y p E)));
+
+symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndSrc_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))));
+```
+
+with checked computation:
+
+```text
+pathout_motive_transport_obj(Z,x,y,p,E) == PathOutMotives_catd(Z)[p](E)
+PathIndSrc_catd(Z)[(y,pathout_motive_transport_obj Z x y p E)] == E[(y,p)]
+PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
+PathIndSrc_transport_func(Z,x,y,p,E)(u)
+  == fib_cov_tapp0_func(E,(x,id_x),(y,p),u)(pathout_refl_arrow Z x y p)
+```
+
+This gives the source side a stable action helper for the canonical
+transported-motive total arrow. A direct `fapp1_fapp0 PathIndSrc_catd` rewrite
+for this arrow was intentionally not added; the helper avoids depending on a
+fragile rewrite match against the currently-defined total-family head.
+
 Added the matching source family and outer path-induction displayed functor:
 
 ```lambdapi
@@ -488,7 +531,7 @@ PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 `Sigma_catd_functord_catd` total-family helper as `PathIndTgt_catd`, using
 `PathOutReflEval_funcd`. This gives the source side a displayed-functor
 interface. The concrete map along a base arrow is now represented by
-`pathout_refl_eval_base_func`, while the full coherence package remains open.
+`PathIndSrc_transport_func`, while the full coherence package remains open.
 
 The rule LHSs deliberately keep the total-base source category implicit. A probe
 with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
@@ -520,8 +563,8 @@ Near-term:
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
   `PathIndSrc_catd`, and `PathInd_funcd`; the current package has checked
   fibres/components, a source-side displayed-functor interface, and a checked
-  base-arrow map `pathout_refl_eval_base_func`, but not the full
-  moving-refl coherence transfor;
+  canonical source transport helper `PathIndSrc_transport_func`, but not the
+  full moving-refl coherence transfor;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.
