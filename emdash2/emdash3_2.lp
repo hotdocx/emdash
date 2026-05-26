@@ -201,21 +201,40 @@ flag "print_meta_args" on;
 // 0. Groupoid universe and equality
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Core object/type universe.
+
+  Surface/formula:
+    a : Grpd       is a small groupoidal/type-like object classifier.
+    τ a            is the ambient Lambdapi type of elements of a.
+    Prop/P         are mapped to Grpd/τ for Lambdapi's inductive interface.
+*/
 constant symbol Grpd : TYPE;
 injective symbol τ : Grpd → TYPE;
 builtin "T" ≔ τ;
 builtin "Prop" ≔ Grpd;
 builtin "P" ≔ τ;
 
+/*
+  Equality in the groupoid universe.
+
+  Surface/formula:
+    x = y          is equality/path type in a groupoid a.
+    eq_refl x      is the reflexive path.
+    ind_eq p P u   transports u : P y backwards along p : x = y.
+    eq_trans p q   composes paths p : x = y and q : y = z.
+*/
 constant symbol = : Π [a: Grpd], τ a → τ a → Grpd;
 notation = infix 10;
 
 constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
 
+// Equality eliminator/transport.
 symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],
   τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);
 rule ind_eq (eq_refl $x) $p $u ↪ $u;
 
+// Equality/path transitivity.
 symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],
   τ (x = y) → τ (y = z) → τ (x = z)
 ≔ λ a x y z p q, ind_eq p (λ t : τ a, t = z) q;
@@ -224,6 +243,8 @@ builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;
 builtin "eqind" ≔ ind_eq;
 
+// Object-level unit and natural numbers used by examples/probes, not by the
+// categorical core itself.
 inductive unit : TYPE ≔ | tt : unit;
 
 constant symbol Unit_grpd : Grpd;
@@ -237,12 +258,25 @@ inductive nat : TYPE ≔
 // 1. Core categories
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Core category interface.
+
+  Surface/formula:
+    A : Cat
+    Obj(A)                    object classifier of A
+    Hom_cat(A,x,y)            hom-category Hom_A(x,y), also written x ⟶_A y
+    Hom(A,x,y)                object/type classifier of Hom_cat(A,x,y)
+    id_A(x)                   identity arrow
+    comp_fapp0(g,f)           composite g ∘ f
+    Op_cat(A)                 A^op
+*/
 constant symbol Cat : TYPE;
 
 symbol Obj : Cat → Grpd;
 
 injective symbol Hom_cat : Π (A : Cat) (X_A Y_A : τ (Obj A)), Cat;
 
+// Object/type classifier of a hom-category.
 injective symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
 ≔ Obj (Hom_cat A X_A Y_A);
 
@@ -261,6 +295,7 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   Π (g: τ (Hom A Y_A Z_A)), Π (f: τ (Hom A X_A Y_A)),
   τ (Hom A X_A Z_A);
 
+// Opposite category.
 injective symbol Op_cat : Cat → Cat;
 rule Op_cat (Op_cat $A) ↪ $A;
 rule Obj (Op_cat $A) ↪ Obj $A;
@@ -269,6 +304,9 @@ rule @id (Op_cat $A) $X ↪ @id $A $X;
 rule @comp_fapp0 (Op_cat $A) $X $Y $Z $g $f ↪ @comp_fapp0 $A $Z $Y $X $f $g;
 
 // Path categories internalize HoTT equality as a groupoidal category.
+//
+// Surface/formula:
+//   Path_cat(A) has objects x : A and arrows p : x = y.
 injective symbol Path_cat : Grpd → Cat;
 rule Obj (Path_cat $A) ↪ $A;
 rule Hom_cat (Path_cat $A) $x $y ↪ Path_cat ($x = $y);
@@ -276,6 +314,10 @@ rule @id (Path_cat $A) $x ↪ eq_refl $x;
 rule @comp_fapp0 (Path_cat $A) $x $y $z $q $p ↪ eq_trans $p $q;
 rule Op_cat (Path_cat $A) ↪ Path_cat $A;
 
+// Core groupoid of objects of a category.
+//
+// Surface/formula:
+//   Core_cat(C) = Path_cat(Obj(C)).
 symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 
 assert [A : Grpd] ⊢ Obj (Path_cat A) ≡ A;
@@ -288,6 +330,16 @@ assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
 // 2. Ordinary functors and universe categories
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Ordinary functor category and classifier.
+
+  Surface/formula:
+    Functor_cat(A,B)       = A ⟶ B
+    Functor(A,B)           = Obj(A ⟶ B)
+    F[x]                   = fapp0 F x
+    F[X,Y]                 = fapp1_func F : Hom_A(X,Y) -> Hom_B(F[X],F[Y])
+    F[f]                   = fapp1_fapp0 F f
+*/
 injective symbol Functor_cat : Π (A B : Cat), Cat;
 
 injective symbol Functor (A B : Cat) : Grpd
@@ -309,6 +361,7 @@ symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   Π [X_A Y_A : τ (Obj A)],
   τ (Functor (Hom_cat A X_A Y_A) (Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
 
+// Capped arrow action of a functor: F[f].
 symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   Π [X_A Y_A : τ (Obj A)],
   Π (f : τ (Hom A X_A Y_A)),
@@ -316,15 +369,24 @@ symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
 
 rule fapp0 (fapp1_func $F_AB) $f ↪ fapp1_fapp0 $F_AB $f;
 
+/*
+  Universe classifiers and their category structures.
+
+  Surface/formula:
+    Grpd_cat has Obj(Grpd_cat) = Grpd and Hom(X,Y) = X -> Y.
+    Cat_cat  has Obj(Cat_cat)  = Cat  and Hom(A,B) = A ⟶ B.
+*/
 constant symbol Grpd_grpd : Grpd;
 constant symbol Cat_grpd  : Grpd;
 rule τ Grpd_grpd ↪ Grpd;
 rule τ Cat_grpd  ↪ Cat;
 
+// Category of groupoid/type classifiers.
 constant symbol Grpd_cat : Cat;
 rule Obj Grpd_cat ↪ Grpd_grpd;
 rule τ (Obj (Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);
 
+// Category of categories.
 constant symbol Cat_cat : Cat;
 rule Obj Cat_cat ↪ Cat_grpd;
 rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
@@ -334,6 +396,11 @@ assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 assert (A B : Cat) ⊢ Hom_cat Cat_cat A B ≡ Functor_cat A B;
 
 // Directed Cat-valued families are canonical Cat-valued functors.
+//
+// Surface/formula:
+//   Catd_cat(K) = K -> Cat
+//   Catd(K)     = Obj(Catd_cat(K))
+//   E[k]        = fapp0 E k, usually via Fibre_cat E k.
 injective symbol Catd_cat (K : Cat) : Cat;
 
 injective symbol Catd (K : Cat) : Grpd
@@ -343,7 +410,11 @@ rule Functor_cat $K Cat_cat ↪ @Catd_cat $K;
 
 unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
 
-// Natural families of functors between directed Cat-valued families.
+// Natural/displayed families of functors between directed Cat-valued families.
+//
+// Surface/formula:
+//   Functord_cat(E,D) = (k :^n K) -> E[k] ⟶ D[k]
+//   Functord(E,D)     = Obj(Functord_cat(E,D)).
 injective symbol Functord_cat [K : Cat] (E D : τ (Catd K)) : Cat;
 
 injective symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
@@ -362,6 +433,7 @@ rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 constant symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E);
 rule @id (@Catd_cat $K) $E ↪ @id_funcd $K $E;
 
+// Displayed-functor composition.
 symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)] [C : τ (Catd K)]
   (FF : τ (Functord D C)) (GG : τ (Functord E D)) : τ (Functord E C);
 
@@ -374,9 +446,12 @@ rule @comp_catd_fapp0 $K $E $E $C $FF (@id_funcd $K $E)
 rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
   ↪ $GG;
 
-
-// Natural families of transformations, i.e. modifications between
+// Natural/displayed families of transformations, i.e. modifications between
 // directed-family functors.
+//
+// Surface/formula:
+//   Transfd_cat(FF,GG) = (k :^n K) -> FF[k] ⇒ GG[k]
+//   Transfd(FF,GG)     = Obj(Transfd_cat(FF,GG)).
 injective symbol Transfd_cat [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Cat;
 
@@ -410,6 +485,15 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @id (@Functord_cat K E D) FF
     ≡ @id_transfd K E D FF;
 
+/*
+  Ordinary identity/composition in Cat_cat.
+
+  Surface/formula:
+    id_func(A)             = id_A : A ⟶ A
+    comp_cat_fapp0(F,G)    = F ∘ G
+    (F ∘ G)[x]             = F[G[x]]
+    (F ∘ G)[f]             = F[G[f]]
+*/
 constant symbol id_func [A: Cat] : τ (Functor A A);
 rule @id Cat_cat $A ↪ @id_func $A;
 rule fapp0 (@id_func $A) $xA ↪ $xA;
@@ -431,6 +515,12 @@ rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
 rule @comp_fapp0 $A $Y $Y $Z $g (@id $A $Y) ↪ $g;
 rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
 
+// Ordinary opposite functor action.
+//
+// Surface/formula:
+//   Op_func(F) : A^op -> B^op
+//   Op_func(F)[x] = F[x]
+//   Op_func(F)[f^op] = F[f]^op.
 injective symbol Op_func : Π [A B : Cat],
   τ (Functor A B) → τ (Functor (Op_cat A) (Op_cat B));
 
@@ -443,25 +533,42 @@ rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
 
-// Terminal category and points-as-functors are needed to derive unary homs from binary hom.
+// Terminal category and points-as-functors are needed to derive unary homs from
+// binary homs.
+//
+// Surface/formula:
+//   1 = Terminal_cat
+//   Terminal_func(A) : A -> 1
+//   Obj_func(y) : 1 -> Y picks out y : Obj(Y).
 constant symbol Terminal_cat : Cat;
 rule Op_cat Terminal_cat ↪ Terminal_cat;
 rule Obj Terminal_cat ↪ Unit_grpd;
 rule Hom_cat Terminal_cat _ _ ↪ Terminal_cat;
 
+// Unique object of the terminal category.
 constant symbol Terminal_obj : τ (Obj Terminal_cat);
 rule @id Terminal_cat _ ↪ Terminal_obj;
 rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 
+// Unique functor into the terminal category.
 injective symbol Terminal_func : Π (A : Cat), τ (Functor A Terminal_cat);
 rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 
+// Evaluation at a fixed object, as a functor out of a functor category.
+//
+// Surface/formula:
+//   fapp0_func(x)[F] = F[x].
 symbol fapp0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
 rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 
 // Constant functor, used by constant directed families without capping the
 // hom-action too early.
+//
+// Surface/formula:
+//   Const_func(b) : A -> B
+//   Const_func(b)[x] = b
+//   Const_func(b)[f] = id_b.
 injective symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
 rule @fapp0 $A $B (@Const_func $A $B $b) $_ ↪ $b;
 rule @fapp1_func $A $B (@Const_func $A $B $b) $x $y
@@ -477,10 +584,19 @@ rule @comp_cat_fapp0 $A $B $C $F (@Const_func $A $B $b)
 rule @comp_cat_fapp0 $A $B $C (@Const_func $B $C $c) $G
   ↪ @Const_func $A $C $c;
 
+// Point object as a functor from the terminal category.
+//
+// Surface/formula:
+//   Obj_func(y) = const_1(y) : 1 -> Y.
 injective symbol Obj_func [Y : Cat] (y : τ (Obj Y)) : τ (Functor Terminal_cat Y)
 ≔ @Const_func Terminal_cat Y y;
 
-// Internalized opposite as a functor in Cat: A |-> A^op.
+// Internalized opposite as a functor in Cat.
+//
+// Surface/formula:
+//   op : Cat -> Cat
+//   op[A] = A^op
+//   op[F] = F^op.
 constant symbol op : τ (Functor Cat_cat Cat_cat);
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
@@ -488,6 +604,9 @@ rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 // Internalized ordinary functor-category formation. The total package has no
 // recoverable parameters; the partial stage is injective so equality of
 // packages can recover the fixed source category.
+//
+// Surface/formula:
+//   Functor_cat_func[A][B] = A -> B.
 constant symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
 
 injective symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
@@ -517,6 +636,10 @@ symbol Catd_cat_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
      Functor_cat_func;
 
 // Curried postcomposition in Cat, used to build constructor pipelines.
+//
+// Surface/formula:
+//   comp_cat_cov_func(G) : (X -> Y) -> (X -> Z)
+//   comp_cat_cov_func(G)[F] = G ∘ F.
 symbol comp_cat_cov_func : Π [X Y Z : Cat],
   Π (G : τ (Functor Y Z)),
   τ (Functor (Functor_cat X Y) (Functor_cat X Z));
@@ -527,6 +650,9 @@ rule fapp0 (@comp_cat_cov_func $X $Y $Z $G) $F
 // Internalized pointwise opposite on directed families. This is the packaged
 // functorial version of `Op_catd`; the object-level result remains the
 // canonical normal form.
+//
+// Surface/formula:
+//   Op_catd_func(Z)[E] = E^op.
 injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z));
 
 rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
@@ -536,6 +662,20 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
 // 3. Curried internal hom
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Ordinary internal hom classifiers.
+
+  Surface/formula:
+    hom_(F,W)[y]          = Hom_A(W,F[y])
+    hom_con(W,F)[y]       = Hom_A(F[y],W)
+    hom_int(F)[W][y]      = Hom_A(W,F[y])
+    hom_precomp_func(f)(g)= g ∘ f
+
+  `hom_int(F)` is the internalized functorial package
+  A^op -> (B -> Cat). Its surface reading is:
+
+    W :^f A^op |- y :^f B |- Hom_A(W,y)
+*/
 injective symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
 rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
@@ -556,10 +696,19 @@ rule @fapp0 (Hom_cat $A $Y $Z) (Hom_cat $A $X $Z)
       (@hom_precomp_func $A $X $Y $Z $f) $g
   ↪ @comp_fapp0 $A $X $Y $Z $g $f;
 
+// Contravariant represented-object classifier.
+//
+// Surface/formula:
+//   hom_con(W,F)[y] = Hom_A(F[y],W).
 injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat B) Cat_cat)
 ≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
 
+// Internalized hom classifier.
+//
+// Surface/formula:
+//   hom_int(F) : A^op -> (B -> Cat)
+//   hom_int(F)[W][y] = Hom_A(W,F[y]).
 injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat A) (Catd_cat B));
 
@@ -620,6 +769,15 @@ inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
 | Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), @τΣ_ a P;
 notation τΣ_ quantifier;
 
+/*
+  Encoded dependent pair type used for object-level Sigma data.
+
+  Surface/formula:
+    Σ x : a, P(x)
+    Struct_sigma x u = (x,u)
+    sigma_Fst(x,u)   = x
+    sigma_Snd(x,u)   = u
+*/
 constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd;
 notation Σ_ quantifier;
 rule τ (Σ_ $P) ↪ τΣ_ $P;
@@ -627,6 +785,7 @@ rule τ (Σ_ $P) ↪ τΣ_ $P;
 injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
 rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
 
+// Second projection of an encoded dependent pair.
 injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 
@@ -634,6 +793,16 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 // 5. Ordinary transfors
 // -------------------------------------------------------------------------------------------------
 
+/*
+  Ordinary transfor/natural-transformation category.
+
+  Surface/formula:
+    Transf_cat(F,G) = F ⇒ G
+    Transf(F,G)     = Obj(F ⇒ G)
+
+  For Cat-valued functors this reduces to the displayed-family category:
+    Transf_cat(K,Cat,E,D) = Functord_cat(E,D).
+*/
 injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 
 injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
@@ -727,7 +896,12 @@ assert [A B : Cat] (F : τ (Functor B A))
     ≡ @hom_precomp_func A x y (@fapp0 B A F b) p;
 
 // Reserved capped ordinary hom-action surface. It is not used by v3.2 rules
-// yet. The intended computation is the projected endpoint of
+// yet.
+//
+// Surface/formula:
+//   tapp1_fapp0(ϵ,f) : F[X] -> G[Y]
+//
+// The intended computation is the projected endpoint of
 // `tapp1_int_func_transf`: evaluate the internal action at ϵ, project the
 // resulting transfor at X and then Y, and finally apply the resulting hom
 // functor to f. Keep it abstract until the external ordinary naturality API is
@@ -746,6 +920,13 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   internalized action
 
     hom_int(id_A) ⇒ hom_int(G) ∘ F^op.
+
+  Surface/formula:
+    tapp1_int_func_transf(F,G)[ϵ]
+      : Hom_A(~,—) ⇒ Hom_B(F^op ~,G —)
+
+    fapp1_int_transf(F)
+      = tapp1_int_func_transf(F,F)[id_F]
 */
 symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   τ (Functor
@@ -756,6 +937,7 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
           (@hom_int B A G)
           (@Op_func A B F))));
 
+// Object action of `tapp1_int_func_transf`.
 symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Transf F G)),
   τ (Transf
@@ -767,6 +949,7 @@ symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
 rule fapp0 (@tapp1_int_func_transf $A $B $F $G) $ϵ
   ↪ @tapp1_int_fapp0_transf $A $B $F $G $ϵ;
 
+// Hom action of `tapp1_int_func_transf`.
 symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ ϵ' : τ (Transf F G)),
   τ (Functor
@@ -783,6 +966,7 @@ symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)]
 rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F $G) $ϵ $ϵ'
   ↪ @tapp1_int_fapp1_func_transf $A $B $F $G $ϵ $ϵ';
 
+// Identity-specialized ordinary internal hom-action.
 symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
   τ (Transf
       (@hom_int A A (@id_func A))
@@ -909,6 +1093,10 @@ rule @tapp0_fapp0
       (@fapp0 $A $B $F $a)
       $η;
 
+// Fixed-base layer: constant Cat-valued family.
+//
+// Surface/formula:
+//   const_K(A)[k] = A.
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
@@ -925,9 +1113,17 @@ rule @fapp1_func $K Cat_cat (@Const_catd $K $A) $x $y
 
 rule @fapp1_fapp0 $K Cat_cat (@Const_catd $K $A) $x $y $_ ↪ @id_func $A;
 
+// Fixed-base layer: terminal displayed family.
+//
+// Surface/formula:
+//   Terminal_catd(K) = 1_K = const_K(1).
 symbol Terminal_catd (K : Cat) : τ (Catd K)
 ≔ @Const_catd K Terminal_cat;
 
+// Fixed-base layer: pointwise opposite of a directed family.
+//
+// Surface/formula:
+//   Op_catd(E)[k] = E[k]^op.
 injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 
 rule @fapp0 (@Catd_cat $K) (@Catd_cat $K) (@Op_catd_func $K) $E
@@ -942,6 +1138,10 @@ rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
 rule @Op_catd $K (@Op_catd $K $E) ↪ $E;
 rule @Op_catd $K (@Const_catd $K $A) ↪ @Const_catd $K (Op_cat $A);
 
+// Fixed-base layer: pointwise opposite of a displayed functor.
+//
+// Surface/formula:
+//   Op_funcd(FF)[k] = Op_func(FF[k]).
 injective symbol Op_funcd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   : τ (Functord (Op_catd E) (Op_catd D));
@@ -1058,12 +1258,20 @@ rule @tapp0_fapp0
       (@Pi_pullback_funcd $K $G)
   ↪ @Pi_func (@fapp0 $K (Op_cat Cat_cat) $G $x);
 
+// Fixed-base layer: functorial section evaluation at k.
+//
+// Surface/formula:
+//   piapp0_func(E,k) : (Π i :^f K, E[i]) -> E[k].
 symbol piapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Pi_cat E) (Fibre_cat E k))
 ≔ comp_cat_fapp0
      (@fapp0_func Terminal_cat (Fibre_cat E k) Terminal_obj)
      (@tapp0_func K Cat_cat (@Const_catd K Terminal_cat) E k);
 
+// Fixed-base layer: section object evaluation.
+//
+// Surface/formula:
+//   piapp0(s,k) = s[k] : E[k].
 symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
   Π (s : τ (Obj (Pi_cat E))),
   Π (k : τ (Obj K)),
@@ -1092,8 +1300,17 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
     Sigma_func[K][E]          = Sigma_cat(E)
     sigma_map_func(η)(k,u)    = (k, η_k(u))
 */
+// Fixed-base layer: total category of a directed family.
+//
+// Surface/formula:
+//   Sigma_cat(E) = Σ k :^f K, E[k]
+//   Obj(Sigma_cat(E)) has objects (k,u).
 injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
+// Fixed-base layer: functorial total-category constructor.
+//
+// Surface/formula:
+//   Sigma_func(K)[E] = Sigma_cat(E).
 injective symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E
   ↪ @Sigma_cat $K $E;
@@ -1101,6 +1318,11 @@ rule @fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E
 rule τ (Obj (@Sigma_cat $K $E))
   ↪ `τΣ_ k : τ (Obj $K), Obj (Fibre_cat $E k);
 
+// Fixed-base layer: first projection from a total category.
+//
+// Surface/formula:
+//   Sigma_proj1_func(E) : Sigma_cat(E) -> K
+//   Sigma_proj1_func(E)[(k,u)] = k.
 injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
   : τ (Functor (Sigma_cat E) K);
 
@@ -1135,6 +1357,11 @@ rule @Functord_cat
       (@Sigma_proj1_pullback_catd $K $R $D)
   ↪ @Functord_cat $K $R $D;
 
+// Fixed-base layer: total map induced by a displayed functor.
+//
+// Surface/formula:
+//   sigma_map_func(η) : Sigma_cat(E) -> Sigma_cat(D)
+//   sigma_map_func(η)[(k,u)] = (k,η[k](u)).
 injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
@@ -1241,10 +1468,11 @@ rule @fapp1_fapp0
   corresponding categorical data are invariantly recoverable up to equivalence.
   The `_func` suffix is reserved for functor-valued constructor packages.
 
-  Mathematical notation:
-    Functor_catd(A,B)[k]      = Functor_cat(A[k],B[k])
-    Hom_catd(E,X,Y)[k]        = Hom_cat(E[k],X[k],Y[k])
-    Transf_catd(A,B,FF,GG)[k] = Transf_cat(FF[k],GG[k])
+  Surface/formula:
+    Functor_catd(A,B)[k]      = A[k^-] ⟶ B[k]
+    Functor_catd_func(K)[A][B]= Functor_catd(A,B)
+    Hom_catd(E,X,Y)[k]        = Hom_{E[k]}(X[k^-],Y[k])
+    Transf_catd(A,B,FF,GG)[k] = FF[k^-] ⇒ GG[k]
 */
 
 injective symbol Functor_catd [K : Cat]
@@ -1255,11 +1483,13 @@ injective symbol Functor_catd [K : Cat]
 rule @fapp0 $K Cat_cat (@Functor_catd $K $A $B) $k
   ↪ Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k);
 
+// Internalized constructor package for mixed-variance functor families.
 injective symbol Functor_catd_func (K : Cat)
   : τ (Functor
       (Op_cat (Catd_cat (Op_cat K)))
       (Functor_cat (Catd_cat K) (Catd_cat K)));
 
+// Partial application of `Functor_catd_func`.
 injective symbol Functor_catd_fapp0_func [K : Cat]
   (A : τ (Catd (Op_cat K)))
   : τ (Functor (Catd_cat K) (Catd_cat K));
@@ -1271,6 +1501,10 @@ rule @fapp0 _ _
 rule @fapp0 _ _ (@Functor_catd_fapp0_func $K $A) $B
   ↪ @Functor_catd $K $A $B;
 
+// Mixed-variance hom family for two sections of a displayed family.
+//
+// Surface/formula:
+//   Hom_catd(E,X,Y)[k] = Hom_{E[k]}(X[k^-],Y[k]).
 injective symbol Hom_catd [K : Cat]
   (E : τ (Catd K))
   (X : τ (Obj (Pi_cat (Op_catd E))))
@@ -1283,6 +1517,10 @@ rule @fapp0 $K Cat_cat (@Hom_catd $K $E $X $Y) $k
       (@piapp0 $K (@Op_catd $K $E) $X $k)
       (@piapp0 $K $E $Y $k);
 
+// Mixed-variance transfor family for two displayed functors.
+//
+// Surface/formula:
+//   Transf_catd(A,B,FF,GG)[k] = FF[k^-] ⇒ GG[k].
 injective symbol Transf_catd [K : Cat]
   (A : τ (Catd (Op_cat K)))
   (B : τ (Catd K))
@@ -1321,6 +1559,10 @@ symbol Rep_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ @hom_int Z Z (@id_func Z);
 
+// Fixed-source representable family.
+//
+// Surface/formula:
+//   Rep_Z(x)[y] = Hom_Z(x,y).
 symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd Z)
 ≔ @fapp0 (Op_cat Z) (Catd_cat Z) (@Rep_catd_func Z) x;
@@ -1744,12 +1986,20 @@ symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
      (@Rep_catd Z x)
      (@CompTarget_catd Z x);
 
+// Internalized classifier: pointwise opposite representable.
+//
+// Surface/formula:
+//   Edge_Z(x)[y] = Hom_Z(x,y)^op.
 symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ comp_cat_fapp0
      (@Op_catd_func Z)
      (@hom_int Z Z (@id_func Z));
 
+// Internalized classifier: presheaf category over each fibre of a family.
+//
+// Surface/formula:
+//   Presheaf_catd(K)[A][k] = A[k] -> Cat.
 symbol Presheaf_catd_func (K : Cat)
   : τ (Functor
       (Op_cat (Catd_cat (Op_cat K)))
@@ -1758,6 +2008,10 @@ symbol Presheaf_catd_func (K : Cat)
      (@fapp0_func (Catd_cat K) (Catd_cat K) (@Const_catd K Cat_cat))
      (@Functor_catd_func K);
 
+// Internalized classifier: hom-presheaf family for a represented object.
+//
+// Surface/formula:
+//   HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op -> Cat.
 symbol HomPresheaf_catd_func [Z : Cat]
   : τ (Functor Z (Catd_cat (Op_cat Z)))
 ≔ comp_cat_fapp0
@@ -1793,6 +2047,10 @@ symbol Homd_target_section_catd [Z : Cat] (E : τ (Catd Z))
      E
      (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);
 
+// Full target family of the internal displayed hom constructor.
+//
+// Surface/formula:
+//   HomdTarget_E[x] = Π y :^f Z^op, E[y^-] -> HomPsh_Z(x)[y].
 symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
   : τ (Catd Z)
 ≔ comp_cat_fapp0
@@ -1840,6 +2098,11 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   a separate `fib_cov_tapp0_fapp0` alias in v3.2.
 */
 
+// Fixed-base covariant transport from a fibre object.
+//
+// Surface/formula:
+//   fib_cov_tapp0_func(E,x,u,y) : Hom_K(x,y) -> E[y]
+//   fib_cov_tapp0_func(E,x,u,y)[f] = E[f](u).
 symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (u : τ (Obj (Fibre_cat E x)))
@@ -1848,6 +2111,10 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
      (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
      (@fapp1_func K Cat_cat E x y);
 
+// Internalized target family for covariant fibre transport.
+//
+// Surface/formula:
+//   FibCov_target(E)[x] = Functord_cat(Rep_K(x),E).
 symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
 ≔ @hom_con
     (@Catd_cat K)
@@ -1855,15 +2122,22 @@ symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
     (Op_cat K)
     (@hom_int K K (@id_func K));
 
+// Internalized covariant fibre transport package.
+//
+// Surface/formula:
+//   fib_cov_int(E)[x](u) : Rep_K(x) -> E
+//   fib_cov_int(E)[x](u)[y][f] = E[f](u).
 constant symbol fib_cov_int : Π [K : Cat], Π (E : τ (Catd K)),
   τ (Functord E (@FibCov_target_catd K E));
 
+// Component functor of `fib_cov_int` at x.
 symbol fib_cov_src_func [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   : τ (Functor
       (Fibre_cat E x)
       (Fibre_cat (@FibCov_target_catd K E) x));
 
+// Object component of `fib_cov_src_func`.
 injective symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
@@ -1953,6 +2227,10 @@ symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
 
 // General endpoint notation for dependent homs along a displayed functor. The
 // old one-family endpoint is the identity-family specialization.
+//
+// Surface/formula:
+//   homd_(FF,x,u,y,v)[f : x -> y]
+//     = Hom_{E[y]}(FF[y](v), E[f](u)).
 injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -1982,6 +2260,9 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
 
 // General first projection of `homd_int`: externalize x and the source fibre
 // object in E, while the probe family D remains internal.
+//
+// Surface/formula:
+//   homd_src_func(FF,x) : E[x]^op -> Π y :^f Z^op, ...
 symbol homd_src_func [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -2003,6 +2284,9 @@ rule @tapp0_fapp0
   ↪ @homd_src_func $Z $D $E $FF $x;
 
 // General source-fixed projection after evaluating the component functor at u.
+//
+// Surface/formula:
+//   homd_src_sec(FF,x,u)[y] = homd_tgt_func(FF,x,u,y).
 symbol homd_src_sec [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -2022,6 +2306,9 @@ rule @homd_src_func $Z $D (@Const_catd $Z Terminal_cat) $FF $x
       (@homd_src_sec $Z $D (@Const_catd $Z Terminal_cat) $FF $x Terminal_obj);
 
 // General inner endpoint functor after projecting the source-fixed section at y.
+//
+// Surface/formula:
+//   homd_tgt_func(FF,x,u,y)[v] = homd_(FF,x,u,y,v).
 symbol homd_tgt_func [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -2107,6 +2394,10 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   : τ (Obj (Fibre_cat E y))
 ≔ fapp0 (@fib_cov_tapp0_func K E x y (@piapp0 K E s x)) f;
 
+// Section action over a hom object.
+//
+// Surface/formula:
+//   piapp1_func(s,x,y)[f] = s[f].
 symbol piapp1_func [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K))
@@ -2116,6 +2407,10 @@ symbol piapp1_func [K : Cat] (E : τ (Catd K))
         x (@piapp0 K E s x)
         y (@piapp0 K E s y))));
 
+// Capped section action over a base arrow.
+//
+// Surface/formula:
+//   piapp1_fapp0(s,f) = s[f] : E[f](s[x]) -> s[y].
 symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   [x y : τ (Obj K)]
@@ -2155,6 +2450,7 @@ symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
           (homd_int GG)
           (Op_funcd FF))));
 
+// Object action of `tdapp1_int_func_transfd`.
 symbol tdapp1_int_fapp0_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
   Π (ϵ : τ (Transfd FF GG)),
@@ -2167,6 +2463,7 @@ symbol tdapp1_int_fapp0_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
 rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ
   ↪ @tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ;
 
+// Hom action of `tdapp1_int_func_transfd`.
 symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
   Π (ϵ ϵ' : τ (Transfd FF GG)),
@@ -2184,6 +2481,7 @@ symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
 rule @fapp1_func _ _ (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ $ϵ'
   ↪ @tdapp1_int_fapp1_func_transfd $K $E $D $FF $GG $ϵ $ϵ';
 
+// Identity-specialized displayed internal hom-action.
 symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π (FF : τ (Functord E D)),
   τ (Transfd
@@ -2216,12 +2514,14 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
   rules attach to them directly. The `Fibre_*` names are readable definitions
   over these heads, not additional kernel rewrite surfaces.
 */
+// Fibre functor of a displayed functor at z.
 symbol Fibre_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (z : τ (Obj K))
   : τ (Functor (Fibre_cat E z) (Fibre_cat D z))
 ≔ @tapp0_fapp0 K Cat_cat E D z FF;
 
+// Component projection functor for displayed transfors at z.
 symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (z : τ (Obj K))
@@ -2229,6 +2529,7 @@ symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
       (Transfd_cat FF GG)
       (Transf_cat (Fibre_func FF z) (Fibre_func GG z)));
 
+// Capped displayed-transfor component.
 symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (z : τ (Obj K))
@@ -2238,6 +2539,7 @@ symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
 
+// Readable component alias.
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -2245,6 +2547,7 @@ symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
   : τ (Transf (Fibre_func FF z) (Fibre_func GG z))
 ≔ @tdapp0_fapp0 K E D FF GG z ϵ;
 
+// Object action of a displayed-transfor component.
 symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -2352,9 +2655,17 @@ constant symbol functord_transport_transf [K : Cat] [E D : τ (Catd K)]
   composed with `Pi_func`, in the same style as the remaining `homd_int` and
   displayed-action projection packages.
 */
+// Generic Sigma helper: include a fibre object as a total object.
+//
+// Surface/formula:
+//   sigma_intro_transf(E)[k](u) = (k,u).
 injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord E (@Const_catd K (@Sigma_cat K E)));
 
+// Component of `sigma_intro_transf` at k.
+//
+// Surface/formula:
+//   sigma_intro_tapp0_func(E,k)(u) = (k,u).
 symbol sigma_intro_tapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Fibre_cat E k) (Sigma_cat E));
 
@@ -2365,6 +2676,10 @@ rule @tapp0_fapp0
 rule fapp0 (@sigma_intro_tapp0_func $K $E $k) $u
   ↪ Struct_sigma $k $u;
 
+// Generic Pi helper: evaluation transfor from a constant section to a family.
+//
+// Surface/formula:
+//   pi_eval_transf(E)[k] = piapp0_func(E,k).
 injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord
       (@Const_catd K (@Functord_cat K (@Const_catd K Terminal_cat) E))
