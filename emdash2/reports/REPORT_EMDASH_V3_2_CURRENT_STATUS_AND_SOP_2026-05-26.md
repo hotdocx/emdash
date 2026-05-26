@@ -38,10 +38,11 @@ Retired historical references:
   `PathInd_src_catd`, `PathInd_tgt_catd`, and `PathInd_func`;
 - outgoing-path family infrastructure:
   `PathOut_cat`, `PathOut_cat_func`, `PathOutMotives_catd`,
-  `pathout_refl_obj`, and the provisional `pathout_refl_arrow_sec`;
+  `pathout_refl_obj`, `pathout_refl_eval_func`, and the provisional
+  `pathout_refl_arrow_sec`;
 - first outer-`x` path-induction packaging:
-  `PathOutPi_funcd`, `PathIndSrc_catd`, `PathIndTgt_catd`, and
-  `PathInd_funcd`, with checked fibre/component rules over
+  `PathOutPi_funcd`, `PathOutReflEval_funcd`, `PathIndSrc_catd`,
+  `PathIndTgt_catd`, and `PathInd_funcd`, with checked fibre/component rules over
   `Sigma_cat Z (PathOutMotives_catd Z)`;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;

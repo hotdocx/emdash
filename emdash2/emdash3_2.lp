@@ -1202,6 +1202,27 @@ symbol pathout_refl_obj [Z : Cat] (x : τ (Obj Z))
   : τ (Obj (@PathOut_cat Z x))
 ≔ @pathout_obj Z x x (@id Z x);
 
+// Fixed-x evaluation at the reflexive outgoing path.  The displayed package
+// below exposes these components while keeping moving-refl naturality abstract.
+symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
+  : τ (Functor (@Catd_cat (@PathOut_cat Z x)) Cat_cat)
+≔ @fapp0_func
+     (@PathOut_cat Z x)
+     Cat_cat
+     (@pathout_refl_obj Z x);
+
+constant symbol PathOutReflEval_funcd [Z : Cat]
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $x
+      (@PathOutReflEval_funcd $Z)
+  ↪ @pathout_refl_eval_func $Z $x;
+
 constant symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y))
   : τ (Hom
@@ -1236,10 +1257,7 @@ symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
 
 symbol PathInd_src_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
-≔ @fapp0_func
-     (@PathOut_cat Z x)
-     Cat_cat
-     (@pathout_refl_obj Z x);
+≔ @pathout_refl_eval_func Z x;
 
 symbol PathInd_tgt_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
@@ -1269,17 +1287,11 @@ rule @tapp0_fapp0
   ↪ @path_ind_func_fapp0 $Z $x $E;
 
 symbol PathIndSrc_catd [Z : Cat]
-  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)));
-
-rule @fapp0
-      _
-      Cat_cat
-      (@PathIndSrc_catd $Z)
-      (Struct_sigma $x $E)
-  ↪ @Fibre_cat
-      (@PathOut_cat $Z $x)
-      $E
-      (@pathout_refl_obj $Z $x);
+  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
+≔ @Sigma_catd_functord_catd
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutReflEval_funcd Z);
 
 constant symbol PathInd_funcd [Z : Cat]
   : τ (Functord
@@ -2219,6 +2231,27 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     ≡ @Catd_cat (@PathOut_cat Z x);
 
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    Cat_cat
+    (@pathout_refl_eval_func Z x)
+    (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
+    ≡ @Fibre_cat
+        (@PathOut_cat Z x)
+        (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
+        (@pathout_refl_obj Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @tapp0_fapp0
+    Z
+    Cat_cat
+    (@PathOutMotives_catd Z)
+    (@Const_catd Z Cat_cat)
+    x
+    (@PathOutReflEval_funcd Z)
+    ≡ @pathout_refl_eval_func Z x;
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
   @tapp0_fapp0
     Z
     Cat_cat
@@ -2306,6 +2339,10 @@ assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   Fibre_cat (@PathInd_src_catd Z x) E
     ≡ Fibre_cat E (@pathout_refl_obj Z x);
+
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @PathInd_src_catd Z x
+    ≡ @pathout_refl_eval_func Z x;
 
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   Fibre_cat (@PathInd_tgt_catd Z x) E

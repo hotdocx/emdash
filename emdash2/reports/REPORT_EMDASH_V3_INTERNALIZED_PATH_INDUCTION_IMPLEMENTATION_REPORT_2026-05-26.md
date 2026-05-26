@@ -176,6 +176,10 @@ PathInd_src_catd(Z,x)[E] == E[(x,id_x)]
 PathInd_tgt_catd(Z,x)[E] == Pi_cat E
 ```
 
+The source side is routed through the named helper
+`pathout_refl_eval_func Z x`, whose object action is evaluation at
+`pathout_refl_obj Z x`.
+
 Added:
 
 ```lambdapi
@@ -414,6 +418,23 @@ The checked target fibre is:
 PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
 ```
 
+Added the matching source-side evaluation package:
+
+```lambdapi
+symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
+  : τ (Functor (@Catd_cat (@PathOut_cat Z x)) Cat_cat);
+
+constant symbol PathOutReflEval_funcd [Z : Cat]
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
+```
+
+with checked component computation:
+
+```text
+PathOutReflEval_funcd(Z)[x] == pathout_refl_eval_func Z x
+pathout_refl_eval_func(Z,x)[E] == E[(x,id_x)]
+```
+
 Added the matching source family and outer path-induction displayed functor:
 
 ```lambdapi
@@ -431,6 +452,11 @@ PathIndSrc_catd(Z)[(x,E)] == E[(x,id_x)]
 PathInd_funcd(Z)[(x,E)] == path_ind_func_fapp0 Z x E
 PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 ```
+
+`PathIndSrc_catd` is now routed through the same
+`Sigma_catd_functord_catd` total-family helper as `PathIndTgt_catd`, using
+`PathOutReflEval_funcd`. This gives the source side a displayed-functor
+interface while still keeping the hard base-arrow action abstract.
 
 The rule LHSs deliberately keep the total-base source category implicit. A probe
 with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
@@ -459,9 +485,10 @@ Near-term:
 
 - use the fixed-`x` composition result as the benchmark for future
   path-induction internalization and outer-`x` refinements;
-- refine the base-arrow action/coherence of `PathIndSrc_catd` and
-  `PathInd_funcd`; the current package has checked fibres/components but keeps
-  the hard moving-refl functoriality abstract;
+- refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
+  `PathIndSrc_catd`, and `PathInd_funcd`; the current package has checked
+  fibres/components and a source-side displayed-functor interface, but keeps the
+  hard moving-refl functoriality abstract;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.
