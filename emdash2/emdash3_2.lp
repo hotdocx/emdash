@@ -136,6 +136,10 @@ flag "print_meta_args" on;
     - `Pi_cat E`: notation for the canonical section category
       `Functord_cat (Const_catd K Terminal_cat) E`; section homs and
       projections therefore use the displayed-functor normal form directly.
+    - `Pi_int_funcd` / `Pi_pullback_funcd`: internalized Pi over varying bases.
+      `Pi_pullback_funcd` is the stable normal form for the semantic
+      `Pullback_catd_func` action on `Pi_int_funcd`; its fold keeps reducible
+      endpoint-family slots implicit.
     - `Sigma_cat E`: object decoding is Sigma-shaped; homs between total
       objects route through the endpoint `homd_`.
     - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
@@ -974,6 +978,34 @@ rule @tapp0_fapp0
       Pi_int_funcd
   ↪ @Pi_func $K;
 
+// Stable normal form for pulling the internal Pi package back along a
+// Cat-valued contravariant base functor. The fold rule routes the semantic
+// `Pi_int_funcd`/`Pullback_catd_func` expression into this head while keeping
+// the reducible endpoint family slots implicit on the LHS.
+injective symbol Pi_pullback_funcd [K : Cat]
+  (G : τ (Functor K (Op_cat Cat_cat)))
+  : τ (Functord
+      (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+      (@Const_catd K Cat_cat));
+
+rule @fapp1_fapp0
+      (@Catd_cat (Op_cat Cat_cat))
+      (@Catd_cat $K)
+      (@Pullback_catd_func $K (Op_cat Cat_cat) $G)
+      _
+      _
+      Pi_int_funcd
+  ↪ @Pi_pullback_funcd $K $G;
+
+rule @tapp0_fapp0
+      $K
+      Cat_cat
+      _
+      _
+      $x
+      (@Pi_pullback_funcd $K $G)
+  ↪ @Pi_func (@fapp0 $K (Op_cat Cat_cat) $G $x);
+
 symbol piapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Pi_cat E) (Fibre_cat E k))
 ≔ comp_cat_fapp0
@@ -1265,21 +1297,18 @@ symbol PathOutMotives_catd [Z : Cat]
      Catd_cat_func
      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
 
-// Stable path-out Pi package. Semantically this is the pullback action of
-// `Pi_int_funcd` along `Op_func (PathOut_cat_func Z)`, but keeping a stable
-// head avoids matching later Sigma-transport rules against that large
-// reducible expression.
 symbol PathOutPi_funcd [Z : Cat]
-  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
-
-rule @tapp0_fapp0
-      _
-      Cat_cat
-      _
-      _
-      $x
-      (@PathOutPi_funcd $Z)
-  ↪ @Pi_func (@PathOut_cat $Z $x);
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat))
+≔ @fapp1_fapp0
+    (@Catd_cat (Op_cat Cat_cat))
+    (@Catd_cat Z)
+    (@Pullback_catd_func
+      Z
+      (Op_cat Cat_cat)
+      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z)))
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    Pi_int_funcd;
 
 symbol PathIndTgt_catd [Z : Cat]
   : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
@@ -2144,6 +2173,20 @@ rule @tapp0_fapp0
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
+rule @Sigma_catd_transport_func
+      $K
+      _
+      (@Pi_pullback_funcd $K $G)
+      $x
+      $y
+      $p
+      $E
+  ↪ @section_pullback_func
+      (@fapp0 $K (Op_cat Cat_cat) $G $y)
+      (@fapp0 $K (Op_cat Cat_cat) $G $x)
+      (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
+      $E;
+
 // Target-side path-out transport. The transported motive remains canonically
 // `PathOutMotives[p](E)`; this helper exposes its pullback presentation so Pi
 // sections move by the generic section-pullback map.
@@ -2188,16 +2231,6 @@ rule @Sigma_catd_transport_func
       $p
       $E
   ↪ @pathout_refl_eval_base_func $Z $x $y $p $E;
-
-rule @Sigma_catd_transport_func
-      $Z
-      _
-      (@PathOutPi_funcd $Z)
-      $x
-      $y
-      $p
-      $E
-  ↪ @pathout_pi_transport_func $Z $x $y $p $E;
 
 // Canonical path-induction transport square over `(x,E) -> (y,p_*E)`.
 // The two functors below are the induction-then-target-transport and
@@ -2295,6 +2328,27 @@ assert [A B : Cat] (F : τ (Functor A B)) ⊢
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
   @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func A B F) E
     ≡ @Pullback_catd A B E F;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) ⊢
+  @fapp1_fapp0
+    (@Catd_cat (Op_cat Cat_cat))
+    (@Catd_cat K)
+    (@Pullback_catd_func K (Op_cat Cat_cat) G)
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    Pi_int_funcd
+    ≡ @Pi_pullback_funcd K G;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x : τ (Obj K)) ⊢
+  @tapp0_fapp0
+    K
+    Cat_cat
+    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+    (@Const_catd K Cat_cat)
+    x
+    (@Pi_pullback_funcd K G)
+    ≡ @Pi_func (@fapp0 K (Op_cat Cat_cat) G x);
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;
@@ -2673,6 +2727,12 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     (@PathOutPi_funcd Z)
     ≡ @Pi_func (@PathOut_cat Z x);
 
+assert [Z : Cat] ⊢
+  @PathOutPi_funcd Z
+    ≡ @Pi_pullback_funcd
+        Z
+        (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
+
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E)
     ≡ @Pi_cat (@PathOut_cat Z x) E;
@@ -2735,6 +2795,23 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
         (@PathOut_cat Z y)
         (@PathOut_cat Z x)
         (@PathOut_transport_func Z x y p)
+        E;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
+  @Sigma_catd_transport_func
+    K
+    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+    (@Pi_pullback_funcd K G)
+    x
+    y
+    p
+    E
+    ≡ @section_pullback_func
+        (@fapp0 K (Op_cat Cat_cat) G y)
+        (@fapp0 K (Op_cat Cat_cat) G x)
+        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
         E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))

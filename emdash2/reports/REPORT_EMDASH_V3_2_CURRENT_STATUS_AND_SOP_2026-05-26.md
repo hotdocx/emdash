@@ -37,9 +37,11 @@ Retired historical references:
   `functord_transport_transf`, and the canonical total arrow
   `sigma_transport_arrow`, plus the stable Sigma-family action projection
   `Sigma_catd_transport_func`;
-- internalized `Catd_cat_func`, `Pullback_catd_func`, and `Pi_int_funcd`
+- internalized `Catd_cat_func`, `Pullback_catd_func`, `Pi_int_funcd`, and
+  `Pi_pullback_funcd`
   infrastructure, including the checked arrow-action fold
-  `Catd_cat_func[F] == Pullback_catd_func F`;
+  `Catd_cat_func[F] == Pullback_catd_func F` and the semantic Pi-pullback fold
+  `Pullback_catd_func[G][Pi_int_funcd] == Pi_pullback_funcd G`;
 - fixed-`Z,x` path induction packages:
   `PathInd_src_catd`, `PathInd_tgt_catd`, and `PathInd_func`;
 - outgoing-path family infrastructure:
@@ -53,10 +55,12 @@ Retired historical references:
 - first outer-`x` path-induction packaging:
   `PathOutPi_funcd`, `PathOutReflEval_funcd`, `PathIndSrc_catd`,
   `PathIndTgt_catd`, and `PathInd_funcd`, with checked fibre/component rules over
-  `Sigma_cat Z (PathOutMotives_catd Z)`, checked source/target transports as
-  specializations of `Sigma_catd_transport_func` over canonical transported
-  motives, and a named path-induction transport square specialized from generic
-  displayed-functor naturality;
+  `Sigma_cat Z (PathOutMotives_catd Z)`, with `PathOutPi_funcd` restored as the
+  semantic `Pi_int_funcd` pullback instance folding through `Pi_pullback_funcd`,
+  checked source/target transports as specializations of
+  `Sigma_catd_transport_func` over canonical transported motives, and a named
+  path-induction transport square specialized from generic displayed-functor
+  naturality;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a

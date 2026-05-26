@@ -81,6 +81,30 @@ Pi_int_funcd[K] == Pi_func K
 The rule uses implicit source/target family slots because the fully spelled
 form was too brittle for assertions after conversion.
 
+### Pi Pullback Stable Fold
+
+Added:
+
+```lambdapi
+injective symbol Pi_pullback_funcd [K : Cat]
+  (G : τ (Functor K (Op_cat Cat_cat)))
+  : τ (Functord
+      (comp_cat_fapp0 Catd_cat_func G)
+      (Const_catd K Cat_cat));
+```
+
+This is the stable normal form for the semantic action of
+`Pullback_catd_func G` on `Pi_int_funcd`:
+
+```text
+Pullback_catd_func(G)[Pi_int_funcd] == Pi_pullback_funcd(G)
+Pi_pullback_funcd(G)[x] == Pi_func(G[x])
+```
+
+The fold rule deliberately keeps the source and target family slots implicit on
+the LHS, so it does not depend on spelling the reducible `Catd_cat_func`
+endpoint.
+
 ### Section Pullback Transfor
 
 Added:
@@ -467,9 +491,15 @@ symbol PathOutPi_funcd [Z : Cat]
   : Functord (PathOutMotives_catd Z) (Const_catd Z Cat_cat)
 ```
 
-as a stable package for the pullback of `Pi_int_funcd` along
-`Op_func (PathOut_cat_func Z)`. It keeps the head available for later Sigma
-transport discrimination, with the projection rule:
+as the semantic pullback action of `Pi_int_funcd` along
+`Op_func (PathOut_cat_func Z)`. This expression now folds through the generic
+stable head:
+
+```text
+PathOutPi_funcd(Z) == Pi_pullback_funcd(Op_func(PathOut_cat_func Z))
+```
+
+and therefore projects by:
 
 ```text
 PathOutPi_funcd(Z)[x] == Pi_func(PathOut_cat Z x)
@@ -626,6 +656,8 @@ PathIndTgt_transport_func(Z,x,y,p,E)
   == section_pullback_func(PathOut_transport_func Z x y p,E)
 (PathIndTgt_catd Z)[pathout_motive_transport_arrow Z x y p E]
   == PathIndTgt_transport_func Z x y p E
+Sigma_catd_transport_func(Pi_pullback_funcd G,p,E)
+  == section_pullback_func(G[p],E)
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[q]
   == s[PathOut_transport_func(Z,x,y,p)(q)]
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[pathout_refl_obj Z y]

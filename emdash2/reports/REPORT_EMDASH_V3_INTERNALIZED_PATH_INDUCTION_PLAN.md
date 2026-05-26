@@ -505,6 +505,16 @@ Pi_int_funcd[K] == Pi_func K
 
 The naturality along `F : A -> B` should use `section_pullback_func F`.
 
+The current implementation also has the stable semantic fold:
+
+```text
+Pi_pullback_funcd(G)
+  == Pullback_catd_func(G)[Pi_int_funcd]
+Pi_pullback_funcd(G)[x] == Pi_func(G[x])
+Sigma_catd_transport_func(Pi_pullback_funcd G,p,E)
+  == section_pullback_func(G[p],E)
+```
+
 Likely supporting symbol:
 
 ```lambdapi
@@ -1118,12 +1128,14 @@ base-arrow naturality story for `PathOutReflEval_funcd`, `PathIndSrc_catd`,
 The current reassessment is that the next missing internalized prerequisite is
 not another path-specific helper. The core now has `catd_transport_func`,
 `functord_transport_lhs_func`, `functord_transport_rhs_func`,
-`functord_transport_transf`, `sigma_transport_arrow`, and the stable
+`functord_transport_transf`, `sigma_transport_arrow`, the stable
 `Sigma_catd_transport_func` projection for `Sigma_catd_functord_catd` along
-canonical Sigma transport arrows. A direct fully expanded construction through
-`functord_transport_transf` was probed and timed out, so the implementation uses
-the smaller stable head. What is still missing is a cheap component-level
-projection for the resulting coherence transfors.
+canonical Sigma transport arrows, and `Pi_pullback_funcd` as the stable
+semantic normal form for pulling `Pi_int_funcd` along a Cat-valued base functor.
+A direct fully expanded construction through `functord_transport_transf` was
+probed and timed out, so the implementation uses the smaller stable heads. What
+is still missing is a cheap component-level projection for the resulting
+coherence transfors.
 
 ## Validation Strategy
 
@@ -1250,10 +1262,11 @@ Treat this as a real source-side problem, not as notation.
    Current local answer: the core now has `functord_transport_lhs_func`,
    `functord_transport_rhs_func`, and `functord_transport_transf` for arbitrary
    displayed functors, plus `Sigma_catd_transport_func` for Sigma-total family
-   action along canonical transport arrows. `Pi_int_funcd` still uses the
-   specialized `section_pullback_transf` for its computational component. The
-   remaining API question is the component projection that exposes these
-   coherence transfors cheaply.
+   action along canonical transport arrows. `Pi_pullback_funcd` connects the
+   target-side path-induction package back to the semantic `Pi_int_funcd` route,
+   while `section_pullback_transf` still supplies the section-pullback
+   computational component. The remaining API question is the component
+   projection that exposes these coherence transfors cheaply.
 
 2. Should `Catd_cat_func` be a definition or an injective stable head?
 
