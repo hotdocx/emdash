@@ -39,6 +39,10 @@ Retired historical references:
 - outgoing-path family infrastructure:
   `PathOut_cat`, `PathOut_cat_func`, `PathOutMotives_catd`,
   `pathout_refl_obj`, and the provisional `pathout_refl_arrow_sec`;
+- first outer-`x` path-induction packaging:
+  `PathOutPi_funcd`, `PathIndSrc_catd`, `PathIndTgt_catd`, and
+  `PathInd_funcd`, with checked fibre/component rules over
+  `Sigma_cat Z (PathOutMotives_catd Z)`;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a

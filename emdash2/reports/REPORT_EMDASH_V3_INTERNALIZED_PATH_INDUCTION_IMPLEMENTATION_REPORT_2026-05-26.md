@@ -362,6 +362,80 @@ path_comp_sec(x)[p]       == path_comp_func(p)
 path_comp_sec(x)[p][z](q) == q ∘ p
 ```
 
+### First Outer-`x` Path-Induction Package
+
+Follow-up implementation added the first checked outer-`x` package over:
+
+```text
+Sigma_cat Z (PathOutMotives_catd Z)
+```
+
+Supporting rules added:
+
+```text
+Pullback_catd_func(F)[η][a] == η[F a]
+Pullback_catd(Const_catd B C, F) == Const_catd A C
+```
+
+The second rule is the constant-family pullback normal form needed for the
+target side.
+
+Added:
+
+```lambdapi
+symbol PathOutPi_funcd [Z : Cat]
+  : Functord (PathOutMotives_catd Z) (Const_catd Z Cat_cat)
+```
+
+as the pullback of `Pi_int_funcd` along `Op_func (PathOut_cat_func Z)`, with:
+
+```text
+PathOutPi_funcd(Z)[x] == Pi_func(PathOut_cat Z x)
+```
+
+Added the total-base target family:
+
+```lambdapi
+symbol PathIndTgt_catd [Z : Cat]
+  : Catd (Sigma_cat Z (PathOutMotives_catd Z))
+```
+
+via the new universe-valued total-family helper:
+
+```lambdapi
+Sigma_catd_functord_catd(FF)[(k,r)] == FF[k](r)
+```
+
+specialized to `FF : Functord R (Const_catd K Cat_cat)`.
+
+The checked target fibre is:
+
+```text
+PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
+```
+
+Added the matching source family and outer path-induction displayed functor:
+
+```lambdapi
+symbol PathIndSrc_catd [Z : Cat]
+  : Catd (Sigma_cat Z (PathOutMotives_catd Z));
+
+constant symbol PathInd_funcd [Z : Cat]
+  : Functord (PathIndSrc_catd Z) (PathIndTgt_catd Z);
+```
+
+with checked component rules:
+
+```text
+PathIndSrc_catd(Z)[(x,E)] == E[(x,id_x)]
+PathInd_funcd(Z)[(x,E)] == path_ind_func_fapp0 Z x E
+PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
+```
+
+The rule LHSs deliberately keep the total-base source category implicit. A probe
+with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
+defined motive family normalized to its canonical composition pipeline.
+
 ## Validation
 
 Commands run successfully after the implemented changes:
@@ -377,14 +451,17 @@ The full check covers:
 - `emdash3_2.lp`.
 
 The same validation was rerun after adding the `Catd_cat_func` arrow-action
-fold, and both commands still succeeded.
+fold and after the first outer-`x` package, and both commands still succeeded.
 
 ## Remaining Work
 
 Near-term:
 
 - use the fixed-`x` composition result as the benchmark for future
-  path-induction internalization;
+  path-induction internalization and outer-`x` refinements;
+- refine the base-arrow action/coherence of `PathIndSrc_catd` and
+  `PathInd_funcd`; the current package has checked fibres/components but keeps
+  the hard moving-refl functoriality abstract;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.
@@ -392,6 +469,7 @@ Near-term:
 Later:
 
 - construct `pathout_refl_arrow` from Sigma hom/dependent-hom normal forms;
-- internalize the outer `x` using `PathOutMotives_catd`;
+- strengthen the outer-`x` package once moving evaluation at `(x,id_x)` has a
+  computational arrow-action story;
 - add context/product/projection/exchange infrastructure before attempting full
   `forall x y z` transitivity as a closed internal theorem.

@@ -1035,16 +1035,17 @@ The following phases are implemented and checked in `emdash3_2.lp`:
 path_comp_sec(x)[p]       == path_comp_func(p)
 path_comp_sec(x)[p][z](q) == q ∘ p
 ```
+7. First outer-`x` packaging over `Sigma_cat Z (PathOutMotives_catd Z)`:
+   `PathOutPi_funcd`, `PathIndSrc_catd`, `PathIndTgt_catd`, and
+   `PathInd_funcd`, with checked fibres/components.
 
-### Next Phase: Attempt Outer-`x` Internalization
-
-Only after the fixed-`x` benchmark passes, define the total base:
+### Current Outer-`x` Package
 
 ```text
 Σ_x Catd(PathOut_Z(x))
 ```
 
-and add:
+is now represented by:
 
 ```text
 PathIndSrc_catd Z
@@ -1052,26 +1053,37 @@ PathIndTgt_catd Z
 PathInd_funcd Z
 ```
 
-This phase is expected to reveal missing infrastructure around moving
-evaluation points and context projections.
-
-The immediate design target is still:
+with checked fibre/component computation:
 
 ```text
-PathIndSrc_catd Z
-PathIndTgt_catd Z
-PathInd_funcd Z
-```
-
-with fibre computation:
-
-```text
+PathIndSrc_catd Z [(x,E)] == E[(x,id_x)]
+PathIndTgt_catd Z [(x,E)] == Pi_cat E
 PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
 ```
 
-but this should be probed incrementally. The known hard part is the source
-family: evaluating a motive at the moving object `(x,id_x)` in the varying
-category `PathOut_Z(x)`.
+The target side is routed through:
+
+```text
+PathOutPi_funcd Z [x] == Pi_func(PathOut_cat Z x)
+```
+
+The known hard part remains the source-side base-arrow action: evaluating a
+motive at the moving object `(x,id_x)` in the varying category `PathOut_Z(x)`.
+The current package records the correct fibre and component computations but
+does not yet construct the moving-refl/coherence story.
+
+### Next Phase: Refine Moving-Source Functoriality
+
+The next implementation should avoid replacing the checked outer package. Use
+it as the interface, and probe smaller rules or helper packages that explain:
+
+```text
+(x,E) |-> E[(x,id_x)]
+```
+
+over arrows in `Sigma_cat Z (PathOutMotives_catd Z)`. This likely depends on a
+more computational construction of `pathout_refl_arrow` from Sigma
+hom/dependent-hom normal forms.
 
 ## Validation Strategy
 
@@ -1097,6 +1109,10 @@ Pi_int_funcd[K] == Pi_func K
 section_pullback_transf(F)[E] == section_pullback_func F E
 PathOut_cat_func(Z)[x] == PathOut_cat Z x
 PathOutMotives_catd(Z)[x] == Catd_cat(PathOut_cat Z x)
+PathOutPi_funcd(Z)[x] == Pi_func(PathOut_cat Z x)
+PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
+PathIndSrc_catd(Z)[(x,E)] == Fibre_cat E (pathout_refl_obj Z x)
+PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 PathInd_tgt_catd(Z,x)[E] == Pi_cat E
 PathInd_src_catd(Z,x)[E] == Fibre_cat E (pathout_refl_obj Z x)
 PathInd_func(Z,x)[E](u) == path_ind_sec Z x E u
@@ -1213,11 +1229,11 @@ Treat this as a real source-side problem, not as notation.
 The next implementation should not try to replace `path_ind_sec` immediately
 with a single maximally internal symbol.
 
-The best next move is to attempt the outer-`x` internalization incrementally,
-starting with the target side because it can reuse `PathOutMotives_catd` and
-`Pi_int_funcd`. The source side should be treated as the main discovery problem:
-it needs a reliable representation of evaluation at the moving object
-`(x,id_x)` in the varying category `PathOut_Z(x)`.
+The first outer-`x` package now exists and computes at fibres/components. The
+best next move is to keep that package as the interface and refine the
+source-side functoriality incrementally. The main discovery problem is still a
+reliable computational account of evaluation at the moving object `(x,id_x)` in
+the varying category `PathOut_Z(x)`.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer
