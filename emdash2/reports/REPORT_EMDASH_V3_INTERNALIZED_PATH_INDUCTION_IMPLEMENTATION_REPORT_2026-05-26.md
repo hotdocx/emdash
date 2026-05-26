@@ -168,7 +168,9 @@ functord_transport_rhs_func(FF,p)(u)
   == Fibre_func(FF,y)(catd_transport_func(E,p)(u))
 ```
 
-This is the uniform prerequisite for path-specific coherence squares.
+This is the uniform prerequisite for displayed-functor coherence squares; path
+induction now uses it by specialization rather than by duplicating the two
+routes.
 
 The implementation also added the canonical total Sigma arrow:
 
@@ -187,11 +189,27 @@ constant symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
 defined as the specialization of `sigma_transport_arrow` to
 `PathOutMotives_catd Z`.
 
-A more ambitious generic action helper for `Sigma_catd_functord_catd` along
-`sigma_transport_arrow` was probed, but the fully expanded transfor-component
-definition hit the bounded-check timeout. That helper was not added. The next
-foundational prerequisite is a smaller stable projection for that Sigma-family
-action.
+The direct definitional helper for the action of `Sigma_catd_functord_catd`
+along `sigma_transport_arrow` was probed and hit the bounded-check timeout.
+The implementation therefore added the smaller stable projection head:
+
+```lambdapi
+symbol Sigma_catd_transport_func [K : Cat] [R : τ (Catd K)]
+  (FF : τ (Functord R (@Const_catd K Cat_cat)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x)))
+  : τ (Functor
+      (Fibre_cat (Sigma_catd_functord_catd FF) (x,r))
+      (Fibre_cat (Sigma_catd_functord_catd FF) (y,R[p](r))));
+```
+
+with the checked generic projection:
+
+```text
+(Sigma_catd_functord_catd FF)[sigma_transport_arrow(R,p,r)]
+  == Sigma_catd_transport_func(FF,p,r)
+```
 
 ### Packaged Refl Arrow Section
 
@@ -449,7 +467,9 @@ symbol PathOutPi_funcd [Z : Cat]
   : Functord (PathOutMotives_catd Z) (Const_catd Z Cat_cat)
 ```
 
-as the pullback of `Pi_int_funcd` along `Op_func (PathOut_cat_func Z)`, with:
+as a stable package for the pullback of `Pi_int_funcd` along
+`Op_func (PathOut_cat_func Z)`. It keeps the head available for later Sigma
+transport discrimination, with the projection rule:
 
 ```text
 PathOutPi_funcd(Z)[x] == Pi_func(PathOut_cat Z x)
@@ -562,12 +582,14 @@ PathIndSrc_catd(Z)[(y,pathout_motive_transport_obj Z x y p E)] == E[(y,p)]
 PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
 PathIndSrc_transport_func(Z,x,y,p,E)(u)
   == fib_cov_tapp0_func(E,(x,id_x),(y,p),u)(pathout_refl_arrow Z x y p)
+(PathIndSrc_catd Z)[pathout_motive_transport_arrow Z x y p E]
+  == PathIndSrc_transport_func Z x y p E
 ```
 
 This gives the source side a stable action helper for the canonical
-transported-motive total arrow. A direct `fapp1_fapp0 PathIndSrc_catd` rewrite
-for this arrow was intentionally not added; the helper avoids depending on a
-fragile rewrite match against the currently-defined total-family head.
+transported-motive total arrow. The direct `fapp1_fapp0 PathIndSrc_catd`
+projection now factors through the generic `Sigma_catd_transport_func` rule and
+then specializes by the stable `PathOutReflEval_funcd` head.
 
 The target side now has the matching section-pullback helper:
 
@@ -602,6 +624,8 @@ pathout_motive_transport_obj(Z,x,y,p,E)
 PathOut_transport_func(Z,x,y,p)(pathout_refl_obj Z y) == pathout_obj Z x y p
 PathIndTgt_transport_func(Z,x,y,p,E)
   == section_pullback_func(PathOut_transport_func Z x y p,E)
+(PathIndTgt_catd Z)[pathout_motive_transport_arrow Z x y p E]
+  == PathIndTgt_transport_func Z x y p E
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[q]
   == s[PathOut_transport_func(Z,x,y,p)(q)]
 PathIndTgt_transport_func(Z,x,y,p,E)(s)[pathout_refl_obj Z y]
@@ -630,13 +654,18 @@ symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
       (PathIndSrc_catd Z [(x,E)])
       (PathIndTgt_catd Z [(y,pathout_motive_transport_obj Z x y p E)]));
 
-constant symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
+symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
   : τ (Transf
       (PathInd_transport_lhs_func Z x y p E)
       (PathInd_transport_rhs_func Z x y p E));
 ```
+
+These three names are no longer independent path-specific composites: they are
+defined by specializing `functord_transport_lhs_func`,
+`functord_transport_rhs_func`, and `functord_transport_transf` to
+`PathInd_funcd` along `pathout_motive_transport_arrow`.
 
 The checked object actions are:
 
@@ -675,9 +704,10 @@ PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 `PathIndSrc_catd` is now routed through the same
 `Sigma_catd_functord_catd` total-family helper as `PathIndTgt_catd`, using
 `PathOutReflEval_funcd`. This gives the source side a displayed-functor
-interface. The concrete map along a base arrow is now represented by
-`PathIndSrc_transport_func`; the functor-level coherence square is named by
-`PathInd_transport_transf`, while the component-level projection remains open.
+interface. The concrete source and target maps along a base arrow are now
+specializations of `Sigma_catd_transport_func`; the functor-level coherence
+square is the corresponding specialization of `functord_transport_transf`,
+while the component-level projection remains open.
 
 The rule LHSs deliberately keep the total-base source category implicit. A probe
 with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
@@ -697,8 +727,9 @@ The full check covers:
 - `emdash2.lp`;
 - `emdash3_2.lp`.
 
-The same validation was rerun after adding the `Catd_cat_func` arrow-action
-fold and after the first outer-`x` package, and both commands still succeeded.
+The same validation was rerun after the `Sigma_catd_transport_func`
+rearchitecture and the `PathInd_transport_transf` generic-specialization
+change, and both commands still succeeded.
 
 ## Remaining Work
 
@@ -708,13 +739,10 @@ Near-term:
   path-induction internalization and outer-`x` refinements;
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
   `PathIndSrc_catd`, `PathIndTgt_catd`, and `PathInd_funcd`; the current package
-  has checked fibres/components, canonical source and target transport helpers,
+  has checked fibres/components, a stable generic
+  `Sigma_catd_transport_func` projection along canonical Sigma transport arrows,
   and the functor-level coherence square `PathInd_transport_transf`, but not a
   cheap component-level coherence projection;
-- add a stable, generic `Sigma_catd_functord_catd` action projection along
-  `sigma_transport_arrow`; a fully expanded helper was probed and timed out, so
-  this should be designed as a smaller core projection rather than reusing a
-  large transfor-component expression directly;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.

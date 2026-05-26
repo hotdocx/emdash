@@ -1101,6 +1101,34 @@ rule @fapp0
       (@tapp0_fapp0 $K Cat_cat $R (@Const_catd $K Cat_cat) $k $FF)
       $r;
 
+// Stable action of a Sigma-induced Cat-valued family along the canonical
+// total transport arrow. It is intentionally a small projection head: a direct
+// definition through displayed-functor naturality is conversion-heavy.
+symbol Sigma_catd_transport_func [K : Cat] [R : τ (Catd K)]
+  (FF : τ (Functord R (@Const_catd K Cat_cat)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x)))
+  : τ (Functor
+      (Fibre_cat (@Sigma_catd_functord_catd K R FF) (Struct_sigma x r))
+      (Fibre_cat
+        (@Sigma_catd_functord_catd K R FF)
+        (Struct_sigma y
+          (@fapp0
+            (Fibre_cat R x)
+            (Fibre_cat R y)
+            (@catd_transport_func K R x y p)
+            r))));
+
+rule @fapp1_fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      (@Sigma_catd_functord_catd $K $R $FF)
+      _
+      _
+      (@sigma_transport_arrow $K $R $x $y $p $r)
+  ↪ @Sigma_catd_transport_func $K $R $FF $x $y $p $r;
+
 // -------------------------------------------------------------------------------------------------
 // 8. Mixed-variance family functor
 // -------------------------------------------------------------------------------------------------
@@ -1237,18 +1265,21 @@ symbol PathOutMotives_catd [Z : Cat]
      Catd_cat_func
      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
 
+// Stable path-out Pi package. Semantically this is the pullback action of
+// `Pi_int_funcd` along `Op_func (PathOut_cat_func Z)`, but keeping a stable
+// head avoids matching later Sigma-transport rules against that large
+// reducible expression.
 symbol PathOutPi_funcd [Z : Cat]
-  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat))
-≔ @fapp1_fapp0
-    (@Catd_cat (Op_cat Cat_cat))
-    (@Catd_cat Z)
-    (@Pullback_catd_func
-      Z
-      (Op_cat Cat_cat)
-      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z)))
-    Catd_cat_func
-    (@Const_catd (Op_cat Cat_cat) Cat_cat)
-    Pi_int_funcd;
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $x
+      (@PathOutPi_funcd $Z)
+  ↪ @Pi_func (@PathOut_cat $Z $x);
 
 symbol PathIndTgt_catd [Z : Cat]
   : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
@@ -1412,7 +1443,14 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndSrc_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @pathout_refl_eval_base_func Z x y p E;
+≔ @Sigma_catd_transport_func
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutReflEval_funcd Z)
+    x
+    y
+    p
+    E;
 
 constant symbol PathInd_funcd [Z : Cat]
   : τ (Functord
@@ -2129,7 +2167,37 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndTgt_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @pathout_pi_transport_func Z x y p E;
+≔ @Sigma_catd_transport_func
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutPi_funcd Z)
+    x
+    y
+    p
+    E;
+
+// Path-induction source/target transports are specializations of the generic
+// Sigma-family action. The discriminator is the stable displayed-functor head,
+// not the reducible total-base endpoints.
+rule @Sigma_catd_transport_func
+      $Z
+      _
+      (@PathOutReflEval_funcd $Z)
+      $x
+      $y
+      $p
+      $E
+  ↪ @pathout_refl_eval_base_func $Z $x $y $p $E;
+
+rule @Sigma_catd_transport_func
+      $Z
+      _
+      (@PathOutPi_funcd $Z)
+      $x
+      $y
+      $p
+      $E
+  ↪ @pathout_pi_transport_func $Z $x $y $p $E;
 
 // Canonical path-induction transport square over `(x,E) -> (y,p_*E)`.
 // The two functors below are the induction-then-target-transport and
@@ -2144,20 +2212,14 @@ symbol PathInd_transport_lhs_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndTgt_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @comp_cat_fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathIndTgt_transport_func Z x y p E)
-    (@tapp0_fapp0
-      (@Sigma_cat Z (@PathOutMotives_catd Z))
-      Cat_cat
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z)
-      (Struct_sigma x E)
-      (@PathInd_funcd Z));
+≔ @functord_transport_lhs_func
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (@PathInd_funcd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E);
 
 symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
@@ -2167,29 +2229,29 @@ symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndTgt_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @comp_cat_fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndSrc_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@tapp0_fapp0
-      (@Sigma_cat Z (@PathOutMotives_catd Z))
-      Cat_cat
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-      (@PathInd_funcd Z))
-    (@PathIndSrc_transport_func Z x y p E);
+≔ @functord_transport_rhs_func
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (@PathInd_funcd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E);
 
-constant symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
+symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
   : τ (Transf
       (@PathInd_transport_lhs_func Z x y p E)
-      (@PathInd_transport_rhs_func Z x y p E));
+      (@PathInd_transport_rhs_func Z x y p E))
+≔ @functord_transport_transf
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (@PathInd_funcd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E);
 
 // -------------------------------------------------------------------------------------------------
 // 16. Regression assertions for the mixed-variance skeleton
@@ -2632,6 +2694,17 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
     ≡ @pathout_refl_eval_base_func Z x y p E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndSrc_catd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E)
+    ≡ @PathIndSrc_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
   (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
   @fapp0
@@ -2668,6 +2741,17 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @PathIndTgt_transport_func Z x y p E
     ≡ @pathout_pi_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndTgt_catd Z)
+    (Struct_sigma x E)
+    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
+    (@pathout_motive_transport_arrow Z x y p E)
+    ≡ @PathIndTgt_transport_func Z x y p E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -3294,6 +3378,25 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
           (Fibre_cat E y)
           (@catd_transport_func K E x y p)
           u);
+
+assert [K : Cat] (R : τ (Catd K))
+  (FF : τ (Functord R (@Const_catd K Cat_cat)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x))) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat K R)
+    Cat_cat
+    (@Sigma_catd_functord_catd K R FF)
+    (Struct_sigma x r)
+    (Struct_sigma y
+      (@fapp0
+        (Fibre_cat R x)
+        (Fibre_cat R y)
+        (@catd_transport_func K R x y p)
+        r))
+    (@sigma_transport_arrow K R x y p r)
+    ≡ @Sigma_catd_transport_func K R FF x y p r;
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x : τ (Obj Z)) ⊢

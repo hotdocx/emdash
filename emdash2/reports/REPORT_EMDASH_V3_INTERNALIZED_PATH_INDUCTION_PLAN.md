@@ -1118,11 +1118,12 @@ base-arrow naturality story for `PathOutReflEval_funcd`, `PathIndSrc_catd`,
 The current reassessment is that the next missing internalized prerequisite is
 not another path-specific helper. The core now has `catd_transport_func`,
 `functord_transport_lhs_func`, `functord_transport_rhs_func`,
-`functord_transport_transf`, and `sigma_transport_arrow`. What is still missing
-is a stable generic action projection for `Sigma_catd_functord_catd` along
-`sigma_transport_arrow`. A direct fully expanded construction through
-`functord_transport_transf` was probed and timed out, so this needs a smaller
-stable head/projection.
+`functord_transport_transf`, `sigma_transport_arrow`, and the stable
+`Sigma_catd_transport_func` projection for `Sigma_catd_functord_catd` along
+canonical Sigma transport arrows. A direct fully expanded construction through
+`functord_transport_transf` was probed and timed out, so the implementation uses
+the smaller stable head. What is still missing is a cheap component-level
+projection for the resulting coherence transfors.
 
 ## Validation Strategy
 
@@ -1248,10 +1249,11 @@ Treat this as a real source-side problem, not as notation.
 
    Current local answer: the core now has `functord_transport_lhs_func`,
    `functord_transport_rhs_func`, and `functord_transport_transf` for arbitrary
-   displayed functors. `Pi_int_funcd` still uses the specialized
-   `section_pullback_transf` for its computational component. The remaining API
-   question is the stable projection that turns these generic naturality routes
-   into cheap Sigma-total family action.
+   displayed functors, plus `Sigma_catd_transport_func` for Sigma-total family
+   action along canonical transport arrows. `Pi_int_funcd` still uses the
+   specialized `section_pullback_transf` for its computational component. The
+   remaining API question is the component projection that exposes these
+   coherence transfors cheaply.
 
 2. Should `Catd_cat_func` be a definition or an injective stable head?
 
@@ -1292,11 +1294,12 @@ with a single maximally internal symbol.
 The first outer-`x` package now exists and computes at fibres/components, with
 the source side routed through `PathOutReflEval_funcd`. Checked source and
 target base-arrow maps now exist as `PathIndSrc_transport_func` and
-`PathIndTgt_transport_func` over canonical transported-motive arrows. The
-coherence square now has functor-level endpoints and a named transfor. The best
-next move is to keep that package as the interface and refine the generic
-Sigma-total action projection incrementally, without reintroducing broad or
-timeout-prone transfor rules.
+`PathIndTgt_transport_func` over canonical transported-motive arrows, now via
+`Sigma_catd_transport_func`. The coherence square now has functor-level
+endpoints and a named transfor obtained by specializing generic displayed
+functor naturality. The best next move is to keep that package as the interface
+and refine the component-level projection incrementally, without reintroducing
+broad or timeout-prone transfor rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer

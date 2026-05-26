@@ -35,7 +35,8 @@ Retired historical references:
   `catd_transport_func`, `functord_transport_func`,
   `functord_transport_lhs_func`, `functord_transport_rhs_func`,
   `functord_transport_transf`, and the canonical total arrow
-  `sigma_transport_arrow`;
+  `sigma_transport_arrow`, plus the stable Sigma-family action projection
+  `Sigma_catd_transport_func`;
 - internalized `Catd_cat_func`, `Pullback_catd_func`, and `Pi_int_funcd`
   infrastructure, including the checked arrow-action fold
   `Catd_cat_func[F] == Pullback_catd_func F`;
@@ -52,9 +53,10 @@ Retired historical references:
 - first outer-`x` path-induction packaging:
   `PathOutPi_funcd`, `PathOutReflEval_funcd`, `PathIndSrc_catd`,
   `PathIndTgt_catd`, and `PathInd_funcd`, with checked fibre/component rules over
-  `Sigma_cat Z (PathOutMotives_catd Z)`, checked source/target transport
-  helpers over canonical transported motives, and a named path-induction
-  transport square;
+  `Sigma_cat Z (PathOutMotives_catd Z)`, checked source/target transports as
+  specializations of `Sigma_catd_transport_func` over canonical transported
+  motives, and a named path-induction transport square specialized from generic
+  displayed-functor naturality;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a
