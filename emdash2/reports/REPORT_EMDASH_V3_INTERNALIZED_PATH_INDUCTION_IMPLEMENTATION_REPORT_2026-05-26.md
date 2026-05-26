@@ -316,9 +316,11 @@ CompMotive_catd(Z,x)[(y,p)] == Functord_cat (Rep_Z(y)) (Rep_Z(x))
 ```
 
 The first implementation tried to keep `CompTarget_catd` as a readable
-`hom_con` alias in `Catd_cat Z`. The later root-cause analysis below changed
-it into a stable computational family head, while preserving the same fibre
-meaning.
+`hom_con` alias in `Catd_cat Z`, then briefly explored a primitive stable
+family head. The later root-cause analysis below restored the semantic
+`hom_con` alias and removed the CompTarget-specific shortcut rules; the
+blockers were missing/narrow projection rules and non-canonical explicit
+source/target slots, not the semantic architecture itself.
 
 Added:
 
@@ -763,18 +765,128 @@ The same validation was rerun after the `Sigma_catd_transport_func`
 rearchitecture and the `PathInd_transport_transf` generic-specialization
 change, and both commands still succeeded.
 
+## Latest Assessment: 2026-05-27
+
+The current implementation is no longer only in the fixed-`x` phase. It has a
+checked internalized-`x` layer over:
+
+```text
+Sigma_cat Z (PathOutMotives_catd Z)
+```
+
+namely `PathIndSrc_catd`, `PathIndTgt_catd`, `PathInd_funcd`, the canonical
+source and target transport functors, and the functor-level coherence package
+`PathInd_transport_transf`.
+
+The fixed-`x` layer is still present and important:
+
+```text
+PathInd_src_catd Z x
+PathInd_tgt_catd Z x
+PathInd_func Z x
+```
+
+It is not obsolete. It is the component/projection view of the internalized
+package at a fixed `(x,E)`, and it remains the benchmark for expected
+computation of `path_ind_sec`.
+
+The `Pi_int_funcd` route is also genuinely internalized. The corrected design
+does not replace it with an object-level-only helper. The semantic pullback:
+
+```text
+Pullback_catd_func(G)[Pi_int_funcd]
+```
+
+now folds to:
+
+```text
+Pi_pullback_funcd(G)
+```
+
+with projection:
+
+```text
+Pi_pullback_funcd(G)[x] == Pi_func(G[x])
+```
+
+This is the right stable head for `PathOutPi_funcd`, because it preserves the
+global internal Pi package while avoiding brittle matches against large
+reducible pullback expressions.
+
+### Coherence And Feasibility
+
+The plan remains coherent, but the next implementation step should stay at the
+generic infrastructure level before adding more path-specific declarations.
+The immediate missing piece is a cheap component projection for the existing
+functor-level coherence:
+
+```text
+functord_transport_transf(FF,p)
+  : D[p] o FF[x] => FF[y] o E[p]
+```
+
+and then its path-induction specialization:
+
+```text
+PathInd_transport_transf(Z,x,y,p,E)
+```
+
+A direct fully expanded `PathInd_transport_app` was already probed and made
+conversion search hit the bounded timeout. That does not invalidate the design;
+it means the component projection should be introduced through a small stable
+head, with inferred endpoint categories implicit on rewrite LHSs.
+
+Recommended next implementation order:
+
+1. Add or probe a generic component/app projection for
+   `functord_transport_transf`, keeping source/target functor slots implicit
+   where they are inferable.
+2. Specialize that projection to `PathInd_transport_transf` and assert the
+   object-level route equality only after the generic projection checks.
+3. Only then consider additional naturality for arbitrary arrows in
+   `Sigma_cat Z (PathOutMotives_catd Z)`.
+4. Keep `pathout_refl_arrow` axiomatized for now. Constructing it is a separate
+   Sigma-hom/dependent-hom normal-form task and should not block the
+   internalized-`x` packaging.
+5. Treat full transitivity as a benchmark and later theorem. The current
+   `path_comp_sec` computation is a valuable fixed-`x` regression, but closed
+   internal transitivity still needs context/product/projection/exchange
+   infrastructure.
+
+Feasibility assessment:
+
+- Generic component projection for `functord_transport_transf`: medium to high,
+  if implemented as a stable projection head and probed incrementally.
+- Path-specific component projection for `PathInd_transport_transf`: medium,
+  once the generic projection exists.
+- Arbitrary total-base naturality over
+  `Sigma_cat Z (PathOutMotives_catd Z)`: medium, but likely needs more Sigma
+  hom/action normal forms.
+- Constructing `pathout_refl_arrow`: medium to low with current infrastructure;
+  it belongs after more Sigma hom/dependent-hom work.
+- Full closed transitivity theorem: later-stage work, not a near-term
+  consequence of the current package alone.
+
+The working design principle remains: prefer semantic internal packages first,
+then add narrow stable heads only when a focused probe shows conversion or
+matching needs them. Avoid object-only shortcuts for declarations that are meant
+to live over the moving base.
+
 ## Remaining Work
 
 Near-term:
 
 - use the fixed-`x` composition result as the benchmark for future
   path-induction internalization and outer-`x` refinements;
+- add the generic component/app projection for `functord_transport_transf`,
+  then specialize it to `PathInd_transport_transf`;
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
-  `PathIndSrc_catd`, `PathIndTgt_catd`, and `PathInd_funcd`; the current package
-  has checked fibres/components, a stable generic
-  `Sigma_catd_transport_func` projection along canonical Sigma transport arrows,
-  and the functor-level coherence square `PathInd_transport_transf`, but not a
-  cheap component-level coherence projection;
+  `PathIndSrc_catd`, `PathIndTgt_catd`, and `PathInd_funcd` only through the
+  generic transport/coherence infrastructure where possible; the current
+  package has checked fibres/components, a stable generic
+  `Sigma_catd_transport_func` projection along canonical Sigma transport
+  arrows, and the functor-level coherence square `PathInd_transport_transf`,
+  but not a cheap component-level coherence projection;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.
