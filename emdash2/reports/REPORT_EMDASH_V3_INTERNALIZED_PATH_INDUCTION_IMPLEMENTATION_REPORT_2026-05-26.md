@@ -435,6 +435,37 @@ PathOutReflEval_funcd(Z)[x] == pathout_refl_eval_func Z x
 pathout_refl_eval_func(Z,x)[E] == E[(x,id_x)]
 ```
 
+Follow-up implementation added two narrower computational bridges toward the
+moving-`x` source action:
+
+```text
+(F o G)[f] == F[G[f]]
+```
+
+for ordinary functor composition, and:
+
+```lambdapi
+symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat E (@pathout_refl_obj Z x))
+      (Fibre_cat E (@pathout_obj Z x y p)));
+```
+
+with:
+
+```text
+PathOutMotives_catd(Z)[p](E)[(y,id_y)] == E[(y,p)]
+pathout_refl_eval_base_func(Z,x,y,p,E) == E[pathout_refl_arrow Z x y p]
+pathout_refl_eval_base_func(Z,x,y,p,E)(u)
+  == fib_cov_tapp0_func(E,(x,id_x),(y,p),u)(pathout_refl_arrow Z x y p)
+```
+
+This is the checked source-side map required by moving reflexive evaluation.
+It is not yet packaged as the full naturality/coherence transfor for
+`PathOutReflEval_funcd`.
+
 Added the matching source family and outer path-induction displayed functor:
 
 ```lambdapi
@@ -456,7 +487,8 @@ PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
 `PathIndSrc_catd` is now routed through the same
 `Sigma_catd_functord_catd` total-family helper as `PathIndTgt_catd`, using
 `PathOutReflEval_funcd`. This gives the source side a displayed-functor
-interface while still keeping the hard base-arrow action abstract.
+interface. The concrete map along a base arrow is now represented by
+`pathout_refl_eval_base_func`, while the full coherence package remains open.
 
 The rule LHSs deliberately keep the total-base source category implicit. A probe
 with explicit `Sigma_cat Z (PathOutMotives_catd Z)` did not fire after the
@@ -487,8 +519,9 @@ Near-term:
   path-induction internalization and outer-`x` refinements;
 - refine the base-arrow action/coherence of `PathOutReflEval_funcd`,
   `PathIndSrc_catd`, and `PathInd_funcd`; the current package has checked
-  fibres/components and a source-side displayed-functor interface, but keeps the
-  hard moving-refl functoriality abstract;
+  fibres/components, a source-side displayed-functor interface, and a checked
+  base-arrow map `pathout_refl_eval_base_func`, but not the full
+  moving-refl coherence transfor;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.

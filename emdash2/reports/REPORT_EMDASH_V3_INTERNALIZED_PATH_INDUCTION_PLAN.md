@@ -1058,6 +1058,8 @@ with checked fibre/component computation:
 ```text
 PathOutReflEval_funcd Z [x] == pathout_refl_eval_func Z x
 pathout_refl_eval_func Z x [E] == E[(x,id_x)]
+PathOutMotives_catd Z [p](E)[(y,id_y)] == E[(y,p)]
+pathout_refl_eval_base_func Z x y p E == E[pathout_refl_arrow Z x y p]
 PathIndSrc_catd Z [(x,E)] == E[(x,id_x)]
 PathIndTgt_catd Z [(x,E)] == Pi_cat E
 PathInd_funcd Z [(x,E)](u) == path_ind_sec Z x E u
@@ -1072,8 +1074,10 @@ PathOutPi_funcd Z [x] == Pi_func(PathOut_cat Z x)
 The known hard part remains the source-side base-arrow action: evaluating a
 motive at the moving object `(x,id_x)` in the varying category `PathOut_Z(x)`.
 The current package records this through `PathOutReflEval_funcd` and the total
-source family `PathIndSrc_catd`, but does not yet construct the
-moving-refl/coherence story.
+source family `PathIndSrc_catd`. The checked map
+`pathout_refl_eval_base_func` now sends `E[(x,id_x)]` to `E[(y,p)]` by applying
+`E` to `pathout_refl_arrow Z x y p`, but the full moving-refl/coherence story
+is not yet packaged.
 
 ### Next Phase: Refine Moving-Source Functoriality
 
@@ -1086,9 +1090,10 @@ the base-arrow action of:
 ```
 
 over arrows in `Sigma_cat Z (PathOutMotives_catd Z)`. The source-side object
-and component package is now explicit; the remaining problem is the
-arrow/coherence computation, likely depending on a more computational
-construction of `pathout_refl_arrow` from Sigma hom/dependent-hom normal forms.
+and component package is now explicit, and the base-arrow map exists as
+`pathout_refl_eval_base_func`; the remaining problem is packaging this map as
+the coherent action needed by `PathOutReflEval_funcd`, `PathIndSrc_catd`, and
+`PathInd_funcd`.
 
 ## Validation Strategy
 
@@ -1117,6 +1122,8 @@ PathOutMotives_catd(Z)[x] == Catd_cat(PathOut_cat Z x)
 PathOutPi_funcd(Z)[x] == Pi_func(PathOut_cat Z x)
 PathOutReflEval_funcd(Z)[x] == pathout_refl_eval_func Z x
 pathout_refl_eval_func(Z,x)[E] == Fibre_cat E (pathout_refl_obj Z x)
+PathOutMotives_catd(Z)[p](E)[pathout_refl_obj Z y] == Fibre_cat E (pathout_obj Z x y p)
+pathout_refl_eval_base_func(Z,x,y,p,E) == E[pathout_refl_arrow Z x y p]
 PathIndTgt_catd(Z)[(x,E)] == Pi_cat E
 PathIndSrc_catd(Z)[(x,E)] == Fibre_cat E (pathout_refl_obj Z x)
 PathInd_funcd(Z)[(x,E)](u) == path_ind_sec Z x E u
@@ -1238,11 +1245,11 @@ The next implementation should not try to replace `path_ind_sec` immediately
 with a single maximally internal symbol.
 
 The first outer-`x` package now exists and computes at fibres/components, with
-the source side routed through `PathOutReflEval_funcd`. The best next move is to
-keep that package as the interface and refine the source-side arrow/coherence
-computation incrementally. The main discovery problem is still a reliable
-computational account of evaluation at the moving object `(x,id_x)` in the
-varying category `PathOut_Z(x)`.
+the source side routed through `PathOutReflEval_funcd`. A checked source-side
+base-arrow map now exists as `pathout_refl_eval_base_func`. The best next move
+is to keep that package as the interface and refine the source-side
+arrow/coherence computation incrementally, packaging the checked base-arrow map
+without reintroducing broad or timeout-prone transfor rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer
