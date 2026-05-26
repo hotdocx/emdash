@@ -135,6 +135,64 @@ PathOutMotives_catd(Z)[x] == Catd_cat(PathOut_cat Z x)
 
 This is the first prerequisite for eventual outer-`x` internalization.
 
+### Generic Base-Arrow Transport Reassessment
+
+The path-induction transport square should not remain the only place where
+base-arrow functoriality is visible. The implementation now includes a generic
+core layer:
+
+```lambdapi
+symbol catd_transport_func [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat E y));
+
+symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat D y));
+
+symbol functord_transport_lhs_func ...
+symbol functord_transport_rhs_func ...
+constant symbol functord_transport_transf ...
+```
+
+with checked object-action reductions for the two naturality routes:
+
+```text
+functord_transport_lhs_func(FF,p)(u)
+  == catd_transport_func(D,p)(Fibre_func(FF,x)(u))
+
+functord_transport_rhs_func(FF,p)(u)
+  == Fibre_func(FF,y)(catd_transport_func(E,p)(u))
+```
+
+This is the uniform prerequisite for path-specific coherence squares.
+
+The implementation also added the canonical total Sigma arrow:
+
+```lambdapi
+constant symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Sigma_cat K E)
+      (Struct_sigma x u)
+      (Struct_sigma y (catd_transport_func(E,p)(u))));
+```
+
+`pathout_motive_transport_arrow` is no longer a path-specific primitive; it is
+defined as the specialization of `sigma_transport_arrow` to
+`PathOutMotives_catd Z`.
+
+A more ambitious generic action helper for `Sigma_catd_functord_catd` along
+`sigma_transport_arrow` was probed, but the fully expanded transfor-component
+definition hit the bounded-check timeout. That helper was not added. The next
+foundational prerequisite is a smaller stable projection for that Sigma-family
+action.
+
 ### Packaged Refl Arrow Section
 
 Added:
@@ -475,7 +533,7 @@ symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
   (E : τ (Catd (@PathOut_cat Z x)))
   : τ (Catd (@PathOut_cat Z y));
 
-constant symbol pathout_motive_transport_arrow [Z : Cat]
+symbol pathout_motive_transport_arrow [Z : Cat]
   [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -498,6 +556,8 @@ with checked computation:
 
 ```text
 pathout_motive_transport_obj(Z,x,y,p,E) == PathOutMotives_catd(Z)[p](E)
+pathout_motive_transport_arrow(Z,x,y,p,E)
+  == sigma_transport_arrow(PathOutMotives_catd Z,p,E)
 PathIndSrc_catd(Z)[(y,pathout_motive_transport_obj Z x y p E)] == E[(y,p)]
 PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
 PathIndSrc_transport_func(Z,x,y,p,E)(u)
@@ -651,6 +711,10 @@ Near-term:
   has checked fibres/components, canonical source and target transport helpers,
   and the functor-level coherence square `PathInd_transport_transf`, but not a
   cheap component-level coherence projection;
+- add a stable, generic `Sigma_catd_functord_catd` action projection along
+  `sigma_transport_arrow`; a fully expanded helper was probed and timed out, so
+  this should be designed as a smaller core projection rather than reusing a
+  large transfor-component expression directly;
 - avoid broad underspecified `tapp0_fapp0` rules, since earlier probes timed
   out before the root cause was narrowed to missing projection rules and
   non-canonical explicit source/target slots.

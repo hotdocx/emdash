@@ -1061,6 +1061,8 @@ pathout_refl_eval_func Z x [E] == E[(x,id_x)]
 PathOutMotives_catd Z [p](E)[(y,id_y)] == E[(y,p)]
 pathout_refl_eval_base_func Z x y p E == E[pathout_refl_arrow Z x y p]
 pathout_motive_transport_obj Z x y p E == PathOutMotives_catd Z [p](E)
+pathout_motive_transport_arrow Z x y p E
+  == sigma_transport_arrow (PathOutMotives_catd Z) p E
 PathOut_transport_func Z x y p [pathout_refl_obj Z y] == pathout_obj Z x y p
 PathIndSrc_transport_func Z x y p E == pathout_refl_eval_base_func Z x y p E
 PathIndTgt_transport_func Z x y p E == section_pullback_func(PathOut_transport_func Z x y p,E)
@@ -1113,6 +1115,15 @@ to use as a rewrite/proof surface, and eventually connecting it to the generic
 base-arrow naturality story for `PathOutReflEval_funcd`, `PathIndSrc_catd`,
 `PathIndTgt_catd`, and `PathInd_funcd`.
 
+The current reassessment is that the next missing internalized prerequisite is
+not another path-specific helper. The core now has `catd_transport_func`,
+`functord_transport_lhs_func`, `functord_transport_rhs_func`,
+`functord_transport_transf`, and `sigma_transport_arrow`. What is still missing
+is a stable generic action projection for `Sigma_catd_functord_catd` along
+`sigma_transport_arrow`. A direct fully expanded construction through
+`functord_transport_transf` was probed and timed out, so this needs a smaller
+stable head/projection.
+
 ## Validation Strategy
 
 Each phase should be checked with:
@@ -1144,6 +1155,7 @@ PathOutMotives_catd(Z)[p](E)[pathout_refl_obj Z y] == Fibre_cat E (pathout_obj Z
 pathout_refl_eval_base_func(Z,x,y,p,E) == E[pathout_refl_arrow Z x y p]
 pathout_motive_transport_obj(Z,x,y,p,E) == PathOutMotives_catd(Z)[p](E)
 pathout_motive_transport_obj(Z,x,y,p,E) == Pullback_catd(E, PathOut_transport_func Z x y p)
+pathout_motive_transport_arrow(Z,x,y,p,E) == sigma_transport_arrow(PathOutMotives_catd Z,p,E)
 PathOut_transport_func(Z,x,y,p)(pathout_refl_obj Z y) == pathout_obj Z x y p
 PathIndSrc_transport_func(Z,x,y,p,E) == pathout_refl_eval_base_func Z x y p E
 PathIndTgt_transport_func(Z,x,y,p,E) == pathout_pi_transport_func Z x y p E
@@ -1234,9 +1246,12 @@ Treat this as a real source-side problem, not as notation.
 1. What is the cleanest generic projection for base-arrow naturality of a
    `Functord` object?
 
-   Current local answer: `Pi_int_funcd` uses the specialized
-   `section_pullback_transf`. A generic projection for arbitrary base-arrow
-   naturality remains a later API question.
+   Current local answer: the core now has `functord_transport_lhs_func`,
+   `functord_transport_rhs_func`, and `functord_transport_transf` for arbitrary
+   displayed functors. `Pi_int_funcd` still uses the specialized
+   `section_pullback_transf` for its computational component. The remaining API
+   question is the stable projection that turns these generic naturality routes
+   into cheap Sigma-total family action.
 
 2. Should `Catd_cat_func` be a definition or an injective stable head?
 
@@ -1279,9 +1294,9 @@ the source side routed through `PathOutReflEval_funcd`. Checked source and
 target base-arrow maps now exist as `PathIndSrc_transport_func` and
 `PathIndTgt_transport_func` over canonical transported-motive arrows. The
 coherence square now has functor-level endpoints and a named transfor. The best
-next move is to keep that package as the interface and refine the component
-projection incrementally, without reintroducing broad or timeout-prone transfor
-rules.
+next move is to keep that package as the interface and refine the generic
+Sigma-total action projection incrementally, without reintroducing broad or
+timeout-prone transfor rules.
 
 This keeps the architecture aligned with the current successful Pi-alias and
 Sigma-projection-pullback design, while making the path-induction layer

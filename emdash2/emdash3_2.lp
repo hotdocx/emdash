@@ -171,6 +171,9 @@ flag "print_meta_args" on;
     - `Fibre_func` / `Fibre_transf` / `Fibre_transf_app`: derived fibre-level
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
+    - `catd_transport_func` / `functord_transport_*`: generic base-arrow
+      transport and naturality-route helpers for displayed functors. These are
+      the uniform core counterparts of later path-specific transport squares.
     - Pointwise displayed-functor calculus: `Op_funcd` projects through
       `tapp0_fapp0` to ordinary fibre opposites, and `comp_catd_fapp0`
       projects pointwise to ordinary fibre composition. The semantic E/C
@@ -817,6 +820,13 @@ symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
   : τ (Catd A)
 ≔ @comp_cat_fapp0 A B Cat_cat E F;
 
+// Generic base-arrow transport for displayed Cat-valued families.
+symbol catd_transport_func [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat E y))
+≔ @fapp1_fapp0 K Cat_cat E x y p;
+
 // Functorial package for pullback/reindexing of directed families along a base
 // functor.  The general `Pullback_catd` remains a composition definition; this
 // package is the stable functor-level action needed by internalized
@@ -1060,6 +1070,20 @@ rule @comp_cat_fapp0 _ _ _
       (@sigma_map_func $K $E $D $η)
   ↪ @Sigma_proj1_func $K $E;
 
+constant symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (@Sigma_cat K E)
+      (Struct_sigma x u)
+      (Struct_sigma y
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat E y)
+          (@catd_transport_func K E x y p)
+          u)));
+
 // Cat-valued family over a total category induced by a displayed functor into
 // the constant category universe.
 symbol Sigma_catd_functord_catd [K : Cat] [R : τ (Catd K)]
@@ -1301,14 +1325,21 @@ symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
       p)
     E;
 
-constant symbol pathout_motive_transport_arrow [Z : Cat]
+symbol pathout_motive_transport_arrow [Z : Cat]
   [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
   : τ (Hom
       (@Sigma_cat Z (@PathOutMotives_catd Z))
       (Struct_sigma x E)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)));
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+≔ @sigma_transport_arrow
+    Z
+    (@PathOutMotives_catd Z)
+    x
+    y
+    p
+    E;
 
 constant symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
   : τ (Obj (Pi_cat
@@ -1931,6 +1962,47 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
      u
      (@Fibre_transf K E D FF GG ϵ z);
 
+// Heterogeneous action of a displayed functor over a base arrow. This is the
+// Cat-valued specialization of the ordinary transfor hom-action.
+symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat D y))
+≔ @tapp1_fapp0 K Cat_cat E D x y FF p;
+
+symbol functord_transport_lhs_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat D y))
+≔ @comp_cat_fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D x)
+    (Fibre_cat D y)
+    (@catd_transport_func K D x y p)
+    (@Fibre_func K E D FF x);
+
+symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor (Fibre_cat E x) (Fibre_cat D y))
+≔ @comp_cat_fapp0
+    (Fibre_cat E x)
+    (Fibre_cat E y)
+    (Fibre_cat D y)
+    (@Fibre_func K E D FF y)
+    (@catd_transport_func K E x y p);
+
+constant symbol functord_transport_transf [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Transf
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
@@ -2476,6 +2548,17 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
         (@PathOut_cat Z x)
         E
         (@PathOut_transport_func Z x y p);
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @pathout_motive_transport_arrow Z x y p E
+    ≡ @sigma_transport_arrow
+        Z
+        (@PathOutMotives_catd Z)
+        x
+        y
+        p
+        E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   @fapp0
@@ -3161,6 +3244,56 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
         (@Fibre_func K E D GG z)
         u
         (@Fibre_transf K E D FF GG ϵ z);
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @catd_transport_func K E x y p
+    ≡ @fapp1_fapp0 K Cat_cat E x y p;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_func K E D FF x y p
+    ≡ @tapp1_fapp0 K Cat_cat E D x y FF p;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    u
+    ≡ @fapp0
+        (Fibre_cat D x)
+        (Fibre_cat D y)
+        (@catd_transport_func K D x y p)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat D x)
+          (@Fibre_func K E D FF x)
+          u);
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u
+    ≡ @fapp0
+        (Fibre_cat E y)
+        (Fibre_cat D y)
+        (@Fibre_func K E D FF y)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat E y)
+          (@catd_transport_func K E x y p)
+          u);
 
 assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E))
   (x : τ (Obj Z)) ⊢

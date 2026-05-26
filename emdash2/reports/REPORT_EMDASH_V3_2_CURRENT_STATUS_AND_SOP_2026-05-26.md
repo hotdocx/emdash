@@ -31,6 +31,11 @@ Retired historical references:
   `Functor_cat K Cat_cat`;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
+- generic base-arrow transport helpers:
+  `catd_transport_func`, `functord_transport_func`,
+  `functord_transport_lhs_func`, `functord_transport_rhs_func`,
+  `functord_transport_transf`, and the canonical total arrow
+  `sigma_transport_arrow`;
 - internalized `Catd_cat_func`, `Pullback_catd_func`, and `Pi_int_funcd`
   infrastructure, including the checked arrow-action fold
   `Catd_cat_func[F] == Pullback_catd_func F`;
