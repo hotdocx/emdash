@@ -566,6 +566,173 @@ This matches the `_int*` design pattern:
 - keep endpoint/source/target family slots implicit in rules where possible;
 - use assertions to document mathematical component equations.
 
+## Ported SOP And Design Hygiene
+
+This section ports forward the implementation discipline from the older
+path-induction plan and implementation report. Future work should treat these
+rules as part of the replacement plan, not as historical notes.
+
+### Rewrite LHS Hygiene
+
+Rewrite rules should match the smallest stable discriminator that actually
+matters. In particular:
+
+- keep inferred source/target categories, endpoint families, and similar
+  reconstructible arguments implicit on rule LHSs unless they are the real
+  discriminator;
+- avoid explicit compound or reducible expressions in implicit-argument
+  positions on rule LHSs;
+- do not match against readability aliases when the canonical unfolded head is
+  the one Lambdapi will see after reduction;
+- probe nontrivial rules in a temporary copy with a focused assertion before
+  committing them to `emdash3_2.lp`;
+- prefer narrow rules over broad `tapp0_fapp0`, `tdapp0_fapp0`,
+  `Pullback_catd`, or arbitrary transfor projection rules.
+
+The failure mode to avoid is a rule that is mathematically right but
+operationally brittle because its LHS contains a large normalized pullback,
+Sigma, or hom expression in a slot that Lambdapi should have inferred.
+
+### Canonical Endpoint Spelling
+
+When an assertion or helper type must spell source/target categories
+explicitly, prefer canonical endpoint forms over reducible fibre wrappers.
+
+Examples:
+
+```text
+Hom_cat Z x y
+Functord_cat Z (Rep_catd Z y) (Rep_catd Z x)
+```
+
+are usually better explicit endpoints than:
+
+```text
+Fibre_cat (CompTarget_catd Z x) y
+```
+
+unless the assertion is specifically testing that fibre reduction. This was the
+root cause of several false blockers in the fixed-`x` transitivity benchmark.
+
+### Stable Heads Policy
+
+The default path is:
+
+```text
+semantic definition first, stable head only after a focused probe justifies it.
+```
+
+A stable head is justified when it is a real projection, discrimination, or
+performance boundary. It is not justified merely because a formula is easier to
+read under a shorter name.
+
+Many good stable heads are projections from a more internalized construction,
+for example:
+
+```text
+Pi_pullback_funcd(G)[x] = Pi_func(G[x])
+Sigma_catd_transport_func(...) = Sigma_catd_functord_catd(...)[sigma_transport_arrow(...)]
+PathInd_transfd(Z)[x] = PathInd_func(Z,x)
+```
+
+This pattern preserves the internal/synthetic object while exposing the
+component that rewrite search needs. Helper aliases should route through the
+semantic constructor rather than duplicating semantic bodies.
+
+### Object-Level vs Arrow-Action-Level
+
+Object-level formulas are not enough for internalized infrastructure. A package
+such as:
+
+```text
+PathOutMotives_Z[x] = Catd(PathOut_Z(x))
+```
+
+must also have the correct action on arrows:
+
+```text
+p : x -> y
+E : Catd(PathOut_Z(y))
+--------------------------------
+p^*E : Catd(PathOut_Z(x))
+```
+
+and its projections must compute in the contexts where later packages use it.
+The same warning applies to `PathOutReflEval_funcd`, `PathOutPi_funcd`,
+`PathInd_transfd`, and any future uncurrying construction.
+
+If an implementation step starts requiring manually written naturality squares,
+check whether the missing object should instead be a displayed functor or
+displayed transformation whose action/naturality is synthetic. Manual squares
+may be useful as projected lemmas, but they should not become the primary
+architecture when an internal `_int*` package is the intended concept.
+
+### Capped Action vs Full Hom/Omega Action
+
+The file often needs both:
+
+```text
+fapp1_fapp0 F p
+```
+
+and:
+
+```text
+fapp1_func F a b
+```
+
+The first is the capped action of a functor on one displayed arrow/object-level
+component. The second is the full hom-action functor. They are related, but
+neither should be treated as a complete substitute for the other.
+
+The transitivity benchmark exposed the typical issue: `Op_func` had a full
+hom-action rule, but the semantic `hom_con` route needed the capped rule:
+
+```text
+fapp1_fapp0(Op_func F, p) = fapp1_fapp0(F, p) with endpoints reversed.
+```
+
+Adding that narrow capped rule was correct. Replacing the full synthetic action
+with capped object-only reasoning would not have been correct. Future work
+should check which level is needed before adding a helper or rule.
+
+### Assertion Placement And Documentation
+
+Assertions/checks with mathematical content should live near the symbols they
+explain, not in a generic diagnostic block. Examples include component laws
+such as:
+
+```text
+PathInd_transfd(Z)[x] = PathInd_func(Z,x)
+PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u)
+path_comp_sec(Z,x)[(y,p)][z](q) = q o p
+```
+
+Diagnostic checks that only probe Lambdapi normalization or a temporary
+regression can remain in a dedicated debug/diagnostic section, but theorem-like
+assertions should be documented as formulas and kept with their motivation.
+
+When feasible, each nontrivial symbol and theorem-style assertion should have a
+nearby header comment giving the mathematical notation and/or faithful surface
+syntax from
+`reports/REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md`. The Lambdapi term
+may still use explicit canonical endpoints when that improves checking
+stability.
+
+### Validation Workflow
+
+For implementation turns touching `emdash3_2.lp`, validate incrementally:
+
+```bash
+timeout 60s lambdapi check -w emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+git diff --check
+```
+
+If a bounded check times out after a rewrite/projection change, treat it as a
+rewrite/unification regression until a focused probe says otherwise. Inspect
+the rule LHS before redesigning the mathematical architecture.
+
 ## Proposed New Symbols
 
 ### `PathInd_transfd`
@@ -927,4 +1094,3 @@ This is the synthetic telescope theorem:
 
 The Sigma-total theorem should become a derived uncurrying, not the primitive
 source of truth.
-
