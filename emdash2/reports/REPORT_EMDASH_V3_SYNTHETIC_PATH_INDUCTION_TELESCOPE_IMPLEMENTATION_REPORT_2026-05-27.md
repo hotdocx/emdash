@@ -399,6 +399,145 @@ Design notes:
 - The old internalized-x transport theorem heads `functord_transport_transf`
   and `PathInd_transport_transf` remain deleted.
 
+## 2026-05-28 Planning Note: Sigma Level, Product, And Uncurrying
+
+### Capped Sigma Status
+
+The current transitivity/composition theorem is a theorem about 1-arrows:
+
+```text
+PathInd_transfd(...)[...][...][...][(y,p)][z](q) -> q o p.
+```
+
+This uses the capped ordinary arrow action `fapp1_fapp0`, not the full
+hom-functor action `fapp1_func` as an exposed omega-level API.
+
+The recent Sigma infrastructure should be read the same way for now:
+
+- `sigma_map_func` is a functor object.
+- Its object action computes on `(k,u)`.
+- Its capped arrow action computes on Sigma-hom pairs via `fapp1_fapp0`.
+- Sigma-arrow composition computes via `comp_fapp0` in `Sigma_cat`.
+
+What is not yet exposed:
+
+```text
+fapp1_func(sigma_map_func eta)
+```
+
+as a fully named/computational functor between Sigma hom-categories, with all
+higher action data. The current rules are deliberately enough for 1-arrow/path
+transitivity, Sigma transport, and rho coherence. They are not yet the final
+full omega-functorial Sigma API.
+
+### Product Before Further Dependent Uncurrying
+
+`Product_cat` is not currently reintroduced in v3.2. The foundations report
+already records the intended relation:
+
+```text
+Sigma_cat(Const_catd K A)  ~  Product_cat K A.
+```
+
+Before expanding generic `Sigma_transfd_funcd` naturality, it is likely useful
+to stage a smaller non-dependent product/curry-uncurry pass:
+
+```text
+Product_cat A B
+Cat(A x B, C)  ~  Cat(A, Functor_cat B C).
+```
+
+Recommended approach:
+
+1. Do not port the full emdash2 `Product_cat` block blindly.
+2. Probe a minimal v3.2 product API in a temporary file:
+   objects as pairs, homs as pairs, identity, composition, projections, and
+   pairing.
+3. Add ordinary curry/uncurry heads only after the product normal forms are
+   stable.
+4. Treat the dependent Sigma uncurrying layer as the dependent analogue of
+   this ordinary product/curry story.
+
+This staging should make later `Sigma_transfd_funcd` design less ad hoc.
+
+### `Sigma_transfd_funcd` As Dependent Comprehension Action
+
+`Sigma_catd_functord_catd` and `Sigma_transfd_funcd` are best understood as
+dependent context-extension/curry-uncurry infrastructure.
+
+For:
+
+```text
+FF : Functord R (Const_catd K Cat_cat)
+```
+
+the object:
+
+```text
+Sigma_catd_functord_catd(FF)
+```
+
+is the family over the context extension `Sigma K R`:
+
+```text
+(k,r) |-> FF[k][r].
+```
+
+For:
+
+```text
+eta : Transfd S T
+```
+
+the object:
+
+```text
+Sigma_transfd_funcd(eta)
+```
+
+is the uncurried/comprehension action:
+
+```text
+(k,r) |-> eta[k][r].
+```
+
+This is Grothendieck-like, but it is not literally the old emdash2
+`Fibration_cov_fapp1_func`.
+
+The emdash2 head had shape:
+
+```text
+Fibration_cov_fapp1_func :
+  Transf(E,D) -> Functord(Fibration_cov_catd E, Fibration_cov_catd D).
+```
+
+That is the morphism-action of the Grothendieck construction on an ordinary
+Cat-valued natural transformation. In contrast, `Sigma_transfd_funcd` acts on a
+displayed transfor over a dependent telescope and produces a displayed functor
+between families over the Sigma-total context. A good working description is:
+
+```text
+dependent Sigma-total/comprehension uncurrying
+```
+
+or, with care:
+
+```text
+dependent Grothendieck-style morphism action.
+```
+
+### Refined Next Implementation Order
+
+1. Add comments/report text clarifying that the current Sigma computations are
+   capped/1-arrow computations, not the final full `fapp1_func` API.
+2. Probe a minimal `Product_cat` and ordinary curry/uncurry package.
+3. Relate or at least document `Product_cat K A` against
+   `Sigma_cat(Const_catd K A)`.
+4. Return to `Sigma_transfd_funcd` and try to derive more of its action and
+   naturality from the smaller ordinary and dependent infrastructure.
+5. Keep global coherent motive families deferred until the generic uncurrying
+   and comprehension action layer is stable.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
