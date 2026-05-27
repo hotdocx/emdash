@@ -368,6 +368,12 @@ asks for behavior along arbitrary total arrows:
 (p, alpha) : (x,E) -> (y,E').
 ```
 
+The implementation now follows this diagnosis: `functord_transport_transf` and
+the derived `PathInd_transport_transf` transport-square layer have been removed
+from the active file. Source and target transport for path induction are direct
+definitions, while the primary theorem remains the telescope-shaped
+`PathInd_transfd`.
+
 The intended telescope theorem first internalizes `x` in the source and target
 functors:
 
@@ -627,10 +633,13 @@ performance boundary. It is not justified merely because a formula is easier to
 read under a shorter name.
 
 Many good stable heads are projections from a more internalized construction,
-for example:
+but they should be introduced only when a focused probe shows an actual
+projection or performance boundary. Current active Sigma transport now prefers
+transparent definitions through the fundamental Sigma-arrow constructor:
 
 ```text
 Pi_pullback_funcd(G)[x] = Pi_func(G[x])
+sigma_transport_arrow(E,p,u) = sigma_arrow(E,u,E[p](u),p,id)
 Sigma_catd_transport_func(...) = Sigma_catd_functord_catd(...)[sigma_transport_arrow(...)]
 PathInd_transfd(Z)[x] = PathInd_func(Z,x)
 ```
@@ -820,8 +829,9 @@ PathInd_funcd(Z)
 This is the right direction because it turns the old Sigma-total formulation
 into a compiled theorem derived from the more synthetic telescope theorem.
 
-This generic uncurrying construction may need stable projection heads,
-especially for action along canonical total arrows:
+This generic uncurrying construction may need stable projection heads only
+after a concrete downstream theorem justifies them, especially for action along
+canonical total arrows:
 
 ```text
 sigma_transport_arrow(R,p,r).

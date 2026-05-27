@@ -210,6 +210,22 @@ A natural family morphism `FF : E → D` induces a map on totals:
 Σ(FF)(k,u) = (k, FF[k](u))
 ```
 
+The current kernel also exposes the canonical total arrow over a base arrow:
+
+```text
+sigma_transport(E,p,u) : (x,u) → (y,E[p](u))
+```
+
+and the action of a Sigma map on such arrows:
+
+```text
+Σ(FF)[sigma_transport(E,p,u)]
+  = sigma_map_transport(FF,p,u).
+```
+
+These are now definitions over the smaller Sigma-arrow constructor for total
+arrows as `(base arrow, fibre arrow)` pairs, not additional axioms.
+
 The first projection is a functor:
 
 ```text
@@ -517,6 +533,11 @@ using the endpoint computation:
 ```text
 Rep_Z(x)[p](id_x) = p.
 ```
+
+The canonical Sigma transport arrow itself is defined from the fundamental
+Sigma-hom characterization: a total arrow is a base arrow plus a fibre arrow,
+and `sigma_transport_arrow(E,p,u)` is the special case with the identity fibre
+arrow at `E[p](u)`.
 
 The primary internalized theorem is the telescope form over varying `x`:
 

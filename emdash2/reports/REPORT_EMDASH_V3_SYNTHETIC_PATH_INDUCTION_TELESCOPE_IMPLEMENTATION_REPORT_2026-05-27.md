@@ -66,6 +66,50 @@ This was needed for the endpoint computation:
 Rep_Z(x)[p](id_x) = p.
 ```
 
+- Promoted the Sigma hom characterization into the Sigma foundation section:
+
+```text
+Hom_Sigma(E)((x,u),(y,v))
+  = Sigma (p : Hom_K(x,y)), Hom_{E[y]}(E[p](u),v).
+```
+
+- Added `sigma_arrow(E,u,v,p,alpha)` as the total-arrow constructor backed by
+  that `Hom(Sigma)` characterization.
+
+- Replaced the previously primitive-looking canonical total transport with the
+  transparent definition:
+
+```text
+sigma_transport_arrow(E,p,u)
+  = sigma_arrow(E,u,E[p](u),p,id_{E[p](u)}).
+```
+
+- Added global strict functoriality rules in the cut-elimination orientation:
+
+```text
+F[id_x] = id_{F[x]}
+F[g] o F[f]  -->  F[g o f].
+```
+
+- Defined the generic Sigma-map action on canonical total transport arrows:
+
+```text
+Sigma(eta)[sigma_transport(E,p,u)]
+  = sigma_map_transport_arrow(eta,p,u).
+```
+
+- Defined `Sigma_catd_transport_func(FF,p,r)` as the ordinary action of
+  `Sigma_catd_functord_catd(FF)` on `sigma_transport_arrow(R,p,r)`, rather than
+  as a primitive projection head.
+
+- Added the first PathOut transport computations needed for rho coherence:
+
+```text
+PathOut_transport(p)[(z,q)] = (z,q o p)
+PathOut_transport(p)[rho_{y,z,q}]
+  = sigma_map_transport_arrow(precompose_p, q, id_y).
+```
+
 - Replaced the primitive rho-section by its path-induction-derived
   presentation:
 
@@ -76,6 +120,17 @@ pathout_refl_arrow_sec(x)
 
 Its component computes to the same `pathout_refl_arrow(Z,x,y,p)`.
 
+- Removed the old internalized-`x` transport-square layer:
+  `functord_transport_transf`, `PathInd_transport_lhs_func`,
+  `PathInd_transport_rhs_func`, and `PathInd_transport_transf`. These belonged
+  to the earlier Sigma-total-primary design. The current source and target
+  transport helpers are direct definitions:
+
+```text
+PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
+PathIndTgt_transport(p,E) = section_pullback(PathOut_transport(p),E).
+```
+
 ## Design Notes
 
 The old Sigma-total presentation is now derived from the telescope theorem. Its
@@ -85,6 +140,23 @@ the generic projection rule is available.
 
 The `rho` construction is no longer an axiom. Full `rho` coherence, such as
 compatibility with composition in `PathOut_transport`, remains deferred.
+
+`sigma_transport_arrow`, `sigma_map_transport_arrow`, and
+`Sigma_catd_transport_func` are no longer primitive mathematical assumptions.
+They are transparent definitions over `sigma_arrow` and ordinary functor
+action. This keeps `Hom(Sigma)` as the fundamental constructor layer.
+
+The direct composite:
+
+```text
+PathOut_transport(p)[rho_{y,z,q}] o rho_{x,y,p}
+```
+
+was probed but does not yet reduce definitionally to `rho_{x,z,q o p}`. The
+transparent `sigma_map_transport_arrow` exposes the transported-rho half; the
+remaining missing piece is a clean Sigma-arrow composition rule, preferably at
+the `sigma_arrow` constructor level rather than as a broad ad hoc
+`comp_fapp0` rule.
 
 `pathout_refl_arrow_sec` is now transparent. A focused probe showed that the
 path-induction-derived definition checks once the old explicit
@@ -117,6 +189,6 @@ git diff --cached --check
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it.
-- Develop the full `rho` coherence laws.
+- Develop the full `rho` coherence laws, especially Sigma-arrow composition.
 - Keep global coherent motive families deferred; they are not the core
   path-induction constructor.

@@ -378,6 +378,25 @@ symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
 
 rule fapp0 (fapp1_func $F_AB) $f ↪ fapp1_fapp0 $F_AB $f;
 
+// Strict functoriality, oriented as cut elimination.
+rule @fapp1_fapp0 $A $B $F $X $X (@id $A $X)
+  ↪ @id $B (@fapp0 $A $B $F $X);
+
+rule @comp_fapp0
+      $B
+      (@fapp0 $A $B $F $X)
+      (@fapp0 $A $B $F $Y)
+      (@fapp0 $A $B $F $Z)
+      (@fapp1_fapp0 $A $B $F $Y $Z $g)
+      (@fapp1_fapp0 $A $B $F $X $Y $f)
+  ↪ @fapp1_fapp0
+      $A
+      $B
+      $F
+      $X
+      $Z
+      (@comp_fapp0 $A $X $Y $Z $g $f);
+
 /*
   Universe classifiers and their category structures.
 
@@ -1332,6 +1351,40 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
   τ (Obj (Fibre_cat E k))
 ≔ λ K E s k, @fapp0 (Pi_cat E) (Fibre_cat E k) (@piapp0_func K E k) s;
 
+// Fixed-base covariant transport from a fibre object.
+//
+// Surface/formula:
+//   fib_cov_tapp0_func(E,x,u,y) : Hom_K(x,y) -> E[y]
+//   fib_cov_tapp0_func(E,x,u,y)[f] = E[f](u).
+symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Functor (Hom_cat K x y) (Fibre_cat E y))
+≔ comp_cat_fapp0
+     (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
+     (@fapp1_func K Cat_cat E x y);
+
+// General endpoint notation for dependent homs along a displayed functor. The
+// old one-family endpoint is the identity-family specialization.
+//
+// Surface/formula:
+//   homd_(FF,x,u,y,v)[f : x -> y]
+//     = Hom_{E[y]}(FF[y](v), E[f](u)).
+injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
+  (FF : τ (Functord D E))
+  (x : τ (Obj Z))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj Z))
+  (v : τ (Obj (Fibre_cat D y)))
+  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
+≔ @hom_con
+     (Fibre_cat E y)
+     (fapp0
+       (@tapp0_fapp0 Z Cat_cat D E y FF)
+       v)
+     (Hom_cat Z x y)
+     (@fib_cov_tapp0_func Z E x y u);
+
 // Fibre transport is introduced later as a defined projection from the
 // reordered functor `fib_cov_tapp0_func`. v3.2 deliberately avoids the v3.1
 // generic strict identity/composition transport rewrites for arbitrary
@@ -1371,6 +1424,44 @@ rule @fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E
 
 rule τ (Obj (@Sigma_cat $K $E))
   ↪ `τΣ_ k : τ (Obj $K), Obj (Fibre_cat $E k);
+
+// Hom categories of Sigma totals are the dependent-hom Sigma over base arrows.
+//
+// Surface/formula:
+//   Hom_{Sigma E}((x,u),(y,v))
+//     = Sigma (p : Hom_K(x,y)), Hom_{E[y]}(E[p](u),v).
+rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
+  ↪ Op_cat
+      (@Sigma_cat
+        (Op_cat (Hom_cat $K $x $y))
+        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v));
+
+// Constructor for arrows in a Sigma category, using the Sigma-hom
+// characterization above. The explicit fibre arrow is the second component of
+// the encoded dependent pair in the reduced hom category.
+symbol sigma_arrow [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom K x y))
+  (alpha : τ (Hom
+      (Fibre_cat E y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p)
+        u)
+      v))
+  : τ (Hom
+      (@Sigma_cat K E)
+      (Struct_sigma x u)
+      (Struct_sigma y v))
+≔ @Struct_sigma
+    (Obj (Op_cat (Hom_cat K x y)))
+    (λ f : τ (Obj (Op_cat (Hom_cat K x y))),
+      Obj (Fibre_cat (@homd_ K E E (@id_funcd K E) x u y v) f))
+    p
+    alpha;
 
 // Fixed-base layer: first projection from a total category.
 //
@@ -1440,7 +1531,10 @@ rule @comp_cat_fapp0 _ _ _
 // Surface/formula:
 //   sigma_transport_arrow(E,p,u) : (x,u) -> (y,E[p](u))
 //   in Sigma_cat(E) = Σ k :^f K, E[k].
-constant symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
+// Canonical total arrow over a base arrow, defined by the smaller Sigma-arrow
+// constructor pairing the base arrow with the identity fibre arrow at the
+// transported endpoint.
+symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
@@ -1452,7 +1546,65 @@ constant symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
           (Fibre_cat E x)
           (Fibre_cat E y)
           (@catd_transport_func K E x y p)
-          u)));
+          u)))
+≔ @sigma_arrow
+    K
+    E
+    x
+    y
+    u
+    (@fapp0
+      (Fibre_cat E x)
+      (Fibre_cat E y)
+      (@catd_transport_func K E x y p)
+      u)
+    p
+    (@id
+      (Fibre_cat E y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p)
+        u));
+
+// Generic action of a Sigma map on a canonical total transport arrow. This is a
+// transparent alias for the ordinary functor action on the canonical total
+// arrow.
+symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
+  (η : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (@Sigma_cat K D)
+      (Struct_sigma x
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat D x)
+          (@tapp0_fapp0 K Cat_cat E D x η)
+          u))
+      (Struct_sigma y
+        (@fapp0
+          (Fibre_cat E y)
+          (Fibre_cat D y)
+          (@tapp0_fapp0 K Cat_cat E D y η)
+          (@fapp0
+            (Fibre_cat E x)
+            (Fibre_cat E y)
+            (@catd_transport_func K E x y p)
+            u))))
+≔ @fapp1_fapp0
+    (@Sigma_cat K E)
+    (@Sigma_cat K D)
+    (@sigma_map_func K E D η)
+    (Struct_sigma x u)
+    (Struct_sigma y
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p)
+        u))
+    (@sigma_transport_arrow K E x y p u);
 
 // Internalized-x prerequisite: Cat-valued family over a total category induced
 // by a displayed functor into the constant category universe.
@@ -1485,8 +1637,6 @@ rule @fapp0
 //   (Sigma_catd_functord_catd(FF))[sigma_transport_arrow(R,p,r)]
 //     = Sigma_catd_transport_func(FF,p,r).
 //
-// It is intentionally a small projection head: a direct definition through
-// displayed-functor naturality is conversion-heavy.
 symbol Sigma_catd_transport_func [K : Cat] [R : τ (Catd K)]
   (FF : τ (Functord R (@Const_catd K Cat_cat)))
   [x y : τ (Obj K)]
@@ -1501,16 +1651,19 @@ symbol Sigma_catd_transport_func [K : Cat] [R : τ (Catd K)]
             (Fibre_cat R x)
             (Fibre_cat R y)
             (@catd_transport_func K R x y p)
-            r))));
-
-rule @fapp1_fapp0
-      (@Sigma_cat $K $R)
-      Cat_cat
-      (@Sigma_catd_functord_catd $K $R $FF)
-      _
-      _
-      (@sigma_transport_arrow $K $R $x $y $p $r)
-  ↪ @Sigma_catd_transport_func $K $R $FF $x $y $p $r;
+            r))))
+≔ @fapp1_fapp0
+    (@Sigma_cat K R)
+    Cat_cat
+    (@Sigma_catd_functord_catd K R FF)
+    (Struct_sigma x r)
+    (Struct_sigma y
+      (@fapp0
+        (Fibre_cat R x)
+        (Fibre_cat R y)
+        (@catd_transport_func K R x y p)
+        r))
+    (@sigma_transport_arrow K R x y p r);
 
 // Generic uncurrying of a displayed transfor over a telescope into a displayed
 // functor over the Sigma-total category.
@@ -1988,14 +2141,7 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndSrc_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @Sigma_catd_transport_func
-    Z
-    (@PathOutMotives_catd Z)
-    (@PathOutReflEval_funcd Z)
-    x
-    y
-    p
-    E;
+≔ @pathout_refl_eval_base_func Z x y p E;
 
 // Uncurried Sigma-total presentation of path induction, derived from the
 // primary telescope theorem by generic Sigma-total uncurrying.
@@ -2221,19 +2367,6 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   action is just `fapp0 (fib_cov_tapp0_func E x y u) f`, so it is not named by
   a separate `fib_cov_tapp0_fapp0` alias in v3.2.
 */
-
-// Fixed-base covariant transport from a fibre object.
-//
-// Surface/formula:
-//   fib_cov_tapp0_func(E,x,u,y) : Hom_K(x,y) -> E[y]
-//   fib_cov_tapp0_func(E,x,u,y)[f] = E[f](u).
-symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
-  [x y : τ (Obj K)]
-  (u : τ (Obj (Fibre_cat E x)))
-  : τ (Functor (Hom_cat K x y) (Fibre_cat E y))
-≔ comp_cat_fapp0
-     (@fapp0_func (Fibre_cat E x) (Fibre_cat E y) u)
-     (@fapp1_func K Cat_cat E x y);
 
 // Internalized target family for covariant fibre transport.
 //
@@ -2497,27 +2630,6 @@ assert [Z : Cat] (x y z : τ (Obj Z))
     q
     ≡ @comp_fapp0 Z x y z q p;
 
-// General endpoint notation for dependent homs along a displayed functor. The
-// old one-family endpoint is the identity-family specialization.
-//
-// Surface/formula:
-//   homd_(FF,x,u,y,v)[f : x -> y]
-//     = Hom_{E[y]}(FF[y](v), E[f](u)).
-injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
-  (FF : τ (Functord D E))
-  (x : τ (Obj Z))
-  (u : τ (Obj (Fibre_cat E x)))
-  (y : τ (Obj Z))
-  (v : τ (Obj (Fibre_cat D y)))
-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
-≔ @hom_con
-     (Fibre_cat E y)
-     (fapp0
-       (@tapp0_fapp0 Z Cat_cat D E y FF)
-       v)
-     (Hom_cat Z x y)
-     (@fib_cov_tapp0_func Z E x y u);
-
 /*
   Internal dependent-hom projection cascade:
 
@@ -2631,12 +2743,6 @@ rule @tapp0_fapp0
 // endpoint family; pointwise object-action is handled by unfolding `homd_`.
 rule fapp0 (@homd_tgt_func $Z $D $E $FF $x $u $y) $v
   ↪ @homd_ $Z $D $E $FF $x $u $y $v;
-
-rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
-  ↪ Op_cat
-      (@Sigma_cat
-        (Op_cat (Hom_cat $K $x $y))
-        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v));
 
 // -------------------------------------------------------------------------------------------------
 // 12. Section action over dependent homs
@@ -3061,19 +3167,6 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
 
-// Internalized-x coherence theorem/package for displayed functoriality.
-//
-// Surface/formula:
-//   functord_transport_transf(FF,p) :
-//     D[p] ∘ FF[x] => FF[y] ∘ E[p].
-constant symbol functord_transport_transf [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  : τ (Transf
-      (@functord_transport_lhs_func K E D FF x y p)
-      (@functord_transport_rhs_func K E D FF x y p));
-
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
@@ -3209,20 +3302,6 @@ rule @tapp0_fapp0
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
-rule @Sigma_catd_transport_func
-      $K
-      _
-      (@Pi_pullback_funcd $K $G)
-      $x
-      $y
-      $p
-      $E
-  ↪ @section_pullback_func
-      (@fapp0 $K (Op_cat Cat_cat) $G $y)
-      (@fapp0 $K (Op_cat Cat_cat) $G $x)
-      (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
-      $E;
-
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
 // pullback presentation so Pi sections move by the generic section-pullback
@@ -3257,104 +3336,11 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
       (Fibre_cat
         (@PathIndTgt_catd Z)
         (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @Sigma_catd_transport_func
-    Z
-    (@PathOutMotives_catd Z)
-    (@PathOutPi_funcd Z)
-    x
-    y
-    p
-    E;
-
-// Path-induction source/target transports are specializations of the generic
-// Sigma-family action. The discriminator is the stable displayed-functor head,
-// not the reducible total-base endpoints.
-rule @Sigma_catd_transport_func
-      $Z
-      _
-      (@PathOutReflEval_funcd $Z)
-      $x
-      $y
-      $p
-      $E
-  ↪ @pathout_refl_eval_base_func $Z $x $y $p $E;
-
-// Final desired internalized-x coherence goal: canonical path-induction
-// transport square over `(x,E) -> (y,p_*E)`.
-//
-// Surface/formula:
-//   PathIndTgt[p,E] ∘ PathInd[x,E]
-//     => PathInd[y,p_*E] ∘ PathIndSrc[p,E].
-//
-// The two functors below are the induction-then-target-transport and
-// source-transport-then-induction routes. The transfor is kept abstract for now;
-// probing showed that exposing a fully expanded component/app helper is
-// conversion-heavy.
-//
-// LHS route:
-//   E[(x,id_x)] --PathInd[x,E]--> Π PathOut_Z(x).E
-//               --PathIndTgt_transport(p,E)--> Π PathOut_Z(y).p_*E.
-symbol PathInd_transport_lhs_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Functor
-      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-      (Fibre_cat
-        (@PathIndTgt_catd Z)
-        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @functord_transport_lhs_func
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (@PathInd_funcd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E);
-
-// RHS route:
-//   E[(x,id_x)] --PathIndSrc_transport(p,E)--> (p_*E)[(y,id_y)]
-//               --PathInd[y,p_*E]--> Π PathOut_Z(y).p_*E.
-symbol PathInd_transport_rhs_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Functor
-      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-      (Fibre_cat
-        (@PathIndTgt_catd Z)
-        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @functord_transport_rhs_func
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (@PathInd_funcd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E);
-
-// Coherence package relating the LHS/RHS routes. This is the current formal
-// boundary of the internalized-x plan: functor-level coherence exists, while a
-// cheap component-level projection remains future work.
-symbol PathInd_transport_transf [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Transf
-      (@PathInd_transport_lhs_func Z x y p E)
-      (@PathInd_transport_rhs_func Z x y p E))
-≔ @functord_transport_transf
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (@PathInd_funcd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E);
+≔ @pathout_pi_transport_func Z x y p E;
 
 /*
   Mathematical computation statements for target transport and the
-  path-induction coherence square over the canonical transported-motive arrow.
-
-  These document the two functor-level routes that the still-missing
-  component-level coherence projection must relate.
+  source transport over the canonical transported-motive arrow.
 */
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
@@ -3365,38 +3351,10 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
         (@PathOut_transport_func Z x y p)
         E;
 
-assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
-  (x y : τ (Obj K)) (p : τ (Hom K x y))
-  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
-  @Sigma_catd_transport_func
-    K
-    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
-    (@Pi_pullback_funcd K G)
-    x
-    y
-    p
-    E
-    ≡ @section_pullback_func
-        (@fapp0 K (Op_cat Cat_cat) G y)
-        (@fapp0 K (Op_cat Cat_cat) G x)
-        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
-        E;
-
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @PathIndTgt_transport_func Z x y p E
     ≡ @pathout_pi_transport_func Z x y p E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @fapp1_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndTgt_catd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E)
-    ≡ @PathIndTgt_transport_func Z x y p E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -3459,46 +3417,6 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
         E
         s
         (@pathout_obj Z x y p);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathInd_transport_lhs_func Z x y p E)
-    u
-    ≡ @fapp0
-        (Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x E))
-        (Fibre_cat
-          (@PathIndTgt_catd Z)
-          (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-        (@PathIndTgt_transport_func Z x y p E)
-        (@path_ind_sec Z x E u);
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-    (Fibre_cat
-      (@PathIndTgt_catd Z)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-    (@PathInd_transport_rhs_func Z x y p E)
-    u
-    ≡ @path_ind_sec
-        Z
-        y
-        (@pathout_motive_transport_obj Z x y p E)
-        (@fapp0
-          (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-          (Fibre_cat
-            (@PathIndSrc_catd Z)
-            (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-          (@PathIndSrc_transport_func Z x y p E)
-          u);
 
 // -------------------------------------------------------------------------------------------------
 // 16. Remaining constructor/projection assertions
@@ -3954,6 +3872,15 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
         x
         p;
 
+assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (@PathOut_cat Z y)
+    (@PathOut_cat Z x)
+    (@PathOut_transport_func Z x y p)
+    (@pathout_obj Z y z q)
+    ≡ @pathout_obj Z x z (@comp_fapp0 Z x y z q p);
+
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @pathout_motive_transport_obj Z x y p E
@@ -3999,6 +3926,31 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
         y
         p
         (@id Z x);
+
+assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp1_fapp0
+    (@PathOut_cat Z y)
+    (@PathOut_cat Z x)
+    (@PathOut_transport_func Z x y p)
+    (@pathout_refl_obj Z y)
+    (@pathout_obj Z y z q)
+    (@pathout_refl_arrow Z y z q)
+    ≡ @sigma_map_transport_arrow
+        Z
+        (@Rep_catd Z y)
+        (@Rep_catd Z x)
+        (@fapp1_fapp0
+          (Op_cat Z)
+          (@Catd_cat Z)
+          (@Rep_catd_func Z)
+          y
+          x
+          p)
+        y
+        z
+        q
+        (@id Z y);
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
@@ -4077,17 +4029,6 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @PathIndSrc_transport_func Z x y p E
     ≡ @pathout_refl_eval_base_func Z x y p E;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @fapp1_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndSrc_catd Z)
-    (Struct_sigma x E)
-    (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))
-    (@pathout_motive_transport_arrow Z x y p E)
-    ≡ @PathIndSrc_transport_func Z x y p E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))

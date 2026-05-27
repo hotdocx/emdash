@@ -31,14 +31,19 @@ Retired historical references:
 
 - directed Cat-valued families via `Catd_cat K` as the canonical normal form of
   `Functor_cat K Cat_cat`;
+- strict functoriality rules for ordinary functors, oriented as
+  cut-elimination (`F[g] o F[f]` folds to `F[g o f]`);
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
+- the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
+  `sigma_arrow` as the base-arrow/fibre-arrow constructor for total arrows;
 - generic base-arrow transport helpers:
   `catd_transport_func`, `functord_transport_func`,
-  `functord_transport_lhs_func`, `functord_transport_rhs_func`,
-  `functord_transport_transf`, and the canonical total arrow
-  `sigma_transport_arrow`, plus the stable Sigma-family action projection
-  `Sigma_catd_transport_func`;
+  `functord_transport_lhs_func`, `functord_transport_rhs_func`, the canonical
+  total arrow `sigma_transport_arrow` defined through `sigma_arrow`,
+  `sigma_map_transport_arrow` for the action of Sigma maps on canonical total
+  arrows, and `Sigma_catd_transport_func` as the transparent action of
+  `Sigma_catd_functord_catd` on those canonical arrows;
 - internalized `Catd_cat_func`, `Pullback_catd_func`, `Pi_int_funcd`, and
   `Pi_pullback_funcd`
   infrastructure, including the checked arrow-action fold
@@ -51,10 +56,9 @@ Retired historical references:
   `pathout_refl_obj`, `pathout_refl_eval_func`,
   `pathout_refl_eval_base_func`, `pathout_motive_transport_obj`,
   `PathOut_transport_func`, `PathIndSrc_transport_func`,
-  `PathIndTgt_transport_func`, `PathInd_transport_lhs_func`,
-  `PathInd_transport_rhs_func`, `PathInd_transport_transf`, and
-  `pathout_refl_arrow_sec`, with `pathout_refl_arrow` now constructed from the
-  generic `sigma_transport_arrow` and `pathout_refl_arrow_sec` derived from
+  `PathIndTgt_transport_func`, and `pathout_refl_arrow_sec`, with
+  `pathout_refl_arrow` now constructed from the generic
+  `sigma_transport_arrow` and `pathout_refl_arrow_sec` derived from
   `path_ind_sec` componentwise;
 - primary telescope path-induction packaging:
   `PathInd_transfd : Transfd(PathOutReflEval_funcd, PathOutPi_funcd)`;
@@ -62,10 +66,8 @@ Retired historical references:
   `PathInd_funcd = Sigma_transfd_funcd(PathInd_transfd)`, with checked
   fibre/component rules over `Sigma_cat Z (PathOutMotives_catd Z)`, with
   `PathOutPi_funcd` restored as the semantic `Pi_int_funcd` pullback instance
-  folding through `Pi_pullback_funcd`, checked source/target transports as
-  specializations of `Sigma_catd_transport_func` over canonical transported
-  motives, and a named path-induction transport square specialized from generic
-  displayed-functor naturality;
+  folding through `Pi_pullback_funcd`, and checked source/target transports
+  defined directly as rho-evaluation and section pullback;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a
