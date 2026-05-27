@@ -1924,6 +1924,24 @@ rule @tapp0_fapp0
       (@PathInd_func $Z $x)
   ↪ @path_ind_func_fapp0 $Z $x $E;
 
+// Primary synthetic/telescope path-induction theorem over the varying source
+// object.
+//
+// Surface/formula:
+//   PathInd_transfd(Z) :
+//     (x :^n Z) -> PathOutReflEval_Z[x] => PathOutPi_Z[x]
+//   PathInd_transfd(Z)[x] = PathInd_func(Z,x).
+//
+// The component projection rule is installed later, after the generic
+// displayed-transfor head `tdapp0_fapp0` is declared.
+constant symbol PathInd_transfd [Z : Cat]
+  : τ (@Transfd
+      Z
+      (@PathOutMotives_catd Z)
+      (@Const_catd Z Cat_cat)
+      (@PathOutReflEval_funcd Z)
+      (@PathOutPi_funcd Z));
+
 // Internalized-x source layer: total source family over moving `(x,E)`.
 //
 // Surface/formula:
@@ -1959,7 +1977,9 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
     p
     E;
 
-// Final desired internalized-x theorem packaged as a displayed functor.
+// Uncurried Sigma-total presentation of path induction. This is currently a
+// primitive package for existing checks; the forward plan is to derive it from
+// `PathInd_transfd` by a generic Sigma-total uncurrying construction.
 //
 // Surface/formula:
 //   PathInd_funcd(Z) :
@@ -2800,6 +2820,101 @@ symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
 
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
+
+// Component projection for the primary synthetic/telescope path-induction
+// theorem. This lives here because `tdapp0_fapp0` is the generic displayed
+// transfor component head.
+rule @tdapp0_fapp0
+      $Z
+      _
+      _
+      _
+      _
+      $x
+      (@PathInd_transfd $Z)
+  ↪ @PathInd_func $Z $x;
+
+/*
+  Mathematical computation statements for synthetic/telescope path induction.
+
+  Surface/formula:
+    PathInd_transfd(Z)[x]       = PathInd_func(Z,x)
+    PathInd_transfd(Z)[x][E]    = path_ind_func_fapp0(Z,x,E)
+    PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u).
+*/
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @tdapp0_fapp0
+    Z
+    (@PathOutMotives_catd Z)
+    (@Const_catd Z Cat_cat)
+    (@PathOutReflEval_funcd Z)
+    (@PathOutPi_funcd Z)
+    x
+    (@PathInd_transfd Z)
+    ≡ @PathInd_func Z x;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    Cat_cat
+    (@PathInd_src_catd Z x)
+    (@PathInd_tgt_catd Z x)
+    E
+    (@tdapp0_fapp0
+      Z
+      (@PathOutMotives_catd Z)
+      (@Const_catd Z Cat_cat)
+      (@PathOutReflEval_funcd Z)
+      (@PathOutPi_funcd Z)
+      x
+      (@PathInd_transfd Z))
+    ≡ @path_ind_func_fapp0 Z x E;
+
+assert [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat E (@pathout_refl_obj Z x))
+    (Pi_cat E)
+    (@tapp0_fapp0
+      (@Catd_cat (@PathOut_cat Z x))
+      Cat_cat
+      (@PathInd_src_catd Z x)
+      (@PathInd_tgt_catd Z x)
+      E
+      (@tdapp0_fapp0
+        Z
+        (@PathOutMotives_catd Z)
+        (@Const_catd Z Cat_cat)
+        (@PathOutReflEval_funcd Z)
+        (@PathOutPi_funcd Z)
+        x
+        (@PathInd_transfd Z)))
+    u
+    ≡ @path_ind_sec Z x E u;
+
+// First transitivity benchmark rerouted through the synthetic/telescope
+// theorem component.
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @fapp0
+    (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
+    (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+    (@tapp0_fapp0
+      (@Catd_cat (@PathOut_cat Z x))
+      Cat_cat
+      (@PathInd_src_catd Z x)
+      (@PathInd_tgt_catd Z x)
+      (@CompMotive_catd Z x)
+      (@tdapp0_fapp0
+        Z
+        (@PathOutMotives_catd Z)
+        (@Const_catd Z Cat_cat)
+        (@PathOutReflEval_funcd Z)
+        (@PathOutPi_funcd Z)
+        x
+        (@PathInd_transfd Z)))
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_sec Z x;
 
 // Readable component alias.
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
