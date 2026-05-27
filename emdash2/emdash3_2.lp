@@ -522,6 +522,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
 constant symbol id_func [A: Cat] : τ (Functor A A);
 rule @id Cat_cat $A ↪ @id_func $A;
 rule fapp0 (@id_func $A) $xA ↪ $xA;
+rule @fapp1_fapp0 $A $A (@id_func $A) $x $y $p ↪ $p;
 
 symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
   (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C);
@@ -794,6 +795,10 @@ assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
         (@fapp0 A B G x)
         (@fapp0 A B G y)
         (@fapp1_fapp0 A B G x y f);
+
+assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
+  @fapp1_fapp0 A A (@id_func A) x y p
+    ≡ p;
 
 // -------------------------------------------------------------------------------------------------
 // 4. Encoded Sigma types for object layers
@@ -1507,6 +1512,21 @@ rule @fapp1_fapp0
       (@sigma_transport_arrow $K $R $x $y $p $r)
   ↪ @Sigma_catd_transport_func $K $R $FF $x $y $p $r;
 
+// Generic uncurrying of a displayed transfor over a telescope into a displayed
+// functor over the Sigma-total category.
+//
+// Surface/formula:
+//   Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r].
+//
+// The object-component projection rule is installed later, after the generic
+// displayed-transfor component head `tdapp0_fapp0` is declared.
+constant symbol Sigma_transfd_funcd [K : Cat] [R : τ (Catd K)]
+  [S T : τ (Functord R (@Const_catd K Cat_cat))]
+  (eta : τ (Transfd S T))
+  : τ (Functord
+      (@Sigma_catd_functord_catd K R S)
+      (@Sigma_catd_functord_catd K R T));
+
 // -------------------------------------------------------------------------------------------------
 // 8. Mixed-variance family functor
 // -------------------------------------------------------------------------------------------------
@@ -1762,20 +1782,26 @@ rule @tapp0_fapp0
       (@PathOutReflEval_funcd $Z)
   ↪ @pathout_refl_eval_func $Z $x;
 
-// Final desired construction, currently axiomatized: reflexive-to-path arrow
-// in the outgoing-path category.
+// Reflexive-to-path arrow in the outgoing-path category.
 //
 // Surface/formula:
 //   rho_{x,y,p} : (x,id_x) -> (y,p) in PathOut_Z(x).
 //
-// Future work should construct this from Sigma hom/dependent-hom normal forms;
-// this declaration names the intended path-induction eliminator input.
-constant symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
+// This is the canonical Sigma transport arrow for Rep_Z(x). Its endpoint
+// reduces by Rep_Z(x)[p](id_x) = p.
+symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
   (p : τ (Hom Z x y))
   : τ (Hom
       (@PathOut_cat Z x)
       (@pathout_refl_obj Z x)
-      (@pathout_obj Z x y p));
+      (@pathout_obj Z x y p))
+≔ @sigma_transport_arrow
+    Z
+    (@Rep_catd Z x)
+    x
+    y
+    p
+    (@id Z x);
 
 // Fixed-x source layer: motive transport along `rho_{x,y,p}`.
 //
@@ -1990,6 +2016,20 @@ constant symbol PathInd_funcd [Z : Cat]
   : τ (Functord
       (@PathIndSrc_catd Z)
       (@PathIndTgt_catd Z));
+
+// Derived Sigma-total presentation from the primary telescope theorem. The
+// existing `PathInd_funcd` constant remains in place while this derived form
+// is validated componentwise.
+symbol PathInd_funcd_from_transfd [Z : Cat]
+  : τ (Functord
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z))
+≔ @Sigma_transfd_funcd
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutReflEval_funcd Z)
+    (@PathOutPi_funcd Z)
+    (@PathInd_transfd Z);
 
 rule @tapp0_fapp0
       _
@@ -2834,6 +2874,29 @@ rule @tdapp0_fapp0
       (@PathInd_transfd $Z)
   ↪ @PathInd_func $Z $x;
 
+// Object-component projection for generic Sigma-total uncurrying.
+rule @tapp0_fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      _
+      _
+      (Struct_sigma $k $r)
+      (@Sigma_transfd_funcd $K $R $S $T $eta)
+  ↪ @tapp0_fapp0
+      (Fibre_cat $R $k)
+      Cat_cat
+      (@Fibre_func $K $R (@Const_catd $K Cat_cat) $S $k)
+      (@Fibre_func $K $R (@Const_catd $K Cat_cat) $T $k)
+      $r
+      (@tdapp0_fapp0
+        $K
+        $R
+        (@Const_catd $K Cat_cat)
+        $S
+        $T
+        $k
+        $eta);
+
 /*
   Mathematical computation statements for synthetic/telescope path induction.
 
@@ -2915,6 +2978,66 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
         (@PathInd_transfd Z)))
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_sec Z x;
+
+/*
+  Generic Sigma-total uncurrying and the path-induction specialization.
+
+  Surface/formula:
+    Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r]
+    PathInd_funcd_from_transfd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
+*/
+assert [K : Cat] (R : τ (Catd K))
+  (S T : τ (Functord R (@Const_catd K Cat_cat)))
+  (eta : τ (Transfd S T))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  @tapp0_fapp0
+    (@Sigma_cat K R)
+    Cat_cat
+    (@Sigma_catd_functord_catd K R S)
+    (@Sigma_catd_functord_catd K R T)
+    (Struct_sigma k r)
+    (@Sigma_transfd_funcd K R S T eta)
+    ≡ @tapp0_fapp0
+        (Fibre_cat R k)
+        Cat_cat
+        (@Fibre_func K R (@Const_catd K Cat_cat) S k)
+        (@Fibre_func K R (@Const_catd K Cat_cat) T k)
+        r
+        (@tdapp0_fapp0
+          K
+          R
+          (@Const_catd K Cat_cat)
+          S
+          T
+          k
+          eta);
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (Struct_sigma x E)
+    (@PathInd_funcd_from_transfd Z)
+    ≡ @path_ind_func_fapp0 Z x E;
+
+assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Sigma_cat Z (@PathOutMotives_catd Z))
+    Cat_cat
+    (@PathIndSrc_catd Z)
+    (@PathIndTgt_catd Z)
+    (Struct_sigma x E)
+    (@PathInd_funcd_from_transfd Z)
+    ≡ @tapp0_fapp0
+        (@Sigma_cat Z (@PathOutMotives_catd Z))
+        Cat_cat
+        (@PathIndSrc_catd Z)
+        (@PathIndTgt_catd Z)
+        (Struct_sigma x E)
+        (@PathInd_funcd Z);
 
 // Readable component alias.
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
@@ -3908,6 +4031,24 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     (@PathOut_transport_func Z x y p)
     (@pathout_refl_obj Z y)
     ≡ @pathout_obj Z x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @fapp0
+    (Fibre_cat (@Rep_catd Z x) x)
+    (Fibre_cat (@Rep_catd Z x) y)
+    (@catd_transport_func Z (@Rep_catd Z x) x y p)
+    (@id Z x)
+    ≡ p;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @pathout_refl_arrow Z x y p
+    ≡ @sigma_transport_arrow
+        Z
+        (@Rep_catd Z x)
+        x
+        y
+        p
+        (@id Z x);
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
