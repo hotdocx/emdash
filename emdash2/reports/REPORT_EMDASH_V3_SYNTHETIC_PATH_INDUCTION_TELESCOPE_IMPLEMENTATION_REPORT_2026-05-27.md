@@ -361,10 +361,48 @@ Recommended dependency order for the next implementation phase:
 7. Only then revisit full rho coherence.
 ```
 
+## 2026-05-28 Implementation Update
+
+The recommended dependency order above has now been implemented in
+`emdash3_2.lp` and validated.
+
+Added computational infrastructure:
+
+- `comp_func_tele`, the telescoped internal composition package:
+  `Hom(y,z) -> Hom(x,y) -> Hom(x,z)`.
+- A fully expanded `PathInd_transfd` transitivity assertion showing that the
+  synthetic/telescope theorem component computes to `q o p`.
+- Strict object transport:
+  `E[q](E[p](u)) -> E[q o p](u)`.
+- Strict off-diagonal naturality for ordinary transfors:
+  `G[g] o epsilon[f] -> epsilon[g o f]` and
+  `epsilon[f] o F[g] -> epsilon[f o g]`.
+- Cat-valued object-level naturality folds:
+  `D[p](eta[x](u)) -> eta[p](u)` and
+  `eta[y](E[p](u)) -> eta[p](u)`.
+- General Sigma-map action on Sigma homs:
+  `Sigma(eta)[(p,alpha)] -> (p, eta[y][alpha])`.
+- General Sigma-arrow composition:
+  `(q,beta) o (p,alpha) -> (q o p, beta o E[q][alpha])`.
+- Regression assertions for `sigma_map_transport_arrow` and full rho
+  coherence:
+  `PathOut_transport(p)[rho_yz_q] o rho_xy_p -> rho_xz_(q o p)`.
+
+Design notes:
+
+- `sigma_arrow` remains a transparent readability constructor over the
+  fundamental `Hom(Sigma)` pair characterization. Rules that must fire after
+  unfolding match the reduced `Struct_sigma` pair form.
+- The Sigma composition rule explicitly matches `Sigma_cat K E` as the actual
+  discriminator needed to recover `K` and `E`; it avoids explicit `Hom_cat`
+  source/target categories or reducible fibre-category expressions on the LHS.
+- The old internalized-x transport theorem heads `functord_transport_transf`
+  and `PathInd_transport_transf` remain deleted.
+
 ## Validation
 
-The implementation was probed in temporary copies before being applied to
-`emdash3_2.lp`. Temporary files were removed.
+The implementation was probed in a temporary copy before being applied to
+`emdash3_2.lp`.
 
 Commands run successfully:
 
@@ -372,18 +410,16 @@ Commands run successfully:
 timeout 60s lambdapi check -w emdash3_2.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 git diff --check
-git diff --cached --check
 ```
 
 ## Remaining Work
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it.
-- Add the fully expanded `PathInd_transfd` transitivity assertion as a compact
-  regression for the achieved theorem.
-- Develop strict object transport, off-diagonal naturality, Sigma-map action,
-  and Sigma-arrow composition in the probe-first order described above.
-- Develop the full `rho` coherence laws only after those generic Sigma-arrow
-  prerequisites are stable.
+- Continue the primitive-to-defined audit, especially around ordinary
+  off-diagonal action (`tapp1_fapp0`) and any remaining internalized packages
+  that can be derived cleanly from smaller semantic constructors.
+- Add further Sigma-map/Sigma-composition regression assertions only when a
+  downstream theorem exposes a missing computation.
 - Keep global coherent motive families deferred; they are not the core
   path-induction constructor.

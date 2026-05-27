@@ -741,6 +741,23 @@ rule @fapp0 (Hom_cat $A $Y $Z) (Hom_cat $A $X $Z)
       (@hom_precomp_func $A $X $Y $Z $f) $g
   ↪ @comp_fapp0 $A $X $Y $Z $g $f;
 
+// Telescoped internal composition package.
+//
+// Surface/formula:
+//   comp_func_tele(A,x,y,z) :
+//     Hom_A(y,z) -> (Hom_A(x,y) -> Hom_A(x,z))
+//   comp_func_tele(A,x,y,z)[g][f] = g o f.
+symbol comp_func_tele [A : Cat] [X Y Z : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A Y Z)
+      (Functor_cat (Hom_cat A X Y) (Hom_cat A X Z)))
+≔ @fapp1_func
+    A
+    Cat_cat
+    (@hom_ A A (@id_func A) X)
+    Y
+    Z;
+
 // Contravariant represented-object classifier.
 //
 // Surface/formula:
@@ -796,6 +813,19 @@ assert [A : Cat] (x y z : τ (Obj A))
     (Hom_cat A x z)
     (@hom_precomp_func A x y z p)
     q
+    ≡ @comp_fapp0 A x y z q p;
+
+assert [A : Cat] (x y z : τ (Obj A))
+  (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
+  @fapp0
+    (Hom_cat A x y)
+    (Hom_cat A x z)
+    (@fapp0
+      (Hom_cat A y z)
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x z))
+      (@comp_func_tele A x y z)
+      q)
+    p
     ≡ @comp_fapp0 A x y z q p;
 
 assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
@@ -977,6 +1007,49 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (f : τ (Hom A X Y)),
   τ (Hom B (fapp0 F X) (fapp0 G Y));
 
+// Strict naturality for off-diagonal ordinary transfor components, oriented as
+// cut elimination.
+//
+// Surface/formula:
+//   G[g] o epsilon[f] -> epsilon[g o f]
+//   epsilon[f] o F[g] -> epsilon[f o g].
+rule comp_fapp0
+      (@fapp1_fapp0 $A $B $G $Y $Z $g)
+      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
+  ↪ tapp1_fapp0 $ϵ (comp_fapp0 $g $f);
+
+rule comp_fapp0
+      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
+      (@fapp1_fapp0 $A $B $F $X0 $X $g)
+  ↪ tapp1_fapp0 $ϵ (comp_fapp0 $f $g);
+
+// Arrow-indexed component at an identity base arrow is definitionally usable as
+// the ordinary diagonal component, without rewriting away the stable
+// `tapp1_fapp0` head.
+unif_rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
+  ≡ @tapp0_fapp0 $A $B $F $G $X $ϵ
+  ↪ [ tt ≡ tt ];
+
+// Cat-valued object-level projections of strict naturality. Both composites
+// fold to the off-diagonal component at the base arrow.
+//
+// Surface/formula:
+//   D[p](eta[x](u)) -> eta[p](u)
+//   eta[y](E[p](u)) -> eta[p](u).
+//
+// Keep the outer `fapp0` source/target categories implicit. The explicit
+// arguments below are the stable ordinary action/component heads themselves,
+// not reducible fibre-category expressions.
+rule fapp0
+      (@fapp1_fapp0 $K Cat_cat $D $x $y $p)
+      (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $x $eta) $u)
+  ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
+
+rule fapp0
+      (@tapp0_fapp0 $K Cat_cat $E $D $y $eta)
+      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
+  ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
+
 /*
   More-internal ordinary hom-action.
 
@@ -1059,6 +1132,36 @@ assert [A B : Cat] (F G : τ (Functor A B))
   @fapp1_func _ _ (@tapp1_int_func_transf A B F G) ϵ ϵ'
     ≡ @tapp1_int_fapp1_func_transf A B F G ϵ ϵ';
 
+assert [A B : Cat] (F G : τ (Functor A B))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A X Y))
+  (g : τ (Hom A Y Z))
+  (ϵ : τ (Transf F G)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@fapp0 A B G Z)
+    (@fapp1_fapp0 A B G Y Z g)
+    (@tapp1_fapp0 A B F G X Y ϵ f)
+    ≡ @tapp1_fapp0 A B F G X Z ϵ
+        (@comp_fapp0 A X Y Z g f);
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (X0 X Y : τ (Obj A))
+  (g : τ (Hom A X0 X))
+  (f : τ (Hom A X Y))
+  (ϵ : τ (Transf F G)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F X0)
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@tapp1_fapp0 A B F G X Y ϵ f)
+    (@fapp1_fapp0 A B F X0 X g)
+    ≡ @tapp1_fapp0 A B F G X0 Y ϵ
+        (@comp_fapp0 A X0 X Y f g);
+
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
   @tapp1_int_fapp0_transf A B F F (id (Functor_cat A B) F)
     ≡ @fapp1_int_transf A B F;
@@ -1109,6 +1212,27 @@ symbol catd_transport_func [K : Cat] (E : τ (Catd K))
   (p : τ (Hom K x y))
   : τ (Functor (Fibre_cat E x) (Fibre_cat E y))
 ≔ @fapp1_fapp0 K Cat_cat E x y p;
+
+// Strict object transport, oriented as cut elimination.
+//
+// Surface/formula:
+//   E[q](E[p](u)) -> E[q o p](u).
+//
+// Keep the outer `fapp0` source/target categories implicit. The explicit
+// arguments below are the stable functor-action heads themselves, not reducible
+// fibre-category expressions.
+rule fapp0
+      (@fapp1_fapp0 $K Cat_cat $E $y $z $q)
+      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
+  ↪ fapp0
+      (@fapp1_fapp0
+        $K
+        Cat_cat
+        $E
+        $x
+        $z
+        (@comp_fapp0 $K $x $y $z $q $p))
+      $u;
 
 // Internalized-x prerequisite: functorial package for pullback/reindexing of
 // directed families along a base functor.
@@ -1463,6 +1587,62 @@ symbol sigma_arrow [K : Cat] (E : τ (Catd K))
     p
     alpha;
 
+// Composition of Sigma arrows.
+//
+// Surface/formula:
+//   (q,beta) o (p,alpha)
+//     = (q o p, beta o E[q](alpha)).
+//
+// The source of E[q](alpha) computes from E[q](E[p](u)) to
+// E[q o p](u) by strict object transport. The LHS matches the reduced
+// Sigma-hom pair form; the Sigma category itself is the discriminator needed to
+// recover K and E.
+rule @comp_fapp0
+      (@Sigma_cat $K $E)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $z $w)
+      (Struct_sigma $q $beta)
+      (Struct_sigma $p $alpha)
+  ↪ @sigma_arrow
+      $K
+      $E
+      $x
+      $z
+      $u
+      $w
+      (@comp_fapp0 $K $x $y $z $q $p)
+      (@comp_fapp0
+        (Fibre_cat $E $z)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $E $z)
+          (@catd_transport_func
+            $K
+            $E
+            $x
+            $z
+            (@comp_fapp0 $K $x $y $z $q $p))
+          $u)
+        (@fapp0
+          (Fibre_cat $E $y)
+          (Fibre_cat $E $z)
+          (@catd_transport_func $K $E $y $z $q)
+          $v)
+        $w
+        $beta
+        (@fapp1_fapp0
+          (Fibre_cat $E $y)
+          (Fibre_cat $E $z)
+          (@catd_transport_func $K $E $y $z $q)
+          (@fapp0
+            (Fibre_cat $E $x)
+            (Fibre_cat $E $y)
+            (@catd_transport_func $K $E $x $y $p)
+            $u)
+          $v
+          $alpha));
+
 // Fixed-base layer: first projection from a total category.
 //
 // Surface/formula:
@@ -1520,6 +1700,49 @@ rule @fapp0 _ _
   ↪ Struct_sigma
       $k
       (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
+
+// Arrow action of a Sigma map on the canonical Sigma-hom constructor.
+//
+// Surface/formula:
+//   Sigma(eta)[(p,alpha)] = (p, eta[y][alpha]).
+//
+// The two possible source objects in D[y],
+//   D[p](eta[x](u)) and eta[y](E[p](u)),
+// are connected by the Cat-valued object-level strict-naturality folds above.
+rule @fapp1_fapp0
+      _
+      _
+      (@sigma_map_func $K $E $D $η)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $p $alpha)
+  ↪ @sigma_arrow
+      $K
+      $D
+      $x
+      $y
+      (@fapp0
+        (Fibre_cat $E $x)
+        (Fibre_cat $D $x)
+        (@tapp0_fapp0 $K Cat_cat $E $D $x $η)
+        $u)
+      (@fapp0
+        (Fibre_cat $E $y)
+        (Fibre_cat $D $y)
+        (@tapp0_fapp0 $K Cat_cat $E $D $y $η)
+        $v)
+      $p
+      (@fapp1_fapp0
+        (Fibre_cat $E $y)
+        (Fibre_cat $D $y)
+        (@tapp0_fapp0 $K Cat_cat $E $D $y $η)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $E $y)
+          (@catd_transport_func $K $E $x $y $p)
+          $u)
+        $v
+        $alpha);
 
 rule @comp_cat_fapp0 _ _ _
       (@Sigma_proj1_func $K $D)
@@ -3035,6 +3258,51 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     (@id_funcd Z (@Rep_catd Z x))
     ≡ @path_comp_sec Z x;
 
+// Fully expanded transitivity benchmark through the synthetic/telescope
+// theorem component.
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z y)
+      (@Rep_catd Z x)
+      z
+      (@fapp0
+        (Hom_cat Z x y)
+        (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+        (@tapp0_fapp0
+          Z
+          Cat_cat
+          (@Rep_catd Z x)
+          (@CompTarget_catd Z x)
+          y
+          (@fapp0
+            (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
+            (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+            (@tapp0_fapp0
+              (@Catd_cat (@PathOut_cat Z x))
+              Cat_cat
+              (@PathInd_src_catd Z x)
+              (@PathInd_tgt_catd Z x)
+              (@CompMotive_catd Z x)
+              (@tdapp0_fapp0
+                Z
+                (@PathOutMotives_catd Z)
+                (@Const_catd Z Cat_cat)
+                (@PathOutReflEval_funcd Z)
+                (@PathOutPi_funcd Z)
+                x
+                (@PathInd_transfd Z)))
+            (@id_funcd Z (@Rep_catd Z x))))
+        p))
+    q
+    ≡ @comp_fapp0 Z x y z q p;
+
 /*
   Generic Sigma-total uncurrying and the path-induction specialization.
 
@@ -3952,6 +4220,28 @@ assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y))
         q
         (@id Z y);
 
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @comp_fapp0
+    (@PathOut_cat Z x)
+    (@pathout_refl_obj Z x)
+    (@pathout_obj Z x y p)
+    (@pathout_obj Z x z (@comp_fapp0 Z x y z q p))
+    (@fapp1_fapp0
+      (@PathOut_cat Z y)
+      (@PathOut_cat Z x)
+      (@PathOut_transport_func Z x y p)
+      (@pathout_refl_obj Z y)
+      (@pathout_obj Z y z q)
+      (@pathout_refl_arrow Z y z q))
+    (@pathout_refl_arrow Z x y p)
+    ≡ @pathout_refl_arrow
+        Z
+        x
+        z
+        (@comp_fapp0 Z x y z q p);
+
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @pathout_refl_eval_base_func Z x y p E
@@ -4406,6 +4696,90 @@ assert [K : Cat] (E : τ (Catd K))
   (p : τ (Hom K x y)) ⊢
   @catd_transport_func K E x y p
     ≡ @fapp1_fapp0 K Cat_cat E x y p;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y z : τ (Obj K))
+  (p : τ (Hom K x y))
+  (q : τ (Hom K y z))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E y)
+    (Fibre_cat E z)
+    (@catd_transport_func K E y z q)
+    (@fapp0
+      (Fibre_cat E x)
+      (Fibre_cat E y)
+      (@catd_transport_func K E x y p)
+      u)
+    ≡ @fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E z)
+        (@catd_transport_func K E x z (@comp_fapp0 K x y z q p))
+        u;
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y z : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (w : τ (Obj (Fibre_cat E z)))
+  (p : τ (Hom K x y))
+  (q : τ (Hom K y z))
+  (alpha : τ (Hom
+      (Fibre_cat E y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p)
+        u)
+      v))
+  (beta : τ (Hom
+      (Fibre_cat E z)
+      (@fapp0
+        (Fibre_cat E y)
+        (Fibre_cat E z)
+        (@catd_transport_func K E y z q)
+        v)
+      w)) ⊢
+  @comp_fapp0
+    (@Sigma_cat K E)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    (Struct_sigma z w)
+    (@sigma_arrow K E y z v w q beta)
+    (@sigma_arrow K E x y u v p alpha)
+    ≡ @sigma_arrow
+        K
+        E
+        x
+        z
+        u
+        w
+        (@comp_fapp0 K x y z q p)
+        (@comp_fapp0
+          (Fibre_cat E z)
+          (@fapp0
+            (Fibre_cat E x)
+            (Fibre_cat E z)
+            (@catd_transport_func K E x z (@comp_fapp0 K x y z q p))
+            u)
+          (@fapp0
+            (Fibre_cat E y)
+            (Fibre_cat E z)
+            (@catd_transport_func K E y z q)
+            v)
+          w
+          beta
+          (@fapp1_fapp0
+            (Fibre_cat E y)
+            (Fibre_cat E z)
+            (@catd_transport_func K E y z q)
+            (@fapp0
+              (Fibre_cat E x)
+              (Fibre_cat E y)
+              (@catd_transport_func K E x y p)
+              u)
+            v
+            alpha));
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -5077,6 +5451,71 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
         k
         (@fapp0 (Fibre_cat E k) (Fibre_cat D k)
           (@tapp0_fapp0 K Cat_cat E D k η)
+          u);
+
+assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom K x y))
+  (alpha : τ (Hom
+      (Fibre_cat E y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p)
+        u)
+      v)) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat K E)
+    (@Sigma_cat K D)
+    (@sigma_map_func K E D η)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    (@sigma_arrow K E x y u v p alpha)
+    ≡ @sigma_arrow
+        K
+        D
+        x
+        y
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat D x)
+          (@tapp0_fapp0 K Cat_cat E D x η)
+          u)
+        (@fapp0
+          (Fibre_cat E y)
+          (Fibre_cat D y)
+          (@tapp0_fapp0 K Cat_cat E D y η)
+          v)
+        p
+        (@fapp1_fapp0
+          (Fibre_cat E y)
+          (Fibre_cat D y)
+          (@tapp0_fapp0 K Cat_cat E D y η)
+          (@fapp0
+            (Fibre_cat E x)
+            (Fibre_cat E y)
+            (@catd_transport_func K E x y p)
+            u)
+          v
+          alpha);
+
+assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @sigma_map_transport_arrow K E D η x y p u
+    ≡ @sigma_transport_arrow
+        K
+        D
+        x
+        y
+        p
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat D x)
+          (@tapp0_fapp0 K Cat_cat E D x η)
           u);
 
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
