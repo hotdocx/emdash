@@ -432,11 +432,11 @@ full omega-functorial Sigma API.
 
 ### Product Before Further Dependent Uncurrying
 
-`Product_cat` is not currently reintroduced in v3.2. The foundations report
-already records the intended relation:
+`Product_cat` has now been reintroduced in v3.2. The foundations report
+records the intended relation:
 
 ```text
-Sigma_cat(Const_catd K A)  ~  Product_cat K A.
+Sigma_cat(Const_catd K A)  =  Product_cat K A.
 ```
 
 Before expanding generic `Sigma_transfd_funcd` naturality, it is likely useful
@@ -531,7 +531,7 @@ dependent Grothendieck-style morphism action.
 1. Add comments/report text clarifying that the current Sigma computations are
    capped/1-arrow computations, not the final full `fapp1_func` API.
 2. Probe a minimal `Product_cat` and ordinary curry/uncurry package.
-3. Relate or at least document `Product_cat K A` against
+3. Relate `Product_cat K A` definitionally against
    `Sigma_cat(Const_catd K A)`.
 4. Return to `Sigma_transfd_funcd` and try to derive more of its action and
    naturality from the smaller ordinary and dependent infrastructure.
@@ -540,7 +540,7 @@ dependent Grothendieck-style morphism action.
 
 ## 2026-05-28 Implementation Update: Product Warm-Up
 
-The first two items in the refined order above have now been implemented in
+The first three items in the refined order above have now been implemented in
 `emdash3_2.lp`.
 
 Added comments near the Sigma definitions clarifying that the current Sigma
@@ -607,17 +607,19 @@ components and functor action:
 G[x'][g] o G[f][y].
 ```
 
-Added bridge functors between ordinary products and constant-family Sigma
-totals:
+Added the direct non-dependent Sigma/Product normal form:
 
 ```text
-Product_to_const_sigma_func    : Product_cat K A -> Sigma_cat(Const_catd K A)
-const_sigma_to_Product_func    : Sigma_cat(Const_catd K A) -> Product_cat K A
+Sigma_cat(Const_catd K A) -> Product_cat K A
+Hom_{Sigma(Const A)}((x,u),(y,v)) -> Hom_K(x,y) x Hom_A(u,v)
+sigma_arrow(Const A,p,alpha) -> (p,alpha)
 ```
 
-These compute on objects and capped 1-arrow actions. They are intentionally not
-a definitional identification between `Product_cat K A` and
-`Sigma_cat(Const_catd K A)`.
+This replaces the temporary bridge-functor approach. The bridge heads
+`Product_to_const_sigma_func` and `const_sigma_to_Product_func` were removed
+instead of kept as undeclared functor symbols; constant-family Sigma now
+inherits the Product object, hom, identity, and composition normal forms
+directly.
 
 The next natural implementation step is to probe the full `fapp1_func` action
 for ordinary curry/uncurry, then return to more generic `Sigma_transfd_funcd`
@@ -642,9 +644,8 @@ git diff --check
   a concrete downstream theorem needs it.
 - Continue the ordinary curry/uncurry pass by probing the missing full
   `fapp1_func` action laws and a more-internal adjunction-style packaging.
-- Strengthen the product/Sigma constant-family bridge only if a downstream
-  theorem requires more than the current object and capped-arrow bridge
-  functors.
+- Audit downstream uses of constant-family Sigma to ensure they rely on the
+  direct `Product_cat` normal form rather than reintroducing bridge symbols.
 - Continue the primitive-to-defined audit, especially around ordinary
   off-diagonal action (`tapp1_fapp0`) and any remaining internalized packages
   that can be derived cleanly from smaller semantic constructors.

@@ -236,19 +236,27 @@ The first projection is a functor:
 For a constant family, the expected non-dependent sum is the product:
 
 ```text
-Σ_K Const_K(A) ≃ K × A
+Σ_K Const_K(A) = K × A
 ```
 
-The current v3.2 file has not yet reintroduced a `Product_cat` presentation for
-this case. When that is added, the expected projections are:
+The current v3.2 file represents this by the direct normal form:
+
+```text
+Sigma_cat(Const_catd K A) ↪ Product_cat K A
+```
+
+The product projections have the expected readings:
 
 ```text
 π₁ : K × A → K
 π₂ : K × A → A
 ```
 
-with `Σ_K Const_K(A)` reducing to, or at least being connected with,
-`Product_cat K A`.
+and homs reduce pointwise:
+
+```text
+Hom_{K×A}((x,u),(y,v)) = Hom_K(x,y) × Hom_A(u,v)
+```
 
 ## 7. Dependent Products: Section Categories
 
@@ -606,8 +614,8 @@ The current foundations intentionally do not yet include:
 - A finalized surface syntax for the future proof assistant.
 - Full coherence APIs for every Sigma/Pi helper.
 - A named `section_total(s) : K → Σ_K E` construction and its projection laws.
-- A `Product_cat K A` presentation of `Σ_K Const_K(A)`, including product
-  projections, currying/uncurrying, and the projection `π₂ : K × A → A`.
+- Full product/functor adjunction packaging for `Product_cat`, beyond the
+  current product normal forms and object-level curry/uncurry scaffold.
 - General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
   functors.
 
@@ -661,8 +669,8 @@ vocabulary.
 | `Sigma_transfd_funcd(eta)` | `Sigma_transfd_funcd eta` |
 | Sigma-total path induction | `PathInd_funcd Z` |
 | `section_total(s)` | future presentation-level facade; not currently named |
-| `K × A` | future `Product_cat K A` connection for `Σ_K Const_K(A)` |
-| `π₂ : K × A → A` | future product/Sigma-constant projection |
+| `K × A` | `Product_cat K A`; also the normal form of `Sigma_cat(Const_catd K A)` |
+| `π₂ : K × A → A` | product projection via `Product_projR_func` |
 
 The implementation contains additional projection heads to make Lambdapi
 normalization reliable. They are part of the checked kernel engineering, not

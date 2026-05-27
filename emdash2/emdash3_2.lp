@@ -1779,6 +1779,12 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
 //   on all higher hom-action data.
 injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
+// Non-dependent Sigma is ordinary product. This must reduce before the generic
+// dependent `Hom(Sigma)` presentation, so constant-family totals inherit the
+// pointwise Product normal forms directly.
+rule @Sigma_cat $K (@Const_catd $K $A)
+  ↪ Product_cat $K $A;
+
 // Fixed-base layer: functorial total-category constructor.
 //
 // Surface/formula:
@@ -2073,116 +2079,6 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
 	    (@catd_transport_func K E x y p)
 	    u))
     (@sigma_transport_arrow K E x y p u);
-
-// Bridge between ordinary products and constant-family Sigma totals.
-//
-// Surface/formula:
-//   Product_cat K A  ~  Sigma_cat(Const_catd K A).
-//
-// This is intentionally a pair of bridge functors, not a definitional
-// identification. Product homs use pointwise products, while Sigma homs use the
-// dependent `Hom(Sigma)` presentation.
-symbol Product_to_const_sigma_func [K A : Cat]
-  : τ (Functor (Product_cat K A) (@Sigma_cat K (@Const_catd K A)));
-
-symbol const_sigma_to_Product_func [K A : Cat]
-  : τ (Functor (@Sigma_cat K (@Const_catd K A)) (Product_cat K A));
-
-rule fapp0 (@Product_to_const_sigma_func $K $A) (Struct_sigma $k $a)
-  ↪ Struct_sigma $k $a;
-
-rule fapp0 (@const_sigma_to_Product_func $K $A) (Struct_sigma $k $a)
-  ↪ Struct_sigma $k $a;
-
-rule @fapp1_fapp0
-      _
-      _
-      (@Product_to_const_sigma_func $K $A)
-      (Struct_sigma $x $u)
-      (Struct_sigma $y $v)
-      (Struct_sigma $p $alpha)
-  ↪ @sigma_arrow
-      $K
-      (@Const_catd $K $A)
-      $x
-      $y
-      $u
-      $v
-      $p
-      $alpha;
-
-rule @fapp1_fapp0
-      _
-      _
-      (@const_sigma_to_Product_func $K $A)
-      (Struct_sigma $x $u)
-      (Struct_sigma $y $v)
-      (Struct_sigma $p $alpha)
-  ↪ Struct_sigma $p $alpha;
-
-assert [K A : Cat] (k : τ (Obj K)) (a : τ (Obj A)) ⊢
-  @fapp0
-    (Product_cat K A)
-    (@Sigma_cat K (@Const_catd K A))
-    (@Product_to_const_sigma_func K A)
-    (Struct_sigma k a)
-    ≡ @Struct_sigma
-        (Obj K)
-        (λ _ : τ (Obj K), Obj A)
-        k
-        a;
-
-assert [K A : Cat] (k : τ (Obj K)) (a : τ (Obj A)) ⊢
-  @fapp0
-    (@Sigma_cat K (@Const_catd K A))
-    (Product_cat K A)
-    (@const_sigma_to_Product_func K A)
-    (Struct_sigma k a)
-    ≡ @Struct_sigma
-        (Obj K)
-        (λ _ : τ (Obj K), Obj A)
-        k
-        a;
-
-assert [K A : Cat]
-  (x y : τ (Obj K))
-  (u v : τ (Obj A))
-  (p : τ (Hom K x y))
-  (alpha : τ (Hom A u v)) ⊢
-  @fapp1_fapp0
-    (Product_cat K A)
-    (@Sigma_cat K (@Const_catd K A))
-    (@Product_to_const_sigma_func K A)
-    (Struct_sigma x u)
-    (Struct_sigma y v)
-    (Struct_sigma p alpha)
-    ≡ @sigma_arrow
-        K
-        (@Const_catd K A)
-        x
-        y
-        u
-        v
-        p
-        alpha;
-
-assert [K A : Cat]
-  (x y : τ (Obj K))
-  (u v : τ (Obj A))
-  (p : τ (Hom K x y))
-  (alpha : τ (Hom A u v)) ⊢
-  @fapp1_fapp0
-    (@Sigma_cat K (@Const_catd K A))
-    (Product_cat K A)
-    (@const_sigma_to_Product_func K A)
-    (Struct_sigma x u)
-    (Struct_sigma y v)
-    (@sigma_arrow K (@Const_catd K A) x y u v p alpha)
-    ≡ @Struct_sigma
-        (Obj (Hom_cat K x y))
-        (λ _ : τ (Obj (Hom_cat K x y)), Obj (Hom_cat A u v))
-        p
-        alpha;
 
 // Internalized-x prerequisite: Cat-valued family over a total category induced
 // by a displayed functor into the constant category universe.
@@ -4351,6 +4247,32 @@ assert [K : Cat] (R D : τ (Catd K))
   (s t : τ (Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)))) ⊢
   Hom_cat (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)) s t
     ≡ @Transfd_cat K R D s t;
+
+assert [K A : Cat] ⊢
+  @Sigma_cat K (@Const_catd K A) ≡ Product_cat K A;
+
+assert [K A : Cat]
+  (x y : τ (Obj K))
+  (u v : τ (Obj A)) ⊢
+  @Hom_cat
+    (@Sigma_cat K (@Const_catd K A))
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    ≡ @Product_cat
+        (Hom_cat K x y)
+        (Hom_cat A u v);
+
+assert [K A : Cat]
+  (x y : τ (Obj K))
+  (u v : τ (Obj A))
+  (p : τ (Hom K x y))
+  (alpha : τ (Hom A u v)) ⊢
+  @sigma_arrow K (@Const_catd K A) x y u v p alpha
+    ≡ @Struct_sigma
+        (Obj (Hom_cat K x y))
+        (λ _ : τ (Obj (Hom_cat K x y)), Obj (Hom_cat A u v))
+        p
+        alpha;
 
 /*
   Mixed-variance family constructors.
