@@ -1901,6 +1901,23 @@ symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
   : τ (Obj (Pi_cat E));
 
+// Derived presentation of the rho-section as path induction on the
+// representable motive at the reflexive outgoing path. The stable
+// `pathout_refl_arrow_sec` head remains primitive to avoid making its
+// component rule unfold through `path_ind_sec` during early checks.
+symbol pathout_refl_arrow_sec_from_pathind [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (Pi_cat
+      (@Rep_catd
+        (@PathOut_cat Z x)
+        (@pathout_refl_obj Z x))))
+≔ @path_ind_sec
+    Z
+    x
+    (@Rep_catd
+      (@PathOut_cat Z x)
+      (@pathout_refl_obj Z x))
+    (@id (@PathOut_cat Z x) (@pathout_refl_obj Z x));
+
 // Fixed-x internal layer: source family of path induction at fixed x.
 //
 // Surface/formula:
@@ -4153,6 +4170,14 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     (@PathOut_cat Z x)
     (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
     (@pathout_refl_arrow_sec Z x)
+    (@pathout_obj Z x y p)
+    ≡ @pathout_refl_arrow Z x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @piapp0
+    (@PathOut_cat Z x)
+    (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
+    (@pathout_refl_arrow_sec_from_pathind Z x)
     (@pathout_obj Z x y p)
     ≡ @pathout_refl_arrow Z x y p;
 

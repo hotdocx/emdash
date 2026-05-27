@@ -54,7 +54,9 @@ Retired historical references:
   `PathIndTgt_transport_func`, `PathInd_transport_lhs_func`,
   `PathInd_transport_rhs_func`, `PathInd_transport_transf`, and
   `pathout_refl_arrow_sec`, with `pathout_refl_arrow` now constructed from the
-  generic `sigma_transport_arrow`;
+  generic `sigma_transport_arrow` and
+  `pathout_refl_arrow_sec_from_pathind` validating the derived rho-section
+  presentation componentwise;
 - primary telescope path-induction packaging:
   `PathInd_transfd : Transfd(PathOutReflEval_funcd, PathOutPi_funcd)`;
 - derived Sigma-total path-induction packaging:
