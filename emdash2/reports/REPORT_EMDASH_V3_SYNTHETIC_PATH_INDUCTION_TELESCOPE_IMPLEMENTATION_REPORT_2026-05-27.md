@@ -538,6 +538,91 @@ dependent Grothendieck-style morphism action.
 5. Keep global coherent motive families deferred until the generic uncurrying
    and comprehension action layer is stable.
 
+## 2026-05-28 Implementation Update: Product Warm-Up
+
+The first two items in the refined order above have now been implemented in
+`emdash3_2.lp`.
+
+Added comments near the Sigma definitions clarifying that the current Sigma
+computation layer is capped/1-arrow level:
+
+```text
+fapp1_fapp0(sigma_map_func eta, (p,alpha))
+```
+
+is computational, while the full hom-functor package
+
+```text
+fapp1_func(sigma_map_func eta)
+```
+
+is not yet exposed as the final omega-level Sigma API.
+
+Added a minimal ordinary product package:
+
+```text
+Product_cat(A,B)
+Obj(A x B) = Sigma x : Obj(A), Obj(B)
+Hom_{A x B}((x,u),(y,v)) = Hom_A(x,y) x Hom_B(u,v)
+id_{(x,u)} = (id_x,id_u)
+(g1,g2) o (f1,f2) = (g1 o f1, g2 o f2)
+```
+
+Also added the ordinary product universal-property heads at object/action
+level:
+
+```text
+Product_pair_func(F,G)
+Product_projL_func(H)
+Product_projR_func(H)
+```
+
+with object and `fapp1_func` projection/pairing computations.
+
+Added an object-level ordinary curry/uncurry scaffold:
+
+```text
+curry(F)[x][y] = F[(x,y)]
+uncurry(G)[(x,y)] = G[x][y]
+uncurry(curry(F))[(x,y)] = F[(x,y)]
+curry(uncurry(G))[x][y] = G[x][y]
+```
+
+This is intentionally not the final most-internal product/functor adjunction
+package. In particular, the full omega-action:
+
+```text
+fapp1_func(curry(F))
+fapp1_func(uncurry(G))
+```
+
+is not implemented yet. The current scaffold only validates object-level beta
+behavior and the two object-level round trips.
+
+The curry/uncurry arrow-action laws should be probed later as a focused pass,
+because the natural formula for `uncurry(G)[(f,g)]` uses both transfor
+components and functor action:
+
+```text
+G[x'][g] o G[f][y].
+```
+
+Added bridge functors between ordinary products and constant-family Sigma
+totals:
+
+```text
+Product_to_const_sigma_func    : Product_cat K A -> Sigma_cat(Const_catd K A)
+const_sigma_to_Product_func    : Sigma_cat(Const_catd K A) -> Product_cat K A
+```
+
+These compute on objects and capped 1-arrow actions. They are intentionally not
+a definitional identification between `Product_cat K A` and
+`Sigma_cat(Const_catd K A)`.
+
+The next natural implementation step is to probe the full `fapp1_func` action
+for ordinary curry/uncurry, then return to more generic `Sigma_transfd_funcd`
+action/naturality.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -555,6 +640,11 @@ git diff --check
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it.
+- Continue the ordinary curry/uncurry pass by probing the missing full
+  `fapp1_func` action laws and a more-internal adjunction-style packaging.
+- Strengthen the product/Sigma constant-family bridge only if a downstream
+  theorem requires more than the current object and capped-arrow bridge
+  functors.
 - Continue the primitive-to-defined audit, especially around ordinary
   off-diagonal action (`tapp1_fapp0`) and any remaining internalized packages
   that can be derived cleanly from smaller semantic constructors.

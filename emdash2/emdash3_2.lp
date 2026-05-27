@@ -878,6 +878,168 @@ injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 
 // -------------------------------------------------------------------------------------------------
+// 4b. Ordinary binary products of categories
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Minimal ordinary product package.
+
+  Surface/formula:
+    Product_cat(A,B)              = A x B
+    Obj(A x B)                    = Sigma x : Obj(A), Obj(B)
+    Hom_{A x B}((x,u),(y,v))      = Hom_A(x,y) x Hom_B(u,v)
+    id_{(x,u)}                    = (id_x,id_u)
+    (g1,g2) o (f1,f2)             = (g1 o f1, g2 o f2)
+
+  This is the ordinary/non-dependent warm-up for later dependent
+  Sigma-total/comprehension uncurrying. Keep it small until the normal forms
+  are stable in v3.2.
+*/
+injective symbol Product_cat : Π (A B : Cat), Cat;
+
+rule Obj (Product_cat $A $B)
+  ↪ @Σ_ (Obj $A) (λ _ : τ (Obj $A), Obj $B);
+
+rule Op_cat (Product_cat $A $B)
+  ↪ Product_cat (Op_cat $A) (Op_cat $B);
+
+symbol Product_projL [A B : Cat] (xy : τ (Obj (Product_cat A B)))
+  : τ (Obj A)
+≔ sigma_Fst xy;
+
+symbol Product_projR [A B : Cat] (xy : τ (Obj (Product_cat A B)))
+  : τ (Obj B)
+≔ sigma_Snd xy;
+
+injective symbol Product_pair [A B : Cat]
+  (x : τ (Obj A)) (y : τ (Obj B))
+  : τ (Obj (Product_cat A B))
+≔ @Struct_sigma (Obj A) (λ _ : τ (Obj A), Obj B) x y;
+
+rule Hom_cat (Product_cat $A $B) $p $q
+  ↪ Product_cat
+      (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
+      (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
+
+rule @id (Product_cat $A $B) (Struct_sigma $x $u)
+  ↪ Struct_sigma (@id $A $x) (@id $B $u);
+
+rule @comp_fapp0
+      (Product_cat $A $B)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $z $w)
+      (Struct_sigma $g1 $g2)
+      (Struct_sigma $f1 $f2)
+  ↪ Struct_sigma
+      (@comp_fapp0 $A $x $y $z $g1 $f1)
+      (@comp_fapp0 $B $u $v $w $g2 $f2);
+
+// Universal-property view at object/action level: a functor into a product is
+// equivalent to a pair of functors. This is intentionally just the ordinary
+// product warm-up; transfor-level product rules can be added later when needed.
+symbol Product_projL_func [A B I : Cat]
+  (H : τ (Functor I (Product_cat A B)))
+  : τ (Functor I A);
+
+symbol Product_projR_func [A B I : Cat]
+  (H : τ (Functor I (Product_cat A B)))
+  : τ (Functor I B);
+
+injective symbol Product_pair_func [A B I : Cat]
+  (F : τ (Functor I A)) (G : τ (Functor I B))
+  : τ (Functor I (Product_cat A B));
+
+rule Product_projL_func (Product_pair_func $F $G) ↪ $F
+with Product_projR_func (Product_pair_func $F $G) ↪ $G;
+
+rule Product_pair_func (Product_projL_func $H) (Product_projR_func $H) ↪ $H;
+
+rule fapp0 (Product_pair_func $F $G) $i
+  ↪ Struct_sigma (fapp0 $F $i) (fapp0 $G $i);
+
+rule fapp0 (Product_projL_func $H) $i
+  ↪ sigma_Fst (fapp0 $H $i);
+
+rule fapp0 (Product_projR_func $H) $i
+  ↪ sigma_Snd (fapp0 $H $i);
+
+rule @fapp1_func _ _ (Product_pair_func $F $G) $i $j
+  ↪ Product_pair_func
+      (@fapp1_func _ _ $F $i $j)
+      (@fapp1_func _ _ $G $i $j);
+
+rule @fapp1_func _ _ (Product_projL_func $H) $i $j
+  ↪ Product_projL_func (@fapp1_func _ _ $H $i $j);
+
+rule @fapp1_func _ _ (Product_projR_func $H) $i $j
+  ↪ Product_projR_func (@fapp1_func _ _ $H $i $j);
+
+assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
+  @Product_projL A B (@Product_pair A B x u) ≡ x;
+
+assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
+  @Product_projR A B (@Product_pair A B x u) ≡ u;
+
+assert [A B : Cat]
+  (p q : τ (Obj (Product_cat A B))) ⊢
+  @Hom_cat (Product_cat A B) p q
+    ≡ @Product_cat
+        (Hom_cat A (sigma_Fst p) (sigma_Fst q))
+        (Hom_cat B (sigma_Snd p) (sigma_Snd q));
+
+assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
+  @id (Product_cat A B) (Struct_sigma x u)
+    ≡ @Struct_sigma
+        (Obj (Hom_cat A x x))
+        (λ _ : τ (Obj (Hom_cat A x x)), Obj (Hom_cat B u u))
+        (@id A x)
+        (@id B u);
+
+assert [A B : Cat]
+  (x y z : τ (Obj A))
+  (u v w : τ (Obj B))
+  (f : τ (Hom A x y))
+  (g : τ (Hom A y z))
+  (alpha : τ (Hom B u v))
+  (beta : τ (Hom B v w)) ⊢
+  @comp_fapp0
+    (Product_cat A B)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    (Struct_sigma z w)
+    (Struct_sigma g beta)
+    (Struct_sigma f alpha)
+    ≡ @Struct_sigma
+        (Obj (Hom_cat A x z))
+        (λ _ : τ (Obj (Hom_cat A x z)), Obj (Hom_cat B u w))
+        (@comp_fapp0 A x y z g f)
+        (@comp_fapp0 B u v w beta alpha);
+
+assert [A B I : Cat]
+  (F : τ (Functor I A))
+  (G : τ (Functor I B))
+  (i : τ (Obj I)) ⊢
+  @fapp0 I (Product_cat A B) (@Product_pair_func A B I F G) i
+    ≡ @Struct_sigma
+        (Obj A)
+        (λ _ : τ (Obj A), Obj B)
+        (@fapp0 I A F i)
+        (@fapp0 I B G i);
+
+assert [A B I : Cat]
+  (F : τ (Functor I A))
+  (G : τ (Functor I B))
+  (i j : τ (Obj I)) ⊢
+  @fapp1_func I (Product_cat A B) (@Product_pair_func A B I F G) i j
+    ≡ @Product_pair_func
+        (Hom_cat A (@fapp0 I A F i) (@fapp0 I A F j))
+        (Hom_cat B (@fapp0 I B G i) (@fapp0 I B G j))
+        (Hom_cat I i j)
+        (@fapp1_func I A F i j)
+        (@fapp1_func I B G i j);
+
+// -------------------------------------------------------------------------------------------------
 // 5. Ordinary transfors
 // -------------------------------------------------------------------------------------------------
 
@@ -1049,6 +1211,78 @@ rule fapp0
       (@tapp0_fapp0 $K Cat_cat $E $D $y $eta)
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
   ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
+
+// Ordinary product curry/uncurry scaffold.
+//
+// Surface/formula:
+//   curry(F)[x][y]      = F[(x,y)]
+//   uncurry(G)[(x,y)]   = G[x][y]
+//
+// Status:
+//   This is intentionally object-level first. It is not yet the most-internal
+//   Product/Functor adjunction package, and it does not yet expose the full
+//   omega-action (`fapp1_func`) of curry/uncurry. The full arrow-action package
+//   should be added in a later focused pass once the Product normal forms are
+//   stable in v3.2.
+symbol curry_func [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  : τ (Functor A (Functor_cat B C));
+
+symbol curry_fapp0_func [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  : τ (Functor B C);
+
+rule fapp0 (@curry_func $A $B $C $F) $x
+  ↪ @curry_fapp0_func $A $B $C $F $x;
+
+rule fapp0 (@curry_fapp0_func $A $B $C $F $x) $y
+  ↪ fapp0 $F (Struct_sigma $x $y);
+
+symbol uncurry_func [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  : τ (Functor (Product_cat A B) C);
+
+rule fapp0 (@uncurry_func $A $B $C $G) (Struct_sigma $x $y)
+  ↪ fapp0 (fapp0 $G $x) $y;
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0 B C
+    (@fapp0 A (Functor_cat B C) (@curry_func A B C F) x)
+    y
+    ≡ @fapp0 (Product_cat A B) C F (Struct_sigma x y);
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0 (Product_cat A B) C
+    (@uncurry_func A B C G)
+    (Struct_sigma x y)
+    ≡ @fapp0 B C (@fapp0 A (Functor_cat B C) G x) y;
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0 (Product_cat A B) C
+    (@uncurry_func A B C (@curry_func A B C F))
+    (Struct_sigma x y)
+    ≡ @fapp0 (Product_cat A B) C F (Struct_sigma x y);
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0 B C
+    (@fapp0 A (Functor_cat B C)
+      (@curry_func A B C (@uncurry_func A B C G))
+      x)
+    y
+    ≡ @fapp0 B C (@fapp0 A (Functor_cat B C) G x) y;
 
 /*
   More-internal ordinary hom-action.
@@ -1536,6 +1770,13 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
 // Surface/formula:
 //   Sigma_cat(E) = Σ k :^f K, E[k]
 //   Obj(Sigma_cat(E)) has objects (k,u).
+//
+// Current computational status:
+//   The Sigma rules below expose object action, capped 1-arrow action
+//   (`fapp1_fapp0`), and 1-arrow composition. They are deliberately enough for
+//   path/arrow transitivity, total transports, and rho coherence. They are not
+//   yet the final full omega-functorial API for `fapp1_func(sigma_map_func eta)`
+//   on all higher hom-action data.
 injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
 // Fixed-base layer: functorial total-category constructor.
@@ -1706,6 +1947,10 @@ rule @fapp0 _ _
 // Surface/formula:
 //   Sigma(eta)[(p,alpha)] = (p, eta[y][alpha]).
 //
+// This is the capped action `fapp1_fapp0` of `sigma_map_func`. A future
+// full-omega layer should expose the corresponding `fapp1_func` package between
+// Sigma hom-categories.
+//
 // The two possible source objects in D[y],
 //   D[p](eta[x](u)) and eta[y](E[p](u)),
 // are connected by the Cat-valued object-level strict-naturality folds above.
@@ -1825,9 +2070,119 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
       (@fapp0
         (Fibre_cat E x)
         (Fibre_cat E y)
-        (@catd_transport_func K E x y p)
-        u))
+	    (@catd_transport_func K E x y p)
+	    u))
     (@sigma_transport_arrow K E x y p u);
+
+// Bridge between ordinary products and constant-family Sigma totals.
+//
+// Surface/formula:
+//   Product_cat K A  ~  Sigma_cat(Const_catd K A).
+//
+// This is intentionally a pair of bridge functors, not a definitional
+// identification. Product homs use pointwise products, while Sigma homs use the
+// dependent `Hom(Sigma)` presentation.
+symbol Product_to_const_sigma_func [K A : Cat]
+  : τ (Functor (Product_cat K A) (@Sigma_cat K (@Const_catd K A)));
+
+symbol const_sigma_to_Product_func [K A : Cat]
+  : τ (Functor (@Sigma_cat K (@Const_catd K A)) (Product_cat K A));
+
+rule fapp0 (@Product_to_const_sigma_func $K $A) (Struct_sigma $k $a)
+  ↪ Struct_sigma $k $a;
+
+rule fapp0 (@const_sigma_to_Product_func $K $A) (Struct_sigma $k $a)
+  ↪ Struct_sigma $k $a;
+
+rule @fapp1_fapp0
+      _
+      _
+      (@Product_to_const_sigma_func $K $A)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $p $alpha)
+  ↪ @sigma_arrow
+      $K
+      (@Const_catd $K $A)
+      $x
+      $y
+      $u
+      $v
+      $p
+      $alpha;
+
+rule @fapp1_fapp0
+      _
+      _
+      (@const_sigma_to_Product_func $K $A)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $p $alpha)
+  ↪ Struct_sigma $p $alpha;
+
+assert [K A : Cat] (k : τ (Obj K)) (a : τ (Obj A)) ⊢
+  @fapp0
+    (Product_cat K A)
+    (@Sigma_cat K (@Const_catd K A))
+    (@Product_to_const_sigma_func K A)
+    (Struct_sigma k a)
+    ≡ @Struct_sigma
+        (Obj K)
+        (λ _ : τ (Obj K), Obj A)
+        k
+        a;
+
+assert [K A : Cat] (k : τ (Obj K)) (a : τ (Obj A)) ⊢
+  @fapp0
+    (@Sigma_cat K (@Const_catd K A))
+    (Product_cat K A)
+    (@const_sigma_to_Product_func K A)
+    (Struct_sigma k a)
+    ≡ @Struct_sigma
+        (Obj K)
+        (λ _ : τ (Obj K), Obj A)
+        k
+        a;
+
+assert [K A : Cat]
+  (x y : τ (Obj K))
+  (u v : τ (Obj A))
+  (p : τ (Hom K x y))
+  (alpha : τ (Hom A u v)) ⊢
+  @fapp1_fapp0
+    (Product_cat K A)
+    (@Sigma_cat K (@Const_catd K A))
+    (@Product_to_const_sigma_func K A)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    (Struct_sigma p alpha)
+    ≡ @sigma_arrow
+        K
+        (@Const_catd K A)
+        x
+        y
+        u
+        v
+        p
+        alpha;
+
+assert [K A : Cat]
+  (x y : τ (Obj K))
+  (u v : τ (Obj A))
+  (p : τ (Hom K x y))
+  (alpha : τ (Hom A u v)) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat K (@Const_catd K A))
+    (Product_cat K A)
+    (@const_sigma_to_Product_func K A)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    (@sigma_arrow K (@Const_catd K A) x y u v p alpha)
+    ≡ @Struct_sigma
+        (Obj (Hom_cat K x y))
+        (λ _ : τ (Obj (Hom_cat K x y)), Obj (Hom_cat A u v))
+        p
+        alpha;
 
 // Internalized-x prerequisite: Cat-valued family over a total category induced
 // by a displayed functor into the constant category universe.
