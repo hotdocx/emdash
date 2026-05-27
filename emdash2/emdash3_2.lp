@@ -1865,32 +1865,6 @@ symbol pathout_motive_transport_arrow [Z : Cat]
     p
     E;
 
-// Fixed-x packaging layer: section collecting all `rho_{x,y,p}`.
-//
-// Surface/formula:
-//   pathout_refl_arrow_sec(x) :
-//     Π q :^f PathOut_Z(x), Hom_{PathOut_Z(x)}((x,id_x),q)
-//   pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
-constant symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
-  : τ (Obj (Pi_cat
-      (@Rep_catd
-        (@PathOut_cat Z x)
-        (@pathout_refl_obj Z x))));
-
-rule @tapp0_fapp0
-      _
-      Cat_cat
-      _
-      _
-      (Struct_sigma $y $p)
-      (@pathout_refl_arrow_sec $Z $x)
-  ↪ @Obj_func
-      (Hom_cat
-        (@PathOut_cat $Z $x)
-        (@pathout_refl_obj $Z $x)
-        (Struct_sigma $y $p))
-      (@pathout_refl_arrow $Z $x $y $p);
-
 // Final desired fixed-x theorem/object: path induction section.
 //
 // Surface/formula:
@@ -1901,11 +1875,14 @@ symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
   (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
   : τ (Obj (Pi_cat E));
 
-// Derived presentation of the rho-section as path induction on the
-// representable motive at the reflexive outgoing path. The stable
-// `pathout_refl_arrow_sec` head remains primitive to avoid making its
-// component rule unfold through `path_ind_sec` during early checks.
-symbol pathout_refl_arrow_sec_from_pathind [Z : Cat] (x : τ (Obj Z))
+// Fixed-x packaging layer: section collecting all `rho_{x,y,p}`, derived as
+// path induction on the representable motive at the reflexive outgoing path.
+//
+// Surface/formula:
+//   pathout_refl_arrow_sec(x) :
+//     Π q :^f PathOut_Z(x), Hom_{PathOut_Z(x)}((x,id_x),q)
+//   pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
+symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
   : τ (Obj (Pi_cat
       (@Rep_catd
         (@PathOut_cat Z x)
@@ -4170,14 +4147,6 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     (@PathOut_cat Z x)
     (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
     (@pathout_refl_arrow_sec Z x)
-    (@pathout_obj Z x y p)
-    ≡ @pathout_refl_arrow Z x y p;
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
-  @piapp0
-    (@PathOut_cat Z x)
-    (@Rep_catd (@PathOut_cat Z x) (@pathout_refl_obj Z x))
-    (@pathout_refl_arrow_sec_from_pathind Z x)
     (@pathout_obj Z x y p)
     ≡ @pathout_refl_arrow Z x y p;
 

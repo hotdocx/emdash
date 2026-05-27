@@ -470,7 +470,110 @@ expected future dependent adjunctions along a functor `F : A → B`:
 Some higher action/coherence rules for these helpers remain future work. The
 object-level beta laws above are the current intended reading.
 
-## 12. What Is Deferred
+## 12. Synthetic Path Induction
+
+For a category `Z` and source object `x : Z`, the outgoing-path category is:
+
+```text
+PathOut_Z(x) = Σ y : Z, Hom_Z(x,y)
+```
+
+An object is written `(y,p)`, where `p : Hom_Z(x,y)`. The reflexive outgoing
+path is:
+
+```text
+reflout_x = (x,id_x).
+```
+
+A path-induction motive at fixed `x` is a directed family:
+
+```text
+E : PathOut_Z(x) → Cat.
+```
+
+The fixed-`x` eliminator has the expected dependent-product shape:
+
+```text
+path_ind_sec(Z,x,E,u) : Π q : PathOut_Z(x), E[q]
+u : E[reflout_x]
+```
+
+and computes at `(y,p)` by transporting `u` along the canonical arrow:
+
+```text
+rho_{x,y,p} : reflout_x → (y,p)
+```
+
+In the current implementation this arrow is not axiomatic. It is the canonical
+Sigma transport arrow for the representable family:
+
+```text
+rho_{x,y,p} =
+  sigma_transport_arrow(Rep_Z(x), p, id_x)
+```
+
+using the endpoint computation:
+
+```text
+Rep_Z(x)[p](id_x) = p.
+```
+
+The primary internalized theorem is the telescope form over varying `x`:
+
+```text
+PathInd_transfd(Z)
+  : (x :^n Z) →
+      PathOutReflEval_Z[x] ⇒ PathOutPi_Z[x]
+```
+
+where:
+
+```text
+PathOutReflEval_Z[x][E] = E[reflout_x]
+PathOutPi_Z[x][E]       = Π q : PathOut_Z(x), E[q].
+```
+
+Its component is the fixed-`x` theorem:
+
+```text
+PathInd_transfd(Z)[x] = PathInd_func(Z,x)
+PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u).
+```
+
+The fixed-`x` rho-section is the path induction instance for the representable
+motive on `PathOut_Z(x)`:
+
+```text
+pathout_refl_arrow_sec(x)
+  = path_ind_sec(Rep_{PathOut_Z(x)}((x,id_x)), id_{(x,id_x)}),
+pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
+```
+
+The Sigma-total presentation is now derived from this telescope theorem:
+
+```text
+PathInd_funcd(Z) =
+  Sigma_transfd_funcd(PathInd_transfd(Z)).
+```
+
+The generic uncurrying law is:
+
+```text
+Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r].
+```
+
+This keeps the theorem surface sequential:
+
+```text
+(x :^n Z) →
+  (E :^n Catd(PathOut_Z(x))) →
+    E[reflout_x] → Π q : PathOut_Z(x), E[q]
+```
+
+while still providing the compiled Sigma-total form needed by existing
+transport and total-category infrastructure.
+
+## 13. What Is Deferred
 
 The current foundations intentionally do not yet include:
 
@@ -492,7 +595,7 @@ directed categorical foundation: universes as categories, functorial
 Cat-valued families, total categories, section categories, dependent homs, and
 section action over base arrows.
 
-## 13. Implementation Glossary
+## 14. Implementation Glossary
 
 This table maps the mathematical notation above to the current `emdash3_2.lp`
 vocabulary.
@@ -529,6 +632,13 @@ vocabulary.
 | `Functor_catd(A,B)` | `Functor_catd A B` |
 | `Hom_catd(E,X,Y)` | `Hom_catd E X Y` |
 | `Transf_catd(A,B,FF,GG)` | `Transf_catd A B FF GG` |
+| `PathOut_Z(x)` | `PathOut_cat Z x` |
+| `(y,p) : PathOut_Z(x)` | `pathout_obj Z x y p` |
+| `reflout_x` | `pathout_refl_obj Z x` |
+| `rho_{x,y,p}` | `pathout_refl_arrow Z x y p` |
+| `PathInd_transfd(Z)` | `PathInd_transfd Z` |
+| `Sigma_transfd_funcd(eta)` | `Sigma_transfd_funcd eta` |
+| Sigma-total path induction | `PathInd_funcd Z` |
 | `section_total(s)` | future presentation-level facade; not currently named |
 | `K × A` | future `Product_cat K A` connection for `Σ_K Const_K(A)` |
 | `π₂ : K × A → A` | future product/Sigma-constant projection |

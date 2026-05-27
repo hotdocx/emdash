@@ -66,10 +66,11 @@ This was needed for the endpoint computation:
 Rep_Z(x)[p](id_x) = p.
 ```
 
-- Added a derived bridge for the rho-section:
+- Replaced the primitive rho-section by its path-induction-derived
+  presentation:
 
 ```text
-pathout_refl_arrow_sec_from_pathind(x)
+pathout_refl_arrow_sec(x)
   = path_ind_sec(Rep_{PathOut_Z(x)}((x,id_x)), id_{(x,id_x)}).
 ```
 
@@ -85,10 +86,18 @@ the generic projection rule is available.
 The `rho` construction is no longer an axiom. Full `rho` coherence, such as
 compatibility with composition in `PathOut_transport`, remains deferred.
 
-`pathout_refl_arrow_sec` remains a stable primitive section head. A direct
-replacement by its path-induction-derived presentation was probed, but it made
-the full check time out. The derived bridge is therefore kept as documentation
-and executable evidence while preserving the stable head for rewrite search.
+`pathout_refl_arrow_sec` is now transparent. A focused probe showed that the
+path-induction-derived definition checks once the old explicit
+`tapp0_fapp0(pathout_refl_arrow_sec, Struct_sigma ...)` component rewrite rule
+is removed. The earlier timeout came from that overlapping reduction path, not
+from the component assertion itself.
+
+Do not define `pathout_refl_arrow` itself as the component of
+`pathout_refl_arrow_sec` in the current architecture. That section is defined
+through `path_ind_sec`, and the component rule for `path_ind_sec` uses
+`pathout_refl_arrow`; making `pathout_refl_arrow` unfold back to that component
+would create a recursive computation path. The component equality is therefore
+kept as an assertion rather than as the defining equation.
 
 ## Validation
 
@@ -101,6 +110,7 @@ Commands run successfully:
 timeout 60s lambdapi check -w emdash3_2.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 git diff --check
+git diff --cached --check
 ```
 
 ## Remaining Work
