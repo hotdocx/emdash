@@ -10,8 +10,12 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
   v3.2 status and rewrite/debugging SOP.
-- `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`: current
-  internalized path-induction plan.
+- `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_PLAN_2026-05-27.md`:
+  active synthetic/telescope path-induction plan for v3.2.
+- `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md` and
+  `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`:
+  superseded internalized path-induction plan and implementation log, useful as
+  historical context but no longer the forward plan.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
@@ -40,6 +44,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   shape. Try a smaller stable-head rule, omit brittle implicit arguments, or
   move the rule later only if there is a concrete assertion showing why it is
   needed.
+- Keep inferred source/target categories, endpoint families, and similar
+  reconstructible arguments implicit on rule LHSs unless they are the actual
+  discriminator. In particular, avoid explicit compound or reducible expressions
+  in implicit-argument positions on rule LHSs.
 - During debugging, keep inferred arguments explicit when that makes errors and
   constraints easier to read. Before finalizing, clean up redundant explicit
   arguments after a bounded check proves Lambdapi can infer them reliably.
@@ -57,12 +65,24 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Prefer semantic definitions before introducing new stable heads. If a semantic
   construction fails to compute, first check for missing projection rules and for
   brittle explicit source/target slots.
+- Use stable heads only for real projection, discrimination, or performance
+  boundaries. Good stable heads are often projections from a more internalized
+  construction, not substitutes for that construction.
 - In explicit `fapp0` source/target arguments, prefer canonical normal forms
   such as `Hom_cat ...` and `Functord_cat ...` over reducible readability
   wrappers such as `Fibre_cat (DefinedAlias ...) k`. The wrapper may compute
   alone but still trigger expensive conversion in nested assertions.
 - Keep readable helper aliases routed through the named semantic constructor;
   avoid duplicating the same semantic body in multiple helper definitions.
+- Do not stop at object-level formulas when implementing internalized
+  infrastructure. Check that arrow actions and projections compute at the level
+  later packages need.
+- Distinguish capped action `fapp1_fapp0 F p` from full hom-action
+  `fapp1_func F a b`. A missing capped rule can block a valid semantic route,
+  but capped object-level helpers should not replace full synthetic action.
+- Keep theorem-style `assert`/`#check` statements near the symbols and comments
+  that explain their mathematical formula. Reserve diagnostic sections for
+  temporary normalization probes and regression checks.
 
 ## Print pipeline
 Run these from this folder (`emdash2/`), independent of the parent repo workspace:
