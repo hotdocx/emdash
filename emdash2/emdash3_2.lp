@@ -2003,24 +2003,15 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
     p
     E;
 
-// Uncurried Sigma-total presentation of path induction. This is currently a
-// primitive package for existing checks; the forward plan is to derive it from
-// `PathInd_transfd` by a generic Sigma-total uncurrying construction.
+// Uncurried Sigma-total presentation of path induction, derived from the
+// primary telescope theorem by generic Sigma-total uncurrying.
 //
 // Surface/formula:
 //   PathInd_funcd(Z) :
 //     (x,E :^n Σ x :^f Z, Catd(PathOut_Z(x))) ->
 //       E[(x,id_x)] -> Π q :^f PathOut_Z(x), E[q]
 //   PathInd_funcd(Z)[(x,E)][u] = path_ind_sec(Z,x,E,u).
-constant symbol PathInd_funcd [Z : Cat]
-  : τ (Functord
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z));
-
-// Derived Sigma-total presentation from the primary telescope theorem. The
-// existing `PathInd_funcd` constant remains in place while this derived form
-// is validated componentwise.
-symbol PathInd_funcd_from_transfd [Z : Cat]
+symbol PathInd_funcd [Z : Cat]
   : τ (Functord
       (@PathIndSrc_catd Z)
       (@PathIndTgt_catd Z))
@@ -2031,21 +2022,12 @@ symbol PathInd_funcd_from_transfd [Z : Cat]
     (@PathOutPi_funcd Z)
     (@PathInd_transfd Z);
 
-rule @tapp0_fapp0
-      _
-      Cat_cat
-      _
-      _
-      (Struct_sigma $x $E)
-      (@PathInd_funcd $Z)
-  ↪ @path_ind_func_fapp0 $Z $x $E;
-
 /*
-  Mathematical computation statements for fixed-x and outer-x path induction.
+  Mathematical computation statements for fixed-x path induction.
 
   These describe the source/target fibres and the component of the packaged
-  eliminator. They are local theorem statements for the path-induction
-  interface, not generic rewrite-debug checks.
+  fixed-source eliminator. The Sigma-total component statements live with the
+  generic uncurrying projection, after `tdapp0_fapp0` is available.
 */
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
   Fibre_cat (@PathInd_src_catd Z x) E
@@ -2078,32 +2060,6 @@ assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
     E
     (@PathInd_func Z x)
     ≡ @path_ind_func_fapp0 Z x E;
-
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @tapp0_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (Struct_sigma x E)
-    (@PathInd_funcd Z)
-    ≡ @path_ind_func_fapp0 Z x E;
-
-assert [Z : Cat] (x : τ (Obj Z))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
-  @fapp0
-    (Fibre_cat E (@pathout_refl_obj Z x))
-    (Pi_cat E)
-    (@tapp0_fapp0
-      (@Sigma_cat Z (@PathOutMotives_catd Z))
-      Cat_cat
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z)
-      (Struct_sigma x E)
-      (@PathInd_funcd Z))
-    u
-    ≡ @path_ind_sec Z x E u;
 
 // Transitivity benchmark layer: target family for composition out of a fixed
 // source x.
@@ -2984,7 +2940,7 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
 
   Surface/formula:
     Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r]
-    PathInd_funcd_from_transfd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
+    PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
 */
 assert [K : Cat] (R : τ (Catd K))
   (S T : τ (Functord R (@Const_catd K Cat_cat)))
@@ -3020,24 +2976,24 @@ assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
     (@PathIndSrc_catd Z)
     (@PathIndTgt_catd Z)
     (Struct_sigma x E)
-    (@PathInd_funcd_from_transfd Z)
+    (@PathInd_funcd Z)
     ≡ @path_ind_func_fapp0 Z x E;
 
-assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @tapp0_fapp0
-    (@Sigma_cat Z (@PathOutMotives_catd Z))
-    Cat_cat
-    (@PathIndSrc_catd Z)
-    (@PathIndTgt_catd Z)
-    (Struct_sigma x E)
-    (@PathInd_funcd_from_transfd Z)
-    ≡ @tapp0_fapp0
-        (@Sigma_cat Z (@PathOutMotives_catd Z))
-        Cat_cat
-        (@PathIndSrc_catd Z)
-        (@PathIndTgt_catd Z)
-        (Struct_sigma x E)
-        (@PathInd_funcd Z);
+assert [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)))) ⊢
+  @fapp0
+    (Fibre_cat E (@pathout_refl_obj Z x))
+    (Pi_cat E)
+    (@tapp0_fapp0
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      Cat_cat
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z)
+      (Struct_sigma x E)
+      (@PathInd_funcd Z))
+    u
+    ≡ @path_ind_sec Z x E u;
 
 // Readable component alias.
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]

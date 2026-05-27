@@ -11,9 +11,11 @@ path-induction work.
 
 - Active implementation: `emdash3_2.lp`.
 - Current theory/design guide:
-  `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md`.
+  `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_PLAN_2026-05-27.md`.
 - Current implementation status:
-  `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`.
+  `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_IMPLEMENTATION_REPORT_2026-05-27.md`.
+- Superseded internalized-path reports remain useful as historical
+  implementation records, but they are no longer the forward plan.
 - This report records repository-level SOP and retirement guidance.
 
 Retired historical references:
@@ -50,17 +52,19 @@ Retired historical references:
   `pathout_refl_eval_base_func`, `pathout_motive_transport_obj`,
   `PathOut_transport_func`, `PathIndSrc_transport_func`,
   `PathIndTgt_transport_func`, `PathInd_transport_lhs_func`,
-  `PathInd_transport_rhs_func`, `PathInd_transport_transf`, and the provisional
-  `pathout_refl_arrow_sec`;
-- first outer-`x` path-induction packaging:
-  `PathOutPi_funcd`, `PathOutReflEval_funcd`, `PathIndSrc_catd`,
-  `PathIndTgt_catd`, and `PathInd_funcd`, with checked fibre/component rules over
-  `Sigma_cat Z (PathOutMotives_catd Z)`, with `PathOutPi_funcd` restored as the
-  semantic `Pi_int_funcd` pullback instance folding through `Pi_pullback_funcd`,
-  checked source/target transports as specializations of
-  `Sigma_catd_transport_func` over canonical transported motives, and a named
-  path-induction transport square specialized from generic displayed-functor
-  naturality;
+  `PathInd_transport_rhs_func`, `PathInd_transport_transf`, and
+  `pathout_refl_arrow_sec`, with `pathout_refl_arrow` now constructed from the
+  generic `sigma_transport_arrow`;
+- primary telescope path-induction packaging:
+  `PathInd_transfd : Transfd(PathOutReflEval_funcd, PathOutPi_funcd)`;
+- derived Sigma-total path-induction packaging:
+  `PathInd_funcd = Sigma_transfd_funcd(PathInd_transfd)`, with checked
+  fibre/component rules over `Sigma_cat Z (PathOutMotives_catd Z)`, with
+  `PathOutPi_funcd` restored as the semantic `Pi_int_funcd` pullback instance
+  folding through `Pi_pullback_funcd`, checked source/target transports as
+  specializations of `Sigma_catd_transport_func` over canonical transported
+  motives, and a named path-induction transport square specialized from generic
+  displayed-functor naturality;
 - the fixed-`x` directed composition benchmark:
   `path_comp_sec(x)[p][z](q) == q o p`;
 - `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a
