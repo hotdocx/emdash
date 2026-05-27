@@ -171,6 +171,196 @@ through `path_ind_sec`, and the component rule for `path_ind_sec` uses
 would create a recursive computation path. The component equality is therefore
 kept as an assertion rather than as the defining equation.
 
+## Preliminary Findings For The Next Phase
+
+The original transitivity benchmark has been achieved computationally in the
+fixed-source form:
+
+```text
+path_ind_sec(Z,x,CompMotive_Z(x),id_{Rep_Z(x)}) = path_comp_sec(Z,x)
+path_comp_sec(Z,x)[p][z](q) = q o p.
+```
+
+The redesigned internalized-source theorem also reaches this benchmark through
+the telescope component:
+
+```text
+PathInd_transfd(Z)[x] = PathInd_func(Z,x)
+PathInd_transfd(Z)[x][CompMotive_Z(x)](id_{Rep_Z(x)})
+  = path_comp_sec(Z,x).
+```
+
+The file does not yet contain one fully expanded assertion spelling the whole
+chain:
+
+```text
+PathInd_transfd(Z)[x][CompMotive_Z(x)](id)[(y,p)][z](q) = q o p.
+```
+
+Adding that assertion should be the first next implementation step. It is a
+regression check for the achieved theorem, not new theory.
+
+### Composition Packaging
+
+Do not import the old `Product_cat`-based `comp_func` from `emdash2.lp` as the
+first move. The better v3.2 form is the telescoped/internal composition
+package:
+
+```text
+comp_func_tele(A,x,y,z)
+  : Hom_A(y,z) -> (Hom_A(x,y) -> Hom_A(x,z)).
+```
+
+It should be definable from the existing internal hom infrastructure:
+
+```text
+comp_func_tele(A,x,y,z)
+  := hom_(id_A,x)[on arrows y -> z]
+```
+
+or, in Lambdapi terms, morally:
+
+```text
+comp_func_tele(A,x,y,z)
+  := fapp1_func(hom_ A A id_A x, y, z).
+```
+
+The pointwise beta behavior should be:
+
+```text
+comp_func_tele(A,x,y,z)[g][f] = g o f.
+```
+
+This gives the omega-friendly packaging of composition without requiring
+`Product_cat` in v3.2.
+
+### Do Not Reverse `comp_cat_fapp0` Globally Yet
+
+Although cut-elimination often suggests the orientation:
+
+```text
+F(G(x)) -> (F o G)(x),
+```
+
+the current v3.2 kernel uses:
+
+```text
+(F o G)[x] -> F[G[x]].
+```
+
+Reversing this globally would be a high-risk rewrite-system change. It would
+overlap with many constructor beta rules and could hide constructor-specific
+normal forms currently used by assertions. For the immediate Sigma work, prefer
+a narrow strict object-transport fold:
+
+```text
+E[q](E[p](u)) -> E[q o p](u).
+```
+
+This should be treated as the object-level projection of strict functoriality
+for `E : K -> Cat`, not as a new mathematical axiom.
+
+### Sigma-Arrow Composition
+
+The intended Sigma-arrow composition computation is:
+
+```text
+(q,beta) o (p,alpha)
+  -> (q o p, beta o E[q][alpha])
+```
+
+with:
+
+```text
+p     : Hom_K(x,y)
+q     : Hom_K(y,z)
+alpha : Hom_{E[y]}(E[p](u), v)
+beta  : Hom_{E[z]}(E[q](v), w).
+```
+
+The fibre part:
+
+```text
+beta o E[q][alpha]
+```
+
+has the expected source only after the strict object-transport fold:
+
+```text
+E[q](E[p](u)) -> E[q o p](u).
+```
+
+Conceptual rule:
+
+```text
+comp_Sigma(
+  sigma_arrow(E,v,w,q,beta),
+  sigma_arrow(E,u,v,p,alpha))
+  ->
+sigma_arrow(E,u,w,q o p,beta o E[q][alpha]).
+```
+
+Operationally, since `sigma_arrow` is transparent and unfolds to the
+`Struct_sigma` representation supplied by `Hom(Sigma)`, the robust Lambdapi rule
+may need to match the reduced pair form rather than the readability head. The
+mathematical comment should still present it as Sigma-arrow composition.
+
+### Strict Naturality For Off-Diagonal Components
+
+Full Sigma-map action on general Sigma arrows needs the strict naturality of
+ordinary transfors. The useful v2 pattern is the off-diagonal component:
+
+```text
+tapp1_fapp0(epsilon,f) : F[x] -> G[y]
+```
+
+with cut-elimination rules:
+
+```text
+G[g] o epsilon[f] -> epsilon[g o f]
+epsilon[f] o F[g] -> epsilon[f o g].
+```
+
+v3.2 already reserves `tapp1_fapp0`, but keeps it abstract. Porting the strict
+v2 rules, carefully and with focused probes, would expose the naturality needed
+for Cat-valued transfors and displayed functors:
+
+```text
+D[p] o eta[x] -> eta[p]
+eta[y] o E[p] -> eta[p].
+```
+
+This is the missing ingredient for a fully general computation of:
+
+```text
+Sigma(eta)[sigma_arrow(E,p,alpha)].
+```
+
+### Rho Coherence Status
+
+Full rho coherence:
+
+```text
+PathOut_transport(p)[rho_{y,z,q}] o rho_{x,y,p}
+  -> rho_{x,z,q o p}
+```
+
+is no longer a blocker for `PathInd_transfd` or for the transitivity benchmark.
+It remains useful future coherence for `PathOut`, generic Sigma maps, and
+eventual global coherent motive families.
+
+Recommended dependency order for the next implementation phase:
+
+```text
+1. Add the fully expanded PathInd_transfd transitivity assertion.
+2. Add/probe comp_func_tele as transparent internal composition packaging.
+3. Probe the strict object-transport fold E[q](E[p](u)) -> E[q o p](u).
+4. Port/probe v2-style strict off-diagonal naturality for tapp1_fapp0.
+5. Probe Sigma-map action on general sigma_arrow.
+6. Probe Sigma-arrow composition.
+7. Only then revisit full rho coherence.
+```
+
 ## Validation
 
 The implementation was probed in temporary copies before being applied to
@@ -189,6 +379,11 @@ git diff --cached --check
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it.
-- Develop the full `rho` coherence laws, especially Sigma-arrow composition.
+- Add the fully expanded `PathInd_transfd` transitivity assertion as a compact
+  regression for the achieved theorem.
+- Develop strict object transport, off-diagonal naturality, Sigma-map action,
+  and Sigma-arrow composition in the probe-first order described above.
+- Develop the full `rho` coherence laws only after those generic Sigma-arrow
+  prerequisites are stable.
 - Keep global coherent motive families deferred; they are not the core
   path-induction constructor.
