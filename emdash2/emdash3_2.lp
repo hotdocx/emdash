@@ -2581,6 +2581,47 @@ constant symbol Sigma_transfd_funcd [K : Cat] [R : τ (Catd K)]
       (@Sigma_catd_functord_catd K R S)
       (@Sigma_catd_functord_catd K R T));
 
+// Canonical-transport action of a Sigma-uncurried displayed transfor.
+//
+// Surface/formula:
+//   Sigma_transfd(eta)[sigma_transport(R,p,r)]
+//     = Sigma_catd_transport(T,p,r) o eta[(x,r)].
+symbol Sigma_transfd_transport_func [K : Cat] [R : τ (Catd K)]
+  [S T : τ (Functord R (@Const_catd K Cat_cat))]
+  (eta : τ (Transfd S T))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x)))
+  : τ (Functor
+      (Fibre_cat (@Sigma_catd_functord_catd K R S) (Struct_sigma x r))
+      (Fibre_cat
+        (@Sigma_catd_functord_catd K R T)
+        (Struct_sigma y
+          (@fapp0
+            (Fibre_cat R x)
+            (Fibre_cat R y)
+            (@catd_transport_func K R x y p)
+            r))))
+≔ @comp_cat_fapp0
+    (Fibre_cat (@Sigma_catd_functord_catd K R S) (Struct_sigma x r))
+    (Fibre_cat (@Sigma_catd_functord_catd K R T) (Struct_sigma x r))
+    (Fibre_cat
+      (@Sigma_catd_functord_catd K R T)
+      (Struct_sigma y
+        (@fapp0
+          (Fibre_cat R x)
+          (Fibre_cat R y)
+          (@catd_transport_func K R x y p)
+          r)))
+    (@Sigma_catd_transport_func K R T x y p r)
+    (@tapp0_fapp0
+      (@Sigma_cat K R)
+      Cat_cat
+      (@Sigma_catd_functord_catd K R S)
+      (@Sigma_catd_functord_catd K R T)
+      (Struct_sigma x r)
+      (@Sigma_transfd_funcd K R S T eta));
+
 // -------------------------------------------------------------------------------------------------
 // 8. Mixed-variance family functor
 // -------------------------------------------------------------------------------------------------
@@ -3854,6 +3895,22 @@ rule @tapp0_fapp0
         $k
         $eta);
 
+// Canonical-transport action projection for generic Sigma-total uncurrying.
+// The rule matches the reduced Sigma-hom pair form, because
+// `sigma_transport_arrow` is transparent and may unfold before this projection
+// fires.  The target endpoint's second component stays implicit; the identity
+// fibre arrow forces it to be the transported object.
+rule @tapp1_fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      _
+      _
+      (Struct_sigma $x $r)
+      (Struct_sigma $y _)
+      (@Sigma_transfd_funcd $K $R $S $T $eta)
+      (Struct_sigma $p (@id _ _))
+  ↪ @Sigma_transfd_transport_func $K $R $S $T $eta $x $y $p $r;
+
 /*
   Mathematical computation statements for synthetic/telescope path induction.
 
@@ -4080,6 +4137,91 @@ symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
   (p : τ (Hom K x y))
   : τ (Functor (Fibre_cat E x) (Fibre_cat D y))
 ≔ @tapp1_fapp0 K Cat_cat E D x y FF p;
+
+assert [K : Cat] (R : τ (Catd K))
+  (S T : τ (Functord R (@Const_catd K Cat_cat)))
+  (eta : τ (Transfd S T))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x))) ⊢
+  @functord_transport_func
+    (@Sigma_cat K R)
+    (@Sigma_catd_functord_catd K R S)
+    (@Sigma_catd_functord_catd K R T)
+    (@Sigma_transfd_funcd K R S T eta)
+    (Struct_sigma x r)
+    (Struct_sigma y
+      (@fapp0
+        (Fibre_cat R x)
+        (Fibre_cat R y)
+        (@catd_transport_func K R x y p)
+        r))
+    (@sigma_transport_arrow K R x y p r)
+    ≡ @Sigma_transfd_transport_func K R S T eta x y p r;
+
+assert [K : Cat] (R : τ (Catd K))
+  (S T : τ (Functord R (@Const_catd K Cat_cat)))
+  (eta : τ (Transfd S T))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x)))
+  (c : τ (Obj (Fibre_cat
+      (@Sigma_catd_functord_catd K R S)
+      (Struct_sigma x r)))) ⊢
+  @fapp0
+    (Fibre_cat
+      (@Sigma_catd_functord_catd K R S)
+      (Struct_sigma x r))
+    (Fibre_cat
+      (@Sigma_catd_functord_catd K R T)
+      (Struct_sigma y
+        (@fapp0
+          (Fibre_cat R x)
+          (Fibre_cat R y)
+          (@catd_transport_func K R x y p)
+          r)))
+    (@functord_transport_func
+      (@Sigma_cat K R)
+      (@Sigma_catd_functord_catd K R S)
+      (@Sigma_catd_functord_catd K R T)
+      (@Sigma_transfd_funcd K R S T eta)
+      (Struct_sigma x r)
+      (Struct_sigma y
+        (@fapp0
+          (Fibre_cat R x)
+          (Fibre_cat R y)
+          (@catd_transport_func K R x y p)
+          r))
+      (@sigma_transport_arrow K R x y p r))
+    c
+    ≡ @fapp0
+        (Fibre_cat
+          (@Sigma_catd_functord_catd K R T)
+          (Struct_sigma x r))
+        (Fibre_cat
+          (@Sigma_catd_functord_catd K R T)
+          (Struct_sigma y
+            (@fapp0
+              (Fibre_cat R x)
+              (Fibre_cat R y)
+              (@catd_transport_func K R x y p)
+              r)))
+        (@Sigma_catd_transport_func K R T x y p r)
+        (@fapp0
+          (Fibre_cat
+            (@Sigma_catd_functord_catd K R S)
+            (Struct_sigma x r))
+          (Fibre_cat
+            (@Sigma_catd_functord_catd K R T)
+            (Struct_sigma x r))
+          (@tapp0_fapp0
+            (@Sigma_cat K R)
+            Cat_cat
+            (@Sigma_catd_functord_catd K R S)
+            (@Sigma_catd_functord_catd K R T)
+            (Struct_sigma x r)
+            (@Sigma_transfd_funcd K R S T eta))
+          c);
 
 // Internalized-x coherence route: first apply FF at x, then transport in D.
 //

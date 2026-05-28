@@ -640,6 +640,59 @@ The next natural implementation step is to return to more generic
 `Sigma_transfd_funcd` action/naturality, unless Product/Functor adjunction
 coherence becomes a more urgent downstream dependency.
 
+## 2026-05-28 Implementation Update: Sigma-Transfd Canonical Transport Action
+
+Product/Functor adjunction coherence remains deferred. The next Sigma-total
+uncurrying step has instead been implemented for the canonical total transport
+case.
+
+Added:
+
+```text
+Sigma_transfd_transport_func(eta,p,r)
+  = Sigma_catd_transport(T,p,r) o Sigma_transfd(eta)[(x,r)]
+```
+
+for:
+
+```text
+eta : Transfd(S,T)
+p   : Hom_K(x,y)
+r   : R[x].
+```
+
+The exposed computation is:
+
+```text
+Sigma_transfd(eta)[sigma_transport(R,p,r)]
+  -> Sigma_transfd_transport_func(eta,p,r)
+```
+
+where the left side is the heterogeneous `functord_transport_func`/`tapp1_fapp0`
+action of the uncurried displayed functor over the Sigma-total base. The
+rewrite rule deliberately matches the reduced Sigma-hom pair form
+`(p,id)` rather than the transparent `sigma_transport_arrow` head, because
+`sigma_transport_arrow` is a definition over `sigma_arrow`/`Struct_sigma` and
+may unfold before the projection fires.
+
+Also added an object-action regression:
+
+```text
+Sigma_transfd_transport_func(eta,p,r)[c]
+  = Sigma_catd_transport(T,p,r)(eta[(x,r)](c)).
+```
+
+This is a narrow canonical-transport projection, not a full arbitrary
+Sigma-arrow action for `Sigma_transfd_funcd`. The opposite route
+
+```text
+eta[(y,R[p]r)](Sigma_catd_transport(S,p,r)(c))
+```
+
+does not yet reduce definitionally to the same normal form; exposing that
+requires a cleaner displayed-transfor naturality/comprehension rule and is left
+for a later concrete downstream need.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -656,7 +709,9 @@ git diff --check
 ## Remaining Work
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
-  a concrete downstream theorem needs it.
+  a concrete downstream theorem needs it. Canonical total transport is now
+  exposed; arbitrary Sigma-arrow action and the opposite naturality route remain
+  deferred.
 - Continue the ordinary curry/uncurry pass only if a downstream theorem needs
   explicit Product/Functor adjunction coherence beyond the current functor-level
   beta/action laws.
