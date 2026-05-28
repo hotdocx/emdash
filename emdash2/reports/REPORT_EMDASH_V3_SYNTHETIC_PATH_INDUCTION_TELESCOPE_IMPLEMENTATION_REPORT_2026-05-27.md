@@ -693,6 +693,83 @@ does not yet reduce definitionally to the same normal form; exposing that
 requires a cleaner displayed-transfor naturality/comprehension rule and is left
 for a later concrete downstream need.
 
+## 2026-05-28 Reassessment: Internal Naturality Normal Form
+
+After review, the preceding `Sigma_transfd_transport_func` direction is likely
+the wrong long-term normal form. It chooses one external route around a
+naturality square:
+
+```text
+T[p](eta[x](c))
+```
+
+but the internal/synthetic normal form should be the off-diagonal transfor
+component itself:
+
+```text
+tapp1_fapp0(eta,p)(c).
+```
+
+For a canonical/cartesian Sigma arrow
+
+```text
+sigma_transport(R,p,r) : (x,r) -> (y,R[p]r),
+```
+
+the desired compiled Sigma-total computation is therefore:
+
+```text
+Sigma_transfd_funcd(eta)[sigma_transport(R,p,r)]
+  -> tapp1_fapp0(Sigma_transfd_funcd(eta), sigma_transport(R,p,r))
+```
+
+or, more precisely, it should keep the existing `tapp1_fapp0` term as the
+canonical internal off-diagonal component rather than folding it to a
+route-specific helper.
+
+The two external routes should, when they arise, accumulate toward that same
+off-diagonal component:
+
+```text
+T[p](eta[x](c))       -> eta[p](c)
+eta[y](S[p](c))       -> eta[p](c)
+```
+
+This follows the project design rule: if we are manually managing a naturality
+square, the design is probably not internal/synthetic enough. The square is
+data carried by the internal natural/displayed quantification.
+
+Implementation consequence for the next turn:
+
+- Treat the current rewrite from `tapp1_fapp0(Sigma_transfd_funcd eta, ...)` to
+  `Sigma_transfd_transport_func` as suspect.
+- Prefer removing that fold, or redefining the helper only as a readable alias
+  that does not replace the `tapp1_fapp0` head.
+- Do not introduce a new stable off-diagonal head unless a focused probe shows
+  that `tapp1_fapp0` itself cannot serve.
+- Probe diagonal naturality accumulation rules with `tapp0_fapp0` on the LHS,
+  if needed, but orient them toward `tapp1_fapp0`, not toward a route-specific
+  composite.
+
+The corrected remaining target is not arbitrary Sigma-arrow action. It is only
+canonical/cartesian Sigma-arrow computation, and even there the normal form
+should remain internal:
+
+```text
+PathInd_funcd[canonical transport of (x,E)]
+  -> PathInd_transfd's off-diagonal component over p,E.
+```
+
+Arbitrary Sigma arrows
+
+```text
+(p,alpha) : (x,r) -> (y,r')
+```
+
+remain outside the immediate milestone. Requiring them would recreate the old
+Sigma-total-primary architecture that the telescope redesign intentionally
+avoided.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
