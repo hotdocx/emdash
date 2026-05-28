@@ -579,7 +579,7 @@ Product_projR_func(H)
 
 with object and `fapp1_func` projection/pairing computations.
 
-Added an object-level ordinary curry/uncurry scaffold:
+Added the ordinary curry/uncurry scaffold:
 
 ```text
 curry(F)[x][y] = F[(x,y)]
@@ -588,20 +588,35 @@ uncurry(curry(F))[(x,y)] = F[(x,y)]
 curry(uncurry(G))[x][y] = G[x][y]
 ```
 
-This is intentionally not the final most-internal product/functor adjunction
-package. In particular, the full omega-action:
+The object-level heads remain stable projections of the more-internal functor
+packages:
 
 ```text
-fapp1_func(curry(F))
-fapp1_func(uncurry(G))
+curry_func_func[F]   = curry(F)
+uncurry_func_func[G] = uncurry(G)
 ```
 
-is not implemented yet. The current scaffold only validates object-level beta
-behavior and the two object-level round trips.
+The first hom-action layer is now exposed:
 
-The curry/uncurry arrow-action laws should be probed later as a focused pass,
-because the natural formula for `uncurry(G)[(f,g)]` uses both transfor
-components and functor action:
+```text
+curry(F)[p][y] = F[(p,id_y)]
+curry(F)[x][q] = F[(id_x,q)]
+uncurry(G)[(p,q)] = G[x'][q] o G[p][y]
+```
+
+The functor-level action on transfors also computes componentwise:
+
+```text
+curry(eta)[x][y] = eta[(x,y)]
+uncurry(theta)[(x,y)] = theta[x][y]
+```
+
+This is still not the final Product/Functor adjunction package. The remaining
+work is adjunction-style packaging and coherence beyond these beta/action
+laws.
+
+The natural formula for `uncurry(G)[(f,g)]` uses both transfor components and
+functor action:
 
 ```text
 G[x'][g] o G[f][y].
@@ -621,9 +636,9 @@ instead of kept as undeclared functor symbols; constant-family Sigma now
 inherits the Product object, hom, identity, and composition normal forms
 directly.
 
-The next natural implementation step is to probe the full `fapp1_func` action
-for ordinary curry/uncurry, then return to more generic `Sigma_transfd_funcd`
-action/naturality.
+The next natural implementation step is to return to more generic
+`Sigma_transfd_funcd` action/naturality, unless Product/Functor adjunction
+coherence becomes a more urgent downstream dependency.
 
 ## Validation
 
@@ -642,8 +657,9 @@ git diff --check
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it.
-- Continue the ordinary curry/uncurry pass by probing the missing full
-  `fapp1_func` action laws and a more-internal adjunction-style packaging.
+- Continue the ordinary curry/uncurry pass only if a downstream theorem needs
+  explicit Product/Functor adjunction coherence beyond the current functor-level
+  beta/action laws.
 - Audit downstream uses of constant-family Sigma to ensure they rely on the
   direct `Product_cat` normal form rather than reintroducing bridge symbols.
 - Continue the primitive-to-defined audit, especially around ordinary

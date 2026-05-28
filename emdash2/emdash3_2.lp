@@ -1212,18 +1212,17 @@ rule fapp0
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
   ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
 
-// Ordinary product curry/uncurry scaffold.
+// Ordinary product curry/uncurry scaffold and its first hom-action layer.
 //
 // Surface/formula:
 //   curry(F)[x][y]      = F[(x,y)]
 //   uncurry(G)[(x,y)]   = G[x][y]
 //
 // Status:
-//   This is intentionally object-level first. It is not yet the most-internal
-//   Product/Functor adjunction package, and it does not yet expose the full
-//   omega-action (`fapp1_func`) of curry/uncurry. The full arrow-action package
-//   should be added in a later focused pass once the Product normal forms are
-//   stable in v3.2.
+//   `curry_func F` and `uncurry_func G` remain stable object-action heads.
+//   Their functor-level packages and first hom-actions are installed below.
+//   Full adjunction/coherence packaging beyond these beta/action laws remains
+//   future work.
 symbol curry_func [A B C : Cat]
   (F : τ (Functor (Product_cat A B) C))
   : τ (Functor A (Functor_cat B C));
@@ -1283,6 +1282,434 @@ assert [A B C : Cat]
       x)
     y
     ≡ @fapp0 B C (@fapp0 A (Functor_cat B C) G x) y;
+
+// More-internal ordinary product/function currying.
+//
+// The object-level heads above remain the stable projections:
+//
+//   curry_func_func[A,B,C][F]   = curry_func(F)
+//   uncurry_func_func[A,B,C][G] = uncurry_func(G)
+//
+// The additional heads expose the ordinary hom-action needed to iterate the
+// construction as an omega-functorial package.
+symbol curry_inner_fapp1_func [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  [y y' : τ (Obj B)]
+  : τ (Functor
+      (Hom_cat B y y')
+      (Hom_cat
+        C
+        (@fapp0 (Product_cat A B) C F (Struct_sigma x y))
+        (@fapp0 (Product_cat A B) C F (Struct_sigma x y'))));
+
+rule @fapp1_func _ _ (@curry_fapp0_func $A $B $C $F $x) $y $y'
+  ↪ @curry_inner_fapp1_func $A $B $C $F $x $y $y';
+
+rule fapp0 (@curry_inner_fapp1_func $A $B $C $F $x $y $y') $q
+  ↪ @fapp1_fapp0
+      (Product_cat $A $B)
+      $C
+      $F
+      (Struct_sigma $x $y)
+      (Struct_sigma $x $y')
+      (Struct_sigma (@id $A $x) $q);
+
+rule @fapp1_fapp0 _ _ (@curry_fapp0_func $A $B $C $F $x) $y $y' $q
+  ↪ fapp0 (@curry_inner_fapp1_func $A $B $C $F $x $y $y') $q;
+
+symbol curry_outer_fapp1_func [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  [x x' : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A x x')
+      (Transf_cat
+        (@curry_fapp0_func A B C F x)
+        (@curry_fapp0_func A B C F x')));
+
+symbol curry_outer_transf [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  [x x' : τ (Obj A)]
+  (p : τ (Hom A x x'))
+  : τ (Transf
+      (@curry_fapp0_func A B C F x)
+      (@curry_fapp0_func A B C F x'));
+
+rule @fapp1_func _ _ (@curry_func $A $B $C $F) $x $x'
+  ↪ @curry_outer_fapp1_func $A $B $C $F $x $x';
+
+rule fapp0 (@curry_outer_fapp1_func $A $B $C $F $x $x') $p
+  ↪ @curry_outer_transf $A $B $C $F $x $x' $p;
+
+rule @fapp1_fapp0 _ _ (@curry_func $A $B $C $F) $x $x' $p
+  ↪ @curry_outer_transf $A $B $C $F $x $x' $p;
+
+rule @tapp0_fapp0 _ _ _ _ $y
+      (@curry_outer_transf $A $B $C $F $x $x' $p)
+  ↪ @fapp1_fapp0
+      (Product_cat $A $B)
+      $C
+      $F
+      (Struct_sigma $x $y)
+      (Struct_sigma $x' $y)
+      (Struct_sigma $p (@id $B $y));
+
+symbol uncurry_fapp1_func [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  [x x' : τ (Obj A)]
+  [y y' : τ (Obj B)]
+  : τ (Functor
+      (Hom_cat (Product_cat A B) (Struct_sigma x y) (Struct_sigma x' y'))
+      (Hom_cat
+        C
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) G x) y)
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) G x') y')));
+
+rule @fapp1_func _ _ (@uncurry_func $A $B $C $G)
+      (Struct_sigma $x $y)
+      (Struct_sigma $x' $y')
+  ↪ @uncurry_fapp1_func $A $B $C $G $x $x' $y $y';
+
+rule fapp0 (@uncurry_fapp1_func $A $B $C $G $x $x' $y $y')
+      (Struct_sigma $p $q)
+  ↪ @comp_fapp0
+      $C
+      (@fapp0 $B $C (@fapp0 $A (Functor_cat $B $C) $G $x) $y)
+      (@fapp0 $B $C (@fapp0 $A (Functor_cat $B $C) $G $x') $y)
+      (@fapp0 $B $C (@fapp0 $A (Functor_cat $B $C) $G $x') $y')
+      (@fapp1_fapp0
+        $B
+        $C
+        (@fapp0 $A (Functor_cat $B $C) $G $x')
+        $y
+        $y'
+        $q)
+      (@tapp0_fapp0
+        $B
+        $C
+        (@fapp0 $A (Functor_cat $B $C) $G $x)
+        (@fapp0 $A (Functor_cat $B $C) $G $x')
+        $y
+        (@fapp1_fapp0
+          $A
+          (Functor_cat $B $C)
+          $G
+          $x
+          $x'
+          $p));
+
+rule @fapp1_fapp0 _ _ (@uncurry_func $A $B $C $G)
+      (Struct_sigma $x $y)
+      (Struct_sigma $x' $y')
+      (Struct_sigma $p $q)
+  ↪ fapp0
+      (@uncurry_fapp1_func $A $B $C $G $x $x' $y $y')
+      (Struct_sigma $p $q);
+
+symbol curry_func_func [A B C : Cat]
+  : τ (Functor
+      (Functor_cat (Product_cat A B) C)
+      (Functor_cat A (Functor_cat B C)));
+
+rule fapp0 (@curry_func_func $A $B $C) $F
+  ↪ @curry_func $A $B $C $F;
+
+symbol curry_func_fapp1_func [A B C : Cat]
+  [F G : τ (Functor (Product_cat A B) C)]
+  : τ (Functor
+      (Transf_cat F G)
+      (Transf_cat
+        (@curry_func A B C F)
+        (@curry_func A B C G)));
+
+symbol curry_transf [A B C : Cat]
+  [F G : τ (Functor (Product_cat A B) C)]
+  (eta : τ (Transf F G))
+  : τ (Transf
+      (@curry_func A B C F)
+      (@curry_func A B C G));
+
+symbol curry_transf_tapp0_transf [A B C : Cat]
+  [F G : τ (Functor (Product_cat A B) C)]
+  (eta : τ (Transf F G))
+  (x : τ (Obj A))
+  : τ (Transf
+      (@curry_fapp0_func A B C F x)
+      (@curry_fapp0_func A B C G x));
+
+rule @fapp1_func _ _ (@curry_func_func $A $B $C) $F $G
+  ↪ @curry_func_fapp1_func $A $B $C $F $G;
+
+rule fapp0 (@curry_func_fapp1_func $A $B $C $F $G) $eta
+  ↪ @curry_transf $A $B $C $F $G $eta;
+
+rule @fapp1_fapp0 _ _ (@curry_func_func $A $B $C) $F $G $eta
+  ↪ @curry_transf $A $B $C $F $G $eta;
+
+rule @tapp0_fapp0 _ _ _ _ $x
+      (@curry_transf $A $B $C $F $G $eta)
+  ↪ @curry_transf_tapp0_transf $A $B $C $F $G $eta $x;
+
+rule @tapp0_fapp0 _ _ _ _ $y
+      (@curry_transf_tapp0_transf $A $B $C $F $G $eta $x)
+  ↪ @tapp0_fapp0
+      (Product_cat $A $B)
+      $C
+      $F
+      $G
+      (Struct_sigma $x $y)
+      $eta;
+
+symbol uncurry_func_func [A B C : Cat]
+  : τ (Functor
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat (Product_cat A B) C));
+
+rule fapp0 (@uncurry_func_func $A $B $C) $G
+  ↪ @uncurry_func $A $B $C $G;
+
+symbol uncurry_func_fapp1_func [A B C : Cat]
+  [G H : τ (Functor A (Functor_cat B C))]
+  : τ (Functor
+      (Transf_cat G H)
+      (Transf_cat
+        (@uncurry_func A B C G)
+        (@uncurry_func A B C H)));
+
+symbol uncurry_transf [A B C : Cat]
+  [G H : τ (Functor A (Functor_cat B C))]
+  (theta : τ (Transf G H))
+  : τ (Transf
+      (@uncurry_func A B C G)
+      (@uncurry_func A B C H));
+
+rule @fapp1_func _ _ (@uncurry_func_func $A $B $C) $G $H
+  ↪ @uncurry_func_fapp1_func $A $B $C $G $H;
+
+rule fapp0 (@uncurry_func_fapp1_func $A $B $C $G $H) $theta
+  ↪ @uncurry_transf $A $B $C $G $H $theta;
+
+rule @fapp1_fapp0 _ _ (@uncurry_func_func $A $B $C) $G $H $theta
+  ↪ @uncurry_transf $A $B $C $G $H $theta;
+
+rule @tapp0_fapp0 _ _ _ _ (Struct_sigma $x $y)
+      (@uncurry_transf $A $B $C $G $H $theta)
+  ↪ @tapp0_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $G $x)
+      (@fapp0 $A (Functor_cat $B $C) $H $x)
+      $y
+      (@tapp0_fapp0
+        $A
+        (Functor_cat $B $C)
+        $G
+        $H
+        $x
+        $theta);
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  (y y' : τ (Obj B))
+  ⊢
+  @fapp1_func B C (@curry_fapp0_func A B C F x) y y'
+    ≡ @curry_inner_fapp1_func A B C F x y y';
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A))
+  (y y' : τ (Obj B))
+  (q : τ (Hom B y y')) ⊢
+  @fapp1_fapp0 B C (@curry_fapp0_func A B C F x) y y' q
+    ≡ @fapp1_fapp0
+        (Product_cat A B)
+        C
+        F
+        (Struct_sigma x y)
+        (Struct_sigma x y')
+        (Struct_sigma (@id A x) q);
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x x' : τ (Obj A))
+  ⊢
+  @fapp1_func A (Functor_cat B C) (@curry_func A B C F) x x'
+    ≡ @curry_outer_fapp1_func A B C F x x';
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C))
+  (x x' : τ (Obj A))
+  (p : τ (Hom A x x'))
+  (y : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    B
+    C
+    (@curry_fapp0_func A B C F x)
+    (@curry_fapp0_func A B C F x')
+    y
+    (@fapp1_fapp0 A (Functor_cat B C) (@curry_func A B C F) x x' p)
+    ≡ @fapp1_fapp0
+        (Product_cat A B)
+        C
+        F
+        (Struct_sigma x y)
+        (Struct_sigma x' y)
+        (Struct_sigma p (@id B y));
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x x' : τ (Obj A))
+  (y y' : τ (Obj B))
+  ⊢
+  @fapp1_func
+    (Product_cat A B)
+    C
+    (@uncurry_func A B C G)
+    (Struct_sigma x y)
+    (Struct_sigma x' y')
+    ≡ @uncurry_fapp1_func A B C G x x' y y';
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x x' : τ (Obj A))
+  (y y' : τ (Obj B))
+  (p : τ (Hom A x x'))
+  (q : τ (Hom B y y')) ⊢
+  @fapp1_fapp0
+    (Product_cat A B)
+    C
+    (@uncurry_func A B C G)
+    (Struct_sigma x y)
+    (Struct_sigma x' y')
+    (Struct_sigma p q)
+    ≡ @comp_fapp0
+        C
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) G x) y)
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) G x') y)
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) G x') y')
+        (@fapp1_fapp0
+          B
+          C
+          (@fapp0 A (Functor_cat B C) G x')
+          y
+          y'
+          q)
+        (@tapp0_fapp0
+          B
+          C
+          (@fapp0 A (Functor_cat B C) G x)
+          (@fapp0 A (Functor_cat B C) G x')
+          y
+          (@fapp1_fapp0
+            A
+            (Functor_cat B C)
+            G
+            x
+            x'
+            p));
+
+assert [A B C : Cat]
+  (F : τ (Functor (Product_cat A B) C)) ⊢
+  @fapp0
+    (Functor_cat (Product_cat A B) C)
+    (Functor_cat A (Functor_cat B C))
+    (@curry_func_func A B C)
+    F
+    ≡ @curry_func A B C F;
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C)) ⊢
+  @fapp1_func
+    (Functor_cat (Product_cat A B) C)
+    (Functor_cat A (Functor_cat B C))
+    (@curry_func_func A B C)
+    F
+    G
+    ≡ @curry_func_fapp1_func A B C F G;
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C))) ⊢
+  @fapp0
+    (Functor_cat A (Functor_cat B C))
+    (Functor_cat (Product_cat A B) C)
+    (@uncurry_func_func A B C)
+    G
+    ≡ @uncurry_func A B C G;
+
+assert [A B C : Cat]
+  (G H : τ (Functor A (Functor_cat B C))) ⊢
+  @fapp1_func
+    (Functor_cat A (Functor_cat B C))
+    (Functor_cat (Product_cat A B) C)
+    (@uncurry_func_func A B C)
+    G
+    H
+    ≡ @uncurry_func_fapp1_func A B C G H;
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C))
+  (eta : τ (Transf F G))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    B
+    C
+    (@curry_fapp0_func A B C F x)
+    (@curry_fapp0_func A B C G x)
+    y
+    (@tapp0_fapp0
+      A
+      (Functor_cat B C)
+      (@curry_func A B C F)
+      (@curry_func A B C G)
+      x
+      (@fapp1_fapp0
+        (Functor_cat (Product_cat A B) C)
+        (Functor_cat A (Functor_cat B C))
+        (@curry_func_func A B C)
+        F
+        G
+        eta))
+    ≡ @tapp0_fapp0
+        (Product_cat A B)
+        C
+        F
+        G
+        (Struct_sigma x y)
+        eta;
+
+assert [A B C : Cat]
+  (G H : τ (Functor A (Functor_cat B C)))
+  (theta : τ (Transf G H))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    (Product_cat A B)
+    C
+    (@uncurry_func A B C G)
+    (@uncurry_func A B C H)
+    (Struct_sigma x y)
+    (@fapp1_fapp0
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat (Product_cat A B) C)
+      (@uncurry_func_func A B C)
+      G
+      H
+      theta)
+    ≡ @tapp0_fapp0
+        B
+        C
+        (@fapp0 A (Functor_cat B C) G x)
+        (@fapp0 A (Functor_cat B C) H x)
+        y
+        (@tapp0_fapp0
+          A
+          (Functor_cat B C)
+          G
+          H
+          x
+          theta);
 
 /*
   More-internal ordinary hom-action.

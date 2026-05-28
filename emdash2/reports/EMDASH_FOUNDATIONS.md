@@ -614,8 +614,8 @@ The current foundations intentionally do not yet include:
 - A finalized surface syntax for the future proof assistant.
 - Full coherence APIs for every Sigma/Pi helper.
 - A named `section_total(s) : K → Σ_K E` construction and its projection laws.
-- Full product/functor adjunction packaging for `Product_cat`, beyond the
-  current product normal forms and object-level curry/uncurry scaffold.
+- Full product/functor adjunction coherence for `Product_cat`, beyond the
+  current product normal forms and functor-level curry/uncurry action laws.
 - General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
   functors.
 
