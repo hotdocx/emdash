@@ -175,9 +175,11 @@ flag "print_meta_args" on;
     - `Fibre_func` / `Fibre_transf` / `Fibre_transf_app`: derived fibre-level
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
-    - `catd_transport_func` / `functord_transport_*`: generic base-arrow
-      transport and naturality-route helpers for displayed functors. These are
-      the uniform core counterparts of later path-specific transport squares.
+    - `catd_transport_func` / `functord_transport_*` /
+      `functord_laxity_transf`: generic base-arrow transport,
+      naturality-route, and laxity/coherence helpers for displayed functors.
+      These are the uniform core counterparts of later path-specific transport
+      squares.
     - Pointwise displayed-functor calculus: `Op_funcd` projects through
       `tapp0_fapp0` to ordinary fibre opposites, and `comp_catd_fapp0`
       projects pointwise to ordinary fibre composition. The semantic E/C
@@ -547,6 +549,8 @@ symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
   (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C);
 
 rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
+rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
+rule @comp_cat_fapp0 $A $A $C $F (@id_func $A) ↪ $F;
 rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
   ↪ @fapp1_fapp0
@@ -4166,6 +4170,25 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
 
+// Internalized-x laxity/coherence projection for a displayed functor over a
+// base arrow.
+//
+// Surface/formula:
+//   laxity(FF,p) : D[p] o FF[x] => FF[y] o E[p].
+//
+// This is the explicit skew comparison between the two route functors. Strict
+// displayed functors may later make this collapse; non-strict constructions
+// such as internal Pi expose real coherence here.
+symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@Transf
+      (Fibre_cat E x)
+      (Fibre_cat D y)
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
 // -------------------------------------------------------------------------------------------------
@@ -4301,6 +4324,34 @@ rule @tapp0_fapp0
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
+// Pi is contravariantly natural in the base category. In the displayed-family
+// view, this is the laxity/coherence projection of `Pi_int_funcd` along a base
+// arrow `F : A -> B`, seen as `B -> A` in `Op(Cat)`.
+rule @functord_laxity_transf
+      _
+      _
+      _
+      Pi_int_funcd
+      $B
+      $A
+      $F
+  ↪ @section_pullback_transf $A $B $F;
+
+// Pulling `Pi_int_funcd` back along `G : K -> Cat^op` preserves the same Pi
+// laxity component along each base arrow p.
+rule @functord_laxity_transf
+      $K
+      _
+      _
+      (@Pi_pullback_funcd $K $G)
+      $x
+      $y
+      $p
+  ↪ @section_pullback_transf
+      (@fapp0 $K (Op_cat Cat_cat) $G $y)
+      (@fapp0 $K (Op_cat Cat_cat) $G $x)
+      (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p);
+
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
 // pullback presentation so Pi sections move by the generic section-pullback
@@ -4354,6 +4405,24 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
   @PathIndTgt_transport_func Z x y p E
     ≡ @pathout_pi_transport_func Z x y p E;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x))) ⊢
+  @tapp0_fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    Cat_cat
+    _
+    _
+    E
+    (@functord_laxity_transf
+      Z
+      (@PathOutMotives_catd Z)
+      (@Const_catd Z Cat_cat)
+      (@PathOutPi_funcd Z)
+      x
+      y
+      p)
+    ≡ @PathIndTgt_transport_func Z x y p E;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -4688,6 +4757,57 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
     E
     (@section_pullback_transf A B F)
     ≡ @section_pullback_func A B F E;
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @functord_laxity_transf
+    (Op_cat Cat_cat)
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    Pi_int_funcd
+    B
+    A
+    F
+    ≡ @section_pullback_transf A B F;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_laxity_transf
+    K
+    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+    (@Const_catd K Cat_cat)
+    (@Pi_pullback_funcd K G)
+    x
+    y
+    p
+    ≡ @section_pullback_transf
+        (@fapp0 K (Op_cat Cat_cat) G y)
+        (@fapp0 K (Op_cat Cat_cat) G x)
+        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p);
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
+  @tapp0_fapp0
+    (@Catd_cat (@fapp0 K (Op_cat Cat_cat) G x))
+    Cat_cat
+    _
+    _
+    E
+    (@functord_laxity_transf
+      K
+      (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+      (@Const_catd K Cat_cat)
+      (@Pi_pullback_funcd K G)
+      x
+      y
+      p)
+    ≡ @section_pullback_func
+        (@fapp0 K (Op_cat Cat_cat) G y)
+        (@fapp0 K (Op_cat Cat_cat) G x)
+        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
+        E;
 
 /*
   Sigma total category and projection-pullback normal forms.

@@ -1113,6 +1113,78 @@ Recommended next implementation phase:
    `q o p`; this new phase is about canonical-arrow naturality/coherence of
    the Pi target transport.
 
+## 2026-05-29 Implementation Update: Displayed-Functor Laxity Projection
+
+The recommended projection was implemented in `emdash3_2.lp`.
+
+New generic head:
+
+```text
+functord_laxity_transf(FF,p)
+  : Transf(
+      functord_transport_lhs_func(FF,p),
+      functord_transport_rhs_func(FF,p)).
+```
+
+This records the skew coherence between the two route functors
+
+```text
+D[p] o FF[x]
+FF[y] o E[p]
+```
+
+without forcing arbitrary Sigma-total transport to compute.
+
+Pi specialization:
+
+```text
+functord_laxity_transf(Pi_int_funcd,F)
+  -> section_pullback_transf(F)
+```
+
+where `F : A -> B` is read as a base arrow `B -> A` in `Op(Cat)`.
+
+Pulled-back specialization:
+
+```text
+functord_laxity_transf(Pi_pullback_funcd(G),p)
+  -> section_pullback_transf(G[p]).
+```
+
+Component extraction then computes as desired:
+
+```text
+tapp0_fapp0(functord_laxity_transf(Pi_pullback_funcd(G),p), E)
+  -> section_pullback_func(G[p],E).
+```
+
+Path-specific regression:
+
+```text
+tapp0_fapp0(functord_laxity_transf(PathOutPi_funcd(Z),p), E)
+  -> PathIndTgt_transport_func(p,E).
+```
+
+The probe showed that the Pi specialization needs ordinary identity folds for
+the stable functor-composition head:
+
+```text
+comp_cat_fapp0(id, F) -> F
+comp_cat_fapp0(F, id) -> F.
+```
+
+Without these rules, the source route for `Pi_int_funcd` remains syntactically
+`id_Cat o Pi_func(B)`, and Lambdapi cannot prove subject reduction for the
+specialization to `section_pullback_transf(F)`. These are ordinary
+strict-functoriality rules for `comp_cat_fapp0`, not Sigma-specific transport
+rules.
+
+This update deliberately does not add a rule for
+`Sigma_catd_transport_func(Pi_pullback_funcd(G),p,E)`. The computation now has
+a clean source of truth at the displayed-laxity projection layer; the
+Sigma-total presentation can later be connected to that projection by a
+separate total-action theorem if a downstream theorem needs it.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -1128,10 +1200,11 @@ git diff --check
 
 ## Remaining Work
 
-- Probe a generic displayed-functor laxity/coherence projection, likely
-  `functord_laxity_transf(FF,p)`, and specialize it first to
-  `Pi_int_funcd`/`Pi_pullback_funcd(G)` so that Pi target transport computes
-  through `section_pullback_transf(F)` and then `section_pullback_func(F,E)`.
+- If a downstream theorem requires it, connect canonical Sigma-total transport
+  for `Sigma_catd_functord_catd(Pi_pullback_funcd(G))` to the new
+  `functord_laxity_transf(Pi_pullback_funcd(G),p)` projection. Keep this as a
+  separate total-action theorem rather than a direct rule on the transparent
+  `Sigma_catd_transport_func` alias.
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it. The route-specific canonical
   transport helper has been removed; arbitrary Sigma-arrow action remains
