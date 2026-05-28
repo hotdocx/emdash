@@ -855,6 +855,83 @@ transport coherence rather than part of the current transitivity computation.
 It is deferred until a downstream theorem needs that exact transport
 normal form.
 
+## 2026-05-28 Planning Note: Canonical Pi-Pullback Transport
+
+The deferred `Pi_pullback_funcd` transport computation should be implemented at
+the lower semantic/projection layer, not by adding a rewrite rule to
+`Sigma_catd_transport_func` and not by defining `section_pullback_func` from
+Sigma transport.
+
+The intended dependency direction is:
+
+```text
+Pi_int_funcd / Pi_pullback_funcd
+  -> section_pullback_transf
+  -> section_pullback_func
+  -> Sigma_catd_functord_catd(Pi_pullback_funcd) canonical transport.
+```
+
+`section_pullback_func(F,E)` is the component of Pi naturality under base
+pullback:
+
+```text
+section_pullback_transf(F)[E] -> section_pullback_func(F,E).
+```
+
+It is not conceptually a Sigma-total construction. The Sigma-total route should
+project to this existing Pi-naturality component.
+
+The desired future computation is:
+
+```text
+Sigma_catd_transport_func(Pi_pullback_funcd(G), p, E)
+  -> tapp0_fapp0(section_pullback_transf(G[p]), E)
+  -> section_pullback_func(G[p], E).
+```
+
+Since `Sigma_catd_transport_func` is a transparent definition, the future rule
+or projection should target the unfolded constituent expression:
+
+```text
+fapp1_fapp0
+  (Sigma_catd_functord_catd(Pi_pullback_funcd(G)))
+  (sigma_transport_arrow(...,p,E))
+```
+
+or, if `sigma_transport_arrow` unfolds too early, the corresponding reduced
+Sigma-hom pair form. The RHS should be the Pi-naturality component:
+
+```text
+tapp0_fapp0(section_pullback_transf(G[p]), E)
+```
+
+and the existing `section_pullback_transf` rule should finish the reduction to
+`section_pullback_func(G[p],E)`.
+
+Concrete path-induction specialization:
+
+```text
+Sigma_catd_transport_func(PathOutPi_funcd, p, E)
+  -> PathIndTgt_transport_func(p,E).
+```
+
+This is needed for canonical-arrow naturality of the derived Sigma-total
+presentation `PathInd_funcd`, but it is not needed for the transitivity theorem
+already checked through both `PathInd_transfd` and `PathInd_funcd`.
+
+Implementation recommendation for the next pass:
+
+1. Probe the lower-level `fapp1_fapp0(Sigma_catd_functord_catd(...), ...)`
+   rule in a temporary copy, with the endpoint-family arguments kept implicit
+   unless they are true discriminators.
+2. First target the RHS
+   `tapp0_fapp0(section_pullback_transf(G[p]), E)`, not the fully reduced
+   `section_pullback_func(G[p],E)`.
+3. Add the generic assertion only if the path-specific assertion also reduces:
+   `Sigma_catd_transport_func(PathOutPi_funcd,p,E) ≡ PathIndTgt_transport_func(p,E)`.
+4. If the rule only works by matching a large explicit Sigma/Pi endpoint in an
+   implicit LHS slot, reject it and leave the computation deferred.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
