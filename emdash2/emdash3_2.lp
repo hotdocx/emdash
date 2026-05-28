@@ -4176,9 +4176,12 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
 // Surface/formula:
 //   laxity(FF,p) : D[p] o FF[x] => FF[y] o E[p].
 //
-// This is the explicit skew comparison between the two route functors. Strict
-// displayed functors may later make this collapse; non-strict constructions
-// such as internal Pi expose real coherence here.
+// This is the explicit skew comparison between the two route functors. It is
+// currently an interim stable projection interface: the intended final
+// implementation should derive its components from the appropriate
+// Sigma-total/off-diagonal action. The helper below names the component
+// extracted from the current strict Sigma map action, which is useful
+// infrastructure but not yet the full lax total-action package needed by Pi.
 symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4188,6 +4191,30 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
       (Fibre_cat D y)
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p));
+
+// Component-level extraction from the current Sigma-total action. This names
+// the fibre component of Sigma(FF) applied to the canonical total transport
+// arrow. It is deliberately separate from `functord_laxity_transf`: the
+// current `sigma_map_func` action is strict/cartesian on canonical transport
+// arrows, while Pi laxity needs the fuller lax total-action package.
+symbol sigma_map_transport_fibre_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat D y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_lhs_func K E D FF x y p)
+        u)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_rhs_func K E D FF x y p)
+        u))
+≔ sigma_Snd (@sigma_map_transport_arrow K E D FF x y p u);
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -5733,6 +5760,13 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
         (Fibre_cat D y)
         (@functord_transport_func K E D FF x y p)
         u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @sigma_map_transport_fibre_arrow K E D FF x y p u
+    ≡ sigma_Snd (@sigma_map_transport_arrow K E D FF x y p u);
 
 assert [K : Cat] (R : τ (Catd K))
   (FF : τ (Functord R (@Const_catd K Cat_cat)))

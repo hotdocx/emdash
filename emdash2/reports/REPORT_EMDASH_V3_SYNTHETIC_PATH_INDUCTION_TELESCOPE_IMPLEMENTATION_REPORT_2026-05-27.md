@@ -1185,6 +1185,132 @@ a clean source of truth at the displayed-laxity projection layer; the
 Sigma-total presentation can later be connected to that projection by a
 separate total-action theorem if a downstream theorem needs it.
 
+## 2026-05-29 Correction: Laxity Projection Is Interim
+
+Follow-up review clarified an important architectural issue: the newly added
+
+```text
+functord_laxity_transf(FF,p)
+```
+
+is currently a stable projection interface, not yet the intended derivation
+from existing total/Sigma action. The long-term design remains:
+
+```text
+lax coherence = fibre component of the image of a canonical/cartesian
+                 Sigma-total arrow under the relevant total action.
+```
+
+For a fixed-source off-diagonal package
+
+```text
+eta^X : Hom_A(X,-) -> Hom_B(F[X],G[-])
+```
+
+the intended extraction is:
+
+```text
+Sigma(eta^X)((Y,f) -> (Z,g o f))
+```
+
+and then project the fibre component of the resulting Sigma arrow. That fibre
+component is the skew laxity cell:
+
+```text
+G[g] o eta_(f) => eta_(g o f).
+```
+
+The same principle should explain the Pi case:
+
+```text
+section_pullback_transf(F)
+```
+
+should be the extracted fibre component of the total action of `Pi_int_funcd`
+along the canonical/cartesian total arrow over `F`, not merely a primitive
+special case attached to `functord_laxity_transf`.
+
+Immediate implementation target after this correction:
+
+1. Probe a component-level extraction rule for the component of
+   `functord_laxity_transf(FF,p)` at `u`.
+2. The candidate RHS is the fibre component of the total action:
+
+   ```text
+   sigma_Snd(sigma_map_transport_arrow(FF,p,u))
+   ```
+
+   or a stable wrapper over that expression if the transparent Sigma term
+   unfolds too early.
+3. If the current `sigma_map_func` action strictifies canonical arrows and only
+   produces identity/cartesian components, document that as a limitation of the
+   present strict Sigma-map action. In that case, introduce a separate stable
+   extraction head whose eventual definition is the full omega/Sigma action,
+   and keep Pi-specific computation as a fold from that head.
+4. Do not add more Pi-only primitive facts until the generic component
+   extraction path has been probed.
+
+## 2026-05-29 Implementation Update: Sigma-Total Fibre Extraction Helper
+
+The first extraction-layer helper was implemented:
+
+```text
+sigma_map_transport_fibre_arrow(FF,p,u)
+  := sigma_Snd(sigma_map_transport_arrow(FF,p,u)).
+```
+
+Its type is the component-level comparison between the two displayed route
+objects:
+
+```text
+D[p](FF[x](u)) -> FF[y](E[p](u)).
+```
+
+Equivalently, it is the fibre component of the current total action
+`Sigma(FF)` on the canonical total transport arrow:
+
+```text
+sigma_transport_arrow(E,p,u) : (x,u) -> (y,E[p](u)).
+```
+
+A focused regression assertion checks the definitional extraction:
+
+```text
+sigma_map_transport_fibre_arrow(FF,p,u)
+  = sigma_Snd(sigma_map_transport_arrow(FF,p,u)).
+```
+
+Important probe result:
+
+- A generic rewrite
+
+  ```text
+  tapp0_fapp0(functord_laxity_transf(FF,p),u)
+    -> sigma_Snd(sigma_map_transport_arrow(FF,p,u))
+  ```
+
+  typechecked.
+- However, the direct Pi/path specialization
+
+  ```text
+  sigma_Snd(sigma_map_transport_arrow(PathOutPi_funcd,p,E))
+    = PathIndTgt_transport_func(p,E)
+  ```
+
+  did not reduce.
+
+Therefore the generic rewrite was not promoted. Promoting it would make the
+generic total-extraction normal form compete with the existing Pi-specific
+`functord_laxity_transf` normal form without proving that the two join.
+
+Interpretation: the current `sigma_map_func` action is still the strict/capped
+total-map action. It can expose the fibre component of the image of a
+canonical total arrow, but this is not yet the fuller lax/off-diagonal total
+action needed to derive `section_pullback_transf(F)` for Pi. The next real
+architecture step is to build that fuller action from the internal
+off-diagonal packages (`tdapp1_int_*` / `fdapp1_int_transfd` style), then fold
+its extracted component to `functord_laxity_transf`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -1200,6 +1326,18 @@ git diff --check
 
 ## Remaining Work
 
+- Build the fuller lax/off-diagonal total-action extraction from the existing
+  internal displayed hom-action packages (`tdapp1_int_*` /
+  `fdapp1_int_transfd`). The target is a derived/folded path:
+
+  ```text
+  off_diagonal_total_action(FF,p,u)
+    -> functord_laxity_transf(FF,p)[u].
+  ```
+
+  Once the Pi instance joins with `section_pullback_func(F,E)`, replace the
+  current Pi-specific `functord_laxity_transf` folds by this derived path where
+  feasible.
 - If a downstream theorem requires it, connect canonical Sigma-total transport
   for `Sigma_catd_functord_catd(Pi_pullback_funcd(G))` to the new
   `functord_laxity_transf(Pi_pullback_funcd(G),p)` projection. Keep this as a
