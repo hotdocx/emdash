@@ -4041,6 +4041,59 @@ assert [Z : Cat] (x : τ (Obj Z))
     u
     ≡ @path_ind_sec Z x E u;
 
+// Sigma-total presentation of the transitivity benchmark, using the derived
+// `PathInd_funcd` component rather than the telescope component directly.
+assert [Z : Cat] (x : τ (Obj Z)) ⊢
+  @fapp0
+    (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
+    (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+    (@tapp0_fapp0
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      Cat_cat
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z)
+      (Struct_sigma x (@CompMotive_catd Z x))
+      (@PathInd_funcd Z))
+    (@id_funcd Z (@Rep_catd Z x))
+    ≡ @path_comp_sec Z x;
+
+// Fully expanded transitivity benchmark through the Sigma-total presentation.
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  @fapp0
+    (Hom_cat Z y z)
+    (Hom_cat Z x z)
+    (@tapp0_fapp0
+      Z
+      Cat_cat
+      (@Rep_catd Z y)
+      (@Rep_catd Z x)
+      z
+      (@fapp0
+        (Hom_cat Z x y)
+        (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
+        (@tapp0_fapp0
+          Z
+          Cat_cat
+          (@Rep_catd Z x)
+          (@CompTarget_catd Z x)
+          y
+          (@fapp0
+            (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
+            (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+            (@tapp0_fapp0
+              (@Sigma_cat Z (@PathOutMotives_catd Z))
+              Cat_cat
+              (@PathIndSrc_catd Z)
+              (@PathIndTgt_catd Z)
+              (Struct_sigma x (@CompMotive_catd Z x))
+              (@PathInd_funcd Z))
+            (@id_funcd Z (@Rep_catd Z x))))
+        p))
+    q
+    ≡ @comp_fapp0 Z x y z q p;
+
 // Readable component alias.
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
@@ -5528,6 +5581,38 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
           (Fibre_cat E y)
           (@catd_transport_func K E x y p)
           u);
+
+// Object-level strict naturality of displayed functor transport: both named
+// coherence routes compute to the internal off-diagonal component.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    u
+    ≡ @fapp0
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_func K E D FF x y p)
+        u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u
+    ≡ @fapp0
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_func K E D FF x y p)
+        u;
 
 assert [K : Cat] (R : τ (Catd K))
   (FF : τ (Functord R (@Const_catd K Cat_cat)))

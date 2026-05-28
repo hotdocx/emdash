@@ -800,6 +800,61 @@ wrong architectural response. Future work should only add a diagonal
 `tapp0_fapp0` accumulation rule if a concrete downstream computation produces
 that exact shape and the rule can be oriented toward `tapp1_fapp0`.
 
+## 2026-05-28 Implementation Update: Generic Route Accumulation Assertions
+
+The generic displayed-functor transport routes were checked at object level:
+
+```text
+D[p](FF[x](u)) -> FF[p](u)
+FF[y](E[p](u)) -> FF[p](u)
+```
+
+In the file this is expressed as two regression assertions showing that
+`functord_transport_lhs_func(FF,p)[u]` and
+`functord_transport_rhs_func(FF,p)[u]` both compute to
+`functord_transport_func(FF,p)[u]`.
+
+No new rewrite rule was needed. The assertions are consequences of the existing
+Cat-valued strict naturality rules:
+
+```text
+fapp0(D[p], fapp0(eta[x], u)) -> fapp0(eta[p], u)
+fapp0(eta[y], fapp0(E[p], u)) -> fapp0(eta[p], u)
+```
+
+This confirms the desired internal normal form for route computations in the
+generic displayed setting. The still-open Sigma-total question is narrower:
+whether a downstream theorem exposes the same shape after the canonical
+Sigma-total transport arrow has reduced far enough for these generic rules to
+apply. We should not add a Sigma-specific route fold unless such a theorem
+requires it.
+
+## 2026-05-28 Implementation Update: Sigma-Total Transitivity Regression
+
+The achieved transitivity theorem is now also checked through the derived
+Sigma-total presentation:
+
+```text
+PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_{Rep_Z(x)})
+  -> path_comp_sec(Z,x)
+```
+
+and fully expanded:
+
+```text
+PathInd_funcd(Z)[(x,CompMotive_Z(x))](id)[(y,p)][z](q)
+  -> q o p.
+```
+
+This is the Sigma-style regression for the already-derived theorem; it does
+not require reintroducing the old Sigma-total-primary transport-square design.
+
+A nearby probe tried to expose canonical transport for the `Pi_pullback_funcd`
+specialization of `Sigma_catd_transport_func`, but that is adjacent target-side
+transport coherence rather than part of the current transitivity computation.
+It is deferred until a downstream theorem needs that exact transport
+normal form.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
