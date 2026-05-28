@@ -932,6 +932,43 @@ Implementation recommendation for the next pass:
 4. If the rule only works by matching a large explicit Sigma/Pi endpoint in an
    implicit LHS slot, reject it and leave the computation deferred.
 
+## 2026-05-28 Implementation Probe: Pi-Pullback Transport Deferred
+
+The canonical `Pi_pullback_funcd` transport rule was probed in temporary files
+and was not promoted to `emdash3_2.lp`.
+
+Findings:
+
+- A rule matching on the transparent helper
+  `sigma_transport_arrow(...)` is not robust, because the helper unfolds to the
+  underlying `sigma_arrow`/`Struct_sigma` representation before the intended
+  `fapp1_fapp0` projection necessarily sees that head.
+- A reduced Sigma-pair rule with an unconstrained target object does not
+  preserve typing: Lambdapi cannot infer that the target object is the canonical
+  transported motive object required by the RHS.
+- A diagnostic rule that explicitly matched the transported target object in
+  the reduced pair form could be made to typecheck in isolation, but it relies
+  on large compound endpoint expressions in positions that are implicit in the
+  declared `fapp1_fapp0` interface. That is exactly the brittle pattern banned
+  by the rewrite-rule SOP.
+- Even with that diagnostic rule, the intended assertions through
+  `Sigma_catd_transport_func(Pi_pullback_funcd(G),p,E)` did not reduce cleanly.
+
+Conclusion: do not add a direct rule for this computation yet, and do not add a
+rule directly on the transparent `Sigma_catd_transport_func` alias. The current
+explicit target helper remains the correct stable surface:
+
+```text
+PathIndTgt_transport_func(p,E)
+  = section_pullback_func(PathOut_transport_func(p),E).
+```
+
+The deferred computation should be revisited only after there is a stable,
+more-internal source for the required endpoint information, likely a cleaner
+Pi-naturality/comprehension package rather than a Sigma-specific rule. This
+does not affect the already checked transitivity theorem through
+`PathInd_transfd` and the derived `PathInd_funcd`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
