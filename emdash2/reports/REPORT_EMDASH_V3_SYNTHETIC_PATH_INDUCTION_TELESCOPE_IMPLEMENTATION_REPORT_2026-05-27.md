@@ -969,6 +969,150 @@ Pi-naturality/comprehension package rather than a Sigma-specific rule. This
 does not affect the already checked transitivity theorem through
 `PathInd_transfd` and the derived `PathInd_funcd`.
 
+## 2026-05-29 Design Note: Lax Coherence Via Sigma Totals
+
+After reviewing the `emdash2.lp` lax-functor comments against the current v3.2
+Sigma-total architecture, the cleaner interpretation is:
+
+```text
+lax coherence = image of a canonical/cartesian source triangle
+                under the relevant total/Sigma action.
+```
+
+For an ordinary functor `F`, the computational reading of
+
+```text
+F[g] o F[f]  =>  F[g o f]
+```
+
+is not primarily a textbook composition equation. It is the image, under the
+displayed/Grothendieck hom-action package, of the canonical source triangle
+from `f` to `g o f` over `g`. If the functor is strict/cartesian-preserving,
+that image triangle collapses to the canonical one; otherwise it is genuine
+laxity data.
+
+For a transfor `eta : F => G`, the same skew accumulation principle applies to
+the fixed-`X` off-diagonal package:
+
+```text
+eta^X : Hom_A(X,-) -> Hom_B(F[X],G[-]).
+```
+
+In v3.2 this is clearer when totalized:
+
+```text
+Sigma(eta^X)
+  : Sigma(Y : A, Hom_A(X,Y))
+    -> Sigma(Y : A, Hom_B(F[X],G[Y])).
+```
+
+The source object is `(Y,f)`.  The canonical/cartesian source triangle over
+`g : Y -> Z` is a Sigma arrow
+
+```text
+(Y,f) -> (Z,g o f)
+```
+
+whose fibre component is identity/canonical. Applying `Sigma(eta^X)` produces
+a target Sigma arrow still over `g`, but with nontrivial fibre component. Its
+ambient boundary is the lax naturality/accumulation cell:
+
+```text
+G[g] o eta_(f)  =>  eta_(g o f).
+```
+
+The dual skew variant
+
+```text
+eta_(f) o F[h]  =>  eta_(f o h)
+```
+
+is the analogous other-side accumulation. The direct textbook square comparing
+`G[p] o eta[x]` and `eta[y] o F[p]` is semantically useful, but it should not be
+the primary normalization driver. The computational orientation should go
+through one chosen off-diagonal apex, in the spirit of the
+antecedential/consequential naturality distinction.
+
+### Pi Specialization
+
+The Pi coherence should be understood as this same projected lax action, not as
+an arbitrary Sigma-transport rule.
+
+The internal Pi package is:
+
+```text
+Pi_int_funcd
+  : Functord
+      Catd_cat_func
+      (Const_catd (Op_cat Cat_cat) Cat_cat).
+```
+
+For `F : Functor A B`, viewed as a base arrow `B -> A` in `Op_cat Cat_cat`, the
+two Cat-valued routes are:
+
+```text
+D[F] o Pi_func(B)
+Pi_func(A) o Pullback_catd_func(F)
+```
+
+where `D` is constant, so the first route reduces to `Pi_func(B)`. Therefore
+the projected laxity/naturality arrow is exactly:
+
+```text
+section_pullback_transf(F)
+  : Transf(
+      Pi_func(B),
+      Pi_func(A) o Pullback_catd_func(F)).
+```
+
+Its component at `E : Catd(B)` is:
+
+```text
+section_pullback_func(F,E).
+```
+
+For a pulled-back base family `G : K -> Op(Cat)`, the desired specialization is:
+
+```text
+functord_laxity_transf(Pi_pullback_funcd(G), p)
+  -> section_pullback_transf(G[p])
+
+tapp0_fapp0(functord_laxity_transf(Pi_pullback_funcd(G), p), E)
+  -> section_pullback_func(G[p], E).
+```
+
+This is the likely solution to the deferred Pi-pullback transport issue. The
+source of truth is the lax/coherence projection of `Pi_int_funcd` and its
+pullbacks, not a direct rule on the transparent alias
+`Sigma_catd_transport_func`.
+
+### Implementation Recommendations
+
+Recommended next implementation phase:
+
+1. Introduce or probe a small stable projection for displayed-functor laxity,
+   tentatively `functord_laxity_transf(FF,p)`, whose type expresses the skew
+   comparison between the two routes
+   `D[p] o FF[x]` and `FF[y] o E[p]`.
+2. First add only the Pi specialization:
+   `functord_laxity_transf(Pi_int_funcd,F) -> section_pullback_transf(F)`,
+   or the pulled-back specialization
+   `functord_laxity_transf(Pi_pullback_funcd(G),p) ->
+   section_pullback_transf(G[p])`, whichever typechecks with cleaner implicit
+   arguments.
+3. Keep rewrite-rule LHSs on stable explicit discriminators such as
+   `functord_laxity_transf`, `Pi_int_funcd`, or `Pi_pullback_funcd`. Do not
+   match on transparent aliases such as `Sigma_catd_transport_func`, and do not
+   place large reducible endpoint expressions in implicit argument slots.
+4. Treat the Sigma-total action as the semantic explanation and eventual
+   omega-friendly presentation: `Sigma(eta^X)` sends canonical/cartesian Sigma
+   arrows to the lax-coherence Sigma arrows. Do not require arbitrary
+   Sigma-arrow action to compute before the Pi coherence projection exists.
+5. Leave the already achieved transitivity theorem unchanged. Both the
+   telescope theorem and the derived Sigma-total regression already compute to
+   `q o p`; this new phase is about canonical-arrow naturality/coherence of
+   the Pi target transport.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -984,6 +1128,10 @@ git diff --check
 
 ## Remaining Work
 
+- Probe a generic displayed-functor laxity/coherence projection, likely
+  `functord_laxity_transf(FF,p)`, and specialize it first to
+  `Pi_int_funcd`/`Pi_pullback_funcd(G)` so that Pi target transport computes
+  through `section_pullback_transf(F)` and then `section_pullback_func(F,E)`.
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
   a concrete downstream theorem needs it. The route-specific canonical
   transport helper has been removed; arbitrary Sigma-arrow action remains
