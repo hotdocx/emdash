@@ -591,18 +591,18 @@ The generic uncurrying law is:
 Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r].
 ```
 
-The current kernel also exposes the canonical transport action of this
-uncurried displayed functor:
+For canonical total arrows, the intended internal normal form is the existing
+off-diagonal transfor component:
 
 ```text
 Sigma_transfd_funcd(eta)[sigma_transport(R,p,r)]
-  =
-Sigma_catd_transport(T,p,r) ∘ Sigma_transfd_funcd(eta)[(x,r)].
+  is represented by
+tapp1_fapp0(Sigma_transfd_funcd(eta), sigma_transport(R,p,r)).
 ```
 
-This is the implemented computation for canonical total arrows `(p,id)`.
-Action over arbitrary Sigma-total arrows and the opposite naturality route are
-still deferred.
+The kernel deliberately does not fold this to one external route around a
+naturality square, such as `T[p](eta[x](c))`. Action over arbitrary Sigma-total
+arrows remains outside the immediate milestone.
 
 This keeps the theorem surface sequential:
 

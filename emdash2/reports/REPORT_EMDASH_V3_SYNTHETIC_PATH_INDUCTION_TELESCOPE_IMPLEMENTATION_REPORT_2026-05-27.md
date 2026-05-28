@@ -640,13 +640,12 @@ The next natural implementation step is to return to more generic
 `Sigma_transfd_funcd` action/naturality, unless Product/Functor adjunction
 coherence becomes a more urgent downstream dependency.
 
-## 2026-05-28 Implementation Update: Sigma-Transfd Canonical Transport Action
+## 2026-05-28 Superseded Probe: Sigma-Transfd Canonical Transport Action
 
-Product/Functor adjunction coherence remains deferred. The next Sigma-total
-uncurrying step has instead been implemented for the canonical total transport
-case.
+Product/Functor adjunction coherence remains deferred. A route-specific
+Sigma-total uncurrying step was probed for the canonical total transport case.
 
-Added:
+The probed helper was:
 
 ```text
 Sigma_transfd_transport_func(eta,p,r)
@@ -681,6 +680,8 @@ Also added an object-action regression:
 Sigma_transfd_transport_func(eta,p,r)[c]
   = Sigma_catd_transport(T,p,r)(eta[(x,r)](c)).
 ```
+
+This probe typechecked, but it has now been retracted from `emdash3_2.lp`.
 
 This is a narrow canonical-transport projection, not a full arbitrary
 Sigma-arrow action for `Sigma_transfd_funcd`. The opposite route
@@ -770,6 +771,35 @@ remain outside the immediate milestone. Requiring them would recreate the old
 Sigma-total-primary architecture that the telescope redesign intentionally
 avoided.
 
+## 2026-05-28 Implementation Update: Route-Specific Fold Removed
+
+The reassessment above has now been applied to `emdash3_2.lp`.
+
+Removed from the active file:
+
+```text
+Sigma_transfd_transport_func
+tapp1_fapp0(Sigma_transfd_funcd eta, (p,id)) -> Sigma_transfd_transport_func(...)
+```
+
+and the two route-specific regression assertions that made
+`Sigma_catd_transport(T,p,r) o eta[(x,r)]` the target normal form.
+
+The active normal form for canonical/cartesian Sigma-total action is again the
+existing internal off-diagonal component:
+
+```text
+functord_transport_func(Sigma_transfd_funcd eta, sigma_transport(R,p,r))
+  = tapp1_fapp0(Sigma_transfd_funcd eta, sigma_transport(R,p,r)).
+```
+
+No new stable off-diagonal head was introduced. A probe of route-composite
+assertions showed that explicit Sigma-total endpoints are still too brittle for
+a clean theorem-style assertion there; adding a special rewrite would be the
+wrong architectural response. Future work should only add a diagonal
+`tapp0_fapp0` accumulation rule if a concrete downstream computation produces
+that exact shape and the rule can be oriented toward `tapp1_fapp0`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -786,9 +816,9 @@ git diff --check
 ## Remaining Work
 
 - Expose more of the generic `Sigma_transfd_funcd` action/naturality only when
-  a concrete downstream theorem needs it. Canonical total transport is now
-  exposed; arbitrary Sigma-arrow action and the opposite naturality route remain
-  deferred.
+  a concrete downstream theorem needs it. The route-specific canonical
+  transport helper has been removed; arbitrary Sigma-arrow action remains
+  outside the immediate milestone.
 - Continue the ordinary curry/uncurry pass only if a downstream theorem needs
   explicit Product/Functor adjunction coherence beyond the current functor-level
   beta/action laws.
