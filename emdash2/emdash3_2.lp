@@ -2061,6 +2061,19 @@ injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
 
+// Stable displayed-identity bridge for Pi. Generic strict functoriality
+// catches `Pi_func(K)[id]`, while this development often keeps the displayed
+// identity visible as `id_funcd`; this rule is the same identity preservation
+// computation at that stable head.
+rule @fapp1_fapp0
+      (@Catd_cat $K)
+      Cat_cat
+      (@Pi_func $K)
+      $E
+      $E
+      (@id_funcd $K $E)
+  ↪ @id_func (@Pi_cat $K $E);
+
 // Internalized-x layer: global natural package for Pi over varying bases.
 //
 // Surface/formula:
@@ -3722,6 +3735,31 @@ rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
     fdapp1_int_transfd(FF)
       = tdapp1_int_fapp0_transfd(id_FF)
 
+  Current laxity architecture:
+
+    internal hom-action  ->  extracted laxity  ->  Sigma action consumes laxity.
+
+  The Sigma-total presentation is the externalization/test surface where a
+  laxity cell is visible as a fibre component of a total arrow. It is not the
+  primitive source of that same laxity; otherwise `Sigma(FF)` would be defined
+  using `laxity(FF,p)` and `laxity(FF,p)` would be extracted back from
+  `Sigma(FF)`, which is circular.
+
+  The intended non-circular source for displayed functor laxity is the
+  identity-specialized internal displayed hom-action:
+
+    fdapp1_int_transfd(FF)
+      : Transfd(homd_int(id_E), homd_int(FF) o Op_funcd(FF)).
+
+  Applying this to a canonical/cartesian dependent-hom triangle should expose
+  the component
+
+    D[p](FF[x](u)) -> FF[y](E[p](u)).
+
+  Once that extraction is stable, `functord_laxity_transf(FF,p)` below should
+  be defined or folded from it, and Sigma-map arrow action should consume the
+  resulting laxity prefix. Strict constructors will then need explicit folds
+  making their laxity collapse to the identity/cartesian component.
 */
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
@@ -4124,6 +4162,25 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
      u
      (@Fibre_transf K E D FF GG ϵ z);
 
+// Fixed-base layer: component of an arrow between sections.
+//
+// Mathematical notation:
+//   pi_hom_fapp0(eta,k) = eta[k] : s[k] -> t[k]
+//   for eta : Hom_{Π i :^f K, E[i]}(s,t).
+//
+// Faithful surface syntax:
+//   eta[k] : s[k] -> t[k].
+//
+// This is a semantic definition over the existing displayed component
+// projection. There is intentionally no rewrite rule targeting `piapp0_func`:
+// that head is definable, so it is not a rewrite discriminator.
+symbol pi_hom_fapp0 [K : Cat] [E : τ (Catd K)]
+  [s t : τ (Obj (Pi_cat E))]
+  (eta : τ (Hom (Pi_cat E) s t))
+  (k : τ (Obj K))
+  : τ (Hom (Fibre_cat E k) (piapp0 s k) (piapp0 t k))
+≔ tapp0_fapp0 Terminal_obj (tdapp0_fapp0 k eta);
+
 // Internalized-x prerequisite: heterogeneous action of a displayed functor over
 // a base arrow. This is the Cat-valued specialization of the ordinary transfor
 // hom-action.
@@ -4178,10 +4235,10 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
 //
 // This is the explicit skew comparison between the two route functors. It is
 // currently an interim stable projection interface: the intended final
-// implementation should derive its components from the appropriate
-// Sigma-total/off-diagonal action. The helper below names the component
-// extracted from the current strict Sigma map action, which is useful
-// infrastructure but not yet the full lax total-action package needed by Pi.
+// implementation should derive it from the internal displayed hom-action
+// (`fdapp1_int_transfd`) applied to canonical/cartesian dependent-hom
+// triangles. Sigma-map action should later consume this laxity prefix; it
+// should not be the primitive source of the same laxity.
 symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4192,11 +4249,12 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p));
 
-// Component-level extraction from the current Sigma-total action. This names
-// the fibre component of Sigma(FF) applied to the canonical total transport
-// arrow. It is deliberately separate from `functord_laxity_transf`: the
-// current `sigma_map_func` action is strict/cartesian on canonical transport
-// arrows, while Pi laxity needs the fuller lax total-action package.
+// Component-level extraction from the current strict Sigma-total action. This
+// names the fibre component of Sigma(FF) applied to the canonical total
+// transport arrow. It is deliberately separate from `functord_laxity_transf`:
+// the current `sigma_map_func` action maps a canonical/cartesian arrow to an
+// identity-like/cartesian component, while Pi laxity needs the nontrivial
+// component extracted from internal hom-action.
 symbol sigma_map_transport_fibre_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4215,6 +4273,151 @@ symbol sigma_map_transport_fibre_arrow [K : Cat] [E D : τ (Catd K)]
         (@functord_transport_rhs_func K E D FF x y p)
         u))
 ≔ sigma_Snd (@sigma_map_transport_arrow K E D FF x y p u);
+
+// Source dependent-hom section used by the internal-hom extraction.
+//
+// Mathematical notation:
+//   homd_id_src_sec(E,x,u)
+//     = homd_int(id_E)[x](u)
+//     : Π y :^f K^op, E[y^-] -> Hom_K(x,y)^op -> Cat.
+//
+// Faithful surface syntax:
+//   Homd_E(x,u,—,—).
+symbol homd_id_src_sec [K : Cat] (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
+≔ homd_src_sec (@id_funcd K E) x u;
+
+// Target dependent-hom section obtained by applying FF to the source object.
+//
+// Mathematical notation:
+//   homd_ff_src_sec(FF,x,u)
+//     = homd_int(FF)[x](FF[x](u))
+//     : Π y :^f K^op, E[y^-] -> Hom_K(x,y)^op -> Cat.
+//
+// Faithful surface syntax:
+//   Homd_D(x,FF[x](u),—,FF[—](—)).
+symbol homd_ff_src_sec [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
+≔ homd_src_sec FF x (fapp0 (Fibre_func FF x) u);
+
+// First concrete stage of the non-circular laxity extraction path. This is the
+// component of the internal displayed hom-action at the represented source x
+// and source fibre object u. Its source is the identity dependent-hom section;
+// its target is the section obtained by first applying FF at x and then using
+// `homd_int(FF)`.
+//
+// Mathematical notation:
+//   fdapp1_section(FF,x,u) :
+//     homd_int(id_E)[x](u) -> homd_int(FF)[x](FF[x](u)).
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u] :
+//     Homd_E(x,u,—,—) -> Homd_D(x,FF[x](u),—,FF[—](—)).
+//
+// Further projections at y, at the transported object E[p](u), and at the base
+// arrow p should eventually produce the component of
+// `functord_laxity_transf(FF,p)` at u.
+symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat (Homd_target_catd E) x)
+      (homd_id_src_sec E x u)
+      (homd_ff_src_sec FF x u))
+≔ Fibre_transf_app (fdapp1_int_transfd FF) x u;
+
+// Second projection stage of the same internal-hom extraction path.
+//
+// Mathematical notation:
+//   fdapp1_section(FF,x,u)[y] :
+//     homd_int(id_E)[x](u)[y]
+//       -> homd_int(FF)[x](FF[x](u))[y].
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u][y] :
+//     Homd_E(x,u,y,—) => Homd_D(x,FF[x](u),y,FF[y](—)).
+//
+// This deliberately stops before choosing the transported fibre object E[p](u)
+// and base arrow p.
+symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Hom
+      (Fibre_cat (Homd_target_section_catd E x) y)
+      (piapp0 (homd_id_src_sec E x u) y)
+      (piapp0 (homd_ff_src_sec FF x u) y))
+≔ pi_hom_fapp0 (functord_laxity_fdapp1_section_arrow FF x u) y;
+
+// Source y-component of the identity dependent-hom section.
+//
+// Mathematical notation:
+//   homd_id_tgt_func(E,x,u,y)
+//     = homd_int(id_E)[x](u)[y].
+//
+// Faithful surface syntax:
+//   Homd_E(x,u,y,—).
+symbol homd_id_tgt_func [K : Cat] (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Obj (Fibre_cat (Homd_target_section_catd E x) y))
+≔ piapp0 (homd_id_src_sec E x u) y;
+
+// Target y-component after applying FF to the source object.
+//
+// Mathematical notation:
+//   homd_ff_tgt_func(FF,x,u,y)
+//     = homd_int(FF)[x](FF[x](u))[y].
+//
+// Faithful surface syntax:
+//   Homd_D(x,FF[x](u),y,FF[y](—)).
+symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Obj (Fibre_cat (Homd_target_section_catd E x) y))
+≔ piapp0 (homd_ff_src_sec FF x u) y;
+
+// Third projection stage: evaluate the y-component at a fibre object v.
+//
+// Mathematical notation:
+//   fdapp1_section(FF,x,u)[y][v] :
+//     homd_int(id_E)[x](u)[y](v)
+//       -> homd_int(FF)[x](FF[x](u))[y](v).
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u][y,v] :
+//     Hom_E(E[—](u),v) => Hom_D(D[—](FF[x](u)),FF[y](v)).
+//
+// The explicit `@HomPresheaf_catd_func K` is intentional: K is an implicit
+// parameter of the symbol, so the readable form `HomPresheaf_catd_func K`
+// would put K in the wrong application slot.
+symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      (Fibre_cat (fapp0 (@HomPresheaf_catd_func K) x) y)
+      (fapp0 (homd_id_tgt_func E x u y) v)
+      (fapp0 (homd_ff_tgt_func FF x u y) v))
+≔ @tapp0_fapp0
+    (Fibre_cat E y)
+    (Fibre_cat (fapp0 (@HomPresheaf_catd_func K) x) y)
+    (homd_id_tgt_func E x u y)
+    (homd_ff_tgt_func FF x u y)
+    v
+    (functord_laxity_fdapp1_tgt_arrow FF x u y);
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -4605,6 +4808,9 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
     x
     (@Pi_pullback_funcd K G)
     ≡ @Pi_func (@fapp0 K (Op_cat Cat_cat) G x);
+
+assert [K : Cat] (E : τ (Catd K)) ⊢
+  fapp1_fapp0 (Pi_func K) id_funcd ≡ id_func;
 
 /*
   Section-category and section-evaluation normal forms.

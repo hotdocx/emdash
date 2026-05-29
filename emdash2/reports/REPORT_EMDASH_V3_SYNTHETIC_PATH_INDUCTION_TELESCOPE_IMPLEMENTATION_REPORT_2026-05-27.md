@@ -1925,6 +1925,194 @@ Recommended phases:
    The next turn should focus on the internal-hom extraction and local
    Sigma/Pi computation.
 
+## 2026-05-29 Implementation Update: First Internal-Hom Extraction Stage
+
+Implementation has started according to the decision-complete order above.
+
+Completed in `emdash3_2.lp`:
+
+- Added self-contained code comments near the internal displayed hom-action
+  declarations documenting the current/latest architecture:
+
+  ```text
+  internal hom-action -> extracted laxity -> Sigma action consumes laxity.
+  ```
+
+- Added the focused stable displayed-identity bridge for Pi:
+
+  ```text
+  fapp1_fapp0(Pi_func(K), id_funcd(E))
+    -> id_func(Pi_cat(E)).
+  ```
+
+  This was first probed in a temporary copy. It typechecked and was then
+  promoted with a regression assertion. This rule is the visible-`id_funcd`
+  form of strict identity preservation for `Pi_func`, not an additional
+  mathematical axiom.
+
+- Added the first concrete helper in the non-circular laxity extraction path:
+
+  ```text
+  functord_laxity_fdapp1_section_arrow(FF,x,u)
+  ```
+
+  Its definition is the component of:
+
+  ```text
+  fdapp1_int_transfd(FF)
+  ```
+
+  at the represented source `x` and source fibre object `u`, via
+  `Fibre_transf_app`. Its type is an arrow in:
+
+  ```text
+  Fibre_cat(Homd_target_catd(E), x)
+  ```
+
+  from the identity dependent-hom section:
+
+  ```text
+  homd_src_sec(id_E,x,u)
+  ```
+
+  to the section obtained by first applying `FF[x]` to `u` and then using
+  `homd_int(FF)`:
+
+  ```text
+  homd_src_sec(FF,x,FF[x](u)).
+  ```
+
+  This is not yet the whole laxity component
+
+  ```text
+  D[p](FF[x](u)) -> FF[y](E[p](u)).
+  ```
+
+  It is the first stable projection layer from which that component should be
+  obtained by further projections at `y`, at `E[p](u)`, and at `p`.
+
+Focused temporary probes:
+
+- The first helper above typechecked quickly and was promoted.
+- A second-stage helper that immediately projected at `y` while forcing fully
+  reduced endpoint names timed out under a 60s Lambdapi check.
+- A revised second-stage helper using less-reduced/raw endpoint terms also
+  timed out under a 60s Lambdapi check.
+
+Interpretation: the next extraction step should introduce additional stable
+projection heads for the section-at-`y` and terminal-object evaluation layers,
+rather than asking Lambdapi to solve the whole
+`Pi_cat`/`Homd_target_section_catd`/terminal-source conversion in one
+definition. This matches the standing SOP: use semantic definitions first, but
+add stable heads when a focused probe shows real discrimination or performance
+need.
+
+## 2026-05-29 Implementation Update: Readable Section Projection Stack
+
+Follow-up implementation tightened the first extraction stage and advanced one
+projection layer.
+
+Changes promoted to `emdash3_2.lp`:
+
+- Rewrote the first internal-hom extraction helper in readable form. The active
+  definition now uses small semantic aliases instead of fully explicit kernel
+  applications:
+
+  ```text
+  homd_id_src_sec(E,x,u)
+    = homd_int(id_E)[x](u)
+
+  homd_ff_src_sec(FF,x,u)
+    = homd_int(FF)[x](FF[x](u))
+
+  functord_laxity_fdapp1_section_arrow(FF,x,u)
+    = fdapp1_int(FF)[x,u]
+  ```
+
+- Added a semantic section-arrow component helper:
+
+  ```text
+  pi_hom_fapp0(eta,k) = eta[k] : s[k] -> t[k].
+  ```
+
+  This is a definition through the existing displayed component projection:
+
+  ```text
+  tapp0_fapp0(Terminal_obj, tdapp0_fapp0(k,eta)).
+  ```
+
+  No rewrite rule was added for `piapp0_func`. A temp probe with such a rule
+  was rejected: `piapp0_func` is definable, and the rule both violated the SOP
+  against definable LHS discriminators and led to timeout behavior.
+
+- Added the second projection stage:
+
+  ```text
+  functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)
+    = fdapp1_int(FF)[x,u][y]
+    : Homd_E(x,u,y,—)
+        -> Homd_D(x,FF[x](u),y,FF[y](—)).
+  ```
+
+  This is still not the full laxity cell. It stops before choosing the fibre
+  object `E[p](u)` and base arrow `p`.
+
+- Added the third projection stage:
+
+  ```text
+  functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v)
+    = fdapp1_int(FF)[x,u][y][v]
+    : Hom_E(E[-](u),v)
+        -> Hom_D(D[-](FF[x](u)),FF[y](v)).
+  ```
+
+  This is still one step before the desired laxity component: the remaining
+  projection must choose `v := E[p](u)` and then evaluate at the base arrow
+  `p` and the canonical source triangle/identity.
+
+Probe results:
+
+- The readable first-stage helper and the second-stage `y` projection
+  typechecked quickly in a temporary copy and were promoted.
+- Initial third-stage attempts timed out or failed because the type used the
+  readable-looking expression:
+
+  ```text
+  HomPresheaf_catd_func K
+  ```
+
+  But `K` is an implicit parameter of `HomPresheaf_catd_func`. Without `@`,
+  Lambdapi parsed this as an explicit application and inferred the malformed
+  head:
+
+  ```text
+  @HomPresheaf_catd_func ?K K
+  ```
+
+  A `type` query on the candidate body exposed this mismatch.
+- The corrected ambient category is:
+
+  ```text
+  Fibre_cat(fapp0(@HomPresheaf_catd_func K,x),y).
+  ```
+
+  With this correction, and with the body written as an explicit
+  `@tapp0_fapp0` application, the third-stage helper typechecked quickly and
+  was promoted.
+
+Current interpretation: the presheaf/object evaluation stage is no longer the
+bottleneck. The actual next missing layer is the final canonical-triangle
+evaluation:
+
+```text
+fdapp1_int(FF)[x,u][y,E[p](u)][p]
+  : D[p](FF[x](u)) -> FF[y](E[p](u)).
+```
+
+This should again be probed with `type` queries first, because the corrected
+`HomPresheaf_catd_func` issue shows that implicit-argument placement can easily
+masquerade as a mathematical design problem.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
