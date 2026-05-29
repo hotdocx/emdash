@@ -2832,9 +2832,9 @@ timeout 60s lambdapi check -w tmp/emdash3_2_sigma_probe.lp
 timeout 60s lambdapi check -w emdash3_2.lp
 ```
 
-## 2026-05-30 Current Recommendation: Replace Sigma Fibre Head By Laxity Precomposition
+## 2026-05-30 Superseded Recommendation: Replace Sigma Fibre Head By Direct Laxity Precomposition
 
-This is the latest settled recommendation after reviewing the promoted
+This was the recommendation after reviewing the promoted
 `sigma_map_fibre_arrow` implementation. The current file typechecks, and the
 `sigma_map_fibre_arrow` head was a useful probe, but it is not the best final
 semantic interface. It names the whole Sigma-map fibre component directly:
@@ -2985,10 +2985,11 @@ object-indexed precomposition functor. A more internal functorial family in `u`
 should be introduced only when a downstream theorem requires that extra
 structure.
 
-This recommendation supersedes the promoted `sigma_map_fibre_arrow` as the next
-implementation target. The old head remains useful historical evidence that the
-Sigma-map lax-prefix route typechecks, but the next implementation should remove
-it in favor of `functord_laxity_precomp_func`.
+The direct `fapp0(functord_laxity_precomp_func)(FF[y][alpha])` plan below was
+then itself refined by the implementation update in the next section: keep
+`functord_laxity_precomp_func` as the reusable operation, but use
+`functord_laxity_precomp_fibre_fapp0` as the stable composite-action head so
+consumer rules still see the original `alpha`.
 
 The reusable SOP for this style is now consolidated in
 `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` under
@@ -2996,6 +2997,90 @@ The reusable SOP for this style is now consolidated in
 pointer from `README.md`. Future implementation comments in `emdash3_2.lp`
 should cite the same principle near any new precomposition/postcomposition
 stable heads.
+
+## 2026-05-30 Implementation Update: Precomposition Replacement Promoted
+
+The temporary `sigma_map_fibre_arrow` head has been removed from
+`emdash3_2.lp`. The active implementation now introduces:
+
+```text
+functord_laxity_precomp_func(FF,p,u,w)
+  : Hom_D[y](FF[y](E[p]u),w)
+    -> Hom_D[y](D[p](FF[x]u),w)
+```
+
+and uses a stable capped action for the composite:
+
+```text
+functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
+  ~= precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
+```
+
+Thus Sigma-map arrow action now computes as:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p, functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)).
+```
+
+This is the promoted compromise between the desired semantic precomposition
+normal form and rewrite-rule hygiene. The precomposition functor is explicit as
+the reusable operation, but the Sigma action consumes a stable composite-action
+head whose input remains the original fibre arrow `alpha`.
+
+Root-cause probe:
+
+An attempted direct replacement
+
+```text
+fapp0
+  (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+  (FF[y][alpha])
+```
+
+was semantically correct, but the consumer rule for the canonical case had to
+match:
+
+```text
+FF[y][homd_id_canonical_triangle(E,p,u)].
+```
+
+The bounded probe showed that the file checked quickly up to the existing
+canonical internal-hom rule, and began timing out exactly when this replacement
+consumer rule was added. The issue is that the old `sigma_map_fibre_arrow` rules
+matched the original `alpha`, while the direct precomposition application sees
+the arrow after `FF[y]` has acted. For identities this interacts with strict
+functoriality:
+
+```text
+FF[y][id] -> id
+```
+
+and with the local canonical-triangle bridge:
+
+```text
+id(E[y],E[p]u) -> homd_id_canonical_triangle(E,p,u).
+```
+
+That overlap made the rule checker search through too much conversion.
+
+The promoted fix keeps the original source arrow visible at the stable head.
+The two old rules translate directly:
+
+```text
+functord_laxity_precomp_fibre_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
+  -> functord_laxity_fdapp1_cell(FF,p,u)
+
+functord_laxity_precomp_fibre_fapp0(Rep_transport_func(p),q,id_q)
+  -> id_(q o p).
+```
+
+Validation:
+
+```bash
+timeout 60s lambdapi check -w tmp/emdash3_2_precomp_probe.lp
+timeout 60s lambdapi check -w emdash3_2.lp
+```
 
 ## Validation
 
@@ -3038,14 +3123,13 @@ git diff --check
     = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
   ```
 
-  The currently promoted implementation uses the temporary stable
-  `sigma_map_fibre_arrow` head. The latest recommendation is to replace it with
-  the more semantic cut-elimination head
-  `functord_laxity_precomp_func(FF,p,u,w)` and make Sigma action apply that
-  functor to `FF[y][alpha]`. Continue adding focused strict collapses for other
-  known strict constructors only when downstream regressions expose a missing
-  computation. The first representable/pathout collapse is now keyed on
-  `Rep_transport_func`.
+  The current implementation has removed the temporary `sigma_map_fibre_arrow`
+  name. It now exposes `functord_laxity_precomp_func(FF,p,u,w)` as the reusable
+  precomposition operation and uses the stable composite-action head
+  `functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)` for Sigma-map arrow
+  action. Continue adding focused strict collapses for other known strict
+  constructors only when downstream regressions expose a missing computation.
+  The first representable/pathout collapse is now keyed on `Rep_transport_func`.
 - Keep ordinary functor/transfor laxness aligned with the non-displayed
   internal hom-action packages:
 

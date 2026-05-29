@@ -4230,22 +4230,48 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p));
 
-// Fibre component of Sigma-map arrow action.
+// Precomposition by the displayed laxity component.
 //
 // Mathematical notation:
-//   Sigma(FF)(p,alpha).snd
-//     = FF[y](alpha) o laxity(FF,p)[u].
+//   laxity_precomp(FF,p,u,w)
+//     : Hom_D[y](FF[y](E[p]u),w) -> Hom_D[y](D[p](FF[x]u),w).
 //
 // Faithful surface syntax:
-//   Sigma(FF)[p,alpha]
-//     = (p, FF[y][alpha] o laxity(FF,p)[u]).
+//   precompose_by(laxity(FF,p)[u]).
 //
-// The raw composite is intentionally represented by this stable head. A direct
-// rule with the full `comp_fapp0(FF[y][alpha],laxity)` term in the Sigma action
-// RHS is mathematically correct but causes expensive conversion in the current
-// kernel. Focused rules below expose the canonical transport case needed by
-// the path-induction telescope.
-symbol sigma_map_fibre_arrow [K : Cat] [E D : τ (Catd K)]
+// This is the reusable Dosen cut-elimination operation. The Sigma-map action
+// below uses the corresponding composite action on a source fibre arrow, so
+// canonical source arrows remain visible to consumer rules.
+symbol functord_laxity_precomp_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (w : τ (Obj (Fibre_cat D y)))
+  : τ (Functor
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_rhs_func FF p) u)
+        w)
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_lhs_func FF p) u)
+        w));
+
+// Stable capped action of the composite
+//   FF[y]_1 ; precompose_by(laxity(FF,p)[u]).
+//
+// Mathematical notation:
+//   precompose_by(laxity(FF,p)[u])(FF[y][alpha]).
+//
+// Faithful surface syntax:
+//   precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
+//
+// The input remains the original fibre arrow `alpha`. This is deliberate:
+// matching after the `FF[y]` action forces the rule checker to reason through
+// strict functoriality of identities and loses the canonical source-triangle
+// head that downstream rules need.
+symbol functord_laxity_precomp_fibre_fapp0 [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
@@ -4266,7 +4292,7 @@ symbol sigma_map_fibre_arrow [K : Cat] [E D : τ (Catd K)]
 //
 // Surface/formula:
 //   Sigma(FF)[(p,alpha)]
-//     = (p, FF[y][alpha] o laxity(FF,p)[u]).
+//     = (p, precompose_by(laxity(FF,p)[u])[FF[y][alpha]]).
 //
 // This is the capped action `fapp1_fapp0` of `sigma_map_func`. A future
 // full-omega layer should expose the corresponding `fapp1_func` package between
@@ -4294,7 +4320,7 @@ rule @fapp1_fapp0
         (@tapp0_fapp0 $K Cat_cat $E $D $y $η)
         $v)
       $p
-      (@sigma_map_fibre_arrow $K $E $D $η $x $y $p $u $v $alpha);
+      (@functord_laxity_precomp_fibre_fapp0 $K $E $D $η $x $y $p $u $v $alpha);
 
 // Component-level extraction from the Sigma-total action on canonical
 // transport. Under the lax Sigma action, this fibre component reduces to the
@@ -4614,7 +4640,7 @@ rule fapp0
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
-rule @sigma_map_fibre_arrow
+rule @functord_laxity_precomp_fibre_fapp0
       $K
       $E
       $D
@@ -4645,7 +4671,7 @@ rule @functord_laxity_fdapp1_cell
 
 // Consumer-local strict Sigma action for representable precomposition on the
 // identity/canonical fibre arrow.
-rule @sigma_map_fibre_arrow
+rule @functord_laxity_precomp_fibre_fapp0
       $Z
       _
       _
@@ -7078,7 +7104,7 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
           (@tapp0_fapp0 K Cat_cat E D y η)
           v)
         p
-        (@sigma_map_fibre_arrow K E D η x y p u v alpha);
+        (@functord_laxity_precomp_fibre_fapp0 K E D η x y p u v alpha);
 
 // A Sigma map does not preserve canonical transport strictly for arbitrary
 // displayed functors. The image exposes the displayed laxity component;

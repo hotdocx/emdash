@@ -186,13 +186,27 @@ sigma_map_fibre_arrow(FF,p,u,alpha)
   ~= FF[y][alpha] o laxity(FF,p)[u].
 ```
 
-The preferred reusable normal form is:
+The preferred semantic normal form is:
 
 ```text
 fapp0
   (functord_laxity_precomp_func(FF,p,u,FF[y]v))
   (FF[y][alpha]).
 ```
+
+If consumer rules need to recognize the original source arrow `alpha`, do not
+force them to match after the `FF[y]` action. Use a stable composite-action head
+that records the same factorization while keeping `alpha` visible:
+
+```text
+functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
+  ~= fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (FF[y][alpha]).
+```
+
+This is the current Sigma-map implementation. It avoids making canonical
+identity/triangle rules match through strict functoriality of `FF[y]`.
 
 Here `functord_laxity_precomp_func(FF,p,u,w)` represents precomposition by the
 displayed laxity component:
