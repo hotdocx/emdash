@@ -2113,6 +2113,129 @@ This should again be probed with `type` queries first, because the corrected
 `HomPresheaf_catd_func` issue shows that implicit-argument placement can easily
 masquerade as a mathematical design problem.
 
+## 2026-05-29 Implementation Update: Canonical Homd Endpoint Projection
+
+Further review corrected the diagnosis above. The `@HomPresheaf_catd_func K`
+implicit-argument issue was real, but the deeper root cause was architectural:
+the extraction path crossed between two convertible views of the same category:
+
+```text
+Fibre_cat(HomPresheaf_Z(x), y)
+```
+
+and its canonical endpoint form:
+
+```text
+Functor_cat(Op_cat(Hom_cat K x y), Cat_cat).
+```
+
+Using the first view in the projection stack made later stages repeatedly ask
+Lambdapi to rediscover the whole `HomPresheaf` classifier pipeline. Several
+probes confirmed that adding rewrite rules against `HomPresheaf_catd_func` or
+bridging from the fibre view to a `Transf` view is the wrong direction:
+
+- direct bridge helpers from `Fibre_cat(HomPresheaf_Z(x),y)` to `Transf`
+  timed out;
+- a focused projection rule for `Presheaf_catd_func` would have required
+  compound expressions in rewrite-rule source/target slots and still timed out;
+- an evaluation functor
+
+  ```text
+  HomPresheaf_Z(x)[y] -> Cat
+  ```
+
+  typechecked by itself, but combining it with the third-stage arrow again
+  forced large endpoint conversions.
+
+The better design is to expose the canonical category earlier. This was probed
+and promoted:
+
+```text
+homd_tgt_func(FF,x,u,y)
+  : Fibre_cat(D,y) -> Functor_cat(Op_cat(Hom_cat K x y), Cat_cat)
+```
+
+instead of the older target:
+
+```text
+Fibre_cat(D,y) -> Fibre_cat(HomPresheaf_Z(x), y).
+```
+
+The readable aliases were then reordered and retargeted so that the stack from
+the `y` projection onward stays in canonical functor-category form:
+
+```text
+homd_id_tgt_func(E,x,u,y)
+  : E[y] -> ((x -> y)^op -> Cat)
+
+homd_ff_tgt_func(FF,x,u,y)
+  : E[y] -> ((x -> y)^op -> Cat)
+
+functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)
+  : homd_id_tgt_func(E,x,u,y)
+      -> homd_ff_tgt_func(FF,x,u,y)
+
+functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v)
+  : homd_id_tgt_func(E,x,u,y)[v]
+      -> homd_ff_tgt_func(FF,x,u,y)[v]
+```
+
+The fourth projection now typechecks quickly when its endpoints are written
+through the stable endpoint constructor `homd_`:
+
+```text
+functord_laxity_fdapp1_hom_func(FF,p,u,v)
+  : homd_(id_E,x,u,y,v)[p]
+      -> homd_(FF,x,FF[x](u),y,v)[p].
+```
+
+This is the right normal form for this layer. It avoids forcing the simplified
+fibre-hom category too early:
+
+```text
+Hom_{D[y]}(D[p](FF[x](u)), FF[y](v)).
+```
+
+That simplification remains valid but should be exposed by focused endpoint
+assertions/folds only where a downstream theorem needs it.
+
+A canonical source triangle was also promoted:
+
+```text
+homd_id_canonical_triangle(E,p,u)
+  : homd_(id_E,x,u,y,E[p](u))[p]
+```
+
+with body:
+
+```text
+id_{E[p](u)}.
+```
+
+Important non-promotion:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u,E[p](u)),
+  homd_id_canonical_triangle(E,p,u))
+```
+
+still timed out when promoted as the raw cell. This shows the next missing
+surface is not `HomPresheaf` normalization anymore; it is the object-action
+surface for the fourth projection, or a staged endpoint/action helper that does
+not unfold the whole fourth-stage definition during application.
+
+Current next recommendation:
+
+1. Keep the promoted canonical `homd_tgt_func` and fourth-stage hom functor.
+2. Do not add rewrite rules on `HomPresheaf_catd_func` or other definable
+   classifier pipelines.
+3. Next probe a stable object-action layer for
+   `functord_laxity_fdapp1_hom_func`, preferably still typed at the direct
+   `homd_` endpoint.
+4. Only after that object-action layer typechecks quickly, fold/package it as
+   the component of `functord_laxity_transf(FF,p)`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to

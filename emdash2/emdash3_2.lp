@@ -3618,9 +3618,7 @@ symbol homd_tgt_func [Z : Cat] [D E : τ (Catd Z)]
   (y : τ (Obj Z))
   : τ (Functor
         (Fibre_cat D y)
-        (Fibre_cat
-          (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x)
-          y));
+        (Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat));
 
 // Terminal-source normal form for the generalized inner endpoint. This exposes
 // the same homd-valued family used by piapp1_func without adding a broad
@@ -4332,30 +4330,6 @@ symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
       (homd_ff_src_sec FF x u))
 ≔ Fibre_transf_app (fdapp1_int_transfd FF) x u;
 
-// Second projection stage of the same internal-hom extraction path.
-//
-// Mathematical notation:
-//   fdapp1_section(FF,x,u)[y] :
-//     homd_int(id_E)[x](u)[y]
-//       -> homd_int(FF)[x](FF[x](u))[y].
-//
-// Faithful surface syntax:
-//   fdapp1_int(FF)[x,u][y] :
-//     Homd_E(x,u,y,—) => Homd_D(x,FF[x](u),y,FF[y](—)).
-//
-// This deliberately stops before choosing the transported fibre object E[p](u)
-// and base arrow p.
-symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat E x)))
-  (y : τ (Obj K))
-  : τ (Hom
-      (Fibre_cat (Homd_target_section_catd E x) y)
-      (piapp0 (homd_id_src_sec E x u) y)
-      (piapp0 (homd_ff_src_sec FF x u) y))
-≔ pi_hom_fapp0 (functord_laxity_fdapp1_section_arrow FF x u) y;
-
 // Source y-component of the identity dependent-hom section.
 //
 // Mathematical notation:
@@ -4368,7 +4342,9 @@ symbol homd_id_tgt_func [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   (y : τ (Obj K))
-  : τ (Obj (Fibre_cat (Homd_target_section_catd E x) y))
+  : τ (Functor
+      (Fibre_cat E y)
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
 ≔ piapp0 (homd_id_src_sec E x u) y;
 
 // Target y-component after applying FF to the source object.
@@ -4384,8 +4360,37 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   (y : τ (Obj K))
-  : τ (Obj (Fibre_cat (Homd_target_section_catd E x) y))
+  : τ (Functor
+      (Fibre_cat E y)
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
 ≔ piapp0 (homd_ff_src_sec FF x u) y;
+
+// Second projection stage of the same internal-hom extraction path.
+//
+// Mathematical notation:
+//   fdapp1_section(FF,x,u)[y] :
+//     homd_int(id_E)[x](u)[y]
+//       -> homd_int(FF)[x](FF[x](u))[y].
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u][y] :
+//     Homd_E(x,u,y,—) => Homd_D(x,FF[x](u),y,FF[y](—)).
+//
+// The codomain is written in the canonical functor-category normal form
+// `(x -> y)^op -> Cat`; this avoids later depending on the reducible
+// `Fibre_cat(HomPresheaf_Z(x),y)` classifier pipeline.
+symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Hom
+      (Functor_cat
+        (Fibre_cat E y)
+        (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
+      (homd_id_tgt_func E x u y)
+      (homd_ff_tgt_func FF x u y))
+≔ pi_hom_fapp0 (functord_laxity_fdapp1_section_arrow FF x u) y;
 
 // Third projection stage: evaluate the y-component at a fibre object v.
 //
@@ -4398,9 +4403,10 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 //   fdapp1_int(FF)[x,u][y,v] :
 //     Hom_E(E[—](u),v) => Hom_D(D[—](FF[x](u)),FF[y](v)).
 //
-// The explicit `@HomPresheaf_catd_func K` is intentional: K is an implicit
-// parameter of the symbol, so the readable form `HomPresheaf_catd_func K`
-// would put K in the wrong application slot.
+// The ambient category is written directly as `(x -> y)^op -> Cat`, rather
+// than through `Fibre_cat(HomPresheaf_Z(x),y)`. This is the canonical endpoint
+// category of the HomPresheaf classifier and avoids making later projections
+// depend on unfolding the whole classifier pipeline.
 symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
@@ -4408,16 +4414,89 @@ symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   (y : τ (Obj K))
   (v : τ (Obj (Fibre_cat E y)))
   : τ (Hom
-      (Fibre_cat (fapp0 (@HomPresheaf_catd_func K) x) y)
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
       (fapp0 (homd_id_tgt_func E x u y) v)
       (fapp0 (homd_ff_tgt_func FF x u y) v))
 ≔ @tapp0_fapp0
     (Fibre_cat E y)
-    (Fibre_cat (fapp0 (@HomPresheaf_catd_func K) x) y)
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
     (homd_id_tgt_func E x u y)
     (homd_ff_tgt_func FF x u y)
     v
     (functord_laxity_fdapp1_tgt_arrow FF x u y);
+
+// Fourth projection stage, with endpoints written directly through `homd_`.
+//
+// Mathematical notation:
+//   fdapp1_int(FF)[x,u][y,v][p] :
+//     homd_(id_E,x,u,y,v)[p]
+//       -> homd_(FF,x,FF[x](u),y,v)[p].
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u][y,v][p].
+//
+// This deliberately keeps the endpoints at the stable `homd_` layer. A later
+// fold/assertion can expose the simplified fibre-hom category
+// `Hom_{D[y]}(D[p](FF[x](u)),FF[y](v))` when a theorem needs that shape.
+symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      Cat_cat
+      (fapp0
+        (homd_
+          (@id_funcd K E)
+          x
+          u
+          y
+          v)
+        p)
+      (fapp0
+        (homd_
+          FF
+          x
+          (fapp0 (Fibre_func FF x) u)
+          y
+          v)
+        p))
+≔ @fapp1_fapp0
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    Cat_cat
+    (@fapp0_func (Op_cat (Hom_cat K x y)) Cat_cat p)
+    (fapp0 (homd_id_tgt_func E x u y) v)
+    (fapp0 (homd_ff_tgt_func FF x u y) v)
+    (functord_laxity_fdapp1_presheaf_arrow FF x u y v);
+
+// Canonical source triangle, first typed in the direct `homd_` endpoint.
+//
+// Mathematical notation:
+//   id_{E[p](u)} : homd_(id_E,x,u,y,E[p](u))[p].
+//
+// Faithful surface syntax:
+//   id : Homd_E(x,u,y,E[p]u)[p].
+//
+// This is the source object for the eventual raw laxity cell. Keeping it typed
+// at the direct `homd_` endpoint avoids the expensive inline conversion through
+// `homd_id_tgt_func`.
+symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj
+      (fapp0
+        (homd_
+          (@id_funcd K E)
+          x
+          u
+          y
+          (fapp0 (catd_transport_func E p) u))
+        p))
+≔ @id
+    (Fibre_cat E y)
+    (fapp0 (catd_transport_func E p) u);
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -6283,6 +6362,15 @@ assert [Z : Cat] (E : τ (Catd Z))
         v
         (Hom_cat Z x y)
         (@fib_cov_tapp0_func Z E x y u);
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @homd_id_canonical_triangle K E x y p u
+    ≡ @id
+        (Fibre_cat E y)
+        (fapp0 (catd_transport_func E p) u);
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
