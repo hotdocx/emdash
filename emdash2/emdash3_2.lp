@@ -6540,6 +6540,87 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
 
+/*
+  End-to-end displayed internal-hom extraction checks.
+
+  The third projection assertion below uses explicit canonical source/target
+  slots for `tapp0_fapp0`. The readable form
+
+    tapp0_fapp0 v (functord_laxity_fdapp1_tgt_arrow ...)
+
+  is mathematically correct but asks Lambdapi to rediscover a `Transf_cat`
+  presentation from a `Hom(Functor_cat(...),...)` endpoint and can time out.
+*/
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @Fibre_transf_app
+    K
+    (@Op_catd K E)
+    (@Homd_target_catd K E)
+    (@homd_int K E E (@id_funcd K E))
+    (@comp_catd_fapp0
+      K
+      (@Op_catd K E)
+      (@Op_catd K D)
+      (@Homd_target_catd K E)
+      (@homd_int K E D FF)
+      (@Op_funcd K E D FF))
+    (@fdapp1_int_transfd K E D FF)
+    x
+    u
+    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  tapp0_fapp0
+    Terminal_obj
+    (tdapp0_fapp0 y (@functord_laxity_fdapp1_section_arrow K E D FF x u))
+    ≡ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat E y)
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    (@homd_id_tgt_func K E x u y)
+    (@homd_ff_tgt_func K E D FF x u y)
+    v
+    (@functord_laxity_fdapp1_tgt_arrow K E D FF x u y)
+    ≡ @functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @fapp1_fapp0
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    Cat_cat
+    (@fapp0_func (Op_cat (Hom_cat K x y)) Cat_cat p)
+    (fapp0 (@homd_id_tgt_func K E x u y) v)
+    (fapp0 (@homd_ff_tgt_func K E D FF x u y) v)
+    (@functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v)
+    ≡ @functord_laxity_fdapp1_hom_func K E D FF x y p u v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0
+    (@functord_laxity_fdapp1_hom_func K E D FF x y p u _)
+    (@homd_id_canonical_triangle K E x y p u)
+    ≡ @tapp0_fapp0
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_lhs_func K E D FF x y p)
+        (@functord_transport_rhs_func K E D FF x y p)
+        u
+        (@functord_laxity_transf K E D FF x y p);
+
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K)) ⊢

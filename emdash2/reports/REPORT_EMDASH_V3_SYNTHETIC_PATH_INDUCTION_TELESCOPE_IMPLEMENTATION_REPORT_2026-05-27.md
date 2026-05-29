@@ -2610,6 +2610,81 @@ homd_(id_E,x,u,y,E[p]u)[p].
 This keeps identity bridges typed by the local semantic context and avoids
 perturbing unrelated identity computations.
 
+## 2026-05-30 Implementation Update: Internal-Hom Extraction Regressions
+
+The displayed internal-hom extraction path is now guarded by focused
+stage-by-stage assertions in `emdash3_2.lp`.
+
+The checked ladder is:
+
+```text
+Fibre_transf_app(fdapp1_int_transfd(FF),x,u)
+  == functord_laxity_fdapp1_section_arrow(FF,x,u)
+
+tapp0_fapp0(
+  tdapp0_fapp0(y, functord_laxity_fdapp1_section_arrow(FF,x,u)),
+  *)
+  == functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)
+
+tapp0_fapp0(
+  functord_laxity_fdapp1_tgt_arrow(FF,x,u,y),
+  v)
+  == functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v)
+
+fapp1_fapp0(
+  fapp0_func(p),
+  functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v))
+  == functord_laxity_fdapp1_hom_func(FF,p,u,v)
+```
+
+At the canonical transported endpoint, the extracted internal-hom action now
+joins with the displayed-laxity component:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u,E[p]u),
+  homd_id_canonical_triangle(E,p,u))
+  == tapp0_fapp0(functord_laxity_transf(FF,p),u)
+```
+
+Both sides reduce to the stable cell:
+
+```text
+functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+This is not yet a constructor/eta principle for the whole transfor
+`functord_laxity_transf(FF,p)`, but it gives the intended computational bridge
+at the component level: the lower internal hom-action and the public laxity
+interface now have a checked common normal form.
+
+Probe note:
+
+The readable assertion
+
+```text
+tapp0_fapp0 v (functord_laxity_fdapp1_tgt_arrow ...)
+```
+
+timed out. The issue was not mathematical: Lambdapi had to infer the whole
+`Transf_cat` presentation behind a `Hom(Functor_cat(...),...)` endpoint. The
+promoted assertion fixes the source category, target category, and endpoint
+functors explicitly in canonical form:
+
+```text
+tapp0_fapp0
+  (Fibre_cat E y)
+  (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+  (homd_id_tgt_func(E,x,u,y))
+  (homd_ff_tgt_func(FF,x,u,y))
+  v
+  (functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)).
+```
+
+This follows the SOP distinction: rewrite-rule LHSs should avoid brittle
+compound source/target slots, but focused assertions may spell out canonical
+source/target slots to prevent conversion search from exploding.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -2631,13 +2706,14 @@ git diff --check
 
 ## Remaining Work
 
-- Build the fuller lax/off-diagonal total-action extraction from the existing
-  internal displayed hom-action packages (`tdapp1_int_*` /
-  `fdapp1_int_transfd`). The target is a derived/folded path:
+- Continue from the now-checked component-level bridge from internal hom-action
+  to displayed laxity. The remaining question is whether more of this should be
+  packaged as reusable rules or kept as focused regression assertions:
 
   ```text
   fdapp1_int_transfd(FF) applied to canonical_triangle(E,p,u)
-    -> functord_laxity_transf(FF,p)[u].
+    == functord_laxity_transf(FF,p)[u]
+    == functord_laxity_fdapp1_cell(FF,p,u).
   ```
 
   Once the Pi instance joins with `section_pullback_func(F,E)`, replace the
