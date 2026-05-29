@@ -2832,6 +2832,164 @@ timeout 60s lambdapi check -w tmp/emdash3_2_sigma_probe.lp
 timeout 60s lambdapi check -w emdash3_2.lp
 ```
 
+## 2026-05-30 Current Recommendation: Replace Sigma Fibre Head By Laxity Precomposition
+
+This is the latest settled recommendation after reviewing the promoted
+`sigma_map_fibre_arrow` implementation. The current file typechecks, and the
+`sigma_map_fibre_arrow` head was a useful probe, but it is not the best final
+semantic interface. It names the whole Sigma-map fibre component directly:
+
+```text
+sigma_map_fibre_arrow(FF,p,u,alpha)
+  ~= FF[y][alpha] o laxity(FF,p)[u].
+```
+
+The cleaner cut-elimination normal form is to name the reusable operation:
+
+```text
+precompose by laxity(FF,p)[u].
+```
+
+That should be represented by a primitive stable functor head, provisionally:
+
+```text
+functord_laxity_precomp_func(FF,p,u,w)
+  : Hom_D[y](FF[y](E[p]u), w)
+    -> Hom_D[y](D[p](FF[x]u), w).
+```
+
+In current symbol language, the intended type is approximately:
+
+```text
+functord_laxity_precomp_func(FF,p,u,w)
+  : Functor
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_rhs_func FF p) u)
+        w)
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_lhs_func FF p) u)
+        w).
+```
+
+Then the Sigma-map arrow action should be expressed as:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p,
+      fapp0
+        (functord_laxity_precomp_func
+          (FF,p,u,FF[y]v))
+        (FF[y][alpha])).
+```
+
+The missing `fapp0` is important: `functord_laxity_precomp_func` is a functor,
+so Sigma action must apply it to the target-fibre arrow `FF[y][alpha]`. This
+keeps the information that the fibre component is a genuine precomposition
+operation, rather than hiding the whole composite in a one-off Sigma-specific
+head.
+
+Do not define this head by reusing `hom_precomp_func` directly. The existing
+`hom_precomp_func` computation is oriented as:
+
+```text
+fapp0 (hom_precomp_func(f)) g
+  -> g o f.
+```
+
+For this phase we want the opposite cut-elimination direction in selected
+consumer contexts:
+
+```text
+g o laxity(FF,p)[u]
+  -> fapp0 (functord_laxity_precomp_func(FF,p,u,w)) g.
+```
+
+So `functord_laxity_precomp_func` should be a stable projection head with its
+own focused rules, not a transparent alias that immediately expands to raw
+composition. A later probe may add a functor-level fold:
+
+```text
+hom_precomp_func(laxity(FF,p)[u])
+  -> functord_laxity_precomp_func(FF,p,u,w),
+```
+
+but only if the critical pairs with the existing `hom_precomp_func` action rule
+are checked. Similarly, an object-level fold from the raw composite to
+`fapp0(precomp_func)(...)` should be added only if a concrete downstream theorem
+needs the raw composite to normalize to the stable cut-elimination form.
+
+Planned replacement steps:
+
+1. Introduce `functord_laxity_precomp_func` near
+   `functord_laxity_transf` / `functord_laxity_fdapp1_cell`, with comments in
+   both mathematical notation and faithful surface syntax.
+2. Change the `sigma_map_func` capped arrow-action rule so its fibre component
+   is:
+
+   ```text
+   fapp0
+     (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+     (fapp1_fapp0(FF[y],alpha)).
+   ```
+
+3. Delete `sigma_map_fibre_arrow` and port its consumer rules to the
+   `fapp0(functord_laxity_precomp_func ...)(...)` surface.
+4. Keep the existing plain-identity-to-`homd_id_canonical_triangle` fold:
+
+   ```text
+   id(E[y], E[p]u)
+     -> homd_id_canonical_triangle(E,p,u).
+   ```
+
+   It remains the right local way to remember that this identity is the
+   canonical/cartesian dependent-hom triangle. Do not use
+   `homd_id_canonical_triangle` itself on rewrite LHSs when the expression has
+   already normalized to plain `id`; instead rely on the existing local fold.
+5. Add or port the canonical transport consumer rule so:
+
+   ```text
+   fapp0
+     (functord_laxity_precomp_func
+       (FF,p,u,FF[y](E[p]u)))
+     (FF[y][homd_id_canonical_triangle(E,p,u)])
+     -> functord_laxity_fdapp1_cell(FF,p,u).
+   ```
+
+   Probe whether the argument appears syntactically as the canonical head or as
+   a plain identity after existing strict functor rules. Add only the focused
+   consumer-local form needed by the checked normal form.
+6. Keep the representable strict collapse keyed on `Rep_transport_func`:
+
+   ```text
+   functord_laxity_fdapp1_cell(Rep_transport_func(p),q)
+     -> id(q o p).
+   ```
+
+   After the precomposition replacement, first try to get the PathOut/rho
+   regression through the generic precomp canonical-transport rule plus this
+   cell collapse. Add a representable-specific `fapp0(precomp_func)(id)` rule
+   only if the regression shows it is still needed.
+7. Probe in a temporary copy before touching the active file. Keep bounded
+   checks (`timeout 60s lambdapi check -w ...`), and avoid rewrite LHSs with
+   explicit compound expressions in implicit argument positions. Prefer stable
+   heads and `_` for non-discriminating source/target slots.
+8. Update assertions currently expecting `sigma_map_fibre_arrow` so they expect
+   the new `fapp0(functord_laxity_precomp_func ...)(...)` normal form, or the
+   subsequent canonical cell when the canonical-transport consumer rule fires.
+
+The design question about internalizing `u` in "precompose by
+`laxity(FF,p)[u]`" remains deferred. The present phase only needs the
+object-indexed precomposition functor. A more internal functorial family in `u`
+should be introduced only when a downstream theorem requires that extra
+structure.
+
+This recommendation supersedes the promoted `sigma_map_fibre_arrow` as the next
+implementation target. The old head remains useful historical evidence that the
+Sigma-map lax-prefix route typechecks, but the next implementation should remove
+it in favor of `functord_laxity_precomp_func`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -2866,16 +3024,21 @@ git diff --check
 
   The Pi-specific whole-`functord_laxity_transf` folds are kept because they
   expose the full `section_pullback_transf` naturality object.
-- Sigma-map arrow action has been revised to the stable lax-prefix normal form:
+- Sigma-map arrow action has been revised to the lax-prefix normal form:
 
   ```text
   Sigma(FF)(p,alpha)
     = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
   ```
 
-  Continue adding focused strict collapses for other known strict constructors
-  only when downstream regressions expose a missing computation. The first
-  representable/pathout collapse is now keyed on `Rep_transport_func`.
+  The currently promoted implementation uses the temporary stable
+  `sigma_map_fibre_arrow` head. The latest recommendation is to replace it with
+  the more semantic cut-elimination head
+  `functord_laxity_precomp_func(FF,p,u,w)` and make Sigma action apply that
+  functor to `FF[y][alpha]`. Continue adding focused strict collapses for other
+  known strict constructors only when downstream regressions expose a missing
+  computation. The first representable/pathout collapse is now keyed on
+  `Rep_transport_func`.
 - Keep ordinary functor/transfor laxness aligned with the non-displayed
   internal hom-action packages:
 
