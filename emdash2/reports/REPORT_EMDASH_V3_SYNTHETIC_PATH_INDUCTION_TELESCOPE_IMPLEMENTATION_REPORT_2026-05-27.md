@@ -2751,6 +2751,78 @@ The whole folds preserve functoriality/naturality structure. The component/cell
 assertions remain useful regressions showing that the internal hom-action route
 and the public Pi laxity transfor have the same component normal form.
 
+## 2026-05-29 Implementation Update: Lax Sigma-Map Arrow Action
+
+The Sigma-map arrow action has now been revised from the old strict/cartesian
+shape to the lax-prefix shape:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+```
+
+The direct rule with the full raw composite
+`comp_fapp0(FF[y](alpha), laxity(FF,p)[u])` in the RHS was probed first. It is
+mathematically the intended formula, but it timed out under a bounded
+Lambdapi check. The promoted implementation therefore factors the fibre
+component through a stable head:
+
+```text
+sigma_map_fibre_arrow(FF,p,u,alpha)
+```
+
+with surface reading:
+
+```text
+FF[y][alpha] o laxity(FF,p)[u].
+```
+
+The capped Sigma-map rule now constructs:
+
+```text
+sigma_arrow(p, sigma_map_fibre_arrow(FF,p,u,alpha)).
+```
+
+For the canonical transport case, the stable fibre action reduces to the
+already checked displayed-laxity cell:
+
+```text
+sigma_map_transport_fibre_arrow(FF,p,u)
+  == functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+A diagnostic `compute` probe showed that representable transport normalizes
+past the readable `Rep_catd_func` / `Rep_catd` aliases to the internal
+`hom_int(id)` / `hom_` presentation. Rather than matching that raw normalized
+shape in later rules, the implementation now introduces a stable
+representable-transport head:
+
+```text
+Rep_transport_func(p) : Rep_Z(y) -> Rep_Z(x)
+Rep_transport_func(p)[z][q] = q o p.
+```
+
+The normalized internal hom-action folds to this head, and its fibre component
+folds to `hom_precomp_func`. Strict/cartesian representable behaviour is then
+recorded by focused rules keyed on `Rep_transport_func`, with family slots left
+implicit. This avoids rewrite rules with large compound expressions in
+implicit argument positions.
+
+The fixed PathOut/rho regression still computes: the image of the canonical
+rho transport under representable precomposition reduces to the identity at
+the composite arrow:
+
+```text
+id_{q o p} : Hom_Z(x,z)(q o p, q o p).
+```
+
+Successful probe and promotion checks:
+
+```bash
+timeout 60s lambdapi check -w tmp/emdash3_2_sigma_probe.lp
+timeout 60s lambdapi check -w emdash3_2.lp
+```
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -2785,16 +2857,16 @@ git diff --check
 
   The Pi-specific whole-`functord_laxity_transf` folds are kept because they
   expose the full `section_pullback_transf` naturality object.
-- Revise Sigma-map arrow action only after the extraction path is stable. The
-  desired normal form is:
+- Sigma-map arrow action has been revised to the stable lax-prefix normal form:
 
   ```text
   Sigma(FF)(p,alpha)
     = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
   ```
 
-  Add strict collapses for representables and other known strict constructors
-  before enabling this normal form globally.
+  Continue adding focused strict collapses for other known strict constructors
+  only when downstream regressions expose a missing computation. The first
+  representable/pathout collapse is now keyed on `Rep_transport_func`.
 - Keep ordinary functor/transfor laxness aligned with the non-displayed
   internal hom-action packages:
 
