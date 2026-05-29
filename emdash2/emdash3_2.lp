@@ -4327,8 +4327,23 @@ symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
   : τ (Hom
       (Fibre_cat (Homd_target_catd E) x)
       (homd_id_src_sec E x u)
-      (homd_ff_src_sec FF x u))
-≔ Fibre_transf_app (fdapp1_int_transfd FF) x u;
+      (homd_ff_src_sec FF x u));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $u
+      (@tdapp0_fapp0
+        $K
+        _
+        _
+        _
+        _
+        $x
+        (@fdapp1_int_transfd $K $E $D $FF))
+  ↪ @functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u;
 
 // Source y-component of the identity dependent-hom section.
 //
@@ -4389,8 +4404,23 @@ symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
         (Fibre_cat E y)
         (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
       (homd_id_tgt_func E x u y)
-      (homd_ff_tgt_func FF x u y))
-≔ pi_hom_fapp0 (functord_laxity_fdapp1_section_arrow FF x u) y;
+      (homd_ff_tgt_func FF x u y));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      Terminal_obj
+      (@tdapp0_fapp0
+        _
+        _
+        _
+        _
+        _
+        $y
+        (@functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u))
+  ↪ @functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y;
 
 // Third projection stage: evaluate the y-component at a fibre object v.
 //
@@ -4416,14 +4446,16 @@ symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   : τ (Hom
       (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
       (fapp0 (homd_id_tgt_func E x u y) v)
-      (fapp0 (homd_ff_tgt_func FF x u y) v))
-≔ @tapp0_fapp0
-    (Fibre_cat E y)
-    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
-    (homd_id_tgt_func E x u y)
-    (homd_ff_tgt_func FF x u y)
-    v
-    (functord_laxity_fdapp1_tgt_arrow FF x u y);
+      (fapp0 (homd_ff_tgt_func FF x u y) v));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $v
+      (@functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y)
+  ↪ @functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
 // Fourth projection stage, with endpoints written directly through `homd_`.
 //
@@ -4461,21 +4493,23 @@ symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
           (fapp0 (Fibre_func FF x) u)
           y
           v)
-        p))
-≔ @fapp1_fapp0
-    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
-    Cat_cat
-    (@fapp0_func (Op_cat (Hom_cat K x y)) Cat_cat p)
-    (fapp0 (homd_id_tgt_func E x u y) v)
-    (fapp0 (homd_ff_tgt_func FF x u y) v)
-    (functord_laxity_fdapp1_presheaf_arrow FF x u y v);
+        p));
+
+rule @fapp1_fapp0
+      _
+      Cat_cat
+      (@fapp0_func _ _ $p)
+      _
+      _
+      (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
+  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
 
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable normal form for a component of `functord_laxity_transf`.
-// It deliberately avoids a rewrite rule whose LHS matches the concrete
-// identity triangle: the readable `homd_id_canonical_triangle` unfolds to an
-// identity arrow, and that identity has several possible stable presentations
-// depending on endpoint exposure.
+// It deliberately avoids a rewrite rule whose LHS matches a concrete plain
+// `id` term: the canonical triangle is represented by the stable
+// `homd_id_canonical_triangle` head below, and no global plain-id-to-triangle
+// rewrite is installed.
 //
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
@@ -4502,7 +4536,7 @@ rule @tapp0_fapp0
       (@functord_laxity_transf $K $E $D $FF $x $y $p)
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
-// Canonical source triangle, first typed in the direct `homd_` endpoint.
+// Canonical source triangle, typed in the direct `homd_` endpoint.
 //
 // Mathematical notation:
 //   id_{E[p](u)} : homd_(id_E,x,u,y,E[p](u))[p].
@@ -4510,10 +4544,11 @@ rule @tapp0_fapp0
 // Faithful surface syntax:
 //   id : Homd_E(x,u,y,E[p]u)[p].
 //
-// This is the source object for the eventual raw laxity cell. Keeping it typed
-// at the direct `homd_` endpoint avoids the expensive inline conversion through
-// `homd_id_tgt_func`.
-symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
+// This is a stable identity-specialization head, similar in role to `id_func`
+// and `id_funcd`: it names the canonical/cartesian triangle without forcing
+// every plain identity in a fibre category to reduce to this homd-specific
+// normal form.
+constant symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
@@ -4525,10 +4560,20 @@ symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
           u
           y
           (fapp0 (catd_transport_func E p) u))
-        p))
-≔ @id
-    (Fibre_cat E y)
-    (fapp0 (catd_transport_func E p) u);
+        p));
+
+rule fapp0
+      (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u _)
+      (@homd_id_canonical_triangle $K $E $x $y $p $u)
+  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+
+rule fapp0
+      (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u
+        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
+      (@id
+        (@fapp0 $K Cat_cat $E $y)
+        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
+  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
 // -------------------------------------------------------------------------------------------------
 // 15. Generic Sigma/Pi weakening helpers
@@ -6465,14 +6510,27 @@ assert [Z : Cat] (E : τ (Catd Z))
         (Hom_cat Z x y)
         (@fib_cov_tapp0_func Z E x y u);
 
-assert [K : Cat] (E : τ (Catd K))
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
-  @homd_id_canonical_triangle K E x y p u
-    ≡ @id
-        (Fibre_cat E y)
-        (fapp0 (catd_transport_func E p) u);
+  fapp0
+    (@functord_laxity_fdapp1_hom_func K E D FF x y p u _)
+    (@homd_id_canonical_triangle K E x y p u)
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0
+    (@functord_laxity_fdapp1_hom_func
+      K E D FF x y p u
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
+    (@id
+      (@fapp0 K Cat_cat E y)
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))

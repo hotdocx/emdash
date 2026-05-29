@@ -2236,6 +2236,287 @@ Current next recommendation:
 4. Only after that object-action layer typechecks quickly, fold/package it as
    the component of `functord_laxity_transf(FF,p)`.
 
+## 2026-05-30 Corrected Status: Stable Projection Ladder Toward Laxity
+
+The latest review corrected the implementation diagnosis again. The canonical
+`homd_tgt_func` endpoint change remains good, but the current promoted
+`functord_laxity_fdapp1_*` helpers are still too definitional for the final
+extraction architecture. In particular, trying to compute:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u,E[p](u)),
+  homd_id_canonical_triangle(E,p,u))
+```
+
+asks Lambdapi to unfold the fourth-stage helper and re-solve the whole
+projection stack during object application. That is the wrong computational
+surface. It explains the timeout and matches the older successful patterns:
+
+```text
+fib_cov_int -> fib_cov_src_func -> fib_cov_transf -> fib_cov_tapp0_func
+homd_int    -> homd_src_func    -> homd_src_sec   -> homd_tgt_func -> homd_
+```
+
+Those developments use stable projection heads at each layer, with small folds
+from the lower internal package toward the next normal-form head. The corrected
+laxity extraction should follow the same SOP. The final head to reach is not a
+large defined expression; it is the stable interface:
+
+```text
+functord_laxity_transf(FF,p)
+  : D[p] o FF[x] => FF[y] o E[p].
+```
+
+Therefore the desired projection ladder is:
+
+```text
+fdapp1_int_transfd(FF)
+  -> fdapp1/lax section component at (x,u)
+  -> fdapp1/lax y-component
+  -> fdapp1/lax v-component
+  -> fdapp1/lax p-action
+  -> component of functord_laxity_transf(FF,p) at u.
+```
+
+In current names, the intended normal-form sequence is:
+
+```text
+fdapp1_int_transfd(FF)
+  -> functord_laxity_fdapp1_section_arrow(FF,x,u)
+  -> functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)
+  -> functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v)
+  -> functord_laxity_fdapp1_hom_func(FF,p,u,v)
+  -> tapp0_fapp0(functord_laxity_transf(FF,p),u).
+```
+
+The last step is only well-typed at the canonical choice:
+
+```text
+v := E[p](u),
+source triangle := homd_id_canonical_triangle(E,p,u).
+```
+
+The orientation is important:
+
+```text
+extracted internal-hom action
+  -> component of functord_laxity_transf(FF,p)
+```
+
+not:
+
+```text
+functord_laxity_transf(FF,p)
+  -> giant internal-hom expression.
+```
+
+This keeps `functord_laxity_transf` as the stable normal form consumed by Pi
+and Sigma rules. Pi-specific computation can then be stated as a small fold on
+that stable head:
+
+```text
+functord_laxity_transf(Pi_pullback_funcd(G),p)
+  -> section_pullback_transf(G[p]).
+```
+
+### Corrected Implementation Order
+
+1. Keep `functord_laxity_transf` primitive/stable for now. Do not make it a
+   transparent definition by the full internal-hom expression.
+2. Refactor the current `functord_laxity_fdapp1_*` extraction path toward
+   stable projection heads. Readable semantic aliases are acceptable for
+   comments and assertions, but rewrite-rule discriminators should be stable
+   lower-level heads (`tdapp0_fapp0`, `tapp0_fapp0`, `fapp1_fapp0`, etc.) and
+   should fold toward the named projection heads.
+3. Avoid rewrite rules whose left-hand side depends on definable helper heads
+   or compound expressions in inferred source/target slots. This is the same
+   rule hygiene used by the `homd_int` and `fib_cov_int` cascades.
+4. Add a final stable object-action fold from the canonical-triangle
+   application of the fourth-stage projection to:
+
+   ```text
+   tapp0_fapp0(functord_laxity_transf(FF,p),u).
+   ```
+
+   If the direct fold still times out, insert one more stable head for the raw
+   canonical-triangle cell, then fold that raw cell to the laxity component.
+5. Only after the generic component fold is stable, revisit the Pi-specific
+   `section_pullback_transf` rules and the later Sigma-map lax-prefix action.
+   The Sigma action must consume `functord_laxity_transf`; it must not be used
+   as the source from which `functord_laxity_transf` is extracted.
+
+Immediate implementation status after this correction:
+
+- The current file typechecks.
+- The canonical `homd_tgt_func` endpoint form should be kept.
+- The `functord_laxity_fdapp1_*` projection heads should be promoted as stable
+  heads along the same route instead of pushing large defined expressions
+  further.
+- The next validation target is a small assertion that the canonical-triangle
+  projection folds to:
+
+  ```text
+  tapp0_fapp0(functord_laxity_transf(FF,p),u).
+  ```
+
+## 2026-05-30 Implementation Update: Component-To-Cell Orientation
+
+The first corrected implementation step after the review has been promoted to
+`emdash3_2.lp`.
+
+Important correction to the previous section: the final generic fold should be
+oriented from the `functord_laxity_transf` component to the extracted
+internal-hom cell, not from the extracted cell back to the interface component.
+The active normal form is now:
+
+```text
+tapp0_fapp0(functord_laxity_transf(FF,p),u)
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+The extracted cell is a stable head:
+
+```text
+functord_laxity_fdapp1_cell(FF,p,u)
+  : D[p](FF[x](u)) -> FF[y](E[p](u)).
+```
+
+It represents the canonical-triangle application of the fourth internal-hom
+projection:
+
+```text
+fdapp1_int(FF)[x,u][y,E[p]u][p](id).
+```
+
+The first attempt deliberately did **not** add a rewrite whose left-hand side
+matched either `homd_id_canonical_triangle(E,p,u)` or an explicit identity
+term. At that time `homd_id_canonical_triangle` was still a transparent alias,
+and a compute probe showed that the alias normalized generically to:
+
+```text
+id(E[y], E[p](u)).
+```
+
+However, rules keyed on a concrete `id` shape still produced slow conversion in
+temporary probes, because the surrounding fourth-stage hom-action endpoint
+forces Lambdapi to compare several reducible presentations of the same homd
+object. Therefore the safe promoted step is to expose the stable cell head and
+make the transfor component reduce to that head.
+
+Pi-specific cell folds were added after `section_pullback_func` is declared:
+
+```text
+functord_laxity_fdapp1_cell(Pi_int_funcd,F,E)
+  -> section_pullback_func(F,E)
+
+functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+  -> section_pullback_func(G[p],E).
+```
+
+This preserves the existing Pi/path computations because:
+
+```text
+tapp0_fapp0(functord_laxity_transf(Pi_pullback_funcd(G),p),E)
+  -> functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+  -> section_pullback_func(G[p],E).
+```
+
+Validation assertions added:
+
+```text
+tapp0_fapp0(functord_laxity_transf(FF,p),u)
+  == functord_laxity_fdapp1_cell(FF,p,u)
+
+functord_laxity_fdapp1_cell(Pi_int_funcd,F,E)
+  == section_pullback_func(F,E)
+
+functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+  == section_pullback_func(G[p],E).
+```
+
+Follow-up implementation added exactly that smaller stable identity API. The
+symbol:
+
+```text
+homd_id_canonical_triangle(E,p,u)
+  : homd_(id_E,x,u,y,E[p]u)[p]
+```
+
+is now a primitive stable head, analogous in role to `id_func` and `id_funcd`.
+No global rewrite from plain `id(E[y],E[p]u)` to this head is installed, because
+a probe with such a global bridge changed existing Sigma-map transport normal
+forms. Instead, only the fdapp1 fourth-stage action consumes this stable head:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u,_),
+  homd_id_canonical_triangle(E,p,u))
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+This keeps the canonical triangle available as a real rewrite discriminator
+without perturbing unrelated plain identity computations.
+
+The stable projection-head refactor for the earlier fdapp1 stages was then
+promoted as well:
+
+```text
+tdapp0/tapp0 projections of fdapp1_int_transfd(FF)
+  -> functord_laxity_fdapp1_section_arrow
+  -> functord_laxity_fdapp1_tgt_arrow
+  -> functord_laxity_fdapp1_presheaf_arrow
+  -> functord_laxity_fdapp1_hom_func.
+```
+
+The active final extraction route is now:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u,_),
+  homd_id_canonical_triangle(E,p,u))
+  -> functord_laxity_fdapp1_cell(FF,p,u)
+
+tapp0_fapp0(functord_laxity_transf(FF,p),u)
+  -> functord_laxity_fdapp1_cell(FF,p,u)
+```
+
+This completes the currently scoped generic component extraction surface without
+installing a global bridge from plain `id` to the homd-specific canonical
+triangle.
+
+Follow-up identity probe:
+
+The earlier failed `id` probe was too explicit: it used `Fibre_cat` /
+`catd_transport_func` or explicit source/target arguments for the nested
+transport-object application. A corrected SOP-clean probe succeeded by matching
+the primitive projection shape directly:
+
+```text
+fapp0(
+  functord_laxity_fdapp1_hom_func(FF,p,u, fapp0(E[p],u)),
+  id(E[y], fapp0(E[p],u)))
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+In kernel shape, the nested object action leaves source/target inference
+implicit:
+
+```text
+fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u
+```
+
+not:
+
+```text
+@fapp0 (E[x]) (E[y]) (@fapp1_fapp0 K Cat_cat E x y p) u.
+```
+
+This gives the needed bridge from the plain identity normal form to the
+extracted laxity cell in exactly the fdapp1 fourth-stage context, without
+installing a global rewrite from every fibre identity to
+`homd_id_canonical_triangle`.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
