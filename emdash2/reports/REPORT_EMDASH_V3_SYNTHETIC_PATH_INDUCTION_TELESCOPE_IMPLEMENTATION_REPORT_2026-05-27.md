@@ -2791,6 +2791,15 @@ sigma_map_transport_fibre_arrow(FF,p,u)
   == functord_laxity_fdapp1_cell(FF,p,u).
 ```
 
+A follow-up probe removed a redundant direct rule for the plain identity
+presentation of the canonical fibre arrow. The active route is:
+
+```text
+id(E[y],E[p]u)
+  -> homd_id_canonical_triangle(E,p,u)
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
 A diagnostic `compute` probe showed that representable transport normalizes
 past the readable `Rep_catd_func` / `Rep_catd` aliases to the internal
 `hom_int(id)` / `hom_` presentation. Rather than matching that raw normalized

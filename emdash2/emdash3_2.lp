@@ -4627,21 +4627,6 @@ rule @sigma_map_fibre_arrow
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
-rule @sigma_map_fibre_arrow
-      $K
-      $E
-      $D
-      $FF
-      $x
-      $y
-      $p
-      $u
-      _
-      (@id
-        (@fapp0 $K Cat_cat $E $y)
-        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
-
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the
 // stable `Rep_transport_func` head and keeps the family slots implicit.
