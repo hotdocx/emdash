@@ -4470,6 +4470,38 @@ symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
     (fapp0 (homd_ff_tgt_func FF x u y) v)
     (functord_laxity_fdapp1_presheaf_arrow FF x u y v);
 
+// Raw canonical-triangle cell extracted from the internal displayed hom-action.
+// This is the stable normal form for a component of `functord_laxity_transf`.
+// It deliberately avoids a rewrite rule whose LHS matches the concrete
+// identity triangle: the readable `homd_id_canonical_triangle` unfolds to an
+// identity arrow, and that identity has several possible stable presentations
+// depending on endpoint exposure.
+//
+// Mathematical notation:
+//   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
+//     : D[p](FF[x](u)) -> FF[y](E[p](u)).
+//
+// Faithful surface syntax:
+//   fdapp1_int(FF)[x,u][y,E[p]u][p](id).
+symbol functord_laxity_fdapp1_cell [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (functord_transport_lhs_func FF p) u)
+      (fapp0 (functord_transport_rhs_func FF p) u));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $u
+      (@functord_laxity_transf $K $E $D $FF $x $y $p)
+  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+
 // Canonical source triangle, first typed in the direct `homd_` endpoint.
 //
 // Mathematical notation:
@@ -4632,6 +4664,32 @@ rule @tapp0_fapp0
       $E
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
+
+rule @functord_laxity_fdapp1_cell
+      _
+      _
+      _
+      Pi_int_funcd
+      $B
+      $A
+      $F
+      $E
+  ↪ @section_pullback_func $A $B $F $E;
+
+rule @functord_laxity_fdapp1_cell
+      $K
+      _
+      _
+      (@Pi_pullback_funcd $K $G)
+      $x
+      $y
+      $p
+      $E
+  ↪ @section_pullback_func
+      (@fapp0 $K (Op_cat Cat_cat) $G $y)
+      (@fapp0 $K (Op_cat Cat_cat) $G $x)
+      (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
+      $E;
 
 // Pi is contravariantly natural in the base category. In the displayed-family
 // view, this is the laxity/coherence projection of `Pi_int_funcd` along a base
@@ -5115,6 +5173,50 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
       x
       y
       p)
+    ≡ @section_pullback_func
+        (@fapp0 K (Op_cat Cat_cat) G y)
+        (@fapp0 K (Op_cat Cat_cat) G x)
+        (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p)
+        E;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u
+    (@functord_laxity_transf K E D FF x y p)
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
+  @functord_laxity_fdapp1_cell
+    (Op_cat Cat_cat)
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    Pi_int_funcd
+    B
+    A
+    F
+    E
+    ≡ @section_pullback_func A B F E;
+
+assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
+  @functord_laxity_fdapp1_cell
+    K
+    (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+    (@Const_catd K Cat_cat)
+    (@Pi_pullback_funcd K G)
+    x
+    y
+    p
+    E
     ≡ @section_pullback_func
         (@fapp0 K (Op_cat Cat_cat) G y)
         (@fapp0 K (Op_cat Cat_cat) G x)
