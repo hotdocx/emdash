@@ -2666,10 +2666,20 @@ The readable assertion
 tapp0_fapp0 v (functord_laxity_fdapp1_tgt_arrow ...)
 ```
 
-timed out. The issue was not mathematical: Lambdapi had to infer the whole
-`Transf_cat` presentation behind a `Hom(Functor_cat(...),...)` endpoint. The
-promoted assertion fixes the source category, target category, and endpoint
-functors explicitly in canonical form:
+timed out. The issue was not mathematical: Lambdapi had to reconstruct too many
+implicit projection parameters. A follow-up probe confirmed that the
+`functord_laxity_fdapp1_tgt_arrow` head itself should be typed in the reduced
+consumer-facing form:
+
+```text
+Transf(
+  homd_id_tgt_func(E,x,u,y),
+  homd_ff_tgt_func(FF,x,u,y)).
+```
+
+That change was promoted. However, the fully readable assertion can still time
+out, so the promoted regression fixes the source category, target category, and
+endpoint functors explicitly in canonical form:
 
 ```text
 tapp0_fapp0
@@ -2684,6 +2694,15 @@ tapp0_fapp0
 This follows the SOP distinction: rewrite-rule LHSs should avoid brittle
 compound source/target slots, but focused assertions may spell out canonical
 source/target slots to prevent conversion search from exploding.
+
+The same probe also tested changing `functord_laxity_fdapp1_presheaf_arrow` to
+the reduced `Transf` spelling. That was not promoted: the file timed out,
+because the next consumer of that head is the evaluation functor action
+`fapp1_fapp0(fapp0_func(p), ...)`, where the `Hom(Functor_cat(...),...)`
+surface is the better computational interface. The guideline is therefore:
+write intermediate symbol types in the reduced/computer form expected by their
+next projection consumer, but do not globally reduce every `Hom(Functor_cat)`
+presentation.
 
 ## Validation
 

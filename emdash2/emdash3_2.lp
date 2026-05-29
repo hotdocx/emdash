@@ -4391,18 +4391,16 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 //   fdapp1_int(FF)[x,u][y] :
 //     Homd_E(x,u,y,—) => Homd_D(x,FF[x](u),y,FF[y](—)).
 //
-// The codomain is written in the canonical functor-category normal form
-// `(x -> y)^op -> Cat`; this avoids later depending on the reducible
+// The type is written in the reduced `Transf` form because the next projection
+// consumes it through `tapp0_fapp0`. This still keeps the codomain functor in
+// the canonical `(x -> y)^op -> Cat` form, avoiding the reducible
 // `Fibre_cat(HomPresheaf_Z(x),y)` classifier pipeline.
 symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   (y : τ (Obj K))
-  : τ (Hom
-      (Functor_cat
-        (Fibre_cat E y)
-        (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
+  : τ (Transf
       (homd_id_tgt_func E x u y)
       (homd_ff_tgt_func FF x u y));
 
@@ -6548,8 +6546,10 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
 
     tapp0_fapp0 v (functord_laxity_fdapp1_tgt_arrow ...)
 
-  is mathematically correct but asks Lambdapi to rediscover a `Transf_cat`
-  presentation from a `Hom(Functor_cat(...),...)` endpoint and can time out.
+  is mathematically correct but asks Lambdapi to reconstruct too many implicit
+  projection parameters and can time out. The `tgt_arrow` head itself is typed
+  in reduced `Transf` form; the explicit assertion below is still the robust
+  regression surface.
 */
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x : τ (Obj K))
