@@ -2578,6 +2578,38 @@ This was later generalized one step: the same SOP-clean identity shape now
 folds directly to `homd_id_canonical_triangle`, and the fdapp1 fourth-stage
 context reaches the extracted laxity cell through that canonical head.
 
+Identity-normal-form caveat:
+
+The fold above handles the primitive `@id` normal form whose category is still
+visible as `fapp0(K,Cat_cat,E,y)` and whose object is still visible as
+`fapp0(E[p],u)`. It does not settle every identity presentation that can arise
+after further computation. Depending on the family and endpoint category,
+ordinary identities may reduce to specialized heads such as:
+
+```text
+id_func
+id_funcd
+id_transfd          (future/when present)
+```
+
+or to constructor-specific identity forms for `Cat_cat`, `Catd_cat`,
+`Functor_cat`, `Transf_cat`, and related classifiers. If a future projection
+appears not to consume the canonical triangle, check first whether the source
+triangle has normalized past the primitive `@id` shape into one of these
+specialized identity heads.
+
+The preferred repair is not a broad global rewrite from every specialized
+identity back to `homd_id_canonical_triangle`. Use a focused probe and add a
+narrow consumer-local simulation/fold rule only where the expected endpoint is
+the transported dependent-hom source shape:
+
+```text
+homd_(id_E,x,u,y,E[p]u)[p].
+```
+
+This keeps identity bridges typed by the local semantic context and avoids
+perturbing unrelated identity computations.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to

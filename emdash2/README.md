@@ -74,6 +74,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   alone but still trigger expensive conversion in nested assertions.
 - Keep readable helper aliases routed through the named semantic constructor;
   avoid duplicating the same semantic body in multiple helper definitions.
+- Treat identities as a family of normal forms, not one syntactic shape. A
+  plain `@id` may reduce to specialized heads such as `id_func`, `id_funcd`, or
+  constructor-specific identities before a consumer rule sees it. When a
+  canonical/cartesian triangle is expected, prefer a narrow typed bridge or
+  consumer-local simulation rule for that endpoint over broad global identity
+  rewrites.
 - Do not stop at object-level formulas when implementing internalized
   infrastructure. Check that arrow actions and projections compute at the level
   later packages need.

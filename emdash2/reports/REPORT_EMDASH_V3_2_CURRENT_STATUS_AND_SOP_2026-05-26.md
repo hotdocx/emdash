@@ -146,6 +146,43 @@ CompTarget_fapp1_func p
 No separate `CompTarget_fapp1_func_func` alias is needed; full hom-action is the
 ordinary `fapp1_func (CompTarget_catd Z x)`.
 
+## SOP: Identity Normal Forms
+
+Identity terms can normalize into different specialized heads depending on the
+category visible at the moment of reduction. Examples include plain `@id`,
+`id_func`, `id_funcd`, and future higher identity heads, as well as
+constructor-specific identities for categories such as `Cat_cat`, `Catd_cat`,
+`Functor_cat`, and `Transf_cat`.
+
+Do not assume that a rule which consumes plain `@id` will also consume all
+semantically equal identity presentations. If a computation involving a
+canonical/cartesian triangle fails unexpectedly, first inspect whether the
+identity normalized past the primitive shape into a specialized identity head.
+
+Prefer narrow, typed bridges over broad global identity rewrites. A good bridge
+matches the semantic consumer context and only accepts the identity presentation
+when the endpoints force the intended source shape. For example, the
+`homd_id_canonical_triangle` bridge is restricted to the transported
+dependent-hom source:
+
+```text
+id(E[y], E[p](u))
+  -> homd_id_canonical_triangle(E,p,u)
+```
+
+where the rule LHS uses the primitive projection shape:
+
+```text
+@id
+  (@fapp0 K Cat_cat E y)
+  (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+```
+
+Do not install global rewrites from all identities or all specialized identity
+heads back into a local canonical-triangle head. If a specialized identity head
+must be accepted, probe a consumer-local simulation/fold rule and add a focused
+assertion showing the intended normal form.
+
 ## Stable Heads Policy
 
 Stable heads are justified when later rules need a visible constructor or when a
