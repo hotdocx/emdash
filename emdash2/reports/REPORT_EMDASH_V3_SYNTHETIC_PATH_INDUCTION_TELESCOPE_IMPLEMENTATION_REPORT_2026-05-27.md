@@ -1311,6 +1311,434 @@ architecture step is to build that fuller action from the internal
 off-diagonal packages (`tdapp1_int_*` / `fdapp1_int_transfd` style), then fold
 its extracted component to `functord_laxity_transf`.
 
+## 2026-05-29 Conceptual Settlement: Laxity, Sigma, And Internal Hom-Action
+
+Follow-up review settled the conceptual architecture for laxity/coherence.
+The short version is:
+
+```text
+conceptually settled, computationally not yet fully implemented.
+```
+
+There are two distinct layers which must not be confused.
+
+First, `Sigma(FF)` is not the foundational source of laxity if its action is
+itself defined using that laxity. Otherwise the design would be circular:
+
+```text
+Sigma(FF)(p,alpha) uses laxity(FF,p)
+laxity(FF,p) is extracted from Sigma(FF)(canonical_arrow)
+```
+
+The non-circular architecture is:
+
+```text
+lower internal hom-action
+  -> extracted laxity/coherence
+  -> Sigma-map action consumes that laxity
+  -> Sigma-total probes/benchmarks confirm the computation.
+```
+
+So the Sigma-total presentation remains important, but it is the
+externalization/test surface where the laxity becomes visible as the second
+component of a total arrow. It is not the primitive source of that same
+laxity.
+
+### Computational Shape
+
+The computational primitive is not the textbook square directly. It is the
+off-diagonal/skew accumulation idiom:
+
+```text
+action of g on eta_(f)  =>  eta_(action of g on f)
+```
+
+For an ordinary transfor
+
+```text
+eta : Transf(F,G)
+eta_f := tapp1_fapp0(eta,f) : F[X] -> G[Y],
+```
+
+the codomain-side accumulation is:
+
+```text
+G[g] o eta_f  =>  eta_(g o f).
+```
+
+Here `G[g]` is implicit in the type of `eta`; it is recovered from the
+codomain functor and the off-diagonal component. The textbook square
+
+```text
+G[p] o eta[x]  vs  eta[y] o F[p]
+```
+
+is semantically correct, but it is not the best normalization driver. The
+normalization driver should be the skew/off-diagonal component and the chosen
+accumulation convention.
+
+For displayed/Cat-valued functors this specializes to:
+
+```text
+FF[p] := tapp1_fapp0(FF,p) : E[x] -> D[y]
+
+D[p] o FF[x]      -- one accumulated route
+FF[y] o E[p]      -- the other accumulated route
+```
+
+and the desired displayed laxity cell is:
+
+```text
+functord_laxity_transf(FF,p)
+  : Transf(
+      D[p] o FF[x],
+      FF[y] o E[p]).
+```
+
+### The Failed Direct Sigma Extraction
+
+The earlier generic component rewrite
+
+```text
+tapp0_fapp0(functord_laxity_transf(FF,p),u)
+  -> sigma_Snd(sigma_map_transport_arrow(FF,p,u))
+```
+
+typechecked, but the Pi/path specialization did not reduce:
+
+```text
+sigma_Snd(sigma_map_transport_arrow(PathOutPi_funcd,p,E))
+  != PathIndTgt_transport_func(p,E).
+```
+
+The reason is now clear. The current `sigma_map_func` action is the strict
+Sigma-map action:
+
+```text
+Sigma(FF)(p,alpha) = (p, FF[y](alpha)).
+```
+
+For a canonical/cartesian total arrow, `alpha` is an identity. Therefore the
+current action sees essentially:
+
+```text
+FF[y](id)
+```
+
+and any boundary mismatch has already been made convertible by existing
+strict/object-level folds. This loses the nontrivial comparison
+
+```text
+D[p](FF[x](u)) -> FF[y](E[p](u)).
+```
+
+For the Pi/path case, the failed normal form was identity-like action on the
+already transported motive, while the desired normal form is the actual
+section pullback:
+
+```text
+section_pullback_func(PathOut_transport_func(p), E).
+```
+
+### Successful Cheap Probe
+
+A disposable temporary-file probe tested the downstream design by assuming the
+middle laxity object exists.
+
+The probe changed the Sigma-map arrow action shape to:
+
+```text
+Sigma(eta)(p, alpha)
+  -> (p, eta[y](alpha) o laxity(eta,p)[u])
+```
+
+instead of the current strict shape:
+
+```text
+Sigma(eta)(p, alpha)
+  -> (p, eta[y](alpha)).
+```
+
+The probe then added the Pi-specific laxity fold:
+
+```text
+laxity(Pi_pullback_funcd(G), p)
+  -> section_pullback_transf(G[p])
+```
+
+and a focused identity cleanup rule:
+
+```text
+Pi_func(K)[id_funcd(E)] -> id_func(Pi_cat(E)).
+```
+
+The identity cleanup is needed because generic strict functoriality matches
+`@id`, while this file often keeps the stable displayed-identity head
+`id_funcd` visible.
+
+With these temporary changes, the target assertion passed:
+
+```text
+sigma_Snd(sigma_map_transport_arrow(PathOutPi_funcd,p,E))
+  == PathIndTgt_transport_func(p,E).
+```
+
+Both sides computed to:
+
+```text
+section_pullback_func(PathOut_transport_func(p), E).
+```
+
+This confirms that the downstream Sigma/Pi computation is feasible once the
+correct laxity component is available. The same probe also confirmed the cost:
+old assertions that rely on all Sigma maps being strict/cartesian fail unless
+the relevant constructors are separately marked strict. In particular, the
+fixed-x path transitivity benchmarks through representable transport depend on
+strict behavior and will need strict markers/folds for representable or
+otherwise strict constructions.
+
+### Non-Circular Source Of Displayed Laxity
+
+The likely source of displayed functor laxity is the existing internal
+displayed hom-action:
+
+```text
+fdapp1_int_transfd(FF)
+  : Transfd(
+      homd_int(id_E),
+      homd_int(FF) o Op_funcd(FF)).
+```
+
+This is the v3.2 analogue of the emdash2 `fapp1_funcd` idea. It says that a
+displayed functor acts on dependent homs/triangles. Applying this to a
+canonical/cartesian source triangle should produce the non-cartesian target
+triangle whose fibre component is exactly the displayed laxity/coherence cell.
+
+Pseudo-sketch:
+
+```text
+canonical_triangle(E,p,u)
+  : homd_int(id_E) ...
+  -- represents E[p](u) from u over p
+
+fdapp1_int_transfd(FF)(canonical_triangle(E,p,u))
+  : homd_int(FF)(...)
+  -- target triangle under FF
+
+extract second/fibre component:
+  D[p](FF[x](u)) -> FF[y](E[p](u)).
+```
+
+Then package this naturally in `u`:
+
+```text
+functord_laxity_transf(FF,p)
+  : Transf(
+      D[p] o FF[x],
+      FF[y] o E[p]).
+```
+
+Only after that should Sigma action consume the laxity:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+```
+
+Current status:
+
+```text
+Implemented heads exist:
+  fdapp1_int_transfd
+  tdapp1_int_fapp0_transfd
+  homd_int projection cascade
+
+Missing:
+  the focused projection rule/defined helper extracting
+  functord_laxity_transf(FF,p) from fdapp1_int_transfd(FF).
+```
+
+Therefore the next real design task is not:
+
+```text
+extract laxity from Sigma map.
+```
+
+It is:
+
+```text
+extract laxity from internal displayed hom-action,
+then let Sigma map consume that laxity.
+```
+
+### Ordinary Functors And Transfors
+
+The same conceptual story is not restricted to `Cat_cat`.
+
+For an ordinary functor
+
+```text
+F : Functor A B
+```
+
+the relevant package is the ordinary internal hom-action:
+
+```text
+fapp1_int_transf(F)
+  : Transf(
+      hom_int(id_A),
+      hom_int(F) o Op_func(F)).
+```
+
+This is the Yoneda/hom-presheaf move: even if `B` is arbitrary, the homs of
+`B` are categories, so `Cat_cat` appears after applying:
+
+```text
+Hom_B(FX, -) : B -> Cat.
+```
+
+Then lax functoriality is extracted by applying this internal action to
+canonical triangles in the representable total:
+
+```text
+f : X -> Y
+g : Y -> Z
+canonical triangle: f -> g o f
+```
+
+and the image gives the cell:
+
+```text
+F[g] o F[f] => F[g o f].
+```
+
+For an ordinary transformation
+
+```text
+eta : Transf(F,G),
+```
+
+the relevant package is:
+
+```text
+tapp1_int_fapp0_transf(eta)
+  : Transf(
+      hom_int(id_A),
+      hom_int(G) o Op_func(F)).
+```
+
+Its off-diagonal component is:
+
+```text
+eta_f : F[X] -> G[Y],
+```
+
+and its lax/naturality accumulation cells are:
+
+```text
+G[g] o eta_f => eta_(g o f)
+eta_f o F[h] => eta_(f o h).
+```
+
+So ordinary laxness should be expressed through
+`tapp1_int_*` / `fapp1_int_transf`, not primarily through the special
+identification:
+
+```text
+Functord_cat = Transf_cat(_, Cat_cat, ...).
+```
+
+The terminal-base viewpoint remains useful but is not the foundational source
+by itself. If an ordinary functor is viewed as a displayed functor over
+`Terminal_cat`, the terminal base has no nontrivial base arrows. The
+nontrivial data `f : X -> Y` and `g : Y -> Z` lives inside the fibre category
+`A`, so the internal hom/Yoneda construction is still needed to expose it.
+With enough `Lift_catd`/constant-family bridge rules, the terminal-base route
+should recover the ordinary route, but v3.2 does not yet implement that bridge
+fully.
+
+For displayed functors, the analogue is:
+
+```text
+fdapp1_int_transfd(FF).
+```
+
+For displayed transformations, the analogue is:
+
+```text
+tdapp1_int_fapp0_transfd(epsilon).
+```
+
+Thus the current implementation gap is not that laxness is mathematically
+unclear. The gap is:
+
+```text
+We have the internal action heads,
+but we have not yet exposed the projection/extraction rules that turn them
+into the concrete laxity cells needed by Sigma/Pi computation.
+```
+
+### Strictness Status And Future Split
+
+The current v3.2 file still has global strict rewrite rules for ordinary
+functoriality and ordinary transfor accumulation. These were useful temporary
+conveniences for early normalization, but they collapse some coherence data too
+early for the present Pi/internalized-family milestone.
+
+The future architecture should follow the emdash2-style split:
+
+```text
+Functor / Transf                  general, possibly lax
+StrictFunctor / StrictTransf      extra structure or marked projections
+```
+
+and similarly for displayed functors/transformations where needed. Strict
+computation rules should move to strict projections or known strict
+constructors. Pi supplies a genuinely nontrivial laxity component:
+
+```text
+section_pullback_transf(F).
+```
+
+Representable transport and other strict constructions should be explicitly
+marked so their laxity collapses to identity/cartesian behaviour.
+
+### Implementation SOP From This Settlement
+
+When this architecture is implemented in `emdash3_2.lp`, the file itself must
+carry self-contained comments explaining the settled mathematics and
+normalization discipline. Future readers should not need this report to know:
+
+- why laxity is extracted from internal hom-action rather than from Sigma
+  action;
+- why Sigma action consumes a laxity prefix;
+- why Pi laxity computes to `section_pullback_transf`;
+- why ordinary functor/transfor laxness is expressed through
+  `fapp1_int_transf` / `tapp1_int_fapp0_transf`;
+- why strict constructors need explicit markers/folds once global strictness is
+  relaxed.
+
+Concrete next implementation recommendations:
+
+1. Add the internal-hom-action extraction helper/rule that produces
+   `functord_laxity_transf(FF,p)` from `fdapp1_int_transfd(FF)`.
+2. Keep `functord_laxity_transf` as an interface only until that extraction
+   helper is stable; then make it defined or folded from the extraction path.
+3. Revise Sigma-map arrow action to include the laxity prefix:
+
+   ```text
+   Sigma(FF)(p,alpha)
+     = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+   ```
+
+4. Add focused strictness collapses for known strict constructions, especially
+   representables/pathout transport, before replacing the current strict Sigma
+   action globally.
+5. Add the focused `Pi_func(id_funcd)` identity cleanup if the implementation
+   keeps `id_funcd` visible in Pi action normal forms.
+6. Keep arbitrary Sigma-arrow action and full omega `fapp1_func` Sigma
+   coherence scoped to concrete downstream needs.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -1324,6 +1752,12 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 git diff --check
 ```
 
+Documentation-only update after the conceptual-settlement review:
+
+```bash
+git diff --check
+```
+
 ## Remaining Work
 
 - Build the fuller lax/off-diagonal total-action extraction from the existing
@@ -1331,13 +1765,33 @@ git diff --check
   `fdapp1_int_transfd`). The target is a derived/folded path:
 
   ```text
-  off_diagonal_total_action(FF,p,u)
+  fdapp1_int_transfd(FF) applied to canonical_triangle(E,p,u)
     -> functord_laxity_transf(FF,p)[u].
   ```
 
   Once the Pi instance joins with `section_pullback_func(F,E)`, replace the
   current Pi-specific `functord_laxity_transf` folds by this derived path where
   feasible.
+- Revise Sigma-map arrow action only after the extraction path is stable. The
+  desired normal form is:
+
+  ```text
+  Sigma(FF)(p,alpha)
+    = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+  ```
+
+  Add strict collapses for representables and other known strict constructors
+  before enabling this normal form globally.
+- Keep ordinary functor/transfor laxness aligned with the non-displayed
+  internal hom-action packages:
+
+  ```text
+  fapp1_int_transf(F)
+  tapp1_int_fapp0_transf(eta).
+  ```
+
+  Do not try to use the terminal-base encoding alone as the foundational source
+  of ordinary functoriality/naturality laxity.
 - If a downstream theorem requires it, connect canonical Sigma-total transport
   for `Sigma_catd_functord_catd(Pi_pullback_funcd(G))` to the new
   `functord_laxity_transf(Pi_pullback_funcd(G),p)` projection. Keep this as a
