@@ -1311,7 +1311,7 @@ architecture step is to build that fuller action from the internal
 off-diagonal packages (`tdapp1_int_*` / `fdapp1_int_transfd` style), then fold
 its extracted component to `functord_laxity_transf`.
 
-## 2026-05-29 Conceptual Settlement: Laxity, Sigma, And Internal Hom-Action
+## 2026-05-29 Current Latest Design: Laxity, Sigma, And Internal Hom-Action
 
 Follow-up review settled the conceptual architecture for laxity/coherence.
 The short version is:
@@ -1738,6 +1738,192 @@ Concrete next implementation recommendations:
    keeps `id_funcd` visible in Pi action normal forms.
 6. Keep arbitrary Sigma-arrow action and full omega `fapp1_func` Sigma
    coherence scoped to concrete downstream needs.
+
+## 2026-05-29 Decision-Complete Implementation Order
+
+This section records the current recommended implementation order. It
+supersedes earlier rough ordering notes in this report where they conflict.
+
+Key decisions before implementation:
+
+- Do **not** start by deleting the current global strict functoriality or
+  naturality rewrite rules. Keep them during the next probes. The successful
+  cheap probe did not require deleting those rules.
+- The strictness problem first becomes operational when the Sigma-map action is
+  changed from the current strict/cartesian action to the lax-prefix action.
+  Therefore strictness collapses for known strict constructors must be prepared
+  **before** promoting the revised Sigma-map action, not after.
+- The focused rule
+
+  ```text
+  Pi_func(K)[id_funcd(E)] -> id_func(Pi_cat(E))
+  ```
+
+  is not a new mathematical axiom. It is the stable-head version of strict
+  identity preservation for `Pi_func`. The generic strict functoriality rule
+  matches an input written as `@id`; after normalization this file often keeps
+  the displayed identity as the stable head `id_funcd`, so a focused bridge is
+  needed unless `id_funcd` is redesigned to unfold differently.
+- `functord_laxity_transf` should ultimately be defined or folded from the
+  internal-hom extraction path. It should remain an interface only while that
+  extraction is being stabilized.
+- The future emdash2-style strict/lax split remains important, but it is not
+  the first implementation move. First prove that the explicit laxity
+  extraction and Pi/Sigma computation work locally.
+
+Recommended phases:
+
+1. **Document The Settlement In Code**
+
+   Add a compact, self-contained comment block in `emdash3_2.lp` near the
+   internal hom-action / `functord_laxity_transf` area. It should state the
+   current design:
+
+   ```text
+   internal hom-action -> extracted laxity -> Sigma action consumes laxity
+   ```
+
+   It should also say that the current global strict rules are temporary and
+   that strict constructors will be marked/folded explicitly as the lax layer
+   is promoted.
+
+2. **Add The Stable Identity Cleanup**
+
+   Probe and then add the focused Pi identity bridge:
+
+   ```text
+   fapp1_fapp0(Pi_func(K), id_funcd(E)) -> id_func(Pi_cat(E)).
+   ```
+
+   This is low risk and was required by the successful cheap probe. Treat it as
+   a strictness bridge for the visible `id_funcd` normal form.
+
+3. **Build A Focused Internal-Hom Extraction Probe**
+
+   In a temporary copy, introduce only stable helper heads needed to express the
+   component extracted from:
+
+   ```text
+   fdapp1_int_transfd(FF)
+   ```
+
+   applied to a canonical/cartesian source triangle:
+
+   ```text
+   canonical_triangle(E,p,u).
+   ```
+
+   The target component is:
+
+   ```text
+   D[p](FF[x](u)) -> FF[y](E[p](u)).
+   ```
+
+   Do not revise Sigma action in this phase. The purpose is to isolate whether
+   the existing `homd_int` projection cascade and `fdapp1_int_transfd` heads are
+   sufficient to expose the desired component.
+
+4. **Package The Extracted Component As Laxity**
+
+   Once the component extraction typechecks, package it as the whole transfor:
+
+   ```text
+   functord_laxity_transf(FF,p)
+     : Transf(D[p] o FF[x], FF[y] o E[p]).
+   ```
+
+   Preferred endpoint:
+
+   ```text
+   functord_laxity_transf(FF,p) := extracted_internal_hom_laxity(FF,p).
+   ```
+
+   If Lambdapi cannot yet build the whole `Transf` term directly, keep
+   `functord_laxity_transf` as a stable head and add a focused projection/fold
+   from the extracted internal-hom helper. Record the reason in comments.
+
+5. **Make Pi Laxity Join Through The Extraction Path**
+
+   Replace or justify the current Pi-specific folds by proving that the
+   extracted route computes to:
+
+   ```text
+   functord_laxity_transf(Pi_pullback_funcd(G),p)
+     -> section_pullback_transf(G[p]).
+   ```
+
+   Required regression:
+
+   ```text
+   tapp0_fapp0(functord_laxity_transf(PathOutPi_funcd,p),E)
+     -> PathIndTgt_transport_func(p,E).
+   ```
+
+   Keep the existing Pi-specific fold temporarily until the extracted route
+   joins, then either remove it or document it as a shortcut to the extracted
+   normal form.
+
+6. **Prepare Strict Constructor Collapses Before Sigma Revision**
+
+   Before changing the Sigma-map action globally, add focused strict collapses
+   for known strict constructions that old benchmarks rely on. The first likely
+   targets are representable/pathout transport and any strict constructor used
+   by fixed-x path transitivity.
+
+   The goal is that for strict `FF`:
+
+   ```text
+   functord_laxity_transf(FF,p)[u]
+     -> identity/cartesian component.
+   ```
+
+   This phase addresses the cheap-probe failure where old strict Sigma/path
+   assertions broke after adding the laxity prefix.
+
+7. **Revise Sigma-Map Arrow Action In A Temp Probe**
+
+   Only after phases 4-6, change the Sigma-map action in a temporary file to:
+
+   ```text
+   Sigma(FF)(p,alpha)
+     = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+   ```
+
+   Required probe assertions:
+
+   ```text
+   sigma_Snd(sigma_map_transport_arrow(PathOutPi_funcd,p,E))
+     == PathIndTgt_transport_func(p,E)
+   ```
+
+   and the fixed-x strict transitivity/pathout assertions still join through
+   the strict collapses from phase 6.
+
+8. **Promote Sigma Revision And Regressions**
+
+   Promote the revised Sigma-map action only after the temp probe passes.
+   Add focused assertions for:
+
+   ```text
+   Pi/path laxity -> PathIndTgt_transport_func
+   Sigma action with Pi -> section_pullback_func
+   strict representable Sigma action -> old cartesian normal form
+   ```
+
+9. **Defer The Global Strict/Lax Split**
+
+   After the above is stable, start a separate phase to move global strict
+   functoriality/naturality rules behind explicit strict wrappers or strict
+   constructor folds, following the emdash2-style design:
+
+   ```text
+   StrictFunctor_cat / sfunc_func
+   Strict displayed functor/transfor variants
+   ```
+
+   This is deliberately not a prerequisite for the next implementation turn.
+   The next turn should focus on the internal-hom extraction and local
+   Sigma/Pi computation.
 
 ## Validation
 
