@@ -146,6 +146,119 @@ CompTarget_fapp1_func p
 No separate `CompTarget_fapp1_func_func` alias is needed; full hom-action is the
 ordinary `fapp1_func (CompTarget_catd Z x)`.
 
+## SOP: Dosen Cut-Elimination Precomposition/Postcomposition Heads
+
+When a theorem wants a composite to normalize by "absorbing a cut", choose the
+normal form that exposes the reusable action, not a one-off composite hidden in
+an ad hoc arrow symbol.
+
+The basic pattern is:
+
+```text
+g o f
+  -> fapp0 (precompose_by f) g
+
+f o h
+  -> fapp0 (postcompose_by f) h
+```
+
+The exact orientation depends on the theorem. The important point is that the
+normal form should be the action of a stable functorial operation whenever that
+operation will be reused by Sigma maps, laxity cells, naturality, or strictness
+collapses.
+
+Use this technique when all of the following hold:
+
+- the raw mathematical formula is a composite such as
+  `comp_fapp0(g,f)`;
+- putting the raw composite directly in a large rewrite RHS is expensive,
+  brittle, or hides useful structure;
+- the composite is really the action of a reusable precomposition or
+  postcomposition operation;
+- the existing library helper has the wrong computational orientation for the
+  current cut-elimination normal form.
+
+For example, the Sigma-map lax-prefix action should not ultimately be hidden
+behind a one-off head:
+
+```text
+sigma_map_fibre_arrow(FF,p,u,alpha)
+  ~= FF[y][alpha] o laxity(FF,p)[u].
+```
+
+The preferred reusable normal form is:
+
+```text
+fapp0
+  (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+  (FF[y][alpha]).
+```
+
+Here `functord_laxity_precomp_func(FF,p,u,w)` represents precomposition by the
+displayed laxity component:
+
+```text
+laxity(FF,p)[u]
+  : D[p](FF[x]u) -> FF[y](E[p]u).
+```
+
+So its source and target are:
+
+```text
+Hom_D[y](FF[y](E[p]u), w)
+  -> Hom_D[y](D[p](FF[x]u), w).
+```
+
+Do not make such a head a transparent alias for an existing helper if that
+helper computes in the opposite direction. In particular, the current
+`hom_precomp_func` rule expands an application to a raw composite:
+
+```text
+fapp0 (hom_precomp_func(f)) g
+  -> g o f.
+```
+
+That is useful in some contexts, but it is not the desired normal form when the
+cut-elimination direction is:
+
+```text
+g o f
+  -> fapp0 (precompose_by f) g.
+```
+
+In that case introduce a stable projection head for the intended normal form and
+add only focused folds after probing. Possible folds include:
+
+```text
+hom_precomp_func(laxity(FF,p)[u])
+  -> functord_laxity_precomp_func(FF,p,u,w)
+
+comp_fapp0(g,laxity(FF,p)[u])
+  -> fapp0 (functord_laxity_precomp_func(FF,p,u,w)) g.
+```
+
+Do not add those folds globally by default. First check critical pairs with
+identity and composition rules, and prefer consumer-local rules when the theorem
+only needs one canonical case.
+
+Implementation checklist for this style:
+
+1. Write the mathematical formula in a comment near the symbol.
+2. Identify whether the desired normal form is precomposition, postcomposition,
+   or another functorial action.
+3. If an existing helper has the wrong orientation, add a new stable head rather
+   than redefining the helper or forcing a global opposite rewrite.
+4. Make large rules produce `fapp0(stable_action)(argument)` instead of a raw
+   `comp_fapp0(...)`.
+5. Add canonical consumer rules, such as identity/canonical-triangle cases,
+   only after a temporary probe shows the syntactic normal form.
+6. Keep source/target and endpoint slots implicit on rewrite LHSs unless they
+   are the actual discriminator.
+7. Add assertions for both the reusable action form and the downstream theorem
+   normal form.
+8. Record failed orientations in the implementation report when they influence
+   the design.
+
 ## SOP: Identity Normal Forms
 
 Identity terms can normalize into different specialized heads depending on the

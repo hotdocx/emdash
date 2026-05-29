@@ -68,6 +68,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Use stable heads only for real projection, discrimination, or performance
   boundaries. Good stable heads are often projections from a more internalized
   construction, not substitutes for that construction.
+- For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
+  postcomposition action heads over one-off heads that hide a raw composite. For
+  example, when the desired normal form is `g o f -> fapp0(precompose_by f) g`,
+  do not reuse a helper whose application rule expands in the opposite
+  direction unless a focused probe shows the critical pairs are harmless. See
+  `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
 - In explicit `fapp0` source/target arguments, prefer canonical normal forms
   such as `Hom_cat ...` and `Functord_cat ...` over reducible readability
   wrappers such as `Fibre_cat (DefinedAlias ...) k`. The wrapper may compute

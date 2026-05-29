@@ -2990,6 +2990,13 @@ implementation target. The old head remains useful historical evidence that the
 Sigma-map lax-prefix route typechecks, but the next implementation should remove
 it in favor of `functord_laxity_precomp_func`.
 
+The reusable SOP for this style is now consolidated in
+`reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` under
+"SOP: Dosen Cut-Elimination Precomposition/Postcomposition Heads", with a short
+pointer from `README.md`. Future implementation comments in `emdash3_2.lp`
+should cite the same principle near any new precomposition/postcomposition
+stable heads.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
