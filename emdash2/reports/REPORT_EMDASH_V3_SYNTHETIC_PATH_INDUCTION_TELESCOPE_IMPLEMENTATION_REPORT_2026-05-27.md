@@ -2704,6 +2704,53 @@ write intermediate symbol types in the reduced/computer form expected by their
 next projection consumer, but do not globally reduce every `Hom(Functor_cat)`
 presentation.
 
+## 2026-05-30 Implementation Update: Pi Laxity Keeps Whole Transfors
+
+A cleanup probe briefly removed the whole-transfor Pi-specific folds:
+
+```text
+functord_laxity_transf(Pi_int_funcd,F)
+  -> section_pullback_transf(F)
+
+functord_laxity_transf(Pi_pullback_funcd(G),p)
+  -> section_pullback_transf(G[p]).
+```
+
+The file still typechecked after also removing the old whole-transfor
+assertions, because the Pi/path transport computations already go through the
+generic component route:
+
+```text
+tapp0_fapp0(functord_laxity_transf(Pi_int_funcd,F),E)
+  -> functord_laxity_fdapp1_cell(Pi_int_funcd,F,E)
+  -> section_pullback_func(F,E)
+
+tapp0_fapp0(functord_laxity_transf(Pi_pullback_funcd(G),p),E)
+  -> functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+  -> section_pullback_func(G[p],E).
+```
+
+However, the removal was not promoted. For Pi, the whole-transfor fold is the
+better architectural normal form: it records the full naturality/coherence
+transfor, not only its object component. The active file therefore keeps both
+levels:
+
+```text
+functord_laxity_transf(Pi_int_funcd,F)
+  -> section_pullback_transf(F)
+
+functord_laxity_transf(Pi_pullback_funcd(G),p)
+  -> section_pullback_transf(G[p])
+
+tapp0_fapp0(functord_laxity_transf(...),E)
+  -> functord_laxity_fdapp1_cell(...)
+  -> section_pullback_func(...,E).
+```
+
+The whole folds preserve functoriality/naturality structure. The component/cell
+assertions remain useful regressions showing that the internal hom-action route
+and the public Pi laxity transfor have the same component normal form.
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -2726,8 +2773,9 @@ git diff --check
 ## Remaining Work
 
 - Continue from the now-checked component-level bridge from internal hom-action
-  to displayed laxity. The remaining question is whether more of this should be
-  packaged as reusable rules or kept as focused regression assertions:
+  to displayed laxity. The currently promoted policy is: keep whole-transfor
+  folds when they express real constructor-level naturality/coherence, and keep
+  component/cell assertions to verify their object-level normal forms:
 
   ```text
   fdapp1_int_transfd(FF) applied to canonical_triangle(E,p,u)
@@ -2735,9 +2783,8 @@ git diff --check
     == functord_laxity_fdapp1_cell(FF,p,u).
   ```
 
-  Once the Pi instance joins with `section_pullback_func(F,E)`, replace the
-  current Pi-specific `functord_laxity_transf` folds by this derived path where
-  feasible.
+  The Pi-specific whole-`functord_laxity_transf` folds are kept because they
+  expose the full `section_pullback_transf` naturality object.
 - Revise Sigma-map arrow action only after the extraction path is stable. The
   desired normal form is:
 

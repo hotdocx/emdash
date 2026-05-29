@@ -4730,8 +4730,8 @@ rule @functord_laxity_fdapp1_cell
       $E;
 
 // Pi is contravariantly natural in the base category. In the displayed-family
-// view, this is the laxity/coherence projection of `Pi_int_funcd` along a base
-// arrow `F : A -> B`, seen as `B -> A` in `Op(Cat)`.
+// view, this is the whole laxity/coherence transfor of `Pi_int_funcd` along a
+// base arrow `F : A -> B`, seen as `B -> A` in `Op(Cat)`.
 rule @functord_laxity_transf
       _
       _
@@ -4743,7 +4743,7 @@ rule @functord_laxity_transf
   ↪ @section_pullback_transf $A $B $F;
 
 // Pulling `Pi_int_funcd` back along `G : K -> Cat^op` preserves the same Pi
-// laxity component along each base arrow p.
+// laxity/coherence transfor along each base arrow p.
 rule @functord_laxity_transf
       $K
       _
@@ -5192,6 +5192,23 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
         (@fapp0 K (Op_cat Cat_cat) G y)
         (@fapp0 K (Op_cat Cat_cat) G x)
         (@fapp1_fapp0 K (Op_cat Cat_cat) G x y p);
+
+assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
+  @tapp0_fapp0
+    (@Catd_cat B)
+    Cat_cat
+    _
+    _
+    E
+    (@functord_laxity_transf
+      (Op_cat Cat_cat)
+      Catd_cat_func
+      (@Const_catd (Op_cat Cat_cat) Cat_cat)
+      Pi_int_funcd
+      B
+      A
+      F)
+    ≡ @section_pullback_func A B F E;
 
 assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
   (x y : τ (Obj K))
