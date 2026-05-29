@@ -2444,9 +2444,31 @@ homd_id_canonical_triangle(E,p,u)
 ```
 
 is now a primitive stable head, analogous in role to `id_func` and `id_funcd`.
-No global rewrite from plain `id(E[y],E[p]u)` to this head is installed, because
-a probe with such a global bridge changed existing Sigma-map transport normal
-forms. Instead, only the fdapp1 fourth-stage action consumes this stable head:
+The first implementation avoided a global rewrite from plain
+`id(E[y],E[p]u)` to this head, because an overly explicit probe changed an
+existing Sigma-map transport assertion. A later SOP-clean probe found the
+correct narrow left-hand side:
+
+```text
+id(E[y], fapp0(E[p],u))
+  -> homd_id_canonical_triangle(E,p,u)
+```
+
+where the kernel shape leaves the source/target arguments of the inner
+transport-object application implicit:
+
+```text
+rule @id
+      (@fapp0 $K Cat_cat $E $y)
+      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
+  -> homd_id_canonical_triangle(E,p,u).
+```
+
+This is not a rewrite for every identity in every fibre category. It is a
+specific fold for the primitive projection normal form of the transported
+object `E[p](u)`.
+
+The fdapp1 fourth-stage action consumes this stable head:
 
 ```text
 fapp0(
@@ -2456,7 +2478,47 @@ fapp0(
 ```
 
 This keeps the canonical triangle available as a real rewrite discriminator
-without perturbing unrelated plain identity computations.
+without perturbing unrelated plain identity computations. The direct local
+fdapp1 fallback rule on the explicit plain `id` was removed; the active route is
+now:
+
+```text
+id(E[y],E[p]u)
+  -> homd_id_canonical_triangle(E,p,u)
+  -> functord_laxity_fdapp1_cell(FF,p,u)
+```
+
+The same probe clarified that the old assertion
+
+```text
+sigma_map_transport_arrow(eta,p,u)
+  == sigma_transport_arrow(D,p,eta[x](u))
+```
+
+was not a harmless computation test. It asserted strict/cartesian preservation
+of canonical transport by an arbitrary displayed functor. In the lax design that
+is false in general: the image of the canonical source triangle should expose
+the image of `homd_id_canonical_triangle`, and eventually the laxity cell.
+
+The active assertion has therefore been replaced by the weaker and correct
+normal form:
+
+```text
+sigma_map_transport_arrow(eta,p,u)
+  == sigma_arrow(
+       p,
+       eta[y][homd_id_canonical_triangle(E,p,u)])
+```
+
+where the source/target object mismatch is handled by the existing Cat-valued
+object-level naturality folds.
+
+The corresponding fibre-component sanity assertion now also checks:
+
+```text
+sigma_map_transport_fibre_arrow(FF,p,u)
+  == FF[y][homd_id_canonical_triangle(E,p,u)].
+```
 
 The stable projection-head refactor for the earlier fdapp1 stages was then
 promoted as well:
@@ -2482,8 +2544,8 @@ tapp0_fapp0(functord_laxity_transf(FF,p),u)
 ```
 
 This completes the currently scoped generic component extraction surface without
-installing a global bridge from plain `id` to the homd-specific canonical
-triangle.
+installing a broad global bridge from arbitrary plain `id` terms to the
+homd-specific canonical triangle.
 
 Follow-up identity probe:
 
@@ -2512,10 +2574,9 @@ not:
 @fapp0 (E[x]) (E[y]) (@fapp1_fapp0 K Cat_cat E x y p) u.
 ```
 
-This gives the needed bridge from the plain identity normal form to the
-extracted laxity cell in exactly the fdapp1 fourth-stage context, without
-installing a global rewrite from every fibre identity to
-`homd_id_canonical_triangle`.
+This was later generalized one step: the same SOP-clean identity shape now
+folds directly to `homd_id_canonical_triangle`, and the fdapp1 fourth-stage
+context reaches the extracted laxity cell through that canonical head.
 
 ## Validation
 

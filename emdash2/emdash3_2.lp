@@ -4247,12 +4247,12 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p));
 
-// Component-level extraction from the current strict Sigma-total action. This
-// names the fibre component of Sigma(FF) applied to the canonical total
-// transport arrow. It is deliberately separate from `functord_laxity_transf`:
-// the current `sigma_map_func` action maps a canonical/cartesian arrow to an
-// identity-like/cartesian component, while Pi laxity needs the nontrivial
-// component extracted from internal hom-action.
+// Component-level extraction from the current Sigma-total action. This names
+// the fibre component of Sigma(FF) applied to the canonical total transport
+// arrow. It is deliberately separate from `functord_laxity_transf`: the current
+// `sigma_map_func` action exposes the fibre functor action on the canonical
+// homd triangle, while Pi laxity needs the nontrivial component extracted from
+// internal hom-action.
 symbol sigma_map_transport_fibre_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4506,10 +4506,8 @@ rule @fapp1_fapp0
 
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable normal form for a component of `functord_laxity_transf`.
-// It deliberately avoids a rewrite rule whose LHS matches a concrete plain
-// `id` term: the canonical triangle is represented by the stable
-// `homd_id_canonical_triangle` head below, and no global plain-id-to-triangle
-// rewrite is installed.
+// The concrete transported-object identity first folds to the stable
+// `homd_id_canonical_triangle` head below, then this action consumes that head.
 //
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
@@ -4545,9 +4543,9 @@ rule @tapp0_fapp0
 //   id : Homd_E(x,u,y,E[p]u)[p].
 //
 // This is a stable identity-specialization head, similar in role to `id_func`
-// and `id_funcd`: it names the canonical/cartesian triangle without forcing
-// every plain identity in a fibre category to reduce to this homd-specific
-// normal form.
+// and `id_funcd`: it names the canonical/cartesian triangle. The rewrite below
+// folds only the primitive projection normal form `id_{E[p](u)}` to this head,
+// not arbitrary identities in arbitrary fibre categories.
 constant symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
@@ -4562,17 +4560,14 @@ constant symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
           (fapp0 (catd_transport_func E p) u))
         p));
 
+rule @id
+      (@fapp0 $K Cat_cat $E $y)
+      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
+  ↪ @homd_id_canonical_triangle $K $E $x $y $p $u;
+
 rule fapp0
       (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u _)
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
-
-rule fapp0
-      (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u
-        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
-      (@id
-        (@fapp0 $K Cat_cat $E $y)
-        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
 // -------------------------------------------------------------------------------------------------
@@ -6200,6 +6195,19 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   @sigma_map_transport_fibre_arrow K E D FF x y p u
     ≡ sigma_Snd (@sigma_map_transport_arrow K E D FF x y p u);
 
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @sigma_map_transport_fibre_arrow K E D FF x y p u
+    ≡ @fapp1_fapp0
+        (Fibre_cat E y)
+        (Fibre_cat D y)
+        (@tapp0_fapp0 K Cat_cat E D y FF)
+        (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+        (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+        (@homd_id_canonical_triangle K E x y p u);
+
 assert [K : Cat] (R : τ (Catd K))
   (FF : τ (Functord R (@Const_catd K Cat_cat)))
   (x y : τ (Obj K))
@@ -6898,22 +6906,37 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
           v
           alpha);
 
+// A Sigma map does not preserve canonical transport strictly for arbitrary
+// displayed functors. The image exposes the action on the canonical homd
+// triangle; strict/cartesian preservation is a later specialization.
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   @sigma_map_transport_arrow K E D η x y p u
-    ≡ @sigma_transport_arrow
+    ≡ @sigma_arrow
         K
         D
         x
         y
-        p
         (@fapp0
           (Fibre_cat E x)
           (Fibre_cat D x)
           (@tapp0_fapp0 K Cat_cat E D x η)
-          u);
+          u)
+        (@fapp0
+          (Fibre_cat E y)
+          (Fibre_cat D y)
+          (@tapp0_fapp0 K Cat_cat E D y η)
+          (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
+        p
+        (@fapp1_fapp0
+          (Fibre_cat E y)
+          (Fibre_cat D y)
+          (@tapp0_fapp0 K Cat_cat E D y η)
+          (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+          (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+          (@homd_id_canonical_triangle K E x y p u));
 
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
   @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K
