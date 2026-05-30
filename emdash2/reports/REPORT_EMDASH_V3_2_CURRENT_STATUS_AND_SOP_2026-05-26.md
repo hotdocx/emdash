@@ -186,7 +186,7 @@ sigma_map_fibre_arrow(FF,p,u,alpha)
   ~= FF[y][alpha] o laxity(FF,p)[u].
 ```
 
-The preferred semantic normal form is:
+The first semantic decomposition is:
 
 ```text
 fapp0
@@ -194,22 +194,35 @@ fapp0
   (FF[y][alpha]).
 ```
 
-If consumer rules need to recognize the original source arrow `alpha`, do not
-force them to match after the `FF[y]` action. Use a stable composite-action head
-that records the same factorization while keeping `alpha` visible:
+However, the active v3.2 implementation does not expose this standalone
+precomposition functor yet. Probes showed that Sigma-map consumers need the
+extra fibre action `FF[y][-]` as part of the reusable operation, because
+matching after that action forces critical identity/canonical-triangle rules to
+reason through strict functoriality.
+
+The current normal form is therefore the composite fibre functor:
 
 ```text
-functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
-  ~= fapp0
-       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-       (FF[y][alpha]).
+functord_laxity_precomp_fibre_func(FF,p,u,v)
+  : Hom_E[y](E[p]u,v)
+    -> Hom_D[y](D[p](FF[x]u),FF[y]v)
 ```
 
-This is the current Sigma-map implementation. It avoids making canonical
-identity/triangle rules match through strict functoriality of `FF[y]`.
+with capped action:
 
-Here `functord_laxity_precomp_func(FF,p,u,w)` represents precomposition by the
-displayed laxity component:
+```text
+fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
+  -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
+```
+
+This records the same factorization while keeping the original source arrow
+`alpha` visible to consumer rules. This is the current Sigma-map
+implementation. It avoids making canonical identity/triangle rules match
+through strict functoriality of `FF[y]`.
+
+The deferred standalone head
+`functord_laxity_precomp_func(FF,p,u,w)` would represent precomposition by the
+displayed laxity component alone:
 
 ```text
 laxity(FF,p)[u]
@@ -241,7 +254,8 @@ g o f
 ```
 
 In that case introduce a stable projection head for the intended normal form and
-add only focused folds after probing. Possible folds include:
+add only focused folds after probing. Possible future folds, if the standalone
+precomposition functor is reintroduced, include:
 
 ```text
 hom_precomp_func(laxity(FF,p)[u])

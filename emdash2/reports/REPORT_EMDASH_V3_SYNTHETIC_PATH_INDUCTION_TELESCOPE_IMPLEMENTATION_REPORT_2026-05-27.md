@@ -2986,10 +2986,11 @@ should be introduced only when a downstream theorem requires that extra
 structure.
 
 The direct `fapp0(functord_laxity_precomp_func)(FF[y][alpha])` plan below was
-then itself refined by the implementation update in the next section: keep
-`functord_laxity_precomp_func` as the reusable operation, but use
-`functord_laxity_precomp_fibre_fapp0` as the stable composite-action head so
-consumer rules still see the original `alpha`.
+then itself refined by the implementation updates in the following sections.
+The final current surface does not keep `functord_laxity_precomp_func` active;
+it exposes the composite fibre functor
+`functord_laxity_precomp_fibre_func` instead, with
+`functord_laxity_precomp_fibre_fapp0` as its capped action.
 
 The reusable SOP for this style is now consolidated in
 `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` under
@@ -3082,6 +3083,99 @@ timeout 60s lambdapi check -w tmp/emdash3_2_precomp_probe.lp
 timeout 60s lambdapi check -w emdash3_2.lp
 ```
 
+## 2026-05-30 Follow-Up Decision: Use The Composite Fibre Functor
+
+A follow-up review found that the promoted `functord_laxity_precomp_func` was
+not yet connected computationally to the Sigma-map action. The actual operation
+needed by Sigma and by the downstream canonical/representable rules is not
+plain precomposition alone, but the composite functor:
+
+```text
+alpha |-> FF[y][alpha] o laxity(FF,p)[u].
+```
+
+This should be exposed directly as a functor-level stable head:
+
+```text
+functord_laxity_precomp_fibre_func(FF,p,u,v)
+  : Hom_E[y](E[p]u,v)
+    -> Hom_D[y](D[p](FF[x]u),FF[y]v).
+```
+
+Its capped action should be:
+
+```text
+fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
+  -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+```
+
+This keeps the operation functorial in `alpha` while preserving the crucial
+rewrite-rule property discovered by the probe: consumer rules still match the
+original source arrow `alpha`, not the post-action term `FF[y][alpha]`.
+
+Completed implementation order for the active follow-up:
+
+1. Probe deleting the dangling `functord_laxity_precomp_func`.
+2. Introduce `functord_laxity_precomp_fibre_func`.
+3. Add the projection rule from its `fapp0` to
+   `functord_laxity_precomp_fibre_fapp0`.
+4. Make Sigma-map arrow action use
+   `fapp0(functord_laxity_precomp_fibre_func)(alpha)` and rely on the projection
+   rule to fold to the stable capped head.
+5. Keep the existing canonical and representable consumer rules headed by
+   `functord_laxity_precomp_fibre_fapp0`.
+6. If a later theorem needs standalone precomposition by laxity without the
+   `FF[y]` action, reintroduce a separate `functord_laxity_precomp_func` then,
+   with checked folds connecting it to the composite operation.
+
+## 2026-05-30 Latest Active Implementation: Composite Fibre Functor Promoted
+
+The follow-up plan has now been probed and promoted. This is the latest active
+design for the Sigma-map lax-prefix action.
+
+Changes made in `emdash3_2.lp`:
+
+1. Deleted the dangling standalone `functord_laxity_precomp_func`.
+2. Added `functord_laxity_precomp_fibre_func(FF,p,u,v)` as the functor-level
+   stable head for
+
+   ```text
+   alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
+   ```
+
+3. Kept `functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)` as the capped
+   action/projection head.
+4. Added the projection rule:
+
+   ```text
+   fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
+     -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+   ```
+
+5. Revised the Sigma-map arrow-action rule so the fibre component is expressed
+   through the functor-level operation:
+
+   ```text
+   Sigma(FF)(p,alpha)
+     = (p, fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha).
+   ```
+
+This keeps the operation functorial while preserving the successful matching
+property of the previous stable capped head: canonical and representable
+consumer rules still see the original source arrow `alpha`.
+
+Probe command:
+
+```bash
+timeout 60s lambdapi check -w tmp/emdash3_2_fibre_func_probe.lp
+```
+
+Active-file command:
+
+```bash
+timeout 60s lambdapi check -w emdash3_2.lp
+```
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -3120,16 +3214,17 @@ git diff --check
 
   ```text
   Sigma(FF)(p,alpha)
-    = (p, FF[y](alpha) o functord_laxity_transf(FF,p)[u]).
+    = (p, fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha).
   ```
 
   The current implementation has removed the temporary `sigma_map_fibre_arrow`
-  name. It now exposes `functord_laxity_precomp_func(FF,p,u,w)` as the reusable
-  precomposition operation and uses the stable composite-action head
-  `functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)` for Sigma-map arrow
-  action. Continue adding focused strict collapses for other known strict
-  constructors only when downstream regressions expose a missing computation.
-  The first representable/pathout collapse is now keyed on `Rep_transport_func`.
+  name and the dangling standalone `functord_laxity_precomp_func`. It now
+  exposes `functord_laxity_precomp_fibre_func(FF,p,u,v)` as the reusable
+  composite fibre operation and uses
+  `functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)` as its capped action.
+  Continue adding focused strict collapses for other known strict constructors
+  only when downstream regressions expose a missing computation. The first
+  representable/pathout collapse is now keyed on `Rep_transport_func`.
 - Keep ordinary functor/transfor laxness aligned with the non-displayed
   internal hom-action packages:
 
