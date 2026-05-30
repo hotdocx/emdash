@@ -3450,6 +3450,35 @@ The old composite wrapper can be reintroduced later only if a concrete theorem
 needs a named functor for the whole action
 `alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]]`.
 
+Design clarification: the canonical consumer rule intentionally matches the
+provenance-preserving stable head
+
+```text
+functord_transport_fibre_fapp1_fapp0
+  (FF,p,u,homd_id_canonical_triangle(E,p,u))
+```
+
+rather than a raw target identity
+
+```text
+id_{FF[y](E[p]u)}.
+```
+
+Semantically, `functord_laxity_precomp_fapp0` still represents
+precomposition by `laxity(FF,p)[u]`, so the extensional equation
+
+```text
+precompose_by(laxity(FF,p)[u])[id_{FF[y](E[p]u)}]
+  = laxity(FF,p)[u]
+```
+
+is the right intuition. Computationally, however, the synthetic Sigma action
+produces the image of the canonical/cartesian source triangle. The stable head
+records that provenance and avoids matching a raw identity with the large
+endpoint `FF[y](E[p]u)`. Probes of direct raw-identity rules timed out in
+Lambdapi's rule checker, while the stable-head consumer is accepted and keeps
+the intended cut-elimination normal form.
+
 Validation:
 
 ```bash

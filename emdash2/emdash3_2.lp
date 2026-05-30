@@ -4688,6 +4688,18 @@ rule fapp0
 // Standalone-precomposition canonical consumer. The source identity first
 // folds to `homd_id_canonical_triangle`; applying FF[y] to that triangle folds
 // to the stable transported-source action head above.
+//
+// This is the stable-head version of the tempting but fragile extensional
+// equation:
+//   precompose_by(laxity(FF,p)[u])[id_{FF[y](E[p]u)}] = laxity(FF,p)[u].
+//
+// Do not replace this with a rule matching the raw target identity. That raw
+// identity has a large endpoint
+//   FF[y](E[p]u)
+// and direct rules on that shape make the checker search through too much
+// projection structure. More importantly, the term below preserves the
+// provenance needed by the synthetic Sigma action: it remembers that the target
+// identity is the image of the canonical/cartesian source triangle.
 rule @functord_laxity_precomp_fapp0
       $K
       $E
