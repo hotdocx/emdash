@@ -215,6 +215,22 @@ fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
   -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
 ```
 
+The semantic raw-composite fold is not active yet. It is the desired next
+connection:
+
+```text
+FF[y][alpha] o laxity(FF,p)[u]
+  -> fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
+  -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+```
+
+Endpoint-convertibility probes confirm that the middle object
+`FF[y](E[p]u)` joins with `(FF[y] o E[p])(u)`. The remaining issue is rewrite
+rule engineering: a direct `comp_fapp0` rule for this fold currently makes
+Lambdapi's subject-reduction/critical-pair checking search through too much
+composition and projection structure. A better implementation likely needs
+additional stable route-object or transported-source fibre-action heads.
+
 This records the same factorization while keeping the original source arrow
 `alpha` visible to consumer rules. This is the current Sigma-map
 implementation. It avoids making canonical identity/triangle rules match
@@ -268,6 +284,19 @@ comp_fapp0(g,laxity(FF,p)[u])
 Do not add those folds globally by default. First check critical pairs with
 identity and composition rules, and prefer consumer-local rules when the theorem
 only needs one canonical case.
+
+In particular, a functor-level fold of the form
+
+```text
+hom_precomp_func(laxity(FF,p)[u]) o FF[y]_1
+  -> functord_laxity_precomp_fibre_func(FF,p,u,v)
+```
+
+was considered but is not active yet. The first probe could not prove
+preservation with the target object hidden in the composed hom-action, and the
+stable-source-action variant timed out because it interacted too broadly with
+strict functoriality. Revisit this only with a smaller projection surface or a
+concrete downstream theorem requiring the functor-level composite itself.
 
 Implementation checklist for this style:
 

@@ -3160,6 +3160,32 @@ Changes made in `emdash3_2.lp`:
      = (p, fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha).
    ```
 
+6. Probed the semantic object-level cut-elimination fold:
+
+   ```text
+   FF[y][alpha] o laxity(FF,p)[u]
+     -> fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
+     -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+   ```
+
+   This rule is not active yet. A temporary unreduced-laxity version checked,
+   but it would not fire after `laxity(FF,p)[u]` projects to
+   `functord_laxity_fdapp1_cell`. Reduced-cell versions and variants using a
+   transported-source fibre-action head timed out during rule checking.
+
+   A focused endpoint-convertibility probe did pass: `FF[y](E[p]u)` currently
+   joins with `(FF[y] o E[p])(u)`, both as objects and inside the relevant
+   hom-category endpoints. So the blocker is not a missing definitional
+   equality; it is that a direct `comp_fapp0` rewrite asks Lambdapi to discover
+   that equality inside a large composition rule.
+
+   Recommended next architecture: introduce stable route-object heads such as
+   `functord_transport_lhs_obj(FF,p,u)` and
+   `functord_transport_rhs_obj(FF,p,u)`, or a narrower transported-source
+   fibre-action package whose type already uses those route-object heads. Then
+   retry the raw-composite cut-elimination rule against matching syntactic
+   endpoints.
+
 This keeps the operation functorial while preserving the successful matching
 property of the previous stable capped head: canonical and representable
 consumer rules still see the original source arrow `alpha`.
@@ -3168,6 +3194,7 @@ Probe command:
 
 ```bash
 timeout 60s lambdapi check -w tmp/emdash3_2_fibre_func_probe.lp
+timeout 60s lambdapi check -w tmp/emdash3_2_endpoint_convert_probe.lp
 ```
 
 Active-file command:
@@ -3175,6 +3202,180 @@ Active-file command:
 ```bash
 timeout 60s lambdapi check -w emdash3_2.lp
 ```
+
+Functor-level `hom_precomp_func` probe:
+
+The natural functor-level semantic fold
+
+```text
+hom_precomp_func(laxity(FF,p)[u]) o FF[y]_1
+  -> functord_laxity_precomp_fibre_func(FF,p,u,v)
+```
+
+was also probed. The direct rule could not prove type preservation with `v`
+hidden in the target of the `FF[y]` hom-action. Variants introducing stable
+source-action heads for `FF[y][alpha]` timed out when combined with the
+`comp_fapp0` fold. The functor-level fold is therefore deferred together with
+the object-level raw-composite fold.
+
+Follow-up probe on endpoint normal forms:
+
+The suggested variant of writing the composition middle object in reduced form
+was tested:
+
+```text
+middle = FF[y](E[p]u)
+```
+
+instead of:
+
+```text
+middle = (FF[y] o E[p])(u).
+```
+
+That variant still timed out while checking the `comp_fapp0` rule itself. A
+second probe wrote both the source and middle endpoints in projected reduced
+form:
+
+```text
+D[p](FF[x]u) -> FF[y](E[p]u) -> FF[y]v.
+```
+
+That also timed out. A sentinel inserted immediately after the proposed rule
+confirmed that the timeout happens during checking of the new global
+`comp_fapp0` rule, before later assertions or downstream rules are reached.
+Retyping the local laxity/precomposition heads at projected endpoints did not
+change this result.
+
+Conclusion: the middle-object normal form is not the root cause. The focused
+endpoint-convertibility assertions pass, but a global `comp_fapp0` rule with
+this highly structured first/second arrow makes Lambdapi's rule checker search
+through too many existing `comp_fapp0` critical pairs and projection
+conversions. The next architecture should avoid another broad global
+`comp_fapp0` fold unless the composition spine has first been narrowed by
+additional stable route/composite heads, or unless the fold is moved to a
+smaller consumer-local operation whose head is not the overloaded global
+composition symbol.
+
+Follow-up probe on using `unif_rule` instead of a rewrite:
+
+Several unification-only bridges were tested for the same intended comparison:
+
+```text
+FF[y][alpha] o laxity(FF,p)[u]
+  ~= functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+```
+
+The following shapes were accepted quickly:
+
+```text
+unif_rule comp_fapp0(raw FF[y][alpha], laxity_cell)
+  ≡ functord_laxity_precomp_fibre_fapp0(...)
+  -> [tt = tt]
+
+unif_rule comp_fapp0(stable FF[y][alpha], laxity_cell)
+  ≡ functord_laxity_precomp_fibre_fapp0(...)
+  -> [tt = tt]
+
+unif_rule @comp_fapp0 _ _ _ _ (stable FF[y][alpha]) laxity_cell
+  ≡ functord_laxity_precomp_fibre_fapp0(...)
+  -> [tt = tt].
+```
+
+Here the "stable FF[y][alpha]" variant used a probe-local head
+`functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)` for the transported-source
+fibre action.
+
+However, closed equality assertions of the form:
+
+```text
+@comp_fapp0 _ _ _ _ (stable FF[y][alpha]) laxity_cell
+  == functord_laxity_precomp_fibre_fapp0(...)
+```
+
+still failed or timed out. This matches Lambdapi's documented behavior:
+`unif_rule` guides unification constraints; it is not a rewrite rule and should
+not be treated as computation/conversion. The unification approach is therefore
+viable only as a consumer-local elaboration hint if a concrete implicit
+argument or proof script gets stuck on this comparison. It is not a replacement
+for the missing cut-elimination computation, and it should not be promoted as a
+global semantic equality unless a downstream use demonstrates that unification
+simulation is exactly what is needed.
+
+Follow-up reassessment of the standalone-precomposition route:
+
+The earlier standalone-precomposition design was revisited:
+
+```text
+functord_laxity_precomp_func(FF,p,u,w)
+  : Hom_D[y](FF[y](E[p]u),w)
+    -> Hom_D[y](D[p](FF[x]u),w).
+```
+
+The original failure was more precise than "`FF[y][id]` reduces to `id`". In
+the current active file, the local source-triangle fold:
+
+```text
+id(E[y],E[p]u) -> homd_id_canonical_triangle(E,p,u)
+```
+
+fires before ordinary strict functoriality can reduce `FF[y][id]`. Therefore
+the actual post-action normal form in the standalone route is:
+
+```text
+FF[y][homd_id_canonical_triangle(E,p,u)]
+```
+
+not a plain target identity. A direct consumer rule matching the raw nested
+`fapp1_fapp0(..., homd_id_canonical_triangle(...))` timed out, as before.
+However, the SOP-stable-head repair works:
+
+```text
+functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)
+  ~= FF[y][alpha]
+```
+
+for transported-source fibre arrows. With that head, the standalone
+precomposition consumer:
+
+```text
+functord_laxity_precomp_fapp0
+  (FF,p,u,
+   functord_transport_fibre_fapp1_fapp0
+     (FF,p,u,homd_id_canonical_triangle(E,p,u)))
+  -> functord_laxity_fdapp1_cell(FF,p,u)
+```
+
+checked quickly, and the full canonical-flow assertion passed:
+
+```text
+precompose_by(laxity(FF,p)[u])
+  (FF[y][id(E[y],E[p]u)])
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+Successful probe:
+
+```bash
+timeout 30s lambdapi check -w tmp/emdash3_2_standalone_precomp_stable_fapp1_probe.lp
+```
+
+This means the standalone-precomposition route is feasible after all, provided
+we also introduce the stable post-`FF[y]` fibre-action projection. The current
+active composite-fibre functor remains typechecked, but the better next design
+candidate is now:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p,
+     fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+```
+
+The existing `functord_laxity_precomp_fibre_func` can then either be retained
+as the composite functor-level wrapper or deleted/replaced if the standalone
+route covers all downstream uses more transparently.
 
 ## Validation
 
