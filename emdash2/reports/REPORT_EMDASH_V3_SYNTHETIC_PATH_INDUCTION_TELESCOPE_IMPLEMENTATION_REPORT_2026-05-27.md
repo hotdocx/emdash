@@ -3422,10 +3422,33 @@ The representable/PathOut strict collapse was also ported to the standalone
 surface, so the fixed-x transitivity/rho regression still computes.
 
 The older `functord_laxity_precomp_fibre_func` /
-`functord_laxity_precomp_fibre_fapp0` composite wrapper is retained for now as
-a compatibility/convenience surface, but it is no longer the Sigma-map action's
-primary normal form. A later cleanup can delete it if no downstream theorem
-needs the composite functor as a named object.
+`functord_laxity_precomp_fibre_fapp0` composite wrapper has now been removed
+from the active file. It was only a compatibility surface after standalone
+precomposition became the Sigma-map normal form, and keeping it risked
+confusing later design work.
+
+## 2026-05-30 Implementation Update: Composite Fibre Wrapper Removed
+
+The active file no longer declares:
+
+```text
+functord_laxity_precomp_fibre_func
+functord_laxity_precomp_fibre_fapp0
+```
+
+The only active Sigma-map lax-prefix normal form is now:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p,
+     fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+```
+
+The old composite wrapper can be reintroduced later only if a concrete theorem
+needs a named functor for the whole action
+`alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]]`.
 
 Validation:
 
@@ -3479,10 +3502,9 @@ git diff --check
 
   The current implementation has removed the temporary `sigma_map_fibre_arrow`
   name and restored standalone `functord_laxity_precomp_func`, plus the stable
-  post-action head `functord_transport_fibre_fapp1_fapp0`. The older composite
-  wrapper `functord_laxity_precomp_fibre_func` remains available but is no
-  longer the primary Sigma-map normal form. Continue adding focused strict
-  collapses for other known strict constructors only when downstream
+  post-action head `functord_transport_fibre_fapp1_fapp0`. The later cleanup
+  also deleted the obsolete composite fibre wrapper. Continue adding focused
+  strict collapses for other known strict constructors only when downstream
   regressions expose a missing computation. The first representable/pathout
   collapse is now ported to the standalone precomposition surface and keyed on
   `Rep_transport_func`.

@@ -212,21 +212,10 @@ Sigma(FF)(p,alpha)
        (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
 ```
 
-The older composite fibre functor is retained as a compatibility/convenience
-surface for now:
-
-```text
-functord_laxity_precomp_fibre_func(FF,p,u,v)
-  : Hom_E[y](E[p]u,v)
-    -> Hom_D[y](D[p](FF[x]u),FF[y]v)
-```
-
-with capped action:
-
-```text
-fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
-  -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
-```
+The older composite fibre functor surface has been deleted from the active
+file. It bundled the `FF[y]` action and precomposition into one head, but the
+standalone normal form above is clearer and keeps the post-action projection
+visible to focused consumer rules.
 
 The semantic raw-composite fold is not active yet:
 
@@ -309,14 +298,16 @@ In particular, a functor-level fold of the form
 
 ```text
 hom_precomp_func(laxity(FF,p)[u]) o FF[y]_1
-  -> functord_laxity_precomp_fibre_func(FF,p,u,v)
+  -> <a named composite fibre functor>
 ```
 
 was considered but is not active yet. The first probe could not prove
 preservation with the target object hidden in the composed hom-action, and the
 stable-source-action variant timed out because it interacted too broadly with
 strict functoriality. Revisit this only with a smaller projection surface or a
-concrete downstream theorem requiring the functor-level composite itself.
+concrete downstream theorem requiring the functor-level composite itself. If
+that need returns, reintroduce a fresh name deliberately rather than reviving
+the deleted temporary wrapper by default.
 
 Implementation checklist for this style:
 

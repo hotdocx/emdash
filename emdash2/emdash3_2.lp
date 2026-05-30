@@ -4230,67 +4230,6 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p));
 
-// Composite fibre-hom action:
-//   FF[y]_1 ; precompose_by(laxity(FF,p)[u]).
-//
-// Mathematical notation:
-//   laxity_precomp_fibre(FF,p,u,v)
-//     : Hom_E[y](E[p]u,v) -> Hom_D[y](D[p](FF[x]u),FF[y]v).
-//
-// Faithful surface syntax:
-//   alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
-//
-// This composite wrapper is retained as a compatibility/convenience surface for
-// consumers that need the whole hom-functor action as a named object. The
-// current Sigma-map normal form below instead uses the standalone
-// `functord_laxity_precomp_func` applied to the stable transported-source
-// fibre-action head.
-symbol functord_laxity_precomp_fibre_func [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-  (v : τ (Obj (Fibre_cat E y)))
-  : τ (Functor
-      (Hom_cat
-        (Fibre_cat E y)
-        (fapp0 (catd_transport_func E p) u)
-        v)
-      (Hom_cat
-        (Fibre_cat D y)
-        (fapp0 (functord_transport_lhs_func FF p) u)
-        (fapp0 (Fibre_func FF y) v)));
-
-// Stable capped action of `functord_laxity_precomp_fibre_func`.
-//
-// Mathematical notation:
-//   laxity_precomp_fibre(FF,p,u,v)[alpha]
-//     = precompose_by(laxity(FF,p)[u])(FF[y][alpha]).
-//
-// Faithful surface syntax:
-//   precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
-symbol functord_laxity_precomp_fibre_fapp0 [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-  [v : τ (Obj (Fibre_cat E y))]
-  (alpha : τ (Hom
-      (Fibre_cat E y)
-      (fapp0 (catd_transport_func E p) u)
-      v))
-  : τ (Hom
-      (Fibre_cat D y)
-      (fapp0 (functord_transport_lhs_func FF p) u)
-      (fapp0
-        (Fibre_func FF y)
-        v));
-
-rule fapp0
-      (@functord_laxity_precomp_fibre_func $K $E $D $FF $x $y $p $u $v)
-      $alpha
-  ↪ @functord_laxity_precomp_fibre_fapp0 $K $E $D $FF $x $y $p $u $v $alpha;
-
 // Standalone precomposition by the displayed laxity component.
 //
 // Mathematical notation:
@@ -4772,19 +4711,6 @@ rule @functord_laxity_precomp_fapp0
         (@homd_id_canonical_triangle $K $E $x $y $p $u))
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
-rule @functord_laxity_precomp_fibre_fapp0
-      $K
-      $E
-      $D
-      $FF
-      $x
-      $y
-      $p
-      $u
-      _
-      (@homd_id_canonical_triangle $K $E $x $y $p $u)
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
-
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the
 // stable `Rep_transport_func` head and keeps the family slots implicit.
@@ -4824,21 +4750,6 @@ rule @functord_laxity_precomp_fapp0
         (@id $Z $y)
         $q
         (@id (Hom_cat $Z $y $z) $q))
-  ↪ @id
-      (Hom_cat $Z $x $z)
-      (@comp_fapp0 $Z $x $y $z $q $p);
-
-rule @functord_laxity_precomp_fibre_fapp0
-      $Z
-      _
-      _
-      (@Rep_transport_func $Z $x $y $p)
-      $y
-      $z
-      $q
-      (@id $Z $y)
-      $q
-      (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
       (@comp_fapp0 $Z $x $y $z $q $p);
