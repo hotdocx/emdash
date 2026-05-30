@@ -3006,6 +3006,20 @@ rule @tapp0_fapp0
 //     (x :^n Z) -> PathOutReflEval_Z[x] => PathOutPi_Z[x]
 //   PathInd_transfd(Z)[x] = PathInd_func(Z,x).
 //
+// Status/architecture note:
+//   This `Transfd` is the primary internalized-x theorem. Its type already
+//   internalizes naturality in the source object x; we should not re-express
+//   that naturality as an external hand-written square for the core milestone.
+//   What downstream regressions inspect are the induced source/target
+//   transports along p : x -> y:
+//
+//     source: E[rho_{x,y,p}]
+//     target: section_pullback(PathOut_transport(p),E)
+//
+//   The target transport computes through `functord_laxity_transf` for
+//   `PathOutPi_funcd`; this is shared by the telescope theorem and its derived
+//   Sigma-total presentation.
+//
 // The component projection rule is installed later, after the generic
 // displayed-transfor head `tdapp0_fapp0` is declared.
 constant symbol PathInd_transfd [Z : Cat]
@@ -3052,6 +3066,11 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
 //     (x,E :^n Σ x :^f Z, Catd(PathOut_Z(x))) ->
 //       E[(x,id_x)] -> Π q :^f PathOut_Z(x), E[q]
 //   PathInd_funcd(Z)[(x,E)][u] = path_ind_sec(Z,x,E,u).
+//
+// This is a derived presentation, not the primitive theorem. It is used to
+// inspect the Sigma-style formulation at canonical/cartesian total arrows
+// coming from transport of `(x,E)`. Arbitrary non-cartesian Sigma-arrow
+// naturality is intentionally outside the current milestone.
 symbol PathInd_funcd [Z : Cat]
   : τ (Functord
       (@PathIndSrc_catd Z)
