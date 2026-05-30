@@ -4240,10 +4240,11 @@ symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
 // Faithful surface syntax:
 //   alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
 //
-// This is the functorial operation that Sigma-map action needs. We expose it
-// directly because matching after the `FF[y]` action forces the rule checker to
-// reason through strict functoriality of identities and loses the canonical
-// source-triangle head that downstream rules need.
+// This composite wrapper is retained as a compatibility/convenience surface for
+// consumers that need the whole hom-functor action as a named object. The
+// current Sigma-map normal form below instead uses the standalone
+// `functord_laxity_precomp_func` applied to the stable transported-source
+// fibre-action head.
 symbol functord_laxity_precomp_fibre_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4290,6 +4291,88 @@ rule fapp0
       $alpha
   ↪ @functord_laxity_precomp_fibre_fapp0 $K $E $D $FF $x $y $p $u $v $alpha;
 
+// Standalone precomposition by the displayed laxity component.
+//
+// Mathematical notation:
+//   precompose_by(laxity(FF,p)[u])
+//     : Hom_D[y](FF[y](E[p]u),w) -> Hom_D[y](D[p](FF[x]u),w).
+//
+// Faithful surface syntax:
+//   beta |-> beta o laxity(FF,p)[u].
+symbol functord_laxity_precomp_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (w : τ (Obj (Fibre_cat D y)))
+  : τ (Functor
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_rhs_func FF p) u)
+        w)
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (functord_transport_lhs_func FF p) u)
+        w));
+
+// Stable capped action of `functord_laxity_precomp_func`.
+//
+// Mathematical notation:
+//   precompose_by(laxity(FF,p)[u])[beta].
+//
+// Faithful surface syntax:
+//   beta o laxity(FF,p)[u], in cut-elimination normal form.
+symbol functord_laxity_precomp_fapp0 [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  [w : τ (Obj (Fibre_cat D y))]
+  (beta : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (functord_transport_rhs_func FF p) u)
+      w))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (functord_transport_lhs_func FF p) u)
+      w);
+
+rule fapp0
+      (@functord_laxity_precomp_func $K $E $D $FF $x $y $p $u $w)
+      $beta
+  ↪ @functord_laxity_precomp_fapp0 $K $E $D $FF $x $y $p $u $w $beta;
+
+// Stable transported-source fibre action of a displayed functor component.
+//
+// Mathematical notation:
+//   FF[y][alpha] : FF[y](E[p]u) -> FF[y](v).
+//
+// Faithful surface syntax:
+//   FF[y][alpha], specialized to transported source E[p]u.
+symbol functord_transport_fibre_fapp1_fapp0 [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  [v : τ (Obj (Fibre_cat E y))]
+  (alpha : τ (Hom
+      (Fibre_cat E y)
+      (fapp0 (catd_transport_func E p) u)
+      v))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (Fibre_func FF y) (fapp0 (catd_transport_func E p) u))
+      (fapp0 (Fibre_func FF y) v));
+
+rule @fapp1_fapp0
+      _
+      _
+      (@tapp0_fapp0 $K Cat_cat $E $D $y $FF)
+      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
+      $v
+      $alpha
+  ↪ @functord_transport_fibre_fapp1_fapp0 $K $E $D $FF $x $y $p $u $v $alpha;
+
 // Arrow action of a Sigma map on the canonical Sigma-hom constructor.
 //
 // Surface/formula:
@@ -4323,8 +4406,27 @@ rule @fapp1_fapp0
         $v)
       $p
       (fapp0
-        (@functord_laxity_precomp_fibre_func $K $E $D $η $x $y $p $u $v)
-        $alpha);
+        (@functord_laxity_precomp_func
+          $K
+          $E
+          $D
+          $η
+          $x
+          $y
+          $p
+          $u
+          (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $y $η) $v))
+        (@functord_transport_fibre_fapp1_fapp0
+          $K
+          $E
+          $D
+          $η
+          $x
+          $y
+          $p
+          $u
+          $v
+          $alpha));
 
 // Component-level extraction from the Sigma-total action on canonical
 // transport. Under the lax Sigma action, this fibre component reduces to the
@@ -4644,6 +4746,32 @@ rule fapp0
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
 
+// Standalone-precomposition canonical consumer. The source identity first
+// folds to `homd_id_canonical_triangle`; applying FF[y] to that triangle folds
+// to the stable transported-source action head above.
+rule @functord_laxity_precomp_fapp0
+      $K
+      $E
+      $D
+      $FF
+      $x
+      $y
+      $p
+      $u
+      _
+      (@functord_transport_fibre_fapp1_fapp0
+        $K
+        $E
+        $D
+        $FF
+        $x
+        $y
+        $p
+        $u
+        _
+        (@homd_id_canonical_triangle $K $E $x $y $p $u))
+  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+
 rule @functord_laxity_precomp_fibre_fapp0
       $K
       $E
@@ -4675,6 +4803,31 @@ rule @functord_laxity_fdapp1_cell
 
 // Consumer-local strict Sigma action for representable precomposition on the
 // identity/canonical fibre arrow.
+rule @functord_laxity_precomp_fapp0
+      $Z
+      _
+      _
+      (@Rep_transport_func $Z $x $y $p)
+      $y
+      $z
+      $q
+      (@id $Z $y)
+      _
+      (@functord_transport_fibre_fapp1_fapp0
+        $Z
+        _
+        _
+        (@Rep_transport_func $Z $x $y $p)
+        $y
+        $z
+        $q
+        (@id $Z $y)
+        $q
+        (@id (Hom_cat $Z $y $z) $q))
+  ↪ @id
+      (Hom_cat $Z $x $z)
+      (@comp_fapp0 $Z $x $y $z $q $p);
+
 rule @functord_laxity_precomp_fibre_fapp0
       $Z
       _
@@ -6671,6 +6824,34 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
 
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0
+    (@functord_laxity_precomp_func
+      K
+      E
+      D
+      FF
+      x
+      y
+      p
+      u
+      (fapp0
+        (@tapp0_fapp0 K Cat_cat E D y FF)
+        (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)))
+    (@fapp1_fapp0
+      (Fibre_cat E y)
+      (Fibre_cat D y)
+      (@tapp0_fapp0 K Cat_cat E D y FF)
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
+      (@id
+        (@fapp0 K Cat_cat E y)
+        (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)))
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+
 /*
   End-to-end displayed internal-hom extraction checks.
 
@@ -7108,7 +7289,31 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
           (@tapp0_fapp0 K Cat_cat E D y η)
           v)
         p
-        (@functord_laxity_precomp_fibre_fapp0 K E D η x y p u v alpha);
+        (@functord_laxity_precomp_fapp0
+          K
+          E
+          D
+          η
+          x
+          y
+          p
+          u
+          (@fapp0
+            (Fibre_cat E y)
+            (Fibre_cat D y)
+            (@tapp0_fapp0 K Cat_cat E D y η)
+            v)
+          (@functord_transport_fibre_fapp1_fapp0
+            K
+            E
+            D
+            η
+            x
+            y
+            p
+            u
+            v
+            alpha));
 
 // A Sigma map does not preserve canonical transport strictly for arbitrary
 // displayed functors. The image exposes the displayed laxity component;

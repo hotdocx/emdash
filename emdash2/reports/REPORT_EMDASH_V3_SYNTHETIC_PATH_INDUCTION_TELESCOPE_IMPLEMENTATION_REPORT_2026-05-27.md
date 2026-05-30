@@ -2987,10 +2987,11 @@ structure.
 
 The direct `fapp0(functord_laxity_precomp_func)(FF[y][alpha])` plan below was
 then itself refined by the implementation updates in the following sections.
-The final current surface does not keep `functord_laxity_precomp_func` active;
-it exposes the composite fibre functor
-`functord_laxity_precomp_fibre_func` instead, with
-`functord_laxity_precomp_fibre_fapp0` as its capped action.
+At that intermediate stage, the surface did not keep
+`functord_laxity_precomp_func` active; it exposed the composite fibre functor
+`functord_laxity_precomp_fibre_func` instead. This intermediate decision was
+later superseded by the standalone-precomposition promotion recorded near the
+end of this report.
 
 The reusable SOP for this style is now consolidated in
 `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` under
@@ -3128,10 +3129,11 @@ Completed implementation order for the active follow-up:
    `FF[y]` action, reintroduce a separate `functord_laxity_precomp_func` then,
    with checked folds connecting it to the composite operation.
 
-## 2026-05-30 Latest Active Implementation: Composite Fibre Functor Promoted
+## 2026-05-30 Superseded Implementation: Composite Fibre Functor Promoted
 
-The follow-up plan has now been probed and promoted. This is the latest active
-design for the Sigma-map lax-prefix action.
+The follow-up plan was probed and promoted at this stage, but it is no longer
+the latest active design. It was superseded by the later standalone
+precomposition promotion near the end of this report.
 
 Changes made in `emdash3_2.lp`:
 
@@ -3377,6 +3379,60 @@ The existing `functord_laxity_precomp_fibre_func` can then either be retained
 as the composite functor-level wrapper or deleted/replaced if the standalone
 route covers all downstream uses more transparently.
 
+## 2026-05-30 Implementation Update: Standalone Precomposition Promoted
+
+The standalone-precomposition route above has now been promoted to
+`emdash3_2.lp`.
+
+New active heads:
+
+```text
+functord_laxity_precomp_func(FF,p,u,w)
+  : Hom_D[y](FF[y](E[p]u),w)
+    -> Hom_D[y](D[p](FF[x]u),w)
+
+functord_laxity_precomp_fapp0(FF,p,u,beta)
+  ~= precompose_by(laxity(FF,p)[u])[beta]
+
+functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)
+  ~= FF[y][alpha]
+```
+
+The Sigma-map arrow action now computes through standalone precomposition:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p,
+     fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+```
+
+The canonical total-transport case is covered by a focused consumer rule:
+
+```text
+functord_laxity_precomp_fapp0
+  (FF,p,u,
+   functord_transport_fibre_fapp1_fapp0
+     (FF,p,u,homd_id_canonical_triangle(E,p,u)))
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+The representable/PathOut strict collapse was also ported to the standalone
+surface, so the fixed-x transitivity/rho regression still computes.
+
+The older `functord_laxity_precomp_fibre_func` /
+`functord_laxity_precomp_fibre_fapp0` composite wrapper is retained for now as
+a compatibility/convenience surface, but it is no longer the Sigma-map action's
+primary normal form. A later cleanup can delete it if no downstream theorem
+needs the composite functor as a named object.
+
+Validation:
+
+```bash
+timeout 60s lambdapi check -w emdash3_2.lp
+```
+
 ## Validation
 
 The implementation was probed in a temporary copy before being applied to
@@ -3415,17 +3471,21 @@ git diff --check
 
   ```text
   Sigma(FF)(p,alpha)
-    = (p, fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha).
+    = (p,
+       fapp0
+         (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+         (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
   ```
 
   The current implementation has removed the temporary `sigma_map_fibre_arrow`
-  name and the dangling standalone `functord_laxity_precomp_func`. It now
-  exposes `functord_laxity_precomp_fibre_func(FF,p,u,v)` as the reusable
-  composite fibre operation and uses
-  `functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)` as its capped action.
-  Continue adding focused strict collapses for other known strict constructors
-  only when downstream regressions expose a missing computation. The first
-  representable/pathout collapse is now keyed on `Rep_transport_func`.
+  name and restored standalone `functord_laxity_precomp_func`, plus the stable
+  post-action head `functord_transport_fibre_fapp1_fapp0`. The older composite
+  wrapper `functord_laxity_precomp_fibre_func` remains available but is no
+  longer the primary Sigma-map normal form. Continue adding focused strict
+  collapses for other known strict constructors only when downstream
+  regressions expose a missing computation. The first representable/pathout
+  collapse is now ported to the standalone precomposition surface and keyed on
+  `Rep_transport_func`.
 - Keep ordinary functor/transfor laxness aligned with the non-displayed
   internal hom-action packages:
 

@@ -194,13 +194,26 @@ fapp0
   (FF[y][alpha]).
 ```
 
-However, the active v3.2 implementation does not expose this standalone
-precomposition functor yet. Probes showed that Sigma-map consumers need the
-extra fibre action `FF[y][-]` as part of the reusable operation, because
-matching after that action forces critical identity/canonical-triangle rules to
-reason through strict functoriality.
+The active v3.2 implementation now exposes this standalone precomposition
+functor again, together with a stable transported-source fibre-action head:
 
-The current normal form is therefore the composite fibre functor:
+```text
+functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)
+  ~= FF[y][alpha].
+```
+
+The current Sigma-map normal form is:
+
+```text
+Sigma(FF)(p,alpha)
+  = (p,
+     fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+```
+
+The older composite fibre functor is retained as a compatibility/convenience
+surface for now:
 
 ```text
 functord_laxity_precomp_fibre_func(FF,p,u,v)
@@ -215,29 +228,36 @@ fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
   -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha)
 ```
 
-The semantic raw-composite fold is not active yet. It is the desired next
-connection:
+The semantic raw-composite fold is not active yet:
 
 ```text
 FF[y][alpha] o laxity(FF,p)[u]
-  -> fapp0 (functord_laxity_precomp_fibre_func(FF,p,u,v)) alpha
-  -> functord_laxity_precomp_fibre_fapp0(FF,p,u,alpha).
+  -> fapp0
+       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
+       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)).
 ```
 
 Endpoint-convertibility probes confirm that the middle object
 `FF[y](E[p]u)` joins with `(FF[y] o E[p])(u)`. The remaining issue is rewrite
 rule engineering: a direct `comp_fapp0` rule for this fold currently makes
 Lambdapi's subject-reduction/critical-pair checking search through too much
-composition and projection structure. A better implementation likely needs
-additional stable route-object or transported-source fibre-action heads.
+composition and projection structure. The transported-source fibre-action head
+now exists; any future raw-composite bridge should use an even smaller
+route-object or composition-specific projection surface.
 
 This records the same factorization while keeping the original source arrow
-`alpha` visible to consumer rules. This is the current Sigma-map
-implementation. It avoids making canonical identity/triangle rules match
-through strict functoriality of `FF[y]`.
+`alpha` visible inside the stable post-action head. The canonical identity case
+now computes through:
 
-The deferred standalone head
-`functord_laxity_precomp_func(FF,p,u,w)` would represent precomposition by the
+```text
+id(E[y],E[p]u)
+  -> homd_id_canonical_triangle(E,p,u)
+  -> functord_transport_fibre_fapp1_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
+  -> functord_laxity_fdapp1_cell(FF,p,u).
+```
+
+The active standalone head
+`functord_laxity_precomp_func(FF,p,u,w)` represents precomposition by the
 displayed laxity component alone:
 
 ```text
@@ -270,8 +290,8 @@ g o f
 ```
 
 In that case introduce a stable projection head for the intended normal form and
-add only focused folds after probing. Possible future folds, if the standalone
-precomposition functor is reintroduced, include:
+add only focused folds after probing. Possible future folds around the active
+standalone precomposition head include:
 
 ```text
 hom_precomp_func(laxity(FF,p)[u])
