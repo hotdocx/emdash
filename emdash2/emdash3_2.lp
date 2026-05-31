@@ -1240,6 +1240,20 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (f : τ (Hom A X Y)),
   τ (Hom B (fapp0 F X) (fapp0 G Y));
 
+rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
+  ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;
+
+rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
+  ↪ @tapp1_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta) $p;
+
+assert [X A B : Cat]
+  (F G : τ (Functor X (Product_cat A B)))
+  (eta : τ (@Transf X (Product_cat A B) F G))
+  (i j : τ (Obj X))
+  (p : τ (Hom X i j)) ⊢
+  sigma_Fst (@tapp1_fapp0 X (Product_cat A B) F G i j eta p)
+    ≡ @tapp1_fapp0 X A (sigma_Fst F) (sigma_Fst G) i j (sigma_Fst eta) p;
+
 // Strict naturality for off-diagonal ordinary transfor components, oriented as
 // cut elimination.
 //
