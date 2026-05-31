@@ -13,6 +13,8 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`:
   active consolidated synthetic/telescope path-induction plan and status for
   v3.2.
+- `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`:
+  active consolidated Pi-alias and Sigma projection-pullback status for v3.2.
 - Older path-induction plan/report files are superseded historical context and
   are no longer the forward plan.
 - `lambdapi.pkg`: package config for Lambdapi.

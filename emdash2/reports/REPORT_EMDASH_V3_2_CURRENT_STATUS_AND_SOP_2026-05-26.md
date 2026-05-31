@@ -12,9 +12,13 @@ path-induction work.
 - Active implementation: `emdash3_2.lp`.
 - Current synthetic/telescope path-induction plan and implementation status:
   `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`.
+- Current Pi-alias and Sigma projection-pullback status:
+  `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`.
 - The older synthetic/telescope path-induction plan and implementation report
   from 2026-05-27 are superseded by that consolidated report and are no longer
   forward guidance.
+- The older Pi-alias/Sigma-projection plan and implementation report from
+  2026-05-25 are superseded by the Pi/Sigma consolidated status report.
 - Superseded internalized-path reports remain useful as historical
   implementation records, but they are no longer the forward plan.
 - This report records repository-level SOP and retirement guidance.
