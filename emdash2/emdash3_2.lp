@@ -3667,21 +3667,14 @@ rule fapp0 (@homd_tgt_func $Z $D $E $FF $x $u $y) $v
 // -------------------------------------------------------------------------------------------------
 
 /*
-  Full section action over a base arrow.
+  Section action source endpoint.
 
   Mathematical notation:
-    s[x]                      = piapp0 s x
-    s[f]                      = piapp1_fapp0 s f : E(f)(s[x]) → s[y]
-    piapp1_func(s,x,y)[f]     = s[f]
-    piapp1_src_obj(s,f)       = E(f)(s[x])
+    s[x]                = piapp0 s x
+    piapp1_src_obj(s,f) = E(f)(s[x]).
 
-  `piapp1_func` is the section-level package over the base-arrow category.
-  The capped object component is defined by ordinary section evaluation, so it
-  remains iterable through `Pi_cat` rather than becoming only an object-level
-  shortcut. `piapp1_src_obj` names the reduced source endpoint of that component;
-  `piapp1_fapp0` uses it in its displayed hom type. The terminal-specialization
-  fold from displayed internal action is installed after the displayed component
-  projections, where the stable `tdapp0_fapp0` head is available.
+  The full `piapp1_func`/`piapp1_fapp0` package is defined after the displayed
+  internal-hom projection heads it unfolds through.
 */
 symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -3689,36 +3682,6 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   (f : τ (Hom K x y))
   : τ (Obj (Fibre_cat E y))
 ≔ fapp0 (@fib_cov_tapp0_func K E x y (@piapp0 K E s x)) f;
-
-// Section action over a hom object.
-//
-// Surface/formula:
-//   piapp1_func(s,x,y)[f] = s[f].
-symbol piapp1_func [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  (x y : τ (Obj K))
-  : τ (Obj (Pi_cat
-      (homd_
-        (@id_funcd K E)
-        x (@piapp0 K E s x)
-        y (@piapp0 K E s y))));
-
-// Capped section action over a base arrow.
-//
-// Surface/formula:
-//   piapp1_fapp0(s,f) = s[f] : E[f](s[x]) -> s[y].
-symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
-  (s : τ (Obj (Pi_cat E)))
-  [x y : τ (Obj K)]
-  (f : τ (Hom K x y))
-  : τ (Hom
-      (Fibre_cat E y)
-      (@piapp1_src_obj K E s x y f)
-      (@piapp0 K E s y))
-≔ piapp0 (@piapp1_func K E s x y) f;
-
-rule fapp0 (@piapp1_func $K (@Const_catd $K $A) $s $x $y) $f
-  ↪ @fapp1_fapp0 $K $A $s $x $y $f;
 
 // -------------------------------------------------------------------------------------------------
 // 13. Internal displayed hom-action heads
@@ -4642,6 +4605,57 @@ rule @fapp1_fapp0
       (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
   ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
 
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $p
+      (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
+  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
+
+/*
+  Full section action over a base arrow.
+
+  Mathematical notation:
+    s[f]                  = piapp1_fapp0 s f : E(f)(s[x]) → s[y]
+    piapp1_func(s,x,y)[f] = s[f].
+
+  The section action is the terminal-source specialization of the displayed
+  internal hom action, projected to the presheaf arrow level.
+*/
+symbol piapp1_func [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  : τ (Obj (Pi_cat
+      (homd_
+        (@id_funcd K E)
+        x (@piapp0 K E s x)
+        y (@piapp0 K E s y))))
+≔ @functord_laxity_fdapp1_presheaf_arrow
+    K
+    (@Const_catd K Terminal_cat)
+    E
+    s
+    x
+    Terminal_obj
+    y
+    Terminal_obj;
+
+// Capped section action over a base arrow.
+//
+// Surface/formula:
+//   piapp1_fapp0(s,f) = s[f] : E[f](s[x]) -> s[y].
+symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y))
+  : τ (Hom
+      (Fibre_cat E y)
+      (@piapp1_src_obj K E s x y f)
+      (@piapp0 K E s y))
+≔ piapp0 (@piapp1_func K E s x y) f;
+
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable component-level displayed laxity normal form.
 // The concrete transported-object identity first folds to the stable
@@ -4694,10 +4708,54 @@ rule @id
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
   ↪ @homd_id_canonical_triangle $K $E $x $y $p $u;
 
+rule @homd_id_canonical_triangle
+      $K
+      (@Const_catd $K Terminal_cat)
+      $x
+      $y
+      $p
+      Terminal_obj
+  ↪ Terminal_obj;
+
 rule fapp0
       (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u _)
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
   ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+
+rule @fapp0
+      Terminal_cat
+      _
+      (@functord_laxity_fdapp1_hom_func
+        $K
+        (@Const_catd $K Terminal_cat)
+        $D
+        $FF
+        $x
+        $y
+        $p
+        Terminal_obj
+        Terminal_obj)
+      Terminal_obj
+  ↪ @functord_laxity_fdapp1_cell
+      $K
+      (@Const_catd $K Terminal_cat)
+      $D
+      $FF
+      $x
+      $y
+      $p
+      Terminal_obj;
+
+rule @functord_laxity_fdapp1_cell
+      $K
+      (@Const_catd $K Terminal_cat)
+      (@Const_catd $K $A)
+      $s
+      $x
+      $y
+      $p
+      Terminal_obj
+  ↪ @fapp1_fapp0 $K $A $s $x $y $p;
 
 // Standalone-precomposition canonical consumer. The source identity first
 // folds to `homd_id_canonical_triangle`; applying FF[y] to that triangle folds
