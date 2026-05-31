@@ -237,7 +237,7 @@ PathIndTgt_transport(p,E)
 The target transport computes through Pi laxity:
 
 ```text
-functord_laxity_transf(PathOutPi_funcd(Z),p)[E]
+functord_laxity_fdapp1_cell(PathOutPi_funcd(Z),p,E)
   -> PathIndTgt_transport_func(p,E)
   -> section_pullback_func(PathOut_transport_func(p),E).
 ```
@@ -397,19 +397,19 @@ section_pullback_transf(F)
   : Pi_func(B) => Pi_func(A) o Pullback_catd_func(F).
 ```
 
-The displayed laxity projections are installed:
+Pi pullback/section pullback remains available as a whole ordinary transfor:
 
 ```text
-functord_laxity_transf(Pi_int_funcd,F)
-  -> section_pullback_transf(F)
-
-functord_laxity_transf(Pi_pullback_funcd(G),p)
-  -> section_pullback_transf(G[p]).
+section_pullback_transf(F)[E] = section_pullback_func(F,E).
 ```
 
-Components compute through:
+The displayed Pi-laxity computations are currently installed at the component
+level:
 
 ```text
+functord_laxity_fdapp1_cell(Pi_int_funcd,F,E)
+  -> section_pullback_func(F,E)
+
 functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
   -> section_pullback_func(G[p],E).
 ```
@@ -432,21 +432,16 @@ functord_transport_lhs_func(FF,p) = D[p] o FF[x]
 functord_transport_rhs_func(FF,p) = FF[y] o E[p].
 ```
 
-The public laxity interface is:
+The active component-level laxity interface is:
 
 ```text
-functord_laxity_transf(FF,p)
-  : D[p] o FF[x] => FF[y] o E[p].
+functord_laxity_fdapp1_cell(FF,p,u)
+  : D[p](FF[x](u)) -> FF[y](E[p](u)).
 ```
 
-Its component normal form is:
-
-```text
-functord_laxity_transf(FF,p)[u]
-  -> functord_laxity_fdapp1_cell(FF,p,u).
-```
-
-The non-circular source of this cell is the internal displayed hom-action:
+A whole-transfor laxity interface is deliberately deferred until the source
+object `u` can be internalized cleanly. The non-circular source of the active
+cell is the internal displayed hom-action:
 
 ```text
 fdapp1_int_transfd(FF)
@@ -580,10 +575,11 @@ alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
    Do not extract laxity from `Sigma(FF)` if `Sigma(FF)` already uses that
    laxity.
 
-7. Pi target transport is a laxity specialization.
+7. Pi target transport is a component-level laxity specialization.
 
-   `PathIndTgt_transport` comes from `functord_laxity_transf(PathOutPi_funcd,p)`
-   and ultimately from Pi pullback/section pullback.
+   `PathIndTgt_transport` comes from
+   `functord_laxity_fdapp1_cell(PathOutPi_funcd,p,E)` and ultimately from Pi
+   pullback/section pullback.
 
 8. The active Sigma-map action is lax-prefix standalone precomposition.
 
@@ -680,11 +676,10 @@ on the transparent `Sigma_catd_transport_func` alias.
 ### Phase 3: Improve Laxity Extraction Without Circularity
 
 The component bridge from `fdapp1_int_transfd(FF)` to
-`functord_laxity_transf(FF,p)[u]` is checked. A fuller future cleanup may
-derive more of the whole `functord_laxity_transf(FF,p)` interface from the
-internal hom-action path. Until that is stable, keep
-`functord_laxity_transf` as the public stable interface and keep
-`functord_laxity_fdapp1_cell` as the component normal form.
+`functord_laxity_fdapp1_cell(FF,p,u)` is checked. A future cleanup may add a
+whole-transfor laxity interface derived from the internal hom-action path, but
+only after the source object `u` can be internalized without making the current
+component computation misleading.
 
 ### Phase 4: Add Strict Collapses Locally
 

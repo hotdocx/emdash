@@ -208,11 +208,13 @@ section_pullback_transf(F)[E] = section_pullback_func(F,E).
 For varying bases:
 
 ```text
-functord_laxity_transf(Pi_pullback_funcd(G),p)
-  -> section_pullback_transf(G[p]).
+functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+  -> section_pullback_func(G[p],E).
 ```
 
-This is now the path-induction target-transport source of truth.
+This component-level rule is now the path-induction target-transport source of
+truth. The whole displayed-laxity transfor interface is deferred until the
+source object can be internalized cleanly.
 
 ### Sigma Projection Pullback
 
@@ -521,4 +523,3 @@ After this report is accepted:
    a constant future construction; that has been superseded by Sigma transport.
 5. Do not resurrect `piapp1_int_*` or primitive `Pi_cat` unless a future
    focused probe demonstrates a new, concrete need.
-
