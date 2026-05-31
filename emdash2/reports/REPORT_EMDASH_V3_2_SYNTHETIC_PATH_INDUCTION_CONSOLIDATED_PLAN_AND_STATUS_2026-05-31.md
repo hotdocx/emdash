@@ -64,6 +64,18 @@ PathInd_funcd(Z)[(x,CompMotive_Z(x))](id)[(y,p)][z](q)
   -> q o p.
 ```
 
+The telescoped/internal composition package supporting this benchmark is:
+
+```text
+comp_func_tele(A,x,y,z)
+  : Hom_A(y,z) -> (Hom_A(x,y) -> Hom_A(x,z))
+
+comp_func_tele(A,x,y,z)[g][f] = g o f.
+```
+
+This is the current omega-friendly composition packaging. Do not replace it
+with the older v2 product-based composition package as the first move.
+
 The canonical path-out arrow is not axiomatic:
 
 ```text
@@ -585,7 +597,20 @@ alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
    Exposing full `fapp1_func(sigma_map_func FF)` as a functor between Sigma
    hom-categories remains future work.
 
-10. Strictness is currently partly global and partly local.
+10. Ordinary functor/transfor laxity follows the same internal-action pattern.
+
+    Ordinary functoriality and naturality laxity should be exposed through the
+    non-displayed internal hom-action packages:
+
+    ```text
+    fapp1_int_transf(F)
+    tapp1_int_fapp0_transf(eta)
+    ```
+
+    The terminal-base encoding is useful as a comparison, but it is not by
+    itself the foundational source of ordinary laxity.
+
+11. Strictness is currently partly global and partly local.
 
     Global strict functoriality and ordinary naturality rules still exist in
     `emdash3_2.lp`. Known strict constructors such as representable transport
@@ -607,6 +632,10 @@ Keep these rules for future implementation turns:
 - Do not add rules on transparent aliases such as `Sigma_catd_transport_func`
   merely because the alias is readable. Match the lower stable action head
   when a computation really must be exposed.
+- Do not globally reverse `comp_cat_fapp0` or other central composition
+  orientation rules to force one theorem. Prefer focused precomposition or
+  postcomposition heads in the local cut-elimination direction needed by the
+  theorem.
 - Treat `unif_rule` as elaboration/unification guidance, not as computation.
   It should not replace a missing conversion rule.
 - Preserve provenance when it is computationally useful. For example, the
@@ -760,4 +789,3 @@ After this file is accepted:
    ```
 
    They were useful probes but are not current architecture.
-
