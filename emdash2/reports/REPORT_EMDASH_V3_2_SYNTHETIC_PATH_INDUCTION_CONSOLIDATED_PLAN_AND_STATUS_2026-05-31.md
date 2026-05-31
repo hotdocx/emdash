@@ -440,8 +440,22 @@ functord_laxity_fdapp1_cell(FF,p,u)
 ```
 
 A whole-transfor laxity interface is deliberately deferred until the source
-object `u` can be internalized cleanly. The non-circular source of the active
-cell is the internal displayed hom-action:
+object `u` can be internalized cleanly. The intended declaration is preserved
+as design guidance, but it is not a live symbol in `emdash3_2.lp`:
+
+```text
+symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@Transf
+      (Fibre_cat E x)
+      (Fibre_cat D y)
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+```
+
+The non-circular source of the active cell is the internal displayed hom-action:
 
 ```text
 fdapp1_int_transfd(FF)
@@ -679,7 +693,8 @@ The component bridge from `fdapp1_int_transfd(FF)` to
 `functord_laxity_fdapp1_cell(FF,p,u)` is checked. A future cleanup may add a
 whole-transfor laxity interface derived from the internal hom-action path, but
 only after the source object `u` can be internalized without making the current
-component computation misleading.
+component computation misleading. Until then, the whole-transfor declaration is
+documentation only, not an active interface.
 
 ### Phase 4: Add Strict Collapses Locally
 

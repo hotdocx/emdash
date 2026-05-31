@@ -4228,6 +4228,32 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
 
+/*
+  Deferred whole-transfor displayed laxity interface.
+
+  Intended future surface:
+
+    functord_laxity_transf(FF,p)
+      : D[p] o FF[x] => FF[y] o E[p].
+
+  Intended declaration, deliberately not active yet:
+
+    symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
+      (FF : τ (Functord E D))
+      [x y : τ (Obj K)]
+      (p : τ (Hom K x y))
+      : τ (@Transf
+          (Fibre_cat E x)
+          (Fibre_cat D y)
+          (@functord_transport_lhs_func K E D FF x y p)
+          (@functord_transport_rhs_func K E D FF x y p));
+
+  The active implementation stops at the component-level cell
+  `functord_laxity_fdapp1_cell(FF,p,u)`. Reintroduce the live symbol only after
+  the `fdapp1_int_transfd` extraction internalizes `u` cleanly enough to support
+  the whole `Transf` computationally.
+*/
+
 // Standalone precomposition by the displayed laxity component.
 //
 // Mathematical notation:
