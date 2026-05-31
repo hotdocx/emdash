@@ -4675,7 +4675,7 @@ symbol functord_laxity_fdapp1_cell [K : Cat] [E D : τ (Catd K)]
 // and `id_funcd`: it names the canonical/cartesian triangle. The rewrite below
 // folds only the primitive projection normal form `id_{E[p](u)}` to this head,
 // not arbitrary identities in arbitrary fibre categories.
-constant symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
+injective symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
