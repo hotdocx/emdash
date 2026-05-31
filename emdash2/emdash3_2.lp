@@ -894,12 +894,17 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
     Hom_{A x B}((x,u),(y,v))      = Hom_A(x,y) x Hom_B(u,v)
     id_{(x,u)}                    = (id_x,id_u)
     (g1,g2) o (f1,f2)             = (g1 o f1, g2 o f2)
+    X -> (A x B)                  = (X -> A) x (X -> B)
 
-  This is the ordinary/non-dependent warm-up for later dependent
-  Sigma-total/comprehension uncurrying. Keep it small until the normal forms
-  are stable in v3.2.
+  Product-valued functors are represented by the product normal form above.
+  Projection computation is attached to stable projection functor heads and to
+  `sigma_Fst`/`sigma_Snd` consumer rules. Avoid a broad eta rule expanding
+  arbitrary `fapp0 H i`; use the narrower paired-head rules below.
 */
 injective symbol Product_cat : Π (A B : Cat), Cat;
+
+rule Functor_cat $X (Product_cat $A $B)
+  ↪ Product_cat (Functor_cat $X $A) (Functor_cat $X $B);
 
 rule Obj (Product_cat $A $B)
   ↪ @Σ_ (Obj $A) (λ _ : τ (Obj $A), Obj $B);
@@ -920,10 +925,65 @@ injective symbol Product_pair [A B : Cat]
   : τ (Obj (Product_cat A B))
 ≔ @Struct_sigma (Obj A) (λ _ : τ (Obj A), Obj B) x y;
 
+injective symbol productproj1 [A B : Cat]
+  : τ (Functor (Product_cat A B) A);
+
+injective symbol productproj2 [A B : Cat]
+  : τ (Functor (Product_cat A B) B);
+
+// The identity functor of a product is the paired projection functor.
+rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @productproj1 $A $B;
+rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @productproj2 $A $B;
+
+rule @fapp0 (Product_cat $A $B) $A (@productproj1 $A $B) $p
+  ↪ sigma_Fst $p;
+
+rule @fapp0 (Product_cat $A $B) $B (@productproj2 $A $B) $p
+  ↪ sigma_Snd $p;
+
+// Projection of a paired functor application.
+rule sigma_Fst (@fapp0 $X (Product_cat $A $B) $H $i)
+  ↪ @fapp0 $X $A (sigma_Fst $H) $i;
+
+rule sigma_Snd (@fapp0 $X (Product_cat $A $B) $H $i)
+  ↪ @fapp0 $X $B (sigma_Snd $H) $i;
+
+// Application and hom-action for an explicitly paired functor.
+rule @fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i
+  ↪ Struct_sigma
+      (@fapp0 $X $A $F $i)
+      (@fapp0 $X $B $G $i);
+
 rule Hom_cat (Product_cat $A $B) $p $q
   ↪ Product_cat
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
+
+rule @fapp1_func $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j
+  ↪ Struct_sigma
+      (@fapp1_func $X $A $F $i $j)
+      (@fapp1_func $X $B $G $i $j);
+
+rule @fapp1_fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j $p
+  ↪ Struct_sigma
+      (@fapp1_fapp0 $X $A $F $i $j $p)
+      (@fapp1_fapp0 $X $B $G $i $j $p);
+
+rule @fapp1_func (Product_cat $A $B) $A (@productproj1 $A $B) $p $q
+  ↪ @productproj1
+      (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
+      (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
+
+rule @fapp1_func (Product_cat $A $B) $B (@productproj2 $A $B) $p $q
+  ↪ @productproj2
+      (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
+      (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
+
+rule @fapp1_fapp0 (Product_cat $A $B) $A (@productproj1 $A $B) $p $q $h
+  ↪ sigma_Fst $h;
+
+rule @fapp1_fapp0 (Product_cat $A $B) $B (@productproj2 $A $B) $p $q $h
+  ↪ sigma_Snd $h;
 
 rule @id (Product_cat $A $B) (Struct_sigma $x $u)
   ↪ Struct_sigma (@id $A $x) (@id $B $u);
@@ -938,46 +998,6 @@ rule @comp_fapp0
   ↪ Struct_sigma
       (@comp_fapp0 $A $x $y $z $g1 $f1)
       (@comp_fapp0 $B $u $v $w $g2 $f2);
-
-// Universal-property view at object/action level: a functor into a product is
-// equivalent to a pair of functors. This is intentionally just the ordinary
-// product warm-up; transfor-level product rules can be added later when needed.
-symbol Product_projL_func [A B I : Cat]
-  (H : τ (Functor I (Product_cat A B)))
-  : τ (Functor I A);
-
-symbol Product_projR_func [A B I : Cat]
-  (H : τ (Functor I (Product_cat A B)))
-  : τ (Functor I B);
-
-injective symbol Product_pair_func [A B I : Cat]
-  (F : τ (Functor I A)) (G : τ (Functor I B))
-  : τ (Functor I (Product_cat A B));
-
-rule Product_projL_func (Product_pair_func $F $G) ↪ $F
-with Product_projR_func (Product_pair_func $F $G) ↪ $G;
-
-rule Product_pair_func (Product_projL_func $H) (Product_projR_func $H) ↪ $H;
-
-rule fapp0 (Product_pair_func $F $G) $i
-  ↪ Struct_sigma (fapp0 $F $i) (fapp0 $G $i);
-
-rule fapp0 (Product_projL_func $H) $i
-  ↪ sigma_Fst (fapp0 $H $i);
-
-rule fapp0 (Product_projR_func $H) $i
-  ↪ sigma_Snd (fapp0 $H $i);
-
-rule @fapp1_func _ _ (Product_pair_func $F $G) $i $j
-  ↪ Product_pair_func
-      (@fapp1_func _ _ $F $i $j)
-      (@fapp1_func _ _ $G $i $j);
-
-rule @fapp1_func _ _ (Product_projL_func $H) $i $j
-  ↪ Product_projL_func (@fapp1_func _ _ $H $i $j);
-
-rule @fapp1_func _ _ (Product_projR_func $H) $i $j
-  ↪ Product_projR_func (@fapp1_func _ _ $H $i $j);
 
 assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
   @Product_projL A B (@Product_pair A B x u) ≡ x;
@@ -1024,7 +1044,13 @@ assert [A B I : Cat]
   (F : τ (Functor I A))
   (G : τ (Functor I B))
   (i : τ (Obj I)) ⊢
-  @fapp0 I (Product_cat A B) (@Product_pair_func A B I F G) i
+  @fapp0 I (Product_cat A B)
+    (@Struct_sigma
+      (Obj (Functor_cat I A))
+      (λ _ : τ (Obj (Functor_cat I A)), Obj (Functor_cat I B))
+      F
+      G)
+    i
     ≡ @Struct_sigma
         (Obj A)
         (λ _ : τ (Obj A), Obj B)
@@ -1035,13 +1061,45 @@ assert [A B I : Cat]
   (F : τ (Functor I A))
   (G : τ (Functor I B))
   (i j : τ (Obj I)) ⊢
-  @fapp1_func I (Product_cat A B) (@Product_pair_func A B I F G) i j
-    ≡ @Product_pair_func
-        (Hom_cat A (@fapp0 I A F i) (@fapp0 I A F j))
-        (Hom_cat B (@fapp0 I B G i) (@fapp0 I B G j))
-        (Hom_cat I i j)
+  @fapp1_func I (Product_cat A B)
+    (@Struct_sigma
+      (Obj (Functor_cat I A))
+      (λ _ : τ (Obj (Functor_cat I A)), Obj (Functor_cat I B))
+      F
+      G)
+    i
+    j
+    ≡ @Struct_sigma
+        (Obj (Functor_cat
+          (Hom_cat I i j)
+          (Hom_cat A (@fapp0 I A F i) (@fapp0 I A F j))))
+        (λ _ : τ (Obj (Functor_cat
+          (Hom_cat I i j)
+          (Hom_cat A (@fapp0 I A F i) (@fapp0 I A F j)))),
+          Obj (Functor_cat
+            (Hom_cat I i j)
+            (Hom_cat B (@fapp0 I B G i) (@fapp0 I B G j))))
         (@fapp1_func I A F i j)
         (@fapp1_func I B G i j);
+
+assert [A B : Cat]
+  (p q : τ (Obj (Product_cat A B))) ⊢
+  @fapp1_func (Product_cat A B) A (@productproj1 A B) p q
+    ≡ @productproj1
+        (Hom_cat A (sigma_Fst p) (sigma_Fst q))
+        (Hom_cat B (sigma_Snd p) (sigma_Snd q));
+
+assert [A B : Cat]
+  (p q : τ (Obj (Product_cat A B)))
+  (h : τ (Hom (Product_cat A B) p q)) ⊢
+  @fapp1_fapp0 (Product_cat A B) A (@productproj1 A B) p q h
+    ≡ sigma_Fst h;
+
+assert [I A B : Cat]
+  (H : τ (Functor I (Product_cat A B)))
+  (i : τ (Obj I)) ⊢
+  sigma_Fst (@fapp0 I (Product_cat A B) H i)
+    ≡ @fapp0 I A (sigma_Fst H) i;
 
 // -------------------------------------------------------------------------------------------------
 // 5. Ordinary transfors
@@ -1071,6 +1129,11 @@ unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
 
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
+
+rule @Transf_cat $X (Product_cat $A $B) $F $G
+  ↪ Product_cat
+      (@Transf_cat $X $A (sigma_Fst $F) (sigma_Fst $G))
+      (@Transf_cat $X $B (sigma_Snd $F) (sigma_Snd $G));
 
 /*
   Cat-valued transfors reduce to displayed functors.
@@ -1106,6 +1169,19 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
 */
 rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
   ↪ @tapp0_fapp0 $A $B $F $G $Y $ϵ;
+
+rule sigma_Fst (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
+  ↪ @tapp0_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i (sigma_Fst $eta);
+
+rule sigma_Snd (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
+  ↪ @tapp0_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i (sigma_Snd $eta);
+
+assert [X A B : Cat]
+  (F G : τ (Functor X (Product_cat A B)))
+  (eta : τ (@Transf X (Product_cat A B) F G))
+  (i : τ (Obj X)) ⊢
+  sigma_Fst (@tapp0_fapp0 X (Product_cat A B) F G i eta)
+    ≡ @tapp0_fapp0 X A (sigma_Fst F) (sigma_Fst G) i (sigma_Fst eta);
 
 // Hom-action of evaluation-at-an-object is component projection.
 rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
