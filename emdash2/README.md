@@ -10,12 +10,11 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
   v3.2 status and rewrite/debugging SOP.
-- `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_PLAN_2026-05-27.md`:
-  active synthetic/telescope path-induction plan for v3.2.
-- `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_PLAN.md` and
-  `reports/REPORT_EMDASH_V3_INTERNALIZED_PATH_INDUCTION_IMPLEMENTATION_REPORT_2026-05-26.md`:
-  superseded internalized path-induction plan and implementation log, useful as
-  historical context but no longer the forward plan.
+- `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`:
+  active consolidated synthetic/telescope path-induction plan and status for
+  v3.2.
+- Older path-induction plan/report files are superseded historical context and
+  are no longer the forward plan.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.

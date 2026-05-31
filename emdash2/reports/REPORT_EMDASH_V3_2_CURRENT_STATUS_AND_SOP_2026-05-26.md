@@ -10,10 +10,11 @@ path-induction work.
 ## Current Source Of Truth
 
 - Active implementation: `emdash3_2.lp`.
-- Current theory/design guide:
-  `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_PLAN_2026-05-27.md`.
-- Current implementation status:
-  `reports/REPORT_EMDASH_V3_SYNTHETIC_PATH_INDUCTION_TELESCOPE_IMPLEMENTATION_REPORT_2026-05-27.md`.
+- Current synthetic/telescope path-induction plan and implementation status:
+  `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`.
+- The older synthetic/telescope path-induction plan and implementation report
+  from 2026-05-27 are superseded by that consolidated report and are no longer
+  forward guidance.
 - Superseded internalized-path reports remain useful as historical
   implementation records, but they are no longer the forward plan.
 - This report records repository-level SOP and retirement guidance.
