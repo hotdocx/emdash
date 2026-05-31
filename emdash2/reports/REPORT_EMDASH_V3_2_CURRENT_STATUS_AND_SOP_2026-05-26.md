@@ -38,6 +38,12 @@ Retired historical references:
   `Functor_cat K Cat_cat`;
 - strict functoriality rules for ordinary functors, oriented as
   cut-elimination (`F[g] o F[f]` folds to `F[g o f]`);
+- ordinary binary products with the product-valued functor normal form
+  `Functor_cat X (Product_cat A B)` to
+  `Product_cat (Functor_cat X A) (Functor_cat X B)`, stable projection
+  functors `Product_projL_func`/`Product_projR_func`, and
+  projection-oriented computation for `fapp0`, `fapp1_func`, `fapp1_fapp0`,
+  `tapp0_fapp0`, and `tapp1_fapp0`;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

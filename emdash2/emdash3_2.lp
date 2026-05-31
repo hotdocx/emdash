@@ -925,20 +925,20 @@ injective symbol Product_pair [A B : Cat]
   : τ (Obj (Product_cat A B))
 ≔ @Struct_sigma (Obj A) (λ _ : τ (Obj A), Obj B) x y;
 
-injective symbol productproj1 [A B : Cat]
+injective symbol Product_projL_func [A B : Cat]
   : τ (Functor (Product_cat A B) A);
 
-injective symbol productproj2 [A B : Cat]
+injective symbol Product_projR_func [A B : Cat]
   : τ (Functor (Product_cat A B) B);
 
 // The identity functor of a product is the paired projection functor.
-rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @productproj1 $A $B;
-rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @productproj2 $A $B;
+rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
+rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
 
-rule @fapp0 (Product_cat $A $B) $A (@productproj1 $A $B) $p
+rule @fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p
   ↪ sigma_Fst $p;
 
-rule @fapp0 (Product_cat $A $B) $B (@productproj2 $A $B) $p
+rule @fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p
   ↪ sigma_Snd $p;
 
 // Projection of a paired functor application.
@@ -969,20 +969,20 @@ rule @fapp1_fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j $p
       (@fapp1_fapp0 $X $A $F $i $j $p)
       (@fapp1_fapp0 $X $B $G $i $j $p);
 
-rule @fapp1_func (Product_cat $A $B) $A (@productproj1 $A $B) $p $q
-  ↪ @productproj1
+rule @fapp1_func (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q
+  ↪ @Product_projL_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
-rule @fapp1_func (Product_cat $A $B) $B (@productproj2 $A $B) $p $q
-  ↪ @productproj2
+rule @fapp1_func (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q
+  ↪ @Product_projR_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
-rule @fapp1_fapp0 (Product_cat $A $B) $A (@productproj1 $A $B) $p $q $h
+rule @fapp1_fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q $h
   ↪ sigma_Fst $h;
 
-rule @fapp1_fapp0 (Product_cat $A $B) $B (@productproj2 $A $B) $p $q $h
+rule @fapp1_fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
 rule @id (Product_cat $A $B) (Struct_sigma $x $u)
@@ -1084,15 +1084,15 @@ assert [A B I : Cat]
 
 assert [A B : Cat]
   (p q : τ (Obj (Product_cat A B))) ⊢
-  @fapp1_func (Product_cat A B) A (@productproj1 A B) p q
-    ≡ @productproj1
+  @fapp1_func (Product_cat A B) A (@Product_projL_func A B) p q
+    ≡ @Product_projL_func
         (Hom_cat A (sigma_Fst p) (sigma_Fst q))
         (Hom_cat B (sigma_Snd p) (sigma_Snd q));
 
 assert [A B : Cat]
   (p q : τ (Obj (Product_cat A B)))
   (h : τ (Hom (Product_cat A B) p q)) ⊢
-  @fapp1_fapp0 (Product_cat A B) A (@productproj1 A B) p q h
+  @fapp1_fapp0 (Product_cat A B) A (@Product_projL_func A B) p q h
     ≡ sigma_Fst h;
 
 assert [I A B : Cat]

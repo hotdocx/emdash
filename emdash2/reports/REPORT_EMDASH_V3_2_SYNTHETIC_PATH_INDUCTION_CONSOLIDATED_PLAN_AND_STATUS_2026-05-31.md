@@ -361,16 +361,33 @@ Obj(A x B) = Obj(A) x Obj(B)
 Hom_{A x B}((x,u),(y,v)) = Hom_A(x,y) x Hom_B(u,v).
 ```
 
-The file includes product projections, pairing, and ordinary curry/uncurry
-beta/action laws:
+Product-valued functors now reduce to product categories:
+
+```text
+Functor_cat X (Product_cat A B)
+  -> Product_cat (Functor_cat X A) (Functor_cat X B).
+```
+
+The projection functors are the stable heads:
+
+```text
+Product_projL_func(A,B) : A x B -> A
+Product_projR_func(A,B) : A x B -> B.
+```
+
+The file includes product object projections, object pairing, projection
+functor computation, product-transfor decomposition, projection rules for
+`tapp0_fapp0` and `tapp1_fapp0`, and ordinary curry/uncurry beta/action laws:
 
 ```text
 curry(F)[x][y] = F[(x,y)]
 uncurry(G)[(x,y)] = G[x][y].
 ```
 
-This is not yet a full Product/Functor adjunction package. Adjunction-style
-coherence remains deferred until a downstream theorem needs it.
+This is still not a full Product/Functor adjunction package. The current
+normal form makes product pairing silent at the category level, but
+adjunction-style coherence remains deferred until a downstream theorem needs
+it.
 
 Constant-family Sigma now reduces directly:
 

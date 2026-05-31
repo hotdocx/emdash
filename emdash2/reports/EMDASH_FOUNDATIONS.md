@@ -252,6 +252,27 @@ The product projections have the expected readings:
 π₂ : K × A → A
 ```
 
+Product-valued functors now use the product normal form:
+
+```text
+Functor(X, A × B) = Functor(X,A) × Functor(X,B)
+```
+
+The projection functors are stable computational heads:
+
+```text
+Product_projL_func(A,B) : A × B → A
+Product_projR_func(A,B) : A × B → B
+```
+
+Projection computation is consumer-oriented:
+
+```text
+π₁(H[i]) = (π₁ H)[i]
+π₁(eta[i]) = (π₁ eta)[i]
+π₁(eta[p]) = (π₁ eta)[p]
+```
+
 and homs reduce pointwise:
 
 ```text
@@ -628,7 +649,8 @@ The current foundations intentionally do not yet include:
 - Full coherence APIs for every Sigma/Pi helper.
 - A named `section_total(s) : K → Σ_K E` construction and its projection laws.
 - Full product/functor adjunction coherence for `Product_cat`, beyond the
-  current product normal forms and functor-level curry/uncurry action laws.
+  current product normal form, projection computation, and functor-level
+  curry/uncurry action laws.
 - General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
   functors.
 
@@ -683,7 +705,8 @@ vocabulary.
 | Sigma-total path induction | `PathInd_funcd Z` |
 | `section_total(s)` | future presentation-level facade; not currently named |
 | `K × A` | `Product_cat K A`; also the normal form of `Sigma_cat(Const_catd K A)` |
-| `π₂ : K × A → A` | product projection via `Product_projR_func` |
+| `π₁ : K × A → K` | `Product_projL_func K A` |
+| `π₂ : K × A → A` | `Product_projR_func K A` |
 
 The implementation contains additional projection heads to make Lambdapi
 normalization reliable. They are part of the checked kernel engineering, not
