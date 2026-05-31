@@ -151,6 +151,43 @@ CompTarget_fapp1_func p
 No separate `CompTarget_fapp1_func_func` alias is needed; full hom-action is the
 ordinary `fapp1_func (CompTarget_catd Z x)`.
 
+### Terminal-Source Equivalences Are Not Global Computation
+
+Mathematically, maps out of the terminal category satisfy familiar equivalences:
+
+```text
+Functor_cat Terminal_cat A ~= A
+Transf_cat
+  (Const_func Terminal_cat Y u)
+  (Const_func Terminal_cat Y v)
+  ~= Hom_cat Y u v
+```
+
+Do not install these equivalences as broad rewrite rules by default. They are
+semantic identifications, not projection rules. Making one of them definitional
+creates pressure to make the whole `1 -> X` equivalence definitional, including
+rules for `Functor_cat Terminal_cat A`, `Obj_func`, `Const_func`, and terminal
+evaluation. That tends to hide which projection path produced a term and can
+interfere with the stable-head normalization discipline.
+
+Prefer consumer-local projection rules instead. For example, a section-action
+normal form should reduce through `piapp0`, `tapp0_fapp0`, and the named
+displayed-action heads that express the component being consumed. If a theorem
+needs an ordinary functor view of a terminal-source section, add a focused
+assertion or a deliberately named bridge after probing, rather than adding a
+global `1 -> X = X` rewrite.
+
+The old terminal-source transformation collapse
+
+```text
+Transf_cat Terminal_cat Y (Const_func Terminal_cat Y u)
+  (Const_func Terminal_cat Y v)
+  -> Hom_cat Y u v
+```
+
+was removed from `emdash3_2.lp` after a probe showed the current development
+typechecks without it.
+
 ## SOP: Dosen Cut-Elimination Precomposition/Postcomposition Heads
 
 When a theorem wants a composite to normalize by "absorbing a cut", choose the

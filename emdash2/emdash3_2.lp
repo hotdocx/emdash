@@ -1083,15 +1083,6 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
 assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;
 
-// Transformations between point functors from the terminal category are just
-// arrows in the target. This bridge keeps terminal-source component projections
-// convertible to the corresponding target homs, including surface section-action
-// computations.
-rule @Transf_cat Terminal_cat $Y
-    (@Const_func Terminal_cat $Y $u)
-    (@Const_func Terminal_cat $Y $v)
-  ↪ Hom_cat $Y $u $v;
-
 /*
   Mathematical notation:
     ϵ : F ⇒ G

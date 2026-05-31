@@ -277,14 +277,56 @@ Current status:
 
 - `piapp1_src_obj` is a definition through `fib_cov_tapp0_func`.
 - `piapp1_fapp0` is a definition through `piapp0(piapp1_func(...),f)`.
-- `piapp1_func` remains the section-level package over the base-arrow
-  category, with a constant-family computation rule.
+- `piapp1_func` is defined by the terminal-source specialization of
+  `functord_laxity_fdapp1_presheaf_arrow`.
+- The constant-family computation is checked at the `piapp1_fapp0` API:
+  `piapp1_fapp0(Const_catd K A,s,f) = fapp1_fapp0(s,f)`.
 - The old `piapp1_int_*` projection chain is not active.
 
 This preserves user-facing section action while avoiding a separate
-terminal-source internal action pipeline. Further reduction of `piapp1_func`
-to a fully defined alias over generic displayed action remains optional future
-cleanup.
+terminal-source internal action pipeline. The intended computational route is:
+
+```text
+piapp1_fapp0(s,f)
+  = piapp0(piapp1_func(s,x,y),f)
+  -> tapp0_fapp0(...,f,functord_laxity_fdapp1_presheaf_arrow(...))
+  -> functord_laxity_fdapp1_hom_func(...)
+  -> functord_laxity_fdapp1_cell(...)
+```
+
+For a constant family this ends at ordinary functor action:
+
+```text
+piapp1_fapp0(Const_catd K A,s,f)
+  -> fapp1_fapp0(s,f).
+```
+
+Do not replace this with a local rule for raw ordinary functor evaluation:
+
+```text
+fapp0(piapp1_func(Const_catd K A,s,x,y),f)
+  -> fapp1_fapp0(s,f).
+```
+
+That raw projection first views the dependent-hom section object as an ordinary
+functor `Op(Hom_K(x,y)) -> Hom_A(s[x],s[y])`. Mathematically this is the same
+component in the constant-family case, but internally it follows a different
+representation path than `piapp0`. A probe showed that such a local raw-`fapp0`
+bridge is needed only to prove the raw projection assertion, while the
+`piapp1_fapp0` API assertion typechecks without it. Keep the API assertion as
+the regression test.
+
+The related terminal-source collapse
+
+```text
+Transf_cat Terminal_cat Y (Const_func Terminal_cat Y u)
+  (Const_func Terminal_cat Y v)
+  -> Hom_cat Y u v
+```
+
+was also removed. The current section-action computation does not rely on that
+global `1 -> X` equivalence, and broad terminal-source rewrites would invite
+similarly broad rules such as `Functor_cat Terminal_cat A -> A`.
 
 ### Raw Representables And PathOut
 
