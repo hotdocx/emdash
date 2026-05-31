@@ -4614,6 +4614,34 @@ rule @tapp0_fapp0
       (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
   ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
 
+rule @fapp0
+      (Op_cat (Hom_cat $K $x $y))
+      (Hom_cat $A (@fapp0 $K $A $s $x) (@fapp0 $K $A $s $y))
+      (@functord_laxity_fdapp1_presheaf_arrow
+        $K
+        (@Const_catd $K Terminal_cat)
+        (@Const_catd $K $A)
+        $s
+        $x
+        Terminal_obj
+        $y
+        Terminal_obj)
+      $p
+  ↪ @fapp0
+      Terminal_cat
+      (Hom_cat $A (@fapp0 $K $A $s $x) (@fapp0 $K $A $s $y))
+      (@functord_laxity_fdapp1_hom_func
+        $K
+        (@Const_catd $K Terminal_cat)
+        (@Const_catd $K $A)
+        $s
+        $x
+        $y
+        $p
+        Terminal_obj
+        Terminal_obj)
+      Terminal_obj;
+
 /*
   Full section action over a base arrow.
 
@@ -7080,6 +7108,17 @@ assert [K : Cat] (E : τ (Catd K))
   (f : τ (Hom K x y)) ⊢
   @piapp1_fapp0 K E s x y f
     ≡ piapp0 (@piapp1_func K E s x y) f;
+
+assert [K : Cat] (A : Cat)
+  (s : τ (Obj (Pi_cat (Const_catd K A))))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @fapp0
+    (Op_cat (Hom_cat K x y))
+    (Hom_cat A (@fapp0 K A s x) (@fapp0 K A s y))
+    (@piapp1_func K (@Const_catd K A) s x y)
+    f
+    ≡ @fapp1_fapp0 K A s x y f;
 
 assert [K : Cat] (A : Cat)
   (s : τ (Obj (Pi_cat (Const_catd K A))))
