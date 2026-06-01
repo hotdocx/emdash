@@ -54,11 +54,12 @@ Retired historical references:
   computation, product pair-telescope computation, and postcomposition of
   transfors;
 - semantic ordinary curry routing through the pair telescope:
-  `curry_func`, `curry_fapp0_func`, `curry_inner_fapp1_func`,
-  `curry_outer_fapp1_func`, and `curry_outer_transf` now compute through
-  `Product_pair_tele_func`, `comp_cat_cov_func`, and
-  `comp_cat_cov_transf`; the `curry_func_func` action on transfors remains a
-  stable facade pending a generic precomposition-transfor package;
+  `curry_func_func` is defined through
+  `comp_cat_con_func(Product_pair_tele_func)` and
+  `comp_cat_cov_func_func`; `curry_func` and `curry_fapp0_func` are
+  definitional projections, and the checked object beta law is
+  `curry(F)[x][y] = F[(x,y)]`; curry transfor action remains deferred pending
+  a generic precomposition-transfor package;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
