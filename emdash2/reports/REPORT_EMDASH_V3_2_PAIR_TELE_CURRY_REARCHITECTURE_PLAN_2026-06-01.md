@@ -2,8 +2,9 @@
 
 Date: 2026-06-01
 
-Status: proposed implementation plan. This is not yet implemented in
-`emdash3_2.lp`.
+Status: partially implemented in `emdash3_2.lp`. Stages 1-4 below are now
+installed and checked; curry and evaluation/uncurry rearchitecture remain
+deferred.
 
 ## Executive Summary
 
@@ -372,9 +373,45 @@ Later, after the direct rules are checked, we can decide whether
 `tapp1_int_func_transf` should compute to the same stable postcomposition
 transfor package.
 
-## Proposed Implementation Stages
+## Implementation Status On 2026-06-01
 
-The implementation order for the next turn should start below curry:
+Implemented and checked in `emdash3_2.lp`:
+
+- `tapp1_func`, the functor-level off-diagonal component
+  `Hom_A(X,Y) -> Hom_B(F[X],G[Y])`;
+- product projection rules for `tapp1_func`;
+- identity-transfor rules for `tapp1_func` and `tapp1_fapp0`;
+- the single nested projection bridge
+  `tapp0_fapp0 Y (tapp0_fapp0 X (tapp1_int_fapp0_transf eta))`;
+- `Const_transf_func` and `Const_transf`, with `tapp0_fapp0`,
+  `tapp1_func`, and capped `tapp1_fapp0` computation;
+- the hom-action of `const_section_func`;
+- `Product_pair_tele_func`, with object and arrow computation checked
+  projectionwise;
+- `comp_cat_cov_fapp1_func` and `comp_cat_cov_transf`, with `tapp0_fapp0`,
+  `tapp1_func`, and capped `tapp1_fapp0` computation.
+
+Implementation lessons:
+
+- The single nested bridge from `tapp1_int_fapp0_transf` to `tapp1_func`
+  typechecks directly when endpoint families are kept implicit on the LHS.
+- `Product_pair_tele_func` rules should be installed after
+  `const_section_func`, because its stable component projections are
+  `const_section_func B A` and `Const_func A (Functor_cat B B) id_B`.
+- The `fapp1_func` and `fapp1_fapp0` rules for `Product_pair_tele_func` need
+  the normalized product target
+  `Product_cat (Functor_cat B A) (Functor_cat B B)` on the LHS, not the
+  reducible target `Functor_cat B (Product_cat A B)`.
+- Full product eta assertions such as
+  `pair_tele[x][y] == Struct_sigma x y` are more brittle than projectionwise
+  assertions. The checked assertions use `sigma_Fst`/`sigma_Snd`.
+- Direct capped rules for `Const_transf` and `comp_cat_cov_transf` are kept so
+  the existing `tapp1_fapp0` API still computes and joins with the new
+  `tapp1_func` layer.
+
+## Implementation Order / Remaining Work
+
+The validated implementation order was:
 
 ```text
 tapp1_func
@@ -385,10 +422,19 @@ tapp1_func
   -> deferred Eval_func / uncurry rearchitecture
 ```
 
-Starting with curry would force the new architecture to lean on the old capped
-`tapp1_fapp0` and curry-specific heads. Starting with `tapp1_func` gives the
-constant-transfor, pair-telescope, postcomposition, and future evaluation
-rules the typed hom-functor layer they all need.
+Stages through `comp_cat_cov_func postcomposition` are now complete. The
+remaining order is:
+
+```text
+curry rearchitecture
+  -> deferred Eval_func / uncurry rearchitecture
+```
+
+The completed lower layers are kept in this section as an implementation
+record: starting with curry would have forced the new architecture to lean on
+the old capped `tapp1_fapp0` and curry-specific heads. Starting with
+`tapp1_func` gave the constant-transfor, pair-telescope, postcomposition, and
+future evaluation rules the typed hom-functor layer they all need.
 
 ### Stage 1: Intermediate `tapp1_func`
 

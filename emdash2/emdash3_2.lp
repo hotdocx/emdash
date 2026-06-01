@@ -1240,11 +1240,240 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (f : τ (Hom A X Y)),
   τ (Hom B (fapp0 F X) (fapp0 G Y));
 
+// Functor-level off-diagonal ordinary transfor component.
+//
+// Surface/formula:
+//   tapp1_func(ϵ,X,Y) : Hom_A(X,Y) -> Hom_B(F[X],G[Y])
+//   tapp1_func(ϵ,X,Y)[f] = tapp1_fapp0(ϵ,f).
+symbol tapp1_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
+  Π [X Y : τ (Obj A)],
+  Π (ϵ : τ (Obj (Transf_cat F G))),
+  τ (Functor
+      (Hom_cat A X Y)
+      (Hom_cat B (fapp0 F X) (fapp0 G Y)));
+
+rule fapp0 (@tapp1_func $A $B $F $G $X $Y $ϵ) $f
+  ↪ @tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f;
+
+rule sigma_Fst (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
+  ↪ @tapp1_func $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta);
+
+rule sigma_Snd (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
+  ↪ @tapp1_func $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta);
+
+rule @tapp1_func $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F)
+  ↪ @fapp1_func $A $B $F $X $Y;
+
+assert [X A B : Cat]
+  (F G : τ (Functor X (Product_cat A B)))
+  (eta : τ (@Transf X (Product_cat A B) F G))
+  (i j : τ (Obj X)) ⊢
+  sigma_Fst (@tapp1_func X (Product_cat A B) F G i j eta)
+    ≡ @tapp1_func X A (sigma_Fst F) (sigma_Fst G) i j (sigma_Fst eta);
+
+symbol Const_transf_func [K A : Cat] [x y : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A x y)
+      (@Transf_cat K A (@Const_func K A x) (@Const_func K A y)));
+
+symbol Const_transf [K A : Cat] [x y : τ (Obj A)]
+  (p : τ (Hom A x y))
+  : τ (Transf (@Const_func K A x) (@Const_func K A y));
+
+rule fapp0 (@Const_transf_func $K $A $x $y) $p
+  ↪ @Const_transf $K $A $x $y $p;
+
+rule @tapp0_fapp0 $K $A _ _ $k (@Const_transf $K $A $x $y $p)
+  ↪ $p;
+
+rule @tapp1_func $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p)
+  ↪ @Const_func (Hom_cat $K $k $k') (Hom_cat $A $x $y) $p;
+
+rule @tapp1_fapp0 $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p) $_
+  ↪ $p;
+
+assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K A
+      (@Const_func K A x)
+      (@Const_func K A y)
+      k
+      (@Const_transf K A x y p)
+    ≡ p;
+
+assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
+  (k k' : τ (Obj K)) ⊢
+  @tapp1_func
+      K A
+      (@Const_func K A x)
+      (@Const_func K A y)
+      k k'
+      (@Const_transf K A x y p)
+    ≡ @Const_func (Hom_cat K k k') (Hom_cat A x y) p;
+
+assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
+  (k k' : τ (Obj K)) (q : τ (Hom K k k')) ⊢
+  @tapp1_fapp0
+      K A
+      (@Const_func K A x)
+      (@Const_func K A y)
+      k k'
+      (@Const_transf K A x y p)
+      q
+    ≡ p;
+
+symbol comp_cat_cov_fapp1_func [X Y Z : Cat]
+  (G : τ (Functor Y Z))
+  [F H : τ (Functor X Y)]
+  : τ (Functor
+      (@Transf_cat X Y F H)
+      (@Transf_cat
+        X Z
+        (@comp_cat_fapp0 X Y Z G F)
+        (@comp_cat_fapp0 X Y Z G H)));
+
+symbol comp_cat_cov_transf [X Y Z : Cat]
+  (G : τ (Functor Y Z))
+  [F H : τ (Functor X Y)]
+  (eta : τ (Transf F H))
+  : τ (Transf
+      (@comp_cat_fapp0 X Y Z G F)
+      (@comp_cat_fapp0 X Y Z G H));
+
+rule @fapp1_func _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H
+  ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
+
+rule fapp0 (@comp_cat_cov_fapp1_func $X $Y $Z $G $F $H) $eta
+  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
+
+rule @fapp1_fapp0 _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H $eta
+  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
+
+rule @tapp0_fapp0
+      $X
+      $Z
+      _
+      _
+      $i
+      (@comp_cat_cov_transf $X $Y $Z $G $F $H $eta)
+  ↪ @fapp1_fapp0
+      $Y
+      $Z
+      $G
+      (@fapp0 $X $Y $F $i)
+      (@fapp0 $X $Y $H $i)
+      (@tapp0_fapp0 $X $Y $F $H $i $eta);
+
+rule @tapp1_func
+      $X
+      $Z
+      _
+      _
+      $i
+      $j
+      (@comp_cat_cov_transf $X $Y $Z $G $F $H $eta)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $X $i $j)
+      (Hom_cat $Y
+        (@fapp0 $X $Y $F $i)
+        (@fapp0 $X $Y $H $j))
+      (Hom_cat $Z
+        (@fapp0 $Y $Z $G (@fapp0 $X $Y $F $i))
+        (@fapp0 $Y $Z $G (@fapp0 $X $Y $H $j)))
+      (@fapp1_func
+        $Y
+        $Z
+        $G
+        (@fapp0 $X $Y $F $i)
+        (@fapp0 $X $Y $H $j))
+      (@tapp1_func $X $Y $F $H $i $j $eta);
+
+rule @tapp1_fapp0
+      $X
+      $Z
+      _
+      _
+      $i
+      $j
+      (@comp_cat_cov_transf $X $Y $Z $G $F $H $eta)
+      $p
+  ↪ @fapp1_fapp0
+      $Y
+      $Z
+      $G
+      (@fapp0 $X $Y $F $i)
+      (@fapp0 $X $Y $H $j)
+      (@tapp1_fapp0 $X $Y $F $H $i $j $eta $p);
+
+assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
+  (eta : τ (Transf F H)) (i : τ (Obj X)) ⊢
+  @tapp0_fapp0
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z G H)
+    i
+    (@comp_cat_cov_transf X Y Z G F H eta)
+  ≡ @fapp1_fapp0
+      Y
+      Z
+      G
+      (@fapp0 X Y F i)
+      (@fapp0 X Y H i)
+      (@tapp0_fapp0 X Y F H i eta);
+
+assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
+  (eta : τ (Transf F H)) (i j : τ (Obj X)) ⊢
+  @tapp1_func
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z G H)
+    i j
+    (@comp_cat_cov_transf X Y Z G F H eta)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X i j)
+      (Hom_cat Y
+        (@fapp0 X Y F i)
+        (@fapp0 X Y H j))
+      (Hom_cat Z
+        (@fapp0 Y Z G (@fapp0 X Y F i))
+        (@fapp0 Y Z G (@fapp0 X Y H j)))
+      (@fapp1_func
+        Y
+        Z
+        G
+        (@fapp0 X Y F i)
+        (@fapp0 X Y H j))
+      (@tapp1_func X Y F H i j eta);
+
+assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
+  (eta : τ (Transf F H)) (i j : τ (Obj X)) (p : τ (Hom X i j)) ⊢
+  @tapp1_fapp0
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z G H)
+    i j
+    (@comp_cat_cov_transf X Y Z G F H eta)
+    p
+  ≡ @fapp1_fapp0
+      Y
+      Z
+      G
+      (@fapp0 X Y F i)
+      (@fapp0 X Y H j)
+      (@tapp1_fapp0 X Y F H i j eta p);
+
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;
 
 rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta) $p;
+
+rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
+  ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
 assert [X A B : Cat]
   (F G : τ (Functor X (Product_cat A B)))
@@ -1860,6 +2089,23 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
 
 rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
+
+// Project the internal off-diagonal action twice to recover the ordinary
+// functor-level component `Hom_A(X,Y) -> Hom_B(F[X],G[Y])`.
+rule @tapp0_fapp0
+      $A
+      Cat_cat
+      _
+      _
+      $Y
+      (@tapp0_fapp0
+        (Op_cat $A)
+        (@Catd_cat $A)
+        _
+        _
+        $X
+        (@tapp1_int_fapp0_transf $A $B $F $G $ϵ))
+  ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
 
 /*
   Ordinary internal hom-action package.
@@ -4997,6 +5243,140 @@ injective symbol const_section_func (K : Cat) (A : Cat)
 
 rule @fapp0 $A _ (@const_section_func $K $A) $a
   ↪ @Const_func $K $A $a;
+
+rule @fapp1_func $A _ (@const_section_func $K $A) $x $y
+  ↪ @Const_transf_func $K $A $x $y;
+
+rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
+  ↪ @Const_transf $K $A $x $y $p;
+
+assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
+  @fapp1_fapp0
+      A
+      (@Pi_cat K (@Const_catd K A))
+      (@const_section_func K A)
+      x y p
+    ≡ @Const_transf K A x y p;
+
+// Pairing telescope for products.
+//
+// Surface/formula:
+//   Product_pair_tele_func(A,B) : A -> (B -> A x B)
+//   Product_pair_tele_func[x][y] = (x,y)
+//   Product_pair_tele_func[p][y] = (p,id_y).
+symbol Product_pair_tele_func [A B : Cat]
+  : τ (Functor A (Functor_cat B (Product_cat A B)));
+
+rule sigma_Fst (@Product_pair_tele_func $A $B)
+  ↪ @const_section_func $B $A;
+
+rule sigma_Snd (@Product_pair_tele_func $A $B)
+  ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
+
+rule @fapp0 $A (Functor_cat $B (Product_cat $A $B))
+      (@Product_pair_tele_func $A $B) $x
+  ↪ Struct_sigma (@Const_func $B $A $x) (@id_func $B);
+
+rule @fapp1_func $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
+      (@Product_pair_tele_func $A $B) $x $x'
+  ↪ Struct_sigma
+      (@Const_transf_func $B $A $x $x')
+      (@Const_func
+        (Hom_cat $A $x $x')
+        (@Transf_cat $B $B (@id_func $B) (@id_func $B))
+        (@id (Functor_cat $B $B) (@id_func $B)));
+
+rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
+      (@Product_pair_tele_func $A $B) $x $x' $p
+  ↪ Struct_sigma
+      (@Const_transf $B $A $x $x' $p)
+      (@id (Functor_cat $B $B) (@id_func $B));
+
+assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢
+  sigma_Fst
+    (@fapp0
+      B
+      (Product_cat A B)
+      (@fapp0
+        A
+        (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B)
+        x)
+      y)
+    ≡ x;
+
+assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢
+  sigma_Snd
+    (@fapp0
+      B
+      (Product_cat A B)
+      (@fapp0
+        A
+        (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B)
+        x)
+      y)
+    ≡ y;
+
+assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x'))
+  (y : τ (Obj B)) ⊢
+  sigma_Fst
+    (@tapp0_fapp0
+      B
+      (Product_cat A B)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x')
+      y
+      (@fapp1_fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x x' p))
+    ≡ p;
+
+assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x'))
+  (y : τ (Obj B)) ⊢
+  sigma_Snd
+    (@tapp0_fapp0
+      B
+      (Product_cat A B)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x')
+      y
+      (@fapp1_fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x x' p))
+    ≡ @id B y;
+
+assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x'))
+  (y y' : τ (Obj B)) ⊢
+  sigma_Fst
+    (@tapp1_func
+      B
+      (Product_cat A B)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x')
+      y y'
+      (@fapp1_fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x x' p))
+    ≡ @Const_func (Hom_cat B y y') (Hom_cat A x x') p;
+
+assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x'))
+  (y y' : τ (Obj B)) ⊢
+  sigma_Snd
+    (@tapp1_func
+      B
+      (Product_cat A B)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x)
+      (@fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x')
+      y y'
+      (@fapp1_fapp0 A (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B) x x' p))
+    ≡ @fapp1_func B B (@id_func B) y y';
 
 // Internalized-x prerequisite: pull a section back along a base functor.
 //
