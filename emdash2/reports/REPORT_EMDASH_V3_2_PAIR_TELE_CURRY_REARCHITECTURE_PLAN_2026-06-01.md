@@ -8,6 +8,10 @@ computation, including the `tapp1_at_transf` one-projection refinement.
 `curry_func_func` is now the primary semantic curry package; its transfor
 action, evaluation, and uncurry rearchitecture remain deferred.
 
+Update on 2026-06-02: the remaining curry-transfor work should first consolidate
+the relationship between `hom_*` and `comp_cat_*` composition packages. The
+consolidated plan is recorded in Stage 5a below.
+
 ## Executive Summary
 
 The proposed direction is feasible, but it should be implemented in stages.
@@ -59,6 +63,16 @@ of this plan:
    transformations induced by arrows;
 3. the transfor action of `comp_cat_cov_func`, i.e. postcomposition of a
    natural transformation by an ordinary functor.
+
+The later composition review refined the ownership model:
+
+- generic `hom_*` packages should own the meaning of precomposition and
+  postcomposition in higher homs;
+- Cat-specific `comp_cat_*_transf` stable heads should own component
+  computation with `tapp0_fapp0`, `tapp1_func`, and capped `tapp1_fapp0`;
+- `comp_func_tele` is only the identity-functor special case of a more general
+  hom-postcomposition telescope and should be removed rather than kept as a
+  separate primitive alias.
 
 With those layers installed, `curry_func_func` is defined through:
 
@@ -334,8 +348,8 @@ the off-diagonal component over any base arrow in `K` is still the same arrow
 
 ### Postcomposition By A Functor
 
-`comp_cat_cov_func` should be understood as a specialization of categorical
-composition in `Cat_cat`:
+`comp_cat_cov_func` was originally understood as a specialization of
+categorical composition in `Cat_cat`:
 
 ```text
 comp_func_tele Cat_cat X Y Z
@@ -359,6 +373,12 @@ comp_cat_cov_func(G)[eta][x] = G[eta[x]]
 
 Add a stable postcomposition package rather than relying on large nested
 left-hand sides under `tapp0_fapp0`.
+
+Update on 2026-06-02: Stage 5a refines this explanation. The better generic
+owner is not the old `comp_func_tele` alias, but the generalized
+`hom_postcomp_tele_func` / `hom_postcomp_func` projection of `hom_`. The
+existing `comp_cat_cov_func` and `comp_cat_cov_transf` should remain the
+Cat-specific stable heads for ordinary functor and transfor computation.
 
 Recommended names:
 
@@ -502,7 +522,9 @@ Stages through ordinary curry object computation are now complete. The
 remaining order is:
 
 ```text
-generic precomposition transfor action
+hom/composition consolidation
+  -> generic hom-postcomposition and hom-precomposition hom-actions
+  -> Cat-specific precomposition transfor action
   -> curry_func_func transfor-action refinement
   -> deferred Eval_func / uncurry rearchitecture
 ```
@@ -684,6 +706,417 @@ not reintroduced as a curry-only stable facade. A fully semantic version should
 use the precomposition analogue of `comp_cat_cov_transf`, because
 `curry(eta)[x]` is the precomposition of `eta` by
 `Product_pair_tele_func[x]`.
+
+### Stage 5a: Hom/Composition Consolidation
+
+This addendum records the 2026-06-02 review of `comp_*`, `hom_*`, and their
+`Cat_cat` specializations. It is the next implementation target before resuming
+`curry_func_func` transfor action.
+
+#### Problem
+
+The current file has several composition-related heads:
+
+```text
+comp_fapp0
+comp_cat_fapp0
+comp_cat_cov_func
+comp_cat_cov_func_func
+comp_cat_con_func
+comp_func_tele
+hom_precomp_func
+hom_
+hom_int
+```
+
+The hierarchy should not contain many semantically interdependent names that
+are unrelated syntactically. In particular:
+
+- `comp_func_tele` is not used as infrastructure; static search shows it is
+  declared and then used only by its own sanity assertion and reports;
+- `comp_cat_cov_func_func` and `comp_cat_con_func` were added as object-level
+  composition packages, but their relationship to `hom_`, `hom_int`, and
+  `hom_precomp_func` should be made explicit before adding more curry action
+  rules;
+- `comp_cat_cov_transf` is already a useful stable head for Cat-specific
+  postcomposition of transfors, but its semantic source should be documented as
+  the Cat-specialized hom-postcomposition action.
+
+#### Ownership Principle
+
+Use two layers:
+
+```text
+generic hom_* heads
+  own semantic higher-hom action
+
+Cat-specific comp_cat_* stable heads
+  own ordinary transfor component computation
+```
+
+The reason for the split is important. Generic higher-hom actions live in an
+arbitrary category `A : Cat`; their outputs are just arrows in hom-categories.
+For arbitrary `A`, there is no general `tapp0_fapp0` or `tapp1_func` projection
+API. These projections only become available after specializing to:
+
+```text
+A = Cat_cat
+Hom_cat Cat_cat X Z = Functor_cat X Z
+Hom_cat (Functor_cat X Z) P Q = Transf_cat P Q
+```
+
+Therefore rules such as:
+
+```text
+tapp0_fapp0 (comp_cat_cov_transf G eta) i
+  -> G[eta[i]]
+
+tapp1_func (comp_cat_cov_transf G eta) i j
+  -> G_1(F[i],H[j]) o tapp1_func eta i j
+```
+
+are not generic `hom_*` rules. They are Cat-specific projection rules for the
+Cat-specialized higher-hom action. The same applies to the planned
+precomposition rules:
+
+```text
+tapp0_fapp0 (comp_cat_con_transf F eta) x
+  -> eta[F[x]]
+
+tapp1_func (comp_cat_con_transf F eta) x y
+  -> tapp1_func eta (F[x]) (F[y]) o F_1(x,y)
+```
+
+This justifies keeping `comp_cat_cov_transf` and `comp_cat_con_transf` as stable
+Cat-specific heads even if their meaning is owned by generic `hom_*` packages.
+Do not make these transfor heads transparent aliases that unfold away before
+`tapp0_fapp0` or `tapp1_func` can discriminate on them.
+
+#### Generic Postcomposition From `hom_`
+
+For:
+
+```text
+R : I -> A
+W : Obj(A)
+```
+
+the covariant hom functor is:
+
+```text
+hom_ R W : I -> Cat
+hom_ R W [i] = Hom_A(W, R[i])
+```
+
+Expose its hom-action through stable projection heads:
+
+```text
+hom_postcomp_tele_func(R,W,i,j)
+  : Functor
+      (Hom_cat I i j)
+      (Functor_cat
+        (Hom_cat A W (R[i]))
+        (Hom_cat A W (R[j])))
+
+hom_postcomp_func(R,W,r)
+  : Functor
+      (Hom_cat A W (R[i]))
+      (Hom_cat A W (R[j]))
+```
+
+Recommended rules:
+
+```text
+fapp1_func (hom_ R W) i j
+  -> hom_postcomp_tele_func(R,W,i,j)
+
+fapp0 (hom_postcomp_tele_func(R,W,i,j)) r
+  -> hom_postcomp_func(R,W,r)
+
+fapp1_fapp0 (hom_ R W) r
+  -> hom_postcomp_func(R,W,r)
+
+fapp0 (hom_postcomp_func(R,W,r)) g
+  -> R[r] o g
+```
+
+Then expose the hom-action of `hom_postcomp_func` itself:
+
+```text
+hom_postcomp_fapp1_func(R,W,r,g,h)
+  : Functor
+      (Hom_cat (Hom_cat A W (R[i])) g h)
+      (Hom_cat
+        (Hom_cat A W (R[j]))
+        (R[r] o g)
+        (R[r] o h))
+
+hom_postcomp_fapp1_fapp0(R,W,r,alpha)
+  : Hom_cat
+      (Hom_cat A W (R[j]))
+      (R[r] o g)
+      (R[r] o h)
+```
+
+Recommended rules:
+
+```text
+fapp1_func (hom_postcomp_func(R,W,r)) g h
+  -> hom_postcomp_fapp1_func(R,W,r,g,h)
+
+fapp0 (hom_postcomp_fapp1_func(R,W,r,g,h)) alpha
+  -> hom_postcomp_fapp1_fapp0(R,W,r,alpha)
+
+fapp1_fapp0 (hom_postcomp_func(R,W,r)) alpha
+  -> hom_postcomp_fapp1_fapp0(R,W,r,alpha)
+```
+
+The old `comp_func_tele(A,x,y,z)` is just the special case:
+
+```text
+hom_postcomp_tele_func(id_func A, x, y, z)
+```
+
+Delete `comp_func_tele` and replace its local sanity assertion with an assertion
+for `hom_postcomp_tele_func` or `hom_postcomp_func`.
+
+#### Cat-Specialized Postcomposition
+
+Specialize generic postcomposition by:
+
+```text
+A = Cat_cat
+I = Cat_cat
+R = id_func Cat_cat
+W = X
+i = Y
+j = Z
+r = G : Y -> Z
+```
+
+Then:
+
+```text
+hom_postcomp_tele_func(id_Cat, X, Y, Z)
+  : (Y -> Z) -> ((X -> Y) -> (X -> Z))
+
+hom_postcomp_func(id_Cat, X, G)
+  : (X -> Y) -> (X -> Z)
+```
+
+The Cat-specific names are:
+
+```text
+comp_cat_cov_func_func(X,Y,Z)
+  ~= hom_postcomp_tele_func(id_Cat, X, Y, Z)
+
+comp_cat_cov_func(G)
+  ~= hom_postcomp_func(id_Cat, X, G)
+```
+
+Their transfor action is the Cat specialization of
+`hom_postcomp_fapp1_fapp0`:
+
+```text
+comp_cat_cov_fapp1_func(G,F,H)
+  ~= hom_postcomp_fapp1_func(id_Cat, X, G, F, H)
+
+comp_cat_cov_transf(G,eta)
+  ~= hom_postcomp_fapp1_fapp0(id_Cat, X, G, eta)
+```
+
+Keep `comp_cat_cov_transf` stable because it owns ordinary transfor component
+projection:
+
+```text
+tapp0_fapp0 (comp_cat_cov_transf G eta) i
+  -> G[eta[i]]
+
+tapp1_func (comp_cat_cov_transf G eta) i j
+  -> G_1(F[i],H[j]) o tapp1_func eta i j
+
+tapp1_fapp0 (comp_cat_cov_transf G eta) p
+  -> G[eta[p]]
+```
+
+If probes are clean, add bridge/fold rules from the Cat-specialized generic
+heads to the `comp_cat_cov_*` heads. Prefer folding generic specialized forms
+to the existing Cat-specific stable heads rather than unfolding the stable heads
+away.
+
+#### Generic Precomposition From `hom_int`
+
+The existing `hom_int` package internalizes represented-object variance:
+
+```text
+hom_int(R) : A^op -> (I -> Cat)
+hom_int(R)[X][i] = Hom_A(X, R[i])
+```
+
+The current file already exposes the object component of this represented-object
+action:
+
+```text
+tapp0_fapp0
+  b
+  (fapp1_fapp0 (hom_int R) f)
+  -> hom_precomp_func(f)
+```
+
+where:
+
+```text
+f : X -> Y
+hom_precomp_func(f)
+  : Hom_A(Y,Z) -> Hom_A(X,Z)
+
+hom_precomp_func(f)[g] = g o f
+```
+
+This existing rule is the correct semantic anchor: `hom_precomp_func` is not an
+unrelated helper, but the represented-object action of `hom_int`.
+
+Add the missing hom-action package for `hom_precomp_func`:
+
+```text
+hom_precomp_fapp1_func(f,g,h)
+  : Functor
+      (Hom_cat (Hom_cat A Y Z) g h)
+      (Hom_cat
+        (Hom_cat A X Z)
+        (g o f)
+        (h o f))
+
+hom_precomp_fapp1_fapp0(f,alpha)
+  : Hom_cat
+      (Hom_cat A X Z)
+      (g o f)
+      (h o f)
+```
+
+Recommended rules:
+
+```text
+fapp1_func (hom_precomp_func f) g h
+  -> hom_precomp_fapp1_func(f,g,h)
+
+fapp0 (hom_precomp_fapp1_func(f,g,h)) alpha
+  -> hom_precomp_fapp1_fapp0(f,alpha)
+
+fapp1_fapp0 (hom_precomp_func f) alpha
+  -> hom_precomp_fapp1_fapp0(f,alpha)
+```
+
+Do not immediately add broad rules connecting the off-diagonal
+`tapp1_func` projection of `hom_int` to `hom_precomp_fapp1_func`. The
+off-diagonal action of `hom_int` over a base arrow in `I` combines
+precomposition in the represented object with postcomposition by `R` in the
+target object. That mixed rule is real but broader than the immediate curry
+milestone.
+
+#### Cat-Specialized Precomposition
+
+Specialize generic precomposition by:
+
+```text
+A = Cat_cat
+f = F : X -> Y
+g = G : Y -> Z
+h = H : Y -> Z
+alpha = eta : G => H
+```
+
+Then:
+
+```text
+hom_precomp_func(Cat_cat,F)
+  : (Y -> Z) -> (X -> Z)
+
+hom_precomp_fapp1_fapp0(Cat_cat,F,eta)
+  : (G o F) => (H o F)
+```
+
+The Cat-specific names are:
+
+```text
+comp_cat_con_func(F)
+  ~= hom_precomp_func(Cat_cat,F)
+
+comp_cat_con_fapp1_func(F,G,H)
+  ~= hom_precomp_fapp1_func(Cat_cat,F,G,H)
+
+comp_cat_con_transf(F,eta)
+  ~= hom_precomp_fapp1_fapp0(Cat_cat,F,eta)
+```
+
+The component rules are Cat-specific projections:
+
+```text
+tapp0_fapp0 (comp_cat_con_transf F eta) x
+  -> eta[F[x]]
+
+tapp1_func (comp_cat_con_transf F eta) x y
+  -> tapp1_func eta (F[x]) (F[y]) o F_1(x,y)
+
+tapp1_fapp0 (comp_cat_con_transf F eta) p
+  -> eta[F[p]]
+```
+
+As with postcomposition, keep `comp_cat_con_transf` stable. It is the head that
+ordinary-transfor projection rules should discriminate on. The generic
+`hom_precomp_*` layer owns the meaning; the Cat-specific stable head owns the
+component computation.
+
+Implementation choice for `comp_cat_con_func`:
+
+- preferred probe: define it as the `Cat_cat` specialization of
+  `hom_precomp_func`;
+- fallback: keep it as a stable object-level facade and add a fold/bridge from
+  the Cat-specialized `hom_precomp_func` to `comp_cat_con_func`.
+
+The preferred route is more semantic, but the fallback is acceptable if
+Lambdapi's subject-reduction or critical-pair checking becomes brittle.
+
+#### Recommended Implementation Order
+
+Probe in a temporary copy first, then port into `emdash3_2.lp`:
+
+```text
+1. Delete `comp_func_tele` and its assertion.
+2. Add `hom_postcomp_tele_func` and `hom_postcomp_func`.
+3. Add `hom_postcomp_fapp1_func` and `hom_postcomp_fapp1_fapp0`.
+4. Relate Cat-specialized postcomposition to existing `comp_cat_cov_*` heads.
+5. Add `hom_precomp_fapp1_func` and `hom_precomp_fapp1_fapp0`.
+6. Define or bridge `comp_cat_con_func` as the Cat specialization of
+   `hom_precomp_func`.
+7. Add `comp_cat_con_fapp1_func` and `comp_cat_con_transf` as stable
+   Cat-specific heads.
+8. Add `tapp0_fapp0`, `tapp1_func`, and capped `tapp1_fapp0` rules for
+   `comp_cat_con_transf`.
+9. Re-run the existing curry object-beta assertions.
+10. Resume `curry_func_func` transfor action using `comp_cat_con_transf`
+    rather than curry-only helper heads.
+```
+
+Add focused assertions at each layer:
+
+```text
+hom_postcomp_func(R,W,r)[g] == R[r] o g
+hom_precomp_func(f)[g] == g o f
+
+comp_cat_cov_transf(G,eta)[i] == G[eta[i]]
+comp_cat_con_transf(F,eta)[x] == eta[F[x]]
+
+tapp1_func(comp_cat_cov_transf(G,eta),i,j)
+  == G_1(F[i],H[j]) o tapp1_func(eta,i,j)
+
+tapp1_func(comp_cat_con_transf(F,eta),x,y)
+  == tapp1_func(eta,F[x],F[y]) o F_1(x,y)
+```
+
+The last two should use explicit canonical `Hom_cat` endpoint forms in
+assertions, but the corresponding rewrite-rule LHSs should keep inferred
+source/target endpoints implicit or as `_`.
 
 ### Stage 6: Keep Uncurry Stable
 
