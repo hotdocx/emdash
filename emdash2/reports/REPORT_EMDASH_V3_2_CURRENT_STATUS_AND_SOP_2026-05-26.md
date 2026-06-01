@@ -14,6 +14,8 @@ path-induction work.
   `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`.
 - Current Pi-alias and Sigma projection-pullback status:
   `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`.
+- Current pair-telescope/Product-curry rearchitecture plan:
+  `reports/REPORT_EMDASH_V3_2_PAIR_TELE_CURRY_REARCHITECTURE_PLAN_2026-06-01.md`.
 - The older synthetic/telescope path-induction plan and implementation report
   from 2026-05-27 are superseded by that consolidated report and are no longer
   forward guidance.
