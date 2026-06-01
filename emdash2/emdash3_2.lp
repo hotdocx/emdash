@@ -741,6 +741,7 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
 
   Surface/formula:
     hom_(F,W)[y]          = Hom_A(W,F[y])
+    hom_postcomp_func(f)(g)= F[f] o g
     hom_con(W,F)[y]       = Hom_A(F[y],W)
     hom_int(F)[W][y]      = Hom_A(W,F[y])
     hom_precomp_func(f)(g)= g ∘ f
@@ -760,6 +761,89 @@ rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
 rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
   ↪ comp_fapp0 (fapp1_fapp0 $F $f) $g;
 
+// Stable hom-action projection for covariant hom: postcompose by F[f].
+symbol hom_postcomp_tele_func [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  : τ (Functor
+      (Hom_cat B X Y)
+      (Functor_cat
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y))));
+
+rule @fapp1_func $B Cat_cat (@hom_ $A $B $F $W) $X $Y
+  ↪ @hom_postcomp_tele_func $A $B $F $W $X $Y;
+
+symbol hom_postcomp_func [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  : τ (Functor
+      (Hom_cat A W (@fapp0 B A F X))
+      (Hom_cat A W (@fapp0 B A F Y)));
+
+rule fapp0 (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f
+  ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
+
+rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
+  ↪ @comp_fapp0
+      $A
+      $W
+      (@fapp0 $B $A $F $X)
+      (@fapp0 $B $A $F $Y)
+      (@fapp1_fapp0 $B $A $F $X $Y $f)
+      $g;
+
+symbol hom_postcomp_fapp1_func [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  [g h : τ (Hom A W (@fapp0 B A F X))]
+  : τ (Functor
+      (Hom_cat (Hom_cat A W (@fapp0 B A F X)) g h)
+      (Hom_cat
+        (Hom_cat A W (@fapp0 B A F Y))
+        (@comp_fapp0
+          A W (@fapp0 B A F X) (@fapp0 B A F Y)
+          (@fapp1_fapp0 B A F X Y f)
+          g)
+        (@comp_fapp0
+          A W (@fapp0 B A F X) (@fapp0 B A F Y)
+          (@fapp1_fapp0 B A F X Y f)
+          h)));
+
+symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  [g h : τ (Hom A W (@fapp0 B A F X))]
+  (alpha : τ (Hom (Hom_cat A W (@fapp0 B A F X)) g h))
+  : τ (Hom
+      (Hom_cat A W (@fapp0 B A F Y))
+      (@comp_fapp0
+        A W (@fapp0 B A F X) (@fapp0 B A F Y)
+        (@fapp1_fapp0 B A F X Y f)
+        g)
+      (@comp_fapp0
+        A W (@fapp0 B A F X) (@fapp0 B A F Y)
+        (@fapp1_fapp0 B A F X Y f)
+        h));
+
+rule @fapp1_func _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h
+  ↪ @hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h;
+
+rule fapp0 (@hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h) $alpha
+  ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
+
+rule @fapp1_fapp0 _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h $alpha
+  ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
+
+rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
+  ↪ @comp_cat_cov_func_func $X $Y $Z;
+
+rule @hom_postcomp_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G
+  ↪ @comp_cat_cov_func $X $Y $Z $G;
+
 // Contravariant action in the represented object: precompose an arrow
 // g : Hom_A(Y,Z) by f : Hom_A(X,Y).
 symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
@@ -770,22 +854,36 @@ rule @fapp0 (Hom_cat $A $Y $Z) (Hom_cat $A $X $Z)
       (@hom_precomp_func $A $X $Y $Z $f) $g
   ↪ @comp_fapp0 $A $X $Y $Z $g $f;
 
-// Telescoped internal composition package.
-//
-// Surface/formula:
-//   comp_func_tele(A,x,y,z) :
-//     Hom_A(y,z) -> (Hom_A(x,y) -> Hom_A(x,z))
-//   comp_func_tele(A,x,y,z)[g][f] = g o f.
-symbol comp_func_tele [A : Cat] [X Y Z : τ (Obj A)]
+rule @hom_precomp_func Cat_cat $X $Y $Z $F
+  ↪ @comp_cat_con_func $X $Y $Z $F;
+
+symbol hom_precomp_fapp1_func [A : Cat] [X Y Z : τ (Obj A)]
+  (f : τ (Hom A X Y))
+  [g h : τ (Hom A Y Z)]
   : τ (Functor
-      (Hom_cat A Y Z)
-      (Functor_cat (Hom_cat A X Y) (Hom_cat A X Z)))
-≔ @fapp1_func
-    A
-    Cat_cat
-    (@hom_ A A (@id_func A) X)
-    Y
-    Z;
+      (Hom_cat (Hom_cat A Y Z) g h)
+      (Hom_cat
+        (Hom_cat A X Z)
+        (@comp_fapp0 A X Y Z g f)
+        (@comp_fapp0 A X Y Z h f)));
+
+symbol hom_precomp_fapp1_fapp0 [A : Cat] [X Y Z : τ (Obj A)]
+  (f : τ (Hom A X Y))
+  [g h : τ (Hom A Y Z)]
+  (alpha : τ (Hom (Hom_cat A Y Z) g h))
+  : τ (Hom
+      (Hom_cat A X Z)
+      (@comp_fapp0 A X Y Z g f)
+      (@comp_fapp0 A X Y Z h f));
+
+rule @fapp1_func _ _ (@hom_precomp_func $A $X $Y $Z $f) $g $h
+  ↪ @hom_precomp_fapp1_func $A $X $Y $Z $f $g $h;
+
+rule fapp0 (@hom_precomp_fapp1_func $A $X $Y $Z $f $g $h) $alpha
+  ↪ @hom_precomp_fapp1_fapp0 $A $X $Y $Z $f $g $h $alpha;
+
+rule @fapp1_fapp0 _ _ (@hom_precomp_func $A $X $Y $Z $f) $g $h $alpha
+  ↪ @hom_precomp_fapp1_fapp0 $A $X $Y $Z $f $g $h $alpha;
 
 // Contravariant represented-object classifier.
 //
@@ -849,11 +947,7 @@ assert [A : Cat] (x y z : τ (Obj A))
   @fapp0
     (Hom_cat A x y)
     (Hom_cat A x z)
-    (@fapp0
-      (Hom_cat A y z)
-      (Functor_cat (Hom_cat A x y) (Hom_cat A x z))
-      (@comp_func_tele A x y z)
-      q)
+    (@hom_postcomp_func A A (@id_func A) x y z q)
     p
     ≡ @comp_fapp0 A x y z q p;
 
@@ -1371,6 +1465,12 @@ symbol comp_cat_cov_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z G H));
 
+rule @hom_postcomp_fapp1_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G $F $H
+  ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
+
+rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G $F $H $eta
+  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
+
 rule @fapp1_func _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H
   ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
 
@@ -1495,6 +1595,293 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
       (@fapp0 X Y F i)
       (@fapp0 X Y H j)
       (@tapp1_fapp0 X Y F H i j eta p);
+
+// Hom-action of postcomposition as a functor in the postcomposing functor.
+// Its object component is precomposition of the original transfor.
+symbol comp_cat_cov_func_func_fapp1_func [X Y Z : Cat]
+  [G H : τ (Functor Y Z)]
+  : τ (Functor
+      (@Transf_cat Y Z G H)
+      (@Transf_cat
+        (Functor_cat X Y)
+        (Functor_cat X Z)
+        (@comp_cat_cov_func X Y Z G)
+        (@comp_cat_cov_func X Y Z H)));
+
+symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
+  [G H : τ (Functor Y Z)]
+  (eta : τ (Transf G H))
+  : τ (Transf
+      (@comp_cat_cov_func X Y Z G)
+      (@comp_cat_cov_func X Y Z H));
+
+rule @fapp1_func _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H
+  ↪ @comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H;
+
+rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
+  ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
+
+rule @fapp1_fapp0 _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H $eta
+  ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
+
+symbol comp_cat_con_fapp1_func [X Y Z : Cat]
+  (F : τ (Functor X Y))
+  [G H : τ (Functor Y Z)]
+  : τ (Functor
+      (@Transf_cat Y Z G H)
+      (@Transf_cat
+        X Z
+        (@comp_cat_fapp0 X Y Z G F)
+        (@comp_cat_fapp0 X Y Z H F)));
+
+symbol comp_cat_con_transf [X Y Z : Cat]
+  (F : τ (Functor X Y))
+  [G H : τ (Functor Y Z)]
+  (eta : τ (Transf G H))
+  : τ (Transf
+      (@comp_cat_fapp0 X Y Z G F)
+      (@comp_cat_fapp0 X Y Z H F));
+
+// Off-diagonal action of `comp_cat_cov_func_func_transf`. This is the
+// horizontal composite `(H * alpha) o (eta * F)`.
+symbol comp_cat_cov_func_func_tapp1_func [X Y Z : Cat]
+  [G H : τ (Functor Y Z)]
+  (eta : τ (Transf G H))
+  [F K : τ (Functor X Y)]
+  : τ (Functor
+      (@Transf_cat X Y F K)
+      (@Transf_cat
+        X
+        Z
+        (@comp_cat_fapp0 X Y Z G F)
+        (@comp_cat_fapp0 X Y Z H K)));
+
+symbol comp_cat_cov_func_func_tapp1_fapp0 [X Y Z : Cat]
+  [G H : τ (Functor Y Z)]
+  (eta : τ (Transf G H))
+  [F K : τ (Functor X Y)]
+  (alpha : τ (Transf F K))
+  : τ (Transf
+      (@comp_cat_fapp0 X Y Z G F)
+      (@comp_cat_fapp0 X Y Z H K))
+≔ @comp_fapp0
+    (Functor_cat X Z)
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z H F)
+    (@comp_cat_fapp0 X Y Z H K)
+    (@comp_cat_cov_transf X Y Z H F K alpha)
+    (@comp_cat_con_transf X Y Z F G H eta);
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $F
+      (@comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta)
+  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
+
+rule @tapp1_func
+      _
+      _
+      _
+      _
+      $F
+      $K
+      (@comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta)
+  ↪ @comp_cat_cov_func_func_tapp1_func $X $Y $Z $G $H $eta $F $K;
+
+rule fapp0
+      (@comp_cat_cov_func_func_tapp1_func $X $Y $Z $G $H $eta $F $K)
+      $alpha
+  ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
+
+rule @tapp1_fapp0
+      _
+      _
+      _
+      _
+      $F
+      $K
+      (@comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta)
+      $alpha
+  ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
+
+assert [X Y Z : Cat] (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (F : τ (Functor X Y)) ⊢
+  @tapp0_fapp0
+    (Functor_cat X Y)
+    (Functor_cat X Z)
+    (@comp_cat_cov_func X Y Z G)
+    (@comp_cat_cov_func X Y Z H)
+    F
+    (@comp_cat_cov_func_func_transf X Y Z G H eta)
+  ≡ @comp_cat_con_transf X Y Z F G H eta;
+
+assert [X Y Z : Cat] (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (F K : τ (Functor X Y)) ⊢
+  @tapp1_func
+    (Functor_cat X Y)
+    (Functor_cat X Z)
+    (@comp_cat_cov_func X Y Z G)
+    (@comp_cat_cov_func X Y Z H)
+    F
+    K
+    (@comp_cat_cov_func_func_transf X Y Z G H eta)
+  ≡ @comp_cat_cov_func_func_tapp1_func X Y Z G H eta F K;
+
+assert [X Y Z : Cat] (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (F K : τ (Functor X Y))
+  (alpha : τ (Transf F K)) ⊢
+  @tapp1_fapp0
+    (Functor_cat X Y)
+    (Functor_cat X Z)
+    (@comp_cat_cov_func X Y Z G)
+    (@comp_cat_cov_func X Y Z H)
+    F
+    K
+    (@comp_cat_cov_func_func_transf X Y Z G H eta)
+    alpha
+  ≡ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
+
+rule @hom_precomp_fapp1_func Cat_cat $X $Y $Z $F $G $H
+  ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
+
+rule @hom_precomp_fapp1_fapp0 Cat_cat $X $Y $Z $F $G $H $eta
+  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
+
+rule @fapp1_func _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H
+  ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
+
+rule fapp0 (@comp_cat_con_fapp1_func $X $Y $Z $F $G $H) $eta
+  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
+
+rule @fapp1_fapp0 _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H $eta
+  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
+
+rule @tapp0_fapp0
+      $X
+      $Z
+      _
+      _
+      $i
+      (@comp_cat_con_transf $X $Y $Z $F $G $H $eta)
+  ↪ @tapp0_fapp0
+      $Y
+      $Z
+      $G
+      $H
+      (@fapp0 $X $Y $F $i)
+      $eta;
+
+rule @tapp1_func
+      $X
+      $Z
+      _
+      _
+      $i
+      $j
+      (@comp_cat_con_transf $X $Y $Z $F $G $H $eta)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $X $i $j)
+      (Hom_cat $Y
+        (@fapp0 $X $Y $F $i)
+        (@fapp0 $X $Y $F $j))
+      (Hom_cat $Z
+        (@fapp0 $Y $Z $G (@fapp0 $X $Y $F $i))
+        (@fapp0 $Y $Z $H (@fapp0 $X $Y $F $j)))
+      (@tapp1_func
+        $Y
+        $Z
+        $G
+        $H
+        (@fapp0 $X $Y $F $i)
+        (@fapp0 $X $Y $F $j)
+        $eta)
+      (@fapp1_func $X $Y $F $i $j);
+
+rule @tapp1_fapp0
+      $X
+      $Z
+      _
+      _
+      $i
+      $j
+      (@comp_cat_con_transf $X $Y $Z $F $G $H $eta)
+      $p
+  ↪ @tapp1_fapp0
+      $Y
+      $Z
+      $G
+      $H
+      (@fapp0 $X $Y $F $i)
+      (@fapp0 $X $Y $F $j)
+      $eta
+      (@fapp1_fapp0 $X $Y $F $i $j $p);
+
+assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (i : τ (Obj X)) ⊢
+  @tapp0_fapp0
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z H F)
+    i
+    (@comp_cat_con_transf X Y Z F G H eta)
+  ≡ @tapp0_fapp0
+      Y
+      Z
+      G
+      H
+      (@fapp0 X Y F i)
+      eta;
+
+assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (i j : τ (Obj X)) ⊢
+  @tapp1_func
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z H F)
+    i j
+    (@comp_cat_con_transf X Y Z F G H eta)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X i j)
+      (Hom_cat Y
+        (@fapp0 X Y F i)
+        (@fapp0 X Y F j))
+      (Hom_cat Z
+        (@fapp0 Y Z G (@fapp0 X Y F i))
+        (@fapp0 Y Z H (@fapp0 X Y F j)))
+      (@tapp1_func
+        Y
+        Z
+        G
+        H
+        (@fapp0 X Y F i)
+        (@fapp0 X Y F j)
+        eta)
+      (@fapp1_func X Y F i j);
+
+assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) (i j : τ (Obj X)) (p : τ (Hom X i j)) ⊢
+  @tapp1_fapp0
+    X
+    Z
+    (@comp_cat_fapp0 X Y Z G F)
+    (@comp_cat_fapp0 X Y Z H F)
+    i j
+    (@comp_cat_con_transf X Y Z F G H eta)
+    p
+  ≡ @tapp1_fapp0
+      Y
+      Z
+      G
+      H
+      (@fapp0 X Y F i)
+      (@fapp0 X Y F j)
+      eta
+      (@fapp1_fapp0 X Y F i j p);
 
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;
@@ -5283,6 +5670,116 @@ assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
           (@fapp0 A B G x)
           (@fapp0 A B G y))
         (@fapp1_func A B G x y);
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C)) ⊢
+  @fapp1_func
+    (Functor_cat (Product_cat A B) C)
+    (Functor_cat A (Functor_cat B C))
+    (@curry_func_func A B C)
+    F
+    G
+  ≡ @comp_cat_fapp0
+      (@Transf_cat (Product_cat A B) C F G)
+      (@Transf_cat
+        (Functor_cat B (Product_cat A B))
+        (Functor_cat B C)
+        (@comp_cat_cov_func B (Product_cat A B) C F)
+        (@comp_cat_cov_func B (Product_cat A B) C G))
+      (@Transf_cat
+        A
+        (Functor_cat B C)
+        (@curry_func A B C F)
+        (@curry_func A B C G))
+      (@comp_cat_con_fapp1_func
+        A
+        (Functor_cat B (Product_cat A B))
+        (Functor_cat B C)
+        (@Product_pair_tele_func A B)
+        (@comp_cat_cov_func B (Product_cat A B) C F)
+        (@comp_cat_cov_func B (Product_cat A B) C G))
+      (@comp_cat_cov_func_func_fapp1_func B (Product_cat A B) C F G);
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C))
+  (eta : τ (Transf F G)) ⊢
+  @fapp1_fapp0
+    (Functor_cat (Product_cat A B) C)
+    (Functor_cat A (Functor_cat B C))
+    (@curry_func_func A B C)
+    F
+    G
+    eta
+  ≡ @comp_cat_con_transf
+      A
+      (Functor_cat B (Product_cat A B))
+      (Functor_cat B C)
+      (@Product_pair_tele_func A B)
+      (@comp_cat_cov_func B (Product_cat A B) C F)
+      (@comp_cat_cov_func B (Product_cat A B) C G)
+      (@comp_cat_cov_func_func_transf B (Product_cat A B) C F G eta);
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C))
+  (eta : τ (Transf F G))
+  (x : τ (Obj A)) ⊢
+  @tapp0_fapp0
+    A
+    (Functor_cat B C)
+    (@curry_func A B C F)
+    (@curry_func A B C G)
+    x
+    (@fapp1_fapp0
+      (Functor_cat (Product_cat A B) C)
+      (Functor_cat A (Functor_cat B C))
+      (@curry_func_func A B C)
+      F
+      G
+      eta)
+  ≡ @comp_cat_con_transf
+      B
+      (Product_cat A B)
+      C
+      (@fapp0
+        A
+        (Functor_cat B (Product_cat A B))
+        (@Product_pair_tele_func A B)
+        x)
+      F
+      G
+      eta;
+
+assert [A B C : Cat]
+  (F G : τ (Functor (Product_cat A B) C))
+  (eta : τ (Transf F G))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    B
+    C
+    (@fapp0 A (Functor_cat B C) (@curry_func A B C F) x)
+    (@fapp0 A (Functor_cat B C) (@curry_func A B C G) x)
+    y
+    (@tapp0_fapp0
+      A
+      (Functor_cat B C)
+      (@curry_func A B C F)
+      (@curry_func A B C G)
+      x
+      (@fapp1_fapp0
+        (Functor_cat (Product_cat A B) C)
+        (Functor_cat A (Functor_cat B C))
+        (@curry_func_func A B C)
+        F
+        G
+        eta))
+  ≡ @tapp0_fapp0
+      (Product_cat A B)
+      C
+      F
+      G
+      (Struct_sigma x y)
+      eta;
 
 // Semantic curry sanity checks. These live after `Product_pair_tele_func`
 // computation rules, because the primary curry package is a definition through

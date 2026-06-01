@@ -2,11 +2,11 @@
 
 Date: 2026-06-01
 
-Status: partially implemented in `emdash3_2.lp`. Stages 1-5 below are now
-installed and checked for the pair telescope and ordinary curry object
-computation, including the `tapp1_at_transf` one-projection refinement.
-`curry_func_func` is now the primary semantic curry package; its transfor
-action, evaluation, and uncurry rearchitecture remain deferred.
+Status: partially implemented in `emdash3_2.lp`. Stages 1-5a below are now
+installed and checked for the pair telescope, ordinary curry object
+computation, the `tapp1_at_transf` one-projection refinement, and the semantic
+transfor action of `curry_func_func`. Evaluation and the uncurry
+rearchitecture remain deferred.
 
 Update on 2026-06-02: the remaining curry-transfor work should first consolidate
 the relationship between `hom_*` and `comp_cat_*` composition packages. The
@@ -62,7 +62,9 @@ of this plan:
 2. the arrow action of `const_section_func`, i.e. constant natural
    transformations induced by arrows;
 3. the transfor action of `comp_cat_cov_func`, i.e. postcomposition of a
-   natural transformation by an ordinary functor.
+   natural transformation by an ordinary functor;
+4. the transfor action of `comp_cat_cov_func_func`, i.e. functoriality of
+   postcomposition in the postcomposing functor.
 
 The later composition review refined the ownership model:
 
@@ -92,7 +94,7 @@ curry(F)[x][y] = F[(x,y)]
 The old curry hom-action helper heads are not part of the new core
 architecture. They were removed when unused rather than retained as parallel
 rewrite facades. Reintroduce a helper only as a projection from
-`curry_func_func`, after the generic precomposition/transfor layer exists.
+`curry_func_func`, after a focused probe shows a real consumer need.
 
 `uncurry_func` should remain stable/primitive for now. A fully semantic
 uncurry should probably use an evaluation functor, but that should be deferred
@@ -116,14 +118,17 @@ capped projection infrastructure instead of clarifying it.
   the off-diagonal hom-action functor
   `Hom_A(X,Y) -> Hom_B(F[X],G[Y])`;
 - `comp_cat_cov_func_func`, packaging postcomposition as a functor in the
-  postcomposing functor, and `comp_cat_con_func`, packaging precomposition by
-  a fixed functor;
+  postcomposing functor, including `comp_cat_cov_func_func_fapp1_func`,
+  `comp_cat_cov_func_func_transf`,
+  `comp_cat_cov_func_func_tapp1_func`, and
+  `comp_cat_cov_func_func_tapp1_fapp0` for its transfor action;
+- `comp_cat_con_func`, packaging precomposition by a fixed functor, with
+  `comp_cat_con_fapp1_func` and `comp_cat_con_transf`;
 - `curry_func_func` as the primary semantic curry package, with `curry_func`
   and `curry_fapp0_func` only definitional object projections;
 - an uncurry scaffold with stable object and hom-action heads.
 
-The remaining curry-specific transfor behavior should eventually be owned by
-more generic mechanisms:
+The curry-specific transfor behavior is now owned by generic mechanisms:
 
 - pairing into a product should be owned by `Product_pair_tele_func`;
 - off-diagonal naturality should be owned by a reusable `tapp1_func` layer,
@@ -131,8 +136,8 @@ more generic mechanisms:
 - constant-natural-transformation computation should be owned by
   `const_section_func`;
 - postcomposition of transfors should be owned by `comp_cat_cov_func`;
-- precomposition of transfors should be owned by a generic
-  `comp_cat_con_func` transfor-action package, not by curry-only helpers.
+- precomposition of transfors is owned by `comp_cat_con_func` and
+  `comp_cat_con_transf`, not by curry-only helpers.
 
 ## Feasibility Review
 
@@ -833,12 +838,29 @@ fapp1_func (hom_ R W) i j
 fapp0 (hom_postcomp_tele_func(R,W,i,j)) r
   -> hom_postcomp_func(R,W,r)
 
-fapp1_fapp0 (hom_ R W) r
-  -> hom_postcomp_func(R,W,r)
-
 fapp0 (hom_postcomp_func(R,W,r)) g
   -> R[r] o g
 ```
+
+Implementation note from the 2026-06-02 probe: do not add the broad direct fold
+
+```text
+fapp1_fapp0 (hom_ R W) r
+  -> hom_postcomp_func(R,W,r)
+```
+
+as an early global rule. It typechecks locally, but it changes old normal forms
+used by downstream path-induction assertions. Keep the existing compatibility
+rule:
+
+```text
+fapp0 (fapp1_fapp0 (hom_ R W) r) g
+  -> R[r] o g
+```
+
+and use `hom_postcomp_func` explicitly, or through
+`hom_postcomp_tele_func`, when the stable postcomposition functor itself is the
+desired normal form.
 
 Then expose the hom-action of `hom_postcomp_func` itself:
 
@@ -943,6 +965,54 @@ If probes are clean, add bridge/fold rules from the Cat-specialized generic
 heads to the `comp_cat_cov_*` heads. Prefer folding generic specialized forms
 to the existing Cat-specific stable heads rather than unfolding the stable heads
 away.
+
+The next functorial layer is postcomposition as a functor in the postcomposing
+functor:
+
+```text
+comp_cat_cov_func_func(X,Y,Z)
+  : (Y -> Z) -> ((X -> Y) -> (X -> Z))
+
+comp_cat_cov_func_func_transf(eta : G => H)
+  : comp_cat_cov_func(G) => comp_cat_cov_func(H)
+```
+
+Its object component is precomposition of `eta` by the input functor:
+
+```text
+tapp0_fapp0 (comp_cat_cov_func_func_transf eta) F
+  -> comp_cat_con_transf(F, eta)
+```
+
+Its off-diagonal component over `alpha : F => K` is horizontal composition:
+
+```text
+tapp1_fapp0 (comp_cat_cov_func_func_transf eta) alpha
+  -> comp_cat_cov_func_func_tapp1_fapp0(eta, alpha)
+
+comp_cat_cov_func_func_tapp1_fapp0(eta, alpha)
+  = (comp_cat_cov_transf H alpha) o (comp_cat_con_transf F eta)
+```
+
+Important SOP lesson from the probe: the projection-rule LHSs for
+`comp_cat_cov_func_func_transf` must leave source and target category slots
+implicit:
+
+```text
+tapp0_fapp0 _ _ _ _ F (comp_cat_cov_func_func_transf eta)
+```
+
+Do not write the LHS as:
+
+```text
+tapp0_fapp0 (Functor_cat X Y) (Functor_cat X Z) ...
+```
+
+That shape works for variable `Y`, but it fails in the curry/product use case,
+where `Y = Product_cat A B` and the new product architecture rewrites
+`Functor_cat B (Product_cat A B)` to a product of functor categories. This is
+exactly the kind of reducible endpoint family that should not appear as an LHS
+discriminator.
 
 #### Generic Precomposition From `hom_int`
 
@@ -1117,6 +1187,46 @@ tapp1_func(comp_cat_con_transf(F,eta),x,y)
 The last two should use explicit canonical `Hom_cat` endpoint forms in
 assertions, but the corresponding rewrite-rule LHSs should keep inferred
 source/target endpoints implicit or as `_`.
+
+Implementation status on 2026-06-02:
+
+- steps 1-10 above are implemented and checked in `emdash3_2.lp`;
+- `comp_func_tele` was deleted and its assertion now uses
+  `hom_postcomp_func(id_func A, x, q)`;
+- `hom_postcomp_tele_func`, `hom_postcomp_func`,
+  `hom_postcomp_fapp1_func`, and `hom_postcomp_fapp1_fapp0` are installed;
+- Cat-specialized postcomposition folds to the existing `comp_cat_cov_func`,
+  `comp_cat_cov_func_func`, `comp_cat_cov_fapp1_func`, and
+  `comp_cat_cov_transf` heads;
+- `comp_cat_cov_func_func_fapp1_func` and
+  `comp_cat_cov_func_func_transf` give the functor-in-postcomposer hom-action;
+- `comp_cat_cov_func_func_tapp1_func` and
+  `comp_cat_cov_func_func_tapp1_fapp0` give its off-diagonal action, with
+  `comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)` defined as
+  `(comp_cat_cov_transf H alpha) o (comp_cat_con_transf F eta)`;
+- `hom_precomp_fapp1_func` and `hom_precomp_fapp1_fapp0` are installed;
+- Cat-specialized precomposition folds through `comp_cat_con_func`,
+  `comp_cat_con_fapp1_func`, and `comp_cat_con_transf`;
+- `comp_cat_con_transf` has checked `tapp0_fapp0`, `tapp1_func`, and capped
+  `tapp1_fapp0` component rules;
+- `curry_func_func` now has checked semantic transfor-action assertions through
+  composition, including:
+
+```text
+fapp1_fapp0(curry_func_func, eta)
+  = comp_cat_con_transf(
+      Product_pair_tele_func,
+      comp_cat_cov_func_func_transf(eta))
+
+tapp0_fapp0(fapp1_fapp0(curry_func_func, eta), x)
+  = comp_cat_con_transf(Product_pair_tele_func[x], eta)
+
+tapp0_fapp0(tapp0_fapp0(fapp1_fapp0(curry_func_func, eta), x), y)
+  = eta[(x,y)]
+```
+
+The next implementation target is Stage 6/Eval/uncurry design, not additional
+curry-only helper heads.
 
 ### Stage 6: Keep Uncurry Stable
 

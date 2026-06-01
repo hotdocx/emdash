@@ -48,18 +48,26 @@ Retired historical references:
   `tapp0_fapp0`, and `tapp1_fapp0`;
 - pair-telescope/curry prerequisite layers:
   `tapp1_at_transf`, `tapp1_func`, `Const_transf_func`, `Const_transf`,
-  `Product_pair_tele_func`, `comp_cat_cov_fapp1_func`, and
-  `comp_cat_cov_transf`, giving functor-level off-diagonal transfor
-  components, the fixed-source transfor projection layer, constant-transfor
-  computation, product pair-telescope computation, and postcomposition of
-  transfors;
+  `Product_pair_tele_func`, `hom_postcomp_tele_func`, `hom_postcomp_func`,
+  `hom_postcomp_fapp1_func`, `hom_postcomp_fapp1_fapp0`,
+  `hom_precomp_fapp1_func`, `hom_precomp_fapp1_fapp0`,
+  `comp_cat_cov_fapp1_func`, `comp_cat_cov_transf`,
+  `comp_cat_cov_func_func_fapp1_func`, `comp_cat_cov_func_func_transf`,
+  `comp_cat_cov_func_func_tapp1_func`,
+  `comp_cat_cov_func_func_tapp1_fapp0`, `comp_cat_con_fapp1_func`, and
+  `comp_cat_con_transf`, giving functor-level off-diagonal transfor components,
+  the fixed-source transfor projection layer, constant-transfor computation,
+  product pair-telescope computation, hom-owned post/precomposition action, and
+  Cat-specific component computation for post/precomposition of transfors;
 - semantic ordinary curry routing through the pair telescope:
   `curry_func_func` is defined through
   `comp_cat_con_func(Product_pair_tele_func)` and
   `comp_cat_cov_func_func`; `curry_func` and `curry_fapp0_func` are
   definitional projections, and the checked object beta law is
-  `curry(F)[x][y] = F[(x,y)]`; curry transfor action remains deferred pending
-  a generic precomposition-transfor package;
+  `curry(F)[x][y] = F[(x,y)]`; its checked transfor component law is
+  `curry(eta)[x][y] = eta[(x,y)]`, obtained through
+  `comp_cat_cov_func_func_transf` and `comp_cat_con_transf` rather than a
+  curry-only facade;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
@@ -131,6 +139,15 @@ Keep inferred source/target arguments implicit in rule LHSs unless they are the
 real discriminator. The useful discriminator is usually the explicit data head:
 for example `Op_funcd`, `comp_catd_fapp0`, `homd_int`, or `tapp0_fapp0`, not
 the reducible endpoint categories around it.
+
+This matters especially when the endpoint category may be a functor category
+into a product. Under the current product architecture,
+`Functor_cat X (Product_cat A B)` rewrites to
+`Product_cat (Functor_cat X A) (Functor_cat X B)`. A rule LHS such as
+`tapp0_fapp0 (Functor_cat X Y) ... (stable_head ...)` may work for variable
+`Y` but fail when `Y` is `Product_cat A B`. Prefer
+`tapp0_fapp0 _ _ _ _ ... (stable_head ...)` when the stable head is the real
+discriminator.
 
 When an explicit source/target category slot is needed in an assertion or rule,
 prefer canonical normal forms:
