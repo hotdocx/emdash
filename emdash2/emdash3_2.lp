@@ -1308,6 +1308,9 @@ assert [X A B : Cat]
     ≡ @tapp0_fapp0 X A (sigma_Fst F) (sigma_Fst G) i (sigma_Fst eta);
 
 // Hom-action of evaluation-at-an-object is component projection.
+rule @fapp1_func _ $B (@fapp0_func $A $B $x) $F $G
+  ↪ @tapp0_func $A $B $F $G $x;
+
 rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
   ↪ @tapp0_fapp0 $A $B $F $G $x $η;
 
@@ -1943,6 +1946,142 @@ rule fapp0
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
   ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
 
+// Product evaluation: apply a functor to an object.
+//
+// Surface/formula:
+//   Eval_func(A,B)[(x,F)] = F[x]
+//   Eval_fapp1_func(A,B,x,y,F,G)[(p,eta)] = eta[p].
+symbol Eval_func [A B : Cat]
+  : τ (Functor (Product_cat A (Functor_cat A B)) B);
+
+rule fapp0 (@Eval_func $A $B) (Struct_sigma $x $F)
+  ↪ @fapp0 $A $B $F $x;
+
+symbol Eval_fapp1_func [A B : Cat]
+  [x y : τ (Obj A)]
+  [F G : τ (Functor A B)]
+  : τ (Functor
+      (Product_cat (Hom_cat A x y) (Transf_cat F G))
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B G y)));
+
+rule @fapp1_func _ _ (@Eval_func $A $B) (Struct_sigma $x $F) (Struct_sigma $y $G)
+  ↪ @Eval_fapp1_func $A $B $x $y $F $G;
+
+rule fapp0 (@Eval_fapp1_func $A $B $x $y $F $G) (Struct_sigma $p $eta)
+  ↪ @tapp1_fapp0 $A $B $F $G $x $y $eta $p;
+
+rule @fapp1_fapp0 _ _ (@Eval_func $A $B)
+      (Struct_sigma $x $F)
+      (Struct_sigma $y $G)
+      (Struct_sigma $p $eta)
+  ↪ @tapp1_fapp0 $A $B $F $G $x $y $eta $p;
+
+assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢
+  @fapp0 (Product_cat A (Functor_cat A B)) B
+    (@Eval_func A B)
+    (Struct_sigma x F)
+    ≡ @fapp0 A B F x;
+
+assert [A B : Cat]
+  (x y : τ (Obj A))
+  (F G : τ (Functor A B)) ⊢
+  @fapp1_func
+    (Product_cat A (Functor_cat A B))
+    B
+    (@Eval_func A B)
+    (Struct_sigma x F)
+    (Struct_sigma y G)
+  ≡ @Eval_fapp1_func A B x y F G;
+
+assert [A B : Cat]
+  (x y : τ (Obj A))
+  (F G : τ (Functor A B))
+  (p : τ (Hom A x y))
+  (eta : τ (Transf F G)) ⊢
+  @fapp1_fapp0
+    (Product_cat A (Functor_cat A B))
+    B
+    (@Eval_func A B)
+    (Struct_sigma x F)
+    (Struct_sigma y G)
+    (Struct_sigma p eta)
+  ≡ @tapp1_fapp0 A B F G x y eta p;
+
+// Fixed-point section for evaluation. This packages F |-> (x,F), so
+// fapp0_func(x) is evaluation after this section.
+symbol Eval_at_func [A B : Cat] (x : τ (Obj A))
+  : τ (Functor
+      (Functor_cat A B)
+      (Product_cat A (Functor_cat A B)));
+
+rule sigma_Fst (@Eval_at_func $A $B $x)
+  ↪ @Const_func (Functor_cat $A $B) $A $x;
+
+rule sigma_Snd (@Eval_at_func $A $B $x)
+  ↪ @id_func (Functor_cat $A $B);
+
+rule @fapp0 (Functor_cat $A $B) (Product_cat $A (Functor_cat $A $B))
+      (@Eval_at_func $A $B $x) $F
+  ↪ Struct_sigma $x $F;
+
+rule @fapp1_func (Functor_cat $A $B) (Product_cat $A (Functor_cat $A $B))
+      (@Eval_at_func $A $B $x) $F $G
+  ↪ Struct_sigma
+      (@Const_func
+        (@Transf_cat $A $B $F $G)
+        (Hom_cat $A $x $x)
+        (@id $A $x))
+      (@id_func (@Transf_cat $A $B $F $G));
+
+rule @fapp1_fapp0 (Functor_cat $A $B) (Product_cat $A (Functor_cat $A $B))
+      (@Eval_at_func $A $B $x) $F $G $eta
+  ↪ Struct_sigma (@id $A $x) $eta;
+
+rule @comp_cat_fapp0
+      (Functor_cat $A $B)
+      (Product_cat $A (Functor_cat $A $B))
+      $B
+      (@Eval_func $A $B)
+      (@Eval_at_func $A $B $x)
+  ↪ @fapp0_func $A $B $x;
+
+assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢
+  @fapp0
+    (Functor_cat A B)
+    B
+    (@fapp0_func A B x)
+    F
+  ≡ @fapp0 A B F x;
+
+assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) ⊢
+  @fapp1_func
+    (Functor_cat A B)
+    B
+    (@fapp0_func A B x)
+    F
+    G
+  ≡ @tapp0_func A B F G x;
+
+assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B))
+  (eta : τ (Transf F G)) ⊢
+  @fapp1_fapp0
+    (Functor_cat A B)
+    B
+    (@fapp0_func A B x)
+    F
+    G
+    eta
+  ≡ @tapp0_fapp0 A B F G x eta;
+
+assert [A B : Cat] (x : τ (Obj A)) ⊢
+  @comp_cat_fapp0
+    (Functor_cat A B)
+    (Product_cat A (Functor_cat A B))
+    B
+    (@Eval_func A B)
+    (@Eval_at_func A B x)
+  ≡ @fapp0_func A B x;
+
 // Ordinary product curry/uncurry scaffold and its first hom-action layer.
 //
 // Surface/formula:
@@ -2156,8 +2295,128 @@ assert [A B C : Cat]
             (Functor_cat B C)
             G
             x
-            x'
-            p));
+	            x'
+	            p));
+
+// Semantic uncurry companion through product evaluation. This keeps
+// `uncurry_func` stable, while exposing the evaluation-based construction:
+//   (x,y) |-> (y,G[x]) |-> G[x][y].
+symbol uncurry_eval_arg_func [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  : τ (Functor
+      (Product_cat A B)
+      (Product_cat B (Functor_cat B C)));
+
+rule sigma_Fst (@uncurry_eval_arg_func $A $B $C $G)
+  ↪ @Product_projR_func $A $B;
+
+rule sigma_Snd (@uncurry_eval_arg_func $A $B $C $G)
+  ↪ @comp_cat_fapp0
+      (Product_cat $A $B)
+      $A
+      (Functor_cat $B $C)
+      $G
+      (@Product_projL_func $A $B);
+
+rule @fapp0 _ _ (@uncurry_eval_arg_func $A $B $C $G) (Struct_sigma $x $y)
+  ↪ Struct_sigma
+      $y
+      (@fapp0 $A (Functor_cat $B $C) $G $x);
+
+rule @fapp1_func _ _ (@uncurry_eval_arg_func $A $B $C $G)
+      (Struct_sigma $x $y)
+      (Struct_sigma $x' $y')
+  ↪ Struct_sigma
+      (@Product_projR_func
+        (Hom_cat $A $x $x')
+        (Hom_cat $B $y $y'))
+      (@comp_cat_fapp0
+        (Product_cat
+          (Hom_cat $A $x $x')
+          (Hom_cat $B $y $y'))
+        (Hom_cat $A $x $x')
+        (@Transf_cat
+          $B
+          $C
+          (@fapp0 $A (Functor_cat $B $C) $G $x)
+          (@fapp0 $A (Functor_cat $B $C) $G $x'))
+        (@fapp1_func $A (Functor_cat $B $C) $G $x $x')
+        (@Product_projL_func
+          (Hom_cat $A $x $x')
+          (Hom_cat $B $y $y')));
+
+rule @fapp1_fapp0 _ _ (@uncurry_eval_arg_func $A $B $C $G)
+      (Struct_sigma $x $y)
+      (Struct_sigma $x' $y')
+      (Struct_sigma $p $q)
+  ↪ Struct_sigma
+      $q
+      (@fapp1_fapp0
+        $A
+        (Functor_cat $B $C)
+        $G
+        $x
+        $x'
+        $p);
+
+symbol uncurry_eval_func [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  : τ (Functor (Product_cat A B) C)
+≔ @comp_cat_fapp0
+    (Product_cat A B)
+    (Product_cat B (Functor_cat B C))
+    C
+    (@Eval_func B C)
+    (@uncurry_eval_arg_func A B C G);
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0
+    (Product_cat A B)
+    C
+    (@uncurry_eval_func A B C G)
+    (Struct_sigma x y)
+  ≡ @fapp0 B C (@fapp0 A (Functor_cat B C) G x) y;
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x x' : τ (Obj A))
+  (y y' : τ (Obj B))
+  (p : τ (Hom A x x'))
+  (q : τ (Hom B y y')) ⊢
+  @fapp1_fapp0
+    (Product_cat A B)
+    C
+    (@uncurry_eval_func A B C G)
+    (Struct_sigma x y)
+    (Struct_sigma x' y')
+    (Struct_sigma p q)
+  ≡ @tapp1_fapp0
+      B
+      C
+      (@fapp0 A (Functor_cat B C) G x)
+      (@fapp0 A (Functor_cat B C) G x')
+      y
+      y'
+      (@fapp1_fapp0 A (Functor_cat B C) G x x' p)
+      q;
+
+assert [A B C : Cat]
+  (G : τ (Functor A (Functor_cat B C)))
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @fapp0
+    (Product_cat A B)
+    C
+    (@uncurry_eval_func A B C G)
+    (Struct_sigma x y)
+  ≡ @fapp0
+      (Product_cat A B)
+      C
+      (@uncurry_func A B C G)
+      (Struct_sigma x y);
 
 assert [A B C : Cat]
   (F : τ (Functor (Product_cat A B) C)) ⊢

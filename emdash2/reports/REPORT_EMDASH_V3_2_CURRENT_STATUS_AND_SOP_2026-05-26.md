@@ -68,6 +68,13 @@ Retired historical references:
   `curry(eta)[x][y] = eta[(x,y)]`, obtained through
   `comp_cat_cov_func_func_transf` and `comp_cat_con_transf` rather than a
   curry-only facade;
+- product evaluation through `Eval_func` and `Eval_fapp1_func`, fixed-object
+  evaluation through `Eval_at_func`, and the fold
+  `Eval_func o Eval_at_func(x) = fapp0_func(x)`, with `fapp0_func(x)` now also
+  exposing its functor-level hom-action as `tapp0_func`;
+- an evaluation-based uncurry companion through `uncurry_eval_arg_func` and
+  `uncurry_eval_func`, checked on objects and capped hom-action while the stable
+  `uncurry_func` head remains unchanged;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

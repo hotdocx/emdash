@@ -96,10 +96,10 @@ architecture. They were removed when unused rather than retained as parallel
 rewrite facades. Reintroduce a helper only as a projection from
 `curry_func_func`, after a focused probe shows a real consumer need.
 
-`uncurry_func` should remain stable/primitive for now. A fully semantic
-uncurry should probably use an evaluation functor, but that should be deferred
-until `tapp1_func` exists; otherwise evaluation would duplicate the current
-capped projection infrastructure instead of clarifying it.
+`uncurry_func` remains stable/primitive for now. The semantic evaluation layer
+is now installed separately through `Eval_func`, and the evaluation-based
+uncurry companion is exposed as `uncurry_eval_func` without replacing the
+stable `uncurry_func` head.
 
 ## Current State
 
@@ -126,6 +126,11 @@ capped projection infrastructure instead of clarifying it.
   `comp_cat_con_fapp1_func` and `comp_cat_con_transf`;
 - `curry_func_func` as the primary semantic curry package, with `curry_func`
   and `curry_fapp0_func` only definitional object projections;
+- `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`, giving product
+  evaluation and the fixed-object evaluation section, with `fapp0_func(x)`
+  folding from `Eval_func o Eval_at_func(x)`;
+- `uncurry_eval_arg_func` and `uncurry_eval_func`, giving a checked semantic
+  evaluation-based uncurry companion while `uncurry_func` remains stable;
 - an uncurry scaffold with stable object and hom-action heads.
 
 The curry-specific transfor behavior is now owned by generic mechanisms:
@@ -517,21 +522,22 @@ The validated implementation order was:
 ```text
 tapp1_func
   -> Const_transf / const_section_func hom-action
-  -> Product_pair_tele_func
-  -> comp_cat_cov_func postcomposition
-  -> curry rearchitecture
-  -> deferred Eval_func / uncurry rearchitecture
+	  -> Product_pair_tele_func
+	  -> comp_cat_cov_func postcomposition
+	  -> curry rearchitecture
+	  -> Eval_func / evaluation-based uncurry companion
 ```
 
-Stages through ordinary curry object computation are now complete. The
-remaining order is:
+Stages through evaluation-based uncurry companion computation are now complete.
+The remaining order is:
 
 ```text
 hom/composition consolidation
   -> generic hom-postcomposition and hom-precomposition hom-actions
   -> Cat-specific precomposition transfor action
   -> curry_func_func transfor-action refinement
-  -> deferred Eval_func / uncurry rearchitecture
+  -> Eval_func / evaluation-based uncurry companion
+  -> future uncurry_func replacement/coherence, if desired
 ```
 
 The completed lower layers are kept in this section as an implementation
@@ -1233,7 +1239,7 @@ curry-only helper heads.
 Leave `uncurry_func` and its current hom-action rules unchanged during this
 iteration.
 
-A future semantic design would likely introduce:
+The semantic evaluation layer is now implemented separately:
 
 ```text
 Eval_func(A,B) : Product_cat A (Functor_cat A B) -> B
@@ -1261,37 +1267,56 @@ fapp1_func Eval_func (x,F) (y,G)
   -> Eval_fapp1_func x y F G
 ```
 
-This is why `Eval_func` is deferred until after `tapp1_func`: without this
+This is why `Eval_func` was deferred until after `tapp1_func`: without this
 intermediate hom-action functor, evaluation would merely repackage
 `tapp1_fapp0` and duplicate the existing capped projection API.
 
-With this order, the existing `fapp0_func x` can later be understood as a
-stable projection of evaluation at the fixed point `x`, using a constant
-functor into the first product component and the identity functor on
-`Functor_cat A B`.
+With this order, the existing `fapp0_func x` is now understood as a stable
+projection of evaluation at the fixed point `x`, using a constant functor into
+the first product component and the identity functor on `Functor_cat A B`.
 
 Schematically:
 
 ```text
 fapp0_func x
   ~= Eval_func(A,B)
-       o (Const_func (Functor_cat A B) A x,
-          id_func (Functor_cat A B))
+	       o (Const_func (Functor_cat A B) A x,
+	          id_func (Functor_cat A B))
 ```
 
-A semantic uncurry could then be:
+A semantic uncurry companion is now implemented:
 
 ```text
-uncurry(G)
+uncurry_eval_func(G)
   = Eval_func(B,C)
       o (Product_projR_func A B,
          comp_cat_fapp0 G (Product_projL_func A B))
 ```
 
-This evaluation layer should remain deferred. It probably does not require an
-internal `Product_cat_func` as a prerequisite for fixed `A,B`, but it does
-require `tapp1_func` if it is to expose `fapp1_func Eval_func` rather than
-only capped `fapp1_fapp0` behavior.
+The checked computation laws are:
+
+```text
+Eval_func[(x,F)] = F[x]
+Eval_fapp1_func[(p,eta)] = eta[p]
+
+Eval_func o Eval_at_func(x) = fapp0_func(x)
+
+uncurry_eval_func(G)[(x,y)] = G[x][y]
+uncurry_eval_func(G)[(p,q)] = G[p][q]
+```
+
+Here `G[p][q]` is represented by the off-diagonal component:
+
+```text
+tapp1_fapp0
+  (fapp1_fapp0 G p)
+  q
+```
+
+This deliberately does not replace `uncurry_func`. The stable `uncurry_func`
+head still owns the existing object and hom-action rewrite rules; the
+evaluation-based package is a semantic companion and a future route for
+consolidation after more adjunction/coherence laws are in place.
 
 ## Rewrite Hygiene
 
