@@ -2090,22 +2090,78 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
 rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
-// Project the internal off-diagonal action twice to recover the ordinary
-// functor-level component `Hom_A(X,Y) -> Hom_B(F[X],G[Y])`.
+// First projection of the internal off-diagonal action at a fixed source
+// object. This exposes the whole transfor
+//   Hom_A(X,-) => Hom_B(F[X],G[-])
+// before projecting again to the hom-functor component at Y.
+symbol tapp1_at_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
+  Π (X : τ (Obj A)),
+  Π (ϵ : τ (Transf F G)),
+  τ (Transf
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X)));
+
+rule @tapp0_fapp0
+      (Op_cat $A)
+      (@Catd_cat $A)
+      _
+      _
+      $X
+      (@tapp1_int_fapp0_transf $A $B $F $G $ϵ)
+  ↪ @tapp1_at_transf $A $B $F $G $X $ϵ;
+
 rule @tapp0_fapp0
       $A
       Cat_cat
       _
       _
       $Y
-      (@tapp0_fapp0
-        (Op_cat $A)
-        (@Catd_cat $A)
-        _
-        _
-        $X
-        (@tapp1_int_fapp0_transf $A $B $F $G $ϵ))
+      (@tapp1_at_transf $A $B $F $G $X $ϵ)
   ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ : τ (Transf F G)) (X : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      (Op_cat A)
+      (@Catd_cat A)
+      (@hom_int A A (@id_func A))
+      (@comp_cat_fapp0
+        (Op_cat A)
+        (Op_cat B)
+        (@Catd_cat A)
+        (@hom_int B A G)
+        (@Op_func A B F))
+      X
+      (@tapp1_int_fapp0_transf A B F G ϵ)
+    ≡ @tapp1_at_transf A B F G X ϵ;
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      Cat_cat
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X))
+      Y
+      (@tapp1_at_transf A B F G X ϵ)
+    ≡ @tapp1_func A B F G X Y ϵ;
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      Cat_cat
+      _
+      _
+      Y
+      (@tapp0_fapp0
+        (Op_cat A)
+        (@Catd_cat A)
+        _
+        _
+        X
+        (@tapp1_int_fapp0_transf A B F G ϵ))
+    ≡ @tapp1_func A B F G X Y ϵ;
 
 /*
   Ordinary internal hom-action package.

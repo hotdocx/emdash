@@ -3,8 +3,8 @@
 Date: 2026-06-01
 
 Status: partially implemented in `emdash3_2.lp`. Stages 1-4 below are now
-installed and checked; curry and evaluation/uncurry rearchitecture remain
-deferred.
+installed and checked, including the `tapp1_at_transf` one-projection
+refinement; curry and evaluation/uncurry rearchitecture remain deferred.
 
 ## Executive Summary
 
@@ -201,8 +201,25 @@ where the target category of the original transfor is a `Product_cat`.
 
 #### Bridge From `tapp1_int_fapp0_transf`
 
-The bridge from the internal package to `tapp1_func` can probably be a single
-nested projection rule:
+The bridge from the internal package to `tapp1_func` should use an intermediate
+one-projection stable head:
+
+```text
+tapp1_at_transf eta X
+  : Transf(hom_A(X,-), hom_B(F[X],G[-]))
+```
+
+The projection ladder is:
+
+```text
+tapp0_fapp0 X (tapp1_int_fapp0_transf eta)
+  -> tapp1_at_transf eta X
+
+tapp0_fapp0 Y (tapp1_at_transf eta X)
+  -> tapp1_func eta X Y
+```
+
+The old direct composite remains a checked consequence:
 
 ```text
 tapp0_fapp0 Y
@@ -210,11 +227,17 @@ tapp0_fapp0 Y
   -> tapp1_func eta X Y
 ```
 
-This refines the SOP: a nested projection is acceptable when the discriminants
-are stable projection heads and the reducible endpoint families are not used
-as discriminators. In Lambdapi, keep the source/target endpoint arguments
-implicit or as `_` on the LHS. The stable heads should be the two
-`tapp0_fapp0` projections and `tapp1_int_fapp0_transf`.
+This keeps the meaningful semantic layer visible. `tapp1_at_transf eta X`
+is the fixed-source natural family in the target object, and may become the
+right place to express ordinary lax-naturality data, analogously to the current
+component-level `functord_laxity_*` architecture for displayed functors.
+
+This still refines the SOP: a nested projection assertion is acceptable when
+the discriminants are stable projection heads and the reducible endpoint
+families are not used as rewrite-rule discriminators. In Lambdapi, keep the
+source/target endpoint arguments implicit or as `_` on the rule LHSs. The
+stable heads should be `tapp0_fapp0`, `tapp1_int_fapp0_transf`, and
+`tapp1_at_transf`.
 
 The risk is typechecking the bridge, not the mathematical rule. The endpoint
 families reduce through:
@@ -240,10 +263,10 @@ fapp0 (hom_ B A G (F[X])) Y
 
 These are the "reducible endpoint families": endpoint types whose canonical
 shape is recovered only after reductions through `comp_cat_fapp0`, `hom_int`,
-`hom_`, `Op_func`, and `Transf_cat K Cat_cat -> Functord_cat`. The rule should
-be probed in a temporary copy. If it checks cleanly and does not noticeably
-hurt decision-tree behavior, keep it. If not, split it into a first-projection
-stable head and then the second projection to `tapp1_func`.
+`hom_`, `Op_func`, and `Transf_cat K Cat_cat -> Functord_cat`. The checked
+implementation avoids using those reducible families as discriminators by
+installing the two smaller rules above and a focused assertion for the old
+double projection.
 
 ### Constant Transfors
 
@@ -364,10 +387,10 @@ Keep `tapp1_fapp0` as the capped projection obtained by applying
 
 `tapp1_int_func_transf` and `tapp1_int_fapp0_transf` remain useful as a future
 internal action package. The immediate bridge from `tapp1_int_fapp0_transf` to
-`tapp1_func` should be tried as the single nested projection rule above. If it
-is fragile, introduce the one-projection stable head as a fallback. The
-important point is that new semantic rules should target `tapp1_func`, not
-only `tapp1_fapp0`.
+ordinary components now goes through `tapp1_at_transf`, then `tapp1_func`. The
+important point is that new semantic rules should target the highest reusable
+layer they need: `tapp1_at_transf` for fixed-source naturality, `tapp1_func`
+for hom-functor action, and `tapp1_fapp0` only for capped components.
 
 Later, after the direct rules are checked, we can decide whether
 `tapp1_int_func_transf` should compute to the same stable postcomposition
@@ -381,8 +404,9 @@ Implemented and checked in `emdash3_2.lp`:
   `Hom_A(X,Y) -> Hom_B(F[X],G[Y])`;
 - product projection rules for `tapp1_func`;
 - identity-transfor rules for `tapp1_func` and `tapp1_fapp0`;
-- the single nested projection bridge
-  `tapp0_fapp0 Y (tapp0_fapp0 X (tapp1_int_fapp0_transf eta))`;
+- `tapp1_at_transf`, the fixed-source one-projection layer
+  `Hom_A(X,-) => Hom_B(F[X],G[-])`, plus the two projection rules
+  `tapp1_int_fapp0_transf -> tapp1_at_transf -> tapp1_func`;
 - `Const_transf_func` and `Const_transf`, with `tapp0_fapp0`,
   `tapp1_func`, and capped `tapp1_fapp0` computation;
 - the hom-action of `const_section_func`;
@@ -393,8 +417,11 @@ Implemented and checked in `emdash3_2.lp`:
 
 Implementation lessons:
 
-- The single nested bridge from `tapp1_int_fapp0_transf` to `tapp1_func`
-  typechecks directly when endpoint families are kept implicit on the LHS.
+- The direct nested bridge from `tapp1_int_fapp0_transf` to `tapp1_func`
+  typechecked, but the implementation now uses `tapp1_at_transf` as the
+  stable one-projection layer. This preserves the whole fixed-source transfor
+  for future lax-naturality infrastructure while keeping the old nested
+  projection as a checked consequence.
 - `Product_pair_tele_func` rules should be installed after
   `const_section_func`, because its stable component projections are
   `const_section_func B A` and `Const_func A (Functor_cat B B) id_B`.
@@ -453,19 +480,7 @@ fapp0 (tapp1_func eta X Y) p -> tapp1_fapp0 eta p
 
 Add product projection rules for `sigma_Fst`/`sigma_Snd` over `tapp1_func`.
 
-Then probe the single nested bridge:
-
-```text
-tapp0_fapp0 Y
-  (tapp0_fapp0 X (tapp1_int_fapp0_transf eta))
-  -> tapp1_func eta X Y
-```
-
-If that rule fails or introduces bad decision-tree behavior, add a first
-projection stable head and route the bridge in two smaller rules.
-
-The fallback first-projection head should be named and typed along these
-lines:
+Then add the first-projection stable head:
 
 ```text
 tapp1_at_transf [A B F G] eta X
@@ -489,6 +504,14 @@ tapp0_fapp0 X (tapp1_int_fapp0_transf eta)
 
 tapp0_fapp0 Y (tapp1_at_transf eta X)
   -> tapp1_func eta X Y
+```
+
+Also keep a regression assertion for the old composite projection:
+
+```text
+tapp0_fapp0 Y
+  (tapp0_fapp0 X (tapp1_int_fapp0_transf eta))
+  == tapp1_func eta X Y
 ```
 
 ### Stage 2: Constant Transfor Infrastructure

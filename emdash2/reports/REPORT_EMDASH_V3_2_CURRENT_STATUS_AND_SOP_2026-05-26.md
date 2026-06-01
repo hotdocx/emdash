@@ -47,11 +47,12 @@ Retired historical references:
   projection-oriented computation for `fapp0`, `fapp1_func`, `fapp1_fapp0`,
   `tapp0_fapp0`, and `tapp1_fapp0`;
 - pair-telescope/curry prerequisite layers:
-  `tapp1_func`, `Const_transf_func`, `Const_transf`,
+  `tapp1_at_transf`, `tapp1_func`, `Const_transf_func`, `Const_transf`,
   `Product_pair_tele_func`, `comp_cat_cov_fapp1_func`, and
   `comp_cat_cov_transf`, giving functor-level off-diagonal transfor
-  components, constant-transfor computation, product pair-telescope
-  computation, and postcomposition of transfors;
+  components, the fixed-source transfor projection layer, constant-transfor
+  computation, product pair-telescope computation, and postcomposition of
+  transfors;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
