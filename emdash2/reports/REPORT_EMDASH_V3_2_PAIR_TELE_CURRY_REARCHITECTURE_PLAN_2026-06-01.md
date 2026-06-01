@@ -418,6 +418,33 @@ tapp0_fapp0 Y
 If that rule fails or introduces bad decision-tree behavior, add a first
 projection stable head and route the bridge in two smaller rules.
 
+The fallback first-projection head should be named and typed along these
+lines:
+
+```text
+tapp1_at_transf [A B F G] eta X
+  : Transf_cat
+      (hom_ A A (id_func A) X)
+      (hom_ B A G (fapp0 F X))
+```
+
+Mathematically:
+
+```text
+tapp1_at_transf(eta,X)
+  : Hom_A(X,-) => Hom_B(F[X],G[-])
+```
+
+with bridge rules:
+
+```text
+tapp0_fapp0 X (tapp1_int_fapp0_transf eta)
+  -> tapp1_at_transf eta X
+
+tapp0_fapp0 Y (tapp1_at_transf eta X)
+  -> tapp1_func eta X Y
+```
+
 ### Stage 2: Constant Transfor Infrastructure
 
 Add `Const_transf_func` and `Const_transf` near `Const_func` or near
@@ -547,10 +574,43 @@ Eval_func(A,B)[(x,F)] = F[x]
 Eval_func(A,B)[(p,eta)] = fapp0 (tapp1_func eta x y) p
 ```
 
+The hom-action should not be specified only by the capped last line. To expose
+`fapp1_func Eval_func`, introduce the intermediate hom-action functor:
+
+```text
+Eval_fapp1_func [A B] [x y : Obj A] [F G : Functor A B]
+  : Functor
+      (Product_cat (Hom_cat A x y) (Transf_cat F G))
+      (Hom_cat B (F[x]) (G[y]))
+
+Eval_fapp1_func[(p,eta)]
+  = fapp0 (tapp1_func eta x y) p
+```
+
+Then:
+
+```text
+fapp1_func Eval_func (x,F) (y,G)
+  -> Eval_fapp1_func x y F G
+```
+
+This is why `Eval_func` is deferred until after `tapp1_func`: without this
+intermediate hom-action functor, evaluation would merely repackage
+`tapp1_fapp0` and duplicate the existing capped projection API.
+
 With this order, the existing `fapp0_func x` can later be understood as a
 stable projection of evaluation at the fixed point `x`, using a constant
 functor into the first product component and the identity functor on
 `Functor_cat A B`.
+
+Schematically:
+
+```text
+fapp0_func x
+  ~= Eval_func(A,B)
+       o (Const_func (Functor_cat A B) A x,
+          id_func (Functor_cat A B))
+```
 
 A semantic uncurry could then be:
 
