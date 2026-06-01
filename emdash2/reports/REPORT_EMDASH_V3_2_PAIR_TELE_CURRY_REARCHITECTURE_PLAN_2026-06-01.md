@@ -2,9 +2,11 @@
 
 Date: 2026-06-01
 
-Status: partially implemented in `emdash3_2.lp`. Stages 1-4 below are now
-installed and checked, including the `tapp1_at_transf` one-projection
-refinement; curry and evaluation/uncurry rearchitecture remain deferred.
+Status: partially implemented in `emdash3_2.lp`. Stages 1-5 below are now
+installed and checked for ordinary curry object/hom-action routing, including
+the `tapp1_at_transf` one-projection refinement. The action of
+`curry_func_func` on transfors, evaluation, and uncurry rearchitecture remain
+deferred.
 
 ## Executive Summary
 
@@ -58,10 +60,21 @@ copy. The arrow computation needs three missing generic layers:
 3. the transfor action of `comp_cat_cov_func`, i.e. postcomposition of a
    natural transformation by an ordinary functor.
 
-Once those are installed, `curry(F)` can be routed through:
+With those installed, `curry(F)` is routed through:
 
 ```text
 curry(F) = comp_cat_cov_func(F) o Product_pair_tele_func(A,B)
+```
+
+The stable old curry heads are kept as facades, but now rewrite to this
+semantic route at the object and ordinary hom-action levels:
+
+```text
+curry_fapp0_func(F,x)
+  -> F o Product_pair_tele_func[x]
+
+curry_outer_transf(F,p)
+  -> comp_cat_cov_func(F)[Product_pair_tele_func[p]]
 ```
 
 `uncurry_func` should remain stable/primitive for now. A fully semantic
@@ -414,6 +427,13 @@ Implemented and checked in `emdash3_2.lp`:
   projectionwise;
 - `comp_cat_cov_fapp1_func` and `comp_cat_cov_transf`, with `tapp0_fapp0`,
   `tapp1_func`, and capped `tapp1_fapp0` computation.
+- generic full hom-action rules for ordinary identity and composition:
+  `fapp1_func(id_func) -> id_func` and
+  `fapp1_func(comp_cat_fapp0 F G) -> comp_cat_fapp0(F_1,G_1)`;
+- semantic curry aliases:
+  `curry_func`, `curry_fapp0_func`, `curry_inner_fapp1_func`,
+  `curry_outer_fapp1_func`, and `curry_outer_transf` now route through
+  `Product_pair_tele_func`, `comp_cat_cov_func`, and `comp_cat_cov_transf`.
 
 Implementation lessons:
 
@@ -435,6 +455,15 @@ Implementation lessons:
 - Direct capped rules for `Const_transf` and `comp_cat_cov_transf` are kept so
   the existing `tapp1_fapp0` API still computes and joins with the new
   `tapp1_func` layer.
+- The object rule for `Product_pair_tele_func` should use the normalized
+  target `Product_cat (Functor_cat B A) (Functor_cat B B)`, matching the
+  already-normalized `fapp1_func` and `fapp1_fapp0` rules. The reducible target
+  `Functor_cat B (Product_cat A B)` was too weak once semantic curry exposed
+  the normalized target during type preservation.
+- Fully semantic ordinary curry also needs full hom-action computation for
+  ordinary identity and composition. Adding `fapp1_func(id_func)` and
+  `fapp1_func(comp_cat_fapp0 F G)` made the old curry stable heads join with
+  the new `comp_cat_cov_func(F) o Product_pair_tele_func` route.
 
 ## Implementation Order / Remaining Work
 
@@ -449,11 +478,11 @@ tapp1_func
   -> deferred Eval_func / uncurry rearchitecture
 ```
 
-Stages through `comp_cat_cov_func postcomposition` are now complete. The
+Stages through ordinary curry object/hom-action routing are now complete. The
 remaining order is:
 
 ```text
-curry rearchitecture
+curry_func_func transfor-action refinement
   -> deferred Eval_func / uncurry rearchitecture
 ```
 
@@ -595,40 +624,54 @@ transfor computation.
 
 ### Stage 5: Route Curry Through Pair Telescope
 
-The plan is to replace the old curry architecture, not preserve its current
-symbols as primitive structure. During migration, keep only what is needed to
-keep the file checkable. A conservative first edit is to add a semantic alias
-or redefine only the object-action helper:
+The old curry heads are now facades over the semantic route, not independent
+primitive structure. The object-action helper rewrites to:
 
 ```text
 curry_fapp0_func(F,x)
   = comp_cat_fapp0 F (fapp0 Product_pair_tele_func x)
 ```
 
-Then keep:
+The outer hom-action rewrites through generic postcomposition:
 
 ```text
-fapp0 (curry_func F) x -> curry_fapp0_func F x
-```
-
-This preserves existing downstream references while making the object-level
-computation semantic:
-
-```text
-curry(F)[x][y] == F[(x,y)]
-```
-
-After Stage 4 passes, evaluate whether `curry_outer_transf` can be redefined
-or replaced by the generic postcomposition transfor:
-
-```text
-curry(F)[p]
+curry_outer_transf(F,p)
   = comp_cat_cov_func(F)[Product_pair_tele_func[p]]
 ```
 
-After the new core is in place, old heads such as `curry_outer_transf`,
-`curry_outer_fapp1_func`, and `curry_inner_fapp1_func` should be removed,
-deferred, or reintroduced only as aliases over the new architecture.
+Installed semantic alias rules:
+
+```text
+curry_func(F)
+  -> comp_cat_cov_func(F) o Product_pair_tele_func
+
+curry_fapp0_func(F,x)
+  -> F o Product_pair_tele_func[x]
+
+curry_inner_fapp1_func(F,x,y,y')
+  -> fapp1_func(F o Product_pair_tele_func[x],y,y')
+
+curry_outer_fapp1_func(F,x,x')
+  -> comp_cat_cov_fapp1_func(F) o Product_pair_tele_func[x,x']
+
+curry_outer_transf(F,p)
+  -> comp_cat_cov_transf(F,Product_pair_tele_func[p])
+```
+
+This preserves existing downstream references while making the usual object and
+outer arrow computations semantic:
+
+```text
+curry(F)[x][y] = F[(x,y)]
+curry(F)[p][y] = F[(p,id_y)]
+```
+
+The action of `curry_func_func` on a transfor `eta : F => G` still uses the old
+stable `curry_transf` / `curry_transf_tapp0_transf` facade. A fully semantic
+version should probably introduce the precomposition analogue of
+`comp_cat_cov_transf`, because `curry_transf(eta)[x]` is the precomposition of
+`eta` by `Product_pair_tele_func[x]`. That prerequisite is deliberately
+deferred rather than hand-encoding precomposition only for curry.
 
 ### Stage 6: Keep Uncurry Stable
 

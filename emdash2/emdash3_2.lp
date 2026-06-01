@@ -5329,7 +5329,7 @@ rule sigma_Fst (@Product_pair_tele_func $A $B)
 rule sigma_Snd (@Product_pair_tele_func $A $B)
   ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
 
-rule @fapp0 $A (Functor_cat $B (Product_cat $A $B))
+rule @fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
       (@Product_pair_tele_func $A $B) $x
   ↪ Struct_sigma (@Const_func $B $A $x) (@id_func $B);
 
@@ -5433,6 +5433,206 @@ assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x'))
       (@fapp1_fapp0 A (Functor_cat B (Product_cat A B))
         (@Product_pair_tele_func A B) x x' p))
     ≡ @fapp1_func B B (@id_func B) y y';
+
+// Generic full hom-action for identity and composition of ordinary functors.
+// These rules let semantic aliases such as curry expose functor-level action
+// instead of falling back to capped `fapp1_fapp0` computation only.
+rule @fapp1_func $A $A (@id_func $A) $x $y
+  ↪ @id_func (Hom_cat $A $x $y);
+
+rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
+  ↪ @comp_cat_fapp0
+      (Hom_cat $A $x $y)
+      (Hom_cat $B
+        (@fapp0 $A $B $G $x)
+        (@fapp0 $A $B $G $y))
+      (Hom_cat $C
+        (@fapp0 $B $C $F (@fapp0 $A $B $G $x))
+        (@fapp0 $B $C $F (@fapp0 $A $B $G $y)))
+      (@fapp1_func
+        $B
+        $C
+        $F
+        (@fapp0 $A $B $G $x)
+        (@fapp0 $A $B $G $y))
+      (@fapp1_func $A $B $G $x $y);
+
+assert [A : Cat] (x y : τ (Obj A)) ⊢
+  @fapp1_func A A (@id_func A) x y
+    ≡ @id_func (Hom_cat A x y);
+
+assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func A C (@comp_cat_fapp0 A B C F G) x y
+    ≡ @comp_cat_fapp0
+        (Hom_cat A x y)
+        (Hom_cat B
+          (@fapp0 A B G x)
+          (@fapp0 A B G y))
+        (Hom_cat C
+          (@fapp0 B C F (@fapp0 A B G x))
+          (@fapp0 B C F (@fapp0 A B G y)))
+        (@fapp1_func
+          B
+          C
+          F
+          (@fapp0 A B G x)
+          (@fapp0 A B G y))
+        (@fapp1_func A B G x y);
+
+// Semantic curry aliases through the product pairing telescope.
+rule @curry_func $A $B $C $F
+  ↪ @comp_cat_fapp0
+      $A
+      (Functor_cat $B (Product_cat $A $B))
+      (Functor_cat $B $C)
+      (@comp_cat_cov_func $B (Product_cat $A $B) $C $F)
+      (@Product_pair_tele_func $A $B);
+
+rule @curry_fapp0_func $A $B $C $F $x
+  ↪ @comp_cat_fapp0
+      $B
+      (Product_cat $A $B)
+      $C
+      $F
+      (@fapp0
+        $A
+        (Functor_cat $B (Product_cat $A $B))
+        (@Product_pair_tele_func $A $B)
+        $x);
+
+rule @curry_inner_fapp1_func $A $B $C $F $x $y $y'
+  ↪ @fapp1_func
+      $B
+      $C
+      (@comp_cat_fapp0
+        $B
+        (Product_cat $A $B)
+        $C
+        $F
+        (@fapp0
+          $A
+          (Functor_cat $B (Product_cat $A $B))
+          (@Product_pair_tele_func $A $B)
+          $x))
+      $y
+      $y';
+
+rule @curry_outer_fapp1_func $A $B $C $F $x $x'
+  ↪ @comp_cat_fapp0
+      (Hom_cat $A $x $x')
+      (@Transf_cat
+        $B
+        (Product_cat $A $B)
+        (@fapp0
+          $A
+          (Functor_cat $B (Product_cat $A $B))
+          (@Product_pair_tele_func $A $B)
+          $x)
+        (@fapp0
+          $A
+          (Functor_cat $B (Product_cat $A $B))
+          (@Product_pair_tele_func $A $B)
+          $x'))
+      (@Transf_cat
+        $B
+        $C
+        (@curry_fapp0_func $A $B $C $F $x)
+        (@curry_fapp0_func $A $B $C $F $x'))
+      (@comp_cat_cov_fapp1_func
+        $B
+        (Product_cat $A $B)
+        $C
+        $F
+        (@fapp0
+          $A
+          (Functor_cat $B (Product_cat $A $B))
+          (@Product_pair_tele_func $A $B)
+          $x)
+        (@fapp0
+          $A
+          (Functor_cat $B (Product_cat $A $B))
+          (@Product_pair_tele_func $A $B)
+          $x'))
+      (@fapp1_func
+        $A
+        (Functor_cat $B (Product_cat $A $B))
+        (@Product_pair_tele_func $A $B)
+        $x
+        $x');
+
+rule @curry_outer_transf $A $B $C $F $x $x' $p
+  ↪ @comp_cat_cov_transf
+      $B
+      (Product_cat $A $B)
+      $C
+      $F
+      (@fapp0
+        $A
+        (Functor_cat $B (Product_cat $A $B))
+        (@Product_pair_tele_func $A $B)
+        $x)
+      (@fapp0
+        $A
+        (Functor_cat $B (Product_cat $A $B))
+        (@Product_pair_tele_func $A $B)
+        $x')
+      (@fapp1_fapp0
+        $A
+        (Functor_cat $B (Product_cat $A $B))
+        (@Product_pair_tele_func $A $B)
+        $x
+        $x'
+        $p);
+
+assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) ⊢
+  @curry_func A B C F
+    ≡ @comp_cat_fapp0
+        A
+        (Functor_cat B (Product_cat A B))
+        (Functor_cat B C)
+        (@comp_cat_cov_func B (Product_cat A B) C F)
+        (@Product_pair_tele_func A B);
+
+assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C))
+  (x : τ (Obj A)) ⊢
+  @curry_fapp0_func A B C F x
+    ≡ @comp_cat_fapp0
+        B
+        (Product_cat A B)
+        C
+        F
+        (@fapp0
+          A
+          (Functor_cat B (Product_cat A B))
+          (@Product_pair_tele_func A B)
+          x);
+
+assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C))
+  (x x' : τ (Obj A)) (p : τ (Hom A x x')) ⊢
+  @curry_outer_transf A B C F x x' p
+    ≡ @comp_cat_cov_transf
+        B
+        (Product_cat A B)
+        C
+        F
+        (@fapp0
+          A
+          (Functor_cat B (Product_cat A B))
+          (@Product_pair_tele_func A B)
+          x)
+        (@fapp0
+          A
+          (Functor_cat B (Product_cat A B))
+          (@Product_pair_tele_func A B)
+          x')
+        (@fapp1_fapp0
+          A
+          (Functor_cat B (Product_cat A B))
+          (@Product_pair_tele_func A B)
+          x
+          x'
+          p);
 
 // Internalized-x prerequisite: pull a section back along a base functor.
 //
