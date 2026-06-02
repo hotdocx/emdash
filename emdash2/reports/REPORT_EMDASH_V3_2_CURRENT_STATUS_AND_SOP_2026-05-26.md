@@ -32,6 +32,49 @@ Retired historical references:
 - Do not consult those archived files during normal v3.2 work. Recover them
   only for explicitly requested historical comparison.
 
+## Current Orientation Snapshot
+
+Review snapshot: 2026-06-03.
+
+`emdash3_2.lp` remains the active v3.2 source. The current architecture is
+centered on directed Cat-valued families, with `Catd_cat K` as the canonical
+normal form of `Functor_cat K Cat_cat`, and with `Functord`/`Transfd` carrying
+the displayed or natural family layers.
+
+The primary path-induction theorem is `PathInd_transfd(Z)`. The Sigma-total
+presentation `PathInd_funcd(Z)` is derived by
+`Sigma_transfd_funcd(PathInd_transfd Z)` and should not be treated as the
+primitive theorem.
+
+`Pi_cat(E)` is a defined section-category alias through
+`Functord_cat(Const_catd K Terminal_cat, E)`, not a primitive kernel
+discriminator. Sigma maps use the standalone lax-prefix/precomposition normal
+form through `functord_laxity_precomp_func` and
+`functord_transport_fibre_fapp1_fapp0`; arbitrary Sigma maps do not strictly
+preserve canonical transport without an additional strict/cartesian
+specialization.
+
+The Product/curry layer is partly rearchitected around semantic owners:
+product-valued functors reduce to products of functor categories,
+`Product_pair_tele_func` owns pairing, `curry_func_func` routes through the pair
+telescope, and semantic uncurry routes through right-ordered `Eval_func` plus
+the `Product_cat_func` stable projection ladder. The transfor action of
+semantic uncurry remains deferred.
+
+The faithful surface-syntax plan is a presentation layer over this kernel, not
+a replacement for it. Default surface mode should print mathematical,
+polarity-aware syntax such as `Π y :^f Z^op, D[y^-] ...`, while kernel/debug
+mode should preserve stable rewrite heads such as `homd_src_func`,
+`tdapp0_fapp0`, and `functord_laxity_fdapp1_cell`.
+
+Current validation observed during this review:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+checks both `emdash2.lp` and `emdash3_2.lp`.
+
 ## Current v3.2 Status
 
 `emdash3_2.lp` now has:
