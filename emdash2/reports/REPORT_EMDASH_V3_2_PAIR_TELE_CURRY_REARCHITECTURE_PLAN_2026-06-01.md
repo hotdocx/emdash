@@ -130,7 +130,7 @@ functor is needed.
 - `curry_func_func` as the primary semantic curry package, with `curry_func`
   and `curry_fapp0_func` only definitional object projections;
 - `Product_cat_func` for internalized product formation; the fixed-right
-  product action is being revised to use the stable ladder
+  product action uses the stable ladder
   `Product_cat_fapp1_func` / `Product_cat_fapp1_fapp0_functord` /
   `Product_cat_fapp1_tapp0_func`;
 - right-ordered `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`, with
@@ -148,9 +148,9 @@ Reassessment after the `Product_cat_func` refactor:
 - `Product_mapL_transf` was removed rather than retained as a parallel stable
   theory;
 - the checked direct definition of `Product_mapL_func` as
-  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)` should be replaced by the
-  stable head `Product_cat_fapp1_tapp0_func`;
-- `Product_mapL_func_func` may remain definitionally
+  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)` was replaced by the stable
+  head `Product_cat_fapp1_tapp0_func`;
+- `Product_mapL_func_func` remains definitionally
   `tapp0_func(B) o Product_cat_fapp1_func(A,A')`;
 - object and capped-arrow laws for `G * 1_B`, plus object and capped-arrow laws
   for semantic uncurry, are checked;
@@ -555,8 +555,10 @@ tapp1_func
 The temporary evaluation-based uncurry companion proved the needed component
 computations, but its argument order was not the desired global architecture.
 The Stage 6 replacement fixed evaluation order, routed fixed-right product
-mapping through `Product_cat_func`, and demoted `Product_mapL_func` /
-`Product_mapL_func_func` to definitions. The remaining order is:
+mapping through the stable projection ladder of `Product_cat_func`, renamed the
+object-level fixed-right action to `Product_cat_fapp1_tapp0_func`, and kept
+`Product_mapL_func_func` as a defined functorial package. The remaining order
+is:
 
 ```text
 hom/composition consolidation
@@ -1378,42 +1380,42 @@ argument map:
 That companion proved the object and capped arrow computations, but it did not
 package the functoriality of `G` in the correct product-functorial layer.
 
-Implementation status on 2026-06-02, after post-review:
+Implementation status on 2026-06-02, after the stable-ladder correction:
 
 - `Product_cat_func` and `Product_cat_fapp0_func` give internalized product
   formation;
 - `Product_cat_func[A]` projection uses implicit source/target slots so the
   rule works with the canonical `Catd_cat Cat_cat` target as well as the
   readable `Functor_cat Cat_cat Cat_cat` notation;
-- the current checked file has a direct nested rule from
-  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)` to the paired functor
-  `(G o Product_projL_func, Product_projR_func)`;
-- that direct nested rule typechecks but should be treated as an intermediate
-  implementation mistake: it violates the stable-head SOP and performs
-  constructor-style computation before reaching a named projection head;
-- `Product_mapL_func(G,B)` is currently a definition of that raw nested
-  projection, but should be replaced/renamed by the stable projection head
-  `Product_cat_fapp1_tapp0_func(A,A',B,G)`;
-- `Product_mapL_func_func(A,A',B)` is currently a definition through
-  `tapp0_func(B) o fapp1_func(Product_cat_func,A,A')`; it should remain a
-  defined symbol, but should route through `Product_cat_fapp1_func(A,A')`;
+- the direct nested rule from
+  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)` to the paired functor was
+  removed;
+- `Product_cat_fapp1_func(A,A')` is the stable functor-level projection of
+  `fapp1_func Product_cat_func A A'`;
+- `Product_cat_fapp1_fapp0_functord(A,A',G)` is the stable object projection of
+  that functor-level action;
+- `Product_cat_fapp1_tapp0_func(A,A',B,G)` is the stable fixed-right product
+  action `G * 1_B`, and owns the projection/object/capped-arrow computation;
+- `Product_mapL_func` was removed/renamed away;
+- `Product_mapL_func_func(A,A',B)` remains a defined symbol through
+  `tapp0_func(B) o Product_cat_fapp1_func(A,A')`;
 - the independent stable heads `Product_mapL_func_func_fapp1_func` and
   `Product_mapL_transf` were removed;
 - `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func` were replaced in place
   with the right-ordered convention;
 - `uncurry_func_func` is now defined as
   `comp_cat_cov_func(Eval_func(B,C)) o Product_mapL_func_func`, where
-  `Product_mapL_func_func` itself is defined through `Product_cat_func`;
+  `Product_mapL_func_func` itself is defined through `Product_cat_fapp1_func`;
 - `uncurry_func` is the object projection of `uncurry_func_func`;
 - the obsolete helper heads `uncurry_eval_arg_func`, `uncurry_eval_func`,
   `uncurry_fapp1_func`, `uncurry_func_fapp1_func`, and `uncurry_transf` were
   removed.
 
-Recommended correction before the next implementation pass:
+Stable-ladder architecture now implemented:
 
 - keep the right-ordered `Eval_func` and semantic uncurry direction;
-- replace the direct nested `tapp0_fapp0(... fapp1_fapp0 Product_cat_func ...)`
-  rule by stable heads:
+- the direct nested `tapp0_fapp0(... fapp1_fapp0 Product_cat_func ...)` rule is
+  replaced by stable heads:
 
 ```text
 Product_cat_fapp1_func(A,A')
@@ -1432,7 +1434,7 @@ Product_cat_fapp1_tapp0_func(A,A',B,G)
   : Functor (Product_cat A B) (Product_cat A' B)
 ```
 
-- add bridge rules only between adjacent rungs:
+- bridge rules are only between adjacent rungs:
 
 ```text
 fapp1_func Product_cat_func A A'
@@ -1468,14 +1470,12 @@ Product_cat_fapp1_tapp0_func(A,A',B,G)[(p,q)]
   -> (G[p], q)
 ```
 
-- remove or rename the object-level `Product_mapL_func` head. Recommended name:
+- the object-level `Product_mapL_func` head was removed/renamed to
   `Product_cat_fapp1_tapp0_func`, because it records that the head is the
-  `tapp0` projection of the `fapp1` action of `Product_cat_func`. This is less
-  misleading than keeping both `Product_mapL_func` as a stable projection and
-  `Product_mapL_func_func` as a defined functorial package;
+  `tapp0` projection of the `fapp1` action of `Product_cat_func`;
 - keep `Product_mapL_func_func` as a defined symbol for readability, with body
   `tapp0_func(B) o Product_cat_fapp1_func(A,A')`;
-- keep the object-projection assertion, but change its RHS to the renamed stable
+- keep the object-projection assertion with RHS at the renamed stable
   head:
 
 ```text
@@ -1530,10 +1530,10 @@ Use the v3.2 SOP:
 - add stable heads only when they represent reusable semantic objects or avoid
   fragile nested projection LHSs;
 - do not introduce a parallel stable theory for an action that is already owned
-  by an internalized functor. If a helper such as `Product_mapL_func` is useful,
-  it must be a projection or definition from the owning internalized functor
-  (`Product_cat_func` here), not an independent primitive with its own unrelated
-  folds;
+  by an internalized functor. If a helper is useful, expose it as an adjacent
+  stable projection rung from the owning internalized functor
+  (`Product_cat_func` here), not as a raw nested chain or an independent
+  primitive with unrelated folds;
 - before retaining a stable helper, audit the full ladder of relationships it
   would need: object action, capped arrow action, functor-level arrow action,
   transfor action, and projection from the owning semantic constructor. If that
@@ -1555,9 +1555,8 @@ uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
 
 The current uncurry endpoint is `Eval_func(B,C) o (G * 1_B)`, where
 `Eval_func` uses the right-ordered convention and `G * 1_B` is supplied by the
-outer action of `Product_cat_func`, specifically
-`tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`. Existing stable uncurry or
-product-map helper heads should be kept only as definitions/projections. The
-checked laws currently cover object and capped `fapp1_fapp0` computation; the
-transfor-component law is deferred to the higher `Product_cat_func` action on
-transfors.
+outer action of `Product_cat_func` through the stable head
+`Product_cat_fapp1_tapp0_func`. Existing stable uncurry or product-map helper
+heads should be kept only as definitions/projections. The checked laws currently
+cover object and capped `fapp1_fapp0` computation; the transfor-component law is
+deferred to the higher `Product_cat_func` action on transfors.

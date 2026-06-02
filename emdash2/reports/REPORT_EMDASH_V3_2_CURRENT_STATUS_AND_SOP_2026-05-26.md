@@ -72,12 +72,13 @@ Retired historical references:
   fixed-object evaluation through `Eval_at_func`, and the fold
   `Eval_func o Eval_at_func(x) = fapp0_func(x)`, with `fapp0_func(x)` now also
   exposing its functor-level hom-action as `tapp0_func`;
-- internalized product formation through `Product_cat_func`, with
-  `Product_mapL_func` and `Product_mapL_func_func` retained only as definitions
-  of the fixed-right product action `G * 1_B`;
+- internalized product formation through `Product_cat_func`, with the
+  fixed-right product action `G * 1_B` exposed through the stable ladder
+  `Product_cat_fapp1_func` / `Product_cat_fapp1_fapp0_functord` /
+  `Product_cat_fapp1_tapp0_func`;
 - semantic uncurry through `uncurry_func_func` and `uncurry_func`, now defined as
   `Eval_func(B,C) o (G * 1_B)` and checked on objects and capped hom-action,
-  with `G * 1_B` routed through `Product_cat_func`'s arrow-action projection
+  with `G * 1_B` routed through the `Product_cat_func` stable projection ladder
   rather than through an independent `Product_mapL*` theory;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
@@ -209,18 +210,26 @@ reassessment is the model:
 ```text
 Product_cat_func[A][B] = Product_cat A B
 
+fapp1_func Product_cat_func A A'
+  -> Product_cat_fapp1_func(A,A')
+
+fapp1_fapp0 Product_cat_func A A' G
+  -> Product_cat_fapp1_fapp0_functord(A,A',G)
+
 G * 1_B
-  := tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)
+  := Product_cat_fapp1_tapp0_func(A,A',B,G)
 
 G |-> G * 1_B
-  := tapp0_func(B) o fapp1_func(Product_cat_func,A,A')
+  := Product_mapL_func_func(A,A',B)
+   = tapp0_func(B) o Product_cat_fapp1_func(A,A')
 ```
 
-If a helper such as `Product_mapL_func` is retained, it should point to this
-projection chain. It should not duplicate object, arrow, transfor, and
-functorial computation as a parallel primitive package. In the current v3.2
-state, `Product_mapL_func` and `Product_mapL_func_func` are definitions through
-this chain, and the former `Product_mapL_transf` stable bridge has been removed.
+If a helper is retained for a projection from an internalized functor, it should
+be an adjacent stable projection rung, not a raw nested chain. The product
+reassessment is the model: `Product_cat_fapp1_tapp0_func` owns object and
+capped-arrow computation for `G * 1_B`; `Product_mapL_func_func` remains a
+defined functorial readability package; the former `Product_mapL_transf` stable
+bridge has been removed.
 
 ### Terminal-Source Equivalences Are Not Global Computation
 

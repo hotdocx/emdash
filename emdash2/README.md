@@ -70,8 +70,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   boundaries. Good stable heads are often projections from a more internalized
   construction, not substitutes for that construction.
 - Do not keep a parallel stable-head package for an action already owned by an
-  internalized functor. Prefer projection chains such as
-  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`; retain helper names only as
+  internalized functor. Prefer adjacent stable projection rungs before attaching
+  computation, for example
+  `Product_cat_fapp1_func` -> `Product_cat_fapp1_fapp0_functord` ->
+  `Product_cat_fapp1_tapp0_func`; retain higher helper names only as
   definitions/aliases of that semantic owner.
 - For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
   postcomposition action heads over one-off heads that hide a raw composite. For
