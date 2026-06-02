@@ -1512,6 +1512,23 @@ uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
 uncurry(theta)[(x,y)] = tapp1_fapp0(theta[x], id_y)  -- deferred
 ```
 
+Readability cleanup status on 2026-06-02:
+
+- added mathematical/surface headers for the product-ladder, evaluation, and
+  curry/uncurry blocks;
+- kept rule LHSs conservative and stable-head oriented;
+- cleaned simple RHSs and definitional projections where a focused probe showed
+  Lambdapi can infer the hidden arguments;
+- kept `Product_mapL_func_func`, `curry_func_func`, and `uncurry_func_func`
+  bodies explicit, because their intermediate functor categories are part of
+  the diagnostic architecture;
+- changed product action sanity checks from raw `Struct_sigma` equality to
+  projectionwise assertions, avoiding unnecessary inference of the dependent
+  family argument to `Struct_sigma`;
+- kept full `fapp1_func` and capped `fapp1_fapp0` regression assertions
+  explicit where source/target product objects or transfor endpoints are not
+  recoverable from the visible payload alone.
+
 ## Rewrite Hygiene
 
 Use the v3.2 SOP:

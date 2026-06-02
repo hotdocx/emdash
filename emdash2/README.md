@@ -102,6 +102,17 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Keep theorem-style `assert`/`#check` statements near the symbols and comments
   that explain their mathematical formula. Reserve diagnostic sections for
   temporary normalization probes and regression checks.
+- For readability cleanup, distinguish four surfaces:
+  rule LHSs, rule RHSs/defined bodies, theorem-style assertions, and
+  diagnostic assertions. Rule LHSs should stay conservative and keep the
+  stable discriminator explicit. RHSs and defined bodies may omit inferred
+  arguments only after a probe shows type preservation still succeeds.
+  Theorem-style assertions should prefer the mathematical formula, often
+  projectionwise for products. Diagnostic assertions may remain explicit,
+  especially for full `fapp1_func`/capped `fapp1_fapp0` endpoints, hidden
+  fixed product factors such as `Product_cat_fapp1_tapp0_func A A' B G`, and
+  product-valued hom-actions where Lambdapi otherwise reconstructs endpoints
+  through large `sigma_Fst`/`sigma_Snd` terms.
 
 ## Print pipeline
 Run these from this folder (`emdash2/`), independent of the parent repo workspace:

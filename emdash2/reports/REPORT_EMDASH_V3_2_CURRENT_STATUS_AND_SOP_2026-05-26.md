@@ -231,6 +231,49 @@ capped-arrow computation for `G * 1_B`; `Product_mapL_func_func` remains a
 defined functorial readability package; the former `Product_mapL_transf` stable
 bridge has been removed.
 
+### Readability Cleanup SOP
+
+Readability cleanup is useful, but it should not erase the information that
+Lambdapi needs for rule discrimination and subject reduction. Treat the file as
+having four different surfaces:
+
+1. **Rule LHSs.** Keep these conservative. The stable discriminator should be
+   explicit, and inferred source/target arguments should remain implicit unless
+   they are the discriminator. Avoid compound reducible endpoint expressions in
+   implicit slots.
+
+2. **Rule RHSs and defined-symbol bodies.** These may be cleaned by omitting
+   redundant implicit arguments, but only after a probe confirms type
+   preservation. Do not hide parameters that are not syntactically recoverable
+   from the visible arguments. For example, `Product_cat_fapp1_tapp0_func`
+   usually needs its fixed-right factor visible as
+   `Product_cat_fapp1_tapp0_func A A' B G`; `G` alone does not determine `B`.
+
+3. **Theorem-style assertions.** Prefer the mathematical formula when Lambdapi
+   can infer it. For products, projectionwise assertions are often clearer and
+   more robust than equality of raw `Struct_sigma` constructors:
+
+   ```text
+   sigma_Fst ((G * 1_B)[(x,y)]) = G[x]
+   sigma_Snd ((G * 1_B)[(x,y)]) = y
+   ```
+
+   This avoids forcing Lambdapi to infer the dependent family argument of
+   `Struct_sigma`.
+
+4. **Diagnostic assertions.** These may remain explicit. This is especially
+   appropriate for full `fapp1_func` and capped `fapp1_fapp0` assertions,
+   product-valued hom-actions, and regression checks whose purpose is to expose
+   canonical endpoints. In those cases compact formulas can make Lambdapi
+   reconstruct endpoints through large `sigma_Fst`/`sigma_Snd` terms and fail
+   with misleading conversion goals.
+
+The Product/Eval cleanup probe is the current model. Object-level formulas such
+as `Eval_func(A,B)[(F,x)] = F[x]` can be compact. Full hom-action checks such
+as `fapp1_func Eval_func (F,x) (G,y)` should keep canonical source/target
+categories explicit, because the assertion is a projection/regression witness,
+not just a user-facing mathematical formula.
+
 ### Terminal-Source Equivalences Are Not Global Computation
 
 Mathematically, maps out of the terminal category satisfy familiar equivalences:
