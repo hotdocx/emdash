@@ -96,11 +96,11 @@ architecture. They were removed when unused rather than retained as parallel
 rewrite facades. Reintroduce a helper only as a projection from
 `curry_func_func`, after a focused probe shows a real consumer need.
 
-The current semantic evaluation layer was useful as a probe, but the next
-implementation pass should replace its argument order. Keep the symbol names
-`Eval_func` and `Eval_fapp1_func`, but orient evaluation as
-`Eval_func(A,B)[(F,x)] = F[x]`. This lets uncurry be built from the outer
-arrow-action of internal product formation, with no swap/symmetry functor.
+Stage 6 now uses the right-ordered evaluation convention while keeping the
+public names `Eval_func` and `Eval_fapp1_func`:
+`Eval_func(A,B)[(F,x)] = F[x]`. Uncurry is built from
+`Eval_func(B,C) o (G * 1_B)`, where `G * 1_B` is the fixed-right product-map
+action `Product_mapL_func_func`. No product symmetry/swap functor is needed.
 
 ## Current State
 
@@ -127,11 +127,16 @@ arrow-action of internal product formation, with no swap/symmetry functor.
   `comp_cat_con_fapp1_func` and `comp_cat_con_transf`;
 - `curry_func_func` as the primary semantic curry package, with `curry_func`
   and `curry_fapp0_func` only definitional object projections;
-- a temporary left-ordered `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`,
-  which should be replaced by the right-ordered convention described in Stage 6;
-- a temporary `uncurry_eval_arg_func` / `uncurry_eval_func` companion, which
-  should be replaced by product-functoriality via `Product_cat_func`;
-- an uncurry scaffold with stable object and hom-action heads.
+- `Product_cat_func` for internalized product formation, plus
+  `Product_mapL_func`, `Product_mapL_func_func`, and `Product_mapL_transf` for
+  the fixed-right product action `G * 1_B`;
+- right-ordered `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`, with
+  `Eval_func(A,B)[(F,x)] = F[x]`;
+- `uncurry_func_func` and `uncurry_func` defined semantically through
+  `Eval_func(B,C)` and `Product_mapL_func_func`; the older
+  `uncurry_eval_arg_func`, `uncurry_eval_func`, `uncurry_fapp1_func`,
+  `uncurry_func_fapp1_func`, and `uncurry_transf` helper heads have been
+  removed.
 
 The curry-specific transfor behavior is now owned by generic mechanisms:
 
@@ -529,18 +534,16 @@ tapp1_func
 ```
 
 The temporary evaluation-based uncurry companion proved the needed component
-computations, but its argument order is not the desired global architecture.
-The remaining order is:
+computations, but its argument order was not the desired global architecture.
+The Stage 6 replacement is now implemented. The remaining order is:
 
 ```text
 hom/composition consolidation
   -> generic hom-postcomposition and hom-precomposition hom-actions
   -> Cat-specific precomposition transfor action
   -> curry_func_func transfor-action refinement
-  -> Product_cat_func / product-functorial action
-  -> replace Eval_func with right-ordered evaluation
-  -> replace uncurry_func_func through Eval_func and product action
-  -> delete or redefine obsolete uncurry helper heads
+  -> optional higher uncurry coherence / fapp1_func facade only if a later
+     consumer needs a shorter stable head
 ```
 
 The completed lower layers are kept in this section as an implementation
@@ -1239,9 +1242,9 @@ curry-only helper heads.
 
 ### Stage 6: Right-Ordered Evaluation And Uncurry
 
-Recommended adjustment: keep the public names `Eval_func`,
-`Eval_fapp1_func`, and related evaluation helpers, but replace the current
-temporary left-ordered convention by right-ordered evaluation.
+Implemented adjustment: keep the public names `Eval_func`,
+`Eval_fapp1_func`, and related evaluation helpers, but use right-ordered
+evaluation.
 
 The target convention is:
 
@@ -1279,8 +1282,8 @@ fapp0_func x
   ~= Eval_func(A,B) o Eval_at_func(x)
 ```
 
-This replaces the current temporary left-ordered `Eval_at_func`, where the
-fixed object was the first product component.
+This replaces the temporary left-ordered `Eval_at_func`, where the fixed object
+was the first product component.
 
 The reason for the reorientation is uncurry. Introduce an internalized product
 functor layer:
@@ -1294,7 +1297,8 @@ With this orientation, the outer arrow-action at
 `G : Functor_cat A (Functor_cat B C)` gives the needed product map directly:
 
 ```text
-G * 1_B : Product_cat A B -> Product_cat (Functor_cat B C) B
+Product_mapL_func(G,B) = G * 1_B
+  : Product_cat A B -> Product_cat (Functor_cat B C) B
 (G * 1_B)[(x,y)] = (G[x], y)
 (G * 1_B)[(p,q)] = (G[p], q)
 ```
@@ -1310,31 +1314,48 @@ uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
 ```
 
 No product symmetry/swap functor is required. This is the main advantage over
-the current temporary `uncurry_eval_arg_func`, which used the left-ordered
+the deleted temporary `uncurry_eval_arg_func`, which used the left-ordered
 argument map:
 
 ```text
 (x,y) |-> (y, G[x]) : Product_cat A B -> Product_cat B (Functor_cat B C)
 ```
 
-That companion proved the object and capped arrow computations, but it does not
-package the functoriality of `G` in the correct product-functorial layer and
-should not become the final architecture.
+That companion proved the object and capped arrow computations, but it did not
+package the functoriality of `G` in the correct product-functorial layer.
 
-Implementation notes for the next pass:
+Implementation status on 2026-06-02:
 
-- add `Product_cat_func` or a stable projection of it before replacing
-  `Eval_func`;
-- add a reusable product-map head for the outer action, e.g.
-  `Product_mapL_func` / `Product_outer_map_func` / final name TBD, satisfying
-  projectionwise object and arrow rules for `G * 1_B`;
-- replace the existing `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`
-  declarations/rules in place, keeping the symbol names but changing the
-  product order;
-- rebuild `uncurry_func_func` through `Eval_func(B,C)` and the product action;
-- delete or redefine the old `uncurry_func`, `uncurry_fapp1_func`,
-  `uncurry_func_fapp1_func`, `uncurry_transf`, `uncurry_eval_arg_func`, and
-  `uncurry_eval_func` only after the new `uncurry_func_func` assertions pass.
+- `Product_cat_func` and `Product_cat_fapp0_func` give internalized product
+  formation at object level;
+- `Product_mapL_func(G,B)` is the stable head for `G * 1_B`;
+- `Product_mapL_func_func` packages `G |-> G * 1_B`;
+- `Product_mapL_transf(theta)` computes componentwise as
+  `(theta[x], id_y)`;
+- `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func` were replaced in place
+  with the right-ordered convention;
+- `uncurry_func_func` is now defined as
+  `comp_cat_cov_func(Eval_func(B,C)) o Product_mapL_func_func`;
+- `uncurry_func` is the object projection of `uncurry_func_func`;
+- the obsolete helper heads `uncurry_eval_arg_func`, `uncurry_eval_func`,
+  `uncurry_fapp1_func`, `uncurry_func_fapp1_func`, and `uncurry_transf` were
+  removed.
+
+Checked component laws include:
+
+```text
+Product_mapL_func(G,B)[(x,y)] = (G[x], y)
+Product_mapL_func(G,B)[(p,q)] = (G[p], q)
+Product_mapL_transf(theta)[(x,y)] = (theta[x], id_y)
+
+Eval_func(A,B)[(F,x)] = F[x]
+Eval_fapp1_func[(eta,p)] = tapp1_fapp0 eta p
+Eval_func(A,B) o Eval_at_func(x) = fapp0_func(x)
+
+uncurry(G)[(x,y)] = G[x][y]
+uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
+uncurry(theta)[(x,y)] = tapp1_fapp0(theta[x], id_y)
+```
 
 ## Rewrite Hygiene
 
