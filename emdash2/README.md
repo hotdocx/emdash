@@ -113,6 +113,16 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   fixed product factors such as `Product_cat_fapp1_tapp0_func A A' B G`, and
   product-valued hom-actions where Lambdapi otherwise reconstructs endpoints
   through large `sigma_Fst`/`sigma_Snd` terms.
+- Write declared symbol types in reduced/canonical form by default. Prefer
+  `τ (Functord E D)` over unreduced equivalents such as
+  `τ (@Transf K Cat_cat E D)` unless the unreduced shape is intentionally
+  needed for a projection route or diagnostic assertion; document that exception
+  near the symbol. Avoid adding decoded `*_TYPE` or classifier heads merely to
+  shorten binders: they introduce a parallel theory layer and require matching
+  reductions for every semantic specialization, such as Cat-valued and
+  product-valued transfors. A decoded `TYPE` head alone also does not replace
+  `Obj(...)` unification rules; that would require a classifier-level head and
+  corresponding confluence checks.
 
 ## Print pipeline
 Run these from this folder (`emdash2/`), independent of the parent repo workspace:

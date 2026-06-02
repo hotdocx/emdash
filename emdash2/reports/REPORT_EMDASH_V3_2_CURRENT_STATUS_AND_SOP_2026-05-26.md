@@ -274,6 +274,59 @@ as `fapp1_func Eval_func (F,x) (G,y)` should keep canonical source/target
 categories explicit, because the assertion is a projection/regression witness,
 not just a user-facing mathematical formula.
 
+### Canonical Type-Shape SOP
+
+Declared symbol types should normally be written in their reduced/canonical
+form, even when the symbol itself is a primitive stable head or a defined
+readability alias. Prefer:
+
+```text
+sym : τ (Functord E D)
+```
+
+over unreduced but convertible forms such as:
+
+```text
+sym : τ (@Transf K Cat_cat E D)
+```
+
+because `Transf_cat K Cat_cat E D` reduces to `Functord_cat E D`. The reduced
+form is easier for both humans and Lambdapi: it avoids forcing later rules and
+assertions to rely on a reducible classifier path.
+
+Use an unreduced type only when that exact shape is intentionally needed, for
+example to expose a projection route, preserve a stable diagnostic endpoint, or
+probe a rewrite interaction. In that case, document the reason near the symbol
+or assertion.
+
+Do not introduce decoded `*_TYPE` heads or extra classifier heads merely to
+shorten frequent binders. Such heads create a parallel semantic layer. For
+example, a classifier-level head for transformations would need to join with
+all existing category-level reductions:
+
+```text
+Transf_cat K Cat_cat E D -> Functord_cat E D
+Transf_cat X (Product_cat A B) F G
+  -> Product_cat (Transf_cat X A ...) (Transf_cat X B ...)
+```
+
+A decoded type rule alone, such as:
+
+```text
+τ (Obj (Transf_cat F G)) -> Transf_TYPE F G
+```
+
+would not replace unification rules about `Obj (Transf_cat ...)`, because those
+goals do not contain `τ`. Replacing such an `Obj`-level unification rule would
+require an injective classifier-level head, e.g. `Transf_grpd`, plus all
+corresponding reductions and confluence checks. That is usually more theory
+surface than the saved binder verbosity is worth.
+
+Current policy: keep the semantic owner at the category/classifier level
+(`Transf_cat`, `Functord_cat`, `Product_cat`, etc.), use reduced canonical
+types in declarations, and keep narrow `Obj(...)` unification rules only where
+they are proven useful for elaboration and rewrite stability.
+
 ### Terminal-Source Equivalences Are Not Global Computation
 
 Mathematically, maps out of the terminal category satisfy familiar equivalences:
