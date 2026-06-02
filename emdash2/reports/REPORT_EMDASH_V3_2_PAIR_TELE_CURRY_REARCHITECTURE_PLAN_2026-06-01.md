@@ -129,25 +129,31 @@ functor is needed.
   `comp_cat_con_fapp1_func` and `comp_cat_con_transf`;
 - `curry_func_func` as the primary semantic curry package, with `curry_func`
   and `curry_fapp0_func` only definitional object projections;
-- `Product_cat_func` for internalized product formation, plus a provisional
-  first-pass `Product_mapL_func`, `Product_mapL_func_func`, and
-  `Product_mapL_transf` layer for the fixed-right product action `G * 1_B`;
+- `Product_cat_func` for internalized product formation, with
+  `Product_mapL_func` and `Product_mapL_func_func` retained only as definitions
+  of the fixed-right projection chain for `G * 1_B`;
 - right-ordered `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func`, with
   `Eval_func(A,B)[(F,x)] = F[x]`;
 - `uncurry_func_func` and `uncurry_func` defined semantically through
-  `Eval_func(B,C)` and the provisional `Product_mapL_func_func`; the older
-  left-ordered `uncurry_eval_arg_func` / `uncurry_eval_func` companion and the
-  old uncurry-only helper heads were removed.
+  `Eval_func(B,C)` and the `Product_cat_func`-defined
+  `Product_mapL_func_func`; the older left-ordered `uncurry_eval_arg_func` /
+  `uncurry_eval_func` companion and the old uncurry-only helper heads were
+  removed.
 
-Reassessment after the first Stage 6 pass:
+Reassessment after the `Product_cat_func` refactor:
 
 - the right-ordered `Eval_func` direction is still correct;
 - the old left-ordered uncurry companion should stay deleted;
-- the current `Product_mapL*` layer typechecks, but should not remain an
-  independent primitive/stable theory;
-- the next implementation pass should route `G * 1_B` through the projection
-  chain of `Product_cat_func` and then either delete `Product_mapL*` or demote
-  any retained `Product_mapL*` names to definitions/aliases of that chain.
+- `Product_mapL_transf` was removed rather than retained as a parallel stable
+  theory;
+- `Product_mapL_func` is definitionally
+  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`;
+- `Product_mapL_func_func` is definitionally
+  `tapp0_func(B) o fapp1_func(Product_cat_func,A,A')`;
+- object and capped-arrow laws for `G * 1_B`, plus object and capped-arrow laws
+  for semantic uncurry, are checked;
+- the transfor action of semantic uncurry remains deferred until the higher
+  arrow-action of `Product_cat_func` on a transfor `theta` is internalized.
 
 The curry-specific transfor behavior is now owned by generic mechanisms:
 
@@ -546,19 +552,19 @@ tapp1_func
 
 The temporary evaluation-based uncurry companion proved the needed component
 computations, but its argument order was not the desired global architecture.
-The first Stage 6 replacement fixed evaluation order and uncurry computation,
-but used a provisional `Product_mapL*` stable layer. The remaining order is:
+The Stage 6 replacement fixed evaluation order, routed fixed-right product
+mapping through `Product_cat_func`, and demoted `Product_mapL_func` /
+`Product_mapL_func_func` to definitions. The remaining order is:
 
 ```text
 hom/composition consolidation
   -> generic hom-postcomposition and hom-precomposition hom-actions
   -> Cat-specific precomposition transfor action
   -> curry_func_func transfor-action refinement
-  -> Product_cat_func arrow-action / projection chain
-  -> demote or delete provisional Product_mapL* heads
-  -> rewrite uncurry_func_func through Product_cat_func projections
-  -> optional higher uncurry coherence / fapp1_func facade only if a later
-     consumer needs a shorter stable head
+  -> higher Product_cat_func arrow-action on transfors
+  -> semantic uncurry transfor component
+  -> optional higher uncurry fapp1_func facade only if a later consumer needs a
+     shorter stable head
 ```
 
 The completed lower layers are kept in this section as an implementation
@@ -1360,31 +1366,43 @@ package the functoriality of `G` in the correct product-functorial layer.
 Implementation status on 2026-06-02:
 
 - `Product_cat_func` and `Product_cat_fapp0_func` give internalized product
-  formation at object level;
-- a first checked implementation installed `Product_mapL_func(G,B)`,
-  `Product_mapL_func_func`, and `Product_mapL_transf(theta)` as stable heads for
-  `G * 1_B`;
+  formation;
+- `Product_cat_func[A]` projection uses implicit source/target slots so the
+  rule works with the canonical `Catd_cat Cat_cat` target as well as the
+  readable `Functor_cat Cat_cat Cat_cat` notation;
+- `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)` computes to the paired
+  functor `(G o Product_projL_func, Product_projR_func)`;
+- `Product_mapL_func(G,B)` is retained only as the definition
+  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`;
+- `Product_mapL_func_func(A,A',B)` is retained only as the definition
+  `tapp0_func(B) o fapp1_func(Product_cat_func,A,A')`;
+- the independent stable heads `Product_mapL_func_func_fapp1_func` and
+  `Product_mapL_transf` were removed;
 - `Eval_func`, `Eval_fapp1_func`, and `Eval_at_func` were replaced in place
   with the right-ordered convention;
 - `uncurry_func_func` is now defined as
-  `comp_cat_cov_func(Eval_func(B,C)) o Product_mapL_func_func`;
+  `comp_cat_cov_func(Eval_func(B,C)) o Product_mapL_func_func`, where
+  `Product_mapL_func_func` itself is defined through `Product_cat_func`;
 - `uncurry_func` is the object projection of `uncurry_func_func`;
 - the obsolete helper heads `uncurry_eval_arg_func`, `uncurry_eval_func`,
   `uncurry_fapp1_func`, `uncurry_func_fapp1_func`, and `uncurry_transf` were
   removed.
 
-Revised recommendation:
+Implemented recommendation and remaining gap:
 
 - keep the right-ordered `Eval_func` and semantic uncurry direction;
 - do not keep `Product_mapL_func`, `Product_mapL_func_func`, or
   `Product_mapL_transf` as independent primitive/stable heads;
-- add the missing arrow-action projection layer for `Product_cat_func`;
+- install the missing arrow-action projection layer for `Product_cat_func`;
 - express `G * 1_B` as
   `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`;
 - express the functorial package `G |-> G * 1_B` as
   `tapp0_func(B) o fapp1_func(Product_cat_func,A,A')`;
-- then either delete `Product_mapL*` or redefine retained names through those
-  projections.
+- retain any `Product_mapL*` names only as definitions through those
+  projections. This has now been done for `Product_mapL_func` and
+  `Product_mapL_func_func`; `Product_mapL_transf` was deleted;
+- defer the transfor-component law for semantic uncurry until the higher action
+  of `Product_cat_func` on transfors is available.
 
 After the `Product_cat_func` refactor, target component laws to check include:
 
@@ -1398,7 +1416,7 @@ tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)[(p,q)]
   = (G[p], q)
 
 tapp0_fapp0 B (the Product_cat_func action on theta)[(x,y)]
-  = (theta[x], id_y)
+  = (theta[x], id_y)       -- deferred higher action
 
 Eval_func(A,B)[(F,x)] = F[x]
 Eval_fapp1_func[(eta,p)] = tapp1_fapp0 eta p
@@ -1406,7 +1424,7 @@ Eval_func(A,B) o Eval_at_func(x) = fapp0_func(x)
 
 uncurry(G)[(x,y)] = G[x][y]
 uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
-uncurry(theta)[(x,y)] = tapp1_fapp0(theta[x], id_y)
+uncurry(theta)[(x,y)] = tapp1_fapp0(theta[x], id_y)  -- deferred
 ```
 
 ## Rewrite Hygiene
@@ -1450,10 +1468,11 @@ uncurry(G)[(x,y)] = G[x][y]
 uncurry(G)[(p,q)] = tapp1_fapp0 (G[p]) q
 ```
 
-The intended uncurry endpoint is `Eval_func(B,C) o (G * 1_B)`, where
+The current uncurry endpoint is `Eval_func(B,C) o (G * 1_B)`, where
 `Eval_func` uses the right-ordered convention and `G * 1_B` is supplied by the
 outer action of `Product_cat_func`, specifically
 `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`. Existing stable uncurry or
-product-map helper heads should be kept only as definitions/projections after
-this replacement has passed focused object, `fapp1_func`, capped
-`fapp1_fapp0`, and transfor-component assertions.
+product-map helper heads should be kept only as definitions/projections. The
+checked laws currently cover object and capped `fapp1_fapp0` computation; the
+transfor-component law is deferred to the higher `Product_cat_func` action on
+transfors.

@@ -72,14 +72,13 @@ Retired historical references:
   fixed-object evaluation through `Eval_at_func`, and the fold
   `Eval_func o Eval_at_func(x) = fapp0_func(x)`, with `fapp0_func(x)` now also
   exposing its functor-level hom-action as `tapp0_func`;
-- internalized product formation through `Product_cat_func`, plus a provisional
-  checked `Product_mapL_func`, `Product_mapL_func_func`, and
-  `Product_mapL_transf` bridge for the fixed-right product action `G * 1_B`;
+- internalized product formation through `Product_cat_func`, with
+  `Product_mapL_func` and `Product_mapL_func_func` retained only as definitions
+  of the fixed-right product action `G * 1_B`;
 - semantic uncurry through `uncurry_func_func` and `uncurry_func`, now defined as
-  `Eval_func(B,C) o (G * 1_B)` and checked on objects, capped hom-action, and
-  transfor components, with the follow-up requirement that `G * 1_B` be routed
-  through `Product_cat_func`'s arrow-action projection rather than through an
-  independent `Product_mapL*` theory;
+  `Eval_func(B,C) o (G * 1_B)` and checked on objects and capped hom-action,
+  with `G * 1_B` routed through `Product_cat_func`'s arrow-action projection
+  rather than through an independent `Product_mapL*` theory;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
@@ -219,7 +218,9 @@ G |-> G * 1_B
 
 If a helper such as `Product_mapL_func` is retained, it should point to this
 projection chain. It should not duplicate object, arrow, transfor, and
-functorial computation as a parallel primitive package.
+functorial computation as a parallel primitive package. In the current v3.2
+state, `Product_mapL_func` and `Product_mapL_func_func` are definitions through
+this chain, and the former `Product_mapL_transf` stable bridge has been removed.
 
 ### Terminal-Source Equivalences Are Not Global Computation
 

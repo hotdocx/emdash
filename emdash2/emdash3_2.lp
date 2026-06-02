@@ -1953,110 +1953,85 @@ rule fapp0
 //   Product_mapL_func(G,B) = G * 1_B : A x B -> A' x B
 //   Product_mapL_func(G,B)[(x,y)] = (G[x],y)
 //   Product_mapL_func(G,B)[(p,q)] = (G[p],q).
+//
+// `Product_mapL_func` and `Product_mapL_func_func` are definitions/projections
+// from `Product_cat_func`, not independent stable computation packages.
 constant symbol Product_cat_func
   : τ (Functor Cat_cat (Functor_cat Cat_cat Cat_cat));
 
 injective symbol Product_cat_fapp0_func (A : Cat)
   : τ (Functor Cat_cat Cat_cat);
 
-rule @fapp0 Cat_cat (Functor_cat Cat_cat Cat_cat) Product_cat_func $A
+rule @fapp0 _ _ Product_cat_func $A
   ↪ @Product_cat_fapp0_func $A;
 
 rule @fapp0 Cat_cat Cat_cat (@Product_cat_fapp0_func $A) $B
   ↪ Product_cat $A $B;
 
+rule @tapp0_fapp0
+      Cat_cat
+      Cat_cat
+      (@Product_cat_fapp0_func $A)
+      (@Product_cat_fapp0_func $A')
+      $B
+      (@fapp1_fapp0
+        Cat_cat
+        (@Catd_cat Cat_cat)
+        Product_cat_func
+        $A
+        $A'
+        $G)
+  ↪ @Struct_sigma
+      (Obj (Functor_cat (Product_cat $A $B) $A'))
+      (λ _ : τ (Obj (Functor_cat (Product_cat $A $B) $A')),
+        Obj (Functor_cat (Product_cat $A $B) $B))
+      (@comp_cat_fapp0
+        (Product_cat $A $B)
+        $A
+        $A'
+        $G
+        (@Product_projL_func $A $B))
+      (@Product_projR_func $A $B);
+
 symbol Product_mapL_func [A A' B : Cat]
   (G : τ (Functor A A'))
-  : τ (Functor (Product_cat A B) (Product_cat A' B));
-
-rule sigma_Fst (@Product_mapL_func $A $A' $B $G)
-  ↪ @comp_cat_fapp0
-      (Product_cat $A $B)
-      $A
-      $A'
-      $G
-      (@Product_projL_func $A $B);
-
-rule sigma_Snd (@Product_mapL_func $A $A' $B $G)
-  ↪ @Product_projR_func $A $B;
-
-rule @fapp0 _ _ (@Product_mapL_func $A $A' $B $G) (Struct_sigma $x $y)
-  ↪ Struct_sigma
-      (@fapp0 $A $A' $G $x)
-      $y;
-
-rule @fapp1_func _ _ (@Product_mapL_func $A $A' $B $G)
-      (Struct_sigma $x $y)
-      (Struct_sigma $x' $y')
-  ↪ Struct_sigma
-      (@comp_cat_fapp0
-        (Product_cat
-          (Hom_cat $A $x $x')
-          (Hom_cat $B $y $y'))
-        (Hom_cat $A $x $x')
-        (Hom_cat $A'
-          (@fapp0 $A $A' $G $x)
-          (@fapp0 $A $A' $G $x'))
-        (@fapp1_func $A $A' $G $x $x')
-        (@Product_projL_func
-          (Hom_cat $A $x $x')
-          (Hom_cat $B $y $y')))
-      (@Product_projR_func
-        (Hom_cat $A $x $x')
-        (Hom_cat $B $y $y'));
-
-rule @fapp1_fapp0 _ _ (@Product_mapL_func $A $A' $B $G)
-      (Struct_sigma $x $y)
-      (Struct_sigma $x' $y')
-      (Struct_sigma $p $q)
-  ↪ Struct_sigma
-      (@fapp1_fapp0 $A $A' $G $x $x' $p)
-      $q;
+  : τ (Functor (Product_cat A B) (Product_cat A' B))
+≔ @tapp0_fapp0
+    Cat_cat
+    Cat_cat
+    (@Product_cat_fapp0_func A)
+    (@Product_cat_fapp0_func A')
+    B
+    (@fapp1_fapp0
+      Cat_cat
+      (@Catd_cat Cat_cat)
+      Product_cat_func
+      A
+      A'
+      G);
 
 symbol Product_mapL_func_func [A A' B : Cat]
   : τ (Functor
       (Functor_cat A A')
-      (Functor_cat (Product_cat A B) (Product_cat A' B)));
-
-rule fapp0 (@Product_mapL_func_func $A $A' $B) $G
-  ↪ @Product_mapL_func $A $A' $B $G;
-
-symbol Product_mapL_func_func_fapp1_func [A A' B : Cat]
-  [G H : τ (Functor A A')]
-  : τ (Functor
-      (@Transf_cat A A' G H)
-      (@Transf_cat
-        (Product_cat A B)
-        (Product_cat A' B)
-        (@Product_mapL_func A A' B G)
-        (@Product_mapL_func A A' B H)));
-
-symbol Product_mapL_transf [A A' B : Cat]
-  [G H : τ (Functor A A')]
-  (theta : τ (Transf G H))
-  : τ (Transf
-      (@Product_mapL_func A A' B G)
-      (@Product_mapL_func A A' B H));
-
-rule @fapp1_func _ _ (@Product_mapL_func_func $A $A' $B) $G $H
-  ↪ @Product_mapL_func_func_fapp1_func $A $A' $B $G $H;
-
-rule fapp0 (@Product_mapL_func_func_fapp1_func $A $A' $B $G $H) $theta
-  ↪ @Product_mapL_transf $A $A' $B $G $H $theta;
-
-rule @fapp1_fapp0 _ _ (@Product_mapL_func_func $A $A' $B) $G $H $theta
-  ↪ @Product_mapL_transf $A $A' $B $G $H $theta;
-
-rule @tapp0_fapp0
-      (Product_cat $A $B)
-      (Product_cat $A' $B)
-      (@Product_mapL_func $A $A' $B $G)
-      (@Product_mapL_func $A $A' $B $H)
-      (Struct_sigma $x $y)
-      (@Product_mapL_transf $A $A' $B $G $H $theta)
-  ↪ Struct_sigma
-      (@tapp0_fapp0 $A $A' $G $H $x $theta)
-      (@id $B $y);
+      (Functor_cat (Product_cat A B) (Product_cat A' B)))
+≔ @comp_cat_fapp0
+    (Functor_cat A A')
+    (@Functord_cat Cat_cat
+      (@Product_cat_fapp0_func A)
+      (@Product_cat_fapp0_func A'))
+    (Functor_cat (Product_cat A B) (Product_cat A' B))
+    (@tapp0_func
+      Cat_cat
+      Cat_cat
+      (@Product_cat_fapp0_func A)
+      (@Product_cat_fapp0_func A')
+      B)
+    (@fapp1_func
+      Cat_cat
+      (@Catd_cat Cat_cat)
+      Product_cat_func
+      A
+      A');
 
 assert [A A' B : Cat] (G : τ (Functor A A'))
   (x : τ (Obj A)) (y : τ (Obj B)) ⊢
@@ -2086,21 +2061,13 @@ assert [A A' B : Cat] (G : τ (Functor A A'))
         (@fapp1_fapp0 A A' G x x' p)
         q;
 
-assert [A A' B : Cat] (G H : τ (Functor A A'))
-  (theta : τ (Transf G H)) (x : τ (Obj A)) (y : τ (Obj B)) ⊢
-  @tapp0_fapp0
-    (Product_cat A B)
-    (Product_cat A' B)
-    (@Product_mapL_func A A' B G)
-    (@Product_mapL_func A A' B H)
-    (Struct_sigma x y)
-    (@Product_mapL_transf A A' B G H theta)
-    ≡ @Struct_sigma
-        (Obj (Hom_cat A' (@fapp0 A A' G x) (@fapp0 A A' H x)))
-        (λ _ : τ (Obj (Hom_cat A' (@fapp0 A A' G x) (@fapp0 A A' H x))),
-          Obj (Hom_cat B y y))
-        (@tapp0_fapp0 A A' G H x theta)
-        (@id B y);
+assert [A A' B : Cat] (G : τ (Functor A A')) ⊢
+  @fapp0
+    (Functor_cat A A')
+    (Functor_cat (Product_cat A B) (Product_cat A' B))
+    (@Product_mapL_func_func A A' B)
+    G
+    ≡ @Product_mapL_func A A' B G;
 
 // Product evaluation: apply a functor to an object.
 //
@@ -2355,39 +2322,9 @@ assert [A B C : Cat]
     G
     ≡ @uncurry_func A B C G;
 
-assert [A B C : Cat]
-  (G H : τ (Functor A (Functor_cat B C)))
-  (theta : τ (Transf G H))
-  (x : τ (Obj A))
-  (y : τ (Obj B)) ⊢
-  @tapp0_fapp0
-    (Product_cat A B)
-    C
-    (@uncurry_func A B C G)
-    (@uncurry_func A B C H)
-    (Struct_sigma x y)
-    (@fapp1_fapp0
-      (Functor_cat A (Functor_cat B C))
-      (Functor_cat (Product_cat A B) C)
-      (@uncurry_func_func A B C)
-      G
-      H
-      theta)
-    ≡ @tapp1_fapp0
-        B
-        C
-        (@fapp0 A (Functor_cat B C) G x)
-        (@fapp0 A (Functor_cat B C) H x)
-        y
-        y
-        (@tapp0_fapp0
-          A
-          (Functor_cat B C)
-          G
-          H
-          x
-          theta)
-        (@id B y);
+// The transfor action of semantic uncurry depends on the higher arrow-action
+// of `Product_cat_func` on a transfor `theta`. Keep it deferred rather than
+// reinstating an independent `Product_mapL_transf` stable package.
 
 /*
   More-internal ordinary hom-action.
