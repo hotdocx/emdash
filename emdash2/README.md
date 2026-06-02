@@ -69,6 +69,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Use stable heads only for real projection, discrimination, or performance
   boundaries. Good stable heads are often projections from a more internalized
   construction, not substitutes for that construction.
+- Do not keep a parallel stable-head package for an action already owned by an
+  internalized functor. Prefer projection chains such as
+  `tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)`; retain helper names only as
+  definitions/aliases of that semantic owner.
 - For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
   postcomposition action heads over one-off heads that hide a raw composite. For
   example, when the desired normal form is `g o f -> fapp0(precompose_by f) g`,

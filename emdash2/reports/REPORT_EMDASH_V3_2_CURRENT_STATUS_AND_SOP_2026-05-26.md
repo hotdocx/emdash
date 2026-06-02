@@ -72,12 +72,14 @@ Retired historical references:
   fixed-object evaluation through `Eval_at_func`, and the fold
   `Eval_func o Eval_at_func(x) = fapp0_func(x)`, with `fapp0_func(x)` now also
   exposing its functor-level hom-action as `tapp0_func`;
-- internalized product formation through `Product_cat_func`, plus
-  `Product_mapL_func`, `Product_mapL_func_func`, and `Product_mapL_transf` for
-  the fixed-right product action `G * 1_B`;
+- internalized product formation through `Product_cat_func`, plus a provisional
+  checked `Product_mapL_func`, `Product_mapL_func_func`, and
+  `Product_mapL_transf` bridge for the fixed-right product action `G * 1_B`;
 - semantic uncurry through `uncurry_func_func` and `uncurry_func`, now defined as
   `Eval_func(B,C) o (G * 1_B)` and checked on objects, capped hom-action, and
-  transfor components;
+  transfor components, with the follow-up requirement that `G * 1_B` be routed
+  through `Product_cat_func`'s arrow-action projection rather than through an
+  independent `Product_mapL*` theory;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
@@ -199,6 +201,25 @@ CompTarget_fapp1_func p
 
 No separate `CompTarget_fapp1_func_func` alias is needed; full hom-action is the
 ordinary `fapp1_func (CompTarget_catd Z x)`.
+
+Do not install an independent stable-head theory for an action already owned by
+an internalized functor. A helper may be useful as notation, but it should be a
+definition or projection of the owning constructor's action. The product
+reassessment is the model:
+
+```text
+Product_cat_func[A][B] = Product_cat A B
+
+G * 1_B
+  := tapp0_fapp0 B (fapp1_fapp0 Product_cat_func G)
+
+G |-> G * 1_B
+  := tapp0_func(B) o fapp1_func(Product_cat_func,A,A')
+```
+
+If a helper such as `Product_mapL_func` is retained, it should point to this
+projection chain. It should not duplicate object, arrow, transfor, and
+functorial computation as a parallel primitive package.
 
 ### Terminal-Source Equivalences Are Not Global Computation
 
