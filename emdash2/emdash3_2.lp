@@ -406,19 +406,17 @@ rule @comp_fapp0
     Grpd_cat has Obj(Grpd_cat) = Grpd and Hom(X,Y) = X -> Y.
     Cat_cat  has Obj(Cat_cat)  = Cat  and Hom(A,B) = A ⟶ B.
 */
-constant symbol Grpd_grpd : Grpd;
-constant symbol Cat_grpd  : Grpd;
-rule τ Grpd_grpd ↪ Grpd;
-rule τ Cat_grpd  ↪ Cat;
 
 // Category of groupoid/type classifiers.
 constant symbol Grpd_cat : Cat;
-rule Obj Grpd_cat ↪ Grpd_grpd;
+injective symbol Grpd_grpd : Grpd ≔ Obj Grpd_cat;
+rule τ (Obj Grpd_cat) ↪ Grpd;
 rule τ (Obj (Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);
 
 // Category of categories.
 constant symbol Cat_cat : Cat;
-rule Obj Cat_cat ↪ Cat_grpd;
+injective symbol Cat_grpd  : Grpd ≔ Obj Cat_cat;
+rule τ (Obj Cat_cat)  ↪ Cat;
 rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
 
 /*
