@@ -15,6 +15,9 @@ The proof assistant is called `m—` (read “emdash”).
   v3.2.
 - `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`:
   active consolidated Pi-alias and Sigma projection-pullback status for v3.2.
+- `reports/REPORT_EMDASH_V3_2_INTERNAL_ACTION_PROJECTION_PLAN_2026-06-03.md`:
+  implemented plan/status for `fapp1_at_transf`, generic displayed
+  internal-action projections, and future `functord_laxity_fdapp1_*` renaming.
 - Older path-induction plan/report files are superseded historical context and
   are no longer the forward plan.
 - `lambdapi.pkg`: package config for Lambdapi.

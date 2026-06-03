@@ -2451,6 +2451,24 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
 rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
+// First projection of the identity-specialized ordinary internal hom-action at
+// a fixed source object. This is the identity-specialized counterpart of
+// `tapp1_at_transf`.
+symbol fapp1_at_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
+  Π (X : τ (Obj A)),
+  τ (Transf
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A F (@fapp0 A B F X)));
+
+rule @tapp0_fapp0
+      (Op_cat $A)
+      (@Catd_cat $A)
+      _
+      _
+      $X
+      (@fapp1_int_transf $A $B $F)
+  ↪ @fapp1_at_transf $A $B $F $X;
+
 // First projection of the internal off-diagonal action at a fixed source
 // object. This exposes the whole transfor
 //   Hom_A(X,-) => Hom_B(F[X],G[-])
@@ -2471,6 +2489,9 @@ rule @tapp0_fapp0
       (@tapp1_int_fapp0_transf $A $B $F $G $ϵ)
   ↪ @tapp1_at_transf $A $B $F $G $X $ϵ;
 
+rule @tapp1_at_transf $A $B $F $F $X (id (Functor_cat $A $B) $F)
+  ↪ @fapp1_at_transf $A $B $F $X;
+
 rule @tapp0_fapp0
       $A
       Cat_cat
@@ -2479,6 +2500,65 @@ rule @tapp0_fapp0
       $Y
       (@tapp1_at_transf $A $B $F $G $X $ϵ)
   ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
+
+rule @tapp0_fapp0
+      $A
+      Cat_cat
+      _
+      _
+      $Y
+      (@fapp1_at_transf $A $B $F $X)
+  ↪ @fapp1_func $A $B $F $X $Y;
+
+assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      (Op_cat A)
+      (@Catd_cat A)
+      (@hom_int A A (@id_func A))
+      (@comp_cat_fapp0
+        (Op_cat A)
+        (Op_cat B)
+        (@Catd_cat A)
+        (@hom_int B A F)
+        (@Op_func A B F))
+      X
+      (@fapp1_int_transf A B F)
+    ≡ @fapp1_at_transf A B F X;
+
+assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢
+  @tapp1_at_transf A B F F X (id (Functor_cat A B) F)
+    ≡ @fapp1_at_transf A B F X;
+
+assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      Cat_cat
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A F (@fapp0 A B F X))
+      Y
+      (@fapp1_at_transf A B F X)
+    ≡ @fapp1_func A B F X Y;
+
+assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      Cat_cat
+      _
+      _
+      Y
+      (@tapp0_fapp0
+        (Op_cat A)
+        (@Catd_cat A)
+        _
+        _
+        X
+        (@fapp1_int_transf A B F))
+    ≡ @fapp1_func A B F X Y;
+
+assert [A B : Cat] (F : τ (Functor A B))
+  (X Y : τ (Obj A)) (f : τ (Hom A X Y)) ⊢
+  fapp0 (@fapp1_func A B F X Y) f
+    ≡ @fapp1_fapp0 A B F X Y f;
 
 assert [A B : Cat] (F G : τ (Functor A B))
   (ϵ : τ (Transf F G)) (X : τ (Obj A)) ⊢
@@ -5487,8 +5567,365 @@ rule @fapp0
       $FF
       $x
       $y
+	      $p
+	      Terminal_obj;
+
+// Generic displayed internal-hom action projections. These are the arbitrary
+// displayed-transfor counterparts of the identity-specialized
+// `functord_laxity_fdapp1_*` extraction path below.
+symbol homd_tdapp1_src_sec [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
+≔ @homd_src_sec
+    K
+    E
+    D
+    GG
+    x
+    (fapp0 (@Fibre_func K E D FF x) u);
+
+symbol homd_tdapp1_tgt_func [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Functor
+      (Fibre_cat E y)
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
+≔ piapp0 (@homd_tdapp1_src_sec K E D FF GG x u) y;
+
+symbol tdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat (Homd_target_catd E) x)
+      (homd_id_src_sec E x u)
+      (@homd_tdapp1_src_sec K E D FF GG x u));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $u
+      (@tdapp0_fapp0
+        $K
+        _
+        _
+        _
+        _
+        $x
+        (@tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ))
+  ↪ @tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u;
+
+rule @tdapp1_int_section_arrow
+      $K
+      $E
+      $D
+      $FF
+      $FF
+      (@id_transfd $K $E $D $FF)
+      $x
+      $u
+  ↪ @functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u;
+
+symbol tdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Transf
+      (homd_id_tgt_func E x u y)
+      (@homd_tdapp1_tgt_func K E D FF GG x u y));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      Terminal_obj
+      (@tdapp0_fapp0
+        _
+        _
+        _
+        _
+        _
+        $y
+        (@tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u))
+  ↪ @tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y;
+
+rule @tdapp1_int_tgt_arrow
+      $K
+      $E
+      $D
+      $FF
+      $FF
+      (@id_transfd $K $E $D $FF)
+      $x
+      $u
+      $y
+  ↪ @functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y;
+
+symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+      (fapp0 (homd_id_tgt_func E x u y) v)
+      (fapp0 (@homd_tdapp1_tgt_func K E D FF GG x u y) v));
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $v
+      (@tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y)
+  ↪ @tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v;
+
+rule @tdapp1_int_presheaf_arrow
+      $K
+      $E
+      $D
+      $FF
+      $FF
+      (@id_transfd $K $E $D $FF)
+      $x
+      $u
+      $y
+      $v
+  ↪ @functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v;
+
+symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      Cat_cat
+      (fapp0
+        (homd_
+          (@id_funcd K E)
+          x
+          u
+          y
+          v)
+        p)
+      (fapp0
+        (homd_
+          GG
+          x
+          (fapp0 (Fibre_func FF x) u)
+          y
+          v)
+        p));
+
+rule @fapp1_fapp0
+      _
+      Cat_cat
+      (@fapp0_func _ _ $p)
+      _
+      _
+      (@tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v)
+  ↪ @tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u $v;
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
       $p
-      Terminal_obj;
+      (@tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v)
+  ↪ @tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u $v;
+
+rule @tdapp1_int_hom_func
+      $K
+      $E
+      $D
+      $FF
+      $FF
+      (@id_transfd $K $E $D $FF)
+      $x
+      $y
+      $p
+      $u
+      $v
+  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
+
+symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (ϵ : τ (Transfd FF GG))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (functord_transport_lhs_func FF p) u)
+      (fapp0 (functord_transport_rhs_func GG p) u));
+
+rule fapp0
+      (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _)
+      (@homd_id_canonical_triangle $K $E $x $y $p $u)
+  ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
+
+rule @tdapp1_int_cell
+      $K
+      $E
+      $D
+      $FF
+      $FF
+      (@id_transfd $K $E $D $FF)
+      $x
+      $y
+      $p
+      $u
+  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (Transfd FF GG)) (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @Fibre_transf_app
+    K
+    (@Op_catd K E)
+    (@Homd_target_catd K E)
+    (@homd_int K E E (@id_funcd K E))
+    (@comp_catd_fapp0
+      K
+      (@Op_catd K E)
+      (@Op_catd K D)
+      (@Homd_target_catd K E)
+      (@homd_int K E D GG)
+      (@Op_funcd K E D FF))
+    (@tdapp1_int_fapp0_transfd K E D FF GG ϵ)
+    x
+    u
+    ≡ @tdapp1_int_section_arrow K E D FF GG ϵ x u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  tapp0_fapp0
+    Terminal_obj
+    (tdapp0_fapp0 y (@tdapp1_int_section_arrow K E D FF GG ϵ x u))
+    ≡ @tdapp1_int_tgt_arrow K E D FF GG ϵ x u y;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat E y)
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    (@homd_id_tgt_func K E x u y)
+    (@homd_tdapp1_tgt_func K E D FF GG x u y)
+    v
+    (@tdapp1_int_tgt_arrow K E D FF GG ϵ x u y)
+    ≡ @tdapp1_int_presheaf_arrow K E D FF GG ϵ x u y v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @fapp1_fapp0
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    Cat_cat
+    (@fapp0_func (Op_cat (Hom_cat K x y)) Cat_cat p)
+    (fapp0 (@homd_id_tgt_func K E x u y) v)
+    (fapp0 (@homd_tdapp1_tgt_func K E D FF GG x u y) v)
+    (@tdapp1_int_presheaf_arrow K E D FF GG ϵ x u y v)
+    ≡ @tdapp1_int_hom_func K E D FF GG ϵ x y p u v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
+  (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  fapp0
+    (@tdapp1_int_hom_func K E D FF GG ϵ x y p u _)
+    (@homd_id_canonical_triangle K E x y p u)
+    ≡ @tdapp1_int_cell K E D FF GG ϵ x y p u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tdapp1_int_section_arrow
+      K E D FF FF (@id_transfd K E D FF) x u
+    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tdapp1_int_tgt_arrow
+      K E D FF FF (@id_transfd K E D FF) x u y
+    ≡ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tdapp1_int_cell
+      K E D FF FF (@id_transfd K E D FF) x y p u
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+
+// Neutral aliases for the identity-specialized displayed internal action
+// projection ladder. The old `functord_laxity_fdapp1_*` heads remain the
+// canonical rewrite targets for now.
+symbol fdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+≔ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+
+symbol fdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+≔ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+
+symbol fdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+≔ @functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v;
+
+symbol fdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+≔ @functord_laxity_fdapp1_hom_func K E D FF x y p u v;
+
+symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+≔ @functord_laxity_fdapp1_cell K E D FF x y p u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_int_section_arrow K E D FF x u
+    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_int_cell K E D FF x y p u
+    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
 
 rule @functord_laxity_fdapp1_cell
       $K
