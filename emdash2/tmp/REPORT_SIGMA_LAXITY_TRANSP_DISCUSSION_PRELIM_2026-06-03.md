@@ -466,6 +466,37 @@ fapp0 (tdapp1_int_hom_func ...) id_{E[p]u}
 The raw-identity probe passed, and the active file now contains no
 `homd_id_canonical_triangle` references.
 
+### Terminal Case Clarification
+
+The deleted rule:
+
+```text
+homd_id_canonical_triangle(Const(Terminal),p,Terminal_obj)
+  -> Terminal_obj
+```
+
+was not an independent mathematical requirement. It existed because the raw
+terminal identity:
+
+```text
+id_{Terminal_obj}
+```
+
+was first folded into the artificial `homd_id_canonical_triangle` head. After
+that fold, the ordinary terminal identity rule:
+
+```text
+id(Terminal_cat,_) -> Terminal_obj
+```
+
+could no longer see the raw `id` head.
+
+Once `homd_id_canonical_triangle` was deleted, the terminal case returned to
+the ordinary owner rule `id(Terminal_cat,_) -> Terminal_obj`. The remaining
+terminal-source `fdapp1_int_hom_fapp0(..., Terminal_obj) -> fdapp1_int_cell`
+rule covers the displayed internal-hom collapse, so no replacement
+canonical-triangle terminal bridge is needed.
+
 ## Placement Constraints
 
 The new capped projection head can be declared before `fdapp1_int_cell`, because

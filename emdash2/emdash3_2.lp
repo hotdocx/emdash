@@ -5442,8 +5442,8 @@ rule @fdapp1_int_hom_fapp0
       $u
       _
       (@id
-        (@fapp0 $K Cat_cat $E $y)
-        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
+        _
+        _)
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 rule @fdapp1_int_hom_fapp0
@@ -5674,8 +5674,8 @@ symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
 rule fapp0
       (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _)
       (@id
-        (@fapp0 $K Cat_cat $E $y)
-        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
+        _
+        _)
   ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
 
 rule @tdapp1_int_cell
