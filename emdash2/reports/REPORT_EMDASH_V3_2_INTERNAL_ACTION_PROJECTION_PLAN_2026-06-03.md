@@ -9,8 +9,8 @@ cleanup and extension tasks in `emdash3_2.lp`:
   `fapp1_at_transf`;
 - add a generic projection ladder for `tdapp1_int_fapp0_transfd`, the object
   action of `tdapp1_int_func_transfd`;
-- complete the neutral renaming of the old `functord_laxity_fdapp1_*`
-  projection heads to the canonical `fdapp1_int_*` heads.
+- complete the neutral canonical naming of the displayed internal-action
+  projection heads as `fdapp1_int_*`.
 
 The plan follows the v3.2 stable-head SOP: introduce small projection heads only
 where they expose a meaningful semantic layer, keep reducible endpoint families
@@ -33,24 +33,15 @@ Implemented in `emdash3_2.lp` on 2026-06-03:
   `fdapp1_int_section_arrow`, `fdapp1_int_tgt_arrow`,
   `fdapp1_int_presheaf_arrow`, `fdapp1_int_hom_func`, and
   `fdapp1_int_cell`.
-- compatibility aliases for the old names:
-  `functord_laxity_fdapp1_section_arrow`,
-  `functord_laxity_fdapp1_tgt_arrow`,
-  `functord_laxity_fdapp1_presheaf_arrow`,
-  `functord_laxity_fdapp1_hom_func`, and
-  `functord_laxity_fdapp1_cell`.
 
-The mechanical kernel rename from `functord_laxity_fdapp1_*` to
-`fdapp1_int_*` is now complete. The old names remain available as definitions
-pointing to the new canonical heads; no bidirectional rewrite rules are used
-between old and new names.
+The canonical rename is complete. No compatibility aliases for the earlier
+displayed-laxity projection names are kept in `emdash3_2.lp`.
 
 Validation after implementation:
 
 ```bash
-timeout 30s lambdapi check -w tmp_internal_action_projection_probe.lp
-timeout 60s lambdapi check -w tmp_internal_action_rename_probe.lp
 timeout 60s lambdapi check -w emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
 ## Current Reviewed State
@@ -309,19 +300,8 @@ fdapp1_int_hom_func
 fdapp1_int_cell
 ```
 
-The old `functord_laxity_fdapp1_*` names remain available as compatibility
-definitions pointing to the new canonical heads:
-
-```text
-functord_laxity_fdapp1_section_arrow := fdapp1_int_section_arrow
-functord_laxity_fdapp1_tgt_arrow := fdapp1_int_tgt_arrow
-functord_laxity_fdapp1_presheaf_arrow := fdapp1_int_presheaf_arrow
-functord_laxity_fdapp1_hom_func := fdapp1_int_hom_func
-functord_laxity_fdapp1_cell := fdapp1_int_cell
-```
-
-There are no bidirectional rewrite rules between old and new names. The
-canonical normal form is the neutral `fdapp1_int_*` family.
+No compatibility aliases are retained. The canonical normal form is the neutral
+`fdapp1_int_*` family.
 
 The `functord_laxity_precomp_func` and `functord_laxity_precomp_fapp0` names
 should stay for now. They are not merely projection rungs; they are

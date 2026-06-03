@@ -5876,56 +5876,6 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       K E D FF FF (@id_transfd K E D FF) x y p u
     ≡ @fdapp1_int_cell K E D FF x y p u;
 
-// Compatibility aliases for the old displayed-laxity names. The canonical
-// rewrite heads are now the neutral `fdapp1_int_*` projection names.
-symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat E x)))
-≔ @fdapp1_int_section_arrow K E D FF x u;
-
-symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat E x)))
-  (y : τ (Obj K))
-≔ @fdapp1_int_tgt_arrow K E D FF x u y;
-
-symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x : τ (Obj K))
-  (u : τ (Obj (Fibre_cat E x)))
-  (y : τ (Obj K))
-  (v : τ (Obj (Fibre_cat E y)))
-≔ @fdapp1_int_presheaf_arrow K E D FF x u y v;
-
-symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-  (v : τ (Obj (Fibre_cat E y)))
-≔ @fdapp1_int_hom_func K E D FF x y p u v;
-
-symbol functord_laxity_fdapp1_cell [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-≔ @fdapp1_int_cell K E D FF x y p u;
-
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
-  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
-  @functord_laxity_fdapp1_section_arrow K E D FF x u
-    ≡ @fdapp1_int_section_arrow K E D FF x u;
-
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
-  (x y : τ (Obj K))
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x))) ⊢
-  @functord_laxity_fdapp1_cell K E D FF x y p u
-    ≡ @fdapp1_int_cell K E D FF x y p u;
-
 rule @fdapp1_int_cell
       $K
       (@Const_catd $K Terminal_cat)
