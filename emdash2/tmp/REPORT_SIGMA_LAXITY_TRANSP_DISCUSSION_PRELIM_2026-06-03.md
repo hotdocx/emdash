@@ -306,51 +306,80 @@ transport package.
 So the generic `hom_postcomp_eval_func` idea is useful background, but it is
 not the final owner for this Sigma/laxity computation.
 
-## Current Preferred Direction
+## Superseded Specialized-Transp Direction
 
-The current preferred design is a specialized primitive functor head:
+After the generic `hom_postcomp_eval_func` direction, we briefly considered a
+specialized primitive functor head:
 
 ```text
 functord_laxity_precomp_transp_func(FF,p,u,v)
 ```
 
-with intended type:
-
-```text
-Functor
-  (Hom_{E[y]}(E[p]u, v))
-  (Hom_{D[y]}(D[p](FF[x]u), FF[y]v))
-```
-
-and intended surface meaning:
+with intended object action:
 
 ```text
 alpha |-> FF[y][alpha] o fdapp1_int_cell(FF,p,u)
 ```
 
-but it should not be definitionally expanded to that composite. It should be a
-primitive stable head whose rewrite behavior is owned directly by the
-Sigma/laxity transport calculus.
+This was an improvement over the old two-head expression because it made the
+whole operation the stable owner. However, it was still one abstraction too
+many.
 
-The key rules should be Došen-style cut-elimination/accumulation rules:
+The later review observed that the existing internal-hom extraction already
+has the correct functor:
 
 ```text
-functord_laxity_precomp_transp_func(FF,p,u,E[p]u)[canonical_id]
-  -> fdapp1_int_cell(FF,p,u)
-
-FF[y][beta] o
-  functord_laxity_precomp_transp_func(FF,p,u,v)[alpha]
-  ->
-functord_laxity_precomp_transp_func(FF,p,u,w)[beta o alpha]
+fdapp1_int_hom_func(FF,p,u,v)
+  : Hom_Cat(
+      homd_(id_E,x,u,y,v)[p],
+      homd_(FF,x,FF[x]u,y,v)[p])
 ```
 
-The first rule should probably consume `homd_id_canonical_triangle`, because
-the current code folds the raw fibre identity at `E[p]u` to that canonical head.
+So the Sigma-map fibre component should be one more projection of this existing
+functor, not a new standalone laxity-transport functor.
+
+## Current Preferred Direction
+
+The current preferred and now probed design is the capped projection:
+
+```text
+fdapp1_int_hom_fapp0(FF,p,u,alpha)
+```
+
+with type:
+
+```text
+alpha : Hom_{E[y]}(E[p]u, v)
+
+fdapp1_int_hom_fapp0(FF,p,u,alpha)
+  : Hom_{D[y]}(D[p](FF[x]u), FF[y]v)
+```
+
+It is linked to the existing internal-hom functor by:
+
+```text
+fapp0 (fdapp1_int_hom_func(FF,p,u,v)) alpha
+  -> fdapp1_int_hom_fapp0(FF,p,u,alpha)
+```
+
+The canonical identity collapse is:
+
+```text
+fdapp1_int_hom_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
+  -> fdapp1_int_cell(FF,p,u)
+```
+
+The terminal-source specialization similarly routes through
+`fdapp1_int_hom_fapp0` before reaching `fdapp1_int_cell`.
+
+This is cleaner than both the old two-head reconstruction and the proposed
+`functord_laxity_precomp_transp_func`: the laxness comes from the original
+internal displayed hom-action, and no rule has to assert that
+`fdapp1_int_hom_fapp0(beta o alpha)` decomposes as a composite.
 
 ## Sigma Rule Shape
 
-The capped `fapp1_fapp0` rule for `sigma_map_func` should eventually be
-rewritten from the old two-head expression to:
+The capped `fapp1_fapp0` rule for `sigma_map_func` now has the intended shape:
 
 ```text
 sigma_map_func(eta)[(p,alpha)]
@@ -358,15 +387,19 @@ sigma_map_func(eta)[(p,alpha)]
 sigma_arrow
   ...
   p
-  (fapp0
-    (functord_laxity_precomp_transp_func eta p u v)
-    alpha)
+  (fdapp1_int_hom_fapp0(eta,p,u,alpha))
 ```
 
-This keeps the functor object visible and functorial in `alpha`, without
-exposing `FF[y][alpha]` as the stable owner of the computation.
+The old surface reading:
 
-The `fapp1_func(sigma_map_func eta)` version is explicitly deferred.
+```text
+FF[y][alpha] o laxity(FF,p)[u]
+```
+
+is still a useful mathematical explanation, but it is no longer the kernel
+normal form.
+
+The `fapp1_func(sigma_map_func eta)` version remains explicitly deferred.
 
 ## Old Heads To Retire Or Isolate
 
@@ -394,8 +427,10 @@ stable form.
 
 ## Placement Constraints
 
-The new functor head can be declared before `fdapp1_int_cell`, because its type
-does not need to mention `fdapp1_int_cell`.
+The new capped projection head can be declared before `fdapp1_int_cell`, because
+its type does not need to mention `fdapp1_int_cell`. This is necessary because
+the early `sigma_map_func` capped action rule needs the head before the full
+`fdapp1_int_hom_func` extraction section is reached.
 
 The identity/canonical collapse rule must be placed after:
 
@@ -406,6 +441,15 @@ homd_id_canonical_triangle
 
 because its RHS is `fdapp1_int_cell` and its LHS likely consumes
 `homd_id_canonical_triangle`.
+
+The fold from nested functor action:
+
+```text
+fapp0 (fdapp1_int_hom_func ...) alpha
+  -> fdapp1_int_hom_fapp0 ...
+```
+
+must live after `fdapp1_int_hom_func` is declared.
 
 ## Probe Status
 
@@ -419,31 +463,73 @@ Known from the discussion:
 - A very rough post-compaction probe of the specialized
   `functord_laxity_precomp_transp_func` shape timed out under a 60 second
   check, but the probe was not refined enough to count as negative evidence.
+- A later complete probe replaced the old two-head Sigma/laxity machinery with
+  `fdapp1_int_hom_fapp0`, deleted the unused
+  `sigma_map_transport_fibre_arrow` helper, and updated the dependent
+  path-out/transitivity assertions.
+- That complete probe passed:
+
+  ```bash
+  timeout 60s lambdapi check -w tmp_sigma_fdapp_complete_probe.lp
+  ```
+
+- The active file was then updated and passed:
+
+  ```bash
+  timeout 60s lambdapi check -w emdash3_2.lp
+  ```
+
+## PathOut Transport Finding
+
+The path-out transitivity assertion showed why a broad strictness rule for
+`PathOut_transport_func` is not the right diagnosis. `PathOut_transport_func`
+is defined through:
+
+```text
+PathOut_cat_func(Z) = Sigma_func(Z) o Rep_catd_func(Z)
+PathOut_transport_func(p) = PathOut_cat_func(Z)[p]
+```
+
+So its computation on canonical total arrows goes through the Sigma-map action
+for the representable displayed functor:
+
+```text
+Rep_transport_func(p)
+```
+
+The focused replacement rule is therefore:
+
+```text
+fdapp1_int_hom_fapp0(Rep_transport_func(p), q, id_y)
+  -> id_{q o p}
+```
+
+This is the new-head replacement for the old representable-specific
+`functord_laxity_precomp_fapp0` / `functord_transport_fibre_fapp1_fapp0`
+consumer.
 
 ## Current Working Assessment
 
-The likely feasible implementation plan is:
+The implementation performed by the successful probe is:
 
-1. Add `functord_laxity_precomp_transp_func` as a primitive functor head.
-2. Rewrite the capped `sigma_map_func` action to use it directly.
-3. Add the canonical identity collapse:
+1. Replace `functord_laxity_precomp_func`,
+   `functord_laxity_precomp_fapp0`, and
+   `functord_transport_fibre_fapp1_fapp0` with
+   `fdapp1_int_hom_fapp0`.
+2. Rewrite the capped `sigma_map_func` action to use
+   `fdapp1_int_hom_fapp0` directly.
+3. Delete `sigma_map_transport_fibre_arrow`, which was only defined and
+   asserted locally.
+4. Add the canonical identity collapse:
 
    ```text
-   fapp0 (functord_laxity_precomp_transp_func ... E[p]u)
-         homd_id_canonical_triangle
+   fdapp1_int_hom_fapp0(..., homd_id_canonical_triangle)
      -> fdapp1_int_cell
    ```
 
-4. Add the accumulation rule:
+5. Add the terminal-source and representable/cartesian specializations at the
+   new head.
+6. Update assertions to expect `fdapp1_int_hom_fapp0`.
 
-   ```text
-   FF[y][beta] o transp(alpha) -> transp(beta o alpha)
-   ```
-
-5. Remove or comment the old two-head consumer rules and update assertions.
-6. Probe incrementally in a temporary copy, keeping reducible endpoint slots
-   implicit on LHSs where possible.
-
-This report is intentionally preliminary. The next step should be a more
-precise implementation plan with exact Lambdapi declarations, placement edits,
-old-rule removal list, and focused assertions.
+This report remains preliminary as a discussion record, but the core design has
+now been implemented and typechecked in `emdash3_2.lp`.
