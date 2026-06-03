@@ -5412,8 +5412,8 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
 
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable component-level displayed laxity normal form.
-// The concrete transported-object identity first folds to the stable
-// `homd_id_canonical_triangle` head below, then this action consumes that head.
+// The concrete transported-object identity is consumed directly by the
+// `fdapp1_int_hom_fapp0` rule below.
 //
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
@@ -5431,46 +5431,6 @@ symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func FF p) u));
 
-// Canonical source triangle, typed in the direct `homd_` endpoint.
-//
-// Mathematical notation:
-//   id_{E[p](u)} : homd_(id_E,x,u,y,E[p](u))[p].
-//
-// Faithful surface syntax:
-//   id : Homd_E(x,u,y,E[p]u)[p].
-//
-// This is a stable identity-specialization head, similar in role to `id_func`
-// and `id_funcd`: it names the canonical/cartesian triangle. The rewrite below
-// folds only the primitive projection normal form `id_{E[p](u)}` to this head,
-// not arbitrary identities in arbitrary fibre categories.
-injective symbol homd_id_canonical_triangle [K : Cat] (E : τ (Catd K))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  (u : τ (Obj (Fibre_cat E x)))
-  : τ (Obj
-      (fapp0
-        (homd_
-          (@id_funcd K E)
-          x
-          u
-          y
-          (fapp0 (catd_transport_func E p) u))
-        p));
-
-rule @id
-      (@fapp0 $K Cat_cat $E $y)
-      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
-  ↪ @homd_id_canonical_triangle $K $E $x $y $p $u;
-
-rule @homd_id_canonical_triangle
-      $K
-      (@Const_catd $K Terminal_cat)
-      $x
-      $y
-      $p
-      Terminal_obj
-  ↪ Terminal_obj;
-
 rule @fdapp1_int_hom_fapp0
       $K
       $E
@@ -5481,7 +5441,9 @@ rule @fdapp1_int_hom_fapp0
       $p
       $u
       _
-      (@homd_id_canonical_triangle $K $E $x $y $p $u)
+      (@id
+        (@fapp0 $K Cat_cat $E $y)
+        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 rule @fdapp1_int_hom_fapp0
@@ -5711,7 +5673,9 @@ symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
 
 rule fapp0
       (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _)
-      (@homd_id_canonical_triangle $K $E $x $y $p $u)
+      (@id
+        (@fapp0 $K Cat_cat $E $y)
+        (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u))
   ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
 
 rule @tdapp1_int_cell
@@ -5788,7 +5752,9 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   fapp0
     (@tdapp1_int_hom_func K E D FF GG ϵ x y p u _)
-    (@homd_id_canonical_triangle K E x y p u)
+    (@id
+      (@fapp0 K Cat_cat E y)
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     ≡ @tdapp1_int_cell K E D FF GG ϵ x y p u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
@@ -8012,7 +7978,9 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   fapp0
     (@fdapp1_int_hom_func K E D FF x y p u _)
-    (@homd_id_canonical_triangle K E x y p u)
+    (@id
+      (@fapp0 K Cat_cat E y)
+      (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     ≡ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))

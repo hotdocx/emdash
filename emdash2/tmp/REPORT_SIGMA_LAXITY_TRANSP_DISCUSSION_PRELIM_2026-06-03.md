@@ -362,12 +362,17 @@ fapp0 (fdapp1_int_hom_func(FF,p,u,v)) alpha
   -> fdapp1_int_hom_fapp0(FF,p,u,alpha)
 ```
 
-The canonical identity collapse is:
+The identity collapse is now direct on the transported fibre identity:
 
 ```text
-fdapp1_int_hom_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
+fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
   -> fdapp1_int_cell(FF,p,u)
 ```
+
+An intermediate `homd_id_canonical_triangle` head was initially used to name
+that transported identity, but a later probe showed that the raw identity LHS
+typechecks and does not reintroduce the earlier search problem after the
+Sigma-map fibre component was simplified.
 
 The terminal-source specialization similarly routes through
 `fdapp1_int_hom_fapp0` before reaching `fdapp1_int_cell`.
@@ -425,6 +430,42 @@ should be removed or replaced, not kept in parallel.
 Assertions that mention the old heads must be rewritten to the new expected
 stable form.
 
+## Removed Canonical-Triangle Head
+
+After `fdapp1_int_hom_fapp0` became the owner of the Sigma-map fibre component,
+we retried the older goal of deleting:
+
+```text
+homd_id_canonical_triangle
+```
+
+and its folding rule:
+
+```text
+id_{E[p]u} -> homd_id_canonical_triangle(E,p,u)
+```
+
+The replacement rules match directly on the raw transported identity:
+
+```text
+@id
+  (E[y])
+  (E[p]u)
+```
+
+in both consumers:
+
+```text
+fdapp1_int_hom_fapp0(..., id_{E[p]u})
+  -> fdapp1_int_cell(...)
+
+fapp0 (tdapp1_int_hom_func ...) id_{E[p]u}
+  -> tdapp1_int_cell(...)
+```
+
+The raw-identity probe passed, and the active file now contains no
+`homd_id_canonical_triangle` references.
+
 ## Placement Constraints
 
 The new capped projection head can be declared before `fdapp1_int_cell`, because
@@ -432,15 +473,13 @@ its type does not need to mention `fdapp1_int_cell`. This is necessary because
 the early `sigma_map_func` capped action rule needs the head before the full
 `fdapp1_int_hom_func` extraction section is reached.
 
-The identity/canonical collapse rule must be placed after:
+The identity collapse rule must be placed after:
 
 ```text
 fdapp1_int_cell
-homd_id_canonical_triangle
 ```
 
-because its RHS is `fdapp1_int_cell` and its LHS likely consumes
-`homd_id_canonical_triangle`.
+because its RHS is `fdapp1_int_cell`.
 
 The fold from nested functor action:
 
@@ -476,6 +515,15 @@ Known from the discussion:
 - The active file was then updated and passed:
 
   ```bash
+  timeout 60s lambdapi check -w emdash3_2.lp
+  ```
+
+- A follow-up probe removed `homd_id_canonical_triangle` entirely and matched
+  directly on the transported raw identity. The probe and the active file both
+  passed:
+
+  ```bash
+  timeout 60s lambdapi check -w tmp_raw_id_probe.lp
   timeout 60s lambdapi check -w emdash3_2.lp
   ```
 
@@ -520,16 +568,18 @@ The implementation performed by the successful probe is:
    `fdapp1_int_hom_fapp0` directly.
 3. Delete `sigma_map_transport_fibre_arrow`, which was only defined and
    asserted locally.
-4. Add the canonical identity collapse:
+4. Add the raw transported-identity collapse:
 
    ```text
-   fdapp1_int_hom_fapp0(..., homd_id_canonical_triangle)
+   fdapp1_int_hom_fapp0(..., id_{E[p]u})
      -> fdapp1_int_cell
    ```
 
 5. Add the terminal-source and representable/cartesian specializations at the
    new head.
 6. Update assertions to expect `fdapp1_int_hom_fapp0`.
+7. Remove `homd_id_canonical_triangle` and consume the raw transported identity
+   directly.
 
 This report remains preliminary as a discussion record, but the core design has
 now been implemented and typechecked in `emdash3_2.lp`.
