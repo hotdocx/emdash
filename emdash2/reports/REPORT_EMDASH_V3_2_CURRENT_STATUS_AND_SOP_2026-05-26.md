@@ -67,7 +67,7 @@ The faithful surface-syntax plan is a presentation layer over this kernel, not
 a replacement for it. Default surface mode should print mathematical,
 polarity-aware syntax such as `Π y :^f Z^op, D[y^-] ...`, while kernel/debug
 mode should preserve stable rewrite heads such as `homd_src_func`,
-`tdapp0_fapp0`, and `functord_laxity_fdapp1_cell`.
+`tdapp0_fapp0`, and `fdapp1_int_cell`.
 
 Current validation observed during this review:
 
@@ -505,7 +505,7 @@ now computes through:
 id(E[y],E[p]u)
   -> homd_id_canonical_triangle(E,p,u)
   -> functord_transport_fibre_fapp1_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
-  -> functord_laxity_fdapp1_cell(FF,p,u).
+  -> fdapp1_int_cell(FF,p,u).
 ```
 
 The active standalone head

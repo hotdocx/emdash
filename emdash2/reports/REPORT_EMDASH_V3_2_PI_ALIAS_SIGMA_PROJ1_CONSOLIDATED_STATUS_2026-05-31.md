@@ -208,7 +208,7 @@ section_pullback_transf(F)[E] = section_pullback_func(F,E).
 For varying bases:
 
 ```text
-functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+fdapp1_int_cell(Pi_pullback_funcd(G),p,E)
   -> section_pullback_func(G[p],E).
 ```
 
@@ -278,7 +278,7 @@ Current status:
 - `piapp1_src_obj` is a definition through `fib_cov_tapp0_func`.
 - `piapp1_fapp0` is a definition through `piapp0(piapp1_func(...),f)`.
 - `piapp1_func` is defined by the terminal-source specialization of
-  `functord_laxity_fdapp1_presheaf_arrow`.
+  `fdapp1_int_presheaf_arrow`.
 - The constant-family computation is checked at the `piapp1_fapp0` API:
   `piapp1_fapp0(Const_catd K A,s,f) = fapp1_fapp0(s,f)`.
 - The old `piapp1_int_*` projection chain is not active.
@@ -289,9 +289,9 @@ terminal-source internal action pipeline. The intended computational route is:
 ```text
 piapp1_fapp0(s,f)
   = piapp0(piapp1_func(s,x,y),f)
-  -> tapp0_fapp0(...,f,functord_laxity_fdapp1_presheaf_arrow(...))
-  -> functord_laxity_fdapp1_hom_func(...)
-  -> functord_laxity_fdapp1_cell(...)
+  -> tapp0_fapp0(...,f,fdapp1_int_presheaf_arrow(...))
+  -> fdapp1_int_hom_func(...)
+  -> fdapp1_int_cell(...)
 ```
 
 For a constant family this ends at ordinary functor action:

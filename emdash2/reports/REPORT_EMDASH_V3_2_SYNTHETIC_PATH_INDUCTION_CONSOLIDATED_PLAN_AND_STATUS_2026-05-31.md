@@ -237,7 +237,7 @@ PathIndTgt_transport(p,E)
 The target transport computes through Pi laxity:
 
 ```text
-functord_laxity_fdapp1_cell(PathOutPi_funcd(Z),p,E)
+fdapp1_int_cell(PathOutPi_funcd(Z),p,E)
   -> PathIndTgt_transport_func(p,E)
   -> section_pullback_func(PathOut_transport_func(p),E).
 ```
@@ -424,10 +424,10 @@ The displayed Pi-laxity computations are currently installed at the component
 level:
 
 ```text
-functord_laxity_fdapp1_cell(Pi_int_funcd,F,E)
+fdapp1_int_cell(Pi_int_funcd,F,E)
   -> section_pullback_func(F,E)
 
-functord_laxity_fdapp1_cell(Pi_pullback_funcd(G),p,E)
+fdapp1_int_cell(Pi_pullback_funcd(G),p,E)
   -> section_pullback_func(G[p],E).
 ```
 
@@ -452,7 +452,7 @@ functord_transport_rhs_func(FF,p) = FF[y] o E[p].
 The active component-level laxity interface is:
 
 ```text
-functord_laxity_fdapp1_cell(FF,p,u)
+fdapp1_int_cell(FF,p,u)
   : D[p](FF[x](u)) -> FF[y](E[p](u)).
 ```
 
@@ -483,11 +483,11 @@ projection ladder is:
 
 ```text
 fdapp1_int_transfd(FF)
-  -> functord_laxity_fdapp1_section_arrow(FF,x,u)
-  -> functord_laxity_fdapp1_tgt_arrow(FF,x,u,y)
-  -> functord_laxity_fdapp1_presheaf_arrow(FF,x,u,y,v)
-  -> functord_laxity_fdapp1_hom_func(FF,p,u,v)
-  -> functord_laxity_fdapp1_cell(FF,p,u).
+  -> fdapp1_int_section_arrow(FF,x,u)
+  -> fdapp1_int_tgt_arrow(FF,x,u,y)
+  -> fdapp1_int_presheaf_arrow(FF,x,u,y,v)
+  -> fdapp1_int_hom_func(FF,p,u,v)
+  -> fdapp1_int_cell(FF,p,u).
 ```
 
 The stable canonical triangle is:
@@ -544,7 +544,7 @@ functord_laxity_precomp_fapp0
   (FF,p,u,
    functord_transport_fibre_fapp1_fapp0
      (FF,p,u,homd_id_canonical_triangle(E,p,u)))
-  -> functord_laxity_fdapp1_cell(FF,p,u).
+  -> fdapp1_int_cell(FF,p,u).
 ```
 
 The previous composite wrapper:
@@ -609,7 +609,7 @@ alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
 7. Pi target transport is a component-level laxity specialization.
 
    `PathIndTgt_transport` comes from
-   `functord_laxity_fdapp1_cell(PathOutPi_funcd,p,E)` and ultimately from Pi
+   `fdapp1_int_cell(PathOutPi_funcd,p,E)` and ultimately from Pi
    pullback/section pullback.
 
 8. The active Sigma-map action is lax-prefix standalone precomposition.
@@ -707,7 +707,7 @@ on the transparent `Sigma_catd_transport_func` alias.
 ### Phase 3: Improve Laxity Extraction Without Circularity
 
 The component bridge from `fdapp1_int_transfd(FF)` to
-`functord_laxity_fdapp1_cell(FF,p,u)` is checked. A future cleanup may add a
+`fdapp1_int_cell(FF,p,u)` is checked. A future cleanup may add a
 whole-transfor laxity interface derived from the internal hom-action path, but
 only after the source object `u` can be internalized without making the current
 component computation misleading. Until then, the whole-transfor declaration is

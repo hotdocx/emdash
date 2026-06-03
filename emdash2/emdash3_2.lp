@@ -176,7 +176,7 @@ flag "print_meta_args" on;
       projections over `tapp0`/`tdapp0`, useful for later bridges but not
       rewrite discriminators.
     - `catd_transport_func`, `functord_transport_*`, and
-      `functord_laxity_fdapp1_cell`: generic base-arrow transport,
+      `fdapp1_int_cell`: generic base-arrow transport,
       naturality-route, and component-level laxity/coherence helpers for
       displayed functors. A whole-transfor laxity interface remains deferred
       until the source object `u` can be internalized cleanly.
@@ -4544,7 +4544,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
     D[p](FF[x](u)) -> FF[y](E[p](u)).
 
   The active implementation stops at this component-level normal form,
-  `functord_laxity_fdapp1_cell(FF,p,u)`. A future whole-transfor interface
+  `fdapp1_int_cell(FF,p,u)`. A future whole-transfor interface
   should be added only after the source object `u` can be internalized without
   obscuring this extraction path. Strict constructors then need explicit folds
   making their laxity collapse to the identity/cartesian component.
@@ -5036,7 +5036,7 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
           (@functord_transport_rhs_func K E D FF x y p));
 
   The active implementation stops at the component-level cell
-  `functord_laxity_fdapp1_cell(FF,p,u)`. Reintroduce the live symbol only after
+  `fdapp1_int_cell(FF,p,u)`. Reintroduce the live symbol only after
   the `fdapp1_int_transfd` extraction internalizes `u` cleanly enough to support
   the whole `Transf` computationally.
 */
@@ -5247,7 +5247,7 @@ symbol homd_ff_src_sec [K : Cat] [E D : τ (Catd K)]
 //
 // Further projections at y, at the transported object E[p](u), and at the base
 // arrow p produce the component-level displayed laxity cell.
-symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
+symbol fdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
@@ -5270,7 +5270,7 @@ rule @tapp0_fapp0
         _
         $x
         (@fdapp1_int_transfd $K $E $D $FF))
-  ↪ @functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u;
+  ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u;
 
 // Source y-component of the identity dependent-hom section.
 //
@@ -5322,7 +5322,7 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 // consumes it through `tapp0_fapp0`. This still keeps the codomain functor in
 // the canonical `(x -> y)^op -> Cat` form, avoiding the reducible
 // `Fibre_cat(HomPresheaf_Z(x),y)` classifier pipeline.
-symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+symbol fdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
@@ -5344,8 +5344,8 @@ rule @tapp0_fapp0
         _
         _
         $y
-        (@functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u))
-  ↪ @functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y;
+        (@fdapp1_int_section_arrow $K $E $D $FF $x $u))
+  ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y;
 
 // Third projection stage: evaluate the y-component at a fibre object v.
 //
@@ -5362,7 +5362,7 @@ rule @tapp0_fapp0
 // than through `Fibre_cat(HomPresheaf_Z(x),y)`. This is the canonical endpoint
 // category of the HomPresheaf classifier and avoids making later projections
 // depend on unfolding the whole classifier pipeline.
-symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
+symbol fdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
@@ -5379,8 +5379,8 @@ rule @tapp0_fapp0
       _
       _
       $v
-      (@functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y)
-  ↪ @functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v;
+      (@fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y)
+  ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
 // Fourth projection stage, with endpoints written directly through `homd_`.
 //
@@ -5395,7 +5395,7 @@ rule @tapp0_fapp0
 // This deliberately keeps the endpoints at the stable `homd_` layer. A later
 // fold/assertion can expose the simplified fibre-hom category
 // `Hom_{D[y]}(D[p](FF[x](u)),FF[y](v))` when a theorem needs that shape.
-symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
+symbol fdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
@@ -5426,8 +5426,8 @@ rule @fapp1_fapp0
       (@fapp0_func _ _ $p)
       _
       _
-      (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
-  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
+      (@fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v)
+  ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
 rule @tapp0_fapp0
       _
@@ -5435,8 +5435,8 @@ rule @tapp0_fapp0
       _
       _
       $p
-      (@functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v)
-  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
+      (@fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v)
+  ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
 /*
   Full section action over a base arrow.
@@ -5456,7 +5456,7 @@ symbol piapp1_func [K : Cat] (E : τ (Catd K))
         (@id_funcd K E)
         x (@piapp0 K E s x)
         y (@piapp0 K E s y))))
-≔ @functord_laxity_fdapp1_presheaf_arrow
+≔ @fdapp1_int_presheaf_arrow
     K
     (@Const_catd K Terminal_cat)
     E
@@ -5491,7 +5491,7 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id).
-symbol functord_laxity_fdapp1_cell [K : Cat] [E D : τ (Catd K)]
+symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
@@ -5542,14 +5542,14 @@ rule @homd_id_canonical_triangle
   ↪ Terminal_obj;
 
 rule fapp0
-      (@functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u _)
+      (@fdapp1_int_hom_func $K $E $D $FF $x $y $p $u _)
       (@homd_id_canonical_triangle $K $E $x $y $p $u)
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+  ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 rule @fapp0
       Terminal_cat
       _
-      (@functord_laxity_fdapp1_hom_func
+      (@fdapp1_int_hom_func
         $K
         (@Const_catd $K Terminal_cat)
         $D
@@ -5560,7 +5560,7 @@ rule @fapp0
         Terminal_obj
         Terminal_obj)
       Terminal_obj
-  ↪ @functord_laxity_fdapp1_cell
+  ↪ @fdapp1_int_cell
       $K
       (@Const_catd $K Terminal_cat)
       $D
@@ -5571,8 +5571,8 @@ rule @fapp0
 	      Terminal_obj;
 
 // Generic displayed internal-hom action projections. These are the arbitrary
-// displayed-transfor counterparts of the identity-specialized
-// `functord_laxity_fdapp1_*` extraction path below.
+// displayed-transfor counterparts of the identity-specialized `fdapp1_int_*`
+// extraction path below.
 symbol homd_tdapp1_src_sec [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (x : τ (Obj K))
@@ -5631,7 +5631,7 @@ rule @tdapp1_int_section_arrow
       (@id_transfd $K $E $D $FF)
       $x
       $u
-  ↪ @functord_laxity_fdapp1_section_arrow $K $E $D $FF $x $u;
+  ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u;
 
 symbol tdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
@@ -5669,7 +5669,7 @@ rule @tdapp1_int_tgt_arrow
       $x
       $u
       $y
-  ↪ @functord_laxity_fdapp1_tgt_arrow $K $E $D $FF $x $u $y;
+  ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y;
 
 symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
@@ -5703,7 +5703,7 @@ rule @tdapp1_int_presheaf_arrow
       $u
       $y
       $v
-  ↪ @functord_laxity_fdapp1_presheaf_arrow $K $E $D $FF $x $u $y $v;
+  ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
 symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
@@ -5761,7 +5761,7 @@ rule @tdapp1_int_hom_func
       $p
       $u
       $v
-  ↪ @functord_laxity_fdapp1_hom_func $K $E $D $FF $x $y $p $u $v;
+  ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
 symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
@@ -5790,7 +5790,7 @@ rule @tdapp1_int_cell
       $y
       $p
       $u
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+  ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (ϵ : τ (Transfd FF GG)) (x : τ (Obj K))
@@ -5860,13 +5860,13 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
   @tdapp1_int_section_arrow
       K E D FF FF (@id_transfd K E D FF) x u
-    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+    ≡ @fdapp1_int_section_arrow K E D FF x u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
   @tdapp1_int_tgt_arrow
       K E D FF FF (@id_transfd K E D FF) x u y
-    ≡ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+    ≡ @fdapp1_int_tgt_arrow K E D FF x u y;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -5874,60 +5874,59 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   @tdapp1_int_cell
       K E D FF FF (@id_transfd K E D FF) x y p u
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
-// Neutral aliases for the identity-specialized displayed internal action
-// projection ladder. The old `functord_laxity_fdapp1_*` heads remain the
-// canonical rewrite targets for now.
-symbol fdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
+// Compatibility aliases for the old displayed-laxity names. The canonical
+// rewrite heads are now the neutral `fdapp1_int_*` projection names.
+symbol functord_laxity_fdapp1_section_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
-≔ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+≔ @fdapp1_int_section_arrow K E D FF x u;
 
-symbol fdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
+symbol functord_laxity_fdapp1_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   (y : τ (Obj K))
-≔ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+≔ @fdapp1_int_tgt_arrow K E D FF x u y;
 
-symbol fdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
+symbol functord_laxity_fdapp1_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x)))
   (y : τ (Obj K))
   (v : τ (Obj (Fibre_cat E y)))
-≔ @functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v;
+≔ @fdapp1_int_presheaf_arrow K E D FF x u y v;
 
-symbol fdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
+symbol functord_laxity_fdapp1_hom_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
   (v : τ (Obj (Fibre_cat E y)))
-≔ @functord_laxity_fdapp1_hom_func K E D FF x y p u v;
+≔ @fdapp1_int_hom_func K E D FF x y p u v;
 
-symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
+symbol functord_laxity_fdapp1_cell [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x)))
-≔ @functord_laxity_fdapp1_cell K E D FF x y p u;
+≔ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢
-  @fdapp1_int_section_arrow K E D FF x u
-    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+  @functord_laxity_fdapp1_section_arrow K E D FF x u
+    ≡ @fdapp1_int_section_arrow K E D FF x u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
-  @fdapp1_int_cell K E D FF x y p u
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+  @functord_laxity_fdapp1_cell K E D FF x y p u
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
-rule @functord_laxity_fdapp1_cell
+rule @fdapp1_int_cell
       $K
       (@Const_catd $K Terminal_cat)
       (@Const_catd $K $A)
@@ -5974,12 +5973,12 @@ rule @functord_laxity_precomp_fapp0
         $u
         _
         (@homd_id_canonical_triangle $K $E $x $y $p $u))
-  ↪ @functord_laxity_fdapp1_cell $K $E $D $FF $x $y $p $u;
+  ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the
 // stable `Rep_transport_func` head and keeps the family slots implicit.
-rule @functord_laxity_fdapp1_cell
+rule @fdapp1_int_cell
       $Z
       _
       _
@@ -6473,7 +6472,7 @@ rule @tapp0_fapp0
       (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
-rule @functord_laxity_fdapp1_cell
+rule @fdapp1_int_cell
       _
       _
       _
@@ -6484,7 +6483,7 @@ rule @functord_laxity_fdapp1_cell
       $E
   ↪ @section_pullback_func $A $B $F $E;
 
-rule @functord_laxity_fdapp1_cell
+rule @fdapp1_int_cell
       $K
       _
       _
@@ -6555,7 +6554,7 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x))) ⊢
-  @functord_laxity_fdapp1_cell
+  @fdapp1_int_cell
     Z
     (@PathOutMotives_catd Z)
     (@Const_catd Z Cat_cat)
@@ -6904,7 +6903,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
     ≡ @section_pullback_func A B F E;
 
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
-  @functord_laxity_fdapp1_cell
+  @fdapp1_int_cell
     (Op_cat Cat_cat)
     Catd_cat_func
     (@Const_catd (Op_cat Cat_cat) Cat_cat)
@@ -6919,7 +6918,7 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (E : τ (Catd (@fapp0 K (Op_cat Cat_cat) G x))) ⊢
-  @functord_laxity_fdapp1_cell
+  @fdapp1_int_cell
     K
     (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
     (@Const_catd K Cat_cat)
@@ -7871,7 +7870,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   @sigma_map_transport_fibre_arrow K E D FF x y p u
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K : Cat] (R : τ (Catd K))
   (FF : τ (Functord R (@Const_catd K Cat_cat)))
@@ -8188,22 +8187,22 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   fapp0
-    (@functord_laxity_fdapp1_hom_func K E D FF x y p u _)
+    (@fdapp1_int_hom_func K E D FF x y p u _)
     (@homd_id_canonical_triangle K E x y p u)
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   fapp0
-    (@functord_laxity_fdapp1_hom_func
+    (@fdapp1_int_hom_func
       K E D FF x y p u
       (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     (@id
       (@fapp0 K Cat_cat E y)
       (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -8231,7 +8230,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (@id
         (@fapp0 K Cat_cat E y)
         (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)))
-    ≡ @functord_laxity_fdapp1_cell K E D FF x y p u;
+    ≡ @fdapp1_int_cell K E D FF x y p u;
 
 /*
   End-to-end displayed internal-hom extraction checks.
@@ -8239,7 +8238,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   The third projection assertion below uses explicit canonical source/target
   slots for `tapp0_fapp0`. The readable form
 
-    tapp0_fapp0 v (functord_laxity_fdapp1_tgt_arrow ...)
+    tapp0_fapp0 v (fdapp1_int_tgt_arrow ...)
 
   is mathematically correct but asks Lambdapi to reconstruct too many implicit
   projection parameters and can time out. The `tgt_arrow` head itself is typed
@@ -8264,15 +8263,15 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
     (@fdapp1_int_transfd K E D FF)
     x
     u
-    ≡ @functord_laxity_fdapp1_section_arrow K E D FF x u;
+    ≡ @fdapp1_int_section_arrow K E D FF x u;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   tapp0_fapp0
     Terminal_obj
-    (tdapp0_fapp0 y (@functord_laxity_fdapp1_section_arrow K E D FF x u))
-    ≡ @functord_laxity_fdapp1_tgt_arrow K E D FF x u y;
+    (tdapp0_fapp0 y (@fdapp1_int_section_arrow K E D FF x u))
+    ≡ @fdapp1_int_tgt_arrow K E D FF x u y;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -8284,8 +8283,8 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
     (@homd_id_tgt_func K E x u y)
     (@homd_ff_tgt_func K E D FF x u y)
     v
-    (@functord_laxity_fdapp1_tgt_arrow K E D FF x u y)
-    ≡ @functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v;
+    (@fdapp1_int_tgt_arrow K E D FF x u y)
+    ≡ @fdapp1_int_presheaf_arrow K E D FF x u y v;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -8298,8 +8297,8 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
     (@fapp0_func (Op_cat (Hom_cat K x y)) Cat_cat p)
     (fapp0 (@homd_id_tgt_func K E x u y) v)
     (fapp0 (@homd_ff_tgt_func K E D FF x u y) v)
-    (@functord_laxity_fdapp1_presheaf_arrow K E D FF x u y v)
-    ≡ @functord_laxity_fdapp1_hom_func K E D FF x y p u v;
+    (@fdapp1_int_presheaf_arrow K E D FF x u y v)
+    ≡ @fdapp1_int_hom_func K E D FF x y p u v;
 
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
@@ -8705,7 +8704,7 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
           (@tapp0_fapp0 K Cat_cat E D y η)
           (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
         p
-        (@functord_laxity_fdapp1_cell K E D η x y p u);
+        (@fdapp1_int_cell K E D η x y p u);
 
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
   @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K
