@@ -2,6 +2,9 @@
 
 Date: 2026-05-24
 
+Last updated: 2026-06-04, consolidating the indexed binder syntax around
+`:^n` and clarifying the roles of `Functor_catd`, `Transf_catd`, and `Pi_cat`.
+
 ## Scope
 
 This report records the proposed design for a faithful mathematical surface
@@ -52,7 +55,7 @@ syntax should expose the dependent-hom expression itself:
 homd_int(FF) :
   (x :^n Z) →
     E[x]^op ⟶
-      Π y :^f Z^op,
+      Π y :^n Z^op,
         D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -72,7 +75,7 @@ It expands kernel helper heads into mathematical notation when that expansion is
 stable and faithful. It should prefer:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -133,7 +136,6 @@ This invariant is realistic only if:
 The printer should therefore emit explicit enough syntax to avoid guessing:
 
 ```text
-:^f
 :^n
 Z^op
 z^-
@@ -143,44 +145,53 @@ z^-
 
 These annotations are part of the faithful syntax, not decoration.
 
-## Context And Polarity
+## Context, Polarity, And Indexed Binders
 
 The surface language needs an explicit notion of current variance/polarity.
 
-### Binder Polarity
+### Single Indexed Binder
 
-The binder determines the current polarity of a variable.
-
-```text
-z :^f Z
-```
-
-means `z` is bound functorially over `Z`.
-
-```text
-z :^f Z^op
-```
-
-means `z` is bound functorially over `Op_cat Z`.
+The current canonical plan uses one explicit indexed binder marker:
 
 ```text
 z :^n Z
 ```
 
-means `z` is bound naturally/displayedly over `Z`, usually corresponding to
-the external shape of a `Functord` or `Transfd`.
+This means `z` is an indexed categorical variable over `Z`, with the usual
+natural/displayed coherence expected of the expression formed around the
+binder. The surrounding type former determines the construction:
 
-The exact semantic distinction between `:^f` and `:^n` is:
+```text
+Π z :^n Z, K[z]          section category
+Σ z :^n Z, K[z]          total category
+(z :^n Z) → E[z] ⟶ D[z] displayed/natural family of functors
+(z :^n Z) → FF[z] ⇒ GG[z] displayed/natural family of transfors
+```
 
-- `:^f` is used for section/category-level functorial indexing, such as
-  `Pi_cat E`, `Sigma_cat E`, and families indexed by a base category;
-- `:^n` is used for natural/displayed-family binders, such as the displayed
-  functor reading of `Functord E D` and the displayed transfor reading of
-  `Transfd FF GG`.
+The older draft distinction between `:^f` and `:^n` is retired from the
+canonical surface plan. It created the false impression that `Pi_cat` and
+`Sigma_cat` involve only functorial variation while `Functord_cat` and
+`Transfd_cat` involve natural variation. The better distinction is:
 
-This distinction may evolve, but the syntax should keep it explicit because the
-future parser/elaborator needs to know whether it is constructing a section-like
-object or a natural family morphism.
+```text
+The fibre/type family K[z], E[z], or D[z] varies functorially in z.
+An inhabitant or morphism over the binder varies naturally/displayedly in z.
+```
+
+This matches the kernel fact that:
+
+```text
+Pi_cat E = Functord_cat(1_K,E)
+```
+
+so a section is already a special naturally/displayedly varying family, namely
+a displayed functor out of the terminal family.
+
+For now, `:^n` remains explicit to avoid a broad syntax churn in reports and
+future comments. A later surface language may choose to omit the marker in
+unambiguous binders, or introduce more refined markers such as an
+object/isofibration-oriented `:^o`, but that is deliberately not part of the
+near-term v3.2 cleanup.
 
 ### Polarity Flip
 
@@ -198,7 +209,7 @@ current binder."
 For example, under:
 
 ```text
-Π y :^f Z^op, ...
+Π y :^n Z^op, ...
 ```
 
 plain `y` is in the `Z^op` polarity. If a family `D : Z → Cat` must be read at
@@ -218,7 +229,7 @@ This is the key correction for the `homd_int` target syntax. Under a
 `Z^op`-binder, the domain family `D : Catd Z` is reached by a polarity flip:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -259,10 +270,12 @@ The following table gives the intended default surface notation.
 | `Terminal_catd K` | `1_K` | terminal family, i.e. `const_K(1)` |
 | `Functor_catd A B` | `A[z^-] ⟶_[z] B[z]` | mixed-variance family of functor categories |
 | `Transf_catd A B FF GG` | `FF[z^-] ⇒_[z] GG[z]` | mixed-variance family of transfor categories |
-| `Functord E D` | `(z :^n K) → E[z] ⟶ D[z]` | natural/displayed family of functors |
-| `Transfd FF GG` | `(z :^n K) → FF[z] ⇒ GG[z]` | natural/displayed family of transfors |
-| `Pi_cat E` | `Π z :^f K, E[z]` | section category |
-| `Sigma_cat E` | `Σ z :^f K, E[z]` | total category |
+| `Functord_cat E D` | `(z :^n K) → E[z] ⟶ D[z]` | displayed-functor category |
+| `Functord E D` | type of `(z :^n K) → E[z] ⟶ D[z]` | hidden object wrapper |
+| `Transfd_cat FF GG` | `(z :^n K) → FF[z] ⇒ GG[z]` | displayed-transfor category |
+| `Transfd FF GG` | type of `(z :^n K) → FF[z] ⇒ GG[z]` | hidden object wrapper |
+| `Pi_cat E` | `Π z :^n K, E[z]` | section category |
+| `Sigma_cat E` | `Σ z :^n K, E[z]` | total category |
 | `Struct_sigma z u` | `(z,u)` | total object |
 | `piapp0 s z` | `s[z]` | section object component |
 | `piapp1_fapp0 s f` | `s[f]` | section arrow component |
@@ -296,6 +309,83 @@ FF[z^-] ⇒_[z] GG[z]
 This distinction is necessary because `Functor_catd` and `Transf_catd` are not
 ordinary functor/transfor categories. They are mixed-variance family
 constructors.
+
+### Type Former Clarification
+
+The single indexed binder does not remove the important type-former
+distinctions. The surrounding constructor is what determines the intended
+surface reading.
+
+For a base `Z`:
+
+```text
+Functor_catd M N
+```
+
+is a `Catd Z` whose fibre is:
+
+```text
+(Functor_catd M N)[z] = M[z^-] ⟶_[z] N[z]
+```
+
+Here `M` and `N` are displayed category families. The mixed variance is
+expressed by the source occurrence `M[z^-]` and the indexed arrow marker
+`⟶_[z]`.
+
+Similarly:
+
+```text
+Transf_catd M N FF GG
+```
+
+is a `Catd Z` whose fibre is:
+
+```text
+(Transf_catd M N FF GG)[z] = FF[z^-] ⇒_[z] GG[z]
+```
+
+Here `FF` and `GG` are sections/objects of the mixed-variance functor family
+`Functor_catd M N`, not category families themselves. This is why the transfor
+notation should use `FF` and `GG`, while the functor-family notation should use
+`M` and `N`.
+
+The section category is a special displayed-functor category:
+
+```text
+Pi_cat K = Functord_cat(1_Z,K)
+```
+
+so the surface expression:
+
+```text
+Π z :^n Z, K[z]
+```
+
+can be read morally as:
+
+```text
+(z :^n Z) → 1 ⟶ K[z]
+```
+
+If `K = Functor_catd M N`, this expands to sections of mixed-variance functor
+categories:
+
+```text
+Π z :^n Z, M[z^-] ⟶_[z] N[z]
+```
+
+If `K = Transf_catd M N FF GG`, this expands to sections of mixed-variance
+transfor categories:
+
+```text
+Π z :^n Z, FF[z^-] ⇒_[z] GG[z]
+```
+
+No separate `Pid_cat` alias is needed for the second case at the surface level
+or in the current kernel: `Transf_catd M N FF GG` is already a Cat-valued
+family, so `Pi_cat (Transf_catd M N FF GG)` is the existing type former for
+such sections. A dedicated alias should be added only if future rewrite rules
+need a stable head for this shape.
 
 ## Indexed Arrow Syntax
 
@@ -647,7 +737,7 @@ Default surface type:
 homd_int(FF) :
   (x :^n Z) →
     E[x]^op ⟶
-      Π y :^f Z^op,
+      Π y :^n Z^op,
         D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -806,7 +896,7 @@ Surface context:
 ```text
 K : Cat
 E : K → Cat
-s : Π z :^f K, E[z]
+s : Π z :^n K, E[z]
 ```
 
 Default surface type:
@@ -853,7 +943,7 @@ Homd_target_catd Z D
 as:
 
 ```text
-x ↦ Π y :^f Z^op,
+x ↦ Π y :^n Z^op,
       D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -862,7 +952,7 @@ More explicitly:
 ```text
 HomdTarget_Z(D)[x]
   =
-  Π y :^f Z^op,
+  Π y :^n Z^op,
     D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -885,13 +975,13 @@ Instead:
 For example, parsing:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
 should produce a surface AST containing:
 
-- a `PiSectionBinder` or equivalent node for `y :^f Z^op`;
+- an indexed binder node for `y :^n Z^op` under a `Π` type former;
 - a polarity-flipped fibre occurrence `D[y^-]`;
 - an indexed functor-family arrow `⟶_[y]`;
 - an ordinary functor arrow `⟶`;
@@ -917,8 +1007,8 @@ Its responsibilities include:
 - inserting `Op_cat`, `Op_catd`, and polarity conversions from explicit `^op`
   and `^-` syntax;
 - resolving compact placeholder expressions such as `Hom_B(F^op ~, G —)`;
-- elaborating `Π z :^f K, E[z]` to `Pi_cat E`;
-- elaborating `Σ z :^f K, E[z]` to `Sigma_cat E`;
+- elaborating `Π z :^n K, E[z]` to `Pi_cat E`;
+- elaborating `Σ z :^n K, E[z]` to `Sigma_cat E`;
 - preserving enough source information to pretty-print helpful errors.
 
 The elaborator should be allowed to use definitional equality and normalization
@@ -956,7 +1046,7 @@ The canonical pretty-printer should prefer one spelling among convertible
 alternatives. For the `homd_int` target, the canonical spelling should be:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -986,8 +1076,8 @@ A ⟶ B
 F ⇒ G
 K → Cat
 E[z]
-Π z :^f K, E[z]
-Σ z :^f K, E[z]
+Π z :^n K, E[z]
+Σ z :^n K, E[z]
 A[z^-] ⟶_[z] B[z]
 FF[z^-] ⇒_[z] GG[z]
 ```
@@ -1252,7 +1342,7 @@ possibly by binder annotation:
 
 ```text
 Σ x : A, P[x]          object/type-level Sigma
-Σ z :^f K, E[z]        categorical total category
+Σ z :^n K, E[z]        categorical total category
 ```
 
 ### Section 5: Ordinary Transfors And Internal Action
@@ -1331,7 +1421,7 @@ Surface recommendations:
 | `Terminal_catd K` | `1_K` | surface constructor |
 | `Op_catd E` | `E^op` | surface constructor |
 | `Op_funcd FF` | `FF^op` | surface constructor |
-| `Pi_cat E` | `Π z :^f K, E[z]` | surface constructor |
+| `Pi_cat E` | `Π z :^n K, E[z]` | surface constructor |
 | `Pi_func K` | `Π_K` as functor on families | compact/debug |
 | `piapp0_func E k` | evaluation functor `ev_k` | kernel/debug |
 | `piapp0 s k` | `s[k]` | projection notation |
@@ -1354,7 +1444,7 @@ Surface recommendations:
 
 | Kernel symbol | Surface syntax | Class |
 | --- | --- | --- |
-| `Sigma_cat E` | `Σ z :^f K, E[z]` | surface constructor |
+| `Sigma_cat E` | `Σ z :^n K, E[z]` | surface constructor |
 | `Sigma_func K` | `Σ_K` as functor on families | compact/debug |
 | `Sigma_proj1_func E` | `π₁ : Σ_K E ⟶ K` | surface constructor |
 | `sigma_map_func η` | `Σ(η)` | surface constructor |
@@ -1491,7 +1581,7 @@ Surface recommendations:
 
 | Kernel symbol | Surface syntax | Class |
 | --- | --- | --- |
-| `Homd_target_section_catd D x` | expanded `Π y :^f Z^op, ...` section | surface macro/debug |
+| `Homd_target_section_catd D x` | expanded `Π y :^n Z^op, ...` section | surface macro/debug |
 | `Homd_target_catd D` | expanded dependent-hom target family | surface macro/debug |
 | `homd_int FF` | `Homd_E(~, FF —)` expanded by default | surface macro |
 | `fib_cov_tapp0_func E x y u` | `f ↦ E[f](u)` | surface macro |
@@ -1510,7 +1600,7 @@ Default `homd_int` expansion:
 homd_int(FF) :
   (x :^n Z) →
     E[x]^op ⟶
-      Π y :^f Z^op,
+      Π y :^n Z^op,
         D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -1560,7 +1650,7 @@ s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 where:
 
 ```text
-s : Π z :^f K, E[z]
+s : Π z :^n K, E[z]
 f : Hom_K(x,y)
 ```
 
@@ -1816,14 +1906,14 @@ This is likely the right surface notation family for the `*_int` constructors.
 For round-tripping, the pretty-printer should pick one canonical spelling:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
 It should not alternate among equivalent forms such as:
 
 ```text
-Π y :^f Z,
+Π y :^n Z,
   D[y] ⟶_[y^-] (...)
 ```
 
@@ -1864,7 +1954,7 @@ For each major symbol, use a compact comment block like:
 //   homd_int(FF) :
 //     (x :^n Z) →
 //       E[x]^op ⟶
-//         Π y :^f Z^op,
+//         Π y :^n Z^op,
 //           D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 //
 // Kernel role:
@@ -1907,23 +1997,28 @@ Current recommendation:
 - do not introduce additional dash-like symbols until a concrete ambiguity
   appears.
 
-### Binder Names For `:^f` And `:^n`
+### Indexed Binder Marker
 
-The current proposal uses:
+The current canonical proposal uses:
 
 ```text
-:^f
 :^n
 ```
 
-The mnemonic is:
+The mnemonic is "natural/displayed indexed variation." In the near-term v3.2
+docs and comments, `:^n` should be used for `Π`, `Σ`, and displayed-family
+arrow binders:
 
-- `f` for functorial/section-family indexing;
-- `n` for natural/displayed-family variation.
+```text
+Π z :^n K, E[z]
+Σ z :^n K, E[z]
+(z :^n K) → E[z] ⟶ D[z]
+```
 
-This should be reviewed against future examples. If the distinction becomes
-unclear, alternative names may be needed, but the syntax must continue to mark
-the distinction explicitly.
+Earlier drafts used `:^f` for section and total binders. Treat that spelling as
+legacy report syntax, not as the canonical plan. If a later implementation
+drops explicit binder markers entirely, it should do so as a separate
+surface-language simplification, not as part of the v3.2 comment cleanup.
 
 ### Compact `Homd` Macro Syntax
 
@@ -1938,7 +2033,7 @@ These should be treated as documented macro-style pretty forms for now. The
 parser can support the fully expanded binder syntax first:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y^-] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -1949,7 +2044,7 @@ and add compact placeholder macros later.
 Inside:
 
 ```text
-Π y :^f Z^op, ...
+Π y :^n Z^op, ...
 ```
 
 the canonical syntax should print `D[y^-]` for `D : Catd Z`.
@@ -1963,6 +2058,57 @@ Hom_{E[y]}(E[f](u), FF[y](v))
 after leaving the opposite-binder context. The documentation should be explicit
 when it switches from canonical round-trip syntax to informal mathematical
 reading.
+
+## Near-Term `emdash3_2.lp` Comment Cleanup Plan
+
+The next Lambdapi-file implementation pass should be documentation-only unless
+a typechecking probe shows that a comment update exposes a missing assertion.
+The intended scope is:
+
+1. Replace canonical surface comments using `:^f` with `:^n`.
+2. Update `Pi_cat` comments to say:
+
+   ```text
+   Pi_cat(E) = Π k :^n K, E[k]
+             = (k :^n K) → 1 ⟶ E[k]
+   ```
+
+   where `1` is the terminal category/family source, not merely the object
+   symbol `⋆`.
+
+3. Update `Sigma_cat` comments to say:
+
+   ```text
+   Sigma_cat(E) = Σ k :^n K, E[k]
+   ```
+
+4. Update `Functor_catd` comments to use displayed category-family names:
+
+   ```text
+   Functor_catd(M,N)[z] = M[z^-] ⟶_[z] N[z]
+   ```
+
+5. Update `Transf_catd` comments to use displayed functor names:
+
+   ```text
+   Transf_catd(M,N,FF,GG)[z] = FF[z^-] ⇒_[z] GG[z]
+   ```
+
+6. Update `homd_int`, `Homd_target_*`, and related examples from
+   `Π y :^f Z^op` to `Π y :^n Z^op`.
+7. Do not introduce `Pid_cat` in this pass. Use
+   `Pi_cat (Transf_catd M N FF GG)` for sections of mixed-variance transfor
+   families unless a future computation needs a dedicated stable head.
+8. Keep the kernel symbols and rewrite rules unchanged. This is a surface
+   syntax/documentation consolidation, not a semantic rearchitecture.
+
+Suggested verification after the comment cleanup:
+
+```bash
+rg ':\^f' emdash3_2.lp reports/REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md
+timeout 60s lambdapi check -w emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
 
 ## Validation Strategy For The Future TypeScript Implementation
 
@@ -2021,7 +2167,7 @@ for all initial examples.
 Add negative tests where a string parses but fails elaboration, for example:
 
 ```text
-Π y :^f Z^op,
+Π y :^n Z^op,
   D[y] ⟶_[y] (Hom_Z(x,y)^op ⟶ Cat)
 ```
 
@@ -2046,7 +2192,7 @@ The most important design commitments are:
   `Homd_target_catd` into dependent-hom notation;
 - the pretty-printer is typed and polarity-aware;
 - `z^-` means polarity inversion relative to the current binder;
-- under `Π y :^f Z^op`, a family `D : Catd Z` is applied as `D[y^-]`;
+- under `Π y :^n Z^op`, a family `D : Catd Z` is applied as `D[y^-]`;
 - `⟶_[z]` and `⇒_[z]` distinguish mixed-variance family constructors from
   ordinary `⟶` and `⇒`;
 - the parser creates a surface AST and leaves semantic correctness to
