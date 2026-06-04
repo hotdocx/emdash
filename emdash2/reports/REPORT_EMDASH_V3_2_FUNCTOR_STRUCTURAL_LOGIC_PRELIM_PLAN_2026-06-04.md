@@ -323,14 +323,18 @@ stable. They should not block the implementation of `sym_func_func` or
 The ordinary `Functor_cat` layer will not be enough for the full emdash
 development.
 
-Analogous structural operations are expected for:
+Analogous structural operations are expected around:
 
 ```text
-Functord_cat
-Transfd_cat
 Functor_catd
 Transf_catd
 ```
+
+The wording matters. The structural constructor should be owned by
+`Functor_catd` or by the hom-action induced from such a constructor. The type
+of a displayed operation will often be a `Functord_cat`, because maps between
+Cat-valued families are displayed functors. That does not mean the operation is
+conceptually "on `Functord_cat`" as a separate logical layer.
 
 This is another reason not to make product maps the primary design. Product
 operations do not directly express the binder, variance, and naturality
@@ -346,8 +350,215 @@ Likely later design direction:
 - keep `Functor_catd` and `Transf_catd` variance explicit rather than routing
   through product encodings.
 
-No concrete displayed signatures are proposed in this preliminary report. They
-should be designed after the ordinary structural layer has been probed.
+Concrete displayed signatures are deferred, but the likely policy is clarified
+in the next section.
+
+## Deferred Displayed/Fibred Context
+
+This section records preliminary context for the displayed/fibration layer. It
+is not part of the first implementation pass.
+
+### Pointwise Fibred Products
+
+A pointwise displayed product family is meaningful:
+
+```text
+Product_catd(E,D) : Catd K
+Product_catd(E,D)[k] = Product_cat(E[k], D[k])
+```
+
+This should be the primary name for a fibrewise product family if/when needed.
+It should have the expected pointwise object, hom, projection, and pairing
+behavior by routing through the existing ordinary `Product_cat` machinery.
+
+Avoid a primitive `Productd_cat` for now. The name is ambiguous among several
+different constructions:
+
+```text
+Product_catd(E,D)             -- fibrewise product family
+Pi_cat(Product_catd(E,D))     -- category of pairs of sections
+Sigma_cat(Product_catd(E,D))  -- total category with objects (k,u,v)
+```
+
+For a fibred product of total categories over the same base, the likely
+presentation is:
+
+```text
+Sigma_cat(Product_catd(E,D))
+```
+
+For pairs of sections, the likely presentation is:
+
+```text
+Pi_cat(Product_catd(E,D))
+```
+
+Later comparison checks may include:
+
+```text
+Pi_cat(Product_catd(E,D))
+  ~= Product_cat(Pi_cat E, Pi_cat D)
+```
+
+but this should not be installed as a broad rewrite without a concrete
+consumer and confluence/probe evidence.
+
+### Structural Operations On `Functor_catd`
+
+The displayed analogue of ordinary structural logic should be formulated around
+`Functor_catd`, not around products and not as an unrelated operation on
+`Functord_cat`.
+
+Recall the current mixed-variance constructor:
+
+```text
+Functor_catd(A,B)[k] = A[k^-] -> B[k]
+
+A : Catd(Op_cat K)
+B : Catd K
+Functor_catd(A,B) : Catd K
+```
+
+For exchange and contraction, the variance is straightforward:
+
+```text
+A,B : Catd(Op_cat K)
+C   : Catd K
+```
+
+Then the displayed exchange operation should be a displayed functor whose
+fibres are ordinary exchange:
+
+```text
+Functor_catd_sym_funcd(A,B,C)
+  : Functord
+      (Functor_catd A (Functor_catd B C))
+      (Functor_catd B (Functor_catd A C))
+
+Functor_catd_sym_funcd(A,B,C)[k](H)[b][a]
+  = H[a][b]
+```
+
+Similarly, displayed contraction should identify two source-family slots:
+
+```text
+Functor_catd_diag_funcd(A,C)
+  : Functord
+      (Functor_catd A (Functor_catd A C))
+      (Functor_catd A C)
+
+Functor_catd_diag_funcd(A,C)[k](H)[a]
+  = H[a][a]
+```
+
+The type is written as a `Functord` because it is a natural/displayed morphism
+between Cat-valued families. The semantic owner remains `Functor_catd`.
+
+### Displayed Weakening / Constant And Variance
+
+There are two different possible readings of displayed weakening:
+
+1. A natural displayed operation that sends a target-fibre object to the
+   constant source-slot functor.
+2. A pointwise mixed-variance functor family that literally has `B` as the
+   source of an outer `Functor_catd` and as the target of an inner
+   `Functor_catd`.
+
+The first reading is the likely primary one:
+
+```text
+Functor_catd_const_funcd(A,B)
+  : Functord B (Functor_catd A B)
+
+A : Catd(Op_cat K)
+B : Catd K
+
+Functor_catd_const_funcd(A,B)[k](b)
+  = Const_func(A[k^-], B[k], b)
+```
+
+For a base arrow `p : x -> y`, naturality uses the covariant action of `B`:
+
+```text
+B[p](b) : B[y]
+
+Functor_catd(A,B)[p](Const(b))
+  = B[p] o Const(b) o A[p]
+  = Const(B[p](b))
+```
+
+So under this reading `B : Catd K` is correct. It does not need to be a family
+over `Core_cat K`, because the operation should preserve directed transport in
+the target family.
+
+The second reading would look like a pointwise family:
+
+```text
+Functor_catd(B?, Functor_catd A B)
+```
+
+where the same `B` appears as an outer source and as the inner target. That
+does create a variance problem: the outer source of `Functor_catd` must be a
+family over `Op_cat K`, while the inner target is a family over `K`.
+
+Using `Core_cat K` for this would make the variance conflict disappear only by
+forgetting directed base arrows and keeping path/equality transport. That is
+not the right default for emdash's directed displayed calculus. If a future
+object-only or groupoidal comparison theorem needs such a core-restricted
+version, it should be named separately and treated as a weaker comparison
+surface, not as the primary displayed constant operation.
+
+Preliminary conclusion: use the first reading for the main operation:
+
+```text
+Functor_catd_const_funcd(A,B)
+  : Functord B (Functor_catd A B)
+```
+
+and keep `B : Catd K`.
+
+### Structural Operations On `Transf_catd`
+
+`Transf_catd` is meaningful, but it should not receive an independent logical
+theory before the corresponding `Functor_catd` structural operations exist.
+
+Current meaning:
+
+```text
+Transf_catd(A,B,FF,GG)[k] = FF[k^-] => GG[k]
+```
+
+Therefore an exchange or diagonal operation on `Transf_catd` should be the
+hom-action of the corresponding structural operation on `Functor_catd`.
+
+For exchange, semantically:
+
+```text
+eta : H => H'
+
+sym(eta)[b][a] = eta[a][b]
+```
+
+For diagonal, semantically:
+
+```text
+eta : H => H'
+
+diag(eta)[a] = eta[a][a]
+```
+
+The implementation policy should be:
+
+```text
+Functor_catd structural operation first.
+Transf_catd operation = hom-action/projection of that operation.
+Add stable Transf_catd projection heads only if the induced route is too
+brittle or too expensive in a focused probe.
+```
+
+`Transfd_cat` then appears as the category of displayed transformations
+between displayed functors, not as the primary owner of pointwise
+mixed-variance transfor-family syntax.
 
 ## Placement Recommendation
 
