@@ -3041,10 +3041,11 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
 //
 // Current computational status:
 //   The Sigma rules below expose object action, capped 1-arrow action
-//   (`fapp1_fapp0`), and 1-arrow composition. They are deliberately enough for
-//   path/arrow transitivity, total transports, and rho coherence. They are not
-//   yet the final full omega-functorial API for `fapp1_func(sigma_map_func eta)`
-//   on all higher hom-action data.
+//   (`fapp1_fapp0`), fixed-endpoint hom-action (`fapp1_func`), and 1-arrow
+//   composition. They are deliberately enough for path/arrow transitivity,
+//   total transports, rho coherence, and the current Sigma-map hom-action
+//   package. Higher hom-action data can still be refined as the omega layer
+//   grows.
 injective symbol Sigma_cat [K : Cat] (E : τ (Catd K)) : Cat;
 
 // Non-dependent Sigma is ordinary product. This must reduce before the generic
@@ -5087,9 +5088,9 @@ symbol fdapp1_int_hom_fapp0 [K : Cat] [E D : τ (Catd K)]
 //   Sigma(FF)[(p,alpha)]
 //     = (p, fdapp1_int(FF)[x,u][y,v][p][alpha]).
 //
-// This is the capped action `fapp1_fapp0` of `sigma_map_func`. A future
-// full-omega layer should expose the corresponding `fapp1_func` package between
-// Sigma hom-categories.
+// This is the capped action `fapp1_fapp0` of `sigma_map_func`. The corresponding
+// fixed-endpoint hom-action package is folded later, after
+// `fdapp1_int_presheaf_arrow` is available.
 rule @fapp1_fapp0
       _
       _
@@ -5306,6 +5307,31 @@ rule @tapp0_fapp0
       $v
       (@fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y)
   ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
+
+// Full hom-action of a Sigma map between fixed endpoints.
+//
+// The hom category of a Sigma total is stored as the opposite of a dependent
+// Sigma over the opposite base hom. Therefore the functor-level action is the
+// opposite of the Sigma map induced by the internal displayed-hom projection:
+//   (p,alpha) |-> (p, fdapp1_int(FF)[x,u][y,v][p][alpha]).
+rule @fapp1_func
+      _
+      _
+      (@sigma_map_func $K $E $D $FF)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+  ↪ @Op_func
+      (@Sigma_cat
+        (Op_cat (Hom_cat $K $x $y))
+        (fapp0 (@homd_id_tgt_func $K $E $x $u $y) $v))
+      (@Sigma_cat
+        (Op_cat (Hom_cat $K $x $y))
+        (fapp0 (@homd_ff_tgt_func $K $E $D $FF $x $u $y) $v))
+      (@sigma_map_func
+        (Op_cat (Hom_cat $K $x $y))
+        (fapp0 (@homd_id_tgt_func $K $E $x $u $y) $v)
+        (fapp0 (@homd_ff_tgt_func $K $E $D $FF $x $u $y) $v)
+        (@fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v));
 
 // Fourth projection stage, with endpoints written directly through `homd_`.
 //
@@ -8400,6 +8426,29 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
         (@fapp0 (Fibre_cat E k) (Fibre_cat D k)
           (@tapp0_fapp0 K Cat_cat E D k η)
           u);
+
+assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
+  (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @fapp1_func
+    (@Sigma_cat K E)
+    (@Sigma_cat K D)
+    (@sigma_map_func K E D η)
+    (Struct_sigma x u)
+    (Struct_sigma y v)
+    ≡ @Op_func
+        (@Sigma_cat
+          (Op_cat (Hom_cat K x y))
+          (fapp0 (@homd_id_tgt_func K E x u y) v))
+        (@Sigma_cat
+          (Op_cat (Hom_cat K x y))
+          (fapp0 (@homd_ff_tgt_func K E D η x u y) v))
+        (@sigma_map_func
+          (Op_cat (Hom_cat K x y))
+          (fapp0 (@homd_id_tgt_func K E x u y) v)
+          (fapp0 (@homd_ff_tgt_func K E D η x u y) v)
+          (@fdapp1_int_presheaf_arrow K E D η x u y v));
 
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
   (x y : τ (Obj K))

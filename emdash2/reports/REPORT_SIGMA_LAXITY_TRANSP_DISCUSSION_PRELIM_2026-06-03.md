@@ -404,7 +404,58 @@ FF[y][alpha] o laxity(FF,p)[u]
 is still a useful mathematical explanation, but it is no longer the kernel
 normal form.
 
-The `fapp1_func(sigma_map_func eta)` version remains explicitly deferred.
+## Full Sigma Hom-Action Added
+
+On 2026-06-04, the non-capped hom-action package for `sigma_map_func` was
+added and typechecked. The important typing point is that Sigma homs are not
+stored as ordinary products in the current kernel. They reduce to the opposite
+of a dependent Sigma:
+
+```text
+Hom_{Sigma(E)}((x,u),(y,v))
+  = Op(Sigma_{p : Hom_K(x,y)^op} homd_(id_E,x,u,y,v))
+```
+
+Therefore the full hom-action is most naturally expressed as the opposite of a
+dependent Sigma map, not as a product functor plus an explicit uncurry
+operation:
+
+```text
+fapp1_func(sigma_map_func(FF),(x,u),(y,v))
+  ->
+Op_func(
+  sigma_map_func(
+    fdapp1_int_presheaf_arrow(FF,x,u,y,v)))
+```
+
+Spelled out, the source and target displayed hom-families are:
+
+```text
+source(p) = homd_(id_E,x,u,y,v)[p]
+target(p) = homd_(FF,x,FF[x]u,y,v)[p]
+```
+
+and the displayed map is:
+
+```text
+fdapp1_int_presheaf_arrow(FF,x,u,y,v)
+  : source => target
+```
+
+The object action of this functor is exactly the capped Sigma rule:
+
+```text
+(p,alpha) |-> (p, fdapp1_int_hom_fapp0(FF,p,u,v,alpha))
+```
+
+The first projection `(p,alpha) |-> p` is inherited from the inner
+`sigma_map_func`; it does not need a separate `Product_projL_func` rule. The
+dependency of the second projection on `p` and `alpha` is handled by the
+displayed functor `fdapp1_int_presheaf_arrow` over the hom-index Sigma.
+
+This means the earlier product/uncurry idea remains useful as future ordinary
+logic infrastructure, but it is not required for the Sigma-map hom-action in
+the current representation.
 
 ## Old Heads To Retire Or Isolate
 
@@ -558,6 +609,17 @@ Known from the discussion:
   timeout 60s lambdapi check -w emdash3_2.lp
   ```
 
+- A later probe added the full `fapp1_func(sigma_map_func eta)` hom-action as
+  `Op_func` of the dependent hom-index `sigma_map_func` induced by
+  `fdapp1_int_presheaf_arrow`. The probe, active v3.2 file, and workspace check
+  passed:
+
+  ```bash
+  timeout 60s lambdapi check -w tmp_sigma_fapp1_func_probe.lp
+  timeout 60s lambdapi check -w emdash3_2.lp
+  EMDASH_TYPECHECK_TIMEOUT=60s make check
+  ```
+
 ## PathOut Transport Finding
 
 The path-out transitivity assertion showed why a broad strictness rule for
@@ -611,6 +673,8 @@ The implementation performed by the successful probe is:
 6. Update assertions to expect `fdapp1_int_hom_fapp0`.
 7. Remove `homd_id_canonical_triangle` and consume the raw transported identity
    directly.
+8. Add the full `fapp1_func(sigma_map_func eta)` rule as the `Op_func` of the
+   dependent Sigma map over homs induced by `fdapp1_int_presheaf_arrow`.
 
 This report remains preliminary as a discussion record, but the core design has
 now been implemented and typechecked in `emdash3_2.lp`.
