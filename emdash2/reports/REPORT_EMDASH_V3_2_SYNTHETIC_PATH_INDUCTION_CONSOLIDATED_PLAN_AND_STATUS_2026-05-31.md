@@ -29,7 +29,7 @@ The surface reading is:
 ```text
 (x :^n Z) ->
   (E :^n Catd(PathOut_Z(x))) ->
-    E[(x,id_x)] -> Pi q :^f PathOut_Z(x), E[q].
+    E[(x,id_x)] -> Pi q :^n PathOut_Z(x), E[q].
 ```
 
 The component normal forms are checked:
@@ -84,18 +84,18 @@ rho_{x,y,p}
   = sigma_transport_arrow(Rep_Z(x), p, id_x).
 ```
 
-The latest Sigma-map/laxity design is the standalone lax-prefix
-precomposition normal form:
+The latest Sigma-map/laxity design is the internal displayed-hom projection
+normal form:
 
 ```text
 Sigma(FF)(p,alpha)
-  = (p,
-     fapp0
-       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+  = (p, fdapp1_int_hom_fapp0(FF,p,u,alpha)).
 ```
 
-The older composite fibre wrapper is deleted from the active file.
+Here `fdapp1_int_hom_fapp0(FF,p,u,alpha)` is the capped projection of the
+internal displayed hom-action; mathematically it reads as
+`FF[y][alpha] ∘ laxity(FF,p)[u]`. The older composite/precomposition wrappers
+and canonical-triangle head are deleted from the active file.
 
 ## Active Sources
 
@@ -487,79 +487,62 @@ fdapp1_int_transfd(FF)
   -> fdapp1_int_tgt_arrow(FF,x,u,y)
   -> fdapp1_int_presheaf_arrow(FF,x,u,y,v)
   -> fdapp1_int_hom_func(FF,p,u,v)
+  -> fdapp1_int_hom_fapp0(FF,p,u,alpha)
+```
+
+The canonical/cartesian identity case is the final consumer rule:
+
+```text
+fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
   -> fdapp1_int_cell(FF,p,u).
 ```
-
-The stable canonical triangle is:
-
-```text
-homd_id_canonical_triangle(E,p,u)
-  : homd_(id_E,x,u,y,E[p]u)[p].
-```
-
-Only the narrow primitive identity shape:
-
-```text
-id(E[y], E[p]u)
-```
-
-folds to this head. Do not add broad identity rewrites from arbitrary identity
-presentations back to `homd_id_canonical_triangle`.
 
 ### Current Sigma-Map Lax Normal Form
 
-The active Sigma-map arrow normal form is:
+The active Sigma-map capped arrow normal form is:
 
 ```text
 Sigma(FF)(p,alpha)
-  = (p,
-     fapp0
-       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+  = (p, fdapp1_int_hom_fapp0(FF,p,u,alpha)).
 ```
 
-The pieces are:
+The fixed-endpoint hom-action version is also implemented. Since Sigma homs
+are stored as opposites of dependent Sigma categories over base homs, the
+functor-level action is the opposite of the dependent Sigma map induced by:
 
 ```text
-functord_laxity_precomp_func(FF,p,u,w)
-  : Hom_D[y](FF[y](E[p]u),w)
-    -> Hom_D[y](D[p](FF[x]u),w)
-
-functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)
-  ~= FF[y][alpha].
+fdapp1_int_presheaf_arrow(FF,x,u,y,v).
 ```
 
-The capped precomposition action is:
+Objectwise, that functor sends:
 
 ```text
-functord_laxity_precomp_fapp0(FF,p,u,beta)
-  ~= beta o laxity(FF,p)[u].
+(p,alpha) |-> (p, fdapp1_int_hom_fapp0(FF,p,u,alpha)).
 ```
 
-The canonical transport case reduces through the provenance-preserving stable
-post-action head, not through a raw target identity:
+The mathematical reading is still:
 
 ```text
+fdapp1_int_hom_fapp0(FF,p,u,alpha)
+  ~= FF[y][alpha] ∘ laxity(FF,p)[u].
+```
+
+But the kernel owner is the direct internal-hom projection, not a reconstructed
+composite through separate `FF[y][alpha]` and precomposition heads.
+
+The previous probe-era wrappers:
+
+```text
+homd_id_canonical_triangle
+functord_laxity_precomp_func
 functord_laxity_precomp_fapp0
-  (FF,p,u,
-   functord_transport_fibre_fapp1_fapp0
-     (FF,p,u,homd_id_canonical_triangle(E,p,u)))
-  -> fdapp1_int_cell(FF,p,u).
-```
-
-The previous composite wrapper:
-
-```text
+functord_transport_fibre_fapp1_fapp0
 functord_laxity_precomp_fibre_func
 functord_laxity_precomp_fibre_fapp0
 ```
 
-has been removed. Reintroduce it only if a concrete theorem needs a named
-functor for the whole operation:
-
-```text
-alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
-```
+have been removed from the active architecture. Do not use them as current
+implementation guidance.
 
 ## Settled Design Decisions
 
@@ -612,17 +595,19 @@ alpha |-> precompose_by(laxity(FF,p)[u])[FF[y][alpha]].
    `fdapp1_int_cell(PathOutPi_funcd,p,E)` and ultimately from Pi
    pullback/section pullback.
 
-8. The active Sigma-map action is lax-prefix standalone precomposition.
+8. The active Sigma-map action is a direct internal-hom projection.
 
-   The current normal form exposes `functord_laxity_precomp_func` and
-   `functord_transport_fibre_fapp1_fapp0`; it does not use the older composite
-   fibre wrapper.
+   The current capped normal form is `fdapp1_int_hom_fapp0(FF,p,u,alpha)`.
+   The fixed-endpoint hom-action is induced by `fdapp1_int_presheaf_arrow`.
+   It does not use the older composite or standalone precomposition wrappers.
 
-9. Capped action is not the full omega API.
+9. Fixed-endpoint hom-action is implemented; higher omega action remains future.
 
-   The current Sigma and path-induction computations use `fapp1_fapp0`.
-   Exposing full `fapp1_func(sigma_map_func FF)` as a functor between Sigma
-   hom-categories remains future work.
+   The current Sigma and path-induction computations still mostly inspect
+   capped `fapp1_fapp0` endpoints, but the fixed-endpoint
+   `fapp1_func(sigma_map_func FF)` is now implemented through
+   `fdapp1_int_presheaf_arrow`. Further higher hom-action/coherence data remain
+   future work.
 
 10. Ordinary functor/transfor laxity follows the same internal-action pattern.
 
@@ -665,14 +650,15 @@ Keep these rules for future implementation turns:
   theorem.
 - Treat `unif_rule` as elaboration/unification guidance, not as computation.
   It should not replace a missing conversion rule.
-- Preserve provenance when it is computationally useful. For example, the
-  Sigma canonical case keeps:
+- Preserve provenance when it is computationally useful, but keep the current
+  owner. For example, the Sigma canonical case is consumed at:
 
   ```text
-  functord_transport_fibre_fapp1_fapp0(FF,p,u,homd_id_canonical_triangle(...))
+  fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
+    -> fdapp1_int_cell(FF,p,u)
   ```
 
-  instead of erasing it to a raw target identity.
+  rather than via a separate canonical-triangle head.
 
 ## Forward Plan
 
@@ -685,7 +671,7 @@ PathInd_transfd primary
 PathInd_funcd derived
 rho via Sigma transport
 target transport via Pi laxity/section pullback
-Sigma-map action via standalone lax-prefix precomposition.
+Sigma-map action via fdapp1_int_hom_fapp0 / fdapp1_int_presheaf_arrow.
 ```
 
 Before changing any of these surfaces, add or keep focused regressions showing
@@ -811,6 +797,10 @@ After this file is accepted:
    ```text
    Sigma_transfd_transport_func
    sigma_map_fibre_arrow
+   homd_id_canonical_triangle
+   functord_laxity_precomp_func
+   functord_laxity_precomp_fapp0
+   functord_transport_fibre_fapp1_fapp0
    functord_laxity_precomp_fibre_func
    functord_laxity_precomp_fibre_fapp0
    ```

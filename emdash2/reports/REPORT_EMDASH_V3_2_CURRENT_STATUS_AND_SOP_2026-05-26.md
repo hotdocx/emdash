@@ -36,7 +36,7 @@ Retired historical references:
 
 ## Current Orientation Snapshot
 
-Review snapshot: 2026-06-03.
+Review snapshot: 2026-06-04.
 
 `emdash3_2.lp` remains the active v3.2 source. The current architecture is
 centered on directed Cat-valued families, with `Catd_cat K` as the canonical
@@ -50,11 +50,17 @@ primitive theorem.
 
 `Pi_cat(E)` is a defined section-category alias through
 `Functord_cat(Const_catd K Terminal_cat, E)`, not a primitive kernel
-discriminator. Sigma maps use the standalone lax-prefix/precomposition normal
-form through `functord_laxity_precomp_func` and
-`functord_transport_fibre_fapp1_fapp0`; arbitrary Sigma maps do not strictly
-preserve canonical transport without an additional strict/cartesian
-specialization.
+discriminator. Sigma maps now use the internal displayed-hom projection owner:
+the capped fibre component is `fdapp1_int_hom_fapp0`, the fixed-endpoint
+hom-action is induced by `fdapp1_int_presheaf_arrow`, and the canonical
+cartesian/laxity cell is `fdapp1_int_cell`. The old
+`functord_laxity_precomp_*`, `functord_transport_fibre_*`, and
+`homd_id_canonical_triangle` heads are not active guidance.
+
+Arbitrary Sigma maps do not strictly preserve canonical transport without an
+additional strict/cartesian specialization. Known strict cases should get
+focused collapses keyed on the specific strict constructor, as with
+`Rep_transport_func`.
 
 The Product/curry layer is partly rearchitected around semantic owners:
 product-valued functors reduce to products of functor categories,
@@ -64,10 +70,11 @@ the `Product_cat_func` stable projection ladder. The transfor action of
 semantic uncurry remains deferred.
 
 The faithful surface-syntax plan is a presentation layer over this kernel, not
-a replacement for it. Default surface mode should print mathematical,
-polarity-aware syntax such as `Π y :^f Z^op, D[y^-] ...`, while kernel/debug
-mode should preserve stable rewrite heads such as `homd_src_func`,
-`tdapp0_fapp0`, and `fdapp1_int_cell`.
+a replacement for it. The current binder convention uses one indexed binder
+`:^n`; mixed variance is shown on the family occurrence, for example
+`Π y :^n Z^op, D[y^-] ⟶_[y] ...`. Kernel/debug mode should preserve stable
+rewrite heads such as `homd_src_func`, `tdapp0_fapp0`,
+`fdapp1_int_hom_fapp0`, and `fdapp1_int_cell`.
 
 Current validation observed during this review:
 
@@ -129,6 +136,11 @@ checks both `emdash2.lp` and `emdash3_2.lp`.
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
   `sigma_arrow` as the base-arrow/fibre-arrow constructor for total arrows;
+- Sigma-map fibre action through the neutral internal-hom projection heads:
+  `fdapp1_int_presheaf_arrow` gives the fixed-endpoint hom-action,
+  `fdapp1_int_hom_func` projects at a base arrow, `fdapp1_int_hom_fapp0`
+  gives the capped fibre arrow, and the transported-identity case folds to
+  `fdapp1_int_cell`;
 - generic base-arrow transport helpers:
   `catd_transport_func`, `functord_transport_func`,
   `functord_transport_lhs_func`, `functord_transport_rhs_func`, the canonical
@@ -179,6 +191,63 @@ emdash3_2.lp
 ```
 
 The old v3.1 baseline is no longer part of the ordinary check path.
+
+## Before Editing `emdash3_2.lp`
+
+Treat the file as a kernel specification, not as a surface-language document.
+Mathematical comments should explain the intended categorical operation, but
+rewrite rules should stay close to the stable heads that Lambdapi actually
+matches.
+
+Before proposing or implementing a nontrivial change, check these points:
+
+1. Identify the semantic owner of the operation.
+
+   Do not add a parallel helper if an internalized functor or transfor already
+   owns the action. Prefer a projection rule or a defined alias through the
+   owner. Examples: `Product_cat_func` owns product functoriality,
+   `homd_int` owns dependent-hom projections, and `fdapp1_int_presheaf_arrow`
+   owns the fixed-endpoint Sigma-map hom-action.
+
+2. Decide whether the new computation needs a stable head.
+
+   Add primitive/stable heads only when a focused probe shows a real
+   discrimination or performance boundary. If the problem is only a missing
+   projection, add the smaller projection instead of introducing a new semantic
+   layer.
+
+3. Keep rule left-hand sides minimal.
+
+   Inferred source/target categories and endpoint-family slots should usually
+   be `_`. Spell them out only when that slot is the actual discriminator.
+   Reducible terms such as `fapp0 F x`, `comp_cat_fapp0 F G`,
+   `Functor_catd ...`, `HomPresheaf_catd_func ...`, `Homd_target_catd ...`,
+   or `Op_cat (Hom_cat ...)` are common causes of brittle rules.
+
+4. Use canonical endpoint forms in assertions and symbol types.
+
+   Prefer `Hom_cat ...` and `Functord_cat ...` when conversion search matters.
+   Readability wrappers such as `Fibre_cat (DefinedAlias ...) k` are useful in
+   prose but can make nested `fapp0` assertions harder for Lambdapi.
+
+5. Preserve omega-friendly functor-level structure.
+
+   Prefer functor-level folds over capped pointwise rewrites when the result
+   must support another hom-action. A RHS that immediately computes one cell
+   may lose the functor object needed for higher-dimensional iteration.
+
+6. Probe before committing rules.
+
+   Use a temporary copy plus a focused assertion for the intended normal form.
+   A rule that typechecks but fails or times out on the assertion is not ready
+   for the active file.
+
+7. Document failed orientations when they affect the design.
+
+   If a tempting rule is rejected because it creates conversion blowups,
+   circularity, or misleading ownership, record that in this SOP report or the
+   relevant implementation report. Do not leave the lesson only in a local
+   comment near a later symbol.
 
 ## SOP: Rewrite And Conversion Hygiene
 
@@ -409,185 +478,81 @@ Transf_cat Terminal_cat Y (Const_func Terminal_cat Y u)
 was removed from `emdash3_2.lp` after a probe showed the current development
 typechecks without it.
 
-## SOP: Dosen Cut-Elimination Precomposition/Postcomposition Heads
+## SOP: Dosen Cut-Elimination And Sigma/Laxity Ownership
 
 When a theorem wants a composite to normalize by "absorbing a cut", choose the
 normal form that exposes the reusable action, not a one-off composite hidden in
-an ad hoc arrow symbol.
-
-The basic pattern is:
+an ad hoc arrow symbol. The basic patterns are:
 
 ```text
-g o f
-  -> fapp0 (precompose_by f) g
-
-f o h
-  -> fapp0 (postcompose_by f) h
+g ∘ f  -> fapp0 (precompose_by f) g
+f ∘ h  -> fapp0 (postcompose_by f) h
 ```
 
-The exact orientation depends on the theorem. The important point is that the
-normal form should be the action of a stable functorial operation whenever that
-operation will be reused by Sigma maps, laxity cells, naturality, or strictness
-collapses.
+Use such a head only when the composite is genuinely a reusable functorial
+operation and the existing helper has the wrong computational orientation for
+the theorem. Otherwise prefer the already-owned semantic projection.
 
-Use this technique when all of the following hold:
-
-- the raw mathematical formula is a composite such as
-  `comp_fapp0(g,f)`;
-- putting the raw composite directly in a large rewrite RHS is expensive,
-  brittle, or hides useful structure;
-- the composite is really the action of a reusable precomposition or
-  postcomposition operation;
-- the existing library helper has the wrong computational orientation for the
-  current cut-elimination normal form.
-
-For example, the Sigma-map lax-prefix action should not ultimately be hidden
-behind a one-off head:
+The current Sigma-map fibre component is owned by the internal displayed
+hom-action projection ladder, not by a separate precomposition wrapper:
 
 ```text
-sigma_map_fibre_arrow(FF,p,u,alpha)
-  ~= FF[y][alpha] o laxity(FF,p)[u].
+fdapp1_int_transfd(FF)
+  -> fdapp1_int_section_arrow(FF,x,u)
+  -> fdapp1_int_tgt_arrow(FF,x,u,y)
+  -> fdapp1_int_presheaf_arrow(FF,x,u,y,v)
+  -> fdapp1_int_hom_func(FF,p,u,v)
+  -> fdapp1_int_hom_fapp0(FF,p,u,alpha).
 ```
 
-The first semantic decomposition is:
+The mathematical reading of the final capped component is:
 
 ```text
-fapp0
-  (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-  (FF[y][alpha]).
+fdapp1_int_hom_fapp0(FF,p,u,alpha)
+  : D[p](FF[x]u) ⟶ FF[y]v
+  morally FF[y][alpha] ∘ laxity(FF,p)[u].
 ```
 
-The active v3.2 implementation now exposes this standalone precomposition
-functor again, together with a stable transported-source fibre-action head:
-
-```text
-functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)
-  ~= FF[y][alpha].
-```
-
-The current Sigma-map normal form is:
+The Sigma-map capped action is:
 
 ```text
 Sigma(FF)(p,alpha)
-  = (p,
-     fapp0
-       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha))).
+  = (p, fdapp1_int_hom_fapp0(FF,p,u,alpha)).
 ```
 
-The older composite fibre functor surface has been deleted from the active
-file. It bundled the `FF[y]` action and precomposition into one head, but the
-standalone normal form above is clearer and keeps the post-action projection
-visible to focused consumer rules.
+The fixed-endpoint hom-action of `sigma_map_func` is the opposite of the
+dependent Sigma map induced by `fdapp1_int_presheaf_arrow`. Do not reconstruct
+it as a product functor plus an independent uncurry wrapper unless a focused
+future theorem proves that such a surface is necessary.
 
-The semantic raw-composite fold is not active yet:
-
-```text
-FF[y][alpha] o laxity(FF,p)[u]
-  -> fapp0
-       (functord_laxity_precomp_func(FF,p,u,FF[y]v))
-       (functord_transport_fibre_fapp1_fapp0(FF,p,u,alpha)).
-```
-
-Endpoint-convertibility probes confirm that the middle object
-`FF[y](E[p]u)` joins with `(FF[y] o E[p])(u)`. The remaining issue is rewrite
-rule engineering: a direct `comp_fapp0` rule for this fold currently makes
-Lambdapi's subject-reduction/critical-pair checking search through too much
-composition and projection structure. The transported-source fibre-action head
-now exists; any future raw-composite bridge should use an even smaller
-route-object or composition-specific projection surface.
-
-This records the same factorization while keeping the original source arrow
-`alpha` visible inside the stable post-action head. The canonical identity case
-now computes through:
+The canonical/cartesian identity case is consumed directly by
+`fdapp1_int_hom_fapp0`:
 
 ```text
-id(E[y],E[p]u)
-  -> homd_id_canonical_triangle(E,p,u)
-  -> functord_transport_fibre_fapp1_fapp0(FF,p,u,homd_id_canonical_triangle(E,p,u))
+fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
   -> fdapp1_int_cell(FF,p,u).
 ```
 
-The active standalone head
-`functord_laxity_precomp_func(FF,p,u,w)` represents precomposition by the
-displayed laxity component alone:
-
-```text
-laxity(FF,p)[u]
-  : D[p](FF[x]u) -> FF[y](E[p]u).
-```
-
-So its source and target are:
-
-```text
-Hom_D[y](FF[y](E[p]u), w)
-  -> Hom_D[y](D[p](FF[x]u), w).
-```
-
-Do not make such a head a transparent alias for an existing helper if that
-helper computes in the opposite direction. In particular, the current
-`hom_precomp_func` rule expands an application to a raw composite:
-
-```text
-fapp0 (hom_precomp_func(f)) g
-  -> g o f.
-```
-
-That is useful in some contexts, but it is not the desired normal form when the
-cut-elimination direction is:
-
-```text
-g o f
-  -> fapp0 (precompose_by f) g.
-```
-
-In that case introduce a stable projection head for the intended normal form and
-add only focused folds after probing. Possible future folds around the active
-standalone precomposition head include:
-
-```text
-hom_precomp_func(laxity(FF,p)[u])
-  -> functord_laxity_precomp_func(FF,p,u,w)
-
-comp_fapp0(g,laxity(FF,p)[u])
-  -> fapp0 (functord_laxity_precomp_func(FF,p,u,w)) g.
-```
-
-Do not add those folds globally by default. First check critical pairs with
-identity and composition rules, and prefer consumer-local rules when the theorem
-only needs one canonical case.
-
-In particular, a functor-level fold of the form
-
-```text
-hom_precomp_func(laxity(FF,p)[u]) o FF[y]_1
-  -> <a named composite fibre functor>
-```
-
-was considered but is not active yet. The first probe could not prove
-preservation with the target object hidden in the composed hom-action, and the
-stable-source-action variant timed out because it interacted too broadly with
-strict functoriality. Revisit this only with a smaller projection surface or a
-concrete downstream theorem requiring the functor-level composite itself. If
-that need returns, reintroduce a fresh name deliberately rather than reviving
-the deleted temporary wrapper by default.
+`homd_id_canonical_triangle`, `functord_laxity_precomp_func`,
+`functord_laxity_precomp_fapp0`, and
+`functord_transport_fibre_fapp1_fapp0` were probe-era names. They should not be
+used in new plans for the active file.
 
 Implementation checklist for this style:
 
 1. Write the mathematical formula in a comment near the symbol.
-2. Identify whether the desired normal form is precomposition, postcomposition,
-   or another functorial action.
-3. If an existing helper has the wrong orientation, add a new stable head rather
-   than redefining the helper or forcing a global opposite rewrite.
-4. Make large rules produce `fapp0(stable_action)(argument)` instead of a raw
-   `comp_fapp0(...)`.
-5. Add canonical consumer rules, such as identity/canonical-triangle cases,
-   only after a temporary probe shows the syntactic normal form.
+2. Identify the owner of the reusable action before adding a new head.
+3. If an existing helper has the wrong orientation, add a new stable head only
+   after proving that a smaller projection rule is insufficient.
+4. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
+   the stable action will be reused.
+5. Add canonical consumer rules, such as identity/cartesian cases, only after a
+   temporary probe shows the syntactic normal form.
 6. Keep source/target and endpoint slots implicit on rewrite LHSs unless they
    are the actual discriminator.
 7. Add assertions for both the reusable action form and the downstream theorem
    normal form.
-8. Record failed orientations in the implementation report when they influence
+8. Record failed orientations in an implementation report when they influence
    the design.
 
 ## SOP: Identity Normal Forms
@@ -603,29 +568,19 @@ semantically equal identity presentations. If a computation involving a
 canonical/cartesian triangle fails unexpectedly, first inspect whether the
 identity normalized past the primitive shape into a specialized identity head.
 
-Prefer narrow, typed bridges over broad global identity rewrites. A good bridge
-matches the semantic consumer context and only accepts the identity presentation
-when the endpoints force the intended source shape. For example, the
-`homd_id_canonical_triangle` bridge is restricted to the transported
-dependent-hom source:
+Prefer narrow, typed consumer rules over broad global identity rewrites. In the
+current Sigma/laxity path, the consumer rule is deliberately attached to
+`fdapp1_int_hom_fapp0` and accepts the transported endpoint identity directly:
 
 ```text
-id(E[y], E[p](u))
-  -> homd_id_canonical_triangle(E,p,u)
+fdapp1_int_hom_fapp0(FF,p,u,id)
+  -> fdapp1_int_cell(FF,p,u).
 ```
 
-where the rule LHS uses the primitive projection shape:
-
-```text
-@id
-  (@fapp0 K Cat_cat E y)
-  (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u)
-```
-
-Do not install global rewrites from all identities or all specialized identity
-heads back into a local canonical-triangle head. If a specialized identity head
-must be accepted, probe a consumer-local simulation/fold rule and add a focused
-assertion showing the intended normal form.
+Do not reinstall a global canonical-triangle identity head merely to make one
+consumer compute. If a specialized identity head must be accepted, probe a
+consumer-local simulation/fold rule and add a focused assertion showing the
+intended normal form.
 
 ## Stable Heads Policy
 

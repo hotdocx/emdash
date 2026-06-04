@@ -32,6 +32,21 @@ The word "directed" matters. The base `K` is a category with real arrows, not
 just a type of points. Consequently, pointwise constructions must usually carry
 naturality data over base arrows.
 
+### Implementation Reading Note
+
+This document gives the mathematical surface. The Lambdapi file also contains
+stable projection heads such as `tapp0_fapp0`, `homd_src_func`,
+`fdapp1_int_hom_fapp0`, and `fdapp1_int_cell`. These names are kernel
+normalization artifacts: they preserve enough structure for rewrite rules and
+higher hom-actions to keep computing.
+
+When planning implementation work, use this document to understand the
+mathematics, then use
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` for the rewrite
+hygiene and stable-head ownership rules. Do not infer from the surface formula
+alone that a new primitive head is needed; first locate the current semantic
+owner in `emdash3_2.lp`.
+
 ## 2. Categories And Hom-Categories
 
 A category `A` has:
