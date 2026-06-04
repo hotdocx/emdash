@@ -761,7 +761,26 @@ rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
 rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
   ↪ comp_fapp0 (fapp1_fapp0 $F $f) $g;
 
-// Stable hom-action projection for covariant hom: postcompose by F[f].
+/*
+  Stable covariant hom-action projections.
+
+  Mathematical notation:
+    hom_postcomp_tele_func(F,W,X,Y)
+      : Hom_B(X,Y) ⟶ (Hom_A(W,F[X]) ⟶ Hom_A(W,F[Y]))
+
+    hom_postcomp_func(F,W,X,Y,f)[g] = F[f] ∘ g
+
+    hom_postcomp_fapp1_func(F,W,X,Y,f,g,h)
+      : Hom(g,h) ⟶ Hom(F[f] ∘ g, F[f] ∘ h)
+
+  Faithful surface syntax:
+    Hom_A(W,F[-])[f](g)
+
+  This is the functorial-in-f head for postcomposition. It keeps the arrow
+  f : X ⟶ Y visible long enough to expose the whole functor
+  Hom_A(W,F[X]) ⟶ Hom_A(W,F[Y]), rather than capping immediately at a
+  single g.
+*/
 symbol hom_postcomp_tele_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -844,8 +863,24 @@ rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
 rule @hom_postcomp_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G
   ↪ @comp_cat_cov_func $X $Y $Z $G;
 
-// Contravariant action in the represented object: precompose an arrow
-// g : Hom_A(Y,Z) by f : Hom_A(X,Y).
+/*
+  Stable contravariant hom-action projections.
+
+  Mathematical notation:
+    hom_precomp_func(A,X,Y,Z,f)
+      : Hom_A(Y,Z) ⟶ Hom_A(X,Z)
+
+    hom_precomp_func(f)[g] = g ∘ f
+
+    hom_precomp_fapp1_func(f,g,h)
+      : Hom(g,h) ⟶ Hom(g ∘ f,h ∘ f)
+
+  Faithful surface syntax:
+    Hom_A(-,Z)[f](g)
+
+  This is the represented-object action of hom_int. For f : X ⟶ Y, the
+  component at Z sends a map g : Y ⟶ Z to g ∘ f.
+*/
 symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
   (f : τ (Hom A X Y))
   : τ (Functor (Hom_cat A Y Z) (Hom_cat A X Z));
@@ -1398,6 +1433,22 @@ assert [X A B : Cat]
   sigma_Fst (@tapp1_func X (Product_cat A B) F G i j eta)
     ≡ @tapp1_func X A (sigma_Fst F) (sigma_Fst G) i j (sigma_Fst eta);
 
+/*
+  Constant transfor induced by an arrow in the codomain.
+
+  Mathematical notation:
+    Const_transf_func(K,A,x,y)
+      : Hom_A(x,y) ⟶ Transf(const x,const y)
+
+    Const_transf(p)[k] = p
+    Const_transf(p)[q] = p
+
+  Faithful surface syntax:
+    k :^n K ⊢ p : x ⟶ y
+
+  The component and off-diagonal action are constant in the K-variable. This
+  is the transfor-level counterpart of Const_func.
+*/
 symbol Const_transf_func [K A : Cat] [x y : τ (Obj A)]
   : τ (Functor
       (Hom_cat A x y)
@@ -1450,6 +1501,23 @@ assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
       q
     ≡ p;
 
+/*
+  Postcomposition of transfors by a fixed functor.
+
+  Mathematical notation:
+    comp_cat_cov_fapp1_func(G)
+      : Transf(F,H) ⟶ Transf(G ∘ F, G ∘ H)
+
+    comp_cat_cov_transf(G,eta) = G eta
+    comp_cat_cov_transf(G,eta)[i] = G[eta[i]]
+
+  Faithful surface syntax:
+    eta : F ⇒ H
+    G eta : G ∘ F ⇒ G ∘ H
+
+  The name follows the ordinary `comp_cat_cov_func(G)` object action: the
+  functor argument varies covariantly in the slot being postcomposed by G.
+*/
 symbol comp_cat_cov_fapp1_func [X Y Z : Cat]
   (G : τ (Functor Y Z))
   [F H : τ (Functor X Y)]
@@ -1599,8 +1667,26 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
       (@fapp0 X Y H j)
       (@tapp1_fapp0 X Y F H i j eta p);
 
-// Hom-action of postcomposition as a functor in the postcomposing functor.
-// Its object component is precomposition of the original transfor.
+/*
+  Hom-action of postcomposition as a functor in the postcomposing functor.
+
+  Mathematical notation:
+    comp_cat_cov_func_func[X,Y,Z]
+      : (Y ⟶ Z) ⟶ ((X ⟶ Y) ⟶ (X ⟶ Z))
+
+    comp_cat_cov_func_func_transf(eta)
+      : (G ∘ -) ⇒ (H ∘ -)
+
+    comp_cat_cov_func_func_transf(eta)[F]
+      = eta ∘ F : G ∘ F ⇒ H ∘ F.
+
+  Faithful surface syntax:
+    eta : G ⇒ H
+    eta ∘ F : G ∘ F ⇒ H ∘ F
+
+  Its object component at F is precomposition of eta by F, implemented by
+  `comp_cat_con_transf(F,eta)`.
+*/
 symbol comp_cat_cov_func_func_fapp1_func [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
   : τ (Functor
@@ -1627,6 +1713,20 @@ rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
 rule @fapp1_fapp0 _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H $eta
   ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
 
+/*
+  Precomposition of transfors by a fixed functor.
+
+  Mathematical notation:
+    comp_cat_con_fapp1_func(F)
+      : Transf(G,H) ⟶ Transf(G ∘ F,H ∘ F)
+
+    comp_cat_con_transf(F,eta) = eta ∘ F
+    comp_cat_con_transf(F,eta)[i] = eta[F[i]]
+
+  Faithful surface syntax:
+    eta : G ⇒ H
+    eta ∘ F : G ∘ F ⇒ H ∘ F
+*/
 symbol comp_cat_con_fapp1_func [X Y Z : Cat]
   (F : τ (Functor X Y))
   [G H : τ (Functor Y Z)]
@@ -1646,7 +1746,14 @@ symbol comp_cat_con_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z H F));
 
 // Off-diagonal action of `comp_cat_cov_func_func_transf`. This is the
-// horizontal composite `(H * alpha) o (eta * F)`.
+// horizontal composite `(H alpha) ∘ (eta F)`.
+//
+// Mathematical notation:
+//   eta : G ⇒ H, alpha : F ⇒ K
+//   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
+//     : G ∘ F ⇒ H ∘ K
+//   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
+//     = (H alpha) ∘ (eta F).
 symbol comp_cat_cov_func_func_tapp1_func [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
   (eta : τ (Transf G H))
@@ -5504,9 +5611,32 @@ rule @fdapp1_int_hom_fapp0
 	      $p
 	      Terminal_obj;
 
-// Generic displayed internal-hom action projections. These are the arbitrary
-// displayed-transfor counterparts of the identity-specialized `fdapp1_int_*`
-// extraction path below.
+/*
+  Generic displayed internal-hom action projections.
+
+  These are the arbitrary displayed-transfor counterparts of the
+  identity-specialized `fdapp1_int_*` extraction path.
+
+  Mathematical notation:
+    epsilon : FF ⇒ GG
+    homd_tdapp1_src_sec(FF,GG,x,u)
+      = homd_int(GG)[x](FF[x](u))
+
+    tdapp1_int_section_arrow(epsilon,x,u)
+      : homd_int(id_E)[x](u)
+          ⟶ homd_int(GG)[x](FF[x](u))
+
+    tdapp1_int_cell(epsilon,p,u)
+      : D[p](FF[x](u)) ⟶ GG[y](E[p](u)).
+
+  Faithful surface syntax:
+    epsilon[p][u] : D[p](FF[x] u) ⟶ GG[y](E[p] u)
+
+  The rules below project this cell through the same stages as
+  `fdapp1_int_*`: section at x,u; target y; fibre object v; base arrow p; then
+  the identity fibre arrow. When epsilon is the displayed identity, these heads
+  fold back to the corresponding `fdapp1_int_*` normal forms.
+*/
 symbol homd_tdapp1_src_sec [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (x : τ (Obj K))
