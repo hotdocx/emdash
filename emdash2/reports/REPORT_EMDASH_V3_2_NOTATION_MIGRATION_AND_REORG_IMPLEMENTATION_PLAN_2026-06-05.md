@@ -89,8 +89,8 @@ Important parser/syntax principles:
 Completed:
 
 - created `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
-- replaced `REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md` with a
-  supersession pointer;
+- replaced the older v3 faithful surface-syntax plan with the canonical syntax
+  report;
 - added a canonical notation banner to `emdash3_2.lp`;
 - normalized active `emdash3_2.lp` syntax comments away from the old
   functor/transformation arrow glyphs;
@@ -213,15 +213,9 @@ Create a new canonical syntax report:
 reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md
 ```
 
-Then replace the old active syntax plan:
-
-```text
-reports/REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md
-```
-
-with a short supersession/redirect to the new canonical report. The old report
-uses pre-2026-06-05 arrow/transformation glyphs; leaving it as an
-active-looking document would create confusion during the file split.
+Then retire the old active-looking syntax plan in favor of the new canonical
+report. The old report used pre-2026-06-05 arrow/transformation glyphs; leaving
+it as active guidance would create confusion during the file split.
 
 ### 2. Normalize Active Syntax Comments In `emdash3_2.lp`
 
@@ -248,20 +242,12 @@ Do not use this pass to redesign the kernel. If a comment cannot be updated
 faithfully without theory work, leave a local TODO noting the missing
 construction rather than inventing a misleading notation.
 
-### 3. Add Banners To Other Active/Current Reports
+### 3. Retire Or Update Older Reports
 
-For reports that remain useful but still contain older notation, add a banner
-near the top:
-
-```text
-Notation warning: this report predates the 2026-06-05 canonical surface syntax.
-Use REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md for current
-notation.
-```
-
-Use in-place full rewrites only for currently active reports where the notation
-is central to the report. Historical dated reports can keep old notation behind
-the warning banner.
+Reports that remain active should use the canonical notation directly or point
+to the canonical syntax report as their notation authority. Historical dated
+reports that still use older notation should be archived rather than left in
+`reports/` with warning banners.
 
 ### 4. Split Diagnostics After Notation Cleanup
 

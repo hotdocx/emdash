@@ -5,11 +5,8 @@ Date: 2026-06-05
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
 
-Supersedes:
-
-```text
-reports/REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md
-```
+Supersedes the older v3 faithful surface-syntax plan, which is no longer an
+active report after the 2026-06-05 reports consolidation.
 
 This report consolidates the notation settlement from:
 

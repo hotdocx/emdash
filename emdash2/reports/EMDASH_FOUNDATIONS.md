@@ -1,8 +1,5 @@
 # emdash Foundations
 
-> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
-
-
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory. It presents the intended mathematics in ordinary
 category/type-theory notation and deliberately suppresses most Lambdapi rewrite
@@ -10,6 +7,8 @@ engineering details.
 
 The implementation is still evolving. This note describes the current directed
 categorical foundation, not a finished proof assistant surface language.
+For parser/comment notation, use
+`REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` as the authority.
 
 ## 1. Reading Guide
 
@@ -20,15 +19,15 @@ as one computational theory.
 The notation is intentionally close to dependent type theory:
 
 ```text
-F : A → B              ordinary functor
+F : A ⊢ B              ordinary functor
 F[x]                    action of F on an object
 F[f]                    action of F on an arrow
-E : K → Cat            functorial family of categories over K
+E : K ⊢ Cat            functorial family of categories over K
 E[k]                    fibre category at k
 Σ_k E[k]                total category of a family
 Π_k E[k]                category of sections of a family
 s[k]                    value of a section at k
-s[f]                    action of a section over f : x → y
+s[f]                    action of a section over f : x ->^K y
 ```
 
 The word "directed" matters. The base `K` is a category with real arrows, not
@@ -128,7 +127,7 @@ Transf(F,G)
 ```
 
 whose objects are transformations from `F` to `G`. A transformation
-`ϵ : F ⇒ G` has point components:
+`ϵ : F => G` has point components:
 
 ```text
 ϵ[x] : Hom_B(F[x],G[x])
@@ -139,7 +138,7 @@ whose objects are transformations from `F` to `G`. A transformation
 A directed family of categories over `K` is a functor:
 
 ```text
-E : K → Cat
+E : K ⊢ Cat
 ```
 
 The theory writes this as a category-valued family:
@@ -151,10 +150,10 @@ E[k] = fibre of E at k
 
 Terminology used in this note:
 
-- A **functorial family** is a category-valued functor `E : K → Cat`.
-- A **natural family morphism** `FF : E → D` is a family of functors that is
+- A **functorial family** is a category-valued functor `E : K ⊢ Cat`.
+- A **natural family morphism** `FF : E ⊢ D` is a family of functors that is
   natural in the base variable.
-- A **natural family transformation** `ϵ : FF ⇒ GG` is a family of
+- A **natural family transformation** `ϵ : FF => GG` is a family of
   transformations that is natural in the base variable.
 
 The implementation names for these are `Catd`, `Functord`, and `Transfd`,
@@ -165,15 +164,15 @@ variance over base arrows.
 A natural family morphism has fibre functors:
 
 ```text
-FF : E → D
-FF[k] : E[k] → D[k]
+FF : k :^n K ; E[k] ⊢ D[k]
+FF[k] : E[k] ⊢ D[k]
 ```
 
 A natural family transformation has fibrewise components:
 
 ```text
-ϵ : FF ⇒ GG
-ϵ[k] : FF[k] ⇒ GG[k]
+ϵ : FF => GG
+ϵ[k] : FF[k] => GG[k]
 ϵ[k](u) : Hom_{D[k]}(FF[k](u), GG[k](u))
 ```
 
@@ -369,14 +368,14 @@ Hom_{Π E}(s,t)
   = natural family transformations from s to t
 ```
 
-Pointwise, such a transformation `α : s ⇒ t` still has components:
+Pointwise, such a transformation `α : s => t` still has components:
 
 ```text
 α[k] : Hom_{E[k]}(s[k], t[k])
 ```
 
 but these components are constrained by naturality over every base arrow
-`f : x → y`. This is why the implementation uses `Transfd`, not a naive
+`f : x ->^K y`. This is why the implementation uses `Transfd`, not a naive
 pointwise dependent product of homs.
 
 When the base is non-directed or only path-like, the distinction between
@@ -590,8 +589,7 @@ The primary internalized theorem is the telescope form over varying `x`:
 
 ```text
 PathInd_transfd(Z)
-  : (x :^n Z) →
-      PathOutReflEval_Z[x] ⇒ PathOutPi_Z[x]
+  : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x]
 ```
 
 where:

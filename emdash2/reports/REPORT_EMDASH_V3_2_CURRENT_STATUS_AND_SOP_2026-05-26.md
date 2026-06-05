@@ -1,34 +1,36 @@
 # EMDASH v3.2 Current Status And SOP
 
-> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
-
-
 Date: 2026-05-26
+Last consolidated: 2026-06-05
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
-implementation log, plus the later Pi-alias, Sigma-projection, and internalized
-path-induction work.
+implementation log, plus the later Pi-alias, Sigma-projection,
+Product/curry, internal-action, Sigma-laxity, notation, and reorganization
+work.
 
 ## Current Source Of Truth
 
 - Active implementation: `emdash3_2.lp`.
-- Current synthetic/telescope path-induction plan and implementation status:
-  `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`.
-- Current Pi-alias and Sigma projection-pullback status:
-  `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`.
-- Current pair-telescope/Product-curry rearchitecture plan:
-  `reports/REPORT_EMDASH_V3_2_PAIR_TELE_CURRY_REARCHITECTURE_PLAN_2026-06-01.md`.
-- Current internal-action projection plan/status:
-  `reports/REPORT_EMDASH_V3_2_INTERNAL_ACTION_PROJECTION_PLAN_2026-06-03.md`.
-- The older synthetic/telescope path-induction plan and implementation report
-  from 2026-05-27 are superseded by that consolidated report and are no longer
-  forward guidance.
-- The older Pi-alias/Sigma-projection plan and implementation report from
-  2026-05-25 are superseded by the Pi/Sigma consolidated status report.
-- Superseded internalized-path reports remain useful as historical
-  implementation records, but they are no longer the forward plan.
-- This report records repository-level SOP and retirement guidance.
+- Active diagnostic/regression checks: `emdash3_2_checks.lp`.
+- Current notation authority:
+  `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
+- Current mathematical reading guide: `reports/EMDASH_FOUNDATIONS.md`.
+- Current open structural-logic implementation plan:
+  `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`.
+- Current notation/reorganization subplan:
+  `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
+- Current v2 reference: `reports/REPORT_EMDASH2_CONSOLIDATED.md`.
+
+Reports retired by the 2026-06-05 consolidation have been archived under:
+
+```text
+.scratchpad/retired/2026-06-05_reports_consolidation/
+```
+
+Do not consult archived reports during normal v3.2 work. Their surviving
+design facts have been folded into this report, `EMDASH_FOUNDATIONS.md`, the
+canonical syntax report, or the structural-logic plan.
 
 Retired historical references:
 
@@ -39,12 +41,36 @@ Retired historical references:
 
 ## Current Orientation Snapshot
 
-Review snapshot: 2026-06-04.
+Review snapshot: 2026-06-05.
 
 `emdash3_2.lp` remains the active v3.2 source. The current architecture is
 centered on directed Cat-valued families, with `Catd_cat K` as the canonical
 normal form of `Functor_cat K Cat_cat`, and with `Functord`/`Transfd` carrying
 the displayed or natural family layers.
+
+Top-level implementation sections now have this active order:
+
+```text
+0. Groupoid universe and equality
+1. Encoded Sigma types for object layers
+2. Core categories
+3. Functor, displayed-family, and universe categories
+4. Ordinary internal hom and hom actions
+5. Ordinary binary products of categories
+6. Ordinary transformations and functor composition actions
+7. Product functor packages, evaluation, curry, and ordinary internal action
+8. Directed Cat-valued family constructors
+9. Directed Sigma categories and maps between totals
+10. Mixed-variance family functor
+11. Representables, path induction, and presheaf-family classifiers
+12. Directed homd target and internal homd functor
+13. Endpoint normal forms for Sigma homs
+14. Section action over dependent homs
+15. Internal displayed hom-action heads
+16. Derived displayed component notation
+17. Generic Sigma/Pi weakening and delayed projection helpers
+18. Check catalog and nested telescope stress examples
+```
 
 The primary path-induction theorem is `PathInd_transfd(Z)`. The Sigma-total
 presentation `PathInd_funcd(Z)` is derived by
@@ -72,11 +98,12 @@ telescope, and semantic uncurry routes through right-ordered `Eval_func` plus
 the `Product_cat_func` stable projection ladder. The transfor action of
 semantic uncurry remains deferred.
 
-The faithful surface-syntax plan is a presentation layer over this kernel, not
-a replacement for it. The current binder convention uses one indexed binder
+The canonical surface syntax is a presentation layer over this kernel, not a
+replacement for it. The current binder convention uses one indexed binder
 `:^n`; mixed variance is shown on the family occurrence, for example
-`Π y :^n Z^op, D[y^-] ⟶_[y] ...`. Kernel/debug mode should preserve stable
-rewrite heads such as `homd_src_func`, `tdapp0_fapp0`,
+`A[z^-] ⊢_[z] B[z]` for `Functor_catd A B` and
+`aa[z^-] ->_[z]^R bb[z]` for `Hom_catd R aa bb`. Kernel/debug mode should
+preserve stable rewrite heads such as `homd_src_func`, `tdapp0_fapp0`,
 `fdapp1_int_hom_fapp0`, and `fdapp1_int_cell`.
 
 Current validation observed during this review:
@@ -85,7 +112,7 @@ Current validation observed during this review:
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-checks both `emdash2.lp` and `emdash3_2.lp`.
+checks `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
 
 ## Current v3.2 Status
 
@@ -191,6 +218,7 @@ At the time of this report it checks:
 ```text
 emdash2.lp
 emdash3_2.lp
+emdash3_2_checks.lp
 ```
 
 The old v3.1 baseline is no longer part of the ordinary check path.
@@ -512,7 +540,7 @@ The mathematical reading of the final capped component is:
 
 ```text
 fdapp1_int_hom_fapp0(FF,p,u,alpha)
-  : D[p](FF[x]u) ⟶ FF[y]v
+  : D[p](FF[x]u) ->^(D[y]) FF[y]v
   morally FF[y][alpha] ∘ laxity(FF,p)[u].
 ```
 

@@ -4,9 +4,9 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md and @reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, with diagnostics in @emdash3_2_checks.lp. Current v3.2 guidance is consolidated in @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, @reports/EMDASH_FOUNDATIONS.md, and @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
 
-For v3.2 work, start from @emdash3_2.lp and the current v3.2 status/SOP reports. Consult @reports/REPORT_EMDASH_V3_CONSOLIDATED.md only for explicitly requested historical comparison. The v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report have been retired into the ignored `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/` folder. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
+For v3.2 work, start from @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md only for the still-proposed structural functor logic work, and @reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md only for notation/reorganization follow-up. The v3.1 baseline, the older tracked v3 attempt, and superseded v3/v3.2 feature reports have been retired into ignored `.scratchpad/` folders so they do not distract normal development.
 
 The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
@@ -22,7 +22,7 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: for v3.2 work, start by reading @emdash3_2.lp, @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, and @reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
+Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/EMDASH_FOUNDATIONS.md for the mathematical reading guide, @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md for current notation, and @reports/REPORT_EMDASH2_CONSOLIDATED.md only as the v2 reference for rewrite/unification style and stable-head SOP.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 

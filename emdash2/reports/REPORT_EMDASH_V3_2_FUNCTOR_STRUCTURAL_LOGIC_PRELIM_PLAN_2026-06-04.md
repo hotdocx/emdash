@@ -1,6 +1,6 @@
 # EMDASH v3.2 Functor Structural Logic Preliminary Plan
 
-> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
+> Notation note: this is still a preliminary design plan. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` as the current notation authority; early schematic code blocks in this report may use ASCII `->` as informal meta-notation before the canonical notation table.
 
 
 Date: 2026-06-04
@@ -10,8 +10,10 @@ Status: preliminary design note. No implementation has been attempted in
 
 ## Scope
 
-This report consolidates the deferred B10 infrastructure issue from
-`reports/REPORT_SIGMA_LAXITY_TRANSP_DISCUSSION_PRELIM_2026-06-03.md`.
+This report consolidates the deferred B10 infrastructure issue that was first
+noticed during the Sigma-laxity transport discussion. The preliminary
+Sigma-laxity report has since been archived; this file is the active forward
+reference for the structural-logic work.
 
 The Sigma/laxity problem that exposed B10 is now settled by the displayed
 internal-hom projection path:

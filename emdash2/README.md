@@ -10,16 +10,17 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
   v3.2 status and rewrite/debugging SOP.
-- `reports/REPORT_EMDASH_V3_2_SYNTHETIC_PATH_INDUCTION_CONSOLIDATED_PLAN_AND_STATUS_2026-05-31.md`:
-  active consolidated synthetic/telescope path-induction plan and status for
-  v3.2.
-- `reports/REPORT_EMDASH_V3_2_PI_ALIAS_SIGMA_PROJ1_CONSOLIDATED_STATUS_2026-05-31.md`:
-  active consolidated Pi-alias and Sigma projection-pullback status for v3.2.
-- `reports/REPORT_EMDASH_V3_2_INTERNAL_ACTION_PROJECTION_PLAN_2026-06-03.md`:
-  implemented plan/status for `fapp1_at_transf`, generic displayed
-  internal-action projections, and the `fdapp1_int_*` canonical rename.
-- Older path-induction plan/report files are superseded historical context and
-  are no longer the forward plan.
+- `reports/EMDASH_FOUNDATIONS.md`: mathematician-facing reading guide for the
+  current v3.2 foundations.
+- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
+  current notation authority for comments, examples, and future parser work.
+- `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
+  active proposed plan for structural functor logic
+  (weakening/exchange/contraction and displayed follow-ups).
+- `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
+  active notation/reorganization subplan.
+- Older v3/v3.2 feature reports have been consolidated into the current SOP
+  and foundations reports, then archived under `.scratchpad/retired/`.
 - `lambdapi.pkg`: package config for Lambdapi.
 - `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
