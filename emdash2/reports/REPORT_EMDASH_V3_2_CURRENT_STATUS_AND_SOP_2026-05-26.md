@@ -1,5 +1,8 @@
 # EMDASH v3.2 Current Status And SOP
 
+> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
+
+
 Date: 2026-05-26
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates

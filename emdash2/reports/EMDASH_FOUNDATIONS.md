@@ -1,5 +1,8 @@
 # emdash Foundations
 
+> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
+
+
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory. It presents the intended mathematics in ordinary
 category/type-theory notation and deliberately suppresses most Lambdapi rewrite

@@ -1,5 +1,8 @@
 # emdash v3 Consolidated Architecture
 
+> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
+
+
 ## Current Source of Truth
 
 Supersession note, 2026-05-26: this report describes the v3.1 baseline and is

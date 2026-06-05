@@ -1,5 +1,8 @@
 # EMDASH v3.2 Pair-Telescope And Curry Rearchitecture Plan
 
+> Notation warning: this report predates the 2026-06-05 canonical surface syntax. Use `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` for current notation; older formulas may use retired arrow/transformation glyphs.
+
+
 Date: 2026-06-01
 
 Status: partially implemented in `emdash3_2.lp`. Stages 1-5a below are now

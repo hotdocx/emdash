@@ -2,7 +2,7 @@
 
 Date: 2026-06-05
 
-Status: proposed implementation plan, to preserve context before larger edits.
+Status: implementation started; notation cleanup and assertion split completed.
 
 ## Purpose
 
@@ -81,6 +81,28 @@ Important parser/syntax principles:
   use `z :^n Z ; E[z] ⊢ D[z]`, not `z :^n Z ; e : E[z] ⊢ D[z]`.
 
 ## Immediate Implementation Order
+
+## Progress 2026-06-05
+
+Completed:
+
+- created `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
+- replaced `REPORT_EMDASH_V3_FAITHFUL_SURFACE_SYNTAX_PLAN.md` with a
+  supersession pointer;
+- added a canonical notation banner to `emdash3_2.lp`;
+- normalized active `emdash3_2.lp` syntax comments away from the old
+  functor/transformation arrow glyphs;
+- extracted 314 top-level diagnostic `assert` checks from `emdash3_2.lp` into
+  `emdash3_2_checks.lp`;
+- updated `scripts/check.sh` and `Makefile` so `make check` checks
+  `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
+- added notation-warning banners to older reports that still preserve
+  pre-2026-06-05 notation.
+
+Still deferred:
+
+- consider deeper definition-level file splits after the assertion split has
+  settled.
 
 ### 1. Establish One Current Syntax Authority
 
