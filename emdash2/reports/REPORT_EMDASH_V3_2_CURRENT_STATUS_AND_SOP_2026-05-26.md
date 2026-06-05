@@ -419,6 +419,36 @@ as `fapp1_func Eval_func (F,x) (G,y)` should keep canonical source/target
 categories explicit, because the assertion is a projection/regression witness,
 not just a user-facing mathematical formula.
 
+### Layout And Vertical Formatting SOP
+
+Most one-argument-per-line rule blocks are a debugging convenience, not a
+Lambdapi requirement. They are useful while diagnosing hidden arity,
+stable-head discriminators, and failing conversion goals, because they make the
+argument spine visible. After a construction has stabilized, prefer mostly
+horizontal presentation for simple rules.
+
+Prefer compact/horizontal layout for:
+
+- rewrite rules whose left-hand side is just a stable head plus variables;
+- identity/specialization folds;
+- short projection rules where the discriminator is obvious;
+- short symbol declarations whose type is not a nested endpoint formula.
+
+Keep vertical layout for:
+
+- nested `Hom_cat`, `Functor_cat`, `Fibre_cat`, `Sigma_cat`, `Product_cat`, or
+  `Functor_catd` endpoints;
+- long dependent symbol types;
+- rules where source/target categories are deliberately explicit;
+- RHSs with nested composition or transport where indentation reflects the
+  computation path;
+- diagnostic assertions whose purpose is to expose canonical endpoints.
+
+Do presentation cleanup section by section and run a bounded check after each
+batch. Do not use a blind formatter: a compact rule should still reveal the
+stable discriminator and should not hide endpoint data that was intentionally
+left visible for conversion or review.
+
 ### Canonical Type-Shape SOP
 
 Declared symbol types should normally be written in their reduced/canonical

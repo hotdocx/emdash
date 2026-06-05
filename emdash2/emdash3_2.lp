@@ -3950,14 +3950,7 @@ rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
 // Component projection for the primary synthetic/telescope path-induction
 // theorem. This lives here because `tdapp0_fapp0` is the generic displayed
 // transfor component head.
-rule @tdapp0_fapp0
-      $Z
-      _
-      _
-      _
-      _
-      $x
-      (@PathInd_transfd $Z)
+rule @tdapp0_fapp0 $Z _ _ _ _ $x (@PathInd_transfd $Z)
   ↪ @PathInd_func $Z $x;
 
 // Object-component projection for generic Sigma-total uncurrying.
@@ -4543,32 +4536,12 @@ symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func FF p) u));
 
-rule @fdapp1_int_hom_fapp0
-      $K
-      $E
-      $D
-      $FF
-      $x
-      $y
-      $p
-      $u
-      _
-      (@id
-        _
-        _)
+rule @fdapp1_int_hom_fapp0 $K $E $D $FF $x $y $p $u _ (@id _ _)
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 rule @fdapp1_int_hom_fapp0
-      $K
-      (@Const_catd $K Terminal_cat)
-      $D
-      $FF
-      $x
-      $y
-      $p
-      Terminal_obj
-      Terminal_obj
-      Terminal_obj
+      $K (@Const_catd $K Terminal_cat) $D $FF $x $y $p
+      Terminal_obj Terminal_obj Terminal_obj
   ↪ @fdapp1_int_cell
       $K
       (@Const_catd $K Terminal_cat)
@@ -4576,8 +4549,8 @@ rule @fdapp1_int_hom_fapp0
       $FF
       $x
       $y
-	      $p
-	      Terminal_obj;
+      $p
+      Terminal_obj;
 
 /*
   Generic displayed internal-hom action projections.
@@ -4654,15 +4627,7 @@ rule @tapp0_fapp0
         (@tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ))
   ↪ @tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u;
 
-rule @tdapp1_int_section_arrow
-      $K
-      $E
-      $D
-      $FF
-      $FF
-      (@id_transfd $K $E $D $FF)
-      $x
-      $u
+rule @tdapp1_int_section_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u
   ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u;
 
 symbol tdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
@@ -4691,16 +4656,7 @@ rule @tapp0_fapp0
         (@tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u))
   ↪ @tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y;
 
-rule @tdapp1_int_tgt_arrow
-      $K
-      $E
-      $D
-      $FF
-      $FF
-      (@id_transfd $K $E $D $FF)
-      $x
-      $u
-      $y
+rule @tdapp1_int_tgt_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y
   ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y;
 
 symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
@@ -4725,16 +4681,7 @@ rule @tapp0_fapp0
   ↪ @tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v;
 
 rule @tdapp1_int_presheaf_arrow
-      $K
-      $E
-      $D
-      $FF
-      $FF
-      (@id_transfd $K $E $D $FF)
-      $x
-      $u
-      $y
-      $v
+      $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y $v
   ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
 symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
@@ -4782,17 +4729,7 @@ rule @tapp0_fapp0
   ↪ @tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u $v;
 
 rule @tdapp1_int_hom_func
-      $K
-      $E
-      $D
-      $FF
-      $FF
-      (@id_transfd $K $E $D $FF)
-      $x
-      $y
-      $p
-      $u
-      $v
+      $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u $v
   ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
 symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
@@ -4806,49 +4743,20 @@ symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func GG p) u));
 
-rule fapp0
-      (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _)
-      (@id
-        _
-        _)
+rule fapp0 (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _) (@id _ _)
   ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
 
-rule @tdapp1_int_cell
-      $K
-      $E
-      $D
-      $FF
-      $FF
-      (@id_transfd $K $E $D $FF)
-      $x
-      $y
-      $p
-      $u
+rule @tdapp1_int_cell $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 rule @fdapp1_int_cell
-      $K
-      (@Const_catd $K Terminal_cat)
-      (@Const_catd $K $A)
-      $s
-      $x
-      $y
-      $p
-      Terminal_obj
+      $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A) $s $x $y $p Terminal_obj
   ↪ @fapp1_fapp0 $K $A $s $x $y $p;
 
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the
 // stable `Rep_transport_func` head and keeps the family slots implicit.
-rule @fdapp1_int_cell
-      $Z
-      _
-      _
-      (@Rep_transport_func $Z $x $y $p)
-      $y
-      $z
-      $q
-      (@id $Z $y)
+rule @fdapp1_int_cell $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q (@id $Z $y)
   ↪ @id
       (Hom_cat $Z $x $z)
       (@comp_fapp0 $Z $x $y $z $q $p);
@@ -4857,16 +4765,8 @@ rule @fdapp1_int_cell
 // fibre projection: applying the internal-hom action to the canonical identity
 // fibre arrow gives the identity at the composite arrow.
 rule @fdapp1_int_hom_fapp0
-      $Z
-      _
-      _
-      (@Rep_transport_func $Z $x $y $p)
-      $y
-      $z
-      $q
-      (@id $Z $y)
-      $q
-      (@id (Hom_cat $Z $y $z) $q)
+      $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q
+      (@id $Z $y) $q (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
       (@comp_fapp0 $Z $x $y $z $q $p);
@@ -4952,11 +4852,9 @@ rule @tapp0_fapp0
 injective symbol const_section_func (K : Cat) (A : Cat)
   : τ (Functor A (@Pi_cat K (@Const_catd K A)));
 
-rule @fapp0 $A _ (@const_section_func $K $A) $a
-  ↪ @Const_func $K $A $a;
+rule @fapp0 $A _ (@const_section_func $K $A) $a ↪ @Const_func $K $A $a;
 
-rule @fapp1_func $A _ (@const_section_func $K $A) $x $y
-  ↪ @Const_transf_func $K $A $x $y;
+rule @fapp1_func $A _ (@const_section_func $K $A) $x $y ↪ @Const_transf_func $K $A $x $y;
 
 rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
   ↪ @Const_transf $K $A $x $y $p;
@@ -4967,11 +4865,9 @@ rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
 //   Product_pair_tele_func(A,B) : A ⊢ (B ⊢ A x B)
 //   Product_pair_tele_func[x][y] = (x,y)
 //   Product_pair_tele_func[p][y] = (p,id_y).
-rule sigma_Fst (@Product_pair_tele_func $A $B)
-  ↪ @const_section_func $B $A;
+rule sigma_Fst (@Product_pair_tele_func $A $B) ↪ @const_section_func $B $A;
 
-rule sigma_Snd (@Product_pair_tele_func $A $B)
-  ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
+rule sigma_Snd (@Product_pair_tele_func $A $B) ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
 
 rule @fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
       (@Product_pair_tele_func $A $B) $x
@@ -4997,8 +4893,7 @@ rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
 // Generic full hom-action for identity and composition of ordinary functors.
 // These rules let semantic aliases such as curry expose functor-level action
 // instead of falling back to capped `fapp1_fapp0` computation only.
-rule @fapp1_func $A $A (@id_func $A) $x $y
-  ↪ @id_func (Hom_cat $A $x $y);
+rule @fapp1_func $A $A (@id_func $A) $x $y ↪ @id_func (Hom_cat $A $x $y);
 
 rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
   ↪ @comp_cat_fapp0
@@ -5044,8 +4939,7 @@ symbol section_pullback_sec [A B : Cat]
   (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E)))
   : τ (Obj (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F)));
 
-rule @fapp0 _ _ (@section_pullback_func $A $B $F $E) $s
-  ↪ @section_pullback_sec $A $B $F $E $s;
+rule @fapp0 _ _ (@section_pullback_func $A $B $F $E) $s ↪ @section_pullback_sec $A $B $F $E $s;
 
 rule @tapp0_fapp0
       $A Cat_cat (@Const_catd $A Terminal_cat) _ $a
@@ -5070,24 +4964,10 @@ injective symbol section_pullback_transf [A B : Cat]
         (@Pi_func A)
         (@Pullback_catd_func A B F)));
 
-rule @tapp0_fapp0
-      (@Catd_cat $B)
-      Cat_cat
-      _
-      _
-      $E
-      (@section_pullback_transf $A $B $F)
+rule @tapp0_fapp0 (@Catd_cat $B) Cat_cat _ _ $E (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
-rule @fdapp1_int_cell
-      _
-      _
-      _
-      Pi_int_funcd
-      $B
-      $A
-      $F
-      $E
+rule @fdapp1_int_cell _ _ _ Pi_int_funcd $B $A $F $E
   ↪ @section_pullback_func $A $B $F $E;
 
 rule @fdapp1_int_cell

@@ -117,6 +117,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   fixed product factors such as `Product_cat_fapp1_tapp0_func A A' B G`, and
   product-valued hom-actions where Lambdapi otherwise reconstructs endpoints
   through large `sigma_Fst`/`sigma_Snd` terms.
+- Prefer mostly horizontal formatting for simple stable-head rules after they
+  have stabilized. Keep vertical layout for nested endpoint formulas, explicit
+  source/target categories, and diagnostic assertions. See the layout SOP in
+  `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
 - Write declared symbol types in reduced/canonical form by default. Prefer
   `τ (Functord E D)` over unreduced equivalents such as
   `τ (@Transf K Cat_cat E D)` unless the unreduced shape is intentionally

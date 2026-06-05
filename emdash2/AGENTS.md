@@ -47,6 +47,7 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
 - Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
 - If a semantic definition fails to compute, first look for missing projection rules, such as a capped `fapp1_fapp0` rule corresponding to an existing `fapp1_func` rule.
 - Do not duplicate semantic bodies in helper aliases; route helper definitions through the named semantic constructor.
+- Prefer mostly horizontal formatting for simple stable-head rules after they stabilize. Keep vertical layout for nested endpoint formulas, deliberately explicit source/target categories, and diagnostic assertions.
 
 ## SOP: Continuous typecheck (watch mode)
 Recommended workflow (2 terminals):
