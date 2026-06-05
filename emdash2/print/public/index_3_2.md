@@ -38,9 +38,9 @@ $$
 \\mathrm{path\\_comp\\_func}(p)[z][q] \\rightsquigarrow q \\circ p.
 $$
 
-The article draft below is a workbench for the v3.2 paper. It leads with this
-computation, then builds outward to the shaped syntax and kernel infrastructure
-that make the theorem expressible and executable.
+The article leads with this computation, then builds outward to the shaped
+syntax and kernel infrastructure that make the theorem expressible and
+executable.
 
 # 1. Introduction
 
@@ -73,7 +73,7 @@ this construction as a section.
 
 ## 1.1 Contributions Of The v3.2 Paper
 
-This paper draft will focus on four contributions.
+The v3.2 article focuses on four contributions.
 
 1. **Synthetic arrow induction.** The primitive theorem surface is
    `PathInd_transfd(Z)`, a displayed transformation over the source object
@@ -86,6 +86,28 @@ This paper draft will focus on four contributions.
 4. **Stable-head normalization.** The implementation separates semantic
    owners from presentation helpers so Lambdapi can typecheck the development
    with predictable rewrite behavior.
+
+## 1.2 What "Checked" Means Here
+
+The paper uses checked in the Lambdapi sense: an assertion of the form
+
+```text
+Γ ⊢ left ≡ right
+```
+
+is accepted only when `left` and `right` are convertible under the current
+definitions, rewrite rules, and beta-reduction. For the path-induction story,
+the checked evidence has three layers.
+
+1. The theorem interfaces typecheck, for example `PathInd_transfd(Z)` has the
+   displayed-transformation type claimed in the paper.
+2. Their projections compute, for example `PathInd_transfd(Z)[x]` reduces to
+   the fixed-source `PathInd_func(Z,x)`.
+3. Fully expanded applications normalize to the expected categorical term, for
+   example the composition benchmark reduces to `comp_fapp0 Z x y z q p`.
+
+This is stronger than a prose analogy with induction. The theorem surface and
+the transitivity computation are part of the same executable rewrite system.
 
 # 2. The Main Computation
 
@@ -282,6 +304,48 @@ in `emdash3_2_checks.lp` and normalize to:
 comp_fapp0 Z x y z q p.
 ```
 
+The benchmark has three levels. At the mathematical level, it is the familiar
+composition of arrows. At the theorem level, it is an application of
+path-induction to a representable-composition motive. At the kernel level, it
+is a normalization statement about stable application heads.
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "p", "left": 90, "top": 80, "label": "$p : x \\to y$" },
+    { "name": "q", "left": 350, "top": 80, "label": "$q : y \\to z$" },
+    { "name": "qp", "left": 610, "top": 80, "label": "$q \\circ p : x \\to z$" },
+    { "name": "mot", "left": 90, "top": 280, "label": "$\\mathrm{CompMotive}_Z(x)$" },
+    { "name": "ind", "left": 350, "top": 280, "label": "$\\mathrm{PathInd}$" },
+    { "name": "nf", "left": 610, "top": 280, "label": "$\\mathrm{comp\\_fapp0}\\ Z\\ x\\ y\\ z\\ q\\ p$" }
+  ],
+  "arrows": [
+    { "from": "p", "to": "q", "label": "$\\mathrm{input}$", "label_alignment": "over", "style": { "body": { "name": "dotted" }, "head": { "name": "none" } } },
+    { "from": "q", "to": "qp", "label": "$\\circ$", "label_alignment": "over" },
+    { "from": "mot", "to": "ind", "label": "$\\mathrm{id}_{\\mathrm{Rep}_Z(x)}$", "label_alignment": "over" },
+    { "from": "ind", "to": "nf", "label": "$\\rightsquigarrow$", "label_alignment": "over" },
+    { "from": "p", "to": "mot", "label": "$$", "style": { "body": { "name": "dashed" }, "head": { "name": "none" } } },
+    { "from": "q", "to": "ind", "label": "$$", "style": { "body": { "name": "dashed" }, "head": { "name": "none" } } },
+    { "from": "qp", "to": "nf", "label": "$$", "style": { "body": { "name": "dashed" }, "head": { "name": "none" } } }
+  ]
+}
+</div>
+
+The checked route through the primary theorem is:
+
+```text
+PathInd_transfd(Z)[x][CompMotive_Z(x)](id_Rep_Z(x))[p][z][q]
+  = comp_fapp0 Z x y z q p.
+```
+
+The checked route through the derived total theorem is:
+
+```text
+PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
+  = comp_fapp0 Z x y z q p.
+```
+
 # 3. The Telescope Theorem
 
 The fixed-source eliminator is useful, but the real v3.2 theorem is the
@@ -447,8 +511,8 @@ the displayed family itself is the object of interest.
 
 # 5. Kernel Foundations
 
-The kernel section of the paper should be dependency-driven. The theorem uses
-only the following infrastructure, in this order.
+The kernel exposition is dependency-driven. The theorem uses only the
+following infrastructure, in this order.
 
 1. `Grpd`, `Cat`, `Obj`, and `Hom_cat` give the strict categorical base.
 2. `Functor_cat` and `Transf_cat` provide ordinary program and transformation
@@ -522,8 +586,8 @@ catalog for the paper.
 
 # 7. Supporting Constructions
 
-After the path-induction theorem, the paper should include smaller examples
-that show the same kernel discipline in other constructors.
+After the path-induction theorem, the article includes smaller examples that
+show the same kernel discipline in other constructors.
 
 Product-valued functors and product projections are already computational. In
 particular, maps into a product category reduce through the two projection
@@ -544,8 +608,8 @@ counit[f] o left(unit[g]) -> f o left(g)
 right(counit[g]) o unit[f] -> right(g) o f.
 ```
 
-This should remain a later section or sidebar. It reinforces the same message,
-but it is not the central theorem of v3.2.
+This remains a later section or sidebar. It reinforces the same message, but
+it is not the central theorem of v3.2.
 
 # 8. Implementation And Validation
 
@@ -570,6 +634,23 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 npm run check:render
 ```
 
+The checked regression catalog is organized by computational surface:
+
+| Surface | Representative checked claim |
+| --- | --- |
+| PathOut object layer | `PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))` |
+| PathOut transport | `PathOut_transport(p)[(z,q)] = (z,q o p)` |
+| Rho construction | `rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)` |
+| Fixed-source induction | `PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)` |
+| Telescope theorem | `PathInd_transfd(Z)[x] = PathInd_func(Z,x)` |
+| Sigma-total theorem | `PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)` |
+| Composition benchmark | `path_comp_func(p)[z][q] = q o p` |
+
+The checks deliberately include both readable helper heads and fully expanded
+applications. The readable heads are what the article explains; the expanded
+applications are what guard against accidental loss of computation when a
+definition is refactored.
+
 The print pipeline treats this file as a draft variant:
 
 ```text
@@ -588,7 +669,7 @@ article rather than from the old v2 text.
 
 # 9. Limitations And Future Work
 
-The v3.2 article should be explicit about what is implemented now and what is
+The v3.2 article is explicit about what is implemented now and what is
 planned.
 
 Structural functor logic is still planned. The likely operations are exchange,
@@ -656,8 +737,8 @@ work together as a small executable specification.
 
 # Appendix B. Selected Checked Normal Forms
 
-The article should quote checked normal forms in compact mathematical notation
-and keep the fully expanded Lambdapi terms available as regression references.
+The article quotes checked normal forms in compact mathematical notation and
+keeps the fully expanded Lambdapi terms available as regression references.
 The following statements are covered by `emdash3_2_checks.lp`.
 
 Core PathOut and rho checks:
