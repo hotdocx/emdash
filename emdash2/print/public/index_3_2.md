@@ -153,6 +153,37 @@ The computation chain is:
 | path action | `path_comp_func(p)` | functor `Rep_Z(y) ⊢ Rep_Z(x)` |
 | normal form | `comp_fapp0 Z x y z q p` | ordinary categorical composition |
 
+The three formal claims used throughout the article are the following.
+
+**Fixed-Source Arrow Induction.** For every `E : Catd(PathOut_Z(x))` and
+`u : E[(x,id_x)]`, there is a section:
+
+```text
+path_ind_sec(Z,x,E,u) : Π q :^n PathOut_Z(x), E[q]
+path_ind_sec(Z,x,E,u)[(y,p)] = E[rho_{x,y,p}](u).
+```
+
+**Telescope Arrow Induction.** The fixed-source construction is internalized
+in the source object:
+
+```text
+PathInd_transfd(Z)
+  : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x].
+```
+
+Its Sigma-total presentation is derived:
+
+```text
+PathInd_funcd(Z) = Sigma_transfd_funcd(PathInd_transfd(Z)).
+```
+
+**Computational Transitivity.** For `p : x ->^Z y` and `q : y ->^Z z`, the
+composition instance of path induction computes to ordinary composition:
+
+```text
+path_comp_func(p)[z][q] = comp_fapp0 Z x y z q p.
+```
+
 ## 2.1 Outgoing Arrows
 
 For a fixed source object $x : Z$, define:
@@ -839,20 +870,32 @@ work together as a small executable specification.
 | `Rep_Z(x)` | `Rep_catd Z x` |
 | `Rep_transport(p)` | `Rep_transport_func Z x y p` |
 | `PathOut_Z(x)` | `PathOut_cat Z x` |
+| `PathOut_Z(p)` | `PathOut_transport_func Z x y p` |
 | `(y,p)` in `PathOut_Z(x)` | `pathout_obj Z x y p` |
 | `(x,id_x)` | `pathout_refl_obj Z x` |
 | `rho_{x,y,p}` | `pathout_refl_arrow Z x y p` |
+| section of all `rho` arrows | `pathout_refl_arrow_sec Z x` |
 | `E[rho_{x,y,p}]` | `pathout_refl_eval_base_func Z x y p E` |
+| transported motive `p_*E` | `pathout_motive_transport_obj Z x y p E` |
 | `PathOutMotives_Z` | `PathOutMotives_catd Z` |
 | `PathOutReflEval_Z` | `PathOutReflEval_funcd Z` |
 | `PathOutPi_Z` | `PathOutPi_funcd Z` |
+| fixed-source induction source family | `PathInd_src_catd Z x` |
+| fixed-source induction target family | `PathInd_tgt_catd Z x` |
+| fixed-source component functor | `path_ind_func_fapp0 Z x E` |
 | fixed-source path induction | `PathInd_func Z x` |
 | telescope path induction | `PathInd_transfd Z` |
+| Sigma-total source family | `PathIndSrc_catd Z` |
+| Sigma-total target family | `PathIndTgt_catd Z` |
+| Sigma-total source transport | `PathIndSrc_transport_func Z x y p E` |
+| Sigma-total target transport | `PathIndTgt_transport_func Z x y p E` |
 | Sigma-total path induction | `PathInd_funcd Z` |
 | composition target | `CompTarget_catd Z x` |
+| action of composition target | `CompTarget_fapp1_func Z x a b p` |
 | composition motive | `CompMotive_catd Z x` |
 | composition section | `path_comp_sec Z x` |
 | composition functor for `p` | `path_comp_func Z x y p` |
+| covariant fibre transport | `fib_cov_transf Z D x u` |
 
 # Appendix B. Selected Checked Normal Forms
 
