@@ -7,7 +7,20 @@
   archived historical baselines rather than current design authorities.  This file uses
   directed Cat-valued families directly:
 
-    Functor_cat K Cat_cat --> Catd_cat K.
+    Functor_cat K Cat_cat ↪ Catd_cat K.
+
+  Canonical surface syntax authority:
+    reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md
+
+  Current surface-notation summary:
+    A ⊢ B                         = Functor_cat A B
+    z :^n Z ; E[z] ⊢ D[z]         = Functord_cat E D
+    Π (z :^n Z), D[z]             = Pi_cat D
+    a ->^C b                      = Hom_cat C a b
+    aa[z^-] ->_[z]^R bb[z]        = Hom_catd R aa bb
+    A[z^-] ⊢_[z] B[z]             = Functor_catd A B
+    F => G                        = Transf_cat F G
+    FF[z^-] =>_[z] GG[z]          = Transf_catd A B FF GG
 */
 
 flag "eta_equality" on;
@@ -135,7 +148,8 @@ flag "print_meta_args" on;
       the surface reading of `E[k]`.
     - `Pi_cat E`: notation for the canonical section category
       `Functord_cat (Const_catd K Terminal_cat) E`, surface
-      `Π k :^n K, E[k]`, morally `(k :^n K) → 1 ⟶ E[k]`;
+      `Π (k :^n K), E[k]`, i.e. terminal-shape
+      `k :^n K ; 1[k] ⊢ E[k]`;
       section homs and projections therefore use the displayed-functor normal
       form directly.
     - `Pi_int_funcd` / `Pi_pullback_funcd`: internalized Pi over varying bases.
@@ -186,7 +200,7 @@ flag "print_meta_args" on;
       `tapp0_fapp0` to ordinary fibre opposites, and `comp_catd_fapp0`
       projects pointwise to ordinary fibre composition. The semantic E/C
       outer-slot form validates; the D/C outer-slot form is not the intended
-      general E[x] -> C[x] projection.
+      general `E[x] ⊢ C[x]` projection.
     - Earlier diagnostic aliases `fdapp1_int_fibre_transf` /
       `fdapp1_int_fibre_app` and the terminal-specialized `piapp1_int_*`
       projection chain have been retired. The displayed route now stays at the
@@ -268,7 +282,7 @@ inductive nat : TYPE ≔
   Surface/formula:
     A : Cat
     Obj(A)                    object classifier of A
-    Hom_cat(A,x,y)            hom-category Hom_A(x,y), also written x ⟶_A y
+    Hom_cat(A,x,y)            hom-category Hom_A(x,y), also written x ->^A y
     Hom(A,x,y)                object/type classifier of Hom_cat(A,x,y)
     id_A(x)                   identity arrow
     comp_fapp0(g,f)           composite g ∘ f
@@ -347,10 +361,10 @@ assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
   Ordinary functor category and classifier.
 
   Surface/formula:
-    Functor_cat(A,B)       = A ⟶ B
-    Functor(A,B)           = Obj(A ⟶ B)
+    Functor_cat(A,B)       = A ⊢ B
+    Functor(A,B)           = Obj(A ⊢ B)
     F[x]                   = fapp0 F x
-    F[X,Y]                 = fapp1_func F : Hom_A(X,Y) -> Hom_B(F[X],F[Y])
+    F[X,Y]                 = fapp1_func F : Hom_A(X,Y) ⊢ Hom_B(F[X],F[Y])
     F[f]                   = fapp1_fapp0 F f
 */
 injective symbol Functor_cat : Π (A B : Cat), Cat;
@@ -362,9 +376,9 @@ unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'
 
 /*
   Mathematical notation:
-    F : A → B                 means F : Functor(A,B)
+    F : A ⊢ B                 means F : Functor(A,B)
     F[x]                      = fapp0 F x
-    F₁[X,Y]                   = fapp1_func F : Hom_A(X,Y) → Hom_B(F[x],F[y])
+    F₁[X,Y]                   = fapp1_func F : Hom_A(X,Y) ⊢ Hom_B(F[x],F[y])
     F[f]                      = fapp1_fapp0 F f
 */
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
@@ -405,8 +419,8 @@ rule @comp_fapp0
   Universe classifiers and their category structures.
 
   Surface/formula:
-    Grpd_cat has Obj(Grpd_cat) = Grpd and Hom(X,Y) = X -> Y.
-    Cat_cat  has Obj(Cat_cat)  = Cat  and Hom(A,B) = A ⟶ B.
+    Grpd_cat has Obj(Grpd_cat) = Grpd and homs are ordinary functions.
+    Cat_cat  has Obj(Cat_cat)  = Cat  and Hom(A,B) = A ⊢ B.
 */
 
 // Category of groupoid/type classifiers.
@@ -427,7 +441,7 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
   Surface/formula:
     Obj(Grpd_cat) = Grpd
     Obj(Cat_cat)  = Cat
-    Hom_Cat(A,B)  = A -> B.
+    Hom_Cat(A,B)  = A ⊢ B.
 */
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
 assert ⊢ τ (Obj Cat_cat) ≡ Cat;
@@ -436,7 +450,7 @@ assert (A B : Cat) ⊢ Hom_cat Cat_cat A B ≡ Functor_cat A B;
 // Directed Cat-valued families are canonical Cat-valued functors.
 //
 // Surface/formula:
-//   Catd_cat(K) = K -> Cat
+//   Catd_cat(K) = K ⊢ Cat
 //   Catd(K)     = Obj(Catd_cat(K))
 //   E[k]        = fapp0 E k, usually via Fibre_cat E k.
 injective symbol Catd_cat (K : Cat) : Cat;
@@ -451,7 +465,7 @@ unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
 // Natural/displayed families of functors between directed Cat-valued families.
 //
 // Surface/formula:
-//   Functord_cat(E,D) = (k :^n K) → E[k] ⟶ D[k]
+//   Functord_cat(E,D) = k :^n K ; E[k] ⊢ D[k]
 //   Functord(E,D)     = Obj(Functord_cat(E,D)).
 injective symbol Functord_cat [K : Cat] (E D : τ (Catd K)) : Cat;
 
@@ -464,7 +478,7 @@ unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
 // `Catd_cat K` is the canonical normal form of `Functor_cat K Cat_cat`.
 // Therefore `Hom_cat (Catd_cat K) E D` does not route through a direct
 // `Transf_cat K Cat_cat E D` rewrite. The ordinary-functor route
-// `Hom_cat (Functor_cat K Cat_cat) E D -> Transf_cat K Cat_cat E D` and the
+// `Hom_cat (Functor_cat K Cat_cat) E D ↪ Transf_cat K Cat_cat E D` and the
 // directed-family route below both join at `Functord_cat K E D`.
 rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 
@@ -488,7 +502,7 @@ rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
 // directed-family functors.
 //
 // Surface/formula:
-//   Transfd_cat(FF,GG) = (k :^n K) → FF[k] ⇒ GG[k]
+//   Transfd_cat(FF,GG) = k :^n K ; FF[k] => GG[k]
 //   Transfd(FF,GG)     = Obj(Transfd_cat(FF,GG)).
 injective symbol Transfd_cat [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Cat;
@@ -518,9 +532,9 @@ rule @id (@Functord_cat $K $E $D) $FF
   Directed-family category and displayed-arrow normal forms.
 
   Surface/formula:
-    K -> Cat = Catd_cat(K)
-    Hom_Catd(E,D) = (k :^n K) → E[k] ⟶ D[k]
-    Hom_Functord(FF,GG) = (k :^n K) → FF[k] ⇒ GG[k].
+    K ⊢ Cat = Catd_cat(K)
+    Hom_Catd(E,D) = k :^n K ; E[k] ⊢ D[k]
+    Hom_Functord(FF,GG) = k :^n K ; FF[k] => GG[k].
 */
 assert [K : Cat] ⊢ Functor_cat K Cat_cat ≡ Catd_cat K;
 assert [K : Cat] (E D : τ (Catd K)) ⊢
@@ -535,7 +549,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   Ordinary identity/composition in Cat_cat.
 
   Surface/formula:
-    id_func(A)             = id_A : A ⟶ A
+    id_func(A)             = id_A : A ⊢ A
     comp_cat_fapp0(F,G)    = F ∘ G
     (F ∘ G)[x]             = F[G[x]]
     (F ∘ G)[f]             = F[G[f]]
@@ -567,7 +581,7 @@ rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
 // Ordinary opposite functor action.
 //
 // Surface/formula:
-//   Op_func(F) : A^op -> B^op
+//   Op_func(F) : A^op ⊢ B^op
 //   Op_func(F)[x] = F[x]
 //   Op_func(F)[f^op] = F[f]^op.
 injective symbol Op_func : Π [A B : Cat],
@@ -587,8 +601,8 @@ rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
 //
 // Surface/formula:
 //   1 = Terminal_cat
-//   Terminal_func(A) : A -> 1
-//   Obj_func(y) : 1 -> Y picks out y : Obj(Y).
+//   Terminal_func(A) : A ⊢ 1
+//   Obj_func(y) : 1 ⊢ Y picks out y : Obj(Y).
 constant symbol Terminal_cat : Cat;
 rule Op_cat Terminal_cat ↪ Terminal_cat;
 rule Obj Terminal_cat ↪ Unit_grpd;
@@ -615,7 +629,7 @@ rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 // hom-action too early.
 //
 // Surface/formula:
-//   Const_func(b) : A -> B
+//   Const_func(b) : A ⊢ B
 //   Const_func(b)[x] = b
 //   Const_func(b)[f] = id_b.
 injective symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
@@ -636,14 +650,14 @@ rule @comp_cat_fapp0 $A $B $C (@Const_func $B $C $c) $G
 // Point object as a functor from the terminal category.
 //
 // Surface/formula:
-//   Obj_func(y) = const_1(y) : 1 -> Y.
+//   Obj_func(y) = const_1(y) : 1 ⊢ Y.
 injective symbol Obj_func [Y : Cat] (y : τ (Obj Y)) : τ (Functor Terminal_cat Y)
 ≔ @Const_func Terminal_cat Y y;
 
 // Internalized opposite as a functor in Cat.
 //
 // Surface/formula:
-//   op : Cat -> Cat
+//   op : Cat ⊢ Cat
 //   op[A] = A^op
 //   op[F] = F^op.
 constant symbol op : τ (Functor Cat_cat Cat_cat);
@@ -655,7 +669,7 @@ rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 // packages can recover the fixed source category.
 //
 // Surface/formula:
-//   Functor_cat_func[A][B] = A -> B.
+//   Functor_cat_func[A][B] = A ⊢ B.
 constant symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
 
 injective symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
@@ -669,9 +683,9 @@ rule @fapp0 Cat_cat Cat_cat (Functor_cat_fapp0_func $A) $B
 // universe-level functor.
 //
 // Surface/formula:
-//   Catd_cat_func : Cat^op -> Cat
-//   Catd_cat_func[K] = Catd(K) = (K -> Cat)
-//   Catd_cat_func[F : A -> B] = F^* : Catd(B) -> Catd(A)
+//   Catd_cat_func : Cat^op ⊢ Cat
+//   Catd_cat_func[K] = Catd(K) = (K ⊢ Cat)
+//   Catd_cat_func[F : A ⊢ B] = F^* : Catd(B) ⊢ Catd(A)
 //
 // This is the internal package that lets later constructions vary the base
 // category. It is obtained by evaluating the internalized ordinary
@@ -687,7 +701,7 @@ symbol Catd_cat_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
 // Curried postcomposition in Cat, used to build constructor pipelines.
 //
 // Surface/formula:
-//   comp_cat_cov_func(G) : (X -> Y) -> (X -> Z)
+//   comp_cat_cov_func(G) : (X ⊢ Y) ⊢ (X ⊢ Z)
 //   comp_cat_cov_func(G)[F] = G ∘ F.
 symbol comp_cat_cov_func : Π [X Y Z : Cat],
   Π (G : τ (Functor Y Z)),
@@ -700,7 +714,7 @@ rule fapp0 (@comp_cat_cov_func $X $Y $Z $G) $F
 //
 // Surface/formula:
 //   comp_cat_cov_func_func[X,Y,Z][G] = comp_cat_cov_func(G)
-//   : (Y -> Z) -> ((X -> Y) -> (X -> Z)).
+//   : (Y ⊢ Z) ⊢ ((X ⊢ Y) ⊢ (X ⊢ Z)).
 symbol comp_cat_cov_func_func [X Y Z : Cat]
   : τ (Functor
       (Functor_cat Y Z)
@@ -713,7 +727,7 @@ rule fapp0 (@comp_cat_cov_func_func $X $Y $Z) $G
 //
 // Surface/formula:
 //   comp_cat_con_func(F)[G] = G o F
-//   : (Y -> Z) -> (X -> Z).
+//   : (Y ⊢ Z) ⊢ (X ⊢ Z).
 symbol comp_cat_con_func [X Y Z : Cat]
   (F : τ (Functor X Y))
   : τ (Functor (Functor_cat Y Z) (Functor_cat X Z));
@@ -747,9 +761,9 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
     hom_precomp_func(f)(g)= g ∘ f
 
   `hom_int(F)` is the internalized functorial package
-  A^op -> (B -> Cat). Its surface reading is:
+  A^op ⊢ (B ⊢ Cat). Its surface reading is:
 
-    W :^n A^op |- y :^n B |- Hom_A(W,y)
+    W :^n A^op ; 1[W] ⊢ (y :^n B ; 1[y] ⊢ Hom_A(W,y))
 */
 injective symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
@@ -766,19 +780,19 @@ rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
 
   Mathematical notation:
     hom_postcomp_tele_func(F,W,X,Y)
-      : Hom_B(X,Y) ⟶ (Hom_A(W,F[X]) ⟶ Hom_A(W,F[Y]))
+      : Hom_B(X,Y) ⊢ (Hom_A(W,F[X]) ⊢ Hom_A(W,F[Y]))
 
     hom_postcomp_func(F,W,X,Y,f)[g] = F[f] ∘ g
 
     hom_postcomp_fapp1_func(F,W,X,Y,f,g,h)
-      : Hom(g,h) ⟶ Hom(F[f] ∘ g, F[f] ∘ h)
+      : Hom(g,h) ⊢ Hom(F[f] ∘ g, F[f] ∘ h)
 
   Faithful surface syntax:
     Hom_A(W,F[-])[f](g)
 
   This is the functorial-in-f head for postcomposition. It keeps the arrow
-  f : X ⟶ Y visible long enough to expose the whole functor
-  Hom_A(W,F[X]) ⟶ Hom_A(W,F[Y]), rather than capping immediately at a
+  f : X ->^B Y visible long enough to expose the whole functor
+  Hom_A(W,F[X]) ⊢ Hom_A(W,F[Y]), rather than capping immediately at a
   single g.
 */
 symbol hom_postcomp_tele_func [A B : Cat]
@@ -868,18 +882,18 @@ rule @hom_postcomp_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G
 
   Mathematical notation:
     hom_precomp_func(A,X,Y,Z,f)
-      : Hom_A(Y,Z) ⟶ Hom_A(X,Z)
+      : Hom_A(Y,Z) ⊢ Hom_A(X,Z)
 
     hom_precomp_func(f)[g] = g ∘ f
 
     hom_precomp_fapp1_func(f,g,h)
-      : Hom(g,h) ⟶ Hom(g ∘ f,h ∘ f)
+      : Hom(g,h) ⊢ Hom(g ∘ f,h ∘ f)
 
   Faithful surface syntax:
     Hom_A(-,Z)[f](g)
 
-  This is the represented-object action of hom_int. For f : X ⟶ Y, the
-  component at Z sends a map g : Y ⟶ Z to g ∘ f.
+  This is the represented-object action of hom_int. For f : X ->^A Y, the
+  component at Z sends a map g : Y ->^A Z to g ∘ f.
 */
 symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
   (f : τ (Hom A X Y))
@@ -931,7 +945,7 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
 // Internalized hom classifier.
 //
 // Surface/formula:
-//   hom_int(F) : A^op -> (B -> Cat)
+//   hom_int(F) : A^op ⊢ (B ⊢ Cat)
 //   hom_int(F)[W][y] = Hom_A(W,F[y]).
 injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat A) (Catd_cat B));
@@ -1048,7 +1062,7 @@ rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
     Hom_{A x B}((x,u),(y,v))      = Hom_A(x,y) x Hom_B(u,v)
     id_{(x,u)}                    = (id_x,id_u)
     (g1,g2) o (f1,f2)             = (g1 o f1, g2 o f2)
-    X -> (A x B)                  = (X -> A) x (X -> B)
+    X ⊢ (A x B)                  = (X ⊢ A) x (X ⊢ B)
 
   Product-valued functors are represented by the product normal form above.
   Projection computation is attached to stable projection functor heads and to
@@ -1268,8 +1282,8 @@ symbol Product_pair_tele_func [A B : Cat]
   Ordinary transfor/natural-transformation category.
 
   Surface/formula:
-    Transf_cat(F,G) = F ⇒ G
-    Transf(F,G)     = Obj(F ⇒ G)
+    Transf_cat(F,G) = F => G
+    Transf(F,G)     = Obj(F => G)
 
   For Cat-valued functors this reduces to the displayed-family category:
     Transf_cat(K,Cat,E,D) = Functord_cat(E,D).
@@ -1307,8 +1321,8 @@ assert [K : Cat] (E D : τ (Catd K)) ⊢
 
 /*
   Mathematical notation:
-    ϵ : F ⇒ G
-    tapp0_func(F,G,Y)         : Transf(F,G) → Hom_B(F[Y],G[Y])
+    ϵ : F => G
+    tapp0_func(F,G,Y)         : Transf(F,G) ⊢ Hom_B(F[Y],G[Y])
     ϵ[Y]                      = tapp0_fapp0 Y ϵ
     (η ∘ ϵ)[Y]                = η[Y] ∘ ϵ[Y]
 */
@@ -1361,7 +1375,7 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
 // Component of `hom_int` along its contravariant represented-object argument.
-// For f : X -> Y, the displayed functor Hom(Y,F-) -> Hom(X,F-) is
+// For f : X ->^A Y, the displayed functor Hom(Y,F-) ⊢ Hom(X,F-) is
 // precomposition by f.
 rule @tapp0_fapp0
       $B
@@ -1389,7 +1403,7 @@ assert [A B : Cat] (F : τ (Functor B A))
 // yet.
 //
 // Surface/formula:
-//   tapp1_fapp0(ϵ,f) : F[X] -> G[Y]
+//   tapp1_fapp0(ϵ,f) : F[X] ->^B G[Y]
 //
 // The intended computation is the projected endpoint of
 // `tapp1_int_func_transf`: evaluate the internal action at ϵ, project the
@@ -1405,7 +1419,7 @@ symbol tapp1_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
 // Functor-level off-diagonal ordinary transfor component.
 //
 // Surface/formula:
-//   tapp1_func(ϵ,X,Y) : Hom_A(X,Y) -> Hom_B(F[X],G[Y])
+//   tapp1_func(ϵ,X,Y) : Hom_A(X,Y) ⊢ Hom_B(F[X],G[Y])
 //   tapp1_func(ϵ,X,Y)[f] = tapp1_fapp0(ϵ,f).
 symbol tapp1_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π [X Y : τ (Obj A)],
@@ -1438,13 +1452,13 @@ assert [X A B : Cat]
 
   Mathematical notation:
     Const_transf_func(K,A,x,y)
-      : Hom_A(x,y) ⟶ Transf(const x,const y)
+      : Hom_A(x,y) ⊢ Transf(const x,const y)
 
     Const_transf(p)[k] = p
     Const_transf(p)[q] = p
 
   Faithful surface syntax:
-    k :^n K ⊢ p : x ⟶ y
+    k :^n K ; 1[k] ⊢ (p : x ->^A y)
 
   The component and off-diagonal action are constant in the K-variable. This
   is the transfor-level counterpart of Const_func.
@@ -1506,14 +1520,14 @@ assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
 
   Mathematical notation:
     comp_cat_cov_fapp1_func(G)
-      : Transf(F,H) ⟶ Transf(G ∘ F, G ∘ H)
+      : Transf(F,H) ⊢ Transf(G ∘ F, G ∘ H)
 
     comp_cat_cov_transf(G,eta) = G eta
     comp_cat_cov_transf(G,eta)[i] = G[eta[i]]
 
   Faithful surface syntax:
-    eta : F ⇒ H
-    G eta : G ∘ F ⇒ G ∘ H
+    eta : F => H
+    G eta : G ∘ F => G ∘ H
 
   The name follows the ordinary `comp_cat_cov_func(G)` object action: the
   functor argument varies covariantly in the slot being postcomposed by G.
@@ -1672,17 +1686,17 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
 
   Mathematical notation:
     comp_cat_cov_func_func[X,Y,Z]
-      : (Y ⟶ Z) ⟶ ((X ⟶ Y) ⟶ (X ⟶ Z))
+      : (Y ⊢ Z) ⊢ ((X ⊢ Y) ⊢ (X ⊢ Z))
 
     comp_cat_cov_func_func_transf(eta)
-      : (G ∘ -) ⇒ (H ∘ -)
+      : (G ∘ -) => (H ∘ -)
 
     comp_cat_cov_func_func_transf(eta)[F]
-      = eta ∘ F : G ∘ F ⇒ H ∘ F.
+      = eta ∘ F : G ∘ F => H ∘ F.
 
   Faithful surface syntax:
-    eta : G ⇒ H
-    eta ∘ F : G ∘ F ⇒ H ∘ F
+    eta : G => H
+    eta ∘ F : G ∘ F => H ∘ F
 
   Its object component at F is precomposition of eta by F, implemented by
   `comp_cat_con_transf(F,eta)`.
@@ -1718,14 +1732,14 @@ rule @fapp1_fapp0 _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H $eta
 
   Mathematical notation:
     comp_cat_con_fapp1_func(F)
-      : Transf(G,H) ⟶ Transf(G ∘ F,H ∘ F)
+      : Transf(G,H) ⊢ Transf(G ∘ F,H ∘ F)
 
     comp_cat_con_transf(F,eta) = eta ∘ F
     comp_cat_con_transf(F,eta)[i] = eta[F[i]]
 
   Faithful surface syntax:
-    eta : G ⇒ H
-    eta ∘ F : G ∘ F ⇒ H ∘ F
+    eta : G => H
+    eta ∘ F : G ∘ F => H ∘ F
 */
 symbol comp_cat_con_fapp1_func [X Y Z : Cat]
   (F : τ (Functor X Y))
@@ -1749,9 +1763,9 @@ symbol comp_cat_con_transf [X Y Z : Cat]
 // horizontal composite `(H alpha) ∘ (eta F)`.
 //
 // Mathematical notation:
-//   eta : G ⇒ H, alpha : F ⇒ K
+//   eta : G => H, alpha : F => K
 //   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
-//     : G ∘ F ⇒ H ∘ K
+//     : G ∘ F => H ∘ K
 //   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
 //     = (H alpha) ∘ (eta F).
 symbol comp_cat_cov_func_func_tapp1_func [X Y Z : Cat]
@@ -2014,8 +2028,8 @@ assert [X A B : Cat]
 // cut elimination.
 //
 // Surface/formula:
-//   G[g] o epsilon[f] -> epsilon[g o f]
-//   epsilon[f] o F[g] -> epsilon[f o g].
+//   G[g] o epsilon[f] ↪ epsilon[g o f]
+//   epsilon[f] o F[g] ↪ epsilon[f o g].
 rule comp_fapp0
       (@fapp1_fapp0 $A $B $G $Y $Z $g)
       (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
@@ -2037,8 +2051,8 @@ unif_rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
 // fold to the off-diagonal component at the base arrow.
 //
 // Surface/formula:
-//   D[p](eta[x](u)) -> eta[p](u)
-//   eta[y](E[p](u)) -> eta[p](u).
+//   D[p](eta[x](u)) ↪ eta[p](u)
+//   eta[y](E[p](u)) ↪ eta[p](u).
 //
 // Keep the outer `fapp0` source/target categories implicit. The explicit
 // arguments below are the stable ordinary action/component heads themselves,
@@ -2065,7 +2079,7 @@ rule fapp0
       : Product_cat_func[A] => Product_cat_func[A']
 
     Product_cat_fapp1_tapp0_func(G,B)
-      = G * 1_B : A x B -> A' x B
+      = G * 1_B : A x B ⊢ A' x B
 
     (G * 1_B)[(x,y)] = (G[x],y)
     (G * 1_B)[(p,q)] = (G[p],q)
@@ -2239,11 +2253,11 @@ assert [A A' B : Cat] (G : τ (Functor A A')) ⊢
   Product evaluation: apply a functor to an object.
 
   Mathematical notation:
-    Eval_func(A,B) : (A -> B) x A -> B
+    Eval_func(A,B) : (A ⊢ B) x A ⊢ B
     Eval_func(A,B)[(F,x)] = F[x]
 
     Eval_fapp1_func(A,B,F,G,x,y)
-      : (F => G) x Hom_A(x,y) -> Hom_B(F[x],G[y])
+      : (F => G) x Hom_A(x,y) ⊢ Hom_B(F[x],G[y])
     Eval_fapp1_func(A,B,F,G,x,y)[(eta,p)] = eta[p]
 
   Faithful surface syntax:
@@ -2308,7 +2322,7 @@ assert [A B : Cat]
   Fixed-point section for evaluation.
 
   Mathematical notation:
-    Eval_at_func(A,B,x) : (A -> B) -> (A -> B) x A
+    Eval_at_func(A,B,x) : (A ⊢ B) ⊢ (A ⊢ B) x A
     Eval_at_func(A,B,x)[F] = (F,x)
     Eval_func(A,B) o Eval_at_func(A,B,x) = fapp0_func(A,B,x)
 
@@ -2499,14 +2513,14 @@ assert [A B C : Cat]
   More-internal ordinary hom-action.
 
   This ports the settled v2 core without also committing to the later
-  hom-action packaging heads.  The functor sends a transfor ϵ : F ⇒ G to the
+  hom-action packaging heads.  The functor sends a transfor ϵ : F => G to the
   internalized action
 
-    hom_int(id_A) ⇒ hom_int(G) ∘ F^op.
+    hom_int(id_A) => hom_int(G) ∘ F^op.
 
   Surface/formula:
     tapp1_int_func_transf(F,G)[ϵ]
-      : Hom_A(~,—) ⇒ Hom_B(F^op ~,G —)
+      : Hom_A(~,—) => Hom_B(F^op ~,G —)
 
     fapp1_int_transf(F)
       = tapp1_int_func_transf(F,F)[id_F]
@@ -2781,7 +2795,7 @@ assert [A B : Cat] (F : τ (Functor A B)) ⊢
     Terminal_catd(K)          = Const_catd(K,Terminal_cat)
     Op_catd(E)[k]             = E[k]^op
     Pi_cat(E)                 = Π k :^n K, E[k]
-                                = (k :^n K) → 1 ⟶ E[k]
+                                = k :^n K ; 1[k] ⊢ E[k]
     piapp0(s,k)               = s[k]
 */
 // Fixed-base notation: fibre of a directed family.
@@ -2794,7 +2808,7 @@ symbol Fibre_cat [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) : Cat
 // Fixed-base notation: reindex a displayed Cat-valued family along a functor.
 //
 // Surface/formula:
-//   F^*E : A -> Cat
+//   F^*E : A ⊢ Cat
 //   (F^*E)[a] = E[F[a]]
 symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
   : τ (Catd A)
@@ -2804,7 +2818,7 @@ symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
 // Cat-valued families.
 //
 // Surface/formula:
-//   E[p] : E[x] -> E[y]
+//   E[p] : E[x] ⊢ E[y]
 //   catd_transport_func(E,p) = fapp1_fapp0(E,p)
 symbol catd_transport_func [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
@@ -2815,7 +2829,7 @@ symbol catd_transport_func [K : Cat] (E : τ (Catd K))
 // Strict object transport, oriented as cut elimination.
 //
 // Surface/formula:
-//   E[q](E[p](u)) -> E[q o p](u).
+//   E[q](E[p](u)) ↪ E[q o p](u).
 //
 // Keep the outer `fapp0` source/target categories implicit. The explicit
 // arguments below are the stable functor-action heads themselves, not reducible
@@ -2837,7 +2851,7 @@ rule fapp0
 // directed families along a base functor.
 //
 // Surface/formula:
-//   Pullback_catd_func(F) : (B -> Cat) -> (A -> Cat)
+//   Pullback_catd_func(F) : (B ⊢ Cat) ⊢ (A ⊢ Cat)
 //   Pullback_catd_func(F)[E] = F^*E
 //
 // The general `Pullback_catd` remains a composition definition; this package
@@ -2980,7 +2994,7 @@ rule @tapp0_fapp0
 //
 // Surface/formula:
 //   Pi_cat(E) = Π k :^n K, E[k]
-//             = (k :^n K) → 1 ⟶ E[k]
+//             = k :^n K ; 1[k] ⊢ E[k]
 //   section object s has components s[k] : E[k].
 symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat
 ≔ @Functord_cat K (@Const_catd K Terminal_cat) E;
@@ -2992,7 +3006,7 @@ rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
 //
 // Surface/formula:
 //   Pi_func(K)[E] = Π k :^n K, E[k].
-//                 = (k :^n K) → 1 ⟶ E[k].
+//                 = k :^n K ; 1[k] ⊢ E[k].
 injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
@@ -3013,7 +3027,7 @@ rule @fapp1_fapp0
 // Internalized-x layer: global natural package for Pi over varying bases.
 //
 // Surface/formula:
-//   Pi_int_funcd : (K :^n Cat^op) -> (K -> Cat) -> Cat
+//   Pi_int_funcd : K :^n Cat^op ; (K ⊢ Cat) ⊢ Cat
 //   Pi_int_funcd[K] = Pi_func(K)
 //
 // The base is Op(Cat) because section categories pull back contravariantly
@@ -3036,8 +3050,8 @@ rule @tapp0_fapp0
 // back along a Cat-valued contravariant base functor.
 //
 // Surface/formula:
-//   for G : K -> Cat^op,
-//   Pi_pullback_funcd(G) : (x :^n K) -> (G[x] -> Cat) -> Cat
+//   for G : K ⊢ Cat^op,
+//   Pi_pullback_funcd(G) : x :^n K ; (G[x] ⊢ Cat) ⊢ Cat
 //   Pi_pullback_funcd(G)[x] = Pi_func(G[x])
 //   Sigma_catd_transport_func(Pi_pullback_funcd(G),p,E)
 //     = section_pullback_func(G[p],E)
@@ -3072,7 +3086,7 @@ rule @tapp0_fapp0
 // Fixed-base layer: functorial section evaluation at k.
 //
 // Surface/formula:
-//   piapp0_func(E,k) : (Π i :^n K, E[i]) -> E[k].
+//   piapp0_func(E,k) : (Π i :^n K, E[i]) ⊢ E[k].
 symbol piapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Pi_cat E) (Fibre_cat E k))
 ≔ comp_cat_fapp0
@@ -3092,7 +3106,7 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
 // Fixed-base covariant transport from a fibre object.
 //
 // Surface/formula:
-//   fib_cov_tapp0_func(E,x,u,y) : Hom_K(x,y) -> E[y]
+//   fib_cov_tapp0_func(E,x,u,y) : Hom_K(x,y) ⊢ E[y]
 //   fib_cov_tapp0_func(E,x,u,y)[f] = E[f](u).
 symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
   [x y : τ (Obj K)]
@@ -3106,7 +3120,7 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
 // old one-family endpoint is the identity-family specialization.
 //
 // Surface/formula:
-//   homd_(FF,x,u,y,v)[f : x -> y]
+//   homd_(FF,x,u,y,v)[f : x ->^Z y]
 //     = Hom_{E[y]}(FF[y](v), E[f](u)).
 injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
@@ -3274,7 +3288,7 @@ rule @comp_fapp0
 // Fixed-base layer: first projection from a total category.
 //
 // Surface/formula:
-//   Sigma_proj1_func(E) : Sigma_cat(E) -> K
+//   Sigma_proj1_func(E) : Sigma_cat(E) ⊢ K
 //   Sigma_proj1_func(E)[(k,u)] = k.
 injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
   : τ (Functor (Sigma_cat E) K);
@@ -3313,7 +3327,7 @@ rule @Functord_cat
 // Fixed-base layer: total map induced by a displayed functor.
 //
 // Surface/formula:
-//   sigma_map_func(η) : Sigma_cat(E) -> Sigma_cat(D)
+//   sigma_map_func(η) : Sigma_cat(E) ⊢ Sigma_cat(D)
 //   sigma_map_func(η)[(k,u)] = (k,η[k](u)).
 injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
@@ -3337,7 +3351,7 @@ rule @comp_cat_fapp0 _ _ _
 // Internalized-x prerequisite: canonical total arrow over a base arrow.
 //
 // Surface/formula:
-//   sigma_transport_arrow(E,p,u) : (x,u) -> (y,E[p](u))
+//   sigma_transport_arrow(E,p,u) : (x,u) ->^Sigma_cat(E) (y,E[p](u))
 //   in Sigma_cat(E) = Σ k :^n K, E[k].
 // Canonical total arrow over a base arrow, defined by the smaller Sigma-arrow
 // constructor pairing the base arrow with the identity fibre arrow at the
@@ -3418,8 +3432,8 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
 // by a displayed functor into the constant category universe.
 //
 // Surface/formula:
-//   if FF : (k :^n K) → R[k] ⟶ Cat, then
-//   Sigma_catd_functord_catd(FF) : (Σ k :^n K, R[k]) → Cat
+//   if FF : k :^n K ; R[k] ⊢ Cat, then
+//   Sigma_catd_functord_catd(FF) : (Σ k :^n K, R[k]) ⊢ Cat
 //   Sigma_catd_functord_catd(FF)[(k,r)] = FF[k][r].
 symbol Sigma_catd_functord_catd [K : Cat] [R : τ (Catd K)]
   (FF : τ (Functord R (@Const_catd K Cat_cat)))
@@ -3441,7 +3455,7 @@ rule @fapp0
 //
 // Surface/formula:
 //   Sigma_catd_transport_func(FF,p,r)
-//     : FF[x][r] -> FF[y][R[p](r)]
+//     : FF[x][r] ⊢ FF[y][R[p](r)]
 //   (Sigma_catd_functord_catd(FF))[sigma_transport_arrow(R,p,r)]
 //     = Sigma_catd_transport_func(FF,p,r).
 //
@@ -3499,10 +3513,10 @@ constant symbol Sigma_transfd_funcd [K : Cat] [R : τ (Catd K)]
   The `_func` suffix is reserved for functor-valued constructor packages.
 
   Surface/formula:
-    Functor_catd(M,N)[k]       = M[k^-] ⟶_[k] N[k]
+    Functor_catd(M,N)[k]       = M[k^-] ⊢_[k] N[k]
     Functor_catd_func(K)[M][N] = Functor_catd(M,N)
-    Hom_catd(E,X,Y)[k]         = Hom_{E[k]}(X[k^-],Y[k])
-    Transf_catd(M,N,FF,GG)[k]  = FF[k^-] ⇒_[k] GG[k]
+    Hom_catd(E,X,Y)[k]         = X[k^-] ->_[k]^E Y[k]
+    Transf_catd(M,N,FF,GG)[k]  = FF[k^-] =>_[k] GG[k]
 */
 
 injective symbol Functor_catd [K : Cat]
@@ -3534,7 +3548,7 @@ rule @fapp0 _ _ (@Functor_catd_fapp0_func $K $A) $B
 // Mixed-variance hom family for two sections of a displayed family.
 //
 // Surface/formula:
-//   Hom_catd(E,X,Y)[k] = Hom_{E[k]}(X[k^-],Y[k]).
+//   Hom_catd(E,X,Y)[k] = X[k^-] ->_[k]^E Y[k].
 injective symbol Hom_catd [K : Cat]
   (E : τ (Catd K))
   (X : τ (Obj (Pi_cat (Op_catd E))))
@@ -3550,7 +3564,7 @@ rule @fapp0 $K Cat_cat (@Hom_catd $K $E $X $Y) $k
 // Mixed-variance transfor family for two displayed functors.
 //
 // Surface/formula:
-//   Transf_catd(M,N,FF,GG)[k] = FF[k^-] ⇒_[k] GG[k].
+//   Transf_catd(M,N,FF,GG)[k] = FF[k^-] =>_[k] GG[k].
 //
 // Since `Transf_catd(M,N,FF,GG)` is already a Cat-valued family, sections of
 // mixed-variance transfors are expressed by `Pi_cat (Transf_catd M N FF GG)`.
@@ -3605,11 +3619,11 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
 // Stable representable transport/precomposition head.
 //
 // Mathematical notation:
-//   Rep_transport(p) : Rep_Z(y) -> Rep_Z(x)
+//   Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
 //   Rep_transport(p)[z][q] = q o p.
 //
 // Faithful surface syntax:
-//   (q : y -> z) |-> q o p.
+//   (q : y ->^Z z) |-> q o p.
 injective symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x));
@@ -3653,9 +3667,9 @@ symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
 // Internalized-x layer: PathOut as a contravariant functor of the source.
 //
 // Surface/formula:
-//   PathOut_cat_func(Z) : Z^op -> Cat
+//   PathOut_cat_func(Z) : Z^op ⊢ Cat
 //   PathOut_cat_func(Z)[x] = PathOut_Z(x)
-//   PathOut_cat_func(Z)[p : x -> y] : PathOut_Z(y) -> PathOut_Z(x).
+//   PathOut_cat_func(Z)[p : x ->^Z y] : PathOut_Z(y) ⊢ PathOut_Z(x).
 symbol PathOut_cat_func [Z : Cat]
   : τ (Functor (Op_cat Z) Cat_cat)
 ≔ @comp_cat_fapp0
@@ -3669,7 +3683,7 @@ symbol PathOut_cat_func [Z : Cat]
 //
 // Surface/formula:
 //   PathOut_transport_func(p) = PathOut_cat_func(Z)[p]
-//   : PathOut_Z(y) -> PathOut_Z(x)
+//   : PathOut_Z(y) ⊢ PathOut_Z(x)
 //   and PathOut_transport_func(p)[(y,id_y)] = (y,p).
 symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
@@ -3686,7 +3700,7 @@ symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
 //
 // Surface/formula:
 //   PathOutMotives_Z[x] = Catd(PathOut_Z(x))
-//   i.e. a fibre object E is a motive E : PathOut_Z(x) -> Cat.
+//   i.e. a fibre object E is a motive E : PathOut_Z(x) ⊢ Cat.
 symbol PathOutMotives_catd [Z : Cat]
   : τ (Catd Z)
 ≔ @comp_cat_fapp0
@@ -3699,7 +3713,7 @@ symbol PathOutMotives_catd [Z : Cat]
 // Internalized-x target layer: Pi over the moving PathOut category.
 //
 // Surface/formula:
-//   PathOutPi_Z : (x :^n Z) -> Catd(PathOut_Z(x)) -> Cat
+//   PathOutPi_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
 //   PathOutPi_Z[x][E] = Π q :^n PathOut_Z(x), E[q].
 //
 // This is deliberately the semantic pullback of `Pi_int_funcd` along
@@ -3764,7 +3778,7 @@ symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
 // evaluation.
 //
 // Surface/formula:
-//   PathOutReflEval_Z : (x :^n Z) -> Catd(PathOut_Z(x)) -> Cat
+//   PathOutReflEval_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
 //   PathOutReflEval_Z[x][E] = E[(x,id_x)].
 constant symbol PathOutReflEval_funcd [Z : Cat]
   : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
@@ -3781,7 +3795,7 @@ rule @tapp0_fapp0
 // Reflexive-to-path arrow in the outgoing-path category.
 //
 // Surface/formula:
-//   rho_{x,y,p} : (x,id_x) -> (y,p) in PathOut_Z(x).
+//   rho_{x,y,p} : (x,id_x) ->^PathOut_Z(x) (y,p).
 //
 // This is the canonical Sigma transport arrow for Rep_Z(x). Its endpoint
 // reduces by Rep_Z(x)[p](id_x) = p.
@@ -3802,7 +3816,7 @@ symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
 // Fixed-x source layer: motive transport along `rho_{x,y,p}`.
 //
 // Surface/formula:
-//   E[rho_{x,y,p}] : E[(x,id_x)] -> E[(y,p)].
+//   E[rho_{x,y,p}] : E[(x,id_x)] ⊢ E[(y,p)].
 symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -3823,7 +3837,7 @@ symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
 // Surface/formula:
 //   p_*E = PathOutMotives_Z[p](E)
 //        = Pullback_catd(E, PathOut_transport_func(p))
-//   so p_*E : PathOut_Z(y) -> Cat.
+//   so p_*E : PathOut_Z(y) ⊢ Cat.
 symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -3844,7 +3858,7 @@ symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
 // Σ x :^n Z, Catd(PathOut_Z(x)).
 //
 // Surface/formula:
-//   (x,E) -> (y,p_*E), lying over p : x -> y.
+//   (x,E) ->^Σ (y,p_*E), lying over p : x ->^Z y.
 symbol pathout_motive_transport_arrow [Z : Cat]
   [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
@@ -3910,7 +3924,7 @@ symbol PathInd_tgt_catd [Z : Cat] (x : τ (Obj Z))
 // Fixed-x internal layer: component functor of the fixed-source eliminator.
 //
 // Surface/formula:
-//   path_ind_func_fapp0(Z,x,E) : E[(x,id_x)] -> Π q, E[q]
+//   path_ind_func_fapp0(Z,x,E) : E[(x,id_x)] ⊢ Π q, E[q]
 //   path_ind_func_fapp0(Z,x,E)[u] = path_ind_sec(Z,x,E,u).
 symbol path_ind_func_fapp0 [Z : Cat] (x : τ (Obj Z))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -3925,7 +3939,7 @@ rule @fapp0 _ _ (@path_ind_func_fapp0 $Z $x $E) $u
 //
 // Surface/formula:
 //   PathInd_func(Z,x) :
-//     (E :^n Catd(PathOut_Z(x))) -> E[(x,id_x)] -> Π q, E[q].
+//     E :^n Catd(PathOut_Z(x)) ; E[(x,id_x)] ⊢ Π q, E[q].
 constant symbol PathInd_func [Z : Cat] (x : τ (Obj Z))
   : τ (Functord
       (@PathInd_src_catd Z x)
@@ -3945,7 +3959,7 @@ rule @tapp0_fapp0
 //
 // Surface/formula:
 //   PathInd_transfd(Z) :
-//     (x :^n Z) -> PathOutReflEval_Z[x] => PathOutPi_Z[x]
+//     x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x]
 //   PathInd_transfd(Z)[x] = PathInd_func(Z,x).
 //
 // Status/architecture note:
@@ -3953,7 +3967,7 @@ rule @tapp0_fapp0
 //   internalizes naturality in the source object x; we should not re-express
 //   that naturality as an external hand-written square for the core milestone.
 //   What downstream regressions inspect are the induced source/target
-//   transports along p : x -> y:
+//   transports along p : x ->^Z y:
 //
 //     source: E[rho_{x,y,p}]
 //     target: section_pullback(PathOut_transport(p),E)
@@ -3989,7 +4003,7 @@ symbol PathIndSrc_catd [Z : Cat]
 //
 // Surface/formula:
 //   PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
-//   : E[(x,id_x)] -> (p_*E)[(y,id_y)] = E[(y,p)].
+//   : E[(x,id_x)] ⊢ (p_*E)[(y,id_y)] = E[(y,p)].
 symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -4005,8 +4019,8 @@ symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
 //
 // Surface/formula:
 //   PathInd_funcd(Z) :
-//     (x,E :^n Σ x :^n Z, Catd(PathOut_Z(x))) ->
-//       E[(x,id_x)] -> Π q :^n PathOut_Z(x), E[q]
+//     x,E :^n Σ x :^n Z, Catd(PathOut_Z(x)) ;
+//       E[(x,id_x)] ⊢ Π q :^n PathOut_Z(x), E[q]
 //   PathInd_funcd(Z)[(x,E)][u] = path_ind_sec(Z,x,E,u).
 //
 // This is a derived presentation, not the primitive theorem. It is used to
@@ -4067,7 +4081,7 @@ assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
 // source x.
 //
 // Surface/formula:
-//   CompTarget_Z(x)[y] = Rep_Z(y) -> Rep_Z(x)
+//   CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
 //                      = Functord_cat(Rep_Z(y),Rep_Z(x)).
 //
 // This is a semantic `hom_con` alias, not a primitive stable family head. The
@@ -4085,8 +4099,8 @@ injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
 // `CompTarget_catd`.
 //
 // Surface/formula:
-//   CompTarget_Z(x)[p : a -> b]
-//     : (Rep_Z(a) -> Rep_Z(x)) -> (Rep_Z(b) -> Rep_Z(x)).
+//   CompTarget_Z(x)[p : a ->^Z b]
+//     : (Rep_Z(a) ⊢ Rep_Z(x)) ⊢ (Rep_Z(b) ⊢ Rep_Z(x)).
 //
 // Its endpoint type uses canonical `Functord_cat` forms rather than reducible
 // `Fibre_cat` wrappers, but its body still goes through `CompTarget_catd`
@@ -4107,10 +4121,10 @@ symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
 // Transitivity benchmark layer: composition motive over PathOut_Z(x).
 //
 // Surface/formula:
-//   CompMotive_Z(x)[(y,p)] = Rep_Z(y) -> Rep_Z(x).
+//   CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x).
 //
 // This is the pullback of `CompTarget_Z(x)` along the Sigma projection
-// PathOut_Z(x) -> Z.
+// PathOut_Z(x) ⊢ Z.
 symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
   : τ (Catd (@PathOut_cat Z x))
 ≔ @Sigma_proj1_pullback_catd
@@ -4131,7 +4145,7 @@ symbol Edge_catd_func [Z : Cat]
 // Internalized classifier: presheaf category over each fibre of a family.
 //
 // Surface/formula:
-//   Presheaf_catd(K)[A][k] = A[k] ⟶ Cat.
+//   Presheaf_catd(K)[A][k] = A[k] ⊢ Cat.
 symbol Presheaf_catd_func (K : Cat)
   : τ (Functor
       (Op_cat (Catd_cat (Op_cat K)))
@@ -4143,7 +4157,7 @@ symbol Presheaf_catd_func (K : Cat)
 // Internalized classifier: hom-presheaf family for a represented object.
 //
 // Surface/formula:
-//   HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op ⟶ Cat.
+//   HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op ⊢ Cat.
 symbol HomPresheaf_catd_func [Z : Cat]
   : τ (Functor Z (Catd_cat (Op_cat Z)))
 ≔ comp_cat_fapp0
@@ -4161,7 +4175,7 @@ symbol HomPresheaf_catd_func [Z : Cat]
 
     Edge_Z(x)(y)              = Hom_Z(x,y)^op
     HomPsh_Z(x)(y)            = Functor_cat(Hom_Z(x,y)^op, Cat)
-    HomdTargetSection_E(x)(y) = E[y^-] ⟶_[y] HomPsh_Z(x)[y]
+    HomdTargetSection_E(x)(y) = E[y^-] ⊢_[y] HomPsh_Z(x)[y]
     HomdTarget_E[x]           = Π y :^n Z^op, HomdTargetSection_E(x)[y]
 
   `Homd_target_section_catd` and `Homd_target_catd` name these target-family
@@ -4183,7 +4197,7 @@ symbol Homd_target_section_catd [Z : Cat] (E : τ (Catd Z))
 //
 // Surface/formula:
 //   HomdTarget_E[x] =
-//     Π y :^n Z^op, E[y^-] ⟶_[y] HomPsh_Z(x)[y].
+//     Π y :^n Z^op, E[y^-] ⊢_[y] HomPsh_Z(x)[y].
 symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
   : τ (Catd Z)
 ≔ comp_cat_fapp0
@@ -4213,15 +4227,14 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
 
     FibCovTarget_E[x]            = Transf_cat(hom_Z(x,-), E)
                                   ≡ Functord_cat(hom_Z(x,-), E)
-    fib_cov_int(E)               : E → FibCovTarget_E
-    fib_cov_src_func(E,x)        : E[x] → FibCovTarget_E[x]
-    fib_cov_transf(E,x,u)        : hom_Z(x,-) ⇒ E
+    fib_cov_int(E)               : E ⊢ FibCovTarget_E
+    fib_cov_src_func(E,x)        : E[x] ⊢ FibCovTarget_E[x]
+    fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
                                   ≡ Functord(hom_Z(x,-), E)
-    fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) → E[y]
+    fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) ⊢ E[y]
     fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
 
-  Locally, `→` denotes an ordinary functor and `⇒` denotes the mathematical
-  transfor/natural-transformation reading. In the formal v3.2 normal form, a
+  In the formal v3.2 normal form, a
   Cat-valued transfor is a displayed functor: `Transf_cat K Cat_cat F E`
   reduces to `Functord_cat K F E`. The declarations below keep the conceptual
   `FibCov_target_catd` family visible; assertions document the reduced heads.
@@ -4245,7 +4258,7 @@ symbol FibCov_target_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K)
 // Internalized covariant fibre transport package.
 //
 // Surface/formula:
-//   fib_cov_int(E)[x](u) : Rep_K(x) -> E
+//   fib_cov_int(E)[x](u) : Rep_K(x) ⊢ E
 //   fib_cov_int(E)[x](u)[y][f] = E[f](u).
 constant symbol fib_cov_int : Π [K : Cat], Π (E : τ (Catd K)),
   τ (Functord E (@FibCov_target_catd K E));
@@ -4326,7 +4339,7 @@ assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
 //
 // Surface/formula:
 //   path_comp_sec(x) :
-//     (p :^n Rep_Z(x)[y]) -> Rep_Z(y) -> Rep_Z(x)
+//     p :^n Rep_Z(x)[y] ; Rep_Z(y) ⊢ Rep_Z(x)
 //   path_comp_sec(x)[p][z][q] = q ∘ p.
 //
 // This is the reduced normal form of fixed-x path induction on the composition
@@ -4343,7 +4356,7 @@ symbol path_comp_sec [Z : Cat] (x : τ (Obj Z))
 // precomposition.
 //
 // Surface/formula:
-//   path_comp_func(p) : Rep_Z(y) -> Rep_Z(x)
+//   path_comp_func(p) : Rep_Z(y) ⊢ Rep_Z(x)
 //   path_comp_func(p)[z][q] = q ∘ p.
 symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
@@ -4496,10 +4509,10 @@ assert [Z : Cat] (x y z : τ (Obj Z))
 /*
   Internal dependent-hom projection cascade:
 
-    homd_int(FF) at x               -> homd_src_func(FF,x)
-    homd_src_func(FF,x) at u        -> homd_src_sec(FF,x,u)
-    homd_src_sec(FF,x,u) at y       -> homd_tgt_func(FF,x,u,y)
-    homd_tgt_func(FF,x,u,y) at v    -> homd_(FF,x,u,y,v)
+    homd_int(FF) at x               ↪ homd_src_func(FF,x)
+    homd_src_func(FF,x) at u        ↪ homd_src_sec(FF,x,u)
+    homd_src_sec(FF,x,u) at y       ↪ homd_tgt_func(FF,x,u,y)
+    homd_tgt_func(FF,x,u,y) at v    ↪ homd_(FF,x,u,y,v)
 
   The identity-specialized compatibility heads from v3.1/v3.2 migration have
   been retired; identity cases are written with `FF := id_funcd E`.
@@ -4509,7 +4522,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
 // object in E, while the probe family D remains internal.
 //
 // Surface/formula:
-//   homd_src_func(FF,x) : E[x]^op ⟶ Π y :^n Z^op, ...
+//   homd_src_func(FF,x) : E[x]^op ⊢ Π y :^n Z^op, ...
 symbol homd_src_func [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -4633,7 +4646,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
 /*
   Mathematical notation:
     tdapp1_int_func_transfd(FF,GG)
-      : Transfd(FF,GG) → Transfd(homd_int(id_E), homd_int(GG) ∘ FF^op)
+      : Transfd(FF,GG) ⊢ Transfd(homd_int(id_E), homd_int(GG) ∘ FF^op)
 
     tdapp1_int_fapp0_transfd(ϵ)
       = the internal displayed hom-action of ϵ
@@ -4643,7 +4656,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
 
   Current laxity architecture:
 
-    internal hom-action  ->  extracted laxity  ->  Sigma action consumes laxity.
+    internal hom-action, then extracted laxity, then Sigma action consumes laxity.
 
   The Sigma-total presentation is the externalization/test surface where a
   laxity cell is visible as a fibre component of a total arrow. It is not the
@@ -4660,7 +4673,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
   Applying this to a canonical/cartesian dependent-hom triangle should expose
   the component
 
-    D[p](FF[x](u)) -> FF[y](E[p](u)).
+    D[p](FF[x](u)) ->^(D[y]) FF[y](E[p](u)).
 
   The active implementation stops at this component-level normal form,
   `fdapp1_int_cell(FF,p,u)`. A future whole-transfor interface
@@ -4732,9 +4745,9 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
 
   Mathematical notation:
 
-    Fibre_func(FF,z)          = FF[z] : E[z] → D[z]
-    tdapp0_func(z)            : Transfd(FF,GG) → Transf(FF[z],GG[z])
-    tdapp0_fapp0(z,ϵ)         = ϵ_z : FF[z] ⇒ GG[z]
+    Fibre_func(FF,z)          = FF[z] : E[z] ⊢ D[z]
+    tdapp0_func(z)            : Transfd(FF,GG) ⊢ Transf(FF[z],GG[z])
+    tdapp0_fapp0(z,ϵ)         = ϵ_z : FF[z] => GG[z]
     Fibre_transf(ϵ,z)         = ϵ_z
     Fibre_transf_app(ϵ,z,u)   = ϵ_z(u)
 
@@ -5072,11 +5085,11 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
 // Fixed-base layer: component of an arrow between sections.
 //
 // Mathematical notation:
-//   pi_hom_fapp0(eta,k) = eta[k] : s[k] -> t[k]
+//   pi_hom_fapp0(eta,k) = eta[k] : s[k] ->^(E[k]) t[k]
 //   for eta : Hom_{Π i :^n K, E[i]}(s,t).
 //
 // Faithful surface syntax:
-//   eta[k] : s[k] -> t[k].
+//   eta[k] : s[k] ->^(E[k]) t[k].
 //
 // This is a semantic definition over the existing displayed component
 // projection. There is intentionally no rewrite rule targeting `piapp0_func`:
@@ -5093,8 +5106,8 @@ symbol pi_hom_fapp0 [K : Cat] [E : τ (Catd K)]
 // hom-action.
 //
 // Surface/formula:
-//   FF[p] : E[x] -> D[y]
-//   for FF : (k :^n K) → E[k] ⟶ D[k] and p : x -> y.
+//   FF[p] : E[x] ⊢ D[y]
+//   for FF : k :^n K ; E[k] ⊢ D[k] and p : x ->^K y.
 symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -5105,7 +5118,7 @@ symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
 // Internalized-x coherence route: first apply FF at x, then transport in D.
 //
 // Surface/formula:
-//   D[p] ∘ FF[x] : E[x] -> D[y].
+//   D[p] ∘ FF[x] : E[x] ⊢ D[y].
 symbol functord_transport_lhs_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -5121,7 +5134,7 @@ symbol functord_transport_lhs_func [K : Cat] [E D : τ (Catd K)]
 // Internalized-x coherence route: first transport in E, then apply FF at y.
 //
 // Surface/formula:
-//   FF[y] ∘ E[p] : E[x] -> D[y].
+//   FF[y] ∘ E[p] : E[x] ⊢ D[y].
 symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -5164,7 +5177,7 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
 //
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,v][p][alpha]
-//     : D[p](FF[x]u) -> FF[y]v.
+//     : D[p](FF[x]u) ->^(D[y]) FF[y]v.
 //
 // Faithful surface syntax:
 //   the Sigma-map fibre component induced by the internal displayed hom-action.
@@ -5249,7 +5262,7 @@ rule @fapp1_fapp0
 // Mathematical notation:
 //   homd_id_src_sec(E,x,u)
 //     = homd_int(id_E)[x](u)
-//     : Π y :^n K^op, E[y^-] ⟶_[y] (Hom_K(x,y)^op ⟶ Cat).
+//     : Π y :^n K^op, E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat).
 //
 // Faithful surface syntax:
 //   Homd_E(x,u,—,—).
@@ -5264,7 +5277,7 @@ symbol homd_id_src_sec [K : Cat] (E : τ (Catd K))
 // Mathematical notation:
 //   homd_ff_src_sec(FF,x,u)
 //     = homd_int(FF)[x](FF[x](u))
-//     : Π y :^n K^op, E[y^-] ⟶_[y] (Hom_K(x,y)^op ⟶ Cat).
+//     : Π y :^n K^op, E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat).
 //
 // Faithful surface syntax:
 //   Homd_D(x,FF[x](u),—,FF[—](—)).
@@ -5283,11 +5296,11 @@ symbol homd_ff_src_sec [K : Cat] [E D : τ (Catd K)]
 //
 // Mathematical notation:
 //   fdapp1_section(FF,x,u) :
-//     homd_int(id_E)[x](u) -> homd_int(FF)[x](FF[x](u)).
+//     homd_int(id_E)[x](u) ->^(HomdTarget_E[x]) homd_int(FF)[x](FF[x](u)).
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u] :
-//     Homd_E(x,u,—,—) -> Homd_D(x,FF[x](u),—,FF[—](—)).
+//     Homd_E(x,u,—,—) ->^(HomdTarget_E[x]) Homd_D(x,FF[x](u),—,FF[—](—)).
 //
 // Further projections at y, at the transported object E[p](u), and at the base
 // arrow p produce the component-level displayed laxity cell.
@@ -5356,7 +5369,7 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 // Mathematical notation:
 //   fdapp1_section(FF,x,u)[y] :
 //     homd_int(id_E)[x](u)[y]
-//       -> homd_int(FF)[x](FF[x](u))[y].
+//       => homd_int(FF)[x](FF[x](u))[y].
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u][y] :
@@ -5364,7 +5377,7 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 //
 // The type is written in the reduced `Transf` form because the next projection
 // consumes it through `tapp0_fapp0`. This still keeps the codomain functor in
-// the canonical `(x -> y)^op -> Cat` form, avoiding the reducible
+// the canonical `Hom_K(x,y)^op ⊢ Cat` form, avoiding the reducible
 // `Fibre_cat(HomPresheaf_Z(x),y)` classifier pipeline.
 symbol fdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -5396,13 +5409,13 @@ rule @tapp0_fapp0
 // Mathematical notation:
 //   fdapp1_section(FF,x,u)[y][v] :
 //     homd_int(id_E)[x](u)[y](v)
-//       -> homd_int(FF)[x](FF[x](u))[y](v).
+//       ->^(HomPsh_Z(x)[y]) homd_int(FF)[x](FF[x](u))[y](v).
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u][y,v] :
 //     Hom_E(E[—](u),v) => Hom_D(D[—](FF[x](u)),FF[y](v)).
 //
-// The ambient category is written directly as `(x -> y)^op -> Cat`, rather
+// The ambient category is written directly as `Hom_K(x,y)^op ⊢ Cat`, rather
 // than through `Fibre_cat(HomPresheaf_Z(x),y)`. This is the canonical endpoint
 // category of the HomPresheaf classifier and avoids making later projections
 // depend on unfolding the whole classifier pipeline.
@@ -5456,7 +5469,7 @@ rule @fapp1_func
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,v][p] :
 //     homd_(id_E,x,u,y,v)[p]
-//       -> homd_(FF,x,FF[x](u),y,v)[p].
+//       ⊢ homd_(FF,x,FF[x](u),y,v)[p].
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u][y,v][p].
@@ -5516,7 +5529,7 @@ rule fapp0
   Full section action over a base arrow.
 
   Mathematical notation:
-    s[f]                  = piapp1_fapp0 s f : E(f)(s[x]) → s[y]
+    s[f]                  = piapp1_fapp0 s f : E(f)(s[x]) ->^(E[y]) s[y]
     piapp1_func(s,x,y)[f] = s[f].
 
   The section action is the terminal-source specialization of the displayed
@@ -5543,7 +5556,7 @@ symbol piapp1_func [K : Cat] (E : τ (Catd K))
 // Capped section action over a base arrow.
 //
 // Surface/formula:
-//   piapp1_fapp0(s,f) = s[f] : E[f](s[x]) -> s[y].
+//   piapp1_fapp0(s,f) = s[f] : E[f](s[x]) ->^(E[y]) s[y].
 symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   [x y : τ (Obj K)]
@@ -5561,7 +5574,7 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
 //
 // Mathematical notation:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
-//     : D[p](FF[x](u)) -> FF[y](E[p](u)).
+//     : D[p](FF[x](u)) ->^(D[y]) FF[y](E[p](u)).
 //
 // Faithful surface syntax:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id).
@@ -5618,19 +5631,19 @@ rule @fdapp1_int_hom_fapp0
   identity-specialized `fdapp1_int_*` extraction path.
 
   Mathematical notation:
-    epsilon : FF ⇒ GG
+    epsilon : FF => GG
     homd_tdapp1_src_sec(FF,GG,x,u)
       = homd_int(GG)[x](FF[x](u))
 
     tdapp1_int_section_arrow(epsilon,x,u)
       : homd_int(id_E)[x](u)
-          ⟶ homd_int(GG)[x](FF[x](u))
+          ->^(HomdTarget_E[x]) homd_int(GG)[x](FF[x](u))
 
     tdapp1_int_cell(epsilon,p,u)
-      : D[p](FF[x](u)) ⟶ GG[y](E[p](u)).
+      : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u)).
 
   Faithful surface syntax:
-    epsilon[p][u] : D[p](FF[x] u) ⟶ GG[y](E[p] u)
+    epsilon[p][u] : D[p](FF[x] u) ->^(D[y]) GG[y](E[p] u)
 
   The rules below project this cell through the same stages as
   `fdapp1_int_*`: section at x,u; target y; fibre object v; base arrow p; then
@@ -5996,21 +6009,21 @@ rule @fdapp1_int_hom_fapp0
 /*
   Generic Sigma/Pi weakening/evaluation helpers.
 
-    sigma_intro_transf(E)             : E → const(ΣE)
-    sigma_intro_tapp0_func(E,k)       : E[k] → ΣE
+    sigma_intro_transf(E)             : E ⊢ const(ΣE)
+    sigma_intro_tapp0_func(E,k)       : E[k] ⊢ ΣE
     sigma_intro_tapp0_func(E,k)(u)    = (k,u)
 
-    pi_eval_transf(E)                 : const(ΠE) → E
-    pi_eval_transf(E)[k]              = piapp0_func(E,k) : ΠE → E[k]
+    pi_eval_transf(E)                 : const(ΠE) ⊢ E
+    pi_eval_transf(E)[k]              = piapp0_func(E,k) : ΠE ⊢ E[k]
 
-    const_section_func(K,A)           : A → Π k :^n K, A
+    const_section_func(K,A)           : A ⊢ Π (k :^n K), A
     const_section_func(K,A)(a)        = const(a)
 
-    section_pullback_func(F,E)        : Π_B E → Π_A F^*E
+    section_pullback_func(F,E)        : Π_B E ⊢ Π_A F^*E
     section_pullback_func(F,E)(s)(a)  = s(Fa)
 
   The arrow action of `sigma_intro_tapp0_func` is intentionally deferred. It
-  should eventually send a fibre arrow α : u → v in E[k] to the corresponding
+  should eventually send a fibre arrow α : u ->^(E[k]) v to the corresponding
   total arrow (id_k, α), but the clean rule needs the identity/fibre-transport
   normal forms for Sigma homs.
 
@@ -6085,7 +6098,7 @@ assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
 // Pairing telescope for products.
 //
 // Surface/formula:
-//   Product_pair_tele_func(A,B) : A -> (B -> A x B)
+//   Product_pair_tele_func(A,B) : A ⊢ (B ⊢ A x B)
 //   Product_pair_tele_func[x][y] = (x,y)
 //   Product_pair_tele_func[p][y] = (p,id_y).
 rule sigma_Fst (@Product_pair_tele_func $A $B)
@@ -6391,7 +6404,7 @@ assert [A B C : Cat]
 //
 // Surface/formula:
 //   section_pullback_func(F,E) :
-//     (Π b :^n B, E[b]) ⟶ (Π a :^n A, E[F[a]])
+//     (Π b :^n B, E[b]) ⊢ (Π a :^n A, E[F[a]])
 //   section_pullback_func(F,E)(s)[a] = s[F[a]].
 symbol section_pullback_func [A B : Cat]
   (F : τ (Functor A B)) (E : τ (Catd B))
@@ -6422,7 +6435,7 @@ rule @tapp0_fapp0
 //
 // Surface/formula:
 //   section_pullback_transf(F)[E] = section_pullback_func(F,E)
-//   : Π b :^n B, E[b] ⟶ Π a :^n A, E[F[a]].
+//   : Π b :^n B, E[b] ⊢ Π a :^n A, E[F[a]].
 injective symbol section_pullback_transf [A B : Cat]
   (F : τ (Functor A B))
   : τ (Transf
@@ -6477,7 +6490,7 @@ rule @fdapp1_int_cell
 // Surface/formula:
 //   pathout_pi_transport(p,E)
 //     : Π q :^n PathOut_Z(x), E[q]
-//       ⟶ Π q :^n PathOut_Z(y), E[PathOut_transport(p)[q]].
+//       ⊢ Π q :^n PathOut_Z(y), E[PathOut_transport(p)[q]].
 symbol pathout_pi_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   (E : τ (Catd (@PathOut_cat Z x)))
@@ -6699,7 +6712,7 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
 
   Surface/formula:
     Pi(E) = Transf(1_K,E)
-    Pi(const_K(A)) = K -> A
+    Pi(const_K(A)) = K ⊢ A
     Hom_Pi(s,t) = Transfd(s,t)
     s[k] = piapp0(s,k).
 */
@@ -6973,9 +6986,9 @@ assert [K A : Cat]
   Mixed-variance family constructors.
 
   Surface/formula:
-    Functor_catd(M,N)[k] = M[k^-] ⟶_[k] N[k]
-    Hom_catd(E,X,Y)[k] = Hom_{E[k]}(X[k^-],Y[k])
-    Transf_catd(M,N,FF,GG)[k] = FF[k^-] ⇒_[k] GG[k]
+    Functor_catd(M,N)[k] = M[k^-] ⊢_[k] N[k]
+    Hom_catd(E,X,Y)[k] = X[k^-] ->_[k]^E Y[k]
+    Transf_catd(M,N,FF,GG)[k] = FF[k^-] =>_[k] GG[k]
     Hom_catd(const Cat, X, Y) = Functor_catd(Op_func(X),Y).
 */
 assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢
@@ -7481,8 +7494,8 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
 
   Surface/formula:
     Edge_Z(x)[y] = Hom_Z(x,y)^op
-    HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op ⟶ Cat
-    HomdTargetSection_E[x][y] = E[y^-] ⟶_[y] HomPresheaf_Z(x)[y]
+    HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op ⊢ Cat
+    HomdTargetSection_E[x][y] = E[y^-] ⊢_[y] HomPresheaf_Z(x)[y]
     HomdTarget_E[x] = Π y :^n Z^op, HomdTargetSection_E[x][y].
 */
 assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢
