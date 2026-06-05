@@ -98,11 +98,45 @@ Completed:
   `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
 - added notation-warning banners to older reports that still preserve
   pre-2026-06-05 notation.
+- created the temporary reorganization workbench files
+  `emdash3_2_tmp.lp` and `emdash3_2_tmp_checks.lp`;
+- started the tmp-only ordering pass:
+  - moved the encoded object-level Sigma block next to the object/groupoid
+    foundations;
+  - clarified the large early functor/universe section with subsections for
+    ordinary functors, universe categories, displayed-family classifiers,
+    elementary functor packages, and internalized constructor packages;
+  - clarified the path-induction/presheaf section with subsections for
+    representables, `PathOut` motives, Sigma-total path induction, and the
+    transitivity/presheaf benchmark layer;
+  - clarified directed-family constructors with subsections for fibre/pullback
+    transport, constant/opposite/displayed composition packages, Pi/section
+    action, and dependent-hom endpoint notation;
+  - clarified directed Sigma categories with subsections for total categories
+    and Sigma homs, Sigma maps and canonical transport arrows, and families
+    over Sigma totals;
+  - renamed the late helper section to record that it contains delayed
+    projection rules, especially product-pair telescope rules waiting on
+    `const_section_func` and path-induction projections waiting on
+    `tdapp0_fapp0`.
+
+Latest tmp validation:
+
+```text
+timeout 60s lambdapi check -w emdash3_2_tmp.lp
+timeout 60s lambdapi check -w emdash3_2_tmp_checks.lp
+```
+
+Both temporary checks pass after the current ordering/comment pass.
 
 Still deferred:
 
 - consider deeper definition-level file splits after the assertion split has
   settled.
+- do not move `Product_pair_tele_func` computation rules earlier until the
+  constant-section machinery is available at their destination;
+- do not move `PathInd_transfd` or `Sigma_transfd_funcd` component projection
+  rules earlier than the generic displayed component head `tdapp0_fapp0`.
 
 ## Reorganization Workbench Policy
 
