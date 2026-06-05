@@ -223,6 +223,21 @@ endpoint $p$.
 }
 </div>
 
+The `rho` arrows themselves assemble into a section of the representable
+family of arrows out of the reflexive point:
+
+```text
+pathout_refl_arrow_sec(x)
+  : Π q :^n PathOut_Z(x),
+      reflout_x ->^PathOut_Z(x) q
+
+pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
+```
+
+This is the first place where the proof begins to look like induction rather
+than merely like Sigma transport: one canonical section supplies the arrow
+along which every motive will act.
+
 ## 2.3 Fixed-Source Path Induction
 
 For a motive:
@@ -242,6 +257,23 @@ The intended computation is:
 
 ```text
 path_ind_sec(Z,x,E,u)[(y,p)] = E[rho_{x,y,p}](u).
+```
+
+The checked section-evaluation rule is the fully internal version of that
+formula:
+
+```text
+piapp0(path_ind_sec(Z,x,E,u),(y,p))
+  = fib_cov_tapp0_func(PathOut_Z(x),E,reflout_x,(y,p),u)(rho_{x,y,p}).
+```
+
+The right hand side is ordinary covariant fibre transport in the displayed
+family `E`, evaluated at the canonical arrow `rho_{x,y,p}`. For motives
+pulled back along the Sigma projection, the same construction reduces to the
+existing covariant fibre-transport package:
+
+```text
+path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u).
 ```
 
 Kernel packaging:
@@ -525,6 +557,18 @@ following infrastructure, in this order.
 6. `Rep_catd`, `PathOut_cat`, `pathout_refl_arrow`, and `PathInd_transfd`
    assemble the arrow-induction theorem.
 
+The dependency spine is short enough to show explicitly:
+
+| Construction | Built from | Informal reading |
+| --- | --- | --- |
+| `Rep_catd Z x` | `hom_int Z Z id_func` | represented hom-family `Hom_Z(x,-)` |
+| `PathOut_cat Z x` | `Sigma_cat Z (Rep_catd Z x)` | total category of arrows out of `x` |
+| `PathOut_cat_func Z` | `Sigma_func Z` applied to `Rep_catd_func Z` | contravariant variation of `PathOut` in `x` |
+| `PathOutMotives_catd Z` | `Catd_cat_func` over `PathOut_cat_func Z` | family of motive categories |
+| `PathOutPi_funcd Z` | `Pi_pullback_funcd` | family of section categories over moving `PathOut` |
+| `PathInd_transfd Z` | displayed transformation interface | telescope theorem |
+| `PathInd_funcd Z` | `Sigma_transfd_funcd(PathInd_transfd Z)` | derived total presentation |
+
 The representable family is the first key construction:
 
 ```text
@@ -601,15 +645,28 @@ some whole-functor semantic uncurry statements is deferred to the planned
 structural functor-logic work.
 
 Ordinary adjunctions provide another good example because their triangle
-computations have the shape of cut-elimination:
+computations have the shape of cut-elimination. The v3.2 interface treats an
+adjunction as a first-class object:
+
+```text
+J : Adjunction(R,L)
+left_adj_func(J)     : R ⊢ L
+right_adj_func(J)    : L ⊢ R
+unit_adj_transf(J)   : id_R => right(J) o left(J)
+counit_adj_transf(J) : left(J) o right(J) => id_L
+```
+
+The component-level triangle reductions are oriented as computation:
 
 ```text
 counit[f] o left(unit[g]) -> f o left(g)
 right(counit[g]) o unit[f] -> right(g) o f.
 ```
 
-This remains a later section or sidebar. It reinforces the same message, but
-it is not the central theorem of v3.2.
+These reductions are good supporting evidence for the design, because they
+make ordinary adjunction calculus execute by the same stable-head discipline
+as the path-induction theorem. They are still not the central theorem of v3.2;
+the article should use them as a later sidebar or compact section.
 
 # 8. Implementation And Validation
 
@@ -749,6 +806,7 @@ PathOut_transport(p)[(z,q)] = (z,q o p)
 PathOut_transport(p)[(y,id_y)] = (y,p)
 Rep_Z(x)[p](id_x) = p
 rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
+pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}
 PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
   = rho_{x,z,q o p}
 ```
@@ -758,6 +816,7 @@ Path-induction projection checks:
 ```text
 PathInd_func(Z,x)[E] = path_ind_func_fapp0(Z,x,E)
 PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)
+path_ind_sec(Z,x,E,u)[(y,p)] = E[rho_{x,y,p}](u)
 PathInd_transfd(Z)[x] = PathInd_func(Z,x)
 PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u)
 PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)
