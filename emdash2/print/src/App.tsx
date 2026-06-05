@@ -94,7 +94,8 @@ const PreviewController = ({ markdown, isTwoColumn }: PreviewControllerProps) =>
             const converter = new showdown.Converter({
                 metadata: true,
                 noHeaderId: true,
-                literalMidWordUnderscores: true // *** The crucial fix for KaTeX ***
+                literalMidWordUnderscores: true, // *** The crucial fix for KaTeX ***
+                tables: true
             });
             let html = converter.makeHtml(processedText);
             const metadata = converter.getMetadata() as any;
