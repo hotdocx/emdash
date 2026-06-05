@@ -401,6 +401,44 @@ PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
   = comp_fapp0 Z x y z q p.
 ```
 
+## 2.6 Proof Sketch Of The Benchmark
+
+The composition benchmark computes because the composition motive is a
+Sigma-projection pullback. For any displayed family `D : Catd Z`, fixed-source
+path induction on the pullback motive reduces to ordinary covariant fibre
+transport:
+
+```text
+path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u).
+```
+
+For the benchmark, `D` is `CompTarget_Z(x)`, and the initial element is the
+identity displayed functor on `Rep_Z(x)`. Therefore:
+
+```text
+path_comp_sec(x)
+  = fib_cov_transf(CompTarget_Z(x),x,id_Rep_Z(x)).
+```
+
+Evaluating this section at `p : x ->^Z y` transports the identity functor along
+the `CompTarget` action on `p`:
+
+```text
+CompTarget_Z(x)[p](id_Rep_Z(x)) = path_comp_func(p).
+```
+
+But `CompTarget_Z(x)[y]` is `Rep_Z(y) ⊢ Rep_Z(x)`, so
+`path_comp_func(p)` is exactly representable precomposition:
+
+```text
+path_comp_func(p) : Rep_Z(y) ⊢ Rep_Z(x)
+path_comp_func(p)[z][q] = q o p.
+```
+
+Thus the final normal form is not a special-purpose rewrite for transitivity.
+It is the ordinary action of the representable family, reached by applying the
+general path-induction theorem to a pullback motive.
+
 # 3. The Telescope Theorem
 
 The fixed-source eliminator is useful, but the real v3.2 theorem is the
@@ -855,7 +893,9 @@ CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x)
 Pi(PathOut_Z(x), CompMotive_Z(x))
   = z :^n Z ; Rep_Z(x)[z] ⊢ CompTarget_Z(x)[z]
 
+path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u)
 path_ind_sec(CompMotive_Z(x), id_Rep_Z(x)) = path_comp_sec(x)
+CompTarget_Z(x)[p](id_Rep_Z(x)) = path_comp_func(p)
 path_comp_sec(x)[p] = path_comp_func(p)
 path_comp_func(p)[z][q] = q o p
 ```
