@@ -114,6 +114,32 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 
 checks `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
 
+### Maintenance Review 2026-06-05
+
+The current maintenance scan found the active v3.2 source coherent against its
+documentation:
+
+- `emdash3_2.lp` contains the implementation and human-readable normal-form
+  catalog; executable diagnostic assertions live in `emdash3_2_checks.lp`.
+- The main file has no active `assert` commands.
+- The section order in `emdash3_2.lp` matches the orientation snapshot above.
+- Direct bounded checks pass for both `emdash3_2.lp` and
+  `emdash3_2_checks.lp`; the full bounded `make check` path also passes.
+
+Known incomplete or intentionally deferred items are documented rather than
+left implicit:
+
+- structural functor logic remains a proposed plan in
+  `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`;
+- semantic uncurry transfor action is deferred pending the higher
+  `Product_cat_func` action on transfors;
+- the whole-transfor displayed laxity interface is deferred; current rules stop
+  at component-level helpers such as `fdapp1_int_cell`;
+- the arrow action of `sigma_intro_tapp0_func` is deferred until the relevant
+  identity/fibre-transport normal forms for Sigma homs are clean;
+- deeper definition-level file splitting remains deferred until the current
+  assertion split and reorganization layout have settled.
+
 ## Current v3.2 Status
 
 `emdash3_2.lp` now has:

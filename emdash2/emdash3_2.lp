@@ -5034,12 +5034,12 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
 // -------------------------------------------------------------------------------------------------
 
 /*
-  Executable computation checks now live in emdash3_2_tmp_checks.lp. This tail
+  Executable computation checks now live in emdash3_2_checks.lp. This tail
   section keeps the human-readable catalog of the lower-level normal forms
   covered there, plus the nested telescope stress-example constructors that are
   still useful as ordinary declarations.
 
-  During the temporary reorganization pass, use this section as a checklist for
+  During future section/file cleanup, use this section as a checklist for
   moving nearby catalog comments toward the declarations they document. Keep the
   stress-example symbols here until their final home is clear.
 */
