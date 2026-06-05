@@ -188,6 +188,13 @@ left implicit:
   `Eval_func(B,C) o (G * 1_B)` and checked on objects and capped hom-action,
   with `G * 1_B` routed through the `Product_cat_func` stable projection ladder
   rather than through an independent `Product_mapL*` theory;
+- a first-class ordinary functor adjunction interface:
+  `Adjunction(R,L)`, with stable projections `left_adj_func`,
+  `right_adj_func`, `unit_adj_transf`, and `counit_adj_transf`, plus checked
+  left and right component-level triangle cut-elimination rules. This replaces
+  the draft v2 parameterized `adj` interface for v3.2; the v2
+  evidence-irrelevance/projection unification rules are intentionally not
+  installed unless a future focused probe shows a concrete need;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

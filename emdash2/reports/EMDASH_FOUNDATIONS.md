@@ -482,6 +482,34 @@ natural transformation structure when arrows over the base must be tracked.
 
 ## 11. Basic Sigma/Pi Operations And Adjunction Shadows
 
+The active v3.2 implementation now includes a basic first-class ordinary
+functor adjunction interface. For categories `R` and `L`, an adjunction package
+
+```text
+J : Adjunction(R,L)
+```
+
+has stable projections:
+
+```text
+left_adj_func(J)     : R ⊢ L
+right_adj_func(J)    : L ⊢ R
+unit_adj_transf(J)   : id_R => right(J) o left(J)
+counit_adj_transf(J) : left(J) o right(J) => id_L
+```
+
+The package also has the two component-level triangle cut-elimination rules:
+
+```text
+counit[f] o left(unit[g]) -> f o left(g)
+right(counit[g]) o unit[f] -> right(g) o f
+```
+
+This is intentionally not the old v2 parameterized `adj` interface with
+projection/evidence-irrelevance unification rules. The v3.2 form is a
+first-class package with stable projection heads; parameterized bridges can be
+added later only if a concrete theorem needs them.
+
 The current theory includes the expected basic operations:
 
 ```text
@@ -664,7 +692,7 @@ The current foundations intentionally do not yet include:
 - A finalized surface syntax for the future proof assistant.
 - Full coherence APIs for every Sigma/Pi helper.
 - A named `section_total(s) : K → Σ_K E` construction and its projection laws.
-- Full product/functor adjunction coherence for `Product_cat`, beyond the
+- Full product/curry adjunction coherence for `Product_cat`, beyond the
   current product normal form, projection computation, and functor-level
   curry/uncurry action laws.
 - General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base

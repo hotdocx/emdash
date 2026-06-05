@@ -646,6 +646,99 @@ assert [A B C : Cat]
   fapp0 uncurry_func_func G
     ≡ uncurry_func G;
 
+// Ordinary adjunction triangle cut-elimination.
+assert [R L : Cat]
+  (J : τ (Adjunction R L))
+  (X X' : τ (Obj R))
+  (Y : τ (Obj L))
+  (g : τ (Hom R X X'))
+  (f : τ (Hom L (@fapp0 R L (@left_adj_func R L J) X') Y)) ⊢
+  comp_fapp0
+    (@tapp1_fapp0
+      L
+      L
+      (@comp_cat_fapp0
+        L
+        R
+        L
+        (@left_adj_func R L J)
+        (@right_adj_func R L J))
+      (@id_func L)
+      (@fapp0 R L (@left_adj_func R L J) X')
+      Y
+      (@counit_adj_transf R L J)
+      f)
+    (@fapp1_fapp0
+      R
+      L
+      (@left_adj_func R L J)
+      X
+      (@fapp0 L R (@right_adj_func R L J)
+        (@fapp0 R L (@left_adj_func R L J) X'))
+      (@tapp1_fapp0
+        R
+        R
+        (@id_func R)
+        (@comp_cat_fapp0
+          R
+          L
+          R
+          (@right_adj_func R L J)
+          (@left_adj_func R L J))
+        X
+        X'
+        (@unit_adj_transf R L J)
+        g))
+  ≡ comp_fapp0
+      f
+      (@fapp1_fapp0 R L (@left_adj_func R L J) X X' g);
+
+assert [R L : Cat]
+  (J : τ (Adjunction R L))
+  (X : τ (Obj R))
+  (Y' Y : τ (Obj L))
+  (f : τ (Hom R X (@fapp0 L R (@right_adj_func R L J) Y')))
+  (g : τ (Hom L Y' Y)) ⊢
+  comp_fapp0
+    (@fapp1_fapp0
+      L
+      R
+      (@right_adj_func R L J)
+      (@fapp0 R L (@left_adj_func R L J)
+        (@fapp0 L R (@right_adj_func R L J) Y'))
+      Y
+      (@tapp1_fapp0
+        L
+        L
+        (@comp_cat_fapp0
+          L
+          R
+          L
+          (@left_adj_func R L J)
+          (@right_adj_func R L J))
+        (@id_func L)
+        Y'
+        Y
+        (@counit_adj_transf R L J)
+        g))
+    (@tapp1_fapp0
+      R
+      R
+      (@id_func R)
+      (@comp_cat_fapp0
+        R
+        L
+        R
+        (@right_adj_func R L J)
+        (@left_adj_func R L J))
+      X
+      (@fapp0 L R (@right_adj_func R L J) Y')
+      (@unit_adj_transf R L J)
+      f)
+  ≡ comp_fapp0
+      (@fapp1_fapp0 L R (@right_adj_func R L J) Y' Y g)
+      f;
+
 // From emdash3_2.lp:2636.
 assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢
   @tapp0_fapp0
@@ -3768,4 +3861,3 @@ assert [K : Cat] (E : τ (Catd K))
         (@piapp0 K E s x)
         y
         (@piapp0 K E s y);
-

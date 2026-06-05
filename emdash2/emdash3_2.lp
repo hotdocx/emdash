@@ -1917,7 +1917,7 @@ rule @comp_cat_fapp0
 
   `curry_func_func` and `uncurry_func_func` are the primary semantic packages.
   `curry_func`, `curry_fapp0_func`, and `uncurry_func` are definitional
-  projections. Full adjunction/coherence packaging remains future work.
+  projections. Full product/curry adjunction coherence remains future work.
 */
 symbol curry_func_func [A B C : Cat]
   : τ (Functor
@@ -1970,6 +1970,105 @@ symbol uncurry_func [A B C : Cat]
 // The transfor action of semantic uncurry depends on the higher arrow-action
 // of `Product_cat_func` on a transfor `theta`. Keep it deferred rather than
 // reinstating an independent `Product_mapL_transf` stable package.
+
+/*
+  Ordinary functor adjunctions.
+
+  This is the v3.2 replacement for the draft `adj` interface from emdash2.
+  The old interface was parameterized by already-named functors/unit/counit and
+  used unification rules to make projection heads behave like those parameters.
+  Here the adjunction itself is first-class:
+
+    J : Adjunction(R,L)
+    left_adj_func(J)     : R ⊢ L
+    right_adj_func(J)    : L ⊢ R
+    unit_adj_transf(J)   : id_R => right(J) o left(J)
+    counit_adj_transf(J) : left(J) o right(J) => id_L
+
+  The projection heads are intentionally stable.  We do not add the v2
+  evidence-irrelevance unification rules here; if a future theorem needs a
+  parameterized "L is left adjoint to R" witness, add a narrow bridge after a
+  focused probe.
+*/
+injective symbol Adjunction (R L : Cat) : Grpd;
+
+symbol left_adj_func [R L : Cat]
+  (J : τ (Adjunction R L))
+  : τ (Functor R L);
+
+symbol right_adj_func [R L : Cat]
+  (J : τ (Adjunction R L))
+  : τ (Functor L R);
+
+symbol unit_adj_transf [R L : Cat]
+  (J : τ (Adjunction R L))
+  : τ (Transf
+      (@id_func R)
+      (@comp_cat_fapp0
+        R
+        L
+        R
+        (@right_adj_func R L J)
+        (@left_adj_func R L J)));
+
+symbol counit_adj_transf [R L : Cat]
+  (J : τ (Adjunction R L))
+  : τ (Transf
+      (@comp_cat_fapp0
+        L
+        R
+        L
+        (@left_adj_func R L J)
+        (@right_adj_func R L J))
+      (@id_func L));
+
+// Left triangle cut-elimination.
+//
+// Surface/formula:
+//   counit[f] o left(unit[g]) ↪ f o left(g)
+//
+// for g : X ->^R X' and f : left(X') ->^L Y.
+rule comp_fapp0
+      (@tapp1_fapp0 _ _
+        _
+        _
+        (fapp0 (@left_adj_func $R $L $J) $X')
+        $Y
+        (@counit_adj_transf $R $L $J)
+        $f)
+      (fapp1_fapp0 (@left_adj_func $R $L $J)
+        (@tapp1_fapp0 _ _ _ _
+          $X
+          $X'
+          (@unit_adj_transf $R $L $J)
+          $g))
+  ↪ comp_fapp0
+      $f
+      (fapp1_fapp0 (@left_adj_func $R $L $J) $g);
+
+// Right triangle cut-elimination.
+//
+// Surface/formula:
+//   right(counit[g]) o unit[f] ↪ right(g) o f
+//
+// for f : X ->^R right(Y') and g : Y' ->^L Y.
+rule comp_fapp0
+      (fapp1_fapp0 (@right_adj_func $R $L $J)
+        (@tapp1_fapp0 _ _ _ _
+          $Y'
+          $Y
+          (@counit_adj_transf $R $L $J)
+          $g))
+      (@tapp1_fapp0 _ _
+        _
+        _
+        $X
+        (fapp0 (@right_adj_func $R $L $J) $Y')
+        (@unit_adj_transf $R $L $J)
+        $f)
+  ↪ comp_fapp0
+      (fapp1_fapp0 (@right_adj_func $R $L $J) $g)
+      $f;
 
 /*
   More-internal ordinary hom-action.
