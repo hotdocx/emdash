@@ -109,6 +109,17 @@ the checked evidence has three layers.
 This is stronger than a prose analogy with induction. The theorem surface and
 the transitivity computation are part of the same executable rewrite system.
 
+## 1.3 Reading Order
+
+Section 2 gives the theorem by computation: outgoing arrows, the canonical
+`rho` arrow, fixed-source induction, the telescope theorem, and the
+composition benchmark. Section 3 then isolates the displayed-transformation
+form of the theorem and its Sigma-total presentation. Sections 4--6 explain
+the surface syntax, the kernel dependencies, and the normalization discipline
+needed to make the theorem compute. Section 7 records supporting
+constructions, while Section 8 and Appendix B summarize the executable
+regression catalog.
+
 # 2. The Main Computation
 
 The main checked computation is:
@@ -117,7 +128,7 @@ The main checked computation is:
 path_comp_func(p)[z][q] = q o p.
 ```
 
-This should be read in the following context:
+This is read in the following context:
 
 ```text
 x y z : Obj Z
@@ -129,6 +140,18 @@ The expression on the left is not a hand-written composition operator. It is
 the normal form obtained by applying the path-induction theorem to a motive
 whose value at `(y,p)` is the category of representable precomposition maps
 from `Rep_Z(y)` to `Rep_Z(x)`.
+
+The computation chain is:
+
+| Stage | Construction | Role |
+| --- | --- | --- |
+| outgoing arrows | `PathOut_Z(x)` | category of pairs `(y,p : x -> y)` |
+| canonical arrow | `rho_{x,y,p}` | arrow from `(x,id_x)` to `(y,p)` |
+| induction theorem | `PathInd_transfd(Z)` | telescope theorem over the moving source |
+| motive | `CompMotive_Z(x)` | target family `Rep_Z(y) ⊢ Rep_Z(x)` |
+| induced section | `path_comp_sec(x)` | section obtained by path induction |
+| path action | `path_comp_func(p)` | functor `Rep_Z(y) ⊢ Rep_Z(x)` |
+| normal form | `comp_fapp0 Z x y z q p` | ordinary categorical composition |
 
 ## 2.1 Outgoing Arrows
 
@@ -489,9 +512,10 @@ ordinary functor-level applications and expanded normal forms.
 # 4. The Surface Language
 
 The notation is part of the result. The v3.2 file is still Lambdapi, but its
-comments and planned parser surface use a disciplined syntax so that a reader
-can distinguish ordinary homs, indexed homs, ordinary functor categories,
-shaped functor categories, and mixed-variance displayed functor categories.
+comments and surface-syntax documentation use a disciplined syntax so that a
+reader can distinguish ordinary homs, indexed homs, ordinary functor
+categories, shaped functor categories, and mixed-variance displayed functor
+categories.
 
 | Surface form | Kernel meaning | Role |
 | --- | --- | --- |
@@ -526,7 +550,7 @@ z :^n Z ; E[z] ⊢ D[z]
 
 does not bind an object variable of `E[z]`. The shape `E[z]` is part of the
 generalized quantification. If the target family depends on an actual object
-of `E[z]`, the construction is different and should be represented using a
+of `E[z]`, the construction is different and is represented using a
 Sigma-style telescope.
 
 The nested telescope stress test is:
@@ -666,7 +690,7 @@ right(counit[g]) o unit[f] -> right(g) o f.
 These reductions are good supporting evidence for the design, because they
 make ordinary adjunction calculus execute by the same stable-head discipline
 as the path-induction theorem. They are still not the central theorem of v3.2;
-the article should use them as a later sidebar or compact section.
+the article uses them as a later sidebar or compact section.
 
 # 8. Implementation And Validation
 
@@ -708,7 +732,7 @@ applications. The readable heads are what the article explains; the expanded
 applications are what guard against accidental loss of computation when a
 definition is refactored.
 
-The print pipeline treats this file as a draft variant:
+The print pipeline treats this file as the current v3.2 long-form variant:
 
 ```text
 print/public/index_3_2.md
@@ -720,8 +744,8 @@ It is previewed with:
 /?paper=index_3_2.md
 ```
 
-Once this long version is coherent, it can replace `print/public/index.md`;
-the short version `index_0.md` should then be regenerated from the v3.2 long
+Once this long version is promoted, it can replace `print/public/index.md`;
+the short version `index_0.md` can then be regenerated from the v3.2 long
 article rather than from the old v2 text.
 
 # 9. Limitations And Future Work
@@ -836,15 +860,22 @@ path_comp_sec(x)[p] = path_comp_func(p)
 path_comp_func(p)[z][q] = q o p
 ```
 
-The two expanded routes that matter most are:
+The two expanded routes that matter most are the primary telescope route:
 
 ```text
-expanded(PathInd_transfd, CompMotive_Z(x), p, q) = q o p
-expanded(PathInd_funcd, CompMotive_Z(x), p, q) = q o p
+PathInd_transfd(Z)[x][CompMotive_Z(x)](id_Rep_Z(x))[p][z][q]
+  = comp_fapp0 Z x y z q p
+```
+
+and the derived Sigma-total route:
+
+```text
+PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
+  = comp_fapp0 Z x y z q p
 ```
 
 # Appendix C. Diagram Source Notes
 
-All figures in this draft are Arrowgram JSON blocks. They are intentionally
+All figures in this article are Arrowgram JSON blocks. They are intentionally
 simple: the diagrams explain object and arrow flow, while the actual
 normalization claims are made by Lambdapi assertions in `emdash3_2_checks.lp`.
