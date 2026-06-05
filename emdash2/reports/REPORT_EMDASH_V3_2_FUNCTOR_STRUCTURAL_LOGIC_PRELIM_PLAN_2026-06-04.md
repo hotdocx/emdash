@@ -645,3 +645,731 @@ are not the right foundation for displayed/mixed-variance analogues.
 
 Product swap, product diagonal, and product weakening remain valuable
 computational tests, but they are secondary.
+
+## Postscript 2026-06-05: Shaped Turnstile And Indexed Hom Notation
+
+This postscript consolidates the follow-up discussion after the first draft of
+this report. It is intended as current notation and architecture guidance for
+future v3.2 comments and surface-syntax planning. It does not change the
+kernel implementation plan above by itself.
+
+The main correction is that the displayed/fibred discussion should not suggest
+that there is a separate "logic of the shape" for a `Functord` domain. A term
+of shape:
+
+```text
+Functord E D
+```
+
+should be read as a generalized or shaped element of `D`, with shape `E`. The
+shape is part of the quantification. It is not an explicit bound object
+variable that may occur in the target expression. Formula-level operations
+lift across this shaped quantification by ordinary displayed composition.
+
+### Shaped Quantification
+
+The preferred surface reading for:
+
+```text
+Functord_cat E D
+```
+
+is:
+
+```text
+z :^n Z ; E[z] ⊢ D[z]
+```
+
+where:
+
+```text
+E : Catd Z
+D : Catd Z
+```
+
+This should be understood as an ordinary category expression. It can appear
+anywhere a category is expected, for example:
+
+```text
+C ⊢ (z :^n Z ; E[z] ⊢ D[z])
+```
+
+which means:
+
+```text
+Functor_cat C (Functord_cat E D)
+```
+
+Do not insert an explicit dummy variable:
+
+```text
+z :^n Z ; e : E[z] ⊢ D[z]
+```
+
+for this constructor. The element `e` is not semantically available to the
+target family `D[z]` in plain `Functord_cat E D`. If a later construction needs
+the target to depend on an actual object of `E[z]`, that is a different
+dependent/telescopic construction, most likely represented through a family
+over `Sigma_cat E`.
+
+The terminal-shape case should remain visibly Pi-shaped:
+
+```text
+Π (z :^n Z), D[z]
+```
+
+meaning:
+
+```text
+Pi_cat D
+```
+
+with the definitional explanation:
+
+```text
+Pi_cat D = Functord_cat (Terminal_catd Z) D
+```
+
+Avoid making:
+
+```text
+(z :^n Z) -> D[z]
+```
+
+the primary notation for `Pi_cat D`, even though that spelling is tempting by
+analogy with proof-assistant dependent functions. In emdash notation, `Π`
+should continue to signal the section category directly.
+
+### Ordinary Functor Categories
+
+The ordinary functor category should use the same turnstile idea without an
+indexed prefix:
+
+```text
+A ⊢ B
+```
+
+meaning:
+
+```text
+Functor_cat A B
+```
+
+Since the kernel already has:
+
+```text
+Hom_cat Cat_cat A B ↪ Functor_cat A B
+```
+
+this can also be read as:
+
+```text
+Hom_cat Cat_cat A B
+```
+
+but the surface syntax should emphasize the functor/program category, not the
+generic hom spelling.
+
+The shaped turnstile is then the displayed version:
+
+```text
+z :^n Z ; E[z] ⊢ D[z]
+```
+
+meaning:
+
+```text
+Functord_cat E D
+```
+
+and the kernel justification is the existing canonical rewrite:
+
+```text
+Hom_cat (Catd_cat Z) E D ↪ Functord_cat E D
+```
+
+Thus:
+
+```text
+⊢
+```
+
+is the category-of-programs/functors notation, both ordinary and shaped.
+
+### Ordinary And Indexed Homs
+
+The hom notation should be kept distinct from turnstile notation.
+
+Ordinary homs should use:
+
+```text
+a ->^C b
+```
+
+meaning:
+
+```text
+Hom_cat C a b
+```
+
+and most often, when the ambient category `C` is clear:
+
+```text
+a -> b
+```
+
+This keeps useful object-arrow declarations available, such as:
+
+```text
+f :^n x -> z
+```
+
+meaning:
+
+```text
+f :^n Hom_cat Z x z
+```
+
+with `Z` inferred from `x` and `z`.
+
+The ambient category should use a superscript, not a subscript. Avoid:
+
+```text
+a ->_C b
+```
+
+because the underscore form is reserved for indexed/displayed homs.
+
+Indexed or displayed homs should use a syntactically distinct operator:
+
+```text
+aa[z^-] ->_[z]^R bb[z]
+```
+
+meaning:
+
+```text
+Hom_catd R aa bb
+```
+
+where:
+
+```text
+R  : Catd Z
+aa : Obj(Pi_cat (Op_catd R))
+bb : Obj(Pi_cat R)
+```
+
+When `R` is clear, the shorter form is:
+
+```text
+aa[z^-] ->_[z] bb[z]
+```
+
+The underscore is part of the operator. A parser should distinguish `->_` from
+plain `->` without doing semantic analysis. Superscript annotations such as
+`^R` are "obvious explicit" ambient parameters, not implicit subscripts.
+
+The current kernel gives:
+
+```text
+Hom_catd R aa bb [z]
+  = Hom_cat (R[z]) (aa[z^-]) (bb[z])
+```
+
+so the notation is the displayed analogue of ordinary hom.
+
+### `Functor_catd`: Two Coherent Surface Readings
+
+There are two coherent notations for `Functor_catd`, and the distinction should
+be documented rather than blurred.
+
+The functor-category-flavored notation is:
+
+```text
+A[z^-] ⊢_[z] B[z]
+```
+
+meaning directly:
+
+```text
+Functor_catd A B
+```
+
+Here `⊢_` is its own operator, distinct from plain `⊢`. If an index is omitted
+for readability, the operator should remain `⊢_`, not become `⊢`.
+
+This spelling has the advantage that it mirrors:
+
+```text
+A ⊢ B
+```
+
+for ordinary functor categories. It also lets a parser distinguish the
+displayed/mixed-variance functor-family constructor syntactically.
+
+The generic indexed-hom spelling is:
+
+```text
+A[z^-] ->_[z]^Cat B[z]
+```
+
+meaning:
+
+```text
+Hom_catd (Const_catd Z Cat_cat) A B
+```
+
+which the kernel rewrites to:
+
+```text
+Functor_catd A B
+```
+
+via the existing rule:
+
+```text
+Hom_catd (Const_catd Z Cat_cat) X Y
+  ↪ Functor_catd (Op_func X) Y
+```
+
+This spelling has the advantage that it presents `Functor_catd` as an instance
+of the general indexed hom notation. It also makes clear that the ambient
+displayed category is the constant family at `Cat_cat`.
+
+Current recommendation:
+
+- keep both readings in the design notes;
+- use `A[z^-] ⊢_[z] B[z]` when emphasizing the functor-category type former;
+- use `A[z^-] ->_[z]^Cat B[z]` when emphasizing the generic indexed hom
+  constructor `Hom_catd`;
+- do not silently collapse `⊢_` to plain `⊢`;
+- do not use `->_` for ordinary homs.
+
+The implementation may still elaborate either surface spelling to the stable
+kernel head `Functor_catd A B` when that is the most useful normal form.
+
+### `Transf_catd` And Indexed Transformation Notation
+
+The generic indexed hom notation also explains `Transf_catd`.
+
+For ordinary transformations:
+
+```text
+F => G
+```
+
+should remain the readable spelling for:
+
+```text
+Transf_cat F G
+```
+
+or equivalently:
+
+```text
+Hom_cat (Functor_cat A B) F G
+```
+
+For indexed transformations:
+
+```text
+FF[z^-] =>_[z] GG[z]
+```
+
+should be the readable spelling for:
+
+```text
+Transf_catd A B FF GG
+```
+
+and it can be understood generically as:
+
+```text
+FF[z^-] ->_[z]^(Functor_catd A B) GG[z]
+```
+
+meaning:
+
+```text
+Hom_catd (Functor_catd A B) FF GG
+```
+
+which the kernel rewrites to:
+
+```text
+Transf_catd A B FF GG
+```
+
+This keeps `=>_` as a readable specialization of `->_`, not as a separate
+semantic principle.
+
+### Structural Operations Lift Uniformly Over Shapes
+
+The earlier discussion of weakening/constant should be simplified. There is no
+separate phenomenon in which the usual logical operation modifies the ambient
+shape `E` of a shaped quantification.
+
+All three structural operations should be internal maps between formula
+families:
+
+```text
+weak/const : B ⊢ (A ⊢ B)
+exchange   : (A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))
+diag       : (A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)
+```
+
+In existing kernel notation, the ordinary versions are:
+
+```text
+Const_func_func(A,B)
+  : Functor B (Functor_cat A B)
+
+sym_func_func(A,B,C)
+  : Functor
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat B (Functor_cat A C))
+
+diag_func_func(A,C)
+  : Functor
+      (Functor_cat A (Functor_cat A C))
+      (Functor_cat A C)
+```
+
+The displayed versions should be analogous maps between Cat-valued families:
+
+```text
+Functor_catd_const_funcd(A,B)
+  : Functord B (Functor_catd A B)
+
+Functor_catd_sym_funcd(A,B,C)
+  : Functord
+      (Functor_catd A (Functor_catd B C))
+      (Functor_catd B (Functor_catd A C))
+
+Functor_catd_diag_funcd(A,C)
+  : Functord
+      (Functor_catd A (Functor_catd A C))
+      (Functor_catd A C)
+```
+
+Given an arbitrary shaped term, the lift is by ordinary composition. For
+example:
+
+```text
+f : Functord E B
+Functor_catd_const_funcd(A,B) o f
+  : Functord E (Functor_catd A B)
+```
+
+and:
+
+```text
+g : Functord E (Functor_catd A (Functor_catd B C))
+Functor_catd_sym_funcd(A,B,C) o g
+  : Functord E (Functor_catd B (Functor_catd A C))
+```
+
+and:
+
+```text
+h : Functord E (Functor_catd A (Functor_catd A C))
+Functor_catd_diag_funcd(A,C) o h
+  : Functord E (Functor_catd A C)
+```
+
+So the only asymmetry is syntactic:
+
+```text
+B
+```
+
+is an uncompound source formula for weakening/constant, while exchange and
+contraction start from compound source formulas:
+
+```text
+A ⊢ (B ⊢ C)
+A ⊢ (A ⊢ C)
+```
+
+There is no need for a separate "shape-context logic" for this point. If later
+we introduce maps between shapes, such as product-shape projections, swaps, or
+diagonals, their effect on shaped terms should be ordinary precomposition along
+displayed functors. That is a separate reindexing topic, not the owner of the
+formula-level structural operations in this report.
+
+### Variance Of Displayed Weakening
+
+The variance conclusion remains:
+
+```text
+Functor_catd_const_funcd(A,B)
+  : Functord B (Functor_catd A B)
+
+A : Catd(Op_cat K)
+B : Catd K
+```
+
+For a base arrow `p : x -> y`, naturality uses the covariant action of `B`:
+
+```text
+B[p](b) : B[y]
+
+Functor_catd(A,B)[p](Const(b))
+  = B[p] o Const(b) o A[p]
+  = Const(B[p](b))
+```
+
+Therefore the primary operation uses `B : Catd K`, not
+`B : Catd(Core_cat K)`. A core-restricted family is relevant only for a
+different shape where the same family is forced to appear both covariantly and
+contravariantly in a single construction. That should be treated as a weaker
+comparison or groupoidal restriction, not as the default displayed constant
+operation.
+
+### Nested Telescope Stress Test
+
+The notation should be tested on nested telescope expressions such as:
+
+```text
+k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z])
+```
+
+The order `k;z` is intentional. This is telescope-style notation, not a
+product-base pair. It means:
+
+```text
+first specialize in k, then specialize the resulting Z-family in z.
+```
+
+Morally:
+
+```text
+C : Catd K
+E : K^op -> Catd Z
+D : K    -> Catd Z
+```
+
+and for each `k`:
+
+```text
+E[k^-] : Catd Z
+D[k]   : Catd Z
+```
+
+so the inner expression is:
+
+```text
+z :^n Z ; E[k^-;z] ⊢ D[k;z]
+```
+
+meaning:
+
+```text
+Functord_cat (E[k^-]) (D[k])
+```
+
+The whole nested expression can be represented by a family over `K`:
+
+```text
+R := Hom_catd (Const_catd K (Catd_cat Z)) Ebar Dbar
+```
+
+where:
+
+```text
+Ebar[k^-] = E[k^-; -] : Catd Z
+Dbar[k]   = D[k; -]   : Catd Z
+```
+
+Then:
+
+```text
+R[k]
+  = Hom_cat (Catd_cat Z) Ebar[k^-] Dbar[k]
+  ↪ Functord_cat (E[k^-]) (D[k])
+```
+
+and the whole expression is:
+
+```text
+Functord_cat C R
+```
+
+This is the important subtlety:
+
+```text
+z :^n Z ; E[k^-;z] ⊢ D[k;z]
+```
+
+uses plain shaped `⊢`, i.e. `Functord_cat` over `Z`. It is not itself the
+indexed hom operator `->_` and not `⊢_`. However, as `k` varies, the family of
+these inner categories is naturally built using `Hom_catd` over the ambient
+category family:
+
+```text
+Const_catd K (Catd_cat Z)
+```
+
+So the outer variation is mixed-variance in the category of `Z`-families, while
+the inner displayed quantification remains ordinary `Functord_cat`.
+
+### Internal Constructor Packages
+
+The nested telescope example should not be forced through
+`Functor_catd_func`. The existing `Functor_catd_func(K)` internalizes the
+specific mixed-variance functor-family constructor:
+
+```text
+Functor_catd(A,B)[k] = A[k^-] ⊢_[k] B[k]
+```
+
+It is not the primary owner of:
+
+```text
+k |-> Functord_cat (E[k^-]) (D[k])
+```
+
+For that, the conceptual owner is generic hom in the category `Catd_cat Z`,
+expressed externally as:
+
+```text
+Hom_catd (Const_catd K (Catd_cat Z)) Ebar Dbar
+```
+
+It may still be useful to add internal convenience packages later:
+
+```text
+Functord_cat_func(Z)
+  : Op(Catd_cat Z) ⊢ (Catd_cat Z ⊢ Cat)
+
+Functord_cat_func(Z)[E][D]
+  = Functord_cat E D
+```
+
+This should likely be definable from the existing ordinary internal hom
+machinery, for example via `hom_int` at `Catd_cat Z`, with endpoint reductions
+landing in `Functord_cat`.
+
+Likewise, a later package:
+
+```text
+Transfd_cat_func(E,D)
+  : Op(Functord_cat E D) ⊢ (Functord_cat E D ⊢ Cat)
+
+Transfd_cat_func(E,D)[FF][GG]
+  = Transfd_cat FF GG
+```
+
+could be useful for internalized transformation-category formation.
+
+These packages are notation/projection infrastructure. They are not required
+for the first implementation of ordinary `Const_func_func`, `sym_func_func`,
+and `diag_func_func`, and they should not be allowed to delay that structural
+logic pass.
+
+### Substitution In Indexed Notation
+
+The indexed operator leaves room for future substitution or pullback notation:
+
+```text
+A[z^-] ->_[z:=f]^R B[z]
+```
+
+or, in functor-category spelling:
+
+```text
+A[z^-] ⊢_[z:=f] B[z]
+```
+
+should mean that the displayed family:
+
+```text
+A[z^-] ->_[z]^R B[z]
+```
+
+or:
+
+```text
+A[z^-] ⊢_[z] B[z]
+```
+
+is pulled back along a base functor:
+
+```text
+f : K ⊢ Z
+```
+
+approximately:
+
+```text
+Pullback_catd (Hom_catd R A B) f
+```
+
+or in the `Functor_catd` case:
+
+```text
+Pullback_catd (Functor_catd A B) f
+```
+
+The exact formalization should wait until substitution notation is actively
+needed, but the use of superscripts for ambient parameters and subscripts for
+indices/substitutions is compatible with this future direction.
+
+### Current Notation Table
+
+The current likely replacement notation table is:
+
+```text
+a ->^C b
+  := Hom_cat C a b
+
+a -> b
+  := Hom_cat C a b
+     when C is clear
+
+aa[z^-] ->_[z]^R bb[z]
+  := Hom_catd R aa bb
+
+aa[z^-] ->_[z] bb[z]
+  := Hom_catd R aa bb
+     when R is clear
+
+A ⊢ B
+  := Functor_cat A B
+
+z :^n Z ; E[z] ⊢ D[z]
+  := Functord_cat E D
+
+Π (z :^n Z), D[z]
+  := Pi_cat D
+
+A[z^-] ⊢_[z] B[z]
+  := Functor_catd A B
+
+A[z^-] ->_[z]^Cat B[z]
+  := Hom_catd (Const_catd Z Cat_cat) A B
+   ↪ Functor_catd A B
+
+F => G
+  := Transf_cat F G
+
+FF[z^-] =>_[z] GG[z]
+  := Transf_catd A B FF GG
+
+FF[z^-] ->_[z]^(Functor_catd A B) GG[z]
+  := Hom_catd (Functor_catd A B) FF GG
+   ↪ Transf_catd A B FF GG
+```
+
+Open choice for later parser/surface implementation:
+
+- choose whether `A[z^-] ⊢_[z] B[z]` is the primary printed form for
+  `Functor_catd A B`, with `->_[z]^Cat` kept as the generic-hom explanation;
+- or choose whether `A[z^-] ->_[z]^Cat B[z]` is the primary printed form, with
+  `⊢_[z]` kept as the functor-category-flavored alias.
+
+Both are coherent. The important settled points are that `->` and `->_` are
+syntactically distinct, ambient category/family parameters use superscripts,
+plain `⊢` is not the same as `⊢_`, and `Π` remains the notation for
+terminal-shape sections.
