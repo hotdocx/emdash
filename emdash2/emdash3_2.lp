@@ -275,7 +275,35 @@ inductive nat : TYPE ≔
 | succ : nat → nat;
 
 // -------------------------------------------------------------------------------------------------
-// 1. Core categories
+// 1. Encoded Sigma types for object layers
+// -------------------------------------------------------------------------------------------------
+
+inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
+| Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), @τΣ_ a P;
+notation τΣ_ quantifier;
+
+/*
+  Encoded dependent pair type used for object-level Sigma data.
+
+  Surface/formula:
+    Σ x : a, P(x)
+    Struct_sigma x u = (x,u)
+    sigma_Fst(x,u)   = x
+    sigma_Snd(x,u)   = u
+*/
+constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd;
+notation Σ_ quantifier;
+rule τ (Σ_ $P) ↪ τΣ_ $P;
+
+injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
+rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
+
+// Second projection of an encoded dependent pair.
+injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
+rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
+
+// -------------------------------------------------------------------------------------------------
+// 2. Core categories
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -351,9 +379,10 @@ symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 */
 
 // -------------------------------------------------------------------------------------------------
-// 2. Ordinary functors and universe categories
+// 3. Functor, displayed-family, and universe categories
 // -------------------------------------------------------------------------------------------------
 
+// 3a. Ordinary functor classifier and action.
 /*
   Ordinary functor category and classifier.
 
@@ -412,6 +441,7 @@ rule @comp_fapp0
       $Z
       (@comp_fapp0 $A $X $Y $Z $g $f);
 
+// 3b. Universe categories.
 /*
   Universe classifiers and their category structures.
 
@@ -441,6 +471,8 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
     Hom_Cat(A,B)  = A ⊢ B.
 */
 
+// 3c. Directed-family and displayed-arrow classifiers.
+//
 // Directed Cat-valued families are canonical Cat-valued functors.
 //
 // Surface/formula:
@@ -531,6 +563,8 @@ rule @id (@Functord_cat $K $E $D) $FF
     Hom_Functord(FF,GG) = k :^n K ; FF[k] => GG[k].
 */
 
+// 3d. Ordinary identity, composition, opposite, terminal, and constant
+// functor packages.
 /*
   Ordinary identity/composition in Cat_cat.
 
@@ -650,6 +684,8 @@ constant symbol op : τ (Functor Cat_cat Cat_cat);
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
+// 3e. Internalized universe-level constructor packages.
+//
 // Internalized ordinary functor-category formation. The total package has no
 // recoverable parameters; the partial stage is injective so equality of
 // packages can recover the fixed source category.
@@ -733,7 +769,7 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
   ↪ @Op_catd_func $Z;
 
 // -------------------------------------------------------------------------------------------------
-// 3. Curried internal hom
+// 4. Ordinary internal hom and hom actions
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -950,35 +986,7 @@ rule @fapp0 _ _ (@hom_int $A $B $F) $W
 */
 
 // -------------------------------------------------------------------------------------------------
-// 4. Encoded Sigma types for object layers
-// -------------------------------------------------------------------------------------------------
-
-inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
-| Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), @τΣ_ a P;
-notation τΣ_ quantifier;
-
-/*
-  Encoded dependent pair type used for object-level Sigma data.
-
-  Surface/formula:
-    Σ x : a, P(x)
-    Struct_sigma x u = (x,u)
-    sigma_Fst(x,u)   = x
-    sigma_Snd(x,u)   = u
-*/
-constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd;
-notation Σ_ quantifier;
-rule τ (Σ_ $P) ↪ τΣ_ $P;
-
-injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
-rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
-
-// Second projection of an encoded dependent pair.
-injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
-rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
-
-// -------------------------------------------------------------------------------------------------
-// 4b. Ordinary binary products of categories
+// 5. Ordinary binary products of categories
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -1101,7 +1109,7 @@ symbol Product_pair_tele_func [A B : Cat]
   : τ (Functor A (Functor_cat B (Product_cat A B)));
 
 // -------------------------------------------------------------------------------------------------
-// 5. Ordinary transfors
+// 6. Ordinary transformations and functor composition actions
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -1665,6 +1673,10 @@ rule fapp0
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
   ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
 
+// -------------------------------------------------------------------------------------------------
+// 7. Product functor packages, evaluation, curry, and ordinary internal action
+// -------------------------------------------------------------------------------------------------
+
 /*
   Internalized product formation in Cat.
 
@@ -2093,7 +2105,7 @@ rule @tapp0_fapp0
 */
 
 // -------------------------------------------------------------------------------------------------
-// 6. Directed Cat-valued family constructors
+// 8. Directed Cat-valued family constructors
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -2108,6 +2120,9 @@ rule @tapp0_fapp0
                                 = k :^n K ; 1[k] ⊢ E[k]
     piapp0(s,k)               = s[k]
 */
+
+// 8a. Fibre notation, pullback, and base-arrow transport.
+
 // Fixed-base notation: fibre of a directed family.
 //
 // Surface/formula:
@@ -2213,6 +2228,8 @@ rule @tapp0_fapp0
       (@fapp0 $A $B $F $a)
       $η;
 
+// 8b. Constant, terminal, opposite, and displayed composition.
+//
 // Fixed-base layer: constant Cat-valued family.
 //
 // Surface/formula:
@@ -2300,6 +2317,8 @@ rule @tapp0_fapp0
       (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
+// 8c. Section categories and Pi action.
+//
 // Fixed-base layer: section category of a displayed family.
 //
 // Surface/formula:
@@ -2413,6 +2432,8 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
   τ (Obj (Fibre_cat E k))
 ≔ λ K E s k, @fapp0 (Pi_cat E) (Fibre_cat E k) (@piapp0_func K E k) s;
 
+// 8d. Fibre covariance and dependent-hom endpoint notation.
+//
 // Fixed-base covariant transport from a fibre object.
 //
 // Surface/formula:
@@ -2453,7 +2474,7 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
 // Cat-valued families.
 
 // -------------------------------------------------------------------------------------------------
-// 7. Directed Sigma categories and maps between totals
+// 9. Directed Sigma categories and maps between totals
 // -------------------------------------------------------------------------------------------------
 
 // Sigma totalization is a stable constructor package. Its map/projection heads
@@ -2469,6 +2490,9 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
     Sigma_func[K][E]          = Sigma_cat(E)
     sigma_map_func(η)(k,u)    = (k, η_k(u))
 */
+
+// 9a. Sigma totals, Sigma homs, and projection.
+
 // Fixed-base layer: total category of a directed family.
 //
 // Surface/formula:
@@ -2634,6 +2658,8 @@ rule @Functord_cat
       (@Sigma_proj1_pullback_catd $K $R $D)
   ↪ @Functord_cat $K $R $D;
 
+// 9b. Sigma maps and canonical transport arrows.
+//
 // Fixed-base layer: total map induced by a displayed functor.
 //
 // Surface/formula:
@@ -2738,6 +2764,8 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
 	    u))
     (@sigma_transport_arrow K E x y p u);
 
+// 9c. Families over Sigma totals and displayed-transfor uncurrying.
+//
 // Internalized-x prerequisite: Cat-valued family over a total category induced
 // by a displayed functor into the constant category universe.
 //
@@ -2813,7 +2841,7 @@ constant symbol Sigma_transfd_funcd [K : Cat] [R : τ (Catd K)]
       (@Sigma_catd_functord_catd K R T));
 
 // -------------------------------------------------------------------------------------------------
-// 8. Mixed-variance family functor
+// 10. Mixed-variance family functor
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -2899,7 +2927,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
   ↪ @Transf_catd $K $A $B $FF $GG;
 
 // -------------------------------------------------------------------------------------------------
-// 9. Internal edge and presheaf-family classifiers
+// 11. Representables, path induction, and presheaf-family classifiers
 // -------------------------------------------------------------------------------------------------
 
 // These named classifiers are defined composition pipelines.  Keep them named
@@ -2913,6 +2941,8 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
     Presheaf_catd(K)(A)[k]    = Functor_cat(A[k],Cat)
     HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
 */
+
+// 11a. Representables and outgoing-path categories.
 
 symbol Rep_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -2996,6 +3026,8 @@ symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
     x
     p;
 
+// 11b. PathOut motives and fixed-source path induction.
+//
 // Internalized-x layer: family of motive categories over source objects.
 //
 // Surface/formula:
@@ -3286,6 +3318,8 @@ constant symbol PathInd_transfd [Z : Cat]
       (@PathOutReflEval_funcd Z)
       (@PathOutPi_funcd Z));
 
+// 11c. Sigma-total presentation of path induction.
+//
 // Internalized-x source layer: total source family over moving `(x,E)`.
 //
 // Surface/formula:
@@ -3346,6 +3380,8 @@ symbol PathInd_funcd [Z : Cat]
   generic uncurrying projection, after `tdapp0_fapp0` is available.
 */
 
+// 11d. Transitivity benchmark and presheaf classifiers.
+//
 // Transitivity benchmark layer: target family for composition out of a fixed
 // source x.
 //
@@ -3434,7 +3470,7 @@ symbol HomPresheaf_catd_func [Z : Cat]
      (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z));
 
 // -------------------------------------------------------------------------------------------------
-// 10. Directed homd target and internal homd functor
+// 12. Directed homd target and internal homd functor
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -3484,7 +3520,7 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   τ (Functord (Op_catd E) (@Homd_target_catd Z D));
 
 // -------------------------------------------------------------------------------------------------
-// 11. Endpoint normal forms for Sigma homs
+// 13. Endpoint normal forms for Sigma homs
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -3750,7 +3786,7 @@ rule fapp0 (@homd_tgt_func $Z $D $E $FF $x $u $y) $v
   ↪ @homd_ $Z $D $E $FF $x $u $y $v;
 
 // -------------------------------------------------------------------------------------------------
-// 12. Section action over dependent homs
+// 14. Section action over dependent homs
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -3771,7 +3807,7 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
 ≔ fapp0 (@fib_cov_tapp0_func K E x y (@piapp0 K E s x)) f;
 
 // -------------------------------------------------------------------------------------------------
-// 13. Internal displayed hom-action heads
+// 15. Internal displayed hom-action heads
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -3868,7 +3904,7 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
 // -------------------------------------------------------------------------------------------------
-// 14. Derived displayed component notation
+// 16. Derived displayed component notation
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -4836,7 +4872,7 @@ rule @fdapp1_int_hom_fapp0
       (@comp_fapp0 $Z $x $y $z $q $p);
 
 // -------------------------------------------------------------------------------------------------
-// 15. Generic Sigma/Pi weakening helpers
+// 17. Generic Sigma/Pi weakening and delayed projection helpers
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -4866,6 +4902,9 @@ rule @fdapp1_int_hom_fapp0
   composed with `Pi_func`, in the same style as the remaining `homd_int` and
   displayed-action projection packages.
 */
+
+// 17a. Generic Sigma/Pi introduction and evaluation.
+
 // Generic Sigma helper: include a fibre object as a total object.
 //
 // Surface/formula:
@@ -4903,6 +4942,8 @@ rule @tapp0_fapp0
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;
 
+// 17b. Constant sections and delayed product-pair telescope rules.
+//
 // Fixed-base layer: constant section constructor.
 //
 // Surface/formula:
@@ -4951,6 +4992,8 @@ rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
       (@Const_transf $B $A $x $x' $p)
       (@id (Functor_cat $B $B) (@id_func $B));
 
+// 17c. Generic ordinary functor hom-action.
+//
 // Generic full hom-action for identity and composition of ordinary functors.
 // These rules let semantic aliases such as curry expose functor-level action
 // instead of falling back to capped `fapp1_fapp0` computation only.
@@ -4978,6 +5021,8 @@ rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
 // computation rules, because the primary curry package is a definition through
 // that telescope rather than a primitive object-action rewrite rule.
 
+// 17d. Section pullback and internal Pi action.
+//
 // Internalized-x prerequisite: pull a section back along a base functor.
 //
 // Surface/formula:
@@ -5060,6 +5105,8 @@ rule @fdapp1_int_cell
       (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
       $E;
 
+// 17e. Path-induction target transport aliases.
+//
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
 // pullback presentation so Pi sections move by the generic section-pullback
@@ -5098,21 +5145,23 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
 
 /*
   Mathematical computation statements for target transport and the
-  source transport over the canonical transported-motive arrow.
+  source transport over the canonical transported-motive arrow live in the
+  checks module.
 */
 
 // -------------------------------------------------------------------------------------------------
-// 16. Remaining constructor/projection assertions
+// 18. Check catalog and nested telescope stress examples
 // -------------------------------------------------------------------------------------------------
 
 /*
-  The main theorem-like computation statements for path induction,
-  target/source transport, and the fixed-x transitivity benchmark live next to
-  their motivating declarations above.
+  Executable computation checks now live in emdash3_2_tmp_checks.lp. This tail
+  section keeps the human-readable catalog of the lower-level normal forms
+  covered there, plus the nested telescope stress-example constructors that are
+  still useful as ordinary declarations.
 
-  This section keeps lower-level constructor/projection checks and
-  dependency-delayed sanity assertions that are still useful as executable
-  documentation of canonical normal forms.
+  During the temporary reorganization pass, use this section as a checklist for
+  moving nearby catalog comments toward the declarations they document. Keep the
+  stress-example symbols here until their final home is clear.
 */
 
 /*
@@ -5146,7 +5195,8 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
     s[k] = piapp0(s,k).
 */
 
-// Component of the global internal Pi package at a fixed base.
+// The checks module also covers the component of the global internal Pi package
+// at a fixed base.
 
 /*
   Generic Sigma/Pi helper computations.
@@ -5336,8 +5386,9 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
     Sigma_catd_transport(FF,p,r) = Sigma(FF)[sigma_transport(p,r)].
 */
 
-// Object-level strict naturality of displayed functor transport: both named
-// coherence routes compute to the internal off-diagonal component.
+// The checks module covers object-level strict naturality of displayed functor
+// transport: both named coherence routes compute to the internal off-diagonal
+// component.
 
 /*
   Internal dependent-hom constructor projections.
@@ -5348,9 +5399,9 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
     homd_tgt_func(FF,x,u,y)(v) = homd_(FF,x,u,y,v).
 */
 
-// Regression for the `homd_int` first projection. The rule itself keeps the
-// source/target family arguments implicit; this assertion may spell them out
-// because it is not a rewrite-pattern LHS.
+// The checks module keeps the regression for the `homd_int` first projection.
+// The rule itself keeps the source/target family arguments implicit; the check
+// may spell them out because it is not a rewrite-pattern LHS.
 
 /*
   Terminal-source specializations of the dependent-hom source projection.
@@ -5372,15 +5423,15 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 /*
   End-to-end displayed internal-hom extraction checks.
 
-  The third projection assertion below uses explicit canonical source/target
+  The third projection check uses explicit canonical source/target
   slots for `tapp0_fapp0`. The readable form
 
     tapp0_fapp0 v (fdapp1_int_tgt_arrow ...)
 
   is mathematically correct but asks Lambdapi to reconstruct too many implicit
   projection parameters and can time out. The `tgt_arrow` head itself is typed
-  in reduced `Transf` form; the explicit assertion below is still the robust
-  regression surface.
+  in reduced `Transf` form; the explicit check is still the robust regression
+  surface.
 */
 
 /*

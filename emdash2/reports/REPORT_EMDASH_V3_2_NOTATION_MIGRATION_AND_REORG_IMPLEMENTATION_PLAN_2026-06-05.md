@@ -3,6 +3,8 @@
 Date: 2026-06-05
 
 Status: implementation started; notation cleanup and assertion split completed.
+The first temporary reorganization pass has also been promoted into
+`emdash3_2.lp`.
 
 ## Purpose
 
@@ -115,19 +117,23 @@ Completed:
   - clarified directed Sigma categories with subsections for total categories
     and Sigma homs, Sigma maps and canonical transport arrows, and families
     over Sigma totals;
-  - renamed the late helper section to record that it contains delayed
-    projection rules, especially product-pair telescope rules waiting on
-    `const_section_func` and path-induction projections waiting on
-    `tdapp0_fapp0`.
+- renamed the late helper section to record that it contains delayed
+  projection rules, especially product-pair telescope rules waiting on
+  `const_section_func` and path-induction projections waiting on
+  `tdapp0_fapp0`.
+- promoted the checked temporary layout from `emdash3_2_tmp.lp` into
+  `emdash3_2.lp`.
 
 Latest tmp validation:
 
 ```text
 timeout 60s lambdapi check -w emdash3_2_tmp.lp
 timeout 60s lambdapi check -w emdash3_2_tmp_checks.lp
+timeout 60s lambdapi check -w emdash3_2.lp
+timeout 60s lambdapi check -w emdash3_2_checks.lp
 ```
 
-Both temporary checks pass after the current ordering/comment pass.
+Both temporary checks and both active v3.2 checks pass after promotion.
 
 Still deferred:
 
