@@ -282,70 +282,286 @@ in `emdash3_2_checks.lp` and normalize to:
 comp_fapp0 Z x y z q p.
 ```
 
-# 3. The Surface Language
+# 3. The Telescope Theorem
 
-This section will introduce the current v3.2 notation authority.
+The fixed-source eliminator is useful, but the real v3.2 theorem is the
+source-indexed package. The source object $x$ itself varies in $Z$, and the
+family of motives varies with it:
+
+```text
+PathOutMotives_Z[x] = Catd(PathOut_Z(x)).
+```
+
+The two displayed functors in the theorem are:
+
+```text
+PathOutReflEval_Z[x][E] = E[(x,id_x)]
+PathOutPi_Z[x][E]       = Π q :^n PathOut_Z(x), E[q].
+```
+
+Thus the theorem interface is:
+
+```text
+PathInd_transfd(Z)
+  : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x].
+```
+
+This formulation is intentionally not a separate family of external naturality
+squares. The naturality information is part of being a displayed
+transformation. The regressions inspect the induced transports. Along
+$p : x \\to y$, a motive $E$ over $\\mathrm{PathOut}_Z(x)$ is transported to
+
+```text
+p_*E = Pullback_catd(E, PathOut_transport_func(p)).
+```
+
+The source transport is the concrete functor:
+
+```text
+PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
+  : E[(x,id_x)] ⊢ E[(y,p)].
+```
+
+The target transport is section pullback along the contravariant PathOut
+transport:
+
+```text
+PathIndTgt_transport(p,E)
+  : Π q :^n PathOut_Z(x), E[q]
+    ⊢ Π q :^n PathOut_Z(y), E[PathOut_transport(p)[q]].
+```
+
+The next diagram isolates the source side: path induction moves a base value
+$u$ by applying the motive to $\\rho_{x,y,p}$.
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "u0", "left": 120, "top": 90, "label": "$u \\in E[(x,\\mathrm{id}_x)]$" },
+    { "name": "u1", "left": 560, "top": 90, "label": "$E[\\rho_{x,y,p}](u) \\in E[(y,p)]$" },
+    { "name": "r0", "left": 120, "top": 270, "label": "$(x,\\mathrm{id}_x)$" },
+    { "name": "r1", "left": 560, "top": 270, "label": "$(y,p)$" }
+  ],
+  "arrows": [
+    { "from": "u0", "to": "u1", "label": "$E[\\rho_{x,y,p}]$", "label_alignment": "over" },
+    { "from": "r0", "to": "r1", "label": "$\\rho_{x,y,p}$", "label_alignment": "over" },
+    { "from": "u0", "to": "r0", "label": "$\\in$", "label_alignment": "right", "style": { "body": { "name": "dotted" }, "head": { "name": "none" } } },
+    { "from": "u1", "to": "r1", "label": "$\\in$", "label_alignment": "left", "style": { "body": { "name": "dotted" }, "head": { "name": "none" } } }
+  ]
+}
+</div>
+
+The Sigma-total presentation is deliberately secondary. It is derived by the
+generic Sigma-total operation on displayed transformations:
+
+```text
+PathInd_funcd(Z) = Sigma_transfd_funcd(PathInd_transfd(Z)).
+```
+
+Its component at `(x,E)` reduces back to the fixed-source component:
+
+```text
+PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
+```
+
+This distinction matters for the article. The theorem is most naturally
+telescope-shaped; the Sigma-total form is a useful presentation for checking
+ordinary functor-level applications and expanded normal forms.
+
+<div class="arrowgram">
+{
+  "version": 1,
+  "nodes": [
+    { "name": "mot", "left": 100, "top": 230, "label": "$x :^n Z ;\\ \\mathrm{Catd}(\\mathrm{PathOut}_Z(x))$" },
+    { "name": "src", "left": 140, "top": 80, "label": "$\\mathrm{PathOutReflEval}_Z$" },
+    { "name": "tgt", "left": 560, "top": 80, "label": "$\\mathrm{PathOutPi}_Z$" },
+    { "name": "sigsrc", "left": 140, "top": 390, "label": "$\\mathrm{PathIndSrc}_Z$" },
+    { "name": "sigtgt", "left": 560, "top": 390, "label": "$\\mathrm{PathIndTgt}_Z$" }
+  ],
+  "arrows": [
+    { "from": "src", "to": "tgt", "label": "$\\mathrm{PathInd\\_transfd}(Z)$", "label_alignment": "over" },
+    { "from": "src", "to": "mot", "label": "$$", "style": { "body": { "name": "dashed" }, "head": { "name": "none" } } },
+    { "from": "tgt", "to": "mot", "label": "$$", "style": { "body": { "name": "dashed" }, "head": { "name": "none" } } },
+    { "from": "sigsrc", "to": "sigtgt", "label": "$\\mathrm{PathInd\\_funcd}(Z)$", "label_alignment": "over" },
+    { "from": "src", "to": "sigsrc", "label": "$\\Sigma$", "label_alignment": "right", "style": { "body": { "name": "dotted" } } },
+    { "from": "tgt", "to": "sigtgt", "label": "$\\Sigma$", "label_alignment": "left", "style": { "body": { "name": "dotted" } } }
+  ]
+}
+</div>
+
+# 4. The Surface Language
+
+The notation is part of the result. The v3.2 file is still Lambdapi, but its
+comments and planned parser surface use a disciplined syntax so that a reader
+can distinguish ordinary homs, indexed homs, ordinary functor categories,
+shaped functor categories, and mixed-variance displayed functor categories.
+
+| Surface form | Kernel meaning | Role |
+| --- | --- | --- |
+| `a ->^C b` | `Hom_cat C a b` | ordinary hom with explicit ambient category |
+| `a -> b` | `Hom_cat C a b` | ordinary hom when `C` is clear |
+| `aa[z^-] ->_[z]^R bb[z]` | `Hom_catd R aa bb` | indexed/displayed hom |
+| `A ⊢ B` | `Functor_cat A B` | ordinary functor/program category |
+| `z :^n Z ; E[z] ⊢ D[z]` | `Functord_cat E D` | shaped functor/program category |
+| `Π (z :^n Z), D[z]` | `Pi_cat D` | terminal-shape section category |
+| `A[z^-] ⊢_[z] B[z]` | `Functor_catd A B` | mixed-variance displayed functor family |
+| `F => G` | `Transf_cat F G` | ordinary transformation category |
+| `FF[z^-] =>_[z] GG[z]` | `Transf_catd FF GG` | indexed/displayed transformation category |
+
+There are two details that are easy to miss. First, ordinary hom ambient
+parameters are superscripts:
 
 ```text
 a ->^C b
-aa[z^-] ->_[z]^R bb[z]
-A ⊢ B
-z :^n Z ; E[z] ⊢ D[z]
-Π (z :^n Z), D[z]
-A[z^-] ⊢_[z] B[z]
-F => G
-FF[z^-] =>_[z] GG[z]
 ```
 
-The nested telescope stress test will be treated as an expressibility example:
+The notation `->_` is reserved for indexed/displayed homs:
+
+```text
+aa[z^-] ->_[z]^R bb[z].
+```
+
+Second, the shaped category
+
+```text
+z :^n Z ; E[z] ⊢ D[z]
+```
+
+does not bind an object variable of `E[z]`. The shape `E[z]` is part of the
+generalized quantification. If the target family depends on an actual object
+of `E[z]`, the construction is different and should be represented using a
+Sigma-style telescope.
+
+The nested telescope stress test is:
 
 ```text
 k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z])
 ```
 
-# 4. Kernel Foundations
+This is not a product-base notation. It is telescope-style: `k` is the first
+input and `z` is the next input. The order `k;z` is therefore meaningful. The
+inner category is an ordinary shaped functor category, not a `⊢_` expression;
+the indexed-hom notation `->_` is the right way to spell fibrewise homs when
+the displayed family itself is the object of interest.
 
-This section will be dependency-driven rather than a broad tour:
+# 5. Kernel Foundations
 
-1. `Grpd`, `Cat`, `Obj`, `Hom_cat`;
-2. `Functor_cat`, `Transf_cat`, stable application heads;
-3. `Catd_cat`, `Functord_cat`, `Transfd_cat`;
-4. `Pi_cat`, `Sigma_cat`, `sigma_arrow`, `sigma_transport_arrow`;
-5. `Functor_catd`, `Hom_catd`, `Transf_catd`;
-6. representables `Rep_catd`, `PathOut_cat`, and path induction.
+The kernel section of the paper should be dependency-driven. The theorem uses
+only the following infrastructure, in this order.
 
-# 5. Computational Normalization Discipline
+1. `Grpd`, `Cat`, `Obj`, and `Hom_cat` give the strict categorical base.
+2. `Functor_cat` and `Transf_cat` provide ordinary program and transformation
+   categories.
+3. `Catd_cat`, `Functord_cat`, and `Transfd_cat` provide directed families,
+   shaped programs, and displayed transformations.
+4. `Pi_cat` and `Sigma_cat` provide section and total categories.
+5. `Functor_catd`, `Hom_catd`, and `Transf_catd` provide mixed-variance
+   displayed functor, hom, and transformation families.
+6. `Rep_catd`, `PathOut_cat`, `pathout_refl_arrow`, and `PathInd_transfd`
+   assemble the arrow-induction theorem.
 
-This section will explain stable heads, rewrite rules versus unification rules,
-semantic owners before helper aliases, and why diagnostics are split into
-`emdash3_2_checks.lp`.
+The representable family is the first key construction:
 
-# 6. Supporting Constructions
+```text
+Rep_Z(x)[y] = Hom_Z(x,y).
+```
 
-This section will cover supporting examples after the main theorem:
+Its action on a base arrow is precomposition:
 
-- product-valued functors and projections;
-- semantic curry/uncurry object and capped hom-action checks;
-- Sigma/Pi helper beta laws;
-- ordinary adjunction cut-elimination:
+```text
+Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
+Rep_transport(p)[z][q] = q o p.
+```
+
+`PathOut_Z(x)` is then just the Sigma category of this representable family:
+
+```text
+PathOut_Z(x) = Σ y :^n Z, Rep_Z(x)[y].
+```
+
+All later path-induction terms are built from this small list. That is why the
+paper can lead with the theorem and postpone the broader library tour.
+
+# 6. Computational Normalization Discipline
+
+The implementation style is as important as the definitions. The v3.2 file
+uses named semantic owners for constructions whose projections must compute
+predictably, and it avoids introducing helper aliases as independent rewrite
+owners.
+
+For example, `CompTarget_catd` is a semantic `hom_con` expression:
+
+```text
+CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x).
+```
+
+The readable helper `CompTarget_fapp1_func` exposes a capped action with
+canonical endpoints, but it routes through `CompTarget_catd`. The helper is
+not a second semantic definition of the same operation.
+
+The stable-head discipline is visible in the application names:
+
+```text
+fapp0        ordinary functor object action
+fapp1_fapp0  ordinary functor arrow action
+tapp0_fapp0  transformation component
+tdapp0_fapp0 displayed-transformation component
+piapp0       section evaluation
+```
+
+Rules are installed at the lowest stable head that carries the relevant
+discriminator. This is why many assertions use canonical forms such as
+`Hom_cat`, `Functor_cat`, and `Functord_cat` rather than readability wrappers:
+the canonical heads are better unification targets.
+
+The diagnostics live in `emdash3_2_checks.lp` rather than in the main file.
+That split keeps `emdash3_2.lp` readable while still making normalization
+claims executable. The checks are not ornamental; they are the regression
+catalog for the paper.
+
+# 7. Supporting Constructions
+
+After the path-induction theorem, the paper should include smaller examples
+that show the same kernel discipline in other constructors.
+
+Product-valued functors and product projections are already computational. In
+particular, maps into a product category reduce through the two projection
+functors, and diagonal or swap maps can be presented as ordinary product maps
+when the needed product context is available.
+
+The curry/uncurry layer is treated as supporting infrastructure. Object-level
+semantic curry and uncurry are present, and capped hom-action checks document
+the current computational behavior. The remaining higher action needed for
+some whole-functor semantic uncurry statements is deferred to the planned
+structural functor-logic work.
+
+Ordinary adjunctions provide another good example because their triangle
+computations have the shape of cut-elimination:
 
 ```text
 counit[f] o left(unit[g]) -> f o left(g)
 right(counit[g]) o unit[f] -> right(g) o f.
 ```
 
-# 7. Implementation And Validation
+This should remain a later section or sidebar. It reinforces the same message,
+but it is not the central theorem of v3.2.
 
-The implementation is split into:
+# 8. Implementation And Validation
 
-- `emdash3_2.lp`: definitions and rewrite rules;
-- `emdash3_2_checks.lp`: executable assertions and regression checks;
-- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
-  current status and SOP;
-- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
-  notation authority.
+The implementation is split into two Lambdapi files:
 
-Validation commands:
+- `emdash3_2.lp`: definitions, interfaces, and rewrite rules;
+- `emdash3_2_checks.lp`: executable assertions and regression checks.
+
+The active reports used by the paper are:
+
+- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`;
+- `reports/EMDASH_FOUNDATIONS.md`;
+- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
+- `reports/REPORT_EMDASH_V3_2_RESEARCH_ARTICLE_ARCHITECTURE_2026-06-05.md`.
+
+The core validation commands are:
 
 ```bash
 timeout 60s lambdapi check -w emdash3_2.lp
@@ -354,30 +570,141 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 npm run check:render
 ```
 
-# 8. Limitations And Future Work
+The print pipeline treats this file as a draft variant:
 
-The v3.2 article should be explicit about deferred work:
+```text
+print/public/index_3_2.md
+```
 
-- structural functor logic is planned but not implemented;
-- general dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` remain future work;
-- arbitrary Sigma-map transport is not strict without strict/cartesian
-  specialization;
-- whole-transfor displayed laxity is deferred;
-- full product/curry adjunction coherence is future work;
-- `section_total(s) : K ⊢ Σ_K E` is not yet a named presentation facade.
+It is previewed with:
 
-# 9. Conclusion
+```text
+/?paper=index_3_2.md
+```
 
-The conclusion will return to the main claim: v3.2 shows that arrow induction
-and directed transitivity can be internalized as checked computational
-structure in a Lambdapi kernel, while the new shaped syntax makes these
-constructions presentable as a programming-language/proof-assistant surface.
+Once this long version is coherent, it can replace `print/public/index.md`;
+the short version `index_0.md` should then be regenerated from the v3.2 long
+article rather than from the old v2 text.
+
+# 9. Limitations And Future Work
+
+The v3.2 article should be explicit about what is implemented now and what is
+planned.
+
+Structural functor logic is still planned. The likely operations are exchange,
+weakening/constant, and contraction/diagonal at the level of nested functor
+categories, with displayed and transformation variants treated carefully.
+
+General dependent adjunctions remain future work:
+
+```text
+Σ_F ⊣ F^* ⊣ Π_F.
+```
+
+The current ordinary adjunction interface is useful and computational, but it
+is not yet the general fibred adjunction story.
+
+Arbitrary Sigma-map transport is not claimed to be strict without the right
+cartesian or strict specialization. The v3.2 path-induction story uses the
+canonical transport arrows it needs; it does not claim a fully general
+strictification theorem for every Sigma arrow.
+
+Whole-transfor displayed laxity and full product/curry adjunction coherence
+are also deferred. Finally, a presentation facade such as
+
+```text
+section_total(s) : K ⊢ Σ_K E
+```
+
+is not yet named, even though the semantic construction it would expose is
+conceptually clear.
+
+# 10. Conclusion
+
+The v3.2 development shows that arrow induction can be presented as
+computational categorical structure. The theorem is shaped as a displayed
+transformation over the source object, its fixed-source and Sigma-total
+presentations compute to the same section, and the composition benchmark
+normalizes to ordinary categorical composition.
+
+The broader contribution is a surface and kernel architecture for
+omega-oriented categorical programming: shaped quantification, indexed homs,
+displayed transformations, Sigma/Pi categories, and stable-head normalization
+work together as a small executable specification.
 
 # Appendix A. Identifier Glossary
 
-This appendix will map mathematical notation to implementation identifiers.
+| Mathematical notation | Kernel identifier |
+| --- | --- |
+| `Rep_Z(x)` | `Rep_catd Z x` |
+| `Rep_transport(p)` | `Rep_transport_func Z x y p` |
+| `PathOut_Z(x)` | `PathOut_cat Z x` |
+| `(y,p)` in `PathOut_Z(x)` | `pathout_obj Z x y p` |
+| `(x,id_x)` | `pathout_refl_obj Z x` |
+| `rho_{x,y,p}` | `pathout_refl_arrow Z x y p` |
+| `E[rho_{x,y,p}]` | `pathout_refl_eval_base_func Z x y p E` |
+| `PathOutMotives_Z` | `PathOutMotives_catd Z` |
+| `PathOutReflEval_Z` | `PathOutReflEval_funcd Z` |
+| `PathOutPi_Z` | `PathOutPi_funcd Z` |
+| fixed-source path induction | `PathInd_func Z x` |
+| telescope path induction | `PathInd_transfd Z` |
+| Sigma-total path induction | `PathInd_funcd Z` |
+| composition target | `CompTarget_catd Z x` |
+| composition motive | `CompMotive_catd Z x` |
+| composition section | `path_comp_sec Z x` |
+| composition functor for `p` | `path_comp_func Z x y p` |
 
 # Appendix B. Selected Checked Normal Forms
 
-This appendix will quote the main normal forms from `emdash3_2_checks.lp`,
-including the fully expanded telescope and Sigma-total composition benchmarks.
+The article should quote checked normal forms in compact mathematical notation
+and keep the fully expanded Lambdapi terms available as regression references.
+The following statements are covered by `emdash3_2_checks.lp`.
+
+Core PathOut and rho checks:
+
+```text
+PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))
+PathOut_transport(p)[(z,q)] = (z,q o p)
+PathOut_transport(p)[(y,id_y)] = (y,p)
+Rep_Z(x)[p](id_x) = p
+rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
+PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
+  = rho_{x,z,q o p}
+```
+
+Path-induction projection checks:
+
+```text
+PathInd_func(Z,x)[E] = path_ind_func_fapp0(Z,x,E)
+PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)
+PathInd_transfd(Z)[x] = PathInd_func(Z,x)
+PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u)
+PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)
+PathInd_funcd(Z)[(x,E)](u) = path_ind_sec(Z,x,E,u)
+```
+
+Composition benchmark checks:
+
+```text
+CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
+CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x)
+Pi(PathOut_Z(x), CompMotive_Z(x))
+  = z :^n Z ; Rep_Z(x)[z] ⊢ CompTarget_Z(x)[z]
+
+path_ind_sec(CompMotive_Z(x), id_Rep_Z(x)) = path_comp_sec(x)
+path_comp_sec(x)[p] = path_comp_func(p)
+path_comp_func(p)[z][q] = q o p
+```
+
+The two expanded routes that matter most are:
+
+```text
+expanded(PathInd_transfd, CompMotive_Z(x), p, q) = q o p
+expanded(PathInd_funcd, CompMotive_Z(x), p, q) = q o p
+```
+
+# Appendix C. Diagram Source Notes
+
+All figures in this draft are Arrowgram JSON blocks. They are intentionally
+simple: the diagrams explain object and arrow flow, while the actual
+normalization claims are made by Lambdapi assertions in `emdash3_2_checks.lp`.
