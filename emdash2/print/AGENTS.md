@@ -8,6 +8,7 @@ The `print/` workspace renders the research paper from a single Markdown source:
 
 - Paper source: `print/public/index.md`
 - Short/conference variant: `print/public/index_0.md`
+- v3.2 draft variant: `print/public/index_3_2.md`
 - Renderer app: `print/src/App.tsx`
 - Output: “Print / Save PDF” in the preview UI (Paged.js paginates the HTML)
 
@@ -30,6 +31,7 @@ From the `emdash2/` project folder:
    - choose which paper to preview via query param:
      - default (archive/full): `/?paper=index.md` (or just `/`)
      - short (conference): `/?paper=index_0.md` (also accepts `?paper=0`)
+     - v3.2 draft: `/?paper=index_3_2.md`
 3. “Print / Save PDF”:
    - use the UI button (top-right) which triggers the browser print dialog
 
@@ -39,6 +41,7 @@ Paper content
 
 - `print/public/index.md`: the paper (YAML frontmatter + Markdown + embedded diagram blocks)
 - `print/public/index_0.md`: shorter paper variant (same renderer/pipeline)
+- `print/public/index_3_2.md`: current v3.2 long-article workbench until promotion
 
 Renderer / parsing
 
@@ -64,7 +67,7 @@ Browser console / end-to-end checks
   - loads the app
   - fails on `console.error`, `pageerror`, request failures
   - treats KaTeX strict warnings (e.g. `[mathVsTextAccents]`) as failures
-  - checks both `index.md` (default) and `index_0.md` (via `?paper=index_0.md`)
+  - checks every `print/public/index*.md` variant discovered by the current naming policy; `index.md` is loaded as the default route and other variants use `?paper=...`
 
 NPM scripts (most useful)
 
@@ -74,7 +77,7 @@ NPM scripts (most useful)
 
 ## Adding more variants
 
-You can add additional public paper variants as `print/public/index_<N>.md` (e.g. `index_1.md`). The renderer can load any `*.md` via `?paper=...`, but the validation script currently auto-discovers and validates only files matching `index*.md`.
+You can add additional public paper variants as `print/public/index_<name>.md` (e.g. `index_1.md` or `index_3_2.md`). The renderer can load any `*.md` via `?paper=...`, while validation and console checks auto-discover files matching `index(?:_[A-Za-z0-9]+)*.md`.
 
 # Authoring conventions (important gotchas)
 

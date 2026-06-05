@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import fs from 'node:fs';
 import net from 'node:net';
 import process from 'node:process';
 import { chromium } from 'playwright';
@@ -48,6 +49,30 @@ function killProcess(child) {
   }, 2000).unref();
 }
 
+function discoverPaperRuns() {
+  const publicDir = new URL('../public/', import.meta.url);
+  const files = fs
+    .readdirSync(publicDir, { withFileTypes: true })
+    .filter((d) => d.isFile() && /^index(?:_[A-Za-z0-9]+)*\.md$/.test(d.name))
+    .map((d) => d.name)
+    .sort((a, b) => {
+      if (a === 'index.md') return -1;
+      if (b === 'index.md') return 1;
+      if (a === 'index_0.md') return -1;
+      if (b === 'index_0.md') return 1;
+      return a.localeCompare(b);
+    });
+
+  if (files.length === 0) {
+    throw new Error('No public/index*.md paper files found');
+  }
+
+  return files.map((file) => ({
+    name: file === 'index.md' ? 'index.md (default)' : file,
+    query: file === 'index.md' ? '' : `?paper=${encodeURIComponent(file)}`,
+  }));
+}
+
 async function main() {
   const host = '127.0.0.1';
   const port = await findOpenPort(host, 4173, 30);
@@ -72,14 +97,11 @@ async function main() {
   }
   if (!(await isPortOpen(host, port))) {
     killProcess(preview);
-    throw new Error(`Preview server did not start on ${url}`);
+    throw new Error(`Preview server did not start on ${baseUrl}`);
   }
 
   const browser = await chromium.launch({ headless: true });
-  const runs = [
-    { name: 'index.md (default)', query: '' },
-    { name: 'index_0.md', query: '?paper=index_0.md' },
-  ];
+  const runs = discoverPaperRuns();
 
   const errors = [];
   const warnings = [];

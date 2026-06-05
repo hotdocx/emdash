@@ -190,7 +190,7 @@ export default function App() {
             .then(text => setMarkdown(text))
             .catch(err => {
                 console.error(err);
-                setMarkdown(`# Error: Could not load ${paperPath}\n\nPlease ensure \`print/public/${safe}\` exists, or open with \`?paper=index.md\` / \`?paper=index_0.md\`.`);
+                setMarkdown(`# Error: Could not load ${paperPath}\n\nPlease ensure \`print/public/${safe}\` exists, or open with \`?paper=index.md\`, \`?paper=index_0.md\`, or \`?paper=index_3_2.md\`.`);
             });
     }, []);
 

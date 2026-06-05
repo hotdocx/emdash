@@ -52,7 +52,7 @@ const publicDir = new URL('../public/', import.meta.url);
 const publicPath = new URL('.', publicDir);
 const mdFiles = fs
   .readdirSync(publicPath, { withFileTypes: true })
-  .filter((d) => d.isFile() && /^index(?:_[0-9]+)?\.md$/.test(d.name))
+  .filter((d) => d.isFile() && /^index(?:_[A-Za-z0-9]+)*\.md$/.test(d.name))
   .map((d) => d.name)
   .sort((a, b) => a.localeCompare(b));
 
