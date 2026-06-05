@@ -104,6 +104,67 @@ Still deferred:
 - consider deeper definition-level file splits after the assertion split has
   settled.
 
+## Reorganization Workbench Policy
+
+Before splitting `emdash3_2.lp` into definition-level modules, do a cleanup and
+ordering pass in temporary files:
+
+```text
+emdash3_2_tmp.lp
+emdash3_2_tmp_checks.lp
+```
+
+The active baseline remains:
+
+```text
+emdash3_2.lp
+emdash3_2_checks.lp
+```
+
+The temporary checks file should require the temporary implementation:
+
+```text
+require open emdash.emdash3_2_tmp;
+```
+
+Every temporary reorganization stage must pass:
+
+```text
+lambdapi check -w emdash3_2_tmp.lp
+lambdapi check -w emdash3_2_tmp_checks.lp
+```
+
+Only after the temporary layout is stable should the same edits be applied to
+the active `emdash3_2.lp` and `emdash3_2_checks.lp`.
+
+Recommended temporary stages:
+
+1. Comment/section cleanup only:
+   - fix stale section names left by the assertion split;
+   - add missing or clearer section headings;
+   - split huge conceptual sections with subsection comments without moving
+     declarations.
+2. Dependency-preserving local moves:
+   - keep `τΣ_` and object-level encoded Sigma near the foundations;
+   - keep ordinary `Product_cat` before any ordinary functor/transfor code that
+     projects products;
+   - consolidate product telescope rules with the constant-section machinery
+     they depend on, or document why they are delayed;
+   - keep ordinary `Transf` core separate from Product/Eval/Curry/Internal
+     action material.
+3. Larger thematic regrouping, only after successful temporary checks:
+   - separate ordinary category/functor/transfor core;
+   - separate directed-family constructors (`Catd`, `Functord`, `Transfd`,
+     `Pi`, `Sigma`);
+   - separate mixed-variance constructors (`Hom_catd`, `Functor_catd`,
+     `Transf_catd`);
+   - separate path-induction, displayed internal hom/action, and
+     Sigma-laxity-oriented projection pipelines.
+
+Do not reorder a declaration merely because the target layout is nicer. First
+identify the symbols/rules that depend on it, move a small block in the
+temporary file, and re-run both temporary checks.
+
 ### 1. Establish One Current Syntax Authority
 
 Create a new canonical syntax report:
