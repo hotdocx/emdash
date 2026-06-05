@@ -634,6 +634,54 @@ inner category is an ordinary shaped functor category, not a `⊢_` expression;
 the indexed-hom notation `->_` is the right way to spell fibrewise homs when
 the displayed family itself is the object of interest.
 
+The same distinction explains why the article keeps both `->_` and `⊢_`.
+Generic displayed homs use the indexed hom operator:
+
+```text
+aa[z^-] ->_[z]^R bb[z]
+```
+
+The mixed-variance functor-family constructor is the `Cat`-ambient instance of
+that idea:
+
+```text
+A[z^-] ->_[z]^Cat B[z]  =  A[z^-] ⊢_[z] B[z].
+```
+
+When the reader should see an ordinary program category, the article uses
+`⊢`. When the reader should see a fibrewise or mixed-variance program-family
+category, the article uses `⊢_`.
+
+The transformation notation follows the same pattern:
+
+```text
+F => G
+FF[z^-] =>_[z] GG[z]
+```
+
+The first is an ordinary transformation category. The second is the indexed
+or displayed transformation category, equivalently the displayed hom in the
+appropriate displayed functor-family category.
+
+Subscripts are reserved for displayed indices and later substitution. This is
+why ordinary ambient categories use superscripts:
+
+```text
+a ->^C b
+aa[z^-] ->_[z]^R bb[z]
+```
+
+The design leaves room for future pullback notation such as:
+
+```text
+A[z^-] ->_[z:=f]^R B[z]
+A[z^-] ⊢_[z:=f] B[z]
+```
+
+Such expressions are intended to mean that the indexed family over `Z` has
+been pulled back along `f : K ⊢ Z`. The article does not use this substitution
+notation in the v3.2 theorem, but the operator design keeps the slot open.
+
 # 5. Kernel Foundations
 
 The kernel exposition is dependency-driven. The theorem uses only the
