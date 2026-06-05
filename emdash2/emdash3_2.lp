@@ -7024,6 +7024,196 @@ assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
     ≡ Transf_catd A B FF GG;
 
 /*
+  Surface-notation stress examples.
+
+  These declarations exercise the 2026-06-05 notation plan without adding new
+  rewrite behavior. They are deliberately semantic aliases through existing
+  constructors. Surface readings:
+
+    a ->^C b
+      Hom_cat C a b
+
+    aa[z^-] ->_[z]^R bb[z]
+      Hom_catd R aa bb
+
+    A ⊢ B
+      Functor_cat A B
+
+    z :^n Z ; E[z] ⊢ D[z]
+      Functord_cat E D
+
+    Π (z :^n Z), D[z]
+      Pi_cat D
+
+    k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z])
+      Functord_cat C (Hom_catd(const_K(Catd_cat Z), E, D)).
+*/
+
+// Generic section category of an indexed hom family:
+//   Π (z :^n Z), aa[z^-] ->_[z]^R bb[z].
+symbol Indexed_hom_section_cat [Z : Cat]
+  (R : τ (Catd Z))
+  (aa : τ (Obj (Pi_cat (Op_catd R))))
+  (bb : τ (Obj (Pi_cat R)))
+  : Cat
+≔ @Pi_cat Z (@Hom_catd Z R aa bb);
+
+// Nested telescope result family over K:
+//   k |-> (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
+symbol Nested_telescope_catd [K Z : Cat]
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
+  : τ (Catd K)
+≔ @Hom_catd
+    K
+    (@Const_catd K (@Catd_cat Z))
+    E
+    D;
+
+// Full nested telescope category:
+//   k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
+symbol Nested_telescope_cat [K Z : Cat]
+  (C : τ (Catd K))
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
+  : Cat
+≔ @Functord_cat K C (@Nested_telescope_catd K Z E D);
+
+assert [K Z : Cat]
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
+  (k : τ (Obj K)) ⊢
+  Fibre_cat (@Nested_telescope_catd K Z E D) k
+    ≡ @Functord_cat
+        Z
+        (@piapp0 K (@Op_catd K (@Const_catd K (@Catd_cat Z))) E k)
+        (@piapp0 K (@Const_catd K (@Catd_cat Z)) D k);
+
+assert [K Z : Cat]
+  (C : τ (Catd K))
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z))))) ⊢
+  @Nested_telescope_cat K Z C E D
+    ≡ @Functord_cat K C (@Nested_telescope_catd K Z E D);
+
+/*
+  Basic textbook-logic formulas already expressible in the ordinary layer.
+
+  These are category-valued formulas plus canonical inhabitants/programs where
+  existing infrastructure already supplies one. They should remain simple
+  aliases; the real computation is owned by `id_func`, `comp_cat_cov_func_func`,
+  `Eval_func`, `const_section_func`, product projections/pairing, and
+  curry/uncurry.
+*/
+
+// Identity: A ⊢ A.
+symbol Logic_id_cat (A : Cat) : Cat
+≔ Functor_cat A A;
+
+symbol Logic_id_func (A : Cat) : τ (Obj (Logic_id_cat A))
+≔ @id_func A;
+
+// Hypothetical syllogism / composition:
+//   (B ⊢ C) ⊢ ((A ⊢ B) ⊢ (A ⊢ C)).
+symbol Logic_comp_cat (A B C : Cat) : Cat
+≔ Functor_cat
+    (Functor_cat B C)
+    (Functor_cat (Functor_cat A B) (Functor_cat A C));
+
+symbol Logic_comp_func (A B C : Cat) : τ (Obj (Logic_comp_cat A B C))
+≔ @comp_cat_cov_func_func A B C;
+
+// Modus ponens / evaluation:
+//   ((A ⊢ B) x A) ⊢ B.
+symbol Logic_eval_cat (A B : Cat) : Cat
+≔ Functor_cat (Product_cat (Functor_cat A B) A) B;
+
+symbol Logic_eval_func (A B : Cat) : τ (Obj (Logic_eval_cat A B))
+≔ @Eval_func A B;
+
+// Weakening / K:
+//   B ⊢ (A ⊢ B).
+symbol Logic_weakening_cat (A B : Cat) : Cat
+≔ Functor_cat B (Functor_cat A B);
+
+symbol Logic_weakening_func (A B : Cat) : τ (Obj (Logic_weakening_cat A B))
+≔ @const_section_func A B;
+
+// Product introduction:
+//   A ⊢ (B ⊢ A x B).
+symbol Logic_product_intro_cat (A B : Cat) : Cat
+≔ Functor_cat A (Functor_cat B (Product_cat A B));
+
+symbol Logic_product_intro_func (A B : Cat) : τ (Obj (Logic_product_intro_cat A B))
+≔ @Product_pair_tele_func A B;
+
+// Product projections:
+//   A x B ⊢ A
+//   A x B ⊢ B.
+symbol Logic_product_elimL_cat (A B : Cat) : Cat
+≔ Functor_cat (Product_cat A B) A;
+
+symbol Logic_product_elimL_func (A B : Cat) : τ (Obj (Logic_product_elimL_cat A B))
+≔ @Product_projL_func A B;
+
+symbol Logic_product_elimR_cat (A B : Cat) : Cat
+≔ Functor_cat (Product_cat A B) B;
+
+symbol Logic_product_elimR_func (A B : Cat) : τ (Obj (Logic_product_elimR_cat A B))
+≔ @Product_projR_func A B;
+
+// Curry and uncurry:
+//   ((A x B) ⊢ C) ⊢ (A ⊢ (B ⊢ C))
+//   (A ⊢ (B ⊢ C)) ⊢ ((A x B) ⊢ C).
+symbol Logic_curry_cat (A B C : Cat) : Cat
+≔ Functor_cat
+    (Functor_cat (Product_cat A B) C)
+    (Functor_cat A (Functor_cat B C));
+
+symbol Logic_curry_func (A B C : Cat) : τ (Obj (Logic_curry_cat A B C))
+≔ @curry_func_func A B C;
+
+symbol Logic_uncurry_cat (A B C : Cat) : Cat
+≔ Functor_cat
+    (Functor_cat A (Functor_cat B C))
+    (Functor_cat (Product_cat A B) C);
+
+symbol Logic_uncurry_func (A B C : Cat) : τ (Obj (Logic_uncurry_cat A B C))
+≔ @uncurry_func_func A B C;
+
+/*
+  Deferred textbook/structural stress formulas.
+
+  The following formulas are intentionally not declared yet. They should become
+  typechecked aliases once the corresponding structural operations are added.
+
+    Exchange:
+      (A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))
+      owner: sym_func_func(A,B,C)
+
+    Contraction:
+      (A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)
+      owner: diag_func_func(A,C)
+
+    Displayed weakening:
+      B ⊢_K (A ⊢_[K] B)
+      owner: Functor_catd_const_funcd(A,B)
+
+    Displayed exchange:
+      (A ⊢_[K] (B ⊢_[K] C)) ⊢_K (B ⊢_[K] (A ⊢_[K] C))
+      owner: Functor_catd_sym_funcd(A,B,C)
+
+    Displayed contraction:
+      (A ⊢_[K] (A ⊢_[K] C)) ⊢_K (A ⊢_[K] C)
+      owner: Functor_catd_diag_funcd(A,C)
+
+    Indexed product formulas such as
+      z :^n Z ; E[z] ⊢ D[z] x F[z]
+      and their curry/uncurry forms need `Product_catd` and displayed
+      product/evaluation packages before they should be made executable.
+*/
+
+/*
   PathOut category and moving-motive transport.
 
   Surface/formula:
