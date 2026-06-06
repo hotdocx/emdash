@@ -1,5 +1,5 @@
 ---
-title: emdash v3.2 — Directed dependent homs and computational arrow induction
+title: emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction)
 authors: https://github.com/hotdocx/emdash
 ---
 
