@@ -12,6 +12,13 @@ category-theoretic arrow-induction principle built from directed families,
 dependent sums, dependent products, and dependent homs, then checked by
 normalization in Lambdapi.
 
+The strict/lax distinction is essential. Ordinary functoriality is oriented as
+strict computation, but transport in directed families may preserve canonical
+total arrows only up to a displayed laxity cell. The arrow-induction theorem is
+therefore formulated first as a source-indexed telescope; its Sigma-total
+presentation is derived only after the relevant transport and laxity data have
+been internalized.
+
 The foundational construction is the directed dependent hom. Given a
 category-valued family $E : K \\to \\mathbf{Cat}$, objects
 $u \\in E[x]$ and $v \\in E[y]$, and a base arrow $f : x \\to y$, the fibre
@@ -101,7 +108,11 @@ The v3.2 article focuses on four checked contributions.
    `x :^n Z ; E :^n (PathOut_Z(x) ⊢ Cat)`, the checked construction has type
    `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`; the kernel packages the
    source-indexed telescope as `PathInd_transfd(Z)`.
-4. **Computational composition.** The transitivity benchmark reduces a fully
+4. **Strict and lax directed transport.** General displayed functors carry
+   computable laxity cells over base arrows; strict or cartesian constructors,
+   including representable precomposition, collapse those cells to canonical
+   identities.
+5. **Computational composition.** The transitivity benchmark reduces a fully
    expanded path-induction expression to $q \\circ p$, represented in the
    kernel by the normal form `comp_fapp0 Z x y z q p`.
 
@@ -587,7 +598,93 @@ applications and expanded regression checks.
 }
 </div>
 
-# 6. Composition As The Main Computation
+# 6. Strictness, Laxity, And Directed Induction
+
+In ordinary dependent type theory and HoTT, substitution is organized around
+variables and identity/path structure. The computation rules for identity
+elimination are strict at reflexivity, and many uses of transport are
+judgemental only after the relevant path has reduced to `refl`.
+
+In emdash v3.2 the base of a family is a directed category. A family
+$E : K \\to \\mathbf{Cat}$ transports fibre objects along actual arrows
+$p : x \\to y$:
+
+```text
+E[p](u) : E[y].
+```
+
+This directed transport is strict for ordinary functoriality: functor actions
+are oriented so that composites compute as composites. However, a morphism of
+families
+
+```text
+FF : k :^n K ; E[k] ⊢ D[k]
+```
+
+does not in general preserve canonical transport arrows strictly. Over
+$p : x \\to y$ and $u : E[x]$, the two evident endpoints are
+
+```text
+D[p](FF[x](u))
+FF[y](E[p](u)).
+```
+
+A displayed functor relates them by a directed laxity cell
+
+```text
+λ_{FF,p,u} : D[p](FF[x](u)) →^{D[y]} FF[y](E[p](u)).
+```
+
+The active kernel obtains this cell from the internal displayed hom-action,
+with component-level normal form `fdapp1_int_cell(FF,p,u)`. The Sigma-total
+action exposes the same data: the image of a total arrow `(p,α)` is
+
+```text
+Σ(FF)(p,α) = (p, FF[y][α] ∘ λ_{FF,p,u}).
+```
+
+Thus the Sigma-total presentation is not the primitive source of laxity. It is
+where laxity becomes visible as the fibre component of a total arrow. This
+avoids a circular definition in which Sigma maps would be defined from an
+external laxity operation and that laxity would then be extracted back from
+Sigma maps.
+
+Strict or cartesian constructors add focused computation rules making the
+laxity cell collapse. Representable precomposition is one such strict case:
+for $p : x \\to y$, the family morphism
+
+```text
+Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
+```
+
+has cartesian behaviour on the canonical identity fibre arrow, so the laxity
+component reduces to the identity at the composite:
+
+```text
+λ_{Rep_transport(p),q,id_y} = id_{q ∘ p}.
+```
+
+This is why the `PathOut` and composition benchmarks compute strictly even
+though the surrounding directed-family theory permits lax displayed
+transport.
+
+The formulation of arrow induction follows this discipline. The primary
+theorem is the source-indexed telescope:
+
+```text
+x :^n Z ;
+E :^n (PathOut_Z(x) ⊢ Cat) ;
+E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
+```
+
+Moving the source object along $p : x \\to y$ transports motives by pullback
+along `PathOut_Z(p)`. The source side is the concrete map
+$E[\\rho_{x,y,p}]$, and the target side is section pullback. The derived
+Sigma-total theorem is used to inspect this structure at canonical transported
+objects. It should not be read as a claim that arbitrary non-cartesian
+Sigma-total arrows preserve the induction structure strictly.
+
+# 7. Composition As The Main Computation
 
 The most concrete application of arrow induction is directed transitivity.
 Fix $x : Z$. Define the composition target family:
@@ -669,7 +766,7 @@ The computation is not a special-purpose rewrite for transitivity. It is the
 ordinary action of the representable family, reached by applying the general
 arrow-induction theorem to the composition motive.
 
-# 7. Surface Syntax And Kernel Names
+# 8. Surface Syntax And Kernel Names
 
 The paper uses the current v3.2 surface syntax. The syntax distinguishes
 ordinary homs, indexed homs, ordinary functor categories, shaped functor
@@ -720,7 +817,7 @@ k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
 This is telescope-style notation, not product-base notation. The order `k;z`
 is meaningful.
 
-# 8. Computational Method And Checked Evidence
+# 9. Computational Method And Checked Evidence
 
 The formalization relies on a small normalization discipline. Constructions
 whose projections are used by later theorems are assigned stable semantic
@@ -770,7 +867,7 @@ Representative checked claims:
 | Sigma-total theorem | `PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)` |
 | Composition benchmark | `path_comp_func(p)[z][q] = q ∘ p` |
 
-# 9. Supporting Examples, Limitations, And Future Work
+# 10. Supporting Examples, Limitations, And Future Work
 
 The path-induction theorem is the central v3.2 result, but the same
 normalization discipline appears elsewhere in the file.
@@ -812,7 +909,7 @@ Several parts of the intended language remain outside the present theorem.
 - A presentation facade such as `section_total(s) : K ⊢ Σ_K E` is not yet a
   named surface constructor.
 
-# 10. Formal Artifact And Validation
+# 11. Formal Artifact And Validation
 
 The artifact consists of a Lambdapi development, a companion regression module,
 and a reproducible paper-rendering pipeline. The active v3.2 sources are:
@@ -838,7 +935,7 @@ The first three commands check the formal development and its conversion
 assertions. The final command validates embedded diagram specifications,
 builds the renderer, and runs a browser smoke test for the paper artifact.
 
-# 11. Conclusion
+# 12. Conclusion
 
 The v3.2 development shows that directed arrow induction can be expressed as
 computational categorical structure. The foundation is a directed dependent
@@ -886,6 +983,7 @@ computes.
 | composition section | `path_comp_sec Z x` |
 | composition functor for `p` | `path_comp_func Z x y p` |
 | covariant fibre transport | `fib_cov_transf Z D x u` |
+| displayed laxity cell `λ_{FF,p,u}` | `fdapp1_int_cell K E D FF x y p u` |
 
 # Appendix B. Selected Checked Normal Forms
 
