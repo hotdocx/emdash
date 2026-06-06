@@ -37,6 +37,10 @@ npm run check:render
 - Move most kernel identifiers out of the early prose. Main text should use
   mathematical notation first, then give kernel names in compact implementation
   callouts or the glossary.
+- Use `χ^{FF}_{p,u}` (read as `cmp(FF,p,u)`) for displayed
+  transport-comparison components. Avoid `λ`-style notation for laxity or
+  comparison data, since `λ` should remain visually reserved for lambda
+  abstraction in type-theoretic prose.
 - Rebuild the theorem narrative after the foundation:
   representables, outgoing-arrow categories, canonical `rho`, fixed-source
   arrow induction, primary telescope theorem, derived Sigma-total theorem, and

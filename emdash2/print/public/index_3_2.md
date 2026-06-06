@@ -14,10 +14,10 @@ normalization in Lambdapi.
 
 The strict/lax distinction is essential. Ordinary functoriality is oriented as
 strict computation, but transport in directed families may preserve canonical
-total arrows only up to a displayed laxity cell. The arrow-induction theorem is
-therefore formulated first as a source-indexed telescope; its Sigma-total
-presentation is derived only after the relevant transport and laxity data have
-been internalized.
+total arrows only up to a displayed transport-comparison cell. The
+arrow-induction theorem is therefore formulated first as a source-indexed
+telescope; its Sigma-total presentation is derived only after the relevant
+transport comparison data have been internalized.
 
 The foundational construction is the directed dependent hom. Given a
 category-valued family $E : K \\to \\mathbf{Cat}$, objects
@@ -109,9 +109,9 @@ The v3.2 article focuses on four checked contributions.
    `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`; the kernel packages the
    source-indexed telescope as `PathInd_transfd(Z)`.
 4. **Strict and lax directed transport.** General displayed functors carry
-   computable laxity cells over base arrows; strict or cartesian constructors,
-   including representable precomposition, collapse those cells to canonical
-   identities.
+   computable transport-comparison cells over base arrows; strict or cartesian
+   constructors, including representable precomposition, collapse those cells
+   to canonical identities.
 5. **Computational composition.** The transitivity benchmark reduces a fully
    expanded path-induction expression to $q \\circ p$, represented in the
    kernel by the normal form `comp_fapp0 Z x y z q p`.
@@ -629,11 +629,12 @@ D[p](FF[x](u))
 FF[y](E[p](u)).
 ```
 
-A displayed functor therefore has a directed laxity phenomenon at the
-component level:
+A displayed functor therefore has a directed laxity phenomenon at the component
+level. We write the associated transport-comparison component as
+`χ^{FF}_{p,u}` (read as `cmp(FF,p,u)`), reserving `λ` for lambda abstraction:
 
 ```text
-λ_{FF,p,u} : D[p](FF[x](u)) →^{D[y]} FF[y](E[p](u)).
+χ^{FF}_{p,u} : D[p](FF[x](u)) →^{D[y]} FF[y](E[p](u)).
 ```
 
 This is useful mathematical notation, but it is not a primitive operation in
@@ -652,10 +653,10 @@ total arrow is represented as
 Σ(FF)(p,α) = (p, fdapp1_int_hom_fapp0(FF,p,u,α)).
 ```
 
-The familiar composite $FF[y][\\alpha] \\circ \\lambda_{FF,p,u}$ is only a
+The familiar composite $FF[y][\\alpha] \\circ \\chi^{FF}_{p,u}$ is only a
 surface reading of this capped projection. The article does not take it as the
 definition, because the active v3.2 design deliberately avoids reconstructing
-Sigma maps from a separate whole-laxity operation.
+Sigma maps from a separate whole-comparison operation.
 
 The canonical identity case extracts the component-level cell:
 
@@ -669,18 +670,18 @@ internal displayed hom-action and its Sigma-map fibre component, not supplied
 as an independent external naturality square.
 
 Strict or cartesian constructors add focused computation rules making the
-laxity cell collapse. Representable precomposition is one such strict case:
-for $p : x \\to y$, the family morphism
+comparison cell collapse. Representable precomposition is one such strict
+case: for $p : x \\to y$, the family morphism
 
 ```text
 Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
 ```
 
-has cartesian behaviour on the canonical identity fibre arrow, so the laxity
-component reduces to the identity at the composite:
+has cartesian behaviour on the canonical identity fibre arrow, so the
+comparison component reduces to the identity at the composite:
 
 ```text
-λ_{Rep_transport(p),q,id_y} = id_{q ∘ p}.
+χ^{Rep_transport(p)}_{q,id_y} = id_{q ∘ p}.
 ```
 
 This is why the `PathOut` and composition benchmarks compute strictly even
@@ -1002,7 +1003,7 @@ computes.
 | composition section | `path_comp_sec Z x` |
 | composition functor for `p` | `path_comp_func Z x y p` |
 | covariant fibre transport | `fib_cov_transf Z D x u` |
-| displayed laxity cell `λ_{FF,p,u}` | `fdapp1_int_cell K E D FF x y p u` |
+| displayed transport-comparison component `χ^{FF}_{p,u}` | `fdapp1_int_cell K E D FF x y p u` |
 
 # Appendix B. Selected Checked Normal Forms
 
