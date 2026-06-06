@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hotdocx/arrowgram": "file:~/arrowgram/packages/arrowgram",
+    "dompurify": "^3.4.3",
     "katex": "^0.16.9",
     "lucide-react": "^0.475.0",
     "mermaid": "^10.9.0",

@@ -45,11 +45,14 @@ Paper content
 
 Renderer / parsing
 
-- `print/src/App.tsx`: transforms `index.md` into HTML:
-  - Pre-renders Mermaid to SVG and Arrowgram to SVG
-  - Converts Markdown with Showdown
-  - Renders KaTeX math to HTML
-  - Feeds final HTML into Paged.js for pagination
+- `print/src/App.tsx`: selects/fetches the paper variant, builds the title/layout wrapper, and feeds final HTML into Paged.js for pagination
+- `print/src/pipeline/commonMarkdownPipeline.tsx`: transforms Markdown into sanitized HTML:
+  - Pre-renders Vega-Lite / Mermaid / Arrowgram blocks to SVG-safe placeholders
+  - Converts Markdown with Showdown (`tables: true` is required)
+  - Protects math and code blocks around Showdown / KaTeX passes
+  - Re-inserts static diagram SVG after sanitization when required for print fidelity
+- `print/src/utils/sanitizeHtml.ts`: DOMPurify configuration for Markdown/HTML/SVG output
+- `print/src/preview/pagedCleanup.ts`: removes empty Paged.js pages after pagination
 
 Styling / layout
 
@@ -67,6 +70,7 @@ Browser console / end-to-end checks
   - loads the app
   - fails on `console.error`, `pageerror`, request failures
   - treats KaTeX strict warnings (e.g. `[mathVsTextAccents]`) as failures
+  - fails if raw Markdown pipe-table syntax is visible after rendering
   - checks every `print/public/index*.md` variant discovered by the current naming policy; `index.md` is loaded as the default route and other variants use `?paper=...`
 
 NPM scripts (most useful)
@@ -74,6 +78,21 @@ NPM scripts (most useful)
 - `npm run validate:paper`: validate embedded JSON blocks
 - `npm run check:console`: headless browser console check
 - `npm run check:render`: validate + build + console check (recommended before sending a PDF)
+
+## Upstream renderer references
+
+This `print/` app started as a local copy of Arrowgram's paged renderer, but it
+also has emdash-specific paper variants and checks. Do not blindly overwrite it
+from upstream.
+
+Current upstream references:
+
+- `/home/user1/arrowgram/packages/web`: best reference for renderer architecture and shared Markdown pipeline patterns
+- `/home/user1/arrowgram/packages/paged`: closest package shape, but currently less complete than `packages/web` in some pipeline hardening
+
+When syncing, port generic renderer hardening selectively and keep local
+emdash behavior: `index*.md` auto-discovery, `index_3_2.md`, local dependency
+shape, Showdown table parsing, and the raw-pipe-table browser regression check.
 
 ## Adding more variants
 
@@ -163,6 +182,17 @@ If Arrowgram JSON fails schema validation:
 - check `style.body.name` is one of the allowed enums
 - ensure `label` strings are valid JSON and LaTeX is double-escaped
 
+## 1.5) Markdown tables showing as raw pipes
+
+Run:
+
+- `npm run check:render`
+
+The browser console check fails if a pipe table like `| A | B |` is still
+visible as plain text after Showdown/Paged.js rendering. The renderer must keep
+Showdown table parsing enabled (`tables: true`), and table CSS should apply to
+plain `.paper-body table` elements as well as custom table classes.
+
 ## 2) “Diagram Error” boxes in the output
 
 - Arrowgram errors: open browser console; the renderer logs parsing errors from `JSON.parse` and/or the Arrowgram runtime.
@@ -191,12 +221,19 @@ Paged.js changes layout (page breaks, floats, columns). Use:
 
 These are “infrastructure” edits made while authoring the current paper; they explain why some parts of the pipeline behave the way they do.
 
-## `print/src/App.tsx` (renderer hardening)
+## `print/src/App.tsx` (paper selection)
+
+- The heavy Markdown/math/diagram pipeline lives in `print/src/pipeline/commonMarkdownPipeline.tsx`, following the stronger upstream pattern from `arrowgram/packages/web`.
+- `App.tsx` keeps paper selection local: default route, `?paper=index_0.md`, `?paper=index_3_2.md`, `?paper=ls:key`, and absolute Markdown URLs.
+
+## `print/src/pipeline/commonMarkdownPipeline.tsx` (renderer hardening)
 
 - **Math protection before Markdown**: `$...$` and `$$...$$` blocks are replaced by placeholder tokens before Showdown runs, then restored immediately after `makeHtml`. This prevents Showdown from turning `_` into `<em>` inside math.
 - **Placeholder tokens avoid `_`**: placeholders use `AGPROT…AGPROT` tokens because underscores may be mutated by Markdown emphasis rules.
+- **Markdown table support**: Showdown must be configured with `tables: true`; otherwise pipe tables render as literal text in the browser.
 - **Code blocks protected from KaTeX pass**: `<pre>…</pre>` and `<code>…</code>` blocks are temporarily replaced so `$` inside code does not get interpreted as math.
 - **“Double backslash” normalization**: KaTeX rendering trims a common authoring artifact where `\\omega` (etc.) accidentally appears in math; the renderer normalizes some of these back to `\omega` before calling KaTeX.
+- **Sanitize, then re-insert static diagrams**: Arrowgram and Mermaid SVG blocks are restored after DOMPurify sanitization so print-safe SVG output and KaTeX labels survive the pipeline.
 
 ## `print/src/vite-env.d.ts` (TypeScript module typing)
 

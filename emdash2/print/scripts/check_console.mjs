@@ -73,6 +73,30 @@ function discoverPaperRuns() {
   }));
 }
 
+async function findRenderedRawMarkdownTables(page) {
+  return page.evaluate(() => {
+    const root = document.querySelector('.paper-body');
+    if (!root) return [];
+
+    const clone = root.cloneNode(true);
+    clone.querySelectorAll('pre, code, table, script, style').forEach((el) => el.remove());
+    const lines = (clone.textContent || '')
+      .split(/\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const rawTables = [];
+    for (let i = 0; i < lines.length - 1; i++) {
+      const current = lines[i];
+      const next = lines[i + 1];
+      const looksLikePipeRow = /^\|.+\|$/.test(current);
+      const looksLikeSeparator = /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(next);
+      if (looksLikePipeRow && looksLikeSeparator) rawTables.push(current);
+    }
+    return rawTables;
+  });
+}
+
 async function main() {
   const host = '127.0.0.1';
   const port = await findOpenPort(host, 4173, 30);
@@ -137,6 +161,14 @@ async function main() {
     await page.goto(`${baseUrl}${run.query}`, { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.pagedjs_pages', { timeout: 30_000 });
     await sleep(1500);
+
+    const rawMarkdownTables = await findRenderedRawMarkdownTables(page);
+    if (rawMarkdownTables.length) {
+      errors.push(
+        `[${run.name}] raw Markdown table syntax rendered as text: ${rawMarkdownTables.slice(0, 3).join(' / ')}`
+      );
+    }
+
     await page.close();
   }
 
