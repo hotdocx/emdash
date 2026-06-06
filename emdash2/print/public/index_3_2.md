@@ -35,12 +35,20 @@ $$
 \\rho_{x,y,p} : (x,\\mathrm{id}_x) \\to (y,p).
 $$
 
-The primary theorem is a displayed transformation over the source object:
+The induction principle can be stated directly in the surface language. For a
+moving source $x : Z$ and a motive $E$ over outgoing arrows from $x$, there is
+a functor from the fibre of $E$ at the reflexive outgoing arrow to the category
+of sections of $E$:
 
 ```text
-PathInd_transfd(Z)
-  : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x].
+x :^n Z ;
+E :^n (PathOut_Z(x) ⊢ Cat) ;
+E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
 ```
+
+It sends $u : E[(x,\\mathrm{id}_x)]$ to the section
+$q \\mapsto E[\\rho_q](u)$. The Lambdapi implementation packages this
+telescope as `PathInd_transfd(Z)`.
 
 Its most visible checked consequence is directed transitivity. For
 $p : x \\to y$ and $q : y \\to z$, the composition instance of arrow induction
@@ -89,9 +97,10 @@ The v3.2 article focuses on four checked contributions.
 2. **Outgoing-arrow categories.** For each object $x : Z$,
    $\\mathrm{PathOut}_Z(x)$ is the Sigma total of the representable family
    $\\mathrm{Hom}_Z(x,-)$.
-3. **Synthetic arrow induction.** The primary theorem surface is
-   `PathInd_transfd(Z)`, a displayed transformation natural in the source
-   object.
+3. **Synthetic arrow induction.** For
+   `x :^n Z ; E :^n (PathOut_Z(x) ⊢ Cat)`, the checked construction has type
+   `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`; the kernel packages the
+   source-indexed telescope as `PathInd_transfd(Z)`.
 4. **Computational composition.** The transitivity benchmark reduces a fully
    expanded path-induction expression to `comp_fapp0 Z x y z q p`.
 
@@ -111,10 +120,11 @@ is accepted only when `left` and `right` are convertible under beta-reduction,
 definitions, rewrite rules, and unification rules. For the arrow-induction
 story, the checked evidence has three layers.
 
-1. The theorem interfaces typecheck, including the displayed-transformation
-   type of `PathInd_transfd(Z)`.
-2. Their projections compute, for example `PathInd_transfd(Z)[x]` reduces to
-   the fixed-source `PathInd_func(Z,x)`.
+1. The theorem interfaces typecheck, including the unfolded telescope
+   `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`.
+2. Their projections compute, for example the implementation package
+   `PathInd_transfd(Z)` reduces at source `x` to the fixed-source
+   `PathInd_func(Z,x)`.
 3. Fully expanded applications normalize to ordinary categorical terms, for
    example the composition benchmark reduces to `comp_fapp0 Z x y z q p`.
 
@@ -427,37 +437,51 @@ This fixed-source construction is packaged as a shaped functor:
 
 ```text
 PathInd_func(Z,x)
-  : E :^n Catd(PathOut_Z(x)) ; E[(x,id_x)] ⊢ Π q, E[q]
+  : E :^n (PathOut_Z(x) ⊢ Cat) ;
+      E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]
 
 PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u).
 ```
 
 ## 5.1 The Telescope Theorem
 
-The primary v3.2 theorem lets the source object vary. For each $x : Z$, the
-motive category is:
+The primary v3.2 theorem lets the source object vary. In unfolded surface
+notation, the theorem is the following source-indexed construction:
 
 ```text
-PathOutMotives_Z[x] = Catd(PathOut_Z(x)).
+x :^n Z ;
+E :^n (PathOut_Z(x) ⊢ Cat) ;
+E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
 ```
 
-The source and target displayed functors are:
+Its value on $u : E[(x,\\mathrm{id}_x)]$ is the section whose component at
+`(y,p)` is `E[rho_{x,y,p}](u)`.
+
+The kernel packages this theorem as a transformation between two
+source-indexed constructions. For each $x : Z$, the motive category is:
 
 ```text
-PathOutReflEval_Z[x][E] = E[(x,id_x)]
-PathOutPi_Z[x][E]       = Π q :^n PathOut_Z(x), E[q].
+PathOutMotives_Z[x] = PathOut_Z(x) ⊢ Cat.
 ```
 
-The theorem is:
+The source and target constructions are:
+
+```text
+source[x,E] = E[(x,id_x)]
+target[x,E] = Π q :^n PathOut_Z(x), E[q].
+```
+
+The implementation names for these are `PathOutReflEval_Z` and `PathOutPi_Z`,
+and the packaged theorem is:
 
 ```text
 PathInd_transfd(Z)
   : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x].
 ```
 
-This is the main theorem interface. It is a displayed transformation, so its
-naturality in the moving source object is part of the theorem's type. The
-paper should not treat that naturality as a separate external square.
+This packaging is important to the implementation because naturality in the
+moving source object is part of the theorem's type, not a separate external
+square.
 
 Along a base arrow $p : x \\to y$, a motive $E$ over `PathOut_Z(x)` is
 transported to:
@@ -505,8 +529,8 @@ There is also an ordinary total-category presentation of the theorem:
 
 ```text
 PathInd_funcd(Z)
-  : (x,E) :^n Σ x :^n Z, Catd(PathOut_Z(x)) ;
-      E[(x,id_x)] ⊢ Π q :^n PathOut_Z(x), E[q].
+  : (x,E) :^n Σ x :^n Z, (PathOut_Z(x) ⊢ Cat) ;
+      E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
 ```
 
 It is derived, not primitive:
@@ -529,11 +553,11 @@ applications and expanded regression checks.
 {
   "version": 1,
   "nodes": [
-    { "name": "mot", "left": 100, "top": 230, "label": "$x :^n Z ;\\ \\mathrm{Catd}(\\mathrm{PathOut}_Z(x))$" },
-    { "name": "src", "left": 140, "top": 80, "label": "$\\mathrm{PathOutReflEval}_Z$" },
-    { "name": "tgt", "left": 560, "top": 80, "label": "$\\mathrm{PathOutPi}_Z$" },
-    { "name": "sigsrc", "left": 140, "top": 390, "label": "$\\mathrm{PathIndSrc}_Z$" },
-    { "name": "sigtgt", "left": 560, "top": 390, "label": "$\\mathrm{PathIndTgt}_Z$" }
+    { "name": "mot", "left": 100, "top": 230, "label": "$x :^n Z;\\ E : \\mathrm{PathOut}_Z(x) \\to \\mathrm{Cat}$" },
+    { "name": "src", "left": 140, "top": 80, "label": "$E[(x,\\mathrm{id}_x)]$" },
+    { "name": "tgt", "left": 560, "top": 80, "label": "$\\Pi_q\\ E[q]$" },
+    { "name": "sigsrc", "left": 140, "top": 390, "label": "$\\Sigma\\ \\mathrm{source}$" },
+    { "name": "sigtgt", "left": 560, "top": 390, "label": "$\\Sigma\\ \\mathrm{target}$" }
   ],
   "arrows": [
     { "from": "src", "to": "tgt", "label": "$\\mathrm{PathInd\\_transfd}(Z)$", "label_alignment": "over" },
@@ -811,7 +835,8 @@ computational categorical structure. The foundation is a directed dependent
 type theory of category-valued families, Sigma totals, Pi sections, and
 dependent homs. The outgoing-arrow category is a Sigma total of a
 representable; the canonical `rho` arrow is Sigma transport; and the primary
-theorem is a displayed transformation over the moving source object.
+theorem is a source-indexed telescope from the reflexive fibre of a motive to
+its section category.
 
 The composition benchmark is the visible payoff. Applying arrow induction to
 the composition motive normalizes to ordinary categorical composition. That is
