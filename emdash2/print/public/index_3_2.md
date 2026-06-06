@@ -629,25 +629,44 @@ D[p](FF[x](u))
 FF[y](E[p](u)).
 ```
 
-A displayed functor relates them by a directed laxity cell
+A displayed functor therefore has a directed laxity phenomenon at the
+component level:
 
 ```text
 λ_{FF,p,u} : D[p](FF[x](u)) →^{D[y]} FF[y](E[p](u)).
 ```
 
-The active kernel obtains this cell from the internal displayed hom-action,
-with component-level normal form `fdapp1_int_cell(FF,p,u)`. The Sigma-total
-action exposes the same data: the image of a total arrow `(p,α)` is
+This is useful mathematical notation, but it is not a primitive operation in
+the active kernel. The computational owner is the internal displayed
+hom-action. Its capped projection has the form
 
 ```text
-Σ(FF)(p,α) = (p, FF[y][α] ∘ λ_{FF,p,u}).
+fdapp1_int_hom_fapp0(FF,p,u,α)
+  : D[p](FF[x](u)) →^{D[y]} FF[y](v)
 ```
 
-Thus the Sigma-total presentation is not the primitive source of laxity. It is
-where laxity becomes visible as the fibre component of a total arrow. This
-avoids a circular definition in which Sigma maps would be defined from an
-external laxity operation and that laxity would then be extracted back from
-Sigma maps.
+for a fibre arrow $\\alpha : E[p](u) \\to v$. Thus the Sigma-map action on a
+total arrow is represented as
+
+```text
+Σ(FF)(p,α) = (p, fdapp1_int_hom_fapp0(FF,p,u,α)).
+```
+
+The familiar composite $FF[y][\\alpha] \\circ \\lambda_{FF,p,u}$ is only a
+surface reading of this capped projection. The article does not take it as the
+definition, because the active v3.2 design deliberately avoids reconstructing
+Sigma maps from a separate whole-laxity operation.
+
+The canonical identity case extracts the component-level cell:
+
+```text
+fdapp1_int_hom_fapp0(FF,p,u,id_{E[p](u)})
+  = fdapp1_int_cell(FF,p,u).
+```
+
+This is the sense in which laxity becomes visible: it is observed through the
+internal displayed hom-action and its Sigma-map fibre component, not supplied
+as an independent external naturality square.
 
 Strict or cartesian constructors add focused computation rules making the
 laxity cell collapse. Representable precomposition is one such strict case:
