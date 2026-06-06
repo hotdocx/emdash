@@ -135,6 +135,7 @@ body {
   }
 
   .pagedjs_page {
+    background: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
   }
 }
@@ -257,6 +258,28 @@ body {
 .arrowgram-container svg {
   max-width: 100%;
   height: auto !important;
+  overflow: visible;
+}
+
+.arrowgram-container foreignObject {
+  overflow: visible;
+}
+
+.arrowgram-container foreignObject div,
+.arrowgram-container foreignObject .katex {
+  max-width: none;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.arrowgram-container foreignObject > div > div {
+  background: #f0f2f5;
+  box-decoration-break: clone;
+  padding: 0 2px;
+}
+
+.pagedjs_page .arrowgram-container foreignObject > div > div {
+  background: white;
 }
 
 .mermaid-error,

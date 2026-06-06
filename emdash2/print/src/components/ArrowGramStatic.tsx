@@ -9,6 +9,14 @@ interface ArrowGramStaticProps {
     onEdit?: () => void;
 }
 
+function expandViewBox(viewBox: string, padding: number) {
+    const parts = viewBox.trim().split(/\s+/).map(Number);
+    if (parts.length !== 4 || parts.some((part) => !Number.isFinite(part))) return viewBox;
+
+    const [x, y, width, height] = parts;
+    return `${x - padding} ${y - padding} ${width + padding * 2} ${height + padding * 2}`;
+}
+
 export function ArrowGramStatic({ spec, id, className, onEdit }: ArrowGramStaticProps) {
     const generatedId = useId();
     const finalId = id || generatedId.replace(/:/g, "");
@@ -36,9 +44,16 @@ export function ArrowGramStatic({ spec, id, className, onEdit }: ArrowGramStatic
         <div className={`relative group inline-block ${className}`}>
             <div className="arrowgram-container">
                 <svg
-                    viewBox={diagram.viewBox}
+                    id={finalId}
+                    width="100%"
+                    viewBox={expandViewBox(diagram.viewBox, 90)}
                     className="w-full h-auto max-w-full"
-                    style={{ minWidth: '200px', minHeight: '100px' }}
+                    style={{
+                        minWidth: '200px',
+                        minHeight: '100px',
+                        fontFamily: 'sans-serif',
+                        overflow: 'visible',
+                    }}
                 >
                     <ArrowGramDiagram diagram={diagram} />
                 </svg>
