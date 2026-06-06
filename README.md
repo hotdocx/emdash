@@ -1,8 +1,8 @@
-# emdash 2 — Functorial programming for strict/lax ω-categories in Lambdapi
+# emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction)
 
-## NEW UPDATED VERSION EMDASH 2 — [./emdash2/emdash2.lp](./emdash2/emdash2.lp) 
+## NEW UPDATED VERSION EMDASH 2 — [./emdash2/emdash3_2.lp](./emdash2/emdash3_2.lp) 
 
-*GO TO: [./emdash2/emdash2.lp](./emdash2/emdash2.lp)*
+*GO TO: [./emdash2/emdash3_2.lp](./emdash2/emdash3_2.lp)*
 
 We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
 
@@ -16,9 +16,9 @@ From an engineering perspective, this fits a “MathOps” workflow: a long-runn
 
 ## Start here
 
-- Lambdapi specification [`./emdash2/emdash2.lp`](./emdash2/emdash2.lp)
-- Markdown report (copy of `./emdash2/print/public/index.md`): [`./docs/emdash2.md`](./docs/emdash2.md)
-- PDF report (rendered from the markdown): [`./docs/emdash2.pdf`](./docs/emdash2.pdf)
+- Lambdapi specification [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
+- Markdown report (copy of `./emdash2/print/public/index_3_2.md`): [`./docs/emdash3_2.md`](./docs/emdash3_2.md)
+- PDF report (rendered from the markdown): [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
 - Original source: [https://github.com/1337777/cartier/blob/master/cartierSolution19.lp](https://github.com/1337777/cartier/blob/master/cartierSolution19.lp)
 - Published report, editable: [https://hotdocx.github.io/r/26043CPAL64001](https://hotdocx.github.io/r/26043CPAL64001)
 - arrowgram commutative diagrams/books/slides editor: [https://github.com/hotdocx/arrowgram/](https://github.com/hotdocx/arrowgram/)
