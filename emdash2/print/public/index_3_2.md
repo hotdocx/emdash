@@ -97,7 +97,7 @@ Sigma category of arrows, not in an identity type.
 
 ## 1.1 What v3.2 Contributes
 
-The v3.2 article focuses on four checked contributions.
+The v3.2 article focuses on five checked contributions.
 
 1. **Directed dependent homs.** Homs in total categories and section actions
    are organized by one dependent-hom construction over a base arrow.
@@ -256,12 +256,18 @@ Its objects are pairs:
 (k,u)       with k : K and u : E[k].
 ```
 
-The hom category in a total category is organized by the dependent hom:
+The hom category in a total category is organized by the dependent hom. At the
+level of 1-cell data it has the familiar dependent-pair shape:
 
 ```text
 Hom_{ΣE}((x,u),(y,v))
   = Σ f : x →^K y, Hom_{E[y]}(E[f](u),v).
 ```
+
+The kernel keeps the opposite orientation needed for higher hom-action explicit,
+so the checked normal form is an opposite of a Sigma category over the opposite
+base hom. This distinction affects higher cells and normal forms, not the
+ordinary description of a total arrow.
 
 Equivalently, an arrow in the total category is a pair:
 
@@ -508,11 +514,18 @@ This packaging is important to the implementation because naturality in the
 moving source object is part of the theorem's type, not a separate external
 square.
 
-Along a base arrow $p : x \\to y$, a motive $E$ over `PathOut_Z(x)` is
-transported by pullback along the precomposition action on outgoing arrows:
+Along a base arrow $p : x \\to y$, `PathOut` is contravariant in the source.
+Precomposition gives a functor
 
 ```text
-p_*E = PathOut_Z(p)^*E.
+PathOut_Z(p) : PathOut_Z(y) ⊢ PathOut_Z(x)
+PathOut_Z(p)[(z,q : y → z)] = (z,q ∘ p).
+```
+
+A motive $E$ over `PathOut_Z(x)` is transported by pullback along this action:
+
+```text
+p_*E = PathOut_Z(p)^*E : PathOut_Z(y) ⊢ Cat.
 ```
 
 In Lambdapi this is the expression
@@ -563,11 +576,12 @@ PathInd_funcd(Z)
 It is derived, not primitive:
 
 ```text
-PathInd_funcd(Z) = Σ(PathInd_transfd(Z)).
+PathInd_funcd(Z) = Sigma_transfd_funcd(PathInd_transfd(Z)).
 ```
 
-The right hand side is implemented by `Sigma_transfd_funcd`. Its component at
-`(x,E)` reduces back to the object component of the fixed-source functor:
+Equivalently, it is the Sigma-totalization of the telescope theorem. Its
+component at `(x,E)` reduces back to the object component of the fixed-source
+functor:
 
 ```text
 PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
@@ -677,8 +691,9 @@ case: for $p : x \\to y$, the family morphism
 Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
 ```
 
-has cartesian behaviour on the canonical identity fibre arrow, so the
-comparison component reduces to the identity at the composite:
+has cartesian behaviour on the canonical identity fibre arrow. Concretely, for
+$q : y \\to z$, the comparison component reduces to the identity at the
+composite:
 
 ```text
 χ^{Rep_transport(p)}_{q,id_y} = id_{q ∘ p}.
@@ -880,7 +895,7 @@ Representative checked claims:
 | --- | --- |
 | Representable | `Rep_Z(x)[y] = Hom_Z(x,y)` |
 | PathOut object layer | `PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))` |
-| PathOut transport | `PathOut_transport(p)[(z,q)] = (z,q ∘ p)` |
+| PathOut transport | `PathOut_Z(p) : PathOut_Z(y) ⊢ PathOut_Z(x)` and `PathOut_Z(p)[(z,q : y → z)] = (z,q ∘ p)` |
 | Rho construction | `rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)` |
 | Fixed-source induction | `PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)` |
 | Telescope theorem | `PathInd_transfd(Z)[x] = PathInd_func(Z,x)` |
@@ -974,6 +989,21 @@ computes.
 
 | Mathematical notation | Kernel identifier |
 | --- | --- |
+| category of categories | `Cat_cat` |
+| `E : K ⊢ Cat` | `Catd_cat K` |
+| fibre `E[k]` | `Fibre_cat K E k` |
+| transport `E[p]` | `catd_transport_func K E x y p` |
+| `A ⊢ B` | `Functor_cat A B` |
+| `z :^n Z ; E[z] ⊢ D[z]` | `Functord_cat Z E D` |
+| `Π (k :^n K), E[k]` | `Pi_cat K E` |
+| section evaluation `s[k]` | `piapp0 K E s k` |
+| `Σ (k :^n K), E[k]` | `Sigma_cat K E` |
+| total arrow `(p,α)` in `ΣE` | `sigma_arrow K E x y u v p α` |
+| canonical total transport | `sigma_transport_arrow K E x y p u` |
+| Sigma map `Σ(FF)` | `sigma_map_func K E D FF` |
+| dependent hom `homd_E(x,u,y,v)` | `homd_ K E E (id_funcd K E) x u y v` |
+| motive pullback `F^*E` | `Pullback_catd A B E F` |
+| uncurrying a displayed theorem over Sigma | `Sigma_transfd_funcd K R S T η` |
 | `Rep_Z(x)` | `Rep_catd Z x` |
 | `Rep_transport(p)` | `Rep_transport_func Z x y p` |
 | `PathOut_Z(x)` | `PathOut_cat Z x` |
@@ -1002,7 +1032,9 @@ computes.
 | composition motive | `CompMotive_catd Z x` |
 | composition section | `path_comp_sec Z x` |
 | composition functor for `p` | `path_comp_func Z x y p` |
+| fibre transport action `E[f](u)` | `fib_cov_tapp0_func K E x y u` |
 | covariant fibre transport | `fib_cov_transf Z D x u` |
+| Sigma-map fibre component | `fdapp1_int_hom_fapp0 K E D FF x y p u v α` |
 | displayed transport-comparison component `χ^{FF}_{p,u}` | `fdapp1_int_cell K E D FF x y p u` |
 
 # Appendix B. Selected Checked Normal Forms
@@ -1016,7 +1048,8 @@ Core PathOut and rho checks:
 ```text
 Rep_Z(x)[y] = Hom_Z(x,y)
 PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))
-PathOut_transport(p)[(z,q)] = (z,q ∘ p)
+PathOut_Z(p) : PathOut_Z(y) ⊢ PathOut_Z(x)
+PathOut_transport(p)[(z,q : y → z)] = (z,q ∘ p)
 PathOut_transport(p)[(y,id_y)] = (y,p)
 Rep_Z(x)[p](id_x) = p
 rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
