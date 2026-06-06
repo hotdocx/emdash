@@ -102,7 +102,8 @@ The v3.2 article focuses on four checked contributions.
    `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`; the kernel packages the
    source-indexed telescope as `PathInd_transfd(Z)`.
 4. **Computational composition.** The transitivity benchmark reduces a fully
-   expanded path-induction expression to `comp_fapp0 Z x y z q p`.
+   expanded path-induction expression to $q \\circ p$, represented in the
+   kernel by the normal form `comp_fapp0 Z x y z q p`.
 
 The rest of the paper builds these facts in the order a reader needs them:
 first the foundation, then dependent homs, then outgoing arrows, then the
@@ -122,15 +123,20 @@ story, the checked evidence has three layers.
 
 1. The theorem interfaces typecheck, including the unfolded telescope
    `E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q]`.
-2. Their projections compute, for example the implementation package
-   `PathInd_transfd(Z)` reduces at source `x` to the fixed-source
-   `PathInd_func(Z,x)`.
+2. Their projections compute; for example, the source-indexed theorem reduces
+   at source `x` to the fixed-source construction introduced in Section 5.
 3. Fully expanded applications normalize to ordinary categorical terms, for
-   example the composition benchmark reduces to `comp_fapp0 Z x y z q p`.
+   example the composition benchmark reduces to $q \\circ p$, whose kernel
+   normal form is `comp_fapp0 Z x y z q p`.
 
 Thus the paper is not claiming only that the theorem is mathematically
 plausible. The theorem surface, its projections, and the benchmark computation
 are part of the same executable rewrite system.
+
+We follow a formula-first convention for implementation names. When the paper
+mentions a Lambdapi identifier such as `Sigma_cat` or `PathInd_transfd`, the
+surrounding display gives the corresponding mathematical or emdash surface
+notation first; Appendix A collects the identifier correspondences.
 
 # 2. A Type-Theoretic Foundation For Directed Families
 
@@ -144,13 +150,13 @@ The core reading is:
 ```text
 A : Cat                  a category
 x : A                    an object, formally x : Obj(A)
-a ->^A b                 hom-category Hom_A(a,b)
+a →^A b                  hom-category Hom_A(a,b)
 F : A ⊢ B                ordinary functor
 F[x]                     object action
 F[f]                     arrow action
 E : K ⊢ Cat              category-valued family over K
 E[k]                     fibre category at k
-E[f](u)                  transport of u along f : k -> k'
+E[f](u)                  transport of u along f : k → k'
 ```
 
 The hom between two objects is itself a category. A 1-cell $f : x \\to y$ is an
@@ -183,12 +189,14 @@ A transformation between such family morphisms is a family of transformations
 natural in the same directed base:
 
 ```text
-ϵ : FF => GG
-ϵ[k] : FF[k] => GG[k].
+ϵ : FF ⇒ GG
+ϵ[k] : FF[k] ⇒ GG[k].
 ```
 
 The notation `:^n` marks an ordinary directed index in the current surface
-syntax. Mixed variance appears on the family occurrence, for example
+syntax. The paper uses typographic operators such as `→`, `→_`, `⇒`, and
+`⇒_`; the parser-oriented ASCII spellings are recorded in the syntax report.
+Mixed variance appears on the family occurrence, for example
 `A[z^-] ⊢_[z] B[z]`, not by introducing older binder modes.
 
 # 3. Dependent Hom, Sigma Totals, And Sections
@@ -217,6 +225,7 @@ homd_E(x,u,y,v) : Hom_K(x,y)^op ⊢ Cat
 homd_E(x,u,y,v)[f] = Hom_{E[y]}(E[f](u),v).
 ```
 
+The Lambdapi identifier for this dependent-hom functor is `homd_`.
 The opposite on the base hom is an implementation convention that makes the
 functorial action line up with the current normal forms. The reader-facing
 content is simply: a dependent arrow from $(x,u)$ to $(y,v)$ consists of a base
@@ -240,22 +249,23 @@ The hom category in a total category is organized by the dependent hom:
 
 ```text
 Hom_{ΣE}((x,u),(y,v))
-  = Σ f : x ->^K y, Hom_{E[y]}(E[f](u),v).
+  = Σ f : x →^K y, Hom_{E[y]}(E[f](u),v).
 ```
 
 Equivalently, an arrow in the total category is a pair:
 
 ```text
 (f, α)
-f : x ->^K y
-α : E[f](u) ->^{E[y]} v.
+f : x →^K y
+α : E[f](u) →^{E[y]} v.
 ```
 
-The implementation exposes this through `Sigma_cat`, `sigma_arrow`, and
-`sigma_transport_arrow`. The last one is the canonical total arrow
+The implementation identifier for $\\Sigma_k E[k]$ is `Sigma_cat(E)`;
+`sigma_arrow(E,p,α)` names the pair `(p,α)`. The canonical transported total
+arrow is `sigma_transport_arrow(E,p,u)`:
 
 ```text
-sigma_transport(E,p,u) : (x,u) -> (y,E[p](u))
+sigma_transport_arrow(E,p,u) : (x,u) → (y,E[p](u))
 ```
 
 whose fibre component is the identity at the transported endpoint.
@@ -287,6 +297,9 @@ surface notation the article writes:
 Π (k :^n K), E[k].
 ```
 
+Section evaluation is written $s[k]$ in the surface notation; its Lambdapi
+projection head is `piapp0(s,k)`.
+
 # 4. Outgoing Arrows And The Canonical `rho` Arrow
 
 Now fix a category $Z$ and an object $x : Z$. The represented family at $x$ is:
@@ -300,7 +313,7 @@ precomposition:
 
 ```text
 Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
-Rep_transport(p)[z][q] = q o p.
+Rep_transport(p)[z][q] = q ∘ p.
 ```
 
 The outgoing-arrow category from $x$ is the Sigma total of this representable:
@@ -310,7 +323,7 @@ PathOut_Z(x) = Σ y :^n Z, Rep_Z(x)[y]
              = Σ y :^n Z, Hom_Z(x,y).
 ```
 
-An object of `PathOut_Z(x)` is a pair `(y,p)` with `p : x ->^Z y`. The
+An object of `PathOut_Z(x)` is a pair `(y,p)` with `p : x →^Z y`. The
 distinguished reflexive outgoing arrow is:
 
 ```text
@@ -346,7 +359,7 @@ The first diagram shows `PathOut_Z(x)` as a total category over $Z$.
 For every object `(y,p)` of `PathOut_Z(x)`, there is a canonical arrow:
 
 ```text
-rho_{x,y,p} : reflout_x ->^PathOut_Z(x) (y,p).
+rho_{x,y,p} : reflout_x →^PathOut_Z(x) (y,p).
 ```
 
 This is not postulated. It is the Sigma transport arrow of the representable
@@ -393,7 +406,7 @@ The `rho` arrows assemble into a section:
 ```text
 pathout_refl_arrow_sec(x)
   : Π q :^n PathOut_Z(x),
-      reflout_x ->^PathOut_Z(x) q
+      reflout_x →^PathOut_Z(x) q
 
 pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
 ```
@@ -426,7 +439,8 @@ suffices to define it at the reflexive outgoing arrow and then transport along
 the canonical `rho` arrow.
 
 The checked internal version of the same statement uses ordinary fibre
-transport in the family `E`:
+transport in the family `E`. The kernel head `fib_cov_tapp0_func` names the
+functor $f \\mapsto E[f](u)$:
 
 ```text
 piapp0(path_ind_sec(Z,x,E,u),(y,p))
@@ -476,7 +490,7 @@ and the packaged theorem is:
 
 ```text
 PathInd_transfd(Z)
-  : x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x].
+  : x :^n Z ; PathOutReflEval_Z[x] ⇒ PathOutPi_Z[x].
 ```
 
 This packaging is important to the implementation because naturality in the
@@ -484,13 +498,15 @@ moving source object is part of the theorem's type, not a separate external
 square.
 
 Along a base arrow $p : x \\to y$, a motive $E$ over `PathOut_Z(x)` is
-transported to:
+transported by pullback along the precomposition action on outgoing arrows:
 
 ```text
-p_*E = Pullback_catd(E, PathOut_transport_func(p)).
+p_*E = PathOut_Z(p)^*E.
 ```
 
-The source-side transport is concrete:
+In Lambdapi this is the expression
+`Pullback_catd(E, PathOut_transport_func(p))`. The source-side transport is
+concrete:
 
 ```text
 PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
@@ -536,10 +552,11 @@ PathInd_funcd(Z)
 It is derived, not primitive:
 
 ```text
-PathInd_funcd(Z) = Sigma_transfd_funcd(PathInd_transfd(Z)).
+PathInd_funcd(Z) = Σ(PathInd_transfd(Z)).
 ```
 
-Its component at `(x,E)` reduces back to the fixed-source component:
+The right hand side is implemented by `Sigma_transfd_funcd`. Its component at
+`(x,E)` reduces back to the object component of the fixed-source functor:
 
 ```text
 PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
@@ -579,7 +596,7 @@ Fix $x : Z$. Define the composition target family:
 CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x).
 ```
 
-Pull it back along the projection `PathOut_Z(x) -> Z`:
+Pull it back along the projection `PathOut_Z(x) → Z`:
 
 ```text
 CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x).
@@ -601,10 +618,10 @@ path_comp_func(p) : Rep_Z(y) ⊢ Rep_Z(x).
 Its action on $q : y \\to z$ computes to ordinary composition:
 
 ```text
-path_comp_func(p)[z][q] = q o p.
+path_comp_func(p)[z][q] = q ∘ p.
 ```
 
-At the kernel level, the normal form is:
+The kernel normal form for this composite is:
 
 ```text
 comp_fapp0 Z x y z q p.
@@ -660,28 +677,28 @@ categories, section categories, and displayed transformation categories.
 
 | Surface form | Kernel meaning | Role |
 | --- | --- | --- |
-| `a ->^C b` | `Hom_cat C a b` | ordinary hom with explicit ambient category |
-| `a -> b` | `Hom_cat C a b` | ordinary hom when `C` is clear |
-| `aa[z^-] ->_[z]^R bb[z]` | `Hom_catd R aa bb` | indexed/displayed hom |
+| `a →^C b` | `Hom_cat C a b` | ordinary hom with explicit ambient category |
+| `a → b` | `Hom_cat C a b` | ordinary hom when `C` is clear |
+| `aa[z^-] →_[z]^R bb[z]` | `Hom_catd R aa bb` | indexed/displayed hom |
 | `A ⊢ B` | `Functor_cat A B` | ordinary functor/program category |
 | `z :^n Z ; E[z] ⊢ D[z]` | `Functord_cat E D` | shaped functor/program category |
 | `Π (z :^n Z), D[z]` | `Pi_cat D` | terminal-shape section category |
 | `A[z^-] ⊢_[z] B[z]` | `Functor_catd A B` | mixed-variance displayed functor family |
-| `F => G` | `Transf_cat F G` | ordinary transformation category |
-| `FF[z^-] =>_[z] GG[z]` | `Transf_catd A B FF GG` | indexed/displayed transformation category |
+| `F ⇒ G` | `Transf_cat F G` | ordinary transformation category |
+| `FF[z^-] ⇒_[z] GG[z]` | `Transf_catd A B FF GG` | indexed/displayed transformation category |
 
 Two notation choices prevent ambiguity.
 
 First, ordinary ambient categories use superscripts:
 
 ```text
-a ->^C b.
+a →^C b.
 ```
 
-The operator `->_` is reserved for indexed or displayed homs:
+The operator `→_` is reserved for indexed or displayed homs:
 
 ```text
-aa[z^-] ->_[z]^R bb[z].
+aa[z^-] →_[z]^R bb[z].
 ```
 
 Second, the shaped category
@@ -703,11 +720,12 @@ k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
 This is telescope-style notation, not product-base notation. The order `k;z`
 is meaningful.
 
-# 8. Normalization Discipline And Checked Evidence
+# 8. Computational Method And Checked Evidence
 
-The v3.2 implementation uses named semantic owners for constructions whose
-projections must compute predictably. Readable helper names are routed through
-those semantic owners rather than duplicating their definitions.
+The formalization relies on a small normalization discipline. Constructions
+whose projections are used by later theorems are assigned stable semantic
+owners; readable helper names are routed through those owners rather than
+duplicating their definitions.
 
 For example:
 
@@ -718,7 +736,8 @@ CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x).
 The helper for its action on a base arrow routes through `CompTarget_Z(x)`;
 it is not a second definition of the same operation.
 
-The stable-head discipline is visible in the application names:
+The stable heads that appear in the evidence have direct mathematical
+readings:
 
 ```text
 fapp0         ordinary functor object action
@@ -733,9 +752,10 @@ discriminator. This is why diagnostic assertions often use canonical forms
 such as `Hom_cat`, `Functor_cat`, and `Functord_cat` rather than readability
 wrappers.
 
-The executable checks live in `emdash3_2_checks.lp`. The main file
-`emdash3_2.lp` contains definitions, interfaces, comments, and rewrite rules;
-the checks file is the regression catalog for normalization claims.
+The formal artifact separates definitions from executable claims:
+`emdash3_2.lp` contains the definitions and rewrite rules, while
+`emdash3_2_checks.lp` contains the conversion assertions used as regression
+evidence.
 
 Representative checked claims:
 
@@ -743,12 +763,12 @@ Representative checked claims:
 | --- | --- |
 | Representable | `Rep_Z(x)[y] = Hom_Z(x,y)` |
 | PathOut object layer | `PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))` |
-| PathOut transport | `PathOut_transport(p)[(z,q)] = (z,q o p)` |
+| PathOut transport | `PathOut_transport(p)[(z,q)] = (z,q ∘ p)` |
 | Rho construction | `rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)` |
 | Fixed-source induction | `PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)` |
 | Telescope theorem | `PathInd_transfd(Z)[x] = PathInd_func(Z,x)` |
 | Sigma-total theorem | `PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)` |
-| Composition benchmark | `path_comp_func(p)[z][q] = q o p` |
+| Composition benchmark | `path_comp_func(p)[z][q] = q ∘ p` |
 
 # 9. Supporting Examples, Limitations, And Future Work
 
@@ -767,20 +787,20 @@ an adjunction as a first-class object:
 J : Adjunction(R,L)
 left_adj_func(J)     : R ⊢ L
 right_adj_func(J)    : L ⊢ R
-unit_adj_transf(J)   : id_R => right(J) o left(J)
-counit_adj_transf(J) : left(J) o right(J) => id_L
+unit_adj_transf(J)   : id_R ⇒ right(J) ∘ left(J)
+counit_adj_transf(J) : left(J) ∘ right(J) ⇒ id_L
 ```
 
 The component-level triangle reductions are oriented as computation:
 
 ```text
-counit[f] o left(unit[g]) -> f o left(g)
-right(counit[g]) o unit[f] -> right(g) o f.
+counit[f] ∘ left(unit[g]) → f ∘ left(g)
+right(counit[g]) ∘ unit[f] → right(g) ∘ f.
 ```
 
 These are supporting examples, not the lead theorem.
 
-The current limitations are intentional and should not be hidden.
+Several parts of the intended language remain outside the present theorem.
 
 - Structural functor logic, including exchange, weakening, and contraction for
   nested shaped categories, is planned but not implemented.
@@ -792,9 +812,10 @@ The current limitations are intentional and should not be hidden.
 - A presentation facade such as `section_total(s) : K ⊢ Σ_K E` is not yet a
   named surface constructor.
 
-# 10. Implementation And Validation
+# 10. Formal Artifact And Validation
 
-The active v3.2 sources are:
+The artifact consists of a Lambdapi development, a companion regression module,
+and a reproducible paper-rendering pipeline. The active v3.2 sources are:
 
 - `emdash3_2.lp`: definitions, interfaces, and rewrite rules.
 - `emdash3_2_checks.lp`: executable assertions and regression checks.
@@ -804,7 +825,7 @@ The active v3.2 sources are:
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   rewrite/debugging SOP.
 
-Validation commands:
+The claims in this article are validated by the following checks:
 
 ```bash
 timeout 60s lambdapi check -w emdash3_2.lp
@@ -813,20 +834,9 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 npm run check:render
 ```
 
-The print pipeline treats this file as the current v3.2 long-form workbench:
-
-```text
-print/public/index_3_2.md
-```
-
-It can be previewed with:
-
-```text
-/?paper=index_3_2.md
-```
-
-Once this long version is stable, it can be promoted to `print/public/index.md`
-and a short `index_0.md` can be derived from it.
+The first three commands check the formal development and its conversion
+assertions. The final command validates embedded diagram specifications,
+builds the renderer, and runs a browser smoke test for the paper artifact.
 
 # 11. Conclusion
 
@@ -888,13 +898,13 @@ Core PathOut and rho checks:
 ```text
 Rep_Z(x)[y] = Hom_Z(x,y)
 PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))
-PathOut_transport(p)[(z,q)] = (z,q o p)
+PathOut_transport(p)[(z,q)] = (z,q ∘ p)
 PathOut_transport(p)[(y,id_y)] = (y,p)
 Rep_Z(x)[p](id_x) = p
 rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
 pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}
 PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
-  = rho_{x,z,q o p}
+  = rho_{x,z,q ∘ p}
 ```
 
 Path-induction projection checks:
@@ -921,7 +931,7 @@ path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u)
 path_ind_sec(CompMotive_Z(x), id_Rep_Z(x)) = path_comp_sec(x)
 CompTarget_Z(x)[p](id_Rep_Z(x)) = path_comp_func(p)
 path_comp_sec(x)[p] = path_comp_func(p)
-path_comp_func(p)[z][q] = q o p
+path_comp_func(p)[z][q] = q ∘ p
 ```
 
 The two expanded routes that matter most are the primary telescope route:
