@@ -30,10 +30,10 @@ $$
 
 This construction is used twice: it describes homs in Sigma totals, and it
 describes the action of sections over base arrows. From it, v3.2 builds the
-outgoing-arrow category
+outgoing-arrow category from $x$
 
 $$
-\\mathrm{PathOut}_Z(x) = \\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)
+\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)
 $$
 
 and the canonical arrow
@@ -43,19 +43,20 @@ $$
 $$
 
 The induction principle can be stated directly in the surface language. For a
-moving source $x : Z$ and a motive $E$ over outgoing arrows from $x$, there is
-a functor from the fibre of $E$ at the reflexive outgoing arrow to the category
-of sections of $E$:
+moving source $x : Z$ and a motive $E$ over the unfolded outgoing-arrow
+category, there is a functor from the fibre of $E$ at the reflexive outgoing
+arrow to the category of sections of $E$:
 
 ```text
 x :^n Z ;
-E :^n (PathOut_Z(x) ⊢ Cat) ;
-E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
+E :^n ((Σ (y :^n Z), Hom_Z(x,y)) ⊢ Cat) ;
+E[(x,id_x)] ⊢ Π (q :^n (Σ (y :^n Z), Hom_Z(x,y))), E[q].
 ```
 
 It sends $u : E[(x,\\mathrm{id}_x)]$ to the section
-$q \\mapsto E[\\rho_q](u)$. The Lambdapi implementation packages this
-telescope as `PathInd_transfd(Z)`.
+$q \\mapsto E[\\rho_q](u)$. Later sections abbreviate
+$\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)$ as `PathOut_Z(x)`; the Lambdapi
+implementation packages the telescope as `PathInd_transfd(Z)`.
 
 Its most visible checked consequence is directed transitivity. For
 $p : x \\to y$ and $q : y \\to z$, the composition instance of arrow induction
