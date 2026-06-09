@@ -31,10 +31,10 @@ Hom_{ΣE}((x,u),(y,v))
 
 The same normalization-first architecture also covers product/curry structure, computational adjunctions, structural operations such as weakening/symmetry/contraction, and vertical/horizontal composition, whiskering, interchange, and stacking of higher cells; sheaves and schemes are feasible too.
 
-The motivating example is the familiar shape of path induction in dependent type theory. For a category `Z` and an object `x : Z`, replace paths out of `x` by the outgoing-arrow category
+The motivating example is the familiar shape of path induction in dependent type theory. For a category `Z` and an object `x : Z`, replace paths out of `x` by the outgoing-arrow category, i.e. the coslice/undercategory
 
 ```
-Out_Z(x) = Σ(y : Z), Hom_Z(x,y).
+x ↓ Z = Σ(y : Z), Hom_Z(x,y).
 ```
 
 Its distinguished object is
@@ -43,7 +43,7 @@ Its distinguished object is
 ι_x = (x,id_x),
 ```
 
-and every object `a = (y,p) : Out_Z(x)` has a canonical arrow
+and every object `a = (y,p) : x ↓ Z` has a canonical arrow
 
 ```
 ρ^x_a : ι_x → a.
@@ -52,13 +52,13 @@ and every object `a = (y,p) : Out_Z(x)` has a canonical arrow
 Thus, for a motive
 
 ```
-E : Out_Z(x) → Cat
+E : x ↓ Z → Cat
 ```
 
 and `u : E(ι_x)`, fixed-source directed induction has the expected section
 
 ```
-Ind_x(E,u) : Π(a : Out_Z(x)), E(a)
+Ind_x(E,u) : Π(a : x ↓ Z), E(a)
 
 Ind_x(E,u)(a) = E(ρ^x_a)(u).
 ```
@@ -78,25 +78,25 @@ Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
 
 ```
-Out_Z(r) : Out_Z(y) → Out_Z(x)
+r^* : y ↓ Z → x ↓ Z
 
-Out_Z(r)(z,q : y → z) = (z,q ∘ r).
+r^*(z,q : y → z) = (z,q ∘ r).
 ```
 
 Once induction is internalized as a construction varying in `x`, the target `Π`/section-taking construction
 
 ```
-x ↦ (E ↦ Π(a : Out_Z(x)), E(a))
+x ↦ (E ↦ Π(a : x ↓ Z), E(a))
 ```
 
 is itself a displayed construction over the moving source object `x`. Its transport/comparison along `r` is not the identity; it is the section-pullback functor
 
 ```
-Π(a : Out_Z(x)), E(a)
+Π(a : x ↓ Z), E(a)
   →
-Π(b : Out_Z(y)), E(Out_Z(r)(b)),
+Π(b : y ↓ Z), E(r^*(b)),
 ```
 
-sending `s` to `b ↦ s(Out_Z(r)(b))`.
+sending `s` to `b ↦ s(r^*(b))`.
 
 This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.

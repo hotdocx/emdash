@@ -47,11 +47,12 @@ feasible too.
 
 The motivating example is the familiar shape of path induction in dependent
 type theory, now directed. For a category $Z$ and an object $x : Z$, emdash
-uses the outgoing-arrow category
+uses the outgoing-arrow category, i.e. the coslice/undercategory
 
 $$
 \\mathrm{PathOut}_Z(x)
-  :=
+  := x \\downarrow Z
+  =
 \\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y).
 $$
 
