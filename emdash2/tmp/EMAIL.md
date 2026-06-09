@@ -37,30 +37,18 @@ The motivating example is the familiar shape of path induction in dependent type
 x ↓ Z = Σ(y : Z), Hom_Z(x,y).
 ```
 
-Its distinguished object is
+The object `(x,id_x)` is initial in `(x ↓ Z)`. For `a = (y,p)`, the canonical arrow `(x,id_x) → a` is `p` itself. Thus, for a motive
 
 ```
-ι_x = (x,id_x),
+E : (x ↓ Z) → Cat
 ```
 
-and every object `a = (y,p) : x ↓ Z` has a canonical arrow
+and `u : E((x,id_x))`, fixed-source directed induction has the expected section
 
 ```
-ρ^x_a : ι_x → a.
-```
+Ind_x(E,u) : Π(a : (x ↓ Z)), E(a)
 
-Thus, for a motive
-
-```
-E : x ↓ Z → Cat
-```
-
-and `u : E(ι_x)`, fixed-source directed induction has the expected section
-
-```
-Ind_x(E,u) : Π(a : x ↓ Z), E(a)
-
-Ind_x(E,u)(a) = E(ρ^x_a)(u).
+Ind_x(E,u)(y,p) = E(p)(u).
 ```
 
 Write `Rep_Z(t)` for the covariant representable `Hom_Z(t,-)`. For the composition motive
@@ -78,7 +66,7 @@ Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
 
 ```
-r^* : y ↓ Z → x ↓ Z
+r^* : (y ↓ Z) → (x ↓ Z)
 
 r^*(z,q : y → z) = (z,q ∘ r).
 ```
@@ -86,15 +74,15 @@ r^*(z,q : y → z) = (z,q ∘ r).
 Once induction is internalized as a construction varying in `x`, the target `Π`/section-taking construction
 
 ```
-x ↦ (E ↦ Π(a : x ↓ Z), E(a))
+x ↦ (E ↦ Π(a : (x ↓ Z)), E(a))
 ```
 
 is itself a displayed construction over the moving source object `x`. Its transport/comparison along `r` is not the identity; it is the section-pullback functor
 
 ```
-Π(a : x ↓ Z), E(a)
+Π(a : (x ↓ Z)), E(a)
   →
-Π(b : y ↓ Z), E(r^*(b)),
+Π(b : (y ↓ Z)), E(r^*(b)),
 ```
 
 sending `s` to `b ↦ s(r^*(b))`.

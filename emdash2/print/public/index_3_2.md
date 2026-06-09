@@ -56,8 +56,10 @@ $$
 \\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y).
 $$
 
-Its distinguished object is $\\iota_x = (x,\\mathrm{id}_x)$, and every object
-$a = (y,p) : \\mathrm{PathOut}_Z(x)$ has a canonical arrow
+The object $\\iota_x = (x,\\mathrm{id}_x)$ is initial in
+$\\mathrm{PathOut}_Z(x)$. For $a = (y,p)$, the canonical arrow
+$\\iota_x \\to a$ is the arrow $p$ itself; when a reusable name is needed, we
+write it as
 
 $$
 \\rho^x_a : \\iota_x \\to a.
