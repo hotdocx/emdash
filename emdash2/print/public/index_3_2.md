@@ -54,8 +54,8 @@ uses the outgoing-arrow category, i.e. the coslice/undercategory
 
 $$
 \\mathrm{PathOut}_Z(x)
-  := x \\downarrow Z
-  =
+  \\coloneqq x \\downarrow Z
+  \\coloneqq
 \\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y).
 $$
 
