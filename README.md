@@ -1,18 +1,125 @@
 # emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction)
 
-## NEW UPDATED VERSION EMDASH 2 — [./emdash2/emdash3_2.lp](./emdash2/emdash3_2.lp) 
+## NEW UPDATED VERSION EMDASH 3.2 — [./emdash2/emdash3_2.lp](./emdash2/emdash3_2.lp)
 
-*GO TO: [./emdash2/emdash3_2.lp](./emdash2/emdash3_2.lp)*
+The current v3.2 draft of **emdash** is a Lambdapi formalization and prototype
+proof assistant aimed at functorial programming with strict/lax higher
+ω-categorical structure, fully internalized and computational in the style of
+Kosta Došen's cut-elimination techniques. It points to a research programme at
+the intersection of dependent type theory and category theory, potentially on a
+scale comparable to homotopy type theory.
 
-We report on **emdash** https://github.com/hotdocx/emdash an ongoing experiment whose goal is a new *type-theoretical* account of strict/lax $\\omega$-categories that is both *internal* (expressed inside dependent type theory) and *computational* (amenable to normalization by rewriting). The current implementation target is the Lambdapi logical framework, and the guiding methodological stance is proof-theoretic: many categorical equalities are best presented as *normalization* (“cut-elimination”) steps rather than as external propositions.
+Primary artifacts:
 
-The central construction is a dependent comma/arrow (“dependent hom”) operation that directly organizes “cells over a base arrow” in a simplicial manner. Concretely, let $B$ be a category and let $E$ be a dependent category over $B$ (informally a fibration $E: B\\to \\mathbf{Cat}$). Fix a base object $b_0\\in B$ and a fibre object $e_0\\in E(b_0)$. We construct a Cat-valued functor that assigns to a base arrow $b_{01}: b_0\\to b_1$ and a fibre object $e_1\\in E(b_1)$ the category of morphisms in the fibre over $b_1$ from the transport of $e_0$ along $b_{01}$ to $e_1$. In slogan form, this is a dependent arrow/comma object
-$\\mathrm{Homd}_E(e_0,(-,-)) : E \\times_B \\bigl(\\mathrm{Hom}_B(b_0,-)\\bigr)^{\\mathrm{op}} \\to \\mathbf{Cat}.$
-In the current kernel snapshot, this construction is computational in the Grothendieck/Grothendieck probe case (via a definitional rule for `homd_`), while full general normalization is still ongoing. The intended iteration yields a simplicial presentation of higher cells (triangles, surfaces, higher simplices), where “stacking” of $2$-cells along a $1$-cell is expressed *over a chosen base edge*.
+- PDF report: [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
+- Lambdapi source: [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
 
-As a complementary application, we outline a computational formulation of adjunctions in which unit and counit are first-class $2$-cell data and the triangle identities are oriented as definitional reductions on composites (e.g. $\\epsilon_f \\circ L(\\eta_g) \\rightsquigarrow f \\circ L(g)$ ). This showcases the broader emdash theme: coherence is enforced by computation, via stable rewrite heads for functoriality and “off-diagonal” components of transformations. The development is diagram-first: commutative diagrams are specified in a strict JSON format (Arrowgram) and rendered/checked as part of a reproducible paper artifact.
+The basic construction underneath the draft is the directed dependent hom. For
+a category-valued family
 
-From an engineering perspective, this fits a “MathOps” workflow: a long-running feedback loop between an LLM assistant and a proof-checker/type-checker, where commutative diagrams are first-class artifacts. In emdash we use Arrowgram (a strict JSON diagram format) to make diagrams AI-editable, renderable (e.g. to SVG), and checkable alongside the kernel and the paper.
+```text
+E : K ⊢ Cat
+```
+
+where `⊢` denotes a functor category, and fixed data `x : K`, `u : E[x]`,
+emdash forms a functorial object
+
+```text
+homd_E(x,u)
+  : Π(y : K^op), E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat)
+```
+
+Here `⊢_[y]` is the mixed-variance displayed version of `⊢`, and `y^-` marks
+that the `E`-argument occurs contravariantly. Its value at `y`, `v : E[y]`,
+and `f : x → y` is
+
+```text
+Hom_{E[y]}(E[f](u),v).
+```
+
+This is also what organizes arrows in Sigma totals:
+
+```text
+Hom_{ΣE}((x,u),(y,v))
+  = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
+```
+
+The same normalization-first architecture also covers product/curry structure,
+computational adjunctions, structural operations such as
+weakening/symmetry/contraction, and vertical/horizontal composition,
+whiskering, interchange, and stacking of higher cells; sheaves and schemes are
+feasible too.
+
+The motivating example is the familiar shape of path induction in dependent
+type theory. For a category `Z` and an object `x : Z`, replace paths out of
+`x` by the outgoing-arrow category, i.e. the coslice/undercategory
+
+```text
+x ↓ Z = Σ(y : Z), Hom_Z(x,y).
+```
+
+The object `(x,id_x)` is initial in `(x ↓ Z)`. For `a = (y,p)`, the canonical
+arrow `(x,id_x) → a` is `p` itself. Thus, for a motive
+
+```text
+E : (x ↓ Z) ⊢ Cat
+```
+
+and `u : E((x,id_x))`, fixed-source directed induction has the expected
+section
+
+```text
+Ind_x(E,u) : Π(a : (x ↓ Z)), E(a)
+
+Ind_x(E,u)(y,p) = E(p)(u).
+```
+
+Write `Rep_Z(t)` for the covariant representable `Hom_Z(t,-)`. For the
+composition motive
+
+```text
+E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x)
+```
+
+with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary
+composition: for `p : x → y` and `q : y → z`,
+
+```text
+Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
+```
+
+The new phenomenon appears when the source object `x` itself is internalized.
+For an arrow `r : x → y`, precomposition gives
+
+```text
+r^* : (y ↓ Z) ⊢ (x ↓ Z)
+
+r^*(z,q : y → z) = (z,q ∘ r).
+```
+
+Once induction is internalized as a construction varying in `x`, the target
+`Π`/section-taking construction
+
+```text
+x ↦ (E ↦ Π(a : (x ↓ Z)), E(a))
+```
+
+is itself a displayed construction over the moving source object `x`. Its
+transport/comparison along `r` is not the identity; it is the section-pullback
+functor
+
+```text
+Π(a : (x ↓ Z)), E(a)
+  ⊢
+Π(b : (y ↓ Z)), E(r^*(b))
+```
+
+sending `s` to `b ↦ s(r^*(b))`.
+
+This is the lax naturality/functoriality layer exposed by the internalized
+formulation of directed path induction in `emdash` v3.2. An open question is
+whether this phenomenon has an established name or prior formulation in
+categorical logic, HoTT, or higher category theory.
 
 ## Start here
 
@@ -61,7 +168,7 @@ Build and publish your professional AI agents that co-work for you 24/7, save yo
 
 - Dedicated 24/7 cloud computers
 - Webhook trigger events, scheduled automations
-- API tools, Gmail, Website, Latex, Excel, PDF tools
+- API tools, Gmail, Website, LaTeX, Excel, PDF tools
 - Agent-to-agent marketplace
 - Run your AI workspace from Telegram or WhatsApp chat
 - OpenClaw-compatible 🦞 for professionals
@@ -75,31 +182,31 @@ Build and publish your professional AI agents that co-work for you 24/7, save yo
 
 ### Quick links
 
-[1] *emdash Experiment-able Testing Playground in hotdocx Web App*. [https://hotdocx.github.io/#/hdx/25188CHRI27000](https://hotdocx.github.io/#/hdx/25188CHRI27000) 
+[1] *emdash Experiment-able Testing Playground in hotdocx Web App*. [https://hotdocx.github.io/#/hdx/25188CHRI27000](https://hotdocx.github.io/#/hdx/25188CHRI27000)
 
 [2] *emdash Kernel Specification Written in the Lambdapi Proof Assistant*. [./spec/emdash_specification_lambdapi.lp](./spec/emdash_specification_lambdapi.lp)
 
-[3] *emdash Technical Report*. [./docs/emdash.pdf](./docs/emdash.pdf) 
+[3] *emdash Technical Report*. [./docs/emdash.pdf](./docs/emdash.pdf)
 
 ### Other links
 
-[4] *emdash Re-formattable Technical Report in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004) 
+[4] *emdash Re-formattable Technical Report in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI25004](https://hotdocx.github.io/#/hdx/25188CHRI25004)
 
 [5] *arrowgram App for Commutative Arrow Diagrams*. [https://github.com/hotdocx/arrowgram](https://github.com/hotdocx/arrowgram)
 
-[6] *arrowgram AI Template in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI26000](https://hotdocx.github.io/#/hdx/25188CHRI26000) 
+[6] *arrowgram AI Template in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25188CHRI26000](https://hotdocx.github.io/#/hdx/25188CHRI26000)
 
 [7] *jsCoq AI Template for Coq in hotdocx Publisher*. [https://hotdocx.github.io/#/hdx/25191CHRI43000](https://hotdocx.github.io/#/hdx/25191CHRI43000)
 
-[8] *hotdocX GitHub Sponsored Profile*. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
+[8] *hotdocx GitHub Sponsored Profile*. [https://github.com/sponsors/hotdocx](https://github.com/sponsors/hotdocx)
 
 ![emdash.png](./emdash.png)
 
 ### Past/Future Work
 
-[9] *emdash further Lambapi-specifications for ω-categories, sheaves and schemes*. [https://github.com/1337777/cartier/](https://github.com/1337777/cartier/)
+[9] *emdash further Lambdapi specifications for ω-categories, sheaves and schemes*. [https://github.com/1337777/cartier/](https://github.com/1337777/cartier/)
 
-TLDR: for the functoriality rule  `(F b) ∘> (F a)  ↪  F (b ∘> a)` it is clear that the size of the composition term `(b ∘> a)` in the RHS is smaller/decreasing; but for the naturality rule  `(ϵ._X) ∘> (G a)  ↪  (F a) _∘> (ϵ._Y)` it is not clear how to make the computation progress towards a smaller RHS, and the key insight by Kosta Dosen is that the RHS `_∘>` is actually a Yoneda/hom action/transport which is syntactically distinct than (but semantically equivalent to) the usual composition `∘>` ... Then extensionality/univalence is directly expressible via rules such as `@Hom Set $X $Y ↪ (τ $X → τ $Y)`. The prerequisite benchmark is whether `symbol super_yoneda_functor : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Functor (Functor_cat B A) (Functor_cat B Set)` becomes computationally expressible by `reflexivity` proofs alone. Furthermore simplicial-cubical ω-categories become expressible via an elementary insight: given the usual triangle simplex `{0,1,2}` with arrows `f : 0 -> 1`, `g: 1 -> 2` and `h: 0 -> 2`, then the `projection functor` which maps a surface `σ: f -> h over g` to its base line `g` will indeed also functorially map a volume from `σ` down to a base surface from `g`... visually:  [https://cutt.cx/fTL](https://cutt.cx/fTL) — Ultimately it becomes expressible to extend the sheafification-functor given a site-topology closure-operator, and to specify a co-inductive computational logic interface for algebraic-geometry schemes, as outlined in [https://github.com/1337777/cartier/blob/master/cartierSolution16.lp](https://github.com/1337777/cartier/blob/master/cartierSolution16.lp)
+TLDR: for the functoriality rule  `(F b) ∘> (F a)  ↪  F (b ∘> a)` it is clear that the size of the composition term `(b ∘> a)` in the RHS is smaller/decreasing; but for the naturality rule  `(ϵ._X) ∘> (G a)  ↪  (F a) _∘> (ϵ._Y)` it is not clear how to make the computation progress towards a smaller RHS, and the key insight by Kosta Došen is that the RHS `_∘>` is actually a Yoneda/hom action/transport which is syntactically distinct than (but semantically equivalent to) the usual composition `∘>` ... Then extensionality/univalence is directly expressible via rules such as `@Hom Set $X $Y ↪ (τ $X → τ $Y)`. The prerequisite benchmark is whether `symbol super_yoneda_functor : Π [A : Cat], Π [B : Cat], Π (W: Obj A), Functor (Functor_cat B A) (Functor_cat B Set)` becomes computationally expressible by `reflexivity` proofs alone. Furthermore simplicial-cubical ω-categories become expressible via an elementary insight: given the usual triangle simplex `{0,1,2}` with arrows `f : 0 -> 1`, `g: 1 -> 2` and `h: 0 -> 2`, then the `projection functor` which maps a surface `σ: f -> h over g` to its base line `g` will indeed also functorially map a volume from `σ` down to a base surface from `g`... visually:  [https://cutt.cx/fTL](https://cutt.cx/fTL) — Ultimately it becomes expressible to extend the sheafification-functor given a site-topology closure-operator, and to specify a co-inductive computational logic interface for algebraic-geometry schemes, as outlined in [https://github.com/1337777/cartier/blob/master/cartierSolution16.lp](https://github.com/1337777/cartier/blob/master/cartierSolution16.lp)
 
 ## Core Features Implemented in Detail
 
@@ -147,7 +254,7 @@ The system natively supports fundamental category theory concepts, with their ty
 *   **Built-in Categories and Functors**:
     *   `SetTerm`: The initial standard library (`src/stdlib.ts`) defines `Set` as a built-in category, representing the category of sets and functions. Its `Hom` type (i.e., `Hom Set X Y`) is reduced to a `Pi` type (`Π (_:X). Y`), aligning with the set-theoretic interpretation of functions.
     *   `HomCovFunctorIdentity`: Represents the covariant Hom-functor `Hom_A(W, -)`. Its application (`fmap0 (HomCovFunctor A W) Y`) reduces to `Hom A W Y`, showcasing how functorial concepts are integrated into the core reduction rules.
-*   **Standard Library (`src/stdlib.ts`)**: This module is crucial for setting up the initial categorical environment. it defines core category theory primitives like `identity_morph` (identity morphism) and `compose_morph` (composition of morphisms), tested in `tests/phase1_tests.ts`. More importantly for functorial elaboration, it also sets up key rewrite rules, including the **naturality law** for natural transformations and the **functoriality of composition** for functors. These rules are integral to proving properties in the system and are automatically applied during reduction.
+*   **Standard Library (`src/stdlib.ts`)**: This module is crucial for setting up the initial categorical environment. It defines core category theory primitives like `identity_morph` (identity morphism) and `compose_morph` (composition of morphisms), tested in `tests/phase1_tests.ts`. More importantly for functorial elaboration, it also sets up key rewrite rules, including the **naturality law** for natural transformations and the **functoriality of composition** for functors. These rules are integral to proving properties in the system and are automatically applied during reduction.
 
 ### 3. Extensibility and System Management
 
@@ -173,8 +280,6 @@ The system natively supports fundamental category theory concepts, with their ty
 *   `src/stdlib.ts`: Defines the standard library, providing the initial set of types, terms, and rules for fundamental category theory concepts and basic logical constructs. It's where the system's "axioms" and initial definitions are set up, including identity and composition morphisms, and naturality laws. It also contains the `resetMyLambdaPi_Emdash` function for re-initializing the system.
 *   `src/structural.ts`: Provides utility functions for checking raw structural equality between terms *without* performing any reduction or unification. This is used for quick, shallow comparisons when convertibility is not required.
 *   `src/proof.ts`: (Preliminary) Contains the infrastructure for an interactive proof mode, allowing users to inspect the proof state (holes), report on goals, and refine them using various tactics (`intro`, `exact`, `apply`). This module directly interacts with the `elaboration.ts` and `state.ts` to manage subgoals.
-*   `src/util.ts`: (Note: This file was listed but not found during the file reading phase. If it exists, it likely contains general utility functions not directly tied to the core type theory, such as debugging helpers or minor transformations.)
-
 ## Testing (tests/)
 
 The `tests/` directory contains a comprehensive suite of unit tests, designed to ensure the correctness, stability, and adherence to type-theoretic principles of the `emdash` core logic. Each test file focuses on specific aspects:
@@ -197,4 +302,4 @@ The `tests/` directory contains a comprehensive suite of unit tests, designed to
 *   `tests/kernel_implicits_tests.ts`: Specifically tests the handling of "kernel implicits" for category theory constructors (like `FMap0Term`), ensuring they are correctly inserted and typed during elaboration.
 *   `tests/phase1_tests.ts`: Focuses on initial categorical primitives and their projections, ensuring the foundational category theory concepts are correctly implemented and integrated.
 *   `tests/proof_mode_tests.ts`: Tests the preliminary proof mode functionalities (`src/proof.ts`), such as finding holes, reporting goal states, and applying basic tactics like `intro`, `exact`, and `apply`.
-*   `tests/utils.ts`: Contains general utility functions used across the test suite, such as custom assertion helpers (`assertEqual`, `assert`) for clearer test failures. 
+*   `tests/utils.ts`: Contains general utility functions used across the test suite, such as custom assertion helpers (`assertEqual`, `assert`) for clearer test failures.
