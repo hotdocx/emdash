@@ -1,19 +1,21 @@
-I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Došen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
+I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with strict/lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Došen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
 
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
 
+Notation: `A ⊢ B` denotes the emdash functor/program category; `A[z^-] ⊢_[z] B[z]` denotes the mixed-variance displayed version; `z^-` marks evaluation at an opposite-variance index. I use `→` only for ordinary arrows such as `p : x → y`.
+
 The basic construction underneath the draft is the directed dependent hom. For a category-valued family
 
 ```
-E : K → Cat
+E : K ⊢ Cat
 ```
 
 and fixed data `x : K`, `u : E[x]`, emdash forms a functorial object
 
 ```
 homd_E(x,u)
-  : Π(y : K^op), E[y^-] ⊢ (Hom_K(x,y)^op ⊢ Cat)
+  : Π(y : K^op), E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat)
 ```
 
 whose value at `y`, `v : E[y]`, and `f : x → y` is
@@ -40,7 +42,7 @@ x ↓ Z = Σ(y : Z), Hom_Z(x,y).
 The object `(x,id_x)` is initial in `(x ↓ Z)`. For `a = (y,p)`, the canonical arrow `(x,id_x) → a` is `p` itself. Thus, for a motive
 
 ```
-E : (x ↓ Z) → Cat
+E : (x ↓ Z) ⊢ Cat
 ```
 
 and `u : E((x,id_x))`, fixed-source directed induction has the expected section
@@ -66,7 +68,7 @@ Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
 
 ```
-r^* : (y ↓ Z) → (x ↓ Z)
+r^* : (y ↓ Z) ⊢ (x ↓ Z)
 
 r^*(z,q : y → z) = (z,q ∘ r).
 ```
@@ -81,7 +83,7 @@ is itself a displayed construction over the moving source object `x`. Its transp
 
 ```
 Π(a : (x ↓ Z)), E(a)
-  →
+  ⊢
 Π(b : (y ↓ Z)), E(r^*(b)),
 ```
 
