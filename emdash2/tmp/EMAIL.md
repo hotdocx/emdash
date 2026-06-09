@@ -54,7 +54,7 @@ Ind_x(E,u)(y,p) = E(p)(u).
 Write `Rep_Z(t)` for the covariant representable `Hom_Z(t,-)`. For the composition motive
 
 ```
-E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x),
+E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x)
 ```
 
 with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary composition: for `p : x → y` and `q : y → z`,
@@ -82,7 +82,7 @@ is itself a displayed construction over the moving source object `x`. Its transp
 ```
 Π(a : (x ↓ Z)), E(a)
   ⊢
-Π(b : (y ↓ Z)), E(r^*(b)),
+Π(b : (y ↓ Z)), E(r^*(b))
 ```
 
 sending `s` to `b ↦ s(r^*(b))`.
