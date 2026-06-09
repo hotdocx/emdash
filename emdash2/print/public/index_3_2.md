@@ -13,17 +13,20 @@ structural categorical equalities are oriented as normalization, or
 cut-elimination, steps.
 
 The basic construction is the directed dependent hom. For a category-valued
-family $E : K \\to \\mathbf{Cat}$ and fixed data $x : K$ and
-$u \\in E[x]$, emdash forms a functorial object
+family $E : K \\vdash \\mathbf{Cat}$, where $\\vdash$ denotes a functor
+category, and fixed data $x : K$ and $u \\in E[x]$, emdash forms a functorial
+object
 
 $$
 \\mathrm{homd}_E(x,u)
   : \\prod_{y : K^{\\mathrm{op}}}
-      \\bigl(E[y] \\to (\\mathrm{Hom}_K(x,y)^{\\mathrm{op}}
-      \\to \\mathbf{Cat})\\bigr)
+      \\bigl(E[y^-] \\vdash_{[y]}
+        (\\mathrm{Hom}_K(x,y)^{\\mathrm{op}} \\vdash \\mathbf{Cat})\\bigr)
 $$
 
-whose value at $y$, $v \\in E[y]$, and $f : x \\to y$ is
+Here $\\vdash_{[y]}$ is the mixed-variance displayed version of $\\vdash$, and
+$y^-$ marks that the $E$-argument occurs contravariantly. At a fixed $y$, its
+value at $v \\in E[y]$ and $f : x \\to y$ is
 
 $$
 \\mathrm{homd}_E(x,u)[y][v][f]
@@ -65,7 +68,7 @@ $$
 \\rho^x_a : \\iota_x \\to a.
 $$
 
-Thus, for a motive $E : \\mathrm{PathOut}_Z(x) \\to \\mathbf{Cat}$ and
+Thus, for a motive $E : \\mathrm{PathOut}_Z(x) \\vdash \\mathbf{Cat}$ and
 $u \\in E(\\iota_x)$, fixed-source directed induction gives the section
 
 $$
@@ -76,8 +79,7 @@ $$
 $$
 
 Write $\\mathrm{Rep}_Z(t)$ for the covariant representable
-$\\mathrm{Hom}_Z(t,-)$. For the composition motive, using the emdash
-functor-category notation $\\vdash$,
+$\\mathrm{Hom}_Z(t,-)$. For the composition motive
 
 $$
 E[(y,p)] := \\mathrm{Rep}_Z(y) \\vdash \\mathrm{Rep}_Z(x),
@@ -95,7 +97,7 @@ The new phenomenon appears when the source object $x$ itself is internalized.
 For an arrow $r : x \\to y$, precomposition gives
 
 $$
-\\mathrm{PathOut}_Z(r) : \\mathrm{PathOut}_Z(y) \\to
+\\mathrm{PathOut}_Z(r) : \\mathrm{PathOut}_Z(y) \\vdash
 \\mathrm{PathOut}_Z(x),
 \\qquad
 \\mathrm{PathOut}_Z(r)(z,q : y \\to z) = (z,q \\circ r).
@@ -114,7 +116,7 @@ along $r$ is not the identity; it is the section-pullback functor
 
 $$
 \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)
-  \\to
+  \\vdash
 \\prod_{b : \\mathrm{PathOut}_Z(y)}
   E(\\mathrm{PathOut}_Z(r)(b)),
 \\qquad
