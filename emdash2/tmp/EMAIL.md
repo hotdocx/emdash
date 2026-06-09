@@ -86,7 +86,7 @@ Out_Z(r)(z,q : y → z) = (z,q ∘ r).
 Once induction is internalized as a construction varying in `x`, the target `Π`/section-taking construction
 
 ```
-(x,E) ↦ Π(q : Out_Z(x)), E(q)
+x ↦ (E ↦ Π(a : Out_Z(x)), E(a))
 ```
 
 is itself a displayed construction over the moving source object `x`. Its transport/comparison along `r` is not the identity; it is the section-pullback functor

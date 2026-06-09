@@ -102,7 +102,8 @@ Once induction is internalized as a construction varying in $x$, the target
 section-taking construction
 
 $$
-(x,E) \\mapsto \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)
+x \\mapsto
+\\left(E \\mapsto \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)\\right)
 $$
 
 is itself displayed over the moving source object. Its transport/comparison
