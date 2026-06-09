@@ -3,22 +3,20 @@ I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalizatio
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
 
-Notation: `A ⊢ B` denotes the emdash functor/program category; `A[z^-] ⊢_[z] B[z]` denotes the mixed-variance displayed version; `z^-` marks evaluation at an opposite-variance index. I use `→` only for ordinary arrows such as `p : x → y`.
-
 The basic construction underneath the draft is the directed dependent hom. For a category-valued family
 
 ```
 E : K ⊢ Cat
 ```
 
-and fixed data `x : K`, `u : E[x]`, emdash forms a functorial object
+where `⊢` denotes a functor category, and fixed data `x : K`, `u : E[x]`, emdash forms a functorial object
 
 ```
 homd_E(x,u)
   : Π(y : K^op), E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat)
 ```
 
-whose value at `y`, `v : E[y]`, and `f : x → y` is
+Here `⊢_[y]` is the mixed-variance displayed version of `⊢`, and `y^-` marks that the `E`-argument occurs contravariantly. Its value at `y`, `v : E[y]`, and `f : x → y` is
 
 ```
 Hom_{E[y]}(E[f](u),v).
