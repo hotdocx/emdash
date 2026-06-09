@@ -63,7 +63,7 @@ Ind_x(E,u) : Π(a : Out_Z(x)), E(a)
 Ind_x(E,u)(a) = E(ρ^x_a)(u).
 ```
 
-For the composition motive
+Write `Rep_Z(t)` for the covariant representable `Hom_Z(t,-)`. For the composition motive
 
 ```
 E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x),
