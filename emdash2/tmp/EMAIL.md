@@ -43,10 +43,10 @@ Its distinguished object is
 ι_x = (x,id_x),
 ```
 
-and every object `q = (y,p) : Out_Z(x)` has a canonical arrow
+and every object `a = (y,p) : Out_Z(x)` has a canonical arrow
 
 ```
-ρ^x_q : ι_x → q.
+ρ^x_a : ι_x → a.
 ```
 
 Thus, for a motive
@@ -58,9 +58,21 @@ E : Out_Z(x) → Cat
 and `u : E(ι_x)`, fixed-source directed induction has the expected section
 
 ```
-Ind_x(E,u) : Π(q : Out_Z(x)), E(q)
+Ind_x(E,u) : Π(a : Out_Z(x)), E(a)
 
-Ind_x(E,u)(q) = E(ρ^x_q)(u).
+Ind_x(E,u)(a) = E(ρ^x_a)(u).
+```
+
+For the composition motive
+
+```
+E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x),
+```
+
+with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary composition:
+
+```
+Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 ```
 
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
