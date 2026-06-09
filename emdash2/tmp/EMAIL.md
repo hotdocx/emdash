@@ -3,6 +3,32 @@ I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalizatio
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
 
+The basic construction underneath the draft is the directed dependent hom. For a category-valued family
+
+```
+E : K → Cat
+```
+
+and fixed data `x : K`, `u : E[x]`, emdash forms a functorial object
+
+```
+homd_E(x,u)
+  : Π(y : K^op), E[y^-] ⊢ (Hom_K(x,y)^op ⊢ Cat)
+```
+
+whose value at `y`, `v : E[y]`, and `f : x → y` is
+
+```
+Hom_{E[y]}(E[f](u),v).
+```
+
+This is also what organizes arrows in Sigma totals:
+
+```
+Hom_{ΣE}((x,u),(y,v))
+  = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
+```
+
 The motivating example is the familiar shape of path induction in dependent type theory. For a category `Z` and an object `x : Z`, replace paths out of `x` by the outgoing-arrow category
 
 ```
@@ -58,4 +84,3 @@ is itself a displayed construction over the moving source object `x`. Its transp
 ```
 
 This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, directed type theory, or higher category theory.
-
