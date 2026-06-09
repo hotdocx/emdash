@@ -85,4 +85,4 @@ is itself a displayed construction over the moving source object `x`. Its transp
 Π(b : Out_Z(y)), E(Out_Z(r)(b)).
 ```
 
-This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, directed type theory, or higher category theory.
+This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.
