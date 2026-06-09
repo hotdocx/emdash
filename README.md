@@ -44,11 +44,11 @@ Hom_{ΣE}((x,u),(y,v))
   = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
 ```
 
-The same normalization-first architecture also covers product/curry structure,
-computational adjunctions, structural operations such as
-weakening/symmetry/contraction, and vertical/horizontal composition,
-whiskering, interchange, and stacking of higher cells; sheaves and schemes are
-feasible too.
+The same normalization-first architecture drives this simplicial ω-iteration
+and also covers product/curry structure, computational adjunctions, structural
+operations such as weakening/symmetry/contraction, and vertical/horizontal
+composition, whiskering, interchange, and stacking of higher cells; sheaves and
+schemes are feasible too.
 
 The motivating example is the familiar shape of path induction in dependent
 type theory. For a category `Z` and an object `x : Z`, replace paths out of
