@@ -6,65 +6,120 @@ authors: https://github.com/hotdocx/emdash
 # Abstract
 
 We present the v3.2 architecture of **emdash**, a Lambdapi specification for a
-programming language and proof assistant for strict/lax $\\omega$-categories.
-The main result of this iteration is not a new datatype of paths. It is a
-category-theoretic arrow-induction principle built from directed families,
-dependent sums, dependent products, and dependent homs, then checked by
-normalization in Lambdapi.
+programming language and prototype proof assistant for strict/lax higher
+$\\omega$-categorical structure. The development is fully internalized in
+dependent type theory and computational in the proof-theoretic sense:
+structural categorical equalities are oriented as normalization, or
+cut-elimination, steps.
 
-The strict/lax distinction is essential. Ordinary functoriality is oriented as
-strict computation, but transport in directed families may preserve canonical
-total arrows only up to a displayed transport-comparison cell. The
-arrow-induction theorem is therefore formulated first as a source-indexed
-telescope; its Sigma-total presentation is derived only after the relevant
-transport comparison data have been internalized.
-
-The foundational construction is the directed dependent hom. Given a
-category-valued family $E : K \\to \\mathbf{Cat}$, objects
-$u \\in E[x]$ and $v \\in E[y]$, and a base arrow $f : x \\to y$, the fibre
-over $f$ is
+The basic construction is the directed dependent hom. For a category-valued
+family $E : K \\to \\mathbf{Cat}$ and fixed data $x : K$ and
+$u \\in E[x]$, emdash forms a functorial object
 
 $$
-\\mathrm{Hom}_{E[y]}(E[f](u), v).
+\\mathrm{homd}_E(x,u)
+  : \\prod_{y : K^{\\mathrm{op}}}
+      \\bigl(E[y] \\to (\\mathrm{Hom}_K(x,y)^{\\mathrm{op}}
+      \\to \\mathbf{Cat})\\bigr)
 $$
 
-This construction is used twice: it describes homs in Sigma totals, and it
-describes the action of sections over base arrows. From it, v3.2 builds the
-outgoing-arrow category from $x$
+whose value at $y$, $v \\in E[y]$, and $f : x \\to y$ is
 
 $$
-\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)
+\\mathrm{homd}_E(x,u)[y][v][f]
+  =
+\\mathrm{Hom}_{E[y]}(E[f](u),v).
 $$
 
-and the canonical arrow
+This is the construction that organizes arrows in Sigma totals:
 
 $$
-\\rho_{x,y,p} : (x,\\mathrm{id}_x) \\to (y,p).
+\\mathrm{Hom}_{\\Sigma E}((x,u),(y,v))
+  =
+\\Sigma_{f : x \\to y}\\,\\mathrm{Hom}_{E[y]}(E[f](u),v).
 $$
 
-The induction principle can be stated directly in the surface language. For a
-moving source $x : Z$ and a motive $E$ over the unfolded outgoing-arrow
-category, there is a functor from the fibre of $E$ at the reflexive outgoing
-arrow to the category of sections of $E$:
+The same normalization-first architecture covers product/curry structure,
+computational adjunctions, structural operations such as
+weakening/symmetry/contraction, and vertical and horizontal composition,
+whiskering, interchange, and stacking of higher cells; sheaves and schemes are
+feasible too.
 
-```text
-x :^n Z ;
-E :^n ((Σ (y :^n Z), Hom_Z(x,y)) ⊢ Cat) ;
-E[(x,id_x)] ⊢ Π (q :^n (Σ (y :^n Z), Hom_Z(x,y))), E[q].
-```
-
-It sends $u : E[(x,\\mathrm{id}_x)]$ to the section
-$q \\mapsto E[\\rho_q](u)$. Later sections abbreviate
-$\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)$ as `PathOut_Z(x)`; the Lambdapi
-implementation packages the telescope as `PathInd_transfd(Z)`.
-
-Its most visible checked consequence is directed transitivity. For
-$p : x \\to y$ and $q : y \\to z$, the composition instance of arrow induction
-normalizes to ordinary categorical composition:
+The motivating example is the familiar shape of path induction in dependent
+type theory, now directed. For a category $Z$ and an object $x : Z$, emdash
+uses the outgoing-arrow category
 
 $$
-\\mathrm{path\\_comp\\_func}(p)[z][q] \\rightsquigarrow q \\circ p.
+\\mathrm{PathOut}_Z(x)
+  :=
+\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y).
 $$
+
+Its distinguished object is $\\iota_x = (x,\\mathrm{id}_x)$, and every object
+$a = (y,p) : \\mathrm{PathOut}_Z(x)$ has a canonical arrow
+
+$$
+\\rho^x_a : \\iota_x \\to a.
+$$
+
+Thus, for a motive $E : \\mathrm{PathOut}_Z(x) \\to \\mathbf{Cat}$ and
+$u \\in E(\\iota_x)$, fixed-source directed induction gives the section
+
+$$
+\\mathrm{Ind}_x(E,u)
+  : \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a),
+\\qquad
+\\mathrm{Ind}_x(E,u)(a) = E(\\rho^x_a)(u).
+$$
+
+Write $\\mathrm{Rep}_Z(t)$ for the covariant representable
+$\\mathrm{Hom}_Z(t,-)$. For the composition motive, using the emdash
+functor-category notation $\\vdash$,
+
+$$
+E[(y,p)] := \\mathrm{Rep}_Z(y) \\vdash \\mathrm{Rep}_Z(x),
+$$
+
+with initial datum $\\mathrm{id} : \\mathrm{Rep}_Z(x) \\vdash
+\\mathrm{Rep}_Z(x)$, this computes to ordinary composition:
+
+$$
+\\mathrm{Ind}_x(E,\\mathrm{id})[(y,p)][z][q]
+  \\rightsquigarrow q \\circ p.
+$$
+
+The new phenomenon appears when the source object $x$ itself is internalized.
+For an arrow $r : x \\to y$, precomposition gives
+
+$$
+\\mathrm{PathOut}_Z(r) : \\mathrm{PathOut}_Z(y) \\to
+\\mathrm{PathOut}_Z(x),
+\\qquad
+\\mathrm{PathOut}_Z(r)(z,q : y \\to z) = (z,q \\circ r).
+$$
+
+Once induction is internalized as a construction varying in $x$, the target
+section-taking construction
+
+$$
+(x,E) \\mapsto \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)
+$$
+
+is itself displayed over the moving source object. Its transport/comparison
+along $r$ is not the identity; it is the section-pullback functor
+
+$$
+\\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)
+  \\to
+\\prod_{b : \\mathrm{PathOut}_Z(y)}
+  E(\\mathrm{PathOut}_Z(r)(b)),
+\\qquad
+s \\mapsto \\bigl(b \\mapsto s(\\mathrm{PathOut}_Z(r)(b))\\bigr).
+$$
+
+This is the lax naturality/functoriality layer exposed by the internalized
+formulation of directed path induction; the Lambdapi kernel packages the
+source-indexed theorem as `PathInd_transfd(Z)`.
 
 # 1. Introduction
 
