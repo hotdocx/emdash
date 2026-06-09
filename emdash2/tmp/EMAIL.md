@@ -1,4 +1,4 @@
-I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Dosen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
+I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Došen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
 
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
@@ -69,7 +69,7 @@ Write `Rep_Z(t)` for the covariant representable `Hom_Z(t,-)`. For the compositi
 E[(y,p)] ≔ Rep_Z(y) ⊢ Rep_Z(x),
 ```
 
-with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary composition:
+with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary composition: for `p : x → y` and `q : y → z`,
 
 ```
 Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
@@ -94,7 +94,9 @@ is itself a displayed construction over the moving source object `x`. Its transp
 ```
 Π(a : Out_Z(x)), E(a)
   →
-Π(b : Out_Z(y)), E(Out_Z(r)(b)).
+Π(b : Out_Z(y)), E(Out_Z(r)(b)),
 ```
+
+sending `s` to `b ↦ s(Out_Z(r)(b))`.
 
 This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.
