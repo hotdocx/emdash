@@ -1,4 +1,4 @@
-I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with higher lax ω-categorical structure (fully internalized and computational, in the style of Kosta Dosen's cut-elimination techniques):
+I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Dosen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
 
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
