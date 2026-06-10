@@ -645,6 +645,12 @@ fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
 `functord_transport_fibre_fapp1_fapp0` were probe-era names. They should not be
 used in new plans for the active file.
 
+Simplicial ω-iteration should be documented through the existing
+`hom_int`/Sigma-hom/`homd_int`/`fdapp1_int_*` pipeline. Do not reintroduce old
+v2-style simplicial stable heads merely to name triangle/surface or
+cell-over-cell intuitions; add a new head only after a focused theorem proves a
+real computational need.
+
 Implementation checklist for this style:
 
 1. Write the mathematical formula in a comment near the symbol.

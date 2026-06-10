@@ -411,6 +411,18 @@ Here "packages" means that `homd_E(x,u,y,v)` is not merely a pointwise formula:
 it is one functorial object carrying the object, arrow, and higher action of
 dependent fibre arrows over the base hom.
 
+### Simplicial Reading
+
+The same construction has a simplicial/Grothendieck reading. The Sigma total
+over `homd_E(x,u,y,v)` packages a base arrow `f : x → y` together with a fibre
+arrow `E[f](u) → v`, so it is a cell living over a chosen base edge. Ordinary
+`hom_int`, after fixing a source object `W`, gives the first triangle/surface
+presentation over an edge; dependent `homd_E`, after fixing `x,u`, is the
+dependent iteration step. When the family itself is hom-shaped, this
+Sigma-of-hom pattern supplies the next "cell over a cell" layer. This is an
+interpretation of the existing hom/Sigma architecture, not a separate primitive
+or rewrite surface.
+
 More generally, dependent homs can be formed along a natural family morphism
 `FF : D → E`, allowing endpoint data in different families. The endpoint form
 specializes to the identity-family case above.

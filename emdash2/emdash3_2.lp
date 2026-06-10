@@ -787,6 +787,14 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
   A^op ⊢ (B ⊢ Cat). Its surface reading is:
 
     W :^n A^op ; 1[W] ⊢ (y :^n B ; 1[y] ⊢ Hom_A(W,y))
+
+  Simplicial reading:
+    Fixing W and taking the Sigma total of hom_(F,W) gives the
+    Grothendieck/coslice presentation: an object is an edge W -> F[y], and a
+    total arrow is a base edge together with a comparison triangle/surface over
+    it. This is the first simplicial presentation used by the later dependent
+    hom iteration; it is a reading of existing hom/Sigma structure, not a
+    separate kernel primitive.
 */
 injective symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
@@ -2627,6 +2635,12 @@ rule τ (Obj (@Sigma_cat $K $E))
 
 // Hom categories of Sigma totals are the dependent-hom Sigma over base arrows.
 //
+// Simplicial reading:
+//   A total arrow is a base arrow plus a dependent-hom fibre arrow. Thus Sigma
+//   totals provide the iteration step from edges to cells over edges; when the
+//   family E is itself hom-shaped, the same Sigma-of-hom pattern becomes the
+//   next simplex layer.
+//
 // Surface/formula:
 //   Hom_{Sigma E}((x,u),(y,v))
 //     = Sigma (p : Hom_K(x,y)), Hom_{E[y]}(E[p](u),v).
@@ -3615,6 +3629,17 @@ symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
 // displayed functor are recoverable from the head. Terminal-source behavior is
 // still exposed through the stable projection rules below; avoid adding broad
 // whole-family `homd_int` rewrites unless a later design explicitly needs them.
+//
+// Simplicial iteration note:
+//   `homd_int(FF)` is the dependent step of the same Sigma-of-hom pattern. Its
+//   projection ladder externalizes x and then u:
+//
+//     homd_int(FF)[x](u) = homd_src_sec(FF,x,u).
+//
+//   With x,u fixed, this section classifies fibre arrows over base arrows; its
+//   Sigma total supplies the next "cell over a cell" layer. This remains a
+//   conceptual reading of the existing `homd_int`/Sigma-hom architecture, not a
+//   reason to add broad whole-family rewrite rules.
 injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   Π (FF : τ (Functord D E)),
   τ (Functord (Op_catd E) (@Homd_target_catd Z D));
