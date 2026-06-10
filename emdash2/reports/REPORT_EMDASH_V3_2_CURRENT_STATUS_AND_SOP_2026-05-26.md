@@ -68,7 +68,8 @@ Top-level implementation sections now have this active order:
 14. Section action over dependent homs
 15. Internal displayed hom-action heads
 16. Derived displayed component notation
-17. Generic Sigma/Pi weakening and delayed projection helpers
+17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed
+    projection helpers
 18. Check catalog and nested telescope stress examples
 ```
 
@@ -129,7 +130,9 @@ documentation:
 Known incomplete or intentionally deferred items are documented rather than
 left implicit:
 
-- structural functor logic remains a proposed plan in
+- ordinary structural functor logic has a first implementation slice
+  (`Const_func_func`, `sym_func_func`, `diag_func_func`), while displayed
+  structural logic and product/curry compatibility checks remain proposed in
   `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`;
 - semantic uncurry transfor action is deferred pending the higher
   `Product_cat_func` action on transfors;
@@ -188,6 +191,16 @@ left implicit:
   `Eval_func(B,C) o (G * 1_B)` and checked on objects and capped hom-action,
   with `G * 1_B` routed through the `Product_cat_func` stable projection ladder
   rather than through an independent `Product_mapL*` theory;
+- ordinary structural functor logic:
+  `Const_func_func(A,B)` is a semantic alias through `const_section_func(A,B)`;
+  `sym_func_func(A,B,C)` exposes exchange
+  `(A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))`; `diag_func_func(A,C)` exposes
+  contraction `(A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)`. Their checked normal forms include
+  `sym(H)[b][a] = H[a][b]`, `sym(H)[b][p] = H[p][b]`,
+  `sym(H)[q][a] = H[a][q]`, `sym(eta)[b][a] = eta[a][b]`,
+  `diag(H)[a] = H[a][a]`, `diag(H)[p] = tapp1_fapp0(H[p],p)`, and
+  `diag(eta)[a] = eta[a][a]`. Product/curry compatibility and displayed
+  analogues remain deferred;
 - a first-class ordinary functor adjunction interface:
   `Adjunction(R,L)`, with stable projections `left_adj_func`,
   `right_adj_func`, `unit_adj_transf`, and `counit_adj_transf`, plus checked

@@ -5,8 +5,50 @@
 
 Date: 2026-06-04
 
-Status: preliminary design note. No implementation has been attempted in
-`emdash3_2.lp` from this report yet.
+Status: preliminary design note with first ordinary implementation slice
+landed on 2026-06-10. The ordinary weakening/exchange/contraction layer is now
+implemented in `emdash3_2.lp`; displayed/mixed-variance follow-up and
+product/curry compatibility checks remain proposed.
+
+## Implementation Note 2026-06-10
+
+The first ordinary structural layer has been added under section 17 of
+`emdash3_2.lp`, with regression assertions in `emdash3_2_checks.lp`.
+
+Implemented:
+
+```text
+Const_func_func(A,B) : B ⊢ (A ⊢ B)
+sym_func_func(A,B,C) : (A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))
+diag_func_func(A,C)  : (A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)
+```
+
+`Const_func_func(A,B)` is a defined alias through the existing
+`const_section_func(A,B)` route. `sym_func_func` and `diag_func_func` are
+stable primitive heads with object, capped-arrow, full hom-action projection
+heads, and pointwise transfor-action beta rules.
+
+Checked ordinary normal forms include:
+
+```text
+Const_func_func(A,B)[b] = Const_func(A,B,b)
+Const_func_func(A,B)[p] = Const_transf(A,B,p)
+sym(H)[b][a] = H[a][b]
+sym(H)[b][p] = H[p][b]
+sym(H)[q][a] = H[a][q]
+sym(eta)[b][a] = eta[a][b]
+diag(H)[a] = H[a][a]
+diag(H)[p] = tapp1_fapp0(H[p],p)
+diag(eta)[a] = eta[a][a]
+```
+
+Still deferred from this plan:
+
+- product swap and product diagonal compatibility checks;
+- product/curry presentations of exchange and contraction;
+- displayed `Functor_catd_*_funcd` analogues;
+- `Transf_catd`-level projections induced by displayed structural operations;
+- higher `Product_cat_func` transfor action for semantic uncurry.
 
 ## Scope
 

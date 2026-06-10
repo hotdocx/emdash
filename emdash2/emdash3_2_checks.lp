@@ -1993,6 +1993,261 @@ assert [K : Cat] (A : Cat)
     k
     ≡ a;
 
+// From emdash3_2.lp:4991.
+assert [A B : Cat] (b : τ (Obj B)) ⊢
+  @fapp0 B (Functor_cat A B) (@Const_func_func A B) b
+    ≡ @Const_func A B b;
+
+// From emdash3_2.lp:4991.
+assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) ⊢
+  @fapp1_fapp0
+      B
+      (Functor_cat A B)
+      (@Const_func_func A B)
+      x y p
+    ≡ @Const_transf A B x y p;
+
+// From emdash3_2.lp:4991.
+assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y))
+  (a : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      B
+      (@Const_func A B x)
+      (@Const_func A B y)
+      a
+      (@fapp1_fapp0
+        B
+        (Functor_cat A B)
+        (@Const_func_func A B)
+        x y p)
+    ≡ p;
+
+// From emdash3_2.lp:4991.
+assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y))
+  (a a' : τ (Obj A)) (q : τ (Hom A a a')) ⊢
+  @tapp1_fapp0
+      A
+      B
+      (@Const_func A B x)
+      (@Const_func A B y)
+      a
+      a'
+      (@fapp1_fapp0
+        B
+        (Functor_cat A B)
+        (@Const_func_func A B)
+        x y p)
+      q
+    ≡ p;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) ⊢
+  @fapp0
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat B (Functor_cat A C))
+      (@sym_func_func A B C)
+      H
+    ≡ @sym_func A B C H;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C)))
+  (a : τ (Obj A)) (b : τ (Obj B)) ⊢
+  @fapp0
+      A
+      C
+      (@fapp0
+        B
+        (Functor_cat A C)
+        (@fapp0
+          (Functor_cat A (Functor_cat B C))
+          (Functor_cat B (Functor_cat A C))
+          (@sym_func_func A B C)
+          H)
+        b)
+      a
+    ≡ @fapp0 B C (@fapp0 A (Functor_cat B C) H a) b;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C)))
+  (a a' : τ (Obj A)) (p : τ (Hom A a a')) (b : τ (Obj B)) ⊢
+  @fapp1_fapp0
+      A
+      C
+      (@sym_fapp0_func A B C H b)
+      a
+      a'
+      p
+    ≡ @tapp0_fapp0
+        B
+        C
+        (@fapp0 A (Functor_cat B C) H a)
+        (@fapp0 A (Functor_cat B C) H a')
+        b
+        (@fapp1_fapp0 A (Functor_cat B C) H a a' p);
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C)))
+  (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢
+  @fapp1_fapp0
+      B
+      (Functor_cat A C)
+      (@sym_func A B C H)
+      b
+      b'
+      q
+    ≡ @sym_tapp1_fapp0_transf A B C H b b' q;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C)))
+  (a : τ (Obj A)) (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢
+  @tapp0_fapp0
+      A
+      C
+      (@sym_fapp0_func A B C H b)
+      (@sym_fapp0_func A B C H b')
+      a
+      (@sym_tapp1_fapp0_transf A B C H b b' q)
+    ≡ @fapp1_fapp0
+        B
+        C
+        (@fapp0 A (Functor_cat B C) H a)
+        b
+        b'
+        q;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C)))
+  (a a' : τ (Obj A)) (p : τ (Hom A a a'))
+  (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢
+  @tapp1_fapp0
+      A
+      C
+      (@sym_fapp0_func A B C H b)
+      (@sym_fapp0_func A B C H b')
+      a
+      a'
+      (@sym_tapp1_fapp0_transf A B C H b b' q)
+      p
+    ≡ @tapp1_fapp0
+        B
+        C
+        (@fapp0 A (Functor_cat B C) H a)
+        (@fapp0 A (Functor_cat B C) H a')
+        b
+        b'
+        (@fapp1_fapp0 A (Functor_cat B C) H a a' p)
+        q;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat]
+  (H K : τ (Functor A (Functor_cat B C)))
+  (eta : τ (Transf H K))
+  (b : τ (Obj B)) ⊢
+  @tapp0_fapp0
+      B
+      (Functor_cat A C)
+      (@sym_func A B C H)
+      (@sym_func A B C K)
+      b
+      (@fapp1_fapp0
+        (Functor_cat A (Functor_cat B C))
+        (Functor_cat B (Functor_cat A C))
+        (@sym_func_func A B C)
+        H
+        K
+        eta)
+    ≡ @sym_transf_tapp0_transf A B C H K eta b;
+
+// From emdash3_2.lp:4991.
+assert [A B C : Cat]
+  (H K : τ (Functor A (Functor_cat B C)))
+  (eta : τ (Transf H K))
+  (a : τ (Obj A)) (b : τ (Obj B)) ⊢
+  @tapp0_fapp0
+      A
+      C
+      (@sym_fapp0_func A B C H b)
+      (@sym_fapp0_func A B C K b)
+      a
+      (@sym_transf_tapp0_transf A B C H K eta b)
+    ≡ @tapp0_fapp0
+        B
+        C
+        (@fapp0 A (Functor_cat B C) H a)
+        (@fapp0 A (Functor_cat B C) K a)
+        b
+        (@tapp0_fapp0 A (Functor_cat B C) H K a eta);
+
+// From emdash3_2.lp:4991.
+assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) ⊢
+  @fapp0
+      (Functor_cat A (Functor_cat A C))
+      (Functor_cat A C)
+      (@diag_func_func A C)
+      H
+    ≡ @diag_func A C H;
+
+// From emdash3_2.lp:4991.
+assert [A C : Cat] (H : τ (Functor A (Functor_cat A C)))
+  (a : τ (Obj A)) ⊢
+  @fapp0 A C (@diag_func A C H) a
+    ≡ @fapp0 A C (@fapp0 A (Functor_cat A C) H a) a;
+
+// From emdash3_2.lp:4991.
+assert [A C : Cat] (H : τ (Functor A (Functor_cat A C)))
+  (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢
+  @fapp1_fapp0 A C (@diag_func A C H) a a' p
+    ≡ @tapp1_fapp0
+        A
+        C
+        (@fapp0 A (Functor_cat A C) H a)
+        (@fapp0 A (Functor_cat A C) H a')
+        a
+        a'
+        (@fapp1_fapp0 A (Functor_cat A C) H a a' p)
+        p;
+
+// From emdash3_2.lp:4991.
+assert [A C : Cat]
+  (H K : τ (Functor A (Functor_cat A C)))
+  (eta : τ (Transf H K))
+  (a : τ (Obj A)) ⊢
+  @tapp0_fapp0
+      A
+      C
+      (@diag_func A C H)
+      (@diag_func A C K)
+      a
+      (@fapp1_fapp0
+        (Functor_cat A (Functor_cat A C))
+        (Functor_cat A C)
+        (@diag_func_func A C)
+        H
+        K
+        eta)
+    ≡ @tapp0_fapp0
+        A
+        C
+        (@fapp0 A (Functor_cat A C) H a)
+        (@fapp0 A (Functor_cat A C) K a)
+        a
+        (@tapp0_fapp0 A (Functor_cat A C) H K a eta);
+
+// From emdash3_2.lp:4991.
+assert [A C : Cat] (H : τ (Functor A (Functor_cat A C)))
+  (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢
+  fapp0 (@fapp1_func A C (@diag_func A C H) a a') p
+    ≡ @tapp1_fapp0
+        A
+        C
+        (@fapp0 A (Functor_cat A C) H a)
+        (@fapp0 A (Functor_cat A C) H a')
+        a
+        a'
+        (@fapp1_fapp0 A (Functor_cat A C) H a a' p)
+        p;
+
 // From emdash3_2.lp:6851.
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
   (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E))) ⊢

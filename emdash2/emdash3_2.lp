@@ -213,8 +213,9 @@ flag "print_meta_args" on;
     - `Terminal_catd K` and `piapp0` are readability definitions, not rewrite
       discriminators. Operational rules use the unfolded constant-terminal
       source or lower-level `tapp0_fapp0` folds.
-    - Generic Sigma/Pi weakening helpers have basic stable beta assertions; any
-      richer coherence helpers remain deferred until needed.
+    - Generic Sigma/Pi weakening and ordinary structural-logic helpers have
+      basic stable beta assertions; any richer coherence helpers remain
+      deferred until needed.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -4871,7 +4872,7 @@ rule @fdapp1_int_hom_fapp0
       (@comp_fapp0 $Z $x $y $z $q $p);
 
 // -------------------------------------------------------------------------------------------------
-// 17. Generic Sigma/Pi weakening and delayed projection helpers
+// 17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed projection helpers
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -4987,7 +4988,291 @@ rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
       (@Const_transf $B $A $x $x' $p)
       (@id (Functor_cat $B $B) (@id_func $B));
 
-// 17c. Generic ordinary functor hom-action.
+// 17c. Ordinary functor structural logic.
+
+/*
+  Usual structural operations for nested ordinary functor categories.
+
+  Surface/formula:
+    Const_func_func(A,B) : B ⊢ (A ⊢ B)
+    sym_func_func(A,B,C) : (A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))
+    diag_func_func(A,C)  : (A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)
+
+  Weakening is a readable alias through `const_section_func`; exchange and
+  contraction are stable heads because later displayed analogues should
+  recognize these structural operations directly, rather than through
+  product/curry encodings.
+*/
+
+symbol Const_func_func [A B : Cat]
+  : τ (Functor B (Functor_cat A B))
+≔ @const_section_func A B;
+
+symbol sym_func_func [A B C : Cat]
+  : τ (Functor
+      (Functor_cat A (Functor_cat B C))
+      (Functor_cat B (Functor_cat A C)));
+
+symbol sym_func [A B C : Cat]
+  (H : τ (Functor A (Functor_cat B C)))
+  : τ (Functor B (Functor_cat A C));
+
+symbol sym_fapp0_func [A B C : Cat]
+  (H : τ (Functor A (Functor_cat B C)))
+  (b : τ (Obj B))
+  : τ (Functor A C);
+
+symbol sym_fapp0_fapp1_func [A B C : Cat]
+  (H : τ (Functor A (Functor_cat B C)))
+  (b : τ (Obj B))
+  [a a' : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A a a')
+      (Hom_cat C
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) H a) b)
+        (@fapp0 B C (@fapp0 A (Functor_cat B C) H a') b)));
+
+symbol sym_fapp1_func [A B C : Cat]
+  (H : τ (Functor A (Functor_cat B C)))
+  [b b' : τ (Obj B)]
+  : τ (Functor
+      (Hom_cat B b b')
+      (@Transf_cat
+        A
+        C
+        (@sym_fapp0_func A B C H b)
+        (@sym_fapp0_func A B C H b')));
+
+symbol sym_tapp1_fapp0_transf [A B C : Cat]
+  (H : τ (Functor A (Functor_cat B C)))
+  [b b' : τ (Obj B)]
+  (q : τ (Hom B b b'))
+  : τ (Transf
+      (@sym_fapp0_func A B C H b)
+      (@sym_fapp0_func A B C H b'));
+
+symbol sym_func_func_fapp1_func [A B C : Cat]
+  [H K : τ (Functor A (Functor_cat B C))]
+  : τ (Functor
+      (@Transf_cat A (Functor_cat B C) H K)
+      (@Transf_cat
+        B
+        (Functor_cat A C)
+        (@sym_func A B C H)
+        (@sym_func A B C K)));
+
+symbol sym_func_func_transf [A B C : Cat]
+  [H K : τ (Functor A (Functor_cat B C))]
+  (eta : τ (Transf H K))
+  : τ (Transf
+      (@sym_func A B C H)
+      (@sym_func A B C K));
+
+symbol sym_transf_tapp0_transf [A B C : Cat]
+  [H K : τ (Functor A (Functor_cat B C))]
+  (eta : τ (Transf H K))
+  (b : τ (Obj B))
+  : τ (Transf
+      (@sym_fapp0_func A B C H b)
+      (@sym_fapp0_func A B C K b));
+
+rule @fapp0 _ _ (@sym_func_func $A $B $C) $H
+  ↪ @sym_func $A $B $C $H;
+
+rule @fapp1_func _ _ (@sym_func_func $A $B $C) $H $K
+  ↪ @sym_func_func_fapp1_func $A $B $C $H $K;
+
+rule fapp0 (@sym_func_func_fapp1_func $A $B $C $H $K) $eta
+  ↪ @sym_func_func_transf $A $B $C $H $K $eta;
+
+rule @fapp1_fapp0 _ _ (@sym_func_func $A $B $C) $H $K $eta
+  ↪ @sym_func_func_transf $A $B $C $H $K $eta;
+
+rule @fapp0 $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b
+  ↪ @sym_fapp0_func $A $B $C $H $b;
+
+rule @fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a
+  ↪ @fapp0 $B $C (@fapp0 $A (Functor_cat $B $C) $H $a) $b;
+
+rule @fapp1_func $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a'
+  ↪ @sym_fapp0_fapp1_func $A $B $C $H $b $a $a';
+
+rule fapp0 (@sym_fapp0_fapp1_func $A $B $C $H $b $a $a') $p
+  ↪ @tapp0_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $H $a)
+      (@fapp0 $A (Functor_cat $B $C) $H $a')
+      $b
+      (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p);
+
+rule @fapp1_fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a' $p
+  ↪ @tapp0_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $H $a)
+      (@fapp0 $A (Functor_cat $B $C) $H $a')
+      $b
+      (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p);
+
+rule @fapp1_func $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b $b'
+  ↪ @sym_fapp1_func $A $B $C $H $b $b';
+
+rule fapp0 (@sym_fapp1_func $A $B $C $H $b $b') $q
+  ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
+
+rule @fapp1_fapp0 $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b $b' $q
+  ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
+
+rule @tapp0_fapp0
+      $A
+      $C
+      _
+      _
+      $a
+      (@sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q)
+  ↪ @fapp1_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $H $a)
+      $b
+      $b'
+      $q;
+
+rule @tapp1_fapp0
+      $A
+      $C
+      _
+      _
+      $a
+      $a'
+      (@sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q)
+      $p
+  ↪ @tapp1_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $H $a)
+      (@fapp0 $A (Functor_cat $B $C) $H $a')
+      $b
+      $b'
+      (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p)
+      $q;
+
+rule @tapp0_fapp0
+      $B
+      (Functor_cat $A $C)
+      _
+      _
+      $b
+      (@sym_func_func_transf $A $B $C $H $K $eta)
+  ↪ @sym_transf_tapp0_transf $A $B $C $H $K $eta $b;
+
+rule @tapp0_fapp0
+      $A
+      $C
+      _
+      _
+      $a
+      (@sym_transf_tapp0_transf $A $B $C $H $K $eta $b)
+  ↪ @tapp0_fapp0
+      $B
+      $C
+      (@fapp0 $A (Functor_cat $B $C) $H $a)
+      (@fapp0 $A (Functor_cat $B $C) $K $a)
+      $b
+      (@tapp0_fapp0 $A (Functor_cat $B $C) $H $K $a $eta);
+
+symbol diag_func_func [A C : Cat]
+  : τ (Functor
+      (Functor_cat A (Functor_cat A C))
+      (Functor_cat A C));
+
+symbol diag_func [A C : Cat]
+  (H : τ (Functor A (Functor_cat A C)))
+  : τ (Functor A C);
+
+symbol diag_fapp1_func [A C : Cat]
+  (H : τ (Functor A (Functor_cat A C)))
+  [a a' : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A a a')
+      (Hom_cat C
+        (@fapp0 A C (@fapp0 A (Functor_cat A C) H a) a)
+        (@fapp0 A C (@fapp0 A (Functor_cat A C) H a') a')));
+
+symbol diag_func_func_fapp1_func [A C : Cat]
+  [H K : τ (Functor A (Functor_cat A C))]
+  : τ (Functor
+      (@Transf_cat A (Functor_cat A C) H K)
+      (@Transf_cat
+        A
+        C
+        (@diag_func A C H)
+        (@diag_func A C K)));
+
+symbol diag_func_func_transf [A C : Cat]
+  [H K : τ (Functor A (Functor_cat A C))]
+  (eta : τ (Transf H K))
+  : τ (Transf
+      (@diag_func A C H)
+      (@diag_func A C K));
+
+rule @fapp0 _ _ (@diag_func_func $A $C) $H
+  ↪ @diag_func $A $C $H;
+
+rule @fapp1_func _ _ (@diag_func_func $A $C) $H $K
+  ↪ @diag_func_func_fapp1_func $A $C $H $K;
+
+rule fapp0 (@diag_func_func_fapp1_func $A $C $H $K) $eta
+  ↪ @diag_func_func_transf $A $C $H $K $eta;
+
+rule @fapp1_fapp0 _ _ (@diag_func_func $A $C) $H $K $eta
+  ↪ @diag_func_func_transf $A $C $H $K $eta;
+
+rule @fapp0 $A $C (@diag_func $A $C $H) $a
+  ↪ @fapp0 $A $C (@fapp0 $A (Functor_cat $A $C) $H $a) $a;
+
+rule @fapp1_func $A $C (@diag_func $A $C $H) $a $a'
+  ↪ @diag_fapp1_func $A $C $H $a $a';
+
+rule fapp0 (@diag_fapp1_func $A $C $H $a $a') $p
+  ↪ @tapp1_fapp0
+      $A
+      $C
+      (@fapp0 $A (Functor_cat $A $C) $H $a)
+      (@fapp0 $A (Functor_cat $A $C) $H $a')
+      $a
+      $a'
+      (@fapp1_fapp0 $A (Functor_cat $A $C) $H $a $a' $p)
+      $p;
+
+rule @fapp1_fapp0 $A $C (@diag_func $A $C $H) $a $a' $p
+  ↪ @tapp1_fapp0
+      $A
+      $C
+      (@fapp0 $A (Functor_cat $A $C) $H $a)
+      (@fapp0 $A (Functor_cat $A $C) $H $a')
+      $a
+      $a'
+      (@fapp1_fapp0 $A (Functor_cat $A $C) $H $a $a' $p)
+      $p;
+
+rule @tapp0_fapp0
+      $A
+      $C
+      _
+      _
+      $a
+      (@diag_func_func_transf $A $C $H $K $eta)
+  ↪ @tapp0_fapp0
+      $A
+      $C
+      (@fapp0 $A (Functor_cat $A $C) $H $a)
+      (@fapp0 $A (Functor_cat $A $C) $K $a)
+      $a
+      (@tapp0_fapp0 $A (Functor_cat $A $C) $H $K $a $eta);
+
+// 17d. Generic ordinary functor hom-action.
 //
 // Generic full hom-action for identity and composition of ordinary functors.
 // These rules let semantic aliases such as curry expose functor-level action
@@ -5015,7 +5300,7 @@ rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
 // computation rules, because the primary curry package is a definition through
 // that telescope rather than a primitive object-action rewrite rule.
 
-// 17d. Section pullback and internal Pi action.
+// 17e. Section pullback and internal Pi action.
 //
 // Internalized-x prerequisite: pull a section back along a base functor.
 //
@@ -5084,7 +5369,7 @@ rule @fdapp1_int_cell
       (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
       $E;
 
-// 17e. Path-induction target transport aliases.
+// 17f. Path-induction target transport aliases.
 //
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
