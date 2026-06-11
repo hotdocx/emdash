@@ -17,6 +17,9 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
   active proposed plan for structural functor logic
   (weakening/exchange/contraction and displayed follow-ups).
+- `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
+  active proposed plan for dependent products along functors (`Pi_f`) and
+  comma-category infrastructure.
 - `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
   active notation/reorganization subplan.
 - Older v3/v3.2 feature reports have been consolidated into the current SOP

@@ -18,6 +18,8 @@ work.
 - Current mathematical reading guide: `reports/EMDASH_FOUNDATIONS.md`.
 - Current open structural-logic implementation plan:
   `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`.
+- Current open Pi-along-functor implementation plan:
+  `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`.
 - Current notation/reorganization subplan:
   `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
 - Current v2 reference: `reports/REPORT_EMDASH2_CONSOLIDATED.md`.
@@ -134,6 +136,8 @@ left implicit:
   (`Const_func_func`, `sym_func_func`, `diag_func_func`), while displayed
   structural logic and product/curry compatibility checks remain proposed in
   `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`;
+- dependent products along arbitrary functors (`Pi_f`) remain proposed in
+  `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`;
 - semantic uncurry transfor action is deferred pending the higher
   `Product_cat_func` action on transfors;
 - the whole-transfor displayed laxity interface is deferred; current rules stop
