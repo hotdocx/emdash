@@ -1834,6 +1834,25 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
   @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func A B F) E
     ≡ @Pullback_catd A B E F;
 
+// Derived classifier for displayed categories over the fibres of K.
+assert [L : Cat] (K : τ (Catd L)) (l : τ (Obj L)) ⊢
+  Fibre_cat (Catd_catd_con K) l
+    ≡ Catd_cat (Fibre_cat K l);
+
+assert [L : Cat] (K : τ (Catd L)) (x y : τ (Obj L))
+  (p : τ (Hom L x y)) ⊢
+  @fapp1_fapp0
+    (Op_cat L)
+    Cat_cat
+    (@Catd_catd_con L K)
+    y
+    x
+    p
+    ≡ @Pullback_catd_func
+        (Fibre_cat K x)
+        (Fibre_cat K y)
+        (@fapp1_fapp0 L Cat_cat K x y p);
+
 // From emdash3_2.lp:6686.
 assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) ⊢
   @fapp1_fapp0

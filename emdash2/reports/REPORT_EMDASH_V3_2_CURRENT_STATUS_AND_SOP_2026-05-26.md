@@ -233,6 +233,9 @@ left implicit:
   infrastructure, including the checked arrow-action fold
   `Catd_cat_func[F] == Pullback_catd_func F` and the semantic Pi-pullback fold
   `Pullback_catd_func[G][Pi_int_funcd] == Pi_pullback_funcd G`;
+- derived `Catd_catd_con(K) := Catd_cat_func o Op_func(K)` classifier for
+  fibrewise displayed categories over `K`, with checked fibre and pullback
+  action laws;
 - fixed-`Z,x` path induction packages:
   `PathInd_src_catd`, `PathInd_tgt_catd`, and `PathInd_func`;
 - outgoing-path family infrastructure:

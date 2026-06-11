@@ -238,6 +238,16 @@ Catd_catd_con(K)[p^op]
   : Catd(K[y]) ⊢ Catd(K[x])
 ```
 
+Implementation note, 2026-06-11: this classifier is now present in
+`emdash3_2.lp` as a derived semantic alias:
+
+```text
+Catd_catd_con(K) := Catd_cat_func o Op_func(K)
+```
+
+It was deliberately not added as an independent primitive. The active checks
+cover its fibre law and its opposite-base arrow action as pullback.
+
 There are two important section readings:
 
 ```text

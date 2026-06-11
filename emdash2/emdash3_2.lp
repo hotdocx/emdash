@@ -158,6 +158,10 @@ flag "print_meta_args" on;
       `Pi_pullback_funcd` is the stable normal form for the semantic
       `Pullback_catd_func` action on `Pi_int_funcd`; its fold keeps reducible
       endpoint-family slots implicit.
+    - `Catd_catd_con(K)`: derived classifier for fibrewise displayed
+      categories over a directed family K, defined as
+      `Catd_cat_func o Op_func(K)`. This is a readability/bookmark alias for
+      existing constructor pipelines, not an independent primitive.
     - `Sigma_cat E`: object decoding is Sigma-shaped; homs between total
       objects route through the endpoint `homd_`.
     - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
@@ -720,6 +724,23 @@ symbol Catd_cat_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
      Cat_cat
      (@fapp0_func Cat_cat Cat_cat Cat_cat)
      Functor_cat_func;
+
+// Derived classifier of displayed categories over the fibres of a displayed
+// category. This is intentionally a semantic alias, not a new primitive:
+//
+//   Catd_catd_con(K) : Catd(Op_cat L)
+//   Catd_catd_con(K)[l] = Catd_cat(K[l])
+//   Catd_catd_con(K)[p^op] = Pullback_catd_func(K[p])
+//
+// The definition routes through the already-internalized constructor
+// `Catd_cat_func : Cat^op ⊢ Cat` and the opposite of K.
+symbol Catd_catd_con [L : Cat] (K : τ (Catd L)) : τ (Catd (Op_cat L))
+≔ @comp_cat_fapp0
+     (Op_cat L)
+     (Op_cat Cat_cat)
+     Cat_cat
+     Catd_cat_func
+     (@Op_func L Cat_cat K);
 
 // Curried postcomposition in Cat, used to build constructor pipelines.
 //
