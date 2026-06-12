@@ -2,8 +2,8 @@
 
 Date: 2026-06-12
 
-Status: preliminary design note. No implementation has landed from this plan
-yet.
+Status: first implementation slice landed in `emdash3_2.lp` and
+`emdash3_2_checks.lp` on 2026-06-12.
 
 ## Scope
 
@@ -328,3 +328,41 @@ Final validation after implementation:
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
+
+## Implementation Notes 2026-06-12
+
+The first slice implements Option A for generalized precomposition:
+
+```text
+hom_precomp_along_func(F,Z,h)
+  := fapp1_fapp0(hom_con(Z,F), h)
+```
+
+The readable alias computes as intended:
+
+```text
+hom_precomp_along_func(F,Z,h)[g] = g o F[h]
+```
+
+The full strict naturality and strict functoriality rules were added at the
+`comp_cat_fapp0`/`tapp1_func`/`fapp1_func` level. The pre/right rules
+discriminate on the normalized owner:
+
+```text
+fapp1_fapp0(hom_(Op(B),Op(A),Op(F),Z), h)
+```
+
+rather than on `hom_precomp_along_func`, because the readable alias unfolds
+through `hom_con`.
+
+One focused probe found that the post/left rules must not hard-code the fixed
+source endpoint as syntactic `F[X]` on the LHS. Representable postcomposition
+can reduce `F[X]` to a composite before the rule sees it. The implemented rule
+therefore keeps that endpoint as an inferred pattern variable; typing still
+forces it to be the correct endpoint.
+
+The v2 "exchange law" check was ported as a v3.2 full-owner interchange
+regression. It uses `hom_postcomp_func(...) o tapp1_func(...)` rather than the
+old pointwise `fapp1_fapp0 postcomp_g beta` spelling, because the latter now
+reduces through the specialized hom-postcomposition projection ladder before
+generic capped naturality can match.

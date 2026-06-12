@@ -88,6 +88,17 @@ assert [A : Cat] (x y z : τ (Obj A))
     q
     ≡ @comp_fapp0 A x y z q p;
 
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x))
+  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
+  fapp0 (@hom_precomp_along_func A B F z w x h) g
+    ≡ @comp_fapp0 B
+        (@fapp0 A B F w)
+        (@fapp0 A B F x)
+        z
+        g
+        (@fapp1_fapp0 A B F w x h);
+
 // From emdash3_2.lp:994.
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
@@ -883,6 +894,192 @@ assert [A B : Cat] (F G : τ (Functor A B))
     (@fapp1_fapp0 A B F X0 X g)
     ≡ @tapp1_fapp0 A B F G X0 Y ϵ
         (@comp_fapp0 A X0 X Y f g);
+
+// Full strict naturality: post/left accumulation before capping.
+assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
+  (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@hom_postcomp_func B A G (@fapp0 A B F X) Y Z g)
+    (@tapp1_func A B F G X Y ϵ)
+  ≡ @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat A X Z)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@tapp1_func A B F G X Z ϵ)
+    (@hom_postcomp_func A A (@id_func A) X Y Z g);
+
+assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
+  (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢
+  fapp0
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+      (@hom_postcomp_func B A G (@fapp0 A B F X) Y Z g)
+      (@tapp1_func A B F G X Y ϵ))
+    f
+  ≡ @tapp1_fapp0 A B F G X Z ϵ
+      (@comp_fapp0 A X Y Z g f);
+
+// Full strict naturality: pre/right accumulation before capping.
+assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
+  (h : τ (Hom A W X)) (ϵ : τ (Transf F G)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@hom_precomp_along_func A B F (@fapp0 A B G Y) W X h)
+    (@tapp1_func A B F G X Y ϵ)
+  ≡ @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat A W Y)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@tapp1_func A B F G W Y ϵ)
+    (@hom_precomp_func A W X Y h);
+
+assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
+  (h : τ (Hom A W X)) (f : τ (Hom A X Y)) (ϵ : τ (Transf F G)) ⊢
+  fapp0
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+      (@hom_precomp_along_func A B F (@fapp0 A B G Y) W X h)
+      (@tapp1_func A B F G X Y ϵ))
+    f
+  ≡ @tapp1_fapp0 A B F G W Y ϵ
+      (@comp_fapp0 A W X Y f h);
+
+// Full strict functoriality: post/left accumulation for a single functor.
+assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
+  (g : τ (Hom A Y Z)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Y))
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@hom_postcomp_func B A F (@fapp0 A B F X) Y Z g)
+    (@fapp1_func A B F X Y)
+  ≡ @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat A X Z)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@fapp1_func A B F X Z)
+    (@hom_postcomp_func A A (@id_func A) X Y Z g);
+
+assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
+  (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) ⊢
+  fapp0
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Y))
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@hom_postcomp_func B A F (@fapp0 A B F X) Y Z g)
+      (@fapp1_func A B F X Y))
+    f
+  ≡ @fapp1_fapp0 A B F X Z
+      (@comp_fapp0 A X Y Z g f);
+
+// Full strict functoriality: pre/right accumulation for a single functor.
+assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
+  (h : τ (Hom A W X)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Y))
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F Y))
+    (@hom_precomp_along_func A B F (@fapp0 A B F Y) W X h)
+    (@fapp1_func A B F X Y)
+  ≡ @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat A W Y)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F Y))
+    (@fapp1_func A B F W Y)
+    (@hom_precomp_func A W X Y h);
+
+assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
+  (h : τ (Hom A W X)) (f : τ (Hom A X Y)) ⊢
+  fapp0
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Y))
+      (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F Y))
+      (@hom_precomp_along_func A B F (@fapp0 A B F Y) W X h)
+      (@fapp1_func A B F X Y))
+    f
+  ≡ @fapp1_fapp0 A B F W Y
+      (@comp_fapp0 A W X Y f h);
+
+// Interchange law instance for the Cat-valued representable `hom_`
+// (postcomposition). This is the v3.2 full-owner form of the old v2
+// "exchange law" check.
+assert [B : Cat] (M N L : τ (Obj B))
+  (f g : τ (Hom B N L)) (e_fg : τ (Hom (Hom_cat B N L) f g))
+  (X Y Z : τ (Hom B M N))
+  (α : τ (Hom (Hom_cat B M N) X Y))
+  (β : τ (Hom (Hom_cat B M N) Y Z)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat (Hom_cat B M N) X Y)
+    (Hom_cat
+      (Hom_cat B M L)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L f) X)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L g) Y))
+    (Hom_cat
+      (Hom_cat B M L)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L f) X)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L g) Z))
+    (@hom_postcomp_func
+      (Hom_cat B M L)
+      (Hom_cat B M N)
+      (@hom_postcomp_func B B (@id_func B) M N L g)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L f) X)
+      Y
+      Z
+      β)
+    (@tapp1_func
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L f)
+      (@hom_postcomp_func B B (@id_func B) M N L g)
+      X
+      Y
+      (@fapp1_fapp0
+        (Hom_cat B N L)
+        (Functor_cat (Hom_cat B M N) (Hom_cat B M L))
+        (@hom_postcomp_tele_func B B (@id_func B) M N L)
+        f
+        g
+        e_fg))
+  ≡ @comp_cat_fapp0
+    (Hom_cat (Hom_cat B M N) X Y)
+    (Hom_cat (Hom_cat B M N) X Z)
+    (Hom_cat
+      (Hom_cat B M L)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L f) X)
+      (fapp0 (@hom_postcomp_func B B (@id_func B) M N L g) Z))
+    (@tapp1_func
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L f)
+      (@hom_postcomp_func B B (@id_func B) M N L g)
+      X
+      Z
+      (@fapp1_fapp0
+        (Hom_cat B N L)
+        (Functor_cat (Hom_cat B M N) (Hom_cat B M L))
+        (@hom_postcomp_tele_func B B (@id_func B) M N L)
+        f
+        g
+        e_fg))
+    (@hom_postcomp_func
+      (Hom_cat B M N)
+      (Hom_cat B M N)
+      (@id_func (Hom_cat B M N))
+      X
+      Y
+      Z
+      β);
 
 // From emdash3_2.lp:2777.
 assert [A B : Cat] (F : τ (Functor A B)) ⊢

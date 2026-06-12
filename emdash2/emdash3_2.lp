@@ -1022,6 +1022,24 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
   : τ (Functor (Op_cat B) Cat_cat)
 ≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
 
+// Generalized precomposition along a functor, routed through the semantic
+// contravariant representable. For F : A ⊢ B and h : W ->^A X,
+//   hom_precomp_along_func(F,Z,h)[g] = g o F[h].
+symbol hom_precomp_along_func [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  : τ (Functor
+      (Hom_cat B (@fapp0 A B F X) Z)
+      (Hom_cat B (@fapp0 A B F W) Z))
+≔ @fapp1_fapp0
+    (Op_cat A)
+    Cat_cat
+    (@hom_con B Z A F)
+    X
+    W
+    h;
+
 // Internalized hom classifier.
 //
 // Surface/formula:
@@ -1687,6 +1705,61 @@ rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
 
 rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
+
+// Full strict naturality for ordinary transfors, oriented as cut elimination.
+// The post/left rule accumulates a codomain arrow through the off-diagonal
+// hom-action:
+//   postcomp(G[g]) o epsilon[X,Y] ↪ epsilon[X,Z] o postcomp(g).
+//
+// The represented source endpoint of the postcomposition functor is kept as a
+// pattern variable. Typing forces it to be F[X], but this lets the rule still
+// match when F[X] has already reduced, as in representable postcomposition
+// regressions.
+rule comp_cat_fapp0
+      (@hom_postcomp_func $B $A $G $FX $Y $Z $g)
+      (@tapp1_func $A $B $F $G $X $Y $ϵ)
+  ↪ comp_cat_fapp0
+      (@tapp1_func $A $B $F $G $X $Z $ϵ)
+      (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
+
+// Full pre/right strict naturality:
+//   precomp(F[h]) o epsilon[X,Y] ↪ epsilon[W,Y] o precomp(h).
+//
+// `hom_precomp_along_func` is the readable alias for the left functor, but it
+// unfolds through `hom_con` to the existing `hom_` owner over opposites. The
+// LHS therefore discriminates on that semantic normal form rather than adding a
+// parallel primitive `hom_con` theory.
+rule comp_cat_fapp0
+      (@fapp1_fapp0 (Op_cat $A) Cat_cat
+        (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) (@fapp0 $A $B $G $Y))
+        $X
+        $W
+        $h)
+      (@tapp1_func $A $B $F $G $X $Y $ϵ)
+  ↪ comp_cat_fapp0
+      (@tapp1_func $A $B $F $G $W $Y $ϵ)
+      (@hom_precomp_func $A $W $X $Y $h);
+
+// Full strict functoriality for ordinary functors. These are first-class
+// single-functor accumulation rules; they are distinct from the later rule for
+// the hom-action of a composite functor F o G.
+rule comp_cat_fapp0
+      (@hom_postcomp_func $B $A $F $FX $Y $Z $g)
+      (@fapp1_func $A $B $F $X $Y)
+  ↪ comp_cat_fapp0
+      (@fapp1_func $A $B $F $X $Z)
+      (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
+
+rule comp_cat_fapp0
+      (@fapp1_fapp0 (Op_cat $A) Cat_cat
+        (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) (@fapp0 $A $B $F $Y))
+        $X
+        $W
+        $h)
+      (@fapp1_func $A $B $F $X $Y)
+  ↪ comp_cat_fapp0
+      (@fapp1_func $A $B $F $W $Y)
+      (@hom_precomp_func $A $W $X $Y $h);
 
 // Strict naturality for off-diagonal ordinary transfor components, oriented as
 // cut elimination.
