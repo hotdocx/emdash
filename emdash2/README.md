@@ -88,6 +88,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   do not reuse a helper whose application rule expands in the opposite
   direction unless a focused probe shows the critical pairs are harmless. See
   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
+- When one endpoint of a hom varies by a functor, prefer the hom-indexed family
+  owner (`hom_int`, `hom_con`, or displayed `homd_int(FF)`) over a hand-built
+  `comp_cat*` pipeline; this keeps pre/postcomposition under the hom-action
+  projection ladder.
 - In explicit `fapp0` source/target arguments, prefer canonical normal forms
   such as `Hom_cat ...` and `Functord_cat ...` over reducible readability
   wrappers such as `Fibre_cat (DefinedAlias ...) k`. The wrapper may compute

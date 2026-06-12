@@ -183,6 +183,12 @@ flag "print_meta_args" on;
     - `homd_` is the generalized endpoint with an explicit displayed functor
       argument. The old one-family endpoint is represented by the identity
       specialization `homd_ (id_funcd E)`.
+    - Hom-indexed family idiom: when a construction contains
+      `Hom_A(W,F[-])`, `Hom_A(F[-],W)`, or the displayed analogue, prefer the
+      classifier that takes the functor/displayed functor as an argument
+      (`hom_int`, `hom_con`, `homd_int(FF)`) over first building an explicit
+      `comp_cat*` pipeline. This gives post/precomposition a semantic owner and
+      keeps cut-elimination local to the hom-action projection ladder.
     - `FibCov_*`: the internal covariant fibre-transport package; it projects
       through `fib_cov_src_func` to the external `fib_cov_transf`, then to
       `fib_cov_tapp0_func`.
@@ -808,6 +814,16 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
   A^op ⊢ (B ⊢ Cat). Its surface reading is:
 
     W :^n A^op ; 1[W] ⊢ (y :^n B ; 1[y] ⊢ Hom_A(W,y))
+
+  Design/SOP note:
+    Use `hom_int(F)` when the varying endpoint is already functor-shaped.
+    For example, for f : A ⊢ B, the outgoing comma family is naturally
+
+      b ↦ Σ (a :^n A), Hom_B(b,f[a])
+
+    and its hom-family part is `hom_int(f)[b]`. This avoids spelling the same
+    idea as a raw post/precomposition pipeline first, where later rules would
+    have to cut through `comp_cat_fapp0` before finding the hom-action owner.
 
   Simplicial reading:
     Fixing W and taking the Sigma total of hom_(F,W) gives the
@@ -3650,6 +3666,13 @@ symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
 // displayed functor are recoverable from the head. Terminal-source behavior is
 // still exposed through the stable projection rules below; avoid adding broad
 // whole-family `homd_int` rewrites unless a later design explicitly needs them.
+//
+// Design/SOP note:
+//   The displayed-functor argument is intentional. Prefer `homd_int(FF)` when
+//   the target endpoint varies through a displayed functor FF; do not first
+//   express the situation as `homd_int(id_D) o Op_funcd(FF)` unless the point of
+//   the theorem is that comparison itself. The explicit argument keeps the
+//   dependent hom-action and its cut-elimination rules under one stable owner.
 //
 // Simplicial iteration note:
 //   `homd_int(FF)` is the dependent step of the same Sigma-of-hom pattern. Its

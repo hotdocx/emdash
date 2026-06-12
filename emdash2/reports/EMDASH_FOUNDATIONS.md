@@ -423,6 +423,25 @@ Sigma-of-hom pattern supplies the next "cell over a cell" layer. This is an
 interpretation of the existing hom/Sigma architecture, not a separate primitive
 or rewrite surface.
 
+This also motivates a recurring v3.2 implementation idiom: when one endpoint
+of a hom varies by a functor, write the family as a hom-indexed family rather
+than as a raw composition of endpoint functors. For example, for `f : A ⊢ B`,
+the family:
+
+```text
+b ↦ (a ↦ Hom_B(b,f[a]))
+```
+
+is the internal package:
+
+```text
+hom_int B A f : Op_cat B ⊢ Catd_cat A.
+```
+
+This packages the pre/postcomposition actions under the hom constructor, which
+is better aligned with cut-elimination than first introducing an explicit
+`comp_cat*` pipeline and later trying to fold it away.
+
 More generally, dependent homs can be formed along a natural family morphism
 `FF : D → E`, allowing endpoint data in different families. The endpoint form
 specializes to the identity-family case above.

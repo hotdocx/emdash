@@ -320,13 +320,23 @@ Before proposing or implementing a nontrivial change, check these points:
    must support another hom-action. A RHS that immediately computes one cell
    may lose the functor object needed for higher-dimensional iteration.
 
-6. Probe before committing rules.
+6. Use hom-indexed family owners for functor-shaped endpoints.
+
+   When a formula contains `Hom_A(W,F[-])`, `Hom_A(F[-],W)`, or the displayed
+   analogue, prefer the classifier that takes the functor/displayed functor as
+   an argument: `hom_int`, `hom_con`, or `homd_int(FF)`. Do not first encode the
+   same idea as a raw `comp_cat*` pipeline unless the comparison with that raw
+   pipeline is the theorem being studied. This keeps post/precomposition
+   actions under a semantic owner and avoids an extra explicit cut before
+   cut-elimination can fire.
+
+7. Probe before committing rules.
 
    Use a temporary copy plus a focused assertion for the intended normal form.
    A rule that typechecks but fails or times out on the assertion is not ready
    for the active file.
 
-7. Document failed orientations when they affect the design.
+8. Document failed orientations when they affect the design.
 
    If a tempting rule is rejected because it creates conversion blowups,
    circularity, or misleading ownership, record that in this SOP report or the
@@ -662,12 +672,67 @@ Implementation checklist for this style:
 
 1. Write the mathematical formula in a comment near the symbol.
 2. Identify the owner of the reusable action before adding a new head.
-3. If an existing helper has the wrong orientation, add a new stable head only
+3. When one endpoint varies by a functor, try the hom-indexed-family owner
+   first: `hom_int(F)`, `hom_con`, or the displayed `homd_int(FF)`.
+4. If an existing helper has the wrong orientation, add a new stable head only
    after proving that a smaller projection rule is insufficient.
-4. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
+5. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
    the stable action will be reused.
-5. Add canonical consumer rules, such as identity/cartesian cases, only after a
+6. Add canonical consumer rules, such as identity/cartesian cases, only after a
    temporary probe shows the syntactic normal form.
+
+### Hom-Indexed Family SOP
+
+The category-theoretic idiom:
+
+```text
+Hom_B(b, f[-])
+```
+
+should normally enter the kernel through the internal hom-family package:
+
+```text
+hom_int B A f : Op_cat B ⊢ Catd_cat A
+hom_int(f)[b][a] = Hom_B(b, f[a])
+```
+
+and not by first expanding all functor composition around the endpoint. This is
+why `hom_int` carries the functor argument `f`: the action in `b` is
+precomposition, the action in `a` is postcomposition by `f`, and both actions
+are owned by the hom projection heads.
+
+For the proposed `Pi_f` comma infrastructure, this means the semantic
+expression:
+
+```text
+CommaOut_catd(f) ≃ Sigma_func(A) o hom_int B A f
+```
+
+is the right starting point for the internal family:
+
+```text
+b ↦ Σ (a :^n A), b ->^B f[a].
+```
+
+If a stable `CommaOut_catd(f)` head is later introduced, it should fold from
+this hom-indexed-family expression after a focused probe, rather than duplicate
+the object formula by hand.
+
+The displayed analogue is the same rule:
+
+```text
+homd_int(FF)
+```
+
+should be preferred when the target endpoint varies through a displayed
+functor `FF`. Expressions like:
+
+```text
+homd_int(id_D) o Op_funcd(FF)
+```
+
+are useful comparison surfaces, but they should not become the primary owner of
+dependent hom-action unless a theorem specifically concerns that comparison.
 6. Keep source/target and endpoint slots implicit on rewrite LHSs unless they
    are the actual discriminator.
 7. Add assertions for both the reusable action form and the downstream theorem

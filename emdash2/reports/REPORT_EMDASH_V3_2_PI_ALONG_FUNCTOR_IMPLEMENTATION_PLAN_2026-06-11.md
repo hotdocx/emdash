@@ -85,6 +85,17 @@ category it is the section category over the outgoing comma category:
 CommaOut(f,b) := Σ (a :^n A), b ->^B f[a]
 ```
 
+The hom-family part should be read through the existing `hom_int` idiom:
+
+```text
+hom_int B A f : Op_cat B ⊢ Catd_cat A
+hom_int(f)[b][a] = Hom_B(b,f[a])
+```
+
+This is not just notation. It gives the pre/postcomposition action a semantic
+owner before any raw `comp_cat*` pipeline is introduced, which is the normal
+cut-elimination style used elsewhere in v3.2.
+
 Then:
 
 ```text
@@ -415,6 +426,11 @@ This expression sends:
 ```text
 b ↦ Sigma_cat(hom_(f,b))
 ```
+
+It is preferred over expanding `b ->^B f[-]` as a hand-built composition of
+endpoint functors. The `hom_int` package is the owner of the hom-family action;
+`CommaOut_catd(f)` should only become a stable owner after a probe shows that
+the Sigma/hom pipeline needs a fold for conversion or performance.
 
 A stable fold should be considered:
 
