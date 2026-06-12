@@ -818,9 +818,10 @@ specialized, not a broad kernel rewrite.
 - Treat `CommaOut_catd(f)` as the owner of the functor
   `b ↦ Σ(a), b -> f[a]`; use a fold from the internal expression only after a
   focused probe.
-- Keep object-law, arrow-action-law, and family-argument-action-law probes
-  separate. A rule that works at object level may still be too expensive at
-  arrow-action level.
+- Keep object-law, arrow-action-law, transfor-naturality, and
+  family-argument-action-law probes separate. A rule that works at object or
+  component level may still be too expensive, wrongly oriented, or
+  underspecified at `fapp1_func`/`tapp1_func` level.
 
 ## Validation Targets
 

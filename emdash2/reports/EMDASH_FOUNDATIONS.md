@@ -125,6 +125,12 @@ This is a useful discipline throughout the development: an equation such as
 When `x` ranges over a directed category, the corresponding arrow action over
 `p : x -> y` is part of the structure, not a later cosmetic detail.
 
+The same warning applies one level up. A displayed equation such as
+`eta[x] = ...` gives only the component of a natural transformation. Its
+functorial/naturality action over arrows, represented in the kernel by
+`tapp1_func eta` and its capped projections, must also be specified or
+explicitly deferred before the construction is treated as implemented.
+
 The theory also has transformation categories:
 
 ```text

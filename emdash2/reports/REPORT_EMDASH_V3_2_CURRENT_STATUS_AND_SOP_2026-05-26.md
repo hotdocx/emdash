@@ -320,25 +320,30 @@ Before proposing or implementing a nontrivial change, check these points:
    must support another hom-action. A RHS that immediately computes one cell
    may lose the functor object needed for higher-dimensional iteration.
 
-6. Do not stop at object-level formulas for varying variables.
+6. Do not stop at pointwise formulas for varying variables.
 
    A formula such as `A[x] = ...` is only the object law of a would-be
-   functorial family when `x` varies in a category. Before turning it into a
-   constructor, stable head, or rewrite rule, identify the arrow action for
-   `p : x -> y` and any higher/family-argument action the surrounding API will
-   need. If the arrow action is not yet available, document the formula as an
-   object-level sketch and do not let it masquerade as the full definition.
+   functorial family when `x` varies in a category. Likewise, a pointwise
+   formula such as `eta[x] = ...` is only the component law of a natural
+   transformation until its naturality/hom-action is accounted for. Before
+   turning such a sketch into a constructor, stable head, or rewrite rule,
+   identify the arrow action for `p : x -> y`, for example `F[p]` for a functor
+   or `eta[p]` / `tapp1_func eta` for a transfor, and any
+   higher/family-argument action the surrounding API will need. If the arrow
+   action is not yet available, document the formula as a pointwise sketch and
+   do not let it masquerade as the full definition.
 
    Validation should keep these probes separate:
 
    ```text
    object law
    base-arrow action law
+   transfor naturality / hom-action law, when relevant
    action on family morphisms / transfors, when relevant
    ```
 
-   A rule that works at object level can still have the wrong variance,
-   endpoints, or performance behavior at arrow-action level.
+   A rule that works pointwise can still have the wrong variance, endpoints,
+   or performance behavior at arrow-action or naturality level.
 
 7. Use hom-indexed family owners for functor-shaped endpoints.
 
@@ -704,7 +709,7 @@ Implementation checklist for this style:
 
 ### Functorial Variation SOP
 
-Object-level equations are often useful sketches, but in v3.2 they are not
+Pointwise equations are often useful sketches, but in v3.2 they are not
 complete definitions when an index varies in a directed category.
 
 For a proposed family:
@@ -725,9 +730,25 @@ for every base arrow:
 p : x -> y.
 ```
 
+For a proposed natural transformation or transfor:
+
+```text
+eta[x] = ComponentFormula(x)
+```
+
+also ask for the naturality/hom-action package:
+
+```text
+eta[p]      // capped reading
+tapp1_func eta x y
+```
+
+for every base arrow `p : x -> y`. If this action is deferred, say so in the
+implementation comment/report rather than leaving only the component equation.
+
 For a proposed functor between family categories, also ask how the construction
 acts on displayed functors and transfors if later consumers will need that
-level. This prevents an object-only normal form from becoming a misleading
+level. This prevents a pointwise normal form from becoming a misleading
 stable head.
 
 The `Pi_f` plan is the current model. The fibre formula:

@@ -119,9 +119,11 @@ flag "print_meta_args" on;
       object that would support another hom-action.
     - Treat formulas such as `E[x] = ...` as object laws only. If `x` varies
       in a category, also identify the action over `p : x -> y` before turning
-      the formula into a constructor, stable head, or rewrite rule. If a later
-      consumer needs functorial action in a family argument, keep that as a
-      separate design/probe item too.
+      the formula into a constructor, stable head, or rewrite rule. The same
+      applies to transfor sketches: `eta[x] = ...` is only the component law
+      until `eta[p]` / `tapp1_func eta` is specified or explicitly deferred. If
+      a later consumer needs functorial action in a family argument, keep that
+      as a separate design/probe item too.
     - Use pointwise endpoint notation only when the current construction
       genuinely needs an endpoint. Here `homd_` is defined by the semantic
       `hom_con` endpoint; internal rules should discriminate on `homd_int`.

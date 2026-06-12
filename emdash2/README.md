@@ -104,10 +104,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   canonical/cartesian triangle is expected, prefer a narrow typed bridge or
   consumer-local simulation rule for that endpoint over broad global identity
   rewrites.
-- Do not stop at object-level formulas when implementing internalized
+- Do not stop at pointwise formulas when implementing internalized
   infrastructure. A sketch like `A[x] = ...` is only the object law when `x`
-  varies functorially; also specify the action over `p : x -> y`, plus
-  family-morphism/transfor action when later packages need that level.
+  varies functorially; a sketch like `eta[x] = ...` is only the component law
+  of a transfor. Also specify the action over `p : x -> y`, such as `A[p]` or
+  `eta[p]` / `tapp1_func eta`, plus family-morphism/transfor action when later
+  packages need that level.
 - Distinguish capped action `fapp1_fapp0 F p` from full hom-action
   `fapp1_func F a b`. A missing capped rule can block a valid semantic route,
   but capped object-level helpers should not replace full synthetic action.
