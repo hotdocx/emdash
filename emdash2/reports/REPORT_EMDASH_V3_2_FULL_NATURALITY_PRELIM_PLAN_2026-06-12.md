@@ -47,15 +47,24 @@ F[g] o F[f] -> F[g o f]
 ```
 
 There are also later full hom-action rules for identity and composition of
-ordinary functors:
+ordinary functors in `Cat_cat`:
 
 ```text
 fapp1_func(id_A) -> id_(Hom_A)
 fapp1_func(F o G) -> fapp1_func(F) o fapp1_func(G)
 ```
 
-These are useful, but they are not the same as the functoriality of an
-arbitrary functor `F` with respect to composition inside its source category.
+The composition rule expands the hom-action of the composite functor `F o G`
+into the composite of the hom-actions of `F` and `G`. This is the full
+hom-action counterpart of the existing object/capped-arrow computation for
+ordinary functor composition, and there is no present reason to remove it unless
+a focused probe later exposes an actual overlap or orientation problem.
+
+This rule is separate from strict functoriality of an arbitrary single functor
+`F` with respect to composition inside its source category. The redesign needs
+strict functoriality rules in addition to strict naturality rules; that
+single-functor strict functoriality problem is the one still to formulate at
+the full `fapp1_func` level.
 
 Transformation action:
 
@@ -232,11 +241,25 @@ naturality:
 tapp1_func(id_F, X, Y) -> fapp1_func(F,X,Y)
 ```
 
-The code already has this identity specialization. However, implementation may
-still need explicit `fapp1_func` companion rules, because the identity
-specialization can erase the `tapp1_func` head before a generic naturality rule
-has a chance to match. This is the full-functor-level analogue of the existing
+The code already has this identity specialization. However, implementation
+still needs strict functoriality rules as first-class rules, not merely as an
+informal consequence of strict naturality. The identity-transfor viewpoint is a
+design guide and a consistency check, but implementation should provide the
+functoriality rules explicitly when the naturality head is not present or has
+already reduced away. This is the full-functor-level analogue of the existing
 "identity-silent" issue for capped rules.
+
+This is distinct from the existing rule for the hom-action of a composite
+functor:
+
+```text
+fapp1_func(F o G) -> fapp1_func(F) o fapp1_func(G)
+```
+
+That rule concerns functor composition as an arrow of `Cat_cat`; it should stay
+unless implementation probes discover a concrete conflict. It does not solve,
+and should not be confused with, the strict functoriality rule for a single
+functor's action on composable arrows in its source.
 
 ## v1 Inspiration
 
