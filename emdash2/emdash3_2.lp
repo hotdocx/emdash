@@ -1031,14 +1031,23 @@ symbol hom_precomp_along_func [A B : Cat]
   (h : τ (Hom A W X))
   : τ (Functor
       (Hom_cat B (@fapp0 A B F X) Z)
-      (Hom_cat B (@fapp0 A B F W) Z))
-≔ @fapp1_fapp0
-    (Op_cat A)
-    Cat_cat
-    (@hom_con B Z A F)
-    X
-    W
-    h;
+      (Hom_cat B (@fapp0 A B F W) Z));
+
+rule @fapp1_fapp0 (Op_cat $A) Cat_cat
+      (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) $Z)
+      $X
+      $W
+      $h
+  ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
+
+rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
+  ↪ @comp_fapp0
+      $B
+      (@fapp0 $A $B $F $W)
+      (@fapp0 $A $B $F $X)
+      $Z
+      $g
+      (@fapp1_fapp0 $A $B $F $W $X $h);
 
 // Internalized hom classifier.
 //
@@ -1725,16 +1734,11 @@ rule comp_cat_fapp0
 // Full pre/right strict naturality:
 //   precomp(F[h]) o epsilon[X,Y] ↪ epsilon[W,Y] o precomp(h).
 //
-// `hom_precomp_along_func` is the readable alias for the left functor, but it
-// unfolds through `hom_con` to the existing `hom_` owner over opposites. The
-// LHS therefore discriminates on that semantic normal form rather than adding a
-// parallel primitive `hom_con` theory.
+// `hom_precomp_along_func` is the stable projection for the left functor. The
+// raw semantic owner over opposites folds to this head above, so the
+// accumulation rule does not need to expose `hom_`/`Op_func` internals.
 rule comp_cat_fapp0
-      (@fapp1_fapp0 (Op_cat $A) Cat_cat
-        (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) (@fapp0 $A $B $G $Y))
-        $X
-        $W
-        $h)
+      (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $G $Y) $W $X $h)
       (@tapp1_func $A $B $F $G $X $Y $ϵ)
   ↪ comp_cat_fapp0
       (@tapp1_func $A $B $F $G $W $Y $ϵ)
@@ -1751,11 +1755,7 @@ rule comp_cat_fapp0
       (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
 
 rule comp_cat_fapp0
-      (@fapp1_fapp0 (Op_cat $A) Cat_cat
-        (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) (@fapp0 $A $B $F $Y))
-        $X
-        $W
-        $h)
+      (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $F $Y) $W $X $h)
       (@fapp1_func $A $B $F $X $Y)
   ↪ comp_cat_fapp0
       (@fapp1_func $A $B $F $W $Y)

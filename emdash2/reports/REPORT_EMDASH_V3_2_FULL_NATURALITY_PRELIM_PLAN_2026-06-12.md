@@ -334,26 +334,30 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 The first slice implements Option A for generalized precomposition:
 
 ```text
-hom_precomp_along_func(F,Z,h)
-  := fapp1_fapp0(hom_con(Z,F), h)
+fapp1_fapp0(hom_(Op(B),Op(A),Op(F),Z), h)
+  -> hom_precomp_along_func(F,Z,h)
 ```
 
-The readable alias computes as intended:
+The stable projection computes as intended:
 
 ```text
 hom_precomp_along_func(F,Z,h)[g] = g o F[h]
 ```
 
 The full strict naturality and strict functoriality rules were added at the
-`comp_cat_fapp0`/`tapp1_func`/`fapp1_func` level. The pre/right rules
-discriminate on the normalized owner:
+`comp_cat_fapp0`/`tapp1_func`/`fapp1_func` level. The pre/right rules now
+discriminate on the stable projection head:
 
 ```text
-fapp1_fapp0(hom_(Op(B),Op(A),Op(F),Z), h)
+hom_precomp_along_func(F,Z,h)
 ```
 
-rather than on `hom_precomp_along_func`, because the readable alias unfolds
-through `hom_con`.
+The raw `hom_`-over-opposites owner folds to this head, so the public
+accumulation rules do not expose the brittle normalized `hom_`/`Op_func`
+expression. A temporary probe also confirmed that making
+`hom_precomp_along_func` a reducible alias is the weaker choice: it typechecks,
+but then rules either have to match the raw owner or risk a rewrite cycle if a
+fold is added back to the alias.
 
 One focused probe found that the post/left rules must not hard-code the fixed
 source endpoint as syntactic `F[X]` on the LHS. Representable postcomposition
