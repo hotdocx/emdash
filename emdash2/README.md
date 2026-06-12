@@ -108,8 +108,9 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   infrastructure. A sketch like `A[x] = ...` is only the object law when `x`
   varies functorially; a sketch like `eta[x] = ...` is only the component law
   of a transfor. Also specify the action over `p : x -> y`, such as `A[p]` or
-  `eta[p]` / `tapp1_func eta`, plus family-morphism/transfor action when later
-  packages need that level.
+  `fapp1_func A`, and `eta[p]` or `tapp1_func eta`. Capped or
+  constructor-specific `fapp1*`/`tapp1*` helpers may be the practical probe
+  surface, but they should not hide the full arrow-action obligation.
 - Distinguish capped action `fapp1_fapp0 F p` from full hom-action
   `fapp1_func F a b`. A missing capped rule can block a valid semantic route,
   but capped object-level helpers should not replace full synthetic action.

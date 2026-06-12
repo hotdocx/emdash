@@ -127,9 +127,11 @@ When `x` ranges over a directed category, the corresponding arrow action over
 
 The same warning applies one level up. A displayed equation such as
 `eta[x] = ...` gives only the component of a natural transformation. Its
-functorial/naturality action over arrows, represented in the kernel by
-`tapp1_func eta` and its capped projections, must also be specified or
-explicitly deferred before the construction is treated as implemented.
+functorial/naturality action over arrows is represented primarily by
+`tapp1_func eta`; capped projections such as `tapp1_fapp0 eta p`, or
+constructor-specific `*_tapp1_*` helpers, may be the relevant implementation
+surface. That arrow action must still be specified or explicitly deferred
+before the construction is treated as implemented.
 
 The theory also has transformation categories:
 

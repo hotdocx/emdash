@@ -328,10 +328,12 @@ Before proposing or implementing a nontrivial change, check these points:
    transformation until its naturality/hom-action is accounted for. Before
    turning such a sketch into a constructor, stable head, or rewrite rule,
    identify the arrow action for `p : x -> y`, for example `F[p]` for a functor
-   or `eta[p]` / `tapp1_func eta` for a transfor, and any
-   higher/family-argument action the surrounding API will need. If the arrow
-   action is not yet available, document the formula as a pointwise sketch and
-   do not let it masquerade as the full definition.
+   or `eta[p]` / `tapp1_func eta` for a transfor, and any higher/family-argument
+   action the surrounding API will need. Capped projections such as
+   `fapp1_fapp0`/`tapp1_fapp0`, or constructor-specific action helpers, may be
+   the practical probe surface, but they do not replace the full arrow-action
+   obligation. If the arrow action is not yet available, document the formula as
+   a pointwise sketch and do not let it masquerade as the full definition.
 
    Validation should keep these probes separate:
 
@@ -743,8 +745,11 @@ eta[p]      // capped reading
 tapp1_func eta x y
 ```
 
-for every base arrow `p : x -> y`. If this action is deferred, say so in the
-implementation comment/report rather than leaving only the component equation.
+for every base arrow `p : x -> y`. In a focused assertion this may project
+through `tapp1_fapp0 eta p` or a constructor-specific `*_tapp1_*` helper, but
+the design obligation is still the naturality/hom-action represented by
+`tapp1_func`. If this action is deferred, say so in the implementation
+comment/report rather than leaving only the component equation.
 
 For a proposed functor between family categories, also ask how the construction
 acts on displayed functors and transfors if later consumers will need that

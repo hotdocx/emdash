@@ -821,7 +821,10 @@ specialized, not a broad kernel rewrite.
 - Keep object-law, arrow-action-law, transfor-naturality, and
   family-argument-action-law probes separate. A rule that works at object or
   component level may still be too expensive, wrongly oriented, or
-  underspecified at `fapp1_func`/`tapp1_func` level.
+  underspecified at `fapp1_func`/`tapp1_func` level. Capped
+  `fapp1_fapp0`/`tapp1_fapp0` or constructor-specific helpers can be useful
+  assertion surfaces, but they should be read as projections of the full
+  arrow-action requirement.
 
 ## Validation Targets
 

@@ -121,9 +121,12 @@ flag "print_meta_args" on;
       in a category, also identify the action over `p : x -> y` before turning
       the formula into a constructor, stable head, or rewrite rule. The same
       applies to transfor sketches: `eta[x] = ...` is only the component law
-      until `eta[p]` / `tapp1_func eta` is specified or explicitly deferred. If
-      a later consumer needs functorial action in a family argument, keep that
-      as a separate design/probe item too.
+      until `eta[p]` / `tapp1_func eta` is specified or explicitly deferred.
+      Capped projections such as `tapp1_fapp0`, or constructor-specific
+      `*_tapp1_*` helpers, may be the practical assertion surface, but they do
+      not replace the need to account for the full arrow action. If a later
+      consumer needs functorial action in a family argument, keep that as a
+      separate design/probe item too.
     - Use pointwise endpoint notation only when the current construction
       genuinely needs an endpoint. Here `homd_` is defined by the semantic
       `hom_con` endpoint; internal rules should discriminate on `homd_int`.
