@@ -120,6 +120,11 @@ F[x] : Obj(B)
 F[f] : Hom_B(F[x],F[y])
 ```
 
+This is a useful discipline throughout the development: an equation such as
+`E[x] = ...` is only the object part of a functorial or natural construction.
+When `x` ranges over a directed category, the corresponding arrow action over
+`p : x -> y` is part of the structure, not a later cosmetic detail.
+
 The theory also has transformation categories:
 
 ```text

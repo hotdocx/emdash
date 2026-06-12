@@ -169,6 +169,10 @@ stable comma heads. If Lambdapi has to rediscover the comma projection
 equation through raw Sigma, hom, and composition reductions, conversion is
 likely to become brittle.
 
+This is an instance of the general v3.2 functorial-variation SOP: an object
+law for a varying index is only a sketch until the corresponding arrow action
+has a stable owner.
+
 ## No Restriction On `f` For Kernel Definition
 
 The general comma formula is meaningful for every ordinary functor:

@@ -320,7 +320,27 @@ Before proposing or implementing a nontrivial change, check these points:
    must support another hom-action. A RHS that immediately computes one cell
    may lose the functor object needed for higher-dimensional iteration.
 
-6. Use hom-indexed family owners for functor-shaped endpoints.
+6. Do not stop at object-level formulas for varying variables.
+
+   A formula such as `A[x] = ...` is only the object law of a would-be
+   functorial family when `x` varies in a category. Before turning it into a
+   constructor, stable head, or rewrite rule, identify the arrow action for
+   `p : x -> y` and any higher/family-argument action the surrounding API will
+   need. If the arrow action is not yet available, document the formula as an
+   object-level sketch and do not let it masquerade as the full definition.
+
+   Validation should keep these probes separate:
+
+   ```text
+   object law
+   base-arrow action law
+   action on family morphisms / transfors, when relevant
+   ```
+
+   A rule that works at object level can still have the wrong variance,
+   endpoints, or performance behavior at arrow-action level.
+
+7. Use hom-indexed family owners for functor-shaped endpoints.
 
    When a formula contains `Hom_A(W,F[-])`, `Hom_A(F[-],W)`, or the displayed
    analogue, prefer the classifier that takes the functor/displayed functor as
@@ -330,13 +350,13 @@ Before proposing or implementing a nontrivial change, check these points:
    actions under a semantic owner and avoids an extra explicit cut before
    cut-elimination can fire.
 
-7. Probe before committing rules.
+8. Probe before committing rules.
 
    Use a temporary copy plus a focused assertion for the intended normal form.
    A rule that typechecks but fails or times out on the assertion is not ready
    for the active file.
 
-8. Document failed orientations when they affect the design.
+9. Document failed orientations when they affect the design.
 
    If a tempting rule is rejected because it creates conversion blowups,
    circularity, or misleading ownership, record that in this SOP report or the
@@ -672,14 +692,52 @@ Implementation checklist for this style:
 
 1. Write the mathematical formula in a comment near the symbol.
 2. Identify the owner of the reusable action before adding a new head.
-3. When one endpoint varies by a functor, try the hom-indexed-family owner
+3. Separate object laws from arrow-action laws before choosing rewrites.
+4. When one endpoint varies by a functor, try the hom-indexed-family owner
    first: `hom_int(F)`, `hom_con`, or the displayed `homd_int(FF)`.
-4. If an existing helper has the wrong orientation, add a new stable head only
+5. If an existing helper has the wrong orientation, add a new stable head only
    after proving that a smaller projection rule is insufficient.
-5. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
+6. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
    the stable action will be reused.
-6. Add canonical consumer rules, such as identity/cartesian cases, only after a
+7. Add canonical consumer rules, such as identity/cartesian cases, only after a
    temporary probe shows the syntactic normal form.
+
+### Functorial Variation SOP
+
+Object-level equations are often useful sketches, but in v3.2 they are not
+complete definitions when an index varies in a directed category.
+
+For a proposed family:
+
+```text
+X[x] = Formula(x)
+```
+
+also ask for:
+
+```text
+X[p] : X[x] ⊢ X[y]
+```
+
+for every base arrow:
+
+```text
+p : x -> y.
+```
+
+For a proposed functor between family categories, also ask how the construction
+acts on displayed functors and transfors if later consumers will need that
+level. This prevents an object-only normal form from becoming a misleading
+stable head.
+
+The `Pi_f` plan is the current model. The fibre formula:
+
+```text
+(Pi_f E)[b] = Pi_cat(Pullback_catd(E, CommaOut_proj(f,b)))
+```
+
+is useful but incomplete until the base-arrow action along `h : b -> b'` is
+specified through `CommaOut_precomp(f,h)` and `section_pullback_func`.
 
 ### Hom-Indexed Family SOP
 

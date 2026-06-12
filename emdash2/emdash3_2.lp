@@ -117,6 +117,11 @@ flag "print_meta_args" on;
       must remain iterable to higher cells.  A rule whose RHS is just
       `fapp0 (...) cell` computes one selected cell but can lose the functor
       object that would support another hom-action.
+    - Treat formulas such as `E[x] = ...` as object laws only. If `x` varies
+      in a category, also identify the action over `p : x -> y` before turning
+      the formula into a constructor, stable head, or rewrite rule. If a later
+      consumer needs functorial action in a family argument, keep that as a
+      separate design/probe item too.
     - Use pointwise endpoint notation only when the current construction
       genuinely needs an endpoint. Here `homd_` is defined by the semantic
       `hom_con` endpoint; internal rules should discriminate on `homd_int`.
@@ -166,6 +171,8 @@ flag "print_meta_args" on;
       objects route through the endpoint `homd_`.
     - `Functor_catd` / `Functor_catd_func`: mixed-variance family formation
       is functorial in family arguments, not just an object-level recipe.
+      Object formulas must be paired with arrow-action formulas before they
+      are treated as full displayed-family constructors.
     - `Rep_catd_func` / `Rep_catd` / `PathOut_cat`: raw covariant
       representable and outgoing-arrow total category notation for directed
       induction. `Edge_catd_func` remains the pointwise-opposite variant used
