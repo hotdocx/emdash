@@ -820,7 +820,7 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
     hom_postcomp_func(f)(g)= F[f] o g
     hom_con(W,F)[y]       = Hom_A(F[y],W)
     hom_int(F)[W][y]      = Hom_A(W,F[y])
-    hom_precomp_func(f)(g)= g ∘ f
+    hom_precomp_along_func(id_A,Z,f)(g)= g ∘ f
 
   `hom_int(F)` is the internalized functorial package
   A^op ⊢ (B ⊢ Cat). Its surface reading is:
@@ -957,63 +957,6 @@ rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
 rule @hom_postcomp_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G
   ↪ @comp_cat_cov_func $X $Y $Z $G;
 
-/*
-  Stable contravariant hom-action projections.
-
-  Mathematical notation:
-    hom_precomp_func(A,X,Y,Z,f)
-      : Hom_A(Y,Z) ⊢ Hom_A(X,Z)
-
-    hom_precomp_func(f)[g] = g ∘ f
-
-    hom_precomp_fapp1_func(f,g,h)
-      : Hom(g,h) ⊢ Hom(g ∘ f,h ∘ f)
-
-  Faithful surface syntax:
-    Hom_A(-,Z)[f](g)
-
-  This is the represented-object action of hom_int. For f : X ->^A Y, the
-  component at Z sends a map g : Y ->^A Z to g ∘ f.
-*/
-symbol hom_precomp_func [A : Cat] [X Y Z : τ (Obj A)]
-  (f : τ (Hom A X Y))
-  : τ (Functor (Hom_cat A Y Z) (Hom_cat A X Z));
-
-rule @fapp0 (Hom_cat $A $Y $Z) (Hom_cat $A $X $Z)
-      (@hom_precomp_func $A $X $Y $Z $f) $g
-  ↪ @comp_fapp0 $A $X $Y $Z $g $f;
-
-rule @hom_precomp_func Cat_cat $X $Y $Z $F
-  ↪ @comp_cat_con_func $X $Y $Z $F;
-
-symbol hom_precomp_fapp1_func [A : Cat] [X Y Z : τ (Obj A)]
-  (f : τ (Hom A X Y))
-  [g h : τ (Hom A Y Z)]
-  : τ (Functor
-      (Hom_cat (Hom_cat A Y Z) g h)
-      (Hom_cat
-        (Hom_cat A X Z)
-        (@comp_fapp0 A X Y Z g f)
-        (@comp_fapp0 A X Y Z h f)));
-
-symbol hom_precomp_fapp1_fapp0 [A : Cat] [X Y Z : τ (Obj A)]
-  (f : τ (Hom A X Y))
-  [g h : τ (Hom A Y Z)]
-  (alpha : τ (Hom (Hom_cat A Y Z) g h))
-  : τ (Hom
-      (Hom_cat A X Z)
-      (@comp_fapp0 A X Y Z g f)
-      (@comp_fapp0 A X Y Z h f));
-
-rule @fapp1_func _ _ (@hom_precomp_func $A $X $Y $Z $f) $g $h
-  ↪ @hom_precomp_fapp1_func $A $X $Y $Z $f $g $h;
-
-rule fapp0 (@hom_precomp_fapp1_func $A $X $Y $Z $f $g $h) $alpha
-  ↪ @hom_precomp_fapp1_fapp0 $A $X $Y $Z $f $g $h $alpha;
-
-rule @fapp1_fapp0 _ _ (@hom_precomp_func $A $X $Y $Z $f) $g $h $alpha
-  ↪ @hom_precomp_fapp1_fapp0 $A $X $Y $Z $f $g $h $alpha;
-
 // Contravariant represented-object classifier.
 //
 // Surface/formula:
@@ -1035,9 +978,8 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
     hom_precomp_along_fapp1_func(F,Z,h,g,k)
       : Hom(g,k) ⊢ Hom(g o F[h], k o F[h])
 
-  This is the generalized counterpart of `hom_precomp_func`: the
-  precomposed arrow is not an arrow h of the target category B itself, but the
-  image F[h] of an arrow h in the source category A.
+  When F is the identity functor, this is ordinary represented-object
+  precomposition: g maps to g o h.
 */
 symbol hom_precomp_along_tele_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
@@ -1155,7 +1097,7 @@ rule @fapp0 _ _ (@hom_int $A $B $F) $W
     hom_(F,W)[y] = Hom_A(W,F[y])
     hom_con(W,F)[y] = Hom_A(F[y],W)
     hom_int(F)[W][y] = Hom_A(W,F[y])
-    hom_precomp_func(p)[q] = q o p.
+    hom_precomp_along_func(id_A,Z,p)[q] = q o p.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -1381,7 +1323,14 @@ rule @tapp0_fapp0
       $b
       (@fapp1_fapp0 (Op_cat $A) (@Catd_cat $B)
         (@hom_int $A $B $F) $Y $X $f)
-  ↪ @hom_precomp_func $A $X $Y (@fapp0 $B $A $F $b) $f;
+  ↪ @hom_precomp_along_func
+      $A
+      $A
+      (@id_func $A)
+      (@fapp0 $B $A $F $b)
+      $X
+      $Y
+      $f;
 
 // Component of `hom_int` in the represented object is precomposition.
 
@@ -1745,12 +1694,6 @@ rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
       $H
       $eta;
 
-rule @hom_precomp_fapp1_func Cat_cat $X $Y $Z $F $G $H
-  ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
-
-rule @hom_precomp_fapp1_fapp0 Cat_cat $X $Y $Z $F $G $H $eta
-  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
-
 rule @fapp1_func _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H
   ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
 
@@ -1856,7 +1799,7 @@ rule comp_cat_fapp0
       (@tapp1_func $A $B $F $G $X $Y $ϵ)
   ↪ comp_cat_fapp0
       (@tapp1_func $A $B $F $G $W $Y $ϵ)
-      (@hom_precomp_func $A $W $X $Y $h);
+      (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
 
 // Full strict functoriality for ordinary functors. These are first-class
 // single-functor accumulation rules; they are distinct from the later rule for
@@ -1873,7 +1816,7 @@ rule comp_cat_fapp0
       (@fapp1_func $A $B $F $X $Y)
   ↪ comp_cat_fapp0
       (@fapp1_func $A $B $F $W $Y)
-      (@hom_precomp_func $A $W $X $Y $h);
+      (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
 
 // Strict naturality for off-diagonal ordinary transfor components, oriented as
 // cut elimination.
@@ -3334,7 +3277,7 @@ rule @tapp0_fapp0
       _
       $z
       (@Rep_transport_func $Z $x $y $p)
-  ↪ @hom_precomp_func $Z $x $y $z $p;
+  ↪ @hom_precomp_along_func $Z $Z (@id_func $Z) $z $x $y $p;
 
 // Fixed-x layer: outgoing-path category at a fixed source object.
 //

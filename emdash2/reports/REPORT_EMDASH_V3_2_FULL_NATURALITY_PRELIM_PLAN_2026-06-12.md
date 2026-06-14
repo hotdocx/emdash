@@ -104,15 +104,15 @@ hom_postcomp_func(F,W,X,Y,f)[g]
   = F[f] o g
 ```
 
-The contravariant precomposition API is less uniform:
+The former contravariant precomposition API was less uniform:
 
 ```text
-hom_precomp_func(A,X,Y,Z,f)[g] = g o f
+hom_precomp_along_func(id_A,Z,f)[g] = g o f
 ```
 
-This is currently a standalone stable head. It is morally the identity-functor
-case of a precomposition action owned by `hom_con`, but `hom_con` is only a
-defined alias:
+This was originally represented by a standalone stable head. It is really the
+identity-functor case of a precomposition action owned by `hom_con`, but
+`hom_con` is only a defined alias:
 
 ```text
 hom_con(W,F)
@@ -217,7 +217,7 @@ After adding the generalized precomposition projection:
 ```text
 hom_precomp_along_func(F, G[Y], h) o tapp1_func(eta, X, Y)
   ->
-tapp1_func(eta, W, Y) o hom_precomp_func(A,W,X,Y,h)
+tapp1_func(eta, W, Y) o hom_precomp_along_func(id_A, Y, h)
 ```
 
 Both sides have type:
@@ -418,25 +418,24 @@ hom_precomp_along_tele_func(F,Z,W,X)
 so that the raw `hom_`-over-opposites full action can fold to it, and then the
 object action of the tele head gives `hom_precomp_along_func`.
 
-Replacing old `hom_precomp_func` should be staged rather than done in one
-large migration. Recommended next phase:
+Replacing the old identity-specialized precomposition heads was staged rather
+than done in one large migration. The recommended phase at that point was:
 
 1. Add the missing `hom_precomp_along_*` projection ladder.
 2. Add Cat-specific folds analogous to the existing postcomp folds, so
    generalized precomposition in `Cat_cat` folds to `comp_cat_con_func`, and its
    arrow action folds to `comp_cat_con_fapp1_func` / `comp_cat_con_transf`.
-3. Keep old `hom_precomp_func` initially as the identity-functor specialization
-   for compatibility.
-4. After checks pass, migrate old `hom_precomp_func` and
-   `hom_precomp_fapp1_*` to either fold into
+3. Keep the old heads initially as the identity-functor specialization for
+   compatibility.
+4. After checks pass, migrate the old heads to either fold into
    `hom_precomp_along_func(id_A,Z,h)`, if the generalized head should be
    canonical, or remain as identity-specialized stable aliases if that proves
    less brittle.
 
-Thus, the current implementation is a good first slice, but not the final
-symmetric architecture. The next implementation should build the full
-`hom_precomp_along_func` projection ladder and only then decide how
-aggressively to retire or migrate the older `hom_precomp_func` heads.
+Thus, that implementation was a good first slice, but not the final symmetric
+architecture. The full `hom_precomp_along_func` projection ladder was built
+first, and the older identity-specialized heads were then retired after a
+focused probe.
 
 ### Implementation Result
 
@@ -474,11 +473,19 @@ hom_precomp_along_fapp1_fapp0(F,Z,h,G,H,eta)
   -> comp_cat_con_transf(F[h],G,H,eta)
 ```
 
-The old `hom_precomp_func` and `hom_precomp_fapp1_*` heads remain in place for
-now as the identity-specialized compatibility surface. The next migration step
-is to decide, by focused probe, whether old `hom_precomp_func` should fold into
-the generalized `hom_precomp_along_func(id_A,Z,h)` form or remain a stable
-specialization.
+Follow-up probing chose the generalized head as canonical. The old
+identity-specialized heads were removed from `emdash3_2.lp`; ordinary
+represented-object precomposition is now expressed as:
+
+```text
+hom_precomp_along_func(id_A,Z,h)
+hom_precomp_along_fapp1_func(id_A,Z,h,g,k)
+hom_precomp_along_fapp1_fapp0(id_A,Z,h,g,k,alpha)
+```
+
+The internal-hom component, representable transport component, and strict
+pre/right naturality and functoriality RHSs now use this identity-specialized
+generalized form directly.
 
 Probe note: a standalone assertion equating the raw full
 `fapp1_func(hom_(Op(B),Op(A),Op(F),Z),X,W)` with

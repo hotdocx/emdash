@@ -84,7 +84,7 @@ assert [A : Cat] (x y z : τ (Obj A))
   @fapp0
     (Hom_cat A y z)
     (Hom_cat A x z)
-    (@hom_precomp_func A x y z p)
+    (@hom_precomp_along_func A A (@id_func A) z x y p)
     q
     ≡ @comp_fapp0 A x y z q p;
 
@@ -357,7 +357,7 @@ assert [A B : Cat] (F : τ (Functor B A))
     (@hom_ A B F x)
     b
     (@fapp1_fapp0 (Op_cat A) (@Catd_cat B) (@hom_int A B F) y x p)
-    ≡ @hom_precomp_func A x y (@fapp0 B A F b) p;
+    ≡ @hom_precomp_along_func A A (@id_func A) (@fapp0 B A F b) x y p;
 
 // From emdash3_2.lp:1443.
 assert [X A B : Cat]
@@ -1025,7 +1025,7 @@ assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
     (Hom_cat A W Y)
     (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
     (@tapp1_func A B F G W Y ϵ)
-    (@hom_precomp_func A W X Y h);
+    (@hom_precomp_along_func A A (@id_func A) Y W X h);
 
 assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) (f : τ (Hom A X Y)) (ϵ : τ (Transf F G)) ⊢
@@ -1083,7 +1083,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
     (Hom_cat A W Y)
     (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F Y))
     (@fapp1_func A B F W Y)
-    (@hom_precomp_func A W X Y h);
+    (@hom_precomp_along_func A A (@id_func A) Y W X h);
 
 assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) (f : τ (Hom A X Y)) ⊢
@@ -1187,7 +1187,7 @@ assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     (@Rep_catd Z x)
     z
     (@fapp1_fapp0 (Op_cat Z) (@Catd_cat Z) (@Rep_catd_func Z) y x p)
-    ≡ @hom_precomp_func Z x y z p;
+    ≡ @hom_precomp_along_func Z Z (@id_func Z) z x y p;
 
 // From emdash3_2.lp:4048.
 assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢
