@@ -1022,9 +1022,38 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
   : τ (Functor (Op_cat B) Cat_cat)
 ≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
 
-// Generalized precomposition along a functor, routed through the semantic
-// contravariant representable. For F : A ⊢ B and h : W ->^A X,
-//   hom_precomp_along_func(F,Z,h)[g] = g o F[h].
+/*
+  Generalized precomposition along a functor, routed through the semantic
+  contravariant representable.
+
+  Mathematical notation:
+    hom_precomp_along_tele_func(F,Z,W,X)
+      : Hom_A(W,X) ⊢ (Hom_B(F[X],Z) ⊢ Hom_B(F[W],Z))
+
+    hom_precomp_along_func(F,Z,h)[g] = g o F[h]
+
+    hom_precomp_along_fapp1_func(F,Z,h,g,k)
+      : Hom(g,k) ⊢ Hom(g o F[h], k o F[h])
+
+  This is the generalized counterpart of `hom_precomp_func`: the
+  precomposed arrow is not an arrow h of the target category B itself, but the
+  image F[h] of an arrow h in the source category A.
+*/
+symbol hom_precomp_along_tele_func [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A W X)
+      (Functor_cat
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z)));
+
+rule @fapp1_func (Op_cat $A) Cat_cat
+      (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) $Z)
+      $X
+      $W
+  ↪ @hom_precomp_along_tele_func $A $B $F $Z $W $X;
+
 symbol hom_precomp_along_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1032,6 +1061,9 @@ symbol hom_precomp_along_func [A B : Cat]
   : τ (Functor
       (Hom_cat B (@fapp0 A B F X) Z)
       (Hom_cat B (@fapp0 A B F W) Z));
+
+rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
+  ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
 rule @fapp1_fapp0 (Op_cat $A) Cat_cat
       (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) $Z)
@@ -1048,6 +1080,62 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
       $Z
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h);
+
+symbol hom_precomp_along_fapp1_func [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  [g k : τ (Hom B (@fapp0 A B F X) Z)]
+  : τ (Functor
+      (Hom_cat (Hom_cat B (@fapp0 A B F X) Z) g k)
+      (Hom_cat
+        (Hom_cat B (@fapp0 A B F W) Z)
+        (@comp_fapp0
+          B
+          (@fapp0 A B F W)
+          (@fapp0 A B F X)
+          Z
+          g
+          (@fapp1_fapp0 A B F W X h))
+        (@comp_fapp0
+          B
+          (@fapp0 A B F W)
+          (@fapp0 A B F X)
+          Z
+          k
+          (@fapp1_fapp0 A B F W X h))));
+
+symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  [g k : τ (Hom B (@fapp0 A B F X) Z)]
+  (alpha : τ (Hom (Hom_cat B (@fapp0 A B F X) Z) g k))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F W) Z)
+      (@comp_fapp0
+        B
+        (@fapp0 A B F W)
+        (@fapp0 A B F X)
+        Z
+        g
+        (@fapp1_fapp0 A B F W X h))
+      (@comp_fapp0
+        B
+        (@fapp0 A B F W)
+        (@fapp0 A B F X)
+        Z
+        k
+        (@fapp1_fapp0 A B F W X h)));
+
+rule @fapp1_func _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k
+  ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
+
+rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
+  ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
+
+rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
+  ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
 // Internalized hom classifier.
 //
@@ -1630,6 +1718,32 @@ rule @tapp1_fapp0
       (@comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta)
       $alpha
   ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
+
+rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
+  ↪ @comp_cat_con_func
+      (@fapp0 Cat_cat Cat_cat $F $W)
+      (@fapp0 Cat_cat Cat_cat $F $X)
+      $Z
+      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h);
+
+rule @hom_precomp_along_fapp1_func Cat_cat Cat_cat $F $Z $W $X $h $G $H
+  ↪ @comp_cat_con_fapp1_func
+      (@fapp0 Cat_cat Cat_cat $F $W)
+      (@fapp0 Cat_cat Cat_cat $F $X)
+      $Z
+      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
+      $G
+      $H;
+
+rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
+  ↪ @comp_cat_con_transf
+      (@fapp0 Cat_cat Cat_cat $F $W)
+      (@fapp0 Cat_cat Cat_cat $F $X)
+      $Z
+      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
+      $G
+      $H
+      $eta;
 
 rule @hom_precomp_fapp1_func Cat_cat $X $Y $Z $F $G $H
   ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;

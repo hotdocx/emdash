@@ -370,3 +370,120 @@ regression. It uses `hom_postcomp_func(...) o tapp1_func(...)` rather than the
 old pointwise `fapp1_fapp0 postcomp_g beta` spelling, because the latter now
 reduces through the specialized hom-postcomposition projection ladder before
 generic capped naturality can match.
+
+## Implementation Notes 2026-06-15
+
+The generalized precomposition head still needs the same projection ladder as
+the postcomposition head. Right now it has the object action:
+
+```text
+hom_precomp_along_func(F,Z,h)[g] = g o F[h]
+```
+
+but it does not yet have the arrow-action analogue:
+
+```text
+hom_precomp_along_func(F,Z,h)[alpha]
+  : Hom(g,k) -> Hom(g o F[h], k o F[h])
+```
+
+So it should get projection heads parallel to `hom_postcomp_func`:
+
+```text
+hom_precomp_along_fapp1_func(F,Z,h,g,k)
+hom_precomp_along_fapp1_fapp0(F,Z,h,g,k,alpha)
+```
+
+with rules:
+
+```text
+fapp1_func(hom_precomp_along_func(F,Z,h), g, k)
+  -> hom_precomp_along_fapp1_func(...)
+
+fapp0(hom_precomp_along_fapp1_func(...), alpha)
+  -> hom_precomp_along_fapp1_fapp0(...)
+
+fapp1_fapp0(hom_precomp_along_func(F,Z,h), g, k, alpha)
+  -> hom_precomp_along_fapp1_fapp0(...)
+```
+
+It should also get the higher tele projection, fully parallel to
+`hom_postcomp_tele_func`:
+
+```text
+hom_precomp_along_tele_func(F,Z,W,X)
+  : Hom_A(W,X) -> Functor(Hom_B(F[X],Z), Hom_B(F[W],Z))
+```
+
+so that the raw `hom_`-over-opposites full action can fold to it, and then the
+object action of the tele head gives `hom_precomp_along_func`.
+
+Replacing old `hom_precomp_func` should be staged rather than done in one
+large migration. Recommended next phase:
+
+1. Add the missing `hom_precomp_along_*` projection ladder.
+2. Add Cat-specific folds analogous to the existing postcomp folds, so
+   generalized precomposition in `Cat_cat` folds to `comp_cat_con_func`, and its
+   arrow action folds to `comp_cat_con_fapp1_func` / `comp_cat_con_transf`.
+3. Keep old `hom_precomp_func` initially as the identity-functor specialization
+   for compatibility.
+4. After checks pass, migrate old `hom_precomp_func` and
+   `hom_precomp_fapp1_*` to either fold into
+   `hom_precomp_along_func(id_A,Z,h)`, if the generalized head should be
+   canonical, or remain as identity-specialized stable aliases if that proves
+   less brittle.
+
+Thus, the current implementation is a good first slice, but not the final
+symmetric architecture. The next implementation should build the full
+`hom_precomp_along_func` projection ladder and only then decide how
+aggressively to retire or migrate the older `hom_precomp_func` heads.
+
+### Implementation Result
+
+The generalized precomposition ladder has now been added in `emdash3_2.lp`:
+
+```text
+hom_precomp_along_tele_func(F,Z,W,X)
+hom_precomp_along_func(F,Z,h)
+hom_precomp_along_fapp1_func(F,Z,h,g,k)
+hom_precomp_along_fapp1_fapp0(F,Z,h,g,k,alpha)
+```
+
+The raw contravariant representable owner folds at both the full and capped
+levels:
+
+```text
+fapp1_func(hom_(Op(B),Op(A),Op(F),Z), X, W)
+  -> hom_precomp_along_tele_func(F,Z,W,X)
+
+fapp1_fapp0(hom_(Op(B),Op(A),Op(F),Z), X, W, h)
+  -> hom_precomp_along_func(F,Z,h)
+```
+
+The Cat-valued specialization now folds generalized precomposition along
+`F[h]` to the existing `comp_cat_con_*` heads:
+
+```text
+hom_precomp_along_func(F,Z,h)
+  -> comp_cat_con_func(F[h])
+
+hom_precomp_along_fapp1_func(F,Z,h,G,H)
+  -> comp_cat_con_fapp1_func(F[h],G,H)
+
+hom_precomp_along_fapp1_fapp0(F,Z,h,G,H,eta)
+  -> comp_cat_con_transf(F[h],G,H,eta)
+```
+
+The old `hom_precomp_func` and `hom_precomp_fapp1_*` heads remain in place for
+now as the identity-specialized compatibility surface. The next migration step
+is to decide, by focused probe, whether old `hom_precomp_func` should fold into
+the generalized `hom_precomp_along_func(id_A,Z,h)` form or remain a stable
+specialization.
+
+Probe note: a standalone assertion equating the raw full
+`fapp1_func(hom_(Op(B),Op(A),Op(F),Z),X,W)` with
+`hom_precomp_along_tele_func(F,Z,W,X)` was unnecessarily brittle because the
+assertion forced type conversion across unreduced `Op_cat` endpoints. The rule
+itself typechecks, and the diagnostics assert the downstream stable behavior:
+tele object projection, capped raw fold, full arrow-action projection, capped
+arrow-action projection, and Cat-valued folds.
