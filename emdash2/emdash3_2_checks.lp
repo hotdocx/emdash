@@ -289,6 +289,52 @@ assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat)
       K
       eta;
 
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
+  (L : τ (Functor X Y)) ⊢
+  @hom_postcomp_func Cat_cat Cat_cat E W X Y L
+    ≡ @comp_cat_cov_func
+        W
+        (@fapp0 Cat_cat Cat_cat E X)
+        (@fapp0 Cat_cat Cat_cat E Y)
+        (@fapp1_fapp0 Cat_cat Cat_cat E X Y L);
+
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
+  (L : τ (Functor X Y))
+  (G K : τ (Functor W (@fapp0 Cat_cat Cat_cat E X))) ⊢
+  @fapp1_func
+    (Functor_cat W (@fapp0 Cat_cat Cat_cat E X))
+    (Functor_cat W (@fapp0 Cat_cat Cat_cat E Y))
+    (@hom_postcomp_func Cat_cat Cat_cat E W X Y L)
+    G
+    K
+  ≡ @comp_cat_cov_fapp1_func
+      W
+      (@fapp0 Cat_cat Cat_cat E X)
+      (@fapp0 Cat_cat Cat_cat E Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat E X Y L)
+      G
+      K;
+
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
+  (L : τ (Functor X Y))
+  (G K : τ (Functor W (@fapp0 Cat_cat Cat_cat E X)))
+  (eta : τ (Transf G K)) ⊢
+  @fapp1_fapp0
+    (Functor_cat W (@fapp0 Cat_cat Cat_cat E X))
+    (Functor_cat W (@fapp0 Cat_cat Cat_cat E Y))
+    (@hom_postcomp_func Cat_cat Cat_cat E W X Y L)
+    G
+    K
+    eta
+  ≡ @comp_cat_cov_transf
+      W
+      (@fapp0 Cat_cat Cat_cat E X)
+      (@fapp0 Cat_cat Cat_cat E Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat E X Y L)
+      G
+      K
+      eta;
+
 // From emdash3_2.lp:994.
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
@@ -567,6 +613,12 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
       (@fapp0 X Y H j)
       (@tapp1_fapp0 X Y F H i j eta p);
 
+assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F : τ (Functor X Y)) ⊢
+  @comp_cat_cov_transf X Y Z G F F (@id (Functor_cat X Y) F)
+    ≡ @id
+        (Functor_cat X Z)
+        (@comp_cat_fapp0 X Y Z G F);
+
 // From emdash3_2.lp:1834.
 assert [X Y Z : Cat] (G H : τ (Functor Y Z))
   (eta : τ (Transf G H)) (F : τ (Functor X Y)) ⊢
@@ -673,6 +725,12 @@ assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
       (@fapp0 X Y F j)
       eta
       (@fapp1_fapp0 X Y F i j p);
+
+assert [X Y Z : Cat] (F : τ (Functor X Y)) (G : τ (Functor Y Z)) ⊢
+  @comp_cat_con_transf X Y Z F G G (@id (Functor_cat Y Z) G)
+    ≡ @id
+        (Functor_cat X Z)
+        (@comp_cat_fapp0 X Y Z G F);
 
 // From emdash3_2.lp:2019.
 assert [X A B : Cat]

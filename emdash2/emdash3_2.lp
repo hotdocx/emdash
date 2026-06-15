@@ -978,8 +978,12 @@ rule @hom_postcomp_fapp1_fapp0
 rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
   ↪ @comp_cat_cov_func_func $X $Y $Z;
 
-rule @hom_postcomp_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G
-  ↪ @comp_cat_cov_func $X $Y $Z $G;
+rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
+  ↪ @comp_cat_cov_func
+      $W
+      (@fapp0 Cat_cat Cat_cat $E $X)
+      (@fapp0 Cat_cat Cat_cat $E $Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f);
 
 // Contravariant represented-object classifier.
 //
@@ -1526,11 +1530,24 @@ symbol comp_cat_cov_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z G H));
 
-rule @hom_postcomp_fapp1_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G $F $H
-  ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
+rule @hom_postcomp_fapp1_func Cat_cat Cat_cat $E $W $X $Y $f $G $H
+  ↪ @comp_cat_cov_fapp1_func
+      $W
+      (@fapp0 Cat_cat Cat_cat $E $X)
+      (@fapp0 Cat_cat Cat_cat $E $Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
+      $G
+      $H;
 
-rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z $G $F $H $eta
-  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
+rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
+  ↪ @comp_cat_cov_transf
+      $W
+      (@fapp0 Cat_cat Cat_cat $E $X)
+      (@fapp0 Cat_cat Cat_cat $E $Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
+      $G
+      $H
+      $eta;
 
 rule @fapp1_func _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H
   ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
@@ -1596,6 +1613,9 @@ rule @tapp1_fapp0
       (@fapp0 $X $Y $F $i)
       (@fapp0 $X $Y $H $j)
       (@tapp1_fapp0 $X $Y $F $H $i $j $eta $p);
+
+rule @comp_cat_cov_transf $X $Y $Z $G $F $F (@id _ $F)
+  ↪ @id (Functor_cat $X $Z) (@comp_cat_fapp0 $X $Y $Z $G $F);
 
 /*
   Hom-action of postcomposition as a functor in the postcomposing functor.
@@ -1841,6 +1861,9 @@ rule @tapp1_fapp0
       (@fapp0 $X $Y $F $j)
       $eta
       (@fapp1_fapp0 $X $Y $F $i $j $p);
+
+rule @comp_cat_con_transf $X $Y $Z $F $G $G (@id _ $G)
+  ↪ @id (Functor_cat $X $Z) (@comp_cat_fapp0 $X $Y $Z $G $F);
 
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;

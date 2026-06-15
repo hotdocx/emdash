@@ -614,3 +614,44 @@ These must reduce to the identity at the accumulated 1-cell. The diagnostic
 that exposed this was the PathOut transitivity computation: the composite first
 normalized to a Sigma pair whose fibre component was
 `hom_postcomp_fapp1_fapp0(id_Z, q, p, p, id_p)` instead of `id_(q o p)`.
+
+### Generalized `Cat_cat` Postcomposition Exits
+
+The first implementation kept the semantic postcomposition exits too narrow:
+
+```text
+hom_postcomp_fapp1_func(Cat,Cat,id_Cat, ...)
+hom_postcomp_fapp1_fapp0(Cat,Cat,id_Cat, ...)
+```
+
+These are only the special case where the varying endpoint functor is the
+identity endofunctor on `Cat_cat`. The intended generalized exits parallel the
+already-general precomposition exits:
+
+```text
+hom_postcomp_func(Cat,Cat,E,W,X,Y,f)
+  -> comp_cat_cov_func(W, E[X], E[Y], E[f])
+
+hom_postcomp_fapp1_func(Cat,Cat,E,W,X,Y,f,G,H)
+  -> comp_cat_cov_fapp1_func(W, E[X], E[Y], E[f], G, H)
+
+hom_postcomp_fapp1_fapp0(Cat,Cat,E,W,X,Y,f,G,H,eta)
+  -> comp_cat_cov_transf(W, E[X], E[Y], E[f], G, H, eta)
+```
+
+This generalization should replace the identity-only `hom_postcomp_func`
+special case rather than coexist with it.
+
+The confluence-sensitive overlap is not primarily the opposite bridge:
+`hom_postcomp_* (Op(B), Op(A), Op(F), ...)` does not directly overlap
+`Cat_cat Cat_cat E` because `Op_cat Cat_cat` is not currently reduced to
+`Cat_cat`. The real overlap is with identity-on-higher-arrow rules. To make the
+semantic exits join, add the semantic identity reductions:
+
+```text
+comp_cat_cov_transf(G,F,F,id_F) -> id_(G o F)
+comp_cat_con_transf(F,G,G,id_G) -> id_(G o F)
+```
+
+Focused probing of these generalized exits plus the semantic identity rules
+typechecked and preserved the diagnostic suite.
