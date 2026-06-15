@@ -1079,6 +1079,53 @@ rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
+// Opposite-specialized postcomposition is canonicalized to generalized
+// precomposition. This makes the generic postcomposition route join the
+// contravariant `hom_`-over-opposites route at the stable projection heads.
+rule @hom_postcomp_tele_func
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+  ↪ @hom_precomp_along_tele_func $A $B $F $Z $W $X;
+
+rule @hom_postcomp_func
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+      $h
+  ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
+
+rule @hom_postcomp_fapp1_func
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+      $h
+      $g
+      $k
+  ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
+
+rule @hom_postcomp_fapp1_fapp0
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+      $h
+      $g
+      $k
+      $alpha
+  ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
+
 // Internalized hom classifier.
 //
 // Surface/formula:

@@ -494,3 +494,64 @@ assertion forced type conversion across unreduced `Op_cat` endpoints. The rule
 itself typechecks, and the diagnostics assert the downstream stable behavior:
 tele object projection, capped raw fold, full arrow-action projection, capped
 arrow-action projection, and Cat-valued folds.
+
+### Opposite-Postcomp Bridge Decision
+
+The `hom_precomp_along_*` ladder intentionally duplicates the postcomposition
+projection/action story at the variance boundary. We should not wait until final
+`comp_fapp0` projection for opposite-specialized postcomposition to meet
+precomposition: the full functor-level owners matter for later strict
+naturality, functoriality, and higher projection rules.
+
+The canonical orientation should be:
+
+```text
+hom_postcomp_* over opposites  ->  hom_precomp_along_*
+```
+
+not the symmetric inverse. The inverse would reintroduce two canonical normal
+forms and create unnecessary overlap/cycle risk. The directed bridge makes the
+general postcomposition route join the specialized contravariant route.
+
+The bridge rules to probe and implement are:
+
+```text
+hom_postcomp_tele_func(Op(B), Op(A), Op(F), Z, X, W)
+  -> hom_precomp_along_tele_func(F,Z,W,X)
+
+hom_postcomp_func(Op(B), Op(A), Op(F), Z, X, W, h)
+  -> hom_precomp_along_func(F,Z,W,X,h)
+
+hom_postcomp_fapp1_func(Op(B), Op(A), Op(F), Z, X, W, h, g, k)
+  -> hom_precomp_along_fapp1_func(F,Z,W,X,h,g,k)
+
+hom_postcomp_fapp1_fapp0(Op(B), Op(A), Op(F), Z, X, W, h, g, k, alpha)
+  -> hom_precomp_along_fapp1_fapp0(F,Z,W,X,h,g,k,alpha)
+```
+
+These rules do not make `hom_con` primitive. They only ensure that when the
+existing `hom_` owner is seen through opposites and already projected into a
+postcomposition stable head, it normalizes back to the contravariant
+`hom_precomp_along_*` stable head rather than surviving as a second normal
+form.
+
+Implementation result: the four directed bridge rules were added to
+`emdash3_2.lp`. Focused diagnostics were added at the projected surfaces:
+
+```text
+fapp0(hom_postcomp_tele_func(Op(B),Op(A),Op(F),Z,X,W), h)
+  -> hom_precomp_along_func(F,Z,W,X,h)
+
+fapp0(hom_postcomp_func(Op(B),Op(A),Op(F),Z,X,W,h), g)
+  -> g o F[h]
+
+fapp0(hom_postcomp_fapp1_func(Op(B),Op(A),Op(F),Z,X,W,h,g,k), alpha)
+  -> hom_precomp_along_fapp1_fapp0(F,Z,W,X,h,g,k,alpha)
+```
+
+Direct assertions equating the unreduced opposite `hom_postcomp_*` functor
+heads with the corresponding `hom_precomp_along_*` heads were deliberately not
+used as diagnostics: they ask Lambdapi to solve brittle type conversion across
+`Op_cat` endpoints before the projected computation has a chance to expose the
+canonical stable head. The rules themselves pass subject reduction; the
+projected assertions are the robust regression surface.

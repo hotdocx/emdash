@@ -140,6 +140,61 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
     alpha
   ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
 
+// Opposite-specialized postcomposition bridges to precomposition-along after
+// projection. Direct head equality over unreduced opposites is intentionally
+// not the diagnostic surface.
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x)) ⊢
+  fapp0
+    (@hom_postcomp_tele_func
+      (Op_cat B)
+      (Op_cat A)
+      (@Op_func A B F)
+      z
+      x
+      w)
+    h
+  ≡ @hom_precomp_along_func A B F z w x h;
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x))
+  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
+  fapp0
+    (@hom_postcomp_func
+      (Op_cat B)
+      (Op_cat A)
+      (@Op_func A B F)
+      z
+      x
+      w
+      h)
+    g
+  ≡ @comp_fapp0
+      B
+      (@fapp0 A B F w)
+      (@fapp0 A B F x)
+      z
+      g
+      (@fapp1_fapp0 A B F w x h);
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x))
+  (g k : τ (Hom B (@fapp0 A B F x) z))
+  (alpha : τ (Hom (Hom_cat B (@fapp0 A B F x) z) g k)) ⊢
+  fapp0
+    (@hom_postcomp_fapp1_func
+      (Op_cat B)
+      (Op_cat A)
+      (@Op_func A B F)
+      z
+      x
+      w
+      h
+      g
+      k)
+    alpha
+  ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
+
 assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat)
   (H : τ (Functor W X)) ⊢
   @hom_precomp_along_func Cat_cat Cat_cat F Z W X H
