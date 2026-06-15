@@ -694,3 +694,131 @@ Focused probing showed that the generalized postcomp tele rule, the minimal
 typecheck and preserve the diagnostic suite. Higher-arrow action for
 `comp_cat_con_func_func` can be considered later if a concrete computation
 needs it; the tele fold only needs the object action above.
+
+### Cat-Specialized Semantic Heads And Tele Higher Action
+
+The Cat-specialized heads are not all equally forced by mathematics. In
+principle, some rules currently attached to heads such as
+`comp_cat_cov_func` or `comp_cat_cov_fapp1_func` could be written directly on
+long Cat-specialized `hom_postcomp_*` left-hand sides. The first heads that are
+strongly justified by extra exposed structure are:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+```
+
+Their results are transfors in `Cat_cat`, so they support the additional
+transfor projections:
+
+```text
+tapp0_fapp0(...)
+tapp1_func(...)
+tapp1_fapp0(...)
+```
+
+Those projections do not make sense on a completely generic
+`hom_postcomp_fapp1_fapp0` or `hom_precomp_along_fapp1_fapp0`, whose result is
+only an arrow in an arbitrary hom category. They could be attached directly to
+Cat-specialized hom-action patterns, but the patterns would be long and brittle.
+The practical convention is therefore:
+
+```text
+Cat-specialized semantic heads package extra structure exposed only when the
+ambient category is Cat_cat.
+```
+
+The parent Cat-specialized heads remain useful as a coherent projection ladder
+and readable normal form, even if the strongest theoretical need starts at the
+transfor-producing level.
+
+For the tele layer, the remaining uniformity gap is the higher action of:
+
+```text
+hom_postcomp_tele_func(F,W,X,Y)
+```
+
+Add stable projection heads:
+
+```text
+hom_postcomp_tele_fapp1_func(F,W,X,Y,f,g)
+hom_postcomp_tele_fapp1_fapp0(F,W,X,Y,f,g,alpha)
+```
+
+with projection rules:
+
+```text
+fapp1_func(hom_postcomp_tele_func(F,W,X,Y), f, g)
+  -> hom_postcomp_tele_fapp1_func(F,W,X,Y,f,g)
+
+fapp0(hom_postcomp_tele_fapp1_func(F,W,X,Y,f,g), alpha)
+  -> hom_postcomp_tele_fapp1_fapp0(F,W,X,Y,f,g,alpha)
+
+fapp1_fapp0(hom_postcomp_tele_func(F,W,X,Y), f, g, alpha)
+  -> hom_postcomp_tele_fapp1_fapp0(F,W,X,Y,f,g,alpha)
+```
+
+The identity-Cat specialization should join the existing object-level tele
+fold:
+
+```text
+hom_postcomp_tele_func(Cat,Cat,id_Cat,X,Y,Z)
+  -> comp_cat_cov_func_func(X,Y,Z)
+```
+
+so its higher action should fold to:
+
+```text
+hom_postcomp_tele_fapp1_func(Cat,Cat,id_Cat,X,Y,Z,G,H)
+  -> comp_cat_cov_func_func_fapp1_func(X,Y,Z,G,H)
+
+hom_postcomp_tele_fapp1_fapp0(Cat,Cat,id_Cat,X,Y,Z,G,H,eta)
+  -> comp_cat_cov_func_func_transf(X,Y,Z,G,H,eta)
+```
+
+For arbitrary `E : Cat -> Cat`, the object-level tele head now folds through a
+composite:
+
+```text
+hom_postcomp_tele_func(Cat,Cat,E,W,X,Y)
+  -> comp_cat_cov_func_func(W,E[X],E[Y]) o E[X,Y]
+```
+
+so the higher action has a confluence-sensitive overlap with the generic
+`fapp1_func` / `fapp1_fapp0` rules for `comp_cat_fapp0`. Focused probing chose
+to install explicit arbitrary-`E` Cat folds oriented through that same composite
+route:
+
+```text
+hom_postcomp_tele_fapp1_func(Cat,Cat,E,W,X,Y,L,M)
+  -> fapp1_func(comp_cat_cov_func_func(W,E[X],E[Y]) o E[X,Y], L, M)
+
+hom_postcomp_tele_fapp1_fapp0(Cat,Cat,E,W,X,Y,L,M,alpha)
+  -> fapp1_fapp0(comp_cat_cov_func_func(W,E[X],E[Y]) o E[X,Y], L, M, alpha)
+```
+
+The semantic content of the capped arbitrary-`E` case is postcomposition by the
+transfor `E[alpha]`, i.e. a `comp_cat_cov_func_func_transf` whose transfor
+argument is the capped arrow action of `fapp1_func(E,X,Y)` on `alpha`. The
+implemented diagnostics check that this semantic normal form is reached:
+
+```text
+hom_postcomp_tele_fapp1_fapp0(Cat,Cat,E,W,X,Y,L,M,alpha)
+  -> comp_cat_cov_func_func_transf(W,E[X],E[Y],E[L],E[M],E[alpha])
+```
+
+where:
+
+```text
+E[alpha] = fapp1_fapp0(fapp1_func(E,X,Y), L, M, alpha)
+```
+
+The identity-Cat instance then computes as a consequence:
+
+```text
+hom_postcomp_tele_fapp1_func(Cat,Cat,id_Cat,W,X,Y,G,H)
+  -> comp_cat_cov_func_func_fapp1_func(W,X,Y,G,H)
+
+hom_postcomp_tele_fapp1_fapp0(Cat,Cat,id_Cat,W,X,Y,G,H,eta)
+  -> comp_cat_cov_func_func_transf(W,X,Y,G,H,eta)
+```

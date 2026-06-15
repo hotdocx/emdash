@@ -880,6 +880,9 @@ rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
     hom_postcomp_fapp1_func(F,W,X,Y,f,g,h)
       : Hom(g,h) ⊢ Hom(F[f] ∘ g, F[f] ∘ h)
 
+    hom_postcomp_tele_fapp1_func(F,W,X,Y,f,g)
+      : Hom(f,g) ⊢ Hom(hom_postcomp_func(f), hom_postcomp_func(g))
+
   Faithful surface syntax:
     Hom_A(W,F[-])[f](g)
 
@@ -922,6 +925,40 @@ rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
       (@fapp0 $B $A $F $Y)
       (@fapp1_fapp0 $B $A $F $X $Y $f)
       $g;
+
+symbol hom_postcomp_tele_fapp1_func [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  [f g : τ (Hom B X Y)]
+  : τ (Functor
+      (Hom_cat (Hom_cat B X Y) f g)
+      (Hom_cat
+        (Functor_cat
+          (Hom_cat A W (@fapp0 B A F X))
+          (Hom_cat A W (@fapp0 B A F Y)))
+        (@hom_postcomp_func A B F W X Y f)
+        (@hom_postcomp_func A B F W X Y g)));
+
+symbol hom_postcomp_tele_fapp1_fapp0 [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  [f g : τ (Hom B X Y)]
+  (alpha : τ (Hom (Hom_cat B X Y) f g))
+  : τ (Hom
+      (Functor_cat
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y)))
+      (@hom_postcomp_func A B F W X Y f)
+      (@hom_postcomp_func A B F W X Y g));
+
+rule @fapp1_func _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g
+  ↪ @hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g;
+
+rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
+  ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
+
+rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
+  ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
 symbol hom_postcomp_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
@@ -1702,6 +1739,51 @@ rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
 
 rule @fapp1_fapp0 _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H $eta
   ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
+
+rule @hom_postcomp_tele_fapp1_func Cat_cat Cat_cat $E $W $X $Y $G $H
+  ↪ @fapp1_func
+      (Functor_cat $X $Y)
+      (Functor_cat
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
+      (@comp_cat_fapp0
+        (Functor_cat $X $Y)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          (@fapp0 Cat_cat Cat_cat $E $Y))
+        (Functor_cat
+          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
+          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
+        (@comp_cat_cov_func_func
+          $W
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          (@fapp0 Cat_cat Cat_cat $E $Y))
+        (@fapp1_func Cat_cat Cat_cat $E $X $Y))
+      $G
+      $H;
+
+rule @hom_postcomp_tele_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $G $H $eta
+  ↪ @fapp1_fapp0
+      (Functor_cat $X $Y)
+      (Functor_cat
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
+      (@comp_cat_fapp0
+        (Functor_cat $X $Y)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          (@fapp0 Cat_cat Cat_cat $E $Y))
+        (Functor_cat
+          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
+          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
+        (@comp_cat_cov_func_func
+          $W
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          (@fapp0 Cat_cat Cat_cat $E $Y))
+        (@fapp1_func Cat_cat Cat_cat $E $X $Y))
+      $G
+      $H
+      $eta;
 
 /*
   Precomposition of transfors by a fixed functor.

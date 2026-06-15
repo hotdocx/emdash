@@ -371,6 +371,84 @@ assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
       K
       eta;
 
+// Higher action of the tele-level postcomposition stable head.
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (f g : τ (Hom B X Y)) ⊢
+  @fapp1_func
+    (Hom_cat B X Y)
+    (Functor_cat
+      (Hom_cat A W (@fapp0 B A F X))
+      (Hom_cat A W (@fapp0 B A F Y)))
+    (@hom_postcomp_tele_func A B F W X Y)
+    f
+    g
+  ≡ @hom_postcomp_tele_fapp1_func A B F W X Y f g;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (f g : τ (Hom B X Y))
+  (alpha : τ (Hom (Hom_cat B X Y) f g)) ⊢
+  @fapp1_fapp0
+    (Hom_cat B X Y)
+    (Functor_cat
+      (Hom_cat A W (@fapp0 B A F X))
+      (Hom_cat A W (@fapp0 B A F Y)))
+    (@hom_postcomp_tele_func A B F W X Y)
+    f
+    g
+    alpha
+  ≡ @hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g alpha;
+
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
+  (G H : τ (Functor X Y)) ⊢
+  @hom_postcomp_tele_fapp1_func Cat_cat Cat_cat E W X Y G H
+  ≡ @fapp1_func
+      (Functor_cat X Y)
+      (Functor_cat
+        (Functor_cat W (@fapp0 Cat_cat Cat_cat E X))
+        (Functor_cat W (@fapp0 Cat_cat Cat_cat E Y)))
+      (@comp_cat_fapp0
+        (Functor_cat X Y)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat E X)
+          (@fapp0 Cat_cat Cat_cat E Y))
+        (Functor_cat
+          (Functor_cat W (@fapp0 Cat_cat Cat_cat E X))
+          (Functor_cat W (@fapp0 Cat_cat Cat_cat E Y)))
+        (@comp_cat_cov_func_func
+          W
+          (@fapp0 Cat_cat Cat_cat E X)
+          (@fapp0 Cat_cat Cat_cat E Y))
+        (@fapp1_func Cat_cat Cat_cat E X Y))
+      G
+      H;
+
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
+  (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
+  @hom_postcomp_tele_fapp1_fapp0 Cat_cat Cat_cat E W X Y G H eta
+  ≡ @comp_cat_cov_func_func_transf
+      W
+      (@fapp0 Cat_cat Cat_cat E X)
+      (@fapp0 Cat_cat Cat_cat E Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat E X Y G)
+      (@fapp1_fapp0 Cat_cat Cat_cat E X Y H)
+      (@fapp1_fapp0
+        (Functor_cat X Y)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat E X)
+          (@fapp0 Cat_cat Cat_cat E Y))
+        (@fapp1_func Cat_cat Cat_cat E X Y)
+        G
+        H
+        eta);
+
+assert (W X Y : Cat) (G H : τ (Functor X Y)) ⊢
+  @hom_postcomp_tele_fapp1_func Cat_cat Cat_cat (@id_func Cat_cat) W X Y G H
+    ≡ @comp_cat_cov_func_func_fapp1_func W X Y G H;
+
+assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
+  @hom_postcomp_tele_fapp1_fapp0 Cat_cat Cat_cat (@id_func Cat_cat) W X Y G H eta
+    ≡ @comp_cat_cov_func_func_transf W X Y G H eta;
+
 // From emdash3_2.lp:994.
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
