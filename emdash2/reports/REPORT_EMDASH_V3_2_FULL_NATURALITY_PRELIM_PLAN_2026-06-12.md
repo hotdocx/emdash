@@ -655,3 +655,42 @@ comp_cat_con_transf(F,G,G,id_G) -> id_(G o F)
 
 Focused probing of these generalized exits plus the semantic identity rules
 typechecked and preserved the diagnostic suite.
+
+### Generalized Tele-Level `Cat_cat` Exits
+
+The remaining identity-only tele rule:
+
+```text
+hom_postcomp_tele_func(Cat,Cat,id_Cat,X,Y,Z)
+  -> comp_cat_cov_func_func(X,Y,Z)
+```
+
+is the special case of a general semantic fold. For an arbitrary endofunctor
+`E : Cat -> Cat`, the tele-level postcomposition action factors through the
+arrow action of `E`:
+
+```text
+hom_postcomp_tele_func(Cat,Cat,E,W,X,Y)
+  -> comp_cat_cov_func_func(W,E[X],E[Y]) o E[X,Y]
+```
+
+where `E[X,Y]` is `fapp1_func(E,X,Y)`.
+
+The matching precomposition tele-level fold needs the object-level package:
+
+```text
+comp_cat_con_func_func(X,Y,Z)[F] = comp_cat_con_func(F)
+```
+
+Then the generalized precomposition tele fold is:
+
+```text
+hom_precomp_along_tele_func(Cat,Cat,E,Z,W,X)
+  -> comp_cat_con_func_func(E[W],E[X],Z) o E[W,X]
+```
+
+Focused probing showed that the generalized postcomp tele rule, the minimal
+`comp_cat_con_func_func` package, and the generalized precomp tele rule all
+typecheck and preserve the diagnostic suite. Higher-arrow action for
+`comp_cat_con_func_func` can be considered later if a concrete computation
+needs it; the tele fold only needs the object action above.

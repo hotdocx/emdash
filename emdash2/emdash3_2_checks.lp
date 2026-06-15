@@ -243,6 +243,26 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
     alpha
   ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
 
+assert [X Y Z : Cat] (F : τ (Functor X Y)) ⊢
+  fapp0 (@comp_cat_con_func_func X Y Z) F
+    ≡ @comp_cat_con_func X Y Z F;
+
+assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat) ⊢
+  @hom_precomp_along_tele_func Cat_cat Cat_cat F Z W X
+    ≡ @comp_cat_fapp0
+        (Functor_cat W X)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat F W)
+          (@fapp0 Cat_cat Cat_cat F X))
+        (Functor_cat
+          (Functor_cat (@fapp0 Cat_cat Cat_cat F X) Z)
+          (Functor_cat (@fapp0 Cat_cat Cat_cat F W) Z))
+        (@comp_cat_con_func_func
+          (@fapp0 Cat_cat Cat_cat F W)
+          (@fapp0 Cat_cat Cat_cat F X)
+          Z)
+        (@fapp1_func Cat_cat Cat_cat F W X);
+
 assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat)
   (H : τ (Functor W X)) ⊢
   @hom_precomp_along_func Cat_cat Cat_cat F Z W X H
@@ -288,6 +308,22 @@ assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat)
       G
       K
       eta;
+
+assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat) ⊢
+  @hom_postcomp_tele_func Cat_cat Cat_cat E W X Y
+    ≡ @comp_cat_fapp0
+        (Functor_cat X Y)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat E X)
+          (@fapp0 Cat_cat Cat_cat E Y))
+        (Functor_cat
+          (Functor_cat W (@fapp0 Cat_cat Cat_cat E X))
+          (Functor_cat W (@fapp0 Cat_cat Cat_cat E Y)))
+        (@comp_cat_cov_func_func
+          W
+          (@fapp0 Cat_cat Cat_cat E X)
+          (@fapp0 Cat_cat Cat_cat E Y))
+        (@fapp1_func Cat_cat Cat_cat E X Y);
 
 assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
   (L : τ (Functor X Y)) ⊢

@@ -797,6 +797,19 @@ symbol comp_cat_con_func [X Y Z : Cat]
 rule fapp0 (@comp_cat_con_func $X $Y $Z $F) $G
   ↪ @comp_cat_fapp0 $X $Y $Z $G $F;
 
+// Precomposition packaged as a functor in the precomposing functor.
+//
+// Surface/formula:
+//   comp_cat_con_func_func[X,Y,Z][F] = comp_cat_con_func(F)
+//   : (X ⊢ Y) ⊢ ((Y ⊢ Z) ⊢ (X ⊢ Z)).
+symbol comp_cat_con_func_func [X Y Z : Cat]
+  : τ (Functor
+      (Functor_cat X Y)
+      (Functor_cat (Functor_cat Y Z) (Functor_cat X Z)));
+
+rule fapp0 (@comp_cat_con_func_func $X $Y $Z) $F
+  ↪ @comp_cat_con_func $X $Y $Z $F;
+
 // Internalized pointwise opposite on directed families. This is the packaged
 // functorial version of `Op_catd`; the object-level result remains the
 // canonical normal form.
@@ -975,8 +988,20 @@ rule @hom_postcomp_fapp1_fapp0
         (@fapp1_fapp0 $B $A $F $X $Y $f)
         $g);
 
-rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
-  ↪ @comp_cat_cov_func_func $X $Y $Z;
+rule @hom_postcomp_tele_func Cat_cat Cat_cat $E $W $X $Y
+  ↪ @comp_cat_fapp0
+      (Functor_cat $X $Y)
+      (Functor_cat
+        (@fapp0 Cat_cat Cat_cat $E $X)
+        (@fapp0 Cat_cat Cat_cat $E $Y))
+      (Functor_cat
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
+      (@comp_cat_cov_func_func
+        $W
+        (@fapp0 Cat_cat Cat_cat $E $X)
+        (@fapp0 Cat_cat Cat_cat $E $Y))
+      (@fapp1_func Cat_cat Cat_cat $E $X $Y);
 
 rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
   ↪ @comp_cat_cov_func
@@ -1017,6 +1042,21 @@ symbol hom_precomp_along_tele_func [A B : Cat]
       (Functor_cat
         (Hom_cat B (@fapp0 A B F X) Z)
         (Hom_cat B (@fapp0 A B F W) Z)));
+
+rule @hom_precomp_along_tele_func Cat_cat Cat_cat $E $Z $W $X
+  ↪ @comp_cat_fapp0
+      (Functor_cat $W $X)
+      (Functor_cat
+        (@fapp0 Cat_cat Cat_cat $E $W)
+        (@fapp0 Cat_cat Cat_cat $E $X))
+      (Functor_cat
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+      (@comp_cat_con_func_func
+        (@fapp0 Cat_cat Cat_cat $E $W)
+        (@fapp0 Cat_cat Cat_cat $E $X)
+        $Z)
+      (@fapp1_func Cat_cat Cat_cat $E $W $X);
 
 symbol hom_precomp_along_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
