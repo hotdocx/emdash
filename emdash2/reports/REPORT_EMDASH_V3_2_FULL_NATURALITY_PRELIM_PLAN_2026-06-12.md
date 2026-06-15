@@ -555,3 +555,62 @@ used as diagnostics: they ask Lambdapi to solve brittle type conversion across
 `Op_cat` endpoints before the projected computation has a chance to expose the
 canonical stable head. The rules themselves pass subject reduction; the
 projected assertions are the robust regression surface.
+
+### Direct Opposite-Hom Rule Cleanup
+
+After adding the directed opposite-postcomp bridge, the earlier direct
+opposite-specific raw `hom_` rules should be simplified away. The full rule:
+
+```text
+fapp1_func(hom_(Op(B),Op(A),Op(F),Z), X, W)
+  -> hom_precomp_along_tele_func(F,Z,W,X)
+```
+
+is derivable through the general postcomposition route:
+
+```text
+fapp1_func(hom_(Op(B),Op(A),Op(F),Z), X, W)
+  -> hom_postcomp_tele_func(Op(B),Op(A),Op(F),Z,X,W)
+  -> hom_precomp_along_tele_func(F,Z,W,X)
+```
+
+The capped direct rule is not derivable unless the general capped
+postcomposition fold exists:
+
+```text
+fapp1_fapp0(hom_(A,B,F,W), X, Y, f)
+  -> hom_postcomp_func(A,B,F,W,X,Y,f)
+```
+
+Focused probing showed the correct cleanup sequence:
+
+1. Add the general capped postcomposition fold above.
+2. Remove both direct opposite-specific raw `hom_ -> hom_precomp_along_*`
+   rules.
+3. Keep the directed bridge
+   `hom_postcomp_* over opposites -> hom_precomp_along_*`.
+
+This makes the architecture cleaner:
+
+```text
+hom_ projection -> hom_postcomp_*
+opposite-specialized hom_postcomp_* -> hom_precomp_along_*
+```
+
+rather than having `hom_` sometimes bypass `hom_postcomp_*` directly into
+`hom_precomp_along_*`.
+
+Implementation also needs the identity-on-higher-arrows companions for the
+stable post/precomposition projection heads. Once capped `hom_` action folds to
+`hom_postcomp_func`, generic identity functoriality no longer sees the raw
+`fapp1_fapp0` head; it sees:
+
+```text
+hom_postcomp_fapp1_fapp0(..., g, g, id_g)
+hom_precomp_along_fapp1_fapp0(..., g, g, id_g)
+```
+
+These must reduce to the identity at the accumulated 1-cell. The diagnostic
+that exposed this was the PathOut transitivity computation: the composite first
+normalized to a Sigma pair whose fibre component was
+`hom_postcomp_fapp1_fapp0(id_Z, q, p, p, id_p)` instead of `id_(q o p)`.

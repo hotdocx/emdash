@@ -78,6 +78,30 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
     ≡ @comp_fapp0 A W (fapp0 F X) (fapp0 F Y)
         (fapp0 (@fapp1_func B A F X Y) f) g;
 
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (f : τ (Hom B X Y))
+  (g : τ (Hom A W (@fapp0 B A F X))) ⊢
+  @hom_postcomp_fapp1_fapp0
+    A
+    B
+    F
+    W
+    X
+    Y
+    f
+    g
+    g
+    (@id (Hom_cat A W (@fapp0 B A F X)) g)
+  ≡ @id
+      (Hom_cat A W (@fapp0 B A F Y))
+      (@comp_fapp0
+        A
+        W
+        (@fapp0 B A F X)
+        (@fapp0 B A F Y)
+        (@fapp1_fapp0 B A F X Y f)
+        g);
+
 // From emdash3_2.lp:985.
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
@@ -139,6 +163,30 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
     k
     alpha
   ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x))
+  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
+  @hom_precomp_along_fapp1_fapp0
+    A
+    B
+    F
+    z
+    w
+    x
+    h
+    g
+    g
+    (@id (Hom_cat B (@fapp0 A B F x) z) g)
+  ≡ @id
+      (Hom_cat B (@fapp0 A B F w) z)
+      (@comp_fapp0
+        B
+        (@fapp0 A B F w)
+        (@fapp0 A B F x)
+        z
+        g
+        (@fapp1_fapp0 A B F w x h));
 
 // Opposite-specialized postcomposition bridges to precomposition-along after
 // projection. Direct head equality over unreduced opposites is intentionally

@@ -898,6 +898,9 @@ symbol hom_postcomp_func [A B : Cat]
 rule fapp0 (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f
   ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
 
+rule @fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f
+  ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
+
 rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
   ↪ @comp_fapp0
       $A
@@ -951,6 +954,27 @@ rule fapp0 (@hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h $alpha
   ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
 
+rule @hom_postcomp_fapp1_fapp0
+      $A
+      $B
+      $F
+      $W
+      $X
+      $Y
+      $f
+      $g
+      $g
+      (@id _ $g)
+  ↪ @id
+      (Hom_cat $A $W (@fapp0 $B $A $F $Y))
+      (@comp_fapp0
+        $A
+        $W
+        (@fapp0 $B $A $F $X)
+        (@fapp0 $B $A $F $Y)
+        (@fapp1_fapp0 $B $A $F $X $Y $f)
+        $g);
+
 rule @hom_postcomp_tele_func Cat_cat Cat_cat (@id_func Cat_cat) $X $Y $Z
   ↪ @comp_cat_cov_func_func $X $Y $Z;
 
@@ -990,12 +1014,6 @@ symbol hom_precomp_along_tele_func [A B : Cat]
         (Hom_cat B (@fapp0 A B F X) Z)
         (Hom_cat B (@fapp0 A B F W) Z)));
 
-rule @fapp1_func (Op_cat $A) Cat_cat
-      (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) $Z)
-      $X
-      $W
-  ↪ @hom_precomp_along_tele_func $A $B $F $Z $W $X;
-
 symbol hom_precomp_along_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1005,13 +1023,6 @@ symbol hom_precomp_along_func [A B : Cat]
       (Hom_cat B (@fapp0 A B F W) Z));
 
 rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
-  ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
-
-rule @fapp1_fapp0 (Op_cat $A) Cat_cat
-      (@hom_ (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F) $Z)
-      $X
-      $W
-      $h
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
 rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
@@ -1078,6 +1089,27 @@ rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
 
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
+
+rule @hom_precomp_along_fapp1_fapp0
+      $A
+      $B
+      $F
+      $Z
+      $W
+      $X
+      $h
+      $g
+      $g
+      (@id _ $g)
+  ↪ @id
+      (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
+      (@comp_fapp0
+        $B
+        (@fapp0 $A $B $F $W)
+        (@fapp0 $A $B $F $X)
+        $Z
+        $g
+        (@fapp1_fapp0 $A $B $F $W $X $h));
 
 // Opposite-specialized postcomposition is canonicalized to generalized
 // precomposition. This makes the generic postcomposition route join the
