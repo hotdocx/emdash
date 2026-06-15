@@ -164,13 +164,19 @@ left implicit:
 - pair-telescope/curry prerequisite layers:
   `tapp1_at_transf`, `tapp1_func`, `Const_transf_func`, `Const_transf`,
   `Product_pair_tele_func`, `hom_postcomp_tele_func`, `hom_postcomp_func`,
+  `hom_postcomp_tele_fapp1_func`, `hom_postcomp_tele_fapp1_fapp0`,
   `hom_postcomp_fapp1_func`, `hom_postcomp_fapp1_fapp0`,
-  `hom_precomp_fapp1_func`, `hom_precomp_fapp1_fapp0`,
+  `hom_precomp_along_tele_func`, `hom_precomp_along_func`,
+  `hom_precomp_along_tele_fapp1_func`,
+  `hom_precomp_along_tele_fapp1_fapp0`,
+  `hom_precomp_along_fapp1_func`, `hom_precomp_along_fapp1_fapp0`,
   `comp_cat_cov_fapp1_func`, `comp_cat_cov_transf`,
   `comp_cat_cov_func_func_fapp1_func`, `comp_cat_cov_func_func_transf`,
   `comp_cat_cov_func_func_tapp1_func`,
-  `comp_cat_cov_func_func_tapp1_fapp0`, `comp_cat_con_fapp1_func`, and
-  `comp_cat_con_transf`, giving functor-level off-diagonal transfor components,
+  `comp_cat_cov_func_func_tapp1_fapp0`, `comp_cat_con_func_func`,
+  `comp_cat_con_func_func_fapp1_func`, `comp_cat_con_func_func_transf`,
+  `comp_cat_con_fapp1_func`, and `comp_cat_con_transf`, giving
+  functor-level off-diagonal transfor components,
   the fixed-source transfor projection layer, constant-transfor computation,
   product pair-telescope computation, hom-owned post/precomposition action, and
   Cat-specific component computation for post/precomposition of transfors;
@@ -465,6 +471,38 @@ reassessment is the model: `Product_cat_fapp1_tapp0_func` owns object and
 capped-arrow computation for `G * 1_B`; `Product_mapL_func_func` remains a
 defined functorial readability package; the former `Product_mapL_transf` stable
 bridge has been removed.
+
+### Cat-Specialized Semantic Head SOP
+
+Cat-specialized semantic heads package extra structure exposed only when the
+ambient category is `Cat_cat`.
+
+The generic owner may already express the Cat case as an arrow in a hom
+category. For example, a generic `hom_postcomp_*` or
+`hom_precomp_along_*` head can specialize to `Cat_cat`. The reason to keep a
+separate Cat-specialized head is that the specialized result is then known to be
+a transfor, so additional projections become meaningful:
+
+```text
+tapp0_fapp0(...)
+tapp1_func(...)
+tapp1_fapp0(...)
+```
+
+Do not add a Cat-specialized head merely to rename a generic construction. Add
+or keep it when it gives a stable projection ladder, packages Cat-only transfor
+structure, or avoids long brittle Cat-specialized LHS patterns. When a generic
+owner and a Cat-specialized head coexist, document the orientation and add
+focused diagnostics for the overlap/join. The current model is the
+postcomposition ladder:
+
+```text
+hom_postcomp_fapp1_fapp0(Cat,Cat,E,...)
+  -> comp_cat_cov_transf(...)
+
+hom_postcomp_tele_fapp1_fapp0(Cat,Cat,E,...,alpha)
+  -> comp_cat_cov_func_func_transf(..., E[alpha])
+```
 
 ### Readability Cleanup SOP
 

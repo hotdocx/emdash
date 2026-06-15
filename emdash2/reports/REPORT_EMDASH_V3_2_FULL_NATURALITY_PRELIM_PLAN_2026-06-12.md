@@ -822,3 +822,72 @@ hom_postcomp_tele_fapp1_func(Cat,Cat,id_Cat,W,X,Y,G,H)
 hom_postcomp_tele_fapp1_fapp0(Cat,Cat,id_Cat,W,X,Y,G,H,eta)
   -> comp_cat_cov_func_func_transf(W,X,Y,G,H,eta)
 ```
+
+### Precomposition Tele Higher Action Follow-Up
+
+The contravariant tele head should receive the same higher-action treatment:
+
+```text
+hom_precomp_along_tele_fapp1_func(F,Z,W,X,h,k)
+hom_precomp_along_tele_fapp1_fapp0(F,Z,W,X,h,k,alpha)
+```
+
+For the Cat-specialized arbitrary-`E` case, the existing tele object fold is:
+
+```text
+hom_precomp_along_tele_func(Cat,Cat,E,Z,W,X)
+  -> comp_cat_con_func_func(E[W],E[X],Z) o E[W,X]
+```
+
+Therefore the higher action should join the same composite route:
+
+```text
+hom_precomp_along_tele_fapp1_fapp0(Cat,Cat,E,Z,W,X,L,M,alpha)
+  -> fapp1_fapp0(
+       comp_cat_con_func_func(E[W],E[X],Z) o E[W,X],
+       L,M,alpha)
+```
+
+To expose the semantic normal form, `comp_cat_con_func_func` also needs the
+matching higher-action projection heads:
+
+```text
+comp_cat_con_func_func_fapp1_func(X,Y,Z,F,K)
+comp_cat_con_func_func_transf(X,Y,Z,F,K,alpha)
+```
+
+with object component:
+
+```text
+comp_cat_con_func_func_transf(F,K,alpha)[G]
+  = comp_cat_cov_transf(G,F,K,alpha)
+```
+
+The expected arbitrary-`E` capped tele normal form is then:
+
+```text
+hom_precomp_along_tele_fapp1_fapp0(Cat,Cat,E,Z,W,X,L,M,alpha)
+  -> comp_cat_con_func_func_transf(E[W],E[X],Z,E[L],E[M],E[alpha])
+```
+
+Implementation result: focused probing typechecked this mirror slice and the
+rules were added to `emdash3_2.lp`. The opposite-postcomposition bridge was
+extended too:
+
+```text
+hom_postcomp_tele_fapp1_func(Op(B),Op(A),Op(F),Z,X,W,h,k)
+  -> hom_precomp_along_tele_fapp1_func(F,Z,W,X,h,k)
+
+hom_postcomp_tele_fapp1_fapp0(Op(B),Op(A),Op(F),Z,X,W,h,k,alpha)
+  -> hom_precomp_along_tele_fapp1_fapp0(F,Z,W,X,h,k,alpha)
+```
+
+The diagnostics check generic precomp tele projection, the opposite bridge, the
+`comp_cat_con_func_func` higher-action projection, its object component
+
+```text
+comp_cat_con_func_func_transf(F,K,alpha)[G]
+  -> comp_cat_cov_transf(G,F,K,alpha)
+```
+
+and both arbitrary-`E` and identity-Cat normal forms.

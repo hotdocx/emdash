@@ -78,6 +78,12 @@ flag "print_meta_args" on;
       If the issue is a missing projection rule (for example capped
       `fapp1_fapp0` for a constructor that already has `fapp1_func`), add that
       smaller projection instead of replacing the semantic definition.
+    - Cat-specialized semantic heads package extra structure exposed only when
+      the ambient category is `Cat_cat`. A generic hom-action arrow may have a
+      Cat-specialized transfor normal form where `tapp0_fapp0`, `tapp1_func`,
+      and `tapp1_fapp0` become valid projection surfaces. Keep such heads when
+      they make the projection ladder stable, but document their generic owner
+      and any overlap/join with it.
     - Do not duplicate a semantic body in helper aliases.  Define readable
       aliases through the named semantic constructor so later corrections have
       one source of truth.
@@ -1068,6 +1074,9 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
     hom_precomp_along_fapp1_func(F,Z,h,g,k)
       : Hom(g,k) ⊢ Hom(g o F[h], k o F[h])
 
+    hom_precomp_along_tele_fapp1_func(F,Z,W,X,h,k)
+      : Hom(h,k) ⊢ Hom(hom_precomp_along_func(h), hom_precomp_along_func(k))
+
   When F is the identity functor, this is ordinary represented-object
   precomposition: g maps to g o h.
 */
@@ -1114,6 +1123,40 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
       $Z
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h);
+
+symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  [h k : τ (Hom A W X)]
+  : τ (Functor
+      (Hom_cat (Hom_cat A W X) h k)
+      (Hom_cat
+        (Functor_cat
+          (Hom_cat B (@fapp0 A B F X) Z)
+          (Hom_cat B (@fapp0 A B F W) Z))
+        (@hom_precomp_along_func A B F Z W X h)
+        (@hom_precomp_along_func A B F Z W X k)));
+
+symbol hom_precomp_along_tele_fapp1_fapp0 [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  [h k : τ (Hom A W X)]
+  (alpha : τ (Hom (Hom_cat A W X) h k))
+  : τ (Hom
+      (Functor_cat
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z))
+      (@hom_precomp_along_func A B F Z W X h)
+      (@hom_precomp_along_func A B F Z W X k));
+
+rule @fapp1_func _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k
+  ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
+
+rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
+  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
+
+rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
+  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
 symbol hom_precomp_along_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
@@ -1238,6 +1281,29 @@ rule @hom_postcomp_fapp1_fapp0
       $k
       $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
+
+rule @hom_postcomp_tele_fapp1_func
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+      $h
+      $k
+  ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
+
+rule @hom_postcomp_tele_fapp1_fapp0
+      (Op_cat $B)
+      (Op_cat $A)
+      (@Op_func $A $B $F)
+      $Z
+      $X
+      $W
+      $h
+      $k
+      $alpha
+  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
 // Internalized hom classifier.
 //
@@ -1573,6 +1639,15 @@ rule @tapp1_fapp0 $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p) $_
   ↪ $p;
 
 /*
+  Cat-specialized semantic heads package extra structure exposed only when the
+  ambient category is `Cat_cat`. The generic `hom_postcomp_*` and
+  `hom_precomp_along_*` owners still describe the hom-action, but after
+  specializing to `Cat_cat` the result is a transfor and can expose
+  `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections without long
+  Cat-specialized hom-action patterns.
+*/
+
+/*
   Postcomposition of transfors by a fixed functor.
 
   Mathematical notation:
@@ -1817,6 +1892,41 @@ symbol comp_cat_con_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z H F));
 
+symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
+  [F K : τ (Functor X Y)]
+  : τ (Functor
+      (@Transf_cat X Y F K)
+      (@Transf_cat
+        (Functor_cat Y Z)
+        (Functor_cat X Z)
+        (@comp_cat_con_func X Y Z F)
+        (@comp_cat_con_func X Y Z K)));
+
+symbol comp_cat_con_func_func_transf [X Y Z : Cat]
+  [F K : τ (Functor X Y)]
+  (alpha : τ (Transf F K))
+  : τ (Transf
+      (@comp_cat_con_func X Y Z F)
+      (@comp_cat_con_func X Y Z K));
+
+rule @fapp1_func _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K
+  ↪ @comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K;
+
+rule fapp0 (@comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K) $alpha
+  ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
+
+rule @fapp1_fapp0 _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K $alpha
+  ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $G
+      (@comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha)
+  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $K $alpha;
+
 // Off-diagonal action of `comp_cat_cov_func_func_transf`. This is the
 // horizontal composite `(H alpha) ∘ (eta F)`.
 //
@@ -1911,6 +2021,51 @@ rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
       (@fapp0 Cat_cat Cat_cat $F $X)
       $Z
       (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
+      $G
+      $H
+      $eta;
+
+rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
+  ↪ @fapp1_func
+      (Functor_cat $W $X)
+      (Functor_cat
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+      (@comp_cat_fapp0
+        (Functor_cat $W $X)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+        (@comp_cat_con_func_func
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          $Z)
+        (@fapp1_func Cat_cat Cat_cat $E $W $X))
+      $G
+      $H;
+
+rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H $eta
+  ↪ @fapp1_fapp0
+      (Functor_cat $W $X)
+      (Functor_cat
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+      (@comp_cat_fapp0
+        (Functor_cat $W $X)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+        (@comp_cat_con_func_func
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          $Z)
+        (@fapp1_func Cat_cat Cat_cat $E $W $X))
       $G
       $H
       $eta;

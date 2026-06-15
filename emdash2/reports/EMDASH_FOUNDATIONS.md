@@ -146,6 +146,13 @@ whose objects are transformations from `F` to `G`. A transformation
 ϵ[x] : Hom_B(F[x],G[x])
 ```
 
+Implementation note: some Cat-specialized kernel heads, such as the
+`comp_cat_cov_*` and `comp_cat_con_*` families, package structure that only
+appears once the ambient category is `Cat`. A generic hom-action may already
+express the same Cat case, but the Cat-specialized result is a transfor and
+therefore exposes component and off-diagonal projections such as
+`tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`.
+
 ## 5. Directed Families
 
 A directed family of categories over `K` is a functor:

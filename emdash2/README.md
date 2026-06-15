@@ -76,6 +76,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Use stable heads only for real projection, discrimination, or performance
   boundaries. Good stable heads are often projections from a more internalized
   construction, not substitutes for that construction.
+- Cat-specialized semantic heads package extra structure exposed only when the
+  ambient category is `Cat_cat`. For example, a generic hom-action arrow may
+  have a Cat-specialized presentation as a transfor, where `tapp0_fapp0`,
+  `tapp1_func`, and `tapp1_fapp0` projections become meaningful. Prefer these
+  Cat heads when they keep the projection ladder readable, but document the
+  generic owner and any overlap/join with it.
 - Do not keep a parallel stable-head package for an action already owned by an
   internalized functor. Prefer adjacent stable projection rungs before attaching
   computation, for example
