@@ -433,7 +433,7 @@ unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'
   Mathematical notation:
     F : A ⊢ B                 means F : Functor(A,B)
     F[x]                      = fapp0 F x
-    F₁[X,Y]                   = fapp1_func F : Hom_A(X,Y) ⊢ Hom_B(F[x],F[y])
+    F₁[X,Y]                   = fapp1_func F : Hom_A(X,Y) ⊢ Hom_B(F[X],F[Y])
     F[f]                      = fapp1_fapp0 F f
 */
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
@@ -859,7 +859,7 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
   `hom_int(F)` is the internalized functorial package
   A^op ⊢ (B ⊢ Cat). Its surface reading is:
 
-    W :^n A^op ; 1[W] ⊢ (y :^n B ; 1[y] ⊢ Hom_A(W,y))
+    W :^n A^op ; 1[W] ⊢ (y :^n B ; 1[y] ⊢ Hom_A(W,F[y]))
 
   Design/SOP note:
     Use `hom_int(F)` when the varying endpoint is already functor-shaped.
@@ -3384,6 +3384,7 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
 // old one-family endpoint is the identity-family specialization.
 //
 // Surface/formula:
+//   homd_(FF,x,u,y,v) : Hom_Z(x,y)^op ⊢ Cat
 //   homd_(FF,x,u,y,v)[f : x ->^Z y]
 //     = Hom_{E[y]}(E[f](u), FF[y](v)).
 injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
@@ -3419,7 +3420,7 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
     Obj(Sigma_cat(E))         = Σ (k : Obj K), Obj(E[k])
     Sigma_proj1_func(E)(k,u)  = k
     Sigma_proj1_pullback(R,D) = D pulled back along Sigma_proj1_func(R)
-    Π (k,r) :^n ΣR, D[k]      = Functord_cat(R,D)
+    Π (k,r) :^n Sigma_cat(R), D[k] = Functord_cat(R,D)
     Sigma_func[K][E]          = Sigma_cat(E)
     sigma_map_func(η)(k,u)    = (k, η_k(u))
 */
@@ -3466,9 +3467,13 @@ rule τ (Obj (@Sigma_cat $K $E))
 //   family E is itself hom-shaped, the same Sigma-of-hom pattern becomes the
 //   next simplex layer.
 //
-// Surface/formula:
+// Mathematical reading:
 //   Hom_{Σ E}((x,u),(y,v))
 //     = Σ (p : Hom_K(x,y)), Hom_{E[y]}(E[p](u),v).
+//
+// Kernel normal form:
+//   Hom_{Σ E}((x,u),(y,v))
+//     ↪ Op_cat(Σ (p : Hom_K(x,y)^op), homd_(id_E,x,u,y,v)[p]).
 rule Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)
   ↪ Op_cat
       (@Sigma_cat
@@ -5855,7 +5860,7 @@ rule @fdapp1_int_hom_fapp0
     const_section_func(K,A)(a)        = const(a)
 
     section_pullback_func(F,E)        : Π_B E ⊢ Π_A F^*E
-    section_pullback_func(F,E)(s)(a)  = s(Fa)
+    section_pullback_func(F,E)(s)[a]  = s[F[a]]
 
   The arrow action of `sigma_intro_tapp0_func` is intentionally deferred. It
   should eventually send a fibre arrow α : u ->^(E[k]) v to the corresponding
@@ -6754,7 +6759,8 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
   Sigma homs and Sigma-map action.
 
   Surface/formula:
-    Hom_{Σ E}((x,u),(y,v)) = Σ (f : Hom_Z(x,y)), homd_(id_E,x,u,y,v)[f]
+    Hom_{Σ E}((x,u),(y,v))
+      = Op_cat(Σ (f : Hom_Z(x,y)^op), homd_(id_E,x,u,y,v)[f])
     Sigma_map(eta)(k,u) = (k, eta[k](u))
     Sigma_proj1 ∘ Sigma_map(eta) = Sigma_proj1.
 */
