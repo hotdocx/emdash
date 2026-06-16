@@ -23,6 +23,44 @@
     FF[z^-] =>_[z] GG[z]          = Transf_catd A B FF GG
 
   Diagnostic `assert` checks live in emdash3_2_checks.lp.
+
+  Table of contents / future split map:
+
+    0-2. Kernel foundations
+         Groupoid universe, equality, encoded Sigma object layers, core
+         category structure, opposites, and path categories.
+
+    3-7. Ordinary category calculus
+         Ordinary functors, universe categories, ordinary internal homs,
+         products, transfors, composition actions, evaluation/curry, ordinary
+         adjunctions, and ordinary internal hom-action.
+
+    8-10. Directed family calculus
+         Cat-valued directed families, reindexing, displayed functors and
+         transfors, Pi/Sigma categories, dependent hom endpoints, and
+         mixed-variance family constructors.
+
+    11-13. Representable and dependent-hom infrastructure
+         Representables, presheaf classifiers, Homd target families,
+         homd_int projection normal forms, and covariant fibre transport.
+
+    14-16. Displayed hom-action and laxity extraction
+         Section action, internal displayed hom-action, displayed component
+         notation, Sigma-map hom-action, and component-level displayed
+         laxity cells.
+
+    17. Structural logic and bridges
+         Generic Sigma/Pi weakening/evaluation helpers, constant sections,
+         product-pair telescope rules, ordinary exchange/contraction, generic
+         ordinary functor hom-action, section pullback, and internal Pi action.
+
+    18. Applications
+         PathOut, fixed-source and telescope path induction, Sigma-total path
+         induction, target transport aliases, transitivity/composition
+         benchmark, and nested telescope stress examples.
+
+    19. Check catalog
+         Human-readable catalog of normal forms tested by emdash3_2_checks.lp.
 */
 
 flag "eta_equality" on;
@@ -3884,7 +3922,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
   ↪ @Transf_catd $K $A $B $FF $GG;
 
 // -------------------------------------------------------------------------------------------------
-// 11. Representables, path induction, and presheaf-family classifiers
+// 11. Representables and presheaf-family classifiers
 // -------------------------------------------------------------------------------------------------
 
 // These named classifiers are defined composition pipelines.  Keep them named
@@ -3893,13 +3931,12 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 /*
   Mathematical notation:
     Rep_Z(x)[y]               = Hom_Z(x,y)
-    PathOut_Z(x)              = Σ_y Hom_Z(x,y)
     Edge_Z(x)[y]              = Hom_Z(x,y)^op
     Presheaf_catd(K)(A)[k]    = Functor_cat(A[k],Cat)
     HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
 */
 
-// 11a. Representables and outgoing-path categories.
+// 11a. Representables.
 
 symbol Rep_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -3943,456 +3980,7 @@ rule @tapp0_fapp0
       (@Rep_transport_func $Z $x $y $p)
   ↪ @hom_precomp_along_func $Z $Z (@id_func $Z) $z $x $y $p;
 
-// Fixed-x layer: outgoing-path category at a fixed source object.
-//
-// Surface/formula:
-//   PathOut_Z(x) = Σ y :^n Z, Hom_Z(x,y)
-//   object notation: (y,p) with p : Hom_Z(x,y).
-symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
-≔ @Sigma_cat Z (@Rep_catd Z x);
-
-// Internalized-x layer: PathOut as a contravariant functor of the source.
-//
-// Surface/formula:
-//   PathOut_cat_func(Z) : Z^op ⊢ Cat
-//   PathOut_cat_func(Z)[x] = PathOut_Z(x)
-//   PathOut_cat_func(Z)[p : x ->^Z y] : PathOut_Z(y) ⊢ PathOut_Z(x).
-symbol PathOut_cat_func [Z : Cat]
-  : τ (Functor (Op_cat Z) Cat_cat)
-≔ @comp_cat_fapp0
-     (Op_cat Z)
-     (@Catd_cat Z)
-     Cat_cat
-     (@Sigma_func Z)
-     (@Rep_catd_func Z);
-
-// Internalized-x layer: readable name for PathOut's action on a base arrow.
-//
-// Surface/formula:
-//   PathOut_transport_func(p) = PathOut_cat_func(Z)[p]
-//   : PathOut_Z(y) ⊢ PathOut_Z(x)
-//   and PathOut_transport_func(p)[(y,id_y)] = (y,p).
-symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  : τ (Functor (@PathOut_cat Z y) (@PathOut_cat Z x))
-≔ @fapp1_fapp0
-    (Op_cat Z)
-    Cat_cat
-    (@PathOut_cat_func Z)
-    y
-    x
-    p;
-
-// 11b. PathOut motives and fixed-source path induction.
-//
-// Internalized-x layer: family of motive categories over source objects.
-//
-// Surface/formula:
-//   PathOutMotives_Z[x] = Catd(PathOut_Z(x))
-//   i.e. a fibre object E is a motive E : PathOut_Z(x) ⊢ Cat.
-symbol PathOutMotives_catd [Z : Cat]
-  : τ (Catd Z)
-≔ @comp_cat_fapp0
-     Z
-     (Op_cat Cat_cat)
-     Cat_cat
-     Catd_cat_func
-     (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
-
-// Internalized-x target layer: Pi over the moving PathOut category.
-//
-// Surface/formula:
-//   PathOutPi_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
-//   PathOutPi_Z[x][E] = Π q :^n PathOut_Z(x), E[q].
-//
-// This is deliberately the semantic pullback of `Pi_int_funcd` along
-// `Op_func(PathOut_cat_func Z)`, then folded to `Pi_pullback_funcd`.
-symbol PathOutPi_funcd [Z : Cat]
-  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat))
-≔ @fapp1_fapp0
-    (@Catd_cat (Op_cat Cat_cat))
-    (@Catd_cat Z)
-    (@Pullback_catd_func
-      Z
-      (Op_cat Cat_cat)
-      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z)))
-    Catd_cat_func
-    (@Const_catd (Op_cat Cat_cat) Cat_cat)
-    Pi_int_funcd;
-
-// Internalized-x target layer: total target family for path induction.
-//
-// Surface/formula:
-//   PathIndTgt_Z[(x,E)] = Π q :^n PathOut_Z(x), E[q]
-//   over Σ x :^n Z, Catd(PathOut_Z(x)).
-symbol PathIndTgt_catd [Z : Cat]
-  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
-≔ @Sigma_catd_functord_catd
-    Z
-    (@PathOutMotives_catd Z)
-    (@PathOutPi_funcd Z);
-
-// Fixed-x notation: object `(y,p)` of PathOut_Z(x).
-//
-// Surface/formula:
-//   pathout_obj(x;y,p) = (y,p).
-symbol pathout_obj [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  : τ (Obj (@PathOut_cat Z x))
-≔ Struct_sigma y p;
-
-// Fixed-x notation: distinguished reflexive outgoing path.
-//
-// Surface/formula:
-//   reflout_x = (x,id_x) : PathOut_Z(x).
-symbol pathout_refl_obj [Z : Cat] (x : τ (Obj Z))
-  : τ (Obj (@PathOut_cat Z x))
-≔ @pathout_obj Z x x (@id Z x);
-
-// Fixed-x source layer: evaluation at the reflexive outgoing path.
-//
-// Surface/formula:
-//   pathout_refl_eval_func(Z,x)[E] = E[(x,id_x)].
-//
-// The base-arrow helper below records the concrete map along p; the full
-// coherence package remains abstract.
-symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
-  : τ (Functor (@Catd_cat (@PathOut_cat Z x)) Cat_cat)
-≔ @fapp0_func
-     (@PathOut_cat Z x)
-     Cat_cat
-     (@pathout_refl_obj Z x);
-
-// Internalized-x source layer: displayed package of fixed-source reflexive
-// evaluation.
-//
-// Surface/formula:
-//   PathOutReflEval_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
-//   PathOutReflEval_Z[x][E] = E[(x,id_x)].
-constant symbol PathOutReflEval_funcd [Z : Cat]
-  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
-
-rule @tapp0_fapp0
-      _
-      Cat_cat
-      _
-      _
-      $x
-      (@PathOutReflEval_funcd $Z)
-  ↪ @pathout_refl_eval_func $Z $x;
-
-// Reflexive-to-path arrow in the outgoing-path category.
-//
-// Surface/formula:
-//   rho_{x,y,p} : (x,id_x) ->^PathOut_Z(x) (y,p).
-//
-// This is the canonical Sigma transport arrow for Rep_Z(x). Its endpoint
-// reduces by Rep_Z(x)[p](id_x) = p.
-symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  : τ (Hom
-      (@PathOut_cat Z x)
-      (@pathout_refl_obj Z x)
-      (@pathout_obj Z x y p))
-≔ @sigma_transport_arrow
-    Z
-    (@Rep_catd Z x)
-    x
-    y
-    p
-    (@id Z x);
-
-// Fixed-x source layer: motive transport along `rho_{x,y,p}`.
-//
-// Surface/formula:
-//   E[rho_{x,y,p}] : E[(x,id_x)] ⊢ E[(y,p)].
-symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Functor
-      (Fibre_cat E (@pathout_refl_obj Z x))
-      (Fibre_cat E (@pathout_obj Z x y p)))
-≔ @fapp1_fapp0
-    (@PathOut_cat Z x)
-    Cat_cat
-    E
-    (@pathout_refl_obj Z x)
-    (@pathout_obj Z x y p)
-    (@pathout_refl_arrow Z x y p);
-
-// Internalized-x source/target base layer: transport a motive along a moving
-// source arrow.
-//
-// Surface/formula:
-//   p_*E = PathOutMotives_Z[p](E)
-//        = Pullback_catd(E, PathOut_transport_func(p))
-//   so p_*E : PathOut_Z(y) ⊢ Cat.
-symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Catd (@PathOut_cat Z y))
-≔ @fapp0
-    (@Catd_cat (@PathOut_cat Z x))
-    (@Catd_cat (@PathOut_cat Z y))
-    (@fapp1_fapp0
-      Z
-      Cat_cat
-      (@PathOutMotives_catd Z)
-      x
-      y
-      p)
-    E;
-
-// Internalized-x source/target base layer: canonical total arrow in
-// Σ x :^n Z, Catd(PathOut_Z(x)).
-//
-// Surface/formula:
-//   (x,E) ->^Σ (y,p_*E), lying over p : x ->^Z y.
-symbol pathout_motive_transport_arrow [Z : Cat]
-  [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Hom
-      (@Sigma_cat Z (@PathOutMotives_catd Z))
-      (Struct_sigma x E)
-      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
-≔ @sigma_transport_arrow
-    Z
-    (@PathOutMotives_catd Z)
-    x
-    y
-    p
-    E;
-
-// Final desired fixed-x theorem/object: path induction section.
-//
-// Surface/formula:
-//   path_ind_sec(x,E,u) : Π q :^n PathOut_Z(x), E[q]
-//   with u : E[(x,id_x)].
-symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
-  : τ (Obj (Pi_cat E));
-
-// Fixed-x packaging layer: section collecting all `rho_{x,y,p}`, derived as
-// path induction on the representable motive at the reflexive outgoing path.
-//
-// Surface/formula:
-//   pathout_refl_arrow_sec(x) :
-//     Π q :^n PathOut_Z(x), Hom_{PathOut_Z(x)}((x,id_x),q)
-//   pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
-symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
-  : τ (Obj (Pi_cat
-      (@Rep_catd
-        (@PathOut_cat Z x)
-        (@pathout_refl_obj Z x))))
-≔ @path_ind_sec
-    Z
-    x
-    (@Rep_catd
-      (@PathOut_cat Z x)
-      (@pathout_refl_obj Z x))
-    (@id (@PathOut_cat Z x) (@pathout_refl_obj Z x));
-
-// Fixed-x internal layer: source family of path induction at fixed x.
-//
-// Surface/formula:
-//   PathInd_src(Z,x)[E] = E[(x,id_x)].
-symbol PathInd_src_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
-≔ @pathout_refl_eval_func Z x;
-
-// Fixed-x internal layer: target family of path induction at fixed x.
-//
-// Surface/formula:
-//   PathInd_tgt(Z,x)[E] = Π q :^n PathOut_Z(x), E[q].
-symbol PathInd_tgt_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
-≔ @Pi_func (@PathOut_cat Z x);
-
-// Fixed-x internal layer: component functor of the fixed-source eliminator.
-//
-// Surface/formula:
-//   path_ind_func_fapp0(Z,x,E) : E[(x,id_x)] ⊢ Π q, E[q]
-//   path_ind_func_fapp0(Z,x,E)[u] = path_ind_sec(Z,x,E,u).
-symbol path_ind_func_fapp0 [Z : Cat] (x : τ (Obj Z))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Functor
-      (Fibre_cat E (@pathout_refl_obj Z x))
-      (Pi_cat E));
-
-rule @fapp0 _ _ (@path_ind_func_fapp0 $Z $x $E) $u
-  ↪ @path_ind_sec $Z $x $E $u;
-
-// Final desired fixed-x theorem packaged as a displayed functor.
-//
-// Surface/formula:
-//   PathInd_func(Z,x) :
-//     E :^n Catd(PathOut_Z(x)) ; E[(x,id_x)] ⊢ Π q, E[q].
-constant symbol PathInd_func [Z : Cat] (x : τ (Obj Z))
-  : τ (Functord
-      (@PathInd_src_catd Z x)
-      (@PathInd_tgt_catd Z x));
-
-rule @tapp0_fapp0
-      _
-      Cat_cat
-      _
-      _
-      $E
-      (@PathInd_func $Z $x)
-  ↪ @path_ind_func_fapp0 $Z $x $E;
-
-// Primary synthetic/telescope path-induction theorem over the varying source
-// object.
-//
-// Surface/formula:
-//   PathInd_transfd(Z) :
-//     x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x]
-//   PathInd_transfd(Z)[x] = PathInd_func(Z,x).
-//
-// Status/architecture note:
-//   This `Transfd` is the primary internalized-x theorem. Its type already
-//   internalizes naturality in the source object x; we should not re-express
-//   that naturality as an external hand-written square for the core milestone.
-//   What downstream regressions inspect are the induced source/target
-//   transports along p : x ->^Z y:
-//
-//     source: E[rho_{x,y,p}]
-//     target: section_pullback(PathOut_transport(p),E)
-//
-//   The target transport computes through the component-level displayed laxity
-//   cell for `PathOutPi_funcd`; this is shared by the telescope theorem and its
-//   derived Sigma-total presentation.
-//
-// The component projection rule is installed later, after the generic
-// displayed-transfor head `tdapp0_fapp0` is declared.
-constant symbol PathInd_transfd [Z : Cat]
-  : τ (@Transfd
-      Z
-      (@PathOutMotives_catd Z)
-      (@Const_catd Z Cat_cat)
-      (@PathOutReflEval_funcd Z)
-      (@PathOutPi_funcd Z));
-
-// 11c. Sigma-total presentation of path induction.
-//
-// Internalized-x source layer: total source family over moving `(x,E)`.
-//
-// Surface/formula:
-//   PathIndSrc_Z[(x,E)] = E[(x,id_x)]
-//   over Σ x :^n Z, Catd(PathOut_Z(x)).
-symbol PathIndSrc_catd [Z : Cat]
-  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
-≔ @Sigma_catd_functord_catd
-    Z
-    (@PathOutMotives_catd Z)
-    (@PathOutReflEval_funcd Z);
-
-// Internalized-x source layer: source transport along the canonical total
-// transported-motive arrow.
-//
-// Surface/formula:
-//   PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
-//   : E[(x,id_x)] ⊢ (p_*E)[(y,id_y)] = E[(y,p)].
-symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  (E : τ (Catd (@PathOut_cat Z x)))
-  : τ (Functor
-      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
-      (Fibre_cat
-        (@PathIndSrc_catd Z)
-        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
-≔ @pathout_refl_eval_base_func Z x y p E;
-
-// Uncurried Sigma-total presentation of path induction, derived from the
-// primary telescope theorem by generic Sigma-total uncurrying.
-//
-// Surface/formula:
-//   PathInd_funcd(Z) :
-//     x,E :^n Σ x :^n Z, Catd(PathOut_Z(x)) ;
-//       E[(x,id_x)] ⊢ Π q :^n PathOut_Z(x), E[q]
-//   PathInd_funcd(Z)[(x,E)][u] = path_ind_sec(Z,x,E,u).
-//
-// This is a derived presentation, not the primitive theorem. It is used to
-// inspect the Sigma-style formulation at canonical/cartesian total arrows
-// coming from transport of `(x,E)`. Arbitrary non-cartesian Sigma-arrow
-// naturality is intentionally outside the current milestone.
-symbol PathInd_funcd [Z : Cat]
-  : τ (Functord
-      (@PathIndSrc_catd Z)
-      (@PathIndTgt_catd Z))
-≔ @Sigma_transfd_funcd
-    Z
-    (@PathOutMotives_catd Z)
-    (@PathOutReflEval_funcd Z)
-    (@PathOutPi_funcd Z)
-    (@PathInd_transfd Z);
-
-/*
-  Mathematical computation statements for fixed-x path induction.
-
-  These describe the source/target fibres and the component of the packaged
-  fixed-source eliminator. The Sigma-total component statements live with the
-  generic uncurrying projection, after `tdapp0_fapp0` is available.
-*/
-
-// 11d. Transitivity benchmark and presheaf classifiers.
-//
-// Transitivity benchmark layer: target family for composition out of a fixed
-// source x.
-//
-// Surface/formula:
-//   CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
-//                      = Functord_cat(Rep_Z(y),Rep_Z(x)).
-//
-// This is a semantic `hom_con` alias, not a primitive stable family head. The
-// transitivity benchmark checks that path induction on the corresponding
-// motive computes to post/precomposition in representables.
-injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd Z)
-≔ @hom_con
-    (@Catd_cat Z)
-    (@Rep_catd Z x)
-    (Op_cat Z)
-    (@Rep_catd_func Z);
-
-// Transitivity benchmark layer: readable alias for the capped hom-action of
-// `CompTarget_catd`.
-//
-// Surface/formula:
-//   CompTarget_Z(x)[p : a ->^Z b]
-//     : (Rep_Z(a) ⊢ Rep_Z(x)) ⊢ (Rep_Z(b) ⊢ Rep_Z(x)).
-//
-// Its endpoint type uses canonical `Functord_cat` forms rather than reducible
-// `Fibre_cat` wrappers, but its body still goes through `CompTarget_catd`
-// itself.
-symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
-  (p : τ (Hom Z a b))
-  : τ (Functor
-      (@Functord_cat Z (@Rep_catd Z a) (@Rep_catd Z x))
-      (@Functord_cat Z (@Rep_catd Z b) (@Rep_catd Z x)))
-≔ @fapp1_fapp0
-    Z
-    Cat_cat
-    (@CompTarget_catd Z x)
-    a
-    b
-    p;
-
-// Transitivity benchmark layer: composition motive over PathOut_Z(x).
-//
-// Surface/formula:
-//   CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x).
-//
-// This is the pullback of `CompTarget_Z(x)` along the Sigma projection
-// PathOut_Z(x) ⊢ Z.
-symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
-  : τ (Catd (@PathOut_cat Z x))
-≔ @Sigma_proj1_pullback_catd
-     Z
-     (@Rep_catd Z x)
-     (@CompTarget_catd Z x);
+// 11b. Opposite-edge and presheaf classifiers.
 
 // Internalized classifier: pointwise opposite representable.
 //
@@ -4494,8 +4082,9 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
   Π (FF : τ (Functord D E)),
   τ (Functord (Op_catd E) (@Homd_target_catd Z D));
 
+
 // -------------------------------------------------------------------------------------------------
-// 13. Endpoint normal forms for Sigma homs
+// 13. Dependent-hom projections and covariant fibre transport
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -4573,80 +4162,6 @@ rule @tapp0_fapp0
       (@fib_cov_transf $K $E $x $u)
   ↪ @fib_cov_tapp0_func $K $E $x $y $u;
 
-rule @tapp0_fapp0
-      (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x))
-      Cat_cat
-      (@Const_catd (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x)) Terminal_cat)
-      $E
-      (Struct_sigma $y $p)
-      (@path_ind_sec $Z $x $E $u)
-  ↪ @Obj_func
-      (Fibre_cat $E (Struct_sigma $y $p))
-      (@fapp0
-        (Hom_cat (@PathOut_cat $Z $x)
-          (@pathout_refl_obj $Z $x)
-          (Struct_sigma $y $p))
-        (Fibre_cat $E (Struct_sigma $y $p))
-        (@fib_cov_tapp0_func
-          (@PathOut_cat $Z $x)
-          $E
-          (@pathout_refl_obj $Z $x)
-          (Struct_sigma $y $p)
-          $u)
-        (@pathout_refl_arrow $Z $x $y $p));
-
-rule @path_ind_sec $Z $x
-      (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id_func $Z) $x) $D)
-      $u
-  ↪ @fib_cov_transf $Z $D $x $u;
-
-// Mathematical computation statement: fixed-x path induction on a
-// Sigma-projection pullback motive reduces to covariant fibre transport.
-
-// Final desired transitivity benchmark theorem/object.
-//
-// Surface/formula:
-//   path_comp_sec(x) :
-//     p :^n Rep_Z(x)[y] ; Rep_Z(y) ⊢ Rep_Z(x)
-//   path_comp_sec(x)[p][z][q] = q ∘ p.
-//
-// This is the reduced normal form of fixed-x path induction on the composition
-// motive.
-symbol path_comp_sec [Z : Cat] (x : τ (Obj Z))
-  : τ (Obj (@Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x)))
-≔ @fib_cov_transf
-    Z
-    (@CompTarget_catd Z x)
-    x
-    (@id_funcd Z (@Rep_catd Z x));
-
-// Transitivity benchmark layer: representable action of a path by
-// precomposition.
-//
-// Surface/formula:
-//   path_comp_func(p) : Rep_Z(y) ⊢ Rep_Z(x)
-//   path_comp_func(p)[z][q] = q ∘ p.
-symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
-≔ @fapp1_fapp0
-    (Op_cat Z)
-    (@Catd_cat Z)
-    (@Rep_catd_func Z)
-    y
-    x
-    p;
-
-/*
-  Mathematical computation statements for the fixed-x transitivity benchmark.
-
-  These are not merely regression probes: they state that fixed-x path
-  induction on the composition motive computes to representable
-  precomposition, and then to ordinary categorical composition.
-*/
-
-// The semantic `hom_con` presentation of `CompTarget_catd` computes without a
-// CompTarget-specific identity shortcut.
 
 /*
   Internal dependent-hom projection cascade:
@@ -4725,7 +4240,7 @@ symbol homd_tgt_func [Z : Cat] [D E : τ (Catd Z)]
 // whole-family homd_int rewrite.
 rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $E $s $x $u $y
   ↪ Obj_func
-      (homd_ 
+      (homd_
         (@id_funcd $Z $E)
         $x $u
         $y (@piapp0 $Z $E $s $y));
@@ -4878,8 +4393,9 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
       (@id_transfd $K $E $D $FF)
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
+
 // -------------------------------------------------------------------------------------------------
-// 16. Derived displayed component notation
+// 16. Displayed components, displayed hom-action, and laxity extraction
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -4932,11 +4448,6 @@ symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
 
-// Component projection for the primary synthetic/telescope path-induction
-// theorem. This lives here because `tdapp0_fapp0` is the generic displayed
-// transfor component head.
-rule @tdapp0_fapp0 $Z _ _ _ _ $x (@PathInd_transfd $Z)
-  ↪ @PathInd_func $Z $x;
 
 // Object-component projection for generic Sigma-total uncurrying.
 rule @tapp0_fapp0
@@ -4960,34 +4471,6 @@ rule @tapp0_fapp0
         $T
         $k
         $eta);
-
-/*
-  Mathematical computation statements for synthetic/telescope path induction.
-
-  Surface/formula:
-    PathInd_transfd(Z)[x]       = PathInd_func(Z,x)
-    PathInd_transfd(Z)[x][E]    = path_ind_func_fapp0(Z,x,E)
-    PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u).
-*/
-
-// First transitivity benchmark rerouted through the synthetic/telescope
-// theorem component.
-
-// Fully expanded transitivity benchmark through the synthetic/telescope
-// theorem component.
-
-/*
-  Generic Sigma-total uncurrying and the path-induction specialization.
-
-  Surface/formula:
-    Sigma_transfd_funcd(eta)[(k,r)] = eta[k][r]
-    PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E).
-*/
-
-// Sigma-total presentation of the transitivity benchmark, using the derived
-// `PathInd_funcd` component rather than the telescope component directly.
-
-// Fully expanded transitivity benchmark through the Sigma-total presentation.
 
 // Readable component alias.
 //
@@ -5855,6 +5338,7 @@ rule @fdapp1_int_hom_fapp0
       (Hom_cat $Z $x $z)
       (@comp_fapp0 $Z $x $y $z $q $p);
 
+
 // -------------------------------------------------------------------------------------------------
 // 17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed projection helpers
 // -------------------------------------------------------------------------------------------------
@@ -6420,7 +5904,544 @@ rule @fdapp1_int_cell
       (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
       $E;
 
-// 17f. Path-induction target transport aliases.
+
+// -------------------------------------------------------------------------------------------------
+// 18. Applications: PathOut, path induction, and transitivity
+// -------------------------------------------------------------------------------------------------
+
+// 18a. Outgoing-path categories and fixed-source path induction.
+
+// Fixed-x layer: outgoing-path category at a fixed source object.
+//
+// Surface/formula:
+//   PathOut_Z(x) = Σ y :^n Z, Hom_Z(x,y)
+//   object notation: (y,p) with p : Hom_Z(x,y).
+symbol PathOut_cat [Z : Cat] (x : τ (Obj Z)) : Cat
+≔ @Sigma_cat Z (@Rep_catd Z x);
+
+// Internalized-x layer: PathOut as a contravariant functor of the source.
+//
+// Surface/formula:
+//   PathOut_cat_func(Z) : Z^op ⊢ Cat
+//   PathOut_cat_func(Z)[x] = PathOut_Z(x)
+//   PathOut_cat_func(Z)[p : x ->^Z y] : PathOut_Z(y) ⊢ PathOut_Z(x).
+symbol PathOut_cat_func [Z : Cat]
+  : τ (Functor (Op_cat Z) Cat_cat)
+≔ @comp_cat_fapp0
+     (Op_cat Z)
+     (@Catd_cat Z)
+     Cat_cat
+     (@Sigma_func Z)
+     (@Rep_catd_func Z);
+
+// Internalized-x layer: readable name for PathOut's action on a base arrow.
+//
+// Surface/formula:
+//   PathOut_transport_func(p) = PathOut_cat_func(Z)[p]
+//   : PathOut_Z(y) ⊢ PathOut_Z(x)
+//   and PathOut_transport_func(p)[(y,id_y)] = (y,p).
+symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functor (@PathOut_cat Z y) (@PathOut_cat Z x))
+≔ @fapp1_fapp0
+    (Op_cat Z)
+    Cat_cat
+    (@PathOut_cat_func Z)
+    y
+    x
+    p;
+
+// 18b. PathOut motives and fixed-source path induction.
+//
+// Internalized-x layer: family of motive categories over source objects.
+//
+// Surface/formula:
+//   PathOutMotives_Z[x] = Catd(PathOut_Z(x))
+//   i.e. a fibre object E is a motive E : PathOut_Z(x) ⊢ Cat.
+symbol PathOutMotives_catd [Z : Cat]
+  : τ (Catd Z)
+≔ @comp_cat_fapp0
+     Z
+     (Op_cat Cat_cat)
+     Cat_cat
+     Catd_cat_func
+     (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
+
+// Internalized-x target layer: Pi over the moving PathOut category.
+//
+// Surface/formula:
+//   PathOutPi_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
+//   PathOutPi_Z[x][E] = Π q :^n PathOut_Z(x), E[q].
+//
+// This is deliberately the semantic pullback of `Pi_int_funcd` along
+// `Op_func(PathOut_cat_func Z)`, then folded to `Pi_pullback_funcd`.
+symbol PathOutPi_funcd [Z : Cat]
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat))
+≔ @fapp1_fapp0
+    (@Catd_cat (Op_cat Cat_cat))
+    (@Catd_cat Z)
+    (@Pullback_catd_func
+      Z
+      (Op_cat Cat_cat)
+      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z)))
+    Catd_cat_func
+    (@Const_catd (Op_cat Cat_cat) Cat_cat)
+    Pi_int_funcd;
+
+// Internalized-x target layer: total target family for path induction.
+//
+// Surface/formula:
+//   PathIndTgt_Z[(x,E)] = Π q :^n PathOut_Z(x), E[q]
+//   over Σ x :^n Z, Catd(PathOut_Z(x)).
+symbol PathIndTgt_catd [Z : Cat]
+  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
+≔ @Sigma_catd_functord_catd
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutPi_funcd Z);
+
+// Fixed-x notation: object `(y,p)` of PathOut_Z(x).
+//
+// Surface/formula:
+//   pathout_obj(x;y,p) = (y,p).
+symbol pathout_obj [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  : τ (Obj (@PathOut_cat Z x))
+≔ Struct_sigma y p;
+
+// Fixed-x notation: distinguished reflexive outgoing path.
+//
+// Surface/formula:
+//   reflout_x = (x,id_x) : PathOut_Z(x).
+symbol pathout_refl_obj [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (@PathOut_cat Z x))
+≔ @pathout_obj Z x x (@id Z x);
+
+// Fixed-x source layer: evaluation at the reflexive outgoing path.
+//
+// Surface/formula:
+//   pathout_refl_eval_func(Z,x)[E] = E[(x,id_x)].
+//
+// The base-arrow helper below records the concrete map along p; the full
+// coherence package remains abstract.
+symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
+  : τ (Functor (@Catd_cat (@PathOut_cat Z x)) Cat_cat)
+≔ @fapp0_func
+     (@PathOut_cat Z x)
+     Cat_cat
+     (@pathout_refl_obj Z x);
+
+// Internalized-x source layer: displayed package of fixed-source reflexive
+// evaluation.
+//
+// Surface/formula:
+//   PathOutReflEval_Z : x :^n Z ; Catd(PathOut_Z(x)) ⊢ Cat
+//   PathOutReflEval_Z[x][E] = E[(x,id_x)].
+constant symbol PathOutReflEval_funcd [Z : Cat]
+  : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $x
+      (@PathOutReflEval_funcd $Z)
+  ↪ @pathout_refl_eval_func $Z $x;
+
+// Reflexive-to-path arrow in the outgoing-path category.
+//
+// Surface/formula:
+//   rho_{x,y,p} : (x,id_x) ->^PathOut_Z(x) (y,p).
+//
+// This is the canonical Sigma transport arrow for Rep_Z(x). Its endpoint
+// reduces by Rep_Z(x)[p](id_x) = p.
+symbol pathout_refl_arrow [Z : Cat] (x y : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  : τ (Hom
+      (@PathOut_cat Z x)
+      (@pathout_refl_obj Z x)
+      (@pathout_obj Z x y p))
+≔ @sigma_transport_arrow
+    Z
+    (@Rep_catd Z x)
+    x
+    y
+    p
+    (@id Z x);
+
+// Fixed-x source layer: motive transport along `rho_{x,y,p}`.
+//
+// Surface/formula:
+//   E[rho_{x,y,p}] : E[(x,id_x)] ⊢ E[(y,p)].
+symbol pathout_refl_eval_base_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat E (@pathout_refl_obj Z x))
+      (Fibre_cat E (@pathout_obj Z x y p)))
+≔ @fapp1_fapp0
+    (@PathOut_cat Z x)
+    Cat_cat
+    E
+    (@pathout_refl_obj Z x)
+    (@pathout_obj Z x y p)
+    (@pathout_refl_arrow Z x y p);
+
+// Internalized-x source/target base layer: transport a motive along a moving
+// source arrow.
+//
+// Surface/formula:
+//   p_*E = PathOutMotives_Z[p](E)
+//        = Pullback_catd(E, PathOut_transport_func(p))
+//   so p_*E : PathOut_Z(y) ⊢ Cat.
+symbol pathout_motive_transport_obj [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Catd (@PathOut_cat Z y))
+≔ @fapp0
+    (@Catd_cat (@PathOut_cat Z x))
+    (@Catd_cat (@PathOut_cat Z y))
+    (@fapp1_fapp0
+      Z
+      Cat_cat
+      (@PathOutMotives_catd Z)
+      x
+      y
+      p)
+    E;
+
+// Internalized-x source/target base layer: canonical total arrow in
+// Σ x :^n Z, Catd(PathOut_Z(x)).
+//
+// Surface/formula:
+//   (x,E) ->^Σ (y,p_*E), lying over p : x ->^Z y.
+symbol pathout_motive_transport_arrow [Z : Cat]
+  [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Hom
+      (@Sigma_cat Z (@PathOutMotives_catd Z))
+      (Struct_sigma x E)
+      (Struct_sigma y (@pathout_motive_transport_obj Z x y p E)))
+≔ @sigma_transport_arrow
+    Z
+    (@PathOutMotives_catd Z)
+    x
+    y
+    p
+    E;
+
+// Final desired fixed-x theorem/object: path induction section.
+//
+// Surface/formula:
+//   path_ind_sec(x,E,u) : Π q :^n PathOut_Z(x), E[q]
+//   with u : E[(x,id_x)].
+symbol path_ind_sec [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x))))
+  : τ (Obj (Pi_cat E));
+
+// Fixed-x packaging layer: section collecting all `rho_{x,y,p}`, derived as
+// path induction on the representable motive at the reflexive outgoing path.
+//
+// Surface/formula:
+//   pathout_refl_arrow_sec(x) :
+//     Π q :^n PathOut_Z(x), Hom_{PathOut_Z(x)}((x,id_x),q)
+//   pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}.
+symbol pathout_refl_arrow_sec [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (Pi_cat
+      (@Rep_catd
+        (@PathOut_cat Z x)
+        (@pathout_refl_obj Z x))))
+≔ @path_ind_sec
+    Z
+    x
+    (@Rep_catd
+      (@PathOut_cat Z x)
+      (@pathout_refl_obj Z x))
+    (@id (@PathOut_cat Z x) (@pathout_refl_obj Z x));
+
+// Fixed-x internal layer: source family of path induction at fixed x.
+//
+// Surface/formula:
+//   PathInd_src(Z,x)[E] = E[(x,id_x)].
+symbol PathInd_src_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
+≔ @pathout_refl_eval_func Z x;
+
+// Fixed-x internal layer: target family of path induction at fixed x.
+//
+// Surface/formula:
+//   PathInd_tgt(Z,x)[E] = Π q :^n PathOut_Z(x), E[q].
+symbol PathInd_tgt_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@Catd_cat (@PathOut_cat Z x)))
+≔ @Pi_func (@PathOut_cat Z x);
+
+// Fixed-x internal layer: component functor of the fixed-source eliminator.
+//
+// Surface/formula:
+//   path_ind_func_fapp0(Z,x,E) : E[(x,id_x)] ⊢ Π q, E[q]
+//   path_ind_func_fapp0(Z,x,E)[u] = path_ind_sec(Z,x,E,u).
+symbol path_ind_func_fapp0 [Z : Cat] (x : τ (Obj Z))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat E (@pathout_refl_obj Z x))
+      (Pi_cat E));
+
+rule @fapp0 _ _ (@path_ind_func_fapp0 $Z $x $E) $u
+  ↪ @path_ind_sec $Z $x $E $u;
+
+// Final desired fixed-x theorem packaged as a displayed functor.
+//
+// Surface/formula:
+//   PathInd_func(Z,x) :
+//     E :^n Catd(PathOut_Z(x)) ; E[(x,id_x)] ⊢ Π q, E[q].
+constant symbol PathInd_func [Z : Cat] (x : τ (Obj Z))
+  : τ (Functord
+      (@PathInd_src_catd Z x)
+      (@PathInd_tgt_catd Z x));
+
+rule @tapp0_fapp0
+      _
+      Cat_cat
+      _
+      _
+      $E
+      (@PathInd_func $Z $x)
+  ↪ @path_ind_func_fapp0 $Z $x $E;
+
+// Primary synthetic/telescope path-induction theorem over the varying source
+// object.
+//
+// Surface/formula:
+//   PathInd_transfd(Z) :
+//     x :^n Z ; PathOutReflEval_Z[x] => PathOutPi_Z[x]
+//   PathInd_transfd(Z)[x] = PathInd_func(Z,x).
+//
+// Status/architecture note:
+//   This `Transfd` is the primary internalized-x theorem. Its type already
+//   internalizes naturality in the source object x; we should not re-express
+//   that naturality as an external hand-written square for the core milestone.
+//   What downstream regressions inspect are the induced source/target
+//   transports along p : x ->^Z y:
+//
+//     source: E[rho_{x,y,p}]
+//     target: section_pullback(PathOut_transport(p),E)
+//
+//   The target transport computes through the component-level displayed laxity
+//   cell for `PathOutPi_funcd`; this is shared by the telescope theorem and its
+//   derived Sigma-total presentation.
+//
+// The component projection rule is installed later, after the generic
+// displayed-transfor head `tdapp0_fapp0` is declared.
+constant symbol PathInd_transfd [Z : Cat]
+  : τ (@Transfd
+      Z
+      (@PathOutMotives_catd Z)
+      (@Const_catd Z Cat_cat)
+      (@PathOutReflEval_funcd Z)
+      (@PathOutPi_funcd Z));
+
+// 18c. Sigma-total presentation of path induction.
+//
+// Internalized-x source layer: total source family over moving `(x,E)`.
+//
+// Surface/formula:
+//   PathIndSrc_Z[(x,E)] = E[(x,id_x)]
+//   over Σ x :^n Z, Catd(PathOut_Z(x)).
+symbol PathIndSrc_catd [Z : Cat]
+  : τ (Catd (@Sigma_cat Z (@PathOutMotives_catd Z)))
+≔ @Sigma_catd_functord_catd
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutReflEval_funcd Z);
+
+// Internalized-x source layer: source transport along the canonical total
+// transported-motive arrow.
+//
+// Surface/formula:
+//   PathIndSrc_transport(p,E) = E[rho_{x,y,p}]
+//   : E[(x,id_x)] ⊢ (p_*E)[(y,id_y)] = E[(y,p)].
+symbol PathIndSrc_transport_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  (E : τ (Catd (@PathOut_cat Z x)))
+  : τ (Functor
+      (Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x E))
+      (Fibre_cat
+        (@PathIndSrc_catd Z)
+        (Struct_sigma y (@pathout_motive_transport_obj Z x y p E))))
+≔ @pathout_refl_eval_base_func Z x y p E;
+
+// Uncurried Sigma-total presentation of path induction, derived from the
+// primary telescope theorem by generic Sigma-total uncurrying.
+//
+// Surface/formula:
+//   PathInd_funcd(Z) :
+//     x,E :^n Σ x :^n Z, Catd(PathOut_Z(x)) ;
+//       E[(x,id_x)] ⊢ Π q :^n PathOut_Z(x), E[q]
+//   PathInd_funcd(Z)[(x,E)][u] = path_ind_sec(Z,x,E,u).
+//
+// This is a derived presentation, not the primitive theorem. It is used to
+// inspect the Sigma-style formulation at canonical/cartesian total arrows
+// coming from transport of `(x,E)`. Arbitrary non-cartesian Sigma-arrow
+// naturality is intentionally outside the current milestone.
+symbol PathInd_funcd [Z : Cat]
+  : τ (Functord
+      (@PathIndSrc_catd Z)
+      (@PathIndTgt_catd Z))
+≔ @Sigma_transfd_funcd
+    Z
+    (@PathOutMotives_catd Z)
+    (@PathOutReflEval_funcd Z)
+    (@PathOutPi_funcd Z)
+    (@PathInd_transfd Z);
+
+/*
+  Mathematical computation statements for fixed-x path induction.
+
+  These describe the source/target fibres and the component of the packaged
+  fixed-source eliminator. The Sigma-total component statements live with the
+  generic uncurrying projection, after `tdapp0_fapp0` is available.
+*/
+
+// 18d. Transitivity benchmark.
+//
+// Transitivity benchmark layer: target family for composition out of a fixed
+// source x.
+//
+// Surface/formula:
+//   CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
+//                      = Functord_cat(Rep_Z(y),Rep_Z(x)).
+//
+// This is a semantic `hom_con` alias, not a primitive stable family head. The
+// transitivity benchmark checks that path induction on the corresponding
+// motive computes to post/precomposition in representables.
+injective symbol CompTarget_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd Z)
+≔ @hom_con
+    (@Catd_cat Z)
+    (@Rep_catd Z x)
+    (Op_cat Z)
+    (@Rep_catd_func Z);
+
+// Transitivity benchmark layer: readable alias for the capped hom-action of
+// `CompTarget_catd`.
+//
+// Surface/formula:
+//   CompTarget_Z(x)[p : a ->^Z b]
+//     : (Rep_Z(a) ⊢ Rep_Z(x)) ⊢ (Rep_Z(b) ⊢ Rep_Z(x)).
+//
+// Its endpoint type uses canonical `Functord_cat` forms rather than reducible
+// `Fibre_cat` wrappers, but its body still goes through `CompTarget_catd`
+// itself.
+symbol CompTarget_fapp1_func [Z : Cat] [x a b : τ (Obj Z)]
+  (p : τ (Hom Z a b))
+  : τ (Functor
+      (@Functord_cat Z (@Rep_catd Z a) (@Rep_catd Z x))
+      (@Functord_cat Z (@Rep_catd Z b) (@Rep_catd Z x)))
+≔ @fapp1_fapp0
+    Z
+    Cat_cat
+    (@CompTarget_catd Z x)
+    a
+    b
+    p;
+
+// Transitivity benchmark layer: composition motive over PathOut_Z(x).
+//
+// Surface/formula:
+//   CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x).
+//
+// This is the pullback of `CompTarget_Z(x)` along the Sigma projection
+// PathOut_Z(x) ⊢ Z.
+symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
+  : τ (Catd (@PathOut_cat Z x))
+≔ @Sigma_proj1_pullback_catd
+     Z
+     (@Rep_catd Z x)
+     (@CompTarget_catd Z x);
+
+// Component projection for the primary synthetic/telescope path-induction theorem.
+rule @tdapp0_fapp0 $Z _ _ _ _ $x (@PathInd_transfd $Z)
+  ↪ @PathInd_func $Z $x;
+
+rule @tapp0_fapp0
+      (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x))
+      Cat_cat
+      (@Const_catd (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x)) Terminal_cat)
+      $E
+      (Struct_sigma $y $p)
+      (@path_ind_sec $Z $x $E $u)
+  ↪ @Obj_func
+      (Fibre_cat $E (Struct_sigma $y $p))
+      (@fapp0
+        (Hom_cat (@PathOut_cat $Z $x)
+          (@pathout_refl_obj $Z $x)
+          (Struct_sigma $y $p))
+        (Fibre_cat $E (Struct_sigma $y $p))
+        (@fib_cov_tapp0_func
+          (@PathOut_cat $Z $x)
+          $E
+          (@pathout_refl_obj $Z $x)
+          (Struct_sigma $y $p)
+          $u)
+        (@pathout_refl_arrow $Z $x $y $p));
+
+rule @path_ind_sec $Z $x
+      (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id_func $Z) $x) $D)
+      $u
+  ↪ @fib_cov_transf $Z $D $x $u;
+
+// Mathematical computation statement: fixed-x path induction on a
+// Sigma-projection pullback motive reduces to covariant fibre transport.
+
+// Final desired transitivity benchmark theorem/object.
+//
+// Surface/formula:
+//   path_comp_sec(x) :
+//     p :^n Rep_Z(x)[y] ; Rep_Z(y) ⊢ Rep_Z(x)
+//   path_comp_sec(x)[p][z][q] = q ∘ p.
+//
+// This is the reduced normal form of fixed-x path induction on the composition
+// motive.
+symbol path_comp_sec [Z : Cat] (x : τ (Obj Z))
+  : τ (Obj (@Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x)))
+≔ @fib_cov_transf
+    Z
+    (@CompTarget_catd Z x)
+    x
+    (@id_funcd Z (@Rep_catd Z x));
+
+// Transitivity benchmark layer: representable action of a path by
+// precomposition.
+//
+// Surface/formula:
+//   path_comp_func(p) : Rep_Z(y) ⊢ Rep_Z(x)
+//   path_comp_func(p)[z][q] = q ∘ p.
+symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
+≔ @fapp1_fapp0
+    (Op_cat Z)
+    (@Catd_cat Z)
+    (@Rep_catd_func Z)
+    y
+    x
+    p;
+
+/*
+  Mathematical computation statements for the fixed-x transitivity benchmark.
+
+  These are not merely regression probes: they state that fixed-x path
+  induction on the composition motive computes to representable
+  precomposition, and then to ordinary categorical composition.
+*/
+
+// The semantic `hom_con` presentation of `CompTarget_catd` computes without a
+// CompTarget-specific identity shortcut.
+
+// 18e. Path-induction target transport aliases.
 //
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
@@ -6464,8 +6485,71 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
   checks module.
 */
 
+
+// 18f. Nested telescope stress examples.
+
+/*
+  Mixed-variance family constructors.
+
+  Surface/formula:
+    Functor_catd(M,N)[k] = M[k^-] ⊢_[k] N[k]
+    Hom_catd(E,X,Y)[k] = X[k^-] ->_[k]^E Y[k]
+    Transf_catd(M,N,FF,GG)[k] = FF[k^-] =>_[k] GG[k]
+    Hom_catd(const Cat, X, Y) = Functor_catd(Op_func(X),Y).
+*/
+
+// Nested telescope stress example.
+//
+// Surface/formula:
+//   k |-> (z :^n Z ; E[k^-;z] ⊢ D[k;z])
+//   = Hom_{Catd(Z)}(E[k^-],D[k]).
+symbol Nested_telescope_catd [K Z : Cat]
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
+  : τ (Catd K)
+≔ @Hom_catd
+    K
+    (@Const_catd K (@Catd_cat Z))
+    E
+    D;
+
+// Full nested telescope category:
+//   k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
+symbol Nested_telescope_cat [K Z : Cat]
+  (C : τ (Catd K))
+  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
+  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
+  : Cat
+≔ @Functord_cat K C (@Nested_telescope_catd K Z E D);
+
+// Nested transformation telescope stress example.
+//
+// Surface/formula:
+//   k |-> (z :^n Z ; FF[k^-;z] => GG[k;z])
+//   = Hom_{Functord(E,D)}(FF[k^-],GG[k]).
+symbol Nested_transfd_telescope_catd [K Z : Cat]
+  (E D : τ (Catd Z))
+  (FF : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Functord_cat Z E D))))))
+  (GG : τ (Obj (Pi_cat (@Const_catd K (@Functord_cat Z E D)))))
+  : τ (Catd K)
+≔ @Hom_catd
+    K
+    (@Const_catd K (@Functord_cat Z E D))
+    FF
+    GG;
+
+// Full nested transformation telescope category:
+//   k :^n K ; C[k] ⊢ (z :^n Z ; FF[k^-;z] => GG[k;z]).
+symbol Nested_transfd_telescope_cat [K Z : Cat]
+  (C : τ (Catd K))
+  (E D : τ (Catd Z))
+  (FF : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Functord_cat Z E D))))))
+  (GG : τ (Obj (Pi_cat (@Const_catd K (@Functord_cat Z E D)))))
+  : Cat
+≔ @Functord_cat K C (@Nested_transfd_telescope_catd K Z E D FF GG);
+
 // -------------------------------------------------------------------------------------------------
-// 18. Check catalog and nested telescope stress examples
+// 19. Check catalog
 // -------------------------------------------------------------------------------------------------
 
 /*
@@ -6541,66 +6625,6 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
     (Sigma_proj1(R))^*D[(k,r)] = D[k]
     Π (k,r) :^n Sigma_cat(R), D[k] = Functord(R,D).
 */
-
-/*
-  Mixed-variance family constructors.
-
-  Surface/formula:
-    Functor_catd(M,N)[k] = M[k^-] ⊢_[k] N[k]
-    Hom_catd(E,X,Y)[k] = X[k^-] ->_[k]^E Y[k]
-    Transf_catd(M,N,FF,GG)[k] = FF[k^-] =>_[k] GG[k]
-    Hom_catd(const Cat, X, Y) = Functor_catd(Op_func(X),Y).
-*/
-
-// Nested telescope stress example.
-//
-// Surface/formula:
-//   k |-> (z :^n Z ; E[k^-;z] ⊢ D[k;z])
-//   = Hom_{Catd(Z)}(E[k^-],D[k]).
-symbol Nested_telescope_catd [K Z : Cat]
-  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
-  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
-  : τ (Catd K)
-≔ @Hom_catd
-    K
-    (@Const_catd K (@Catd_cat Z))
-    E
-    D;
-
-// Full nested telescope category:
-//   k :^n K ; C[k] ⊢ (z :^n Z ; E[k^-;z] ⊢ D[k;z]).
-symbol Nested_telescope_cat [K Z : Cat]
-  (C : τ (Catd K))
-  (E : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Catd_cat Z))))))
-  (D : τ (Obj (Pi_cat (@Const_catd K (@Catd_cat Z)))))
-  : Cat
-≔ @Functord_cat K C (@Nested_telescope_catd K Z E D);
-
-// Nested transformation telescope stress example.
-//
-// Surface/formula:
-//   k |-> (z :^n Z ; FF[k^-;z] => GG[k;z])
-//   = Hom_{Functord(E,D)}(FF[k^-],GG[k]).
-symbol Nested_transfd_telescope_catd [K Z : Cat]
-  (E D : τ (Catd Z))
-  (FF : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Functord_cat Z E D))))))
-  (GG : τ (Obj (Pi_cat (@Const_catd K (@Functord_cat Z E D)))))
-  : τ (Catd K)
-≔ @Hom_catd
-    K
-    (@Const_catd K (@Functord_cat Z E D))
-    FF
-    GG;
-
-// Full nested transformation telescope category:
-//   k :^n K ; C[k] ⊢ (z :^n Z ; FF[k^-;z] => GG[k;z]).
-symbol Nested_transfd_telescope_cat [K Z : Cat]
-  (C : τ (Catd K))
-  (E D : τ (Catd Z))
-  (FF : τ (Obj (Pi_cat (@Op_catd K (@Const_catd K (@Functord_cat Z E D))))))
-  (GG : τ (Obj (Pi_cat (@Const_catd K (@Functord_cat Z E D)))))
-  : Cat
-≔ @Functord_cat K C (@Nested_transfd_telescope_catd K Z E D FF GG);
 
 /*
   PathOut category and moving-motive transport.
