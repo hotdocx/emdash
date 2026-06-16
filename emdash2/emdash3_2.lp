@@ -603,14 +603,19 @@ rule @id (@Functord_cat $K $E $D) $FF
     (F ∘ G)[x]             = F[G[x]]
     (F ∘ G)[f]             = F[G[f]]
 */
+// Stable identity functor head: id_func(A) = id_A : A ⊢ A.
 constant symbol id_func [A: Cat] : τ (Functor A A);
+
+// Cat_cat identity and point/arrow actions of the ordinary identity functor.
 rule @id Cat_cat $A ↪ @id_func $A;
 rule fapp0 (@id_func $A) $xA ↪ $xA;
 rule @fapp1_fapp0 $A $A (@id_func $A) $x $y $p ↪ $p;
 
+// Stable composition head: comp_cat_fapp0(F,G) = F ∘ G.
 symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
   (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C);
 
+// Cat_cat composition folds and point/arrow actions of composed functors.
 rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
 rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
 rule @comp_cat_fapp0 $A $A $C $F (@id_func $A) ↪ $F;
@@ -624,6 +629,7 @@ rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
       (@fapp0 $A $B $G $y)
       (@fapp1_fapp0 $A $B $G $x $y $f);
 
+// Ordinary category identity cuts: g ∘ id ↪ g and id ∘ f ↪ f.
 rule @comp_fapp0 $A $Y $Y $Z $g (@id $A $Y) ↪ $g;
 rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
 
@@ -636,11 +642,14 @@ rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
 injective symbol Op_func : Π [A B : Cat],
   τ (Functor A B) → τ (Functor (Op_cat A) (Op_cat B));
 
+// Opposite-functor involution and pointwise object/arrow computations.
 rule Op_func (@Op_func $A $B $F) ↪ $F;
 rule @fapp0 _ _ (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
 rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y ↪ @fapp1_func $A $B $F $Y $X;
 rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
   ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
+
+// Opposite preserves identity and reverses ordinary functor composition.
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
@@ -653,6 +662,8 @@ rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
 //   Terminal_func(A) : A ⊢ 1
 //   Obj_func(y) : 1 ⊢ Y picks out y : Obj(Y).
 constant symbol Terminal_cat : Cat;
+
+// Terminal category normal forms: objects/homs/id/composition are all unit.
 rule Op_cat Terminal_cat ↪ Terminal_cat;
 rule Obj Terminal_cat ↪ Unit_grpd;
 rule Hom_cat Terminal_cat _ _ ↪ Terminal_cat;
@@ -664,6 +675,7 @@ rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 
 // Unique functor into the terminal category.
 injective symbol Terminal_func : Π (A : Cat), τ (Functor A Terminal_cat);
+// Opposite preserves the unique terminal-valued functor.
 rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 
 // Evaluation at a fixed object, as a functor out of a functor category.
@@ -672,6 +684,7 @@ rule @Op_func _ _ (@Terminal_func $A) ↪ @Terminal_func (Op_cat $A);
 //   fapp0_func(x)[F] = F[x].
 symbol fapp0_func : Π [A B : Cat],
   τ (Obj A) → τ (Functor (Functor_cat A B) B);
+// Evaluation functor object action: ev_x(F) ↪ F[x].
 rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 
 // Constant functor, used by constant directed families without capping the
@@ -682,6 +695,7 @@ rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 //   Const_func(b)[x] = b
 //   Const_func(b)[f] = id_b.
 injective symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
+// Constant-functor object/arrow actions and functorial compatibility.
 rule @fapp0 $A $B (@Const_func $A $B $b) $_ ↪ $b;
 rule @fapp1_func $A $B (@Const_func $A $B $b) $x $y
   ↪ @Const_func
@@ -710,6 +724,7 @@ injective symbol Obj_func [Y : Cat] (y : τ (Obj Y)) : τ (Functor Terminal_cat 
 //   op[A] = A^op
 //   op[F] = F^op.
 constant symbol op : τ (Functor Cat_cat Cat_cat);
+// Internal opposite action on categories and functors.
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
@@ -864,8 +879,10 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
     hom iteration; it is a reading of existing hom/Sigma structure, not a
     separate kernel primitive.
 */
+// Represented hom family with fixed source W: hom_(F,W)[y] = Hom_A(W,F[y]).
 injective symbol hom_ [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   : τ (Functor B Cat_cat);
+// Object projection of the represented hom family.
 rule @fapp0 $B Cat_cat (@hom_ $A $B $F $W) $y
   ↪ Hom_cat $A $W (@fapp0 $B $A $F $y);
 
@@ -897,6 +914,7 @@ rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
   Hom_A(W,F[X]) ⊢ Hom_A(W,F[Y]), rather than capping immediately at a
   single g.
 */
+// Telescope-level postcomposition: f ↦ (g ↦ F[f] ∘ g).
 symbol hom_postcomp_tele_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -906,9 +924,11 @@ symbol hom_postcomp_tele_func [A B : Cat]
         (Hom_cat A W (@fapp0 B A F X))
         (Hom_cat A W (@fapp0 B A F Y))));
 
+// Arrow action of hom_(F,W) exposes the postcomposition telescope.
 rule @fapp1_func $B Cat_cat (@hom_ $A $B $F $W) $X $Y
   ↪ @hom_postcomp_tele_func $A $B $F $W $X $Y;
 
+// Capped postcomposition functor: hom_postcomp_func(f)[g] = F[f] ∘ g.
 symbol hom_postcomp_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -917,12 +937,15 @@ symbol hom_postcomp_func [A B : Cat]
       (Hom_cat A W (@fapp0 B A F X))
       (Hom_cat A W (@fapp0 B A F Y)));
 
+// Applying the telescope to f yields the capped postcomposition functor.
 rule fapp0 (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f
   ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
 
+// Direct capped arrow action of hom_(F,W) joins the telescope projection.
 rule @fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f
   ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
 
+// Object action of postcomposition: g ↦ F[f] ∘ g.
 rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
   ↪ @comp_fapp0
       $A
@@ -932,6 +955,7 @@ rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
       (@fapp1_fapp0 $B $A $F $X $Y $f)
       $g;
 
+// Hom-action of the telescope as f varies: alpha : f => g maps to a transfor.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -945,6 +969,7 @@ symbol hom_postcomp_tele_fapp1_func [A B : Cat]
         (@hom_postcomp_func A B F W X Y f)
         (@hom_postcomp_func A B F W X Y g)));
 
+// Capped hom-action of the postcomposition telescope.
 symbol hom_postcomp_tele_fapp1_fapp0 [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -957,6 +982,7 @@ symbol hom_postcomp_tele_fapp1_fapp0 [A B : Cat]
       (@hom_postcomp_func A B F W X Y f)
       (@hom_postcomp_func A B F W X Y g));
 
+// Projection rules for the telescope hom-action.
 rule @fapp1_func _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g
   ↪ @hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g;
 
@@ -966,6 +992,7 @@ rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
+// Hom-action of capped postcomposition on arrows alpha : g => h.
 symbol hom_postcomp_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -984,6 +1011,7 @@ symbol hom_postcomp_fapp1_func [A B : Cat]
           (@fapp1_fapp0 B A F X Y f)
           h)));
 
+// Capped hom-action of capped postcomposition.
 symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -1001,6 +1029,7 @@ symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
         (@fapp1_fapp0 B A F X Y f)
         h));
 
+// Projection rules for the capped postcomposition hom-action.
 rule @fapp1_func _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h
   ↪ @hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h;
 
@@ -1010,6 +1039,7 @@ rule fapp0 (@hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h $alpha
   ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
 
+// Identity 2-cell under postcomposition maps to the identity at F[f] ∘ g.
 rule @hom_postcomp_fapp1_fapp0
       $A
       $B
@@ -1031,6 +1061,7 @@ rule @hom_postcomp_fapp1_fapp0
         (@fapp1_fapp0 $B $A $F $X $Y $f)
         $g);
 
+// Cat-valued postcomposition telescope reduces to ordinary functor composition.
 rule @hom_postcomp_tele_func Cat_cat Cat_cat $E $W $X $Y
   ↪ @comp_cat_fapp0
       (Functor_cat $X $Y)
@@ -1046,6 +1077,7 @@ rule @hom_postcomp_tele_func Cat_cat Cat_cat $E $W $X $Y
         (@fapp0 Cat_cat Cat_cat $E $Y))
       (@fapp1_func Cat_cat Cat_cat $E $X $Y);
 
+// Cat-valued capped postcomposition reduces to comp_cat_cov_func.
 rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
   ↪ @comp_cat_cov_func
       $W
@@ -1080,6 +1112,7 @@ injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B
   When F is the identity functor, this is ordinary represented-object
   precomposition: g maps to g o h.
 */
+// Telescope-level precomposition: h ↦ (g ↦ g ∘ F[h]).
 symbol hom_precomp_along_tele_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1089,6 +1122,7 @@ symbol hom_precomp_along_tele_func [A B : Cat]
         (Hom_cat B (@fapp0 A B F X) Z)
         (Hom_cat B (@fapp0 A B F W) Z)));
 
+// Cat-valued precomposition telescope reduces to ordinary functor composition.
 rule @hom_precomp_along_tele_func Cat_cat Cat_cat $E $Z $W $X
   ↪ @comp_cat_fapp0
       (Functor_cat $W $X)
@@ -1104,6 +1138,7 @@ rule @hom_precomp_along_tele_func Cat_cat Cat_cat $E $Z $W $X
         $Z)
       (@fapp1_func Cat_cat Cat_cat $E $W $X);
 
+// Capped precomposition functor: hom_precomp_along_func(h)[g] = g ∘ F[h].
 symbol hom_precomp_along_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1112,9 +1147,11 @@ symbol hom_precomp_along_func [A B : Cat]
       (Hom_cat B (@fapp0 A B F X) Z)
       (Hom_cat B (@fapp0 A B F W) Z));
 
+// Applying the telescope to h yields the capped precomposition functor.
 rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
+// Object action of precomposition: g ↦ g ∘ F[h].
 rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
   ↪ @comp_fapp0
       $B
@@ -1124,6 +1161,7 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h);
 
+// Hom-action of the telescope as h varies: alpha : h => k maps to a transfor.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1137,6 +1175,7 @@ symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
         (@hom_precomp_along_func A B F Z W X h)
         (@hom_precomp_along_func A B F Z W X k)));
 
+// Capped hom-action of the precomposition telescope.
 symbol hom_precomp_along_tele_fapp1_fapp0 [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1149,6 +1188,7 @@ symbol hom_precomp_along_tele_fapp1_fapp0 [A B : Cat]
       (@hom_precomp_along_func A B F Z W X h)
       (@hom_precomp_along_func A B F Z W X k));
 
+// Projection rules for the precomposition telescope hom-action.
 rule @fapp1_func _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k
   ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
 
@@ -1158,6 +1198,7 @@ rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
+// Hom-action of capped precomposition on arrows alpha : g => k.
 symbol hom_precomp_along_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1182,6 +1223,7 @@ symbol hom_precomp_along_fapp1_func [A B : Cat]
           k
           (@fapp1_fapp0 A B F W X h))));
 
+// Capped hom-action of capped precomposition.
 symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1205,6 +1247,7 @@ symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
         k
         (@fapp1_fapp0 A B F W X h)));
 
+// Projection rules for the capped precomposition hom-action.
 rule @fapp1_func _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k
   ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
 
@@ -1214,6 +1257,7 @@ rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
+// Identity 2-cell under precomposition maps to the identity at g ∘ F[h].
 rule @hom_precomp_along_fapp1_fapp0
       $A
       $B
@@ -1346,33 +1390,42 @@ rule @fapp0 _ _ (@hom_int $A $B $F) $W
   `sigma_Fst`/`sigma_Snd` consumer rules. Avoid a broad eta rule expanding
   arbitrary `fapp0 H i`; use the narrower paired-head rules below.
 */
+// Binary product category: Product_cat(A,B) = A x B.
 injective symbol Product_cat : Π (A B : Cat), Cat;
 
+// Product-valued functors normalize componentwise: X ⊢ A x B = (X ⊢ A) x (X ⊢ B).
 rule Functor_cat $X (Product_cat $A $B)
   ↪ Product_cat (Functor_cat $X $A) (Functor_cat $X $B);
 
+// Product objects are encoded pairs (x,u) with x : Obj(A), u : Obj(B).
 rule Obj (Product_cat $A $B)
   ↪ @Σ_ (Obj $A) (λ _ : τ (Obj $A), Obj $B);
 
+// Opposite distributes over binary products: (A x B)^op = A^op x B^op.
 rule Op_cat (Product_cat $A $B)
   ↪ Product_cat (Op_cat $A) (Op_cat $B);
 
+// First object projection: Product_projL(x,u) = x.
 symbol Product_projL [A B : Cat] (xy : τ (Obj (Product_cat A B)))
   : τ (Obj A)
 ≔ sigma_Fst xy;
 
+// Second object projection: Product_projR(x,u) = u.
 symbol Product_projR [A B : Cat] (xy : τ (Obj (Product_cat A B)))
   : τ (Obj B)
 ≔ sigma_Snd xy;
 
+// Object pairing: Product_pair(x,u) = (x,u) : Obj(A x B).
 injective symbol Product_pair [A B : Cat]
   (x : τ (Obj A)) (y : τ (Obj B))
   : τ (Obj (Product_cat A B))
 ≔ @Struct_sigma (Obj A) (λ _ : τ (Obj A), Obj B) x y;
 
+// First projection functor: pi_1 : A x B ⊢ A.
 injective symbol Product_projL_func [A B : Cat]
   : τ (Functor (Product_cat A B) A);
 
+// Second projection functor: pi_2 : A x B ⊢ B.
 injective symbol Product_projR_func [A B : Cat]
   : τ (Functor (Product_cat A B) B);
 
@@ -1380,6 +1433,7 @@ injective symbol Product_projR_func [A B : Cat]
 rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
 rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
 
+// Projection functors act by object projections.
 rule @fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p
   ↪ sigma_Fst $p;
 
@@ -1394,26 +1448,31 @@ rule sigma_Snd (@fapp0 $X (Product_cat $A $B) $H $i)
   ↪ @fapp0 $X $B (sigma_Snd $H) $i;
 
 // Application and hom-action for an explicitly paired functor.
+// Explicit pair application: (F,G)[i] = (F[i],G[i]).
 rule @fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i
   ↪ Struct_sigma
       (@fapp0 $X $A $F $i)
       (@fapp0 $X $B $G $i);
 
+// Product homs compute componentwise.
 rule Hom_cat (Product_cat $A $B) $p $q
   ↪ Product_cat
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
+// Hom-action of a paired functor is the pair of hom-actions.
 rule @fapp1_func $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j
   ↪ Struct_sigma
       (@fapp1_func $X $A $F $i $j)
       (@fapp1_func $X $B $G $i $j);
 
+// Capped hom-action of a paired functor is componentwise.
 rule @fapp1_fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j $p
   ↪ Struct_sigma
       (@fapp1_fapp0 $X $A $F $i $j $p)
       (@fapp1_fapp0 $X $B $G $i $j $p);
 
+// Hom-action of product projections is projection on product homs.
 rule @fapp1_func (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q
   ↪ @Product_projL_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
@@ -1424,15 +1483,18 @@ rule @fapp1_func (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
+// Capped projection hom-actions select the corresponding component arrow.
 rule @fapp1_fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q $h
   ↪ sigma_Fst $h;
 
 rule @fapp1_fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
+// Product identities are pairs of identities.
 rule @id (Product_cat $A $B) (Struct_sigma $x $u)
   ↪ Struct_sigma (@id $A $x) (@id $B $u);
 
+// Product composition is componentwise: (g1,g2) ∘ (f1,f2).
 rule @comp_fapp0
       (Product_cat $A $B)
       (Struct_sigma $x $u)
@@ -1446,6 +1508,9 @@ rule @comp_fapp0
 
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.
+//
+// Surface/formula:
+//   Product_pair_tele_func(A,B)[x][y] = (x,y).
 symbol Product_pair_tele_func [A B : Cat]
   : τ (Functor A (Functor_cat B (Product_cat A B)));
 
