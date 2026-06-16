@@ -873,7 +873,7 @@ rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
 
   Simplicial reading:
     Fixing W and taking the Sigma total of hom_(F,W) gives the
-    Grothendieck/coslice presentation: an object is an edge W -> F[y], and a
+    Grothendieck/coslice presentation: an object is an edge W ->^A F[y], and a
     total arrow is a base edge together with a comparison triangle/surface over
     it. This is the first simplicial presentation used by the later dependent
     hom iteration; it is a reading of existing hom/Sigma structure, not a
@@ -3387,6 +3387,9 @@ symbol fib_cov_tapp0_func [K : Cat] (E : τ (Catd K))
 //   homd_(FF,x,u,y,v) : Hom_Z(x,y)^op ⊢ Cat
 //   homd_(FF,x,u,y,v)[f : x ->^Z y]
 //     = Hom_{E[y]}(E[f](u), FF[y](v)).
+//
+// Here FF : D ⊢_Z E, so the source endpoint u lies in E[x] and the target
+// endpoint v lies in D[y].
 injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
   (FF : τ (Functord D E))
   (x : τ (Obj Z))
@@ -3577,6 +3580,9 @@ rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 // `Pullback_catd` stays a definition by composition, but this special case is
 // discriminable so sections over the total category can contract to displayed
 // functors out of the displayed family.
+//
+// Surface/formula:
+//   Sigma_proj1_pullback_catd(R,D)[(k,r)] = D[k].
 injective symbol Sigma_proj1_pullback_catd [K : Cat]
   (R D : τ (Catd K))
   : τ (Catd (@Sigma_cat K R));
@@ -3669,9 +3675,16 @@ symbol sigma_transport_arrow [K : Cat] (E : τ (Catd K))
         (@catd_transport_func K E x y p)
         u));
 
-// Generic action of a Sigma map on a canonical total transport arrow. This is a
-// transparent alias for the ordinary functor action on the canonical total
-// arrow.
+// Generic action of a Sigma map on a canonical total transport arrow.
+//
+// Surface/formula:
+//   sigma_map_transport_arrow(η,p,u)
+//     = Sigma(η)[sigma_transport_arrow(E,p,u)]
+//     : (x,η[x](u)) ->^Sigma_cat(D) (y,η[y](E[p](u))).
+//
+// This is a transparent alias for ordinary functor action on the canonical
+// total arrow; it deliberately exposes the displayed-functor laxity target
+// rather than pretending to be strict transport to D[p](η[x](u)).
 symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   [x y : τ (Obj K)]
@@ -4495,7 +4508,7 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
     fib_cov_transf(E,x,u)        : hom_Z(x,-) => E
                                   ≡ Functord(hom_Z(x,-), E)
     fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) ⊢ E[y]
-    fib_cov_tapp0_func(E,x,u,y)(f) = E(f)(u)
+    fib_cov_tapp0_func(E,x,u,y)(f) = E[f](u)
 
   In the formal v3.2 normal form, a
   Cat-valued transfor is a displayed functor: `Transf_cat K Cat_cat F E`
@@ -4756,7 +4769,7 @@ rule fapp0 (@homd_tgt_func $Z $D $E $FF $x $u $y) $v
 
   Mathematical notation:
     s[x]                = piapp0 s x
-    piapp1_src_obj(s,f) = E(f)(s[x]).
+    piapp1_src_obj(s,f) = E[f](s[x]).
 
   The full `piapp1_func`/`piapp1_fapp0` package is defined after the displayed
   internal-hom projection heads it unfolds through.
@@ -5478,7 +5491,7 @@ rule fapp0
   Full section action over a base arrow.
 
   Mathematical notation:
-    s[f]                  = piapp1_fapp0 s f : E(f)(s[x]) ->^(E[y]) s[y]
+    s[f]                  = piapp1_fapp0 s f : E[f](s[x]) ->^(E[y]) s[y]
     piapp1_func(s,x,y)[f] = s[f].
 
   The section action is the terminal-source specialization of the displayed
@@ -5577,7 +5590,7 @@ rule @fdapp1_int_hom_fapp0
       : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u)).
 
   Faithful surface syntax:
-    epsilon[p][u] : D[p](FF[x] u) ->^(D[y]) GG[y](E[p] u)
+    epsilon[p][u] : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u))
 
   The rules below project this cell through the same stages as
   `fdapp1_int_*`: section at x,u; target y; fibre object v; base arrow p; then
@@ -5621,7 +5634,7 @@ symbol homd_tdapp1_tgt_func [K : Cat] [E D : τ (Catd K)]
 //
 // Surface/formula:
 //   tdapp1_int_section_arrow(epsilon,x,u)
-//     : homd_int(id_E)[x](u) -> homd_int(GG)[x](FF[x](u)).
+//     : homd_int(id_E)[x](u) ->^(HomdTarget_E[x]) homd_int(GG)[x](FF[x](u)).
 symbol tdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5701,7 +5714,7 @@ rule @tdapp1_int_tgt_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y
 //
 // Surface/formula:
 //   tdapp1_int_presheaf_arrow(epsilon,x,u,y,v)
-//     : Hom_E(E[-]u,v) => Hom_D(D[-](FF[x]u),GG[y]v).
+//     : Hom_E(E[—](u),v) => Hom_D(D[—](FF[x](u)),GG[y](v)).
 symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5737,7 +5750,7 @@ rule @tdapp1_int_presheaf_arrow
 //
 // Surface/formula:
 //   tdapp1_int_hom_func(epsilon,p,u,v)
-//     : homd_(id_E,x,u,y,v)[p] ⊢ homd_(GG,x,FF[x]u,y,v)[p].
+//     : homd_(id_E,x,u,y,v)[p] ⊢ homd_(GG,x,FF[x](u),y,v)[p].
 symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5792,7 +5805,7 @@ rule @tdapp1_int_hom_func
 //
 // Surface/formula:
 //   tdapp1_int_cell(epsilon,p,u)
-//     : D[p](FF[x]u) ->^(D[y]) GG[y](E[p]u).
+//     : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u)).
 symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -6596,8 +6609,8 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
     Rep_Z(x)[y] = Hom_Z(x,y)
     PathOut_Z(x) = Σ y :^n Z, Hom_Z(x,y)
     PathOutMotives_Z[x] = Catd(PathOut_Z(x))
-    PathOut_Z(p) = precomposition/pullback along p
-    pathout_motive_transport(p,E) = PathOut_Z(p)^*E.
+    PathOut_transport_func(p : x ->^Z y) : PathOut_Z(y) ⊢ PathOut_Z(x)
+    pathout_motive_transport(p,E) = PathOut_transport_func(p)^*E.
 */
 
 /*
@@ -6759,7 +6772,9 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
   Sigma homs and Sigma-map action.
 
   Surface/formula:
-    Hom_{Σ E}((x,u),(y,v))
+    Hom_{Σ E}((x,u),(y,v)) =
+      Σ (f : Hom_Z(x,y)), Hom_{E[y]}(E[f](u),v)
+    kernel normal form:
       = Op_cat(Σ (f : Hom_Z(x,y)^op), homd_(id_E,x,u,y,v)[f])
     Sigma_map(eta)(k,u) = (k, eta[k](u))
     Sigma_proj1 ∘ Sigma_map(eta) = Sigma_proj1.
