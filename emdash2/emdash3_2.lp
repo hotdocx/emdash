@@ -649,7 +649,7 @@ rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y ↪ @fapp1_func $A $B $F $Y $X;
 rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
   ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
 
-// Opposite preserves identity and reverses ordinary functor composition.
+// Opposite preserves identity and ordinary functor composition.
 rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
 rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
@@ -663,7 +663,7 @@ rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
 //   Obj_func(y) : 1 ⊢ Y picks out y : Obj(Y).
 constant symbol Terminal_cat : Cat;
 
-// Terminal category normal forms: objects/homs/id/composition are all unit.
+// Terminal normal forms: Obj(1)=Unit, Hom_1(*,*)=1, id/comp are Terminal_obj.
 rule Op_cat Terminal_cat ↪ Terminal_cat;
 rule Obj Terminal_cat ↪ Unit_grpd;
 rule Hom_cat Terminal_cat _ _ ↪ Terminal_cat;
@@ -955,7 +955,7 @@ rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
       (@fapp1_fapp0 $B $A $F $X $Y $f)
       $g;
 
-// Hom-action of the telescope as f varies: alpha : f => g maps to a transfor.
+// Hom-action of the telescope as f varies: alpha : f ->^(Hom_B(X,Y)) g.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -992,7 +992,7 @@ rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
-// Hom-action of capped postcomposition on arrows alpha : g => h.
+// Hom-action of capped postcomposition on alpha : g ->^(Hom_A(W,F[X])) h.
 symbol hom_postcomp_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y : τ (Obj B)]
@@ -1161,7 +1161,7 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h);
 
-// Hom-action of the telescope as h varies: alpha : h => k maps to a transfor.
+// Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1198,7 +1198,7 @@ rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
-// Hom-action of capped precomposition on arrows alpha : g => k.
+// Hom-action of capped precomposition on alpha : g ->^(Hom_B(F[X],Z)) k.
 symbol hom_precomp_along_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
   [W X : τ (Obj A)]
@@ -1378,22 +1378,22 @@ rule @fapp0 _ _ (@hom_int $A $B $F) $W
   Minimal ordinary product package.
 
   Surface/formula:
-    Product_cat(A,B)              = A x B
-    Obj(A x B)                    = Sigma x : Obj(A), Obj(B)
-    Hom_{A x B}((x,u),(y,v))      = Hom_A(x,y) x Hom_B(u,v)
+    Product_cat(A,B)              = A × B
+    Obj(A × B)                    = Sigma x : Obj(A), Obj(B)
+    Hom_{A × B}((x,u),(y,v))      = Hom_A(x,y) × Hom_B(u,v)
     id_{(x,u)}                    = (id_x,id_u)
     (g1,g2) o (f1,f2)             = (g1 o f1, g2 o f2)
-    X ⊢ (A x B)                  = (X ⊢ A) x (X ⊢ B)
+    X ⊢ (A × B)                  = (X ⊢ A) × (X ⊢ B)
 
   Product-valued functors are represented by the product normal form above.
   Projection computation is attached to stable projection functor heads and to
   `sigma_Fst`/`sigma_Snd` consumer rules. Avoid a broad eta rule expanding
   arbitrary `fapp0 H i`; use the narrower paired-head rules below.
 */
-// Binary product category: Product_cat(A,B) = A x B.
+// Binary product category: Product_cat(A,B) = A × B.
 injective symbol Product_cat : Π (A B : Cat), Cat;
 
-// Product-valued functors normalize componentwise: X ⊢ A x B = (X ⊢ A) x (X ⊢ B).
+// Product-valued functors normalize componentwise: X ⊢ A × B = (X ⊢ A) × (X ⊢ B).
 rule Functor_cat $X (Product_cat $A $B)
   ↪ Product_cat (Functor_cat $X $A) (Functor_cat $X $B);
 
@@ -1401,7 +1401,7 @@ rule Functor_cat $X (Product_cat $A $B)
 rule Obj (Product_cat $A $B)
   ↪ @Σ_ (Obj $A) (λ _ : τ (Obj $A), Obj $B);
 
-// Opposite distributes over binary products: (A x B)^op = A^op x B^op.
+// Opposite distributes over binary products: (A × B)^op = A^op × B^op.
 rule Op_cat (Product_cat $A $B)
   ↪ Product_cat (Op_cat $A) (Op_cat $B);
 
@@ -1415,17 +1415,17 @@ symbol Product_projR [A B : Cat] (xy : τ (Obj (Product_cat A B)))
   : τ (Obj B)
 ≔ sigma_Snd xy;
 
-// Object pairing: Product_pair(x,u) = (x,u) : Obj(A x B).
+// Object pairing: Product_pair(x,u) = (x,u) : Obj(A × B).
 injective symbol Product_pair [A B : Cat]
   (x : τ (Obj A)) (y : τ (Obj B))
   : τ (Obj (Product_cat A B))
 ≔ @Struct_sigma (Obj A) (λ _ : τ (Obj A), Obj B) x y;
 
-// First projection functor: pi_1 : A x B ⊢ A.
+// First projection functor: π₁ : A × B ⊢ A.
 injective symbol Product_projL_func [A B : Cat]
   : τ (Functor (Product_cat A B) A);
 
-// Second projection functor: pi_2 : A x B ⊢ B.
+// Second projection functor: π₂ : A × B ⊢ B.
 injective symbol Product_projR_func [A B : Cat]
   : τ (Functor (Product_cat A B) B);
 
@@ -1555,7 +1555,7 @@ rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
 // Product-valued transfors project componentwise.
 //
 // Surface/formula:
-//   Transf(F,G) in A x B = Transf(F_1,G_1) x Transf(F_2,G_2).
+//   Transf(F,G) in A × B = Transf(F_1,G_1) × Transf(F_2,G_2).
 rule @Transf_cat $X (Product_cat $A $B) $F $G
   ↪ Product_cat
       (@Transf_cat $X $A (sigma_Fst $F) (sigma_Fst $G))
@@ -2380,21 +2380,21 @@ rule fapp0
   Internalized product formation in Cat.
 
   Mathematical notation:
-    Product_cat_func[A][B] = A x B
-    Product_cat_fapp0_func(A)[B] = A x B
+    Product_cat_func[A][B] = A × B
+    Product_cat_fapp0_func(A)[B] = A × B
 
     Product_cat_fapp1_func(A,A')[G]
       = Product_cat_fapp1_fapp0_functord(G)
       : Product_cat_func[A] => Product_cat_func[A']
 
     Product_cat_fapp1_tapp0_func(G,B)
-      = G * 1_B : A x B ⊢ A' x B
+      = G * 1_B : A × B ⊢ A' × B
 
     (G * 1_B)[(x,y)] = (G[x],y)
     (G * 1_B)[(p,q)] = (G[p],q)
 
   Faithful surface syntax:
-    A x B
+    A × B
     G * 1_B
 
   `Product_cat_fapp1_tapp0_func` is the stable fixed-right projection of the
@@ -2404,14 +2404,14 @@ rule fapp0
 // Internalized binary product constructor.
 //
 // Surface/formula:
-//   Product_cat_func[A][B] = A x B.
+//   Product_cat_func[A][B] = A × B.
 constant symbol Product_cat_func
   : τ (Functor Cat_cat (Functor_cat Cat_cat Cat_cat));
 
 // Partial product constructor at fixed left factor A.
 //
 // Surface/formula:
-//   Product_cat_fapp0_func(A)[B] = A x B.
+//   Product_cat_fapp0_func(A)[B] = A × B.
 injective symbol Product_cat_fapp0_func (A : Cat)
   : τ (Functor Cat_cat Cat_cat);
 
@@ -2425,7 +2425,7 @@ rule @fapp0 Cat_cat Cat_cat (@Product_cat_fapp0_func $A) $B
 // Hom-action of product formation in the left factor.
 //
 // Surface/formula:
-//   Product_cat_fapp1_func(A,A')[G] : (A x -) => (A' x -).
+//   Product_cat_fapp1_func(A,A')[G] : (A × -) => (A' × -).
 symbol Product_cat_fapp1_func [A A' : Cat]
   : τ (Functor
       (Functor_cat A A')
@@ -2474,8 +2474,8 @@ rule @tapp0_fapp0
 // Projection rules for the fixed-right product map.
 //
 // Surface/formula:
-//   pi_1 o (G * 1_B) = G o pi_1
-//   pi_2 o (G * 1_B) = pi_2.
+//   π₁ ∘ (G * 1_B) = G ∘ π₁
+//   π₂ ∘ (G * 1_B) = π₂.
 rule sigma_Fst (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
   ↪ comp_cat_fapp0 $G Product_projL_func;
 
@@ -5928,7 +5928,7 @@ rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
 // Pairing telescope for products.
 //
 // Surface/formula:
-//   Product_pair_tele_func(A,B) : A ⊢ (B ⊢ A x B)
+//   Product_pair_tele_func(A,B) : A ⊢ (B ⊢ A × B)
 //   Product_pair_tele_func[x][y] = (x,y)
 //   Product_pair_tele_func[p][y] = (p,id_y).
 rule sigma_Fst (@Product_pair_tele_func $A $B) ↪ @const_section_func $B $A;
