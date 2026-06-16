@@ -70,12 +70,21 @@ Background daemon-style (then tail the log):
 
 ## SOP: MathOps / DevOps
 - Use `make ci` before handing off substantial edits. It runs active
-  Lambdapi checks, reviewer milestone examples, whitespace diff checks,
-  stale-reference lint, check-catalog freshness, and source metrics.
+  Lambdapi checks, reviewer milestone examples, Python byte-compilation, shell
+  syntax checks, whitespace diff checks, stale-reference lint, check-catalog
+  freshness, and source metrics.
 - Use `make catalog` after adding or reorganizing diagnostic assertions in
-  `emdash3_2_checks.lp`.
+  `emdash3_2_checks.lp`; the catalog generator fails when an assertion cannot
+  be classified into a reviewer-facing area.
 - Use `make health` after meaningful architecture/check changes to refresh
-  `reports/REPORT_EMDASH_HEALTH.md`.
+  `reports/REPORT_EMDASH_HEALTH.md`; the report includes the core files and
+  the checked `examples/*.lp` milestones.
+- Use `scripts/probe.sh tmp/probes/name.lp` for bounded focused experiments;
+  it writes a log under `logs/probes/` and calls
+  `scripts/explain_failure.py` on failure.
+- Use `scripts/decision_tree.sh SYMBOL` as the local wrapper around
+  `lambdapi decision-tree`, with bare symbols resolved under
+  `emdash.emdash3_2`.
 - Use `reports/INDEX.md` before searching reports by filename.
 - Use `research/literature.md` and `scripts/arxiv_search.py` for repeatable
   arXiv/ar5iv discovery. ar5iv is for HTML skimming; arXiv PDF/source remains

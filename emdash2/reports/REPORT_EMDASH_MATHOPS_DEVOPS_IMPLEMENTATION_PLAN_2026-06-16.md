@@ -211,6 +211,10 @@ Initial implementation status:
 - `research/literature.md` and `scripts/arxiv_search.py`: implemented.
 - `reports/REPORT_EMDASH_CHECK_CATALOG.md` generator: implemented.
 - `examples/` reviewer milestone suite: implemented.
+- Examples are included in `scripts/check_metrics.py` and
+  `reports/REPORT_EMDASH_HEALTH.md`: implemented.
+- Focused checker-loop helpers `scripts/probe.sh`,
+  `scripts/explain_failure.py`, and `scripts/decision_tree.sh`: implemented.
 
 This sequence improves daily development immediately, then improves research
 intake, then improves external credibility.

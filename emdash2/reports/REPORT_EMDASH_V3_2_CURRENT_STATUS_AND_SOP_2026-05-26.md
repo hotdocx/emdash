@@ -297,6 +297,19 @@ At the time of this report it checks:
 ```text
 emdash3_2.lp
 emdash3_2_checks.lp
+examples/*.lp
+```
+
+For focused probes, use:
+
+```bash
+scripts/probe.sh tmp/probes/name.lp
+```
+
+For compact failure extraction from a watcher or probe log, use:
+
+```bash
+scripts/explain_failure.py logs/typecheck.log
 ```
 
 The old v3.1 baseline and obsolete v2 baseline are no longer part of the

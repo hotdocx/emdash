@@ -52,6 +52,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 ## MathOps utilities
 - Stale active-reference lint: `./scripts/lint_active_refs.sh`.
 - Check/source metrics: `python3 scripts/check_metrics.py --write-report`.
+- Probe a temporary Lambdapi file with a compact failure summary:
+  `scripts/probe.sh tmp/probes/name.lp`.
+- Summarize an existing Lambdapi log: `scripts/explain_failure.py logs/typecheck.log`.
+- Inspect rewrite compilation: `scripts/decision_tree.sh homd_`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
 - Reviewer milestone examples live in `examples/`.

@@ -9,20 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MAIN = ROOT / "emdash3_2.lp"
 CHECKS = ROOT / "emdash3_2_checks.lp"
 REPORT = ROOT / "reports" / "REPORT_EMDASH_CHECK_CATALOG.md"
-
-
-@dataclass(frozen=True)
-class Section:
-    line: int
-    number: str
-    title: str
-
-    @property
-    def label(self) -> str:
-        return f"{self.number}. {self.title}"
 
 
 @dataclass(frozen=True)
@@ -34,30 +22,14 @@ class Check:
     statement: str
 
 
+@dataclass(frozen=True)
+class Area:
+    title: str
+    patterns: tuple[str, ...]
+
+
 def read_lines(path: Path) -> list[str]:
     return path.read_text(encoding="utf-8").splitlines()
-
-
-def parse_sections(lines: list[str]) -> list[Section]:
-    pattern = re.compile(r"^//\s+([0-9]+)\.\s+(.*\S)\s*$")
-    sections: list[Section] = []
-    for i, line in enumerate(lines, start=1):
-        match = pattern.match(line)
-        if match:
-            sections.append(Section(i, match.group(1), match.group(2)))
-    return sections
-
-
-def section_for_line(sections: list[Section], source_line: int | None) -> str:
-    if source_line is None:
-        return "Untagged / no source-line comment"
-    current = "Before section map"
-    for section in sections:
-        if section.line <= source_line:
-            current = section.label
-        else:
-            break
-    return current
 
 
 def parse_checks(lines: list[str]) -> list[Check]:
@@ -99,59 +71,123 @@ def parse_checks(lines: list[str]) -> list[Check]:
     return checks
 
 
-AREAS: list[tuple[str, tuple[str, ...]]] = [
-    (
+AREAS: list[Area] = [
+    Area(
+        "Path/equality category calculus",
+        ("Path_cat", "eq_refl", "eq_trans"),
+    ),
+    Area(
         "Applications: PathOut, path induction, transitivity, telescopes",
         ("PathOut", "PathInd", "path_comp", "CompTarget", "Nested_", "Telescope"),
     ),
-    (
+    Area(
         "Adjunction triangle cut-elimination",
         ("Adjunction", "left_adj", "right_adj", "unit_adj", "counit_adj"),
     ),
-    (
-        "Displayed hom-action and laxity extraction",
-        ("tdapp", "fdapp", "Fibre_transf", "catd_transport", "functord_transport"),
-    ),
-    (
-        "Dependent homs and covariant fibre transport",
-        ("homd", "Homd", "fib_cov", "FibCov", "HomPresheaf", "Rep_catd", "Edge_catd"),
-    ),
-    (
-        "Sigma/Pi totals, sections, and directed family calculus",
-        ("Sigma", "sigma_", "Pi_", "Pi_cat", "piapp", "Const_catd", "Pullback_catd", "Catd_cat_func"),
-    ),
-    (
+    Area(
         "Products, evaluation, curry/uncurry",
         ("Product", "Eval", "curry", "uncurry"),
     ),
-    (
-        "Ordinary transformations and structural logic",
-        ("Transf", "tapp", "Const_transf", "sym_func", "diag_func", "comp_cat_cov", "comp_cat_con"),
+    Area(
+        "Sigma/Pi totals, sections, and directed family calculus",
+        (
+            "Sigma",
+            "sigma_",
+            "Pi_",
+            "Pi_cat",
+            "piapp",
+            "Const_catd",
+            "Pullback_catd",
+            "Catd_cat_func",
+        ),
     ),
-    (
+    Area(
+        "Dependent homs and covariant fibre transport",
+        (
+            "homd",
+            "Homd",
+            "fib_cov",
+            "FibCov",
+            "HomPresheaf",
+            "Rep_catd",
+            "Edge_catd",
+        ),
+    ),
+    Area(
+        "Displayed hom-action and laxity extraction",
+        ("tdapp", "fdapp", "Fibre_transf", "catd_transport", "functord_transport"),
+    ),
+    Area(
+        "Universe categories and displayed-family category heads",
+        (
+            "Obj Grpd_cat",
+            "Obj Cat_cat",
+            "Hom_cat Cat_cat",
+            "Functor_cat K Cat_cat",
+            "Hom_cat (Catd_cat K)",
+            "Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat",
+            "Hom_cat (Functor_cat K Cat_cat)",
+            "≡ @id_transfd",
+        ),
+    ),
+    Area(
+        "Ordinary transformations and structural logic",
+        (
+            "Transf",
+            "tapp",
+            "Const_transf",
+            "sym_func",
+            "diag_func",
+            "comp_cat_cov",
+            "comp_cat_con",
+        ),
+    ),
+    Area(
         "Ordinary internal hom and composition actions",
         ("hom_", "hom_con", "hom_int", "hom_postcomp", "hom_precomp", "comp_func"),
     ),
-    (
-        "Kernel categories, functors, and universes",
-        ("Path_cat", "Grpd_cat", "Cat_cat", "Functor_cat", "Functord_cat", "Transfd_cat", "id_func"),
+    Area(
+        "Displayed families, fibres, and displayed functor structure",
+        (
+            "Fibre_cat",
+            "Fibre_func",
+            "Terminal_catd",
+            "Op_catd",
+            "Catd_catd_con",
+            "Obj_func",
+            "id_funcd",
+            "Op_funcd",
+            "comp_catd_fapp0",
+            "Functor_catd",
+        ),
+    ),
+    Area(
+        "Ordinary functor identity/composition laws",
+        (
+            "comp_cat_fapp0",
+            "fapp1_fapp0",
+            "fapp1_func",
+            "id_func",
+            "fapp0_func",
+            "Const_func",
+        ),
     ),
 ]
 
 
 def classify(check: Check) -> str:
     text = check.statement
-    for area, patterns in AREAS:
-        if any(pattern in text for pattern in patterns):
-            return area
+    for area in AREAS:
+        if any(pattern in text for pattern in area.patterns):
+            return area.title
     return "Other / unclassified checks"
 
 
 def summarize(checks: list[Check]) -> dict[str, list[Check]]:
-    grouped: dict[str, list[Check]] = {}
+    grouped: dict[str, list[Check]] = {area.title: [] for area in AREAS}
     for check in checks:
         grouped.setdefault(classify(check), []).append(check)
-    return grouped
+    return {area: items for area, items in grouped.items() if items}
 
 
 def short(text: str, limit: int = 120) -> str:
@@ -162,9 +198,10 @@ def short(text: str, limit: int = 120) -> str:
 
 
 def render() -> str:
-    sections = parse_sections(read_lines(MAIN))
     checks = parse_checks(read_lines(CHECKS))
     grouped = summarize(checks)
+    unclassified = grouped.get("Other / unclassified checks", [])
+    legacy_source_tags = sum(1 for check in checks if check.source_line is not None)
 
     lines: list[str] = [
         "# EMDASH Check Catalog",
@@ -175,15 +212,18 @@ def render() -> str:
         "It is intended as a reviewer-facing map of the regression suite, not as",
         "the source of truth for the checked statements.",
         "",
-        "The `Source line` column records legacy `// From emdash3_2.lp:<line>`",
-        "comments where present. Those comments came from an older pre-split",
-        "snapshot and are kept only as traceability tags; the `Area` grouping is",
-        "based on the checked statement text.",
+        "`emdash3_2_checks.lp` still contains legacy",
+        "`// From emdash3_2.lp:<line>` comments from an older pre-split",
+        "snapshot. This report deliberately does not present those as active",
+        "source locations; the grouping below is based on the checked statement",
+        "text.",
         "",
         "## Summary",
         "",
         f"- Total checks: {len(checks)}",
-        f"- Mapped sections: {len(grouped)}",
+        f"- Mapped areas: {len(grouped)}",
+        f"- Legacy source-line tags: {legacy_source_tags}",
+        f"- Unclassified checks: {len(unclassified)}",
         "",
         "| Area | Checks |",
         "| --- | ---: |",
@@ -202,13 +242,12 @@ def render() -> str:
         lines.extend([
             f"### {area}",
             "",
-            "| # | Check line | Source line | Statement head |",
-            "| ---: | ---: | ---: | --- |",
+            "| # | Check line | Statement |",
+            "| ---: | ---: | --- |",
         ])
         for check in items:
-            source = "" if check.source_line is None else str(check.source_line)
             lines.append(
-                f"| {check.index} | {check.line} | {source} | `{short(check.first_line)}` |"
+                f"| {check.index} | {check.line} | `{short(check.statement)}` |"
             )
         lines.append("")
 
@@ -232,19 +271,32 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    def display(path: Path) -> str:
+        try:
+            return str(path.relative_to(ROOT))
+        except ValueError:
+            return str(path)
+
     content = render()
+    if "Other / unclassified checks" in summarize(parse_checks(read_lines(CHECKS))):
+        print(
+            "Some checks are unclassified; update AREAS in "
+            "scripts/generate_check_catalog.py.",
+            file=sys.stderr,
+        )
+        return 1
     output = args.output if args.output.is_absolute() else ROOT / args.output
     if args.check:
         existing = output.read_text(encoding="utf-8") if output.exists() else ""
         if existing != content:
-            print(f"{output.relative_to(ROOT)} is out of date.", file=sys.stderr)
+            print(f"{display(output)} is out of date.", file=sys.stderr)
             return 1
-        print(f"{output.relative_to(ROOT)} is up to date.")
+        print(f"{display(output)} is up to date.")
         return 0
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(content, encoding="utf-8")
-    print(f"wrote {output.relative_to(ROOT)}")
+    print(f"wrote {display(output)}")
     return 0
 
 

@@ -14,7 +14,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHECK_FILES = [Path("emdash3_2.lp"), Path("emdash3_2_checks.lp")]
+CORE_CHECK_FILES = [Path("emdash3_2.lp"), Path("emdash3_2_checks.lp")]
+EXAMPLES_DIR = ROOT / "examples"
 
 
 @dataclass
@@ -27,7 +28,7 @@ class CheckResult:
 def run_command(cmd: list[str], timeout_value: str | None = None) -> tuple[int, str, float]:
     full_cmd = cmd
     if timeout_value and shutil.which("timeout"):
-      full_cmd = ["timeout", "--signal=INT", timeout_value, *cmd]
+        full_cmd = ["timeout", "--signal=INT", timeout_value, *cmd]
 
     start = time.perf_counter()
     proc = subprocess.run(
@@ -53,6 +54,11 @@ def lambdapi_version() -> str:
     except FileNotFoundError:
         return "not found"
     return " ".join(proc.stdout.strip().split()) or f"exit {proc.returncode}"
+
+
+def check_files() -> list[Path]:
+    examples = sorted(path.relative_to(ROOT) for path in EXAMPLES_DIR.glob("*.lp"))
+    return [*CORE_CHECK_FILES, *examples]
 
 
 def count_lines(path: Path) -> dict[str, int | dict[str, int]]:
@@ -106,10 +112,10 @@ def count_lines(path: Path) -> dict[str, int | dict[str, int]]:
     return counts
 
 
-def run_checks(timeout_value: str) -> tuple[list[CheckResult], int]:
+def run_checks(files: list[Path], timeout_value: str) -> tuple[list[CheckResult], int]:
     results: list[CheckResult] = []
     overall = 0
-    for rel in CHECK_FILES:
+    for rel in files:
         cmd = ["lambdapi", "check", "-w", str(rel)]
         rc, output, duration = run_command(cmd, timeout_value)
         results.append(CheckResult(str(rel), rc, duration))
@@ -124,17 +130,20 @@ def run_checks(timeout_value: str) -> tuple[list[CheckResult], int]:
 
 def build_payload(args: argparse.Namespace) -> tuple[dict, int]:
     timeout_value = os.environ.get("EMDASH_TYPECHECK_TIMEOUT", "60s")
+    files_to_check = check_files()
     if args.no_check:
-        checks = [CheckResult(str(path), None, None) for path in CHECK_FILES]
+        checks = [CheckResult(str(path), None, None) for path in files_to_check]
         rc = 0
     else:
-        checks, rc = run_checks(timeout_value)
+        checks, rc = run_checks(files_to_check, timeout_value)
 
-    files = {str(path): count_lines(ROOT / path) for path in CHECK_FILES}
+    files = {str(path): count_lines(ROOT / path) for path in files_to_check}
     payload = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "lambdapi_version": lambdapi_version(),
         "timeout": timeout_value,
+        "core_files": [str(path) for path in CORE_CHECK_FILES],
+        "example_files": [str(path) for path in files_to_check if str(path).startswith("examples/")],
         "checks": [result.__dict__ for result in checks],
         "files": files,
     }
@@ -185,6 +194,36 @@ def format_report(payload: dict) -> str:
             f"{counts['rules']} | {counts['unif_rules']} | {counts['asserts']} | "
             f"{counts['todos']} | {counts['deferred_mentions']} |"
         )
+
+    example_files = payload.get("example_files", [])
+    if example_files:
+        durations = {
+            check["file"]: check["duration_s"]
+            for check in payload["checks"]
+            if check["file"] in example_files
+        }
+        exits = {
+            check["file"]: check["returncode"]
+            for check in payload["checks"]
+            if check["file"] in example_files
+        }
+        lines.extend([
+            "",
+            "## Reviewer Milestone Examples",
+            "",
+            "| Example | Exit | Seconds | Lines | Asserts |",
+            "| --- | ---: | ---: | ---: | ---: |",
+        ])
+        for file_name in example_files:
+            counts = payload["files"][file_name]
+            duration = durations.get(file_name)
+            duration_text = "" if duration is None else f"{duration:.3f}"
+            exit_value = exits.get(file_name)
+            exit_text = "" if exit_value is None else str(exit_value)
+            lines.append(
+                f"| `{file_name}` | {exit_text} | {duration_text} | "
+                f"{counts['lines']} | {counts['asserts']} |"
+            )
 
     main_sections = payload["files"].get("emdash3_2.lp", {}).get("sections", {})
     if main_sections:
