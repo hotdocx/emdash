@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+MAIN = ROOT / "emdash3_2.lp"
+CHECKS = ROOT / "emdash3_2_checks.lp"
+REPORT = ROOT / "reports" / "REPORT_EMDASH_CHECK_CATALOG.md"
+
+
+@dataclass(frozen=True)
+class Section:
+    line: int
+    number: str
+    title: str
+
+    @property
+    def label(self) -> str:
+        return f"{self.number}. {self.title}"
+
+
+@dataclass(frozen=True)
+class Check:
+    index: int
+    line: int
+    source_line: int | None
+    first_line: str
+    statement: str
+
+
+def read_lines(path: Path) -> list[str]:
+    return path.read_text(encoding="utf-8").splitlines()
+
+
+def parse_sections(lines: list[str]) -> list[Section]:
+    pattern = re.compile(r"^//\s+([0-9]+)\.\s+(.*\S)\s*$")
+    sections: list[Section] = []
+    for i, line in enumerate(lines, start=1):
+        match = pattern.match(line)
+        if match:
+            sections.append(Section(i, match.group(1), match.group(2)))
+    return sections
+
+
+def section_for_line(sections: list[Section], source_line: int | None) -> str:
+    if source_line is None:
+        return "Untagged / no source-line comment"
+    current = "Before section map"
+    for section in sections:
+        if section.line <= source_line:
+            current = section.label
+        else:
+            break
+    return current
+
+
+def parse_checks(lines: list[str]) -> list[Check]:
+    checks: list[Check] = []
+    source_line: int | None = None
+    from_pattern = re.compile(r"^//\s+From emdash3_2\.lp:([0-9]+)\.")
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        line_no = i + 1
+        from_match = from_pattern.match(line)
+        if from_match:
+            source_line = int(from_match.group(1))
+            i += 1
+            continue
+        if line.lstrip().startswith("assert"):
+            block = [line.strip()]
+            j = i
+            if not line.strip().endswith(";"):
+                j = i + 1
+                while j < len(lines):
+                    block.append(lines[j].strip())
+                    if lines[j].strip().endswith(";"):
+                        break
+                    j += 1
+            checks.append(
+                Check(
+                    index=len(checks) + 1,
+                    line=line_no,
+                    source_line=source_line,
+                    first_line=line.strip(),
+                    statement=" ".join(block),
+                )
+            )
+            source_line = None
+            i = j + 1
+            continue
+        i += 1
+    return checks
+
+
+AREAS: list[tuple[str, tuple[str, ...]]] = [
+    (
+        "Applications: PathOut, path induction, transitivity, telescopes",
+        ("PathOut", "PathInd", "path_comp", "CompTarget", "Nested_", "Telescope"),
+    ),
+    (
+        "Adjunction triangle cut-elimination",
+        ("Adjunction", "left_adj", "right_adj", "unit_adj", "counit_adj"),
+    ),
+    (
+        "Displayed hom-action and laxity extraction",
+        ("tdapp", "fdapp", "Fibre_transf", "catd_transport", "functord_transport"),
+    ),
+    (
+        "Dependent homs and covariant fibre transport",
+        ("homd", "Homd", "fib_cov", "FibCov", "HomPresheaf", "Rep_catd", "Edge_catd"),
+    ),
+    (
+        "Sigma/Pi totals, sections, and directed family calculus",
+        ("Sigma", "sigma_", "Pi_", "Pi_cat", "piapp", "Const_catd", "Pullback_catd", "Catd_cat_func"),
+    ),
+    (
+        "Products, evaluation, curry/uncurry",
+        ("Product", "Eval", "curry", "uncurry"),
+    ),
+    (
+        "Ordinary transformations and structural logic",
+        ("Transf", "tapp", "Const_transf", "sym_func", "diag_func", "comp_cat_cov", "comp_cat_con"),
+    ),
+    (
+        "Ordinary internal hom and composition actions",
+        ("hom_", "hom_con", "hom_int", "hom_postcomp", "hom_precomp", "comp_func"),
+    ),
+    (
+        "Kernel categories, functors, and universes",
+        ("Path_cat", "Grpd_cat", "Cat_cat", "Functor_cat", "Functord_cat", "Transfd_cat", "id_func"),
+    ),
+]
+
+
+def classify(check: Check) -> str:
+    text = check.statement
+    for area, patterns in AREAS:
+        if any(pattern in text for pattern in patterns):
+            return area
+    return "Other / unclassified checks"
+
+
+def summarize(checks: list[Check]) -> dict[str, list[Check]]:
+    grouped: dict[str, list[Check]] = {}
+    for check in checks:
+        grouped.setdefault(classify(check), []).append(check)
+    return grouped
+
+
+def short(text: str, limit: int = 120) -> str:
+    clean = " ".join(text.split())
+    if len(clean) <= limit:
+        return clean
+    return clean[: limit - 4].rstrip() + " ..."
+
+
+def render() -> str:
+    sections = parse_sections(read_lines(MAIN))
+    checks = parse_checks(read_lines(CHECKS))
+    grouped = summarize(checks)
+
+    lines: list[str] = [
+        "# EMDASH Check Catalog",
+        "",
+        "This report is generated by `scripts/generate_check_catalog.py` from",
+        "`emdash3_2_checks.lp`.",
+        "",
+        "It is intended as a reviewer-facing map of the regression suite, not as",
+        "the source of truth for the checked statements.",
+        "",
+        "The `Source line` column records legacy `// From emdash3_2.lp:<line>`",
+        "comments where present. Those comments came from an older pre-split",
+        "snapshot and are kept only as traceability tags; the `Area` grouping is",
+        "based on the checked statement text.",
+        "",
+        "## Summary",
+        "",
+        f"- Total checks: {len(checks)}",
+        f"- Mapped sections: {len(grouped)}",
+        "",
+        "| Area | Checks |",
+        "| --- | ---: |",
+    ]
+
+    for area, items in grouped.items():
+        lines.append(f"| {area} | {len(items)} |")
+
+    lines.extend([
+        "",
+        "## Section Details",
+        "",
+    ])
+
+    for area, items in grouped.items():
+        lines.extend([
+            f"### {area}",
+            "",
+            "| # | Check line | Source line | Statement head |",
+            "| ---: | ---: | ---: | --- |",
+        ])
+        for check in items:
+            source = "" if check.source_line is None else str(check.source_line)
+            lines.append(
+                f"| {check.index} | {check.line} | {source} | `{short(check.first_line)}` |"
+            )
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Generate the reviewer-facing EMDASH check catalog."
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Exit 1 if the generated report differs from the checked-in file.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=REPORT,
+        help="Output path for the generated markdown report.",
+    )
+    args = parser.parse_args()
+
+    content = render()
+    output = args.output if args.output.is_absolute() else ROOT / args.output
+    if args.check:
+        existing = output.read_text(encoding="utf-8") if output.exists() else ""
+        if existing != content:
+            print(f"{output.relative_to(ROOT)} is out of date.", file=sys.stderr)
+            return 1
+        print(f"{output.relative_to(ROOT)} is up to date.")
+        return 0
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(content, encoding="utf-8")
+    print(f"wrote {output.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

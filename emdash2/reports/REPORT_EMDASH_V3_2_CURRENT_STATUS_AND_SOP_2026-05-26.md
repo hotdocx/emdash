@@ -274,6 +274,18 @@ The local CI gate is:
 make ci
 ```
 
+Reviewer-facing examples can be checked with:
+
+```bash
+make examples
+```
+
+The check catalog is refreshed with:
+
+```bash
+make catalog
+```
+
 The health/metrics report is refreshed with:
 
 ```bash

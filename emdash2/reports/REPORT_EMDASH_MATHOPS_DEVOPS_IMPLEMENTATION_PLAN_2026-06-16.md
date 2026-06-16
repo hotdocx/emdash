@@ -204,5 +204,13 @@ easy to feed into the next iteration.
 5. `reports/REPORT_EMDASH_CHECK_CATALOG.md` generator
 6. `examples/` reviewer milestone suite
 
+Initial implementation status:
+
+- `reports/INDEX.md`: implemented.
+- `make ci`, stale-reference lint, and check metrics: implemented.
+- `research/literature.md` and `scripts/arxiv_search.py`: implemented.
+- `reports/REPORT_EMDASH_CHECK_CATALOG.md` generator: implemented.
+- `examples/` reviewer milestone suite: implemented.
+
 This sequence improves daily development immediately, then improves research
 intake, then improves external credibility.

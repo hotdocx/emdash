@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check ci ci-render health watch clean
+.PHONY: check examples catalog ci ci-render health watch clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -7,9 +7,17 @@ check:
 
 ci:
 > ./scripts/check.sh
+> ./scripts/check_examples.sh
 > git diff --check
 > ./scripts/lint_active_refs.sh
+> python3 scripts/generate_check_catalog.py --check
 > python3 scripts/check_metrics.py --update-log
+
+examples:
+> ./scripts/check_examples.sh
+
+catalog:
+> python3 scripts/generate_check_catalog.py
 
 ci-render:
 > npm run check:render

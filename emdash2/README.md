@@ -35,7 +35,9 @@ The proof assistant is called `m—` (read “emdash”).
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 - Check active Lambdapi files: `make check`
+- Check reviewer milestone examples: `make examples`
 - Run local CI gate: `make ci`
+- Regenerate the check catalog: `make catalog`
 - Refresh the health report: `make health`
 - Check just v3.2: `lambdapi check -w emdash3_2.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
@@ -52,6 +54,7 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Check/source metrics: `python3 scripts/check_metrics.py --write-report`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
+- Reviewer milestone examples live in `examples/`.
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a

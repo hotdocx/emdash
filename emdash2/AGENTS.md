@@ -28,7 +28,9 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 
 ## Fast commands
 - Typecheck the current development: `make check`
+- Check reviewer milestone examples: `make examples`
 - Run local CI gate: `make ci`
+- Regenerate the check catalog: `make catalog`
 - Refresh the health report: `make health`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
@@ -68,8 +70,10 @@ Background daemon-style (then tail the log):
 
 ## SOP: MathOps / DevOps
 - Use `make ci` before handing off substantial edits. It runs active
-  Lambdapi checks, whitespace diff checks, stale-reference lint, and source
-  metrics.
+  Lambdapi checks, reviewer milestone examples, whitespace diff checks,
+  stale-reference lint, check-catalog freshness, and source metrics.
+- Use `make catalog` after adding or reorganizing diagnostic assertions in
+  `emdash3_2_checks.lp`.
 - Use `make health` after meaningful architecture/check changes to refresh
   `reports/REPORT_EMDASH_HEALTH.md`.
 - Use `reports/INDEX.md` before searching reports by filename.
