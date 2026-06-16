@@ -175,22 +175,25 @@ historical.
 
 ## Agentic AI Loop
 
-The loop should become:
+The loop should stay lightweight during editing and become strict only at
+handoff:
 
 ```text
-plan/probe -> edit -> bounded check -> metrics -> check catalog -> report update
+plan/probe -> edit -> bounded check -> handoff CI -> report refresh when needed
 ```
 
 Practical improvements:
 
-- `scripts/probe.sh tmp/probes/name.lp`: copies `emdash3_2.lp`, runs a focused
-  check, writes a log.
+- `scripts/probe.sh tmp/probes/name.lp`: runs a focused bounded check on an
+  explicit probe file and writes a log.
 - `scripts/explain_failure.py logs/typecheck.log`: extracts the first Lambdapi
   error with nearby source context.
 - `scripts/decision_tree.sh SYMBOL`: wraps `lambdapi decision-tree` for rewrite
   debugging.
 - `logs/session-notes.md`: optional rolling notes for failed probes worth
   remembering.
+- `make catalog` is non-strict so it remains useful while new checks are being
+  sorted; `make ci` runs the strict freshness/classification check.
 
 For AI work, the key is that checker output should be compact, stable, and
 easy to feed into the next iteration.
@@ -215,6 +218,8 @@ Initial implementation status:
   `reports/REPORT_EMDASH_HEALTH.md`: implemented.
 - Focused checker-loop helpers `scripts/probe.sh`,
   `scripts/explain_failure.py`, and `scripts/decision_tree.sh`: implemented.
+- Friction review update: `make ci` now uses compact metrics output, while
+  `make catalog` is exploratory/non-strict and `make ci` remains strict.
 
 This sequence improves daily development immediately, then improves research
 intake, then improves external credibility.

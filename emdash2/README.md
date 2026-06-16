@@ -62,8 +62,8 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
-  temporary copy such as `tmp_rule_probe.lp`, then run
-  `timeout 30s lambdapi check -w tmp_rule_probe.lp`.
+  temporary file such as `tmp/probes/name.lp`, then run
+  `scripts/probe.sh tmp/probes/name.lp`.
 - Add at least one focused `assert` exercising the intended normal form in the
   probe. A rule that typechecks but does not prove the assertion is not ready.
 - If a probe times out, treat that as evidence about rule placement or LHS
@@ -82,7 +82,8 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   valid, keep it only as a temporary probe and remove it before final cleanup.
 - To audit whether an existing rule is actually used, combine static search
   with a temporary-removal probe: copy `emdash3_2.lp`, remove only that rule,
-  run a bounded `lambdapi check`, and inspect the first failing rule/assertion.
+  run `scripts/probe.sh` on the copy, and inspect the first failing
+  rule/assertion.
   Record the downstream dependency in the implementation report before deleting
   the temporary copy.
 - Do not keep temporary probe files in the workspace. Move successful rules and

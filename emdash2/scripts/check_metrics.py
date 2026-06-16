@@ -241,6 +241,27 @@ def format_report(payload: dict) -> str:
     return "\n".join(lines)
 
 
+def format_brief(payload: dict, rc: int) -> str:
+    checks = payload["checks"]
+    checked = [check for check in checks if check["returncode"] is not None]
+    if not checked:
+        return (
+            f"source metrics collected: {len(payload['files'])} file(s); "
+            "Lambdapi checks skipped"
+        )
+    total_s = sum(check["duration_s"] or 0 for check in checked)
+    failed = [check for check in checked if check["returncode"] != 0]
+    status = "passed" if rc == 0 else "failed"
+    lines = [
+        f"check metrics {status}: {len(checked)} file(s), {total_s:.3f}s total",
+    ]
+    if failed:
+        lines.append("failed files:")
+        for check in failed:
+            lines.append(f"- {check['file']}: exit {check['returncode']}")
+    return "\n".join(lines)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Collect EMDASH typecheck and source-health metrics."
@@ -265,6 +286,11 @@ def main() -> int:
         action="store_true",
         help="Print JSON instead of the markdown summary.",
     )
+    parser.add_argument(
+        "--brief",
+        action="store_true",
+        help="Print only a compact summary after per-file check timings.",
+    )
     args = parser.parse_args()
 
     payload, rc = build_payload(args)
@@ -279,6 +305,8 @@ def main() -> int:
 
     if args.json:
         print(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+    elif args.brief:
+        print(format_brief(payload, rc))
     else:
         print(format_report(payload))
     return rc

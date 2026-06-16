@@ -6,12 +6,12 @@ check:
 > ./scripts/check.sh
 
 ci:
-> python3 scripts/check_metrics.py --update-log
+> python3 scripts/check_metrics.py --update-log --brief
 > python3 -m py_compile scripts/*.py
 > bash -n scripts/*.sh
 > git diff --check
 > ./scripts/lint_active_refs.sh
-> python3 scripts/generate_check_catalog.py --check
+> python3 scripts/generate_check_catalog.py --check --strict
 
 examples:
 > ./scripts/check_examples.sh

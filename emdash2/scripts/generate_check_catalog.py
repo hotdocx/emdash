@@ -264,6 +264,11 @@ def main() -> int:
         help="Exit 1 if the generated report differs from the checked-in file.",
     )
     parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit 1 if any assertion is not classified into a reviewer-facing area.",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=REPORT,
@@ -277,14 +282,28 @@ def main() -> int:
         except ValueError:
             return str(path)
 
+    checks = parse_checks(read_lines(CHECKS))
+    grouped = summarize(checks)
     content = render()
-    if "Other / unclassified checks" in summarize(parse_checks(read_lines(CHECKS))):
+    unclassified = grouped.get("Other / unclassified checks", [])
+    if unclassified and args.strict:
         print(
             "Some checks are unclassified; update AREAS in "
             "scripts/generate_check_catalog.py.",
             file=sys.stderr,
         )
+        for check in unclassified[:10]:
+            print(
+                f"- check #{check.index} at line {check.line}: {short(check.statement, 100)}",
+                file=sys.stderr,
+            )
         return 1
+    if unclassified:
+        print(
+            f"warning: {len(unclassified)} check(s) are unclassified; "
+            "CI uses --strict and will fail until AREAS is updated.",
+            file=sys.stderr,
+        )
     output = args.output if args.output.is_absolute() else ROOT / args.output
     if args.check:
         existing = output.read_text(encoding="utf-8") if output.exists() else ""

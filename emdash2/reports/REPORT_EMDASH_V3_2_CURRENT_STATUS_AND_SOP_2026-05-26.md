@@ -274,6 +274,11 @@ The local CI gate is:
 make ci
 ```
 
+Use it before handoff or after broad edits. For the ordinary agentic inner
+loop, prefer focused probes and `make check`; `make ci` also checks examples,
+script syntax, active-reference lint, strict check-catalog freshness, and
+compact source metrics.
+
 Reviewer-facing examples can be checked with:
 
 ```bash
@@ -285,6 +290,11 @@ The check catalog is refreshed with:
 ```bash
 make catalog
 ```
+
+`make catalog` is intentionally non-strict during exploration: it can write a
+catalog with an unclassified-check warning. `make ci` uses the strict catalog
+check and fails if any diagnostic assertion is not mapped to a reviewer-facing
+area.
 
 The health/metrics report is refreshed with:
 
@@ -414,8 +424,9 @@ Before proposing or implementing a nontrivial change, check these points:
 Probe before committing nontrivial rewrite changes:
 
 ```bash
-cp emdash3_2.lp tmp_rule_probe.lp
-timeout 30s lambdapi check -w tmp_rule_probe.lp
+mkdir -p tmp/probes
+cp emdash3_2.lp tmp/probes/rule_probe.lp
+scripts/probe.sh tmp/probes/rule_probe.lp
 ```
 
 Add a focused assertion exercising the intended normal form. A rule that

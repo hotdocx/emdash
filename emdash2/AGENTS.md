@@ -69,18 +69,22 @@ Background daemon-style (then tail the log):
 - `nohup make watch >/dev/null 2>&1 &`
 
 ## SOP: MathOps / DevOps
-- Use `make ci` before handing off substantial edits. It runs active
-  Lambdapi checks, reviewer milestone examples, Python byte-compilation, shell
-  syntax checks, whitespace diff checks, stale-reference lint, check-catalog
-  freshness, and source metrics.
+- Keep the inner loop small: use `scripts/probe.sh tmp/probes/name.lp` for
+  focused experiments, `make check` for the active kernel plus diagnostics, and
+  `make examples` only when touching reviewer-facing milestones.
+- Use `make ci` before handing off substantial edits, not after every small
+  probe. It runs active Lambdapi checks, reviewer milestone examples, Python
+  byte-compilation, shell syntax checks, whitespace diff checks,
+  stale-reference lint, strict check-catalog freshness, and compact source
+  metrics.
 - Use `make catalog` after adding or reorganizing diagnostic assertions in
-  `emdash3_2_checks.lp`; the catalog generator fails when an assertion cannot
-  be classified into a reviewer-facing area.
+  `emdash3_2_checks.lp`. During exploration it may emit an unclassified-check
+  warning and still write the catalog; `make ci` enforces the strict
+  zero-unclassified policy.
 - Use `make health` after meaningful architecture/check changes to refresh
   `reports/REPORT_EMDASH_HEALTH.md`; the report includes the core files and
   the checked `examples/*.lp` milestones.
-- Use `scripts/probe.sh tmp/probes/name.lp` for bounded focused experiments;
-  it writes a log under `logs/probes/` and calls
+- `scripts/probe.sh` writes a log under `logs/probes/` and calls
   `scripts/explain_failure.py` on failure.
 - Use `scripts/decision_tree.sh SYMBOL` as the local wrapper around
   `lambdapi decision-tree`, with bare symbols resolved under
