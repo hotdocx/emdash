@@ -1321,70 +1321,33 @@ rule @hom_precomp_along_fapp1_fapp0
 // precomposition. This makes the generic postcomposition route join the
 // contravariant `hom_`-over-opposites route at the stable projection heads.
 rule @hom_postcomp_tele_func
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W
   ↪ @hom_precomp_along_tele_func $A $B $F $Z $W $X;
 
 rule @hom_postcomp_func
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
-      $h
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
 rule @hom_postcomp_fapp1_func
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
-      $h
-      $g
-      $k
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h $g $k
   ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
 
 rule @hom_postcomp_fapp1_fapp0
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
-      $h
-      $g
-      $k
-      $alpha
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
 rule @hom_postcomp_tele_fapp1_func
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
-      $h
-      $k
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h $k
   ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
 
 rule @hom_postcomp_tele_fapp1_fapp0
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_func $A $B $F)
-      $Z
-      $X
-      $W
-      $h
-      $k
-      $alpha
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
 // Internalized hom classifier.
@@ -6553,14 +6516,12 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 // -------------------------------------------------------------------------------------------------
 
 /*
-  Executable computation checks now live in emdash3_2_checks.lp. This tail
-  section keeps the human-readable catalog of the lower-level normal forms
-  covered there, plus the nested telescope stress-example constructors that are
-  still useful as ordinary declarations.
+  This section is intentionally comment-only. Executable computation checks now
+  live in emdash3_2_checks.lp, while this tail section keeps the
+  human-readable catalog of lower-level normal forms covered there.
 
-  During future section/file cleanup, use this section as a checklist for
-  moving nearby catalog comments toward the declarations they document. Keep the
-  stress-example symbols here until their final home is clear.
+  During future section/file cleanup, use this catalog as a checklist for
+  moving nearby normal-form comments toward the declarations they document.
 */
 
 /*
