@@ -2336,18 +2336,31 @@ rule fapp0
   arrow-action of `Product_cat_func`. `Product_mapL_func_func` is only the
   defined functorial package G |-> G * 1_B.
 */
+// Internalized binary product constructor.
+//
+// Surface/formula:
+//   Product_cat_func[A][B] = A x B.
 constant symbol Product_cat_func
   : τ (Functor Cat_cat (Functor_cat Cat_cat Cat_cat));
 
+// Partial product constructor at fixed left factor A.
+//
+// Surface/formula:
+//   Product_cat_fapp0_func(A)[B] = A x B.
 injective symbol Product_cat_fapp0_func (A : Cat)
   : τ (Functor Cat_cat Cat_cat);
 
+// Object projection ladder for the internalized product constructor.
 rule @fapp0 _ _ Product_cat_func $A
   ↪ @Product_cat_fapp0_func $A;
 
 rule @fapp0 Cat_cat Cat_cat (@Product_cat_fapp0_func $A) $B
   ↪ Product_cat $A $B;
 
+// Hom-action of product formation in the left factor.
+//
+// Surface/formula:
+//   Product_cat_fapp1_func(A,A')[G] : (A x -) => (A' x -).
 symbol Product_cat_fapp1_func [A A' : Cat]
   : τ (Functor
       (Functor_cat A A')
@@ -2355,16 +2368,25 @@ symbol Product_cat_fapp1_func [A A' : Cat]
         (Product_cat_fapp0_func A)
         (Product_cat_fapp0_func A')));
 
+// Capped hom-action of product formation at G.
+//
+// Surface/formula:
+//   Product_cat_fapp1_fapp0_functord(G) = Product_cat_func[G].
 symbol Product_cat_fapp1_fapp0_functord [A A' : Cat]
   (G : τ (Functor A A'))
   : τ (Functord
       (Product_cat_fapp0_func A)
       (Product_cat_fapp0_func A'));
 
+// Component of the product hom-action at a fixed right factor B.
+//
+// Surface/formula:
+//   Product_cat_fapp1_tapp0_func(G,B) = G * 1_B.
 symbol Product_cat_fapp1_tapp0_func [A A' B : Cat]
   (G : τ (Functor A A'))
   : τ (Functor (Product_cat A B) (Product_cat A' B));
 
+// Functor-level and capped projections of product formation hom-action.
 rule @fapp1_func _ _ Product_cat_func $A $A'
   ↪ Product_cat_fapp1_func;
 
@@ -2374,6 +2396,7 @@ rule fapp0 (@Product_cat_fapp1_func $A $A') $G
 rule @fapp1_fapp0 _ _ Product_cat_func $A $A' $G
   ↪ Product_cat_fapp1_fapp0_functord $G;
 
+// Component projection of `G * 1_B` from the displayed product hom-action.
 rule @tapp0_fapp0
       Cat_cat
       Cat_cat
@@ -2383,17 +2406,30 @@ rule @tapp0_fapp0
       (@Product_cat_fapp1_fapp0_functord $A $A' $G)
   ↪ Product_cat_fapp1_tapp0_func $G;
 
+// Projection rules for the fixed-right product map.
+//
+// Surface/formula:
+//   pi_1 o (G * 1_B) = G o pi_1
+//   pi_2 o (G * 1_B) = pi_2.
 rule sigma_Fst (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
   ↪ comp_cat_fapp0 $G Product_projL_func;
 
 rule sigma_Snd (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
   ↪ Product_projR_func;
 
+// Object action of the fixed-right product map.
+//
+// Surface/formula:
+//   (G * 1_B)[(x,y)] = (G[x],y).
 rule @fapp0 _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G) (Struct_sigma $x $y)
   ↪ Struct_sigma
       (fapp0 $G $x)
       $y;
 
+// Full hom-action of the fixed-right product map.
+//
+// Surface/formula:
+//   (G * 1_B)_1 = G_1 x 1.
 rule @fapp1_func _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
       (Struct_sigma $x $y)
       (Struct_sigma $x' $y')
@@ -2414,6 +2450,10 @@ rule @fapp1_func _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
         (Hom_cat $A $x $x')
         (Hom_cat $B $y $y'));
 
+// Capped arrow action of the fixed-right product map.
+//
+// Surface/formula:
+//   (G * 1_B)[(p,q)] = (G[p],q).
 rule @fapp1_fapp0 _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
       (Struct_sigma $x $y)
       (Struct_sigma $x' $y')
@@ -2462,12 +2502,21 @@ symbol Product_mapL_func_func [A A' B : Cat]
     F[x]
     eta[p]
 */
+// Product evaluation functor.
+//
+// Surface/formula:
+//   Eval_func(A,B)[(F,x)] = F[x].
 symbol Eval_func [A B : Cat]
   : τ (Functor (Product_cat (Functor_cat A B) A) B);
 
+// Object action of product evaluation.
 rule fapp0 (@Eval_func $A $B) (Struct_sigma $F $x)
   ↪ fapp0 $F $x;
 
+// Hom-action of product evaluation.
+//
+// Surface/formula:
+//   Eval_fapp1_func[(eta,p)] = eta[p].
 symbol Eval_fapp1_func [A B : Cat]
   [F G : τ (Functor A B)]
   [x y : τ (Obj A)]
@@ -2475,9 +2524,11 @@ symbol Eval_fapp1_func [A B : Cat]
       (Product_cat (Transf_cat F G) (Hom_cat A x y))
       (Hom_cat B (fapp0 F x) (fapp0 G y)));
 
+// Full hom-action of evaluation exposes the off-diagonal transfor component.
 rule @fapp1_func _ _ (@Eval_func $A $B) (Struct_sigma $F $x) (Struct_sigma $G $y)
   ↪ Eval_fapp1_func;
 
+// Capped hom-action of evaluation.
 rule fapp0 (@Eval_fapp1_func $A $B $F $G $x $y) (Struct_sigma $eta $p)
   ↪ tapp1_fapp0 $eta $p;
 
@@ -2498,21 +2549,28 @@ rule @fapp1_fapp0 _ _ (@Eval_func $A $B)
   Faithful surface syntax:
     F |-> (F,x)
 */
+// Pair a functor with the fixed object x for evaluation.
+//
+// Surface/formula:
+//   Eval_at_func(x)[F] = (F,x).
 symbol Eval_at_func [A B : Cat] (x : τ (Obj A))
   : τ (Functor
       (Functor_cat A B)
       (Product_cat (Functor_cat A B) A));
 
+// Projections of the fixed-point evaluation section.
 rule sigma_Fst (@Eval_at_func $A $B $x)
   ↪ @id_func (Functor_cat $A $B);
 
 rule sigma_Snd (@Eval_at_func $A $B $x)
   ↪ Const_func $x;
 
+// Object action of `Eval_at_func`.
 rule @fapp0 (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
       (@Eval_at_func $A $B $x) $F
   ↪ Struct_sigma $F $x;
 
+// Hom-action of `Eval_at_func`: keep eta and the identity at x.
 rule @fapp1_func (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
       (@Eval_at_func $A $B $x) $F $G
   ↪ Struct_sigma
@@ -2526,6 +2584,10 @@ rule @fapp1_fapp0 (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
       (@Eval_at_func $A $B $x) $F $G $eta
   ↪ Struct_sigma $eta (id $A $x);
 
+// Evaluation at the fixed-point section folds to ordinary object evaluation.
+//
+// Surface/formula:
+//   Eval_func o Eval_at_func(x) = fapp0_func(x).
 rule @comp_cat_fapp0
       (Functor_cat $A $B)
       (Product_cat (Functor_cat $A $B) $A)
@@ -2553,6 +2615,10 @@ rule @comp_cat_fapp0
   `curry_func`, `curry_fapp0_func`, and `uncurry_func` are definitional
   projections. Full product/curry adjunction coherence remains future work.
 */
+// Semantic curry package through the product-pair telescope.
+//
+// Surface/formula:
+//   curry_func_func[F][x][y] = F[(x,y)].
 symbol curry_func_func [A B C : Cat]
   : τ (Functor
       (Functor_cat (Product_cat A B) C)
@@ -2568,17 +2634,29 @@ symbol curry_func_func [A B C : Cat]
       (@Product_pair_tele_func A B))
     (@comp_cat_cov_func_func B (Product_cat A B) C);
 
+// Object action of semantic curry.
+//
+// Surface/formula:
+//   curry_func(F) = curry(F).
 symbol curry_func [A B C : Cat]
   (F : τ (Functor (Product_cat A B) C))
   : τ (Functor A (Functor_cat B C))
 ≔ fapp0 curry_func_func F;
 
+// Curry evaluated at x.
+//
+// Surface/formula:
+//   curry_fapp0_func(F,x)[y] = F[(x,y)].
 symbol curry_fapp0_func [A B C : Cat]
   (F : τ (Functor (Product_cat A B) C))
   (x : τ (Obj A))
   : τ (Functor B C)
 ≔ fapp0 (curry_func F) x;
 
+// Semantic uncurry package through fixed-right product action and evaluation.
+//
+// Surface/formula:
+//   uncurry_func_func[G][(x,y)] = G[x][y].
 symbol uncurry_func_func [A B C : Cat]
   : τ (Functor
       (Functor_cat A (Functor_cat B C))
@@ -2596,6 +2674,10 @@ symbol uncurry_func_func [A B C : Cat]
       (@Eval_func B C))
     (@Product_mapL_func_func A (Functor_cat B C) B);
 
+// Object action of semantic uncurry.
+//
+// Surface/formula:
+//   uncurry_func(G) = uncurry(G).
 symbol uncurry_func [A B C : Cat]
   (G : τ (Functor A (Functor_cat B C)))
   : τ (Functor (Product_cat A B) C)
@@ -2624,16 +2706,29 @@ symbol uncurry_func [A B C : Cat]
   parameterized "L is left adjoint to R" witness, add a narrow bridge after a
   focused probe.
 */
+// First-class ordinary adjunction package between R and L.
 injective symbol Adjunction (R L : Cat) : Grpd;
 
+// Left adjoint projection.
+//
+// Surface/formula:
+//   left_adj_func(J) : R ⊢ L.
 symbol left_adj_func [R L : Cat]
   (J : τ (Adjunction R L))
   : τ (Functor R L);
 
+// Right adjoint projection.
+//
+// Surface/formula:
+//   right_adj_func(J) : L ⊢ R.
 symbol right_adj_func [R L : Cat]
   (J : τ (Adjunction R L))
   : τ (Functor L R);
 
+// Unit of the adjunction.
+//
+// Surface/formula:
+//   unit_adj_transf(J) : id_R => right(J) o left(J).
 symbol unit_adj_transf [R L : Cat]
   (J : τ (Adjunction R L))
   : τ (Transf
@@ -2645,6 +2740,10 @@ symbol unit_adj_transf [R L : Cat]
         (@right_adj_func R L J)
         (@left_adj_func R L J)));
 
+// Counit of the adjunction.
+//
+// Surface/formula:
+//   counit_adj_transf(J) : left(J) o right(J) => id_L.
 symbol counit_adj_transf [R L : Cat]
   (J : τ (Adjunction R L))
   : τ (Transf
@@ -2720,6 +2819,11 @@ rule comp_fapp0
     fapp1_int_transf(F)
       = tapp1_int_func_transf(F,F)[id_F]
 */
+// Internal off-diagonal ordinary hom-action package.
+//
+// Surface/formula:
+//   tapp1_int_func_transf(F,G)[epsilon]
+//     : hom_int(id_A) => hom_int(G) o F^op.
 symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   τ (Functor
       (Transf_cat F G)
@@ -2730,6 +2834,10 @@ symbol tapp1_int_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
           (@Op_func A B F))));
 
 // Object action of `tapp1_int_func_transf`.
+//
+// Surface/formula:
+//   tapp1_int_fapp0_transf(epsilon)
+//     = tapp1_int_func_transf(F,G)[epsilon].
 symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Transf F G)),
   τ (Transf
@@ -2738,10 +2846,15 @@ symbol tapp1_int_fapp0_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
         (@hom_int B A G)
         (@Op_func A B F)));
 
+// Object-action projection for internal ordinary hom-action.
 rule fapp0 (@tapp1_int_func_transf $A $B $F $G) $ϵ
   ↪ @tapp1_int_fapp0_transf $A $B $F $G $ϵ;
 
 // Hom action of `tapp1_int_func_transf`.
+//
+// Surface/formula:
+//   tapp1_int_fapp1_func_transf(epsilon,epsilon')
+//     : Hom(epsilon,epsilon') ⊢ Hom(tapp1_int(epsilon),tapp1_int(epsilon')).
 symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ ϵ' : τ (Transf F G)),
   τ (Functor
@@ -2755,10 +2868,14 @@ symbol tapp1_int_fapp1_func_transf : Π [A B : Cat], Π [F G : τ (Functor A B)]
         (@tapp1_int_fapp0_transf A B F G ϵ)
         (@tapp1_int_fapp0_transf A B F G ϵ')));
 
+// Hom-action projection for internal ordinary hom-action.
 rule @fapp1_func _ _ (@tapp1_int_func_transf $A $B $F $G) $ϵ $ϵ'
   ↪ @tapp1_int_fapp1_func_transf $A $B $F $G $ϵ $ϵ';
 
 // Identity-specialized ordinary internal hom-action.
+//
+// Surface/formula:
+//   fapp1_int_transf(F) = tapp1_int_func_transf(F,F)[id_F].
 symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
   τ (Transf
       (@hom_int A A (@id_func A))
@@ -2766,18 +2883,23 @@ symbol fapp1_int_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
         (@hom_int B A F)
         (@Op_func A B F)));
 
+// Identity transfor specializes the off-diagonal action to functor hom-action.
 rule @tapp1_int_fapp0_transf $A $B $F $F (id (Functor_cat $A $B) $F)
   ↪ @fapp1_int_transf $A $B $F;
 
 // First projection of the identity-specialized ordinary internal hom-action at
 // a fixed source object. This is the identity-specialized counterpart of
 // `tapp1_at_transf`.
+//
+// Surface/formula:
+//   fapp1_at_transf(F,X) : Hom_A(X,-) => Hom_B(F[X],F[-]).
 symbol fapp1_at_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
   Π (X : τ (Obj A)),
   τ (Transf
       (@hom_ A A (@id_func A) X)
       (@hom_ B A F (@fapp0 A B F X)));
 
+// First projection fold for identity-specialized internal hom-action.
 rule @tapp0_fapp0
       (Op_cat $A)
       (@Catd_cat $A)
@@ -2791,6 +2913,9 @@ rule @tapp0_fapp0
 // object. This exposes the whole transfor
 //   Hom_A(X,-) => Hom_B(F[X],G[-])
 // before projecting again to the hom-functor component at Y.
+//
+// Surface/formula:
+//   tapp1_at_transf(epsilon,X) : Hom_A(X,-) => Hom_B(F[X],G[-]).
 symbol tapp1_at_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (X : τ (Obj A)),
   Π (ϵ : τ (Transf F G)),
@@ -2798,6 +2923,7 @@ symbol tapp1_at_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
       (@hom_ A A (@id_func A) X)
       (@hom_ B A G (@fapp0 A B F X)));
 
+// First projection fold for off-diagonal internal hom-action.
 rule @tapp0_fapp0
       (Op_cat $A)
       (@Catd_cat $A)
@@ -2807,9 +2933,14 @@ rule @tapp0_fapp0
       (@tapp1_int_fapp0_transf $A $B $F $G $ϵ)
   ↪ @tapp1_at_transf $A $B $F $G $X $ϵ;
 
+// Identity transfor folds the off-diagonal fixed-source action to fapp1.
 rule @tapp1_at_transf $A $B $F $F $X (id (Functor_cat $A $B) $F)
   ↪ @fapp1_at_transf $A $B $F $X;
 
+// Second projection of off-diagonal internal hom-action.
+//
+// Surface/formula:
+//   tapp1_at_transf(epsilon,X)[Y] = tapp1_func(epsilon,X,Y).
 rule @tapp0_fapp0
       $A
       Cat_cat
@@ -2819,6 +2950,10 @@ rule @tapp0_fapp0
       (@tapp1_at_transf $A $B $F $G $X $ϵ)
   ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
 
+// Second projection of identity-specialized internal hom-action.
+//
+// Surface/formula:
+//   fapp1_at_transf(F,X)[Y] = fapp1_func(F,X,Y).
 rule @tapp0_fapp0
       $A
       Cat_cat
