@@ -1475,9 +1475,22 @@ injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
   ↪ [ $A ≡ $A'; $B ≡ $B'; $F ≡ $F'; $G ≡ $G' ];
 
+// Hom in an ordinary functor category is the transfor category.
+//
+// Surface/formula:
+//   Hom_{A ⊢ B}(F,G) = F => G.
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
+
+// Cat-valued transfors are displayed/natural family morphisms.
+//
+// Surface/formula:
+//   E => D over K = k :^n K ; E[k] ⊢ D[k].
 rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
 
+// Product-valued transfors project componentwise.
+//
+// Surface/formula:
+//   Transf(F,G) in A x B = Transf(F_1,G_1) x Transf(F_2,G_2).
 rule @Transf_cat $X (Product_cat $A $B) $F $G
   ↪ Product_cat
       (@Transf_cat $X $A (sigma_Fst $F) (sigma_Fst $G))
@@ -1511,9 +1524,14 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   definitional abbreviation.  This follows emdash2: the head must remain
   visible so later rules can attach component computations directly to it.
 */
+// Evaluation of the component projection functor.
+//
+// Surface/formula:
+//   tapp0_func(Y)[epsilon] = epsilon[Y].
 rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
   ↪ @tapp0_fapp0 $A $B $F $G $Y $ϵ;
 
+// Product-valued transfor components project componentwise.
 rule sigma_Fst (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
   ↪ @tapp0_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i (sigma_Fst $eta);
 
@@ -1527,12 +1545,18 @@ rule @fapp1_func _ $B (@fapp0_func $A $B $x) $F $G
 rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
   ↪ @tapp0_fapp0 $A $B $F $G $x $η;
 
+// Identity transfor components are identity arrows.
 rule @tapp0_fapp0 $A $B $F $F $Y (@id (Functor_cat $A $B) $F)
   ↪ @id $B (@fapp0 $A $B $F $Y);
 
+// Displayed identity components are identity functors on fibres.
 rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id_funcd $K $E)
   ↪ @id_func (@fapp0 $K Cat_cat $E $Y);
 
+// Vertical composite components compose pointwise.
+//
+// Surface/formula:
+//   (eta o epsilon)[Y] = eta[Y] o epsilon[Y].
 rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
   ↪ comp_fapp0
       (@tapp0_fapp0 $A $B $G $H $Y $η)
@@ -1589,15 +1613,21 @@ symbol tapp1_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
       (Hom_cat A X Y)
       (Hom_cat B (fapp0 F X) (fapp0 G Y)));
 
+// Evaluation of the off-diagonal transfor component functor.
+//
+// Surface/formula:
+//   tapp1_func(epsilon,X,Y)[f] = tapp1_fapp0(epsilon,f).
 rule fapp0 (@tapp1_func $A $B $F $G $X $Y $ϵ) $f
   ↪ @tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f;
 
+// Product-valued off-diagonal components project componentwise.
 rule sigma_Fst (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
   ↪ @tapp1_func $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta);
 
 rule sigma_Snd (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
   ↪ @tapp1_func $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta);
 
+// Identity transfor off-diagonal action is ordinary functor hom-action.
 rule @tapp1_func $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F)
   ↪ @fapp1_func $A $B $F $X $Y;
 
@@ -1629,9 +1659,11 @@ symbol Const_transf [K A : Cat] [x y : τ (Obj A)]
 rule fapp0 (@Const_transf_func $K $A $x $y) $p
   ↪ @Const_transf $K $A $x $y $p;
 
+// Constant transfor components are the same codomain arrow at every object.
 rule @tapp0_fapp0 $K $A _ _ $k (@Const_transf $K $A $x $y $p)
   ↪ $p;
 
+// Constant transfor off-diagonal action is constant on the base arrow.
 rule @tapp1_func $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p)
   ↪ @Const_func (Hom_cat $K $k $k') (Hom_cat $A $x $y) $p;
 
@@ -1710,6 +1742,10 @@ rule fapp0 (@comp_cat_cov_fapp1_func $X $Y $Z $G $F $H) $eta
 rule @fapp1_fapp0 _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H $eta
   ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
 
+// Component of postcomposition by G.
+//
+// Surface/formula:
+//   (G eta)[i] = G[eta[i]].
 rule @tapp0_fapp0
       $X
       $Z
@@ -1725,6 +1761,10 @@ rule @tapp0_fapp0
       (@fapp0 $X $Y $H $i)
       (@tapp0_fapp0 $X $Y $F $H $i $eta);
 
+// Off-diagonal action of postcomposition by G.
+//
+// Surface/formula:
+//   (G eta)[p] = G[eta[p]].
 rule @tapp1_func
       $X
       $Z
@@ -1749,6 +1789,7 @@ rule @tapp1_func
         (@fapp0 $X $Y $H $j))
       (@tapp1_func $X $Y $F $H $i $j $eta);
 
+// Capped off-diagonal action of postcomposition by G.
 rule @tapp1_fapp0
       $X
       $Z
@@ -1766,6 +1807,7 @@ rule @tapp1_fapp0
       (@fapp0 $X $Y $H $j)
       (@tapp1_fapp0 $X $Y $F $H $i $j $eta $p);
 
+// Postcomposition preserves identity transfors.
 rule @comp_cat_cov_transf $X $Y $Z $G $F $F (@id _ $F)
   ↪ @id (Functor_cat $X $Z) (@comp_cat_fapp0 $X $Y $Z $G $F);
 
@@ -1902,6 +1944,11 @@ symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
         (@comp_cat_con_func X Y Z F)
         (@comp_cat_con_func X Y Z K)));
 
+// Hom-action of precomposition as a functor in the precomposing functor.
+//
+// Surface/formula:
+//   alpha : F => K
+//   comp_cat_con_func_func_transf(alpha)[G] = G alpha.
 symbol comp_cat_con_func_func_transf [X Y Z : Cat]
   [F K : τ (Functor X Y)]
   (alpha : τ (Transf F K))
@@ -1909,6 +1956,7 @@ symbol comp_cat_con_func_func_transf [X Y Z : Cat]
       (@comp_cat_con_func X Y Z F)
       (@comp_cat_con_func X Y Z K));
 
+// Projection ladder for the hom-action of precomposition-in-F.
 rule @fapp1_func _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K
   ↪ @comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K;
 
@@ -1918,6 +1966,10 @@ rule fapp0 (@comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K) $alpha
 rule @fapp1_fapp0 _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K $alpha
   ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
 
+// Component of the precomposition-in-F hom-action at G.
+//
+// Surface/formula:
+//   comp_cat_con_func_func_transf(alpha)[G] = G alpha.
 rule @tapp0_fapp0
       _
       _
@@ -1973,6 +2025,7 @@ rule @tapp0_fapp0
       (@comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta)
   ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
 
+// Off-diagonal action of postcomposition-in-G.
 rule @tapp1_func
       _
       _
@@ -1988,6 +2041,7 @@ rule fapp0
       $alpha
   ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
 
+// Capped horizontal composite of two ordinary transfors.
 rule @tapp1_fapp0
       _
       _
@@ -1999,6 +2053,7 @@ rule @tapp1_fapp0
       $alpha
   ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
 
+// Cat-specialized generalized precomposition folds to ordinary precomposition.
 rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
   ↪ @comp_cat_con_func
       (@fapp0 Cat_cat Cat_cat $F $W)
@@ -2025,6 +2080,7 @@ rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
       $H
       $eta;
 
+// Tele-level Cat-specialized precomposition hom-action.
 rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
   ↪ @fapp1_func
       (Functor_cat $W $X)
@@ -2079,6 +2135,10 @@ rule fapp0 (@comp_cat_con_fapp1_func $X $Y $Z $F $G $H) $eta
 rule @fapp1_fapp0 _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H $eta
   ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
 
+// Component of precomposition by F.
+//
+// Surface/formula:
+//   (eta o F)[i] = eta[F[i]].
 rule @tapp0_fapp0
       $X
       $Z
@@ -2094,6 +2154,10 @@ rule @tapp0_fapp0
       (@fapp0 $X $Y $F $i)
       $eta;
 
+// Off-diagonal action of precomposition by F.
+//
+// Surface/formula:
+//   (eta o F)[p] = eta[F[p]].
 rule @tapp1_func
       $X
       $Z
@@ -2139,15 +2203,18 @@ rule @tapp1_fapp0
       $eta
       (@fapp1_fapp0 $X $Y $F $i $j $p);
 
+// Precomposition preserves identity transfors.
 rule @comp_cat_con_transf $X $Y $Z $F $G $G (@id _ $G)
   ↪ @id (Functor_cat $X $Z) (@comp_cat_fapp0 $X $Y $Z $G $F);
 
+// Product-valued capped off-diagonal components project componentwise.
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;
 
 rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta) $p;
 
+// Identity transfor capped off-diagonal action is ordinary functor action.
 rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
@@ -4613,6 +4680,9 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
   over these heads, not additional kernel rewrite surfaces.
 */
 // Fibre functor of a displayed functor at z.
+//
+// Surface/formula:
+//   Fibre_func(FF,z) = FF[z] : E[z] ⊢ D[z].
 symbol Fibre_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (z : τ (Obj K))
@@ -4620,6 +4690,9 @@ symbol Fibre_func [K : Cat] [E D : τ (Catd K)]
 ≔ @tapp0_fapp0 K Cat_cat E D z FF;
 
 // Component projection functor for displayed transfors at z.
+//
+// Surface/formula:
+//   tdapp0_func(z)[epsilon] = epsilon[z].
 symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (z : τ (Obj K))
@@ -4628,12 +4701,16 @@ symbol tdapp0_func [K : Cat] [E D : τ (Catd K)]
       (Transf_cat (Fibre_func FF z) (Fibre_func GG z)));
 
 // Capped displayed-transfor component.
+//
+// Surface/formula:
+//   tdapp0_fapp0(z,epsilon) = epsilon[z] : FF[z] => GG[z].
 symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (z : τ (Obj K))
   (ϵ : τ (Transfd FF GG))
   : τ (Transf (Fibre_func FF z) (Fibre_func GG z));
 
+// Projection from displayed-transfor component functor to capped component.
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
 
@@ -4695,6 +4772,9 @@ rule @tapp0_fapp0
 // Fully expanded transitivity benchmark through the Sigma-total presentation.
 
 // Readable component alias.
+//
+// Surface/formula:
+//   Fibre_transf(epsilon,z) = epsilon[z].
 symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -4703,6 +4783,9 @@ symbol Fibre_transf [K : Cat] [E D : τ (Catd K)]
 ≔ @tdapp0_fapp0 K E D FF GG z ϵ;
 
 // Object action of a displayed-transfor component.
+//
+// Surface/formula:
+//   Fibre_transf_app(epsilon,z,u) = epsilon[z][u].
 symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -4951,6 +5034,10 @@ symbol fdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
       (homd_id_src_sec E x u)
       (homd_ff_src_sec FF x u));
 
+// First projection fold for identity-specialized displayed hom-action.
+//
+// Surface/formula:
+//   fdapp1_int_transfd(FF)[x][u] = fdapp1_int_section_arrow(FF,x,u).
 rule @tapp0_fapp0
       _
       _
@@ -5026,6 +5113,10 @@ symbol fdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
       (homd_id_tgt_func E x u y)
       (homd_ff_tgt_func FF x u y));
 
+// Second projection fold for identity-specialized displayed hom-action.
+//
+// Surface/formula:
+//   fdapp1_int_section_arrow(FF,x,u)[y] = fdapp1_int_tgt_arrow(FF,x,u,y).
 rule @tapp0_fapp0
       _
       _
@@ -5068,6 +5159,11 @@ symbol fdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
       (fapp0 (homd_id_tgt_func E x u y) v)
       (fapp0 (homd_ff_tgt_func FF x u y) v));
 
+// Third projection fold for identity-specialized displayed hom-action.
+//
+// Surface/formula:
+//   fdapp1_int_tgt_arrow(FF,x,u,y)[v]
+//     = fdapp1_int_presheaf_arrow(FF,x,u,y,v).
 rule @tapp0_fapp0
       _
       _
@@ -5140,6 +5236,11 @@ symbol fdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
           v)
         p));
 
+// Fourth projection fold by evaluating the presheaf arrow at p.
+//
+// Surface/formula:
+//   fdapp1_int_presheaf_arrow(FF,x,u,y,v)[p]
+//     = fdapp1_int_hom_func(FF,p,u,v).
 rule @fapp1_fapp0
       _
       Cat_cat
@@ -5158,6 +5259,11 @@ rule @tapp0_fapp0
       (@fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v)
   ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
+// Final capped projection of identity-specialized displayed hom-action.
+//
+// Surface/formula:
+//   fdapp1_int_hom_func(FF,p,u,v)[alpha]
+//     = fdapp1_int_hom_fapp0(FF,p,u,alpha).
 rule fapp0
       (@fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v)
       $alpha
@@ -5226,9 +5332,14 @@ symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func FF p) u));
 
+// Canonical transported-identity fibre arrow exposes the displayed laxity cell.
+//
+// Surface/formula:
+//   fdapp1_int(FF)[x,u][y,E[p]u][p](id) ↪ fdapp1_int_cell(FF,p,u).
 rule @fdapp1_int_hom_fapp0 $K $E $D $FF $x $y $p $u _ (@id _ _)
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
+// Terminal-source specialization of the transported-identity laxity fold.
 rule @fdapp1_int_hom_fapp0
       $K (@Const_catd $K Terminal_cat) $D $FF $x $y $p
       Terminal_obj Terminal_obj Terminal_obj
@@ -5268,6 +5379,11 @@ rule @fdapp1_int_hom_fapp0
   the identity fibre arrow. When epsilon is the displayed identity, these heads
   fold back to the corresponding `fdapp1_int_*` normal forms.
 */
+// Source dependent-hom section for an arbitrary displayed transfor.
+//
+// Surface/formula:
+//   homd_tdapp1_src_sec(FF,GG,x,u)
+//     = homd_int(GG)[x](FF[x](u)).
 symbol homd_tdapp1_src_sec [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (x : τ (Obj K))
@@ -5281,6 +5397,11 @@ symbol homd_tdapp1_src_sec [K : Cat] [E D : τ (Catd K)]
     x
     (fapp0 (@Fibre_func K E D FF x) u);
 
+// y-component of the arbitrary displayed-transfor dependent-hom target.
+//
+// Surface/formula:
+//   homd_tdapp1_tgt_func(FF,GG,x,u,y)
+//     = homd_tdapp1_src_sec(FF,GG,x,u)[y].
 symbol homd_tdapp1_tgt_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (x : τ (Obj K))
@@ -5291,6 +5412,11 @@ symbol homd_tdapp1_tgt_func [K : Cat] [E D : τ (Catd K)]
       (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat))
 ≔ piapp0 (@homd_tdapp1_src_sec K E D FF GG x u) y;
 
+// First projection of arbitrary displayed hom-action.
+//
+// Surface/formula:
+//   tdapp1_int_section_arrow(epsilon,x,u)
+//     : homd_int(id_E)[x](u) -> homd_int(GG)[x](FF[x](u)).
 symbol tdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5301,6 +5427,11 @@ symbol tdapp1_int_section_arrow [K : Cat] [E D : τ (Catd K)]
       (homd_id_src_sec E x u)
       (@homd_tdapp1_src_sec K E D FF GG x u));
 
+// First projection fold for arbitrary displayed hom-action.
+//
+// Surface/formula:
+//   tdapp1_int_fapp0_transfd(epsilon)[x][u]
+//     = tdapp1_int_section_arrow(epsilon,x,u).
 rule @tapp0_fapp0
       _
       _
@@ -5317,9 +5448,15 @@ rule @tapp0_fapp0
         (@tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ))
   ↪ @tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u;
 
+// Displayed identity folds arbitrary section-arrow action to fdapp1.
 rule @tdapp1_int_section_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u
   ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u;
 
+// Second projection of arbitrary displayed hom-action at y.
+//
+// Surface/formula:
+//   tdapp1_int_tgt_arrow(epsilon,x,u,y)
+//     : homd_int(id_E)[x](u)[y] => homd_int(GG)[x](FF[x](u))[y].
 symbol tdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5330,6 +5467,11 @@ symbol tdapp1_int_tgt_arrow [K : Cat] [E D : τ (Catd K)]
       (homd_id_tgt_func E x u y)
       (@homd_tdapp1_tgt_func K E D FF GG x u y));
 
+// Second projection fold for arbitrary displayed hom-action.
+//
+// Surface/formula:
+//   tdapp1_int_section_arrow(epsilon,x,u)[y]
+//     = tdapp1_int_tgt_arrow(epsilon,x,u,y).
 rule @tapp0_fapp0
       _
       _
@@ -5346,9 +5488,15 @@ rule @tapp0_fapp0
         (@tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u))
   ↪ @tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y;
 
+// Displayed identity folds arbitrary target-arrow action to fdapp1.
 rule @tdapp1_int_tgt_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y
   ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y;
 
+// Third projection of arbitrary displayed hom-action at fibre object v.
+//
+// Surface/formula:
+//   tdapp1_int_presheaf_arrow(epsilon,x,u,y,v)
+//     : Hom_E(E[-]u,v) => Hom_D(D[-](FF[x]u),GG[y]v).
 symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5361,6 +5509,11 @@ symbol tdapp1_int_presheaf_arrow [K : Cat] [E D : τ (Catd K)]
       (fapp0 (homd_id_tgt_func E x u y) v)
       (fapp0 (@homd_tdapp1_tgt_func K E D FF GG x u y) v));
 
+// Third projection fold for arbitrary displayed hom-action.
+//
+// Surface/formula:
+//   tdapp1_int_tgt_arrow(epsilon,x,u,y)[v]
+//     = tdapp1_int_presheaf_arrow(epsilon,x,u,y,v).
 rule @tapp0_fapp0
       _
       _
@@ -5370,10 +5523,16 @@ rule @tapp0_fapp0
       (@tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y)
   ↪ @tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v;
 
+// Displayed identity folds arbitrary presheaf-arrow action to fdapp1.
 rule @tdapp1_int_presheaf_arrow
       $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y $v
   ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
+// Fourth projection of arbitrary displayed hom-action at base arrow p.
+//
+// Surface/formula:
+//   tdapp1_int_hom_func(epsilon,p,u,v)
+//     : homd_(id_E,x,u,y,v)[p] ⊢ homd_(GG,x,FF[x]u,y,v)[p].
 symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5400,6 +5559,7 @@ symbol tdapp1_int_hom_func [K : Cat] [E D : τ (Catd K)]
           v)
         p));
 
+// Fourth projection fold by evaluating the arbitrary presheaf arrow at p.
 rule @fapp1_fapp0
       _
       Cat_cat
@@ -5418,10 +5578,16 @@ rule @tapp0_fapp0
       (@tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v)
   ↪ @tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u $v;
 
+// Displayed identity folds arbitrary hom-action at p to fdapp1.
 rule @tdapp1_int_hom_func
       $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u $v
   ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
+// Canonical transported-identity cell for an arbitrary displayed transfor.
+//
+// Surface/formula:
+//   tdapp1_int_cell(epsilon,p,u)
+//     : D[p](FF[x]u) ->^(D[y]) GG[y](E[p]u).
 symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
   [FF GG : τ (Functord E D)]
   (ϵ : τ (Transfd FF GG))
@@ -5433,12 +5599,22 @@ symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func GG p) u));
 
+// Final capped projection for arbitrary displayed hom-action.
+//
+// Surface/formula:
+//   tdapp1_int_hom_func(epsilon,p,u,E[p]u)(id)
+//     = tdapp1_int_cell(epsilon,p,u).
 rule fapp0 (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _) (@id _ _)
   ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
 
+// Displayed identity folds arbitrary component cell to fdapp1.
 rule @tdapp1_int_cell $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
+// Terminal-source displayed laxity is ordinary functor arrow action.
+//
+// Surface/formula:
+//   fdapp1_int_cell(s,p,*) = s[p].
 rule @fdapp1_int_cell
       $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A) $s $x $y $p Terminal_obj
   ↪ @fapp1_fapp0 $K $A $s $x $y $p;
@@ -5594,24 +5770,44 @@ rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
   product/curry encodings.
 */
 
+// Weakening for ordinary functor categories.
+//
+// Surface/formula:
+//   Const_func_func(A,B)[b] = const_A(b) : A ⊢ B.
 symbol Const_func_func [A B : Cat]
   : τ (Functor B (Functor_cat A B))
 ≔ @const_section_func A B;
 
+// Exchange of two ordinary functor arguments.
+//
+// Surface/formula:
+//   sym_func_func(A,B,C)[H][b][a] = H[a][b].
 symbol sym_func_func [A B C : Cat]
   : τ (Functor
       (Functor_cat A (Functor_cat B C))
       (Functor_cat B (Functor_cat A C)));
 
+// Object action of exchange.
+//
+// Surface/formula:
+//   sym_func(H) : B ⊢ (A ⊢ C).
 symbol sym_func [A B C : Cat]
   (H : τ (Functor A (Functor_cat B C)))
   : τ (Functor B (Functor_cat A C));
 
+// Exchange evaluated at the B-object b.
+//
+// Surface/formula:
+//   sym_fapp0_func(H,b)[a] = H[a][b].
 symbol sym_fapp0_func [A B C : Cat]
   (H : τ (Functor A (Functor_cat B C)))
   (b : τ (Obj B))
   : τ (Functor A C);
 
+// A-arrow action after exchange at fixed b.
+//
+// Surface/formula:
+//   sym_fapp0_func(H,b)[p] = H[p][b].
 symbol sym_fapp0_fapp1_func [A B C : Cat]
   (H : τ (Functor A (Functor_cat B C)))
   (b : τ (Obj B))
@@ -5622,6 +5818,10 @@ symbol sym_fapp0_fapp1_func [A B C : Cat]
         (@fapp0 B C (@fapp0 A (Functor_cat B C) H a) b)
         (@fapp0 B C (@fapp0 A (Functor_cat B C) H a') b)));
 
+// B-arrow action of the exchanged functor.
+//
+// Surface/formula:
+//   sym_func(H)[q] : sym(H)[b] => sym(H)[b'].
 symbol sym_fapp1_func [A B C : Cat]
   (H : τ (Functor A (Functor_cat B C)))
   [b b' : τ (Obj B)]
@@ -5633,6 +5833,10 @@ symbol sym_fapp1_func [A B C : Cat]
         (@sym_fapp0_func A B C H b)
         (@sym_fapp0_func A B C H b')));
 
+// Capped B-arrow action of exchange.
+//
+// Surface/formula:
+//   sym_tapp1_fapp0_transf(H,q)[a] = H[a][q].
 symbol sym_tapp1_fapp0_transf [A B C : Cat]
   (H : τ (Functor A (Functor_cat B C)))
   [b b' : τ (Obj B)]
@@ -5641,6 +5845,10 @@ symbol sym_tapp1_fapp0_transf [A B C : Cat]
       (@sym_fapp0_func A B C H b)
       (@sym_fapp0_func A B C H b'));
 
+// Hom-action of exchange on ordinary transfors.
+//
+// Surface/formula:
+//   sym_func_func[eta] : sym(H) => sym(K).
 symbol sym_func_func_fapp1_func [A B C : Cat]
   [H K : τ (Functor A (Functor_cat B C))]
   : τ (Functor
@@ -5651,6 +5859,10 @@ symbol sym_func_func_fapp1_func [A B C : Cat]
         (@sym_func A B C H)
         (@sym_func A B C K)));
 
+// Capped hom-action of exchange on an ordinary transfor.
+//
+// Surface/formula:
+//   sym_func_func_transf(eta)[b][a] = eta[a][b].
 symbol sym_func_func_transf [A B C : Cat]
   [H K : τ (Functor A (Functor_cat B C))]
   (eta : τ (Transf H K))
@@ -5658,6 +5870,10 @@ symbol sym_func_func_transf [A B C : Cat]
       (@sym_func A B C H)
       (@sym_func A B C K));
 
+// Component of exchanged transfor at b.
+//
+// Surface/formula:
+//   sym_transf_tapp0_transf(eta,b)[a] = eta[a][b].
 symbol sym_transf_tapp0_transf [A B C : Cat]
   [H K : τ (Functor A (Functor_cat B C))]
   (eta : τ (Transf H K))
@@ -5666,6 +5882,7 @@ symbol sym_transf_tapp0_transf [A B C : Cat]
       (@sym_fapp0_func A B C H b)
       (@sym_fapp0_func A B C K b));
 
+// Projection ladder for exchange: object action and hom-action.
 rule @fapp0 _ _ (@sym_func_func $A $B $C) $H
   ↪ @sym_func $A $B $C $H;
 
@@ -5678,6 +5895,7 @@ rule fapp0 (@sym_func_func_fapp1_func $A $B $C $H $K) $eta
 rule @fapp1_fapp0 _ _ (@sym_func_func $A $B $C) $H $K $eta
   ↪ @sym_func_func_transf $A $B $C $H $K $eta;
 
+// Object and A-arrow action after exchange at fixed b.
 rule @fapp0 $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b
   ↪ @sym_fapp0_func $A $B $C $H $b;
 
@@ -5705,6 +5923,7 @@ rule @fapp1_fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a' $p
       $b
       (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p);
 
+// B-arrow action after exchange and its mixed off-diagonal component.
 rule @fapp1_func $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b $b'
   ↪ @sym_fapp1_func $A $B $C $H $b $b';
 
@@ -5748,6 +5967,7 @@ rule @tapp1_fapp0
       (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p)
       $q;
 
+// Component projection for exchanged transfors.
 rule @tapp0_fapp0
       $B
       (Functor_cat $A $C)
@@ -5772,15 +5992,27 @@ rule @tapp0_fapp0
       $b
       (@tapp0_fapp0 $A (Functor_cat $B $C) $H $K $a $eta);
 
+// Contraction/diagonal for ordinary functor categories.
+//
+// Surface/formula:
+//   diag_func_func(A,C)[H][a] = H[a][a].
 symbol diag_func_func [A C : Cat]
   : τ (Functor
       (Functor_cat A (Functor_cat A C))
       (Functor_cat A C));
 
+// Object action of contraction.
+//
+// Surface/formula:
+//   diag_func(H) : A ⊢ C.
 symbol diag_func [A C : Cat]
   (H : τ (Functor A (Functor_cat A C)))
   : τ (Functor A C);
 
+// Arrow action of contraction.
+//
+// Surface/formula:
+//   diag_func(H)[p] = H[p][p].
 symbol diag_fapp1_func [A C : Cat]
   (H : τ (Functor A (Functor_cat A C)))
   [a a' : τ (Obj A)]
@@ -5790,6 +6022,10 @@ symbol diag_fapp1_func [A C : Cat]
         (@fapp0 A C (@fapp0 A (Functor_cat A C) H a) a)
         (@fapp0 A C (@fapp0 A (Functor_cat A C) H a') a')));
 
+// Hom-action of contraction on ordinary transfors.
+//
+// Surface/formula:
+//   diag_func_func[eta] : diag(H) => diag(K).
 symbol diag_func_func_fapp1_func [A C : Cat]
   [H K : τ (Functor A (Functor_cat A C))]
   : τ (Functor
@@ -5800,6 +6036,10 @@ symbol diag_func_func_fapp1_func [A C : Cat]
         (@diag_func A C H)
         (@diag_func A C K)));
 
+// Capped hom-action of contraction on an ordinary transfor.
+//
+// Surface/formula:
+//   diag_func_func_transf(eta)[a] = eta[a][a].
 symbol diag_func_func_transf [A C : Cat]
   [H K : τ (Functor A (Functor_cat A C))]
   (eta : τ (Transf H K))
@@ -5807,6 +6047,7 @@ symbol diag_func_func_transf [A C : Cat]
       (@diag_func A C H)
       (@diag_func A C K));
 
+// Projection ladder for contraction: object action and hom-action.
 rule @fapp0 _ _ (@diag_func_func $A $C) $H
   ↪ @diag_func $A $C $H;
 
@@ -5819,6 +6060,7 @@ rule fapp0 (@diag_func_func_fapp1_func $A $C $H $K) $eta
 rule @fapp1_fapp0 _ _ (@diag_func_func $A $C) $H $K $eta
   ↪ @diag_func_func_transf $A $C $H $K $eta;
 
+// Object and arrow action of the diagonal functor.
 rule @fapp0 $A $C (@diag_func $A $C $H) $a
   ↪ @fapp0 $A $C (@fapp0 $A (Functor_cat $A $C) $H $a) $a;
 
@@ -5847,6 +6089,7 @@ rule @fapp1_fapp0 $A $C (@diag_func $A $C $H) $a $a' $p
       (@fapp1_fapp0 $A (Functor_cat $A $C) $H $a $a' $p)
       $p;
 
+// Component projection for contracted transfors.
 rule @tapp0_fapp0
       $A
       $C
