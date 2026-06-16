@@ -2,7 +2,7 @@
 .PHONY: check clean
 
 check:
-# scripts/check.sh checks the v2 reference, active v3.2 development, and v3.2 diagnostics.
+# scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
 > ./scripts/check.sh
 
 watch:

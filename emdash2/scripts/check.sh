@@ -16,6 +16,5 @@ check_file() {
   fi
 }
 
-check_file emdash2.lp
 check_file emdash3_2.lp
 check_file emdash3_2_checks.lp

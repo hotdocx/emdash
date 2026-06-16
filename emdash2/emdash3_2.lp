@@ -70,7 +70,7 @@ flag "print_domains" on;
 flag "print_meta_args" on;
 
 /*
-  Ported working conventions from emdash2.lp
+  Ported working conventions from the retired v2 baseline
 
   This file is intentionally kernel-like: primitives stay small, and
   computational behavior is made explicit by rewrite and unification rules.
@@ -1534,8 +1534,8 @@ injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);
 
-// Controlled Obj-inversion for transformation categories. This is the
-// emdash2 helper that lets projection rules keep source/target functors
+// Controlled Obj-inversion for transformation categories. This inherited
+// helper lets projection rules keep source/target functors
 // implicit, e.g. `@tapp0_fapp0 ... _ _ ...`, without forcing reducible
 // compound family expressions into rewrite-rule LHSs.
 unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
@@ -1587,7 +1587,7 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
 
 /*
   Design note: `tapp0_fapp0` is a primitive projection head, not a
-  definitional abbreviation.  This follows emdash2: the head must remain
+  definitional abbreviation. The head must remain
   visible so later rules can attach component computations directly to it.
 */
 // Evaluation of the component projection functor.
@@ -2756,7 +2756,7 @@ symbol uncurry_func [A B C : Cat]
 /*
   Ordinary functor adjunctions.
 
-  This is the v3.2 replacement for the draft `adj` interface from emdash2.
+  This is the v3.2 replacement for the draft retired-baseline `adj` interface.
   The old interface was parameterized by already-named functors/unit/counit and
   used unification rules to make projection heads behave like those parameters.
   Here the adjunction itself is first-class:

@@ -230,8 +230,8 @@ def main() -> int:
         "path",
         type=Path,
         nargs="?",
-        default=Path("emdash2.lp"),
-        help="Path to the .lp file to rewrite (default: emdash2.lp).",
+        default=Path("emdash3_2.lp"),
+        help="Path to the .lp file to rewrite (default: emdash3_2.lp).",
     )
     ap.add_argument(
         "--check",
@@ -258,4 +258,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

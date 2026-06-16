@@ -4,11 +4,11 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, with diagnostics in @emdash3_2_checks.lp. Current v3.2 guidance is consolidated in @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, @reports/EMDASH_FOUNDATIONS.md, and @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, with diagnostics in @emdash3_2_checks.lp. Current v3.2 guidance is consolidated in @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, @reports/EMDASH_FOUNDATIONS.md, and @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md. The obsolete v2 baseline has been retired; see @reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md for the audit summary.
 
 For v3.2 work, start from @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md only for the still-proposed structural functor logic work, and @reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md only for notation/reorganization follow-up. The v3.1 baseline, the older tracked v3 attempt, and superseded v3/v3.2 feature reports have been retired into ignored `.scratchpad/` folders so they do not distract normal development.
 
-The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
+The baseline inspiration is in the active files and in retirement-audit reports. Older material moved to `.scratchpad/` is not part of normal development. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
@@ -22,7 +22,7 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/EMDASH_FOUNDATIONS.md for the mathematical reading guide, @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md for current notation, and @reports/REPORT_EMDASH2_CONSOLIDATED.md only as the v2 reference for rewrite/unification style and stable-head SOP.
+Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/EMDASH_FOUNDATIONS.md for the mathematical reading guide, @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md for current notation, and @reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md only when you need the obsolete v2 retirement summary.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
@@ -30,7 +30,6 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 - Typecheck the current development: `make check`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
-- Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`
 - Remove compilation artefacts: `make clean`

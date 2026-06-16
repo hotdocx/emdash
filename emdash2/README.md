@@ -5,9 +5,7 @@ The proof assistant is inspired by the functorial programming approach of Kosta 
 The proof assistant is called `m—` (read “emdash”).
 
 ## Layout
-- `emdash2.lp`: ω-category-oriented development (v2, second iteration).
 - `emdash3_2.lp`: active v3.2 directed-family mixed-variance development.
-- `reports/REPORT_EMDASH2_CONSOLIDATED.md`: current v2 reference report.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
   v3.2 status and rewrite/debugging SOP.
 - `reports/EMDASH_FOUNDATIONS.md`: mathematician-facing reading guide for the
@@ -22,6 +20,9 @@ The proof assistant is called `m—` (read “emdash”).
   comma-category infrastructure.
 - `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
   active notation/reorganization subplan.
+- `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit explaining
+  why the old v2 baseline was retired and which ideas remain future design
+  material.
 - Older v3/v3.2 feature reports have been consolidated into the current SOP
   and foundations reports, then archived under `.scratchpad/retired/`.
 - `lambdapi.pkg`: package config for Lambdapi.

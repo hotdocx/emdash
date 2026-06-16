@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-05
+Last consolidated: 2026-06-16
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -22,7 +22,8 @@ work.
   `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`.
 - Current notation/reorganization subplan:
   `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
-- Current v2 reference: `reports/REPORT_EMDASH2_CONSOLIDATED.md`.
+- v2 retirement audit:
+  `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`.
 
 Reports retired by the 2026-06-05 consolidation have been archived under:
 
@@ -38,6 +39,9 @@ Retired historical references:
 
 - The old v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report have been
   moved to ignored `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/`.
+- The obsolete v2 baseline and consolidated v2 report have been moved to
+  ignored `.scratchpad/retired/2026-06-16_v2_reference/`; use
+  `REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md` for the retained audit.
 - Do not consult those archived files during normal v3.2 work. Recover them
   only for explicitly requested historical comparison.
 
@@ -53,26 +57,14 @@ the displayed or natural family layers.
 Top-level implementation sections now have this active order:
 
 ```text
-0. Groupoid universe and equality
-1. Encoded Sigma types for object layers
-2. Core categories
-3. Functor, displayed-family, and universe categories
-4. Ordinary internal hom and hom actions
-5. Ordinary binary products of categories
-6. Ordinary transformations and functor composition actions
-7. Product functor packages, evaluation, curry, and ordinary internal action
-8. Directed Cat-valued family constructors
-9. Directed Sigma categories and maps between totals
-10. Mixed-variance family functor
-11. Representables, path induction, and presheaf-family classifiers
-12. Directed homd target and internal homd functor
-13. Endpoint normal forms for Sigma homs
-14. Section action over dependent homs
-15. Internal displayed hom-action heads
-16. Derived displayed component notation
-17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed
-    projection helpers
-18. Check catalog and nested telescope stress examples
+0-2. Kernel foundations
+3-7. Ordinary category calculus
+8-10. Directed family calculus
+11-13. Representable and dependent-hom infrastructure
+14-16. Displayed hom-action and laxity extraction
+17. Structural logic and bridges
+18. Applications
+19. Check catalog
 ```
 
 The primary path-induction theorem is `PathInd_transfd(Z)`. The Sigma-total
@@ -115,7 +107,7 @@ Current validation observed during this review:
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-checks `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
+checks `emdash3_2.lp` and `emdash3_2_checks.lp`.
 
 ### Maintenance Review 2026-06-05
 
@@ -275,12 +267,12 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 At the time of this report it checks:
 
 ```text
-emdash2.lp
 emdash3_2.lp
 emdash3_2_checks.lp
 ```
 
-The old v3.1 baseline is no longer part of the ordinary check path.
+The old v3.1 baseline and obsolete v2 baseline are no longer part of the
+ordinary check path.
 
 ## Before Editing `emdash3_2.lp`
 

@@ -96,8 +96,8 @@ Completed:
   functor/transformation arrow glyphs;
 - extracted 314 top-level diagnostic `assert` checks from `emdash3_2.lp` into
   `emdash3_2_checks.lp`;
-- updated `scripts/check.sh` and `Makefile` so `make check` checks
-  `emdash2.lp`, `emdash3_2.lp`, and `emdash3_2_checks.lp`.
+- updated `scripts/check.sh` and `Makefile` so `make check` checks the active
+  v3.2 implementation and diagnostics.
 - added notation-warning banners to older reports that still preserve
   pre-2026-06-05 notation.
 - created the temporary reorganization workbench files
@@ -267,7 +267,6 @@ require open emdash3_2;
 and `scripts/check.sh` should check:
 
 ```text
-emdash2.lp
 emdash3_2.lp
 emdash3_2_checks.lp
 ```

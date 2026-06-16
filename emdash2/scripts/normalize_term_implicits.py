@@ -13,7 +13,7 @@ SKIP_COMMAND_HEADS = {
 }
 
 
-# Phase A (very safe, observed in emdash2.lp)
+# Phase A (very safe, observed in the legacy baseline and retained for v3.2)
 ALLOW_BRACKET_HEADS_PHASE_A = {
     "tapp1_int_fapp0_transf",
     "tdapp1_int_fapp0_transfd",
@@ -413,8 +413,8 @@ def main() -> int:
         "path",
         type=Path,
         nargs="?",
-        default=Path("emdash2.lp"),
-        help="Path to the .lp file to rewrite (default: emdash2.lp).",
+        default=Path("emdash3_2.lp"),
+        help="Path to the .lp file to rewrite (default: emdash3_2.lp).",
     )
     ap.add_argument(
         "--phase-b",
