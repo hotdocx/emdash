@@ -28,6 +28,8 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 
 ## Fast commands
 - Typecheck the current development: `make check`
+- Run local CI gate: `make ci`
+- Refresh the health report: `make health`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
 - Print preview: `npm run dev`
@@ -63,6 +65,17 @@ Tuning / troubleshooting:
 
 Background daemon-style (then tail the log):
 - `nohup make watch >/dev/null 2>&1 &`
+
+## SOP: MathOps / DevOps
+- Use `make ci` before handing off substantial edits. It runs active
+  Lambdapi checks, whitespace diff checks, stale-reference lint, and source
+  metrics.
+- Use `make health` after meaningful architecture/check changes to refresh
+  `reports/REPORT_EMDASH_HEALTH.md`.
+- Use `reports/INDEX.md` before searching reports by filename.
+- Use `research/literature.md` and `scripts/arxiv_search.py` for repeatable
+  arXiv/ar5iv discovery. ar5iv is for HTML skimming; arXiv PDF/source remains
+  authoritative for exact formulas.
 
 ## Conventions
 - Keep the repo in a state where `make check` succeeds.

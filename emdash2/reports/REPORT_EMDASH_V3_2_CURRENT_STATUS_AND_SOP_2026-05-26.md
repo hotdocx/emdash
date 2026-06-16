@@ -24,6 +24,10 @@ work.
   `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
 - v2 retirement audit:
   `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`.
+- Reports index:
+  `reports/INDEX.md`.
+- MathOps/DevOps implementation plan:
+  `reports/REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`.
 
 Reports retired by the 2026-06-05 consolidation have been archived under:
 
@@ -262,6 +266,18 @@ The current full check is:
 
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+The local CI gate is:
+
+```bash
+make ci
+```
+
+The health/metrics report is refreshed with:
+
+```bash
+make health
 ```
 
 At the time of this report it checks:

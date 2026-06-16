@@ -23,6 +23,8 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit explaining
   why the old v2 baseline was retired and which ideas remain future design
   material.
+- `reports/INDEX.md`: current report map.
+- `research/literature.md`: MathOps literature-discovery workflow.
 - Older v3/v3.2 feature reports have been consolidated into the current SOP
   and foundations reports, then archived under `.scratchpad/retired/`.
 - `lambdapi.pkg`: package config for Lambdapi.
@@ -33,6 +35,8 @@ The proof assistant is called `m—` (read “emdash”).
 Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 
 - Check active Lambdapi files: `make check`
+- Run local CI gate: `make ci`
+- Refresh the health report: `make health`
 - Check just v3.2: `lambdapi check -w emdash3_2.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 
@@ -42,6 +46,12 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - One-shot check: `python3 scripts/watch_typecheck.py --once`.
 - Tuning: `python3 scripts/watch_typecheck.py --interval 0.2` / `--no-clear`.
 - Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
+
+## MathOps utilities
+- Stale active-reference lint: `./scripts/lint_active_refs.sh`.
+- Check/source metrics: `python3 scripts/check_metrics.py --write-report`.
+- arXiv/ar5iv discovery:
+  `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
