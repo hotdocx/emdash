@@ -522,6 +522,198 @@ semantic owners. A future displayed profunctor/unit theory should be built by
 analogy with `homd_int`, not by forcing `Unit_prof` to cover dependent
 endpoints.
 
+### Curried Hom Infrastructure Versus General Profunctors
+
+There are two different questions that should not be conflated.
+
+First, internalize the existing `hom_int` in its functor argument:
+
+```text
+hom_int(F) : X^op -> Catd(B)
+```
+
+where `F : B -> X`. A possible internal package would be:
+
+```text
+hom_int_func(X,B)
+  : (B -> X) -> (X^op -> Catd(B))
+hom_int_func[X,B][F] = hom_int(F)
+```
+
+This is a one-functor internalization. Its hom-action on a transformation
+`eta : F => G` is postcomposition by `eta`. If this package is added, it
+should probably be named something unambiguous like `hom_int_func`, not
+`hom_int_int`: the latter name does not say whether one is internalizing only
+the target functor argument of `hom_int`, or also adding a second endpoint
+functor.
+
+Conceptually, this one-functor package is a Yoneda-style/representable
+inclusion into the curried profunctor category:
+
+```text
+Prof_curried_cat(X,B) := Functor_cat (Op_cat X) (Catd_cat B)
+
+hom_int_func(X,B)
+  : Functor_cat B X -> Prof_curried_cat(X,B)
+```
+
+Its image consists of profunctors representable in the contravariant `X`
+variable. That is useful and central, but it is not the same as the category of
+all profunctors.
+
+Second, build a unit/representable profunctor from two endpoint functors:
+
+```text
+F : A -> X
+G : B -> X
+Unit_prof(F,G)[a,b] = Hom_X(F[a],G[b]).
+```
+
+This is a two-functor construction. It can be factored through the one-functor
+package by substitution and uncurry:
+
+```text
+Unit_prof(F,G)
+  = uncurry(hom_int(G) o Op_func(F)).
+```
+
+So if a later `Unit_prof_func2` exists, it should be understood as:
+
+```text
+Unit_prof_func2(F,G)
+  = uncurry(hom_int_func[X,B](G) o Op_func(F))
+```
+
+morally, not as a new independent hom calculus.
+
+The current v3.2 source already has a related two-functor internal hom-action:
+
+```text
+tapp1_int_func_transf(F,G)
+  : Transf(F,G)
+      -> Transf(hom_int(id_A), hom_int(G) o Op_func(F)).
+```
+
+This is evidence that the two-endpoint functorial story belongs to ordinary
+hom-action infrastructure. It should be reused when designing any future
+`hom_int_func` or `Unit_prof_func2` projection rules.
+
+More precisely, `tapp1_int_func_transf` is not just the postcomposition
+hom-action of `hom_int_func`. It is the richer binary hom-action:
+
+```text
+Hom_A(-,-) -> Hom_B(F- ,G-)
+```
+
+so it belongs next to the one-variable postcomposition action, not as a
+replacement for it. A future `hom_int_func` may still need its own projection
+head for:
+
+```text
+eta : F => G
+hom_int(F) => hom_int(G)
+```
+
+unless the existing `hom_postcomp_*` heads are enough for the required checks.
+
+However, this does not make `hom_int_func` or `Unit_prof_func2` a replacement
+for general profunctors. They describe representable/unit profunctors. A
+general profunctor is an arbitrary family:
+
+```text
+R : Catd(A^op x B)
+```
+
+or equivalently, in curried form:
+
+```text
+Rcur : A^op -> Catd(B).
+```
+
+The curried form is useful and closer to `hom_int`; the uncurried product-base
+form is useful for `Prof_reindex`, tensor endpoints, and direct fibre access.
+They should be treated as two surfaces for the same general concept, related by
+curry/uncurry, not as two competing theories.
+
+This answers the "could `hom_int_int` be the profunctor concept?" question as
+follows:
+
+```text
+hom_int_func:
+  yes, as the representable/Yoneda inclusion into curried profunctors;
+  no, as the full profunctor concept.
+
+Unit_prof_func2:
+  yes, as the binary endpoint package for Hom_X(F[a],G[b]);
+  no, as the full profunctor concept.
+
+Prof_curried_cat / Prof_cat:
+  yes, as the full profunctor concept, with curried and uncurried surfaces.
+```
+
+So the globally coherent architecture is:
+
+```text
+ordinary hom infrastructure
+  hom_int(F)
+  hom_int_func(X,B)                    // if needed
+  tapp1_int_func_transf(F,G)
+
+representable/unit profunctors
+  Unit_prof(F,G)
+  Unit_prof_func2(F,G)                 // if needed
+
+general profunctors
+  Prof_curried_cat(A,B)                // optional facade
+  Prof_cat(A,B) = Catd_cat(A^op x B)   // product-base facade
+```
+
+The maps between these layers should be explicit comparison/projection maps.
+They should not be collapsed by broad rewrite rules.
+
+Because `curry_func_func` and `uncurry_func_func` are semantic composites with
+nontrivial `comp_cat_fapp0` cuts, avoid adding broad rewrite rules that fold
+arbitrary:
+
+```text
+uncurry(hom_int(G) o Op_func(F))
+```
+
+into a primitive `Unit_prof` head. Prefer:
+
+```text
+Unit_prof := Hom_catd(...)          // base clarity
+comparison checks with hom_int      // inherited hom-action story
+optional stable projections later   // only if downstream rules need them
+```
+
+If a curried profunctor facade becomes useful, introduce it explicitly:
+
+```text
+Prof_curried_cat(A,B) := Functor_cat (Op_cat A) (Catd_cat B)
+```
+
+and relate it to:
+
+```text
+Prof_cat(A,B) := Catd_cat(Product_cat(Op_cat A,B))
+```
+
+by named curry/uncurry comparison maps, not by unrestricted global rewrites.
+This keeps the core profunctor API independent of the current complexity of
+`uncurry_func_func`.
+
+Implementation consequence: the first implementation should not attempt to
+make the uncurried product form disappear. Tensor, weighted limits, and
+reindexing all naturally inspect fibres over pairs `(a,b)` or `(b,c)`. The
+curried form should be introduced when it buys reuse of existing `hom_int` and
+composition infrastructure, not as a replacement for the product-base surface.
+
+Displayed/dependent profunctors are a separate future layer. That is where a
+`homd_int`-style analogue becomes relevant: a displayed profunctor over a base
+profunctor would need endpoint families and dependent hom-action over the base
+profunctor's cells. Do not solve that while implementing ordinary `Unit_prof`.
+
 ## Main Design Stance
 
 The working v3.2 reading of a profunctor is:
