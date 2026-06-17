@@ -522,6 +522,113 @@ semantic owners. A future displayed profunctor/unit theory should be built by
 analogy with `homd_int`, not by forcing `Unit_prof` to cover dependent
 endpoints.
 
+### Single-Argument Core Versus Binary Convenience
+
+Refinement: the primitive/core unit-hom profunctor should probably have one
+functor argument, not two.
+
+The existing `hom_int` already has the shape:
+
+```text
+hom_int(G) : X^op -> Catd(B)
+G : B -> X
+hom_int(G)[x][b] = Hom_X(x,G[b])
+```
+
+Therefore the direct profunctor analogue is the right-representable/hom
+profunctor:
+
+```text
+Hom_prof(G) : Prof(X,B)
+Hom_prof(G)[x,b] = Hom_X(x,G[b])
+```
+
+This is the profunctor form of the existing single-argument `hom_int(G)`.
+The identity/unit profunctor on `X` is the specialization:
+
+```text
+Unit_prof(X) := Hom_prof(id_X) : Prof(X,X)
+```
+
+The two-endpoint form used in the Cartier draft is then a derived
+left-reindexed convenience:
+
+```text
+Hom_prof_along(F,G) : Prof(A,B)
+F : A -> X
+G : B -> X
+
+Hom_prof_along(F,G)
+  := Prof_reindex(Hom_prof(G), F, id_B)
+
+Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b]).
+```
+
+So the answer to "is the two-functor form necessary?" is:
+
+```text
+mathematically/foundationally:
+  no; the single-argument hom profunctor plus left reindexing is enough.
+
+as notation/API for weighted limits and adjunction formulas:
+  probably yes as a semantic alias, because formulas such as
+  Hom_prof_along(M,F) are much easier to read than an explicit reindexing
+  expression.
+
+as a primitive stable rewrite owner:
+  not initially; add it only if downstream tensor/weighted-limit rules need a
+  stable head that cannot be recovered from Hom_prof + Prof_reindex.
+```
+
+This also clarifies naming. The most precise split would be:
+
+```text
+Hom_prof(G) or Right_repr_prof(G)
+  core single-argument right-representable profunctor.
+
+Unit_prof(X)
+  identity/unit profunctor, defined as Hom_prof(id_X).
+
+Hom_prof_along(F,G) or Unit_prof_along(F,G)
+  binary convenience, defined by left reindexing Hom_prof(G).
+```
+
+The old report shorthand `Unit_prof(F,G)` should be read as this binary
+convenience unless/until we settle final names.
+
+Temporary probe result: a primitive single-argument `Probe_Hom_prof(G)` with
+the direct fibre computation:
+
+```text
+Probe_Hom_prof(G)[x,b] -> Hom_X(x,G[b])
+```
+
+typechecked. The derived binary object:
+
+```text
+Pullback_catd(Probe_Hom_prof(G), Product_cat_fapp1_tapp0_func(Op_func(F),B))
+```
+
+also typechecked as a definition. A fully normalized fibre assertion for that
+derived binary expression should be added later with the landed `Prof_reindex`
+surface, not forced during the naming/design probe.
+
+Important caveat about the proposed "curry projection":
+
+```text
+curry(Hom_prof(G)) -> hom_int(G)
+```
+
+is conceptually the right comparison. But in the current v3.2 source,
+`curry_func_func` is a transparent semantic composite and `curry_func` is a
+defined alias, not an opaque primitive stable head. A probe showed that
+Lambdapi refuses a rewrite rule headed by `curry_func` because it is defined
+with `≔`; a rule against `fapp0 curry_func_func ...` is not enough to make the
+expected comparison assertion reduce robustly. Therefore, if we want this
+projection as computation, we should first promote or add a stable curry
+projection owner. Do not assume the current curry aliases are safe rewrite
+owners.
+
 ### Curried Hom Infrastructure Versus General Profunctors
 
 There are two different questions that should not be conflated.
@@ -808,15 +915,21 @@ Initial probe targets:
 ```text
 Prof_base(A,B) normalizes to Product_cat (Op_cat A) B.
 Prof_cat(A,B) normalizes to Catd_cat(Prof_base(A,B)).
-Fibre_cat(Unit_prof(F,G),(a,b)) normalizes to Hom_cat X (F[a]) (G[b]).
+Fibre_cat(Hom_prof(G),(x,b)) normalizes to Hom_cat X x (G[b]).
+Hom_prof_along(F,G) typechecks as the left reindexing of Hom_prof(G).
+Fibre_cat(Hom_prof_along(F,G),(a,b)) normalizes to Hom_cat X (F[a]) (G[b]).
 Prof_reindex(R,F,G) has the expected fibre over (a',b').
-Prof_hom(id_I,Unit_prof(F,G),id_I) exposes the expected transformation shape.
+Prof_hom(id_I,Hom_prof_along(F,G),id_I) exposes the expected transformation
+shape.
 ```
 
-Probe outcome: the first four items have a direct semantic route. The
-`Prof_hom` wrapper also typechecks as a semantic `Obj(Functord_cat ...)`. More
-ambitious normal-form assertions for `Prof_hom` should wait until the first
-landed checks show which projection surface is most readable.
+Probe outcome so far: the single-argument `Hom_prof(G)` fibre rule typechecks,
+and the binary `Hom_prof_along(F,G)` object typechecks as a left reindexing of
+it. The earlier broader probe also showed direct semantic routes for
+`Prof_base`, `Prof_cat`, `Prof_reindex`, and the `Prof_hom` wrapper as a
+semantic `Obj(Functord_cat ...)`. More ambitious normal-form assertions for
+`Hom_prof_along` and `Prof_hom` should wait until the first landed checks show
+which projection surface is most readable.
 
 ## Phase 1: Profunctor Facade
 
@@ -874,32 +987,36 @@ Prof_reindex(R,F,G)
   := Pullback_catd R (Product_map_func (Op_func F) G).
 ```
 
-The first unit profunctor should be semantic rather than primitive:
+The first hom/unit profunctor should start with the single-argument core:
 
 ```text
-Unit_prof(F,G) : Prof(A,B)
+Hom_prof(G) : Prof(X,B)
 
-where
-  F : A -> X
-  G : B -> X
+where G : B -> X
 
-Unit_prof(F,G)[a,b] = Hom_X(F[a],G[b]).
+Hom_prof(G)[x,b] = Hom_X(x,G[b]).
 ```
 
 Likely implementation route:
 
 ```text
-K      := Product_cat (Op_cat A) B
-source := comp_cat_fapp0 (Op_func F) (Product_projL_func (Op_cat A) B)
-target := comp_cat_fapp0 G           (Product_projR_func (Op_cat A) B)
+K      := Product_cat (Op_cat X) B
+source := Product_projL_func (Op_cat X) B
+target := comp_cat_fapp0 G (Product_projR_func (Op_cat X) B)
 
-Unit_prof(F,G) := Hom_catd(Const_catd K X, source, target)
+Hom_prof(G) := Hom_catd(Const_catd K X, source, target)
 ```
 
-The direct `Hom_catd(Const_catd K X, source, target)` route has been probed
-successfully for ordinary homs in a fixed `X`. It should be used first; add a
-stable `Unit_prof` projection head only if later checks need a dedicated
-discriminator.
+Then define the binary endpoint form by left reindexing:
+
+```text
+Hom_prof_along(F,G)
+  := Prof_reindex(Hom_prof(G), F, id_B)
+```
+
+The direct single-argument fibre rule has been probed successfully. Add a
+stable binary `Hom_prof_along`/`Unit_prof_along` projection head only if later
+checks need a dedicated discriminator.
 
 Then define the old Cartier-shaped element category:
 
