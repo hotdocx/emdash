@@ -239,6 +239,197 @@ structure, or op-dual universal-property transport from which these can be
 definitionally derived. Their computation should be governed by explicit
 beta/eta and naturality rules.
 
+## Internalization Strategy
+
+The Cartier port must track which variables are merely Lambdapi parameters and
+which variables have been internalized as functorial arguments. The v3.2 SOP is
+incremental:
+
+```text
+external fixed symbol
+  -> functorial package in one variable
+  -> functorial package in several variables
+  -> projection rules back to the external symbol
+  -> higher hom-action/projection rules only when demanded by checks
+```
+
+Existing examples:
+
+```text
+Product_cat(A,B)
+Product_cat_func[A][B] = A x B
+Product_cat_fapp1_tapp0_func(F,B) = F * 1_B
+Product_mapL_func_func(A,A',B)[F] = F * 1_B
+
+Pullback_catd(E,F)
+Pullback_catd_func(F)[E] = F^*E
+Catd_cat_func[F] = Pullback_catd_func(F)
+
+Pi_cat(E)
+Pi_func(K)[E] = Pi_cat(E)
+Pi_int_funcd[K] = Pi_func(K)
+Pi_pullback_funcd(G)[x] = Pi_func(G[x])
+```
+
+The profunctor port should follow this pattern. Do not start with the most
+internal possible symbol unless a concrete computation already needs it.
+
+### Provisional Internalization Ladder
+
+For the profunctor facade:
+
+```text
+Level 0:
+  Prof_base(A,B)
+  Prof_cat(A,B)
+  R : Catd(Prof_base(A,B))
+
+Level 1:
+  Prof_reindex_func(F,G)
+    : Prof_cat(A,B) -> Prof_cat(A',B')
+  Prof_reindex_func(F,G)[R] = Prof_reindex(R,F,G)
+
+Level 2:
+  internalize in F and/or G only if repeated reindexing/naturality rules need it
+```
+
+`Prof_reindex_func(F,G)` is the first likely internalized helper because it is
+mostly already supplied by:
+
+```text
+Pullback_catd_func(Product_map_func(Op_func F,G)).
+```
+
+The hard part is not internalizing in `R`; the hard part is deciding whether
+`Product_map_func(Op_func F,G)` itself needs a stable two-variable product-map
+owner.
+
+For the unit profunctor:
+
+```text
+Level 0:
+  Unit_prof(F,G) : Prof(A,B)
+
+Level 1:
+  Unit_prof_func(F)
+    : (B -> X) -> Prof_cat(A,B)
+  or
+  Unit_prof_func_right(G)
+    : (A -> X)^op -> Prof_cat(A,B)
+
+Level 2:
+  Unit_prof_func2
+    : (A -> X)^op x (B -> X) -> Prof_cat(A,B)
+```
+
+The variance is important:
+
+```text
+Unit_prof(F,G)[a,b] = Hom_X(F[a],G[b])
+```
+
+is contravariant in `F` and covariant in `G`. Therefore a fully internalized
+two-variable owner should have source morally:
+
+```text
+Product_cat (Op_cat (Functor_cat A X)) (Functor_cat B X)
+```
+
+and target:
+
+```text
+Prof_cat(A,B).
+```
+
+This is exactly the kind of internalization that should be delayed until a
+downstream theorem needs it. The first implementation can use the semantic
+`Hom_catd` owner and later add `Unit_prof_func2` with projection rules:
+
+```text
+Unit_prof_func2[(F,G)] = Unit_prof(F,G)
+Unit_prof_func2[(alpha,beta)] = pre/postcomposition on hom fibres
+```
+
+For tensor:
+
+```text
+Level 0:
+  Prof_tensor(R,S) : Prof(A,C)
+
+Level 1:
+  Prof_tensor_func(A,B,C)
+    : Prof_cat(A,B) x Prof_cat(B,C) -> Prof_cat(A,C)
+  Prof_tensor_func[(R,S)] = Prof_tensor(R,S)
+
+Level 2:
+  equipment-level tensor over reindexing spans:
+  Tensor_cov_transf / Tensor_con_transf analogues
+```
+
+The fixed-base tensor functor is the internal form of the ordinary bifunctor
+on profunctor categories. The old Cartier transformation constructors are more
+general: they are equipment cells over functors between bases. Those should
+not replace the fixed-base functor; they should sit above it.
+
+For implication:
+
+```text
+Level 0:
+  Prof_imply_cov(O,Q)
+  Prof_imply_con(Q,O)
+
+Level 1:
+  Prof_imply_cov_func(Q)
+    : Prof_cat(A,B) -> Prof_cat(A,C)
+  Prof_imply_con_func(Q)
+    : Prof_cat(A,B) -> Prof_cat(C,B)
+
+Level 2:
+  two-variable closed-structure functors and equipment-level naturality
+```
+
+For weighted limits:
+
+```text
+Level 0:
+  WeightedLimit_cov(F,W,L) : TYPE
+
+Level 1:
+  universal/cone maps functorial in the probe M : I -> B
+
+Level 2:
+  naturality of the weighted-limit package in F, W, L, and adjunction data
+```
+
+The universal property is inherently shaped: even if the limit object is a
+point or point-family, the statement quantifies over all probes `M : I -> B`.
+So weighted limits are one of the places where the old "functors into a
+category" discipline is not accidental. It expresses enriched/natural
+parametricity of the universal property.
+
+### Internalization Decision Rule
+
+For each proposed symbol, ask:
+
+```text
+1. Is this only a pointwise/fibre formula?
+   Use direct Catd/fibre infrastructure.
+
+2. Is this a fixed-base functorial operation?
+   Add a `*_func` package over `Prof_cat(...)` with fapp0/fapp1 projections.
+
+3. Does this vary over base functors or substitutions?
+   Add an equipment-level transformation constructor.
+
+4. Does this require coends, closed bicategory structure, or a universal
+   property not present in v3.2?
+   Use a primitive calculus head with beta/eta rules.
+```
+
+This rule is more important than the old Cartier naming. It lets the port keep
+the concrete applications while changing the architecture when v3.2 already
+has a better semantic owner.
+
 ## Main Design Stance
 
 The working v3.2 reading of a profunctor is:
