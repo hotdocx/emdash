@@ -718,6 +718,7 @@ Yoneda actions:
 
 Tensor/co-Yoneda:
   coyoneda_Unit_Tensor_cov_transf matches P ⊗ Unit_mod(G,N).
+  Here both G : B -> B' and N : J -> B' may be non-identity.
 
 Internal hom:
   comp_Imply_cov_mod uses (Unit_mod(G,N) ⇐ W).
@@ -725,10 +726,12 @@ Internal hom:
 Weighted limits:
   limit_cov_univ_transf uses (Unit_mod(M,F) ⇐ W).
   limit_con_univ_transf uses (W ⇒ Unit_mod(F,M)).
+  Here M : I -> B and F : J -> B are both genuine endpoints.
 
 Adjunction accumulation/naturality:
   Adj_cov_hom and Adj_con_hom keep parameters Z and M/N as direct arguments,
   and rewrite them under extra substitutions.
+  Several rules accumulate extra functor composition into both endpoint slots.
 
 Duality:
   Op_mod(Unit_mod(F,G)) -> Unit_mod(Op_func(G), Op_func(F)).
@@ -746,15 +749,46 @@ Operational need for a binary normal form:
 
 Recommended v3.2 compromise:
   make Hom_prof(G) the primitive/core right-representable;
-  add Hom_prof_along(F,G) as the normal form for left-reindexed Hom_prof(G);
+  add primitive Hom_prof_along(F,G) if rules need it on the LHS;
   orient Prof_reindex(Hom_prof(G),F,H) toward Hom_prof_along(F,G o H);
   orient further reindexing of Hom_prof_along by endpoint composition;
   only then port co-Yoneda, weighted limits, adjunction, and duality rules.
 ```
 
 In other words, the binary form should not be the foundational primitive, but
-we should expect to need a binary stable head as a cut-elimination normal form
-for already-reindexed representables.
+if it appears in rewrite-rule LHSs it must be a primitive/stable head, not a
+transparent alias. The semantic equation:
+
+```text
+Hom_prof_along(F,G) = Prof_reindex(Hom_prof(G), F, id)
+```
+
+should then be implemented by oriented fold/projection rules, not by defining
+`Hom_prof_along` with `≔`.
+
+Candidate normal-form rules:
+
+```text
+Prof_reindex(Hom_prof(G), F, H)
+  -> Hom_prof_along(F, G o H)
+
+Prof_reindex(Hom_prof_along(F,G), F', H)
+  -> Hom_prof_along(F' o F, G o H)
+
+curry*(Hom_prof(G))
+  -> hom_int(G)
+
+curry*(Hom_prof_along(F,G))
+  -> hom_int(G) o Op_func(F)
+
+Op_prof(Hom_prof_along(F,G))
+  -> Hom_prof_along(Op_func(G), Op_func(F))
+```
+
+Composition order in the schematic rules must be adjusted to the landed
+`comp_cat_fapp0` convention, but the invariant is clear: all reindexing cuts
+on representables should accumulate into endpoint functor arguments before
+co-Yoneda, weighted-limit, adjunction, or duality rules try to match them.
 
 ### Curried Hom Infrastructure Versus General Profunctors
 
@@ -1149,7 +1183,7 @@ then `Hom_prof` should be declared as a stable/injective head with projection
 rules, not merely as a transparent `≔` alias. The `Hom_catd` expression remains
 the correctness model and comparison check.
 
-Then define the binary endpoint form by left reindexing:
+Then specify the binary endpoint form by left reindexing:
 
 ```text
 Hom_prof_along(F,G)
@@ -1159,6 +1193,11 @@ Hom_prof_along(F,G)
 The direct single-argument fibre rule has been probed successfully. Add a
 stable binary `Hom_prof_along`/`Unit_prof_along` projection head only if later
 checks need a dedicated discriminator.
+
+If added, `Hom_prof_along` should be an injective/stable symbol with fold rules
+from representable reindexing. Do not implement it as a transparent alias if
+co-Yoneda, weighted-limit, adjunction, or duality rules need to match it in
+their LHSs.
 
 Then define the old Cartier-shaped element category:
 
