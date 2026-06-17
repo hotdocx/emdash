@@ -100,6 +100,145 @@ The alias is still useful for comments and later APIs, but the first landed
 definitions should keep canonical `Catd(base)` types in symbol declarations and
 diagnostic assertions until unification behavior is proven stable.
 
+## Design Reassessment 2026-06-17
+
+The old Cartier design systematically worked with functor-shaped objects:
+
+```text
+F : I -> A
+G : I -> B
+hom F R G
+```
+
+instead of only point objects:
+
+```text
+a : Obj A
+b : Obj B
+R[a,b]
+```
+
+This should not be ported blindly. In v3.2 the correct layering is:
+
+```text
+1. Fibre-direct layer:
+   R : Catd(A^op x B)
+   Fibre_cat R (a,b)
+   fapp1_func R / fapp1_fapp0 R
+
+2. Shaped/equipment layer:
+   Prof_transf_cat(R',F,R,G)
+   Prof_hom(F,R,G)
+   tensor/int-hom/weighted-limit universal maps
+```
+
+The fibre-direct layer should be used whenever a construction only needs a
+pointwise category or the existing directed-family arrow action. The shaped
+layer is justified when a theorem must be natural in a test category `I`, or
+when the statement is genuinely an equipment/proarrow cell over functors
+`F : A' -> A` and `G : B' -> B`.
+
+Consequently, `Prof_hom` is not a replacement for direct access to:
+
+```text
+Fibre_cat R (a,b)
+catd_transport_func(R,(p,q))
+```
+
+It is the naturality/universal-property layer over those fibres. Weighted
+limits and adjunction preservation really do need this layer because their
+universal properties quantify over shaped probes `M : I -> B`, not just over
+terminal-shaped points.
+
+The implementation should therefore avoid duplicating the whole ordinary
+category theory inside profunctors. Prefer this order:
+
+```text
+define fibre-direct semantic owner first;
+add a shaped facade only when a universal property needs it;
+add a primitive stable head only when a downstream rewrite needs that head.
+```
+
+Potential missing core/kernel primitives exposed by this review:
+
+```text
+Product_mapR_func_func or Product_swap_func, if duality needs right-side maps;
+Product_map_func only as a stable helper if two-variable product maps recur;
+Op_transf for ordinary transformations;
+Op_adjunction for first-class adjunctions;
+adjunction hom-isomorphism as a profunctor transformation bridge;
+coend/coinserter infrastructure if tensor is ever made semantic;
+Initial_cat or empty hom categories for full collage/join semantics.
+```
+
+At present, only the first four are near-term kernel candidates. Coends and
+initial homs are larger foundations and should not block the symbolic
+profunctor calculus.
+
+## Stable-Head Policy
+
+Use three implementation classes.
+
+### Defined Readability Aliases
+
+These should start as definitions/aliases, not primitive stable heads:
+
+```text
+Prof_base(A,B)
+Prof_cat(A,B)
+Prof(A,B)
+Product_map_func(F,G), if needed only for fixed external F,G
+Cov_repr_prof(F)
+Con_repr_prof(G)
+Prof_hom_cat(F,R,G)
+Prof_hom(F,R,G), initially
+```
+
+Reason: each has a clear semantic owner in existing infrastructure
+(`Product_cat`, `Catd_cat`, `Pullback_catd`, `Hom_catd`, or
+`Functord_cat`). Adding injective heads too early would create a parallel API
+with extra unification commitments.
+
+### Semantic Constructors That May Need Stable Heads Later
+
+These should be implemented semantically first, but are plausible future stable
+heads if downstream rewrite rules need a clean discriminator:
+
+```text
+Unit_prof(F,G)
+Prof_reindex(R,F,G)
+Prof_transf_cat(R',F,R,G)
+Product_swap_func(A,B)
+Product_mapR_func_func(A,B,B')
+Product_map_func(F,G), if used by op-duality/reindexing rules repeatedly
+```
+
+The criterion is operational, not aesthetic: add a stable head only after a
+probe shows that a downstream rule cannot reliably match or compute through
+the semantic body.
+
+### Primitive Calculus Heads
+
+These likely need primitive stable heads from the beginning:
+
+```text
+Prof_tensor(R,S)
+Prof_imply_cov(O,Q)
+Prof_imply_con(Q,O)
+Prof_eval_cov_transf / Prof_lambda_cov_transf
+WeightedLimit_cov / WeightedLimit_con
+weighted_limit_*_univ_transf
+weighted_limit_*_cone_transf
+Op_transf
+Op_adjunction
+Op_weighted_limit_cov / Op_weighted_limit_con
+```
+
+Reason: v3.2 does not currently have semantic coends, closed bicategory
+structure, or op-dual universal-property transport from which these can be
+definitionally derived. Their computation should be governed by explicit
+beta/eta and naturality rules.
+
 ## Main Design Stance
 
 The working v3.2 reading of a profunctor is:
@@ -214,20 +353,36 @@ Prof_cat(A,B)  : Cat
 Prof(A,B)      : Grpd
 ```
 
-The key helper is a product-map functor:
+One possible helper is a product-map functor:
 
 ```text
 Product_map_func(F,G)
   : Product_cat A B -> Product_cat A' B'
 ```
 
-implemented through the existing product-valued functor normal form:
+For fixed external `F` and `G`, this should first be a semantic pair through
+the existing product-valued functor normal form:
 
 ```text
 Struct_sigma
   (comp_cat_fapp0 F (Product_projL_func A B))
   (comp_cat_fapp0 G (Product_projR_func A B))
 ```
+
+The existing product infrastructure already internalizes the fixed-right
+left-factor action:
+
+```text
+Product_cat_fapp1_tapp0_func(F,B) = F * 1_B
+Product_mapL_func_func(A,A',B)[F] = F * 1_B
+```
+
+So a new primitive `Product_map_func` is not justified merely to write
+`Prof_reindex`. It becomes justified only if downstream rules need a stable
+two-variable product-map discriminator, or if we need functoriality in both
+`F` and `G` simultaneously. A full semantic two-variable map can later be
+factored through fixed-side maps and product swap once the right-side/swap
+layer is landed.
 
 For profunctor reindexing:
 
