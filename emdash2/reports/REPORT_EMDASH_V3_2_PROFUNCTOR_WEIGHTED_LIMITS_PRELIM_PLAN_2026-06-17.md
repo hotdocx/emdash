@@ -430,6 +430,98 @@ This rule is more important than the old Cartier naming. It lets the port keep
 the concrete applications while changing the architecture when v3.2 already
 has a better semantic owner.
 
+## Unit Profunctor Versus Existing Hom Infrastructure
+
+`Unit_prof(F,G)` should not be treated as a fundamentally new hom theory. For
+fixed:
+
+```text
+F : A -> X
+G : B -> X
+```
+
+there are two coherent semantic presentations:
+
+```text
+1. Hom_catd presentation:
+   Unit_prof(F,G)
+     := Hom_catd(Const_catd(A^op x B,X), F o piL, G o piR)
+
+2. hom_int/curry presentation:
+   Unit_prof(F,G)
+     := uncurry(hom_int(G) o Op_func(F))
+```
+
+where:
+
+```text
+hom_int(G) : X^op -> Catd(B)
+hom_int(G)[x][b] = Hom_X(x,G[b])
+```
+
+and:
+
+```text
+(hom_int(G) o Op_func(F))[a][b] = Hom_X(F[a],G[b]).
+```
+
+A temporary probe checked that the `uncurry(hom_int(G) o Op_func(F))`
+presentation computes fibrewise to:
+
+```text
+Hom_X(F[a],G[b])
+```
+
+and agrees fibrewise with the `Hom_catd` presentation. This strongly suggests
+that the first implementation of `Unit_prof` should be a defined semantic
+alias, not a primitive stable head.
+
+The two presentations have different strengths:
+
+```text
+Hom_catd presentation:
+  best for direct indexed-hom reading over the profunctor base A^op x B;
+  packages both endpoints as sections over the same base;
+  aligns with `Prof_base` and `Prof_reindex`.
+
+hom_int/curry presentation:
+  best for reusing the existing hom-action owners;
+  exposes precomposition in F and postcomposition in G through hom_int,
+  hom_precomp_along_*, and hom_postcomp_*;
+  explains why curry/uncurry is relevant but not necessarily a new primitive.
+```
+
+Therefore the likely implementation order is:
+
+```text
+1. Define Unit_prof semantically through Hom_catd for base clarity.
+2. Add checks showing its fibre formula.
+3. Add a comparison/check with uncurry(hom_int(G) o Op_func(F)).
+4. Only add Unit_prof_func2 if later proofs need functoriality in F and G
+   as a reusable package.
+```
+
+If `Unit_prof_func2` is eventually added, it should be understood as an
+internalized packaging of existing hom infrastructure:
+
+```text
+Unit_prof_func2
+  : Product_cat (Op_cat (Functor_cat A X)) (Functor_cat B X)
+      -> Prof_cat(A,B)
+Unit_prof_func2[(F,G)] = Unit_prof(F,G)
+```
+
+Its hom-action should not invent new hom composition rules. It should project
+to the existing pre/postcomposition heads where possible. In particular,
+comparison with `hom_int` should drive the design of any projection rules.
+
+Relationship to `homd_int`: `Unit_prof` is the ordinary/Cat-valued hom-family
+case. `homd_int(FF)` is the displayed/dependent analogue where the endpoint
+varies through a displayed functor over a base. They should remain separate
+semantic owners. A future displayed profunctor/unit theory should be built by
+analogy with `homd_int`, not by forcing `Unit_prof` to cover dependent
+endpoints.
+
 ## Main Design Stance
 
 The working v3.2 reading of a profunctor is:
