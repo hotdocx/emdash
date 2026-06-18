@@ -283,12 +283,11 @@ Prof_tensor(R,S)
 Prof_imply_cov(O,Q)
 Prof_imply_con(Q,O)
 Prof_eval_cov_transf / Prof_lambda_cov_transf
-WeightedLimit_cov / WeightedLimit_con
-weighted_limit_*_univ_transf
-weighted_limit_*_cone_transf
+WeightedLimit_cov
+weighted_limit_cov_univ_transf
+weighted_limit_cov_cone_transf
 Op_transf
 Op_adjunction
-Op_weighted_limit_cov / Op_weighted_limit_con
 ```
 
 Reason: v3.2 does not currently have semantic coends, closed bicategory
@@ -296,7 +295,10 @@ structure, or op-dual universal-property transport from which these can be
 definitionally derived. Their computation may therefore need explicit beta/eta
 and naturality rules. This classification must be rechecked immediately before
 each head is introduced; a prerequisite side task may reveal a better general
-semantic owner.
+semantic owner. Phase 5d performed that recheck and found that
+`WeightedColimit_con`, `Op_weighted_limit_cov`, and
+`Op_weighted_colimit_con` are transparent aliases/wrappers over
+`WeightedLimit_cov`; they do not need primitive stable heads.
 
 ## Internalization Strategy
 
@@ -3259,7 +3261,8 @@ Op_adjunction     Adjunction(A,B) -> Adjunction(Op_cat B, Op_cat A)
 Op_prof           Prof(A,B) -> Prof(Op_cat B,Op_cat A)
 Op_prof_transf
 Op_weighted_limit_cov
-Op_weighted_limit_con
+WeightedColimit_con
+Op_weighted_colimit_con
 ```
 
 The ordinary transformation dual should reverse the transformation direction:
@@ -3424,24 +3427,134 @@ logs/probes/profunctor_phase5b_op_prof_probe-20260619-013006.log
 logs/probes/profunctor_phase5b_op_prof_probe-20260619-013020.log
 ```
 
-Once these operations exist, define the left-adjoint theorem by duality:
+### Implementation Log 2026-06-19: Phase 5c
+
+The stable profunctor-cell dual is active:
 
 ```text
-left_adjoint_preserves_weighted_colimit_con
-  := Op_prof_transf(
-       right_adjoint_preserves_weighted_limit_cov(
-         Op_weighted_limit_cov(...),
-         Op_adjunction(...),
-         Op_func(M)))
+r : Prof_transf_cat(A,A',B,B',R',F,R,G)
+
+Op_prof_transf(r)
+  : Prof_transf_cat(
+      Op_cat B, Op_cat B',
+      Op_cat A, Op_cat A',
+      Op_prof(R'), Op_func(G),
+      Op_prof(R), Op_func(F)).
 ```
 
-The expected public theorem should mention left adjoints preserving weighted
-colimits directly; the implementation can be the op-dual of the right-adjoint
-limit theorem.
+Here `r` is a cell `R' -> R` over `F : A' -> A` and `G : B' -> B`.
+Object-level `Op_prof` swaps the bases but does not opposite the fibres.
+Consequently `Op_prof_transf` also preserves the cell direction and preserves,
+rather than reverses, equipment-cell composition order.
 
-The weighted-colimit theorem should be the dual of the right-adjoint limit
-theorem, not a second independent proof. This is the main reason to implement
-`Op_weighted_limit_cov/con` before broad colimit-specific APIs.
+The active rules cover identity and composition. A double application folds
+back to the original cell, supported by the narrow canonical cancellation:
+
+```text
+(H o Product_swap_func(B,A)) o Product_swap_func(A,B) -> H.
+```
+
+The involution rule is accepted by Lambdapi's subject-reduction checker. A
+standalone involution equality in `emdash3_2_checks.lp` is deliberately
+omitted because elaborating its deeply transparent dependent endpoint type
+fails even though the kernel rule is accepted. The final focused probe checks
+the type, identity, and composition computations.
+
+`Op_prof_transf` remains primitive. Two attempted semantic bridges through
+the hom action of `Pullback_catd_func(Product_swap_func)` were rejected: the
+direct `Prof_reindex` comparison failed subject reduction, while the
+reoriented fold caused a 30-second typecheck loop. No broad semantic rewrite
+was installed.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase5c_op_prof_transf_probe-20260619-014651.log
+```
+
+Failed probes recording the involution prerequisite, endpoint correction, and
+rejected semantic bridges:
+
+```text
+logs/probes/profunctor_phase5c_op_prof_transf_probe-20260619-014412.log
+logs/probes/profunctor_phase5c_op_prof_transf_probe-20260619-014436.log
+logs/probes/profunctor_phase5c_op_prof_transf_probe-20260619-014537.log
+logs/probes/profunctor_phase5c_op_prof_transf_probe-20260619-014558.log
+```
+
+### Implementation Log 2026-06-19: Phase 5d
+
+The weighted-colimit classifier is active as a transparent dual alias:
+
+```text
+WeightedColimit_con(F,W,L)
+  := WeightedLimit_cov(
+       Op_func(F),
+       Op_prof(W),
+       Op_func(L))
+```
+
+where the right-hand side lives in the opposite ambient and index categories.
+For:
+
+```text
+F : J -> B
+W : Prof(J,J')
+L : J' -> B,
+```
+
+the dual weight has exactly the covariant-limit orientation:
+
+```text
+Op_prof(W) : Prof(Op_cat J',Op_cat J).
+```
+
+This design keeps `WeightedLimit_cov` as the sole universal-property owner.
+The conversions:
+
+```text
+Op_weighted_limit_cov
+Op_weighted_colimit_con
+```
+
+are transparent identity wrappers after `Op_func`, `Op_prof`, and
+double-product-swap involution normalize. Their round trip is checked.
+
+The full preservation theorem is:
+
+```text
+left_adjoint_preserves_weighted_colimit_con(isc,adj)
+  := right_adjoint_preserves_weighted_limit_cov(
+       isc,
+       Op_adjunction(adj)).
+```
+
+The right adjoint of `Op_adjunction(adj)` computes to
+`Op_func(left_adj_func(adj))`, and `Op_func` distributes over composition, so
+the returned opposite-limit witness is definitionally the desired colimit
+witness for `left(adj) o F` and `left(adj) o L`.
+
+This is simpler and stronger than copying the obsolete theorem as a single
+universal transformation: the public result is the full weighted-colimit
+witness and inherits the existing limit beta/eta interface through the
+transparent alias. Direct colimit-oriented names for the universal and cone
+projections remain deferred until downstream use justifies them. A fully
+expanded inherited-universal-map assertion encountered the known deep
+dependent elaboration failure; no additional kernel rewrite was installed.
+
+Successful focused probes:
+
+```text
+logs/probes/profunctor_phase5d_weighted_colimit_dual_probe-20260619-020959.log
+logs/probes/profunctor_phase5d_weighted_colimit_dual_probe-20260619-021021.log
+logs/probes/profunctor_phase5d_weighted_colimit_dual_probe-20260619-021157.log
+```
+
+The failed expanded-projection diagnostic is retained at:
+
+```text
+logs/probes/profunctor_phase5d_weighted_colimit_dual_probe-20260619-021132.log
+```
 
 ## Phase 6: Directed Inductive Type / Join Category
 
@@ -3498,7 +3611,7 @@ Phase 1 profunctor facade: reindexing landed; shaped elements remain.
 Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend semantics.
 Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
 Phase 4 weighted limits: plausibly feasible as universal packages over implication.
-Phase 5 op-duality: plausibly feasible, but needs product swap and careful fibre-op choice.
+Phase 5 op-duality: object/cell duality and the full weighted-colimit preservation theorem landed.
 Phase 6 join: plausibly feasible as primitive directed-inductive example; collage needs more.
 ```
 
@@ -3507,8 +3620,8 @@ Completeness gaps to keep explicit:
 ```text
 No general coend/coinserter quotient currently exists.
 No bicategory-of-profunctors coherence layer currently exists.
-No ordinary Op_transf or Op_adjunction currently exists.
-No Product_swap_func currently exists as a named product-map helper.
+No semantic pullback/reindex comparison for Op_prof_transf currently exists.
+No direct colimit-oriented universal/cone projection names currently exist.
 No Initial_cat currently exists for a full collage/join story.
 No truncation/discreteness assumption is available or intended.
 ```
@@ -3536,9 +3649,10 @@ owner or receive comparison maps without invalidating the public calculus.
 6. Phase 4a-d, landed: covariant weighted-limit universal package, the narrow
    adjunction/profunctor transpose bridge, stable universal-map computation,
    and the full right-adjoint preservation witness.
-7. Phase 5a-b, landed: ordinary transfor/adjunction duality,
-   `Product_swap_func`, and base-swap-only object-level `Op_prof`. Add
-   profunctor-cell and weighted-limit/colimit duality next.
+7. Phase 5a-d, landed: ordinary transfor/adjunction duality,
+   `Product_swap_func`, base-swap-only object-level `Op_prof`, and stable
+   profunctor-cell duality, followed by the transparent weighted-colimit
+   classifier and the full left-adjoint preservation witness.
 8. Add the join/directed-inductive example, either primitive or via collage.
 
 Each step should leave:

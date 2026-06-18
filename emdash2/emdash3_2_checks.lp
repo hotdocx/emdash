@@ -5079,22 +5079,6 @@ assert [A A' B B' : Cat]
         (@Op_prof A B R)
         (@Op_func A' A F)));
 
-assert [A A' B B' : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [F : τ (Functor A' A)]
-  [G : τ (Functor B' B)]
-  (r : τ (Obj (@Prof_transf_cat A A' B B' R' F R G))) ⊢
-  @Op_prof_transf
-    (Op_cat B) (Op_cat B')
-    (Op_cat A) (Op_cat A')
-    (@Op_prof A' B' R')
-    (@Op_prof A B R)
-    (@Op_func B' B G)
-    (@Op_func A' A F)
-    (@Op_prof_transf A A' B B' R' R F G r)
-  ≡ r;
-
 assert [A B : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
   @Op_prof_transf
@@ -5107,6 +5091,35 @@ assert [A B : Cat]
       (Op_cat B)
       (Op_cat A)
       (@Op_prof A B R);
+
+assert [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L)) ⊢
+  @Op_weighted_colimit_con
+    (Op_cat B)
+    (Op_cat J)
+    (Op_cat J')
+    (@Op_func J B F)
+    (@Op_prof J' J W)
+    (@Op_func J' B L)
+    (@Op_weighted_limit_cov B J J' F W L isl)
+  ≡ isl;
+
+assert [A J J' B : Cat]
+  [F : τ (Functor J A)]
+  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [L : τ (Functor J' A)]
+  (isc : τ (@WeightedColimit_con A J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @left_adjoint_preserves_weighted_colimit_con
+    A J J' B F W L isc adj
+  : τ (@WeightedColimit_con
+      B J J'
+      (@comp_cat_fapp0 J A B (@left_adj_func A B adj) F)
+      W
+      (@comp_cat_fapp0 J' A B (@left_adj_func A B adj) L));
 
 assert
   [A0 A1 A2 B0 B1 B2 : Cat]

@@ -171,8 +171,25 @@ projections and involution. The semantic object-level `Op_prof(R)` pulls `R`
 back along product swap only. It deliberately does not apply `Op_catd` to
 fibres: under the current higher-category rule
 `Hom_cat(Op_cat X,b,a) -> Hom_cat(X,a,b)`, pointwise fibre-op would incorrectly
-dualize representable hom categories twice. Profunctor-cell duality and
-weighted-colimit packages remain deferred.
+dualize representable hom categories twice. `Op_prof_transf` is the stable
+duality operation on equipment cells. It swaps the two profunctor endpoints
+and applies `Op_func` to their base functors, but preserves the cell direction
+and composition order because `Op_prof` does not opposite the fibres. Its
+typing, identity, and composition laws are checked, and the involution rewrite
+is accepted by the kernel. The general semantic comparison between this
+stable cell head and the hom action of pullback along product swap remains
+deferred: the direct reindex fold caused a focused-probe typecheck loop.
+
+Contravariant weighted colimits are now a transparent dual presentation:
+`WeightedColimit_con(F,W,L)` is definitionally
+`WeightedLimit_cov(Op_func(F),Op_prof(W),Op_func(L))` in the opposite ambient
+and index categories. `Op_weighted_limit_cov` and
+`Op_weighted_colimit_con` are identity wrappers after opposite and
+double-swap normalization. The full
+`left_adjoint_preserves_weighted_colimit_con` witness is the existing
+right-adjoint preservation theorem applied to `Op_adjunction`; no duplicate
+colimit proof calculus or new rewrite rule is required. Direct
+colimit-oriented universal/cone projection names remain deferred.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

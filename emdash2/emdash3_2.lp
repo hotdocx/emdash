@@ -8100,6 +8100,92 @@ with @Prof_comp_transf
           (@right_adj_func $A $B $adj)
           $L));
 
+/*
+  Contravariant weighted colimits by duality.
+
+  For F : J -> B, W : Prof(J,J'), and L : J' -> B, the colimit witness is
+  definitionally the covariant weighted-limit witness in the opposite category:
+
+    WeightedLimit_cov(Op F, Op_prof W, Op L).
+
+  This keeps one universal-property owner. Direct colimit-oriented projection
+  names remain deferred until a downstream formula requires them.
+*/
+symbol WeightedColimit_con [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Catd (Product_cat (Op_cat J) J')))
+  (L : τ (Functor J' B))
+  : Grpd
+≔ @WeightedLimit_cov
+    (Op_cat B)
+    (Op_cat J)
+    (Op_cat J')
+    (@Op_func J B F)
+    (@Op_prof J J' W)
+    (@Op_func J' B L);
+
+// The two conversions are identity wrappers after opposite involution and
+// double product-swap pullback cancellation.
+symbol Op_weighted_limit_cov
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  : τ (@WeightedColimit_con
+      (Op_cat B)
+      (Op_cat J)
+      (Op_cat J')
+      (@Op_func J B F)
+      (@Op_prof J' J W)
+      (@Op_func J' B L))
+≔ isl;
+
+symbol Op_weighted_colimit_con
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [L : τ (Functor J' B)]
+  (isc : τ (@WeightedColimit_con B J J' F W L))
+  : τ (@WeightedLimit_cov
+      (Op_cat B)
+      (Op_cat J)
+      (Op_cat J')
+      (@Op_func J B F)
+      (@Op_prof J J' W)
+      (@Op_func J' B L))
+≔ isc;
+
+/*
+  Left adjoints preserve weighted colimits.
+
+  Applying right-adjoint preservation to Op_adjunction(adj) makes its right
+  adjoint Op(left(adj)), so the result is definitionally the desired colimit
+  witness after Op_func distributes over composition.
+*/
+symbol left_adjoint_preserves_weighted_colimit_con
+  [A J J' B : Cat]
+  [F : τ (Functor J A)]
+  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [L : τ (Functor J' A)]
+  (isc : τ (@WeightedColimit_con A J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (@WeightedColimit_con
+      B J J'
+      (@comp_cat_fapp0 J A B (@left_adj_func A B adj) F)
+      W
+      (@comp_cat_fapp0 J' A B (@left_adj_func A B adj) L))
+≔ @right_adjoint_preserves_weighted_limit_cov
+    (Op_cat A)
+    (Op_cat J)
+    (Op_cat J')
+    (Op_cat B)
+    (@Op_prof J J' W)
+    (@Op_func J A F)
+    (@Op_func J' A L)
+    isc
+    (@Op_adjunction A B adj);
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity
