@@ -7020,6 +7020,617 @@ with @Prof_eval_cov_hom_transf
         $t)
   ↪ $t;
 
+/*
+  Contravariant profunctor implication.
+
+  For P : Prof(A,B) and O : Prof(A,X):
+
+    Prof_imply_con(P,O) : Prof(B,X)
+
+  is the symbolic right adjoint to tensoring on the left by P. As for the
+  covariant implication, the object remains opaque and its computational
+  content is exposed through reindexing and the eval/lambda calculus.
+*/
+symbol Prof_imply_con [A B X : Cat]
+  (P : τ (Catd (Product_cat (Op_cat A) B)))
+  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  : τ (Catd (Product_cat (Op_cat B) X));
+
+// Reindexing the implication result acts on the right endpoints of both inputs.
+rule @Prof_reindex
+      $B $B'
+      $X $X'
+      (@Prof_imply_con $A $B $X $P $O)
+      $M
+      $G
+  ↪ @Prof_imply_con
+      $A $B' $X'
+      (@Prof_reindex
+        $A $A $B $B'
+        $P
+        (@id_func $A)
+        $M)
+      (@Prof_reindex
+        $A $A $X $X'
+        $O
+        (@id_func $A)
+        $G);
+
+// Implication is contravariant in P and covariant in O.
+constant symbol Prof_imply_con_transf
+  [A B B' X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [O' : τ (Catd (Product_cat (Op_cat A) X'))]
+  [M : τ (Functor B' B)]
+  [G : τ (Functor X X')]
+  (p : τ (Obj (@Prof_transf_cat A A B B' P' (@id_func A) P M)))
+  (o : τ (Obj (@Prof_transf_cat A A X' X O (@id_func A) O' G)))
+  : τ (Obj
+      (@Prof_transf_cat
+        B' B' X' X
+        (@Prof_reindex
+          B B' X X
+          (@Prof_imply_con A B X P O)
+          M
+          (@id_func X))
+        (@id_func B')
+        (@Prof_imply_con A B' X' P' O')
+        G));
+
+// Evaluation and lambda abstraction for general equipment cells.
+symbol Prof_eval_con_transf
+  [A B X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [G : τ (Functor X X')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      B B X' X
+      Q
+      (@id_func B)
+      (@Prof_imply_con A B X' P O)
+      G)))
+  : τ (Obj
+      (@Prof_transf_cat
+        A A X' X
+        (@Prof_tensor A B X P Q)
+        (@id_func A)
+        O
+        G));
+
+symbol Prof_lambda_con_transf
+  [A B X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [G : τ (Functor X X')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A A X' X
+      (@Prof_tensor A B X P Q)
+      (@id_func A)
+      O
+      G)))
+  : τ (Obj
+      (@Prof_transf_cat
+        B B X' X
+        Q
+        (@id_func B)
+        (@Prof_imply_con A B X' P O)
+        G));
+
+rule @Prof_lambda_con_transf
+      $A $B $X $X'
+      $P $Q $O $G
+      (@Prof_eval_con_transf
+        $A $B $X $X'
+        $P $Q $O $G
+        $t)
+  ↪ $t
+with @Prof_eval_con_transf
+      $A $B $X $X'
+      $P $Q $O $G
+      (@Prof_lambda_con_transf
+        $A $B $X $X'
+        $P $Q $O $G
+        $t)
+  ↪ $t;
+
+// Shaped specialization obtained by setting Q to Unit_prof(B).
+symbol Prof_eval_con_hom_transf
+  [A B X : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [G : τ (Functor B X)]
+  (t : τ (@Prof_hom
+    B B X
+    (@id_func B)
+    (@Prof_imply_con A B X P O)
+    G))
+  : τ (Obj
+      (@Prof_transf_cat A A X B P (@id_func A) O G));
+
+symbol Prof_lambda_con_transf_hom
+  [A B X : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [G : τ (Functor B X)]
+  (t : τ (Obj
+    (@Prof_transf_cat A A X B P (@id_func A) O G)))
+  : τ (@Prof_hom
+      B B X
+      (@id_func B)
+      (@Prof_imply_con A B X P O)
+      G);
+
+rule @Prof_lambda_con_transf_hom
+      $A $B $X
+      $P $O $G
+      (@Prof_eval_con_hom_transf
+        $A $B $X
+        $P $O $G
+        $t)
+  ↪ $t
+with @Prof_eval_con_hom_transf
+      $A $B $X
+      $P $O $G
+      (@Prof_lambda_con_transf_hom
+        $A $B $X
+        $P $O $G
+        $t)
+  ↪ $t;
+
+/*
+  Covariant weighted limits.
+
+  For F : J -> B, W : Prof(J',J), and L : J' -> B, a witness packages the
+  representable universal comparison
+
+    Prof_imply_cov(Hom_prof_along(M,F),W) <-> Hom_prof_along(M,L)
+
+  for every shaped probe M : I -> B. Naturality in M and preservation by right
+  adjoints are separate later slices.
+*/
+injective symbol WeightedLimit_cov [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Catd (Product_cat (Op_cat J') J)))
+  (L : τ (Functor J' B))
+  : Grpd;
+
+symbol weighted_limit_cov_univ_transf
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along I J B M F)
+          W)
+        (@id_func I)
+        (@Hom_prof_along I J' B M L)
+        (@id_func J')));
+
+symbol weighted_limit_cov_cone_transf
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Hom_prof_along I J' B M L)
+        (@id_func I)
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along I J B M F)
+          W)
+        (@id_func J')));
+
+rule @Prof_comp_transf
+      $I $I $I
+      $J' $J' $J'
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along $I $J $B $M $F)
+        $W)
+      (@Hom_prof_along $I $J' $B $M $L)
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along $I $J $B $M $F)
+        $W)
+      (@id_func $I)
+      (@id_func $J')
+      (@id_func $I)
+      (@id_func $J')
+      (@weighted_limit_cov_cone_transf
+        $B $J $J'
+        $F $W $L
+        $isl
+        $I $M)
+      (@weighted_limit_cov_univ_transf
+        $B $J $J'
+        $F $W $L
+        $isl
+        $I $M)
+  ↪ @Prof_id_transf
+      $I $J'
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along $I $J $B $M $F)
+        $W)
+with @Prof_comp_transf
+      $I $I $I
+      $J' $J' $J'
+      (@Hom_prof_along $I $J' $B $M $L)
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along $I $J $B $M $F)
+        $W)
+      (@Hom_prof_along $I $J' $B $M $L)
+      (@id_func $I)
+      (@id_func $J')
+      (@id_func $I)
+      (@id_func $J')
+      (@weighted_limit_cov_univ_transf
+        $B $J $J'
+        $F $W $L
+        $isl
+        $I $M)
+      (@weighted_limit_cov_cone_transf
+        $B $J $J'
+        $F $W $L
+        $isl
+        $I $M)
+  ↪ @Prof_id_transf
+      $I $J'
+      (@Hom_prof_along $I $J' $B $M $L);
+
+/*
+  Narrow adjunction/profunctor bridge.
+
+  For adj : Adjunction(A,B), M : I -> A, and F : K -> B, these cells expose
+  the representable hom isomorphism
+
+    Hom_B(left(M),F) <-> Hom_A(M,right(F)).
+
+  They are stable primitive heads because the current kernel has no constructor
+  assembling a displayed natural transformation from pointwise unit/counit
+  formulas. Future component projections should reduce to those formulas.
+*/
+symbol Adjunction_prof_transpose
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func I)
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func K)));
+
+symbol Adjunction_prof_untranspose
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func I)
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func K)));
+
+rule @Prof_comp_transf
+      $I $I $I
+      $K $K $K
+      (@Hom_prof_along
+        $I $K $B
+        (@comp_cat_fapp0
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $F)
+      (@Hom_prof_along
+        $I $K $A
+        $M
+        (@comp_cat_fapp0
+          $K $B $A
+          (@right_adj_func $A $B $adj)
+          $F))
+      (@Hom_prof_along
+        $I $K $B
+        (@comp_cat_fapp0
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $F)
+      (@id_func $I)
+      (@id_func $K)
+      (@id_func $I)
+      (@id_func $K)
+      (@Adjunction_prof_untranspose
+        $A $B $adj
+        $I $K
+        $M $F)
+      (@Adjunction_prof_transpose
+        $A $B $adj
+        $I $K
+        $M $F)
+  ↪ @Prof_id_transf
+      $I $K
+      (@Hom_prof_along
+        $I $K $B
+        (@comp_cat_fapp0
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $F)
+with @Prof_comp_transf
+      $I $I $I
+      $K $K $K
+      (@Hom_prof_along
+        $I $K $A
+        $M
+        (@comp_cat_fapp0
+          $K $B $A
+          (@right_adj_func $A $B $adj)
+          $F))
+      (@Hom_prof_along
+        $I $K $B
+        (@comp_cat_fapp0
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $F)
+      (@Hom_prof_along
+        $I $K $A
+        $M
+        (@comp_cat_fapp0
+          $K $B $A
+          (@right_adj_func $A $B $adj)
+          $F))
+      (@id_func $I)
+      (@id_func $K)
+      (@id_func $I)
+      (@id_func $K)
+      (@Adjunction_prof_transpose
+        $A $B $adj
+        $I $K
+        $M $F)
+      (@Adjunction_prof_untranspose
+        $A $B $adj
+        $I $K
+        $M $F)
+  ↪ @Prof_id_transf
+      $I $K
+      (@Hom_prof_along
+        $I $K $A
+        $M
+        (@comp_cat_fapp0
+          $K $B $A
+          (@right_adj_func $A $B $adj)
+          $F));
+
+// Lift untranspose covariantly through implication while the weight is fixed.
+symbol Adjunction_prof_imply_untranspose
+  [B J J' A : Cat]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [F : τ (Functor J B)]
+  (adj : τ (Adjunction A B))
+  [I : Cat]
+  (M : τ (Functor I A))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along
+            I J A
+            M
+            (@comp_cat_fapp0
+              J B A
+              (@right_adj_func A B adj)
+              F))
+          W)
+        (@id_func I)
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along
+            I J B
+            (@comp_cat_fapp0
+              I A B
+              (@left_adj_func A B adj)
+              M)
+            F)
+          W)
+        (@id_func J')))
+≔ @Prof_imply_cov_transf
+    I I J' J' J
+    (@Hom_prof_along
+      I J A
+      M
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F))
+    (@Hom_prof_along
+      I J B
+      (@comp_cat_fapp0
+        I A B
+        (@left_adj_func A B adj)
+        M)
+      F)
+    W W
+    (@id_func I)
+    (@id_func J')
+    (@Adjunction_prof_untranspose A B adj I J M F)
+    (@Prof_id_transf J' J W);
+
+/*
+  Universal-map part of right-adjoint preservation of weighted limits.
+
+  This is deliberately a transparent cell, not yet a full
+  `WeightedLimit_cov` witness. It composes:
+
+    implication(untranspose), weighted-limit universality, transpose.
+
+  Packaging the full witness requires naturality/coherence rules ensuring that
+  the corresponding composite cone joins the generic weighted-limit beta/eta
+  reductions.
+*/
+symbol right_adjoint_preserves_weighted_limit_cov_univ_transf
+  [B J J' A : Cat]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B))
+  [I : Cat]
+  (M : τ (Functor I A))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along
+            I J A
+            M
+            (@comp_cat_fapp0
+              J B A
+              (@right_adj_func A B adj)
+              F))
+          W)
+        (@id_func I)
+        (@Hom_prof_along
+          I J' A
+          M
+          (@comp_cat_fapp0
+            J' B A
+            (@right_adj_func A B adj)
+            L))
+        (@id_func J')))
+≔ @Prof_comp_transf
+    I I I
+    J' J' J'
+    (@Prof_imply_cov
+      I J' J
+      (@Hom_prof_along
+        I J A
+        M
+        (@comp_cat_fapp0
+          J B A
+          (@right_adj_func A B adj)
+          F))
+      W)
+    (@Hom_prof_along
+      I J' B
+      (@comp_cat_fapp0
+        I A B
+        (@left_adj_func A B adj)
+        M)
+      L)
+    (@Hom_prof_along
+      I J' A
+      M
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L))
+    (@id_func I)
+    (@id_func J')
+    (@id_func I)
+    (@id_func J')
+    (@Adjunction_prof_transpose A B adj I J' M L)
+    (@Prof_comp_transf
+      I I I
+      J' J' J'
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along
+          I J A
+          M
+          (@comp_cat_fapp0
+            J B A
+            (@right_adj_func A B adj)
+            F))
+        W)
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along
+          I J B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        W)
+      (@Hom_prof_along
+        I J' B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        L)
+      (@id_func I)
+      (@id_func J')
+      (@id_func I)
+      (@id_func J')
+      (@weighted_limit_cov_univ_transf
+        B J J'
+        F W L
+        isl
+        I
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M))
+      (@Adjunction_prof_imply_untranspose
+        B J J' A
+        W F
+        adj
+        I M));
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity

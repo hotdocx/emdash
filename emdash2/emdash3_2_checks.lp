@@ -5330,6 +5330,426 @@ assert [A X A' : Cat]
       t)
   ≡ t;
 
+assert [A B B' X X' : Cat]
+  (P : τ (Catd (Product_cat (Op_cat A) B)))
+  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  (M : τ (Functor B' B))
+  (G : τ (Functor X' X)) ⊢
+  @Prof_reindex
+    B B' X X'
+    (@Prof_imply_con A B X P O)
+    M
+    G
+  ≡ @Prof_imply_con
+      A B' X'
+      (@Prof_reindex A A B B' P (@id_func A) M)
+      (@Prof_reindex A A X X' O (@id_func A) G);
+
+assert [A B X : Cat]
+  (P : τ (Catd (Product_cat (Op_cat A) B)))
+  (O : τ (Catd (Product_cat (Op_cat A) X))) ⊢
+  @Prof_reindex
+    B B X X
+    (@Prof_imply_con A B X P O)
+    (@id_func B)
+    (@id_func X)
+  ≡ @Prof_imply_con A B X P O;
+
+assert [A B B' X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [O' : τ (Catd (Product_cat (Op_cat A) X'))]
+  [M : τ (Functor B' B)]
+  [G : τ (Functor X X')]
+  (p : τ (Obj (@Prof_transf_cat A A B B' P' (@id_func A) P M)))
+  (o : τ (Obj (@Prof_transf_cat A A X' X O (@id_func A) O' G))) ⊢
+  @Prof_imply_con_transf
+    A B B' X X'
+    P P' O O' M G
+    p o
+  : τ (Obj
+      (@Prof_transf_cat
+        B' B' X' X
+        (@Prof_reindex
+          B B' X X
+          (@Prof_imply_con A B X P O)
+          M
+          (@id_func X))
+        (@id_func B')
+        (@Prof_imply_con A B' X' P' O')
+        G));
+
+assert [A B X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [G : τ (Functor X X')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      B B X' X
+      Q
+      (@id_func B)
+      (@Prof_imply_con A B X' P O)
+      G))) ⊢
+  @Prof_lambda_con_transf
+    A B X X'
+    P Q O G
+    (@Prof_eval_con_transf
+      A B X X'
+      P Q O G
+      t)
+  ≡ t;
+
+assert [A B X X' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [G : τ (Functor X X')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A A X' X
+      (@Prof_tensor A B X P Q)
+      (@id_func A)
+      O
+      G))) ⊢
+  @Prof_eval_con_transf
+    A B X X'
+    P Q O G
+    (@Prof_lambda_con_transf
+      A B X X'
+      P Q O G
+      t)
+  ≡ t;
+
+assert [A B X : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [G : τ (Functor B X)]
+  (t : τ (@Prof_hom
+    B B X
+    (@id_func B)
+    (@Prof_imply_con A B X P O)
+    G)) ⊢
+  @Prof_lambda_con_transf_hom
+    A B X
+    P O G
+    (@Prof_eval_con_hom_transf
+      A B X
+      P O G
+      t)
+  ≡ t;
+
+assert [A B X : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [G : τ (Functor B X)]
+  (t : τ (Obj
+    (@Prof_transf_cat A A X B P (@id_func A) O G))) ⊢
+  @Prof_eval_con_hom_transf
+    A B X
+    P O G
+    (@Prof_lambda_con_transf_hom
+      A B X
+      P O G
+      t)
+  ≡ t;
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (M : τ (Functor I B)) ⊢
+  @weighted_limit_cov_univ_transf
+    B J J'
+    F W L
+    isl
+    I M
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along I J B M F)
+          W)
+        (@id_func I)
+        (@Hom_prof_along I J' B M L)
+        (@id_func J')));
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (M : τ (Functor I B)) ⊢
+  @weighted_limit_cov_cone_transf
+    B J J'
+    F W L
+    isl
+    I M
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Hom_prof_along I J' B M L)
+        (@id_func I)
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along I J B M F)
+          W)
+        (@id_func J')));
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (M : τ (Functor I B)) ⊢
+  @Prof_comp_transf
+    I I I
+    J' J' J'
+    (@Prof_imply_cov
+      I J' J
+      (@Hom_prof_along I J B M F)
+      W)
+    (@Hom_prof_along I J' B M L)
+    (@Prof_imply_cov
+      I J' J
+      (@Hom_prof_along I J B M F)
+      W)
+    (@id_func I)
+    (@id_func J')
+    (@id_func I)
+    (@id_func J')
+    (@weighted_limit_cov_cone_transf
+      B J J'
+      F W L
+      isl
+      I M)
+    (@weighted_limit_cov_univ_transf
+      B J J'
+      F W L
+      isl
+      I M)
+  ≡ @Prof_id_transf
+      I J'
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W);
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (M : τ (Functor I B)) ⊢
+  @Prof_comp_transf
+    I I I
+    J' J' J'
+    (@Hom_prof_along I J' B M L)
+    (@Prof_imply_cov
+      I J' J
+      (@Hom_prof_along I J B M F)
+      W)
+    (@Hom_prof_along I J' B M L)
+    (@id_func I)
+    (@id_func J')
+    (@id_func I)
+    (@id_func J')
+    (@weighted_limit_cov_univ_transf
+      B J J'
+      F W L
+      isl
+      I M)
+    (@weighted_limit_cov_cone_transf
+      B J J'
+      F W L
+      isl
+      I M)
+  ≡ @Prof_id_transf
+      I J'
+      (@Hom_prof_along I J' B M L);
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @Adjunction_prof_transpose A B adj I K M F
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func I)
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func K)));
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @Adjunction_prof_untranspose A B adj I K M F
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func I)
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func K)));
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @Prof_comp_transf
+    I I I K K K
+    (@Hom_prof_along
+      I K B
+      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      F)
+    (@Hom_prof_along
+      I K A
+      M
+      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+    (@Hom_prof_along
+      I K B
+      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      F)
+    (@id_func I)
+    (@id_func K)
+    (@id_func I)
+    (@id_func K)
+    (@Adjunction_prof_untranspose A B adj I K M F)
+    (@Adjunction_prof_transpose A B adj I K M F)
+  ≡ @Prof_id_transf
+      I K
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+        F);
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @Prof_comp_transf
+    I I I K K K
+    (@Hom_prof_along
+      I K A
+      M
+      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+    (@Hom_prof_along
+      I K B
+      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      F)
+    (@Hom_prof_along
+      I K A
+      M
+      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+    (@id_func I)
+    (@id_func K)
+    (@id_func I)
+    (@id_func K)
+    (@Adjunction_prof_transpose A B adj I K M F)
+    (@Adjunction_prof_untranspose A B adj I K M F)
+  ≡ @Prof_id_transf
+      I K
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F));
+
+assert [B J J' A I : Cat]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [F : τ (Functor J B)]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A)) ⊢
+  @Adjunction_prof_imply_untranspose
+    B J J' A
+    W F
+    adj
+    I M
+  ≡ @Prof_imply_cov_transf
+      I I J' J' J
+      (@Hom_prof_along
+        I J A
+        M
+        (@comp_cat_fapp0
+          J B A
+          (@right_adj_func A B adj)
+          F))
+      (@Hom_prof_along
+        I J B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        F)
+      W W
+      (@id_func I)
+      (@id_func J')
+      (@Adjunction_prof_untranspose A B adj I J M F)
+      (@Prof_id_transf J' J W);
+
+assert [B J J' A I : Cat]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A)) ⊢
+  @right_adjoint_preserves_weighted_limit_cov_univ_transf
+    B J J' A
+    W F L
+    isl adj
+    I M
+  : τ (Obj
+      (@Prof_transf_cat
+        I I J' J'
+        (@Prof_imply_cov
+          I J' J
+          (@Hom_prof_along
+            I J A
+            M
+            (@comp_cat_fapp0
+              J B A
+              (@right_adj_func A B adj)
+              F))
+          W)
+        (@id_func I)
+        (@Hom_prof_along
+          I J' A
+          M
+          (@comp_cat_fapp0
+            J' B A
+            (@right_adj_func A B adj)
+            L))
+        (@id_func J')));
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))

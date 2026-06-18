@@ -136,16 +136,29 @@ and shaped elements in the identity-representable case. Unit type collapses,
 general tensor associativity/coherence, and functor-induced unit elements
 `Prof_func_hom(F)` remain deferred.
 
-The covariant profunctor implication slice is active. For
-`O : Prof(A,X)` and `Q : Prof(B,X)`,
-`Prof_imply_cov(O,Q) : Prof(A,B)` is an opaque symbolic right adjoint to
-tensoring on the right by `Q`. Reindexing acts on the left endpoints of both
-inputs. `Prof_imply_cov_transf` is covariant in `O` and contravariant in `Q`.
-`Prof_eval_cov_transf` and `Prof_lambda_cov_transf` are checked inverse
-operations for general cells; `Prof_eval_cov_hom_transf` and
-`Prof_lambda_cov_transf_hom` give the shaped specialization. Contravariant
-implication, implication naturality beyond the first mixed-variance cell
-constructor, and end semantics remain deferred.
+Both profunctor implication slices are active. `Prof_imply_cov(O,Q)` is the
+opaque symbolic right adjoint to tensoring on the right by `Q`, while
+`Prof_imply_con(P,O)` is the opaque symbolic right adjoint to tensoring on the
+left by `P`. Covariant implication reindexes the left endpoints of its inputs
+and is covariant in `O`, contravariant in `Q`; contravariant implication
+reindexes the right endpoints of its inputs and is contravariant in `P`,
+covariant in `O`. Both sides have checked inverse eval/lambda operations for
+general cells and shaped specializations. Implication naturality beyond the
+mixed-variance cell constructors, internalized implication functors, and end
+semantics remain deferred.
+
+The first weighted-limit and adjunction-preservation slices are active.
+`WeightedLimit_cov(F,W,L)` packages, for every probe `M`, inverse equipment
+cells between `Prof_imply_cov(Hom_prof_along(M,F),W)` and
+`Hom_prof_along(M,L)`. Their beta/eta reductions are owned by
+`Prof_comp_transf`. `Adjunction_prof_transpose` and
+`Adjunction_prof_untranspose` give the narrow inverse representable bridge
+`Hom_B(left(M),F) <-> Hom_A(M,right(F))`. The transparent
+`right_adjoint_preserves_weighted_limit_cov_univ_transf` computes by lifting
+untranspose through implication, applying weighted-limit universality at
+`left(M)`, and transposing the result. A full preserved `WeightedLimit_cov`
+witness, naturality in `M`, and unit/counit component projections remain
+deferred.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

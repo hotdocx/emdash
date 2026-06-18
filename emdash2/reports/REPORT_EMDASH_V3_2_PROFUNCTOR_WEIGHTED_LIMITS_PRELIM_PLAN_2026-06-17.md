@@ -2747,15 +2747,139 @@ The initial compact beta-rule failure is retained as:
 logs/probes/profunctor_phase3a_imply_cov_probe-20260618-210209.log
 ```
 
-Deferred to Phase 3b and later focused slices:
+Deferred to later focused slices:
 
 ```text
-Prof_imply_con and its eval/lambda calculus;
 naturality of eval/lambda under Prof_tensor_transf;
 fixed-base internalized Prof_imply_cov_func(Q);
+fixed-base internalized Prof_imply_con_func(P);
 two-variable implication functors;
 end-based semantics or comparison maps;
 interaction with Prof_comp_transf beyond beta/eta.
+```
+
+### Implementation Log 2026-06-18: Phase 3b
+
+The contravariant implication and its symmetric lambda calculus are now active.
+
+For:
+
+```text
+P : Prof(A,B)
+O : Prof(A,X),
+```
+
+the stable primitive is:
+
+```text
+Prof_imply_con(P,O) : Prof(B,X).
+```
+
+It is the symbolic right adjoint to:
+
+```text
+Q |-> Prof_tensor(P,Q).
+```
+
+As on the covariant side, this is a computational universal interface rather
+than a claim that the missing end construction has already been implemented.
+
+#### Reindexing
+
+Result endpoint reindexing computes by:
+
+```text
+Prof_reindex(Prof_imply_con(P,O),M,G)
+  -> Prof_imply_con(
+       Prof_reindex(P,id_A,M),
+       Prof_reindex(O,id_A,G)).
+```
+
+Thus the first result endpoint acts on the right endpoint of `P`, while the
+second result endpoint acts on the right endpoint of `O`. Identity reindexing
+again joins with the general Phase 2 neutral rule.
+
+#### Mixed-variance cell action
+
+For:
+
+```text
+p : Prof_transf_cat(P',id_A,P,M)
+o : Prof_transf_cat(O,id_A,O',G),
+```
+
+the constructor:
+
+```text
+Prof_imply_con_transf(p,o)
+```
+
+maps the left-reindexed source implication to `Prof_imply_con(P',O')`.
+This records the semantic variance directly: contravariant in `P`, covariant
+in `O`. It is the v3.2 replacement for Cartier's `Imply_con_transf`, with the
+arguments ordered like the implication inputs rather than preserving the old
+surface order.
+
+#### General eval/lambda
+
+For:
+
+```text
+P : Prof(A,B)
+Q : Prof(B,X)
+O : Prof(A,X')
+G : X -> X',
+```
+
+the checked inverse operations implement:
+
+```text
+Prof_transf_cat(Q,id_B,Prof_imply_con(P,O),G)
+  <->
+Prof_transf_cat(Prof_tensor(P,Q),id_A,O,G).
+```
+
+Both beta/eta cancellation directions compute. Their rule LHSs keep all
+category, profunctor, and endpoint arguments explicit, following the stable
+Phase 3a pattern.
+
+#### Shaped eval/lambda
+
+Setting `Q = Unit_prof(B)` and applying the right-unit co-Yoneda reading gives
+the symmetric shaped interface:
+
+```text
+Prof_hom(id_B,Prof_imply_con(P,O),G)
+  <->
+Prof_transf_cat(P,id_A,O,G).
+```
+
+This shaped pair was absent as a complete lambda calculus in the old Cartier
+draft, but follows from the same tensor-hom adjunction and required no new
+kernel primitive. It is useful for the later dual weighted-colimit surface.
+
+The active checks cover:
+
+```text
+general and identity implication reindexing;
+the mixed-variance implication cell type;
+general eval-after-lambda and lambda-after-eval;
+shaped eval-after-lambda and lambda-after-eval.
+```
+
+The strengthened focused probe log is:
+
+```text
+logs/probes/profunctor_phase3b_imply_con_probe-20260618-220433.log
+```
+
+Deferred from this slice:
+
+```text
+naturality of eval/lambda under Prof_tensor_transf;
+interaction with Prof_comp_transf beyond beta/eta;
+internalized implication functors;
+end-based semantics or comparison maps.
 ```
 
 ## Phase 4: Weighted Limits
@@ -2894,6 +3018,173 @@ bridge can be built from `unit_adj_transf` and `counit_adj_transf`, with the
 existing triangle rewrite rules providing the beta cancellations. The first
 implementation should expose only the bridge maps that the preservation proof
 uses.
+
+### Implementation Log 2026-06-18: Phase 4a
+
+The first covariant weighted-limit package is active:
+
+```text
+WeightedLimit_cov(F,W,L) : Grpd
+```
+
+for:
+
+```text
+F : J -> B
+W : Prof(J',J)
+L : J' -> B.
+```
+
+For every `M : I -> B`, a witness exposes inverse cells:
+
+```text
+weighted_limit_cov_univ_transf:
+  Prof_imply_cov(Hom_prof_along(M,F),W)
+  ->
+  Hom_prof_along(M,L)
+
+weighted_limit_cov_cone_transf:
+  Hom_prof_along(M,L)
+  ->
+  Prof_imply_cov(Hom_prof_along(M,F),W).
+```
+
+Both cells live over identity endpoint functors on `I` and `J'`. Their two
+composites reduce through `Prof_comp_transf` to the corresponding
+`Prof_id_transf`. This packages the universal representable isomorphism
+without claiming an end formula for implication.
+
+The witness is `Grpd`-valued rather than a raw Lambdapi `TYPE`, consistently
+with `Adjunction`, `Functor`, `Transf`, and the rest of the v3.2 object
+classifier architecture.
+
+Naturality in the externally quantified probe `M` remains deferred. It should
+be added only when a concrete preservation or internalization check determines
+the required endpoint action.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase4a_weighted_limit_cov_probe-20260618-220949.log
+```
+
+### Implementation Log 2026-06-18: Phase 4b
+
+The narrow adjunction/profunctor bridge is active:
+
+```text
+Adjunction_prof_transpose:
+  Hom_prof_along(left(adj) o M,F)
+  ->
+  Hom_prof_along(M,right(adj) o F)
+
+Adjunction_prof_untranspose:
+  Hom_prof_along(M,right(adj) o F)
+  ->
+  Hom_prof_along(left(adj) o M,F).
+```
+
+Both are equipment cells over identity endpoints and cancel in both
+directions under `Prof_comp_transf`.
+
+These are stable primitive heads, not transparent definitions. The current
+kernel can express the pointwise unit/counit formulas but has no general
+constructor that assembles those pointwise functors into a displayed natural
+transformation between `Hom_prof_along` families. Future component projection
+rules should reduce these heads to:
+
+```text
+f |-> right(f) o unit
+g |-> counit o left(g),
+```
+
+using the existing ordinary adjunction triangle reductions. Until those
+projections are required, this pair is the smallest bridge replacing the old
+broad `Adj_cov_hom` / `Adj_con_hom` subsystem.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase4b_adjunction_bridge_probe-20260618-221240.log
+```
+
+### Implementation Log 2026-06-18: Phase 4c
+
+The universal-map part of right-adjoint preservation is active as a
+transparent semantic composite:
+
+```text
+right_adjoint_preserves_weighted_limit_cov_univ_transf.
+```
+
+For `adj : Adjunction(A,B)` and a weighted limit `L` of `F` by `W`, its source
+and target are:
+
+```text
+Prof_imply_cov(
+  Hom_prof_along(M,right(adj) o F),
+  W)
+->
+Hom_prof_along(M,right(adj) o L).
+```
+
+Its definition is exactly:
+
+```text
+Prof_imply_cov_transf(
+  Adjunction_prof_untranspose(adj,M,F),
+  Prof_id_transf(W))
+;
+weighted_limit_cov_univ_transf(isl,left(adj) o M)
+;
+Adjunction_prof_transpose(adj,M,L).
+```
+
+Here semicolons indicate equipment-cell composition in execution order. The
+small transparent helper `Adjunction_prof_imply_untranspose` routes the first
+step through the named `Prof_imply_cov_transf` semantic constructor. Explicit
+category and endpoint arguments are retained on the nested
+`Prof_comp_transf` spine because the compact inferred form left unresolved
+polymorphic endpoints.
+
+The theorem intentionally returns the universal cell rather than prematurely
+constructing:
+
+```text
+WeightedLimit_cov(right(adj) o F,W,right(adj) o L).
+```
+
+Giving projection rules for such a witness would overlap the generic
+weighted-limit beta/eta rules. Proving the expanded branches join requires
+the still-deferred naturality of implication and of the adjunction bridge.
+This is the next semantic prerequisite, not a reason to make the preservation
+map opaque.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase4c_right_adjoint_limit_probe-20260618-221641.log
+```
+
+Failed probes retained as elaboration evidence:
+
+```text
+logs/probes/profunctor_phase4c_right_adjoint_limit_probe-20260618-221444.log
+logs/probes/profunctor_phase4c_right_adjoint_limit_probe-20260618-221504.log
+logs/probes/profunctor_phase4c_right_adjoint_limit_probe-20260618-221525.log
+logs/probes/profunctor_phase4c_right_adjoint_limit_probe-20260618-221604.log
+```
+
+Deferred after Phase 4c:
+
+```text
+naturality in the shaped probe M;
+component projections of transpose/untranspose to unit/counit formulas;
+the preserved weighted-limit cone;
+the full right-adjoint-preserves-WeightedLimit_cov witness;
+contravariant weighted-colimit packages, to be obtained through Phase 5
+duality rather than copied from the obsolete draft.
+```
 
 ## Phase 5: Duality And Left Adjoints Preserve Weighted Colimits
 
@@ -3096,10 +3387,12 @@ owner or receive comparison maps without invalidating the public calculus.
 4. Phase 2a-c, landed: primitive `Prof_tensor`, endpoint reindexing,
    generalized and shaped tensor introductions, equipment-cell composition,
    and symmetric identity-representable co-Yoneda beta rules.
-5. Phase 3a, landed: covariant implication, mixed-variance cell action, and
-   general/shaped eval-lambda beta-eta. Add the contravariant half only after
-   this surface drives a concrete weighted-limit or duality check.
-6. Add weighted-limit packages and the adjunction transpose bridge.
+5. Phase 3a-b, landed: both implication variances, mixed-variance cell actions,
+   and general/shaped eval-lambda beta-eta.
+6. Phase 4a-c, landed: covariant weighted-limit universal package, the narrow
+   adjunction/profunctor transpose bridge, and the transparent universal-map
+   part of right-adjoint preservation. Naturality and the full preservation
+   witness remain deferred.
 7. Add op-duality operations required for left-adjoint colimit preservation.
 8. Add the join/directed-inductive example, either primitive or via collage.
 

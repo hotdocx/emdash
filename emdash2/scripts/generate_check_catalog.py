@@ -100,6 +100,8 @@ AREAS: list[Area] = [
             "Prof_lambda",
             "Hom_prof",
             "Unit_prof",
+            "WeightedLimit",
+            "weighted_limit",
         ),
     ),
     Area(
