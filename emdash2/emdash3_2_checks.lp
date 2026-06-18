@@ -4465,6 +4465,170 @@ assert [A B X : Cat]
       (@Hom_prof_along A B X F G)
       (Struct_sigma a b);
 
+// General two-sided product maps used by profunctor reindexing.
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (a : τ (Obj A))
+  (b : τ (Obj B)) ⊢
+  @fapp0
+    (Product_cat A B)
+    (Product_cat A' B')
+    (@Product_map_func A A' B B' F G)
+    (Struct_sigma a b)
+  ≡ @Product_pair A' B' (fapp0 F a) (fapp0 G b);
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B))
+  (p : τ (Hom A a a'))
+  (q : τ (Hom B b b')) ⊢
+  sigma_Fst
+    (@fapp1_fapp0
+      (Product_cat A B)
+      (Product_cat A' B')
+      (@Product_map_func A A' B B' F G)
+      (Struct_sigma a b)
+      (Struct_sigma a' b')
+      (Struct_sigma p q))
+  ≡ fapp1_fapp0 F p;
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B))
+  (p : τ (Hom A a a'))
+  (q : τ (Hom B b b')) ⊢
+  sigma_Snd
+    (@fapp1_fapp0
+      (Product_cat A B)
+      (Product_cat A' B')
+      (@Product_map_func A A' B B' F G)
+      (Struct_sigma a b)
+      (Struct_sigma a' b')
+      (Struct_sigma p q))
+  ≡ fapp1_fapp0 G q;
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B)) ⊢
+  sigma_Fst
+    (@fapp1_func
+      (Product_cat A B)
+      (Product_cat A' B')
+      (@Product_map_func A A' B B' F G)
+      (Struct_sigma a b)
+      (Struct_sigma a' b'))
+  ≡ @comp_cat_fapp0
+      (Product_cat (Hom_cat A a a') (Hom_cat B b b'))
+      (Hom_cat A a a')
+      (Hom_cat A' (fapp0 F a) (fapp0 F a'))
+      (@fapp1_func A A' F a a')
+      (@Product_projL_func (Hom_cat A a a') (Hom_cat B b b'));
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B)) ⊢
+  sigma_Snd
+    (@fapp1_func
+      (Product_cat A B)
+      (Product_cat A' B')
+      (@Product_map_func A A' B B' F G)
+      (Struct_sigma a b)
+      (Struct_sigma a' b'))
+  ≡ @comp_cat_fapp0
+      (Product_cat (Hom_cat A a a') (Hom_cat B b b'))
+      (Hom_cat B b b')
+      (Hom_cat B' (fapp0 G b) (fapp0 G b'))
+      (@fapp1_func B B' G b b')
+      (@Product_projR_func (Hom_cat A a a') (Hom_cat B b b'));
+
+// Stable profunctor reindexing and its representable fold.
+assert [A A' B B' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  (a : τ (Obj A'))
+  (b : τ (Obj B')) ⊢
+  Fibre_cat
+    (@Prof_reindex A A' B B' R F G)
+    (Struct_sigma a b)
+  ≡ Fibre_cat
+      R
+      (@Product_pair (Op_cat A) B (fapp0 F a) (fapp0 G b));
+
+assert [A A' B B' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  (a a' : τ (Obj A'))
+  (b b' : τ (Obj B')) ⊢
+  @fapp1_func
+    (Product_cat (Op_cat A') B')
+    Cat_cat
+    (@Prof_reindex A A' B B' R F G)
+    (Struct_sigma a b)
+    (Struct_sigma a' b')
+  ≡ @Prof_reindex_fapp1_func
+      A A' B B' R F G
+      (Struct_sigma a b)
+      (Struct_sigma a' b');
+
+assert [A A' B B' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  (a a' : τ (Obj A'))
+  (b b' : τ (Obj B'))
+  (p : τ (Hom A' a' a))
+  (q : τ (Hom B' b b')) ⊢
+  @fapp1_fapp0
+    (Product_cat (Op_cat A') B')
+    Cat_cat
+    (@Prof_reindex A A' B B' R F G)
+    (Struct_sigma a b)
+    (Struct_sigma a' b')
+    (Struct_sigma p q)
+  ≡ @fapp1_fapp0
+      (Product_cat (Op_cat A) B)
+      Cat_cat
+      R
+      (Struct_sigma (fapp0 F a) (fapp0 G b))
+      (Struct_sigma (fapp0 F a') (fapp0 G b'))
+      (Struct_sigma (fapp1_fapp0 F p) (fapp1_fapp0 G q));
+
+assert [A A' B B' X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (F' : τ (Functor A' A))
+  (G' : τ (Functor B' B)) ⊢
+  @Prof_reindex
+    A A' B B'
+    (@Hom_prof_along A B X F G)
+    F'
+    G'
+  ≡ @Hom_prof_along
+      A' B' X
+      (@comp_cat_fapp0 A' A X F F')
+      (@comp_cat_fapp0 B' B X G G');
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X)) ⊢
+  @Prof_reindex
+    X A B B
+    (@Hom_prof B X G)
+    F
+    (@id_func B)
+  ≡ @Hom_prof_along A B X F G;
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))

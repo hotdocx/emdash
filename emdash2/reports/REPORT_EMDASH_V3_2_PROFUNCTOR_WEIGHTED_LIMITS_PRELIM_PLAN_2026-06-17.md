@@ -3,8 +3,8 @@
 Date: 2026-06-17
 
 Status: implementation in progress. The first Phase 1 profunctor-facade slice
-is active in `emdash3_2.lp`; reindexing and shaped profunctor elements remain
-the next Phase 1 work.
+and stable profunctor reindexing are active in `emdash3_2.lp`; shaped
+profunctor elements remain the next Phase 1 work.
 
 ## Scope
 
@@ -1875,7 +1875,8 @@ the Hom_prof and Unit_prof fibre specializations;
 pointwise agreement with the Hom_catd semantic model.
 ```
 
-Deferred from this slice:
+Deferred from this slice at the time of Phase 1a; the first two items were
+subsequently landed in Phase 1b:
 
 ```text
 Product_map_func or another two-sided product-map owner;
@@ -1890,6 +1891,97 @@ The focused probe and the bounded active check both passed. The probe log is:
 
 ```text
 logs/probes/profunctor_phase1_facade_probe-20260618-165702.log
+```
+
+### Implementation Log 2026-06-18: Phase 1b
+
+The second bounded slice adds the general two-sided product map and profunctor
+reindexing.
+
+The general product map remains a transparent semantic construction:
+
+```text
+Product_map_func(F,G)
+  := (F o Product_projL_func, G o Product_projR_func)
+
+Product_map_func(F,G)[(a,b)] = (F[a],G[b])
+Product_map_func(F,G)[(p,q)] = (F[p],G[q]).
+```
+
+Its checks cover both the full `fapp1_func` projections and the capped
+`fapp1_fapp0` projections. No new primitive product-map action hierarchy was
+introduced.
+
+The initial probe then tried:
+
+```text
+Prof_reindex(R,F,G)
+  := Pullback_catd(R,Product_map_func(Op_func(F),G)).
+```
+
+as a transparent definition. Its fibre and arrow computations worked, but
+Lambdapi refused the required representable fold because a rewrite rule cannot
+target a symbol already defined with `≔`. This is the concrete operational
+reason for promoting reindexing itself.
+
+The landed architecture is therefore:
+
+```text
+symbol Prof_reindex(R,F,G) : Prof(A',B')
+
+Prof_reindex(R,F,G)[a',b'] = R[F[a'],G[b']]
+
+Prof_reindex_fapp1_func(R,F,G,ab,ab')
+  : Hom(ab,ab') ->
+      (Prof_reindex(R,F,G)[ab] ->
+       Prof_reindex(R,F,G)[ab']).
+```
+
+`Prof_reindex` is stable but deliberately not declared injective. Its object,
+full-action, and capped-action rules all route through:
+
+```text
+Product_map_func(Op_func(F),G)
+```
+
+and the original `R` action. Thus the stable head supplies rewrite
+discrimination without claiming that reindexing data can be semantically
+recovered from the resulting profunctor.
+
+The representable accumulation rule is now active:
+
+```text
+Prof_reindex(Hom_prof_along(F,G),F',G')
+  -> Hom_prof_along(F o F',G o G').
+```
+
+In particular:
+
+```text
+Prof_reindex(Hom_prof(G),F,id_B)
+  -> Hom_prof_along(F,G).
+```
+
+Nested general reindexing and identity reindexing are intentionally deferred.
+Adding them now would introduce associativity and overlap obligations not
+needed by the first shaped-element construction. They should be probed when a
+specific downstream formula requires those normal forms.
+
+The active checks cover:
+
+```text
+Product_map_func object action;
+Product_map_func full and capped arrow action;
+Prof_reindex fibre computation;
+Prof_reindex full and capped arrow action;
+general representable endpoint accumulation;
+the Hom_prof left-reindex specialization.
+```
+
+The successful focused probe log is:
+
+```text
+logs/probes/profunctor_phase1b_reindex_probe-20260618-170923.log
 ```
 
 ## Phase 2: Tensor And Co-Yoneda
@@ -2340,7 +2432,7 @@ compatibility. Ordinary weakening/exchange/contraction already exist.
 Current assessment:
 
 ```text
-Phase 1 profunctor facade: partially implemented; base, hom head, and action pass.
+Phase 1 profunctor facade: reindexing landed; shaped elements remain.
 Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend semantics.
 Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
 Phase 4 weighted limits: plausibly feasible as universal packages over implication.
@@ -2367,11 +2459,11 @@ owner or receive comparison maps without invalidating the public calculus.
 
 ## Suggested Implementation Order
 
-1. Phase 1a, now landed: facade aliases, `Hom_prof_along`, its first full
+1. Phase 1a, landed: facade aliases, `Hom_prof_along`, its first full
    action, `Hom_prof`, and `Unit_prof`.
-2. Phase 1b: add a semantic two-sided product map, `Prof_reindex`, and their
-   object/arrow checks.
-3. Phase 1c: add `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`; introduce
+2. Phase 1b, landed: semantic `Product_map_func`, stable `Prof_reindex`, its
+   full action, and representable endpoint accumulation.
+3. Phase 1c, next: add `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`; introduce
    endpoint-internalized or curry comparison packages only when these checks
    demand them.
 4. Add primitive `Prof_tensor` plus narrow transformation constructors.

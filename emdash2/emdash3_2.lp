@@ -291,8 +291,11 @@ flag "print_meta_args" on;
       stable representable head; `Hom_prof(G)` and `Unit_prof(X)` are
       transparent identity-left specializations. Its base-arrow action is
       owned by `Hom_prof_along_fapp1_func` and computes as postcomposition
-      after precomposition. Reindexing, profunctor transformations, and curry
-      comparison remain later implementation phases.
+      after precomposition. `Product_map_func(F,G)` is the transparent general
+      product map. `Prof_reindex(R,F,G)` is a stable non-injective head whose
+      object and arrow projections are pullback along `Op_func(F) × G`;
+      representable reindexing accumulates endpoint functors. Profunctor
+      transformations and curry comparison remain later implementation phases.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -2563,6 +2566,33 @@ symbol Product_mapL_func_func [A A' B : Cat]
       (@Product_cat_fapp0_func A')
       B)
     (@Product_cat_fapp1_func A A');
+
+// General two-sided product map.
+//
+// Surface/formula:
+//   Product_map_func(F,G)[(a,b)] = (F[a],G[b])
+//   Product_map_func(F,G)[(p,q)] = (F[p],G[q]).
+//
+// This remains the semantic pair of projected composites. It is named because
+// profunctor reindexing and later op-duality use the same two-sided map, but it
+// is not an independent primitive stable-head theory.
+symbol Product_map_func [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  : τ (Functor (Product_cat A B) (Product_cat A' B'))
+≔ Struct_sigma
+    (@comp_cat_fapp0
+      (Product_cat A B)
+      A
+      A'
+      F
+      (@Product_projL_func A B))
+    (@comp_cat_fapp0
+      (Product_cat A B)
+      B
+      B'
+      G
+      (@Product_projR_func A B));
 
 /*
   Product evaluation: apply a functor to an object.
@@ -5926,6 +5956,178 @@ symbol Prof_cat (A B : Cat) : Cat
 symbol Prof (A B : Cat) : Grpd
 ≔ Obj (Prof_cat A B);
 
+/*
+  Profunctor reindexing.
+
+  Surface/formula:
+    Prof_reindex(R,F,G)[a',b'] = R[F[a'],G[b']]
+
+  where:
+    R : Prof(A,B)
+    F : A' ⊢ A
+    G : B' ⊢ B.
+
+  Semantically this is pullback along:
+
+    Product_map_func(Op_func(F),G) : A'^op × B' ⊢ A^op × B.
+
+  Unlike the readability aliases above, `Prof_reindex` is a stable,
+  non-injective head. A focused probe showed that the representable
+  accumulation law cannot be attached to a symbol defined with `≔`.
+  Its object and arrow projections below retain the semantic pullback owner.
+*/
+symbol Prof_reindex [A A' B B' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  : τ (Catd (Product_cat (Op_cat A') B'));
+
+// Object/fibre projection of profunctor reindexing.
+rule @fapp0
+      (Product_cat (Op_cat $A') $B')
+      Cat_cat
+      (@Prof_reindex $A $A' $B $B' $R $F $G)
+      $ab
+  ↪ @fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      $R
+      (@fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab);
+
+// Full base-arrow action of reindexing. The named rung keeps the functorial
+// action available before capping at one product arrow.
+symbol Prof_reindex_fapp1_func [A A' B B' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  [ab ab' : τ (Obj (Product_cat (Op_cat A') B'))]
+  : τ (Functor
+      (Hom_cat (Product_cat (Op_cat A') B') ab ab')
+      (Functor_cat
+        (@fapp0
+          (Product_cat (Op_cat A') B')
+          Cat_cat
+          (@Prof_reindex A A' B B' R F G)
+          ab)
+        (@fapp0
+          (Product_cat (Op_cat A') B')
+          Cat_cat
+          (@Prof_reindex A A' B B' R F G)
+          ab')));
+
+rule @fapp1_func
+      (Product_cat (Op_cat $A') $B')
+      Cat_cat
+      (@Prof_reindex $A $A' $B $B' $R $F $G)
+      $ab
+      $ab'
+  ↪ @Prof_reindex_fapp1_func
+      $A $A' $B $B' $R $F $G $ab $ab';
+
+// Applying the full action maps the base arrow through Op_func(F) × G, then
+// applies the original profunctor action.
+rule fapp0
+      (@Prof_reindex_fapp1_func
+        $A $A' $B $B' $R $F $G $ab $ab')
+      $pq
+  ↪ @fapp1_fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      $R
+      (@fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab)
+      (@fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab')
+      (@fapp1_fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab
+        $ab'
+        $pq);
+
+// Direct capped action joins the full-action projection above.
+rule @fapp1_fapp0
+      (Product_cat (Op_cat $A') $B')
+      Cat_cat
+      (@Prof_reindex $A $A' $B $B' $R $F $G)
+      $ab
+      $ab'
+      $pq
+  ↪ @fapp1_fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      $R
+      (@fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab)
+      (@fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab')
+      (@fapp1_fapp0
+        (Product_cat (Op_cat $A') $B')
+        (Product_cat (Op_cat $A) $B)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
+        $ab
+        $ab'
+        $pq);
+
 // Binary representable hom profunctor.
 //
 // Surface/formula:
@@ -6040,6 +6242,22 @@ symbol Hom_prof [B X : Cat]
 symbol Unit_prof (X : Cat)
   : τ (Catd (Product_cat (Op_cat X) X))
 ≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
+
+// Reindexing a representable accumulates both endpoint functors.
+rule @Prof_reindex
+      $A
+      $A'
+      $B
+      $B'
+      (@Hom_prof_along $A $B $X $F $G)
+      $F'
+      $G'
+  ↪ @Hom_prof_along
+      $A'
+      $B'
+      $X
+      (@comp_cat_fapp0 $A' $A $X $F $F')
+      (@comp_cat_fapp0 $B' $B $X $G $G');
 
 
 // -------------------------------------------------------------------------------------------------

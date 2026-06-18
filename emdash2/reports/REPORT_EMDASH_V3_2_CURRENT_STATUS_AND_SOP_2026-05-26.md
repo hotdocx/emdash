@@ -103,8 +103,11 @@ and `Prof` are transparent aliases for families on `A^op × B`.
 `Hom_prof_along(F,G)` is the sole stable representable head, with direct fibre
 computation and a full base-arrow action computing as postcomposition after
 precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
-specializations. Reindexing, shaped profunctor elements, and curry comparison
-remain the next Phase 1 work.
+specializations. The general `Product_map_func(F,G)` is a transparent paired
+map. `Prof_reindex(R,F,G)` is a stable non-injective head whose projections
+compute as pullback along `Op_func(F) × G`; representable reindexing accumulates
+both endpoint functors. Shaped profunctor elements and curry comparison remain
+the next Phase 1 work.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
@@ -226,11 +229,15 @@ left implicit:
 - a first Cat-valued profunctor facade:
   `Prof_base(A,B) = A^op × B`, `Prof_cat(A,B) = Catd_cat(Prof_base(A,B))`,
   and `Prof(A,B) = Obj(Prof_cat(A,B))` are transparent aliases;
+  `Product_map_func(F,G)` is the semantic pair of projected composites;
+  `Prof_reindex(R,F,G)` and `Prof_reindex_fapp1_func` expose object, full,
+  and capped pullback action along `Op_func(F) × G`;
   `Hom_prof_along(F,G)` is the single stable representable constructor;
   `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
   the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.
+  reindexing a representable folds to endpoint composition;
   `Hom_prof(G)` and `Unit_prof(X)` are transparent specializations, while
-  profunctor reindexing, `Prof_hom`, and curry comparison remain deferred;
+  `Prof_hom` and curry comparison remain deferred;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
