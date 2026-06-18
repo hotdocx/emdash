@@ -2313,6 +2313,234 @@ The failed classifier probe is retained as:
 logs/probes/profunctor_phase2b_tensor_cells_probe-20260618-201134.log
 ```
 
+### Implementation Log 2026-06-18: Phase 2c
+
+The general equipment-cell composition/application prerequisite and the first
+computational co-Yoneda rules are now active.
+
+#### Endpoint accumulation
+
+Iterated ordinary functor composition now has the left-associated normal form:
+
+```text
+H o (G o F) -> (H o G) o F.
+```
+
+This orientation was added only after nested profunctor reindexing required a
+join with representable endpoint accumulation. It joins the existing left and
+right identity rules in the focused probe.
+
+Nested profunctor reindexing now computes:
+
+```text
+Prof_reindex(Prof_reindex(R,F,G),F',G')
+  -> Prof_reindex(R,F o F',G o G').
+```
+
+The representable overlap joins because functor composition is normalized
+left-associatively. Identity and tensor-reindexing overlaps also passed the
+focused assertions.
+
+#### Internalized reindexing
+
+The attempted semantic definition:
+
+```text
+Prof_reindex_func(F,G)
+  := Pullback_catd_func(Product_map_func(Op_func(F),G))
+```
+
+did not provide a usable arrow action. The transparent body unfolded to
+`Pullback_catd` before the object projection could expose the stable
+`Prof_reindex` endpoint, leaving unsolved conversion goals between semantic
+pullbacks and stable profunctor families.
+
+The landed package is therefore:
+
+```text
+Prof_reindex_func(F,G)
+  : Prof_cat(A,B) -> Prof_cat(A',B')
+
+Prof_reindex_func(F,G)[R]
+  -> Prof_reindex(R,F,G)
+
+Prof_reindex_transf(r,F,G)
+  : Functord(
+      Prof_reindex(R,F,G),
+      Prof_reindex(S,F,G)).
+```
+
+The identity action computes:
+
+```text
+Prof_reindex_transf(r,id_A,id_B) -> r.
+```
+
+These stable heads are justified projection owners, not an alternative
+semantics: pullback along `Op_func(F) × G` remains the comparison model.
+
+#### General cell composition
+
+For:
+
+```text
+r : Prof_transf_cat(R0,F01,R1,G01)
+s : Prof_transf_cat(R1,F12,R2,G12),
+```
+
+the stable composite is:
+
+```text
+Prof_comp_transf(s,r)
+  : Prof_transf_cat(
+      R0,
+      F12 o F01,
+      R2,
+      G12 o G01).
+```
+
+Its semantic route is:
+
+```text
+comp_catd_fapp0(
+  Prof_reindex_transf(s,F01,G01),
+  r)
+  -> Prof_comp_transf(s,r).
+```
+
+The first attempt kept `Prof_comp_transf` transparent, but Lambdapi correctly
+refused co-Yoneda rewrite rules on a symbol defined with `≔`. Composition was
+therefore promoted to a stable head only after this concrete rewrite-facing
+failure.
+
+`Prof_id_transf(R)` is the stable identity cell, with:
+
+```text
+Prof_comp_transf(Prof_id_transf(R1),r) -> r
+Prof_comp_transf(s,Prof_id_transf(R0)) -> s.
+```
+
+The probe also tested a fold from generic `id_funcd`, but `id_funcd` is a
+protected constant and cannot head a new rule. No global identity behavior was
+changed. `Prof_id_hom(B)` is only readable notation for the identity cell of
+the unit profunctor.
+
+#### Symmetric tensor introductions
+
+The already active introductions are now completed by:
+
+```text
+Prof_tensor_transf_hom(M,r,s),
+```
+
+which combines a shaped element on the left with a general cell on the right.
+Together:
+
+```text
+Prof_tensor_hom_transf   // general left, shaped right
+Prof_tensor_transf_hom   // shaped left, general right
+Prof_tensor_hom_hom      // shaped on both sides
+Prof_tensor_transf       // general on both sides
+```
+
+cover the first tensor-introduction surface without duplicating Cartier's
+syntactic covariant/contravariant split.
+
+#### Co-Yoneda beta
+
+Both named co-Yoneda maps now cancel tensor introduction in the
+identity-representable case:
+
+```text
+Prof_comp_transf(
+  Prof_coyoneda_unit_tensor_cov_transf(pp,id_B),
+  Prof_tensor_hom_transf(id_B,qq,Prof_id_hom(B)))
+  -> Prof_comp_transf(pp,qq)
+
+Prof_comp_transf(
+  Prof_coyoneda_unit_tensor_cov_transf(pp,id_B),
+  Prof_tensor_hom_hom(id_B,p,Prof_id_hom(B)))
+  -> Prof_comp_transf(pp,p)
+
+Prof_comp_transf(
+  Prof_coyoneda_unit_tensor_con_transf(pp,id_A),
+  Prof_tensor_transf_hom(id_A,Prof_id_hom(A),qq))
+  -> Prof_comp_transf(pp,qq)
+
+Prof_comp_transf(
+  Prof_coyoneda_unit_tensor_con_transf(pp,id_A),
+  Prof_tensor_hom_hom(id_A,Prof_id_hom(A),p))
+  -> Prof_comp_transf(pp,p).
+```
+
+The actual rule LHSs use the stable canonical form:
+
+```text
+Hom_prof_along(id_X,id_X)
+```
+
+rather than transparent `Unit_prof(X)`. A probe using `Unit_prof` as the
+discriminator compiled a branch but failed to reduce after the alias unfolded.
+This confirms the Phase 1 policy that `Hom_prof_along` is the sole
+rewrite-facing representable head.
+
+These are deliberately narrow beta rules. General co-Yoneda cancellation along
+an arbitrary functor requires a canonical shaped element:
+
+```text
+Prof_func_hom(F)
+  : Prof_hom(F,Unit_prof(B),F),
+```
+
+packaging the hom-action of `F`. That construction should be implemented as
+its own functorial package before generalizing the beta LHSs.
+
+Still deferred:
+
+```text
+associativity/coherence rules for Prof_comp_transf;
+tensor associator and unitors;
+general Prof_func_hom(F);
+type-level tensor-unit collapses;
+coend/coinserter semantics.
+```
+
+The active checks cover:
+
+```text
+left-associated ordinary functor composition;
+nested profunctor reindexing;
+Prof_reindex_func object projection;
+Prof_reindex_transf type and identity action;
+Prof_comp_transf type and semantic fold;
+left and right composition identities;
+the missing symmetric tensor introduction;
+two right-unit and two left-unit co-Yoneda beta reductions.
+```
+
+Successful focused probe logs:
+
+```text
+logs/probes/profunctor_phase2c_cell_composition_probe-20260618-204159.log
+logs/probes/profunctor_phase2c_left_coyoneda_probe-20260618-204527.log
+```
+
+Important failed probes influencing the design:
+
+```text
+logs/probes/profunctor_phase2c_cell_composition_probe-20260618-203557.log
+  transparent Prof_reindex_func did not expose stable endpoints;
+
+logs/probes/profunctor_phase2c_cell_composition_probe-20260618-203740.log
+  transparent Prof_comp_transf could not own beta rules;
+
+logs/probes/profunctor_phase2c_cell_composition_probe-20260618-203941.log
+  generic id_funcd is protected and was left unchanged;
+
+logs/probes/profunctor_phase2c_cell_composition_probe-20260618-204020.log
+  transparent Unit_prof was unsuitable as a rewrite discriminator.
+```
+
 ## Phase 3: Internal Hom / Implication
 
 Add profunctor implication as right-adjoint-like structure to tensor:
@@ -2704,10 +2932,9 @@ owner or receive comparison maps without invalidating the public calculus.
 3. Phase 1c, landed: transparent `Prof_transf_cat`, `Prof_hom_cat`, and
    `Prof_hom`; the checks did not demand endpoint-internalized or curry
    comparison packages.
-4. Phase 2a-b, landed: primitive `Prof_tensor`, endpoint reindexing, one
-   generalized tensor-cell constructor, shaped introductions, and named
-   co-Yoneda cells. Next add general cell composition/application and only
-   then the narrow co-Yoneda beta rules.
+4. Phase 2a-c, landed: primitive `Prof_tensor`, endpoint reindexing,
+   generalized and shaped tensor introductions, equipment-cell composition,
+   and symmetric identity-representable co-Yoneda beta rules.
 5. Add covariant implication/eval/lambda beta-eta.
 6. Add weighted-limit packages and the adjunction transpose bridge.
 7. Add op-duality operations required for left-adjoint colimit preservation.

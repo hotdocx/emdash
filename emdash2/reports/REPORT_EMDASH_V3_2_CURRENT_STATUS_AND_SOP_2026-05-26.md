@@ -124,9 +124,17 @@ subsuming the old draft's separate covariant/contravariant constructors.
 `Prof_tensor_hom_hom` and `Prof_tensor_hom_transf` provide shaped introduction
 forms. The left and right named co-Yoneda cells are
 `Prof_coyoneda_unit_tensor_con_transf` and
-`Prof_coyoneda_unit_tensor_cov_transf`. Unit type collapses, associativity,
-and co-Yoneda beta rules remain deferred; beta needs a general operation for
-composing/applying cells across reindexed bases.
+`Prof_coyoneda_unit_tensor_cov_transf`.
+
+The equipment-cell composition layer is now active. `Prof_reindex_func` and
+`Prof_reindex_transf` internalize endpoint reindexing, nested reindexing
+accumulates endpoint functors, and `Prof_comp_transf` is the stable
+reindex-then-compose cell head. `Prof_id_transf` supplies its identity, while
+the generic `id_funcd` behavior remains unchanged. Both left and right
+co-Yoneda maps now have checked beta rules for tensor-introduced general cells
+and shaped elements in the identity-representable case. Unit type collapses,
+general tensor associativity/coherence, and functor-induced unit elements
+`Prof_func_hom(F)` remain deferred.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
@@ -263,9 +271,13 @@ left implicit:
   `Prof_tensor(R,S)` is the primitive profunctor composite;
   tensor reindexing distributes across exposed endpoints;
   `Prof_tensor_transf`, `Prof_tensor_hom_hom`, and
-  `Prof_tensor_hom_transf` provide the first cell/element introduction layer;
-  named left/right co-Yoneda cells are active, while their beta laws await
-  general equipment-cell composition/application;
+  both `Prof_tensor_hom_transf` and `Prof_tensor_transf_hom` provide the first
+  cell/element introduction layer;
+  `Prof_reindex_func`, `Prof_reindex_transf`, `Prof_id_transf`, and
+  `Prof_comp_transf` provide general equipment-cell reindexing and
+  composition;
+  named left/right co-Yoneda cells and their identity-representable beta laws
+  are active;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

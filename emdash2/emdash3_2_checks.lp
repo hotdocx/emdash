@@ -4854,6 +4854,356 @@ assert [A B A' B' I : Cat]
         P'
         G));
 
+// General equipment-cell reindexing and composition.
+assert [A B C D : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor B C))
+  (H : τ (Functor C D)) ⊢
+  @comp_cat_fapp0
+    A C D H
+    (@comp_cat_fapp0 A B C G F)
+  ≡ @comp_cat_fapp0
+      A B D
+      (@comp_cat_fapp0 B C D H G)
+      F;
+
+assert [A A' A'' B B' B'' : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  (F' : τ (Functor A'' A'))
+  (G' : τ (Functor B'' B')) ⊢
+  @Prof_reindex
+    A' A'' B' B''
+    (@Prof_reindex A A' B B' R F G)
+    F'
+    G'
+  ≡ @Prof_reindex
+      A A'' B B''
+      R
+      (@comp_cat_fapp0 A'' A' A F F')
+      (@comp_cat_fapp0 B'' B' B G G');
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  @fapp0
+    (@Catd_cat (Product_cat (Op_cat A) B))
+    (@Catd_cat (Product_cat (Op_cat A') B'))
+    (@Prof_reindex_func A A' B B' F G)
+    R
+  ≡ @Prof_reindex A A' B B' R F G;
+
+assert [A A' B B' : Cat]
+  [R S : τ (Catd (Product_cat (Op_cat A) B))]
+  (r : τ (Functord R S))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B)) ⊢
+  @Prof_reindex_transf A A' B B' R S r F G
+  : τ (Functord
+      (@Prof_reindex A A' B B' R F G)
+      (@Prof_reindex A A' B B' S F G));
+
+assert [A B : Cat]
+  [R S : τ (Catd (Product_cat (Op_cat A) B))]
+  (r : τ (Functord R S)) ⊢
+  @Prof_reindex_transf
+    A A B B
+    R S r
+    (@id_func A)
+    (@id_func B)
+  ≡ r;
+
+assert [A0 A1 A2 B0 B1 B2 : Cat]
+  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
+  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
+  [F01 : τ (Functor A0 A1)]
+  [G01 : τ (Functor B0 B1)]
+  [F12 : τ (Functor A1 A2)]
+  [G12 : τ (Functor B1 B2)]
+  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
+  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01))) ⊢
+  @Prof_comp_transf
+    A0 A1 A2 B0 B1 B2
+    R0 R1 R2 F01 G01 F12 G12
+    s r
+  : τ (Obj
+      (@Prof_transf_cat
+        A2 A0 B2 B0
+        R0
+        (@comp_cat_fapp0 A0 A1 A2 F12 F01)
+        R2
+        (@comp_cat_fapp0 B0 B1 B2 G12 G01)));
+
+assert [A0 A1 A2 B0 B1 B2 : Cat]
+  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
+  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
+  [F01 : τ (Functor A0 A1)]
+  [G01 : τ (Functor B0 B1)]
+  [F12 : τ (Functor A1 A2)]
+  [G12 : τ (Functor B1 B2)]
+  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
+  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01))) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat A0) B0)
+    R0
+    (@Prof_reindex A1 A0 B1 B0 R1 F01 G01)
+    (@Prof_reindex
+      A2 A0 B2 B0
+      R2
+      (@comp_cat_fapp0 A0 A1 A2 F12 F01)
+      (@comp_cat_fapp0 B0 B1 B2 G12 G01))
+    (@Prof_reindex_transf
+      A1 A0 B1 B0
+      R1
+      (@Prof_reindex A2 A1 B2 B1 R2 F12 G12)
+      s
+      F01
+      G01)
+    r
+  ≡ @Prof_comp_transf
+      A0 A1 A2 B0 B1 B2
+      R0 R1 R2 F01 G01 F12 G12
+      s r;
+
+assert [A B : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  @Prof_comp_transf
+    A A A B B B
+    R R R
+    (@id_func A) (@id_func B)
+    (@id_func A) (@id_func B)
+    (@Prof_id_transf A B R)
+    (@Prof_id_transf A B R)
+  ≡ @Prof_id_transf A B R;
+
+assert [A0 A A' B : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A0) B))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A') B))]
+  [H : τ (Functor A0 A)]
+  [F : τ (Functor A A')]
+  (qq : τ (Obj
+    (@Prof_transf_cat A A0 B B Q H P (@id_func B))))
+  (pp : τ (Obj
+    (@Prof_transf_cat A' A B B P F P' (@id_func B)))) ⊢
+  @Prof_comp_transf
+    A0 A A'
+    B B B
+    Q
+    (@Prof_tensor
+      A B B P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B)))
+    P'
+    H
+    (@id_func B)
+    F
+    (@id_func B)
+    (@Prof_coyoneda_unit_tensor_cov_transf
+      A B A' B
+      P P'
+      F
+      (@id_func B)
+      pp
+      B
+      (@id_func B))
+    (@Prof_tensor_hom_transf
+      B A0 A B B
+      Q P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B))
+      H
+      (@id_func B)
+      (@id_func B)
+      qq
+      (@Prof_id_transf
+        B B
+        (@Hom_prof_along B B B (@id_func B) (@id_func B))))
+  ≡ @Prof_comp_transf
+      A0 A A'
+      B B B
+      Q P P'
+      H
+      (@id_func B)
+      F
+      (@id_func B)
+      pp qq;
+
+assert [A A' B : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A') B))]
+  [H : τ (Functor B A)]
+  [F : τ (Functor A A')]
+  (p : τ (@Prof_hom B A B H P (@id_func B)))
+  (pp : τ (Obj
+    (@Prof_transf_cat A' A B B P F P' (@id_func B)))) ⊢
+  @Prof_comp_transf
+    B A A'
+    B B B
+    (@Hom_prof_along B B B (@id_func B) (@id_func B))
+    (@Prof_tensor
+      A B B P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B)))
+    P'
+    H
+    (@id_func B)
+    F
+    (@id_func B)
+    (@Prof_coyoneda_unit_tensor_cov_transf
+      A B A' B
+      P P'
+      F
+      (@id_func B)
+      pp
+      B
+      (@id_func B))
+    (@Prof_tensor_hom_hom
+      B A B B
+      P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B))
+      H
+      (@id_func B)
+      (@id_func B)
+      p
+      (@Prof_id_transf
+        B B
+        (@Hom_prof_along B B B (@id_func B) (@id_func B))))
+  ≡ @Prof_comp_transf
+      B A A'
+      B B B
+      (@Hom_prof_along B B B (@id_func B) (@id_func B))
+      P P'
+      H
+      (@id_func B)
+      F
+      (@id_func B)
+      pp p;
+
+assert [I X' A B X : Cat]
+  [S' : τ (Catd (Product_cat (Op_cat I) X'))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [F : τ (Functor I A)]
+  [G : τ (Functor X' X)]
+  (M : τ (Functor I B))
+  (r : τ (@Prof_hom I A B F R M))
+  (s : τ (Obj (@Prof_transf_cat B I X X' S' M S G))) ⊢
+  @Prof_tensor_transf_hom
+    I X' A B X S' R S F G M r s
+  : τ (Obj
+      (@Prof_transf_cat
+        A I X X'
+        S'
+        F
+        (@Prof_tensor A B X R S)
+        G));
+
+assert [A B0 B B' : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
+  [K : τ (Functor B0 B)]
+  [G : τ (Functor B B')]
+  (qq : τ (Obj
+    (@Prof_transf_cat A A B B0 Q (@id_func A) P K)))
+  (pp : τ (Obj
+    (@Prof_transf_cat A A B' B P (@id_func A) P' G))) ⊢
+  @Prof_comp_transf
+    A A A
+    B0 B B'
+    Q
+    (@Prof_tensor
+      A A B
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P)
+    P'
+    (@id_func A)
+    K
+    (@id_func A)
+    G
+    (@Prof_coyoneda_unit_tensor_con_transf
+      A B A B'
+      P P'
+      (@id_func A)
+      G
+      pp
+      A
+      (@id_func A))
+    (@Prof_tensor_transf_hom
+      A B0 A A B
+      Q
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P
+      (@id_func A)
+      K
+      (@id_func A)
+      (@Prof_id_transf
+        A A
+        (@Hom_prof_along A A A (@id_func A) (@id_func A)))
+      qq)
+  ≡ @Prof_comp_transf
+      A A A
+      B0 B B'
+      Q P P'
+      (@id_func A)
+      K
+      (@id_func A)
+      G
+      pp qq;
+
+assert [A B B' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
+  [K : τ (Functor A B)]
+  [G : τ (Functor B B')]
+  (p : τ (@Prof_hom A A B (@id_func A) P K))
+  (pp : τ (Obj
+    (@Prof_transf_cat A A B' B P (@id_func A) P' G))) ⊢
+  @Prof_comp_transf
+    A A A
+    A B B'
+    (@Hom_prof_along A A A (@id_func A) (@id_func A))
+    (@Prof_tensor
+      A A B
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P)
+    P'
+    (@id_func A)
+    K
+    (@id_func A)
+    G
+    (@Prof_coyoneda_unit_tensor_con_transf
+      A B A B'
+      P P'
+      (@id_func A)
+      G
+      pp
+      A
+      (@id_func A))
+    (@Prof_tensor_hom_hom
+      A A A B
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P
+      (@id_func A)
+      K
+      (@id_func A)
+      (@Prof_id_transf
+        A A
+        (@Hom_prof_along A A A (@id_func A) (@id_func A)))
+      p)
+  ≡ @Prof_comp_transf
+      A A A
+      A B B'
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P P'
+      (@id_func A)
+      K
+      (@id_func A)
+      G
+      pp p;
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))

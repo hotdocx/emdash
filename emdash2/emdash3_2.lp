@@ -671,6 +671,15 @@ symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
 rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
 rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
 rule @comp_cat_fapp0 $A $A $C $F (@id_func $A) ↪ $F;
+// Canonical left-associated normal form for iterated functor composition.
+rule @comp_cat_fapp0
+      $A $C $E
+      $H
+      (@comp_cat_fapp0 $A $B $C $G $F)
+  ↪ @comp_cat_fapp0
+      $A $B $E
+      (@comp_cat_fapp0 $B $C $E $H $G)
+      $F;
 rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
 rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
   ↪ @fapp1_fapp0
@@ -6253,6 +6262,20 @@ rule @Prof_reindex
       (@id_func $B)
   ↪ $R;
 
+// Nested reindexing accumulates both endpoint functors.
+rule @Prof_reindex
+      $A' $A''
+      $B' $B''
+      (@Prof_reindex $A $A' $B $B' $R $F $G)
+      $F'
+      $G'
+  ↪ @Prof_reindex
+      $A $A''
+      $B $B''
+      $R
+      (@comp_cat_fapp0 $A'' $A' $A $F $F')
+      (@comp_cat_fapp0 $B'' $B' $B $G $G');
+
 // Reindexing a representable accumulates both endpoint functors.
 rule @Prof_reindex
       $A
@@ -6311,6 +6334,144 @@ symbol Prof_hom [I A B : Cat]
   (G : τ (Functor I B))
   : Grpd
 ≔ Obj (@Prof_hom_cat I A B F R G);
+
+/*
+  Internalized profunctor reindexing.
+
+  Semantically this is pullback along Product_map_func(Op_func(F),G), but the
+  stable functor and arrow heads are required because the object projection
+  must remain the stable `Prof_reindex` normal form.
+*/
+symbol Prof_reindex_func [A A' B B' : Cat]
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  : τ (Functor (Prof_cat A B) (Prof_cat A' B'));
+
+rule @fapp0
+      (@Catd_cat (Product_cat (Op_cat $A) $B))
+      (@Catd_cat (Product_cat (Op_cat $A') $B'))
+      (@Prof_reindex_func $A $A' $B $B' $F $G)
+      $R
+  ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
+
+symbol Prof_reindex_transf [A A' B B' : Cat]
+  [R S : τ (Catd (Product_cat (Op_cat A) B))]
+  (r : τ (Functord R S))
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  : τ (Functord
+      (@Prof_reindex A A' B B' R F G)
+      (@Prof_reindex A A' B B' S F G));
+
+rule @fapp1_fapp0
+      (@Catd_cat (Product_cat (Op_cat $A) $B))
+      (@Catd_cat (Product_cat (Op_cat $A') $B'))
+      (@Prof_reindex_func $A $A' $B $B' $F $G)
+      $R
+      $S
+      $r
+  ↪ @Prof_reindex_transf $A $A' $B $B' $R $S $r $F $G;
+
+rule @Prof_reindex_transf
+      $A $A $B $B
+      $R $S
+      $r
+      (@id_func $A)
+      (@id_func $B)
+  ↪ $r;
+
+// Stable identity equipment cell. Keep generic id_funcd unchanged globally.
+symbol Prof_id_transf [A B : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  : τ (Obj
+      (@Prof_transf_cat
+        A A B B
+        R
+        (@id_func A)
+        R
+        (@id_func B)));
+
+// Readable shaped identity element for the unit profunctor.
+symbol Prof_id_hom (B : Cat)
+  : τ (@Prof_hom
+      B B B
+      (@id_func B)
+      (@Unit_prof B)
+      (@id_func B))
+≔ @Prof_id_transf
+    B B
+    (@Hom_prof_along B B B (@id_func B) (@id_func B));
+
+/*
+  General equipment-cell composition.
+
+  Semantically, reindex the second cell along the first cell's endpoint
+  functors and compose the resulting displayed functors. The stable head owns
+  identity and co-Yoneda cut-elimination rules.
+*/
+symbol Prof_comp_transf
+  [A0 A1 A2 B0 B1 B2 : Cat]
+  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
+  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
+  [F01 : τ (Functor A0 A1)]
+  [G01 : τ (Functor B0 B1)]
+  [F12 : τ (Functor A1 A2)]
+  [G12 : τ (Functor B1 B2)]
+  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
+  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01)))
+  : τ (Obj
+      (@Prof_transf_cat
+        A2 A0 B2 B0
+        R0
+        (@comp_cat_fapp0 A0 A1 A2 F12 F01)
+        R2
+        (@comp_cat_fapp0 B0 B1 B2 G12 G01)));
+
+// Fold the semantic reindex-then-compose route to the stable composition head.
+rule @comp_catd_fapp0
+      (Product_cat (Op_cat $A0) $B0)
+      $R0
+      (@Prof_reindex $A1 $A0 $B1 $B0 $R1 $F01 $G01)
+      (@Prof_reindex
+        $A2 $A0 $B2 $B0
+        $R2
+        (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
+        (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01))
+      (@Prof_reindex_transf
+        $A1 $A0 $B1 $B0
+        $R1
+        (@Prof_reindex $A2 $A1 $B2 $B1 $R2 $F12 $G12)
+        $s
+        $F01
+        $G01)
+      $r
+  ↪ @Prof_comp_transf
+      $A0 $A1 $A2 $B0 $B1 $B2
+      $R0 $R1 $R2
+      $F01 $G01 $F12 $G12
+      $s $r;
+
+rule @Prof_comp_transf
+      $A0 $A1 $A1
+      $B0 $B1 $B1
+      $R0 $R1 $R1
+      $F01 $G01
+      (@id_func $A1)
+      (@id_func $B1)
+      (@Prof_id_transf $A1 $B1 $R1)
+      $r
+  ↪ $r
+with @Prof_comp_transf
+      $A0 $A0 $A2
+      $B0 $B0 $B2
+      $R0 $R0 $R2
+      (@id_func $A0)
+      (@id_func $B0)
+      $F12 $G12
+      $s
+      (@Prof_id_transf $A0 $B0 $R0)
+  ↪ $s;
 
 /*
   Primitive tensor/composition of Cat-valued profunctors.
@@ -6405,6 +6566,25 @@ constant symbol Prof_tensor_hom_transf
         (@Prof_tensor A B X R S)
         G));
 
+// Compose a shaped element on the left with a general cell on the right.
+constant symbol Prof_tensor_transf_hom
+  [I X' A B X : Cat]
+  [S' : τ (Catd (Product_cat (Op_cat I) X'))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [F : τ (Functor I A)]
+  [G : τ (Functor X' X)]
+  (M : τ (Functor I B))
+  (r : τ (@Prof_hom I A B F R M))
+  (s : τ (Obj (@Prof_transf_cat B I X X' S' M S G)))
+  : τ (Obj
+      (@Prof_transf_cat
+        A I X X'
+        S'
+        F
+        (@Prof_tensor A B X R S)
+        G));
+
 /*
   Named co-Yoneda maps.
 
@@ -6452,6 +6632,229 @@ constant symbol Prof_coyoneda_unit_tensor_con_transf
         M
         P'
         G));
+
+// Right-unit co-Yoneda cancellation on a tensor-introduced general cell.
+rule @Prof_comp_transf
+      $A0 $A $A'
+      $B $B $B
+      $Q
+      (@Prof_tensor
+        $A $B $B
+        $P
+        (@Hom_prof_along
+          $B $B $B
+          (@id_func $B)
+          (@id_func $B)))
+      $P'
+      $H
+      (@id_func $B)
+      $F
+      (@id_func $B)
+      (@Prof_coyoneda_unit_tensor_cov_transf
+        $A $B $A' $B
+        $P $P'
+        $F
+        (@id_func $B)
+        $pp
+        $B
+        (@id_func $B))
+      (@Prof_tensor_hom_transf
+        $B $A0 $A $B $B
+        $Q $P
+        (@Hom_prof_along
+          $B $B $B
+          (@id_func $B)
+          (@id_func $B))
+        $H
+        (@id_func $B)
+        (@id_func $B)
+        $qq
+        (@Prof_id_transf
+          $B $B
+          (@Hom_prof_along
+            $B $B $B
+            (@id_func $B)
+            (@id_func $B))))
+  ↪ @Prof_comp_transf
+      $A0 $A $A'
+      $B $B $B
+      $Q $P $P'
+      $H
+      (@id_func $B)
+      $F
+      (@id_func $B)
+      $pp $qq;
+
+// Right-unit co-Yoneda cancellation on a tensor-introduced shaped element.
+rule @Prof_comp_transf
+      $B $A $A'
+      $B $B $B
+      (@Hom_prof_along
+        $B $B $B
+        (@id_func $B)
+        (@id_func $B))
+      (@Prof_tensor
+        $A $B $B
+        $P
+        (@Hom_prof_along
+          $B $B $B
+          (@id_func $B)
+          (@id_func $B)))
+      $P'
+      $H
+      (@id_func $B)
+      $F
+      (@id_func $B)
+      (@Prof_coyoneda_unit_tensor_cov_transf
+        $A $B $A' $B
+        $P $P'
+        $F
+        (@id_func $B)
+        $pp
+        $B
+        (@id_func $B))
+      (@Prof_tensor_hom_hom
+        $B $A $B $B
+        $P
+        (@Hom_prof_along
+          $B $B $B
+          (@id_func $B)
+          (@id_func $B))
+        $H
+        (@id_func $B)
+        (@id_func $B)
+        $p
+        (@Prof_id_transf
+          $B $B
+          (@Hom_prof_along
+            $B $B $B
+            (@id_func $B)
+            (@id_func $B))))
+  ↪ @Prof_comp_transf
+      $B $A $A'
+      $B $B $B
+      (@Hom_prof_along
+        $B $B $B
+        (@id_func $B)
+        (@id_func $B))
+      $P $P'
+      $H
+      (@id_func $B)
+      $F
+      (@id_func $B)
+      $pp $p;
+
+// Left-unit co-Yoneda cancellation on a tensor-introduced general cell.
+rule @Prof_comp_transf
+      $A $A $A
+      $B0 $B $B'
+      $Q
+      (@Prof_tensor
+        $A $A $B
+        (@Hom_prof_along
+          $A $A $A
+          (@id_func $A)
+          (@id_func $A))
+        $P)
+      $P'
+      (@id_func $A)
+      $K
+      (@id_func $A)
+      $G
+      (@Prof_coyoneda_unit_tensor_con_transf
+        $A $B $A $B'
+        $P $P'
+        (@id_func $A)
+        $G
+        $pp
+        $A
+        (@id_func $A))
+      (@Prof_tensor_transf_hom
+        $A $B0 $A $A $B
+        $Q
+        (@Hom_prof_along
+          $A $A $A
+          (@id_func $A)
+          (@id_func $A))
+        $P
+        (@id_func $A)
+        $K
+        (@id_func $A)
+        (@Prof_id_transf
+          $A $A
+          (@Hom_prof_along
+            $A $A $A
+            (@id_func $A)
+            (@id_func $A)))
+        $qq)
+  ↪ @Prof_comp_transf
+      $A $A $A
+      $B0 $B $B'
+      $Q $P $P'
+      (@id_func $A)
+      $K
+      (@id_func $A)
+      $G
+      $pp $qq;
+
+// Left-unit co-Yoneda cancellation on a tensor-introduced shaped element.
+rule @Prof_comp_transf
+      $A $A $A
+      $A $B $B'
+      (@Hom_prof_along
+        $A $A $A
+        (@id_func $A)
+        (@id_func $A))
+      (@Prof_tensor
+        $A $A $B
+        (@Hom_prof_along
+          $A $A $A
+          (@id_func $A)
+          (@id_func $A))
+        $P)
+      $P'
+      (@id_func $A)
+      $K
+      (@id_func $A)
+      $G
+      (@Prof_coyoneda_unit_tensor_con_transf
+        $A $B $A $B'
+        $P $P'
+        (@id_func $A)
+        $G
+        $pp
+        $A
+        (@id_func $A))
+      (@Prof_tensor_hom_hom
+        $A $A $A $B
+        (@Hom_prof_along
+          $A $A $A
+          (@id_func $A)
+          (@id_func $A))
+        $P
+        (@id_func $A)
+        $K
+        (@id_func $A)
+        (@Prof_id_transf
+          $A $A
+          (@Hom_prof_along
+            $A $A $A
+            (@id_func $A)
+            (@id_func $A)))
+        $p)
+  ↪ @Prof_comp_transf
+      $A $A $A
+      $A $B $B'
+      (@Hom_prof_along
+        $A $A $A
+        (@id_func $A)
+        (@id_func $A))
+      $P $P'
+      (@id_func $A)
+      $K
+      (@id_func $A)
+      $G
+      $pp $p;
 
 
 // -------------------------------------------------------------------------------------------------
