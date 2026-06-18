@@ -82,7 +82,14 @@ AREAS: list[Area] = [
     ),
     Area(
         "Adjunction triangle cut-elimination",
-        ("Adjunction", "left_adj", "right_adj", "unit_adj", "counit_adj"),
+        (
+            "Adjunction",
+            "Op_adjunction",
+            "left_adj",
+            "right_adj",
+            "unit_adj",
+            "counit_adj",
+        ),
     ),
     Area(
         "Cat-valued profunctor facade",
@@ -98,6 +105,7 @@ AREAS: list[Area] = [
             "Prof_imply",
             "Prof_eval",
             "Prof_lambda",
+            "Op_prof",
             "Hom_prof",
             "Unit_prof",
             "WeightedLimit",
@@ -154,6 +162,7 @@ AREAS: list[Area] = [
         "Ordinary transformations and structural logic",
         (
             "Transf",
+            "Op_transf",
             "tapp",
             "Const_transf",
             "sym_func",

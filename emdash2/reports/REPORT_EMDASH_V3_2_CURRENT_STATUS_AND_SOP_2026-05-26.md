@@ -153,12 +153,26 @@ cells between `Prof_imply_cov(Hom_prof_along(M,F),W)` and
 `Hom_prof_along(M,L)`. Their beta/eta reductions are owned by
 `Prof_comp_transf`. `Adjunction_prof_transpose` and
 `Adjunction_prof_untranspose` give the narrow inverse representable bridge
-`Hom_B(left(M),F) <-> Hom_A(M,right(F))`. The transparent
-`right_adjoint_preserves_weighted_limit_cov_univ_transf` computes by lifting
-untranspose through implication, applying weighted-limit universality at
-`left(M)`, and transposing the result. A full preserved `WeightedLimit_cov`
-witness, naturality in `M`, and unit/counit component projections remain
-deferred.
+`Hom_B(left(M),F) <-> Hom_A(M,right(F))`. The formerly transparent Phase 4c
+composite has been promoted to the stable
+`right_adjoint_preserves_weighted_limit_cov_univ_transf` head, with the exact
+composition folding to it. `right_adjoint_preserves_weighted_limit_cov`
+constructs the full preserved witness; its universal projection computes to
+that stable map and constructor-local joins preserve both generic beta/eta
+laws. An explicit formula for the inverse preserved cone, naturality in `M`,
+and unit/counit component projections remain deferred.
+
+The first duality slices are active. `Op_transf` reverses ordinary
+transformation direction, vertical composition, and off-diagonal endpoints.
+`Op_adjunction` maps `Adjunction(A,B)` to
+`Adjunction(Op_cat B,Op_cat A)`, swaps the left/right projections, and exchanges
+unit with opposite counit. `Product_swap_func` has full object/arrow
+projections and involution. The semantic object-level `Op_prof(R)` pulls `R`
+back along product swap only. It deliberately does not apply `Op_catd` to
+fibres: under the current higher-category rule
+`Hom_cat(Op_cat X,b,a) -> Hom_cat(X,a,b)`, pointwise fibre-op would incorrectly
+dualize representable hom categories twice. Profunctor-cell duality and
+weighted-colimit packages remain deferred.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

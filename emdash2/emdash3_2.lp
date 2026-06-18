@@ -1514,6 +1514,68 @@ rule @fapp1_fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q $h
 rule @fapp1_fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
+/*
+  Product symmetry.
+
+  Product-valued functors are encoded by their two projection components, so
+  the stable swap head exposes that projection ladder as well as direct object
+  and arrow computations.
+*/
+injective symbol Product_swap_func [A B : Cat]
+  : τ (Functor (Product_cat A B) (Product_cat B A));
+
+rule sigma_Fst (@Product_swap_func $A $B)
+  ↪ @Product_projR_func $A $B;
+
+rule sigma_Snd (@Product_swap_func $A $B)
+  ↪ @Product_projL_func $A $B;
+
+rule @fapp0
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (@Product_swap_func $A $B)
+      (Struct_sigma $x $y)
+  ↪ @Struct_sigma
+      (Obj $B)
+      (λ _ : τ (Obj $B), Obj $A)
+      $y $x;
+
+rule @fapp1_func
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (@Product_swap_func $A $B)
+      $p $q
+  ↪ @Product_swap_func
+      (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
+      (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
+
+rule @fapp1_fapp0
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (@Product_swap_func $A $B)
+      $p $q
+      $h
+  ↪ @Struct_sigma
+      (Obj (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q)))
+      (λ _ : τ (Obj (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q))),
+        Obj (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q)))
+      (sigma_Snd $h)
+      (sigma_Fst $h);
+
+rule @comp_cat_fapp0
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (Product_cat $A $B)
+      (@Product_swap_func $B $A)
+      (@Product_swap_func $A $B)
+  ↪ @id_func (Product_cat $A $B);
+
+rule @Op_func
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (@Product_swap_func $A $B)
+  ↪ @Product_swap_func (Op_cat $A) (Op_cat $B);
+
 // Product identities are pairs of identities.
 rule @id (Product_cat $A $B) (Struct_sigma $x $u)
   ↪ Struct_sigma (@id $A $x) (@id $B $u);
@@ -1651,6 +1713,59 @@ rule @tapp0_fapp0 $A $B $F $H $Y (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $
       (@tapp0_fapp0 $A $B $G $H $Y $η)
       (@tapp0_fapp0 $A $B $F $G $Y $ϵ);
 
+/*
+  Opposite of an ordinary transfor.
+
+  A component F[x] -> G[x] in B becomes G[x] -> F[x] in B^op. Vertical
+  composition order reverses, while the off-diagonal action swaps its base
+  endpoints.
+*/
+injective symbol Op_transf
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  (eta : τ (Transf F G))
+  : τ (Transf
+      (@Op_func A B G)
+      (@Op_func A B F));
+
+rule @Op_transf
+      (Op_cat $A) (Op_cat $B)
+      (@Op_func $A $B $G)
+      (@Op_func $A $B $F)
+      (@Op_transf $A $B $F $G $eta)
+  ↪ $eta;
+
+rule @Op_transf
+      $A $B
+      $F $F
+      (@id (Functor_cat $A $B) $F)
+  ↪ @id
+      (Functor_cat (Op_cat $A) (Op_cat $B))
+      (@Op_func $A $B $F);
+
+rule @Op_transf
+      $A $B
+      $F $H
+      (@comp_fapp0
+        (Functor_cat $A $B)
+        $F $G $H
+        $eta $epsilon)
+  ↪ @comp_fapp0
+      (Functor_cat (Op_cat $A) (Op_cat $B))
+      (@Op_func $A $B $H)
+      (@Op_func $A $B $G)
+      (@Op_func $A $B $F)
+      (@Op_transf $A $B $F $G $epsilon)
+      (@Op_transf $A $B $G $H $eta);
+
+rule @tapp0_fapp0
+      (Op_cat $A) (Op_cat $B)
+      (@Op_func $A $B $G)
+      (@Op_func $A $B $F)
+      $x
+      (@Op_transf $A $B $F $G $eta)
+  ↪ @tapp0_fapp0 $A $B $F $G $x $eta;
+
 // Component of `hom_int` along its contravariant represented-object argument.
 // For f : X ->^A Y, the displayed functor Hom(Y,F-) ⊢ Hom(X,F-) is
 // precomposition by f.
@@ -1719,6 +1834,15 @@ rule sigma_Snd (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
 // Identity transfor off-diagonal action is ordinary functor hom-action.
 rule @tapp1_func $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F)
   ↪ @fapp1_func $A $B $F $X $Y;
+
+// Opposite transfor off-diagonal action swaps the base endpoints.
+rule @tapp1_func
+      (Op_cat $A) (Op_cat $B)
+      (@Op_func $A $B $G)
+      (@Op_func $A $B $F)
+      $x $y
+      (@Op_transf $A $B $F $G $eta)
+  ↪ @tapp1_func $A $B $F $G $y $x $eta;
 
 /*
   Constant transfor induced by an arrow in the codomain.
@@ -2918,6 +3042,57 @@ rule comp_fapp0
   ↪ comp_fapp0
       (fapp1_fapp0 (@right_adj_func $R $L $J) $g)
       $f;
+
+/*
+  Opposite adjunction.
+
+  An adjunction A <-> B dualizes to B^op <-> A^op. The old right adjoint
+  becomes the new left adjoint, and the original counit/unit become the dual
+  unit/counit through `Op_transf`.
+*/
+injective symbol Op_adjunction
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  : τ (Adjunction (Op_cat B) (Op_cat A));
+
+rule @Op_adjunction
+      (Op_cat $B) (Op_cat $A)
+      (@Op_adjunction $A $B $adj)
+  ↪ $adj;
+
+rule @left_adj_func
+      (Op_cat $B) (Op_cat $A)
+      (@Op_adjunction $A $B $adj)
+  ↪ @Op_func $B $A (@right_adj_func $A $B $adj);
+
+rule @right_adj_func
+      (Op_cat $B) (Op_cat $A)
+      (@Op_adjunction $A $B $adj)
+  ↪ @Op_func $A $B (@left_adj_func $A $B $adj);
+
+rule @unit_adj_transf
+      (Op_cat $B) (Op_cat $A)
+      (@Op_adjunction $A $B $adj)
+  ↪ @Op_transf
+      $B $B
+      (@comp_cat_fapp0
+        $B $A $B
+        (@left_adj_func $A $B $adj)
+        (@right_adj_func $A $B $adj))
+      (@id_func $B)
+      (@counit_adj_transf $A $B $adj);
+
+rule @counit_adj_transf
+      (Op_cat $B) (Op_cat $A)
+      (@Op_adjunction $A $B $adj)
+  ↪ @Op_transf
+      $A $A
+      (@id_func $A)
+      (@comp_cat_fapp0
+        $A $B $A
+        (@right_adj_func $A $B $adj)
+        (@left_adj_func $A $B $adj))
+      (@unit_adj_transf $A $B $adj);
 
 /*
   More-internal ordinary hom-action.
@@ -5966,6 +6141,27 @@ symbol Prof (A B : Cat) : Grpd
 ≔ Obj (Prof_cat A B);
 
 /*
+  Object-level opposite profunctor.
+
+  For R : Prof(A,B), the dual has base:
+
+    Prof_base(Op_cat B,Op_cat A) = B × Op_cat A.
+
+  The current higher-category opposite satisfies
+  Hom_{Op X}(b,a) = Hom_X(a,b) without an extra opposite on the hom-category.
+  Therefore profunctor duality is pullback along product symmetry only.
+  Applying `Op_catd` pointwise would incorrectly add a second fibre opposite.
+*/
+symbol Op_prof [A B : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  : τ (Catd (Product_cat B (Op_cat A)))
+≔ @Pullback_catd
+    (Product_cat B (Op_cat A))
+    (Product_cat (Op_cat A) B)
+    R
+    (@Product_swap_func B (Op_cat A));
+
+/*
   Profunctor reindexing.
 
   Surface/formula:
@@ -7508,16 +7704,15 @@ symbol Adjunction_prof_imply_untranspose
     (@Prof_id_transf J' J W);
 
 /*
-  Universal-map part of right-adjoint preservation of weighted limits.
+  Universal map for right-adjoint preservation of weighted limits.
 
-  This is deliberately a transparent cell, not yet a full
-  `WeightedLimit_cov` witness. It composes:
+  The public symbol is a stable rewrite-facing normal form. The semantic
+  composition below folds to it:
 
     implication(untranspose), weighted-limit universality, transpose.
 
-  Packaging the full witness requires naturality/coherence rules ensuring that
-  the corresponding composite cone joins the generic weighted-limit beta/eta
-  reductions.
+  A focused Phase 4d probe showed that the formerly transparent definition was
+  too reducible to discriminate the preservation witness's beta/eta joins.
 */
 symbol right_adjoint_preserves_weighted_limit_cov_univ_transf
   [B J J' A : Cat]
@@ -7549,87 +7744,260 @@ symbol right_adjoint_preserves_weighted_limit_cov_univ_transf
             J' B A
             (@right_adj_func A B adj)
             L))
-        (@id_func J')))
-≔ @Prof_comp_transf
-    I I I
-    J' J' J'
-    (@Prof_imply_cov
-      I J' J
-      (@Hom_prof_along
-        I J A
-        M
-        (@comp_cat_fapp0
-          J B A
-          (@right_adj_func A B adj)
-          F))
-      W)
-    (@Hom_prof_along
-      I J' B
-      (@comp_cat_fapp0
-        I A B
-        (@left_adj_func A B adj)
-        M)
-      L)
-    (@Hom_prof_along
-      I J' A
-      M
-      (@comp_cat_fapp0
-        J' B A
-        (@right_adj_func A B adj)
-        L))
-    (@id_func I)
-    (@id_func J')
-    (@id_func I)
-    (@id_func J')
-    (@Adjunction_prof_transpose A B adj I J' M L)
-    (@Prof_comp_transf
-      I I I
-      J' J' J'
+        (@id_func J')));
+
+// Fold the explicit preservation proof to its stable universal-map head.
+rule @Prof_comp_transf
+      $I $I $I
+      $J' $J' $J'
       (@Prof_imply_cov
-        I J' J
+        $I $J' $J
         (@Hom_prof_along
-          I J A
-          M
+          $I $J $A
+          $M
           (@comp_cat_fapp0
-            J B A
-            (@right_adj_func A B adj)
-            F))
-        W)
-      (@Prof_imply_cov
-        I J' J
-        (@Hom_prof_along
-          I J B
-          (@comp_cat_fapp0
-            I A B
-            (@left_adj_func A B adj)
-            M)
-          F)
-        W)
+            $J $B $A
+            (@right_adj_func $A $B $adj)
+            $F))
+        $W)
       (@Hom_prof_along
-        I J' B
+        $I $J' $B
         (@comp_cat_fapp0
-          I A B
-          (@left_adj_func A B adj)
-          M)
-        L)
-      (@id_func I)
-      (@id_func J')
-      (@id_func I)
-      (@id_func J')
-      (@weighted_limit_cov_univ_transf
-        B J J'
-        F W L
-        isl
-        I
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $L)
+      (@Hom_prof_along
+        $I $J' $A
+        $M
         (@comp_cat_fapp0
-          I A B
-          (@left_adj_func A B adj)
-          M))
-      (@Adjunction_prof_imply_untranspose
-        B J J' A
-        W F
-        adj
-        I M));
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L))
+      (@id_func $I)
+      (@id_func $J')
+      (@id_func $I)
+      (@id_func $J')
+      (@Adjunction_prof_transpose $A $B $adj $I $J' $M $L)
+      (@Prof_comp_transf
+        $I $I $I
+        $J' $J' $J'
+        (@Prof_imply_cov
+          $I $J' $J
+          (@Hom_prof_along
+            $I $J $A
+            $M
+            (@comp_cat_fapp0
+              $J $B $A
+              (@right_adj_func $A $B $adj)
+              $F))
+          $W)
+        (@Prof_imply_cov
+          $I $J' $J
+          (@Hom_prof_along
+            $I $J $B
+            (@comp_cat_fapp0
+              $I $A $B
+              (@left_adj_func $A $B $adj)
+              $M)
+            $F)
+          $W)
+        (@Hom_prof_along
+          $I $J' $B
+          (@comp_cat_fapp0
+            $I $A $B
+            (@left_adj_func $A $B $adj)
+            $M)
+          $L)
+        (@id_func $I)
+        (@id_func $J')
+        (@id_func $I)
+        (@id_func $J')
+        (@weighted_limit_cov_univ_transf
+          $B $J $J'
+          $F $W $L
+          $isl
+          $I
+          (@comp_cat_fapp0
+            $I $A $B
+            (@left_adj_func $A $B $adj)
+            $M))
+        (@Adjunction_prof_imply_untranspose
+          $B $J $J' $A
+          $W $F
+          $adj
+          $I $M))
+  ↪ @right_adjoint_preserves_weighted_limit_cov_univ_transf
+      $B $J $J' $A
+      $W $F $L
+      $isl $adj
+      $I $M;
+
+/*
+  Full right-adjoint preservation witness.
+
+  Its universal projection computes to the stable map above. The inverse cone
+  remains owned by the generic `WeightedLimit_cov` interface. The two local
+  composition rules below join the generic beta/eta rules with the projected
+  universal map without introducing broad implication naturality.
+*/
+symbol right_adjoint_preserves_weighted_limit_cov
+  [B J J' A : Cat]
+  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (@WeightedLimit_cov
+      A J J'
+      (@comp_cat_fapp0 J B A (@right_adj_func A B adj) F)
+      W
+      (@comp_cat_fapp0 J' B A (@right_adj_func A B adj) L));
+
+rule @weighted_limit_cov_univ_transf
+      $A $J $J'
+      (@comp_cat_fapp0 $J $B $A (@right_adj_func $A $B $adj) $F)
+      $W
+      (@comp_cat_fapp0 $J' $B $A (@right_adj_func $A $B $adj) $L)
+      (@right_adjoint_preserves_weighted_limit_cov
+        $B $J $J' $A
+        $W $F $L
+        $isl $adj)
+      $I $M
+  ↪ @right_adjoint_preserves_weighted_limit_cov_univ_transf
+      $B $J $J' $A
+      $W $F $L
+      $isl $adj
+      $I $M;
+
+rule @Prof_comp_transf
+      $I $I $I
+      $J' $J' $J'
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along
+          $I $J $A
+          $M
+          (@comp_cat_fapp0
+            $J $B $A
+            (@right_adj_func $A $B $adj)
+            $F))
+        $W)
+      (@Hom_prof_along
+        $I $J' $A
+        $M
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L))
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along
+          $I $J $A
+          $M
+          (@comp_cat_fapp0
+            $J $B $A
+            (@right_adj_func $A $B $adj)
+            $F))
+        $W)
+      (@id_func $I)
+      (@id_func $J')
+      (@id_func $I)
+      (@id_func $J')
+      (@weighted_limit_cov_cone_transf
+        $A $J $J'
+        (@comp_cat_fapp0
+          $J $B $A
+          (@right_adj_func $A $B $adj)
+          $F)
+        $W
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L)
+        (@right_adjoint_preserves_weighted_limit_cov
+          $B $J $J' $A
+          $W $F $L
+          $isl $adj)
+        $I $M)
+      (@right_adjoint_preserves_weighted_limit_cov_univ_transf
+        $B $J $J' $A
+        $W $F $L
+        $isl $adj
+        $I $M)
+  ↪ @Prof_id_transf
+      $I $J'
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along
+          $I $J $A
+          $M
+          (@comp_cat_fapp0
+            $J $B $A
+            (@right_adj_func $A $B $adj)
+            $F))
+        $W)
+with @Prof_comp_transf
+      $I $I $I
+      $J' $J' $J'
+      (@Hom_prof_along
+        $I $J' $A
+        $M
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L))
+      (@Prof_imply_cov
+        $I $J' $J
+        (@Hom_prof_along
+          $I $J $A
+          $M
+          (@comp_cat_fapp0
+            $J $B $A
+            (@right_adj_func $A $B $adj)
+            $F))
+        $W)
+      (@Hom_prof_along
+        $I $J' $A
+        $M
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L))
+      (@id_func $I)
+      (@id_func $J')
+      (@id_func $I)
+      (@id_func $J')
+      (@right_adjoint_preserves_weighted_limit_cov_univ_transf
+        $B $J $J' $A
+        $W $F $L
+        $isl $adj
+        $I $M)
+      (@weighted_limit_cov_cone_transf
+        $A $J $J'
+        (@comp_cat_fapp0
+          $J $B $A
+          (@right_adj_func $A $B $adj)
+          $F)
+        $W
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L)
+        (@right_adjoint_preserves_weighted_limit_cov
+          $B $J $J' $A
+          $W $F $L
+          $isl $adj)
+        $I $M)
+  ↪ @Prof_id_transf
+      $I $J'
+      (@Hom_prof_along
+        $I $J' $A
+        $M
+        (@comp_cat_fapp0
+          $J' $B $A
+          (@right_adj_func $A $B $adj)
+          $L));
 
 
 // -------------------------------------------------------------------------------------------------

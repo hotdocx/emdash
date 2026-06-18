@@ -3186,6 +3186,67 @@ contravariant weighted-colimit packages, to be obtained through Phase 5
 duality rather than copied from the obsolete draft.
 ```
 
+### Implementation Log 2026-06-19: Phase 4d
+
+The full right-adjoint preservation witness is now active:
+
+```text
+right_adjoint_preserves_weighted_limit_cov(isl,adj)
+  : WeightedLimit_cov(
+      right(adj) o F,
+      W,
+      right(adj) o L).
+```
+
+The Phase 4c universal map had to be promoted from a transparent definition to
+the stable head:
+
+```text
+right_adjoint_preserves_weighted_limit_cov_univ_transf.
+```
+
+The exact three-step semantic composite still computes: a rewrite on the
+outer `Prof_comp_transf` spine folds it to this stable head. The promotion was
+required because the universal map is now a discriminator in the preserved
+witness's beta/eta joins; the transparent composite was elaboration-unstable
+in that position.
+
+The witness's universal projection computes to the stable map. Its inverse
+cone remains abstractly owned by `WeightedLimit_cov`, and two
+constructor-local `Prof_comp_transf` rules join that projected universal map
+with the generic weighted-limit beta/eta laws. No global implication
+naturality or composition-associativity rule was needed.
+
+This is intentionally narrower than the initially anticipated solution. An
+explicit formula for the preserved cone is still useful future work, but it is
+not a prerequisite for expressing or computing the preservation witness.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-012036.log
+```
+
+Failed probes retained as design evidence:
+
+```text
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011543.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011625.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011648.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011704.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011851.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-011910.log
+logs/probes/profunctor_phase4d_preserved_limit_witness_probe-20260619-012001.log
+```
+
+Remaining Phase 4 refinements:
+
+```text
+an explicit semantic preserved-cone composite;
+naturality in the shaped probe M;
+component projections of transpose/untranspose to unit/counit formulas.
+```
+
 ## Phase 5: Duality And Left Adjoints Preserve Weighted Colimits
 
 This is the most important part of the old duality section. Do not port the
@@ -3269,16 +3330,99 @@ Product_swap_func(B,Op_cat A)
   : Product_cat B (Op_cat A) -> Product_cat (Op_cat A) B
 ```
 
-and probably pointwise opposite on fibres:
+### Implementation Log 2026-06-19: Phase 5a
+
+The ordinary duality prerequisites are active.
+
+`Op_transf` maps:
 
 ```text
-Op_prof(R) := Pullback_catd(Op_catd(R), Product_swap_func(B,Op_cat A))
+eta : Transf(F,G)
 ```
 
-The `Op_catd(R)` part is the design choice forced by Cat-valued profunctors:
-it reverses higher cells inside each profunctor value. If a later theorem only
-needs base reversal and not fibre reversal, document that as a different
-operation rather than overloading `Op_prof`.
+to:
+
+```text
+Op_transf(eta) : Transf(Op_func(G),Op_func(F)).
+```
+
+It has checked involution, identity, reversed vertical composition, component
+projection, and swapped off-diagonal action. `Op_adjunction` maps:
+
+```text
+Adjunction(A,B) -> Adjunction(Op_cat B,Op_cat A)
+```
+
+and computes:
+
+```text
+left(Op_adjunction(adj))  -> Op_func(right(adj))
+right(Op_adjunction(adj)) -> Op_func(left(adj))
+unit(Op_adjunction(adj))  -> Op_transf(counit(adj))
+counit(Op_adjunction(adj))-> Op_transf(unit(adj)).
+```
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase5a_ordinary_duality_probe-20260619-012526.log
+```
+
+The initial failed diagnostic log is:
+
+```text
+logs/probes/profunctor_phase5a_ordinary_duality_probe-20260619-012459.log
+```
+
+### Implementation Log 2026-06-19: Phase 5b
+
+`Product_swap_func(A,B)` is active with:
+
+```text
+sigma_Fst(Product_swap_func) -> Product_projR_func
+sigma_Snd(Product_swap_func) -> Product_projL_func;
+```
+
+direct object and arrow computations, involution under composition, and
+compatibility with `Op_func`.
+
+The object-level profunctor dual is:
+
+```text
+Op_prof(R)
+  := Pullback_catd(R,Product_swap_func(B,Op_cat A)).
+```
+
+The earlier tentative pointwise `Op_catd(R)` is rejected for the current
+higher-category opposite. The kernel already computes:
+
+```text
+Hom_cat(Op_cat X,b,a) -> Hom_cat(X,a,b),
+```
+
+so representables dualize correctly by base swap alone. Pointwise fibre-op
+would produce an additional `Op_cat(Hom_cat(X,a,b))`, dualizing the hom
+category twice relative to the established `Op_cat` semantics.
+
+The active checks cover product-swap objects and involution, `Op_func` of
+swap, general `Op_prof` fibre projection, and representable fibres.
+Profunctor-cell duality and whole-object involution remain separate later
+slices.
+
+Successful focused probe:
+
+```text
+logs/probes/profunctor_phase5b_op_prof_probe-20260619-013045.log
+```
+
+Failed probes recording the projection-ladder and endpoint corrections:
+
+```text
+logs/probes/profunctor_phase5b_op_prof_probe-20260619-012931.log
+logs/probes/profunctor_phase5b_op_prof_probe-20260619-012950.log
+logs/probes/profunctor_phase5b_op_prof_probe-20260619-013006.log
+logs/probes/profunctor_phase5b_op_prof_probe-20260619-013020.log
+```
 
 Once these operations exist, define the left-adjoint theorem by duality:
 
@@ -3389,11 +3533,12 @@ owner or receive comparison maps without invalidating the public calculus.
    and symmetric identity-representable co-Yoneda beta rules.
 5. Phase 3a-b, landed: both implication variances, mixed-variance cell actions,
    and general/shaped eval-lambda beta-eta.
-6. Phase 4a-c, landed: covariant weighted-limit universal package, the narrow
-   adjunction/profunctor transpose bridge, and the transparent universal-map
-   part of right-adjoint preservation. Naturality and the full preservation
-   witness remain deferred.
-7. Add op-duality operations required for left-adjoint colimit preservation.
+6. Phase 4a-d, landed: covariant weighted-limit universal package, the narrow
+   adjunction/profunctor transpose bridge, stable universal-map computation,
+   and the full right-adjoint preservation witness.
+7. Phase 5a-b, landed: ordinary transfor/adjunction duality,
+   `Product_swap_func`, and base-swap-only object-level `Op_prof`. Add
+   profunctor-cell and weighted-limit/colimit duality next.
 8. Add the join/directed-inductive example, either primitive or via collage.
 
 Each step should leave:
