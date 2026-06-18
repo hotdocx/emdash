@@ -133,8 +133,8 @@ reindex-then-compose cell head. `Prof_id_transf` supplies its identity, while
 the generic `id_funcd` behavior remains unchanged. Both left and right
 co-Yoneda maps now have checked beta rules for tensor-introduced general cells
 and shaped elements in the identity-representable case. Unit type collapses,
-general tensor associativity/coherence, and functor-induced unit elements
-`Prof_func_hom(F)` remain deferred.
+general tensor associativity/coherence, and generalized co-Yoneda rules using
+the now-active `Prof_func_hom(F)` remain deferred.
 
 Both profunctor implication slices are active. `Prof_imply_cov(O,Q)` is the
 opaque symbolic right adjoint to tensoring on the right by `Q`, while
@@ -190,6 +190,20 @@ double-swap normalization. The full
 right-adjoint preservation theorem applied to `Op_adjunction`; no duplicate
 colimit proof calculus or new rewrite rule is required. Direct
 colimit-oriented universal/cone projection names remain deferred.
+
+The first directed-inductive join slice is active. `Terminal_prof(A,B)` is the
+constant terminal Cat-valued profunctor. `Prof_func_transf(F)` is the stable
+representable equipment cell induced by functorial hom action, with identity
+and composition reductions; `Prof_func_hom(F)` is its transparent shaped
+notation. `Join_cat(A,B)` has two inclusion functors and one internally natural
+cross cell from `Terminal_prof(A,B)` to
+`Hom_prof_along(join_fst_func,join_snd_func)`. `join_cross_hom(a,b)` derives
+the old shaped cross-arrow interface from this cell. The nondependent
+`join_elim_func` computes on both inclusions and on the general and shaped
+cross cells. This replaces the obsolete externally quantified cross family
+plus hand-written naturality equation with one `Prof_transf_cat` datum.
+Dependent elimination, generic directed-inductive types, explicit join hom
+decompositions, and a semantic collage construction remain deferred.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

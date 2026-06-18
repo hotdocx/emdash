@@ -2494,15 +2494,17 @@ Prof_func_hom(F)
   : Prof_hom(F,Unit_prof(B),F),
 ```
 
-packaging the hom-action of `F`. That construction should be implemented as
-its own functorial package before generalizing the beta LHSs.
+packaging the hom-action of `F`. Phase 6a now supplies this as the transparent
+shaped view `Prof_func_hom(F)` of the stable equipment cell
+`Prof_func_transf(F)`. Generalizing the co-Yoneda beta LHSs remains a separate
+task.
 
 Still deferred:
 
 ```text
 associativity/coherence rules for Prof_comp_transf;
 tensor associator and unitors;
-general Prof_func_hom(F);
+general co-Yoneda beta rules using Prof_func_hom(F);
 type-level tensor-unit collapses;
 coend/coinserter semantics.
 ```
@@ -3591,6 +3593,117 @@ join_cross_hom ; join_elim_func(first,second,cross) -> cross
 
 expressed in current v3.2 `Functor`/`Transf`/`Prof_hom` vocabulary.
 
+### Implementation Log 2026-06-19: Phase 6a
+
+The first primitive directed-inductive join slice is active. The key redesign
+is that the old data:
+
+```text
+one_hom(I,a,b)
+natural_eq(...)
+```
+
+is not ported as an externally Lambdapi-quantified family plus a separate
+coherence proof. It is one internally natural equipment cell:
+
+```text
+cross :
+  Terminal_prof(A,B)
+  ->
+  Hom_prof_along(first,second).
+```
+
+Here:
+
+```text
+Terminal_prof(A,B)
+  := Const_catd(Product_cat(Op_cat A,B),Terminal_cat).
+```
+
+This cell lives in `Prof_transf_cat`, so its displayed-functor structure owns
+naturality simultaneously in the contravariant `A` endpoint and covariant `B`
+endpoint.
+
+The reusable prerequisite:
+
+```text
+Prof_func_transf(F) :
+  Unit_prof(A) -> Unit_prof(B)
+```
+
+is the representable equipment cell induced by the hom action of
+`F : A -> B`. It has checked identity and composition reductions.
+`Prof_func_hom(F)` is only a transparent shaped-element alias for the same
+stable cell. `Prof_terminal_hom(F,G)` supplies the unique shaped element of a
+terminal profunctor.
+
+The primitive join surface is:
+
+```text
+Join_cat(A,B)
+join_fst_func : A -> Join_cat(A,B)
+join_snd_func : B -> Join_cat(A,B)
+join_cross_transf :
+  Terminal_prof(A,B)
+  ->
+  Hom_prof_along(join_fst_func,join_snd_func)
+join_cross_hom(a,b)
+join_elim_func(first,second,cross) : Join_cat(A,B) -> E.
+```
+
+`join_cross_hom(a,b)` is derived by composing `join_cross_transf` with
+`Prof_terminal_hom(a,b)`, rather than postulated independently.
+
+The recursor has beta rules on both inclusions. Its cross beta law composes the
+canonical cross cell with `Prof_func_transf(join_elim_func(...))` and reduces
+to the supplied `cross`. A second narrow rule gives the corresponding shaped
+computation without installing global equipment-cell associativity.
+
+The rewrite LHSs use canonical stable forms:
+
+```text
+Hom_prof_along(id,id)
+Const_catd(...,Terminal_cat)
+```
+
+rather than the transparent `Unit_prof` and `Terminal_prof` aliases.
+
+Successful final focused probe:
+
+```text
+logs/probes/profunctor_phase6a_join_probe-20260619-023809.log
+```
+
+Earlier successful milestones:
+
+```text
+logs/probes/profunctor_phase6a_join_probe-20260619-023444.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023527.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023711.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023727.log
+```
+
+The failed logs record endpoint elaboration, the correction from a constant to
+a rewrite-capable `Prof_func_transf` head, and expanded cross-beta assertions
+that fail during dependent elaboration even though the rewrite rules pass
+subject reduction:
+
+```text
+logs/probes/profunctor_phase6a_join_probe-20260619-023349.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023411.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023428.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023544.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023620.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023630.log
+logs/probes/profunctor_phase6a_join_probe-20260619-023746.log
+```
+
+This remains deliberately provisional. It does not yet provide dependent
+elimination, object/hom case decompositions for `Join_cat`, a generic
+directed-inductive framework, or a proof that `Join_cat` is a semantic collage
+of `Terminal_prof`. Those are separate design checkpoints, not implicit claims
+of this primitive recursor.
+
 ## Conditional Dependencies
 
 Use `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`
@@ -3612,7 +3725,7 @@ Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend 
 Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
 Phase 4 weighted limits: plausibly feasible as universal packages over implication.
 Phase 5 op-duality: object/cell duality and the full weighted-colimit preservation theorem landed.
-Phase 6 join: plausibly feasible as primitive directed-inductive example; collage needs more.
+Phase 6 join: first primitive nondependent directed-inductive slice landed; dependent elimination and collage remain.
 ```
 
 Completeness gaps to keep explicit:
@@ -3653,7 +3766,9 @@ owner or receive comparison maps without invalidating the public calculus.
    `Product_swap_func`, base-swap-only object-level `Op_prof`, and stable
    profunctor-cell duality, followed by the transparent weighted-colimit
    classifier and the full left-adjoint preservation witness.
-8. Add the join/directed-inductive example, either primitive or via collage.
+8. Phase 6a, landed: primitive join, internally natural cross cell, shaped
+   cross arrows, and nondependent recursor beta rules. Assess dependent
+   elimination and/or semantic collage only as later independent slices.
 
 Each step should leave:
 

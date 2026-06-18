@@ -92,6 +92,17 @@ AREAS: list[Area] = [
         ),
     ),
     Area(
+        "Directed inductive join category",
+        (
+            "Join_cat",
+            "join_",
+            "Terminal_prof",
+            "Prof_terminal_hom",
+            "Prof_func_transf",
+            "Prof_func_hom",
+        ),
+    ),
+    Area(
         "Cat-valued profunctor facade",
         (
             "Prof_base",

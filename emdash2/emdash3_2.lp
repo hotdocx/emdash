@@ -8186,6 +8186,213 @@ symbol left_adjoint_preserves_weighted_colimit_con
     isc
     (@Op_adjunction A B adj);
 
+/*
+  Directed-inductive join category.
+
+  This is a primitive nondependent recursor stress test, not a claim that the
+  kernel already has a generic higher-inductive or collage construction.
+
+  The old draft quantified externally over shaped cross arrows and added a
+  separate naturality equation. Here that data is one internal equipment cell:
+
+    Terminal_prof(A,B) -> Hom_prof_along(first,second).
+
+  Thus naturality in both endpoints is owned by `Prof_transf_cat`.
+*/
+
+// Constant terminal Cat-valued profunctor.
+symbol Terminal_prof (A B : Cat)
+  : τ (Catd (Product_cat (Op_cat A) B))
+≔ @Const_catd (Product_cat (Op_cat A) B) Terminal_cat;
+
+/*
+  Representable equipment cell induced by a functor's hom action.
+
+  This is the general `Prof_func_hom` prerequisite deferred by Phase 2, at the
+  equipment-cell level needed by the join recursor. It is stable because the
+  current internal ordinary hom-action has no direct uncurried product-family
+  constructor.
+*/
+symbol Prof_func_transf [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Obj
+      (@Prof_transf_cat
+        B A B A
+        (@Unit_prof A)
+        F
+        (@Unit_prof B)
+        F));
+
+rule @Prof_func_transf $A $A (@id_func $A)
+  ↪ @Prof_id_transf
+      $A $A
+      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A));
+
+rule @Prof_comp_transf
+      $A $B $C
+      $A $B $C
+      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+      (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+      (@Hom_prof_along $C $C $C (@id_func $C) (@id_func $C))
+      $F $F
+      $G $G
+      (@Prof_func_transf $B $C $G)
+      (@Prof_func_transf $A $B $F)
+  ↪ @Prof_func_transf
+      $A $C
+      (@comp_cat_fapp0 $A $B $C $G $F);
+
+// Shaped-element notation for the same functor-induced equipment cell.
+symbol Prof_func_hom [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (@Prof_hom A B B F (@Unit_prof B) F)
+≔ @Prof_func_transf A B F;
+
+// Unique shaped element of the terminal profunctor.
+constant symbol Prof_terminal_hom [I A B : Cat]
+  (F : τ (Functor I A))
+  (G : τ (Functor I B))
+  : τ (@Prof_hom I A B F (@Terminal_prof A B) G);
+
+// Primitive join and its two category introductions.
+injective symbol Join_cat (A B : Cat) : Cat;
+
+constant symbol join_fst_func (A B : Cat)
+  : τ (Functor A (@Join_cat A B));
+
+constant symbol join_snd_func (A B : Cat)
+  : τ (Functor B (@Join_cat A B));
+
+// Internally natural family of all directed cross arrows from A to B.
+constant symbol join_cross_transf (A B : Cat)
+  : τ (Obj
+      (@Prof_transf_cat
+        (@Join_cat A B) A
+        (@Join_cat A B) B
+        (@Terminal_prof A B)
+        (@join_fst_func A B)
+        (@Unit_prof (@Join_cat A B))
+        (@join_snd_func A B)));
+
+// Shaped cross arrow derived from the internally natural cross cell.
+symbol join_cross_hom [A B I : Cat]
+  (a : τ (Functor I A))
+  (b : τ (Functor I B))
+  : τ (@Prof_hom
+      I
+      (@Join_cat A B)
+      (@Join_cat A B)
+      (@comp_cat_fapp0
+        I A (@Join_cat A B)
+        (@join_fst_func A B)
+        a)
+      (@Unit_prof (@Join_cat A B))
+      (@comp_cat_fapp0
+        I B (@Join_cat A B)
+        (@join_snd_func A B)
+        b))
+≔ @Prof_comp_transf
+    I A (@Join_cat A B)
+    I B (@Join_cat A B)
+    (@Unit_prof I)
+    (@Terminal_prof A B)
+    (@Unit_prof (@Join_cat A B))
+    a b
+    (@join_fst_func A B)
+    (@join_snd_func A B)
+    (@join_cross_transf A B)
+    (@Prof_terminal_hom I A B a b);
+
+/*
+  Nondependent join recursor.
+
+  `cross` is a single natural equipment cell, rather than a family of
+  Lambdapi-quantified shaped elements plus a separate coherence proof.
+*/
+symbol join_elim_func [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second)))
+  : τ (Functor (@Join_cat A B) E);
+
+rule @comp_cat_fapp0
+      $A
+      (@Join_cat $A $B)
+      $E
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@join_fst_func $A $B)
+  ↪ $first
+with @comp_cat_fapp0
+      $B
+      (@Join_cat $A $B)
+      $E
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@join_snd_func $A $B)
+  ↪ $second;
+
+// The recursor sends the internally natural generating cross cell to `cross`.
+rule @Prof_comp_transf
+      $A (@Join_cat $A $B) $E
+      $B (@Join_cat $A $B) $E
+      (@Const_catd (Product_cat (Op_cat $A) $B) Terminal_cat)
+      (@Hom_prof_along
+        (@Join_cat $A $B)
+        (@Join_cat $A $B)
+        (@Join_cat $A $B)
+        (@id_func (@Join_cat $A $B))
+        (@id_func (@Join_cat $A $B)))
+      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
+      (@join_fst_func $A $B)
+      (@join_snd_func $A $B)
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@Prof_func_transf
+        (@join_elim_func $A $B $E $first $second $cross))
+      (@join_cross_transf $A $B)
+  ↪ $cross;
+
+// Shaped beta law, narrowly reassociating the canonical cross composite.
+rule @Prof_comp_transf
+      $I (@Join_cat $A $B) $E
+      $I (@Join_cat $A $B) $E
+      (@Hom_prof_along $I $I $I (@id_func $I) (@id_func $I))
+      (@Hom_prof_along
+        (@Join_cat $A $B)
+        (@Join_cat $A $B)
+        (@Join_cat $A $B)
+        (@id_func (@Join_cat $A $B))
+        (@id_func (@Join_cat $A $B)))
+      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
+      (@comp_cat_fapp0
+        $I $A (@Join_cat $A $B)
+        (@join_fst_func $A $B)
+        $a)
+      (@comp_cat_fapp0
+        $I $B (@Join_cat $A $B)
+        (@join_snd_func $A $B)
+        $b)
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@join_elim_func $A $B $E $first $second $cross)
+      (@Prof_func_transf
+        (@join_elim_func $A $B $E $first $second $cross))
+      (@join_cross_hom $A $B $I $a $b)
+  ↪ @Prof_comp_transf
+      $I $A $E
+      $I $B $E
+      (@Hom_prof_along $I $I $I (@id_func $I) (@id_func $I))
+      (@Const_catd (Product_cat (Op_cat $A) $B) Terminal_cat)
+      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
+      $a $b
+      $first $second
+      $cross
+      (@Prof_terminal_hom $I $A $B $a $b);
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity

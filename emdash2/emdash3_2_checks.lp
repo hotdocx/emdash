@@ -5121,6 +5121,119 @@ assert [A J J' B : Cat]
       W
       (@comp_cat_fapp0 J' A B (@left_adj_func A B adj) L));
 
+assert [A B : Cat]
+  (a : τ (Obj A))
+  (b : τ (Obj B)) ⊢
+  @fapp0
+    (Product_cat (Op_cat A) B)
+    Cat_cat
+    (@Terminal_prof A B)
+    (Struct_sigma a b)
+  ≡ Terminal_cat;
+
+assert [A B : Cat]
+  (F : τ (Functor A B)) ⊢
+  @Prof_func_transf A B F
+  : τ (Obj
+      (@Prof_transf_cat
+        B A B A
+        (@Unit_prof A)
+        F
+        (@Unit_prof B)
+        F));
+
+assert [A B : Cat]
+  (F : τ (Functor A B)) ⊢
+  @Prof_func_hom A B F
+  : τ (@Prof_hom A B B F (@Unit_prof B) F);
+
+assert [A : Cat] ⊢
+  @Prof_func_transf A A (@id_func A)
+  ≡ @Prof_id_transf
+      A A
+      (@Hom_prof_along A A A (@id_func A) (@id_func A));
+
+assert [A B C : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor B C)) ⊢
+  @Prof_comp_transf
+    A B C
+    A B C
+    (@Hom_prof_along A A A (@id_func A) (@id_func A))
+    (@Hom_prof_along B B B (@id_func B) (@id_func B))
+    (@Hom_prof_along C C C (@id_func C) (@id_func C))
+    F F G G
+    (@Prof_func_transf B C G)
+    (@Prof_func_transf A B F)
+  ≡ @Prof_func_transf
+      A C
+      (@comp_cat_fapp0 A B C G F);
+
+assert [A B : Cat] ⊢
+  @join_cross_transf A B
+  : τ (Obj
+      (@Prof_transf_cat
+        (@Join_cat A B) A
+        (@Join_cat A B) B
+        (@Terminal_prof A B)
+        (@join_fst_func A B)
+        (@Unit_prof (@Join_cat A B))
+        (@join_snd_func A B)));
+
+assert [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second))) ⊢
+  @comp_cat_fapp0
+    A
+    (@Join_cat A B)
+    E
+    (@join_elim_func A B E first second cross)
+    (@join_fst_func A B)
+  ≡ first;
+
+assert [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second))) ⊢
+  @comp_cat_fapp0
+    B
+    (@Join_cat A B)
+    E
+    (@join_elim_func A B E first second cross)
+    (@join_snd_func A B)
+  ≡ second;
+
+assert [A B I : Cat]
+  (a : τ (Functor I A))
+  (b : τ (Functor I B)) ⊢
+  @join_cross_hom A B I a b
+  : τ (@Prof_hom
+      I
+      (@Join_cat A B)
+      (@Join_cat A B)
+      (@comp_cat_fapp0
+        I A (@Join_cat A B)
+        (@join_fst_func A B)
+        a)
+      (@Unit_prof (@Join_cat A B))
+      (@comp_cat_fapp0
+        I B (@Join_cat A B)
+        (@join_snd_func A B)
+        b));
+
 assert
   [A0 A1 A2 B0 B1 B2 : Cat]
   [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
