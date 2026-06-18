@@ -312,15 +312,23 @@ For the hom/unit profunctor:
 
 ```text
 Level 0:
-  Hom_prof(G) : Prof(X,B)
-  Unit_prof(X) := Hom_prof(id_X)
   Hom_prof_along(F,G) : Prof(A,B)
+  Hom_prof(G) := Hom_prof_along(id_X,G)       // notation/specialization
+  Unit_prof(X) := Hom_prof_along(id_X,id_X)
 
-Level 1:
-  Hom_prof_func(X,B)
-    : (B -> X) -> Prof_cat(X,B)
-  Hom_prof_along_left_func(G)
+Level 1a, ordinary curried right-endpoint internalization:
+  hom_int_func(X,B)
+    : (B -> X) -> Prof_curried_cat(X,B)
+  hom_int_func(X,B)[G] = hom_int(G)
+
+Level 1b, one profunctor endpoint internalized at a time:
+  Hom_prof_cov_func(F)
+    : (B -> X) -> Prof_cat(A,B)
+  Hom_prof_cov_func(F)[G] = Hom_prof_along(F,G)
+
+  Hom_prof_con_func(G)
     : (A -> X)^op -> Prof_cat(A,B)
+  Hom_prof_con_func(G)[F] = Hom_prof_along(F,G)
 
 Level 2:
   Hom_prof_along_func2
@@ -333,8 +341,68 @@ The variance is important:
 Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b])
 ```
 
-is contravariant in `F` and covariant in `G`. Therefore a fully internalized
-two-variable owner should have source morally:
+is contravariant in `F` and covariant in `G`. The two Level 1b packages expose
+exactly those two variances without internalizing the pair simultaneously.
+They are the likely packages needed by weighted limits:
+
+```text
+limit_cov:
+  M varies in Hom_prof_along(M,F), hence use Hom_prof_con_func(F)
+
+limit_con:
+  M varies in Hom_prof_along(F,M), hence use Hom_prof_cov_func(F)
+```
+
+The fixed-`F` curried analogue does not require adding `F` as an argument to
+the core `hom_int_func`. Existing precomposition infrastructure can
+postprocess the whole internalized package:
+
+```text
+hom_int_along_func(F)
+  := comp_cat_con_func(Op_func(F)) o hom_int_func(X,B)
+
+hom_int_along_func(F)[G]
+  = hom_int(G) o Op_func(F).
+```
+
+A focused probe confirmed that this definition and object projection
+typecheck. Therefore:
+
+```text
+hom_int_func:
+  should retain the smallest natural arity G |-> hom_int(G).
+
+hom_int_along_func(F):
+  may be introduced as a named fixed-F package if downstream rules repeatedly
+  need G |-> hom_int(G) o Op_func(F).
+
+Hom_prof_cov_func(F):
+  is the corresponding uncurried package if the product-base profunctor head
+  is the rewrite-facing owner.
+```
+
+The left-endpoint package is genuinely contravariant. A candidate curried
+owner is:
+
+```text
+hom_con_int_func(G)
+  : (A -> X)^op -> Prof_curried_cat(A,B)
+
+hom_con_int_func(G)[F]
+  = hom_int(G) o Op_func(F).
+```
+
+Its object formula coincides with the fixed-`G` side of the same hom
+profunctor, but its hom-action must project to precomposition. The current
+`hom_con(W,F)` is an `injective` transparent definition through `hom_` over
+opposites, together with rules that canonicalize its action to the stable
+`hom_precomp_along_*` heads. This means the first new primitive, if one is
+needed, should be the reusable `hom_con_int_func(G)` package rather than an
+automatic promotion of the existing object-level `hom_con` alias. Promote
+`hom_con` itself only if a focused rewrite-facing probe needs to discriminate
+on that head.
+
+A fully internalized two-variable owner would have source morally:
 
 ```text
 Product_cat (Op_cat (Functor_cat A X)) (Functor_cat B X)
@@ -347,11 +415,15 @@ Prof_cat(A,B).
 ```
 
 This is exactly the kind of internalization that should be delayed until a
-downstream theorem needs it. The first implementation should use `Hom_prof(G)`
-as the one-argument core and later add `Hom_prof_along_func2` with projection
-rules if the binary normal form is needed functorially:
+downstream theorem needs both endpoints to vary simultaneously. The first
+implementation should keep `Hom_prof_along(F,G)` external and add only the
+one-endpoint package demanded by the first weighted-limit or co-Yoneda check:
 
 ```text
+Hom_prof_cov_func(F)[G] = Hom_prof_along(F,G)
+Hom_prof_con_func(G)[F] = Hom_prof_along(F,G)
+
+// only later, if a theorem quantifies over both endpoints:
 Hom_prof_along_func2[(F,G)] = Hom_prof_along(F,G)
 Hom_prof_along_func2[(alpha,beta)] = pre/postcomposition on hom fibres
 ```
@@ -439,7 +511,7 @@ has a better semantic owner.
 ## Hom Profunctor Versus Existing Hom Infrastructure
 
 The hom/unit profunctor should not be treated as a fundamentally new hom
-theory. The one-argument core is:
+theory. Its smallest semantic factorization is the one-argument object:
 
 ```text
 Hom_prof(G) : Prof(X,B)
@@ -496,8 +568,11 @@ presentation computes fibrewise to:
 Hom_X(F[a],G[b])
 ```
 
-and agrees fibrewise with the `Hom_catd` presentation. This strongly suggests
-that the binary `Hom_prof_along(F,G)` does not need to be the primitive core.
+and agrees fibrewise with the `Hom_catd` presentation. This proves that the
+binary `Hom_prof_along(F,G)` is not mathematically foundational. It does not
+settle the rewrite-facing normal form: the later Cartier audit shows that
+co-Yoneda, weighted limits, adjunction, and duality repeatedly need both
+reindexed endpoints visible.
 
 The two presentations have different strengths:
 
@@ -514,16 +589,21 @@ hom_int/curry presentation:
   explains why curry/uncurry is relevant but not necessarily a new primitive.
 ```
 
-Therefore the likely implementation order is:
+Therefore the current implementation order is:
 
 ```text
-1. Add Hom_prof(G) as the one-argument core, with direct fibre checks.
-2. Add Unit_prof(X) := Hom_prof(id_X), at least as notation.
-3. Add Hom_prof_along(F,G) as left reindexing of Hom_prof(G).
-4. Add checks comparing Hom_prof_along(F,G) with the Hom_catd and curried
+1. Keep Hom_prof(G) as the semantic factorization and comparison model.
+2. Add Hom_prof_along(F,G) as the sole rewrite-facing primitive/stable head,
+   with direct fibre and hom-action projections.
+3. Define Hom_prof(G) and Unit_prof(X) as identity-endpoint notation or
+   specializations, not competing primitive heads.
+4. Add fold rules from representable Prof_reindex expressions into
+   Hom_prof_along(F,G).
+5. Add checks comparing Hom_prof_along(F,G) with the Hom_catd and curried
    presentations.
-5. Only add a stable binary head if downstream cut-elimination rules need a
-   clean discriminator for already-reindexed representables.
+6. Add Hom_prof_cov_func(F) or Hom_prof_con_func(G) only when a universal
+   formula needs that endpoint internalized.
+7. Add Hom_prof_along_func2 only if a theorem genuinely varies both endpoints.
 ```
 
 If `Hom_prof_along_func2` is eventually added, it should be understood as an
@@ -549,7 +629,8 @@ analogy with `homd_int`, not by forcing `Hom_prof` to cover dependent endpoints.
 ### Single-Argument Core Versus Binary Convenience
 
 Refinement: the semantic core unit-hom profunctor has one functor argument,
-but the rewrite-facing primitive may need two endpoint functor arguments.
+but the current rewrite audit favors a single two-endpoint primitive normal
+form.
 
 The existing `hom_int` already has the shape:
 
@@ -595,27 +676,28 @@ mathematically/foundationally:
   no; the single-argument hom profunctor plus left reindexing is enough.
 
 as notation/API for weighted limits and adjunction formulas:
-  probably yes as a semantic alias, because formulas such as
+  yes, because formulas such as
   Hom_prof_along(M,F) are much easier to read than an explicit reindexing
   expression.
 
 as a primitive stable rewrite owner:
-  only if rewrite rules need to match the binary endpoint normal form.
-  If so, prefer making it the single rewrite-facing hom-prof head from the
-  start, rather than adding it later beside a competing primitive Hom_prof.
+  current evidence says yes: reindexing, co-Yoneda, weighted limits,
+  adjunction, and duality all benefit from matching the binary endpoint
+  normal form. Make it the single rewrite-facing hom-prof head rather than
+  adding it beside a competing primitive Hom_prof.
 ```
 
 This also clarifies naming. The most precise split would be:
 
 ```text
+Hom_prof_along(F,G)
+  sole primitive/stable rewrite-facing hom profunctor.
+
 Hom_prof(G) or Right_repr_prof(G)
-  core single-argument right-representable profunctor.
+  semantic/notation specialization Hom_prof_along(id_X,G).
 
 Unit_prof(X)
-  identity/unit profunctor, defined as Hom_prof(id_X).
-
-Hom_prof_along(F,G) or Unit_prof_along(F,G)
-  binary convenience, defined by left reindexing Hom_prof(G).
+  identity/unit specialization Hom_prof_along(id_X,id_X).
 ```
 
 The old report shorthand `Unit_prof(F,G)` should be read as this binary
@@ -654,8 +736,8 @@ projection as computation, we should first promote or add a stable curry
 projection owner. Do not assume the current curry aliases are safe rewrite
 owners.
 
-Under the hypothesis of a restored/promoted primitive curry package, the
-picture improves. A focused probe with a fresh primitive:
+With a stable curry comparison package, the picture improves. A focused probe
+with a fresh primitive:
 
 ```text
 Probe_curry_func_func
@@ -675,9 +757,10 @@ source = Catd_cat(Product_cat(Op_cat X,B))
 target = Functor_cat(Op_cat X)(Catd_cat B)
 ```
 
-rather than reducible `Functor_cat _ Cat_cat` wrappers. So primitive
-`curry*` is a feasible way to make the single-argument `Hom_prof(G)` inherit
-the existing `hom_int(G)` story computationally.
+rather than reducible `Functor_cat _ Cat_cat` wrappers. So a primitive
+profunctor-specific `Prof_curry*` is a feasible way to make
+`Hom_prof_along(id_X,G)` inherit the existing `hom_int(G)` story
+computationally, without first reverting ordinary global curry.
 
 ### Cartier Binary-Argument Audit
 
@@ -830,24 +913,25 @@ single-argument primitive-curry probe.
 
 ### Curried Hom Infrastructure Versus General Profunctors
 
-There are two different questions that should not be conflated.
+There are three different questions that should not be conflated.
 
-First, internalize the existing `hom_int` in its functor argument:
+First, internalize the existing `hom_int` in its present functor argument:
 
 ```text
-hom_int(F) : X^op -> Catd(B)
+hom_int(G) : X^op -> Catd(B)
+G : B -> X
 ```
 
-where `F : B -> X`. A possible internal package would be:
+The smallest natural package is:
 
 ```text
 hom_int_func(X,B)
   : (B -> X) -> (X^op -> Catd(B))
-hom_int_func[X,B][F] = hom_int(F)
+hom_int_func(X,B)[G] = hom_int(G)
 ```
 
 This is a one-functor internalization. Its hom-action on a transformation
-`eta : F => G` is postcomposition by `eta`. If this package is added, it
+`eta : G => G'` is postcomposition by `eta`. If this package is added, it
 should probably be named something unambiguous like `hom_int_func`, not
 `hom_int_int`: the latter name does not say whether one is internalizing only
 the target functor argument of `hom_int`, or also adding a second endpoint
@@ -867,7 +951,60 @@ Its image consists of profunctors representable in the contravariant `X`
 variable. That is useful and central, but it is not the same as the category of
 all profunctors.
 
-Second, build a unit/representable profunctor from two endpoint functors:
+Fixing another endpoint `F : A -> X` does not force `F` into the primitive
+arity of `hom_int_func`. The current `comp_cat_con_func` already internalizes
+precomposition by a fixed functor, so the complete fixed-`F` family can be
+formed after `G` has been internalized:
+
+```text
+hom_int_along_func(F)
+  := comp_cat_con_func(Op_func(F)) o hom_int_func(X,B)
+
+hom_int_along_func(F)[G]
+  = hom_int(G) o Op_func(F)
+  : A^op -> Catd(B).
+```
+
+A focused probe typechecked this semantic definition and its object
+projection. Therefore `hom_int_func` should not acquire an external `F`
+parameter merely because later formulas use `Hom_X(F-,G-)`. Add a named
+`hom_int_along_func(F)` stable head only if weighted-limit or adjunction rules
+must match that partial family directly.
+
+Second, internalize the left endpoint contravariantly. Fixing `G : B -> X`
+gives the distinct package:
+
+```text
+hom_con_int_func(G)
+  : Op_cat(Functor_cat A X) -> Prof_curried_cat(A,B)
+
+hom_con_int_func(G)[F]
+  = hom_int(G) o Op_func(F).
+```
+
+Although its object projection has the same expression as the fixed-`F`
+package, its hom-action is different: a transformation in the original
+`Functor_cat A X` direction acts by precomposition and therefore becomes
+contravariant. This package is not supplied merely by the object-level
+`hom_int_func`.
+
+The current source already expresses:
+
+```text
+hom_con(W,F)[y] = Hom_X(F[y],W)
+```
+
+as an `injective` transparent definition through `hom_` over opposites. Its
+action is then canonicalized to the primitive `hom_precomp_along_*` projection
+heads. Thus the present evidence does not yet require changing `hom_con`
+itself from a semantic alias to a primitive stable object head. The likely
+missing primitive is the higher contravariant package
+`hom_con_int_func(G)`, whose projections should reuse
+`hom_precomp_along_*`. Reconsider primitive `hom_con` only if a concrete rule
+must discriminate on `hom_con` before those projections are exposed.
+
+Third, build the uncurried unit/representable profunctor from two endpoint
+functors:
 
 ```text
 F : A -> X
@@ -922,10 +1059,30 @@ hom_int(F) => hom_int(G)
 
 unless the existing `hom_postcomp_*` heads are enough for the required checks.
 
-However, this does not make `hom_int_func` or `Hom_prof_along_func2` a
-replacement for general profunctors. They describe representable/unit
-profunctors. A
-general profunctor is an arbitrary family:
+The two one-endpoint uncurried packages should project to the same binary
+normal form:
+
+```text
+Hom_prof_cov_func(F)
+  : Functor_cat B X -> Prof_cat(A,B)
+Hom_prof_cov_func(F)[G] = Hom_prof_along(F,G)
+
+Hom_prof_con_func(G)
+  : Op_cat(Functor_cat A X) -> Prof_cat(A,B)
+Hom_prof_con_func(G)[F] = Hom_prof_along(F,G).
+```
+
+A focused probe typechecked both signatures and projection rules. This is
+preferable to immediately internalizing the pair `(F,G)`, because the weighted
+limit universal properties vary only one probe endpoint at a time:
+
+```text
+Hom_prof_along(M,F)  // M varies contravariantly
+Hom_prof_along(F,M)  // M varies covariantly.
+```
+
+None of these packages replaces general profunctors. They describe only
+representable/unit profunctors. A general profunctor is an arbitrary family:
 
 ```text
 R : Catd(A^op x B)
@@ -962,15 +1119,19 @@ So the globally coherent architecture is:
 
 ```text
 ordinary hom infrastructure
-  hom_int(F)
-  hom_int_func(X,B)                    // if needed
+  hom_int(G)
+  hom_int_func(X,B)                    // G varies covariantly
+  hom_int_along_func(F)                // semantic fixed-F postprocessing
+  hom_con_int_func(G)                  // F varies contravariantly, if needed
   tapp1_int_func_transf(F,G)
 
 representable/unit profunctors
-  Hom_prof(G)
-  Unit_prof(X) = Hom_prof(id_X)
-  Hom_prof_along(F,G)                  // reindexed normal form
-  Hom_prof_along_func2(F,G)            // if needed
+  Hom_prof_along(F,G)                  // single binary rewrite normal form
+  Hom_prof(G) = Hom_prof_along(id_X,G)
+  Unit_prof(X) = Hom_prof_along(id_X,id_X)
+  Hom_prof_cov_func(F)                  // internalized G
+  Hom_prof_con_func(G)                  // internalized F
+  Hom_prof_along_func2                  // only if both must vary
 
 general profunctors
   Prof_curried_cat(A,B)                // optional facade
@@ -980,8 +1141,74 @@ general profunctors
 The maps between these layers should be explicit comparison/projection maps.
 They should not be collapsed by broad rewrite rules.
 
-Because `curry_func_func` and `uncurry_func_func` are semantic composites with
-nontrivial `comp_cat_fapp0` cuts, avoid adding broad rewrite rules that fold
+#### Direct Product Projections Versus Curry Comparison
+
+`Hom_prof_along` needs direct product-base projections regardless of whether a
+curry comparison exists:
+
+```text
+fapp0(Hom_prof_along(F,G),(a,b))
+  -> Hom_X(F[a],G[b])
+
+fapp1_func(Hom_prof_along(F,G),...)
+  -> the existing pre/postcomposition hom-action packages
+
+fapp1_fapp0(Hom_prof_along(F,G),...)
+  -> the capped pre/postcomposition action.
+```
+
+These computations are used by profunctor reindexing, tensor, co-Yoneda, and
+direct fibre inspection. A curry projection cannot replace them.
+
+Conversely, a curry comparison exposes the whole curried family and lets the
+new profunctor head inherit the existing `hom_int` theory:
+
+```text
+Prof_curry(Hom_prof_along(F,G))
+  -> hom_int(G) o Op_func(F).
+```
+
+The recommended design is therefore hybrid:
+
+```text
+direct fapp* projections:
+  foundational computation of the uncurried Hom_prof_along head
+
+stable Prof_curry comparison:
+  bridge to hom_int and the curried partial packages
+
+ordinary curry_func_func:
+  retain its current semantic implementation unless generic curry rules,
+  independently of profunctors, prove that it must again be primitive.
+```
+
+Git history confirms that the present ordinary-curry design was deliberate.
+Before commit `e867e2a` on June 1, 2026, `curry_func`, `curry_func_func`, and
+several curry-specific action heads were primitive. That commit redefined
+`curry_func_func` through `Product_pair_tele_func`,
+`comp_cat_cov_func_func`, and `comp_cat_con_func`, and removed the duplicated
+curry-specific action ladder. The accompanying rearchitecture report says
+that generic pairing and pre/postcomposition should own those computations.
+
+Consequently, do not globally revert `curry_func_func` merely to obtain a
+rewrite discriminator for hom profunctors. First probe a profunctor-specific
+stable comparison:
+
+```text
+Prof_curry_func(A,B)
+  : Prof_cat(A,B) -> Prof_curried_cat(A,B)
+
+Prof_curry_func(A,B)[Hom_prof_along(F,G)]
+  -> hom_int(G) o Op_func(F).
+```
+
+This preserves the ordinary semantic curry architecture while giving
+profunctor rules a stable head. Promote global `curry_func_func` back to a
+primitive only if the same rewrite-facing need appears for non-profunctor
+consumers too.
+
+Because ordinary `curry_func_func` and `uncurry_func_func` are semantic
+composites with nontrivial `comp_cat_fapp0` cuts, avoid broad rules that fold
 arbitrary:
 
 ```text
@@ -991,10 +1218,10 @@ uncurry(hom_int(G) o Op_func(F))
 into a primitive binary head. Prefer:
 
 ```text
-Hom_prof(G)                         // one-argument core
-primitive curry comparison          // Hom_prof(G) -> hom_int(G)
-Hom_prof_along(F,G)                 // optional binary normal form
-optional stable projections later   // only if downstream rules need them
+Hom_prof_along(F,G)                 // binary uncurried normal form
+direct fapp* projections             // product-base computation
+Prof_curry comparison                // bridge to hom_int
+one-endpoint packages                // only as demanded by universal formulas
 ```
 
 If a curried profunctor facade becomes useful, introduce it explicitly:
@@ -1134,6 +1361,25 @@ semantic `Obj(Functord_cat ...)`. More ambitious normal-form assertions for
 `Hom_prof_along` and `Prof_hom` should wait until the first landed checks show
 which projection surface is most readable.
 
+The partial-internalization probe additionally confirmed:
+
+```text
+hom_int_func(X,B)[G] = hom_int(G)
+
+hom_int_along_func(F)
+  := comp_cat_con_func(Op_func(F)) o hom_int_func(X,B)
+
+hom_con_int_func(G)[F]
+  = hom_int(G) o Op_func(F)
+
+Hom_prof_cov_func(F)[G] = Hom_prof_along(F,G)
+Hom_prof_con_func(G)[F] = Hom_prof_along(F,G).
+```
+
+Only the signatures, object projections, and fixed-`F` semantic composition
+were probed. Their transformation/hom actions remain implementation work and
+must be routed through the existing post/precomposition heads.
+
 ## Phase 1: Profunctor Facade
 
 Add readable semantic aliases first:
@@ -1210,7 +1456,8 @@ target := comp_cat_fapp0 G (Product_projR_func (Op_cat X) B)
 Hom_prof(G) := Hom_catd(Const_catd K X, source, target)
 ```
 
-Read this as the semantic specification. There are two implementation routes:
+Read this as the semantic specification. Two implementation routes were
+probed:
 
 ```text
 Route A: one-argument stable head
@@ -1222,7 +1469,12 @@ Route B: two-endpoint stable head
   Hom_prof(G) is notation for Hom_prof_along(id_X,G).
 ```
 
-If we choose Route A and want the primitive curry projection:
+Route A remains mathematically valid and its direct fibre rule typechecks, but
+the Cartier rewrite audit and the endpoint-internalization analysis now favor
+Route B. Route B avoids competing heads and keeps all reindexing cuts visible
+as endpoint arguments.
+
+If Route A were chosen and needed a primitive curry projection:
 
 ```text
 curry*(Hom_prof(G)) -> hom_int(G)
@@ -1232,7 +1484,7 @@ then `Hom_prof` should be declared as a stable/injective head with projection
 rules, not merely as a transparent `≔` alias. The `Hom_catd` expression remains
 the correctness model and comparison check.
 
-If we choose Route B, the primitive curry projections are instead:
+For the recommended Route B, the stable profunctor-curry projections are:
 
 ```text
 curry*(Hom_prof_along(F,G)) -> hom_int(G) o Op_func(F)
@@ -1248,14 +1500,12 @@ Hom_prof_along(F,G)
   := Prof_reindex(Hom_prof(G), F, id_B)
 ```
 
-The direct single-argument fibre rule has been probed successfully. Add a
-stable binary `Hom_prof_along`/`Unit_prof_along` projection head only if later
-checks need a dedicated discriminator.
-
-If added, `Hom_prof_along` should be an injective/stable symbol with fold rules
-from representable reindexing. Do not implement it as a transparent alias if
-co-Yoneda, weighted-limit, adjunction, or duality rules need to match it in
-their LHSs.
+The direct single-argument fibre rule has been probed successfully, but it is
+now a semantic comparison result rather than the proposed rewrite API.
+`Hom_prof_along` should be an injective/stable symbol with fold rules from
+representable reindexing. Do not implement it as a transparent alias because
+co-Yoneda, weighted-limit, adjunction, and duality rules are expected to match
+it in their LHSs.
 
 Then define the old Cartier-shaped element category:
 
@@ -1308,7 +1558,7 @@ The object check already probes cleanly. The arrow check should be added when
 the active implementation lands, because later `Prof_reindex` and `Op_prof`
 depend on product-map arrow action.
 
-For the hom/unit profunctor core:
+For the semantic one-argument comparison model:
 
 ```text
 K      := Prof_base(X,B)
@@ -1319,8 +1569,11 @@ Hom_prof(G) := Hom_catd(Const_catd(K,X), source, target)
 ```
 
 Again, this is the semantic specification. The implementation can use an
-injective `Hom_prof` head with the same fibre computation, then add the
-primitive-curry comparison once the stable curry owner exists.
+identity-left specialization of the binary stable head:
+
+```text
+Hom_prof(G) := Hom_prof_along(id_X,G).
+```
 
 The key point is that:
 
@@ -1339,16 +1592,36 @@ Pi_cat(Const_catd(K,X))          -> Functor_cat K X
 This is why `Hom_catd` is the correct owner: it packages both the fibre formula
 and the base-arrow action of the hom family.
 
-Then define or normalize the binary endpoint surface by reindexing:
+The actual rewrite-facing declaration should be the binary endpoint surface:
+
+```text
+injective symbol Hom_prof_along(F,G) : Prof(A,B)
+
+fibre(Hom_prof_along(F,G),(a,b))
+  -> Hom_X(F[a],G[b])
+
+Prof_reindex(Hom_prof_along(F,G),F',G')
+  -> Hom_prof_along(F o F',G o G')
+```
+
+The exact composition order must follow `comp_cat_fapp0`, and the hom-action
+projections must be probed against `hom_precomp_along_*` and
+`hom_postcomp_*`. The semantic identity:
 
 ```text
 Hom_prof_along(F,G)
-  := Prof_reindex(Hom_prof(G), F, id_B)
+  = Prof_reindex(Hom_prof(G),F,id_B)
 ```
 
-If the Cartier-style cut-elimination rules become brittle when this stays as a
-visible `Prof_reindex`, promote `Hom_prof_along(F,G)` to a stable normal-form
-head and orient representable reindexing toward it.
+should be retained as a comparison/fold rule, not as a transparent definition.
+
+After the fixed-parameter object rules pass, add only the one endpoint package
+needed by the first universal-property check:
+
+```text
+Hom_prof_con_func(G)[F] = Hom_prof_along(F,G)
+Hom_prof_cov_func(F)[G] = Hom_prof_along(F,G).
+```
 
 The first `Prof_hom` API should be:
 
