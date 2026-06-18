@@ -39,6 +39,57 @@ The current `Pi_along_func` and displayed structural-logic plans are supporting
 references only. They should be implemented during this work only when a
 specific profunctor construction needs them.
 
+## Planning Status And Revision Discipline
+
+Every architecture proposed in this report is provisional. The names,
+factorizations, stable-head choices, phase boundaries, and implementation order
+are working hypotheses to be tested by focused Lambdapi probes and by the
+category-theoretic statements that later phases actually require. They may be
+adjusted, replaced, or rolled back as implementation exposes missing
+functoriality, bad normal forms, non-joinable rules, or a better semantic owner.
+
+In particular, this is not a porting specification for the corresponding
+`cartierSolution13.lp` declarations and rules. That file is evidence about
+useful target computations and about failure modes, not an API to reproduce.
+Before implementing each old section:
+
+```text
+1. Restate the intended construction from ordinary category/profunctor
+   semantics, independently of the old Lambdapi formulation.
+2. Identify the least-internal and one-variable-internal forms actually needed
+   by the target theorem or computation.
+3. Locate reusable v3.2 semantic owners and projection infrastructure.
+4. Probe the semantic definition and its required object/arrow/naturality
+   computations.
+5. Introduce a primitive stable head only for a demonstrated rewrite,
+   discrimination, termination, or performance requirement.
+6. Reassess the design before continuing to the next phase.
+```
+
+Discovering a missing general kernel construction is an expected outcome, not
+an exceptional failure. Such a side task should be isolated and implemented as
+general infrastructure when its mathematical ownership is broader than
+profunctors. Examples may include product-map action, opposite transformations,
+adjunction transport, coend-like quotients, or directed-inductive eliminators.
+After completing such a prerequisite, return to the original phase and
+re-evaluate whether its proposed profunctor-specific head is still necessary.
+
+Backtracking is required rather than discouraged when a probe shows that:
+
+```text
+the proposed normal form hides a variable needed by downstream matching;
+two primitive heads create competing canonical forms;
+a rule duplicates computation already owned by a general constructor;
+pointwise object equations cannot be extended functorially or naturally;
+the old Cartier statement was stronger, weaker, or differently oriented than
+the genuine categorical construction;
+later weighted-limit or duality formulas reveal an asymmetric design that
+cannot support both variance directions coherently.
+```
+
+Accordingly, words such as "recommended", "should", and "likely primitive"
+below describe the current best candidate, not a frozen public interface.
+
 ## Review Assessment 2026-06-17
 
 The global shape of this plan is coherent with the current v3.2 architecture:
@@ -223,7 +274,8 @@ the semantic body.
 
 ### Primitive Calculus Heads
 
-These likely need primitive stable heads from the beginning:
+The current hypothesis is that these may need primitive stable heads from the
+beginning:
 
 ```text
 Prof_tensor(R,S)
@@ -240,8 +292,10 @@ Op_weighted_limit_cov / Op_weighted_limit_con
 
 Reason: v3.2 does not currently have semantic coends, closed bicategory
 structure, or op-dual universal-property transport from which these can be
-definitionally derived. Their computation should be governed by explicit
-beta/eta and naturality rules.
+definitionally derived. Their computation may therefore need explicit beta/eta
+and naturality rules. This classification must be rechecked immediately before
+each head is introduced; a prerequisite side task may reveal a better general
+semantic owner.
 
 ## Internalization Strategy
 
@@ -1187,8 +1241,78 @@ Before commit `e867e2a` on June 1, 2026, `curry_func`, `curry_func_func`, and
 several curry-specific action heads were primitive. That commit redefined
 `curry_func_func` through `Product_pair_tele_func`,
 `comp_cat_cov_func_func`, and `comp_cat_con_func`, and removed the duplicated
-curry-specific action ladder. The accompanying rearchitecture report says
-that generic pairing and pre/postcomposition should own those computations.
+curry-specific action ladder. The historical rearchitecture report included
+in that commit says that generic pairing and pre/postcomposition should own
+those computations.
+
+#### Product-Functor Adjunction Interpretation
+
+For a fixed category `B`, the ordinary categorical owner of curry/uncurry is
+the adjunction:
+
+```text
+L_B(A) := Product_cat A B
+R_B(C) := Functor_cat B C
+
+L_B is left adjoint to R_B
+```
+
+with unit and counit components:
+
+```text
+eta_A : A -> Functor_cat B (Product_cat A B)
+eta_A  = Product_pair_tele_func(A,B)
+eta_A[x][y] = (x,y)
+
+epsilon_C : Product_cat (Functor_cat B C) B -> C
+epsilon_C = Eval_func(B,C)
+epsilon_C[(G,y)] = G[y].
+```
+
+Thus the current semantic definitions have exactly the standard mate
+factorizations:
+
+```text
+curry(F : A x B -> C)
+  = R_B(F) o eta_A
+  = comp_cat_cov_func(F) o Product_pair_tele_func(A,B)
+
+uncurry(G : A -> Functor_cat B C)
+  = epsilon_C o L_B(G)
+  = Eval_func(B,C) o (G x id_B).
+```
+
+So the understanding that the curry/uncurry correspondence is definable from
+the unit-counit presentation of this adjunction is correct. More precisely, the
+unit and counit induce the mate maps between:
+
+```text
+Functor_cat (Product_cat A B) C
+Functor_cat A (Functor_cat B C).
+```
+
+In ordinary `Cat` this is naturally an isomorphism of functor categories, not
+only a bijection of object sets. The present v3.2 source implements the
+underlying functors and their principal pointwise computations, but it does not
+yet package the complete adjunction or prove all of:
+
+```text
+naturality of eta and epsilon in the category variables;
+the two triangle identities;
+curry(uncurry(G)) = G and uncurry(curry(F)) = F at the full
+functor/transformation level;
+compatibility with the higher transfor actions needed by the omega setting.
+```
+
+This also clarifies the "more basic primitives" question. The unit component
+already decomposes computationally into constant sections, identity, product
+pairing, and pre/postcomposition. The left action `L_B(G) = G x id_B`
+decomposes through the product-functor infrastructure. Evaluation is canonical
+from the functor-category semantics, but it is not supplied by binary products
+alone; the current kernel keeps `Eval_func` as a named computational
+constructor with pointwise object and hom-action rules. Future work may further
+factor its implementation, but should preserve evaluation as the semantic
+owner of application.
 
 Consequently, do not globally revert `curry_func_func` merely to obtain a
 rewrite discriminator for hom profunctors. First probe a profunctor-specific
@@ -2109,12 +2233,12 @@ compatibility. Ordinary weakening/exchange/contraction already exist.
 Current assessment:
 
 ```text
-Phase 1 profunctor facade: feasible now; semantic route probed successfully.
-Phase 2 tensor: feasible as primitive calculus; not complete as coend semantics.
-Phase 3 implication: feasible as primitive adjoint calculus; probe covariant first.
-Phase 4 weighted limits: feasible as universal packages over implication.
-Phase 5 op-duality: feasible, but needs product swap and careful fibre-op choice.
-Phase 6 join: feasible as primitive directed-inductive example; collage needs more.
+Phase 1 profunctor facade: currently feasible; semantic route probed successfully.
+Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend semantics.
+Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
+Phase 4 weighted limits: plausibly feasible as universal packages over implication.
+Phase 5 op-duality: plausibly feasible, but needs product swap and careful fibre-op choice.
+Phase 6 join: plausibly feasible as primitive directed-inductive example; collage needs more.
 ```
 
 Completeness gaps to keep explicit:
@@ -2151,4 +2275,8 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
 passing, and should add report notes when a semantic definition has to become a
-stable primitive head.
+stable primitive head. Each step is also a design checkpoint: compare the
+result again with the pure categorical semantics, record any prerequisite
+kernel work, and revise later phases rather than preserving an earlier
+provisional choice for compatibility with this report or with
+`cartierSolution13.lp`.
