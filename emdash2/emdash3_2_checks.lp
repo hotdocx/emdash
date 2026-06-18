@@ -4629,6 +4629,67 @@ assert [A B X : Cat]
     (@id_func B)
   ≡ @Hom_prof_along A B X F G;
 
+// Shaped profunctor cells and elements.
+assert [A A' B B' : Cat]
+  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (F : τ (Functor A' A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor B' B)) ⊢
+  @Prof_transf_cat A A' B B' R' F R G
+  ≡ @Functord_cat
+      (Product_cat (Op_cat A') B')
+      R'
+      (@Prof_reindex A A' B B' R F G);
+
+assert [I A B : Cat]
+  (F : τ (Functor I A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor I B)) ⊢
+  @Prof_hom_cat I A B F R G
+  ≡ @Functord_cat
+      (Product_cat (Op_cat I) I)
+      (@Unit_prof I)
+      (@Prof_reindex A I B I R F G);
+
+assert [I A B : Cat]
+  (F : τ (Functor I A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor I B)) ⊢
+  @Prof_hom I A B F R G
+  ≡ Obj
+      (@Functord_cat
+        (Product_cat (Op_cat I) I)
+        (@Unit_prof I)
+        (@Prof_reindex A I B I R F G));
+
+assert [I C : Cat]
+  (F G : τ (Functor I C)) ⊢
+  @Prof_hom_cat I C C F (@Unit_prof C) G
+  ≡ @Functord_cat
+      (Product_cat (Op_cat I) I)
+      (@Unit_prof I)
+      (@Hom_prof_along I I C F G);
+
+assert [A A' B B' X : Cat]
+  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (F : τ (Functor A' A))
+  (H : τ (Functor A X))
+  (K : τ (Functor B X))
+  (G : τ (Functor B' B)) ⊢
+  @Prof_transf_cat
+    A A' B B'
+    R'
+    F
+    (@Hom_prof_along A B X H K)
+    G
+  ≡ @Functord_cat
+      (Product_cat (Op_cat A') B')
+      R'
+      (@Hom_prof_along
+        A' B' X
+        (@comp_cat_fapp0 A' A X H F)
+        (@comp_cat_fapp0 B' B X K G));
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))

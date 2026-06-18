@@ -106,8 +106,13 @@ precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
 specializations. The general `Product_map_func(F,G)` is a transparent paired
 map. `Prof_reindex(R,F,G)` is a stable non-injective head whose projections
 compute as pullback along `Op_func(F) × G`; representable reindexing accumulates
-both endpoint functors. Shaped profunctor elements and curry comparison remain
-the next Phase 1 work.
+both endpoint functors. `Prof_transf_cat(R',F,R,G)` is the transparent category
+of natural family morphisms from `R'` to `Prof_reindex(R,F,G)`.
+`Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
+`Prof_hom(F,R,G)` is its object classifier. In the representable case the
+target computes to `Hom_prof_along(F,G)`. Comparison with ordinary
+`Transf_cat(F,G)` and curry/internalized endpoint packages remain deferred;
+the first shaped-element checks do not require them.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
@@ -236,8 +241,11 @@ left implicit:
   `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
   the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.
   reindexing a representable folds to endpoint composition;
-  `Hom_prof(G)` and `Unit_prof(X)` are transparent specializations, while
-  `Prof_hom` and curry comparison remain deferred;
+  `Hom_prof(G)` and `Unit_prof(X)` are transparent specializations;
+  `Prof_transf_cat(R',F,R,G)`, `Prof_hom_cat(F,R,G)`, and
+  `Prof_hom(F,R,G)` provide the transparent shaped-cell and shaped-element
+  layer through `Functord_cat`; ordinary-transformation and curry comparisons
+  remain deferred;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

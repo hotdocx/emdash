@@ -1984,6 +1984,84 @@ The successful focused probe log is:
 logs/probes/profunctor_phase1b_reindex_probe-20260618-170923.log
 ```
 
+### Implementation Log 2026-06-18: Phase 1c
+
+The third bounded slice adds the shaped-cell and shaped-element layer without
+promoting any new stable head:
+
+```text
+Prof_transf_cat(R',F,R,G)
+  := Functord_cat(R',Prof_reindex(R,F,G))
+
+Prof_hom_cat(F,R,G)
+  := Prof_transf_cat(Unit_prof(I),F,R,G)
+
+Prof_hom(F,R,G)
+  := Obj(Prof_hom_cat(F,R,G)).
+```
+
+Here:
+
+```text
+R' : Prof(A',B')
+F  : A' -> A
+R  : Prof(A,B)
+G  : B' -> B.
+```
+
+Thus `Prof_transf_cat` is the category of natural family morphisms:
+
+```text
+R' -> Prof_reindex(R,F,G)
+```
+
+on the common base `A'^op × B'`. The shaped-element specialization uses a
+single probe category `I` on both sides and the source `Unit_prof(I)`.
+
+A focused probe confirmed that transparent definitions are sufficient. In
+particular:
+
+```text
+Prof_hom_cat(F,Unit_prof(C),G)
+  -> Functord_cat(Unit_prof(I),Hom_prof_along(F,G)).
+```
+
+This is the intended representable shaped-element normal form. The reduction
+uses the Phase 1b representable reindex fold; it does not require a new
+`Prof_hom` discriminator.
+
+The implementation deliberately does not install a global rewrite:
+
+```text
+Prof_hom_cat(F,Unit_prof(C),G) -> Transf_cat(F,G).
+```
+
+Although these categories should be related by the representable/Yoneda
+semantics, they are not presently definitionally identical in the kernel.
+Any such relationship should first be exposed by a named comparison map or
+isomorphism with focused component and naturality checks.
+
+The first Phase 1c checks cover:
+
+```text
+the general Prof_transf_cat classifier;
+the Prof_hom_cat common-shape specialization;
+the Prof_hom object classifier;
+the Unit_prof representable target fold;
+general representable endpoint accumulation under Prof_transf_cat.
+```
+
+No endpoint-internalized `Hom_prof_*_func` package and no curry comparison was
+needed by these checks. Those remain demand-driven side tasks for the first
+tensor, implication, weighted-limit, or adjunction formula that genuinely
+quantifies over an endpoint.
+
+The successful focused probe log is:
+
+```text
+logs/probes/profunctor_phase1c_shaped_elements_probe-20260618-195732.log
+```
+
 ## Phase 2: Tensor And Co-Yoneda
 
 The tensor of profunctors is semantically coend-like:
@@ -2463,9 +2541,9 @@ owner or receive comparison maps without invalidating the public calculus.
    action, `Hom_prof`, and `Unit_prof`.
 2. Phase 1b, landed: semantic `Product_map_func`, stable `Prof_reindex`, its
    full action, and representable endpoint accumulation.
-3. Phase 1c, next: add `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`; introduce
-   endpoint-internalized or curry comparison packages only when these checks
-   demand them.
+3. Phase 1c, landed: transparent `Prof_transf_cat`, `Prof_hom_cat`, and
+   `Prof_hom`; the checks did not demand endpoint-internalized or curry
+   comparison packages.
 4. Add primitive `Prof_tensor` plus narrow transformation constructors.
 5. Add covariant implication/eval/lambda beta-eta.
 6. Add weighted-limit packages and the adjunction transpose bridge.

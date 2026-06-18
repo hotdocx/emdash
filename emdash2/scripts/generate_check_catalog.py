@@ -86,7 +86,15 @@ AREAS: list[Area] = [
     ),
     Area(
         "Cat-valued profunctor facade",
-        ("Prof_base", "Prof_cat", "Prof_reindex", "Hom_prof", "Unit_prof"),
+        (
+            "Prof_base",
+            "Prof_cat",
+            "Prof_reindex",
+            "Prof_transf",
+            "Prof_hom",
+            "Hom_prof",
+            "Unit_prof",
+        ),
     ),
     Area(
         "Products, evaluation, curry/uncurry",

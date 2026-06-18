@@ -6259,6 +6259,49 @@ rule @Prof_reindex
       (@comp_cat_fapp0 $A' $A $X $F $F')
       (@comp_cat_fapp0 $B' $B $X $G $G');
 
+/*
+  Shaped profunctor cells.
+
+  A cell from R' : Prof(A',B') to R : Prof(A,B), over endpoint functors
+  F : A' -> A and G : B' -> B, is a natural family morphism:
+
+    R' -> Prof_reindex(R,F,G).
+
+  The common-shape specialization uses Unit_prof(I) as source. Its objects are
+  shaped elements of R over F : I -> A and G : I -> B. These remain transparent
+  aliases: `Functord_cat` and `Prof_reindex` are the semantic owners, while the
+  representable fold above supplies the useful normal form.
+*/
+symbol Prof_transf_cat [A A' B B' : Cat]
+  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (F : τ (Functor A' A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor B' B))
+  : Cat
+≔ @Functord_cat
+    (Product_cat (Op_cat A') B')
+    R'
+    (@Prof_reindex A A' B B' R F G);
+
+symbol Prof_hom_cat [I A B : Cat]
+  (F : τ (Functor I A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor I B))
+  : Cat
+≔ @Prof_transf_cat
+    A I B I
+    (@Unit_prof I)
+    F
+    R
+    G;
+
+symbol Prof_hom [I A B : Cat]
+  (F : τ (Functor I A))
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (G : τ (Functor I B))
+  : Grpd
+≔ Obj (@Prof_hom_cat I A B F R G);
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity
