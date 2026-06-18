@@ -85,6 +85,10 @@ AREAS: list[Area] = [
         ("Adjunction", "left_adj", "right_adj", "unit_adj", "counit_adj"),
     ),
     Area(
+        "Cat-valued profunctor facade",
+        ("Prof_base", "Prof_cat", "Hom_prof", "Unit_prof"),
+    ),
+    Area(
         "Products, evaluation, curry/uncurry",
         ("Product", "Eval", "curry", "uncurry"),
     ),

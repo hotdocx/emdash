@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-06-16
+Date: 2026-06-18
 
 Use this file as the first stop for report discovery. The active code authority
 is still `emdash3_2.lp`; reports explain status, notation, plans, and review
@@ -25,9 +25,9 @@ decisions.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
   dependent products along functors and comma-category infrastructure.
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
-  preliminary plan for the v3.2 profunctor facade, tensor/internal-hom
-  calculus, weighted limits, op-duality, and the join/directed-inductive
-  stress test.
+  active implementation plan and log for the v3.2 profunctor facade,
+  tensor/internal-hom calculus, weighted limits, op-duality, and the
+  join/directed-inductive stress test.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:

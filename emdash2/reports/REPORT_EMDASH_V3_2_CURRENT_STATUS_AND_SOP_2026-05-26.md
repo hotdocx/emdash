@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-16
+Last consolidated: 2026-06-18
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -67,8 +67,9 @@ Top-level implementation sections now have this active order:
 11-13. Representable and dependent-hom infrastructure
 14-16. Displayed hom-action and laxity extraction
 17. Structural logic and bridges
-18. Applications
-19. Check catalog
+18. Cat-valued profunctors
+19. Applications
+20. Check catalog
 ```
 
 The primary path-induction theorem is `PathInd_transfd(Z)`. The Sigma-total
@@ -96,6 +97,14 @@ product-valued functors reduce to products of functor categories,
 telescope, and semantic uncurry routes through right-ordered `Eval_func` plus
 the `Product_cat_func` stable projection ladder. The transfor action of
 semantic uncurry remains deferred.
+
+The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
+and `Prof` are transparent aliases for families on `A^op × B`.
+`Hom_prof_along(F,G)` is the sole stable representable head, with direct fibre
+computation and a full base-arrow action computing as postcomposition after
+precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
+specializations. Reindexing, shaped profunctor elements, and curry comparison
+remain the next Phase 1 work.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
@@ -214,6 +223,14 @@ left implicit:
   the draft v2 parameterized `adj` interface for v3.2; the v2
   evidence-irrelevance/projection unification rules are intentionally not
   installed unless a future focused probe shows a concrete need;
+- a first Cat-valued profunctor facade:
+  `Prof_base(A,B) = A^op × B`, `Prof_cat(A,B) = Catd_cat(Prof_base(A,B))`,
+  and `Prof(A,B) = Obj(Prof_cat(A,B))` are transparent aliases;
+  `Hom_prof_along(F,G)` is the single stable representable constructor;
+  `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
+  the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.
+  `Hom_prof(G)` and `Unit_prof(X)` are transparent specializations, while
+  profunctor reindexing, `Prof_hom`, and curry comparison remain deferred;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

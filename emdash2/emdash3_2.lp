@@ -54,12 +54,16 @@
          product-pair telescope rules, ordinary exchange/contraction, generic
          ordinary functor hom-action, section pullback, and internal Pi action.
 
-    18. Applications
+    18. Cat-valued profunctors
+         Profunctor base/category aliases, representable hom profunctors, and
+         their mixed-variance base-arrow action.
+
+    19. Applications
          PathOut, fixed-source and telescope path induction, Sigma-total path
          induction, target transport aliases, transitivity/composition
          benchmark, and nested telescope stress examples.
 
-    19. Check catalog
+    20. Check catalog
          Human-readable catalog of normal forms tested by emdash3_2_checks.lp.
 */
 
@@ -282,6 +286,13 @@ flag "print_meta_args" on;
     - Generic Sigma/Pi weakening and ordinary structural-logic helpers have
       basic stable beta assertions; any richer coherence helpers remain
       deferred until needed.
+    - `Prof_base`, `Prof_cat`, and `Prof` are transparent aliases for
+      Cat-valued profunctors on `A^op × B`. `Hom_prof_along(F,G)` is the sole
+      stable representable head; `Hom_prof(G)` and `Unit_prof(X)` are
+      transparent identity-left specializations. Its base-arrow action is
+      owned by `Hom_prof_along_fapp1_func` and computes as postcomposition
+      after precomposition. Reindexing, profunctor transformations, and curry
+      comparison remain later implementation phases.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -5869,10 +5880,173 @@ rule @fdapp1_int_cell
 
 
 // -------------------------------------------------------------------------------------------------
-// 18. Applications: PathOut, path induction, and transitivity
+// 18. Cat-valued profunctors
 // -------------------------------------------------------------------------------------------------
 
-// 18a. Outgoing-path categories and fixed-source path induction.
+/*
+  A v3.2 profunctor from A to B is a Cat-valued functor on A^op × B.
+
+  Surface/formula:
+    Prof_base(A,B) = A^op × B
+    Prof_cat(A,B)  = (A^op × B) ⊢ Cat
+    R : Prof(A,B)  means R : A^op × B ⊢ Cat
+
+    Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b])
+
+  for F : A ⊢ X and G : B ⊢ X.
+
+  The binary `Hom_prof_along` head is the sole rewrite-facing representable
+  constructor. `Hom_prof(G)` and `Unit_prof(X)` below are transparent
+  specializations, so there are no competing primitive normal forms.
+
+  For a base arrow (p,q) : (a,b) -> (a',b') in A^op × B, equivalently
+
+    p : a' ->^A a
+    q : b  ->^B b',
+
+  the hom profunctor acts by:
+
+    h |-> G[q] o h o F[p].
+
+  `Hom_prof_along_fapp1_func` keeps the whole functorial action over product
+  homs visible. The capped rule joins the generic
+  `fapp0(fapp1_func(...),...)` projection at the same pre/postcomposition
+  composite.
+*/
+
+// Profunctor base: A^op × B.
+symbol Prof_base (A B : Cat) : Cat
+≔ Product_cat (Op_cat A) B;
+
+// Category of Cat-valued profunctors A -/-> B.
+symbol Prof_cat (A B : Cat) : Cat
+≔ Catd_cat (Prof_base A B);
+
+// Object/type classifier of Cat-valued profunctors.
+symbol Prof (A B : Cat) : Grpd
+≔ Obj (Prof_cat A B);
+
+// Binary representable hom profunctor.
+//
+// Surface/formula:
+//   Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b]).
+injective symbol Hom_prof_along [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  : τ (Catd (Product_cat (Op_cat A) B));
+
+// Direct fibre computation, formulated for an arbitrary product object.
+rule @fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      (@Hom_prof_along $A $B $X $F $G)
+      $ab
+  ↪ Hom_cat
+      $X
+      (@fapp0 $A $X $F (sigma_Fst $ab))
+      (@fapp0 $B $X $G (sigma_Snd $ab));
+
+// Full base-arrow action of the representable hom profunctor.
+symbol Hom_prof_along_fapp1_func [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  [ab ab' : τ (Obj (Product_cat (Op_cat A) B))]
+  : τ (Functor
+      (Hom_cat (Product_cat (Op_cat A) B) ab ab')
+      (Functor_cat
+        (Hom_cat X
+          (@fapp0 A X F (sigma_Fst ab))
+          (@fapp0 B X G (sigma_Snd ab)))
+        (Hom_cat X
+          (@fapp0 A X F (sigma_Fst ab'))
+          (@fapp0 B X G (sigma_Snd ab')))));
+
+rule @fapp1_func
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      (@Hom_prof_along $A $B $X $F $G)
+      $ab
+      $ab'
+  ↪ @Hom_prof_along_fapp1_func
+      $A $B $X $F $G $ab $ab';
+
+// Applying the full action to a product arrow gives precomposition followed
+// by postcomposition.
+rule fapp0
+      (@Hom_prof_along_fapp1_func
+        $A $B $X $F $G $ab $ab')
+      $pq
+  ↪ @comp_cat_fapp0
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab))
+        (@fapp0 $B $X $G (sigma_Snd $ab)))
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (@fapp0 $B $X $G (sigma_Snd $ab)))
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (@fapp0 $B $X $G (sigma_Snd $ab')))
+      (@hom_postcomp_func
+        $X $B $G
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (sigma_Snd $ab)
+        (sigma_Snd $ab')
+        (sigma_Snd $pq))
+      (@hom_precomp_along_func
+        $A $X $F
+        (@fapp0 $B $X $G (sigma_Snd $ab))
+        (sigma_Fst $ab')
+        (sigma_Fst $ab)
+        (sigma_Fst $pq));
+
+// Capped base-arrow action, joined with the full-action projection above.
+rule @fapp1_fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      (@Hom_prof_along $A $B $X $F $G)
+      $ab
+      $ab'
+      $pq
+  ↪ @comp_cat_fapp0
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab))
+        (@fapp0 $B $X $G (sigma_Snd $ab)))
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (@fapp0 $B $X $G (sigma_Snd $ab)))
+      (Hom_cat $X
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (@fapp0 $B $X $G (sigma_Snd $ab')))
+      (@hom_postcomp_func
+        $X $B $G
+        (@fapp0 $A $X $F (sigma_Fst $ab'))
+        (sigma_Snd $ab)
+        (sigma_Snd $ab')
+        (sigma_Snd $pq))
+      (@hom_precomp_along_func
+        $A $X $F
+        (@fapp0 $B $X $G (sigma_Snd $ab))
+        (sigma_Fst $ab')
+        (sigma_Fst $ab)
+        (sigma_Fst $pq));
+
+// Right-representable hom profunctor, as the identity-left specialization.
+symbol Hom_prof [B X : Cat]
+  (G : τ (Functor B X))
+  : τ (Catd (Product_cat (Op_cat X) B))
+≔ @Hom_prof_along X B X (@id_func X) G;
+
+// Identity/unit hom profunctor.
+symbol Unit_prof (X : Cat)
+  : τ (Catd (Product_cat (Op_cat X) X))
+≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
+
+
+// -------------------------------------------------------------------------------------------------
+// 19. Applications: PathOut, path induction, and transitivity
+// -------------------------------------------------------------------------------------------------
+
+// 19a. Outgoing-path categories and fixed-source path induction.
 
 // Fixed-x layer: outgoing-path category at a fixed source object.
 //
@@ -5914,7 +6088,7 @@ symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
     x
     p;
 
-// 18b. PathOut motives and fixed-source path induction.
+// 19b. PathOut motives and fixed-source path induction.
 //
 // Internalized-x layer: family of motive categories over source objects.
 //
@@ -6206,7 +6380,7 @@ constant symbol PathInd_transfd [Z : Cat]
       (@PathOutReflEval_funcd Z)
       (@PathOutPi_funcd Z));
 
-// 18c. Sigma-total presentation of path induction.
+// 19c. Sigma-total presentation of path induction.
 //
 // Internalized-x source layer: total source family over moving `(x,E)`.
 //
@@ -6268,7 +6442,7 @@ symbol PathInd_funcd [Z : Cat]
   generic uncurrying projection, after `tdapp0_fapp0` is available.
 */
 
-// 18d. Transitivity benchmark.
+// 19d. Transitivity benchmark.
 //
 // Transitivity benchmark layer: target family for composition out of a fixed
 // source x.
@@ -6404,7 +6578,7 @@ symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
 // The semantic `hom_con` presentation of `CompTarget_catd` computes without a
 // CompTarget-specific identity shortcut.
 
-// 18e. Path-induction target transport aliases.
+// 19e. Path-induction target transport aliases.
 //
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
@@ -6449,7 +6623,7 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
 */
 
 
-// 18f. Nested telescope stress examples.
+// 19f. Nested telescope stress examples.
 
 /*
   Mixed-variance family constructors.
@@ -6512,7 +6686,7 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 ≔ @Functord_cat K C (@Nested_transfd_telescope_catd K Z E D FF GG);
 
 // -------------------------------------------------------------------------------------------------
-// 19. Check catalog
+// 20. Check catalog
 // -------------------------------------------------------------------------------------------------
 
 /*

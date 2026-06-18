@@ -2,8 +2,9 @@
 
 Date: 2026-06-17
 
-Status: preliminary implementation plan. No implementation from this report has
-been attempted in `emdash3_2.lp` yet.
+Status: implementation in progress. The first Phase 1 profunctor-facade slice
+is active in `emdash3_2.lp`; reindexing and shaped profunctor elements remain
+the next Phase 1 work.
 
 ## Scope
 
@@ -1785,6 +1786,112 @@ These are important later because adjunctions are most naturally bridges
 between the covariant and contravariant representables of the left and right
 adjoint functors.
 
+### Implementation Log 2026-06-18: Phase 1a
+
+The first bounded implementation slice is now active in `emdash3_2.lp`.
+It intentionally stops before general profunctor reindexing and shaped
+profunctor elements.
+
+Landed transparent aliases:
+
+```text
+Prof_base(A,B) := Product_cat (Op_cat A) B
+Prof_cat(A,B)  := Catd_cat(Prof_base(A,B))
+Prof(A,B)      := Obj(Prof_cat(A,B))
+```
+
+Landed stable representable owner:
+
+```text
+Hom_prof_along(F,G) : Catd(Product_cat(Op_cat A,B))
+Hom_prof_along(F,G)[ab]
+  = Hom_X(F[sigma_Fst(ab)],G[sigma_Snd(ab)])
+```
+
+The implementation confirmed Route B from the design review:
+
+```text
+Hom_prof(G) := Hom_prof_along(id_X,G)
+Unit_prof(X) := Hom_prof_along(id_X,id_X)
+```
+
+Both are transparent specializations. There is no competing primitive
+`Hom_prof` or `Unit_prof` head.
+
+The first full action rung is:
+
+```text
+Hom_prof_along_fapp1_func(F,G,ab,ab')
+```
+
+and for:
+
+```text
+ab  = (a,b)
+ab' = (a',b')
+p : a' ->^A a
+q : b  ->^B b'
+```
+
+its action computes as:
+
+```text
+h |-> G[q] o h o F[p].
+```
+
+The rule is factored through the existing semantic owners:
+
+```text
+hom_precomp_along_func(F,G[b],p)
+hom_postcomp_func(G,F[a'],q)
+```
+
+rather than introducing profunctor-specific pre/postcomposition helpers.
+The direct capped `fapp1_fapp0` rule joins the generic
+`fapp0(fapp1_func(...),...)` route at the same composite.
+
+One initial probe attempted to pattern the full action only at explicit
+`Struct_sigma(a,b)` endpoints. Although the object rule worked, that full
+action surface was brittle for subject reduction and matching. The accepted
+design computes on arbitrary product objects using:
+
+```text
+sigma_Fst(ab)
+sigma_Snd(ab)
+```
+
+and keeps explicit pairs only in diagnostic assertions. This is both more
+general and more consistent with the existing product-projection architecture.
+
+The active checks cover:
+
+```text
+the three facade aliases;
+the representable fibre formula;
+the full action projection;
+the capped pre/postcomposition composite;
+the element action h |-> G[q] o h o F[p];
+the Hom_prof and Unit_prof fibre specializations;
+pointwise agreement with the Hom_catd semantic model.
+```
+
+Deferred from this slice:
+
+```text
+Product_map_func or another two-sided product-map owner;
+Prof_reindex and its representable fold;
+Prof_transf_cat, Prof_hom_cat, and Prof_hom;
+Hom_prof_con_func and Hom_prof_cov_func;
+Prof_curry_func and comparison with hom_int;
+Cov_repr_prof and Con_repr_prof notation.
+```
+
+The focused probe and the bounded active check both passed. The probe log is:
+
+```text
+logs/probes/profunctor_phase1_facade_probe-20260618-165702.log
+```
+
 ## Phase 2: Tensor And Co-Yoneda
 
 The tensor of profunctors is semantically coend-like:
@@ -2233,7 +2340,7 @@ compatibility. Ordinary weakening/exchange/contraction already exist.
 Current assessment:
 
 ```text
-Phase 1 profunctor facade: currently feasible; semantic route probed successfully.
+Phase 1 profunctor facade: partially implemented; base, hom head, and action pass.
 Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend semantics.
 Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
 Phase 4 weighted limits: plausibly feasible as universal packages over implication.
@@ -2260,13 +2367,18 @@ owner or receive comparison maps without invalidating the public calculus.
 
 ## Suggested Implementation Order
 
-1. Add the profunctor facade and `Unit_prof` semantic checks.
-2. Add reindexing and `Prof_hom`.
-3. Add primitive `Prof_tensor` plus narrow transformation constructors.
-4. Add covariant implication/eval/lambda beta-eta.
-5. Add weighted-limit packages and the adjunction transpose bridge.
-6. Add op-duality operations required for left-adjoint colimit preservation.
-7. Add the join/directed-inductive example, either primitive or via collage.
+1. Phase 1a, now landed: facade aliases, `Hom_prof_along`, its first full
+   action, `Hom_prof`, and `Unit_prof`.
+2. Phase 1b: add a semantic two-sided product map, `Prof_reindex`, and their
+   object/arrow checks.
+3. Phase 1c: add `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`; introduce
+   endpoint-internalized or curry comparison packages only when these checks
+   demand them.
+4. Add primitive `Prof_tensor` plus narrow transformation constructors.
+5. Add covariant implication/eval/lambda beta-eta.
+6. Add weighted-limit packages and the adjunction transpose bridge.
+7. Add op-duality operations required for left-adjoint colimit preservation.
+8. Add the join/directed-inductive example, either primitive or via collage.
 
 Each step should leave:
 

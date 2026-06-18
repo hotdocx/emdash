@@ -4337,6 +4337,134 @@ assert [K : Cat] (E : τ (Catd K))
         y
         (@piapp0 K E s y);
 
+// Cat-valued profunctor facade and representable hom action.
+assert [A B : Cat] ⊢
+  Prof_base A B ≡ Product_cat (Op_cat A) B;
+
+assert [A B : Cat] ⊢
+  Prof_cat A B ≡ Catd_cat (Product_cat (Op_cat A) B);
+
+assert [A B : Cat] ⊢
+  Prof A B ≡ Obj (Catd_cat (Product_cat (Op_cat A) B));
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (a : τ (Obj A))
+  (b : τ (Obj B)) ⊢
+  Fibre_cat
+    (@Hom_prof_along A B X F G)
+    (Struct_sigma a b)
+  ≡ Hom_cat X (fapp0 F a) (fapp0 G b);
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B)) ⊢
+  @fapp1_func
+    (Product_cat (Op_cat A) B)
+    Cat_cat
+    (@Hom_prof_along A B X F G)
+    (Struct_sigma a b)
+    (Struct_sigma a' b')
+  ≡ @Hom_prof_along_fapp1_func
+      A B X F G
+      (Struct_sigma a b)
+      (Struct_sigma a' b');
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B))
+  (p : τ (Hom A a' a))
+  (q : τ (Hom B b b')) ⊢
+  @fapp1_fapp0
+    (Product_cat (Op_cat A) B)
+    Cat_cat
+    (@Hom_prof_along A B X F G)
+    (Struct_sigma a b)
+    (Struct_sigma a' b')
+    (Struct_sigma p q)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X (fapp0 F a) (fapp0 G b))
+      (Hom_cat X (fapp0 F a') (fapp0 G b))
+      (Hom_cat X (fapp0 F a') (fapp0 G b'))
+      (@hom_postcomp_func
+        X B G (fapp0 F a') b b' q)
+      (@hom_precomp_along_func
+        A X F (fapp0 G b) a' a p);
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B))
+  (p : τ (Hom A a' a))
+  (q : τ (Hom B b b'))
+  (h : τ (Hom X (fapp0 F a) (fapp0 G b))) ⊢
+  fapp0
+    (@fapp1_fapp0
+      (Product_cat (Op_cat A) B)
+      Cat_cat
+      (@Hom_prof_along A B X F G)
+      (Struct_sigma a b)
+      (Struct_sigma a' b')
+      (Struct_sigma p q))
+    h
+  ≡ @comp_fapp0
+      X
+      (fapp0 F a')
+      (fapp0 G b)
+      (fapp0 G b')
+      (fapp1_fapp0 G q)
+      (@comp_fapp0
+        X
+        (fapp0 F a')
+        (fapp0 F a)
+        (fapp0 G b)
+        h
+        (fapp1_fapp0 F p));
+
+assert [B X : Cat]
+  (G : τ (Functor B X))
+  (x : τ (Obj X))
+  (b : τ (Obj B)) ⊢
+  Fibre_cat (@Hom_prof B X G) (Struct_sigma x b)
+  ≡ Hom_cat X x (fapp0 G b);
+
+assert [X : Cat]
+  (x y : τ (Obj X)) ⊢
+  Fibre_cat (@Unit_prof X) (Struct_sigma x y)
+  ≡ Hom_cat X x y;
+
+assert [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  (a : τ (Obj A))
+  (b : τ (Obj B)) ⊢
+  Fibre_cat
+    (@Hom_catd
+      (Product_cat (Op_cat A) B)
+      (@Const_catd (Product_cat (Op_cat A) B) X)
+      (@comp_cat_fapp0
+        (Product_cat (Op_cat A) B)
+        (Op_cat A)
+        (Op_cat X)
+        (@Op_func A X F)
+        (@Product_projL_func (Op_cat A) B))
+      (@comp_cat_fapp0
+        (Product_cat (Op_cat A) B)
+        B
+        X
+        G
+        (@Product_projR_func (Op_cat A) B)))
+    (Struct_sigma a b)
+  ≡ Fibre_cat
+      (@Hom_prof_along A B X F G)
+      (Struct_sigma a b);
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))
