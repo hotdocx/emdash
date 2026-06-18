@@ -136,6 +136,17 @@ and shaped elements in the identity-representable case. Unit type collapses,
 general tensor associativity/coherence, and functor-induced unit elements
 `Prof_func_hom(F)` remain deferred.
 
+The covariant profunctor implication slice is active. For
+`O : Prof(A,X)` and `Q : Prof(B,X)`,
+`Prof_imply_cov(O,Q) : Prof(A,B)` is an opaque symbolic right adjoint to
+tensoring on the right by `Q`. Reindexing acts on the left endpoints of both
+inputs. `Prof_imply_cov_transf` is covariant in `O` and contravariant in `Q`.
+`Prof_eval_cov_transf` and `Prof_lambda_cov_transf` are checked inverse
+operations for general cells; `Prof_eval_cov_hom_transf` and
+`Prof_lambda_cov_transf_hom` give the shaped specialization. Contravariant
+implication, implication naturality beyond the first mixed-variance cell
+constructor, and end semantics remain deferred.
+
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
 `:^n`; mixed variance is shown on the family occurrence, for example
@@ -278,6 +289,9 @@ left implicit:
   composition;
   named left/right co-Yoneda cells and their identity-representable beta laws
   are active;
+  `Prof_imply_cov`, `Prof_imply_cov_transf`, and the general/shaped
+  `Prof_eval_cov_*`/`Prof_lambda_cov_*` inverse pairs provide the first
+  profunctor internal-hom calculus;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

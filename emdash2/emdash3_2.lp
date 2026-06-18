@@ -6856,6 +6856,170 @@ rule @Prof_comp_transf
       $G
       $pp $p;
 
+/*
+  Covariant profunctor implication.
+
+  For O : Prof(A,X) and Q : Prof(B,X):
+
+    Prof_imply_cov(O,Q) : Prof(A,B)
+
+  is the symbolic right adjoint to tensoring on the right by Q. The current
+  kernel has no end semantics for this object, so the implication itself is
+  opaque and its computational content is exposed through reindexing and the
+  eval/lambda calculus below.
+*/
+symbol Prof_imply_cov [A B X : Cat]
+  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  (Q : τ (Catd (Product_cat (Op_cat B) X)))
+  : τ (Catd (Product_cat (Op_cat A) B));
+
+// Reindexing the implication result acts on the left endpoints of both inputs.
+rule @Prof_reindex
+      $A $A'
+      $B $B'
+      (@Prof_imply_cov $A $B $X $O $Q)
+      $F
+      $M
+  ↪ @Prof_imply_cov
+      $A' $B' $X
+      (@Prof_reindex
+        $A $A' $X $X
+        $O
+        $F
+        (@id_func $X))
+      (@Prof_reindex
+        $B $B' $X $X
+        $Q
+        $M
+        (@id_func $X));
+
+// Implication is covariant in O and contravariant in Q.
+constant symbol Prof_imply_cov_transf
+  [A A' B B' X : Cat]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [O' : τ (Catd (Product_cat (Op_cat A') X))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [Q' : τ (Catd (Product_cat (Op_cat B') X))]
+  [F : τ (Functor A A')]
+  [M : τ (Functor B' B)]
+  (o : τ (Obj (@Prof_transf_cat A' A X X O F O' (@id_func X))))
+  (q : τ (Obj (@Prof_transf_cat B B' X X Q' M Q (@id_func X))))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A B' B'
+        (@Prof_reindex
+          A A B B'
+          (@Prof_imply_cov A B X O Q)
+          (@id_func A)
+          M)
+        F
+        (@Prof_imply_cov A' B' X O' Q')
+        (@id_func B')));
+
+// Evaluation and lambda abstraction for general equipment cells.
+symbol Prof_eval_cov_transf
+  [A B X A' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A B B
+      P
+      F
+      (@Prof_imply_cov A' B X O Q)
+      (@id_func B))))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A X X
+        (@Prof_tensor A B X P Q)
+        F
+        O
+        (@id_func X)));
+
+symbol Prof_lambda_cov_transf
+  [A B X A' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A X X
+      (@Prof_tensor A B X P Q)
+      F
+      O
+      (@id_func X))))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A B B
+        P
+        F
+        (@Prof_imply_cov A' B X O Q)
+        (@id_func B)));
+
+rule @Prof_lambda_cov_transf
+      $A $B $X $A'
+      $P $Q $O $F
+      (@Prof_eval_cov_transf
+        $A $B $X $A'
+        $P $Q $O $F
+        $t)
+  ↪ $t
+with @Prof_eval_cov_transf
+      $A $B $X $A'
+      $P $Q $O $F
+      (@Prof_lambda_cov_transf
+        $A $B $X $A'
+        $P $Q $O $F
+        $t)
+  ↪ $t;
+
+// Shaped specialization of evaluation and lambda abstraction.
+symbol Prof_eval_cov_hom_transf
+  [A X A' : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (@Prof_hom
+    A A' A
+    F
+    (@Prof_imply_cov A' A X O Q)
+    (@id_func A)))
+  : τ (Obj
+      (@Prof_transf_cat A' A X X Q F O (@id_func X)));
+
+symbol Prof_lambda_cov_transf_hom
+  [A X A' : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat A' A X X Q F O (@id_func X))))
+  : τ (@Prof_hom
+      A A' A
+      F
+      (@Prof_imply_cov A' A X O Q)
+      (@id_func A));
+
+rule @Prof_lambda_cov_transf_hom
+      $A $X $A'
+      $Q $O $F
+      (@Prof_eval_cov_hom_transf
+        $A $X $A'
+        $Q $O $F
+        $t)
+  ↪ $t
+with @Prof_eval_cov_hom_transf
+      $A $X $A'
+      $Q $O $F
+      (@Prof_lambda_cov_transf_hom
+        $A $X $A'
+        $Q $O $F
+        $t)
+  ↪ $t;
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity

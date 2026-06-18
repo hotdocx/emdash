@@ -5204,6 +5204,132 @@ assert [A B B' : Cat]
       G
       pp p;
 
+// Covariant profunctor implication and eval/lambda calculus.
+assert [A A' B B' X : Cat]
+  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  (Q : τ (Catd (Product_cat (Op_cat B) X)))
+  (F : τ (Functor A' A))
+  (M : τ (Functor B' B)) ⊢
+  @Prof_reindex
+    A A' B B'
+    (@Prof_imply_cov A B X O Q)
+    F
+    M
+  ≡ @Prof_imply_cov
+      A' B' X
+      (@Prof_reindex A A' X X O F (@id_func X))
+      (@Prof_reindex B B' X X Q M (@id_func X));
+
+assert [A B X : Cat]
+  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  (Q : τ (Catd (Product_cat (Op_cat B) X))) ⊢
+  @Prof_reindex
+    A A B B
+    (@Prof_imply_cov A B X O Q)
+    (@id_func A)
+    (@id_func B)
+  ≡ @Prof_imply_cov A B X O Q;
+
+assert [A A' B B' X : Cat]
+  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [O' : τ (Catd (Product_cat (Op_cat A') X))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [Q' : τ (Catd (Product_cat (Op_cat B') X))]
+  [F : τ (Functor A A')]
+  [M : τ (Functor B' B)]
+  (o : τ (Obj (@Prof_transf_cat A' A X X O F O' (@id_func X))))
+  (q : τ (Obj (@Prof_transf_cat B B' X X Q' M Q (@id_func X)))) ⊢
+  @Prof_imply_cov_transf
+    A A' B B' X
+    O O' Q Q' F M
+    o q
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A B' B'
+        (@Prof_reindex
+          A A B B'
+          (@Prof_imply_cov A B X O Q)
+          (@id_func A)
+          M)
+        F
+        (@Prof_imply_cov A' B' X O' Q')
+        (@id_func B')));
+
+assert [A B X A' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A B B
+      P
+      F
+      (@Prof_imply_cov A' B X O Q)
+      (@id_func B)))) ⊢
+  @Prof_lambda_cov_transf
+    A B X A'
+    P Q O F
+    (@Prof_eval_cov_transf
+      A B X A'
+      P Q O F
+      t)
+  ≡ t;
+
+assert [A B X A' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A X X
+      (@Prof_tensor A B X P Q)
+      F
+      O
+      (@id_func X)))) ⊢
+  @Prof_eval_cov_transf
+    A B X A'
+    P Q O F
+    (@Prof_lambda_cov_transf
+      A B X A'
+      P Q O F
+      t)
+  ≡ t;
+
+assert [A X A' : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (@Prof_hom
+    A A' A
+    F
+    (@Prof_imply_cov A' A X O Q)
+    (@id_func A))) ⊢
+  @Prof_lambda_cov_transf_hom
+    A X A'
+    Q O F
+    (@Prof_eval_cov_hom_transf
+      A X A'
+      Q O F
+      t)
+  ≡ t;
+
+assert [A X A' : Cat]
+  [Q : τ (Catd (Product_cat (Op_cat A) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat A' A X X Q F O (@id_func X)))) ⊢
+  @Prof_eval_cov_hom_transf
+    A X A'
+    Q O F
+    (@Prof_lambda_cov_transf_hom
+      A X A'
+      Q O F
+      t)
+  ≡ t;
+
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)
   (x y : τ (Obj K))

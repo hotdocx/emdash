@@ -2597,6 +2597,167 @@ both covariant and contravariant tensor-introduction rules because composable
 spans are asymmetric. Preserve that asymmetry instead of trying to hide it
 behind one over-general constructor.
 
+### Implementation Log 2026-06-18: Phase 3a
+
+The covariant implication and lambda calculus are now active.
+
+For:
+
+```text
+O : Prof(A,X)
+Q : Prof(B,X),
+```
+
+the stable primitive is:
+
+```text
+Prof_imply_cov(O,Q) : Prof(A,B).
+```
+
+This is the symbolic right adjoint to:
+
+```text
+P |-> Prof_tensor(P,Q).
+```
+
+No fibre/end formula is claimed. As with tensor, the current implementation
+provides a computational universal calculus without pretending that the
+missing end construction is already present.
+
+#### Reindexing
+
+Result endpoint reindexing computes by:
+
+```text
+Prof_reindex(Prof_imply_cov(O,Q),F,M)
+  -> Prof_imply_cov(
+       Prof_reindex(O,F,id_X),
+       Prof_reindex(Q,M,id_X)).
+```
+
+Thus the first result endpoint acts on the left endpoint of `O`, while the
+second result endpoint acts contravariantly through the left endpoint of `Q`.
+The identity overlap reduces back to `Prof_imply_cov(O,Q)` using the Phase 2
+neutral reindex rule.
+
+#### Mixed-variance cell action
+
+For:
+
+```text
+o : Prof_transf_cat(O,F,O',id_X)
+q : Prof_transf_cat(Q',M,Q,id_X),
+```
+
+the constructor:
+
+```text
+Prof_imply_cov_transf(o,q)
+```
+
+has target:
+
+```text
+Prof_transf_cat(
+  Prof_reindex(Prof_imply_cov(O,Q),id_A,M),
+  F,
+  Prof_imply_cov(O',Q'),
+  id_B').
+```
+
+This records the correct variance directly: covariant in `O`, contravariant
+in `Q`. It is the cleaned-up v3.2 counterpart of Cartier's
+`Imply_cov_transf`.
+
+#### General eval/lambda
+
+For:
+
+```text
+P : Prof(A,B)
+Q : Prof(B,X)
+O : Prof(A',X)
+F : A -> A',
+```
+
+the two stable operations are:
+
+```text
+Prof_eval_cov_transf:
+  Prof_transf_cat(P,F,Prof_imply_cov(O,Q),id_B)
+  ->
+  Prof_transf_cat(Prof_tensor(P,Q),F,O,id_X)
+
+Prof_lambda_cov_transf:
+  Prof_transf_cat(Prof_tensor(P,Q),F,O,id_X)
+  ->
+  Prof_transf_cat(P,F,Prof_imply_cov(O,Q),id_B).
+```
+
+Both cancellation directions compute:
+
+```text
+Prof_lambda_cov_transf(Prof_eval_cov_transf(t)) -> t
+Prof_eval_cov_transf(Prof_lambda_cov_transf(t)) -> t.
+```
+
+The rule LHSs keep category, profunctor, and endpoint parameters explicit.
+The first compact probe could not reconstruct the common tensor codomain
+through two nested polymorphic heads. Explicit stable parameters solved the
+subject-reduction problem without changing the public constructor types.
+
+#### Shaped eval/lambda
+
+The shaped specialization is:
+
+```text
+Prof_eval_cov_hom_transf:
+  Prof_hom(F,Prof_imply_cov(O,Q),id_A)
+  ->
+  Prof_transf_cat(Q,F,O,id_X)
+
+Prof_lambda_cov_transf_hom:
+  Prof_transf_cat(Q,F,O,id_X)
+  ->
+  Prof_hom(F,Prof_imply_cov(O,Q),id_A).
+```
+
+It also has both beta/eta cancellations. This is the direct replacement for
+Cartier's `Eval_cov_hom_transf` and `Lambda_cov_transf_hom`, expressed through
+the landed shaped-element API rather than a separate primitive `hom` type.
+
+The active checks cover:
+
+```text
+general and identity implication reindexing;
+the mixed-variance implication cell type;
+general eval-after-lambda and lambda-after-eval;
+shaped eval-after-lambda and lambda-after-eval.
+```
+
+The successful focused probe log is:
+
+```text
+logs/probes/profunctor_phase3a_imply_cov_probe-20260618-210306.log
+```
+
+The initial compact beta-rule failure is retained as:
+
+```text
+logs/probes/profunctor_phase3a_imply_cov_probe-20260618-210209.log
+```
+
+Deferred to Phase 3b and later focused slices:
+
+```text
+Prof_imply_con and its eval/lambda calculus;
+naturality of eval/lambda under Prof_tensor_transf;
+fixed-base internalized Prof_imply_cov_func(Q);
+two-variable implication functors;
+end-based semantics or comparison maps;
+interaction with Prof_comp_transf beyond beta/eta.
+```
+
 ## Phase 4: Weighted Limits
 
 Weighted limits should be packaged over the profunctor implication layer:
@@ -2935,7 +3096,9 @@ owner or receive comparison maps without invalidating the public calculus.
 4. Phase 2a-c, landed: primitive `Prof_tensor`, endpoint reindexing,
    generalized and shaped tensor introductions, equipment-cell composition,
    and symmetric identity-representable co-Yoneda beta rules.
-5. Add covariant implication/eval/lambda beta-eta.
+5. Phase 3a, landed: covariant implication, mixed-variance cell action, and
+   general/shaped eval-lambda beta-eta. Add the contravariant half only after
+   this surface drives a concrete weighted-limit or duality check.
 6. Add weighted-limit packages and the adjunction transpose bridge.
 7. Add op-duality operations required for left-adjoint colimit preservation.
 8. Add the join/directed-inductive example, either primitive or via collage.
