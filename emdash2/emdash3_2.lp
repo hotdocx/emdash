@@ -6243,6 +6243,16 @@ symbol Unit_prof (X : Cat)
   : τ (Catd (Product_cat (Op_cat X) X))
 ≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
 
+// Reindexing along identity endpoint functors is neutral. This rule is added
+// here because tensor reindexing below exposes identity reindexing at the
+// unchanged middle endpoint.
+rule @Prof_reindex
+      $A $A $B $B
+      $R
+      (@id_func $A)
+      (@id_func $B)
+  ↪ $R;
+
 // Reindexing a representable accumulates both endpoint functors.
 rule @Prof_reindex
       $A
@@ -6301,6 +6311,147 @@ symbol Prof_hom [I A B : Cat]
   (G : τ (Functor I B))
   : Grpd
 ≔ Obj (@Prof_hom_cat I A B F R G);
+
+/*
+  Primitive tensor/composition of Cat-valued profunctors.
+
+  Semantically this is the coend-like composite:
+
+    R : Prof(A,B), S : Prof(B,X) |- Prof_tensor(R,S) : Prof(A,X).
+
+  The current kernel has no general coend/coinserter quotient, so the tensor
+  itself is intentionally opaque. Reindexing distributes across only the two
+  exposed endpoints; the shared middle category B remains fixed.
+*/
+symbol Prof_tensor [A B X : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (S : τ (Catd (Product_cat (Op_cat B) X)))
+  : τ (Catd (Product_cat (Op_cat A) X));
+
+rule @Prof_reindex
+      $A $A'
+      $X $X'
+      (@Prof_tensor $A $B $X $R $S)
+      $F
+      $G
+  ↪ @Prof_tensor
+      $A' $B $X'
+      (@Prof_reindex
+        $A $A' $B $B
+        $R
+        $F
+        (@id_func $B))
+      (@Prof_reindex
+        $B $B $X $X'
+        $S
+        (@id_func $B)
+        $G);
+
+/*
+  Tensor introduction for equipment cells.
+
+  The old Cartier draft had separate covariant and contravariant constructors
+  depending on which side first displayed the middle reindexing. With
+  `Prof_transf_cat(R',F,R,G)` both are the same cell type, so one constructor
+  suffices.
+*/
+constant symbol Prof_tensor_transf
+  [A A' B B' X X' : Cat]
+  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
+  [S' : τ (Catd (Product_cat (Op_cat B') X'))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [F : τ (Functor A' A)]
+  [M : τ (Functor B' B)]
+  [G : τ (Functor X' X)]
+  (r : τ (Obj (@Prof_transf_cat A A' B B' R' F R M)))
+  (s : τ (Obj (@Prof_transf_cat B B' X X' S' M S G)))
+  : τ (Obj
+      (@Prof_transf_cat
+        A A' X X'
+        (@Prof_tensor A' B' X' R' S')
+        F
+        (@Prof_tensor A B X R S)
+        G));
+
+// Compose shaped elements through a common middle probe M.
+constant symbol Prof_tensor_hom_hom
+  [I A B X : Cat]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [F : τ (Functor I A)]
+  [G : τ (Functor I X)]
+  (M : τ (Functor I B))
+  (r : τ (@Prof_hom I A B F R M))
+  (s : τ (@Prof_hom I B X M S G))
+  : τ (@Prof_hom I A X F (@Prof_tensor A B X R S) G);
+
+// Compose a general cell on the left with a shaped element on the right.
+constant symbol Prof_tensor_hom_transf
+  [J A' A B X : Cat]
+  [R' : τ (Catd (Product_cat (Op_cat A') J))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor J X)]
+  (M : τ (Functor J B))
+  (r : τ (Obj (@Prof_transf_cat A A' B J R' F R M)))
+  (s : τ (@Prof_hom J B X M S G))
+  : τ (Obj
+      (@Prof_transf_cat
+        A A' X J
+        R'
+        F
+        (@Prof_tensor A B X R S)
+        G));
+
+/*
+  Named co-Yoneda maps.
+
+  These are not type-level unit rewrites. They retain the restricted hom
+  profunctor explicitly and produce an equipment cell to the target
+  profunctor. Beta rules are deferred until the general composition/application
+  operation for cells over reindexed bases is implemented.
+*/
+constant symbol Prof_coyoneda_unit_tensor_cov_transf
+  [A B A' B' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A') B'))]
+  [F : τ (Functor A A')]
+  [G : τ (Functor B B')]
+  (pp : τ (Obj (@Prof_transf_cat A' A B' B P F P' G)))
+  [J : Cat]
+  (N : τ (Functor J B'))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A B' J
+        (@Prof_tensor
+          A B J
+          P
+          (@Hom_prof_along B J B' G N))
+        F
+        P'
+        N));
+
+constant symbol Prof_coyoneda_unit_tensor_con_transf
+  [A B A' B' : Cat]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [P' : τ (Catd (Product_cat (Op_cat A') B'))]
+  [F : τ (Functor A A')]
+  [G : τ (Functor B B')]
+  (pp : τ (Obj (@Prof_transf_cat A' A B' B P F P' G)))
+  [I : Cat]
+  (M : τ (Functor I A'))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' I B' B
+        (@Prof_tensor
+          I A B
+          (@Hom_prof_along I A A' M F)
+          P)
+        M
+        P'
+        G));
 
 
 // -------------------------------------------------------------------------------------------------

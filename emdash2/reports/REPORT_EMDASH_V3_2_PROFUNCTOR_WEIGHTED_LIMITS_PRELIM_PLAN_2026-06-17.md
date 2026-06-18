@@ -2153,6 +2153,166 @@ Unit_prof(A) tensor R
 
 at the type level until there is a concrete associativity/unit coherence test.
 
+### Implementation Log 2026-06-18: Phase 2a-b
+
+The first tensor slice is now active as a symbolic bicategorical calculus.
+The tensor itself is a stable, opaque primitive:
+
+```text
+Prof_tensor(R,S) : Prof(A,X)
+
+R : Prof(A,B)
+S : Prof(B,X).
+```
+
+No fibre formula is claimed. In particular, the implementation does not
+encode a fake Sigma category in place of the missing coend quotient.
+
+General endpoint reindexing computes by:
+
+```text
+Prof_reindex(Prof_tensor(R,S),F,G)
+  -> Prof_tensor(
+       Prof_reindex(R,F,id_B),
+       Prof_reindex(S,id_B,G)).
+```
+
+This rule justified activating the previously deferred neutral law:
+
+```text
+Prof_reindex(R,id_A,id_B) -> R.
+```
+
+The focused probe checked the overlap at identity endpoint functors. It joins:
+the tensor-distribution branch reduces both inner identity reindexings and
+reaches the same `Prof_tensor(R,S)` normal form. The representable reindex fold
+also joins the identity rule because composition with identity reduces.
+
+The first equipment-cell constructor is:
+
+```text
+Prof_tensor_transf(r,s).
+```
+
+For:
+
+```text
+r : Prof_transf_cat(R',F,R,M)
+s : Prof_transf_cat(S',M,S,G),
+```
+
+it produces:
+
+```text
+Prof_transf_cat(
+  Prof_tensor(R',S'),
+  F,
+  Prof_tensor(R,S),
+  G).
+```
+
+This is a deliberate redesign of the Cartier surface. The old
+`Tensor_cov_transf` and `Tensor_con_transf` differed only in where a middle
+substitution was syntactically exposed. In v3.2, `Prof_transf_cat` already
+records both endpoint functors and both old premises elaborate to the same
+general cell type. Keeping two primitive constructors would therefore create
+duplicate normal forms without semantic content.
+
+The first shaped introduction forms are:
+
+```text
+Prof_tensor_hom_hom(M,r,s)
+  : Prof_hom(F,Prof_tensor(R,S),G)
+
+Prof_tensor_hom_transf(M,r,s)
+  : Prof_transf_cat(R',F,Prof_tensor(R,S),G).
+```
+
+The named right- and left-unit co-Yoneda maps are:
+
+```text
+Prof_coyoneda_unit_tensor_cov_transf(pp,N)
+  : Prof_transf_cat(
+      Prof_tensor(P,Hom_prof_along(G,N)),
+      F,
+      P',
+      N)
+
+Prof_coyoneda_unit_tensor_con_transf(pp,M)
+  : Prof_transf_cat(
+      Prof_tensor(Hom_prof_along(M,F),P),
+      M,
+      P',
+      G).
+```
+
+They retain both non-identity endpoint functors directly in
+`Hom_prof_along`, as required by the co-Yoneda semantics reviewed from the old
+draft. They are named cells, not type-level rewrites:
+
+```text
+Prof_tensor(P,Unit_prof) -> P
+Unit_prof tensor P -> P
+```
+
+remain intentionally absent.
+
+The first probe attempt wrote cell terms as `τ(Prof_transf_cat(...))`. It
+failed because `Prof_transf_cat` is a category, not its object classifier.
+The accepted declarations use the canonical:
+
+```text
+τ(Obj(Prof_transf_cat(...))).
+```
+
+No readability-only `Prof_transf` classifier was added.
+
+Co-Yoneda beta rules remain deferred for a concrete architectural reason. A
+beta statement must compose or apply a cell:
+
+```text
+R' -> Prof_reindex(R,F,G)
+```
+
+to another cell or shaped element whose base is itself reindexed. The active
+kernel does not yet have the general equipment-cell composition/application
+operation. Implementing it plausibly requires:
+
+```text
+reindexing a Functord cell along endpoint functors;
+nested Prof_reindex accumulation;
+composition through comp_catd_fapp0;
+focused identity and associativity joins.
+```
+
+This is the next Phase 2 prerequisite. Adding one-off co-Yoneda cancellation
+heads before that operation exists would duplicate the missing general
+calculus.
+
+The active checks cover:
+
+```text
+neutral profunctor reindexing;
+general, left-only, right-only, and identity tensor reindexing;
+representable accumulation inside tensor reindexing;
+the general tensor-cell constructor;
+both shaped tensor introductions;
+both named co-Yoneda cell types.
+```
+
+Successful focused probe logs:
+
+```text
+logs/probes/profunctor_phase2a_tensor_reindex_probe-20260618-200925.log
+logs/probes/profunctor_phase2b_tensor_cells_probe-20260618-201218.log
+```
+
+The failed classifier probe is retained as:
+
+```text
+logs/probes/profunctor_phase2b_tensor_cells_probe-20260618-201134.log
+```
+
 ## Phase 3: Internal Hom / Implication
 
 Add profunctor implication as right-adjoint-like structure to tensor:
@@ -2544,7 +2704,10 @@ owner or receive comparison maps without invalidating the public calculus.
 3. Phase 1c, landed: transparent `Prof_transf_cat`, `Prof_hom_cat`, and
    `Prof_hom`; the checks did not demand endpoint-internalized or curry
    comparison packages.
-4. Add primitive `Prof_tensor` plus narrow transformation constructors.
+4. Phase 2a-b, landed: primitive `Prof_tensor`, endpoint reindexing, one
+   generalized tensor-cell constructor, shaped introductions, and named
+   co-Yoneda cells. Next add general cell composition/application and only
+   then the narrow co-Yoneda beta rules.
 5. Add covariant implication/eval/lambda beta-eta.
 6. Add weighted-limit packages and the adjunction transpose bridge.
 7. Add op-duality operations required for left-adjoint colimit preservation.

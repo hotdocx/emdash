@@ -92,6 +92,7 @@ AREAS: list[Area] = [
             "Prof_reindex",
             "Prof_transf",
             "Prof_hom",
+            "Prof_tensor",
             "Hom_prof",
             "Unit_prof",
         ),

@@ -114,6 +114,20 @@ target computes to `Hom_prof_along(F,G)`. Comparison with ordinary
 `Transf_cat(F,G)` and curry/internalized endpoint packages remain deferred;
 the first shaped-element checks do not require them.
 
+The first tensor/co-Yoneda calculus is also active. `Prof_tensor(R,S)` is an
+opaque primitive composition of Cat-valued profunctors because the kernel has
+no general coend/coinserter quotient. Reindexing a tensor distributes across
+its two exposed endpoints and keeps the middle category fixed; the newly
+active identity-reindex fold removes the unchanged middle reindexings.
+`Prof_tensor_transf` tensors two general cells over one shared middle functor,
+subsuming the old draft's separate covariant/contravariant constructors.
+`Prof_tensor_hom_hom` and `Prof_tensor_hom_transf` provide shaped introduction
+forms. The left and right named co-Yoneda cells are
+`Prof_coyoneda_unit_tensor_con_transf` and
+`Prof_coyoneda_unit_tensor_cov_transf`. Unit type collapses, associativity,
+and co-Yoneda beta rules remain deferred; beta needs a general operation for
+composing/applying cells across reindexed bases.
+
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
 `:^n`; mixed variance is shown on the family occurrence, for example
@@ -246,6 +260,12 @@ left implicit:
   `Prof_hom(F,R,G)` provide the transparent shaped-cell and shaped-element
   layer through `Functord_cat`; ordinary-transformation and curry comparisons
   remain deferred;
+  `Prof_tensor(R,S)` is the primitive profunctor composite;
+  tensor reindexing distributes across exposed endpoints;
+  `Prof_tensor_transf`, `Prof_tensor_hom_hom`, and
+  `Prof_tensor_hom_transf` provide the first cell/element introduction layer;
+  named left/right co-Yoneda cells are active, while their beta laws await
+  general equipment-cell composition/application;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
