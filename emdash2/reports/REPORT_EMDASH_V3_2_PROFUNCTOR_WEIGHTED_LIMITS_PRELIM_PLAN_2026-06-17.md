@@ -548,8 +548,8 @@ analogy with `homd_int`, not by forcing `Hom_prof` to cover dependent endpoints.
 
 ### Single-Argument Core Versus Binary Convenience
 
-Refinement: the primitive/core unit-hom profunctor should probably have one
-functor argument, not two.
+Refinement: the semantic core unit-hom profunctor has one functor argument,
+but the rewrite-facing primitive may need two endpoint functor arguments.
 
 The existing `hom_int` already has the shape:
 
@@ -600,8 +600,9 @@ as notation/API for weighted limits and adjunction formulas:
   expression.
 
 as a primitive stable rewrite owner:
-  not initially; add it only if downstream tensor/weighted-limit rules need a
-  stable head that cannot be recovered from Hom_prof + Prof_reindex.
+  only if rewrite rules need to match the binary endpoint normal form.
+  If so, prefer making it the single rewrite-facing hom-prof head from the
+  start, rather than adding it later beside a competing primitive Hom_prof.
 ```
 
 This also clarifies naming. The most precise split would be:
@@ -737,6 +738,24 @@ Duality:
   Op_mod(Unit_mod(F,G)) -> Unit_mod(Op_func(G), Op_func(F)).
 ```
 
+From pure category-theory semantics, these do not force a primitive binary
+unit. For example:
+
+```text
+P ⊗ Hom_B(G-,N-)
+```
+
+is a whiskered/reindexed co-Yoneda situation. It can be described from the
+ordinary identity hom profunctor plus functorial restriction along `G` and
+`N`. Similarly, `Unit_mod(M,F)` in weighted limits is just the hom profunctor
+of `B` restricted along two shaped probes. Semantically, the two functors are
+reindexing data.
+
+What the Cartier draft shows is not semantic necessity; it shows that the old
+rewrite system wanted the restriction data already absorbed into a visible
+normal form before co-Yoneda, weighted-limit, adjunction, and duality rules
+matched.
+
 Therefore the refined conclusion is:
 
 ```text
@@ -748,34 +767,41 @@ Operational need for a binary normal form:
   equally stable normal forms.
 
 Recommended v3.2 compromise:
-  make Hom_prof(G) the primitive/core right-representable;
-  add primitive Hom_prof_along(F,G) if rules need it on the LHS;
-  orient Prof_reindex(Hom_prof(G),F,H) toward Hom_prof_along(F,G o H);
+  if binary endpoint rules are needed, make the binary head the only
+  rewrite-facing hom-prof head;
+  treat Hom_prof(G) as notation for Hom_prof_along(id_X,G), not as a competing
+  primitive;
+  orient Prof_reindex(Hom_prof_along(F,G),F',H) by endpoint composition;
   orient further reindexing of Hom_prof_along by endpoint composition;
   only then port co-Yoneda, weighted limits, adjunction, and duality rules.
 ```
 
-In other words, the binary form should not be the foundational primitive, but
-if it appears in rewrite-rule LHSs it must be a primitive/stable head, not a
-transparent alias. The semantic equation:
+In other words, the binary form is still only a reindexed hom profunctor
+semantically, but if it appears in rewrite-rule LHSs it must be a
+primitive/stable head, not a transparent alias. Avoid maintaining two competing
+primitive heads:
 
 ```text
-Hom_prof_along(F,G) = Prof_reindex(Hom_prof(G), F, id)
+Hom_prof(G)
+Hom_prof_along(id_X,G)
 ```
 
-should then be implemented by oriented fold/projection rules, not by defining
-`Hom_prof_along` with `≔`.
+for the same normal form. Either orient one away immediately, or prefer a
+single two-endpoint head and make the one-argument spelling notation.
 
 Candidate normal-form rules:
 
 ```text
-Prof_reindex(Hom_prof(G), F, H)
+Hom_prof(G)
+  := Hom_prof_along(id_X,G)        // notation/readability, not primitive
+
+Prof_reindex(Hom_prof_along(id_X,G), F, H)
   -> Hom_prof_along(F, G o H)
 
 Prof_reindex(Hom_prof_along(F,G), F', H)
   -> Hom_prof_along(F' o F, G o H)
 
-curry*(Hom_prof(G))
+curry*(Hom_prof_along(id_X,G))
   -> hom_int(G)
 
 curry*(Hom_prof_along(F,G))
@@ -789,6 +815,18 @@ Composition order in the schematic rules must be adjusted to the landed
 `comp_cat_fapp0` convention, but the invariant is clear: all reindexing cuts
 on representables should accumulate into endpoint functor arguments before
 co-Yoneda, weighted-limit, adjunction, or duality rules try to match them.
+
+A focused probe with a primitive two-endpoint head confirmed this is feasible:
+
+```text
+Hom_prof_along(F,G)[a,b] -> Hom_X(F[a],G[b])
+curry*(Hom_prof_along(F,G)) -> hom_int(G) o Op_func(F)
+curry*(Hom_prof_along(id_X,G)) -> hom_int(G)
+```
+
+using the same canonical `Catd_cat(Product_cat(...))` and
+`Functor_cat(...)(Catd_cat ...)` source/target forms required by the
+single-argument primitive-curry probe.
 
 ### Curried Hom Infrastructure Versus General Profunctors
 
@@ -1152,7 +1190,7 @@ Prof_reindex(R,F,G)
   := Pullback_catd R (Product_map_func (Op_func F) G).
 ```
 
-The first hom/unit profunctor should start with the single-argument core:
+The semantic specification should start with the single-argument core:
 
 ```text
 Hom_prof(G) : Prof(X,B)
@@ -1172,8 +1210,19 @@ target := comp_cat_fapp0 G (Product_projR_func (Op_cat X) B)
 Hom_prof(G) := Hom_catd(Const_catd K X, source, target)
 ```
 
-Read this as the semantic specification. If we want the primitive curry
-projection:
+Read this as the semantic specification. There are two implementation routes:
+
+```text
+Route A: one-argument stable head
+  Hom_prof(G) is primitive/stable.
+  Hom_prof_along(F,G) is added only if a later probe proves it is needed.
+
+Route B: two-endpoint stable head
+  Hom_prof_along(F,G) is the only rewrite-facing primitive.
+  Hom_prof(G) is notation for Hom_prof_along(id_X,G).
+```
+
+If we choose Route A and want the primitive curry projection:
 
 ```text
 curry*(Hom_prof(G)) -> hom_int(G)
@@ -1183,7 +1232,16 @@ then `Hom_prof` should be declared as a stable/injective head with projection
 rules, not merely as a transparent `≔` alias. The `Hom_catd` expression remains
 the correctness model and comparison check.
 
-Then specify the binary endpoint form by left reindexing:
+If we choose Route B, the primitive curry projections are instead:
+
+```text
+curry*(Hom_prof_along(F,G)) -> hom_int(G) o Op_func(F)
+curry*(Hom_prof_along(id_X,G)) -> hom_int(G)
+```
+
+The two-endpoint primitive probe confirmed this route is mechanically feasible.
+
+Either way, specify the binary endpoint form semantically by left reindexing:
 
 ```text
 Hom_prof_along(F,G)
