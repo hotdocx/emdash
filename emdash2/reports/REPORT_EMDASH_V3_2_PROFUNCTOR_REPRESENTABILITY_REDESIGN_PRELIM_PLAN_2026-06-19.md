@@ -46,6 +46,55 @@ algebra lives in fixed profunctor hom-categories. Endpoint-changing equipment
 cells remain useful, but they should not be the default language for vertical
 universal properties.
 
+### Cartier Retrospective: Invertible Does Not Mean Identity
+
+The obsolete `cartierSolution13.lp` did not avoid isomorphisms. It encoded
+several isomorphisms as unnamed pairs of operations with direct beta/eta
+rewrite rules:
+
+```text
+Eval_cov_transf / Lambda_cov_transf;
+limit_cov_univ_transf / limit_cov_cone_transf;
+Adj_cov_hom / Adj_con_hom.
+```
+
+For example, the two weighted-limit comparison maps compose to
+`Id_transf`, but neither map is generally an identity transformation. The old
+preservation symbol:
+
+```text
+righ_adjoint_preserves_limit_cov
+```
+
+was a transparent composite constructing the forward universal
+transformation. It did not construct a complete new `limit_cov` witness with
+both inverse maps and cancellation laws. Its apparent simplicity therefore
+does not establish that right-adjoint preservation can generally be represented
+by an identity-arrow isomorphism.
+
+The old file did use genuine identity-arrow strictification in narrower
+contexts:
+
+```text
+type_intro_hom(eq_refl) -> identity;
+classification followed by decoding in the strict universe -> original data;
+identity functors/transformations used as unchanged legs of larger composites.
+```
+
+This supports a bounded optimization principle:
+
+```text
+when a comparison path is reflexivity, its induced equivalence arrow computes
+to identity;
+```
+
+but not the stronger and generally false principle:
+
+```text
+every representability, adjunction, or preservation comparison is itself an
+identity arrow.
+```
+
 ## Root Causes
 
 ### 1. Destructor-Only Weighted-Limit Witness
@@ -112,10 +161,10 @@ strict isomorphism with on-the-nose inverse equations;
 weak/recursive equivalence with higher cancellation data.
 ```
 
-The present weighted-limit calculus uses strict inverse cancellation. A future
-omega-categorical equivalence and univalence layer may be more foundational,
-but it is not yet available and should not be silently conflated with this
-immediate strict interface.
+The present weighted-limit calculus uses strict inverse cancellation. A
+globally univalent omega-categorical foundation is now the intended
+architecture, but it is not yet active and should not be silently conflated
+with this immediate strict interface.
 
 ### 4. General Equipment Composition Used For Vertical Maps
 
@@ -165,9 +214,23 @@ representability concept.
 
 ## Recommended Architecture
 
-### Semantic Strength: Identity, Strict Isomorphism, And Equivalence
+### Semantic Strength: Three Distinct Equivalence Layers
 
-For the immediate redesign, use an explicitly strict computational interface:
+Do not overload one `Equiv` name for three different constructions.
+
+First, HoTT equivalence between groupoid/type classifiers:
+
+```text
+TypeEquiv(A,B)
+```
+
+should eventually be based on a map whose homotopy fibres are contractible, or
+on an equivalent half-adjoint formulation. A pair of potentially different
+left and right inverses is a useful bi-invertible presentation, but plain
+quasi-inverse data should not silently be treated as the final
+proof-irrelevant `IsEquivMap` predicate.
+
+Second, strict isomorphism arrows in a category:
 
 ```text
 StrictIso(C,x,y)
@@ -179,74 +242,60 @@ strict_iso_comp
 strict_iso_fmap(F,i)
 ```
 
-`StrictIso(C,x,y)` should initially mean arrows:
+should consist of arrows `to : x -> y` and `from : y -> x` with equality paths
+showing that both composites are identities. It needs an introduction form so
+that preservation theorems can construct witnesses.
+
+Third, weak omega-categorical equivalence arrows:
 
 ```text
-to   : x -> y
-from : y -> x
+OmegaEquiv(C,x,y)
+omega_equiv_to
+omega_equiv_left_inv
+omega_equiv_right_inv
+omega_equiv_left_cancel
+omega_equiv_right_cancel
 ```
 
-with both composites equal to the corresponding identity arrows. It must have
-an introduction form so that preservation theorems can construct witnesses,
-rather than only project behavior from primitive inhabitants.
+may use distinct left and right inverse arrows. Their cancellation data should
+be equivalences recursively in the next hom-categories rather than necessarily
+groupoid equality proofs. A feasible Lambdapi presentation may declare the
+`OmegaEquiv` classifier first and expose the recursive structure through
+separate destructor/constructor symbols.
 
-When `x` and `y` reduce to the same object and the intended maps reduce to
-identity arrows, use `strict_iso_refl` or a similarly narrow identity-arrow
-constructor. This stronger case should be preferred whenever it genuinely
-applies because its projections and cancellations can compute without any
-general inverse or associativity proof. It must not be asserted for a general
-weighted-limit or adjunction comparison merely to simplify normalization:
-those comparisons are not ordinarily identity arrows.
-
-An eventual equivalence layer may have a different shape. For example:
+There are canonical bridges:
 
 ```text
-Equiv(C,x,y)
-equiv_to
-equiv_left_inv
-equiv_right_inv
-equiv_left_cancel
-equiv_right_cancel
+StrictIso(C,x,y) -> OmegaEquiv(C,x,y);
+path x y         -> OmegaEquiv(C,x,y).
 ```
 
-Here `equiv_left_inv` and `equiv_right_inv` may be distinct arrows from `y` to
-`x`. Their cancellation witnesses need not be equality proofs: they may
-themselves be recursively expressed by equivalences in the appropriate next
-hom-category. This is compatible with a later account of:
+The path bridge should compute by equality induction:
 
 ```text
-univalent category: object paths correspond to equivalences;
-univalent Cat universe: paths in Cat correspond to category equivalences.
+idtoequiv_cat(refl_x) -> omega_equiv_refl(x);
+omega_equiv_to(omega_equiv_refl(x)) -> id_x.
 ```
 
-It is plausible that this recursive `Equiv` interface will eventually be the
-deeper foundation and that `StrictIso` will be a strict specialization.
-However, it is not yet established that a coinductive/co-recursive equivalence
-encoding is easier to implement in Lambdapi. It depends on unresolved equality,
-universe, productivity, and higher-coherence design. It should be explored as a
-separate foundational side quest rather than made a prerequisite for replacing
-the current preservation axiom.
+Thus identity-arrow computation is the reflexivity specialization of the
+general equivalence story. It must not replace nonidentity representability or
+adjunction comparisons.
 
-This leaves two legitimate implementation branches:
+For the immediate weighted-limit redesign, two implementation routes remain
+legitimate:
 
 ```text
 strict-first:
-  implement StrictIso directly and later embed it into Equiv;
+  implement StrictIso and later map it into OmegaEquiv and paths;
 
-equivalence-first:
-  implement Equiv, then define the immediate weighted-limit interface by a
-  strict/identity specialization whose maps and cancellations compute more
-  strongly than a general equivalence.
+path/equivalence-first:
+  implement enough global univalence that representability is stored as a path,
+  then recover the strict comparison maps needed by the current API.
 ```
 
-The first focused probes should compare these branches. The plan defaults to
-the strict-first branch only because it matches the active theorem's required
-computation and has fewer currently unresolved dependencies, not because
-`StrictIso` is assumed to be the final foundational notion.
-
-The first strict layer might use nested `Σ_` data and equality proofs, or a
-dedicated generic computational structure. Focused probes must decide which
-representation gives acceptable normal forms.
+The implementation should choose whichever route reaches a complete,
+computational preservation theorem with the smallest validated kernel
+extension. The report must record which stronger computations remain blocked.
 
 Broad raw composition-associativity rewrites should not be introduced merely
 to support this layer.
@@ -265,6 +314,150 @@ runtime normalization. The same possibility applies to
 associativity unification hint can create ambiguous metavariable solutions or
 unification loops even when it introduces no rewrite reduction. Constructor
 projection computation should remain the primary mechanism.
+
+### Foundational Decision: `Cat` Classifies Univalent Categories
+
+The intended foundational contract is now:
+
+```text
+every C : Cat is an internally univalent omega-category;
+Cat_cat is itself univalent.
+```
+
+This replaces the previously safer proposal to introduce a separate `UCat`
+subuniverse. The implementation must distinguish the global availability of
+univalence from full computation for every category constructor.
+
+A schematic interface is:
+
+```text
+idtoequiv_cat [C] [x y] :
+  (x = y) -> OmegaEquiv(C,x,y)
+
+equivtoid_cat [C] [x y] :
+  OmegaEquiv(C,x,y) -> (x = y)
+
+idtoequiv_cat(equivtoid_cat(e)) -> e
+equivtoid_cat(idtoequiv_cat(p)) -> p.
+```
+
+The exact ownership may instead use:
+
+```text
+CatUnivalence(C)
+cat_univalence(C) : CatUnivalence(C)
+```
+
+with the two conversions as projections. The latter makes the foundational
+assumption explicit and gives constructor-specific closure rules a stable
+owner. Focused probes should compare both formulations.
+
+Because `Cat_cat` is itself a `Cat`, the same interface specializes to:
+
+```text
+(A = B) ~= OmegaEquiv(Cat_cat,A,B).
+```
+
+The right side is an omega-categorical equivalence whose underlying arrow is a
+functor `A -> B`. This is the category-universe analogue of Voevodsky
+univalence.
+
+The groupoid/type universe requires a parallel but distinct interface:
+
+```text
+idtoequiv_grpd : (A = B) -> TypeEquiv(A,B)
+ua_grpd        : TypeEquiv(A,B) -> (A = B).
+```
+
+It should not be defined by identifying `TypeEquiv` with
+`OmegaEquiv(Grpd_cat,A,B)` until the truncation and higher-cell semantics of
+`Grpd_cat` are settled.
+
+The global categorical bridge also supplies the previously deferred
+path-to-arrow inclusion:
+
+```text
+path_to_hom_fapp0(C,p)
+  := omega_equiv_to(idtoequiv_cat(C,p));
+
+Core_incl_func(C) : Core_cat(C) -> C.
+```
+
+Its object action is identity and its arrow action is the formula above. This
+keeps the safe `path -> arrow` direction computational while univalence owns
+the reverse `equivalence arrow -> path` direction.
+
+### Incremental Univalence Closure
+
+Global univalence can be available before every constructor has specialized
+computation. Generic `idtoequiv_cat` and `equivtoid_cat` terms may remain stuck
+for a constructor whose closure laws are deferred.
+
+The development should add univalence closure in parallel with the existing
+directed `Obj`/`Hom_cat` computation:
+
+| Category constructor | Directed computation already owned by | Undirected/univalence closure |
+| --- | --- | --- |
+| `Path_cat(A)` | equality paths and `eq_trans` | path equivalences reduce to path algebra |
+| `Op_cat(C)` | reversed homs/composition | equivalences reverse coherently |
+| `Product_cat(A,B)` | projections and component homs | paths/equivalences compute componentwise |
+| `Functor_cat(A,B)` | `fapp0`, `fapp1_func`, transformations | functor paths correspond to natural equivalences |
+| `Catd_cat(K)` | natural family morphisms | family paths correspond to natural fibre equivalences |
+| `Sigma_cat(E)` | total objects and directed dependent homs | total paths/equivalences decompose into base and fibre data |
+| `Pi_cat(E)` | sections and section action | section paths/equivalences compute pointwise and naturally |
+| `Prof_cat(A,B)` | Cat-valued families on `A^op x B` | profunctor paths correspond to natural pointwise equivalences |
+| `Cat_cat` | functor categories | category paths correspond to omega-equivalences of categories |
+
+The initial implementation should target only the obvious/high-value cases:
+
+```text
+reflexivity/identity equivalence;
+Path_cat;
+Op_cat;
+Product_cat;
+Cat_cat at least at the generic univalence interface;
+Prof_cat only as far as representability immediately consumes it.
+```
+
+Functor, family, Sigma/Pi, and full profunctor closure can remain stuck but
+must be listed explicitly. This mirrors the existing kernel strategy: a
+constructor may exist globally before its entire projection ladder computes.
+
+### Univalence Rewrite Discipline
+
+Global univalence must not be implemented by directly rewriting category
+objects or arbitrary arrows:
+
+```text
+do not rewrite A to B merely because e : OmegaEquiv(Cat_cat,A,B);
+do not identify every arrow with an equality path;
+do not install evidence-irrelevance for equivalence witnesses by default.
+```
+
+Keep explicit stable heads:
+
+```text
+idtoequiv_cat;
+equivtoid_cat;
+omega_equiv_to;
+omega_equiv_*_inv;
+strict_iso_to_omega.
+```
+
+The principal generic computation should be cancellation of adjacent
+conversion heads:
+
+```text
+idtoequiv_cat(equivtoid_cat(e)) -> e;
+equivtoid_cat(idtoequiv_cat(p)) -> p;
+idtoequiv_cat(refl) -> omega_equiv_refl;
+omega_equiv_to(omega_equiv_refl) -> id.
+```
+
+Constructor-specific closure rules should be keyed on visible constructors
+such as `Path_cat`, `Op_cat`, or `Product_cat`. Unification rules may help
+compare path/equivalence normal forms during proof checking, but they must not
+turn univalence into an unrestricted bidirectional conversion procedure.
 
 ### Separate Vertical Maps From Equipment Cells
 
@@ -378,31 +571,96 @@ WeightedCone_prof(F,W)
 Define generic representability:
 
 ```text
-RepresentedBy(P,L)
+RepresentedBy_strict(P,L)
   := StrictIso(Prof_cat B J', P, Conjoint_prof(L)).
 ```
 
-Then define:
+Under global univalence there is also a path-oriented formulation:
 
 ```text
-WeightedLimit_cov(F,W,L)
-  := RepresentedBy(WeightedCone_prof(F,W),L).
+RepresentedBy_path(P,L)
+  := P = Conjoint_prof(L).
 ```
 
-This removes the need for a primitive destructor-only weighted-limit witness.
+The two are connected by:
+
+```text
+idtoequiv_cat :
+  RepresentedBy_path(P,L)
+    -> OmegaEquiv(Prof_cat B J',P,Conjoint_prof(L));
+
+equivtoid_cat :
+  OmegaEquiv(Prof_cat B J',P,Conjoint_prof(L))
+    -> RepresentedBy_path(P,L).
+```
+
+A strict isomorphism maps to the same `OmegaEquiv`. Recovering a
+`StrictIso` from an arbitrary omega-equivalence is not automatic; it is valid
+only for the strict fragment or with an additional strictification result.
+
+Consequently, two weighted-limit classifiers should be distinguished if both
+are needed:
+
+```text
+StrictWeightedLimit_cov(F,W,L)
+  := RepresentedBy_strict(WeightedCone_prof(F,W),L);
+
+WeightedLimit_cov(F,W,L)
+  := RepresentedBy_path(WeightedCone_prof(F,W),L).
+```
+
+Alternatively, the existing public name may remain strict during migration,
+with the path-based classifier introduced under a provisional name. The final
+naming depends on whether the intended default semantics is strict weighted
+limit or weak/pseudo weighted limit.
+
+The first implementation should choose the representation that gives a complete
+computational theorem earliest:
+
+```text
+strict owner:
+  compose strict isomorphisms directly;
+
+path owner:
+  compose paths by eq_trans/ap and derive comparison arrows through
+  idtoequiv_cat.
+```
+
+The path owner is architecturally attractive because path composition,
+symmetry, and functorial action can replace a separate strict-isomorphism
+algebra. It is feasible only when `Prof_cat` univalence exposes comparison maps
+with the required strict beta/eta behavior. Until that focused probe succeeds,
+the strict owner remains a valid bounded implementation.
+
+Either formulation removes the need for a primitive destructor-only
+weighted-limit witness.
 
 For a shaped probe `M : I -> B`, derive:
 
 ```text
-weighted_limit_cov_iso_at(isl,M)
+weighted_limit_cov_comparison_at(isl,M)
   := strict_iso_fmap(Prof_reindex_func(M,id_J'),isl)
 
 weighted_limit_cov_univ_transf(isl,M)
-  := strict_iso_to(weighted_limit_cov_iso_at(isl,M))
+  := strict_iso_to(weighted_limit_cov_comparison_at(isl,M))
 
 weighted_limit_cov_cone_transf(isl,M)
-  := strict_iso_from(weighted_limit_cov_iso_at(isl,M)).
+  := strict_iso_from(weighted_limit_cov_comparison_at(isl,M)).
 ```
+
+For a path-owned witness, replace `strict_iso_fmap` by path action:
+
+```text
+weighted_limit_cov_path_at(isl,M)
+  := ap(Prof_reindex_func(M,id_J'),isl);
+
+weighted_limit_cov_equiv_at(isl,M)
+  := idtoequiv_cat(weighted_limit_cov_path_at(isl,M)).
+```
+
+The universal and cone maps are then projections of
+`weighted_limit_cov_equiv_at`. They compute to identities when the
+representability path is reflexivity, but are not generally identity arrows.
 
 Thus the current shaped API can remain as a compatibility or presentation
 layer, while its implementation is derived from one internalized
@@ -410,7 +668,7 @@ representability isomorphism.
 
 ## Adjunction Bridge
 
-Define one ambient isomorphism:
+Define one ambient comparison, initially as a strict isomorphism:
 
 ```text
 Adjunction_hom_prof_iso(adj,F) :
@@ -438,6 +696,20 @@ The current `Adjunction_prof_transpose` and
 `Adjunction_prof_untranspose` can initially remain as projections of this
 isomorphism.
 
+Under `Prof_cat` univalence, the same comparison induces:
+
+```text
+Adjunction_hom_prof_path(adj,F) :
+  Hom_prof_along(left(adj),F)
+    = Hom_prof(right(adj) o F)
+  := equivtoid_cat(strict_iso_to_omega(Adjunction_hom_prof_iso(adj,F))).
+```
+
+If the path-oriented route proves computationally cleaner, this path should
+become the semantic owner and the transpose/untranspose maps should be recovered
+by `idtoequiv_cat`. The focused probe must check both beta directions before
+changing ownership.
+
 The first implementation may keep `F` external. The most-internal eventual
 form should be a natural strict isomorphism between functors of:
 
@@ -451,7 +723,7 @@ of the externally quantified probe `M`.
 
 ## Derived Right-Adjoint Preservation
 
-The preservation theorem should be the composition of three generic
+The preservation theorem can be the composition of three generic strict
 isomorphisms:
 
 ```text
@@ -489,6 +761,32 @@ computations.
 
 The theorem-specific large fold and constructor-local preservation rules would
 then be unnecessary.
+
+The globally univalent alternative composes the corresponding three paths:
+
+```text
+right_adjoint_preserves_weighted_limit_cov_path(isl,adj)
+  :=
+  Adjunction_hom_prof_path(adj,L)
+  · ap(Prof_reindex_func(left(adj),id),isl)
+  · ap(
+      Prof_imply_cov_func(W),
+      inverse(Adjunction_hom_prof_path(adj,F))).
+```
+
+Here `·`, `inverse`, and `ap` are path composition, path reversal, and
+functorial action on equality. The public universal and cone transformations
+are obtained by applying `idtoequiv_cat` to this composite path.
+
+This path formula should be preferred if focused probes show that:
+
+```text
+idtoequiv_cat(path composite)
+```
+
+projects to the expected composite of universal maps without theorem-specific
+folds. Otherwise the strict-isomorphism composite should be implemented first,
+then converted to a path using univalence. Both routes are genuine definitions.
 
 The left-adjoint weighted-colimit theorem should remain a transparent dual of
 this genuinely defined theorem.
@@ -588,32 +886,69 @@ If composition of equality evidence is blocked only by bracketing, first test a
 narrow associativity unification rule. Do not turn arbitrary arrow
 associativity into a global reduction rule.
 
-### Equivalence And Univalence Side Quest
+### Global Equivalence And Univalence Infrastructure
 
-A recursive `Equiv`, univalent categories, and univalence of `Cat_cat` are
-globally relevant to the project and may ultimately subsume strict
-isomorphisms. They are not currently a proven prerequisite for the strict
-weighted-limit theorem.
+Equivalence and univalence are no longer treated only as an optional
+subuniverse side quest. They are part of the intended meaning of `Grpd`,
+`Cat`, and `Cat_cat`. Their implementation must still be staged.
 
-A separate probe/report should determine:
+The groupoid/HoTT layer first needs focused designs for:
 
 ```text
-whether Equiv is inductive, coinductive, or encoded by destructors;
-how separate left and right inverse data are represented;
-how cancellation recurses through higher hom-categories;
-how Equiv relates to the existing groupoid equality;
-which computation is definitional and which is propositional;
-whether a univalence bridge is an axiom, structure, or derived construction.
+eq_sym;
+ap and dependent ap;
+dependent groupoid-level Pi or an adequate classifier;
+IsContr(A);
+homotopy fibre of a map;
+IsEquivMap(f);
+TypeEquiv(A,B);
+idtoequiv_grpd / ua_grpd.
 ```
 
-Until that design is validated, the representability migration should use the
-smallest strict interface required by the active theorem.
+Some initial probes may use bi-invertible map data before `IsContr` and
+dependent Pi are available. That temporary representation must be documented
+and connected to the final `IsEquivMap` interface rather than silently
+becoming the definition.
+
+The categorical layer must determine:
+
+```text
+whether OmegaEquiv is inductive, coinductive, or encoded by destructors;
+how separate left and right inverse data are represented;
+how cancellation recurses through higher hom-categories;
+how StrictIso maps into OmegaEquiv;
+how OmegaEquiv relates to the existing groupoid equality;
+which computation is definitional and which is propositional;
+whether CatUnivalence(C) is an explicit structure or direct global operations;
+how constructor-specific univalence closure is registered incrementally.
+```
+
+The foundational commitment that every `C : Cat` is univalent may initially be
+implemented by a generic primitive bridge with only reflexivity computation.
+That is an explicit kernel assumption, not a derived closure theorem.
+Constructor-specific computation should then progressively reduce the generic
+bridge for `Path_cat`, `Op_cat`, products, functor categories, family
+categories, Sigma/Pi, profunctors, and `Cat_cat`.
+
+For weighted limits, the implementation should probe both:
+
+```text
+StrictIso representability;
+path representability via univalence.
+```
+
+Whichever route first yields a complete defined preservation witness without
+large theorem-specific rules should be used as the first active implementation.
+The report and code must state whether the other route, and which univalence
+closures, remain deferred.
 
 ### Completeness Boundary
 
 This redesign addresses:
 
 ```text
+the global univalence contract for Cat and Cat_cat;
+the initial TypeEquiv/OmegaEquiv distinction and path bridges;
 vertical profunctor maps and endpoint restriction;
 representables and their functoriality;
 closed implication functoriality;
@@ -628,36 +963,49 @@ It does not by itself provide:
 coend/end semantics for tensor and implication;
 general tensor associators and unitors;
 weak/pseudo weighted limits;
-recursive omega-categorical equivalence or univalence;
+full computation of univalence for every category constructor;
+all HoTT laws for Sigma, Pi, identity, and universe types;
 generic directed-inductive types or a semantic collage construction.
 ```
 
-Those remain compatible follow-up layers rather than hidden obligations of the
-first migration.
+The first two univalence interfaces are part of the foundational architecture;
+their complete constructor-specific computation remains incremental rather than
+a prerequisite for the first representability migration.
 
 ## Migration Strategy
 
-1. Record the immediate semantic target as strict Cat-enriched weighted limits.
-   Probe strict-first versus equivalence-first ownership, while reserving full
-   recursive `Equiv` and univalence for a separately validated side quest.
-2. Expose vertical `ProfMap` composition as the default algebra and treat
+1. Record the foundational contract that `Cat` classifies univalent
+   omega-categories and that `Cat_cat` is univalent, while permitting generic
+   univalence terms to remain stuck where closure computation is deferred.
+2. Probe the minimum groupoid equality infrastructure: `eq_sym`, `ap`,
+   `TypeEquiv`, and identity-equivalence computation.
+3. Probe the categorical `OmegaEquiv` classifier, recursive cancellation data,
+   strict-isomorphism embedding, `idtoequiv_cat`, and `equivtoid_cat`.
+4. Add the first closure computations for reflexivity, `Path_cat`, `Op_cat`,
+   products, and the generic `Cat_cat` bridge. Document every deferred
+   constructor.
+5. Expose vertical `ProfMap` composition as the default algebra and treat
    endpoint-changing `ProfCell` as restriction into a fixed target.
-3. Probe `StrictIso`, its identity-arrow specialization, composition, functorial
+6. Probe `StrictIso`, its identity-arrow specialization, composition, functorial
    image, and any narrowly required associativity unification support.
-4. Add companion/conjoint presentation names where they clarify variance, and
+7. Add companion/conjoint presentation names where they clarify variance, and
    add `Hom_prof_func`.
-5. Add fixed-weight `Prof_imply_cov_func`, checked against the eventual
+8. Add fixed-weight `Prof_imply_cov_func`, checked against the eventual
    mixed-variance bifunctor signature.
-6. Introduce `RepresentedBy` and a parallel internalized weighted-limit type.
-7. Package the ambient transpose pair as `Adjunction_hom_prof_iso`, with shaped
-   components derived by reindexing.
-8. Define the new preservation theorem using the three-strict-isomorphism
-   composite.
-9. Derive the existing shaped API as compatibility projections.
-10. Compare all current regression checks against the new implementation.
-11. Retire the primitive preservation theorem and its large theorem-specific
+9. Probe `Prof_cat` univalence far enough to compare strict-isomorphism and path
+   ownership of representability.
+10. Introduce the selected `RepresentedBy` owner and a parallel internalized
+    weighted-limit type.
+11. Package the ambient adjunction comparison, with shaped components derived
+    by reindexing.
+12. Define the preservation theorem using either the three-strict-isomorphism
+    composite or the three-path composite, according to focused computation
+    evidence.
+13. Derive the existing shaped API as compatibility projections.
+14. Compare all current regression checks against the new implementation.
+15. Retire the primitive preservation theorem and its large theorem-specific
     rewrite rules only after the replacement passes all gates.
-12. Refactor eval/lambda, weighted colimits, and other inverse-pair APIs onto
+16. Refactor eval/lambda, weighted colimits, and other inverse-pair APIs onto
     the same generic infrastructure where this improves computation and
     ownership.
 
@@ -669,13 +1017,15 @@ coend/end semantics are absent. Their primitivity is not the main problem.
 The missing architectural pieces are:
 
 ```text
+global but incrementally computational univalence for Cat and Cat_cat;
+separate TypeEquiv, StrictIso, and OmegaEquiv layers;
 functorial ownership of representables and closed operations;
 vertical ProfMap ownership beneath endpoint-changing ProfCell;
 generic strict computational isomorphisms with identity-arrow fast paths;
 generic representability;
 internalized rather than externally repeated universal properties;
 companion/conjoint organization of representables;
-an explicit boundary between strict results and future Equiv/univalence.
+an explicit boundary between strict and weak weighted-limit semantics.
 ```
 
 The proposed redesign should be evaluated globally against tensor,
