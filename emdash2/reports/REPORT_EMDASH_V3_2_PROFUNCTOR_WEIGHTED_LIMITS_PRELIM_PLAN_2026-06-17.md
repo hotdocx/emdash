@@ -2,9 +2,56 @@
 
 Date: 2026-06-17
 
-Status: implementation in progress. The first Phase 1 profunctor-facade slice
-and stable profunctor reindexing are active in `emdash3_2.lp`; shaped
-profunctor elements remain the next Phase 1 work.
+Status updated: 2026-06-19
+
+Status: the first end-to-end implementation pass is complete through Phase 6a.
+The requested computational surface for Cat-valued profunctors, tensor,
+internal hom, weighted limits, preservation by right adjoints, dual weighted
+colimits, preservation by left adjoints, and the nondependent directed join
+recursor is active in `emdash3_2.lp`. The plan is now in refinement and
+semantic-completion mode rather than initial feasibility mode.
+
+Latest validation:
+
+```text
+make check   passed
+make health  passed
+make ci      passed
+
+emdash3_2_checks.lp: 483 checks
+check catalog:       14 areas, 0 unclassified checks
+```
+
+## Overall Implementation Status 2026-06-19
+
+The main applications that motivated this plan are now expressible and have
+computational rewrite interfaces. The implementation deliberately remains a
+symbolic Dosen-style calculus where the current kernel lacks general
+coend/end, quotient, bicategorical-coherence, or directed-inductive semantics.
+
+| Phase | Landed implementation | Explicit remaining work |
+| --- | --- | --- |
+| 0. Baseline and probes | Incremental probe/log/report workflow used throughout all phases. | Continue using focused probes for every nontrivial rewrite or internalization extension. |
+| 1. Profunctor facade | `Prof_base`, `Prof_cat`, `Hom_prof_along`, `Hom_prof`, `Unit_prof`, `Product_map_func`, `Prof_reindex`, `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`. | Ordinary-`Transf_cat` comparisons, broader endpoint internalization, and curry/uncurry comparison packages only when demanded downstream. |
+| 2. Tensor and co-Yoneda | Primitive `Prof_tensor`, endpoint reindexing, general and shaped tensor cells, `Prof_comp_transf`, identities, and symmetric identity-representable co-Yoneda beta rules. `Prof_func_transf`/`Prof_func_hom` are now available. | General co-Yoneda rules using `Prof_func_hom`, tensor associativity/unit coherence, and semantic coend/coinserter ownership. |
+| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, and inverse general/shaped eval-lambda operations. | End semantics, broader eval naturality, and internalized implication functors. |
+| 4. Weighted limits | `WeightedLimit_cov`, inverse universal/cone cells, the adjunction/profunctor transpose bridge, and the full `right_adjoint_preserves_weighted_limit_cov` witness. | Naturality in the shaped probe, explicit preserved-cone formula, and unit/counit component projections. |
+| 5. Duality and weighted colimits | `Op_transf`, `Op_adjunction`, `Product_swap_func`, base-swap-only `Op_prof`, `Op_prof_transf`, transparent `WeightedColimit_con`, and the full `left_adjoint_preserves_weighted_colimit_con` witness derived by duality. | Direct colimit-oriented projection names and a non-looping semantic pullback/reindex comparison for `Op_prof_transf`. |
+| 6a. Directed join | `Terminal_prof`, internally natural `join_cross_transf`, derived shaped `join_cross_hom`, and `join_elim_func` with inclusion and cross beta rules. | Dependent elimination, explicit join object/hom decomposition, a generic directed-inductive framework, and/or semantic collage construction. |
+
+The central success criterion has therefore been reached:
+
+```text
+right adjoints preserve Cat-valued profunctor-weighted limits;
+left adjoints preserve the dual weighted colimits by computation through Op;
+the join example exercises a directed categorical recursor with an internally
+natural generating cross cell.
+```
+
+This does not mean that a complete semantic bicategory of Cat-valued
+profunctors has been constructed. No Set/groupoid truncation assumption was
+introduced, and no existing symbolic primitive is being presented as a
+general coend, end, quotient, or collage implementation.
 
 ## Scope
 
@@ -3720,11 +3767,11 @@ compatibility. Ordinary weakening/exchange/contraction already exist.
 Current assessment:
 
 ```text
-Phase 1 profunctor facade: reindexing landed; shaped elements remain.
-Phase 2 tensor: plausibly feasible as primitive calculus; not complete as coend semantics.
-Phase 3 implication: plausibly feasible as primitive adjoint calculus; probe covariant first.
-Phase 4 weighted limits: plausibly feasible as universal packages over implication.
-Phase 5 op-duality: object/cell duality and the full weighted-colimit preservation theorem landed.
+Phase 1 profunctor facade: landed, including general cells and shaped elements.
+Phase 2 tensor/co-Yoneda: landed as a primitive computational calculus; semantic coends and broad coherence remain.
+Phase 3 implication: both variance directions and general/shaped beta-eta landed; end semantics and broader naturality remain.
+Phase 4 weighted limits: full covariant witness and right-adjoint preservation landed; naturality/component refinements remain.
+Phase 5 op-duality: object/cell duality and full left-adjoint weighted-colimit preservation landed.
 Phase 6 join: first primitive nondependent directed-inductive slice landed; dependent elimination and collage remain.
 ```
 
@@ -3745,7 +3792,7 @@ calculus whose reductions are beta/eta and named universal-map cancellations.
 If a later semantic coend layer is added, `Prof_tensor` can become a semantic
 owner or receive comparison maps without invalidating the public calculus.
 
-## Suggested Implementation Order
+## Implemented Order And Next Refinements
 
 1. Phase 1a, landed: facade aliases, `Hom_prof_along`, its first full
    action, `Hom_prof`, and `Unit_prof`.
@@ -3770,15 +3817,25 @@ owner or receive comparison maps without invalidating the public calculus.
    cross arrows, and nondependent recursor beta rules. Assess dependent
    elimination and/or semantic collage only as later independent slices.
 
-Each step should leave:
+All listed landed steps leave:
 
 ```text
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-passing, and should add report notes when a semantic definition has to become a
-stable primitive head. Each step is also a design checkpoint: compare the
-result again with the pure categorical semantics, record any prerequisite
-kernel work, and revise later phases rather than preserving an earlier
-provisional choice for compatibility with this report or with
-`cartierSolution13.lp`.
+passing. Further refinements should preserve the same discipline: add report
+notes when a semantic definition must become a stable primitive head, compare
+each extension again with pure categorical semantics, record prerequisite
+kernel work, and revise earlier provisional choices rather than preserving
+them for compatibility with this report or with `cartierSolution13.lp`.
+
+The most natural independent next slices are:
+
+```text
+1. Generalize co-Yoneda beta rules using the landed Prof_func_hom.
+2. Add weighted-limit probe naturality and/or explicit preserved-cone formulas.
+3. Design dependent elimination for Join_cat without assuming collage
+   semantics prematurely.
+4. Investigate semantic end/coend comparison layers without replacing the
+   stable public calculus until termination and computation are demonstrated.
+```
