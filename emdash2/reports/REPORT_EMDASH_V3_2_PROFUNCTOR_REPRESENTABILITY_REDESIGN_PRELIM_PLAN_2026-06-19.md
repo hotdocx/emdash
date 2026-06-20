@@ -1544,6 +1544,226 @@ The first two univalence interfaces are part of the foundational architecture;
 their complete constructor-specific computation remains incremental rather than
 a prerequisite for the first representability migration.
 
+## File And Migration Management
+
+This redesign changes a substantial connected region of `emdash3_2.lp`, but it
+should not be implemented by first deleting that region and reconstructing it
+from a copied backup.
+
+### Git Is The Baseline Owner
+
+Do not add tracked files such as:
+
+```text
+emdash3_2_backup.lp;
+emdash3_2_before_representability.lp;
+emdash3_2_checks_backup.lp.
+```
+
+They would create stale parallel specifications, duplicate module surfaces,
+confuse searches and reference lint, and eventually diverge from the active
+file. They are weaker baselines than an immutable Git commit.
+
+At the time of this file-management review, the active Lambdapi implementation
+and checks are at:
+
+```text
+8cdf0e3c074a18496ae5e9cf53931bfd0f5fa583
+```
+
+Before the first implementation slice:
+
+```text
+commit the finalized plan or otherwise start from a deliberately recorded
+worktree state;
+run git status --short;
+record git rev-parse HEAD in the implementation log;
+run make ci.
+```
+
+That commit is the migration baseline. The old files remain available without
+copying:
+
+```text
+git show BASELINE:emdash2/emdash3_2.lp;
+git show BASELINE:emdash2/emdash3_2_checks.lp;
+git diff BASELINE -- emdash2/emdash3_2.lp emdash2/emdash3_2_checks.lp.
+```
+
+An optional tag or dedicated branch may be created by the maintainer for
+workflow convenience, but neither is technically required once the baseline
+commit has been recorded. The implementation should not create branches,
+tags, or commits implicitly.
+
+### Three Distinct Working Surfaces
+
+Use three surfaces for different purposes.
+
+#### 1. Focused Probe Files
+
+Use:
+
+```text
+tmp/probes/<slice>_probe.lp
+```
+
+for isolated declarations, rules, and assertions. Prefer importing
+`emdash.emdash3_2` and using `Probe_*` names when the experiment is additive.
+Run the probe with `scripts/probe.sh`.
+
+When an experiment must remove, reorder, or replace an existing declaration or
+rule, an imported additive probe is insufficient. In that narrow case, create
+a temporary full-file copy under `tmp/probes/`, patch only the relevant region,
+and append focused assertions. This is a disposable cutover simulation, not a
+backup or an implementation target.
+
+Successful declarations and checks must be promoted to the active files.
+Temporary probe files must then be deleted. Probe logs may be cited in this
+report when they provide architecture evidence.
+
+#### 2. Active Additive Integration
+
+Promote stable results directly into:
+
+```text
+emdash3_2.lp;
+emdash3_2_checks.lp.
+```
+
+Do this incrementally while the current profunctor and weighted-limit API
+remains active. In particular:
+
+```text
+add IsoEvidence and computational StrictIso infrastructure;
+add functorial representable/implication infrastructure;
+add the fully ambient adjunction mate;
+add computational representability;
+add a derived preservation implementation under a bounded provisional name
+when the existing public name prevents parallel definition.
+```
+
+Each promoted slice must include focused diagnostics in
+`emdash3_2_checks.lp` and pass a timeout-bounded `make check`. Refresh the
+catalog after adding or reorganizing assertions. Run `make health` and
+`make ci` at architectural checkpoints.
+
+Do not use a backup copy as the place where successful probes accumulate. That
+would postpone integration conflicts and test only a fork rather than the
+active kernel.
+
+#### 3. Legacy Compatibility Surface
+
+Keep the current:
+
+```text
+WeightedLimit_cov;
+weighted_limit_cov_univ_transf;
+weighted_limit_cov_cone_transf;
+Adjunction_prof_transpose / Adjunction_prof_untranspose;
+right_adjoint_preserves_weighted_limit_cov;
+WeightedColimit_con and left-adjoint preservation facade
+```
+
+active while their generic replacements are being built. New generic
+infrastructure should coexist with these symbols until the replacement:
+
+```text
+has the required object, whole-arrow, and capped projections;
+passes identity/composition/cancellation checks;
+reproduces the current shaped endpoint types;
+passes a behavior-parity check against the old public API.
+```
+
+This is an additive migration, not a second permanent architecture. Provisional
+parallel names must be few, scoped to the cutover, and listed in the
+implementation log.
+
+Keeping the legacy rules active can mask missing generic computation. In
+particular, the existing explicit preservation-composite fold may recognize a
+term produced by the provisional implementation and reduce it through the old
+theorem-specific path.
+
+Therefore every replacement slice that overlaps a legacy rule needs two
+results:
+
+```text
+compatibility result:
+  the new construction coexists with the active public API;
+
+independence result:
+  the new construction still passes its focused assertions in a temporary
+  full-file probe with the overlapping legacy fold/rules disabled.
+```
+
+Use static search and `scripts/decision_tree.sh` to identify candidate masking
+rules before the temporary-removal probe. Record every disabled legacy rule
+and the first downstream failure, if any, in the implementation log.
+
+### Cutover Procedure
+
+Do not delete the old weighted-limit/preservation block at the beginning of
+the work. Perform the public-name cutover only after the replacement is green
+under provisional names.
+
+The cutover should be one bounded slice:
+
+```text
+1. record a pre-cutover Git checkpoint;
+2. use a temporary full-file cutover probe if removing the old declarations is
+   necessary to test the final public names;
+3. verify the replacement's independence with every overlapping
+   theorem-specific legacy fold disabled;
+4. deactivate only the exact legacy declarations/rules being replaced;
+5. install the derived implementations under the established public names;
+6. redirect compatibility projections to the new generic owner;
+7. migrate existing diagnostics without weakening their behavioral coverage;
+8. run bounded make check, make catalog, make health, and make ci.
+```
+
+If active-file debugging temporarily requires disabling legacy code, comment
+that exact block with a dated migration marker rather than deleting it
+immediately, as required by the repository SOP. Once the replacement passes
+all gates and the baseline/pre-cutover commits preserve the old text, remove
+the commented block in a dedicated cleanup slice. Long-lived commented copies
+are not an acceptable backup strategy.
+
+Never use destructive Git restoration to perform this process. Inspect old
+text with `git show` and edit the active files deliberately. Existing unrelated
+worktree changes must be preserved.
+
+### Check Migration And Regression Discovery
+
+`emdash3_2_checks.lp` is not to be replaced wholesale. Add new checks beside
+the old checks first. Maintain a small parity inventory covering:
+
+```text
+old public computation;
+new generic computation;
+old shaped endpoint;
+new reindexed ambient endpoint;
+forward/inverse cancellation;
+duality and left-adjoint preservation;
+the same new computations with overlapping legacy rules disabled;
+timeout/performance behavior.
+```
+
+At cutover, rewrite only checks whose owning symbol changes. Preserve tests of
+observable behavior even when their implementation-specific term changes. A
+check may be removed only when the report records which stronger check
+subsumes it.
+
+### Module Splitting
+
+Do not combine this semantic migration with a broad physical split of
+`emdash3_2.lp`. A new extension module that merely imports the old monolith
+cannot replace declarations already owned by it, while extracting prerequisites
+would add a second large dependency migration.
+
+After the new architecture and public cutover stabilize, a separate
+reorganization plan may extract generic equivalence, profunctor, or
+representability modules. Until then, use comments and local section placement
+to keep ownership clear.
+
 ## Migration Strategy
 
 The work should proceed on two tracks. Global univalence remains a foundational
