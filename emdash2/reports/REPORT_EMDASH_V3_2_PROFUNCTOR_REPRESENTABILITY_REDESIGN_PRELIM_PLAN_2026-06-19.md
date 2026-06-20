@@ -205,14 +205,17 @@ instead.
 ### 6. The Adjunction Hom Bridge Is Also Over-Externalized
 
 `Adjunction_prof_transpose` and `Adjunction_prof_untranspose` are parameterized
-by an external probe:
+by two external probes:
 
 ```text
 M : I -> A.
+F : K -> B.
 ```
 
-They should instead arise from one ambient hom-profunctor isomorphism, with the
-component at arbitrary `M` obtained by reindexing.
+They should instead arise from one ambient hom-profunctor isomorphism in
+`Prof_cat(A,B)`, with the component at arbitrary `(M,F)` obtained by one
+profunctor reindexing. The earlier fixed-`F` proposal was still unnecessarily
+externalized.
 
 ### 7. No Generic Representability Abstraction
 
@@ -289,9 +292,9 @@ an unrestricted `strict_iso_intro`.
 This interface is not an ordinary freely constructible record. Its
 nontrivial atomic inhabitants must come from semantically justified
 computational generators whose projected arrows already have joining inverse
-computations. Examples may include an adjunction hom comparison derived from
-unit/counit formulas, or a closed-structure comparison derived from
-eval/lambda. Each such generator requires:
+computations. Examples may include an adjunction hom comparison exposed by a
+computational adjunction presentation, or a closed-structure comparison exposed
+by eval/lambda. Each such generator requires:
 
 ```text
 stable forward and inverse projections;
@@ -924,89 +927,206 @@ Thus the current shaped API can remain as a compatibility or presentation
 layer, while its implementation is derived from one internalized
 computational representability isomorphism.
 
-## Adjunction Bridge
+## Computational Adjunction Presentations And The Mate Bridge
 
-Define one ambient comparison, initially as a strict isomorphism:
+### The Active Presentation Is Already Computational
+
+The active v3.2 package:
 
 ```text
-Adjunction_hom_prof_iso(adj,F) :
+adj : Adjunction(A,B)
+L   := left_adj_func(adj)  : A -> B
+R   := right_adj_func(adj) : B -> A
+eta := unit_adj_transf(adj)
+eps := counit_adj_transf(adj)
+```
+
+is a valid computational presentation of an adjunction. Its essential content
+is not merely the existence of unit/counit transformations or propositional
+triangle equations. The kernel has generalized component-level
+cut-elimination rules:
+
+```text
+eps[f] o L(eta[g]) -> f o L(g);
+R(eps[g]) o eta[f] -> R(g) o f.
+```
+
+Here the off-diagonal `tapp1_fapp0` components fuse transformation naturality
+with the surrounding arrow cut. These rules are the computational triangle
+laws from which the ordinary transpose/untranspose beta laws are expected to
+follow.
+
+The redesign must therefore not describe unit and counit as the uniquely
+foundational definition of adjunction. In the Došen cut-elimination discipline,
+several presentations can carry equivalent computational content:
+
+```text
+unit + counit + triangle cut rules;
+transpose + untranspose + beta/eta and naturality;
+mixed triangular presentations using one unit/counit direction and one mate
+operation.
+```
+
+For example, from a hom-mate presentation:
+
+```text
+transpose    : Hom_B(L a,b) -> Hom_A(a,R b);
+untranspose  : Hom_A(a,R b) -> Hom_B(L a,b),
+```
+
+one recovers:
+
+```text
+eta_a := transpose(id_(L a));
+eps_b := untranspose(id_(R b)).
+```
+
+Conversely, the familiar object-level formulas are:
+
+```text
+transpose(f)   = R(f) o eta_a;
+untranspose(g) = eps_b o L(g).
+```
+
+The operational normal forms should be chosen to expose the active
+`tapp1_fapp0` triangle redexes; the implementation should not blindly expand
+these formulas into a bracketing that the cut rules cannot recognize.
+
+The current unit/counit `Adjunction` package should remain the active owner
+unless a focused migration establishes computational translations in both
+directions to a better presentation. The representability redesign only needs
+a presentation-independent consumer boundary: an adjunction supplies its
+fully internal hom-mate isomorphism.
+
+### Fully Internal Ambient Mate Isomorphism
+
+The canonical comparison has no external shaped functor:
+
+```text
+Adjunction_hom_prof_iso(adj) :
   StrictIso(
-    Prof_cat A J,
-    Hom_prof_along(left(adj),F),
-    Hom_prof(right(adj) o F)).
+    Prof_cat A B,
+    Hom_prof_along(L,id_B),
+    Hom_prof_along(id_A,R)).
 ```
 
-The component at an arbitrary:
+Its fibre at `(a,b)` is the traditional hom isomorphism:
 
 ```text
-M : I -> A
+Hom_B(L a,b) <-> Hom_A(a,R b).
 ```
 
-should be obtained by:
+Both shaped variables are derived simultaneously. For:
 
 ```text
-strict_iso_fmap(
-  Prof_reindex_func(M,id_J),
-  Adjunction_hom_prof_iso(adj,F)).
+M : I -> A;
+F : K -> B,
 ```
 
-The current `Adjunction_prof_transpose` and
-`Adjunction_prof_untranspose` can initially remain as projections of this
-isomorphism.
-
-Merely packaging the current primitive transpose/untranspose pair would improve
-ownership but would not remove its axiom-like status. The intended endpoint is
-to define `Adjunction_hom_prof_iso` from:
+define:
 
 ```text
-unit_adj_transf;
-counit_adj_transf;
-representable hom pre/postcomposition;
-the existing triangle cut-elimination rules.
+Adjunction_hom_prof_iso_along(adj,M,F)
+  := strict_iso_fmap(
+       Prof_reindex_func(M,F),
+       Adjunction_hom_prof_iso(adj)).
 ```
+
+The two sides compute to:
+
+```text
+Hom_prof_along(L o M,F);
+Hom_prof_along(M,R o F).
+```
+
+The previous fixed-`F` comparison is only the specialization along
+`(id_A,F)`. The current `Adjunction_prof_transpose(adj,M,F)` and
+`Adjunction_prof_untranspose(adj,M,F)` should become the forward and inverse
+projections of `Adjunction_hom_prof_iso_along`.
+
+This formulation is both more traditional and more internalized than the
+earlier report proposal. It makes naturality in `M` and `F` inherited from
+`Prof_reindex_func`, rather than a later collection of theorem-specific rules.
+
+### Computational Ownership
+
+For the current unit/counit presentation, the intended observational behavior
+of the ambient generator is:
+
+```text
+forward fibre action  -> R(f) o eta;
+inverse fibre action  -> eps o L(g);
+forward-after-inverse -> identity by the right triangle cut;
+inverse-after-forward -> identity by the left triangle cut.
+```
+
+At higher dimensions, the corresponding whole and capped projections must be
+compatible with representable hom action and the natural-transformation
+projection ladder.
+
+Because the current kernel has no general constructor assembling a
+`Functord` from these fibre formulas, the ambient mate operations may need
+stable primitive heads. Such heads are acceptable as a computational
+presentation or definitional extension when all observable structure is tied
+to the existing adjunction calculus:
+
+```text
+their fibre/arrow projections compute to the mate formulas;
+their reindexing computes through Prof_reindex_transf;
+their projection-first composites reduce by the existing triangle cuts;
+those reductions join generic StrictIso cancellation;
+identity/composition/naturality checks pass without theorem-specific folds.
+```
+
+This is different from a bare opaque inhabitant whose only behavior is an
+unrelated generic cancellation rule. If a whole-transformation constructor is
+later added, the stable mate heads may become transparent definitions without
+changing their public normal forms.
+
+The implementation should be staged so that failures identify the missing
+layer precisely:
+
+```text
+1. fibre mate functors
+   Adjunction_transpose_func(adj,a,b)
+   Adjunction_untranspose_func(adj,a,b);
+
+2. object and higher-arrow actions of those functors, with beta/eta joins
+   against the off-diagonal triangle rules;
+
+3. natural assembly over A^op x B as vertical ProfMaps;
+
+4. packaging as Adjunction_hom_prof_iso(adj);
+
+5. reindexing along arbitrary (M,F) and comparison with the current shaped
+   API.
+```
+
+The names in the first step are provisional. A direct internalized constructor
+is preferable if it exposes the same intermediate checks without duplicating
+semantic bodies.
 
 Because the immediate `StrictIso` interface deliberately has no unrestricted
-constructor from propositional inverse proofs, this comparison is expected to
-be an atomic computational generator of that interface. "Define from" here
-means that its forward and inverse projections are the whole transformations
-assembled from unit/counit, and that projection-first cancellation joins the
-generic `StrictIso` cancellation through the triangle rules. A bare opaque
-inhabitant with only generic cancellation would remain an axiom and would not
-satisfy the redesign.
-
-A temporary primitive ambient comparison is acceptable only as an explicitly
-documented intermediate slice with this derivation remaining as tracked debt.
-
-The focused derivation probe should first determine whether the current kernel
-can assemble the required whole displayed/natural family transformation from
-the pointwise unit/counit formulas. Failure here indicates a missing general
-transformation-construction primitive, not a reason to add a permanent
-adjunction-specific axiom.
+constructor from propositional inverse proofs, the ambient mate is a
+semantically justified atomic computational generator. Its justification is
+the chosen computational presentation of `Adjunction`, not specifically the
+fact that this presentation happens to expose both unit and counit as
+primitives.
 
 Under `Prof_cat` univalence, the same comparison induces:
 
 ```text
-Adjunction_hom_prof_path(adj,F) :
-  Hom_prof_along(left(adj),F)
-    = Hom_prof(right(adj) o F)
-  := equivtoid_cat(strict_iso_to_omega(Adjunction_hom_prof_iso(adj,F))).
+Adjunction_hom_prof_path(adj) :
+  Hom_prof_along(L,id_B)
+    = Hom_prof_along(id_A,R)
+  := equivtoid_cat(
+       strict_iso_to_omega(Adjunction_hom_prof_iso(adj))).
 ```
 
-If the path-oriented route proves computationally cleaner, this path should
-become the semantic owner and the transpose/untranspose maps should be recovered
-by `idtoequiv_cat`. The focused probe must check both beta directions before
-changing ownership.
-
-The first implementation may keep `F` external. The most-internal eventual
-form should be a natural strict isomorphism between functors of:
-
-```text
-F : Functor_cat(J,B).
-```
-
-That later internalization would make naturality in `F` structural rather than
-a collection of component rules. It is not necessary for the first replacement
-of the externally quantified probe `M`.
+If the path-oriented route proves computationally cleaner, this path may become
+the semantic owner and the mate maps may be recovered by `idtoequiv_cat`. Both
+conversion directions and their compatibility with the adjunction cut rules
+must be checked before changing ownership.
 
 ## Derived Right-Adjoint Preservation
 
@@ -1016,13 +1136,14 @@ isomorphisms:
 ```text
 right_adjoint_preserves_weighted_limit_cov(isl,adj)
   :=
-  Adjunction_hom_prof_iso(adj,L)
+  Adjunction_hom_prof_iso_along(adj,id_A,L)
   o
   strict_iso_fmap(Prof_reindex_func(left(adj),id),isl)
   o
   strict_iso_fmap(
     Prof_imply_cov_func(W),
-    strict_iso_sym(Adjunction_hom_prof_iso(adj,F))).
+    strict_iso_sym(
+      Adjunction_hom_prof_iso_along(adj,id_A,F))).
 ```
 
 Semantically:
@@ -1055,11 +1176,16 @@ three paths:
 ```text
 right_adjoint_preserves_biweighted_limit_cov_path(isl_path,adj)
   :=
-  Adjunction_hom_prof_path(adj,L)
+  ap(
+    Prof_reindex_func(id_A,L),
+    Adjunction_hom_prof_path(adj))
   · ap(Prof_reindex_func(left(adj),id),isl_path)
   · ap(
       Prof_imply_cov_func(W),
-      inverse(Adjunction_hom_prof_path(adj,F))).
+      inverse(
+        ap(
+          Prof_reindex_func(id_A,F),
+          Adjunction_hom_prof_path(adj)))).
 ```
 
 Here `·`, `inverse`, and `ap` are path composition, path reversal, and
@@ -1164,8 +1290,8 @@ logs/probes/profunctor_weighted_limit_internalized_probe-20260619-135634.log
 
 ### Internalized Adjunction Hom Bridge
 
-One ambient adjunction hom-profunctor cell was successfully reindexed along
-arbitrary:
+The earlier probe established that a fixed-`F` ambient adjunction
+hom-profunctor cell can be reindexed along arbitrary:
 
 ```text
 M : I -> A
@@ -1178,6 +1304,34 @@ Successful probe log:
 ```text
 logs/probes/profunctor_weighted_limit_internalized_probe-20260619-135825.log
 ```
+
+The stronger fully internal formulation has now also passed. One ambient map:
+
+```text
+Hom_prof_along(L,id_B)
+  ->
+Hom_prof_along(id_A,R)
+```
+
+over `A^op x B`, reindexed simultaneously along:
+
+```text
+M : I -> A;
+F : K -> B,
+```
+
+has exactly the current shaped transpose type. The inverse direction passes
+the same check.
+
+Successful probe log:
+
+```text
+logs/probes/profunctor_adjunction_fully_internal_probe-20260620-162419.log
+logs/probes/profunctor_adjunction_fully_internal_surface_probe-20260620-162800.log
+```
+
+The second probe checks the current `Prof_transf_cat` surface directly rather
+than only its unfolded `Functord` normal form.
 
 These probes establish that the proposed internalization does not require a
 new base-reindexing mechanism. The missing work is the generic
@@ -1208,10 +1362,11 @@ and the desired projection normal forms.
 They also support a selective internalization policy:
 
 ```text
-internalize the probe M now;
-internalize variation in F when naturality in F is consumed;
-keep F, W, and L as external theorem parameters until simultaneous
-internalization has a concrete downstream use.
+internalize both hom variables of the adjunction mate immediately;
+derive every shaped (M,F) mate by Prof_reindex_func(M,F);
+internalize the weighted-limit probe M immediately;
+keep the diagram F, weight W, and candidate L as weighted-limit theorem
+parameters until their simultaneous variation has a concrete consumer.
 ```
 
 Internalization should remove duplicated external quantification and expose
@@ -1380,6 +1535,8 @@ general tensor associators and unitors;
 weak/pseudo weighted limits;
 full computation of univalence for every category constructor;
 all HoTT laws for Sigma, Pi, identity, and universe types;
+the complete computational equivalence of every standard adjunction
+presentation;
 generic directed-inductive types or a semantic collage construction.
 ```
 
@@ -1420,10 +1577,12 @@ weighted limits.
    `IsWeightedLimit_cov_iso`, and `IsWeightedLimit_cov_comp`, then present the
    existing `WeightedLimit_cov` as a compatibility name for the computational
    interface.
-9. Define the ambient `Adjunction_hom_prof_iso` from unit, counit,
-   representable hom action, and triangle computation. Use a temporary
-   primitive only if a focused probe demonstrates the missing general
-   whole-transformation constructor and documents that prerequisite.
+9. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
+   computational adjunction presentation. Its projections must compute to the
+   standard mate formulas, use the current off-diagonal triangle cuts for
+   cancellation, and reindex simultaneously along `(M,F)`. Stable mate heads
+   are acceptable while the general whole-`Functord` constructor is absent,
+   provided they have no independent opaque behavior.
 10. Define `right_adjoint_preserves_weighted_limit_cov` as the
    three-strict-isomorphism composite.
 11. Derive the existing shaped universal/cone API by reindexing the one ambient
@@ -1497,7 +1656,11 @@ the computational weighted-limit witness forgets to the ordinary
 isomorphism-representability property;
 every nontrivial atomic StrictIso generator exposes semantic forward/inverse
 maps whose projection-first cancellation joins generic cancellation;
-the one ambient witness reindexes to every shaped probe M;
+the ambient weighted-limit witness reindexes to every shaped probe M;
+the ambient adjunction mate reindexes simultaneously to every shaped pair
+(M,F);
+the mate projections compute to the chosen adjunction presentation and their
+beta laws join the active triangle cuts;
 the old theorem-specific exact-syntax fold is unnecessary;
 the preserved cone is as explicit and computational as the universal map;
 left-adjoint colimit preservation remains a transparent dual;
@@ -1512,8 +1675,10 @@ strict_iso_comp projection and cancellation paths join;
 strict_iso_refl/sym/fmap projection and cancellation paths join;
 Hom_prof_func and Prof_imply_cov_func pass identity/composition checks;
 any Catd_cat-specialized univalence head documents Functor_cat as owner;
-any temporary adjunction bridge records the missing whole-transformation
-constructor that prevents its derivation.
+the adjunction mate bridge has no behavior independent of the chosen
+computational Adjunction presentation;
+any temporary whole-transformation head records the constructor that prevents
+it from being a transparent definition.
 ```
 
 The implementation must document every new stable computational head,
@@ -1523,22 +1688,24 @@ including:
 strict_iso_comp/fmap;
 Hom_prof_func;
 Prof_imply_cov_func;
+Adjunction_hom_prof_iso and its mate projections;
 closed implication arrow action.
 ```
 
 These heads are not automatically architectural debt: stable constructors may
-be the intended computational presentation. Separately, every temporary
-semantic primitive, especially an opaque `Adjunction_hom_prof_iso`, must state
-its intended derivation and the missing lower-level constructor or computation
-law.
+be the intended computational presentation. An adjunction mate head is
+acceptable when its projections, naturality, and cancellation are
+computationally fixed by the active `Adjunction` interface. A bare opaque
+`Adjunction_hom_prof_iso` without those bridges remains unacceptable.
 
 The internalization target is:
 
 ```text
-one ambient representability comparison internalizes the probe M;
-variation in F is internalized when a natural comparison functor is consumed;
-F, W, and L remain theorem parameters until simultaneous internalization has a
-concrete downstream use.
+one ambient weighted-limit comparison internalizes the probe M;
+one ambient adjunction mate internalizes both hom variables and derives every
+shaped pair (M,F) by reindexing;
+the weighted diagram F, weight W, and candidate L remain theorem parameters
+until their simultaneous variation has a concrete downstream use.
 ```
 
 The weak/path track is computationally ready only when:
