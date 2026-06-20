@@ -77,6 +77,10 @@ AREAS: list[Area] = [
         ("Path_cat", "eq_refl", "eq_trans"),
     ),
     Area(
+        "Ordinary categorical isomorphism evidence",
+        ("IsoEvidence", "iso_evidence"),
+    ),
+    Area(
         "Applications: PathOut, path induction, transitivity, telescopes",
         ("PathOut", "PathInd", "path_comp", "CompTarget", "Nested_", "Telescope"),
     ),
@@ -107,6 +111,7 @@ AREAS: list[Area] = [
         (
             "Prof_base",
             "Prof_cat",
+            "ProfMap",
             "Prof_reindex",
             "Prof_comp",
             "Prof_id",

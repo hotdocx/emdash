@@ -28,6 +28,41 @@ assert [A : Grpd] (x : τ A) ⊢ @id (Path_cat A) x ≡ eq_refl x;
 assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
   @comp_fapp0 (Path_cat A) x y z q p ≡ eq_trans p q;
 
+// Ordinary categorical isomorphism evidence.
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_to C x x (@iso_evidence_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_to C y x (@iso_evidence_sym C x y i)
+  ≡ @iso_evidence_from C x y i;
+
+assert [C : Cat] [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_from C y x (@iso_evidence_sym C x y i)
+  ≡ @iso_evidence_to C x y i;
+
+assert [C : Cat] [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_left C x y i
+  : τ (
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_to C x y i)
+      =
+      @id C x);
+
+assert [C : Cat] [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_right C x y i
+  : τ (
+      @comp_fapp0 C y x y
+        (@iso_evidence_to C x y i)
+        (@iso_evidence_from C x y i)
+      =
+      @id C y);
+
 // From emdash3_2.lp:446.
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
 
@@ -4472,6 +4507,20 @@ assert [A B : Cat] ⊢
 
 assert [A B : Cat] ⊢
   Prof A B ≡ Obj (Catd_cat (Product_cat (Op_cat A) B));
+
+assert [A B : Cat] (P Q : τ (Prof A B)) ⊢
+  ProfMap P Q
+  ≡ Functord P Q;
+
+assert [A B : Cat] (P : τ (Prof A B)) ⊢
+  @id (Prof_cat A B) P
+  : τ (ProfMap P P);
+
+assert [A B : Cat] [P Q R : τ (Prof A B)]
+  (q : τ (ProfMap Q R))
+  (p : τ (ProfMap P Q)) ⊢
+  @comp_fapp0 (Prof_cat A B) P Q R q p
+  : τ (ProfMap P R);
 
 assert [A B X : Cat]
   (F : τ (Functor A X))

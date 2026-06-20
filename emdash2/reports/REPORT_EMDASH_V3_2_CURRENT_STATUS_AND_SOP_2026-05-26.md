@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-18
+Last consolidated: 2026-06-20
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -20,6 +20,8 @@ work.
   `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`.
 - Current open Pi-along-functor implementation plan:
   `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`.
+- Active profunctor representability redesign plan:
+  `reports/REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
 - Current notation/reorganization subplan:
   `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
 - v2 retirement audit:
@@ -204,6 +206,22 @@ cross cells. This replaces the obsolete externally quantified cross family
 plus hand-written naturality equation with one `Prof_transf_cat` datum.
 Dependent elimination, generic directed-inductive types, explicit join hom
 decompositions, and a semantic collage construction remain deferred.
+
+The profunctor representability redesign has started with a bounded coherent
+foundation. `ProfMap(P,Q)` is a transparent name for the existing hom in
+`Prof_cat(A,B)`, so vertical identity and composition remain owned by
+`id_funcd` and `comp_catd_fapp0`. `IsoEvidence(C,x,y)` is active as nested
+Sigma data with forward/inverse projections, propositional left/right inverse
+equations, reflexivity, and symmetry.
+
+No generic computational `StrictIso` is active. Two candidate rewrite
+presentations passed focused assertions but failed decision-tree critical-pair
+audits: projection-expanding composition/functoriality conflicted with
+cancellation, while composition-folding conflicted with reflexivity, symmetry,
+Catd identities, and component projection. Do not reintroduce generic or
+Catd-specific strict-isomorphism cancellation based only on successful
+typechecking. The next comparison-owner design must include local-confluence
+evidence; see the redesign report's 2026-06-20 implementation checkpoint.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

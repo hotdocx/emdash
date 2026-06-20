@@ -522,7 +522,83 @@ rule @comp_fapp0
       $Z
       (@comp_fapp0 $A $X $Y $Z $g $f);
 
-// 3b. Universe categories.
+// -------------------------------------------------------------------------------------------------
+// 3b. Ordinary categorical isomorphism evidence
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Ordinary categorical isomorphism evidence.
+
+  This is propositional data: a forward arrow, an inverse arrow, and equality
+  paths witnessing both inverse equations. It does not claim judgmental
+  cancellation.
+*/
+symbol IsoEvidence
+  (C : Cat)
+  (x y : τ (Obj C))
+  : Grpd
+≔ `Σ_ to : τ (Hom C x y),
+   `Σ_ from : τ (Hom C y x),
+   `Σ_ _ : τ (
+      @comp_fapp0 C x y x from to
+        =
+      @id C x),
+      @comp_fapp0 C y x y to from
+        =
+      @id C y;
+
+symbol iso_evidence_to
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (Hom C x y)
+≔ sigma_Fst i;
+
+symbol iso_evidence_from
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (Hom C y x)
+≔ sigma_Fst (sigma_Snd i);
+
+symbol iso_evidence_left
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C x y x
+        (iso_evidence_from i)
+        (iso_evidence_to i)
+      =
+      @id C x)
+≔ sigma_Fst (sigma_Snd (sigma_Snd i));
+
+symbol iso_evidence_right
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C y x y
+        (iso_evidence_to i)
+        (iso_evidence_from i)
+      =
+      @id C y)
+≔ sigma_Snd (sigma_Snd (sigma_Snd i));
+
+symbol iso_evidence_sym
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (IsoEvidence C y x)
+≔ Struct_sigma
+    (iso_evidence_from i)
+    (Struct_sigma
+      (iso_evidence_to i)
+      (Struct_sigma
+        (iso_evidence_right i)
+        (iso_evidence_left i)));
+
+// 3c. Universe categories.
 /*
   Universe classifiers and their category structures.
 
@@ -552,7 +628,7 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
     Hom_Cat(A,B)  = A ⊢ B.
 */
 
-// 3c. Directed-family and displayed-arrow classifiers.
+// 3d. Directed-family and displayed-arrow classifiers.
 //
 // Directed Cat-valued families are canonical Cat-valued functors.
 //
@@ -693,6 +769,20 @@ rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
 // Ordinary category identity cuts: g ∘ id ↪ g and id ∘ f ↪ f.
 rule @comp_fapp0 $A $Y $Y $Z $g (@id $A $Y) ↪ $g;
 rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
+
+// Reflexive ordinary isomorphism evidence requires the identity-cut rules
+// above so that both propositional inverse equations are reflexivity.
+symbol iso_evidence_refl
+  [C : Cat]
+  (x : τ (Obj C))
+  : τ (IsoEvidence C x x)
+≔ Struct_sigma
+    (@id C x)
+    (Struct_sigma
+      (@id C x)
+      (Struct_sigma
+        (eq_refl (@id C x))
+        (eq_refl (@id C x))));
 
 // Ordinary opposite functor action.
 //
@@ -6154,6 +6244,17 @@ symbol Prof_cat (A B : Cat) : Cat
 // Object/type classifier of Cat-valued profunctors.
 symbol Prof (A B : Cat) : Grpd
 ≔ Obj (Prof_cat A B);
+
+// Vertical maps between profunctors with fixed endpoints.
+//
+// This is intentionally a transparent alias for the existing hom-category;
+// identities and composition remain owned by `id_funcd` and
+// `comp_catd_fapp0`.
+symbol ProfMap
+  [A B : Cat]
+  (P Q : τ (Prof A B))
+  : Grpd
+≔ Obj (Hom_cat (Prof_cat A B) P Q);
 
 /*
   Object-level opposite profunctor.

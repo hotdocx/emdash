@@ -3,10 +3,11 @@
 Date: 2026-06-19
 Last reviewed: 2026-06-20
 
-Status: proposed redesign plan. This report records a retrospective
-architecture review of the implemented profunctor, implication, weighted-limit,
-duality, and join work. It is intentionally provisional. No migration described
-here has yet replaced the active implementation in `emdash3_2.lp`.
+Status: active incremental redesign. The coherent Phase 1 foundation
+(`ProfMap` and ordinary `IsoEvidence`) is now active. The initially proposed
+generic judgmentally cancelling `StrictIso` layer failed the required
+critical-pair audit and has not been promoted. The remainder of this report is
+still provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
@@ -14,6 +15,63 @@ enriched-category and profunctor-equipment semantics, the current v3.2 kernel,
 and focused Lambdapi feasibility evidence. Every proposed interface remains
 subject to adjustment, replacement, or a prerequisite kernel side task as
 implementation probes expose better normal forms.
+
+## Implementation Checkpoint: 2026-06-20
+
+The first bounded implementation slice started from clean baseline commit:
+
+```text
+422c0df8b76921eb00d41ef141a3b6d02bb3dcbc
+```
+
+The following coherent infrastructure is active:
+
+```text
+ProfMap(P,Q) := Obj(Hom_cat(Prof_cat(A,B),P,Q));
+
+IsoEvidence(C,x,y);
+iso_evidence_to;
+iso_evidence_from;
+iso_evidence_left;
+iso_evidence_right;
+iso_evidence_refl;
+iso_evidence_sym.
+```
+
+`ProfMap` is transparent, so its identity and composition remain the existing
+`id_funcd` and `comp_catd_fapp0`. `IsoEvidence` is nested Sigma data with
+propositional inverse equations; reflexivity has identity-arrow projections,
+and symmetry swaps both arrows and inverse proofs.
+
+Two candidate computational `StrictIso` implementations were rejected after
+ordinary typechecking had initially passed:
+
+1. Generic or `Catd_cat`-owned cancellation plus projection-expanding
+   `strict_iso_comp`/`strict_iso_fmap` produced unjoinable projection-first
+   versus cancellation-first critical pairs. Contextual cancellation rules
+   also overlapped Catd identity and component projection.
+2. Orienting ordinary composition toward a stable composite-isomorphism
+   witness removed the composite expansion problem, but still produced
+   unjoinable overlaps with reflexivity, symmetry, Catd identities, and
+   `tapp0_fapp0` projection.
+
+The successful ordinary-evidence probe is:
+
+```text
+logs/probes/profunctor_representability_phase1_iso_evidence_probe-20260620-191023.log
+```
+
+Useful negative evidence is retained in:
+
+```text
+logs/probes/profunctor_representability_phase1_strict_iso_probe-20260620-185745.log
+logs/probes/profunctor_representability_phase1_strict_iso_fold_probe-20260620-190859.log
+```
+
+The first log shows that assertions alone can pass for a non-confluent rewrite
+system. The later decision-tree audit, not ordinary typechecking, invalidated
+the design. Therefore no active `StrictIso`, generic judgmental-cancellation,
+or Catd-specific cancellation rule should be inferred from this checkpoint.
 
 The immediate motivation is the current implementation of:
 
@@ -286,6 +344,26 @@ strict_iso_comp;
 strict_iso_fmap.
 ```
 
+This remains a semantic desideratum, not a validated rewrite presentation.
+The 2026-06-20 probes refute the earlier assumption that attaching generic
+cancellation to ordinary composition and then adding projection equations for
+these combinators is a coherent implementation. The next design must choose a
+different computational owner, for example:
+
+```text
+domain-specific inverse-operation calculi with generic propositional
+IsoEvidence as the common forgetful layer;
+
+a dedicated cut/eliminator syntax whose computation does not overlap ordinary
+category composition and component projection;
+
+or path/equivalence ownership followed by a separately justified strict
+specialization.
+```
+
+No option is selected yet. In particular, do not add category-by-category
+cancellation rules merely to make a finite assertion suite pass.
+
 Preservation constructs its result using these combinators; it does not require
 an unrestricted `strict_iso_intro`.
 
@@ -299,7 +377,7 @@ by eval/lambda. Each such generator requires:
 ```text
 stable forward and inverse projections;
 projection-first inverse composites that reduce or unify with identities;
-agreement with generic StrictIso cancellation;
+agreement with the selected computational comparison's cancellation;
 focused critical-pair and timeout checks.
 ```
 
@@ -392,13 +470,13 @@ path/equivalence-first:
   then recover the comparison maps needed by the current API.
 ```
 
-The selected first implementation is `computational-first`. This is an
-implementation priority, not a rejection of global univalence. The existing
-weighted-limit API requires judgmentally cancelling inverse comparison maps.
-The current equality kernel can already express `IsoEvidence`, but the
-computational `StrictIso` refinement still requires the focused design
-described below. Path ownership additionally requires computational laws for
-`idtoequiv_cat` over path composition and functorial path action.
+The first attempted implementation was `computational-first`. It successfully
+landed `IsoEvidence`, but the proposed generic `StrictIso` rewrite
+presentation failed the 2026-06-20 critical-pair audit. The choice of
+computational owner is therefore reopened. The existing weighted-limit API
+still requires judgmentally cancelling inverse comparison maps, while path
+ownership additionally requires computational laws for `idtoequiv_cat` over
+path composition and functorial path action.
 
 The path/equivalence route should proceed in parallel and may become the deeper
 owner after focused probes show that its projections reproduce the strict
@@ -872,7 +950,7 @@ WeightedLimit_cov_chosen(F,W)
 The preservation theorem currently needs only the property at an explicit
 candidate `L`; it does not require globally chosen limits.
 
-The selected first implementation owner is computational representability:
+The two candidate owners remain:
 
 ```text
 computational owner:
@@ -883,7 +961,9 @@ path owner:
   idtoequiv_cat.
 ```
 
-The path owner is architecturally attractive because path composition,
+The 2026-06-20 result rejects one generic strict-isomorphism presentation; it
+does not yet select the path owner. The path owner is architecturally
+attractive because path composition,
 symmetry, and functorial action can replace a separate strict-isomorphism
 algebra. It is feasible only when `Prof_cat` univalence exposes comparison maps
 with the required strict beta/eta behavior and with computation over
@@ -1074,7 +1154,8 @@ to the existing adjunction calculus:
 their fibre/arrow projections compute to the mate formulas;
 their reindexing computes through Prof_reindex_transf;
 their projection-first composites reduce by the existing triangle cuts;
-those reductions join generic StrictIso cancellation;
+those reductions join the cancellation law of the selected computational
+comparison owner;
 identity/composition/naturality checks pass without theorem-specific folds.
 ```
 
@@ -1356,8 +1437,8 @@ logs/probes/profunctor_representability_final_review_probe-20260619-184248.log
 
 This establishes that propositional isomorphism data is easy to represent. It
 does not establish a computational `StrictIso` interface. The remaining
-difficulty is generic judgmental cancellation, composition, functorial image,
-and the desired projection normal forms.
+difficulty is selecting a coherent owner for judgmental cancellation,
+composition, functorial image, and the desired projection normal forms.
 
 They also support a selective internalization policy:
 
@@ -1382,8 +1463,7 @@ cuts, and specialized composition normal forms. It does not yet expose a
 generic proof-level associativity theorem for arbitrary `comp_fapp0` or
 `comp_catd_fapp0`.
 
-Therefore the following must be probed before promoting a concrete
-`StrictIso` representation into the active kernel:
+The following proposed interface was probed:
 
 ```text
 strict_iso_to
@@ -1395,7 +1475,7 @@ strict_iso_fmap
 strict_iso_evidence
 ```
 
-The probe should distinguish:
+The probes distinguished:
 
 ```text
 IsoEvidence as nested Sigma data with explicit equality evidence;
@@ -1403,10 +1483,9 @@ a dedicated computational StrictIso classifier;
 identity-arrow specializations for judgmentally equal endpoints.
 ```
 
-The basic Sigma evidence representation has already passed a focused probe. The
-next probe should concentrate on arbitrary-witness cancellation,
-`strict_iso_refl`, `strict_iso_sym`, `strict_iso_comp`, and
-`strict_iso_fmap`.
+The Sigma evidence representation passed and is active. Arbitrary-witness
+cancellation with `strict_iso_refl`, `strict_iso_sym`, `strict_iso_comp`, and
+`strict_iso_fmap` did not pass the critical-pair audit and is not active.
 
 A temporary probe of the rejected unrestricted constructor/projection design
 did pass ordinary typechecking:
@@ -1417,11 +1496,10 @@ logs/probes/strict_iso_intro_overlap_probe-20260620-155202.log
 
 That result is deliberately negative evidence only: ordinary typechecking did
 not inspect or establish joinability of the nested projection/cancellation
-overlap. A local-confluence/debug attempt was too expensive for the bounded
-review run. The report therefore makes no confluence claim for that design.
+overlap.
 
-An unrestricted `strictify_iso : IsoEvidence -> StrictIso` is outside this
-first probe. If explored later, it must test the constructor-projection versus
+An unrestricted `strictify_iso : IsoEvidence -> StrictIso` remains outside the
+plan. If explored later, it must test the constructor-projection versus
 generic-cancellation overlap explicitly.
 
 It must also test the critical overlaps between:
@@ -1437,7 +1515,7 @@ generic functor identity/composition action;
 any associativity unification rule.
 ```
 
-The desired join is that both:
+The required join would make both:
 
 ```text
 strict_iso_from(strict_iso_comp(i,j))
@@ -1445,9 +1523,10 @@ strict_iso_from(strict_iso_comp(i,j))
 ```
 
 and its projected/reassociated component form reduce or unify with the same
-identity. One safe strategy is to let the stable `strict_iso_comp` head own
-generic cancellation and expose its arrow projections only to consumers that
-need them, rather than eagerly unfolding every composite.
+identity. The tested projection-expanding strategy failed this requirement.
+The tested strategy in which a stable composite head accumulated ordinary
+composition also failed because it overlapped reflexivity, symmetry, identity,
+and component projection. Neither strategy is safe.
 
 If composition of equality evidence is blocked only by bracketing, first test a
 narrow associativity unification rule. Do not turn arbitrary arrow
@@ -1772,46 +1851,51 @@ weighted limits.
 
 ### Critical Path: Computational Representability
 
-1. Introduce transparent `ProfMap` notation over `Hom_(Prof_cat A B)` and verify
-   that identity/composition are already owned by `id_funcd` and
-   `comp_catd_fapp0`. Treat endpoint-changing `ProfCell` as restriction into a
-   fixed target. Add no new vertical-map primitive unless the probe requires it.
-2. Implement/probe a dedicated computational `StrictIso` classifier with stable
-   `to/from` projections, judgmental cancellation for arbitrary witnesses,
-   reflexivity, symmetry, and composition. Keep arbitrary Sigma-encoded
-   inverse proofs in the separate `IsoEvidence` classifier.
-3. Probe projection/cancellation critical pairs for `strict_iso_refl`,
-   `strict_iso_sym`, `strict_iso_comp`, and `strict_iso_fmap`, together with
-   identity cuts, generic functoriality, and any narrowly required associativity
-   unification support.
-4. Add companion/conjoint presentation names where they clarify variance, and
+1. Completed: introduce transparent `ProfMap` notation over
+   `Hom_(Prof_cat A B)` and verify that identity/composition are already owned
+   by `id_funcd` and `comp_catd_fapp0`. Treat endpoint-changing `ProfCell` as
+   restriction into a fixed target.
+2. Completed: introduce Sigma-encoded `IsoEvidence` with forward/inverse
+   projections, both propositional inverse proofs, reflexivity, and symmetry.
+3. Blocked and returned to design: the proposed generic computational
+   `StrictIso` classifier with ordinary-composition cancellation,
+   reflexivity/symmetry/composition projections, and functorial image. Both
+   projection-expanding and composition-folding presentations failed the
+   decision-tree critical-pair audit.
+4. Before any new computational-isomorphism promotion, compare the alternative
+   owners recorded above. Require local-confluence evidence for projection,
+   cancellation, identity, component projection, and functorial action;
+   ordinary assertions are insufficient.
+5. Add companion/conjoint presentation names where they clarify variance, and
    add `Hom_prof_func`.
-5. Complete and check the object action, arrow action, identity law,
+6. Complete and check the object action, arrow action, identity law,
    composition law, and consumed capped projections of `Hom_prof_func`.
-6. Add fixed-weight `Prof_imply_cov_func`, including its complete unary functor
+7. Add fixed-weight `Prof_imply_cov_func`, including its complete unary functor
    laws and compatibility with `Prof_reindex_func`, while checking it against
    the eventual mixed-variance bifunctor signature.
-7. Implement `strict_iso_fmap` first for `Prof_reindex_func`, then for
+8. Only after selecting a coherent computational-isomorphism owner, implement
+   its functorial action first for `Prof_reindex_func`, then for
    `Prof_imply_cov_func(W)`.
-8. Introduce `IsRepresentedBy_iso`, `IsRepresentedBy_comp`,
-   `IsWeightedLimit_cov_iso`, and `IsWeightedLimit_cov_comp`, then present the
-   existing `WeightedLimit_cov` as a compatibility name for the computational
-   interface.
-9. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
+9. Introduce ordinary `IsRepresentedBy_iso` over `IsoEvidence`; introduce a
+   separate computational representability classifier only after the blocker
+   above is resolved. Then add `IsRepresentedBy_comp`,
+   `IsWeightedLimit_cov_iso`, and `IsWeightedLimit_cov_comp`.
+10. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
    computational adjunction presentation. Its projections must compute to the
    standard mate formulas, use the current off-diagonal triangle cuts for
    cancellation, and reindex simultaneously along `(M,F)`. Stable mate heads
    are acceptable while the general whole-`Functord` constructor is absent,
    provided they have no independent opaque behavior.
-10. Define `right_adjoint_preserves_weighted_limit_cov` as the
-   three-strict-isomorphism composite.
-11. Derive the existing shaped universal/cone API by reindexing the one ambient
-   strict isomorphism.
-12. Compare all current regression checks against the new implementation.
-13. Retire the primitive preservation theorem and its large theorem-specific
+11. Define `right_adjoint_preserves_weighted_limit_cov` using the selected
+   computational comparison algebra rather than assuming the rejected generic
+   `StrictIso` presentation.
+12. Derive the existing shaped universal/cone API by reindexing the one ambient
+   comparison.
+13. Compare all current regression checks against the new implementation.
+14. Retire the primitive preservation theorem and its large theorem-specific
     rewrite rules only after the replacement passes `make check`, `make health`,
     and `make ci`.
-14. Keep left-adjoint preservation as a transparent dual of the genuinely
+15. Keep left-adjoint preservation as a transparent dual of the genuinely
     defined right-adjoint theorem.
 
 ### Parallel Track: Equivalence And Computational Univalence
@@ -1864,6 +1948,11 @@ WeightedLimit_cov_chosen(F,W).
    stuck projection.
 
 ## Acceptance Criteria
+
+The semantic outcomes below remain valid, but every item phrased in terms of
+generic `StrictIso` is conditional on finding a coherent implementation of
+that interface. The 2026-06-20 rewrite presentation does not satisfy these
+criteria and is not active.
 
 The computational migration is complete only when all of the following hold:
 
@@ -1954,7 +2043,7 @@ global but incrementally computational univalence for Cat and Cat_cat;
 separate TypeEquiv, IsoEvidence, StrictIso, and OmegaEquiv layers;
 functorial ownership of representables and closed operations;
 vertical ProfMap ownership beneath endpoint-changing ProfCell;
-generic strict computational isomorphisms with identity-arrow fast paths;
+an unresolved computational comparison algebra with identity-arrow fast paths;
 generic representability;
 internalized rather than externally repeated universal properties;
 companion/conjoint organization of representables;
@@ -1962,32 +2051,32 @@ an explicit boundary among ordinary-isomorphism, computational, and weak
 weighted-limit semantics.
 ```
 
-The final review selects computational vertical representability, with an
-explicit forgetful map to ordinary isomorphism representability, as the
-immediate implementation. Computational univalence remains a parallel
-foundational track. This is currently the best balance of traditional
-semantics, full computation, internalization, kernel compatibility, and
-feasibility.
+The first implementation confirms vertical `ProfMap` ownership and ordinary
+isomorphism representability as coherent foundations. It does not confirm that
+a single generic judgmentally cancelling `StrictIso` classifier is the right
+computational owner. Computational univalence remains a parallel foundational
+track and is now also a serious alternative source of the comparison algebra.
 
 The redesign should still be evaluated globally against tensor, co-Yoneda,
 implication, weighted limits, duality, and join usage. It must not be
 implemented as a theorem-local cleanup.
 
-The next work is now precisely bounded:
+The next work is now bounded differently:
 
 ```text
-transparent ProfMap;
-computational StrictIso classifier and to/from projections;
-generic judgmental cancellation for an arbitrary witness;
-strict_iso_refl, strict_iso_sym, strict_iso_comp;
-critical-pair checks between projection, cancellation, identity, and
-associativity;
-strict_iso_fmap for Prof_reindex_func.
+keep the landed transparent ProfMap and ordinary IsoEvidence layer;
+do not restore either rejected StrictIso rewrite presentation;
+probe domain-specific inverse-operation ownership versus a dedicated
+comparison cut/eliminator versus path/equivalence ownership;
+require decision-tree/local-confluence evidence before active promotion;
+continue independent functorial infrastructure such as Hom_prof_func where it
+does not presuppose the unresolved comparison owner.
 ```
 
 `OmegaEquiv`, full univalence, `Hom_prof_func`, implication, and the
-preservation theorem should not enter this first probe. Neither should an
-unrestricted `IsoEvidence -> StrictIso` strictification constructor. The first
-probe establishes the generic computational algebra only; a subsequent focused
-probe must validate each nontrivial atomic generator before the preservation
-theorem can consume it.
+preservation theorem should still not be mixed into the next comparison-owner
+probe. Neither should an unrestricted `IsoEvidence -> StrictIso`
+strictification constructor. The failed probes establish that passing
+beta/eta assertions is weaker than establishing a coherent computational
+algebra; future work must make confluence part of the design criterion from the
+start.
