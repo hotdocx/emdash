@@ -63,6 +63,54 @@ assert [C : Cat] [x y : τ (Obj C)]
       =
       @id C y);
 
+assert [a b : Grpd] (f : τ a → τ b) (x : τ a) ⊢
+  @eq_ap a b f x x (eq_refl x)
+  ≡ eq_refl (f x);
+
+assert [a : Grpd] (x : τ a) ⊢
+  @eq_sym a x x (eq_refl x)
+  ≡ eq_refl x;
+
+assert [C : Cat] [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_to C x z
+    (@iso_evidence_comp C x y z j i)
+  ≡ @comp_fapp0 C x y z
+      (@iso_evidence_to C y z j)
+      (@iso_evidence_to C x y i);
+
+assert [C : Cat] [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_from C x z
+    (@iso_evidence_comp C x y z j i)
+  ≡ @comp_fapp0 C z y x
+      (@iso_evidence_from C x y i)
+      (@iso_evidence_from C y z j);
+
+assert [C D : Cat] (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_to
+    D
+    (@fapp0 C D F x)
+    (@fapp0 C D F y)
+    (@iso_evidence_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D F x y
+      (@iso_evidence_to C x y i);
+
+assert [C D : Cat] (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_from
+    D
+    (@fapp0 C D F x)
+    (@fapp0 C D F y)
+    (@iso_evidence_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D F y x
+      (@iso_evidence_from C x y i);
+
 // From emdash3_2.lp:446.
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
 
@@ -4803,6 +4851,29 @@ assert [A B X : Cat]
     F
     (@id_func B)
   ≡ @Hom_prof_along A B X F G;
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @Companion_prof A B F
+  ≡ @Hom_prof_along A B B F (@id_func B);
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @Conjoint_prof A B F
+  ≡ @Hom_prof A B F;
+
+assert [B J : Cat]
+  (P : τ (Prof B J))
+  (L : τ (Functor J B)) ⊢
+  @IsRepresentedBy_iso B J P L
+  ≡ IsoEvidence
+      (Prof_cat B J)
+      P
+      (@Conjoint_prof J B L);
+
+assert [B J : Cat]
+  (P : τ (Prof B J)) ⊢
+  @Representation_iso B J P
+  ≡ `Σ_ L : τ (Functor J B),
+      @IsRepresentedBy_iso B J P L;
 
 // Shaped profunctor cells and elements.
 assert [A A' B B' : Cat]

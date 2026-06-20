@@ -4,10 +4,11 @@ Date: 2026-06-19
 Last reviewed: 2026-06-20
 
 Status: active incremental redesign. The coherent Phase 1 foundation
-(`ProfMap` and ordinary `IsoEvidence`) is now active. The initially proposed
-generic judgmentally cancelling `StrictIso` layer failed the required
-critical-pair audit and has not been promoted. The remainder of this report is
-still provisional.
+(`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
+evidence/representability algebra are active. The initially proposed generic
+judgmentally cancelling `StrictIso` layer failed the required critical-pair
+audit and has not been promoted. The remainder of this report is still
+provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
@@ -35,13 +36,32 @@ iso_evidence_from;
 iso_evidence_left;
 iso_evidence_right;
 iso_evidence_refl;
-iso_evidence_sym.
+iso_evidence_sym;
+eq_sym;
+eq_ap;
+comp_assoc;
+iso_evidence_comp;
+iso_evidence_fmap;
+Companion_prof;
+Conjoint_prof;
+IsRepresentedBy_iso;
+Representation_iso.
 ```
 
 `ProfMap` is transparent, so its identity and composition remain the existing
 `id_funcd` and `comp_catd_fapp0`. `IsoEvidence` is nested Sigma data with
 propositional inverse equations; reflexivity has identity-arrow projections,
-and symmetry swaps both arrows and inverse proofs.
+symmetry swaps both arrows and inverse proofs, composition exposes ordinary
+arrow composition, and strict functors transport evidence through their arrow
+action. `comp_assoc` is propositional category-law evidence. It is
+deliberately neither a runtime rewrite nor a global conversion equation.
+
+`Companion_prof` and `Conjoint_prof` are transparent views of
+`Hom_prof_along`; they introduce no competing rewrite head.
+`IsRepresentedBy_iso` is ordinary representability by a conjoint, and
+`Representation_iso` is its Sigma of chosen representing functors. This layer
+does not claim the stronger computational beta/eta interface still needed by
+weighted-limit preservation.
 
 Two candidate computational `StrictIso` implementations were rejected after
 ordinary typechecking had initially passed:
@@ -72,6 +92,26 @@ The first log shows that assertions alone can pass for a non-confluent rewrite
 system. The later decision-tree audit, not ordinary typechecking, invalidated
 the design. Therefore no active `StrictIso`, generic judgmental-cancellation,
 or Catd-specific cancellation rule should be inferred from this checkpoint.
+
+A third experiment attempted to encode inverse cancellation and ordinary
+composition associativity as unification rules. It was also rejected:
+unification rules assist elaboration but do not make conversion assertions
+compute, projected composite witnesses escape the generic cancellation
+pattern, and a generic associativity rule polluted unrelated unification
+problems until the imported signature became unsatisfiable. The replacement
+uses explicit `comp_assoc` equality evidence. The successful bounded
+composition/functor-image probe is:
+
+```text
+logs/probes/profunctor_representability_phase2_iso_comp_step_probe-20260620-204039.log
+```
+
+The first full `Hom_prof_func` candidate also passed focused object, component,
+identity, and composition assertions, but it was not promoted. Its required
+general postcomposition and arrow-action rules introduced unjoinable critical
+pairs with existing `Cat_cat`, `Op_cat`, `Path_cat`, `Catd_cat`, and product
+specializations. An object-only or opaque functor head would not be a complete
+functorial representable and is therefore not being reported as progress.
 
 The immediate motivation is the current implementation of:
 
@@ -1856,7 +1896,9 @@ weighted limits.
    by `id_funcd` and `comp_catd_fapp0`. Treat endpoint-changing `ProfCell` as
    restriction into a fixed target.
 2. Completed: introduce Sigma-encoded `IsoEvidence` with forward/inverse
-   projections, both propositional inverse proofs, reflexivity, and symmetry.
+   projections, both propositional inverse proofs, reflexivity, symmetry,
+   transparent composition, and strict-functor image. Ordinary associativity
+   is explicit equality evidence rather than a rewrite/unification equation.
 3. Blocked and returned to design: the proposed generic computational
    `StrictIso` classifier with ordinary-composition cancellation,
    reflexivity/symmetry/composition projections, and functorial image. Both
@@ -1866,19 +1908,21 @@ weighted limits.
    owners recorded above. Require local-confluence evidence for projection,
    cancellation, identity, component projection, and functorial action;
    ordinary assertions are insufficient.
-5. Add companion/conjoint presentation names where they clarify variance, and
-   add `Hom_prof_func`.
-6. Complete and check the object action, arrow action, identity law,
-   composition law, and consumed capped projections of `Hom_prof_func`.
+5. Completed: add transparent companion/conjoint presentation names and
+   ordinary `IsRepresentedBy_iso`/`Representation_iso`.
+6. Blocked and returned to design: complete `Hom_prof_func`. The first full
+   arrow-action presentation passed assertions but failed its decision-tree
+   critical-pair audit. Do not promote an object-only substitute.
 7. Add fixed-weight `Prof_imply_cov_func`, including its complete unary functor
    laws and compatibility with `Prof_reindex_func`, while checking it against
    the eventual mixed-variance bifunctor signature.
 8. Only after selecting a coherent computational-isomorphism owner, implement
    its functorial action first for `Prof_reindex_func`, then for
    `Prof_imply_cov_func(W)`.
-9. Introduce ordinary `IsRepresentedBy_iso` over `IsoEvidence`; introduce a
-   separate computational representability classifier only after the blocker
-   above is resolved. Then add `IsRepresentedBy_comp`,
+9. Completed in its independent part: ordinary `IsRepresentedBy_iso` and
+   `Representation_iso` over `IsoEvidence`. Introduce a separate computational
+   representability classifier only after the comparison-owner blocker is
+   resolved. Then add `IsRepresentedBy_comp`,
    `IsWeightedLimit_cov_iso`, and `IsWeightedLimit_cov_comp`.
 10. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
    computational adjunction presentation. Its projections must compute to the
@@ -2065,12 +2109,14 @@ The next work is now bounded differently:
 
 ```text
 keep the landed transparent ProfMap and ordinary IsoEvidence layer;
+use the active propositional comp/fmap algebra for ordinary representability;
 do not restore either rejected StrictIso rewrite presentation;
 probe domain-specific inverse-operation ownership versus a dedicated
 comparison cut/eliminator versus path/equivalence ownership;
 require decision-tree/local-confluence evidence before active promotion;
-continue independent functorial infrastructure such as Hom_prof_func where it
-does not presuppose the unresolved comparison owner.
+redesign Hom_prof_func arrow ownership before another promotion attempt;
+continue independent fixed-weight implication and ordinary representability
+infrastructure where it does not presuppose the unresolved comparison owner.
 ```
 
 `OmegaEquiv`, full univalence, `Hom_prof_func`, implication, and the

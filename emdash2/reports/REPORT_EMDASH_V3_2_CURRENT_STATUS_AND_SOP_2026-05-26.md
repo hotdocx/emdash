@@ -223,6 +223,16 @@ Catd-specific strict-isomorphism cancellation based only on successful
 typechecking. The next comparison-owner design must include local-confluence
 evidence; see the redesign report's 2026-06-20 implementation checkpoint.
 
+The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
+propositional `comp_assoc`, transparent `iso_evidence_comp`, and
+`iso_evidence_fmap`. Associativity is intentionally not a rewrite or generic
+unification rule: a focused generic-unification probe polluted unrelated
+elaboration and was rejected. Transparent `Companion_prof`/`Conjoint_prof`
+names and the ordinary `IsRepresentedBy_iso`/`Representation_iso` layer are
+also active. A full `Hom_prof_func` probe passed basic assertions but failed
+its decision-tree critical-pair audit, so no incomplete object-only
+replacement was promoted.
+
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
 `:^n`; mixed variance is shown on the family occurrence, for example

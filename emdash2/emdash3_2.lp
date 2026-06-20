@@ -340,6 +340,26 @@ symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],
   τ (x = y) → τ (y = z) → τ (x = z)
 ≔ λ a x y z p q, ind_eq p (λ t : τ a, t = z) q;
 
+// Symmetry and nondependent action of functions on equality paths.
+symbol eq_sym
+  [a : Grpd]
+  [x y : τ a]
+  (p : τ (x = y))
+  : τ (y = x)
+≔ ind_eq p
+    (λ t : τ a, y = t)
+    (eq_refl y);
+
+symbol eq_ap
+  [a b : Grpd]
+  (f : τ a → τ b)
+  [x y : τ a]
+  (p : τ (x = y))
+  : τ (f x = f y)
+≔ ind_eq p
+    (λ t : τ a, f t = f y)
+    (eq_refl (f y));
+
 builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;
 builtin "eqind" ≔ ind_eq;
@@ -423,6 +443,27 @@ injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Hom A X_A X_A);
 symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)],
   Π (g: τ (Hom A Y_A Z_A)), Π (f: τ (Hom A X_A Y_A)),
   τ (Hom A X_A Z_A);
+
+/*
+  Propositional associativity of ordinary categorical composition.
+
+  This is evidence in the object equality theory, not a runtime rewrite or a
+  global unification equation. Cut-elimination rules may still normalize
+  specific constructors without globally reassociating arbitrary arrows.
+*/
+symbol comp_assoc
+  [C : Cat]
+  [w x y z : τ (Obj C)]
+  (h : τ (Hom C y z))
+  (g : τ (Hom C x y))
+  (f : τ (Hom C w x))
+  : τ (
+      @comp_fapp0 C w y z h
+        (@comp_fapp0 C w x y g f)
+      =
+      @comp_fapp0 C w x z
+        (@comp_fapp0 C x y z h g)
+        f);
 
 // Opposite category.
 injective symbol Op_cat : Cat → Cat;
@@ -783,6 +824,350 @@ symbol iso_evidence_refl
       (Struct_sigma
         (eq_refl (@id C x))
         (eq_refl (@id C x))));
+
+/*
+  Composition of ordinary isomorphism evidence.
+
+  The small proof steps keep endpoint inference bounded. The observable
+  forward and inverse arrows remain transparent compositions; only their
+  propositional inverse witnesses use comp_assoc and equality congruence.
+*/
+symbol iso_evidence_comp_left_step1
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C x z x
+        (@comp_fapp0 C z y x
+          (@iso_evidence_from C x y i)
+          (@iso_evidence_from C y z j))
+        (@comp_fapp0 C x y z
+          (@iso_evidence_to C y z j)
+          (@iso_evidence_to C x y i))
+      =
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@comp_fapp0 C x z y
+          (@iso_evidence_from C y z j)
+          (@comp_fapp0 C x y z
+            (@iso_evidence_to C y z j)
+            (@iso_evidence_to C x y i))))
+≔ @eq_sym
+    (Hom C x x)
+    (@comp_fapp0 C x y x
+      (@iso_evidence_from C x y i)
+      (@comp_fapp0 C x z y
+        (@iso_evidence_from C y z j)
+        (@comp_fapp0 C x y z
+          (@iso_evidence_to C y z j)
+          (@iso_evidence_to C x y i))))
+    (@comp_fapp0 C x z x
+      (@comp_fapp0 C z y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_from C y z j))
+      (@comp_fapp0 C x y z
+        (@iso_evidence_to C y z j)
+        (@iso_evidence_to C x y i)))
+    (@comp_assoc C x z y x
+      (@iso_evidence_from C x y i)
+      (@iso_evidence_from C y z j)
+      (@comp_fapp0 C x y z
+        (@iso_evidence_to C y z j)
+        (@iso_evidence_to C x y i)));
+
+symbol iso_evidence_comp_left_step2
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@comp_fapp0 C x z y
+          (@iso_evidence_from C y z j)
+          (@comp_fapp0 C x y z
+            (@iso_evidence_to C y z j)
+            (@iso_evidence_to C x y i)))
+      =
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@comp_fapp0 C x y y
+          (@comp_fapp0 C y z y
+            (@iso_evidence_from C y z j)
+            (@iso_evidence_to C y z j))
+          (@iso_evidence_to C x y i)))
+≔ @eq_ap
+    (Hom C x y)
+    (Hom C x x)
+    (λ q : τ (Hom C x y),
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        q)
+    (@comp_fapp0 C x z y
+      (@iso_evidence_from C y z j)
+      (@comp_fapp0 C x y z
+        (@iso_evidence_to C y z j)
+        (@iso_evidence_to C x y i)))
+    (@comp_fapp0 C x y y
+      (@comp_fapp0 C y z y
+        (@iso_evidence_from C y z j)
+        (@iso_evidence_to C y z j))
+      (@iso_evidence_to C x y i))
+    (@comp_assoc C x y z y
+      (@iso_evidence_from C y z j)
+      (@iso_evidence_to C y z j)
+      (@iso_evidence_to C x y i));
+
+symbol iso_evidence_comp_left_step3
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@comp_fapp0 C x y y
+          (@comp_fapp0 C y z y
+            (@iso_evidence_from C y z j)
+            (@iso_evidence_to C y z j))
+          (@iso_evidence_to C x y i))
+      =
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_to C x y i))
+≔ @eq_ap
+    (Hom C y y)
+    (Hom C x x)
+    (λ m : τ (Hom C y y),
+      @comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@comp_fapp0 C x y y
+          m
+          (@iso_evidence_to C x y i)))
+    (@comp_fapp0 C y z y
+      (@iso_evidence_from C y z j)
+      (@iso_evidence_to C y z j))
+    (@id C y)
+    (@iso_evidence_left C y z j);
+
+symbol iso_evidence_comp_left
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C x z x
+        (@comp_fapp0 C z y x
+          (@iso_evidence_from C x y i)
+          (@iso_evidence_from C y z j))
+        (@comp_fapp0 C x y z
+          (@iso_evidence_to C y z j)
+          (@iso_evidence_to C x y i))
+      =
+      @id C x)
+≔ eq_trans
+    (@iso_evidence_comp_left_step1 C x y z j i)
+    (eq_trans
+      (@iso_evidence_comp_left_step2 C x y z j i)
+      (eq_trans
+        (@iso_evidence_comp_left_step3 C x y z j i)
+        (@iso_evidence_left C x y i)));
+
+symbol iso_evidence_comp_right_step1
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C z x z
+        (@comp_fapp0 C x y z
+          (@iso_evidence_to C y z j)
+          (@iso_evidence_to C x y i))
+        (@comp_fapp0 C z y x
+          (@iso_evidence_from C x y i)
+          (@iso_evidence_from C y z j))
+      =
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@comp_fapp0 C z x y
+          (@iso_evidence_to C x y i)
+          (@comp_fapp0 C z y x
+            (@iso_evidence_from C x y i)
+            (@iso_evidence_from C y z j))))
+≔ @eq_sym
+    (Hom C z z)
+    (@comp_fapp0 C z y z
+      (@iso_evidence_to C y z j)
+      (@comp_fapp0 C z x y
+        (@iso_evidence_to C x y i)
+        (@comp_fapp0 C z y x
+          (@iso_evidence_from C x y i)
+          (@iso_evidence_from C y z j))))
+    (@comp_fapp0 C z x z
+      (@comp_fapp0 C x y z
+        (@iso_evidence_to C y z j)
+        (@iso_evidence_to C x y i))
+      (@comp_fapp0 C z y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_from C y z j)))
+    (@comp_assoc C z x y z
+      (@iso_evidence_to C y z j)
+      (@iso_evidence_to C x y i)
+      (@comp_fapp0 C z y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_from C y z j)));
+
+symbol iso_evidence_comp_right_step2
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@comp_fapp0 C z x y
+          (@iso_evidence_to C x y i)
+          (@comp_fapp0 C z y x
+            (@iso_evidence_from C x y i)
+            (@iso_evidence_from C y z j)))
+      =
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@comp_fapp0 C z y y
+          (@comp_fapp0 C y x y
+            (@iso_evidence_to C x y i)
+            (@iso_evidence_from C x y i))
+          (@iso_evidence_from C y z j)))
+≔ @eq_ap
+    (Hom C z y)
+    (Hom C z z)
+    (λ q : τ (Hom C z y),
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        q)
+    (@comp_fapp0 C z x y
+      (@iso_evidence_to C x y i)
+      (@comp_fapp0 C z y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_from C y z j)))
+    (@comp_fapp0 C z y y
+      (@comp_fapp0 C y x y
+        (@iso_evidence_to C x y i)
+        (@iso_evidence_from C x y i))
+      (@iso_evidence_from C y z j))
+    (@comp_assoc C z y x y
+      (@iso_evidence_to C x y i)
+      (@iso_evidence_from C x y i)
+      (@iso_evidence_from C y z j));
+
+symbol iso_evidence_comp_right_step3
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@comp_fapp0 C z y y
+          (@comp_fapp0 C y x y
+            (@iso_evidence_to C x y i)
+            (@iso_evidence_from C x y i))
+          (@iso_evidence_from C y z j))
+      =
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@iso_evidence_from C y z j))
+≔ @eq_ap
+    (Hom C y y)
+    (Hom C z z)
+    (λ m : τ (Hom C y y),
+      @comp_fapp0 C z y z
+        (@iso_evidence_to C y z j)
+        (@comp_fapp0 C z y y
+          m
+          (@iso_evidence_from C y z j)))
+    (@comp_fapp0 C y x y
+      (@iso_evidence_to C x y i)
+      (@iso_evidence_from C x y i))
+    (@id C y)
+    (@iso_evidence_right C x y i);
+
+symbol iso_evidence_comp_right
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (
+      @comp_fapp0 C z x z
+        (@comp_fapp0 C x y z
+          (@iso_evidence_to C y z j)
+          (@iso_evidence_to C x y i))
+        (@comp_fapp0 C z y x
+          (@iso_evidence_from C x y i)
+          (@iso_evidence_from C y z j))
+      =
+      @id C z)
+≔ eq_trans
+    (@iso_evidence_comp_right_step1 C x y z j i)
+    (eq_trans
+      (@iso_evidence_comp_right_step2 C x y z j i)
+      (eq_trans
+        (@iso_evidence_comp_right_step3 C x y z j i)
+        (@iso_evidence_right C y z j)));
+
+symbol iso_evidence_comp
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (IsoEvidence C y z))
+  (i : τ (IsoEvidence C x y))
+  : τ (IsoEvidence C x z)
+≔ Struct_sigma
+    (@comp_fapp0 C x y z
+      (@iso_evidence_to C y z j)
+      (@iso_evidence_to C x y i))
+    (Struct_sigma
+      (@comp_fapp0 C z y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_from C y z j))
+      (Struct_sigma
+        (@iso_evidence_comp_left C x y z j i)
+        (@iso_evidence_comp_right C x y z j i)));
+
+// Strict functors preserve ordinary isomorphism evidence.
+symbol iso_evidence_fmap
+  [C D : Cat]
+  (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (IsoEvidence D (fapp0 F x) (fapp0 F y))
+≔ Struct_sigma
+    (@fapp1_fapp0 C D F x y
+      (@iso_evidence_to C x y i))
+    (Struct_sigma
+      (@fapp1_fapp0 C D F y x
+        (@iso_evidence_from C x y i))
+      (Struct_sigma
+        (@eq_ap
+          (Hom C x x)
+          (Hom D (fapp0 F x) (fapp0 F x))
+          (λ p : τ (Hom C x x),
+            @fapp1_fapp0 C D F x x p)
+          (@comp_fapp0 C x y x
+            (@iso_evidence_from C x y i)
+            (@iso_evidence_to C x y i))
+          (@id C x)
+          (@iso_evidence_left C x y i))
+        (@eq_ap
+          (Hom C y y)
+          (Hom D (fapp0 F y) (fapp0 F y))
+          (λ p : τ (Hom C y y),
+            @fapp1_fapp0 C D F y y p)
+          (@comp_fapp0 C y x y
+            (@iso_evidence_to C x y i)
+            (@iso_evidence_from C x y i))
+          (@id C y)
+          (@iso_evidence_right C x y i))));
 
 // Ordinary opposite functor action.
 //
@@ -6563,6 +6948,37 @@ symbol Hom_prof [B X : Cat]
 symbol Unit_prof (X : Cat)
   : τ (Catd (Product_cat (Op_cat X) X))
 ≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
+
+// Standard equipment names for the two representables induced by a functor.
+// They are transparent views of the sole rewrite-facing Hom_prof_along head.
+symbol Companion_prof [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Prof A B)
+≔ @Hom_prof_along A B B F (@id_func B);
+
+symbol Conjoint_prof [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Prof B A)
+≔ @Hom_prof A B F;
+
+// Ordinary representability of a profunctor by a conjoint.
+symbol IsRepresentedBy_iso
+  [B J : Cat]
+  (P : τ (Prof B J))
+  (L : τ (Functor J B))
+  : Grpd
+≔ IsoEvidence
+    (Prof_cat B J)
+    P
+    (@Conjoint_prof J B L);
+
+// A chosen representing functor together with ordinary isomorphism evidence.
+symbol Representation_iso
+  [B J : Cat]
+  (P : τ (Prof B J))
+  : Grpd
+≔ `Σ_ L : τ (Functor J B),
+    @IsRepresentedBy_iso B J P L;
 
 // Reindexing along identity endpoint functors is neutral. This rule is added
 // here because tensor reindexing below exposes identity reindexing at the
