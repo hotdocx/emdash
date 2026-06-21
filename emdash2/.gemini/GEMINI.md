@@ -4,11 +4,11 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 ## Advices
 
-Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The v3.2 implementation fork is @emdash3_2.lp, guided by @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. The preserved v3.1 baseline is @emdash3_1.lp, summarized by @reports/REPORT_EMDASH_V3_CONSOLIDATED.md. The v2 reference remains @emdash2.lp, summarized by @reports/REPORT_EMDASH2_CONSOLIDATED.md.
+Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, with diagnostics in @emdash3_2_checks.lp. Current v3.2 guidance is consolidated in @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, @reports/EMDASH_FOUNDATIONS.md, and @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md. The obsolete v2 baseline has been retired; see @reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md for the audit summary.
 
-For v3.2 work, start from @emdash3_2.lp, the preserved @emdash3_1.lp baseline, and the consolidated reports. The older tracked v3 attempt has been retired into the ignored `.scratchpad/backup/2026-05-15_v3_retirement/` folder so it does not distract normal development.
+For v3.2 work, start from @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md only for the still-proposed structural functor logic work, and @reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md only for notation/reorganization follow-up. The v3.1 baseline, the older tracked v3 attempt, and superseded v3/v3.2 feature reports have been retired into ignored `.scratchpad/` folders so they do not distract normal development.
 
-The baseline inspiration is in the active files and in older material moved to `.scratchpad/`. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
+The baseline inspiration is in the active files and in retirement-audit reports. Older material moved to `.scratchpad/` is not part of normal development. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
@@ -22,16 +22,18 @@ Advice: if while implementing a new feature/task you find that you need to tempo
 
 Advice: you should try to write comments/explanations/doc about what you have implemented.
 
-Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_1.lp, @reports/REPORT_EMDASH_V3_CONSOLIDATED.md, and @reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md. Consult @emdash2.lp and @reports/REPORT_EMDASH2_CONSOLIDATED.md as references for rewrite/unification style and stable-head SOP.
+Advice: for v3.2 work, start by reading @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/EMDASH_FOUNDATIONS.md for the mathematical reading guide, @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md for current notation, and @reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md only when you need the obsolete v2 retirement summary.
 
 Advice: you should think hard and do a careful review and analysis; and find a design, architecture, and implementation to solve the task...
 
 ## Fast commands
 - Typecheck the current development: `make check`
+- Check reviewer milestone examples: `make examples`
+- Run local CI gate: `make ci`
+- Regenerate the check catalog: `make catalog`
+- Refresh the health report: `make health`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
-- Typecheck only v3.1 baseline: `lambdapi check -w emdash3_1.lp`
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
-- Typecheck only v2 reference: `lambdapi check -w emdash2.lp`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`
 - Remove compilation artefacts: `make clean`
@@ -40,6 +42,33 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 During early development, a “hung” typecheck usually indicates a rewrite/unification issue. Prefer a short timeout (≤ 60s) and investigate if it fires:
 - One-shot with timeout: `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 - Watch mode already uses `scripts/check.sh` (with the same timeout mechanism).
+- If the quiet `-w` run does not localize the interaction, rerun the smallest
+  target with warnings enabled:
+  `EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check`,
+  `make check-warnings`, or
+  `timeout 20s lambdapi check emdash3_2.lp`.
+- Check/probe/metrics scripts append optional flags from
+  `EMDASH_LAMBDAPI_FLAGS`, for example
+  `EMDASH_LAMBDAPI_FLAGS='--debug=u'`.
+
+## SOP: Rewrite-rule hygiene
+- Probe nontrivial rewrite/unification changes in a temporary copy with a focused assertion before editing the active file.
+- Keep inferred source/target arguments implicit on rule LHSs unless they are the actual discriminator.
+- Use `_` for reconstructible compound terms in inferred LHS slots after a
+  focused probe confirms the rule still checks promptly. If a compound slot
+  is an actual constructor discriminator or a measured subject-reduction /
+  decision-tree guard, keep it explicit and annotate it immediately above the
+  rule with `// lhs-audit: keep SLOT[,SLOT] -- reason`.
+- When a new rule appears to cause a loop or explosion, inspect a
+  warning-enabled check before rejecting it. The actual cause may be an older
+  interacting rule with reducible compound terms in inferred,
+  non-discriminating LHS slots.
+- When an explicit source/target category is needed in an assertion, prefer canonical forms such as `Hom_cat ...` and `Functord_cat ...` over reducible readability wrappers such as `Fibre_cat (DefinedAlias ...) k`.
+- Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
+- Cat-specialized semantic heads package extra structure exposed only when the ambient category is `Cat_cat`; keep them when they expose transfor projections such as `tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0`, but document the generic owner and any required overlap/join.
+- If a semantic definition fails to compute, first look for missing projection rules, such as a capped `fapp1_fapp0` rule corresponding to an existing `fapp1_func` rule.
+- Do not duplicate semantic bodies in helper aliases; route helper definitions through the named semantic constructor.
+- Prefer mostly horizontal formatting for simple stable-head rules after they stabilize. Keep vertical layout for nested endpoint formulas, deliberately explicit source/target categories, and diagnostic assertions.
 
 ## SOP: Continuous typecheck (watch mode)
 Recommended workflow (2 terminals):
@@ -56,6 +85,40 @@ Tuning / troubleshooting:
 Background daemon-style (then tail the log):
 - `nohup make watch >/dev/null 2>&1 &`
 
+## SOP: MathOps / DevOps
+- Keep the inner loop small: use `scripts/probe.sh tmp/probes/name.lp` for
+  focused experiments, `make check` for the active kernel plus diagnostics, and
+  `make examples` only when touching reviewer-facing milestones.
+- Use `make ci` before handing off substantial edits, not after every small
+  probe. It runs active Lambdapi checks, reviewer milestone examples, Python
+  byte-compilation, shell syntax checks, whitespace diff checks,
+  stale-reference lint, strict check-catalog freshness, and compact source
+  metrics.
+- Use `make catalog` after adding or reorganizing diagnostic assertions in
+  `emdash3_2_checks.lp`. During exploration it may emit an unclassified-check
+  warning and still write the catalog; `make ci` enforces the strict
+  zero-unclassified policy.
+- Use `make health` after meaningful architecture/check changes to refresh
+  `reports/REPORT_EMDASH_HEALTH.md`; the report includes the core files and
+  the checked `examples/*.lp` milestones.
+- `scripts/probe.sh` writes a log under `logs/probes/` and calls
+  `scripts/explain_failure.py` on failure.
+- Use `scripts/decision_tree.sh SYMBOL` as the local wrapper around
+  `lambdapi decision-tree`, with bare symbols resolved under
+  `emdash.emdash3_2`.
+- Use `python3 scripts/audit_rule_lhs.py` for an advisory inventory of
+  reconstructible compound terms in inferred LHS slots. Its output includes
+  intentional constructor discriminators; use `--show-kept` to include
+  annotated exceptions. `make audit-rules` and `make ci` use strict mode and
+  reject unreviewed candidates. Probe each proposed `_` replacement rather
+  than applying it mechanically.
+- Use `scripts/explain_failure.py --warning LOG` to locate the first warning
+  in a warning-enabled Lambdapi log.
+- Use `reports/INDEX.md` before searching reports by filename.
+- Use `research/literature.md` and `scripts/arxiv_search.py` for repeatable
+  arXiv/ar5iv discovery. ar5iv is for HTML skimming; arXiv PDF/source remains
+  authoritative for exact formulas.
+
 ## Conventions
 - Keep the repo in a state where `make check` succeeds.
 - Prefer small, composable files/modules once the theory grows (split out kernel/infrastructure vs. examples).
@@ -67,6 +130,30 @@ Background daemon-style (then tail the log):
 
 ## Notes for Codex CLI iteration
 - Keep `make watch` running and let the agent read `logs/typecheck.log` to see current typecheck failures while editing.
+
+## SOP: Resume After Context Compaction Or Interruption
+
+Do not continue from a compacted conversational summary alone. Before editing
+after an LLM context compaction, unexpected interruption, or handoff:
+
+1. Read `AGENTS.md`, `README.md`, `emdash3_2.lp`,
+   `emdash3_2_checks.lp`,
+   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
+   `reports/EMDASH_FOUNDATIONS.md`, and
+   `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
+2. Read the active task-specific plan/report and any user-designated
+   `tmp/tmp-context-*.md` recovery file.
+3. Run `git status --short`, inspect both `git diff --cached` and `git diff`,
+   and preserve the distinction between staged user-approved work and
+   unstaged work.
+4. Re-locate the active symbols and nearby rules with `rg`; do not rely on
+   line numbers or architectural conclusions remembered from before
+   compaction.
+5. Run a bounded baseline check before new edits. If it times out or hides the
+   location, repeat the smallest target with warnings enabled.
+
+Record any changed architectural conclusion in the active report; do not
+leave the correction only in conversational context.
 </INSTRUCTIONS>
 
 ## Some docs (in .rst reStructuredText format)
