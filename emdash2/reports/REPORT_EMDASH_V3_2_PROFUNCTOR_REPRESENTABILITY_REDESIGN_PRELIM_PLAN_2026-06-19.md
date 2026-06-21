@@ -392,11 +392,72 @@ prof_comparison_pull(i) : ProfMap(R,Q) -> ProfMap(R,P);
 prof_comparison_evidence(i) : IsoEvidence(Prof_cat(A,B),P,Q).
 ```
 
-The two eliminators are judgmental inverses on dedicated heads. Propositional
-semantic fields state that they agree with ordinary postcomposition by
-`iso_evidence_to` and `iso_evidence_from`. This preserves the traditional
-categorical interpretation without adding rewrite rules to
-`comp_catd_fapp0` or `Prof_comp_transf`.
+The two eliminators are judgmental inverses on dedicated heads. The initial
+promotion used primitive propositional semantic fields to relate them to
+ordinary postcomposition. A follow-up refinement removed that unnecessary
+opacity.
+
+Selected arrows are now identity applications:
+
+```text
+prof_comparison_to(i)   := prof_comparison_push(i,id);
+prof_comparison_from(i) := prof_comparison_pull(i,id).
+```
+
+Incoming-map naturality is the inward cut-elimination rule:
+
+```text
+prof_comparison_push(i,r) o h
+  -> prof_comparison_push(i,r o h);
+
+prof_comparison_pull(i,s) o h
+  -> prof_comparison_pull(i,s o h).
+```
+
+The reverse expansion orientation was rejected: it produced twelve
+probe-owned critical pairs with identity cuts, the semantic equipment fold,
+and reductions of opposite/product bases. The inward orientation added no
+critical pair in either the imported probe or a full owning-module copy.
+
+Proof-time unification equations identify the selected identity applications
+with the normalized Sigma projections of `prof_comparison_evidence`. Because
+`iso_evidence_to/from` are transparent aliases, rules written with those alias
+heads do not fire; the active equations deliberately use
+`sigma_Fst(evidence)` and `sigma_Fst(sigma_Snd(evidence))`.
+
+Consequently:
+
+```text
+prof_comparison_to_evidence(i);
+prof_comparison_from_evidence(i);
+```
+
+are definitions by `eq_refl`. Unification does not recursively rewrite an
+evidence projection inside arbitrary composition, so the general
+`prof_comparison_push/pull_semantics` proofs are transparent
+`eq_trans`/`eq_ap` derivations from:
+
+```text
+the reflexive selected-arrow bridge;
+inward accumulation.
+```
+
+They are no longer primitive evidence fields.
+
+Functorial action is owned by the existing generic infrastructure:
+
+```text
+prof_comparison_push_func(i,R)
+  := hom_postcomp_func(id_Prof,R,P,Q,prof_comparison_to(i));
+
+prof_comparison_pull_func(i,R)
+  := hom_postcomp_func(id_Prof,R,Q,P,prof_comparison_from(i)).
+```
+
+Their object actions reduce to the dedicated push/pull eliminators through
+ordinary postcomposition plus accumulation, while higher-arrow behavior is
+inherited from `hom_postcomp_*`. Thus `ProfComparison` owns computational
+invertibility, not a duplicate functor calculus.
 
 The active algebra includes:
 
@@ -466,6 +527,8 @@ Passing focused log:
 
 ```text
 logs/probes/profunctor_representability_weighted_eliminator_probe-20260622-014137.log
+logs/probes/profunctor_comparison_accumulation_probe-20260622-022308.log
+logs/probes/profunctor_comparison_unif_bridge_probe-20260622-023828.log
 ```
 
 After active promotion:
@@ -481,7 +544,10 @@ Therefore the currently selected computational owner is:
 ```text
 dedicated inverse application/elimination;
 ordinary IsoEvidence for semantic arrows and equations;
-propositional agreement between eliminators and ordinary postcomposition;
+selected arrows related to evidence projections by proof-time unification;
+transparent postcomposition semantics derived by accumulation and equality
+congruence;
+generic hom_postcomp_func ownership of functorial/higher action;
 no generic inverse cancellation on shared category/equipment composition.
 ```
 
@@ -2302,9 +2368,12 @@ weighted limits.
    decision-tree critical-pair audit.
 4. Completed after redesign: select `ProfComparison`, whose inverse
    `prof_comparison_push/pull` operations compute on dedicated heads.
-   Ordinary `IsoEvidence` and propositional postcomposition semantics are the
-   forgetful layer. Direct cancellation under `Prof_comp_transf` was rejected
-   after active duality overlaps increased the warning inventory.
+   Selected arrows are identity applications; inward accumulation derives
+   ordinary postcomposition behavior; `hom_postcomp_func` owns functorial and
+   higher action. Proof-time unification makes selected-arrow/evidence
+   agreement reflexive, and general semantic proofs are transparent.
+   Direct cancellation under `Prof_comp_transf` was rejected after active
+   duality overlaps increased the warning inventory.
 5. Completed: add transparent companion/conjoint presentation names and
    ordinary `IsRepresentedBy_iso`/`Representation_iso`.
 6. Completed after redesign: `Hom_prof_func` is the stable opaque view of a
@@ -2420,7 +2489,8 @@ ProfComparison forgets to coherent propositional IsoEvidence;
 the computational weighted-limit witness forgets to the ordinary
 isomorphism-representability property;
 every nontrivial atomic ProfComparison exposes ordinary evidence and
-propositional postcomposition semantics;
+reflexive selected-arrow bridges;
+general postcomposition semantics is derived transparently from accumulation;
 the ambient weighted-limit witness reindexes to every shaped probe M;
 the ambient adjunction mate reindexes simultaneously to every shaped pair
 (M,F);
@@ -2438,6 +2508,8 @@ ProfMap remains transparent unless a focused probe justifies a stable head;
 prof_comparison_refl/sym/comp push/pull paths join;
 prof_comparison_fmap evidence computes without exposing an invalid target
 action formula;
+prof_comparison_push/pull_func use generic hom_postcomp infrastructure and
+compute to the eliminators on objects;
 Hom_prof_func and Prof_imply_cov_func pass identity/composition checks;
 any Catd_cat-specialized univalence head documents Functor_cat as owner;
 the adjunction mate bridge has no behavior independent of the chosen

@@ -7128,11 +7128,145 @@ with @prof_comparison_push
       (@prof_comparison_pull $A $B $P $Q $i $R $s)
   ↪ $s;
 
+// Selected forward and inverse arrows are identity applications.
+symbol prof_comparison_to
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (ProfMap P Q)
+≔ @prof_comparison_push
+    A B P Q i P
+    (@id_funcd (Product_cat (Op_cat A) B) P);
+
+symbol prof_comparison_from
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (ProfMap Q P)
+≔ @prof_comparison_pull
+    A B P Q i Q
+    (@id_funcd (Product_cat (Op_cat A) B) Q);
+
 symbol prof_comparison_evidence
   [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
   : τ (IsoEvidence (Prof_cat A B) P Q);
+
+/*
+  Incoming-map naturality is oriented inward as cut elimination:
+
+    push(i,r) o h -> push(i,r o h).
+
+  The opposite expansion orientation creates critical pairs with identity
+  cuts, equipment folds, and reducible opposite bases.
+*/
+rule @comp_catd_fapp0
+      _
+      $S $R $Q
+      (@prof_comparison_push $A $B $P $Q $i $R $r)
+      $h
+  ↪ @prof_comparison_push
+      $A $B $P $Q $i $S
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat $A) $B)
+        $S $R $P
+        $r $h)
+with @comp_catd_fapp0
+      _
+      $S $R $P
+      (@prof_comparison_pull $A $B $P $Q $i $R $s)
+      $h
+  ↪ @prof_comparison_pull
+      $A $B $P $Q $i $S
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat $A) $B)
+        $S $R $Q
+        $s $h);
+
+/*
+  Proof-time agreement between selected comparison arrows and ordinary
+  evidence projections. `iso_evidence_to/from` are transparent Sigma
+  projections, so these equations use their normalized forms. They do not
+  rewrite either public normal form, but let the explicit bridge proofs below
+  be `eq_refl`.
+*/
+unif_rule @prof_comparison_push
+    $A $B $P $Q $i $P
+    (@id_funcd (Product_cat (Op_cat $A) $B) $P)
+  ≡ sigma_Fst
+      (@prof_comparison_evidence $A $B $P $Q $i)
+  ↪ [ tt ≡ tt ];
+
+unif_rule @prof_comparison_pull
+    $A $B $P $Q $i $Q
+    (@id_funcd (Product_cat (Op_cat $A) $B) $Q)
+  ≡ sigma_Fst
+      (sigma_Snd
+        (@prof_comparison_evidence $A $B $P $Q $i))
+  ↪ [ tt ≡ tt ];
+
+symbol prof_comparison_to_evidence
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (
+      @prof_comparison_to A B P Q i
+      =
+      @iso_evidence_to
+        (Prof_cat A B) P Q
+        (@prof_comparison_evidence A B P Q i))
+≔ eq_refl
+    (@prof_comparison_to A B P Q i);
+
+symbol prof_comparison_from_evidence
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (
+      @prof_comparison_from A B P Q i
+      =
+      @iso_evidence_from
+        (Prof_cat A B) P Q
+        (@prof_comparison_evidence A B P Q i))
+≔ eq_refl
+    (@prof_comparison_from A B P Q i);
+
+// Accumulation identifies the eliminators with postcomposition by the
+// selected arrows before relating those arrows to ordinary evidence.
+symbol prof_comparison_push_selected
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (r : τ (ProfMap R P))
+  : τ (
+      @prof_comparison_push A B P Q i R r
+      =
+      @comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        R P Q
+        (@prof_comparison_to A B P Q i)
+        r)
+≔ eq_refl
+    (@prof_comparison_push A B P Q i R r);
+
+symbol prof_comparison_pull_selected
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (s : τ (ProfMap R Q))
+  : τ (
+      @prof_comparison_pull A B P Q i R s
+      =
+      @comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        R Q P
+        (@prof_comparison_from A B P Q i)
+        s)
+≔ eq_refl
+    (@prof_comparison_pull A B P Q i R s);
 
 symbol prof_comparison_push_semantics
   [A B : Cat]
@@ -7149,7 +7283,22 @@ symbol prof_comparison_push_semantics
         (@iso_evidence_to
           (Prof_cat A B) P Q
           (@prof_comparison_evidence A B P Q i))
-        r);
+        r)
+≔ eq_trans
+    (@prof_comparison_push_selected A B P Q i R r)
+    (@eq_ap
+      (@ProfMap A B P Q)
+      (@ProfMap A B R Q)
+      (λ f : τ (@ProfMap A B P Q),
+        @comp_catd_fapp0
+          (Product_cat (Op_cat A) B)
+          R P Q
+          f r)
+      (@prof_comparison_to A B P Q i)
+      (@iso_evidence_to
+        (Prof_cat A B) P Q
+        (@prof_comparison_evidence A B P Q i))
+      (@prof_comparison_to_evidence A B P Q i));
 
 symbol prof_comparison_pull_semantics
   [A B : Cat]
@@ -7166,7 +7315,58 @@ symbol prof_comparison_pull_semantics
         (@iso_evidence_from
           (Prof_cat A B) P Q
           (@prof_comparison_evidence A B P Q i))
-        s);
+        s)
+≔ eq_trans
+    (@prof_comparison_pull_selected A B P Q i R s)
+    (@eq_ap
+      (@ProfMap A B Q P)
+      (@ProfMap A B R P)
+      (λ f : τ (@ProfMap A B Q P),
+        @comp_catd_fapp0
+          (Product_cat (Op_cat A) B)
+          R Q P
+          f s)
+      (@prof_comparison_from A B P Q i)
+      (@iso_evidence_from
+        (Prof_cat A B) P Q
+        (@prof_comparison_evidence A B P Q i))
+      (@prof_comparison_from_evidence A B P Q i));
+
+/*
+  Generic functorial owners for comparison action. Their object actions reduce
+  to `prof_comparison_push/pull` through ordinary hom postcomposition and the
+  inward accumulation rules. Higher-arrow behavior is inherited from the
+  existing `hom_postcomp_*` infrastructure.
+*/
+symbol prof_comparison_push_func
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  (R : τ (Prof A B))
+  : τ (Functor
+      (Hom_cat (Prof_cat A B) R P)
+      (Hom_cat (Prof_cat A B) R Q))
+≔ @hom_postcomp_func
+    (Prof_cat A B)
+    (Prof_cat A B)
+    (@id_func (Prof_cat A B))
+    R P Q
+    (@prof_comparison_to A B P Q i);
+
+symbol prof_comparison_pull_func
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  (R : τ (Prof A B))
+  : τ (Functor
+      (Hom_cat (Prof_cat A B) R Q)
+      (Hom_cat (Prof_cat A B) R P))
+≔ @hom_postcomp_func
+    (Prof_cat A B)
+    (Prof_cat A B)
+    (@id_func (Prof_cat A B))
+    R Q P
+    (@prof_comparison_from A B P Q i);
 
 injective symbol prof_comparison_refl
   [A B : Cat]
@@ -9037,7 +9237,8 @@ symbol Adjunction_hom_prof_comparison_along
     3. the adjunction mate at the candidate limit.
 
   It does not replace the stronger unsuffixed computational witness below,
-  whose judgmentally cancelling comparison owner remains under redesign.
+  which remains temporarily active while consumers migrate to the parallel
+  `ProfComparison` API.
 */
 symbol right_adjoint_weighted_limit_iso_step1
   [B J J' A : Cat]

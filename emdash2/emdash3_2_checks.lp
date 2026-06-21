@@ -6147,6 +6147,30 @@ assert [A B : Cat]
   : τ (@IsoEvidence (@Prof_cat A B) P Q);
 
 assert [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q)) ⊢
+  @prof_comparison_to_evidence A B P Q i
+  ≡ eq_refl (@prof_comparison_to A B P Q i);
+
+assert [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q)) ⊢
+  @prof_comparison_from_evidence A B P Q i
+  ≡ eq_refl (@prof_comparison_from A B P Q i);
+
+assert [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q)) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat A) B)
+    P Q P
+    (@prof_comparison_from A B P Q i)
+    (@prof_comparison_to A B P Q i)
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) B)
+      P;
+
+assert [A B : Cat]
   [P Q R : τ (Prof A B)]
   (i : τ (@ProfComparison A B P Q))
   (r : τ (@ProfMap A B R P)) ⊢
@@ -6159,8 +6183,34 @@ assert [A B : Cat]
         R P Q
         (@iso_evidence_to
           (Prof_cat A B) P Q
-          (@prof_comparison_evidence A B P Q i))
+        (@prof_comparison_evidence A B P Q i))
         r);
+
+assert [A B : Cat]
+  [P Q R S : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (r : τ (@ProfMap A B R P))
+  (h : τ (@ProfMap A B S R)) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat A) B)
+    S R Q
+    (@prof_comparison_push A B P Q i R r)
+    h
+  ≡ @prof_comparison_push A B P Q i S
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        S R P r h);
+
+assert [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (r : τ (@ProfMap A B R P)) ⊢
+  @fapp0
+    (Hom_cat (Prof_cat A B) R P)
+    (Hom_cat (Prof_cat A B) R Q)
+    (@prof_comparison_push_func A B P Q i R)
+    r
+  ≡ @prof_comparison_push A B P Q i R r;
 
 assert [A B : Cat]
   [P Q R : τ (Prof A B)]

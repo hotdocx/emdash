@@ -256,10 +256,28 @@ The selected computational comparison owner is now the dedicated
 `ProfComparison(P,Q)` eliminator algebra. For every incoming
 `R : Prof(A,B)`, `prof_comparison_push` and `prof_comparison_pull` are
 judgmental inverses on their own heads. `prof_comparison_evidence` forgets to
-ordinary `IsoEvidence`, while propositional semantic fields identify push and
-pull with postcomposition by its forward and inverse arrows. Reflexivity,
-symmetry, and composition compute structurally; functorial image is a stable
-certified comparison whose evidence computes through `iso_evidence_fmap`.
+ordinary `IsoEvidence`. The selected arrows
+`prof_comparison_to/from` are push/pull applied to identities. Proof-time
+unification equates those identity applications with the normalized Sigma
+projections of the ordinary evidence, so the explicit bridge proofs are
+defined by `eq_refl`.
+
+Incoming-map naturality accumulates ordinary vertical composition inward:
+
+```text
+push(i,r) o h -> push(i,r o h);
+pull(i,s) o h -> pull(i,s o h).
+```
+
+The opposite expansion orientation was rejected after producing twelve
+focused critical pairs. General push/pull postcomposition semantics is now a
+transparent `eq_trans`/`eq_ap` derivation, not primitive evidence.
+`prof_comparison_push_func` and `prof_comparison_pull_func` use the generic
+`hom_postcomp_func`; their object actions compute to push/pull, and their
+higher-arrow actions are inherited from the existing hom calculus.
+Reflexivity, symmetry, and composition compute structurally; functorial image
+is a stable certified comparison whose evidence computes through
+`iso_evidence_fmap`.
 
 This design was selected only after rejecting a profunctor-specialized variant
 whose arrows cancelled directly under `Prof_comp_transf`. That variant passed
