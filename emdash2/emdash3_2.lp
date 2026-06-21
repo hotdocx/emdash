@@ -8748,118 +8748,52 @@ symbol weighted_limit_cov_comp_cone_transf
       (@Hom_prof_along I J' B M L));
 
 /*
-  Covariant weighted limits.
+  Public computational weighted-limit interface.
 
-  For F : J -> B, W : Prof(J',J), and L : J' -> B, a witness packages the
-  representable universal comparison
-
-    Prof_imply_cov(Hom_prof_along(M,F),W) <-> Hom_prof_along(M,L)
-
-  for every shaped probe M : I -> B. Naturality in M and preservation by right
-  adjoints are separate later slices.
+  The established name is now a transparent compatibility alias for the
+  ambient representability comparison. Shaped universal and cone maps are
+  selected identity applications of its push/pull eliminators.
 */
-injective symbol WeightedLimit_cov [B J J' : Cat]
+symbol WeightedLimit_cov [B J J' : Cat]
   (F : τ (Functor J B))
-  (W : τ (Catd (Product_cat (Op_cat J') J)))
+  (W : τ (Prof J' J))
   (L : τ (Functor J' B))
-  : Grpd;
+  : Grpd
+≔ @IsWeightedLimit_cov_comp B J J' F W L;
 
 symbol weighted_limit_cov_univ_transf
   [B J J' : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L))
   [I : Cat]
   (M : τ (Functor I B))
-  : τ (Obj
-      (@Prof_transf_cat
-        I I J' J'
-        (@Prof_imply_cov
-          I J' J
-          (@Hom_prof_along I J B M F)
-          W)
-        (@id_func I)
-        (@Hom_prof_along I J' B M L)
-        (@id_func J')));
+  : τ (ProfMap
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W)
+      (@Hom_prof_along I J' B M L))
+≔ @weighted_limit_cov_comp_univ_transf
+    B J J' F W L isl I M;
 
 symbol weighted_limit_cov_cone_transf
   [B J J' : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L))
   [I : Cat]
   (M : τ (Functor I B))
-  : τ (Obj
-      (@Prof_transf_cat
-        I I J' J'
-        (@Hom_prof_along I J' B M L)
-        (@id_func I)
-        (@Prof_imply_cov
-          I J' J
-          (@Hom_prof_along I J B M F)
-          W)
-        (@id_func J')));
-
-rule @Prof_comp_transf
-      $I $I $I
-      $J' $J' $J'
+  : τ (ProfMap
+      (@Hom_prof_along I J' B M L)
       (@Prof_imply_cov
-        $I $J' $J
-        (@Hom_prof_along $I $J $B $M $F)
-        $W)
-      (@Hom_prof_along $I $J' $B $M $L)
-      (@Prof_imply_cov
-        $I $J' $J
-        (@Hom_prof_along $I $J $B $M $F)
-        $W)
-      (@id_func $I)
-      (@id_func $J')
-      (@id_func $I)
-      (@id_func $J')
-      (@weighted_limit_cov_cone_transf
-        $B $J $J'
-        $F $W $L
-        $isl
-        $I $M)
-      (@weighted_limit_cov_univ_transf
-        $B $J $J'
-        $F $W $L
-        $isl
-        $I $M)
-  ↪ @Prof_id_transf
-      $I $J'
-      (@Prof_imply_cov
-        $I $J' $J
-        (@Hom_prof_along $I $J $B $M $F)
-        $W)
-with @Prof_comp_transf
-      $I $I $I
-      $J' $J' $J'
-      (@Hom_prof_along $I $J' $B $M $L)
-      (@Prof_imply_cov
-        $I $J' $J
-        (@Hom_prof_along $I $J $B $M $F)
-        $W)
-      (@Hom_prof_along $I $J' $B $M $L)
-      (@id_func $I)
-      (@id_func $J')
-      (@id_func $I)
-      (@id_func $J')
-      (@weighted_limit_cov_univ_transf
-        $B $J $J'
-        $F $W $L
-        $isl
-        $I $M)
-      (@weighted_limit_cov_cone_transf
-        $B $J $J'
-        $F $W $L
-        $isl
-        $I $M)
-  ↪ @Prof_id_transf
-      $I $J'
-      (@Hom_prof_along $I $J' $B $M $L);
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W))
+≔ @weighted_limit_cov_comp_cone_transf
+    B J J' F W L isl I M;
 
 /*
   Narrow adjunction/profunctor bridge.
@@ -9547,6 +9481,13 @@ symbol right_adjoint_preserves_weighted_limit_cov_comp
       (@right_adjoint_weighted_limit_comp_step1
         B J J' A W F adj));
 
+/*
+  Migration marker (2026-06-22): retired theorem-specific preservation block.
+
+  This exact block is temporarily retained as a nested comment for one
+  validation slice. Its active replacement is the transparent public theorem
+  immediately below. Remove this commented block after the cutover gates pass.
+
 // Lift untranspose covariantly through implication while the weight is fixed.
 symbol Adjunction_prof_imply_untranspose
   [B J J' A : Cat]
@@ -9897,6 +9838,34 @@ with @Prof_comp_transf
           $J' $B $A
           (@right_adj_func $A $B $adj)
           $L));
+
+*/
+
+/*
+  Public right-adjoint preservation theorem.
+
+  The established name is now the genuinely defined comparison composition.
+*/
+symbol right_adjoint_preserves_weighted_limit_cov
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (@WeightedLimit_cov
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L))
+≔ @right_adjoint_preserves_weighted_limit_cov_comp
+    B J J' A W F L isl adj;
 
 /*
   Contravariant weighted colimits by duality.

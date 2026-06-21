@@ -6383,6 +6383,11 @@ assert [B J J' I : Cat]
           W)
         (@id_func J')));
 
+/*
+  Retired at the 2026-06-22 cutover: cancellation is now checked through
+  weighted_limit_cov_push/pull on arbitrary incoming maps, not duplicate
+  Prof_comp_transf rules on the two selected identity applications.
+
 assert [B J J' I : Cat]
   [F : τ (Functor J B)]
   [W : τ (Catd (Product_cat (Op_cat J') J))]
@@ -6454,6 +6459,7 @@ assert [B J J' I : Cat]
   ≡ @Prof_id_transf
       I J'
       (@Hom_prof_along I J' B M L);
+*/
 
 assert [A B I K : Cat]
   (adj : τ (Adjunction A B))
@@ -6729,6 +6735,11 @@ assert [B J J' A : Cat]
           (@Adjunction_prof_untranspose
             A B adj A J (@id_func A) F)));
 
+/*
+  Retired at the 2026-06-22 cutover: diagnostics for the former implication
+  helper, theorem-specific universal head, and constructor-local
+  Prof_comp_transf joins.
+
 assert [B J J' A I : Cat]
   [W : τ (Catd (Product_cat (Op_cat J') J))]
   [F : τ (Functor J B)]
@@ -6915,6 +6926,54 @@ assert [B J J' A I : Cat]
       (@Hom_prof_along
         I J' A M
         (@comp_cat_fapp0 J' B A (@right_adj_func A B adj) L));
+*/
+
+assert [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @right_adjoint_preserves_weighted_limit_cov
+    B J J' A W F L isl adj
+  ≡ @right_adjoint_preserves_weighted_limit_cov_comp
+      B J J' A W F L isl adj;
+
+assert [B J J' A I : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@WeightedLimit_cov B J J' F W L))
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A)) ⊢
+  @weighted_limit_cov_univ_transf
+    A J J'
+    (@comp_cat_fapp0
+      J B A
+      (@right_adj_func A B adj)
+      F)
+    W
+    (@comp_cat_fapp0
+      J' B A
+      (@right_adj_func A B adj)
+      L)
+    (@right_adjoint_preserves_weighted_limit_cov
+      B J J' A W F L isl adj)
+    I M
+  ≡ @weighted_limit_cov_comp_univ_transf
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L)
+      (@right_adjoint_preserves_weighted_limit_cov_comp
+        B J J' A W F L isl adj)
+      I M;
 
 // From emdash3_2.lp:8346.
 assert [K : Cat] (A : Cat)

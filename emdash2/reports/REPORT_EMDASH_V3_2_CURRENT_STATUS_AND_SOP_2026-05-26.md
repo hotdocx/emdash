@@ -157,20 +157,24 @@ symbolic above its object/capped projections: separate higher-arrow rules, the
 eventual mixed-variance bifunctor, fixed-left contravariant implication
 functor, broader eval naturality, and end semantics remain deferred.
 
-The first weighted-limit and adjunction-preservation slices are active.
-`WeightedLimit_cov(F,W,L)` packages, for every probe `M`, inverse equipment
-cells between `Prof_imply_cov(Hom_prof_along(M,F),W)` and
-`Hom_prof_along(M,L)`. Their beta/eta reductions are owned by
-`Prof_comp_transf`. `Adjunction_prof_transpose` and
-`Adjunction_prof_untranspose` give the narrow inverse representable bridge
-`Hom_B(left(M),F) <-> Hom_A(M,right(F))`. The formerly transparent Phase 4c
-composite has been promoted to the stable
-`right_adjoint_preserves_weighted_limit_cov_univ_transf` head, with the exact
-composition folding to it. `right_adjoint_preserves_weighted_limit_cov`
-constructs the full preserved witness; its universal projection computes to
-that stable map and constructor-local joins preserve both generic beta/eta
-laws. An explicit formula for the inverse preserved cone, naturality in `M`,
-and unit/counit component projections remain deferred.
+The weighted-limit public API has completed its representability cutover.
+`WeightedLimit_cov(F,W,L)` is a transparent compatibility name for
+`IsWeightedLimit_cov_comp(F,W,L)`, one ambient `ProfComparison` between the
+weighted-cone profunctor and `Hom_prof(L)`. Reindexing internalizes every
+shaped probe `M`; `weighted_limit_cov_push/pull` are inverse on arbitrary
+incoming maps, while `weighted_limit_cov_univ_transf` and
+`weighted_limit_cov_cone_transf` are selected identity applications.
+Cancellation is owned by the comparison eliminators and vertical
+`comp_catd_fapp0`, not duplicate `Prof_comp_transf` rules.
+
+`Adjunction_prof_transpose` and `Adjunction_prof_untranspose` remain the narrow
+unit/counit-based representable bridge
+`Hom_B(left(M),F) <-> Hom_A(M,right(F))`.
+`right_adjoint_preserves_weighted_limit_cov` is now transparently
+`right_adjoint_preserves_weighted_limit_cov_comp`, the composition of three
+certified comparisons. The former stable universal-map head, giant
+exact-syntax fold, implication helper, primitive witness, and
+constructor-local beta/eta joins are retired.
 
 The representability redesign now also has a fully ambient ordinary
 isomorphism layer. `Adjunction_hom_prof_iso_evidence(adj)` packages the
@@ -183,15 +187,14 @@ cancel directly under vertical `comp_catd_fapp0`; the rules are
 adjunction-specific and do not impose generic judgmental cancellation on
 arbitrary isomorphism evidence.
 
-Consequently,
-`right_adjoint_preserves_weighted_limit_cov_iso` is a transparent theorem:
+Consequently, `right_adjoint_preserves_weighted_limit_cov_iso` is a transparent theorem:
 it maps the inverse mate through `Prof_imply_cov_func(W)`, reindexes the given
 ordinary weighted-limit evidence along the left adjoint, and composes with the
-mate at the limit. The unsuffixed
-`right_adjoint_preserves_weighted_limit_cov` remains the stronger
-computational compatibility API and is not yet replaced by this propositional
-theorem. Warning-enabled validation stayed at 1,139 recognized warnings, so
-the new vertical/reindex rules introduced no newly detected critical pair.
+mate at the limit. The unsuffixed theorem is the stronger computational
+comparison theorem and forgets exactly to this propositional result.
+Cutover validation reduced the warning inventory from 1,139 to 1,043:
+unjoinable critical pairs fell from 986 to 890 while the 153 replaceable
+pattern-variable warnings were unchanged.
 
 The first duality slices are active. `Op_transf` reverses ordinary
 transformation direction, vertical composition, and off-diagonal endpoints.
@@ -283,9 +286,9 @@ This design was selected only after rejecting a profunctor-specialized variant
 whose arrows cancelled directly under `Prof_comp_transf`. That variant passed
 an imported probe but added two active critical pairs with
 `Op_prof_transf`; attempted dual closure increased the overlap set further.
-The dedicated eliminator adds no rule to ordinary category or equipment
-composition and keeps the warning inventory at the established 1,139
-warnings.
+The dedicated eliminator adds no inverse-cancellation rule to shared
+equipment composition. Its inward vertical accumulation is coherent with the
+active kernel, and the completed cutover leaves 1,043 recognized warnings.
 
 `IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
 representability property. One ambient `ProfComparison` is reindexed to every
@@ -296,14 +299,13 @@ incoming profunctor map. The selected
 operations. `Adjunction_hom_prof_comparison` is the atomic computational mate
 and forgets to the existing unit/counit-based evidence.
 
-`right_adjoint_preserves_weighted_limit_cov_comp` is now a transparent
+`right_adjoint_preserves_weighted_limit_cov_comp` is a transparent
 composition of three certified comparisons: the inverse mate through
 fixed-weight implication, the given limit comparison reindexed along the left
 adjoint, and the mate at the candidate limit. Its evidence projection reduces
 exactly to `right_adjoint_preserves_weighted_limit_cov_iso`, and its
-universality computes through generic push/pull beta/eta. The old unsuffixed
-primitive witness and exact-syntax fold remain temporarily active pending
-consumer compatibility checks and cutover.
+universality computes through generic push/pull beta/eta. The established
+unsuffixed name is now a transparent compatibility alias for this theorem.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and

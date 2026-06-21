@@ -9,15 +9,15 @@ evidence/representability algebra are active. Fixed-weight covariant
 implication is now internalized as a complete unary functor. The ordinary
 ambient adjunction mate and the propositional right-adjoint preservation
 theorem are also active. A dedicated computational `ProfComparison` algebra
-is now active in parallel with the old weighted-limit API. It makes inverse
+now owns the established weighted-limit API. It makes inverse
 universal-property operations compute on dedicated eliminator heads and
 forgets to ordinary `IsoEvidence`. The initially proposed generic
 judgmentally cancelling `StrictIso` layer and a later profunctor-specialized
 variant based on cancellation under `Prof_comp_transf` both failed active
-critical-pair audits and were not promoted. Replacement of the old
-unsuffixed computational preservation witness is now a migration task rather
-than a missing-feasibility question. The remainder of this report is still
-provisional.
+critical-pair audits and were not promoted. The old primitive weighted-limit
+witness and theorem-specific preservation calculus have now been replaced by
+transparent public aliases of the comparison implementation. The remainder of
+this report is still provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
@@ -531,7 +531,7 @@ logs/probes/profunctor_comparison_accumulation_probe-20260622-022308.log
 logs/probes/profunctor_comparison_unif_bridge_probe-20260622-023828.log
 ```
 
-After active promotion:
+After initial active promotion:
 
 ```text
 make check: passed;
@@ -556,17 +556,33 @@ remain parallel foundational work. Univalence may eventually explain or
 generate certified comparisons, but it does not by itself justify judgmental
 cancellation on ordinary composition.
 
-The next migration step is compatibility and cutover:
+The public cutover was completed on 2026-06-22:
 
-1. compare the selected maps of `IsWeightedLimit_cov_comp` with the old
-   `weighted_limit_cov_univ_transf` and `weighted_limit_cov_cone_transf`;
-2. decide whether the public unsuffixed API should become the eliminator-based
-   classifier or retain a compatibility facade;
-3. migrate right-adjoint preservation to the defined `_comp` theorem;
-4. only then retire the primitive witness, its giant exact-syntax fold, and
-   constructor-local cancellation joins;
-5. derive weighted-colimit preservation by duality from the migrated
-   right-adjoint theorem.
+```text
+WeightedLimit_cov := IsWeightedLimit_cov_comp;
+weighted_limit_cov_univ_transf := weighted_limit_cov_comp_univ_transf;
+weighted_limit_cov_cone_transf := weighted_limit_cov_comp_cone_transf;
+right_adjoint_preserves_weighted_limit_cov
+  := right_adjoint_preserves_weighted_limit_cov_comp.
+```
+
+The primitive witness, giant exact-syntax fold, implication helper,
+theorem-specific universal-map head, and constructor-local equipment
+cancellation joins are retired. Diagnostics now test arbitrary-map push/pull,
+selected projections, and transparent theorem equality. Weighted colimits and
+left-adjoint preservation continue definitionally through duality.
+
+The cutover reduced warning-enabled diagnostics from:
+
+```text
+1,139 total = 986 unjoinable + 153 replaceable
+```
+
+to:
+
+```text
+1,043 total = 890 unjoinable + 153 replaceable.
+```
 
 ## Assessment
 
@@ -2415,12 +2431,14 @@ weighted limits.
 12. Completed: one ambient weighted-limit comparison is reindexed to every
    shaped probe, and its inverse operations act on every incoming profunctor
    map. The selected universal and cone maps are identity applications.
-13. In progress: compare the old selected-arrow checks and public consumers
-   against the new eliminator API, and design the compatibility/cutover
-   surface.
-14. Pending: retire the primitive preservation theorem and its large
-   theorem-specific rewrite rules only after the replacement passes
-   `make check`, `make health`, and `make ci`.
+13. Completed: migrate selected-arrow checks and public consumers to the
+   eliminator API. Preserve selected projection checks while replacing
+   duplicate `Prof_comp_transf` cancellation checks with arbitrary-map
+   push/pull beta/eta.
+14. Completed: replace the primitive preservation theorem and remove its
+   theorem-specific rewrite behavior from the active calculus. The exact
+   legacy text is temporarily retained in a dated nested comment for one
+   validation slice and is scheduled for immediate cleanup.
 15. Keep left-adjoint preservation as a transparent dual of the genuinely
     defined right-adjoint theorem.
 
