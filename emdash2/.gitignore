@@ -1,6 +1,7 @@
 .scratchpad
 .antigravitycli/
 .gemini/
+tmp/probes/
 *.lpo
 *.lpi
 *.lpj

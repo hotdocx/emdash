@@ -13,17 +13,17 @@ The proof assistant is called `m—` (read “emdash”).
 - `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
   current notation authority for comments, examples, and future parser work.
 - `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
-  active proposed plan for structural functor logic
+  design plan for structural functor logic
   (weakening/exchange/contraction and displayed follow-ups).
 - `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
-  active proposed plan for dependent products along functors (`Pi_f`) and
+  design and implementation plan for dependent products along functors (`Pi_f`) and
   comma-category infrastructure.
 - `reports/REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
-  active implementation plan and log for Cat-valued profunctors, tensor and
+  implementation plan and log for Cat-valued profunctors, tensor and
   internal hom, weighted limits, duality, and the directed-inductive stress
   test.
 - `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
-  active notation/reorganization subplan.
+  notation/reorganization plan.
 - `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit explaining
   why the old v2 baseline was retired and which ideas remain future design
   material.

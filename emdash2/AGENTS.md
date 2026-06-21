@@ -6,13 +6,13 @@ This repo contains Lambdapi developments for “m— / emdash” functorial prog
 
 Our project is `emdash`, whose goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories. The active v3.2 implementation is @emdash3_2.lp, with diagnostics in @emdash3_2_checks.lp. Current v3.2 guidance is consolidated in @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md, @reports/EMDASH_FOUNDATIONS.md, and @reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md. The obsolete v2 baseline has been retired; see @reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md for the audit summary.
 
-For v3.2 work, start from @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Use @reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md only for the still-proposed structural functor logic work, and @reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md only for notation/reorganization follow-up. The v3.1 baseline, the older tracked v3 attempt, and superseded v3/v3.2 feature reports have been retired into ignored `.scratchpad/` folders so they do not distract normal development.
+For v3.2 work, start from @emdash3_2.lp, @emdash3_2_checks.lp, and @reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md. Consult @reports/INDEX.md to identify the relevant task-specific design or implementation plan. The v3.1 baseline, the older tracked v3 attempt, and superseded v3/v3.2 feature reports have been retired into ignored `.scratchpad/` folders so they do not distract normal development.
 
 The baseline inspiration is in the active files and in retirement-audit reports. Older material moved to `.scratchpad/` is not part of normal development. Do not read, summarize, or reference `.scratchpad/` during normal work unless the user explicitly asks for historical recovery.
 
 Examples of usage of lambdapi are in the folder @lambdapi-examples/ (if you encouter syntax errors which you are struggling to solve, you should try to find the answer in the @lambdapi-examples/ folder and try to apply the same logic to your case)
 
-The active v3.2 file @emdash3_2.lp is draft work in progress. The immediate milestone is to develop the directed-family mixed-variance foundation for Sigma categories and dependent homs, then iterate toward horizontal composition, exchange/stacking laws, and adjunctions. All these should be computational, in the style of Kosta Dosen book "cut-elimination in categories".
+The active v3.2 file @emdash3_2.lp is draft work in progress. New categorical infrastructure should compute through rewrite and unification rules in the style of Kosta Dosen's "cut-elimination in categories", while remaining compatible with the directed-family and higher-cell architecture already established in the file.
 
 Advice: although we are interested in ω-categories (that is infinity/ω hierarchy of arrow, arrows of arrow, etc), as a rule of thumb, being able to express the 2-category version of what we want will, without extra efforts, also apply/extend to the ω-categories.
 
