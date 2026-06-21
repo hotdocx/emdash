@@ -154,25 +154,29 @@ composition, commutes with endpoint reindexing by reindexing both the varying
 input and fixed weight, and is the identity-endpoint specialization of the
 general mixed-variance cell constructor.
 
-The two-variable variance is now internalized in curried form:
+The two-variable variance is now internalized directly as the mixed-variance
+bifunctor:
 
 ```text
-Prof_imply_cov_func_func :
-  Prof_cat(B,X)^op -> Functor_cat(Prof_cat(A,X),Prof_cat(A,B)).
+Prof_imply_cov_func2 :
+  Prof_cat(A,X) x Prof_cat(B,X)^op -> Prof_cat(A,B).
 ```
 
-Its object action is `Prof_imply_cov_func(Q)`.
-`Prof_imply_cov_con_transf(q)` is the outer contravariant arrow action, and its
-component at `O` is `Prof_imply_cov_func2_transf(id_O,q)`. The fixed-endpoint
+Its object action projects an arbitrary product object `(O,Q)` to
+`Prof_imply_cov(O,Q)`. Its full and capped arrow actions project an arbitrary
+product arrow `(o,q)` to `Prof_imply_cov_func2_transf(o,q)`. The fixed-endpoint
 mixed action preserves identity and composition and specializes to the unary
-action when `q` is an identity. A direct product-domain bifunctor was rejected:
-identity decomposition for an arbitrary opaque Sigma object does not expose
-the pair components, so the generic strict-functor identity cut did not join.
-The curried presentation avoids making explicit `Struct_sigma` construction a
-precondition for computation.
+action when `q` is an identity.
 
-The active warning inventory is now 1,053: 900 unjoinable critical-pair
-reports and 153 replaceable-pattern reports. The ten reports added by this
+The initially rejected product presentation exposed a kernel gap rather than
+an architectural obstruction. Whole product identities still expand only on
+an explicit `Struct_sigma`, but their `sigma_Fst` and `sigma_Snd` projections
+now compute for every opaque product object. That is sufficient for the
+generic strict-functor identity cut of `Prof_imply_cov_func2`, without imposing
+global Sigma eta or rebuilding arbitrary product arrows.
+
+The active warning inventory is now 1,052: 899 unjoinable critical-pair
+reports and 153 replaceable-pattern reports. The nine reports added by this
 slice are sort-impossible generic decision-tree overlaps requiring the new
 functor/transformation heads to inhabit unrelated source-object positions;
 the well-typed object, full/capped arrow, component, identity, composition,
@@ -314,7 +318,7 @@ an imported probe but added two active critical pairs with
 The dedicated eliminator adds no inverse-cancellation rule to shared
 equipment composition. Its inward vertical accumulation is coherent with the
 active kernel, and the completed cutover left 1,043 recognized warnings before
-the later curried implication slice documented above.
+the later mixed-variance implication slice documented above.
 
 `IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
 representability property. One ambient `ProfComparison` is reindexed to every
@@ -827,6 +831,13 @@ scripts/probe.sh tmp/probes/rule_probe.lp
 
 Add a focused assertion exercising the intended normal form. A rule that
 typechecks but does not prove the assertion, or times out on it, is not ready.
+An append-only probe against the imported active module is not a complete
+critical-pair audit: it may not expose interactions with rules that occur
+later than the rule's intended declaration position. Before promotion, place
+the candidate at its owning position in a temporary full copy, or validate it
+in place, and run the warning-enabled owning-module check. The 2026-06-22
+`Struct_sigma` audit found two such later-rule interactions that an appended
+probe did not report.
 
 If the quiet probe/check times out without a useful location, rerun the same
 small target with warnings enabled before concluding that the newly added rule

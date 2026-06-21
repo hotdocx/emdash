@@ -700,6 +700,16 @@ assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
         (@id A x)
         (@id B u);
 
+assert [A B : Cat]
+  (xu : τ (Obj (Product_cat A B))) ⊢
+  sigma_Fst (@id (Product_cat A B) xu)
+    ≡ @id A (sigma_Fst xu);
+
+assert [A B : Cat]
+  (xu : τ (Obj (Product_cat A B))) ⊢
+  sigma_Snd (@id (Product_cat A B) xu)
+    ≡ @id B (sigma_Snd xu);
+
 // From emdash3_2.lp:1191.
 assert [A B : Cat]
   (x y z : τ (Obj A))
@@ -5904,86 +5914,86 @@ assert [A B X : Cat]
       A B X Q O O' o;
 
 assert [A B X : Cat]
-  (Q : τ (Prof B X)) ⊢
+  (oq : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))) ⊢
   @fapp0
-    (Op_cat (Prof_cat B X))
-    (Functor_cat (Prof_cat A X) (Prof_cat A B))
-    (@Prof_imply_cov_func_func A B X)
-    Q
-  ≡ @Prof_imply_cov_func A B X Q;
-
-assert [A B X : Cat]
-  [Q Q' : τ (Prof B X)] ⊢
-  @fapp1_func
-    (Op_cat (Prof_cat B X))
-    (Functor_cat (Prof_cat A X) (Prof_cat A B))
-    (@Prof_imply_cov_func_func A B X)
-    Q Q'
-  ≡ @Prof_imply_cov_func_func_fapp1_func
-      A B X Q Q';
-
-assert [A B X : Cat]
-  [Q Q' : τ (Prof B X)]
-  (q : τ (Functord Q' Q)) ⊢
-  @fapp1_fapp0
-    (Op_cat (Prof_cat B X))
-    (Functor_cat (Prof_cat A X) (Prof_cat A B))
-    (@Prof_imply_cov_func_func A B X)
-    Q Q' q
-  ≡ @Prof_imply_cov_con_transf
-      A B X Q Q' q;
-
-assert [A B X : Cat]
-  [Q Q' : τ (Prof B X)]
-  (q : τ (Functord Q' Q))
-  (O : τ (Prof A X)) ⊢
-  @tapp0_fapp0
-    (Prof_cat A X)
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
     (Prof_cat A B)
-    (@Prof_imply_cov_func A B X Q)
-    (@Prof_imply_cov_func A B X Q')
-    O
-    (@Prof_imply_cov_con_transf
-      A B X Q Q' q)
-  ≡ @Prof_imply_cov_func2_transf
-      A B X O O Q Q'
-      (@id_funcd (Product_cat (Op_cat A) X) O)
-      q;
+    (@Prof_imply_cov_func2 A B X)
+    oq
+  ≡ @Prof_imply_cov
+      A B X
+      (sigma_Fst oq)
+      (sigma_Snd oq);
 
 assert [A B X : Cat]
-  (Q : τ (Prof B X)) ⊢
+  [oq oq' : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))] ⊢
+  @fapp1_func
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    (Prof_cat A B)
+    (@Prof_imply_cov_func2 A B X)
+    oq oq'
+  ≡ @Prof_imply_cov_func2_fapp1_func
+      A B X oq oq';
+
+assert [A B X : Cat]
+  [oq oq' : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))]
+  (r : τ (Hom
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    oq oq')) ⊢
   @fapp1_fapp0
-    (Op_cat (Prof_cat B X))
-    (Functor_cat (Prof_cat A X) (Prof_cat A B))
-    (@Prof_imply_cov_func_func A B X)
-    Q Q
-    (@id (Op_cat (Prof_cat B X)) Q)
-  ≡ @id
-      (Functor_cat
-        (Prof_cat A X)
-        (Prof_cat A B))
-      (@Prof_imply_cov_func A B X Q);
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    (Prof_cat A B)
+    (@Prof_imply_cov_func2 A B X)
+    oq oq' r
+  ≡ @Prof_imply_cov_func2_transf
+      A B X
+      (sigma_Fst oq)
+      (sigma_Fst oq')
+      (sigma_Snd oq)
+      (sigma_Snd oq')
+      (sigma_Fst r)
+      (sigma_Snd r);
 
 assert [A B X : Cat]
-  [Q0 Q1 Q2 : τ (Prof B X)]
-  (q10 : τ (Functord Q1 Q0))
-  (q21 : τ (Functord Q2 Q1)) ⊢
-  @Prof_imply_cov_con_transf
-    A B X Q0 Q2
-    (@comp_catd_fapp0
-      (Product_cat (Op_cat B) X)
-      Q2 Q1 Q0 q10 q21)
-  ≡ @comp_fapp0
-      (Functor_cat
+  (oq : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))) ⊢
+  @fapp1_fapp0
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    (Prof_cat A B)
+    (@Prof_imply_cov_func2 A B X)
+    oq oq
+    (@id
+      (Product_cat
         (Prof_cat A X)
-        (Prof_cat A B))
-      (@Prof_imply_cov_func A B X Q0)
-      (@Prof_imply_cov_func A B X Q1)
-      (@Prof_imply_cov_func A B X Q2)
-      (@Prof_imply_cov_con_transf
-        A B X Q1 Q2 q21)
-      (@Prof_imply_cov_con_transf
-        A B X Q0 Q1 q10);
+        (Op_cat (Prof_cat B X)))
+      oq)
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) B)
+      (@Prof_imply_cov
+        A B X
+        (sigma_Fst oq)
+        (sigma_Snd oq));
 
 assert [A B X : Cat]
   (O : τ (Prof A X))

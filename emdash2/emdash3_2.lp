@@ -2095,9 +2095,18 @@ rule @Op_func
       (@Product_swap_func $A $B)
   ↪ @Product_swap_func (Op_cat $A) (Op_cat $B);
 
-// Product identities are pairs of identities.
+// Product identities are pairs when the product object is explicit.
 rule @id (Product_cat $A $B) (Struct_sigma $x $u)
   ↪ Struct_sigma (@id $A $x) (@id $B $u);
+
+// For an opaque product object, expose identity componentwise through
+// projections without expanding the whole arrow. This lets component
+// consumers compute while preserving the generic identity normal form.
+rule sigma_Fst (@id (Product_cat $A _) $xu)
+  ↪ @id $A (sigma_Fst $xu);
+
+rule sigma_Snd (@id (Product_cat _ $B) $xu)
+  ↪ @id $B (sigma_Snd $xu);
 
 // Product composition is componentwise: (g1,g2) ∘ (f1,f2).
 rule @comp_fapp0
@@ -8299,24 +8308,54 @@ rule @Prof_reindex_transf
         $F (@id_func $X));
 
 /*
-  Curried mixed-variance covariant implication.
+  Mixed-variance covariant implication.
 
-  The product presentation
+    Prof_imply_cov_func2 :
+      Prof(A,X) x Prof(B,X)^op -> Prof(A,B).
 
-    Prof(A,X) x Prof(B,X)^op -> Prof(A,B)
-
-  is mathematically equivalent, but generic product objects are opaque Sigma
-  variables in the current kernel. Their identities decompose only after an
-  explicit `Struct_sigma` constructor is visible. The curried owner avoids
-  making that representational detail part of the functor laws:
-
-    Prof_imply_cov_func_func :
-      Prof(B,X)^op -> (Prof(A,X) -> Prof(A,B)).
-
-  Its object action is the existing fixed-weight unary functor. The
-  fixed-endpoint mixed arrow head owns simultaneous covariance in O and
-  contravariance in Q.
+  Product identity projections compute for arbitrary product objects, so the
+  direct product-domain presentation inherits the generic strict-functor
+  identity law without requiring a visible Struct_sigma constructor.
 */
+symbol Prof_imply_cov_func2 [A B X : Cat]
+  : τ (Functor
+      (Product_cat
+        (Prof_cat A X)
+        (Op_cat (Prof_cat B X)))
+      (Prof_cat A B));
+
+rule @fapp0
+      _ _
+      (@Prof_imply_cov_func2 $A $B $X)
+      $oq
+  ↪ @Prof_imply_cov
+      $A $B $X
+      (sigma_Fst $oq)
+      (sigma_Snd $oq);
+
+symbol Prof_imply_cov_func2_fapp1_func
+  [A B X : Cat]
+  [oq oq' : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))]
+  : τ (Functor
+      (Hom_cat
+        (Product_cat
+          (Prof_cat A X)
+          (Op_cat (Prof_cat B X)))
+        oq oq')
+      (@Functord_cat
+        (Product_cat (Op_cat A) B)
+        (@Prof_imply_cov
+          A B X
+          (sigma_Fst oq)
+          (sigma_Snd oq))
+        (@Prof_imply_cov
+          A B X
+          (sigma_Fst oq')
+          (sigma_Snd oq'))));
+
 symbol Prof_imply_cov_func2_transf
   [A B X : Cat]
   [O O' : τ (Prof A X)]
@@ -8326,6 +8365,39 @@ symbol Prof_imply_cov_func2_transf
   : τ (Functord
       (@Prof_imply_cov A B X O Q)
       (@Prof_imply_cov A B X O' Q'));
+
+rule @fapp1_func
+      _ _
+      (@Prof_imply_cov_func2 $A $B $X)
+      $oq $oq'
+  ↪ @Prof_imply_cov_func2_fapp1_func
+      $A $B $X $oq $oq';
+
+rule fapp0
+      (@Prof_imply_cov_func2_fapp1_func
+        $A $B $X $oq $oq')
+      $r
+  ↪ @Prof_imply_cov_func2_transf
+      $A $B $X
+      (sigma_Fst $oq)
+      (sigma_Fst $oq')
+      (sigma_Snd $oq)
+      (sigma_Snd $oq')
+      (sigma_Fst $r)
+      (sigma_Snd $r);
+
+rule @fapp1_fapp0
+      _ _
+      (@Prof_imply_cov_func2 $A $B $X)
+      $oq $oq' $r
+  ↪ @Prof_imply_cov_func2_transf
+      $A $B $X
+      (sigma_Fst $oq)
+      (sigma_Fst $oq')
+      (sigma_Snd $oq)
+      (sigma_Snd $oq')
+      (sigma_Fst $r)
+      (sigma_Snd $r);
 
 rule @Prof_imply_cov_func2_transf
       $A $B $X
@@ -8378,104 +8450,6 @@ rule @Prof_imply_cov_func2_transf
       (@Prof_id_transf $B $X $Q)
   ↪ @Prof_imply_cov_func_transf
       $A $B $X $Q $O $O' $o;
-
-symbol Prof_imply_cov_func_func [A B X : Cat]
-  : τ (Functor
-      (Op_cat (Prof_cat B X))
-      (Functor_cat
-        (Prof_cat A X)
-        (Prof_cat A B)));
-
-rule @fapp0
-      _ _
-      (@Prof_imply_cov_func_func $A $B $X)
-      $Q
-  ↪ @Prof_imply_cov_func $A $B $X $Q;
-
-symbol Prof_imply_cov_func_func_fapp1_func
-  [A B X : Cat]
-  [Q Q' : τ (Prof B X)]
-  : τ (Functor
-      (@Functord_cat
-        (Product_cat (Op_cat B) X)
-        Q' Q)
-      (@Transf_cat
-        (Prof_cat A X)
-        (Prof_cat A B)
-        (@Prof_imply_cov_func A B X Q)
-        (@Prof_imply_cov_func A B X Q')));
-
-symbol Prof_imply_cov_con_transf
-  [A B X : Cat]
-  [Q Q' : τ (Prof B X)]
-  (q : τ (Functord Q' Q))
-  : τ (Transf
-      (@Prof_imply_cov_func A B X Q)
-      (@Prof_imply_cov_func A B X Q'));
-
-rule @fapp1_func
-      _ _
-      (@Prof_imply_cov_func_func $A $B $X)
-      $Q $Q'
-  ↪ @Prof_imply_cov_func_func_fapp1_func
-      $A $B $X $Q $Q';
-
-rule fapp0
-      (@Prof_imply_cov_func_func_fapp1_func
-        $A $B $X $Q $Q')
-      $q
-  ↪ @Prof_imply_cov_con_transf
-      $A $B $X $Q $Q' $q;
-
-rule @fapp1_fapp0
-      _ _
-      (@Prof_imply_cov_func_func $A $B $X)
-      $Q $Q' $q
-  ↪ @Prof_imply_cov_con_transf
-      $A $B $X $Q $Q' $q;
-
-rule @tapp0_fapp0
-      _
-      _
-      _
-      _
-      $O
-      (@Prof_imply_cov_con_transf
-        $A $B $X $Q $Q' $q)
-  ↪ @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O
-      $Q $Q'
-      (@id_funcd
-        (Product_cat (Op_cat $A) $X)
-        $O)
-      $q;
-
-rule @Prof_imply_cov_con_transf
-      $A $B $X
-      $Q $Q
-      (@id_funcd _ $Q)
-  ↪ @id
-      (Functor_cat
-        (Prof_cat $A $X)
-        (Prof_cat $A $B))
-      (@Prof_imply_cov_func $A $B $X $Q);
-
-rule @Prof_imply_cov_con_transf
-      $A $B $X
-      $Q0 $Q2
-      (@comp_catd_fapp0 _ $Q2 $Q1 $Q0 $q10 $q21)
-  ↪ @comp_fapp0
-      (Functor_cat
-        (Prof_cat $A $X)
-        (Prof_cat $A $B))
-      (@Prof_imply_cov_func $A $B $X $Q0)
-      (@Prof_imply_cov_func $A $B $X $Q1)
-      (@Prof_imply_cov_func $A $B $X $Q2)
-      (@Prof_imply_cov_con_transf
-        $A $B $X $Q1 $Q2 $q21)
-      (@Prof_imply_cov_con_transf
-        $A $B $X $Q0 $Q1 $q10);
 
 // Implication is covariant in O and contravariant in Q.
 symbol Prof_imply_cov_transf

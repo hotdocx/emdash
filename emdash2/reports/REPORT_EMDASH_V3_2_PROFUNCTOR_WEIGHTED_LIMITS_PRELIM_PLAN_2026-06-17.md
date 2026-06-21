@@ -34,7 +34,7 @@ coend/end, quotient, bicategorical-coherence, or directed-inductive semantics.
 | 0. Baseline and probes | Incremental probe/log/report workflow used throughout all phases. | Continue using focused probes for every nontrivial rewrite or internalization extension. |
 | 1. Profunctor facade | `Prof_base`, `Prof_cat`, `Hom_prof_along`, `Hom_prof`, `Unit_prof`, semantic `Hom_prof_func`, `Product_map_func`, `Prof_reindex`, `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`. | Ordinary-`Transf_cat` comparisons, broader endpoint internalization, and further curry/uncurry comparison projections only when demanded downstream. |
 | 2. Tensor and co-Yoneda | Primitive `Prof_tensor`, endpoint reindexing, general and shaped tensor cells, `Prof_comp_transf`, identities, and symmetric identity-representable co-Yoneda beta rules. `Prof_func_transf`/`Prof_func_hom` are now available. | General co-Yoneda rules using `Prof_func_hom`, tensor associativity/unit coherence, and semantic coend/coinserter ownership. |
-| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, inverse general/shaped eval-lambda operations, fixed-weight `Prof_imply_cov_func(Q)`, fixed-endpoint `Prof_imply_cov_func2_transf`, and curried `Prof_imply_cov_func_func` with checked identity/composition and unary specialization. | End semantics, broader eval naturality, fixed-left `Prof_imply_con_func(P)`, separate higher-arrow projections, and any demanded tensor/implication adjunction package. |
+| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, inverse general/shaped eval-lambda operations, fixed-weight `Prof_imply_cov_func(Q)`, fixed-endpoint `Prof_imply_cov_func2_transf`, and direct mixed-variance bifunctor `Prof_imply_cov_func2` with checked object/full/capped action, identity/composition, and unary specialization. | End semantics, broader eval naturality, fixed-left `Prof_imply_con_func(P)`, separate higher-arrow projections, and any demanded tensor/implication adjunction package. |
 | 4. Weighted limits | Ordinary `WeightedCone_prof`/`IsWeightedLimit_cov_iso`; computational `ProfComparison`/`WeightedLimit_cov`; arbitrary-map push/pull and selected universal/cone cells; ambient adjunction comparison; and genuinely defined ordinary and computational right-adjoint preservation theorems. The established public names are transparent aliases of the representability implementation. | Naturality in additional theorem parameters, unit/counit component projections, and any further selected-map presentation requested by concrete consumers. |
 | 5. Duality and weighted colimits | `Op_transf`, `Op_adjunction`, `Product_swap_func`, base-swap-only `Op_prof`, `Op_prof_transf`, transparent `WeightedColimit_con`, and the full `left_adjoint_preserves_weighted_colimit_con` witness derived by duality. | Direct colimit-oriented projection names and a non-looping semantic pullback/reindex comparison for `Op_prof_transf`. |
 | 6a. Directed join | `Terminal_prof`, internally natural `join_cross_transf`, derived shaped `join_cross_hom`, and `join_elim_func` with inclusion and cross beta rules. | Dependent elimination, explicit join object/hom decomposition, a generic directed-inductive framework, and/or semantic collage construction. |
@@ -3831,14 +3831,15 @@ owner or receive comparison maps without invalidating the public calculus.
     cancellation rules are retired. Weighted-colimit preservation remains the
     same transparent dual construction.
 11. Mixed-variance implication internalization, landed 2026-06-22:
-    `Prof_imply_cov_func_func` internalizes the contravariant weight as a
-    functor into the category of unary implication functors.
-    `Prof_imply_cov_func2_transf` owns simultaneous fixed-endpoint action and
-    `Prof_imply_cov_con_transf` owns the outer arrow action. Identity,
-    composition, component, unary-specialization, and fixed-endpoint folds are
-    checked. The initially probed product-domain bifunctor was rejected because
-    strict identity computation depended on seeing an explicit Sigma-pair
-    constructor rather than an arbitrary product object.
+    `Prof_imply_cov_func2` directly internalizes the covariant profunctor and
+    contravariant weight over
+    `Prof_cat(A,X) x Op_cat(Prof_cat(B,X))`.
+    `Prof_imply_cov_func2_transf` owns simultaneous fixed-endpoint action, and
+    the functor's object/full/capped projections consume arbitrary opaque
+    product objects and arrows through `sigma_Fst`/`sigma_Snd`. Identity,
+    composition, unary-specialization, and general-cell folds are checked.
+    The earlier curried workaround was removed after componentwise projection
+    rules for arbitrary product identities closed the actual kernel gap.
 
 All listed landed steps leave:
 

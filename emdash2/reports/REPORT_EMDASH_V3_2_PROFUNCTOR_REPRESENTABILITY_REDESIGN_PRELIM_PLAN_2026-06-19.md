@@ -6,8 +6,8 @@ Last reviewed: 2026-06-22
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
 evidence/representability algebra are active. Covariant implication is now
-internalized as a complete unary functor and as a curried mixed-variance
-functor in its contravariant weight. The ordinary
+internalized as a complete unary functor and as a direct mixed-variance
+bifunctor in its varying profunctor and contravariant weight. The ordinary
 ambient adjunction mate and the propositional right-adjoint preservation
 theorem are also active. A dedicated computational `ProfComparison` algebra
 now owns the established weighted-limit API. It makes inverse
@@ -592,35 +592,38 @@ The direct product-domain proposal:
 Prof_cat(A,X) x Op_cat(Prof_cat(B,X)) -> Prof_cat(A,B)
 ```
 
-passed constructor-based assertions but failed the stronger arbitrary-object
-identity audit. Product objects are encoded Sigma data, and the product
-identity rule exposes component identities only when a `Struct_sigma`
-constructor is visible. For an opaque product-object variable, projection
-before identity reduction and generic functor identity reduction did not join.
-The product presentation was therefore not promoted.
+initially failed the stronger arbitrary-object identity audit. The failure was
+not intrinsic to the product presentation: product objects are encoded Sigma
+data, but the kernel only decomposed a whole product identity when a
+`Struct_sigma` constructor was visible.
 
-The selected computational owner is the equivalent curried presentation:
-
-```text
-Prof_imply_cov_func_func :
-  Op_cat(Prof_cat(B,X))
-    -> Functor_cat(Prof_cat(A,X),Prof_cat(A,B)).
-```
-
-Its object action is the already active `Prof_imply_cov_func(Q)`.
-`Prof_imply_cov_con_transf(q)` supplies the outer contravariant action, and its
-component at `O` is the fixed-endpoint mixed action:
+A broad whole-arrow rule rebuilding every opaque product identity as a
+`Struct_sigma` was rejected. It introduced genuine nonjoinable interactions
+with hom precomposition and postcomposition consumers. The coherent repair is
+projection-owned:
 
 ```text
-Prof_imply_cov_func2_transf(id_O,q).
+sigma_Fst(id_(A x B)(xu)) -> id_A(sigma_Fst(xu));
+sigma_Snd(id_(A x B)(xu)) -> id_B(sigma_Snd(xu)).
 ```
 
-The latter owns simultaneous covariance in `O` and contravariance in `Q`,
-preserves identities and composition, specializes to
+The whole identity stays opaque unless its object is an explicit pair, while
+component consumers obtain exactly the identities they need. With those rules
+the selected owner is the direct bifunctor:
+
+```text
+Prof_imply_cov_func2 :
+  Product_cat(Prof_cat(A,X),Op_cat(Prof_cat(B,X)))
+    -> Prof_cat(A,B).
+```
+
+Its object action accepts an arbitrary opaque `(O,Q)`, and its full/capped
+arrow actions accept an arbitrary opaque `(o,q)`.
+`Prof_imply_cov_func2_transf(o,q)` owns simultaneous covariance in `O` and
+contravariance in `Q`, preserves identities and composition, specializes to
 `Prof_imply_cov_func_transf` when `q` is an identity, and is the fixed-endpoint
-normal form of `Prof_imply_cov_transf`. Full and capped outer arrow actions,
-components, identity, composition, unary specialization, and the general-cell
-fold are checked.
+normal form of `Prof_imply_cov_transf`. The temporary curried owner and outer
+contravariant transformation head were removed.
 
 A separate `Hom_prof_func` endpoint audit established a narrower boundary.
 Right-endpoint restriction preserves representability definitionally on
@@ -632,17 +635,39 @@ No bridge was promoted. If a downstream theorem needs that square as data, it
 should be expressed as a natural comparison rather than imposed as another
 runtime normal form.
 
-Active validation after the curried implication promotion reports:
+Active validation after the direct implication promotion reports:
 
 ```text
-1,053 total = 900 unjoinable + 153 replaceable.
+1,052 total = 899 unjoinable + 153 replaceable.
 ```
 
-The ten new critical-pair reports are sort-impossible generic decision-tree
+The nine new critical-pair reports are sort-impossible generic decision-tree
 artifacts, analogous to the bounded artifacts already documented for unary
 internalized functors. Their terms require the new functor or transformation
 head itself to inhabit unrelated source-object positions. The well-typed
 identity and composition paths join and have direct regression checks.
+
+The same review scanned every active `Struct_sigma` occurrence on a rewrite
+LHS in `emdash3_2.lp`. Constructor discrimination remains justified for:
+
+```text
+the sigma_Fst/sigma_Snd eliminators;
+explicitly paired product-valued functors and product composition;
+evaluation and fixed-factor product maps;
+Sigma homs, Sigma arrows, and Sigma-map arrow action;
+displayed-total uncurrying and the measured path-induction guard.
+```
+
+Broader projection formulas for arbitrary product composition and evaluation
+typechecked in isolation but added twenty active critical pairs. Broad whole
+`sigma_map_func` object reconstruction added another real overlap. Opaque
+object fallbacks for `Sigma_proj1_func`, `Sigma_proj1_pullback_catd`, and
+`Sigma_catd_functord_catd` passed when appended to an imported probe but added
+two pairs when placed at their owning declaration point because later rules
+also interact with them. They were not promoted. This establishes an important
+SOP point: a focused probe is necessary but not sufficient for a broad rule;
+warning-enabled validation in the owning module at the intended declaration
+position is the promotion gate.
 
 ## Assessment
 
@@ -817,8 +842,8 @@ Prof_imply_cov_func(W).
 ```
 
 It has the complete current unary object/whole-hom/capped interface and strict
-vertical identity/composition laws. The curried mixed-variance owner is now
-active as `Prof_imply_cov_func_func`; what remains missing is the hom-action's
+vertical identity/composition laws. The direct mixed-variance owner is now
+active as `Prof_imply_cov_func2`; what remains missing is the hom-action's
 separate higher-arrow projections and any demanded tensor/implication
 adjunction package.
 `prof_comparison_fmap` now supplies certified comparison transport through
@@ -1380,8 +1405,8 @@ Prof_reindex_func(F,G)
 ```
 
 `Prof_reindex_func`, `Hom_prof_func`, the fixed-weight
-`Prof_imply_cov_func(W)`, and the curried mixed-variance
-`Prof_imply_cov_func_func` are active. The remaining closed-structure work is
+`Prof_imply_cov_func(W)`, and the direct mixed-variance
+`Prof_imply_cov_func2` are active. The remaining closed-structure work is
 limited to higher projections and adjunction/naturality packages demanded
 downstream.
 
@@ -1410,19 +1435,19 @@ varying input and fixed weight. This is the first active evidence that the
 eventual bifunctor below can own the mixed variance without forcing general
 equipment-cell syntax into ordinary vertical functor laws.
 
-The mixed-variance owner is now active in curried form:
+The mixed-variance owner is now active in direct product form:
 
 ```text
-Prof_imply_cov_func_func :
-  Op_cat(Prof_cat(B,X))
-    -> Functor_cat(Prof_cat(A,X),Prof_cat(A,B)).
+Prof_imply_cov_func2 :
+  Product_cat(Prof_cat(A,X),Op_cat(Prof_cat(B,X)))
+    -> Prof_cat(A,B).
 ```
 
-Its object action is the fixed-weight unary `Prof_imply_cov_func(W)`, and its
-components use `Prof_imply_cov_func2_transf`. This is preferable to the
-equivalent uncurried product presentation in the current kernel because it
-does not require product-object eta or explicit Sigma constructors for strict
-identity computation.
+Its fixed-weight specialization is the unary `Prof_imply_cov_func(W)`, and its
+arrow action uses `Prof_imply_cov_func2_transf`. Product-object eta is still
+absent and unnecessary: object and arrow components are consumed through
+projections, and product identity projections supply the strict identity
+computation.
 
 Eventually tensor and implication should be packaged as an adjunction at the
 functor level:
@@ -2466,12 +2491,11 @@ weighted limits.
    object/full/capped arrow action, strict identity/composition laws,
    compatibility with `Prof_reindex_func`, and a specialization bridge from
    the existing mixed-variance constructor.
-7a. Completed: add the curried mixed-variance
-    `Prof_imply_cov_func_func`, its outer contravariant action
-    `Prof_imply_cov_con_transf`, and fixed-endpoint simultaneous action
-    `Prof_imply_cov_func2_transf`. The direct product-domain presentation was
-    rejected because arbitrary product-object identities did not expose their
-    Sigma components.
+7a. Completed after kernel correction: add the direct mixed-variance
+    `Prof_imply_cov_func2`, its full/capped arrow action, and fixed-endpoint
+    simultaneous action `Prof_imply_cov_func2_transf`. Componentwise product
+    identity projections make arbitrary opaque product identities compute.
+    The temporary curried workaround was removed.
 8. Completed for the selected comparison owner:
    `prof_comparison_fmap` transports certified comparisons through
    `Prof_reindex_func` and `Prof_imply_cov_func(W)`. Its ordinary evidence
@@ -2686,8 +2710,8 @@ extensions:
 
 ```text
 retain ProfComparison as the computational representability owner;
-retain the curried mixed implication owner rather than the rejected
-product-domain presentation;
+retain the direct mixed implication bifunctor and projection-owned product
+identity computation;
 add separate higher-arrow implication projections only for a concrete
 consumer;
 package tensor-right and implication as a functor-level adjunction when its
