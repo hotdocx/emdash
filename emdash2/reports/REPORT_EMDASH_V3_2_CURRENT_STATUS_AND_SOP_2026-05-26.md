@@ -565,7 +565,9 @@ make catalog
 `make catalog` is intentionally non-strict during exploration: it can write a
 catalog with an unclassified-check warning. `make ci` uses the strict catalog
 check and fails if any diagnostic assertion is not mapped to a reviewer-facing
-area.
+area. The generator strips nested Lambdapi block comments while preserving
+line numbers, so temporarily commented assertions are not counted as active
+checks.
 
 The health/metrics report is refreshed with:
 

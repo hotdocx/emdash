@@ -760,9 +760,8 @@ It has the complete current unary object/whole-hom/capped interface and strict
 vertical identity/composition laws. What remains missing is the hom-action's
 separate higher-arrow projections and the eventual mixed-variance bifunctor.
 `prof_comparison_fmap` now supplies certified comparison transport through
-this functor, and the parallel computational preservation theorem uses it.
-The old unsuffixed theorem still manually builds its comparison cell only
-because public cutover has not yet occurred.
+this functor. The computational preservation theorem uses that transport, and
+the established unsuffixed theorem is now its transparent public name.
 
 ### 6. The Adjunction Hom Bridge Is Also Over-Externalized
 
@@ -2436,9 +2435,10 @@ weighted limits.
    duplicate `Prof_comp_transf` cancellation checks with arbitrary-map
    push/pull beta/eta.
 14. Completed: replace the primitive preservation theorem and remove its
-   theorem-specific rewrite behavior from the active calculus. The exact
-   legacy text is temporarily retained in a dated nested comment for one
-   validation slice and is scheduled for immediate cleanup.
+   theorem-specific rewrite behavior from the active calculus. After the
+   cutover passed all validation gates, the dated commented implementation
+   and diagnostic copies were removed; Git history remains the baseline
+   reference.
 15. Keep left-adjoint preservation as a transparent dual of the genuinely
     defined right-adjoint theorem.
 

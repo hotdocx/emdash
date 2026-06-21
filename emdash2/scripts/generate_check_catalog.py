@@ -28,8 +28,47 @@ class Area:
     patterns: tuple[str, ...]
 
 
+def strip_block_comments(text: str) -> str:
+    """Replace nested block comments with whitespace while preserving lines."""
+    out: list[str] = []
+    i = 0
+    block_depth = 0
+    in_string = False
+
+    while i < len(text):
+        if block_depth:
+            if text.startswith("/*", i):
+                block_depth += 1
+                out.extend("  ")
+                i += 2
+                continue
+            if text.startswith("*/", i):
+                block_depth -= 1
+                out.extend("  ")
+                i += 2
+                continue
+            out.append("\n" if text[i] == "\n" else " ")
+            i += 1
+            continue
+
+        if not in_string and text.startswith("/*", i):
+            block_depth = 1
+            out.extend("  ")
+            i += 2
+            continue
+
+        char = text[i]
+        if char == '"' and (i == 0 or text[i - 1] != "\\"):
+            in_string = not in_string
+        out.append(char)
+        i += 1
+
+    return "".join(out)
+
+
 def read_lines(path: Path) -> list[str]:
-    return path.read_text(encoding="utf-8").splitlines()
+    text = path.read_text(encoding="utf-8")
+    return strip_block_comments(text).splitlines()
 
 
 def parse_checks(lines: list[str]) -> list[Check]:
