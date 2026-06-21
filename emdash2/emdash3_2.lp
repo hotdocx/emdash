@@ -8520,6 +8520,351 @@ with @Prof_comp_transf
           (@right_adj_func $A $B $adj)
           $F));
 
+/*
+  Ordinary ambient adjunction-mate isomorphism evidence.
+
+  The existing mate operations are inverse both as equipment cells and as
+  vertical maps in one fixed profunctor category. The vertical cancellation
+  rules below are deliberately domain-specific: they do not introduce a
+  generic judgmentally cancelling isomorphism classifier.
+
+  The ambient evidence internalizes both hom variables. Reindexing it along
+  M : I -> A and F : K -> B recovers the existing shaped mate operations
+  simultaneously.
+*/
+rule @comp_catd_fapp0
+      _
+      _ _ _
+      (@Adjunction_prof_untranspose
+        $A $B $adj
+        $I $K
+        $M $F)
+      (@Adjunction_prof_transpose
+        $A $B $adj
+        $I $K
+        $M $F)
+  ↪ @id_funcd
+      (Product_cat (Op_cat $I) $K)
+      (@Hom_prof_along
+        $I $K $B
+        (@comp_cat_fapp0
+          $I $A $B
+          (@left_adj_func $A $B $adj)
+          $M)
+        $F)
+with @comp_catd_fapp0
+      _
+      _ _ _
+      (@Adjunction_prof_transpose
+        $A $B $adj
+        $I $K
+        $M $F)
+      (@Adjunction_prof_untranspose
+        $A $B $adj
+        $I $K
+        $M $F)
+  ↪ @id_funcd
+      (Product_cat (Op_cat $I) $K)
+      (@Hom_prof_along
+        $I $K $A
+        $M
+        (@comp_cat_fapp0
+          $K $B $A
+          (@right_adj_func $A $B $adj)
+          $F));
+
+rule @Prof_reindex_transf
+      $A $I $B $K
+      _ _
+      (@Adjunction_prof_transpose
+        $A $B $adj
+        $A $B
+        (@id_func $A)
+        (@id_func $B))
+      $M $F
+  ↪ @Adjunction_prof_transpose
+      $A $B $adj
+      $I $K
+      $M $F
+with @Prof_reindex_transf
+      $A $I $B $K
+      _ _
+      (@Adjunction_prof_untranspose
+        $A $B $adj
+        $A $B
+        (@id_func $A)
+        (@id_func $B))
+      $M $F
+  ↪ @Adjunction_prof_untranspose
+      $A $B $adj
+      $I $K
+      $M $F;
+
+symbol Adjunction_hom_prof_iso_evidence
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  : τ (IsoEvidence
+      (Prof_cat A B)
+      (@Hom_prof_along
+        A B B
+        (@left_adj_func A B adj)
+        (@id_func B))
+      (@Hom_prof_along
+        A B A
+        (@id_func A)
+        (@right_adj_func A B adj)))
+≔ Struct_sigma
+    (@Adjunction_prof_transpose
+      A B adj
+      A B
+      (@id_func A)
+      (@id_func B))
+    (Struct_sigma
+      (@Adjunction_prof_untranspose
+        A B adj
+        A B
+        (@id_func A)
+        (@id_func B))
+      (Struct_sigma
+        (eq_refl
+          (@id_funcd
+            (Product_cat (Op_cat A) B)
+            (@Hom_prof_along
+              A B B
+              (@left_adj_func A B adj)
+              (@id_func B))))
+        (eq_refl
+          (@id_funcd
+            (Product_cat (Op_cat A) B)
+            (@Hom_prof_along
+              A B A
+              (@id_func A)
+              (@right_adj_func A B adj))))));
+
+symbol Adjunction_hom_prof_iso_evidence_along
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (IsoEvidence
+      (Prof_cat I K)
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        F)
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0
+          K B A
+          (@right_adj_func A B adj)
+          F)))
+≔ @iso_evidence_fmap
+    (Prof_cat A B)
+    (Prof_cat I K)
+    (@Prof_reindex_func A I B K M F)
+    (@Hom_prof_along
+      A B B
+      (@left_adj_func A B adj)
+      (@id_func B))
+    (@Hom_prof_along
+      A B A
+      (@id_func A)
+      (@right_adj_func A B adj))
+    (@Adjunction_hom_prof_iso_evidence A B adj);
+
+/*
+  Ordinary right-adjoint preservation of weighted-limit representability.
+
+  This is a genuine definition over propositional IsoEvidence. It composes:
+
+    1. the inverse adjunction mate, lifted through fixed-weight implication;
+    2. the given weighted-limit evidence, reindexed along the left adjoint;
+    3. the adjunction mate at the candidate limit.
+
+  It does not replace the stronger unsuffixed computational witness below,
+  whose judgmentally cancelling comparison owner remains under redesign.
+*/
+symbol right_adjoint_weighted_limit_iso_step1
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  (adj : τ (Adjunction A B))
+  : τ (IsoEvidence
+      (Prof_cat A J')
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof
+          J A
+          (@comp_cat_fapp0
+            J B A
+            (@right_adj_func A B adj)
+            F))
+        W)
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof_along
+          A J B
+          (@left_adj_func A B adj)
+          F)
+        W))
+≔ @iso_evidence_fmap
+    (Prof_cat A J)
+    (Prof_cat A J')
+    (@Prof_imply_cov_func A J' J W)
+    (@Hom_prof
+      J A
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F))
+    (@Hom_prof_along
+      A J B
+      (@left_adj_func A B adj)
+      F)
+    (@iso_evidence_sym
+      (Prof_cat A J)
+      (@Hom_prof_along
+        A J B
+        (@left_adj_func A B adj)
+        F)
+      (@Hom_prof
+        J A
+        (@comp_cat_fapp0
+          J B A
+          (@right_adj_func A B adj)
+          F))
+      (@Adjunction_hom_prof_iso_evidence_along
+        A B adj
+        A J
+        (@id_func A)
+        F));
+
+symbol right_adjoint_weighted_limit_iso_step2
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_iso B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (IsoEvidence
+      (Prof_cat A J')
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof_along
+          A J B
+          (@left_adj_func A B adj)
+          F)
+        W)
+      (@Hom_prof_along
+        A J' B
+        (@left_adj_func A B adj)
+        L))
+≔ @iso_evidence_fmap
+    (Prof_cat B J')
+    (Prof_cat A J')
+    (@Prof_reindex_func
+      B A J' J'
+      (@left_adj_func A B adj)
+      (@id_func J'))
+    (@WeightedCone_prof B J J' F W)
+    (@Hom_prof J' B L)
+    isl;
+
+symbol right_adjoint_weighted_limit_iso_step3
+  [B J J' A : Cat]
+  [L : τ (Functor J' B)]
+  (adj : τ (Adjunction A B))
+  : τ (IsoEvidence
+      (Prof_cat A J')
+      (@Hom_prof_along
+        A J' B
+        (@left_adj_func A B adj)
+        L)
+      (@Hom_prof
+        J' A
+        (@comp_cat_fapp0
+          J' B A
+          (@right_adj_func A B adj)
+          L)))
+≔ @Adjunction_hom_prof_iso_evidence_along
+    A B adj
+    A J'
+    (@id_func A)
+    L;
+
+symbol right_adjoint_preserves_weighted_limit_cov_iso
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_iso B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (@IsWeightedLimit_cov_iso
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L))
+≔ @iso_evidence_comp
+    (Prof_cat A J')
+    (@Prof_imply_cov
+      A J' J
+      (@Hom_prof
+        J A
+        (@comp_cat_fapp0
+          J B A
+          (@right_adj_func A B adj)
+          F))
+      W)
+    (@Hom_prof_along
+      A J' B
+      (@left_adj_func A B adj)
+      L)
+    (@Hom_prof
+      J' A
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L))
+    (@right_adjoint_weighted_limit_iso_step3
+      B J J' A L adj)
+    (@iso_evidence_comp
+      (Prof_cat A J')
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof
+          J A
+          (@comp_cat_fapp0
+            J B A
+            (@right_adj_func A B adj)
+            F))
+        W)
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof_along
+          A J B
+          (@left_adj_func A B adj)
+          F)
+        W)
+      (@Hom_prof_along
+        A J' B
+        (@left_adj_func A B adj)
+        L)
+      (@right_adjoint_weighted_limit_iso_step2
+        B J J' A W F L isl adj)
+      (@right_adjoint_weighted_limit_iso_step1
+        B J J' A W F adj));
+
 // Lift untranspose covariantly through implication while the weight is fixed.
 symbol Adjunction_prof_imply_untranspose
   [B J J' A : Cat]

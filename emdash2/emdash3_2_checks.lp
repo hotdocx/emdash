@@ -6367,6 +6367,168 @@ assert [A B I K : Cat]
         M
         (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F));
 
+assert [A B : Cat]
+  (adj : τ (Adjunction A B)) ⊢
+  @Adjunction_hom_prof_iso_evidence A B adj
+  : τ (IsoEvidence
+      (Prof_cat A B)
+      (@Hom_prof_along
+        A B B
+        (@left_adj_func A B adj)
+        (@id_func B))
+      (@Hom_prof_along
+        A B A
+        (@id_func A)
+        (@right_adj_func A B adj)));
+
+assert [A B : Cat]
+  (adj : τ (Adjunction A B)) ⊢
+  @iso_evidence_to
+    (Prof_cat A B)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence A B adj)
+  ≡ @Adjunction_prof_transpose
+      A B adj
+      A B
+      (@id_func A)
+      (@id_func B);
+
+assert [A B : Cat]
+  (adj : τ (Adjunction A B)) ⊢
+  @iso_evidence_from
+    (Prof_cat A B)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence A B adj)
+  ≡ @Adjunction_prof_untranspose
+      A B adj
+      A B
+      (@id_func A)
+      (@id_func B);
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @iso_evidence_to
+    (Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence_along
+      A B adj I K M F)
+  ≡ @Adjunction_prof_transpose A B adj I K M F;
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @iso_evidence_from
+    (Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence_along
+      A B adj I K M F)
+  ≡ @Adjunction_prof_untranspose A B adj I K M F;
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat I) K)
+    _ _ _
+    (@Adjunction_prof_untranspose A B adj I K M F)
+    (@Adjunction_prof_transpose A B adj I K M F)
+  ≡ @id_funcd
+      (Product_cat (Op_cat I) K)
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        F);
+
+assert [A B I K : Cat]
+  (adj : τ (Adjunction A B))
+  (M : τ (Functor I A))
+  (F : τ (Functor K B)) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat I) K)
+    _ _ _
+    (@Adjunction_prof_transpose A B adj I K M F)
+    (@Adjunction_prof_untranspose A B adj I K M F)
+  ≡ @id_funcd
+      (Product_cat (Op_cat I) K)
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0
+          K B A
+          (@right_adj_func A B adj)
+          F));
+
+assert [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_iso B J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @right_adjoint_preserves_weighted_limit_cov_iso
+    B J J' A W F L isl adj
+  : τ (@IsWeightedLimit_cov_iso
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L));
+
+assert [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_iso B J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @iso_evidence_to
+    (Prof_cat A J')
+    _
+    _
+    (@right_adjoint_preserves_weighted_limit_cov_iso
+      B J J' A W F L isl adj)
+  ≡ @comp_catd_fapp0
+      (Product_cat (Op_cat A) J')
+      _ _ _
+      (@Adjunction_prof_transpose
+        A B adj A J' (@id_func A) L)
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat A) J')
+        _ _ _
+        (@iso_evidence_to
+          (Prof_cat A J')
+          _ _
+          (@right_adjoint_weighted_limit_iso_step2
+            B J J' A W F L isl adj))
+        (@Prof_imply_cov_func_transf
+          A J' J W
+          (@Hom_prof
+            J A
+            (@comp_cat_fapp0
+              J B A
+              (@right_adj_func A B adj)
+              F))
+          (@Hom_prof_along
+            A J B
+            (@left_adj_func A B adj)
+            F)
+          (@Adjunction_prof_untranspose
+            A B adj A J (@id_func A) F)));
+
 assert [B J J' A I : Cat]
   [W : τ (Catd (Product_cat (Op_cat J') J))]
   [F : τ (Functor J B)]

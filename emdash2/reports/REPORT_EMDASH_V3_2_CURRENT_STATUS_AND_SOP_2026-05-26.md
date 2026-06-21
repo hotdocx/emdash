@@ -172,6 +172,27 @@ that stable map and constructor-local joins preserve both generic beta/eta
 laws. An explicit formula for the inverse preserved cone, naturality in `M`,
 and unit/counit component projections remain deferred.
 
+The representability redesign now also has a fully ambient ordinary
+isomorphism layer. `Adjunction_hom_prof_iso_evidence(adj)` packages the
+adjunction mate in `IsoEvidence` inside `Prof_cat(A,B)`, and
+`Adjunction_hom_prof_iso_evidence_along(adj,M,F)` is obtained by applying
+`iso_evidence_fmap` to `Prof_reindex_func(M,F)`. Its forward and inverse
+projections compute to the existing shaped
+`Adjunction_prof_transpose/untranspose` operations. Those operations now
+cancel directly under vertical `comp_catd_fapp0`; the rules are
+adjunction-specific and do not impose generic judgmental cancellation on
+arbitrary isomorphism evidence.
+
+Consequently,
+`right_adjoint_preserves_weighted_limit_cov_iso` is a transparent theorem:
+it maps the inverse mate through `Prof_imply_cov_func(W)`, reindexes the given
+ordinary weighted-limit evidence along the left adjoint, and composes with the
+mate at the limit. The unsuffixed
+`right_adjoint_preserves_weighted_limit_cov` remains the stronger
+computational compatibility API and is not yet replaced by this propositional
+theorem. Warning-enabled validation stayed at 1,139 recognized warnings, so
+the new vertical/reindex rules introduced no newly detected critical pair.
+
 The first duality slices are active. `Op_transf` reverses ordinary
 transformation direction, vertical composition, and off-diagonal endpoints.
 `Op_adjunction` maps `Adjunction(A,B)` to

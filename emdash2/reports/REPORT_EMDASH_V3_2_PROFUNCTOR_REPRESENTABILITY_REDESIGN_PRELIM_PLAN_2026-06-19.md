@@ -6,10 +6,13 @@ Last reviewed: 2026-06-21
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
 evidence/representability algebra are active. Fixed-weight covariant
-implication is now internalized as a complete unary functor. The initially
-proposed generic judgmentally cancelling `StrictIso` layer failed the required
-critical-pair audit and has not been promoted. The remainder of this report is
-still provisional.
+implication is now internalized as a complete unary functor. The ordinary
+ambient adjunction mate and the propositional right-adjoint preservation
+theorem are also active. The initially proposed generic judgmentally
+cancelling `StrictIso` layer failed the required critical-pair audit and has
+not been promoted. The stronger unsuffixed computational preservation witness
+therefore remains under redesign. The remainder of this report is still
+provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
@@ -246,6 +249,64 @@ overlap; its two well-typed paths join through
 regression check. Neither the reindex-compatibility rule nor the
 mixed-variance specialization added another warning. This is bounded evidence
 for the promoted interface, not a global confluence claim.
+
+The next bounded slice selected domain-specific adjunction-mate ownership
+instead of a new global computational-isomorphism classifier. The active
+ordinary layer is:
+
+```text
+Adjunction_hom_prof_iso_evidence(adj)
+  : IsoEvidence(
+      Prof_cat(A,B),
+      Hom_prof_along(left(adj),id_B),
+      Hom_prof_along(id_A,right(adj)));
+
+Adjunction_hom_prof_iso_evidence_along(adj,M,F)
+  := iso_evidence_fmap(
+       Prof_reindex_func(M,F),
+       Adjunction_hom_prof_iso_evidence(adj)).
+```
+
+The existing `Adjunction_prof_transpose` and
+`Adjunction_prof_untranspose` now cancel directly under vertical
+`comp_catd_fapp0`, in addition to their existing equipment-cell cancellation.
+These are narrow rules discriminating on the adjunction mate heads; they do
+not assert generic judgmental cancellation for arbitrary `IsoEvidence`.
+Reindexing the ambient forward and inverse maps simultaneously along `(M,F)`
+computes to the existing shaped mate operations.
+
+The focused quiet and warning-enabled probes both passed. The active
+warning inventory remained exactly 1,139 recognized warnings, including 986
+unjoinable critical-pair warnings and 153 replaceable-pattern warnings. Thus
+the new vertical cancellation and reindex rules added no newly detected
+critical pair. The strict rewrite-LHS audit also remains at zero unreviewed
+compound slots.
+
+This ambient evidence makes the ordinary preservation theorem a genuine
+definition:
+
+```text
+right_adjoint_preserves_weighted_limit_cov_iso(isl,adj)
+  : IsWeightedLimit_cov_iso(
+      right(adj) o F,
+      W,
+      right(adj) o L).
+```
+
+Its three transparent steps are:
+
+```text
+1. map the inverse adjunction mate through Prof_imply_cov_func(W);
+2. map isl through Prof_reindex_func(left(adj),id);
+3. compose with the adjunction mate at L.
+```
+
+The forward projection computes to the expected vertical composite of
+implication-untranspose, the reindexed weighted-limit comparison, and
+transpose. This proves ordinary isomorphism-level preservation without an
+axiomatic theorem symbol. It deliberately does not redefine the unsuffixed
+`right_adjoint_preserves_weighted_limit_cov`, because that API still promises
+the stronger judgmentally cancelling `WeightedLimit_cov` interface.
 
 The immediate motivation is the current implementation of:
 
@@ -2083,17 +2144,23 @@ weighted limits.
    representability classifier only after the comparison-owner blocker is
    resolved; then add `IsRepresentedBy_comp` and
    `IsWeightedLimit_cov_comp`.
-10. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
-   computational adjunction presentation. Its projections must compute to the
-   standard mate formulas, use the current off-diagonal triangle cuts for
-   cancellation, and reindex simultaneously along `(M,F)`. Stable mate heads
-   are acceptable while the general whole-`Functord` constructor is absent,
-   provided they have no independent opaque behavior.
-11. Define `right_adjoint_preserves_weighted_limit_cov` using the selected
-   computational comparison algebra rather than assuming the rejected generic
-   `StrictIso` presentation.
-12. Derive the existing shaped universal/cone API by reindexing the one ambient
-   comparison.
+10. Completed for ordinary evidence:
+   `Adjunction_hom_prof_iso_evidence(adj)` packages the active mate operations
+   in `IsoEvidence`, and
+   `Adjunction_hom_prof_iso_evidence_along(adj,M,F)` is its simultaneous
+   reindexing along both hom variables. Its forward/inverse projections compute
+   to the existing shaped transpose/untranspose heads. The stronger
+   computational comparison package remains conditional on selecting its
+   owner.
+11. Completed at the ordinary-isomorphism level:
+   `right_adjoint_preserves_weighted_limit_cov_iso` is a transparent
+   composition of implication functoriality, reindexed weighted-limit
+   evidence, and ambient adjunction-mate evidence. Define the unsuffixed
+   `right_adjoint_preserves_weighted_limit_cov` analogously only after selecting
+   the stronger computational comparison algebra.
+12. Completed for the ordinary adjunction mate: the shaped mate evidence is
+   obtained by reindexing one ambient comparison. Derivation of the
+   computational weighted-limit universal/cone API remains pending.
 13. Compare all current regression checks against the new implementation.
 14. Retire the primitive preservation theorem and its large theorem-specific
     rewrite rules only after the replacement passes `make check`, `make health`,
@@ -2269,6 +2336,8 @@ The next work is now bounded differently:
 ```text
 keep the landed transparent ProfMap and ordinary IsoEvidence layer;
 use the active propositional comp/fmap algebra for ordinary representability;
+use the active ambient adjunction-mate evidence and genuinely defined
+ordinary right-adjoint preservation theorem as the semantic reference;
 do not restore either rejected StrictIso rewrite presentation;
 probe domain-specific inverse-operation ownership versus a dedicated
 comparison cut/eliminator versus path/equivalence ownership;
@@ -2278,7 +2347,10 @@ constructor-specific arrow package;
 use the landed fixed-weight implication functor in the next generic
 comparison/representability probes;
 continue ordinary representability infrastructure where it does not
-presuppose the unresolved computational comparison owner.
+presuppose the unresolved computational comparison owner;
+compare any future computational theorem's projections against
+right_adjoint_preserves_weighted_limit_cov_iso rather than against the old
+theorem-specific composite alone.
 ```
 
 `OmegaEquiv`, full univalence, the two-variable implication bifunctor, and the
