@@ -8298,6 +8298,185 @@ rule @Prof_reindex_transf
         $O $O' $o
         $F (@id_func $X));
 
+/*
+  Curried mixed-variance covariant implication.
+
+  The product presentation
+
+    Prof(A,X) x Prof(B,X)^op -> Prof(A,B)
+
+  is mathematically equivalent, but generic product objects are opaque Sigma
+  variables in the current kernel. Their identities decompose only after an
+  explicit `Struct_sigma` constructor is visible. The curried owner avoids
+  making that representational detail part of the functor laws:
+
+    Prof_imply_cov_func_func :
+      Prof(B,X)^op -> (Prof(A,X) -> Prof(A,B)).
+
+  Its object action is the existing fixed-weight unary functor. The
+  fixed-endpoint mixed arrow head owns simultaneous covariance in O and
+  contravariance in Q.
+*/
+symbol Prof_imply_cov_func2_transf
+  [A B X : Cat]
+  [O O' : τ (Prof A X)]
+  [Q Q' : τ (Prof B X)]
+  (o : τ (Functord O O'))
+  (q : τ (Functord Q' Q))
+  : τ (Functord
+      (@Prof_imply_cov A B X O Q)
+      (@Prof_imply_cov A B X O' Q'));
+
+rule @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O
+      $Q $Q
+      (@id_funcd _ $O)
+      (@id_funcd _ $Q)
+  ↪ @id_funcd
+      (Product_cat (Op_cat $A) $B)
+      (@Prof_imply_cov $A $B $X $O $Q);
+
+rule @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O''
+      $Q $Q''
+      (@comp_catd_fapp0 _ $O $O' $O'' $o' $o)
+      (@comp_catd_fapp0 _ $Q'' $Q' $Q $q $q')
+  ↪ @comp_catd_fapp0
+      (Product_cat (Op_cat $A) $B)
+      (@Prof_imply_cov $A $B $X $O $Q)
+      (@Prof_imply_cov $A $B $X $O' $Q')
+      (@Prof_imply_cov $A $B $X $O'' $Q'')
+      (@Prof_imply_cov_func2_transf
+        $A $B $X
+        $O' $O''
+        $Q' $Q''
+        $o' $q')
+      (@Prof_imply_cov_func2_transf
+        $A $B $X
+        $O $O'
+        $Q $Q'
+        $o $q);
+
+// The unary fixed-weight functor is the identity-Q specialization.
+rule @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O'
+      $Q $Q
+      $o
+      (@id_funcd _ $Q)
+  ↪ @Prof_imply_cov_func_transf
+      $A $B $X $Q $O $O' $o;
+
+// Equipment identity has the same vertical specialization.
+rule @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O'
+      $Q $Q
+      $o
+      (@Prof_id_transf $B $X $Q)
+  ↪ @Prof_imply_cov_func_transf
+      $A $B $X $Q $O $O' $o;
+
+symbol Prof_imply_cov_func_func [A B X : Cat]
+  : τ (Functor
+      (Op_cat (Prof_cat B X))
+      (Functor_cat
+        (Prof_cat A X)
+        (Prof_cat A B)));
+
+rule @fapp0
+      _ _
+      (@Prof_imply_cov_func_func $A $B $X)
+      $Q
+  ↪ @Prof_imply_cov_func $A $B $X $Q;
+
+symbol Prof_imply_cov_func_func_fapp1_func
+  [A B X : Cat]
+  [Q Q' : τ (Prof B X)]
+  : τ (Functor
+      (@Functord_cat
+        (Product_cat (Op_cat B) X)
+        Q' Q)
+      (@Transf_cat
+        (Prof_cat A X)
+        (Prof_cat A B)
+        (@Prof_imply_cov_func A B X Q)
+        (@Prof_imply_cov_func A B X Q')));
+
+symbol Prof_imply_cov_con_transf
+  [A B X : Cat]
+  [Q Q' : τ (Prof B X)]
+  (q : τ (Functord Q' Q))
+  : τ (Transf
+      (@Prof_imply_cov_func A B X Q)
+      (@Prof_imply_cov_func A B X Q'));
+
+rule @fapp1_func
+      _ _
+      (@Prof_imply_cov_func_func $A $B $X)
+      $Q $Q'
+  ↪ @Prof_imply_cov_func_func_fapp1_func
+      $A $B $X $Q $Q';
+
+rule fapp0
+      (@Prof_imply_cov_func_func_fapp1_func
+        $A $B $X $Q $Q')
+      $q
+  ↪ @Prof_imply_cov_con_transf
+      $A $B $X $Q $Q' $q;
+
+rule @fapp1_fapp0
+      _ _
+      (@Prof_imply_cov_func_func $A $B $X)
+      $Q $Q' $q
+  ↪ @Prof_imply_cov_con_transf
+      $A $B $X $Q $Q' $q;
+
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $O
+      (@Prof_imply_cov_con_transf
+        $A $B $X $Q $Q' $q)
+  ↪ @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O
+      $Q $Q'
+      (@id_funcd
+        (Product_cat (Op_cat $A) $X)
+        $O)
+      $q;
+
+rule @Prof_imply_cov_con_transf
+      $A $B $X
+      $Q $Q
+      (@id_funcd _ $Q)
+  ↪ @id
+      (Functor_cat
+        (Prof_cat $A $X)
+        (Prof_cat $A $B))
+      (@Prof_imply_cov_func $A $B $X $Q);
+
+rule @Prof_imply_cov_con_transf
+      $A $B $X
+      $Q0 $Q2
+      (@comp_catd_fapp0 _ $Q2 $Q1 $Q0 $q10 $q21)
+  ↪ @comp_fapp0
+      (Functor_cat
+        (Prof_cat $A $X)
+        (Prof_cat $A $B))
+      (@Prof_imply_cov_func $A $B $X $Q0)
+      (@Prof_imply_cov_func $A $B $X $Q1)
+      (@Prof_imply_cov_func $A $B $X $Q2)
+      (@Prof_imply_cov_con_transf
+        $A $B $X $Q1 $Q2 $q21)
+      (@Prof_imply_cov_con_transf
+        $A $B $X $Q0 $Q1 $q10);
+
 // Implication is covariant in O and contravariant in Q.
 symbol Prof_imply_cov_transf
   [A A' B B' X : Cat]
@@ -8330,6 +8509,19 @@ rule @Prof_imply_cov_transf
       (@Prof_id_transf $B $X $Q)
   ↪ @Prof_imply_cov_func_transf
       $A $B $X $Q $O $O' $o;
+
+// The fixed-endpoint general cell is the curried mixed functor action.
+rule @Prof_imply_cov_transf
+      $A $A $B $B $X
+      $O $O' $Q $Q'
+      (@id_func $A)
+      (@id_func $B)
+      $o $q
+  ↪ @Prof_imply_cov_func2_transf
+      $A $B $X
+      $O $O'
+      $Q $Q'
+      $o $q;
 
 // Evaluation and lambda abstraction for general equipment cells.
 symbol Prof_eval_cov_transf

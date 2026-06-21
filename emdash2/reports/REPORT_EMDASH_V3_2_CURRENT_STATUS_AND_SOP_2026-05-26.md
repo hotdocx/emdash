@@ -152,10 +152,34 @@ hom, and capped arrow actions compute through
 `Prof_imply_cov_func_transf`; it strictly preserves vertical identity and
 composition, commutes with endpoint reindexing by reindexing both the varying
 input and fixed weight, and is the identity-endpoint specialization of the
-general mixed-variance cell constructor. The hom-action functor is still
-symbolic above its object/capped projections: separate higher-arrow rules, the
-eventual mixed-variance bifunctor, fixed-left contravariant implication
-functor, broader eval naturality, and end semantics remain deferred.
+general mixed-variance cell constructor.
+
+The two-variable variance is now internalized in curried form:
+
+```text
+Prof_imply_cov_func_func :
+  Prof_cat(B,X)^op -> Functor_cat(Prof_cat(A,X),Prof_cat(A,B)).
+```
+
+Its object action is `Prof_imply_cov_func(Q)`.
+`Prof_imply_cov_con_transf(q)` is the outer contravariant arrow action, and its
+component at `O` is `Prof_imply_cov_func2_transf(id_O,q)`. The fixed-endpoint
+mixed action preserves identity and composition and specializes to the unary
+action when `q` is an identity. A direct product-domain bifunctor was rejected:
+identity decomposition for an arbitrary opaque Sigma object does not expose
+the pair components, so the generic strict-functor identity cut did not join.
+The curried presentation avoids making explicit `Struct_sigma` construction a
+precondition for computation.
+
+The active warning inventory is now 1,053: 900 unjoinable critical-pair
+reports and 153 replaceable-pattern reports. The ten reports added by this
+slice are sort-impossible generic decision-tree overlaps requiring the new
+functor/transformation heads to inhabit unrelated source-object positions;
+the well-typed object, full/capped arrow, component, identity, composition,
+unary-specialization, and general-cell cases are checked. Separate
+higher-arrow projections of the implication hom-action, fixed-left
+contravariant implication, broader eval naturality, and end semantics remain
+deferred.
 
 The weighted-limit public API has completed its representability cutover.
 `WeightedLimit_cov(F,W,L)` is a transparent compatibility name for
@@ -192,7 +216,8 @@ it maps the inverse mate through `Prof_imply_cov_func(W)`, reindexes the given
 ordinary weighted-limit evidence along the left adjoint, and composes with the
 mate at the limit. The unsuffixed theorem is the stronger computational
 comparison theorem and forgets exactly to this propositional result.
-Cutover validation reduced the warning inventory from 1,139 to 1,043:
+Cutover validation reduced the warning inventory from 1,139 to 1,043 before
+the later mixed-variance internalization:
 unjoinable critical pairs fell from 986 to 890 while the 153 replaceable
 pattern-variable warnings were unchanged.
 
@@ -288,7 +313,8 @@ an imported probe but added two active critical pairs with
 `Op_prof_transf`; attempted dual closure increased the overlap set further.
 The dedicated eliminator adds no inverse-cancellation rule to shared
 equipment composition. Its inward vertical accumulation is coherent with the
-active kernel, and the completed cutover leaves 1,043 recognized warnings.
+active kernel, and the completed cutover left 1,043 recognized warnings before
+the later curried implication slice documented above.
 
 `IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
 representability property. One ambient `ProfComparison` is reindexed to every
