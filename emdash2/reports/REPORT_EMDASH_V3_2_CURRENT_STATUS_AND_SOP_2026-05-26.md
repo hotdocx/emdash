@@ -523,6 +523,16 @@ For a warning-enabled log:
 scripts/explain_failure.py --warning logs/typecheck.log
 ```
 
+For a compact inventory of the current kernel warning stream while preserving
+the complete raw output:
+
+```bash
+make warning-summary
+```
+
+This writes `logs/warnings/latest.log`. It is an explicit diagnostic and is
+not part of `make check`, probes, or CI.
+
 Quiet checks suppress Lambdapi warnings with `-w`, which keeps the ordinary
 inner loop and CI output manageable. When a timeout, conversion explosion, or
 unexpected critical-pair interaction is not localized by the quiet run,
@@ -550,6 +560,52 @@ The first omits `-w`; the second appends explicit Lambdapi flags. Warning
 output can be large, so redirect it to a log and inspect the first warning
 near the newly added rule rather than treating every pre-existing warning as
 caused by the current change.
+
+Useful focused debug flags are:
+
+```text
+u  unification                 c  conversion
+q  rewriting                   w  weak-head normalization
+s  subject reduction           k  local confluence
+d  decision-tree compilation   i  typing
+```
+
+Enable only the smallest relevant subset. `--record-time` reports phase
+timings, and `--too-long=SECONDS` reports commands crossing a duration
+threshold without interrupting them. `--no-sr-check` is not valid for
+promoted code or validation.
+
+For normalized, type-aware discovery, use:
+
+```bash
+scripts/lambdapi_search.sh 'name = hom_int'
+scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
+```
+
+The wrapper keeps an ignored explicit database in `.cache/`. Search uses
+`with` for conjunction, `|` for disjunction, and `in` for path filtering.
+It supplements `rg`; it does not replace lexical source inspection.
+
+Decision trees can be emitted as DOT or rendered through the installed
+Graphviz tool:
+
+```bash
+scripts/decision_tree.sh fapp1_func > /tmp/fapp1.gv
+scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func
+```
+
+The wrapper uses `--no-warnings` so the existing warning stream cannot corrupt
+DOT output.
+
+Accumulated checker and probe logs are cleaned only on explicit request:
+
+```bash
+make prune-logs
+EMDASH_LOG_KEEP_DAYS=7 make prune-logs
+```
+
+This maintenance command is deliberately absent from the development and CI
+paths.
 
 The old v3.1 baseline and obsolete v2 baseline are no longer part of the
 ordinary check path.

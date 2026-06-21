@@ -220,6 +220,21 @@ Initial implementation status:
   `scripts/explain_failure.py`, and `scripts/decision_tree.sh`: implemented.
 - Friction review update: `make ci` now uses compact metrics output, while
   `make catalog` is exploratory/non-strict and `make ci` remains strict.
+- 2026-06-21 lightweight tooling review:
+  - obsolete Gemini/Antigravity agent metadata is removed; `AGENTS.md`
+    remains the Codex-facing instruction source with the intentionally
+    embedded Lambdapi reference;
+  - current Lambdapi search syntax and explicit index usage are documented,
+    with `scripts/lambdapi_search.sh` as an optional normalized/type-aware
+    supplement to `rg`;
+  - `scripts/decision_tree.sh` suppresses unrelated warnings and can render
+    PNG output through Graphviz;
+  - `make warning-summary` provides an opt-in compact warning inventory while
+    retaining one raw latest log;
+  - `make prune-logs` provides manual cleanup and is not called by the normal
+    check, probe, or CI loops;
+  - the tested development build is recorded but intentionally not enforced,
+    so toolchain setup cannot block exploratory mathematics.
 
 This sequence improves daily development immediately, then improves research
 intake, then improves external credibility.

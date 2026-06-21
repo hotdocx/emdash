@@ -109,13 +109,38 @@ beginning, the timeout is set to 2s.
 ``search``
 ------------------
 
-Runs a query between double quotes against the index file
-``~/.LPSearch.db``. See :doc:`query_language` for the query language
-specification.
+Runs a query against the index file updated with the assets defined in the
+file under development including the assets imported by the ``require``
+commands. See :doc:`query_language` for the query language specification.
 
 ::
 
-  search "spine >= (nat → nat) , hyp >= bool";
+  search spine >= (nat → nat) with hyp >= bool;
+
+The current query grammar is:
+
+::
+
+   Q ::= B | Q with Q | Q|Q | Q in PATH
+   B ::= WHERE HOW GENERALIZE? PATTERN
+   WHERE ::= name | anywhere | rule | lhs | rhs | type | concl | hyp | spine
+   HOW ::= > | = | >= | ≥
+
+``with`` is conjunction, ``|`` is disjunction, and ``in`` filters by module
+path or by a quoted regular expression. Search patterns use Lambdapi syntax
+and are matched up to normalization rules stored in the index.
+
+For batch use, an explicit database can be built and queried with:
+
+::
+
+  lambdapi index -w --db=.cache/lambdapi-search.db emdash3_2.lp
+  lambdapi search -w --db=.cache/lambdapi-search.db \
+    --require=emdash.emdash3_2 'type >= Prof_imply_cov'
+
+The project wrapper ``scripts/lambdapi_search.sh QUERY`` maintains this
+ignored database automatically. ``lambdapi deindex`` can remove constants
+from an index when incremental index maintenance is needed.
 
 .. _type:
 

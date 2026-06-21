@@ -34,6 +34,8 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 - Refresh the health report: `make health`
 - Watch+recheck on save: `make watch` (logs to `logs/typecheck.log`)
 - Typecheck only v3.2: `lambdapi check -w emdash3_2.lp`
+- Summarize warning-enabled checking: `make warning-summary`
+- Manually remove accumulated `.log` files: `make prune-logs`
 - Print preview: `npm run dev`
 - Print render check: `npm run check:render`
 - Remove compilation artefacts: `make clean`
@@ -106,6 +108,17 @@ Background daemon-style (then tail the log):
 - Use `scripts/decision_tree.sh SYMBOL` as the local wrapper around
   `lambdapi decision-tree`, with bare symbols resolved under
   `emdash.emdash3_2`.
+- Use `scripts/decision_tree.sh --png OUTPUT.png SYMBOL` to render a decision
+  tree when Graphviz is available. The wrapper suppresses the unrelated
+  warning stream so its DOT output remains valid.
+- Use `scripts/lambdapi_search.sh QUERY` for normalization- and type-aware
+  discovery. It maintains an ignored index under `.cache/`; use `rg` first for
+  ordinary lexical source searches.
+- Use `make warning-summary` for a compact warning inventory while preserving
+  the raw warning-enabled check at `logs/warnings/latest.log`.
+- Use `make prune-logs` only as manual maintenance. It is intentionally absent
+  from checks, probes, and CI; set `EMDASH_LOG_KEEP_DAYS=N` to retain recent
+  logs.
 - Use `python3 scripts/audit_rule_lhs.py` for an advisory inventory of
   reconstructible compound terms in inferred LHS slots. Its output includes
   intentional constructor discriminators; use `--show-kept` to include
@@ -125,8 +138,16 @@ Background daemon-style (then tail the log):
 - When adding rewrite/unif rules, also add a small “sanity” term (or query) exercising the rule.
 
 ## Debugging Lambdapi
-- Print goals/contexts by adding `#check`/`#print` queries (see `docs/lambdapi_docs_queries.rst.txt`).
+- Print goals/contexts by adding `#check`/`#print` queries (see
+  `docs/lambdapi_docs_queries.rst`).
 - Inspect rewrite compilation via decision trees: `lambdapi decision-tree <Module>.<symbol>`.
+- Focused CLI debug flags include `u` (unification), `c` (conversion), `q`
+  (rewriting), `w` (weak-head normalization), `s` (subject reduction), `k`
+  (local confluence), `d` (decision-tree compilation), and `i` (typing).
+  Enable only the smallest useful set and redirect potentially large output.
+- `--record-time` reports phase timings; `--too-long=SECONDS` reports slow
+  commands without interrupting them. Never use `--no-sr-check` for promoted
+  code or validation.
 
 ## Notes for Codex CLI iteration
 - Keep `make watch` running and let the agent read `logs/typecheck.log` to see current typecheck failures while editing.
@@ -158,7 +179,10 @@ leave the correction only in conversational context.
 
 ## Some docs (in .rst reStructuredText format)
 
-Some Lambdapi docs are in `docs/lambdapi_docs_syntax.rst` and `docs/lambdapi_docs_commands.rst` and `docs/lambdapi_docs_queries.rst` and `docs/lambdapi_docs_pattern.rst`, including via web search.
+Some Lambdapi docs are in `docs/lambdapi_docs_syntax.rst`,
+`docs/lambdapi_docs_commands.rst`, `docs/lambdapi_docs_queries.rst`,
+`docs/lambdapi_docs_query_language.rst`, and
+`docs/lambdapi_docs_pattern.rst`, including via web search.
 
 
 Lambdapi Syntax of terms (copied from `docs/lambdapi_docs_syntax.rst`)
@@ -978,13 +1002,30 @@ beginning, the timeout is set to 2s.
 ``search``
 ------------------
 
-Runs a query between double quotes against the index file
-``~/.LPSearch.db``. See :doc:`query_language` for the query language
-specification.
+Runs a query against the index file updated with the assets defined in the
+file under development, including assets imported by ``require`` commands.
+See :doc:`query_language` for the query language specification.
 
 ::
 
-  search "spine >= (nat → nat) , hyp >= bool";
+  search spine >= (nat → nat) with hyp >= bool;
+
+The current query grammar is:
+
+::
+
+   Q ::= B | Q with Q | Q|Q | Q in PATH
+   B ::= WHERE HOW GENERALIZE? PATTERN
+   WHERE ::= name | anywhere | rule | lhs | rhs | type | concl | hyp | spine
+   HOW ::= > | = | >= | ≥
+
+``with`` is conjunction, ``|`` is disjunction, and ``in`` filters by module
+path or a quoted regular expression. Search patterns use Lambdapi syntax and
+are matched up to the normalization rules stored in the index. The CLI can
+build and query an explicit database with ``lambdapi index --db=PATH FILE``
+and ``lambdapi search --db=PATH --require=MODULE QUERY``; ``lambdapi deindex``
+removes indexed constants. In this project, prefer
+``scripts/lambdapi_search.sh QUERY`` for that explicit workflow.
 
 .. _type:
 

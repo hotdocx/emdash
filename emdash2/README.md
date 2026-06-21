@@ -36,7 +36,9 @@ The proof assistant is called `m—` (read “emdash”).
 - `print/`: project-local paper renderer and Arrowgram validation tools.
 
 ## Quick start
-Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
+Prereq: `lambdapi` on PATH. The current workspace is tested with development
+build `3.0.0-90-gdb4f780`; this is an environment record, not a check or CI
+gate.
 
 - Check active Lambdapi files: `make check`
 - Check reviewer milestone examples: `make examples`
@@ -47,7 +49,10 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 - Diagnostic kernel check with Lambdapi warnings enabled:
   `make check-warnings`
+- Compact inventory of the warning-enabled kernel check:
+  `make warning-summary`
 - Strict rewrite-LHS hygiene audit: `make audit-rules`
+- Manually remove accumulated `.log` files: `make prune-logs`
 
 ## Watch mode (auto typecheck on save)
 - Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
@@ -64,9 +69,16 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Summarize an existing Lambdapi log: `scripts/explain_failure.py logs/typecheck.log`.
 - Show the first warning from a warning-enabled log:
   `scripts/explain_failure.py --warning logs/typecheck.log`.
+- Summarize the current warning stream while preserving the raw log:
+  `make warning-summary`.
 - Audit reconstructible compound terms in inferred rewrite-rule LHS slots:
   `python3 scripts/audit_rule_lhs.py --show-kept`.
-- Inspect rewrite compilation: `scripts/decision_tree.sh homd_`.
+- Inspect rewrite compilation: `scripts/decision_tree.sh fapp1_func`.
+- Render a decision tree with Graphviz:
+  `scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func`.
+- Search the normalized Lambdapi index:
+  `scripts/lambdapi_search.sh 'type >= Prof_imply_cov'`.
+- Manually remove accumulated checker/probe logs: `make prune-logs`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
 - Reviewer milestone examples live in `examples/`.
@@ -85,6 +97,19 @@ All project check/probe/metrics scripts also append flags from
 `EMDASH_LAMBDAPI_FLAGS`, for example
 `EMDASH_LAMBDAPI_FLAGS='--debug=u'`. Redirect warning/debug output to a log
 when necessary.
+
+Useful focused debug flags include `u` for unification, `c` for conversion,
+`q` for rewriting, `w` for weak-head normalization, `s` for
+subject-reduction, `k` for local confluence, `d` for decision-tree
+compilation, and `i` for typing. Enable only the smallest relevant set.
+`--record-time` reports phase timings, while `--too-long=SECONDS` reports
+individual slow commands without interrupting them. Do not use
+`--no-sr-check` for promoted code or validation.
+
+The semantic-search wrapper maintains an ignored index under `.cache/`.
+Lambdapi search is normalization- and type-aware, so it supplements rather
+than replaces `rg`. Current query syntax uses `with` for conjunction, `|` for
+disjunction, and `in` for path filtering.
 
 The LHS audit is advisory. Constructor patterns such as `Op_cat`,
 `Product_cat`, `Sigma_cat`, and dependent-pair endpoints may be intentional
@@ -125,9 +150,10 @@ formatting helps human review but is not required by the scanner.
   rule/assertion.
   Record the downstream dependency in the implementation report before deleting
   the temporary copy.
-- Do not keep temporary probe files in the workspace. Move successful rules and
-  their assertions into `emdash3_2.lp`, and document failed probes in the active
-  implementation report when they influence the design.
+- Keep ordinary experiments untracked under ignored `tmp/probes/`, and remove
+  them after their conclusions have been transferred. Move durable,
+  reviewer-facing computations to `examples/`; retain a diagnostic probe only
+  when a report explains why it remains useful.
 - Prefer semantic definitions before introducing new stable heads. If a semantic
   construction fails to compute, first check for missing projection rules and for
   brittle explicit source/target slots.
