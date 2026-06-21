@@ -61,7 +61,10 @@ propositional inverse equations; reflexivity has identity-arrow projections,
 symmetry swaps both arrows and inverse proofs, composition exposes ordinary
 arrow composition, and strict functors transport evidence through their arrow
 action. `comp_assoc` is propositional category-law evidence. It is
-deliberately neither a runtime rewrite nor a global conversion equation.
+primitive and deliberately neither a runtime rewrite nor an active global
+unification equation. A corrected associativity unification rule can construct
+the same witness from `eq_refl` in a focused tail probe, but its global cost is
+currently unacceptable; see the associativity audit below.
 
 `Companion_prof` and `Conjoint_prof` are transparent views of
 `Hom_prof_along`; they introduce no competing rewrite head.
@@ -101,12 +104,47 @@ the design. Therefore no active `StrictIso`, generic judgmental-cancellation,
 or Catd-specific cancellation rule should be inferred from this checkpoint.
 
 A third experiment attempted to encode inverse cancellation and ordinary
-composition associativity as unification rules. It was also rejected:
-unification rules assist elaboration but do not make conversion assertions
-compute, projected composite witnesses escape the generic cancellation
-pattern, and a generic associativity rule polluted unrelated unification
-problems until the imported signature became unsatisfiable. The replacement
-uses explicit `comp_assoc` equality evidence. The successful bounded
+composition associativity as unification rules. Its results must be separated:
+
+1. The inverse-cancellation hints did not make conversion assertions compute
+   and did not let `eq_refl(id)` inhabit the required inverse equations.
+   Projected composite witnesses also escaped the generic cancellation
+   pattern.
+2. The historical associativity hint was malformed: the inner composite used
+   endpoints `C y x z` where the typed composite of `h : y -> z` and
+   `g : x -> y` requires `C x y z`. Its subsequent unification pollution is
+   therefore not evidence against the intended associativity equation.
+3. The corrected arrow-level rule is:
+
+   ```lambdapi
+   unif_rule @comp_fapp0 $C $w $y $z $h
+       (@comp_fapp0 $C $w $x $y $g $f)
+     ≡ @comp_fapp0 $C $w $x $z
+         (@comp_fapp0 $C $x $y $z $h $g)
+         $f
+     ↪ [ tt ≡ tt ];
+   ```
+
+   In isolation, this successfully elaborates `comp_assoc` as `eq_refl` from
+   either bracketing. However, promoting it at the ordinary-composition layer
+   makes the active `emdash3_2.lp` check exceed the 60-second gate.
+4. A narrower rule matching only the surrounding equality classifiers does
+   not fire soon enough: Lambdapi decomposes those classifiers and leaves the
+   same arrow-unification goals. Lambdapi 3.0.0 provides no private/local
+   scope for a `unif_rule`.
+
+Accordingly, the active implementation keeps explicit primitive
+`comp_assoc` equality evidence. This is a performance/scope boundary, not a
+claim that reflexive proof-time associativity is semantically impossible.
+The focused evidence is:
+
+```text
+logs/probes/comp_assoc_unif_review_probe-20260621-134559.log
+logs/probes/comp_assoc_unif_review_probe-20260621-143022.log
+```
+
+The first log is the successful corrected arrow-level probe; the second is
+the rejected equality-classifier restriction. The successful bounded
 composition/functor-image probe is:
 
 ```text
@@ -640,11 +678,12 @@ f o (g o h)  =?=  (f o g) o h
 ```
 
 during elaboration or proof checking without making associativity part of
-runtime normalization. The same possibility applies to
-`comp_catd_fapp0`. Such rules still require focused probes: a broad
-associativity unification hint can create ambiguous metavariable solutions or
-unification loops even when it introduces no rewrite reduction. Constructor
-projection computation should remain the primary mechanism.
+runtime normalization. The corrected ordinary rule has now passed that
+focused semantic test, but failed the global performance gate when placed
+before the active comparison layer. It therefore remains a probe result rather
+than active infrastructure. The same possibility may be explored separately
+for `comp_catd_fapp0`, but it must not be inferred from the ordinary result.
+Constructor projection computation should remain the primary mechanism.
 
 ### Foundational Decision: `Cat` Classifies Univalent Categories
 
@@ -1669,9 +1708,12 @@ The tested strategy in which a stable composite head accumulated ordinary
 composition also failed because it overlapped reflexivity, symmetry, identity,
 and component projection. Neither strategy is safe.
 
-If composition of equality evidence is blocked only by bracketing, first test a
-narrow associativity unification rule. Do not turn arbitrary arrow
-associativity into a global reduction rule.
+If composition of equality evidence is blocked only by bracketing, first test
+a stable-head or consumer-local formulation. The corrected generic ordinary
+associativity hint is already known to exceed the active 60-second gate, while
+an equality-classifier wrapper is already known not to intercept the
+decomposed arrow goals. Do not turn arbitrary arrow associativity into a
+global reduction rule.
 
 ### Global Equivalence And Univalence Infrastructure
 

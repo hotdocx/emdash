@@ -233,12 +233,20 @@ evidence; see the redesign report's 2026-06-21 implementation checkpoint.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and
-`iso_evidence_fmap`. Associativity is intentionally not a rewrite or generic
-unification rule: a focused generic-unification probe polluted unrelated
-elaboration and was rejected. Transparent `Companion_prof`/`Conjoint_prof`
-names and the ordinary `IsRepresentedBy_iso`/`Representation_iso` layer are
-also active. `WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now
-expose the ordinary representability statement separately from the stronger
+`iso_evidence_fmap`. Associativity is intentionally not a rewrite or active
+generic unification rule. The first historical associativity probe had an
+endpoint-order error and is not evidence against the intended equation. A
+corrected arrow-level unification rule does elaborate `comp_assoc` from
+`eq_refl` in isolation, but promoting it before the active comparison layer
+makes `emdash3_2.lp` exceed the 60-second typecheck gate. Restricting the hint
+to the surrounding equality type does not work because unification decomposes
+that classifier and leaves the two arrow goals. Lambdapi 3.0.0 has no
+private/local unification-rule scope, so `comp_assoc` remains primitive
+propositional category-law evidence. Transparent
+`Companion_prof`/`Conjoint_prof` names and the ordinary
+`IsRepresentedBy_iso`/`Representation_iso` layer are also active.
+`WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now expose the
+ordinary representability statement separately from the stronger
 computational `WeightedLimit_cov` API, and ordinary isomorphism evidence maps
 through the active `Prof_imply_cov_func(W)`.
 

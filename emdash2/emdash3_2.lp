@@ -448,8 +448,11 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   Propositional associativity of ordinary categorical composition.
 
   This is evidence in the object equality theory, not a runtime rewrite or a
-  global unification equation. Cut-elimination rules may still normalize
-  specific constructors without globally reassociating arbitrary arrows.
+  global unification equation. A correctly typed associativity unification
+  rule can elaborate this witness from `eq_refl` in isolation, but globally
+  enabling that broad rule makes the active kernel exceed the bounded
+  typecheck gate. Cut-elimination rules may still normalize specific
+  constructors without globally reassociating arbitrary arrows.
 */
 symbol comp_assoc
   [C : Cat]
