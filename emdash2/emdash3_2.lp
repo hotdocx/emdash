@@ -7089,6 +7089,176 @@ symbol Representation_iso
 ≔ `Σ_ L : τ (Functor J B),
     @IsRepresentedBy_iso B J P L;
 
+/*
+  Computational comparisons between profunctors.
+
+  The computational owner is an inverse pair of operations on every incoming
+  vertical map. Beta/eta therefore reduces on dedicated heads rather than on
+  the shared `comp_catd_fapp0` or `Prof_comp_transf` heads. Ordinary
+  `IsoEvidence` and the two semantic paths retain the standard categorical
+  interpretation as postcomposition by inverse arrows.
+*/
+injective symbol ProfComparison
+  [A B : Cat]
+  (P Q : τ (Prof A B))
+  : Grpd;
+
+symbol prof_comparison_push
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (r : τ (ProfMap R P))
+  : τ (ProfMap R Q);
+
+symbol prof_comparison_pull
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (s : τ (ProfMap R Q))
+  : τ (ProfMap R P);
+
+rule @prof_comparison_pull
+      $A $B $P $Q $i $R
+      (@prof_comparison_push $A $B $P $Q $i $R $r)
+  ↪ $r
+with @prof_comparison_push
+      $A $B $P $Q $i $R
+      (@prof_comparison_pull $A $B $P $Q $i $R $s)
+  ↪ $s;
+
+symbol prof_comparison_evidence
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (IsoEvidence (Prof_cat A B) P Q);
+
+symbol prof_comparison_push_semantics
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (r : τ (ProfMap R P))
+  : τ (
+      @prof_comparison_push A B P Q i R r
+      =
+      @comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        R P Q
+        (@iso_evidence_to
+          (Prof_cat A B) P Q
+          (@prof_comparison_evidence A B P Q i))
+        r);
+
+symbol prof_comparison_pull_semantics
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  [R : τ (Prof A B)]
+  (s : τ (ProfMap R Q))
+  : τ (
+      @prof_comparison_pull A B P Q i R s
+      =
+      @comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        R Q P
+        (@iso_evidence_from
+          (Prof_cat A B) P Q
+          (@prof_comparison_evidence A B P Q i))
+        s);
+
+injective symbol prof_comparison_refl
+  [A B : Cat]
+  (P : τ (Prof A B))
+  : τ (ProfComparison P P);
+
+injective symbol prof_comparison_sym
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (ProfComparison Q P);
+
+injective symbol prof_comparison_comp
+  [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (j : τ (ProfComparison Q R))
+  (i : τ (ProfComparison P Q))
+  : τ (ProfComparison P R);
+
+injective symbol prof_comparison_fmap
+  [A B A' B' : Cat]
+  (F : τ (Functor (Prof_cat A B) (Prof_cat A' B')))
+  [P Q : τ (Prof A B)]
+  (i : τ (ProfComparison P Q))
+  : τ (ProfComparison (fapp0 F P) (fapp0 F Q));
+
+rule @prof_comparison_push
+      $A $B $P $P
+      (@prof_comparison_refl $A $B $P)
+      _ $r
+  ↪ $r
+with @prof_comparison_pull
+      $A $B $P $P
+      (@prof_comparison_refl $A $B $P)
+      _ $r
+  ↪ $r;
+
+rule @prof_comparison_push
+      $A $B $Q $P
+      (@prof_comparison_sym $A $B $P $Q $i)
+      $R $r
+  ↪ @prof_comparison_pull $A $B $P $Q $i $R $r
+with @prof_comparison_pull
+      $A $B $Q $P
+      (@prof_comparison_sym $A $B $P $Q $i)
+      $R $s
+  ↪ @prof_comparison_push $A $B $P $Q $i $R $s;
+
+rule @prof_comparison_push
+      $A $B $P $R
+      (@prof_comparison_comp $A $B $P $Q $R $j $i)
+      $S $r
+  ↪ @prof_comparison_push
+      $A $B $Q $R $j $S
+      (@prof_comparison_push $A $B $P $Q $i $S $r)
+with @prof_comparison_pull
+      $A $B $P $R
+      (@prof_comparison_comp $A $B $P $Q $R $j $i)
+      $S $s
+  ↪ @prof_comparison_pull
+      $A $B $P $Q $i $S
+      (@prof_comparison_pull $A $B $Q $R $j $S $s);
+
+rule @prof_comparison_evidence
+      $A $B $P $P
+      (@prof_comparison_refl $A $B $P)
+  ↪ @iso_evidence_refl (Prof_cat $A $B) $P;
+
+rule @prof_comparison_evidence
+      $A $B $Q $P
+      (@prof_comparison_sym $A $B $P $Q $i)
+  ↪ @iso_evidence_sym
+      (Prof_cat $A $B) $P $Q
+      (@prof_comparison_evidence $A $B $P $Q $i);
+
+rule @prof_comparison_evidence
+      $A $B $P $R
+      (@prof_comparison_comp $A $B $P $Q $R $j $i)
+  ↪ @iso_evidence_comp
+      (Prof_cat $A $B) $P $Q $R
+      (@prof_comparison_evidence $A $B $Q $R $j)
+      (@prof_comparison_evidence $A $B $P $Q $i);
+
+rule @prof_comparison_evidence
+      $A' $B' _ _
+      (@prof_comparison_fmap $A $B $A' $B' $F $P $Q $i)
+  ↪ @iso_evidence_fmap
+      (Prof_cat $A $B)
+      (Prof_cat $A' $B')
+      $F $P $Q
+      (@prof_comparison_evidence $A $B $P $Q $i);
+
 // Reindexing along identity endpoint functors is neutral. This rule is added
 // here because tensor reindexing below exposes identity reindexing at the
 // unchanged middle endpoint.
@@ -8252,6 +8422,132 @@ symbol IsWeightedLimit_cov_iso
     L;
 
 /*
+  Computational weighted-limit representability.
+
+  One ambient comparison internalizes the probe. Reindexing it along
+  M : I -> B supplies inverse operations on every incoming profunctor map.
+  The older selected universal/cone maps are recovered by applying these
+  operations to identities; beta/eta itself remains on the dedicated
+  comparison eliminators.
+*/
+symbol IsWeightedLimit_cov_comp
+  [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Prof J' J))
+  (L : τ (Functor J' B))
+  : Grpd
+≔ @ProfComparison
+    B J'
+    (@WeightedCone_prof B J J' F W)
+    (@Hom_prof J' B L);
+
+symbol weighted_limit_cov_push
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  [R : τ (Prof I J')]
+  (r : τ (ProfMap
+      R
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W)))
+  : τ (ProfMap R (@Hom_prof_along I J' B M L))
+≔ @prof_comparison_push
+    I J'
+    _
+    _
+    (@prof_comparison_fmap
+      B J' I J'
+      (@Prof_reindex_func B I J' J' M (@id_func J'))
+      _
+      _
+      isl)
+    R
+    r;
+
+symbol weighted_limit_cov_pull
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  [R : τ (Prof I J')]
+  (s : τ (ProfMap R (@Hom_prof_along I J' B M L)))
+  : τ (ProfMap
+      R
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W))
+≔ @prof_comparison_pull
+    I J'
+    _
+    _
+    (@prof_comparison_fmap
+      B J' I J'
+      (@Prof_reindex_func B I J' J' M (@id_func J'))
+      _
+      _
+      isl)
+    R
+    s;
+
+symbol weighted_limit_cov_comp_univ_transf
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  : τ (ProfMap
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W)
+      (@Hom_prof_along I J' B M L))
+≔ @weighted_limit_cov_push
+    B J J' F W L isl I M
+    (@Prof_imply_cov
+      I J' J
+      (@Hom_prof_along I J B M F)
+      W)
+    (@id_funcd
+      (Product_cat (Op_cat I) J')
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W));
+
+symbol weighted_limit_cov_comp_cone_transf
+  [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  [I : Cat]
+  (M : τ (Functor I B))
+  : τ (ProfMap
+      (@Hom_prof_along I J' B M L)
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W))
+≔ @weighted_limit_cov_pull
+    B J J' F W L isl I M
+    (@Hom_prof_along I J' B M L)
+    (@id_funcd
+      (Product_cat (Op_cat I) J')
+      (@Hom_prof_along I J' B M L));
+
+/*
   Covariant weighted limits.
 
   For F : J -> B, W : Prof(J',J), and L : J' -> B, a witness packages the
@@ -8678,6 +8974,60 @@ symbol Adjunction_hom_prof_iso_evidence_along
     (@Adjunction_hom_prof_iso_evidence A B adj);
 
 /*
+  Computational adjunction mate.
+
+  This is an atomic certified comparison rather than an unrestricted
+  strictification of ordinary isomorphism evidence. Reindexing its ambient
+  form internalizes both hom variables. Its ordinary evidence projection is
+  the unit/counit-based mate already active above.
+*/
+injective symbol Adjunction_hom_prof_comparison
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  : τ (ProfComparison
+      (@Hom_prof_along
+        A B B
+        (@left_adj_func A B adj)
+        (@id_func B))
+      (@Hom_prof_along
+        A B A
+        (@id_func A)
+        (@right_adj_func A B adj)));
+
+rule @prof_comparison_evidence
+      $A $B _ _
+      (@Adjunction_hom_prof_comparison $A $B $adj)
+  ↪ @Adjunction_hom_prof_iso_evidence $A $B $adj;
+
+symbol Adjunction_hom_prof_comparison_along
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (ProfComparison
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        F)
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0
+          K B A
+          (@right_adj_func A B adj)
+          F)))
+≔ @prof_comparison_fmap
+    A B I K
+    (@Prof_reindex_func A I B K M F)
+    _
+    _
+    (@Adjunction_hom_prof_comparison A B adj);
+
+/*
   Ordinary right-adjoint preservation of weighted-limit representability.
 
   This is a genuine definition over propositional IsoEvidence. It composes:
@@ -8863,6 +9213,137 @@ symbol right_adjoint_preserves_weighted_limit_cov_iso
       (@right_adjoint_weighted_limit_iso_step2
         B J J' A W F L isl adj)
       (@right_adjoint_weighted_limit_iso_step1
+        B J J' A W F adj));
+
+/*
+  Computational right-adjoint preservation.
+
+  This parallel API composes three certified comparisons:
+
+    1. the inverse adjunction mate through fixed-weight implication;
+    2. the given weighted-limit comparison reindexed along the left adjoint;
+    3. the adjunction mate at the candidate limit.
+
+  Its beta/eta laws are inherited from `prof_comparison_push/pull`; no
+  theorem-specific fold or cancellation rule is added to ordinary equipment
+  composition.
+*/
+symbol right_adjoint_weighted_limit_comp_step1
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  (adj : τ (Adjunction A B))
+  : τ (ProfComparison
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof
+          J A
+          (@comp_cat_fapp0
+            J B A
+            (@right_adj_func A B adj)
+            F))
+        W)
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof_along
+          A J B
+          (@left_adj_func A B adj)
+          F)
+        W))
+≔ @prof_comparison_fmap
+    A J A J'
+    (@Prof_imply_cov_func A J' J W)
+    _
+    _
+    (@prof_comparison_sym
+      A J
+      _
+      _
+      (@Adjunction_hom_prof_comparison_along
+        A B adj
+        A J
+        (@id_func A)
+        F));
+
+symbol right_adjoint_weighted_limit_comp_step2
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (ProfComparison
+      (@Prof_imply_cov
+        A J' J
+        (@Hom_prof_along
+          A J B
+          (@left_adj_func A B adj)
+          F)
+        W)
+      (@Hom_prof_along
+        A J' B
+        (@left_adj_func A B adj)
+        L))
+≔ @prof_comparison_fmap
+    B J' A J'
+    (@Prof_reindex_func
+      B A J' J'
+      (@left_adj_func A B adj)
+      (@id_func J'))
+    _
+    _
+    isl;
+
+symbol right_adjoint_weighted_limit_comp_step3
+  [B J J' A : Cat]
+  [L : τ (Functor J' B)]
+  (adj : τ (Adjunction A B))
+  : τ (ProfComparison
+      (@Hom_prof_along
+        A J' B
+        (@left_adj_func A B adj)
+        L)
+      (@Hom_prof
+        J' A
+        (@comp_cat_fapp0
+          J' B A
+          (@right_adj_func A B adj)
+          L)))
+≔ @Adjunction_hom_prof_comparison_along
+    A B adj
+    A J'
+    (@id_func A)
+    L;
+
+symbol right_adjoint_preserves_weighted_limit_cov_comp
+  [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (adj : τ (Adjunction A B))
+  : τ (@IsWeightedLimit_cov_comp
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L))
+≔ @prof_comparison_comp
+    A J'
+    _ _ _
+    (@right_adjoint_weighted_limit_comp_step3
+      B J J' A L adj)
+    (@prof_comparison_comp
+      A J'
+      _ _ _
+      (@right_adjoint_weighted_limit_comp_step2
+        B J J' A W F L isl adj)
+      (@right_adjoint_weighted_limit_comp_step1
         B J J' A W F adj));
 
 // Lift untranspose covariantly through implication while the weight is fixed.

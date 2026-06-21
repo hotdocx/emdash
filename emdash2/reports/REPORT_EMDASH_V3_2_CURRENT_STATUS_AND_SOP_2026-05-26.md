@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-21
+Last consolidated: 2026-06-22
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -249,8 +249,43 @@ audits: projection-expanding composition/functoriality conflicted with
 cancellation, while composition-folding conflicted with reflexivity, symmetry,
 Catd identities, and component projection. Do not reintroduce generic or
 Catd-specific strict-isomorphism cancellation based only on successful
-typechecking. The next comparison-owner design must include local-confluence
-evidence; see the redesign report's 2026-06-21 implementation checkpoint.
+typechecking. See the redesign report's 2026-06-21 and 2026-06-22
+implementation checkpoints for the rejected and selected owners.
+
+The selected computational comparison owner is now the dedicated
+`ProfComparison(P,Q)` eliminator algebra. For every incoming
+`R : Prof(A,B)`, `prof_comparison_push` and `prof_comparison_pull` are
+judgmental inverses on their own heads. `prof_comparison_evidence` forgets to
+ordinary `IsoEvidence`, while propositional semantic fields identify push and
+pull with postcomposition by its forward and inverse arrows. Reflexivity,
+symmetry, and composition compute structurally; functorial image is a stable
+certified comparison whose evidence computes through `iso_evidence_fmap`.
+
+This design was selected only after rejecting a profunctor-specialized variant
+whose arrows cancelled directly under `Prof_comp_transf`. That variant passed
+an imported probe but added two active critical pairs with
+`Op_prof_transf`; attempted dual closure increased the overlap set further.
+The dedicated eliminator adds no rule to ordinary category or equipment
+composition and keeps the warning inventory at the established 1,139
+warnings.
+
+`IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
+representability property. One ambient `ProfComparison` is reindexed to every
+shaped probe `M`, and `weighted_limit_cov_push/pull` act inversely on every
+incoming profunctor map. The selected
+`weighted_limit_cov_comp_univ_transf` and
+`weighted_limit_cov_comp_cone_transf` are identity applications of those
+operations. `Adjunction_hom_prof_comparison` is the atomic computational mate
+and forgets to the existing unit/counit-based evidence.
+
+`right_adjoint_preserves_weighted_limit_cov_comp` is now a transparent
+composition of three certified comparisons: the inverse mate through
+fixed-weight implication, the given limit comparison reindexed along the left
+adjoint, and the mate at the candidate limit. Its evidence projection reduces
+exactly to `right_adjoint_preserves_weighted_limit_cov_iso`, and its
+universality computes through generic push/pull beta/eta. The old unsuffixed
+primitive witness and exact-syntax fold remain temporarily active pending
+consumer compatibility checks and cutover.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and

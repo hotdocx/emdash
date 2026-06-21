@@ -6139,6 +6139,156 @@ assert [B J J' : Cat]
       (@Prof_imply_cov B J' J O W)
       (@Prof_imply_cov B J' J O' W));
 
+// Computational profunctor comparisons and weighted representability.
+assert [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q)) ⊢
+  @prof_comparison_evidence A B P Q i
+  : τ (@IsoEvidence (@Prof_cat A B) P Q);
+
+assert [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (r : τ (@ProfMap A B R P)) ⊢
+  @prof_comparison_push_semantics A B P Q i R r
+  : τ (
+      @prof_comparison_push A B P Q i R r
+      =
+      @comp_catd_fapp0
+        (Product_cat (Op_cat A) B)
+        R P Q
+        (@iso_evidence_to
+          (Prof_cat A B) P Q
+          (@prof_comparison_evidence A B P Q i))
+        r);
+
+assert [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (r : τ (@ProfMap A B R P)) ⊢
+  @prof_comparison_pull A B P Q i R
+    (@prof_comparison_push A B P Q i R r)
+  ≡ r;
+
+assert [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (s : τ (@ProfMap A B R Q)) ⊢
+  @prof_comparison_push A B P Q i R
+    (@prof_comparison_pull A B P Q i R s)
+  ≡ s;
+
+assert [A B : Cat]
+  [P R : τ (Prof A B)]
+  (r : τ (@ProfMap A B R P)) ⊢
+  @prof_comparison_push
+    A B P P
+    (@prof_comparison_refl A B P)
+    R r
+  ≡ r;
+
+assert [A B : Cat]
+  [P Q S R : τ (Prof A B)]
+  (i : τ (@ProfComparison A B P Q))
+  (j : τ (@ProfComparison A B Q S))
+  (r : τ (@ProfMap A B R P)) ⊢
+  @prof_comparison_push
+    A B P S
+    (@prof_comparison_comp A B P Q S j i)
+    R r
+  ≡ @prof_comparison_push A B Q S j R
+      (@prof_comparison_push A B P Q i R r);
+
+assert [B J J' : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L)) ⊢
+  @prof_comparison_evidence
+    B J'
+    (@WeightedCone_prof B J J' F W)
+    (@Hom_prof J' B L)
+    isl
+  : τ (@IsWeightedLimit_cov_iso B J J' F W L);
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (M : τ (Functor I B))
+  [R : τ (Prof I J')]
+  (r : τ (ProfMap
+      R
+      (@Prof_imply_cov
+        I J' J
+        (@Hom_prof_along I J B M F)
+        W))) ⊢
+  @weighted_limit_cov_pull B J J' F W L isl I M R
+    (@weighted_limit_cov_push B J J' F W L isl I M R r)
+  ≡ r;
+
+assert [B J J' I : Cat]
+  [F : τ (Functor J B)]
+  [W : τ (Prof J' J)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (M : τ (Functor I B))
+  [R : τ (Prof I J')]
+  (s : τ (ProfMap R (@Hom_prof_along I J' B M L))) ⊢
+  @weighted_limit_cov_push B J J' F W L isl I M R
+    (@weighted_limit_cov_pull B J J' F W L isl I M R s)
+  ≡ s;
+
+assert [A B : Cat]
+  (adj : τ (Adjunction A B)) ⊢
+  @prof_comparison_evidence
+    A B
+    _
+    _
+    (@Adjunction_hom_prof_comparison A B adj)
+  ≡ @Adjunction_hom_prof_iso_evidence A B adj;
+
+assert [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @prof_comparison_evidence
+    A J'
+    _ _
+    (@right_adjoint_preserves_weighted_limit_cov_comp
+      B J J' A W F L isl adj)
+  ≡ @right_adjoint_preserves_weighted_limit_cov_iso
+      B J J' A W F L
+      (@prof_comparison_evidence
+        B J'
+        _
+        _
+        isl)
+      adj;
+
+assert [B J J' A : Cat]
+  [W : τ (Prof J' J)]
+  [F : τ (Functor J B)]
+  [L : τ (Functor J' B)]
+  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
+  (adj : τ (Adjunction A B)) ⊢
+  @right_adjoint_preserves_weighted_limit_cov_comp
+    B J J' A W F L isl adj
+  : τ (@IsWeightedLimit_cov_comp
+      A J J'
+      (@comp_cat_fapp0
+        J B A
+        (@right_adj_func A B adj)
+        F)
+      W
+      (@comp_cat_fapp0
+        J' B A
+        (@right_adj_func A B adj)
+        L));
+
 assert [B J J' I : Cat]
   [F : τ (Functor J B)]
   [W : τ (Catd (Product_cat (Op_cat J') J))]

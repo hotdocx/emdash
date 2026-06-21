@@ -1,17 +1,22 @@
 # EMDASH v3.2 Profunctor Representability Redesign Preliminary Plan
 
 Date: 2026-06-19
-Last reviewed: 2026-06-21
+Last reviewed: 2026-06-22
 
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
 evidence/representability algebra are active. Fixed-weight covariant
 implication is now internalized as a complete unary functor. The ordinary
 ambient adjunction mate and the propositional right-adjoint preservation
-theorem are also active. The initially proposed generic judgmentally
-cancelling `StrictIso` layer failed the required critical-pair audit and has
-not been promoted. The stronger unsuffixed computational preservation witness
-therefore remains under redesign. The remainder of this report is still
+theorem are also active. A dedicated computational `ProfComparison` algebra
+is now active in parallel with the old weighted-limit API. It makes inverse
+universal-property operations compute on dedicated eliminator heads and
+forgets to ordinary `IsoEvidence`. The initially proposed generic
+judgmentally cancelling `StrictIso` layer and a later profunctor-specialized
+variant based on cancellation under `Prof_comp_transf` both failed active
+critical-pair audits and were not promoted. Replacement of the old
+unsuffixed computational preservation witness is now a migration task rather
+than a missing-feasibility question. The remainder of this report is still
 provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
@@ -318,6 +323,185 @@ right_adjoint_preserves_weighted_limit_cov_univ_transf
 but the review treats those symbols as symptoms of broader architectural
 issues rather than as an isolated rewrite cleanup.
 
+## Implementation Checkpoint: 2026-06-22
+
+The comparison-owner question has now been resolved provisionally in favor of
+a Došen/Yoneda-style eliminator rather than cancellation on ordinary
+composition.
+
+Three focused experiments were compared.
+
+First, a generic comparison acting by inverse operations on incoming homs
+passed:
+
+```text
+Comparison(C,x,y);
+comparison_push(i) : Hom(z,x) -> Hom(z,y);
+comparison_pull(i) : Hom(z,y) -> Hom(z,x);
+
+comparison_pull(i,comparison_push(i,f)) -> f;
+comparison_push(i,comparison_pull(i,g)) -> g.
+```
+
+Reflexivity, symmetry, and composition compute structurally on the dedicated
+heads. A strict-functor image can be a certified stable comparison, but its
+action cannot generally be exposed by invoking the source comparison at an
+arbitrary target test object. The coherent form keeps mapped eliminators
+stable and exposes their ordinary mathematical evidence separately.
+
+Passing focused log:
+
+```text
+logs/probes/profunctor_representability_comparison_eliminator_probe-20260622-012438.log
+```
+
+Second, a profunctor-specialized comparison whose selected forward and inverse
+arrows cancelled directly under `Prof_comp_transf` passed isolated assertions.
+It could express the full preservation theorem as a composition of three
+comparisons and forget exactly to
+`right_adjoint_preserves_weighted_limit_cov_iso`.
+
+That result did not survive active integration. The two new cancellation rules
+created exactly two new critical pairs with the existing rule distributing
+`Op_prof_transf` over `Prof_comp_transf`: cancellation-first produced a dual
+identity, while duality-first produced a composite of dualized comparison
+arrows. Adding an `Op_prof_comparison` closure and involution rule increased,
+rather than removed, the overlap set. The active warning inventory moved from
+1,139 to 1,141 and then 1,151. The raw-composition presentation was therefore
+backed out.
+
+This is an important SOP result: a probe module that imports the active kernel
+and adds rules afterward may not expose every rule-order interaction that
+appears when those rules are inserted into the owning module. Active
+warning-enabled integration remains a required promotion gate.
+
+Focused semantic construction log:
+
+```text
+logs/probes/profunctor_representability_prof_comparison_probe-20260622-013039.log
+```
+
+Third, the successful architecture specializes the generic eliminator idea to
+profunctor categories:
+
+```text
+ProfComparison(P,Q);
+
+prof_comparison_push(i) : ProfMap(R,P) -> ProfMap(R,Q);
+prof_comparison_pull(i) : ProfMap(R,Q) -> ProfMap(R,P);
+prof_comparison_evidence(i) : IsoEvidence(Prof_cat(A,B),P,Q).
+```
+
+The two eliminators are judgmental inverses on dedicated heads. Propositional
+semantic fields state that they agree with ordinary postcomposition by
+`iso_evidence_to` and `iso_evidence_from`. This preserves the traditional
+categorical interpretation without adding rewrite rules to
+`comp_catd_fapp0` or `Prof_comp_transf`.
+
+The active algebra includes:
+
+```text
+prof_comparison_refl;
+prof_comparison_sym;
+prof_comparison_comp;
+prof_comparison_fmap.
+```
+
+Reflexivity, symmetry, and composition compute structurally on push/pull.
+Functorial image remains a certified stable comparison; its evidence
+projection computes through `iso_evidence_fmap`.
+
+Weighted limits now have a parallel computational representation:
+
+```text
+IsWeightedLimit_cov_comp(F,W,L)
+  := ProfComparison(WeightedCone_prof(F,W),Hom_prof(L));
+
+weighted_limit_cov_push;
+weighted_limit_cov_pull;
+weighted_limit_cov_comp_univ_transf;
+weighted_limit_cov_comp_cone_transf.
+```
+
+One ambient comparison is reindexed along every shaped probe `M : I -> B`.
+The resulting push/pull operations quantify over every incoming
+`R : Prof(I,J')` and are judgmental inverses. The old selected universal and
+cone maps are recovered by applying push and pull to identity maps. This is
+both more internalized and closer to the standard representability universal
+property than storing only two selected inverse arrows for every external
+probe.
+
+The adjunction mate is an atomic certified comparison:
+
+```text
+Adjunction_hom_prof_comparison(adj);
+Adjunction_hom_prof_comparison_along(adj,M,F).
+```
+
+Its evidence projection is the existing unit/counit-based
+`Adjunction_hom_prof_iso_evidence`; its ambient form internalizes both hom
+variables, and shaped forms are obtained by `prof_comparison_fmap` along
+`Prof_reindex_func(M,F)`.
+
+The computational preservation theorem is now a genuine definition:
+
+```text
+right_adjoint_preserves_weighted_limit_cov_comp
+```
+
+It composes:
+
+```text
+the inverse adjunction comparison through Prof_imply_cov_func(W);
+the given weighted-limit comparison reindexed along the left adjoint;
+the adjunction comparison at the candidate limit.
+```
+
+Its push/pull beta/eta laws follow from generic comparison computation, and
+its evidence projection reduces exactly to
+`right_adjoint_preserves_weighted_limit_cov_iso`. It introduces no
+theorem-specific fold.
+
+Passing focused log:
+
+```text
+logs/probes/profunctor_representability_weighted_eliminator_probe-20260622-014137.log
+```
+
+After active promotion:
+
+```text
+make check: passed;
+warning inventory: unchanged at 1,139
+  (986 unjoinable critical pairs, 153 replaceable variables).
+```
+
+Therefore the currently selected computational owner is:
+
+```text
+dedicated inverse application/elimination;
+ordinary IsoEvidence for semantic arrows and equations;
+propositional agreement between eliminators and ordinary postcomposition;
+no generic inverse cancellation on shared category/equipment composition.
+```
+
+This does not settle global `StrictIso`, `OmegaEquiv`, or univalence. Those
+remain parallel foundational work. Univalence may eventually explain or
+generate certified comparisons, but it does not by itself justify judgmental
+cancellation on ordinary composition.
+
+The next migration step is compatibility and cutover:
+
+1. compare the selected maps of `IsWeightedLimit_cov_comp` with the old
+   `weighted_limit_cov_univ_transf` and `weighted_limit_cov_cone_transf`;
+2. decide whether the public unsuffixed API should become the eliminator-based
+   classifier or retain a compatibility facade;
+3. migrate right-adjoint preservation to the defined `_comp` theorem;
+4. only then retire the primitive witness, its giant exact-syntax fold, and
+   constructor-local cancellation joins;
+5. derive weighted-colimit preservation by duality from the migrated
+   right-adjoint theorem.
+
 ## Assessment
 
 The concern about the current preservation implementation is correct. It is
@@ -492,12 +676,11 @@ Prof_imply_cov_func(W).
 
 It has the complete current unary object/whole-hom/capped interface and strict
 vertical identity/composition laws. What remains missing is the hom-action's
-separate higher-arrow projections, the eventual mixed-variance bifunctor,
-functorial transport of the still-unresolved computational comparison
-structure, and the refactoring of right-adjoint preservation to use those
-generic operations. The existing theorem therefore still manually builds its
-comparison cell even though the unary closed operation no longer lacks a
-functor owner.
+separate higher-arrow projections and the eventual mixed-variance bifunctor.
+`prof_comparison_fmap` now supplies certified comparison transport through
+this functor, and the parallel computational preservation theorem uses it.
+The old unsuffixed theorem still manually builds its comparison cell only
+because public cutover has not yet occurred.
 
 ### 6. The Adjunction Hom Bridge Is Also Over-Externalized
 
@@ -2112,15 +2295,16 @@ weighted limits.
    projections, both propositional inverse proofs, reflexivity, symmetry,
    transparent composition, and strict-functor image. Ordinary associativity
    is explicit equality evidence rather than a rewrite/unification equation.
-3. Blocked and returned to design: the proposed generic computational
+3. Rejected: the proposed generic computational
    `StrictIso` classifier with ordinary-composition cancellation,
    reflexivity/symmetry/composition projections, and functorial image. Both
    projection-expanding and composition-folding presentations failed the
    decision-tree critical-pair audit.
-4. Before any new computational-isomorphism promotion, compare the alternative
-   owners recorded above. Require local-confluence evidence for projection,
-   cancellation, identity, component projection, and functorial action;
-   ordinary assertions are insufficient.
+4. Completed after redesign: select `ProfComparison`, whose inverse
+   `prof_comparison_push/pull` operations compute on dedicated heads.
+   Ordinary `IsoEvidence` and propositional postcomposition semantics are the
+   forgetful layer. Direct cancellation under `Prof_comp_transf` was rejected
+   after active duality overlaps increased the warning inventory.
 5. Completed: add transparent companion/conjoint presentation names and
    ordinary `IsRepresentedBy_iso`/`Representation_iso`.
 6. Completed after redesign: `Hom_prof_func` is the stable opaque view of a
@@ -2133,38 +2317,41 @@ weighted limits.
    object/full/capped arrow action, strict identity/composition laws,
    compatibility with `Prof_reindex_func`, and a specialization bridge from
    the existing mixed-variance constructor.
-8. Only after selecting a coherent computational-isomorphism owner, implement
-   its functorial action first for `Prof_reindex_func`, then for
-   `Prof_imply_cov_func(W)`.
-9. Completed in its ordinary independent part: `IsRepresentedBy_iso`,
+8. Completed for the selected comparison owner:
+   `prof_comparison_fmap` transports certified comparisons through
+   `Prof_reindex_func` and `Prof_imply_cov_func(W)`. Its ordinary evidence
+   computes through `iso_evidence_fmap`; its target eliminators remain stable
+   because an arbitrary target probe cannot invoke the source eliminator.
+9. Completed: `IsRepresentedBy_iso`,
    `Representation_iso`, `WeightedCone_prof`, and
    `IsWeightedLimit_cov_iso` over `IsoEvidence`. The generic
    `iso_evidence_fmap` now maps ordinary comparisons through
-   `Prof_imply_cov_func(W)`. Introduce a separate computational
-   representability classifier only after the comparison-owner blocker is
-   resolved; then add `IsRepresentedBy_comp` and
-   `IsWeightedLimit_cov_comp`.
-10. Completed for ordinary evidence:
+   `Prof_imply_cov_func(W)`. The parallel computational classifier
+   `IsWeightedLimit_cov_comp` is active over `ProfComparison`, with shaped
+   push/pull operations and selected identity applications.
+10. Completed for ordinary and computational evidence:
    `Adjunction_hom_prof_iso_evidence(adj)` packages the active mate operations
    in `IsoEvidence`, and
    `Adjunction_hom_prof_iso_evidence_along(adj,M,F)` is its simultaneous
    reindexing along both hom variables. Its forward/inverse projections compute
-   to the existing shaped transpose/untranspose heads. The stronger
-   computational comparison package remains conditional on selecting its
-   owner.
-11. Completed at the ordinary-isomorphism level:
+   to the existing shaped transpose/untranspose heads.
+   `Adjunction_hom_prof_comparison(adj)` is the atomic certified computational
+   mate, and its shaped form is obtained by comparison functoriality.
+11. Completed in both parallel APIs:
    `right_adjoint_preserves_weighted_limit_cov_iso` is a transparent
    composition of implication functoriality, reindexed weighted-limit
-   evidence, and ambient adjunction-mate evidence. Define the unsuffixed
-   `right_adjoint_preserves_weighted_limit_cov` analogously only after selecting
-   the stronger computational comparison algebra.
-12. Completed for the ordinary adjunction mate: the shaped mate evidence is
-   obtained by reindexing one ambient comparison. Derivation of the
-   computational weighted-limit universal/cone API remains pending.
-13. Compare all current regression checks against the new implementation.
-14. Retire the primitive preservation theorem and its large theorem-specific
-    rewrite rules only after the replacement passes `make check`, `make health`,
-    and `make ci`.
+   evidence, and ambient adjunction-mate evidence.
+   `right_adjoint_preserves_weighted_limit_cov_comp` composes the same three
+   certified comparisons and forgets exactly to the ordinary theorem.
+12. Completed: one ambient weighted-limit comparison is reindexed to every
+   shaped probe, and its inverse operations act on every incoming profunctor
+   map. The selected universal and cone maps are identity applications.
+13. In progress: compare the old selected-arrow checks and public consumers
+   against the new eliminator API, and design the compatibility/cutover
+   surface.
+14. Pending: retire the primitive preservation theorem and its large
+   theorem-specific rewrite rules only after the replacement passes
+   `make check`, `make health`, and `make ci`.
 15. Keep left-adjoint preservation as a transparent dual of the genuinely
     defined right-adjoint theorem.
 
@@ -2219,29 +2406,27 @@ WeightedLimit_cov_chosen(F,W).
 
 ## Acceptance Criteria
 
-The semantic outcomes below remain valid, but every item phrased in terms of
-generic `StrictIso` is conditional on finding a coherent implementation of
-that interface. The 2026-06-20 rewrite presentation does not satisfy these
-criteria and is not active.
+The selected computational owner is now `ProfComparison`, not generic
+`StrictIso`. Any later global strict-isomorphism interface is independent and
+must satisfy its own confluence audit.
 
 The computational migration is complete only when all of the following hold:
 
 ```text
 right_adjoint_preserves_weighted_limit_cov has a defining body;
-its forward and inverse maps are projections of constructed generic data;
-their beta/eta laws follow from generic judgmental StrictIso cancellation;
-StrictIso can be forgotten to coherent propositional IsoEvidence;
+its universal operations are projections of constructed ProfComparison data;
+their beta/eta laws follow from dedicated push/pull elimination;
+ProfComparison forgets to coherent propositional IsoEvidence;
 the computational weighted-limit witness forgets to the ordinary
 isomorphism-representability property;
-every nontrivial atomic StrictIso generator exposes semantic forward/inverse
-maps whose projection-first cancellation joins generic cancellation;
+every nontrivial atomic ProfComparison exposes ordinary evidence and
+propositional postcomposition semantics;
 the ambient weighted-limit witness reindexes to every shaped probe M;
 the ambient adjunction mate reindexes simultaneously to every shaped pair
 (M,F);
-the mate projections compute to the chosen adjunction presentation and their
-beta laws join the active triangle cuts;
+the mate evidence computes to the chosen adjunction presentation;
 the old theorem-specific exact-syntax fold is unnecessary;
-the preserved cone is as explicit and computational as the universal map;
+the preserved push and pull operations are equally explicit and computational;
 left-adjoint colimit preservation remains a transparent dual;
 all existing diagnostics pass without hidden primitive replacement axioms.
 ```
@@ -2250,8 +2435,9 @@ Additionally:
 
 ```text
 ProfMap remains transparent unless a focused probe justifies a stable head;
-strict_iso_comp projection and cancellation paths join;
-strict_iso_refl/sym/fmap projection and cancellation paths join;
+prof_comparison_refl/sym/comp push/pull paths join;
+prof_comparison_fmap evidence computes without exposing an invalid target
+action formula;
 Hom_prof_func and Prof_imply_cov_func pass identity/composition checks;
 any Catd_cat-specialized univalence head documents Functor_cat as owner;
 the adjunction mate bridge has no behavior independent of the chosen
@@ -2264,10 +2450,11 @@ The implementation must document every new stable computational head,
 including:
 
 ```text
-strict_iso_comp/fmap;
+ProfComparison and prof_comparison_push/pull/evidence;
+prof_comparison_refl/sym/comp/fmap;
 Hom_prof_func;
 Prof_imply_cov_func;
-Adjunction_hom_prof_iso and its mate projections;
+Adjunction_hom_prof_comparison and its evidence projection;
 closed implication arrow action.
 ```
 
@@ -2313,7 +2500,7 @@ global but incrementally computational univalence for Cat and Cat_cat;
 separate TypeEquiv, IsoEvidence, StrictIso, and OmegaEquiv layers;
 functorial ownership of representables and closed operations;
 vertical ProfMap ownership beneath endpoint-changing ProfCell;
-an unresolved computational comparison algebra with identity-arrow fast paths;
+the active dedicated ProfComparison algebra and its future generalization;
 generic representability;
 internalized rather than externally repeated universal properties;
 companion/conjoint organization of representables;
@@ -2321,11 +2508,12 @@ an explicit boundary among ordinary-isomorphism, computational, and weak
 weighted-limit semantics.
 ```
 
-The first implementation confirms vertical `ProfMap` ownership and ordinary
-isomorphism representability as coherent foundations. It does not confirm that
-a single generic judgmentally cancelling `StrictIso` classifier is the right
-computational owner. Computational univalence remains a parallel foundational
-track and is now also a serious alternative source of the comparison algebra.
+The implementation confirms vertical `ProfMap` ownership, ordinary
+isomorphism representability, and dedicated inverse eliminators as coherent
+foundations. It rejects a single generic judgmentally cancelling `StrictIso`
+classifier as the immediate computational owner. Computational univalence
+remains a parallel foundational track and may later generate or classify
+certified comparisons.
 
 The redesign should still be evaluated globally against tensor, co-Yoneda,
 implication, weighted limits, duality, and join usage. It must not be
@@ -2339,25 +2527,21 @@ use the active propositional comp/fmap algebra for ordinary representability;
 use the active ambient adjunction-mate evidence and genuinely defined
 ordinary right-adjoint preservation theorem as the semantic reference;
 do not restore either rejected StrictIso rewrite presentation;
-probe domain-specific inverse-operation ownership versus a dedicated
-comparison cut/eliminator versus path/equivalence ownership;
+retain dedicated ProfComparison push/pull as the active computational owner;
 require decision-tree/local-confluence evidence before active promotion;
 use the landed semantic Hom_prof_func rather than the rejected
 constructor-specific arrow package;
-use the landed fixed-weight implication functor in the next generic
-comparison/representability probes;
-continue ordinary representability infrastructure where it does not
-presuppose the unresolved computational comparison owner;
-compare any future computational theorem's projections against
-right_adjoint_preserves_weighted_limit_cov_iso rather than against the old
-theorem-specific composite alone.
+use the landed fixed-weight implication functor through
+prof_comparison_fmap;
+compare the active computational theorem's evidence against
+right_adjoint_preserves_weighted_limit_cov_iso;
+migrate public weighted-limit consumers before deleting the old selected-arrow
+API.
 ```
 
 `OmegaEquiv`, full univalence, the two-variable implication bifunctor, and the
-preservation theorem should still not all be mixed into the next
-comparison-owner probe. The active representable and fixed-weight implication
-functors may now be used as independently validated operations. Neither should an
-unrestricted `IsoEvidence -> StrictIso` strictification constructor be added.
-The failed probes establish that passing beta/eta assertions is weaker than
-establishing a coherent computational algebra; future work must make
-confluence part of the design criterion from the start.
+public cutover should still not all be mixed into one migration slice. Neither
+should an unrestricted `IsoEvidence -> StrictIso` strictification constructor
+be added. The failed probes establish that passing beta/eta assertions is
+weaker than establishing a coherent computational algebra; active warning and
+confluence audits remain promotion criteria.
