@@ -33,6 +33,13 @@ class Candidate:
     head: str
     slot: int
     argument: str
+    reason: str | None = None
+
+
+KEEP_RE = re.compile(
+    r"//\s*lhs-audit:\s*keep\s+([0-9][0-9,\s]*)"
+    r"(?:\s+--\s*(.*?))?\s*$"
+)
 
 
 def strip_comments(text: str) -> str:
@@ -137,14 +144,37 @@ def rule_commands(text: str) -> list[tuple[int, str]]:
     return commands
 
 
-def candidates(path: Path) -> list[Candidate]:
-    text = strip_comments(path.read_text(encoding="utf-8"))
+def keep_annotations(lines: list[str], rule_line: int) -> dict[int, str]:
+    kept: dict[int, str] = {}
+    index = rule_line - 2
+    while index >= 0:
+        line = lines[index].strip()
+        if not line:
+            index -= 1
+            continue
+        if not line.startswith("//"):
+            break
+        match = KEEP_RE.match(line)
+        if match:
+            reason = match.group(2) or "intentional LHS discriminator"
+            for value in match.group(1).split(","):
+                kept[int(value.strip())] = reason
+        index -= 1
+    return kept
+
+
+def candidates(path: Path) -> tuple[list[Candidate], list[Candidate]]:
+    raw_text = path.read_text(encoding="utf-8")
+    raw_lines = raw_text.splitlines()
+    text = strip_comments(raw_text)
     found: list[Candidate] = []
+    kept: list[Candidate] = []
     for command_line, command in rule_commands(text):
         clauses = re.split(r"\nwith\s+", command)
         clause_offset = 0
         for clause_text in clauses:
             clause_line = command_line + clause_offset
+            annotations = keep_annotations(raw_lines, clause_line)
             clause = re.sub(r"^rule\s+", "", clause_text)
             lhs = clause.split("↪", 1)[0].strip()
             parts = split_top_level(lhs)
@@ -172,15 +202,15 @@ def candidates(path: Path) -> list[Candidate]:
                     value for index, value in enumerate(arguments) if index != slot
                 )
                 if all(variable in other_arguments for variable in variables):
-                    found.append(
-                        Candidate(
-                            line=clause_line,
-                            head=head,
-                            slot=slot + 1,
-                            argument=argument,
-                        )
+                    item = Candidate(
+                        line=clause_line,
+                        head=head,
+                        slot=slot + 1,
+                        argument=argument,
+                        reason=annotations.get(slot + 1),
                     )
-    return found
+                    (kept if item.reason else found).append(item)
+    return found, kept
 
 
 def main() -> int:
@@ -198,11 +228,22 @@ def main() -> int:
         help="Lambdapi source to scan (default: emdash3_2.lp).",
     )
     parser.add_argument("--json", action="store_true", help="Emit JSON.")
+    parser.add_argument(
+        "--show-kept",
+        action="store_true",
+        help="List candidates suppressed by adjacent lhs-audit annotations.",
+    )
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit nonzero when unreviewed candidates remain.",
+    )
     args = parser.parse_args()
 
     path = args.file if args.file.is_absolute() else ROOT / args.file
-    found = candidates(path)
+    found, kept = candidates(path)
     clauses = {(item.line, item.head) for item in found}
+    kept_clauses = {(item.line, item.head) for item in kept}
 
     if args.json:
         print(
@@ -212,24 +253,38 @@ def main() -> int:
                     "candidate_clauses": len(clauses),
                     "candidate_slots": len(found),
                     "candidates": [asdict(item) for item in found],
+                    "annotated_clauses": len(kept_clauses),
+                    "annotated_slots": len(kept),
+                    "annotated": [asdict(item) for item in kept],
                 },
                 indent=2,
             )
         )
-        return 0
+        return 1 if args.strict and found else 0
 
     print(
         f"{path}: {len(found)} reconstructible compound slot(s) "
-        f"across {len(clauses)} rule clause(s)"
+        f"across {len(clauses)} unreviewed rule clause(s); "
+        f"{len(kept)} annotated slot(s) across "
+        f"{len(kept_clauses)} intentional clause(s)"
     )
     for item in found:
         print(f"{item.line}: @{item.head} slot {item.slot}: {item.argument}")
+    if args.show_kept and kept:
+        print()
+        print("Annotated intentional slots:")
+        for item in kept:
+            print(
+                f"{item.line}: @{item.head} slot {item.slot}: "
+                f"{item.argument} -- {item.reason}"
+            )
     print()
     print(
-        "Advisory only: constructor and pair patterns may be intentional "
-        "discriminators. Probe each proposed replacement with `_`."
+        "Advisory only: probe each proposed replacement with `_`. Mark a "
+        "measured intentional case immediately above its rule with "
+        "`// lhs-audit: keep SLOT[,SLOT] -- reason`."
     )
-    return 0
+    return 1 if args.strict and found else 0
 
 
 if __name__ == "__main__":

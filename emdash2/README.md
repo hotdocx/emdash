@@ -47,6 +47,7 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 - Diagnostic kernel check with Lambdapi warnings enabled:
   `make check-warnings`
+- Strict rewrite-LHS hygiene audit: `make audit-rules`
 
 ## Watch mode (auto typecheck on save)
 - Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
@@ -64,7 +65,7 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Show the first warning from a warning-enabled log:
   `scripts/explain_failure.py --warning logs/typecheck.log`.
 - Audit reconstructible compound terms in inferred rewrite-rule LHS slots:
-  `python3 scripts/audit_rule_lhs.py`.
+  `python3 scripts/audit_rule_lhs.py --show-kept`.
 - Inspect rewrite compilation: `scripts/decision_tree.sh homd_`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
@@ -88,7 +89,10 @@ when necessary.
 The LHS audit is advisory. Constructor patterns such as `Op_cat`,
 `Product_cat`, `Sigma_cat`, and dependent-pair endpoints may be intentional
 discriminators. Replace a reported slot by `_` only after a focused probe and
-bounded full check.
+bounded full check. Record a justified exception immediately above the rule as
+`// lhs-audit: keep SLOT[,SLOT] -- reason`; `make audit-rules` rejects
+unreviewed candidates, and `make ci` runs the same strict gate. Vertical rule
+formatting helps human review but is not required by the scanner.
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a

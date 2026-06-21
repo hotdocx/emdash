@@ -54,6 +54,11 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
 ## SOP: Rewrite-rule hygiene
 - Probe nontrivial rewrite/unification changes in a temporary copy with a focused assertion before editing the active file.
 - Keep inferred source/target arguments implicit on rule LHSs unless they are the actual discriminator.
+- Use `_` for reconstructible compound terms in inferred LHS slots after a
+  focused probe confirms the rule still checks promptly. If a compound slot
+  is an actual constructor discriminator or a measured subject-reduction /
+  decision-tree guard, keep it explicit and annotate it immediately above the
+  rule with `// lhs-audit: keep SLOT[,SLOT] -- reason`.
 - When a new rule appears to cause a loop or explosion, inspect a
   warning-enabled check before rejecting it. The actual cause may be an older
   interacting rule with reducible compound terms in inferred,
@@ -103,8 +108,10 @@ Background daemon-style (then tail the log):
   `emdash.emdash3_2`.
 - Use `python3 scripts/audit_rule_lhs.py` for an advisory inventory of
   reconstructible compound terms in inferred LHS slots. Its output includes
-  intentional constructor discriminators; probe each proposed `_`
-  replacement rather than applying it mechanically.
+  intentional constructor discriminators; use `--show-kept` to include
+  annotated exceptions. `make audit-rules` and `make ci` use strict mode and
+  reject unreviewed candidates. Probe each proposed `_` replacement rather
+  than applying it mechanically.
 - Use `scripts/explain_failure.py --warning LOG` to locate the first warning
   in a warning-enabled Lambdapi log.
 - Use `reports/INDEX.md` before searching reports by filename.

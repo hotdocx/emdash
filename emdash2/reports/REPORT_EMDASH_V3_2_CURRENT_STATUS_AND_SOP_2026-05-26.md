@@ -685,29 +685,48 @@ semantic rule.
 The repository provides an advisory whole-file scan:
 
 ```bash
-python3 scripts/audit_rule_lhs.py
+python3 scripts/audit_rule_lhs.py --show-kept
+make audit-rules
 ```
 
-The 2026-06-21 scan reports 87 reconstructible compound slots across 59 rule
-clauses. This is an upper-bound cleanup inventory, not a defect count.
-Legitimate entries include category-constructor rules where `Op_cat`,
-`Path_cat`, `Product_cat`, or `Sigma_cat` is itself the discriminator, and
-pair-pattern rules where the endpoint constructor is needed for
-decomposition. The main candidate groups for future focused probes are:
+The initial 2026-06-21 heuristic scan reported 87 reconstructible compound
+slots across 59 rule clauses. A clause-by-clause review of all 428 rewrite
+clauses then replaced 81 non-discriminating slots by `_`. The strict scan now
+has zero unreviewed candidates and six locally annotated slots across five
+intentional clauses:
+
+- two dependent-pair endpoint patterns used for decomposition;
+- one terminal-source constant-family semantic discriminator;
+- one `pi_eval_transf` source-family decision-tree guard;
+- the two coupled source/family guards on the `path_ind_sec` component rule.
+
+The last three guards were tested rather than assumed. Removing the
+`pi_eval_transf` family or either half of the `path_ind_sec` guard causes a
+bounded check timeout or a subject-reduction failure. Keep such exceptions
+explicit and annotate them immediately above the rule:
 
 ```text
-stable product/swap/evaluation functor projections;
-Catd/Pi/Sigma/pullback projection source and target slots;
-ordinary structural-functor projection target slots;
-profunctor reindex/representable projection base slots;
-displayed-composition endpoint families.
+// lhs-audit: keep 1,3 -- measured subject-reduction and performance guard
 ```
 
-The confirmed generic strict-functor composition violation is already fixed:
-its three reducible `fapp0(F,-)` endpoint slots are `_`. Do not mechanically
-rewrite the remaining inventory. For each candidate, verify that all variables
-are still bound by a stable data head, run a focused assertion, compare
-warning behavior when relevant, and then run the bounded full check.
+As a secondary diagnostic, a warning-enabled kernel check still succeeds and
+the existing `Unjoinable critical pair` warning count fell from 1,142 before
+this cleanup to 983 afterward. This is not a confluence proof, but it confirms
+that the removed indices had been creating avoidable overlap pressure.
+
+The scanner is intentionally heuristic: it models the inferred slots of the
+generic application, transfor, and composition heads where this mistake is
+most likely. The manual pass also reviews specialized stable-head and
+cancellation rules; their nested compounds are semantic patterns rather than
+generic inferred indices. Vertical formatting improves readability, but the
+scanner parses balanced applications and does not depend on alignment.
+
+`make audit-rules` runs the scanner with `--strict`, and `make ci` includes the
+same gate. Do not mechanically rewrite a candidate. Verify that variables
+remain bound by a stable data head, probe the `_` replacement, compare
+warning behavior when relevant, and run the bounded full check. If the
+compound is necessary, add a local `lhs-audit` annotation with the measured
+reason.
 
 Keep inferred source/target arguments implicit in rule LHSs unless they are the
 real discriminator. The useful discriminator is usually the explicit data head:

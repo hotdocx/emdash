@@ -1962,10 +1962,10 @@ rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
 rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
 
 // Projection functors act by object projections.
-rule @fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p
+rule @fapp0 _ _ (@Product_projL_func $A $B) $p
   ↪ sigma_Fst $p;
 
-rule @fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p
+rule @fapp0 _ _ (@Product_projR_func $A $B) $p
   ↪ sigma_Snd $p;
 
 // Projection of a paired functor application.
@@ -2001,21 +2001,21 @@ rule @fapp1_fapp0 $X (Product_cat $A $B) (Struct_sigma $F $G) $i $j $p
       (@fapp1_fapp0 $X $B $G $i $j $p);
 
 // Hom-action of product projections is projection on product homs.
-rule @fapp1_func (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q
+rule @fapp1_func _ _ (@Product_projL_func $A $B) $p $q
   ↪ @Product_projL_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
-rule @fapp1_func (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q
+rule @fapp1_func _ _ (@Product_projR_func $A $B) $p $q
   ↪ @Product_projR_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
 // Capped projection hom-actions select the corresponding component arrow.
-rule @fapp1_fapp0 (Product_cat $A $B) $A (@Product_projL_func $A $B) $p $q $h
+rule @fapp1_fapp0 _ _ (@Product_projL_func $A $B) $p $q $h
   ↪ sigma_Fst $h;
 
-rule @fapp1_fapp0 (Product_cat $A $B) $B (@Product_projR_func $A $B) $p $q $h
+rule @fapp1_fapp0 _ _ (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
 /*
@@ -2035,8 +2035,8 @@ rule sigma_Snd (@Product_swap_func $A $B)
   ↪ @Product_projL_func $A $B;
 
 rule @fapp0
-      (Product_cat $A $B)
-      (Product_cat $B $A)
+      _
+      _
       (@Product_swap_func $A $B)
       (Struct_sigma $x $y)
   ↪ @Struct_sigma
@@ -2045,8 +2045,8 @@ rule @fapp0
       $y $x;
 
 rule @fapp1_func
-      (Product_cat $A $B)
-      (Product_cat $B $A)
+      _
+      _
       (@Product_swap_func $A $B)
       $p $q
   ↪ @Product_swap_func
@@ -2054,8 +2054,8 @@ rule @fapp1_func
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
 rule @fapp1_fapp0
-      (Product_cat $A $B)
-      (Product_cat $B $A)
+      _
+      _
       (@Product_swap_func $A $B)
       $p $q
       $h
@@ -2067,9 +2067,9 @@ rule @fapp1_fapp0
       (sigma_Fst $h);
 
 rule @comp_cat_fapp0
-      (Product_cat $A $B)
-      (Product_cat $B $A)
-      (Product_cat $A $B)
+      _
+      _
+      _
       (@Product_swap_func $B $A)
       (@Product_swap_func $A $B)
   ↪ @id_func (Product_cat $A $B);
@@ -2077,8 +2077,8 @@ rule @comp_cat_fapp0
 // Pulling an arbitrary functor back along product symmetry twice is neutral
 // in the canonical left-associated composition normal form.
 rule @comp_cat_fapp0
-      (Product_cat $A $B)
-      (Product_cat $B $A)
+      _
+      _
       $C
       (@comp_cat_fapp0
         (Product_cat $B $A)
@@ -2278,9 +2278,8 @@ rule @Op_transf
       (@Op_transf $A $B $G $H $eta);
 
 rule @tapp0_fapp0
-      (Op_cat $A) (Op_cat $B)
-      (@Op_func $A $B $G)
-      (@Op_func $A $B $F)
+      _ _
+      _ _
       $x
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp0_fapp0 $A $B $F $G $x $eta;
@@ -2356,9 +2355,8 @@ rule @tapp1_func $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F)
 
 // Opposite transfor off-diagonal action swaps the base endpoints.
 rule @tapp1_func
-      (Op_cat $A) (Op_cat $B)
-      (@Op_func $A $B $G)
-      (@Op_func $A $B $F)
+      _ _
+      _ _
       $x $y
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp1_func $A $B $F $G $y $x $eta;
@@ -3132,8 +3130,8 @@ rule @fapp1_fapp0 _ _ Product_cat_func $A $A' $G
 rule @tapp0_fapp0
       Cat_cat
       Cat_cat
-      (@Product_cat_fapp0_func $A)
-      (@Product_cat_fapp0_func $A')
+      _
+      _
       $B
       (@Product_cat_fapp1_fapp0_functord $A $A' $G)
   ↪ Product_cat_fapp1_tapp0_func $G;
@@ -3162,6 +3160,7 @@ rule @fapp0 _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G) (Struct_sigma $x $y
 //
 // Surface/formula:
 //   (G * 1_B)_1 = G_1 × 1.
+// lhs-audit: keep 4 -- pair endpoint is decomposed by the rule
 rule @fapp1_func _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
       (Struct_sigma $x $y)
       (Struct_sigma $x' $y')
@@ -3186,6 +3185,7 @@ rule @fapp1_func _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
 //
 // Surface/formula:
 //   (G * 1_B)[(p,q)] = (G[p],q).
+// lhs-audit: keep 4 -- pair endpoint is decomposed by the rule
 rule @fapp1_fapp0 _ _ (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
       (Struct_sigma $x $y)
       (Struct_sigma $x' $y')
@@ -3325,12 +3325,12 @@ rule sigma_Snd (@Eval_at_func $A $B $x)
   ↪ Const_func $x;
 
 // Object action of `Eval_at_func`.
-rule @fapp0 (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
+rule @fapp0 _ _
       (@Eval_at_func $A $B $x) $F
   ↪ Struct_sigma $F $x;
 
 // Hom-action of `Eval_at_func`: keep eta and the identity at x.
-rule @fapp1_func (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
+rule @fapp1_func _ _
       (@Eval_at_func $A $B $x) $F $G
   ↪ Struct_sigma
       (@id_func (@Transf_cat $A $B $F $G))
@@ -3339,7 +3339,7 @@ rule @fapp1_func (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
         (Hom_cat $A $x $x)
         (@id $A $x));
 
-rule @fapp1_fapp0 (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
+rule @fapp1_fapp0 _ _
       (@Eval_at_func $A $B $x) $F $G $eta
   ↪ Struct_sigma $eta (id $A $x);
 
@@ -3348,8 +3348,8 @@ rule @fapp1_fapp0 (Functor_cat $A $B) (Product_cat (Functor_cat $A $B) $A)
 // Surface/formula:
 //   Eval_func ∘ Eval_at_func(x) = fapp0_func(x).
 rule @comp_cat_fapp0
-      (Functor_cat $A $B)
-      (Product_cat (Functor_cat $A $B) $A)
+      _
+      _
       $B
       (@Eval_func $A $B)
       (@Eval_at_func $A $B $x)
@@ -3711,8 +3711,8 @@ symbol fapp1_at_transf : Π [A B : Cat], Π (F : τ (Functor A B)),
 
 // First projection fold for identity-specialized internal hom-action.
 rule @tapp0_fapp0
-      (Op_cat $A)
-      (@Catd_cat $A)
+      _
+      _
       _
       _
       $X
@@ -3735,8 +3735,8 @@ symbol tapp1_at_transf : Π [A B : Cat], Π [F G : τ (Functor A B)],
 
 // First projection fold for off-diagonal internal hom-action.
 rule @tapp0_fapp0
-      (Op_cat $A)
-      (@Catd_cat $A)
+      _
+      _
       _
       _
       $X
@@ -3864,7 +3864,7 @@ injective symbol Pullback_catd_func [A B : Cat]
   (F : τ (Functor A B))
   : τ (Functor (Catd_cat B) (Catd_cat A));
 
-rule @fapp0 (@Catd_cat $B) (@Catd_cat $A)
+rule @fapp0 _ _
       (@Pullback_catd_func $A $B $F) $E
   ↪ @Pullback_catd $A $B $E $F;
 
@@ -3941,7 +3941,7 @@ symbol Terminal_catd (K : Cat) : τ (Catd K)
 //   Op_catd(E)[k] = E[k]^op.
 injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 
-rule @fapp0 (@Catd_cat $K) (@Catd_cat $K) (@Op_catd_func $K) $E
+rule @fapp0 _ _ (@Op_catd_func $K) $E
   ↪ @Op_catd $K $E;
 
 rule @comp_cat_fapp0 $K Cat_cat Cat_cat op $E
@@ -4015,7 +4015,7 @@ rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
 //   Pi_func(K)[E] = Π k :^n K, E[k].
 //                 = k :^n K ; 1[k] ⊢ E[k].
 injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
-rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
+rule @fapp0 _ Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
 
 // Stable displayed-identity bridge for Pi. Generic strict functoriality
@@ -4023,7 +4023,7 @@ rule @fapp0 (@Catd_cat $K) Cat_cat (@Pi_func $K) $E
 // identity visible as `id_funcd`; this rule is the same identity preservation
 // computation at that stable head.
 rule @fapp1_fapp0
-      (@Catd_cat $K)
+      _
       Cat_cat
       (@Pi_func $K)
       $E
@@ -4074,7 +4074,7 @@ injective symbol Pi_pullback_funcd [K : Cat]
 
 rule @fapp1_fapp0
       (@Catd_cat (Op_cat Cat_cat))
-      (@Catd_cat $K)
+      _
       (@Pullback_catd_func $K (Op_cat Cat_cat) $G)
       _
       _
@@ -4201,7 +4201,7 @@ rule @Sigma_cat $K (@Const_catd $K $A)
 // Surface/formula:
 //   Sigma_func(K)[E] = Sigma_cat(E).
 injective symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
-rule @fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E
+rule @fapp0 _ Cat_cat (@Sigma_func $K) $E
   ↪ @Sigma_cat $K $E;
 
 rule τ (Obj (@Sigma_cat $K $E))
@@ -4333,7 +4333,7 @@ injective symbol Sigma_proj1_pullback_catd [K : Cat]
   : τ (Catd (@Sigma_cat K R));
 
 rule @comp_cat_fapp0
-      (@Sigma_cat $K $R)
+      _
       $K
       Cat_cat
       $D
@@ -4341,7 +4341,7 @@ rule @comp_cat_fapp0
   ↪ @Sigma_proj1_pullback_catd $K $R $D;
 
 rule @fapp0
-      (@Sigma_cat $K $R)
+      _
       Cat_cat
       (@Sigma_proj1_pullback_catd $K $R $D)
       (Struct_sigma $k $r)
@@ -4364,7 +4364,7 @@ injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
-rule @fapp1_fapp0 (@Catd_cat $K) Cat_cat (@Sigma_func $K) $E $D $η
+rule @fapp1_fapp0 _ Cat_cat (@Sigma_func $K) $E $D $η
   ↪ @sigma_map_func $K $E $D $η;
 
 rule @fapp0 _ _
@@ -4480,7 +4480,7 @@ symbol Sigma_catd_functord_catd [K : Cat] [R : τ (Catd K)]
   : τ (Catd (@Sigma_cat K R));
 
 rule @fapp0
-      (@Sigma_cat $K $R)
+      _
       Cat_cat
       (@Sigma_catd_functord_catd $K $R $FF)
       (Struct_sigma $k $r)
@@ -4670,8 +4670,8 @@ injective symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x));
 
 rule @fapp1_fapp0
-      (Op_cat $Z)
-      (@Catd_cat $Z)
+      _
+      _
       (@hom_int $Z $Z (@id_func $Z))
       $y
       $x
@@ -4957,9 +4957,9 @@ rule @homd_tgt_func $Z (@Const_catd $Z Terminal_cat) $E $s $x $u $y
 // the `tapp0_fapp0` component. The inferred source/target family arguments are
 // deliberately `_` for the same stable-head hygiene as the other homd folds.
 rule @tapp0_fapp0
-      (Op_cat $Z)
+      _
       Cat_cat
-      (@Const_catd (Op_cat $Z) Terminal_cat)
+      _
       _
       $y
       (@homd_src_sec $Z $D $E $FF $x $u)
@@ -4968,6 +4968,7 @@ rule @tapp0_fapp0
       (@homd_tgt_func $Z $D $E $FF $x $u $y);
 
 // Constant-family section evaluation follows ordinary functor application.
+// lhs-audit: keep 3 -- terminal-source family is the semantic discriminator
 rule @tapp0_fapp0
       $K
       Cat_cat
@@ -5158,7 +5159,7 @@ rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
 
 // Object-component projection for generic Sigma-total uncurrying.
 rule @tapp0_fapp0
-      (@Sigma_cat $K $R)
+      _
       Cat_cat
       _
       _
@@ -6110,6 +6111,10 @@ injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
       (@Const_catd K (@Functord_cat K (@Const_catd K Terminal_cat) E))
       E);
 
+// LHS indexing guard: this source family is reconstructible from
+// `pi_eval_transf`, but replacing it with `_` makes bounded kernel checking
+// exceed 30 seconds. Keep it explicit as a decision-tree discriminator.
+// lhs-audit: keep 3 -- measured decision-tree performance guard
 rule @tapp0_fapp0
       $K Cat_cat
       (@Const_catd $K (@Functord_cat $K (@Const_catd $K Terminal_cat) $E))
@@ -6144,11 +6149,11 @@ rule sigma_Fst (@Product_pair_tele_func $A $B) ↪ @const_section_func $B $A;
 
 rule sigma_Snd (@Product_pair_tele_func $A $B) ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
 
-rule @fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
+rule @fapp0 _ _
       (@Product_pair_tele_func $A $B) $x
   ↪ Struct_sigma (@Const_func $B $A $x) (@id_func $B);
 
-rule @fapp1_func $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
+rule @fapp1_func _ _
       (@Product_pair_tele_func $A $B) $x $x'
   ↪ Struct_sigma
       (@Const_transf_func $B $A $x $x')
@@ -6157,7 +6162,7 @@ rule @fapp1_func $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
         (@Transf_cat $B $B (@id_func $B) (@id_func $B))
         (@id (Functor_cat $B $B) (@id_func $B)));
 
-rule @fapp1_fapp0 $A (Product_cat (Functor_cat $B $A) (Functor_cat $B $B))
+rule @fapp1_fapp0 _ _
       (@Product_pair_tele_func $A $B) $x $x' $p
   ↪ Struct_sigma
       (@Const_transf $B $A $x $x' $p)
@@ -6305,7 +6310,7 @@ rule @fapp1_fapp0 _ _ (@sym_func_func $A $B $C) $H $K $eta
   ↪ @sym_func_func_transf $A $B $C $H $K $eta;
 
 // Object and A-arrow action after exchange at fixed b.
-rule @fapp0 $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b
+rule @fapp0 _ _ (@sym_func $A $B $C $H) $b
   ↪ @sym_fapp0_func $A $B $C $H $b;
 
 rule @fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a
@@ -6333,13 +6338,13 @@ rule @fapp1_fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a' $p
       (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p);
 
 // B-arrow action after exchange and its mixed off-diagonal component.
-rule @fapp1_func $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b $b'
+rule @fapp1_func _ _ (@sym_func $A $B $C $H) $b $b'
   ↪ @sym_fapp1_func $A $B $C $H $b $b';
 
 rule fapp0 (@sym_fapp1_func $A $B $C $H $b $b') $q
   ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
 
-rule @fapp1_fapp0 $B (Functor_cat $A $C) (@sym_func $A $B $C $H) $b $b' $q
+rule @fapp1_fapp0 _ _ (@sym_func $A $B $C $H) $b $b' $q
   ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
 
 rule @tapp0_fapp0
@@ -6378,8 +6383,8 @@ rule @tapp1_fapp0
 
 // Component projection for exchanged transfors.
 rule @tapp0_fapp0
-      $B
-      (Functor_cat $A $C)
+      _
+      _
       _
       _
       $b
@@ -6568,7 +6573,7 @@ symbol section_pullback_sec [A B : Cat]
 rule @fapp0 _ _ (@section_pullback_func $A $B $F $E) $s ↪ @section_pullback_sec $A $B $F $E $s;
 
 rule @tapp0_fapp0
-      $A Cat_cat (@Const_catd $A Terminal_cat) _ $a
+      $A Cat_cat _ _ $a
       (@section_pullback_sec $A $B $F $E $s)
   ↪ @Obj_func
       (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
@@ -6590,7 +6595,7 @@ injective symbol section_pullback_transf [A B : Cat]
         (@Pi_func A)
         (@Pullback_catd_func A B F)));
 
-rule @tapp0_fapp0 (@Catd_cat $B) Cat_cat _ _ $E (@section_pullback_transf $A $B $F)
+rule @tapp0_fapp0 _ Cat_cat _ _ $E (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
 rule @fdapp1_int_cell _ _ _ Pi_int_funcd $B $A $F $E
@@ -6719,7 +6724,7 @@ symbol Prof_reindex [A A' B B' : Cat]
 
 // Object/fibre projection of profunctor reindexing.
 rule @fapp0
-      (Product_cat (Op_cat $A') $B')
+      _
       Cat_cat
       (@Prof_reindex $A $A' $B $B' $R $F $G)
       $ab
@@ -6761,7 +6766,7 @@ symbol Prof_reindex_fapp1_func [A A' B B' : Cat]
           ab')));
 
 rule @fapp1_func
-      (Product_cat (Op_cat $A') $B')
+      _
       Cat_cat
       (@Prof_reindex $A $A' $B $B' $R $F $G)
       $ab
@@ -6817,7 +6822,7 @@ rule fapp0
 
 // Direct capped action joins the full-action projection above.
 rule @fapp1_fapp0
-      (Product_cat (Op_cat $A') $B')
+      _
       Cat_cat
       (@Prof_reindex $A $A' $B $B' $R $F $G)
       $ab
@@ -6874,7 +6879,7 @@ injective symbol Hom_prof_along [A B X : Cat]
 
 // Direct fibre computation, formulated for an arbitrary product object.
 rule @fapp0
-      (Product_cat (Op_cat $A) $B)
+      _
       Cat_cat
       (@Hom_prof_along $A $B $X $F $G)
       $ab
@@ -6899,7 +6904,7 @@ symbol Hom_prof_along_fapp1_func [A B X : Cat]
           (@fapp0 B X G (sigma_Snd ab')))));
 
 rule @fapp1_func
-      (Product_cat (Op_cat $A) $B)
+      _
       Cat_cat
       (@Hom_prof_along $A $B $X $F $G)
       $ab
@@ -6938,7 +6943,7 @@ rule fapp0
 
 // Capped base-arrow action, joined with the full-action projection above.
 rule @fapp1_fapp0
-      (Product_cat (Op_cat $A) $B)
+      _
       Cat_cat
       (@Hom_prof_along $A $B $X $F $G)
       $ab
@@ -7026,7 +7031,7 @@ rule fapp0 (@Hom_prof_func $J $B) $G
 // postcomposition of eta by Hom_B(b,-), whose local action is already owned
 // by hom_postcomp_tele_func.
 rule @tapp0_fapp0
-      (Product_cat (Op_cat $B) $J)
+      _
       Cat_cat
       _
       _
@@ -7180,8 +7185,8 @@ symbol Prof_reindex_func [A A' B B' : Cat]
   : τ (Functor (Prof_cat A B) (Prof_cat A' B'));
 
 rule @fapp0
-      (@Catd_cat (Product_cat (Op_cat $A) $B))
-      (@Catd_cat (Product_cat (Op_cat $A') $B'))
+      _
+      _
       (@Prof_reindex_func $A $A' $B $B' $F $G)
       $R
   ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
@@ -7196,8 +7201,8 @@ symbol Prof_reindex_transf [A A' B B' : Cat]
       (@Prof_reindex A A' B B' S F G));
 
 rule @fapp1_fapp0
-      (@Catd_cat (Product_cat (Op_cat $A) $B))
-      (@Catd_cat (Product_cat (Op_cat $A') $B'))
+      _
+      _
       (@Prof_reindex_func $A $A' $B $B' $F $G)
       $R
       $S
@@ -7262,14 +7267,10 @@ symbol Prof_comp_transf
 
 // Fold the semantic reindex-then-compose route to the stable composition head.
 rule @comp_catd_fapp0
-      (Product_cat (Op_cat $A0) $B0)
+      _
       $R0
-      (@Prof_reindex $A1 $A0 $B1 $B0 $R1 $F01 $G01)
-      (@Prof_reindex
-        $A2 $A0 $B2 $B0
-        $R2
-        (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
-        (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01))
+      _
+      _
       (@Prof_reindex_transf
         $A1 $A0 $B1 $B0
         $R1
@@ -9093,14 +9094,14 @@ symbol join_elim_func [A B E : Cat]
 
 rule @comp_cat_fapp0
       $A
-      (@Join_cat $A $B)
+      _
       $E
       (@join_elim_func $A $B $E $first $second $cross)
       (@join_fst_func $A $B)
   ↪ $first
 with @comp_cat_fapp0
       $B
-      (@Join_cat $A $B)
+      _
       $E
       (@join_elim_func $A $B $E $first $second $cross)
       (@join_snd_func $A $B)
@@ -9625,6 +9626,12 @@ symbol CompMotive_catd [Z : Cat] (x : τ (Obj Z))
 rule @tdapp0_fapp0 $Z _ _ _ _ $x (@PathInd_transfd $Z)
   ↪ @PathInd_func $Z $x;
 
+// LHS indexing guard: unlike ordinary inferred source/family slots, both
+// compounds below are required here. Dropping the source makes rule checking
+// exceed the bounded check; dropping the family also does so, and retaining
+// only the family fails subject reduction. Keep this explicit pair unless a
+// focused probe establishes a replacement decision-tree shape.
+// lhs-audit: keep 1,3 -- measured subject-reduction and performance guard
 rule @tapp0_fapp0
       (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x))
       Cat_cat
