@@ -7707,8 +7707,124 @@ rule @Prof_reindex
         $M
         (@id_func $X));
 
+/*
+  Fixed-weight covariant implication.
+
+  For Q : Prof(B,X), this internalizes the covariant action:
+
+    Prof_imply_cov_func(Q) : Prof(A,X) -> Prof(A,B).
+
+  The dedicated arrow head owns the unary functor laws. The general
+  mixed-variance constructor below folds to it when both endpoint maps and the
+  contravariant Q-cell are identities. As with the opaque implication object,
+  the hom-action functor remains symbolic above its object/capped projections;
+  end semantics and separate higher-arrow projection rules are deferred.
+*/
+symbol Prof_imply_cov_func [A B X : Cat]
+  (Q : τ (Prof B X))
+  : τ (Functor
+      (Prof_cat A X)
+      (Prof_cat A B));
+
+rule fapp0
+      (@Prof_imply_cov_func $A $B $X $Q)
+      $O
+  ↪ @Prof_imply_cov $A $B $X $O $Q;
+
+symbol Prof_imply_cov_func_fapp1_func
+  [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)]
+  : τ (Functor
+      (@Functord_cat
+        (Product_cat (Op_cat A) X)
+        O O')
+      (@Functord_cat
+        (Product_cat (Op_cat A) B)
+        (@Prof_imply_cov A B X O Q)
+        (@Prof_imply_cov A B X O' Q)));
+
+symbol Prof_imply_cov_func_transf
+  [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)]
+  (o : τ (Functord O O'))
+  : τ (Functord
+      (@Prof_imply_cov A B X O Q)
+      (@Prof_imply_cov A B X O' Q));
+
+rule fapp1_func
+      (@Prof_imply_cov_func $A $B $X $Q)
+      [$O] [$O']
+  ↪ @Prof_imply_cov_func_fapp1_func
+      $A $B $X $Q $O $O';
+
+rule fapp0
+      (@Prof_imply_cov_func_fapp1_func
+        $A $B $X $Q $O $O')
+      $o
+  ↪ @Prof_imply_cov_func_transf
+      $A $B $X $Q $O $O' $o;
+
+rule fapp1_fapp0
+      (@Prof_imply_cov_func $A $B $X $Q)
+      [$O] [$O'] $o
+  ↪ @Prof_imply_cov_func_transf
+      $A $B $X $Q $O $O' $o;
+
+rule @Prof_imply_cov_func_transf
+      $A $B $X $Q
+      $O $O
+      (@id_funcd _ $O)
+  ↪ @id_funcd
+      (Product_cat (Op_cat $A) $B)
+      (@Prof_imply_cov $A $B $X $O $Q);
+
+rule @Prof_imply_cov_func_transf
+      $A $B $X $Q
+      $O $O''
+      (@comp_catd_fapp0
+        _
+        $O $O' $O''
+        $o' $o)
+  ↪ @comp_catd_fapp0
+      (Product_cat (Op_cat $A) $B)
+      (@Prof_imply_cov $A $B $X $O $Q)
+      (@Prof_imply_cov $A $B $X $O' $Q)
+      (@Prof_imply_cov $A $B $X $O'' $Q)
+      (@Prof_imply_cov_func_transf
+        $A $B $X $Q $O' $O'' $o')
+      (@Prof_imply_cov_func_transf
+        $A $B $X $Q $O $O' $o);
+
+// Reindexing a unary implication map reindexes both its varying input and its
+// fixed weight, matching object-level implication reindexing.
+rule @Prof_reindex_transf
+      $A $A'
+      $B $B'
+      (@Prof_imply_cov $A $B $X $O $Q)
+      (@Prof_imply_cov $A $B $X $O' $Q)
+      (@Prof_imply_cov_func_transf
+        $A $B $X $Q $O $O' $o)
+      $F $M
+  ↪ @Prof_imply_cov_func_transf
+      $A' $B' $X
+      (@Prof_reindex
+        $B $B' $X $X
+        $Q $M (@id_func $X))
+      (@Prof_reindex
+        $A $A' $X $X
+        $O $F (@id_func $X))
+      (@Prof_reindex
+        $A $A' $X $X
+        $O' $F (@id_func $X))
+      (@Prof_reindex_transf
+        $A $A' $X $X
+        $O $O' $o
+        $F (@id_func $X));
+
 // Implication is covariant in O and contravariant in Q.
-constant symbol Prof_imply_cov_transf
+symbol Prof_imply_cov_transf
   [A A' B B' X : Cat]
   [O : τ (Catd (Product_cat (Op_cat A) X))]
   [O' : τ (Catd (Product_cat (Op_cat A') X))]
@@ -7729,6 +7845,16 @@ constant symbol Prof_imply_cov_transf
         F
         (@Prof_imply_cov A' B' X O' Q')
         (@id_func B')));
+
+rule @Prof_imply_cov_transf
+      $A $A $B $B $X
+      $O $O' $Q $Q
+      (@id_func $A)
+      (@id_func $B)
+      $o
+      (@Prof_id_transf $B $X $Q)
+  ↪ @Prof_imply_cov_func_transf
+      $A $B $X $Q $O $O' $o;
 
 // Evaluation and lambda abstraction for general equipment cells.
 symbol Prof_eval_cov_transf
@@ -7996,6 +8122,29 @@ with @Prof_eval_con_hom_transf
         $P $O $G
         $t)
   ↪ $t;
+
+// Ordinary weighted-limit representability, kept separate from the stronger
+// computational `WeightedLimit_cov` interface below.
+symbol WeightedCone_prof
+  [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Prof J' J))
+  : τ (Prof B J')
+≔ @Prof_imply_cov
+    B J' J
+    (@Hom_prof J B F)
+    W;
+
+symbol IsWeightedLimit_cov_iso
+  [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Prof J' J))
+  (L : τ (Functor J' B))
+  : Grpd
+≔ @IsRepresentedBy_iso
+    B J'
+    (@WeightedCone_prof B J J' F W)
+    L;
 
 /*
   Covariant weighted limits.

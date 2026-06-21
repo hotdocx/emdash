@@ -2,7 +2,7 @@
 
 Date: 2026-06-17
 
-Status updated: 2026-06-19
+Status updated: 2026-06-21
 
 Status: the first end-to-end implementation pass is complete through Phase 6a.
 The requested computational surface for Cat-valued profunctors, tensor,
@@ -18,8 +18,8 @@ make check   passed
 make health  passed
 make ci      passed
 
-emdash3_2_checks.lp: 483 checks
-check catalog:       14 areas, 0 unclassified checks
+emdash3_2_checks.lp: 512 checks
+check catalog:       15 areas, 0 unclassified checks
 ```
 
 ## Overall Implementation Status 2026-06-19
@@ -34,8 +34,8 @@ coend/end, quotient, bicategorical-coherence, or directed-inductive semantics.
 | 0. Baseline and probes | Incremental probe/log/report workflow used throughout all phases. | Continue using focused probes for every nontrivial rewrite or internalization extension. |
 | 1. Profunctor facade | `Prof_base`, `Prof_cat`, `Hom_prof_along`, `Hom_prof`, `Unit_prof`, `Product_map_func`, `Prof_reindex`, `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`. | Ordinary-`Transf_cat` comparisons, broader endpoint internalization, and curry/uncurry comparison packages only when demanded downstream. |
 | 2. Tensor and co-Yoneda | Primitive `Prof_tensor`, endpoint reindexing, general and shaped tensor cells, `Prof_comp_transf`, identities, and symmetric identity-representable co-Yoneda beta rules. `Prof_func_transf`/`Prof_func_hom` are now available. | General co-Yoneda rules using `Prof_func_hom`, tensor associativity/unit coherence, and semantic coend/coinserter ownership. |
-| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, and inverse general/shaped eval-lambda operations. | End semantics, broader eval naturality, and internalized implication functors. |
-| 4. Weighted limits | `WeightedLimit_cov`, inverse universal/cone cells, the adjunction/profunctor transpose bridge, and the full `right_adjoint_preserves_weighted_limit_cov` witness. | Naturality in the shaped probe, explicit preserved-cone formula, and unit/counit component projections. |
+| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, inverse general/shaped eval-lambda operations, and fixed-weight `Prof_imply_cov_func(Q)` with full unary functor laws and reindex compatibility. | End semantics, broader eval naturality, fixed-left `Prof_imply_con_func(P)`, and the eventual mixed-variance bifunctors. |
+| 4. Weighted limits | Ordinary `WeightedCone_prof`/`IsWeightedLimit_cov_iso`, computational `WeightedLimit_cov`, inverse universal/cone cells, the adjunction/profunctor transpose bridge, and the full `right_adjoint_preserves_weighted_limit_cov` witness. | A coherent computational representability classifier, naturality in the shaped probe, explicit preserved-cone formula, and unit/counit component projections. |
 | 5. Duality and weighted colimits | `Op_transf`, `Op_adjunction`, `Product_swap_func`, base-swap-only `Op_prof`, `Op_prof_transf`, transparent `WeightedColimit_con`, and the full `left_adjoint_preserves_weighted_colimit_con` witness derived by duality. | Direct colimit-oriented projection names and a non-looping semantic pullback/reindex comparison for `Op_prof_transf`. |
 | 6a. Directed join | `Terminal_prof`, internally natural `join_cross_transf`, derived shaped `join_cross_hom`, and `join_elim_func` with inclusion and cross beta rules. | Dependent elimination, explicit join object/hom decomposition, a generic directed-inductive framework, and/or semantic collage construction. |
 
@@ -3816,6 +3816,10 @@ owner or receive comparison maps without invalidating the public calculus.
 8. Phase 6a, landed: primitive join, internally natural cross cell, shaped
    cross arrows, and nondependent recursor beta rules. Assess dependent
    elimination and/or semantic collage only as later independent slices.
+9. Representability redesign refinement, landed: fixed-weight
+   `Prof_imply_cov_func(Q)` with object/full/capped arrow action, strict unary
+   identity/composition, endpoint reindex compatibility, and a bridge from the
+   identity-endpoint specialization of `Prof_imply_cov_transf`.
 
 All listed landed steps leave:
 

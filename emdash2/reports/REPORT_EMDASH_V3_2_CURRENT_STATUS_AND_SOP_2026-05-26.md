@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-20
+Last consolidated: 2026-06-21
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -145,9 +145,17 @@ left by `P`. Covariant implication reindexes the left endpoints of its inputs
 and is covariant in `O`, contravariant in `Q`; contravariant implication
 reindexes the right endpoints of its inputs and is contravariant in `P`,
 covariant in `O`. Both sides have checked inverse eval/lambda operations for
-general cells and shaped specializations. Implication naturality beyond the
-mixed-variance cell constructors, internalized implication functors, and end
-semantics remain deferred.
+general cells and shaped specializations. The fixed-weight covariant operation
+is now internalized as
+`Prof_imply_cov_func(Q) : Prof_cat(A,X) -> Prof_cat(A,B)`. Its object, full
+hom, and capped arrow actions compute through
+`Prof_imply_cov_func_transf`; it strictly preserves vertical identity and
+composition, commutes with endpoint reindexing by reindexing both the varying
+input and fixed weight, and is the identity-endpoint specialization of the
+general mixed-variance cell constructor. The hom-action functor is still
+symbolic above its object/capped projections: separate higher-arrow rules, the
+eventual mixed-variance bifunctor, fixed-left contravariant implication
+functor, broader eval naturality, and end semantics remain deferred.
 
 The first weighted-limit and adjunction-preservation slices are active.
 `WeightedLimit_cov(F,W,L)` packages, for every probe `M`, inverse equipment
@@ -221,7 +229,7 @@ cancellation, while composition-folding conflicted with reflexivity, symmetry,
 Catd identities, and component projection. Do not reintroduce generic or
 Catd-specific strict-isomorphism cancellation based only on successful
 typechecking. The next comparison-owner design must include local-confluence
-evidence; see the redesign report's 2026-06-20 implementation checkpoint.
+evidence; see the redesign report's 2026-06-21 implementation checkpoint.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and
@@ -229,9 +237,16 @@ propositional `comp_assoc`, transparent `iso_evidence_comp`, and
 unification rule: a focused generic-unification probe polluted unrelated
 elaboration and was rejected. Transparent `Companion_prof`/`Conjoint_prof`
 names and the ordinary `IsRepresentedBy_iso`/`Representation_iso` layer are
-also active. A full `Hom_prof_func` probe passed basic assertions but failed
-its decision-tree critical-pair audit, so no incomplete object-only
-replacement was promoted.
+also active. `WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now
+expose the ordinary representability statement separately from the stronger
+computational `WeightedLimit_cov` API, and ordinary isomorphism evidence maps
+through the active `Prof_imply_cov_func(W)`.
+
+A full `Hom_prof_func` probe passed basic assertions but was not promoted.
+Recovered comparative evidence shows that broad generic postcomposition laws
+caused most of its decision-tree regression; the smaller core remains a
+localized projection-owner problem rather than a semantic impossibility. No
+incomplete object-only replacement was promoted.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

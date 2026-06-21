@@ -5712,6 +5712,115 @@ assert [A A' B B' X : Cat]
         (@Prof_imply_cov A' B' X O' Q')
         (@id_func B')));
 
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  (O : τ (Prof A X)) ⊢
+  fapp0 (@Prof_imply_cov_func A B X Q) O
+  ≡ @Prof_imply_cov A B X O Q;
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)] ⊢
+  fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O']
+  ≡ @Prof_imply_cov_func_fapp1_func
+      A B X Q O O';
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)]
+  (o : τ (Functord O O')) ⊢
+  fapp1_fapp0
+    (@Prof_imply_cov_func A B X Q)
+    [O] [O'] o
+  ≡ @Prof_imply_cov_func_transf
+      A B X Q O O' o;
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  (O : τ (Prof A X)) ⊢
+  @Prof_imply_cov_func_transf
+    A B X Q O O
+    (@id_funcd (Product_cat (Op_cat A) X) O)
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) B)
+      (@Prof_imply_cov A B X O Q);
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  (O : τ (Prof A X)) ⊢
+  @fapp1_fapp0
+    (@Prof_cat A X)
+    (@Prof_cat A B)
+    (@Prof_imply_cov_func A B X Q)
+    O O
+    (@id (@Prof_cat A X) O)
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) B)
+      (@Prof_imply_cov A B X O Q);
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' O'' : τ (Prof A X)]
+  (o : τ (Functord O O'))
+  (o' : τ (Functord O' O'')) ⊢
+  @Prof_imply_cov_func_transf
+    A B X Q O O''
+    (@comp_catd_fapp0
+      (Product_cat (Op_cat A) X)
+      O O' O'' o' o)
+  ≡ @comp_catd_fapp0
+      (Product_cat (Op_cat A) B)
+      (@Prof_imply_cov A B X O Q)
+      (@Prof_imply_cov A B X O' Q)
+      (@Prof_imply_cov A B X O'' Q)
+      (@Prof_imply_cov_func_transf
+        A B X Q O' O'' o')
+      (@Prof_imply_cov_func_transf
+        A B X Q O O' o);
+
+assert [A A' B B' X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)]
+  (o : τ (Functord O O'))
+  (F : τ (Functor A' A))
+  (M : τ (Functor B' B)) ⊢
+  @Prof_reindex_transf
+    A A' B B'
+    (@Prof_imply_cov A B X O Q)
+    (@Prof_imply_cov A B X O' Q)
+    (@Prof_imply_cov_func_transf
+      A B X Q O O' o)
+    F M
+  ≡ @Prof_imply_cov_func_transf
+      A' B' X
+      (@Prof_reindex
+        B B' X X
+        Q M (@id_func X))
+      (@Prof_reindex
+        A A' X X
+        O F (@id_func X))
+      (@Prof_reindex
+        A A' X X
+        O' F (@id_func X))
+      (@Prof_reindex_transf
+        A A' X X
+        O O' o
+        F (@id_func X));
+
+assert [A B X : Cat]
+  (Q : τ (Prof B X))
+  [O O' : τ (Prof A X)]
+  (o : τ (Functord O O')) ⊢
+  @Prof_imply_cov_transf
+    A A B B X
+    O O' Q Q
+    (@id_func A)
+    (@id_func B)
+    o
+    (@Prof_id_transf B X Q)
+  ≡ @Prof_imply_cov_func_transf
+      A B X Q O O' o;
+
 assert [A B X A' : Cat]
   [P : τ (Catd (Product_cat (Op_cat A) B))]
   [Q : τ (Catd (Product_cat (Op_cat B) X))]
@@ -5911,6 +6020,42 @@ assert [A B X : Cat]
       P O G
       t)
   ≡ t;
+
+assert [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Prof J' J)) ⊢
+  @WeightedCone_prof B J J' F W
+  ≡ @Prof_imply_cov
+      B J' J
+      (@Hom_prof J B F)
+      W;
+
+assert [B J J' : Cat]
+  (F : τ (Functor J B))
+  (W : τ (Prof J' J))
+  (L : τ (Functor J' B)) ⊢
+  @IsWeightedLimit_cov_iso B J J' F W L
+  ≡ @IsoEvidence
+      (@Prof_cat B J')
+      (@Prof_imply_cov
+        B J' J
+        (@Hom_prof J B F)
+        W)
+      (@Conjoint_prof J' B L);
+
+assert [B J J' : Cat]
+  (W : τ (Prof J' J))
+  [O O' : τ (Prof B J)]
+  (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢
+  @iso_evidence_fmap
+    (@Prof_cat B J)
+    (@Prof_cat B J')
+    (@Prof_imply_cov_func B J' J W)
+    O O' i
+  : τ (@IsoEvidence
+      (@Prof_cat B J')
+      (@Prof_imply_cov B J' J O W)
+      (@Prof_imply_cov B J' J O' W));
 
 assert [B J J' I : Cat]
   [F : τ (Functor J B)]

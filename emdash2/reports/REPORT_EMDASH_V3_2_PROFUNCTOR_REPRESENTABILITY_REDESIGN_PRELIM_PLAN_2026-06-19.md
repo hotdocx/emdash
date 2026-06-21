@@ -1,14 +1,15 @@
 # EMDASH v3.2 Profunctor Representability Redesign Preliminary Plan
 
 Date: 2026-06-19
-Last reviewed: 2026-06-20
+Last reviewed: 2026-06-21
 
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
-evidence/representability algebra are active. The initially proposed generic
-judgmentally cancelling `StrictIso` layer failed the required critical-pair
-audit and has not been promoted. The remainder of this report is still
-provisional.
+evidence/representability algebra are active. Fixed-weight covariant
+implication is now internalized as a complete unary functor. The initially
+proposed generic judgmentally cancelling `StrictIso` layer failed the required
+critical-pair audit and has not been promoted. The remainder of this report is
+still provisional.
 
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
@@ -17,7 +18,7 @@ and focused Lambdapi feasibility evidence. Every proposed interface remains
 subject to adjustment, replacement, or a prerequisite kernel side task as
 implementation probes expose better normal forms.
 
-## Implementation Checkpoint: 2026-06-20
+## Implementation Checkpoint: 2026-06-21
 
 The first bounded implementation slice started from clean baseline commit:
 
@@ -46,6 +47,11 @@ Companion_prof;
 Conjoint_prof;
 IsRepresentedBy_iso;
 Representation_iso.
+Prof_imply_cov_func(Q);
+Prof_imply_cov_func_fapp1_func(Q,O,O');
+Prof_imply_cov_func_transf(Q,o);
+WeightedCone_prof(F,W);
+IsWeightedLimit_cov_iso(F,W,L).
 ```
 
 `ProfMap` is transparent, so its identity and composition remain the existing
@@ -107,11 +113,57 @@ logs/probes/profunctor_representability_phase2_iso_comp_step_probe-20260620-2040
 ```
 
 The first full `Hom_prof_func` candidate also passed focused object, component,
-identity, and composition assertions, but it was not promoted. Its required
-general postcomposition and arrow-action rules introduced unjoinable critical
-pairs with existing `Cat_cat`, `Op_cat`, `Path_cat`, `Catd_cat`, and product
-specializations. An object-only or opaque functor head would not be a complete
-functorial representable and is therefore not being reported as progress.
+identity, and composition assertions, but it was not promoted. A recovered
+comparative audit refined the initial diagnosis. The two broad generic
+`hom_postcomp_func` identity/composition rules were the main source of new
+warnings: against an active-module diagnostic baseline of about 1140
+unjoinable-pair warnings, the full package reported about 1444, while removing
+those broad rules lowered the result to about 1156. The remaining delta is a
+localized projection-owner problem in the representable functor package, not
+evidence that the mathematical functor is infeasible. These raw decision-tree
+counts are comparative diagnostics, not a proof that the active signature is
+globally confluent. An object-only or opaque substitute would still be
+incomplete, so `Hom_prof_func` remains unpromoted while its arrow ownership is
+redesigned.
+
+The fixed-weight implication functor is now active:
+
+```text
+Prof_imply_cov_func(Q)
+  : Functor(Prof_cat(A,X),Prof_cat(A,B)).
+```
+
+Its object, full hom, and capped arrow projections compute. The stable
+`Prof_imply_cov_func_transf(Q,o)` head preserves vertical identity and
+composition, reindexing it along `(F,M)` computes to the same unary action on
+the reindexed varying input and reindexed fixed weight, and the
+identity-endpoint specialization of `Prof_imply_cov_transf` folds to this unary
+owner. The mixed constructor was therefore changed from protected
+`constant symbol` to rewrite-capable opaque `symbol`; it did not receive broad
+new functor laws.
+
+This remains a symbolic closed-structure interface while end semantics are
+absent. `Prof_imply_cov_func_fapp1_func` is a genuine functor-valued hom action,
+and its object/capped projections compute, but separate rules for its own
+higher-arrow action are not yet exposed. “Complete unary functor” in this
+checkpoint means the current object/whole-hom/capped interface plus strict
+vertical identity/composition and reindex compatibility, not a derived end
+construction or exhaustive higher-projection calculus.
+
+The focused passing probe is:
+
+```text
+logs/probes/profunctor_representability_phase2_imply_cov_func_probe-20260621-020628.log
+```
+
+The comparative decision-tree count moved from about 1140 to about 1144. Three
+new warnings are sort-impossible artifacts of the generic capped functor
+projection audit. The remaining warning is the ordinary functor-identity
+overlap; its two well-typed paths join through
+`Prof_imply_cov_func_transf`'s identity rule and are covered by an active
+regression check. Neither the reindex-compatibility rule nor the
+mixed-variance specialization added another warning. This is bounded evidence
+for the promoted interface, not a global confluence claim.
 
 The immediate motivation is the current implementation of:
 
@@ -287,18 +339,22 @@ vertical profunctor maps in one Prof_cat
 general endpoint-changing equipment cells.
 ```
 
-### 5. Closed Operations Lack Functorial Ownership
+### 5. Closed Operations Need Complete Functorial Ownership
 
-`Prof_imply_cov_transf` exists as a mixed-variance operation, but implication
-is not exposed as the arrow action of a functor such as:
+The first fixed-weight owner is now active:
 
 ```text
 Prof_imply_cov_func(W).
 ```
 
-Consequently, implication cannot generically map isomorphisms. The
-right-adjoint preservation proof manually builds the corresponding cell
-instead.
+It has the complete current unary object/whole-hom/capped interface and strict
+vertical identity/composition laws. What remains missing is the hom-action's
+separate higher-arrow projections, the eventual mixed-variance bifunctor,
+functorial transport of the still-unresolved computational comparison
+structure, and the refactoring of right-adjoint preservation to use those
+generic operations. The existing theorem therefore still manually builds its
+comparison cell even though the unary closed operation no longer lacks a
+functor owner.
 
 ### 6. The Adjunction Hom Bridge Is Also Over-Externalized
 
@@ -853,11 +909,12 @@ Prof_reindex_func(F,G)
   : Functor(Prof_cat A B, Prof_cat A' B')
 ```
 
-`Prof_reindex_func` is already mostly active. The missing work is to make the
-representable and closed operations equally functorial.
+`Prof_reindex_func` and the fixed-weight `Prof_imply_cov_func(W)` are active.
+The remaining work is to make representables functorial and to complete the
+two-variable closed structure.
 
-For both `Hom_prof_func` and `Prof_imply_cov_func(W)`, implementation is not
-complete at object action alone. The required checks are:
+For every such internalized functor, implementation is not complete at object
+action alone. The required checks are:
 
 ```text
 object action;
@@ -868,9 +925,12 @@ composition preservation;
 compatibility with Prof_reindex_func.
 ```
 
-For `Prof_imply_cov_func(W)`, the existing `Prof_imply_cov_transf` supplies the
-candidate mixed-variance arrow action, but the unary functor laws and stable
-projection normal forms must still be established.
+For `Prof_imply_cov_func(W)`, all checks in that list now pass. Its stable
+unary arrow head is the identity-endpoint specialization of
+`Prof_imply_cov_transf`, and its reindex law simultaneously transports the
+varying input and fixed weight. This is the first active evidence that the
+eventual bifunctor below can own the mixed variance without forcing general
+equipment-cell syntax into ordinary vertical functor laws.
 
 The eventual owner of implication variance should be a bifunctor of the
 schematic form:
@@ -1910,20 +1970,26 @@ weighted limits.
    ordinary assertions are insufficient.
 5. Completed: add transparent companion/conjoint presentation names and
    ordinary `IsRepresentedBy_iso`/`Representation_iso`.
-6. Blocked and returned to design: complete `Hom_prof_func`. The first full
-   arrow-action presentation passed assertions but failed its decision-tree
-   critical-pair audit. Do not promote an object-only substitute.
-7. Add fixed-weight `Prof_imply_cov_func`, including its complete unary functor
-   laws and compatibility with `Prof_reindex_func`, while checking it against
-   the eventual mixed-variance bifunctor signature.
+6. Returned to localized redesign: complete `Hom_prof_func`. The first full
+   arrow-action presentation passed assertions. The recovered comparative
+   audit showed that broad generic postcomposition laws were unacceptable,
+   while the smaller core package remains a projection-owner problem rather
+   than a semantic blocker. Do not promote an object-only substitute.
+7. Completed: add fixed-weight `Prof_imply_cov_func`, including complete unary
+   object/full/capped arrow action, strict identity/composition laws,
+   compatibility with `Prof_reindex_func`, and a specialization bridge from
+   the existing mixed-variance constructor.
 8. Only after selecting a coherent computational-isomorphism owner, implement
    its functorial action first for `Prof_reindex_func`, then for
    `Prof_imply_cov_func(W)`.
-9. Completed in its independent part: ordinary `IsRepresentedBy_iso` and
-   `Representation_iso` over `IsoEvidence`. Introduce a separate computational
+9. Completed in its ordinary independent part: `IsRepresentedBy_iso`,
+   `Representation_iso`, `WeightedCone_prof`, and
+   `IsWeightedLimit_cov_iso` over `IsoEvidence`. The generic
+   `iso_evidence_fmap` now maps ordinary comparisons through
+   `Prof_imply_cov_func(W)`. Introduce a separate computational
    representability classifier only after the comparison-owner blocker is
-   resolved. Then add `IsRepresentedBy_comp`,
-   `IsWeightedLimit_cov_iso`, and `IsWeightedLimit_cov_comp`.
+   resolved; then add `IsRepresentedBy_comp` and
+   `IsWeightedLimit_cov_comp`.
 10. Expose the fully ambient `Adjunction_hom_prof_iso(adj)` from the active
    computational adjunction presentation. Its projections must compute to the
    standard mate formulas, use the current off-diagonal triangle cuts for
@@ -2115,14 +2181,17 @@ probe domain-specific inverse-operation ownership versus a dedicated
 comparison cut/eliminator versus path/equivalence ownership;
 require decision-tree/local-confluence evidence before active promotion;
 redesign Hom_prof_func arrow ownership before another promotion attempt;
-continue independent fixed-weight implication and ordinary representability
-infrastructure where it does not presuppose the unresolved comparison owner.
+use the landed fixed-weight implication functor in the next generic
+comparison/representability probes;
+continue ordinary representability infrastructure where it does not
+presuppose the unresolved computational comparison owner.
 ```
 
-`OmegaEquiv`, full univalence, `Hom_prof_func`, implication, and the
-preservation theorem should still not be mixed into the next comparison-owner
-probe. Neither should an unrestricted `IsoEvidence -> StrictIso`
-strictification constructor. The failed probes establish that passing
-beta/eta assertions is weaker than establishing a coherent computational
-algebra; future work must make confluence part of the design criterion from the
-start.
+`OmegaEquiv`, full univalence, `Hom_prof_func`, the two-variable implication
+bifunctor, and the preservation theorem should still not all be mixed into the
+next comparison-owner probe. The active fixed-weight implication functor may
+now be used as one independently validated operation. Neither should an
+unrestricted `IsoEvidence -> StrictIso` strictification constructor be added.
+The failed probes establish that passing beta/eta assertions is weaker than
+establishing a coherent computational algebra; future work must make
+confluence part of the design criterion from the start.
