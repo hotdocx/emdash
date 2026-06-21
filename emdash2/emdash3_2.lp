@@ -722,6 +722,24 @@ rule @comp_catd_fapp0 $K $E $E $C $FF (@id_funcd $K $E)
 rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
   ↪ $GG;
 
+// Canonical Catd specialization of the global strict-functor composition
+// cut. The three family endpoints are inferred from the two arrow actions;
+// keeping them implicit lets this rule survive object-action normalization.
+rule @comp_catd_fapp0
+      $K
+      _ _ _
+      (@fapp1_fapp0
+        $A (@Catd_cat $K) $F $Y $Z $g)
+      (@fapp1_fapp0
+        $A (@Catd_cat $K) $F $X $Y $f)
+  ↪ @fapp1_fapp0
+      $A
+      (@Catd_cat $K)
+      $F
+      $X
+      $Z
+      (@comp_fapp0 $A $X $Y $Z $g $f);
+
 // Natural/displayed families of transformations, i.e. modifications between
 // directed-family functors.
 //
@@ -6948,6 +6966,81 @@ symbol Hom_prof [B X : Cat]
 symbol Unit_prof (X : Cat)
   : τ (Catd (Product_cat (Op_cat X) X))
 ≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
+
+/*
+  Internalized right-representable embedding.
+
+    Hom_prof_func(J,B) : (J -> B) -> Prof(B,J)
+    Hom_prof_func(G)   = Hom_prof(G).
+
+  Semantically, G is first sent to precomposition by G, that operation is
+  precomposed by hom_int(id_B), and the resulting B^op-curried family is
+  uncurried. The semantic body uses only existing strict functors. The public
+  head is opaque so projection rules do not repeatedly unfold that composite;
+  generic fapp1/fapp1_fapp0 rules remain the sole owners of identity and
+  composition.
+*/
+symbol Hom_prof_func [J B : Cat]
+  : τ (Functor
+      (Functor_cat J B)
+      (Prof_cat B J))
+≔ @comp_cat_fapp0
+    (Functor_cat J B)
+    (Functor_cat
+      (Op_cat B)
+      (Functor_cat J Cat_cat))
+    (@Catd_cat (Product_cat (Op_cat B) J))
+    (@uncurry_func_func (Op_cat B) J Cat_cat)
+    (@comp_cat_fapp0
+      (Functor_cat J B)
+      (Functor_cat
+        (Functor_cat B Cat_cat)
+        (Functor_cat J Cat_cat))
+      (Functor_cat
+        (Op_cat B)
+        (Functor_cat J Cat_cat))
+      (@comp_cat_con_func
+        (Op_cat B)
+        (Functor_cat B Cat_cat)
+        (Functor_cat J Cat_cat)
+        (@hom_int B B (@id_func B)))
+      (@comp_cat_con_func_func J B Cat_cat));
+
+opaque Hom_prof_func;
+
+rule fapp0 (@Hom_prof_func $J $B) $G
+  ↪ @Hom_prof $J $B $G;
+
+// Fibre component of the generic arrow action. It is ordinary
+// postcomposition of eta by Hom_B(b,-), whose local action is already owned
+// by hom_postcomp_tele_func.
+rule @tapp0_fapp0
+      (Product_cat (Op_cat $B) $J)
+      Cat_cat
+      _
+      _
+      $bj
+      (@fapp1_fapp0
+        (Functor_cat $J $B)
+        (@Catd_cat (Product_cat (Op_cat $B) $J))
+        (@Hom_prof_func $J $B)
+        $G $H $eta)
+  ↪ @tapp0_fapp0
+      $J
+      Cat_cat
+      (@comp_cat_fapp0
+        $J $B Cat_cat
+        (@hom_ $B $B (@id_func $B) (sigma_Fst $bj))
+        $G)
+      (@comp_cat_fapp0
+        $J $B Cat_cat
+        (@hom_ $B $B (@id_func $B) (sigma_Fst $bj))
+        $H)
+      (sigma_Snd $bj)
+      (@comp_cat_cov_transf
+        $J $B Cat_cat
+        (@hom_ $B $B (@id_func $B) (sigma_Fst $bj))
+        $G $H $eta);
 
 // Standard equipment names for the two representables induced by a functor.
 // They are transparent views of the sole rewrite-facing Hom_prof_along head.

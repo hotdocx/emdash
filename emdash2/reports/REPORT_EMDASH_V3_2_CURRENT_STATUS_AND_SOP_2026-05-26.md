@@ -242,11 +242,19 @@ expose the ordinary representability statement separately from the stronger
 computational `WeightedLimit_cov` API, and ordinary isomorphism evidence maps
 through the active `Prof_imply_cov_func(W)`.
 
-A full `Hom_prof_func` probe passed basic assertions but was not promoted.
-Recovered comparative evidence shows that broad generic postcomposition laws
-caused most of its decision-tree regression; the smaller core remains a
-localized projection-owner problem rather than a semantic impossibility. No
-incomplete object-only replacement was promoted.
+`Hom_prof_func(J,B) : Functor(Functor_cat(J,B),Prof_cat(B,J))` is now active.
+It is the stable opaque view of a semantic pipeline through
+`comp_cat_con_func_func`, precomposition by `hom_int(id_B)`, and uncurry. Its
+object action computes to `Hom_prof(G)`. The whole and capped arrow actions are
+the generic actions of that functor; their fibre component computes through
+`comp_cat_cov_transf` and the existing postcomposition telescope.
+
+No representable-specific identity or composition rules are active. Strictness
+comes from the global functor cuts. A generic `Catd_cat` specialization of the
+global composition cut was added because target composition canonicalizes to
+`comp_catd_fapp0` before the generic `comp_fapp0` rule can match. The earlier
+probe's broad `hom_postcomp_func` laws and constructor-specific
+`Hom_prof_func_transf` laws remain rejected.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder

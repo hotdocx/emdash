@@ -4852,6 +4852,79 @@ assert [A B X : Cat]
     (@id_func B)
   ≡ @Hom_prof_along A B X F G;
 
+assert [J B : Cat]
+  (G : τ (Functor J B)) ⊢
+  fapp0 (@Hom_prof_func J B) G
+  ≡ @Hom_prof J B G;
+
+assert [J B : Cat]
+  [G H : τ (Functor J B)] ⊢
+  fapp1_func (@Hom_prof_func J B) [G] [H]
+  : τ (Functor
+      (@Transf_cat J B G H)
+      (@Functord_cat
+        (Product_cat (Op_cat B) J)
+        (@Hom_prof J B G)
+        (@Hom_prof J B H)));
+
+assert [J B : Cat]
+  [G H : τ (Functor J B)]
+  (eta : τ (Transf G H)) ⊢
+  fapp1_fapp0 (@Hom_prof_func J B) [G] [H] eta
+  : τ (Functord
+      (@Hom_prof J B G)
+      (@Hom_prof J B H));
+
+assert [J B : Cat]
+  [G H : τ (Functor J B)]
+  (eta : τ (Transf G H))
+  (b : τ (Obj B))
+  (j : τ (Obj J)) ⊢
+  @tapp0_fapp0
+    (Product_cat (Op_cat B) J)
+    Cat_cat
+    (@Hom_prof J B G)
+    (@Hom_prof J B H)
+    (Struct_sigma b j)
+    (fapp1_fapp0 (@Hom_prof_func J B) eta)
+  ≡ @hom_postcomp_func
+      B B (@id_func B) b
+      (@fapp0 J B G j)
+      (@fapp0 J B H j)
+      (@tapp0_fapp0 J B G H j eta);
+
+assert [J B : Cat]
+  (G : τ (Functor J B)) ⊢
+  @fapp1_fapp0
+    (Functor_cat J B)
+    (@Catd_cat (Product_cat (Op_cat B) J))
+    (@Hom_prof_func J B)
+    G G
+    (@id (Functor_cat J B) G)
+  ≡ @id_funcd
+      (Product_cat (Op_cat B) J)
+      (@Hom_prof J B G);
+
+assert [J B : Cat]
+  [G H K : τ (Functor J B)]
+  (eta : τ (Transf H K))
+  (epsilon : τ (Transf G H)) ⊢
+  @comp_catd_fapp0
+    (Product_cat (Op_cat B) J)
+    (@Hom_prof J B G)
+    (@Hom_prof J B H)
+    (@Hom_prof J B K)
+    (fapp1_fapp0 (@Hom_prof_func J B) eta)
+    (fapp1_fapp0 (@Hom_prof_func J B) epsilon)
+  ≡ @fapp1_fapp0
+      (Functor_cat J B)
+      (@Catd_cat (Product_cat (Op_cat B) J))
+      (@Hom_prof_func J B)
+      G K
+      (@comp_fapp0
+        (Functor_cat J B)
+        G H K eta epsilon);
+
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
   @Companion_prof A B F
   ≡ @Hom_prof_along A B B F (@id_func B);
