@@ -233,16 +233,16 @@ evidence; see the redesign report's 2026-06-21 implementation checkpoint.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and
-`iso_evidence_fmap`. Associativity is intentionally not a rewrite or active
-generic unification rule. The first historical associativity probe had an
-endpoint-order error and is not evidence against the intended equation. A
-corrected arrow-level unification rule does elaborate `comp_assoc` from
-`eq_refl` in isolation, but promoting it before the active comparison layer
-makes `emdash3_2.lp` exceed the 60-second typecheck gate. Restricting the hint
-to the surrounding equality type does not work because unification decomposes
-that classifier and leaves the two arrow goals. Lambdapi 3.0.0 has no
-private/local unification-rule scope, so `comp_assoc` remains primitive
-propositional category-law evidence. Transparent
+`iso_evidence_fmap`. Ordinary composition associativity is an active
+proof-time unification equation, not a runtime arrow rewrite, and
+`comp_assoc` is transparent `eq_refl` evidence. The first historical
+associativity probe had both an endpoint-order error and a misleading
+performance failure. After correcting the equation, warning-enabled checking
+located the actual interaction in the generic strict-functor composition
+rule: its inferred target-object slots were written as reducible
+`fapp0(F,-)` expressions even though the two `fapp1_fapp0` arguments already
+determine them. Replacing those non-discriminating slots by `_` makes the full
+active kernel check quickly with associativity enabled. Transparent
 `Companion_prof`/`Conjoint_prof` names and the ordinary
 `IsRepresentedBy_iso`/`Representation_iso` layer are also active.
 `WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now expose the
@@ -517,6 +517,40 @@ For compact failure extraction from a watcher or probe log, use:
 scripts/explain_failure.py logs/typecheck.log
 ```
 
+For a warning-enabled log:
+
+```bash
+scripts/explain_failure.py --warning logs/typecheck.log
+```
+
+Quiet checks suppress Lambdapi warnings with `-w`, which keeps the ordinary
+inner loop and CI output manageable. When a timeout, conversion explosion, or
+unexpected critical-pair interaction is not localized by the quiet run,
+repeat the smallest relevant check with warnings enabled:
+
+```bash
+timeout 20s lambdapi check emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=20s EMDASH_LAMBDAPI_WARNINGS=1 make check
+make check-warnings
+```
+
+`make check-warnings` checks only `emdash3_2.lp`, avoiding the duplicate
+warning stream produced when `emdash3_2_checks.lp` imports the kernel. Use
+`EMDASH_LAMBDAPI_WARNINGS=1 make check` when the complete two-file path is
+specifically required.
+
+All check/probe/metrics scripts accept:
+
+```text
+EMDASH_LAMBDAPI_WARNINGS=1
+EMDASH_LAMBDAPI_FLAGS='--debug=u'
+```
+
+The first omits `-w`; the second appends explicit Lambdapi flags. Warning
+output can be large, so redirect it to a log and inspect the first warning
+near the newly added rule rather than treating every pre-existing warning as
+caused by the current change.
+
 The old v3.1 baseline and obsolete v2 baseline are no longer part of the
 ordinary check path.
 
@@ -551,6 +585,13 @@ Before proposing or implementing a nontrivial change, check these points:
    Reducible terms such as `fapp0 F x`, `comp_cat_fapp0 F G`,
    `Functor_catd ...`, `HomPresheaf_catd_func ...`, `Homd_target_catd ...`,
    or `Op_cat (Hom_cat ...)` are common causes of brittle rules.
+
+   This requirement is operational, not only stylistic. The ordinary
+   associativity unification equation exposed a generic strict-functor
+   composition rule whose target endpoints were explicitly written as
+   `fapp0 F X`, `fapp0 F Y`, and `fapp0 F Z`. Those slots were not
+   discriminators; replacing them by `_` removed the unification explosion
+   while preserving the same cut-elimination rule.
 
 4. Use canonical endpoint forms in assertions and symbol types.
 
@@ -626,6 +667,47 @@ scripts/probe.sh tmp/probes/rule_probe.lp
 
 Add a focused assertion exercising the intended normal form. A rule that
 typechecks but does not prove the assertion, or times out on it, is not ready.
+
+If the quiet probe/check times out without a useful location, rerun the same
+small target with warnings enabled before concluding that the newly added rule
+is inherently too broad:
+
+```bash
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=20s \
+  scripts/probe.sh tmp/probes/rule_probe.lp
+```
+
+Warnings can expose the existing rule whose overconstrained LHS interacts with
+the new equation. Inspect whether compound terms occur in inferred,
+non-discriminating argument positions before weakening or rejecting the new
+semantic rule.
+
+The repository provides an advisory whole-file scan:
+
+```bash
+python3 scripts/audit_rule_lhs.py
+```
+
+The 2026-06-21 scan reports 87 reconstructible compound slots across 59 rule
+clauses. This is an upper-bound cleanup inventory, not a defect count.
+Legitimate entries include category-constructor rules where `Op_cat`,
+`Path_cat`, `Product_cat`, or `Sigma_cat` is itself the discriminator, and
+pair-pattern rules where the endpoint constructor is needed for
+decomposition. The main candidate groups for future focused probes are:
+
+```text
+stable product/swap/evaluation functor projections;
+Catd/Pi/Sigma/pullback projection source and target slots;
+ordinary structural-functor projection target slots;
+profunctor reindex/representable projection base slots;
+displayed-composition endpoint families.
+```
+
+The confirmed generic strict-functor composition violation is already fixed:
+its three reducible `fapp0(F,-)` endpoint slots are `_`. Do not mechanically
+rewrite the remaining inventory. For each candidate, verify that all variables
+are still bound by a stable data head, run a focused assertion, compare
+warning behavior when relevant, and then run the bounded full check.
 
 Keep inferred source/target arguments implicit in rule LHSs unless they are the
 real discriminator. The useful discriminator is usually the explicit data head:

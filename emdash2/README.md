@@ -45,6 +45,8 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Refresh the health report: `make health`
 - Check just v3.2: `lambdapi check -w emdash3_2.lp`
 - Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
+- Diagnostic kernel check with Lambdapi warnings enabled:
+  `make check-warnings`
 
 ## Watch mode (auto typecheck on save)
 - Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
@@ -59,10 +61,34 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
 - Probe a temporary Lambdapi file with a compact failure summary:
   `scripts/probe.sh tmp/probes/name.lp`.
 - Summarize an existing Lambdapi log: `scripts/explain_failure.py logs/typecheck.log`.
+- Show the first warning from a warning-enabled log:
+  `scripts/explain_failure.py --warning logs/typecheck.log`.
+- Audit reconstructible compound terms in inferred rewrite-rule LHS slots:
+  `python3 scripts/audit_rule_lhs.py`.
 - Inspect rewrite compilation: `scripts/decision_tree.sh homd_`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
 - Reviewer milestone examples live in `examples/`.
+
+Quiet project checks use Lambdapi's `-w` flag to suppress the large existing
+critical-pair warning stream. When a quiet check times out or does not identify
+the interacting rule, rerun the smallest target with warnings enabled:
+
+```bash
+timeout 20s lambdapi check emdash3_2.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
+EMDASH_LAMBDAPI_WARNINGS=1 scripts/probe.sh tmp/probes/name.lp
+```
+
+All project check/probe/metrics scripts also append flags from
+`EMDASH_LAMBDAPI_FLAGS`, for example
+`EMDASH_LAMBDAPI_FLAGS='--debug=u'`. Redirect warning/debug output to a log
+when necessary.
+
+The LHS audit is advisory. Constructor patterns such as `Op_cat`,
+`Product_cat`, `Sigma_cat`, and dependent-pair endpoints may be intentional
+discriminators. Replace a reported slot by `_` only after a focused probe and
+bounded full check.
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
@@ -78,6 +104,11 @@ Prereq: `lambdapi` on PATH (tested with `lambdapi 3.0.0`).
   reconstructible arguments implicit on rule LHSs unless they are the actual
   discriminator. In particular, avoid explicit compound or reducible expressions
   in implicit-argument positions on rule LHSs.
+- If a new rewrite or unification rule causes a timeout, use a warning-enabled
+  run to locate the existing interacting rule. Audit that rule's inferred
+  argument slots before concluding the new rule is too broad; explicit
+  `fapp0`, composition, pullback, opposite, or family expressions in
+  non-discriminator slots can create avoidable unification search.
 - During debugging, keep inferred arguments explicit when that makes errors and
   constraints easier to read. Before finalizing, clean up redundant explicit
   arguments after a bounded check proves Lambdapi can infer them reliably.

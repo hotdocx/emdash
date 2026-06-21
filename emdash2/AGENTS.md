@@ -42,10 +42,22 @@ Advice: you should think hard and do a careful review and analysis; and find a d
 During early development, a “hung” typecheck usually indicates a rewrite/unification issue. Prefer a short timeout (≤ 60s) and investigate if it fires:
 - One-shot with timeout: `EMDASH_TYPECHECK_TIMEOUT=60s make check`
 - Watch mode already uses `scripts/check.sh` (with the same timeout mechanism).
+- If the quiet `-w` run does not localize the interaction, rerun the smallest
+  target with warnings enabled:
+  `EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check`,
+  `make check-warnings`, or
+  `timeout 20s lambdapi check emdash3_2.lp`.
+- Check/probe/metrics scripts append optional flags from
+  `EMDASH_LAMBDAPI_FLAGS`, for example
+  `EMDASH_LAMBDAPI_FLAGS='--debug=u'`.
 
 ## SOP: Rewrite-rule hygiene
 - Probe nontrivial rewrite/unification changes in a temporary copy with a focused assertion before editing the active file.
 - Keep inferred source/target arguments implicit on rule LHSs unless they are the actual discriminator.
+- When a new rule appears to cause a loop or explosion, inspect a
+  warning-enabled check before rejecting it. The actual cause may be an older
+  interacting rule with reducible compound terms in inferred,
+  non-discriminating LHS slots.
 - When an explicit source/target category is needed in an assertion, prefer canonical forms such as `Hom_cat ...` and `Functord_cat ...` over reducible readability wrappers such as `Fibre_cat (DefinedAlias ...) k`.
 - Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
 - Cat-specialized semantic heads package extra structure exposed only when the ambient category is `Cat_cat`; keep them when they expose transfor projections such as `tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0`, but document the generic owner and any required overlap/join.
@@ -89,6 +101,12 @@ Background daemon-style (then tail the log):
 - Use `scripts/decision_tree.sh SYMBOL` as the local wrapper around
   `lambdapi decision-tree`, with bare symbols resolved under
   `emdash.emdash3_2`.
+- Use `python3 scripts/audit_rule_lhs.py` for an advisory inventory of
+  reconstructible compound terms in inferred LHS slots. Its output includes
+  intentional constructor discriminators; probe each proposed `_`
+  replacement rather than applying it mechanically.
+- Use `scripts/explain_failure.py --warning LOG` to locate the first warning
+  in a warning-enabled Lambdapi log.
 - Use `reports/INDEX.md` before searching reports by filename.
 - Use `research/literature.md` and `scripts/arxiv_search.py` for repeatable
   arXiv/ar5iv discovery. ar5iv is for HTML skimming; arXiv PDF/source remains
@@ -105,6 +123,30 @@ Background daemon-style (then tail the log):
 
 ## Notes for Codex CLI iteration
 - Keep `make watch` running and let the agent read `logs/typecheck.log` to see current typecheck failures while editing.
+
+## SOP: Resume After Context Compaction Or Interruption
+
+Do not continue from a compacted conversational summary alone. Before editing
+after an LLM context compaction, unexpected interruption, or handoff:
+
+1. Read `AGENTS.md`, `README.md`, `emdash3_2.lp`,
+   `emdash3_2_checks.lp`,
+   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
+   `reports/EMDASH_FOUNDATIONS.md`, and
+   `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
+2. Read the active task-specific plan/report and any user-designated
+   `tmp/tmp-context-*.md` recovery file.
+3. Run `git status --short`, inspect both `git diff --cached` and `git diff`,
+   and preserve the distinction between staged user-approved work and
+   unstaged work.
+4. Re-locate the active symbols and nearby rules with `rg`; do not rely on
+   line numbers or architectural conclusions remembered from before
+   compaction.
+5. Run a bounded baseline check before new edits. If it times out or hides the
+   location, repeat the smallest target with warnings enabled.
+
+Record any changed architectural conclusion in the active report; do not
+leave the correction only in conversational context.
 </INSTRUCTIONS>
 
 ## Some docs (in .rst reStructuredText format)

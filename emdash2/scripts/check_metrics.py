@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -59,6 +60,19 @@ def lambdapi_version() -> str:
 def check_files() -> list[Path]:
     examples = sorted(path.relative_to(ROOT) for path in EXAMPLES_DIR.glob("*.lp"))
     return [*CORE_CHECK_FILES, *examples]
+
+
+def lambdapi_check_command(path: Path) -> list[str]:
+    warnings = os.environ.get("EMDASH_LAMBDAPI_WARNINGS", "0").lower()
+    if warnings in {"1", "true", "yes", "on"}:
+        warning_flags: list[str] = []
+    elif warnings in {"0", "false", "no", "off"}:
+        warning_flags = ["-w"]
+    else:
+        raise ValueError(f"invalid EMDASH_LAMBDAPI_WARNINGS value: {warnings}")
+
+    extra_flags = shlex.split(os.environ.get("EMDASH_LAMBDAPI_FLAGS", ""))
+    return ["lambdapi", "check", *warning_flags, *extra_flags, str(path)]
 
 
 def count_lines(path: Path) -> dict[str, int | dict[str, int]]:
@@ -116,7 +130,7 @@ def run_checks(files: list[Path], timeout_value: str) -> tuple[list[CheckResult]
     results: list[CheckResult] = []
     overall = 0
     for rel in files:
-        cmd = ["lambdapi", "check", "-w", str(rel)]
+        cmd = lambdapi_check_command(rel)
         rc, output, duration = run_command(cmd, timeout_value)
         results.append(CheckResult(str(rel), rc, duration))
         print(f"{rel}: exit {rc}, {duration:.3f}s")
@@ -142,6 +156,11 @@ def build_payload(args: argparse.Namespace) -> tuple[dict, int]:
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "lambdapi_version": lambdapi_version(),
         "timeout": timeout_value,
+        "warnings_enabled": os.environ.get(
+            "EMDASH_LAMBDAPI_WARNINGS", "0"
+        ).lower()
+        in {"1", "true", "yes", "on"},
+        "extra_lambdapi_flags": os.environ.get("EMDASH_LAMBDAPI_FLAGS", ""),
         "core_files": [str(path) for path in CORE_CHECK_FILES],
         "example_files": [str(path) for path in files_to_check if str(path).startswith("examples/")],
         "checks": [result.__dict__ for result in checks],
@@ -169,6 +188,8 @@ def format_report(payload: dict) -> str:
         "",
         f"- Lambdapi: `{payload['lambdapi_version']}`",
         f"- Timeout: `{payload['timeout']}`",
+        f"- Warnings enabled: `{payload['warnings_enabled']}`",
+        f"- Extra Lambdapi flags: `{payload['extra_lambdapi_flags']}`",
         "",
         "## Typecheck Timings",
         "",

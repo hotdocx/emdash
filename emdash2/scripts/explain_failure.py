@@ -29,11 +29,13 @@ def source_path(raw: str) -> Path:
 def find_location(lines: list[str], start: int) -> tuple[Path, int] | None:
     patterns = (
         re.compile(r'File "([^"]+)", line ([0-9]+)'),
-        re.compile(r"([^:\s]+\.lp):([0-9]+)(?::[0-9]+)?"),
+        re.compile(r"\[?([^:\s\[\]]+\.lp):([0-9]+)(?::[0-9]+)?"),
     )
-    lo = max(0, start - 5)
-    hi = min(len(lines), start + 6)
-    for i in range(lo, hi):
+    nearby = [
+        *range(start, max(-1, start - 6), -1),
+        *range(start + 1, min(len(lines), start + 6)),
+    ]
+    for i in nearby:
         for pattern in patterns:
             match = pattern.search(lines[i])
             if match:
@@ -48,6 +50,18 @@ def first_error(lines: list[str]) -> int | None:
             return i
     for i, line in enumerate(lines):
         if "error" in line.lower():
+            return i
+    return None
+
+
+def first_warning(lines: list[str]) -> int | None:
+    warning_markers = (
+        "Unjoinable critical pair:",
+        "Warning:",
+        "[WARNING]",
+    )
+    for i, line in enumerate(lines):
+        if any(marker in line for marker in warning_markers):
             return i
     return None
 
@@ -87,6 +101,11 @@ def main() -> int:
         default=16,
         help="Log lines to show from the first detected error.",
     )
+    parser.add_argument(
+        "--warning",
+        action="store_true",
+        help="Show the first Lambdapi warning instead of searching for an error.",
+    )
     args = parser.parse_args()
 
     lines = read_input(args.log)
@@ -94,9 +113,10 @@ def main() -> int:
         print("No log content.")
         return 1
 
-    err = first_error(lines)
+    err = first_warning(lines) if args.warning else first_error(lines)
     if err is None:
-        print("No Lambdapi error marker found.")
+        kind = "warning" if args.warning else "error"
+        print(f"No Lambdapi {kind} marker found.")
         tail = lines[-args.log_lines :]
         if tail:
             print()
@@ -105,7 +125,8 @@ def main() -> int:
                 print(line)
         return 1
 
-    print("## First Lambdapi error")
+    kind = "warning" if args.warning else "error"
+    print(f"## First Lambdapi {kind}")
     for line in lines[err : min(len(lines), err + args.log_lines)]:
         print(line)
 

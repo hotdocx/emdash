@@ -1,9 +1,13 @@
 .RECIPEPREFIX := >
-.PHONY: check examples catalog ci ci-render health watch clean
+.PHONY: check check-warnings examples catalog ci ci-render health watch clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
 > ./scripts/check.sh
+
+check-warnings:
+# Diagnostic kernel check with Lambdapi local-confluence warnings enabled.
+> EMDASH_LAMBDAPI_WARNINGS=1 ./scripts/check.sh emdash3_2.lp
 
 ci:
 > python3 scripts/check_metrics.py --update-log --brief

@@ -71,6 +71,15 @@ assert [a : Grpd] (x : τ a) ⊢
   @eq_sym a x x (eq_refl x)
   ≡ eq_refl x;
 
+assert [C : Cat] [w x y z : τ (Obj C)]
+  (h : τ (Hom C y z))
+  (g : τ (Hom C x y))
+  (f : τ (Hom C w x)) ⊢
+  @comp_assoc C w x y z h g f
+  ≡ eq_refl
+      (@comp_fapp0 C w y z h
+        (@comp_fapp0 C w x y g f));
+
 assert [C : Cat] [x y z : τ (Obj C)]
   (j : τ (IsoEvidence C y z))
   (i : τ (IsoEvidence C x y)) ⊢

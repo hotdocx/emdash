@@ -445,15 +445,20 @@ symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)
   τ (Hom A X_A Z_A);
 
 /*
-  Propositional associativity of ordinary categorical composition.
+  Proof-time associativity of ordinary categorical composition.
 
-  This is evidence in the object equality theory, not a runtime rewrite or a
-  global unification equation. A correctly typed associativity unification
-  rule can elaborate this witness from `eq_refl` in isolation, but globally
-  enabling that broad rule makes the active kernel exceed the bounded
-  typecheck gate. Cut-elimination rules may still normalize specific
-  constructors without globally reassociating arbitrary arrows.
+  This unification equation guides elaboration between the two bracketings; it
+  is not a runtime arrow rewrite. Keep inferred endpoint slots anonymous in
+  generic composition rules below: explicit reducible endpoints can interact
+  badly with this proof-time equation even when they are semantically
+  reconstructible from the action terms.
 */
+unif_rule @comp_fapp0 $C $w $y $z $h
+    (@comp_fapp0 $C $w $x $y $g $f)
+  ≡ @comp_fapp0 $C $w $x $z
+    (@comp_fapp0 $C $x $y $z $h $g)
+    $f
+  ↪ [ tt ≡ tt ];
 symbol comp_assoc
   [C : Cat]
   [w x y z : τ (Obj C)]
@@ -466,7 +471,10 @@ symbol comp_assoc
       =
       @comp_fapp0 C w x z
         (@comp_fapp0 C x y z h g)
-        f);
+        f)
+≔ eq_refl
+    (@comp_fapp0 C w y z h
+      (@comp_fapp0 C w x y g f));
 
 // Opposite category.
 injective symbol Op_cat : Cat → Cat;
@@ -553,9 +561,9 @@ rule @fapp1_fapp0 $A $B $F $X $X (@id $A $X)
 
 rule @comp_fapp0
       $B
-      (@fapp0 $A $B $F $X)
-      (@fapp0 $A $B $F $Y)
-      (@fapp0 $A $B $F $Z)
+      _
+      _
+      _
       (@fapp1_fapp0 $A $B $F $Y $Z $g)
       (@fapp1_fapp0 $A $B $F $X $Y $f)
   ↪ @fapp1_fapp0
