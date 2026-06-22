@@ -680,6 +680,30 @@ constant-family case where a Sigma total reduces to a product. Resolving those
 would require a broader product hom-action/projection ownership side task, not
 just weakening a constructor pattern.
 
+The common failure is architectural: both proposed packages put an outer
+Sigma eliminator directly over another independently rewrite-active cut:
+
+```text
+sigma_Fst(comp_fapp0(...))
+sigma_Snd(fapp0(sigma_map_func(...),...)).
+```
+
+These are commuting conversions. Composition/application may first normalize
+through identity, strict functoriality, naturality, or the generic
+product-valued projection ladder; alternatively, the new outer projection may
+fire first. Constructor beta rules such as
+`sigma_Fst(Struct_sigma(x,u))` do not have this problem because the inner head
+is data, not a competing cut.
+
+The redesign therefore adopts the general SOP that an
+outer-eliminator/inner-cut LHS is presumptively rejected. It is acceptable only
+as a designated projection ladder with one canonical semantic owner, or as a
+narrow measured commuting conversion required by a concrete consumer whose
+outer-first and inner-first paths join in a warning-enabled full-file probe at
+the owning declaration position. For these product/Sigma-map formulas, the
+preferred future work is a coherent general product hom-action/projection
+owner or a stable component head, not additional raw nested-cut rules.
+
 Evaluation and the tested total-family consumers generally return an arbitrary
 category object or a category, not Sigma data, so an output-headed
 `sigma_Fst`/`sigma_Snd` replacement is not available for their general rule.

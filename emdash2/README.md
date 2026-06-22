@@ -118,6 +118,9 @@ bounded full check. Record a justified exception immediately above the rule as
 `// lhs-audit: keep SLOT[,SLOT] -- reason`; `make audit-rules` rejects
 unreviewed candidates, and `make ci` runs the same strict gate. Vertical rule
 formatting helps human review but is not required by the scanner.
+The scanner inventories inferred compound argument slots; it does not prove
+joinability of nested outer-eliminator/inner-cut patterns. Those require
+manual classification and warning-enabled owning-position validation.
 
 ## Probe-first rewrite development
 - Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
@@ -133,6 +136,19 @@ formatting helps human review but is not required by the scanner.
   reconstructible arguments implicit on rule LHSs unless they are the actual
   discriminator. In particular, avoid explicit compound or reducible expressions
   in implicit-argument positions on rule LHSs.
+- Treat `outer_eliminator(inner_rewrite_cut(...))` LHSs as high-risk
+  commuting conversions. Examples include
+  `sigma_Fst(comp_fapp0(...))` and
+  `sigma_Snd(fapp0(specialized_func,...))`. The outer projection and inner cut
+  can reduce in either order, so a rule that typechecks can still create
+  nonjoinable identity, functoriality, or naturality paths.
+- Do not confuse these with constructor beta rules such as
+  `sigma_Fst(Struct_sigma x u)`, or with an established projection ladder that
+  has one canonical semantic owner. Prefer an existing ladder, a stable
+  intermediate projection head, or a functor/composition equation. Add a new
+  commuting conversion only for a concrete computational consumer and only
+  after both reduction orders join in a warning-enabled full-file probe at the
+  rule's owning declaration position.
 - If a new rewrite or unification rule causes a timeout, use a warning-enabled
   run to locate the existing interacting rule. Audit that rule's inferred
   argument slots before concluding the new rule is too broad; explicit

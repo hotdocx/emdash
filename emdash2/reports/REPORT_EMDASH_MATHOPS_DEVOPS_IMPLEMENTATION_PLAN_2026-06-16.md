@@ -145,6 +145,12 @@ Good candidates:
   known-danger phrases.
 - `scripts/lint_rule_lhs.py`: heuristic detector for reducible expressions in
   implicit LHS slots.
+- A complementary nested-cut audit should flag candidate commuting conversions
+  of the form `outer_eliminator(inner_rewrite_active_head(...))`, while
+  allowing explicit exceptions for constructor beta rules and designated
+  projection ladders. This should remain advisory unless symbol reducibility
+  can be classified reliably; warning-enabled owning-position probes remain
+  the promotion authority.
 - `scripts/lint_assert_tags.py`: eventually require every check to have a
   stable `CHECK:` tag.
 
@@ -218,6 +224,10 @@ Initial implementation status:
   `reports/REPORT_EMDASH_HEALTH.md`: implemented.
 - Focused checker-loop helpers `scripts/probe.sh`,
   `scripts/explain_failure.py`, and `scripts/decision_tree.sh`: implemented.
+- Inferred-slot LHS auditing is implemented as `scripts/audit_rule_lhs.py`.
+  Automatic classification of outer-eliminator/inner-cut commuting
+  conversions remains a possible tooling extension; the active SOP currently
+  requires manual review plus a warning-enabled full-file probe.
 - Friction review update: `make ci` now uses compact metrics output, while
   `make catalog` is exploratory/non-strict and `make ci` remains strict.
 - 2026-06-21 lightweight tooling review:

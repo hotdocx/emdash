@@ -757,19 +757,67 @@ Before proposing or implementing a nontrivial change, check these points:
    discriminators; replacing them by `_` removed the unification explosion
    while preserving the same cut-elimination rule.
 
-4. Use canonical endpoint forms in assertions and symbol types.
+4. Avoid unowned commuting conversions.
+
+   A rule whose LHS has the shape:
+
+   ```text
+   outer eliminator (inner rewrite-active cut ...)
+   ```
+
+   gives the kernel competing reduction orders. Typical risky examples are:
+
+   ```text
+   sigma_Fst(comp_fapp0(...))
+   sigma_Snd(fapp0(specialized_func,...))
+   ```
+
+   These are not ordinary beta rules. The outer projection can fire first, or
+   the inner composition/application can reduce first through identities,
+   strict functoriality, naturality, or a constructor-specific rule. The
+   resulting critical pair is often exactly the semantic law the proposed
+   rule was trying to install.
+
+   Constructor beta rules remain normal:
+
+   ```text
+   sigma_Fst(Struct_sigma x u) -> x.
+   ```
+
+   A documented core projection ladder may also use a nested pattern when it
+   has one canonical semantic owner, for example the generic projection of a
+   product-valued functor application. Do not add a second specialized ladder
+   that competes with it.
+
+   Prefer, in order:
+
+   ```text
+   an existing generic projection ladder;
+   a constructor beta rule;
+   a stable intermediate projection/component head;
+   a functor-composition or naturality equation at the semantic owner;
+   propositional evidence when judgmental reduction is not required.
+   ```
+
+   A new commuting conversion is exceptional. It requires a concrete
+   downstream consumer, focused assertions for both reduction orders, a
+   temporary full-file probe with the rule at its owning declaration position,
+   and a warning-enabled comparison against the baseline. Typechecking the
+   intended normal-form assertion alone is insufficient.
+
+5. Use canonical endpoint forms in assertions and symbol types.
 
    Prefer `Hom_cat ...` and `Functord_cat ...` when conversion search matters.
    Readability wrappers such as `Fibre_cat (DefinedAlias ...) k` are useful in
    prose but can make nested `fapp0` assertions harder for Lambdapi.
 
-5. Preserve omega-friendly functor-level structure.
+6. Preserve omega-friendly functor-level structure.
 
    Prefer functor-level folds over capped pointwise rewrites when the result
    must support another hom-action. A RHS that immediately computes one cell
    may lose the functor object needed for higher-dimensional iteration.
 
-6. Do not stop at pointwise formulas for varying variables.
+7. Do not stop at pointwise formulas for varying variables.
 
    A formula such as `A[x] = ...` is only the object law of a would-be
    functorial family when `x` varies in a category. Likewise, a pointwise
@@ -796,7 +844,7 @@ Before proposing or implementing a nontrivial change, check these points:
    A rule that works pointwise can still have the wrong variance, endpoints,
    or performance behavior at arrow-action or naturality level.
 
-7. Use hom-indexed family owners for functor-shaped endpoints.
+8. Use hom-indexed family owners for functor-shaped endpoints.
 
    When a formula contains `Hom_A(W,F[-])`, `Hom_A(F[-],W)`, or the displayed
    analogue, prefer the classifier that takes the functor/displayed functor as
@@ -806,13 +854,13 @@ Before proposing or implementing a nontrivial change, check these points:
    actions under a semantic owner and avoids an extra explicit cut before
    cut-elimination can fire.
 
-8. Probe before committing rules.
+9. Probe before committing rules.
 
    Use a temporary copy plus a focused assertion for the intended normal form.
    A rule that typechecks but fails or times out on the assertion is not ready
    for the active file.
 
-9. Document failed orientations when they affect the design.
+10. Document failed orientations when they affect the design.
 
    If a tempting rule is rejected because it creates conversion blowups,
    circularity, or misleading ownership, record that in this SOP report or the
@@ -891,6 +939,12 @@ most likely. The manual pass also reviews specialized stable-head and
 cancellation rules; their nested compounds are semantic patterns rather than
 generic inferred indices. Vertical formatting improves readability, but the
 scanner parses balanced applications and does not depend on alignment.
+
+The scanner does not decide whether an outer eliminator is commuting across an
+inner rewrite-active cut. A clean `make audit-rules` result therefore does not
+justify rules such as `sigma_Fst(comp_fapp0(...))`. Review these patterns
+separately, identify the outer-first and inner-first reductions, and use the
+warning-enabled owning-position probe described above.
 
 `make audit-rules` runs the scanner with `--strict`, and `make ci` includes the
 same gate. Do not mechanically rewrite a candidate. Verify that variables

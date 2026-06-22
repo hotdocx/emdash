@@ -217,7 +217,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
             "Advisory scan for reconstructible compound terms in inferred "
-            "rewrite-rule LHS slots."
+            "rewrite-rule LHS slots. This does not classify nested "
+            "outer-eliminator/inner-cut commuting conversions."
         )
     )
     parser.add_argument(
@@ -283,6 +284,10 @@ def main() -> int:
         "Advisory only: probe each proposed replacement with `_`. Mark a "
         "measured intentional case immediately above its rule with "
         "`// lhs-audit: keep SLOT[,SLOT] -- reason`."
+    )
+    print(
+        "Separately review outer-eliminator/inner-rewrite-cut LHSs and validate "
+        "both reduction orders in a warning-enabled owning-position probe."
     )
     return 1 if args.strict and found else 0
 

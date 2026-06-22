@@ -56,6 +56,19 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
 ## SOP: Rewrite-rule hygiene
 - Probe nontrivial rewrite/unification changes in a temporary copy with a focused assertion before editing the active file.
 - Keep inferred source/target arguments implicit on rule LHSs unless they are the actual discriminator.
+- Avoid LHSs where an outer eliminator or projection immediately scrutinizes
+  another independently rewrite-active cut, for example
+  `sigma_Fst (comp_fapp0 ...)` or
+  `sigma_Snd (fapp0 (specialized_func ...) ...)`. These are commuting
+  conversions with competing outer-first and inner-first reductions, not
+  ordinary constructor beta rules. Prefer an existing projection ladder, a
+  stable intermediate component head, or an equation at the semantic owner.
+- Nested constructor beta rules such as `sigma_Fst (Struct_sigma x u)` are
+  normal. A documented core projection ladder with one canonical owner can
+  also be valid. A new commuting conversion is exceptional: probe both
+  reduction orders, install it at the intended owning position in a temporary
+  full-file copy, compare warning counts, and promote it only when the paths
+  join and a concrete consumer needs judgmental computation.
 - Use `_` for reconstructible compound terms in inferred LHS slots after a
   focused probe confirms the rule still checks promptly. If a compound slot
   is an actual constructor discriminator or a measured subject-reduction /
@@ -124,7 +137,9 @@ Background daemon-style (then tail the log):
   intentional constructor discriminators; use `--show-kept` to include
   annotated exceptions. `make audit-rules` and `make ci` use strict mode and
   reject unreviewed candidates. Probe each proposed `_` replacement rather
-  than applying it mechanically.
+  than applying it mechanically. This scanner does not establish safety of
+  outer-eliminator/inner-cut commuting conversions; review those manually and
+  with warning-enabled owning-position probes.
 - Use `scripts/explain_failure.py --warning LOG` to locate the first warning
   in a warning-enabled Lambdapi log.
 - Use `reports/INDEX.md` before searching reports by filename.
