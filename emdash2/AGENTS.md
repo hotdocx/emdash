@@ -88,6 +88,14 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   missing; add that owner and route the readable action through it. Separate
   beta/eta laws and Došen-style cuts are allowed only when they express
   structure beyond generic functoriality/naturality.
+- A stable projection head can erase the literal generic-owner pattern before
+  an outer generic cut fires. In that measured case, a specialized
+  identity/composition-looking rule may be needed solely as a confluence
+  bridge between owner-first and projection-first reduction. Audit the exact
+  rule independently, test both paths, and choose one canonical orientation;
+  never install both directions or generate such bridges mechanically. This
+  is an exception for joining a projection ladder, not a second owner of the
+  mathematical functor law.
 - Cat-specialized semantic heads package extra structure exposed only when the ambient category is `Cat_cat`; keep them when they expose transfor projections such as `tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0`, but document the generic owner and any required overlap/join.
 - If a semantic definition fails to compute, first look for missing projection rules, such as a capped `fapp1_fapp0` rule corresponding to an existing `fapp1_func` rule.
 - Do not duplicate semantic bodies in helper aliases; route helper definitions through the named semantic constructor.

@@ -172,6 +172,52 @@ required independently for identity, `Op_transf`, `Op_funcd`, and the other
 audit groups; it must not be assumed without checking their actual projection
 ladders.
 
+### General Stable-Projection Boundary
+
+This phenomenon is general in principle, but it does not require attaching a
+duplicate functoriality package to every specialized `fapp1_*` symbol. An
+extra join bridge becomes a candidate only when all of the following hold:
+
+1. a generic action such as `fapp1_fapp0(F,f)` reduces to a distinct stable
+   head `H(f)`;
+2. reducing to `H` erases the literal owner pattern used by a global identity,
+   composition, or naturality cut;
+3. the outer generic cut and the inner projection can both fire from one
+   well-typed term; and
+4. the two paths do not already rejoin through the semantic body or another
+   canonical projection rule.
+
+Rules that merely define the object/arrow action of a constructor are not
+duplicates of functoriality. Nor is a stable head a problem when it reduces
+onward to generic structure, when no competing outer cut exists, or when the
+consumer needs only one projection path. The active source currently has many
+projection rules (`35` rules headed by `fapp1_func` and `44` headed by
+`fapp1_fapp0` in the 2026-06-22 lexical inventory), but only the small set of
+named identity/composition surfaces in the ledger has been identified as a
+focused ownership audit candidate. These counts are discovery metrics, not a
+claim that all those rules are problematic.
+
+Further internalization often removes duplication at the next fixed-endpoint
+level but may only move the boundary. For example, naming or reusing
+`fapp1_func(op,A,B)` can own the vertical action on transformations between
+fixed functors and may account for `Op_transf` laws. It does not by itself own
+horizontal composition of functors whose source, middle, and target categories
+vary; that remains strict functoriality of `op` in `Cat_cat`. Each audit must
+therefore identify the exact categorical dimension and which variables are
+internal before deciding that another owner eliminates a bridge.
+
+The current policy is consequently:
+
+```text
+keep generic projection syntax when it is usable;
+introduce stable projection heads only for demonstrated computation,
+discrimination, readability, or performance needs;
+when a stable head crosses a generic-law boundary, add at most the measured
+join bridge required by the chosen normal form;
+do not generate identity/composition rules mechanically;
+audit both reduction orders and downstream consumers independently.
+```
+
 The active next slice remains direct Došen-style naturality for the primitive
 tensor-implication eval/lambda bijection. `INT-COMP` becomes a prerequisite
 only if that focused probe genuinely requires extending the composition

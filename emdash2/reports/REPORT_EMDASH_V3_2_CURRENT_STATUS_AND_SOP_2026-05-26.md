@@ -220,6 +220,17 @@ mathematical equality. The implication cluster was migrated immediately
 because its direct mixed owner already existed and the focused replacement
 passed.
 
+This stable-projection issue is general in principle but not a requirement to
+duplicate functor laws for every named `fapp1_*` projection. A separate bridge
+is considered only when projection erases the generic owner pattern, an outer
+generic cut competes with that projection, and the two paths do not already
+join. Constructor action equations and projections that reduce onward to
+generic structure are not duplicate functoriality rules. More internalization
+can remove a bridge at one fixed-endpoint level while leaving a distinct
+higher or varying-endpoint composition boundary. The representability
+redesign report's `General Stable-Projection Boundary` section records the
+full criteria and the bounded 2026-06-22 source inventory.
+
 These migrations are tracked by stable IDs in the representability redesign
 report's `Deferred Internalization Side-Task Ledger`: `INT-COMP`, `INT-OP`,
 `INT-PROF-FUNC`, `INT-OP-PROF`, and `INT-EQUIP-COMP`. They are demand-driven

@@ -196,7 +196,13 @@ manual classification and warning-enabled owning-position validation.
   functor/transfor whose generic action the special term represents, then keep
   the generic action visible or make the special name a transparent semantic
   view. This restriction does not prohibit beta/eta rules or focused
-  cut-elimination laws for additional universal structure.
+  cut-elimination laws for additional universal structure. It also does not
+  prohibit a measured confluence bridge when reducing to a stable projection
+  head erases the generic owner before an outer generic cut can fire. For such
+  a bridge, test owner-first and projection-first reduction, select exactly one
+  canonical orientation, and document why the generic rule alone cannot see
+  the projected normal form. Do not generate these bridges for every action
+  head.
 - For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
   postcomposition action heads over one-off heads that hide a raw composite. For
   example, when the desired normal form is `g o f -> fapp0(precompose_by f) g`,
