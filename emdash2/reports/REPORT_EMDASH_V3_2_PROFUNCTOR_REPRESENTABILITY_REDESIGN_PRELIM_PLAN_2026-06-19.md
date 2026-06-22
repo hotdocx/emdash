@@ -658,16 +658,44 @@ Sigma homs, Sigma arrows, and Sigma-map arrow action;
 displayed-total uncurrying and the measured path-induction guard.
 ```
 
-Broader projection formulas for arbitrary product composition and evaluation
-typechecked in isolation but added twenty active critical pairs. Broad whole
-`sigma_map_func` object reconstruction added another real overlap. Opaque
-object fallbacks for `Sigma_proj1_func`, `Sigma_proj1_pullback_catd`, and
-`Sigma_catd_functord_catd` passed when appended to an imported probe but added
-two pairs when placed at their owning declaration point because later rules
-also interact with them. They were not promoted. This establishes an important
-SOP point: a focused probe is necessary but not sufficient for a broad rule;
-warning-enabled validation in the owning module at the intended declaration
-position is the promotion gate.
+The audit distinguished whole-output rules from projection-owned rules:
+
+```text
+product composition:
+  sigma_Fst(g o f) -> sigma_Fst(g) o sigma_Fst(f)
+  sigma_Snd(g o f) -> sigma_Snd(g) o sigma_Snd(f)
+
+Sigma-map object action:
+  sigma_Fst(Sigma(eta)[ku]) -> sigma_Fst(ku)
+  sigma_Snd(Sigma(eta)[ku]) -> eta[sigma_Fst(ku)](sigma_Snd(ku)).
+```
+
+Both projection-only packages typechecked and proved their opaque-object
+assertions when installed at their owning declaration positions. They were
+still not warning-neutral. Product-composition projections added six
+critical-pair reports, principally against generic strict-functor composition
+and left/right identity cuts. Sigma-map projections added two reports against
+the generic projection of product-valued functor application in the
+constant-family case where a Sigma total reduces to a product. Resolving those
+would require a broader product hom-action/projection ownership side task, not
+just weakening a constructor pattern.
+
+Evaluation and the tested total-family consumers generally return an arbitrary
+category object or a category, not Sigma data, so an output-headed
+`sigma_Fst`/`sigma_Snd` replacement is not available for their general rule.
+Product-valued constructors such as product swap and the fixed-right product
+map already obtain opaque-input component computation through the generic
+`sigma_Fst(fapp0 H i)`/`sigma_Snd(fapp0 H i)` ladder plus projections of `H`.
+
+The earlier combined broad product/evaluation experiment added twenty active
+critical pairs, and broad whole `sigma_map_func` object reconstruction added
+another real overlap. Opaque object fallbacks for `Sigma_proj1_func`,
+`Sigma_proj1_pullback_catd`, and `Sigma_catd_functord_catd` passed when appended
+to an imported probe but added two pairs when placed at their owning
+declaration point because later rules also interact with them. None were
+promoted. This establishes an important SOP point: a focused probe is
+necessary but not sufficient for a broad rule; warning-enabled validation in
+the owning module at the intended declaration position is the promotion gate.
 
 ## Assessment
 
