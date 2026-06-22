@@ -22,6 +22,9 @@ component and off-diagonal transfor structure. Before adding another ordinary
 law to them, resume side task `INT-COMP` from the `Deferred Internalization
 Side-Task Ledger` in
 `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
+Audit `comp_cat_cov_transf`, `comp_cat_con_transf`, and each rule on either head
+independently; their grouping does not imply that the same owner, orientation,
+or migration result applies to both.
 Its completion criterion is a generic-owner route with object, full/capped
 action, identity, and composition diagnostics, plus warning comparison. This
 correction supersedes the later historical recommendation in this report to

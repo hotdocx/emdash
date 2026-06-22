@@ -195,17 +195,30 @@ internalized owners `op`, the hom-action of `op`, and `Op_catd_func`;
 equipment-level owner is still missing. Their existing local identity or
 composition rules must not be copied into new infrastructure. Migrate each
 cluster separately when needed, with downstream projection checks and warning
-comparison, before extending it. Here “migrate” begins with reassessment: a
-rule may be retained when it is an intentional projection/normal-form bridge
-or genuine cut rather than a redundant generic law. In particular,
+comparison, before extending it. These clusters are discovery labels only:
+every symbol and every individual rule must be reassessed separately, and
+rules grouped together may have different diagnoses and outcomes. Here
+“migrate” begins with reassessment: a rule may be retained when it is an
+intentional projection/normal-form bridge or genuine cut rather than a
+redundant generic law. In particular,
 `Op_func(F o G) -> Op_func(F) o Op_func(G)` is not the ordinary arrow-level
-functoriality of `Op_func(F)`. It exposes how the higher opposite operation
-maps composition of functors, expanding the arrow projection of `op` to the
-chosen composed-functor normal form. Treat it as an intentional bridge unless
-a focused audit of its reduction orientation, generic `op` owner, and duality
-consumers finds a concrete conflict. The implication cluster was migrated
-immediately because its direct mixed owner already existed and the focused
-replacement passed.
+functoriality of `Op_func(F)`. The existing `op : Functor Cat_cat Cat_cat`
+already owns the higher strict equality saying that opposite maps a composite
+functor to the composite of opposites. The active rule expands the image of a
+composite, whereas the global cut discipline normally contracts a composite
+of images. Whether this reverse-oriented projection bridge is required by the
+chosen duality normal forms or should be removed/reoriented remains an open,
+rule-specific audit question. Do not change it, or add the opposite direction,
+without normal-form, critical-pair, termination, and downstream duality
+checks. An explicit bridge may still be necessary because reducing
+`fapp1_fapp0(op,F)` to the canonical `Op_func(F)` projection can hide the
+generic owner pattern before an outer composition cut fires. The current
+outward rule joins owner-first and projection-first reductions at the
+distributed composite; an inward replacement would join them at
+`Op_func(F o G)`. This is a normal-form choice, not a choice about the strict
+mathematical equality. The implication cluster was migrated immediately
+because its direct mixed owner already existed and the focused replacement
+passed.
 
 These migrations are tracked by stable IDs in the representability redesign
 report's `Deferred Internalization Side-Task Ledger`: `INT-COMP`, `INT-OP`,
@@ -215,7 +228,8 @@ slice resumes `INT-COMP` only if its focused probe requires a new local law;
 general co-Yoneda/join, duality/univalence, extended profunctor duality, and
 bicategory/equipment coherence respectively trigger the other clusters. A
 trigger requires an internalized-owner probe before any new constructor-local
-functor law is added.
+functor law is added. It does not transfer a conclusion from one member or
+rule of the cluster to another.
 
 The weighted-limit public API has completed its representability cutover.
 `WeightedLimit_cov(F,W,L)` is a transparent compatibility name for

@@ -3875,6 +3875,9 @@ must not be expanded by copying more constructor-specific functor laws. The
 authoritative migration ledger, including expected owners and completion
 criteria, is `Deferred Internalization Side-Task Ledger` in
 `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
+Its IDs group related discovery work only. Every listed symbol and every rule
+must receive an independent semantic, ownership, orientation, confluence, and
+consumer audit; one result must not be generalized to the rest of its group.
 
 Resume the corresponding side task at these points:
 
@@ -3896,7 +3899,10 @@ local law,” not “perform the migration regardless of the consumer” and not
 “remove every existing specialized rule.” The audit may retain a rule that is
 shown to be an intentional projection/normal-form bridge, as may be the case
 for the rule exposing how the higher opposite operation maps a composite
-functor. That rule is distinct from the ordinary arrow-level functoriality of
+functor. The `op : Functor Cat_cat Cat_cat` owner already exists, but it does
+not by itself choose between the generic inward cut and the active outward
+expansion at the `Op_func` projection. That orientation remains a focused
+audit question. It is also distinct from ordinary arrow-level functoriality of
 each `Op_func(F)`. Direct Došen-style beta/eta and cut-elimination rules remain
 valid when they express closed or equipment structure beyond ordinary generic
 functoriality.

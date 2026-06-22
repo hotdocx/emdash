@@ -74,32 +74,41 @@ refactor all of them preemptively. Resume one cluster when the named consumer
 first needs to extend it, or earlier only when a focused probe shows that its
 present ownership blocks the active slice.
 
-| ID | Existing cluster | Expected ownership direction | Resume trigger |
+The IDs below are scheduling and discovery labels only. They do not assert
+that declarations grouped in one row have the same architectural problem or
+should receive the same solution. Reassess every symbol, every projection, and
+every identity/composition/involution rule independently in its mathematical
+and downstream computational context. Different rules on one symbol may be
+retained, reoriented, derived through a generic owner, or removed separately.
+
+| ID | Existing audit group | Questions to test independently | Resume trigger |
 | --- | --- | --- | --- |
-| `INT-COMP` | `comp_cat_cov_transf`, `comp_cat_con_transf`, and their local identity laws | Keep Cat-specialized component/off-diagonal heads when they expose genuine transfor structure, but obtain ordinary identity/composition from the existing composition functors and generic `fapp*`/`tapp*` projections. | Direct tensor-implication eval/lambda naturality, or any broader ordinary full-naturality extension, needs a new law on these heads. |
-| `INT-OP` | `Op_func`, `Op_transf`, `Op_funcd` | Reassess `Op_func` as the arrow projection of `op`, `Op_transf` as the next hom-action of that owner, and `Op_funcd` as action owned by `Op_catd_func`. Retain readable projection heads and local normal-form bridges when focused reduction-order evidence shows they are computationally intentional. | New duality or univalence work would otherwise add another local identity/composition/naturality rule. |
-| `INT-PROF-FUNC` | `Prof_func_transf` and its direct identity/composition rules | Seek an internalized representable-equipment action in the varying functor, potentially displayed or total because both endpoint legs vary. `Prof_func_transf` may remain its readable projection. | General co-Yoneda or join/collage work must compute functor-induced cells beyond the currently checked cases. |
-| `INT-OP-PROF` | `Op_prof_transf` and its direct involution/identity/composition rules | Internalize base-swap duality on an appropriate category or displayed/total category of profunctor cells; project the current stable head from that owner. | Extended profunctor-cell duality, semantic pullback comparison, or colimit duality needs additional cell laws. |
-| `INT-EQUIP-COMP` | Local identity/composition laws for `Prof_comp_transf` and related equipment operations | Make ordinary laws consequences of an internalized category/functor of equipment cells once its varying bases and endpoints have a coherent owner. Preserve only genuine equipment beta/eta or cut-elimination laws. | A bicategory/equipment coherence layer, tensor associativity, or generalized cell composition requires laws beyond the current bounded API. |
+| `INT-COMP` | `comp_cat_cov_transf`, `comp_cat_con_transf`, and their local identity laws | Audit the covariant and contravariant heads separately. For each projection or law, decide whether it exposes genuine Cat-specialized transfor structure, follows from an existing composition functor through generic `fapp*`/`tapp*`, or is a necessary normal-form bridge. | Direct tensor-implication eval/lambda naturality, or any broader ordinary full-naturality extension, needs a new law on one of these heads. |
+| `INT-OP` | `Op_func`, `Op_transf`, `Op_funcd` | Audit each symbol and each of its involution, identity, composition, component, and off-diagonal rules separately. `op` and `Op_catd_func` already provide some owners, but that fact alone does not settle projection heads or rewrite orientation. | New duality or univalence work would otherwise add another rule in one of these APIs. |
+| `INT-PROF-FUNC` | `Prof_func_transf` and its direct identity/composition rules | Independently test the head, identity case, and composite case against a possible representable-equipment action in the varying functor. Such an owner may need displayed or total structure because both endpoint legs vary. | General co-Yoneda or join/collage work must compute functor-induced cells beyond the currently checked cases. |
+| `INT-OP-PROF` | `Op_prof_transf` and its direct involution/identity/composition rules | Independently audit the base-swap head and every law. Test whether each belongs to a future category or displayed/total category of profunctor cells, or is instead a genuine duality projection/cut. | Extended profunctor-cell duality, semantic pullback comparison, or colimit duality needs an additional specific cell law. |
+| `INT-EQUIP-COMP` | Local left/right identity and composition laws for `Prof_comp_transf` and related equipment operations | Audit each equipment law on its own. Test a category/functor owner only when varying bases and endpoints can be represented coherently; retain genuine equipment beta/eta or cut-elimination rules independently of generic laws. | A bicategory/equipment coherence layer, tensor associativity, or generalized cell composition requires a specific law beyond the current bounded API. |
 
 For each resumed side task:
 
 1. Recover the mathematical operation independently of its current stable
    head and identify all variables that must vary internally.
-2. Classify each questioned rule as a redundant generic law, a projection or
+2. Inventory declarations and rules individually; do not assign one verdict
+   to an entire scheduling group or even to every rule on one symbol.
+3. Classify each questioned rule as a redundant generic law, a projection or
    normal-form bridge, a genuine beta/eta or cut law, or an unresolved overlap.
    Do not infer the classification from its syntax alone.
-3. Probe the smallest `Functor`, `Transf`, displayed, or total-category owner;
+4. Probe the smallest `Functor`, `Transf`, displayed, or total-category owner;
    do not begin by copying the local law to a new name. Test both the generic
    and specialized reduction paths on the actual downstream consumer.
-4. Route readable heads through generic projections where that produces the
+5. Route readable heads through generic projections where that produces the
    intended normal form. Remove only laws that the generic calculus
    demonstrably subsumes; explicitly retain and document rules whose
    projection or cut behavior is needed.
-5. Add object, full hom-action, capped action, identity, and composition
+6. Add object, full hom-action, capped action, identity, and composition
    diagnostics appropriate to the owner. Compare warning-enabled checks before
    and after the migration.
-6. Promote the slice only when `make check`, the LHS audit, catalog/health
+7. Promote the slice only when `make check`, the LHS audit, catalog/health
    refreshes, and `make ci` pass. Record any deliberately retained stable head
    and why its behavior is more than generic functoriality.
 
@@ -112,16 +121,56 @@ Op_func(F o G) -> Op_func(F) o Op_func(G)
 does not state the ordinary functoriality of `Op_func(F) : A^op -> B^op` on
 arrows inside `A^op`; that behavior belongs to generic `fapp*`. It states that
 the opposite operation sends a composite functor to the composite of the
-opposite functors. Equivalently, it exposes the composition behavior of the
-arrow projection of the higher functor `op : Cat -> Cat`. Its implementation
-orientation expands that projection to the chosen ordinary-functor
-composition normal form, rather than performing the generic inward
-functoriality cut. It is therefore presumptively an intentional projection and
-normal-form bridge. `INT-OP` must not perturb it without a concrete conflict.
-Any later audit must distinguish these categorical levels and compare both
-reduction orientations, the duality consumers that need the expanded form,
-and critical-pair behavior. A side task may conclude that an existing rule
-should be retained with better ownership documentation rather than changed.
+opposite functors. The internalized owner is not hypothetical: the kernel
+already declares `op : Functor Cat_cat Cat_cat`, with `Op_func(F)` as its
+capped arrow projection. Consequently the strict equality itself is expected.
+
+What remains genuinely open is its computational orientation. The global
+strict-functor cut normally contracts a composite of images toward the image
+of a composite. The active specialized rule goes the other way: it expands
+the `Op_func` projection of a composite into the chosen ordinary-functor
+composition form, which current duality consumers may need. The future
+`INT-OP` audit must independently test retaining, removing, or reversing this
+specific rule; it must not install both directions. The decision requires
+focused normal-form assertions, both reduction-order checks, warning and
+termination comparison, and validation of existing duality and weighted-
+colimit consumers. No outcome is presumed merely from the existence of `op`
+or from the rule's mathematical equality.
+
+The reason an explicit bridge may be needed is precise. `Op_func(F)` is the
+canonical capped projection of `fapp1_fapp0(op,F)`; `fapp1_func(op)` is the
+full hom-action functor at the next level. In a composite of two images there
+are two reduction orders:
+
+```text
+owner first:
+  fapp1(op,F) o fapp1(op,G)
+    -> fapp1(op,F o G)
+    -> Op_func(F o G)
+
+projection first:
+  fapp1(op,F) o fapp1(op,G)
+    -> Op_func(F) o Op_func(G).
+```
+
+After projection-first reduction, the literal `fapp1(op,...)` owner pattern is
+gone, so the global generic rule need not be directly applicable to the
+stable `Op_func` heads. A specialized rule can therefore be a confluence
+bridge rather than an independent functoriality axiom. The current outward
+rule makes the owner-first path join at `Op_func(F) o Op_func(G)`. Replacing it
+with the inward bridge
+
+```text
+Op_func(F) o Op_func(G) -> Op_func(F o G)
+```
+
+would instead make both paths join at `Op_func(F o G)` and would align with
+the generic cut orientation. Either choice can be mathematically sound; only
+one can be active, and the preferred computational normal form must be tested
+against existing consumers. Similar projection-first/owner-first analysis is
+required independently for identity, `Op_transf`, `Op_funcd`, and the other
+audit groups; it must not be assumed without checking their actual projection
+ladders.
 
 The active next slice remains direct Došen-style naturality for the primitive
 tensor-implication eval/lambda bijection. `INT-COMP` becomes a prerequisite
