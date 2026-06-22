@@ -20,6 +20,11 @@ witness and theorem-specific preservation calculus have now been replaced by
 transparent public aliases of the comparison implementation. The remainder of
 this report is still provisional.
 
+Direct tensor-cell naturality for both implication variances is also active.
+It uses explicit closed-substitution heads with mutually completing
+substitution/lambda and eval/tensor cuts; this avoids the non-joinable nested
+equipment-composition presentation while preserving the warning baseline.
+
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
 enriched-category and profunctor-equipment semantics, the current v3.2 kernel,
@@ -83,7 +88,7 @@ retained, reoriented, derived through a generic owner, or removed separately.
 
 | ID | Existing audit group | Questions to test independently | Resume trigger |
 | --- | --- | --- | --- |
-| `INT-COMP` | `comp_cat_cov_transf`, `comp_cat_con_transf`, and their local identity laws | Audit the covariant and contravariant heads separately. For each projection or law, decide whether it exposes genuine Cat-specialized transfor structure, follows from an existing composition functor through generic `fapp*`/`tapp*`, or is a necessary normal-form bridge. | Direct tensor-implication eval/lambda naturality, or any broader ordinary full-naturality extension, needs a new law on one of these heads. |
+| `INT-COMP` | `comp_cat_cov_transf`, `comp_cat_con_transf`, and their local identity laws | Audit the covariant and contravariant heads separately. For each projection or law, decide whether it exposes genuine Cat-specialized transfor structure, follows from an existing composition functor through generic `fapp*`/`tapp*`, or is a necessary normal-form bridge. | Broader ordinary full-naturality work needs a new law on one of these heads. The direct closed-substitution slice did not trigger this audit. |
 | `INT-OP` | `Op_func`, `Op_transf`, `Op_funcd` | Audit each symbol and each of its involution, identity, composition, component, and off-diagonal rules separately. `op` and `Op_catd_func` already provide some owners, but that fact alone does not settle projection heads or rewrite orientation. | New duality or univalence work would otherwise add another rule in one of these APIs. |
 | `INT-PROF-FUNC` | `Prof_func_transf` and its direct identity/composition rules | Independently test the head, identity case, and composite case against a possible representable-equipment action in the varying functor. Such an owner may need displayed or total structure because both endpoint legs vary. | General co-Yoneda or join/collage work must compute functor-induced cells beyond the currently checked cases. |
 | `INT-OP-PROF` | `Op_prof_transf` and its direct involution/identity/composition rules | Independently audit the base-swap head and every law. Test whether each belongs to a future category or displayed/total category of profunctor cells, or is instead a genuine duality projection/cut. | Extended profunctor-cell duality, semantic pullback comparison, or colimit duality needs an additional specific cell law. |
@@ -218,11 +223,12 @@ do not generate identity/composition rules mechanically;
 audit both reduction orders and downstream consumers independently.
 ```
 
-The active next slice remains direct Došen-style naturality for the primitive
-tensor-implication eval/lambda bijection. `INT-COMP` becomes a prerequisite
-only if that focused probe genuinely requires extending the composition
-transformation cluster; otherwise it remains deferred. The other four tasks
-are tied to the later triggers in the table.
+The direct Došen-style tensor-cell naturality slice is now active through
+`Prof_imply_cov_subst_transf` and `Prof_imply_con_subst_transf`. Its focused
+probe did not require extending the ordinary composition-transformation
+cluster, so `INT-COMP` remains deferred. Target-cell or higher naturality is a
+separate demand-driven slice. The other four tasks remain tied to the later
+triggers in the table.
 
 ## Implementation Checkpoint: 2026-06-21
 
@@ -2938,8 +2944,8 @@ extensions:
 retain ProfComparison as the computational representability owner;
 retain the direct mixed implication bifunctor and projection-owned product
 identity computation;
-retain eval/lambda as the primitive tensor-implication bijection and add its
-direct Došen-style naturality cuts;
+retain eval/lambda as the primitive tensor-implication bijection and retain the
+landed explicit-substitution naturality cuts in both variance directions;
 derive any later fixed-weight ordinary adjunction view from that closed
 calculus rather than making it the owner;
 develop TypeEquiv/OmegaEquiv/univalence as the parallel foundational track;

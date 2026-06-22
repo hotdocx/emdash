@@ -8381,6 +8381,103 @@ with @Prof_eval_cov_transf
         $t)
   ↪ $t;
 
+/*
+  Explicit substitution for the covariant closed structure.
+
+  Semantically this packages:
+
+    imply(id,q) o (t o p)
+
+  for p : P0 -> P and q : Q0 -> Q over their shared middle functor. Keeping
+  this as one stable head avoids exposing a deeply nested equipment composite
+  as the naturality normal form. The direct semantic expression typechecks,
+  but its lambda naturality completion introduces broad non-joinable overlaps.
+*/
+symbol Prof_imply_cov_subst_transf
+  [A0 A A' B0 B X : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [H : τ (Functor A0 A)]
+  [M : τ (Functor B0 B)]
+  [F : τ (Functor A A')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A B B
+      P
+      F
+      (@Prof_imply_cov A' B X O Q)
+      (@id_func B))))
+  (p : τ (Obj (@Prof_transf_cat A A0 B B0 P0 H P M)))
+  (q : τ (Obj
+    (@Prof_transf_cat B B0 X X Q0 M Q (@id_func X))))
+  : τ (Obj
+      (@Prof_transf_cat
+        A' A0 B0 B0
+        P0
+        (@comp_cat_fapp0 A0 A A' F H)
+        (@Prof_imply_cov A' B0 X O Q0)
+        (@id_func B0)));
+
+/*
+  Lambda/substitution and eval/tensor naturality are one mutually completing
+  cut. Declaring the clauses together lets the local confluence checker see
+  both beta/eta completion paths.
+*/
+rule @Prof_imply_cov_subst_transf
+      $A0 $A $A' $B0 $B $X
+      $P0 $P $Q0 $Q $O
+      $H $M $F
+      (@Prof_lambda_cov_transf
+        $A $B $X $A'
+        $P $Q $O $F
+        $u)
+      $p $q
+  ↪ @Prof_lambda_cov_transf
+      $A0 $B0 $X $A'
+      $P0 $Q0 $O
+      (@comp_cat_fapp0 $A0 $A $A' $F $H)
+      (@Prof_comp_transf
+        $A0 $A $A'
+        $X $X $X
+        (@Prof_tensor $A0 $B0 $X $P0 $Q0)
+        (@Prof_tensor $A $B $X $P $Q)
+        $O
+        $H (@id_func $X)
+        $F (@id_func $X)
+        $u
+        (@Prof_tensor_transf
+          $A $A0 $B $B0 $X $X
+          $P0 $Q0 $P $Q
+          $H $M (@id_func $X)
+          $p $q))
+with @Prof_comp_transf
+      $A0 $A $A'
+      $X $X $X
+      _ _ $O
+      $H (@id_func $X)
+      $F (@id_func $X)
+      (@Prof_eval_cov_transf
+        $A $B $X $A'
+        $P $Q $O $F
+        $t)
+      (@Prof_tensor_transf
+        $A $A0 $B $B0 $X $X
+        $P0 $Q0 $P $Q
+        $H $M (@id_func $X)
+        $p $q)
+  ↪ @Prof_eval_cov_transf
+      $A0 $B0 $X $A'
+      $P0 $Q0 $O
+      (@comp_cat_fapp0 $A0 $A $A' $F $H)
+      (@Prof_imply_cov_subst_transf
+        $A0 $A $A' $B0 $B $X
+        $P0 $P $Q0 $Q $O
+        $H $M $F
+        $t $p $q);
+
 // Shaped specialization of evaluation and lambda abstraction.
 symbol Prof_eval_cov_hom_transf
   [A X A' : Cat]
@@ -8543,6 +8640,94 @@ with @Prof_eval_con_transf
         $P $Q $O $G
         $t)
   ↪ $t;
+
+/*
+  Explicit substitution for the contravariant closed structure.
+
+  This is the variance-reversed companion of `Prof_imply_cov_subst_transf`:
+  the left endpoint A is fixed, while the middle and right endpoint functors
+  accumulate into the transposed cell.
+*/
+symbol Prof_imply_con_subst_transf
+  [A B0 B X0 X X' : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X0))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [M : τ (Functor B0 B)]
+  [K : τ (Functor X0 X)]
+  [G : τ (Functor X X')]
+  (t : τ (Obj
+    (@Prof_transf_cat
+      B B X' X
+      Q
+      (@id_func B)
+      (@Prof_imply_con A B X' P O)
+      G)))
+  (p : τ (Obj
+    (@Prof_transf_cat A A B B0 P0 (@id_func A) P M)))
+  (q : τ (Obj (@Prof_transf_cat B B0 X X0 Q0 M Q K)))
+  : τ (Obj
+      (@Prof_transf_cat
+        B0 B0 X' X0
+        Q0
+        (@id_func B0)
+        (@Prof_imply_con A B0 X' P0 O)
+        (@comp_cat_fapp0 X0 X X' G K)));
+
+// Lambda/substitution and eval/tensor naturality again complete mutually.
+rule @Prof_imply_con_subst_transf
+      $A $B0 $B $X0 $X $X'
+      $P0 $P $Q0 $Q $O
+      $M $K $G
+      (@Prof_lambda_con_transf
+        $A $B $X $X'
+        $P $Q $O $G
+        $u)
+      $p $q
+  ↪ @Prof_lambda_con_transf
+      $A $B0 $X0 $X'
+      $P0 $Q0 $O
+      (@comp_cat_fapp0 $X0 $X $X' $G $K)
+      (@Prof_comp_transf
+        $A $A $A
+        $X0 $X $X'
+        (@Prof_tensor $A $B0 $X0 $P0 $Q0)
+        (@Prof_tensor $A $B $X $P $Q)
+        $O
+        (@id_func $A) $K
+        (@id_func $A) $G
+        $u
+        (@Prof_tensor_transf
+          $A $A $B $B0 $X $X0
+          $P0 $Q0 $P $Q
+          (@id_func $A) $M $K
+          $p $q))
+with @Prof_comp_transf
+      $A $A $A
+      $X0 $X $X'
+      _ _ $O
+      (@id_func $A) $K
+      (@id_func $A) $G
+      (@Prof_eval_con_transf
+        $A $B $X $X'
+        $P $Q $O $G
+        $t)
+      (@Prof_tensor_transf
+        $A $A $B $B0 $X $X0
+        $P0 $Q0 $P $Q
+        (@id_func $A) $M $K
+        $p $q)
+  ↪ @Prof_eval_con_transf
+      $A $B0 $X0 $X'
+      $P0 $Q0 $O
+      (@comp_cat_fapp0 $X0 $X $X' $G $K)
+      (@Prof_imply_con_subst_transf
+        $A $B0 $B $X0 $X $X'
+        $P0 $P $Q0 $Q $O
+        $M $K $G
+        $t $p $q);
 
 // Shaped specialization obtained by setting Q to Unit_prof(B).
 symbol Prof_eval_con_hom_transf

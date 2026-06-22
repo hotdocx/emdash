@@ -6049,6 +6049,93 @@ assert [A B X A' : Cat]
       t)
   ≡ t;
 
+// Direct covariant eval naturality through explicit closed substitution.
+assert [A0 A A' B0 B X : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [H : τ (Functor A0 A)]
+  [M : τ (Functor B0 B)]
+  [F : τ (Functor A A')]
+  (p : τ (Obj (@Prof_transf_cat A A0 B B0 P0 H P M)))
+  (q : τ (Obj
+    (@Prof_transf_cat B B0 X X Q0 M Q (@id_func X))))
+  (t : τ (Obj
+    (@Prof_transf_cat
+      A' A B B
+      P F
+      (@Prof_imply_cov A' B X O Q)
+      (@id_func B)))) ⊢
+  @Prof_comp_transf
+      A0 A A'
+      X X X
+      (@Prof_tensor A0 B0 X P0 Q0)
+      (@Prof_tensor A B X P Q)
+      O
+      H (@id_func X)
+      F (@id_func X)
+      (@Prof_eval_cov_transf A B X A' P Q O F t)
+      (@Prof_tensor_transf
+        A A0 B B0 X X
+        P0 Q0 P Q
+        H M (@id_func X)
+        p q)
+  ≡ @Prof_eval_cov_transf
+      A0 B0 X A'
+      P0 Q0 O
+      (@comp_cat_fapp0 A0 A A' F H)
+      (@Prof_imply_cov_subst_transf
+        A0 A A' B0 B X
+        P0 P Q0 Q O
+        H M F
+        t p q);
+
+// Lambda commutes with the same substitution, completing beta/eta paths.
+assert [A0 A A' B0 B X : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A0) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [H : τ (Functor A0 A)]
+  [M : τ (Functor B0 B)]
+  [F : τ (Functor A A')]
+  (p : τ (Obj (@Prof_transf_cat A A0 B B0 P0 H P M)))
+  (q : τ (Obj
+    (@Prof_transf_cat B B0 X X Q0 M Q (@id_func X))))
+  (u : τ (Obj
+    (@Prof_transf_cat
+      A' A X X
+      (@Prof_tensor A B X P Q)
+      F O
+      (@id_func X)))) ⊢
+  @Prof_imply_cov_subst_transf
+      A0 A A' B0 B X
+      P0 P Q0 Q O
+      H M F
+      (@Prof_lambda_cov_transf A B X A' P Q O F u)
+      p q
+  ≡ @Prof_lambda_cov_transf
+      A0 B0 X A'
+      P0 Q0 O
+      (@comp_cat_fapp0 A0 A A' F H)
+      (@Prof_comp_transf
+        A0 A A'
+        X X X
+        (@Prof_tensor A0 B0 X P0 Q0)
+        (@Prof_tensor A B X P Q)
+        O
+        H (@id_func X)
+        F (@id_func X)
+        u
+        (@Prof_tensor_transf
+          A A0 B B0 X X
+          P0 Q0 P Q
+          H M (@id_func X)
+          p q));
+
 assert [A X A' : Cat]
   [Q : τ (Catd (Product_cat (Op_cat A) X))]
   [O : τ (Catd (Product_cat (Op_cat A') X))]
@@ -6173,6 +6260,93 @@ assert [A B X X' : Cat]
       P Q O G
       t)
   ≡ t;
+
+// Direct contravariant eval naturality through explicit closed substitution.
+assert [A B0 B X0 X X' : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X0))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [M : τ (Functor B0 B)]
+  [K : τ (Functor X0 X)]
+  [G : τ (Functor X X')]
+  (p : τ (Obj
+    (@Prof_transf_cat A A B B0 P0 (@id_func A) P M)))
+  (q : τ (Obj (@Prof_transf_cat B B0 X X0 Q0 M Q K)))
+  (t : τ (Obj
+    (@Prof_transf_cat
+      B B X' X
+      Q (@id_func B)
+      (@Prof_imply_con A B X' P O)
+      G))) ⊢
+  @Prof_comp_transf
+      A A A
+      X0 X X'
+      (@Prof_tensor A B0 X0 P0 Q0)
+      (@Prof_tensor A B X P Q)
+      O
+      (@id_func A) K
+      (@id_func A) G
+      (@Prof_eval_con_transf A B X X' P Q O G t)
+      (@Prof_tensor_transf
+        A A B B0 X X0
+        P0 Q0 P Q
+        (@id_func A) M K
+        p q)
+  ≡ @Prof_eval_con_transf
+      A B0 X0 X'
+      P0 Q0 O
+      (@comp_cat_fapp0 X0 X X' G K)
+      (@Prof_imply_con_subst_transf
+        A B0 B X0 X X'
+        P0 P Q0 Q O
+        M K G
+        t p q);
+
+// Contravariant lambda commutes with the same substitution.
+assert [A B0 B X0 X X' : Cat]
+  [P0 : τ (Catd (Product_cat (Op_cat A) B0))]
+  [P : τ (Catd (Product_cat (Op_cat A) B))]
+  [Q0 : τ (Catd (Product_cat (Op_cat B0) X0))]
+  [Q : τ (Catd (Product_cat (Op_cat B) X))]
+  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [M : τ (Functor B0 B)]
+  [K : τ (Functor X0 X)]
+  [G : τ (Functor X X')]
+  (p : τ (Obj
+    (@Prof_transf_cat A A B B0 P0 (@id_func A) P M)))
+  (q : τ (Obj (@Prof_transf_cat B B0 X X0 Q0 M Q K)))
+  (u : τ (Obj
+    (@Prof_transf_cat
+      A A X' X
+      (@Prof_tensor A B X P Q)
+      (@id_func A)
+      O G))) ⊢
+  @Prof_imply_con_subst_transf
+      A B0 B X0 X X'
+      P0 P Q0 Q O
+      M K G
+      (@Prof_lambda_con_transf A B X X' P Q O G u)
+      p q
+  ≡ @Prof_lambda_con_transf
+      A B0 X0 X'
+      P0 Q0 O
+      (@comp_cat_fapp0 X0 X X' G K)
+      (@Prof_comp_transf
+        A A A
+        X0 X X'
+        (@Prof_tensor A B0 X0 P0 Q0)
+        (@Prof_tensor A B X P Q)
+        O
+        (@id_func A) K
+        (@id_func A) G
+        u
+        (@Prof_tensor_transf
+          A A B B0 X X0
+          P0 Q0 P Q
+          (@id_func A) M K
+          p q));
 
 assert [A B X : Cat]
   [P : τ (Catd (Product_cat (Op_cat A) B))]

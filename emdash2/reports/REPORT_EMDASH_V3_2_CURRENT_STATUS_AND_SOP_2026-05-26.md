@@ -169,6 +169,26 @@ constructor folds to that generic action on the product arrow `(o,q)`;
 identity and composition are inherited globally rather than restated on a
 profunctor-specific action head.
 
+Direct tensor-implication naturality is now active in both variance
+directions. `Prof_imply_cov_subst_transf(t,p,q)` and
+`Prof_imply_con_subst_transf(t,p,q)` are stable explicit-substitution heads for
+the closed calculus. They own the mutually completing cuts
+
+```text
+eval(t) o tensor(p,q) -> eval(subst(t,p,q));
+subst(lambda(u),p,q)  -> lambda(u o tensor(p,q)).
+```
+
+The covariant head accumulates the left and shared-middle endpoint functors;
+the contravariant head fixes the left endpoint and accumulates the middle and
+right functors. These are closed-structure substitution laws, not duplicated
+ordinary functoriality. A transparent RHS using nested `Prof_comp_transf` and
+`Prof_imply_*_transf` typechecked, but its lambda completion added broad
+non-joinable overlaps. The stable substitution presentation, with the two
+clauses declared mutually, preserves the exact warning baseline. Naturality in
+an additional target cell, higher action on substitution, fuller
+internalization, and end semantics remain demand-driven extensions.
+
 The initially rejected product presentation exposed kernel gaps rather than an
 architectural obstruction. Product identity projections compute for opaque
 product objects. In addition, the global strict-functor identity calculus now
@@ -184,8 +204,9 @@ identity/composition decision trees at impossible or underconstrained
 metavariable shapes; the well-typed Catd identity path and its composition
 interaction are covered by active generic implication checks. The removed
 implication-specific action heads add no remaining local functor-law warning
-surface. Separate direct eval/lambda naturality, the corresponding
-contravariant internalized owner, and end semantics remain deferred.
+surface. The new closed-substitution cuts add no warning. The corresponding
+contravariant internalized functor owner, higher substitution projections, and
+end semantics remain deferred.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
@@ -234,10 +255,11 @@ full criteria and the bounded 2026-06-22 source inventory.
 These migrations are tracked by stable IDs in the representability redesign
 report's `Deferred Internalization Side-Task Ledger`: `INT-COMP`, `INT-OP`,
 `INT-PROF-FUNC`, `INT-OP-PROF`, and `INT-EQUIP-COMP`. They are demand-driven
-side tasks, not current blockers. The immediate direct eval/lambda naturality
-slice resumes `INT-COMP` only if its focused probe requires a new local law;
-general co-Yoneda/join, duality/univalence, extended profunctor duality, and
-bicategory/equipment coherence respectively trigger the other clusters. A
+side tasks, not current blockers. The direct eval/lambda substitution slice
+landed without extending `comp_cat_cov_transf` or `comp_cat_con_transf`, so it
+did not trigger `INT-COMP`; broader ordinary full-naturality work may still do
+so. General co-Yoneda/join, duality/univalence, extended profunctor duality,
+and bicategory/equipment coherence respectively trigger the other clusters. A
 trigger requires an internalized-owner probe before any new constructor-local
 functor law is added. It does not transfer a conclusion from one member or
 rule of the cluster to another.
