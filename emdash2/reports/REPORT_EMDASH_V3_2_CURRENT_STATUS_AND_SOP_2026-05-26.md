@@ -177,15 +177,15 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory is now 1,052: 899 unjoinable critical-pair
-reports and 153 replaceable-pattern reports. The nine reports added by this
-slice are sort-impossible generic decision-tree overlaps requiring the new
-functor/transformation heads to inhabit unrelated source-object positions;
-the well-typed object, full/capped arrow, component, identity, composition,
-unary-specialization, and general-cell cases are checked. Separate
-higher-arrow projections of the implication hom-action, fixed-left
-contravariant implication, broader eval naturality, and end semantics remain
-deferred.
+The active warning inventory is now 1,071: 918 unjoinable critical-pair
+reports and 153 replaceable-pattern reports. The 19-report increase belongs to
+the generic `Catd_cat` identity-action bridge. It overlaps broad generic
+identity/composition decision trees at impossible or underconstrained
+metavariable shapes; the well-typed Catd identity path and its composition
+interaction are covered by active generic implication checks. The removed
+implication-specific action heads add no remaining local functor-law warning
+surface. Separate direct eval/lambda naturality, the corresponding
+contravariant internalized owner, and end semantics remain deferred.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing

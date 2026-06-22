@@ -3856,10 +3856,13 @@ them for compatibility with this report or with `cartierSolution13.lp`.
 The most natural independent next slices are:
 
 ```text
-1. Generalize co-Yoneda beta rules using the landed Prof_func_hom.
-2. Add weighted-limit probe naturality and/or explicit preserved-cone formulas.
-3. Design dependent elimination for Join_cat without assuming collage
+1. Add direct Došen-style naturality cuts for the primitive eval/lambda
+   tensor-implication bijection; do not route them through a fixed-weight
+   ordinary Adjunction package.
+2. Generalize co-Yoneda beta rules using the landed Prof_func_hom.
+3. Add weighted-limit probe naturality and/or explicit preserved-cone formulas.
+4. Design dependent elimination for Join_cat without assuming collage
    semantics prematurely.
-4. Investigate semantic end/coend comparison layers without replacing the
+5. Investigate semantic end/coend comparison layers without replacing the
    stable public calculus until termination and computation are demonstrated.
 ```

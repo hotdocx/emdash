@@ -744,6 +744,7 @@ rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
 // Canonical Catd specialization of the global strict-functor identity cut.
 // This is generic for every functor out of Catd_cat; individual functor
 // constructors must not restate the same identity computation.
+// lhs-audit: keep 1 -- Catd_cat is the source discriminator for id_funcd.
 rule @fapp1_fapp0
       (@Catd_cat $K)
       $B
