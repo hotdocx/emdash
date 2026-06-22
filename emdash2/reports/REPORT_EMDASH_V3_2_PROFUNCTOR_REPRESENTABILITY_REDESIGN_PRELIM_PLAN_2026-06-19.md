@@ -25,6 +25,96 @@ It uses explicit closed-substitution heads with mutually completing
 substitution/lambda and eval/tensor cuts; this avoids the non-joinable nested
 equipment-composition presentation while preserving the warning baseline.
 
+## Retrospective Vertical-Core Assessment, 2026-06-23
+
+The following assessment is copied verbatim from the implementation review
+that identified the primitive-layer problem:
+
+**Assessment**
+
+Yes. The closed-structure API is over-generalized at its primitive layer.
+
+The standard tensor–hom bijection should first be:
+
+```text
+ProfMap(P, Prof_imply_cov(O,Q))
+  ≃ ProfMap(Prof_tensor(P,Q), O)
+```
+
+with all endpoint categories fixed. Reindexing belongs to the derived equipment layer.
+
+A focused probe confirmed:
+
+```text
+Prof_transf_cat(P,id,Q,id) = ProfMap(P,Q)
+```
+
+and all current generalized operations derive transparently:
+
+```text
+O_F := Prof_reindex(O,F,id)
+
+eval_cov_along(t)   := eval_cov_map[O_F](t)
+lambda_cov_along(t) := lambda_cov_map[O_F](t)
+```
+
+with the analogous construction for contravariant implication using `O[id,G]`. No expressivity is lost.
+
+**Consequences**
+
+- `Prof_eval_*_transf` and `Prof_lambda_*_transf` should not remain the primitive closed core in their current endpoint-changing forms.
+- The newly staged `Prof_imply_*_subst_transf` slice extends the wrong primitive layer and should be replaced.
+- Shaped `*_hom_transf` operations should be audited as derived co-Yoneda/equipment conveniences.
+- Weighted limits and preservation are largely unaffected: their redesigned ambient classifiers already use fixed-endpoint `ProfMap` and `ProfComparison`.
+
+**Reindexing**
+
+Reindexing itself is legitimate and standard for profunctor equipment:
+
+```text
+ProfCell(R',F,R,G) = ProfMap(R', Prof_reindex(R,F,G))
+```
+
+The mistake is using equipment cells as the default language for the biclosed core.
+
+Your proposed semantic definition is correct in principle:
+
+```text
+Prof_reindex_func(F,G)
+  := Pullback_catd_func(Product_map_func(Op_func(F),G))
+```
+
+However, a current-kernel probe confirms that its object action still does **not** convert to the stable `Prof_reindex` normal form. Therefore simplifying `Prof_reindex_func` requires jointly reconsidering `Prof_reindex`; it is not currently a drop-in alias replacement.
+
+**Hom Profunctors**
+
+`Hom_prof_along` was initially understood as derived:
+
+```text
+Hom_prof_along(F,G)
+  := Prof_reindex(Hom_prof(G),F,id)
+```
+
+It was promoted mainly because the Cartier-inspired audit anticipated extensive rewrite matching. It now has genuine consumers in co-Yoneda, adjunction, join, and representable accumulation, so its stable status must be audited independently.
+
+It may remain a computational stable head while being mathematically derived. That does not justify using “along” machinery throughout the closed core.
+
+**Recommended Architecture**
+
+1. Primitive vertical layer:
+   `ProfMap`, tensor, implications, fixed-endpoint eval/lambda.
+2. Vertical functorial layer:
+   mixed tensor and implication functors; naturality at fixed endpoints.
+3. Equipment layer:
+   reindexing, endpoint-changing cells, companions/conjoints.
+4. Derived shaped layer:
+   weighted probes, adjunction mates, join cells, optional generalized eval/lambda.
+5. Independently audit whether `Prof_reindex`, `Prof_reindex_func`, and `Hom_prof_along` should be transparent definitions or stable computational projections.
+
+Feasibility is high for the vertical closed-core redesign: the decisive type-conversion probe passed. Simplifying the broader reindex/representable layer remains feasible but requires focused full-kernel migration probes.
+
+The latest closed-substitution changes are staged and should not be committed in their current form.
+
 The recommendations below are not a commitment to reproduce the obsolete
 `cartierSolution13.lp` presentation. They are reassessed from the traditional
 enriched-category and profunctor-equipment semantics, the current v3.2 kernel,
