@@ -188,6 +188,15 @@ manual classification and warning-enabled owning-position validation.
   `Product_cat_fapp1_func` -> `Product_cat_fapp1_fapp0_functord` ->
   `Product_cat_fapp1_tapp0_func`; retain higher helper names only as
   definitions/aliases of that semantic owner.
+- Ordinary identity, composition, and naturality belong exclusively to the
+  generic `fapp*`/`tapp*` rules. Do not add a rule such as
+  `special_action(id) -> id` or
+  `special_action(g o f) -> special_action(g) o special_action(f)`.
+  Such a need is an internalization diagnostic: locate or introduce the
+  functor/transfor whose generic action the special term represents, then keep
+  the generic action visible or make the special name a transparent semantic
+  view. This restriction does not prohibit beta/eta rules or focused
+  cut-elimination laws for additional universal structure.
 - For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
   postcomposition action heads over one-off heads that hide a raw composite. For
   example, when the desired normal form is `g o f -> fapp0(precompose_by f) g`,

@@ -27,6 +27,41 @@ and focused Lambdapi feasibility evidence. Every proposed interface remains
 subject to adjustment, replacement, or a prerequisite kernel side task as
 implementation probes expose better normal forms.
 
+## Correction: Generic Functor Ownership, 2026-06-22
+
+The earlier implication checkpoints below recorded dedicated
+`Prof_imply_cov_func*_transf` action heads with local identity/composition
+rules. That architecture is superseded.
+
+Ordinary functoriality and naturality must be owned exclusively by the global
+`fapp*`/`tapp*` calculus. A local rule that merely states preservation of an
+identity or composite is evidence that the operation or one of its variables
+has not been internalized far enough.
+
+The active correction is:
+
+```text
+Prof_imply_cov_func2
+  : Prof(A,X) x Prof(B,X)^op -> Prof(A,B);
+
+Prof_imply_cov_fixed_weight_func(Q)(O) = (O,Q);
+
+Prof_imply_cov_func(Q)
+  := Prof_imply_cov_func2 o Prof_imply_cov_fixed_weight_func(Q).
+```
+
+The unary semantic composition is opaque, as with `Hom_prof_func`, so its
+generic identity/composition cuts remain visible. Its object projection still
+computes. The fixed-endpoint equipment-cell action folds directly to the
+generic capped action of `Prof_imply_cov_func2`; the four dedicated action
+heads and all their local functor laws were removed.
+
+This correction also exposed a general kernel omission: `id_funcd` is the
+canonical identity normal form in `Catd_cat`, so the global strict-functor
+identity law needs one Catd-specialized bridge, parallel to the already-active
+global Catd composition bridge. The bridge is generic for every functor out of
+`Catd_cat`; it is not an implication-specific law.
+
 ## Implementation Checkpoint: 2026-06-21
 
 The first bounded implementation slice started from clean baseline commit:
@@ -57,9 +92,9 @@ Conjoint_prof;
 IsRepresentedBy_iso;
 Representation_iso.
 Hom_prof_func(J,B);
+Prof_imply_cov_func2;
+Prof_imply_cov_fixed_weight_func(Q);
 Prof_imply_cov_func(Q);
-Prof_imply_cov_func_fapp1_func(Q,O,O');
-Prof_imply_cov_func_transf(Q,o);
 WeightedCone_prof(F,W);
 IsWeightedLimit_cov_iso(F,W,L).
 ```
@@ -224,22 +259,12 @@ Prof_imply_cov_func(Q)
   : Functor(Prof_cat(A,X),Prof_cat(A,B)).
 ```
 
-Its object, full hom, and capped arrow projections compute. The stable
-`Prof_imply_cov_func_transf(Q,o)` head preserves vertical identity and
-composition, reindexing it along `(F,M)` computes to the same unary action on
-the reindexed varying input and reindexed fixed weight, and the
-identity-endpoint specialization of `Prof_imply_cov_transf` folds to this unary
-owner. The mixed constructor was therefore changed from protected
-`constant symbol` to rewrite-capable opaque `symbol`; it did not receive broad
-new functor laws.
-
+Its object projection computes. Its full and capped arrow actions are the
+generic actions of the declared functor, so strict identity/composition are
+inherited globally. The dedicated action heads and their reindex rule described
+by the original checkpoint were removed by the generic-owner correction above.
 This remains a symbolic closed-structure interface while end semantics are
-absent. `Prof_imply_cov_func_fapp1_func` is a genuine functor-valued hom action,
-and its object/capped projections compute, but separate rules for its own
-higher-arrow action are not yet exposed. “Complete unary functor” in this
-checkpoint means the current object/whole-hom/capped interface plus strict
-vertical identity/composition and reindex compatibility, not a derived end
-construction or exhaustive higher-projection calculus.
+absent.
 
 The focused passing probe is:
 
@@ -247,14 +272,9 @@ The focused passing probe is:
 logs/probes/profunctor_representability_phase2_imply_cov_func_probe-20260621-020628.log
 ```
 
-The comparative decision-tree count moved from about 1140 to about 1144. Three
-new warnings are sort-impossible artifacts of the generic capped functor
-projection audit. The remaining warning is the ordinary functor-identity
-overlap; its two well-typed paths join through
-`Prof_imply_cov_func_transf`'s identity rule and are covered by an active
-regression check. Neither the reindex-compatibility rule nor the
-mixed-variance specialization added another warning. This is bounded evidence
-for the promoted interface, not a global confluence claim.
+The historical warning analysis for the removed action heads no longer
+describes the active architecture. Current validation is recorded by the
+generic-owner correction and generated health report.
 
 The next bounded slice selected domain-specific adjunction-mate ownership
 instead of a new global computational-isomorphism classifier. The active
@@ -618,12 +638,12 @@ Prof_imply_cov_func2 :
 ```
 
 Its object action accepts an arbitrary opaque `(O,Q)`, and its full/capped
-arrow actions accept an arbitrary opaque `(o,q)`.
-`Prof_imply_cov_func2_transf(o,q)` owns simultaneous covariance in `O` and
-contravariance in `Q`, preserves identities and composition, specializes to
-`Prof_imply_cov_func_transf` when `q` is an identity, and is the fixed-endpoint
-normal form of `Prof_imply_cov_transf`. The temporary curried owner and outer
-contravariant transformation head were removed.
+arrow actions accept an arbitrary opaque `(o,q)` through the ordinary generic
+functor action. The fixed-endpoint form of `Prof_imply_cov_transf` folds to
+that generic action. The former dedicated mixed and unary action heads were
+removed; fixed-weight implication is now a semantic specialization of this
+mixed owner. The temporary curried owner and outer contravariant
+transformation head remain removed.
 
 A separate `Hom_prof_func` endpoint audit established a narrower boundary.
 Right-endpoint restriction preserves representability definitionally on
@@ -1480,12 +1500,10 @@ but rejects a direct runtime arrow fold because it adds two identity overlaps.
 Its local component delegates to the existing postcomposition telescope rather
 than installing duplicate identity/composition rules.
 
-For `Prof_imply_cov_func(W)`, all checks in that list now pass. Its stable
-unary arrow head is the identity-endpoint specialization of
-`Prof_imply_cov_transf`, and its reindex law simultaneously transports the
-varying input and fixed weight. This is the first active evidence that the
-eventual bifunctor below can own the mixed variance without forcing general
-equipment-cell syntax into ordinary vertical functor laws.
+For `Prof_imply_cov_func(W)`, object and generic full/capped action checks pass.
+It is the opaque semantic composition of the mixed implication functor with
+the fixed-weight insertion. There is no stable unary action head and no local
+identity/composition law.
 
 The mixed-variance owner is now active in direct product form:
 
@@ -1496,20 +1514,10 @@ Prof_imply_cov_func2 :
 ```
 
 Its fixed-weight specialization is the unary `Prof_imply_cov_func(W)`, and its
-arrow action uses `Prof_imply_cov_func2_transf`. Product-object eta is still
-absent and unnecessary: object and arrow components are consumed through
-projections, and product identity projections supply the strict identity
-computation.
-
-Eventually tensor and implication should be packaged as an adjunction at the
-functor level:
-
-```text
-Prof_tensor_right_func(W) ⊣ Prof_imply_cov_func(W).
-```
-
-The current eval/lambda operations would then become projections of this
-reusable adjunction rather than an independent inverse-pair API.
+arrow action is the generic action of the mixed functor. Product-object eta is
+still absent and unnecessary. Tensor/implication eval and lambda remain the
+primitive closed-structure bijection; an ordinary fixed-weight adjunction is
+only a possible derived view and must not own that calculus.
 
 ## Weighted Limits As Representability
 
@@ -2539,15 +2547,19 @@ weighted limits.
    checked. Strict functoriality is inherited globally; no constructor-specific
    identity/composition rule was promoted. A generic `Catd_cat` composition
    cut bridges canonical `comp_catd_fapp0` normalization.
-7. Completed: add fixed-weight `Prof_imply_cov_func`, including complete unary
-   object/full/capped arrow action, strict identity/composition laws,
-   compatibility with `Prof_reindex_func`, and a specialization bridge from
-   the existing mixed-variance constructor.
+7. Completed after correction: add fixed-weight `Prof_imply_cov_func` as the
+   opaque semantic composition of the mixed functor with
+   `Prof_imply_cov_fixed_weight_func(Q)`. Object action computes; full/capped
+   action, identity, and composition are inherited from the global functor
+   calculus.
 7a. Completed after kernel correction: add the direct mixed-variance
-    `Prof_imply_cov_func2`, its full/capped arrow action, and fixed-endpoint
-    simultaneous action `Prof_imply_cov_func2_transf`. Componentwise product
-    identity projections make arbitrary opaque product identities compute.
-    The temporary curried workaround was removed.
+    `Prof_imply_cov_func2`. Its object action computes, its full/capped actions
+    remain generic, and fixed-endpoint `Prof_imply_cov_transf` folds to that
+    generic action. Dedicated unary/mixed action heads and their local
+    identity/composition rules were removed. Componentwise product identity
+    projections and the global Catd identity-action bridge make arbitrary
+    opaque product identities compute. The temporary curried workaround was
+    removed.
 8. Completed for the selected comparison owner:
    `prof_comparison_fmap` transports certified comparisons through
    `Prof_reindex_func` and `Prof_imply_cov_func(W)`. Its ordinary evidence
@@ -2764,10 +2776,10 @@ extensions:
 retain ProfComparison as the computational representability owner;
 retain the direct mixed implication bifunctor and projection-owned product
 identity computation;
-add separate higher-arrow implication projections only for a concrete
-consumer;
-package tensor-right and implication as a functor-level adjunction when its
-unit/counit projections can reuse the active eval/lambda calculus;
+retain eval/lambda as the primitive tensor-implication bijection and add its
+direct Došen-style naturality cuts;
+derive any later fixed-weight ordinary adjunction view from that closed
+calculus rather than making it the owner;
 develop TypeEquiv/OmegaEquiv/univalence as the parallel foundational track;
 require warning-enabled owning-module validation for every promoted rule.
 ```

@@ -80,6 +80,14 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   non-discriminating LHS slots.
 - When an explicit source/target category is needed in an assertion, prefer canonical forms such as `Hom_cat ...` and `Functord_cat ...` over reducible readability wrappers such as `Fibre_cat (DefinedAlias ...) k`.
 - Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
+- Treat the global `fapp*`/`tapp*` calculus as the sole owner of ordinary
+  functoriality and naturality. Never add constructor-specific rules merely to
+  state `F(id) = id`, `F(g o f) = F(g) o F(f)`, or the corresponding ordinary
+  transfor law. If a named action seems to require such rules, treat that as
+  evidence that a more-internalized `Functor`/`Transf` owner or projection is
+  missing; add that owner and route the readable action through it. Separate
+  beta/eta laws and Došen-style cuts are allowed only when they express
+  structure beyond generic functoriality/naturality.
 - Cat-specialized semantic heads package extra structure exposed only when the ambient category is `Cat_cat`; keep them when they expose transfor projections such as `tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0`, but document the generic owner and any required overlap/join.
 - If a semantic definition fails to compute, first look for missing projection rules, such as a capped `fapp1_fapp0` rule corresponding to an existing `fapp1_func` rule.
 - Do not duplicate semantic bodies in helper aliases; route helper definitions through the named semantic constructor.

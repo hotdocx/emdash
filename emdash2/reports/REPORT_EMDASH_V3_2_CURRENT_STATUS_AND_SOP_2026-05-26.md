@@ -148,11 +148,11 @@ covariant in `O`. Both sides have checked inverse eval/lambda operations for
 general cells and shaped specializations. The fixed-weight covariant operation
 is now internalized as
 `Prof_imply_cov_func(Q) : Prof_cat(A,X) -> Prof_cat(A,B)`. Its object, full
-hom, and capped arrow actions compute through
-`Prof_imply_cov_func_transf`; it strictly preserves vertical identity and
-composition, commutes with endpoint reindexing by reindexing both the varying
-input and fixed weight, and is the identity-endpoint specialization of the
-general mixed-variance cell constructor.
+hom, and capped arrow actions remain the generic `fapp*` projections. It is
+defined semantically by composing the mixed-variance implication functor with
+the fixed-weight insertion `O |-> (O,Q)`, then kept opaque so generic strict
+functor cuts remain visible before that product pipeline unfolds. No
+implication-specific identity or composition rule is active.
 
 The two-variable variance is now internalized directly as the mixed-variance
 bifunctor:
@@ -163,17 +163,19 @@ Prof_imply_cov_func2 :
 ```
 
 Its object action projects an arbitrary product object `(O,Q)` to
-`Prof_imply_cov(O,Q)`. Its full and capped arrow actions project an arbitrary
-product arrow `(o,q)` to `Prof_imply_cov_func2_transf(o,q)`. The fixed-endpoint
-mixed action preserves identity and composition and specializes to the unary
-action when `q` is an identity.
+`Prof_imply_cov(O,Q)`. Its full and capped arrow actions remain the ordinary
+generic action of this declared functor. The fixed-endpoint equipment-cell
+constructor folds to that generic action on the product arrow `(o,q)`;
+identity and composition are inherited globally rather than restated on a
+profunctor-specific action head.
 
-The initially rejected product presentation exposed a kernel gap rather than
-an architectural obstruction. Whole product identities still expand only on
-an explicit `Struct_sigma`, but their `sigma_Fst` and `sigma_Snd` projections
-now compute for every opaque product object. That is sufficient for the
-generic strict-functor identity cut of `Prof_imply_cov_func2`, without imposing
-global Sigma eta or rebuilding arbitrary product arrows.
+The initially rejected product presentation exposed kernel gaps rather than an
+architectural obstruction. Product identity projections compute for opaque
+product objects. In addition, the global strict-functor identity calculus now
+has a `Catd_cat` specialization for the canonical `id_funcd` normal form,
+parallel to the existing global Catd composition specialization. This one
+generic bridge replaces constructor-specific identity rules for functors whose
+source category is a profunctor category.
 
 The active warning inventory is now 1,052: 899 unjoinable critical-pair
 reports and 153 replaceable-pattern reports. The nine reports added by this
@@ -184,6 +186,17 @@ unary-specialization, and general-cell cases are checked. Separate
 higher-arrow projections of the implication hom-action, fixed-left
 contravariant implication, broader eval naturality, and end semantics remain
 deferred.
+
+The 2026-06-22 generic-owner audit also identified older migration candidates.
+`comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
+composition functors; `Op_func`, `Op_transf`, and `Op_funcd` have the
+internalized owners `op`, the hom-action of `op`, and `Op_catd_func`;
+`Prof_func_transf` and `Op_prof_transf` indicate that a fully internalized
+equipment-level owner is still missing. Their existing local identity or
+composition rules must not be copied into new infrastructure. Migrate each
+cluster separately, with downstream projection checks and warning comparison,
+before extending it. The implication cluster was migrated immediately because
+its direct mixed owner already existed and the focused replacement passed.
 
 The weighted-limit public API has completed its representability cutover.
 `WeightedLimit_cov(F,W,L)` is a transparent compatibility name for
@@ -734,6 +747,16 @@ Before proposing or implementing a nontrivial change, check these points:
    owner. Examples: `Product_cat_func` owns product functoriality,
    `homd_int` owns dependent-hom projections, and `fdapp1_int_presheaf_arrow`
    owns the fixed-endpoint Sigma-map hom-action.
+
+   Ordinary identity, composition, and naturality are owned only by the global
+   `fapp*`/`tapp*` calculus. A constructor-specific rule whose sole content is
+   `special_action(id) = id`, preservation of composition, or an ordinary
+   naturality square is an architectural warning: the operation is missing a
+   more-internalized `Functor`/`Transf` owner, or its readable action head has
+   been detached from that owner. Add/expose the owner and route the readable
+   name through its projection. Do not repair the detachment with another
+   local functoriality rule. This does not prohibit beta/eta cancellation or
+   Došen-style cuts for universal structure such as eval/lambda.
 
 2. Decide whether the new computation needs a stable head.
 

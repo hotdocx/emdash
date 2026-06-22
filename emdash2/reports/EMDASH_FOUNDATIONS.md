@@ -120,6 +120,14 @@ F[x] : Obj(B)
 F[f] : Hom_B(F[x],F[y])
 ```
 
+Functoriality is structural, not constructor-specific. Once a construction is
+an object of `Functor(A,B)`, its identity and composition laws come from the
+single global functor calculus. A formula that appears to require separate
+identity/composition rules for a named action usually indicates that the
+underlying operation has not yet been internalized far enough as a functor.
+The same principle applies to naturality after a construction has been
+internalized as a transformation.
+
 This is a useful discipline throughout the development: an equation such as
 `E[x] = ...` is only the object part of a functorial or natural construction.
 When `x` ranges over a directed category, the corresponding arrow action over

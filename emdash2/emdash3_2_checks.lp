@@ -5814,8 +5814,14 @@ assert [A B X : Cat]
   (Q : τ (Prof B X))
   [O O' : τ (Prof A X)] ⊢
   fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O']
-  ≡ @Prof_imply_cov_func_fapp1_func
-      A B X Q O O';
+  : τ (Functor
+      (@Functord_cat
+        (Product_cat (Op_cat A) X)
+        O O')
+      (@Functord_cat
+        (Product_cat (Op_cat A) B)
+        (@Prof_imply_cov A B X O Q)
+        (@Prof_imply_cov A B X O' Q)));
 
 assert [A B X : Cat]
   (Q : τ (Prof B X))
@@ -5824,18 +5830,9 @@ assert [A B X : Cat]
   fapp1_fapp0
     (@Prof_imply_cov_func A B X Q)
     [O] [O'] o
-  ≡ @Prof_imply_cov_func_transf
-      A B X Q O O' o;
-
-assert [A B X : Cat]
-  (Q : τ (Prof B X))
-  (O : τ (Prof A X)) ⊢
-  @Prof_imply_cov_func_transf
-    A B X Q O O
-    (@id_funcd (Product_cat (Op_cat A) X) O)
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
-      (@Prof_imply_cov A B X O Q);
+  : τ (Functord
+      (@Prof_imply_cov A B X O Q)
+      (@Prof_imply_cov A B X O' Q));
 
 assert [A B X : Cat]
   (Q : τ (Prof B X))
@@ -5855,63 +5852,23 @@ assert [A B X : Cat]
   [O O' O'' : τ (Prof A X)]
   (o : τ (Functord O O'))
   (o' : τ (Functord O' O'')) ⊢
-  @Prof_imply_cov_func_transf
-    A B X Q O O''
-    (@comp_catd_fapp0
-      (Product_cat (Op_cat A) X)
-      O O' O'' o' o)
-  ≡ @comp_catd_fapp0
+  @comp_catd_fapp0
       (Product_cat (Op_cat A) B)
       (@Prof_imply_cov A B X O Q)
       (@Prof_imply_cov A B X O' Q)
       (@Prof_imply_cov A B X O'' Q)
-      (@Prof_imply_cov_func_transf
-        A B X Q O' O'' o')
-      (@Prof_imply_cov_func_transf
-        A B X Q O O' o);
-
-assert [A A' B B' X : Cat]
-  (Q : τ (Prof B X))
-  [O O' : τ (Prof A X)]
-  (o : τ (Functord O O'))
-  (F : τ (Functor A' A))
-  (M : τ (Functor B' B)) ⊢
-  @Prof_reindex_transf
-    A A' B B'
-    (@Prof_imply_cov A B X O Q)
-    (@Prof_imply_cov A B X O' Q)
-    (@Prof_imply_cov_func_transf
-      A B X Q O O' o)
-    F M
-  ≡ @Prof_imply_cov_func_transf
-      A' B' X
-      (@Prof_reindex
-        B B' X X
-        Q M (@id_func X))
-      (@Prof_reindex
-        A A' X X
-        O F (@id_func X))
-      (@Prof_reindex
-        A A' X X
-        O' F (@id_func X))
-      (@Prof_reindex_transf
-        A A' X X
-        O O' o
-        F (@id_func X));
-
-assert [A B X : Cat]
-  (Q : τ (Prof B X))
-  [O O' : τ (Prof A X)]
-  (o : τ (Functord O O')) ⊢
-  @Prof_imply_cov_transf
-    A A B B X
-    O O' Q Q
-    (@id_func A)
-    (@id_func B)
-    o
-    (@Prof_id_transf B X Q)
-  ≡ @Prof_imply_cov_func_transf
-      A B X Q O O' o;
+      (fapp1_fapp0
+        (@Prof_imply_cov_func A B X Q)
+        [O'] [O''] o')
+      (fapp1_fapp0
+        (@Prof_imply_cov_func A B X Q)
+        [O] [O'] o)
+  ≡ fapp1_fapp0
+      (@Prof_imply_cov_func A B X Q)
+      [O] [O'']
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat A) X)
+        O O' O'' o' o);
 
 assert [A B X : Cat]
   (oq : τ (Obj
@@ -5942,8 +5899,16 @@ assert [A B X : Cat]
     (Prof_cat A B)
     (@Prof_imply_cov_func2 A B X)
     oq oq'
-  ≡ @Prof_imply_cov_func2_fapp1_func
-      A B X oq oq';
+  : τ (Functor
+      (Hom_cat
+        (Product_cat
+          (Prof_cat A X)
+          (Op_cat (Prof_cat B X)))
+        oq oq')
+      (Hom_cat
+        (Prof_cat A B)
+        (fapp0 (@Prof_imply_cov_func2 A B X) oq)
+        (fapp0 (@Prof_imply_cov_func2 A B X) oq')));
 
 assert [A B X : Cat]
   [oq oq' : τ (Obj
@@ -5962,14 +5927,10 @@ assert [A B X : Cat]
     (Prof_cat A B)
     (@Prof_imply_cov_func2 A B X)
     oq oq' r
-  ≡ @Prof_imply_cov_func2_transf
-      A B X
-      (sigma_Fst oq)
-      (sigma_Fst oq')
-      (sigma_Snd oq)
-      (sigma_Snd oq')
-      (sigma_Fst r)
-      (sigma_Snd r);
+  : τ (Hom
+      (Prof_cat A B)
+      (@Prof_imply_cov A B X (sigma_Fst oq) (sigma_Snd oq))
+      (@Prof_imply_cov A B X (sigma_Fst oq') (sigma_Snd oq')));
 
 assert [A B X : Cat]
   (oq : τ (Obj
@@ -5996,53 +5957,34 @@ assert [A B X : Cat]
         (sigma_Snd oq));
 
 assert [A B X : Cat]
-  (O : τ (Prof A X))
-  (Q : τ (Prof B X)) ⊢
-  @Prof_imply_cov_func2_transf
-    A B X O O Q Q
-    (@id_funcd (Product_cat (Op_cat A) X) O)
-    (@id_funcd (Product_cat (Op_cat B) X) Q)
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
-      (@Prof_imply_cov A B X O Q);
-
-assert [A B X : Cat]
-  [O0 O1 O2 : τ (Prof A X)]
-  [Q0 Q1 Q2 : τ (Prof B X)]
-  (o01 : τ (Functord O0 O1))
-  (o12 : τ (Functord O1 O2))
-  (q10 : τ (Functord Q1 Q0))
-  (q21 : τ (Functord Q2 Q1)) ⊢
-  @Prof_imply_cov_func2_transf
-    A B X
-    O0 O2
-    Q0 Q2
-    (@comp_catd_fapp0
-      (Product_cat (Op_cat A) X)
-      O0 O1 O2 o12 o01)
-    (@comp_catd_fapp0
-      (Product_cat (Op_cat B) X)
-      Q2 Q1 Q0 q10 q21)
-  ≡ @comp_catd_fapp0
-      (Product_cat (Op_cat A) B)
-      (@Prof_imply_cov A B X O0 Q0)
-      (@Prof_imply_cov A B X O1 Q1)
-      (@Prof_imply_cov A B X O2 Q2)
-      (@Prof_imply_cov_func2_transf
-        A B X O1 O2 Q1 Q2 o12 q21)
-      (@Prof_imply_cov_func2_transf
-        A B X O0 O1 Q0 Q1 o01 q10);
-
-assert [A B X : Cat]
-  [O O' : τ (Prof A X)]
-  (Q : τ (Prof B X))
-  (o : τ (Functord O O')) ⊢
-  @Prof_imply_cov_func2_transf
-    A B X O O' Q Q
-    o
-    (@id_funcd (Product_cat (Op_cat B) X) Q)
-  ≡ @Prof_imply_cov_func_transf
-      A B X Q O O' o;
+  [oq0 oq1 oq2 : τ (Obj
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))))]
+  (r01 : τ (Hom
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    oq0 oq1))
+  (r12 : τ (Hom
+    (Product_cat
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X)))
+    oq1 oq2)) ⊢
+  @comp_fapp0
+      (Prof_cat A B)
+      (fapp0 (@Prof_imply_cov_func2 A B X) oq0)
+      (fapp0 (@Prof_imply_cov_func2 A B X) oq1)
+      (fapp0 (@Prof_imply_cov_func2 A B X) oq2)
+      (fapp1_fapp0 (@Prof_imply_cov_func2 A B X) r12)
+      (fapp1_fapp0 (@Prof_imply_cov_func2 A B X) r01)
+  ≡ fapp1_fapp0
+      (@Prof_imply_cov_func2 A B X)
+      (@comp_fapp0
+        (Product_cat
+          (Prof_cat A X)
+          (Op_cat (Prof_cat B X)))
+        oq0 oq1 oq2 r12 r01);
 
 assert [A B X : Cat]
   [O O' : τ (Prof A X)]
@@ -6055,8 +5997,15 @@ assert [A B X : Cat]
     (@id_func A)
     (@id_func B)
     o q
-  ≡ @Prof_imply_cov_func2_transf
-      A B X O O' Q Q' o q;
+  ≡ @fapp1_fapp0
+      (Product_cat
+        (Prof_cat A X)
+        (Op_cat (Prof_cat B X)))
+      (Prof_cat A B)
+      (@Prof_imply_cov_func2 A B X)
+      (Struct_sigma O Q)
+      (Struct_sigma O' Q')
+      (Struct_sigma o q);
 
 assert [A B X A' : Cat]
   [P : τ (Catd (Product_cat (Op_cat A) B))]
@@ -6797,8 +6746,10 @@ assert [B J J' A : Cat]
           _ _
           (@right_adjoint_weighted_limit_iso_step2
             B J J' A W F L isl adj))
-        (@Prof_imply_cov_func_transf
-          A J' J W
+        (@fapp1_fapp0
+          (Prof_cat A J)
+          (Prof_cat A J')
+          (@Prof_imply_cov_func A J' J W)
           (@Hom_prof
             J A
             (@comp_cat_fapp0

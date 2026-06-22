@@ -159,6 +159,14 @@ flag "print_meta_args" on;
     - If a concrete constructor does not reduce early enough and needs one of
       these unification helpers, that is usually a signal to add a computation
       rule or introduce a smaller stable head.
+    - A term already typed as `Functor` or `Transf` inherits identity,
+      composition, and naturality from the global `fapp*`/`tapp*` calculus.
+      Do not restate those laws on a constructor-specific action head. If a
+      named action appears to need such rules, add or expose the more
+      internalized functor/transfor owner and make the readable action a
+      projection or semantic view of that owner. Concept-specific beta/eta or
+      cut-elimination rules remain appropriate when they express additional
+      structure rather than ordinary functoriality.
 
   Omega-friendly normalization:
     - Prefer functor-level folds over capped pointwise rewrites when the result
@@ -732,6 +740,17 @@ rule @comp_catd_fapp0 $K $E $E $C $FF (@id_funcd $K $E)
   ↪ $FF;
 rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
   ↪ $GG;
+
+// Canonical Catd specialization of the global strict-functor identity cut.
+// This is generic for every functor out of Catd_cat; individual functor
+// constructors must not restate the same identity computation.
+rule @fapp1_fapp0
+      (@Catd_cat $K)
+      $B
+      $F
+      $E $E
+      (@id_funcd $K $E)
+  ↪ @id $B (@fapp0 (@Catd_cat $K) $B $F $E);
 
 // Canonical Catd specialization of the global strict-functor composition
 // cut. The three family endpoints are inferred from the two arrow actions;
@@ -8192,122 +8211,6 @@ rule @Prof_reindex
         (@id_func $X));
 
 /*
-  Fixed-weight covariant implication.
-
-  For Q : Prof(B,X), this internalizes the covariant action:
-
-    Prof_imply_cov_func(Q) : Prof(A,X) -> Prof(A,B).
-
-  The dedicated arrow head owns the unary functor laws. The general
-  mixed-variance constructor below folds to it when both endpoint maps and the
-  contravariant Q-cell are identities. As with the opaque implication object,
-  the hom-action functor remains symbolic above its object/capped projections;
-  end semantics and separate higher-arrow projection rules are deferred.
-*/
-symbol Prof_imply_cov_func [A B X : Cat]
-  (Q : τ (Prof B X))
-  : τ (Functor
-      (Prof_cat A X)
-      (Prof_cat A B));
-
-rule fapp0
-      (@Prof_imply_cov_func $A $B $X $Q)
-      $O
-  ↪ @Prof_imply_cov $A $B $X $O $Q;
-
-symbol Prof_imply_cov_func_fapp1_func
-  [A B X : Cat]
-  (Q : τ (Prof B X))
-  [O O' : τ (Prof A X)]
-  : τ (Functor
-      (@Functord_cat
-        (Product_cat (Op_cat A) X)
-        O O')
-      (@Functord_cat
-        (Product_cat (Op_cat A) B)
-        (@Prof_imply_cov A B X O Q)
-        (@Prof_imply_cov A B X O' Q)));
-
-symbol Prof_imply_cov_func_transf
-  [A B X : Cat]
-  (Q : τ (Prof B X))
-  [O O' : τ (Prof A X)]
-  (o : τ (Functord O O'))
-  : τ (Functord
-      (@Prof_imply_cov A B X O Q)
-      (@Prof_imply_cov A B X O' Q));
-
-rule fapp1_func
-      (@Prof_imply_cov_func $A $B $X $Q)
-      [$O] [$O']
-  ↪ @Prof_imply_cov_func_fapp1_func
-      $A $B $X $Q $O $O';
-
-rule fapp0
-      (@Prof_imply_cov_func_fapp1_func
-        $A $B $X $Q $O $O')
-      $o
-  ↪ @Prof_imply_cov_func_transf
-      $A $B $X $Q $O $O' $o;
-
-rule fapp1_fapp0
-      (@Prof_imply_cov_func $A $B $X $Q)
-      [$O] [$O'] $o
-  ↪ @Prof_imply_cov_func_transf
-      $A $B $X $Q $O $O' $o;
-
-rule @Prof_imply_cov_func_transf
-      $A $B $X $Q
-      $O $O
-      (@id_funcd _ $O)
-  ↪ @id_funcd
-      (Product_cat (Op_cat $A) $B)
-      (@Prof_imply_cov $A $B $X $O $Q);
-
-rule @Prof_imply_cov_func_transf
-      $A $B $X $Q
-      $O $O''
-      (@comp_catd_fapp0
-        _
-        $O $O' $O''
-        $o' $o)
-  ↪ @comp_catd_fapp0
-      (Product_cat (Op_cat $A) $B)
-      (@Prof_imply_cov $A $B $X $O $Q)
-      (@Prof_imply_cov $A $B $X $O' $Q)
-      (@Prof_imply_cov $A $B $X $O'' $Q)
-      (@Prof_imply_cov_func_transf
-        $A $B $X $Q $O' $O'' $o')
-      (@Prof_imply_cov_func_transf
-        $A $B $X $Q $O $O' $o);
-
-// Reindexing a unary implication map reindexes both its varying input and its
-// fixed weight, matching object-level implication reindexing.
-rule @Prof_reindex_transf
-      $A $A'
-      $B $B'
-      (@Prof_imply_cov $A $B $X $O $Q)
-      (@Prof_imply_cov $A $B $X $O' $Q)
-      (@Prof_imply_cov_func_transf
-        $A $B $X $Q $O $O' $o)
-      $F $M
-  ↪ @Prof_imply_cov_func_transf
-      $A' $B' $X
-      (@Prof_reindex
-        $B $B' $X $X
-        $Q $M (@id_func $X))
-      (@Prof_reindex
-        $A $A' $X $X
-        $O $F (@id_func $X))
-      (@Prof_reindex
-        $A $A' $X $X
-        $O' $F (@id_func $X))
-      (@Prof_reindex_transf
-        $A $A' $X $X
-        $O $O' $o
-        $F (@id_func $X));
-
-/*
   Mixed-variance covariant implication.
 
     Prof_imply_cov_func2 :
@@ -8333,123 +8236,47 @@ rule @fapp0
       (sigma_Fst $oq)
       (sigma_Snd $oq);
 
-symbol Prof_imply_cov_func2_fapp1_func
-  [A B X : Cat]
-  [oq oq' : τ (Obj
+// Insert a varying O beside the fixed contravariant weight Q.
+symbol Prof_imply_cov_fixed_weight_func [A B X : Cat]
+  (Q : τ (Prof B X))
+  : τ (Functor
+      (Prof_cat A X)
+      (Product_cat
+        (Prof_cat A X)
+        (Op_cat (Prof_cat B X))))
+≔ Struct_sigma
+    (@id_func (Prof_cat A X))
+    (@Const_func
+      (Prof_cat A X)
+      (Op_cat (Prof_cat B X))
+      Q);
+
+/*
+  Fixed-weight implication is the semantic specialization of the mixed
+  functor along O |-> (O,Q). The semantic definition is kept opaque so its
+  generic fapp1 identity/composition cuts remain visible before the product
+  pipeline unfolds, following the same pattern as Hom_prof_func.
+*/
+symbol Prof_imply_cov_func [A B X : Cat]
+  (Q : τ (Prof B X))
+  : τ (Functor
+      (Prof_cat A X)
+      (Prof_cat A B))
+≔ @comp_cat_fapp0
+    (Prof_cat A X)
     (Product_cat
       (Prof_cat A X)
-      (Op_cat (Prof_cat B X))))]
-  : τ (Functor
-      (Hom_cat
-        (Product_cat
-          (Prof_cat A X)
-          (Op_cat (Prof_cat B X)))
-        oq oq')
-      (@Functord_cat
-        (Product_cat (Op_cat A) B)
-        (@Prof_imply_cov
-          A B X
-          (sigma_Fst oq)
-          (sigma_Snd oq))
-        (@Prof_imply_cov
-          A B X
-          (sigma_Fst oq')
-          (sigma_Snd oq'))));
+      (Op_cat (Prof_cat B X)))
+    (Prof_cat A B)
+    (@Prof_imply_cov_func2 A B X)
+    (@Prof_imply_cov_fixed_weight_func A B X Q);
 
-symbol Prof_imply_cov_func2_transf
-  [A B X : Cat]
-  [O O' : τ (Prof A X)]
-  [Q Q' : τ (Prof B X)]
-  (o : τ (Functord O O'))
-  (q : τ (Functord Q' Q))
-  : τ (Functord
-      (@Prof_imply_cov A B X O Q)
-      (@Prof_imply_cov A B X O' Q'));
-
-rule @fapp1_func
-      _ _
-      (@Prof_imply_cov_func2 $A $B $X)
-      $oq $oq'
-  ↪ @Prof_imply_cov_func2_fapp1_func
-      $A $B $X $oq $oq';
+opaque Prof_imply_cov_func;
 
 rule fapp0
-      (@Prof_imply_cov_func2_fapp1_func
-        $A $B $X $oq $oq')
-      $r
-  ↪ @Prof_imply_cov_func2_transf
-      $A $B $X
-      (sigma_Fst $oq)
-      (sigma_Fst $oq')
-      (sigma_Snd $oq)
-      (sigma_Snd $oq')
-      (sigma_Fst $r)
-      (sigma_Snd $r);
-
-rule @fapp1_fapp0
-      _ _
-      (@Prof_imply_cov_func2 $A $B $X)
-      $oq $oq' $r
-  ↪ @Prof_imply_cov_func2_transf
-      $A $B $X
-      (sigma_Fst $oq)
-      (sigma_Fst $oq')
-      (sigma_Snd $oq)
-      (sigma_Snd $oq')
-      (sigma_Fst $r)
-      (sigma_Snd $r);
-
-rule @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O
-      $Q $Q
-      (@id_funcd _ $O)
-      (@id_funcd _ $Q)
-  ↪ @id_funcd
-      (Product_cat (Op_cat $A) $B)
-      (@Prof_imply_cov $A $B $X $O $Q);
-
-rule @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O''
-      $Q $Q''
-      (@comp_catd_fapp0 _ $O $O' $O'' $o' $o)
-      (@comp_catd_fapp0 _ $Q'' $Q' $Q $q $q')
-  ↪ @comp_catd_fapp0
-      (Product_cat (Op_cat $A) $B)
-      (@Prof_imply_cov $A $B $X $O $Q)
-      (@Prof_imply_cov $A $B $X $O' $Q')
-      (@Prof_imply_cov $A $B $X $O'' $Q'')
-      (@Prof_imply_cov_func2_transf
-        $A $B $X
-        $O' $O''
-        $Q' $Q''
-        $o' $q')
-      (@Prof_imply_cov_func2_transf
-        $A $B $X
-        $O $O'
-        $Q $Q'
-        $o $q);
-
-// The unary fixed-weight functor is the identity-Q specialization.
-rule @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O'
-      $Q $Q
-      $o
-      (@id_funcd _ $Q)
-  ↪ @Prof_imply_cov_func_transf
-      $A $B $X $Q $O $O' $o;
-
-// Equipment identity has the same vertical specialization.
-rule @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O'
-      $Q $Q
-      $o
-      (@Prof_id_transf $B $X $Q)
-  ↪ @Prof_imply_cov_func_transf
-      $A $B $X $Q $O $O' $o;
+      (@Prof_imply_cov_func $A $B $X $Q)
+      $O
+  ↪ @Prof_imply_cov $A $B $X $O $Q;
 
 // Implication is covariant in O and contravariant in Q.
 symbol Prof_imply_cov_transf
@@ -8474,28 +8301,24 @@ symbol Prof_imply_cov_transf
         (@Prof_imply_cov A' B' X O' Q')
         (@id_func B')));
 
-rule @Prof_imply_cov_transf
-      $A $A $B $B $X
-      $O $O' $Q $Q
-      (@id_func $A)
-      (@id_func $B)
-      $o
-      (@Prof_id_transf $B $X $Q)
-  ↪ @Prof_imply_cov_func_transf
-      $A $B $X $Q $O $O' $o;
-
-// The fixed-endpoint general cell is the curried mixed functor action.
+// The fixed-endpoint general cell is the mixed functor action. Unary
+// fixed-weight action is inherited by composing this functor with
+// Prof_imply_cov_fixed_weight_func.
 rule @Prof_imply_cov_transf
       $A $A $B $B $X
       $O $O' $Q $Q'
       (@id_func $A)
       (@id_func $B)
       $o $q
-  ↪ @Prof_imply_cov_func2_transf
-      $A $B $X
-      $O $O'
-      $Q $Q'
-      $o $q;
+  ↪ @fapp1_fapp0
+      (Product_cat
+        (Prof_cat $A $X)
+        (Op_cat (Prof_cat $B $X)))
+      (Prof_cat $A $B)
+      (@Prof_imply_cov_func2 $A $B $X)
+      (Struct_sigma $O $Q)
+      (Struct_sigma $O' $Q')
+      (Struct_sigma $o $q);
 
 // Evaluation and lambda abstraction for general equipment cells.
 symbol Prof_eval_cov_transf
