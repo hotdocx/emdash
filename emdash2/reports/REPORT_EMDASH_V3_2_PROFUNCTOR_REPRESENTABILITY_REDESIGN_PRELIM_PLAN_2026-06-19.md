@@ -3048,3 +3048,228 @@ slice. Neither should an unrestricted `IsoEvidence -> StrictIso`
 strictification constructor be added. The failed probes establish that passing
 beta/eta assertions is weaker than establishing a coherent computational
 algebra; active warning and confluence audits remain promotion criteria.
+
+## Stable-Head Reindexing Decision, 2026-06-23
+
+This decision supersedes the earlier proposal to make pullback and profunctor
+reindexing fully transparent. That proposal went too far toward semantic
+definitions and risked losing the stable discriminators used by the
+cut-elimination architecture.
+
+The intended hierarchy is instead a layered family of canonical
+specialization heads:
+
+```text
+comp_cat_con_func(F)                  -> Pullback_catd_func(F)
+fapp0(Pullback_catd_func(F), E)       -> Pullback_catd(E,F)
+
+Pullback_catd_func(Product_map_func(Op_func(F),G))
+  -> Prof_reindex_func(F,G)
+
+fapp0(Prof_reindex_func(F,G),R)
+  -> Prof_reindex(R,F,G)
+```
+
+The corresponding object-level join is essential:
+
+```text
+Pullback_catd(R, Product_map_func(Op_func(F),G))
+  -> Prof_reindex(R,F,G)
+```
+
+Otherwise evaluating the outer functor before or after the specialization fold
+can produce non-joinable results.
+
+### Pullback
+
+Keep both `Pullback_catd_func` and `Pullback_catd` primitive. They are the
+canonical Cat-valued specialization of precomposition rather than unrelated
+duplicate semantics.
+
+One additional join is likely necessary:
+
+```text
+comp_cat_fapp0(E,F) -> Pullback_catd(E,F)
+```
+
+when the codomain is `Cat_cat`. Without it,
+
+```text
+fapp0(comp_cat_con_func(F),E)
+```
+
+has two paths:
+
+```text
+comp_cat_fapp0(E,F)
+```
+
+and:
+
+```text
+Pullback_catd(E,F).
+```
+
+This broad specialization will overlap existing rules for `Const_catd`,
+`Op_catd`, and `Sigma_proj1_pullback_catd`. Those overlaps must join through
+focused rules such as:
+
+```text
+Pullback_catd(Const_catd(B,C),F) -> Const_catd(A,C).
+```
+
+Consequently, the design is feasible but requires a systematic specialization
+audit.
+
+The expected pullback accumulation rule is:
+
+```text
+Pullback_catd(Pullback_catd(E,F),H)
+  -> Pullback_catd(E, comp_cat_fapp0(F,H)).
+```
+
+The composition-form cut:
+
+```text
+comp_cat_fapp0(Pullback_catd(E,F),H)
+  -> Pullback_catd(E, comp_cat_fapp0(F,H))
+```
+
+may also be needed, but must not be added automatically. If the general
+Cat-valued composition fold already produces nested `Pullback_catd`, the
+nested accumulation rule may suffice. Both paths must be tested for joining.
+
+### Product Maps
+
+Making `Product_map_func` primitive is plausible and probably necessary if it
+becomes a discriminator for `Prof_reindex_func`.
+
+It requires a complete projection ladder:
+
+```text
+fapp0(Product_map_func(F,G),xy)
+  -> Product_pair(fapp0(F,sigma_Fst(xy)),
+                  fapp0(G,sigma_Snd(xy)))
+
+fapp1_func(Product_map_func(F,G),xy,xy')
+  -> the componentwise hom functor
+
+fapp1_fapp0(Product_map_func(F,G),xy,xy',pq)
+  -> Struct_sigma(fapp1_fapp0(F,sigma_Fst(pq)),
+                  fapp1_fapp0(G,sigma_Snd(pq))).
+```
+
+It should eventually have genuine constructor-level cut elimination:
+
+```text
+Product_map_func(id,id) -> id
+
+Product_map_func(F,G) o Product_map_func(F',G')
+  -> Product_map_func(F o F', G o G').
+```
+
+These do not duplicate ordinary functoriality. They describe composition of
+the `Product_map_func` constructor itself.
+
+A narrower alternative would be a primitive `Prof_base_map_func(F,G)`.
+However, `Product_map_func` is mathematically general and already has several
+consumers, so promoting it is the current preferred direction.
+
+### Profunctor Reindexing
+
+With this hierarchy, keep `Prof_reindex_func` and `Prof_reindex` primitive.
+They are specialized canonical normal forms, not opaque substitutes for
+pullback.
+
+The existing identity, nesting, and representable rules then remain legitimate
+cut-elimination rules:
+
+```text
+Prof_reindex(R,id,id) -> R
+
+Prof_reindex(Prof_reindex(R,F,G),F',G')
+  -> Prof_reindex(R,F o F',G o G')
+
+Prof_reindex(Hom_prof_along(F,G),F',G')
+  -> Hom_prof_along(F o F',G o G').
+```
+
+Keep `Hom_prof_along(F,G)` primitive. It is a canonical representable
+construction with genuine stable projection and cut-elimination requirements,
+analogous to the baked-in reindexing of the ordinary internal-hom
+infrastructure.
+
+Tensor and implication reindexing still require independent audits. They
+express compatibility of opaque tensor and implication constructors with
+endpoint substitution, not merely generic pullback normalization.
+
+Most importantly, this stable reindexing hierarchy does **not** justify
+endpoint-changing eval/lambda primitives. The tensor-implication closed core
+must use fixed endpoints and `ProfMap`; reindexing belongs around that core.
+
+If an additional equipment-style endpoint-changing formulation is later
+needed, derive it from:
+
+```text
+ProfCell(R',F,R,G)
+  := ProfMap(R', Prof_reindex(R,F,G))
+```
+
+together with the rigid `Prof_reindex*` operations and the vertical
+eval/lambda bijection. A readable `Prof_transf_cat` may remain as a transparent
+category alias for this cell type, but endpoint-changing variants of
+`Prof_eval_*`, `Prof_lambda_*`, or implication actions must not become the
+primitive owner of the closed structure merely to expose that derived
+equipment interface.
+
+### Pi Pullback
+
+`Pi_pullback_funcd` is probably eliminable eventually. Its object component
+should follow from:
+
+```text
+tapp0_fapp0(
+  fapp1_fapp0(Pullback_catd_func(G),Pi_int_funcd),
+  x)
+```
+
+reducing through the pointwise arrow action of `Pullback_catd_func`, then
+through:
+
+```text
+tapp0_fapp0(Pi_int_funcd,G[x]) -> Pi_func(G[x]).
+```
+
+The harder computation is `fdapp1_int_cell`. Eliminating
+`Pi_pullback_funcd` likely requires a generic rule describing the displayed
+laxity cell of:
+
+```text
+fapp1_fapp0(Pullback_catd_func(G),eta).
+```
+
+After that, specializing `eta := Pi_int_funcd` should expose
+`section_pullback_func`.
+
+Keep `Pi_pullback_funcd` unchanged for the initial migration and document its
+eventual semantic deletion as deferred work.
+
+### Feasibility And First Probe Boundary
+
+This architecture is preferable to both extremes:
+
+- it does not make every layer fully transparent and thereby erase useful
+  discriminators;
+- it does not treat a collection of disconnected opaque primitives as the
+  theory;
+- it connects canonical specialization heads by joining projection and
+  accumulation rules.
+
+The principal risk is confluence at the
+`comp_cat_con_func -> Pullback_catd_func` and
+`comp_cat_fapp0 -> Pullback_catd` boundaries. The first implementation step
+must therefore be a focused temporary-copy probe of those boundaries,
+including both reduction orders and interactions with existing
+`Const_catd`, `Op_catd`, `Sigma_proj1_pullback_catd`, and product-map rules.
+Only after that pullback layer is stable should `Product_map_func` be promoted
+and the `Prof_reindex*` specialization folds be installed.
