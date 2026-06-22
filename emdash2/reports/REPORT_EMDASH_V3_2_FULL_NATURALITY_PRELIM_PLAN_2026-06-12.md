@@ -1,9 +1,33 @@
 # EMDASH v3.2 Full Naturality Preliminary Plan
 
 Date: 2026-06-12
+Last reviewed: 2026-06-22
 
 Status: first implementation slice landed in `emdash3_2.lp` and
 `emdash3_2_checks.lp` on 2026-06-12.
+
+## 2026-06-22 Generic-Owner Correction
+
+This report records historical implementation steps that introduced local
+identity laws for `comp_cat_cov_transf`, `comp_cat_con_transf`, and related
+specialized actions. Do not copy or extend those laws without reassessing their
+owner and reduction role. Ordinary identity, composition, and naturality
+should be inherited from the operation's internalized `Functor`/`Transf` owner
+and the global `fapp*`/`tapp*` calculus. A specialized rule may nevertheless
+remain when a focused audit establishes that it is an intentional projection
+or normal-form bridge, rather than a duplicate assertion of the generic law.
+
+The Cat-specialized heads may remain as readable projection points for genuine
+component and off-diagonal transfor structure. Before adding another ordinary
+law to them, resume side task `INT-COMP` from the `Deferred Internalization
+Side-Task Ledger` in
+`REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
+Its completion criterion is a generic-owner route with object, full/capped
+action, identity, and composition diagnostics, plus warning comparison. This
+correction supersedes the later historical recommendation in this report to
+add constructor-local “semantic identity reductions.” Direct Došen-style
+beta/eta or cut-elimination laws remain admissible only when they express
+structure beyond generic functoriality or naturality.
 
 ## Scope
 

@@ -62,6 +62,73 @@ identity law needs one Catd-specialized bridge, parallel to the already-active
 global Catd composition bridge. The bridge is generic for every functor out of
 `Catd_cat`; it is not an implication-specific law.
 
+## Deferred Internalization Side-Task Ledger
+
+The generic-owner audit also found older clusters whose local identity or
+composition rules look like ordinary functoriality stated at a specialized
+head. They are audit and possible-migration candidates, not current blockers.
+This classification does not presume that every existing rule is redundant or
+should be removed. A rule may instead be a necessary projection bridge, a
+chosen semantic normal-form conversion, or a genuine Došen-style cut. Do not
+refactor all of them preemptively. Resume one cluster when the named consumer
+first needs to extend it, or earlier only when a focused probe shows that its
+present ownership blocks the active slice.
+
+| ID | Existing cluster | Expected ownership direction | Resume trigger |
+| --- | --- | --- | --- |
+| `INT-COMP` | `comp_cat_cov_transf`, `comp_cat_con_transf`, and their local identity laws | Keep Cat-specialized component/off-diagonal heads when they expose genuine transfor structure, but obtain ordinary identity/composition from the existing composition functors and generic `fapp*`/`tapp*` projections. | Direct tensor-implication eval/lambda naturality, or any broader ordinary full-naturality extension, needs a new law on these heads. |
+| `INT-OP` | `Op_func`, `Op_transf`, `Op_funcd` | Reassess `Op_func` as the arrow projection of `op`, `Op_transf` as the next hom-action of that owner, and `Op_funcd` as action owned by `Op_catd_func`. Retain readable projection heads and local normal-form bridges when focused reduction-order evidence shows they are computationally intentional. | New duality or univalence work would otherwise add another local identity/composition/naturality rule. |
+| `INT-PROF-FUNC` | `Prof_func_transf` and its direct identity/composition rules | Seek an internalized representable-equipment action in the varying functor, potentially displayed or total because both endpoint legs vary. `Prof_func_transf` may remain its readable projection. | General co-Yoneda or join/collage work must compute functor-induced cells beyond the currently checked cases. |
+| `INT-OP-PROF` | `Op_prof_transf` and its direct involution/identity/composition rules | Internalize base-swap duality on an appropriate category or displayed/total category of profunctor cells; project the current stable head from that owner. | Extended profunctor-cell duality, semantic pullback comparison, or colimit duality needs additional cell laws. |
+| `INT-EQUIP-COMP` | Local identity/composition laws for `Prof_comp_transf` and related equipment operations | Make ordinary laws consequences of an internalized category/functor of equipment cells once its varying bases and endpoints have a coherent owner. Preserve only genuine equipment beta/eta or cut-elimination laws. | A bicategory/equipment coherence layer, tensor associativity, or generalized cell composition requires laws beyond the current bounded API. |
+
+For each resumed side task:
+
+1. Recover the mathematical operation independently of its current stable
+   head and identify all variables that must vary internally.
+2. Classify each questioned rule as a redundant generic law, a projection or
+   normal-form bridge, a genuine beta/eta or cut law, or an unresolved overlap.
+   Do not infer the classification from its syntax alone.
+3. Probe the smallest `Functor`, `Transf`, displayed, or total-category owner;
+   do not begin by copying the local law to a new name. Test both the generic
+   and specialized reduction paths on the actual downstream consumer.
+4. Route readable heads through generic projections where that produces the
+   intended normal form. Remove only laws that the generic calculus
+   demonstrably subsumes; explicitly retain and document rules whose
+   projection or cut behavior is needed.
+5. Add object, full hom-action, capped action, identity, and composition
+   diagnostics appropriate to the owner. Compare warning-enabled checks before
+   and after the migration.
+6. Promote the slice only when `make check`, the LHS audit, catalog/health
+   refreshes, and `make ci` pass. Record any deliberately retained stable head
+   and why its behavior is more than generic functoriality.
+
+For example, the active rule
+
+```text
+Op_func(F o G) -> Op_func(F) o Op_func(G)
+```
+
+does not state the ordinary functoriality of `Op_func(F) : A^op -> B^op` on
+arrows inside `A^op`; that behavior belongs to generic `fapp*`. It states that
+the opposite operation sends a composite functor to the composite of the
+opposite functors. Equivalently, it exposes the composition behavior of the
+arrow projection of the higher functor `op : Cat -> Cat`. Its implementation
+orientation expands that projection to the chosen ordinary-functor
+composition normal form, rather than performing the generic inward
+functoriality cut. It is therefore presumptively an intentional projection and
+normal-form bridge. `INT-OP` must not perturb it without a concrete conflict.
+Any later audit must distinguish these categorical levels and compare both
+reduction orientations, the duality consumers that need the expanded form,
+and critical-pair behavior. A side task may conclude that an existing rule
+should be retained with better ownership documentation rather than changed.
+
+The active next slice remains direct Došen-style naturality for the primitive
+tensor-implication eval/lambda bijection. `INT-COMP` becomes a prerequisite
+only if that focused probe genuinely requires extending the composition
+transformation cluster; otherwise it remains deferred. The other four tasks
+are tied to the later triggers in the table.
+
 ## Implementation Checkpoint: 2026-06-21
 
 The first bounded implementation slice started from clean baseline commit:

@@ -194,9 +194,28 @@ internalized owners `op`, the hom-action of `op`, and `Op_catd_func`;
 `Prof_func_transf` and `Op_prof_transf` indicate that a fully internalized
 equipment-level owner is still missing. Their existing local identity or
 composition rules must not be copied into new infrastructure. Migrate each
-cluster separately, with downstream projection checks and warning comparison,
-before extending it. The implication cluster was migrated immediately because
-its direct mixed owner already existed and the focused replacement passed.
+cluster separately when needed, with downstream projection checks and warning
+comparison, before extending it. Here “migrate” begins with reassessment: a
+rule may be retained when it is an intentional projection/normal-form bridge
+or genuine cut rather than a redundant generic law. In particular,
+`Op_func(F o G) -> Op_func(F) o Op_func(G)` is not the ordinary arrow-level
+functoriality of `Op_func(F)`. It exposes how the higher opposite operation
+maps composition of functors, expanding the arrow projection of `op` to the
+chosen composed-functor normal form. Treat it as an intentional bridge unless
+a focused audit of its reduction orientation, generic `op` owner, and duality
+consumers finds a concrete conflict. The implication cluster was migrated
+immediately because its direct mixed owner already existed and the focused
+replacement passed.
+
+These migrations are tracked by stable IDs in the representability redesign
+report's `Deferred Internalization Side-Task Ledger`: `INT-COMP`, `INT-OP`,
+`INT-PROF-FUNC`, `INT-OP-PROF`, and `INT-EQUIP-COMP`. They are demand-driven
+side tasks, not current blockers. The immediate direct eval/lambda naturality
+slice resumes `INT-COMP` only if its focused probe requires a new local law;
+general co-Yoneda/join, duality/univalence, extended profunctor duality, and
+bicategory/equipment coherence respectively trigger the other clusters. A
+trigger requires an internalized-owner probe before any new constructor-local
+functor law is added.
 
 The weighted-limit public API has completed its representability cutover.
 `WeightedLimit_cov(F,W,L)` is a transparent compatibility name for

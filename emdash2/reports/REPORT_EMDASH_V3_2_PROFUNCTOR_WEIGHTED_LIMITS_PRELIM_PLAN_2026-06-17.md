@@ -3866,3 +3866,37 @@ The most natural independent next slices are:
 5. Investigate semantic end/coend comparison layers without replacing the
    stable public calculus until termination and computation are demonstrated.
 ```
+
+### Triggered Internalization Side Tasks
+
+The 2026-06-22 generic-owner audit found several legacy clusters with local
+identity/composition laws. They are not blockers for the sequence above and
+must not be expanded by copying more constructor-specific functor laws. The
+authoritative migration ledger, including expected owners and completion
+criteria, is `Deferred Internalization Side-Task Ledger` in
+`REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
+
+Resume the corresponding side task at these points:
+
+```text
+INT-COMP       direct eval/lambda or full-naturality work needs another
+               comp_cat_cov_transf/comp_cat_con_transf law;
+INT-OP         new duality or univalence work needs another Op_func,
+               Op_transf, or Op_funcd law;
+INT-PROF-FUNC  generalized co-Yoneda or join/collage work needs broader
+               Prof_func_transf computation;
+INT-OP-PROF    extended cell duality or semantic Op_prof pullback comparison
+               needs broader Op_prof_transf computation;
+INT-EQUIP-COMP bicategory/equipment coherence or tensor associativity needs
+               broader Prof_comp_transf laws.
+```
+
+A trigger means “run the focused internalization probe before adding the new
+local law,” not “perform the migration regardless of the consumer” and not
+“remove every existing specialized rule.” The audit may retain a rule that is
+shown to be an intentional projection/normal-form bridge, as may be the case
+for the rule exposing how the higher opposite operation maps a composite
+functor. That rule is distinct from the ordinary arrow-level functoriality of
+each `Op_func(F)`. Direct Došen-style beta/eta and cut-elimination rules remain
+valid when they express closed or equipment structure beyond ordinary generic
+functoriality.

@@ -31,7 +31,8 @@ decisions.
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`:
   proposed representability- and isomorphism-based redesign of the profunctor
   calculus, motivated by the current right-adjoint weighted-limit preservation
-  architecture.
+  architecture; also owns the trigger-based deferred-internalization side-task
+  ledger.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
