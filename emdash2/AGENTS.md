@@ -73,7 +73,10 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   diagnostic evidence for locating overlap families; they are not an automatic
   veto on a semantically necessary rewrite/unification rule. Use them to find
   missing joins, better placement, or follow-up rules, and document any
-  remaining overlap families.
+  remaining overlap families. Do not weaken a semantically intended runtime
+  normal form into a proof-time `unif_rule` merely to reduce the warning
+  count; make that change only when proof-time identification is actually the
+  intended semantics.
 - Use `_` for reconstructible compound terms in inferred LHS slots after a
   focused probe confirms the rule still checks promptly. If a compound slot
   is an actual constructor discriminator or a measured subject-reduction /
@@ -103,7 +106,9 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   whose other side is a bare pattern variable. Prefer two rigid heads or a
   stable intermediary. Compare warning-enabled full-file results to classify
   consequences, even though unification rules do not participate in rewrite
-  critical pairs; do not treat the warning count itself as a gate.
+  critical pairs; do not treat the warning count itself as a gate. A lower
+  warning count from a proof-time variant is not by itself evidence that the
+  proof-time variant is the correct architecture.
 - A `constant` symbol cannot head a rewrite LHS. Changing it to `injective` is
   permitted only as an explicit kernel normal-form migration: probe all
   downstream consumers, subject reduction, and the warning inventory first.

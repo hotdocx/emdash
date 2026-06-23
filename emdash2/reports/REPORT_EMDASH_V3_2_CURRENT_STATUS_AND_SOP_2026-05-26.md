@@ -248,8 +248,9 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory is now 1,115: 952 unjoinable critical-pair
-reports and 163 replaceable-pattern reports. The runtime
+The active warning inventory after the first groupoid-univalence Phase 1 slice
+is now 1,121: 958 unjoinable critical-pair reports and 163
+replaceable-pattern reports. The runtime
 `comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
 the 1,108 post-product-map-reindex inventory; the classified families include
 constant, opposite, Sigma-projection, identity, and higher profunctor-duality
@@ -258,12 +259,19 @@ further diagnostic critical-pair report, but fixes the normal form for bare
 `Pullback_catd(R,Product_map_func(F,G))` syntax. The broader global
 composition-to-pullback folds produced 1,129 warnings and remain rejected
 because they rewrite unrelated Cat-valued composition. The proof-time product
-identity comparisons and their typed `eq_refl` checks preserve the current
-inventory. Every future extension at these stable-head boundaries should
-compare warning-enabled full-file results to classify overlap families, not to
-use the count itself as a veto. Warning reports are diagnostic evidence for
-finding missing joins, better placement, or follow-up rules; they do not by
-themselves block a semantically necessary rewrite/unification rule.
+identity comparisons and their typed `eq_refl` checks preserve that slice's
+inventory. The 2026-06-24 `Core_incl_func` path-to-arrow promotion adds six
+classified diagnostic reports at the expected stable-projection boundary for
+the semantically intended runtime object action
+`Core_incl_func(C)[x] -> x`. Every future extension at these stable-head
+boundaries should compare warning-enabled full-file results to classify
+overlap families, not to use the count itself as a veto. Warning reports are
+diagnostic evidence for finding missing joins, better placement, or follow-up
+rules; they do not by themselves block a semantically necessary
+rewrite/unification rule. In particular, do not replace a wanted runtime
+normal form by proof-time unification merely to improve the warning count; use
+proof-time unification only when proof-time identification is the intended
+semantics.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
@@ -1064,7 +1072,9 @@ probe did not report.
 Separate runtime conversion from proof-time unification. A rewrite rule
 chooses a computational normal form and participates in critical pairs. A
 `unif_rule` only helps solve an otherwise stuck elaboration/unification
-problem. Validate the latter with a typed reflexive proof:
+problem. A proof-time variant can be a useful diagnostic, but a smaller warning
+inventory is not by itself a reason to demote a semantically intended rewrite
+rule. Validate the latter with a typed reflexive proof:
 
 ```text
 eq_refl(t) : τ(t = u)
