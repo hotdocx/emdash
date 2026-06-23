@@ -55,8 +55,9 @@
          ordinary functor hom-action, section pullback, and internal Pi action.
 
     18. Cat-valued profunctors
-         Profunctor base/category aliases, representable hom profunctors, and
-         their mixed-variance base-arrow action.
+         Profunctor base/category aliases, representable hom profunctors,
+         tensor/implication, comparison and weighted-limit machinery, duality,
+         join stress tests, and late cross-section normalization bridges.
 
     19. Applications
          PathOut, fixed-source and telescope path induction, Sigma-total path
@@ -10046,6 +10047,109 @@ rule @Prof_comp_transf
       $cross
       (@Prof_terminal_hom $I $A $B $a $b);
 
+// -------------------------------------------------------------------------------------------------
+// 18z. Late cross-section normalization bridges
+// -------------------------------------------------------------------------------------------------
+
+// These cuts intentionally live at the end of the profunctor section, after the
+// product, pullback, profunctor, implication, adjunction, duality, weighted
+// limit, and join systems they join. They are executable rules, so they must
+// appear before the comment-only check catalog below, but they are not part of
+// the section-19 applications.
+
+// There is deliberately no whole-constructor
+// `Product_map_func(id,id) -> id_func(Product_cat ...)` rule: for an arbitrary
+// opaque product object that would require the rejected broad product eta law.
+
+// Runtime accumulation of Cat-valued pullback through outer composition.
+rule @comp_cat_fapp0
+      $A
+      $B
+      Cat_cat
+      (@Pullback_catd $B $C $E $F)
+      $H
+  ↪ @Pullback_catd
+      $A
+      $C
+      $E
+      (@comp_cat_fapp0 $A $B $C $F $H);
+
+rule @comp_cat_fapp0
+      _
+      _
+      _
+      (@Product_map_func $A1 $A2 $B1 $B2 $F12 $G12)
+      (@Product_map_func $A0 $A1 $B0 $B1 $F01 $G01)
+  ↪ @Product_map_func
+      $A0 $A2 $B0 $B2
+      (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
+      (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01);
+
+/*
+  Product-map identity comparisons.
+
+  Rewriting Product_map_func(id,id) to either id_func or the projection pair
+  creates competing object and hom-action normal forms. At proof/elaboration
+  time, however, both comparisons are useful and coherent. The stable
+  Product_map_func head acts as the rigid intermediary because Lambdapi's
+  unifier does not chain a direct id_func-versus-Struct_sigma eta rule.
+*/
+unif_rule
+  @Product_map_func
+    $A $A $B $B
+    (@id_func $A)
+    (@id_func $B)
+  ≡ @Struct_sigma
+      (Obj (Functor_cat (Product_cat $A $B) $A))
+      (λ _ : τ (Obj (Functor_cat (Product_cat $A $B) $A)),
+        Obj (Functor_cat (Product_cat $A $B) $B))
+      (@Product_projL_func $A $B)
+      (@Product_projR_func $A $B)
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @id_func (Product_cat $A $B)
+  ≡ @Product_map_func
+      $A $A $B $B
+      (@id_func $A)
+      (@id_func $B)
+  ↪ [ tt ≡ tt ];
+
+/*
+  Generic product-map pullback as profunctor reindexing.
+
+  Here F is an arbitrary functor A -> A'. Pulling a Cat-valued family on
+  A' x B' back along Product_map_func(F,G) is the same object as reindexing
+  the corresponding profunctor from Op(A') to B' along Op_func(F) and G.
+  The object-level and functor-level folds share that normal form.
+*/
+// lhs-audit: keep 1,2 -- product source/target guard the product-map base
+rule @Pullback_catd
+      (Product_cat $A $B)
+      (Product_cat $A' $B')
+      $R
+      (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex
+      (Op_cat $A')
+      (Op_cat $A)
+      $B'
+      $B
+      $R
+      (@Op_func $A $A' $F)
+      $G;
+
+rule @Pullback_catd_func
+      _
+      _
+      (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex_func
+      (Op_cat $A')
+      (Op_cat $A)
+      $B'
+      $B
+      (@Op_func $A $A' $F)
+      $G;
+
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity
@@ -10952,101 +11056,6 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 // A Sigma map does not preserve canonical transport strictly for arbitrary
 // displayed functors. The image exposes the displayed laxity component;
 // strict/cartesian preservation is a later specialization.
-
-// Late constructor cuts can use the complete product, pullback, profunctor,
-// implication, and adjunction normalization systems above. There is
-// deliberately no whole-constructor
-// `Product_map_func(id,id) -> id_func(Product_cat ...)` rule: for an arbitrary
-// opaque product object that would require the rejected broad product eta law.
-
-// Runtime accumulation of Cat-valued pullback through outer composition.
-rule @comp_cat_fapp0
-      $A
-      $B
-      Cat_cat
-      (@Pullback_catd $B $C $E $F)
-      $H
-  ↪ @Pullback_catd
-      $A
-      $C
-      $E
-      (@comp_cat_fapp0 $A $B $C $F $H);
-
-rule @comp_cat_fapp0
-      _
-      _
-      _
-      (@Product_map_func $A1 $A2 $B1 $B2 $F12 $G12)
-      (@Product_map_func $A0 $A1 $B0 $B1 $F01 $G01)
-  ↪ @Product_map_func
-      $A0 $A2 $B0 $B2
-      (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
-      (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01);
-
-/*
-  Product-map identity comparisons.
-
-  Rewriting Product_map_func(id,id) to either id_func or the projection pair
-  creates competing object and hom-action normal forms. At proof/elaboration
-  time, however, both comparisons are useful and coherent. The stable
-  Product_map_func head acts as the rigid intermediary because Lambdapi's
-  unifier does not chain a direct id_func-versus-Struct_sigma eta rule.
-*/
-unif_rule
-  @Product_map_func
-    $A $A $B $B
-    (@id_func $A)
-    (@id_func $B)
-  ≡ @Struct_sigma
-      (Obj (Functor_cat (Product_cat $A $B) $A))
-      (λ _ : τ (Obj (Functor_cat (Product_cat $A $B) $A)),
-        Obj (Functor_cat (Product_cat $A $B) $B))
-      (@Product_projL_func $A $B)
-      (@Product_projR_func $A $B)
-  ↪ [ tt ≡ tt ];
-
-unif_rule
-  @id_func (Product_cat $A $B)
-  ≡ @Product_map_func
-      $A $A $B $B
-      (@id_func $A)
-      (@id_func $B)
-  ↪ [ tt ≡ tt ];
-
-/*
-  Generic product-map pullback as profunctor reindexing.
-
-  Here F is an arbitrary functor A -> A'. Pulling a Cat-valued family on
-  A' x B' back along Product_map_func(F,G) is the same object as reindexing
-  the corresponding profunctor from Op(A') to B' along Op_func(F) and G.
-  The object-level and functor-level folds share that normal form.
-*/
-// lhs-audit: keep 1,2 -- product source/target guard the product-map base
-rule @Pullback_catd
-      (Product_cat $A $B)
-      (Product_cat $A' $B')
-      $R
-      (@Product_map_func $A $A' $B $B' $F $G)
-  ↪ @Prof_reindex
-      (Op_cat $A')
-      (Op_cat $A)
-      $B'
-      $B
-      $R
-      (@Op_func $A $A' $F)
-      $G;
-
-rule @Pullback_catd_func
-      _
-      _
-      (@Product_map_func $A $A' $B $B' $F $G)
-  ↪ @Prof_reindex_func
-      (Op_cat $A')
-      (Op_cat $A)
-      $B'
-      $B
-      (@Op_func $A $A' $F)
-      $G;
 
 /*
   Section-dependent-hom composition normal forms.
