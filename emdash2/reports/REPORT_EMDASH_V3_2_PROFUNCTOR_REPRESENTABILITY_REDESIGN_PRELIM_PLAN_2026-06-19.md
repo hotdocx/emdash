@@ -34,6 +34,13 @@ have been removed. The stable pullback/reindex redesign has also landed in a
 bounded form; the final implementation result at the end of this report
 supersedes the broader provisional folds proposed below.
 
+The independent groupoid/computational-univalence track is now owned by
+`REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`.
+Its decisions supersede the provisional `TypeEquiv`, `OmegaEquiv`,
+`CatUnivalence`, path-view, and generic `HomComparison` proposals retained
+below as historical motivation. This report remains authoritative for the
+completed `ProfComparison` and weighted-limit migration.
+
 ## Retrospective Vertical-Core Assessment, 2026-06-23
 
 The following assessment is copied verbatim from the implementation review

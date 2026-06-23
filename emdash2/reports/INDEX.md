@@ -36,6 +36,11 @@ decisions.
   calculus, motivated by the current right-adjoint weighted-limit preservation
   architecture; also owns the trigger-based deferred-internalization side-task
   ledger.
+- `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
+  active architecture and staged implementation plan for observational
+  groupoid paths, type equivalence, computational univalence,
+  omega-categorical equivalence, explicit categorical-univalence capability,
+  Yoneda internalization, and generic `HomComparison`.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
