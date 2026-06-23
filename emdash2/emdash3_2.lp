@@ -3972,6 +3972,9 @@ rule @fapp0 _ _
   These unification rules let reflexive equality proofs and elaboration move
   between the generic composition presentation and the stable pullback heads
   without orienting every Cat-valued composition through Pullback_catd.
+  The special outer-composition accumulation for an already-stable
+  `Pullback_catd` head is a runtime cut below, after the pullback
+  specializations have been declared.
 */
 unif_rule
   @comp_cat_fapp0 $A $B Cat_cat $E $F
@@ -3981,16 +3984,6 @@ unif_rule
 unif_rule
   @comp_cat_con_func $A $B Cat_cat $F
   ≡ @Pullback_catd_func $A $B $F
-  ↪ [ tt ≡ tt ];
-
-unif_rule
-  @comp_cat_fapp0
-    $A $B Cat_cat
-    (@Pullback_catd $B $C $E $F)
-    $H
-  ≡ @Pullback_catd
-      $A $C $E
-      (@comp_cat_fapp0 $A $B $C $F $H)
   ↪ [ tt ≡ tt ];
 
 // Arrow action of the internalized Catd constructor. `Catd_cat_func` is a
@@ -10965,6 +10958,20 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 // deliberately no whole-constructor
 // `Product_map_func(id,id) -> id_func(Product_cat ...)` rule: for an arbitrary
 // opaque product object that would require the rejected broad product eta law.
+
+// Runtime accumulation of Cat-valued pullback through outer composition.
+rule @comp_cat_fapp0
+      $A
+      $B
+      Cat_cat
+      (@Pullback_catd $B $C $E $F)
+      $H
+  ↪ @Pullback_catd
+      $A
+      $C
+      $E
+      (@comp_cat_fapp0 $A $B $C $F $H);
+
 rule @comp_cat_fapp0
       _
       _

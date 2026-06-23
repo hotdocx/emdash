@@ -68,9 +68,12 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   also be valid. A new commuting conversion is exceptional: probe both
   reduction orders, install it at the intended owning position in a temporary
   full-file copy, classify any warning-enabled delta, and promote it only when
-  the paths join and a concrete consumer needs judgmental computation. Warning
-  counts are diagnostic evidence for locating overlap families, not an
-  automatic veto on a semantically necessary rule.
+  the rule is semantically intended or a concrete consumer needs judgmental
+  computation. Warning counts and nonjoinable-critical-pair reports are
+  diagnostic evidence for locating overlap families; they are not an automatic
+  veto on a semantically necessary rewrite/unification rule. Use them to find
+  missing joins, better placement, or follow-up rules, and document any
+  remaining overlap families.
 - Use `_` for reconstructible compound terms in inferred LHS slots after a
   focused probe confirms the rule still checks promptly. If a compound slot
   is an actual constructor discriminator or a measured subject-reduction /
@@ -98,8 +101,9 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
 - Unification rules are experimental, are not automatically transitive, and
   do not reliably solve a pattern whose only rigid side is a constructor and
   whose other side is a bare pattern variable. Prefer two rigid heads or a
-  stable intermediary. Compare warning-enabled full-file results even though
-  unification rules do not participate in rewrite critical pairs.
+  stable intermediary. Compare warning-enabled full-file results to classify
+  consequences, even though unification rules do not participate in rewrite
+  critical pairs; do not treat the warning count itself as a gate.
 - A `constant` symbol cannot head a rewrite LHS. Changing it to `injective` is
   permitted only as an explicit kernel normal-form migration: probe all
   downstream consumers, subject reduction, and the warning inventory first.

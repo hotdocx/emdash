@@ -2737,6 +2737,26 @@ assert [A B C : Cat]
         A C E
         (@comp_cat_fapp0 A B C F H));
 
+assert [A B C : Cat]
+  (E : τ (Catd C))
+  (F : τ (Functor B C))
+  (H : τ (Functor A B))
+  (a : τ (Obj A)) ⊢
+  @fapp0 A Cat_cat
+    (@comp_cat_fapp0
+      A B Cat_cat
+      (@Pullback_catd B C E F)
+      H)
+    a
+  ≡ @Fibre_cat
+      C
+      E
+      (@fapp0
+        A
+        C
+        (@comp_cat_fapp0 A B C F H)
+        a);
+
 assert [A B : Cat]
   (E : τ (Catd B))
   (F : τ (Functor A B))

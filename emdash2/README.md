@@ -148,9 +148,11 @@ manual classification and warning-enabled owning-position validation.
   intermediate projection head, or a functor/composition equation. Add a new
   commuting conversion only for a concrete computational consumer and only
   after both reduction orders join in a warning-enabled full-file probe at the
-  rule's owning declaration position. Treat warning counts as diagnostics for
-  classifying concrete overlap families, not as an automatic veto on a
-  semantically necessary rule.
+  rule's owning declaration position when possible. Treat warning counts and
+  nonjoinable-critical-pair reports as diagnostics for classifying concrete
+  overlap families, not as an automatic veto on a semantically necessary rule.
+  Use them to discover missing joins, better placement, or follow-up rules,
+  and document any remaining overlap families.
 - If a new rewrite or unification rule causes a timeout, use a warning-enabled
   run to locate the existing interacting rule. Audit that rule's inferred
   argument slots before concluding the new rule is too broad; explicit
@@ -167,6 +169,8 @@ manual classification and warning-enabled owning-position validation.
   rule with a typed `eq_refl` check; an ordinary conversion assertion does not
   invoke it. Unification rules are not automatically transitive, so use rigid
   heads or a stable intermediary instead of a bare-variable eta pattern.
+  Warning-enabled comparisons are for consequence classification; the warning
+  count itself is not a pass/fail gate.
 - When a functor-level runtime rule computes the desired object-level result
   after applying `fapp0` or another generic projection, keep the functor as the
   owner. Do not add a parallel object-level rewrite or unification rule for the

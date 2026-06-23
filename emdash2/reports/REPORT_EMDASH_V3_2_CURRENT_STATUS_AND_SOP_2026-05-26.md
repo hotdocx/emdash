@@ -122,10 +122,12 @@ pullback cuts, and focused constant/opposite/Sigma-projection collapses are
 active. Broad global folds from every `comp_cat_fapp0(E,F)` or
 `comp_cat_con_func(F)` were rejected because they affected unrelated
 Cat-valued Došen cuts and increased non-joinable overlaps. The corresponding
-proof-time unification rules are active, including the accumulated comparison
-between `comp(Pullback(E,F),H)` and `Pullback(E,F o H)`. Thus `eq_refl`
-can witness the semantic comparisons without globally rewriting Cat-valued
-composition.
+proof-time unification rules remain active for the broad
+`comp_cat_fapp0(E,F)` and `comp_cat_con_func(F)` comparisons. The special
+accumulated comparison between `comp(Pullback(E,F),H)` and
+`Pullback(E,F o H)` is now a runtime rewrite, installed late after the
+pullback specializations so it participates as a focused Došen cut rather
+than as a global composition-to-pullback fold.
 
 `Prof_reindex(R,F,G)` is the stable profunctor reindexing normal form, and its
 object/full/capped projection rules now route through the generic base map
@@ -236,19 +238,20 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory is now 1,108: 945 unjoinable critical-pair
-reports and 163 replaceable-pattern reports. The 37-report increase over the
-1,071-warning baseline belongs to the bounded pullback and product-map
-projection ladders; demoting `Prof_reindex_base_func` removed its separate
-projection-overlap contribution. The fixed-endpoint closed-core migration
-itself did not increase that bounded probe total. The broader global
-composition-to-pullback folds produced 1,129 warnings and were rejected. The
-proof-time product identity comparisons and their typed `eq_refl` checks
-preserve the current inventory. Every future extension at these stable-head
-boundaries must therefore compare warning-enabled full-file results, not
-merely pass beta/eta assertions. Warning counts remain diagnostic evidence for
-classifying concrete overlap families; they are not by themselves a veto on a
-semantically necessary rule.
+The active warning inventory is now 1,114: 951 unjoinable critical-pair
+reports and 163 replaceable-pattern reports. The runtime
+`comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
+the 1,108 post-product-map-reindex inventory; the classified families include
+constant, opposite, Sigma-projection, identity, and higher profunctor-duality
+interactions. The broader global composition-to-pullback folds produced 1,129
+warnings and remain rejected because they rewrite unrelated Cat-valued
+composition. The proof-time product identity comparisons and their typed
+`eq_refl` checks preserve the current inventory. Every future extension at
+these stable-head boundaries should compare warning-enabled full-file results
+to classify overlap families, not to use the count itself as a veto. Warning
+reports are diagnostic evidence for finding missing joins, better placement,
+or follow-up rules; they do not by themselves block a semantically necessary
+rewrite/unification rule.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing

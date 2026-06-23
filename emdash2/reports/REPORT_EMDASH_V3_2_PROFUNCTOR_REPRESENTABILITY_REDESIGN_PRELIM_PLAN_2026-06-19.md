@@ -3324,22 +3324,31 @@ Pullback_catd(Pullback_catd(E,F),H) -> Pullback_catd(E,F o H)
 
 Object, full-hom, and capped-arrow projections are active. Focused collapses
 for constant, opposite, and Sigma-projection families join the existing
-normal forms. No global composition-to-pullback rewrite fold is installed.
+normal forms. No broad global composition-to-pullback rewrite fold is
+installed.
 
-Post-review probes found that the same semantic comparisons are coherent as
+Post-review probes found that the broad semantic comparisons are coherent as
 proof-time unification rules:
 
 ```text
 comp_cat_fapp0(E,F) == Pullback_catd(E,F)
 comp_cat_con_func(F) == Pullback_catd_func(F)
-comp_cat_fapp0(Pullback_catd(E,F),H)
-  == Pullback_catd(E,F o H).
 ```
 
-Typed `eq_refl` regressions exercise all three rules. They preserved the
-then-current 1,114-warning inventory while avoiding the global runtime
-orientation that caused the 1,129-warning probe. After the later product-map
-reindex migration, the active warning inventory is 1,108.
+The special accumulated cut is now runtime:
+
+```text
+comp_cat_fapp0(Pullback_catd(E,F),H)
+  -> Pullback_catd(E,F o H).
+```
+
+It is installed late, after the pullback specializations, not beside the broad
+proof-time comparisons. Typed regressions exercise both the direct equality
+and the fibre projection. Warning-enabled probing classified six additional
+critical-pair reports for this focused runtime cut, mainly constant,
+opposite, Sigma-projection, identity, and higher profunctor-duality
+interactions. Those warnings are follow-up evidence, not a veto on the
+semantic normal form.
 
 ### Product And Profunctor Base Maps
 
@@ -3444,21 +3453,25 @@ required naturality variables and canonical normal form.
 ### Validation And Remaining Work
 
 The bounded implementation leaves the full active kernel and diagnostics
-typechecking. The warning-enabled inventory after the product-map reindex
-migration is 1,108 reports: 945 unjoinable-critical-pair reports and 163
-replaceable-pattern reports. This is 37 above the previous 1,071 baseline and
-belongs to the remaining stable pullback and product-map projection ladders.
-Demoting `Prof_reindex_base_func` from primitive stable head to transparent
-alias removed its separate projection-overlap contribution. The vertical
-closed-core migration added no further warnings in the focused comparison.
+typechecking. The warning-enabled inventory after the runtime pullback
+accumulation and product-map reindex migration is 1,114 reports: 951
+unjoinable-critical-pair reports and 163 replaceable-pattern reports. This is
+43 above the previous 1,071 baseline and belongs to the remaining stable
+pullback and product-map projection ladders. Demoting
+`Prof_reindex_base_func` from primitive stable head to transparent alias
+removed its separate projection-overlap contribution; promoting
+`comp(Pullback(E,F),H) -> Pullback(E,F o H)` added six classified diagnostic
+overlaps. The vertical closed-core migration added no further warnings in the
+focused comparison.
 
 Warning deltas are diagnostic, not a mechanical acceptance or rejection
 criterion. They should be used to identify concrete overlap families and then
-assessed against the intended normal form. In this slice the generic
-`Pullback_catd_func(Product_map_func(F,G))` fold is semantically the right
-runtime normal form; the redundant object-level comparison was not promoted
-because the functor-level fold already gives the required computation by
-projection.
+assessed against the intended normal form. In this slice both the accumulated
+pullback cut and the generic
+`Pullback_catd_func(Product_map_func(F,G))` fold are semantically the right
+runtime normal forms. The redundant object-level
+`Pullback_catd(Product_map_func(F,G))` comparison was not promoted because the
+functor-level fold already gives the required computation by projection.
 
 The redesign remains feasible. The weighted-limit, comparison, adjunction,
 duality, weighted-colimit, and join sections all continue to typecheck through
