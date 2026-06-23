@@ -3254,26 +3254,74 @@ symbol Product_mapL_func_func [A A' B : Cat]
 //   Product_map_func(F,G)[(a,b)] = (F[a],G[b])
 //   Product_map_func(F,G)[(p,q)] = (F[p],G[q]).
 //
-// This remains the semantic pair of projected composites. It is named because
-// profunctor reindexing and later op-duality use the same two-sided map, but it
-// is not an independent primitive stable-head theory.
-symbol Product_map_func [A A' B B' : Cat]
+// Stable two-sided product-map constructor. Its projections retain the
+// componentwise semantics without unfolding to a pair of composite functors.
+injective symbol Product_map_func [A A' B B' : Cat]
   (F : τ (Functor A A'))
   (G : τ (Functor B B'))
-  : τ (Functor (Product_cat A B) (Product_cat A' B'))
-≔ Struct_sigma
-    (@comp_cat_fapp0
-      (Product_cat A B)
-      A
-      A'
-      F
-      (@Product_projL_func A B))
-    (@comp_cat_fapp0
-      (Product_cat A B)
-      B
-      B'
-      G
-      (@Product_projR_func A B));
+  : τ (Functor (Product_cat A B) (Product_cat A' B'));
+
+rule sigma_Fst (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @comp_cat_fapp0
+      (Product_cat $A $B)
+      $A
+      $A'
+      $F
+      (@Product_projL_func $A $B);
+
+rule sigma_Snd (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @comp_cat_fapp0
+      (Product_cat $A $B)
+      $B
+      $B'
+      $G
+      (@Product_projR_func $A $B);
+
+rule @fapp0 _ _
+      (@Product_map_func $A $A' $B $B' $F $G)
+      $ab
+  ↪ @Product_pair
+      $A'
+      $B'
+      (@fapp0 $A $A' $F (sigma_Fst $ab))
+      (@fapp0 $B $B' $G (sigma_Snd $ab));
+
+rule @fapp1_func _ _
+      (@Product_map_func $A $A' $B $B' $F $G)
+      $ab
+      $ab'
+  ↪ @Product_map_func
+      (Hom_cat $A (sigma_Fst $ab) (sigma_Fst $ab'))
+      (Hom_cat $A'
+        (@fapp0 $A $A' $F (sigma_Fst $ab))
+        (@fapp0 $A $A' $F (sigma_Fst $ab')))
+      (Hom_cat $B (sigma_Snd $ab) (sigma_Snd $ab'))
+      (Hom_cat $B'
+        (@fapp0 $B $B' $G (sigma_Snd $ab))
+        (@fapp0 $B $B' $G (sigma_Snd $ab')))
+      (@fapp1_func $A $A' $F (sigma_Fst $ab) (sigma_Fst $ab'))
+      (@fapp1_func $B $B' $G (sigma_Snd $ab) (sigma_Snd $ab'));
+
+rule @fapp1_fapp0 _ _
+      (@Product_map_func $A $A' $B $B' $F $G)
+      $ab
+      $ab'
+      $pq
+  ↪ @Product_pair
+      (Hom_cat $A'
+        (@fapp0 $A $A' $F (sigma_Fst $ab))
+        (@fapp0 $A $A' $F (sigma_Fst $ab')))
+      (Hom_cat $B'
+        (@fapp0 $B $B' $G (sigma_Snd $ab))
+        (@fapp0 $B $B' $G (sigma_Snd $ab')))
+      (@fapp1_fapp0
+        $A $A' $F
+        (sigma_Fst $ab) (sigma_Fst $ab')
+        (sigma_Fst $pq))
+      (@fapp1_fapp0
+        $B $B' $G
+        (sigma_Snd $ab) (sigma_Snd $ab')
+        (sigma_Snd $pq));
 
 /*
   Product evaluation: apply a functor to an object.
@@ -3837,14 +3885,22 @@ rule @tapp0_fapp0
 symbol Fibre_cat [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) : Cat
 ≔ @fapp0 K Cat_cat E k;
 
-// Fixed-base notation: reindex a displayed Cat-valued family along a functor.
+// Fixed-base reindexing of a displayed Cat-valued family along a functor.
 //
 // Surface/formula:
 //   F^*E : A ⊢ Cat
 //   (F^*E)[a] = E[F[a]]
-symbol Pullback_catd [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B))
-  : τ (Catd A)
-≔ @comp_cat_fapp0 A B Cat_cat E F;
+//
+// This is the canonical Cat-valued precomposition head. A deliberately broad
+// fold from every `comp_cat_fapp0(E,F)` was rejected: it interferes with
+// unrelated Došen cuts whose codomain can instantiate to `Cat_cat`.
+injective symbol Pullback_catd [A B : Cat]
+  (E : τ (Catd B))
+  (F : τ (Functor A B))
+  : τ (Catd A);
+
+rule @fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a
+  ↪ @fapp0 $B Cat_cat $E (@fapp0 $A $B $F $a);
 
 // Internalized-x prerequisite: generic base-arrow transport for displayed
 // Cat-valued families.
@@ -3886,9 +3942,10 @@ rule fapp0
 //   Pullback_catd_func(F) : (B ⊢ Cat) ⊢ (A ⊢ Cat)
 //   Pullback_catd_func(F)[E] = F^*E
 //
-// The general `Pullback_catd` remains a composition definition; this package
-// is the stable functor-level action needed by internalized base-varying
-// constructors such as Pi.
+// This is the functor-level owner whose object projection is the stable
+// `Pullback_catd` head. The existing `Catd_cat_func` arrow projection is the
+// bounded semantic-to-stable bridge; no global `comp_cat_con_func` fold is
+// installed.
 injective symbol Pullback_catd_func [A B : Cat]
   (F : τ (Functor A B))
   : τ (Functor (Catd_cat B) (Catd_cat A));
@@ -3946,6 +4003,10 @@ injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
 rule @comp_cat_fapp0 $A $B Cat_cat (@Const_catd $B $C) $F
   ↪ @Const_catd $A $C;
+rule @Pullback_catd $A $B (@Const_catd $B $C) $F
+  ↪ @Const_catd $A $C;
+rule @Pullback_catd $A $B $E (@Const_func $A $B $b)
+  ↪ @Const_catd $A (@fapp0 $B Cat_cat $E $b);
 rule @hom_ $A $B (@Const_func $B $A $u) $w
   ↪ @Const_catd $B (Hom_cat $A $w $u);
 
@@ -3974,6 +4035,8 @@ rule @fapp0 _ _ (@Op_catd_func $K) $E
   ↪ @Op_catd $K $E;
 
 rule @comp_cat_fapp0 $K Cat_cat Cat_cat op $E
+  ↪ @Op_catd $K $E;
+rule @Pullback_catd $K Cat_cat op $E
   ↪ @Op_catd $K $E;
 
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
@@ -4098,7 +4161,7 @@ rule @tapp0_fapp0
 injective symbol Pi_pullback_funcd [K : Cat]
   (G : τ (Functor K (Op_cat Cat_cat)))
   : τ (Functord
-      (@comp_cat_fapp0 K (Op_cat Cat_cat) Cat_cat Catd_cat_func G)
+      (@Pullback_catd K (Op_cat Cat_cat) Catd_cat_func G)
       (@Const_catd K Cat_cat));
 
 rule @fapp1_fapp0
@@ -4365,6 +4428,13 @@ rule @comp_cat_fapp0
       _
       $K
       Cat_cat
+      $D
+      (@Sigma_proj1_func $K $R)
+  ↪ @Sigma_proj1_pullback_catd $K $R $D;
+
+rule @Pullback_catd
+      _
+      $K
       $D
       (@Sigma_proj1_func $K $R)
   ↪ @Sigma_proj1_pullback_catd $K $R $D;
@@ -6572,6 +6642,47 @@ rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
         (@fapp0 $A $B $G $y))
       (@fapp1_func $A $B $G $x $y);
 
+// Stable pullback cut elimination and arrow projections. These are placed
+// after the generic identity/composition action so competing paths can use
+// those global rules while Lambdapi checks local confluence.
+rule @Pullback_catd $A $A $E (@id_func $A) ↪ $E;
+rule @Pullback_catd $A Cat_cat (@id_func Cat_cat) $F ↪ $F;
+
+rule @Pullback_catd
+      $A $B
+      (@Pullback_catd $B $C $E $F)
+      $H
+  ↪ @Pullback_catd
+      $A $C
+      $E
+      (@comp_cat_fapp0 $A $B $C $F $H);
+
+rule @fapp1_func _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a'
+  ↪ @comp_cat_fapp0
+      (Hom_cat $A $a $a')
+      (Hom_cat $B
+        (@fapp0 $A $B $F $a)
+        (@fapp0 $A $B $F $a'))
+      (Functor_cat
+        (@fapp0 $B Cat_cat $E (@fapp0 $A $B $F $a))
+        (@fapp0 $B Cat_cat $E (@fapp0 $A $B $F $a')))
+      (@fapp1_func
+        $B
+        Cat_cat
+        $E
+        (@fapp0 $A $B $F $a)
+        (@fapp0 $A $B $F $a'))
+      (@fapp1_func $A $B $F $a $a');
+
+rule @fapp1_fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a' $p
+  ↪ @fapp1_fapp0
+      $B
+      Cat_cat
+      $E
+      (@fapp0 $A $B $F $a)
+      (@fapp0 $A $B $F $a')
+      (@fapp1_fapp0 $A $B $F $a $a' $p);
+
 // Semantic curry sanity checks. These live after `Product_pair_tele_func`
 // computation rules, because the primary curry package is a definition through
 // that telescope rather than a primitive object-action rewrite rule.
@@ -6693,6 +6804,78 @@ symbol Prof_cat (A B : Cat) : Cat
 symbol Prof (A B : Cat) : Grpd
 ≔ Obj (Prof_cat A B);
 
+// Stable endpoint-base map for profunctor reindexing.
+//
+// Semantically:
+//   Prof_reindex_base_func(F,G) = Product_map_func(Op_func(F),G).
+//
+// Baking in F and G avoids rewrite LHSs that discriminate through the
+// reducible nested head `Op_func(F)`.
+injective symbol Prof_reindex_base_func [A A' B B' : Cat]
+  (F : τ (Functor A' A))
+  (G : τ (Functor B' B))
+  : τ (Functor
+      (Product_cat (Op_cat A') B')
+      (Product_cat (Op_cat A) B));
+
+rule @fapp0 _ _
+      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+      $ab
+  ↪ @Product_pair
+      (Op_cat $A)
+      $B
+      (@fapp0 $A' $A $F (sigma_Fst $ab))
+      (@fapp0 $B' $B $G (sigma_Snd $ab));
+
+rule @fapp1_func _ _
+      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+      $ab
+      $ab'
+  ↪ @Product_map_func
+      (Hom_cat (Op_cat $A') (sigma_Fst $ab) (sigma_Fst $ab'))
+      (Hom_cat (Op_cat $A)
+        (@fapp0 $A' $A $F (sigma_Fst $ab))
+        (@fapp0 $A' $A $F (sigma_Fst $ab')))
+      (Hom_cat $B' (sigma_Snd $ab) (sigma_Snd $ab'))
+      (Hom_cat $B
+        (@fapp0 $B' $B $G (sigma_Snd $ab))
+        (@fapp0 $B' $B $G (sigma_Snd $ab')))
+      (@fapp1_func
+        (Op_cat $A')
+        (Op_cat $A)
+        (@Op_func $A' $A $F)
+        (sigma_Fst $ab)
+        (sigma_Fst $ab'))
+      (@fapp1_func
+        $B' $B $G
+        (sigma_Snd $ab)
+        (sigma_Snd $ab'));
+
+rule @fapp1_fapp0 _ _
+      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+      $ab
+      $ab'
+      $pq
+  ↪ @Product_pair
+      (Hom_cat (Op_cat $A)
+        (@fapp0 $A' $A $F (sigma_Fst $ab))
+        (@fapp0 $A' $A $F (sigma_Fst $ab')))
+      (Hom_cat $B
+        (@fapp0 $B' $B $G (sigma_Snd $ab))
+        (@fapp0 $B' $B $G (sigma_Snd $ab')))
+      (@fapp1_fapp0
+        (Op_cat $A')
+        (Op_cat $A)
+        (@Op_func $A' $A $F)
+        (sigma_Fst $ab)
+        (sigma_Fst $ab')
+        (sigma_Fst $pq))
+      (@fapp1_fapp0
+        $B' $B $G
+        (sigma_Snd $ab)
+        (sigma_Snd $ab')
+        (sigma_Snd $pq));
+
 // Vertical maps between profunctors with fixed endpoints.
 //
 // This is intentionally a transparent alias for the existing hom-category;
@@ -6764,13 +6947,7 @@ rule @fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab);
 
 // Full base-arrow action of reindexing. The named rung keeps the functorial
@@ -6816,35 +6993,17 @@ rule fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab)
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab')
       (@fapp1_fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab
         $ab'
         $pq);
@@ -6864,24 +7023,12 @@ rule @fapp1_fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab)
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Product_map_func
-          (Op_cat $A')
-          (Op_cat $A)
-          $B'
-          $B
-          (@Op_func $A' $A $F)
-          $G)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
         $ab')
       (@fapp1_fapp0
         (Product_cat (Op_cat $A') $B')
@@ -7527,6 +7674,15 @@ rule @Prof_reindex
       $X
       (@comp_cat_fapp0 $A' $A $X $F $F')
       (@comp_cat_fapp0 $B' $B $X $G $G');
+
+// Reindexing a constant profunctor remains constant.
+rule @Prof_reindex
+      $A $A'
+      $B $B'
+      (@Const_catd _ $C)
+      $F
+      $G
+  ↪ @Const_catd (Product_cat (Op_cat $A') $B') $C;
 
 /*
   Shaped profunctor cells.
@@ -8321,168 +8477,126 @@ rule @Prof_imply_cov_transf
       (Struct_sigma $O' $Q')
       (Struct_sigma $o $q);
 
-// Evaluation and lambda abstraction for general equipment cells.
+/*
+  Vertical covariant closed core.
+
+  Evaluation and lambda abstraction are primitive only for maps between
+  profunctors with fixed endpoints:
+
+    ProfMap(P, O ⇒ Q)  <->  ProfMap(P tensor Q, O).
+
+  Endpoint-changing equipment views below are transparent applications of this
+  core after reindexing O.
+*/
+symbol Prof_eval_cov_map
+  [A B X : Cat]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X)]
+  (t : τ (ProfMap P (@Prof_imply_cov A B X O Q)))
+  : τ (ProfMap (@Prof_tensor A B X P Q) O);
+
+symbol Prof_lambda_cov_map
+  [A B X : Cat]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X)]
+  (t : τ (ProfMap (@Prof_tensor A B X P Q) O))
+  : τ (ProfMap P (@Prof_imply_cov A B X O Q));
+
+rule @Prof_lambda_cov_map
+      $A $B $X $P $Q $O
+      (@Prof_eval_cov_map $A $B $X $P $Q $O $t)
+  ↪ $t
+with @Prof_eval_cov_map
+      $A $B $X $P $Q $O
+      (@Prof_lambda_cov_map $A $B $X $P $Q $O $t)
+  ↪ $t;
+
+// Derived endpoint-changing equipment view.
 symbol Prof_eval_cov_transf
   [A B X A' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A' X)]
   [F : τ (Functor A A')]
   (t : τ (Obj
     (@Prof_transf_cat
       A' A B B
-      P
-      F
+      P F
       (@Prof_imply_cov A' B X O Q)
       (@id_func B))))
   : τ (Obj
       (@Prof_transf_cat
         A' A X X
         (@Prof_tensor A B X P Q)
-        F
-        O
-        (@id_func X)));
+        F O
+        (@id_func X)))
+≔ @Prof_eval_cov_map
+    A B X P Q
+    (@Prof_reindex A' A X X O F (@id_func X))
+    t;
 
 symbol Prof_lambda_cov_transf
   [A B X A' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A' X)]
   [F : τ (Functor A A')]
   (t : τ (Obj
     (@Prof_transf_cat
       A' A X X
       (@Prof_tensor A B X P Q)
-      F
-      O
+      F O
       (@id_func X))))
   : τ (Obj
       (@Prof_transf_cat
         A' A B B
-        P
-        F
+        P F
         (@Prof_imply_cov A' B X O Q)
-        (@id_func B)));
+        (@id_func B)))
+≔ @Prof_lambda_cov_map
+    A B X P Q
+    (@Prof_reindex A' A X X O F (@id_func X))
+    t;
 
-rule @Prof_lambda_cov_transf
-      $A $B $X $A'
-      $P $Q $O $F
-      (@Prof_eval_cov_transf
-        $A $B $X $A'
-        $P $Q $O $F
-        $t)
+/*
+  Fixed-endpoint shaped specialization. This packages the unit/co-Yoneda
+  reduction separately from the general tensor-hom bijection.
+*/
+symbol Prof_eval_cov_hom_map
+  [A X : Cat]
+  [Q O : τ (Prof A X)]
+  (t : τ (@Prof_hom
+    A A A
+    (@id_func A)
+    (@Prof_imply_cov A A X O Q)
+    (@id_func A)))
+  : τ (ProfMap Q O);
+
+symbol Prof_lambda_cov_hom_map
+  [A X : Cat]
+  [Q O : τ (Prof A X)]
+  (t : τ (ProfMap Q O))
+  : τ (@Prof_hom
+      A A A
+      (@id_func A)
+      (@Prof_imply_cov A A X O Q)
+      (@id_func A));
+
+rule @Prof_lambda_cov_hom_map
+      $A $X $Q $O
+      (@Prof_eval_cov_hom_map $A $X $Q $O $t)
   ↪ $t
-with @Prof_eval_cov_transf
-      $A $B $X $A'
-      $P $Q $O $F
-      (@Prof_lambda_cov_transf
-        $A $B $X $A'
-        $P $Q $O $F
-        $t)
+with @Prof_eval_cov_hom_map
+      $A $X $Q $O
+      (@Prof_lambda_cov_hom_map $A $X $Q $O $t)
   ↪ $t;
 
-/*
-  Explicit substitution for the covariant closed structure.
-
-  Semantically this packages:
-
-    imply(id,q) o (t o p)
-
-  for p : P0 -> P and q : Q0 -> Q over their shared middle functor. Keeping
-  this as one stable head avoids exposing a deeply nested equipment composite
-  as the naturality normal form. The direct semantic expression typechecks,
-  but its lambda naturality completion introduces broad non-joinable overlaps.
-*/
-symbol Prof_imply_cov_subst_transf
-  [A0 A A' B0 B X : Cat]
-  [P0 : τ (Catd (Product_cat (Op_cat A0) B0))]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q0 : τ (Catd (Product_cat (Op_cat B0) X))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
-  [H : τ (Functor A0 A)]
-  [M : τ (Functor B0 B)]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A' A B B
-      P
-      F
-      (@Prof_imply_cov A' B X O Q)
-      (@id_func B))))
-  (p : τ (Obj (@Prof_transf_cat A A0 B B0 P0 H P M)))
-  (q : τ (Obj
-    (@Prof_transf_cat B B0 X X Q0 M Q (@id_func X))))
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A0 B0 B0
-        P0
-        (@comp_cat_fapp0 A0 A A' F H)
-        (@Prof_imply_cov A' B0 X O Q0)
-        (@id_func B0)));
-
-/*
-  Lambda/substitution and eval/tensor naturality are one mutually completing
-  cut. Declaring the clauses together lets the local confluence checker see
-  both beta/eta completion paths.
-*/
-rule @Prof_imply_cov_subst_transf
-      $A0 $A $A' $B0 $B $X
-      $P0 $P $Q0 $Q $O
-      $H $M $F
-      (@Prof_lambda_cov_transf
-        $A $B $X $A'
-        $P $Q $O $F
-        $u)
-      $p $q
-  ↪ @Prof_lambda_cov_transf
-      $A0 $B0 $X $A'
-      $P0 $Q0 $O
-      (@comp_cat_fapp0 $A0 $A $A' $F $H)
-      (@Prof_comp_transf
-        $A0 $A $A'
-        $X $X $X
-        (@Prof_tensor $A0 $B0 $X $P0 $Q0)
-        (@Prof_tensor $A $B $X $P $Q)
-        $O
-        $H (@id_func $X)
-        $F (@id_func $X)
-        $u
-        (@Prof_tensor_transf
-          $A $A0 $B $B0 $X $X
-          $P0 $Q0 $P $Q
-          $H $M (@id_func $X)
-          $p $q))
-with @Prof_comp_transf
-      $A0 $A $A'
-      $X $X $X
-      _ _ $O
-      $H (@id_func $X)
-      $F (@id_func $X)
-      (@Prof_eval_cov_transf
-        $A $B $X $A'
-        $P $Q $O $F
-        $t)
-      (@Prof_tensor_transf
-        $A $A0 $B $B0 $X $X
-        $P0 $Q0 $P $Q
-        $H $M (@id_func $X)
-        $p $q)
-  ↪ @Prof_eval_cov_transf
-      $A0 $B0 $X $A'
-      $P0 $Q0 $O
-      (@comp_cat_fapp0 $A0 $A $A' $F $H)
-      (@Prof_imply_cov_subst_transf
-        $A0 $A $A' $B0 $B $X
-        $P0 $P $Q0 $Q $O
-        $H $M $F
-        $t $p $q);
-
-// Shaped specialization of evaluation and lambda abstraction.
 symbol Prof_eval_cov_hom_transf
   [A X A' : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [Q : τ (Prof A X)]
+  [O : τ (Prof A' X)]
   [F : τ (Functor A A')]
   (t : τ (@Prof_hom
     A A' A
@@ -8490,12 +8604,16 @@ symbol Prof_eval_cov_hom_transf
     (@Prof_imply_cov A' A X O Q)
     (@id_func A)))
   : τ (Obj
-      (@Prof_transf_cat A' A X X Q F O (@id_func X)));
+      (@Prof_transf_cat A' A X X Q F O (@id_func X)))
+≔ @Prof_eval_cov_hom_map
+    A X Q
+    (@Prof_reindex A' A X X O F (@id_func X))
+    t;
 
 symbol Prof_lambda_cov_transf_hom
   [A X A' : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
+  [Q : τ (Prof A X)]
+  [O : τ (Prof A' X)]
   [F : τ (Functor A A')]
   (t : τ (Obj
     (@Prof_transf_cat A' A X X Q F O (@id_func X))))
@@ -8503,24 +8621,11 @@ symbol Prof_lambda_cov_transf_hom
       A A' A
       F
       (@Prof_imply_cov A' A X O Q)
-      (@id_func A));
-
-rule @Prof_lambda_cov_transf_hom
-      $A $X $A'
-      $Q $O $F
-      (@Prof_eval_cov_hom_transf
-        $A $X $A'
-        $Q $O $F
-        $t)
-  ↪ $t
-with @Prof_eval_cov_hom_transf
-      $A $X $A'
-      $Q $O $F
-      (@Prof_lambda_cov_transf_hom
-        $A $X $A'
-        $Q $O $F
-        $t)
-  ↪ $t;
+      (@id_func A))
+≔ @Prof_lambda_cov_hom_map
+    A X Q
+    (@Prof_reindex A' A X X O F (@id_func X))
+    t;
 
 /*
   Contravariant profunctor implication.
@@ -8581,12 +8686,42 @@ constant symbol Prof_imply_con_transf
         (@Prof_imply_con A B' X' P' O')
         G));
 
-// Evaluation and lambda abstraction for general equipment cells.
+/*
+  Vertical contravariant closed core:
+
+    ProfMap(Q, P ⇒ O)  <->  ProfMap(P tensor Q, O).
+*/
+symbol Prof_eval_con_map
+  [A B X : Cat]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X)]
+  (t : τ (ProfMap Q (@Prof_imply_con A B X P O)))
+  : τ (ProfMap (@Prof_tensor A B X P Q) O);
+
+symbol Prof_lambda_con_map
+  [A B X : Cat]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X)]
+  (t : τ (ProfMap (@Prof_tensor A B X P Q) O))
+  : τ (ProfMap Q (@Prof_imply_con A B X P O));
+
+rule @Prof_lambda_con_map
+      $A $B $X $P $Q $O
+      (@Prof_eval_con_map $A $B $X $P $Q $O $t)
+  ↪ $t
+with @Prof_eval_con_map
+      $A $B $X $P $Q $O
+      (@Prof_lambda_con_map $A $B $X $P $Q $O $t)
+  ↪ $t;
+
+// Derived endpoint-changing equipment view.
 symbol Prof_eval_con_transf
   [A B X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X')]
   [G : τ (Functor X X')]
   (t : τ (Obj
     (@Prof_transf_cat
@@ -8600,140 +8735,70 @@ symbol Prof_eval_con_transf
         A A X' X
         (@Prof_tensor A B X P Q)
         (@id_func A)
-        O
-        G));
+        O G))
+≔ @Prof_eval_con_map
+    A B X P Q
+    (@Prof_reindex A A X' X O (@id_func A) G)
+    t;
 
 symbol Prof_lambda_con_transf
   [A B X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A) X'))]
+  [P : τ (Prof A B)]
+  [Q : τ (Prof B X)]
+  [O : τ (Prof A X')]
   [G : τ (Functor X X')]
   (t : τ (Obj
     (@Prof_transf_cat
       A A X' X
       (@Prof_tensor A B X P Q)
       (@id_func A)
-      O
-      G)))
+      O G)))
   : τ (Obj
       (@Prof_transf_cat
         B B X' X
         Q
         (@id_func B)
         (@Prof_imply_con A B X' P O)
-        G));
+        G))
+≔ @Prof_lambda_con_map
+    A B X P Q
+    (@Prof_reindex A A X' X O (@id_func A) G)
+    t;
 
-rule @Prof_lambda_con_transf
-      $A $B $X $X'
-      $P $Q $O $G
-      (@Prof_eval_con_transf
-        $A $B $X $X'
-        $P $Q $O $G
-        $t)
+// Fixed-endpoint shaped specialization.
+symbol Prof_eval_con_hom_map
+  [A B : Cat]
+  [P O : τ (Prof A B)]
+  (t : τ (@Prof_hom
+    B B B
+    (@id_func B)
+    (@Prof_imply_con A B B P O)
+    (@id_func B)))
+  : τ (ProfMap P O);
+
+symbol Prof_lambda_con_hom_map
+  [A B : Cat]
+  [P O : τ (Prof A B)]
+  (t : τ (ProfMap P O))
+  : τ (@Prof_hom
+      B B B
+      (@id_func B)
+      (@Prof_imply_con A B B P O)
+      (@id_func B));
+
+rule @Prof_lambda_con_hom_map
+      $A $B $P $O
+      (@Prof_eval_con_hom_map $A $B $P $O $t)
   ↪ $t
-with @Prof_eval_con_transf
-      $A $B $X $X'
-      $P $Q $O $G
-      (@Prof_lambda_con_transf
-        $A $B $X $X'
-        $P $Q $O $G
-        $t)
+with @Prof_eval_con_hom_map
+      $A $B $P $O
+      (@Prof_lambda_con_hom_map $A $B $P $O $t)
   ↪ $t;
 
-/*
-  Explicit substitution for the contravariant closed structure.
-
-  This is the variance-reversed companion of `Prof_imply_cov_subst_transf`:
-  the left endpoint A is fixed, while the middle and right endpoint functors
-  accumulate into the transposed cell.
-*/
-symbol Prof_imply_con_subst_transf
-  [A B0 B X0 X X' : Cat]
-  [P0 : τ (Catd (Product_cat (Op_cat A) B0))]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q0 : τ (Catd (Product_cat (Op_cat B0) X0))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A) X'))]
-  [M : τ (Functor B0 B)]
-  [K : τ (Functor X0 X)]
-  [G : τ (Functor X X')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      B B X' X
-      Q
-      (@id_func B)
-      (@Prof_imply_con A B X' P O)
-      G)))
-  (p : τ (Obj
-    (@Prof_transf_cat A A B B0 P0 (@id_func A) P M)))
-  (q : τ (Obj (@Prof_transf_cat B B0 X X0 Q0 M Q K)))
-  : τ (Obj
-      (@Prof_transf_cat
-        B0 B0 X' X0
-        Q0
-        (@id_func B0)
-        (@Prof_imply_con A B0 X' P0 O)
-        (@comp_cat_fapp0 X0 X X' G K)));
-
-// Lambda/substitution and eval/tensor naturality again complete mutually.
-rule @Prof_imply_con_subst_transf
-      $A $B0 $B $X0 $X $X'
-      $P0 $P $Q0 $Q $O
-      $M $K $G
-      (@Prof_lambda_con_transf
-        $A $B $X $X'
-        $P $Q $O $G
-        $u)
-      $p $q
-  ↪ @Prof_lambda_con_transf
-      $A $B0 $X0 $X'
-      $P0 $Q0 $O
-      (@comp_cat_fapp0 $X0 $X $X' $G $K)
-      (@Prof_comp_transf
-        $A $A $A
-        $X0 $X $X'
-        (@Prof_tensor $A $B0 $X0 $P0 $Q0)
-        (@Prof_tensor $A $B $X $P $Q)
-        $O
-        (@id_func $A) $K
-        (@id_func $A) $G
-        $u
-        (@Prof_tensor_transf
-          $A $A $B $B0 $X $X0
-          $P0 $Q0 $P $Q
-          (@id_func $A) $M $K
-          $p $q))
-with @Prof_comp_transf
-      $A $A $A
-      $X0 $X $X'
-      _ _ $O
-      (@id_func $A) $K
-      (@id_func $A) $G
-      (@Prof_eval_con_transf
-        $A $B $X $X'
-        $P $Q $O $G
-        $t)
-      (@Prof_tensor_transf
-        $A $A $B $B0 $X $X0
-        $P0 $Q0 $P $Q
-        (@id_func $A) $M $K
-        $p $q)
-  ↪ @Prof_eval_con_transf
-      $A $B0 $X0 $X'
-      $P0 $Q0 $O
-      (@comp_cat_fapp0 $X0 $X $X' $G $K)
-      (@Prof_imply_con_subst_transf
-        $A $B0 $B $X0 $X $X'
-        $P0 $P $Q0 $Q $O
-        $M $K $G
-        $t $p $q);
-
-// Shaped specialization obtained by setting Q to Unit_prof(B).
 symbol Prof_eval_con_hom_transf
   [A B X : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [P : τ (Prof A B)]
+  [O : τ (Prof A X)]
   [G : τ (Functor B X)]
   (t : τ (@Prof_hom
     B B X
@@ -8741,12 +8806,16 @@ symbol Prof_eval_con_hom_transf
     (@Prof_imply_con A B X P O)
     G))
   : τ (Obj
-      (@Prof_transf_cat A A X B P (@id_func A) O G));
+      (@Prof_transf_cat A A X B P (@id_func A) O G))
+≔ @Prof_eval_con_hom_map
+    A B P
+    (@Prof_reindex A A X B O (@id_func A) G)
+    t;
 
 symbol Prof_lambda_con_transf_hom
   [A B X : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
+  [P : τ (Prof A B)]
+  [O : τ (Prof A X)]
   [G : τ (Functor B X)]
   (t : τ (Obj
     (@Prof_transf_cat A A X B P (@id_func A) O G)))
@@ -8754,24 +8823,11 @@ symbol Prof_lambda_con_transf_hom
       B B X
       (@id_func B)
       (@Prof_imply_con A B X P O)
-      G);
-
-rule @Prof_lambda_con_transf_hom
-      $A $B $X
-      $P $O $G
-      (@Prof_eval_con_hom_transf
-        $A $B $X
-        $P $O $G
-        $t)
-  ↪ $t
-with @Prof_eval_con_hom_transf
-      $A $B $X
-      $P $O $G
-      (@Prof_lambda_con_transf_hom
-        $A $B $X
-        $P $O $G
-        $t)
-  ↪ $t;
+      G)
+≔ @Prof_lambda_con_hom_map
+    A B P
+    (@Prof_reindex A A X B O (@id_func A) G)
+    t;
 
 // Ordinary weighted-limit representability, kept separate from the stronger
 // computational `WeightedLimit_cov` interface below.
@@ -10031,10 +10087,9 @@ symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
 //   i.e. a fibre object E is a motive E : PathOut_Z(x) ⊢ Cat.
 symbol PathOutMotives_catd [Z : Cat]
   : τ (Catd Z)
-≔ @comp_cat_fapp0
+≔ @Pullback_catd
      Z
      (Op_cat Cat_cat)
-     Cat_cat
      Catd_cat_func
      (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));
 
@@ -10882,6 +10937,37 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
 // A Sigma map does not preserve canonical transport strictly for arbitrary
 // displayed functors. The image exposes the displayed laxity component;
 // strict/cartesian preservation is a later specialization.
+
+// Late constructor cuts can use the complete product, pullback, profunctor,
+// implication, and adjunction normalization systems above. There is
+// deliberately no whole-constructor
+// `Product_map_func(id,id) -> id_func(Product_cat ...)` rule: for an arbitrary
+// opaque product object that would require the rejected broad product eta law.
+rule @comp_cat_fapp0
+      _
+      _
+      _
+      (@Product_map_func $A1 $A2 $B1 $B2 $F12 $G12)
+      (@Product_map_func $A0 $A1 $B0 $B1 $F01 $G01)
+  ↪ @Product_map_func
+      $A0 $A2 $B0 $B2
+      (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
+      (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01);
+
+// Pullback along the stable profunctor endpoint-base map contracts to the
+// profunctor-specific reindexing normal forms.
+rule @Pullback_catd
+      _
+      _
+      $R
+      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
+
+rule @Pullback_catd_func
+      _
+      _
+      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex_func $A $A' $B $B' $F $G;
 
 /*
   Section-dependent-hom composition normal forms.

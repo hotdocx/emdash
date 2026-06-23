@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-22
+Last consolidated: 2026-06-23
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -105,11 +105,27 @@ and `Prof` are transparent aliases for families on `A^op × B`.
 `Hom_prof_along(F,G)` is the sole stable representable head, with direct fibre
 computation and a full base-arrow action computing as postcomposition after
 precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
-specializations. The general `Product_map_func(F,G)` is a transparent paired
-map. `Prof_reindex(R,F,G)` is a stable non-injective head whose projections
-compute as pullback along `Op_func(F) × G`; representable reindexing accumulates
-both endpoint functors. `Prof_transf_cat(R',F,R,G)` is the transparent category
-of natural family morphisms from `R'` to `Prof_reindex(R,F,G)`.
+specializations. `Product_map_func(F,G)` is now a primitive stable
+componentwise product-map constructor with object, full-hom, and capped-arrow
+projections. Its composition cut accumulates the two component functors. There
+is deliberately no whole-constructor identity collapse: the attempted
+`Product_map_func(id,id) -> id` requires a broad product eta law for arbitrary
+opaque product objects and did not join.
+
+`Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
+precomposition heads. Their object/arrow projections, identity and nested
+pullback cuts, and focused constant/opposite/Sigma-projection collapses are
+active. Broad global folds from every `comp_cat_fapp0(E,F)` or
+`comp_cat_con_func(F)` were rejected because they affected unrelated
+Cat-valued Došen cuts and increased non-joinable overlaps.
+
+`Prof_reindex_base_func(F,G)` is the stable endpoint-base map with the semantics
+of `Product_map_func(Op_func(F),G)`. It avoids discriminating through the
+reducible `Op_func` head. Pullback along that base map contracts to the stable
+`Prof_reindex_func(F,G)` and `Prof_reindex(R,F,G)` normal forms.
+Representable reindexing accumulates both endpoint functors.
+`Prof_transf_cat(R',F,R,G)` is the transparent category of natural family
+morphisms from `R'` to `Prof_reindex(R,F,G)`.
 `Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
 `Prof_hom(F,R,G)` is its object classifier. In the representable case the
 target computes to `Hom_prof_along(F,G)`. Comparison with ordinary
@@ -169,25 +185,28 @@ constructor folds to that generic action on the product arrow `(o,q)`;
 identity and composition are inherited globally rather than restated on a
 profunctor-specific action head.
 
-Direct tensor-implication naturality is now active in both variance
-directions. `Prof_imply_cov_subst_transf(t,p,q)` and
-`Prof_imply_con_subst_transf(t,p,q)` are stable explicit-substitution heads for
-the closed calculus. They own the mutually completing cuts
+The tensor-implication bijections now have a fixed-endpoint primitive core:
 
 ```text
-eval(t) o tensor(p,q) -> eval(subst(t,p,q));
-subst(lambda(u),p,q)  -> lambda(u o tensor(p,q)).
+Prof_eval_cov_map / Prof_lambda_cov_map
+Prof_eval_con_map / Prof_lambda_con_map
 ```
 
-The covariant head accumulates the left and shared-middle endpoint functors;
-the contravariant head fixes the left endpoint and accumulates the middle and
-right functors. These are closed-structure substitution laws, not duplicated
-ordinary functoriality. A transparent RHS using nested `Prof_comp_transf` and
-`Prof_imply_*_transf` typechecked, but its lambda completion added broad
-non-joinable overlaps. The stable substitution presentation, with the two
-clauses declared mutually, preserves the exact warning baseline. Naturality in
-an additional target cell, higher action on substitution, fuller
-internalization, and end semantics remain demand-driven extensions.
+These are inverse operations between vertical `ProfMap` classifiers. The
+fixed-endpoint shaped specializations are
+`Prof_eval_cov_hom_map`/`Prof_lambda_cov_hom_map` and
+`Prof_eval_con_hom_map`/`Prof_lambda_con_hom_map`. The existing
+endpoint-changing `Prof_eval_*_transf` and `Prof_lambda_*_transf` names are
+transparent equipment views obtained by reindexing the target and applying
+the vertical core. Their former primitive cancellation rules are no longer
+needed.
+
+The earlier `Prof_imply_cov_subst_transf` and
+`Prof_imply_con_subst_transf` explicit-substitution heads have been removed.
+They extended endpoint-changing equipment syntax at the primitive closed
+layer. Any later tensor-cell naturality or equipment-style closed operation
+must be derived around the fixed-endpoint core and added only for a concrete
+consumer whose canonical normal form has been established.
 
 The initially rejected product presentation exposed kernel gaps rather than an
 architectural obstruction. Product identity projections compute for opaque
@@ -197,16 +216,14 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory is now 1,071: 918 unjoinable critical-pair
-reports and 153 replaceable-pattern reports. The 19-report increase belongs to
-the generic `Catd_cat` identity-action bridge. It overlaps broad generic
-identity/composition decision trees at impossible or underconstrained
-metavariable shapes; the well-typed Catd identity path and its composition
-interaction are covered by active generic implication checks. The removed
-implication-specific action heads add no remaining local functor-law warning
-surface. The new closed-substitution cuts add no warning. The corresponding
-contravariant internalized functor owner, higher substitution projections, and
-end semantics remain deferred.
+The active warning inventory is now 1,114: 951 unjoinable critical-pair
+reports and 163 replaceable-pattern reports. The 43-report increase over the
+1,071-warning baseline belongs to the bounded pullback, product-map, and
+profunctor-base projection ladders. The fixed-endpoint closed-core migration
+itself did not increase that bounded probe total. The broader global
+composition-to-pullback folds produced 1,129 warnings and were rejected.
+Every future extension at these stable-head boundaries must therefore compare
+warning-enabled full-file results, not merely pass beta/eta assertions.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
@@ -569,9 +586,11 @@ left implicit:
 - a first Cat-valued profunctor facade:
   `Prof_base(A,B) = A^op × B`, `Prof_cat(A,B) = Catd_cat(Prof_base(A,B))`,
   and `Prof(A,B) = Obj(Prof_cat(A,B))` are transparent aliases;
-  `Product_map_func(F,G)` is the semantic pair of projected composites;
+  `Product_map_func(F,G)` is the stable componentwise product-map constructor;
+  `Pullback_catd(E,F)` is the stable Cat-valued pullback constructor;
+  `Prof_reindex_base_func(F,G)` packages the endpoint base map;
   `Prof_reindex(R,F,G)` and `Prof_reindex_fapp1_func` expose object, full,
-  and capped pullback action along `Op_func(F) × G`;
+  and capped pullback action along that stable base map;
   `Hom_prof_along(F,G)` is the single stable representable constructor;
   `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
   the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.
@@ -591,9 +610,11 @@ left implicit:
   composition;
   named left/right co-Yoneda cells and their identity-representable beta laws
   are active;
-  `Prof_imply_cov`, `Prof_imply_cov_transf`, and the general/shaped
-  `Prof_eval_cov_*`/`Prof_lambda_cov_*` inverse pairs provide the first
-  profunctor internal-hom calculus;
+  `Prof_imply_cov`, the fixed-endpoint
+  `Prof_eval_cov_map`/`Prof_lambda_cov_map` pair, and its shaped pair provide
+  the primitive profunctor internal-hom calculus; endpoint-changing
+  `Prof_eval_cov_transf`/`Prof_lambda_cov_transf` are transparent reindexed
+  views;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

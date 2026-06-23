@@ -1,7 +1,7 @@
 # EMDASH v3.2 Profunctor Representability Redesign Preliminary Plan
 
 Date: 2026-06-19
-Last reviewed: 2026-06-22
+Last reviewed: 2026-06-23
 
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
@@ -20,10 +20,12 @@ witness and theorem-specific preservation calculus have now been replaced by
 transparent public aliases of the comparison implementation. The remainder of
 this report is still provisional.
 
-Direct tensor-cell naturality for both implication variances is also active.
-It uses explicit closed-substitution heads with mutually completing
-substitution/lambda and eval/tensor cuts; this avoids the non-joinable nested
-equipment-composition presentation while preserving the warning baseline.
+The tensor-implication calculus now has a fixed-endpoint primitive `ProfMap`
+core in both variance directions. Endpoint-changing eval/lambda names are
+transparent reindexed views, and the former explicit closed-substitution heads
+have been removed. The stable pullback/reindex redesign has also landed in a
+bounded form; the final implementation result at the end of this report
+supersedes the broader provisional folds proposed below.
 
 ## Retrospective Vertical-Core Assessment, 2026-06-23
 
@@ -313,12 +315,13 @@ do not generate identity/composition rules mechanically;
 audit both reduction orders and downstream consumers independently.
 ```
 
-The direct Došen-style tensor-cell naturality slice is now active through
-`Prof_imply_cov_subst_transf` and `Prof_imply_con_subst_transf`. Its focused
-probe did not require extending the ordinary composition-transformation
-cluster, so `INT-COMP` remains deferred. Target-cell or higher naturality is a
-separate demand-driven slice. The other four tasks remain tied to the later
-triggers in the table.
+The former direct tensor-cell naturality slice through
+`Prof_imply_cov_subst_transf` and `Prof_imply_con_subst_transf` has been
+retired by the fixed-endpoint closed-core migration. It did not require
+extending the ordinary composition-transformation cluster, so `INT-COMP`
+remains deferred. Any replacement target-cell, tensor-cell, or higher
+naturality is a separate demand-driven slice around the vertical core. The
+other four tasks remain tied to the later triggers in the table.
 
 ## Implementation Checkpoint: 2026-06-21
 
@@ -3034,8 +3037,8 @@ extensions:
 retain ProfComparison as the computational representability owner;
 retain the direct mixed implication bifunctor and projection-owned product
 identity computation;
-retain eval/lambda as the primitive tensor-implication bijection and retain the
-landed explicit-substitution naturality cuts in both variance directions;
+retain fixed-endpoint ProfMap eval/lambda as the primitive tensor-implication
+bijection and derive any endpoint-changing view by reindexing;
 derive any later fixed-weight ordinary adjunction view from that closed
 calculus rather than making it the owner;
 develop TypeEquiv/OmegaEquiv/univalence as the parallel foundational track;
@@ -3273,3 +3276,134 @@ including both reduction orders and interactions with existing
 `Const_catd`, `Op_catd`, `Sigma_proj1_pullback_catd`, and product-map rules.
 Only after that pullback layer is stable should `Product_map_func` be promoted
 and the `Prof_reindex*` specialization folds be installed.
+
+## Stable-Head And Vertical-Core Implementation Result, 2026-06-23
+
+Focused temporary full-file probes resolved the provisional choices above.
+This section is the current decision and supersedes incompatible statements in
+the preceding proposal.
+
+### Rejected Broad Pullback Specializations
+
+The following global folds were not promoted:
+
+```text
+comp_cat_fapp0(E,F) -> Pullback_catd(E,F)
+comp_cat_con_func(F) -> Pullback_catd_func(F)
+```
+
+They forced unrelated Cat-valued composition paths through the pullback head,
+required wider changes such as primitive `Catd_cat_func`, and raised the
+warning-enabled full-file inventory from 1,071 to 1,129. The additional
+non-joinable overlaps occurred outside the intended pullback consumers.
+
+The active bounded design keeps `Pullback_catd` and
+`Pullback_catd_func` primitive, but connects them only through their existing
+semantic projections and focused cuts:
+
+```text
+fapp0(Pullback_catd_func(F),E) -> Pullback_catd(E,F)
+Pullback_catd(E,id) -> E
+Pullback_catd(Pullback_catd(E,F),H) -> Pullback_catd(E,F o H)
+```
+
+Object, full-hom, and capped-arrow projections are active. Focused collapses
+for constant, opposite, and Sigma-projection families join the existing
+normal forms. No global composition-to-pullback fold is installed.
+
+### Product And Profunctor Base Maps
+
+`Product_map_func(F,G)` is now a primitive componentwise stable head with its
+object, full-hom, and capped-arrow projection ladder. Composition of two
+product maps accumulates componentwise.
+
+The proposed whole-constructor identity rule was rejected:
+
+```text
+Product_map_func(id,id) -> id
+```
+
+For an arbitrary opaque object of a product category, joining its object
+projection with the generic identity path requires the broad eta equation
+`xy = (fst(xy),snd(xy))`. The current kernel only computes that equation for
+explicit pairs. Component projections still compute through the generic
+identity rules, so the whole-constructor collapse is not required.
+
+Direct pullback folds discriminating on
+`Product_map_func(Op_func(F),G)` were also brittle because reduction of
+`Op_func` can erase the intended discriminator. The active stable base-map
+head is therefore:
+
+```text
+Prof_reindex_base_func(F,G)
+  : A'^op x B' -> A^op x B
+```
+
+with the componentwise semantics of
+`Product_map_func(Op_func(F),G)`. The bounded joining rules are:
+
+```text
+Pullback_catd(R,Prof_reindex_base_func(F,G))
+  -> Prof_reindex(R,F,G)
+
+Pullback_catd_func(Prof_reindex_base_func(F,G))
+  -> Prof_reindex_func(F,G).
+```
+
+This preserves the requested stable reindexing normal forms without making
+general Cat-valued composition use them.
+
+### Fixed-Endpoint Closed Core
+
+The primitive tensor-implication bijections are now vertical:
+
+```text
+Prof_eval_cov_map   : ProfMap(P,imply_cov(O,Q))
+                    -> ProfMap(tensor(P,Q),O)
+Prof_lambda_cov_map : ProfMap(tensor(P,Q),O)
+                    -> ProfMap(P,imply_cov(O,Q))
+
+Prof_eval_con_map   : ProfMap(Q,imply_con(P,O))
+                    -> ProfMap(tensor(P,Q),O)
+Prof_lambda_con_map : ProfMap(tensor(P,Q),O)
+                    -> ProfMap(Q,imply_con(P,O)).
+```
+
+Each pair has judgmental beta/eta cancellation. Fixed-endpoint shaped
+specializations have separate `*_hom_map` heads. Existing
+`Prof_eval_*_transf` and `Prof_lambda_*_transf` names are transparent derived
+views: they first reindex the target profunctor and then call the corresponding
+vertical map.
+
+The endpoint-changing `Prof_imply_cov_subst_transf` and
+`Prof_imply_con_subst_transf` primitives and their direct naturality cuts were
+removed. They are not necessary for the closed structure and made equipment
+syntax its primitive owner. A future equipment-style closed interface may be
+derived from:
+
+```text
+ProfMap(R',Prof_reindex(R,F,G))
+```
+
+and the vertical bijections, but only when a concrete consumer fixes the
+required naturality variables and canonical normal form.
+
+### Validation And Remaining Work
+
+The bounded implementation leaves the full active kernel and diagnostics
+typechecking. The warning-enabled inventory is 1,114 reports: 951
+unjoinable-critical-pair reports and 163 replaceable-pattern reports. This is
+43 above the previous 1,071 baseline and belongs to the stable pullback,
+product-map, and profunctor-base projection ladders. The vertical closed-core
+migration added no further warnings in the focused comparison.
+
+The redesign remains feasible. The weighted-limit, comparison, adjunction,
+duality, weighted-colimit, and join sections all continue to typecheck through
+the derived endpoint-changing views. Remaining work is deliberately separate:
+
+```text
+derive tensor-cell or target-cell naturality only for a concrete consumer;
+generalize co-Yoneda only when its required equipment normal form is known;
+retain Pi_pullback_funcd until its displayed laxity projection is derivable;
+continue the TypeEquiv/OmegaEquiv/univalence track independently.
+```

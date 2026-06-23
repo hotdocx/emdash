@@ -18,7 +18,7 @@ make check   passed
 make health  passed
 make ci      passed
 
-emdash3_2_checks.lp: 549 checks
+emdash3_2_checks.lp: 562 checks
 check catalog:       15 areas, 0 unclassified checks
 ```
 
@@ -32,9 +32,9 @@ coend/end, quotient, bicategorical-coherence, or directed-inductive semantics.
 | Phase | Landed implementation | Explicit remaining work |
 | --- | --- | --- |
 | 0. Baseline and probes | Incremental probe/log/report workflow used throughout all phases. | Continue using focused probes for every nontrivial rewrite or internalization extension. |
-| 1. Profunctor facade | `Prof_base`, `Prof_cat`, `Hom_prof_along`, `Hom_prof`, `Unit_prof`, semantic `Hom_prof_func`, `Product_map_func`, `Prof_reindex`, `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`. | Ordinary-`Transf_cat` comparisons, broader endpoint internalization, and further curry/uncurry comparison projections only when demanded downstream. |
+| 1. Profunctor facade | `Prof_base`, `Prof_cat`, `Hom_prof_along`, `Hom_prof`, `Unit_prof`, semantic `Hom_prof_func`, stable `Product_map_func`, stable pullback/reindex heads, `Prof_reindex_base_func`, `Prof_transf_cat`, `Prof_hom_cat`, and `Prof_hom`. | Ordinary-`Transf_cat` comparisons, broader endpoint internalization, and further curry/uncurry comparison projections only when demanded downstream. |
 | 2. Tensor and co-Yoneda | Primitive `Prof_tensor`, endpoint reindexing, general and shaped tensor cells, `Prof_comp_transf`, identities, and symmetric identity-representable co-Yoneda beta rules. `Prof_func_transf`/`Prof_func_hom` are now available. | General co-Yoneda rules using `Prof_func_hom`, tensor associativity/unit coherence, and semantic coend/coinserter ownership. |
-| 3. Internal hom | Covariant and contravariant implications, mixed-variance cell actions, inverse general/shaped eval-lambda operations, direct mixed-variance `Prof_imply_cov_func2`, fixed-weight `Prof_imply_cov_func(Q)`, and direct tensor-cell naturality through mutually completing covariant/contravariant explicit-substitution cuts. Generic arrow actions remain owned by `fapp*`; closed substitution is separate additional structure. | Naturality in an additional target cell, end semantics, the corresponding internalized contravariant owner, and higher substitution projections only when demanded by a concrete consumer. |
+| 3. Internal hom | Covariant and contravariant implications, fixed-endpoint vertical `ProfMap` eval/lambda bijections and shaped specializations, transparent endpoint-changing reindexed views, direct mixed-variance `Prof_imply_cov_func2`, and fixed-weight `Prof_imply_cov_func(Q)`. Generic arrow actions remain owned by `fapp*`. | Tensor-cell/target-cell naturality around the vertical core, end semantics, the corresponding internalized contravariant owner, and higher projections only when demanded by a concrete consumer. |
 | 4. Weighted limits | Ordinary `WeightedCone_prof`/`IsWeightedLimit_cov_iso`; computational `ProfComparison`/`WeightedLimit_cov`; arbitrary-map push/pull and selected universal/cone cells; ambient adjunction comparison; and genuinely defined ordinary and computational right-adjoint preservation theorems. The established public names are transparent aliases of the representability implementation. | Naturality in additional theorem parameters, unit/counit component projections, and any further selected-map presentation requested by concrete consumers. |
 | 5. Duality and weighted colimits | `Op_transf`, `Op_adjunction`, `Product_swap_func`, base-swap-only `Op_prof`, `Op_prof_transf`, transparent `WeightedColimit_con`, and the full `left_adjoint_preserves_weighted_colimit_con` witness derived by duality. | Direct colimit-oriented projection names and a non-looping semantic pullback/reindex comparison for `Op_prof_transf`. |
 | 6a. Directed join | `Terminal_prof`, internally natural `join_cross_transf`, derived shaped `join_cross_hom`, and `join_elim_func` with inclusion and cross beta rules. | Dependent elimination, explicit join object/hom decomposition, a generic directed-inductive framework, and/or semantic collage construction. |
@@ -3795,8 +3795,12 @@ owner or receive comparison maps without invalidating the public calculus.
 
 1. Phase 1a, landed: facade aliases, `Hom_prof_along`, its first full
    action, `Hom_prof`, and `Unit_prof`.
-2. Phase 1b, landed: semantic `Product_map_func`, stable `Prof_reindex`, its
-   full action, and representable endpoint accumulation.
+2. Phase 1b, revised 2026-06-23: primitive componentwise
+   `Product_map_func`, bounded stable `Pullback_catd`, stable
+   `Prof_reindex_base_func`, stable `Prof_reindex`, their projection ladders,
+   and representable endpoint accumulation. Broad global pullback folds and
+   the whole-product identity collapse were rejected by focused confluence
+   probes.
 3. Phase 1c, landed: transparent `Prof_transf_cat`, `Prof_hom_cat`, and
    `Prof_hom`; the checks did not demand endpoint-internalized or curry
    comparison packages.
@@ -3839,18 +3843,15 @@ owner or receive comparison maps without invalidating the public calculus.
     identity/composition rules were removed. The global Catd identity-action
     bridge and the existing Catd composition bridge now own the strict laws.
     The earlier curried workaround remains removed.
-12. Direct closed-substitution naturality, landed 2026-06-22:
-    `Prof_imply_cov_subst_transf` and `Prof_imply_con_subst_transf` package the
-    accumulated transposed cell for the two variance directions. Mutually
-    declared substitution/lambda and eval/tensor cuts make both beta/eta
-    overlap paths join. The raw nested equipment-composition formulation
-    typechecked, but direct lambda completion added broad critical pairs and
-    was rejected. Both promoted slices preserve the 1,071-warning baseline.
-    Focused evidence is retained in
-    `logs/probes/profunctor_eval_cov_subst_probe-20260622-232815.log` and
-    `logs/probes/profunctor_eval_con_subst_probe-20260622-233220.log`; the raw
-    nested alternatives are recorded by the preceding
-    `profunctor_eval_cov_naturality_rule_probe-*` logs.
+12. Vertical closed-core migration, landed 2026-06-23:
+    `Prof_eval_cov_map`/`Prof_lambda_cov_map` and
+    `Prof_eval_con_map`/`Prof_lambda_con_map` are the primitive inverse
+    operations over fixed-endpoint `ProfMap`. Fixed-endpoint shaped pairs are
+    also active. Existing endpoint-changing eval/lambda names are transparent
+    wrappers that reindex the target before using this core. The earlier
+    `Prof_imply_cov_subst_transf` and `Prof_imply_con_subst_transf` primitives
+    and their direct naturality checks were removed; future equipment
+    naturality is derived, demand-driven work.
 
 All listed landed steps leave:
 
