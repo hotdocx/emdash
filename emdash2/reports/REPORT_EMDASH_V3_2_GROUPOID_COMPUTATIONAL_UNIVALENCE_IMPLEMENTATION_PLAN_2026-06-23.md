@@ -17,7 +17,9 @@ from this report has been promoted to `emdash3_2.lp`. The existing equality,
 Focused probes have confirmed the transparent `PathOver` and reflexive
 `path_to_hom` definitions, the minimal decoded `Pi_grpd` and
 contractible-fibre `TypeEquiv` encoding, and derivability of the covariant
-Yoneda embedding from `hom_int` over the opposite category.
+Yoneda embedding from `hom_int` over the opposite category. A primitive
+recursive-destructor `OmegaEquiv` interface with reflexivity and recursively
+reflexive inverse cells has also passed an isolated warning-enabled probe.
 
 ## Scope And Authority
 
@@ -38,8 +40,8 @@ The goals are:
   arrows with paths;
 - reuse the existing internal hom/Yoneda infrastructure;
 - permit constructors whose path or univalence projections remain stuck;
-- avoid requiring full recursive omega-equivalence or universe self-univalence
-  before useful lower layers can land.
+- avoid requiring a general omega-equivalence corecursor, complete constructor
+  closure, or universe-specific computation before useful lower layers land.
 
 This plan does not modify the active kernel in one large migration. Each phase
 must be probed independently and promoted only after warning-enabled
@@ -62,12 +64,20 @@ rewrite SOP made the following decisions more precise:
 5. Keep `path_to_hom` independent of categorical univalence.
 6. Give generic `HomComparison` whole `Functord` maps between Yoneda families;
    dedicated pointwise beta/eta belongs below those maps.
-7. Treat full recursive `OmegaEquiv` and `Cat_cat` self-univalence as separate
-   feasibility gates, not prerequisites for observational paths or groupoid
-   type equivalence.
+7. Treat general `OmegaEquiv` corecursion/productivity and `Cat_cat`-specific
+   computation as separate deferred tasks, not prerequisites for
+   observational paths or groupoid type equivalence.
 8. Let `Core_incl_func` and generic `fapp1` functoriality own computational
    path-to-arrow composition. Do not add either orientation of a specialized
    composition rule when the generic owner remains visible.
+9. Classify the primitive recursive `OmegaEquiv` destructor interface as
+   feasible. Keep general corecursion/productivity semantics and closure
+   operations as later validation tasks rather than blockers to the
+   classifier.
+10. If `Cat` is operationally defined to classify only univalent categories,
+    a global `cat_univalence(C)` immediately includes `Cat_cat`. Separate that
+    interface assumption from deferred constructor-specific computation and
+    from model-theoretic justification of the self-universe.
 
 These corrections are architectural, not merely notational. In particular,
 they prevent a chosen pair of conversion functions from competing with the
@@ -240,6 +250,17 @@ The computational core-inclusion interface is therefore feasible, subject to
 the usual owning-position full-file promotion probe. Identification with the
 canonical J-defined semantic map remains a proof-time side task.
 
+The primitive recursive `OmegaEquiv` interface was tested in:
+
+```text
+tmp/probes/univalence_omega_equiv_destructor_probe.lp
+logs/probes/univalence_omega_equiv_destructor_probe-20260623-233648.log
+```
+
+The classifier, forward arrow, distinct left/right inverses, recursive inverse
+cells, reflexivity generator, and recursively reflexive cells all typecheck.
+The warning-enabled run produced no warning located in the probe file.
+
 ## Two Related But Separate Programs
 
 The work must be split into two programs.
@@ -290,6 +311,23 @@ HomComparison(C,x,y).
 Program A is a prerequisite for the full semantics of Program B, but useful
 parts of Program B—especially `path_to_hom`, Yoneda internalization, and
 `HomComparison`—can be developed independently.
+
+Program A is intended to provide computational univalence and observational
+path computation for the standard implemented groupoid type formers, not only
+an abstract noncomputing univalence axiom. In particular:
+
+```text
+Id_Grpd(A,B) behaves as TypeEquiv(A,B);
+coe_grpd(ua_grpd(e),a) computes to e.to(a);
+Sigma/Product paths expose component path data;
+Pi/function paths expose related-input path data;
+reflexivity and dependent ap compute through those views.
+```
+
+The coverage is incremental. Unit, naturals, inductive/coinductive
+classifiers, W/M-style formers, and additional project-specific constructors
+need their own closure entries before the phrase “most cases” is an
+implementation-completeness claim. Missing cases remain well-typed and stuck.
 
 Directed `Hom_cat` characterizations are complementary to these programs.
 They define directed identity/hom structure. Univalence additionally states
@@ -684,18 +722,28 @@ omega_equiv_right_cell
 Distinct left and right inverses match the current higher observational
 fibrancy experiments and avoid prematurely choosing one strict inverse.
 
-This interface is recursive through hom-categories and therefore
-coinductive in character. Lambdapi has no identified native coinductive
-declaration mechanism in the current project. The first implementation must
-therefore compare:
+This interface is recursive through hom-categories and therefore coinductive
+in character. Lambdapi has no identified native generated coinductive
+declaration or productivity checker in the current project. Nevertheless, an
+operational primitive classifier with recursive destructors is accepted by
+Lambdapi and has passed a focused probe.
 
-1. a primitive classifier with recursive destructors and canonical generators;
-2. finite-height `OmegaEquiv_n` probes;
-3. a 2-categorical approximation;
-4. a path-first interface that leaves non-reflexive destructors stuck.
+The implementation should therefore distinguish:
+
+1. the core primitive classifier/destructor interface, now syntactically
+   feasible;
+2. canonical generators and closure operations, to be promoted incrementally;
+3. optional general copattern/corecursion support and productivity criteria;
+4. a terminal-coalgebra or other external semantic justification;
+5. finite-height or 2-categorical probes used only as diagnostics.
 
 Finite approximations are diagnostic only. They must not silently become the
 meaning of `OmegaEquiv`.
+
+The project does not need a general user-facing corecursor before the
+classifier is useful. Canonical inhabitants such as reflexivity,
+`idtoequiv_cat`, and comparison-generated equivalences can be primitive or
+derived individually, with destructor equations audited at their owners.
 
 ### No Unrestricted Introduction Record
 
@@ -778,16 +826,16 @@ equivtoid_cat
     -> (x = y).
 ```
 
-Constructor-specific instances can then be added incrementally. If the
-project later confirms that `Cat` classifies only univalent categories, add:
+Constructor-specific instances can then be added incrementally. The intended
+project convention is that `Cat` classifies only univalent categories, so add:
 
 ```text
 cat_univalence(C) : CatUnivalence(C).
 ```
 
 as an explicit global operational axiom or projection from category
-structure. Keeping the capability explicit during development has several
-advantages:
+structure. The explicit capability remains useful during implementation even
+though the final surface supplies it globally:
 
 - non-univalent intermediate categories remain expressible;
 - constructor closure has a stable semantic owner;
@@ -807,10 +855,28 @@ The current single `Cat`/`Cat_cat` implementation may support the first option
 as a prototype. It must not be presented as a consistency or model-existence
 result.
 
-`Cat_cat` self-univalence is the highest-risk instance. Current HOTT work can
-construct fibrancy for several type formers while fibrancy of the universe
-itself remains open. Emdash should not make `Cat_cat` computation a gate for
-lower constructor instances.
+Under the project-level convention that every `C : Cat` is univalent, the
+global operational instance:
+
+```text
+cat_univalence(C) : CatUnivalence(C)
+```
+
+applies to `Cat_cat` immediately because `Cat_cat : Cat`. Thus existence of a
+`CatUnivalence(Cat_cat)` interface is not a separate implementation obstacle.
+
+What remains separate is:
+
+1. computational closure for the `Cat_cat`/category-universe constructor,
+   which may remain stuck and be added case by case;
+2. a semantic/model-theoretic justification of the unstratified convention
+   `Cat_cat : Cat_cat`;
+3. any later universe hierarchy or consistency claim.
+
+Current HOTT work similarly treats fibrancy of the universe itself as work in
+progress while establishing computational fibrancy for many ordinary type
+formers. Emdash may adopt the global operational interface now and leave
+universe-specific computation pluggable and deferred.
 
 ## Yoneda Internalization
 
@@ -983,10 +1049,11 @@ groupoid Pi formation;
 TypeEquiv;
 groupoid coercion/univalence;
 Yoneda and HomComparison;
-2-dimensional OmegaEquiv probe;
+primitive recursive OmegaEquiv;
 Op/Product categorical closure;
 Functor/Catd/Prof closure;
-Cat_cat self-univalence last.
+global Cat univalence policy;
+Cat_cat-specific computation last.
 ```
 
 Constructors without specialized laws remain well-formed but stuck.
@@ -1120,13 +1187,16 @@ the report labels ua_grpd as an operational assumption.
 
 ### Phase 6: Omega Equivalence
 
-1. Probe a 2-dimensional approximation.
-2. Probe primitive recursive destructors.
-3. Select a canonical reflexivity generator.
-4. Derive `idtoequiv_cat` by equality induction.
-5. Add no general introduction record.
-6. Record whether the intended interface is modelled coinductively or remains
-   an operational specification.
+1. Promote the probed primitive classifier and recursive destructors in an
+   owning-position full-file copy.
+2. Promote the canonical reflexivity generator and recursive reflexivity
+   cells.
+3. Derive `idtoequiv_cat` by equality induction.
+4. Add symmetry, composition, functorial image, and selected constructor
+   closures incrementally.
+5. Add no unrestricted introduction record.
+6. Keep optional general corecursion/productivity and terminal-coalgebra
+   semantics as separate research/implementation tasks.
 
 ### Phase 7: Categorical Univalence
 
@@ -1134,9 +1204,9 @@ the report labels ua_grpd as an operational assumption.
    `idtoequiv_cat`.
 2. Select `equivtoid_cat` and add only required coherence computation.
 3. Add instances for `Path_cat`, `Op_cat`, and products.
-4. Defer `Cat_cat` self-univalence.
-5. Only after universe policy review decide whether to add global
-   `cat_univalence(C)`.
+4. Adopt global `cat_univalence(C)` as the intended operational foundation.
+5. Record the immediate `Cat_cat` instance while leaving universe-specific
+   computation deferred.
 
 ### Phase 8: Weak Representability Integration
 
@@ -1162,10 +1232,11 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-PI-VIEW` | blocked | `UNI-PATHOVER`, `UNI-GRPD-PI` | Sigma view and Pi formation stable | Define related-input observational Pi path. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
-| `UNI-OMEGA` | unresolved foundational design | path utilities | 2-categorical consumer or weak representability begins | Compare recursive destructors with finite-height probes. |
-| `UNI-CAT-CAP` | blocked on `UNI-OMEGA` | `UNI-OMEGA` | Canonical `idtoequiv_cat` is available | Define `CatUnivalence(C)` as `IsEquivMap(idtoequiv_cat)`. |
-| `UNI-CAT-GLOBAL` | deferred | `UNI-CAT-CAP` | universe interpretation chosen | Decide whether every `C : Cat` receives a global instance. |
-| `UNI-CAT-SELF` | deferred/high risk | `UNI-CAT-CAP`, universe policy | lower constructor closure stable | Probe `Cat_cat` only as a separate universe milestone. |
+| `UNI-OMEGA` | primitive recursive interface feasibility confirmed | path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
+| `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
+| `UNI-CAT-CAP` | architecturally ready after `UNI-OMEGA` promotion | `UNI-OMEGA` | Canonical `idtoequiv_cat` lands | Define `CatUnivalence(C)` as `IsEquivMap(idtoequiv_cat)`. |
+| `UNI-CAT-GLOBAL` | design decision adopted; implementation awaits capability | `UNI-CAT-CAP` | `CatUnivalence` interface lands | Add the global operational instance for every `C : Cat`. |
+| `UNI-CAT-SELF` | operational instance follows from global policy; computation deferred | `UNI-CAT-GLOBAL` | global `cat_univalence` is adopted | Record the immediate instance; add universe-specific computation only when consumed. |
 | `UNI-PROF-WEAK` | deferred | `UNI-CAT-CAP`, `UNI-HOM-COMP` | weak representability has a concrete theorem consumer | Compare weak/path and computational weighted limits. |
 
 ## Feasibility Assessment
@@ -1183,15 +1254,19 @@ the report labels ua_grpd as an operational assumption.
 | `coe_grpd(ua(e))` | medium syntactically | foundational status and rewrite overlap |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
-| finite/2D `OmegaEquiv` | medium | choosing a prototype that does not become semantics |
-| full recursive `OmegaEquiv` | unresolved | coinductive meaning and productivity |
-| explicit `CatUnivalence(C)` | medium after Omega interface | coherence and constructor ownership |
-| global univalence for every `C` | foundationally risky | model/universe interpretation |
-| `Cat_cat` self-univalence | highest risk | universe fibrancy/stratification |
+| primitive recursive `OmegaEquiv` interface | confirmed in isolated probe | owning-position promotion and closure operations |
+| general `OmegaEquiv` corecursor/productivity checking | deferred/optional | Lambdapi has no native generated codata checker |
+| explicit `CatUnivalence(C)` | high after Omega promotion | coherence and constructor ownership |
+| global univalence for every `C` | operationally straightforward, foundationally assumed | model/universe interpretation |
+| `Cat_cat` self-univalence interface | immediate under global policy | constructor-specific computation remains deferred |
+| semantic justification of `Cat_cat : Cat_cat` | outside near-term kernel implementation | universe stratification/consistency |
 
-The architecture is feasible even if full `OmegaEquiv` and `Cat_cat`
-self-univalence remain unresolved. The first four phases can provide useful
-computational non-directed equality and type equivalence independently.
+The operational architecture is feasible across all major layers. The
+remaining uncertainty concerns completeness of constructor-specific
+computation, optional general coinduction/productivity infrastructure, and
+semantic justification of the self-universe—not the basic availability of
+computational groupoid univalence, recursive categorical equivalence, or a
+global categorical-univalence interface.
 
 ## Acceptance Criteria
 
@@ -1226,10 +1301,11 @@ Core_incl_func composition is owned by generic fapp1 functoriality;
 Yoneda_cov_func is owned by hom_int(id_{C^op});
 HomComparison beta/eta uses dedicated heads;
 HomComparison forgets to IsoEvidence;
-a finite or recursive OmegaEquiv interface has a documented semantics;
+the primitive recursive OmegaEquiv interface and reflexivity compute;
 idtoequiv_cat is canonical and independent of CatUnivalence(C);
 CatUnivalence(C) states that idtoequiv_cat is an equivalence;
-Cat_cat self-univalence remains separately classified.
+Cat_cat receives the global interface if adopted, with computation separately
+classified.
 ```
 
 The path-owned representability milestone is complete only when:
@@ -1269,6 +1345,7 @@ primary materials inform the design:
   <https://github.com/gwaithimirdain/narya>.
 
 The external state of HOTT remains work in progress. In particular, the 2025
-material reports substantial type-former fibrancy progress while universe
-fibrancy remains unresolved. Emdash should use that as risk evidence, not as a
-reason to postpone the lower computational layers.
+material reports substantial type-former fibrancy progress while fibrancy of
+the fibrant universe remains unresolved. For emdash this is evidence to defer
+universe-specific computational closure and semantic claims; it does not
+prevent adopting the project's global operational univalence interface.
