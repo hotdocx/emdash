@@ -6843,77 +6843,23 @@ symbol Prof_cat (A B : Cat) : Cat
 symbol Prof (A B : Cat) : Grpd
 ≔ Obj (Prof_cat A B);
 
-// Stable endpoint-base map for profunctor reindexing.
+// Readability alias for the endpoint-base map of profunctor reindexing.
 //
 // Semantically:
 //   Prof_reindex_base_func(F,G) = Product_map_func(Op_func(F),G).
-//
-// Baking in F and G avoids rewrite LHSs that discriminate through the
-// reducible nested head `Op_func(F)`.
-injective symbol Prof_reindex_base_func [A A' B B' : Cat]
+symbol Prof_reindex_base_func [A A' B B' : Cat]
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   : τ (Functor
       (Product_cat (Op_cat A') B')
-      (Product_cat (Op_cat A) B));
-
-rule @fapp0 _ _
-      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
-      $ab
-  ↪ @Product_pair
-      (Op_cat $A)
-      $B
-      (@fapp0 $A' $A $F (sigma_Fst $ab))
-      (@fapp0 $B' $B $G (sigma_Snd $ab));
-
-rule @fapp1_func _ _
-      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
-      $ab
-      $ab'
-  ↪ @Product_map_func
-      (Hom_cat (Op_cat $A') (sigma_Fst $ab) (sigma_Fst $ab'))
-      (Hom_cat (Op_cat $A)
-        (@fapp0 $A' $A $F (sigma_Fst $ab))
-        (@fapp0 $A' $A $F (sigma_Fst $ab')))
-      (Hom_cat $B' (sigma_Snd $ab) (sigma_Snd $ab'))
-      (Hom_cat $B
-        (@fapp0 $B' $B $G (sigma_Snd $ab))
-        (@fapp0 $B' $B $G (sigma_Snd $ab')))
-      (@fapp1_func
-        (Op_cat $A')
-        (Op_cat $A)
-        (@Op_func $A' $A $F)
-        (sigma_Fst $ab)
-        (sigma_Fst $ab'))
-      (@fapp1_func
-        $B' $B $G
-        (sigma_Snd $ab)
-        (sigma_Snd $ab'));
-
-rule @fapp1_fapp0 _ _
-      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
-      $ab
-      $ab'
-      $pq
-  ↪ @Product_pair
-      (Hom_cat (Op_cat $A)
-        (@fapp0 $A' $A $F (sigma_Fst $ab))
-        (@fapp0 $A' $A $F (sigma_Fst $ab')))
-      (Hom_cat $B
-        (@fapp0 $B' $B $G (sigma_Snd $ab))
-        (@fapp0 $B' $B $G (sigma_Snd $ab')))
-      (@fapp1_fapp0
-        (Op_cat $A')
-        (Op_cat $A)
-        (@Op_func $A' $A $F)
-        (sigma_Fst $ab)
-        (sigma_Fst $ab')
-        (sigma_Fst $pq))
-      (@fapp1_fapp0
-        $B' $B $G
-        (sigma_Snd $ab)
-        (sigma_Snd $ab')
-        (sigma_Snd $pq));
+      (Product_cat (Op_cat A) B))
+≔ @Product_map_func
+    (Op_cat A')
+    (Op_cat A)
+    B'
+    B
+    (@Op_func A' A F)
+    G;
 
 // Vertical maps between profunctors with fixed endpoints.
 //
@@ -6965,7 +6911,8 @@ symbol Op_prof [A B : Cat]
   Unlike the readability aliases above, `Prof_reindex` is a stable,
   non-injective head. A focused probe showed that the representable
   accumulation law cannot be attached to a symbol defined with `≔`.
-  Its object and arrow projections below retain the semantic pullback owner.
+  Its object and arrow projections below route through the generic
+  Product_map_func(Op_func(F),G) base map directly.
 */
 symbol Prof_reindex [A A' B B' : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B)))
@@ -6986,7 +6933,13 @@ rule @fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab);
 
 // Full base-arrow action of reindexing. The named rung keeps the functorial
@@ -7032,17 +6985,35 @@ rule fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab)
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab')
       (@fapp1_fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab
         $ab'
         $pq);
@@ -7062,12 +7033,24 @@ rule @fapp1_fapp0
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab)
       (@fapp0
         (Product_cat (Op_cat $A') $B')
         (Product_cat (Op_cat $A) $B)
-        (@Prof_reindex_base_func $A $A' $B $B' $F $G)
+        (@Product_map_func
+          (Op_cat $A')
+          (Op_cat $A)
+          $B'
+          $B
+          (@Op_func $A' $A $F)
+          $G)
         $ab')
       (@fapp1_fapp0
         (Product_cat (Op_cat $A') $B')
@@ -11023,20 +11006,26 @@ unif_rule
       (@id_func $B)
   ↪ [ tt ≡ tt ];
 
-// Pullback along the stable profunctor endpoint-base map contracts to the
-// profunctor-specific reindexing normal forms.
-rule @Pullback_catd
-      _
-      _
-      $R
-      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
-  ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
+/*
+  Generic product-map pullback as profunctor reindexing.
 
+  Here F is an arbitrary functor A -> A'. Pulling a Cat-valued family on
+  A' x B' back along Product_map_func(F,G) is the same object as reindexing
+  the corresponding profunctor from Op(A') to B' along Op_func(F) and G.
+  The functor-level fold is the runtime normal form; its object action then
+  computes through the generic fapp0 rule for `Prof_reindex_func`.
+*/
 rule @Pullback_catd_func
       _
       _
-      (@Prof_reindex_base_func $A $A' $B $B' $F $G)
-  ↪ @Prof_reindex_func $A $A' $B $B' $F $G;
+      (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex_func
+      (Op_cat $A')
+      (Op_cat $A)
+      $B'
+      $B
+      (@Op_func $A $A' $F)
+      $G;
 
 /*
   Section-dependent-hom composition normal forms.

@@ -79,14 +79,26 @@ ProfCell(R',F,R,G) = ProfMap(R', Prof_reindex(R,F,G))
 
 The mistake is using equipment cells as the default language for the biclosed core.
 
-Your proposed semantic definition is correct in principle:
+An earlier proposed semantic definition was:
 
 ```text
 Prof_reindex_func(F,G)
   := Pullback_catd_func(Product_map_func(Op_func(F),G))
 ```
 
-However, a current-kernel probe confirms that its object action still does **not** convert to the stable `Prof_reindex` normal form. Therefore simplifying `Prof_reindex_func` requires jointly reconsidering `Prof_reindex`; it is not currently a drop-in alias replacement.
+That formulation captured the intended semantics but was not the cleanest
+rewrite-facing normal form, because the product map had already baked in the
+opposite operation. The active bridge is instead generic in an arbitrary
+product map:
+
+```text
+Pullback_catd_func(Product_map_func(F,G))
+  -> Prof_reindex_func(Op_func(F),G).
+```
+
+For profunctor reindexing itself, `Prof_reindex_func(F,G)` remains the stable
+head where `F : A' -> A`; applying it to `R` computes to
+`Prof_reindex(R,F,G)`.
 
 **Hom Profunctors**
 
@@ -3066,11 +3078,14 @@ specialization heads:
 comp_cat_con_func(F)                  -> Pullback_catd_func(F)
 fapp0(Pullback_catd_func(F), E)       -> Pullback_catd(E,F)
 
-Pullback_catd_func(Product_map_func(Op_func(F),G))
-  -> Prof_reindex_func(F,G)
+Pullback_catd_func(Product_map_func(F,G))
+  -> Prof_reindex_func(Op_func(F),G)
 
 fapp0(Prof_reindex_func(F,G),R)
   -> Prof_reindex(R,F,G)
+
+Prof_reindex_base_func(F,G)
+  := Product_map_func(Op_func(F),G)
 ```
 
 The corresponding object-level join is essential:
@@ -3321,9 +3336,10 @@ comp_cat_fapp0(Pullback_catd(E,F),H)
   == Pullback_catd(E,F o H).
 ```
 
-Typed `eq_refl` regressions exercise all three rules. They preserve the
-1,114-warning inventory while avoiding the global runtime orientation that
-caused the 1,129-warning probe.
+Typed `eq_refl` regressions exercise all three rules. They preserved the
+then-current 1,114-warning inventory while avoiding the global runtime
+orientation that caused the 1,129-warning probe. After the later product-map
+reindex migration, the active warning inventory is 1,108.
 
 ### Product And Profunctor Base Maps
 
@@ -3359,45 +3375,36 @@ The arrow-level comparison does work directly because both sides have rigid
 heads. All comparisons have typed `eq_refl` regressions and preserve the
 warning inventory.
 
-Direct pullback folds discriminating on
-`Product_map_func(Op_func(F),G)` were also brittle because reduction of
-`Op_func` can erase the intended discriminator. The active stable base-map
-head is therefore:
-
-```text
-Prof_reindex_base_func(F,G)
-  : A'^op x B' -> A^op x B
-```
-
-with the componentwise semantics of
-`Product_map_func(Op_func(F),G)`. The bounded joining rules are:
-
-```text
-Pullback_catd(R,Prof_reindex_base_func(F,G))
-  -> Prof_reindex(R,F,G)
-
-Pullback_catd_func(Prof_reindex_base_func(F,G))
-  -> Prof_reindex_func(F,G).
-```
-
-This preserves the requested stable reindexing normal forms without making
-general Cat-valued composition use them.
-
-A post-review replacement probe tested:
+The initial bounded implementation used a primitive
+`Prof_reindex_base_func(F,G)` to avoid discriminating through the reducible
+`Op_func` head. A later review corrected the intended generic formulation:
+the bridge should discriminate on an arbitrary product map and place the
+opposite operation only on the RHS:
 
 ```text
 Pullback_catd_func(Product_map_func(F,G))
   -> Prof_reindex_func(Op_func(F),G)
 ```
 
-with the opposite operation only on the RHS, plus the object-level joining
-rule, while removing `Prof_reindex_base_func`. The formulation is
-type-correct and its focused assertions pass. The full-file warning inventory
-rose from 1,114 to 1,124 after LHS cleanup; remaining reports include a real
-nested-pullback overlap as well as underconstrained opposite-category
-overlaps. Therefore the replacement is feasible but not yet a cleaner
-computational architecture. Keep `Prof_reindex_base_func` provisionally until
-the nested pullback/reindex join has a principled normal form.
+where `F : A -> A'` is a functor between arbitrary categories. This runtime
+rule is now active. Its object action computes by the generic `fapp0`
+projection of `Prof_reindex_func`; no separate object-level
+`Pullback_catd(Product_map_func(F,G))` rewrite or unification rule is needed
+for the same comparison.
+
+After that bridge was promoted, the internal `Prof_reindex` object, full
+base-arrow, and capped-arrow projection rules were migrated to route through
+`Product_map_func(Op_func(F),G)` directly. The old base-map name remains only
+as a transparent readability alias:
+
+```text
+Prof_reindex_base_func(F,G) := Product_map_func(Op_func(F),G).
+```
+
+Its bespoke projection rules and bespoke pullback contraction rules were
+removed. This makes the generic product-map route the single computational
+owner while preserving source compatibility for any old diagnostic or
+readability reference to `Prof_reindex_base_func`.
 
 ### Fixed-Endpoint Closed Core
 
@@ -3437,11 +3444,21 @@ required naturality variables and canonical normal form.
 ### Validation And Remaining Work
 
 The bounded implementation leaves the full active kernel and diagnostics
-typechecking. The warning-enabled inventory is 1,114 reports: 951
-unjoinable-critical-pair reports and 163 replaceable-pattern reports. This is
-43 above the previous 1,071 baseline and belongs to the stable pullback,
-product-map, and profunctor-base projection ladders. The vertical closed-core
-migration added no further warnings in the focused comparison.
+typechecking. The warning-enabled inventory after the product-map reindex
+migration is 1,108 reports: 945 unjoinable-critical-pair reports and 163
+replaceable-pattern reports. This is 37 above the previous 1,071 baseline and
+belongs to the remaining stable pullback and product-map projection ladders.
+Demoting `Prof_reindex_base_func` from primitive stable head to transparent
+alias removed its separate projection-overlap contribution. The vertical
+closed-core migration added no further warnings in the focused comparison.
+
+Warning deltas are diagnostic, not a mechanical acceptance or rejection
+criterion. They should be used to identify concrete overlap families and then
+assessed against the intended normal form. In this slice the generic
+`Pullback_catd_func(Product_map_func(F,G))` fold is semantically the right
+runtime normal form; the redundant object-level comparison was not promoted
+because the functor-level fold already gives the required computation by
+projection.
 
 The redesign remains feasible. The weighted-limit, comparison, adjunction,
 duality, weighted-colimit, and join sections all continue to typecheck through

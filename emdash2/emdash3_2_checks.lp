@@ -5376,11 +5376,14 @@ assert [A A' B B' : Cat]
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
-  @Pullback_catd
-    (Product_cat (Op_cat A') B')
-    (Product_cat (Op_cat A) B)
+  @fapp0
+    (@Catd_cat (Product_cat (Op_cat A) B))
+    (@Catd_cat (Product_cat (Op_cat A') B'))
+    (@Pullback_catd_func
+      (Product_cat (Op_cat A') B')
+      (Product_cat (Op_cat A) B)
+      (@Prof_reindex_base_func A A' B B' F G))
     R
-    (@Prof_reindex_base_func A A' B B' F G)
   ≡ @Prof_reindex A A' B B' R F G;
 
 assert [A A' B B' : Cat]
@@ -5391,6 +5394,42 @@ assert [A A' B B' : Cat]
     (Product_cat (Op_cat A) B)
     (@Prof_reindex_base_func A A' B B' F G)
   ≡ @Prof_reindex_func A A' B B' F G;
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B')) ⊢
+  @Pullback_catd_func
+    (Product_cat A B)
+    (Product_cat A' B')
+    (@Product_map_func A A' B B' F G)
+  ≡ @Prof_reindex_func
+      (Op_cat A')
+      (Op_cat A)
+      B'
+      B
+      (@Op_func A A' F)
+      G;
+
+assert [A A' B B' : Cat]
+  (F : τ (Functor A A'))
+  (G : τ (Functor B B'))
+  (R : τ (Catd (Product_cat A' B'))) ⊢
+  @fapp0
+    (@Catd_cat (Product_cat A' B'))
+    (@Catd_cat (Product_cat A B))
+    (@Pullback_catd_func
+      (Product_cat A B)
+      (Product_cat A' B')
+      (@Product_map_func A A' B B' F G))
+    R
+  ≡ @Prof_reindex
+      (Op_cat A')
+      (Op_cat A)
+      B'
+      B
+      R
+      (@Op_func A A' F)
+      G;
 
 assert [A A' B B' : Cat]
   (F : τ (Functor A' A))

@@ -67,8 +67,10 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   normal. A documented core projection ladder with one canonical owner can
   also be valid. A new commuting conversion is exceptional: probe both
   reduction orders, install it at the intended owning position in a temporary
-  full-file copy, compare warning counts, and promote it only when the paths
-  join and a concrete consumer needs judgmental computation.
+  full-file copy, classify any warning-enabled delta, and promote it only when
+  the paths join and a concrete consumer needs judgmental computation. Warning
+  counts are diagnostic evidence for locating overlap families, not an
+  automatic veto on a semantically necessary rule.
 - Use `_` for reconstructible compound terms in inferred LHS slots after a
   focused probe confirms the rule still checks promptly. If a compound slot
   is an actual constructor discriminator or a measured subject-reduction /
@@ -87,6 +89,12 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   narrowly typed `unif_rule`. Validate it with an explicit typed
   `eq_refl` term; `assert t ≡ u` tests conversion and therefore does not test a
   unification rule.
+- If a functor-level runtime fold already gives the desired object-level
+  computation by applying a generic projection such as `fapp0`, do not add a
+  second object-level rewrite or unification rule for the same semantic
+  comparison. Add a projection regression check instead. Promote a direct
+  object-level rule only when a concrete consumer cannot go through the
+  functor-level owner.
 - Unification rules are experimental, are not automatically transitive, and
   do not reliably solve a pattern whose only rigid side is a constructor and
   whose other side is a bare pattern variable. Prefer two rigid heads or a
