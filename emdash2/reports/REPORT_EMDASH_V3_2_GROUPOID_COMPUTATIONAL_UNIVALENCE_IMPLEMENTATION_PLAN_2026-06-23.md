@@ -65,6 +65,9 @@ rewrite SOP made the following decisions more precise:
 7. Treat full recursive `OmegaEquiv` and `Cat_cat` self-univalence as separate
    feasibility gates, not prerequisites for observational paths or groupoid
    type equivalence.
+8. Let `Core_incl_func` and generic `fapp1` functoriality own computational
+   path-to-arrow composition. Do not add either orientation of a specialized
+   composition rule when the generic owner remains visible.
 
 These corrections are architectural, not merely notational. In particular,
 they prevent a chosen pair of conversion functions from competing with the
@@ -200,20 +203,42 @@ These are append-only import probes. Promotion still requires an
 owning-position temporary full-file probe because interaction with later
 active rules is not tested merely by importing the kernel first.
 
-A separate `Core_incl_func` ownership probe established a narrower negative
-result:
+A separate `Core_incl_func` ownership probe was refined after reviewing the
+orientation of the proposed path-to-arrow composition rule:
 
 ```text
 tmp/probes/univalence_core_incl_owner_probe.lp
-logs/probes/univalence_core_incl_owner_probe-20260623-225558.log
+logs/probes/univalence_core_incl_owner_probe-20260623-231555.log
+logs/probes/univalence_core_incl_owner_probe-20260623-231648.log
 ```
 
-The functor-owned projection and reflexivity case typecheck, but the
-composition rule on transparent `eq_trans` adds one nonjoinable
-unfolding-versus-specialized-rule critical pair. A direct J-defined
-`path_to_hom(eq_trans(p,q))` conversion assertion also fails. Therefore strict
-`Core_incl_func` composition is not promotion-ready even though standalone
-`path_to_hom` reflexivity is feasible.
+The initial outward rule:
+
+```text
+core_path_to_hom(eq_trans(p,q))
+  -> core_path_to_hom(q) o core_path_to_hom(p)
+```
+
+was the wrong runtime orientation and competed with transparent unfolding of
+`eq_trans`. Reversing it gives the intended Došen-style inward fold, but a
+generic rule on `comp_fapp0` still creates new overlaps with specialized
+ambient-category composition for `Op_cat`, `Path_cat`, `Catd_cat`, `Cat_cat`,
+and `Terminal_cat`.
+
+The successful variant removes the specialized composition rule entirely.
+It defines public `path_to_hom` as the arrow action of:
+
+```text
+Core_incl_func(C) : Core_cat(C) -> C
+```
+
+and leaves composition to the existing global `fapp1` functoriality rule.
+Only the reflexivity projection bridge is needed because `Path_cat` can erase
+the literal generic identity owner before `fapp1` sees it. The quiet and
+warning-enabled import probes pass with no warning located in the probe file.
+The computational core-inclusion interface is therefore feasible, subject to
+the usual owning-position full-file promotion probe. Identification with the
+canonical J-defined semantic map remains a proof-time side task.
 
 ## Two Related But Separate Programs
 
@@ -570,7 +595,8 @@ The safe direction:
 path x y -> Hom_C(x,y)
 ```
 
-does not require univalence. It follows from equality induction:
+does not require univalence. Its semantic reference map follows from equality
+induction:
 
 ```text
 path_to_hom(C,p)
@@ -583,46 +609,39 @@ This gives:
 path_to_hom(C,refl_x) -> id_x.
 ```
 
-A functor:
+A computational functor owner:
 
 ```text
 Core_incl_func(C) : Core_cat(C) -> C
 ```
 
-could expose this map as its arrow action. The review probe showed that the
-direct J-term is not definitionally functorial on the current transparent
-`eq_trans` presentation:
+should expose the public map as its arrow action:
 
 ```text
-path_to_hom(eq_trans(p,q))
-  ?= q_as_arrow o p_as_arrow.
+path_to_hom(C,p)
+  := fapp1_fapp0(Core_incl_func(C),p).
 ```
 
-A second probe made `Core_incl_func` the owner, projected its arrow action
-through a dedicated `core_path_to_hom` head, and added reflexivity/composition
-rules there. Reflexivity passed. Composition exposed one new nonjoinable
-critical pair between:
+Then the existing generic functoriality rule owns composition:
 
 ```text
-core_path_to_hom(eq_trans(p,q)) -> ...
+path_to_hom(q) o path_to_hom(p)
+  -> path_to_hom(eq_trans(p,q)).
 ```
 
-and transparent unfolding of `eq_trans` to `ind_eq`.
+No constructor-specific composition rule is required. The only measured
+bridge is:
 
-The next design probe must choose one of:
+```text
+fapp1_fapp0(Core_incl_func(C),eq_refl(x))
+  -> id_C(x).
+```
 
-1. a stable path-composition head owned by `Path_cat`;
-2. a rule on the normalized `ind_eq` presentation, if it can be made narrow
-   and joinable;
-3. propositional functoriality for standalone `path_to_hom`, while deferring a
-   strict `Core_incl_func`;
-4. another stable projection ladder that preserves the generic functor owner
-   before `Path_cat` erases the literal composition.
-
-Do not promote the current diagnostic bridge. This side task should precede
-categorical univalence only if categorical consumers require strict
-path-to-arrow composition. It must not burden `idtoequiv_cat` with ordinary
-path-to-arrow computation.
+This bridge joins projection-first reduction with ordinary functor identity.
+The next full-file probe must additionally decide how to record proof-time
+agreement between the functor-owned runtime map and the J-defined semantic
+reference—preferably propositional evidence or a narrowly typed unification
+rule, not a second runtime owner.
 
 The reverse direction applies only to equivalence arrows and requires
 `CatUnivalence(C)`.
@@ -958,8 +977,7 @@ Suggested order:
 ```text
 reflexivity;
 PathOver;
-standalone path_to_hom;
-strict Core inclusion only after path-composition ownership is resolved;
+Core inclusion and functor-owned path_to_hom;
 Sigma/Product path views;
 groupoid Pi formation;
 TypeEquiv;
@@ -1031,10 +1049,11 @@ append-only import probe.
 
 1. Probe `PathOver` as a transparent semantic definition.
 2. Add reflexivity, symmetry, composition, and dependent `ap` only as required.
-3. Promote standalone J-defined `path_to_hom` only if its reflexivity
-   computation is already useful.
-4. Resolve the transparent-`eq_trans` ownership problem before adding strict
-   `Core_incl_func(C)`.
+3. Add `Core_incl_func(C)` and define public `path_to_hom` through its arrow
+   action.
+4. Add only the measured reflexivity projection bridge.
+5. Verify composition through generic `fapp1` functoriality.
+6. Probe proof-time agreement with the J-defined semantic reference.
 
 Acceptance:
 
@@ -1042,7 +1061,8 @@ Acceptance:
 PathOver(P,refl,u,v) computes to u=v;
 eq_apd computes on reflexivity;
 path_to_hom(refl) computes to id;
-strict Core_incl_func composition remains a separately gated side task;
+path_to_hom(q) o path_to_hom(p) folds through generic functoriality;
+no specialized path-to-arrow composition rule is installed;
 no change to the global equality classifier;
 warning-enabled full-file delta classified.
 ```
@@ -1133,8 +1153,8 @@ the report labels ua_grpd as an operational assumption.
 | ID | Status | Depends on | Resume trigger | Next action |
 | --- | --- | --- | --- | --- |
 | `UNI-PATHOVER` | semantic feasibility confirmed | none | implementation begins | Compare transparent and stable owning-position variants; add dependent-ap checks. |
-| `UNI-PATH-HOM` | standalone reflexivity feasibility confirmed | none | path-to-arrow consumer appears | Promote the J-term only if useful; keep composition propositional. |
-| `UNI-CORE-INCL` | blocked on path-composition ownership | `UNI-PATH-HOM` | strict core functor is required | Resolve transparent `eq_trans` versus stable functor projection; current diagnostic bridge is not joinable. |
+| `UNI-PATH-HOM` | functor-owned computation feasible | none | path-to-arrow implementation begins | Define the public map through `Core_incl_func`; probe proof-time J agreement. |
+| `UNI-CORE-INCL` | composition feasibility confirmed in import probe | none | Phase 1 promotion begins | Run owning-position full-file probe with only object and reflexivity projection rules. |
 | `UNI-GRPD-PI` | formation/decoding feasibility confirmed | none | `TypeEquiv` promotion begins | Probe the decoder at its intended owning position. |
 | `UNI-TYPE-EQUIV` | semantic formation confirmed | promoted `UNI-GRPD-PI` | Pi decoder lands | Derive inverse selection, inverse paths, symmetry, and composition. |
 | `UNI-UA-GRPD` | blocked on `UNI-TYPE-EQUIV` | `UNI-TYPE-EQUIV` | Type equivalence algebra passes | Define universe-univalence capability and probe `coe_grpd(ua(e))`. |
@@ -1154,8 +1174,8 @@ the report labels ua_grpd as an operational assumption.
 | --- | --- | --- |
 | `PathOver` formation/reflexivity | confirmed in isolated probe | transport orientation and unwanted unfolding |
 | dependent ap | high | stable public normal form and reflexivity computation |
-| standalone `path_to_hom` reflexivity | confirmed in isolated probe | no current blocker |
-| strict `Core_incl_func` | unresolved/medium | transparent `eq_trans` erases the generic composition owner |
+| functor-owned `path_to_hom` reflexivity | confirmed in isolated probe | owning-position overlap audit |
+| strict `Core_incl_func` composition | confirmed through generic functoriality | proof-time agreement with J semantics |
 | `Pi_grpd` formation/decoding | confirmed in isolated probe | future interaction with observational Pi equality |
 | contractible-fibre `TypeEquiv` formation | confirmed in isolated probe | inverse derivation, proof term size, and Sigma-fibre equality |
 | Sigma/Product path views | high | encode/decode orientation and projection overlap |
@@ -1202,7 +1222,7 @@ The first categorical milestone is complete when:
 
 ```text
 path_to_hom computes on reflexivity;
-Core_incl_func is either joinable on composition or explicitly deferred;
+Core_incl_func composition is owned by generic fapp1 functoriality;
 Yoneda_cov_func is owned by hom_int(id_{C^op});
 HomComparison beta/eta uses dedicated heads;
 HomComparison forgets to IsoEvidence;
