@@ -3397,9 +3397,24 @@ Pullback_catd_func(Product_map_func(F,G))
 
 where `F : A -> A'` is a functor between arbitrary categories. This runtime
 rule is now active. Its object action computes by the generic `fapp0`
-projection of `Prof_reindex_func`; no separate object-level
-`Pullback_catd(Product_map_func(F,G))` rewrite or unification rule is needed
-for the same comparison.
+projection of `Prof_reindex_func`.
+
+A later direct-syntax audit showed that this does not normalize a bare
+object-level term whose head is already `Pullback_catd`. The corresponding
+object-level fold is therefore also active:
+
+```text
+Pullback_catd(R,Product_map_func(F,G))
+  -> Prof_reindex(R,Op_func(F),G).
+```
+
+The object-level rule keeps the product source and target categories explicit
+on the LHS as real guards for the product-map base. An underscored version
+typechecked, but the explicit product guards reduced the new overlap
+diagnostics from four underconstrained reports to one focused critical-pair
+report. This is an intentional owner split: direct-authored `Pullback_catd`
+syntax needs its own fold, while `fapp0(Pullback_catd_func(...),R)` still
+computes through the functor-level owner and joins the same normal form.
 
 After that bridge was promoted, the internal `Prof_reindex` object, full
 base-arrow, and capped-arrow projection rules were migrated to route through
@@ -3454,24 +3469,28 @@ required naturality variables and canonical normal form.
 
 The bounded implementation leaves the full active kernel and diagnostics
 typechecking. The warning-enabled inventory after the runtime pullback
-accumulation and product-map reindex migration is 1,114 reports: 951
+accumulation and product-map reindex migration is 1,115 reports: 952
 unjoinable-critical-pair reports and 163 replaceable-pattern reports. This is
-43 above the previous 1,071 baseline and belongs to the remaining stable
+44 above the previous 1,071 baseline and belongs to the remaining stable
 pullback and product-map projection ladders. Demoting
 `Prof_reindex_base_func` from primitive stable head to transparent alias
 removed its separate projection-overlap contribution; promoting
 `comp(Pullback(E,F),H) -> Pullback(E,F o H)` added six classified diagnostic
-overlaps. The vertical closed-core migration added no further warnings in the
-focused comparison.
+overlaps; promoting the direct object-level
+`Pullback_catd(R,Product_map_func(F,G))` fold added one focused diagnostic
+critical-pair report. The vertical closed-core migration added no further
+warnings in the focused comparison.
 
 Warning deltas are diagnostic, not a mechanical acceptance or rejection
 criterion. They should be used to identify concrete overlap families and then
 assessed against the intended normal form. In this slice both the accumulated
 pullback cut and the generic
 `Pullback_catd_func(Product_map_func(F,G))` fold are semantically the right
-runtime normal forms. The redundant object-level
-`Pullback_catd(Product_map_func(F,G))` comparison was not promoted because the
-functor-level fold already gives the required computation by projection.
+runtime normal forms. The formerly deferred object-level
+`Pullback_catd(Product_map_func(F,G))` fold is now promoted for direct
+`Pullback_catd` syntax; it is not replaceable by the functor-level projection
+route unless the source term is itself presented through
+`fapp0(Pullback_catd_func(...),R)`.
 
 The redesign remains feasible. The weighted-limit, comparison, adjunction,
 duality, weighted-colimit, and join sections all continue to typecheck through

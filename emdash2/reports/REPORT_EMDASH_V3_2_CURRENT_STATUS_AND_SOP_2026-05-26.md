@@ -134,18 +134,24 @@ object/full/capped projection rules now route through the generic base map
 `Product_map_func(Op_func(F),G)` directly. The formerly primitive
 `Prof_reindex_base_func(F,G)` has been demoted to a transparent readability
 alias for that product map; it no longer owns independent projection or
-pullback rules. The active runtime bridge is exactly:
+pullback rules. The active runtime bridges are exactly:
 
 ```text
+Pullback_catd(R,Product_map_func(F,G))
+  -> Prof_reindex(R,Op_func(F),G)
+
 Pullback_catd_func(Product_map_func(F,G))
   -> Prof_reindex_func(Op_func(F),G)
 ```
 
 where `F : A -> A'` is arbitrary and the opposite operation appears only on
-the RHS. No extra object-level `Pullback_catd` rewrite or unification rule is
-installed for the same comparison; object computation proceeds by applying
-`fapp0` to the functor-level fold. Representable reindexing accumulates both
-endpoint functors.
+the RHS. The object-level fold is installed for direct-authored
+`Pullback_catd` syntax, which does not otherwise pass through the functor-level
+`fapp0` owner. Its LHS keeps the product source and target categories explicit
+as real guards on the product-map base; the underscored variant typechecked
+but produced broader underconstrained overlap diagnostics. Applying `fapp0` to
+the functor-level fold still joins the same normal form. Representable
+reindexing accumulates both endpoint functors.
 `Prof_transf_cat(R',F,R,G)` is the transparent category of natural family
 morphisms from `R'` to `Prof_reindex(R,F,G)`.
 `Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
@@ -238,20 +244,22 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory is now 1,114: 951 unjoinable critical-pair
+The active warning inventory is now 1,115: 952 unjoinable critical-pair
 reports and 163 replaceable-pattern reports. The runtime
 `comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
 the 1,108 post-product-map-reindex inventory; the classified families include
 constant, opposite, Sigma-projection, identity, and higher profunctor-duality
-interactions. The broader global composition-to-pullback folds produced 1,129
-warnings and remain rejected because they rewrite unrelated Cat-valued
-composition. The proof-time product identity comparisons and their typed
-`eq_refl` checks preserve the current inventory. Every future extension at
-these stable-head boundaries should compare warning-enabled full-file results
-to classify overlap families, not to use the count itself as a veto. Warning
-reports are diagnostic evidence for finding missing joins, better placement,
-or follow-up rules; they do not by themselves block a semantically necessary
-rewrite/unification rule.
+interactions. The direct object-level product-map pullback fold adds one
+further diagnostic critical-pair report, but fixes the normal form for bare
+`Pullback_catd(R,Product_map_func(F,G))` syntax. The broader global
+composition-to-pullback folds produced 1,129 warnings and remain rejected
+because they rewrite unrelated Cat-valued composition. The proof-time product
+identity comparisons and their typed `eq_refl` checks preserve the current
+inventory. Every future extension at these stable-head boundaries should
+compare warning-enabled full-file results to classify overlap families, not to
+use the count itself as a veto. Warning reports are diagnostic evidence for
+finding missing joins, better placement, or follow-up rules; they do not by
+themselves block a semantically necessary rewrite/unification rule.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
@@ -618,6 +626,8 @@ left implicit:
   `Pullback_catd(E,F)` is the stable Cat-valued pullback constructor;
   `Prof_reindex_base_func(F,G)` is a transparent readability alias for
   `Product_map_func(Op_func(F),G)`;
+  pulling back along `Product_map_func(F,G)` folds at both object and functor
+  level to profunctor reindexing along `Op_func(F),G`;
   `Prof_reindex(R,F,G)` and `Prof_reindex_fapp1_func` expose object, full,
   and capped pullback action along the generic product base map;
   `Hom_prof_along(F,G)` is the single stable representable constructor;

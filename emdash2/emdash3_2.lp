@@ -11019,9 +11019,23 @@ unif_rule
   Here F is an arbitrary functor A -> A'. Pulling a Cat-valued family on
   A' x B' back along Product_map_func(F,G) is the same object as reindexing
   the corresponding profunctor from Op(A') to B' along Op_func(F) and G.
-  The functor-level fold is the runtime normal form; its object action then
-  computes through the generic fapp0 rule for `Prof_reindex_func`.
+  The object-level and functor-level folds share that normal form.
 */
+// lhs-audit: keep 1,2 -- product source/target guard the product-map base
+rule @Pullback_catd
+      (Product_cat $A $B)
+      (Product_cat $A' $B')
+      $R
+      (@Product_map_func $A $A' $B $B' $F $G)
+  ↪ @Prof_reindex
+      (Op_cat $A')
+      (Op_cat $A)
+      $B'
+      $B
+      $R
+      (@Op_func $A $A' $F)
+      $G;
+
 rule @Pullback_catd_func
       _
       _
