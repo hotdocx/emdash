@@ -339,11 +339,6 @@ notation = infix 10;
 
 constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
 
-// Equality eliminator/transport.
-symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],
-  τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);
-rule ind_eq (eq_refl $x) $p $u ↪ $u;
-
 // Right-based dependent path induction. This supplies the path-dependent
 // eliminator needed for contractible identity fibres without assuming UIP.
 symbol ind_eqr
@@ -356,6 +351,17 @@ symbol ind_eqr
   : τ (P x p);
 
 rule ind_eqr _ $u (eq_refl _) ↪ $u;
+
+// Equality eliminator/transport, derived as the path-independent specialization
+// of right-based dependent path induction.
+symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],
+  τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x)
+≔ λ a x y p P u,
+  @ind_eqr a y
+    (λ t : τ a, λ _ : τ (t = y), P t)
+    u
+    x
+    p;
 
 // Equality/path transitivity.
 symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],

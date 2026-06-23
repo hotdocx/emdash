@@ -351,7 +351,8 @@ assertions in `emdash3_2_checks.lp`.
 Promoted symbols and rules:
 
 ```text
-ind_eqr;                         // right-based dependent path induction
+ind_eqr;                         // primitive right-based dependent path induction
+ind_eq;                          // transport specialization of ind_eqr
 sigma_ind;                       // fixed-parameter Sigma eliminator wrapper
 Pi_grpd; Function_grpd;
 IsContr; is_contr_center; is_contr_path;
@@ -373,6 +374,7 @@ reflexivity computation:
 
 ```text
 ind_eqr(P,u,refl) -> u;
+ind_eq(refl,P,u) -> u;            // by unfolding through ind_eqr
 sigma_ind(Q,c,Struct_sigma(x,u)) -> c(x,u);
 Pi_grpd decodes through τ;
 type_equiv_refl.to -> id;
@@ -414,6 +416,42 @@ The Phase 2/bridge slice therefore introduced no warning-count delta. The
 warning-enabled owner-position probe reports no warning at the new `Pi_grpd`,
 `ind_eqr`, `sigma_ind`, `TypeEquiv`, `coe_grpd`, `idtoequiv_grpd`,
 `GrpdUnivalence`, or `ua_grpd` declarations/rules.
+
+Follow-up implementation note 2026-06-24: the equality eliminator ownership
+was tightened after review. `ind_eqr` is now the primitive J-like eliminator,
+and `ind_eq` is defined as its path-independent transport specialization:
+
+```text
+ind_eq(p,P,u) := ind_eqr(λ x _, P(x), u, p).
+```
+
+The migration passed a full-file owner-position probe and warning-enabled
+probe:
+
+```text
+tmp/probes/univalence_ind_eq_from_ind_eqr_owner_probe.lp
+logs/probes/univalence_ind_eq_from_ind_eqr_owner_probe-20260624-014050.log
+logs/probes/univalence_ind_eq_from_ind_eqr_owner_probe-20260624-014057.log
+```
+
+There was no warning located at the equality-eliminator section in the
+warning-enabled probe. The Lambdapi builtin assignment remains:
+
+```text
+builtin "eqind" ≔ ind_eq;
+```
+
+so external equality-induction expectations continue to route through the
+public transport head while the real computation owner is `ind_eqr`.
+After promotion, `make warning-summary` reports:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+This is a -2 replaceable-pattern delta and no critical-pair delta relative to
+the previous Phase 2 checkpoint. The decrease is expected because the direct
+`ind_eq` rewrite rule was removed.
 
 ## Two Related But Separate Programs
 
@@ -533,6 +571,61 @@ Advantages in Lambdapi:
 Changing `=` or `eq_refl` from `constant` to `injective` is therefore not on
 the initial critical path.
 
+### Equality Eliminator Ownership
+
+The promoted eliminator hierarchy is:
+
+```text
+ind_eqr
+  : Π y, (Π x, (x = y) -> Grpd) -> P(y,refl_y)
+      -> Π x, Π p : x = y, P(x,p)
+
+ind_eq
+  : Π p : x = y, (τ A -> Grpd) -> P(y) -> P(x)
+```
+
+`ind_eqr` is the primitive right-based path-induction owner. `ind_eq` is only
+the transport specialization:
+
+```text
+ind_eq(p,P,u) := ind_eqr(λ x _, P(x), u, p).
+```
+
+This is a real normal-form decision. The previous primitive `ind_eq` rule was
+not a downstream rewrite-LHS owner, so the migration is safe after the
+owner-position probe recorded above. Keeping the public `ind_eq` symbol remains
+useful because `PathOver`, `eq_trans`, `eq_sym`, `eq_ap`, `coe_grpd`,
+`idtoequiv_grpd`, and the Lambdapi builtin `eqind` all speak the simpler
+transport interface.
+
+The alternate singleton/Sigma formulation is:
+
+```text
+ind_eqr_sig
+  : Π (P : (Σ x : A, x = y) -> Grpd),
+      P(y,refl_y) ->
+      Π s : Σ x : A, x = y, P(s).
+```
+
+This formulation is equivalent in intent to the telescope form once encoded
+Sigma elimination is available. The telescope form is definable from a
+primitive `ind_eqr_sig` by applying it to the pair `(x,p)` and the motive
+`λ s, P(fst(s),snd(s))`. Conversely, `ind_eqr_sig` is definable from the
+promoted telescope `ind_eqr` plus `sigma_ind` by splitting `s` into `(x,p)` and
+then applying `ind_eqr` to `p`.
+
+The singleton eliminator is not derivable from the old transport-only
+`ind_eq` without an additional principle such as UIP/path-proof
+irrelevance. After splitting `s` into `(x,p)`, a transport-only eliminator can
+make the target depend on `x`, but not on the particular proof `p`; producing
+all `P(y,p)` from only `P(y,refl_y)` would require collapsing arbitrary loops.
+
+Therefore the current owner should remain `ind_eqr`. A future
+`ind_eqr_sig` may be added as a readable derived helper, but it should compute
+by routing through `ind_eqr` or, if made primitive, `ind_eqr` should be routed
+through it. Do not keep two independent primitive singleton/path-induction
+owners with separate rewrite rules.
+
 ### Path-Over
 
 Dependent equality requires a heterogeneous path over a base path:
@@ -612,6 +705,53 @@ sigma_Fst(path-eliminator(...)) -> ...
 ```
 
 unless a stable path-view owner cannot express the required projection.
+
+### Sigma Eliminator Ownership
+
+The active encoded Sigma type has the generated eliminator `ind_τΣ_`, but the
+promoted low-level groupoid-equivalence code uses:
+
+```text
+sigma_ind
+  : Π (Q : τΣ(A,P) -> Grpd),
+      (Π x u, Q(x,u)) ->
+      Π s, Q(s).
+```
+
+`sigma_ind` is a fixed-parameter eliminator wrapper with the direct
+constructor computation:
+
+```text
+sigma_ind(Q,c,Struct_sigma(x,u)) -> c(x,u).
+```
+
+This wrapper is semantically the eliminator expected for the fixed encoded
+Sigma type. It is not currently defined from `ind_τΣ_`. The generated
+eliminator quantifies over all parameters of `τΣ_`; deriving this
+fixed-parameter wrapper from it would require packaging a higher-order motive
+and branch family inside the `Grpd`/`τ` object language. The current kernel has
+no general classifier for arbitrary motives
+
+```text
+Q : τΣ(A,P) -> Grpd
+```
+
+and their branches as first-class groupoid objects. Adding such a classifier
+solely to remove `sigma_ind` would be premature.
+
+This is a documented deferred alignment task, not an ignored discrepancy. The
+future options are:
+
+1. keep `sigma_ind` as the stable public eliminator and treat `ind_τΣ_` as
+   generated backend infrastructure;
+2. add enough motive/branch classifier infrastructure to derive `sigma_ind`
+   from `ind_τΣ_`;
+3. if a future proof-mode workflow emits `ind_τΣ_` normal forms that conflict
+   with `sigma_ind` normal forms, add a narrow proof-time comparison or migrate
+   to one canonical owner after a full warning-enabled probe.
+
+Until such a consumer exists, `sigma_ind` should remain the computational owner
+used by `type_equiv_refl` and related contractible-fibre proofs.
 
 ### Pi And Function Path View
 
@@ -778,6 +918,57 @@ The capability and the runtime coercion law have different roles.
 `coe_grpd(ua_grpd(e),a)` rule chooses the intended computational presentation.
 Both are operational foundational assumptions unless and until they are
 derived from a fibrancy/observational universe construction.
+
+### Computational-Univalence Closure By Constructor
+
+The planned computational meaning of groupoid univalence has two layers.
+
+First, the universe-level rule chooses how transport along a univalence path
+acts on elements:
+
+```text
+coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a).
+```
+
+Second, each groupoid/type former must supply the equivalence `e` whose
+forward map computes structurally for that constructor. Examples:
+
+```text
+ua_sigma(eA,eP)      // equivalence between Sigma types
+ua_pi(eA,eP)         // equivalence between Pi/function types
+ua_product(eA,eB)    // equivalence between products
+```
+
+The rule `coe_grpd(ua_grpd(U,e),a)` only delegates to `e.to`. It does not by
+itself explain how `e.to` should reduce for Sigma, Pi, product, inductive, or
+project-specific constructors. Those constructor-specific equivalences are the
+recursive computational-univalence closure entries.
+
+This is why Sigma/Pi observational path views are not merely optional algebra.
+They are part of the computational-univalence implementation path:
+
+- Sigma path views expose equality of dependent pairs as a base path plus a
+  fibre `PathOver`. They are needed to prove and compute equality inside
+  homotopy fibres such as `Σ a : A, f(a) = b`, which in turn supports
+  `TypeEquiv` symmetry/composition and Sigma-constructor univalence.
+- Pi/function path views expose equality of dependent functions by
+  related-input paths
+
+  ```text
+  Π x0 x1, Π p : x0 = x1,
+    PathOver(B,p,f(x0),g(x1)).
+  ```
+
+  This is the intended computational owner for function extensionality and
+  Pi-constructor univalence; same-input pointwise equality is only a derived
+  special case.
+
+The implementation can remain partial. A constructor without a closure entry
+still typechecks, but its univalence/path computation remains stuck at the
+corresponding stable head. The phrase “computational univalence for most
+cases” should therefore mean: for the constructors with installed closure
+entries, transport through `ua` reduces recursively through their
+constructor-specific equivalence maps.
 
 ## Categorical Path-To-Arrow Inclusion
 
@@ -1381,6 +1572,8 @@ the report labels ua_grpd as an operational assumption.
 | ID | Status | Depends on | Resume trigger | Next action |
 | --- | --- | --- | --- | --- |
 | `UNI-PATHOVER` | first semantic slice promoted | none | Sigma/Product path views begin | Add `pathover_sym`/`pathover_comp` only when consumed; keep stable-head variant as a fallback if transparent unfolding becomes brittle. |
+| `UNI-EQ-ELIM` | `ind_eqr` primitive; `ind_eq` derived and builtin route preserved | none | singleton eliminator syntax is consumed | Add derived `ind_eqr_sig` only if it improves readability; keep one primitive owner. |
+| `UNI-SIGMA-IND` | fixed-parameter `sigma_ind` promoted; relation to generated `ind_τΣ_` documented deferred | none | proof-mode or generated eliminator normal forms become visible consumers | Either derive `sigma_ind` from richer motive infrastructure or add a narrow comparison after probing. |
 | `UNI-PATH-HOM` | functor-owned map promoted | none | proof-time J agreement is needed | Probe propositional or narrow unification agreement between `path_to_hom` and the J-defined reference. |
 | `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
 | `UNI-GRPD-PI` | promoted | none | observational Pi equality begins | Add related-input Pi path view only after Sigma path views stabilize. |

@@ -94,6 +94,13 @@ assert [A : Grpd]
   ≡ u;
 
 assert [A : Grpd]
+  (x : τ A)
+  (P : τ A → Grpd)
+  (u : τ (P x)) ⊢
+  @ind_eq A x x (eq_refl x) P u
+  ≡ u;
+
+assert [A : Grpd]
   [P : τ A → Grpd]
   (Q : @τΣ_ A P → Grpd)
   (c : Π x : τ A, Π u : τ (P x), τ (Q (@Struct_sigma A P x u)))
