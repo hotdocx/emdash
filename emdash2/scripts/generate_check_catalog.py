@@ -112,6 +112,24 @@ def parse_checks(lines: list[str]) -> list[Check]:
 
 AREAS: list[Area] = [
     Area(
+        "Groupoid univalence and type equivalence",
+        (
+            "ind_eqr",
+            "sigma_ind",
+            "Pi_grpd",
+            "Function_grpd",
+            "IsContr",
+            "HFiber",
+            "IsEquivMap",
+            "TypeEquiv",
+            "type_equiv",
+            "coe_grpd",
+            "idtoequiv_grpd",
+            "GrpdUnivalence",
+            "ua_grpd",
+        ),
+    ),
+    Area(
         "Path/equality category calculus",
         ("Path_cat", "eq_refl", "eq_trans"),
     ),

@@ -86,6 +86,86 @@ assert [A : Grpd]
   @eq_apd A P f x x (eq_refl x)
   ≡ eq_refl (f x);
 
+assert [A : Grpd]
+  (y : τ A)
+  (P : Π x : τ A, τ (x = y) → Grpd)
+  (u : τ (P y (eq_refl y))) ⊢
+  @ind_eqr A y P u y (eq_refl y)
+  ≡ u;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (Q : @τΣ_ A P → Grpd)
+  (c : Π x : τ A, Π u : τ (P x), τ (Q (@Struct_sigma A P x u)))
+  (x : τ A)
+  (u : τ (P x)) ⊢
+  @sigma_ind A P Q c (@Struct_sigma A P x u)
+  ≡ c x u;
+
+// Groupoid-level Pi and contractible-fibre type equivalence infrastructure.
+assert [A : Grpd] [B : τ A → Grpd] ⊢
+  τ (@Pi_grpd A B) ≡ Π x : τ A, τ (B x);
+
+assert [A B : Grpd] ⊢
+  τ (Function_grpd A B) ≡ (τ A → τ B);
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to e a
+  : τ B;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  type_equiv_from e b
+  : τ A;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  type_equiv_right e b
+  : τ (type_equiv_to e (type_equiv_from e b) = b);
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_left e a
+  : τ (type_equiv_from e (type_equiv_to e a) = a);
+
+assert [A : Grpd] ⊢
+  type_equiv_to (@type_equiv_refl A)
+  ≡ λ x : τ A, x;
+
+assert [A : Grpd] (a : τ A) ⊢
+  type_equiv_from (@type_equiv_refl A) a
+  ≡ a;
+
+assert [A : Grpd] (a : τ A) ⊢
+  type_equiv_right (@type_equiv_refl A) a
+  ≡ eq_refl a;
+
+assert [A : Grpd] (a : τ A) ⊢
+  type_equiv_left (@type_equiv_refl A) a
+  ≡ eq_refl a;
+
+assert [A : Grpd] (a : τ A) ⊢
+  @coe_grpd A A (eq_refl A) a
+  ≡ a;
+
+assert [A : Grpd] ⊢
+  @idtoequiv_grpd A A (eq_refl A)
+  ≡ @type_equiv_refl A;
+
+assert [A : Grpd] (a : τ A) ⊢
+  type_equiv_to (@idtoequiv_grpd A A (eq_refl A)) a
+  ≡ a;
+
+assert (U : τ GrpdUnivalence) [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @ua_grpd U A B e
+  : τ (@= Grpd_grpd A B);
+
 // Core inclusion/path-to-arrow is functor-owned. Composition is checked
 // through the generic fapp1_fapp0 composition rule, not a specialized rule.
 assert [C : Cat] (x : τ (Obj C)) ⊢

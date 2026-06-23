@@ -344,6 +344,19 @@ symbol ind_eq : Π [a: Grpd], Π [x: τ a], Π [y: τ a],
   τ (x = y) → Π p: (τ a → Grpd), τ (p y) → τ (p x);
 rule ind_eq (eq_refl $x) $p $u ↪ $u;
 
+// Right-based dependent path induction. This supplies the path-dependent
+// eliminator needed for contractible identity fibres without assuming UIP.
+symbol ind_eqr
+  [a : Grpd]
+  [y : τ a]
+  (P : Π x : τ a, τ (x = y) → Grpd)
+  (u : τ (P y (eq_refl y)))
+  [x : τ a]
+  (p : τ (x = y))
+  : τ (P x p);
+
+rule ind_eqr _ $u (eq_refl _) ↪ $u;
+
 // Equality/path transitivity.
 symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],
   τ (x = y) → τ (y = z) → τ (x = z)
@@ -446,6 +459,210 @@ rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
 // Second projection of an encoded dependent pair.
 injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
+
+// Fixed-parameter eliminator for encoded Sigma objects. The generated
+// `ind_τΣ_` is fully parameter-polymorphic; this wrapper is the stable local
+// eliminator used by low-level groupoid equivalence proofs.
+symbol sigma_ind
+  [A : Grpd]
+  [P : τ A → Grpd]
+  (Q : @τΣ_ A P → Grpd)
+  (c : Π x : τ A, Π u : τ (P x), τ (Q (@Struct_sigma A P x u)))
+  (s : @τΣ_ A P)
+  : τ (Q s);
+
+rule sigma_ind _ $c (Struct_sigma $x $u) ↪ $c $x $u;
+
+// -------------------------------------------------------------------------------------------------
+// 1b. Minimal groupoid-level dependent products and type equivalences
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Groupoid-level dependent products are initially only a decoded object
+  former. Observational Pi path computation is owned by later path-view
+  infrastructure, not by this first formation rule.
+*/
+constant symbol Pi_grpd
+  [A : Grpd]
+  (B : τ A → Grpd)
+  : Grpd;
+
+rule τ (@Pi_grpd $A $B) ↪ Π x : τ $A, τ ($B x);
+
+symbol Function_grpd
+  (A B : Grpd)
+  : Grpd
+≔ @Pi_grpd A (λ _ : τ A, B);
+
+symbol IsContr
+  (X : Grpd)
+  : Grpd
+≔ `Σ_ centre : τ X,
+   @Pi_grpd X (λ x : τ X, centre = x);
+
+symbol is_contr_center
+  [X : Grpd]
+  (c : τ (IsContr X))
+  : τ X
+≔ sigma_Fst c;
+
+symbol is_contr_path
+  [X : Grpd]
+  (c : τ (IsContr X))
+  (x : τ X)
+  : τ (is_contr_center c = x)
+≔ sigma_Snd c x;
+
+symbol HFiber
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (b : τ B)
+  : Grpd
+≔ `Σ_ a : τ A, f a = b;
+
+symbol hfiber_point
+  [A B : Grpd]
+  [f : τ A → τ B]
+  [b : τ B]
+  (h : τ (@HFiber A B f b))
+  : τ A
+≔ sigma_Fst h;
+
+symbol hfiber_path
+  [A B : Grpd]
+  [f : τ A → τ B]
+  [b : τ B]
+  (h : τ (@HFiber A B f b))
+  : τ (f (hfiber_point h) = b)
+≔ sigma_Snd h;
+
+symbol IsEquivMap
+  [A B : Grpd]
+  (f : τ A → τ B)
+  : Grpd
+≔ @Pi_grpd B
+    (λ b : τ B, IsContr (@HFiber A B f b));
+
+symbol is_equiv_fiber
+  [A B : Grpd]
+  [f : τ A → τ B]
+  (e : τ (@IsEquivMap A B f))
+  (b : τ B)
+  : τ (IsContr (@HFiber A B f b))
+≔ e b;
+
+symbol TypeEquiv
+  (A B : Grpd)
+  : Grpd
+≔ `Σ_ f : τ (Function_grpd A B),
+   @IsEquivMap A B f;
+
+symbol type_equiv_to
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ A → τ B
+≔ sigma_Fst e;
+
+symbol type_equiv_is_equiv
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@IsEquivMap A B (type_equiv_to e))
+≔ sigma_Snd e;
+
+symbol type_equiv_fiber
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B)
+  : τ (IsContr (@HFiber A B (type_equiv_to e) b))
+≔ type_equiv_is_equiv e b;
+
+symbol type_equiv_from
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B)
+  : τ A
+≔ @hfiber_point A B (type_equiv_to e) b
+    (is_contr_center (type_equiv_fiber e b));
+
+symbol type_equiv_right
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B)
+  : τ (type_equiv_to e (type_equiv_from e b) = b)
+≔ @hfiber_path A B (type_equiv_to e) b
+    (is_contr_center (type_equiv_fiber e b));
+
+symbol type_equiv_left
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A)
+  : τ (type_equiv_from e (type_equiv_to e a) = a)
+≔ @eq_ap
+    (@HFiber A B (type_equiv_to e) (type_equiv_to e a))
+    A
+    (λ h : τ (@HFiber A B (type_equiv_to e) (type_equiv_to e a)),
+      @hfiber_point A B (type_equiv_to e) (type_equiv_to e a) h)
+    (is_contr_center (type_equiv_fiber e (type_equiv_to e a)))
+    (@Struct_sigma A (λ x : τ A, type_equiv_to e x = type_equiv_to e a)
+      a
+      (eq_refl (type_equiv_to e a)))
+    (is_contr_path
+      (type_equiv_fiber e (type_equiv_to e a))
+      (@Struct_sigma A (λ x : τ A, type_equiv_to e x = type_equiv_to e a)
+        a
+        (eq_refl (type_equiv_to e a))));
+
+symbol hfiber_id_path
+  [A : Grpd]
+  [b a : τ A]
+  (p : τ (a = b))
+  : τ (
+      @Struct_sigma A (λ x : τ A, x = b) b (eq_refl b)
+      =
+      @Struct_sigma A (λ x : τ A, x = b) a p)
+≔ @ind_eqr A b
+    (λ x : τ A, λ q : τ (x = b),
+      @Struct_sigma A (λ t : τ A, t = b) b (eq_refl b)
+      =
+      @Struct_sigma A (λ t : τ A, t = b) x q)
+    (eq_refl (@Struct_sigma A (λ t : τ A, t = b) b (eq_refl b)))
+    a
+    p;
+
+symbol hfiber_id_contr_path
+  [A : Grpd]
+  [b : τ A]
+  (h : τ (@HFiber A A (λ x : τ A, x) b))
+  : τ (
+      @Struct_sigma A (λ x : τ A, x = b) b (eq_refl b)
+      =
+      h)
+≔ @sigma_ind A
+    (λ x : τ A, x = b)
+    (λ h : @τΣ_ A (λ x : τ A, x = b),
+      @Struct_sigma A (λ x : τ A, x = b) b (eq_refl b)
+      =
+      h)
+    (λ a : τ A, λ p : τ (a = b), hfiber_id_path p)
+    h;
+
+symbol type_equiv_refl
+  [A : Grpd]
+  : τ (TypeEquiv A A)
+≔ @Struct_sigma
+    (Function_grpd A A)
+    (λ f : τ (Function_grpd A A), @IsEquivMap A A f)
+    (λ x : τ A, x)
+    (λ b : τ A,
+      @Struct_sigma
+        (@HFiber A A (λ x : τ A, x) b)
+        (λ centre : τ (@HFiber A A (λ x : τ A, x) b),
+          @Pi_grpd
+            (@HFiber A A (λ x : τ A, x) b)
+            (λ h : τ (@HFiber A A (λ x : τ A, x) b), centre = h))
+        (@Struct_sigma A (λ x : τ A, x = b) b (eq_refl b))
+        (λ h : τ (@HFiber A A (λ x : τ A, x) b),
+          hfiber_id_contr_path h));
 
 // -------------------------------------------------------------------------------------------------
 // 2. Core categories
@@ -741,6 +958,48 @@ constant symbol Grpd_cat : Cat;
 injective symbol Grpd_grpd : Grpd ≔ Obj Grpd_cat;
 rule τ (Obj Grpd_cat) ↪ Grpd;
 rule τ (Obj (Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);
+
+symbol coe_grpd
+  [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B))
+  (a : τ A)
+  : τ B
+≔ ind_eq
+    (eq_sym p)
+    (λ X : Grpd, Function_grpd A X)
+    (λ x : τ A, x)
+    a;
+
+symbol idtoequiv_grpd
+  [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B))
+  : τ (TypeEquiv A B)
+≔ ind_eq
+    (eq_sym p)
+    (λ X : Grpd, TypeEquiv A X)
+    (@type_equiv_refl A);
+
+symbol GrpdUnivalence : Grpd
+≔ @Pi_grpd Grpd_grpd
+    (λ A : Grpd,
+      @Pi_grpd Grpd_grpd
+        (λ B : Grpd,
+          @IsEquivMap
+            (@= Grpd_grpd A B)
+            (TypeEquiv A B)
+            (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)));
+
+symbol ua_grpd
+  (U : τ GrpdUnivalence)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@= Grpd_grpd A B)
+≔ @hfiber_point
+    (@= Grpd_grpd A B)
+    (TypeEquiv A B)
+    (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
+    e
+    (is_contr_center (U A B e));
 
 // Category of categories.
 constant symbol Cat_cat : Cat;

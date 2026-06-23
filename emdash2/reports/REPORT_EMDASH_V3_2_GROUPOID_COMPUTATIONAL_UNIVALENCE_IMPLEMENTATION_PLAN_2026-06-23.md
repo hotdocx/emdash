@@ -10,18 +10,21 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 
-Status: active implementation plan. The first Phase 1 slice has been promoted
-to `emdash3_2.lp`: transparent `PathOver`, `pathover_refl`, primitive
-reflexive `eq_apd`, functor-owned `Core_incl_func`, and public
-`path_to_hom`. No groupoid-univalence, `TypeEquiv`, `OmegaEquiv`,
-`CatUnivalence`, or generic `HomComparison` symbol from this report has yet
-been promoted. The existing equality, `Path_cat`, `IsoEvidence`, and
-`ProfComparison` implementations remain active. Focused probes have confirmed
-the minimal decoded `Pi_grpd` and contractible-fibre `TypeEquiv` encoding, and
-derivability of the covariant Yoneda embedding from `hom_int` over the
-opposite category. A primitive recursive-destructor `OmegaEquiv` interface
-with reflexivity and recursively reflexive inverse cells has also passed an
-isolated warning-enabled probe.
+Status: active implementation plan. Phase 1 and the first Program A slices are
+promoted in `emdash3_2.lp`: transparent `PathOver`, `pathover_refl`,
+primitive reflexive `eq_apd`, functor-owned `Core_incl_func`, public
+`path_to_hom`, decoded `Pi_grpd`, contractible-fibre `TypeEquiv`, reflexive
+`type_equiv_refl`, reflexive `coe_grpd`, canonical `idtoequiv_grpd`,
+`GrpdUnivalence`, and `ua_grpd` as a selector from that capability. The
+computational law `coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a)` is not yet
+installed; it remains the next explicit operational-univalence decision. No
+`OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
+report has yet been promoted. The existing equality, `Path_cat`,
+`IsoEvidence`, and `ProfComparison` implementations remain active. Focused
+probes have confirmed derivability of the covariant Yoneda embedding from
+`hom_int` over the opposite category. A primitive recursive-destructor
+`OmegaEquiv` interface with reflexivity and recursively reflexive inverse
+cells has also passed an isolated warning-enabled probe.
 
 ## Scope And Authority
 
@@ -340,6 +343,77 @@ logs/probes/univalence_omega_equiv_destructor_probe-20260623-233648.log
 The classifier, forward arrow, distinct left/right inverses, recursive inverse
 cells, reflexivity generator, and recursively reflexive cells all typecheck.
 The warning-enabled run produced no warning located in the probe file.
+
+Implementation checkpoint 2026-06-24: the first groupoid Pi/type-equivalence
+and groupoid-universe bridge slices landed in `emdash3_2.lp`, with regression
+assertions in `emdash3_2_checks.lp`.
+
+Promoted symbols and rules:
+
+```text
+ind_eqr;                         // right-based dependent path induction
+sigma_ind;                       // fixed-parameter Sigma eliminator wrapper
+Pi_grpd; Function_grpd;
+IsContr; is_contr_center; is_contr_path;
+HFiber; hfiber_point; hfiber_path;
+IsEquivMap; is_equiv_fiber;
+TypeEquiv;
+type_equiv_to; type_equiv_is_equiv; type_equiv_fiber;
+type_equiv_from; type_equiv_left; type_equiv_right;
+hfiber_id_path; hfiber_id_contr_path;
+type_equiv_refl;
+coe_grpd;
+idtoequiv_grpd;
+GrpdUnivalence;
+ua_grpd.
+```
+
+The promoted runtime computation is deliberately limited to constructor and
+reflexivity computation:
+
+```text
+ind_eqr(P,u,refl) -> u;
+sigma_ind(Q,c,Struct_sigma(x,u)) -> c(x,u);
+Pi_grpd decodes through τ;
+type_equiv_refl.to -> id;
+type_equiv_refl.from(a) -> a;
+type_equiv_refl.left(a) -> refl_a;
+type_equiv_refl.right(a) -> refl_a;
+coe_grpd(refl_A,a) -> a;
+idtoequiv_grpd(refl_A) -> type_equiv_refl(A).
+```
+
+No primitive strict cancellation for arbitrary `TypeEquiv` was installed.
+`type_equiv_from`, `type_equiv_left`, and `type_equiv_right` are selected from
+contractible homotopy fibres. Symmetry and composition for `TypeEquiv` remain
+deferred pending more path algebra over Sigma/fibre equality. This is not a
+formation or feasibility blocker for the universe bridge.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_phase2_type_equiv_owner_position.lp
+logs/probes/univalence_phase2_type_equiv_owner_position-20260624-005746.log
+logs/probes/univalence_phase2_type_equiv_owner_position-20260624-005751.log
+logs/probes/univalence_phase2_type_equiv_owner_position-20260624-010104.log
+logs/probes/univalence_phase2_type_equiv_owner_position-20260624-010111.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+```
+
+After promotion, `make warning-summary` still reports the same inventory as
+the previous Phase 1 checkpoint:
+
+```text
+1121 warnings = 958 unjoinable critical pairs + 163 replaceable patterns.
+```
+
+The Phase 2/bridge slice therefore introduced no warning-count delta. The
+warning-enabled owner-position probe reports no warning at the new `Pi_grpd`,
+`ind_eqr`, `sigma_ind`, `TypeEquiv`, `coe_grpd`, `idtoequiv_grpd`,
+`GrpdUnivalence`, or `ua_grpd` declarations/rules.
 
 ## Two Related But Separate Programs
 
@@ -1218,16 +1292,17 @@ warning-enabled full-file delta classified.
 
 1. Add `Pi_grpd` with only `τ` decoding.
 2. Define `Function_grpd`, `IsContr`, `HFiber`, `IsEquivMap`, and `TypeEquiv`.
-3. Derive forward, inverse, inverse paths, reflexivity, symmetry, and
-   composition.
-4. Keep observational Pi paths deferred.
+3. Derive forward, inverse, inverse paths, and reflexivity.
+4. Defer symmetry and composition until Sigma/fibre path algebra is ready.
+5. Keep observational Pi paths deferred.
 
 Acceptance:
 
 ```text
 TypeEquiv has no primitive strict cancellation;
 the inverse is selected from contractible fibres;
-identity and composition typecheck without universe-path axioms;
+identity typechecks without universe-path axioms;
+symmetry and composition are explicitly deferred rather than postulated;
 no dependency on unfinished Grpd_cat composition.
 ```
 
@@ -1237,14 +1312,17 @@ no dependency on unfinished Grpd_cat composition.
 2. Define `idtoequiv_grpd` by equality induction.
 3. State `GrpdUnivalence` as equivalence of the canonical map.
 4. Select provisional `ua_grpd` from that capability.
-5. Probe `coe_grpd(ua_grpd(e),a) -> e.to(a)`.
+5. Probe `coe_grpd(ua_grpd(e),a) -> e.to(a)` as a separate operational
+   computation rule.
 6. Keep other inverse laws propositional.
 
 Acceptance:
 
 ```text
 reflexive coercion computes;
-univalence coercion computes to the selected forward map;
+the univalence capability and ua selector typecheck;
+univalence coercion computes to the selected forward map only after the
+  explicit operational rule is adopted;
 subject reduction and warning-enabled checks pass;
 the report labels ua_grpd as an operational assumption.
 ```
@@ -1305,9 +1383,9 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-PATHOVER` | first semantic slice promoted | none | Sigma/Product path views begin | Add `pathover_sym`/`pathover_comp` only when consumed; keep stable-head variant as a fallback if transparent unfolding becomes brittle. |
 | `UNI-PATH-HOM` | functor-owned map promoted | none | proof-time J agreement is needed | Probe propositional or narrow unification agreement between `path_to_hom` and the J-defined reference. |
 | `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
-| `UNI-GRPD-PI` | formation/decoding feasibility confirmed | none | `TypeEquiv` promotion begins | Probe the decoder at its intended owning position. |
-| `UNI-TYPE-EQUIV` | semantic formation confirmed | promoted `UNI-GRPD-PI` | Pi decoder lands | Derive inverse selection, inverse paths, symmetry, and composition. |
-| `UNI-UA-GRPD` | blocked on `UNI-TYPE-EQUIV` | `UNI-TYPE-EQUIV` | Type equivalence algebra passes | Define universe-univalence capability and probe `coe_grpd(ua(e))`. |
+| `UNI-GRPD-PI` | promoted | none | observational Pi equality begins | Add related-input Pi path view only after Sigma path views stabilize. |
+| `UNI-TYPE-EQUIV` | first contractible-fibre slice promoted | promoted `UNI-GRPD-PI` | symmetry/composition are consumed | Probe the required Sigma/fibre path algebra; do not postulate strict cancellation. |
+| `UNI-UA-GRPD` | capability and selector promoted; computation rule deferred | `UNI-TYPE-EQUIV` | computational univalence law is needed | Decide whether `coe_grpd(ua_grpd(U,e),a)` is an explicit operational axiom/rule or waits for a fuller observational universe construction. |
 | `UNI-SIGMA-VIEW` | unblocked by first `UNI-PATHOVER` slice | `UNI-PATHOVER` | Phase 4 begins | Probe encode/decode and reflexivity projections. |
 | `UNI-PI-VIEW` | blocked | `UNI-PATHOVER`, `UNI-GRPD-PI` | Sigma view and Pi formation stable | Define related-input observational Pi path. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
@@ -1327,10 +1405,12 @@ the report labels ua_grpd as an operational assumption.
 | dependent ap | reflexive computation promoted | stable public normal form beyond reflexivity |
 | functor-owned `path_to_hom` reflexivity | promoted | proof-time agreement with J semantics |
 | strict `Core_incl_func` composition | promoted through generic functoriality | future projection-ladder consumers |
-| `Pi_grpd` formation/decoding | confirmed in isolated probe | future interaction with observational Pi equality |
-| contractible-fibre `TypeEquiv` formation | confirmed in isolated probe | inverse derivation, proof term size, and Sigma-fibre equality |
+| `Pi_grpd` formation/decoding | promoted | future interaction with observational Pi equality |
+| contractible-fibre `TypeEquiv` formation/inverse/reflexivity | promoted | symmetry/composition require more Sigma-fibre path algebra |
 | Sigma/Product path views | high | encode/decode orientation and projection overlap |
 | observational Pi path | medium | related-input dependency and higher substitution |
+| `coe_grpd` and canonical `idtoequiv_grpd` on reflexivity | promoted | no non-reflexive computation without univalence capability |
+| `GrpdUnivalence` capability and `ua_grpd` selector | promoted as interface | computational `coe(ua)` law still needs explicit operational status |
 | `coe_grpd(ua(e))` | medium syntactically | foundational status and rewrite overlap |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
@@ -1350,12 +1430,13 @@ global categorical-univalence interface.
 
 ## Acceptance Criteria
 
-The first foundational milestone is complete when:
+The first foundational milestone is now complete:
 
 ```text
 PathOver and dependent ap are active;
 Pi_grpd decodes;
 TypeEquiv is defined from contractible fibres;
+type_equiv_refl computes through to/from/left/right;
 idtoequiv_grpd computes on reflexivity;
 coe_grpd computes on reflexivity;
 no generic strictification or ordinary-composition cancellation is installed;
@@ -1367,7 +1448,7 @@ The first computational-univalence milestone is complete when:
 ```text
 ua_grpd has an explicit foundational status;
 GrpdUnivalence is stated as equivalence of canonical idtoequiv_grpd;
-coe_grpd(ua_grpd(e),a) computes to type_equiv_to(e,a);
+coe_grpd(ua_grpd(U,e),a) computes to type_equiv_to(e,a);
 Sigma/Product path views compute on reflexivity;
 inverse coherence not needed at runtime remains propositional;
 constructor views can remain stuck outside implemented cases.
