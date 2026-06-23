@@ -160,6 +160,14 @@ manual classification and warning-enabled owning-position validation.
 - Do not add unification helpers for notation-only heads just to make surface
   syntax elaborate. If a helper would imply injectivity that is not semantically
   valid, keep it only as a temporary probe and remove it before final cleanup.
+- Use unification rules for proof-time equality between alternative semantic
+  presentations only when no runtime orientation is intended. Exercise such a
+  rule with a typed `eq_refl` check; an ordinary conversion assertion does not
+  invoke it. Unification rules are not automatically transitive, so use rigid
+  heads or a stable intermediary instead of a bare-variable eta pattern.
+- A protected `constant` cannot head a rewrite rule. Reclassifying one as
+  `injective` changes the global computational normal form and requires a
+  full-file subject-reduction, warning, and downstream-consumer audit.
 - To audit whether an existing rule is actually used, combine static search
   with a temporary-removal probe: copy `emdash3_2.lp`, remove only that rule,
   run `scripts/probe.sh` on the copy, and inspect the first failing

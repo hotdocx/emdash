@@ -2128,6 +2128,18 @@ rule sigma_Fst (@id (Product_cat $A _) $xu)
 rule sigma_Snd (@id (Product_cat _ $B) $xu)
   ↪ @id $B (sigma_Snd $xu);
 
+// Proof-time eta for an opaque product identity. Keep the runtime identity
+// head so the global functor-identity rule remains the computational owner.
+unif_rule
+  @id (Product_cat $A $B) $xy
+  ≡ @Struct_sigma
+      (Obj (Hom_cat $A (sigma_Fst $xy) (sigma_Fst $xy)))
+      (λ _ : τ (Obj (Hom_cat $A (sigma_Fst $xy) (sigma_Fst $xy))),
+        Obj (Hom_cat $B (sigma_Snd $xy) (sigma_Snd $xy)))
+      (@id $A (sigma_Fst $xy))
+      (@id $B (sigma_Snd $xy))
+  ↪ [ tt ≡ tt ];
+
 // Product composition is componentwise: (g1,g2) ∘ (f1,f2).
 rule @comp_fapp0
       (Product_cat $A $B)
@@ -3953,6 +3965,33 @@ injective symbol Pullback_catd_func [A B : Cat]
 rule @fapp0 _ _
       (@Pullback_catd_func $A $B $F) $E
   ↪ @Pullback_catd $A $B $E $F;
+
+/*
+  Proof-time comparison with semantic precomposition.
+
+  These unification rules let reflexive equality proofs and elaboration move
+  between the generic composition presentation and the stable pullback heads
+  without orienting every Cat-valued composition through Pullback_catd.
+*/
+unif_rule
+  @comp_cat_fapp0 $A $B Cat_cat $E $F
+  ≡ @Pullback_catd $A $B $E $F
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @comp_cat_con_func $A $B Cat_cat $F
+  ≡ @Pullback_catd_func $A $B $F
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @comp_cat_fapp0
+    $A $B Cat_cat
+    (@Pullback_catd $B $C $E $F)
+    $H
+  ≡ @Pullback_catd
+      $A $C $E
+      (@comp_cat_fapp0 $A $B $C $F $H)
+  ↪ [ tt ≡ tt ];
 
 // Arrow action of the internalized Catd constructor. `Catd_cat_func` is a
 // definition, so the rule matches the canonical unfolded composition head.
@@ -10953,6 +10992,36 @@ rule @comp_cat_fapp0
       $A0 $A2 $B0 $B2
       (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
       (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01);
+
+/*
+  Product-map identity comparisons.
+
+  Rewriting Product_map_func(id,id) to either id_func or the projection pair
+  creates competing object and hom-action normal forms. At proof/elaboration
+  time, however, both comparisons are useful and coherent. The stable
+  Product_map_func head acts as the rigid intermediary because Lambdapi's
+  unifier does not chain a direct id_func-versus-Struct_sigma eta rule.
+*/
+unif_rule
+  @Product_map_func
+    $A $A $B $B
+    (@id_func $A)
+    (@id_func $B)
+  ≡ @Struct_sigma
+      (Obj (Functor_cat (Product_cat $A $B) $A))
+      (λ _ : τ (Obj (Functor_cat (Product_cat $A $B) $A)),
+        Obj (Functor_cat (Product_cat $A $B) $B))
+      (@Product_projL_func $A $B)
+      (@Product_projR_func $A $B)
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @id_func (Product_cat $A $B)
+  ≡ @Product_map_func
+      $A $A $B $B
+      (@id_func $A)
+      (@id_func $B)
+  ↪ [ tt ≡ tt ];
 
 // Pullback along the stable profunctor endpoint-base map contracts to the
 // profunctor-specific reindexing normal forms.

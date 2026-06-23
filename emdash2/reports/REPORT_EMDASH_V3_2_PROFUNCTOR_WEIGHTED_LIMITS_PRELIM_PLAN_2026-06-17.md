@@ -18,7 +18,7 @@ make check   passed
 make health  passed
 make ci      passed
 
-emdash3_2_checks.lp: 562 checks
+emdash3_2_checks.lp: 568 checks
 check catalog:       15 areas, 0 unclassified checks
 ```
 
@@ -3798,9 +3798,11 @@ owner or receive comparison maps without invalidating the public calculus.
 2. Phase 1b, revised 2026-06-23: primitive componentwise
    `Product_map_func`, bounded stable `Pullback_catd`, stable
    `Prof_reindex_base_func`, stable `Prof_reindex`, their projection ladders,
-   and representable endpoint accumulation. Broad global pullback folds and
-   the whole-product identity collapse were rejected by focused confluence
-   probes.
+   and representable endpoint accumulation. Broad runtime pullback folds and
+   whole-product identity collapses were rejected by focused confluence
+   probes; proof-time unification comparisons for pullback, accumulated
+   pullback, product-map identity, and product-arrow identity landed
+   subsequently without changing the warning inventory.
 3. Phase 1c, landed: transparent `Prof_transf_cat`, `Prof_hom_cat`, and
    `Prof_hom`; the checks did not demand endpoint-internalized or curry
    comparison packages.

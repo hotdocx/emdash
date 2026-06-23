@@ -108,22 +108,37 @@ precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
 specializations. `Product_map_func(F,G)` is now a primitive stable
 componentwise product-map constructor with object, full-hom, and capped-arrow
 projections. Its composition cut accumulates the two component functors. There
-is deliberately no whole-constructor identity collapse: the attempted
-`Product_map_func(id,id) -> id` requires a broad product eta law for arbitrary
-opaque product objects and did not join.
+is deliberately no runtime whole-constructor identity collapse: the attempted
+`Product_map_func(id,id) -> id` and projection-pair rewrites create competing
+object and hom-action paths. Proof-time unification now identifies
+`Product_map_func(id,id)` with both `id_func(A x B)` and the explicit
+projection pair. Product-arrow identity similarly has a proof-time eta rule
+against the pair of component identities while retaining the runtime `id`
+head required by generic functor identity.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
 pullback cuts, and focused constant/opposite/Sigma-projection collapses are
 active. Broad global folds from every `comp_cat_fapp0(E,F)` or
 `comp_cat_con_func(F)` were rejected because they affected unrelated
-Cat-valued Došen cuts and increased non-joinable overlaps.
+Cat-valued Došen cuts and increased non-joinable overlaps. The corresponding
+proof-time unification rules are active, including the accumulated comparison
+between `comp(Pullback(E,F),H)` and `Pullback(E,F o H)`. Thus `eq_refl`
+can witness the semantic comparisons without globally rewriting Cat-valued
+composition.
 
 `Prof_reindex_base_func(F,G)` is the stable endpoint-base map with the semantics
 of `Product_map_func(Op_func(F),G)`. It avoids discriminating through the
 reducible `Op_func` head. Pullback along that base map contracts to the stable
 `Prof_reindex_func(F,G)` and `Prof_reindex(R,F,G)` normal forms.
 Representable reindexing accumulates both endpoint functors.
+The alternative rule
+`Pullback_catd_func(Product_map_func(F,G)) ->
+Prof_reindex_func(Op_func(F),G)` is type-correct and places `Op_func` on the
+RHS as intended. A full replacement probe without `Prof_reindex_base_func`
+still added ten non-joinable reports, including a nested-pullback overlap, so
+the base head remains provisional active infrastructure rather than being
+removed in this slice.
 `Prof_transf_cat(R',F,R,G)` is the transparent category of natural family
 morphisms from `R'` to `Prof_reindex(R,F,G)`.
 `Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
@@ -222,8 +237,10 @@ reports and 163 replaceable-pattern reports. The 43-report increase over the
 profunctor-base projection ladders. The fixed-endpoint closed-core migration
 itself did not increase that bounded probe total. The broader global
 composition-to-pullback folds produced 1,129 warnings and were rejected.
-Every future extension at these stable-head boundaries must therefore compare
-warning-enabled full-file results, not merely pass beta/eta assertions.
+The proof-time pullback/product identity comparisons and their typed
+`eq_refl` checks preserve the 1,114-warning inventory. Every future extension
+at these stable-head boundaries must therefore compare warning-enabled
+full-file results, not merely pass beta/eta assertions.
 
 The 2026-06-22 generic-owner audit also identified older migration candidates.
 `comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
@@ -996,6 +1013,23 @@ the candidate at its owning position in a temporary full copy, or validate it
 in place, and run the warning-enabled owning-module check. The 2026-06-22
 `Struct_sigma` audit found two such later-rule interactions that an appended
 probe did not report.
+
+Separate runtime conversion from proof-time unification. A rewrite rule
+chooses a computational normal form and participates in critical pairs. A
+`unif_rule` only helps solve an otherwise stuck elaboration/unification
+problem. Validate the latter with a typed reflexive proof:
+
+```text
+eq_refl(t) : τ(t = u)
+```
+
+An assertion `t ≡ u` asks for conversion and does not exercise a unification
+rule. Unification rules are experimental and not automatically transitive.
+Prefer rules between two rigid heads, or use a stable intermediary; a generic
+bare-variable eta pattern may typecheck as a rule but fail to solve the
+intended goal. A `constant` cannot head a rewrite LHS. Reclassifying one as
+`injective` is a global normal-form migration and requires downstream
+subject-reduction and warning audits, not just a focused beta assertion.
 
 If the quiet probe/check times out without a useful location, rerun the same
 small target with warnings enabled before concluding that the newly added rule

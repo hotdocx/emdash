@@ -2703,6 +2703,42 @@ assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢
 
 assert [A B : Cat]
   (E : τ (Catd B))
+  (F : τ (Functor A B)) ⊢
+  eq_refl (@comp_cat_fapp0 A B Cat_cat E F)
+  : τ (
+      @comp_cat_fapp0 A B Cat_cat E F
+      =
+      @Pullback_catd A B E F);
+
+assert [A B : Cat]
+  (F : τ (Functor A B)) ⊢
+  eq_refl (@comp_cat_con_func A B Cat_cat F)
+  : τ (
+      @comp_cat_con_func A B Cat_cat F
+      =
+      @Pullback_catd_func A B F);
+
+assert [A B C : Cat]
+  (E : τ (Catd C))
+  (F : τ (Functor B C))
+  (H : τ (Functor A B)) ⊢
+  eq_refl
+    (@comp_cat_fapp0
+      A B Cat_cat
+      (@Pullback_catd B C E F)
+      H)
+  : τ (
+      @comp_cat_fapp0
+        A B Cat_cat
+        (@Pullback_catd B C E F)
+        H
+      =
+      @Pullback_catd
+        A C E
+        (@comp_cat_fapp0 A B C F H));
+
+assert [A B : Cat]
+  (E : τ (Catd B))
   (F : τ (Functor A B))
   (a a' : τ (Obj A))
   (p : τ (Hom A a a')) ⊢
@@ -4842,6 +4878,27 @@ assert [A0 A1 A2 B0 B1 B2 : Cat]
       (@comp_cat_fapp0 A0 A1 A2 F12 F01)
       (@comp_cat_fapp0 B0 B1 B2 G12 G01);
 
+assert [A B : Cat] ⊢
+  eq_refl
+    (@Product_map_func A A B B (@id_func A) (@id_func B))
+  : τ (
+      @Product_map_func A A B B (@id_func A) (@id_func B)
+      =
+      @Struct_sigma
+        (Obj (Functor_cat (Product_cat A B) A))
+        (λ _ : τ (Obj (Functor_cat (Product_cat A B) A)),
+          Obj (Functor_cat (Product_cat A B) B))
+        (@Product_projL_func A B)
+        (@Product_projR_func A B));
+
+assert [A B : Cat] ⊢
+  eq_refl
+    (@Product_map_func A A B B (@id_func A) (@id_func B))
+  : τ (
+      @Product_map_func A A B B (@id_func A) (@id_func B)
+      =
+      @id_func (Product_cat A B));
+
 assert [A A' B B' : Cat]
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
@@ -4860,6 +4917,19 @@ assert [A A' B B' : Cat]
         (@Op_func A' A F)
         G)
       (Struct_sigma a b);
+
+assert [A B : Cat]
+  (xy : τ (Obj (Product_cat A B))) ⊢
+  eq_refl (@id (Product_cat A B) xy)
+  : τ (
+      @id (Product_cat A B) xy
+      =
+      @Struct_sigma
+        (Obj (Hom_cat A (sigma_Fst xy) (sigma_Fst xy)))
+        (λ _ : τ (Obj (Hom_cat A (sigma_Fst xy) (sigma_Fst xy))),
+          Obj (Hom_cat B (sigma_Snd xy) (sigma_Snd xy)))
+        (@id A (sigma_Fst xy))
+        (@id B (sigma_Snd xy)));
 
 // Stable profunctor reindexing and its representable fold.
 assert [A A' B B' : Cat]

@@ -3309,7 +3309,21 @@ Pullback_catd(Pullback_catd(E,F),H) -> Pullback_catd(E,F o H)
 
 Object, full-hom, and capped-arrow projections are active. Focused collapses
 for constant, opposite, and Sigma-projection families join the existing
-normal forms. No global composition-to-pullback fold is installed.
+normal forms. No global composition-to-pullback rewrite fold is installed.
+
+Post-review probes found that the same semantic comparisons are coherent as
+proof-time unification rules:
+
+```text
+comp_cat_fapp0(E,F) == Pullback_catd(E,F)
+comp_cat_con_func(F) == Pullback_catd_func(F)
+comp_cat_fapp0(Pullback_catd(E,F),H)
+  == Pullback_catd(E,F o H).
+```
+
+Typed `eq_refl` regressions exercise all three rules. They preserve the
+1,114-warning inventory while avoiding the global runtime orientation that
+caused the 1,129-warning probe.
 
 ### Product And Profunctor Base Maps
 
@@ -3317,17 +3331,33 @@ normal forms. No global composition-to-pullback fold is installed.
 object, full-hom, and capped-arrow projection ladder. Composition of two
 product maps accumulates componentwise.
 
-The proposed whole-constructor identity rule was rejected:
+The proposed runtime whole-constructor identity rules were rejected:
 
 ```text
 Product_map_func(id,id) -> id
+Product_map_func(id,id) -> (projL,projR)
 ```
 
 For an arbitrary opaque object of a product category, joining its object
 projection with the generic identity path requires the broad eta equation
-`xy = (fst(xy),snd(xy))`. The current kernel only computes that equation for
-explicit pairs. Component projections still compute through the generic
-identity rules, so the whole-constructor collapse is not required.
+`xy = (fst(xy),snd(xy))`, and the projection-pair orientation adds competing
+composition and hom-action paths. The current kernel only computes object eta
+for explicit pairs.
+
+Proof-time unification is sufficient and is now active:
+
+```text
+Product_map_func(id,id) == (projL,projR)
+Product_map_func(id,id) == id_func(A x B)
+id_{A x B}(xy) == (id_A(fst xy),id_B(snd xy)).
+```
+
+The `Product_map_func` head is the rigid intermediary for functor identity.
+Lambdapi does not chain unification rules, and a direct
+`id_func(A x B) == (projL,projR)` rule was not selected during elaboration.
+The arrow-level comparison does work directly because both sides have rigid
+heads. All comparisons have typed `eq_refl` regressions and preserve the
+warning inventory.
 
 Direct pullback folds discriminating on
 `Product_map_func(Op_func(F),G)` were also brittle because reduction of
@@ -3352,6 +3382,22 @@ Pullback_catd_func(Prof_reindex_base_func(F,G))
 
 This preserves the requested stable reindexing normal forms without making
 general Cat-valued composition use them.
+
+A post-review replacement probe tested:
+
+```text
+Pullback_catd_func(Product_map_func(F,G))
+  -> Prof_reindex_func(Op_func(F),G)
+```
+
+with the opposite operation only on the RHS, plus the object-level joining
+rule, while removing `Prof_reindex_base_func`. The formulation is
+type-correct and its focused assertions pass. The full-file warning inventory
+rose from 1,114 to 1,124 after LHS cleanup; remaining reports include a real
+nested-pullback overlap as well as underconstrained opposite-category
+overlaps. Therefore the replacement is feasible but not yet a cleaner
+computational architecture. Keep `Prof_reindex_base_func` provisionally until
+the nested pullback/reindex join has a principled normal form.
 
 ### Fixed-Endpoint Closed Core
 

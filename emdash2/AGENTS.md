@@ -80,6 +80,22 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   non-discriminating LHS slots.
 - When an explicit source/target category is needed in an assertion, prefer canonical forms such as `Hom_cat ...` and `Functord_cat ...` over reducible readability wrappers such as `Fibre_cat (DefinedAlias ...) k`.
 - Prefer semantic definitions first. Add a primitive stable head only after a focused probe shows a real discrimination or performance need.
+- Distinguish runtime normalization from proof-time identification. Use a
+  rewrite rule only when one side is the intended computational normal form.
+  When two presentations should elaborate against each other or make an
+  equality proof reflexive without changing runtime reduction, prefer a
+  narrowly typed `unif_rule`. Validate it with an explicit typed
+  `eq_refl` term; `assert t ≡ u` tests conversion and therefore does not test a
+  unification rule.
+- Unification rules are experimental, are not automatically transitive, and
+  do not reliably solve a pattern whose only rigid side is a constructor and
+  whose other side is a bare pattern variable. Prefer two rigid heads or a
+  stable intermediary. Compare warning-enabled full-file results even though
+  unification rules do not participate in rewrite critical pairs.
+- A `constant` symbol cannot head a rewrite LHS. Changing it to `injective` is
+  permitted only as an explicit kernel normal-form migration: probe all
+  downstream consumers, subject reduction, and the warning inventory first.
+  Do not make that change merely to encode a proof-time eta comparison.
 - Treat the global `fapp*`/`tapp*` calculus as the sole owner of ordinary
   functoriality and naturality. Never add constructor-specific rules merely to
   state `F(id) = id`, `F(g o f) = F(g) o F(f)`, or the corresponding ordinary
