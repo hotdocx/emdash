@@ -369,6 +369,41 @@ symbol eq_ap
     (λ t : τ a, f t = f y)
     (eq_refl (f y));
 
+// Heterogeneous path over an equality/path in a family of groupoids. The
+// semantic definition uses the kernel's backward equality transport; public
+// constructor path views should hide this orientation behind stable heads.
+symbol PathOver
+  [A : Grpd]
+  (P : τ A → Grpd)
+  [x y : τ A]
+  (p : τ (x = y))
+  (u : τ (P x))
+  (v : τ (P y))
+  : Grpd
+≔ u = ind_eq p P v;
+
+symbol pathover_refl
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [x : τ A]
+  (u : τ (P x))
+  : τ (@PathOver A P x x (eq_refl x) u u)
+≔ eq_refl u;
+
+// Dependent action on paths. This is intentionally primitive at first: the
+// current transport-form equality eliminator gives the required reflexive
+// computation directly, while full proof-time agreement with derived J forms
+// remains a separate univalence side task.
+symbol eq_apd
+  [A : Grpd]
+  [P : τ A → Grpd]
+  (f : Π x : τ A, τ (P x))
+  [x y : τ A]
+  (p : τ (x = y))
+  : τ (@PathOver A P x y p (f x) (f y));
+
+rule @eq_apd _ _ $f $x $x (eq_refl $x) ↪ eq_refl ($f $x);
+
 builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;
 builtin "eqind" ≔ ind_eq;
@@ -582,6 +617,39 @@ rule @comp_fapp0
       $X
       $Z
       (@comp_fapp0 $A $X $Y $Z $g $f);
+
+/*
+  Core inclusion and path-to-arrow.
+
+  `Core_incl_func(C) : Core_cat(C) ⊢ C` owns the computational map from
+  non-directed object paths to directed arrows. Composition is deliberately
+  not restated here: the generic `fapp1_fapp0` functoriality rule folds
+  path_to_hom(q) ∘ path_to_hom(p) to path_to_hom(eq_trans(p,q)).
+
+  The reflexivity bridge is a measured projection-ladder join. `Path_cat`
+  reduces identity arrows to `eq_refl` before the generic functor-identity
+  rule can see the literal `id`, so this focused rule restores the intended
+  normal form without adding a second composition owner.
+*/
+injective symbol Core_incl_func
+  (C : Cat)
+  : τ (Functor (Core_cat C) C);
+
+rule @fapp0 _ _ (Core_incl_func _) $x ↪ $x;
+
+rule @fapp1_fapp0 _ _ (Core_incl_func $C) $x $x (eq_refl $x)
+  ↪ @id $C $x;
+
+symbol path_to_hom
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y))
+  : τ (Hom C x y)
+≔ @fapp1_fapp0
+    (Core_cat C)
+    C
+    (Core_incl_func C)
+    x y p;
 
 // -------------------------------------------------------------------------------------------------
 // 3b. Ordinary categorical isomorphism evidence

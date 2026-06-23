@@ -71,6 +71,37 @@ assert [a : Grpd] (x : τ a) ⊢
   @eq_sym a x x (eq_refl x)
   ≡ eq_refl x;
 
+// Groupoid path-over and dependent path action.
+assert [A : Grpd]
+  (P : τ A → Grpd)
+  (x : τ A)
+  (u v : τ (P x)) ⊢
+  @PathOver A P x x (eq_refl x) u v
+  ≡ u = v;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (f : Π x : τ A, τ (P x))
+  (x : τ A) ⊢
+  @eq_apd A P f x x (eq_refl x)
+  ≡ eq_refl (f x);
+
+// Core inclusion/path-to-arrow is functor-owned. Composition is checked
+// through the generic fapp1_fapp0 composition rule, not a specialized rule.
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @path_to_hom C x x (eq_refl x)
+  ≡ @id C x;
+
+assert [C : Cat]
+  [x y z : τ (Obj C)]
+  (p : τ (x = y))
+  (q : τ (y = z)) ⊢
+  @comp_fapp0 C x y z
+    (@path_to_hom C y z q)
+    (@path_to_hom C x y p)
+  ≡ @path_to_hom C x z
+      (@eq_trans (Obj C) x y z p q);
+
 assert [C : Cat] [w x y z : τ (Obj C)]
   (h : τ (Hom C y z))
   (g : τ (Hom C x y))

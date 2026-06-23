@@ -1,7 +1,7 @@
 # EMDASH v3.2 Groupoid And Computational Univalence Implementation Plan
 
 Date: 2026-06-23
-Last reviewed: 2026-06-23
+Last reviewed: 2026-06-24
 
 Plan-ID: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23
 Depends-On: none
@@ -10,16 +10,18 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 
-Status: active architecture and feasibility plan. No groupoid-univalence,
-`TypeEquiv`, `OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol
-from this report has been promoted to `emdash3_2.lp`. The existing equality,
-`Path_cat`, `IsoEvidence`, and `ProfComparison` implementations remain active.
-Focused probes have confirmed the transparent `PathOver` and reflexive
-`path_to_hom` definitions, the minimal decoded `Pi_grpd` and
-contractible-fibre `TypeEquiv` encoding, and derivability of the covariant
-Yoneda embedding from `hom_int` over the opposite category. A primitive
-recursive-destructor `OmegaEquiv` interface with reflexivity and recursively
-reflexive inverse cells has also passed an isolated warning-enabled probe.
+Status: active implementation plan. The first Phase 1 slice has been promoted
+to `emdash3_2.lp`: transparent `PathOver`, `pathover_refl`, primitive
+reflexive `eq_apd`, functor-owned `Core_incl_func`, and public
+`path_to_hom`. No groupoid-univalence, `TypeEquiv`, `OmegaEquiv`,
+`CatUnivalence`, or generic `HomComparison` symbol from this report has yet
+been promoted. The existing equality, `Path_cat`, `IsoEvidence`, and
+`ProfComparison` implementations remain active. Focused probes have confirmed
+the minimal decoded `Pi_grpd` and contractible-fibre `TypeEquiv` encoding, and
+derivability of the covariant Yoneda embedding from `hom_int` over the
+opposite category. A primitive recursive-destructor `OmegaEquiv` interface
+with reflexivity and recursively reflexive inverse cells has also passed an
+isolated warning-enabled probe.
 
 ## Scope And Authority
 
@@ -249,6 +251,84 @@ warning-enabled import probes pass with no warning located in the probe file.
 The computational core-inclusion interface is therefore feasible, subject to
 the usual owning-position full-file promotion probe. Identification with the
 canonical J-defined semantic map remains a proof-time side task.
+
+Implementation checkpoint 2026-06-24: the first Phase 1 path utility and core
+inclusion slice landed in `emdash3_2.lp`, with regression assertions in
+`emdash3_2_checks.lp`.
+
+Promoted symbols:
+
+```text
+PathOver;
+pathover_refl;
+eq_apd;
+Core_incl_func;
+path_to_hom.
+```
+
+Promoted runtime rules:
+
+```text
+eq_apd(f,refl_x) -> refl_(f x);
+Core_incl_func(C)[x] -> x;
+Core_incl_func(C)[refl_x] -> id_x.
+```
+
+There is still no specialized composition rule for `path_to_hom`. The checked
+composition normal form remains the generic functoriality fold:
+
+```text
+path_to_hom(q) o path_to_hom(p)
+  -> path_to_hom(eq_trans(p,q)).
+```
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_phase1_path_api_probe.lp
+logs/probes/univalence_phase1_path_api_probe-20260624-002805.log
+logs/probes/univalence_phase1_path_api_probe-20260624-002811.log
+
+tmp/probes/univalence_phase1_owner_position.lp
+logs/probes/univalence_phase1_owner_position-20260624-002856.log
+logs/probes/univalence_phase1_owner_position-20260624-002900.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+```
+
+The warning-enabled owning-position probe produced no reports at the new
+`eq_apd`, `Core_incl_func`, or `path_to_hom` rule lines. After promotion,
+`make warning-summary` reports:
+
+```text
+1121 warnings = 958 unjoinable critical pairs + 163 replaceable patterns.
+```
+
+This is a +6 critical-pair delta over the prior 1115-warning inventory. The
+six new reports are located at existing product-projection, hom-precomposition,
+and transfor/functoriality rules, with terms involving the new
+`Core_incl_func` object projection and reflexivity bridge. They are the
+expected stable-projection boundary for exposing a global computational object
+action:
+
+```text
+Core_incl_func(C)[x] -> x.
+```
+
+Per the project rewrite SOP, this warning delta is diagnostic evidence for
+classification and follow-up joins; it is not a veto on a semantically intended
+rewrite rule. The runtime projection is retained because it is the selected
+normal form for the core-inclusion functor.
+
+A diagnostic variant replacing this runtime object projection by a proof-time
+unification rule still passed the Phase 1 assertions and reduced the delta to
+about two critical-pair reports. That variant is not promoted: it relies on a
+bare-variable-style unification helper and would make the core inclusion's
+object action proof-time only, contrary to the selected computational
+interface. If later consumers make this +6 boundary expensive or ambiguous,
+reopen `UNI-CORE-INCL` and compare a stable intermediate object-action head
+against the current direct runtime projection.
 
 The primitive recursive `OmegaEquiv` interface was tested in:
 
@@ -1222,17 +1302,17 @@ the report labels ua_grpd as an operational assumption.
 
 | ID | Status | Depends on | Resume trigger | Next action |
 | --- | --- | --- | --- | --- |
-| `UNI-PATHOVER` | semantic feasibility confirmed | none | implementation begins | Compare transparent and stable owning-position variants; add dependent-ap checks. |
-| `UNI-PATH-HOM` | functor-owned computation feasible | none | path-to-arrow implementation begins | Define the public map through `Core_incl_func`; probe proof-time J agreement. |
-| `UNI-CORE-INCL` | composition feasibility confirmed in import probe | none | Phase 1 promotion begins | Run owning-position full-file probe with only object and reflexivity projection rules. |
+| `UNI-PATHOVER` | first semantic slice promoted | none | Sigma/Product path views begin | Add `pathover_sym`/`pathover_comp` only when consumed; keep stable-head variant as a fallback if transparent unfolding becomes brittle. |
+| `UNI-PATH-HOM` | functor-owned map promoted | none | proof-time J agreement is needed | Probe propositional or narrow unification agreement between `path_to_hom` and the J-defined reference. |
+| `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
 | `UNI-GRPD-PI` | formation/decoding feasibility confirmed | none | `TypeEquiv` promotion begins | Probe the decoder at its intended owning position. |
 | `UNI-TYPE-EQUIV` | semantic formation confirmed | promoted `UNI-GRPD-PI` | Pi decoder lands | Derive inverse selection, inverse paths, symmetry, and composition. |
 | `UNI-UA-GRPD` | blocked on `UNI-TYPE-EQUIV` | `UNI-TYPE-EQUIV` | Type equivalence algebra passes | Define universe-univalence capability and probe `coe_grpd(ua(e))`. |
-| `UNI-SIGMA-VIEW` | blocked on `UNI-PATHOVER` | `UNI-PATHOVER` | Path-over normal form selected | Probe encode/decode and reflexivity projections. |
+| `UNI-SIGMA-VIEW` | unblocked by first `UNI-PATHOVER` slice | `UNI-PATHOVER` | Phase 4 begins | Probe encode/decode and reflexivity projections. |
 | `UNI-PI-VIEW` | blocked | `UNI-PATHOVER`, `UNI-GRPD-PI` | Sigma view and Pi formation stable | Define related-input observational Pi path. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
-| `UNI-OMEGA` | primitive recursive interface feasibility confirmed | path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
+| `UNI-OMEGA` | primitive recursive interface feasibility confirmed | promoted path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | architecturally ready after `UNI-OMEGA` promotion | `UNI-OMEGA` | Canonical `idtoequiv_cat` lands | Define `CatUnivalence(C)` as `IsEquivMap(idtoequiv_cat)`. |
 | `UNI-CAT-GLOBAL` | design decision adopted; implementation awaits capability | `UNI-CAT-CAP` | `CatUnivalence` interface lands | Add the global operational instance for every `C : Cat`. |
@@ -1243,10 +1323,10 @@ the report labels ua_grpd as an operational assumption.
 
 | Slice | Feasibility | Main risk |
 | --- | --- | --- |
-| `PathOver` formation/reflexivity | confirmed in isolated probe | transport orientation and unwanted unfolding |
-| dependent ap | high | stable public normal form and reflexivity computation |
-| functor-owned `path_to_hom` reflexivity | confirmed in isolated probe | owning-position overlap audit |
-| strict `Core_incl_func` composition | confirmed through generic functoriality | proof-time agreement with J semantics |
+| `PathOver` formation/reflexivity | promoted | transport orientation and unwanted unfolding in later path views |
+| dependent ap | reflexive computation promoted | stable public normal form beyond reflexivity |
+| functor-owned `path_to_hom` reflexivity | promoted | proof-time agreement with J semantics |
+| strict `Core_incl_func` composition | promoted through generic functoriality | future projection-ladder consumers |
 | `Pi_grpd` formation/decoding | confirmed in isolated probe | future interaction with observational Pi equality |
 | contractible-fibre `TypeEquiv` formation | confirmed in isolated probe | inverse derivation, proof term size, and Sigma-fibre equality |
 | Sigma/Product path views | high | encode/decode orientation and projection overlap |
