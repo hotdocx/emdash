@@ -2,6 +2,13 @@
 
 Date: 2026-06-16
 
+Plan-ID: EMDASH-MATHOPS-DEVOPS-2026-06-16
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: proposed implementation plan for improving the project SOP, validation
 loop, literature discovery, and reviewer-facing evidence.
 
@@ -245,6 +252,17 @@ Initial implementation status:
     check, probe, or CI loops;
   - the tested development build is recorded but intentionally not enforced,
     so toolchain setup cannot block exploratory mathematics.
+- 2026-06-23 Infinity Codex extension:
+  - a trusted repo-local `Stop` hook archives only exact main-agent final
+    responses under ignored `tmp/ai-responses/`;
+  - a `SessionStart` hook for resume/compaction injects recovery pointers
+    without injecting archived prose;
+  - immutable per-turn metadata, generated indexes, logical response IDs,
+    verification, explicit pruning, and plan annotation are implemented in
+    `scripts/infinity_codex.py`;
+  - `make infinity-codex-test` and `make ci` validate the hook and archive;
+  - the archive is deliberately independent of Codex Memories and remains
+    subordinate to active code, SOPs, plans, and side-task ledgers.
 
 This sequence improves daily development immediately, then improves research
 intake, then improves external credibility.

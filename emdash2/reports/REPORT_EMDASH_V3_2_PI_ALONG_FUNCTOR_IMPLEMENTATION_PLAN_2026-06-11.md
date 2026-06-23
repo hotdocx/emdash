@@ -2,6 +2,13 @@
 
 Date: 2026-06-11
 
+Plan-ID: EMDASH-V3-2-PI-ALONG-FUNCTOR-2026-06-11
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: proposed implementation plan. No `Pi_f` implementation from this
 report has been attempted in `emdash3_2.lp` yet.
 

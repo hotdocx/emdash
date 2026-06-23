@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check check-warnings warning-summary audit-rules examples catalog ci ci-render health watch prune-logs clean
+.PHONY: check check-warnings warning-summary audit-rules examples catalog ci ci-render health watch infinity-codex-test prune-logs clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -19,6 +19,8 @@ audit-rules:
 ci:
 > python3 scripts/check_metrics.py --update-log --brief
 > python3 -m py_compile scripts/*.py
+> python3 -m json.tool .codex/hooks.json >/dev/null
+> python3 -m unittest tests.test_infinity_codex
 > bash -n scripts/*.sh
 > git diff --check
 > ./scripts/lint_active_refs.sh
@@ -39,6 +41,10 @@ health:
 
 watch:
 > EMDASH_TYPECHECK_TIMEOUT=$(EMDASH_TYPECHECK_TIMEOUT) python3 scripts/watch_typecheck.py --log logs/typecheck.log
+
+infinity-codex-test:
+> python3 -m json.tool .codex/hooks.json >/dev/null
+> python3 -m unittest tests.test_infinity_codex
 
 prune-logs:
 # Manual cleanup only; this is never called by check, probes, or CI.

@@ -2,6 +2,13 @@
 
 Date: 2026-06-16
 
+Plan-ID: EMDASH-V3-2-REORGANIZATION-2026-06-16
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Active file: `emdash3_2.lp`
 
 Purpose: reorganize `emdash3_2.lp` into a coherent, split-ready sequential order while keeping a single file for now. The future split should have a mostly linear dependency structure and coherent logical units.

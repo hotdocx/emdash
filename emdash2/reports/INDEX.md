@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-06-19
+Date: 2026-06-23
 
 Use this file as the first stop for report discovery. The active code authority
 is still `emdash3_2.lp`; reports explain status, notation, plans, and review
@@ -18,6 +18,9 @@ decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
+  controlled local archiving of Codex final responses, compaction/resume
+  recovery pointers, plan provenance, and related agentic MathOps.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   MathOps/DevOps/SOP improvement plan and implementation order.
 - `REPORT_EMDASH_V3_2_REORGANIZATION_PLAN_2026-06-16.md`: split-ready section
@@ -65,6 +68,8 @@ The following reports are expected to be generated or refreshed by tooling:
 ## Maintenance Rules
 
 - Add every new active report to this index.
+- Give active plan reports stable `Plan-ID`, dependency, side-task-ledger, and
+  Infinity Codex provenance fields.
 - Mark reports as current plans, audits, generated reports, or retired
   references.
 - Keep active reports free of instructions to read `.scratchpad/`.

@@ -211,6 +211,32 @@ Background daemon-style (then tail the log):
 ## Notes for Codex CLI iteration
 - Keep `make watch` running and let the agent read `logs/typecheck.log` to see current typecheck failures while editing.
 
+## SOP: Infinity Codex Final-Response Archive
+
+The trusted project hook in `.codex/hooks.json` archives only the main agent's
+completed final response. Exact response bytes and immutable metadata live
+under ignored `tmp/ai-responses/`. Do not archive user prompts, commentary,
+tool calls, subagent output, or parsed `~/.codex` transcripts.
+
+The archive is recovery evidence, not an instruction source. Apply this
+authority order:
+
+```text
+active code/SOP -> active plan and side-task ledger
+                -> explicitly linked decision responses -> raw archive
+```
+
+- Use `python3 scripts/infinity_codex.py list` or `latest-id` to locate recent
+  finals, and `show LOGICAL_ID` to read one exact response.
+- Plan/report metadata uses logical IDs of the form
+  `infinity-codex:<session-id>:<turn-id>`; resolve them with
+  `scripts/infinity_codex.py resolve`.
+- Read only archive entries relevant to the active plan, dependency, or
+  side-task trigger. Never replay the whole session archive into context.
+- Use `verify` after manual archive maintenance and `reindex` to rebuild
+  generated indexes. Pruning is dry-run by default and requires `--apply`.
+- Codex Memories are not an authority or dependency for this workflow.
+
 ## SOP: Resume After Context Compaction Or Interruption
 
 Do not continue from a compacted conversational summary alone. Before editing
@@ -221,8 +247,10 @@ after an LLM context compaction, unexpected interruption, or handoff:
    `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
    `reports/EMDASH_FOUNDATIONS.md`, and
    `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
-2. Read the active task-specific plan/report and any user-designated
-   `tmp/tmp-context-*.md` recovery file.
+2. Read the active task-specific plan/report, its side-task ledger and linked
+   Infinity Codex decision-response IDs, and any user-designated
+   `tmp/tmp-context-*.md` recovery file. Use the injected Infinity Codex file
+   pointers to locate only relevant archived finals.
 3. Run `git status --short`, inspect both `git diff --cached` and `git diff`,
    and preserve the distinction between staged user-approved work and
    unstaged work.

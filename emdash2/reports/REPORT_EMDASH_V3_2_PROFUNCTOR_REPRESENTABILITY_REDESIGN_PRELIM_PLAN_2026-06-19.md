@@ -3,6 +3,13 @@
 Date: 2026-06-19
 Last reviewed: 2026-06-23
 
+Plan-ID: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19
+Depends-On: EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17
+Supersedes: none
+Side-Task-Ledger: #deferred-internalization-side-task-ledger
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: active incremental redesign. The coherent Phase 1 foundation
 (`ProfMap` and ordinary `IsoEvidence`) and the first Phase 2 propositional
 evidence/representability algebra are active. Covariant implication is now

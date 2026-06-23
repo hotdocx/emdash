@@ -2,6 +2,13 @@
 
 Date: 2026-06-17
 
+Plan-ID: EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19#deferred-internalization-side-task-ledger
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status updated: 2026-06-22
 
 Status: the first end-to-end implementation pass is complete through Phase 6a.

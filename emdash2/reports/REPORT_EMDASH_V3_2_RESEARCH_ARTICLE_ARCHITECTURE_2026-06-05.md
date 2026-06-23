@@ -2,6 +2,13 @@
 
 Date: 2026-06-05
 
+Plan-ID: EMDASH-V3-2-RESEARCH-ARTICLE-2026-06-05
+Depends-On: EMDASH-V3-2-INDEX-READABILITY-2026-06-06, EMDASH-V3-2-NOTATION-REORG-2026-06-05
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: preliminary article design for a new v3.2 paper. This report is based
 on the current `emdash3_2.lp`, `emdash3_2_checks.lp`, the active v3.2 SOP and
 foundations reports, the canonical syntax report, and the older v2 paper

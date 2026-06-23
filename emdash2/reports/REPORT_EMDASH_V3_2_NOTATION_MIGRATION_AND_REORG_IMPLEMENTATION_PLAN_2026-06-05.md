@@ -2,6 +2,13 @@
 
 Date: 2026-06-05
 
+Plan-ID: EMDASH-V3-2-NOTATION-REORG-2026-06-05
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: implementation started; notation cleanup and assertion split completed.
 The first temporary reorganization pass has also been promoted into
 `emdash3_2.lp`.

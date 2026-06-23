@@ -2,6 +2,13 @@
 
 Date: 2026-06-06
 
+Plan-ID: EMDASH-V3-2-INDEX-READABILITY-2026-06-06
+Depends-On: EMDASH-V3-2-NOTATION-REORG-2026-06-05
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: implementation plan for rewriting `print/public/index_3_2.md` for an
 external expert reader.
 

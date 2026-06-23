@@ -30,6 +30,8 @@ work.
   `reports/INDEX.md`.
 - MathOps/DevOps implementation plan:
   `reports/REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`.
+- Infinity Codex final-response archive plan and SOP:
+  `reports/REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`.
 
 Reports retired by the 2026-06-05 consolidation have been archived under:
 
@@ -717,7 +719,28 @@ make ci
 Use it before handoff or after broad edits. For the ordinary agentic inner
 loop, prefer focused probes and `make check`; `make ci` also checks examples,
 script syntax, active-reference lint, strict check-catalog freshness, and
-compact source metrics.
+compact source metrics. It also validates the project-local Codex hook and runs
+the Infinity Codex archive tests.
+
+The focused Infinity Codex gate is:
+
+```bash
+make infinity-codex-test
+```
+
+The hook archives only completed main-agent final responses under ignored
+`tmp/ai-responses/`. On resume or compaction it injects file pointers, not
+archived response text. Raw responses are historical recovery evidence and
+must never outrank current code, this SOP, or the active task plan:
+
+```text
+active code/SOP -> active plan and side-task ledger
+                -> explicitly linked decision responses -> raw archive
+```
+
+Use `python3 scripts/infinity_codex.py verify` after manual maintenance.
+Pruning is explicit and dry-run by default. Codex Memories are not part of
+this workflow.
 
 Reviewer-facing examples can be checked with:
 

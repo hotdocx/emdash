@@ -5,6 +5,13 @@
 
 Date: 2026-06-04
 
+Plan-ID: EMDASH-V3-2-FUNCTOR-STRUCTURAL-LOGIC-2026-06-04
+Depends-On: none
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: preliminary design note with first ordinary implementation slice
 landed on 2026-06-10. The ordinary weakening/exchange/contraction layer is now
 implemented in `emdash3_2.lp`; displayed/mixed-variance follow-up and

@@ -24,6 +24,8 @@ The proof assistant is called `m—` (read “emdash”).
   test.
 - `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
   notation/reorganization plan.
+- `reports/REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
+  local Codex final-response archiving and context-recovery workflow.
 - `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit explaining
   why the old v2 baseline was retired and which ideas remain future design
   material.
@@ -52,6 +54,7 @@ gate.
 - Compact inventory of the warning-enabled kernel check:
   `make warning-summary`
 - Strict rewrite-LHS hygiene audit: `make audit-rules`
+- Test the Infinity Codex hooks/archive: `make infinity-codex-test`
 - Manually remove accumulated `.log` files: `make prune-logs`
 
 ## Watch mode (auto typecheck on save)
@@ -79,9 +82,44 @@ gate.
 - Search the normalized Lambdapi index:
   `scripts/lambdapi_search.sh 'type >= Prof_imply_cov'`.
 - Manually remove accumulated checker/probe logs: `make prune-logs`.
+- Inspect the local final-response archive:
+  `python3 scripts/infinity_codex.py list`.
+- Resolve a plan-linked response:
+  `python3 scripts/infinity_codex.py show
+  'infinity-codex:<session-id>:<turn-id>'`.
 - arXiv/ar5iv discovery:
   `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
 - Reviewer milestone examples live in `examples/`.
+
+## Infinity Codex
+
+Trusted project-local hooks in `.codex/hooks.json` archive the main agent's
+completed final response after each turn. The exact response bytes and
+write-once metadata live under ignored `tmp/ai-responses/`; user prompts,
+commentary, tool calls, and subagent output are not copied. On session resume
+or context compaction, Codex receives file pointers only, never automatically
+injected archived prose.
+
+After cloning or changing the hook definition, restart Codex and use `/hooks`
+to review and trust it. The hook is deliberately independent of Codex
+Memories. Archive authority is:
+
+```text
+active code/SOP -> active plan and side-task ledger
+                -> explicitly linked decision responses -> raw archive
+```
+
+Useful maintenance commands:
+
+```bash
+python3 scripts/infinity_codex.py latest-id
+python3 scripts/infinity_codex.py verify
+python3 scripts/infinity_codex.py reindex
+python3 scripts/infinity_codex.py prune --before 2026-01-01 --dry-run
+```
+
+Deletion requires replacing `--dry-run` with `--apply`. The archive is local
+only; back it up separately if machine-level durability is required.
 
 Quiet project checks use Lambdapi's `-w` flag to suppress the large existing
 critical-pair warning stream. When a quiet check times out or does not identify

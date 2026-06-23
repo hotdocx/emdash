@@ -3,6 +3,13 @@
 Date: 2026-06-12
 Last reviewed: 2026-06-22
 
+Plan-ID: EMDASH-V3-2-FULL-NATURALITY-2026-06-12
+Depends-On: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19
+Supersedes: none
+Side-Task-Ledger: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19#deferred-internalization-side-task-ledger
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
+
 Status: first implementation slice landed in `emdash3_2.lp` and
 `emdash3_2_checks.lp` on 2026-06-12.
 

@@ -2,6 +2,7 @@
 .antigravitycli/
 .gemini/
 tmp/probes/
+tmp/ai-responses/
 *.lpo
 *.lpi
 *.lpj
