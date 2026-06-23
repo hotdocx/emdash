@@ -10,7 +10,9 @@ Infinity-Codex-Origin: pending
 Infinity-Codex-Decision-Responses: pending
 
 Status: implementation complete; local hook trust and first restarted-session
-smoke test remain operator activation steps.
+smoke test remain operator activation steps. The initial live Stop-hook test
+exposed and corrected nested-project path resolution: this Codex project is
+`emdash2`, while the enclosing Git root is `emdash1`.
 
 ## Summary
 
@@ -156,3 +158,25 @@ Activation after this change:
 
 The current thread cannot perform that live lifecycle test because its hook
 set was loaded before `.codex/hooks.json` existed.
+
+## Activation Correction: Nested Project Root
+
+The first live Stop-hook invocation on 2026-06-23 failed because the original
+command used:
+
+```text
+git rev-parse --show-toplevel
+```
+
+That resolves to the enclosing repository `/home/user1/emdash1`, not this
+Codex project `/home/user1/emdash1/emdash2`, so it looked for the archiver in
+the wrong `scripts/` directory.
+
+Both hook commands now start from the Codex session working directory and walk
+upward to the nearest ancestor containing `.codex/hooks.json`. This preserves
+subdirectory launches while selecting the nested Codex project rather than
+the enclosing Git root. The hook-configuration unit test rejects a regression
+back to Git-root-only resolution.
+
+Because changing a hook command changes its trust hash, review and trust the
+updated definition through `/hooks` before repeating the live smoke test.

@@ -245,6 +245,29 @@ class InfinityCodexTests(unittest.TestCase):
             command = event[0]["hooks"][0]["command"]
             self.assertIn("scripts/infinity_codex.py", command)
             self.assertTrue(command.endswith(" hook"))
+            self.assertIn("$PWD", command)
+            self.assertIn(".codex/hooks.json", command)
+            self.assertNotIn("git rev-parse --show-toplevel", command)
+
+    def test_configured_stop_command_resolves_nested_project_root(self) -> None:
+        configuration = json.loads(HOOKS.read_text(encoding="utf-8"))
+        command = configuration["hooks"]["Stop"][0]["hooks"][0]["command"]
+        environment = os.environ.copy()
+        environment["INFINITY_CODEX_ARCHIVE_ROOT"] = str(self.archive)
+        environment["INFINITY_CODEX_NOW"] = "2026-06-23T12:34:56Z"
+        result = subprocess.run(
+            command,
+            shell=True,
+            cwd=REPO_ROOT / "tests",
+            env=environment,
+            input=json.dumps(self.stop_payload("nested project")).encode("utf-8"),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr.decode())
+        self.assertEqual(json.loads(result.stdout), {"continue": True})
+        self.assertEqual(self.one_response().read_text(encoding="utf-8"), "nested project")
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/scripts/infinity_codex.py\" hook",
+            "command": "project_dir=\"$PWD\"; while [ \"$project_dir\" != \"/\" ] && [ ! -f \"$project_dir/.codex/hooks.json\" ]; do project_dir=\"$(dirname \"$project_dir\")\"; done; if [ ! -f \"$project_dir/scripts/infinity_codex.py\" ]; then echo \"Infinity Codex hook: cannot locate scripts/infinity_codex.py from $PWD\" >&2; exit 1; fi; exec /usr/bin/python3 \"$project_dir/scripts/infinity_codex.py\" hook",
             "timeout": 30
           }
         ]
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/scripts/infinity_codex.py\" hook",
+            "command": "project_dir=\"$PWD\"; while [ \"$project_dir\" != \"/\" ] && [ ! -f \"$project_dir/.codex/hooks.json\" ]; do project_dir=\"$(dirname \"$project_dir\")\"; done; if [ ! -f \"$project_dir/scripts/infinity_codex.py\" ]; then echo \"Infinity Codex hook: cannot locate scripts/infinity_codex.py from $PWD\" >&2; exit 1; fi; exec /usr/bin/python3 \"$project_dir/scripts/infinity_codex.py\" hook",
             "timeout": 30,
             "statusMessage": "Loading Infinity Codex recovery pointers"
           }
