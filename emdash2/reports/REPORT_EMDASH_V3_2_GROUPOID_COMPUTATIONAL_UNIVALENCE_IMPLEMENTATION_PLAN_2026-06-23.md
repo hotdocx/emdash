@@ -20,7 +20,11 @@ primitive reflexive `eq_apd`, functor-owned `Core_incl_func`, public
 slice is also promoted: `SigmaPathView`, `sigma_path_base`,
 `sigma_path_fibre`, `sigma_path_refl`, reflexive `sigma_path_encode`,
 `sigma_path_intro`, and constructor-reflexive `sigma_path_decode`. The first
-Pi/function path-view slice is promoted as well: `PiPathView`,
+direct equality-computation slice is also promoted: `=` is now an injective
+rewrite head, Sigma equality reduces to `SigmaPathView`, and the projected
+components of reflexive Sigma paths compute while `eq_refl` itself remains
+eliminator-visible. The first Pi/function path-view slice is promoted as well:
+`PiPathView`,
 `pi_path_apply`, `pi_path_refl`, and reflexive `pi_path_encode`. The first
 constructor-specific computational-univalence skeleton is now promoted:
 `Product_grpd`, `Product_pair_grpd`, `product_type_equiv`,
@@ -36,9 +40,19 @@ categorical-univalence skeleton is also promoted: 1-categorical staging via
 `omega_equiv_op` with destructor computation, explicit product closure
 `omega_equiv_product` with componentwise forward/inverse/cell computation,
 `idtoequiv_cat`, explicit `CatUnivalence`, inverse selection `equivtoid_cat`,
-and global `cat_univalence`. The `Cat_cat` univalence interface is available
-immediately through the global instance; broader constructor-specific
-computation and universe-specific computation remain deferred. No generic
+and global `cat_univalence`. The first specified-inverse operational skeleton
+is promoted as well: `EquivByInverse`, operational-head versions of
+`idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat`, reverse decoder heads
+`grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path`,
+`GrpdUnivalenceByDecoder`, `CatIsoUnivalenceByDecoder`,
+`CatUnivalenceByDecoder`, and the corresponding global decoder capabilities.
+Only `omega_equiv_path` has reflexive runtime computation at this stage;
+`grpd_equiv_path` and `iso_evidence_path` computation is deferred because
+`type_equiv_refl` and `iso_evidence_refl` are transparent semantic
+constructors rather than stable discriminator heads. The `Cat_cat` univalence
+interface is available immediately through the global instance; broader
+constructor-specific computation and universe-specific computation remain
+deferred. No generic
 `HomComparison` symbol from this report has yet been promoted. The existing
 equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
 remain active. Focused probes have confirmed derivability of the covariant
@@ -2542,8 +2556,8 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
 | `UNI-PRODUCT-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA`, product category core | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; opaque product-object eta remains later. |
-| `UNI-EQ-COMPUTE` | proposed 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct computational equality is consumed | Migrate `=` to `injective`; make Sigma equality reduce to `SigmaPathView`; keep `eq_refl` eliminator-visible and add projection rules instead of rewriting `eq_refl` itself. |
-| `UNI-OPERATIONAL-DECODE` | proposed 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation is consumed | Migrate the established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` to stable operational heads; add stable reverse heads such as `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path`; add specified-inverse capabilities such as `CatUnivalenceByDecoder`; compute operational maps by constructor cases and keep generic `IsEquivMap` compatibility separate. |
+| `UNI-EQ-COMPUTE` | first Sigma slice promoted 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct Pi equality, Product/Sigma decoder computation, or more constructor paths are consumed | `=` is injective; Sigma equality reduces to `SigmaPathView`; `eq_refl` remains eliminator-visible; `sigma_Fst`/`sigma_Snd` projection rules expose reflexive Sigma components. Next, probe direct Pi equality and constructor-specific equality decoding only when consumed. |
+| `UNI-OPERATIONAL-DECODE` | first specified-inverse skeleton promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. Only `omega_equiv_path(omega_equiv_refl)` computes for now; reflexive computation for `grpd_equiv_path`/`iso_evidence_path` needs stable owners for `type_equiv_refl`/`iso_evidence_refl` or a different focused rule. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
@@ -2610,6 +2624,18 @@ inverse coherence not needed at runtime remains propositional;
 constructor views can remain stuck outside implemented cases.
 ```
 
+The first direct equality-computation slice is complete when:
+
+```text
+= is an injective rewrite head;
+Sigma equality reduces to SigmaPathView;
+eq_refl itself remains visible to ind_eq/ind_eqr;
+sigma_Fst(eq_refl at Sigma) computes to the base reflexivity path;
+sigma_Snd(eq_refl at Sigma) computes to pathover_refl;
+reflexive ind_eq over Product_grpd still computes;
+warning-enabled check remains at the established baseline.
+```
+
 The first constructor-specific computational-univalence skeleton is complete
 when:
 
@@ -2640,8 +2666,16 @@ forward, inverse, and recursive-cell destructors;
 idtoequiv_cat maps reflexive paths to omega_equiv_refl;
 CatUnivalence, equivtoid_cat, and global cat_univalence are active;
 Cat_cat receives the global interface;
-operational forward/reverse maps and specified-inverse capabilities remain
-the next computational refinement;
+EquivByInverse and the specified-inverse `*ByDecoder` capability layer are
+active;
+idtoequiv_grpd, idtoiso_cat, and idtoequiv_cat are stable operational heads
+with reflexive computation;
+grpd_equiv_path, iso_evidence_path, and omega_equiv_path are active reverse
+decoder heads;
+omega_equiv_path computes on omega_equiv_refl;
+grpd_equiv_path/iso_evidence_path reflexive computation remains deferred
+because their reflexive evidence constructors are transparent rather than
+stable discriminators;
 broader constructor-specific categorical computation and strict cancellation
 remain deferred.
 ```

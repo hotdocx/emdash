@@ -334,7 +334,7 @@ builtin "P" ≔ τ;
     ind_eq p P u   transports u : P y backwards along p : x = y.
     eq_trans p q   composes paths p : x = y and q : y = z.
 */
-constant symbol = : Π [a: Grpd], τ a → τ a → Grpd;
+injective symbol = : Π [a: Grpd], τ a → τ a → Grpd;
 notation = infix 10;
 
 constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
@@ -521,6 +521,15 @@ symbol sigma_path_refl
       @PathOver A P (sigma_Fst u) (sigma_Fst u) p (sigma_Snd u) (sigma_Snd u))
     (eq_refl (sigma_Fst u))
     (@pathover_refl A P (sigma_Fst u) (sigma_Snd u));
+
+rule @= (@Σ_ $A $P) $u $v
+  ↪ @SigmaPathView $A $P $u $v;
+
+rule sigma_Fst (@eq_refl (@Σ_ $A _) $u)
+  ↪ @eq_refl $A (sigma_Fst $u);
+
+rule sigma_Snd (@eq_refl (@Σ_ $A $P) $u)
+  ↪ @pathover_refl $A $P (sigma_Fst $u) (sigma_Snd $u);
 
 symbol sigma_path_encode
   [A : Grpd]
@@ -921,6 +930,21 @@ symbol pi_type_equiv_same_domain
       λ x : τ A, type_equiv_to (e x) (f x))
     (@pi_type_equiv_same_domain_is_equiv A B C e);
 
+/*
+  Specified-inverse equivalence capability.
+
+  This keeps the operational inverse map explicit.  The proof fields are
+  capabilities, not runtime rewrite owners.
+*/
+symbol EquivByInverse
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ A)
+  : Grpd
+≔ @Product_grpd
+    (@Pi_grpd A (λ a : τ A, @= A (g (f a)) a))
+    (@Pi_grpd B (λ b : τ B, @= B (f (g b)) b));
+
 // -------------------------------------------------------------------------------------------------
 // 2. Core categories
 // -------------------------------------------------------------------------------------------------
@@ -1227,11 +1251,10 @@ rule @coe_grpd $A $A (eq_refl $A) $a ↪ $a;
 symbol idtoequiv_grpd
   [A B : Grpd]
   (p : τ (@= Grpd_grpd A B))
-  : τ (TypeEquiv A B)
-≔ ind_eq
-    (eq_sym p)
-    (λ X : Grpd, TypeEquiv A X)
-    (@type_equiv_refl A);
+  : τ (TypeEquiv A B);
+
+rule @idtoequiv_grpd $A $A (eq_refl $A)
+  ↪ @type_equiv_refl $A;
 
 symbol GrpdUnivalence : Grpd
 ≔ @Pi_grpd Grpd_grpd
@@ -1251,6 +1274,25 @@ symbol ua_grpd
 
 rule @coe_grpd $A $B (@ua_grpd _ $A $B $e) $a
   ↪ type_equiv_to $e $a;
+
+symbol grpd_equiv_path
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@= Grpd_grpd A B);
+
+symbol GrpdUnivalenceByDecoder : Grpd
+≔ @Pi_grpd Grpd_grpd
+    (λ A : Grpd,
+      @Pi_grpd Grpd_grpd
+        (λ B : Grpd,
+          @EquivByInverse
+            (@= Grpd_grpd A B)
+            (TypeEquiv A B)
+            (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
+            (λ e : τ (TypeEquiv A B), @grpd_equiv_path A B e)));
+
+symbol grpd_univalence_by_decoder
+  : τ GrpdUnivalenceByDecoder;
 
 // Category of categories.
 constant symbol Cat_cat : Cat;
@@ -1466,11 +1508,10 @@ symbol idtoiso_cat
   [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (x = y))
-  : τ (IsoEvidence C x y)
-≔ ind_eq
-    (eq_sym p)
-    (λ t : τ (Obj C), IsoEvidence C x t)
-    (@iso_evidence_refl C x);
+  : τ (IsoEvidence C x y);
+
+rule @idtoiso_cat $C $x $x (eq_refl $x)
+  ↪ @iso_evidence_refl $C $x;
 
 symbol CatIsoUnivalence
   (C : Cat)
@@ -1501,12 +1542,35 @@ symbol isotoid_cat
       (U x y))
     i;
 
+symbol iso_evidence_path
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (x = y);
+
+symbol CatIsoUnivalenceByDecoder
+  (C : Cat)
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj C)
+        (λ y : τ (Obj C),
+          @EquivByInverse
+            (@= (Obj C) x y)
+            (IsoEvidence C x y)
+            (λ p : τ (@= (Obj C) x y), @idtoiso_cat C x y p)
+            (λ i : τ (IsoEvidence C x y), @iso_evidence_path C x y i)));
+
 // Global operational staging assumption: every active category is
 // 1-categorically univalent, i.e. ordinary isomorphism evidence determines an
 // object path. This does not replace final omega-categorical univalence.
 symbol cat_iso_univalence
   (C : Cat)
   : τ (CatIsoUnivalence C);
+
+symbol cat_iso_univalence_by_decoder
+  (C : Cat)
+  : τ (CatIsoUnivalenceByDecoder C);
 
 /*
   Omega-categorical equivalence is recursive through hom-categories. The
@@ -1645,11 +1709,19 @@ symbol idtoequiv_cat
   [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (x = y))
-  : τ (OmegaEquiv C x y)
-≔ ind_eq
-    (eq_sym p)
-    (λ t : τ (Obj C), OmegaEquiv C x t)
-    (@omega_equiv_refl C x);
+  : τ (OmegaEquiv C x y);
+
+rule @idtoequiv_cat $C $x $x (eq_refl $x)
+  ↪ @omega_equiv_refl $C $x;
+
+symbol omega_equiv_path
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (x = y);
+
+rule @omega_equiv_path $C $x $x (@omega_equiv_refl $C $x)
+  ↪ eq_refl $x;
 
 symbol CatUnivalence
   (C : Cat)
@@ -1662,6 +1734,19 @@ symbol CatUnivalence
             (@= (Obj C) x y)
             (OmegaEquiv C x y)
             (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)));
+
+symbol CatUnivalenceByDecoder
+  (C : Cat)
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj C)
+        (λ y : τ (Obj C),
+          @EquivByInverse
+            (@= (Obj C) x y)
+            (OmegaEquiv C x y)
+            (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)
+            (λ e : τ (OmegaEquiv C x y), @omega_equiv_path C x y e)));
 
 symbol equivtoid_cat
   [C : Cat]
@@ -1687,6 +1772,10 @@ symbol equivtoid_cat
 symbol cat_univalence
   (C : Cat)
   : τ (CatUnivalence C);
+
+symbol cat_univalence_by_decoder
+  (C : Cat)
+  : τ (CatUnivalenceByDecoder C);
 
 /*
   Composition of ordinary isomorphism evidence.

@@ -82,6 +82,10 @@ assert ⊢
   cat_iso_univalence Cat_cat
   : τ (CatIsoUnivalence Cat_cat);
 
+assert ⊢
+  cat_iso_univalence_by_decoder Cat_cat
+  : τ (CatIsoUnivalenceByDecoder Cat_cat);
+
 assert [C : Cat] (x : τ (Obj C)) ⊢
   omega_equiv_to (@omega_equiv_refl C x)
   ≡ @id C x;
@@ -342,6 +346,10 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
   ≡ @omega_equiv_refl C x;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
+  @omega_equiv_path C x x (@omega_equiv_refl C x)
+  ≡ @eq_refl (Obj C) x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
   omega_equiv_to (@idtoequiv_cat C x x (eq_refl x))
   ≡ @id C x;
 
@@ -354,6 +362,10 @@ assert [C : Cat]
 assert ⊢
   cat_univalence Cat_cat
   : τ (CatUnivalence Cat_cat);
+
+assert ⊢
+  cat_univalence_by_decoder Cat_cat
+  : τ (CatUnivalenceByDecoder Cat_cat);
 
 assert [a b : Grpd] (f : τ a → τ b) (x : τ a) ⊢
   @eq_ap a b f x x (eq_refl x)
@@ -508,6 +520,10 @@ assert [A : Grpd] ⊢
   @idtoequiv_grpd A A (eq_refl A)
   ≡ @type_equiv_refl A;
 
+assert ⊢
+  grpd_univalence_by_decoder
+  : τ GrpdUnivalenceByDecoder;
+
 assert [A : Grpd] (a : τ A) ⊢
   type_equiv_to (@idtoequiv_grpd A A (eq_refl A)) a
   ≡ a;
@@ -528,6 +544,43 @@ assert (U : τ GrpdUnivalence)
 assert [A B : Grpd] ⊢
   τ (Product_grpd A B)
   ≡ @τΣ_ A (λ _ : τ A, B);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u v : @τΣ_ A P) ⊢
+  @= (@Σ_ A P) u v
+  ≡ @SigmaPathView A P u v;
+
+assert [A B : Grpd]
+  (p q : τ (Product_grpd A B)) ⊢
+  @= (Product_grpd A B) p q
+  ≡ @SigmaPathView A (λ _ : τ A, B) p q;
+
+assert [A B : Grpd]
+  (x : τ A)
+  (y : τ B) ⊢
+  sigma_Fst (@eq_refl (Product_grpd A B) (@Product_pair_grpd A B x y))
+  ≡ eq_refl x;
+
+assert [A B : Grpd]
+  (x : τ A)
+  (y : τ B) ⊢
+  sigma_Snd (@eq_refl (Product_grpd A B) (@Product_pair_grpd A B x y))
+  ≡ @pathover_refl A (λ _ : τ A, B) x y;
+
+assert [A B : Grpd]
+  (x : τ A)
+  (y : τ B)
+  (M : τ (Product_grpd A B) → Grpd)
+  (u : τ (M (@Product_pair_grpd A B x y))) ⊢
+  @ind_eq
+    (Product_grpd A B)
+    (@Product_pair_grpd A B x y)
+    (@Product_pair_grpd A B x y)
+    (@eq_refl (Product_grpd A B) (@Product_pair_grpd A B x y))
+    M
+    u
+  ≡ u;
 
 assert [A A' B B' : Grpd]
   (eA : τ (TypeEquiv A A'))
