@@ -232,6 +232,86 @@ assert (U : τ GrpdUnivalence)
   @coe_grpd A B (@ua_grpd U A B e) a
   ≡ type_equiv_to e a;
 
+// Constructor-specific computational-univalence skeleton.
+assert [A B : Grpd] ⊢
+  τ (Product_grpd A B)
+  ≡ @τΣ_ A (λ _ : τ A, B);
+
+assert [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  (x : τ A)
+  (y : τ B) ⊢
+  type_equiv_to (@product_type_equiv A A' B B' eA eB)
+    (@Product_pair_grpd A B x y)
+  ≡ @Product_pair_grpd A' B'
+      (type_equiv_to eA x)
+      (type_equiv_to eB y);
+
+assert (U : τ GrpdUnivalence)
+  [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  (x : τ A)
+  (y : τ B) ⊢
+  @coe_grpd
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@ua_grpd U
+      (Product_grpd A B)
+      (Product_grpd A' B')
+      (@product_type_equiv A A' B B' eA eB))
+    (@Product_pair_grpd A B x y)
+  ≡ @Product_pair_grpd A' B'
+      (type_equiv_to eA x)
+      (type_equiv_to eB y);
+
+assert [A : Grpd]
+  [P Q : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (P x) (Q x)))
+  (x : τ A)
+  (u : τ (P x)) ⊢
+  type_equiv_to (@sigma_type_equiv_same_base A P Q e)
+    (@Struct_sigma A P x u)
+  ≡ @Struct_sigma A Q x (type_equiv_to (e x) u);
+
+assert (U : τ GrpdUnivalence)
+  [A : Grpd]
+  [P Q : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (P x) (Q x)))
+  (x : τ A)
+  (u : τ (P x)) ⊢
+  @coe_grpd
+    (@Σ_ A P)
+    (@Σ_ A Q)
+    (@ua_grpd U (@Σ_ A P) (@Σ_ A Q)
+      (@sigma_type_equiv_same_base A P Q e))
+    (@Struct_sigma A P x u)
+  ≡ @Struct_sigma A Q x (type_equiv_to (e x) u);
+
+assert [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (B x) (C x)))
+  (f : τ (@Pi_grpd A B))
+  (x : τ A) ⊢
+  type_equiv_to (@pi_type_equiv_same_domain A B C e) f x
+  ≡ type_equiv_to (e x) (f x);
+
+assert (U : τ GrpdUnivalence)
+  [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (B x) (C x)))
+  (f : τ (@Pi_grpd A B))
+  (x : τ A) ⊢
+  @coe_grpd
+    (@Pi_grpd A B)
+    (@Pi_grpd A C)
+    (@ua_grpd U (@Pi_grpd A B) (@Pi_grpd A C)
+      (@pi_type_equiv_same_domain A B C e))
+    f
+    x
+  ≡ type_equiv_to (e x) (f x);
+
 // Core inclusion/path-to-arrow is functor-owned. Composition is checked
 // through the generic fapp1_fapp0 composition rule, not a specialized rule.
 assert [C : Cat] (x : τ (Obj C)) ⊢

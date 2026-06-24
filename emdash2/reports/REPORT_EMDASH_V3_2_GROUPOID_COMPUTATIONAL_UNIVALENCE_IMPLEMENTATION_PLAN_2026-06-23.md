@@ -21,14 +21,20 @@ slice is also promoted: `SigmaPathView`, `sigma_path_base`,
 `sigma_path_fibre`, `sigma_path_refl`, reflexive `sigma_path_encode`,
 `sigma_path_intro`, and constructor-reflexive `sigma_path_decode`. The first
 Pi/function path-view slice is promoted as well: `PiPathView`,
-`pi_path_apply`, `pi_path_refl`, and reflexive `pi_path_encode`. No
-`OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
-report has yet been promoted. The existing equality, `Path_cat`,
-`IsoEvidence`, and `ProfComparison` implementations remain active. Focused
-probes have confirmed derivability of the covariant Yoneda embedding from
-`hom_int` over the opposite category. A primitive recursive-destructor
-`OmegaEquiv` interface with reflexivity and recursively reflexive inverse
-cells has also passed an isolated warning-enabled probe.
+`pi_path_apply`, `pi_path_refl`, and reflexive `pi_path_encode`. The first
+constructor-specific computational-univalence skeleton is now promoted:
+`Product_grpd`, `Product_pair_grpd`, `product_type_equiv`,
+`sigma_type_equiv_same_base`, and `pi_type_equiv_same_domain`, each with
+forward `type_equiv_to` computation and corresponding `coe_grpd(ua_grpd(...))`
+regression checks. Their `IsEquivMap` witnesses are intentionally isolated
+proof capabilities pending fuller Sigma/Pi path algebra. No `OmegaEquiv`,
+`CatUnivalence`, or generic `HomComparison` symbol from this report has yet
+been promoted. The existing equality, `Path_cat`, `IsoEvidence`, and
+`ProfComparison` implementations remain active. Focused probes have confirmed
+derivability of the covariant Yoneda embedding from `hom_int` over the
+opposite category. A primitive recursive-destructor `OmegaEquiv` interface
+with reflexivity and recursively reflexive inverse cells has also passed an
+isolated warning-enabled probe.
 
 ## Scope And Authority
 
@@ -628,6 +634,79 @@ After promotion, `make warning-summary` remains:
 The warning-enabled owner-position probes report no warning located at
 `sigma_path_intro`, `sigma_path_decode`, `PiPathView`, `pi_path_apply`,
 `pi_path_refl`, or `pi_path_encode`.
+
+Implementation checkpoint 2026-06-24: the first constructor-specific
+computational-univalence skeleton landed.
+
+Promoted constructor equivalence entries:
+
+```text
+Product_grpd;
+Product_pair_grpd;
+product_type_equiv;
+sigma_type_equiv_same_base;
+pi_type_equiv_same_domain.
+```
+
+The promoted computation is deliberately forward-map only. The equivalence
+packages are transparent `TypeEquiv`/Sigma values, so `type_equiv_to` reduces
+by ordinary pair projection rather than by a new rewrite rule:
+
+```text
+type_equiv_to(product_type_equiv(eA,eB),(x,y))
+  -> (type_equiv_to(eA,x), type_equiv_to(eB,y));
+
+type_equiv_to(sigma_type_equiv_same_base(e),(x,u))
+  -> (x, type_equiv_to(e(x),u));
+
+type_equiv_to(pi_type_equiv_same_domain(e),f)(x)
+  -> type_equiv_to(e(x),f(x)).
+```
+
+Because `coe_grpd(ua_grpd(U,e),a)` already delegates to `type_equiv_to(e,a)`,
+the corresponding univalence transports compute through the same maps:
+
+```text
+coe_grpd(ua_grpd(U,product_type_equiv(eA,eB)),(x,y))
+  -> (type_equiv_to(eA,x), type_equiv_to(eB,y));
+
+coe_grpd(ua_grpd(U,sigma_type_equiv_same_base(e)),(x,u))
+  -> (x, type_equiv_to(e(x),u));
+
+coe_grpd(ua_grpd(U,pi_type_equiv_same_domain(e)),f)(x)
+  -> type_equiv_to(e(x),f(x)).
+```
+
+The `*_is_equiv` components are intentionally proof capabilities, not runtime
+normalization owners. Product equivalence, same-base Sigma equivalence, and
+same-domain Pi equivalence are mathematically standard, but deriving their
+contractible-fibre witnesses inside the current kernel requires the still
+deferred Sigma/Pi observational path algebra, especially generic
+encode/decode cancellation and function-extensionality decode. Keeping these
+witnesses isolated lets the computational skeleton land without postulating
+strict inverse/cancellation rules or changing ordinary runtime reduction.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_constructor_equiv_skeleton_probe.lp
+logs/probes/univalence_constructor_equiv_skeleton_probe-20260624-163945.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+make health
+make ci
+```
+
+After promotion, `make warning-summary` remains:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+No new rewrite rule was added for this skeleton, so the unchanged warning
+inventory is expected.
 
 ## Two Related But Separate Programs
 
@@ -1775,9 +1854,10 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
 | `UNI-GRPD-PI` | promoted | none | further Pi equality/univalence begins | Use the promoted related-input Pi path view; defer function-extensionality decode until consumed. |
 | `UNI-TYPE-EQUIV` | first contractible-fibre slice promoted | promoted `UNI-GRPD-PI` | symmetry/composition are consumed | Probe the required Sigma/fibre path algebra; do not postulate strict cancellation. |
-| `UNI-UA-GRPD` | first computational rule promoted | `UNI-TYPE-EQUIV` | constructor-specific univalence computation begins | Add constructor closure entries so `type_equiv_to(e,a)` computes recursively for Sigma/Product/Pi/etc.; keep inverse cancellation propositional unless consumed. |
+| `UNI-UA-GRPD` | first computational rule and constructor-equivalence skeleton promoted | `UNI-TYPE-EQUIV` | more constructor-specific univalence computation is consumed | Extend closure beyond Product, same-base Sigma, and same-domain Pi; keep inverse cancellation propositional unless consumed. |
 | `UNI-SIGMA-VIEW` | componentwise intro and constructor-reflexive decode promoted | `UNI-PATHOVER` | Sigma-constructor univalence or eta is consumed | Keep generic encode/decode cancellation propositional unless a consumer needs judgmental beta/eta. |
 | `UNI-PI-VIEW` | related-input reflexive view/encode promoted | `UNI-PATHOVER`, `UNI-GRPD-PI` | function extensionality or Pi-constructor univalence is consumed | Probe `PiPathView -> f = g` decode separately; do not add eta/cancellation rules speculatively. |
+| `UNI-CTOR-EQUIV` | forward-computing Product, same-base Sigma, and same-domain Pi skeleton promoted | `UNI-UA-GRPD`, `UNI-SIGMA-VIEW`, `UNI-PI-VIEW` | full proof witnesses or base-changing constructors are consumed | Derive or refine `*_is_equiv` witnesses from observational path algebra; add base-changing Sigma/Pi only after transport/pathover computation is stable. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
 | `UNI-OMEGA` | primitive recursive interface feasibility confirmed | promoted path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
@@ -1803,6 +1883,7 @@ the report labels ua_grpd as an operational assumption.
 | `coe_grpd` and canonical `idtoequiv_grpd` on reflexivity | promoted | no non-reflexive computation without univalence capability |
 | `GrpdUnivalence` capability and stable `ua_grpd` operation | promoted | inverse/cancellation coherence remains propositional/deferred |
 | `coe_grpd(ua(e))` | promoted | constructor-specific `e.to` computation still needed |
+| Product/Sigma/Pi constructor equivalence skeleton | promoted for Product, same-base Sigma, and same-domain Pi | `IsEquivMap` witnesses are capabilities until Sigma/Pi path algebra can derive them |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
 | primitive recursive `OmegaEquiv` interface | confirmed in isolated probe | owning-position promotion and closure operations |
@@ -1843,6 +1924,21 @@ coe_grpd(ua_grpd(U,e),a) computes to type_equiv_to(e,a);
 Sigma/Product path views compute on reflexivity;
 inverse coherence not needed at runtime remains propositional;
 constructor views can remain stuck outside implemented cases.
+```
+
+The first constructor-specific computational-univalence skeleton is complete
+when:
+
+```text
+Product_grpd decodes as a constant-family Sigma;
+product_type_equiv computes on paired inputs;
+sigma_type_equiv_same_base computes on Sigma constructors;
+pi_type_equiv_same_domain computes on application;
+coe_grpd(ua_grpd(U,e),a) exposes those same constructorwise maps;
+the equivalence witnesses are isolated proof capabilities, not runtime
+rewrite owners;
+full base-changing Sigma/Pi and derived fibre-contractibility proofs remain
+deferred until the observational path algebra can support them.
 ```
 
 The first categorical milestone is complete when:

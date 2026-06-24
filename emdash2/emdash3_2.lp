@@ -821,6 +821,106 @@ symbol type_equiv_refl
         (λ h : τ (@HFiber A A (λ x : τ A, x) b),
           hfiber_id_contr_path h));
 
+/*
+  Constructor-specific TypeEquiv skeletons.
+
+  These are the first computational-univalence closure entries. The
+  equivalence packages are transparent Sigma values, so `type_equiv_to`
+  computes by ordinary constructor projection. The `*_is_equiv` witnesses are
+  isolated proof capabilities: they do not own runtime computation and should
+  later be replaced or refined by derived fibre-contractibility proofs as the
+  Sigma/Pi observational path algebra matures.
+*/
+
+symbol Product_grpd
+  (A B : Grpd)
+  : Grpd
+≔ @Σ_ A (λ _ : τ A, B);
+
+symbol Product_pair_grpd
+  [A B : Grpd]
+  (x : τ A)
+  (y : τ B)
+  : τ (Product_grpd A B)
+≔ @Struct_sigma A (λ _ : τ A, B) x y;
+
+symbol product_type_equiv_is_equiv
+  [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  : τ (@IsEquivMap
+      (Product_grpd A B)
+      (Product_grpd A' B')
+      (λ p : τ (Product_grpd A B),
+        @Product_pair_grpd A' B'
+          (type_equiv_to eA (sigma_Fst p))
+          (type_equiv_to eB (sigma_Snd p))));
+
+symbol product_type_equiv
+  [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  : τ (TypeEquiv (Product_grpd A B) (Product_grpd A' B'))
+≔ @Struct_sigma
+    (Function_grpd (Product_grpd A B) (Product_grpd A' B'))
+    (λ f : τ (Function_grpd (Product_grpd A B) (Product_grpd A' B')),
+      @IsEquivMap (Product_grpd A B) (Product_grpd A' B') f)
+    (λ p : τ (Product_grpd A B),
+      @Product_pair_grpd A' B'
+        (type_equiv_to eA (sigma_Fst p))
+        (type_equiv_to eB (sigma_Snd p)))
+    (@product_type_equiv_is_equiv A A' B B' eA eB);
+
+symbol sigma_type_equiv_same_base_is_equiv
+  [A : Grpd]
+  [P Q : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (P x) (Q x)))
+  : τ (@IsEquivMap
+      (@Σ_ A P)
+      (@Σ_ A Q)
+      (λ s : τ (@Σ_ A P),
+        @Struct_sigma A Q
+          (sigma_Fst s)
+          (type_equiv_to (e (sigma_Fst s)) (sigma_Snd s))));
+
+symbol sigma_type_equiv_same_base
+  [A : Grpd]
+  [P Q : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (P x) (Q x)))
+  : τ (TypeEquiv (@Σ_ A P) (@Σ_ A Q))
+≔ @Struct_sigma
+    (Function_grpd (@Σ_ A P) (@Σ_ A Q))
+    (λ f : τ (Function_grpd (@Σ_ A P) (@Σ_ A Q)),
+      @IsEquivMap (@Σ_ A P) (@Σ_ A Q) f)
+    (λ s : τ (@Σ_ A P),
+      @Struct_sigma A Q
+        (sigma_Fst s)
+        (type_equiv_to (e (sigma_Fst s)) (sigma_Snd s)))
+    (@sigma_type_equiv_same_base_is_equiv A P Q e);
+
+symbol pi_type_equiv_same_domain_is_equiv
+  [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (B x) (C x)))
+  : τ (@IsEquivMap
+      (@Pi_grpd A B)
+      (@Pi_grpd A C)
+      (λ f : τ (@Pi_grpd A B),
+        λ x : τ A, type_equiv_to (e x) (f x)));
+
+symbol pi_type_equiv_same_domain
+  [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (B x) (C x)))
+  : τ (TypeEquiv (@Pi_grpd A B) (@Pi_grpd A C))
+≔ @Struct_sigma
+    (Function_grpd (@Pi_grpd A B) (@Pi_grpd A C))
+    (λ f : τ (Function_grpd (@Pi_grpd A B) (@Pi_grpd A C)),
+      @IsEquivMap (@Pi_grpd A B) (@Pi_grpd A C) f)
+    (λ f : τ (@Pi_grpd A B),
+      λ x : τ A, type_equiv_to (e x) (f x))
+    (@pi_type_equiv_same_domain_is_equiv A B C e);
+
 // -------------------------------------------------------------------------------------------------
 // 2. Core categories
 // -------------------------------------------------------------------------------------------------
