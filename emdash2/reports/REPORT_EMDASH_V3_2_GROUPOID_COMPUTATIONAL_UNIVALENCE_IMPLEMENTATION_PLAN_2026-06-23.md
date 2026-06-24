@@ -121,9 +121,10 @@ rewrite SOP made the following decisions more precise:
 14. The operational decoder should also be reflected in the univalence
     capability itself. Instead of only saying that `idtoequiv_cat` is an
     equivalence by the generic `IsEquivMap` contractible-fibre interface, add
-    an equivalent specified-inverse formulation saying that the inverse is the
-    operational decoder `omega_equiv_path`. This makes the intended runtime
-    inverse explicit while keeping the existing `IsEquivMap` formulation as a
+    an equivalent specified-inverse formulation whose forward and reverse maps
+    are both operational, for example `path_to_omega_equiv` and
+    `omega_equiv_path`. This makes both intended runtime directions explicit
+    while keeping the induction-defined `idto*`/`equivtoid*` formulation as a
     semantic/compatibility interface.
 
 These corrections are architectural, not merely notational. In particular,
@@ -217,16 +218,45 @@ These decoder heads are not merely convenient wrappers around
 of univalence. Constructor-specific computation should belong first to these
 stable heads.
 
-The active `ua_grpd`, `isotoid_cat`, and `equivtoid_cat` can remain semantic
-interfaces or compatibility wrappers, but they should not be the primary
-runtime owners for constructor-specific decoding. In the final design, the
-preferred capability should name the operational inverse explicitly.
+The same point applies to the forward direction. The induction-defined
+canonical maps:
+
+```text
+idtoequiv_grpd : A = B -> TypeEquiv A B
+idtoiso_cat    : x = y -> IsoEvidence C x y
+idtoequiv_cat  : x = y -> OmegaEquiv C x y
+```
+
+compute only by the ordinary reflexive equality eliminator. They are the
+right semantic maps, but not the right first runtime owners for
+constructor-shaped paths. The operational layer should therefore include
+constructor-aware forward maps as well:
+
+```text
+path_to_type_equiv    : A = B -> TypeEquiv A B
+path_to_iso_evidence  : x = y -> IsoEvidence C x y
+path_to_omega_equiv   : x = y -> OmegaEquiv C x y
+```
+
+These heads can compute on direct equality normal forms. For example, after
+Product/Sigma equality computes to its component path normal form,
+`path_to_omega_equiv` for a product object path can construct
+`omega_equiv_product` from the component forward maps. This is the missing
+dual of `omega_equiv_path`.
+
+The active `ua_grpd`, `isotoid_cat`, `equivtoid_cat`, and `idto*` maps can
+remain semantic interfaces or compatibility wrappers, but they should not be
+the primary runtime owners for constructor-specific forward/reverse
+univalence computation. In the final design, the preferred computational
+capability should name the operational forward and reverse maps explicitly.
 
 ### Specified-Inverse Univalence Capabilities
 
 The current `IsEquivMap` formulation is semantically correct but hides the
-chosen inverse inside a contractible fibre proof. For computational
-univalence, the project needs an additional specified-inverse formulation.
+chosen inverse inside a contractible fibre proof, and the induction-defined
+`idto*` maps only compute by reflexivity. For computational univalence, the
+project needs an additional specified-inverse formulation using operational
+forward and reverse maps.
 
 A generic shape is:
 
@@ -236,10 +266,11 @@ EquivByInverse(A,B,f,g)
    × (Π b : B, f(g b) = b)
 ```
 
-where `f : A -> B` is the canonical `idto...` map and `g : B -> A` is the
-operational decoder. The actual implementation can use `Product_grpd`/Sigma
-packaging, and the homotopies can remain proof capabilities at first. Runtime
-computation is owned by `g`, not by these proof fields.
+where `f : A -> B` is the operational path-to-equivalence map and
+`g : B -> A` is the operational equivalence-to-path decoder. The actual
+implementation can use `Product_grpd`/Sigma packaging, and the homotopies can
+remain proof capabilities at first. Runtime computation is owned by `f` and
+`g`, not by these proof fields.
 
 For groupoid univalence:
 
@@ -248,12 +279,16 @@ grpd_equiv_path
   [A B : Grpd]
   : TypeEquiv A B -> A = B
 
+path_to_type_equiv
+  [A B : Grpd]
+  : A = B -> TypeEquiv A B
+
 GrpdUnivalenceByDecoder
   := Π A B,
       EquivByInverse
         (A = B)
         (TypeEquiv A B)
-        (idtoequiv_grpd[A,B])
+        (path_to_type_equiv[A,B])
         (grpd_equiv_path[A,B]).
 ```
 
@@ -264,12 +299,16 @@ iso_evidence_path
   [C : Cat] [x y : Obj C]
   : IsoEvidence C x y -> x = y
 
+path_to_iso_evidence
+  [C : Cat] [x y : Obj C]
+  : x = y -> IsoEvidence C x y
+
 CatIsoUnivalenceByDecoder(C)
   := Π x y,
       EquivByInverse
         (x = y)
         (IsoEvidence C x y)
-        (idtoiso_cat[C,x,y])
+        (path_to_iso_evidence[C,x,y])
         (iso_evidence_path[C,x,y]).
 ```
 
@@ -280,19 +319,26 @@ omega_equiv_path
   [C : Cat] [x y : Obj C]
   : OmegaEquiv C x y -> x = y
 
+path_to_omega_equiv
+  [C : Cat] [x y : Obj C]
+  : x = y -> OmegaEquiv C x y
+
 CatUnivalenceByDecoder(C)
   := Π x y,
       EquivByInverse
         (x = y)
         (OmegaEquiv C x y)
-        (idtoequiv_cat[C,x,y])
+        (path_to_omega_equiv[C,x,y])
         (omega_equiv_path[C,x,y]).
 ```
 
-This should be easy to state in Lambdapi. Proving or deriving the old
-contractible-fibre `IsEquivMap` formulation from the specified-inverse
-formulation may require additional Sigma/path algebra, so that derivation
-should remain separate. The near-term implementation can expose both:
+This should be easy to state in Lambdapi. The operational forward maps should
+agree with the induction-defined `idto*` maps at least on reflexivity, and
+later by propositional/narrow unification comparison where useful. Proving or
+deriving the old contractible-fibre `IsEquivMap` formulation from the
+specified-inverse formulation may require additional Sigma/path algebra, so
+that derivation should remain separate. The near-term implementation can
+expose both:
 
 ```text
 CatUnivalence(C)              // existing IsEquivMap compatibility interface
@@ -372,15 +418,24 @@ EquivByInverse(A,B,f,g)
    × (Π b : B, f(g b) = b)
 ```
 
-where `f` is an `idto...` map and `g` is an operational decoder such as
-`omega_equiv_path` or `grpd_equiv_path`. In the Product/Sigma case, `g`
-computes to a constructor path normal form with component equalities. The
-round-trip law `g(f p) = p` is therefore a focused place where we know the
-intended behavior: the first component should use the first equality, the
-second component should use the fibre/second equality, and no arbitrary motive
-needs to be handled initially. This should be treated as a future focused
-probe for constructor-specific coherence, not as a requirement to solve
-generic `ind_eq` computation immediately.
+where `f` is an operational path-to-equivalence map such as
+`path_to_omega_equiv` or `path_to_type_equiv`, and `g` is an operational
+decoder such as `omega_equiv_path` or `grpd_equiv_path`. In the Product/Sigma
+case, `g` computes to a constructor path normal form with component
+equalities, and `f` should be defined by constructor case analysis on that
+normal form rather than by plain equality induction alone. The second
+round-trip law:
+
+```text
+f(g b) = b
+```
+
+is therefore a focused place where definitional computation can work for
+constructor evidence such as `omega_equiv_product eA eB`: `g` produces the
+pair/Sigma path and `f` maps it back componentwise to
+`omega_equiv_product eA eB`. This gives a concrete probe for
+constructor-specific coherence without requiring a general solution for
+arbitrary `ind_eq` transport.
 
 The near-term target is:
 
@@ -388,7 +443,7 @@ The near-term target is:
 equality classifier computes by groupoid/type shape;
 eq_refl remains eliminator-visible;
 path-view projections observe reflexive constructor paths;
-operational decoders construct computational paths from equivalence evidence;
+operational forward/reverse univalence maps compute by constructor cases;
 generic ind_eq/ind_eqr constructor-case transport remains stuck unless a
 specific safe rule is later justified.
 ```
@@ -414,13 +469,19 @@ conversion
   -> reflexive internal path;
 
 internal path in Grpd
-  -> TypeEquiv;
+  -> TypeEquiv;                 // semantically idtoequiv_grpd,
+                                // operationally path_to_type_equiv
 
 internal object path in C
   -> directed arrow in C;
 
 internal object path in C
-  -> OmegaEquiv(C,x,y);          // by equality induction
+  -> IsoEvidence(C,x,y);         // semantically idtoiso_cat,
+                                // operationally path_to_iso_evidence
+
+internal object path in C
+  -> OmegaEquiv(C,x,y);          // semantically idtoequiv_cat,
+                                // operationally path_to_omega_equiv
 
 HomComparison(C,x,y)
   -> IsoEvidence(C,x,y);
@@ -1822,6 +1883,10 @@ equivtoid_cat
 For computational univalence, add the specified-inverse companion:
 
 ```text
+path_to_omega_equiv
+  : (x = y)
+    -> OmegaEquiv(C,x,y);
+
 omega_equiv_path
   : OmegaEquiv(C,x,y)
     -> (x = y);
@@ -1831,12 +1896,12 @@ CatUnivalenceByDecoder(C)
   Pi_grpd [Obj(C)] (λ x,
     Pi_grpd [Obj(C)] (λ y,
       EquivByInverse(
-        idtoequiv_cat[C,x,y],
+        path_to_omega_equiv[C,x,y],
         omega_equiv_path[C,x,y])));
 ```
 
 The specified-inverse interface is the better operational owner because it
-names the reverse map whose constructor cases should compute. The
+names both maps whose constructor cases should compute. The
 contractible-fibre `CatUnivalence(C)` interface can remain for semantic
 compatibility, and a later derivation can connect the two interfaces once the
 required Sigma/path algebra is available.
@@ -1855,7 +1920,8 @@ though the final surface supplies it globally:
 
 - non-univalent intermediate categories remain expressible;
 - constructor closure has a stable semantic owner;
-- constructor-specific reverse computation has a stable operational owner;
+- constructor-specific forward/reverse computation has stable operational
+  owners;
 - the global assumption is visible rather than hidden in conversion;
 - `Cat_cat` self-univalence can remain separate;
 - the universe-stratification decision is not forced by the first probe.
@@ -2414,10 +2480,16 @@ the report labels ua_grpd as an operational assumption.
 
 1. Define explicit `CatUnivalence(C)` as equivalence of canonical
    `idtoequiv_cat`.
-2. Select `equivtoid_cat` and add only required coherence computation.
-3. Add instances for `Path_cat`, `Op_cat`, and products.
-4. Adopt global `cat_univalence(C)` as the intended operational foundation.
-5. Record the immediate `Cat_cat` instance while leaving universe-specific
+2. Define operational forward/reverse heads such as `path_to_omega_equiv` and
+   `omega_equiv_path`.
+3. Define `CatUnivalenceByDecoder(C)` as a specified-inverse capability for
+   the operational heads.
+4. Keep `equivtoid_cat`/`idtoequiv_cat` as semantic compatibility wrappers and
+   add only required coherence comparisons.
+5. Add instances for `Path_cat`, `Op_cat`, and products.
+6. Adopt global `cat_univalence(C)` and `cat_univalence_by_decoder(C)` as the
+   intended operational foundation.
+7. Record the immediate `Cat_cat` instance while leaving universe-specific
    computation deferred.
 
 ### Phase 8: Weak Representability Integration
@@ -2453,7 +2525,7 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
 | `UNI-PRODUCT-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA`, product category core | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; opaque product-object eta remains later. |
 | `UNI-EQ-COMPUTE` | proposed 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct computational equality is consumed | Migrate `=` to `injective`; make Sigma equality reduce to `SigmaPathView`; keep `eq_refl` eliminator-visible and add projection rules instead of rewriting `eq_refl` itself. |
-| `UNI-OPERATIONAL-DECODE` | proposed 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | equivalence-to-path computation is consumed | Add stable decoder heads such as `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path`; add specified-inverse capabilities such as `CatUnivalenceByDecoder`; compute decoders by constructor cases and keep generic `IsEquivMap` compatibility separate. |
+| `UNI-OPERATIONAL-DECODE` | proposed 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation is consumed | Add stable forward heads such as `path_to_type_equiv`, `path_to_iso_evidence`, and `path_to_omega_equiv`; add stable reverse heads such as `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path`; add specified-inverse capabilities such as `CatUnivalenceByDecoder`; compute operational maps by constructor cases and keep generic `IsEquivMap` compatibility separate. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
@@ -2550,6 +2622,8 @@ forward, inverse, and recursive-cell destructors;
 idtoequiv_cat maps reflexive paths to omega_equiv_refl;
 CatUnivalence, equivtoid_cat, and global cat_univalence are active;
 Cat_cat receives the global interface;
+operational forward/reverse maps and specified-inverse capabilities remain
+the next computational refinement;
 broader constructor-specific categorical computation and strict cancellation
 remain deferred.
 ```
@@ -2565,6 +2639,8 @@ HomComparison forgets to IsoEvidence;
 the primitive recursive OmegaEquiv interface and reflexivity compute;
 idtoequiv_cat is canonical and independent of CatUnivalence(C);
 CatUnivalence(C) states that idtoequiv_cat is an equivalence;
+CatUnivalenceByDecoder(C) states that path_to_omega_equiv and
+omega_equiv_path are operational inverses;
 Cat_cat receives the global interface if adopted, with computation separately
 classified.
 ```
