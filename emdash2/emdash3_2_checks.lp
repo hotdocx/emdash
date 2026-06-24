@@ -194,6 +194,149 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
   omega_equiv_to (@omega_equiv_op C x x (@omega_equiv_refl C x))
   ≡ @id (Op_cat C) x;
 
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  @omega_equiv_product A B x0 x1 y0 y1 eA eB
+  : τ (OmegaEquiv
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1));
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Fst
+    (@omega_equiv_to
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @omega_equiv_to A x0 x1 eA;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Snd
+    (@omega_equiv_to
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @omega_equiv_to B y0 y1 eB;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Fst
+    (@omega_equiv_left_inv
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @omega_equiv_left_inv A x0 x1 eA;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Snd
+    (@omega_equiv_right_inv
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @omega_equiv_right_inv B y0 y1 eB;
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @omega_equiv_product
+    A
+    B
+    x
+    x
+    y
+    y
+    (@omega_equiv_refl A x)
+    (@omega_equiv_refl B y)
+  ≡ @omega_equiv_refl
+      (Product_cat A B)
+      (Struct_sigma x y);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  @omega_equiv_left_cell
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@omega_equiv_product A B x0 x1 y0 y1 eA eB)
+  ≡ @omega_equiv_product
+      (Hom_cat A x0 x0)
+      (Hom_cat B y0 y0)
+      (@comp_fapp0
+        A
+        x0
+        x1
+        x0
+        (@omega_equiv_left_inv A x0 x1 eA)
+        (@omega_equiv_to A x0 x1 eA))
+      (@id A x0)
+      (@comp_fapp0
+        B
+        y0
+        y1
+        y0
+        (@omega_equiv_left_inv B y0 y1 eB)
+        (@omega_equiv_to B y0 y1 eB))
+      (@id B y0)
+      (@omega_equiv_left_cell A x0 x1 eA)
+      (@omega_equiv_left_cell B y0 y1 eB);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  @omega_equiv_right_cell
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@omega_equiv_product A B x0 x1 y0 y1 eA eB)
+  ≡ @omega_equiv_product
+      (Hom_cat A x1 x1)
+      (Hom_cat B y1 y1)
+      (@comp_fapp0
+        A
+        x1
+        x0
+        x1
+        (@omega_equiv_to A x0 x1 eA)
+        (@omega_equiv_right_inv A x0 x1 eA))
+      (@id A x1)
+      (@comp_fapp0
+        B
+        y1
+        y0
+        y1
+        (@omega_equiv_to B y0 y1 eB)
+        (@omega_equiv_right_inv B y0 y1 eB))
+      (@id B y1)
+      (@omega_equiv_right_cell A x0 x1 eA)
+      (@omega_equiv_right_cell B y0 y1 eB);
+
 assert [C : Cat] (x : τ (Obj C)) ⊢
   @idtoequiv_cat C x x (eq_refl x)
   ≡ @omega_equiv_refl C x;

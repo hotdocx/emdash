@@ -2966,6 +2966,115 @@ rule @comp_fapp0
       (@comp_fapp0 $A $x $y $z $g1 $f1)
       (@comp_fapp0 $B $u $v $w $g2 $f2);
 
+/*
+  Omega-equivalence is closed under explicit product-category pairs.
+
+  This first slice targets visible `Struct_sigma` endpoints. Opaque product
+  eta can remain a later refinement; product projections already expose many
+  opaque component consumers.
+*/
+injective symbol omega_equiv_product
+  [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1))
+  : τ (OmegaEquiv
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1));
+
+rule @omega_equiv_product
+      $A
+      $B
+      $x
+      $x
+      $y
+      $y
+      (@omega_equiv_refl $A $x)
+      (@omega_equiv_refl $B $y)
+  ↪ @omega_equiv_refl
+      (Product_cat $A $B)
+      (Struct_sigma $x $y);
+
+rule @omega_equiv_to
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ Struct_sigma
+      (@omega_equiv_to $A $x0 $x1 $eA)
+      (@omega_equiv_to $B $y0 $y1 $eB)
+with @omega_equiv_left_inv
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ Struct_sigma
+      (@omega_equiv_left_inv $A $x0 $x1 $eA)
+      (@omega_equiv_left_inv $B $y0 $y1 $eB)
+with @omega_equiv_right_inv
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ Struct_sigma
+      (@omega_equiv_right_inv $A $x0 $x1 $eA)
+      (@omega_equiv_right_inv $B $y0 $y1 $eB);
+
+rule @omega_equiv_left_cell
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ @omega_equiv_product
+      (Hom_cat $A $x0 $x0)
+      (Hom_cat $B $y0 $y0)
+      (@comp_fapp0
+        $A
+        $x0
+        $x1
+        $x0
+        (@omega_equiv_left_inv $A $x0 $x1 $eA)
+        (@omega_equiv_to $A $x0 $x1 $eA))
+      (@id $A $x0)
+      (@comp_fapp0
+        $B
+        $y0
+        $y1
+        $y0
+        (@omega_equiv_left_inv $B $y0 $y1 $eB)
+        (@omega_equiv_to $B $y0 $y1 $eB))
+      (@id $B $y0)
+      (@omega_equiv_left_cell $A $x0 $x1 $eA)
+      (@omega_equiv_left_cell $B $y0 $y1 $eB)
+with @omega_equiv_right_cell
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ @omega_equiv_product
+      (Hom_cat $A $x1 $x1)
+      (Hom_cat $B $y1 $y1)
+      (@comp_fapp0
+        $A
+        $x1
+        $x0
+        $x1
+        (@omega_equiv_to $A $x0 $x1 $eA)
+        (@omega_equiv_right_inv $A $x0 $x1 $eA))
+      (@id $A $x1)
+      (@comp_fapp0
+        $B
+        $y1
+        $y0
+        $y1
+        (@omega_equiv_to $B $y0 $y1 $eB)
+        (@omega_equiv_right_inv $B $y0 $y1 $eB))
+      (@id $B $y1)
+      (@omega_equiv_right_cell $A $x0 $x1 $eA)
+      (@omega_equiv_right_cell $B $y0 $y1 $eB);
+
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.
 //
