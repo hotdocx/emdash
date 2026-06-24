@@ -759,6 +759,85 @@ assert [A : Grpd] ⊢
   @grpd_equiv_path A A (@type_equiv_refl A)
   ≡ @eq_refl Grpd_grpd A;
 
+assert [A A' B B' : Grpd] ⊢
+  @ProductGrpdPathView A A' B B'
+  ≡ `Σ_ pA : τ (@= Grpd_grpd A A'),
+     @PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B';
+
+assert [A A' B B' : Grpd]
+  (pA : τ (@= Grpd_grpd A A'))
+  (pB : τ (@PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B')) ⊢
+  @product_grpd_path A A' B B' pA pB
+  : τ (@= Grpd_grpd (Product_grpd A B) (Product_grpd A' B'));
+
+assert [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B')) ⊢
+  @grpd_equiv_path
+      (Product_grpd A B)
+      (Product_grpd A' B')
+      (@product_type_equiv A A' B B' eA eB)
+  ≡ @product_grpd_path
+      A
+      A'
+      B
+      B'
+      (@grpd_equiv_path A A' eA)
+      (@const_pathover
+        Grpd_grpd
+        Grpd_grpd
+        A
+        A'
+        B
+        B'
+        (@grpd_equiv_path A A' eA)
+        (@grpd_equiv_path B B' eB));
+
+assert [A A' B B' : Grpd]
+  (pA : τ (@= Grpd_grpd A A'))
+  (pB : τ (@PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B')) ⊢
+  @idtoequiv_grpd
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@product_grpd_path A A' B B' pA pB)
+  ≡ @product_type_equiv
+      A
+      A'
+      B
+      B'
+      (@idtoequiv_grpd A A' pA)
+      (@idtoequiv_grpd
+        B
+        B'
+        (@const_pathover_path
+          Grpd_grpd
+          Grpd_grpd
+          A
+          A'
+          B
+          B'
+          pA
+          pB));
+
+assert [A B : Grpd] ⊢
+  @idtoequiv_grpd
+    (Product_grpd A B)
+    (Product_grpd A B)
+    (@product_grpd_path
+      A
+      A
+      B
+      B
+      (eq_refl A)
+      (@pathover_refl Grpd_grpd (λ _ : Grpd, Grpd_grpd) A B))
+  ≡ @product_type_equiv
+      A
+      A
+      B
+      B
+      (@type_equiv_refl A)
+      (@type_equiv_refl B);
+
 assert ⊢
   grpd_univalence_by_decoder
   : τ GrpdUnivalenceByDecoder;

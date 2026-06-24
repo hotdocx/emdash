@@ -888,10 +888,21 @@ rule sigma_Snd (@type_equiv_refl $A)
   Sigma/Pi observational path algebra matures.
 */
 
-symbol Product_grpd
+injective symbol Product_grpd
   (A B : Grpd)
-  : Grpd
-≔ @Σ_ A (λ _ : τ A, B);
+  : Grpd;
+
+rule τ (Product_grpd $A $B)
+  ↪ @τΣ_ $A (λ _ : τ $A, $B);
+
+rule @= (Product_grpd $A $B) $p $q
+  ↪ @SigmaPathView $A (λ _ : τ $A, $B) $p $q;
+
+rule sigma_Fst (@eq_refl (Product_grpd $A _) $u)
+  ↪ @eq_refl $A (sigma_Fst $u);
+
+rule sigma_Snd (@eq_refl (Product_grpd $A $B) $u)
+  ↪ @pathover_refl $A (λ _ : τ $A, $B) (sigma_Fst $u) (sigma_Snd $u);
 
 symbol Product_pair_grpd
   [A B : Grpd]
@@ -912,20 +923,20 @@ symbol product_type_equiv_is_equiv
           (type_equiv_to eA (sigma_Fst p))
           (type_equiv_to eB (sigma_Snd p))));
 
-symbol product_type_equiv
+injective symbol product_type_equiv
   [A A' B B' : Grpd]
   (eA : τ (TypeEquiv A A'))
   (eB : τ (TypeEquiv B B'))
-  : τ (TypeEquiv (Product_grpd A B) (Product_grpd A' B'))
-≔ @Struct_sigma
-    (Function_grpd (Product_grpd A B) (Product_grpd A' B'))
-    (λ f : τ (Function_grpd (Product_grpd A B) (Product_grpd A' B')),
-      @IsEquivMap (Product_grpd A B) (Product_grpd A' B') f)
-    (λ p : τ (Product_grpd A B),
-      @Product_pair_grpd A' B'
-        (type_equiv_to eA (sigma_Fst p))
-        (type_equiv_to eB (sigma_Snd p)))
-    (@product_type_equiv_is_equiv A A' B B' eA eB);
+  : τ (TypeEquiv (Product_grpd A B) (Product_grpd A' B'));
+
+rule sigma_Fst (@product_type_equiv $A $A' $B $B' $eA $eB)
+  ↪ λ p : τ (Product_grpd $A $B),
+      @Product_pair_grpd $A' $B'
+        (type_equiv_to $eA (sigma_Fst p))
+        (type_equiv_to $eB (sigma_Snd p));
+
+rule sigma_Snd (@product_type_equiv $A $A' $B $B' $eA $eB)
+  ↪ @product_type_equiv_is_equiv $A $A' $B $B' $eA $eB;
 
 symbol sigma_type_equiv_same_base_is_equiv
   [A : Grpd]
@@ -1303,6 +1314,21 @@ symbol idtoequiv_grpd
 rule @idtoequiv_grpd $A $A (eq_refl $A)
   ↪ @type_equiv_refl $A;
 
+symbol ProductGrpdPathView
+  [A A' B B' : Grpd]
+  : Grpd
+≔ `Σ_ pA : τ (@= Grpd_grpd A A'),
+   @PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B';
+
+// A componentwise product-universe path is an introduction form. It is not an
+// eliminator for arbitrary univalent paths
+// Product_grpd(A,B) = Product_grpd(A',B').
+symbol product_grpd_path
+  [A A' B B' : Grpd]
+  (pA : τ (@= Grpd_grpd A A'))
+  (pB : τ (@PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B'))
+  : τ (@= Grpd_grpd (Product_grpd A B) (Product_grpd A' B'));
+
 symbol GrpdUnivalence : Grpd
 ≔ @Pi_grpd Grpd_grpd
     (λ A : Grpd,
@@ -1329,6 +1355,49 @@ symbol grpd_equiv_path
 
 rule @grpd_equiv_path $A $A (@type_equiv_refl $A)
   ↪ eq_refl $A;
+
+rule @grpd_equiv_path
+      (Product_grpd $A $B)
+      (Product_grpd $A' $B')
+      (@product_type_equiv $A $A' $B $B' $eA $eB)
+  ↪ @product_grpd_path
+      $A
+      $A'
+      $B
+      $B'
+      (@grpd_equiv_path $A $A' $eA)
+      (@const_pathover
+        Grpd_grpd
+        Grpd_grpd
+        $A
+        $A'
+        $B
+        $B'
+        (@grpd_equiv_path $A $A' $eA)
+        (@grpd_equiv_path $B $B' $eB));
+
+rule @idtoequiv_grpd
+      (Product_grpd $A $B)
+      (Product_grpd $A' $B')
+      (@product_grpd_path $A $A' $B $B' $pA $pB)
+  ↪ @product_type_equiv
+      $A
+      $A'
+      $B
+      $B'
+      (@idtoequiv_grpd $A $A' $pA)
+      (@idtoequiv_grpd
+        $B
+        $B'
+        (@const_pathover_path
+          Grpd_grpd
+          Grpd_grpd
+          $A
+          $A'
+          $B
+          $B'
+          $pA
+          $pB));
 
 symbol GrpdUnivalenceByDecoder : Grpd
 ≔ @Pi_grpd Grpd_grpd
