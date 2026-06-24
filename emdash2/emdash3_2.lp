@@ -479,6 +479,60 @@ symbol sigma_ind
 
 rule sigma_ind _ $c (Struct_sigma $x $u) ↪ $c $x $u;
 
+// Observational path view for encoded Sigma objects. A path between dependent
+// pairs is observed as a base path plus a dependent path over that base path.
+symbol SigmaPathView
+  [A : Grpd]
+  (P : τ A → Grpd)
+  (u v : @τΣ_ A P)
+  : Grpd
+≔ `Σ_ p : τ (sigma_Fst u = sigma_Fst v),
+   @PathOver A P (sigma_Fst u) (sigma_Fst v) p (sigma_Snd u) (sigma_Snd v);
+
+symbol sigma_path_base
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (w : τ (@SigmaPathView A P u v))
+  : τ (sigma_Fst u = sigma_Fst v)
+≔ sigma_Fst w;
+
+symbol sigma_path_fibre
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (w : τ (@SigmaPathView A P u v))
+  : τ (@PathOver A P
+      (sigma_Fst u)
+      (sigma_Fst v)
+      (sigma_path_base w)
+      (sigma_Snd u)
+      (sigma_Snd v))
+≔ sigma_Snd w;
+
+symbol sigma_path_refl
+  [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P)
+  : τ (@SigmaPathView A P u u)
+≔ @Struct_sigma
+    (sigma_Fst u = sigma_Fst u)
+    (λ p : τ (sigma_Fst u = sigma_Fst u),
+      @PathOver A P (sigma_Fst u) (sigma_Fst u) p (sigma_Snd u) (sigma_Snd u))
+    (eq_refl (sigma_Fst u))
+    (@pathover_refl A P (sigma_Fst u) (sigma_Snd u));
+
+symbol sigma_path_encode
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (p : τ (u = v))
+  : τ (@SigmaPathView A P u v)
+≔ ind_eq
+    p
+    (λ s : @τΣ_ A P, @SigmaPathView A P s v)
+    (sigma_path_refl v);
+
 // -------------------------------------------------------------------------------------------------
 // 1b. Minimal groupoid-level dependent products and type equivalences
 // -------------------------------------------------------------------------------------------------
@@ -969,12 +1023,9 @@ symbol coe_grpd
   [A B : Grpd]
   (p : τ (@= Grpd_grpd A B))
   (a : τ A)
-  : τ B
-≔ ind_eq
-    (eq_sym p)
-    (λ X : Grpd, Function_grpd A X)
-    (λ x : τ A, x)
-    a;
+  : τ B;
+
+rule @coe_grpd $A $A (eq_refl $A) $a ↪ $a;
 
 symbol idtoequiv_grpd
   [A B : Grpd]
@@ -999,13 +1050,10 @@ symbol ua_grpd
   (U : τ GrpdUnivalence)
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
-  : τ (@= Grpd_grpd A B)
-≔ @hfiber_point
-    (@= Grpd_grpd A B)
-    (TypeEquiv A B)
-    (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
-    e
-    (is_contr_center (U A B e));
+  : τ (@= Grpd_grpd A B);
+
+rule @coe_grpd $A $B (@ua_grpd _ $A $B $e) $a
+  ↪ type_equiv_to $e $a;
 
 // Category of categories.
 constant symbol Cat_cat : Cat;

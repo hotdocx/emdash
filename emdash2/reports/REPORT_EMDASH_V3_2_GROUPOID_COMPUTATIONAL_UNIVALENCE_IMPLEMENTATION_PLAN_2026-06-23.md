@@ -15,10 +15,11 @@ promoted in `emdash3_2.lp`: transparent `PathOver`, `pathover_refl`,
 primitive reflexive `eq_apd`, functor-owned `Core_incl_func`, public
 `path_to_hom`, decoded `Pi_grpd`, contractible-fibre `TypeEquiv`, reflexive
 `type_equiv_refl`, reflexive `coe_grpd`, canonical `idtoequiv_grpd`,
-`GrpdUnivalence`, and `ua_grpd` as a selector from that capability. The
-computational law `coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a)` is not yet
-installed; it remains the next explicit operational-univalence decision. No
-`OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
+`GrpdUnivalence`, stable operational `ua_grpd`, and the computational law
+`coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a)`. The first Sigma path-view
+slice is also promoted: `SigmaPathView`, `sigma_path_base`,
+`sigma_path_fibre`, `sigma_path_refl`, and reflexive `sigma_path_encode`.
+No `OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
 report has yet been promoted. The existing equality, `Path_cat`,
 `IsoEvidence`, and `ProfComparison` implementations remain active. Focused
 probes have confirmed derivability of the covariant Yoneda embedding from
@@ -382,6 +383,7 @@ type_equiv_refl.from(a) -> a;
 type_equiv_refl.left(a) -> refl_a;
 type_equiv_refl.right(a) -> refl_a;
 coe_grpd(refl_A,a) -> a;
+coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a);
 idtoequiv_grpd(refl_A) -> type_equiv_refl(A).
 ```
 
@@ -452,6 +454,101 @@ After promotion, `make warning-summary` reports:
 This is a -2 replaceable-pattern delta and no critical-pair delta relative to
 the previous Phase 2 checkpoint. The decrease is expected because the direct
 `ind_eq` rewrite rule was removed.
+
+Follow-up implementation note 2026-06-24: the first computational
+groupoid-univalence law was promoted. `coe_grpd` is now a primitive stable
+coercion head with rules for reflexivity and univalence paths:
+
+```text
+coe_grpd(refl_A,a) -> a;
+coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a).
+```
+
+`ua_grpd` is also a primitive stable operational head parameterized by
+`U : GrpdUnivalence`. It is no longer a transparent definition by directly
+projecting the centre of the contractible fibre. This is intentional: a
+transparent `ua_grpd` unfolds before the outer `coe_grpd` rule can reliably
+match the selected univalence path, while Lambdapi does not allow installing a
+rewrite rule on the previously defined `coe_grpd` head. The semantic
+capability remains:
+
+```text
+GrpdUnivalence := Π A B, IsEquivMap(idtoequiv_grpd[A,B]).
+```
+
+The operational `ua_grpd` head is therefore the public inverse operation
+associated with such a capability; inverse/cancellation coherence beyond
+`coe(ua)` remains propositional/deferred unless a later consumer requires a
+specific proof-time comparison.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_ua_coe_stable_heads_owner_probe.lp
+logs/probes/univalence_ua_coe_stable_heads_owner_probe-20260624-015040.log
+logs/probes/univalence_ua_coe_stable_heads_owner_probe-20260624-015041.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+```
+
+After promotion, `make warning-summary` still reports:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+The `coe(ua)` rule therefore introduced no warning-count delta. The
+warning-enabled owner-position probe reports no warning located at the new
+`coe_grpd`/`ua_grpd` rules after replacing the unused capability argument in
+the rule LHS by `_`.
+
+Implementation checkpoint 2026-06-24: the first Sigma observational path-view
+slice landed. Promoted symbols:
+
+```text
+SigmaPathView;
+sigma_path_base;
+sigma_path_fibre;
+sigma_path_refl;
+sigma_path_encode.
+```
+
+The promoted computation is intentionally reflexive/projection-only:
+
+```text
+sigma_path_base(sigma_path_refl(u)) -> refl_(fst u);
+sigma_path_fibre(sigma_path_refl(u)) -> pathover_refl(snd u);
+sigma_path_encode(refl_u) -> sigma_path_refl(u).
+```
+
+No generic `sigma_path_decode`, encode/decode cancellation, or raw
+`sigma_Fst(path-eliminator(...))` commuting conversion has been promoted.
+Those remain separate probes because they are the overlap-sensitive part of
+Sigma observational equality.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_sigma_path_view_first_slice_probe.lp
+logs/probes/univalence_sigma_path_view_first_slice_probe-20260624-015416.log
+logs/probes/univalence_sigma_path_view_first_slice_probe-20260624-015421.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+```
+
+After promotion, `make warning-summary` remains:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+The warning-enabled owner-position probe reports only the already existing
+Sigma projection beta warnings at `sigma_Fst`/`sigma_Snd`, with no warning
+located at the new Sigma path-view definitions.
 
 ## Two Related But Separate Programs
 
@@ -693,6 +790,13 @@ sigma_path_encode : (u = v) -> SigmaPathView(P,u,v);
 sigma_path_decode : SigmaPathView(P,u,v) -> (u = v).
 ```
 
+Current promoted boundary: `SigmaPathView`, base/fibre projections,
+`sigma_path_refl`, and reflexive `sigma_path_encode` are active. Generic
+`sigma_path_decode` is not yet promoted. The first decode probe should prefer a
+derived componentwise eliminator using `ind_eqr` and `PathOver`; if that
+requires broad commuting conversions, keep decode primitive/propositional
+until a concrete consumer requires judgmental computation.
+
 Only constructor/reflexivity projections should initially compute
 judgmentally. Generic encode/decode cancellation should begin as propositional
 evidence. A dedicated computational comparison can be introduced later if a
@@ -886,17 +990,18 @@ GrpdUnivalence
       IsEquivMap(idtoequiv_grpd[A,B]))).
 ```
 
-The inverse selected from this capability is the univalence operation:
+The public inverse operation associated with this capability is the stable
+operational head:
 
 ```text
 ua_grpd
-  : τ(TypeEquiv(A,B)) -> τ(@= Grpd_grpd A B).
+  : τ(GrpdUnivalence) -> τ(TypeEquiv(A,B)) -> τ(@= Grpd_grpd A B).
 ```
 
 The first desired computational-univalence law is:
 
 ```text
-coe_grpd(ua_grpd(e),a)
+coe_grpd(ua_grpd(U,e),a)
   -> type_equiv_to(e,a).
 ```
 
@@ -904,8 +1009,8 @@ This law directly exposes the runtime meaning of univalence. It is preferable
 as the initial rule to demanding both generic conversion cancellations:
 
 ```text
-idtoequiv_grpd(ua_grpd(e)) -> e;
-ua_grpd(idtoequiv_grpd(p)) -> p.
+idtoequiv_grpd(ua_grpd(U,e)) -> e;
+ua_grpd(U,idtoequiv_grpd(p)) -> p.
 ```
 
 Those two equations should begin as propositional coherence and may later be
@@ -915,9 +1020,11 @@ rejected `StrictIso` designs.
 
 The capability and the runtime coercion law have different roles.
 `GrpdUnivalence` states the semantic equivalence; the
-`coe_grpd(ua_grpd(e),a)` rule chooses the intended computational presentation.
-Both are operational foundational assumptions unless and until they are
-derived from a fibrancy/observational universe construction.
+`ua_grpd` head and `coe_grpd(ua_grpd(U,e),a)` rule choose the intended
+computational presentation. The stable operational head is used because a
+transparent fibre-centre selector unfolds before the outer `coe_grpd` rule can
+reliably match. Both are operational foundational assumptions unless and until
+they are derived from a fibrancy/observational universe construction.
 
 ### Computational-Univalence Closure By Constructor
 
@@ -1502,8 +1609,8 @@ no dependency on unfinished Grpd_cat composition.
 1. Add stable `coe_grpd`.
 2. Define `idtoequiv_grpd` by equality induction.
 3. State `GrpdUnivalence` as equivalence of the canonical map.
-4. Select provisional `ua_grpd` from that capability.
-5. Probe `coe_grpd(ua_grpd(e),a) -> e.to(a)` as a separate operational
+4. Add stable operational `ua_grpd` parameterized by that capability.
+5. Promote `coe_grpd(ua_grpd(e),a) -> e.to(a)` as a separate operational
    computation rule.
 6. Keep other inverse laws propositional.
 
@@ -1511,9 +1618,9 @@ Acceptance:
 
 ```text
 reflexive coercion computes;
-the univalence capability and ua selector typecheck;
-univalence coercion computes to the selected forward map only after the
-  explicit operational rule is adopted;
+the univalence capability and ua operation typecheck;
+univalence coercion computes to the selected forward map through the explicit
+  operational rule;
 subject reduction and warning-enabled checks pass;
 the report labels ua_grpd as an operational assumption.
 ```
@@ -1521,7 +1628,9 @@ the report labels ua_grpd as an operational assumption.
 ### Phase 4: Observational Constructor Views
 
 1. Add Sigma/Product path views.
-2. Add encode/decode and reflexivity projections.
+2. Add encode/decode and reflexivity projections. The first Sigma slice has
+   promoted the view, projections, reflexive view, and reflexive encode;
+   generic decode remains deferred.
 3. Add Pi/function path views only after `Pi_grpd`.
 4. Do not make generic encode/decode cancellation judgmental without a
    consumer.
@@ -1578,8 +1687,8 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
 | `UNI-GRPD-PI` | promoted | none | observational Pi equality begins | Add related-input Pi path view only after Sigma path views stabilize. |
 | `UNI-TYPE-EQUIV` | first contractible-fibre slice promoted | promoted `UNI-GRPD-PI` | symmetry/composition are consumed | Probe the required Sigma/fibre path algebra; do not postulate strict cancellation. |
-| `UNI-UA-GRPD` | capability and selector promoted; computation rule deferred | `UNI-TYPE-EQUIV` | computational univalence law is needed | Decide whether `coe_grpd(ua_grpd(U,e),a)` is an explicit operational axiom/rule or waits for a fuller observational universe construction. |
-| `UNI-SIGMA-VIEW` | unblocked by first `UNI-PATHOVER` slice | `UNI-PATHOVER` | Phase 4 begins | Probe encode/decode and reflexivity projections. |
+| `UNI-UA-GRPD` | first computational rule promoted | `UNI-TYPE-EQUIV` | constructor-specific univalence computation begins | Add constructor closure entries so `type_equiv_to(e,a)` computes recursively for Sigma/Product/Pi/etc.; keep inverse cancellation propositional unless consumed. |
+| `UNI-SIGMA-VIEW` | first reflexive view/encode slice promoted | `UNI-PATHOVER` | decode or Sigma-constructor univalence is consumed | Probe generic decode via componentwise `ind_eqr`; keep encode/decode cancellation propositional unless a consumer needs judgmental beta/eta. |
 | `UNI-PI-VIEW` | blocked | `UNI-PATHOVER`, `UNI-GRPD-PI` | Sigma view and Pi formation stable | Define related-input observational Pi path. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
@@ -1600,11 +1709,12 @@ the report labels ua_grpd as an operational assumption.
 | strict `Core_incl_func` composition | promoted through generic functoriality | future projection-ladder consumers |
 | `Pi_grpd` formation/decoding | promoted | future interaction with observational Pi equality |
 | contractible-fibre `TypeEquiv` formation/inverse/reflexivity | promoted | symmetry/composition require more Sigma-fibre path algebra |
-| Sigma/Product path views | high | encode/decode orientation and projection overlap |
+| Sigma path-view formation/projections/reflexive encode | promoted | generic decode and cancellation remain overlap-sensitive |
+| Product path views | high | encode/decode orientation and projection overlap |
 | observational Pi path | medium | related-input dependency and higher substitution |
 | `coe_grpd` and canonical `idtoequiv_grpd` on reflexivity | promoted | no non-reflexive computation without univalence capability |
-| `GrpdUnivalence` capability and `ua_grpd` selector | promoted as interface | computational `coe(ua)` law still needs explicit operational status |
-| `coe_grpd(ua(e))` | medium syntactically | foundational status and rewrite overlap |
+| `GrpdUnivalence` capability and stable `ua_grpd` operation | promoted | inverse/cancellation coherence remains propositional/deferred |
+| `coe_grpd(ua(e))` | promoted | constructor-specific `e.to` computation still needed |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
 | primitive recursive `OmegaEquiv` interface | confirmed in isolated probe | owning-position promotion and closure operations |

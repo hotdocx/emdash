@@ -109,6 +109,24 @@ assert [A : Grpd]
   @sigma_ind A P Q c (@Struct_sigma A P x u)
   ≡ c x u;
 
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  sigma_path_base (sigma_path_refl u)
+  ≡ eq_refl (sigma_Fst u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  sigma_path_fibre (sigma_path_refl u)
+  ≡ @pathover_refl A P (sigma_Fst u) (sigma_Snd u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  @sigma_path_encode A P u u (eq_refl u)
+  ≡ sigma_path_refl u;
+
 // Groupoid-level Pi and contractible-fibre type equivalence infrastructure.
 assert [A : Grpd] [B : τ A → Grpd] ⊢
   τ (@Pi_grpd A B) ≡ Π x : τ A, τ (B x);
@@ -172,6 +190,13 @@ assert (U : τ GrpdUnivalence) [A B : Grpd]
   (e : τ (TypeEquiv A B)) ⊢
   @ua_grpd U A B e
   : τ (@= Grpd_grpd A B);
+
+assert (U : τ GrpdUnivalence)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  @coe_grpd A B (@ua_grpd U A B e) a
+  ≡ type_equiv_to e a;
 
 // Core inclusion/path-to-arrow is functor-owned. Composition is checked
 // through the generic fapp1_fapp0 composition rule, not a specialized rule.
