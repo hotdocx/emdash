@@ -33,6 +33,18 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
   @iso_evidence_to C x x (@iso_evidence_refl C x)
   ≡ @id C x;
 
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_from C x x (@iso_evidence_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_left C x x (@iso_evidence_refl C x)
+  ≡ eq_refl (@id C x);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_right C x x (@iso_evidence_refl C x)
+  ≡ eq_refl (@id C x);
+
 assert [C : Cat] [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
   @iso_evidence_to C y x (@iso_evidence_sym C x y i)
@@ -67,6 +79,10 @@ assert [C : Cat] [x y : τ (Obj C)]
 assert [C : Cat] (x : τ (Obj C)) ⊢
   @idtoiso_cat C x x (eq_refl x)
   ≡ @iso_evidence_refl C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_path C x x (@iso_evidence_refl C x)
+  ≡ @eq_refl (Obj C) x;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
   @iso_evidence_to C x x (@idtoiso_cat C x x (eq_refl x))
@@ -258,8 +274,42 @@ assert [A B : Cat]
       (Product_cat A B)
       (Struct_sigma x0 y0)
       (Struct_sigma x1 y1)
-      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+    (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
   ≡ @omega_equiv_right_inv B y0 y1 eB;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Fst
+    (@omega_equiv_path
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @omega_equiv_path A x0 x1 eA;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  sigma_Snd
+    (@omega_equiv_path
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@omega_equiv_product A B x0 x1 y0 y1 eA eB))
+  ≡ @const_pathover
+      (Obj A)
+      (Obj B)
+      x0
+      x1
+      y0
+      y1
+      (@omega_equiv_path A x0 x1 eA)
+      (@omega_equiv_path B y0 y1 eB);
 
 assert [A B : Cat]
   (x : τ (Obj A))
@@ -520,6 +570,10 @@ assert [A : Grpd] ⊢
   @idtoequiv_grpd A A (eq_refl A)
   ≡ @type_equiv_refl A;
 
+assert [A : Grpd] ⊢
+  @grpd_equiv_path A A (@type_equiv_refl A)
+  ≡ @eq_refl Grpd_grpd A;
+
 assert ⊢
   grpd_univalence_by_decoder
   : τ GrpdUnivalenceByDecoder;
@@ -567,6 +621,13 @@ assert [A B : Grpd]
   (y : τ B) ⊢
   sigma_Snd (@eq_refl (Product_grpd A B) (@Product_pair_grpd A B x y))
   ≡ @pathover_refl A (λ _ : τ A, B) x y;
+
+assert [A B : Grpd]
+  [x : τ A]
+  [u v : τ B]
+  (q : τ (u = v)) ⊢
+  @const_pathover A B x x u v (eq_refl x) q
+  ≡ q;
 
 assert [A B : Grpd]
   (x : τ A)

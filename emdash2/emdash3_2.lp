@@ -558,6 +558,29 @@ constant symbol Pi_grpd
 
 rule τ (@Pi_grpd $A $B) ↪ Π x : τ $A, τ ($B x);
 
+// Constant-family pathover bridge: an ordinary fibre path can be viewed over
+// any base path when the family is definitionally constant.
+symbol const_pathover
+  [A B : Grpd]
+  [x y : τ A]
+  [u v : τ B]
+  (p : τ (x = y))
+  (q : τ (u = v))
+  : τ (@PathOver A (λ _ : τ A, B) x y p u v)
+≔ @ind_eqr A y
+    (λ x : τ A, λ p : τ (x = y),
+      @Pi_grpd B (λ u : τ B,
+        @Pi_grpd B (λ v : τ B,
+          @Pi_grpd (@= B u v)
+            (λ _ : τ (@= B u v),
+              @PathOver A (λ _ : τ A, B) x y p u v))))
+    (λ u : τ B, λ v : τ B, λ q : τ (u = v), q)
+    x
+    p
+    u
+    v
+    q;
+
 symbol Function_grpd
   (A B : Grpd)
   : Grpd
@@ -812,23 +835,24 @@ symbol hfiber_id_contr_path
     (λ a : τ A, λ p : τ (a = b), hfiber_id_path p)
     h;
 
-symbol type_equiv_refl
+injective symbol type_equiv_refl
   [A : Grpd]
-  : τ (TypeEquiv A A)
-≔ @Struct_sigma
-    (Function_grpd A A)
-    (λ f : τ (Function_grpd A A), @IsEquivMap A A f)
-    (λ x : τ A, x)
-    (λ b : τ A,
+  : τ (TypeEquiv A A);
+
+rule sigma_Fst (@type_equiv_refl $A)
+  ↪ λ x : τ $A, x;
+
+rule sigma_Snd (@type_equiv_refl $A)
+  ↪ λ b : τ $A,
       @Struct_sigma
-        (@HFiber A A (λ x : τ A, x) b)
-        (λ centre : τ (@HFiber A A (λ x : τ A, x) b),
+        (@HFiber $A $A (λ x : τ $A, x) b)
+        (λ centre : τ (@HFiber $A $A (λ x : τ $A, x) b),
           @Pi_grpd
-            (@HFiber A A (λ x : τ A, x) b)
-            (λ h : τ (@HFiber A A (λ x : τ A, x) b), centre = h))
-        (@Struct_sigma A (λ x : τ A, x = b) b (eq_refl b))
-        (λ h : τ (@HFiber A A (λ x : τ A, x) b),
-          hfiber_id_contr_path h));
+            (@HFiber $A $A (λ x : τ $A, x) b)
+            (λ h : τ (@HFiber $A $A (λ x : τ $A, x) b), centre = h))
+        (@Struct_sigma $A (λ x : τ $A, x = b) b (eq_refl b))
+        (λ h : τ (@HFiber $A $A (λ x : τ $A, x) b),
+          hfiber_id_contr_path h);
 
 /*
   Constructor-specific TypeEquiv skeletons.
@@ -1280,6 +1304,9 @@ symbol grpd_equiv_path
   (e : τ (TypeEquiv A B))
   : τ (@= Grpd_grpd A B);
 
+rule @grpd_equiv_path $A $A (@type_equiv_refl $A)
+  ↪ eq_refl $A;
+
 symbol GrpdUnivalenceByDecoder : Grpd
 ≔ @Pi_grpd Grpd_grpd
     (λ A : Grpd,
@@ -1483,17 +1510,22 @@ rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
 
 // Reflexive ordinary isomorphism evidence requires the identity-cut rules
 // above so that both propositional inverse equations are reflexivity.
-symbol iso_evidence_refl
+injective symbol iso_evidence_refl
   [C : Cat]
   (x : τ (Obj C))
-  : τ (IsoEvidence C x x)
-≔ Struct_sigma
-    (@id C x)
-    (Struct_sigma
-      (@id C x)
-      (Struct_sigma
-        (eq_refl (@id C x))
-        (eq_refl (@id C x))));
+  : τ (IsoEvidence C x x);
+
+rule sigma_Fst (@iso_evidence_refl $C $x)
+  ↪ @id $C $x;
+
+rule sigma_Fst (sigma_Snd (@iso_evidence_refl $C $x))
+  ↪ @id $C $x;
+
+rule sigma_Fst (sigma_Snd (sigma_Snd (@iso_evidence_refl $C $x)))
+  ↪ eq_refl (@id $C $x);
+
+rule sigma_Snd (sigma_Snd (sigma_Snd (@iso_evidence_refl $C $x)))
+  ↪ eq_refl (@id $C $x);
 
 /*
   Categorical univalence skeleton.
@@ -1547,6 +1579,9 @@ symbol iso_evidence_path
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y))
   : τ (x = y);
+
+rule @iso_evidence_path $C $x $x (@iso_evidence_refl $C $x)
+  ↪ eq_refl $x;
 
 symbol CatIsoUnivalenceByDecoder
   (C : Cat)
@@ -3163,6 +3198,33 @@ with @omega_equiv_right_cell
       (@id $B $y1)
       (@omega_equiv_right_cell $A $x0 $x1 $eA)
       (@omega_equiv_right_cell $B $y0 $y1 $eB);
+
+rule @omega_equiv_path
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@omega_equiv_product $A $B $x0 $x1 $y0 $y1 $eA $eB)
+  ↪ @Struct_sigma
+      (@= (Obj $A) $x0 $x1)
+      (λ p : τ (@= (Obj $A) $x0 $x1),
+        @PathOver
+          (Obj $A)
+          (λ _ : τ (Obj $A), Obj $B)
+          $x0
+          $x1
+          p
+          $y0
+          $y1)
+      (@omega_equiv_path $A $x0 $x1 $eA)
+      (@const_pathover
+        (Obj $A)
+        (Obj $B)
+        $x0
+        $x1
+        $y0
+        $y1
+        (@omega_equiv_path $A $x0 $x1 $eA)
+        (@omega_equiv_path $B $y0 $y1 $eB));
 
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.
