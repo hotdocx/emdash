@@ -1574,6 +1574,73 @@ rule omega_equiv_left_cell (omega_equiv_refl $x)
 with omega_equiv_right_cell (omega_equiv_refl $x)
   ↪ omega_equiv_refl (@id _ $x);
 
+/*
+  Constructor-specific omega-equivalence skeleton.
+
+  `Path_cat(A)` already has paths as arrows, so the safe first computation is
+  extraction through existing destructors rather than collapsing the whole
+  classifier `OmegaEquiv(Path_cat A,x,y)` to `x = y`.
+
+  `omega_equiv_op` records that omega-equivalence is stable under opposite
+  categories. Its destructors compute by routing through the existing
+  `Hom_cat(Op_cat C,y,x) -> Hom_cat(C,x,y)` rule; no separate rewrite headed
+  by the transparent `Hom` alias is needed.
+*/
+symbol path_cat_omega_path
+  [A : Grpd]
+  [x y : τ A]
+  (e : τ (OmegaEquiv (Path_cat A) x y))
+  : τ (x = y)
+≔ omega_equiv_to e;
+
+symbol path_cat_iso_path
+  [A : Grpd]
+  [x y : τ A]
+  (i : τ (IsoEvidence (Path_cat A) x y))
+  : τ (x = y)
+≔ iso_evidence_to i;
+
+injective symbol omega_equiv_op
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (OmegaEquiv (Op_cat C) y x);
+
+rule @omega_equiv_op $C $x $x (@omega_equiv_refl $C $x)
+  ↪ @omega_equiv_refl (Op_cat $C) $x;
+
+rule @omega_equiv_to
+      (Op_cat $C)
+      $y
+      $x
+      (@omega_equiv_op $C $x $y $e)
+  ↪ @omega_equiv_to $C $x $y $e
+with @omega_equiv_left_inv
+      (Op_cat $C)
+      $y
+      $x
+      (@omega_equiv_op $C $x $y $e)
+  ↪ @omega_equiv_right_inv $C $x $y $e
+with @omega_equiv_right_inv
+      (Op_cat $C)
+      $y
+      $x
+      (@omega_equiv_op $C $x $y $e)
+  ↪ @omega_equiv_left_inv $C $x $y $e;
+
+rule @omega_equiv_left_cell
+      (Op_cat $C)
+      $y
+      $x
+      (@omega_equiv_op $C $x $y $e)
+  ↪ @omega_equiv_right_cell $C $x $y $e
+with @omega_equiv_right_cell
+      (Op_cat $C)
+      $y
+      $x
+      (@omega_equiv_op $C $x $y $e)
+  ↪ @omega_equiv_left_cell $C $x $y $e;
+
 symbol idtoequiv_cat
   [C : Cat]
   [x y : τ (Obj C)]

@@ -32,10 +32,12 @@ categorical-univalence skeleton is also promoted: 1-categorical staging via
 `idtoiso_cat`, `CatIsoUnivalence`, `isotoid_cat`, and global
 `cat_iso_univalence`; omega-categorical equivalence via primitive
 `OmegaEquiv` destructors, reflexive `omega_equiv_refl`, canonical
-`idtoequiv_cat`, explicit `CatUnivalence`, inverse selection
-`equivtoid_cat`, and global `cat_univalence`. The `Cat_cat` univalence
-interface is available immediately through the global instance; constructor-
-and universe-specific computation remains deferred. No generic
+`path_cat_omega_path`, `path_cat_iso_path`, opposite closure
+`omega_equiv_op` with destructor computation, `idtoequiv_cat`, explicit
+`CatUnivalence`, inverse selection `equivtoid_cat`, and global
+`cat_univalence`. The `Cat_cat` univalence interface is available immediately
+through the global instance; broader constructor-specific computation and
+universe-specific computation remain deferred. No generic
 `HomComparison` symbol from this report has yet been promoted. The existing
 equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
 remain active. Focused probes have confirmed derivability of the covariant
@@ -1323,6 +1325,27 @@ kept explicitly separate from `OmegaEquiv`, because `IsoEvidence` is ordinary
 propositional inverse data at the current hom level, while `OmegaEquiv` is
 recursive through all hom-categories.
 
+Semantic correction 2026-06-24: as final mathematics, `CatIsoUnivalence(C)` is
+justified only for ordinary/1-truncated categories or under an explicit
+1-truncation assumption on `C`. For arbitrary ω-categories, object univalence
+must target `OmegaEquiv(C,x,y)`, not `IsoEvidence(C,x,y)`. The current global:
+
+```text
+cat_iso_univalence(C) : CatIsoUnivalence(C)
+```
+
+is therefore a temporary prototyping axiom for the 1-categorical staging
+layer. A later semantics pass should replace or restrict it by one of:
+
+```text
+IsOneTruncatedCat(C) -> CatIsoUnivalence(C);
+OneCat / OneCat_cat;
+TruncCat(n) / IsNTruncatedCat(n,C).
+```
+
+Until then, report text should avoid presenting `cat_iso_univalence(C)` as a
+correct global principle for all ω-categories.
+
 The staged canonical map is:
 
 ```text
@@ -1347,8 +1370,8 @@ isotoid_cat
     -> x = y.
 ```
 
-Under the project convention that every `C : Cat` is univalent, add a global
-operational instance:
+As a prototype convenience for the staging layer, the current kernel may keep
+the global operational instance:
 
 ```text
 cat_iso_univalence(C) : CatIsoUnivalence(C).
@@ -1785,8 +1808,8 @@ Constructor computation should follow semantic ownership:
 
 | Constructor | Initial undirected owner | First computational target |
 | --- | --- | --- |
-| `Path_cat(A)` | existing equality and `Path_cat` | reflexive/path algebra only |
-| `Op_cat(C)` | object identity plus reversed homs | reverse `OmegaEquiv` projections |
+| `Path_cat(A)` | existing equality and `Path_cat` | projection/extraction of paths before classifier collapse |
+| `Op_cat(C)` | object identity plus reversed homs | orientation-preserving reversal `OmegaEquiv(C,x,y) -> OmegaEquiv(Op C,y,x)` |
 | `Product_cat(A,B)` | Sigma/product path view | component equivalences |
 | `Sigma_cat(E)` | `SigmaPathView` plus family `PathOver` | base/fibre path projections |
 | `Pi_grpd(A,B)` | `PiPathView` | related-input path action |
@@ -1807,13 +1830,73 @@ TypeEquiv;
 groupoid coercion/univalence;
 Yoneda and HomComparison;
 primitive recursive OmegaEquiv;
-Op/Product categorical closure;
+Path_cat extraction helpers;
+Op_cat OmegaEquiv reversal;
+Product categorical closure;
 Functor/Catd/Prof closure;
 global Cat univalence policy;
 Cat_cat-specific computation last.
 ```
 
 Constructors without specialized laws remain well-formed but stuck.
+
+The first `Path_cat(A)` slice should not attempt to rewrite the whole
+classifier `OmegaEquiv(Path_cat A,x,y)` to `x = y`. It is mathematically enough
+for the first skeleton to expose the path carried by equivalence or ordinary
+isomorphism evidence:
+
+```text
+path_cat_omega_path(e) := omega_equiv_to(e) : x = y;
+path_cat_iso_path(i)   := iso_evidence_to(i) : x = y.
+```
+
+For `Op_cat(C)`, the safest first orientation is:
+
+```text
+omega_equiv_op(e : OmegaEquiv(C,x,y))
+  : OmegaEquiv(Op_cat(C),y,x).
+```
+
+This preserves the forward arrow as `omega_equiv_to(e)` after the opposite
+hom reduction. The required conversion goes through the existing primitive
+`Hom_cat` rule:
+
+```text
+Hom(Op_cat C,y,x)
+  := Obj(Hom_cat(Op_cat C,y,x))
+   ↪ Obj(Hom_cat(C,x,y))
+  := Hom(C,x,y).
+```
+
+A 2026-06-24 correction: the earlier failed probe was only the invalid helper:
+
+```text
+Hom(Op_cat C,x,y) ↪ Hom(C,y,x)
+```
+
+because `Hom` is a transparent defined symbol headed by `≔`. That helper is
+unnecessary. An owning-position full-file probe confirmed the direct
+`omega_equiv_op` destructor rules with and without warnings. The promoted
+slice computes the forward arrow, inverse destructors, and recursive cells:
+
+```text
+omega_equiv_to(omega_equiv_op e)        ↪ omega_equiv_to(e);
+omega_equiv_left_inv(omega_equiv_op e)  ↪ omega_equiv_right_inv(e);
+omega_equiv_right_inv(omega_equiv_op e) ↪ omega_equiv_left_inv(e);
+omega_equiv_left_cell(omega_equiv_op e) ↪ omega_equiv_right_cell(e);
+omega_equiv_right_cell(omega_equiv_op e) ↪ omega_equiv_left_cell(e).
+```
+
+Warning classification: promoting these rules raises the warning-enabled
+inventory from 1,119 to 1,134 warnings, all as critical-pair diagnostics. The
+new families are the expected overlaps between `omega_equiv_op` destructors
+and existing constructor reductions for `Op_cat(Op_cat _)`, `Op_cat(Path_cat
+_)`, and `Op_cat(Terminal_cat)`. They are not treated as a veto because the
+rules are the intended normal form and the active checks/CI pass.
+
+The alternative target `OmegaEquiv(Op_cat(C),x,y)` would force the forward
+arrow to be one of the inverse destructors and should be treated as a later
+derived operation.
 
 ## Rewrite And Unification Discipline
 
@@ -2004,8 +2087,10 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CTOR-EQUIV` | forward-computing Product, same-base Sigma, and same-domain Pi skeleton promoted | `UNI-UA-GRPD`, `UNI-SIGMA-VIEW`, `UNI-PI-VIEW` | full proof witnesses or base-changing constructors are consumed | Derive or refine `*_is_equiv` witnesses from observational path algebra; add base-changing Sigma/Pi only after transport/pathover computation is stable. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
-| `UNI-CAT-ISO` | promoted staging layer | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | Extend ordinary-iso/path coherence only when needed; do not identify it with final `OmegaEquiv`. |
-| `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Add symmetry, composition, functorial image, and selected constructor closures incrementally. |
+| `UNI-CAT-ISO` | promoted provisional 1-truncated staging layer | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | Restrict or replace by `IsOneTruncatedCat(C) -> CatIsoUnivalence(C)`/`OneCat` later; do not identify it with final `OmegaEquiv`. |
+| `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Continue selected constructor closures incrementally; `Path_cat` extraction and `Op_cat` destructor closure are now active before product/functor/category-universe computation. |
+| `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
+| `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
@@ -2095,11 +2180,15 @@ CatIsoUnivalence and global cat_iso_univalence are active staging interfaces;
 OmegaEquiv has primitive destructors;
 omega_equiv_refl computes through to/left/right destructors and recursive
 left/right cells;
+path_cat_omega_path and path_cat_iso_path extract paths and compute on
+reflexivity;
+omega_equiv_op closes omega-equivalence under opposites and computes through
+forward, inverse, and recursive-cell destructors;
 idtoequiv_cat maps reflexive paths to omega_equiv_refl;
 CatUnivalence, equivtoid_cat, and global cat_univalence are active;
 Cat_cat receives the global interface;
-constructor-specific categorical computation and strict cancellation remain
-deferred.
+broader constructor-specific categorical computation and strict cancellation
+remain deferred.
 ```
 
 The first categorical milestone is complete when:

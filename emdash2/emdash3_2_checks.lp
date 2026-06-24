@@ -102,6 +102,98 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
   omega_equiv_right_cell (@omega_equiv_refl C x)
   ≡ @omega_equiv_refl (Hom_cat C x x) (@id C x);
 
+assert [A : Grpd] (x : τ A) ⊢
+  @path_cat_omega_path A x x
+    (@omega_equiv_refl (Path_cat A) x)
+  ≡ eq_refl x;
+
+assert [A : Grpd] (x : τ A) ⊢
+  @path_cat_iso_path A x x
+    (@iso_evidence_refl (Path_cat A) x)
+  ≡ eq_refl x;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_op C x y e
+  : τ (OmegaEquiv (Op_cat C) y x);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @id (Hom_cat (Op_cat C) y x)
+    (@omega_equiv_to (Op_cat C) y x (@omega_equiv_op C x y e))
+  ≡ @id (Hom_cat (Op_cat C) y x)
+    (@omega_equiv_to C x y e);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @id (Hom_cat (Op_cat C) x y)
+    (@omega_equiv_left_inv (Op_cat C) y x (@omega_equiv_op C x y e))
+  ≡ @id (Hom_cat (Op_cat C) x y)
+    (@omega_equiv_right_inv C x y e);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @id (Hom_cat (Op_cat C) x y)
+    (@omega_equiv_right_inv (Op_cat C) y x (@omega_equiv_op C x y e))
+  ≡ @id (Hom_cat (Op_cat C) x y)
+    (@omega_equiv_left_inv C x y e);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @id
+    (Path_cat
+      (OmegaEquiv
+        (Hom_cat C y y)
+        (@comp_fapp0 C y x y
+          (@omega_equiv_to C x y e)
+          (@omega_equiv_right_inv C x y e))
+        (@id C y)))
+    (@omega_equiv_left_cell (Op_cat C) y x (@omega_equiv_op C x y e))
+  ≡ @id
+    (Path_cat
+      (OmegaEquiv
+        (Hom_cat C y y)
+        (@comp_fapp0 C y x y
+          (@omega_equiv_to C x y e)
+          (@omega_equiv_right_inv C x y e))
+        (@id C y)))
+    (@omega_equiv_right_cell C x y e);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @id
+    (Path_cat
+      (OmegaEquiv
+        (Hom_cat C x x)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_left_inv C x y e)
+          (@omega_equiv_to C x y e))
+        (@id C x)))
+    (@omega_equiv_right_cell (Op_cat C) y x (@omega_equiv_op C x y e))
+  ≡ @id
+    (Path_cat
+      (OmegaEquiv
+        (Hom_cat C x x)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_left_inv C x y e)
+          (@omega_equiv_to C x y e))
+        (@id C x)))
+    (@omega_equiv_left_cell C x y e);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @omega_equiv_op C x x (@omega_equiv_refl C x)
+  ≡ @omega_equiv_refl (Op_cat C) x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_to (@omega_equiv_op C x x (@omega_equiv_refl C x))
+  ≡ @id (Op_cat C) x;
+
 assert [C : Cat] (x : τ (Obj C)) ⊢
   @idtoequiv_cat C x x (eq_refl x)
   ≡ @omega_equiv_refl C x;
