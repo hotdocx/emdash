@@ -101,11 +101,104 @@ rewrite SOP made the following decisions more precise:
     a global `cat_univalence(C)` immediately includes `Cat_cat`. Separate that
     interface assumption from deferred constructor-specific computation and
     from model-theoretic justification of the self-universe.
+11. Computational equality can be promoted from "external path views" to
+    direct constructor rules for `=`, provided `=` is migrated from `constant`
+    to `injective`. The path-view classifiers remain useful as the right-hand
+    normal forms of equality computation, for example
+    `u = v` at a Sigma type can reduce to `SigmaPathView(u,v)`.
+12. Do not rewrite `eq_refl` wholesale to the corresponding constructor path
+    view. A 2026-06-25 probe showed that `eq_refl(Σ,u) ↪ sigma_path_refl(u)`
+    makes the reflexive `ind_eq`/`ind_eqr` computation stop seeing the
+    `eq_refl` head. The safer pattern is: rewrite the equality classifier
+    itself, keep `eq_refl` eliminator-visible, and add consumer/projection
+    rules such as `sigma_path_base(eq_refl u) ↪ refl(fst u)` and
+    `sigma_path_fibre(eq_refl u) ↪ pathover_refl(snd u)`.
+13. Because the project globally assumes active categories are univalent, the
+    operational inverse direction for categorical univalence should not depend
+    on passing an explicit `U : CatUnivalence(C)` argument at every use. Add a
+    stable operational decoder head such as `omega_equiv_path`, with
+    constructor-specific computation, and relate it later to the generic
+    `equivtoid_cat` inverse selection.
 
 These corrections are architectural, not merely notational. In particular,
 they prevent a chosen pair of conversion functions from competing with the
 canonical equality eliminator and prevent ordinary isomorphism evidence from
 becoming the accidental definition of homotopy equivalence.
+
+### 2026-06-25 Equality Computation Review
+
+The intended observational direction is now:
+
+```text
+= (constructor-shaped groupoid, x, y)
+  ↪ constructor-specific path normal form.
+```
+
+For Sigma/Product, the owner should be Sigma, since `Product_grpd(A,B)` is a
+transparent constant-family Sigma:
+
+```text
+@= (@Σ_ A P) u v
+  ↪ SigmaPathView(A,P,u,v).
+```
+
+This makes the earlier "path-view detour" an implementation staging device,
+not a separate semantic layer. The view type is the desired normal form of the
+equality classifier once direct equality computation is enabled.
+
+A focused probe confirmed:
+
+```text
+injective symbol = ...
+rule @= (@Σ_ A P) u v ↪ SigmaPathView(A,P,u,v)
+```
+
+typechecks, and Product equality then computes through the transparent
+Product-as-Sigma presentation.
+
+The same probe showed that rewriting `eq_refl` itself is the wrong first
+orientation:
+
+```text
+eq_refl(Σ,u) ↪ sigma_path_refl(u)
+```
+
+breaks ordinary reflexive `ind_eq` computation because the eliminator no
+longer sees an `eq_refl` head. The viable first orientation keeps `eq_refl`
+primitive/inert and exposes constructor reflexivity only through consumers:
+
+```text
+sigma_path_base(eq_refl u)  ↪ eq_refl(sigma_Fst u)
+sigma_path_fibre(eq_refl u) ↪ pathover_refl(sigma_Snd u)
+```
+
+This preserves both:
+
+```text
+ind_eq(eq_refl u, M, m) ↪ m
+```
+
+and componentwise observation of reflexive constructor paths.
+
+Pi/function equality remains different. A direct decode
+`PiPathView(f,g) -> f = g` is functional extensionality in the current
+equality discipline. It should remain capability-driven/deferred unless the
+project deliberately adds cubical interval machinery or commits to full
+observational function equality as a definitional layer.
+
+The corresponding univalence inverse-computation layer should be operational,
+not selected through the generic `IsEquivMap` inverse at runtime:
+
+```text
+grpd_equiv_path  : TypeEquiv A B -> A = B
+iso_evidence_path : IsoEvidence C x y -> x = y
+omega_equiv_path  : OmegaEquiv C x y -> x = y
+```
+
+The active `ua_grpd`, `isotoid_cat`, and `equivtoid_cat` can remain semantic
+interfaces or compatibility wrappers. Constructor-specific computation should
+belong first to these stable decoder heads, with later propositional or narrow
+unification agreement back to the generic inverse selections.
 
 ## Executive Architecture
 
@@ -2132,6 +2225,8 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
 | `UNI-PRODUCT-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA`, product category core | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; opaque product-object eta remains later. |
+| `UNI-EQ-COMPUTE` | proposed 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct computational equality is consumed | Migrate `=` to `injective`; make Sigma equality reduce to `SigmaPathView`; keep `eq_refl` eliminator-visible and add projection rules instead of rewriting `eq_refl` itself. |
+| `UNI-OPERATIONAL-DECODE` | proposed 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | equivalence-to-path computation is consumed | Add stable decoder heads such as `omega_equiv_path`; compute by constructor cases; relate later to `equivtoid_cat`/`isotoid_cat`/`ua_grpd` inverse selections. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
