@@ -1454,6 +1454,174 @@ symbol iso_evidence_refl
         (eq_refl (@id C x))));
 
 /*
+  Categorical univalence skeleton.
+
+  The 1-categorical staging layer maps object paths to ordinary isomorphism
+  evidence. It is a compatibility approximation for the familiar
+  univalent-category slogan "isomorphisms are paths"; it remains separate from
+  the recursive omega-categorical equivalence below.
+*/
+
+symbol idtoiso_cat
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y))
+  : τ (IsoEvidence C x y)
+≔ ind_eq
+    (eq_sym p)
+    (λ t : τ (Obj C), IsoEvidence C x t)
+    (@iso_evidence_refl C x);
+
+symbol CatIsoUnivalence
+  (C : Cat)
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj C)
+        (λ y : τ (Obj C),
+          @IsEquivMap
+            (@= (Obj C) x y)
+            (IsoEvidence C x y)
+            (λ p : τ (@= (Obj C) x y), @idtoiso_cat C x y p)));
+
+symbol isotoid_cat
+  [C : Cat]
+  (U : τ (CatIsoUnivalence C))
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (x = y)
+≔ @type_equiv_from
+    (@= (Obj C) x y)
+    (IsoEvidence C x y)
+    (@Struct_sigma
+      (Function_grpd (@= (Obj C) x y) (IsoEvidence C x y))
+      (λ f : τ (Function_grpd (@= (Obj C) x y) (IsoEvidence C x y)),
+        @IsEquivMap (@= (Obj C) x y) (IsoEvidence C x y) f)
+      (λ p : τ (@= (Obj C) x y), @idtoiso_cat C x y p)
+      (U x y))
+    i;
+
+// Global operational staging assumption: every active category is
+// 1-categorically univalent, i.e. ordinary isomorphism evidence determines an
+// object path. This does not replace final omega-categorical univalence.
+symbol cat_iso_univalence
+  (C : Cat)
+  : τ (CatIsoUnivalence C);
+
+/*
+  Omega-categorical equivalence is recursive through hom-categories. The
+  classifier and destructors are primitive operational heads; no unrestricted
+  introduction record or general corecursor is installed. Reflexivity is the
+  first canonical generator and owns the only initial destructor computation.
+*/
+
+constant symbol OmegaEquiv
+  (C : Cat)
+  (x y : τ (Obj C))
+  : Grpd;
+
+symbol omega_equiv_to
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (Hom C x y);
+
+symbol omega_equiv_left_inv
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (Hom C y x);
+
+symbol omega_equiv_right_inv
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (Hom C y x);
+
+symbol omega_equiv_left_cell
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (OmegaEquiv
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (omega_equiv_left_inv e)
+        (omega_equiv_to e))
+      (@id C x));
+
+symbol omega_equiv_right_cell
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (OmegaEquiv
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        (omega_equiv_to e)
+        (omega_equiv_right_inv e))
+      (@id C y));
+
+injective symbol omega_equiv_refl
+  [C : Cat]
+  (x : τ (Obj C))
+  : τ (OmegaEquiv C x x);
+
+rule omega_equiv_to (omega_equiv_refl $x) ↪ @id _ $x
+with omega_equiv_left_inv (omega_equiv_refl $x) ↪ @id _ $x
+with omega_equiv_right_inv (omega_equiv_refl $x) ↪ @id _ $x;
+
+rule omega_equiv_left_cell (omega_equiv_refl $x)
+  ↪ omega_equiv_refl (@id _ $x)
+with omega_equiv_right_cell (omega_equiv_refl $x)
+  ↪ omega_equiv_refl (@id _ $x);
+
+symbol idtoequiv_cat
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y))
+  : τ (OmegaEquiv C x y)
+≔ ind_eq
+    (eq_sym p)
+    (λ t : τ (Obj C), OmegaEquiv C x t)
+    (@omega_equiv_refl C x);
+
+symbol CatUnivalence
+  (C : Cat)
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj C)
+        (λ y : τ (Obj C),
+          @IsEquivMap
+            (@= (Obj C) x y)
+            (OmegaEquiv C x y)
+            (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)));
+
+symbol equivtoid_cat
+  [C : Cat]
+  (U : τ (CatUnivalence C))
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (x = y)
+≔ @type_equiv_from
+    (@= (Obj C) x y)
+    (OmegaEquiv C x y)
+    (@Struct_sigma
+      (Function_grpd (@= (Obj C) x y) (OmegaEquiv C x y))
+      (λ f : τ (Function_grpd (@= (Obj C) x y) (OmegaEquiv C x y)),
+        @IsEquivMap (@= (Obj C) x y) (OmegaEquiv C x y) f)
+      (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)
+      (U x y))
+    e;
+
+// Global operational assumption: the active `Cat` classifier contains
+// univalent categories. In particular, since `Cat_cat : Cat`, this includes
+// the universe category interface; constructor-specific computation can still
+// remain stuck until installed case by case.
+symbol cat_univalence
+  (C : Cat)
+  : τ (CatUnivalence C);
+
+/*
   Composition of ordinary isomorphism evidence.
 
   The small proof steps keep endpoint inference bounded. The observable

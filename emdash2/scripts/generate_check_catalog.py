@@ -138,6 +138,21 @@ AREAS: list[Area] = [
         ("IsoEvidence", "iso_evidence"),
     ),
     Area(
+        "Categorical univalence and omega equivalence",
+        (
+            "idtoiso_cat",
+            "CatIsoUnivalence",
+            "isotoid_cat",
+            "cat_iso_univalence",
+            "OmegaEquiv",
+            "omega_equiv",
+            "idtoequiv_cat",
+            "CatUnivalence",
+            "equivtoid_cat",
+            "cat_univalence",
+        ),
+    ),
+    Area(
         "Applications: PathOut, path induction, transitivity, telescopes",
         ("PathOut", "PathInd", "path_comp", "CompTarget", "Nested_", "Telescope"),
     ),

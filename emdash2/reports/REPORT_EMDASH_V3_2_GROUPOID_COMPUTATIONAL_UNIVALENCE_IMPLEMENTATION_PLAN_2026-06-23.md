@@ -27,14 +27,19 @@ constructor-specific computational-univalence skeleton is now promoted:
 `sigma_type_equiv_same_base`, and `pi_type_equiv_same_domain`, each with
 forward `type_equiv_to` computation and corresponding `coe_grpd(ua_grpd(...))`
 regression checks. Their `IsEquivMap` witnesses are intentionally isolated
-proof capabilities pending fuller Sigma/Pi path algebra. No `OmegaEquiv`,
-`CatUnivalence`, or generic `HomComparison` symbol from this report has yet
-been promoted. The existing equality, `Path_cat`, `IsoEvidence`, and
-`ProfComparison` implementations remain active. Focused probes have confirmed
-derivability of the covariant Yoneda embedding from `hom_int` over the
-opposite category. A primitive recursive-destructor `OmegaEquiv` interface
-with reflexivity and recursively reflexive inverse cells has also passed an
-isolated warning-enabled probe.
+proof capabilities pending fuller Sigma/Pi path algebra. The first
+categorical-univalence skeleton is also promoted: 1-categorical staging via
+`idtoiso_cat`, `CatIsoUnivalence`, `isotoid_cat`, and global
+`cat_iso_univalence`; omega-categorical equivalence via primitive
+`OmegaEquiv` destructors, reflexive `omega_equiv_refl`, canonical
+`idtoequiv_cat`, explicit `CatUnivalence`, inverse selection
+`equivtoid_cat`, and global `cat_univalence`. The `Cat_cat` univalence
+interface is available immediately through the global instance; constructor-
+and universe-specific computation remains deferred. No generic
+`HomComparison` symbol from this report has yet been promoted. The existing
+equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
+remain active. Focused probes have confirmed derivability of the covariant
+Yoneda embedding from `hom_int` over the opposite category.
 
 ## Scope And Authority
 
@@ -1301,6 +1306,59 @@ rule, not a second runtime owner.
 The reverse direction applies only to equivalence arrows and requires
 `CatUnivalence(C)`.
 
+## 1-Categorical Univalence Staging Layer
+
+Before promoting the full recursive `OmegaEquiv` interface, it is useful to
+stage the ordinary 1-categorical approximation that the kernel already has
+most of the infrastructure to express:
+
+```text
+x = y  <->  IsoEvidence(C,x,y).
+```
+
+This layer is not the final meaning of categorical univalence. It is a
+feasibility and regression scaffold for the familiar univalent-category
+principle that isomorphism arrows are groupoidal object paths. It should be
+kept explicitly separate from `OmegaEquiv`, because `IsoEvidence` is ordinary
+propositional inverse data at the current hom level, while `OmegaEquiv` is
+recursive through all hom-categories.
+
+The staged canonical map is:
+
+```text
+idtoiso_cat(C,p)
+  : IsoEvidence(C,x,y)
+
+idtoiso_cat(C,refl_x)
+  -> iso_evidence_refl(C,x).
+```
+
+The corresponding capability mirrors groupoidal univalence:
+
+```text
+CatIsoUnivalence(C)
+  :=
+  Π x y : Obj(C),
+    IsEquivMap(idtoiso_cat[C,x,y]);
+
+isotoid_cat
+  : CatIsoUnivalence(C)
+    -> IsoEvidence(C,x,y)
+    -> x = y.
+```
+
+Under the project convention that every `C : Cat` is univalent, add a global
+operational instance:
+
+```text
+cat_iso_univalence(C) : CatIsoUnivalence(C).
+```
+
+This approximation demonstrates the ordinary 1-categorical statement
+“isomorphisms are paths” without forcing any constructor-specific
+ω-equivalence computation. It should not replace the later `CatUnivalence(C)`
+interface; it is a staging layer and compatibility check.
+
 ## Omega-Categorical Equivalence
 
 ### Destructor-Oriented Interface
@@ -1494,6 +1552,88 @@ Current HOTT work similarly treats fibrancy of the universe itself as work in
 progress while establishing computational fibrancy for many ordinary type
 formers. Emdash may adopt the global operational interface now and leave
 universe-specific computation pluggable and deferred.
+
+Implementation checkpoint 2026-06-24: the categorical-univalence skeleton
+landed.
+
+Promoted 1-categorical staging symbols:
+
+```text
+idtoiso_cat;
+CatIsoUnivalence;
+isotoid_cat;
+cat_iso_univalence.
+```
+
+Promoted omega-categorical symbols:
+
+```text
+OmegaEquiv;
+omega_equiv_to;
+omega_equiv_left_inv;
+omega_equiv_right_inv;
+omega_equiv_left_cell;
+omega_equiv_right_cell;
+omega_equiv_refl;
+idtoequiv_cat;
+CatUnivalence;
+equivtoid_cat;
+cat_univalence.
+```
+
+The installed runtime computation is intentionally narrow:
+
+```text
+idtoiso_cat(refl_x) -> iso_evidence_refl(x);
+
+omega_equiv_to(omega_equiv_refl(x)) -> id_x;
+omega_equiv_left_inv(omega_equiv_refl(x)) -> id_x;
+omega_equiv_right_inv(omega_equiv_refl(x)) -> id_x;
+omega_equiv_left_cell(omega_equiv_refl(x))
+  -> omega_equiv_refl(id_x);
+omega_equiv_right_cell(omega_equiv_refl(x))
+  -> omega_equiv_refl(id_x);
+
+idtoequiv_cat(refl_x) -> omega_equiv_refl(x).
+```
+
+The inverse selections `isotoid_cat` and `equivtoid_cat` are transparent
+projections through `type_equiv_from` applied to the corresponding
+univalence capability, but no strict cancellation rule is installed. The
+global operations:
+
+```text
+cat_iso_univalence(C) : CatIsoUnivalence(C);
+cat_univalence(C)     : CatUnivalence(C);
+```
+
+make the project convention explicit: active categories are univalent. Since
+`Cat_cat : Cat`, `cat_univalence(Cat_cat)` is a checked immediate interface.
+This does not add universe-specific computation and is not a model-theoretic
+consistency proof.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_cat_skeleton_probe.lp
+logs/probes/univalence_cat_skeleton_probe-20260624-172318.log
+logs/probes/univalence_cat_skeleton_probe-20260624-172331.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make warning-summary
+make catalog
+make health
+make ci
+```
+
+After promotion, `make warning-summary` remains:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+The promoted categorical-univalence skeleton therefore introduces no warning
+inventory delta.
 
 ## Yoneda Internalization
 
@@ -1812,6 +1952,10 @@ the report labels ua_grpd as an operational assumption.
 
 ### Phase 6: Omega Equivalence
 
+0. Optionally promote the 1-categorical staging layer
+   `idtoiso_cat`/`CatIsoUnivalence`/`cat_iso_univalence` first. This shows the
+   ordinary univalent-category approximation while the recursive
+   `OmegaEquiv` skeleton is being installed.
 1. Promote the probed primitive classifier and recursive destructors in an
    owning-position full-file copy.
 2. Promote the canonical reflexivity generator and recursive reflexivity
@@ -1860,11 +2004,12 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CTOR-EQUIV` | forward-computing Product, same-base Sigma, and same-domain Pi skeleton promoted | `UNI-UA-GRPD`, `UNI-SIGMA-VIEW`, `UNI-PI-VIEW` | full proof witnesses or base-changing constructors are consumed | Derive or refine `*_is_equiv` witnesses from observational path algebra; add base-changing Sigma/Pi only after transport/pathover computation is stable. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
-| `UNI-OMEGA` | primitive recursive interface feasibility confirmed | promoted path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
+| `UNI-CAT-ISO` | promoted staging layer | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | Extend ordinary-iso/path coherence only when needed; do not identify it with final `OmegaEquiv`. |
+| `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Add symmetry, composition, functorial image, and selected constructor closures incrementally. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
-| `UNI-CAT-CAP` | architecturally ready after `UNI-OMEGA` promotion | `UNI-OMEGA` | Canonical `idtoequiv_cat` lands | Define `CatUnivalence(C)` as `IsEquivMap(idtoequiv_cat)`. |
-| `UNI-CAT-GLOBAL` | design decision adopted; implementation awaits capability | `UNI-CAT-CAP` | `CatUnivalence` interface lands | Add the global operational instance for every `C : Cat`. |
-| `UNI-CAT-SELF` | operational instance follows from global policy; computation deferred | `UNI-CAT-GLOBAL` | global `cat_univalence` is adopted | Record the immediate instance; add universe-specific computation only when consumed. |
+| `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
+| `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
+| `UNI-CAT-SELF` | interface promoted through global policy; computation deferred | `UNI-CAT-GLOBAL` | universe-specific computation is consumed | Add `Cat_cat`-specific computation only when a concrete consumer needs it; keep model justification separate. |
 | `UNI-PROF-WEAK` | deferred | `UNI-CAT-CAP`, `UNI-HOM-COMP` | weak representability has a concrete theorem consumer | Compare weak/path and computational weighted limits. |
 
 ## Feasibility Assessment
@@ -1886,11 +2031,12 @@ the report labels ua_grpd as an operational assumption.
 | Product/Sigma/Pi constructor equivalence skeleton | promoted for Product, same-base Sigma, and same-domain Pi | `IsEquivMap` witnesses are capabilities until Sigma/Pi path algebra can derive them |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
-| primitive recursive `OmegaEquiv` interface | confirmed in isolated probe | owning-position promotion and closure operations |
+| 1-categorical `CatIsoUnivalence` staging | promoted | ordinary iso/path coherence beyond reflexivity remains capability-driven |
+| primitive recursive `OmegaEquiv` interface | promoted with reflexivity | closure operations and constructor-specific destructor computation |
 | general `OmegaEquiv` corecursor/productivity checking | deferred/optional | Lambdapi has no native generated codata checker |
-| explicit `CatUnivalence(C)` | high after Omega promotion | coherence and constructor ownership |
-| global univalence for every `C` | operationally straightforward, foundationally assumed | model/universe interpretation |
-| `Cat_cat` self-univalence interface | immediate under global policy | constructor-specific computation remains deferred |
+| explicit `CatUnivalence(C)` | promoted | coherence and constructor ownership |
+| global univalence for every `C` | promoted as operational assumption | model/universe interpretation |
+| `Cat_cat` self-univalence interface | promoted through global policy | constructor-specific computation remains deferred |
 | semantic justification of `Cat_cat : Cat_cat` | outside near-term kernel implementation | universe stratification/consistency |
 
 The operational architecture is feasible across all major layers. The
@@ -1939,6 +2085,21 @@ the equivalence witnesses are isolated proof capabilities, not runtime
 rewrite owners;
 full base-changing Sigma/Pi and derived fibre-contractibility proofs remain
 deferred until the observational path algebra can support them.
+```
+
+The first categorical-univalence skeleton is complete when:
+
+```text
+idtoiso_cat maps reflexive paths to iso_evidence_refl;
+CatIsoUnivalence and global cat_iso_univalence are active staging interfaces;
+OmegaEquiv has primitive destructors;
+omega_equiv_refl computes through to/left/right destructors and recursive
+left/right cells;
+idtoequiv_cat maps reflexive paths to omega_equiv_refl;
+CatUnivalence, equivtoid_cat, and global cat_univalence are active;
+Cat_cat receives the global interface;
+constructor-specific categorical computation and strict cancellation remain
+deferred.
 ```
 
 The first categorical milestone is complete when:

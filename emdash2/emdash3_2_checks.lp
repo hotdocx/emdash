@@ -63,6 +63,63 @@ assert [C : Cat] [x y : τ (Obj C)]
       =
       @id C y);
 
+// Categorical univalence skeleton: 1-categorical staging and omega layer.
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @idtoiso_cat C x x (eq_refl x)
+  ≡ @iso_evidence_refl C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_to C x x (@idtoiso_cat C x x (eq_refl x))
+  ≡ @id C x;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @isotoid_cat C (cat_iso_univalence C) x y i
+  : τ (x = y);
+
+assert ⊢
+  cat_iso_univalence Cat_cat
+  : τ (CatIsoUnivalence Cat_cat);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_to (@omega_equiv_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_left_inv (@omega_equiv_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_right_inv (@omega_equiv_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_left_cell (@omega_equiv_refl C x)
+  ≡ @omega_equiv_refl (Hom_cat C x x) (@id C x);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_right_cell (@omega_equiv_refl C x)
+  ≡ @omega_equiv_refl (Hom_cat C x x) (@id C x);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @idtoequiv_cat C x x (eq_refl x)
+  ≡ @omega_equiv_refl C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  omega_equiv_to (@idtoequiv_cat C x x (eq_refl x))
+  ≡ @id C x;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @equivtoid_cat C (cat_univalence C) x y e
+  : τ (x = y);
+
+assert ⊢
+  cat_univalence Cat_cat
+  : τ (CatUnivalence Cat_cat);
+
 assert [a b : Grpd] (f : τ a → τ b) (x : τ a) ⊢
   @eq_ap a b f x x (eq_refl x)
   ≡ eq_refl (f x);
