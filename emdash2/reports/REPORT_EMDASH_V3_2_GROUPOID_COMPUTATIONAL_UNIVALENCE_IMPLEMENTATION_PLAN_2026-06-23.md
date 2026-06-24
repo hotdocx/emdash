@@ -18,8 +18,11 @@ primitive reflexive `eq_apd`, functor-owned `Core_incl_func`, public
 `GrpdUnivalence`, stable operational `ua_grpd`, and the computational law
 `coe_grpd(ua_grpd(U,e),a) -> type_equiv_to(e,a)`. The first Sigma path-view
 slice is also promoted: `SigmaPathView`, `sigma_path_base`,
-`sigma_path_fibre`, `sigma_path_refl`, and reflexive `sigma_path_encode`.
-No `OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
+`sigma_path_fibre`, `sigma_path_refl`, reflexive `sigma_path_encode`,
+`sigma_path_intro`, and constructor-reflexive `sigma_path_decode`. The first
+Pi/function path-view slice is promoted as well: `PiPathView`,
+`pi_path_apply`, `pi_path_refl`, and reflexive `pi_path_encode`. No
+`OmegaEquiv`, `CatUnivalence`, or generic `HomComparison` symbol from this
 report has yet been promoted. The existing equality, `Path_cat`,
 `IsoEvidence`, and `ProfComparison` implementations remain active. Focused
 probes have confirmed derivability of the covariant Yoneda embedding from
@@ -550,6 +553,82 @@ The warning-enabled owner-position probe reports only the already existing
 Sigma projection beta warnings at `sigma_Fst`/`sigma_Snd`, with no warning
 located at the new Sigma path-view definitions.
 
+Implementation checkpoint 2026-06-24: the next observational path-view slices
+landed.
+
+Promoted Sigma additions:
+
+```text
+sigma_path_intro;
+sigma_path_decode.
+```
+
+Promoted Pi/function additions:
+
+```text
+PiPathView;
+pi_path_apply;
+pi_path_refl;
+pi_path_encode.
+```
+
+The Sigma decode boundary is intentionally constructor-reflexive, not a
+generic eta law:
+
+```text
+sigma_path_intro(refl_x,q) -> ap(λ z, (x,z), q);
+sigma_path_decode(sigma_path_refl(Struct_sigma(x,a))) -> refl_(x,a).
+```
+
+For a variable pair `u`, `sigma_path_decode(sigma_path_refl(u))` is not a
+judgmental normal form, because `sigma_path_decode` eliminates on the pair
+structure. Adding a broad eta-like rule for that case would be a separate
+overlap-sensitive conversion and is not promoted.
+
+The Pi/function view follows the related-input observational shape:
+
+```text
+PiPathView(B,f,g)
+  := Π x0 x1, Π p : x0 = x1,
+       PathOver(B,p,f(x0),g(x1)).
+```
+
+Its promoted computation is reflexive application/encode only:
+
+```text
+pi_path_apply(pi_path_refl(f),x,x,refl_x) -> refl_(f x);
+pi_path_encode(refl_f) -> pi_path_refl(f).
+```
+
+There is still no function-extensionality decode from `PiPathView` back to
+`f = g`.
+
+Validation evidence:
+
+```text
+tmp/probes/univalence_sigma_path_decode_probe.lp
+logs/probes/univalence_sigma_path_decode_probe-20260624-160945.log
+logs/probes/univalence_sigma_path_decode_probe-20260624-160953.log
+
+tmp/probes/univalence_pi_path_view_first_slice_probe.lp
+logs/probes/univalence_pi_path_view_first_slice_probe-20260624-161141.log
+logs/probes/univalence_pi_path_view_first_slice_probe-20260624-161154.log
+
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+```
+
+After promotion, `make warning-summary` remains:
+
+```text
+1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+```
+
+The warning-enabled owner-position probes report no warning located at
+`sigma_path_intro`, `sigma_path_decode`, `PiPathView`, `pi_path_apply`,
+`pi_path_refl`, or `pi_path_encode`.
+
 ## Two Related But Separate Programs
 
 The work must be split into two programs.
@@ -791,11 +870,12 @@ sigma_path_decode : SigmaPathView(P,u,v) -> (u = v).
 ```
 
 Current promoted boundary: `SigmaPathView`, base/fibre projections,
-`sigma_path_refl`, and reflexive `sigma_path_encode` are active. Generic
-`sigma_path_decode` is not yet promoted. The first decode probe should prefer a
-derived componentwise eliminator using `ind_eqr` and `PathOver`; if that
-requires broad commuting conversions, keep decode primitive/propositional
-until a concrete consumer requires judgmental computation.
+`sigma_path_refl`, reflexive `sigma_path_encode`, `sigma_path_intro`, and
+`sigma_path_decode` are active. Decode is derived componentwise using
+`ind_eqr`, `sigma_ind`, and `PathOver`, but its judgmental computation is only
+constructor-reflexive. Generic encode/decode eta and cancellation remain
+propositional/deferred until a concrete consumer requires judgmental
+computation.
 
 Only constructor/reflexivity projections should initially compute
 judgmentally. Generic encode/decode cancellation should begin as propositional
@@ -884,6 +964,12 @@ presentation exposes `ap` and higher-dimensional substitution directly.
 
 This phase requires a groupoid-level Pi classifier and is not part of the
 first path-over slice.
+
+Current promoted boundary: `PiPathView`, `pi_path_apply`, `pi_path_refl`, and
+reflexive `pi_path_encode` are active. There is no promoted
+function-extensionality decode from `PiPathView(B,f,g)` to `f = g`; that would
+be the overlap-sensitive computational part of Pi univalence and should be
+probed separately.
 
 ## Minimal Groupoid Type-Former Infrastructure
 
@@ -1629,9 +1715,11 @@ the report labels ua_grpd as an operational assumption.
 
 1. Add Sigma/Product path views.
 2. Add encode/decode and reflexivity projections. The first Sigma slice has
-   promoted the view, projections, reflexive view, and reflexive encode;
-   generic decode remains deferred.
-3. Add Pi/function path views only after `Pi_grpd`.
+   promoted the view, projections, reflexive view, reflexive encode,
+   componentwise intro, and constructor-reflexive decode.
+3. Add Pi/function path views only after `Pi_grpd`. The first Pi slice has
+   promoted the related-input view, application, reflexive view, and reflexive
+   encode; function-extensionality decode remains deferred.
 4. Do not make generic encode/decode cancellation judgmental without a
    consumer.
 
@@ -1685,11 +1773,11 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-SIGMA-IND` | fixed-parameter `sigma_ind` promoted; relation to generated `ind_τΣ_` documented deferred | none | proof-mode or generated eliminator normal forms become visible consumers | Either derive `sigma_ind` from richer motive infrastructure or add a narrow comparison after probing. |
 | `UNI-PATH-HOM` | functor-owned map promoted | none | proof-time J agreement is needed | Probe propositional or narrow unification agreement between `path_to_hom` and the J-defined reference. |
 | `UNI-CORE-INCL` | promoted with object and reflexivity projection rules | none | a consumer needs more core-inclusion computation | Monitor stable-projection joins; do not add a specialized composition rule. |
-| `UNI-GRPD-PI` | promoted | none | observational Pi equality begins | Add related-input Pi path view only after Sigma path views stabilize. |
+| `UNI-GRPD-PI` | promoted | none | further Pi equality/univalence begins | Use the promoted related-input Pi path view; defer function-extensionality decode until consumed. |
 | `UNI-TYPE-EQUIV` | first contractible-fibre slice promoted | promoted `UNI-GRPD-PI` | symmetry/composition are consumed | Probe the required Sigma/fibre path algebra; do not postulate strict cancellation. |
 | `UNI-UA-GRPD` | first computational rule promoted | `UNI-TYPE-EQUIV` | constructor-specific univalence computation begins | Add constructor closure entries so `type_equiv_to(e,a)` computes recursively for Sigma/Product/Pi/etc.; keep inverse cancellation propositional unless consumed. |
-| `UNI-SIGMA-VIEW` | first reflexive view/encode slice promoted | `UNI-PATHOVER` | decode or Sigma-constructor univalence is consumed | Probe generic decode via componentwise `ind_eqr`; keep encode/decode cancellation propositional unless a consumer needs judgmental beta/eta. |
-| `UNI-PI-VIEW` | blocked | `UNI-PATHOVER`, `UNI-GRPD-PI` | Sigma view and Pi formation stable | Define related-input observational Pi path. |
+| `UNI-SIGMA-VIEW` | componentwise intro and constructor-reflexive decode promoted | `UNI-PATHOVER` | Sigma-constructor univalence or eta is consumed | Keep generic encode/decode cancellation propositional unless a consumer needs judgmental beta/eta. |
+| `UNI-PI-VIEW` | related-input reflexive view/encode promoted | `UNI-PATHOVER`, `UNI-GRPD-PI` | function extensionality or Pi-constructor univalence is consumed | Probe `PiPathView -> f = g` decode separately; do not add eta/cancellation rules speculatively. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
 | `UNI-OMEGA` | primitive recursive interface feasibility confirmed | promoted path utilities | Phase 6 promotion begins | Run owning-position probe; add reflexivity, then closure operations incrementally. |
@@ -1709,9 +1797,9 @@ the report labels ua_grpd as an operational assumption.
 | strict `Core_incl_func` composition | promoted through generic functoriality | future projection-ladder consumers |
 | `Pi_grpd` formation/decoding | promoted | future interaction with observational Pi equality |
 | contractible-fibre `TypeEquiv` formation/inverse/reflexivity | promoted | symmetry/composition require more Sigma-fibre path algebra |
-| Sigma path-view formation/projections/reflexive encode | promoted | generic decode and cancellation remain overlap-sensitive |
+| Sigma path-view intro/decode | promoted at constructor-reflexive boundary | generic eta/cancellation remain overlap-sensitive |
 | Product path views | high | encode/decode orientation and projection overlap |
-| observational Pi path | medium | related-input dependency and higher substitution |
+| observational Pi path | first related-input slice promoted | function-extensionality decode and higher substitution |
 | `coe_grpd` and canonical `idtoequiv_grpd` on reflexivity | promoted | no non-reflexive computation without univalence capability |
 | `GrpdUnivalence` capability and stable `ua_grpd` operation | promoted | inverse/cancellation coherence remains propositional/deferred |
 | `coe_grpd(ua(e))` | promoted | constructor-specific `e.to` computation still needed |

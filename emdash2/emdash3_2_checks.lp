@@ -127,6 +127,40 @@ assert [A : Grpd]
   @sigma_path_encode A P u u (eq_refl u)
   ≡ sigma_path_refl u;
 
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a b : τ (P x))
+  (q : τ (a = b)) ⊢
+  @sigma_path_intro A P x x a b (eq_refl x) q
+  ≡ @eq_ap
+      (P x)
+      (@Σ_ A P)
+      (λ z : τ (P x), @Struct_sigma A P x z)
+      a
+      b
+      q;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  sigma_path_decode (sigma_path_refl (@Struct_sigma A P x a))
+  ≡ @eq_refl (@Σ_ A P) (@Struct_sigma A P x a);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x : τ A) ⊢
+  @pi_path_apply A B f f (pi_path_refl f) x x (eq_refl x)
+  ≡ eq_refl (f x);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  @pi_path_encode A B f f (eq_refl f)
+  ≡ pi_path_refl f;
+
 // Groupoid-level Pi and contractible-fibre type equivalence infrastructure.
 assert [A : Grpd] [B : τ A → Grpd] ⊢
   τ (@Pi_grpd A B) ≡ Π x : τ A, τ (B x);

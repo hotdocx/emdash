@@ -554,6 +554,103 @@ symbol Function_grpd
   : Grpd
 ≔ @Pi_grpd A (λ _ : τ A, B);
 
+symbol sigma_path_intro
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [x y : τ A]
+  [a : τ (P x)]
+  [b : τ (P y)]
+  (p : τ (x = y))
+  (q : τ (@PathOver A P x y p a b))
+  : τ (@Struct_sigma A P x a = @Struct_sigma A P y b)
+≔ @ind_eqr A y
+    (λ x : τ A, λ p : τ (x = y),
+      @Pi_grpd (P x) (λ a : τ (P x),
+        @Pi_grpd (P y) (λ b : τ (P y),
+          @Pi_grpd (@PathOver A P x y p a b)
+            (λ _ : τ (@PathOver A P x y p a b),
+              @Struct_sigma A P x a = @Struct_sigma A P y b))))
+    (λ a : τ (P y), λ b : τ (P y), λ q : τ (@PathOver A P y y (eq_refl y) a b),
+      @eq_ap
+        (P y)
+        (@Σ_ A P)
+        (λ z : τ (P y), @Struct_sigma A P y z)
+        a
+        b
+        q)
+    x
+    p
+    a
+    b
+    q;
+
+symbol sigma_path_decode
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (w : τ (@SigmaPathView A P u v))
+  : τ (u = v)
+≔ @sigma_ind A P
+    (λ u : @τΣ_ A P,
+      @Pi_grpd (@Σ_ A P) (λ v : @τΣ_ A P,
+        @Pi_grpd (@SigmaPathView A P u v)
+          (λ _ : τ (@SigmaPathView A P u v), u = v)))
+    (λ x : τ A, λ a : τ (P x),
+      @sigma_ind A P
+        (λ v : @τΣ_ A P,
+          @Pi_grpd (@SigmaPathView A P (@Struct_sigma A P x a) v)
+            (λ _ : τ (@SigmaPathView A P (@Struct_sigma A P x a) v),
+              @Struct_sigma A P x a = v))
+        (λ y : τ A, λ b : τ (P y), λ w : τ (@SigmaPathView A P (@Struct_sigma A P x a) (@Struct_sigma A P y b)),
+          @sigma_path_intro A P x y a b
+            (sigma_path_base w)
+            (sigma_path_fibre w)))
+    u
+    v
+    w;
+
+symbol PiPathView
+  [A : Grpd]
+  (B : τ A → Grpd)
+  (f g : Π x : τ A, τ (B x))
+  : Grpd
+≔ @Pi_grpd A
+    (λ x0 : τ A,
+      @Pi_grpd A
+        (λ x1 : τ A,
+          @Pi_grpd (x0 = x1)
+            (λ p : τ (x0 = x1),
+              @PathOver A B x0 x1 p (f x0) (g x1))));
+
+symbol pi_path_apply
+  [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (w : τ (@PiPathView A B f g))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1))
+  : τ (@PathOver A B x0 x1 p (f x0) (g x1))
+≔ w x0 x1 p;
+
+symbol pi_path_refl
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  : τ (@PiPathView A B f f)
+≔ λ x0 : τ A, λ x1 : τ A, λ p : τ (x0 = x1),
+  @eq_apd A B f x0 x1 p;
+
+symbol pi_path_encode
+  [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (@= (@Pi_grpd A B) f g))
+  : τ (@PiPathView A B f g)
+≔ ind_eq
+    p
+    (λ h : τ (@Pi_grpd A B), @PiPathView A B h g)
+    (pi_path_refl g);
+
 symbol IsContr
   (X : Grpd)
   : Grpd
