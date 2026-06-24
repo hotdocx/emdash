@@ -56,9 +56,13 @@ paths over constant families, and
 `omega_equiv_path(omega_equiv_product(eA,eB))` computes to the
 Sigma/Product path normal form whose base component is
 `omega_equiv_path(eA)` and whose fibre component is the constant-family lift of
-`omega_equiv_path(eB)`. The `Cat_cat` univalence interface is available
-immediately through the global instance; broader constructor-specific
-computation and universe-specific computation remain deferred. No generic
+`omega_equiv_path(eB)`. The Product forward dual is now promoted as well:
+`const_pathover_path` reads a constant-family `PathOver` back as an ordinary
+fibre path, and `idtoequiv_cat` maps explicit Product/Sigma path normal forms
+to `omega_equiv_product` of the two component forward maps. The `Cat_cat`
+univalence interface is available immediately through the global instance;
+broader constructor-specific computation and universe-specific computation
+remain deferred. No generic
 `HomComparison` symbol from this report has yet been promoted. The existing
 equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
 remain active. Focused probes have confirmed derivability of the covariant
@@ -419,6 +423,34 @@ omega_equiv_path(omega_equiv_product(eA,eB))
 This keeps the Product path normal form faithful to the underlying
 constant-family Sigma representation while avoiding a premature generic rule
 that would rewrite all constant-family transports.
+
+The forward Product univalence computation needs the inverse bridge:
+
+```text
+const_pathover_path
+  : PathOver(λ _ : A, B, p, y0, y1)
+    -> y0 = y1.
+```
+
+This is now promoted as the constant-family readback. It is intentionally
+local to constant families; it is not a general `PathOver` eliminator or a
+generic transport computation rule.
+
+With this bridge, the Product forward map computes on explicit Sigma path
+normal forms:
+
+```text
+idtoequiv_cat
+  (Product_cat(A,B), (x0,y0), (x1,y1), (pA,pB))
+  ↪
+  omega_equiv_product
+    (idtoequiv_cat(A,x0,x1,pA))
+    (idtoequiv_cat(B,y0,y1,const_pathover_path(pA,pB))).
+```
+
+The reflexive explicit Sigma path then collapses through the existing
+component reflexivity rules and `omega_equiv_product` reflexive collapse to
+`omega_equiv_refl(Product_cat(A,B),(x,y))`.
 
 ### Transport Computation Boundary
 
@@ -2401,6 +2433,21 @@ equality boundary, not a blocker. Do not force a global rewrite of every
 `eq_refl` at Product/Sigma into its path-view components merely to join this
 critical pair; add only consumer-driven bridges.
 
+2026-06-25 forward Product extension status: promoted. A full-file probe
+confirmed `const_pathover_path` and the forward Product rule:
+
+```text
+idtoequiv_cat(Product_cat(A,B), (x0,y0), (x1,y1), (pA,pB))
+  ↪ omega_equiv_product(
+      idtoequiv_cat(A,x0,x1,pA),
+      idtoequiv_cat(B,y0,y1,const_pathover_path(pA,pB))).
+```
+
+The active checks cover the general explicit Sigma path normal form and the
+reflexive explicit Sigma path, which reduces all the way to
+`omega_equiv_refl(Product_cat(A,B),(x,y))`. Warning summary after promotion
+remains 1,135 warnings, so this forward rule adds no warning-count delta.
+
 ## Rewrite And Unification Discipline
 
 ### Runtime Rewrite Candidates
@@ -2587,7 +2634,7 @@ the report labels ua_grpd as an operational assumption.
 
 | ID | Status | Depends on | Resume trigger | Next action |
 | --- | --- | --- | --- | --- |
-| `UNI-PATHOVER` | first semantic slice and constant-family bridge promoted | none | Sigma/Product path views begin | `const_pathover` is active for Product decoder construction; add `pathover_sym`/`pathover_comp` only when consumed; keep stable-head variant as a fallback if transparent unfolding becomes brittle. |
+| `UNI-PATHOVER` | first semantic slice and constant-family bridges promoted | none | Sigma/Product path views begin | `const_pathover` is active for Product decoder construction and `const_pathover_path` is active for Product forward univalence; add `pathover_sym`/`pathover_comp` only when consumed; keep stable-head variant as a fallback if transparent unfolding becomes brittle. |
 | `UNI-EQ-ELIM` | `ind_eqr` primitive; `ind_eq` derived and builtin route preserved | none | singleton eliminator syntax is consumed | Add derived `ind_eqr_sig` only if it improves readability; keep one primitive owner. |
 | `UNI-SIGMA-IND` | fixed-parameter `sigma_ind` promoted; relation to generated `ind_τΣ_` documented deferred | none | proof-mode or generated eliminator normal forms become visible consumers | Either derive `sigma_ind` from richer motive infrastructure or add a narrow comparison after probing. |
 | `UNI-PATH-HOM` | functor-owned map promoted | none | proof-time J agreement is needed | Probe propositional or narrow unification agreement between `path_to_hom` and the J-defined reference. |
@@ -2605,9 +2652,9 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Continue selected constructor closures incrementally; `Path_cat`, `Op_cat`, and explicit `Product_cat` closure are active before functor/category-universe computation. |
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
-| `UNI-PRODUCT-CAT-CLOSURE` | destructor and decoder slices promoted 2026-06-24/25 | promoted `UNI-OMEGA`, product category core, `UNI-PATHOVER` | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; `omega_equiv_path(omega_equiv_product(eA,eB))` exposes the Product/Sigma path normal form through `const_pathover`; opaque product-object eta remains later. |
+| `UNI-PRODUCT-CAT-CLOSURE` | destructor, decoder, and forward-idto slices promoted 2026-06-24/25 | promoted `UNI-OMEGA`, product category core, `UNI-PATHOVER` | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; `omega_equiv_path(omega_equiv_product(eA,eB))` exposes the Product/Sigma path normal form through `const_pathover`; `idtoequiv_cat` maps explicit Product/Sigma path normal forms back to `omega_equiv_product` through `const_pathover_path`; opaque product-object eta remains later. |
 | `UNI-EQ-COMPUTE` | first Sigma slice promoted 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct Pi equality, Product/Sigma decoder computation, or more constructor paths are consumed | `=` is injective; Sigma equality reduces to `SigmaPathView`; `eq_refl` remains eliminator-visible; `sigma_Fst`/`sigma_Snd` projection rules expose reflexive Sigma components. Next, probe direct Pi equality and constructor-specific equality decoding only when consumed. |
-| `UNI-OPERATIONAL-DECODE` | specified-inverse skeleton and first decoder computations promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. `type_equiv_refl` and `iso_evidence_refl` are now stable heads with projection rules, so all three reverse decoders compute on reflexive evidence. The first non-reflexive-shaped decoder case is Product omega-equivalence. |
+| `UNI-OPERATIONAL-DECODE` | specified-inverse skeleton and first Product computations promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. `type_equiv_refl` and `iso_evidence_refl` are now stable heads with projection rules, so all three reverse decoders compute on reflexive evidence. Product omega-equivalence now has both reverse decoding and forward `idtoequiv_cat` computation for explicit Product/Sigma path normal forms. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
@@ -2625,7 +2672,7 @@ the report labels ua_grpd as an operational assumption.
 | `Pi_grpd` formation/decoding | promoted | future interaction with observational Pi equality |
 | contractible-fibre `TypeEquiv` formation/inverse/reflexivity | promoted | symmetry/composition require more Sigma-fibre path algebra |
 | Sigma path-view intro/decode | promoted at constructor-reflexive boundary | generic eta/cancellation remain overlap-sensitive |
-| Product path views | first direct Sigma/Product equality and constant-family bridge promoted | encode/decode orientation and projection overlap |
+| Product path views | first direct Sigma/Product equality and both constant-family bridges promoted | encode/decode orientation and projection overlap |
 | observational Pi path | first related-input slice promoted | direct Pi equality rule and higher substitution/transport coherence |
 | `coe_grpd` and canonical `idtoequiv_grpd` on reflexivity | promoted | no non-reflexive computation without univalence capability |
 | `GrpdUnivalence` capability and stable `ua_grpd` operation | promoted | inverse/cancellation coherence remains propositional/deferred |
@@ -2635,7 +2682,7 @@ the report labels ua_grpd as an operational assumption.
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
 | 1-categorical `CatIsoUnivalence` staging | promoted | ordinary iso/path coherence beyond reflexivity remains capability-driven |
 | primitive recursive `OmegaEquiv` interface | promoted with reflexivity, opposite closure, and explicit Product closure | further closure operations and constructor-specific destructor computation |
-| Product omega-equivalence path decoder | promoted | expected critical-pair boundary against Product reflexive collapse |
+| Product omega-equivalence path decoder and forward `idtoequiv_cat` | promoted | expected critical-pair boundary against Product reflexive collapse; opaque product-object eta remains deferred |
 | general `OmegaEquiv` corecursor/productivity checking | deferred/optional | Lambdapi has no native generated codata checker |
 | explicit `CatUnivalence(C)` | promoted | coherence and constructor ownership |
 | global univalence for every `C` | promoted as operational assumption | model/universe interpretation |
@@ -2717,6 +2764,8 @@ forward, inverse, and recursive-cell destructors;
 omega_equiv_product closes omega-equivalence under explicit Product objects
 and computes through forward, inverse, recursive-cell destructors, and the
 Product path decoder;
+idtoequiv_cat maps explicit Product/Sigma path normal forms to
+omega_equiv_product of the component idtoequiv_cat images;
 idtoequiv_cat maps reflexive paths to omega_equiv_refl;
 CatUnivalence, equivtoid_cat, and global cat_univalence are active;
 Cat_cat receives the global interface;
@@ -2731,6 +2780,8 @@ grpd_equiv_path, iso_evidence_path, and omega_equiv_path compute on reflexive
 evidence;
 omega_equiv_path computes on explicit Product omega-equivalence evidence,
 exposing the Sigma/Product path normal form via const_pathover;
+the explicit reflexive Product/Sigma path maps forward to
+omega_equiv_refl(Product_cat(A,B),(x,y));
 broader constructor-specific categorical computation and strict cancellation
 remain deferred.
 ```

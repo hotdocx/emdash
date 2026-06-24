@@ -312,6 +312,60 @@ assert [A B : Cat]
       (@omega_equiv_path B y0 y1 eB);
 
 assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (pA : τ (x0 = x1))
+  (pB : τ (@PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x0 x1 pA y0 y1)) ⊢
+  @idtoequiv_cat
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@Struct_sigma
+      (@= (Obj A) x0 x1)
+      (λ p : τ (@= (Obj A) x0 x1),
+        @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x0 x1 p y0 y1)
+      pA
+      pB)
+  ≡ @omega_equiv_product
+      A
+      B
+      x0
+      x1
+      y0
+      y1
+      (@idtoequiv_cat A x0 x1 pA)
+      (@idtoequiv_cat
+        B
+        y0
+        y1
+        (@const_pathover_path
+          (Obj A)
+          (Obj B)
+          x0
+          x1
+          y0
+          y1
+          pA
+          pB));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @idtoequiv_cat
+    (Product_cat A B)
+    (Struct_sigma x y)
+    (Struct_sigma x y)
+    (@Struct_sigma
+      (@= (Obj A) x x)
+      (λ p : τ (@= (Obj A) x x),
+        @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x x p y y)
+      (eq_refl x)
+      (@pathover_refl (Obj A) (λ _ : τ (Obj A), Obj B) x y))
+  ≡ @omega_equiv_refl
+      (Product_cat A B)
+      (Struct_sigma x y);
+
+assert [A B : Cat]
   (x : τ (Obj A))
   (y : τ (Obj B)) ⊢
   @omega_equiv_product
@@ -627,6 +681,13 @@ assert [A B : Grpd]
   [u v : τ B]
   (q : τ (u = v)) ⊢
   @const_pathover A B x x u v (eq_refl x) q
+  ≡ q;
+
+assert [A B : Grpd]
+  [x : τ A]
+  [u v : τ B]
+  (q : τ (@PathOver A (λ _ : τ A, B) x x (eq_refl x) u v)) ⊢
+  @const_pathover_path A B x x u v (eq_refl x) q
   ≡ q;
 
 assert [A B : Grpd]

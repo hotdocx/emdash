@@ -581,6 +581,29 @@ symbol const_pathover
     v
     q;
 
+// Constant-family pathover elimination: the fibre component of a path over a
+// constant family can be read back as an ordinary path in the constant fibre.
+symbol const_pathover_path
+  [A B : Grpd]
+  [x y : τ A]
+  [u v : τ B]
+  (p : τ (x = y))
+  (q : τ (@PathOver A (λ _ : τ A, B) x y p u v))
+  : τ (u = v)
+≔ @ind_eqr A y
+    (λ x : τ A, λ p : τ (x = y),
+      @Pi_grpd B (λ u : τ B,
+        @Pi_grpd B (λ v : τ B,
+          @Pi_grpd (@PathOver A (λ _ : τ A, B) x y p u v)
+            (λ _ : τ (@PathOver A (λ _ : τ A, B) x y p u v),
+              u = v))))
+    (λ u : τ B, λ v : τ B, λ q : τ (@PathOver A (λ _ : τ A, B) y y (eq_refl y) u v), q)
+    x
+    p
+    u
+    v
+    q;
+
 symbol Function_grpd
   (A B : Grpd)
   : Grpd
@@ -3225,6 +3248,33 @@ rule @omega_equiv_path
         $y1
         (@omega_equiv_path $A $x0 $x1 $eA)
         (@omega_equiv_path $B $y0 $y1 $eB));
+
+rule @idtoequiv_cat
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (Struct_sigma $pA $pB)
+  ↪ @omega_equiv_product
+      $A
+      $B
+      $x0
+      $x1
+      $y0
+      $y1
+      (@idtoequiv_cat $A $x0 $x1 $pA)
+      (@idtoequiv_cat
+        $B
+        $y0
+        $y1
+        (@const_pathover_path
+          (Obj $A)
+          (Obj $B)
+          $x0
+          $x1
+          $y0
+          $y1
+          $pA
+          $pB));
 
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.
