@@ -59,10 +59,16 @@ Sigma/Product path normal form whose base component is
 `omega_equiv_path(eB)`. The Product forward dual is now promoted as well:
 `const_pathover_path` reads a constant-family `PathOver` back as an ordinary
 fibre path, and `idtoequiv_cat` maps explicit Product/Sigma path normal forms
-to `omega_equiv_product` of the two component forward maps. The `Cat_cat`
-univalence interface is available immediately through the global instance;
-broader constructor-specific computation and universe-specific computation
-remain deferred. No generic
+to `omega_equiv_product` of the two component forward maps. The provisional
+1-categorical staging layer now has the matching narrow Product slice:
+`iso_evidence_product` packages component isomorphism evidence, exposes
+forward and inverse arrows componentwise, `iso_evidence_path` decodes it to
+the Product/Sigma path normal form, and `idtoiso_cat` maps explicit
+Product/Sigma paths back to `iso_evidence_product`. Its inverse-proof
+projection computation is deliberately deferred until a concrete consumer
+needs it. The `Cat_cat` univalence interface is available immediately through
+the global instance; broader constructor-specific computation and
+universe-specific computation remain deferred. No generic
 `HomComparison` symbol from this report has yet been promoted. The existing
 equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
 remain active. Focused probes have confirmed derivability of the covariant
@@ -2416,7 +2422,8 @@ omega_equiv_path
        (omega_equiv_path(B,y0,y1,eB))).
 ```
 
-The warning-enabled inventory is now 1,135 warnings: 974 unjoinable
+At this decoder checkpoint the warning-enabled inventory was 1,135 warnings:
+974 unjoinable
 critical-pair diagnostics and 161 replaceable-pattern-variable diagnostics.
 The single new critical pair is the expected overlap between this Product
 decoder and the existing reflexive collapse:
@@ -2447,6 +2454,44 @@ The active checks cover the general explicit Sigma path normal form and the
 reflexive explicit Sigma path, which reduces all the way to
 `omega_equiv_refl(Product_cat(A,B),(x,y))`. Warning summary after promotion
 remains 1,135 warnings, so this forward rule adds no warning-count delta.
+
+2026-06-25 1-categorical Product staging extension status: promoted. A
+full-file probe confirmed the narrowed Product isomorphism-evidence slice:
+
+```text
+iso_evidence_product(iA,iB)
+  : IsoEvidence(Product_cat(A,B), (x0,y0), (x1,y1));
+
+iso_evidence_to(iso_evidence_product(iA,iB))
+  ↪ (iso_evidence_to(iA), iso_evidence_to(iB));
+
+iso_evidence_from(iso_evidence_product(iA,iB))
+  ↪ (iso_evidence_from(iA), iso_evidence_from(iB));
+
+iso_evidence_path(iso_evidence_product(iA,iB))
+  ↪ (iso_evidence_path(iA),
+     const_pathover(iso_evidence_path(iA), iso_evidence_path(iB)));
+
+idtoiso_cat(Product_cat(A,B), (x0,y0), (x1,y1), (pA,pB))
+  ↪ iso_evidence_product(
+      idtoiso_cat(A,x0,x1,pA),
+      idtoiso_cat(B,y0,y1,const_pathover_path(pA,pB))).
+```
+
+The inverse-proof projections of `iso_evidence_product` are intentionally
+deferred. A broader probe showed they typecheck, but adding them now would add
+two more observational-boundary critical-pair diagnostics against the
+reflexive collapse. Since the 1-categorical iso layer is only a staging
+approximation, the useful skeleton is the forward/inverse arrow computation
+and the path/idto computation.
+
+Warning summary after this narrower promotion is 1,136 warnings: 975
+unjoinable critical-pair diagnostics and 161 replaceable-pattern-variable
+diagnostics. The single new critical pair is the expected analogue of the
+omega Product decoder boundary: `iso_evidence_path` on
+`iso_evidence_product(iso_evidence_refl, iso_evidence_refl)` can either expose
+the Product/Sigma path normal form first or first collapse to
+`iso_evidence_refl(Product_cat(_,_),_)`.
 
 ## Rewrite And Unification Discipline
 
@@ -2648,13 +2693,13 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-SHAPED-TRANSPORT` | deferred abstraction | `UNI-EQ-COMPUTE`, stable operational `idto*` constructor cases | repeated constructor-specific equality eliminators appear | Factor validated operational `idto*` cases into shaped `ind_eq`/`ind_eqr` transport rules for recognizable motives, such as product motives factoring through projections; do not require this before the direct univalence skeleton computes. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
 | `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
-| `UNI-CAT-ISO` | promoted provisional 1-truncated staging layer | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | Restrict or replace by `IsOneTruncatedCat(C) -> CatIsoUnivalence(C)`/`OneCat` later; do not identify it with final `OmegaEquiv`. |
+| `UNI-CAT-ISO` | promoted provisional 1-truncated staging layer with Product closure | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | `iso_evidence_product`, Product `iso_evidence_path`, and Product `idtoiso_cat` are active for explicit Product/Sigma paths; inverse-proof projections are deferred. Restrict or replace by `IsOneTruncatedCat(C) -> CatIsoUnivalence(C)`/`OneCat` later; do not identify it with final `OmegaEquiv`. |
 | `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Continue selected constructor closures incrementally; `Path_cat`, `Op_cat`, and explicit `Product_cat` closure are active before functor/category-universe computation. |
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
-| `UNI-PRODUCT-CAT-CLOSURE` | destructor, decoder, and forward-idto slices promoted 2026-06-24/25 | promoted `UNI-OMEGA`, product category core, `UNI-PATHOVER` | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; `omega_equiv_path(omega_equiv_product(eA,eB))` exposes the Product/Sigma path normal form through `const_pathover`; `idtoequiv_cat` maps explicit Product/Sigma path normal forms back to `omega_equiv_product` through `const_pathover_path`; opaque product-object eta remains later. |
+| `UNI-PRODUCT-CAT-CLOSURE` | omega and 1-categorical staging Product slices promoted 2026-06-24/25 | promoted `UNI-OMEGA`, product category core, `UNI-PATHOVER` | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; `omega_equiv_path(omega_equiv_product(eA,eB))` exposes the Product/Sigma path normal form through `const_pathover`; `idtoequiv_cat` maps explicit Product/Sigma path normal forms back to `omega_equiv_product` through `const_pathover_path`; the provisional `IsoEvidence` layer has the analogous forward/inverse/path/idto skeleton. Opaque product-object eta remains later. |
 | `UNI-EQ-COMPUTE` | first Sigma slice promoted 2026-06-25 | `UNI-SIGMA-VIEW`, `UNI-PATHOVER` | direct Pi equality, Product/Sigma decoder computation, or more constructor paths are consumed | `=` is injective; Sigma equality reduces to `SigmaPathView`; `eq_refl` remains eliminator-visible; `sigma_Fst`/`sigma_Snd` projection rules expose reflexive Sigma components. Next, probe direct Pi equality and constructor-specific equality decoding only when consumed. |
-| `UNI-OPERATIONAL-DECODE` | specified-inverse skeleton and first Product computations promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. `type_equiv_refl` and `iso_evidence_refl` are now stable heads with projection rules, so all three reverse decoders compute on reflexive evidence. Product omega-equivalence now has both reverse decoding and forward `idtoequiv_cat` computation for explicit Product/Sigma path normal forms. |
+| `UNI-OPERATIONAL-DECODE` | specified-inverse skeleton and first Product computations promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. `type_equiv_refl` and `iso_evidence_refl` are now stable heads with projection rules, so all three reverse decoders compute on reflexive evidence. Product omega-equivalence has both reverse decoding and forward `idtoequiv_cat` computation for explicit Product/Sigma path normal forms; Product `IsoEvidence` has the analogous staging computation, except inverse-proof projections remain deferred. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
@@ -2680,9 +2725,10 @@ the report labels ua_grpd as an operational assumption.
 | Product/Sigma/Pi constructor equivalence skeleton | promoted for Product, same-base Sigma, and same-domain Pi | `IsEquivMap` witnesses are capabilities until Sigma/Pi path algebra can derive them |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
 | generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
-| 1-categorical `CatIsoUnivalence` staging | promoted | ordinary iso/path coherence beyond reflexivity remains capability-driven |
+| 1-categorical `CatIsoUnivalence` staging | promoted with Product forward/inverse/path/idto skeleton | ordinary iso/path coherence beyond reflexivity remains capability-driven; Product inverse-proof projections are deferred |
 | primitive recursive `OmegaEquiv` interface | promoted with reflexivity, opposite closure, and explicit Product closure | further closure operations and constructor-specific destructor computation |
 | Product omega-equivalence path decoder and forward `idtoequiv_cat` | promoted | expected critical-pair boundary against Product reflexive collapse; opaque product-object eta remains deferred |
+| Product `IsoEvidence` staging decoder and forward `idtoiso_cat` | promoted | expected critical-pair boundary against Product reflexive collapse; inverse-proof projections deferred |
 | general `OmegaEquiv` corecursor/productivity checking | deferred/optional | Lambdapi has no native generated codata checker |
 | explicit `CatUnivalence(C)` | promoted | coherence and constructor ownership |
 | global univalence for every `C` | promoted as operational assumption | model/universe interpretation |
@@ -2754,6 +2800,12 @@ The first categorical-univalence skeleton is complete when:
 ```text
 idtoiso_cat maps reflexive paths to iso_evidence_refl;
 CatIsoUnivalence and global cat_iso_univalence are active staging interfaces;
+iso_evidence_product closes ordinary isomorphism evidence under explicit
+Product objects at the staging layer;
+Product iso evidence exposes forward/inverse arrows componentwise, decodes to
+the Product/Sigma path normal form through iso_evidence_path, and is built by
+idtoiso_cat from explicit Product/Sigma path normal forms;
+Product iso inverse-proof projection computation remains deferred;
 OmegaEquiv has primitive destructors;
 omega_equiv_refl computes through to/left/right destructors and recursive
 left/right cells;

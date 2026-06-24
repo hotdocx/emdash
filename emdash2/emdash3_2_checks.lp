@@ -217,6 +217,137 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
 assert [A B : Cat]
   [x0 x1 : τ (Obj A)]
   [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1)) ⊢
+  @iso_evidence_product A B x0 x1 y0 y1 iA iB
+  : τ (IsoEvidence
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1));
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1)) ⊢
+  @iso_evidence_to
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@iso_evidence_product A B x0 x1 y0 y1 iA iB)
+  ≡ @Struct_sigma
+      (Obj (Hom_cat A x0 x1))
+      (λ _ : τ (Obj (Hom_cat A x0 x1)), Obj (Hom_cat B y0 y1))
+      (@iso_evidence_to A x0 x1 iA)
+      (@iso_evidence_to B y0 y1 iB);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1)) ⊢
+  @iso_evidence_from
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@iso_evidence_product A B x0 x1 y0 y1 iA iB)
+  ≡ @Struct_sigma
+      (Obj (Hom_cat A x1 x0))
+      (λ _ : τ (Obj (Hom_cat A x1 x0)), Obj (Hom_cat B y1 y0))
+      (@iso_evidence_from A x0 x1 iA)
+      (@iso_evidence_from B y0 y1 iB);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1)) ⊢
+  sigma_Fst
+    (@iso_evidence_path
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@iso_evidence_product A B x0 x1 y0 y1 iA iB))
+  ≡ @iso_evidence_path A x0 x1 iA;
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1)) ⊢
+  sigma_Snd
+    (@iso_evidence_path
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1)
+      (@iso_evidence_product A B x0 x1 y0 y1 iA iB))
+  ≡ @const_pathover
+      (Obj A)
+      (Obj B)
+      x0
+      x1
+      y0
+      y1
+      (@iso_evidence_path A x0 x1 iA)
+      (@iso_evidence_path B y0 y1 iB);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (pA : τ (x0 = x1))
+  (pB : τ (@PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x0 x1 pA y0 y1)) ⊢
+  @idtoiso_cat
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@Struct_sigma
+      (@= (Obj A) x0 x1)
+      (λ p : τ (@= (Obj A) x0 x1),
+        @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x0 x1 p y0 y1)
+      pA
+      pB)
+  ≡ @iso_evidence_product
+      A
+      B
+      x0
+      x1
+      y0
+      y1
+      (@idtoiso_cat A x0 x1 pA)
+      (@idtoiso_cat
+        B
+        y0
+        y1
+        (@const_pathover_path
+          (Obj A)
+          (Obj B)
+          x0
+          x1
+          y0
+          y1
+          pA
+          pB));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @idtoiso_cat
+    (Product_cat A B)
+    (Struct_sigma x y)
+    (Struct_sigma x y)
+    (@Struct_sigma
+      (@= (Obj A) x x)
+      (λ p : τ (@= (Obj A) x x),
+        @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x x p y y)
+      (eq_refl x)
+      (@pathover_refl (Obj A) (λ _ : τ (Obj A), Obj B) x y))
+  ≡ @iso_evidence_refl
+      (Product_cat A B)
+      (Struct_sigma x y);
+
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
   (eA : τ (OmegaEquiv A x0 x1))
   (eB : τ (OmegaEquiv B y0 y1)) ⊢
   @omega_equiv_product A B x0 x1 y0 y1 eA eB

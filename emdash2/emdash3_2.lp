@@ -3114,6 +3114,104 @@ rule @comp_fapp0
       (@comp_fapp0 $B $u $v $w $g2 $f2);
 
 /*
+  Ordinary isomorphism evidence is closed under explicit product-category
+  pairs. This is the 1-categorical staging analogue of `omega_equiv_product`.
+  The inverse-proof projections are intentionally left opaque until a
+  consumer needs them; the first staging slice exposes the forward/inverse
+  arrows and the path decoder.
+*/
+injective symbol iso_evidence_product
+  [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (iA : τ (IsoEvidence A x0 x1))
+  (iB : τ (IsoEvidence B y0 y1))
+  : τ (IsoEvidence
+      (Product_cat A B)
+      (Struct_sigma x0 y0)
+      (Struct_sigma x1 y1));
+
+rule @iso_evidence_product
+      $A
+      $B
+      $x
+      $x
+      $y
+      $y
+      (@iso_evidence_refl $A $x)
+      (@iso_evidence_refl $B $y)
+  ↪ @iso_evidence_refl
+      (Product_cat $A $B)
+      (Struct_sigma $x $y);
+
+rule sigma_Fst
+      (@iso_evidence_product $A $B $x0 $x1 $y0 $y1 $iA $iB)
+  ↪ Struct_sigma
+      (@iso_evidence_to $A $x0 $x1 $iA)
+      (@iso_evidence_to $B $y0 $y1 $iB);
+
+rule sigma_Fst
+      (sigma_Snd
+        (@iso_evidence_product $A $B $x0 $x1 $y0 $y1 $iA $iB))
+  ↪ Struct_sigma
+      (@iso_evidence_from $A $x0 $x1 $iA)
+      (@iso_evidence_from $B $y0 $y1 $iB);
+
+rule @iso_evidence_path
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (@iso_evidence_product $A $B $x0 $x1 $y0 $y1 $iA $iB)
+  ↪ @Struct_sigma
+      (@= (Obj $A) $x0 $x1)
+      (λ p : τ (@= (Obj $A) $x0 $x1),
+        @PathOver
+          (Obj $A)
+          (λ _ : τ (Obj $A), Obj $B)
+          $x0
+          $x1
+          p
+          $y0
+          $y1)
+      (@iso_evidence_path $A $x0 $x1 $iA)
+      (@const_pathover
+        (Obj $A)
+        (Obj $B)
+        $x0
+        $x1
+        $y0
+        $y1
+        (@iso_evidence_path $A $x0 $x1 $iA)
+        (@iso_evidence_path $B $y0 $y1 $iB));
+
+rule @idtoiso_cat
+      (Product_cat $A $B)
+      (Struct_sigma $x0 $y0)
+      (Struct_sigma $x1 $y1)
+      (Struct_sigma $pA $pB)
+  ↪ @iso_evidence_product
+      $A
+      $B
+      $x0
+      $x1
+      $y0
+      $y1
+      (@idtoiso_cat $A $x0 $x1 $pA)
+      (@idtoiso_cat
+        $B
+        $y0
+        $y1
+        (@const_pathover_path
+          (Obj $A)
+          (Obj $B)
+          $x0
+          $x1
+          $y0
+          $y1
+          $pA
+          $pB));
+
+/*
   Omega-equivalence is closed under explicit product-category pairs.
 
   This first slice targets visible `Struct_sigma` endpoints. Opaque product
