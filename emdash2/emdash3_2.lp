@@ -337,7 +337,7 @@ builtin "P" ≔ τ;
 injective symbol = : Π [a: Grpd], τ a → τ a → Grpd;
 notation = infix 10;
 
-constant symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
+injective symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
 
 // Right-based dependent path induction. This supplies the path-dependent
 // eliminator needed for contractible identity fibres without assuming UIP.
@@ -409,19 +409,20 @@ symbol pathover_refl
   : τ (@PathOver A P x x (eq_refl x) u u)
 ≔ eq_refl u;
 
-// Dependent action on paths. This is intentionally primitive at first: the
-// current transport-form equality eliminator gives the required reflexive
-// computation directly, while full proof-time agreement with derived J forms
-// remains a separate univalence side task.
+// Dependent action on paths, derived from right-based path induction.
 symbol eq_apd
   [A : Grpd]
   [P : τ A → Grpd]
   (f : Π x : τ A, τ (P x))
   [x y : τ A]
   (p : τ (x = y))
-  : τ (@PathOver A P x y p (f x) (f y));
-
-rule @eq_apd _ _ $f $x $x (eq_refl $x) ↪ eq_refl ($f $x);
+  : τ (@PathOver A P x y p (f x) (f y))
+≔ @ind_eqr A y
+    (λ x : τ A, λ p : τ (x = y),
+      @PathOver A P x y p (f x) (f y))
+    (eq_refl (f y))
+    x
+    p;
 
 builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;
@@ -530,6 +531,18 @@ rule sigma_Fst (@eq_refl (@Σ_ $A _) $u)
 
 rule sigma_Snd (@eq_refl (@Σ_ $A $P) $u)
   ↪ @pathover_refl $A $P (sigma_Fst $u) (sigma_Snd $u);
+
+// Proof-time Sigma reflexivity eta for the specialized `eq_refl` head. This
+// does not make `eq_refl` runtime-convertible with `sigma_path_refl`; it only
+// lets reflexivity proofs elaborate between the generic reflexive path and the
+// Sigma path-view pair.
+unif_rule
+  @eq_refl (@Σ_ $A $P) $u
+  ≡ @Struct_sigma _ _ $x $y
+  ↪ [
+      $x ≡ @eq_refl $A (@sigma_Fst $A $P $u);
+      $y ≡ @pathover_refl $A $P (@sigma_Fst $A $P $u) (@sigma_Snd $A $P $u)
+    ];
 
 symbol sigma_path_encode
   [A : Grpd]
@@ -680,15 +693,6 @@ symbol PiPathView
 rule @= (@Pi_grpd $A $B) $f $g
   ↪ @PiPathView $A $B $f $g;
 
-injective symbol pi_path_apply
-  [A : Grpd]
-  [B : τ A → Grpd]
-  [f g : Π x : τ A, τ (B x)]
-  (w : τ (@PiPathView A B f g))
-  (x0 x1 : τ A)
-  (p : τ (x0 = x1))
-  : τ (@PathOver A B x0 x1 p (f x0) (g x1));
-
 symbol pi_path_refl
   [A : Grpd]
   [B : τ A → Grpd]
@@ -696,15 +700,7 @@ symbol pi_path_refl
   : τ (@PiPathView A B f f)
 ≔ @eq_refl (@Pi_grpd A B) f;
 
-rule @pi_path_apply
-      $A
-      $B
-      $f
-      $f
-      (@eq_refl (@Pi_grpd $A $B) $f)
-      $x0
-      $x1
-      $p
+rule @eq_refl (@Pi_grpd $A $B) $f $x0 $x1 $p
   ↪ @eq_apd $A $B $f $x0 $x1 $p;
 
 symbol pi_path_encode

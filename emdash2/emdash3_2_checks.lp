@@ -688,10 +688,22 @@ assert [A : Grpd]
   ≡ @eq_refl (@Σ_ A P) (@Struct_sigma A P x a);
 
 assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  eq_refl (@eq_refl (@Σ_ A P) u)
+  : τ (@eq_refl (@Σ_ A P) u = sigma_path_refl u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  eq_refl (@eq_refl (@Σ_ A P) u)
+  : τ (sigma_path_refl u = @eq_refl (@Σ_ A P) u);
+
+assert [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x))
   (x : τ A) ⊢
-  @pi_path_apply A B f f (pi_path_refl f) x x (eq_refl x)
+  @eq_refl (@Pi_grpd A B) f x x (eq_refl x)
   ≡ eq_refl (f x);
 
 assert [A : Grpd]
@@ -699,7 +711,7 @@ assert [A : Grpd]
   (f : Π x : τ A, τ (B x))
   (x0 x1 : τ A)
   (p : τ (x0 = x1)) ⊢
-  @pi_path_apply A B f f (@eq_refl (@Pi_grpd A B) f) x0 x1 p
+  @eq_refl (@Pi_grpd A B) f x0 x1 p
   ≡ @eq_apd A B f x0 x1 p;
 
 assert [A : Grpd]
@@ -707,8 +719,15 @@ assert [A : Grpd]
   (f : Π x : τ A, τ (B x))
   (x0 x1 : τ A)
   (p : τ (x0 = x1)) ⊢
-  @pi_path_apply A B f f (pi_path_refl f) x0 x1 p
+  pi_path_refl f x0 x1 p
   ≡ @eq_apd A B f x0 x1 p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  @eq_refl (@Pi_grpd A B) f
+  ≡ λ x0 : τ A, λ x1 : τ A, λ p : τ (x0 = x1),
+      @eq_apd A B f x0 x1 p;
 
 assert [A : Grpd]
   [B : τ A → Grpd]
