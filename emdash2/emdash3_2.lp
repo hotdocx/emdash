@@ -677,23 +677,35 @@ symbol PiPathView
             (λ p : τ (x0 = x1),
               @PathOver A B x0 x1 p (f x0) (g x1))));
 
-symbol pi_path_apply
+rule @= (@Pi_grpd $A $B) $f $g
+  ↪ @PiPathView $A $B $f $g;
+
+injective symbol pi_path_apply
   [A : Grpd]
   [B : τ A → Grpd]
   [f g : Π x : τ A, τ (B x)]
   (w : τ (@PiPathView A B f g))
   (x0 x1 : τ A)
   (p : τ (x0 = x1))
-  : τ (@PathOver A B x0 x1 p (f x0) (g x1))
-≔ w x0 x1 p;
+  : τ (@PathOver A B x0 x1 p (f x0) (g x1));
 
 symbol pi_path_refl
   [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x))
   : τ (@PiPathView A B f f)
-≔ λ x0 : τ A, λ x1 : τ A, λ p : τ (x0 = x1),
-  @eq_apd A B f x0 x1 p;
+≔ @eq_refl (@Pi_grpd A B) f;
+
+rule @pi_path_apply
+      $A
+      $B
+      $f
+      $f
+      (@eq_refl (@Pi_grpd $A $B) $f)
+      $x0
+      $x1
+      $p
+  ↪ @eq_apd $A $B $f $x0 $x1 $p;
 
 symbol pi_path_encode
   [A : Grpd]

@@ -117,6 +117,8 @@ AREAS: list[Area] = [
             "ind_eqr",
             "sigma_ind",
             "Pi_grpd",
+            "PiPathView",
+            "pi_path",
             "Function_grpd",
             "IsContr",
             "HFiber",

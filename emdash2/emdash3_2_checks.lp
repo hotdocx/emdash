@@ -696,9 +696,58 @@ assert [A : Grpd]
 
 assert [A : Grpd]
   [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1)) ⊢
+  @pi_path_apply A B f f (@eq_refl (@Pi_grpd A B) f) x0 x1 p
+  ≡ @eq_apd A B f x0 x1 p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1)) ⊢
+  @pi_path_apply A B f f (pi_path_refl f) x0 x1 p
+  ≡ @eq_apd A B f x0 x1 p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  pi_path_refl f
+  ≡ @eq_refl (@Pi_grpd A B) f;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x)) ⊢
   @pi_path_encode A B f f (eq_refl f)
   ≡ pi_path_refl f;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f g : Π x : τ A, τ (B x)) ⊢
+  @= (@Pi_grpd A B) f g
+  ≡ @PiPathView A B f g;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f g : Π x : τ A, τ (B x))
+  (w : τ (@PiPathView A B f g)) ⊢
+  w
+  : τ (@= (@Pi_grpd A B) f g);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (M : τ (@Pi_grpd A B) → Grpd)
+  (u : τ (M f)) ⊢
+  @ind_eq
+    (@Pi_grpd A B)
+    f
+    f
+    (@eq_refl (@Pi_grpd A B) f)
+    M
+    u
+  ≡ u;
 
 // Groupoid-level Pi and contractible-fibre type equivalence infrastructure.
 assert [A : Grpd] [B : τ A → Grpd] ⊢
