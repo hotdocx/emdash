@@ -23,12 +23,15 @@ slice is also promoted: `SigmaPathView`, `sigma_path_base`,
 direct equality-computation slice is also promoted: `=` is now an injective
 rewrite head, Sigma equality reduces to `SigmaPathView`, Pi equality reduces
 to `PiPathView`, and the projected components of reflexive Sigma paths compute
-while `eq_refl` itself remains eliminator-visible. The first Pi/function
-path-view slice is promoted as well: `PiPathView`, direct applied-`eq_refl`
-computation for reflexive Pi paths, `pi_path_refl` as a compatibility alias
-for `eq_refl`, reflexive `pi_path_encode`, and direct Pi equality
-computation. `pi_path_apply` is deliberately not a stable owner in the current
-design. The first
+while `eq_refl` itself remains eliminator-visible for Sigma and generic
+reflexivity. The first Pi/function path-view slice is promoted as well:
+`PiPathView`, fully-applied reflexive Pi observation through `eq_apd`,
+`pi_path_refl` as a compatibility alias for `eq_refl`, identity/coercion
+`pi_path_encode`, and direct Pi equality computation. The generic reflexive
+`ind_eq` rule at Pi remains active because `eq_refl(Pi_grpd(A,B),f)` itself is
+not rewritten; only its full related-input application is observed.
+`pi_path_apply` is deliberately not a stable owner in the current design. The
+first
 constructor-specific computational-univalence skeleton is now promoted:
 stable `Product_grpd`, `Product_pair_grpd`, stable `product_type_equiv`,
 `sigma_type_equiv_same_base`, and `pi_type_equiv_same_domain`, each with
@@ -168,19 +171,28 @@ rewrite SOP made the following decisions more precise:
     to observational/constructor-computational forward maps. The generic
     `equivtoid*` inverse-selection wrappers can remain semantic compatibility
     interfaces.
-15. The immediate equality/reflexivity architecture is projection/application
-    based. Keep `eq_refl` eliminator-visible at runtime; make `eq_refl` an
-    injective head only so focused observer rules can compute. For Pi, the
-    observer is ordinary function application:
+15. The immediate equality/reflexivity architecture is
+    projection/application based. Keep `eq_refl` eliminator-visible at
+    runtime for Sigma, Pi, and generic reflexivity; make `eq_refl` an
+    injective head so focused constructor observers can compute. For Pi, the
+    promoted rule is fully applied:
 
     ```text
-    eq_refl(Pi_grpd(A,B),f)(x0,x1,p) -> eq_apd(f,p).
+    eq_refl(Pi_grpd(A,B),f)(x0,x1,p) -> eq_apd(f,x0,x1,p).
     ```
 
-    With Lambdapi function eta, this makes reflexive Pi paths convertible to
-    the explicit related-input lambda without a separate `pi_path_apply` head.
-    For Sigma/Product, keep projection-consumer rules on `sigma_Fst` and
-    `sigma_Snd`.
+    A 2026-06-26 probe also showed that the partial first-application rule
+    `eq_refl(Pi_grpd(A,B),f)(x0) -> eq_apd(f,x0)` and the fully-applied rule
+    both make `eq_refl(Pi_grpd(A,B),f)` convertible to `eq_apd(f)` by
+    Lambdapi eta, and both even prove the section-level comparison
+    `eq_refl(Pi_grpd(A,B)) ≡ eq_apd(A,B)`. The fully-applied rule is promoted
+    because it is the narrower and more conventional observer: it keeps
+    partial applications of `eq_refl(f)` intact unless a concrete
+    related-input path observation is requested. The partial `$x0` rule is
+    recorded as feasible but not promoted. The generic reflexive `ind_eq`
+    regression at Pi remains valid. For Sigma/Product, keep
+    projection-consumer rules on `sigma_Fst` and `sigma_Snd`; do not rewrite
+    Sigma `eq_refl` itself.
 16. `eq_apd` is no longer intended to be primitive. A 2026-06-25/26 full-core
     probe showed that the right-based eliminator definition typechecks:
 
@@ -189,7 +201,7 @@ rewrite SOP made the following decisions more precise:
       ind_eqr (lambda x p. PathOver(P,x,y,p,f x,f y)) (refl(f y)) p.
     ```
 
-    This remains compatible with the direct Pi applied-`eq_refl` rule.
+    This remains compatible with the fully-applied Pi `eq_refl` observer.
 17. Generic Sigma eta is not presently available in Lambdapi conversion and
     should not be simulated by a broad proof-time rule. Runtime eta headed by
     `Struct_sigma` is blocked because the generated inductive constructor is
@@ -311,24 +323,32 @@ equality normal form for Pi types: a `PiPathView` term is already a term of
 function extensionality, but transport/coherence over the resulting Pi path
 normal form.
 
-The promoted rule preserves reflexive equality induction:
+A focused 2026-06-25/26 review showed that the Sigma projection pattern
+transfers to Pi cleanly as a fully-applied observer rule, provided `eq_refl`
+is an injective rewrite head. The promoted reflexive Pi rule is:
 
 ```text
-ind_eq(eq_refl_f, M, u) ↪ u
+eq_refl(Pi_grpd(A,B), f)(x0,x1,p) ↪ eq_apd(f,x0,x1,p).
 ```
 
-because `eq_refl` itself is still not rewritten. A focused 2026-06-25/26
-review showed that the Sigma projection pattern transfers to Pi more cleanly
-through ordinary function application, provided `eq_refl` is an injective
-rewrite head. The promoted reflexive observation rule is:
+Lambdapi eta still proves the fixed-function and section-level comparisons
+against `eq_apd`, but runtime normalization keeps `eq_refl(f)` itself visible.
+Therefore the generic reflexive eliminator regression
+`ind_eq(eq_refl_f, M, u) ↪ u` still passes. The one-argument observer
+`eq_refl(f)(x0) -> eq_apd(f,x0)` was probed and is feasible, but is not
+promoted because it introduces partial `eq_apd` normal forms before any
+concrete path argument is observed.
 
-```text
-eq_refl(Pi_grpd(A,B), f)(x0, x1, p) ↪ eq_apd(f,p).
-```
+The 2026-06-26 probes also showed that `pi_path_encode` should not be
+induction-owned after direct Pi equality is active. Since
+`@= (@Pi_grpd A B) f g` already computes to `PiPathView(A,B,f,g)`,
+`pi_path_encode` is now the identity/coercion on its path argument. This keeps
+`pi_path_encode(eq_refl f)` computing to `pi_path_refl(f)` without requiring
+`pi_path_encode` to perform equality induction.
 
 The earlier `pi_path_apply` stable-head design is retired. `pi_path_refl(f)`
-remains a compatibility/readability alias for `eq_refl(f)`, so the single
-applied-`eq_refl` rule covers both spellings by unfolding and Lambdapi
+remains a compatibility/readability alias for `eq_refl(f)`, so the
+fully-applied Pi observer covers both spellings by unfolding and Lambdapi
 function eta.
 
 The corresponding univalence inverse-computation layer should be operational,
@@ -1131,14 +1151,16 @@ PiPathView(B,f,g)
        PathOver(B,p,f(x0),g(x1)).
 ```
 
-Its promoted computation includes reflexive application/encode and direct
-equality classification:
+Its promoted computation includes direct reflexive application, identity-style
+encode, and direct equality classification:
 
 ```text
 pi_path_refl(f) -> eq_refl(f);
-eq_refl(Pi_grpd(A,B),f)(x0,x1,p) -> eq_apd(f,p);
+eq_refl(Pi_grpd(A,B),f)(x0,x1,p) -> eq_apd(f,x0,x1,p);
+eq_refl(Pi_grpd(A,B),f) == eq_apd(f);      // by eta/conversion
+eq_refl(Pi_grpd(A,B)) == eq_apd(A,B);      // by eta/conversion
 pi_path_refl(f)(x,x,refl_x) -> refl_(f x);
-pi_path_encode(refl_f) -> pi_path_refl(f).
+pi_path_encode(refl_f) -> pi_path_refl(f).  // by identity/coercion
 @= (@Pi_grpd A B) f g -> PiPathView(A,B,f,g).
 ```
 
@@ -1156,20 +1178,25 @@ tmp/probes/univalence_pi_path_view_first_slice_probe.lp
 logs/probes/univalence_pi_path_view_first_slice_probe-20260624-161141.log
 logs/probes/univalence_pi_path_view_first_slice_probe-20260624-161154.log
 
+logs/probes/pi_rule_x0_probe-20260626-044533.log
+logs/probes/pi_rule_full_app_probe-20260626-044533.log
+logs/probes/pi_path_encode_identity_probe-20260626-043105.log
+
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 make catalog
 make warning-summary
 ```
 
-After promotion, `make warning-summary` remains:
+After the 2026-06-26 fully-applied Pi observer and identity-encode correction,
+`make warning-summary` reports:
 
 ```text
-1119 warnings = 958 unjoinable critical pairs + 161 replaceable patterns.
+1136 warnings = 975 unjoinable critical pairs + 161 replaceable patterns.
 ```
 
 The warning-enabled owner-position probes report no warning located at
 `sigma_path_intro`, `sigma_path_decode`, `PiPathView`, `pi_path_refl`,
-`pi_path_encode`, or the direct applied-`eq_refl` Pi rule.
+`pi_path_encode`, or the fully-applied Pi `eq_refl` observer.
 
 Implementation checkpoint 2026-06-24: the first constructor-specific
 computational-univalence skeleton landed.
@@ -1581,12 +1608,13 @@ This phase requires a groupoid-level Pi classifier and is not part of the
 first path-over slice.
 
 Current promoted boundary: `PiPathView`, `pi_path_refl` as `eq_refl`,
-reflexive `pi_path_encode`, direct applied-`eq_refl` computation, and direct
-Pi equality are active. The promoted equality rule is
+identity/coercion `pi_path_encode`, fully-applied Pi `eq_refl` observation,
+and direct Pi equality are active. The promoted equality rule is
 `@= (@Pi_grpd A B) f g ↪ PiPathView(A,B,f,g)`, not a separate
-`PiPathView -> f = g` decoder. Raw application
-`(eq_refl f) x0 x1 p` now computes to `eq_apd(f,p)` while the unapplied
-`eq_refl f` remains eliminator-visible.
+`PiPathView -> f = g` decoder. The specialized reflexive observation
+`(eq_refl f) x0 x1 p` computes to `eq_apd(f,x0,x1,p)`, while
+`eq_refl(Pi_grpd(A,B),f)` itself stays eliminator-visible and only compares
+to `eq_apd(f)` by eta.
 
 ## Minimal Groupoid Type-Former Infrastructure
 
@@ -2736,9 +2764,10 @@ warning-enabled full-file delta classified.
 2. Define `Function_grpd`, `IsContr`, `HFiber`, `IsEquivMap`, and `TypeEquiv`.
 3. Derive forward, inverse, inverse paths, and reflexivity.
 4. Defer symmetry and composition until Sigma/fibre path algebra is ready.
-5. Direct Pi equality computation and reflexive applied-`eq_refl` computation
+5. Direct Pi equality computation and fully-applied Pi `eq_refl` observation
    are now promoted under `UNI-EQ-COMPUTE`; the remaining Pi equality work is
-   transport/coherence beyond reflexivity.
+   shaped eliminator/transport computation for non-reflexive constructor paths
+   and coherence beyond the reflexive observer.
 
 Acceptance:
 
@@ -2850,7 +2879,7 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-TYPE-EQUIV` | first contractible-fibre slice promoted | promoted `UNI-GRPD-PI` | symmetry/composition are consumed | Probe the required Sigma/fibre path algebra; do not postulate strict cancellation. |
 | `UNI-UA-GRPD` | first computational rule and corrected Product groupoid univalence promoted | `UNI-TYPE-EQUIV` | more constructor-specific univalence computation is consumed | `grpd_equiv_path(product_type_equiv)` produces introduced `product_grpd_path` terms, and Product `idtoequiv_grpd` computes on those introduced paths. Arbitrary Product-universe paths are not decomposed. Extend reverse/forward closure beyond Product, same-base Sigma, and same-domain Pi; keep inverse cancellation propositional unless consumed. |
 | `UNI-SIGMA-VIEW` | componentwise intro and constructor-reflexive decode promoted | `UNI-PATHOVER` | Sigma-constructor univalence or eta is consumed | Keep generic encode/decode cancellation propositional unless a consumer needs judgmental beta/eta. |
-| `UNI-PI-VIEW` | related-input reflexive view/encode, direct applied-`eq_refl` computation, and direct equality promoted | `UNI-PATHOVER`, `UNI-GRPD-PI` | Pi-constructor univalence or non-reflexive projection computation is consumed | Direct Pi equality is active as `@= (@Pi_grpd A B) f g ↪ PiPathView(A,B,f,g)`. Do not add a separate `PiPathView -> f = g` decoder. `(eq_refl f) x0 x1 p` computes to `eq_apd(f,p)`, and `pi_path_refl(f)` is a compatibility alias for `eq_refl(f)`. `pi_path_apply` is retired. |
+| `UNI-PI-VIEW` | related-input reflexive view, identity/coercion encode, fully-applied Pi `eq_refl` observer, and direct equality promoted | `UNI-PATHOVER`, `UNI-GRPD-PI` | Pi-constructor univalence or non-reflexive projection computation is consumed | Direct Pi equality is active as `@= (@Pi_grpd A B) f g ↪ PiPathView(A,B,f,g)`. Do not add a separate `PiPathView -> f = g` decoder. `(eq_refl(Pi_grpd(A,B),f)) x0 x1 p` computes to `eq_apd(f,x0,x1,p)`, and `pi_path_refl(f)` is a compatibility alias for `eq_refl(f)`. `pi_path_encode` is identity/coercion across the direct equality normal form. Generic reflexive `ind_eq` at Pi remains active because `eq_refl(f)` itself is not rewritten. `pi_path_apply` is retired. |
 | `UNI-CTOR-EQUIV` | stable Product and forward-computing same-base Sigma/same-domain Pi skeleton promoted | `UNI-UA-GRPD`, `UNI-SIGMA-VIEW`, `UNI-PI-VIEW` | full proof witnesses, reverse decoders, or base-changing constructors are consumed | `Product_grpd`, `product_type_equiv`, and `product_grpd_path` are stable heads for the valid componentwise Product path direction. Derive or refine `*_is_equiv` witnesses from observational path algebra; add Sigma/Pi reverse decoders and base-changing Sigma/Pi only after transport/pathover computation is stable. |
 | `UNI-SHAPED-TRANSPORT` | deferred abstraction | `UNI-EQ-COMPUTE`, stable operational `idto*` constructor cases | repeated constructor-specific equality eliminators appear | Factor validated operational `idto*` cases into shaped `ind_eq`/`ind_eqr` transport rules for recognizable motives, such as product motives factoring through projections; do not require this before the direct univalence skeleton computes. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
@@ -2860,7 +2889,7 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
 | `UNI-OP-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | opposite-category equivalence computation is consumed | `omega_equiv_op : OmegaEquiv(C,x,y) -> OmegaEquiv(Op_cat C,y,x)` computes through forward/inverse/cell destructors; same-orientation derived opposite equivalence remains later. |
 | `UNI-PRODUCT-CAT-CLOSURE` | omega and 1-categorical staging Product slices promoted 2026-06-24/25 | promoted `UNI-OMEGA`, product category core, `UNI-PATHOVER` | product-category omega-equivalence computation is consumed | `omega_equiv_product` handles explicit product pairs componentwise, including recursive cells; `omega_equiv_path(omega_equiv_product(eA,eB))` exposes the Product/Sigma path normal form through `const_pathover`; `idtoequiv_cat` maps explicit Product/Sigma path normal forms back to `omega_equiv_product` through `const_pathover_path`; the provisional `IsoEvidence` layer has the analogous forward/inverse/path/idto skeleton. Opaque product-object eta remains later. |
-| `UNI-EQ-COMPUTE` | Sigma and Pi slices promoted 2026-06-25/26 | `UNI-SIGMA-VIEW`, `UNI-PI-VIEW`, `UNI-PATHOVER` | Product/Sigma/Pi decoder computation or more constructor paths are consumed | `=` and `eq_refl` are injective; Sigma equality reduces to `SigmaPathView`; Pi equality reduces to `PiPathView`; `eq_refl` remains eliminator-visible; `sigma_Fst`/`sigma_Snd` projection rules expose reflexive Sigma components; the targeted Sigma `eq_refl` unification bridge lets `sigma_path_refl` elaborate against generic reflexivity; direct application of reflexive Pi paths exposes `eq_apd`. |
+| `UNI-EQ-COMPUTE` | Sigma and Pi slices promoted 2026-06-25/26 | `UNI-SIGMA-VIEW`, `UNI-PI-VIEW`, `UNI-PATHOVER` | Product/Sigma/Pi decoder computation or more constructor paths are consumed | `=` and `eq_refl` are injective; Sigma equality reduces to `SigmaPathView`; Pi equality reduces to `PiPathView`; Sigma `eq_refl` remains eliminator-visible; `sigma_Fst`/`sigma_Snd` projection rules expose reflexive Sigma components; the targeted Sigma `eq_refl` unification bridge lets `sigma_path_refl` elaborate against generic reflexivity; fully-applied Pi `eq_refl` observation exposes `eq_apd` while preserving generic Pi reflexive elimination. |
 | `UNI-OPERATIONAL-DECODE` | specified-inverse skeleton and first Product computations promoted 2026-06-25 | `UNI-EQ-COMPUTE`, `UNI-OMEGA`, global univalence policy | path/equivalence round-trip computation or constructor-specific decoder computation is consumed | Established forward names `idtoequiv_grpd`, `idtoiso_cat`, and `idtoequiv_cat` are stable operational heads with reflexive rules; reverse heads `grpd_equiv_path`, `iso_evidence_path`, and `omega_equiv_path` plus `*ByDecoder` capabilities are active. `type_equiv_refl` and `iso_evidence_refl` are now stable heads with projection rules, so all three reverse decoders compute on reflexive evidence. Product computes at the groupoid-universe layer only for introduced componentwise paths generated by `product_type_equiv`/`product_grpd_path`; product-category omega and provisional `IsoEvidence` staging layers compute for explicit pair objects. Product `IsoEvidence` inverse-proof projections remain deferred. |
 | `UNI-OMEGA-COREC` | deferred/optional | `UNI-OMEGA` | a general user-facing corecursor is required | Specify productivity or external terminal-coalgebra semantics. |
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |

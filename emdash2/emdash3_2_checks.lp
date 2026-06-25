@@ -726,8 +726,12 @@ assert [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x)) ⊢
   @eq_refl (@Pi_grpd A B) f
-  ≡ λ x0 : τ A, λ x1 : τ A, λ p : τ (x0 = x1),
-      @eq_apd A B f x0 x1 p;
+  ≡ @eq_apd A B f;
+
+assert [A : Grpd]
+  [B : τ A → Grpd] ⊢
+  @eq_refl (@Pi_grpd A B)
+  ≡ @eq_apd A B;
 
 assert [A : Grpd]
   [B : τ A → Grpd]

@@ -709,10 +709,7 @@ symbol pi_path_encode
   [f g : Π x : τ A, τ (B x)]
   (p : τ (@= (@Pi_grpd A B) f g))
   : τ (@PiPathView A B f g)
-≔ ind_eq
-    p
-    (λ h : τ (@Pi_grpd A B), @PiPathView A B h g)
-    (pi_path_refl g);
+≔ p;
 
 symbol IsContr
   (X : Grpd)
