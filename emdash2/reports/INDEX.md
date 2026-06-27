@@ -41,6 +41,10 @@ decisions.
   groupoid paths, type equivalence, computational univalence,
   omega-categorical equivalence, explicit categorical-univalence capability,
   Yoneda internalization, and generic `HomComparison`.
+- `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
+  proposed subplan for the `UNI-DEFISO` migration: stable hom-action owners,
+  generic `hom_int` precomposition, Cat-specialized owner cleanup, and
+  factoring `ProfComparison` through `DefIso`.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
