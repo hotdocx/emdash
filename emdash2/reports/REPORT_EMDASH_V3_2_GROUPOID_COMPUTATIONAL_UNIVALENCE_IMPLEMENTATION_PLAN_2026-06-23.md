@@ -1,7 +1,7 @@
 # EMDASH v3.2 Groupoid And Computational Univalence Implementation Plan
 
 Date: 2026-06-23
-Last reviewed: 2026-06-26
+Last reviewed: 2026-06-27
 
 Plan-ID: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23
 Depends-On: none
@@ -81,11 +81,34 @@ Product/Sigma paths back to `iso_evidence_product`. Its inverse-proof
 projection computation is deliberately deferred until a concrete consumer
 needs it. The `Cat_cat` univalence interface is available immediately through
 the global instance; broader constructor-specific computation and
-universe-specific computation remain deferred. No generic
-`HomComparison` symbol from this report has yet been promoted. The existing
-equality, `Path_cat`, `IsoEvidence`, and `ProfComparison` implementations
-remain active. Focused probes have confirmed derivability of the covariant
-Yoneda embedding from `hom_int` over the opposite category.
+universe-specific computation remain deferred. The previously proposed generic
+`HomComparison` direction has been rejected as the main replacement path for
+`ProfComparison`: it duplicated the pointwise push/pull API without making the
+actual categorical cut owner explicit enough. The replacement target is now a
+general `DefIso(C,x,y)` layer whose computational content is postcomposition
+by selected inverse arrows, with `hom_postcomp_fapp0` as the stable object
+action of `hom_postcomp_func`. The existing equality, `Path_cat`,
+`IsoEvidence`, and `ProfComparison` implementations remain active while the
+new `DefIso` slice is connected to profunctor consumers. Focused probes have
+confirmed derivability of the covariant Yoneda embedding from `hom_int` over
+the opposite category. The first `DefIso` implementation is now promoted:
+`hom_postcomp_fapp0` is the stable runtime object action of
+`hom_postcomp_func`, `DefIso(C,x,y)` has selected `to/from` arrows, and nested
+postcomposition plus identity-functor selected-arrow cancellation compute.
+The parallel `hom_precomp_along_fapp0` head is also promoted for antecedent
+hom-action visibility. Cat composition still has one object-action owner:
+`comp_cat_fapp0`; rejected probes showed that separate
+`comp_cat_cov_fapp0`/`comp_cat_con_fapp0` heads are technically typecheckable
+with a proof-time join, but duplicate the same semantic and syntactic
+composite and should not be promoted. The fixed-source path-transitivity
+benchmark is active again after the `hom_postcomp_fapp0` migration: a focused
+representable join identifies the semantic `hom_con`/`hom_int` double-op route
+with `Rep_transport_func`, and the diagnostics check both
+`path_comp_sec[p] = path_comp_func(p)` and the observed final normal form
+`path_comp_sec[p][q] = hom_postcomp_fapp0(id,q,p)`. Additional typed
+`eq_refl` diagnostics confirm that the same transitivity expressions
+elaborate against the ordinary `comp_fapp0(q,p)` presentation through the
+narrow identity-functor unification bridge.
 
 ## Scope And Authority
 
@@ -100,8 +123,8 @@ The goals are:
 - preserve Lambdapi's strict conversion and rewrite/unification discipline;
 - add observational computation for internal paths incrementally by type
   former;
-- distinguish groupoid/type equivalence from categorical equivalence and from
-  computational comparison;
+- distinguish groupoid/type equivalence from categorical equivalence,
+  ordinary isomorphism evidence, and definitional/computational isomorphism;
 - express categorical univalence without identifying arbitrary directed
   arrows with paths;
 - reuse the existing internal hom/Yoneda infrastructure;
@@ -128,8 +151,10 @@ rewrite SOP made the following decisions more precise:
 4. Define univalence capabilities by `IsEquivMap` of those canonical maps.
    Only the inverse selections require the capabilities.
 5. Keep `path_to_hom` independent of categorical univalence.
-6. Give generic `HomComparison` whole `Functord` maps between Yoneda families;
-   dedicated pointwise beta/eta belongs below those maps.
+6. Replace the generic `HomComparison` direction with a `DefIso` direction:
+   definitional/computational isomorphisms are inverse arrows whose
+   cancellation is owned by stable postcomposition, not by arbitrary
+   propositional `IsoEvidence`.
 7. Treat general `OmegaEquiv` corecursion/productivity and `Cat_cat`-specific
    computation as separate deferred tasks, not prerequisites for
    observational paths or groupoid type equivalence.
@@ -659,7 +684,7 @@ internal path             p : x = y
 groupoid/type equivalence TypeEquiv(A,B)
 categorical equivalence   OmegaEquiv(C,x,y)
 isomorphism evidence      IsoEvidence(C,x,y)
-computational comparison  HomComparison(C,x,y)
+definitional isomorphism  DefIso(C,x,y)
 arbitrary directed arrow  f : Hom_C(x,y)
 ```
 
@@ -681,11 +706,11 @@ internal object path in C
 internal object path in C
   -> OmegaEquiv(C,x,y);          // idtoequiv_cat
 
-HomComparison(C,x,y)
+DefIso(C,x,y)
   -> IsoEvidence(C,x,y);
 
-HomComparison(C,x,y)
-  -> OmegaEquiv(C,x,y);          // later
+DefIso(C,x,y)
+  -> OmegaEquiv(C,x,y);          // later, through its selected arrows/cells
 
 OmegaEquiv(C,x,y)
   -> internal object path;       // operationally through omega_equiv_path
@@ -697,8 +722,8 @@ TypeEquiv(A,B)
 There is no planned generic bridge:
 
 ```text
-IsoEvidence(C,x,y) -> HomComparison(C,x,y);
-OmegaEquiv(C,x,y)  -> HomComparison(C,x,y).
+IsoEvidence(C,x,y) -> DefIso(C,x,y);
+OmegaEquiv(C,x,y)  -> DefIso(C,x,y).
 ```
 
 Either bridge would be a computational strictification principle. The failed
@@ -745,8 +770,11 @@ Important existing facts:
 3. `Hom_cat` is directed and independent of internal equality.
 4. `IsoEvidence` is Sigma-encoded propositional inverse data and deliberately
    has no judgmental cancellation on ordinary composition.
-5. `ProfComparison` obtains computation from dedicated push/pull eliminators,
-   not from generic cancellation under `comp_fapp0` or `Prof_comp_transf`.
+5. `ProfComparison` currently obtains computation from dedicated push/pull
+   eliminators, not from generic cancellation under `comp_fapp0` or
+   `Prof_comp_transf`. This remains active baseline behavior, but the next
+   redesign should factor the same computational content through
+   `DefIso(Prof_cat(A,B),P,Q)` and stable postcomposition.
 6. `Grpd_cat` currently decodes hom objects as ordinary functions, but it does
    not yet expose a complete computational identity/composition calculus for
    those functions.
@@ -2294,105 +2322,190 @@ Therefore a future `hom_con_int_func` or `Yoneda_cov_func` should begin as a
 transparent readability alias. It must not duplicate the semantic body or
 introduce constructor-specific functor laws.
 
-### Generic Hom Comparison
+### Definitional Isomorphism Via Postcomposition
 
-The generic computational owner should internalize the incoming object through
-Yoneda:
-
-```text
-HomComparison(C,x,y).
-```
-
-Its semantic operations are whole transformations between the two Yoneda
-families:
+The previous generic `HomComparison(C,x,y)` proposal has been superseded.
+The more precise generic computational owner is:
 
 ```text
-Yoneda_cov_catd(C,x)
-  := Yoneda_cov_func(C)[x]
-  : Catd(Op_cat(C));
-
-hom_comparison_push_map(i)
-  : Functord(
-      Yoneda_cov_catd(C,x),
-      Yoneda_cov_catd(C,y));
-
-hom_comparison_pull_map(i)
-  : Functord(
-      Yoneda_cov_catd(C,y),
-      Yoneda_cov_catd(C,x)).
+DefIso(C,x,y).
 ```
 
-Thus the whole operations use `Functord`, the existing kernel owner for
-natural transformations between Cat-valued families. Their component at
-`r : Obj(C)` is a functor:
+This is not ordinary `IsoEvidence(C,x,y)`. `IsoEvidence` contains arrows plus
+internal equality/path proofs:
 
 ```text
-Hom_cat(C,r,x) -> Hom_cat(C,r,y)
+to   : Hom_C(x,y)
+from : Hom_C(y,x)
+from ∘ to = id_x
+to ∘ from = id_y
 ```
 
-or its reverse. Pointwise object eliminators are:
+Those proofs do not give judgmental cancellation. `DefIso` is the stronger
+Lambdapi-specific/computational certificate:
 
 ```text
-hom_comparison_push_at(i,r,f)
-  : Hom_C(r,y);
-
-hom_comparison_pull_at(i,r,g)
-  : Hom_C(r,x).
+defiso_to(i)   : Hom_C(x,y)
+defiso_from(i) : Hom_C(y,x)
 ```
 
-with dedicated beta/eta:
+and its cancellation is owned by postcomposition. The required stable
+postcomposition projection is the object action of the existing
+`hom_postcomp_func`:
 
 ```text
-pull_at(i,r,push_at(i,r,f)) -> f;
-push_at(i,r,pull_at(i,r,g)) -> g.
+hom_postcomp_fapp0(A,B,F,W,X,Y,h,f)
+  : Hom_A(W,F[Y])
+
+// Semantics:
+hom_postcomp_fapp0(A,B,F,W,X,Y,h,f) = F[h] ∘ f.
 ```
 
-The `Functord` maps should own naturality in `r` and higher action inside each
-hom-category. Do not start by adding a generic inward-accumulation rule on the
-shared `comp_fapp0` head. Such a rule would affect every category and would be
-much broader than the successful `ProfComparison` rule on
-`comp_catd_fapp0`.
-
-Selected arrows are identity applications:
+The runtime projection should become:
 
 ```text
-hom_comparison_to(i)
-  := push_at(i,x,id_x);
-
-hom_comparison_from(i)
-  := pull_at(i,y,id_y).
+fapp0(hom_postcomp_func(A,B,F,W,X,Y,h), f)
+  ↪ hom_postcomp_fapp0(A,B,F,W,X,Y,h,f).
 ```
 
-The forgetful layer is:
+The ordinary `comp_fapp0` presentation should be retained as semantic bridge
+evidence or a narrow proof-time comparison, not as the primary runtime normal
+form when DefIso cancellation is needed.
+
+The representable/path-transitivity consumer keeps its former strength in the
+new normal-form regime. A focused runtime join is promoted:
 
 ```text
-hom_comparison_evidence
-  : HomComparison(C,x,y) -> IsoEvidence(C,x,y).
+hom_postcomp_fapp0(
+  Op(Catd(Z)),
+  Z,
+  Op_func(hom_int(id_Z)),
+  hom_(id_Z,x),
+  x,y,p,
+  id_funcd(hom_(id_Z,x)))
+↪ Rep_transport_func(Z,x,y,p).
 ```
 
-Later:
+This is not a broad Cat-composition rewrite. It only joins the semantic
+`hom_con`/`hom_int` presentation of the fixed-source transitivity benchmark
+to the existing representable-transport owner. Active checks then assert:
 
 ```text
-hom_comparison_to_omega
-  : HomComparison(C,x,y) -> OmegaEquiv(C,x,y).
+path_comp_sec(x)[p]    ≡ path_comp_func(p)
+path_comp_func(p)[q]   ≡ hom_postcomp_fapp0(id_Z,q,p)
+path_comp_sec(x)[p][q] ≡ hom_postcomp_fapp0(id_Z,q,p)
 ```
 
-`ProfComparison` is mathematically the specialization to:
+The last normal form is the current runtime representative of `q ∘ p`; the
+proof-time bridge to `comp_fapp0(q,p)` remains available through the narrow
+identity-functor unification rule. Because unification rules are not exercised
+by ordinary conversion assertions, the diagnostics also include typed
+`eq_refl` checks of the form:
 
 ```text
-C := Prof_cat(A,B).
+eq_refl(path_comp_func(p)[q])
+  : path_comp_func(p)[q] = comp_fapp0(q,p)
+
+eq_refl(path_comp_sec(x)[p][q])
+  : path_comp_sec(x)[p][q] = comp_fapp0(q,p).
 ```
 
-It should not be migrated immediately. First prove that the generic owner
-reproduces:
+The generic cancellation shape is:
 
-- dedicated pointwise push/pull beta/eta;
-- selected-arrow/evidence agreement;
-- generic higher action through Yoneda;
-- the warning behavior needed by the current profunctor consumers.
+```text
+hom_postcomp_fapp0(A,C,F,W,y,x,defiso_from(i),
+  hom_postcomp_fapp0(A,C,F,W,x,y,defiso_to(i), f))
+↪ f
 
-Only then decide whether `ProfComparison` becomes a transparent alias, a
-bridge, or a retained specialized stable projection.
+hom_postcomp_fapp0(A,C,F,W,x,y,defiso_to(i),
+  hom_postcomp_fapp0(A,C,F,W,y,x,defiso_from(i), g))
+↪ g.
+```
+
+Selected-arrow cancellation in the identity-functor case is also required:
+
+```text
+hom_postcomp_fapp0(C,C,id_C,x,y,x,defiso_from(i),defiso_to(i)) ↪ id_x
+hom_postcomp_fapp0(C,C,id_C,y,x,y,defiso_to(i),defiso_from(i)) ↪ id_y.
+```
+
+Accumulation is part of the intended cut-elimination story:
+
+```text
+comp_fapp0(
+  hom_postcomp_fapp0(A,B,F,W,X,Y,h,f),
+  g)
+↪
+hom_postcomp_fapp0(A,B,F,U,X,Y,h, comp_fapp0(f,g)).
+```
+
+Focused probes on 2026-06-27 showed that both the generic accumulation rule
+and a `defiso_to`/`defiso_from`-specialized variant typecheck when
+reconstructible target slots are written as `_` on the `comp_fapp0` LHS.
+Both variants produce probe-local warning families because any accumulation
+rule headed by shared `comp_fapp0` competes with category-specific
+composition reductions such as opposites, paths, Catd, Cat, and terminal
+categories. Therefore accumulation should be promoted only after a
+warning-delta audit and preferably only when a concrete consumer needs it.
+
+Probe evidence:
+
+```text
+logs/probes/defiso_hom_postcomp_probe-20260627-172613.log
+logs/probes/defiso_hom_postcomp_probe-20260627-172614.log
+logs/probes/defiso_hom_postcomp_specialized_probe-20260627-172723.log
+logs/probes/defiso_hom_postcomp_specialized_probe-20260627-172725.log
+```
+
+`ProfComparison(A,B,P,Q)` should eventually become a wrapper or transparent
+alias around:
+
+```text
+DefIso(Prof_cat(A,B),P,Q).
+```
+
+Its current public push/pull API can then be derived from
+`hom_postcomp_fapp0` by selected `defiso_to/from` arrows. The temporary direct
+runtime bridge from `hom_postcomp_fapp0(id, prof_comparison_to/from, -)` back
+to `prof_comparison_push/pull` was rejected and removed: it reinstated
+`ProfComparison` as a competing computational owner. The functor wrappers
+`prof_comparison_push_func` and `prof_comparison_pull_func` should expose the
+generic stable postcomposition normal form while the older pointwise
+`prof_comparison_push/pull` API remains available for legacy consumers.
+
+Cat-valued composition should not be split into covariant and contravariant
+object-action heads. The functor-level packages
+`comp_cat_cov_func(G)` and `comp_cat_con_func(F)` remain useful higher owners,
+but their object action is exactly the existing single stable head:
+
+```text
+fapp0(comp_cat_cov_func(G),F) ↪ comp_cat_fapp0(G,F)
+fapp0(comp_cat_con_func(F),G) ↪ comp_cat_fapp0(G,F).
+```
+
+A 2026-06-27 probe with extra `comp_cat_cov_fapp0` and
+`comp_cat_con_fapp0` heads succeeded only after adding a narrow proof-time
+join between the two. That result is recorded as a rejected design probe, not
+an implementation target: if two heads need an immediate join because they
+represent the same `G ∘ F`, then the existing `comp_cat_fapp0` is the correct
+runtime owner.
+
+Profunctor implication eval/lambda is a separate mechanism and should not be
+forced through `DefIso`. The active primitive pairs:
+
+```text
+Prof_eval_cov_map / Prof_lambda_cov_map
+Prof_eval_con_map / Prof_lambda_con_map
+```
+
+already own the closed-structure hom-bijections:
+
+```text
+ProfMap(P,O ⇒ Q) <-> ProfMap(P ⊗ Q,O).
+```
+
+Their direct beta/eta rules remain the correct Došen-style adjunction
+computation for closed profunctor structure.
 
 ## Incremental Constructor Closure
 
@@ -2813,13 +2926,20 @@ the report labels ua_grpd as an operational assumption.
 4. Do not make generic encode/decode cancellation judgmental without a
    consumer.
 
-### Phase 5: Yoneda And Generic Comparison
+### Phase 5: Yoneda And DefIso Comparison
 
 1. Promote a transparent `Yoneda_cov_func` alias if useful.
-2. Probe whole natural-transformation ownership for `HomComparison`.
-3. Add dedicated pointwise beta/eta.
-4. Add the `IsoEvidence` forgetful map.
-5. Compare specialization to `ProfComparison` without migrating it.
+2. Promote `hom_postcomp_fapp0` as the stable object-action projection of
+   `hom_postcomp_func`.
+3. Promote the first `DefIso(C,x,y)` slice with `defiso_to/from`, nested
+   postcomposition cancellation, and selected-arrow cancellation.
+4. Add the `IsoEvidence` forgetful map by explicit selected-arrow paths once
+   needed.
+5. Probe accumulation under `comp_fapp0` only for concrete consumers; classify
+   warning deltas before promotion.
+6. Redesign `ProfComparison` as a wrapper/alias over
+   `DefIso(Prof_cat(A,B),P,Q)` only after the current weighted-limit consumers
+   keep their normal forms.
 
 ### Phase 6: Omega Equivalence
 
@@ -2860,7 +2980,8 @@ the report labels ua_grpd as an operational assumption.
 
 1. Define weak/path representability separately from `IsoEvidence` and
    computational comparison.
-2. Map `HomComparison` and `ProfComparison` into `OmegaEquiv`.
+2. Map `DefIso` and the compatibility `ProfComparison` layer into
+   `OmegaEquiv`.
 3. Use `CatUnivalence(Prof_cat(A,B))` to obtain paths.
 4. Compare projected maps with the existing computational weighted-limit API.
 5. Do not replace `ProfComparison` unless the path-owned projections compute
@@ -2883,7 +3004,8 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CTOR-EQUIV` | stable Product and forward-computing same-base Sigma/same-domain Pi skeleton promoted | `UNI-UA-GRPD`, `UNI-SIGMA-VIEW`, `UNI-PI-VIEW` | full proof witnesses, reverse decoders, or base-changing constructors are consumed | `Product_grpd`, `product_type_equiv`, and `product_grpd_path` are stable heads for the valid componentwise Product path direction. Derive or refine `*_is_equiv` witnesses from observational path algebra; add Sigma/Pi reverse decoders and base-changing Sigma/Pi only after transport/pathover computation is stable. |
 | `UNI-SHAPED-TRANSPORT` | deferred abstraction | `UNI-EQ-COMPUTE`, stable operational `idto*` constructor cases | repeated constructor-specific equality eliminators appear | Factor validated operational `idto*` cases into shaped `ind_eq`/`ind_eqr` transport rules for recognizable motives, such as product motives factoring through projections; do not require this before the direct univalence skeleton computes. |
 | `UNI-YONEDA` | semantic feasibility confirmed | none | a generic comparison consumer is selected | Promote transparent alias only if it improves ownership. |
-| `UNI-HOM-COMP` | proposed | `UNI-YONEDA` | generic comparison work begins | Probe transformation-owned naturality and dedicated point beta/eta. |
+| `UNI-DEFISO` | first slice promoted 2026-06-27 | `UNI-YONEDA`, existing `hom_postcomp_func`, existing `ProfComparison` | a consumer needs generic definitional-isomorphism action or ProfComparison migration | `hom_postcomp_fapp0`, `hom_precomp_along_fapp0`, `DefIso(C,x,y)`, selected arrows, nested postcomposition cancellation, and identity-functor selected-arrow cancellation are active. The ordinary `comp_fapp0` presentation remains proof-time/semantic comparison only. The fixed-source path-transitivity benchmark is active again with final runtime checks targeting `hom_postcomp_fapp0(id,q,p)` as the canonical runtime form of `q ∘ p`, plus typed `eq_refl` diagnostics for the ordinary `comp_fapp0(q,p)` view. Accumulation under shared `comp_fapp0` typechecks but introduces probe-local critical-pair families; promote it only after warning-delta audit and concrete consumer demand. Do not add separate Cat cov/con object-action heads; `comp_cat_fapp0` is the single runtime owner. |
+| `UNI-HOM-COMP` | rejected as main replacement direction | `UNI-DEFISO` if ever revived | only if whole Yoneda naturality becomes a separate consumer | Do not promote the old pointwise `HomComparison` API. Its intended role is superseded by `DefIso` plus stable postcomposition; keep only historical report context until fully removed. |
 | `UNI-CAT-ISO` | promoted provisional 1-truncated staging layer with Product closure | promoted `UNI-PATH-HOM`, existing `IsoEvidence` | 1-categorical univalence computations are consumed | `iso_evidence_product`, Product `iso_evidence_path`, and Product `idtoiso_cat` are active for explicit Product/Sigma paths; inverse-proof projections are deferred. Restrict or replace by `IsOneTruncatedCat(C) -> CatIsoUnivalence(C)`/`OneCat` later; do not identify it with final `OmegaEquiv`. |
 | `UNI-OMEGA` | primitive recursive interface and reflexivity promoted | promoted path utilities | more omega-equivalence computation is consumed | Continue selected constructor closures incrementally; `Path_cat`, `Op_cat`, and explicit `Product_cat` closure are active before functor/category-universe computation. |
 | `UNI-PATH-CAT-CLOSURE` | promoted 2026-06-24 | promoted `UNI-OMEGA` | Path-category equivalence computation is consumed | `path_cat_omega_path` and `path_cat_iso_path` extract paths and compute on reflexivity; do not collapse the classifier yet. |
@@ -2895,7 +3017,7 @@ the report labels ua_grpd as an operational assumption.
 | `UNI-CAT-CAP` | promoted | `UNI-OMEGA` | categorical inverse/path computation is consumed | Keep `equivtoid_cat` as capability projection; add cancellation/coherence only for concrete consumers. |
 | `UNI-CAT-GLOBAL` | promoted as explicit operational assumption | `UNI-CAT-CAP` | constructor-specific category univalence is consumed | Add constructor closure entries case by case; keep the global assumption visible. |
 | `UNI-CAT-SELF` | interface promoted through global policy; computation deferred | `UNI-CAT-GLOBAL` | universe-specific computation is consumed | Add `Cat_cat`-specific computation only when a concrete consumer needs it; keep model justification separate. |
-| `UNI-PROF-WEAK` | deferred | `UNI-CAT-CAP`, `UNI-HOM-COMP` | weak representability has a concrete theorem consumer | Compare weak/path and computational weighted limits. |
+| `UNI-PROF-WEAK` | deferred | `UNI-CAT-CAP`, `UNI-DEFISO` | weak representability has a concrete theorem consumer | Compare weak/path and computational weighted limits after `ProfComparison` is factored through `DefIso`. |
 
 ## Feasibility Assessment
 
@@ -2915,7 +3037,7 @@ the report labels ua_grpd as an operational assumption.
 | `coe_grpd(ua(e))` | promoted | constructor-specific `e.to` computation still needed |
 | Product/Sigma/Pi constructor equivalence skeleton | Product stable forward/reverse slice promoted; same-base Sigma and same-domain Pi forward slices promoted | `IsEquivMap` witnesses are capabilities until Sigma/Pi path algebra can derive them; Sigma/Pi reverse decoders remain later |
 | transparent Yoneda embedding | confirmed | naming/normal-form choice only |
-| generic `HomComparison` | medium-high | avoiding generic `comp_fapp0` accumulation |
+| generic `DefIso` via `hom_postcomp_fapp0` | first slice promoted; broader migration medium-high | avoiding broad `comp_fapp0` accumulation and factoring `ProfComparison` without duplicate computational owners; representable path-transitivity regression checks restored against the stable composition normal form |
 | 1-categorical `CatIsoUnivalence` staging | promoted with Product forward/inverse/path/idto skeleton | ordinary iso/path coherence beyond reflexivity remains capability-driven; Product inverse-proof projections are deferred |
 | primitive recursive `OmegaEquiv` interface | promoted with reflexivity, opposite closure, and explicit Product closure | further closure operations and constructor-specific destructor computation |
 | Product omega-equivalence path decoder and forward `idtoequiv_cat` | promoted | expected critical-pair boundary against Product reflexive collapse; opaque product-object eta remains deferred |
@@ -3043,8 +3165,8 @@ The first categorical milestone is complete when:
 path_to_hom computes on reflexivity;
 Core_incl_func composition is owned by generic fapp1 functoriality;
 Yoneda_cov_func is owned by hom_int(id_{C^op});
-HomComparison beta/eta uses dedicated heads;
-HomComparison forgets to IsoEvidence;
+DefIso beta/eta is postcomposition cancellation on `hom_postcomp_fapp0`;
+DefIso forgets to IsoEvidence after selected-arrow paths are available;
 the primitive recursive OmegaEquiv interface and reflexivity compute;
 idtoequiv_cat is canonical and independent of CatUnivalence(C);
 CatUnivalence(C) states that idtoequiv_cat is an equivalence;
@@ -3060,8 +3182,8 @@ The path-owned representability milestone is complete only when:
 Prof_cat univalence is available through inherited semantic owners or a
 documented specialized bridge;
 comparison-to-path-to-comparison projections recover nonidentity maps;
-weak/path representability remains distinct from IsoEvidence and
-ProfComparison;
+weak/path representability remains distinct from IsoEvidence, DefIso, and the
+ProfComparison compatibility layer;
 right-adjoint preservation introduces no theorem-specific path fold.
 ```
 

@@ -2557,6 +2557,19 @@ symbol hom_postcomp_func [A B : Cat]
       (Hom_cat A W (@fapp0 B A F X))
       (Hom_cat A W (@fapp0 B A F Y)));
 
+// Stable object action of postcomposition: hom_postcomp_func(f)[g] = F[f] ∘ g.
+//
+// This head keeps the postcomposition cut visible for DefIso-style
+// cancellation. Ordinary composition is the semantic reading, but the runtime
+// normal form now records the hom-action owner instead of immediately erasing
+// to the shared `comp_fapp0` head.
+symbol hom_postcomp_fapp0 [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  : τ (Hom A W (@fapp0 B A F Y));
+
 // Applying the telescope to f yields the capped postcomposition functor.
 rule fapp0 (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f
   ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
@@ -2565,15 +2578,15 @@ rule fapp0 (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f
 rule @fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f
   ↪ @hom_postcomp_func $A $B $F $W $X $Y $f;
 
-// Object action of postcomposition: g ↦ F[f] ∘ g.
+// Object action of postcomposition: keep the stable postcomposition head.
 rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
-  ↪ @comp_fapp0
-      $A
-      $W
-      (@fapp0 $B $A $F $X)
-      (@fapp0 $B $A $F $Y)
-      (@fapp1_fapp0 $B $A $F $X $Y $f)
-      $g;
+  ↪ @hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g;
+
+// Identity cuts for the identity-functor postcomposition owner. These keep
+// composition normalization at the stable postcomposition head instead of
+// erasing to the shared `comp_fapp0` head.
+rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $X (@id $A $X) $f ↪ $f
+with @hom_postcomp_fapp0 $A $A (@id_func $A) $X $X $Y $f (@id $A $X) ↪ $f;
 
 // Hom-action of the telescope as f varies: alpha : f ->^(Hom_B(X,Y)) g.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
@@ -2622,14 +2635,8 @@ symbol hom_postcomp_fapp1_func [A B : Cat]
       (Hom_cat (Hom_cat A W (@fapp0 B A F X)) g h)
       (Hom_cat
         (Hom_cat A W (@fapp0 B A F Y))
-        (@comp_fapp0
-          A W (@fapp0 B A F X) (@fapp0 B A F Y)
-          (@fapp1_fapp0 B A F X Y f)
-          g)
-        (@comp_fapp0
-          A W (@fapp0 B A F X) (@fapp0 B A F Y)
-          (@fapp1_fapp0 B A F X Y f)
-          h)));
+        (@hom_postcomp_fapp0 A B F W X Y f g)
+        (@hom_postcomp_fapp0 A B F W X Y f h)));
 
 // Capped hom-action of capped postcomposition.
 symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
@@ -2640,14 +2647,8 @@ symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
   (alpha : τ (Hom (Hom_cat A W (@fapp0 B A F X)) g h))
   : τ (Hom
       (Hom_cat A W (@fapp0 B A F Y))
-      (@comp_fapp0
-        A W (@fapp0 B A F X) (@fapp0 B A F Y)
-        (@fapp1_fapp0 B A F X Y f)
-        g)
-      (@comp_fapp0
-        A W (@fapp0 B A F X) (@fapp0 B A F Y)
-        (@fapp1_fapp0 B A F X Y f)
-        h));
+      (@hom_postcomp_fapp0 A B F W X Y f g)
+      (@hom_postcomp_fapp0 A B F W X Y f h));
 
 // Projection rules for the capped postcomposition hom-action.
 rule @fapp1_func _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h
@@ -2659,7 +2660,8 @@ rule fapp0 (@hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h $alpha
   ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
 
-// Identity 2-cell under postcomposition maps to the identity at F[f] ∘ g.
+// Identity 2-cell under postcomposition maps to the identity at the stable
+// postcomposition object action.
 rule @hom_postcomp_fapp1_fapp0
       $A
       $B
@@ -2673,13 +2675,7 @@ rule @hom_postcomp_fapp1_fapp0
       (@id _ $g)
   ↪ @id
       (Hom_cat $A $W (@fapp0 $B $A $F $Y))
-      (@comp_fapp0
-        $A
-        $W
-        (@fapp0 $B $A $F $X)
-        (@fapp0 $B $A $F $Y)
-        (@fapp1_fapp0 $B $A $F $X $Y $f)
-        $g);
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g);
 
 // Cat-valued postcomposition telescope reduces to ordinary functor composition.
 rule @hom_postcomp_tele_func Cat_cat Cat_cat $E $W $X $Y
@@ -2704,6 +2700,73 @@ rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
       (@fapp0 Cat_cat Cat_cat $E $X)
       (@fapp0 Cat_cat Cat_cat $E $Y)
       (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f);
+
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
+  ≡ @comp_cat_fapp0
+      $W
+      (@fapp0 Cat_cat Cat_cat $E $X)
+      (@fapp0 Cat_cat Cat_cat $E $Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
+      $G
+  ↪ [ tt ≡ tt ];
+
+unif_rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $h $g
+  ≡ @comp_fapp0 $A $W $X $Y $h $g
+  ↪ [ tt ≡ tt ];
+
+/*
+  Definitional/computational isomorphisms.
+
+  `IsoEvidence(C,x,y)` is ordinary propositional inverse data. `DefIso`
+  records the stricter Lambdapi-specific situation where inverse cancellation
+  is judgmental under the stable postcomposition owner. This is the
+  postcomposition/consequent variant; a dual precomposition/antecedent variant
+  can be added later if consumed.
+*/
+injective symbol DefIso
+  [C : Cat]
+  (x y : τ (Obj C))
+  : Grpd;
+
+symbol defiso_to
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y))
+  : τ (Hom C x y);
+
+symbol defiso_from
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y))
+  : τ (Hom C y x);
+
+rule @hom_postcomp_fapp0
+      $A $C $F $W $y $x
+      (@defiso_from $C $x $y $i)
+      (@hom_postcomp_fapp0
+        $A $C $F $W $x $y
+        (@defiso_to $C $x $y $i)
+        $f)
+  ↪ $f
+with @hom_postcomp_fapp0
+      $A $C $F $W $x $y
+      (@defiso_to $C $x $y $i)
+      (@hom_postcomp_fapp0
+        $A $C $F $W $y $x
+        (@defiso_from $C $x $y $i)
+        $g)
+  ↪ $g;
+
+rule @hom_postcomp_fapp0
+      $C $C (@id_func $C) $x $y $x
+      (@defiso_from $C $x $y $i)
+      (@defiso_to $C $x $y $i)
+  ↪ @id $C $x
+with @hom_postcomp_fapp0
+      $C $C (@id_func $C) $y $x $y
+      (@defiso_to $C $x $y $i)
+      (@defiso_from $C $x $y $i)
+  ↪ @id $C $y;
 
 // Contravariant represented-object classifier.
 //
@@ -2767,19 +2830,42 @@ symbol hom_precomp_along_func [A B : Cat]
       (Hom_cat B (@fapp0 A B F X) Z)
       (Hom_cat B (@fapp0 A B F W) Z));
 
+// Stable object action of precomposition: hom_precomp_along_func(h)[g] = g ∘ F[h].
+//
+// This is the antecedent/precomposition counterpart to `hom_postcomp_fapp0`.
+// It keeps the cut owner visible while proof-time unification records the
+// ordinary composition reading.
+symbol hom_precomp_along_fapp0 [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  (g : τ (Hom B (@fapp0 A B F X) Z))
+  : τ (Hom B (@fapp0 A B F W) Z);
+
 // Applying the telescope to h yields the capped precomposition functor.
 rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
-// Object action of precomposition: g ↦ g ∘ F[h].
+// Object action of precomposition: keep the stable precomposition head.
 rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
-  ↪ @comp_fapp0
+  ↪ @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g;
+
+unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
+  ≡ @comp_fapp0
       $B
       (@fapp0 $A $B $F $W)
       (@fapp0 $A $B $F $X)
       $Z
       $g
-      (@fapp1_fapp0 $A $B $F $W $X $h);
+      (@fapp1_fapp0 $A $B $F $W $X $h)
+  ↪ [ tt ≡ tt ];
+
+// Identity-functor precomposition uses postcomposition as its canonical
+// runtime presentation. The ordinary `comp_fapp0` reading remains proof-time
+// compatibility through the unification rule above.
+rule @hom_precomp_along_fapp0
+      $A $A (@id_func $A) $Z $W $X $h $g
+  ↪ @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Z $g $h;
 
 // Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
@@ -2826,22 +2912,10 @@ symbol hom_precomp_along_fapp1_func [A B : Cat]
   [g k : τ (Hom B (@fapp0 A B F X) Z)]
   : τ (Functor
       (Hom_cat (Hom_cat B (@fapp0 A B F X) Z) g k)
-      (Hom_cat
-        (Hom_cat B (@fapp0 A B F W) Z)
-        (@comp_fapp0
-          B
-          (@fapp0 A B F W)
-          (@fapp0 A B F X)
-          Z
-          g
-          (@fapp1_fapp0 A B F W X h))
-        (@comp_fapp0
-          B
-          (@fapp0 A B F W)
-          (@fapp0 A B F X)
-          Z
-          k
-          (@fapp1_fapp0 A B F W X h))));
+        (Hom_cat
+          (Hom_cat B (@fapp0 A B F W) Z)
+        (@hom_precomp_along_fapp0 A B F Z W X h g)
+        (@hom_precomp_along_fapp0 A B F Z W X h k)));
 
 // Capped hom-action of capped precomposition.
 symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
@@ -2850,22 +2924,10 @@ symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
   (h : τ (Hom A W X))
   [g k : τ (Hom B (@fapp0 A B F X) Z)]
   (alpha : τ (Hom (Hom_cat B (@fapp0 A B F X) Z) g k))
-  : τ (Hom
+      : τ (Hom
       (Hom_cat B (@fapp0 A B F W) Z)
-      (@comp_fapp0
-        B
-        (@fapp0 A B F W)
-        (@fapp0 A B F X)
-        Z
-        g
-        (@fapp1_fapp0 A B F W X h))
-      (@comp_fapp0
-        B
-        (@fapp0 A B F W)
-        (@fapp0 A B F X)
-        Z
-        k
-        (@fapp1_fapp0 A B F W X h)));
+      (@hom_precomp_along_fapp0 A B F Z W X h g)
+      (@hom_precomp_along_fapp0 A B F Z W X h k));
 
 // Projection rules for the capped precomposition hom-action.
 rule @fapp1_func _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k
@@ -2877,7 +2939,8 @@ rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
-// Identity 2-cell under precomposition maps to the identity at g ∘ F[h].
+// Identity 2-cell under precomposition maps to the identity at the stable
+// precomposition object action.
 rule @hom_precomp_along_fapp1_fapp0
       $A
       $B
@@ -2891,13 +2954,7 @@ rule @hom_precomp_along_fapp1_fapp0
       (@id _ $g)
   ↪ @id
       (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
-      (@comp_fapp0
-        $B
-        (@fapp0 $A $B $F $W)
-        (@fapp0 $A $B $F $X)
-        $Z
-        $g
-        (@fapp1_fapp0 $A $B $F $W $X $h));
+      (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g);
 
 // Opposite-specialized postcomposition is canonicalized to generalized
 // precomposition. This makes the generic postcomposition route join the
@@ -2911,6 +2968,11 @@ rule @hom_postcomp_func
       (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
       $Z $X $W $h
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
+
+rule @hom_postcomp_fapp0
+      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $Z $X $W $h $g
+  ↪ @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g;
 
 rule @hom_postcomp_fapp1_func
       (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
@@ -3781,24 +3843,26 @@ symbol comp_cat_cov_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z G H));
 
-rule @hom_postcomp_fapp1_func Cat_cat Cat_cat $E $W $X $Y $f $G $H
-  ↪ @comp_cat_cov_fapp1_func
-      $W
-      (@fapp0 Cat_cat Cat_cat $E $X)
-      (@fapp0 Cat_cat Cat_cat $E $Y)
-      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
-      $G
-      $H;
-
-rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
-  ↪ @comp_cat_cov_transf
+unif_rule @hom_postcomp_fapp1_func Cat_cat Cat_cat $E $W $X $Y $f $G $H
+  ≡ @comp_cat_cov_fapp1_func
       $W
       (@fapp0 Cat_cat Cat_cat $E $X)
       (@fapp0 Cat_cat Cat_cat $E $Y)
       (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
       $G
       $H
-      $eta;
+  ↪ [ tt ≡ tt ];
+
+unif_rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
+  ≡ @comp_cat_cov_transf
+      $W
+      (@fapp0 Cat_cat Cat_cat $E $X)
+      (@fapp0 Cat_cat Cat_cat $E $Y)
+      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
+      $G
+      $H
+      $eta
+  ↪ [ tt ≡ tt ];
 
 rule @fapp1_func _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H
   ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
@@ -4120,58 +4184,50 @@ rule @tapp1_fapp0
       $alpha
   ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
 
-// Cat-specialized generalized precomposition folds to ordinary precomposition.
-rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
-  ↪ @comp_cat_con_func
-      (@fapp0 Cat_cat Cat_cat $F $W)
-      (@fapp0 Cat_cat Cat_cat $F $X)
-      $Z
-      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h);
-
-rule @hom_precomp_along_fapp1_func Cat_cat Cat_cat $F $Z $W $X $h $G $H
-  ↪ @comp_cat_con_fapp1_func
+// Cat-specialized generalized precomposition agrees proof-time with ordinary
+// precomposition. Runtime object action remains owned by
+// `hom_precomp_along_fapp0`.
+unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
+  ≡ @comp_cat_con_func
       (@fapp0 Cat_cat Cat_cat $F $W)
       (@fapp0 Cat_cat Cat_cat $F $X)
       $Z
       (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
-      $G
-      $H;
+  ↪ [ tt ≡ tt ];
 
-rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
-  ↪ @comp_cat_con_transf
-      (@fapp0 Cat_cat Cat_cat $F $W)
-      (@fapp0 Cat_cat Cat_cat $F $X)
-      $Z
-      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
-      $G
-      $H
-      $eta;
+/*
+  Deferred Cat-specialized higher-action folds.
 
-// Tele-level Cat-specialized precomposition hom-action.
-rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
-  ↪ @fapp1_func
-      (Functor_cat $W $X)
-      (Functor_cat
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_cat_fapp0
-        (Functor_cat $W $X)
-        (Functor_cat
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-        (@comp_cat_con_func_func
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          $Z)
-        (@fapp1_func Cat_cat Cat_cat $E $W $X))
-      $G
-      $H;
+  After `hom_precomp_along_fapp0` became the runtime owner of precomposition
+  object action, these previous folds no longer preserve the runtime endpoint
+  normal form: `comp_cat_con_*` exposes raw `comp_cat_fapp0` endpoints. Keep
+  the object-level Cat fold above, but leave the higher-action folds to a later
+  owner-preserving Cat-specialized wrapper if a concrete consumer needs them.
 
-rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H $eta
-  ↪ @fapp1_fapp0
+  rule @hom_precomp_along_fapp1_func Cat_cat Cat_cat $F $Z $W $X $h $G $H
+    ↪ @comp_cat_con_fapp1_func
+        (@fapp0 Cat_cat Cat_cat $F $W)
+        (@fapp0 Cat_cat Cat_cat $F $X)
+        $Z
+        (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
+        $G
+        $H;
+
+  rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
+    ↪ @comp_cat_con_transf
+        (@fapp0 Cat_cat Cat_cat $F $W)
+        (@fapp0 Cat_cat Cat_cat $F $X)
+        $Z
+        (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
+        $G
+        $H
+        $eta;
+*/
+
+// Tele-level Cat-specialized precomposition hom-action agrees proof-time with
+// ordinary functor-composition action.
+unif_rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
+  ≡ @fapp1_func
       (Functor_cat $W $X)
       (Functor_cat
         (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
@@ -4191,7 +4247,31 @@ rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H $eta
         (@fapp1_func Cat_cat Cat_cat $E $W $X))
       $G
       $H
-      $eta;
+  ↪ [ tt ≡ tt ];
+
+unif_rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H $eta
+  ≡ @fapp1_fapp0
+      (Functor_cat $W $X)
+      (Functor_cat
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+      (@comp_cat_fapp0
+        (Functor_cat $W $X)
+        (Functor_cat
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X))
+        (Functor_cat
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
+          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
+        (@comp_cat_con_func_func
+          (@fapp0 Cat_cat Cat_cat $E $W)
+          (@fapp0 Cat_cat Cat_cat $E $X)
+          $Z)
+        (@fapp1_func Cat_cat Cat_cat $E $W $X))
+      $G
+      $H
+      $eta
+  ↪ [ tt ≡ tt ];
 
 rule @fapp1_func _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H
   ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
@@ -6114,6 +6194,20 @@ rule @tapp0_fapp0
       (@Rep_transport_func $Z $x $y $p)
   ↪ @hom_precomp_along_func $Z $Z (@id_func $Z) $z $x $y $p;
 
+// Focused join for the fixed-source transitivity benchmark: the semantic
+// `hom_con`/`hom_int` route through the double-op presentation of Catd
+// representables is the same representable transport head.
+rule @hom_postcomp_fapp0
+      (Op_cat (@Catd_cat $Z))
+      $Z
+      (@Op_func (Op_cat $Z) (@Catd_cat $Z) (@hom_int $Z $Z (@id_func $Z)))
+      (@hom_ $Z $Z (@id_func $Z) $x)
+      $x
+      $y
+      $p
+      (@id_funcd $Z (@hom_ $Z $Z (@id_func $Z) $x))
+  ↪ @Rep_transport_func $Z $x $y $p;
+
 // 11b. Opposite-edge and presheaf classifiers.
 
 // Internalized classifier: pointwise opposite representable.
@@ -7461,7 +7555,7 @@ rule @fdapp1_int_cell
 rule @fdapp1_int_cell $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q (@id $Z $y)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@comp_fapp0 $Z $x $y $z $q $p);
+      (@hom_postcomp_fapp0 $Z $Z (@id_func $Z) $x $y $z $q $p);
 
 // Representable precomposition is strict/cartesian already at the Sigma-map
 // fibre projection: applying the internal-hom action to the canonical identity
@@ -7471,7 +7565,7 @@ rule @fdapp1_int_hom_fapp0
       (@id $Z $y) $q (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@comp_fapp0 $Z $x $y $z $q $p);
+      (@hom_postcomp_fapp0 $Z $Z (@id_func $Z) $x $y $z $q $p);
 
 
 // -------------------------------------------------------------------------------------------------
