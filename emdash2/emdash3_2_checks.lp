@@ -1169,6 +1169,31 @@ assert [A B : Cat] (F : τ (Functor B A)) (X : τ (Obj (Op_cat A))) (Y : τ (Obj
   @fapp0 B Cat_cat (@fapp0 (Op_cat A) (Catd_cat B) (@hom_int A B F) X) Y
     ≡ Hom_cat A X (fapp0 F Y);
 
+// Generic represented-object action of `hom_int`.
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A)) ⊢
+  @fapp1_func (Op_cat A) (@Catd_cat B) (@hom_int A B F) y x
+    ≡ @hom_int_precomp_tele_func A B F y x;
+
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) ⊢
+  @fapp1_fapp0 (Op_cat A) (@Catd_cat B) (@hom_int A B F) y x p
+    ≡ @hom_int_precomp_func A B F y x p;
+
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    B
+    Cat_cat
+    (@hom_ A B F y)
+    (@hom_ A B F x)
+    b
+    (@hom_int_precomp_func A B F y x p)
+    ≡ @hom_precomp_along_func A A (@id_func A) (@fapp0 B A F b) x y p;
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @Rep_transport_func Z x y p
+    ≡ @hom_int_precomp_func Z Z (@id_func Z) y x p;
+
 // From emdash3_2.lp:979.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y : τ (Obj B)) (f : τ (Hom B X Y)) (g : τ (Hom A W (fapp0 F X))) ⊢
@@ -2845,9 +2870,7 @@ assert [Z : Cat] (x y : τ (Obj Z))
 // observing that result at q computes to categorical composition. The adapted
 // final normal form is the stable postcomposition owner
 // `hom_postcomp_fapp0(id,q,p)`, which is now the canonical runtime form for
-// `q ∘ p`. The following proof-time `eq_refl` checks additionally verify that
-// the same expressions elaborate against the ordinary `comp_fapp0(q,p)` view
-// through the narrow identity-functor unification bridge.
+// `q ∘ p`.
 
 // From emdash3_2.lp:4452.
 assert [Z : Cat] (x y : τ (Obj Z))
@@ -2869,15 +2892,6 @@ assert [Z : Cat] (x y : τ (Obj Z))
 assert [Z : Cat] (x y z : τ (Obj Z))
   (p : τ (Hom Z x y))
   (q : τ (Hom Z y z)) ⊢
-  eq_refl (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p)
-  : τ (
-    @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p
-    =
-    @comp_fapp0 Z x y z q p);
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
   @fapp0
     (Hom_cat Z y z)
     (Hom_cat Z x z)
@@ -2890,36 +2904,6 @@ assert [Z : Cat] (x y z : τ (Obj Z))
       (@path_comp_func Z x y p))
     q
     ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  eq_refl (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@path_comp_func Z x y p))
-      q)
-  : τ (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@path_comp_func Z x y p))
-      q
-    =
-    @comp_fapp0 Z x y z q p);
 
 // From emdash3_2.lp:4483.
 assert [Z : Cat] (x y z : τ (Obj Z))
@@ -2947,56 +2931,6 @@ assert [Z : Cat] (x y z : τ (Obj Z))
         p))
     q
     ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  eq_refl (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@path_comp_sec Z x))
-          p))
-      q)
-  : τ (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@path_comp_sec Z x))
-          p))
-      q
-    =
-    @comp_fapp0 Z x y z q p);
 
 // From emdash3_2.lp:4827.
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
@@ -3118,90 +3052,6 @@ assert [Z : Cat] (x y z : τ (Obj Z))
     q
     ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
 
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  eq_refl (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@fapp0
-              (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
-              (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
-              (@tapp0_fapp0
-                (@Catd_cat (@PathOut_cat Z x))
-                Cat_cat
-                (@PathInd_src_catd Z x)
-                (@PathInd_tgt_catd Z x)
-                (@CompMotive_catd Z x)
-                (@tdapp0_fapp0
-                  Z
-                  (@PathOutMotives_catd Z)
-                  (@Const_catd Z Cat_cat)
-                  (@PathOutReflEval_funcd Z)
-                  (@PathOutPi_funcd Z)
-                  x
-                  (@PathInd_transfd Z)))
-              (@id_funcd Z (@Rep_catd Z x))))
-          p))
-      q)
-  : τ (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@fapp0
-              (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
-              (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
-              (@tapp0_fapp0
-                (@Catd_cat (@PathOut_cat Z x))
-                Cat_cat
-                (@PathInd_src_catd Z x)
-                (@PathInd_tgt_catd Z x)
-                (@CompMotive_catd Z x)
-                (@tdapp0_fapp0
-                  Z
-                  (@PathOutMotives_catd Z)
-                  (@Const_catd Z Cat_cat)
-                  (@PathOutReflEval_funcd Z)
-                  (@PathOutPi_funcd Z)
-                  x
-                  (@PathInd_transfd Z)))
-              (@id_funcd Z (@Rep_catd Z x))))
-          p))
-      q
-    =
-    @comp_fapp0 Z x y z q p);
-
 // From emdash3_2.lp:4953.
 assert [K : Cat] (R : τ (Catd K))
   (S T : τ (Functord R (@Const_catd K Cat_cat)))
@@ -3309,76 +3159,6 @@ assert [Z : Cat] (x y z : τ (Obj Z))
         p))
     q
     ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
-
-assert [Z : Cat] (x y z : τ (Obj Z))
-  (p : τ (Hom Z x y))
-  (q : τ (Hom Z y z)) ⊢
-  eq_refl (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@fapp0
-              (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
-              (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
-              (@tapp0_fapp0
-                (@Sigma_cat Z (@PathOutMotives_catd Z))
-                Cat_cat
-                (@PathIndSrc_catd Z)
-                (@PathIndTgt_catd Z)
-                (Struct_sigma x (@CompMotive_catd Z x))
-                (@PathInd_funcd Z))
-              (@id_funcd Z (@Rep_catd Z x))))
-          p))
-      q)
-  : τ (
-    @fapp0
-      (Hom_cat Z y z)
-      (Hom_cat Z x z)
-      (@tapp0_fapp0
-        Z
-        Cat_cat
-        (@Rep_catd Z y)
-        (@Rep_catd Z x)
-        z
-        (@fapp0
-          (Hom_cat Z x y)
-          (@Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x))
-          (@tapp0_fapp0
-            Z
-            Cat_cat
-            (@Rep_catd Z x)
-            (@CompTarget_catd Z x)
-            y
-            (@fapp0
-              (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x))
-              (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
-              (@tapp0_fapp0
-                (@Sigma_cat Z (@PathOutMotives_catd Z))
-                Cat_cat
-                (@PathIndSrc_catd Z)
-                (@PathIndTgt_catd Z)
-                (Struct_sigma x (@CompMotive_catd Z x))
-                (@PathInd_funcd Z))
-              (@id_funcd Z (@Rep_catd Z x))))
-          p))
-      q
-    =
-    @comp_fapp0 Z x y z q p);
 
 // From emdash3_2.lp:5874.
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))

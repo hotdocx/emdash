@@ -2,7 +2,7 @@
 
 Date: 2026-06-28
 Last reviewed: 2026-06-28
-Status: proposed architecture and incremental migration plan
+Status: active incremental migration plan; Phases 1-2 promoted
 Plan-ID: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28
 
 Parent plan:
@@ -421,8 +421,10 @@ Tasks:
 
 Tasks:
 
-1. Replace the narrow identity-only `hom_postcomp_fapp0` unification bridge
-   by the generalized bridge over `F`.
+1. Add the generalized `hom_postcomp_fapp0` bridge over `F`.
+   Keep the narrow identity-only bridge temporarily; a focused probe showed
+   that replacing it immediately weakens a dependent `PathOut` Sigma endpoint
+   check that still elaborates through the identity-specialized view.
 2. Keep the existing generalized `hom_precomp_along_fapp0` bridge.
 3. Remove noisy duplicated full-transitivity `eq_refl` checks. Keep at most
    one small proof-time bridge check for the generic postcomp/precomp
@@ -442,6 +444,30 @@ Validation:
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
+
+Phase 1 implementation note, 2026-06-28:
+
+- The additive generalized postcomposition bridge was probed successfully in
+  `tmp/probes/defiso_phase1_add_general_source_probe.lp` and
+  `tmp/probes/defiso_phase1_add_general_checks_probe.lp`.
+- Removing the ordinary identity postcomposition rewrite rules is not Phase-1
+  safe: existing `DefIso` cancellation subject-reduction still relies on those
+  endpoint collapses. Revisit this only as part of the coherent Phase 3
+  hom-action functoriality package.
+- Replacing the identity-only `hom_postcomp_fapp0(id, h, g) ≡ comp_fapp0(h,g)`
+  bridge by the generalized bridge alone is not a drop-in change. A dependent
+  `PathOut` Sigma diagnostic still needs the identity-specialized bridge to
+  type a pair whose first component is the ordinary `comp_fapp0` view while the
+  endpoint is the stable `hom_postcomp_fapp0` view.
+- The focused transitivity rewrite
+  `hom_postcomp_fapp0(double-op hom_int route, id_funcd) -> Rep_transport_func`
+  remains active for now. Its architectural replacement should be Phase 2's
+  generic `hom_int_precomp_func` owner, not another theorem-specific bridge.
+- Active validation after promotion:
+  `EMDASH_TYPECHECK_TIMEOUT=60s make check` passed; `make catalog` refreshed
+  the check catalog after removing five diagnostic-only assertions; `make
+  warning-summary` completed with 1162 warnings, with the expected
+  `hom_postcomp_fapp0` family visible in the warning inventory.
 
 ### Phase 2: Introduce generic `hom_int` precomposition owner
 
@@ -467,13 +493,13 @@ Tasks:
 
    ```text
    Rep_transport_func(Z,x,y,p)
-     := hom_int_precomp_func(Z,Z,id_Z,x,y,p).
+     := hom_int_precomp_func(Z,Z,id_Z,y,x,p).
    ```
 
 4. Migrate LHSs currently keyed on `Rep_transport_func` to the real owner:
 
    ```text
-   hom_int_precomp_func(Z,Z,id_Z,x,y,p).
+   hom_int_precomp_func(Z,Z,id_Z,y,x,p).
    ```
 
 5. Re-evaluate `path_comp_func` and transitivity checks against this generic
@@ -485,6 +511,40 @@ Validation:
 - strict/cartesian representable computations currently keyed on
   `Rep_transport_func`;
 - warning-enabled probe if any new overlap appears.
+
+Phase 2 implementation note, 2026-06-28:
+
+- Added the generic represented-object action owner:
+
+  ```text
+  hom_int_precomp_tele_func(F;Y,X)
+  hom_int_precomp_func(F;Y,X,p)
+  ```
+
+  with projection rules from `fapp1_func(hom_int(F))`,
+  `fapp1_fapp0(hom_int(F),p)`, and the `tapp0_fapp0` component rule.
+- Converted `Rep_transport_func(Z,x,y,p)` into the transparent alias
+  `hom_int_precomp_func(Z,Z,id_Z,y,x,p)`.
+- Removed the old identity-specialized `fapp1_fapp0(hom_int(id),p) ->
+  Rep_transport_func(p)` rule and the old `tapp0_fapp0(Rep_transport_func)`
+  component rule; both are now covered by the generic owner.
+- Migrated the strict/cartesian representable rules from
+  `Rep_transport_func` LHSs to
+  `hom_int_precomp_func(Z,Z,id_Z,y,x,p)` LHSs.
+- Retained the focused transitivity join for now, but changed its target to
+  the generic owner. The remaining cleanup is to remove the theorem-specific
+  join once Phase 3 functoriality/accumulation joins can reproduce the same
+  runtime normal form.
+- Added diagnostics for `fapp1_func(hom_int)`,
+  `fapp1_fapp0(hom_int,p)`, the `tapp0_fapp0` component of the new owner, and
+  the `Rep_transport_func` alias. A standalone
+  `fapp0(hom_int_precomp_tele_func,p)` assertion was intentionally not kept:
+  although the source rewrite typechecks, that diagnostic shape triggers broad
+  elaboration ambiguity and adds no extra consumer coverage.
+- Active validation after promotion:
+  `EMDASH_TYPECHECK_TIMEOUT=60s make check` passed; `make catalog` refreshed
+  the check catalog after adding the focused diagnostics; `make
+  warning-summary` completed with 1159 warnings.
 
 ### Phase 3: Add coherent hom-action functoriality joins
 
@@ -594,4 +654,3 @@ old ProfComparison pointwise computation is retained only as compatibility or re
 Cat-specialized stable heads are limited to Cat-only higher/transfor structure;
 make check passes.
 ```
-

@@ -2710,6 +2710,16 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
       $G
   ↪ [ tt ≡ tt ];
 
+unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
+  ≡ @comp_fapp0
+      $A
+      $W
+      (@fapp0 $B $A $F $X)
+      (@fapp0 $B $A $F $Y)
+      (@fapp1_fapp0 $B $A $F $X $Y $h)
+      $g
+  ↪ [ tt ≡ tt ];
+
 unif_rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $h $g
   ≡ @comp_fapp0 $A $W $X $Y $h $g
   ↪ [ tt ≡ tt ];
@@ -3004,6 +3014,40 @@ injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
 
 rule @fapp0 _ _ (@hom_int $A $B $F) $W
   ↪ @hom_ $A $B $F $W;
+
+// Generic stable owner for the represented-object action of `hom_int`.
+//
+// Surface/formula:
+//   hom_int_precomp(F,p) : hom_int(F)[Y] ⊢ hom_int(F)[X]
+//   hom_int_precomp(F,p)[b] = precompose by p in A.
+symbol hom_int_precomp_tele_func [A B : Cat]
+  (F : τ (Functor B A))
+  [Y X : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat (Op_cat A) Y X)
+      (Hom_cat
+        (@Catd_cat B)
+        (@hom_ A B F Y)
+        (@hom_ A B F X)));
+
+symbol hom_int_precomp_func [A B : Cat]
+  (F : τ (Functor B A))
+  [Y X : τ (Obj A)]
+  (p : τ (Hom (Op_cat A) Y X))
+  : τ (Hom (@Catd_cat B) (@hom_ A B F Y) (@hom_ A B F X));
+
+rule @fapp1_func (Op_cat $A) (@Catd_cat $B) (@hom_int $A $B $F) $Y $X
+  ↪ @hom_int_precomp_tele_func $A $B $F $Y $X;
+
+rule @fapp1_fapp0 (Op_cat $A) (@Catd_cat $B) (@hom_int $A $B $F) $Y $X $p
+  ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
+
+rule @fapp0
+      (Hom_cat (Op_cat $A) $Y $X)
+      (Hom_cat (@Catd_cat $B) (@hom_ $A $B $F $Y) (@hom_ $A $B $F $X))
+      (@hom_int_precomp_tele_func $A $B $F $Y $X)
+      $p
+  ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
 
 /*
   Ordinary internal-hom computations.
@@ -3686,6 +3730,22 @@ rule @tapp0_fapp0
 // Component of `hom_int` along its contravariant represented-object argument.
 // For f : X ->^A Y, the displayed functor Hom(Y,F-) ⊢ Hom(X,F-) is
 // precomposition by f.
+rule @tapp0_fapp0
+      $B
+      Cat_cat
+      _
+      _
+      $b
+      (@hom_int_precomp_func $A $B $F $Y $X $f)
+  ↪ @hom_precomp_along_func
+      $A
+      $A
+      (@id_func $A)
+      (@fapp0 $B $A $F $b)
+      $X
+      $Y
+      $f;
+
 rule @tapp0_fapp0
       $B
       Cat_cat
@@ -6172,27 +6232,10 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
 //
 // Faithful surface syntax:
 //   (q : y ->^Z z) |-> q ∘ p.
-injective symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
+symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
-  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x));
-
-rule @fapp1_fapp0
-      _
-      _
-      (@hom_int $Z $Z (@id_func $Z))
-      $y
-      $x
-      $p
-  ↪ @Rep_transport_func $Z $x $y $p;
-
-rule @tapp0_fapp0
-      $Z
-      Cat_cat
-      _
-      _
-      $z
-      (@Rep_transport_func $Z $x $y $p)
-  ↪ @hom_precomp_along_func $Z $Z (@id_func $Z) $z $x $y $p;
+  : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
+≔ @hom_int_precomp_func Z Z (@id_func Z) y x p;
 
 // Focused join for the fixed-source transitivity benchmark: the semantic
 // `hom_con`/`hom_int` route through the double-op presentation of Catd
@@ -6206,7 +6249,7 @@ rule @hom_postcomp_fapp0
       $y
       $p
       (@id_funcd $Z (@hom_ $Z $Z (@id_func $Z) $x))
-  ↪ @Rep_transport_func $Z $x $y $p;
+  ↪ @hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p;
 
 // 11b. Opposite-edge and presheaf classifiers.
 
@@ -7551,8 +7594,12 @@ rule @fdapp1_int_cell
 
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the
-// stable `Rep_transport_func` head and keeps the family slots implicit.
-rule @fdapp1_int_cell $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q (@id $Z $y)
+// generic `hom_int_precomp_func(id,...)` owner and keeps the family slots
+// implicit.
+rule @fdapp1_int_cell
+      $Z _ _
+      (@hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p)
+      $y $z $q (@id $Z $y)
   ↪ @id
       (Hom_cat $Z $x $z)
       (@hom_postcomp_fapp0 $Z $Z (@id_func $Z) $x $y $z $q $p);
@@ -7561,7 +7608,9 @@ rule @fdapp1_int_cell $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q (@id $Z 
 // fibre projection: applying the internal-hom action to the canonical identity
 // fibre arrow gives the identity at the composite arrow.
 rule @fdapp1_int_hom_fapp0
-      $Z _ _ (@Rep_transport_func $Z $x $y $p) $y $z $q
+      $Z _ _
+      (@hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p)
+      $y $z $q
       (@id $Z $y) $q (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
