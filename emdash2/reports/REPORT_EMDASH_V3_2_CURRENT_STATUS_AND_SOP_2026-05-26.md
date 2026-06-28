@@ -1193,6 +1193,28 @@ real discriminator. The useful discriminator is usually the explicit data head:
 for example `Op_funcd`, `comp_catd_fapp0`, `homd_int`, or `tapp0_fapp0`, not
 the reducible endpoint categories around it.
 
+The same rule applies at rewrite-family scale. Identify the true discriminee
+before copying a surface pattern across sibling heads. If the mathematical
+case split is triggered by a stable constructor argument such as
+`Op_func(_,_,F)`, do not also require surrounding presentation wrappers such
+as `Op_cat A`, `Op_cat B`, transparent aliases, or endpoint normal forms unless
+those wrappers are themselves part of the theorem. The 2026-06-28
+`hom_postcomp_*` audit replaced rules of the form
+
+```text
+hom_postcomp_*(Op_cat B, Op_cat A, Op_func(A,B,F), ...)
+```
+
+by the more canonical family
+
+```text
+hom_postcomp_*(B, A, Op_func(_,_,F), ...)
+  -> hom_precomp_along_*(Op_cat A, Op_cat B, F, ...)
+```
+
+after probing both the visible-opposite surface form and the double-op
+normal-form case under typed canonical contexts.
+
 This matters especially when the endpoint category may be a functor category
 into a product. Under the current product architecture,
 `Functor_cat X (Product_cat A B)` rewrites to

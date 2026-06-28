@@ -571,23 +571,30 @@ Validation:
 
 Phase 3 implementation note, 2026-06-28:
 
-- The `hom_postcomp_fapp0` opposite bridge was generalized from the visible
+- The `hom_postcomp_*` opposite bridge family was generalized from the visible
   fully-opposite form:
 
   ```text
-  hom_postcomp_fapp0(Op_cat B, Op_cat A, Op_func(A,B,F), ...)
-    -> hom_precomp_along_fapp0(A,B,F,...)
+  hom_postcomp_*(Op_cat B, Op_cat A, Op_func(A,B,F), ...)
+    -> hom_precomp_along_*(A,B,F,...)
   ```
 
-  to the normal-form-sensitive `Op_func` bridge:
+  to the normal-form-sensitive `Op_func` bridge family:
 
   ```text
-  hom_postcomp_fapp0(B,A,Op_func(_,_,F), ...)
-    -> hom_precomp_along_fapp0(Op_cat A, Op_cat B, F, ...)
+  hom_postcomp_*(B,A,Op_func(_,_,F), ...)
+    -> hom_precomp_along_*(Op_cat A, Op_cat B, F, ...)
   ```
 
-  This single bridge covers both the old fully-opposite surface and the
-  double-op-normalized surface where `Op_cat(Op_cat A)` has already reduced.
+  This family covers the old fully-opposite surface and the double-op
+  normalized surface where `Op_cat(Op_cat A)` has already reduced. The true
+  discriminee is the `Op_func` argument; the surrounding `Op_cat` source and
+  target categories are presentation wrappers, not the semantic case split.
+  The promoted family covers `hom_postcomp_tele_func`,
+  `hom_postcomp_func`, `hom_postcomp_fapp0`,
+  `hom_postcomp_fapp1_func`, `hom_postcomp_fapp1_fapp0`,
+  `hom_postcomp_tele_fapp1_func`, and
+  `hom_postcomp_tele_fapp1_fapp0`.
 - Precomposition by an identity arrow now has a three-rule runtime package:
 
   ```text
@@ -599,14 +606,18 @@ Phase 3 implementation note, 2026-06-28:
   The generic `@id` rule does not subsume the `Cat_cat/id_func` or
   `Catd_cat/id_funcd` normal forms, because those identity heads may already
   be normalized before the precomposition rule is considered.
-- Diagnostics now include the visible-opposite bridge, all three
-  precomposition identity heads, and a typed canonical-context check showing
-  that the old hom-int transitivity shortcut computes by `eq_refl` after the
-  expected `Catd_cat` hom type is fixed.
+- Diagnostics now include visible-opposite bridge checks for the telescope,
+  capped functor, object action, and capped 2-cell action; a double-op
+  normalized bridge check; all three precomposition identity heads; and a
+  typed canonical-context check showing that the old hom-int transitivity
+  shortcut computes by `eq_refl` after the expected `Catd_cat` hom type is
+  fixed.
 - Probe evidence:
   `tmp/probes/hom_postcomp_opfunc_general_bridge_probe.lp`,
   `tmp/probes/hom_postcomp_opfunc_general_no_precomp_id_probe.lp`, and
-  `tmp/probes/hom_precomp_identity_three_rule_probe.lp`.
+  `tmp/probes/hom_precomp_identity_three_rule_probe.lp`. The full-family
+  generalization was validated by
+  `tmp/probes/hom_postcomp_opfunc_general_full_family_probe.lp`.
 
 ### Phase 4: Cat-specialized cleanup plan
 
@@ -727,15 +738,17 @@ Promoted validation:
 - `python3 scripts/audit_rule_lhs.py --show-kept` reports zero unreviewed
   reconstructible compound LHS slots after replacing the new
   `comp_fapp0(..., hom_postcomp_fapp0(...), ...)` target slot by `_`.
-- `make warning-summary` completed with 1501 warnings: 1331 unjoinable
-  critical pairs and 170 replaceable pattern-variable warnings. The warning
-  increase is expected for this migration because `defiso_iso_evidence` is now
-  a stable projection owner, `hom_postcomp_fapp0` owns more DefIso
-  cancellation/accumulation joins, and the hom-action identity package now
-  includes the `Cat_cat/id_func` and `Catd_cat/id_funcd` normal-form heads.
-  The quiet kernel and diagnostics pass; the warning families should be
-  treated as follow-up confluence inventory, not as a veto on the promoted
-  runtime normal forms.
+- `make warning-summary` completed after the full `Op_func` bridge cleanup
+  with 1470 warnings: 1300 unjoinable critical pairs and 170 replaceable
+  pattern-variable warnings. This is a net decrease from the immediately
+  preceding 1501-warning state. The remaining warning families are expected
+  stable-head/DefIso/hom-action confluence inventory: `defiso_iso_evidence`
+  is now a stable projection owner, `hom_postcomp_fapp0` owns more DefIso
+  cancellation/accumulation joins, and the hom-action identity package includes
+  the `Cat_cat/id_func` and `Catd_cat/id_funcd` normal-form heads. The quiet
+  kernel and diagnostics pass; the warning families should be treated as
+  follow-up confluence inventory, not as a veto on the promoted runtime normal
+  forms.
 - `examples/path_induction_transitivity.lp` was updated to match the active
   transitivity benchmark: runtime computation now targets
   `hom_postcomp_fapp0(id,q,p)`, while a typed `eq_refl` witness records the

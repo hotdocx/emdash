@@ -174,6 +174,13 @@ manual classification and warning-enabled owning-position validation.
   reconstructible arguments implicit on rule LHSs unless they are the actual
   discriminator. In particular, avoid explicit compound or reducible expressions
   in implicit-argument positions on rule LHSs.
+- Identify the true discriminee of a rewrite family. If the semantic trigger is
+  a stable constructor argument such as `Op_func(_,_,F)`, do not also require
+  surrounding presentation wrappers like `Op_cat A`, `Op_cat B`, transparent
+  aliases, or endpoint normal forms unless those wrappers are part of the
+  mathematical case split. Probe the generalized rule at the owning position
+  and add typed canonical-context checks for both the visible surface form and
+  the normalized form it is meant to subsume.
 - Treat `outer_eliminator(inner_rewrite_cut(...))` LHSs as high-risk
   commuting conversions. Examples include
   `sigma_Fst(comp_fapp0(...))` and

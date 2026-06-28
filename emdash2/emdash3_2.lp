@@ -26,46 +26,84 @@
 
   Table of contents / future split map:
 
-    0-2. Kernel foundations
-         Groupoid universe, equality, encoded Sigma object layers, core
-         category structure, opposites, and path categories.
+    0. Groupoid universe and equality
+       Grpd, τ, equality/path primitives, induction/transport, observational
+       Sigma/Pi/Product equality skeletons, TypeEquiv, IsoEvidence,
+       OmegaEquiv, and univalence decoder heads.
 
-    3-7. Ordinary category calculus
-         Ordinary functors, universe categories, ordinary internal homs,
-         products, transfors, composition actions, evaluation/curry, ordinary
-         adjunctions, and ordinary internal hom-action.
+    1. Encoded Sigma/product object layers
+       Struct_sigma, projection/pathover helpers, generated Sigma/Pi wrappers,
+       product encodings, and constructor-specific path projections.
 
-    8-10. Directed family calculus
-         Cat-valued directed families, reindexing, displayed functors and
-         transfors, Pi/Sigma categories, dependent hom endpoints, and
-         mixed-variance family constructors.
+    2. Core category structure
+       Cat, Obj/Hom classifiers, id/composition, hom-category structure,
+       products, opposites, path categories, and universe category heads.
 
-    11-13. Representable and dependent-hom infrastructure
-         Representables, presheaf classifiers, Homd target families,
-         homd_int projection normal forms, and covariant fibre transport.
+    3. Ordinary functors and universe categories
+       Functor classifier, fapp0/fapp1 projection calculus, identity and
+       composition functors, Cat_cat/Catd_cat/Functor_cat structure, and
+       ordinary functor laws.
 
-    14-16. Displayed hom-action and laxity extraction
-         Section action, internal displayed hom-action, displayed component
-         notation, Sigma-map hom-action, and component-level displayed
-         laxity cells.
+    4. Ordinary internal hom and hom-actions
+       hom_, hom_func, hom_postcomp_* and hom_precomp_along_* stable heads,
+       opposite post/pre bridges, Cat-specialized hom-action presentations,
+       and ordinary composition-action joins.
 
-    17. Structural logic and bridges
-         Generic Sigma/Pi weakening/evaluation helpers, constant sections,
-         product-pair telescope rules, ordinary exchange/contraction, generic
-         ordinary functor hom-action, section pullback, and internal Pi action.
+    5. Transformations and Cat-specialized projections
+       Transf classifier, tapp0/tapp1 projection calculus, constant
+       transformations, comp_cat_cov/con heads, and transfor-level
+       naturality/cut-elimination rules.
 
-    18. Cat-valued profunctors
-         Profunctor base/category aliases, representable hom profunctors,
-         tensor/implication, comparison and weighted-limit machinery, duality,
-         join stress tests, and late cross-section normalization bridges.
+    6. Ordinary products, evaluation, curry/uncurry, and adjunctions
+       Product_cat/product maps, evaluation/curry rules, ordinary internal
+       hom interfaces, adjunction evidence, triangle reductions, and
+       right-adjoint preservation helpers.
 
-    19. Applications
-         PathOut, fixed-source and telescope path induction, Sigma-total path
-         induction, target transport aliases, transitivity/composition
-         benchmark, and nested telescope stress examples.
+    7. Directed family categories and reindexing
+       Cat-valued directed families, Fibre_cat, reindexing, displayed
+       categories, displayed functors/transfors, Op_funcd, and displayed
+       identity/composition rules.
 
-    20. Check catalog
-         Human-readable catalog of normal forms tested by emdash3_2_checks.lp.
+    8. Directed Pi/Sigma and mixed-variance family constructors
+       Pi_cat, Sigma_cat, dependent total categories, product-pair telescope
+       rules, section pullbacks, and internal Pi action.
+
+    9. Dependent hom and representable infrastructure
+       Representables, homd_src/tgt ladders, Homd target families,
+       homd_int projection normal forms, covariant fibre transport, and
+       representable transport aliases.
+
+    10. Displayed hom-action and laxity extraction
+        Section action, internal displayed hom-action, displayed component
+        notation, Sigma-map hom-action, and component-level displayed
+        laxity cells.
+
+    11. Structural functor logic
+        Generic Sigma/Pi weakening/evaluation helpers, constant sections,
+        ordinary exchange/contraction, generic ordinary functor hom-action,
+        and related structural bridges.
+
+    12. Ordinary internal hom-action refinements
+        tapp1_int/fapp1_int packages, strict naturality, and ordinary
+        hom-action component formulas.
+
+    13. Cat-valued profunctor facade
+        Prof_cat/Prof aliases, representable hom profunctors, tensor,
+        implication, curry/eval, reindexing, duality, and weighted-limit
+        facade rules.
+
+    14. DefIso and profunctor-comparison migration
+        DefIso primitives, hom_postcomp_fapp0 cancellation, fmap/reindex
+        utilities, ProfComparison compatibility aliases, and weighted-limit
+        migration checks.
+
+    15. Applications and stress tests
+        PathOut, fixed-source and telescope path induction, Sigma-total path
+        induction, target transport aliases, transitivity/composition
+        benchmark, nested telescope examples, and directed-inductive joins.
+
+    16. Check catalog
+        Human-readable catalog of normal forms tested by emdash3_2_checks.lp.
 */
 
 flag "eta_equality" on;
@@ -3324,17 +3362,19 @@ rule @hom_precomp_along_fapp1_fapp0
       (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g);
 
 // Opposite-specialized postcomposition is canonicalized to generalized
-// precomposition. This makes the generic postcomposition route join the
+// precomposition. The true discriminee is the `Op_func` argument; surrounding
+// `Op_cat` source/target categories are presentation wrappers and may already
+// have normalized away. This makes the generic postcomposition route join the
 // contravariant `hom_`-over-opposites route at the stable projection heads.
 rule @hom_postcomp_tele_func
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W
-  ↪ @hom_precomp_along_tele_func $A $B $F $Z $W $X;
+  ↪ @hom_precomp_along_tele_func (Op_cat $A) (Op_cat $B) $F $Z $W $X;
 
 rule @hom_postcomp_func
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W $h
-  ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
+  ↪ @hom_precomp_along_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h;
 
 rule @hom_postcomp_fapp0
       $B
@@ -3356,24 +3396,24 @@ rule @hom_postcomp_fapp0
       $g;
 
 rule @hom_postcomp_fapp1_func
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W $h $g $k
-  ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
+  ↪ @hom_precomp_along_fapp1_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $g $k;
 
 rule @hom_postcomp_fapp1_fapp0
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W $h $g $k $alpha
-  ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
+  ↪ @hom_precomp_along_fapp1_fapp0 (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $g $k $alpha;
 
 rule @hom_postcomp_tele_fapp1_func
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W $h $k
-  ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
+  ↪ @hom_precomp_along_tele_fapp1_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k;
 
 rule @hom_postcomp_tele_fapp1_fapp0
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
+      $B $A (@Op_func _ _ $F)
       $Z $X $W $h $k $alpha
-  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
+  ↪ @hom_precomp_along_tele_fapp1_fapp0 (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k $alpha;
 
 // Internalized hom classifier.
 //
