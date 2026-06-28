@@ -230,6 +230,21 @@ Concrete first implementation decision:
    semantic action is ordinary functor action on the cross arrow; the recursor
    beta itself belongs to the primitive `Join_cat` eliminator.
 
+   The old equipment-style expression remains a valid derived reading, but it
+   is deferred and should not be kept as the canonical computation rule:
+
+   ```text
+   Prof_comp_transf(
+     Prof_func_transf(join_elim_func(first,second,cross)),
+     join_cross_transf)
+   ```
+
+   After `Prof_comp_transf` is removed, any computational compatibility for
+   this reading should be join-specific and should expand through
+   `Prof_reindex_transf` plus fixed vertical composition, with
+   `hom_precomp_along_*` / `hom_postcomp_*` appearing only inside the
+   `Hom_prof_along` projection ladder.
+
    The shaped computation should be obtained by applying `Prof_cell_eval` to
    that cell-level beta:
 
@@ -1739,6 +1754,86 @@ Target:
   `hom_precomp_along_*` / `hom_postcomp_*`, only for shaped/naturality
   behavior where those heads are already the semantic owners.
 
+### Deferred Derived Equipment Reading
+
+The old formulation:
+
+```text
+Prof_comp_transf(
+  Prof_func_transf(join_elim_func(F,G,kappa)),
+  join_cross_transf)
+```
+
+was semantically meaningful. It expressed the equipment/double-category
+reading of the primitive cross beta:
+
+```text
+rec(F,G,kappa)_*(chi).
+```
+
+That content is ordinary and useful as a documented derived interpretation,
+but it is not needed as the primitive runtime owner. It is over-generalized
+only because it makes the broad endpoint-changing composition head own a join
+recursor beta.
+
+If a future consumer needs this derived equipment reading after
+`Prof_comp_transf` is deleted or demoted, do not reintroduce a broad
+replacement composition head. The computational route should be a narrow
+join-specific view, schematically:
+
+```text
+join_equipment_cross(F,G,kappa)
+  := comp_catd_fapp0(
+       Prof_reindex_transf(
+         Prof_func_transf(join_elim_func(F,G,kappa)),
+         join_fst_func,
+         join_snd_func),
+       join_cross_transf)
+```
+
+with the expected narrow reduction or proof-time comparison:
+
+```text
+join_equipment_cross(F,G,kappa)
+  -> join_elim_cross_transf(F,G,kappa)
+  -> kappa.
+```
+
+The exact kernel spelling must supply the product base, endpoint functors, and
+inferred profunctor arguments, and must be established in a focused probe. The
+important owner stack is:
+
+```text
+Prof_reindex_transf
+  for endpoint change of a profunctor cell;
+
+comp_catd_fapp0 or a narrower fixed vertical-composition view
+  for vertical composition of displayed profunctor maps;
+
+Hom_prof_along_fapp1_func
+  for representable profunctor arrow action;
+
+hom_precomp_along_* and hom_postcomp_*
+  inside the Hom_prof_along projection ladder;
+
+join_elim_cross_transf
+  for the primitive join recursor beta.
+```
+
+`hom_precomp_along_*` and `hom_postcomp_*` are therefore relevant but not
+sufficient by themselves: they act on ordinary hom arrows inside the
+representable profunctor. The profunctor-cell-level equipment reading also
+needs endpoint reindexing and vertical composition. A future reusable
+functor-induced representable-action owner may replace `Prof_func_transf` in
+this view, but that is a factoring improvement, not a prerequisite for the
+first join migration.
+
+Do not install a rewrite that recognizes arbitrary
+`comp_catd_fapp0(Prof_reindex_transf(...),...)` as a new global equipment
+composition. If computation is needed, orient only the narrow
+join-equipment view above, or keep the comparison proof-time if no runtime
+consumer needs it.
+
 ### Join Migration Phases
 
 1. Introduce the narrow shaped cell-application/evaluation API.
@@ -1829,7 +1924,22 @@ Target:
    Do not remove generic `Prof_comp_transf` yet. The tensor/co-Yoneda slice may
    still depend on it.
 
-7. Audit whether `join_cross_hom` can remain transparent.
+7. Defer the derived equipment reading.
+
+   Do not try to preserve old terms of the form:
+
+   ```text
+   Prof_comp_transf(
+     Prof_func_transf(join_elim_func(first,second,cross)),
+     join_cross_transf)
+   ```
+
+   as canonical runtime normal forms. If a consumer later needs this view,
+   add a narrow `join_equipment_cross`-style compatibility head routed through
+   `Prof_reindex_transf`, fixed vertical composition, and then
+   `join_elim_cross_transf`.
+
+8. Audit whether `join_cross_hom` can remain transparent.
 
    Only do this if the transparent body uses a narrow application/evaluation
    owner. Do not revert to `Prof_comp_transf` as the canonical body.
@@ -1903,6 +2013,12 @@ Medium risk:
   `hom_precomp_along_*` and `hom_postcomp_*` infrastructure should be reused
   for shaped/naturality projections where those heads are already the semantic
   owners, but they are not prerequisites for the top-level join beta.
+- the deferred equipment reading of the join cross beta should use
+  `Prof_reindex_transf` plus fixed vertical composition at profunctor-cell
+  level, and only then the existing `Hom_prof_along` /
+  `hom_precomp_along_*` / `hom_postcomp_*` projection ladder at
+  representable-arrow level. It must not recreate a broad
+  `Prof_comp_transf` replacement.
 - `Prof_cell_apply` must stay narrow: the first implementation should add no
   general associativity, identity, or equipment-composition rewrite rules for
   it.
@@ -1992,6 +2108,7 @@ make catalog
 | `EQUIP-INVENTORY` | proposed | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion. |
 | `EQUIP-CELL-EVAL` | selected for implementation | next implementation probe | Add general object-level `Prof_cell_apply`, define terminal-source `Prof_cell_eval`, and route `join_cross_hom` through `Prof_cell_eval` before migrating join beta. |
 | `EQUIP-JOIN-NARROW` | implementation-specified first pass | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval`, direct primitive `join_elim_cross_transf` beta, and optional transparent/fallback `join_elim_cross_hom` shaped alias. |
+| `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | implementation-specified first pass | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint one-way co-Yoneda map aliases, express arbitrary-`pp` shaped beta via `Prof_cell_apply`, preserve general-cell identity-unit naturality as temporary compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |
