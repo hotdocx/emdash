@@ -214,13 +214,35 @@ Concrete first implementation decision:
      := Prof_cell_eval(join_cross_transf,a,b).
    ```
 
-   Then add join-specific beta heads:
+   Then add the direct primitive join recursor cross beta:
 
    ```text
    join_elim_cross_transf(first,second,cross) -> cross
-   join_elim_cross_hom(first,second,cross,a,b)
-     -> Prof_cell_eval(cross,a,b).
    ```
+
+   This is not a rebranded general equipment composition law. It is the
+   primitive third beta law for the join recursor: the eliminator sends the
+   generating cross-cell to the supplied cross-cell.
+
+   `hom_postcomp_*` / `hom_precomp_*` may be relevant when probing internal
+   representable-action projections or future factoring of `Prof_func_transf`,
+   but they are not prerequisites for this top-level join beta. Pointwise, the
+   semantic action is ordinary functor action on the cross arrow; the recursor
+   beta itself belongs to the primitive `Join_cat` eliminator.
+
+   The shaped computation should be obtained by applying `Prof_cell_eval` to
+   that cell-level beta:
+
+   ```text
+   Prof_cell_eval(
+     join_elim_cross_transf(first,second,cross),a,b)
+   -> Prof_cell_eval(cross,a,b).
+   ```
+
+   A public `join_elim_cross_hom(first,second,cross,a,b)` head may be added as
+   a transparent readability alias or as a fallback stable projection if a
+   focused probe shows the kernel needs it. It is not independent
+   mathematical data.
 
    After diagnostics are migrated to those heads, remove the two
    join-specific `Prof_comp_transf` beta rules.
@@ -531,6 +553,33 @@ The terminal-source specialization should be a transparent definition after
 ```text
 Prof_cell_eval(c,a,b)
   := Prof_cell_apply(c, Prof_terminal_hom(a,b)).
+```
+
+Kernel spelling:
+
+```text
+symbol Prof_cell_eval
+  [I A' B' A B : Cat]
+  [R : τ (Prof A B)]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)]
+  [a : τ (Functor I A')]
+  [b : τ (Functor I B')]
+  (c : τ (Obj
+      (@Prof_transf_cat A A' B B'
+        (@Terminal_prof A' B') F R G)))
+  : τ (@Prof_hom
+      I A B
+      (@comp_cat_fapp0 I A' A F a)
+      R
+      (@comp_cat_fapp0 I B' B G b))
+≔ @Prof_cell_apply
+    I A' B' A B
+    (@Terminal_prof A' B')
+    R
+    F G a b
+    c
+    (@Prof_terminal_hom I A' B' a b);
 ```
 
 Deferred or fallback names, to use only if a focused probe shows a real
@@ -1465,7 +1514,8 @@ Target join surface:
 join_cross_transf(A,B)
 join_cross_hom(a,b)
 join_elim_func(first,second,cross)
-join_elim_cross_beta(first,second,cross)
+join_elim_cross_transf(first,second,cross)
+optional join_elim_cross_hom(first,second,cross,a,b)
 ```
 
 only exposes the operations required by the primitive join recursor. It should
@@ -1500,25 +1550,33 @@ not general equipment-cell composition.
 
 Target options, in priority order:
 
-1. Direct shaped projection head.
+1. Transparent projection through `Prof_cell_eval`.
 
-   Introduce a stable head:
+   Keep the public shaped name:
 
    ```text
    join_cross_hom(A,B,I,a,b)
    ```
 
-   with its current type. Treat it as the primitive shaped projection of
+   but make it route through the narrow terminal-source evaluator:
+
+   ```text
+   join_cross_hom(a,b)
+     := Prof_cell_eval(join_cross_transf,a,b).
+   ```
+
+   This keeps the current type while making `Prof_cell_eval`, not
+   `Prof_comp_transf`, the runtime owner of shaped cell evaluation.
+
+2. Direct stable shaped projection fallback.
+
+   If the transparent `Prof_cell_eval` route fails for a concrete kernel
+   reason, introduce a stable `join_cross_hom(A,B,I,a,b)` head with its
+   current type and document it as the primitive shaped projection of
    `join_cross_transf`.
 
    Add only the projection rules actually required by join diagnostics. Do
    not add general equipment associativity to make the old definition reduce.
-
-2. Transparent projection through a narrow `ProfMap`/`Prof_hom` owner.
-
-   If existing projection infrastructure can extract a shaped element from
-   `join_cross_transf` without using `Prof_comp_transf`, keep
-   `join_cross_hom` transparent through that narrower owner.
 
 3. Temporary compatibility definition.
 
@@ -1528,11 +1586,14 @@ Target options, in priority order:
 
 Probe order:
 
-- first try a direct stable `join_cross_hom` declaration with no definition;
-- add the recursor shaped beta rule against that stable head;
-- check whether existing `join_cross_transf` typing checks still cover the
-  naturality claim;
-- only then consider a transparent projection implementation.
+- first introduce `Prof_cell_apply` and transparent `Prof_cell_eval` in a
+  focused probe;
+- route `join_cross_hom` through `Prof_cell_eval`;
+- check whether existing `join_cross_transf` and `join_cross_hom` typing
+  diagnostics still cover the naturality and shaped-projection claims;
+- add the direct primitive join recursor cross beta and check the shaped beta
+  through `Prof_cell_eval`;
+- only if that route fails, try a direct stable `join_cross_hom` fallback.
 
 ### Join Recursor Beta
 
@@ -1548,71 +1609,135 @@ Prof_comp_transf(
 Mathematical recursor:
 
 ```text
-join_elim(first,second,cross) : Join(A,B) -> E
+F : A -> E
+G : B -> E
+kappa : Terminal_prof(A,B) -> Hom_E(F,G)
+
+[F,G,kappa] : Join(A,B) -> E
 ```
 
 with inclusion computation:
 
 ```text
-join_elim(first,second,cross) . i_A -> first
-join_elim(first,second,cross) . i_B -> second
+[F,G,kappa] . i_A -> F
+[F,G,kappa] . i_B -> G
 ```
 
-Target beta should be join-specific:
+and cross-cell computation:
 
 ```text
-join_elim_cross_transf(first,second,cross)
-  -> cross
+[F,G,kappa]_*(chi) -> kappa.
 ```
 
-or, if no public head is needed:
+This third beta law is necessary ordinary join-recursion semantics. It says
+that the recursor sends the primitive internally natural cross-arrow family
+`chi` to the supplied internally natural family `kappa`.
+
+Kernel target:
 
 ```text
-join_cross_action(join_elim_func(first,second,cross), join_cross_transf)
-  -> cross.
+join_elim_cross_transf(F,G,kappa)
+  : Obj(Prof_transf_cat E A E B Terminal_prof F Unit_prof G)
+
+rule join_elim_cross_transf(F,G,kappa)
+-> kappa.
 ```
 
-The name is less important than the ownership. The rule should discriminate
-on `join_elim_func` and `join_cross_transf`, not on arbitrary
-`Prof_comp_transf`.
+This is the primitive join-eliminator cross beta. It replaces the current
+expression:
+
+```text
+Prof_comp_transf(
+  Prof_func_transf(join_elim_func(F,G,kappa)),
+  join_cross_transf)
+-> kappa
+```
+
+without preserving arbitrary equipment composition as the runtime owner. The
+rule should discriminate on the primitive join recursor and the primitive
+cross-cell, not on arbitrary `Prof_comp_transf`.
+
+Why this does not require `hom_postcomp_*` / `hom_precomp_*` as the top-level
+owner:
+
+- Pointwise, the eliminated cross arrow is sent by ordinary functorial action:
+
+  ```text
+  chi_{a,b} : i_A(a) -> i_B(b)
+  (J-rec(F,G,kappa))(chi_{a,b})
+    : F(a) -> G(b).
+  ```
+
+- The beta law asserts that this arrow is the supplied component
+  `kappa_{a,b}`. That assertion is part of the primitive join recursor, just
+  as the inclusion beta laws are.
+- Existing `Hom_prof_along` action already uses precomposition followed by
+  postcomposition for naturality in the profunctor endpoints. The join beta
+  should respect that projection ladder in shaped/naturality probes, but it
+  should not be expressed by adding a broad new post/precomposition cut.
+- A future reusable functor-induced representable-action owner may factor the
+  pointwise action of a functor on hom profunctor cells. If such an owner is
+  already easy to expose, `join_elim_cross_transf` may be a transparent view
+  of its join specialization. This is a factoring option, not a prerequisite
+  for the first join migration.
 
 For shaped elements:
 
 ```text
-join_elim_cross_hom(first,second,cross,a,b)
-  -> cross[a,b].
+chi[a,b]   := Prof_cell_eval(chi,a,b)
+kappa[a,b] := Prof_cell_eval(kappa,a,b)
+
+[F,G,kappa]_*(chi[a,b]) -> kappa[a,b].
 ```
 
-Equivalently, using ordinary notation:
+Kernel target, using the readable view:
 
 ```text
-join_elim(first,second,cross)_*(chi_{a,b}) -> cross_{a,b}.
+Prof_cell_eval(
+  join_elim_cross_transf(first,second,cross),a,b)
+-> Prof_cell_eval(cross,a,b).
 ```
 
-The RHS should be the same narrow shaped evaluation of the supplied `cross`
-cell, not a general `Prof_comp_transf(cross, Prof_terminal_hom(a,b))` normal
-form. During migration, the old expression may remain a temporary
-compatibility view, but it must not be the final runtime owner.
+Therefore `join_elim_cross_hom(first,second,cross,a,b)` is not independent
+mathematics. It is the component/generalized-element projection of the
+cell-level beta. Prefer defining it transparently as:
+
+```text
+join_elim_cross_hom(first,second,cross,a,b)
+  := Prof_cell_eval(
+       join_elim_cross_transf(first,second,cross),a,b)
+```
+
+so it reduces to `Prof_cell_eval(cross,a,b)`. Add it as an independent stable
+head only if a focused probe shows that the transparent term is too hard for
+the kernel. The RHS must not be a final-form
+`Prof_comp_transf(cross, Prof_terminal_hom(a,b))`; that expression is only a
+temporary compatibility view.
 
 ### Prof_func_transf In Join
 
-`Prof_func_transf(F)` currently appears because applying a functor to a hom
-profunctor is represented as a functor-induced equipment cell. That is a
+`Prof_func_transf(F)` currently appears because applying a functor to hom
+arrows is represented as a functor-induced equipment cell. That is a
 reasonable temporary encoding, but it should not force the whole join recursor
 through general equipment composition.
 
 Target:
 
 - keep `Prof_func_transf` only as a compatibility cell while needed;
-- prefer a narrower representable hom-action owner for:
+- make the primitive join beta the first-pass owner:
 
   ```text
-  Hom_prof_along(join_fst,join_snd)
-  -> Hom_prof_along(first,second)
+  join_elim_cross_transf(first,second,cross) -> cross
   ```
 
-  induced by `join_elim_func(first,second,cross)`;
-- route join beta through the narrow owner.
+- if a focused probe finds that a reusable functor-induced representable-action
+  owner is already available and cheap, define `join_elim_cross_transf` as a
+  transparent view of its join specialization;
+- otherwise keep `join_elim_cross_transf` as the narrow primitive recursor
+  projection, because `Join_cat` itself is primitive;
+- use the existing `Hom_prof_along` projection ladder, including
+  `hom_precomp_along_*` / `hom_postcomp_*`, only for shaped/naturality
+  behavior where those heads are already the semantic owners.
 
 ### Join Migration Phases
 
@@ -1646,20 +1771,58 @@ Target:
 
    Keep active source unchanged. Reproduce current shaped typing checks.
 
-4. Add join-specific cross-transf action and shaped beta heads.
+4. Add the primitive join cross beta head.
 
-   Test:
+   First probe whether an existing reusable representable-action owner can
+   expose the needed special case without broad equipment composition. If that
+   is not already available, introduce the direct join recursor projection:
 
    ```text
    join_elim_cross_transf(first,second,cross) -> cross
+   ```
+
+   This is not a failure to factor through hom-action infrastructure; it is
+   the primitive cross beta for the primitive join eliminator.
+
+   Then test the shaped consequence through `Prof_cell_eval`:
+
+   ```text
+   Prof_cell_eval(
+     join_elim_cross_transf(first,second,cross),a,b)
+   -> Prof_cell_eval(cross,a,b).
+   ```
+
+   Add `join_elim_cross_hom` only as a transparent alias or fallback stable
+   head:
+
+   ```text
    join_elim_cross_hom(first,second,cross,a,b)
-     -> Prof_cell_eval(cross,a,b)
+     := Prof_cell_eval(
+          join_elim_cross_transf(first,second,cross),a,b).
    ```
 
 5. Migrate diagnostics.
 
    Replace checks whose only purpose is current `Prof_comp_transf` join beta
-   with checks over the join-specific heads.
+   with checks over the primitive join cross beta and the shaped
+   `Prof_cell_eval` consequence.
+
+   Add explicit checks that are currently missing:
+
+   ```text
+   join_elim_cross_transf(first,second,cross) ≡ cross
+
+   Prof_cell_eval(
+     join_elim_cross_transf(first,second,cross),a,b)
+   ≡ Prof_cell_eval(cross,a,b)
+   ```
+
+   If the optional shaped alias is introduced, also check:
+
+   ```text
+   join_elim_cross_hom(first,second,cross,a,b)
+   ≡ Prof_cell_eval(cross,a,b).
+   ```
 
 6. Remove join-specific `Prof_comp_transf` beta rules.
 
@@ -1734,6 +1897,12 @@ Medium risk:
 
 - `Prof_func_transf` may need a better representable hom-action owner before
   both general co-Yoneda and join can become clean.
+- `join_elim_cross_transf` must remain the primitive join recursor cross beta
+  or a transparent view of an already-feasible representable-action owner. It
+  must not become an arbitrary hidden equipment composite. Existing
+  `hom_precomp_along_*` and `hom_postcomp_*` infrastructure should be reused
+  for shaped/naturality projections where those heads are already the semantic
+  owners, but they are not prerequisites for the top-level join beta.
 - `Prof_cell_apply` must stay narrow: the first implementation should add no
   general associativity, identity, or equipment-composition rewrite rules for
   it.
@@ -1766,9 +1935,10 @@ Known non-goals:
 3. Join migration.
 
    Join has the smallest semantic surface and the clearest non-collage target.
-   Routing `join_cross_hom` through `Prof_cell_eval` plus join-specific beta
-   heads should let the code remove the join-specific `Prof_comp_transf` rules
-   without touching tensor.
+   Routing `join_cross_hom` through `Prof_cell_eval`, adding the direct
+   primitive `join_elim_cross_transf` beta, and deriving the shaped beta
+   through `Prof_cell_eval` should let the code remove the join-specific
+   `Prof_comp_transf` rules without touching tensor.
 
 4. Tensor/co-Yoneda.
 
@@ -1821,7 +1991,7 @@ make catalog
 | `EQUIP-WL-DOC` | complete in this plan | DefIso/weighted-limit reports | Explicitly document that nested hom-action cancellation is required for weighted-limit beta/eta and runtime universal-property computation. |
 | `EQUIP-INVENTORY` | proposed | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion. |
 | `EQUIP-CELL-EVAL` | selected for implementation | next implementation probe | Add general object-level `Prof_cell_apply`, define terminal-source `Prof_cell_eval`, and route `join_cross_hom` through `Prof_cell_eval` before migrating join beta. |
-| `EQUIP-JOIN-NARROW` | proposed | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with direct/narrow join owners. |
+| `EQUIP-JOIN-NARROW` | implementation-specified first pass | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval`, direct primitive `join_elim_cross_transf` beta, and optional transparent/fallback `join_elim_cross_hom` shaped alias. |
 | `EQUIP-TENSOR-COYONEDA` | implementation-specified first pass | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint one-way co-Yoneda map aliases, express arbitrary-`pp` shaped beta via `Prof_cell_apply`, preserve general-cell identity-unit naturality as temporary compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |
