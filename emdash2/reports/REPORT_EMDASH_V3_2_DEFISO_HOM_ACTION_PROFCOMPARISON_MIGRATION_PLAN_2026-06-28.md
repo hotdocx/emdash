@@ -21,6 +21,7 @@ Related plans:
 
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`
+- `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
 
 The normalized Infinity Codex header fields record the immediate predecessor
@@ -729,6 +730,23 @@ Promoted implementation note, 2026-06-28:
   `defiso_iso_evidence`, so ordinary evidence follows from the strict
   certificate rather than being independently assembled from legacy mate
   heads.
+
+Runtime universal-property note, 2026-06-28:
+
+- The nested hom-action cancellation shape
+  `from . (to . f) -> f` and `to . (from . g) -> g` is the intended runtime
+  owner for weighted-limit beta/eta. Weighted-limit universal properties act
+  on arbitrary incoming maps into the represented classifier, not only on the
+  selected inverse arrows.
+- Direct selected-arrow cancellation such as `from . to -> id` remains useful
+  for ordinary `IsoEvidence`, but it is not enough as the primary runtime
+  formulation without broad reassociation and identity cleanup rules. That
+  broad composition surface is intentionally avoided.
+- The remaining `Prof_comp_transf` users in tensor/co-Yoneda and primitive
+  join are now tracked by
+  `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`.
+  They are separate redesign tasks and are not prerequisites for the
+  adjunction-mate DefIso owner correction already promoted here.
 
 Implementation notes:
 

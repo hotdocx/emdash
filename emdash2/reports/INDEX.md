@@ -45,6 +45,10 @@ decisions.
   proposed subplan for the `UNI-DEFISO` migration: stable hom-action owners,
   generic `hom_int` precomposition, Cat-specialized owner cleanup, and
   factoring `ProfComparison` through `DefIso`.
+- `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
+  detailed redesign plan for retiring remaining `Prof_comp_transf`/
+  equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
+  while retaining semantically justified `Prof_reindex`.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
