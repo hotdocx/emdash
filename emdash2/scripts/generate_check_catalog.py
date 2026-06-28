@@ -270,6 +270,10 @@ AREAS: list[Area] = [
         ("hom_", "hom_con", "hom_int", "hom_postcomp", "hom_precomp", "comp_func"),
     ),
     Area(
+        "DefIso and computational isomorphism comparisons",
+        ("DefIso", "defiso_"),
+    ),
+    Area(
         "Displayed families, fibres, and displayed functor structure",
         (
             "Fibre_cat",

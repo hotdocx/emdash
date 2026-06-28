@@ -2582,6 +2582,61 @@ rule @fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f
 rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
   ↪ @hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g;
 
+// Hom-action functoriality for postcomposition. These joins prevent the
+// stable postcomposition owner from hiding the functoriality already present
+// in `hom_(F,W)`.
+rule @hom_postcomp_func $A $B $F $W $X $X (@id $B $X)
+  ↪ @id_func (Hom_cat $A $W (@fapp0 $B $A $F $X));
+
+rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
+  ↪ $g;
+
+rule @hom_postcomp_func
+      $A $B $F $W $X $Z
+      (@comp_fapp0 $B $X $Y $Z $q $p)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $A $W (@fapp0 $B $A $F $X))
+      (Hom_cat $A $W (@fapp0 $B $A $F $Y))
+      (Hom_cat $A $W (@fapp0 $B $A $F $Z))
+      (@hom_postcomp_func $A $B $F $W $Y $Z $q)
+      (@hom_postcomp_func $A $B $F $W $X $Y $p);
+
+rule @hom_postcomp_fapp0
+      $A $B $F $W $X $Z
+      (@comp_fapp0 $B $X $Y $Z $q $p)
+      $g
+  ↪ @hom_postcomp_fapp0
+      $A $B $F $W $Y $Z $q
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $p $g);
+
+rule @hom_postcomp_fapp0
+      $A $A (@id_func $A) $W $X $Z
+      (@hom_postcomp_fapp0 $A $A (@id_func $A) $X $Y $Z $q $p)
+      $g
+  ↪ @hom_postcomp_fapp0
+      $A $A (@id_func $A) $W $Y $Z $q
+      (@hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $p $g);
+
+// Postcomposition commutes with precomposition in the represented source
+// object. This generic join is the hom-action replacement for profunctor-
+// specific incoming-map naturality rules.
+rule @comp_fapp0
+      $A
+      $V
+      $W
+      _
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g)
+      $h
+  ↪ @hom_postcomp_fapp0
+      $A $B $F $V $X $Y $f
+      (@comp_fapp0
+        $A
+        $V
+        $W
+        (@fapp0 $B $A $F $X)
+        $g
+        $h);
+
 // Identity cuts for the identity-functor postcomposition owner. These keep
 // composition normalization at the stable postcomposition head instead of
 // erasing to the shared `comp_fapp0` head.
@@ -2724,6 +2779,46 @@ unif_rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $h $g
   ≡ @comp_fapp0 $A $W $X $Y $h $g
   ↪ [ tt ≡ tt ];
 
+unif_rule @hom_postcomp_fapp0
+    (@Catd_cat $K)
+    (@Catd_cat $K)
+    (@id_func (@Catd_cat $K))
+    $E $D $C $FF $GG
+  ≡ @comp_catd_fapp0 $K $E $D $C $FF $GG
+  ↪ [ tt ≡ tt ];
+
+rule @hom_postcomp_fapp0
+      (@Catd_cat $K)
+      (@Catd_cat $K)
+      (@id_func (@Catd_cat $K))
+      $R
+      $P
+      $P
+      (@id_funcd $K $P)
+      $r
+  ↪ $r;
+
+rule @comp_catd_fapp0
+      $K
+      $S
+      $R
+      $Q
+      (@hom_postcomp_fapp0
+        (@Catd_cat $K)
+        (@Catd_cat $K)
+        (@id_func (@Catd_cat $K))
+        $R $P $Q
+        $to
+        $r)
+      $h
+  ↪ @hom_postcomp_fapp0
+      (@Catd_cat $K)
+      (@Catd_cat $K)
+      (@id_func (@Catd_cat $K))
+      $S $P $Q
+      $to
+      (@comp_catd_fapp0 $K $S $R $P $r $h);
+
 /*
   Definitional/computational isomorphisms.
 
@@ -2749,6 +2844,27 @@ symbol defiso_from
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y))
   : τ (Hom C y x);
+
+injective symbol defiso_refl
+  [C : Cat]
+  (x : τ (Obj C))
+  : τ (@DefIso C x x);
+
+rule @defiso_to $C $x $x (@defiso_refl $C $x)
+  ↪ @id $C $x
+with @defiso_from $C $x $x (@defiso_refl $C $x)
+  ↪ @id $C $x;
+
+injective symbol defiso_sym
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y))
+  : τ (@DefIso C y x);
+
+rule @defiso_to $C $y $x (@defiso_sym $C $x $y $i)
+  ↪ @defiso_from $C $x $y $i
+with @defiso_from $C $y $x (@defiso_sym $C $x $y $i)
+  ↪ @defiso_to $C $x $y $i;
 
 rule @hom_postcomp_fapp0
       $A $C $F $W $y $x
@@ -2777,6 +2893,184 @@ with @hom_postcomp_fapp0
       (@defiso_to $C $x $y $i)
       (@defiso_from $C $x $y $i)
   ↪ @id $C $y;
+
+rule @comp_catd_fapp0
+      $K
+      $E
+      $D
+      $E
+      (@defiso_from (@Catd_cat $K) $E $D $i)
+      (@defiso_to (@Catd_cat $K) $E $D $i)
+  ↪ @id_funcd $K $E
+with @comp_catd_fapp0
+      $K
+      $D
+      $E
+      $D
+      (@defiso_to (@Catd_cat $K) $E $D $i)
+      (@defiso_from (@Catd_cat $K) $E $D $i)
+  ↪ @id_funcd $K $D;
+
+// Proof-time raw-composition view of DefIso cancellation. Runtime
+// cancellation remains owned by `hom_postcomp_fapp0`; this bridge exists so
+// ordinary propositional `IsoEvidence` witnesses can be built by reflexivity
+// when their statement is phrased with the raw `comp_fapp0` head.
+unif_rule @comp_fapp0
+      $C $x $y $x
+      (@defiso_from $C $x $y $i)
+      (@defiso_to $C $x $y $i)
+  ≡ @id $C $x
+  ↪ [ tt ≡ tt ];
+
+unif_rule @comp_fapp0
+      $C $y $x $y
+      (@defiso_to $C $x $y $i)
+      (@defiso_from $C $x $y $i)
+  ≡ @id $C $y
+  ↪ [ tt ≡ tt ];
+
+symbol defiso_iso_evidence
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y))
+  : τ (@IsoEvidence C x y);
+
+rule sigma_Fst (@defiso_iso_evidence $C $x $y $i)
+  ↪ @defiso_to $C $x $y $i;
+
+rule sigma_Fst (sigma_Snd (@defiso_iso_evidence $C $x $y $i))
+  ↪ @defiso_from $C $x $y $i;
+
+rule sigma_Fst (sigma_Snd (sigma_Snd (@defiso_iso_evidence $C $x $y $i)))
+  ↪ eq_refl
+      (@comp_fapp0 $C $x $y $x
+        (@defiso_from $C $x $y $i)
+        (@defiso_to $C $x $y $i));
+
+rule sigma_Snd (sigma_Snd (sigma_Snd (@defiso_iso_evidence $C $x $y $i)))
+  ↪ eq_refl
+      (@comp_fapp0 $C $y $x $y
+        (@defiso_to $C $x $y $i)
+        (@defiso_from $C $x $y $i));
+
+injective symbol defiso_comp
+  [C : Cat]
+  [x y z : τ (Obj C)]
+  (j : τ (@DefIso C y z))
+  (i : τ (@DefIso C x y))
+  : τ (@DefIso C x z);
+
+rule @defiso_to $C $x $z (@defiso_comp $C $x $y $z $j $i)
+  ↪ @hom_postcomp_fapp0
+      $C $C (@id_func $C) $x $y $z
+      (@defiso_to $C $y $z $j)
+      (@defiso_to $C $x $y $i)
+with @defiso_from $C $x $z (@defiso_comp $C $x $y $z $j $i)
+  ↪ @hom_postcomp_fapp0
+      $C $C (@id_func $C) $z $y $x
+      (@defiso_from $C $x $y $i)
+      (@defiso_from $C $y $z $j);
+
+rule @hom_postcomp_fapp0
+      $C $C (@id_func $C) $x $z $x
+      (@hom_postcomp_fapp0
+        $C $C (@id_func $C) $z $y $x
+        (@defiso_from $C $x $y $i)
+        (@defiso_from $C $y $z $j))
+      (@hom_postcomp_fapp0
+        $C $C (@id_func $C) $x $y $z
+        (@defiso_to $C $y $z $j)
+        (@defiso_to $C $x $y $i))
+  ↪ @id $C $x
+with @hom_postcomp_fapp0
+      $C $C (@id_func $C) $z $x $z
+      (@hom_postcomp_fapp0
+        $C $C (@id_func $C) $x $y $z
+        (@defiso_to $C $y $z $j)
+        (@defiso_to $C $x $y $i))
+      (@hom_postcomp_fapp0
+        $C $C (@id_func $C) $z $y $x
+        (@defiso_from $C $x $y $i)
+        (@defiso_from $C $y $z $j))
+  ↪ @id $C $z;
+
+injective symbol defiso_fmap
+  [C D : Cat]
+  (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y))
+  : τ (@DefIso D (@fapp0 C D F x) (@fapp0 C D F y));
+
+rule @defiso_to
+      $D
+      _ _
+      (@defiso_fmap $C $D $F $x $y $i)
+  ↪ @fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i)
+with @defiso_from
+      $D
+      _ _
+      (@defiso_fmap $C $D $F $x $y $i)
+  ↪ @fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i);
+
+rule @hom_postcomp_fapp0
+      $D $D (@id_func $D)
+      (@fapp0 $C $D $F $x)
+      (@fapp0 $C $D $F $y)
+      (@fapp0 $C $D $F $x)
+      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
+      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
+  ↪ @id $D (@fapp0 $C $D $F $x)
+with @hom_postcomp_fapp0
+      $D $D (@id_func $D)
+      (@fapp0 $C $D $F $y)
+      (@fapp0 $C $D $F $x)
+      (@fapp0 $C $D $F $y)
+      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
+      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
+  ↪ @id $D (@fapp0 $C $D $F $y);
+
+rule @hom_postcomp_fapp0
+      $D $D (@id_func $D)
+      $W _ _
+      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
+      (@hom_postcomp_fapp0
+        $D $D (@id_func $D)
+        $W _ _
+        (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
+        $f)
+  ↪ $f
+with @hom_postcomp_fapp0
+      $D $D (@id_func $D)
+      $W _ _
+      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
+      (@hom_postcomp_fapp0
+        $D $D (@id_func $D)
+        $W _ _
+        (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
+        $g)
+  ↪ $g;
+
+rule @defiso_iso_evidence $C $x $x (@defiso_refl $C $x)
+  ↪ @iso_evidence_refl $C $x;
+
+rule @defiso_iso_evidence $C $y $x (@defiso_sym $C $x $y $i)
+  ↪ @iso_evidence_sym
+      $C $x $y
+      (@defiso_iso_evidence $C $x $y $i);
+
+rule @defiso_iso_evidence $C $x $z (@defiso_comp $C $x $y $z $j $i)
+  ↪ @iso_evidence_comp
+      $C $x $y $z
+      (@defiso_iso_evidence $C $y $z $j)
+      (@defiso_iso_evidence $C $x $y $i);
+
+rule @defiso_iso_evidence
+      $D
+      _ _
+      (@defiso_fmap $C $D $F $x $y $i)
+  ↪ @iso_evidence_fmap
+      $C $D $F $x $y
+      (@defiso_iso_evidence $C $x $y $i);
 
 // Contravariant represented-object classifier.
 //
@@ -2859,6 +3153,32 @@ rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
 // Object action of precomposition: keep the stable precomposition head.
 rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
   ↪ @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g;
+
+// Hom-action functoriality for precomposition. The composition orientation is
+// contravariant in the acted-on base arrow: first precompose by q, then by p.
+rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
+  ↪ @id_func (Hom_cat $B (@fapp0 $A $B $F $X) $Z);
+
+rule @hom_precomp_along_fapp0 $A $B $F $Z $X $X (@id $A $X) $g
+  ↪ $g;
+
+rule @hom_precomp_along_func
+      $A $B $F $Z $W $Y
+      (@comp_fapp0 $A $W $X $Y $q $p)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $B (@fapp0 $A $B $F $Y) $Z)
+      (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+      (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
+      (@hom_precomp_along_func $A $B $F $Z $W $X $p)
+      (@hom_precomp_along_func $A $B $F $Z $X $Y $q);
+
+rule @hom_precomp_along_fapp0
+      $A $B $F $Z $W $Y
+      (@comp_fapp0 $A $W $X $Y $q $p)
+      $g
+  ↪ @hom_precomp_along_fapp0
+      $A $B $F $Z $W $X $p
+      (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g);
 
 unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
   ≡ @comp_fapp0
@@ -3036,17 +3356,13 @@ symbol hom_int_precomp_func [A B : Cat]
   (p : τ (Hom (Op_cat A) Y X))
   : τ (Hom (@Catd_cat B) (@hom_ A B F Y) (@hom_ A B F X));
 
-rule @fapp1_func (Op_cat $A) (@Catd_cat $B) (@hom_int $A $B $F) $Y $X
+rule @fapp1_func _ _ (@hom_int $A $B $F) $Y $X
   ↪ @hom_int_precomp_tele_func $A $B $F $Y $X;
 
-rule @fapp1_fapp0 (Op_cat $A) (@Catd_cat $B) (@hom_int $A $B $F) $Y $X $p
+rule @fapp1_fapp0 _ _ (@hom_int $A $B $F) $Y $X $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
 
-rule @fapp0
-      (Hom_cat (Op_cat $A) $Y $X)
-      (Hom_cat (@Catd_cat $B) (@hom_ $A $B $F $Y) (@hom_ $A $B $F $X))
-      (@hom_int_precomp_tele_func $A $B $F $Y $X)
-      $p
+rule @fapp0 _ _ (@hom_int_precomp_tele_func $A $B $F $Y $X) $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
 
 /*
@@ -8728,10 +9044,11 @@ symbol Representation_iso
   `IsoEvidence` and the two semantic paths retain the standard categorical
   interpretation as postcomposition by inverse arrows.
 */
-injective symbol ProfComparison
+symbol ProfComparison
   [A B : Cat]
   (P Q : τ (Prof A B))
-  : Grpd;
+  : Grpd
+≔ @DefIso (@Prof_cat A B) P Q;
 
 symbol prof_comparison_push
   [A B : Cat]
@@ -8739,7 +9056,14 @@ symbol prof_comparison_push
   (i : τ (ProfComparison P Q))
   [R : τ (Prof A B)]
   (r : τ (ProfMap R P))
-  : τ (ProfMap R Q);
+  : τ (ProfMap R Q)
+≔ @hom_postcomp_fapp0
+    (Prof_cat A B)
+    (Prof_cat A B)
+    (@id_func (Prof_cat A B))
+    R P Q
+    (@defiso_to (@Prof_cat A B) P Q i)
+    r;
 
 symbol prof_comparison_pull
   [A B : Cat]
@@ -8747,16 +9071,14 @@ symbol prof_comparison_pull
   (i : τ (ProfComparison P Q))
   [R : τ (Prof A B)]
   (s : τ (ProfMap R Q))
-  : τ (ProfMap R P);
-
-rule @prof_comparison_pull
-      $A $B $P $Q $i $R
-      (@prof_comparison_push $A $B $P $Q $i $R $r)
-  ↪ $r
-with @prof_comparison_push
-      $A $B $P $Q $i $R
-      (@prof_comparison_pull $A $B $P $Q $i $R $s)
-  ↪ $s;
+  : τ (ProfMap R P)
+≔ @hom_postcomp_fapp0
+    (Prof_cat A B)
+    (Prof_cat A B)
+    (@id_func (Prof_cat A B))
+    R Q P
+    (@defiso_from (@Prof_cat A B) P Q i)
+    s;
 
 // Selected forward and inverse arrows are identity applications.
 symbol prof_comparison_to
@@ -8764,77 +9086,25 @@ symbol prof_comparison_to
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
   : τ (ProfMap P Q)
-≔ @prof_comparison_push
-    A B P Q i P
-    (@id_funcd (Product_cat (Op_cat A) B) P);
+≔ @defiso_to (@Prof_cat A B) P Q i;
 
 symbol prof_comparison_from
   [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
   : τ (ProfMap Q P)
-≔ @prof_comparison_pull
-    A B P Q i Q
-    (@id_funcd (Product_cat (Op_cat A) B) Q);
+≔ @defiso_from (@Prof_cat A B) P Q i;
 
 symbol prof_comparison_evidence
   [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
-  : τ (IsoEvidence (Prof_cat A B) P Q);
+  : τ (IsoEvidence (Prof_cat A B) P Q)
+≔ @defiso_iso_evidence (@Prof_cat A B) P Q i;
 
-/*
-  Incoming-map naturality is oriented inward as cut elimination:
-
-    push(i,r) o h -> push(i,r o h).
-
-  The opposite expansion orientation creates critical pairs with identity
-  cuts, equipment folds, and reducible opposite bases.
-*/
-rule @comp_catd_fapp0
-      _
-      $S $R $Q
-      (@prof_comparison_push $A $B $P $Q $i $R $r)
-      $h
-  ↪ @prof_comparison_push
-      $A $B $P $Q $i $S
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat $A) $B)
-        $S $R $P
-        $r $h)
-with @comp_catd_fapp0
-      _
-      $S $R $P
-      (@prof_comparison_pull $A $B $P $Q $i $R $s)
-      $h
-  ↪ @prof_comparison_pull
-      $A $B $P $Q $i $S
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat $A) $B)
-        $S $R $Q
-        $s $h);
-
-/*
-  Proof-time agreement between selected comparison arrows and ordinary
-  evidence projections. `iso_evidence_to/from` are transparent Sigma
-  projections, so these equations use their normalized forms. They do not
-  rewrite either public normal form, but let the explicit bridge proofs below
-  be `eq_refl`.
-*/
-unif_rule @prof_comparison_push
-    $A $B $P $Q $i $P
-    (@id_funcd (Product_cat (Op_cat $A) $B) $P)
-  ≡ sigma_Fst
-      (@prof_comparison_evidence $A $B $P $Q $i)
-  ↪ [ tt ≡ tt ];
-
-unif_rule @prof_comparison_pull
-    $A $B $P $Q $i $Q
-    (@id_funcd (Product_cat (Op_cat $A) $B) $Q)
-  ≡ sigma_Fst
-      (sigma_Snd
-        (@prof_comparison_evidence $A $B $P $Q $i))
-  ↪ [ tt ≡ tt ];
+// Incoming-map naturality and selected-arrow agreement are now inherited from
+// the generic hom-action and DefIso owners. `ProfComparison` keeps only a
+// compatibility surface while downstream code migrates to `DefIso` directly.
 
 symbol prof_comparison_to_evidence
   [A B : Cat]
@@ -8998,96 +9268,37 @@ symbol prof_comparison_pull_func
     R Q P
     (@prof_comparison_from A B P Q i);
 
-injective symbol prof_comparison_refl
+symbol prof_comparison_refl
   [A B : Cat]
   (P : τ (Prof A B))
-  : τ (ProfComparison P P);
+  : τ (ProfComparison P P)
+≔ @defiso_refl (@Prof_cat A B) P;
 
-injective symbol prof_comparison_sym
+symbol prof_comparison_sym
   [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
-  : τ (ProfComparison Q P);
+  : τ (ProfComparison Q P)
+≔ @defiso_sym (@Prof_cat A B) P Q i;
 
-injective symbol prof_comparison_comp
+symbol prof_comparison_comp
   [A B : Cat]
   [P Q R : τ (Prof A B)]
   (j : τ (ProfComparison Q R))
   (i : τ (ProfComparison P Q))
-  : τ (ProfComparison P R);
+  : τ (ProfComparison P R)
+≔ @defiso_comp (@Prof_cat A B) P Q R j i;
 
-injective symbol prof_comparison_fmap
+symbol prof_comparison_fmap
   [A B A' B' : Cat]
   (F : τ (Functor (Prof_cat A B) (Prof_cat A' B')))
   [P Q : τ (Prof A B)]
   (i : τ (ProfComparison P Q))
-  : τ (ProfComparison (fapp0 F P) (fapp0 F Q));
-
-rule @prof_comparison_push
-      $A $B $P $P
-      (@prof_comparison_refl $A $B $P)
-      _ $r
-  ↪ $r
-with @prof_comparison_pull
-      $A $B $P $P
-      (@prof_comparison_refl $A $B $P)
-      _ $r
-  ↪ $r;
-
-rule @prof_comparison_push
-      $A $B $Q $P
-      (@prof_comparison_sym $A $B $P $Q $i)
-      $R $r
-  ↪ @prof_comparison_pull $A $B $P $Q $i $R $r
-with @prof_comparison_pull
-      $A $B $Q $P
-      (@prof_comparison_sym $A $B $P $Q $i)
-      $R $s
-  ↪ @prof_comparison_push $A $B $P $Q $i $R $s;
-
-rule @prof_comparison_push
-      $A $B $P $R
-      (@prof_comparison_comp $A $B $P $Q $R $j $i)
-      $S $r
-  ↪ @prof_comparison_push
-      $A $B $Q $R $j $S
-      (@prof_comparison_push $A $B $P $Q $i $S $r)
-with @prof_comparison_pull
-      $A $B $P $R
-      (@prof_comparison_comp $A $B $P $Q $R $j $i)
-      $S $s
-  ↪ @prof_comparison_pull
-      $A $B $P $Q $i $S
-      (@prof_comparison_pull $A $B $Q $R $j $S $s);
-
-rule @prof_comparison_evidence
-      $A $B $P $P
-      (@prof_comparison_refl $A $B $P)
-  ↪ @iso_evidence_refl (Prof_cat $A $B) $P;
-
-rule @prof_comparison_evidence
-      $A $B $Q $P
-      (@prof_comparison_sym $A $B $P $Q $i)
-  ↪ @iso_evidence_sym
-      (Prof_cat $A $B) $P $Q
-      (@prof_comparison_evidence $A $B $P $Q $i);
-
-rule @prof_comparison_evidence
-      $A $B $P $R
-      (@prof_comparison_comp $A $B $P $Q $R $j $i)
-  ↪ @iso_evidence_comp
-      (Prof_cat $A $B) $P $Q $R
-      (@prof_comparison_evidence $A $B $Q $R $j)
-      (@prof_comparison_evidence $A $B $P $Q $i);
-
-rule @prof_comparison_evidence
-      $A' $B' _ _
-      (@prof_comparison_fmap $A $B $A' $B' $F $P $Q $i)
-  ↪ @iso_evidence_fmap
-      (Prof_cat $A $B)
-      (Prof_cat $A' $B')
-      $F $P $Q
-      (@prof_comparison_evidence $A $B $P $Q $i);
+  : τ (ProfComparison (fapp0 F P) (fapp0 F Q))
+≔ @defiso_fmap
+    (@Prof_cat A B)
+    (@Prof_cat A' B')
+    F P Q i;
 
 // Reindexing along identity endpoint functors is neutral. This rule is added
 // here because tensor reindexing below exposes identity reindexing at the
@@ -9225,6 +9436,59 @@ rule @Prof_reindex_transf
       (@id_func $A)
       (@id_func $B)
   ↪ $r;
+
+rule @hom_postcomp_fapp0
+      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+      (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      $R _ _
+      (@Prof_reindex_transf
+        $A $A2 $B $B2
+        $y $x
+        (@defiso_from
+          (@Catd_cat (Product_cat (Op_cat $A) $B))
+          $x $y $i)
+        $F $G)
+      (@hom_postcomp_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        $R _ _
+        (@Prof_reindex_transf
+          $A $A2 $B $B2
+          $x $y
+          (@defiso_to
+            (@Catd_cat (Product_cat (Op_cat $A) $B))
+            $x $y $i)
+          $F $G)
+        $r)
+  ↪ $r
+with @hom_postcomp_fapp0
+      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+      (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      $R _ _
+      (@Prof_reindex_transf
+        $A $A2 $B $B2
+        $x $y
+        (@defiso_to
+          (@Catd_cat (Product_cat (Op_cat $A) $B))
+          $x $y $i)
+        $F $G)
+      (@hom_postcomp_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        $R _ _
+        (@Prof_reindex_transf
+          $A $A2 $B $B2
+          $y $x
+          (@defiso_from
+            (@Catd_cat (Product_cat (Op_cat $A) $B))
+            $x $y $i)
+          $F $G)
+        $s)
+  ↪ $s;
 
 // Stable identity equipment cell. Keep generic id_funcd unchanged globally.
 symbol Prof_id_transf [A B : Cat]
@@ -10813,8 +11077,28 @@ injective symbol Adjunction_hom_prof_comparison
         (@id_func A)
         (@right_adj_func A B adj)));
 
-rule @prof_comparison_evidence
-      $A $B _ _
+rule @defiso_to
+      (@Catd_cat (Product_cat (Op_cat $A) $B))
+      _ _
+      (@Adjunction_hom_prof_comparison $A $B $adj)
+  ↪ @Adjunction_prof_transpose
+      $A $B $adj
+      $A $B
+      (@id_func $A)
+      (@id_func $B)
+with @defiso_from
+      (@Catd_cat (Product_cat (Op_cat $A) $B))
+      _ _
+      (@Adjunction_hom_prof_comparison $A $B $adj)
+  ↪ @Adjunction_prof_untranspose
+      $A $B $adj
+      $A $B
+      (@id_func $A)
+      (@id_func $B);
+
+rule @defiso_iso_evidence
+      (@Catd_cat (Product_cat (Op_cat $A) $B))
+      _ _
       (@Adjunction_hom_prof_comparison $A $B $adj)
   ↪ @Adjunction_hom_prof_iso_evidence $A $B $adj;
 

@@ -1200,6 +1200,52 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   fapp0 (@fapp1_fapp0 B Cat_cat (@hom_ A B F W) X Y f) g
     ≡ @hom_postcomp_fapp0 A B F W X Y f g;
 
+// Hom-action functoriality joins for postcomposition.
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X : τ (Obj B)) ⊢
+  @hom_postcomp_func A B F W X X (@id B X)
+    ≡ @id_func (Hom_cat A W (@fapp0 B A F X));
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X : τ (Obj B)) (g : τ (Hom A W (@fapp0 B A F X))) ⊢
+  @hom_postcomp_fapp0 A B F W X X (@id B X) g
+    ≡ g;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y Z : τ (Obj B))
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z)) ⊢
+  @hom_postcomp_func A B F W X Z (@comp_fapp0 B X Y Z q p)
+    ≡ @comp_cat_fapp0
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y))
+        (Hom_cat A W (@fapp0 B A F Z))
+        (@hom_postcomp_func A B F W Y Z q)
+        (@hom_postcomp_func A B F W X Y p);
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y Z : τ (Obj B))
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A F X))) ⊢
+  @hom_postcomp_fapp0 A B F W X Z (@comp_fapp0 B X Y Z q p) g
+    ≡ @hom_postcomp_fapp0 A B F W Y Z q
+        (@hom_postcomp_fapp0 A B F W X Y p g);
+
+assert [A B : Cat] (F : τ (Functor B A))
+  (V W : τ (Obj A)) (X Y : τ (Obj B))
+  (h : τ (Hom A V W))
+  (f : τ (Hom B X Y))
+  (g : τ (Hom A W (@fapp0 B A F X))) ⊢
+  @comp_fapp0
+    A
+    V
+    W
+    (@fapp0 B A F Y)
+    (@hom_postcomp_fapp0 A B F W X Y f g)
+    h
+  ≡ @hom_postcomp_fapp0
+      A B F V X Y f
+      (@comp_fapp0 A V W (@fapp0 B A F X) g h);
+
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y : τ (Obj B)) (f : τ (Hom B X Y))
   (g : τ (Hom A W (@fapp0 B A F X))) ⊢
@@ -1218,6 +1264,106 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
       (Hom_cat A W (@fapp0 B A F Y))
       (@hom_postcomp_fapp0 A B F W X Y f g);
 
+// DefIso utility constructors and ordinary semantic evidence extraction.
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @defiso_refl C x
+  : τ (@DefIso C x x);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @defiso_to C x x (@defiso_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @defiso_from C x x (@defiso_refl C x)
+  ≡ @id C x;
+
+assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢
+  @defiso_to C y x (@defiso_sym C x y i)
+  ≡ @defiso_from C x y i;
+
+assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢
+  @defiso_from C y x (@defiso_sym C x y i)
+  ≡ @defiso_to C x y i;
+
+assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢
+  @defiso_iso_evidence C x y i
+  : τ (@IsoEvidence C x y);
+
+assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢
+  @iso_evidence_to C x y (@defiso_iso_evidence C x y i)
+  ≡ @defiso_to C x y i;
+
+assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢
+  @iso_evidence_from C x y (@defiso_iso_evidence C x y i)
+  ≡ @defiso_from C x y i;
+
+assert [C : Cat] [x y z : τ (Obj C)]
+  (j : τ (@DefIso C y z))
+  (i : τ (@DefIso C x y)) ⊢
+  @defiso_to C x z (@defiso_comp C x y z j i)
+  ≡ @hom_postcomp_fapp0
+      C C (@id_func C) x y z
+      (@defiso_to C y z j)
+      (@defiso_to C x y i);
+
+assert [C : Cat] [x y z : τ (Obj C)]
+  (j : τ (@DefIso C y z))
+  (i : τ (@DefIso C x y)) ⊢
+  @defiso_from C x z (@defiso_comp C x y z j i)
+  ≡ @hom_postcomp_fapp0
+      C C (@id_func C) z y x
+      (@defiso_from C x y i)
+      (@defiso_from C y z j);
+
+assert [C : Cat] [x y z : τ (Obj C)]
+  (j : τ (@DefIso C y z))
+  (i : τ (@DefIso C x y)) ⊢
+  @hom_postcomp_fapp0
+    C C (@id_func C) x z x
+    (@defiso_from C x z (@defiso_comp C x y z j i))
+    (@defiso_to C x z (@defiso_comp C x y z j i))
+  ≡ @id C x;
+
+assert [C D : Cat] (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y)) ⊢
+  @defiso_to
+    D
+    (@fapp0 C D F x)
+    (@fapp0 C D F y)
+    (@defiso_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D F x y (@defiso_to C x y i);
+
+assert [C D : Cat] (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y)) ⊢
+  @defiso_from
+    D
+    (@fapp0 C D F x)
+    (@fapp0 C D F y)
+    (@defiso_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D F y x (@defiso_from C x y i);
+
+assert [C D : Cat] (F : τ (Functor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y)) ⊢
+  @hom_postcomp_fapp0
+    D D (@id_func D)
+    (@fapp0 C D F x)
+    (@fapp0 C D F y)
+    (@fapp0 C D F x)
+    (@defiso_from
+      D
+      (@fapp0 C D F x)
+      (@fapp0 C D F y)
+      (@defiso_fmap C D F x y i))
+    (@defiso_to
+      D
+      (@fapp0 C D F x)
+      (@fapp0 C D F y)
+      (@defiso_fmap C D F x y i))
+  ≡ @id D (@fapp0 C D F x);
+
 // From emdash3_2.lp:985.
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
@@ -1233,6 +1379,37 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
   fapp0 (@hom_precomp_along_func A B F z w x h) g
     ≡ @hom_precomp_along_fapp0 A B F z w x h g;
+
+// Hom-action functoriality joins for precomposition.
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (x : τ (Obj A)) ⊢
+  @hom_precomp_along_func A B F z x x (@id A x)
+    ≡ @id_func (Hom_cat B (@fapp0 A B F x) z);
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (x : τ (Obj A))
+  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
+  @hom_precomp_along_fapp0 A B F z x x (@id A x) g
+    ≡ g;
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x y : τ (Obj A))
+  (p : τ (Hom A w x)) (q : τ (Hom A x y)) ⊢
+  @hom_precomp_along_func A B F z w y (@comp_fapp0 A w x y q p)
+    ≡ @comp_cat_fapp0
+        (Hom_cat B (@fapp0 A B F y) z)
+        (Hom_cat B (@fapp0 A B F x) z)
+        (Hom_cat B (@fapp0 A B F w) z)
+        (@hom_precomp_along_func A B F z w x p)
+        (@hom_precomp_along_func A B F z x y q);
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x y : τ (Obj A))
+  (p : τ (Hom A w x)) (q : τ (Hom A x y))
+  (g : τ (Hom B (@fapp0 A B F y) z)) ⊢
+  @hom_precomp_along_fapp0 A B F z w y (@comp_fapp0 A w x y q p) g
+    ≡ @hom_precomp_along_fapp0 A B F z w x p
+        (@hom_precomp_along_fapp0 A B F z x y q g);
 
 // Generalized precomposition projection ladder.
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))

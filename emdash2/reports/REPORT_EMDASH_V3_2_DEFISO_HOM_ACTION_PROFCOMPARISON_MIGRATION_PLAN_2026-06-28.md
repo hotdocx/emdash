@@ -2,7 +2,7 @@
 
 Date: 2026-06-28
 Last reviewed: 2026-06-28
-Status: active incremental migration plan; Phases 1-2 promoted
+Status: active incremental migration plan; Phases 1-2 and Phase 5 promoted
 Plan-ID: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28
 
 Parent plan:
@@ -595,6 +595,51 @@ Feasibility from the current scan:
 
 ### Phase 5: Migrate ProfComparison to DefIso compatibility
 
+Status as of 2026-06-28:
+
+- Promoted in `emdash3_2.lp`.
+- `ProfComparison(A,B,P,Q)` is now a transparent compatibility alias for
+  `DefIso(Prof_cat(A,B),P,Q)`.
+- `prof_comparison_push/pull` remain as public compatibility names, but they
+  are defined wrappers through `hom_postcomp_fapp0(id,defiso_to/from,_)`.
+  They no longer own primitive cancellation, incoming-map accumulation, or
+  evidence rewrite rules.
+- `prof_comparison_refl/sym/comp/fmap` are transparent aliases for
+  `defiso_refl/sym/comp/fmap`.
+- `prof_comparison_evidence` is a defined alias for `defiso_iso_evidence`.
+  Whole-evidence computation for `DefIso` constructors is now owned
+  generically by `defiso_iso_evidence`.
+- Existing weighted-limit and right-adjoint preservation diagnostics still
+  pass after migration.
+
+Implementation notes:
+
+- `Prof_cat` is a transparent readability alias for
+  `Catd_cat(Product_cat(Op_cat A) B)`. New rewrite rules must not use
+  `Prof_cat` as a semantic discriminator. Where a category argument is a real
+  guard, use the canonical expanded `Catd_cat(Product_cat(...))` form or avoid
+  category-head discrimination entirely.
+- The successful migration needed `defiso_iso_evidence` to become a stable
+  evidence owner with projection rules. Keeping it as a transparent Sigma
+  definition did not leave a stable head for constructor-specific evidence
+  computation.
+- `defiso_fmap` selected-arrow rules now keep endpoint arguments as `_ _`;
+  the endpoints are reconstructible and often reduce through stable functor
+  projections before the DefIso rule sees them.
+- The atomic adjunction mate comparison has focused selected-arrow rules:
+  `defiso_to(Adjunction_hom_prof_comparison)` computes to
+  `Adjunction_prof_transpose`, and `defiso_from(...)` computes to
+  `Adjunction_prof_untranspose`.
+- The weighted-limit beta checks require a stable-projection join for
+  `Prof_reindex_transf` applied to `defiso_to/from`. This is the
+  projection-specialized counterpart of functor-image DefIso cancellation:
+  `fapp1_fapp0(Prof_reindex_func,defiso_to/from)` immediately specializes to
+  `Prof_reindex_transf`, so the abstract `fapp1_fapp0` cancellation rule is
+  not enough.
+- A probe confirmed that adding a rule discriminating on `Prof_cat` was the
+  wrong direction: it is a defined alias, and the actual fix is generic DefIso
+  evidence/selected-arrow computation plus canonical Catd projection joins.
+
 Tasks:
 
 1. Define a bridge from `ProfComparison` to `DefIso(Prof_cat(A,B),P,Q)`, or
@@ -608,12 +653,44 @@ Tasks:
 5. Once all consumers use hom-action/DefIso owners, demote or delete the old
    pointwise computational owner.
 
+Task status:
+
+- Items 1, 2, 3, and 5 are complete in the active kernel.
+- Item 4 remains only as compatibility aliases: the names still exist because
+  downstream code uses them, but their computation is inherited from DefIso
+  and hom-action owners.
+- Future cleanup can migrate consumers away from the `prof_comparison_*`
+  surface and eventually delete the aliases, but this is no longer required
+  for correctness of the DefIso migration.
+
 Validation:
 
 - existing profunctor weighted-limit checks;
 - right-adjoint preservation checks;
 - `ProfComparison` beta/eta checks;
 - `make check`, then `make examples` if reviewer-facing examples are touched.
+
+Promoted validation:
+
+- `EMDASH_TYPECHECK_TIMEOUT=60s scripts/probe.sh
+  tmp/probes/defiso_phase5_profcomparison_alias_source_probe.lp` passed.
+- `EMDASH_TYPECHECK_TIMEOUT=60s scripts/probe.sh
+  tmp/probes/defiso_phase5_profcomparison_alias_checks_probe.lp` passed.
+- `EMDASH_TYPECHECK_TIMEOUT=60s make check` passed after promotion.
+- `python3 scripts/audit_rule_lhs.py --show-kept` reports zero unreviewed
+  reconstructible compound LHS slots after replacing the new
+  `comp_fapp0(..., hom_postcomp_fapp0(...), ...)` target slot by `_`.
+- `make warning-summary` completed with 1499 warnings: 1329 unjoinable
+  critical pairs and 170 replaceable pattern-variable warnings. The warning
+  increase is expected for this migration because `defiso_iso_evidence` is now
+  a stable projection owner and `hom_postcomp_fapp0` owns more DefIso
+  cancellation/accumulation joins. The quiet kernel and diagnostics pass; the
+  warning families should be treated as follow-up confluence inventory, not as
+  a veto on the promoted runtime normal forms.
+- `examples/path_induction_transitivity.lp` was updated to match the active
+  transitivity benchmark: runtime computation now targets
+  `hom_postcomp_fapp0(id,q,p)`, while a typed `eq_refl` witness records the
+  proof-time ordinary-composition view against `comp_fapp0(q,p)`.
 
 ## Open Questions
 
