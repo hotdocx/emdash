@@ -187,7 +187,8 @@ class InfinityCodexTests(unittest.TestCase):
         result = self.run_hook(start_payload)
         context = result["hookSpecificOutput"]["additionalContext"]
         self.assertIn("Local archive index:", context)
-        self.assertIn("Latest archived final:", context)
+        self.assertIn("Latest archived final for this session:", context)
+        self.assertIn("Latest archived final globally:", context)
         self.assertIn("Authority order:", context)
         self.assertNotIn(marker, context)
 
@@ -205,7 +206,9 @@ class InfinityCodexTests(unittest.TestCase):
             "model": "gpt-test",
             "trigger": "manual",
         }
-        self.assertEqual(self.run_hook(compact_payload), {"continue": True})
+        compact_result = self.run_hook(compact_payload)
+        self.assertIn("systemMessage", compact_result)
+        self.assertIn("post-compaction recovery marker", str(compact_result["systemMessage"]))
 
         prompt_payload = {
             "session_id": payload["session_id"],
@@ -222,7 +225,9 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertEqual(
             result["hookSpecificOutput"]["hookEventName"], "UserPromptSubmit"
         )
-        self.assertIn("Latest archived final:", context)
+        self.assertIn("Latest archived final for this session:", context)
+        self.assertIn("Latest archived final globally:", context)
+        self.assertIn("Pending post-compaction marker for current session:", context)
         self.assertNotIn(marker, context)
         self.assertNotIn(secret_prompt, context)
         self.assertEqual(self.run_hook(prompt_payload), {"continue": True})
@@ -232,10 +237,48 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertNotIn(marker, events_text)
         self.assertNotIn(secret_prompt, events_text)
 
+    def test_session_start_reports_pending_postcompact_marker_from_other_session(self) -> None:
+        session_a = "session-with-pending-compact"
+        session_b = "session-that-resumes-later"
+        self.run_hook(
+            self.stop_payload("global latest from session a", session_id=session_a, turn_id="turn-a")
+        )
+        compact_result = self.run_hook(
+            {
+                "session_id": session_a,
+                "turn_id": "compact-turn-a",
+                "transcript_path": "/unstable/transcript.jsonl",
+                "cwd": str(REPO_ROOT),
+                "hook_event_name": "PostCompact",
+                "model": "gpt-test",
+                "trigger": "auto",
+            }
+        )
+        self.assertIn("systemMessage", compact_result)
+        self.run_hook(
+            self.stop_payload("current session latest", session_id=session_b, turn_id="turn-b")
+        )
+        start_result = self.run_hook(
+            {
+                "session_id": session_b,
+                "transcript_path": "/unstable/transcript.jsonl",
+                "cwd": str(REPO_ROOT),
+                "hook_event_name": "SessionStart",
+                "model": "gpt-test",
+                "permission_mode": "default",
+                "source": "resume",
+            }
+        )
+        context = start_result["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("Latest archived final for this session:", context)
+        self.assertIn("Latest archived final globally:", context)
+        self.assertIn("Pending post-compaction marker for session", context)
+        self.assertIn("compactturna", context)
+
     def test_session_start_clears_postcompact_fallback(self) -> None:
         payload = self.stop_payload("session start handles compact")
         self.run_hook(payload)
-        self.run_hook(
+        compact_result = self.run_hook(
             {
                 "session_id": payload["session_id"],
                 "turn_id": "compact-turn",
@@ -246,6 +289,7 @@ class InfinityCodexTests(unittest.TestCase):
                 "trigger": "auto",
             }
         )
+        self.assertIn("systemMessage", compact_result)
         start_payload = {
             "session_id": payload["session_id"],
             "transcript_path": "/unstable/transcript.jsonl",

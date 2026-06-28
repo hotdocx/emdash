@@ -534,6 +534,57 @@ def latest_record(root: Path, session_id: str | None = None) -> dict[str, Any] |
     return records[-1] if records else None
 
 
+def pending_postcompact_root(root: Path) -> Path:
+    return root / "state" / "postcompact"
+
+
+def pending_postcompact_path(root: Path, session_id: str) -> Path:
+    return pending_postcompact_root(root) / f"{safe_identifier(session_id)}.json"
+
+
+def pending_postcompact_records(root: Path) -> list[dict[str, Any]]:
+    state_root = pending_postcompact_root(root)
+    if not state_root.exists():
+        return []
+    records: list[dict[str, Any]] = []
+    for path in sorted(state_root.glob("*.json")):
+        try:
+            record = load_json(path)
+        except (OSError, ValueError, InfinityCodexError):
+            continue
+        record["_state_path"] = str(path)
+        records.append(record)
+    records.sort(key=lambda item: (str(item.get("captured_at", "")), str(item.get("session_id", ""))))
+    return records
+
+
+def latest_line(root: Path, label: str, record: dict[str, Any] | None) -> str:
+    if record is None:
+        return f"- {label}: none"
+    return (
+        f"- {label}: {response_path_for_record(root, record)} "
+        f"({record.get('logical_id')})"
+    )
+
+
+def pending_postcompact_line(root: Path, record: dict[str, Any], *, current: bool) -> str:
+    session_id = str(record.get("session_id", ""))
+    session_dir = find_session_dir(root, session_id) if session_id else None
+    latest = latest_record(root, session_id=session_id) if session_id else None
+    session_label = "current session" if current else f"session {short_identifier(session_id)}"
+    parts = [
+        f"- Pending post-compaction marker for {session_label}:",
+        f"trigger={record.get('trigger', '') or 'unknown'}",
+        f"turn={short_identifier(str(record.get('turn_id', ''))) if record.get('turn_id') else 'unknown'}",
+        f"captured={record.get('captured_at', '')}",
+    ]
+    if session_dir is not None:
+        parts.append(f"archive={session_dir / 'INDEX.md'}")
+    if latest is not None:
+        parts.append(f"latest_final={response_path_for_record(root, latest)}")
+    return " ".join(parts)
+
+
 def recovery_context(root: Path, payload: dict[str, Any]) -> str:
     session_id = payload.get("session_id")
     session_id = session_id if isinstance(session_id, str) else ""
@@ -548,23 +599,24 @@ def recovery_context(root: Path, payload: dict[str, Any]) -> str:
     session_dir = find_session_dir(root, session_id) if session_id else None
     if session_dir is not None:
         lines.append(f"- Current session archive: {session_dir / 'INDEX.md'}")
-    latest = latest_record(root, session_id=session_id) if session_id else None
-    if latest is not None:
+    latest_session = latest_record(root, session_id=session_id) if session_id else None
+    latest_global = latest_record(root)
+    lines.append(latest_line(root, "Latest archived final for this session", latest_session))
+    lines.append(latest_line(root, "Latest archived final globally", latest_global))
+    for pending in pending_postcompact_records(root):
+        pending_session = pending.get("session_id")
         lines.append(
-            f"- Latest archived final: {response_path_for_record(root, latest)} "
-            f"({latest.get('logical_id')})"
+            pending_postcompact_line(
+                root,
+                pending,
+                current=isinstance(pending_session, str) and pending_session == session_id,
+            )
         )
-    else:
-        lines.append("- Latest archived final: none for this session")
     lines.append(
         "Read only the relevant archived finals. Authority order: active code/SOP, "
         "active plan and side-task ledger, linked decision responses, raw archive."
     )
     return "\n".join(lines)
-
-
-def pending_postcompact_path(root: Path, session_id: str) -> Path:
-    return root / "state" / "postcompact" / f"{safe_identifier(session_id)}.json"
 
 
 def write_pending_postcompact(root: Path, payload: dict[str, Any]) -> bool:
@@ -588,6 +640,20 @@ def write_pending_postcompact(root: Path, payload: dict[str, Any]) -> bool:
             ),
         )
     return True
+
+
+def postcompact_system_message(root: Path, payload: dict[str, Any]) -> str:
+    session_id = audit_field(payload, "session_id")
+    trigger = audit_field(payload, "trigger") or "unknown"
+    turn_id = audit_field(payload, "turn_id")
+    turn_label = short_identifier(turn_id) if turn_id else "unknown"
+    path = pending_postcompact_path(root, session_id) if session_id else root / "state" / "postcompact"
+    return (
+        "Infinity Codex recorded a post-compaction recovery marker "
+        f"(trigger={trigger}, turn={turn_label}). "
+        "PostCompact cannot inject developer context directly; recovery pointers "
+        f"will be added on the next prompt/resume. Marker: {path}; archive index: {root / 'INDEX.md'}"
+    )
 
 
 def read_pending_postcompact(root: Path, session_id: str) -> dict[str, Any] | None:
@@ -688,12 +754,13 @@ def run_hook(root: Path, payload: dict[str, Any]) -> dict[str, Any]:
             clear_pending_postcompact(root, session_id)
             return hook_result(context=context)
         if event == "PostCompact":
-            audit_status = (
-                "postcompact_pending"
-                if write_pending_postcompact(root, payload)
-                else "postcompact_missing_session"
+            wrote_marker = write_pending_postcompact(root, payload)
+            audit_status = "postcompact_pending" if wrote_marker else "postcompact_missing_session"
+            if wrote_marker:
+                return hook_result(system_message=postcompact_system_message(root, payload))
+            return hook_result(
+                system_message="Infinity Codex could not record post-compaction recovery marker: missing session_id"
             )
-            return hook_result()
         if event == "UserPromptSubmit":
             session_id = audit_field(payload, "session_id")
             pending = read_pending_postcompact(root, session_id)

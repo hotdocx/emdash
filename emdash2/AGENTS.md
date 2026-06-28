@@ -239,7 +239,10 @@ active code/SOP -> active plan and side-task ledger
 - Resume and compaction hooks inject file pointers as model-visible developer
   context, not necessarily as visible chat prose. If no pointers are apparent,
   inspect `tmp/ai-responses/events.jsonl` for hook lifecycle status and fall
-  back to `latest-id`, `list`, or `show`.
+  back to `latest-id`, `list`, or `show`. `PostCompact` itself cannot inject
+  developer context, so it emits a `systemMessage` warning and records a marker
+  consumed by the next prompt/resume; recovery pointers distinguish the latest
+  final for the current session from the latest final globally.
 - Read only archive entries relevant to the active plan, dependency, or
   side-task trigger. Never replay the whole session archive into context.
 - Use `verify` after manual archive maintenance and `reindex` to rebuild

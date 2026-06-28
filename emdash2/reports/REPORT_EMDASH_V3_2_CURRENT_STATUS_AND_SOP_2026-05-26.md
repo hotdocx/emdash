@@ -743,8 +743,13 @@ The hook archives only completed main-agent final responses under ignored
 developer context, not archived response text. On compaction, `SessionStart`
 does the same when Codex starts a compacted context; otherwise `PostCompact`
 records a private marker and the next `UserPromptSubmit` injects the same
-pointer context once. Raw responses are historical recovery evidence and must
-never outrank current code, this SOP, or the active task plan:
+pointer context once. Since Codex does not accept hook-specific developer
+context from `PostCompact`, that hook emits a `systemMessage` warning with the
+marker and archive index. Recovery context distinguishes the latest final for
+the current session from the latest final globally, and lists pending
+post-compaction markers from other sessions. Raw responses are historical
+recovery evidence and must never outrank current code, this SOP, or the active
+task plan:
 
 ```text
 active code/SOP -> active plan and side-task ledger

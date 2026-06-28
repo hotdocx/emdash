@@ -190,8 +190,16 @@ Updated on 2026-06-28:
 - `PostCompact` records a private pending recovery marker. Since Codex does not
   add hook-specific context from `PostCompact`, the next `UserPromptSubmit`
   consumes that marker and injects the same pointer-only recovery context once.
+- After the 2026-06-28 live auto-compaction smoke test, `PostCompact` also
+  returns a `systemMessage` warning with the marker and archive index, because
+  that is the only immediate UI/event-stream channel supported by Codex for
+  this hook.
 - `SessionStart source=compact` still injects pointers directly and clears any
   pending post-compaction fallback marker.
+- Recovery context now distinguishes the latest archived final for the current
+  session from the latest archived final globally, and lists pending
+  post-compaction markers from other sessions so a resumed or forked session can
+  find the final response from the compacted session that just ended.
 - `tmp/ai-responses/events.jsonl` records hook event name, session id, turn id,
   source/trigger, status, and whether pointer context was emitted. It does not
   record prompts, final-response text, tool calls, or transcript contents.
@@ -200,5 +208,5 @@ Updated on 2026-06-28:
   indexes; `verify` now succeeds on the remaining active archive.
 - `scripts/lint_report_headers.py` and `make ci` now enforce current-plan
   header fields, including non-pending Infinity Codex provenance values.
-- `make infinity-codex-test` now covers 15 tests, including the post-compaction
+- `make infinity-codex-test` now covers 16 tests, including the post-compaction
   fallback path and prompt/response exclusion from the event audit.
