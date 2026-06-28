@@ -3180,6 +3180,43 @@ rule @hom_precomp_along_fapp0
       $A $B $F $Z $W $X $p
       (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g);
 
+// Precomposing the identity at F[X] by h returns the functorial action F[h].
+// The first rule covers unreduced generic identities; the `Cat_cat` and
+// `Catd_cat` rules cover the normal forms of category and displayed-category
+// identities.
+rule @hom_precomp_along_fapp0
+      $A
+      $B
+      $F
+      _
+      $W
+      $X
+      $h
+      (@id $B _)
+  ↪ @fapp1_fapp0 $A $B $F $W $X $h;
+
+rule @hom_precomp_along_fapp0
+      $A
+      Cat_cat
+      $F
+      _
+      $W
+      $X
+      $h
+      (@id_func _)
+  ↪ @fapp1_fapp0 $A Cat_cat $F $W $X $h;
+
+rule @hom_precomp_along_fapp0
+      $A
+      (@Catd_cat $K)
+      $F
+      _
+      $W
+      $X
+      $h
+      (@id_funcd $K _)
+  ↪ @fapp1_fapp0 $A (@Catd_cat $K) $F $W $X $h;
+
 unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
   ≡ @comp_fapp0
       $B
@@ -3300,9 +3337,23 @@ rule @hom_postcomp_func
   ↪ @hom_precomp_along_func $A $B $F $Z $W $X $h;
 
 rule @hom_postcomp_fapp0
-      (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
-      $Z $X $W $h $g
-  ↪ @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g;
+      $B
+      $A
+      (@Op_func _ _ $F)
+      $Z
+      $X
+      $W
+      $h
+      $g
+  ↪ @hom_precomp_along_fapp0
+      (Op_cat $A)
+      (Op_cat $B)
+      $F
+      $Z
+      $W
+      $X
+      $h
+      $g;
 
 rule @hom_postcomp_fapp1_func
       (Op_cat $B) (Op_cat $A) (@Op_func $A $B $F)
@@ -6552,20 +6603,6 @@ symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
 ≔ @hom_int_precomp_func Z Z (@id_func Z) y x p;
-
-// Focused join for the fixed-source transitivity benchmark: the semantic
-// `hom_con`/`hom_int` route through the double-op presentation of Catd
-// representables is the same representable transport head.
-rule @hom_postcomp_fapp0
-      (Op_cat (@Catd_cat $Z))
-      $Z
-      (@Op_func (Op_cat $Z) (@Catd_cat $Z) (@hom_int $Z $Z (@id_func $Z)))
-      (@hom_ $Z $Z (@id_func $Z) $x)
-      $x
-      $y
-      $p
-      (@id_funcd $Z (@hom_ $Z $Z (@id_func $Z) $x))
-  ↪ @hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p;
 
 // 11b. Opposite-edge and presheaf classifiers.
 

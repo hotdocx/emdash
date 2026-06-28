@@ -1088,6 +1088,40 @@ intended goal. A `constant` cannot head a rewrite LHS. Reclassifying one as
 `injective` is a global normal-form migration and requires downstream
 subject-reduction and warning audits, not just a focused beta assertion.
 
+Do not treat a failed bare `assert t ≡ u` as decisive when the real consumer
+has an expected type that forces a canonical presentation. Lambdapi infers the
+two sides of a bare conversion assertion independently; with transparent
+aliases, opposite categories, or `Catd_cat`/`Cat_cat` presentation changes,
+the inferred types may stop at shapes such as:
+
+```text
+Hom(Op_cat B, z, F[w])
+Hom(B, F[w], z)
+```
+
+even though a surrounding declaration would force both sides through the same
+canonical hom type. In such cases, add a focused probe in the real consumer
+shape: first check the raw term at the intended type `T`, or bind it by a
+temporary/helper symbol with result type `T`, then validate conversion and/or
+typed reflexivity against that typed term. This is not a weaker test; it
+models the expected type that actual application code supplies. Keep a bare
+`assert t ≡ u` only when both sides should elaborate and normalize without
+external expected-type information.
+
+Similarly, a generic identity rule headed by `@id C x` does not automatically
+cover already-normalized identity heads. If `@id Cat_cat A` reduces to
+`id_func A`, or `@id (Catd_cat K) E` reduces to `id_funcd K E`, then a
+consumer whose normal form contains `id_func`/`id_funcd` may need sibling
+rules at those heads. Prefer a coherent small package:
+
+```text
+generic @id case
+Cat_cat / id_func normal-form case
+Catd_cat / id_funcd normal-form case
+```
+
+rather than assuming the generic rule subsumes the normal-form cases.
+
 If the quiet probe/check times out without a useful location, rerun the same
 small target with warnings enabled before concluding that the newly added rule
 is inherently too broad:

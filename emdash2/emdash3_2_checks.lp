@@ -1392,6 +1392,104 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   @hom_precomp_along_fapp0 A B F z x x (@id A x) g
     ≡ g;
 
+assert [A B : Cat] (F : τ (Functor A B))
+  (w x : τ (Obj A))
+  (h : τ (Hom A w x)) ⊢
+  @hom_precomp_along_fapp0
+    A
+    B
+    F
+    (@fapp0 A B F x)
+    w
+    x
+    h
+    (@id B (@fapp0 A B F x))
+  ≡ @fapp1_fapp0 A B F w x h;
+
+assert [A : Cat] (F : τ (Functor A Cat_cat))
+  (w x : τ (Obj A))
+  (h : τ (Hom A w x)) ⊢
+  @hom_precomp_along_fapp0
+    A
+    Cat_cat
+    F
+    (@fapp0 A Cat_cat F x)
+    w
+    x
+    h
+    (@id_func (@fapp0 A Cat_cat F x))
+  ≡ @fapp1_fapp0 A Cat_cat F w x h;
+
+assert [A K : Cat] (F : τ (Functor A (@Catd_cat K)))
+  (w x : τ (Obj A))
+  (h : τ (Hom A w x)) ⊢
+  @hom_precomp_along_fapp0
+    A
+    (@Catd_cat K)
+    F
+    (@fapp0 A (@Catd_cat K) F x)
+    w
+    x
+    h
+    (@id_funcd K (@fapp0 A (@Catd_cat K) F x))
+  ≡ @fapp1_fapp0 A (@Catd_cat K) F w x h;
+
+symbol hom_postcomp_opfunc_general_visible_check
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (z : τ (Obj B))
+  [w x : τ (Obj A)]
+  (h : τ (Hom A w x))
+  (g : τ (Hom B (@fapp0 A B F x) z))
+  : τ (Hom B (@fapp0 A B F w) z)
+≔ @hom_postcomp_fapp0
+    (Op_cat B)
+    (Op_cat A)
+    (@Op_func A B F)
+    z x w h g;
+
+assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A))
+  (h : τ (Hom A w x))
+  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
+  @hom_postcomp_opfunc_general_visible_check A B F z w x h g
+    ≡ @hom_precomp_along_fapp0 A B F z w x h g;
+
+// The raw double-op hom_int expression needs an expected canonical Catd hom
+// type before ordinary conversion observes the generalized Op_func bridge.
+// This mirrors real consumers whose declarations fix the surrounding hom
+// category, and it is checked below by both conversion and typed `eq_refl`.
+symbol hom_postcomp_opfunc_general_hom_int_check
+  [Z : Cat]
+  [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (Hom (@Catd_cat Z)
+      (@hom_ Z Z (@id_func Z) y)
+      (@hom_ Z Z (@id_func Z) x))
+≔ @hom_postcomp_fapp0
+    (Op_cat (@Catd_cat Z))
+    Z
+    (@Op_func (Op_cat Z) (@Catd_cat Z) (@hom_int Z Z (@id_func Z)))
+    (@hom_ Z Z (@id_func Z) x)
+    x
+    y
+    p
+    (@id_funcd Z (@hom_ Z Z (@id_func Z) x));
+
+assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
+  @hom_postcomp_opfunc_general_hom_int_check Z x y p
+    ≡ @hom_int_precomp_func Z Z (@id_func Z) y x p;
+
+symbol hom_postcomp_opfunc_general_hom_int_eq_refl_check
+  [Z : Cat]
+  [x y : τ (Obj Z)]
+  (p : τ (Hom Z x y))
+  : τ (
+      @hom_postcomp_opfunc_general_hom_int_check Z x y p
+      =
+      @hom_int_precomp_func Z Z (@id_func Z) y x p)
+≔ eq_refl (@hom_int_precomp_func Z Z (@id_func Z) y x p);
+
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x y : τ (Obj A))
   (p : τ (Hom A w x)) (q : τ (Hom A x y)) ⊢

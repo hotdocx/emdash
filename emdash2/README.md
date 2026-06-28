@@ -209,6 +209,21 @@ manual classification and warning-enabled owning-position validation.
   heads or a stable intermediary instead of a bare-variable eta pattern.
   Warning-enabled comparisons are for consequence classification; the warning
   count itself is not a pass/fail gate.
+- Distinguish a bare conversion assertion from a typed canonical-context
+  check. `assert t ≡ u` lets Lambdapi infer the two sides' types
+  independently; with transparent aliases or opposite-category views this may
+  stop before a common canonical type such as `Hom C x y` is forced. When the
+  real consumer has an expected type, probe that shape explicitly:
+  first check `t : T`, or define a temporary/helper term with type `T`, then
+  use `eq_refl : τ(t = u)` or an assertion against the typed helper. This is
+  not weaker than the application context; it tests the computation under the
+  same expected type real code supplies.
+- A generic identity-headed rule does not necessarily cover normalized
+  identity heads. If `@id Cat_cat A` or `@id (Catd_cat K) E` has already
+  reduced to `id_func A` or `id_funcd K E`, add/test the corresponding
+  normal-form sibling rule when that is the semantic owner. Treat the generic
+  `@id`, `Cat_cat/id_func`, and `Catd_cat/id_funcd` cases as a coherent
+  package when all three surfaces are expected.
 - When a functor-level runtime rule computes the desired object-level result
   after applying `fapp0` or another generic projection, keep the functor as the
   owner. Do not add a parallel object-level rewrite or unification rule for the
