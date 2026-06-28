@@ -1,7 +1,7 @@
 # EMDASH v3.2 Equipment-Shadow, Tensor, Co-Yoneda, And Join Redesign Plan
 
 Date: 2026-06-28
-Last reviewed: 2026-06-28
+Last reviewed: 2026-06-29
 
 Plan-ID: EMDASH-V3-2-EQUIPMENT-SHADOW-TENSOR-JOIN-REDESIGN-2026-06-28
 Depends-On: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17
@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the remaining equipment-cell route for tens
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
-Status: proposed detailed redesign plan; documentation only, no `Prof_comp_transf` retirement promoted yet
+Status: reviewed final design draft; first implementation path fixed, no `Prof_comp_transf` retirement promoted yet
 
 ## Purpose
 
@@ -118,8 +118,7 @@ Reassessment verdict:
 - The weighted-limit and adjunction decisions are already aligned with the
   active `DefIso` / `ProfComparison` owner.
 - The plan still needs one explicit missing layer before it is
-  implementation-complete: a narrow cell-evaluation or shaped-projection
-  operation.
+  implementation-complete: a narrow cell-application/evaluation operation.
 
 The main risk is not that `Prof_reindex` is semantically wrong. It is not. The
 main risk is that some current `Prof_comp_transf` uses are really two
@@ -127,27 +126,126 @@ operations collapsed into one:
 
 ```text
 1. endpoint-changing composition of profunctor cells;
-2. evaluation/projection of an internally natural profunctor cell at a shaped
-   probe.
+2. application/evaluation of an internally natural profunctor cell at a
+   shaped element.
 ```
 
 If the second operation is not named directly, an implementation can easily
 reintroduce `Prof_comp_transf` under another name. Therefore the plan should
-treat the narrow shaped-projection layer as a prerequisite for the join
-migration and as a likely helper for endpoint-changing co-Yoneda wrappers.
+treat the narrow cell-application/evaluation layer as a prerequisite for the
+join migration and as a likely helper for endpoint-changing co-Yoneda
+wrappers.
 
 Refined target stack:
 
 ```text
 fixed-endpoint ProfMap core
   -> Prof_reindex as legitimate change of base
-  -> narrow shaped/cell projection APIs
+  -> narrow shaped/cell application/evaluation APIs
   -> optional endpoint-changing wrappers
   -> future explicit equipment coherence, only if needed
 ```
 
 This is the intended distinction between ordinary profunctor mathematics and
 the old over-generalized equipment-style runtime story.
+
+## Final Review, 2026-06-29
+
+Verdict: the plan is coherent, mathematically justified, and feasible as a
+staged implementation. It is almost decision-complete for the next code pass
+provided the first migration uses the concrete owner choices below. It does
+not justify deleting all of `Prof_comp_transf` in one step.
+
+Goal:
+
+```text
+Remove `Prof_comp_transf` as the runtime owner for join cross projection,
+join cross beta, and co-Yoneda beta, while retaining semantically justified
+`Prof_reindex` and preserving the existing weighted-limit / adjunction
+DefIso architecture.
+```
+
+Required constraints:
+
+1. Keep `Prof_reindex` as the canonical endpoint-change operation.
+2. Do not introduce collage semantics for `Join_cat`.
+3. Do not add general coend/coinserter reductions for `Prof_tensor`.
+4. Do not replace `Prof_comp_transf` by an equally broad renamed equipment
+   composition head.
+5. Route shaped application of profunctor cells through a narrow owner.
+6. Let ordinary functoriality, naturality, and later arrow-action levels be
+   inherited from generic `fapp*`/`tapp*` owners when internalized.
+7. Keep `Prof_comp_transf` only as a compatibility/generic equipment layer
+   until join and tensor/co-Yoneda no longer consume it.
+
+Concrete first implementation decision:
+
+1. Add object-level `Prof_cell_apply` as the general narrow operation.
+
+   It should be declared near `Prof_hom`, before tensor/co-Yoneda, with no
+   general identity, associativity, or equipment-composition rewrite rules:
+
+   ```text
+   Prof_cell_apply(c,r)
+     : Prof_hom(I,A,B,F . a,R,G . b)
+
+   where
+   c : ProfCell(R',F,R,G)
+   r : Prof_hom(I,A',B',a,R',b).
+   ```
+
+2. Add `Prof_cell_eval` as the terminal-source specialization.
+
+   It can be introduced after `Terminal_prof` and `Prof_terminal_hom`:
+
+   ```text
+   Prof_cell_eval(c,a,b)
+     := Prof_cell_apply(c, Prof_terminal_hom(a,b)).
+   ```
+
+3. Route join through `Prof_cell_eval`.
+
+   The first join migration should make:
+
+   ```text
+   join_cross_hom(a,b)
+     := Prof_cell_eval(join_cross_transf,a,b).
+   ```
+
+   Then add join-specific beta heads:
+
+   ```text
+   join_elim_cross_transf(first,second,cross) -> cross
+   join_elim_cross_hom(first,second,cross,a,b)
+     -> Prof_cell_eval(cross,a,b).
+   ```
+
+   After diagnostics are migrated to those heads, remove the two
+   join-specific `Prof_comp_transf` beta rules.
+
+4. Migrate tensor/co-Yoneda after join.
+
+   Introduce fixed-endpoint co-Yoneda maps first. Use `Prof_cell_apply` for
+   shaped RHSs that still mean "apply this cell to this shaped element".
+   Promote co-Yoneda to `ProfComparison` only when a consumer needs reverse
+   beta/eta or ordinary inverse evidence; otherwise a one-way map owner is the
+   smaller first target.
+
+5. Retire generic `Prof_comp_transf` last.
+
+   Generic equipment checks, `Op_prof_transf` compatibility, and any
+   remaining endpoint-changing public wrappers are not blockers for the join
+   migration. They are blockers only for wholesale deletion of the generic
+   composition head.
+
+Residual decisions are probe-local rather than architectural:
+
+- exact implicit-argument layout of `Prof_cell_apply`;
+- whether `Prof_cell_apply` should be `constant`, `symbol`, or later
+  internalized as a functor after the first stable checks;
+- whether fixed-endpoint co-Yoneda needs only map beta or a full
+  `ProfComparison` in the first co-Yoneda pass;
+- warning-enabled overlap deltas after the join-specific rules are removed.
 
 ## Current Remaining Consumers
 
@@ -219,7 +317,7 @@ Deletion status:
 - replace them after fixed-endpoint co-Yoneda owners exist and diagnostics are
   migrated.
 
-### Shaped Cell Evaluation / Projection
+### Shaped Cell Application / Evaluation
 
 Current implicit role:
 
@@ -227,16 +325,57 @@ Current implicit role:
   `join_cross_transf` with `Prof_terminal_hom(a,b)` through
   `Prof_comp_transf`;
 - endpoint-changing tensor and co-Yoneda wrappers also often need to apply a
-  natural profunctor cell to a shaped probe.
+  natural profunctor cell to a shaped element.
 
 Target role:
 
 - introduce or identify a narrow owner for evaluating an internally natural
-  profunctor cell at shaped endpoint probes;
+  profunctor cell on shaped endpoint data;
 - do not use arbitrary equipment-cell composition merely to obtain this
-  shaped projection.
+  shaped application.
 
-Mathematical shape:
+This operation is not specific to `Join_cat`. Join is the first place where
+the missing operation becomes unavoidable, because `join_cross_hom(a,b)` is
+just the generating cross cell applied to the shaped endpoint probe `(a,b)`.
+
+General mathematical shape:
+
+```text
+R  : Prof(A,B)
+R' : Prof(A',B')
+F  : A' -> A
+G  : B' -> B
+c  : ProfCell(R',F,R,G)
+   := ProfMap(R', Prof_reindex(R,F,G))
+
+a : I -> A'
+b : I -> B'
+r : Prof_hom(I,A',B',a,R',b)
+-------------------------------------------
+Prof_cell_apply(c,r)
+  : Prof_hom(I,A,B,F . a,R,G . b)
+```
+
+Semantically:
+
+```text
+Prof_cell_apply(c,r) := ((a,b)^* c) . r.
+```
+
+That is, first reindex the natural profunctor cell `c` along the shaped
+probe `(a,b)`, then apply it to the shaped element `r`.
+
+The terminal-source specialization is:
+
+```text
+R' = Terminal_prof(A',B')
+!_{a,b} : Prof_hom(I,A',B',a,Terminal_prof(A',B'),b)
+
+Prof_cell_eval(c,a,b)
+  := Prof_cell_apply(c,!_{a,b})
+```
+
+So for:
 
 ```text
 c : ProfCell(Terminal_prof(A,B), f, R, g)
@@ -253,24 +392,85 @@ join_cross_transf(A,B)[a,b]
   : Unit_I -> Hom_prof_along(join_fst_func . a, join_snd_func . b).
 ```
 
-Possible kernel names are deliberately provisional:
+Equipment-style presentation:
 
 ```text
-Prof_cell_eval
-Prof_cell_hom
-Prof_transf_eval_hom
+Prof_cell_apply(c,r)
+  = Prof_comp_transf(c,r)
+
+Prof_cell_eval(c,a,b)
+  = Prof_comp_transf(c, Prof_terminal_hom(a,b)).
 ```
 
-or, for the first migration, a join-specific projection head:
+This is mathematically legitimate double-category/equipment composition. The
+design problem is that it makes the broad endpoint-changing composition head
+the runtime owner of a much narrower operation: applying one natural family
+map to one shaped element. The narrow operation is the one that should own
+join cross projection and likely several tensor/co-Yoneda shaped cuts.
+
+Usual mathematical reading:
 
 ```text
-join_cross_hom(A,B,I,a,b).
+restriction / pullback / whiskering of a natural transformation,
+then evaluation at a generalized element.
+```
+
+For a Cat-valued profunctor `R : X^op x Y -> Cat`, a family:
+
+```text
+c_{a,b} : 1 -> R(fa,gb)
+```
+
+reindexed along `a : I -> A` and `b : I -> B` gives the shaped family:
+
+```text
+i |-> c_{a(i),b(i)}
+```
+
+with arrow action supplied by the naturality of `c`.
+
+Internalization target:
+
+```text
+Prof_cell_apply_func :
+  Prof_transf_cat(A,A',B,B',R',F,R,G)
+  x Prof_hom_cat(I,A',B',a,R',b)
+  -> Prof_hom_cat(I,A,B,F . a,R,G . b)
+```
+
+The exact product/telescope presentation is not settled. The architectural
+point is that, once this is internalized as a functor, arrow-action between
+cells and between shaped elements should be inherited from the generic
+`fapp*` calculus rather than restated by hand. Until then, a stable
+application/evaluation head may be justified as a narrow projection owner.
+
+Selected kernel names for the first migration:
+
+```text
+Prof_cell_apply
+Prof_cell_eval
+```
+
+Deferred or fallback names, to use only if a focused probe shows a real
+typing or performance need:
+
+```text
+Prof_cell_hom
+Prof_transf_eval_hom
+join_cross_hom(A,B,I,a,b) as a primitive-only fallback
 ```
 
 Decision status:
 
 - this layer is required for a clean join migration;
-- its exact kernel name and generality are not yet decision-complete;
+- `Prof_cell_apply` is the mathematically natural general target;
+- `Prof_cell_eval` is the terminal-source specialization most directly
+  visible in join;
+- the first implementation should introduce `Prof_cell_apply`, define
+  `Prof_cell_eval` through `Prof_terminal_hom`, and route `join_cross_hom`
+  through `Prof_cell_eval`;
+- the exact implicit-argument layout and later functor-internalized
+  presentation are probe-local details;
 - it must remain narrower than `Prof_comp_transf`.
 
 ### Functor-Induced Representable Cell
@@ -516,7 +716,7 @@ p tensor_M q : Unit_I -> (P tensor Q)[F,G]
 
 This is the mathematical content currently carried by names like
 `Prof_tensor_hom_hom`. Its computation should be owned by tensor/co-Yoneda
-heads or by the narrow shaped-projection layer, not by generic
+heads or by the narrow cell-application/evaluation layer, not by generic
 `Prof_comp_transf`.
 
 ### Co-Yoneda API
@@ -831,7 +1031,7 @@ Refined target:
 join_cross_hom(a,b) := join_cross_transf[a,b]
 ```
 
-where `[-,-]` denotes the narrow shaped cell-evaluation/projection operation,
+where `[-,-]` denotes the narrow terminal-source cell-evaluation operation,
 not general equipment-cell composition.
 
 Target options, in priority order:
@@ -952,49 +1152,60 @@ Target:
 
 ### Join Migration Phases
 
-1. Decide the narrow shaped cell-evaluation/projection API.
+1. Introduce the narrow shaped cell-application/evaluation API.
 
-   Either introduce a general but narrow owner such as:
+   ```text
+   Prof_cell_apply(c,r)
+   ```
+
+   Then define the terminal-source specialization:
 
    ```text
    Prof_cell_eval(c,a,b)
+     := Prof_cell_apply(c, Prof_terminal_hom(a,b)).
    ```
 
-   or keep the first implementation join-specific:
+   The owner must be narrower than `Prof_comp_transf`: add no general
+   associativity, identity, or equipment-composition rewrite rules for
+   `Prof_cell_apply`.
+
+2. Route `join_cross_hom` through `Prof_cell_eval`.
 
    ```text
-   join_cross_hom(A,B,I,a,b).
+   join_cross_hom(a,b)
+     := Prof_cell_eval(join_cross_transf,a,b).
    ```
 
-   The chosen owner must be narrower than `Prof_comp_transf`.
+   Keep the existing type of `join_cross_hom`.
 
-2. Add a probe with direct `join_cross_hom` as a stable shaped projection.
+3. Add a focused probe for the new shaped projection path.
 
    Keep active source unchanged. Reproduce current shaped typing checks.
 
-3. Add a join-specific cross-transf action head or beta head.
+4. Add join-specific cross-transf action and shaped beta heads.
 
    Test:
 
    ```text
    join_elim_cross_transf(first,second,cross) -> cross
-   join_elim_cross_hom(first,second,cross,a,b) -> cross[a,b]
+   join_elim_cross_hom(first,second,cross,a,b)
+     -> Prof_cell_eval(cross,a,b)
    ```
 
-4. Migrate diagnostics.
+5. Migrate diagnostics.
 
    Replace checks whose only purpose is current `Prof_comp_transf` join beta
    with checks over the join-specific heads.
 
-5. Remove join-specific `Prof_comp_transf` beta rules.
+6. Remove join-specific `Prof_comp_transf` beta rules.
 
    Do not remove generic `Prof_comp_transf` yet. The tensor/co-Yoneda slice may
    still depend on it.
 
-6. Audit whether `join_cross_hom` can become transparent again.
+7. Audit whether `join_cross_hom` can remain transparent.
 
-   Only do this if the transparent body uses a narrow projection owner. Do not
-   revert to `Prof_comp_transf` as the canonical body.
+   Only do this if the transparent body uses a narrow application/evaluation
+   owner. Do not revert to `Prof_comp_transf` as the canonical body.
 
 ## Retiring `Prof_comp_transf`
 
@@ -1044,23 +1255,24 @@ High feasibility:
 - keeping `Prof_reindex`;
 - adding fixed-endpoint co-Yoneda owner names in a future implementation
   validation pass;
-- adding a join-specific shaped projection or a narrow cell-evaluation owner.
+- adding a join-specific shaped projection or a narrow cell-application or
+  evaluation owner.
 
 Medium feasibility:
 
 - migrating active co-Yoneda beta rules away from `Prof_comp_transf`, because
   the current rules simultaneously encode co-Yoneda cancellation, tensor
   introduction, endpoint reindexing, and shaped-element specialization.
-- replacing join cross beta without a disguised `Prof_comp_transf`, because
-  the RHS needs a real narrow shaped evaluation of the supplied `cross` cell.
+- migrating endpoint-changing public co-Yoneda names to fixed-endpoint maps or
+  comparisons without reintroducing broad equipment composition.
 
 Medium risk:
 
 - `Prof_func_transf` may need a better representable hom-action owner before
   both general co-Yoneda and join can become clean.
-- the exact generality of `Prof_cell_eval` is not yet settled. Too narrow a
-  head duplicates join-specific logic; too broad a head recreates equipment
-  composition.
+- `Prof_cell_apply` must stay narrow: the first implementation should add no
+  general associativity, identity, or equipment-composition rewrite rules for
+  it.
 
 Known non-goals:
 
@@ -1076,18 +1288,19 @@ Known non-goals:
    Promote this report and cross-link it from the DefIso migration report and
    report index.
 
-2. Narrow cell evaluation first.
+2. Narrow cell application/evaluation first.
 
-   Decide whether the first owner is general (`Prof_cell_eval`) or
-   join-specific (`join_cross_hom`). This is the missing layer identified by
-   the 2026-06-28 reassessment.
+   Add general object-level `Prof_cell_apply`, then terminal-source
+   `Prof_cell_eval`. Do not add broad equipment-style rewrite rules to either
+   owner. This is the missing layer identified by the 2026-06-28
+   reassessment.
 
 3. Join migration.
 
    Join has the smallest semantic surface and the clearest non-collage target.
-   A direct `join_cross_hom` / shaped cell-evaluation owner plus
-   join-specific beta head should let the code remove the join-specific
-   `Prof_comp_transf` rules without touching tensor.
+   Routing `join_cross_hom` through `Prof_cell_eval` plus join-specific beta
+   heads should let the code remove the join-specific `Prof_comp_transf` rules
+   without touching tensor.
 
 4. Tensor/co-Yoneda.
 
@@ -1134,7 +1347,7 @@ make catalog
 | --- | --- | --- | --- |
 | `EQUIP-WL-DOC` | complete in this plan | DefIso/weighted-limit reports | Explicitly document that nested hom-action cancellation is required for weighted-limit beta/eta and runtime universal-property computation. |
 | `EQUIP-INVENTORY` | proposed | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion. |
-| `EQUIP-CELL-EVAL` | proposed | future design refinement | Decide the narrow shaped cell-evaluation/projection owner, such as `Prof_cell_eval` or a first join-specific `join_cross_hom`, before migrating join beta. |
+| `EQUIP-CELL-EVAL` | selected for implementation | next implementation probe | Add general object-level `Prof_cell_apply`, define terminal-source `Prof_cell_eval`, and route `join_cross_hom` through `Prof_cell_eval` before migrating join beta. |
 | `EQUIP-JOIN-NARROW` | proposed | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with direct/narrow join owners. |
 | `EQUIP-TENSOR-COYONEDA` | proposed | future implementation probe | Add fixed-endpoint co-Yoneda map/comparison owners and migrate beta checks away from general equipment composition. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join. |
