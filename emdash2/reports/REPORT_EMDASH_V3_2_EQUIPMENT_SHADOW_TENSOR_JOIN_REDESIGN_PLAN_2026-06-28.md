@@ -302,6 +302,24 @@ Current role:
 - co-Yoneda beta rules cancel a tensor introduction against a named
   co-Yoneda unit map in the identity-representable case.
 
+The four active co-Yoneda beta rules split into two different arities:
+
+```text
+shaped-element beta:
+  Prof_tensor_hom_hom(..., p, unit)
+
+general-cell identity-unit naturality:
+  Prof_tensor_hom_transf(..., qq, unit)
+  Prof_tensor_transf_hom(..., unit, qq)
+```
+
+The second pair is still identity-unit co-Yoneda, not the deferred
+"general co-Yoneda along a functor" using `Prof_func_hom(F)` or
+`Hom_prof_along(G,G)`. It is the ordinary naturality/functoriality form of the
+unit law against a general profunctor cell. The mathematics should be
+preserved, but the runtime owner should move away from generic
+`Prof_comp_transf`.
+
 Target role:
 
 - keep `Prof_tensor` opaque until coend/coinserter semantics exists;
@@ -309,13 +327,21 @@ Target role:
 - expose endpoint-changing variants only as transparent reindexed views or
   narrowly justified wrappers;
 - avoid using general equipment composition as the semantic owner of
-  co-Yoneda beta.
+  co-Yoneda beta;
+- migrate shaped beta first through `Prof_cell_apply`;
+- preserve the general-cell identity-unit naturality rules as compatibility
+  until a fixed-endpoint map/naturality owner replaces their current
+  `Prof_comp_transf` presentation.
 
 Deletion status:
 
 - current `Prof_comp_transf` beta rules are real active consumers;
-- replace them after fixed-endpoint co-Yoneda owners exist and diagnostics are
-  migrated.
+- do not delete the general-cell identity-unit naturality pair as
+  mathematically unnecessary;
+- replace the shaped pair after fixed-endpoint co-Yoneda owners and
+  `Prof_cell_apply` exist;
+- replace or demote the general-cell pair only after a fixed-endpoint
+  postcomposition/naturality owner exists.
 
 ### Shaped Cell Application / Evaluation
 
@@ -923,6 +949,69 @@ no separate `I tensor I` shape: `Prof_tensor_hom_hom` composes two shaped
 elements over the same shape `I` and the same middle probe `M`. The shape is a
 context category, not a tensor factor.
 
+### General-Cell Identity-Unit Naturality
+
+The active co-Yoneda rules using:
+
+```text
+Prof_tensor_hom_transf
+Prof_tensor_transf_hom
+```
+
+are a different arity of the same identity-unit co-Yoneda story. They are not
+the later generalized co-Yoneda-along-a-functor task. They express naturality of
+the unit co-Yoneda map against a general profunctor cell.
+
+Right-unit ordinary notation:
+
+```text
+qq : ProfCell(Q,H,P,id_B)
+pp : ProfCell(P,F,P',id_B)
+
+CoyR(pp,id_B) . (qq tensor id_{Unit_B})
+  -> pp . qq.
+```
+
+The special case `pp = id_P` is:
+
+```text
+epsilon^R_P[H,id_B] . (qq tensor id_{Unit_B})
+  -> qq.
+```
+
+Left-unit ordinary notation:
+
+```text
+qq : ProfCell(Q,id_A,P,K)
+pp : ProfCell(P,id_A,P',G)
+
+CoyL(pp,id_A) . (id_{Unit_A} tensor qq)
+  -> pp . qq.
+```
+
+The special case `pp = id_P` is:
+
+```text
+epsilon^L_P[id_A,K] . (id_{Unit_A} tensor qq)
+  -> qq.
+```
+
+This content is mathematically standard and should be preserved. What must
+change is the runtime owner. The current implementation owns these reductions
+by broad `Prof_comp_transf` rules. The target owner should instead be built
+from:
+
+- fixed-endpoint co-Yoneda map/comparison;
+- fixed-endpoint tensor functoriality or a narrow tensor map owner;
+- `Prof_reindex_transf` for endpoint changes;
+- `hom_postcomp_fapp0` or the corresponding `ProfComparison` push/pull;
+- a derived/compatibility expression for the final composed cell, until a
+  narrower public cell-composition story is settled.
+
+Therefore the first tensor/co-Yoneda migration should not delete these two
+general-cell rules. It should mark them as compatibility rules and replace them
+only after the fixed-endpoint map/naturality path is implemented and checked.
+
 ### Endpoint-Changing Co-Yoneda Wrappers
 
 The existing endpoint-changing right wrapper has the semantic type:
@@ -1036,6 +1125,7 @@ public wrapper, but it should still be derived from:
 
    - fixed-endpoint map computation;
    - shaped element computation;
+   - general-cell identity-unit naturality;
    - endpoint-changing wrapper;
    - genuine unresolved naturality theorem.
 
@@ -1060,13 +1150,32 @@ public wrapper, but it should still be derived from:
    `Prof_coyoneda_unit_tensor_cov_transf` and
    `Prof_coyoneda_unit_tensor_con_transf` symbols.
 
-5. Replace active co-Yoneda beta checks.
+5. Replace shaped co-Yoneda beta checks first.
 
    The checks should mention `prof_comparison_push/pull` or
    `hom_postcomp_fapp0`, plus `Prof_cell_apply` on shaped inputs, not direct
    `Prof_comp_transf` cancellation.
 
-6. Remove the four co-Yoneda `Prof_comp_transf` beta rules.
+6. Preserve the general-cell identity-unit naturality checks as compatibility.
+
+   The checks using `Prof_tensor_hom_transf` and `Prof_tensor_transf_hom` are
+   standard co-Yoneda naturality content. Do not delete them merely because
+   their current owner is `Prof_comp_transf`. Mark their current presentation as
+   temporary and replace it only after a fixed-endpoint map/naturality owner is
+   available.
+
+7. Remove the shaped co-Yoneda `Prof_comp_transf` beta rules after replacement.
+
+   Do not remove the general-cell pair in this first pass.
+
+8. Later replace the general-cell identity-unit naturality rules.
+
+   The later replacement should route through fixed-endpoint co-Yoneda,
+   tensor-map/naturality, `Prof_reindex_transf`, and `hom_postcomp_fapp0` or
+   `ProfComparison` push/pull. If this still requires a named cell-composition
+   expression on the RHS, that name must be documented as derived compatibility
+   or as a future explicit equipment theorem, not as the owner of co-Yoneda
+   computation.
 
    Run:
 
@@ -1438,9 +1547,9 @@ High feasibility:
 
 Medium feasibility:
 
-- migrating active co-Yoneda beta rules away from `Prof_comp_transf`, because
-  the current rules simultaneously encode co-Yoneda cancellation, tensor
-  introduction, endpoint reindexing, and shaped-element specialization.
+- migrating shaped co-Yoneda beta rules away from `Prof_comp_transf`, because
+  they require the fixed-endpoint co-Yoneda owner plus the narrow
+  `Prof_cell_apply` path.
 - migrating endpoint-changing public co-Yoneda names to fixed-endpoint maps or
   comparisons without reintroducing broad equipment composition.
 
@@ -1451,6 +1560,10 @@ Medium risk:
 - `Prof_cell_apply` must stay narrow: the first implementation should add no
   general associativity, identity, or equipment-composition rewrite rules for
   it.
+- migrating general-cell identity-unit co-Yoneda naturality away from
+  `Prof_comp_transf` is a separate later pass, because it also needs
+  fixed-endpoint tensor functoriality/naturality and a settled derived
+  cell-composition expression for the RHS.
 
 Known non-goals:
 
@@ -1484,7 +1597,9 @@ Known non-goals:
 
    Confirm `Prof_func_hom(M)` as the canonical unit-shaped identity element,
    add fixed-endpoint co-Yoneda map/comparison owners, then migrate diagnostics
-   to `Prof_cell_apply` over tensor-introduced shaped elements. Keep
+   for tensor-introduced shaped elements to `Prof_cell_apply`. Preserve the
+   general-cell identity-unit naturality rules as temporary compatibility until
+   fixed-endpoint tensor/co-Yoneda naturality owners replace them. Keep
    endpoint-changing public names as `CoyR`/`CoyL`-style wrappers until their
    consumers are gone.
 
@@ -1529,6 +1644,6 @@ make catalog
 | `EQUIP-INVENTORY` | proposed | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion. |
 | `EQUIP-CELL-EVAL` | selected for implementation | next implementation probe | Add general object-level `Prof_cell_apply`, define terminal-source `Prof_cell_eval`, and route `join_cross_hom` through `Prof_cell_eval` before migrating join beta. |
 | `EQUIP-JOIN-NARROW` | proposed | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with direct/narrow join owners. |
-| `EQUIP-TENSOR-COYONEDA` | refined design draft | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint co-Yoneda map/comparison owners, express beta via `Prof_cell_apply`, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
+| `EQUIP-TENSOR-COYONEDA` | refined design draft | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint co-Yoneda map/comparison owners, express shaped beta via `Prof_cell_apply`, preserve general-cell identity-unit naturality as compatibility until fixed-endpoint map/naturality owners replace it, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |
