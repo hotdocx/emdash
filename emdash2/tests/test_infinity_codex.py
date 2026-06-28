@@ -93,6 +93,15 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertEqual(len(metadata), 1)
         return metadata[0]
 
+    def event_records(self) -> list[dict[str, object]]:
+        path = self.archive / "events.jsonl"
+        self.assertTrue(path.exists())
+        return [
+            json.loads(line)
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+
     def test_stop_preserves_exact_unicode_bytes_without_newline(self) -> None:
         message = "First line\nβ → ω\nfinal byte"
         result = self.run_hook(self.stop_payload(message))
@@ -114,7 +123,8 @@ class InfinityCodexTests(unittest.TestCase):
     def test_null_message_creates_no_archive(self) -> None:
         result = self.run_hook(self.stop_payload(None))
         self.assertEqual(result, {"continue": True})
-        self.assertFalse(self.archive.exists())
+        self.assertEqual(list(self.archive.glob("sessions/*/responses/*.md")), [])
+        self.assertEqual(self.event_records()[-1]["status"], "no_new_archive")
 
     def test_duplicate_turn_is_idempotent(self) -> None:
         payload = self.stop_payload("same response")
@@ -181,6 +191,84 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertIn("Authority order:", context)
         self.assertNotIn(marker, context)
 
+    def test_postcompact_falls_back_to_next_user_prompt_once(self) -> None:
+        marker = "DO-NOT-INJECT-ARCHIVED-CONTENT"
+        secret_prompt = "DO-NOT-LOG-USER-PROMPT"
+        payload = self.stop_payload(marker)
+        self.run_hook(payload)
+        compact_payload = {
+            "session_id": payload["session_id"],
+            "turn_id": "compact-turn",
+            "transcript_path": "/unstable/transcript.jsonl",
+            "cwd": str(REPO_ROOT),
+            "hook_event_name": "PostCompact",
+            "model": "gpt-test",
+            "trigger": "manual",
+        }
+        self.assertEqual(self.run_hook(compact_payload), {"continue": True})
+
+        prompt_payload = {
+            "session_id": payload["session_id"],
+            "turn_id": "prompt-turn",
+            "transcript_path": "/unstable/transcript.jsonl",
+            "cwd": str(REPO_ROOT),
+            "hook_event_name": "UserPromptSubmit",
+            "model": "gpt-test",
+            "permission_mode": "default",
+            "prompt": secret_prompt,
+        }
+        result = self.run_hook(prompt_payload)
+        context = result["hookSpecificOutput"]["additionalContext"]
+        self.assertEqual(
+            result["hookSpecificOutput"]["hookEventName"], "UserPromptSubmit"
+        )
+        self.assertIn("Latest archived final:", context)
+        self.assertNotIn(marker, context)
+        self.assertNotIn(secret_prompt, context)
+        self.assertEqual(self.run_hook(prompt_payload), {"continue": True})
+
+        events_text = (self.archive / "events.jsonl").read_text(encoding="utf-8")
+        self.assertIn("postcompact_context_emitted", events_text)
+        self.assertNotIn(marker, events_text)
+        self.assertNotIn(secret_prompt, events_text)
+
+    def test_session_start_clears_postcompact_fallback(self) -> None:
+        payload = self.stop_payload("session start handles compact")
+        self.run_hook(payload)
+        self.run_hook(
+            {
+                "session_id": payload["session_id"],
+                "turn_id": "compact-turn",
+                "transcript_path": "/unstable/transcript.jsonl",
+                "cwd": str(REPO_ROOT),
+                "hook_event_name": "PostCompact",
+                "model": "gpt-test",
+                "trigger": "auto",
+            }
+        )
+        start_payload = {
+            "session_id": payload["session_id"],
+            "transcript_path": "/unstable/transcript.jsonl",
+            "cwd": str(REPO_ROOT),
+            "hook_event_name": "SessionStart",
+            "model": "gpt-test",
+            "permission_mode": "default",
+            "source": "compact",
+        }
+        result = self.run_hook(start_payload)
+        self.assertIn("hookSpecificOutput", result)
+        prompt_payload = {
+            "session_id": payload["session_id"],
+            "turn_id": "prompt-turn",
+            "transcript_path": "/unstable/transcript.jsonl",
+            "cwd": str(REPO_ROOT),
+            "hook_event_name": "UserPromptSubmit",
+            "model": "gpt-test",
+            "permission_mode": "default",
+            "prompt": "no fallback should remain",
+        }
+        self.assertEqual(self.run_hook(prompt_payload), {"continue": True})
+
     def test_archive_permissions_and_verify(self) -> None:
         self.run_hook(self.stop_payload("private"))
         for path in [self.archive, *self.archive.rglob("*")]:
@@ -236,11 +324,14 @@ class InfinityCodexTests(unittest.TestCase):
         finally:
             report.unlink(missing_ok=True)
 
-    def test_hook_configuration_has_only_stop_and_recovery_events(self) -> None:
+    def test_hook_configuration_has_expected_events(self) -> None:
         configuration = json.loads(HOOKS.read_text(encoding="utf-8"))
         hooks = configuration["hooks"]
-        self.assertEqual(set(hooks), {"Stop", "SessionStart"})
+        self.assertEqual(
+            set(hooks), {"Stop", "SessionStart", "PostCompact", "UserPromptSubmit"}
+        )
         self.assertEqual(hooks["SessionStart"][0]["matcher"], "resume|compact")
+        self.assertEqual(hooks["PostCompact"][0]["matcher"], "manual|auto")
         for event in hooks.values():
             command = event[0]["hooks"][0]["command"]
             self.assertIn("scripts/infinity_codex.py", command)

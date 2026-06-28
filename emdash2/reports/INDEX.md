@@ -78,7 +78,8 @@ The following reports are expected to be generated or refreshed by tooling:
 
 - Add every new active report to this index.
 - Give active plan reports stable `Plan-ID`, dependency, side-task-ledger, and
-  Infinity Codex provenance fields.
+  Infinity Codex provenance fields. `make ci` enforces these fields for reports
+  listed under Current Plans.
 - Mark reports as current plans, audits, generated reports, or retired
   references.
 - Keep active reports free of instructions to read `.scratchpad/`.

@@ -24,6 +24,7 @@ ci:
 > bash -n scripts/*.sh
 > git diff --check
 > ./scripts/lint_active_refs.sh
+> python3 scripts/lint_report_headers.py
 > python3 scripts/audit_rule_lhs.py --strict
 > python3 scripts/generate_check_catalog.py --check --strict
 

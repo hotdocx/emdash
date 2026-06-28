@@ -739,9 +739,12 @@ make infinity-codex-test
 ```
 
 The hook archives only completed main-agent final responses under ignored
-`tmp/ai-responses/`. On resume or compaction it injects file pointers, not
-archived response text. Raw responses are historical recovery evidence and
-must never outrank current code, this SOP, or the active task plan:
+`tmp/ai-responses/`. On resume it injects file pointers as model-visible
+developer context, not archived response text. On compaction, `SessionStart`
+does the same when Codex starts a compacted context; otherwise `PostCompact`
+records a private marker and the next `UserPromptSubmit` injects the same
+pointer context once. Raw responses are historical recovery evidence and must
+never outrank current code, this SOP, or the active task plan:
 
 ```text
 active code/SOP -> active plan and side-task ledger
@@ -749,8 +752,11 @@ active code/SOP -> active plan and side-task ledger
 ```
 
 Use `python3 scripts/infinity_codex.py verify` after manual maintenance.
-Pruning is explicit and dry-run by default. Codex Memories are not part of
-this workflow.
+If injected pointers are not apparent in the UI, inspect
+`tmp/ai-responses/events.jsonl` and fall back to `latest-id`, `list`, or
+`show`. The event audit records lifecycle metadata only; it does not store
+prompts or final-response text. Pruning is explicit and dry-run by default.
+Codex Memories are not part of this workflow.
 
 Reviewer-facing examples can be checked with:
 

@@ -31,6 +31,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ARCHIVE_ROOT = REPO_ROOT / "tmp" / "ai-responses"
 PRIVATE_DIR_MODE = 0o700
 PRIVATE_FILE_MODE = 0o600
+EVENT_AUDIT_FILE = "events.jsonl"
 
 
 class InfinityCodexError(RuntimeError):
@@ -562,13 +563,108 @@ def recovery_context(root: Path, payload: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def hook_result(*, system_message: str | None = None, context: str | None = None) -> dict[str, Any]:
+def pending_postcompact_path(root: Path, session_id: str) -> Path:
+    return root / "state" / "postcompact" / f"{safe_identifier(session_id)}.json"
+
+
+def write_pending_postcompact(root: Path, payload: dict[str, Any]) -> bool:
+    session_id = payload.get("session_id")
+    if not isinstance(session_id, str) or not session_id:
+        return False
+    turn_id = payload.get("turn_id") if isinstance(payload.get("turn_id"), str) else ""
+    trigger = payload.get("trigger") if isinstance(payload.get("trigger"), str) else ""
+    with archive_lock(root):
+        path = pending_postcompact_path(root, session_id)
+        atomic_replace(
+            path,
+            json_bytes(
+                {
+                    "archive_format_version": ARCHIVE_FORMAT_VERSION,
+                    "captured_at": iso_utc(utc_now()),
+                    "session_id": session_id,
+                    "turn_id": turn_id,
+                    "trigger": trigger,
+                }
+            ),
+        )
+    return True
+
+
+def read_pending_postcompact(root: Path, session_id: str) -> dict[str, Any] | None:
+    if not session_id:
+        return None
+    with archive_lock(root):
+        path = pending_postcompact_path(root, session_id)
+        if not path.exists():
+            return None
+        return load_json(path)
+
+
+def clear_pending_postcompact(root: Path, session_id: str) -> None:
+    if not session_id:
+        return
+    with archive_lock(root):
+        with contextlib.suppress(FileNotFoundError):
+            pending_postcompact_path(root, session_id).unlink()
+
+
+def audit_field(payload: dict[str, Any], name: str) -> str:
+    value = payload.get(name)
+    return value if isinstance(value, str) else ""
+
+
+def append_event_audit(
+    root: Path,
+    payload: dict[str, Any],
+    *,
+    context_emitted: bool,
+    status: str,
+    note: str | None = None,
+) -> None:
+    record: dict[str, Any] = {
+        "archive_format_version": ARCHIVE_FORMAT_VERSION,
+        "captured_at": iso_utc(utc_now()),
+        "hook_event_name": audit_field(payload, "hook_event_name"),
+        "session_id": audit_field(payload, "session_id"),
+        "turn_id": audit_field(payload, "turn_id"),
+        "source": audit_field(payload, "source"),
+        "trigger": audit_field(payload, "trigger"),
+        "context_emitted": context_emitted,
+        "status": status,
+    }
+    if note:
+        record["note"] = note
+    with archive_lock(root):
+        ensure_private_dir(root)
+        path = root / EVENT_AUDIT_FILE
+        with path.open("ab") as handle:
+            os.chmod(path, PRIVATE_FILE_MODE)
+            encoded = (
+                json.dumps(
+                    record,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+                + b"\n"
+            )
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+
+
+def hook_result(
+    *,
+    system_message: str | None = None,
+    context: str | None = None,
+    context_event_name: str = "SessionStart",
+) -> dict[str, Any]:
     result: dict[str, Any] = {"continue": True}
     if system_message:
         result["systemMessage"] = system_message
     if context:
         result["hookSpecificOutput"] = {
-            "hookEventName": "SessionStart",
+            "hookEventName": context_event_name,
             "additionalContext": context,
         }
     return result
@@ -576,19 +672,60 @@ def hook_result(*, system_message: str | None = None, context: str | None = None
 
 def run_hook(root: Path, payload: dict[str, Any]) -> dict[str, Any]:
     event = payload.get("hook_event_name")
+    context_emitted = False
+    audit_status = "ignored"
+    audit_note: str | None = None
     try:
         if event == "Stop":
-            archive_response(root, payload)
+            _, created = archive_response(root, payload)
+            audit_status = "archived" if created else "no_new_archive"
             return hook_result()
         if event == "SessionStart":
-            return hook_result(context=recovery_context(root, payload))
+            context = recovery_context(root, payload)
+            context_emitted = True
+            audit_status = "context_emitted"
+            session_id = audit_field(payload, "session_id")
+            clear_pending_postcompact(root, session_id)
+            return hook_result(context=context)
+        if event == "PostCompact":
+            audit_status = (
+                "postcompact_pending"
+                if write_pending_postcompact(root, payload)
+                else "postcompact_missing_session"
+            )
+            return hook_result()
+        if event == "UserPromptSubmit":
+            session_id = audit_field(payload, "session_id")
+            pending = read_pending_postcompact(root, session_id)
+            if pending is None:
+                audit_status = "no_pending_context"
+                return hook_result()
+            context = recovery_context(root, payload)
+            clear_pending_postcompact(root, session_id)
+            context_emitted = True
+            audit_status = "postcompact_context_emitted"
+            return hook_result(context=context, context_event_name="UserPromptSubmit")
+        audit_status = "unsupported_event"
         return hook_result(
             system_message=f"Infinity Codex ignored unsupported hook event: {event!r}"
         )
     except ArchiveConflict as error:
+        audit_status = "archive_conflict"
+        audit_note = str(error)
         return hook_result(system_message=f"Infinity Codex archive conflict: {error}")
     except Exception as error:
+        audit_status = "failed"
+        audit_note = str(error)
         return hook_result(system_message=f"Infinity Codex archive failed: {error}")
+    finally:
+        with contextlib.suppress(Exception):
+            append_event_audit(
+                root,
+                payload,
+                context_emitted=context_emitted,
+                status=audit_status,
+                note=audit_note,
+            )
 
 
 def command_hook(root: Path) -> int:

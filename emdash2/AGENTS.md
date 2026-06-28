@@ -236,6 +236,10 @@ active code/SOP -> active plan and side-task ledger
 - Plan/report metadata uses logical IDs of the form
   `infinity-codex:<session-id>:<turn-id>`; resolve them with
   `scripts/infinity_codex.py resolve`.
+- Resume and compaction hooks inject file pointers as model-visible developer
+  context, not necessarily as visible chat prose. If no pointers are apparent,
+  inspect `tmp/ai-responses/events.jsonl` for hook lifecycle status and fall
+  back to `latest-id`, `list`, or `show`.
 - Read only archive entries relevant to the active plan, dependency, or
   side-task trigger. Never replay the whole session archive into context.
 - Use `verify` after manual archive maintenance and `reindex` to rebuild
@@ -254,8 +258,9 @@ after an LLM context compaction, unexpected interruption, or handoff:
    `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
 2. Read the active task-specific plan/report, its side-task ledger and linked
    Infinity Codex decision-response IDs, and any user-designated
-   `tmp/tmp-context-*.md` recovery file. Use the injected Infinity Codex file
-   pointers to locate only relevant archived finals.
+   `tmp/tmp-context-*.md` recovery file. Use injected Infinity Codex file
+   pointers when present; otherwise run `python3 scripts/infinity_codex.py
+   latest-id` or `list` to locate only relevant archived finals.
 3. Run `git status --short`, inspect both `git diff --cached` and `git diff`,
    and preserve the distinction between staged user-approved work and
    unstaged work.

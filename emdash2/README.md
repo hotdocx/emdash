@@ -96,9 +96,12 @@ gate.
 Trusted project-local hooks in `.codex/hooks.json` archive the main agent's
 completed final response after each turn. The exact response bytes and
 write-once metadata live under ignored `tmp/ai-responses/`; user prompts,
-commentary, tool calls, and subagent output are not copied. On session resume
-or context compaction, Codex receives file pointers only, never automatically
-injected archived prose.
+commentary, tool calls, and subagent output are not copied. On session resume,
+Codex receives file pointers as model-visible developer context, never
+automatically injected archived prose. On context compaction, `SessionStart`
+does the same when Codex starts a compacted context; a `PostCompact` marker plus
+the next `UserPromptSubmit` provides a one-shot fallback when compaction happens
+inside an already-running session.
 
 After cloning or changing the hook definition, restart Codex and use `/hooks`
 to review and trust it. The hook is deliberately independent of Codex
@@ -117,6 +120,11 @@ python3 scripts/infinity_codex.py verify
 python3 scripts/infinity_codex.py reindex
 python3 scripts/infinity_codex.py prune --before 2026-01-01 --dry-run
 ```
+
+If no recovery pointers are visible after resume or compaction, inspect the
+archive directly with `latest-id`, `list`, or `show`, and check
+`tmp/ai-responses/events.jsonl` for hook lifecycle metadata. The event audit
+does not contain prompt text or final-response text.
 
 Deletion requires replacing `--dry-run` with `--apply`. The archive is local
 only; back it up separately if machine-level durability is required.

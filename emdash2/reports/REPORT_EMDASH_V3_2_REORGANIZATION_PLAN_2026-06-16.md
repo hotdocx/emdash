@@ -8,6 +8,7 @@ Supersedes: none
 Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
+Status: proposed reorganization plan; no active file split has been promoted.
 
 Active file: `emdash3_2.lp`
 

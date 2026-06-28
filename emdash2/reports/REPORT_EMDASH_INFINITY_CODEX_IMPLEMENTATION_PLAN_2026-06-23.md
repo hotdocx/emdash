@@ -6,13 +6,13 @@ Plan-ID: EMDASH-INFINITY-CODEX-2026-06-23
 Depends-On: EMDASH-MATHOPS-DEVOPS-2026-06-16
 Supersedes: none
 Side-Task-Ledger: none
-Infinity-Codex-Origin: pending
-Infinity-Codex-Decision-Responses: pending
+Infinity-Codex-Origin: pre-infinity-codex
+Infinity-Codex-Decision-Responses: none
 
-Status: implementation complete; local hook trust and first restarted-session
-smoke test remain operator activation steps. The initial live Stop-hook test
-exposed and corrected nested-project path resolution: this Codex project is
-`emdash2`, while the enclosing Git root is `emdash1`.
+Status: implementation complete with 2026-06-28 compaction-recovery hardening.
+The initial live Stop-hook test exposed and corrected nested-project path
+resolution: this Codex project is `emdash2`, while the enclosing Git root is
+`emdash1`.
 
 ## Summary
 
@@ -180,3 +180,25 @@ back to Git-root-only resolution.
 
 Because changing a hook command changes its trust hash, review and trust the
 updated definition through `/hooks` before repeating the live smoke test.
+
+## Hardening Update: Compaction Fallback And Audit
+
+Updated on 2026-06-28:
+
+- `.codex/hooks.json` now registers `PostCompact` and `UserPromptSubmit` in
+  addition to `Stop` and `SessionStart`.
+- `PostCompact` records a private pending recovery marker. Since Codex does not
+  add hook-specific context from `PostCompact`, the next `UserPromptSubmit`
+  consumes that marker and injects the same pointer-only recovery context once.
+- `SessionStart source=compact` still injects pointers directly and clears any
+  pending post-compaction fallback marker.
+- `tmp/ai-responses/events.jsonl` records hook event name, session id, turn id,
+  source/trigger, status, and whether pointer context was emitted. It does not
+  record prompts, final-response text, tool calls, or transcript contents.
+- The pre-hardening first archive record with mismatched metadata was preserved
+  under `tmp/ai-responses/quarantine/` and removed from the active generated
+  indexes; `verify` now succeeds on the remaining active archive.
+- `scripts/lint_report_headers.py` and `make ci` now enforce current-plan
+  header fields, including non-pending Infinity Codex provenance values.
+- `make infinity-codex-test` now covers 15 tests, including the post-compaction
+  fallback path and prompt/response exclusion from the event audit.

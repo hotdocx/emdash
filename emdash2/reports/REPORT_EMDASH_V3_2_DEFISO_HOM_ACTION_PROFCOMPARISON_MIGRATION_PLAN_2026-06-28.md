@@ -2,8 +2,13 @@
 
 Date: 2026-06-28
 Last reviewed: 2026-06-28
-Status: active incremental migration plan; Phases 1-3 and Phase 5 promoted
 Plan-ID: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28
+Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23
+Supersedes: none
+Side-Task-Ledger: none
+Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
+Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
+Status: active incremental migration plan; Phases 1-3 and Phase 5 promoted
 
 Parent plan:
 `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`,
@@ -17,13 +22,9 @@ Related plans:
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
 
-Infinity Codex provenance:
-
-- Immediate predecessor decision context:
-  `infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441`
-- This report was written from the active code and active plan state on
-  2026-06-28. Add the current-turn final-response ID after the archive hook
-  records it, if stronger conversational provenance is needed.
+The normalized Infinity Codex header fields record the immediate predecessor
+decision context used when this report was written from the active code and
+active plan state on 2026-06-28.
 
 ## Purpose
 
