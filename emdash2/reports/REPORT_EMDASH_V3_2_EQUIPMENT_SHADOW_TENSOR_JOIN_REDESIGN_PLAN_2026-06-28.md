@@ -996,13 +996,75 @@ epsilon^L_P[id_A,K] . (id_{Unit_A} tensor qq)
   -> qq.
 ```
 
-This content is mathematically standard and should be preserved. What must
-change is the runtime owner. The current implementation owns these reductions
-by broad `Prof_comp_transf` rules. The target owner should instead be built
-from:
+This content is mathematically standard and should be preserved. The important
+distinction is between the required mathematics and the current constructor
+generality.
+
+The fixed-endpoint mathematics required for the tensor side is only:
+
+```text
+P,P' : Prof(A,B)
+Q,Q' : Prof(B,X)
+
+r : ProfMap(P,P')
+s : ProfMap(Q,Q')
+
+r tensor s : ProfMap(P tensor Q, P' tensor Q')
+```
+
+For right co-Yoneda, the fixed-endpoint map is:
+
+```text
+epsilon^R_P : ProfMap(P tensor Unit_B, P)
+```
+
+with naturality:
+
+```text
+r . epsilon^R_P
+  =
+epsilon^R_P' . (r tensor id_Unit_B).
+```
+
+Thus for an incoming map `q : ProfMap(Q,P)` the computational beta target is:
+
+```text
+epsilon^R_P' . (r tensor id_Unit_B) . (q tensor id_Unit_B)
+  -> r . q.
+```
+
+The left map is dual:
+
+```text
+epsilon^L_P : ProfMap(Unit_A tensor P, P)
+
+r . epsilon^L_P
+  =
+epsilon^L_P' . (id_Unit_A tensor r).
+```
+
+The active general-cell rules are exactly endpoint-changing identity-unit
+specializations of these formulas. Their current syntax uses
+`Prof_tensor_hom_transf` and `Prof_tensor_transf_hom`, but the co-Yoneda
+consumers instantiate those mixed constructors only as:
+
+```text
+qq tensor id_Unit_B
+id_Unit_A tensor qq.
+```
+
+Therefore `Prof_tensor_hom_transf` and `Prof_tensor_transf_hom` are
+semantically admissible current shims, not evidence that the final architecture
+needs their full mixed "general cell plus shaped element" generality as a
+primitive owner.
+
+What must change is the runtime owner. The current implementation owns these
+reductions by broad `Prof_comp_transf` rules. The target owner should instead
+be built from:
 
 - fixed-endpoint co-Yoneda map/comparison;
-- fixed-endpoint tensor functoriality or a narrow tensor map owner;
+- fixed-endpoint tensor functoriality, preferably `Prof_tensor_func`, or a
+  narrow tensor map owner such as `Prof_tensor_map`;
 - `Prof_reindex_transf` for endpoint changes;
 - `hom_postcomp_fapp0` or the corresponding `ProfComparison` push/pull;
 - a derived/compatibility expression for the final composed cell, until a
@@ -1159,10 +1221,13 @@ public wrapper, but it should still be derived from:
 6. Preserve the general-cell identity-unit naturality checks as compatibility.
 
    The checks using `Prof_tensor_hom_transf` and `Prof_tensor_transf_hom` are
-   standard co-Yoneda naturality content. Do not delete them merely because
-   their current owner is `Prof_comp_transf`. Mark their current presentation as
-   temporary and replace it only after a fixed-endpoint map/naturality owner is
-   available.
+   standard co-Yoneda naturality content, but only in the narrow identity-unit
+   specializations `qq tensor id_Unit_B` and `id_Unit_A tensor qq`. Do not delete
+   them merely because their current owner is `Prof_comp_transf`; doing so would
+   lose a real naturality theorem. Also do not promote their full current
+   mixed-constructor generality as the final design. Mark their current
+   presentation as temporary compatibility scaffolding and replace it only
+   after a fixed-endpoint tensor-map/naturality owner is available.
 
 7. Remove the shaped co-Yoneda `Prof_comp_transf` beta rules after replacement.
 
@@ -1172,10 +1237,20 @@ public wrapper, but it should still be derived from:
 
    The later replacement should route through fixed-endpoint co-Yoneda,
    tensor-map/naturality, `Prof_reindex_transf`, and `hom_postcomp_fapp0` or
-   `ProfComparison` push/pull. If this still requires a named cell-composition
-   expression on the RHS, that name must be documented as derived compatibility
-   or as a future explicit equipment theorem, not as the owner of co-Yoneda
-   computation.
+   `ProfComparison` push/pull. The intended fixed-endpoint replacement is
+   morally:
+
+   ```text
+   Prof_tensor_map(r,s)
+   epsilon^R_naturality(r)
+   epsilon^L_naturality(r)
+   ```
+
+   Endpoint-changing presentations should be obtained by reindexing these
+   fixed-endpoint constructions. If the replacement still requires a named
+   cell-composition expression on the RHS, that name must be documented as
+   derived compatibility or as a future explicit equipment theorem, not as the
+   owner of co-Yoneda computation.
 
    Run:
 
