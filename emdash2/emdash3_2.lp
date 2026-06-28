@@ -24,86 +24,127 @@
 
   Diagnostic `assert` checks live in emdash3_2_checks.lp.
 
-  Table of contents / future split map:
+  Table of contents / source section map:
 
     0. Groupoid universe and equality
-       Grpd, τ, equality/path primitives, induction/transport, observational
-       Sigma/Pi/Product equality skeletons, TypeEquiv, IsoEvidence,
-       OmegaEquiv, and univalence decoder heads.
+       - groupoid universe, decoding, equality, induction, and transport;
+       - observational Sigma/Pi/Product path skeletons;
+       - type equivalences, path/equivalence decoders, and univalence
+         staging.
 
-    1. Encoded Sigma/product object layers
-       Struct_sigma, projection/pathover helpers, generated Sigma/Pi wrappers,
-       product encodings, and constructor-specific path projections.
+    1. Encoded Sigma types for object layers
+       - dependent-pair encoding, projections, and pathover helpers;
+       - groupoid-level dependent products and type-equivalence basics;
+       - constructor-specific TypeEquiv scaffolding.
 
-    2. Core category structure
-       Cat, Obj/Hom classifiers, id/composition, hom-category structure,
-       products, opposites, path categories, and universe category heads.
+    2. Core categories
+       - category interface, hom-categories, identities, and composition;
+       - inference-helper policy and composition associativity;
+       - path-category computation laws.
 
-    3. Ordinary functors and universe categories
-       Functor classifier, fapp0/fapp1 projection calculus, identity and
-       composition functors, Cat_cat/Catd_cat/Functor_cat structure, and
-       ordinary functor laws.
+    3. Functor, displayed-family, and universe categories
+       - ordinary functor classifier and action;
+       - categorical isomorphism evidence and univalence/OmegaEquiv staging;
+       - universe-category and displayed-family category heads;
+       - internalized universe-level constructor packages.
 
-    4. Ordinary internal hom and hom-actions
-       hom_, hom_func, hom_postcomp_* and hom_precomp_along_* stable heads,
-       opposite post/pre bridges, Cat-specialized hom-action presentations,
-       and ordinary composition-action joins.
+    4. Ordinary internal hom and hom actions
+       - ordinary internal hom classifiers;
+       - stable postcomposition/precomposition hom-action presentations;
+       - DefIso-facing cancellation and opposite post/pre bridges;
+       - ordinary internal-hom computation joins.
 
-    5. Transformations and Cat-specialized projections
-       Transf classifier, tapp0/tapp1 projection calculus, constant
-       transformations, comp_cat_cov/con heads, and transfor-level
-       naturality/cut-elimination rules.
+    5. Ordinary binary products of categories
+       - product categories, projections, pairing, and symmetry;
+       - product closure for isomorphism evidence;
+       - product closure for omega-equivalence.
 
-    6. Ordinary products, evaluation, curry/uncurry, and adjunctions
-       Product_cat/product maps, evaluation/curry rules, ordinary internal
-       hom interfaces, adjunction evidence, triangle reductions, and
-       right-adjoint preservation helpers.
+    6. Ordinary transformations and functor composition actions
+       - transformation classifier and projection calculus;
+       - Cat-valued/displayed-functor interpretation of transformations;
+       - constant transformations, opposite transformations, and
+         Cat-specialized composition-action projections.
 
-    7. Directed family categories and reindexing
-       Cat-valued directed families, Fibre_cat, reindexing, displayed
-       categories, displayed functors/transfors, Op_funcd, and displayed
-       identity/composition rules.
+    7. Product functor packages, evaluation, curry, and ordinary internal action
+       - internalized product formation and evaluation;
+       - product curry/uncurry scaffolding;
+       - ordinary adjunctions and opposite adjunctions;
+       - ordinary internal hom-action packages.
 
-    8. Directed Pi/Sigma and mixed-variance family constructors
-       Pi_cat, Sigma_cat, dependent total categories, product-pair telescope
-       rules, section pullbacks, and internal Pi action.
+    8. Directed Cat-valued family constructors
+       - fibre notation, pullback, and base-arrow transport;
+       - constant, terminal, opposite, and displayed composition;
+       - section categories, Pi action, fibre covariance, and dependent-hom
+         endpoints.
 
-    9. Dependent hom and representable infrastructure
-       Representables, homd_src/tgt ladders, Homd target families,
-       homd_int projection normal forms, covariant fibre transport, and
-       representable transport aliases.
+    9. Directed Sigma categories and maps between totals
+       - Sigma totals, Sigma homs, and projection;
+       - Sigma maps and canonical transport arrows;
+       - families over Sigma totals and displayed-transfor uncurrying.
 
-    10. Displayed hom-action and laxity extraction
-        Section action, internal displayed hom-action, displayed component
-        notation, Sigma-map hom-action, and component-level displayed
-        laxity cells.
+    10. Mixed-variance family functor
+        - stable mixed-variance family constructors;
+        - source/target transport shape for mixed variance.
 
-    11. Structural functor logic
-        Generic Sigma/Pi weakening/evaluation helpers, constant sections,
-        ordinary exchange/contraction, generic ordinary functor hom-action,
-        and related structural bridges.
+    11. Representables and presheaf-family classifiers
+        - representable displayed families;
+        - opposite-edge and presheaf classifiers.
 
-    12. Ordinary internal hom-action refinements
-        tapp1_int/fapp1_int packages, strict naturality, and ordinary
-        hom-action component formulas.
+    12. Directed homd target and internal homd functor
+        - Homd target architecture;
+        - internal homd functor entry point.
 
-    13. Cat-valued profunctor facade
-        Prof_cat/Prof aliases, representable hom profunctors, tensor,
-        implication, curry/eval, reindexing, duality, and weighted-limit
-        facade rules.
+    13. Dependent-hom projections and covariant fibre transport
+        - covariant fibre-transport architecture;
+        - internal dependent-hom projection cascade.
 
-    14. DefIso and profunctor-comparison migration
-        DefIso primitives, hom_postcomp_fapp0 cancellation, fmap/reindex
-        utilities, ProfComparison compatibility aliases, and weighted-limit
-        migration checks.
+    14. Section action over dependent homs
+        - section action source endpoint;
+        - section-level dependent-hom action entry point.
 
-    15. Applications and stress tests
-        PathOut, fixed-source and telescope path induction, Sigma-total path
-        induction, target transport aliases, transitivity/composition
-        benchmark, nested telescope examples, and directed-inductive joins.
+    15. Internal displayed hom-action heads
+        - internal displayed hom-action constructors;
+        - displayed source/target action surfaces.
 
-    16. Check catalog
-        Human-readable catalog of normal forms tested by emdash3_2_checks.lp.
+    16. Displayed components, displayed hom-action, and laxity extraction
+        - fibre-level displayed notation;
+        - displayed laxity and whole-transfor interfaces;
+        - section action over base arrows and displayed internal-hom action
+          projections.
+
+    17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed
+        projection helpers
+        - generic Sigma/Pi introduction and evaluation;
+        - constant sections and delayed product-pair telescope rules;
+        - ordinary functor structural logic;
+        - generic ordinary functor hom-action, section pullback, and internal
+          Pi action.
+
+    18. Cat-valued profunctors
+        - profunctor facade, opposite, reindexing, and shaped cells;
+        - right-representables, comparison action, and DefIso migration
+          compatibility;
+        - equipment-cell composition, duality, tensor, and co-Yoneda maps;
+        - covariant/contravariant implication and vertical closed cores;
+        - weighted-limit representability and adjunction-mate preservation;
+        - directed-inductive join category and late cross-section bridges.
+
+    19. Applications: PathOut, path induction, and transitivity
+        - outgoing-path categories and fixed-source path induction;
+        - PathOut motives and Sigma-total path induction presentation;
+        - transitivity benchmark and target-transport aliases;
+        - nested telescope stress examples.
+
+    20. Check catalog
+        - comment-only map of diagnostics in emdash3_2_checks.lp;
+        - reviewer-facing normal-form categories and application checks.
+
+  Grouped architecture map:
+    - Kernel foundations: 0-3.
+    - Ordinary category calculus: 4-7.
+    - Directed-family and displayed calculus: 8-17.
+    - Profunctor, equipment, and DefIso migration machinery: 18.
+    - Applications and diagnostic catalog: 19-20.
 */
 
 flag "eta_equality" on;
