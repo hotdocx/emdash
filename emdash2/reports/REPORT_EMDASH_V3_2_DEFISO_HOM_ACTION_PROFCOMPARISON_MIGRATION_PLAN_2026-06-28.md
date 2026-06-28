@@ -8,7 +8,8 @@ Supersedes: none
 Side-Task-Ledger: none
 Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
-Status: active incremental migration plan; Phases 1-3 and Phase 5 promoted
+Status: active incremental migration plan; Phases 1-3, Phase 5, and the
+adjunction-mate DefIso owner correction promoted
 
 Parent plan:
 `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`,
@@ -669,6 +670,66 @@ Status as of 2026-06-28:
 - Existing weighted-limit and right-adjoint preservation diagnostics still
   pass after migration.
 
+Architectural correction, 2026-06-28:
+
+- The Phase 5 promotion should be read narrowly: the public
+  `ProfComparison` compatibility surface is now routed through `DefIso`, but
+  the lower adjunction-mate/equipment layer is not yet fully DefIso-owned.
+- In the active code before this correction,
+  `defiso_to(Adjunction_hom_prof_comparison)` and
+  `defiso_from(Adjunction_hom_prof_comparison)` reduced by runtime rewrite to
+  the legacy primitive heads `Adjunction_prof_transpose` and
+  `Adjunction_prof_untranspose`. This weakens the intended ownership: once a
+  selected DefIso arrow reduces to a legacy primitive head, generic DefIso
+  cancellation no longer controls the runtime normal form, and direct
+  cancellation rules for the legacy heads under `Prof_comp_transf` or
+  `comp_catd_fapp0` become necessary again.
+- The corrected target is that `Adjunction_hom_prof_comparison` remains the
+  atomic strict/DefIso certificate, while the old
+  `Adjunction_prof_transpose` and `Adjunction_prof_untranspose` names are
+  transparent compatibility views of the selected `defiso_to` and
+  `defiso_from` arrows. If a legacy primitive name must temporarily be
+  connected to a selected DefIso arrow, use proof-time compatibility
+  (`unif_rule` validated by typed `eq_refl`) rather than a runtime rewrite that
+  steals the normal form.
+- `Prof_comp_transf` was relevant historically because the legacy mate heads
+  were equipment-cell objects. It should not be the final owner of adjunction
+  mate cancellation for right-adjoint weighted-limit preservation. Final
+  cancellation should be inherited from DefIso/hom-action owners, with
+  ordinary `IsoEvidence` obtained by `defiso_iso_evidence`.
+- There are two preservation APIs for a real reason. The strict theorem
+  `right_adjoint_preserves_weighted_limit_cov_comp` consumes
+  `IsWeightedLimit_cov_comp` / `ProfComparison` / `DefIso`. The ordinary
+  theorem `right_adjoint_preserves_weighted_limit_cov_iso` consumes only
+  `IsWeightedLimit_cov_iso` / `IsoEvidence`; it cannot be derived from the
+  strict theorem for an arbitrary ordinary input because there is no general
+  `IsoEvidence -> DefIso`. For a strict input `isl`, however, the ordinary
+  result should be exactly the evidence projection of the strict result:
+  `prof_comparison_evidence(right_adjoint_preserves_weighted_limit_cov_comp
+  isl adj)`.
+
+Promoted implementation note, 2026-06-28:
+
+- `Adjunction_hom_prof_comparison` is now declared before the legacy mate
+  views and remains the atomic strict `ProfComparison` / `DefIso` owner.
+- `Adjunction_hom_prof_comparison_along` is obtained by
+  `prof_comparison_fmap` along `Prof_reindex_func`.
+- `Adjunction_prof_transpose` and `Adjunction_prof_untranspose` are now
+  transparent compatibility views of `defiso_to` and `defiso_from` applied to
+  `Adjunction_hom_prof_comparison_along`.
+- The runtime selected-arrow rules
+  `defiso_to/from(Adjunction_hom_prof_comparison) -> Adjunction_prof_*` were
+  removed.
+- The adjunction-specific cancellation rules under `Prof_comp_transf` and
+  direct `comp_catd_fapp0` were removed. Diagnostics now check cancellation
+  through `prof_comparison_push/pull` and check ordinary inverse evidence
+  through `iso_evidence_left/right`.
+- `Adjunction_hom_prof_iso_evidence` and
+  `Adjunction_hom_prof_iso_evidence_along` are now transparent projections of
+  `defiso_iso_evidence`, so ordinary evidence follows from the strict
+  certificate rather than being independently assembled from legacy mate
+  heads.
+
 Implementation notes:
 
 - `Prof_cat` is a transparent readability alias for
@@ -683,10 +744,10 @@ Implementation notes:
 - `defiso_fmap` selected-arrow rules now keep endpoint arguments as `_ _`;
   the endpoints are reconstructible and often reduce through stable functor
   projections before the DefIso rule sees them.
-- The atomic adjunction mate comparison has focused selected-arrow rules:
-  `defiso_to(Adjunction_hom_prof_comparison)` computes to
-  `Adjunction_prof_transpose`, and `defiso_from(...)` computes to
-  `Adjunction_prof_untranspose`.
+- The atomic adjunction mate comparison should own the selected arrows. Legacy
+  mate names may remain as transparent compatibility views, but selected-arrow
+  runtime rules from `defiso_to/from` to those names are not the intended final
+  architecture.
 - The weighted-limit beta checks require a stable-projection join for
   `Prof_reindex_transf` applied to `defiso_to/from`. This is the
   projection-specialized counterpart of functor-image DefIso cancellation:

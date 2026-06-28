@@ -10863,324 +10863,17 @@ symbol weighted_limit_cov_cone_transf
     B J J' F W L isl I M;
 
 /*
-  Narrow adjunction/profunctor bridge.
+  Computational adjunction/profunctor mate.
 
-  For adj : Adjunction(A,B), M : I -> A, and F : K -> B, these cells expose
-  the representable hom isomorphism
+  For adj : Adjunction(A,B), M : I -> A, and F : K -> B, the mate comparison
+  expresses the representable hom isomorphism
 
     Hom_B(left(M),F) <-> Hom_A(M,right(F)).
 
-  They are stable primitive heads because the current kernel has no constructor
-  assembling a displayed natural transformation from pointwise unit/counit
-  formulas. Future component projections should reduce to those formulas.
-*/
-symbol Adjunction_prof_transpose
-  [A B : Cat]
-  (adj : τ (Adjunction A B))
-  [I K : Cat]
-  (M : τ (Functor I A))
-  (F : τ (Functor K B))
-  : τ (Obj
-      (@Prof_transf_cat
-        I I K K
-        (@Hom_prof_along
-          I K B
-          (@comp_cat_fapp0
-            I A B
-            (@left_adj_func A B adj)
-            M)
-          F)
-        (@id_func I)
-        (@Hom_prof_along
-          I K A
-          M
-          (@comp_cat_fapp0
-            K B A
-            (@right_adj_func A B adj)
-            F))
-        (@id_func K)));
-
-symbol Adjunction_prof_untranspose
-  [A B : Cat]
-  (adj : τ (Adjunction A B))
-  [I K : Cat]
-  (M : τ (Functor I A))
-  (F : τ (Functor K B))
-  : τ (Obj
-      (@Prof_transf_cat
-        I I K K
-        (@Hom_prof_along
-          I K A
-          M
-          (@comp_cat_fapp0
-            K B A
-            (@right_adj_func A B adj)
-            F))
-        (@id_func I)
-        (@Hom_prof_along
-          I K B
-          (@comp_cat_fapp0
-            I A B
-            (@left_adj_func A B adj)
-            M)
-          F)
-        (@id_func K)));
-
-rule @Prof_comp_transf
-      $I $I $I
-      $K $K $K
-      (@Hom_prof_along
-        $I $K $B
-        (@comp_cat_fapp0
-          $I $A $B
-          (@left_adj_func $A $B $adj)
-          $M)
-        $F)
-      (@Hom_prof_along
-        $I $K $A
-        $M
-        (@comp_cat_fapp0
-          $K $B $A
-          (@right_adj_func $A $B $adj)
-          $F))
-      (@Hom_prof_along
-        $I $K $B
-        (@comp_cat_fapp0
-          $I $A $B
-          (@left_adj_func $A $B $adj)
-          $M)
-        $F)
-      (@id_func $I)
-      (@id_func $K)
-      (@id_func $I)
-      (@id_func $K)
-      (@Adjunction_prof_untranspose
-        $A $B $adj
-        $I $K
-        $M $F)
-      (@Adjunction_prof_transpose
-        $A $B $adj
-        $I $K
-        $M $F)
-  ↪ @Prof_id_transf
-      $I $K
-      (@Hom_prof_along
-        $I $K $B
-        (@comp_cat_fapp0
-          $I $A $B
-          (@left_adj_func $A $B $adj)
-          $M)
-        $F)
-with @Prof_comp_transf
-      $I $I $I
-      $K $K $K
-      (@Hom_prof_along
-        $I $K $A
-        $M
-        (@comp_cat_fapp0
-          $K $B $A
-          (@right_adj_func $A $B $adj)
-          $F))
-      (@Hom_prof_along
-        $I $K $B
-        (@comp_cat_fapp0
-          $I $A $B
-          (@left_adj_func $A $B $adj)
-          $M)
-        $F)
-      (@Hom_prof_along
-        $I $K $A
-        $M
-        (@comp_cat_fapp0
-          $K $B $A
-          (@right_adj_func $A $B $adj)
-          $F))
-      (@id_func $I)
-      (@id_func $K)
-      (@id_func $I)
-      (@id_func $K)
-      (@Adjunction_prof_transpose
-        $A $B $adj
-        $I $K
-        $M $F)
-      (@Adjunction_prof_untranspose
-        $A $B $adj
-        $I $K
-        $M $F)
-  ↪ @Prof_id_transf
-      $I $K
-      (@Hom_prof_along
-        $I $K $A
-        $M
-        (@comp_cat_fapp0
-          $K $B $A
-          (@right_adj_func $A $B $adj)
-          $F));
-
-/*
-  Ordinary ambient adjunction-mate isomorphism evidence.
-
-  The existing mate operations are inverse both as equipment cells and as
-  vertical maps in one fixed profunctor category. The vertical cancellation
-  rules below are deliberately domain-specific: they do not introduce a
-  generic judgmentally cancelling isomorphism classifier.
-
-  The ambient evidence internalizes both hom variables. Reindexing it along
-  M : I -> A and F : K -> B recovers the existing shaped mate operations
-  simultaneously.
-*/
-rule @comp_catd_fapp0
-      _
-      _ _ _
-      (@Adjunction_prof_untranspose
-        $A $B $adj
-        $I $K
-        $M $F)
-      (@Adjunction_prof_transpose
-        $A $B $adj
-        $I $K
-        $M $F)
-  ↪ @id_funcd
-      (Product_cat (Op_cat $I) $K)
-      (@Hom_prof_along
-        $I $K $B
-        (@comp_cat_fapp0
-          $I $A $B
-          (@left_adj_func $A $B $adj)
-          $M)
-        $F)
-with @comp_catd_fapp0
-      _
-      _ _ _
-      (@Adjunction_prof_transpose
-        $A $B $adj
-        $I $K
-        $M $F)
-      (@Adjunction_prof_untranspose
-        $A $B $adj
-        $I $K
-        $M $F)
-  ↪ @id_funcd
-      (Product_cat (Op_cat $I) $K)
-      (@Hom_prof_along
-        $I $K $A
-        $M
-        (@comp_cat_fapp0
-          $K $B $A
-          (@right_adj_func $A $B $adj)
-          $F));
-
-rule @Prof_reindex_transf
-      $A $I $B $K
-      _ _
-      (@Adjunction_prof_transpose
-        $A $B $adj
-        $A $B
-        (@id_func $A)
-        (@id_func $B))
-      $M $F
-  ↪ @Adjunction_prof_transpose
-      $A $B $adj
-      $I $K
-      $M $F
-with @Prof_reindex_transf
-      $A $I $B $K
-      _ _
-      (@Adjunction_prof_untranspose
-        $A $B $adj
-        $A $B
-        (@id_func $A)
-        (@id_func $B))
-      $M $F
-  ↪ @Adjunction_prof_untranspose
-      $A $B $adj
-      $I $K
-      $M $F;
-
-symbol Adjunction_hom_prof_iso_evidence
-  [A B : Cat]
-  (adj : τ (Adjunction A B))
-  : τ (IsoEvidence
-      (Prof_cat A B)
-      (@Hom_prof_along
-        A B B
-        (@left_adj_func A B adj)
-        (@id_func B))
-      (@Hom_prof_along
-        A B A
-        (@id_func A)
-        (@right_adj_func A B adj)))
-≔ Struct_sigma
-    (@Adjunction_prof_transpose
-      A B adj
-      A B
-      (@id_func A)
-      (@id_func B))
-    (Struct_sigma
-      (@Adjunction_prof_untranspose
-        A B adj
-        A B
-        (@id_func A)
-        (@id_func B))
-      (Struct_sigma
-        (eq_refl
-          (@id_funcd
-            (Product_cat (Op_cat A) B)
-            (@Hom_prof_along
-              A B B
-              (@left_adj_func A B adj)
-              (@id_func B))))
-        (eq_refl
-          (@id_funcd
-            (Product_cat (Op_cat A) B)
-            (@Hom_prof_along
-              A B A
-              (@id_func A)
-              (@right_adj_func A B adj))))));
-
-symbol Adjunction_hom_prof_iso_evidence_along
-  [A B : Cat]
-  (adj : τ (Adjunction A B))
-  [I K : Cat]
-  (M : τ (Functor I A))
-  (F : τ (Functor K B))
-  : τ (IsoEvidence
-      (Prof_cat I K)
-      (@Hom_prof_along
-        I K B
-        (@comp_cat_fapp0
-          I A B
-          (@left_adj_func A B adj)
-          M)
-        F)
-      (@Hom_prof_along
-        I K A
-        M
-        (@comp_cat_fapp0
-          K B A
-          (@right_adj_func A B adj)
-          F)))
-≔ @iso_evidence_fmap
-    (Prof_cat A B)
-    (Prof_cat I K)
-    (@Prof_reindex_func A I B K M F)
-    (@Hom_prof_along
-      A B B
-      (@left_adj_func A B adj)
-      (@id_func B))
-    (@Hom_prof_along
-      A B A
-      (@id_func A)
-      (@right_adj_func A B adj))
-    (@Adjunction_hom_prof_iso_evidence A B adj);
-
-/*
-  Computational adjunction mate.
-
-  This is an atomic certified comparison rather than an unrestricted
-  strictification of ordinary isomorphism evidence. Reindexing its ambient
-  form internalizes both hom variables. Its ordinary evidence projection is
-  the unit/counit-based mate already active above.
+  The strict owner is the ambient DefIso/ProfComparison certificate below.
+  The legacy `Adjunction_prof_transpose` and
+  `Adjunction_prof_untranspose` names are transparent views of its selected
+  arrows, not independent runtime owners.
 */
 injective symbol Adjunction_hom_prof_comparison
   [A B : Cat]
@@ -11194,31 +10887,6 @@ injective symbol Adjunction_hom_prof_comparison
         A B A
         (@id_func A)
         (@right_adj_func A B adj)));
-
-rule @defiso_to
-      (@Catd_cat (Product_cat (Op_cat $A) $B))
-      _ _
-      (@Adjunction_hom_prof_comparison $A $B $adj)
-  ↪ @Adjunction_prof_transpose
-      $A $B $adj
-      $A $B
-      (@id_func $A)
-      (@id_func $B)
-with @defiso_from
-      (@Catd_cat (Product_cat (Op_cat $A) $B))
-      _ _
-      (@Adjunction_hom_prof_comparison $A $B $adj)
-  ↪ @Adjunction_prof_untranspose
-      $A $B $adj
-      $A $B
-      (@id_func $A)
-      (@id_func $B);
-
-rule @defiso_iso_evidence
-      (@Catd_cat (Product_cat (Op_cat $A) $B))
-      _ _
-      (@Adjunction_hom_prof_comparison $A $B $adj)
-  ↪ @Adjunction_hom_prof_iso_evidence $A $B $adj;
 
 symbol Adjunction_hom_prof_comparison_along
   [A B : Cat]
@@ -11247,6 +10915,115 @@ symbol Adjunction_hom_prof_comparison_along
     _
     _
     (@Adjunction_hom_prof_comparison A B adj);
+
+symbol Adjunction_prof_transpose
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func I)
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func K)))
+≔ @defiso_to
+    (@Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_comparison_along A B adj I K M F);
+
+symbol Adjunction_prof_untranspose
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (Obj
+      (@Prof_transf_cat
+        I I K K
+        (@Hom_prof_along
+          I K A
+          M
+          (@comp_cat_fapp0
+            K B A
+            (@right_adj_func A B adj)
+            F))
+        (@id_func I)
+        (@Hom_prof_along
+          I K B
+          (@comp_cat_fapp0
+            I A B
+            (@left_adj_func A B adj)
+            M)
+          F)
+        (@id_func K)))
+≔ @defiso_from
+    (@Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_comparison_along A B adj I K M F);
+
+symbol Adjunction_hom_prof_iso_evidence
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  : τ (IsoEvidence
+      (Prof_cat A B)
+      (@Hom_prof_along
+        A B B
+        (@left_adj_func A B adj)
+        (@id_func B))
+      (@Hom_prof_along
+        A B A
+        (@id_func A)
+        (@right_adj_func A B adj)))
+≔ @defiso_iso_evidence
+    (@Prof_cat A B)
+    _
+    _
+    (@Adjunction_hom_prof_comparison A B adj);
+
+symbol Adjunction_hom_prof_iso_evidence_along
+  [A B : Cat]
+  (adj : τ (Adjunction A B))
+  [I K : Cat]
+  (M : τ (Functor I A))
+  (F : τ (Functor K B))
+  : τ (IsoEvidence
+      (Prof_cat I K)
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0
+          I A B
+          (@left_adj_func A B adj)
+          M)
+        F)
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0
+          K B A
+          (@right_adj_func A B adj)
+          F)))
+≔ @defiso_iso_evidence
+    (@Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_comparison_along A B adj I K M F);
 
 /*
   Ordinary right-adjoint preservation of weighted-limit representability.

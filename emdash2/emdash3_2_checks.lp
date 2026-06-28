@@ -8212,9 +8212,16 @@ assert [A B I K : Cat]
 assert [A B I K : Cat]
   (adj : τ (Adjunction A B))
   (M : τ (Functor I A))
-  (F : τ (Functor K B)) ⊢
-  @Prof_comp_transf
-    I I I K K K
+  (F : τ (Functor K B))
+  [R : τ (Prof I K)]
+  (r : τ (ProfMap
+    R
+    (@Hom_prof_along
+      I K B
+      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      F))) ⊢
+  @prof_comparison_pull
+    I K
     (@Hom_prof_along
       I K B
       (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
@@ -8223,33 +8230,35 @@ assert [A B I K : Cat]
       I K A
       M
       (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-    (@Hom_prof_along
-      I K B
-      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
-      F)
-    (@id_func I)
-    (@id_func K)
-    (@id_func I)
-    (@id_func K)
-    (@Adjunction_prof_untranspose A B adj I K M F)
-    (@Adjunction_prof_transpose A B adj I K M F)
-  ≡ @Prof_id_transf
+    (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+    R
+    (@prof_comparison_push
       I K
       (@Hom_prof_along
         I K B
         (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
-        F);
+        F)
+      (@Hom_prof_along
+        I K A
+        M
+        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+      (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+      R r)
+  ≡ r;
 
 assert [A B I K : Cat]
   (adj : τ (Adjunction A B))
   (M : τ (Functor I A))
-  (F : τ (Functor K B)) ⊢
-  @Prof_comp_transf
-    I I I K K K
+  (F : τ (Functor K B))
+  [R : τ (Prof I K)]
+  (s : τ (ProfMap
+    R
     (@Hom_prof_along
       I K A
       M
-      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F)))) ⊢
+  @prof_comparison_push
+    I K
     (@Hom_prof_along
       I K B
       (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
@@ -8258,18 +8267,21 @@ assert [A B I K : Cat]
       I K A
       M
       (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-    (@id_func I)
-    (@id_func K)
-    (@id_func I)
-    (@id_func K)
-    (@Adjunction_prof_transpose A B adj I K M F)
-    (@Adjunction_prof_untranspose A B adj I K M F)
-  ≡ @Prof_id_transf
+    (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+    R
+    (@prof_comparison_pull
       I K
+      (@Hom_prof_along
+        I K B
+        (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+        F)
       (@Hom_prof_along
         I K A
         M
-        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F));
+        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
+      (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+      R s)
+  ≡ s;
 
 assert [A B : Cat]
   (adj : τ (Adjunction A B)) ⊢
@@ -8339,39 +8351,39 @@ assert [A B I K : Cat]
   (adj : τ (Adjunction A B))
   (M : τ (Functor I A))
   (F : τ (Functor K B)) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat I) K)
-    _ _ _
-    (@Adjunction_prof_untranspose A B adj I K M F)
-    (@Adjunction_prof_transpose A B adj I K M F)
-  ≡ @id_funcd
-      (Product_cat (Op_cat I) K)
-      (@Hom_prof_along
-        I K B
-        (@comp_cat_fapp0
-          I A B
-          (@left_adj_func A B adj)
-          M)
-        F);
+  @iso_evidence_left
+    (Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence_along
+      A B adj I K M F)
+  : τ (
+      @comp_fapp0
+        (Prof_cat I K)
+        _ _ _
+        (@Adjunction_prof_untranspose A B adj I K M F)
+        (@Adjunction_prof_transpose A B adj I K M F)
+      =
+      @id (Prof_cat I K) _);
 
 assert [A B I K : Cat]
   (adj : τ (Adjunction A B))
   (M : τ (Functor I A))
   (F : τ (Functor K B)) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat I) K)
-    _ _ _
-    (@Adjunction_prof_transpose A B adj I K M F)
-    (@Adjunction_prof_untranspose A B adj I K M F)
-  ≡ @id_funcd
-      (Product_cat (Op_cat I) K)
-      (@Hom_prof_along
-        I K A
-        M
-        (@comp_cat_fapp0
-          K B A
-          (@right_adj_func A B adj)
-          F));
+  @iso_evidence_right
+    (Prof_cat I K)
+    _
+    _
+    (@Adjunction_hom_prof_iso_evidence_along
+      A B adj I K M F)
+  : τ (
+      @comp_fapp0
+        (Prof_cat I K)
+        _ _ _
+        (@Adjunction_prof_transpose A B adj I K M F)
+        (@Adjunction_prof_untranspose A B adj I K M F)
+      =
+      @id (Prof_cat I K) _);
 
 assert [B J J' A : Cat]
   [W : τ (Prof J' J)]
