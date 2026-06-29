@@ -9,9 +9,9 @@ Supersedes: no whole report; refines the remaining equipment-cell route for tens
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
-Status: join and shaped co-Yoneda first implementation slices landed;
-`Prof_comp_transf` targeted for eventual removal but not yet safe to demote
-wholesale
+Status: join, shaped co-Yoneda, and fixed-endpoint tensor-map prerequisite
+slices landed; `Prof_comp_transf` targeted for eventual removal but not yet
+safe to demote wholesale
 
 ## Purpose
 
@@ -382,6 +382,47 @@ join checkpoint. The warning log contains no entries headed by
 `Prof_cell_apply`, `Prof_cell_eval`, `Prof_coyoneda_cov_map`,
 `Prof_coyoneda_con_map`, or `join_elim_cross_transf`.
 
+## Implementation Checkpoint, 2026-06-29, Fixed Tensor Map
+
+The next tensor/co-Yoneda prerequisite slice has landed.
+
+Implemented:
+
+- `Prof_tensor_map(r,s)` was added as a transparent fixed-endpoint alias for
+  the identity-endpoint case of `Prof_tensor_transf`.
+- Diagnostics now cover the fixed-endpoint map type and transparent unfolding
+  through `Prof_tensor_transf`.
+
+Deliberately not implemented in this slice:
+
+- no `Prof_tensor_func` bifunctor object;
+- no tensor identity or composition rules;
+- no replacement yet for the general-cell identity-unit naturality pair using
+  `Prof_tensor_hom_transf` / `Prof_tensor_transf_hom`;
+- no generic `Prof_comp_transf` demotion or deletion.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_tensor_map_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+EMDASH_TYPECHECK_TIMEOUT=60s make ci
+```
+
+The warning-enabled check stayed at 1,415 warnings. The warning log contains
+no entries headed by `Prof_tensor_map`, `Prof_cell_apply`, `Prof_cell_eval`,
+`Prof_coyoneda_cov_map`, `Prof_coyoneda_con_map`, or
+`join_elim_cross_transf`.
+
+This checkpoint intentionally records only the fixed-endpoint tensor-map
+owner needed by later co-Yoneda naturality work. The remaining general-cell
+identity-unit naturality rules stay under `Prof_comp_transf` until the
+fixed-endpoint naturality and derived composition route has been implemented
+and checked.
+
 ## Current Remaining Consumers
 
 After the first join implementation slice, the active source still has these
@@ -423,6 +464,7 @@ Current declarations:
 ```text
 Prof_tensor
 Prof_tensor_transf
+Prof_tensor_map
 Prof_tensor_hom_hom
 Prof_tensor_hom_transf
 Prof_tensor_transf_hom
@@ -437,6 +479,8 @@ Current role:
 - `Prof_tensor` is an opaque coend-like profunctor composite;
 - tensor introductions package either general equipment cells, shaped
   elements, or both;
+- `Prof_tensor_map` exposes the fixed-endpoint vertical tensor action as a
+  transparent identity-endpoint alias of `Prof_tensor_transf`;
 - fixed one-way co-Yoneda map aliases expose the identity-endpoint maps;
 - shaped co-Yoneda beta rules cancel a tensor-introduced shaped element
   through `Prof_cell_apply`;
@@ -2212,6 +2256,6 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active and arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it. |
+| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, and fixed-endpoint `Prof_tensor_map` is available as a prerequisite; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint naturality plus hom-action cut-elimination owners replace it. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |

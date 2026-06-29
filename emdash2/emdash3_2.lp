@@ -9868,6 +9868,31 @@ constant symbol Prof_tensor_transf
         (@Prof_tensor A B X R S)
         G));
 
+/*
+  Fixed-endpoint tensor map action.
+
+  This is a transparent vertical-map alias for the identity-endpoint case of
+  `Prof_tensor_transf`. It is a prerequisite for later co-Yoneda naturality
+  migration, but deliberately adds no tensor identity or composition rules.
+*/
+symbol Prof_tensor_map
+  [A B X : Cat]
+  [P P' : τ (Prof A B)]
+  [Q Q' : τ (Prof B X)]
+  (r : τ (ProfMap P P'))
+  (s : τ (ProfMap Q Q'))
+  : τ (ProfMap
+      (@Prof_tensor A B X P Q)
+      (@Prof_tensor A B X P' Q'))
+≔ @Prof_tensor_transf
+    A A B B X X
+    P Q
+    P' Q'
+    (@id_func A)
+    (@id_func B)
+    (@id_func X)
+    r s;
+
 // Compose shaped elements through a common middle probe M.
 constant symbol Prof_tensor_hom_hom
   [I A B X : Cat]
