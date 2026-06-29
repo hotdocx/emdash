@@ -2690,11 +2690,11 @@ make catalog
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite, and fixed co-Yoneda naturality is now internalized through unit tensor functors plus `Prof_coyoneda_*_transf`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until it can be routed through those internal transformations and an already-owned hom-action/postcomposition path. |
-| `EQUIP-OP-DUALITY` | complete first pass | active implementation | `Op_prof` remains defined by pullback/swap; fixed-endpoint `Op_prof_func`, transparent `Op_prof_map`, and the normalized opposite/reindex bridge are active; primitive `Op_prof_transf` has been demoted to a transparent endpoint-changing view with diagnostics migrated to fixed-functor/bridge checks. |
+| `EQUIP-OP-DUALITY` | first pass complete; primitive-owner follow-up pending | active implementation plus future probe | `Op_prof` is currently defined by pullback/swap; fixed-endpoint `Op_prof_func`, transparent `Op_prof_map`, and the normalized opposite/reindex bridge are active. The next reindex-product-fold pass should probe making `Op_prof` a stable primitive semantic owner, with pullback/swap as proof-time compatibility and the direct `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))` computation owned by `Op_prof`. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
-| `EQUIP-REINDEX-PRODUCT-FOLD` | decision updated, implementation pending | future reindex normal-form pass | Replace the one-off opposite/reindex bridge by a mixed `Pullback_catd`/`Prof_reindex` accumulation calculus plus a product-level swapped-map owner. Reassess the broad runtime `Pullback_catd(Product_map_func(F,G)) -> Prof_reindex(...)` bridge as proof-time `unif_rule` infrastructure during that pass. |
+| `EQUIP-REINDEX-PRODUCT-FOLD` | decision updated, implementation pending | future reindex normal-form pass | First probe a stable primitive `Op_prof` owner with proof-time pullback/swap compatibility; if successful, remove the one-off unfolded opposite/reindex bridge without adding generalized pullback/reindex swap-normalization rules. Defer the broader `Product_swap_transf` / `Product_swapped_map_func` naturality owner unless raw pullback/swap syntax remains a concrete runtime consumer. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
 
 ### Reindex Product-Fold Core Review, 2026-06-29
@@ -3033,3 +3033,169 @@ Computation feasibility:
   creating a competing product-map/swap loop, and the mixed
   pullback/reindex rules must be checked against existing pullback,
   product-map, identity, and opposite specializations.
+
+#### Revision: Primitive `Op_prof` First, 2026-06-30
+
+The 2026-06-30 review refines the immediate implementation order. The
+product-swap naturality problem is real: if the comparison is phrased in raw
+syntax as
+
+```text
+Prof_reindex(Pullback_catd(R, Product_swap_func(...)), ...)
+  =
+Pullback_catd(Prof_reindex(R,...), Product_swap_func(...)),
+```
+
+then the computation necessarily involves functoriality/naturality of
+`Product_swap_func`. The plan should not pretend that this question can be
+avoided in the raw pullback/swap presentation.
+
+However, the immediate profunctor-duality runtime path does not have to expose
+that raw presentation. The root implementation friction is that `Op_prof` is
+currently transparent:
+
+```text
+Op_prof(R) := Pullback_catd(R, Product_swap_func(B,Op_cat A)).
+```
+
+This makes every `Op_prof` computation leak into the `Pullback_catd` and
+`Product_swap_func` calculus, which in turn forced the current specialized
+opposite/reindex rule to recognize the unfolded pullback/swap shape.
+
+The next implementation probe should therefore make `Op_prof` the stable
+semantic owner first:
+
+```text
+Op_prof(A,B,R) : Prof(Op_cat B, Op_cat A).
+```
+
+Keep the existing `Prof`, `Prof_cat`, and `Prof_base` aliases unchanged for
+this pass. Making `Prof` itself primitive, with proof-time comparison to
+`Catd_cat(Product_cat(Op_cat A) B)`, is coherent long-term but is a separate
+foundation-level migration, closer to the existing `Catd_cat` versus
+`Functor_cat K Cat_cat` boundary. It should not be bundled into the `Op_prof`
+probe.
+
+The stable `Op_prof` probe should provide direct projection rules sufficient
+to preserve existing object and arrow computations, for example:
+
+```text
+Op_prof(R)[b,a] -> R[a,b]
+Op_prof(R)[q,p] -> R[p,q]
+```
+
+in kernel syntax via the existing `fapp0`, `fapp1_func`, and `fapp1_fapp0`
+projection surfaces. `Op_prof_func(A,B)` should likewise become, or be probed
+as, the stable fixed-endpoint functor whose object action is:
+
+```text
+fapp0(Op_prof_func(A,B), R) -> Op_prof(A,B,R).
+```
+
+`Op_prof_map(r)` should remain a transparent readability alias for the generic
+action of that fixed functor:
+
+```text
+Op_prof_map(r) := fapp1_fapp0(Op_prof_func(A,B), r).
+```
+
+The semantic opposite/reindex computation should then be owned directly by
+`Op_prof`:
+
+```text
+Prof_reindex(Op_prof(A,B,R), Op_func(G), Op_func(F))
+  -> Op_prof(A',B', Prof_reindex(A,A',B,B',R,F,G)).
+```
+
+The promoted rule should make the main visible discriminator the profunctor
+argument headed by `Op_prof`, not a pullback whose base map is headed by
+`Product_swap_func`. Endpoint and `Op_func` arguments may still be needed as
+type guards or to recover `F` and `G`; the probe should try `_` for
+reconstructible endpoint slots first and keep explicit arguments only when
+Lambdapi needs them for typing or rule compilation.
+
+Compatibility with the old semantic presentation should be proof-time first:
+
+```text
+unif_rule
+  Op_prof(A,B,R)
+  ≡ Pullback_catd(R, Product_swap_func(B,Op_cat A)).
+```
+
+If the functor-level comparison is consumed, add the analogous proof-time
+comparison:
+
+```text
+unif_rule
+  Op_prof_func(A,B)
+  ≡ Pullback_catd_func(Product_swap_func(B,Op_cat A)).
+```
+
+Both unification rules must be validated with explicit typed `eq_refl`
+witnesses; a bare conversion assertion is not enough to test unification-rule
+behavior. If proof-time comparison is unreliable, keep a documented
+compatibility lemma/view rather than reintroducing the old unfolded runtime
+rule.
+
+If the stable `Op_prof` rule succeeds, the current specialized unfolded rule
+
+```text
+Prof_reindex(
+  Pullback_catd(R, Product_swap_func(B,Op_cat A)),
+  Op_func(G), Op_func(F))
+->
+Pullback_catd(
+  Prof_reindex(R,F,G),
+  Product_swap_func(B',Op_cat A'))
+```
+
+should be removed. The replacement regression target is:
+
+```text
+Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+  ≡ Op_prof(Prof_reindex(R,F,G)).
+```
+
+This is not an external product-swap naturality square. It is the internal
+runtime law for the semantic opposite-profunctor operation. Direct-authored
+raw pullback/swap syntax should elaborate against `Op_prof` by proof-time
+compatibility where possible, but it should not determine the profunctor
+duality normal form.
+
+The broader product-swap naturality owner remains the correct general design
+for raw product syntax. It should be documented and deferred unless raw
+pullback/swap expressions remain concrete runtime consumers after the stable
+`Op_prof` migration:
+
+```text
+Product_swap_transf
+  : product formation => swapped product formation
+
+tapp0_fapp0(Product_swap_transf,(A,B))
+  = Product_swap_func(A,B)
+
+tapp1_fapp0(Product_swap_transf,(F,G))
+  = Product_swapped_map_func(F,G).
+```
+
+In this reading, `Product_swapped_map_func` is not arbitrary extra
+infrastructure. It is the off-diagonal component of the internal natural
+transformation expressing product symmetry. If stable heads such as
+`Product_swap_func` and `Product_swapped_map_func` are retained for runtime
+normal forms, their projection and accumulation rules may need to duplicate
+the corresponding `tapp0_fapp0`/`tapp1_fapp0` computations as confluence
+bridges, in the usual SOP style.
+
+Immediate implementation order for the next code pass:
+
+1. Probe stable primitive `Op_prof` and stable `Op_prof_func`.
+2. Add direct object/full-arrow/capped-arrow projections for `Op_prof`.
+3. Add the direct `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`
+   computation, with the `Op_prof` argument as the real discriminator.
+4. Add proof-time `Op_prof` and, if needed, `Op_prof_func` compatibility with
+   the pullback/swap presentation.
+5. Remove the current unfolded pullback/swap opposite/reindex rule only after
+   the existing opposite/reindex diagnostic still passes by `eq_refl`.
+6. Defer `Product_swap_transf` / `Product_swapped_map_func` implementation
+   until a concrete raw product-swap runtime consumer remains after the
+   `Op_prof` migration.
