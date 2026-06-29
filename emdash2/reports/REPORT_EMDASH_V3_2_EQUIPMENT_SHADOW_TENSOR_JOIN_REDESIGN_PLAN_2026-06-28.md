@@ -2696,3 +2696,234 @@ make catalog
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-REINDEX-PRODUCT-FOLD` | deferred after probe | future reindex normal-form pass | Reassess whether the broad runtime `Pullback_catd(Product_map_func(F,G)) -> Prof_reindex(...)` bridge should become proof-time `unif_rule` infrastructure. A general `Prof_reindex(Pullback_catd(...),F,G)` probe produced an accumulated pullback normal form rather than the decomposed opposite/reindex bridge normal form, so do not change the active runtime fold in this migration. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
+
+### Reindex Product-Fold Core Review, 2026-06-29
+
+Fresh probes after the internal fixed co-Yoneda naturality slice split the
+`EQUIP-REINDEX-PRODUCT-FOLD` question into core theory and compatibility
+views. Endpoint-changing equipment-style views, including `Op_prof_transf`,
+should not constrain the core design; they may be deleted, retired, or kept
+only as documented compatibility after the core normal forms are settled.
+
+The broad product-map pullback folds
+
+```text
+Pullback_catd(R, Product_map_func(F,G)) -> Prof_reindex(...)
+Pullback_catd_func(Product_map_func(F,G)) -> Prof_reindex_func(...)
+```
+
+can plausibly become proof-time `unif_rule`s. The temporary probe
+`tmp/probes/reindex_product_unif_only_probe.lp` checked with and without
+warnings, and explicit `eq_refl` witnesses elaborated across both product-map
+comparisons. This would be a real normal-form-policy change: direct-authored
+`Pullback_catd(Product_map_func(...))` syntax would no longer runtime-reduce to
+`Prof_reindex`, so diagnostics and consumers expecting the stable runtime head
+must be migrated to write `Prof_reindex` directly or use proof-time equality.
+
+The clarified goal of this side task is stronger than merely changing the
+opposite normal form. The existing specialized bridge
+
+```text
+Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+  -> Op_prof(Prof_reindex(R,F,G))
+```
+
+is currently implemented by a kernel-visible `Pullback_catd` RHS because
+`Op_prof` is transparent. This comparison should remain available by ordinary
+computation / `eq_refl`, but it should not be owned by a one-off rewrite rule
+whose LHS repeats opposite endpoint structure in several independent
+arguments.
+
+The first general rule needed by the core layer uses the existing source
+symbols directly:
+
+```text
+Prof_reindex_base_func(F,G)
+  := Product_map_func(Op_func(F),G)
+
+Prof_reindex(Pullback_catd(E,H),F,G)
+  -> Pullback_catd(E, H o Prof_reindex_base_func(F,G)).
+```
+
+Its single mathematical discriminator is the profunctor argument
+`Pullback_catd(E,H)`; it should not pattern-match on opposite endpoints as the
+special current rule does. But this rule alone is not yet a full replacement
+for the existing opposite bridge, because in the opposite case it first
+computes to an accumulated base-map presentation.
+
+For the opposite case, `Op_prof(R)` is just:
+
+```text
+Pullback_catd(R, Product_swap_func(B,Op_cat A)).
+```
+
+Therefore the general rule should compute:
+
+```text
+Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+  -> Pullback_catd(
+       R,
+       Product_swap_func(B,Op_cat A) o
+       Prof_reindex_base_func(Op_func(G),Op_func(F))).
+```
+
+To recover the current unfolded target
+
+```text
+Op_prof(Prof_reindex(R,F,G))
+```
+
+by computation, the core calculus also needs an internal owner that normalizes
+the composed base map
+
+```text
+Product_swap_func(B,Op_cat A)
+  o Prof_reindex_base_func(Op_func(G),Op_func(F))
+```
+
+to the base map used by
+
+```text
+Op_prof(Prof_reindex(R,F,G)).
+```
+
+This owner must not be an external commutative-square/naturality rewrite.
+Possible acceptable owners are a narrow internal base-map normalizer for
+profunctor endpoint maps, or an internalized fixed-functor comparison around
+`Op_prof_func` and `Prof_reindex_func`. The design is not complete until this
+owner is chosen and probed.
+
+Next feasible design options:
+
+```text
+A. Add the general Prof_reindex(Pullback_catd(...),F,G) runtime rule and then
+   add a core/internal base-map normalizer sufficient to make the opposite
+   comparison reduce to the old unfolded target by `eq_refl`.
+
+B. Re-assess whether `Prof_reindex_base_func` should remain a transparent
+   alias or become a narrow stable head for profunctor endpoint base maps.
+   This is worthwhile only if the stable head can own the needed composition
+   normalization without becoming a broad product-map naturality square.
+
+C. If no clean base-map owner is found, keep the old bridge only temporarily
+   while retiring endpoint-changing compatibility views, but document it as
+   an implementation stopgap rather than the target architecture.
+```
+
+Do not promote any option until a focused full-source probe shows the general
+pullback/reindex assertion, the old unfolded opposite target by `eq_refl`, the
+product-map proof-time equality, warning delta, and LHS audit all pass.
+
+#### Expanded Correctness And Feasibility Assessment
+
+Correctness:
+
+- `Prof_reindex(R,F,G)` already means pulling `R` back along
+  `Prof_reindex_base_func(F,G)`, and `Prof_reindex_base_func(F,G)` is already
+  the source-level alias for `Product_map_func(Op_func(F),G)`.
+- Therefore, when the profunctor argument is itself a pullback
+  `Pullback_catd(E,H)`, the standard categorical computation is ordinary
+  pullback accumulation:
+
+  ```text
+  Prof_reindex(Pullback_catd(E,H),F,G)
+    -> Pullback_catd(E, H o Prof_reindex_base_func(F,G)).
+  ```
+
+- This is not a naturality square and not an equipment-cell law. It is the
+  same Došen-style cut already used by the generic pullback accumulation rule,
+  specialized to the profunctor reindexing owner.
+- In kernel spelling, the expected RHS is:
+
+  ```text
+  @Pullback_catd
+    (Product_cat (Op_cat A') B')
+    C
+    E
+    (@comp_cat_fapp0
+      (Product_cat (Op_cat A') B')
+      (Product_cat (Op_cat A) B)
+      C
+      H
+      (@Prof_reindex_base_func A A' B B' F G))
+  ```
+
+  where `H : Functor (Product_cat (Op_cat A) B) C` and
+  `E : Catd(C)`.
+
+Completeness:
+
+- This rule covers the mathematical content of the current opposite/reindex
+  bridge because `Op_prof(R)` is a defined pullback:
+
+  ```text
+  Op_prof(R)
+    := Pullback_catd(R, Product_swap_func(B,Op_cat A)).
+  ```
+
+  Applying the general rule gives the accumulated base-map presentation of
+  the same pullback.
+- This is not complete by itself. The clarified goal is to remove the existing
+  specialized opposite/reindex bridge while preserving the same unfolded
+  target by computation / `eq_refl`. That requires a second, core owner for
+  the relevant composed base map.
+- The second owner must not be phrased as an external product-swap naturality
+  square. It should be internal to the base-map calculus or to an internalized
+  fixed functor layer.
+- If a later proof or API needs endpoint-changing equipment syntax, it should
+  be rebuilt on top of this core computation or kept as documented-only
+  compatibility; it should not determine the core normal form.
+- The object-level rule should have a functor-level migration story:
+  direct-authored `Pullback_catd_func(Product_map_func(...))` should become
+  proof-time comparison against `Prof_reindex_func(...)`, while consumers that
+  need runtime `Prof_reindex` must write `Prof_reindex` or go through
+  `Prof_reindex_func`.
+
+Rewrite hygiene:
+
+- The intended LHS discriminator is the profunctor argument headed by
+  `Pullback_catd`, not endpoint expressions such as `Op_cat B` or
+  `Product_cat B (Op_cat A)`.
+- A probe should first try the minimally discriminating shape:
+
+  ```text
+  rule @Prof_reindex
+        $A $A' $B $B'
+        (@Pullback_catd
+          (Product_cat (Op_cat $A) $B)
+          $C
+          $E
+          $H)
+        $F
+        $G
+    ↪ ...
+  ```
+
+  The explicit `Product_cat (Op_cat A) B` source may be needed only because it
+  is the source category of a profunctor over `(A,B)`, not because it is an
+  independent semantic case split. If Lambdapi can infer it with `_` in a
+  focused probe, prefer `_`; otherwise keep the explicit source and document
+  it as a type guard, not an endpoint-shape discriminator.
+- Do not add a rule whose LHS repeats opposite endpoint structure in several
+  independent arguments just to recover the old opposite bridge. That is the
+  pattern being retired.
+
+Computation feasibility:
+
+- Locally feasible part already probed: turning the broad
+  `Pullback_catd(Product_map_func(...)) -> Prof_reindex(...)` and
+  `Pullback_catd_func(Product_map_func(...)) -> Prof_reindex_func(...)`
+  folds into `unif_rule`s checked in the source probe with warning-enabled
+  checking.
+- Not yet promoted: the general
+  `Prof_reindex(Pullback_catd(...),F,G)` runtime rule, and not yet designed:
+  the core/internal base-map normalizer needed to recover the old unfolded
+  opposite target by computation without the specialized bridge.
+- Expected fallout: checks that currently assert conversion to
+  `Op_prof(Prof_reindex(...))` should remain as regression targets for the
+  final replacement; checks for direct conversion from
+  `Pullback_catd(Product_map_func(...))` to `Prof_reindex(...)` may need to
+  become proof-time equality witnesses.
+- Feasibility verdict: plausible but not yet implementation-decision complete.
+  The plan now needs a focused design pass for the internal base-map owner
+  before code promotion.
