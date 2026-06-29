@@ -6641,21 +6641,6 @@ assert [A B X : Cat]
       (@Prof_tensor A B X P Q)
       (@Prof_tensor A B X P' Q'));
 
-assert [A B X : Cat]
-  [P P' : τ (Prof A B)]
-  [Q Q' : τ (Prof B X)]
-  (r : τ (ProfMap P P'))
-  (s : τ (ProfMap Q Q')) ⊢
-  @Prof_tensor_map A B X P P' Q Q' r s
-  ≡ @Prof_tensor_transf
-      A A B B X X
-      P Q
-      P' Q'
-      (@id_func A)
-      (@id_func B)
-      (@id_func X)
-      r s;
-
 assert [I A B X : Cat]
   [R : τ (Catd (Product_cat (Op_cat A) B))]
   [S : τ (Catd (Product_cat (Op_cat B) X))]

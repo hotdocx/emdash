@@ -388,15 +388,20 @@ The next tensor/co-Yoneda prerequisite slice has landed.
 
 Implemented:
 
-- `Prof_tensor_map(r,s)` was added as a transparent fixed-endpoint alias for
-  the identity-endpoint case of `Prof_tensor_transf`.
-- Diagnostics now cover the fixed-endpoint map type and transparent unfolding
-  through `Prof_tensor_transf`.
+- `Prof_tensor_map(r,s)` was added as the fixed-endpoint vertical tensor-map
+  head.
+- After reassessment, `Prof_tensor_map` was corrected from a transparent
+  identity-endpoint alias of `Prof_tensor_transf` to an independent narrow
+  fixed-endpoint owner.
+- Diagnostics now cover the fixed-endpoint map type, without asserting
+  definitional equality to `Prof_tensor_transf`.
 
 Deliberately not implemented in this slice:
 
 - no `Prof_tensor_func` bifunctor object;
 - no tensor identity or composition rules;
+- no derived definition of the endpoint-changing `Prof_tensor_transf` wrapper
+  from `Prof_tensor_map` plus `Prof_reindex`;
 - no replacement yet for the general-cell identity-unit naturality pair using
   `Prof_tensor_hom_transf` / `Prof_tensor_transf_hom`;
 - no generic `Prof_comp_transf` demotion or deletion.
@@ -404,7 +409,7 @@ Deliberately not implemented in this slice:
 Validation:
 
 ```text
-EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_tensor_map_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_tensor_map_core_probe.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 make catalog
 python3 scripts/audit_rule_lhs.py --show-kept
@@ -418,10 +423,45 @@ no entries headed by `Prof_tensor_map`, `Prof_cell_apply`, `Prof_cell_eval`,
 `join_elim_cross_transf`.
 
 This checkpoint intentionally records only the fixed-endpoint tensor-map
-owner needed by later co-Yoneda naturality work. The remaining general-cell
-identity-unit naturality rules stay under `Prof_comp_transf` until the
-fixed-endpoint naturality and derived composition route has been implemented
-and checked.
+owner needed by later co-Yoneda naturality work. The older
+`Prof_tensor_transf` remains a temporary endpoint-changing primitive. The
+intended future direction is to derive endpoint-changing tensor cells from
+`Prof_tensor_map`, `Prof_reindex_transf`, and a settled vertical-composition
+view, not to define the fixed-endpoint owner through the endpoint-changing
+primitive. The remaining general-cell identity-unit naturality rules stay
+under `Prof_comp_transf` until the fixed-endpoint naturality and derived
+composition route has been implemented and checked.
+
+## Reassessment Note, 2026-06-29, `Prof_id_transf`
+
+`Prof_id_transf` was reviewed as a possible primitive shadow over the generic
+`id_funcd` identity. A focused full-source probe showed that the declaration
+can be made transparent:
+
+```text
+Prof_id_transf(A,B,R) := id_funcd(Prof_base(A,B),R).
+```
+
+That change is not ready to promote. In the active diagnostics, the existing
+duality identity rule:
+
+```text
+Op_prof_transf(Prof_id_transf(R)) -> Prof_id_transf(Op_prof(R))
+```
+
+depends on the stable `Prof_id_transf` head. Once the head unfolds to
+`id_funcd`, the old rule no longer recognizes the identity case. The same
+issue is expected for the `Prof_comp_transf` left/right identity rules, which
+also discriminate on `Prof_id_transf`.
+
+Conclusion:
+
+- keep `Prof_id_transf` as a stable identity equipment head for now;
+- do not treat it as the final architecture;
+- migrate it only in a separate identity-normal-form pass that adds and probes
+  coherent `id_funcd` sibling rules for `Op_prof_transf` and
+  `Prof_comp_transf`, or after those equipment heads have been demoted enough
+  that the stable identity discriminator is no longer needed.
 
 ## Current Remaining Consumers
 
@@ -480,7 +520,7 @@ Current role:
 - tensor introductions package either general equipment cells, shaped
   elements, or both;
 - `Prof_tensor_map` exposes the fixed-endpoint vertical tensor action as a
-  transparent identity-endpoint alias of `Prof_tensor_transf`;
+  narrow owner independent from the endpoint-changing `Prof_tensor_transf`;
 - fixed one-way co-Yoneda map aliases expose the identity-endpoint maps;
 - shaped co-Yoneda beta rules cancel a tensor-introduced shaped element
   through `Prof_cell_apply`;
@@ -2256,6 +2296,7 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, and fixed-endpoint `Prof_tensor_map` is available as a prerequisite; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint naturality plus hom-action cut-elimination owners replace it. |
+| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, and independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint naturality plus hom-action cut-elimination owners replace it. |
+| `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded, but active diagnostics need stable-head identity rules for `Op_prof_transf` and likely `Prof_comp_transf`; migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |
