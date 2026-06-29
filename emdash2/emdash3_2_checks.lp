@@ -6742,6 +6742,39 @@ assert [A B A' B' I : Cat]
 
 assert [A B : Cat]
   (P : τ (Prof A B)) ⊢
+  @fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_right_unit_func A B)
+    P
+  ≡ @Prof_tensor A B B P (@Unit_prof B);
+
+assert [A B : Cat]
+  [P P' : τ (Prof A B)]
+  (r : τ (ProfMap P P')) ⊢
+  @fapp1_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_right_unit_func A B)
+    P P' r
+  ≡ @Prof_tensor_map
+      A B B
+      P P'
+      (@Unit_prof B)
+      (@Unit_prof B)
+      r
+      (@id_funcd
+        (Product_cat (Op_cat B) B)
+        (@Unit_prof B));
+
+assert [A B : Cat] ⊢
+  @Prof_coyoneda_cov_transf A B
+  : τ (Transf
+      (@Prof_tensor_right_unit_func A B)
+      (@id_func (@Prof_cat A B)));
+
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
   @Prof_coyoneda_cov_map A B P
   : τ (ProfMap
       (@Prof_tensor A B B P (@Unit_prof B))
@@ -6750,14 +6783,61 @@ assert [A B : Cat]
 assert [A B : Cat]
   (P : τ (Prof A B)) ⊢
   @Prof_coyoneda_cov_map A B P
-  ≡ @Prof_coyoneda_unit_tensor_cov_transf
-      A B A B
-      P P
-      (@id_func A)
-      (@id_func B)
-      (@Prof_id_transf A B P)
-      B
-      (@id_func B);
+  ≡ @tapp0_fapp0
+      (@Prof_cat A B)
+      (@Prof_cat A B)
+      (@Prof_tensor_right_unit_func A B)
+      (@id_func (@Prof_cat A B))
+      P
+      (@Prof_coyoneda_cov_transf A B);
+
+assert [A B : Cat]
+  [P P' : τ (Prof A B)]
+  (r : τ (ProfMap P P')) ⊢
+  @tapp1_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_right_unit_func A B)
+    (@id_func (@Prof_cat A B))
+    P P'
+    (@Prof_coyoneda_cov_transf A B)
+    r
+  : τ (ProfMap
+      (@Prof_tensor A B B P (@Unit_prof B))
+      P');
+
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
+  @fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_left_unit_func A B)
+    P
+  ≡ @Prof_tensor A A B (@Unit_prof A) P;
+
+assert [A B : Cat]
+  [P P' : τ (Prof A B)]
+  (r : τ (ProfMap P P')) ⊢
+  @fapp1_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_left_unit_func A B)
+    P P' r
+  ≡ @Prof_tensor_map
+      A A B
+      (@Unit_prof A)
+      (@Unit_prof A)
+      P P'
+      (@id_funcd
+        (Product_cat (Op_cat A) A)
+        (@Unit_prof A))
+      r;
+
+assert [A B : Cat] ⊢
+  @Prof_coyoneda_con_transf A B
+  : τ (Transf
+      (@Prof_tensor_left_unit_func A B)
+      (@id_func (@Prof_cat A B)));
 
 assert [A B : Cat]
   (P : τ (Prof A B)) ⊢
@@ -6769,14 +6849,28 @@ assert [A B : Cat]
 assert [A B : Cat]
   (P : τ (Prof A B)) ⊢
   @Prof_coyoneda_con_map A B P
-  ≡ @Prof_coyoneda_unit_tensor_con_transf
-      A B A B
-      P P
-      (@id_func A)
-      (@id_func B)
-      (@Prof_id_transf A B P)
-      A
-      (@id_func A);
+  ≡ @tapp0_fapp0
+      (@Prof_cat A B)
+      (@Prof_cat A B)
+      (@Prof_tensor_left_unit_func A B)
+      (@id_func (@Prof_cat A B))
+      P
+      (@Prof_coyoneda_con_transf A B);
+
+assert [A B : Cat]
+  [P P' : τ (Prof A B)]
+  (r : τ (ProfMap P P')) ⊢
+  @tapp1_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_left_unit_func A B)
+    (@id_func (@Prof_cat A B))
+    P P'
+    (@Prof_coyoneda_con_transf A B)
+    r
+  : τ (ProfMap
+      (@Prof_tensor A A B (@Unit_prof A) P)
+      P');
 
 // General equipment-cell reindexing and composition.
 assert [A B C D : Cat]

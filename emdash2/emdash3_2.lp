@@ -9976,34 +9976,84 @@ constant symbol Prof_coyoneda_unit_tensor_con_transf
         P'
         G));
 
+/*
+  Internal fixed-endpoint co-Yoneda naturality owners.
+
+  The unit tensor functors expose the fixed-endpoint action of
+  `Prof_tensor_map`. The co-Yoneda maps below are diagonal components of
+  natural transformations; their naturality is represented by generic
+  `tapp1_fapp0`, not by a separate commuting-square rewrite rule.
+*/
+symbol Prof_tensor_right_unit_func [A B : Cat]
+  : τ (Functor (Prof_cat A B) (Prof_cat A B));
+
+rule @fapp0 _ _ (@Prof_tensor_right_unit_func $A $B) $P
+  ↪ @Prof_tensor $A $B $B $P (@Unit_prof $B);
+
+rule @fapp1_fapp0 _ _ (@Prof_tensor_right_unit_func $A $B) $P $P' $r
+  ↪ @Prof_tensor_map
+      $A $B $B
+      $P $P'
+      (@Unit_prof $B)
+      (@Unit_prof $B)
+      $r
+      (@id_funcd
+        (Product_cat (Op_cat $B) $B)
+        (@Unit_prof $B));
+
+symbol Prof_tensor_left_unit_func [A B : Cat]
+  : τ (Functor (Prof_cat A B) (Prof_cat A B));
+
+rule @fapp0 _ _ (@Prof_tensor_left_unit_func $A $B) $P
+  ↪ @Prof_tensor $A $A $B (@Unit_prof $A) $P;
+
+rule @fapp1_fapp0 _ _ (@Prof_tensor_left_unit_func $A $B) $P $P' $r
+  ↪ @Prof_tensor_map
+      $A $A $B
+      (@Unit_prof $A)
+      (@Unit_prof $A)
+      $P $P'
+      (@id_funcd
+        (Product_cat (Op_cat $A) $A)
+        (@Unit_prof $A))
+      $r;
+
+symbol Prof_coyoneda_cov_transf [A B : Cat]
+  : τ (Transf
+      (@Prof_tensor_right_unit_func A B)
+      (@id_func (@Prof_cat A B)));
+
+symbol Prof_coyoneda_con_transf [A B : Cat]
+  : τ (Transf
+      (@Prof_tensor_left_unit_func A B)
+      (@id_func (@Prof_cat A B)));
+
 // Fixed-endpoint one-way co-Yoneda maps.
 symbol Prof_coyoneda_cov_map [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfMap
       (@Prof_tensor A B B P (@Unit_prof B))
       P)
-≔ @Prof_coyoneda_unit_tensor_cov_transf
-    A B A B
-    P P
-    (@id_func A)
-    (@id_func B)
-    (@Prof_id_transf A B P)
-    B
-    (@id_func B);
+≔ @tapp0_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_right_unit_func A B)
+    (@id_func (@Prof_cat A B))
+    P
+    (@Prof_coyoneda_cov_transf A B);
 
 symbol Prof_coyoneda_con_map [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfMap
       (@Prof_tensor A A B (@Unit_prof A) P)
       P)
-≔ @Prof_coyoneda_unit_tensor_con_transf
-    A B A B
-    P P
-    (@id_func A)
-    (@id_func B)
-    (@Prof_id_transf A B P)
-    A
-    (@id_func A);
+≔ @tapp0_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat A B)
+    (@Prof_tensor_left_unit_func A B)
+    (@id_func (@Prof_cat A B))
+    P
+    (@Prof_coyoneda_con_transf A B);
 
 // Right-unit co-Yoneda cancellation on a tensor-introduced general cell.
 rule @Prof_comp_transf
