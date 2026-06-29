@@ -1,7 +1,7 @@
 # EMDASH v3.2 Equipment-Shadow, Tensor, Co-Yoneda, And Join Redesign Plan
 
 Date: 2026-06-28
-Last reviewed: 2026-06-29
+Last reviewed: 2026-06-30
 
 Plan-ID: EMDASH-V3-2-EQUIPMENT-SHADOW-TENSOR-JOIN-REDESIGN-2026-06-28
 Depends-On: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17
@@ -9,10 +9,10 @@ Supersedes: no whole report; refines the remaining equipment-cell route for tens
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
-Status: join, shaped co-Yoneda, fixed-endpoint tensor-map, opposite
-fixed-functor/bridge/demotion, and internal fixed co-Yoneda naturality-owner
-slices landed; `Prof_comp_transf` targeted for eventual removal but not yet
-safe to demote wholesale
+Status: join, shaped co-Yoneda, fixed-endpoint tensor-map, stable `Op_prof`
+semantic owner, and internal fixed co-Yoneda naturality-owner slices landed;
+`Prof_comp_transf` targeted for eventual removal but not yet safe to demote
+wholesale
 
 ## Purpose
 
@@ -2690,11 +2690,11 @@ make catalog
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite, and fixed co-Yoneda naturality is now internalized through unit tensor functors plus `Prof_coyoneda_*_transf`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until it can be routed through those internal transformations and an already-owned hom-action/postcomposition path. |
-| `EQUIP-OP-DUALITY` | first pass complete; primitive-owner follow-up pending | active implementation plus future probe | `Op_prof` is currently defined by pullback/swap; fixed-endpoint `Op_prof_func`, transparent `Op_prof_map`, and the normalized opposite/reindex bridge are active. The next reindex-product-fold pass should probe making `Op_prof` a stable primitive semantic owner, with pullback/swap as proof-time compatibility and the direct `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))` computation owned by `Op_prof`. |
+| `EQUIP-OP-DUALITY` | stable primitive owner landed | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
-| `EQUIP-REINDEX-PRODUCT-FOLD` | decision updated, implementation pending | future reindex normal-form pass | First probe a stable primitive `Op_prof` owner with proof-time pullback/swap compatibility; if successful, remove the one-off unfolded opposite/reindex bridge without adding generalized pullback/reindex swap-normalization rules. Defer the broader `Product_swap_transf` / `Product_swapped_map_func` naturality owner unless raw pullback/swap syntax remains a concrete runtime consumer. |
+| `EQUIP-REINDEX-PRODUCT-FOLD` | primitive `Op_prof` slice complete; raw swap naturality deferred | active implementation plus future raw-product probe | The one-off unfolded opposite/reindex bridge has been replaced by the direct semantic computation `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`. Broader `Product_swap_transf` / `Product_swapped_map_func` naturality remains deferred unless raw pullback/swap syntax becomes a concrete runtime consumer. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
 
 ### Reindex Product-Fold Core Review, 2026-06-29
@@ -3199,3 +3199,76 @@ Immediate implementation order for the next code pass:
 6. Defer `Product_swap_transf` / `Product_swapped_map_func` implementation
    until a concrete raw product-swap runtime consumer remains after the
    `Op_prof` migration.
+
+### Implementation Checkpoint, 2026-06-30, Stable `Op_prof` Owner
+
+The primitive `Op_prof` first slice has landed.
+
+Implemented in `emdash3_2.lp`:
+
+- `Op_prof(A,B,R)` is now an injective stable semantic head, no longer a
+  transparent definition through `Pullback_catd(R, Product_swap_func(...))`.
+- `Op_prof` has direct `fapp0`, `fapp1_func`, and `fapp1_fapp0` projection
+  rules. These projections compute by applying the product symmetry to the
+  base argument, but the runtime owner remains `Op_prof`.
+- `Op_prof(Op_prof(R)) -> R` is now owned by `Op_prof`, replacing the previous
+  accidental double-swap pullback cancellation path.
+- `Op_prof_func(A,B)` is now an injective stable fixed-endpoint functor, with
+  object action:
+
+  ```text
+  fapp0(Op_prof_func(A,B),R) -> Op_prof(A,B,R).
+  ```
+
+- `Op_prof_map(r)` remains a transparent readability alias for
+  `fapp1_fapp0(Op_prof_func(A,B),r)`.
+- Proof-time compatibility identifies:
+
+  ```text
+  Op_prof(R)      == Pullback_catd(R, Product_swap_func(B,Op_cat A))
+  Op_prof_func    == Pullback_catd_func(Product_swap_func(B,Op_cat A)).
+  ```
+
+- The old unfolded opposite/reindex rule over
+  `Pullback_catd(R,Product_swap_func(...))` has been removed.
+- The active runtime opposite/reindex computation is now:
+
+  ```text
+  Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+    -> Op_prof(Prof_reindex(R,F,G)).
+  ```
+
+Diagnostics in `emdash3_2_checks.lp` now cover:
+
+- fixed object action of `Op_prof_func`;
+- semantic involution `Op_prof(Op_prof(R)) -> R`;
+- capped-arrow projection of `Op_prof`;
+- explicit `eq_refl` witnesses for both proof-time pullback/swap
+  compatibility rules;
+- fixed type of `Op_prof_map`;
+- opposite/reindex bridge conversion;
+- endpoint-changing view type for `Op_prof_transf`;
+- fixed-functor identity and composition checks for `Op_prof_map`.
+
+Validation:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled source check reports 1,382 warnings after this slice. A
+HEAD snapshot of `emdash3_2.lp` reported 1,406 warnings under the same
+summarizer, so the stable `Op_prof` migration removes the old high-overlap
+unfolded `Prof_reindex(Pullback_catd(...Product_swap_func...))` family rather
+than increasing the warning inventory.
+
+Deferred:
+
+- `Product_swap_transf` / `Product_swapped_map_func` remains the correct
+  general owner for raw product-swap naturality, but it is not needed for the
+  core profunctor-duality runtime path after this migration.
+- Making `Prof`, `Prof_cat`, or `Prof_base` primitive remains a separate
+  foundation-level design/probe, not part of this slice.

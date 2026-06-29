@@ -2794,6 +2794,54 @@ assert [A B : Cat]
   ≡ @Op_prof A B R;
 
 assert [A B : Cat]
+  (R : τ (Prof A B)) ⊢
+  @Op_prof (Op_cat B) (Op_cat A) (@Op_prof A B R)
+  ≡ R;
+
+assert [A B : Cat]
+  (R : τ (Prof A B))
+  (a a' : τ (Obj A))
+  (b b' : τ (Obj B))
+  (p : τ (Hom A a' a))
+  (q : τ (Hom B b b')) ⊢
+  @fapp1_fapp0
+    (Product_cat B (Op_cat A))
+    Cat_cat
+    (@Op_prof A B R)
+    (Struct_sigma b a)
+    (Struct_sigma b' a')
+    (Struct_sigma q p)
+  ≡ @fapp1_fapp0
+      (Product_cat (Op_cat A) B)
+      Cat_cat
+      R
+      (Struct_sigma a b)
+      (Struct_sigma a' b')
+      (Struct_sigma p q);
+
+assert [A B : Cat]
+  (R : τ (Prof A B)) ⊢
+  eq_refl (@Op_prof A B R)
+  : τ (
+      @Op_prof A B R
+      =
+      @Pullback_catd
+        (Product_cat B (Op_cat A))
+        (Product_cat (Op_cat A) B)
+        R
+        (@Product_swap_func B (Op_cat A)));
+
+assert [A B : Cat] ⊢
+  eq_refl (@Op_prof_func A B)
+  : τ (
+      @Op_prof_func A B
+      =
+      @Pullback_catd_func
+        (Product_cat B (Op_cat A))
+        (Product_cat (Op_cat A) B)
+        (@Product_swap_func B (Op_cat A)));
+
+assert [A B : Cat]
   [P Q : τ (Prof A B)]
   (r : τ (ProfMap P Q)) ⊢
   @Op_prof_map A B P Q r

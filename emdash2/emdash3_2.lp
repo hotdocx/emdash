@@ -8750,14 +8750,104 @@ symbol ProfMap
   Therefore profunctor duality is pullback along product symmetry only.
   Applying `Op_catd` pointwise would incorrectly add a second fibre opposite.
 */
-symbol Op_prof [A B : Cat]
+injective symbol Op_prof [A B : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B)))
-  : τ (Catd (Product_cat B (Op_cat A)))
-≔ @Pullback_catd
-    (Product_cat B (Op_cat A))
-    (Product_cat (Op_cat A) B)
-    R
-    (@Product_swap_func B (Op_cat A));
+  : τ (Catd (Product_cat B (Op_cat A)));
+
+rule @fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba
+  ↪ @fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      $R
+      (@fapp0
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        (@Product_swap_func $B (Op_cat $A))
+        $ba);
+
+rule @fapp1_func _ Cat_cat (@Op_prof $A $B $R) $ba $ba'
+  ↪ @comp_cat_fapp0
+      (Hom_cat (Product_cat $B (Op_cat $A)) $ba $ba')
+      (Hom_cat
+        (Product_cat (Op_cat $A) $B)
+        (@fapp0
+          (Product_cat $B (Op_cat $A))
+          (Product_cat (Op_cat $A) $B)
+          (@Product_swap_func $B (Op_cat $A))
+          $ba)
+        (@fapp0
+          (Product_cat $B (Op_cat $A))
+          (Product_cat (Op_cat $A) $B)
+          (@Product_swap_func $B (Op_cat $A))
+          $ba'))
+      (Functor_cat
+        (@fapp0
+          (Product_cat (Op_cat $A) $B)
+          Cat_cat
+          $R
+          (@fapp0
+            (Product_cat $B (Op_cat $A))
+            (Product_cat (Op_cat $A) $B)
+            (@Product_swap_func $B (Op_cat $A))
+            $ba))
+        (@fapp0
+          (Product_cat (Op_cat $A) $B)
+          Cat_cat
+          $R
+          (@fapp0
+            (Product_cat $B (Op_cat $A))
+            (Product_cat (Op_cat $A) $B)
+            (@Product_swap_func $B (Op_cat $A))
+            $ba')))
+      (@fapp1_func
+        (Product_cat (Op_cat $A) $B)
+        Cat_cat
+        $R
+        (@fapp0
+          (Product_cat $B (Op_cat $A))
+          (Product_cat (Op_cat $A) $B)
+          (@Product_swap_func $B (Op_cat $A))
+          $ba)
+        (@fapp0
+          (Product_cat $B (Op_cat $A))
+          (Product_cat (Op_cat $A) $B)
+          (@Product_swap_func $B (Op_cat $A))
+          $ba'))
+      (@fapp1_func
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        (@Product_swap_func $B (Op_cat $A))
+        $ba
+        $ba');
+
+rule @fapp1_fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba $ba' $h
+  ↪ @fapp1_fapp0
+      (Product_cat (Op_cat $A) $B)
+      Cat_cat
+      $R
+      (@fapp0
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        (@Product_swap_func $B (Op_cat $A))
+        $ba)
+      (@fapp0
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        (@Product_swap_func $B (Op_cat $A))
+        $ba')
+      (@fapp1_fapp0
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        (@Product_swap_func $B (Op_cat $A))
+        $ba
+        $ba'
+        $h);
+
+rule @Op_prof
+      _
+      _
+      (@Op_prof $A $B $R)
+  ↪ $R;
 
 /*
   Fixed-endpoint opposite profunctor functor.
@@ -8765,14 +8855,30 @@ symbol Op_prof [A B : Cat]
   This is the fixed vertical action of object-level profunctor duality.
   Identity and composition are inherited from the generic functor calculus.
 */
-symbol Op_prof_func [A B : Cat]
+injective symbol Op_prof_func [A B : Cat]
   : τ (Functor
       (@Prof_cat A B)
-      (@Prof_cat (Op_cat B) (Op_cat A)))
-≔ @Pullback_catd_func
-    (Product_cat B (Op_cat A))
-    (Product_cat (Op_cat A) B)
-    (@Product_swap_func B (Op_cat A));
+      (@Prof_cat (Op_cat B) (Op_cat A)));
+
+rule @fapp0 _ _ (@Op_prof_func $A $B) $R
+  ↪ @Op_prof $A $B $R;
+
+unif_rule
+  @Op_prof $A $B $R
+  ≡ @Pullback_catd
+      (Product_cat $B (Op_cat $A))
+      (Product_cat (Op_cat $A) $B)
+      $R
+      (@Product_swap_func $B (Op_cat $A))
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @Op_prof_func $A $B
+  ≡ @Pullback_catd_func
+      (Product_cat $B (Op_cat $A))
+      (Product_cat (Op_cat $A) $B)
+      (@Product_swap_func $B (Op_cat $A))
+  ↪ [ tt ≡ tt ];
 
 symbol Op_prof_map
   [A B : Cat]
@@ -8816,23 +8922,18 @@ symbol Prof_reindex [A A' B B' : Cat]
   (G : τ (Functor B' B))
   : τ (Catd (Product_cat (Op_cat A') B'));
 
-// lhs-audit: keep 1,2,3,4 -- opposite endpoint shape is the discriminator
-// for the normalized opposite/reindex bridge.
+// Reindexing object-level profunctor opposite is owned by the semantic
+// `Op_prof` head, not by the unfolded pullback/product-swap presentation.
 rule @Prof_reindex
-      (Op_cat $B) (Op_cat $B')
-      (Op_cat $A) (Op_cat $A')
-      (@Pullback_catd
-        (Product_cat $B (Op_cat $A))
-        (Product_cat (Op_cat $A) $B)
-        $R
-        (@Product_swap_func $B (Op_cat $A)))
+      _ _
+      _ _
+      (@Op_prof $A $B $R)
       (@Op_func $B' $B $G)
       (@Op_func $A' $A $F)
-  ↪ @Pullback_catd
-      (Product_cat $B' (Op_cat $A'))
-      (Product_cat (Op_cat $A') $B')
-      (@Prof_reindex $A $A' $B $B' $R $F $G)
-      (@Product_swap_func $B' (Op_cat $A'));
+  ↪ @Op_prof
+      $A'
+      $B'
+      (@Prof_reindex $A $A' $B $B' $R $F $G);
 
 // Object/fibre projection of profunctor reindexing.
 rule @fapp0
