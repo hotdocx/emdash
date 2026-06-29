@@ -10,8 +10,9 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
 Status: join, shaped co-Yoneda, and fixed-endpoint tensor-map prerequisite
-slices landed; `Prof_comp_transf` targeted for eventual removal but not yet
-safe to demote wholesale
+slices landed; final opposite/tensor endpoint-changing architecture decision
+recorded; `Prof_comp_transf` targeted for eventual removal but not yet safe
+to demote wholesale
 
 ## Purpose
 
@@ -662,6 +663,47 @@ Deletion status:
 - safe to demote only after tensor/co-Yoneda and generic compatibility
   consumers migrate.
 
+### Opposite And Duality
+
+Current declarations:
+
+```text
+Op_prof
+Op_prof_transf
+```
+
+Current role:
+
+- `Op_prof` is already a transparent pullback-by-swap definition on
+  profunctor objects;
+- `Op_prof_transf` is a primitive/injective endpoint-changing compatibility
+  head;
+- direct rules on `Op_prof_transf` currently own involution, identity, and
+  composition checks, and they still discriminate on `Prof_id_transf` and
+  `Prof_comp_transf`.
+
+Target role:
+
+- keep `Op_prof` defined through pullback by `Product_swap_func`;
+- add the fixed-endpoint functor `Op_prof_func(A,B)` as the owner of
+  vertical opposite action;
+- optionally expose `Op_prof_map(r)` as a transparent readability alias for
+  `fapp1_fapp0(Op_prof_func(A,B),r)`;
+- add exactly one opposite/reindex compatibility bridge, oriented from
+  `Prof_reindex(Op_prof(R),Op_func(G),Op_func(F))` to
+  `Op_prof(Prof_reindex(R,F,G))`, using the kernel-visible normalized
+  pullback-by-swap head;
+- demote or retire the current primitive `Op_prof_transf` after diagnostics
+  migrate to the fixed functor, the bridge, and any transparent
+  endpoint-changing view that remains.
+
+Deletion status:
+
+- `Op_prof` should remain as a defined object-level operation;
+- `Op_prof_transf` is not final architecture, but should not be deleted until
+  the fixed functor, bridge, identity checks, and composition checks have
+  active replacements.
+
 ### Tensor And Co-Yoneda
 
 Current declarations:
@@ -1200,9 +1242,14 @@ Endpoint-changing tensor cells are allowed only as derived views:
 Prof_tensor_transf(r,s)
 ```
 
-should be a wrapper around reindexing plus fixed-endpoint tensor functoriality,
-or remain a temporary stable head with a clear migration label. It should not
-be the primitive owner of the closed/tensor theory.
+should eventually be a wrapper around reindexing plus fixed-endpoint tensor
+functoriality, but only after the necessary middle-change/coend compatibility
+map is explicitly available. That full wrapper is a future equipment/coend
+compatibility theorem, not part of this migration. Until then,
+`Prof_tensor_transf` may remain only as a temporary stable head with a clear
+migration label. It should not be the primitive owner of the closed/tensor
+theory, and new code should target fixed-endpoint `Prof_tensor_map` plus
+identity-middle co-Yoneda naturality instead.
 
 Expected shaped tensor introduction:
 
@@ -2342,18 +2389,32 @@ High feasibility:
 
 - documenting the weighted-limit cancellation owner;
 - keeping `Prof_reindex`;
-- adding fixed-endpoint one-way co-Yoneda owner aliases in a future
-  implementation validation pass;
-- adding a join-specific shaped projection or a narrow cell-application or
-  evaluation owner.
+- keeping the already-landed narrow `Prof_cell_apply` / `Prof_cell_eval` and
+  join-recursion slices as the join runtime owners;
+- keeping the already-landed fixed-endpoint `Prof_tensor_map` as the tensor
+  vertical map owner;
+- adding `Op_prof_func(A,B)` as a fixed-endpoint functor
+  `Prof_cat(A,B) -> Prof_cat(Op B,Op A)`, because a focused source probe showed
+  that the existing `Pullback_catd_func(Product_swap_func(B,Op A))` presentation
+  makes the object action compute to `Op_prof(R)`;
+- adding `Op_prof_map(r)` as a transparent readability alias through
+  `fapp1_fapp0(Op_prof_func(A,B),r)`, if diagnostics benefit from the name.
 
 Medium feasibility:
 
-- migrating shaped co-Yoneda beta rules away from `Prof_comp_transf`, because
-  they require the one-way co-Yoneda owner plus the narrow `Prof_cell_apply`
-  path and must preserve arbitrary `pp`.
-- migrating endpoint-changing public co-Yoneda names to fixed-endpoint maps or
-  comparisons without reintroducing broad equipment composition.
+- promoting the opposite/reindex bridge. A focused source probe and a
+  warning-enabled probe passed for the normalized pullback-by-swap rule, but
+  promotion still needs the active-file warning delta, diagnostics migration,
+  and owner-position documentation.
+- replacing the current primitive `Op_prof_transf` by a transparent
+  endpoint-changing compatibility view. This is feasible after the bridge, but
+  it must migrate the existing involution, identity, and composition checks.
+- migrating endpoint-changing public co-Yoneda names to fixed-endpoint maps,
+  identity-middle tensor naturality, or comparisons without reintroducing broad
+  equipment composition.
+- replacing the remaining general-cell identity-unit co-Yoneda naturality
+  rules headed by `Prof_comp_transf`, because their mathematical content is
+  real but their current owner is temporary compatibility scaffolding.
 
 Medium risk:
 
@@ -2374,31 +2435,40 @@ Medium risk:
 - `Prof_cell_apply` must stay narrow: the first implementation should add no
   general associativity, identity, or equipment-composition rewrite rules for
   it.
-- migrating general-cell identity-unit co-Yoneda naturality away from
-  `Prof_comp_transf` is a separate later pass, because it also needs
-  fixed-endpoint tensor functoriality/naturality and a settled derived
-  cell-composition expression for the RHS.
+- retiring `Prof_id_transf` into `id_funcd` is blocked by stable-head
+  identity rules for the current `Op_prof_transf` and `Prof_comp_transf`
+  surfaces. It should move only after those surfaces are demoted, or after
+  coherent `id_funcd` sibling rules are probed.
+- retiring `Prof_tensor_transf` is blocked by the remaining identity-middle
+  co-Yoneda naturality consumers. A full endpoint-changing tensor wrapper also
+  needs middle-change/coend compatibility and is outside this migration.
+- demoting or deleting `Prof_comp_transf` remains the last cleanup pass,
+  because it also supports generic equipment compatibility checks and current
+  identity/composition normal forms.
 
 Known non-goals:
 
 - no tensor associator/unitor coherence in this migration;
 - no general coend/coinserter semantics for `Prof_tensor`;
 - no semantic collage implementation for `Join_cat`;
-- no full bicategory/equipment coherence layer.
+- no full bicategory/equipment coherence layer;
+- no new most-general endpoint-changing tensor primitive replacing
+  `Prof_tensor_transf`.
 
 ## Implementation Order
 
 1. Documentation and indexing.
 
    Promote this report and cross-link it from the DefIso migration report and
-   report index.
+   report index. This is complete for the first pass; keep this report updated
+   whenever an architectural conclusion changes.
 
 2. Narrow cell application/evaluation first.
 
    Add general object-level `Prof_cell_apply`, then terminal-source
    `Prof_cell_eval`. Do not add broad equipment-style rewrite rules to either
    owner. This is the missing layer identified by the 2026-06-28
-   reassessment.
+   reassessment. This first pass is complete.
 
 3. Join migration.
 
@@ -2406,7 +2476,8 @@ Known non-goals:
    Routing `join_cross_hom` through `Prof_cell_eval`, adding the direct
    primitive `join_elim_cross_transf` beta, and deriving the shaped beta
    through `Prof_cell_eval` should let the code remove the join-specific
-   `Prof_comp_transf` rules without touching tensor.
+   `Prof_comp_transf` rules without touching tensor. This first pass is
+   complete.
 
 4. Tensor/co-Yoneda.
 
@@ -2415,18 +2486,46 @@ Known non-goals:
    for tensor-introduced shaped elements to `Prof_cell_apply`. Do not add
    co-Yoneda `ProfComparison` owners in the first pass. Preserve the
    general-cell identity-unit naturality rules as temporary compatibility until
-   fixed-endpoint tensor/co-Yoneda naturality owners replace them. Keep
-   endpoint-changing public names as `CoyR`/`CoyL`-style wrappers until their
-   consumers are gone.
+   fixed-endpoint tensor/co-Yoneda naturality owners replace them.
 
-5. `Prof_func_transf` audit.
+5. Fixed tensor map.
+
+   Keep `Prof_tensor_map` as the independent fixed-endpoint tensor-map owner.
+   Do not define it through `Prof_tensor_transf`, and do not use
+   `Prof_tensor_transf` as the owner of fixed tensor functoriality. This
+   prerequisite slice is complete.
+
+6. Opposite fixed functor and bridge.
+
+   Add `Op_prof_func`, add `Op_prof_map` only as a transparent alias if useful,
+   then promote the normalized opposite/reindex bridge after an active-file
+   warning-enabled check. Migrate diagnostics from the primitive
+   `Op_prof_transf` rules to the fixed functor, the bridge, and a transparent
+   endpoint-changing view. Only then demote or retire the current
+   `Op_prof_transf` primitive/rules.
+
+7. Identity-middle co-Yoneda naturality.
+
+   Replace the remaining `Prof_comp_transf` co-Yoneda identity-unit naturality
+   pair through fixed-endpoint co-Yoneda maps, `Prof_tensor_map`, and a narrow
+   fixed vertical composition/postcomposition owner. Do not introduce a general
+   middle-change tensor wrapper in this pass.
+
+8. `Prof_func_transf` audit.
 
    Decide whether it remains a narrow representable equipment compatibility
    cell or is replaced by a hom-action owner.
 
-6. Generic `Prof_comp_transf` retirement.
+9. `Prof_id_transf` normal-form pass.
 
-   Only after join and tensor/co-Yoneda no longer rely on it.
+   Retry the transparent `id_funcd` migration only after `Op_prof_transf` and
+   enough `Prof_comp_transf` consumers have been demoted, or after coherent
+   `id_funcd` sibling rules have passed focused probes.
+
+10. Generic `Prof_comp_transf` retirement.
+
+   Only after join, opposite, tensor/co-Yoneda, and identity-normal-form
+   consumers no longer rely on it.
 
 ## Validation Gates
 
@@ -2462,6 +2561,8 @@ make catalog
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, and independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint naturality plus hom-action cut-elimination owners replace it. |
+| `EQUIP-OP-DUALITY` | decision complete after probe | next implementation pass | Keep `Op_prof` defined by pullback/swap; add fixed-endpoint `Op_prof_func`, optional transparent `Op_prof_map`, and one normalized opposite/reindex bridge; then demote or retire primitive `Op_prof_transf` after diagnostics migrate. |
+| `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded, but active diagnostics need stable-head identity rules for `Op_prof_transf` and likely `Prof_comp_transf`; migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
-| `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |
+| `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
