@@ -6495,6 +6495,22 @@ assert [I C : Cat]
       (@Unit_prof I)
       (@Hom_prof_along I I C F G);
 
+assert [I A' B' A B : Cat]
+  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)]
+  [a : τ (Functor I A')]
+  [b : τ (Functor I B')]
+  (c : τ (Obj (@Prof_transf_cat A A' B B' R' F R G)))
+  (r : τ (@Prof_hom I A' B' a R' b)) ⊢
+  @Prof_cell_apply I A' B' A B R' R F G a b c r
+  : τ (@Prof_hom
+      I A B
+      (@comp_cat_fapp0 I A' A F a)
+      R
+      (@comp_cat_fapp0 I B' B G b));
+
 assert [A A' B B' X : Cat]
   (R' : τ (Catd (Product_cat (Op_cat A') B')))
   (F : τ (Functor A' A))
@@ -6935,6 +6951,24 @@ assert [A B : Cat]
     (Struct_sigma a b)
   ≡ Terminal_cat;
 
+assert [I A' B' A B : Cat]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)]
+  [a : τ (Functor I A')]
+  [b : τ (Functor I B')]
+  (c : τ (Obj
+      (@Prof_transf_cat A A' B B'
+        (@Terminal_prof A' B') F R G))) ⊢
+  @Prof_cell_eval I A' B' A B R F G a b c
+  ≡ @Prof_cell_apply
+      I A' B' A B
+      (@Terminal_prof A' B')
+      R
+      F G a b
+      c
+      (@Prof_terminal_hom I A' B' a b);
+
 assert [A B : Cat]
   (F : τ (Functor A B)) ⊢
   @Prof_func_transf A B F
@@ -7037,6 +7071,77 @@ assert [A B I : Cat]
         I B (@Join_cat A B)
         (@join_snd_func A B)
         b));
+
+assert [A B I : Cat]
+  (a : τ (Functor I A))
+  (b : τ (Functor I B)) ⊢
+  @join_cross_hom A B I a b
+  ≡ @Prof_cell_eval
+      I A B
+      (@Join_cat A B)
+      (@Join_cat A B)
+      (@Unit_prof (@Join_cat A B))
+      (@join_fst_func A B)
+      (@join_snd_func A B)
+      a b
+      (@join_cross_transf A B);
+
+assert [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second))) ⊢
+  @join_elim_cross_transf A B E first second cross
+  : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second));
+
+assert [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second))) ⊢
+  @join_elim_cross_transf A B E first second cross
+  ≡ cross;
+
+assert [A B E I : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second)))
+  (a : τ (Functor I A))
+  (b : τ (Functor I B)) ⊢
+  @Prof_cell_eval
+    I A B E E
+    (@Unit_prof E)
+    first second
+    a b
+    (@join_elim_cross_transf A B E first second cross)
+  ≡ @Prof_cell_eval
+      I A B E E
+      (@Unit_prof E)
+      first second
+      a b
+      cross;
 
 assert
   [A0 A1 A2 B0 B1 B2 : Cat]

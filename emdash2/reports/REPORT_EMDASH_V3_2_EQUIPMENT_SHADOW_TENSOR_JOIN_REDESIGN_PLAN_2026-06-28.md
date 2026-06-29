@@ -9,9 +9,8 @@ Supersedes: no whole report; refines the remaining equipment-cell route for tens
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
-Status: reviewed implementation-specified design draft; first implementation
-path fixed, `Prof_comp_transf` targeted for eventual removal but not yet safe
-to demote wholesale
+Status: first join implementation slice landed; `Prof_comp_transf` targeted
+for eventual removal but not yet safe to demote wholesale
 
 ## Purpose
 
@@ -289,9 +288,61 @@ The first code pass should use an uninterpreted `symbol` for
 `Prof_cell_apply`, not a `constant`, because the shaped beta rules must be
 headed by this narrow application owner.
 
+## Implementation Checkpoint, 2026-06-29
+
+The first join-focused implementation slice has landed in `emdash3_2.lp` and
+`emdash3_2_checks.lp`.
+
+Implemented:
+
+- `Prof_cell_apply` was added near `Prof_hom` as a narrow shaped application
+  head for one profunctor cell applied to one shaped profunctor element. It has
+  no identity, associativity, or generic equipment-composition rewrite rules.
+- `Prof_cell_eval` was added after `Terminal_prof` and `Prof_terminal_hom` as
+  the transparent terminal-source specialization through
+  `Prof_terminal_hom`.
+- `join_cross_hom(a,b)` now routes through `Prof_cell_eval` instead of
+  `Prof_comp_transf`.
+- `join_elim_cross_transf(first,second,cross)` was added as the primitive
+  join-recursion cross-cell projection, with direct beta
+  `join_elim_cross_transf(first,second,cross) -> cross`.
+- The two join-specific `Prof_comp_transf` beta rules were removed.
+- Diagnostics now cover `Prof_cell_apply`, `Prof_cell_eval`, the
+  `join_cross_hom` evaluation route, the cell-level join cross beta, and the
+  shaped `Prof_cell_eval` consequence.
+
+Deliberately not implemented in this slice:
+
+- no optional `join_elim_cross_hom` alias, because the transparent
+  `Prof_cell_eval` route checks;
+- no tensor/co-Yoneda migration;
+- no demotion or deletion of generic `Prof_comp_transf`, because the
+  tensor/co-Yoneda compatibility rules still consume it;
+- no derived `join_equipment_cross` compatibility view for the old equipment
+  reading.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_join_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+EMDASH_TYPECHECK_TIMEOUT=60s make ci
+```
+
+The warning-enabled check succeeded with 1,417 warnings. The first warning is
+the pre-existing strict-functor identity/opposite overlap, and the warning log
+contains no entries headed by `Prof_cell_apply`, `Prof_cell_eval`, or
+`join_elim_cross_transf`. Remaining `Prof_comp_transf` warnings are in the
+generic equipment/duality compatibility families, not in the removed
+join-specific rules.
+
 ## Current Remaining Consumers
 
-The active source currently has these `Prof_comp_transf` clusters.
+After the first join implementation slice, the active source still has these
+remaining `Prof_comp_transf` clusters.
 
 ### Generic Equipment Cell
 
@@ -307,7 +358,7 @@ left/right identity rules
 Current role:
 
 - provide a stable composition head for endpoint-changing cells;
-- support old co-Yoneda and join runtime cuts;
+- support tensor/co-Yoneda runtime cuts and generic equipment compatibility;
 - expose a small amount of equipment-like syntax.
 
 Target role:
@@ -319,7 +370,8 @@ Target role:
 Deletion status:
 
 - not safe to delete yet;
-- safe to demote only after tensor/co-Yoneda and join consumers migrate.
+- safe to demote only after tensor/co-Yoneda and generic compatibility
+  consumers migrate.
 
 ### Tensor And Co-Yoneda
 
@@ -392,16 +444,16 @@ Deletion status:
 
 Current implicit role:
 
-- `join_cross_hom(a,b)` is currently implemented by composing
+- `join_cross_hom(a,b)` was previously implemented by composing
   `join_cross_transf` with `Prof_terminal_hom(a,b)` through
-  `Prof_comp_transf`;
+  `Prof_comp_transf`; it now routes through `Prof_cell_eval`;
 - endpoint-changing tensor and co-Yoneda wrappers also often need to apply a
   natural profunctor cell to a shaped element.
 
 Target role:
 
-- introduce or identify a narrow owner for evaluating an internally natural
-  profunctor cell on shaped endpoint data;
+- keep `Prof_cell_apply` / `Prof_cell_eval` as the narrow first-pass owner for
+  evaluating an internally natural profunctor cell on shaped endpoint data;
 - do not use arbitrary equipment-cell composition merely to obtain this
   shaped application.
 
@@ -647,7 +699,8 @@ Target role:
 
 Deletion status:
 
-- not safe to delete before join and co-Yoneda are redesigned.
+- not safe to delete before co-Yoneda and generic compatibility consumers are
+  redesigned. It is no longer a join-runtime-beta blocker.
 
 ### Primitive Join
 
@@ -658,9 +711,9 @@ Join_cat(A,B)
 join_fst_func : A -> Join_cat(A,B)
 join_snd_func : B -> Join_cat(A,B)
 join_cross_transf
-join_cross_hom(a,b) := Prof_comp_transf(join_cross_transf, terminal)
+join_cross_hom(a,b) := Prof_cell_eval(join_cross_transf,a,b)
 join_elim_func(first,second,cross)
-cross beta rules headed by Prof_comp_transf
+join_elim_cross_transf(first,second,cross) -> cross
 ```
 
 Current role:
@@ -679,8 +732,10 @@ Target role:
 
 Deletion status:
 
-- current shaped cross and cross beta still depend on `Prof_comp_transf`;
-- migrate join before deleting the generic composition head.
+- first-pass join migration is complete;
+- no active join-specific `Prof_comp_transf` beta rules remain;
+- the old equipment-style reading is deferred to a future compatibility head
+  if a concrete consumer needs it.
 
 ## Weighted-Limit Runtime Computation
 
@@ -1547,14 +1602,14 @@ This is the requested stronger/narrower design.
 
 ### Join Cross Projection
 
-The current definition is:
+Before the first implementation slice, the definition was:
 
 ```text
 join_cross_hom(a,b)
   := Prof_comp_transf(join_cross_transf, Prof_terminal_hom(a,b)).
 ```
 
-Refined target:
+Implemented target:
 
 ```text
 join_cross_hom(a,b) := join_cross_transf[a,b]
@@ -2105,9 +2160,9 @@ make catalog
 | ID | Status | Owner | Decision / Trigger |
 | --- | --- | --- | --- |
 | `EQUIP-WL-DOC` | complete in this plan | DefIso/weighted-limit reports | Explicitly document that nested hom-action cancellation is required for weighted-limit beta/eta and runtime universal-property computation. |
-| `EQUIP-INVENTORY` | proposed | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion. |
-| `EQUIP-CELL-EVAL` | selected for implementation | next implementation probe | Add general object-level `Prof_cell_apply`, define terminal-source `Prof_cell_eval`, and route `join_cross_hom` through `Prof_cell_eval` before migrating join beta. |
-| `EQUIP-JOIN-NARROW` | implementation-specified first pass | future implementation probe | Replace join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval`, direct primitive `join_elim_cross_transf` beta, and optional transparent/fallback `join_elim_cross_hom` shaped alias. |
+| `EQUIP-INVENTORY` | updated by first implementation slice | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion; join-specific runtime ownership has moved off `Prof_comp_transf`, while tensor/co-Yoneda and generic equipment compatibility remain. |
+| `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
+| `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | implementation-specified first pass | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint one-way co-Yoneda map aliases, express arbitrary-`pp` shaped beta via `Prof_cell_apply`, preserve general-cell identity-unit naturality as temporary compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |

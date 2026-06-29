@@ -9511,6 +9511,29 @@ symbol Prof_hom [I A B : Cat]
 ≔ Obj (@Prof_hom_cat I A B F R G);
 
 /*
+  Narrow shaped application of an internally natural profunctor cell.
+
+  This is deliberately smaller than the general equipment composition
+  `Prof_comp_transf`: it applies one cell to one shaped element and owns no
+  identity, associativity, or generic composition rewrite rules.
+*/
+symbol Prof_cell_apply
+  [I A' B' A B : Cat]
+  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)]
+  [a : τ (Functor I A')]
+  [b : τ (Functor I B')]
+  (c : τ (Obj (@Prof_transf_cat A A' B B' R' F R G)))
+  (r : τ (@Prof_hom I A' B' a R' b))
+  : τ (@Prof_hom
+      I A B
+      (@comp_cat_fapp0 I A' A F a)
+      R
+      (@comp_cat_fapp0 I B' B G b));
+
+/*
   Internalized profunctor reindexing.
 
   Semantically this is pullback along Product_map_func(Op_func(F),G), but the
@@ -11525,6 +11548,30 @@ constant symbol Prof_terminal_hom [I A B : Cat]
   (G : τ (Functor I B))
   : τ (@Prof_hom I A B F (@Terminal_prof A B) G);
 
+// Terminal-source specialization of narrow cell application.
+symbol Prof_cell_eval
+  [I A' B' A B : Cat]
+  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)]
+  [a : τ (Functor I A')]
+  [b : τ (Functor I B')]
+  (c : τ (Obj
+      (@Prof_transf_cat A A' B B'
+        (@Terminal_prof A' B') F R G)))
+  : τ (@Prof_hom
+      I A B
+      (@comp_cat_fapp0 I A' A F a)
+      R
+      (@comp_cat_fapp0 I B' B G b))
+≔ @Prof_cell_apply
+    I A' B' A B
+    (@Terminal_prof A' B')
+    R
+    F G a b
+    c
+    (@Prof_terminal_hom I A' B' a b);
+
 // Primitive join and its two category introductions.
 injective symbol Join_cat (A B : Cat) : Cat;
 
@@ -11562,17 +11609,15 @@ symbol join_cross_hom [A B I : Cat]
         I B (@Join_cat A B)
         (@join_snd_func A B)
         b))
-≔ @Prof_comp_transf
-    I A (@Join_cat A B)
-    I B (@Join_cat A B)
-    (@Unit_prof I)
-    (@Terminal_prof A B)
+≔ @Prof_cell_eval
+    I A B
+    (@Join_cat A B)
+    (@Join_cat A B)
     (@Unit_prof (@Join_cat A B))
-    a b
     (@join_fst_func A B)
     (@join_snd_func A B)
-    (@join_cross_transf A B)
-    (@Prof_terminal_hom I A B a b);
+    a b
+    (@join_cross_transf A B);
 
 /*
   Nondependent join recursor.
@@ -11592,6 +11637,28 @@ symbol join_elim_func [A B E : Cat]
         second)))
   : τ (Functor (@Join_cat A B) E);
 
+// Primitive join-recursion beta for the internally natural cross cell.
+symbol join_elim_cross_transf [A B E : Cat]
+  (first : τ (Functor A E))
+  (second : τ (Functor B E))
+  (cross : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second)))
+  : τ (Obj
+      (@Prof_transf_cat
+        E A E B
+        (@Terminal_prof A B)
+        first
+        (@Unit_prof E)
+        second));
+
+rule @join_elim_cross_transf $A $B $E $first $second $cross
+  ↪ $cross;
+
 rule @comp_cat_fapp0
       $A
       _
@@ -11606,63 +11673,6 @@ with @comp_cat_fapp0
       (@join_elim_func $A $B $E $first $second $cross)
       (@join_snd_func $A $B)
   ↪ $second;
-
-// The recursor sends the internally natural generating cross cell to `cross`.
-rule @Prof_comp_transf
-      $A (@Join_cat $A $B) $E
-      $B (@Join_cat $A $B) $E
-      (@Const_catd (Product_cat (Op_cat $A) $B) Terminal_cat)
-      (@Hom_prof_along
-        (@Join_cat $A $B)
-        (@Join_cat $A $B)
-        (@Join_cat $A $B)
-        (@id_func (@Join_cat $A $B))
-        (@id_func (@Join_cat $A $B)))
-      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
-      (@join_fst_func $A $B)
-      (@join_snd_func $A $B)
-      (@join_elim_func $A $B $E $first $second $cross)
-      (@join_elim_func $A $B $E $first $second $cross)
-      (@Prof_func_transf
-        (@join_elim_func $A $B $E $first $second $cross))
-      (@join_cross_transf $A $B)
-  ↪ $cross;
-
-// Shaped beta law, narrowly reassociating the canonical cross composite.
-rule @Prof_comp_transf
-      $I (@Join_cat $A $B) $E
-      $I (@Join_cat $A $B) $E
-      (@Hom_prof_along $I $I $I (@id_func $I) (@id_func $I))
-      (@Hom_prof_along
-        (@Join_cat $A $B)
-        (@Join_cat $A $B)
-        (@Join_cat $A $B)
-        (@id_func (@Join_cat $A $B))
-        (@id_func (@Join_cat $A $B)))
-      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
-      (@comp_cat_fapp0
-        $I $A (@Join_cat $A $B)
-        (@join_fst_func $A $B)
-        $a)
-      (@comp_cat_fapp0
-        $I $B (@Join_cat $A $B)
-        (@join_snd_func $A $B)
-        $b)
-      (@join_elim_func $A $B $E $first $second $cross)
-      (@join_elim_func $A $B $E $first $second $cross)
-      (@Prof_func_transf
-        (@join_elim_func $A $B $E $first $second $cross))
-      (@join_cross_hom $A $B $I $a $b)
-  ↪ @Prof_comp_transf
-      $I $A $E
-      $I $B $E
-      (@Hom_prof_along $I $I $I (@id_func $I) (@id_func $I))
-      (@Const_catd (Product_cat (Op_cat $A) $B) Terminal_cat)
-      (@Hom_prof_along $E $E $E (@id_func $E) (@id_func $E))
-      $a $b
-      $first $second
-      $cross
-      (@Prof_terminal_hom $I $A $B $a $b);
 
 // -------------------------------------------------------------------------------------------------
 // 18z. Late cross-section normalization bridges
