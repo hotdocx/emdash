@@ -463,6 +463,171 @@ Conclusion:
   `Prof_comp_transf`, or after those equipment heads have been demoted enough
   that the stable identity discriminator is no longer needed.
 
+## Final Architecture Decision, 2026-06-29, Opposite And Endpoint-Changing Cells
+
+The remaining design is now implementation-decision complete enough to guide
+the next code passes. The guiding rule is:
+
+```text
+fixed-endpoint structure first;
+endpoint-changing cells only as derived compatibility views;
+generic equipment composition last, and only if still needed.
+```
+
+### Opposite Profunctors
+
+`Op_prof(R)` should remain defined, not primitive:
+
+```text
+Op_prof(R) := Pullback_catd(R, Product_swap_func).
+```
+
+This is mathematically correct for Cat-valued profunctors. A profunctor
+`R : A^op x B -> Cat` dualizes to a profunctor over
+`B x A^op = Prof_base(Op B, Op A)` by swapping the two base factors. It should
+not apply `Op_catd` to the fibres; doing so would add an unintended fibrewise
+opposite.
+
+The next promoted owner should be the fixed-endpoint functor:
+
+```text
+Op_prof_func(A,B)
+  : Prof_cat(A,B) -> Prof_cat(Op B, Op A)
+```
+
+defined transparently through the existing pullback functor:
+
+```text
+Op_prof_func(A,B)
+  := Pullback_catd_func(Product_swap_func(B,Op A)).
+```
+
+Its object action computes to `Op_prof(R)` through the existing
+`Pullback_catd_func` object rule. A readability alias may be added:
+
+```text
+Op_prof_map(r)
+  := fapp1_fapp0(Op_prof_func(A,B),r)
+```
+
+but identity and composition for fixed-endpoint opposite maps should be
+inherited from the generic functor calculus, not restated by profunctor-specific
+rules.
+
+### Endpoint-Changing `Op_prof_transf`
+
+The current `Op_prof_transf` is too broad as a primitive. It combines:
+
+1. fixed-endpoint action of opposite on vertical profunctor maps;
+2. compatibility between opposite and endpoint reindexing.
+
+A focused probe established the feasible replacement stack:
+
+```text
+Op_prof_func(A',B') on the input cell
+  + a narrow reindex/swap bridge
+```
+
+The required bridge is:
+
+```text
+Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+  -> Op_prof(Prof_reindex(R,F,G)).
+```
+
+Because `Op_prof` is a transparent pullback alias, the kernel-visible promoted
+rule is expected to be the normalized pullback-by-swap form:
+
+```text
+Prof_reindex(
+  Pullback_catd(R, Product_swap_func(B,Op A)),
+  Op_func(G), Op_func(F))
+->
+Pullback_catd(
+  Prof_reindex(R,F,G),
+  Product_swap_func(B',Op A')).
+```
+
+This is a focused compatibility bridge between two standard presentations of
+the same base substitution. It is not a new general equipment composition
+rule. It should be probed at the owning position with warning-enabled checking
+before promotion, and documented as the single owner of opposite/reindex
+commutation.
+
+After that bridge exists, endpoint-changing opposite cells should be exposed
+as a transparent compatibility view:
+
+```text
+Op_prof_transf(r)
+  := fapp1_fapp0(Op_prof_func(A',B'), r)
+```
+
+with the target type converted through the bridge above. The current
+primitive/injective `Op_prof_transf` and its direct involution, identity, and
+composition rules should then be retired or demoted. Diagnostics should move
+to:
+
+- fixed `Op_prof_func` object/map checks;
+- the narrow reindex/swap bridge;
+- any still-needed endpoint-changing view checks.
+
+### Tensor Endpoint-Changing Cells
+
+`Prof_tensor_map` is the fixed-endpoint vertical owner:
+
+```text
+r : ProfMap(P,P')
+s : ProfMap(Q,Q')
+--------------------------------
+Prof_tensor_map(r,s)
+  : ProfMap(P tensor Q, P' tensor Q')
+```
+
+`Prof_tensor_transf` should not be the owner of fixed-endpoint tensor
+functoriality. Ultimately it should be absent from active runtime code, or kept
+only as a documented future endpoint-changing compatibility view.
+
+A full derived replacement for the current most-general `Prof_tensor_transf`
+needs more than `Prof_tensor_map` and exposed-endpoint `Prof_reindex`: it also
+needs a middle-change/coend compatibility map comparing
+
+```text
+Prof_tensor(Prof_reindex(R,F,M), Prof_reindex(S,M,G))
+```
+
+with
+
+```text
+Prof_reindex(Prof_tensor(R,S), F, G).
+```
+
+The current kernel has no general coend/coinserter semantics, so this
+middle-change operation should not be invented as broad infrastructure during
+this migration. For the current co-Yoneda task, only identity-middle
+specializations are needed. Therefore:
+
+- keep `Prof_tensor_transf` as temporary compatibility only while existing
+  general-cell co-Yoneda rules still consume it;
+- do not build new code on `Prof_tensor_transf`;
+- first express identity-middle co-Yoneda naturality through
+  `Prof_tensor_map`, fixed co-Yoneda maps, and a narrow fixed vertical
+  composition/postcomposition owner;
+- after those consumers move, delete or demote `Prof_tensor_transf` rather
+  than generalizing it further.
+
+### Identity And Generic Composition
+
+`Prof_id_transf` remains a stable head only because current
+`Op_prof_transf` and `Prof_comp_transf` rules discriminate on it. The final
+direction is still to let `id_funcd` own vertical identity once the
+endpoint-changing equipment heads are demoted or have coherent `id_funcd`
+normal-form sibling rules.
+
+`Prof_comp_transf` should not be replaced by a renamed composition primitive.
+Any derived endpoint-changing compatibility view must specify the exact fixed
+operation, the exact `Prof_reindex_transf` step, and the exact vertical
+composition/postcomposition owner it uses.
+
 ## Current Remaining Consumers
 
 After the first join implementation slice, the active source still has these
