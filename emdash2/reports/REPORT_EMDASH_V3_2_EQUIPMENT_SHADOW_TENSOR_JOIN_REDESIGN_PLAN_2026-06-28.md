@@ -2694,7 +2694,7 @@ make catalog
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
-| `EQUIP-REINDEX-PRODUCT-FOLD` | deferred after probe | future reindex normal-form pass | Reassess whether the broad runtime `Pullback_catd(Product_map_func(F,G)) -> Prof_reindex(...)` bridge should become proof-time `unif_rule` infrastructure. A general `Prof_reindex(Pullback_catd(...),F,G)` probe produced an accumulated pullback normal form rather than the decomposed opposite/reindex bridge normal form, so do not change the active runtime fold in this migration. |
+| `EQUIP-REINDEX-PRODUCT-FOLD` | decision updated, implementation pending | future reindex normal-form pass | Replace the one-off opposite/reindex bridge by a mixed `Pullback_catd`/`Prof_reindex` accumulation calculus plus a product-level swapped-map owner. Reassess the broad runtime `Pullback_catd(Product_map_func(F,G)) -> Prof_reindex(...)` bridge as proof-time `unif_rule` infrastructure during that pass. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
 
 ### Reindex Product-Fold Core Review, 2026-06-29
@@ -2787,32 +2787,83 @@ to the base map used by
 Op_prof(Prof_reindex(R,F,G)).
 ```
 
-This owner must not be an external commutative-square/naturality rewrite.
-Possible acceptable owners are a narrow internal base-map normalizer for
-profunctor endpoint maps, or an internalized fixed-functor comparison around
-`Op_prof_func` and `Prof_reindex_func`. The design is not complete until this
-owner is chosen and probed.
-
-Next feasible design options:
+This owner must not be an external commutative-square/naturality rewrite. The
+current target owner is a product-level swapped map, provisionally named:
 
 ```text
-A. Add the general Prof_reindex(Pullback_catd(...),F,G) runtime rule and then
-   add a core/internal base-map normalizer sufficient to make the opposite
-   comparison reduce to the old unfolded target by `eq_refl`.
-
-B. Re-assess whether `Prof_reindex_base_func` should remain a transparent
-   alias or become a narrow stable head for profunctor endpoint base maps.
-   This is worthwhile only if the stable head can own the needed composition
-   normalization without becoming a broad product-map naturality square.
-
-C. If no clean base-map owner is found, keep the old bridge only temporarily
-   while retiring endpoint-changing compatibility views, but document it as
-   an implementation stopgap rather than the target architecture.
+Product_swapped_map_func(F,G) : B x A -> A' x B'
+Product_swapped_map_func(F,G)[b,a] = (F[a],G[b]).
 ```
 
-Do not promote any option until a focused full-source probe shows the general
-pullback/reindex assertion, the old unfolded opposite target by `eq_refl`, the
-product-map proof-time equality, warning delta, and LHS audit all pass.
+Here `F : A -> A'` and `G : B -> B'`. This head is just the product-map
+normal form for a componentwise product map whose source factors are swapped.
+It is not profunctor-specific and does not mention `Op_prof` or
+endpoint-changing equipment cells.
+
+Required object and arrow projections:
+
+```text
+sigma_Fst(Product_swapped_map_func(F,G))
+  -> F o Product_projR_func(B,A)
+
+sigma_Snd(Product_swapped_map_func(F,G))
+  -> G o Product_projL_func(B,A)
+
+Product_swapped_map_func(F,G)[(b,a)]
+  -> (F[a],G[b])
+
+Product_swapped_map_func(F,G)[(q,p)]
+  -> (F[p],G[q]).
+```
+
+Required product-cut accumulation rules:
+
+```text
+Product_map_func(K,L) o Product_swapped_map_func(F,G)
+  -> Product_swapped_map_func(K o F, L o G)
+
+Product_swapped_map_func(F,G) o Product_map_func(L,K)
+  -> Product_swapped_map_func(F o K, G o L).
+```
+
+The second rule uses `Product_map_func(L,K)` because its source order is
+`B0 x A0 -> B x A`; after the swapped map, the normalized target order is
+again `A' x B'`.
+
+Required swap/product-map cuts:
+
+```text
+Product_map_func(F,G) o Product_swap_func(B,A)
+  -> Product_swapped_map_func(F,G)
+
+Product_swap_func(B',A') o Product_map_func(G,F)
+  -> Product_swapped_map_func(F,G).
+```
+
+These two rules are not a product-swap naturality square. They orient both
+raw composites into the same internal product-map normal form, whose
+projections, object action, arrow action, and accumulation are owned by the
+product calculus itself.
+
+Possible implementation route:
+
+- The first probe should use `Product_swapped_map_func` as a stable product
+  head, parallel to `Product_map_func`, because this is the clearest way to
+  test the normal form and the two required mixed pullback/reindex rules.
+- A later cleanup may instead route the same concept through a rigid
+  `Product_swap_func` instance of `hom_precomp_along_fapp0` or its
+  `Cat_cat` specialization, for example as the specialized presentation of
+  precomposing a product map along `Product_swap_func(B,A)`. That route is
+  attractive because some accumulation laws may already exist at the
+  hom-action layer. It is deferred until a probe confirms that the rigid
+  product-swap specialization remains visible before the current
+  identity-functor precomposition rule rewrites to `hom_postcomp_fapp0`, or
+  that a thin stable wrapper preserves the desired normal form.
+
+Do not promote the migration until a focused full-source probe shows the
+general pullback/reindex assertion, the mixed `Pullback_catd(Prof_reindex(...))`
+assertion, the old unfolded opposite target by `eq_refl`, the product-map
+proof-time equality, warning delta, and LHS audit all pass.
 
 #### Expanded Correctness And Feasibility Assessment
 
@@ -2868,8 +2919,59 @@ Completeness:
   target by computation / `eq_refl`. That requires a second, core owner for
   the relevant composed base map.
 - The second owner must not be phrased as an external product-swap naturality
-  square. It should be internal to the base-map calculus or to an internalized
-  fixed functor layer.
+  square. It should be the product-level `Product_swapped_map_func` owner,
+  with its own projections, object and arrow computation, and accumulation
+  laws for composition with ordinary `Product_map_func`.
+- The complete mixed accumulation calculus for this pass is:
+
+  ```text
+  Pullback_catd(Pullback_catd(E,H),K)
+    -> Pullback_catd(E, H o K)
+
+  Prof_reindex(Prof_reindex(R,F,G),F',G')
+    -> Prof_reindex(R, F o F', G o G')
+
+  Prof_reindex(Pullback_catd(E,H),F,G)
+    -> Pullback_catd(E, H o Prof_reindex_base_func(F,G))
+
+  Pullback_catd(Prof_reindex(R,F,G),H)
+    -> Pullback_catd(R, Prof_reindex_base_func(F,G) o H).
+  ```
+
+  The first two rules are already active. The last two are the new core
+  mixed rules needed to make the old opposite/reindex target compute without
+  the specialized bridge.
+- In the opposite case, both computation paths should normalize to:
+
+  ```text
+  Pullback_catd(
+    R,
+    Product_swapped_map_func(Op_func(F),G)).
+  ```
+
+  More explicitly:
+
+  ```text
+  Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
+    -> Pullback_catd(
+         R,
+         Product_swap_func(B,Op_cat A)
+           o Product_map_func(G,Op_func(F)))
+    -> Pullback_catd(R, Product_swapped_map_func(Op_func(F),G))
+
+  Op_prof(Prof_reindex(R,F,G))
+    -> Pullback_catd(
+         Prof_reindex(R,F,G),
+         Product_swap_func(B',Op_cat A'))
+    -> Pullback_catd(
+         R,
+         Product_map_func(Op_func(F),G)
+           o Product_swap_func(B',Op_cat A'))
+    -> Pullback_catd(R, Product_swapped_map_func(Op_func(F),G)).
+  ```
+
+  This is the regression target that replaces the existing one-off
+  `Prof_reindex(Op_prof(...))` rule.
 - If a later proof or API needs endpoint-changing equipment syntax, it should
   be rebuilt on top of this core computation or kept as documented-only
   compatibility; it should not determine the core normal form.
@@ -2916,14 +3018,18 @@ Computation feasibility:
   folds into `unif_rule`s checked in the source probe with warning-enabled
   checking.
 - Not yet promoted: the general
-  `Prof_reindex(Pullback_catd(...),F,G)` runtime rule, and not yet designed:
-  the core/internal base-map normalizer needed to recover the old unfolded
-  opposite target by computation without the specialized bridge.
+  `Prof_reindex(Pullback_catd(...),F,G)` runtime rule, the mixed
+  `Pullback_catd(Prof_reindex(...),H)` runtime rule, and the
+  `Product_swapped_map_func` product owner with the projection/object/arrow
+  and accumulation rules listed above.
 - Expected fallout: checks that currently assert conversion to
   `Op_prof(Prof_reindex(...))` should remain as regression targets for the
   final replacement; checks for direct conversion from
   `Pullback_catd(Product_map_func(...))` to `Prof_reindex(...)` may need to
   become proof-time equality witnesses.
-- Feasibility verdict: plausible but not yet implementation-decision complete.
-  The plan now needs a focused design pass for the internal base-map owner
-  before code promotion.
+- Feasibility verdict: implementation-decision complete enough for a probe.
+  The main risk is not mathematical correctness but rewrite interaction:
+  `Product_swapped_map_func` must accumulate with ordinary product maps without
+  creating a competing product-map/swap loop, and the mixed
+  pullback/reindex rules must be checked against existing pullback,
+  product-map, identity, and opposite specializations.
