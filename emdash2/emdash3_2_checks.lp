@@ -2784,6 +2784,41 @@ assert [A B X : Cat]
       (@fapp0 A X F a)
       (@fapp0 B X G b);
 
+assert [A B : Cat]
+  (R : τ (Prof A B)) ⊢
+  @fapp0
+    (@Prof_cat A B)
+    (@Prof_cat (Op_cat B) (Op_cat A))
+    (@Op_prof_func A B)
+    R
+  ≡ @Op_prof A B R;
+
+assert [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (r : τ (ProfMap P Q)) ⊢
+  @Op_prof_map A B P Q r
+  : τ (@ProfMap
+      (Op_cat B)
+      (Op_cat A)
+      (@Op_prof A B P)
+      (@Op_prof A B Q));
+
+assert [A A' B B' : Cat]
+  [R : τ (Prof A B)]
+  [F : τ (Functor A' A)]
+  [G : τ (Functor B' B)] ⊢
+  @Prof_reindex
+    (Op_cat B)
+    (Op_cat B')
+    (Op_cat A)
+    (Op_cat A')
+    (@Op_prof A B R)
+    (@Op_func B' B G)
+    (@Op_func A' A F)
+  ≡ @Op_prof
+      A' B'
+      (@Prof_reindex A A' B B' R F G);
+
 // From emdash3_2.lp:2636.
 assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢
   @tapp0_fapp0
@@ -6949,15 +6984,11 @@ assert [A A' B B' : Cat]
 
 assert [A B : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
-  @Op_prof_transf
-    A A B B
-    R R
-    (@id_func A)
-    (@id_func B)
-    (@Prof_id_transf A B R)
-  ≡ @Prof_id_transf
-      (Op_cat B)
-      (Op_cat A)
+  @Op_prof_map
+    A B R R
+    (@id (@Prof_cat A B) R)
+  ≡ @id
+      (@Prof_cat (Op_cat B) (Op_cat A))
       (@Op_prof A B R);
 
 assert [B J J' : Cat]
@@ -7192,44 +7223,23 @@ assert [A B E I : Cat]
       cross;
 
 assert
-  [A0 A1 A2 B0 B1 B2 : Cat]
-  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
-  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
-  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
-  [F01 : τ (Functor A0 A1)]
-  [G01 : τ (Functor B0 B1)]
-  [F12 : τ (Functor A1 A2)]
-  [G12 : τ (Functor B1 B2)]
-  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
-  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01))) ⊢
-  @Op_prof_transf
-    A2 A0 B2 B0
-    R0 R2
-    (@comp_cat_fapp0 A0 A1 A2 F12 F01)
-    (@comp_cat_fapp0 B0 B1 B2 G12 G01)
-    (@Prof_comp_transf
-      A0 A1 A2 B0 B1 B2
-      R0 R1 R2
-      F01 G01 F12 G12
-      s r)
-  ≡ @Prof_comp_transf
-      (Op_cat B0) (Op_cat B1) (Op_cat B2)
-      (Op_cat A0) (Op_cat A1) (Op_cat A2)
-      (@Op_prof A0 B0 R0)
-      (@Op_prof A1 B1 R1)
-      (@Op_prof A2 B2 R2)
-      (@Op_func B0 B1 G01)
-      (@Op_func A0 A1 F01)
-      (@Op_func B1 B2 G12)
-      (@Op_func A1 A2 F12)
-      (@Op_prof_transf
-        A2 A1 B2 B1
-        R1 R2 F12 G12
-        s)
-      (@Op_prof_transf
-        A1 A0 B1 B0
-        R0 R1 F01 G01
-        r);
+  [A B : Cat]
+  [P Q R : τ (Prof A B)]
+  (s : τ (ProfMap Q R))
+  (r : τ (ProfMap P Q)) ⊢
+  @comp_fapp0
+    (@Prof_cat (Op_cat B) (Op_cat A))
+    (@Op_prof A B P)
+    (@Op_prof A B Q)
+    (@Op_prof A B R)
+    (@Op_prof_map A B Q R s)
+    (@Op_prof_map A B P Q r)
+  ≡ @Op_prof_map
+      A B P R
+      (@comp_fapp0
+        (@Prof_cat A B)
+        P Q R
+        s r);
 
 assert [A0 A1 A2 B0 B1 B2 : Cat]
   [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]

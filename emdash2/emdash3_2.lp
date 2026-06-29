@@ -8760,6 +8760,36 @@ symbol Op_prof [A B : Cat]
     (@Product_swap_func B (Op_cat A));
 
 /*
+  Fixed-endpoint opposite profunctor functor.
+
+  This is the fixed vertical action of object-level profunctor duality.
+  Identity and composition are inherited from the generic functor calculus.
+*/
+symbol Op_prof_func [A B : Cat]
+  : τ (Functor
+      (@Prof_cat A B)
+      (@Prof_cat (Op_cat B) (Op_cat A)))
+≔ @Pullback_catd_func
+    (Product_cat B (Op_cat A))
+    (Product_cat (Op_cat A) B)
+    (@Product_swap_func B (Op_cat A));
+
+symbol Op_prof_map
+  [A B : Cat]
+  [P Q : τ (Prof A B)]
+  (r : τ (ProfMap P Q))
+  : τ (@ProfMap
+      (Op_cat B)
+      (Op_cat A)
+      (@Op_prof A B P)
+      (@Op_prof A B Q))
+≔ @fapp1_fapp0
+    (@Prof_cat A B)
+    (@Prof_cat (Op_cat B) (Op_cat A))
+    (@Op_prof_func A B)
+    P Q r;
+
+/*
   Profunctor reindexing.
 
   Surface/formula:
@@ -8785,6 +8815,24 @@ symbol Prof_reindex [A A' B B' : Cat]
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   : τ (Catd (Product_cat (Op_cat A') B'));
+
+// lhs-audit: keep 1,2,3,4 -- opposite endpoint shape is the discriminator
+// for the normalized opposite/reindex bridge.
+rule @Prof_reindex
+      (Op_cat $B) (Op_cat $B')
+      (Op_cat $A) (Op_cat $A')
+      (@Pullback_catd
+        (Product_cat $B (Op_cat $A))
+        (Product_cat (Op_cat $A) $B)
+        $R
+        (@Product_swap_func $B (Op_cat $A)))
+      (@Op_func $B' $B $G)
+      (@Op_func $A' $A $F)
+  ↪ @Pullback_catd
+      (Product_cat $B' (Op_cat $A'))
+      (Product_cat (Op_cat $A') $B')
+      (@Prof_reindex $A $A' $B $B' $R $F $G)
+      (@Product_swap_func $B' (Op_cat $A'));
 
 // Object/fibre projection of profunctor reindexing.
 rule @fapp0
@@ -9721,21 +9769,13 @@ with @Prof_comp_transf
   ↪ $s;
 
 /*
-  Duality for profunctor equipment cells.
+  Endpoint-changing opposite cell as a transparent compatibility view.
 
-  A cell R' -> R over F : A' -> A and G : B' -> B dualizes to:
-
-    Op_prof(R') -> Op_prof(R)
-
-  over Op_func(G) on the first endpoint and Op_func(F) on the second. Since
-  object-level `Op_prof` swaps bases without oppositing fibres, cell direction
-  and composition order are preserved.
-
-  This remains a stable primitive head. A direct fold from the hom action of
-  `Pullback_catd_func(Product_swap_func)` through endpoint reindexing caused a
-  typecheck loop in the focused probe and is deliberately deferred.
+  The fixed-endpoint action is owned by `Op_prof_func`; the target conversion
+  uses the normalized opposite/reindex bridge above. No identity/composition
+  rule is owned by this compatibility name.
 */
-injective symbol Op_prof_transf
+symbol Op_prof_transf
   [A A' B B' : Cat]
   [R' : τ (Catd (Product_cat (Op_cat A') B'))]
   [R : τ (Catd (Product_cat (Op_cat A) B))]
@@ -9749,62 +9789,14 @@ injective symbol Op_prof_transf
         (@Op_prof A' B' R')
         (@Op_func B' B G)
         (@Op_prof A B R)
-        (@Op_func A' A F)));
-
-rule @Op_prof_transf
-      (Op_cat $B) (Op_cat $B')
-      (Op_cat $A) (Op_cat $A')
-      (@Op_prof $A' $B' $R')
-      (@Op_prof $A $B $R)
-      (@Op_func $B' $B $G)
-      (@Op_func $A' $A $F)
-      (@Op_prof_transf
-        $A $A' $B $B'
-        $R' $R $F $G
-        $r)
-  ↪ $r;
-
-rule @Op_prof_transf
-      $A $A $B $B
-      $R $R
-      (@id_func $A)
-      (@id_func $B)
-      (@Prof_id_transf $A $B $R)
-  ↪ @Prof_id_transf
-      (Op_cat $B)
-      (Op_cat $A)
-      (@Op_prof $A $B $R);
-
-rule @Op_prof_transf
-      $A2 $A0 $B2 $B0
-      $R0 $R2
-      (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
-      (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01)
-      (@Prof_comp_transf
-        $A0 $A1 $A2
-        $B0 $B1 $B2
-        $R0 $R1 $R2
-        $F01 $G01
-        $F12 $G12
-        $s $r)
-  ↪ @Prof_comp_transf
-      (Op_cat $B0) (Op_cat $B1) (Op_cat $B2)
-      (Op_cat $A0) (Op_cat $A1) (Op_cat $A2)
-      (@Op_prof $A0 $B0 $R0)
-      (@Op_prof $A1 $B1 $R1)
-      (@Op_prof $A2 $B2 $R2)
-      (@Op_func $B0 $B1 $G01)
-      (@Op_func $A0 $A1 $F01)
-      (@Op_func $B1 $B2 $G12)
-      (@Op_func $A1 $A2 $F12)
-      (@Op_prof_transf
-        $A2 $A1 $B2 $B1
-        $R1 $R2 $F12 $G12
-        $s)
-      (@Op_prof_transf
-        $A1 $A0 $B1 $B0
-        $R0 $R1 $F01 $G01
-        $r);
+        (@Op_func A' A F)))
+≔ @fapp1_fapp0
+    (@Prof_cat A' B')
+    (@Prof_cat (Op_cat B') (Op_cat A'))
+    (@Op_prof_func A' B')
+    R'
+    (@Prof_reindex A A' B B' R F G)
+    r;
 
 /*
   Primitive tensor/composition of Cat-valued profunctors.

@@ -10,9 +10,9 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
 Status: join, shaped co-Yoneda, and fixed-endpoint tensor-map prerequisite
-slices landed; final opposite/tensor endpoint-changing architecture decision
-recorded; `Prof_comp_transf` targeted for eventual removal but not yet safe
-to demote wholesale
+slices landed; opposite fixed-functor/bridge/demotion slice landed;
+`Prof_comp_transf` targeted for eventual removal but not yet safe to demote
+wholesale
 
 ## Purpose
 
@@ -274,10 +274,9 @@ Concrete first implementation decision:
 
 5. Retire generic `Prof_comp_transf` last.
 
-   Generic equipment checks, `Op_prof_transf` compatibility, and any
-   remaining endpoint-changing public wrappers are not blockers for the join
-   migration. They are blockers only for wholesale deletion of the generic
-   composition head.
+   Generic equipment checks and any remaining endpoint-changing public wrappers
+   are not blockers for the join migration. They are blockers only for
+   wholesale deletion of the generic composition head.
 
 Residual decisions are probe-local rather than architectural:
 
@@ -443,26 +442,28 @@ can be made transparent:
 Prof_id_transf(A,B,R) := id_funcd(Prof_base(A,B),R).
 ```
 
-That change is not ready to promote. In the active diagnostics, the existing
-duality identity rule:
+That change was not ready to promote at this checkpoint. At the time, the
+active diagnostics included the existing duality identity rule:
 
 ```text
 Op_prof_transf(Prof_id_transf(R)) -> Prof_id_transf(Op_prof(R))
 ```
 
-depends on the stable `Prof_id_transf` head. Once the head unfolds to
-`id_funcd`, the old rule no longer recognizes the identity case. The same
-issue is expected for the `Prof_comp_transf` left/right identity rules, which
-also discriminate on `Prof_id_transf`.
+which depended on the stable `Prof_id_transf` head. Once the head unfolded to
+`id_funcd`, the old rule no longer recognized the identity case. The
+2026-06-29 opposite-duality slice later removed this `Op_prof_transf`
+dependency by demoting `Op_prof_transf` to a transparent fixed-functor view.
+The same issue remains for the `Prof_comp_transf` left/right identity rules,
+which still discriminate on `Prof_id_transf`.
 
 Conclusion:
 
 - keep `Prof_id_transf` as a stable identity equipment head for now;
 - do not treat it as the final architecture;
 - migrate it only in a separate identity-normal-form pass that adds and probes
-  coherent `id_funcd` sibling rules for `Op_prof_transf` and
-  `Prof_comp_transf`, or after those equipment heads have been demoted enough
-  that the stable identity discriminator is no longer needed.
+  coherent `id_funcd` sibling rules for remaining `Prof_comp_transf`
+  consumers, or after those equipment heads have been demoted enough that the
+  stable identity discriminator is no longer needed.
 
 ## Final Architecture Decision, 2026-06-29, Opposite And Endpoint-Changing Cells
 
@@ -517,12 +518,12 @@ rules.
 
 ### Endpoint-Changing `Op_prof_transf`
 
-The current `Op_prof_transf` is too broad as a primitive. It combines:
+The former primitive `Op_prof_transf` was too broad. It combined:
 
 1. fixed-endpoint action of opposite on vertical profunctor maps;
 2. compatibility between opposite and endpoint reindexing.
 
-A focused probe established the feasible replacement stack:
+A focused probe established the replacement stack:
 
 ```text
 Op_prof_func(A',B') on the input cell
@@ -537,7 +538,7 @@ Prof_reindex(Op_prof(R), Op_func(G), Op_func(F))
 ```
 
 Because `Op_prof` is a transparent pullback alias, the kernel-visible promoted
-rule is expected to be the normalized pullback-by-swap form:
+rule is the normalized pullback-by-swap form:
 
 ```text
 Prof_reindex(
@@ -551,22 +552,21 @@ Pullback_catd(
 
 This is a focused compatibility bridge between two standard presentations of
 the same base substitution. It is not a new general equipment composition
-rule. It should be probed at the owning position with warning-enabled checking
-before promotion, and documented as the single owner of opposite/reindex
+rule. It was probed at the owning position with warning-enabled checking
+before promotion and is documented as the single owner of opposite/reindex
 commutation.
 
-After that bridge exists, endpoint-changing opposite cells should be exposed
-as a transparent compatibility view:
+With that bridge, endpoint-changing opposite cells are exposed as a transparent
+compatibility view:
 
 ```text
 Op_prof_transf(r)
   := fapp1_fapp0(Op_prof_func(A',B'), r)
 ```
 
-with the target type converted through the bridge above. The current
+with the target type converted through the bridge above. The former
 primitive/injective `Op_prof_transf` and its direct involution, identity, and
-composition rules should then be retired or demoted. Diagnostics should move
-to:
+composition rules have been retired/demoted. Diagnostics moved to:
 
 - fixed `Op_prof_func` object/map checks;
 - the narrow reindex/swap bridge;
@@ -618,16 +618,66 @@ specializations are needed. Therefore:
 
 ### Identity And Generic Composition
 
-`Prof_id_transf` remains a stable head only because current
-`Op_prof_transf` and `Prof_comp_transf` rules discriminate on it. The final
-direction is still to let `id_funcd` own vertical identity once the
-endpoint-changing equipment heads are demoted or have coherent `id_funcd`
-normal-form sibling rules.
+`Prof_id_transf` remains a stable head because current `Prof_comp_transf`
+rules and remaining co-Yoneda compatibility consumers still discriminate on
+it. The final direction is still to let `id_funcd` own vertical identity once
+the remaining endpoint-changing equipment heads are demoted or have coherent
+`id_funcd` normal-form sibling rules.
 
 `Prof_comp_transf` should not be replaced by a renamed composition primitive.
 Any derived endpoint-changing compatibility view must specify the exact fixed
 operation, the exact `Prof_reindex_transf` step, and the exact vertical
 composition/postcomposition owner it uses.
+
+## Implementation Checkpoint, 2026-06-29, Opposite Fixed Functor And Bridge
+
+The opposite-duality slice has been promoted.
+
+Implemented in `emdash3_2.lp`:
+
+- `Op_prof_func(A,B)` is now the fixed-endpoint functor
+  `Prof_cat(A,B) -> Prof_cat(Op B,Op A)`, defined through
+  `Pullback_catd_func(Product_swap_func(B,Op A))`.
+- `Op_prof_map(r)` is a transparent readability alias for the generic
+  `fapp1_fapp0(Op_prof_func(A,B),r)` action.
+- the normalized opposite/reindex bridge is active at the `Prof_reindex`
+  owner:
+
+  ```text
+  Prof_reindex(Op_prof(R),Op_func(G),Op_func(F))
+    -> Op_prof(Prof_reindex(R,F,G)).
+  ```
+
+  The promoted LHS uses the kernel-visible pullback-by-swap shape because
+  `Op_prof` is transparent.
+
+- `Op_prof_transf` is no longer an injective primitive and no longer owns
+  involution, identity, or composition rewrite rules. It is a transparent
+  endpoint-changing compatibility view through `Op_prof_func` plus the bridge.
+
+Diagnostics in `emdash3_2_checks.lp` were migrated accordingly:
+
+- fixed object action of `Op_prof_func`;
+- fixed type of `Op_prof_map`;
+- opposite/reindex bridge conversion;
+- endpoint-changing view type for `Op_prof_transf`;
+- fixed-functor identity and composition checks for `Op_prof_map`.
+
+Validation:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled active summary after this slice reports 1,390 warnings:
+1,215 unjoinable critical-pair reports and 175 replaceable-pattern reports.
+The new bridge accounts for a visible `Prof_reindex` overlap family at the
+bridge owner, but the overall warning count is lower than the previous 1,415
+inventory because the direct `Op_prof_transf` primitive rewrite rules were
+removed.
 
 ## Current Remaining Consumers
 
@@ -669,6 +719,8 @@ Current declarations:
 
 ```text
 Op_prof
+Op_prof_func
+Op_prof_map
 Op_prof_transf
 ```
 
@@ -676,33 +728,27 @@ Current role:
 
 - `Op_prof` is already a transparent pullback-by-swap definition on
   profunctor objects;
-- `Op_prof_transf` is a primitive/injective endpoint-changing compatibility
-  head;
-- direct rules on `Op_prof_transf` currently own involution, identity, and
-  composition checks, and they still discriminate on `Prof_id_transf` and
-  `Prof_comp_transf`.
+- `Op_prof_func` owns the fixed-endpoint vertical action of opposite;
+- `Op_prof_map` is a transparent readability alias for the generic action of
+  `Op_prof_func`;
+- the opposite/reindex bridge converts the endpoint-changing target;
+- `Op_prof_transf` is a transparent endpoint-changing compatibility view, not
+  a primitive/injective rewrite owner.
 
 Target role:
 
-- keep `Op_prof` defined through pullback by `Product_swap_func`;
-- add the fixed-endpoint functor `Op_prof_func(A,B)` as the owner of
-  vertical opposite action;
-- optionally expose `Op_prof_map(r)` as a transparent readability alias for
-  `fapp1_fapp0(Op_prof_func(A,B),r)`;
-- add exactly one opposite/reindex compatibility bridge, oriented from
-  `Prof_reindex(Op_prof(R),Op_func(G),Op_func(F))` to
-  `Op_prof(Prof_reindex(R,F,G))`, using the kernel-visible normalized
-  pullback-by-swap head;
-- demote or retire the current primitive `Op_prof_transf` after diagnostics
-  migrate to the fixed functor, the bridge, and any transparent
-  endpoint-changing view that remains.
+- keep this fixed-functor/bridge presentation;
+- do not reintroduce direct identity, composition, or involution rewrite rules
+  for `Op_prof_transf`;
+- add further opposite diagnostics only at the fixed functor, bridge, or
+  transparent view boundary.
 
 Deletion status:
 
 - `Op_prof` should remain as a defined object-level operation;
-- `Op_prof_transf` is not final architecture, but should not be deleted until
-  the fixed functor, bridge, identity checks, and composition checks have
-  active replacements.
+- `Op_prof_transf` has already been demoted from primitive to transparent
+  compatibility view; deleting even the view is not necessary for this
+  migration.
 
 ### Tensor And Co-Yoneda
 
@@ -2393,22 +2439,17 @@ High feasibility:
   join-recursion slices as the join runtime owners;
 - keeping the already-landed fixed-endpoint `Prof_tensor_map` as the tensor
   vertical map owner;
-- adding `Op_prof_func(A,B)` as a fixed-endpoint functor
+- keeping the already-landed `Op_prof_func(A,B)` as a fixed-endpoint functor
   `Prof_cat(A,B) -> Prof_cat(Op B,Op A)`, because a focused source probe showed
   that the existing `Pullback_catd_func(Product_swap_func(B,Op A))` presentation
   makes the object action compute to `Op_prof(R)`;
-- adding `Op_prof_map(r)` as a transparent readability alias through
-  `fapp1_fapp0(Op_prof_func(A,B),r)`, if diagnostics benefit from the name.
+- keeping `Op_prof_map(r)` as a transparent readability alias through
+  `fapp1_fapp0(Op_prof_func(A,B),r)`;
+- keeping `Op_prof_transf` as a transparent endpoint-changing view rather than
+  a primitive rewrite owner.
 
 Medium feasibility:
 
-- promoting the opposite/reindex bridge. A focused source probe and a
-  warning-enabled probe passed for the normalized pullback-by-swap rule, but
-  promotion still needs the active-file warning delta, diagnostics migration,
-  and owner-position documentation.
-- replacing the current primitive `Op_prof_transf` by a transparent
-  endpoint-changing compatibility view. This is feasible after the bridge, but
-  it must migrate the existing involution, identity, and composition checks.
 - migrating endpoint-changing public co-Yoneda names to fixed-endpoint maps,
   identity-middle tensor naturality, or comparisons without reintroducing broad
   equipment composition.
@@ -2436,9 +2477,9 @@ Medium risk:
   general associativity, identity, or equipment-composition rewrite rules for
   it.
 - retiring `Prof_id_transf` into `id_funcd` is blocked by stable-head
-  identity rules for the current `Op_prof_transf` and `Prof_comp_transf`
-  surfaces. It should move only after those surfaces are demoted, or after
-  coherent `id_funcd` sibling rules are probed.
+  identity rules for the current `Prof_comp_transf` surface and remaining
+  compatibility consumers. It should move only after those surfaces are
+  demoted, or after coherent `id_funcd` sibling rules are probed.
 - retiring `Prof_tensor_transf` is blocked by the remaining identity-middle
   co-Yoneda naturality consumers. A full endpoint-changing tensor wrapper also
   needs middle-change/coend compatibility and is outside this migration.
@@ -2502,7 +2543,8 @@ Known non-goals:
    warning-enabled check. Migrate diagnostics from the primitive
    `Op_prof_transf` rules to the fixed functor, the bridge, and a transparent
    endpoint-changing view. Only then demote or retire the current
-   `Op_prof_transf` primitive/rules.
+   `Op_prof_transf` primitive/rules. This first pass is complete:
+   `Op_prof_transf` is now a transparent view and no direct rules remain.
 
 7. Identity-middle co-Yoneda naturality.
 
@@ -2518,8 +2560,8 @@ Known non-goals:
 
 9. `Prof_id_transf` normal-form pass.
 
-   Retry the transparent `id_funcd` migration only after `Op_prof_transf` and
-   enough `Prof_comp_transf` consumers have been demoted, or after coherent
+   Retry the transparent `id_funcd` migration only after enough
+   `Prof_comp_transf` consumers have been demoted, or after coherent
    `id_funcd` sibling rules have passed focused probes.
 
 10. Generic `Prof_comp_transf` retirement.
@@ -2561,8 +2603,8 @@ make catalog
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, and independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint naturality plus hom-action cut-elimination owners replace it. |
-| `EQUIP-OP-DUALITY` | decision complete after probe | next implementation pass | Keep `Op_prof` defined by pullback/swap; add fixed-endpoint `Op_prof_func`, optional transparent `Op_prof_map`, and one normalized opposite/reindex bridge; then demote or retire primitive `Op_prof_transf` after diagnostics migrate. |
+| `EQUIP-OP-DUALITY` | complete first pass | active implementation | `Op_prof` remains defined by pullback/swap; fixed-endpoint `Op_prof_func`, transparent `Op_prof_map`, and the normalized opposite/reindex bridge are active; primitive `Op_prof_transf` has been demoted to a transparent endpoint-changing view with diagnostics migrated to fixed-functor/bridge checks. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
-| `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded, but active diagnostics need stable-head identity rules for `Op_prof_transf` and likely `Prof_comp_transf`; migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
+| `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
