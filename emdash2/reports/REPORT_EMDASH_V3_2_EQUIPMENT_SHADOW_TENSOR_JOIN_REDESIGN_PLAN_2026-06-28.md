@@ -9,8 +9,9 @@ Supersedes: no whole report; refines the remaining equipment-cell route for tens
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
-Status: first join implementation slice landed; `Prof_comp_transf` targeted
-for eventual removal but not yet safe to demote wholesale
+Status: join and shaped co-Yoneda first implementation slices landed;
+`Prof_comp_transf` targeted for eventual removal but not yet safe to demote
+wholesale
 
 ## Purpose
 
@@ -339,6 +340,48 @@ contains no entries headed by `Prof_cell_apply`, `Prof_cell_eval`, or
 generic equipment/duality compatibility families, not in the removed
 join-specific rules.
 
+## Implementation Checkpoint, 2026-06-29, Shaped Co-Yoneda
+
+The first tensor/co-Yoneda implementation slice has landed for shaped-element
+beta only.
+
+Implemented:
+
+- `Prof_coyoneda_cov_map(P)` was added as a transparent fixed-endpoint alias
+  for `Prof_coyoneda_unit_tensor_cov_transf(Prof_id_transf(P),id_B)`.
+- `Prof_coyoneda_con_map(P)` was added as a transparent fixed-endpoint alias
+  for `Prof_coyoneda_unit_tensor_con_transf(Prof_id_transf(P),id_A)`.
+- The right and left shaped co-Yoneda beta rules now reduce under
+  `Prof_cell_apply(CoyR/CoyL, Prof_tensor_hom_hom(...))`.
+- The two shaped co-Yoneda beta rules headed by `Prof_comp_transf` were
+  removed.
+- Diagnostics now cover the fixed one-way map aliases and the new
+  `Prof_cell_apply` shaped beta normal forms.
+
+Deliberately not implemented in this slice:
+
+- no `ProfComparison` owner for co-Yoneda;
+- no generalized co-Yoneda-along-a-functor beta;
+- no replacement yet for the general-cell identity-unit naturality pair using
+  `Prof_tensor_hom_transf` / `Prof_tensor_transf_hom`;
+- no generic `Prof_comp_transf` demotion or deletion.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_coyoneda_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+EMDASH_TYPECHECK_TIMEOUT=60s make ci
+```
+
+The warning-enabled check succeeded with 1,415 warnings, down two from the
+join checkpoint. The warning log contains no entries headed by
+`Prof_cell_apply`, `Prof_cell_eval`, `Prof_coyoneda_cov_map`,
+`Prof_coyoneda_con_map`, or `join_elim_cross_transf`.
+
 ## Current Remaining Consumers
 
 After the first join implementation slice, the active source still has these
@@ -385,7 +428,8 @@ Prof_tensor_hom_transf
 Prof_tensor_transf_hom
 Prof_coyoneda_unit_tensor_cov_transf
 Prof_coyoneda_unit_tensor_con_transf
-co-Yoneda beta rules headed by Prof_comp_transf
+general-cell co-Yoneda naturality rules headed by Prof_comp_transf
+shaped co-Yoneda beta rules headed by Prof_cell_apply
 ```
 
 Current role:
@@ -393,10 +437,14 @@ Current role:
 - `Prof_tensor` is an opaque coend-like profunctor composite;
 - tensor introductions package either general equipment cells, shaped
   elements, or both;
-- co-Yoneda beta rules cancel a tensor introduction against a named
-  co-Yoneda unit map in the identity-representable case.
+- fixed one-way co-Yoneda map aliases expose the identity-endpoint maps;
+- shaped co-Yoneda beta rules cancel a tensor-introduced shaped element
+  through `Prof_cell_apply`;
+- the remaining general-cell identity-unit naturality rules still cancel a
+  tensor-introduced general cell under `Prof_comp_transf` as temporary
+  compatibility.
 
-The four active co-Yoneda beta rules split into two different arities:
+The co-Yoneda beta/naturality rules split into two different arities:
 
 ```text
 shaped-element beta:
@@ -432,11 +480,11 @@ Target role:
 
 Deletion status:
 
-- current `Prof_comp_transf` beta rules are real active consumers;
+- the shaped co-Yoneda pair no longer consumes `Prof_comp_transf`;
+- the general-cell identity-unit naturality pair remains a real active
+  `Prof_comp_transf` consumer;
 - do not delete the general-cell identity-unit naturality pair as
   mathematically unnecessary;
-- replace the shaped pair after fixed-endpoint co-Yoneda owners and
-  `Prof_cell_apply` exist;
 - replace or demote the general-cell pair only after a fixed-endpoint
   postcomposition/naturality owner exists.
 
@@ -2164,6 +2212,6 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | implementation-specified first pass | future implementation probe | Use `Prof_func_hom(M)` as the canonical unit-shaped identity, add fixed-endpoint one-way co-Yoneda map aliases, express arbitrary-`pp` shaped beta via `Prof_cell_apply`, preserve general-cell identity-unit naturality as temporary compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it, and keep endpoint-changing `CoyR`/`CoyL` names as wrappers. |
+| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active and arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until fixed-endpoint map/naturality plus hom-action cut-elimination owners replace it. |
 | `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join and tensor/co-Yoneda no longer consume it. |

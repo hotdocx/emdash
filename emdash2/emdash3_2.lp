@@ -9966,6 +9966,35 @@ constant symbol Prof_coyoneda_unit_tensor_con_transf
         P'
         G));
 
+// Fixed-endpoint one-way co-Yoneda maps.
+symbol Prof_coyoneda_cov_map [A B : Cat]
+  (P : τ (Prof A B))
+  : τ (ProfMap
+      (@Prof_tensor A B B P (@Unit_prof B))
+      P)
+≔ @Prof_coyoneda_unit_tensor_cov_transf
+    A B A B
+    P P
+    (@id_func A)
+    (@id_func B)
+    (@Prof_id_transf A B P)
+    B
+    (@id_func B);
+
+symbol Prof_coyoneda_con_map [A B : Cat]
+  (P : τ (Prof A B))
+  : τ (ProfMap
+      (@Prof_tensor A A B (@Unit_prof A) P)
+      P)
+≔ @Prof_coyoneda_unit_tensor_con_transf
+    A B A B
+    P P
+    (@id_func A)
+    (@id_func B)
+    (@Prof_id_transf A B P)
+    A
+    (@id_func A);
+
 // Right-unit co-Yoneda cancellation on a tensor-introduced general cell.
 rule @Prof_comp_transf
       $A0 $A $A'
@@ -10019,13 +10048,8 @@ rule @Prof_comp_transf
       $pp $qq;
 
 // Right-unit co-Yoneda cancellation on a tensor-introduced shaped element.
-rule @Prof_comp_transf
-      $B $A $A'
-      $B $B $B
-      (@Hom_prof_along
-        $B $B $B
-        (@id_func $B)
-        (@id_func $B))
+rule @Prof_cell_apply
+      $B $A $B $A' $B
       (@Prof_tensor
         $A $B $B
         $P
@@ -10034,9 +10058,9 @@ rule @Prof_comp_transf
           (@id_func $B)
           (@id_func $B)))
       $P'
-      $H
-      (@id_func $B)
       $F
+      (@id_func $B)
+      $H
       (@id_func $B)
       (@Prof_coyoneda_unit_tensor_cov_transf
         $A $B $A' $B
@@ -10063,17 +10087,12 @@ rule @Prof_comp_transf
             $B $B $B
             (@id_func $B)
             (@id_func $B))))
-  ↪ @Prof_comp_transf
-      $B $A $A'
-      $B $B $B
-      (@Hom_prof_along
-        $B $B $B
-        (@id_func $B)
-        (@id_func $B))
+  ↪ @Prof_cell_apply
+      $B $A $B $A' $B
       $P $P'
-      $H
-      (@id_func $B)
       $F
+      (@id_func $B)
+      $H
       (@id_func $B)
       $pp $p;
 
@@ -10131,13 +10150,8 @@ rule @Prof_comp_transf
       $pp $qq;
 
 // Left-unit co-Yoneda cancellation on a tensor-introduced shaped element.
-rule @Prof_comp_transf
-      $A $A $A
-      $A $B $B'
-      (@Hom_prof_along
-        $A $A $A
-        (@id_func $A)
-        (@id_func $A))
+rule @Prof_cell_apply
+      $A $A $B $A $B'
       (@Prof_tensor
         $A $A $B
         (@Hom_prof_along
@@ -10147,9 +10161,9 @@ rule @Prof_comp_transf
         $P)
       $P'
       (@id_func $A)
-      $K
-      (@id_func $A)
       $G
+      (@id_func $A)
+      $K
       (@Prof_coyoneda_unit_tensor_con_transf
         $A $B $A $B'
         $P $P'
@@ -10175,18 +10189,13 @@ rule @Prof_comp_transf
             (@id_func $A)
             (@id_func $A)))
         $p)
-  ↪ @Prof_comp_transf
-      $A $A $A
-      $A $B $B'
-      (@Hom_prof_along
-        $A $A $A
-        (@id_func $A)
-        (@id_func $A))
+  ↪ @Prof_cell_apply
+      $A $A $B $A $B'
       $P $P'
       (@id_func $A)
-      $K
-      (@id_func $A)
       $G
+      (@id_func $A)
+      $K
       $pp $p;
 
 /*

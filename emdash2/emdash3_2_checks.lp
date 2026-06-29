@@ -6695,6 +6695,44 @@ assert [A B A' B' I : Cat]
         P'
         G));
 
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
+  @Prof_coyoneda_cov_map A B P
+  : τ (ProfMap
+      (@Prof_tensor A B B P (@Unit_prof B))
+      P);
+
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
+  @Prof_coyoneda_cov_map A B P
+  ≡ @Prof_coyoneda_unit_tensor_cov_transf
+      A B A B
+      P P
+      (@id_func A)
+      (@id_func B)
+      (@Prof_id_transf A B P)
+      B
+      (@id_func B);
+
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
+  @Prof_coyoneda_con_map A B P
+  : τ (ProfMap
+      (@Prof_tensor A A B (@Unit_prof A) P)
+      P);
+
+assert [A B : Cat]
+  (P : τ (Prof A B)) ⊢
+  @Prof_coyoneda_con_map A B P
+  ≡ @Prof_coyoneda_unit_tensor_con_transf
+      A B A B
+      P P
+      (@id_func A)
+      (@id_func B)
+      (@Prof_id_transf A B P)
+      A
+      (@id_func A);
+
 // General equipment-cell reindexing and composition.
 assert [A B C D : Cat]
   (F : τ (Functor A B))
@@ -7285,17 +7323,15 @@ assert [A A' B : Cat]
   (p : τ (@Prof_hom B A B H P (@id_func B)))
   (pp : τ (Obj
     (@Prof_transf_cat A' A B B P F P' (@id_func B)))) ⊢
-  @Prof_comp_transf
-    B A A'
-    B B B
-    (@Hom_prof_along B B B (@id_func B) (@id_func B))
+  @Prof_cell_apply
+    B A B A' B
     (@Prof_tensor
       A B B P
       (@Hom_prof_along B B B (@id_func B) (@id_func B)))
     P'
-    H
-    (@id_func B)
     F
+    (@id_func B)
+    H
     (@id_func B)
     (@Prof_coyoneda_unit_tensor_cov_transf
       A B A' B
@@ -7316,14 +7352,12 @@ assert [A A' B : Cat]
       (@Prof_id_transf
         B B
         (@Hom_prof_along B B B (@id_func B) (@id_func B))))
-  ≡ @Prof_comp_transf
-      B A A'
-      B B B
-      (@Hom_prof_along B B B (@id_func B) (@id_func B))
+  ≡ @Prof_cell_apply
+      B A B A' B
       P P'
-      H
-      (@id_func B)
       F
+      (@id_func B)
+      H
       (@id_func B)
       pp p;
 
@@ -7407,19 +7441,17 @@ assert [A B B' : Cat]
   (p : τ (@Prof_hom A A B (@id_func A) P K))
   (pp : τ (Obj
     (@Prof_transf_cat A A B' B P (@id_func A) P' G))) ⊢
-  @Prof_comp_transf
-    A A A
-    A B B'
-    (@Hom_prof_along A A A (@id_func A) (@id_func A))
+  @Prof_cell_apply
+    A A B A B'
     (@Prof_tensor
       A A B
       (@Hom_prof_along A A A (@id_func A) (@id_func A))
       P)
     P'
     (@id_func A)
-    K
-    (@id_func A)
     G
+    (@id_func A)
+    K
     (@Prof_coyoneda_unit_tensor_con_transf
       A B A B'
       P P'
@@ -7439,15 +7471,13 @@ assert [A B B' : Cat]
         A A
         (@Hom_prof_along A A A (@id_func A) (@id_func A)))
       p)
-  ≡ @Prof_comp_transf
-      A A A
-      A B B'
-      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+  ≡ @Prof_cell_apply
+      A A B A B'
       P P'
       (@id_func A)
-      K
-      (@id_func A)
       G
+      (@id_func A)
+      K
       pp p;
 
 // Covariant profunctor implication and eval/lambda calculus.
