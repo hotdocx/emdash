@@ -1342,11 +1342,24 @@ Tensor should eventually have a fixed-base bifunctor:
 
 ```text
 Prof_tensor_func(A,B,X)
-  : Prof_cat(A,B) x Prof_cat(B,X) -> Prof_cat(A,X)
+  : Functor(
+      Product_cat(Prof_cat A B, Prof_cat B X),
+      Prof_cat A X)
 ```
 
-Its object action computes to `Prof_tensor(P,Q)`. Identity/composition should
-come from the global functor calculus once this exists.
+Its object and capped-arrow actions should compute to:
+
+```text
+fapp0(Prof_tensor_func(A,B,X), (P,Q))
+  -> Prof_tensor(A,B,X,P,Q)
+
+fapp1_fapp0(Prof_tensor_func(A,B,X), (r,s))
+  -> Prof_tensor_map(r,s).
+```
+
+This is the proposed unified fixed-endpoint owner for tensor functoriality.
+Identity/composition should then come from the global functor calculus once
+this exists.
 
 Expected fixed-endpoint map action:
 
@@ -1359,6 +1372,42 @@ Prof_tensor_map(r,s) : ProfMap(P tensor Q, P' tensor Q')
 
 If the implementation internalizes this as a functor, the local identity and
 composition laws should be inherited from the generic `fapp*` calculus.
+
+The current unit tensor functors:
+
+```text
+Prof_tensor_right_unit_func(A,B)
+  : Functor(Prof_cat A B, Prof_cat A B)
+
+Prof_tensor_left_unit_func(A,B)
+  : Functor(Prof_cat A B, Prof_cat A B)
+```
+
+are the source functors of the fixed co-Yoneda transformations. A later
+`Prof_tensor_func` cleanup can make them derived uniformly by pairing with the
+unit profunctor:
+
+```text
+Prof_tensor_right_unit_pair_func(A,B)
+  : P |-> (P, Unit_prof(B))
+
+Prof_tensor_right_unit_func(A,B)
+  := Prof_tensor_func(A,B,B)
+       . Prof_tensor_right_unit_pair_func(A,B)
+
+Prof_tensor_left_unit_pair_func(A,B)
+  : P |-> (Unit_prof(A), P)
+
+Prof_tensor_left_unit_func(A,B)
+  := Prof_tensor_func(A,A,B)
+       . Prof_tensor_left_unit_pair_func(A,B).
+```
+
+This `Prof_tensor_func` route is about reducing duplicated primitive surface in
+the types of `Prof_coyoneda_cov_transf` and `Prof_coyoneda_con_transf`. It is
+not the same proposal as the separate, deferred unit-intro maps discussed
+below. Probe it separately because product-valued functor packaging and
+projection ladders are rewrite-sensitive.
 
 Level 3: endpoint-changing wrappers.
 
@@ -1393,88 +1442,50 @@ heads or by the narrow cell-application/evaluation layer, not by generic
 
 ### Co-Yoneda API
 
-The current co-Yoneda maps are endpoint-changing:
+The fixed-endpoint co-Yoneda transformations are the current semantic owners:
+
+```text
+Prof_coyoneda_cov_transf(A,B)
+  : Transf(
+      Prof_tensor_right_unit_func(A,B),
+      id_func(Prof_cat A B))
+
+Prof_coyoneda_con_transf(A,B)
+  : Transf(
+      Prof_tensor_left_unit_func(A,B),
+      id_func(Prof_cat A B)).
+```
+
+Their components are the one-way co-Yoneda maps:
+
+```text
+Prof_coyoneda_cov_map(P)
+  : ProfMap(Prof_tensor(P, Unit_prof(B)), P)
+
+Prof_coyoneda_con_map(P)
+  : ProfMap(Prof_tensor(Unit_prof(A), P), P).
+```
+
+In kernel spelling these maps are components of the transformations:
+
+```text
+Prof_coyoneda_cov_map(P)
+  := tapp0_fapp0(Prof_coyoneda_cov_transf(A,B), P)
+
+Prof_coyoneda_con_map(P)
+  := tapp0_fapp0(Prof_coyoneda_con_transf(A,B), P).
+```
+
+The older endpoint-changing names:
 
 ```text
 Prof_coyoneda_unit_tensor_cov_transf(pp,N)
 Prof_coyoneda_unit_tensor_con_transf(pp,M)
 ```
 
-In this section, write:
-
-```text
-CoyR(pp,N) := Prof_coyoneda_unit_tensor_cov_transf(pp,N)
-CoyL(pp,M) := Prof_coyoneda_unit_tensor_con_transf(pp,M)
-```
-
-as mathematical aliases for the existing endpoint-changing symbols. These are
-not proposed new primitives.
-
-The fixed-endpoint co-Yoneda maps are the first one-way target owners. Use
-these names in the first implementation pass:
-
-```text
-Prof_coyoneda_cov_map(P)
-  : ProfMap(
-      Prof_tensor(P, Unit_prof(B)),
-      P)
-
-Prof_coyoneda_con_map(P)
-  : ProfMap(
-      Prof_tensor(Unit_prof(A), P),
-      P)
-```
-
-Ordinary mathematical notation:
-
-```text
-epsilon^R_P : P tensor_B Unit_B -> P
-epsilon^L_P : Unit_A tensor_A P -> P
-```
-
-where the canonical rewrite-facing unit is:
-
-```text
-Unit_B = Unit_prof(B) = Hom_prof_along(id_B,id_B).
-```
-
-These fixed maps are the special cases:
-
-```text
-epsilon^R_P := CoyR(id_P,id_B)
-epsilon^L_P := CoyL(id_P,id_A).
-```
-
-In kernel spelling these may be transparent aliases of the existing
-endpoint-changing names at `pp = Prof_id_transf` and identity endpoint functor:
-
-```text
-Prof_coyoneda_cov_map(P)
-  := Prof_coyoneda_unit_tensor_cov_transf(
-       Prof_id_transf(A,B,P), id_B)
-
-Prof_coyoneda_con_map(P)
-  := Prof_coyoneda_unit_tensor_con_transf(
-       Prof_id_transf(A,B,P), id_A).
-```
-
-The first co-Yoneda migration should use these one-way maps, not a comparison.
-If inverse directions, arbitrary-map beta/eta, or ordinary inverse evidence are
-later needed, introduce an explicit comparison rather than a pair of unrelated
-maps:
-
-```text
-Prof_coyoneda_cov_comparison(P)
-  : ProfComparison(..., Prof_tensor(P, Unit_prof), P)
-
-Prof_coyoneda_con_comparison(P)
-  : ProfComparison(..., Prof_tensor(Unit_prof, P), P)
-```
-
-A `DefIso`/`ProfComparison` owner is preferred when downstream code needs
-arbitrary-map beta/eta. A plain map is enough only when the consumer needs a
-single reduction direction. The first shaped co-Yoneda migration needs only the
-single reduction direction.
+remain temporary compatibility surfaces. New core computation should be stated
+through the fixed transformations and their `tapp0_fapp0`/`tapp1_fapp0`
+projections, not through those endpoint-changing names.
 
 ### Unit-Shaped Identity Elements
 
@@ -1482,132 +1493,162 @@ The identity input for co-Yoneda tensor beta is not a new mathematical object.
 The canonical shaped identity element of the unit profunctor is the existing:
 
 ```text
-eta_M := Prof_func_hom(M)
+Prof_func_hom(M)
   : Prof_hom(I,B,B,M,Unit_prof(B),M).
 ```
 
-Semantically, for an arrow `u : i -> j` in the shape `I`, this element is
-`M[u] : M[i] -> M[j]`. It is the shaped version of the identity element in
-`Hom_B(Mi,Mi)`, with the correct action over `I`.
+This is not merely a collection of identity arrows at objects of `I`.
+`Prof_hom(I,A,B,F,P,G)` is indexed over `Unit_prof(I)`, so it already contains
+the action over arrows of `I`. Semantically, for an arrow `u : i -> j`, the
+right-unit element above carries `M[u] : M[i] -> M[j]`.
 
-A readability alias may be added if it makes the implementation clearer, but
-it must be transparent:
+A readability alias may be added if useful, but it must be transparent:
 
 ```text
 Unit_prof_id_hom(M) := Prof_func_hom(M).
 ```
 
 For endpoint-changing co-Yoneda along a functor `G : B -> B'`, the corresponding
-identity element in the represented hom profunctor is:
+identity element in the represented hom profunctor may be documented as:
 
 ```text
 eta_{G,M}
-  : Prof_hom(I,B,B,M,Hom_prof_along(G,G),M).
+  : Prof_hom(I,B,B,M,Hom_prof_along(G,G),M)
 ```
 
-Semantically this is `id_{G(Mi)}` with arrow action `G[M[u]]`. After
-representable reindexing, it is the same role as:
-
-```text
-Prof_func_hom(G . M)
-  : Prof_hom(I,B',B',G . M,Unit_prof(B'),G . M).
-```
-
-The exact implementation may use a transparent alias such as:
-
-```text
-Hom_prof_along_id_hom(G,M) := Prof_func_hom(G . M)
-```
-
-provided a focused probe confirms the expected conversion. It should not be a
-new primitive with independent computation rules.
+morally obtained from `Prof_func_hom(G . M)` after representable reindexing.
+This belongs to a later generalized co-Yoneda-along-a-functor pass and should
+not be introduced as an independent primitive in the identity-unit cleanup.
 
 ### Co-Yoneda Beta Target
 
-The current beta shape is:
+The core right-unit beta is:
+
+```text
+p : Prof_hom(I,A,B,F,P,M)
+
+Prof_cell_apply(
+  Prof_coyoneda_cov_map(P),
+  Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
+-> p.
+```
+
+Pointwise this represents the usual formula:
+
+```text
+epsilon^R_P(p,f) = P(id,f)(p)
+```
+
+but at the `Prof_hom` level the action by `f` is already packaged inside the
+shaped element `p`. Therefore the RHS is just `p`.
+
+The core left-unit beta is:
+
+```text
+p : Prof_hom(I,A,B,F,P,G)
+
+Prof_cell_apply(
+  Prof_coyoneda_con_map(P),
+  Prof_tensor_hom_hom(F,Prof_func_hom(F),p))
+-> p.
+```
+
+For arbitrary fixed-endpoint:
+
+```text
+pp : ProfMap(P,P')
+```
+
+the generic naturality component is already internalized as:
+
+```text
+tapp1_fapp0(Prof_coyoneda_cov_transf(A,B), pp)
+  : ProfMap(Prof_tensor(P,Unit_prof(B)), P')
+```
+
+and dually for `Prof_coyoneda_con_transf`. Because `Prof_cell_apply` does not
+currently have a generic accumulation rule through `tapp1_fapp0`, the next
+computational target should include the derived fusion beta:
+
+```text
+Prof_cell_apply(
+  tapp1_fapp0(Prof_coyoneda_cov_transf(A,B), pp),
+  Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
+-> Prof_cell_apply(pp,p)
+```
+
+and dually:
+
+```text
+Prof_cell_apply(
+  tapp1_fapp0(Prof_coyoneda_con_transf(A,B), pp),
+  Prof_tensor_hom_hom(F,Prof_func_hom(F),p))
+-> Prof_cell_apply(pp,p).
+```
+
+These arbitrary-`pp` fusion rules are not new mathematics. They are
+cut-elimination rules for the already-internalized naturality of
+`Prof_coyoneda_*_transf` combined with the direct beta.
+
+The current old presentation:
 
 ```text
 Prof_comp_transf(
   Prof_coyoneda_unit_tensor_cov_transf(pp,id),
   Prof_tensor_hom_transf(id,qq,Prof_id_hom))
--> Prof_comp_transf(pp,qq).
+-> Prof_comp_transf(pp,qq)
 ```
 
-The first replacement should use the one-way map/cell owner and
-`Prof_cell_apply`, preserving the current arbitrary-`pp` generality of the
-shaped rules.
+is therefore compatibility scaffolding for a broader general-cell arity. The
+core shaped owner is `Prof_cell_apply`, not `Prof_comp_transf`.
 
-Right shaped beta:
+There is no separate `I tensor I` shape: `Prof_tensor_hom_hom` composes two
+shaped elements over the same shape `I` and the same middle probe `M`. The
+shape is a context category, not a tensor factor.
+
+### Deferred Unit Intro And Tensor Intro Extensions
+
+Possible unit-intro maps:
 
 ```text
-pp : ProfCell(P,F,P',id_B)
-p  : Prof_hom(I,A,B,H,P,M)
-eta_M := Prof_func_hom(M)
+Prof_tensor_right_unit_intro_map(P)
+  : ProfMap(P, Prof_tensor(P,Unit_prof(B)))
 
+Prof_tensor_left_unit_intro_map(P)
+  : ProfMap(P, Prof_tensor(Unit_prof(A),P))
+```
+
+are separate from the `Prof_tensor_func` proposal above. They may be useful
+later as unitor/section data, possibly via `DefIso` or `ProfComparison`, but
+they are not required for the immediate core beta. A full inverse/eta law would
+be stronger than the current exposed tensor theory and may require tensor
+extensionality or coend-like structure.
+
+Likewise, one-shaped-side intro cells such as:
+
+```text
+Prof_tensor_right_hom_intro_transf(M,s)
+Prof_tensor_left_hom_intro_transf(M,r)
+```
+
+may help later to demote `Prof_tensor_hom_transf` and
+`Prof_tensor_transf_hom`, but the identity-unit cleanup should use
+`Prof_tensor_hom_hom` directly.
+
+A general tensor-map intro beta is also deferred:
+
+```text
 Prof_cell_apply(
-  CoyR(pp,id_B),
-  Prof_tensor_hom_hom(M,p,eta_M))
--> Prof_cell_apply(pp,p).
+  Prof_tensor_map(r,s),
+  Prof_tensor_hom_hom(M,p,q))
+-> Prof_tensor_hom_hom(
+     M,
+     Prof_cell_apply(r,p),
+     Prof_cell_apply(s,q)).
 ```
 
-The fixed right beta is the special case `pp = id_P`, `F = id_A`:
-
-```text
-p     : Prof_hom(I,A,B,H,P,M)
-eta_M : Prof_hom(I,B,B,M,Unit_prof(B),M)
-
-Prof_cell_apply(
-  epsilon^R_P,
-  Prof_tensor_hom_hom(M,p,eta_M))
--> p.
-```
-
-Left shaped beta:
-
-```text
-pp : ProfCell(P,id_A,P',G)
-p  : Prof_hom(I,A,B,H,P,K)
-eta_H := Prof_func_hom(H)
-
-Prof_cell_apply(
-  CoyL(pp,id_A),
-  Prof_tensor_hom_hom(H,eta_H,p))
--> Prof_cell_apply(pp,p).
-```
-
-The fixed left beta is the special case `pp = id_P`, `G = id_B`:
-
-```text
-p     : Prof_hom(I,A,B,H,P,K)
-eta_H : Prof_hom(I,A,A,H,Unit_prof(A),H)
-
-Prof_cell_apply(
-  epsilon^L_P,
-  Prof_tensor_hom_hom(H,eta_H,p))
--> p.
-```
-
-In kernel terms, the first pass should reduce through the rule owner:
-
-```text
-Prof_cell_apply(CoyR/CoyL, Prof_tensor_hom_hom(...))
-```
-
-not through `Prof_comp_transf`. A later `ProfComparison` variant may use
-`prof_comparison_push/pull` or direct `hom_postcomp_fapp0` accumulation when
-reverse beta/eta or arbitrary incoming-map cancellation becomes a concrete
-consumer.
-
-The ordinary pointwise formula for the right map remains:
-
-```text
-epsilon^R_P([x,u]) = P(1,u)(x)
-```
-
-The beta rule above is its identity/hom-action shaped specialization. There is
-no separate `I tensor I` shape: `Prof_tensor_hom_hom` composes two shaped
-elements over the same shape `I` and the same middle probe `M`. The shape is a
-context category, not a tensor factor.
+This is useful tensor-intro functoriality, but broader than the right/left unit
+co-Yoneda cleanup.
 
 ### General-Cell Identity-Unit Naturality
 
@@ -1828,8 +1869,10 @@ Is the consumer fixed-endpoint after reindexing?
 ```
 
 If yes, use `Prof_reindex` to put the target in a fixed endpoint and apply the
-fixed co-Yoneda owner: one-way map first, `ProfComparison` only when a reverse
-or arbitrary-map consumer actually requires it.
+fixed co-Yoneda owner: component map for the direct beta,
+`tapp1_fapp0(Prof_coyoneda_*_transf, pp)` for arbitrary fixed-endpoint `pp`,
+and `ProfComparison` only when a reverse/eta or inverse-evidence consumer
+actually requires it.
 
 If no, the task is not merely "general co-Yoneda"; it is a real
 endpoint-changing naturality theorem. That theorem may deserve a narrow
@@ -1838,7 +1881,8 @@ public wrapper, but it should still be derived from:
 - `Prof_reindex`;
 - fixed-endpoint `ProfMap`;
 - fixed-endpoint tensor functoriality;
-- the co-Yoneda comparison;
+- the fixed co-Yoneda transformation, and only later a comparison if reverse
+  or eta data is needed;
 - generic functor/transfor action.
 
 ### Tensor/Co-Yoneda Migration Phases
@@ -1860,15 +1904,15 @@ public wrapper, but it should still be derived from:
    `Unit_prof_id_hom(M)` or `Hom_prof_along_id_hom(G,M)` independent
    primitives.
 
-3. Add first-pass one-way co-Yoneda owner names.
+3. Keep first-pass fixed co-Yoneda owner names.
 
-   Start with map/cell owners, not `ProfComparison`. Add
-   `Prof_coyoneda_cov_map(P)` and `Prof_coyoneda_con_map(P)` as transparent
-   fixed-endpoint aliases of the existing endpoint-changing co-Yoneda names at
-   `pp = Prof_id_transf` and identity endpoint functor. Keep
+   Start with map/cell owners, not `ProfComparison`.
+   `Prof_coyoneda_cov_map(P)` and `Prof_coyoneda_con_map(P)` are components of
+   `Prof_coyoneda_cov_transf` and `Prof_coyoneda_con_transf`, not aliases of
+   the older endpoint-changing names. Keep
    `Prof_coyoneda_unit_tensor_cov_transf` and
-   `Prof_coyoneda_unit_tensor_con_transf` as the arbitrary-`pp` cell owners for
-   the first shaped beta migration.
+   `Prof_coyoneda_unit_tensor_con_transf` only as temporary compatibility
+   surfaces while shaped beta checks migrate to fixed owners.
 
    Do not add `Prof_coyoneda_*_comparison` in the first pass. Add a comparison
    later only when a concrete consumer needs reverse beta/eta or ordinary
@@ -1885,21 +1929,38 @@ public wrapper, but it should still be derived from:
 5. Replace shaped co-Yoneda beta checks first.
 
    The checks should mention `Prof_cell_apply` on shaped inputs, not direct
-   `Prof_comp_transf` cancellation. Preserve arbitrary `pp`:
+   `Prof_comp_transf` cancellation. Use the fixed co-Yoneda maps for the core
+   beta:
 
    ```text
    Prof_cell_apply(
-     CoyR(pp,id_B),
+     Prof_coyoneda_cov_map(P),
+     Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
+   -> p
+
+   Prof_cell_apply(
+     Prof_coyoneda_con_map(P),
+     Prof_tensor_hom_hom(H,Prof_func_hom(H),p))
+   -> p.
+   ```
+
+   Preserve arbitrary fixed-endpoint `pp` through `tapp1_fapp0`, not through the
+   old endpoint-changing `CoyR/CoyL` surfaces:
+
+   ```text
+   Prof_cell_apply(
+     tapp1_fapp0(Prof_coyoneda_cov_transf(A,B), pp),
      Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
    -> Prof_cell_apply(pp,p)
 
    Prof_cell_apply(
-     CoyL(pp,id_A),
+     tapp1_fapp0(Prof_coyoneda_con_transf(A,B), pp),
      Prof_tensor_hom_hom(H,Prof_func_hom(H),p))
    -> Prof_cell_apply(pp,p).
    ```
 
-   The fixed `epsilon` beta checks are special cases of these rules.
+   These arbitrary-`pp` rules are derived cut-elimination/fusion rules for
+   fixed co-Yoneda naturality plus the direct beta, not new semantic principles.
 
 6. Preserve the general-cell identity-unit naturality checks as compatibility.
 
@@ -2603,14 +2664,17 @@ Known non-goals:
 4. Tensor/co-Yoneda.
 
    Confirm `Prof_func_hom(M)` as the canonical unit-shaped identity element,
-   add fixed-endpoint one-way co-Yoneda map aliases, then migrate diagnostics
-   for tensor-introduced shaped elements to `Prof_cell_apply`. Do not add
-   co-Yoneda `ProfComparison` owners in the first pass. Preserve the
-   general-cell identity-unit naturality rules as temporary compatibility until
-   fixed-endpoint tensor/co-Yoneda naturality owners replace them. The first
-   internal naturality-owner pass is complete: fixed unit tensor functors and
-   fixed co-Yoneda transformations are active, and naturality is represented by
-   generic `tapp1_fapp0` rather than external commuting-square rewrites.
+   keep fixed-endpoint one-way co-Yoneda maps as components of
+   `Prof_coyoneda_*_transf`, then migrate diagnostics for tensor-introduced
+   shaped elements to `Prof_cell_apply`. Do not add co-Yoneda `ProfComparison`
+   owners in the first pass. Preserve the general-cell identity-unit naturality
+   rules as temporary compatibility until fixed-endpoint tensor/co-Yoneda
+   naturality owners replace them. The first internal naturality-owner pass is
+   complete: fixed unit tensor functors and fixed co-Yoneda transformations are
+   active, and naturality is represented by generic `tapp1_fapp0` rather than
+   external commuting-square rewrites. The next tensor/co-Yoneda implementation
+   target is direct fixed-map beta plus arbitrary-`pp` `tapp1_fapp0` fusion
+   under `Prof_cell_apply`.
 
 5. Fixed tensor map.
 
@@ -2632,13 +2696,13 @@ Known non-goals:
 7. Identity-middle co-Yoneda naturality.
 
    Replace the remaining `Prof_comp_transf` co-Yoneda identity-unit naturality
-   pair through fixed-endpoint co-Yoneda maps, `Prof_tensor_map`, and a narrow
-   fixed vertical composition/postcomposition owner. Do not introduce a general
+   pair through fixed-endpoint co-Yoneda maps, `tapp1_fapp0` fusion,
+   `Prof_tensor_map`, and later, if a general incoming-cell consumer remains,
+   an already-owned hom-action/postcomposition path. Do not introduce a general
    middle-change tensor wrapper in this pass. After the internal naturality
    owner pass, do not add a direct square rewrite for this pair; route the next
-   compatibility migration through the internal co-Yoneda transformations,
-   fixed unit tensor functors, and an already-owned hom-action/postcomposition
-   path.
+   compatibility migration through the internal co-Yoneda transformations and
+   fixed unit tensor functors.
 
 8. `Prof_func_transf` audit.
 
@@ -2689,7 +2753,7 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | partial first pass complete | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda map aliases are active, arbitrary-`pp` shaped beta is expressed via `Prof_cell_apply`, independent fixed-endpoint `Prof_tensor_map` is available as a prerequisite, and fixed co-Yoneda naturality is now internalized through unit tensor functors plus `Prof_coyoneda_*_transf`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility until it can be routed through those internal transformations and an already-owned hom-action/postcomposition path. |
+| `EQUIP-TENSOR-COYONEDA` | partial first pass complete; next target clarified | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Next replace old shaped `CoyR/CoyL` beta surfaces by direct `Prof_coyoneda_*_map` beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility. |
 | `EQUIP-OP-DUALITY` | stable primitive owner landed | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
