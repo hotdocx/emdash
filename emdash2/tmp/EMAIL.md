@@ -1,4 +1,4 @@
-I would like to announce a new v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with strict/lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Došen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
+I would like to announce an expanded v3.2 draft of **emdash**, a Lambdapi formalization and prototype proof assistant aimed at functorial programming with strict/lax higher ω-categorical structure (fully internalized and computational, in the style of Kosta Došen's cut-elimination techniques). I believe it points to a high-stakes research programme at the intersection of dependent type theory and category theory, potentially on a scale comparable to homotopy type theory:
 
 https://github.com/hotdocx/emdash/blob/main/docs/emdash3_2.pdf
 https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp
@@ -28,8 +28,6 @@ This is also what organizes arrows in Sigma totals:
 Hom_{ΣE}((x,u),(y,v))
   = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
 ```
-
-The same normalization-first architecture drives this simplicial ω-iteration and also covers product/curry structure, computational adjunctions, structural operations such as weakening/symmetry/contraction, and vertical/horizontal composition, whiskering, interchange, and stacking of higher cells; sheaves and schemes are feasible too.
 
 The motivating example is the familiar shape of path induction in dependent type theory. For a category `Z` and an object `x : Z`, replace paths out of `x` by the outgoing-arrow category, i.e. the coslice/undercategory
 
@@ -63,6 +61,18 @@ with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary compo
 Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 ```
 
+In the current kernel the runtime owner for this reduction is the hom-action cut
+
+```
+hom_postcomp_fapp0(id_Z,q,p),
+```
+
+while the ordinary composition presentation remains available as the typed proof-time view
+
+```
+comp_fapp0(q,p).
+```
+
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
 
 ```
@@ -87,4 +97,21 @@ is itself a displayed construction over the moving source object `x`. Its transp
 
 sending `s` to `b ↦ s(r^*(b))`.
 
-This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.
+The expanded draft now also contains checked slices of a larger profunctor calculus. A Cat-valued profunctor is represented as
+
+```
+Prof(A,B) = A^op × B ⊢ Cat.
+```
+
+The kernel includes representables `Hom_prof_along(F,G)`, reindexing, shaped profunctor cells, a symbolic tensor `Prof_tensor`, fixed tensor action `Prof_tensor_func`, co-Yoneda maps, and covariant/contravariant internal homs with eval/lambda cancellation. Weighted limits are expressed as profunctor representability:
+
+```
+WeightedLimit_cov(F,W,L)
+  = ProfComparison(Prof_imply_cov(Hom_prof(F),W), Hom_prof(L)).
+```
+
+With that interface, right adjoints preserve weighted limits by composing three checked profunctor comparisons: inverse adjunction mate, reindexing of the given limit comparison along the left adjoint, and the mate at the candidate limit. The dual theorem that left adjoints preserve weighted colimits is obtained by opposite normalization, not by duplicating the proof. There is also a primitive directed-inductive join category with two inclusions and one internally natural cross cell.
+
+The supporting MathOps/DevOps layer has grown as well: the repository now has a check catalog, warning summaries, health reports, rewrite-LHS audits, and an "Infinity Codex" final-response archive used only as recovery evidence after interruptions or context compaction.
+
+This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, now connected to a checked profunctor, tensor, weighted-limit, duality, and join calculus in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.

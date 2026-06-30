@@ -1,6 +1,7 @@
 # EMDASH v3.2 Research Article Architecture
 
 Date: 2026-06-05
+Last updated: 2026-07-01
 
 Plan-ID: EMDASH-V3-2-RESEARCH-ARTICLE-2026-06-05
 Depends-On: EMDASH-V3-2-INDEX-READABILITY-2026-06-06, EMDASH-V3-2-NOTATION-REORG-2026-06-05
@@ -9,10 +10,12 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: preliminary article design for a new v3.2 paper. This report is based
-on the current `emdash3_2.lp`, `emdash3_2_checks.lp`, the active v3.2 SOP and
-foundations reports, the canonical syntax report, and the older v2 paper
-sources in `print/public/index.md` and `print/public/index_0.md`.
+Status: active article architecture for the long v3.2 paper workbench. The
+original 2026-06-05 design centered the article on synthetic arrow induction
+and computational composition. The 2026-07-01 update keeps that as the opening
+reader-facing theorem, then extends the article to cover the now-active
+profunctor, tensor/internal-hom, weighted-limit, duality, join-category,
+DefIso/comparison, and MathOps/Infinity-Codex developments.
 
 ## Goal
 
@@ -38,6 +41,146 @@ The leading reader promise should be:
 > computational theorem in Lambdapi. The theorem is expressed using shaped
 > functor categories and displayed transformations, and its most visible
 > regression is that directed transitivity/composition computes by normalization.
+
+## 2026-07-01 Expansion Plan
+
+### Review Findings
+
+Since the first `print/public/index_3_2.md` draft, the active kernel and
+diagnostics have moved well beyond the initial PathOut theorem.
+
+Implemented and checked developments that should now enter the long article:
+
+- Cat-valued profunctors:
+  `Prof_cat(A,B) = Catd_cat(A^op × B)`, `ProfMap`, representables
+  `Hom_prof_along(F,G)`, endpoint reindexing by `Prof_reindex`, and the
+  internal right-representable embedding `Hom_prof_func`.
+- Tensor/co-Yoneda/internal-hom calculus:
+  symbolic `Prof_tensor`, fixed tensor functor `Prof_tensor_func`, fixed
+  vertical tensor map `Prof_tensor_map`, shaped composition
+  `Prof_tensor_hom_hom`, fixed co-Yoneda transformations
+  `Prof_coyoneda_cov_transf`/`Prof_coyoneda_con_transf`, and the covariant and
+  contravariant implication/eval/lambda cores `Prof_imply_*`,
+  `Prof_eval_*_map`, and `Prof_lambda_*_map`.
+- Weighted limits as representability:
+  `WeightedCone_prof`, ordinary `IsWeightedLimit_cov_iso`, computational
+  `IsWeightedLimit_cov_comp`/`WeightedLimit_cov`, arbitrary-probe
+  `weighted_limit_cov_push/pull`, and selected universal/cone maps.
+- Adjunction preservation:
+  `Adjunction_hom_prof_comparison`, transparent mate views
+  `Adjunction_prof_transpose/untranspose`,
+  `right_adjoint_preserves_weighted_limit_cov_comp`, its ordinary evidence
+  projection, and the public `right_adjoint_preserves_weighted_limit_cov`
+  alias.
+- Duality:
+  stable semantic `Op_prof`/`Op_prof_func`, opposite adjunctions,
+  `WeightedColimit_con`, `Op_weighted_limit_cov`,
+  `Op_weighted_colimit_con`, and
+  `left_adjoint_preserves_weighted_colimit_con` by applying the right-adjoint
+  theorem to `Op_adjunction`.
+- Directed-inductive stress test:
+  primitive `Join_cat(A,B)`, inclusions, internally natural
+  `join_cross_transf`, shaped `join_cross_hom`, and `join_elim_func` with
+  inclusion and cross-cell beta computation.
+- Evidence and comparison infrastructure:
+  the groupoid/equality/univalence staging, stable `DefIso`, and the
+  migration of public `ProfComparison` compatibility through DefIso and the
+  hom-action owners.
+- MathOps/DevOps:
+  active report index, health/check catalog generation, rewrite-LHS audit,
+  warning summaries, examples, and the Infinity Codex final-response archive
+  and compaction-recovery hooks.
+
+The most important architectural correction for the paper is the
+runtime/proof-time boundary around hom-action and composition heads:
+
+```text
+hom_postcomp_* / hom_precomp_along_* / hom_postcomp_fapp0
+  runtime cut-elimination and reusable hom-action owners
+
+comp_fapp0 / comp_cat_fapp0 / comp_catd_fapp0
+  ordinary composition heads, proof-time comparison surfaces, and generic
+  functor/category composition normal forms
+```
+
+The article should explain that some Cat-specialized heads are retained only
+when they expose Cat-only transfor projections such as `tapp0_fapp0`,
+`tapp1_func`, or `tapp1_fapp0`. It should not present Cat/Catd
+specializations as a license to duplicate ordinary functoriality.
+
+### Revised Article Strategy
+
+Keep `print/public/index_3_2.md` as the long article workbench. Do not promote
+it to `index.md` or derive a short `index_0.md` in this pass.
+
+The revised article should have two arcs:
+
+1. **Readable theorem arc.** Sections 1-9 continue to introduce directed
+   families, dependent homs, Sigma/Pi, PathOut, synthetic arrow induction, and
+   the composition benchmark.
+2. **Broader calculus arc.** New sections after the normalization-method
+   discussion introduce Cat-valued profunctors, tensor/co-Yoneda/internal hom,
+   weighted limits and adjoint preservation, duality, primitive join, DefIso
+   and univalence staging, and the artifact/MathOps story.
+
+This ordering is deliberate. The PathOut theorem remains the first complete
+computation a reader can understand. The profunctor material then shows that
+the same normalization discipline scales to a larger fragment of categorical
+programming.
+
+### Planned Article Edits
+
+1. Update the title/subtitle, abstract, and contribution list so they mention
+   the profunctor-weighted-limit layer, dual colimits, join category, DefIso,
+   and MathOps without burying the PathOut theorem.
+2. Keep Sections 2-9 largely intact, but adjust the checked-computation prose
+   to mention that the latest transitivity diagnostics use
+   `hom_postcomp_fapp0(id,q,p)` as the runtime normal form while retaining a
+   typed proof-time view against ordinary `comp_fapp0(q,p)`.
+3. Replace the old one-section "Supporting Examples, Limitations, And Future
+   Work" with a longer sequence:
+
+   ```text
+   10. Cat-valued profunctors and representables
+   11. Tensor, co-Yoneda, and internal hom
+   12. Weighted limits, adjunctions, and duality
+   13. Directed-inductive join categories
+   14. Equality, DefIso, and normalization boundaries
+   15. Formal artifact and validation
+   16. Conclusion
+   ```
+
+4. Add checked-normal-form summaries for:
+   `Hom_prof_along`, `Prof_reindex`, `Prof_tensor_func`,
+   `Prof_coyoneda_*`, `Prof_imply_*`, `WeightedLimit_cov`,
+   `right_adjoint_preserves_weighted_limit_cov`, dual weighted colimits,
+   `Join_cat`, `Op_prof`, and `DefIso`/`ProfComparison`.
+5. Expand the identifier glossary with the new public names, but keep long
+   expanded terms in prose or appendices rather than in the narrative.
+6. Update limitations conservatively:
+   no general coend/coinserter semantics for `Prof_tensor`; no semantic
+   collage implementation for `Join_cat`; no generic dependent join
+   eliminator; no complete bicategory/equipment coherence; no full weak
+   omega-category semantics; Cat/Grpd univalence is a staged computational
+   interface, not a completed semantics of all categories.
+7. Update `tmp/EMAIL.md` in the same announcement style. It should still open
+   with the directed dependent-hom/path-induction pitch, then say that the new
+   draft also contains the checked profunctor, weighted-limit, duality, and
+   join developments.
+
+### Validation Plan
+
+For this documentation-only pass:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+npm run validate:paper
+npm run check:render
+```
+
+Run `make catalog` or `make health` only if the check catalog or health report
+is edited or if validation reveals a stale generated artifact. No Lambdapi
+source edits are planned in this pass.
 
 ## Print Pipeline Facts
 
@@ -239,11 +382,15 @@ The article should show both checked routes:
 - through the primary telescope theorem `PathInd_transfd`;
 - through the derived Sigma-total theorem `PathInd_funcd`.
 
-Both routes should end in the same ordinary categorical normal form:
+Both routes should end in the same runtime hom-action normal form:
 
 ```text
-comp_fapp0 Z x y z q p.
+hom_postcomp_fapp0 Z Z (id_func Z) x y z q p.
 ```
+
+The article should also mention the typed ordinary-composition view
+`comp_fapp0 Z x y z q p`, but only as the proof-time comparison surface, not
+as the current runtime owner of the benchmark.
 
 ### 6. Syntax And Expressibility
 
