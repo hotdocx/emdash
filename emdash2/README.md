@@ -103,9 +103,11 @@ does the same when Codex starts a compacted context; a `PostCompact` marker plus
 the next `UserPromptSubmit` provides a one-shot fallback when compaction happens
 inside an already-running session. Because Codex does not accept added
 developer context from `PostCompact`, that hook also emits a visible
-`systemMessage` warning with the marker and archive index. Recovery context
-lists both the latest final for the current session and the latest final
-globally, plus any pending post-compaction markers from other sessions.
+`systemMessage` warning with the marker, archive index, and expected logical ID
+when available. `PostCompact` can only emit that visible warning; it cannot add
+model-visible `additionalContext`. Recovery context lists both the latest final
+for the current session and the latest final globally, plus commands for the
+last few finals and any pending post-compaction markers from other sessions.
 
 After cloning or changing the hook definition, restart Codex and use `/hooks`
 to review and trust it. The hook is deliberately independent of Codex
@@ -120,15 +122,19 @@ Useful maintenance commands:
 
 ```bash
 python3 scripts/infinity_codex.py latest-id
+python3 scripts/infinity_codex.py latest-path
+python3 scripts/infinity_codex.py list --limit 5
 python3 scripts/infinity_codex.py verify
 python3 scripts/infinity_codex.py reindex
 python3 scripts/infinity_codex.py prune --before 2026-01-01 --dry-run
 ```
 
 If no recovery pointers are visible after resume or compaction, inspect the
-archive directly with `latest-id`, `list`, or `show`, and check
-`tmp/ai-responses/events.jsonl` for hook lifecycle metadata. The event audit
-does not contain prompt text or final-response text.
+archive directly with `list --limit 5`, `latest-path`, `latest-id`, or `show`,
+and check `tmp/ai-responses/events.jsonl` for hook lifecycle metadata. If the
+`PostCompact` warning names an expected logical ID, the corresponding response
+file may appear only after the turn stops and the `Stop` hook archives it. The
+event audit does not contain prompt text or final-response text.
 
 Deletion requires replacing `--dry-run` with `--apply`. The archive is local
 only; back it up separately if machine-level durability is required.

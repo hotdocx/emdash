@@ -743,13 +743,14 @@ The hook archives only completed main-agent final responses under ignored
 developer context, not archived response text. On compaction, `SessionStart`
 does the same when Codex starts a compacted context; otherwise `PostCompact`
 records a private marker and the next `UserPromptSubmit` injects the same
-pointer context once. Since Codex does not accept hook-specific developer
-context from `PostCompact`, that hook emits a `systemMessage` warning with the
-marker and archive index. Recovery context distinguishes the latest final for
-the current session from the latest final globally, and lists pending
-post-compaction markers from other sessions. Raw responses are historical
-recovery evidence and must never outrank current code, this SOP, or the active
-task plan:
+pointer context once. `PostCompact` can only emit a visible `systemMessage`;
+it cannot add model-visible `additionalContext`. Its warning therefore names
+the marker, archive index, and expected logical ID when available. Recovery
+context distinguishes the latest final for the current session from the latest
+final globally, gives `list --limit 5` / `latest-path` lookup commands, and
+lists pending post-compaction markers from other sessions. Raw responses are
+historical recovery evidence and must never outrank current code, this SOP, or
+the active task plan:
 
 ```text
 active code/SOP -> active plan and side-task ledger
@@ -758,10 +759,14 @@ active code/SOP -> active plan and side-task ledger
 
 Use `python3 scripts/infinity_codex.py verify` after manual maintenance.
 If injected pointers are not apparent in the UI, inspect
-`tmp/ai-responses/events.jsonl` and fall back to `latest-id`, `list`, or
-`show`. The event audit records lifecycle metadata only; it does not store
-prompts or final-response text. Pruning is explicit and dry-run by default.
-Codex Memories are not part of this workflow.
+`tmp/ai-responses/INDEX.md`, run `python3 scripts/infinity_codex.py list
+--limit 5`, or run `python3 scripts/infinity_codex.py latest-path`. Use
+`--session SESSION_ID` when the current session id is known. If a
+`PostCompact` warning names an expected logical ID, the response file may not
+exist until the turn stops and the `Stop` hook archives it. The event audit at
+`tmp/ai-responses/events.jsonl` records lifecycle metadata only; it does not
+store prompts or final-response text. Pruning is explicit and dry-run by
+default. Codex Memories are not part of this workflow.
 
 Reviewer-facing examples can be checked with:
 

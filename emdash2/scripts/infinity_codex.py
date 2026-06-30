@@ -2,9 +2,10 @@
 """Archive Codex final responses without model-generated summarization.
 
 The Stop hook publishes the exact UTF-8 bytes of last_assistant_message and
-immutable sidecar metadata. SessionStart emits only recovery pointers. The
-transcript_path hook field is deliberately ignored because Codex documents the
-transcript format as unstable.
+immutable sidecar metadata. SessionStart and the post-compaction
+UserPromptSubmit fallback emit only recovery pointers. The transcript_path hook
+field is deliberately ignored because Codex documents the transcript format as
+unstable.
 """
 
 from __future__ import annotations
@@ -567,6 +568,16 @@ def latest_line(root: Path, label: str, record: dict[str, Any] | None) -> str:
     )
 
 
+def shell_quote(value: str) -> str:
+    return "'" + value.replace("'", "'\"'\"'") + "'"
+
+
+def expected_logical_id(session_id: str, turn_id: str) -> str:
+    if session_id and turn_id:
+        return logical_id(session_id, turn_id)
+    return ""
+
+
 def pending_postcompact_line(root: Path, record: dict[str, Any], *, current: bool) -> str:
     session_id = str(record.get("session_id", ""))
     session_dir = find_session_dir(root, session_id) if session_id else None
@@ -580,6 +591,9 @@ def pending_postcompact_line(root: Path, record: dict[str, Any], *, current: boo
     ]
     if session_dir is not None:
         parts.append(f"archive={session_dir / 'INDEX.md'}")
+    expected = record.get("expected_logical_id")
+    if isinstance(expected, str) and expected:
+        parts.append(f"expected_logical={expected}")
     if latest is not None:
         parts.append(f"latest_final={response_path_for_record(root, latest)}")
     return " ".join(parts)
@@ -603,6 +617,19 @@ def recovery_context(root: Path, payload: dict[str, Any]) -> str:
     latest_global = latest_record(root)
     lines.append(latest_line(root, "Latest archived final for this session", latest_session))
     lines.append(latest_line(root, "Latest archived final globally", latest_global))
+    if session_id:
+        quoted_session = shell_quote(session_id)
+        lines.append(
+            "- Recent finals for this session: "
+            f"python3 scripts/infinity_codex.py list --session {quoted_session} --limit 5"
+        )
+        lines.append(
+            "- Latest final path for this session: "
+            f"python3 scripts/infinity_codex.py latest-path --session {quoted_session}"
+        )
+    lines.append(
+        "- Recent finals globally: python3 scripts/infinity_codex.py list --limit 5"
+    )
     for pending in pending_postcompact_records(root):
         pending_session = pending.get("session_id")
         lines.append(
@@ -625,20 +652,19 @@ def write_pending_postcompact(root: Path, payload: dict[str, Any]) -> bool:
         return False
     turn_id = payload.get("turn_id") if isinstance(payload.get("turn_id"), str) else ""
     trigger = payload.get("trigger") if isinstance(payload.get("trigger"), str) else ""
+    expected = expected_logical_id(session_id, turn_id)
     with archive_lock(root):
         path = pending_postcompact_path(root, session_id)
-        atomic_replace(
-            path,
-            json_bytes(
-                {
-                    "archive_format_version": ARCHIVE_FORMAT_VERSION,
-                    "captured_at": iso_utc(utc_now()),
-                    "session_id": session_id,
-                    "turn_id": turn_id,
-                    "trigger": trigger,
-                }
-            ),
-        )
+        record = {
+            "archive_format_version": ARCHIVE_FORMAT_VERSION,
+            "captured_at": iso_utc(utc_now()),
+            "session_id": session_id,
+            "turn_id": turn_id,
+            "trigger": trigger,
+        }
+        if expected:
+            record["expected_logical_id"] = expected
+        atomic_replace(path, json_bytes(record))
     return True
 
 
@@ -648,11 +674,25 @@ def postcompact_system_message(root: Path, payload: dict[str, Any]) -> str:
     turn_id = audit_field(payload, "turn_id")
     turn_label = short_identifier(turn_id) if turn_id else "unknown"
     path = pending_postcompact_path(root, session_id) if session_id else root / "state" / "postcompact"
+    expected = expected_logical_id(session_id, turn_id)
+    expected_text = (
+        f" Expected logical id after this turn stops: {expected}."
+        if expected
+        else ""
+    )
+    session_lookup = (
+        " Recent finals for this session: "
+        f"python3 scripts/infinity_codex.py list --session {shell_quote(session_id)} --limit 5."
+        if session_id
+        else ""
+    )
     return (
         "Infinity Codex recorded a post-compaction recovery marker "
         f"(trigger={trigger}, turn={turn_label}). "
-        "PostCompact cannot inject developer context directly; recovery pointers "
-        f"will be added on the next prompt/resume. Marker: {path}; archive index: {root / 'INDEX.md'}"
+        "PostCompact can only emit this visible systemMessage; it cannot add "
+        "model-visible additionalContext. SessionStart source=compact or the "
+        "next eligible UserPromptSubmit will add recovery pointers."
+        f"{expected_text}{session_lookup} Marker: {path}; archive index: {root / 'INDEX.md'}"
     )
 
 
@@ -831,6 +871,14 @@ def command_latest_id(root: Path, session_id: str | None) -> int:
     return 0
 
 
+def command_latest_path(root: Path, session_id: str | None) -> int:
+    record = latest_record(root, session_id)
+    if record is None:
+        return 1
+    print(response_path_for_record(root, record))
+    return 0
+
+
 def command_resolve(root: Path, value: str) -> int:
     print(response_path_for_record(root, resolve_record(root, value)))
     return 0
@@ -990,6 +1038,11 @@ def build_parser() -> argparse.ArgumentParser:
     latest_parser = subparsers.add_parser("latest-id", help="print the newest logical id")
     latest_parser.add_argument("--session")
 
+    latest_path_parser = subparsers.add_parser(
+        "latest-path", help="print the newest final-response path"
+    )
+    latest_path_parser.add_argument("--session")
+
     resolve_parser = subparsers.add_parser("resolve", help="resolve a logical id to a file")
     resolve_parser.add_argument("logical_id")
 
@@ -1030,6 +1083,8 @@ def main(argv: list[str] | None = None) -> int:
             return command_list(root, args.limit, args.session)
         if args.command == "latest-id":
             return command_latest_id(root, args.session)
+        if args.command == "latest-path":
+            return command_latest_path(root, args.session)
         if args.command == "resolve":
             return command_resolve(root, args.logical_id)
         if args.command == "show":

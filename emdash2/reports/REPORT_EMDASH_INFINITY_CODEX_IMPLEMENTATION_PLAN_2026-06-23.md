@@ -65,6 +65,7 @@ Provide commands:
 ```text
 infinity_codex.py list
 infinity_codex.py latest-id
+infinity_codex.py latest-path
 infinity_codex.py resolve <logical-id>
 infinity_codex.py show <logical-id>
 infinity_codex.py verify
@@ -210,3 +211,27 @@ Updated on 2026-06-28:
   header fields, including non-pending Infinity Codex provenance values.
 - `make infinity-codex-test` now covers 16 tests, including the post-compaction
   fallback path and prompt/response exclusion from the event audit.
+
+## Clarification Update: PostCompact Warning Versus Recovery Context
+
+Updated on 2026-07-01:
+
+- The `PostCompact` warning now says explicitly that this hook can only emit a
+  visible `systemMessage`; it cannot add model-visible `additionalContext`.
+- When the hook has both session and turn IDs, the warning includes the
+  expected logical ID for the final response that should be archived after the
+  turn stops. The exact response file may not exist yet when `PostCompact`
+  runs, because the `Stop` archiver can run later in the same turn.
+- Recovery context now includes concrete lookup commands for the last few
+  finals and the newest response path:
+
+```text
+python3 scripts/infinity_codex.py list --limit 5
+python3 scripts/infinity_codex.py list --session SESSION_ID --limit 5
+python3 scripts/infinity_codex.py latest-path [--session SESSION_ID]
+```
+
+- The persistent SOP in `AGENTS.md`, README, and the current v3.2 SOP now tells
+  agents resuming after compaction to inspect the archive directly when
+  injected pointers are absent, stale, or known to predate the final response
+  for the just-compacted turn.

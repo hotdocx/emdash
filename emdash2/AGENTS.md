@@ -231,18 +231,25 @@ active code/SOP -> active plan and side-task ledger
                 -> explicitly linked decision responses -> raw archive
 ```
 
-- Use `python3 scripts/infinity_codex.py list` or `latest-id` to locate recent
-  finals, and `show LOGICAL_ID` to read one exact response.
+- Use `python3 scripts/infinity_codex.py list --limit 5` to locate the last few
+  finals, `list --session SESSION_ID --limit 5` for the current session when
+  the session id is known, `latest-path [--session SESSION_ID]` for the newest
+  archived response file, and `show LOGICAL_ID` to read one exact response.
 - Plan/report metadata uses logical IDs of the form
   `infinity-codex:<session-id>:<turn-id>`; resolve them with
   `scripts/infinity_codex.py resolve`.
 - Resume and compaction hooks inject file pointers as model-visible developer
-  context, not necessarily as visible chat prose. If no pointers are apparent,
-  inspect `tmp/ai-responses/events.jsonl` for hook lifecycle status and fall
-  back to `latest-id`, `list`, or `show`. `PostCompact` itself cannot inject
-  developer context, so it emits a `systemMessage` warning and records a marker
-  consumed by the next prompt/resume; recovery pointers distinguish the latest
-  final for the current session from the latest final globally.
+  context, not necessarily as visible chat prose. After compaction, first use
+  any injected Infinity Codex recovery pointers. If no pointers are apparent or
+  they may predate the final response for the just-compacted turn, inspect
+  `tmp/ai-responses/INDEX.md`, run `python3 scripts/infinity_codex.py list
+  --limit 5`, or run `python3 scripts/infinity_codex.py latest-path` before
+  assuming conversational memory is complete. `PostCompact` itself can only
+  emit a visible `systemMessage`; it cannot add model-visible
+  `additionalContext`, so it records a marker consumed by `SessionStart
+  source=compact` or the next eligible `UserPromptSubmit`. The warning may
+  include an expected logical ID before the final-response file exists; after
+  the turn stops, resolve it with `resolve`, `latest-path`, or `list`.
 - Read only archive entries relevant to the active plan, dependency, or
   side-task trigger. Never replay the whole session archive into context.
 - Use `verify` after manual archive maintenance and `reindex` to rebuild
@@ -262,8 +269,10 @@ after an LLM context compaction, unexpected interruption, or handoff:
 2. Read the active task-specific plan/report, its side-task ledger and linked
    Infinity Codex decision-response IDs, and any user-designated
    `tmp/tmp-context-*.md` recovery file. Use injected Infinity Codex file
-   pointers when present; otherwise run `python3 scripts/infinity_codex.py
-   latest-id` or `list` to locate only relevant archived finals.
+   pointers when present. After compaction, also check the archive directly
+   when needed: run `python3 scripts/infinity_codex.py list --limit 5`,
+   `python3 scripts/infinity_codex.py latest-path`, or the same commands with
+   `--session SESSION_ID` to locate only relevant recent finals.
 3. Run `git status --short`, inspect both `git diff --cached` and `git diff`,
    and preserve the distinction between staged user-approved work and
    unstaged work.

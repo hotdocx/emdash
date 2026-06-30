@@ -165,9 +165,18 @@ class InfinityCodexTests(unittest.TestCase):
 
     def test_logical_id_resolution_show_and_latest(self) -> None:
         message = "verbatim output"
-        self.run_hook(self.stop_payload(message))
+        payload = self.stop_payload(message)
+        self.run_hook(payload)
         logical = self.run_cli("latest-id").stdout.decode().strip()
+        latest_path = Path(self.run_cli("latest-path").stdout.decode().strip())
+        latest_session_path = Path(
+            self.run_cli(
+                "latest-path", "--session", str(payload["session_id"])
+            ).stdout.decode().strip()
+        )
         resolved = Path(self.run_cli("resolve", logical).stdout.decode().strip())
+        self.assertEqual(latest_path, self.one_response())
+        self.assertEqual(latest_session_path, self.one_response())
         self.assertEqual(resolved, self.one_response())
         self.assertEqual(self.run_cli("show", logical).stdout, message.encode())
 
@@ -189,6 +198,9 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertIn("Local archive index:", context)
         self.assertIn("Latest archived final for this session:", context)
         self.assertIn("Latest archived final globally:", context)
+        self.assertIn("Recent finals for this session:", context)
+        self.assertIn("latest-path --session", context)
+        self.assertIn("Recent finals globally:", context)
         self.assertIn("Authority order:", context)
         self.assertNotIn(marker, context)
 
@@ -208,7 +220,15 @@ class InfinityCodexTests(unittest.TestCase):
         }
         compact_result = self.run_hook(compact_payload)
         self.assertIn("systemMessage", compact_result)
-        self.assertIn("post-compaction recovery marker", str(compact_result["systemMessage"]))
+        compact_message = str(compact_result["systemMessage"])
+        self.assertIn("post-compaction recovery marker", compact_message)
+        self.assertIn("visible systemMessage", compact_message)
+        self.assertIn("model-visible additionalContext", compact_message)
+        self.assertIn(
+            "infinity-codex:019ef43a-0c30-78c2-8f2e-7be96cb03a12:compact-turn",
+            compact_message,
+        )
+        self.assertIn("list --session", compact_message)
 
         prompt_payload = {
             "session_id": payload["session_id"],
@@ -228,6 +248,10 @@ class InfinityCodexTests(unittest.TestCase):
         self.assertIn("Latest archived final for this session:", context)
         self.assertIn("Latest archived final globally:", context)
         self.assertIn("Pending post-compaction marker for current session:", context)
+        self.assertIn(
+            "expected_logical=infinity-codex:019ef43a-0c30-78c2-8f2e-7be96cb03a12:compact-turn",
+            context,
+        )
         self.assertNotIn(marker, context)
         self.assertNotIn(secret_prompt, context)
         self.assertEqual(self.run_hook(prompt_payload), {"continue": True})
