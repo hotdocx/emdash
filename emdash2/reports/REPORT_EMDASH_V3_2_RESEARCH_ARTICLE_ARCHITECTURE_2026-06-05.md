@@ -182,6 +182,34 @@ Run `make catalog` or `make health` only if the check catalog or health report
 is edited or if validation reveals a stale generated artifact. No Lambdapi
 source edits are planned in this pass.
 
+### 2026-07-01 Follow-Up Coherence Review
+
+After the first expansion pass, the follow-up review re-read the active SOP,
+source/check files, foundations, canonical syntax report, current status
+report, and the latest Infinity Codex final for this session. The bounded
+baseline check still passed before further edits:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+The review found no need for Lambdapi source changes. It did identify two
+paper-level precision improvements:
+
+- `ProfMap(P,Q)` should be described as
+  `Obj(Hom_{Prof_cat(A,B)}(P,Q))`, because the kernel symbol classifies
+  vertical profunctor maps as objects of the hom-category, not as the
+  hom-category itself.
+- The PathOut appendix should not suggest that `comp_fapp0 Z x y z q p` is the
+  runtime conversion target of `path_comp_func(p)[z][q]`. The runtime target
+  is `hom_postcomp_fapp0 Z Z (id_func Z) x y z q p`; the ordinary
+  `comp_fapp0` term appears as the typed base component in the transported
+  PathOut-arrow proof-time view.
+
+The implemented follow-up is therefore documentation-only: update
+`print/public/index_3_2.md` to reflect these two distinctions, then rerun
+paper validation and the local CI gate.
+
 ## Print Pipeline Facts
 
 The current print pipeline is documented in `print/AGENTS.md`.

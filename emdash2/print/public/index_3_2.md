@@ -1013,12 +1013,13 @@ category-valued-family infrastructure used earlier:
 ```text
 Prof(A,B)     = A^op × B ⊢ Cat
 Prof_cat(A,B) = Catd_cat(Product_cat(Op_cat A) B)
-ProfMap(P,Q)  = Hom_{Prof_cat(A,B)}(P,Q).
+ProfMap(P,Q)  = Obj(Hom_{Prof_cat(A,B)}(P,Q)).
 ```
 
 Thus a profunctor is not a new external semantic primitive. It is a directed
 family over the product base $A^{\\mathrm{op}} \\times B$, and a vertical
-profunctor map is an ordinary displayed transformation in that family category.
+profunctor map is an object of the ordinary hom-category between two such
+families, equivalently a displayed transformation in that family category.
 This choice keeps identity and vertical composition owned by the existing
 `id_funcd` and `comp_catd_fapp0` calculus.
 
@@ -1667,18 +1668,22 @@ PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
   = hom_postcomp_fapp0 Z Z (id_func Z) x y z q p
 ```
 
-The typed ordinary-composition view is also checked through proof-time
-comparison surfaces:
+The typed ordinary-composition component is also checked through proof-time
+comparison surfaces. In the transported PathOut arrow, the base component is
+the ordinary composite while the endpoint remains the runtime hom-action
+normal form:
 
 ```text
-path_comp_func(p)[z][q] = comp_fapp0 Z x y z q p.
+PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
+  = (comp_fapp0 Z x y z q p,
+     id_{hom_postcomp_fapp0 Z Z (id_func Z) x y z q p})
 ```
 
 Profunctor and tensor checks:
 
 ```text
 Prof_cat(A,B) = Catd_cat(A^op × B)
-ProfMap(P,Q) = Hom_{Prof_cat(A,B)}(P,Q)
+ProfMap(P,Q) = Obj(Hom_{Prof_cat(A,B)}(P,Q))
 Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b])
 Prof_reindex(R,F,G)[a',b'] = R[F[a'],G[b']]
 
