@@ -170,11 +170,8 @@ normalization.
 - 12. Weighted Limits, Adjunctions, And Duality.
 - 13. Directed-Inductive Join Categories.
 - 14. Equality, DefIso, And Normalization Boundaries.
-- 15. Formal Artifact And Validation.
-- 16. Conclusion.
+- 15. Conclusion.
 - Appendix A. Identifier Glossary.
-- Appendix B. Selected Checked Normal Forms.
-- Appendix C. Diagram Source Notes.
 
 # 1. Introduction
 
@@ -265,9 +262,10 @@ Section 13 records the primitive directed-inductive join category. Section 14
 separates equality, `DefIso`, profunctor comparison, and the runtime/proof-time
 normalization boundary.
 
-Section 15 describes the formal artifact, validation commands, and MathOps
-supporting infrastructure. Section 16 concludes. The appendices collect kernel
-identifier correspondences and selected checked normal forms.
+Section 15 concludes. Appendix A collects kernel identifier correspondences.
+The essential artifact and validation facts are part of the computational
+method discussion in Section 9, where they support the checked-evidence
+claims rather than forming a separate implementation section.
 
 ## 1.3 What "Checked" Means
 
@@ -1046,6 +1044,17 @@ The formal artifact separates definitions from executable claims:
 `emdash3_2_checks.lp` contains the conversion assertions used as regression
 evidence.
 
+The surrounding artifact is deliberately modest. The foundations and notation
+reports explain the mathematical and surface-syntax readings; the current SOP
+records rewrite-rule hygiene and diagnostic practice; the print pipeline
+renders this article and validates embedded diagrams. The standard checks
+typecheck the active Lambdapi files under a bounded timeout, run reviewer
+examples and catalog freshness checks, lint active references and rewrite-rule
+left-hand sides, and smoke-test the paper renderer. The Infinity Codex archive
+records final-response recovery evidence after interruptions, but it is not a
+mathematical authority; active code, reports, and executable checks remain the
+evidence base.
+
 Representative checked claims:
 
 | Surface | Representative checked claim |
@@ -1508,47 +1517,7 @@ The current limitations are part of the formal claim.
 - The project is still a strict/lax computational core for higher-categorical
   programming, not a completed formalization of weak $\\omega$-categories.
 
-# 15. Formal Artifact And Validation
-
-The artifact consists of a Lambdapi development, a companion regression module,
-project reports, and a reproducible paper-rendering pipeline. The active v3.2
-sources are:
-
-- `emdash3_2.lp`: definitions, interfaces, and rewrite rules.
-- `emdash3_2_checks.lp`: executable assertions and regression checks.
-- `reports/EMDASH_FOUNDATIONS.md`: mathematician-facing foundation guide.
-- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
-  notation authority.
-- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
-  rewrite/debugging SOP and current-status ledger.
-- `reports/REPORT_EMDASH_V3_2_RESEARCH_ARTICLE_ARCHITECTURE_2026-06-05.md`:
-  article architecture and update plan.
-
-The development process also includes MathOps/DevOps checks: a generated check
-catalog, a health report, warning summaries, rewrite-LHS audits, examples, and
-the Infinity Codex final-response archive. The archive is not an authority for
-mathematics, but it is useful recovery evidence after interruption or context
-compaction; active code, SOP, and reports remain the authority.
-
-The core commands are:
-
-```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-make examples
-make ci
-make warning-summary
-npm run validate:paper
-npm run check:render
-```
-
-`make check` typechecks the active Lambdapi development and diagnostics under
-a timeout suitable for rewrite-system development. `make ci` adds examples,
-catalog freshness, script checks, stale-reference lint, whitespace checks, and
-the Infinity Codex hook tests. `npm run validate:paper` checks the Markdown
-paper sources and embedded diagram specifications, while `npm run check:render`
-builds the print renderer and runs a browser smoke test.
-
-# 16. Conclusion
+# 15. Conclusion
 
 The v3.2 development shows that directed arrow induction can be expressed as
 computational categorical structure. The foundation is a directed dependent
@@ -1660,170 +1629,3 @@ merely stated; it computes.
 | strict computational isomorphism | `DefIso C x y` |
 | profunctor comparison compatibility | `ProfComparison A B P Q` |
 | comparison push/pull | `prof_comparison_push`, `prof_comparison_pull` |
-
-# Appendix B. Selected Checked Normal Forms
-
-The article quotes checked normal forms in compact mathematical notation and
-keeps the fully expanded Lambdapi terms available as regression references.
-The following statements are covered by `emdash3_2_checks.lp`.
-
-Core PathOut and rho checks:
-
-```text
-Rep_Z(x)[y] = Hom_Z(x,y)
-PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))
-PathOut_Z(p) : PathOut_Z(y) ⊢ PathOut_Z(x)
-PathOut_transport(p)[(z,q : y → z)] = (z,q ∘ p)
-PathOut_transport(p)[(y,id_y)] = (y,p)
-Rep_Z(x)[p](id_x) = p
-rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
-pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}
-PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
-  = rho_{x,z,q ∘ p}
-```
-
-Path-induction projection checks:
-
-```text
-PathInd_func(Z,x)[E] = path_ind_func_fapp0(Z,x,E)
-PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)
-path_ind_sec(Z,x,E,u)[(y,p)] = E[rho_{x,y,p}](u)
-PathInd_transfd(Z)[x] = PathInd_func(Z,x)
-PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u)
-PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)
-PathInd_funcd(Z)[(x,E)](u) = path_ind_sec(Z,x,E,u)
-```
-
-Composition benchmark checks:
-
-```text
-CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
-CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x)
-Pi(PathOut_Z(x), CompMotive_Z(x))
-  = z :^n Z ; Rep_Z(x)[z] ⊢ CompTarget_Z(x)[z]
-
-path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u)
-path_ind_sec(CompMotive_Z(x), id_Rep_Z(x)) = path_comp_sec(x)
-CompTarget_Z(x)[p](id_Rep_Z(x)) = path_comp_func(p)
-path_comp_sec(x)[p] = path_comp_func(p)
-path_comp_func(p)[z][q] = q ∘ p
-```
-
-The two expanded routes that matter most are the primary telescope route:
-
-```text
-PathInd_transfd(Z)[x][CompMotive_Z(x)](id_Rep_Z(x))[p][z][q]
-  = hom_postcomp_fapp0 Z Z (id_func Z) x y z q p
-```
-
-and the derived Sigma-total route:
-
-```text
-PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
-  = hom_postcomp_fapp0 Z Z (id_func Z) x y z q p
-```
-
-The typed ordinary-composition component is also checked through proof-time
-comparison surfaces. In the transported PathOut arrow, the base component is
-the ordinary composite while the endpoint remains the runtime hom-action
-normal form:
-
-```text
-PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
-  = (comp_fapp0 Z x y z q p,
-     id_{hom_postcomp_fapp0 Z Z (id_func Z) x y z q p})
-```
-
-Profunctor and tensor checks:
-
-```text
-Prof_cat(A,B) = Catd_cat(A^op × B)
-ProfMap(P,Q) = Obj(Hom_{Prof_cat(A,B)}(P,Q))
-Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b])
-Prof_reindex(R,F,G)[a',b'] = R[F[a'],G[b']]
-
-Prof_tensor_func(P,Q) = Prof_tensor(P,Q)
-Prof_tensor_func(r,s) = Prof_tensor_map(r,s)
-Prof_coyoneda_cov_map(P)
-  = tapp0_fapp0(Prof_coyoneda_cov_transf(A,B),P)
-Prof_coyoneda_con_map(P)
-  = tapp0_fapp0(Prof_coyoneda_con_transf(A,B),P)
-```
-
-Co-Yoneda and internal-hom beta checks:
-
-```text
-Prof_cell_apply(
-  Prof_coyoneda_cov_map(P),
-  Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
-  = p
-
-Prof_cell_apply(
-  Prof_coyoneda_con_map(P),
-  Prof_tensor_hom_hom(F,Prof_func_hom(F),p))
-  = p
-
-Prof_lambda_cov_map(Prof_eval_cov_map(t)) = t
-Prof_eval_cov_map(Prof_lambda_cov_map(t)) = t
-Prof_lambda_con_map(Prof_eval_con_map(t)) = t
-Prof_eval_con_map(Prof_lambda_con_map(t)) = t
-```
-
-Weighted-limit and adjunction checks:
-
-```text
-WeightedCone_prof(F,W)
-  = Prof_imply_cov(Hom_prof(F),W)
-
-IsWeightedLimit_cov_iso(F,W,L)
-  = IsoEvidence(Prof_cat(B,J'), WeightedCone_prof(F,W), Hom_prof(L))
-
-WeightedLimit_cov(F,W,L)
-  = ProfComparison(WeightedCone_prof(F,W), Hom_prof(L))
-
-weighted_limit_cov_pull(isl,M, weighted_limit_cov_push(isl,M,r)) = r
-weighted_limit_cov_push(isl,M, weighted_limit_cov_pull(isl,M,s)) = s
-
-right_adjoint_preserves_weighted_limit_cov(isl,adj)
-  = right_adjoint_preserves_weighted_limit_cov_comp(isl,adj)
-
-prof_comparison_evidence(
-  right_adjoint_preserves_weighted_limit_cov_comp(isl,adj))
-  = right_adjoint_preserves_weighted_limit_cov_iso(
-      prof_comparison_evidence(isl),adj)
-```
-
-Duality and join checks:
-
-```text
-WeightedColimit_con(F,W,L)
-  = WeightedLimit_cov(Op_func(F), Op_prof(W), Op_func(L))
-
-Op_weighted_colimit_con(Op_weighted_limit_cov(isl)) = isl
-
-left_adjoint_preserves_weighted_colimit_con(isc,adj)
-  : WeightedColimit_con(left(adj) ∘ F, W, left(adj) ∘ L)
-
-Terminal_prof(A,B)[a,b] = Terminal_cat
-join_elim_func(first,second,cross) ∘ join_fst_func = first
-join_elim_func(first,second,cross) ∘ join_snd_func = second
-join_elim_cross_transf(first,second,cross) = cross
-join_cross_hom(a,b) = Prof_cell_eval(join_cross_transf,a,b)
-```
-
-Comparison checks:
-
-```text
-ProfComparison(P,Q) = DefIso(Prof_cat(A,B),P,Q)
-prof_comparison_pull(i, prof_comparison_push(i,r)) = r
-prof_comparison_push(i, prof_comparison_pull(i,s)) = s
-prof_comparison_push(refl_P,r) = r
-prof_comparison_push(comp(j,i),r)
-  = prof_comparison_push(j, prof_comparison_push(i,r))
-```
-
-# Appendix C. Diagram Source Notes
-
-All figures in this article are Arrowgram JSON blocks. They are intentionally
-simple: the diagrams explain object and arrow flow, while the actual
-normalization claims are made by Lambdapi assertions in `emdash3_2_checks.lp`.

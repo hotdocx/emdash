@@ -121,7 +121,8 @@ The revised article should have two arcs:
 2. **Broader calculus arc.** New sections after the normalization-method
    discussion introduce Cat-valued profunctors, tensor/co-Yoneda/internal hom,
    weighted limits and adjoint preservation, duality, primitive join, DefIso
-   and univalence staging, and the artifact/MathOps story.
+   and univalence staging. The artifact/MathOps story should be folded into
+   the computational-method discussion instead of standing as its own section.
 
 This ordering is deliberate. The PathOut theorem remains the first complete
 computation a reader can understand. The profunctor material then shows that
@@ -146,8 +147,7 @@ programming.
    12. Weighted limits, adjunctions, and duality
    13. Directed-inductive join categories
    14. Equality, DefIso, and normalization boundaries
-   15. Formal artifact and validation
-   16. Conclusion
+   15. Conclusion
    ```
 
 4. Add checked-normal-form summaries for:
@@ -156,7 +156,8 @@ programming.
    `right_adjoint_preserves_weighted_limit_cov`, dual weighted colimits,
    `Join_cat`, `Op_prof`, and `DefIso`/`ProfComparison`.
 5. Expand the identifier glossary with the new public names, but keep long
-   expanded terms in prose or appendices rather than in the narrative.
+   expanded terms out of the narrative unless a particular computation is
+   needed for the local argument.
 6. Update limitations conservatively:
    no general coend/coinserter semantics for `Prof_tensor`; no semantic
    collage implementation for `Join_cat`; no generic dependent join
@@ -200,11 +201,12 @@ paper-level precision improvements:
   `Obj(Hom_{Prof_cat(A,B)}(P,Q))`, because the kernel symbol classifies
   vertical profunctor maps as objects of the hom-category, not as the
   hom-category itself.
-- The PathOut appendix should not suggest that `comp_fapp0 Z x y z q p` is the
-  runtime conversion target of `path_comp_func(p)[z][q]`. The runtime target
-  is `hom_postcomp_fapp0 Z Z (id_func Z) x y z q p`; the ordinary
-  `comp_fapp0` term appears as the typed base component in the transported
-  PathOut-arrow proof-time view.
+- The PathOut checked-evidence prose should not suggest that
+  `comp_fapp0 Z x y z q p` is the runtime conversion target of
+  `path_comp_func(p)[z][q]`. The runtime target is
+  `hom_postcomp_fapp0 Z Z (id_func Z) x y z q p`; the ordinary `comp_fapp0`
+  term appears as the typed base component in the transported PathOut-arrow
+  proof-time view.
 
 The implemented follow-up is therefore documentation-only: update
 `print/public/index_3_2.md` to reflect these two distinctions, then rerun
@@ -222,8 +224,9 @@ but no explicit document outline. The implemented fix is to add a short
 - Sections 10-14 show how the same normalization discipline extends to
   profunctors, tensor/co-Yoneda/internal hom, weighted limits, duality, join,
   and `DefIso`/comparison boundaries.
-- Sections 15-16 and the appendices cover the artifact, validation, conclusion,
-  glossary, and checked normal forms.
+- Section 15 concludes, while Appendix A covers the compact identifier
+  glossary. Artifact and validation facts belong in the computational-method
+  section rather than in a standalone implementation section.
 
 This is a paper-organization change only. It should not require Lambdapi
 source edits.
@@ -243,6 +246,23 @@ generation.
 
 This is also a paper-organization change only. Validate it with
 `npm run check:render`.
+
+### 2026-07-01 Appendix And Artifact-Section Reduction
+
+The long article should not carry standalone checked-normal-form and diagram
+source appendices. Those references are useful for implementation work, but in
+the paper they make the ending read like a generated report rather than an
+academic article. Delete Appendix B and Appendix C from
+`print/public/index_3_2.md`.
+
+The standalone `Formal Artifact And Validation` section should also be
+deleted. Its essential claim belongs in Section 9: definitions live in
+`emdash3_2.lp`, executable conversion evidence lives in
+`emdash3_2_checks.lp`, and the project validation commands/check catalog,
+examples, report lint, rewrite-LHS audit, renderer checks, and Infinity Codex
+recovery evidence support the artifact without becoming part of the theorem
+statement. After deleting the section, renumber the conclusion as Section 15
+and update the front-matter contents and road map.
 
 ## Print Pipeline Facts
 
@@ -592,18 +612,16 @@ Abstract
    7.2 Sigma/Pi helper laws
    7.3 Ordinary adjunction cut-elimination
 
-8. Implementation
-   8.1 Files and validation commands
+8. Computational Evidence And Artifact Discipline
+   8.1 File roles inside the evidence story
    8.2 The checked regression catalog
-   8.3 Diagram and article pipeline
+   8.3 Diagram and article validation as supporting infrastructure
 
 9. Limitations And Future Work
 
 10. Conclusion
 
 Appendix A. Identifier glossary
-Appendix B. Selected checked normal forms
-Appendix C. Diagram source notes
 ```
 
 ## Proposed Short Article Outline
@@ -724,7 +742,8 @@ expanded(PathInd_funcd, CompMotive, p, q) = q o p
 - Distinguish "implemented and checked" from "planned" or "deferred".
 - Prefer mathematical names in prose and kernel identifiers in small code
   blocks or glossary tables.
-- Keep code snippets short; use appendix for long normal forms.
+- Keep code snippets short; leave long normal forms in `emdash3_2_checks.lp`
+  and project reports rather than paper appendices.
 - Use diagrams to explain objects and arrows, not to replace the checked
   computation statements.
 - Avoid claiming full weak omega-category semantics. Say v3.2 provides a
