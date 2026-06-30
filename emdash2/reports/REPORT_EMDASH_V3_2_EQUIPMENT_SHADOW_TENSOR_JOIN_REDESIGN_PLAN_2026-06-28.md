@@ -14,10 +14,10 @@ Status: join, shaped co-Yoneda, fixed-endpoint tensor-map,
 `Op_prof` semantic owner, internal fixed co-Yoneda naturality-owner, shaped
 `Prof_func_hom`, generic identity-normal-form, generic `Prof_comp_transf`
 retirement, and transparent compatibility-alias retirement slices landed;
-`Prof_func_hom` uncurried internal-action projection design recorded for next
-implementation; broad endpoint-changing/general-cell co-Yoneda runtime rules
-and obsolete equipment-style compatibility symbols have been retired from
-active source and checks
+`Prof_func_hom` uncurried internal-action projection slice landed; broad
+endpoint-changing/general-cell co-Yoneda runtime rules and obsolete
+equipment-style compatibility symbols have been retired from active source and
+checks
 
 ## Purpose
 
@@ -1075,6 +1075,62 @@ This keeps the large internal-action expression out of later tensor/co-Yoneda
 rules while preserving the correct semantic owner. A full transparent
 definition of `Prof_func_hom` through semantic uncurrying remains deferred
 until the currently missing transfor action of `uncurry_func_func` is added.
+
+## Implementation Checkpoint, 2026-07-01, `Prof_func_hom` Uncurried Action
+
+The first uncurried-action slice has been promoted.
+
+Implemented in `emdash3_2.lp`:
+
+- object projection of a functor-induced shaped unit:
+
+  ```text
+  tapp0_fapp0(Prof_func_hom(F),ab)
+    -> fapp1_func(F,sigma_Fst(ab),sigma_Snd(ab));
+  ```
+
+- capped product-base arrow projection through the nested internal ordinary
+  hom-action owner:
+
+  ```text
+  tapp1_fapp0(Prof_func_hom(F),pq)
+    -> tapp1_fapp0(
+         tapp1_fapp0(fapp1_int_transf(F), sigma_Fst(pq)),
+         sigma_Snd(pq)).
+  ```
+
+The promoted rules keep the product/opposite base and the normalized
+representable source/target families explicit on the LHS. The fully
+underscored probe failed subject-reduction checking, while the source/target
+underscored probe introduced an unrelated Cat-valued projection overlap. The
+current guarded rules are therefore intentional LHS-audit exceptions.
+
+No helper head was needed in the first pass: the RHS can point directly at the
+nested `tapp1_fapp0` owner without reviving broad equipment-cell syntax. A
+later helper remains reasonable if a concrete consumer needs a shorter stable
+surface.
+
+Added diagnostics in `emdash3_2_checks.lp`:
+
+- component projection to `fapp1_func`;
+- capped product-base projection to the nested `tapp1_fapp0` expression.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/prof_func_hom_uncurried_action_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/prof_func_hom_uncurried_action_specific_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled active summary after this slice reports 1,366 warnings:
+1,199 unjoinable critical-pair reports and 167 replaceable-pattern reports.
+The delta is localized to the new `Prof_func_hom` projection family, mainly
+overlaps with existing `Op_cat` / special-category normalization and the
+identity specialization `Prof_func_hom(id) -> Prof_id_hom`.
 
 Validation so far:
 
@@ -3315,7 +3371,7 @@ make catalog
 | `EQUIP-OP-DUALITY` | stable primitive owner landed; alias retired | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. `Op_prof_transf` has been removed from active code. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | complete in active code | this report | `Prof_tensor_transf`, `Prof_tensor_hom_transf`, `Prof_tensor_transf_hom`, and the old endpoint-changing co-Yoneda constants have been removed from active code. A fuller endpoint-changing tensor theorem remains deferred because it needs middle-change/coend compatibility. |
 | `EQUIP-ID-TRANSF` | complete and alias retired | identity-normal-form pass | Generic identity is direct `id_funcd`; `Prof_id_hom` remains the shaped unit identity owner. `Prof_id_transf` and the temporary `Prof_comp_transf` identity bridge have been removed from active code. |
-| `EQUIP-PROF-FUNC` | core owner landed; uncurried projection ladder pending | active implementation plus next probe | `Prof_func_hom` is now the core shaped representable unit owner, with identity computation. `Prof_func_transf` and the former representable-composition rule through `Prof_comp_transf` have been removed from active code. Next implementation should add object and product-base arrow projections, with the arrow projection owned by nested `tapp1_fapp0` projections of `fapp1_int_transf(F)`, not by a raw naturality-square formula. |
+| `EQUIP-PROF-FUNC` | core owner and uncurried projection ladder landed | active implementation | `Prof_func_hom` is now the core shaped representable unit owner, with identity computation. `Prof_func_transf` and the former representable-composition rule through `Prof_comp_transf` have been removed from active code. Object projection now exposes `fapp1_func(F,x,y)`, and product-base arrow projection is owned by nested `tapp1_fapp0` projections of `fapp1_int_transf(F)`, not by a raw naturality-square formula. |
 | `EQUIP-REINDEX-PRODUCT-FOLD` | primitive `Op_prof` slice complete; raw swap naturality deferred | active implementation plus future raw-product probe | The one-off unfolded opposite/reindex bridge has been replaced by the direct semantic computation `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`. Broader `Product_swap_transf` / `Product_swapped_map_func` naturality remains deferred unless raw pullback/swap syntax becomes a concrete runtime consumer. |
 | `EQUIP-COMP-RETIRE` | complete in active code | current implementation | `Prof_comp_transf`, its runtime rules, and checks whose sole purpose was the generic equipment-composition facade have been removed. There is no active source/check occurrence; deferred equipment readings remain report-level historical/deferred material. |
 | `EQUIP-ALIAS-RETIRE` | complete in active code | current implementation | Removed transparent compatibility aliases `Prof_id_transf`, `Prof_func_transf`, and `Op_prof_transf`, plus direct checks for those aliases. Active code now implements the minimal fixed-owner design; former names remain only in reports as historical/deferred notation. |

@@ -7124,6 +7124,59 @@ assert [A : Cat] ⊢
   @Prof_func_hom A A (@id_func A)
   ≡ @Prof_id_hom A;
 
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (ab : τ (Obj (Product_cat (Op_cat A) A))) ⊢
+  @tapp0_fapp0
+      (Product_cat (Op_cat A) A)
+      Cat_cat
+      (@Unit_prof A)
+      (@Hom_prof_along A A B F F)
+      ab
+      (@Prof_func_hom A B F)
+  ≡ @fapp1_func
+      A
+      B
+      F
+      (sigma_Fst ab)
+      (sigma_Snd ab);
+
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (ab ab' : τ (Obj (Product_cat (Op_cat A) A)))
+  (pq : τ (Hom (Product_cat (Op_cat A) A) ab ab')) ⊢
+  @tapp1_fapp0
+      (Product_cat (Op_cat A) A)
+      Cat_cat
+      (@Unit_prof A)
+      (@Hom_prof_along A A B F F)
+      ab
+      ab'
+      (@Prof_func_hom A B F)
+      pq
+  ≡ @tapp1_fapp0
+      A
+      Cat_cat
+      (@hom_ A A (@id_func A) (sigma_Fst ab))
+      (@hom_ B A F (@fapp0 A B F (sigma_Fst ab')))
+      (sigma_Snd ab)
+      (sigma_Snd ab')
+      (@tapp1_fapp0
+        (Op_cat A)
+        (@Catd_cat A)
+        (@hom_int A A (@id_func A))
+        (@comp_cat_fapp0
+          (Op_cat A)
+          (Op_cat B)
+          (@Catd_cat A)
+          (@hom_int B A F)
+          (@Op_func A B F))
+        (sigma_Fst ab)
+        (sigma_Fst ab')
+        (@fapp1_int_transf A B F)
+        (sigma_Fst pq))
+      (sigma_Snd pq);
+
 assert [A B : Cat] ⊢
   @join_cross_transf A B
   : τ (Obj
