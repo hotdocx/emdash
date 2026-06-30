@@ -148,35 +148,33 @@ normalization.
 
 # Contents
 
-| Section | Title |
-| --- | --- |
-| Abstract | Summary of the v3.2 architecture and main checked computations |
-| 1 | Introduction |
-| 1.1 | What v3.2 Contributes |
-| 1.2 | Road Map |
-| 1.3 | What "Checked" Means |
-| 2 | A Type-Theoretic Foundation For Directed Families |
-| 3 | Dependent Hom, Sigma Totals, And Sections |
-| 3.1 | Sigma Totals |
-| 3.2 | Pi Sections |
-| 4 | Outgoing Arrows And The Canonical `rho` Arrow |
-| 5 | Arrow Induction |
-| 5.1 | The Telescope Theorem |
-| 5.2 | The Derived Sigma-Total Presentation |
-| 6 | Strictness, Laxity, And Directed Induction |
-| 7 | Composition As The Main Computation |
-| 8 | Surface Syntax And Kernel Names |
-| 9 | Computational Method And Checked Evidence |
-| 10 | Cat-Valued Profunctors And Representables |
-| 11 | Tensor, Co-Yoneda, And Internal Hom |
-| 12 | Weighted Limits, Adjunctions, And Duality |
-| 13 | Directed-Inductive Join Categories |
-| 14 | Equality, DefIso, And Normalization Boundaries |
-| 15 | Formal Artifact And Validation |
-| 16 | Conclusion |
-| Appendix A | Identifier Glossary |
-| Appendix B | Selected Checked Normal Forms |
-| Appendix C | Diagram Source Notes |
+- Abstract: summary of the v3.2 architecture and main checked computations.
+- 1. Introduction.
+  - 1.1 What v3.2 Contributes.
+  - 1.2 Road Map.
+  - 1.3 What "Checked" Means.
+- 2. A Type-Theoretic Foundation For Directed Families.
+- 3. Dependent Hom, Sigma Totals, And Sections.
+  - 3.1 Sigma Totals.
+  - 3.2 Pi Sections.
+- 4. Outgoing Arrows And The Canonical `rho` Arrow.
+- 5. Arrow Induction.
+  - 5.1 The Telescope Theorem.
+  - 5.2 The Derived Sigma-Total Presentation.
+- 6. Strictness, Laxity, And Directed Induction.
+- 7. Composition As The Main Computation.
+- 8. Surface Syntax And Kernel Names.
+- 9. Computational Method And Checked Evidence.
+- 10. Cat-Valued Profunctors And Representables.
+- 11. Tensor, Co-Yoneda, And Internal Hom.
+- 12. Weighted Limits, Adjunctions, And Duality.
+- 13. Directed-Inductive Join Categories.
+- 14. Equality, DefIso, And Normalization Boundaries.
+- 15. Formal Artifact And Validation.
+- 16. Conclusion.
+- Appendix A. Identifier Glossary.
+- Appendix B. Selected Checked Normal Forms.
+- Appendix C. Diagram Source Notes.
 
 # 1. Introduction
 

@@ -232,12 +232,17 @@ source edits.
 
 The road map explains the paper architecture in prose, but it is not a
 front-matter table of contents. Add an explicit `# Contents` section after the
-abstract and before Section 1. Use a Markdown table with all numbered sections,
-current numbered subsections, and appendices so the print renderer produces a
-scan-friendly table without requiring automatic heading-anchor generation.
+abstract and before Section 1.
 
-This is also a paper-organization change only. Because the print pipeline has
-a raw-pipe-table regression check, validate it with `npm run check:render`.
+The contents block should not be a literal Markdown table or embedded HTML
+table. Use a conventional itemized Markdown list instead, nested only for the
+current numbered subsections. This keeps the front matter closer to academic
+paper prose, avoids renderer-specific table concerns, and still provides a
+scan-friendly structural inventory without requiring automatic heading-anchor
+generation.
+
+This is also a paper-organization change only. Validate it with
+`npm run check:render`.
 
 ## Print Pipeline Facts
 
