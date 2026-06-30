@@ -7013,28 +7013,6 @@ assert [A B : Cat]
     (@id_func B)
   ≡ r;
 
-assert [A0 A1 A2 B0 B1 B2 : Cat]
-  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
-  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
-  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
-  [F01 : τ (Functor A0 A1)]
-  [G01 : τ (Functor B0 B1)]
-  [F12 : τ (Functor A1 A2)]
-  [G12 : τ (Functor B1 B2)]
-  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
-  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01))) ⊢
-  @Prof_comp_transf
-    A0 A1 A2 B0 B1 B2
-    R0 R1 R2 F01 G01 F12 G12
-    s r
-  : τ (Obj
-      (@Prof_transf_cat
-        A2 A0 B2 B0
-        R0
-        (@comp_cat_fapp0 A0 A1 A2 F12 F01)
-        R2
-        (@comp_cat_fapp0 B0 B1 B2 G12 G01)));
-
 assert [A A' B B' : Cat]
   [R' : τ (Catd (Product_cat (Op_cat A') B'))]
   [R : τ (Catd (Product_cat (Op_cat A) B))]
@@ -7133,25 +7111,22 @@ assert [A B : Cat]
   @Prof_func_hom A B F
   : τ (@Prof_hom A B B F (@Unit_prof B) F);
 
+assert [A B : Cat]
+  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  @Prof_id_transf A B R
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) B)
+      R;
+
+assert [A : Cat] ⊢
+  @Prof_id_hom A
+  ≡ @id_funcd
+      (Product_cat (Op_cat A) A)
+      (@Unit_prof A);
+
 assert [A : Cat] ⊢
   @Prof_func_hom A A (@id_func A)
   ≡ @Prof_id_hom A;
-
-assert [A B C : Cat]
-  (F : τ (Functor A B))
-  (G : τ (Functor B C)) ⊢
-  @Prof_comp_transf
-    A B C
-    A B C
-    (@Hom_prof_along A A A (@id_func A) (@id_func A))
-    (@Hom_prof_along B B B (@id_func B) (@id_func B))
-    (@Hom_prof_along C C C (@id_func C) (@id_func C))
-    F F G G
-    (@Prof_func_hom B C G)
-    (@Prof_func_hom A B F)
-  ≡ @Prof_func_hom
-      A C
-      (@comp_cat_fapp0 A B C G F);
 
 assert [A B : Cat] ⊢
   @join_cross_transf A B
@@ -7307,49 +7282,6 @@ assert
         (@Prof_cat A B)
         P Q R
         s r);
-
-assert [A0 A1 A2 B0 B1 B2 : Cat]
-  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
-  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
-  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
-  [F01 : τ (Functor A0 A1)]
-  [G01 : τ (Functor B0 B1)]
-  [F12 : τ (Functor A1 A2)]
-  [G12 : τ (Functor B1 B2)]
-  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
-  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01))) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat A0) B0)
-    R0
-    (@Prof_reindex A1 A0 B1 B0 R1 F01 G01)
-    (@Prof_reindex
-      A2 A0 B2 B0
-      R2
-      (@comp_cat_fapp0 A0 A1 A2 F12 F01)
-      (@comp_cat_fapp0 B0 B1 B2 G12 G01))
-    (@Prof_reindex_transf
-      A1 A0 B1 B0
-      R1
-      (@Prof_reindex A2 A1 B2 B1 R2 F12 G12)
-      s
-      F01
-      G01)
-    r
-  ≡ @Prof_comp_transf
-      A0 A1 A2 B0 B1 B2
-      R0 R1 R2 F01 G01 F12 G12
-      s r;
-
-assert [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
-  @Prof_comp_transf
-    A A A B B B
-    R R R
-    (@id_func A) (@id_func B)
-    (@id_func A) (@id_func B)
-    (@Prof_id_transf A B R)
-    (@Prof_id_transf A B R)
-  ≡ @Prof_id_transf A B R;
 
 assert [I A B : Cat]
   [P : τ (Prof A B)]

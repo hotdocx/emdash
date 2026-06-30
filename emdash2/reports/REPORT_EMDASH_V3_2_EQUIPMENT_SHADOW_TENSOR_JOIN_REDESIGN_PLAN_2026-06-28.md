@@ -10,11 +10,13 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
 Status: join, shaped co-Yoneda, fixed-endpoint tensor-map, stable `Op_prof`
-semantic owner, and internal fixed co-Yoneda naturality-owner slices landed;
-fixed co-Yoneda beta/fusion now uses `Prof_func_hom` as the shaped
-representable unit owner; broad endpoint-changing/general-cell co-Yoneda
-runtime rules and obsolete compatibility symbols have been retired from
-active code
+semantic owner, internal fixed co-Yoneda naturality-owner, shaped
+`Prof_func_hom`, and generic identity-normal-form slices landed;
+`Prof_id_transf` and `Prof_id_hom` are transparent `id_funcd` views; broad
+endpoint-changing/general-cell co-Yoneda runtime rules and obsolete
+compatibility symbols have been retired from active code; the generic
+`Prof_comp_transf` equipment-composition facade has been removed from active
+source and checks
 
 ## Purpose
 
@@ -29,10 +31,12 @@ The immediate correction already landed elsewhere:
   transparent selected-arrow views of `defiso_to` and `defiso_from`.
 - The adjunction-specific `Prof_comp_transf` cancellation rules were removed.
 
-That correction does not mean `Prof_comp_transf` can be deleted immediately.
-The active tensor/co-Yoneda and primitive join slices still use it. This plan
-classifies those remaining consumers and gives the target redesign before any
-further code migration.
+That correction did not mean `Prof_comp_transf` could be deleted immediately.
+The earlier tensor/co-Yoneda and primitive join slices still used it at the
+start of this plan. Those core consumers have now migrated to narrower owners.
+The remaining active source use is the generic compatibility facade itself:
+the semantic reindex-then-compose fold, identity/composition compatibility
+rules, and diagnostics that document that facade while it is being retired.
 
 ## Decision Summary
 
@@ -440,79 +444,77 @@ general-cell identity-unit naturality rules that were still under
 computation after the fixed-endpoint naturality and fixed beta/fusion route
 had been implemented and checked.
 
-## Reassessment Note, 2026-06-29, `Prof_id_transf`
+## Implementation Checkpoint, 2026-06-30, Generic Identity Normal Form
 
-`Prof_id_transf` was reviewed as a possible primitive shadow over the generic
-`id_funcd` identity. A focused full-source probe showed that the declaration
-can be made transparent:
-
-```text
-Prof_id_transf(A,B,R) := id_funcd(Prof_base(A,B),R).
-```
-
-That change was not ready to promote at this checkpoint. At the time, the
-active diagnostics included the existing duality identity rule:
+`Prof_id_transf` and `Prof_id_hom` have now been demoted from stable identity
+heads to transparent views of the generic family identity:
 
 ```text
-Op_prof_transf(Prof_id_transf(R)) -> Prof_id_transf(Op_prof(R))
+Prof_id_transf(A,B,R)
+  := id_funcd(Product_cat(Op_cat A,B),R)
+
+Prof_id_hom(B)
+  := id_funcd(Product_cat(Op_cat B,B),Unit_prof(B)).
 ```
 
-which depended on the stable `Prof_id_transf` head. Once the head unfolded to
-`id_funcd`, the old rule no longer recognized the identity case. The
-2026-06-29 opposite-duality slice later removed this `Op_prof_transf`
-dependency by demoting `Op_prof_transf` to a transparent fixed-functor view.
-The same issue remains for the `Prof_comp_transf` left/right identity rules,
-which still discriminate on `Prof_id_transf`.
-
-Follow-up probe after the 2026-06-30 `Prof_func_hom` owner migration:
+The earlier source-only probes were mathematically correct but incomplete:
+the remaining `Prof_comp_transf` identity rules still matched the stable
+`Prof_id_transf` head. The promoted pass added coherent compatibility sibling
+rules that match the actual generic identity owner instead:
 
 ```text
-EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_id_transparent_after_prof_func_probe.lp
+Prof_comp_transf(id_funcd(R1), r) -> r
+Prof_comp_transf(s, id_funcd(R0)) -> s.
 ```
 
-The source-only probe again succeeded with:
+In the active Lambdapi rules, the source category argument of `id_funcd` is
+written as `_`:
 
 ```text
-Prof_id_transf(A,B,R) := id_funcd(Product_cat(Op_cat A,B),R).
+id_funcd _ R
 ```
 
-Promotion still failed the full diagnostics. The concrete blocker is the
-generic equipment identity check:
+This is intentional LHS hygiene. An explicit
+`Product_cat(Op_cat A,B)` source typechecks, but it exposes avoidable
+critical-pair diagnostics in a reconstructible implicit slot. Replacing that
+slot by `_` preserves the intended discrimination on the generic identity
+head and keeps the warning-enabled inventory unchanged.
+
+At the identity-normal-form checkpoint, promoted checks covered:
 
 ```text
-Prof_comp_transf(Prof_id_transf(R),Prof_id_transf(R))
-  == Prof_id_transf(R).
+Prof_id_transf(A,B,R) == id_funcd(Product_cat(Op_cat A,B),R)
+Prof_id_hom(A) == id_funcd(Product_cat(Op_cat A,A),Unit_prof(A))
+Prof_func_hom(id_A) == Prof_id_hom(A)
+Prof_comp_transf(Prof_id_transf(R),Prof_id_transf(R)) == Prof_id_transf(R).
 ```
 
-Once `Prof_id_transf` unfolds to the generic `id_funcd`, the remaining
-`Prof_comp_transf` identity rules no longer provide the required stable
-identity presentation for this assertion. This confirms that transparent
-`Prof_id_transf` should wait for either coherent `id_funcd` sibling rules for
-`Prof_comp_transf`, or for demotion of the generic equipment-composition
-surface itself.
+The last check in that list was removed during the later
+`Prof_comp_transf` retirement checkpoint because its only purpose was to pin
+the temporary generic facade.
 
-Narrow shaped-identity follow-up probe:
+Validation:
 
 ```text
-Prof_id_hom(B) := id_funcd(Product_cat(Op_cat B,B),Unit_prof(B)).
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_id_transparent_with_idfuncd_siblings_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_id_idfuncd_underscore_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
 ```
 
-This narrower migration source-checks, but it was not promoted. It increased
-the warning inventory by two unjoinable critical-pair reports where
-`Prof_func_hom(id)` can reduce to `Prof_id_hom` and then generic `id_funcd`
-before the `Prof_comp_transf(Prof_func_hom(G),Prof_func_hom(F))` rule sees
-the representable identity case. This is the same missing `id_funcd` sibling
-identity issue at a shaped subcase, so it remains deferred with
-`Prof_id_transf`.
+The warning-enabled active summary stayed at 1,434 warnings: 1,257
+unjoinable critical-pair reports and 177 replaceable-pattern reports. This is
+the SOP-correct outcome: warnings were used to improve the LHS shape, not as a
+semantic veto on the identity-normal-form migration.
 
 Conclusion:
 
-- keep `Prof_id_transf` as a stable identity equipment head for now;
-- do not treat it as the final architecture;
-- migrate it only in a separate identity-normal-form pass that adds and probes
-  coherent `id_funcd` sibling rules for remaining `Prof_comp_transf`
-  consumers, or after those equipment heads have been demoted enough that the
-  stable identity discriminator is no longer needed.
+- `Prof_id_transf` is no longer a primitive/stable identity equipment head;
+- `Prof_id_hom` is no longer routed through `Prof_id_transf`;
+- the remaining generic `Prof_comp_transf` facade no longer blocks identity
+  demotion;
+- the next cleanup target is retirement or demotion of `Prof_comp_transf`
+  itself, not another identity workaround.
 
 ## Final Architecture Decision, 2026-06-29, Opposite And Endpoint-Changing Cells
 
@@ -660,11 +662,12 @@ removed from active code rather than generalized further.
 
 ### Identity And Generic Composition
 
-`Prof_id_transf` remains a stable head because current `Prof_comp_transf`
-rules and remaining co-Yoneda compatibility consumers still discriminate on
-it. The final direction is still to let `id_funcd` own vertical identity once
-the remaining endpoint-changing equipment heads are demoted or have coherent
-`id_funcd` normal-form sibling rules.
+`Prof_id_transf` is now only transparent compatibility notation for
+`id_funcd(Product_cat(Op_cat A,B),R)`, and `Prof_id_hom` is the corresponding
+transparent shaped identity for `Unit_prof(B)`. Vertical identity is owned by
+the generic `id_funcd` normal form. The remaining `Prof_comp_transf` facade has
+coherent `id_funcd` sibling identity rules only to keep old compatibility
+diagnostics reducing while the facade is retired.
 
 `Prof_comp_transf` should not be replaced by a renamed composition primitive.
 Any derived endpoint-changing compatibility view must specify the exact fixed
@@ -938,9 +941,11 @@ Implemented in `emdash3_2.lp`:
 
 - `Prof_func_hom(F)` is now the primary shaped representable unit element;
 - `Prof_func_hom(id)` reduces to `Prof_id_hom`;
-- the representable functor-composition rule now reduces
+- at this checkpoint, a temporary representable functor-composition
+  compatibility rule reduced
   `Prof_comp_transf(Prof_func_hom(G),Prof_func_hom(F))` to
-  `Prof_func_hom(G . F)`;
+  `Prof_func_hom(G . F)`; that temporary rule was later removed during
+  `Prof_comp_transf` retirement;
 - `Prof_func_transf(F)` is now a transparent compatibility view of
   `Prof_func_hom(F)`;
 - fixed co-Yoneda beta/fusion rules now key on `Prof_func_hom`, not on the
@@ -964,40 +969,75 @@ EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
 The warning-enabled active summary stayed at 1,434 warnings: 1,257
 unjoinable critical-pair reports and 177 replaceable-pattern reports.
 
-## Current Remaining Consumers
+## Current Active `Prof_comp_transf` Consumers
 
-After the fixed co-Yoneda compatibility demotion, the active source still has
-these remaining `Prof_comp_transf` clusters.
-
-### Generic Equipment Cell
-
-Current declarations:
+There are no active source or diagnostic consumers of `Prof_comp_transf`.
+The remaining active source mention is a retirement marker comment at the old
+section location. The deleted active pieces were:
 
 ```text
-Prof_comp_transf
-Prof_id_transf
-semantic fold from comp_catd_fapp0(Prof_reindex_transf(...), r)
-left/right identity rules
+symbol Prof_comp_transf
+comp_catd_fapp0(Prof_reindex_transf(...), r) -> Prof_comp_transf(...)
+Prof_comp_transf(id_funcd(R1), r) -> r
+Prof_comp_transf(s, id_funcd(R0)) -> s
+Prof_comp_transf(Prof_func_hom(G), Prof_func_hom(F)) -> Prof_func_hom(G.F)
 ```
 
-Current role:
+The corresponding diagnostics that only typed or normalized the retired
+facade were removed. The surviving computational owners are the narrower
+ones already listed in this report: `Prof_cell_apply`, `Prof_cell_eval`,
+fixed co-Yoneda transformations and their `tapp1_fapp0` action,
+`Prof_tensor_map`, `Prof_reindex`, `Prof_reindex_transf`, `Op_prof_func`, and
+the generic family/hom-action calculus.
 
-- provide a stable composition head for endpoint-changing cells;
-- support generic equipment compatibility and current identity/composition
-  normal forms;
-- expose a small amount of equipment-like syntax.
+## Implementation Checkpoint, 2026-06-30, `Prof_comp_transf` Retirement
 
-Target role:
+The generic equipment-composition facade has been removed from active code.
 
-- become a derived compatibility facade or a narrow temporary stable head;
-- stop being the owner of weighted-limit, co-Yoneda, or join beta/eta when a
-  better fixed-endpoint or join-specific owner exists.
+Removed from `emdash3_2.lp`:
 
-Deletion status:
+- the `Prof_comp_transf` symbol;
+- the semantic fold from
+  `comp_catd_fapp0(Prof_reindex_transf(...),r)` to `Prof_comp_transf`;
+- the temporary `id_funcd` left/right identity sibling rules;
+- the representable composition compatibility rule for
+  `Prof_func_hom(G)` and `Prof_func_hom(F)`.
 
-- not safe to delete yet;
-- safe to demote only after tensor/co-Yoneda and generic compatibility
-  consumers migrate.
+Removed from `emdash3_2_checks.lp`:
+
+- the type assertion for `Prof_comp_transf`;
+- the semantic-fold assertion to `Prof_comp_transf`;
+- the identity assertion for
+  `Prof_comp_transf(Prof_id_transf(R),Prof_id_transf(R))`;
+- the representable-composition assertion through `Prof_comp_transf`.
+
+The deletion was intentionally not replaced by another broad endpoint-changing
+composition primitive. Deferred equipment readings must be documented as
+readings or rebuilt from fixed owners only when a concrete future consumer
+requires them.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_comp_retire_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+make health
+EMDASH_TYPECHECK_TIMEOUT=60s make ci
+```
+
+The warning-enabled active summary dropped to 1,413 warnings: 1,246
+unjoinable critical-pair reports and 167 replaceable-pattern reports. This
+drop is useful diagnostic evidence that the broad facade was a real overlap
+source, but it is not the mathematical reason for the deletion. The
+mathematical reason is that join, tensor/co-Yoneda, opposite, and identity now
+have narrower owners.
+
+An active source/check scan now finds no `Prof_comp_transf` symbol or
+diagnostic assertion; the only active source occurrence is the retirement
+marker comment at the old section location.
 
 ### Opposite And Duality
 
@@ -1356,10 +1396,14 @@ Current declarations:
 ```text
 Prof_func_hom(F)
 Prof_func_hom(id) -> Prof_id_hom
-Prof_comp_transf(Prof_func_hom(G), Prof_func_hom(F))
-  -> Prof_func_hom(G . F)
 Prof_func_transf(F) := Prof_func_hom(F)
 ```
+
+The former `Prof_comp_transf(Prof_func_hom(G),Prof_func_hom(F))` compatibility
+rule is retired with the generic equipment-composition facade. If
+representable functor composition needs a future runtime owner, it should be a
+fixed/generic functorial owner, not a revival of broad endpoint-changing
+equipment composition.
 
 Current role:
 
@@ -2746,7 +2790,8 @@ consumer needs it.
 
 ## Retiring `Prof_comp_transf`
 
-`Prof_comp_transf` can be deleted or demoted only when all of these are true:
+`Prof_comp_transf` has now been deleted from active runtime code. The
+preconditions for that deletion were:
 
 1. No active theorem or diagnostic uses it for weighted-limit, adjunction,
    tensor/co-Yoneda, or join beta/eta.
@@ -2768,21 +2813,19 @@ consumer needs it.
 4. Warning-enabled checking does not reveal a new broad composition overlap
    replacing the old one.
 
-A plausible end state is:
+The active end state is:
 
 ```text
-Prof_comp_transf
+no `Prof_comp_transf` symbol in active code
 ```
 
-is either:
+There is no transparent compatibility alias and no narrow replacement stable
+head. A future explicit equipment coherence layer may introduce new names only
+under a separate plan and only for concrete consumers.
 
-- absent from active runtime code;
-- a transparent compatibility alias that cannot head rewrite rules; or
-- a narrowly documented stable head used only by a future explicit equipment
-  coherence layer.
-
-It should not be a hidden prerequisite for the ordinary right-adjoint
-weighted-limit theorem or its dual.
+It is no longer a hidden prerequisite for the ordinary right-adjoint
+weighted-limit theorem, its dual, join beta, fixed co-Yoneda beta/fusion, or
+identity-normal-form computation.
 
 ## Feasibility
 
@@ -2801,7 +2844,14 @@ High feasibility:
 - keeping `Op_prof_map(r)` as a transparent readability alias through
   `fapp1_fapp0(Op_prof_func(A,B),r)`;
 - keeping `Op_prof_transf` as a transparent endpoint-changing view rather than
-  a primitive rewrite owner.
+  a primitive rewrite owner;
+- keeping the landed identity-normal-form pass: `Prof_id_transf` and
+  `Prof_id_hom` are transparent `id_funcd` views, with narrow
+  `id_funcd` sibling rules used only during the temporary compatibility
+  phase before `Prof_comp_transf` retirement;
+- keeping `Prof_comp_transf` absent from active code after its successful
+  deletion probe, while preserving deferred equipment readings as
+  documentation-only formulas.
 
 Medium feasibility:
 
@@ -2816,8 +2866,9 @@ Medium feasibility:
 
 Medium risk:
 
-- `Prof_func_transf` may need a better representable hom-action owner before
-  both general co-Yoneda and join can become clean.
+- `Prof_func_transf` remains a compatibility facade over the shaped
+  `Prof_func_hom` owner. Delete or demote it only after deferred equipment
+  readings no longer mention the old public name.
 - `join_elim_cross_transf` must remain the primitive join recursor cross beta
   or a transparent view of an already-feasible representable-action owner. It
   must not become an arbitrary hidden equipment composite. Existing
@@ -2833,16 +2884,17 @@ Medium risk:
 - `Prof_cell_apply` must stay narrow: the first implementation should add no
   general associativity, identity, or equipment-composition rewrite rules for
   it.
-- retiring `Prof_id_transf` into `id_funcd` is blocked by stable-head
-  identity rules for the current `Prof_comp_transf` surface and remaining
-  compatibility consumers. It should move only after those surfaces are
-  demoted, or after coherent `id_funcd` sibling rules are probed.
+- retiring `Prof_id_transf` into `id_funcd` is complete. The accepted rule
+  shape keeps the `id_funcd` source category reconstructible on the LHS. A
+  warning increase from the explicit-source probe was diagnostic evidence for
+  this LHS refinement, not a blocker to the intended migration.
 - any future endpoint-changing tensor wrapper still needs middle-change/coend
   compatibility and is outside this migration. The old `Prof_tensor_transf`
   compatibility symbol is no longer active code.
-- demoting or deleting `Prof_comp_transf` remains the last cleanup pass,
-  because it also supports generic equipment compatibility checks and current
-  identity/composition normal forms.
+- the deleted `Prof_comp_transf` facade must not be reintroduced under a new
+  name. Any future equipment-composition theorem needs a separate plan and a
+  concrete consumer, and must be derived from fixed owners rather than owning
+  core runtime beta laws.
 
 Known non-goals:
 
@@ -2929,15 +2981,14 @@ Known non-goals:
 
 9. `Prof_id_transf` normal-form pass.
 
-   Source-only transparent `id_funcd` probes now pass, but full promotion is
-   still blocked by the generic `Prof_comp_transf` identity diagnostic. Retry
-   only after enough `Prof_comp_transf` consumers have been demoted, or after
-   coherent `id_funcd` sibling rules have passed focused probes.
+   Complete. `Prof_id_transf` and `Prof_id_hom` are transparent `id_funcd`
+   views. Temporary `Prof_comp_transf` identity rules matched `id_funcd _ R`
+   directly during the bridge phase and were removed with the generic facade.
 
 10. Generic `Prof_comp_transf` retirement.
 
-   Only after join, opposite, tensor/co-Yoneda, and identity-normal-form
-   consumers no longer rely on it.
+   Complete. The generic facade, its runtime rules, and diagnostics whose only
+   target was that facade have been removed from active code.
 
 ## Validation Gates
 
@@ -2968,17 +3019,17 @@ make catalog
 | ID | Status | Owner | Decision / Trigger |
 | --- | --- | --- | --- |
 | `EQUIP-WL-DOC` | complete in this plan | DefIso/weighted-limit reports | Explicitly document that nested hom-action cancellation is required for weighted-limit beta/eta and runtime universal-property computation. |
-| `EQUIP-INVENTORY` | updated by first implementation slice | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion; join-specific runtime ownership has moved off `Prof_comp_transf`, while tensor/co-Yoneda and generic equipment compatibility remain. |
+| `EQUIP-INVENTORY` | updated by current implementation slice | this report | Maintain the remaining `Prof_comp_transf` consumer classification before code deletion; join-specific, tensor/co-Yoneda, opposite, and identity-normal-form ownership have moved off `Prof_comp_transf`, leaving the generic compatibility facade itself as the cleanup target. |
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
 | `EQUIP-TENSOR-COYONEDA` | fixed beta/fusion and compatibility retirement landed | active implementation plus future cleanup | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Old shaped `CoyR/CoyL` beta surfaces have been replaced by direct fixed beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`. The broad general-cell `Prof_comp_transf` co-Yoneda runtime pair and obsolete endpoint-changing tensor/co-Yoneda compatibility symbols have been removed from active code; the corresponding equipment reading is deferred documentation only. |
 | `EQUIP-OP-DUALITY` | stable primitive owner landed | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | complete in active code | this report | `Prof_tensor_transf`, `Prof_tensor_hom_transf`, `Prof_tensor_transf_hom`, and the old endpoint-changing co-Yoneda constants have been removed from active code. A fuller endpoint-changing tensor theorem remains deferred because it needs middle-change/coend compatibility. |
-| `EQUIP-ID-TRANSF` | blocked by generic equipment identity | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probes succeed, but full diagnostics still fail at the generic `Prof_comp_transf(Prof_id_transf,Prof_id_transf) == Prof_id_transf` check. A narrower `Prof_id_hom := id_funcd(...)` probe also source-checks but adds two unjoinable critical-pair reports through `Prof_func_hom(id)` and is deferred for the same missing `id_funcd` sibling-rule reason. Migrate only with coherent `id_funcd` sibling rules or after the generic equipment composition surface is demoted. |
-| `EQUIP-PROF-FUNC` | first pass landed | active implementation plus future compatibility cleanup | `Prof_func_hom` is now the core shaped representable unit owner, with identity and representable-composition computation; `Prof_func_transf` is a transparent compatibility view. Future work may retire the compatibility facade if the deferred equipment readings no longer need it. |
+| `EQUIP-ID-TRANSF` | complete in active code | identity-normal-form pass | `Prof_id_transf` and `Prof_id_hom` are transparent `id_funcd` views. During the temporary compatibility phase, `Prof_comp_transf` identity rules matched `id_funcd _ R` directly; the underscore source slot was intentional LHS hygiene after warning-enabled probes showed that explicit product sources create avoidable diagnostics. Those temporary rules were removed with `Prof_comp_transf`. |
+| `EQUIP-PROF-FUNC` | first pass landed | active implementation plus future compatibility cleanup | `Prof_func_hom` is now the core shaped representable unit owner, with identity computation; `Prof_func_transf` is a transparent compatibility view. The former representable-composition rule through `Prof_comp_transf` was retired with the generic facade. Future work may retire the compatibility facade if the deferred equipment readings no longer need it. |
 | `EQUIP-REINDEX-PRODUCT-FOLD` | primitive `Op_prof` slice complete; raw swap naturality deferred | active implementation plus future raw-product probe | The one-off unfolded opposite/reindex bridge has been replaced by the direct semantic computation `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`. Broader `Product_swap_transf` / `Product_swapped_map_func` naturality remains deferred unless raw pullback/swap syntax becomes a concrete runtime consumer. |
-| `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
+| `EQUIP-COMP-RETIRE` | complete in active code | current implementation | `Prof_comp_transf`, its runtime rules, and checks whose sole purpose was the generic equipment-composition facade have been removed. Active source now keeps only a retirement marker comment; deferred equipment readings remain documentation/future-plan material. |
 
 ### Reindex Product-Fold Core Review, 2026-06-29
 

@@ -9307,7 +9307,7 @@ symbol Representation_iso
 
   The computational owner is an inverse pair of operations on every incoming
   vertical map. Beta/eta therefore reduces on dedicated heads rather than on
-  the shared `comp_catd_fapp0` or `Prof_comp_transf` heads. Ordinary
+  shared generic composition heads. Ordinary
   `IsoEvidence` and the two semantic paths retain the standard categorical
   interpretation as postcomposition by inverse arrows.
 */
@@ -9662,8 +9662,8 @@ symbol Prof_hom [I A B : Cat]
 /*
   Narrow shaped application of an internally natural profunctor cell.
 
-  This is deliberately smaller than the general equipment composition
-  `Prof_comp_transf`: it applies one cell to one shaped element and owns no
+  This is deliberately smaller than the retired general equipment-composition
+  facade: it applies one cell to one shaped element and owns no
   identity, associativity, or generic composition rewrite rules.
 */
 symbol Prof_cell_apply
@@ -9780,7 +9780,7 @@ with @hom_postcomp_fapp0
         $s)
   ↪ $s;
 
-// Stable identity equipment cell. Keep generic id_funcd unchanged globally.
+// Transparent compatibility notation for the generic family identity.
 symbol Prof_id_transf [A B : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B)))
   : τ (Obj
@@ -9789,7 +9789,8 @@ symbol Prof_id_transf [A B : Cat]
         R
         (@id_func A)
         R
-        (@id_func B)));
+        (@id_func B)))
+≔ @id_funcd (Product_cat (Op_cat A) B) R;
 
 // Readable shaped identity element for the unit profunctor.
 symbol Prof_id_hom (B : Cat)
@@ -9798,76 +9799,14 @@ symbol Prof_id_hom (B : Cat)
       (@id_func B)
       (@Unit_prof B)
       (@id_func B))
-≔ @Prof_id_transf
-    B B
-    (@Hom_prof_along B B B (@id_func B) (@id_func B));
+≔ @id_funcd
+    (Product_cat (Op_cat B) B)
+    (@Unit_prof B);
 
-/*
-  General equipment-cell composition.
-
-  Semantically, reindex the second cell along the first cell's endpoint
-  functors and compose the resulting displayed functors. The stable head owns
-  identity and co-Yoneda cut-elimination rules.
-*/
-symbol Prof_comp_transf
-  [A0 A1 A2 B0 B1 B2 : Cat]
-  [R0 : τ (Catd (Product_cat (Op_cat A0) B0))]
-  [R1 : τ (Catd (Product_cat (Op_cat A1) B1))]
-  [R2 : τ (Catd (Product_cat (Op_cat A2) B2))]
-  [F01 : τ (Functor A0 A1)]
-  [G01 : τ (Functor B0 B1)]
-  [F12 : τ (Functor A1 A2)]
-  [G12 : τ (Functor B1 B2)]
-  (s : τ (Obj (@Prof_transf_cat A2 A1 B2 B1 R1 F12 R2 G12)))
-  (r : τ (Obj (@Prof_transf_cat A1 A0 B1 B0 R0 F01 R1 G01)))
-  : τ (Obj
-      (@Prof_transf_cat
-        A2 A0 B2 B0
-        R0
-        (@comp_cat_fapp0 A0 A1 A2 F12 F01)
-        R2
-        (@comp_cat_fapp0 B0 B1 B2 G12 G01)));
-
-// Fold the semantic reindex-then-compose route to the stable composition head.
-rule @comp_catd_fapp0
-      _
-      $R0
-      _
-      _
-      (@Prof_reindex_transf
-        $A1 $A0 $B1 $B0
-        $R1
-        (@Prof_reindex $A2 $A1 $B2 $B1 $R2 $F12 $G12)
-        $s
-        $F01
-        $G01)
-      $r
-  ↪ @Prof_comp_transf
-      $A0 $A1 $A2 $B0 $B1 $B2
-      $R0 $R1 $R2
-      $F01 $G01 $F12 $G12
-      $s $r;
-
-rule @Prof_comp_transf
-      $A0 $A1 $A1
-      $B0 $B1 $B1
-      $R0 $R1 $R1
-      $F01 $G01
-      (@id_func $A1)
-      (@id_func $B1)
-      (@Prof_id_transf $A1 $B1 $R1)
-      $r
-  ↪ $r
-with @Prof_comp_transf
-      $A0 $A0 $A2
-      $B0 $B0 $B2
-      $R0 $R0 $R2
-      (@id_func $A0)
-      (@id_func $B0)
-      $F12 $G12
-      $s
-      (@Prof_id_transf $A0 $B0 $R0)
-  ↪ $s;
+// The former broad `Prof_comp_transf` equipment facade is retired. Core
+// runtime computation now uses narrower owners such as `Prof_cell_apply`,
+// fixed co-Yoneda transformations, `Prof_tensor_map`, and generic family
+// composition directly.
 
 /*
   Shaped representable unit element induced by a functor's hom action.
@@ -9882,20 +9821,6 @@ symbol Prof_func_hom [A B : Cat]
 
 rule @Prof_func_hom $A $A (@id_func $A)
   ↪ @Prof_id_hom $A;
-
-rule @Prof_comp_transf
-      $A $B $C
-      $A $B $C
-      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
-      (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
-      (@Hom_prof_along $C $C $C (@id_func $C) (@id_func $C))
-      $F $F
-      $G $G
-      (@Prof_func_hom $B $C $G)
-      (@Prof_func_hom $A $B $F)
-  ↪ @Prof_func_hom
-      $A $C
-      (@comp_cat_fapp0 $A $B $C $G $F);
 
 // Compatibility equipment-cell notation for the same shaped element.
 symbol Prof_func_transf [A B : Cat]
