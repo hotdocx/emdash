@@ -1,7 +1,7 @@
 # EMDASH v3.2 Equipment-Shadow, Tensor, Co-Yoneda, And Join Redesign Plan
 
 Date: 2026-06-28
-Last reviewed: 2026-06-30
+Last reviewed: 2026-07-01
 
 Plan-ID: EMDASH-V3-2-EQUIPMENT-SHADOW-TENSOR-JOIN-REDESIGN-2026-06-28
 Depends-On: EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17
@@ -14,9 +14,10 @@ Status: join, shaped co-Yoneda, fixed-endpoint tensor-map,
 `Op_prof` semantic owner, internal fixed co-Yoneda naturality-owner, shaped
 `Prof_func_hom`, generic identity-normal-form, generic `Prof_comp_transf`
 retirement, and transparent compatibility-alias retirement slices landed;
-broad endpoint-changing/general-cell co-Yoneda runtime rules and obsolete
-equipment-style compatibility symbols have been retired from active source and
-checks
+`Prof_func_hom` uncurried internal-action projection design recorded for next
+implementation; broad endpoint-changing/general-cell co-Yoneda runtime rules
+and obsolete equipment-style compatibility symbols have been retired from
+active source and checks
 
 ## Purpose
 
@@ -971,6 +972,110 @@ The lasting active-code result is `Prof_func_hom`; old public/equipment
 readings that mention `Prof_func_transf` are report-level historical/deferred
 formulas, not active kernel API.
 
+## Design Checkpoint, 2026-07-01, `Prof_func_hom` Uncurried Action
+
+`Prof_func_hom(F)` should compute as the product/uncurried presentation of the
+existing ordinary internal hom-action:
+
+```text
+fapp1_int_transf(F)
+  : Transf
+      (hom_int(A,A,id_A))
+      (hom_int(B,A,F) o Op_func(F)).
+```
+
+The object component of `Prof_func_hom(F)` at a product object `(x,y)` is:
+
+```text
+tapp0_fapp0(Prof_func_hom(F),(x,y))
+  -> fapp1_func(F,x,y).
+```
+
+For the base-arrow action, do not make the runtime owner a raw formula such
+as `F(k) o F(h) o F(l)` and do not add a commuting-square naturality rule.
+The canonical owner is the nested `tapp1_fapp0` projection already exposed by
+`fapp1_int_transf(F)`.
+
+Let:
+
+```text
+F : Functor A B
+x,y,x',y' : Obj A
+l : Hom_(Op_cat A)(x,x')    // equivalently Hom_A(x',x)
+k : Hom_A(y,y')
+```
+
+Then:
+
+```text
+tapp1_fapp0(fapp1_int_transf(F),l)
+  : Hom_(Catd_cat A)
+      (hom_ A A id_A x)
+      (hom_ B A F (F x')).
+```
+
+Since `Hom_cat(Catd_cat A)` reduces to `Functord_cat`, this is a Cat-valued
+natural family morphism over the target variable `y`:
+
+```text
+y : A ;
+  Hom_A(x,y) -> Hom_B(F x', F y).
+```
+
+The second projection along `k : Hom_A(y,y')` is therefore well-typed:
+
+```text
+tapp1_fapp0(
+  tapp1_fapp0(fapp1_int_transf(F),l),
+  k)
+  : Functor
+      (Hom_cat A x y)
+      (Hom_cat B (F x') (F y')).
+```
+
+Applied to `h : Hom_A(x,y)`, its semantic reading is:
+
+```text
+F(k o h o l)
+```
+
+and, after ordinary functoriality is observed, the same arrow may be read as:
+
+```text
+F(k) o F(h) o F(l).
+```
+
+The nested `tapp1_fapp0` term is the implementation owner; the composed-arrow
+form is only the ordinary mathematical reading.
+
+For a product arrow
+
+```text
+pq : Hom_(Product_cat (Op_cat A) A) (x,y) (x',y')
+```
+
+the intended capped off-diagonal projection is:
+
+```text
+tapp1_fapp0(Prof_func_hom(F),pq)
+  -> tapp1_fapp0(
+       tapp1_fapp0(fapp1_int_transf(F), sigma_Fst pq),
+       sigma_Snd pq).
+```
+
+The promoted implementation should probably introduce a small readable helper
+or stable projection head, for example:
+
+```text
+Prof_func_hom_fapp1_fapp0(F,pq)
+```
+
+whose body or projection rule is the nested `tapp1_fapp0` expression above.
+This keeps the large internal-action expression out of later tensor/co-Yoneda
+rules while preserving the correct semantic owner. A full transparent
+definition of `Prof_func_hom` through semantic uncurrying remains deferred
+until the currently missing transfor action of `uncurry_func_func` is added.
+
 Validation so far:
 
 ```text
@@ -1569,11 +1674,27 @@ equipment composition.
 Current role:
 
 - packages the hom-action of an ordinary functor as a shaped representable
-  unit element.
+  unit element;
+- its object projection should expose the ordinary hom-action component
+  `fapp1_func(F,x,y)`.
 
 Target role:
 
-- keep `Prof_func_hom` as the fixed shaped owner.
+- keep `Prof_func_hom` as the fixed shaped owner;
+- add the uncurried/product-base projection ladder:
+
+  ```text
+  tapp0_fapp0(Prof_func_hom(F),(x,y))
+    -> fapp1_func(F,x,y)
+
+  tapp1_fapp0(Prof_func_hom(F),pq)
+    -> tapp1_fapp0(
+         tapp1_fapp0(fapp1_int_transf(F), sigma_Fst pq),
+         sigma_Snd pq)
+  ```
+
+- use a narrow helper/stable projection head if needed for the second rule,
+  but do not replace it by a raw `F(k) o F(h) o F(l)` naturality-square rule.
 
 Deletion status:
 
@@ -3194,7 +3315,7 @@ make catalog
 | `EQUIP-OP-DUALITY` | stable primitive owner landed; alias retired | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. `Op_prof_transf` has been removed from active code. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | complete in active code | this report | `Prof_tensor_transf`, `Prof_tensor_hom_transf`, `Prof_tensor_transf_hom`, and the old endpoint-changing co-Yoneda constants have been removed from active code. A fuller endpoint-changing tensor theorem remains deferred because it needs middle-change/coend compatibility. |
 | `EQUIP-ID-TRANSF` | complete and alias retired | identity-normal-form pass | Generic identity is direct `id_funcd`; `Prof_id_hom` remains the shaped unit identity owner. `Prof_id_transf` and the temporary `Prof_comp_transf` identity bridge have been removed from active code. |
-| `EQUIP-PROF-FUNC` | core owner landed; alias retired | active implementation | `Prof_func_hom` is now the core shaped representable unit owner, with identity computation. `Prof_func_transf` and the former representable-composition rule through `Prof_comp_transf` have been removed from active code. |
+| `EQUIP-PROF-FUNC` | core owner landed; uncurried projection ladder pending | active implementation plus next probe | `Prof_func_hom` is now the core shaped representable unit owner, with identity computation. `Prof_func_transf` and the former representable-composition rule through `Prof_comp_transf` have been removed from active code. Next implementation should add object and product-base arrow projections, with the arrow projection owned by nested `tapp1_fapp0` projections of `fapp1_int_transf(F)`, not by a raw naturality-square formula. |
 | `EQUIP-REINDEX-PRODUCT-FOLD` | primitive `Op_prof` slice complete; raw swap naturality deferred | active implementation plus future raw-product probe | The one-off unfolded opposite/reindex bridge has been replaced by the direct semantic computation `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`. Broader `Product_swap_transf` / `Product_swapped_map_func` naturality remains deferred unless raw pullback/swap syntax becomes a concrete runtime consumer. |
 | `EQUIP-COMP-RETIRE` | complete in active code | current implementation | `Prof_comp_transf`, its runtime rules, and checks whose sole purpose was the generic equipment-composition facade have been removed. There is no active source/check occurrence; deferred equipment readings remain report-level historical/deferred material. |
 | `EQUIP-ALIAS-RETIRE` | complete in active code | current implementation | Removed transparent compatibility aliases `Prof_id_transf`, `Prof_func_transf`, and `Op_prof_transf`, plus direct checks for those aliases. Active code now implements the minimal fixed-owner design; former names remain only in reports as historical/deferred notation. |
