@@ -748,6 +748,61 @@ their required content through the internal transformations, fixed tensor-map
 functors, and an already-owned hom-action/postcomposition route, without
 installing a new commuting-square rewrite.
 
+## Implementation Checkpoint, 2026-06-30, Fixed Co-Yoneda Beta/Fusion
+
+The fixed co-Yoneda shaped beta/fusion slice has been promoted.
+
+Implemented in `emdash3_2.lp`:
+
+- `Prof_func_transf` / `Prof_func_hom` moved earlier, immediately after
+  `Prof_comp_transf`, so tensor/co-Yoneda rules can use the existing
+  representable functor-induced unit element without adding a new primitive.
+- fixed right and left beta rules now reduce
+  `Prof_cell_apply(tapp0_fapp0(Prof_coyoneda_*_transf,P),
+  Prof_tensor_hom_hom(...,Prof_func_transf(...)))` to the shaped element.
+- fixed right and left arbitrary-`pp` fusion rules now reduce
+  `Prof_cell_apply(tapp1_fapp0(Prof_coyoneda_*_transf,pp),
+  Prof_tensor_hom_hom(...,Prof_func_transf(...)))` to
+  `Prof_cell_apply(pp,p)`.
+- the older shaped rules headed by
+  `Prof_coyoneda_unit_tensor_cov_transf` /
+  `Prof_coyoneda_unit_tensor_con_transf` were removed. Those symbols remain
+  only for the still-active general-cell compatibility rules.
+
+Implementation detail:
+
+- the promoted LHSs use canonical
+  `Catd_cat(Product_cat(Op_cat A,B))` component categories and normalized
+  `Hom_prof_along(id,id)` / `Prof_func_transf` heads. A focused probe showed
+  that the readable `Prof_cat`, `Unit_prof`, and `Prof_func_hom` surfaces were
+  too transparent for these beta rules to serve as reliable runtime
+  discriminators.
+
+Diagnostics in `emdash3_2_checks.lp` now cover:
+
+- direct fixed right/left beta under `Prof_cell_apply`;
+- arbitrary fixed-endpoint `pp` right/left fusion through
+  `tapp1_fapp0(Prof_coyoneda_*_transf,pp)`;
+- the existing general-cell `Prof_comp_transf` identity-unit compatibility
+  rules, which remain intentionally temporary.
+
+Validation so far:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_coyoneda_fixed_beta_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+python3 scripts/audit_rule_lhs.py --show-kept
+make catalog
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled active summary after this slice reports 1,434 warnings:
+1,257 unjoinable critical-pair reports and 177 replaceable-pattern reports.
+The remaining `Prof_cell_apply` warning family is expected evidence that the
+old compatibility and new fixed beta surfaces overlap during the migration; it
+should be reassessed when the general-cell `Prof_comp_transf` co-Yoneda pair is
+retired.
+
 ## Current Remaining Consumers
 
 After the first join implementation slice, the active source still has these
@@ -2753,7 +2808,7 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | partial first pass complete; next target clarified | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Next replace old shaped `CoyR/CoyL` beta surfaces by direct `Prof_coyoneda_*_map` beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility. |
+| `EQUIP-TENSOR-COYONEDA` | fixed beta/fusion slice landed; general-cell compatibility remains | active implementation plus future probe | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Old shaped `CoyR/CoyL` beta surfaces have been replaced by direct fixed beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`; general-cell identity-unit naturality remains temporary `Prof_comp_transf` compatibility. |
 | `EQUIP-OP-DUALITY` | stable primitive owner landed | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. |
 | `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete, blocked by remaining consumers | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. Remove or document-only demote it after identity-middle co-Yoneda naturality is expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and narrow postcomposition/cut-elimination owners. |
 | `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |

@@ -7477,50 +7477,79 @@ assert [A0 A A' B : Cat]
       (@id_func B)
       pp qq;
 
-assert [A A' B : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A') B))]
-  [H : τ (Functor B A)]
-  [F : τ (Functor A A')]
-  (p : τ (@Prof_hom B A B H P (@id_func B)))
-  (pp : τ (Obj
-    (@Prof_transf_cat A' A B B P F P' (@id_func B)))) ⊢
+assert [I A B : Cat]
+  [P : τ (Prof A B)]
+  [F : τ (Functor I A)]
+  [M : τ (Functor I B)]
+  (p : τ (@Prof_hom I A B F P M)) ⊢
   @Prof_cell_apply
-    B A B A' B
+    I A B A B
+    (@Prof_tensor
+      A B B P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B)))
+    P
+    (@id_func A)
+    (@id_func B)
+    F
+    M
+    (@tapp0_fapp0
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_tensor_right_unit_func A B)
+      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      P
+      (@Prof_coyoneda_cov_transf A B))
+    (@Prof_tensor_hom_hom
+      I A B B
+      P
+      (@Hom_prof_along B B B (@id_func B) (@id_func B))
+      F
+      M
+      M
+      p
+      (@Prof_func_transf I B M))
+  ≡ p;
+
+assert [I A B : Cat]
+  [P P' : τ (Prof A B)]
+  [F : τ (Functor I A)]
+  [M : τ (Functor I B)]
+  (pp : τ (@ProfMap A B P P'))
+  (p : τ (@Prof_hom I A B F P M)) ⊢
+  @Prof_cell_apply
+    I A B A B
     (@Prof_tensor
       A B B P
       (@Hom_prof_along B B B (@id_func B) (@id_func B)))
     P'
+    (@id_func A)
+    (@id_func B)
     F
-    (@id_func B)
-    H
-    (@id_func B)
-    (@Prof_coyoneda_unit_tensor_cov_transf
-      A B A' B
+    M
+    (@tapp1_fapp0
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_tensor_right_unit_func A B)
+      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
       P P'
-      F
-      (@id_func B)
-      pp
-      B
-      (@id_func B))
+      (@Prof_coyoneda_cov_transf A B)
+      pp)
     (@Prof_tensor_hom_hom
-      B A B B
+      I A B B
       P
       (@Hom_prof_along B B B (@id_func B) (@id_func B))
-      H
-      (@id_func B)
-      (@id_func B)
-      p
-      (@Prof_id_transf
-        B B
-        (@Hom_prof_along B B B (@id_func B) (@id_func B))))
-  ≡ @Prof_cell_apply
-      B A B A' B
-      P P'
       F
+      M
+      M
+      p
+      (@Prof_func_transf I B M))
+  ≡ @Prof_cell_apply
+      I A B A B
+      P P'
+      (@id_func A)
       (@id_func B)
-      H
-      (@id_func B)
+      F
+      M
       pp p;
 
 assert [I X' A B X : Cat]
@@ -7595,51 +7624,81 @@ assert [A B0 B B' : Cat]
       G
       pp qq;
 
-assert [A B B' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
-  [K : τ (Functor A B)]
-  [G : τ (Functor B B')]
-  (p : τ (@Prof_hom A A B (@id_func A) P K))
-  (pp : τ (Obj
-    (@Prof_transf_cat A A B' B P (@id_func A) P' G))) ⊢
+assert [I A B : Cat]
+  [P : τ (Prof A B)]
+  [F : τ (Functor I A)]
+  [G : τ (Functor I B)]
+  (p : τ (@Prof_hom I A B F P G)) ⊢
   @Prof_cell_apply
-    A A B A B'
+    I A B A B
+    (@Prof_tensor
+      A A B
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P)
+    P
+    (@id_func A)
+    (@id_func B)
+    F
+    G
+    (@tapp0_fapp0
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_tensor_left_unit_func A B)
+      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      P
+      (@Prof_coyoneda_con_transf A B))
+    (@Prof_tensor_hom_hom
+      I A A B
+      (@Hom_prof_along A A A (@id_func A) (@id_func A))
+      P
+      F
+      G
+      F
+      (@Prof_func_transf I A F)
+      p)
+  ≡ p;
+
+assert [I A B : Cat]
+  [P P' : τ (Prof A B)]
+  [F : τ (Functor I A)]
+  [G : τ (Functor I B)]
+  (pp : τ (@ProfMap A B P P'))
+  (p : τ (@Prof_hom I A B F P G)) ⊢
+  @Prof_cell_apply
+    I A B A B
     (@Prof_tensor
       A A B
       (@Hom_prof_along A A A (@id_func A) (@id_func A))
       P)
     P'
     (@id_func A)
+    (@id_func B)
+    F
     G
-    (@id_func A)
-    K
-    (@Prof_coyoneda_unit_tensor_con_transf
-      A B A B'
+    (@tapp1_fapp0
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_tensor_left_unit_func A B)
+      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
       P P'
-      (@id_func A)
-      G
-      pp
-      A
-      (@id_func A))
+      (@Prof_coyoneda_con_transf A B)
+      pp)
     (@Prof_tensor_hom_hom
-      A A A B
+      I A A B
       (@Hom_prof_along A A A (@id_func A) (@id_func A))
       P
-      (@id_func A)
-      K
-      (@id_func A)
-      (@Prof_id_transf
-        A A
-        (@Hom_prof_along A A A (@id_func A) (@id_func A)))
+      F
+      G
+      F
+      (@Prof_func_transf I A F)
       p)
   ≡ @Prof_cell_apply
-      A A B A B'
+      I A B A B
       P P'
       (@id_func A)
+      (@id_func B)
+      F
       G
-      (@id_func A)
-      K
       pp p;
 
 // Covariant profunctor implication and eval/lambda calculus.

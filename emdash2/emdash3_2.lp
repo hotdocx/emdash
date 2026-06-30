@@ -9870,6 +9870,48 @@ with @Prof_comp_transf
   ↪ $s;
 
 /*
+  Representable equipment cell induced by a functor's hom action.
+
+  This is the general `Prof_func_hom` prerequisite deferred by Phase 2, at the
+  equipment-cell level needed by the join recursor and by fixed co-Yoneda unit
+  beta.
+*/
+symbol Prof_func_transf [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Obj
+      (@Prof_transf_cat
+        B A B A
+        (@Unit_prof A)
+        F
+        (@Unit_prof B)
+        F));
+
+rule @Prof_func_transf $A $A (@id_func $A)
+  ↪ @Prof_id_transf
+      $A $A
+      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A));
+
+rule @Prof_comp_transf
+      $A $B $C
+      $A $B $C
+      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+      (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+      (@Hom_prof_along $C $C $C (@id_func $C) (@id_func $C))
+      $F $F
+      $G $G
+      (@Prof_func_transf $B $C $G)
+      (@Prof_func_transf $A $B $F)
+  ↪ @Prof_func_transf
+      $A $C
+      (@comp_cat_fapp0 $A $B $C $G $F);
+
+// Shaped-element notation for the same functor-induced equipment cell.
+symbol Prof_func_hom [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (@Prof_hom A B B F (@Unit_prof B) F)
+≔ @Prof_func_transf A B F;
+
+/*
   Endpoint-changing opposite cell as a transparent compatibility view.
 
   The fixed-endpoint action is owned by `Op_prof_func`; the target conversion
@@ -10156,6 +10198,134 @@ symbol Prof_coyoneda_con_map [A B : Cat]
     P
     (@Prof_coyoneda_con_transf A B);
 
+// Fixed right-unit co-Yoneda beta on tensor-introduced shaped elements.
+rule @Prof_cell_apply
+      $I $A $B $A $B
+      (@Prof_tensor $A $B $B $P
+        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B)))
+      $P
+      (@id_func $A)
+      (@id_func $B)
+      $F
+      $M
+      (@tapp0_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Prof_tensor_right_unit_func $A $B)
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        $P
+        (@Prof_coyoneda_cov_transf $A $B))
+      (@Prof_tensor_hom_hom
+        $I $A $B $B
+        $P
+        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+        $F
+        $M
+        $M
+        $p
+        (@Prof_func_transf $I $B $M))
+  ↪ $p;
+
+// Fixed right-unit co-Yoneda naturality fusion under shaped application.
+rule @Prof_cell_apply
+      $I $A $B $A $B
+      (@Prof_tensor $A $B $B $P
+        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B)))
+      $P'
+      (@id_func $A)
+      (@id_func $B)
+      $F
+      $M
+      (@tapp1_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Prof_tensor_right_unit_func $A $B)
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        $P $P'
+        (@Prof_coyoneda_cov_transf $A $B)
+        $pp)
+      (@Prof_tensor_hom_hom
+        $I $A $B $B
+        $P
+        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+        $F
+        $M
+        $M
+        $p
+        (@Prof_func_transf $I $B $M))
+  ↪ @Prof_cell_apply
+      $I $A $B $A $B
+      $P $P'
+      (@id_func $A)
+      (@id_func $B)
+      $F $M
+      $pp $p;
+
+// Fixed left-unit co-Yoneda beta on tensor-introduced shaped elements.
+rule @Prof_cell_apply
+      $I $A $B $A $B
+      (@Prof_tensor $A $A $B
+        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        $P)
+      $P
+      (@id_func $A)
+      (@id_func $B)
+      $F
+      $G
+      (@tapp0_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Prof_tensor_left_unit_func $A $B)
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        $P
+        (@Prof_coyoneda_con_transf $A $B))
+      (@Prof_tensor_hom_hom
+        $I $A $A $B
+        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        $P
+        $F
+        $G
+        $F
+        (@Prof_func_transf $I $A $F)
+        $p)
+  ↪ $p;
+
+// Fixed left-unit co-Yoneda naturality fusion under shaped application.
+rule @Prof_cell_apply
+      $I $A $B $A $B
+      (@Prof_tensor $A $A $B
+        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        $P)
+      $P'
+      (@id_func $A)
+      (@id_func $B)
+      $F
+      $G
+      (@tapp1_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Prof_tensor_left_unit_func $A $B)
+        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        $P $P'
+        (@Prof_coyoneda_con_transf $A $B)
+        $pp)
+      (@Prof_tensor_hom_hom
+        $I $A $A $B
+        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        $P
+        $F
+        $G
+        $F
+        (@Prof_func_transf $I $A $F)
+        $p)
+  ↪ @Prof_cell_apply
+      $I $A $B $A $B
+      $P $P'
+      (@id_func $A)
+      (@id_func $B)
+      $F $G
+      $pp $p;
+
 // Right-unit co-Yoneda cancellation on a tensor-introduced general cell.
 rule @Prof_comp_transf
       $A0 $A $A'
@@ -10207,55 +10377,6 @@ rule @Prof_comp_transf
       $F
       (@id_func $B)
       $pp $qq;
-
-// Right-unit co-Yoneda cancellation on a tensor-introduced shaped element.
-rule @Prof_cell_apply
-      $B $A $B $A' $B
-      (@Prof_tensor
-        $A $B $B
-        $P
-        (@Hom_prof_along
-          $B $B $B
-          (@id_func $B)
-          (@id_func $B)))
-      $P'
-      $F
-      (@id_func $B)
-      $H
-      (@id_func $B)
-      (@Prof_coyoneda_unit_tensor_cov_transf
-        $A $B $A' $B
-        $P $P'
-        $F
-        (@id_func $B)
-        $pp
-        $B
-        (@id_func $B))
-      (@Prof_tensor_hom_hom
-        $B $A $B $B
-        $P
-        (@Hom_prof_along
-          $B $B $B
-          (@id_func $B)
-          (@id_func $B))
-        $H
-        (@id_func $B)
-        (@id_func $B)
-        $p
-        (@Prof_id_transf
-          $B $B
-          (@Hom_prof_along
-            $B $B $B
-            (@id_func $B)
-            (@id_func $B))))
-  ↪ @Prof_cell_apply
-      $B $A $B $A' $B
-      $P $P'
-      $F
-      (@id_func $B)
-      $H
-      (@id_func $B)
-      $pp $p;
 
 // Left-unit co-Yoneda cancellation on a tensor-introduced general cell.
 rule @Prof_comp_transf
@@ -10309,55 +10430,6 @@ rule @Prof_comp_transf
       (@id_func $A)
       $G
       $pp $qq;
-
-// Left-unit co-Yoneda cancellation on a tensor-introduced shaped element.
-rule @Prof_cell_apply
-      $A $A $B $A $B'
-      (@Prof_tensor
-        $A $A $B
-        (@Hom_prof_along
-          $A $A $A
-          (@id_func $A)
-          (@id_func $A))
-        $P)
-      $P'
-      (@id_func $A)
-      $G
-      (@id_func $A)
-      $K
-      (@Prof_coyoneda_unit_tensor_con_transf
-        $A $B $A $B'
-        $P $P'
-        (@id_func $A)
-        $G
-        $pp
-        $A
-        (@id_func $A))
-      (@Prof_tensor_hom_hom
-        $A $A $A $B
-        (@Hom_prof_along
-          $A $A $A
-          (@id_func $A)
-          (@id_func $A))
-        $P
-        (@id_func $A)
-        $K
-        (@id_func $A)
-        (@Prof_id_transf
-          $A $A
-          (@Hom_prof_along
-            $A $A $A
-            (@id_func $A)
-            (@id_func $A)))
-        $p)
-  ↪ @Prof_cell_apply
-      $A $A $B $A $B'
-      $P $P'
-      (@id_func $A)
-      $G
-      (@id_func $A)
-      $K
-      $pp $p;
 
 /*
   Covariant profunctor implication.
@@ -11668,49 +11740,6 @@ symbol left_adjoint_preserves_weighted_colimit_con
 symbol Terminal_prof (A B : Cat)
   : τ (Catd (Product_cat (Op_cat A) B))
 ≔ @Const_catd (Product_cat (Op_cat A) B) Terminal_cat;
-
-/*
-  Representable equipment cell induced by a functor's hom action.
-
-  This is the general `Prof_func_hom` prerequisite deferred by Phase 2, at the
-  equipment-cell level needed by the join recursor. It is stable because the
-  current internal ordinary hom-action has no direct uncurried product-family
-  constructor.
-*/
-symbol Prof_func_transf [A B : Cat]
-  (F : τ (Functor A B))
-  : τ (Obj
-      (@Prof_transf_cat
-        B A B A
-        (@Unit_prof A)
-        F
-        (@Unit_prof B)
-        F));
-
-rule @Prof_func_transf $A $A (@id_func $A)
-  ↪ @Prof_id_transf
-      $A $A
-      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A));
-
-rule @Prof_comp_transf
-      $A $B $C
-      $A $B $C
-      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
-      (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
-      (@Hom_prof_along $C $C $C (@id_func $C) (@id_func $C))
-      $F $F
-      $G $G
-      (@Prof_func_transf $B $C $G)
-      (@Prof_func_transf $A $B $F)
-  ↪ @Prof_func_transf
-      $A $C
-      (@comp_cat_fapp0 $A $B $C $G $F);
-
-// Shaped-element notation for the same functor-induced equipment cell.
-symbol Prof_func_hom [A B : Cat]
-  (F : τ (Functor A B))
-  : τ (@Prof_hom A B B F (@Unit_prof B) F)
-≔ @Prof_func_transf A B F;
 
 // Unique shaped element of the terminal profunctor.
 constant symbol Prof_terminal_hom [I A B : Cat]
