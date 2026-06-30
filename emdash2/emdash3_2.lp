@@ -9780,18 +9780,6 @@ with @hom_postcomp_fapp0
         $s)
   ↪ $s;
 
-// Transparent compatibility notation for the generic family identity.
-symbol Prof_id_transf [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  : τ (Obj
-      (@Prof_transf_cat
-        A A B B
-        R
-        (@id_func A)
-        R
-        (@id_func B)))
-≔ @id_funcd (Product_cat (Op_cat A) B) R;
-
 // Readable shaped identity element for the unit profunctor.
 symbol Prof_id_hom (B : Cat)
   : τ (@Prof_hom
@@ -9803,17 +9791,14 @@ symbol Prof_id_hom (B : Cat)
     (Product_cat (Op_cat B) B)
     (@Unit_prof B);
 
-// The former broad `Prof_comp_transf` equipment facade is retired. Core
-// runtime computation now uses narrower owners such as `Prof_cell_apply`,
+// Core runtime computation uses narrow fixed owners such as `Prof_cell_apply`,
 // fixed co-Yoneda transformations, `Prof_tensor_map`, and generic family
 // composition directly.
 
 /*
   Shaped representable unit element induced by a functor's hom action.
 
-  This is the core owner used by fixed co-Yoneda beta. The broader
-  `Prof_func_transf` name below is only a transparent compatibility view of
-  the same term at the equipment-cell presentation.
+  This is the core owner used by fixed co-Yoneda beta.
 */
 symbol Prof_func_hom [A B : Cat]
   (F : τ (Functor A B))
@@ -9821,48 +9806,6 @@ symbol Prof_func_hom [A B : Cat]
 
 rule @Prof_func_hom $A $A (@id_func $A)
   ↪ @Prof_id_hom $A;
-
-// Compatibility equipment-cell notation for the same shaped element.
-symbol Prof_func_transf [A B : Cat]
-  (F : τ (Functor A B))
-  : τ (Obj
-      (@Prof_transf_cat
-        B A B A
-        (@Unit_prof A)
-        F
-        (@Unit_prof B)
-        F))
-≔ @Prof_func_hom A B F;
-
-/*
-  Endpoint-changing opposite cell as a transparent compatibility view.
-
-  The fixed-endpoint action is owned by `Op_prof_func`; the target conversion
-  uses the normalized opposite/reindex bridge above. No identity/composition
-  rule is owned by this compatibility name.
-*/
-symbol Op_prof_transf
-  [A A' B B' : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [F : τ (Functor A' A)]
-  [G : τ (Functor B' B)]
-  (r : τ (Obj (@Prof_transf_cat A A' B B' R' F R G)))
-  : τ (Obj
-      (@Prof_transf_cat
-        (Op_cat B) (Op_cat B')
-        (Op_cat A) (Op_cat A')
-        (@Op_prof A' B' R')
-        (@Op_func B' B G)
-        (@Op_prof A B R)
-        (@Op_func A' A F)))
-≔ @fapp1_fapp0
-    (@Prof_cat A' B')
-    (@Prof_cat (Op_cat B') (Op_cat A'))
-    (@Op_prof_func A' B')
-    R'
-    (@Prof_reindex A A' B B' R F G)
-    r;
 
 /*
   Primitive tensor/composition of Cat-valued profunctors.
@@ -9929,13 +9872,6 @@ constant symbol Prof_tensor_hom_hom
   (s : τ (@Prof_hom I B X M S G))
   : τ (@Prof_hom I A X F (@Prof_tensor A B X R S) G);
 
-/*
-  Retired endpoint-changing tensor/co-Yoneda compatibility names such as
-  Prof_tensor_transf, Prof_tensor_hom_transf, Prof_tensor_transf_hom, and
-  Prof_coyoneda_unit_tensor_*_transf are now documented-only future equipment
-  views. The active core below uses fixed-endpoint tensor maps, shaped tensor
-  introduction, and fixed co-Yoneda transformations.
-*/
 /*
   Internal fixed-endpoint co-Yoneda naturality owners.
 

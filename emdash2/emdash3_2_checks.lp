@@ -7013,22 +7013,6 @@ assert [A B : Cat]
     (@id_func B)
   ≡ r;
 
-assert [A A' B B' : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [F : τ (Functor A' A)]
-  [G : τ (Functor B' B)]
-  (r : τ (Obj (@Prof_transf_cat A A' B B' R' F R G))) ⊢
-  @Op_prof_transf A A' B B' R' R F G r
-  : τ (Obj
-      (@Prof_transf_cat
-        (Op_cat B) (Op_cat B')
-        (Op_cat A) (Op_cat A')
-        (@Op_prof A' B' R')
-        (@Op_func B' B G)
-        (@Op_prof A B R)
-        (@Op_func A' A F)));
-
 assert [A B : Cat]
   (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
   @Op_prof_map
@@ -7097,26 +7081,8 @@ assert [I A' B' A B : Cat]
 
 assert [A B : Cat]
   (F : τ (Functor A B)) ⊢
-  @Prof_func_transf A B F
-  : τ (Obj
-      (@Prof_transf_cat
-        B A B A
-        (@Unit_prof A)
-        F
-        (@Unit_prof B)
-        F));
-
-assert [A B : Cat]
-  (F : τ (Functor A B)) ⊢
   @Prof_func_hom A B F
   : τ (@Prof_hom A B B F (@Unit_prof B) F);
-
-assert [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
-  @Prof_id_transf A B R
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
-      R;
 
 assert [A : Cat] ⊢
   @Prof_id_hom A
