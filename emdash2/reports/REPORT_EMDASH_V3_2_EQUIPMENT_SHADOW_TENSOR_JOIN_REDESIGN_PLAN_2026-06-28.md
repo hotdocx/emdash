@@ -11,9 +11,10 @@ Infinity-Codex-Origin: active-codex-session-2026-06-28
 Infinity-Codex-Decision-Responses: none
 Status: join, shaped co-Yoneda, fixed-endpoint tensor-map, stable `Op_prof`
 semantic owner, and internal fixed co-Yoneda naturality-owner slices landed;
-fixed co-Yoneda beta/fusion is the current core runtime path; broad
-endpoint-changing/general-cell co-Yoneda runtime rules have been demoted to
-deferred compatibility
+fixed co-Yoneda beta/fusion now uses `Prof_func_hom` as the shaped
+representable unit owner; broad endpoint-changing/general-cell co-Yoneda
+runtime rules and obsolete compatibility symbols have been retired from
+active code
 
 ## Purpose
 
@@ -320,8 +321,9 @@ Deliberately not implemented in this slice:
 - no optional `join_elim_cross_hom` alias, because the transparent
   `Prof_cell_eval` route checks;
 - no tensor/co-Yoneda migration;
-- no demotion or deletion of generic `Prof_comp_transf`, because the
-  tensor/co-Yoneda compatibility rules still consume it;
+- no demotion or deletion of generic `Prof_comp_transf`; at that checkpoint,
+  tensor/co-Yoneda compatibility rules still consumed it. Later checkpoints
+  retire those tensor/co-Yoneda consumers from active code;
 - no derived `join_equipment_cross` compatibility view for the old equipment
   reading.
 
@@ -426,14 +428,17 @@ no entries headed by `Prof_tensor_map`, `Prof_cell_apply`, `Prof_cell_eval`,
 `join_elim_cross_transf`.
 
 This checkpoint intentionally records only the fixed-endpoint tensor-map
-owner needed by later co-Yoneda naturality work. The older
-`Prof_tensor_transf` remains a temporary endpoint-changing primitive. The
-intended future direction is to derive endpoint-changing tensor cells from
-`Prof_tensor_map`, `Prof_reindex_transf`, and a settled vertical-composition
-view, not to define the fixed-endpoint owner through the endpoint-changing
-primitive. The remaining general-cell identity-unit naturality rules stay
-under `Prof_comp_transf` until the fixed-endpoint naturality and derived
-composition route has been implemented and checked.
+owner needed by later co-Yoneda naturality work. At this checkpoint, the older
+`Prof_tensor_transf` still remained as a temporary endpoint-changing
+primitive; the later compatibility-symbol retirement checkpoint supersedes
+that state and removes it from active code. The intended future direction
+remains to derive any endpoint-changing tensor cells from `Prof_tensor_map`,
+`Prof_reindex_transf`, and a settled vertical-composition view, not to define
+the fixed-endpoint owner through an endpoint-changing primitive. The
+general-cell identity-unit naturality rules that were still under
+`Prof_comp_transf` at this checkpoint were later demoted from active runtime
+computation after the fixed-endpoint naturality and fixed beta/fusion route
+had been implemented and checked.
 
 ## Reassessment Note, 2026-06-29, `Prof_id_transf`
 
@@ -458,6 +463,47 @@ which depended on the stable `Prof_id_transf` head. Once the head unfolded to
 dependency by demoting `Op_prof_transf` to a transparent fixed-functor view.
 The same issue remains for the `Prof_comp_transf` left/right identity rules,
 which still discriminate on `Prof_id_transf`.
+
+Follow-up probe after the 2026-06-30 `Prof_func_hom` owner migration:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_id_transparent_after_prof_func_probe.lp
+```
+
+The source-only probe again succeeded with:
+
+```text
+Prof_id_transf(A,B,R) := id_funcd(Product_cat(Op_cat A,B),R).
+```
+
+Promotion still failed the full diagnostics. The concrete blocker is the
+generic equipment identity check:
+
+```text
+Prof_comp_transf(Prof_id_transf(R),Prof_id_transf(R))
+  == Prof_id_transf(R).
+```
+
+Once `Prof_id_transf` unfolds to the generic `id_funcd`, the remaining
+`Prof_comp_transf` identity rules no longer provide the required stable
+identity presentation for this assertion. This confirms that transparent
+`Prof_id_transf` should wait for either coherent `id_funcd` sibling rules for
+`Prof_comp_transf`, or for demotion of the generic equipment-composition
+surface itself.
+
+Narrow shaped-identity follow-up probe:
+
+```text
+Prof_id_hom(B) := id_funcd(Product_cat(Op_cat B,B),Unit_prof(B)).
+```
+
+This narrower migration source-checks, but it was not promoted. It increased
+the warning inventory by two unjoinable critical-pair reports where
+`Prof_func_hom(id)` can reduce to `Prof_id_hom` and then generic `id_funcd`
+before the `Prof_comp_transf(Prof_func_hom(G),Prof_func_hom(F))` rule sees
+the representable identity case. This is the same missing `id_funcd` sibling
+identity issue at a shaped subcase, so it remains deferred with
+`Prof_id_transf`.
 
 Conclusion:
 
@@ -587,11 +633,11 @@ Prof_tensor_map(r,s)
   : ProfMap(P tensor Q, P' tensor Q')
 ```
 
-`Prof_tensor_transf` should not be the owner of fixed-endpoint tensor
-functoriality. Ultimately it should be absent from active runtime code, or kept
-only as a documented future endpoint-changing compatibility view.
+The former `Prof_tensor_transf` should not be the owner of fixed-endpoint
+tensor functoriality. It is now absent from active code and retained only as a
+documented future endpoint-changing compatibility idea.
 
-A full derived replacement for the current most-general `Prof_tensor_transf`
+A full derived replacement for the former most-general `Prof_tensor_transf`
 needs more than `Prof_tensor_map` and exposed-endpoint `Prof_reindex`: it also
 needs a middle-change/coend compatibility map comparing
 
@@ -607,17 +653,10 @@ Prof_reindex(Prof_tensor(R,S), F, G).
 
 The current kernel has no general coend/coinserter semantics, so this
 middle-change operation should not be invented as broad infrastructure during
-this migration. For the current co-Yoneda task, only identity-middle
-specializations are needed. Therefore:
-
-- keep `Prof_tensor_transf` as temporary compatibility only while existing
-  general-cell co-Yoneda rules still consume it;
-- do not build new code on `Prof_tensor_transf`;
-- first express identity-middle co-Yoneda naturality through
-  `Prof_tensor_map`, fixed co-Yoneda maps, and a narrow fixed vertical
-  composition/postcomposition owner;
-- after those consumers move, delete or demote `Prof_tensor_transf` rather
-  than generalizing it further.
+this migration. For the current co-Yoneda task, the fixed beta/fusion core is
+already expressed through `Prof_tensor_map`, fixed co-Yoneda maps, and
+`Prof_cell_apply`. The former endpoint-changing compatibility heads have been
+removed from active code rather than generalized further.
 
 ### Identity And Generic Composition
 
@@ -723,11 +762,12 @@ Important correction:
 - the naturality datum is represented internally by generic `tapp1_fapp0`
   for `Prof_coyoneda_cov_transf` and `Prof_coyoneda_con_transf`.
 
-The older endpoint-changing
+At this checkpoint, the older endpoint-changing
 `Prof_coyoneda_unit_tensor_cov_transf` and
-`Prof_coyoneda_unit_tensor_con_transf` constants remain active compatibility
-and shaped-cell constructors. They no longer own the fixed-endpoint
-`Prof_coyoneda_*_map` aliases.
+`Prof_coyoneda_unit_tensor_con_transf` constants remained active compatibility
+and shaped-cell constructors. They no longer owned the fixed-endpoint
+`Prof_coyoneda_*_map` aliases, and a later checkpoint retires them from active
+code.
 
 Validation so far:
 
@@ -769,8 +809,10 @@ Implemented in `emdash3_2.lp`:
   `Prof_cell_apply(pp,p)`.
 - the older shaped rules headed by
   `Prof_coyoneda_unit_tensor_cov_transf` /
-  `Prof_coyoneda_unit_tensor_con_transf` were removed. Those symbols remain
-  only as endpoint-changing compatibility/documentation surfaces.
+  `Prof_coyoneda_unit_tensor_con_transf` were removed. At this checkpoint,
+  those names were only endpoint-changing compatibility/documentation
+  surfaces; the later compatibility-symbol retirement checkpoint removes them
+  from active code.
 
 Implementation detail:
 
@@ -820,14 +862,17 @@ Implemented in `emdash3_2.lp`:
 - removed the left-unit `Prof_comp_transf` rule that reduced
   `Prof_coyoneda_unit_tensor_con_transf(...,id_A)` composed with
   `Prof_tensor_transf_hom(...,Prof_id_transf(Unit_A))`;
-- kept the old endpoint-changing co-Yoneda and mixed tensor-introduction
-  symbols as typeable compatibility/documentation surfaces;
+- initially kept the old endpoint-changing co-Yoneda and mixed
+  tensor-introduction symbols as typeable compatibility/documentation surfaces;
+  the later compatibility-symbol retirement checkpoint removes them from
+  active code;
 - kept the fixed co-Yoneda beta/fusion rules under `Prof_cell_apply` as the
   runtime core.
 
 Diagnostics in `emdash3_2_checks.lp` were updated by removing only the two
 assertions whose purpose was to require those broad `Prof_comp_transf`
-reductions. Type checks for the compatibility symbols remain.
+reductions. Type checks for the compatibility symbols remained only until the
+later active-code retirement checkpoint.
 
 Validation:
 
@@ -842,6 +887,82 @@ EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
 The warning-enabled active summary stayed at 1,434 warnings: 1,257
 unjoinable critical-pair reports and 177 replaceable-pattern reports. The
 demotion did not change the current warning inventory.
+
+## Implementation Checkpoint, 2026-06-30, Tensor Compatibility Symbol Retirement
+
+The obsolete endpoint-changing tensor/co-Yoneda compatibility symbols have
+been removed from active code.
+
+Removed from `emdash3_2.lp`:
+
+- `Prof_tensor_transf`;
+- `Prof_tensor_hom_transf`;
+- `Prof_tensor_transf_hom`;
+- `Prof_coyoneda_unit_tensor_cov_transf`;
+- `Prof_coyoneda_unit_tensor_con_transf`.
+
+Removed from `emdash3_2_checks.lp`:
+
+- the type-only diagnostics for those five symbols.
+
+Kept:
+
+- `Prof_tensor`;
+- `Prof_tensor_map`;
+- `Prof_tensor_hom_hom`;
+- `Prof_tensor_right_unit_func` / `Prof_tensor_left_unit_func`;
+- `Prof_coyoneda_cov_transf` / `Prof_coyoneda_con_transf`;
+- the fixed `Prof_cell_apply` beta/fusion rules.
+
+The fuller endpoint-changing/equipment reading remains documented in this
+report as deferred compatibility. It is no longer an active kernel API.
+
+Validation:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_tensor_compat_retire_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled active summary stayed at 1,434 warnings: 1,257
+unjoinable critical-pair reports and 177 replaceable-pattern reports.
+
+## Implementation Checkpoint, 2026-06-30, `Prof_func_hom` Core Owner
+
+The first `Prof_func_transf` audit slice has been promoted.
+
+Implemented in `emdash3_2.lp`:
+
+- `Prof_func_hom(F)` is now the primary shaped representable unit element;
+- `Prof_func_hom(id)` reduces to `Prof_id_hom`;
+- the representable functor-composition rule now reduces
+  `Prof_comp_transf(Prof_func_hom(G),Prof_func_hom(F))` to
+  `Prof_func_hom(G . F)`;
+- `Prof_func_transf(F)` is now a transparent compatibility view of
+  `Prof_func_hom(F)`;
+- fixed co-Yoneda beta/fusion rules now key on `Prof_func_hom`, not on the
+  broader equipment-style name.
+
+This is intentionally not a full deletion of the equipment-cell facade. The
+old public/equipment reading may still mention `Prof_func_transf`, especially
+in deferred join-equipment formulas, but it no longer owns the fixed
+co-Yoneda runtime core.
+
+Validation so far:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/equipment_prof_func_hom_owner_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/audit_rule_lhs.py --show-kept
+EMDASH_TYPECHECK_TIMEOUT=60s make warning-summary
+```
+
+The warning-enabled active summary stayed at 1,434 warnings: 1,257
+unjoinable critical-pair reports and 177 replaceable-pattern reports.
 
 ## Current Remaining Consumers
 
@@ -921,13 +1042,8 @@ Current declarations:
 
 ```text
 Prof_tensor
-Prof_tensor_transf
 Prof_tensor_map
 Prof_tensor_hom_hom
-Prof_tensor_hom_transf
-Prof_tensor_transf_hom
-Prof_coyoneda_unit_tensor_cov_transf
-Prof_coyoneda_unit_tensor_con_transf
 Prof_tensor_right_unit_func
 Prof_tensor_left_unit_func
 Prof_coyoneda_cov_transf
@@ -939,10 +1055,10 @@ deferred general-cell/equipment compatibility surfaces
 Current role:
 
 - `Prof_tensor` is an opaque coend-like profunctor composite;
-- tensor introductions package either general equipment cells, shaped
-  elements, or both;
+- tensor introduction is currently exposed only for shaped elements through
+  `Prof_tensor_hom_hom`;
 - `Prof_tensor_map` exposes the fixed-endpoint vertical tensor action as a
-  narrow owner independent from the endpoint-changing `Prof_tensor_transf`;
+  narrow owner independent from any endpoint-changing tensor wrapper;
 - fixed one-way co-Yoneda map aliases are diagonal components of internal
   natural transformations;
 - fixed co-Yoneda naturality is represented by generic `tapp1_fapp0`
@@ -995,9 +1111,11 @@ Deletion status:
 - the general-cell identity-unit `Prof_comp_transf` pair is not a blocker for
   the minimal core and should be demoted from active runtime computation unless
   a concrete current consumer requires it;
-- keeping the old symbols for documentation or future compatibility is fine,
-  but new core code should target fixed-endpoint `Prof_tensor_map`,
-  `Prof_coyoneda_*_transf`, `tapp*` projections, and `Prof_cell_apply`.
+- the old endpoint-changing tensor/co-Yoneda compatibility symbols have been
+  removed from active code; any future compatibility theorem should be added
+  under a new explicit plan and should target fixed-endpoint
+  `Prof_tensor_map`, `Prof_coyoneda_*_transf`, `tapp*` projections, and
+  `Prof_cell_apply` as its core ingredients.
 
 ### Shaped Cell Application / Evaluation
 
@@ -1236,30 +1354,32 @@ Decision status:
 Current declarations:
 
 ```text
-Prof_func_transf(F)
-Prof_func_hom(F) := Prof_func_transf(F)
-Prof_func_transf(id) -> Prof_id_transf
-Prof_comp_transf(Prof_func_transf(G), Prof_func_transf(F))
-  -> Prof_func_transf(G . F)
+Prof_func_hom(F)
+Prof_func_hom(id) -> Prof_id_hom
+Prof_comp_transf(Prof_func_hom(G), Prof_func_hom(F))
+  -> Prof_func_hom(G . F)
+Prof_func_transf(F) := Prof_func_hom(F)
 ```
 
 Current role:
 
-- packages the hom-action of an ordinary functor as a representable
-  equipment cell;
-- supports join cross beta and deferred general co-Yoneda beta.
+- packages the hom-action of an ordinary functor as a shaped representable
+  unit element;
+- provides a transparent `Prof_func_transf` compatibility facade for deferred
+  equipment readings.
 
 Target role:
 
-- audit independently from `Prof_comp_transf`;
-- either replace by a fixed-endpoint representable/hom-action owner, or keep
-  as a narrow compatibility cell only for consumers that genuinely require
-  endpoint variation.
+- keep `Prof_func_hom` as the fixed shaped owner;
+- keep `Prof_func_transf` only as a narrow compatibility cell for consumers
+  that genuinely require the equipment-cell presentation.
 
 Deletion status:
 
-- not safe to delete before co-Yoneda and generic compatibility consumers are
-  redesigned. It is no longer a join-runtime-beta blocker.
+- `Prof_func_hom` is active core and should not be deleted;
+- `Prof_func_transf` is no longer a co-Yoneda-runtime blocker, but may remain
+  as public/deferred equipment compatibility until those readings are fully
+  retired or reintroduced under a separate theorem.
 
 ### Primitive Join
 
@@ -1511,14 +1631,13 @@ Endpoint-changing tensor cells are allowed only as derived views:
 Prof_tensor_transf(r,s)
 ```
 
-should eventually be a wrapper around reindexing plus fixed-endpoint tensor
+would need to be a wrapper around reindexing plus fixed-endpoint tensor
 functoriality, but only after the necessary middle-change/coend compatibility
 map is explicitly available. That full wrapper is a future equipment/coend
-compatibility theorem, not part of this migration. Until then,
-`Prof_tensor_transf` may remain only as a temporary stable head with a clear
-migration label. It should not be the primitive owner of the closed/tensor
-theory, and new code should target fixed-endpoint `Prof_tensor_map` plus
-identity-middle co-Yoneda naturality instead.
+compatibility theorem, not part of this migration. The former
+`Prof_tensor_transf` stable head has been retired from active code; new code
+should target fixed-endpoint `Prof_tensor_map` plus fixed co-Yoneda
+transformations instead.
 
 Expected shaped tensor introduction:
 
@@ -2007,10 +2126,10 @@ public wrapper, but it should still be derived from:
    Start with map/cell owners, not `ProfComparison`.
    `Prof_coyoneda_cov_map(P)` and `Prof_coyoneda_con_map(P)` are components of
    `Prof_coyoneda_cov_transf` and `Prof_coyoneda_con_transf`, not aliases of
-   the older endpoint-changing names. Keep
+   the older endpoint-changing names. The former
    `Prof_coyoneda_unit_tensor_cov_transf` and
-   `Prof_coyoneda_unit_tensor_con_transf` only as temporary compatibility
-   surfaces; shaped beta checks have migrated to fixed owners.
+   `Prof_coyoneda_unit_tensor_con_transf` compatibility surfaces have been
+   retired from active code; shaped beta checks have migrated to fixed owners.
 
    Do not add `Prof_coyoneda_*_comparison` in the first pass. Add a comparison
    later only when a concrete consumer needs reverse beta/eta or ordinary
@@ -2018,11 +2137,11 @@ public wrapper, but it should still be derived from:
 
 4. Migrate public endpoint-changing names to wrappers.
 
-   Preserve readable names, but route them through fixed-endpoint owners and
-   `Prof_reindex` where possible. In the report notation, these wrappers are
-   `CoyR(pp,N)` and `CoyL(pp,M)`, corresponding to the existing
-   `Prof_coyoneda_unit_tensor_cov_transf` and
-   `Prof_coyoneda_unit_tensor_con_transf` symbols.
+   If endpoint-changing readable names are reintroduced later, route them
+   through fixed-endpoint owners and `Prof_reindex` where possible. In the
+   report notation, these wrappers are `CoyR(pp,N)` and `CoyL(pp,M)`, formerly
+   represented by `Prof_coyoneda_unit_tensor_cov_transf` and
+   `Prof_coyoneda_unit_tensor_con_transf`.
 
 5. Replace shaped co-Yoneda beta checks first.
 
@@ -2691,7 +2810,9 @@ Medium feasibility:
   equipment composition.
 - demoting the remaining broad general-cell co-Yoneda compatibility rules
   headed by `Prof_comp_transf`, while preserving only documented/deferred
-  equipment readings for their fuller endpoint-changing arity.
+  equipment readings for their fuller endpoint-changing arity. This active-code
+  cleanup is now complete for the removed runtime pair and obsolete
+  compatibility symbols.
 
 Medium risk:
 
@@ -2716,10 +2837,9 @@ Medium risk:
   identity rules for the current `Prof_comp_transf` surface and remaining
   compatibility consumers. It should move only after those surfaces are
   demoted, or after coherent `id_funcd` sibling rules are probed.
-- retiring `Prof_tensor_transf` is blocked only by genuine remaining
-  compatibility consumers, not by the fixed co-Yoneda core. A full
-  endpoint-changing tensor wrapper still needs middle-change/coend
-  compatibility and is outside this migration.
+- any future endpoint-changing tensor wrapper still needs middle-change/coend
+  compatibility and is outside this migration. The old `Prof_tensor_transf`
+  compatibility symbol is no longer active code.
 - demoting or deleting `Prof_comp_transf` remains the last cleanup pass,
   because it also supports generic equipment compatibility checks and current
   identity/composition normal forms.
@@ -2774,9 +2894,9 @@ Known non-goals:
 5. Fixed tensor map.
 
    Keep `Prof_tensor_map` as the independent fixed-endpoint tensor-map owner.
-   Do not define it through `Prof_tensor_transf`, and do not use
-   `Prof_tensor_transf` as the owner of fixed tensor functoriality. This
-   prerequisite slice is complete.
+   Do not define it through the former `Prof_tensor_transf`, and do not use an
+   endpoint-changing tensor wrapper as the owner of fixed tensor functoriality.
+   This prerequisite slice is complete.
 
 6. Opposite fixed functor and bridge.
 
@@ -2796,18 +2916,23 @@ Known non-goals:
    add a direct square rewrite for this pair. Any future fuller compatibility
    theorem must route through the internal co-Yoneda transformations, fixed
    unit tensor functors, `Prof_tensor_map`, and explicit reindexing/coherence
-   data.
+   data. This active-code cleanup is complete: the broad runtime pair and the
+   obsolete endpoint-changing tensor/co-Yoneda compatibility symbols have been
+   removed from active code.
 
 8. `Prof_func_transf` audit.
 
-   Decide whether it remains a narrow representable equipment compatibility
-   cell or is replaced by a hom-action owner.
+   First pass complete: `Prof_func_hom` is the shaped hom-action owner and
+   `Prof_func_transf` is a transparent compatibility view. Later cleanup may
+   delete or further demote the compatibility facade if no public/deferred
+   equipment reading still needs it.
 
 9. `Prof_id_transf` normal-form pass.
 
-   Retry the transparent `id_funcd` migration only after enough
-   `Prof_comp_transf` consumers have been demoted, or after coherent
-   `id_funcd` sibling rules have passed focused probes.
+   Source-only transparent `id_funcd` probes now pass, but full promotion is
+   still blocked by the generic `Prof_comp_transf` identity diagnostic. Retry
+   only after enough `Prof_comp_transf` consumers have been demoted, or after
+   coherent `id_funcd` sibling rules have passed focused probes.
 
 10. Generic `Prof_comp_transf` retirement.
 
@@ -2847,11 +2972,11 @@ make catalog
 | `EQUIP-CELL-EVAL` | complete first pass | active implementation | Added general object-level `Prof_cell_apply`, defined terminal-source `Prof_cell_eval`, and routed `join_cross_hom` through `Prof_cell_eval`. |
 | `EQUIP-JOIN-NARROW` | complete first pass | active implementation | Replaced join-specific `Prof_comp_transf` shaped cross and cross beta with `Prof_cell_eval` plus direct primitive `join_elim_cross_transf` beta; no `join_elim_cross_hom` alias was needed. |
 | `EQUIP-JOIN-EQUIP-READING` | deferred | future compatibility probe | Preserve the old `Prof_comp_transf(Prof_func_transf(join_elim_func),join_cross_transf)` expression only as a derived equipment reading, routed through `Prof_reindex_transf`, fixed vertical composition, `Hom_prof_along` projection, and narrow join beta if a later consumer needs computation. |
-| `EQUIP-TENSOR-COYONEDA` | fixed beta/fusion and broad compatibility demotion landed | active implementation plus future cleanup | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Old shaped `CoyR/CoyL` beta surfaces have been replaced by direct fixed beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`. The broad general-cell `Prof_comp_transf` co-Yoneda runtime pair has been removed; the corresponding equipment reading is deferred compatibility only. |
+| `EQUIP-TENSOR-COYONEDA` | fixed beta/fusion and compatibility retirement landed | active implementation plus future cleanup | Fixed-endpoint one-way co-Yoneda maps are components of `Prof_coyoneda_*_transf`, independent fixed-endpoint `Prof_tensor_map` is available, and fixed co-Yoneda naturality is internalized through unit tensor functors plus generic `tapp1_fapp0`. Old shaped `CoyR/CoyL` beta surfaces have been replaced by direct fixed beta and arbitrary-`pp` `tapp1_fapp0` fusion under `Prof_cell_apply`. The broad general-cell `Prof_comp_transf` co-Yoneda runtime pair and obsolete endpoint-changing tensor/co-Yoneda compatibility symbols have been removed from active code; the corresponding equipment reading is deferred documentation only. |
 | `EQUIP-OP-DUALITY` | stable primitive owner landed | active implementation | `Op_prof` and `Op_prof_func` are stable semantic owners with object/full-arrow/capped-arrow projection rules, semantic involution, fixed-functor object action, and proof-time pullback/swap compatibility. `Op_prof_map` remains a transparent fixed-functor action view. |
-| `EQUIP-TENSOR-TRANSF-RETIRE` | decision complete; no fixed-core consumer remains | future tensor/co-Yoneda pass | Treat `Prof_tensor_transf` as temporary compatibility only. Do not build new code on it. The fixed co-Yoneda core no longer requires it, and the broad co-Yoneda runtime pair has been removed. A fuller endpoint-changing tensor theorem remains deferred because it needs middle-change/coend compatibility. |
-| `EQUIP-ID-TRANSF` | deferred after probe | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probe succeeded; the opposite-duality dependency has been removed, but active `Prof_comp_transf` identity rules and remaining compatibility consumers still need a stable identity head. Migrate only with coherent `id_funcd` sibling rules or after those equipment heads are demoted. |
-| `EQUIP-PROF-FUNC` | proposed | future implementation probe | Audit `Prof_func_transf` as representable hom-action compatibility, especially for general co-Yoneda and join; add only transparent aliases for `Unit_prof_id_hom` / `Hom_prof_along_id_hom` if probes justify them. |
+| `EQUIP-TENSOR-TRANSF-RETIRE` | complete in active code | this report | `Prof_tensor_transf`, `Prof_tensor_hom_transf`, `Prof_tensor_transf_hom`, and the old endpoint-changing co-Yoneda constants have been removed from active code. A fuller endpoint-changing tensor theorem remains deferred because it needs middle-change/coend compatibility. |
+| `EQUIP-ID-TRANSF` | blocked by generic equipment identity | future identity-normal-form pass | Transparent `Prof_id_transf := id_funcd(Prof_base(A,B),R)` source probes succeed, but full diagnostics still fail at the generic `Prof_comp_transf(Prof_id_transf,Prof_id_transf) == Prof_id_transf` check. A narrower `Prof_id_hom := id_funcd(...)` probe also source-checks but adds two unjoinable critical-pair reports through `Prof_func_hom(id)` and is deferred for the same missing `id_funcd` sibling-rule reason. Migrate only with coherent `id_funcd` sibling rules or after the generic equipment composition surface is demoted. |
+| `EQUIP-PROF-FUNC` | first pass landed | active implementation plus future compatibility cleanup | `Prof_func_hom` is now the core shaped representable unit owner, with identity and representable-composition computation; `Prof_func_transf` is a transparent compatibility view. Future work may retire the compatibility facade if the deferred equipment readings no longer need it. |
 | `EQUIP-REINDEX-PRODUCT-FOLD` | primitive `Op_prof` slice complete; raw swap naturality deferred | active implementation plus future raw-product probe | The one-off unfolded opposite/reindex bridge has been replaced by the direct semantic computation `Prof_reindex(Op_prof(...)) -> Op_prof(Prof_reindex(...))`. Broader `Product_swap_transf` / `Product_swapped_map_func` naturality remains deferred unless raw pullback/swap syntax becomes a concrete runtime consumer. |
 | `EQUIP-COMP-RETIRE` | blocked on previous tasks | future cleanup | Demote or remove `Prof_comp_transf` only after join, opposite, tensor/co-Yoneda, and identity-normal-form consumers no longer consume it. |
 

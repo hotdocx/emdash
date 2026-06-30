@@ -6694,26 +6694,6 @@ assert [A A' B X Y : Cat]
         K)
       S;
 
-assert [A A' B B' X X' : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [S' : τ (Catd (Product_cat (Op_cat B') X'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [S : τ (Catd (Product_cat (Op_cat B) X))]
-  [F : τ (Functor A' A)]
-  [M : τ (Functor B' B)]
-  [G : τ (Functor X' X)]
-  (r : τ (Obj (@Prof_transf_cat A A' B B' R' F R M)))
-  (s : τ (Obj (@Prof_transf_cat B B' X X' S' M S G))) ⊢
-  @Prof_tensor_transf
-    A A' B B' X X' R' S' R S F M G r s
-  : τ (Obj
-      (@Prof_transf_cat
-        A A' X X'
-        (@Prof_tensor A' B' X' R' S')
-        F
-        (@Prof_tensor A B X R S)
-        G));
-
 assert [A B X : Cat]
   [P P' : τ (Prof A B)]
   [Q Q' : τ (Prof B X)]
@@ -6734,59 +6714,6 @@ assert [I A B X : Cat]
   (s : τ (@Prof_hom I B X M S G)) ⊢
   @Prof_tensor_hom_hom I A B X R S F G M r s
   : τ (@Prof_hom I A X F (@Prof_tensor A B X R S) G);
-
-assert [J A' A B X : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') J))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [S : τ (Catd (Product_cat (Op_cat B) X))]
-  [F : τ (Functor A' A)]
-  [G : τ (Functor J X)]
-  (M : τ (Functor J B))
-  (r : τ (Obj (@Prof_transf_cat A A' B J R' F R M)))
-  (s : τ (@Prof_hom J B X M S G)) ⊢
-  @Prof_tensor_hom_transf
-    J A' A B X R' R S F G M r s
-  : τ (Obj
-      (@Prof_transf_cat
-        A A' X J
-        R'
-        F
-        (@Prof_tensor A B X R S)
-        G));
-
-assert [A B A' B' J : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [F : τ (Functor A A')]
-  [G : τ (Functor B B')]
-  (pp : τ (Obj (@Prof_transf_cat A' A B' B P F P' G)))
-  (N : τ (Functor J B')) ⊢
-  @Prof_coyoneda_unit_tensor_cov_transf
-    A B A' B' P P' F G pp J N
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A B' J
-        (@Prof_tensor A B J P (@Hom_prof_along B J B' G N))
-        F
-        P'
-        N));
-
-assert [A B A' B' I : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [F : τ (Functor A A')]
-  [G : τ (Functor B B')]
-  (pp : τ (Obj (@Prof_transf_cat A' A B' B P F P' G)))
-  (M : τ (Functor I A')) ⊢
-  @Prof_coyoneda_unit_tensor_con_transf
-    A B A' B' P P' F G pp I M
-  : τ (Obj
-      (@Prof_transf_cat
-        A' I B' B
-        (@Prof_tensor I A B (@Hom_prof_along I A A' M F) P)
-        M
-        P'
-        G));
 
 assert [A B : Cat]
   (P : τ (Prof A B)) ⊢
@@ -7207,10 +7134,8 @@ assert [A B : Cat]
   : τ (@Prof_hom A B B F (@Unit_prof B) F);
 
 assert [A : Cat] ⊢
-  @Prof_func_transf A A (@id_func A)
-  ≡ @Prof_id_transf
-      A A
-      (@Hom_prof_along A A A (@id_func A) (@id_func A));
+  @Prof_func_hom A A (@id_func A)
+  ≡ @Prof_id_hom A;
 
 assert [A B C : Cat]
   (F : τ (Functor A B))
@@ -7222,9 +7147,9 @@ assert [A B C : Cat]
     (@Hom_prof_along B B B (@id_func B) (@id_func B))
     (@Hom_prof_along C C C (@id_func C) (@id_func C))
     F F G G
-    (@Prof_func_transf B C G)
-    (@Prof_func_transf A B F)
-  ≡ @Prof_func_transf
+    (@Prof_func_hom B C G)
+    (@Prof_func_hom A B F)
+  ≡ @Prof_func_hom
       A C
       (@comp_cat_fapp0 A B C G F);
 
@@ -7456,7 +7381,7 @@ assert [I A B : Cat]
       M
       M
       p
-      (@Prof_func_transf I B M))
+      (@Prof_func_hom I B M))
   ≡ p;
 
 assert [I A B : Cat]
@@ -7491,7 +7416,7 @@ assert [I A B : Cat]
       M
       M
       p
-      (@Prof_func_transf I B M))
+      (@Prof_func_hom I B M))
   ≡ @Prof_cell_apply
       I A B A B
       P P'
@@ -7500,25 +7425,6 @@ assert [I A B : Cat]
       F
       M
       pp p;
-
-assert [I X' A B X : Cat]
-  [S' : τ (Catd (Product_cat (Op_cat I) X'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [S : τ (Catd (Product_cat (Op_cat B) X))]
-  [F : τ (Functor I A)]
-  [G : τ (Functor X' X)]
-  (M : τ (Functor I B))
-  (r : τ (@Prof_hom I A B F R M))
-  (s : τ (Obj (@Prof_transf_cat B I X X' S' M S G))) ⊢
-  @Prof_tensor_transf_hom
-    I X' A B X S' R S F G M r s
-  : τ (Obj
-      (@Prof_transf_cat
-        A I X X'
-        S'
-        F
-        (@Prof_tensor A B X R S)
-        G));
 
 assert [I A B : Cat]
   [P : τ (Prof A B)]
@@ -7550,7 +7456,7 @@ assert [I A B : Cat]
       F
       G
       F
-      (@Prof_func_transf I A F)
+      (@Prof_func_hom I A F)
       p)
   ≡ p;
 
@@ -7586,7 +7492,7 @@ assert [I A B : Cat]
       F
       G
       F
-      (@Prof_func_transf I A F)
+      (@Prof_func_hom I A F)
       p)
   ≡ @Prof_cell_apply
       I A B A B
