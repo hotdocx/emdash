@@ -1,69 +1,177 @@
 ---
-title: emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction)
+title: emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction, profunctors, and weighted limits)
 authors: https://github.com/hotdocx/emdash
 ---
 
 # Abstract
 
 We present the v3.2 architecture of **emdash**, a Lambdapi specification for a
-programming language and proof assistant for strict/lax $\\omega$-categories.
-The main result of this iteration is not a new datatype of paths. It is a
-category-theoretic arrow-induction principle built from directed families,
-dependent sums, dependent products, and dependent homs, then checked by
-normalization in Lambdapi.
+programming language and prototype proof assistant for strict/lax higher
+$\\omega$-categorical structure. The development is fully internalized in
+dependent type theory and computational in the proof-theoretic sense:
+structural categorical equalities are oriented as normalization, or
+cut-elimination, steps.
 
-The strict/lax distinction is essential. Ordinary functoriality is oriented as
-strict computation, but transport in directed families may preserve canonical
-total arrows only up to a displayed transport-comparison cell. The
-arrow-induction theorem is therefore formulated first as a source-indexed
-telescope; its Sigma-total presentation is derived only after the relevant
-transport comparison data have been internalized.
-
-The foundational construction is the directed dependent hom. Given a
-category-valued family $E : K \\to \\mathbf{Cat}$, objects
-$u \\in E[x]$ and $v \\in E[y]$, and a base arrow $f : x \\to y$, the fibre
-over $f$ is
+The basic construction is the directed dependent hom. For a category-valued
+family $E : K \\vdash \\mathbf{Cat}$, where $\\vdash$ denotes a functor
+category, and fixed data $x : K$ and $u \\in E[x]$, emdash forms a functorial
+object
 
 $$
-\\mathrm{Hom}_{E[y]}(E[f](u), v).
+\\mathrm{homd}_E(x,u)
+  : \\prod_{y : K^{\\mathrm{op}}}
+      \\bigl(E[y^-] \\vdash_{[y]}
+        (\\mathrm{Hom}_K(x,y)^{\\mathrm{op}} \\vdash \\mathbf{Cat})\\bigr)
 $$
 
-This construction is used twice: it describes homs in Sigma totals, and it
-describes the action of sections over base arrows. From it, v3.2 builds the
-outgoing-arrow category
+Here $\\vdash_{[y]}$ is the mixed-variance displayed version of $\\vdash$, and
+$y^-$ marks that the $E$-argument occurs contravariantly. At a fixed $y$, its
+value at $v \\in E[y]$ and $f : x \\to y$ is
 
 $$
-\\mathrm{PathOut}_Z(x) = \\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y)
+\\mathrm{homd}_E(x,u)[y][v][f]
+  =
+\\mathrm{Hom}_{E[y]}(E[f](u),v).
 $$
 
-and the canonical arrow
+This is the construction that organizes arrows in Sigma totals:
 
 $$
-\\rho_{x,y,p} : (x,\\mathrm{id}_x) \\to (y,p).
+\\mathrm{Hom}_{\\Sigma E}((x,u),(y,v))
+  =
+\\Sigma_{f : x \\to y}\\,\\mathrm{Hom}_{E[y]}(E[f](u),v).
 $$
 
-The induction principle can be stated directly in the surface language. For a
-moving source $x : Z$ and a motive $E$ over outgoing arrows from $x$, there is
-a functor from the fibre of $E$ at the reflexive outgoing arrow to the category
-of sections of $E$:
+The same normalization-first architecture drives this simplicial
+$\\omega$-iteration and also covers product/curry structure, computational
+adjunctions, structural operations such as weakening/symmetry/contraction, and
+ordinary hom-action cut elimination. In the current v3.2 kernel it also
+supports a symbolic but checked calculus of Cat-valued profunctors:
+representables, reindexing, tensor, co-Yoneda maps, covariant and
+contravariant internal homs, weighted limits as representability, preservation
+of weighted limits by right adjoints, the dual preservation theorem for left
+adjoints and weighted colimits, and a primitive directed-inductive join
+category.
 
-```text
-x :^n Z ;
-E :^n (PathOut_Z(x) ⊢ Cat) ;
-E[(x,id_x)] ⊢ Π (q :^n PathOut_Z(x)), E[q].
-```
-
-It sends $u : E[(x,\\mathrm{id}_x)]$ to the section
-$q \\mapsto E[\\rho_q](u)$. The Lambdapi implementation packages this
-telescope as `PathInd_transfd(Z)`.
-
-Its most visible checked consequence is directed transitivity. For
-$p : x \\to y$ and $q : y \\to z$, the composition instance of arrow induction
-normalizes to ordinary categorical composition:
+The motivating example is the familiar shape of path induction in dependent
+type theory, now directed. For a category $Z$ and an object $x : Z$, emdash
+uses the outgoing-arrow category, i.e. the coslice/undercategory
 
 $$
-\\mathrm{path\\_comp\\_func}(p)[z][q] \\rightsquigarrow q \\circ p.
+\\mathrm{PathOut}_Z(x)
+  \\coloneqq x \\downarrow Z
+  \\coloneqq
+\\Sigma_{y : Z}\\,\\mathrm{Hom}_Z(x,y).
 $$
+
+The object $\\iota_x = (x,\\mathrm{id}_x)$ is initial in
+$\\mathrm{PathOut}_Z(x)$. For $a = (y,p)$, the canonical arrow
+$\\iota_x \\to a$ is the arrow $p$ itself; when a reusable name is needed, we
+write it as
+
+$$
+\\rho^x_a : \\iota_x \\to a.
+$$
+
+Thus, for a motive $E : \\mathrm{PathOut}_Z(x) \\vdash \\mathbf{Cat}$ and
+$u \\in E(\\iota_x)$, fixed-source directed induction gives the section
+
+$$
+\\mathrm{Ind}_x(E,u)
+  : \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a),
+\\qquad
+\\mathrm{Ind}_x(E,u)(a) = E(\\rho^x_a)(u).
+$$
+
+Write $\\mathrm{Rep}_Z(t)$ for the covariant representable
+$\\mathrm{Hom}_Z(t,-)$. For the composition motive
+
+$$
+E[(y,p)] := \\mathrm{Rep}_Z(y) \\vdash \\mathrm{Rep}_Z(x),
+$$
+
+with initial datum $\\mathrm{id} : \\mathrm{Rep}_Z(x) \\vdash
+\\mathrm{Rep}_Z(x)$, this computes to ordinary composition:
+
+$$
+\\mathrm{Ind}_x(E,\\mathrm{id})[(y,p)][z][q]
+  \\rightsquigarrow q \\circ p.
+$$
+
+The latest runtime owner for this benchmark is the hom-action normal form
+`hom_postcomp_fapp0(id_Z,q,p)`. The ordinary composite `comp_fapp0(q,p)` is
+still available as the typed categorical view; the distinction is one example
+of the v3.2 boundary between runtime cut-elimination heads and proof-time
+convertibility surfaces.
+
+The new phenomenon appears when the source object $x$ itself is internalized.
+For an arrow $r : x \\to y$, precomposition gives
+
+$$
+\\mathrm{PathOut}_Z(r) : \\mathrm{PathOut}_Z(y) \\vdash
+\\mathrm{PathOut}_Z(x),
+\\qquad
+\\mathrm{PathOut}_Z(r)(z,q : y \\to z) = (z,q \\circ r).
+$$
+
+Once induction is internalized as a construction varying in $x$, the target
+section-taking construction
+
+$$
+x \\mapsto
+\\left(E \\mapsto \\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)\\right)
+$$
+
+is itself displayed over the moving source object. Its transport/comparison
+along $r$ is not the identity; it is the section-pullback functor
+
+$$
+\\prod_{a : \\mathrm{PathOut}_Z(x)} E(a)
+  \\vdash
+\\prod_{b : \\mathrm{PathOut}_Z(y)}
+  E(\\mathrm{PathOut}_Z(r)(b)),
+\\qquad
+s \\mapsto \\bigl(b \\mapsto s(\\mathrm{PathOut}_Z(r)(b))\\bigr).
+$$
+
+This is the lax naturality/functoriality layer exposed by the internalized
+formulation of directed path induction; the Lambdapi kernel packages the
+source-indexed theorem as `PathInd_transfd(Z)`.
+
+The profunctor part of the development follows the same rule. A weighted-limit
+theorem is not represented as a single propositional statement detached from
+computation. It is a comparison object whose push/pull operations act on
+arbitrary incoming profunctor maps and cancel by normalization. This is how the
+formalization proves that right adjoints preserve Cat-valued weighted limits,
+and how the dual left-adjoint colimit theorem is obtained by opposite
+normalization.
+
+# Contents
+
+- Abstract: summary of the v3.2 architecture and main checked computations.
+- 1. Introduction.
+  - 1.1 What v3.2 Contributes.
+  - 1.2 Road Map.
+  - 1.3 What "Checked" Means.
+- 2. A Type-Theoretic Foundation For Directed Families.
+- 3. Dependent Hom, Sigma Totals, And Sections.
+  - 3.1 Sigma Totals.
+  - 3.2 Pi Sections.
+- 4. Outgoing Arrows And The Canonical `rho` Arrow.
+- 5. Arrow Induction.
+  - 5.1 The Telescope Theorem.
+  - 5.2 The Derived Sigma-Total Presentation.
+- 6. Strictness, Laxity, And Directed Induction.
+- 7. Composition As The Main Computation.
+- 8. Surface Syntax And Kernel Names.
+- 9. Computational Method And Checked Evidence.
+- 10. Cat-Valued Profunctors And Representables.
+- 11. Tensor, Co-Yoneda, And Internal Hom.
+- 12. Weighted Limits, Adjunctions, And Duality.
+- 13. Directed-Inductive Join Categories.
+- 14. Equality, DefIso, And Normalization Boundaries.
+- 15. Conclusion.
+- Appendix A. Identifier Glossary.
 
 # 1. Introduction
 
@@ -97,7 +205,7 @@ Sigma category of arrows, not in an identity type.
 
 ## 1.1 What v3.2 Contributes
 
-The v3.2 article focuses on five checked contributions.
+The v3.2 article focuses on eight checked contributions.
 
 1. **Directed dependent homs.** Homs in total categories and section actions
    are organized by one dependent-hom construction over a base arrow.
@@ -113,14 +221,53 @@ The v3.2 article focuses on five checked contributions.
    constructors, including representable precomposition, collapse those cells
    to canonical identities.
 5. **Computational composition.** The transitivity benchmark reduces a fully
-   expanded path-induction expression to $q \\circ p$, represented in the
-   kernel by the normal form `comp_fapp0 Z x y z q p`.
+   expanded path-induction expression to $q \\circ p$. Runtime computation
+   exposes the reusable hom-action owner `hom_postcomp_fapp0(id_Z,q,p)`, while
+   a typed proof-time view records the ordinary composite `comp_fapp0(q,p)`.
+6. **Cat-valued profunctors.** The kernel has a checked facade for
+   `Prof(A,B) = A^op × B ⊢ Cat`, representables, reindexing, shaped cells, and
+   shaped elements.
+7. **Tensor, co-Yoneda, and internal hom.** A symbolic tensor and fixed
+   covariant/contravariant implication cores support eval/lambda cancellation,
+   fixed co-Yoneda beta/fusion, and functorial fixed-endpoint tensor action.
+8. **Weighted limits, duality, and directed induction.** Weighted limits are
+   implemented as computational profunctor representability; right adjoints
+   preserve them by composing comparisons, left adjoints preserve the dual
+   weighted colimits by opposite normalization, and `Join_cat` checks a
+   primitive directed-inductive recursor with an internally natural cross cell.
 
-The rest of the paper builds these facts in the order a reader needs them:
-first the foundation, then dependent homs, then outgoing arrows, then the
-induction theorem, and finally the composition computation.
+## 1.2 Road Map
 
-## 1.2 What "Checked" Means
+The paper has two connected layers. The first layer, Sections 2-9, develops
+the directed-family calculus far enough to state and check arrow induction.
+Section 2 fixes the basic directed type-theoretic reading of categories,
+functors, category-valued families, and section categories. Section 3 explains
+dependent homs, Sigma totals, and Pi sections, which are the structural
+ingredients used by outgoing-arrow categories. Section 4 defines
+`PathOut_Z(x)` and the canonical `rho` arrow. Section 5 packages fixed-source,
+source-indexed, and Sigma-total arrow induction. Section 6 explains where
+strict and lax transport enter the theorem. Section 7 gives the main
+normalization benchmark: applying arrow induction to the composition motive
+computes to categorical composition. Sections 8 and 9 then record the surface
+syntax and the kernel-evidence discipline used by the checks.
+
+The second layer, Sections 10-14, shows that the same cut-elimination
+discipline scales beyond the PathOut theorem. Section 10 introduces the
+Cat-valued profunctor facade, representables, reindexing, and shaped cells.
+Section 11 adds the symbolic tensor, fixed co-Yoneda maps, and covariant and
+contravariant internal homs. Section 12 formulates weighted limits as
+profunctor representability, proves right-adjoint preservation by computation,
+and obtains the dual left-adjoint colimit theorem by opposite normalization.
+Section 13 records the primitive directed-inductive join category. Section 14
+separates equality, `DefIso`, profunctor comparison, and the runtime/proof-time
+normalization boundary.
+
+Section 15 concludes. Appendix A collects kernel identifier correspondences.
+The essential artifact and validation facts are part of the computational
+method discussion in Section 9, where they support the checked-evidence
+claims rather than forming a separate implementation section.
+
+## 1.3 What "Checked" Means
 
 The paper uses checked in the Lambdapi sense. An assertion
 
@@ -137,8 +284,10 @@ story, the checked evidence has three layers.
 2. Their projections compute; for example, the source-indexed theorem reduces
    at source `x` to the fixed-source construction introduced in Section 5.
 3. Fully expanded applications normalize to ordinary categorical terms, for
-   example the composition benchmark reduces to $q \\circ p$, whose kernel
-   normal form is `comp_fapp0 Z x y z q p`.
+   example the composition benchmark reduces to $q \\circ p$. The runtime
+   normal form is the hom-action cut
+   `hom_postcomp_fapp0 Z Z (id_func Z) x y z q p`; the typed ordinary
+   composition view remains `comp_fapp0 Z x y z q p`.
 
 Thus the paper is not claiming only that the theorem is mathematically
 plausible. The theorem surface, its projections, and the benchmark computation
@@ -753,11 +902,17 @@ Its action on $q : y \\to z$ computes to ordinary composition:
 path_comp_func(p)[z][q] = q ∘ p.
 ```
 
-The kernel normal form for this composite is:
+The current runtime normal form for this composite is the hom-action cut:
 
 ```text
-comp_fapp0 Z x y z q p.
+hom_postcomp_fapp0 Z Z (id_func Z) x y z q p.
 ```
+
+The ordinary categorical composite is still present as the proof-time view
+`comp_fapp0 Z x y z q p`. The distinction is intentional: the telescope
+`hom_postcomp_*` and `hom_precomp_along_*` heads own runtime cut-elimination,
+while `comp_fapp0`, `comp_cat_fapp0`, and `comp_catd_fapp0` remain the
+ordinary composition and convertibility surfaces.
 
 <div class="arrowgram">
 {
@@ -768,7 +923,7 @@ comp_fapp0 Z x y z q p.
     { "name": "qp", "left": 610, "top": 80, "label": "$q \\circ p : x \\to z$" },
     { "name": "mot", "left": 90, "top": 280, "label": "$\\mathrm{CompMotive}_Z(x)$" },
     { "name": "ind", "left": 350, "top": 280, "label": "$\\mathrm{PathInd}$" },
-    { "name": "nf", "left": 610, "top": 280, "label": "$\\mathrm{comp\\_fapp0}\\ Z\\ x\\ y\\ z\\ q\\ p$" }
+    { "name": "nf", "left": 610, "top": 280, "label": "$\\mathrm{hom\\_postcomp\\_fapp0}(\\mathrm{id}_Z,q,p)$" }
   ],
   "arrows": [
     { "from": "p", "to": "q", "label": "$\\mathrm{input}$", "label_alignment": "over", "style": { "body": { "name": "dotted" }, "head": { "name": "none" } } },
@@ -787,14 +942,14 @@ is checked as:
 
 ```text
 PathInd_transfd(Z)[x][CompMotive_Z(x)](id_Rep_Z(x))[p][z][q]
-  = comp_fapp0 Z x y z q p.
+  = hom_postcomp_fapp0 Z Z (id_func Z) x y z q p.
 ```
 
 The derived Sigma-total route is checked as:
 
 ```text
 PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
-  = comp_fapp0 Z x y z q p.
+  = hom_postcomp_fapp0 Z Z (id_func Z) x y z q p.
 ```
 
 The computation is not a special-purpose rewrite for transitivity. It is the
@@ -889,6 +1044,17 @@ The formal artifact separates definitions from executable claims:
 `emdash3_2_checks.lp` contains the conversion assertions used as regression
 evidence.
 
+The surrounding artifact is deliberately modest. The foundations and notation
+reports explain the mathematical and surface-syntax readings; the current SOP
+records rewrite-rule hygiene and diagnostic practice; the print pipeline
+renders this article and validates embedded diagrams. The standard checks
+typecheck the active Lambdapi files under a bounded timeout, run reviewer
+examples and catalog freshness checks, lint active references and rewrite-rule
+left-hand sides, and smoke-test the paper renderer. The Infinity Codex archive
+records final-response recovery evidence after interruptions, but it is not a
+mathematical authority; active code, reports, and executable checks remain the
+evidence base.
+
 Representative checked claims:
 
 | Surface | Representative checked claim |
@@ -902,75 +1068,456 @@ Representative checked claims:
 | Sigma-total theorem | `PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)` |
 | Composition benchmark | `path_comp_func(p)[z][q] = q ∘ p` |
 
-# 10. Supporting Examples, Limitations, And Future Work
+# 10. Cat-Valued Profunctors And Representables
 
-The path-induction theorem is the central v3.2 result, but the same
-normalization discipline appears elsewhere in the file.
-
-Product-valued functors and product projections compute through stable
-projection functors. Semantic curry and uncurry are present at object level,
-with capped hom-action checks documenting the current behavior. The remaining
-higher action for some whole-functor semantic uncurry statements is deferred.
-
-Ordinary adjunctions provide another compact example. The v3.2 interface treats
-an adjunction as a first-class object:
+The second arc of the v3.2 development starts from Cat-valued profunctors. For
+categories $A$ and $B$, emdash defines the profunctor category by the same
+category-valued-family infrastructure used earlier:
 
 ```text
-J : Adjunction(R,L)
-left_adj_func(J)     : R ⊢ L
-right_adj_func(J)    : L ⊢ R
-unit_adj_transf(J)   : id_R ⇒ right(J) ∘ left(J)
-counit_adj_transf(J) : left(J) ∘ right(J) ⇒ id_L
+Prof(A,B)     = A^op × B ⊢ Cat
+Prof_cat(A,B) = Catd_cat(Product_cat(Op_cat A) B)
+ProfMap(P,Q)  = Obj(Hom_{Prof_cat(A,B)}(P,Q)).
 ```
 
-The component-level triangle reductions are oriented as computation:
+Thus a profunctor is not a new external semantic primitive. It is a directed
+family over the product base $A^{\\mathrm{op}} \\times B$, and a vertical
+profunctor map is an object of the ordinary hom-category between two such
+families, equivalently a displayed transformation in that family category.
+This choice keeps identity and vertical composition owned by the existing
+`id_funcd` and `comp_catd_fapp0` calculus.
+
+The representable profunctor associated to two functors
+$F : A \\vdash X$ and $G : B \\vdash X$ is written:
 
 ```text
-counit[f] ∘ left(unit[g]) → f ∘ left(g)
-right(counit[g]) ∘ unit[f] → right(g) ∘ f.
+Hom_prof_along(F,G) : Prof(A,B)
+Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b]).
 ```
 
-These are supporting examples, not the lead theorem.
+Its action on an arrow pair $(p : a' \\to a, q : b \\to b')$ is the expected
+cut:
 
-Several parts of the intended language remain outside the present theorem.
-
-- Structural functor logic, including exchange, weakening, and contraction for
-  nested shaped categories, is planned but not implemented.
-- General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` remain future work.
-- Arbitrary Sigma-map transport is not claimed to be strict without the right
-  strict or cartesian specialization.
-- Whole-transformation displayed laxity is deferred; current rules expose the
-  component-level infrastructure needed by the checked examples.
-- A presentation facade such as `section_total(s) : K ⊢ Σ_K E` is not yet a
-  named surface constructor.
-
-# 11. Formal Artifact And Validation
-
-The artifact consists of a Lambdapi development, a companion regression module,
-and a reproducible paper-rendering pipeline. The active v3.2 sources are:
-
-- `emdash3_2.lp`: definitions, interfaces, and rewrite rules.
-- `emdash3_2_checks.lp`: executable assertions and regression checks.
-- `reports/EMDASH_FOUNDATIONS.md`: mathematician-facing foundation guide.
-- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
-  notation authority.
-- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
-  rewrite/debugging SOP.
-
-The claims in this article are validated by the following checks:
-
-```bash
-timeout 60s lambdapi check -w emdash3_2.lp
-timeout 60s lambdapi check -w emdash3_2_checks.lp
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-npm run check:render
+```text
+h : Hom_X(F[a],G[b])
+------------------------------------------------
+Hom_prof_along(F,G)[p,q](h) = G[q] ∘ h ∘ F[p].
 ```
 
-The first three commands check the formal development and its conversion
-assertions. The final command validates embedded diagram specifications,
-builds the renderer, and runs a browser smoke test for the paper artifact.
+The implementation deliberately routes this computation through the generic
+hom-action owners. `hom_postcomp_*`, `hom_precomp_along_*`, and their
+`fapp0` projections expose the reusable runtime cuts; `comp_fapp0`,
+`comp_cat_fapp0`, and `comp_catd_fapp0` remain the ordinary composition heads
+and proof-time comparison surfaces.
 
-# 12. Conclusion
+Endpoint reindexing is also internal:
+
+```text
+Prof_reindex(R,F,G)[a',b'] = R[F[a'],G[b']]
+```
+
+with a functorial owner
+
+```text
+Prof_reindex_func(F,G) : Prof(A,B) ⊢ Prof(A',B').
+```
+
+The checks cover identity endpoint reindexing, nested endpoint reindexing,
+representable reindexing, and the semantic agreement with pullback along the
+product map. This is the profunctor version of the earlier displayed-family
+discipline: a readable operation is allowed, but it must route through one
+stable owner.
+
+Two representables receive standard equipment names:
+
+```text
+Companion_prof(F) = Hom_prof_along(F,id)
+Conjoint_prof(F)  = Hom_prof(F).
+```
+
+The internal right-representable embedding
+
+```text
+Hom_prof_func(J,B) : (J ⊢ B) ⊢ Prof(B,J)
+```
+
+computes on objects to `Hom_prof(G)`. Its body is semantic, built from
+ordinary precomposition, internal hom, and uncurrying, but the public head is
+opaque so that projection rules do not repeatedly unfold the composite.
+
+The shaped-cell layer is the bridge from vertical profunctor maps to equipment
+notation. A cell over endpoint functors $F : A' \\vdash A$ and
+$G : B' \\vdash B$ is:
+
+```text
+Prof_transf_cat(R',F,R,G)
+  = R' ⊢ Prof_reindex(R,F,G).
+```
+
+A shaped element is the special case whose source is the unit profunctor on a
+shape category $I$:
+
+```text
+Prof_hom(I,A,B,F,R,G)
+  = Obj(Prof_transf_cat(Unit_prof(I),F,R,G)).
+```
+
+The narrow evaluator `Prof_cell_apply` applies one internally natural
+profunctor cell to one shaped element. It is intentionally smaller than a full
+bicategory-of-profunctors composition operator. Its role is to support the
+checked co-Yoneda and join computations below without adding broad
+constructor-local functoriality rules.
+
+# 11. Tensor, Co-Yoneda, And Internal Hom
+
+The active tensor is a symbolic profunctor composite:
+
+```text
+P : Prof(A,B), Q : Prof(B,X)
+--------------------------------
+Prof_tensor(P,Q) : Prof(A,X).
+```
+
+Mathematically this is the coend-like composite of profunctors. The current
+kernel does not yet contain a general coend or coinserter quotient, so
+`Prof_tensor` is intentionally opaque. Only the endpoint behavior that is
+needed by checked consumers is computational: reindexing distributes over the
+two exposed endpoints, while the shared middle category remains fixed.
+
+Fixed-endpoint tensor functoriality is internalized by a bifunctor:
+
+```text
+Prof_tensor_func(A,B,X)
+  : Prof(A,B) × Prof(B,X) ⊢ Prof(A,X)
+```
+
+with projections:
+
+```text
+Prof_tensor_func(P,Q) = Prof_tensor(P,Q)
+Prof_tensor_func(r,s) = Prof_tensor_map(r,s).
+```
+
+This is the current owner for fixed tensor action. The broader
+endpoint-changing tensor-transformer names from earlier experiments are not
+active core owners; future endpoint-changing tensor theorems should be derived
+from reindexing plus this fixed-endpoint map layer once the missing
+middle-change/coend compatibility is available.
+
+The co-Yoneda maps are fixed natural transformations from tensoring with the
+unit profunctor back to the identity:
+
+```text
+Prof_coyoneda_cov_transf(A,B)
+  : Prof_tensor_right_unit_func(A,B) ⇒ id_{Prof(A,B)}
+
+Prof_coyoneda_con_transf(A,B)
+  : Prof_tensor_left_unit_func(A,B) ⇒ id_{Prof(A,B)}.
+```
+
+Their diagonal components are stable projection heads:
+
+```text
+Prof_coyoneda_cov_map(P)
+  : ProfMap(Prof_tensor(P,Unit_prof(B)), P)
+
+Prof_coyoneda_con_map(P)
+  : ProfMap(Prof_tensor(Unit_prof(A),P), P).
+```
+
+At shaped elements, the checked beta rules have the expected co-Yoneda shape.
+For $p : \\mathrm{Prof\\_hom}(I,A,B,F,P,M)$:
+
+```text
+Prof_cell_apply(
+  Prof_coyoneda_cov_map(P),
+  Prof_tensor_hom_hom(M,p,Prof_func_hom(M)))
+  = p.
+```
+
+Dually, for $p : \\mathrm{Prof\\_hom}(I,A,B,F,P,G)$:
+
+```text
+Prof_cell_apply(
+  Prof_coyoneda_con_map(P),
+  Prof_tensor_hom_hom(F,Prof_func_hom(F),p))
+  = p.
+```
+
+Naturality fusion is also checked for arbitrary fixed-endpoint maps. Applying
+the `tapp1_fapp0` component of a co-Yoneda transformation to a tensor-shaped
+element reduces to applying the chosen map to the original shaped element.
+This is the Došen-style reading of co-Yoneda in the kernel: cut with the
+co-Yoneda counit eliminates.
+
+The closed structure is represented by covariant and contravariant implication
+cores:
+
+```text
+Prof_imply_cov(O,Q) : Prof(A,B)
+Prof_imply_con(P,O) : Prof(B,X)
+```
+
+They are paired with evaluation and lambda maps:
+
+```text
+Prof_eval_cov_map
+Prof_lambda_cov_map
+Prof_eval_con_map
+Prof_lambda_con_map.
+```
+
+For the covariant side, maps
+
+```text
+ProfMap(Prof_tensor(P,Q), O)
+```
+
+and
+
+```text
+ProfMap(P, Prof_imply_cov(O,Q))
+```
+
+convert back and forth by computation. The contravariant side has the dual
+pair of conversions. Additional shaped and endpoint-changing views exist where
+concrete consumers need them, but the principal article point is simpler:
+tensor, co-Yoneda, and internal hom are not detached axioms. They are exposed
+as a cut-elimination interface over Cat-valued profunctors.
+
+# 12. Weighted Limits, Adjunctions, And Duality
+
+Weighted limits are formulated as profunctor representability. For
+$F : J \\vdash B$ and a weight $W : \\mathrm{Prof}(J',J)$, the weighted-cone
+profunctor is:
+
+```text
+WeightedCone_prof(F,W)
+  = Prof_imply_cov(Hom_prof(F), W).
+```
+
+A covariant weighted limit of $F$ by $W$ at
+$L : J' \\vdash B$ is a computational comparison:
+
+```text
+WeightedLimit_cov(F,W,L)
+  = ProfComparison(WeightedCone_prof(F,W), Hom_prof(L)).
+```
+
+There is also an ordinary `IsoEvidence` presentation,
+`IsWeightedLimit_cov_iso`. The active unsuffixed public name is the stronger
+computational comparison, and the ordinary evidence is obtained by projection.
+This is a recurring emdash pattern: a proposition-like statement may be useful
+for mathematical reading, but the runtime theorem is the pair of operations
+that eliminate against arbitrary probes.
+
+Concretely, for any incoming profunctor $R$ and any shaped probe
+$M : I \\vdash B$, the comparison supplies inverse operations:
+
+```text
+weighted_limit_cov_push
+weighted_limit_cov_pull
+```
+
+and the checks assert:
+
+```text
+pull(push(r)) = r
+push(pull(s)) = s.
+```
+
+Selected universal and cone maps are exposed as identity applications of these
+operations:
+
+```text
+weighted_limit_cov_univ_transf
+weighted_limit_cov_cone_transf.
+```
+
+The preservation theorem for right adjoints is then an actual computation over
+these comparisons. Given an adjunction between $A$ and $B$, the representable
+mate comparison is:
+
+```text
+Adjunction_hom_prof_comparison(adj)
+  : Hom_B(left(-),-) ≃ Hom_A(-,right(-)).
+```
+
+The theorem
+
+```text
+right_adjoint_preserves_weighted_limit_cov
+```
+
+is transparently the composition of three comparison steps:
+
+```text
+1. use the inverse adjunction mate through fixed-weight implication;
+2. reindex the given weighted-limit comparison along the left adjoint;
+3. use the adjunction mate at the candidate limit.
+```
+
+The ordinary theorem
+`right_adjoint_preserves_weighted_limit_cov_iso` is defined in parallel over
+`IsoEvidence`, and the computational comparison forgets exactly to this
+ordinary evidence. The formal checks include that compatibility.
+
+Duality is handled by opposite normalization rather than by duplicating the
+proof. The profunctor duality operation
+
+```text
+Op_prof(P) : Prof(Op B, Op A)
+```
+
+pulls back along product swap and does not opposite the fibre categories. This
+choice is deliberate: with the current hom rule for opposite categories,
+pointwise fibre-op would dualize representable hom categories twice.
+
+Contravariant weighted colimits are transparent weighted limits in the
+opposite world:
+
+```text
+WeightedColimit_con(F,W,L)
+  = WeightedLimit_cov(Op_func(F), Op_prof(W), Op_func(L)).
+```
+
+The two conversion wrappers `Op_weighted_limit_cov` and
+`Op_weighted_colimit_con` are identities after opposite and double-swap
+normalization. Consequently,
+
+```text
+left_adjoint_preserves_weighted_colimit_con
+```
+
+is obtained by applying right-adjoint preservation to `Op_adjunction`. No
+second colimit-specific cut calculus is installed.
+
+# 13. Directed-Inductive Join Categories
+
+The first directed-inductive stress test is a primitive join category. For
+categories $A$ and $B$, the kernel has:
+
+```text
+Join_cat(A,B)
+join_fst_func : A ⊢ Join_cat(A,B)
+join_snd_func : B ⊢ Join_cat(A,B).
+```
+
+The directed cross arrows from the $A$ side to the $B$ side are not represented
+as an externally quantified family plus a separate naturality proof. They are
+one internally natural profunctor cell:
+
+```text
+join_cross_transf
+  : Terminal_prof(A,B)
+      ⊢ Hom_prof_along(join_fst_func, join_snd_func).
+```
+
+The old shaped cross-arrow interface is derived from that cell:
+
+```text
+join_cross_hom(a,b)
+  = Prof_cell_eval(join_cross_transf,a,b).
+```
+
+The nondependent recursor is:
+
+```text
+join_elim_func(first,second,cross) : Join_cat(A,B) ⊢ E.
+```
+
+It computes on both inclusions:
+
+```text
+join_elim_func(first,second,cross) ∘ join_fst_func = first
+join_elim_func(first,second,cross) ∘ join_snd_func = second
+```
+
+and on the cross cell:
+
+```text
+join_elim_cross_transf(first,second,cross) = cross.
+```
+
+This is not yet a semantic collage construction and not yet a generic
+dependent higher-inductive schema. Its purpose in v3.2 is narrower and useful:
+it tests whether directed-inductive data can be expressed using the same
+profunctor-cell, shaped-element, and cut-elimination interfaces developed for
+the tensor and weighted-limit calculus.
+
+# 14. Equality, DefIso, And Normalization Boundaries
+
+The v3.2 kernel now contains several equality-like layers, and the article
+keeps them separate.
+
+The ordinary categorical path/equality layer supports the internal syntax
+needed by the directed-family development. Groupoid and univalence-facing
+interfaces stage equivalence data:
+
+```text
+PathOver
+TypeEquiv
+GrpdUnivalence
+OmegaEquiv
+CatUnivalence.
+```
+
+These are not advertised here as a completed semantics of all categories.
+They are a computational interface for later univalence and higher-categorical
+work.
+
+The strict computational isomorphism layer is `DefIso`. It packages selected
+forward and backward maps together with cancellation behavior that is meant to
+compute. Public profunctor comparisons are now compatibility names:
+
+```text
+ProfComparison(P,Q) = DefIso(Prof_cat(A,B),P,Q).
+```
+
+Their eliminators are ordinary hom-action cuts:
+
+```text
+prof_comparison_push(i,r)
+  = hom_postcomp_fapp0(id, defiso_to(i), r)
+
+prof_comparison_pull(i,s)
+  = hom_postcomp_fapp0(id, defiso_from(i), s).
+```
+
+The cancellation equations for comparison push and pull are therefore inherited
+from `DefIso` and `hom_postcomp_fapp0`, not from theorem-specific rewrite
+rules. This is the same architectural boundary already visible in the
+PathOut composition benchmark:
+
+```text
+hom_postcomp_* / hom_precomp_along_* / hom_postcomp_fapp0
+  runtime cut-elimination owners
+
+comp_fapp0 / comp_cat_fapp0 / comp_catd_fapp0
+  ordinary composition heads and proof-time comparison surfaces.
+```
+
+The boundary also explains the treatment of Cat-specialized heads. A
+specialization such as a `Cat_cat` or `Catd_cat` hom-action projection is kept
+when it exposes data that is only semantically available at that level, for
+example `tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0`. It is not a license to
+add a second owner for ordinary functoriality or naturality.
+
+The current limitations are part of the formal claim.
+
+- `Prof_tensor` has no general coend or coinserter semantics yet; only the
+  fixed endpoint and co-Yoneda-facing computations are active.
+- `Join_cat` is a primitive directed-inductive stress test, not a constructed
+  semantic collage.
+- Generic dependent join elimination remains future work.
+- Full bicategory/equipment coherence is not claimed.
+- General dependent adjunctions such as `Σ_F ⊣ F^* ⊣ Π_F` remain future work.
+- Arbitrary Sigma-map transport is not claimed to be strict without the
+  corresponding strict or cartesian specialization.
+- The project is still a strict/lax computational core for higher-categorical
+  programming, not a completed formalization of weak $\\omega$-categories.
+
+# 15. Conclusion
 
 The v3.2 development shows that directed arrow induction can be expressed as
 computational categorical structure. The foundation is a directed dependent
@@ -981,9 +1528,18 @@ theorem is a source-indexed telescope from the reflexive fibre of a motive to
 its section category.
 
 The composition benchmark is the visible payoff. Applying arrow induction to
-the composition motive normalizes to ordinary categorical composition. That is
-the emdash design goal in miniature: coherence is not merely stated; it
-computes.
+the composition motive normalizes to ordinary categorical composition, with
+`hom_postcomp_fapp0` as the runtime cut-elimination owner and `comp_fapp0` as
+the typed ordinary-composition view.
+
+The newer profunctor layer shows that the same method scales beyond the
+PathOut theorem. Cat-valued profunctors, tensor, co-Yoneda reductions,
+internal homs, weighted limits, adjunction preservation, dual colimits, and a
+primitive join category all use the same discipline: put the categorical
+operation behind a stable owner, expose the projections needed by downstream
+consumers, and make structural coherence compute when it is meant to be a
+normal form. That is the emdash design goal in miniature: coherence is not
+merely stated; it computes.
 
 # Appendix A. Identifier Glossary
 
@@ -1036,71 +1592,40 @@ computes.
 | covariant fibre transport | `fib_cov_transf Z D x u` |
 | Sigma-map fibre component | `fdapp1_int_hom_fapp0 K E D FF x y p u v α` |
 | displayed transport-comparison component `χ^{FF}_{p,u}` | `fdapp1_int_cell K E D FF x y p u` |
-
-# Appendix B. Selected Checked Normal Forms
-
-The article quotes checked normal forms in compact mathematical notation and
-keeps the fully expanded Lambdapi terms available as regression references.
-The following statements are covered by `emdash3_2_checks.lp`.
-
-Core PathOut and rho checks:
-
-```text
-Rep_Z(x)[y] = Hom_Z(x,y)
-PathOut_Z(x) = Sigma_cat Z (Rep_Z(x))
-PathOut_Z(p) : PathOut_Z(y) ⊢ PathOut_Z(x)
-PathOut_transport(p)[(z,q : y → z)] = (z,q ∘ p)
-PathOut_transport(p)[(y,id_y)] = (y,p)
-Rep_Z(x)[p](id_x) = p
-rho_{x,y,p} = sigma_transport_arrow(Rep_Z(x),p,id_x)
-pathout_refl_arrow_sec(x)[(y,p)] = rho_{x,y,p}
-PathOut_transport(p)(rho_{y,z,q}) ; rho_{x,y,p}
-  = rho_{x,z,q ∘ p}
-```
-
-Path-induction projection checks:
-
-```text
-PathInd_func(Z,x)[E] = path_ind_func_fapp0(Z,x,E)
-PathInd_func(Z,x)[E](u) = path_ind_sec(Z,x,E,u)
-path_ind_sec(Z,x,E,u)[(y,p)] = E[rho_{x,y,p}](u)
-PathInd_transfd(Z)[x] = PathInd_func(Z,x)
-PathInd_transfd(Z)[x][E](u) = path_ind_sec(Z,x,E,u)
-PathInd_funcd(Z)[(x,E)] = path_ind_func_fapp0(Z,x,E)
-PathInd_funcd(Z)[(x,E)](u) = path_ind_sec(Z,x,E,u)
-```
-
-Composition benchmark checks:
-
-```text
-CompTarget_Z(x)[y] = Rep_Z(y) ⊢ Rep_Z(x)
-CompMotive_Z(x)[(y,p)] = Rep_Z(y) ⊢ Rep_Z(x)
-Pi(PathOut_Z(x), CompMotive_Z(x))
-  = z :^n Z ; Rep_Z(x)[z] ⊢ CompTarget_Z(x)[z]
-
-path_ind_sec(Sigma_proj1_pullback(D),u) = fib_cov_transf(D,x,u)
-path_ind_sec(CompMotive_Z(x), id_Rep_Z(x)) = path_comp_sec(x)
-CompTarget_Z(x)[p](id_Rep_Z(x)) = path_comp_func(p)
-path_comp_sec(x)[p] = path_comp_func(p)
-path_comp_func(p)[z][q] = q ∘ p
-```
-
-The two expanded routes that matter most are the primary telescope route:
-
-```text
-PathInd_transfd(Z)[x][CompMotive_Z(x)](id_Rep_Z(x))[p][z][q]
-  = comp_fapp0 Z x y z q p
-```
-
-and the derived Sigma-total route:
-
-```text
-PathInd_funcd(Z)[(x,CompMotive_Z(x))](id_Rep_Z(x))[p][z][q]
-  = comp_fapp0 Z x y z q p
-```
-
-# Appendix C. Diagram Source Notes
-
-All figures in this article are Arrowgram JSON blocks. They are intentionally
-simple: the diagrams explain object and arrow flow, while the actual
-normalization claims are made by Lambdapi assertions in `emdash3_2_checks.lp`.
+| profunctor base `A^op × B` | `Prof_base A B` |
+| profunctor category `Prof(A,B)` | `Prof_cat A B` |
+| profunctor object sort | `Prof A B` |
+| profunctor map `P ⇒ Q` | `ProfMap A B P Q` |
+| unit profunctor | `Unit_prof B` |
+| representable profunctor `Hom_X(F[-],G[-])` | `Hom_prof_along A B X F G` |
+| conjoint/right representable | `Hom_prof B X G` |
+| right-representable embedding | `Hom_prof_func J B` |
+| endpoint reindexing | `Prof_reindex A A' B B' R F G` |
+| profunctor shaped cell category | `Prof_transf_cat A A' B B' R' F R G` |
+| profunctor shaped element | `Prof_hom I A B F R G` |
+| apply shaped profunctor cell | `Prof_cell_apply ... c r` |
+| tensor of profunctors | `Prof_tensor A B X P Q` |
+| fixed-endpoint tensor bifunctor | `Prof_tensor_func A B X` |
+| fixed-endpoint tensor map | `Prof_tensor_map A B X P P' Q Q' r s` |
+| tensor shaped composition | `Prof_tensor_hom_hom I A B X R S F G M r s` |
+| covariant co-Yoneda map | `Prof_coyoneda_cov_map A B P` |
+| contravariant co-Yoneda map | `Prof_coyoneda_con_map A B P` |
+| covariant internal hom | `Prof_imply_cov A B X O Q` |
+| contravariant internal hom | `Prof_imply_con A B X P O` |
+| covariant eval/lambda maps | `Prof_eval_cov_map`, `Prof_lambda_cov_map` |
+| contravariant eval/lambda maps | `Prof_eval_con_map`, `Prof_lambda_con_map` |
+| weighted cone profunctor | `WeightedCone_prof B J J' F W` |
+| weighted limit comparison | `WeightedLimit_cov B J J' F W L` |
+| weighted limit push/pull | `weighted_limit_cov_push`, `weighted_limit_cov_pull` |
+| adjunction hom comparison | `Adjunction_hom_prof_comparison A B adj` |
+| right adjoints preserve weighted limits | `right_adjoint_preserves_weighted_limit_cov` |
+| profunctor opposite | `Op_prof A B P` |
+| weighted colimit by duality | `WeightedColimit_con B J J' F W L` |
+| left adjoints preserve weighted colimits | `left_adjoint_preserves_weighted_colimit_con` |
+| directed join category | `Join_cat A B` |
+| join inclusions | `join_fst_func A B`, `join_snd_func A B` |
+| join cross cell | `join_cross_transf A B` |
+| join recursor | `join_elim_func A B E first second cross` |
+| strict computational isomorphism | `DefIso C x y` |
+| profunctor comparison compatibility | `ProfComparison A B P Q` |
+| comparison push/pull | `prof_comparison_push`, `prof_comparison_pull` |
