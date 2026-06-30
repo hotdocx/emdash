@@ -7426,57 +7426,6 @@ assert [A B : Cat]
     (@Prof_id_transf A B R)
   ≡ @Prof_id_transf A B R;
 
-assert [A0 A A' B : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A0) B))]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A') B))]
-  [H : τ (Functor A0 A)]
-  [F : τ (Functor A A')]
-  (qq : τ (Obj
-    (@Prof_transf_cat A A0 B B Q H P (@id_func B))))
-  (pp : τ (Obj
-    (@Prof_transf_cat A' A B B P F P' (@id_func B)))) ⊢
-  @Prof_comp_transf
-    A0 A A'
-    B B B
-    Q
-    (@Prof_tensor
-      A B B P
-      (@Hom_prof_along B B B (@id_func B) (@id_func B)))
-    P'
-    H
-    (@id_func B)
-    F
-    (@id_func B)
-    (@Prof_coyoneda_unit_tensor_cov_transf
-      A B A' B
-      P P'
-      F
-      (@id_func B)
-      pp
-      B
-      (@id_func B))
-    (@Prof_tensor_hom_transf
-      B A0 A B B
-      Q P
-      (@Hom_prof_along B B B (@id_func B) (@id_func B))
-      H
-      (@id_func B)
-      (@id_func B)
-      qq
-      (@Prof_id_transf
-        B B
-        (@Hom_prof_along B B B (@id_func B) (@id_func B))))
-  ≡ @Prof_comp_transf
-      A0 A A'
-      B B B
-      Q P P'
-      H
-      (@id_func B)
-      F
-      (@id_func B)
-      pp qq;
-
 assert [I A B : Cat]
   [P : τ (Prof A B)]
   [F : τ (Functor I A)]
@@ -7570,59 +7519,6 @@ assert [I X' A B X : Cat]
         F
         (@Prof_tensor A B X R S)
         G));
-
-assert [A B0 B B' : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A) B0))]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
-  [K : τ (Functor B0 B)]
-  [G : τ (Functor B B')]
-  (qq : τ (Obj
-    (@Prof_transf_cat A A B B0 Q (@id_func A) P K)))
-  (pp : τ (Obj
-    (@Prof_transf_cat A A B' B P (@id_func A) P' G))) ⊢
-  @Prof_comp_transf
-    A A A
-    B0 B B'
-    Q
-    (@Prof_tensor
-      A A B
-      (@Hom_prof_along A A A (@id_func A) (@id_func A))
-      P)
-    P'
-    (@id_func A)
-    K
-    (@id_func A)
-    G
-    (@Prof_coyoneda_unit_tensor_con_transf
-      A B A B'
-      P P'
-      (@id_func A)
-      G
-      pp
-      A
-      (@id_func A))
-    (@Prof_tensor_transf_hom
-      A B0 A A B
-      Q
-      (@Hom_prof_along A A A (@id_func A) (@id_func A))
-      P
-      (@id_func A)
-      K
-      (@id_func A)
-      (@Prof_id_transf
-        A A
-        (@Hom_prof_along A A A (@id_func A) (@id_func A)))
-      qq)
-  ≡ @Prof_comp_transf
-      A A A
-      B0 B B'
-      Q P P'
-      (@id_func A)
-      K
-      (@id_func A)
-      G
-      pp qq;
 
 assert [I A B : Cat]
   [P : τ (Prof A B)]
