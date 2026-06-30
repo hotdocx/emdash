@@ -146,6 +146,38 @@ formalization proves that right adjoints preserve Cat-valued weighted limits,
 and how the dual left-adjoint colimit theorem is obtained by opposite
 normalization.
 
+# Contents
+
+| Section | Title |
+| --- | --- |
+| Abstract | Summary of the v3.2 architecture and main checked computations |
+| 1 | Introduction |
+| 1.1 | What v3.2 Contributes |
+| 1.2 | Road Map |
+| 1.3 | What "Checked" Means |
+| 2 | A Type-Theoretic Foundation For Directed Families |
+| 3 | Dependent Hom, Sigma Totals, And Sections |
+| 3.1 | Sigma Totals |
+| 3.2 | Pi Sections |
+| 4 | Outgoing Arrows And The Canonical `rho` Arrow |
+| 5 | Arrow Induction |
+| 5.1 | The Telescope Theorem |
+| 5.2 | The Derived Sigma-Total Presentation |
+| 6 | Strictness, Laxity, And Directed Induction |
+| 7 | Composition As The Main Computation |
+| 8 | Surface Syntax And Kernel Names |
+| 9 | Computational Method And Checked Evidence |
+| 10 | Cat-Valued Profunctors And Representables |
+| 11 | Tensor, Co-Yoneda, And Internal Hom |
+| 12 | Weighted Limits, Adjunctions, And Duality |
+| 13 | Directed-Inductive Join Categories |
+| 14 | Equality, DefIso, And Normalization Boundaries |
+| 15 | Formal Artifact And Validation |
+| 16 | Conclusion |
+| Appendix A | Identifier Glossary |
+| Appendix B | Selected Checked Normal Forms |
+| Appendix C | Diagram Source Notes |
+
 # 1. Introduction
 
 Higher category theory is hard to mechanize because coherence is not a small
@@ -209,12 +241,37 @@ The v3.2 article focuses on eight checked contributions.
    weighted colimits by opposite normalization, and `Join_cat` checks a
    primitive directed-inductive recursor with an internally natural cross cell.
 
-The rest of the paper builds these facts in the order a reader needs them:
-first the foundation, then dependent homs, then outgoing arrows, then the
-induction theorem and composition computation, and finally the larger
-profunctor-weighted-limit layer that uses the same normalization discipline.
+## 1.2 Road Map
 
-## 1.2 What "Checked" Means
+The paper has two connected layers. The first layer, Sections 2-9, develops
+the directed-family calculus far enough to state and check arrow induction.
+Section 2 fixes the basic directed type-theoretic reading of categories,
+functors, category-valued families, and section categories. Section 3 explains
+dependent homs, Sigma totals, and Pi sections, which are the structural
+ingredients used by outgoing-arrow categories. Section 4 defines
+`PathOut_Z(x)` and the canonical `rho` arrow. Section 5 packages fixed-source,
+source-indexed, and Sigma-total arrow induction. Section 6 explains where
+strict and lax transport enter the theorem. Section 7 gives the main
+normalization benchmark: applying arrow induction to the composition motive
+computes to categorical composition. Sections 8 and 9 then record the surface
+syntax and the kernel-evidence discipline used by the checks.
+
+The second layer, Sections 10-14, shows that the same cut-elimination
+discipline scales beyond the PathOut theorem. Section 10 introduces the
+Cat-valued profunctor facade, representables, reindexing, and shaped cells.
+Section 11 adds the symbolic tensor, fixed co-Yoneda maps, and covariant and
+contravariant internal homs. Section 12 formulates weighted limits as
+profunctor representability, proves right-adjoint preservation by computation,
+and obtains the dual left-adjoint colimit theorem by opposite normalization.
+Section 13 records the primitive directed-inductive join category. Section 14
+separates equality, `DefIso`, profunctor comparison, and the runtime/proof-time
+normalization boundary.
+
+Section 15 describes the formal artifact, validation commands, and MathOps
+supporting infrastructure. Section 16 concludes. The appendices collect kernel
+identifier correspondences and selected checked normal forms.
+
+## 1.3 What "Checked" Means
 
 The paper uses checked in the Lambdapi sense. An assertion
 

@@ -210,6 +210,35 @@ The implemented follow-up is therefore documentation-only: update
 `print/public/index_3_2.md` to reflect these two distinctions, then rerun
 paper validation and the local CI gate.
 
+### 2026-07-01 Introductory Road-Map Follow-Up
+
+A later readability pass found that the introduction had a contribution list
+but no explicit document outline. The implemented fix is to add a short
+`Road Map` subsection after `What v3.2 Contributes` and before `What
+"Checked" Means`. The road map explains the two-layer structure of the paper:
+
+- Sections 2-9 build the directed-family, PathOut, arrow-induction, and
+  composition-normalization theorem.
+- Sections 10-14 show how the same normalization discipline extends to
+  profunctors, tensor/co-Yoneda/internal hom, weighted limits, duality, join,
+  and `DefIso`/comparison boundaries.
+- Sections 15-16 and the appendices cover the artifact, validation, conclusion,
+  glossary, and checked normal forms.
+
+This is a paper-organization change only. It should not require Lambdapi
+source edits.
+
+### 2026-07-01 Table-Of-Contents Follow-Up
+
+The road map explains the paper architecture in prose, but it is not a
+front-matter table of contents. Add an explicit `# Contents` section after the
+abstract and before Section 1. Use a Markdown table with all numbered sections,
+current numbered subsections, and appendices so the print renderer produces a
+scan-friendly table without requiring automatic heading-anchor generation.
+
+This is also a paper-organization change only. Because the print pipeline has
+a raw-pipe-table regression check, validate it with `npm run check:render`.
+
 ## Print Pipeline Facts
 
 The current print pipeline is documented in `print/AGENTS.md`.
