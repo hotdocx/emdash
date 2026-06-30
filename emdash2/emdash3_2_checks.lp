@@ -6704,6 +6704,36 @@ assert [A B X : Cat]
       (@Prof_tensor A B X P Q)
       (@Prof_tensor A B X P' Q'));
 
+assert [A B X : Cat] ⊢
+  @Prof_tensor_func A B X
+  : τ (Functor
+      (Product_cat (@Prof_cat A B) (@Prof_cat B X))
+      (@Prof_cat A X));
+
+assert [A B X : Cat]
+  (P : τ (Prof A B))
+  (Q : τ (Prof B X)) ⊢
+  @fapp0
+    (Product_cat (@Prof_cat A B) (@Prof_cat B X))
+    (@Prof_cat A X)
+    (@Prof_tensor_func A B X)
+    (Struct_sigma P Q)
+  ≡ @Prof_tensor A B X P Q;
+
+assert [A B X : Cat]
+  [P P' : τ (Prof A B)]
+  [Q Q' : τ (Prof B X)]
+  (r : τ (ProfMap P P'))
+  (s : τ (ProfMap Q Q')) ⊢
+  @fapp1_fapp0
+    (Product_cat (@Prof_cat A B) (@Prof_cat B X))
+    (@Prof_cat A X)
+    (@Prof_tensor_func A B X)
+    (Struct_sigma P Q)
+    (Struct_sigma P' Q')
+    (Struct_sigma r s)
+  ≡ @Prof_tensor_map A B X P P' Q Q' r s;
+
 assert [I A B X : Cat]
   [R : τ (Catd (Product_cat (Op_cat A) B))]
   [S : τ (Catd (Product_cat (Op_cat B) X))]

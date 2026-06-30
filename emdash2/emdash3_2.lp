@@ -9860,6 +9860,27 @@ symbol Prof_tensor_map
       (@Prof_tensor A B X P Q)
       (@Prof_tensor A B X P' Q'));
 
+symbol Prof_tensor_func [A B X : Cat]
+  : τ (Functor
+      (Product_cat (@Prof_cat A B) (@Prof_cat B X))
+      (@Prof_cat A X));
+
+rule @fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ
+  ↪ @Prof_tensor
+      $A $B $X
+      (sigma_Fst $PQ)
+      (sigma_Snd $PQ);
+
+rule @fapp1_fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ $PQ' $rs
+  ↪ @Prof_tensor_map
+      $A $B $X
+      (sigma_Fst $PQ)
+      (sigma_Fst $PQ')
+      (sigma_Snd $PQ)
+      (sigma_Snd $PQ')
+      (sigma_Fst $rs)
+      (sigma_Snd $rs);
+
 // Compose shaped elements through a common middle probe M.
 constant symbol Prof_tensor_hom_hom
   [I A B X : Cat]
@@ -9880,39 +9901,39 @@ constant symbol Prof_tensor_hom_hom
   natural transformations; their naturality is represented by generic
   `tapp1_fapp0`, not by a separate commuting-square rewrite rule.
 */
+symbol Prof_tensor_right_unit_pair_func [A B : Cat]
+  : τ (Functor
+      (@Prof_cat A B)
+      (Product_cat (@Prof_cat A B) (@Prof_cat B B)))
+≔ Struct_sigma
+    (@id_func (@Prof_cat A B))
+    (@Const_func (@Prof_cat A B) (@Prof_cat B B) (@Unit_prof B));
+
 symbol Prof_tensor_right_unit_func [A B : Cat]
-  : τ (Functor (Prof_cat A B) (Prof_cat A B));
+  : τ (Functor (Prof_cat A B) (Prof_cat A B))
+≔ @comp_cat_fapp0
+    (@Prof_cat A B)
+    (Product_cat (@Prof_cat A B) (@Prof_cat B B))
+    (@Prof_cat A B)
+    (@Prof_tensor_func A B B)
+    (@Prof_tensor_right_unit_pair_func A B);
 
-rule @fapp0 _ _ (@Prof_tensor_right_unit_func $A $B) $P
-  ↪ @Prof_tensor $A $B $B $P (@Unit_prof $B);
-
-rule @fapp1_fapp0 _ _ (@Prof_tensor_right_unit_func $A $B) $P $P' $r
-  ↪ @Prof_tensor_map
-      $A $B $B
-      $P $P'
-      (@Unit_prof $B)
-      (@Unit_prof $B)
-      $r
-      (@id_funcd
-        (Product_cat (Op_cat $B) $B)
-        (@Unit_prof $B));
+symbol Prof_tensor_left_unit_pair_func [A B : Cat]
+  : τ (Functor
+      (@Prof_cat A B)
+      (Product_cat (@Prof_cat A A) (@Prof_cat A B)))
+≔ Struct_sigma
+    (@Const_func (@Prof_cat A B) (@Prof_cat A A) (@Unit_prof A))
+    (@id_func (@Prof_cat A B));
 
 symbol Prof_tensor_left_unit_func [A B : Cat]
-  : τ (Functor (Prof_cat A B) (Prof_cat A B));
-
-rule @fapp0 _ _ (@Prof_tensor_left_unit_func $A $B) $P
-  ↪ @Prof_tensor $A $A $B (@Unit_prof $A) $P;
-
-rule @fapp1_fapp0 _ _ (@Prof_tensor_left_unit_func $A $B) $P $P' $r
-  ↪ @Prof_tensor_map
-      $A $A $B
-      (@Unit_prof $A)
-      (@Unit_prof $A)
-      $P $P'
-      (@id_funcd
-        (Product_cat (Op_cat $A) $A)
-        (@Unit_prof $A))
-      $r;
+  : τ (Functor (Prof_cat A B) (Prof_cat A B))
+≔ @comp_cat_fapp0
+    (@Prof_cat A B)
+    (Product_cat (@Prof_cat A A) (@Prof_cat A B))
+    (@Prof_cat A B)
+    (@Prof_tensor_func A A B)
+    (@Prof_tensor_left_unit_pair_func A B);
 
 symbol Prof_coyoneda_cov_transf [A B : Cat]
   : τ (Transf
@@ -9929,27 +9950,27 @@ symbol Prof_coyoneda_cov_map [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfMap
       (@Prof_tensor A B B P (@Unit_prof B))
-      P)
-≔ @tapp0_fapp0
-    (@Prof_cat A B)
-    (@Prof_cat A B)
-    (@Prof_tensor_right_unit_func A B)
-    (@id_func (@Prof_cat A B))
-    P
-    (@Prof_coyoneda_cov_transf A B);
+      P);
 
 symbol Prof_coyoneda_con_map [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfMap
       (@Prof_tensor A A B (@Unit_prof A) P)
-      P)
-≔ @tapp0_fapp0
-    (@Prof_cat A B)
-    (@Prof_cat A B)
-    (@Prof_tensor_left_unit_func A B)
-    (@id_func (@Prof_cat A B))
-    P
-    (@Prof_coyoneda_con_transf A B);
+      P);
+
+rule @tapp0_fapp0
+      _ _
+      _ _
+      $P
+      (@Prof_coyoneda_cov_transf $A $B)
+  ↪ @Prof_coyoneda_cov_map $A $B $P;
+
+rule @tapp0_fapp0
+      _ _
+      _ _
+      $P
+      (@Prof_coyoneda_con_transf $A $B)
+  ↪ @Prof_coyoneda_con_map $A $B $P;
 
 // Fixed right-unit co-Yoneda beta on tensor-introduced shaped elements.
 rule @Prof_cell_apply
@@ -9961,13 +9982,7 @@ rule @Prof_cell_apply
       (@id_func $B)
       $F
       $M
-      (@tapp0_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Prof_tensor_right_unit_func $A $B)
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
-        $P
-        (@Prof_coyoneda_cov_transf $A $B))
+      (@Prof_coyoneda_cov_map $A $B $P)
       (@Prof_tensor_hom_hom
         $I $A $B $B
         $P
@@ -9990,10 +10005,8 @@ rule @Prof_cell_apply
       $F
       $M
       (@tapp1_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Prof_tensor_right_unit_func $A $B)
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        _ _
+        _ _
         $P $P'
         (@Prof_coyoneda_cov_transf $A $B)
         $pp)
@@ -10025,13 +10038,7 @@ rule @Prof_cell_apply
       (@id_func $B)
       $F
       $G
-      (@tapp0_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Prof_tensor_left_unit_func $A $B)
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
-        $P
-        (@Prof_coyoneda_con_transf $A $B))
+      (@Prof_coyoneda_con_map $A $B $P)
       (@Prof_tensor_hom_hom
         $I $A $A $B
         (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
@@ -10055,10 +10062,8 @@ rule @Prof_cell_apply
       $F
       $G
       (@tapp1_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
-        (@Prof_tensor_left_unit_func $A $B)
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A) $B)))
+        _ _
+        _ _
         $P $P'
         (@Prof_coyoneda_con_transf $A $B)
         $pp)
