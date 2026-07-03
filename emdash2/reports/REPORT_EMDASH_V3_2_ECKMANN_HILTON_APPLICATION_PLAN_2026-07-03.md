@@ -617,16 +617,78 @@ Computable feasibility is mixed:
 
 Completeness gaps before implementation:
 
-1. Decide whether raw accumulation joins are needed for the EH demo or only
-   for later generality.
-2. Split raw accumulation bridge probes per rule and classify each at its
-   owning position; do not promote the three-rule append package.
-3. Prove or classify tele-level higher-action identity/composition for
+The safe first slice is implementation-decision complete: promote only the
+validated `eq_refl` computation lemmas and transparent aliases that have
+already been probed. The full interchange/EH application is not yet
+implementation-decision complete. The remaining decisions are:
+
+1. First milestone scope.
+
+   Decide whether the first promoted application slice is only the safe
+   reviewer-facing computation lemmas, or whether it also attempts any raw
+   accumulation or interchange infrastructure. The conservative plan is:
+   implement the safe lemmas first, then return to the bridge decisions.
+
+2. Raw accumulation necessity.
+
+   Decide whether the raw accumulation joins are required for the EH demo
+   itself, or whether they are general infrastructure that can follow after
+   the EH proof route is clearer. The candidate shapes are:
+
+   ```text
+   F[q] o ((F[p])_*(g))
+   ((F[p])^*(g)) o F[q]
+   k o ((F[p])^*(g))
+   ```
+
+3. Raw accumulation owner and orientation.
+
+   If any raw accumulation join is needed at runtime, settle the exact owner:
+   broad raw `comp_fapp0`, a functor-level owner, a new stable intermediate
+   projection head, or a narrower existing hom-action head. Also settle the
+   RHS orientation: readable composite such as `(F(q o p))_*(g)` is acceptable
+   only if it continues to the chosen canonical nested stable normal form.
+
+4. Warning follow-up policy for raw bridges.
+
+   Split the append-probe bridge package into one rule at a time, install each
+   candidate at its owning position in a temporary full-file copy, and use the
+   warning families to identify missing joins, over-broad LHSs, or required
+   surrounding redesign. The warnings are not a veto, but the append probes are
+   not enough to approve the rules verbatim.
+
+5. Tele-level higher-action policy.
+
+   Decide whether identity/composition for
    `hom_postcomp_tele_fapp1_fapp0` and
-   `hom_precomp_along_tele_fapp1_fapp0`.
-4. Make the first interchange deliverable component-level unless a checked
+   `hom_precomp_along_tele_fapp1_fapp0` should become runtime computation,
+   proof-time identification, or explicit proof lemmas. This is one of the
+   main prerequisites for a clean four-cell interchange proof.
+
+6. Interchange theorem surface.
+
+   Choose the first promoted interchange target. Current evidence favors a
+   component-level ordinary-transfor theorem or an arbitrary-hom representable
+   theorem. Whole-transfor equality should stay deferred unless a checked
    transfor extensionality principle is added.
-5. Probe the proposed `EH_*` aliases in their final alias form before
+
+7. Horizontal-composition facade.
+
+   Decide whether `EH_hcomp_raw` remains a transparent alias over the current
+   owner stack, or whether a named stable facade is needed. A facade must not
+   hide semantic duplication; it should route through the chosen hom-action
+   owner.
+
+8. Horizontal-to-vertical proof route.
+
+   Decide the intended status of `EH_hcomp_to_vcomp`: explicit equality proof,
+   proof-time `unif_rule`, or runtime bridge. The current narrow runtime
+   bridge is useful evidence but not approved; its warning delta must be
+   classified as missing joins/placement evidence before promotion.
+
+9. Alias elaboration surface.
+
+   Probe the proposed `EH_*` aliases in their final alias form before
    promotion, because unfolded `Hom` types may elaborate more robustly than
    `Obj (EH_2End x)`.
 
