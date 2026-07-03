@@ -98,7 +98,23 @@ The active kernel already has the relevant 2-categorical substrate:
 - `eq_refl`, `eq_trans`, `eq_sym`, and `eq_ap` are available for mathematical
   equality proofs.
 
-The first-layer stable hom-action functoriality is already present:
+The first-layer stable hom-action projection joins are already present. They
+must be read carefully:
+
+- the generic single-functor law in the core calculus is still the usual
+  cut-elimination fold:
+
+```text
+F[q] o F[p]  ->  F(q o p)
+```
+
+This is implemented by the generic `fapp1_fapp0` rule on raw composites.
+
+- the special `hom_postcomp_*` / `hom_precomp_along_*` rules below have the
+  opposite-looking direction because they are stable projection joins. They
+  normalize a hom-action applied to a composite base arrow into nested stable
+  hom-actions. They are not a decision to reverse ordinary functoriality
+  globally.
 
 - postcomposition has stable functor-level and capped object-level folds
   corresponding to:
@@ -124,11 +140,21 @@ The first-layer stable hom-action functoriality is already present:
 
 These are reviewer-facing candidates for proof-by-reflexivity lemmas.
 
-Their purpose is to state the functoriality of the hom-action owners in the
-chosen runtime orientation. In the Došen-style reading, the upstream `hom_*`
-owners also computationally control associativity where the term is already
-expressed through those owners. The downstream ordinary-composition
-associativity rule is intentionally only proof-time unification:
+Their purpose is to state the current normal form of the hom-action projection
+owners. If a theorem wants the usual folded mathematical presentation, for
+example:
+
+```text
+(F q)_*((F p)_*(g))  =  (F(q o p))_*(g)
+```
+
+the first implementation strategy should be a theorem-style equality lemma
+using `eq_refl` or `eq_sym`, not a global rewrite-orientation flip.
+
+In the Došen-style reading, the upstream `hom_*` owners also computationally
+control associativity where the term is already expressed through those
+owners. The downstream ordinary-composition associativity rule is
+intentionally only proof-time unification:
 
 ```text
 (h o g) o f  ~~  h o (g o f)
@@ -148,8 +174,8 @@ F[q] o ((F[p])_*(g))
 ```
 
 stays as a raw `comp_fapp0`; it does not reduce directly back into the
-stable hom-action owner. This is not the primary functoriality orientation of
-`(F -)_*`. The current intended functoriality computation is:
+stable hom-action owner. This is not the current runtime normal form of
+the stable hom-action projection. The current stable projection computation is:
 
 ```text
 (F(q o p))_*(g)  ->  (F q)_*((F p)_*(g))
@@ -167,6 +193,17 @@ stable presentation:
 
 without adding a new runtime rewrite from raw `comp_fapp0` back into the
 stable owner.
+
+Mathematically, the folded presentation
+
+```text
+F[q] o ((F[p])_*(g))  ->  (F(q o p))_*(g)
+```
+
+is the usual direction one may want in a proof. The plan does not reject that
+mathematical orientation; it only says not to install it as a runtime rewrite
+until a concrete implementation roadblock shows that proof-time equality is
+insufficient.
 
 - the analogous raw adjacent precomposition term
 
@@ -669,17 +706,20 @@ The safe first slice is implementation-decision complete: promote only the
 validated `eq_refl` computation lemmas and transparent aliases that have
 already been probed. The first milestone scope is therefore settled:
 implement the safe lemmas first. The broader infrastructure direction is also
-settled at a high level: stable-head hom-action functoriality and ordinary
-transfor naturality are general infrastructure and should precede the final EH
-argument where they are needed.
+settled at a high level: the current stable-head hom-action projection normal
+forms and ordinary transfor naturality are general infrastructure and should
+precede the final EH argument where they are needed.
 
 Settled decisions after the 2026-07-03 review:
 
 1. The first promoted slice is conservative: transparent EH aliases and safe
    `eq_refl` lemmas only.
-2. Stable-head functoriality of `(F -)_*` and `(F -)^*` is already oriented
-   from composite stable heads to nested stable heads, at both the functor
-   level and the capped `fapp0`-projected level.
+2. Generic single-functor functoriality remains oriented in the usual fold
+   direction `F[q] o F[p] -> F(q o p)`. Separately, the current stable
+   hom-action projection joins for `(F -)_*` and `(F -)^*` are oriented from
+   composite stable heads to nested stable heads, at both the functor level
+   and the capped `fapp0`-projected level. This is an explicit provisional
+   design choice, not a global reversal of ordinary functoriality.
 3. Raw terms such as `F[q] o ((F[p])_*(g))` are not the primary functoriality
    orientation and should not reduce back into the stable owner by default.
    Their intended compatibility layer is proof-time unification with the
@@ -734,6 +774,15 @@ raw bridges from expanded `comp_fapp0` presentations back to stable hom-action
 owners are not required before the EH demo. If later reopened, the bridge
 owner/orientation and warning follow-up policy must be settled in a separate
 side-task before promotion.
+
+Pause/re-design trigger:
+if the concrete EH or four-cell-interchange implementation repeatedly gets
+stuck exactly because the stable hom-action projection normal form expands
+composite base arrows while the proof needs the usual folded presentation,
+pause before adding ad hoc bridges. Reassess whether the hom-action projection
+orientation should stay as-is with theorem-style `eq_sym` lemmas, receive a
+narrow proof-time `unif_rule`, or be redesigned at the owning projection
+layer. Do not silently work around this choice with EH-local runtime rules.
 
 ## Proposed Symbols
 
@@ -1015,6 +1064,18 @@ Work items:
    first-layer post/pre composite-arrow functoriality, postcomposition
    represented-source accumulation, and identity/unit cases are good
    candidates.
+   Record both readings where useful:
+
+   ```text
+   runtime stable projection:
+     (F(q o p))_*(g) -> (F q)_*((F p)_*(g))
+
+   theorem-style usual fold:
+     (F q)_*((F p)_*(g)) = (F(q o p))_*(g)
+   ```
+
+   The second form should initially be a proof lemma, probably by `eq_sym` of
+   the first reflexive computation, not a new rewrite rule.
 4. For raw expanded post/pre composition forms, first try to restate demo
    terms through existing stable hom-action owners. If a raw adjacent
    `comp_fapp0` is unavoidable, treat it as a proof-time compatibility case
