@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: proposed implementation-decision plan; no Eckmann-Hilton code has been promoted
+Status: implementation started; first safe computation slice promoted
 
 ## Purpose
 
@@ -1345,6 +1345,41 @@ a copied body that bypasses the named owner.
 
 Status:
 open.
+
+## Implementation Log
+
+### 2026-07-03: First Safe Computation Slice
+
+Promoted in `emdash3_2.lp` under the Applications section:
+
+- `EH_2End`
+- `EH_vcomp`
+- `EH_identity_postcomp`
+- `EH_identity_whisker`
+- `EH_vcomp_alias`
+
+The promoted binder types use the explicit alias form `@EH_2End B x`. This
+matches the successful probe and avoids relying on implicit reconstruction of
+the ambient category before a later readability cleanup is separately checked.
+
+The exact alias form was first checked in:
+
+```text
+tmp/probes/eckmann_hilton_first_slice_probe.lp
+```
+
+Validation:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/eckmann_hilton_first_slice_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s lambdapi check -w emdash3_2.lp
+```
+
+No runtime rewrite rule, proof-time unification rule, horizontal-composition
+facade, or interchange theorem was promoted in this slice. The promoted proof
+symbols are ordinary equality terms whose bodies are `eq_refl`; this is the
+reviewer-facing computation layer, not a diagnostic `assert ... ≡ ...`
+section.
 
 ## Resume / Compaction Note
 

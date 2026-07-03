@@ -12335,6 +12335,97 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
   : Cat
 ≔ @Functord_cat K C (@Nested_transfd_telescope_catd K Z E D FF GG);
 
+// 19g. Eckmann-Hilton first computation slice.
+
+/*
+  This is the conservative first slice of the Eckmann-Hilton application.
+  It introduces reviewer-facing names for the 2-endomorphism category of an
+  identity 1-cell and its vertical composition, plus the identity
+  postcomposition computations that already hold by reflexivity.
+
+  No horizontal-composition facade or rewrite rule is introduced here.
+*/
+
+// 2-endomorphisms of the identity 1-cell at x.
+//
+// Surface/formula:
+//   EH_2End(B,x) = Hom_{Hom_B(x,x)}(id_x,id_x).
+symbol EH_2End
+  [B : Cat]
+  (x : τ (Obj B))
+  : Cat
+≔ Hom_cat (Hom_cat B x x) (@id B x) (@id B x);
+
+// Vertical composition of 2-endomorphisms.
+//
+// Surface/formula:
+//   EH_vcomp(beta,alpha) = beta · alpha.
+symbol EH_vcomp
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta alpha : τ (Obj (@EH_2End B x)))
+  : τ (Obj (@EH_2End B x))
+≔ @comp_fapp0
+    (Hom_cat B x x)
+    (@id B x)
+    (@id B x)
+    (@id B x)
+    beta
+    alpha;
+
+// Postcomposition by the identity 1-cell computes to the identity functor on
+// the endomorphism hom-category.
+symbol EH_identity_postcomp
+  [B : Cat]
+  (x : τ (Obj B))
+  : τ (
+      @hom_postcomp_func B B (@id_func B) x x x (@id B x)
+      =
+      @id_func (Hom_cat B x x))
+≔ eq_refl (@id_func (Hom_cat B x x));
+
+// Consequently, whiskering a 2-endomorphism by the identity 1-cell computes
+// back to the original 2-cell.
+symbol EH_identity_whisker
+  [B : Cat]
+  (x : τ (Obj B))
+  (alpha : τ (Obj (@EH_2End B x)))
+  : τ (
+      @fapp1_fapp0
+        (Hom_cat B x x)
+        (Hom_cat B x x)
+        (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+        (@id B x)
+        (@id B x)
+        alpha
+      =
+      alpha)
+≔ eq_refl alpha;
+
+// Alias computation for the displayed vertical-composition name.
+symbol EH_vcomp_alias
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta alpha : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_vcomp B x beta alpha
+      =
+      @comp_fapp0
+        (Hom_cat B x x)
+        (@id B x)
+        (@id B x)
+        (@id B x)
+        beta
+        alpha)
+≔ eq_refl
+    (@comp_fapp0
+      (Hom_cat B x x)
+      (@id B x)
+      (@id B x)
+      (@id B x)
+      beta
+      alpha);
+
 // -------------------------------------------------------------------------------------------------
 // 20. Check catalog
 // -------------------------------------------------------------------------------------------------
