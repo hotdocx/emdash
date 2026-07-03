@@ -124,6 +124,20 @@ The first-layer stable hom-action functoriality is already present:
 
 These are reviewer-facing candidates for proof-by-reflexivity lemmas.
 
+Their purpose is not only to state functoriality. In the Došen-style reading,
+the upstream `hom_*` owners computationally control associativity by absorbing
+adjacent cuts into reusable pre/postcomposition actions. The downstream
+ordinary-composition associativity rule is intentionally only proof-time
+unification:
+
+```text
+(h o g) o f  ~~  h o (g o f)
+```
+
+That unification rule is semantically valid and useful for elaborating proofs,
+but it is not the preferred runtime computation when an upstream hom-action
+accumulation can choose the normal form.
+
 The audit also found important non-computing shapes:
 
 - the raw adjacent postcomposition term
@@ -133,7 +147,12 @@ F[q] o ((F[p])_*(g))
 ```
 
 stays as a raw `comp_fapp0`; it does not reduce directly to either
-`(F(q o p))_*(g)` or `(F q)_*((F p)_*(g))`.
+`(F(q o p))_*(g)` or `(F q)_*((F p)_*(g))`. The desired missing
+postcomposition accumulation is:
+
+```text
+F[q] o ((F[p])_*(g))  ->  (F(q o p))_*(g)
+```
 
 - the analogous raw adjacent precomposition term
 
@@ -143,6 +162,20 @@ k o ((F[p])^*(g))
 
 stays as a raw `comp_fapp0`; it does not reduce directly to
 `(F[p])^*(k o g)`.
+
+- the source-side precomposition counterpart
+
+```text
+((F[p])^*(g)) o F[q]
+```
+
+also stays as a raw `comp_fapp0`; it does not reduce directly to
+`(F(p o q))^*(g)` or to the current nested stable normal form.
+The desired missing precomposition accumulation is:
+
+```text
+((F[p])^*(g)) o F[q]  ->  (F(p o q))^*(g)
+```
 
 - the higher-action stable heads
   `hom_postcomp_tele_fapp1_fapp0` and
@@ -354,6 +387,7 @@ corresponding stable hom-action target:
 ```text
 F[q] o hom_postcomp_fapp0(p,g)
 k o hom_precomp_along_fapp0(p,g)
+hom_precomp_along_fapp0(p,g) o F[q]
 hom_postcomp_tele_fapp1_fapp0(f,f,id_f)
 hom_precomp_along_tele_fapp1_fapp0(f,f,id_f)
 hom_postcomp_tele_fapp1_fapp0(g,h,e_gh)
@@ -367,6 +401,23 @@ interchange and Eckmann-Hilton application. They may be solved by explicit
 proof terms, by better routing through existing global functoriality/naturality
 owners, or by carefully probed stable-head bridges. They should not be papered
 over by an EH-local rewrite rule.
+
+The exact precomposition-source probe confirms that the stable composite
+target:
+
+```text
+(F(p o q))^*(g)
+```
+
+currently normalizes further to the nested stable form:
+
+```text
+(F q)^*((F p)^*(g))
+```
+
+so any future bridge may choose the composite expression as readable RHS only
+if the existing composite-arrow rule then continues to the accepted canonical
+normal form.
 
 ### Four-Cell Interchange Probes
 
@@ -757,6 +808,17 @@ Work items:
    terms through existing stable hom-action owners. If a raw adjacent
    `comp_fapp0` is unavoidable, classify the missing join under the rewrite
    SOP before adding any bridge.
+   The raw shapes that must be audited include both:
+
+   ```text
+   F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+   ((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
+   k o ((F[p])^*(g))          -> (F[p])^*(k o g)
+   ```
+
+   The first two are the direct upstream associativity-control rules for
+   functorial action on the varying endpoint. The third is the codomain-side
+   precomposition analogue.
 5. For tele-level higher-action identity/composition, determine whether the
    desired computation belongs to the stable projection heads
    `hom_postcomp_tele_fapp1_fapp0` /
@@ -914,12 +976,15 @@ open; focused compute/`eq_refl` probe added under `tmp/probes/`.
 
 Trigger:
 raw adjacent terms such as `F[q] o ((F[p])_*(g))` and
-`k o ((F[p])^*(g))` stay as raw `comp_fapp0` terms.
+`((F[p])^*(g)) o F[q]` stay as raw `comp_fapp0` terms. The
+codomain-side precomposition form `k o ((F[p])^*(g))` is also raw.
 
 Required audit:
 decide whether demo statements can avoid these raw shapes by using existing
 hom-action owners. If not, probe the smallest stable-head bridge and classify
-warning-enabled consequences before promotion.
+warning-enabled consequences before promotion. The semantic intent of such
+bridges is Došen-style upstream associativity control, not an EH-local shortcut
+and not a duplicate of ordinary functoriality.
 
 Status:
 open; no bridge approved.

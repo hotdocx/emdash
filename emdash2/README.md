@@ -305,6 +305,16 @@ manual classification and warning-enabled owning-position validation.
   do not reuse a helper whose application rule expands in the opposite
   direction unless a focused probe shows the critical pairs are harmless. See
   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
+- Treat hom-action accumulation as upstream computational control of
+  associativity. Rules such as
+  `F[q] o ((F[p])_*(g)) -> (F(q o p))_*(g)` and
+  `((F[p])^*(g)) o F[q] -> (F(p o q))^*(g)` are not ordinary
+  constructor-specific functoriality rules when their owner is the stable
+  pre/postcomposition action. They absorb adjacent cuts before falling back to
+  the downstream `comp_fapp0` associativity unification rule, which is
+  proof-time support rather than runtime normalization. Probe these rules at
+  the hom-action owner and classify warning-enabled consequences before
+  promotion.
 - When one endpoint of a hom varies by a functor, prefer the hom-indexed family
   owner (`hom_int`, `hom_con`, or displayed `homd_int(FF)`) over a hand-built
   `comp_cat*` pipeline; this keeps pre/postcomposition under the hom-action

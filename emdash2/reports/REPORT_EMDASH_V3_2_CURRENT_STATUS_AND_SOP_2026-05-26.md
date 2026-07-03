@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-06-23
+Last consolidated: 2026-07-03
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -933,6 +933,23 @@ Before proposing or implementing a nontrivial change, check these points:
    local functoriality rule. This does not prohibit beta/eta cancellation or
    Došen-style cuts for universal structure such as eval/lambda.
 
+   Hom-action accumulation is one important Došen-style case. A rule whose
+   purpose is to absorb an adjacent raw cut into a stable
+   `hom_postcomp_*`/`hom_precomp_along_*` owner is not automatically a
+   forbidden duplicate of ordinary functoriality. Examples of the intended
+   shape are:
+
+   ```text
+   F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+   ((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
+   ```
+
+   These rules computationally control associativity upstream, before the
+   ordinary composite is exposed as a raw `comp_fapp0`. The generic
+   associativity comparison for `comp_fapp0` is proof-time unification; it is
+   sound evidence for proofs, but it should not be the first resort when a
+   stable hom-action owner can supply the intended runtime normal form.
+
 2. Decide whether the new computation needs a stable head.
 
    Add primitive/stable heads only when a focused probe shows a real
@@ -1519,6 +1536,25 @@ f ∘ h  -> fapp0 (postcompose_by f) h
 Use such a head only when the composite is genuinely a reusable functorial
 operation and the existing helper has the wrong computational orientation for
 the theorem. Otherwise prefer the already-owned semantic projection.
+
+For represented hom-actions, accumulation is the mechanism that keeps
+associativity computational at the upstream `hom_*` layer. Typical desired
+rules include:
+
+```text
+F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+((F f)_*(g)) o h           -> (F f)_*(g o h)
+((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
+k o ((F[p])^*(g))          -> (F[p])^*(k o g)
+```
+
+If one of these shapes is missing, first normalize both sides separately and
+check whether the term can be routed through an existing hom-action owner. If a
+new bridge is needed, probe it at the owning declaration position, test both
+owner-first and projection-first reduction, and compare warning-enabled
+results. Falling back to the ordinary `comp_fapp0` associativity unification
+rule is acceptable proof-time evidence, but it means that particular
+associativity step is no longer being controlled by runtime cut-elimination.
 
 The current Sigma-map fibre component is owned by the internal displayed
 hom-action projection ladder, not by a separate precomposition wrapper:

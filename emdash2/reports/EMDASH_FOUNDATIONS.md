@@ -161,6 +161,34 @@ express the same Cat case, but the Cat-specialized result is a transfor and
 therefore exposes component and off-diagonal projections such as
 `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`.
 
+### Hom-Actions And Controlled Associativity
+
+The represented hom-actions are meant to compute with composition before a
+proof has to appeal to a separate associativity principle. In ordinary
+notation:
+
+```text
+(F p)_*(g) = F[p] o g
+(F p)^*(g) = g o F[p]
+```
+
+The useful computational normal forms are accumulation laws such as:
+
+```text
+F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+((F f)_*(g)) o h           -> (F f)_*(g o h)
+((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
+k o ((F[p])^*(g))          -> (F[p])^*(k o g)
+```
+
+These are the higher-categorical analogue of keeping substitution or
+cut-elimination under the constructor that owns it. The kernel also has
+proof-time associativity for raw ordinary composition, but using that
+associativity means the computation has already fallen out of the upstream
+hom-action owner. For reviewer-facing examples, prefer statements whose
+normalization remains in the hom-action layer when that layer is the intended
+mathematical mechanism.
+
 ## 5. Directed Families
 
 A directed family of categories over `K` is a functor:
