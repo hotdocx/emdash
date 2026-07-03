@@ -98,6 +98,65 @@ The active kernel already has the relevant 2-categorical substrate:
 - `eq_refl`, `eq_trans`, `eq_sym`, and `eq_ap` are available for mathematical
   equality proofs.
 
+The first-layer stable hom-action functoriality is already present:
+
+- postcomposition has stable functor-level and capped object-level folds
+  corresponding to:
+
+```text
+(F(q o p))_*        -> (F q)_* o (F p)_*
+(F(q o p))_*(g)    -> (F q)_*((F p)_*(g))
+```
+
+- precomposition has the contravariant stable functor-level and capped
+  object-level folds:
+
+```text
+(F(q o p))^*        -> (F p)^* o (F q)^*
+(F(q o p))^*(g)    -> (F p)^*((F q)^*(g))
+```
+
+- postcomposition has the represented-source accumulation:
+
+```text
+((F f)_*(g)) o h    -> (F f)_*(g o h)
+```
+
+These are reviewer-facing candidates for proof-by-reflexivity lemmas.
+
+The audit also found important non-computing shapes:
+
+- the raw adjacent postcomposition term
+
+```text
+F[q] o ((F[p])_*(g))
+```
+
+stays as a raw `comp_fapp0`; it does not reduce directly to either
+`(F(q o p))_*(g)` or `(F q)_*((F p)_*(g))`.
+
+- the analogous raw adjacent precomposition term
+
+```text
+k o ((F[p])^*(g))
+```
+
+stays as a raw `comp_fapp0`; it does not reduce directly to
+`(F[p])^*(k o g)`.
+
+- the higher-action stable heads
+  `hom_postcomp_tele_fapp1_fapp0` and
+  `hom_precomp_along_tele_fapp1_fapp0` currently expose the action on 2-cells,
+  but they do not fold identity 2-cells to identity transfors and do not fold
+  vertical composites of 2-cells to the stable head applied to the composite
+  2-cell.
+
+This matters for the demo design. When a proof is meant to use generic
+functoriality or naturality, formulate the term through the global
+`fapp1_*`/`tapp1_*` owner or through an existing stable owner whose join is
+known to compute. Do not assume that a raw `comp_fapp0` adjacent to a stable
+hom-action projection will be re-associated into the hom-action normal form.
+
 The existing interchange diagnostic near `emdash3_2_checks.lp`'s comment
 `Interchange law instance for the Cat-valued representable hom_` is relevant
 but should not be copied verbatim into the application theorem. It is a
@@ -248,6 +307,66 @@ delta:                       +12 unjoinable critical pairs
 This bridge is therefore not ready for promotion. It is useful evidence for a
 missing join at the identity-endomorphism horizontal-composition boundary, but
 the rewrite-rule SOP requires more work before any runtime rule can be added.
+
+### Hom-Action Functoriality And Accumulation Probe
+
+Probe:
+
+```text
+tmp/probes/hom_action_functoriality_accumulation_probe.lp
+```
+
+Result:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_functoriality_accumulation_probe.lp
+```
+
+succeeds.
+
+The following `eq_refl` proof symbols succeed in the probe:
+
+```text
+hom_postcomp_func(q o p)
+  =
+comp_cat_fapp0(hom_postcomp_func(q), hom_postcomp_func(p))
+
+hom_postcomp_fapp0(q o p,g)
+  =
+hom_postcomp_fapp0(q, hom_postcomp_fapp0(p,g))
+
+((F f)_*(g)) o h
+  =
+(F f)_*(g o h)
+
+hom_precomp_along_func(q o p)
+  =
+comp_cat_fapp0(hom_precomp_along_func(p), hom_precomp_along_func(q))
+
+hom_precomp_along_fapp0(q o p,g)
+  =
+hom_precomp_along_fapp0(p, hom_precomp_along_fapp0(q,g))
+```
+
+The `compute` queries show that the following do not currently reduce to the
+corresponding stable hom-action target:
+
+```text
+F[q] o hom_postcomp_fapp0(p,g)
+k o hom_precomp_along_fapp0(p,g)
+hom_postcomp_tele_fapp1_fapp0(f,f,id_f)
+hom_precomp_along_tele_fapp1_fapp0(f,f,id_f)
+hom_postcomp_tele_fapp1_fapp0(g,h,e_gh)
+  o hom_postcomp_tele_fapp1_fapp0(f,g,e_fg)
+hom_precomp_along_tele_fapp1_fapp0(g,h,e_gh)
+  o hom_precomp_along_tele_fapp1_fapp0(f,g,e_fg)
+```
+
+These normal-form gaps should be treated as prerequisite subgoals for the
+interchange and Eckmann-Hilton application. They may be solved by explicit
+proof terms, by better routing through existing global functoriality/naturality
+owners, or by carefully probed stable-head bridges. They should not be papered
+over by an EH-local rewrite rule.
 
 ### Four-Cell Interchange Probes
 
@@ -621,9 +740,33 @@ complete.
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-### Phase 1: Four-Cell Interchange Foundation
+### Phase 1: Hom-Action Functoriality And Accumulation Audit
 
 This phase is now the first implementation subtask.
+
+Work items:
+
+1. Promote no new runtime rule initially.
+2. Keep `tmp/probes/hom_action_functoriality_accumulation_probe.lp` as the
+   focused scratch probe while iterating.
+3. Decide which computations are reviewer-facing `eq_refl` lemmas:
+   first-layer post/pre composite-arrow functoriality, postcomposition
+   represented-source accumulation, and identity/unit cases are good
+   candidates.
+4. For raw adjacent post/pre accumulation forms, first try to restate demo
+   terms through existing stable hom-action owners. If a raw adjacent
+   `comp_fapp0` is unavoidable, classify the missing join under the rewrite
+   SOP before adding any bridge.
+5. For tele-level higher-action identity/composition, determine whether the
+   desired computation belongs to the stable projection heads
+   `hom_postcomp_tele_fapp1_fapp0` /
+   `hom_precomp_along_tele_fapp1_fapp0`, or whether the application should
+   route through the generic `fapp1_fapp0` functoriality owner before the
+   stable projection is exposed.
+6. Re-run `compute` on both sides of each candidate lemma before deciding
+   between explicit proof terms, proof-time unification, or runtime rewrite.
+
+### Phase 2: Four-Cell Interchange Foundation
 
 Work items:
 
@@ -648,7 +791,7 @@ Do not add a four-cell interchange rewrite rule merely because the direct
 proof obligations, not yet a proof that runtime normalization should choose
 one side as canonical.
 
-### Phase 2: Reviewer-Facing Computation Lemmas
+### Phase 3: Reviewer-Facing Computation Lemmas
 
 Add a new subsection under applications in `emdash3_2.lp`, after the current
 path-induction/transitivity examples unless a later reorganization plan chooses
@@ -667,7 +810,7 @@ Add diagnostic assertions to `emdash3_2_checks.lp` only for regression
 coverage of the promoted computations, and regenerate the catalog if new
 checks are added.
 
-### Phase 3: Horizontal Composition Facade
+### Phase 4: Horizontal Composition Facade
 
 Add `EH_hcomp_raw` as a transparent alias over the current hom-action owners.
 
@@ -680,7 +823,7 @@ Run compute probes for:
 
 Do not add a runtime rule yet.
 
-### Phase 4: Proof-Term Attempt
+### Phase 5: Proof-Term Attempt
 
 Try to prove:
 
@@ -701,9 +844,9 @@ If this succeeds without new rules, proceed to `EH_comm`.
 If it fails at the known normal-form gap, record the exact stuck goal in this
 report before considering kernel infrastructure.
 
-### Phase 5: Infrastructure Decision Point
+### Phase 6: Infrastructure Decision Point
 
-Only after Phase 4 fails, choose one:
+Only after Phase 5 fails, choose one:
 
 1. Keep `EH_hcomp_to_vcomp` as explicit non-reflexive evidence with a more
    detailed proof term.
@@ -733,7 +876,7 @@ This exact bridge is not currently approved. Before promotion:
 - test both owner-first and projection-first reduction paths;
 - document any remaining overlap family in this report.
 
-### Phase 6: Eckmann-Hilton Theorem
+### Phase 7: Eckmann-Hilton Theorem
 
 Implement `EH_comm` as a proof-term chain. It should be readable enough that a
 reviewer can see the Eckmann-Hilton argument:
@@ -749,6 +892,54 @@ vertical
 Prefer small named lemmas over one giant `eq_trans` term.
 
 ## Side-Task Ledger
+
+### EH-HOM-ACTION-FUNCTORIALITY-AUDIT
+
+Trigger:
+the Eckmann-Hilton and four-cell interchange demos require functoriality of
+the represented hom-actions at both the capped object-action layer and the
+tele-level 2-cell-action layer.
+
+Required audit:
+classify which stable-head functoriality/identity/accumulation laws already
+compute by `eq_refl`, which can be proved explicitly, and which require a
+runtime or proof-time bridge. The current evidence shows first-layer
+post/pre functoriality computes, while tele-level identity/composition does
+not.
+
+Status:
+open; focused compute/`eq_refl` probe added under `tmp/probes/`.
+
+### EH-RAW-ACCUMULATION-JOINS
+
+Trigger:
+raw adjacent terms such as `F[q] o ((F[p])_*(g))` and
+`k o ((F[p])^*(g))` stay as raw `comp_fapp0` terms.
+
+Required audit:
+decide whether demo statements can avoid these raw shapes by using existing
+hom-action owners. If not, probe the smallest stable-head bridge and classify
+warning-enabled consequences before promotion.
+
+Status:
+open; no bridge approved.
+
+### EH-TELE-HIGHER-ACTION-FUNCTORIALITY
+
+Trigger:
+`hom_postcomp_tele_fapp1_fapp0` and
+`hom_precomp_along_tele_fapp1_fapp0` expose higher action on 2-cells but do
+not currently compute identity or composition of those 2-cells at the stable
+head.
+
+Required audit:
+determine whether these are missing projection-ladder joins or whether the
+interchange proof should remain explicit at this layer. Any proposed rule must
+be probed at the owning position and warning-classified because it overlaps
+with generic functoriality.
+
+Status:
+open.
 
 ### EH-HCOMP-JOIN
 
