@@ -2722,6 +2722,129 @@ rule @comp_fapp0
 rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $X (@id $A $X) $f ↪ $f
 with @hom_postcomp_fapp0 $A $A (@id_func $A) $X $X $Y $f (@id $A $X) ↪ $f;
 
+// Reviewer-facing computation lemmas for first-layer postcomposition
+// hom-actions. The fold lemmas record the usual mathematical reading as
+// equality proofs; they do not change the runtime orientation above.
+symbol hom_postcomp_func_id_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X : τ (Obj B)]
+  : τ (
+      @hom_postcomp_func A B F W X X (@id B X)
+      =
+      @id_func (Hom_cat A W (@fapp0 B A F X)))
+≔ eq_refl (@id_func (Hom_cat A W (@fapp0 B A F X)));
+
+symbol hom_postcomp_fapp0_id_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X : τ (Obj B)]
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  : τ (
+      @hom_postcomp_fapp0 A B F W X X (@id B X) g
+      =
+      g)
+≔ eq_refl g;
+
+symbol hom_postcomp_func_comp_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y))
+  (q : τ (Hom B Y Z))
+  : τ (
+      @hom_postcomp_func A B F W X Z (@comp_fapp0 B X Y Z q p)
+      =
+      @comp_cat_fapp0
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y))
+        (Hom_cat A W (@fapp0 B A F Z))
+        (@hom_postcomp_func A B F W Y Z q)
+        (@hom_postcomp_func A B F W X Y p))
+≔ eq_refl
+    (@comp_cat_fapp0
+      (Hom_cat A W (@fapp0 B A F X))
+      (Hom_cat A W (@fapp0 B A F Y))
+      (Hom_cat A W (@fapp0 B A F Z))
+      (@hom_postcomp_func A B F W Y Z q)
+      (@hom_postcomp_func A B F W X Y p));
+
+symbol hom_postcomp_func_comp_fold_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y))
+  (q : τ (Hom B Y Z))
+  : τ (
+      @comp_cat_fapp0
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y))
+        (Hom_cat A W (@fapp0 B A F Z))
+        (@hom_postcomp_func A B F W Y Z q)
+        (@hom_postcomp_func A B F W X Y p)
+      =
+      @hom_postcomp_func A B F W X Z (@comp_fapp0 B X Y Z q p))
+≔ eq_sym (@hom_postcomp_func_comp_eq A B F W X Y Z p q);
+
+symbol hom_postcomp_fapp0_comp_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y))
+  (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  : τ (
+      @hom_postcomp_fapp0 A B F W X Z (@comp_fapp0 B X Y Z q p) g
+      =
+      @hom_postcomp_fapp0 A B F W Y Z q
+        (@hom_postcomp_fapp0 A B F W X Y p g))
+≔ eq_refl
+    (@hom_postcomp_fapp0 A B F W Y Z q
+      (@hom_postcomp_fapp0 A B F W X Y p g));
+
+symbol hom_postcomp_fapp0_comp_fold_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y))
+  (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  : τ (
+      @hom_postcomp_fapp0 A B F W Y Z q
+        (@hom_postcomp_fapp0 A B F W X Y p g)
+      =
+      @hom_postcomp_fapp0 A B F W X Z (@comp_fapp0 B X Y Z q p) g)
+≔ eq_sym (@hom_postcomp_fapp0_comp_eq A B F W X Y Z p q g);
+
+symbol hom_postcomp_fapp0_source_accumulation_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  [V W : τ (Obj A)]
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  (h : τ (Hom A V W))
+  : τ (
+      @comp_fapp0
+        A
+        V
+        W
+        (@fapp0 B A F Y)
+        (@hom_postcomp_fapp0 A B F W X Y f g)
+        h
+      =
+      @hom_postcomp_fapp0 A B F V X Y f
+        (@comp_fapp0 A V W (@fapp0 B A F X) g h))
+≔ eq_refl
+    (@hom_postcomp_fapp0 A B F V X Y f
+      (@comp_fapp0 A V W (@fapp0 B A F X) g h));
+
 // Hom-action of the telescope as f varies: alpha : f ->^(Hom_B(X,Y)) g.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
@@ -3312,6 +3435,106 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
 rule @hom_precomp_along_fapp0
       $A $A (@id_func $A) $Z $W $X $h $g
   ↪ @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Z $g $h;
+
+// Reviewer-facing computation lemmas for first-layer precomposition
+// hom-actions. The fold lemmas record the usual mathematical reading as
+// equality proofs; they do not change the contravariant runtime orientation.
+symbol hom_precomp_along_func_id_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [X : τ (Obj A)]
+  : τ (
+      @hom_precomp_along_func A B F Z X X (@id A X)
+      =
+      @id_func (Hom_cat B (@fapp0 A B F X) Z))
+≔ eq_refl (@id_func (Hom_cat B (@fapp0 A B F X) Z));
+
+symbol hom_precomp_along_fapp0_id_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [X : τ (Obj A)]
+  (g : τ (Hom B (@fapp0 A B F X) Z))
+  : τ (
+      @hom_precomp_along_fapp0 A B F Z X X (@id A X) g
+      =
+      g)
+≔ eq_refl g;
+
+symbol hom_precomp_along_func_comp_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X Y : τ (Obj A)]
+  (p : τ (Hom A W X))
+  (q : τ (Hom A X Y))
+  : τ (
+      @hom_precomp_along_func A B F Z W Y (@comp_fapp0 A W X Y q p)
+      =
+      @comp_cat_fapp0
+        (Hom_cat B (@fapp0 A B F Y) Z)
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z)
+        (@hom_precomp_along_func A B F Z W X p)
+        (@hom_precomp_along_func A B F Z X Y q))
+≔ eq_refl
+    (@comp_cat_fapp0
+      (Hom_cat B (@fapp0 A B F Y) Z)
+      (Hom_cat B (@fapp0 A B F X) Z)
+      (Hom_cat B (@fapp0 A B F W) Z)
+      (@hom_precomp_along_func A B F Z W X p)
+      (@hom_precomp_along_func A B F Z X Y q));
+
+symbol hom_precomp_along_func_comp_fold_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X Y : τ (Obj A)]
+  (p : τ (Hom A W X))
+  (q : τ (Hom A X Y))
+  : τ (
+      @comp_cat_fapp0
+        (Hom_cat B (@fapp0 A B F Y) Z)
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z)
+        (@hom_precomp_along_func A B F Z W X p)
+        (@hom_precomp_along_func A B F Z X Y q)
+      =
+      @hom_precomp_along_func A B F Z W Y (@comp_fapp0 A W X Y q p))
+≔ eq_sym (@hom_precomp_along_func_comp_eq A B F Z W X Y p q);
+
+symbol hom_precomp_along_fapp0_comp_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X Y : τ (Obj A)]
+  (p : τ (Hom A W X))
+  (q : τ (Hom A X Y))
+  (g : τ (Hom B (@fapp0 A B F Y) Z))
+  : τ (
+      @hom_precomp_along_fapp0 A B F Z W Y (@comp_fapp0 A W X Y q p) g
+      =
+      @hom_precomp_along_fapp0 A B F Z W X p
+        (@hom_precomp_along_fapp0 A B F Z X Y q g))
+≔ eq_refl
+    (@hom_precomp_along_fapp0 A B F Z W X p
+      (@hom_precomp_along_fapp0 A B F Z X Y q g));
+
+symbol hom_precomp_along_fapp0_comp_fold_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X Y : τ (Obj A)]
+  (p : τ (Hom A W X))
+  (q : τ (Hom A X Y))
+  (g : τ (Hom B (@fapp0 A B F Y) Z))
+  : τ (
+      @hom_precomp_along_fapp0 A B F Z W X p
+        (@hom_precomp_along_fapp0 A B F Z X Y q g)
+      =
+      @hom_precomp_along_fapp0 A B F Z W Y (@comp_fapp0 A W X Y q p) g)
+≔ eq_sym (@hom_precomp_along_fapp0_comp_eq A B F Z W X Y p q g);
 
 // Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]

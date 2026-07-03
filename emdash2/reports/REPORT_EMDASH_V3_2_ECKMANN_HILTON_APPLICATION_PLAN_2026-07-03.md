@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: implementation started; first safe computation slice promoted
+Status: implementation started; first safe EH slice and first-layer hom-action proof lemmas promoted
 
 ## Purpose
 
@@ -1249,7 +1249,10 @@ post/pre functoriality computes, while tele-level identity/composition does
 not.
 
 Status:
-open; focused compute/`eq_refl` probe added under `tmp/probes/`.
+partially complete; first-layer post/pre identity, composite-arrow, capped
+object-action, source-accumulation, and theorem-style fold equality lemmas
+have been promoted. Tele-level 2-cell-action identity/composition remains
+open.
 
 ### EH-RAW-PRESENTATION-BRIDGES
 
@@ -1380,6 +1383,41 @@ facade, or interchange theorem was promoted in this slice. The promoted proof
 symbols are ordinary equality terms whose bodies are `eq_refl`; this is the
 reviewer-facing computation layer, not a diagnostic `assert ... ≡ ...`
 section.
+
+### 2026-07-03: First-Layer Hom-Action Proof Lemmas
+
+Promoted near the semantic hom-action owners in `emdash3_2.lp`:
+
+- `hom_postcomp_func_id_eq`
+- `hom_postcomp_fapp0_id_eq`
+- `hom_postcomp_func_comp_eq`
+- `hom_postcomp_func_comp_fold_eq`
+- `hom_postcomp_fapp0_comp_eq`
+- `hom_postcomp_fapp0_comp_fold_eq`
+- `hom_postcomp_fapp0_source_accumulation_eq`
+- `hom_precomp_along_func_id_eq`
+- `hom_precomp_along_fapp0_id_eq`
+- `hom_precomp_along_func_comp_eq`
+- `hom_precomp_along_func_comp_fold_eq`
+- `hom_precomp_along_fapp0_comp_eq`
+- `hom_precomp_along_fapp0_comp_fold_eq`
+
+The runtime-direction lemmas are `eq_refl` proofs of the current stable-head
+normal forms. The `*_fold_eq` lemmas record the usual folded mathematical
+direction by `eq_sym`; no rewrite orientation was changed.
+
+The exact proof-symbol package was first checked in:
+
+```text
+tmp/probes/hom_action_phase1_promote_probe.lp
+```
+
+Validation:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_phase1_promote_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s lambdapi check -w emdash3_2.lp
+```
 
 ## Resume / Compaction Note
 
