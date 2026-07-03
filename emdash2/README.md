@@ -306,15 +306,16 @@ manual classification and warning-enabled owning-position validation.
   direction unless a focused probe shows the critical pairs are harmless. See
   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
 - Treat hom-action accumulation as upstream computational control of
-  associativity. Rules such as
-  `F[q] o ((F[p])_*(g)) -> (F(q o p))_*(g)` and
-  `((F[p])^*(g)) o F[q] -> (F(p o q))^*(g)` are not ordinary
-  constructor-specific functoriality rules when their owner is the stable
-  pre/postcomposition action. They absorb adjacent cuts before falling back to
-  the downstream `comp_fapp0` associativity unification rule, which is
-  proof-time support rather than runtime normalization. Probe these rules at
-  the hom-action owner and classify warning-enabled consequences before
-  promotion.
+  associativity when the term is already expressed through a stable hom-action
+  owner. The current runtime orientation is the stable-head one, for example
+  `(F(q o p))_*(g) -> (F q)_*((F p)_*(g))` and
+  `(F(q o p))^*(g) -> (F p)^*((F q)^*(g))`. Raw expanded terms such as
+  `F[q] o ((F[p])_*(g))` should normally stay as raw `comp_fapp0` at runtime;
+  their compatibility with stable hom-action syntax belongs to the existing
+  proof-time `hom_*_fapp0` unification bridges, validated with typed
+  `eq_refl` probes in concrete theorem contexts. Add a runtime raw bridge only
+  for a concrete consumer after the usual owning-position and warning-enabled
+  probe workflow.
 - When one endpoint of a hom varies by a functor, prefer the hom-indexed family
   owner (`hom_int`, `hom_con`, or displayed `homd_int(FF)`) over a hand-built
   `comp_cat*` pipeline; this keeps pre/postcomposition under the hom-action

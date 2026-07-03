@@ -138,7 +138,8 @@ That unification rule is semantically valid and useful for elaborating proofs,
 but it is not the preferred runtime computation when an upstream hom-action
 accumulation can choose the normal form.
 
-The audit also found important raw semantic-presentation shapes:
+The audit also found important raw semantic-presentation shapes. These should
+not be treated as additional default runtime computations:
 
 - the raw adjacent postcomposition presentation
 
@@ -154,10 +155,18 @@ stable hom-action owner. This is not the primary functoriality orientation of
 (F(q o p))_*(g)  ->  (F q)_*((F p)_*(g))
 ```
 
-If a concrete consumer naturally produces the raw `F[q] o ((F[p])_*(g))`
-presentation, a separate bridge back to the stable owner may be useful general
-infrastructure. It should be classified as a raw-presentation bridge, not as
-the main functoriality rule.
+When a concrete proof context naturally produces the raw
+`F[q] o ((F[p])_*(g))` presentation, the intended bridge is proof-time
+compatibility through the existing `hom_postcomp_fapp0` unification rule. In
+particular, a typed equality may identify the raw composite with the nested
+stable presentation:
+
+```text
+(F q)_*((F p)_*(g))
+```
+
+without adding a new runtime rewrite from raw `comp_fapp0` back into the
+stable owner.
 
 - the analogous raw adjacent precomposition term
 
@@ -166,7 +175,8 @@ k o ((F[p])^*(g))
 ```
 
 stays as a raw `comp_fapp0`; it does not reduce directly to
-`(F[p])^*(k o g)`.
+`(F[p])^*(k o g)`. This is likewise a proof-time compatibility case unless a
+later concrete consumer requires runtime normalization.
 
 - the source-side precomposition counterpart
 
@@ -182,9 +192,11 @@ primary functoriality orientation is:
 (F(p o q))^*(g)  ->  (F q)^*((F p)^*(g))
 ```
 
-The raw presentation bridge may still be meaningful general infrastructure,
-but it should not be confused with the already-present stable-head
-functoriality of `(F -)^*`.
+The existing `hom_precomp_along_fapp0` unification rule is the intended
+proof-time bridge between the stable precomposition owner and its raw
+`comp_fapp0` reading. A future runtime bridge remains possible infrastructure
+only if a checked proof or example needs judgmental reduction there; it is not
+part of the EH first-slice plan.
 
 - the corresponding naturality/ordinary-transfor accumulation is already
   represented in the active file. At the capped component level:
@@ -405,13 +417,25 @@ hom_precomp_along_fapp0(q o p,g)
 hom_precomp_along_fapp0(p, hom_precomp_along_fapp0(q,g))
 ```
 
-The `compute` queries show that the following do not currently reduce to the
-corresponding stable hom-action target:
+The `compute` queries show that the following raw expanded presentations do
+not currently reduce to the corresponding stable hom-action target:
 
 ```text
 F[q] o hom_postcomp_fapp0(p,g)
 k o hom_precomp_along_fapp0(p,g)
 hom_precomp_along_fapp0(p,g) o F[q]
+```
+
+This is now considered intentional for the EH plan. These terms should remain
+raw at runtime by default, while typed proof contexts may use the existing
+`hom_postcomp_fapp0` / `hom_precomp_along_fapp0` unification rules, plus the
+ordinary `comp_fapp0` associativity unification rule where necessary, to
+elaborate `eq_refl` proofs against stable presentations.
+
+The following higher-action normal-form gaps remain genuine prerequisite
+subgoals for interchange and Eckmann-Hilton:
+
+```text
 hom_postcomp_tele_fapp1_fapp0(f,f,id_f)
 hom_precomp_along_tele_fapp1_fapp0(f,f,id_f)
 hom_postcomp_tele_fapp1_fapp0(g,h,e_gh)
@@ -420,11 +444,9 @@ hom_precomp_along_tele_fapp1_fapp0(g,h,e_gh)
   o hom_precomp_along_tele_fapp1_fapp0(f,g,e_fg)
 ```
 
-These normal-form gaps should be treated as prerequisite subgoals for the
-interchange and Eckmann-Hilton application. They may be solved by explicit
-proof terms, by better routing through existing global functoriality/naturality
-owners, or by carefully probed stable-head bridges. They should not be papered
-over by an EH-local rewrite rule.
+They may be solved by explicit proof terms, by better routing through existing
+global functoriality/naturality owners, or by carefully probed stable-head
+bridges. They should not be papered over by an EH-local rewrite rule.
 
 The exact precomposition-source probe confirms that the stable composite
 target:
@@ -439,11 +461,11 @@ currently normalizes further to the nested stable form:
 (F q)^*((F p)^*(g))
 ```
 
-so any future bridge may choose the composite expression as readable RHS only
-if the existing composite-arrow rule then continues to the accepted canonical
-normal form.
+so if the optional raw-runtime bridge side-task is reopened later, a bridge
+may choose the composite expression as readable RHS only if the existing
+composite-arrow rule then continues to the accepted canonical normal form.
 
-### Raw Presentation Bridge Feasibility Probes
+### Raw Presentation Proof-Time Compatibility Probes
 
 Two additional append-only probes tested candidate runtime bridges from raw
 semantic presentations back into stable hom-action owners:
@@ -465,32 +487,32 @@ The warning-enabled append probes also terminate. They produce local
 unjoinable-critical-pair families at the candidate postcomposition bridge, but
 under the active SOP this is diagnostic evidence, not a veto on a semantically
 intended runtime rule.
-The minimal bridge is underconstrained because the outer `comp_fapp0` category
-is not tied tightly enough to the stable hom-action owner. The stricter bridge
-ties the outer category and endpoints to the owner, but still reports many
-local overlap families with existing category-specific composition owners
-(`Op_cat`, `Path_cat`, `Catd_cat`, `Cat_cat`, `Terminal_cat`) and existing
-postcomposition identity/composite rules. These reports should be used to
-look for missing joins, better placement, or a surrounding projection-head
-redesign.
 
-Conclusion:
-the raw-presentation bridges are semantically plausible and locally useful,
-but they are not implementation-decision complete. The warnings do not by
-themselves reject the bridges; they show that promotion would require a
-smaller owning-position design or follow-up joins, likely either:
+The current EH decision is stricter than those probes: do not promote any raw
+`comp_fapp0`-headed bridge as part of the first EH implementation path. Raw
+expanded compositions should have no additional runtime behavior by default.
+Their intended compatibility with stable hom-action syntax is proof-time
+unification, using the existing bridges:
 
-- a more stable intermediate projection head;
-- a rule placed at a functor-level owner rather than broad raw `comp_fapp0`;
-- separate carefully guarded bridges for the genuinely needed cases; or
-- explicit proof terms where runtime control is not essential.
+```text
+hom_postcomp_fapp0(...)       ~~  raw comp_fapp0(F[-], ...)
+hom_precomp_along_fapp0(...)  ~~  raw comp_fapp0(..., F[-])
+```
+
+If a future concrete consumer needs judgmental reduction from a raw expanded
+presentation back to a stable owner, reopen this as a separate infrastructure
+side-task. The append probes then become warning evidence to classify: the
+minimal bridge is underconstrained, while the stricter bridge still overlaps
+with category-specific composition owners (`Op_cat`, `Path_cat`, `Catd_cat`,
+`Cat_cat`, `Terminal_cat`) and existing postcomposition identity/composite
+rules. Those warnings are not a semantic veto, but they show that any promoted
+runtime bridge would need a narrower owner, a stable intermediate projection
+head, or follow-up joins.
 
 Do not promote the append-probe rules verbatim. Also do not treat these
 bridges as the primary functoriality orientation of `(F -)_*` or `(F -)^*`;
 that orientation is already the composite-stable-head-to-nested-stable-head
-direction recorded above. Do carry their warning
-families into the next design iteration as evidence about the missing joins or
-rule-placement problem.
+direction recorded above.
 
 ### Four-Cell Interchange Probes
 
@@ -619,15 +641,11 @@ Computable feasibility is mixed:
   the basic `EH_2End`, `EH_vcomp`, identity postcomposition, identity
   whiskering, first-layer post/pre hom-action functoriality, and represented
   source accumulation can be promoted as `eq_refl` proof symbols.
-- Medium confidence:
-  raw bridges from expanded semantic presentations back to stable hom-action
-  owners are mathematically and locally computationally plausible. They are
-  general infrastructure, not EH-local shortcuts and not the primary
-  functoriality orientation. Broad `comp_fapp0`-headed bridges are
-  warning-heavy in append probes; that warning load is not a semantic veto,
-  but it is evidence that the promoted design needs a narrower owner,
-  additional joins, surrounding projection-head redesign, or explicit proof
-  treatment.
+- High confidence:
+  raw expanded semantic presentations can be related to stable hom-action
+  presentations at proof time by the existing `hom_postcomp_fapp0` and
+  `hom_precomp_along_fapp0` unification rules. They should not receive new
+  runtime behavior for the first EH implementation slice.
 - Medium-low confidence:
   component-level ordinary-transfor interchange should be provable as an
   equality chain using `comp_assoc`, strict functoriality, and strict
@@ -663,8 +681,10 @@ Settled decisions after the 2026-07-03 review:
    from composite stable heads to nested stable heads, at both the functor
    level and the capped `fapp0`-projected level.
 3. Raw terms such as `F[q] o ((F[p])_*(g))` are not the primary functoriality
-   orientation. They are optional raw-presentation bridges back into the
-   stable owner, to be added only for a concrete consumer.
+   orientation and should not reduce back into the stable owner by default.
+   Their intended compatibility layer is proof-time unification with the
+   existing `hom_*_fapp0` stable heads, validated by typed `eq_refl` probes
+   when a concrete theorem uses them.
 4. The semantically correct transformation analogue is ordinary naturality
    accumulation, and it is already represented by the full `tapp1_func`
    naturality rules and the capped `tapp1_fapp0` rules.
@@ -674,45 +694,7 @@ Settled decisions after the 2026-07-03 review:
 
 The remaining decisions are narrower:
 
-1. Raw semantic-presentation bridge necessity.
-
-   Decide whether bridges from raw expanded compositions back to stable
-   hom-action owners are required before the EH demo, or whether the demo can
-   be formulated entirely through the existing stable owners. The candidate
-   raw bridge shapes are:
-
-   ```text
-   F[q] o ((F[p])_*(g))
-   ((F[p])^*(g)) o F[q]
-   k o ((F[p])^*(g))
-   ```
-
-   These are general infrastructure candidates. They should be settled before
-   relying on raw expanded presentations in the EH proof, but they are not
-   needed merely to express the already-present functoriality orientation:
-
-   ```text
-   (F(q o p))_*  -> (F q)_* o (F p)_*
-   (F(q o p))^*  -> (F p)^* o (F q)^*
-   ```
-
-2. Raw bridge owner and orientation.
-
-   If any raw bridge is needed at runtime, settle the exact owner: broad raw
-   `comp_fapp0`, a functor-level owner, a new stable intermediate projection
-   head, or a narrower existing hom-action head. Also settle the RHS
-   orientation: readable composite such as `(F(q o p))_*(g)` is acceptable
-   only if it continues to the chosen canonical nested stable normal form.
-
-3. Warning follow-up policy for raw bridges.
-
-   Split the append-probe bridge package into one rule at a time, install each
-   candidate at its owning position in a temporary full-file copy, and use the
-   warning families to identify missing joins, over-broad LHSs, or required
-   surrounding redesign. The warnings are not a veto, but the append probes are
-   not enough to approve the rules verbatim.
-
-4. Tele-level higher-action policy.
+1. Tele-level higher-action policy.
 
    Decide whether identity/composition for
    `hom_postcomp_tele_fapp1_fapp0` and
@@ -720,32 +702,38 @@ The remaining decisions are narrower:
    proof-time identification, or explicit proof lemmas. This is one of the
    main prerequisites for a clean four-cell interchange proof.
 
-5. Interchange theorem surface.
+2. Interchange theorem surface.
 
    Choose the first promoted interchange target. Current evidence favors a
    component-level ordinary-transfor theorem first, then an arbitrary-hom
    representable theorem if needed for EH. Whole-transfor equality should stay
    deferred unless a checked transfor extensionality principle is added.
 
-6. Horizontal-composition facade.
+3. Horizontal-composition facade.
 
    Decide whether `EH_hcomp_raw` remains a transparent alias over the current
    owner stack, or whether a named stable facade is needed. A facade must not
    hide semantic duplication; it should route through the chosen hom-action
    owner.
 
-7. Horizontal-to-vertical proof route.
+4. Horizontal-to-vertical proof route.
 
    Decide the intended status of `EH_hcomp_to_vcomp`: explicit equality proof,
    proof-time `unif_rule`, or runtime bridge. The current narrow runtime
    bridge is useful evidence but not approved; its warning delta must be
    classified as missing joins/placement evidence before promotion.
 
-8. Alias elaboration surface.
+5. Alias elaboration surface.
 
    Probe the proposed `EH_*` aliases in their final alias form before
    promotion, because unfolded `Hom` types may elaborate more robustly than
    `Obj (EH_2End x)`.
+
+Deferred optional infrastructure:
+raw bridges from expanded `comp_fapp0` presentations back to stable hom-action
+owners are not required before the EH demo. If later reopened, the bridge
+owner/orientation and warning follow-up policy must be settled in a separate
+side-task before promotion.
 
 ## Proposed Symbols
 
@@ -1029,24 +1017,26 @@ Work items:
    candidates.
 4. For raw expanded post/pre composition forms, first try to restate demo
    terms through existing stable hom-action owners. If a raw adjacent
-   `comp_fapp0` is unavoidable, classify the bridge back to the stable owner
-   under the rewrite SOP before adding any rule.
-   The raw bridge shapes that may need audit include:
+   `comp_fapp0` is unavoidable, treat it as a proof-time compatibility case
+   using the existing `hom_*_fapp0` unification rules. Validate the concrete
+   theorem shape with a typed `eq_refl` probe instead of adding a runtime rule.
+   The raw shapes include:
 
    ```text
-   F[q] o ((F[p])_*(g))       ~~> stable hom_postcomp owner
-   ((F[p])^*(g)) o F[q]       ~~> stable hom_precomp owner
-   k o ((F[p])^*(g))          ~~> stable hom_precomp owner
+   F[q] o ((F[p])_*(g))       ~~ stable hom_postcomp owner
+   ((F[p])^*(g)) o F[q]       ~~ stable hom_precomp owner
+   k o ((F[p])^*(g))          ~~ stable hom_precomp owner
    ```
 
-   These are raw-presentation bridges, not the primary functoriality
-   orientation of `(F -)_*` or `(F -)^*`.
-5. Treat the append-only raw-presentation bridge probes as feasibility
-   evidence only. Before promotion, split them by rule, install each candidate
-   at its owning position in a temporary full-file copy, and warning-classify
-   the overlap families. Treat warning families as diagnostics for missing
-   joins or placement/redesign work, not as an automatic veto. The current
-   broad append probes are not approved verbatim.
+   These are raw-presentation proof-time comparisons, not the primary
+   functoriality orientation of `(F -)_*` or `(F -)^*`.
+5. Treat the append-only raw-presentation bridge probes as archived feasibility
+   evidence only. The current EH plan does not promote them. If a later
+   concrete consumer needs runtime behavior, split the bridge package by rule,
+   install each candidate at its owning position in a temporary full-file copy,
+   and warning-classify the overlap families. Treat warning families as
+   diagnostics for missing joins or placement/redesign work, not as an
+   automatic veto.
 6. For tele-level higher-action identity/composition, determine whether the
    desired computation belongs to the stable projection heads
    `hom_postcomp_tele_fapp1_fapp0` /
@@ -1208,19 +1198,19 @@ raw adjacent terms such as `F[q] o ((F[p])_*(g))` and
 codomain-side precomposition form `k o ((F[p])^*(g))` is also raw.
 
 Required audit:
-decide whether demo statements can avoid these raw shapes by using existing
-hom-action owners. If not, probe the smallest stable-head bridge and classify
-warning-enabled consequences before promotion. The semantic intent of such
-bridges is Došen-style upstream associativity control, not an EH-local shortcut
-and not a duplicate of ordinary functoriality. The already-present
-functoriality orientation is from composite stable heads to nested stable
-heads.
+for the EH plan, these raw shapes should have no new runtime behavior by
+default. Concrete theorem contexts should use the existing proof-time
+unification bridges from `hom_postcomp_fapp0` and
+`hom_precomp_along_fapp0` to raw `comp_fapp0`, validated by typed `eq_refl`
+probes. A runtime raw bridge is a deferred optional infrastructure task, not a
+prerequisite for the safe EH slice.
 
 Status:
-open; quiet append probes prove the desired local assertions, but
-warning-enabled append probes expose local overlap families at the candidate
-postcomposition bridge. Those warnings are diagnostic evidence, not a
-semantic veto; no bridge is approved yet.
+deferred; no bridge is approved or planned for the first EH implementation
+slice. Quiet append probes prove local assertions, but warning-enabled append
+probes expose local overlap families at the candidate postcomposition bridge.
+Those warnings are diagnostic evidence, not a semantic veto, if this side-task
+is reopened later.
 
 ### EH-TELE-HIGHER-ACTION-FUNCTORIALITY
 
@@ -1294,6 +1284,16 @@ a copied body that bypasses the named owner.
 
 Status:
 open.
+
+## Resume / Compaction Note
+
+After context compaction, interruption, or handoff, do not continue this plan
+from memory alone. Reload `AGENTS.md`, `README.md`, `emdash3_2.lp`,
+`emdash3_2_checks.lp`, this report, the current SOP report,
+`reports/EMDASH_FOUNDATIONS.md`, and the canonical surface syntax report;
+then re-check `git status --short`, `git diff --cached`, `git diff`, relocate
+the active symbols with `rg`, and run a bounded baseline check before new
+edits.
 
 ## Validation Checklist
 

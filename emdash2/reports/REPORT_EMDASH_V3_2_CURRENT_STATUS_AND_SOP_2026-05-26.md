@@ -933,22 +933,22 @@ Before proposing or implementing a nontrivial change, check these points:
    local functoriality rule. This does not prohibit beta/eta cancellation or
    Došen-style cuts for universal structure such as eval/lambda.
 
-   Hom-action accumulation is one important Došen-style case. A rule whose
-   purpose is to absorb an adjacent raw cut into a stable
-   `hom_postcomp_*`/`hom_precomp_along_*` owner is not automatically a
-   forbidden duplicate of ordinary functoriality. Examples of the intended
-   shape are:
+   Hom-action accumulation is one important Došen-style case. The preferred
+   runtime orientation is the stable-head one, where the hom-action owner is
+   already visible. Examples of the intended stable computation are:
 
    ```text
-   F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
-   ((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
+   (F(q o p))_*(g)       -> (F q)_*((F p)_*(g))
+   (F(q o p))^*(g)       -> (F p)^*((F q)^*(g))
    ```
 
-   These rules computationally control associativity upstream, before the
-   ordinary composite is exposed as a raw `comp_fapp0`. The generic
-   associativity comparison for `comp_fapp0` is proof-time unification; it is
-   sound evidence for proofs, but it should not be the first resort when a
-   stable hom-action owner can supply the intended runtime normal form.
+   Raw expanded compositions such as `F[q] o ((F[p])_*(g))` should normally
+   remain raw `comp_fapp0` terms at runtime. Their compatibility with stable
+   hom-action syntax is proof-time evidence supplied by the existing
+   `hom_postcomp_fapp0` / `hom_precomp_along_fapp0` unification bridges, and by
+   ordinary `comp_fapp0` associativity unification when needed. Validate such
+   comparisons with typed `eq_refl` probes. Add a runtime raw bridge only for a
+   concrete consumer after owning-position and warning-enabled probes.
 
 2. Decide whether the new computation needs a stable head.
 
@@ -1538,23 +1538,25 @@ operation and the existing helper has the wrong computational orientation for
 the theorem. Otherwise prefer the already-owned semantic projection.
 
 For represented hom-actions, accumulation is the mechanism that keeps
-associativity computational at the upstream `hom_*` layer. Typical desired
-rules include:
+associativity computational at the upstream `hom_*` layer when the term is
+already routed through that owner. Typical stable computations include:
 
 ```text
-F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+(F(q o p))_*(g)            -> (F q)_*((F p)_*(g))
 ((F f)_*(g)) o h           -> (F f)_*(g o h)
-((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
-k o ((F[p])^*(g))          -> (F[p])^*(k o g)
+(F(q o p))^*(g)            -> (F p)^*((F q)^*(g))
 ```
 
-If one of these shapes is missing, first normalize both sides separately and
-check whether the term can be routed through an existing hom-action owner. If a
-new bridge is needed, probe it at the owning declaration position, test both
+Raw expanded presentations such as `F[q] o ((F[p])_*(g))`,
+`((F[p])^*(g)) o F[q]`, and `k o ((F[p])^*(g))` should normally have no extra
+runtime behavior. First normalize both sides separately and check whether the
+term can be routed through an existing hom-action owner. When a theorem needs
+only proof-time compatibility, use the existing `hom_*_fapp0` unification
+bridges and typed `eq_refl` probes. If a concrete consumer really needs a raw
+runtime bridge, probe it at the owning declaration position, test both
 owner-first and projection-first reduction, and compare warning-enabled
-results. Falling back to the ordinary `comp_fapp0` associativity unification
-rule is acceptable proof-time evidence, but it means that particular
-associativity step is no longer being controlled by runtime cut-elimination.
+results. Warning families are diagnostics for missing joins or placement
+problems, not automatic vetoes.
 
 The current Sigma-map fibre component is owned by the internal displayed
 hom-action projection ladder, not by a separate precomposition wrapper:

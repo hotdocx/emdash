@@ -172,22 +172,24 @@ notation:
 (F p)^*(g) = g o F[p]
 ```
 
-The useful computational normal forms are accumulation laws such as:
+The useful computational normal forms keep the stable hom-action owner visible.
+For example:
 
 ```text
-F[q] o ((F[p])_*(g))       -> (F(q o p))_*(g)
+(F(q o p))_*(g)            -> (F q)_*((F p)_*(g))
 ((F f)_*(g)) o h           -> (F f)_*(g o h)
-((F[p])^*(g)) o F[q]       -> (F(p o q))^*(g)
-k o ((F[p])^*(g))          -> (F[p])^*(k o g)
+(F(q o p))^*(g)            -> (F p)^*((F q)^*(g))
 ```
 
 These are the higher-categorical analogue of keeping substitution or
-cut-elimination under the constructor that owns it. The kernel also has
-proof-time associativity for raw ordinary composition, but using that
-associativity means the computation has already fallen out of the upstream
-hom-action owner. For reviewer-facing examples, prefer statements whose
-normalization remains in the hom-action layer when that layer is the intended
-mathematical mechanism.
+cut-elimination under the constructor that owns it. Raw expanded presentations
+such as `F[q] o ((F[p])_*(g))` and `((F[p])^*(g)) o F[q]` normally remain raw
+ordinary composites at runtime. The kernel records their relation to stable
+hom-action syntax by proof-time unification rules, and it also has proof-time
+associativity for raw ordinary composition. For reviewer-facing examples,
+prefer statements whose runtime normalization remains in the hom-action layer
+when that layer is the intended mathematical mechanism; use typed equality
+proofs when the proof naturally passes through a raw composite.
 
 ## 5. Directed Families
 
