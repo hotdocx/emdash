@@ -206,8 +206,10 @@ textbook four-2-cell interchange law:
 ```
 
 where two compatible 2-cells vary in each of the two horizontal directions.
-The four-cell interchange theorem should therefore become an explicit first
-subtask before the final Eckmann-Hilton proof chain.
+The four-cell interchange theorem should therefore become an explicit early
+subtask before the final Eckmann-Hilton proof chain, after the hom-action
+accumulation audit has classified the normalization paths that interchange
+needs.
 
 ## Probe Evidence
 
@@ -419,6 +421,52 @@ so any future bridge may choose the composite expression as readable RHS only
 if the existing composite-arrow rule then continues to the accepted canonical
 normal form.
 
+### Raw Accumulation Bridge Feasibility Probes
+
+Two additional append-only probes tested candidate runtime bridges for the raw
+accumulation shapes:
+
+```text
+tmp/probes/hom_action_raw_accumulation_bridge_probe.lp
+tmp/probes/hom_action_raw_accumulation_bridge_strict_probe.lp
+```
+
+Both quiet probes succeed and prove the desired `eq_refl` assertions for:
+
+```text
+F[q] o ((F[p])_*(g))
+((F[p])^*(g)) o F[q]
+k o ((F[p])^*(g))
+```
+
+The warning-enabled append probes also terminate. They produce local
+unjoinable-critical-pair families at the candidate postcomposition bridge, but
+under the active SOP this is diagnostic evidence, not a veto on a semantically
+intended runtime rule.
+The minimal bridge is underconstrained because the outer `comp_fapp0` category
+is not tied tightly enough to the stable hom-action owner. The stricter bridge
+ties the outer category and endpoints to the owner, but still reports many
+local overlap families with existing category-specific composition owners
+(`Op_cat`, `Path_cat`, `Catd_cat`, `Cat_cat`, `Terminal_cat`) and existing
+postcomposition identity/composite rules. These reports should be used to
+look for missing joins, better placement, or a surrounding projection-head
+redesign.
+
+Conclusion:
+the raw accumulation bridges are semantically plausible and locally useful,
+but they are not implementation-decision complete. The warnings do not by
+themselves reject the bridges; they show that promotion would require a
+smaller owning-position design or follow-up joins, likely either:
+
+- a more stable intermediate projection head;
+- a rule placed at a functor-level owner rather than broad raw `comp_fapp0`;
+- separate carefully guarded bridges for the genuinely needed cases; or
+- explicit proof terms where runtime control is not essential.
+
+Do not promote the append-probe rules verbatim. Do carry their warning
+families into the next design iteration as evidence about the missing joins or
+rule-placement problem.
+
 ### Four-Cell Interchange Probes
 
 Two additional probes tested the more textbook four-2-cell interchange shape.
@@ -505,24 +553,82 @@ Do not promote the temporary candidate bridge as-is.
 
 Instead, implement the application in phases:
 
-1. First formulate the four-cell interchange theorem surface and determine
-   whether the ordinary-transfor or arbitrary-hom version can be proved as an
-   explicit equality chain using existing associativity, functoriality, and
-   naturality proof/computation infrastructure.
-2. Add reviewer-facing notation and proof symbols whose bodies use the
+1. First complete the hom-action functoriality/accumulation audit enough to
+   know which normalization paths can be used by interchange and which require
+   explicit proof evidence.
+2. Then formulate the four-cell interchange theorem surface and determine
+   whether a component-level ordinary-transfor version, or the arbitrary-hom
+   representable version, can be proved as an explicit equality chain using
+   existing associativity, functoriality, and naturality proof/computation
+   infrastructure.
+3. Add reviewer-facing notation and proof symbols whose bodies use the
    existing computation by `eq_refl`.
-3. Define a named horizontal-composition facade for the identity-endomorphism
+4. Define a named horizontal-composition facade for the identity-endomorphism
    setting, if needed, without immediately adding a runtime rewrite.
-4. State the comparison between that facade and vertical composition as a
+5. State the comparison between that facade and vertical composition as a
    mathematical lemma.
-5. Attempt to prove that comparison using the existing equality combinators
+6. Attempt to prove that comparison using the existing equality combinators
    and existing interchange/naturality owners.
-6. Only if the proof is blocked by a genuine missing computational join, probe
+7. Only if the proof is blocked by a genuine missing computational join, probe
    the smallest owner-position bridge under the rewrite-rule SOP.
 
 This preserves the project discipline: generic functoriality and naturality
 belong to the global `fapp*`/`tapp*` calculus, while specialized bridges are
 allowed only as measured projection-ladder joins.
+
+## Reassessment
+
+Review date: 2026-07-03.
+
+The plan is globally coherent but not yet implementation-decision complete.
+It has the right architecture: start with stable hom-action computation,
+proceed to four-cell interchange, then specialize to Eckmann-Hilton. It also
+correctly avoids a global EH rewrite and treats raw `assert ... ≡ ...`
+diagnostics as DevOps evidence rather than the reviewer-facing theorem.
+
+Computable feasibility is mixed:
+
+- High confidence:
+  the basic `EH_2End`, `EH_vcomp`, identity postcomposition, identity
+  whiskering, first-layer post/pre hom-action functoriality, and represented
+  source accumulation can be promoted as `eq_refl` proof symbols.
+- Medium confidence:
+  raw post/pre accumulation is mathematically and locally computationally
+  plausible. Broad `comp_fapp0`-headed bridges are warning-heavy in append
+  probes; that warning load is not a semantic veto, but it is evidence that
+  the promoted design needs a narrower owner, additional joins, surrounding
+  projection-head redesign, or explicit proof treatment.
+- Medium-low confidence:
+  component-level ordinary-transfor interchange should be provable as an
+  equality chain using `comp_assoc`, strict functoriality, and strict
+  naturality, but this has not yet been demonstrated by a checked proof term.
+- Low confidence as a whole-theorem target:
+  whole-transfor interchange currently lacks a known transfor extensionality
+  principle. The first reviewer-facing interchange result should therefore be
+  component-level or arbitrary-hom-level, not whole-transfor equality.
+- Main blocker:
+  `EH_hcomp_to_vcomp` still depends on identifying a raw
+  `tapp1_fapp0(... hom_postcomp_tele_fapp1_fapp0 ...)` normal form with
+  vertical composition. The temporary bridge for that comparison works in a
+  focused probe but changes the warning inventory. That delta does not veto
+  the bridge if it is the intended computation, but it does require
+  classification of overlap families and a search for missing joins or a
+  better owner before promotion.
+
+Completeness gaps before implementation:
+
+1. Decide whether raw accumulation joins are needed for the EH demo or only
+   for later generality.
+2. Split raw accumulation bridge probes per rule and classify each at its
+   owning position; do not promote the three-rule append package.
+3. Prove or classify tele-level higher-action identity/composition for
+   `hom_postcomp_tele_fapp1_fapp0` and
+   `hom_precomp_along_tele_fapp1_fapp0`.
+4. Make the first interchange deliverable component-level unless a checked
+   transfor extensionality principle is added.
+5. Probe the proposed `EH_*` aliases in their final alias form before
+   promotion, because unfolded `Hom` types may elaborate more robustly than
+   `Obj (EH_2End x)`.
 
 ## Proposed Symbols
 
@@ -819,13 +925,19 @@ Work items:
    The first two are the direct upstream associativity-control rules for
    functorial action on the varying endpoint. The third is the codomain-side
    precomposition analogue.
-5. For tele-level higher-action identity/composition, determine whether the
+5. Treat the append-only raw-accumulation bridge probes as feasibility
+   evidence only. Before promotion, split them by rule, install each candidate
+   at its owning position in a temporary full-file copy, and warning-classify
+   the overlap families. Treat warning families as diagnostics for missing
+   joins or placement/redesign work, not as an automatic veto. The current
+   broad append probes are not approved verbatim.
+6. For tele-level higher-action identity/composition, determine whether the
    desired computation belongs to the stable projection heads
    `hom_postcomp_tele_fapp1_fapp0` /
    `hom_precomp_along_tele_fapp1_fapp0`, or whether the application should
    route through the generic `fapp1_fapp0` functoriality owner before the
    stable projection is exposed.
-6. Re-run `compute` on both sides of each candidate lemma before deciding
+7. Re-run `compute` on both sides of each candidate lemma before deciding
    between explicit proof terms, proof-time unification, or runtime rewrite.
 
 ### Phase 2: Four-Cell Interchange Foundation
@@ -987,7 +1099,10 @@ bridges is Došen-style upstream associativity control, not an EH-local shortcut
 and not a duplicate of ordinary functoriality.
 
 Status:
-open; no bridge approved.
+open; quiet append probes prove the desired local assertions, but
+warning-enabled append probes expose local overlap families at the candidate
+postcomposition bridge. Those warnings are diagnostic evidence, not a
+semantic veto; no bridge is approved yet.
 
 ### EH-TELE-HIGHER-ACTION-FUNCTORIALITY
 
