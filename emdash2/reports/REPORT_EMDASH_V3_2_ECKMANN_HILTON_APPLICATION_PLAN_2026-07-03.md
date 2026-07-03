@@ -101,8 +101,21 @@ The active kernel already has the relevant 2-categorical substrate:
 The existing interchange diagnostic near `emdash3_2_checks.lp`'s comment
 `Interchange law instance for the Cat-valued representable hom_` is relevant
 but should not be copied verbatim into the application theorem. It is a
-full-owner regression for a Cat-valued representable postcomposition action,
-not yet a named theorem surface for identity 1-cell 2-endomorphisms.
+full-owner regression for a Cat-valued representable postcomposition action.
+More precisely, it checks a fundamental naturality/whiskering aspect of
+interchange: one postcomposing 2-cell `e_fg : f => g` interacts correctly with
+a vertical composite `beta · alpha` in the precomposed hom. It is not yet the
+textbook four-2-cell interchange law:
+
+```text
+(theta * beta) · (eta * alpha)
+  =
+(theta · eta) * (beta · alpha)
+```
+
+where two compatible 2-cells vary in each of the two horizontal directions.
+The four-cell interchange theorem should therefore become an explicit first
+subtask before the final Eckmann-Hilton proof chain.
 
 ## Probe Evidence
 
@@ -236,6 +249,84 @@ This bridge is therefore not ready for promotion. It is useful evidence for a
 missing join at the identity-endomorphism horizontal-composition boundary, but
 the rewrite-rule SOP requires more work before any runtime rule can be added.
 
+### Four-Cell Interchange Probes
+
+Two additional probes tested the more textbook four-2-cell interchange shape.
+
+The arbitrary-hom version uses:
+
+```text
+f,g,h : Hom_B(N,L)
+e_fg : f => g
+e_gh : g => h
+X,Y,Z : Hom_B(M,N)
+alpha : X => Y
+beta  : Y => Z
+```
+
+with horizontal composition expressed through the current representable
+postcomposition owner. The two sides are:
+
+```text
+lhs = hcomp(e_gh,beta) · hcomp(e_fg,alpha)
+rhs = hcomp(e_gh · e_fg, beta · alpha)
+```
+
+Probe:
+
+```text
+tmp/probes/interchange_four_cell_probe.lp
+```
+
+Result:
+the formulation is well-typed and `compute` shows the expected normal forms,
+but the `eq_refl` proof fails. The left side normalizes to a vertical
+`comp_fapp0` of two raw `tapp1_fapp0(... hom_postcomp_tele_fapp1_fapp0 ...)`
+horizontal composites. The right side normalizes to one raw `tapp1_fapp0`
+whose two arguments are the vertical composites.
+
+The ordinary-natural-transformation version uses:
+
+```text
+F,G,H : X ⊢ Y
+alpha : F => G
+beta  : G => H
+P,Q,R : Y ⊢ Z
+eta   : P => Q
+theta : Q => R
+```
+
+with horizontal composition expressed by the current
+`comp_cat_cov_func_func_tapp1_fapp0` owner:
+
+```text
+lhs = hcomp(theta,beta) · hcomp(eta,alpha)
+rhs = hcomp(theta · eta, beta · alpha)
+```
+
+Probe:
+
+```text
+tmp/probes/interchange_transf_four_cell_probe.lp
+```
+
+Result:
+the whole-transfor equality is well-typed but not reflexive. The normal forms
+show the left side as two nested vertical composites of
+`comp_cat_cov_transf` and `comp_cat_con_transf`, while the right side is the
+single horizontal composite of the two vertical composites.
+
+A component-level version at `a : Obj(X)` was also probed:
+
+```text
+tmp/probes/interchange_transf_component_probe.lp
+```
+
+It is still not reflexive. The component goal exposes the expected textbook
+proof obligations: associativity, functoriality of `R`, and naturality of
+`theta` with respect to `alpha`. This suggests that the next milestone should
+try an explicit equality proof before adding any rewrite or unification rule.
+
 ## Architecture Decision
 
 Do not start by adding a global Eckmann-Hilton rewrite rule.
@@ -244,15 +335,19 @@ Do not promote the temporary candidate bridge as-is.
 
 Instead, implement the application in phases:
 
-1. Add reviewer-facing notation and proof symbols whose bodies use the
+1. First formulate the four-cell interchange theorem surface and determine
+   whether the ordinary-transfor or arbitrary-hom version can be proved as an
+   explicit equality chain using existing associativity, functoriality, and
+   naturality proof/computation infrastructure.
+2. Add reviewer-facing notation and proof symbols whose bodies use the
    existing computation by `eq_refl`.
-2. Define a named horizontal-composition facade for the identity-endomorphism
+3. Define a named horizontal-composition facade for the identity-endomorphism
    setting, if needed, without immediately adding a runtime rewrite.
-3. State the comparison between that facade and vertical composition as a
+4. State the comparison between that facade and vertical composition as a
    mathematical lemma.
-4. Attempt to prove that comparison using the existing equality combinators
+5. Attempt to prove that comparison using the existing equality combinators
    and existing interchange/naturality owners.
-5. Only if the proof is blocked by a genuine missing computational join, probe
+6. Only if the proof is blocked by a genuine missing computational join, probe
    the smallest owner-position bridge under the rewrite-rule SOP.
 
 This preserves the project discipline: generic functoriality and naturality
@@ -410,6 +505,57 @@ The exact argument order must be fixed by a focused probe against the active
 two-variable version required for EH, not a premature fully general
 interchange theorem.
 
+Before the EH-specialized theorem, add a first interchange subtask with two
+candidate surfaces.
+
+Candidate A: ordinary natural transformations in `Cat_cat`.
+
+```text
+symbol transf_interchange
+  [X Y Z : Cat]
+  [P Q R : τ (Functor Y Z)]
+  (eta : τ (Transf P Q))
+  (theta : τ (Transf Q R))
+  [F G H : τ (Functor X Y)]
+  (alpha : τ (Transf F G))
+  (beta : τ (Transf G H))
+  : τ (
+      comp(
+        hcomp(theta,beta),
+        hcomp(eta,alpha))
+      =
+      hcomp(
+        comp(theta,eta),
+        comp(beta,alpha)));
+```
+
+Here `hcomp` should be the existing
+`comp_cat_cov_func_func_tapp1_fapp0` owner or a transparent readability alias
+over it.
+
+Candidate B: arbitrary-hom/representable postcomposition.
+
+```text
+symbol hom_postcomp_interchange
+  [B : Cat] [M N L : τ (Obj B)]
+  [f g h : τ (Hom B N L)]
+  (e_fg : τ (Hom (Hom_cat B N L) f g))
+  (e_gh : τ (Hom (Hom_cat B N L) g h))
+  [X Y Z : τ (Hom B M N)]
+  (alpha : τ (Hom (Hom_cat B M N) X Y))
+  (beta : τ (Hom (Hom_cat B M N) Y Z))
+  : τ (
+      hcomp(e_gh,beta) · hcomp(e_fg,alpha)
+      =
+      hcomp(e_gh · e_fg, beta · alpha));
+```
+
+Candidate A is probably the cleaner first proof target because its horizontal
+composition owner is already explicit. Candidate B is closer to the
+Eckmann-Hilton application over arbitrary hom-categories and should follow
+only after the ordinary-transfor proof route or missing infrastructure is
+understood.
+
 ### Eckmann-Hilton Commutativity
 
 Target theorem:
@@ -475,7 +621,34 @@ complete.
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
-### Phase 1: Reviewer-Facing Computation Lemmas
+### Phase 1: Four-Cell Interchange Foundation
+
+This phase is now the first implementation subtask.
+
+Work items:
+
+1. Add no promoted code initially.
+2. Keep the ordinary-transfor and arbitrary-hom four-cell probes in
+   `tmp/probes/` while iterating.
+3. Normalize both sides and the component-level versions with `compute`.
+4. Try a mathematical proof of the ordinary-transfor component statement using
+   the existing proof/computation tools:
+   `eq_trans`, `eq_sym`, `eq_ap`, `comp_assoc`, functoriality by reflexivity,
+   and naturality by reflexivity through `tapp1_fapp0`.
+5. If component-level proof succeeds, decide whether a whole-transfor theorem
+   is possible with current infrastructure. Without a transfor extensionality
+   principle, whole-transfor equality may need to remain a named computation
+   rule, a proof-time comparison, or a deferred theorem.
+6. Only after the ordinary-transfor route is understood, specialize or port the
+   theorem to the arbitrary-hom representable postcomposition surface needed
+   by Eckmann-Hilton.
+
+Do not add a four-cell interchange rewrite rule merely because the direct
+`eq_refl` candidates fail. The component probe shows ordinary mathematical
+proof obligations, not yet a proof that runtime normalization should choose
+one side as canonical.
+
+### Phase 2: Reviewer-Facing Computation Lemmas
 
 Add a new subsection under applications in `emdash3_2.lp`, after the current
 path-induction/transitivity examples unless a later reorganization plan chooses
@@ -494,7 +667,7 @@ Add diagnostic assertions to `emdash3_2_checks.lp` only for regression
 coverage of the promoted computations, and regenerate the catalog if new
 checks are added.
 
-### Phase 2: Horizontal Composition Facade
+### Phase 3: Horizontal Composition Facade
 
 Add `EH_hcomp_raw` as a transparent alias over the current hom-action owners.
 
@@ -507,7 +680,7 @@ Run compute probes for:
 
 Do not add a runtime rule yet.
 
-### Phase 3: Proof-Term Attempt
+### Phase 4: Proof-Term Attempt
 
 Try to prove:
 
@@ -528,9 +701,9 @@ If this succeeds without new rules, proceed to `EH_comm`.
 If it fails at the known normal-form gap, record the exact stuck goal in this
 report before considering kernel infrastructure.
 
-### Phase 4: Infrastructure Decision Point
+### Phase 5: Infrastructure Decision Point
 
-Only after Phase 3 fails, choose one:
+Only after Phase 4 fails, choose one:
 
 1. Keep `EH_hcomp_to_vcomp` as explicit non-reflexive evidence with a more
    detailed proof term.
@@ -560,7 +733,7 @@ This exact bridge is not currently approved. Before promotion:
 - test both owner-first and projection-first reduction paths;
 - document any remaining overlap family in this report.
 
-### Phase 5: Eckmann-Hilton Theorem
+### Phase 6: Eckmann-Hilton Theorem
 
 Implement `EH_comm` as a proof-term chain. It should be readable enough that a
 reviewer can see the Eckmann-Hilton argument:
@@ -594,15 +767,32 @@ open; temporary imported bridge succeeds but adds 12 warning reports.
 ### EH-INTERCHANGE-THEOREM
 
 Trigger:
-the existing Cat-valued representable interchange diagnostic must be promoted
-into a mathematical theorem used by `EH_comm`.
+the existing Cat-valued representable interchange diagnostic is insufficient
+for the textbook four-2-cell argument needed by `EH_comm`.
 
 Required audit:
-specialize the theorem surface to identity-endomorphism cells first; do not
-prematurely generalize to all interchange laws.
+first formulate the four-cell ordinary-transfor and arbitrary-hom theorem
+surfaces; test component-level proof terms before any runtime rule; specialize
+to identity-endomorphism cells only after the general proof route is clear.
 
 Status:
 open.
+
+### EH-FOUR-CELL-INTERCHANGE
+
+Trigger:
+the current `emdash3_2_checks.lp` interchange diagnostic covers a
+one-postcomposing-cell naturality slice, not the full four-cell textbook law.
+
+Required audit:
+prove or classify the ordinary-transfor four-cell theorem and then the
+arbitrary-hom representable theorem. If proof attempts fail, identify whether
+the missing infrastructure is associativity/naturality proof lemmas,
+transfor extensionality, a proof-time comparison, or a runtime bridge.
+
+Status:
+open; direct `eq_refl` candidates fail for whole-transfor,
+arbitrary-hom, and ordinary-transfor component formulations.
 
 ### EH-SURFACE-SYNTAX
 
