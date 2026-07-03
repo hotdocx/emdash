@@ -2882,6 +2882,96 @@ rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
+// Proof-time functoriality of the tele-level postcomposition stable head.
+// Runtime generic functoriality can be hidden once the stable projection head
+// is exposed, while a direct runtime bridge currently needs a larger
+// confluence package. Keep this as proof-time identification for now.
+unif_rule @hom_postcomp_tele_fapp1_fapp0
+      $A
+      $B
+      $F
+      $W
+      $X
+      $Y
+      $f
+      $f
+      (@id _ $f)
+  ≡ @id
+      (Functor_cat
+        (Hom_cat $A $W (@fapp0 $B $A $F $X))
+        (Hom_cat $A $W (@fapp0 $B $A $F $Y)))
+      (@hom_postcomp_func $A $B $F $W $X $Y $f)
+  ↪ [ tt ≡ tt ];
+
+unif_rule @comp_fapp0
+      _
+      _
+      _
+      _
+      (@hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $g $h $e_gh)
+      (@hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $e_fg)
+  ≡ @hom_postcomp_tele_fapp1_fapp0
+      $A
+      $B
+      $F
+      $W
+      $X
+      $Y
+      $f
+      $h
+      (@comp_fapp0 (Hom_cat $B $X $Y) $f $g $h $e_gh $e_fg)
+  ↪ [ tt ≡ tt ];
+
+symbol hom_postcomp_tele_fapp1_fapp0_id_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f : τ (Hom B X Y))
+  : τ (
+      @hom_postcomp_tele_fapp1_fapp0
+        A B F W X Y f f
+        (@id (Hom_cat B X Y) f)
+      =
+      @id
+        (Functor_cat
+          (Hom_cat A W (@fapp0 B A F X))
+          (Hom_cat A W (@fapp0 B A F Y)))
+        (@hom_postcomp_func A B F W X Y f))
+≔ eq_refl
+    (@id
+      (Functor_cat
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y)))
+      (@hom_postcomp_func A B F W X Y f));
+
+symbol hom_postcomp_tele_fapp1_fapp0_comp_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  (f g h : τ (Hom B X Y))
+  (e_fg : τ (Hom (Hom_cat B X Y) f g))
+  (e_gh : τ (Hom (Hom_cat B X Y) g h))
+  : τ (
+      @comp_fapp0
+        (Functor_cat
+          (Hom_cat A W (@fapp0 B A F X))
+          (Hom_cat A W (@fapp0 B A F Y)))
+        (@hom_postcomp_func A B F W X Y f)
+        (@hom_postcomp_func A B F W X Y g)
+        (@hom_postcomp_func A B F W X Y h)
+        (@hom_postcomp_tele_fapp1_fapp0 A B F W X Y g h e_gh)
+        (@hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g e_fg)
+      =
+      @hom_postcomp_tele_fapp1_fapp0
+        A B F W X Y f h
+        (@comp_fapp0 (Hom_cat B X Y) f g h e_gh e_fg))
+≔ eq_refl
+    (@hom_postcomp_tele_fapp1_fapp0
+      A B F W X Y f h
+      (@comp_fapp0 (Hom_cat B X Y) f g h e_gh e_fg));
+
 // Hom-action of capped postcomposition on alpha : g ->^(Hom_A(W,F[X])) h.
 symbol hom_postcomp_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
@@ -3572,6 +3662,95 @@ rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
 
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
+
+// Proof-time functoriality of the tele-level precomposition stable head.
+// As above, this records the mathematical functoriality needed by proofs
+// without changing the current runtime normal form.
+unif_rule @hom_precomp_along_tele_fapp1_fapp0
+      $A
+      $B
+      $F
+      $Z
+      $W
+      $X
+      $h
+      $h
+      (@id _ $h)
+  ≡ @id
+      (Functor_cat
+        (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+        (Hom_cat $B (@fapp0 $A $B $F $W) $Z))
+      (@hom_precomp_along_func $A $B $F $Z $W $X $h)
+  ↪ [ tt ≡ tt ];
+
+unif_rule @comp_fapp0
+      _
+      _
+      _
+      _
+      (@hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $g $h $e_gh)
+      (@hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $f $g $e_fg)
+  ≡ @hom_precomp_along_tele_fapp1_fapp0
+      $A
+      $B
+      $F
+      $Z
+      $W
+      $X
+      $f
+      $h
+      (@comp_fapp0 (Hom_cat $A $W $X) $f $g $h $e_gh $e_fg)
+  ↪ [ tt ≡ tt ];
+
+symbol hom_precomp_along_tele_fapp1_fapp0_id_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  : τ (
+      @hom_precomp_along_tele_fapp1_fapp0
+        A B F Z W X h h
+        (@id (Hom_cat A W X) h)
+      =
+      @id
+        (Functor_cat
+          (Hom_cat B (@fapp0 A B F X) Z)
+          (Hom_cat B (@fapp0 A B F W) Z))
+        (@hom_precomp_along_func A B F Z W X h))
+≔ eq_refl
+    (@id
+      (Functor_cat
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z))
+      (@hom_precomp_along_func A B F Z W X h));
+
+symbol hom_precomp_along_tele_fapp1_fapp0_comp_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (f g h : τ (Hom A W X))
+  (e_fg : τ (Hom (Hom_cat A W X) f g))
+  (e_gh : τ (Hom (Hom_cat A W X) g h))
+  : τ (
+      @comp_fapp0
+        (Functor_cat
+          (Hom_cat B (@fapp0 A B F X) Z)
+          (Hom_cat B (@fapp0 A B F W) Z))
+        (@hom_precomp_along_func A B F Z W X f)
+        (@hom_precomp_along_func A B F Z W X g)
+        (@hom_precomp_along_func A B F Z W X h)
+        (@hom_precomp_along_tele_fapp1_fapp0 A B F Z W X g h e_gh)
+        (@hom_precomp_along_tele_fapp1_fapp0 A B F Z W X f g e_fg)
+      =
+      @hom_precomp_along_tele_fapp1_fapp0
+        A B F Z W X f h
+        (@comp_fapp0 (Hom_cat A W X) f g h e_gh e_fg))
+≔ eq_refl
+    (@hom_precomp_along_tele_fapp1_fapp0
+      A B F Z W X f h
+      (@comp_fapp0 (Hom_cat A W X) f g h e_gh e_fg));
 
 // Hom-action of capped precomposition on alpha : g ->^(Hom_B(F[X],Z)) k.
 symbol hom_precomp_along_fapp1_func [A B : Cat]

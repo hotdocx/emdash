@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: implementation started; first safe EH slice and first-layer hom-action proof lemmas promoted
+Status: implementation started; safe EH slice, first-layer hom-action proof lemmas, and tele-level proof-time hom-action lemmas promoted
 
 ## Purpose
 
@@ -250,10 +250,12 @@ transformation component.
 
 - the higher-action stable heads
   `hom_postcomp_tele_fapp1_fapp0` and
-  `hom_precomp_along_tele_fapp1_fapp0` currently expose the action on 2-cells,
-  but they do not fold identity 2-cells to identity transfors and do not fold
-  vertical composites of 2-cells to the stable head applied to the composite
-  2-cell.
+  `hom_precomp_along_tele_fapp1_fapp0` expose the action on 2-cells. They do
+  not currently fold identity 2-cells or vertical composites by runtime
+  reduction. The promoted 2026-07-03 tele-level slice adds proof-time
+  unification rules and reviewer-facing equality lemmas for those four
+  comparisons, so typed `eq_refl` proofs can use the functoriality laws while
+  runtime normalization remains unchanged.
 
 This matters for the demo design. When a proof is meant to use generic
 functoriality or naturality, formulate the term through the global
@@ -469,7 +471,7 @@ raw at runtime by default, while typed proof contexts may use the existing
 ordinary `comp_fapp0` associativity unification rule where necessary, to
 elaborate `eq_refl` proofs against stable presentations.
 
-The following higher-action normal-form gaps remain genuine prerequisite
+The following higher-action normal-form gaps were genuine prerequisite
 subgoals for interchange and Eckmann-Hilton:
 
 ```text
@@ -481,9 +483,11 @@ hom_precomp_along_tele_fapp1_fapp0(g,h,e_gh)
   o hom_precomp_along_tele_fapp1_fapp0(f,g,e_fg)
 ```
 
-They may be solved by explicit proof terms, by better routing through existing
-global functoriality/naturality owners, or by carefully probed stable-head
-bridges. They should not be papered over by an EH-local rewrite rule.
+They are now solved at proof time by promoted `unif_rule`s and checked
+`eq_refl` equality lemmas. They remain non-runtime computations: direct
+runtime stable-head bridges were probed and left deferred because the
+owning-position runtime package changed the warning inventory before the
+necessary confluence joins were designed.
 
 The exact precomposition-source probe confirms that the stable composite
 target:
@@ -501,6 +505,83 @@ currently normalizes further to the nested stable form:
 so if the optional raw-runtime bridge side-task is reopened later, a bridge
 may choose the composite expression as readable RHS only if the existing
 composite-arrow rule then continues to the accepted canonical normal form.
+
+### Tele-Level Higher-Action Proof-Time Probe
+
+The first direct typed proof probe confirmed that the stable heads themselves
+do not compute by runtime conversion:
+
+```text
+tmp/probes/hom_action_tele_phase1_probe.lp
+```
+
+The remaining goal for postcomposition identity was:
+
+```text
+id(hom_postcomp_func(f))
+  ≡
+hom_postcomp_tele_fapp1_fapp0(f,f,id_f)
+```
+
+The generic-owner variant:
+
+```text
+fapp1_fapp0(hom_postcomp_tele_func, id_f)
+```
+
+also exposed the stable head before the generic identity fold could solve the
+goal. This is the measured projection-ladder case described in the SOP.
+
+Runtime bridge probes then showed that stable-head identity and composition
+rules are feasible but not implementation-decision complete as runtime rules:
+
+```text
+tmp/probes/hom_action_tele_bridge_probe.lp
+tmp/probes/emdash3_2_tele_bridge_full_probe.lp
+```
+
+The owning-position full-file runtime probe passed quietly, but warning
+classification changed from:
+
+```text
+baseline full-file copy: 1199 unjoinable critical pairs, 167 replaceable-pattern reports
+runtime bridge copy:     1237 unjoinable critical pairs, 167 replaceable-pattern reports
+delta:                   +38 unjoinable critical pairs
+```
+
+The new families include normalized identity siblings such as `Path_cat`,
+`Catd_cat`, `Functord_cat`, `Cat_cat`, and `Terminal_cat`, plus overlaps
+between the broad stable-head composition bridge and category-specific
+composition owners. A stricter append probe keyed on the explicit
+`Functor_cat` ambient category still passed but worsened the warning stream,
+so it is not the chosen runtime design.
+
+The promoted solution is proof-time identification:
+
+```text
+tmp/probes/hom_action_tele_unif_probe.lp
+```
+
+The proof-time probe passed both quiet and warning-enabled checks. Its
+warning-enabled inventory stayed at the baseline:
+
+```text
+proof-time unif append: 1199 unjoinable critical pairs, 167 replaceable-pattern reports
+```
+
+Promoted in `emdash3_2.lp`:
+
+```text
+hom_postcomp_tele_fapp1_fapp0_id_eq
+hom_postcomp_tele_fapp1_fapp0_comp_eq
+hom_precomp_along_tele_fapp1_fapp0_id_eq
+hom_precomp_along_tele_fapp1_fapp0_comp_eq
+```
+
+These are reviewer-facing equality terms whose bodies are `eq_refl`, but they
+depend on proof-time unification rather than runtime conversion. Runtime
+tele-level bridges remain a deferred infrastructure side-task, not an
+EH-local workaround.
 
 ### Raw Presentation Proof-Time Compatibility Probes
 
@@ -731,39 +812,39 @@ Settled decisions after the 2026-07-03 review:
 5. Whole-transfor interchange is not the first target; without extensionality,
    the first interchange deliverable should be component-level or
    arbitrary-hom-level.
+6. Tele-level higher-action identity/composition is proof-time infrastructure
+   for the current EH plan. Four `unif_rule`s identify the stable
+   `hom_postcomp_tele_fapp1_fapp0` /
+   `hom_precomp_along_tele_fapp1_fapp0` identity and composition
+   presentations with their functoriality targets, and four checked equality
+   symbols expose those comparisons by `eq_refl`. Runtime tele bridges remain
+   deferred because the broad owning-position bridge added 38 unjoinable
+   critical-pair reports and the stricter ambient-category variant was worse.
 
 The remaining decisions are narrower:
 
-1. Tele-level higher-action policy.
-
-   Decide whether identity/composition for
-   `hom_postcomp_tele_fapp1_fapp0` and
-   `hom_precomp_along_tele_fapp1_fapp0` should become runtime computation,
-   proof-time identification, or explicit proof lemmas. This is one of the
-   main prerequisites for a clean four-cell interchange proof.
-
-2. Interchange theorem surface.
+1. Interchange theorem surface.
 
    Choose the first promoted interchange target. Current evidence favors a
    component-level ordinary-transfor theorem first, then an arbitrary-hom
    representable theorem if needed for EH. Whole-transfor equality should stay
    deferred unless a checked transfor extensionality principle is added.
 
-3. Horizontal-composition facade.
+2. Horizontal-composition facade.
 
    Decide whether `EH_hcomp_raw` remains a transparent alias over the current
    owner stack, or whether a named stable facade is needed. A facade must not
    hide semantic duplication; it should route through the chosen hom-action
    owner.
 
-4. Horizontal-to-vertical proof route.
+3. Horizontal-to-vertical proof route.
 
    Decide the intended status of `EH_hcomp_to_vcomp`: explicit equality proof,
    proof-time `unif_rule`, or runtime bridge. The current narrow runtime
    bridge is useful evidence but not approved; its warning delta must be
    classified as missing joins/placement evidence before promotion.
 
-5. Alias elaboration surface.
+4. Alias elaboration surface.
 
    Probe the proposed `EH_*` aliases in their final alias form before
    promotion, because unfolded `Hom` types may elaborate more robustly than
@@ -1245,14 +1326,16 @@ Required audit:
 classify which stable-head functoriality/identity/accumulation laws already
 compute by `eq_refl`, which can be proved explicitly, and which require a
 runtime or proof-time bridge. The current evidence shows first-layer
-post/pre functoriality computes, while tele-level identity/composition does
-not.
+post/pre functoriality computes, while tele-level identity/composition is now
+handled by proof-time unification plus checked `eq_refl` equality lemmas.
 
 Status:
 partially complete; first-layer post/pre identity, composite-arrow, capped
 object-action, source-accumulation, and theorem-style fold equality lemmas
-have been promoted. Tele-level 2-cell-action identity/composition remains
-open.
+have been promoted. Tele-level 2-cell-action identity/composition proof-time
+lemmas have also been promoted. Runtime tele-level stable-head bridges remain
+deferred because the owning-position runtime bridge probe introduced a `+38`
+unjoinable-critical-pair delta.
 
 ### EH-RAW-PRESENTATION-BRIDGES
 
@@ -1281,8 +1364,8 @@ is reopened later.
 Trigger:
 `hom_postcomp_tele_fapp1_fapp0` and
 `hom_precomp_along_tele_fapp1_fapp0` expose higher action on 2-cells but do
-not currently compute identity or composition of those 2-cells at the stable
-head.
+not currently runtime-compute identity or composition of those 2-cells at the
+stable head.
 
 Required audit:
 determine whether these are missing projection-ladder joins or whether the
@@ -1291,7 +1374,11 @@ be probed at the owning position and warning-classified because it overlaps
 with generic functoriality.
 
 Status:
-open.
+proof-time complete for the current EH plan; four `unif_rule`s and four
+reviewer-facing equality lemmas are promoted. Runtime conversion is deferred:
+the broad owning-position runtime bridge passed quietly but added 38
+unjoinable critical-pair reports, and the stricter ambient-`Functor_cat`
+append variant was worse.
 
 ### EH-HCOMP-JOIN
 
@@ -1417,6 +1504,45 @@ Validation:
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_phase1_promote_probe.lp
 EMDASH_TYPECHECK_TIMEOUT=60s lambdapi check -w emdash3_2.lp
+```
+
+### 2026-07-03: Tele-Level Hom-Action Proof-Time Lemmas
+
+Promoted near the tele-level hom-action owners in `emdash3_2.lp`:
+
+- `hom_postcomp_tele_fapp1_fapp0_id_eq`
+- `hom_postcomp_tele_fapp1_fapp0_comp_eq`
+- `hom_precomp_along_tele_fapp1_fapp0_id_eq`
+- `hom_precomp_along_tele_fapp1_fapp0_comp_eq`
+
+The four equality symbols are `eq_refl` terms enabled by four narrow
+proof-time unification rules. No runtime rewrite rule was promoted for these
+tele-level laws.
+
+Probe history:
+
+```text
+tmp/probes/hom_action_tele_phase1_probe.lp
+tmp/probes/hom_action_tele_generic_phase1_probe.lp
+tmp/probes/hom_action_tele_bridge_probe.lp
+tmp/probes/hom_action_tele_unif_probe.lp
+tmp/probes/emdash3_2_tele_bridge_full_probe.lp
+```
+
+The direct stable-head and generic-owner proof probes failed at the expected
+normal-form gap. The runtime bridge probes passed but the owning-position
+full-file bridge changed the warning inventory by `+38` unjoinable
+critical-pair reports. The proof-time unification probe passed with the
+baseline warning inventory (`1199` unjoinable critical pairs and `167`
+replaceable-pattern reports), so proof-time identification was selected for
+the current EH plan.
+
+Validation:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_tele_unif_probe.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_tele_unif_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
 ```
 
 ## Resume / Compaction Note
