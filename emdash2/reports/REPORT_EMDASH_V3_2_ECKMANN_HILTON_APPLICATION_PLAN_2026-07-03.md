@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: implementation started; safe EH slice, first-layer hom-action proof lemmas, and tele-level proof-time hom-action lemmas promoted
+Status: implementation started; safe EH slice, hom-action proof lemmas, and component-level ordinary-transfor interchange promoted
 
 ## Purpose
 
@@ -707,8 +707,10 @@ tmp/probes/interchange_transf_component_probe.lp
 
 It is still not reflexive. The component goal exposes the expected textbook
 proof obligations: associativity, functoriality of `R`, and naturality of
-`theta` with respect to `alpha`. This suggests that the next milestone should
-try an explicit equality proof before adding any rewrite or unification rule.
+`theta` with respect to `alpha`. That explicit proof route has now succeeded:
+`transf_interchange_component` is promoted as the first component-level
+ordinary-transfor interchange theorem, without adding a rewrite or
+unification rule.
 
 ## Architecture Decision
 
@@ -764,10 +766,11 @@ Computable feasibility is mixed:
   presentations at proof time by the existing `hom_postcomp_fapp0` and
   `hom_precomp_along_fapp0` unification rules. They should not receive new
   runtime behavior for the first EH implementation slice.
-- Medium-low confidence:
-  component-level ordinary-transfor interchange should be provable as an
-  equality chain using `comp_assoc`, strict functoriality, and strict
-  naturality, but this has not yet been demonstrated by a checked proof term.
+- Demonstrated:
+  component-level ordinary-transfor interchange is now proved as
+  `transf_interchange_component`, using `comp_assoc`, strict functoriality,
+  and strict naturality. This result is component-level, not whole-transfor
+  extensionality.
 - Low confidence as a whole-theorem target:
   whole-transfor interchange currently lacks a known transfor extensionality
   principle. The first reviewer-facing interchange result should therefore be
@@ -820,14 +823,21 @@ Settled decisions after the 2026-07-03 review:
    symbols expose those comparisons by `eq_refl`. Runtime tele bridges remain
    deferred because the broad owning-position bridge added 38 unjoinable
    critical-pair reports and the stricter ambient-category variant was worse.
+7. The first promoted four-cell interchange target is component-level
+   ordinary-transfor interchange. The theorem
+   `transf_interchange_component` is an explicit equality proof over
+   components, not a whole-transfor extensionality theorem and not a runtime
+   rewrite. It factors through `transf_naturality_component` and the
+   arrow-level `arrow_square_pasting_*` proof chain.
 
 The remaining decisions are narrower:
 
-1. Interchange theorem surface.
+1. Interchange extension surface.
 
-   Choose the first promoted interchange target. Current evidence favors a
-   component-level ordinary-transfor theorem first, then an arbitrary-hom
-   representable theorem if needed for EH. Whole-transfor equality should stay
+   Decide whether the next promoted interchange result should be the
+   arbitrary-hom representable theorem, an EH-specialized component theorem,
+   or a small bridge from the ordinary-transfor component theorem to the
+   representable postcomposition surface. Whole-transfor equality should stay
    deferred unless a checked transfor extensionality principle is added.
 
 2. Horizontal-composition facade.
@@ -1208,6 +1218,14 @@ Work items:
    theorem to the arbitrary-hom representable postcomposition surface needed
    by Eckmann-Hilton.
 
+Current implementation status:
+the ordinary-transfor component route has succeeded and is promoted as
+`transf_interchange_component`. The proof is not reflexivity: it uses
+component naturality, functoriality of the codomain functor by reflexivity,
+and an explicit `arrow_square_pasting_right_to_left` associativity chain. No
+whole-transfor interchange theorem has been promoted, and the arbitrary-hom
+representable theorem remains the next interchange-design question.
+
 Do not add a four-cell interchange rewrite rule merely because the direct
 `eq_refl` candidates fail. The component probe shows ordinary mathematical
 proof obligations, not yet a proof that runtime normalization should choose
@@ -1406,7 +1424,9 @@ surfaces; test component-level proof terms before any runtime rule; specialize
 to identity-endomorphism cells only after the general proof route is clear.
 
 Status:
-open.
+partially complete; `transf_interchange_component` is promoted as the first
+four-cell theorem at the ordinary-transfor component level. The arbitrary-hom
+representable theorem and any EH-specialized interchange theorem remain open.
 
 ### EH-FOUR-CELL-INTERCHANGE
 
@@ -1421,8 +1441,11 @@ the missing infrastructure is associativity/naturality proof lemmas,
 transfor extensionality, a proof-time comparison, or a runtime bridge.
 
 Status:
-open; direct `eq_refl` candidates fail for whole-transfor,
-arbitrary-hom, and ordinary-transfor component formulations.
+partially complete. Direct `eq_refl` candidates fail for whole-transfor,
+arbitrary-hom, and ordinary-transfor component formulations, but the
+ordinary-transfor component theorem is now proved explicitly as
+`transf_interchange_component`. Whole-transfor equality remains deferred
+without extensionality; arbitrary-hom representable interchange remains open.
 
 ### EH-SURFACE-SYNTAX
 
@@ -1543,6 +1566,52 @@ Validation:
 EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_tele_unif_probe.lp
 EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/hom_action_tele_unif_probe.lp
 EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+### 2026-07-03: Component-Level Ordinary-Transfor Interchange
+
+Promoted near the ordinary transfor/naturality owner in `emdash3_2.lp`:
+
+- `transf_diag_to_offdiag_id`
+- `transf_naturality_left`
+- `transf_naturality_right`
+- `transf_naturality_component`
+- `arrow_square_pasting_step1` through `arrow_square_pasting_step6`
+- `arrow_square_pasting_right_to_left`
+- `transf_hcomp`
+- `transf_interchange_component`
+
+This is the first promoted four-cell interchange theorem. It is intentionally
+component-level:
+
+```text
+tapp0((theta * beta) · (eta * alpha), a)
+  =
+tapp0((theta · eta) * (beta · alpha), a)
+```
+
+The proof is not `eq_refl`. It factors through an explicit arrow-level
+associativity chain, the component naturality of `theta` along `alpha[a]`,
+and ordinary functoriality of `R` by reflexivity. No whole-transfor
+extensionality principle, runtime rewrite rule, or new unification rule was
+introduced.
+
+The exact proof route was first checked in:
+
+```text
+tmp/probes/transf_naturality_component_probe.lp
+tmp/probes/interchange_component_steps_probe.lp
+```
+
+Validation:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/transf_naturality_component_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/interchange_component_steps_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s lambdapi check -w emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+EMDASH_TYPECHECK_TIMEOUT=60s make examples
+make warning-summary
 ```
 
 ## Resume / Compaction Note

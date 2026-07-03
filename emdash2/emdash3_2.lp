@@ -5344,6 +5344,496 @@ unif_rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
   ≡ @tapp0_fapp0 $A $B $F $G $X $ϵ
   ↪ [ tt ≡ tt ];
 
+// The diagonal component can be used as the off-diagonal component at an
+// identity base arrow in theorem proofs.
+symbol transf_diag_to_offdiag_id
+  [X Y : Cat]
+  [Q R : τ (Functor X Y)]
+  (theta : τ (Transf Q R))
+  (a : τ (Obj X))
+  : τ (
+      @tapp0_fapp0 X Y Q R a theta
+      =
+      @tapp1_fapp0 X Y Q R a a theta (@id X a))
+≔ eq_refl
+    (@tapp0_fapp0 X Y Q R a theta);
+
+// Component-level strict naturality, split into the two reductions to the
+// off-diagonal component and then composed as an equality proof.
+symbol transf_naturality_left
+  [X Y : Cat]
+  [Q R : τ (Functor X Y)]
+  (theta : τ (Transf Q R))
+  [a b : τ (Obj X)]
+  (p : τ (Hom X a b))
+  : τ (
+      @comp_fapp0 Y
+        (@fapp0 X Y Q a)
+        (@fapp0 X Y R a)
+        (@fapp0 X Y R b)
+        (@fapp1_fapp0 X Y R a b p)
+        (@tapp0_fapp0 X Y Q R a theta)
+      =
+      @tapp1_fapp0 X Y Q R a b theta p)
+≔ eq_trans
+    (@eq_ap
+      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R a))
+      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R b))
+      (λ m : τ (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R a)),
+        @comp_fapp0 Y
+          (@fapp0 X Y Q a)
+          (@fapp0 X Y R a)
+          (@fapp0 X Y R b)
+          (@fapp1_fapp0 X Y R a b p)
+          m)
+      (@tapp0_fapp0 X Y Q R a theta)
+      (@tapp1_fapp0 X Y Q R a a theta (@id X a))
+      (@transf_diag_to_offdiag_id X Y Q R theta a))
+    (eq_refl
+      (@tapp1_fapp0 X Y Q R a b theta p));
+
+symbol transf_naturality_right
+  [X Y : Cat]
+  [Q R : τ (Functor X Y)]
+  (theta : τ (Transf Q R))
+  [a b : τ (Obj X)]
+  (p : τ (Hom X a b))
+  : τ (
+      @comp_fapp0 Y
+        (@fapp0 X Y Q a)
+        (@fapp0 X Y Q b)
+        (@fapp0 X Y R b)
+        (@tapp0_fapp0 X Y Q R b theta)
+        (@fapp1_fapp0 X Y Q a b p)
+      =
+      @tapp1_fapp0 X Y Q R a b theta p)
+≔ eq_trans
+    (@eq_ap
+      (Hom Y (@fapp0 X Y Q b) (@fapp0 X Y R b))
+      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R b))
+      (λ m : τ (Hom Y (@fapp0 X Y Q b) (@fapp0 X Y R b)),
+        @comp_fapp0 Y
+          (@fapp0 X Y Q a)
+          (@fapp0 X Y Q b)
+          (@fapp0 X Y R b)
+          m
+          (@fapp1_fapp0 X Y Q a b p))
+      (@tapp0_fapp0 X Y Q R b theta)
+      (@tapp1_fapp0 X Y Q R b b theta (@id X b))
+      (@transf_diag_to_offdiag_id X Y Q R theta b))
+    (eq_refl
+      (@tapp1_fapp0 X Y Q R a b theta p));
+
+symbol transf_naturality_component
+  [X Y : Cat]
+  [Q R : τ (Functor X Y)]
+  (theta : τ (Transf Q R))
+  [a b : τ (Obj X)]
+  (p : τ (Hom X a b))
+  : τ (
+      @comp_fapp0 Y
+        (@fapp0 X Y Q a)
+        (@fapp0 X Y R a)
+        (@fapp0 X Y R b)
+        (@fapp1_fapp0 X Y R a b p)
+        (@tapp0_fapp0 X Y Q R a theta)
+      =
+      @comp_fapp0 Y
+        (@fapp0 X Y Q a)
+        (@fapp0 X Y Q b)
+        (@fapp0 X Y R b)
+        (@tapp0_fapp0 X Y Q R b theta)
+        (@fapp1_fapp0 X Y Q a b p))
+≔ eq_trans
+    (@transf_naturality_left X Y Q R theta a b p)
+    (eq_sym
+      (@transf_naturality_right X Y Q R theta a b p));
+
+// Arrow-level square pasting used by the ordinary-transfor component
+// interchange proof below.
+symbol arrow_square_pasting_step1
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a3 a5
+        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+        (@comp_fapp0 Z a0 a1 a3 Qalpha eta)
+      =
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a3 a5
+          (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+          Qalpha)
+        eta)
+≔ @comp_assoc Z a0 a1 a3 a5
+    (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+    Qalpha
+    eta;
+
+symbol arrow_square_pasting_step2
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a3 a5
+          (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+          Qalpha)
+        eta
+      =
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a4 a5
+          Rbeta
+          (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+        eta)
+≔ @eq_ap
+    (Hom Z a1 a5)
+    (Hom Z a0 a5)
+    (λ m : τ (Hom Z a1 a5), @comp_fapp0 Z a0 a1 a5 m eta)
+    (@comp_fapp0 Z a1 a3 a5
+      (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+      Qalpha)
+    (@comp_fapp0 Z a1 a4 a5
+      Rbeta
+      (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+    (@eq_sym
+      (Hom Z a1 a5)
+      (@comp_fapp0 Z a1 a4 a5
+        Rbeta
+        (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+      (@comp_fapp0 Z a1 a3 a5
+        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+        Qalpha)
+      (@comp_assoc Z a1 a3 a4 a5 Rbeta thetaG Qalpha));
+
+symbol arrow_square_pasting_step3
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a4 a5
+          Rbeta
+          (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+        eta
+      =
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a4 a5
+          Rbeta
+          (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
+        eta)
+≔ @eq_ap
+    (Hom Z a1 a4)
+    (Hom Z a0 a5)
+    (λ m : τ (Hom Z a1 a4),
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a4 a5 Rbeta m)
+        eta)
+    (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha)
+    (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF)
+    (eq_sym nat);
+
+symbol arrow_square_pasting_step4
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a4 a5
+          Rbeta
+          (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
+        eta
+      =
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a2 a5
+          (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
+          thetaF)
+        eta)
+≔ @eq_ap
+    (Hom Z a1 a5)
+    (Hom Z a0 a5)
+    (λ m : τ (Hom Z a1 a5), @comp_fapp0 Z a0 a1 a5 m eta)
+    (@comp_fapp0 Z a1 a4 a5
+      Rbeta
+      (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
+    (@comp_fapp0 Z a1 a2 a5
+      (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
+      thetaF)
+    (@comp_assoc Z a1 a2 a4 a5 Rbeta Ralpha thetaF);
+
+symbol arrow_square_pasting_step5
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a2 a5
+          (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
+          thetaF)
+        eta
+      =
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
+        eta)
+≔ @eq_ap
+    (Hom Z a2 a5)
+    (Hom Z a0 a5)
+    (λ m : τ (Hom Z a2 a5),
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a2 a5 m thetaF)
+        eta)
+    (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
+    Rbeta_alpha
+    func;
+
+symbol arrow_square_pasting_step6
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a1 a5
+        (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
+        eta
+      =
+      @comp_fapp0 Z a0 a2 a5
+        Rbeta_alpha
+        (@comp_fapp0 Z a0 a1 a2 thetaF eta))
+≔ @eq_sym
+    (Hom Z a0 a5)
+    (@comp_fapp0 Z a0 a2 a5
+      Rbeta_alpha
+      (@comp_fapp0 Z a0 a1 a2 thetaF eta))
+    (@comp_fapp0 Z a0 a1 a5
+      (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
+      eta)
+    (@comp_assoc Z a0 a1 a2 a5 Rbeta_alpha thetaF eta);
+
+symbol arrow_square_pasting_right_to_left
+  [Z : Cat]
+  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
+  (eta : τ (Hom Z a0 a1))
+  (thetaF : τ (Hom Z a1 a2))
+  (Qalpha : τ (Hom Z a1 a3))
+  (Ralpha : τ (Hom Z a2 a4))
+  (thetaG : τ (Hom Z a3 a4))
+  (Rbeta : τ (Hom Z a4 a5))
+  (Rbeta_alpha : τ (Hom Z a2 a5))
+  (nat : τ (
+      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
+      =
+      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
+  (func : τ (
+      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
+      =
+      Rbeta_alpha))
+  : τ (
+      @comp_fapp0 Z a0 a3 a5
+        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
+        (@comp_fapp0 Z a0 a1 a3 Qalpha eta)
+      =
+      @comp_fapp0 Z a0 a2 a5
+        Rbeta_alpha
+        (@comp_fapp0 Z a0 a1 a2 thetaF eta))
+≔ eq_trans
+    (@arrow_square_pasting_step1 Z a0 a1 a2 a3 a4 a5
+      eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
+    (eq_trans
+      (@arrow_square_pasting_step2 Z a0 a1 a2 a3 a4 a5
+        eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
+      (eq_trans
+        (@arrow_square_pasting_step3 Z a0 a1 a2 a3 a4 a5
+          eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
+        (eq_trans
+          (@arrow_square_pasting_step4 Z a0 a1 a2 a3 a4 a5
+            eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
+          (eq_trans
+            (@arrow_square_pasting_step5 Z a0 a1 a2 a3 a4 a5
+              eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
+            (@arrow_square_pasting_step6 Z a0 a1 a2 a3 a4 a5
+              eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)))));
+
+// Horizontal composite of ordinary transfors, at the component-level
+// theorem surface used by the first four-cell interchange result.
+symbol transf_hcomp
+  [X Y Z : Cat]
+  [P Q : τ (Functor Y Z)]
+  (eta : τ (Transf P Q))
+  [F G : τ (Functor X Y)]
+  (alpha : τ (Transf F G))
+  : τ (Transf
+      (@comp_cat_fapp0 X Y Z P F)
+      (@comp_cat_fapp0 X Y Z Q G))
+≔ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z P Q eta F G alpha;
+
+symbol transf_interchange_component
+  [X Y Z : Cat]
+  [P Q R : τ (Functor Y Z)]
+  (eta : τ (Transf P Q))
+  (theta : τ (Transf Q R))
+  [F G H : τ (Functor X Y)]
+  (alpha : τ (Transf F G))
+  (beta : τ (Transf G H))
+  (a : τ (Obj X))
+  : τ (
+      @tapp0_fapp0
+        X Z
+        (@comp_cat_fapp0 X Y Z P F)
+        (@comp_cat_fapp0 X Y Z R H)
+        a
+        (@comp_fapp0
+          (Functor_cat X Z)
+          (@comp_cat_fapp0 X Y Z P F)
+          (@comp_cat_fapp0 X Y Z Q G)
+          (@comp_cat_fapp0 X Y Z R H)
+          (@transf_hcomp X Y Z Q R theta G H beta)
+          (@transf_hcomp X Y Z P Q eta F G alpha))
+      =
+      @tapp0_fapp0
+        X Z
+        (@comp_cat_fapp0 X Y Z P F)
+        (@comp_cat_fapp0 X Y Z R H)
+        a
+        (@transf_hcomp
+          X Y Z
+          P R
+          (@comp_fapp0 (Functor_cat Y Z) P Q R theta eta)
+          F H
+          (@comp_fapp0 (Functor_cat X Y) F G H beta alpha)))
+≔ @arrow_square_pasting_right_to_left
+    Z
+    (@fapp0 Y Z P (@fapp0 X Y F a))
+    (@fapp0 Y Z Q (@fapp0 X Y F a))
+    (@fapp0 Y Z R (@fapp0 X Y F a))
+    (@fapp0 Y Z Q (@fapp0 X Y G a))
+    (@fapp0 Y Z R (@fapp0 X Y G a))
+    (@fapp0 Y Z R (@fapp0 X Y H a))
+    (@tapp0_fapp0 Y Z P Q (@fapp0 X Y F a) eta)
+    (@tapp0_fapp0 Y Z Q R (@fapp0 X Y F a) theta)
+    (@fapp1_fapp0 Y Z Q
+      (@fapp0 X Y F a)
+      (@fapp0 X Y G a)
+      (@tapp0_fapp0 X Y F G a alpha))
+    (@fapp1_fapp0 Y Z R
+      (@fapp0 X Y F a)
+      (@fapp0 X Y G a)
+      (@tapp0_fapp0 X Y F G a alpha))
+    (@tapp0_fapp0 Y Z Q R (@fapp0 X Y G a) theta)
+    (@fapp1_fapp0 Y Z R
+      (@fapp0 X Y G a)
+      (@fapp0 X Y H a)
+      (@tapp0_fapp0 X Y G H a beta))
+    (@fapp1_fapp0 Y Z R
+      (@fapp0 X Y F a)
+      (@fapp0 X Y H a)
+      (@comp_fapp0 Y
+        (@fapp0 X Y F a)
+        (@fapp0 X Y G a)
+        (@fapp0 X Y H a)
+        (@tapp0_fapp0 X Y G H a beta)
+        (@tapp0_fapp0 X Y F G a alpha)))
+    (@transf_naturality_component
+      Y Z Q R theta
+      (@fapp0 X Y F a)
+      (@fapp0 X Y G a)
+      (@tapp0_fapp0 X Y F G a alpha))
+    (eq_refl
+      (@comp_fapp0 Z
+        (@fapp0 Y Z R (@fapp0 X Y F a))
+        (@fapp0 Y Z R (@fapp0 X Y G a))
+        (@fapp0 Y Z R (@fapp0 X Y H a))
+        (@fapp1_fapp0 Y Z R
+          (@fapp0 X Y G a)
+          (@fapp0 X Y H a)
+          (@tapp0_fapp0 X Y G H a beta))
+        (@fapp1_fapp0 Y Z R
+          (@fapp0 X Y F a)
+          (@fapp0 X Y G a)
+          (@tapp0_fapp0 X Y F G a alpha))));
+
 // Cat-valued object-level projections of strict naturality. Both composites
 // fold to the off-diagonal component at the base arrow.
 //
