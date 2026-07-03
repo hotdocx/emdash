@@ -49,6 +49,11 @@ decisions.
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
   while retaining semantically justified `Prof_reindex`.
+- `REPORT_EMDASH_V3_2_ECKMANN_HILTON_APPLICATION_PLAN_2026-07-03.md`:
+  proposed reviewer-facing Eckmann-Hilton application plan, including
+  proof-by-reflexivity boundaries, horizontal-composition normal-form probes,
+  interchange theorem staging, and rewrite-rule SOP gates for any missing
+  bridge.
 - `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
   naturality follow-up plan.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:

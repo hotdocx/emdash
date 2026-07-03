@@ -1,0 +1,645 @@
+# EMDASH v3.2 Eckmann-Hilton Application Plan
+
+Date: 2026-07-03
+Last reviewed: 2026-07-03
+Plan-ID: EMDASH-V3-2-ECKMANN-HILTON-APPLICATION-2026-07-03
+Depends-On: EMDASH-V3-2-FULL-NATURALITY-2026-06-12; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
+Supersedes: none
+Side-Task-Ledger: this-report#side-task-ledger
+Infinity-Codex-Origin: current-session-analysis-2026-07-03
+Infinity-Codex-Decision-Responses: none-yet
+Status: proposed implementation-decision plan; no Eckmann-Hilton code has been promoted
+
+## Purpose
+
+This report plans a reviewer-facing v3.2 application around the
+Eckmann-Hilton argument. The goal is not merely to add another diagnostic
+conversion assertion. The application should expose ordinary mathematical
+proof symbols in `emdash3_2.lp`, with proof terms of equality type
+`τ (lhs = rhs)`.
+
+Some steps should compute by reflexivity:
+
+```text
+lemma : τ (lhs = rhs) ≔ eq_refl normal_form
+```
+
+Other steps should be explicit proof terms using the existing equality
+combinators:
+
+```text
+eq_trans
+eq_sym
+eq_ap
+```
+
+The existing `assert ... ≡ ...` diagnostics in `emdash3_2_checks.lp` remain
+useful for DevOps/regression tracking of rewrite behavior. They are not the
+intended presentation of the Eckmann-Hilton theorem.
+
+## Mathematical Target
+
+For a category `B`, an object `x : Obj(B)`, and the identity 1-cell
+
+```text
+i = id_B(x) : Hom_B(x,x),
+```
+
+the 2-endomorphisms of `i` are objects of:
+
+```text
+Hom_cat (Hom_cat B x x) i i.
+```
+
+Given:
+
+```text
+alpha beta : Hom_{Hom_B(x,x)}(i,i),
+```
+
+Eckmann-Hilton should demonstrate that the vertical composition of these
+2-cells is commutative:
+
+```text
+beta · alpha = alpha · beta.
+```
+
+The intended proof route is the standard degenerate interchange argument:
+
+```text
+beta · alpha
+  = beta * alpha
+  = (beta · id_i) * (id_i · alpha)
+  = (beta * id_i) · (id_i * alpha)
+  = alpha · beta
+```
+
+The exact orientation and term order must follow the active `comp_fapp0`
+convention:
+
+```text
+comp_fapp0 C x y z g f  =  g after f.
+```
+
+## Current Infrastructure
+
+The active kernel already has the relevant 2-categorical substrate:
+
+- `Hom_cat` iterates cells: homs are themselves categories.
+- `id` and `comp_fapp0` give identity and vertical composition at every hom
+  level.
+- `hom_`, `hom_postcomp_tele_func`, `hom_postcomp_func`, and
+  `hom_postcomp_fapp0` expose represented postcomposition.
+- `hom_postcomp_tele_fapp1_func` and `hom_postcomp_tele_fapp1_fapp0` expose
+  the higher action of postcomposition as the postcomposing arrow varies.
+- `tapp1_func` and `tapp1_fapp0` expose off-diagonal transfor action.
+- `comp_cat_cov_func_func_tapp1_fapp0` is the ordinary-transfor horizontal
+  composite owner in the Cat-specialized functor-composition layer.
+- `eq_refl`, `eq_trans`, `eq_sym`, and `eq_ap` are available for mathematical
+  equality proofs.
+
+The existing interchange diagnostic near `emdash3_2_checks.lp`'s comment
+`Interchange law instance for the Cat-valued representable hom_` is relevant
+but should not be copied verbatim into the application theorem. It is a
+full-owner regression for a Cat-valued representable postcomposition action,
+not yet a named theorem surface for identity 1-cell 2-endomorphisms.
+
+## Probe Evidence
+
+Temporary probes were run under `tmp/probes/`. These are ignored scratch files
+and are not promoted code.
+
+### Reflexive Computations Already Present
+
+The following proof-by-reflexivity probe succeeds:
+
+```text
+eh_identity_postcomp_eq :
+  τ (hom_postcomp_func(id_B(x)) = id_func(Hom_B(x,x)))
+≔ eq_refl ...
+
+eh_identity_whisker_eq :
+  τ (fapp1_fapp0(hom_postcomp_func(id_B(x)), alpha) = alpha)
+≔ eq_refl ...
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_eq_refl_probe.lp
+```
+
+Result:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=20s scripts/probe.sh tmp/probes/eckmann_hilton_eq_refl_probe.lp
+```
+
+succeeds.
+
+### Raw Horizontal Candidate Normal Forms
+
+The raw horizontal candidate was written as:
+
+```text
+tapp1_fapp0
+  (hom_postcomp_func(id_x))
+  (hom_postcomp_func(id_x))
+  (fapp1_fapp0(hom_postcomp_tele_func, beta))
+  alpha
+```
+
+Separate `compute` queries showed the normal-form gap:
+
+```text
+raw horizontal candidate
+  -> tapp1_fapp0
+       (id_func (Hom_cat B x x))
+       (id_func (Hom_cat B x x))
+       (hom_postcomp_tele_fapp1_fapp0 B B id_B x x x id_x id_x beta)
+       alpha
+
+vertical composition
+  -> comp_fapp0 (Hom_cat B x x) id_x id_x id_x beta alpha
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_compute_probe.lp
+```
+
+This means the raw comparison is not currently reflexive after normalization.
+
+### Failed Reflexivity Candidate
+
+The direct proof:
+
+```text
+raw_horizontal_candidate = beta · alpha
+```
+
+with body:
+
+```text
+eq_refl (beta · alpha)
+```
+
+fails. The remaining goal is exactly the difference between:
+
+```text
+comp_fapp0(... beta alpha)
+```
+
+and:
+
+```text
+tapp1_fapp0(... hom_postcomp_tele_fapp1_fapp0(... beta) alpha)
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_hcomp_eq_refl_fail_probe.lp
+```
+
+### Candidate Bridge Probe
+
+A narrow temporary bridge was probed:
+
+```text
+tapp1_fapp0
+  (id_func (Hom_cat B x x))
+  (id_func (Hom_cat B x x))
+  (hom_postcomp_tele_fapp1_fapp0 B B id_B x x x id_x id_x beta)
+  alpha
+  -> comp_fapp0 (Hom_cat B x x) id_x id_x id_x beta alpha
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_candidate_bridge_probe.lp
+```
+
+Quiet checking succeeds, and the reflexivity proof then succeeds. However,
+warning-enabled comparison against the no-bridge probe changed the local
+warning inventory:
+
+```text
+no bridge imported probe:   1366 warnings
+bridge imported probe:      1378 warnings
+delta:                       +12 unjoinable critical pairs
+```
+
+This bridge is therefore not ready for promotion. It is useful evidence for a
+missing join at the identity-endomorphism horizontal-composition boundary, but
+the rewrite-rule SOP requires more work before any runtime rule can be added.
+
+## Architecture Decision
+
+Do not start by adding a global Eckmann-Hilton rewrite rule.
+
+Do not promote the temporary candidate bridge as-is.
+
+Instead, implement the application in phases:
+
+1. Add reviewer-facing notation and proof symbols whose bodies use the
+   existing computation by `eq_refl`.
+2. Define a named horizontal-composition facade for the identity-endomorphism
+   setting, if needed, without immediately adding a runtime rewrite.
+3. State the comparison between that facade and vertical composition as a
+   mathematical lemma.
+4. Attempt to prove that comparison using the existing equality combinators
+   and existing interchange/naturality owners.
+5. Only if the proof is blocked by a genuine missing computational join, probe
+   the smallest owner-position bridge under the rewrite-rule SOP.
+
+This preserves the project discipline: generic functoriality and naturality
+belong to the global `fapp*`/`tapp*` calculus, while specialized bridges are
+allowed only as measured projection-ladder joins.
+
+## Proposed Symbols
+
+Names are provisional but should stay close to the active kernel vocabulary.
+
+### Object Classifier
+
+```text
+symbol EH_2End
+  [B : Cat]
+  (x : τ (Obj B))
+  : Cat
+≔ Hom_cat (Hom_cat B x x) (@id B x) (@id B x);
+```
+
+This is a category, not merely a groupoid/type, so it remains compatible with
+higher iteration.
+
+### Vertical Composition
+
+Readable alias:
+
+```text
+symbol EH_vcomp
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta alpha : τ (Obj (EH_2End x)))
+  : τ (Obj (EH_2End x))
+≔ @comp_fapp0
+    (Hom_cat B x x)
+    (@id B x) (@id B x) (@id B x)
+    beta alpha;
+```
+
+This should remain transparent and should not own new rewrite rules.
+
+### Horizontal Composition Facade
+
+A first facade can be transparent over the raw current owner:
+
+```text
+symbol EH_hcomp_raw
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta alpha : τ (Obj (EH_2End x)))
+  : τ (Obj (EH_2End x))
+≔ @tapp1_fapp0
+    (Hom_cat B x x)
+    (Hom_cat B x x)
+    (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+    (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+    (@id B x)
+    (@id B x)
+    (@fapp1_fapp0
+      (Hom_cat B x x)
+      (Functor_cat (Hom_cat B x x) (Hom_cat B x x))
+      (@hom_postcomp_tele_func B B (@id_func B) x x x)
+      (@id B x)
+      (@id B x)
+      beta)
+    alpha;
+```
+
+If this raw facade is too noisy for theorem statements, add a shorter
+transparent alias:
+
+```text
+symbol EH_hcomp ... ≔ EH_hcomp_raw ...
+```
+
+Do not add a rewrite rule on `EH_hcomp` until a concrete proof obligation
+requires it and an owning-position probe classifies the consequence.
+
+### Computation Lemmas
+
+The following are safe first proof symbols because they already compute:
+
+```text
+symbol EH_identity_postcomp
+  [B : Cat] (x : τ (Obj B))
+  : τ (
+      @hom_postcomp_func B B (@id_func B) x x x (@id B x)
+      =
+      @id_func (Hom_cat B x x))
+≔ eq_refl (@id_func (Hom_cat B x x));
+
+symbol EH_identity_whisker
+  [B : Cat] (x : τ (Obj B))
+  (alpha : τ (Obj (EH_2End x)))
+  : τ (
+      @fapp1_fapp0
+        (Hom_cat B x x)
+        (Hom_cat B x x)
+        (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+        (@id B x)
+        (@id B x)
+        alpha
+      =
+      alpha)
+≔ eq_refl alpha;
+```
+
+Endpoint elaboration may require using the unfolded `Hom` type in the first
+implementation slice, then introducing the `EH_2End` alias after a focused
+probe confirms that it does not make inference brittle.
+
+### Horizontal-To-Vertical Lemma
+
+Target statement:
+
+```text
+symbol EH_hcomp_to_vcomp
+  [B : Cat] (x : τ (Obj B))
+  (beta alpha : τ (Obj (EH_2End x)))
+  : τ (EH_hcomp beta alpha = EH_vcomp beta alpha);
+```
+
+This is not currently an `eq_refl` lemma for the raw facade. Implementation
+must first try an explicit proof using `eq_trans`, `eq_sym`, and `eq_ap`.
+
+If the proof remains blocked at the normal-form gap identified above, use the
+rewrite-rule SOP to decide whether to add a runtime bridge, a proof-time
+`unif_rule`, or no kernel rule.
+
+### Interchange Lemma
+
+Target statement should specialize the existing representable interchange
+diagnostic to the EH setting. The theorem should be a mathematical proof
+symbol, not only:
+
+```text
+assert ... ≡ ...
+```
+
+Provisional shape:
+
+```text
+symbol EH_interchange
+  [B : Cat] (x : τ (Obj B))
+  (alpha beta gamma delta : τ (Obj (EH_2End x)))
+  (...)
+  : τ (
+      EH_vcomp (EH_hcomp beta alpha) (EH_hcomp delta gamma)
+      =
+      EH_hcomp (EH_vcomp beta delta) (EH_vcomp alpha gamma));
+```
+
+The exact argument order must be fixed by a focused probe against the active
+`comp_fapp0` orientation. The first implementation should use only the
+two-variable version required for EH, not a premature fully general
+interchange theorem.
+
+### Eckmann-Hilton Commutativity
+
+Target theorem:
+
+```text
+symbol EH_comm
+  [B : Cat] (x : τ (Obj B))
+  (alpha beta : τ (Obj (EH_2End x)))
+  : τ (
+      EH_vcomp beta alpha
+      =
+      EH_vcomp alpha beta);
+```
+
+The proof should be an explicit equality chain. The expected ingredients are:
+
+- left and right unit laws for `EH_vcomp`, probably by `eq_refl`;
+- left and right unit laws for `EH_hcomp`, either by `eq_refl` after a
+  selected bridge or by explicit proof;
+- `EH_interchange`;
+- `EH_hcomp_to_vcomp` in the required orientations.
+
+## Rewrite-Rule SOP For This Plan
+
+Any proposed rewrite or unification rule must follow the active SOP in
+`REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` and `README.md`.
+
+In particular:
+
+1. Normalize both sides of the target equation separately with `compute`
+   before adding rules.
+2. Distinguish runtime normalization from proof-time identification.
+3. Prefer a mathematical proof term if runtime computation is not semantically
+   required.
+4. Probe rules in `tmp/probes/` before editing `emdash3_2.lp`.
+5. Keep inferred source/target slots implicit unless they are true
+   discriminators.
+6. Treat an LHS of the form
+   `tapp1_fapp0(... hom_postcomp_tele_fapp1_fapp0 ... )` as a high-risk
+   outer-eliminator / inner-action commuting conversion until proven
+   otherwise.
+7. Test both reduction paths:
+   owner-first through `hom_postcomp_tele_fapp1_fapp0`, and projection-first
+   through `tapp1_fapp0`.
+8. Run a warning-enabled comparison and classify any delta.
+9. Do not promote a bridge whose only evidence is that one focused
+   `eq_refl` proof starts checking.
+
+The temporary bridge probe added 12 unjoinable critical-pair warnings in an
+imported-file comparison. That does not automatically veto a semantically
+necessary rule, but it does mean the rule is not implementation-decision
+complete.
+
+## Implementation Phases
+
+### Phase 0: Plan Validation
+
+- Keep this report current as the implementation-decision source.
+- Do not edit `emdash3_2.lp` until the theorem surface below is accepted.
+- Re-run:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+### Phase 1: Reviewer-Facing Computation Lemmas
+
+Add a new subsection under applications in `emdash3_2.lp`, after the current
+path-induction/transitivity examples unless a later reorganization plan chooses
+a separate examples module.
+
+Promote only the `eq_refl` lemmas already validated:
+
+- `EH_2End`
+- `EH_vcomp`
+- `EH_identity_postcomp`
+- `EH_identity_whisker`
+
+Add corresponding concise comments explaining the EH reading.
+
+Add diagnostic assertions to `emdash3_2_checks.lp` only for regression
+coverage of the promoted computations, and regenerate the catalog if new
+checks are added.
+
+### Phase 2: Horizontal Composition Facade
+
+Add `EH_hcomp_raw` as a transparent alias over the current hom-action owners.
+
+Run compute probes for:
+
+- `EH_hcomp_raw beta alpha`
+- `EH_vcomp beta alpha`
+- left and right horizontal unit candidates
+- the existing representable interchange specialized to `x`
+
+Do not add a runtime rule yet.
+
+### Phase 3: Proof-Term Attempt
+
+Try to prove:
+
+```text
+EH_hcomp_to_vcomp
+```
+
+using:
+
+- `eq_trans`
+- `eq_sym`
+- `eq_ap`
+- existing `EH_identity_*` lemmas
+- existing naturality/interchange computation from the full-naturality layer
+
+If this succeeds without new rules, proceed to `EH_comm`.
+
+If it fails at the known normal-form gap, record the exact stuck goal in this
+report before considering kernel infrastructure.
+
+### Phase 4: Infrastructure Decision Point
+
+Only after Phase 3 fails, choose one:
+
+1. Keep `EH_hcomp_to_vcomp` as explicit non-reflexive evidence with a more
+   detailed proof term.
+2. Add a proof-time `unif_rule` if the comparison is intended only for proof
+   elaboration and not runtime normalization.
+3. Add a runtime bridge if the comparison is the intended computational normal
+   form.
+4. Add a more general stable owner if the raw bridge is too ad hoc.
+
+Candidate runtime bridge from the probe:
+
+```text
+tapp1_fapp0
+  (id_func (Hom_cat B x x))
+  (id_func (Hom_cat B x x))
+  (hom_postcomp_tele_fapp1_fapp0 B B id_B x x x id_x id_x beta)
+  alpha
+  -> comp_fapp0 (Hom_cat B x x) id_x id_x id_x beta alpha
+```
+
+This exact bridge is not currently approved. Before promotion:
+
+- install it in a temporary full-file copy at the intended owning position;
+- run quiet and warning-enabled full checks;
+- compare warning counts and first-warning families;
+- inspect decision-tree impact if needed;
+- test both owner-first and projection-first reduction paths;
+- document any remaining overlap family in this report.
+
+### Phase 5: Eckmann-Hilton Theorem
+
+Implement `EH_comm` as a proof-term chain. It should be readable enough that a
+reviewer can see the Eckmann-Hilton argument:
+
+```text
+vertical
+  = horizontal
+  = interchange with units
+  = horizontal in the opposite order
+  = vertical in the opposite order
+```
+
+Prefer small named lemmas over one giant `eq_trans` term.
+
+## Side-Task Ledger
+
+### EH-HCOMP-JOIN
+
+Trigger:
+`EH_hcomp_to_vcomp` cannot be proved without identifying the raw horizontal
+normal form with vertical composition.
+
+Required audit:
+classify whether the join belongs to `tapp1_fapp0`, to the postcomposition
+telescope higher-action owner, to a new EH-local facade, or only to proof-time
+equality.
+
+Status:
+open; temporary imported bridge succeeds but adds 12 warning reports.
+
+### EH-INTERCHANGE-THEOREM
+
+Trigger:
+the existing Cat-valued representable interchange diagnostic must be promoted
+into a mathematical theorem used by `EH_comm`.
+
+Required audit:
+specialize the theorem surface to identity-endomorphism cells first; do not
+prematurely generalize to all interchange laws.
+
+Status:
+open.
+
+### EH-SURFACE-SYNTAX
+
+Trigger:
+the raw kernel terms become unreadable in `emdash3_2.lp`.
+
+Required audit:
+add transparent aliases only; no semantic duplication and no helper alias with
+a copied body that bypasses the named owner.
+
+Status:
+open.
+
+## Validation Checklist
+
+Before handing off any promoted implementation:
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog        # if emdash3_2_checks.lp gains new checks
+make examples       # if an examples/*.lp milestone is added
+make warning-summary
+```
+
+For any promoted rewrite or unification rule:
+
+```bash
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
+python3 scripts/audit_rule_lhs.py --show-kept
+```
+
+If a rule changes the warning inventory, update this report with:
+
+- the exact rule;
+- the intended semantic owner;
+- quiet check result;
+- warning-enabled delta;
+- first new warning family if identifiable;
+- why runtime rewrite, proof-time unification, or explicit proof evidence was
+  selected.
