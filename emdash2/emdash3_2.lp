@@ -3027,6 +3027,22 @@ unif_rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $h $g
   ≡ @comp_fapp0 $A $W $X $Y $h $g
   ↪ [ tt ≡ tt ];
 
+// Proof-time bridge between a general postcomposition endpoint and its
+// identity-functor presentation. Both sides already identify with the same
+// raw composition; this direct bridge avoids relying on transitive unification
+// search when higher component rules need matching endpoints.
+unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
+  ≡ @hom_postcomp_fapp0
+      $A
+      $A
+      (@id_func $A)
+      $W
+      (@fapp0 $B $A $F $X)
+      (@fapp0 $B $A $F $Y)
+      (@fapp1_fapp0 $B $A $F $X $Y $h)
+      $g
+  ↪ [ tt ≡ tt ];
+
 unif_rule @hom_postcomp_fapp0
     (@Catd_cat $K)
     (@Catd_cat $K)
@@ -4437,6 +4453,87 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
 //   tapp0_func(Y)[epsilon] = epsilon[Y].
 rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
   ↪ @tapp0_fapp0 $A $B $F $G $Y $ϵ;
+
+// Component of a postcomposition-telescope action. Mathematically,
+//   ((hom_A(W,F[-]))[alpha])[u] = u^*(F[alpha]).
+// This deliberately computes the component through the stable precomposition
+// action. The choice is backtrackable if a later consumer needs this as a
+// proof-time bridge or a more direct component owner instead.
+rule @tapp0_fapp0
+      _ _
+      _ _
+      $u
+      (@hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha)
+  ↪ @hom_precomp_along_fapp1_fapp0
+      $A
+      $A
+      (@id_func $A)
+      (@fapp0 $B $A $F $Y)
+      $W
+      (@fapp0 $B $A $F $X)
+      $u
+      (@fapp1_fapp0 $B $A $F $X $Y $f)
+      (@fapp1_fapp0 $B $A $F $X $Y $g)
+      (@fapp1_fapp0
+        (Hom_cat $B $X $Y)
+        (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+        (@fapp1_func $B $A $F $X $Y)
+        $f
+        $g
+        $alpha);
+
+symbol hom_postcomp_tele_tapp0_component_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  [f g : τ (Hom B X Y)]
+  (alpha : τ (Hom (Hom_cat B X Y) f g))
+  (u : τ (Hom A W (@fapp0 B A F X)))
+  : τ (
+      @tapp0_fapp0
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y))
+        (@hom_postcomp_func A B F W X Y f)
+        (@hom_postcomp_func A B F W X Y g)
+        u
+        (@hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g alpha)
+      =
+      @hom_precomp_along_fapp1_fapp0
+        A
+        A
+        (@id_func A)
+        (@fapp0 B A F Y)
+        W
+        (@fapp0 B A F X)
+        u
+        (@fapp1_fapp0 B A F X Y f)
+        (@fapp1_fapp0 B A F X Y g)
+        (@fapp1_fapp0
+          (Hom_cat B X Y)
+          (Hom_cat A (@fapp0 B A F X) (@fapp0 B A F Y))
+          (@fapp1_func B A F X Y)
+          f
+          g
+          alpha))
+≔ eq_refl
+    (@hom_precomp_along_fapp1_fapp0
+      A
+      A
+      (@id_func A)
+      (@fapp0 B A F Y)
+      W
+      (@fapp0 B A F X)
+      u
+      (@fapp1_fapp0 B A F X Y f)
+      (@fapp1_fapp0 B A F X Y g)
+      (@fapp1_fapp0
+        (Hom_cat B X Y)
+        (Hom_cat A (@fapp0 B A F X) (@fapp0 B A F Y))
+        (@fapp1_func B A F X Y)
+        f
+        g
+        alpha));
 
 // Product-valued transfor components project componentwise.
 rule sigma_Fst (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)

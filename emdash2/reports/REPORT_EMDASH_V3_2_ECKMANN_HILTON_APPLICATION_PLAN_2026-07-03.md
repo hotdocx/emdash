@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
 
 ## Purpose
 
@@ -1318,12 +1318,11 @@ rule @tapp0_fapp0
       $alpha;
 ```
 
-That post-to-pre presentation change is mathematically plausible in the
-identity-functor case, but it is not yet a settled runtime owner. It may be
-better as an explicit proof step, a narrow `unif_rule`, or a new stable
-component owner that exposes the intended component without mixing owners on
-the RHS. Do not promote this rule as runtime infrastructure before that
-semantic review.
+At this stage, the identity-only post-to-pre presentation change was
+mathematically plausible but not yet a settled runtime owner. The later
+general endpoint/component probe, recorded below, supplied the missing
+stable-head endpoint bridge and promoted the general runtime rule as a
+backtrackable design choice.
 
 With the narrow rule present only in the probe, the EH right-unit proof
 succeeds as an explicit two-step `eq_trans`: first from
@@ -1482,9 +1481,47 @@ The warning-enabled version of that last probe also terminates, but it emits
 local critical-pair families at the candidate component rule, especially
 where the functor argument has its own projection ladder
 (`sym_*`, `diag_*`, profunctor constructors, path induction, and related
-stable heads). These warnings are diagnostic rather than vetoes, but they
-mean the broad runtime component rule is not yet promotion-ready without
-owning-position full-file classification.
+stable heads). These warnings are diagnostic rather than vetoes.
+
+An owning-position full-file probe then checked the endpoint bridge and the
+runtime component rule together:
+
+```text
+tmp/probes/emdash3_2_endpoint_component_full_probe.lp
+```
+
+Quiet and warning-enabled checking both passed. Compared with a
+warning-enabled check of active `emdash3_2.lp`, the full-file probe changed
+the single-file warning count:
+
+```text
+baseline emdash3_2.lp:                  1406 warning lines
+endpoint/component full-file probe:     1409 warning lines
+delta:                                    +3 warning lines
+```
+
+The strict LHS audit on the full-file probe still reports no unreviewed
+reconstructible compound slots. The active design therefore promotes:
+
+```text
+hom_postcomp_fapp0(A,B,F,W,X,Y,h,g)
+  ~~
+hom_postcomp_fapp0(A,A,id_A,W,F[X],F[Y],F[h],g)
+```
+
+as a proof-time endpoint bridge, and promotes the runtime component rule:
+
+```text
+tapp0_fapp0 u
+  (hom_postcomp_tele_fapp1_fapp0(F,alpha))
+  ->
+u^*(F[alpha])
+```
+
+implemented through the stable `hom_precomp_along_fapp1_fapp0` presentation.
+This runtime choice is intentionally backtrackable: if a later consumer shows
+that proof-time identification or a new direct component owner is the better
+architecture, this rule should be reconsidered rather than patched around.
 
 The identity-functor specialization is better behaved. The equality type
 
@@ -1508,10 +1545,9 @@ does check:
 tmp/probes/hom_postcomp_tele_tapp0_identity_unif_probe.lp
 ```
 
-This is current evidence that the identity case is a plausible proof-time
-bridge. The fully general `F`-parametric runtime rule now looks semantically
-right but architecturally broad: it requires the endpoint stable-head bridge
-and would need warning-family classification before promotion.
+This identity-specialized probe is superseded by the promoted fully general
+endpoint/component package. It remains useful historical evidence that the
+identity case was the first concrete EH pressure point.
 
 The actual EH right unit still does not follow by a single `eq_refl` from that
 component bridge alone:
@@ -1536,13 +1572,15 @@ Probe:
 tmp/probes/hom_precomp_along_fapp1_identity_action_probe.lp
 ```
 
-So the next proof-oriented subgoal should be one of:
+The next proof-oriented subgoal should now use the promoted component
+computation and focus on the remaining identity-action comparison:
 
-1. an explicit equality chain through raw composition and existing
-   unification rules;
-2. a narrow proof-time bridge package for the identity-specialized EH unit;
-3. a broader endpoint-bridge plus component-rule package, but only after
-   owner-position probing and warning-family classification.
+```text
+hom_precomp_along_fapp1_fapp0(id_X, alpha) = alpha
+```
+
+If the EH proof still needs a bridge here, prefer another focused,
+owner-position probe before adding a global runtime rule.
 
 Statement-only EH surfaces were then probed without adding proofs or axioms
 to the active kernel. The scratch surface defines:
@@ -1579,8 +1617,8 @@ tmp/probes/eckmann_hilton_statement_surfaces_probe.lp
 
 This probe is intentionally statement-level. It does not prove the unit laws,
 the degenerate interchange instances, the shared-middle comparisons, or
-`EH_comm`. It fixes a concrete formulation for the next proof probes while
-leaving the post-to-pre component bridge under semantic review.
+`EH_comm`. It fixed a concrete formulation for the next proof probes before
+the postcomposition-telescope component rule was promoted.
 
 ## Rewrite-Rule SOP For This Plan
 
@@ -2256,11 +2294,73 @@ promoted `EH_2End` and `EH_vcomp` layer:
 - the final commutativity statement
   `vcomp(beta,alpha) = vcomp(alpha,beta)`.
 
-This probe intentionally stops at statements. The next proof probes should
-try to derive the degenerate interchange statements from
-`hom_postcomp_representable_interchange_eq` and separately classify the
-`hcomp(beta,1_i) = beta` unit gap before adding any post-to-pre component
-bridge to the active kernel.
+This probe intentionally stops at statements. After the component promotion
+below, the next proof probes should try to derive the degenerate interchange
+statements from `hom_postcomp_representable_interchange_eq` and separately
+classify the remaining `hcomp(beta,1_i) = beta` unit gap.
+
+### 2026-07-04: Postcomposition-Telescope Component Promotion
+
+Promoted in `emdash3_2.lp`:
+
+- proof-time endpoint bridge:
+
+```text
+hom_postcomp_fapp0(A,B,F,W,X,Y,h,g)
+  ~~
+hom_postcomp_fapp0(A,A,id_A,W,F[X],F[Y],F[h],g)
+```
+
+- runtime component computation:
+
+```text
+tapp0_fapp0 u
+  (hom_postcomp_tele_fapp1_fapp0(F,alpha))
+  ->
+hom_precomp_along_fapp1_fapp0(id_A,F[alpha],u)
+```
+
+- reviewer-facing sanity theorem:
+
+```text
+hom_postcomp_tele_tapp0_component_eq
+```
+
+The mathematical reading is:
+
+```text
+((hom_A(W,F[-]))[alpha])[u] = u^*(F[alpha])
+```
+
+where both sides are 2-cells `F[f] o u => F[g] o u`.
+
+Probe history:
+
+```text
+tmp/probes/hom_postcomp_endpoint_general_to_raw_probe.lp
+tmp/probes/hom_postcomp_endpoint_id_to_raw_probe.lp
+tmp/probes/hom_postcomp_endpoint_general_to_idpost_probe.lp
+tmp/probes/hom_postcomp_endpoint_general_to_idpost_trans_probe.lp
+tmp/probes/hom_postcomp_endpoint_bridge_unif_probe.lp
+tmp/probes/hom_postcomp_component_with_endpoint_unif_probe.lp
+tmp/probes/hom_postcomp_component_runtime_with_endpoint_unif_probe.lp
+tmp/probes/emdash3_2_endpoint_component_full_probe.lp
+```
+
+The decisive owning-position full-file probe checked quietly and
+warning-enabled. Warning-enabled single-file comparison:
+
+```text
+baseline emdash3_2.lp:                  1406 warning lines
+endpoint/component full-file probe:     1409 warning lines
+delta:                                    +3 warning lines
+```
+
+The runtime rule is a conscious, backtrackable design choice. It computes
+through the existing stable precomposition action rather than introducing a
+new direct component owner. If later EH or interchange proofs show that this
+normal form is inconvenient, reconsider the choice as proof-time
+identification or as a new semantic component owner.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 
