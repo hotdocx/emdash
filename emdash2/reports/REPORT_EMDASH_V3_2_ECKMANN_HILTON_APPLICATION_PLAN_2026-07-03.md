@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: implementation paused for hom-action/interchange infrastructure reassessment; safe EH slice, hom-action proof lemmas, and component-level ordinary-transfor interchange promoted
+Status: implementation paused for hom-action/interchange infrastructure reassessment; safe EH slice, hom-action proof lemmas, and component-level ordinary-transfor interchange promoted; fold-orientation baseline probe demonstrates pre-configured representable interchange by conversion but is not promotion-ready
 
 ## Purpose
 
@@ -905,13 +905,24 @@ Computable feasibility is mixed:
   whole-transfor interchange currently lacks a known transfor extensionality
   principle. Further interchange work should therefore target the
   arbitrary-hom representable theorem, not whole-transfor equality.
+- Demonstrated in a detached baseline probe:
+  a coherent fold-oriented package can make the pre-configured arbitrary-hom
+  representable interchange statement compute by conversion:
+  `((d_gh)_*[beta]) · ((e_fg)_*[alpha])` normalizes to
+  `(d_gh · e_fg)_*[beta · alpha]`. The required package was not merely a
+  local interchange rule; it included first-layer hom-action fold migration,
+  precomposition codomain accumulation, runtime DefIso cancellation exposed
+  by that migration, a `Prof_reindex_transf` projection-ladder functoriality
+  bridge, tele-level higher-action folds, and a general off-diagonal
+  `tapp1_fapp0` vertical-composite fold.
 - Main blocker:
-  arbitrary-hom representable interchange still lacks the right checked
-  infrastructure. The next likely missing comparison is not simply an
-  EH-local horizontal-to-vertical bridge; it is a general off-diagonal or
-  hom-action functoriality/naturality rule/theorem that makes
-  `((d_gh)_*[beta]) · ((e_fg)_*[alpha])` compare with
-  `(d_gh · e_fg)_*[beta · alpha]`.
+  this fold-oriented package is not promotion-ready. It passed `make check`
+  and `make examples` in the detached baseline, but warning-enabled checking
+  rose from `1366` warnings on clean `3f9ee5f` to `1704` warnings, with
+  replaceable-pattern warnings unchanged at `167`. The LHS audit also flags
+  the new migration rules for reconstructible compound slots. The next
+  implementation phase must decide promotion granularity, endpoint-slot
+  hygiene, and follow-up joins before editing the active kernel.
 
 Decision status before further implementation:
 
@@ -956,34 +967,47 @@ Settled decisions after the 2026-07-03 review:
    components, not a whole-transfor extensionality theorem and not a runtime
    rewrite. It factors through `transf_naturality_component` and the
    arrow-level `arrow_square_pasting_*` proof chain.
+9. The pre-configured arbitrary-hom representable interchange theorem remains
+   the right next mathematical target. The detached fold-orientation probe
+   shows it can be made reflexive by general infrastructure rather than by an
+   EH-local bridge, but the active kernel should not be migrated until the
+   supporting normal-form package is reviewed rule by rule.
 
 The remaining decisions are now:
 
 1. Raw hom-action accumulation package.
 
-   Decide and probe the missing runtime accumulation rules, starting with
-   `k o ((F[p])^*(g)) -> (F[p])^*(k o g)`.
+   Decide whether to promote the fold-oriented hom-action migration as a
+   package or to extract only the local rules needed by the active normal
+   form. The detached probe shows `k o ((F[p])^*(g)) -> (F[p])^*(k o g)` is
+   compatible with the broader fold package, but also shows that flipping the
+   first-layer post/pre stable projection orientation requires DefIso and
+   profunctor reindexing follow-up joins.
 
 2. Tele-level higher-action orientation.
 
-   Decide whether `hom_postcomp_tele_fapp1_fapp0` /
-   `hom_precomp_along_tele_fapp1_fapp0` should runtime-expand composite
-   2-cell actions, runtime-fold composite action presentations, remain
-   proof-time only, or receive a more precise stable owner.
+   Decide whether to promote the runtime fold direction for
+   `hom_postcomp_tele_fapp1_fapp0` /
+   `hom_precomp_along_tele_fapp1_fapp0`. In the detached fold-oriented
+   baseline this direction passed checks and was part of the successful
+   representable-interchange conversion, adding a measured warning delta that
+   must still be classified.
 
 3. Off-diagonal vertical-composite orientation.
 
-   Decide whether a `tapp1_fapp0` comparison for `(theta · eta)[f]` belongs as
-   a runtime rule, a proof-time rule, or an explicit theorem, and in which
-   direction. The pre-configured representable interchange suggests that the
-   fold direction may be preferable.
+   Decide whether the general runtime fold
+   `theta[q] · eta[p] -> (theta · eta)[q · p]` should be promoted, kept as
+   proof-time identification, or stated as an explicit theorem. The detached
+   probe shows that the endpoint-correct point/off-diagonal folds are
+   insufficient for pre-configured interchange; the full off-diagonal fold is
+   the rule that makes the arbitrary-hom statement reflexive.
 
 4. Interchange extension surface.
 
-   Decide whether the next promoted interchange result should be the
-   pre-configured arbitrary-hom representable theorem or an EH-specialized
-   instance. Whole-transfor equality should stay deferred unless a checked
-   transfor extensionality principle is added.
+   Promote the pre-configured arbitrary-hom representable theorem before an
+   EH-specialized instance, once the underlying infrastructure is accepted.
+   Whole-transfor equality should stay deferred unless a checked transfor
+   extensionality principle is added.
 
 5. Horizontal-composition facade.
 
@@ -1518,7 +1542,11 @@ have been promoted. Tele-level 2-cell-action identity/composition proof-time
 lemmas have also been promoted. Runtime tele-level stable-head bridges remain
 open: the old fold-direction owning-position runtime bridge introduced a
 `+38` unjoinable-critical-pair delta, while a later reverse-orientation
-scratch probe checked but still needs owning-position classification.
+scratch probe checked but still needs owning-position classification. A later
+detached baseline migration probe showed that the fold-oriented first-layer
+hom-action rules plus tele-level runtime folds can pass `make check` and make
+pre-configured representable interchange reflexive, but only with additional
+DefIso and `Prof_reindex_transf` joins and a larger warning inventory.
 
 ### EH-RAW-PRESENTATION-BRIDGES
 
@@ -1545,7 +1573,10 @@ Status:
 open prerequisite for the next interchange phase. Quiet append probes prove
 local assertions, but warning-enabled append probes expose local overlap
 families at the candidate postcomposition bridge. Those warnings are
-diagnostic evidence, not a semantic veto.
+diagnostic evidence, not a semantic veto. The detached fold-orientation probe
+confirmed that the codomain-side precomposition accumulation can live in a
+checking package; it also showed that the first-layer post/pre orientation is
+a package decision, not an isolated one-rule change.
 
 ### EH-TELE-HIGHER-ACTION-FUNCTORIALITY
 
@@ -1567,6 +1598,11 @@ reviewer-facing equality lemmas are promoted. Runtime conversion remains open:
 the broad owning-position runtime bridge passed quietly but added 38
 unjoinable critical-pair reports in one direction, while the reverse
 stable-projection direction has only been checked in a scratch append probe.
+In the detached fold-oriented baseline, the fold direction
+`action(e_gh) o action(e_fg) -> action(e_gh o e_fg)` was part of a
+full-file package that passed checks and examples. This updates the evidence
+from "locally possible" to "globally checkable with follow-up joins", not to
+"ready for promotion".
 
 ### EH-OFFDIAGONAL-VCOMP-ORIENTATION
 
@@ -1588,7 +1624,20 @@ interchange target. Consider an explicit proof theorem or proof-time
 `unif_rule` before adding a runtime rewrite.
 
 Status:
-open. No `tapp1_fapp0` vertical-composite rule has been promoted.
+open but clarified. No `tapp1_fapp0` vertical-composite rule has been
+promoted. The detached probe showed that the endpoint-correct partial folds
+`theta[Y] · eta[f] -> (theta · eta)[f]` and
+`theta[f] · eta[X] -> (theta · eta)[f]` check, but they do not make the
+four-cell representable interchange reflexive. The decisive rule was the
+general off-diagonal fold:
+
+```text
+theta[q] · eta[p] -> (theta · eta)[q · p].
+```
+
+The successful version kept the `comp_fapp0` source/middle/target endpoints
+implicit on the LHS, because explicit `fapp0` endpoints failed to match after
+stable endpoint projection had already normalized.
 
 ### EH-HCOMP-JOIN
 
@@ -1627,7 +1676,9 @@ Status:
 partially complete; `transf_interchange_component` is promoted as an
 ordinary-transfor component theorem. The arbitrary-hom representable
 pre-configured theorem and any EH-specialized interchange theorem remain
-open.
+open in the active kernel. A detached fold-oriented baseline probe proves the
+pre-configured arbitrary-hom representable theorem by conversion, giving a
+concrete implementation route once the infrastructure package is accepted.
 
 ### EH-FOUR-CELL-INTERCHANGE
 
@@ -1663,6 +1714,134 @@ Status:
 open.
 
 ## Implementation Log
+
+### 2026-07-03/04: Fold-Orientation Baseline Probe
+
+Probe location:
+
+```text
+/home/user1/emdash1_orientation_3f9ee5f/emdash2
+```
+
+Baseline commit:
+
+```text
+3f9ee5f77741b2293467f0f234b9456be5e14351
+```
+
+Clean baseline warning inventory:
+
+```text
+1366 warning(s)
+1199 unjoinable critical pair
+ 167 replaceable pattern variable
+```
+
+The probe replaced the first-layer stable post/pre hom-action composition
+orientation by the fold direction:
+
+```text
+(F q)_* o (F p)_*       -> (F(q o p))_*
+(F q)_*((F p)_*(g))     -> (F(q o p))_*(g)
+(F p)^* o (F q)^*       -> (F(q o p))^*
+(F p)^*((F q)^*(g))     -> (F(q o p))^*(g)
+```
+
+It also added the codomain-side precomposition accumulation:
+
+```text
+k o ((F[p])^*(g)) -> (F[p])^*(k o g).
+```
+
+The first fold-only package checked at the kernel level but broke a DefIso
+diagnostic. Computing both sides showed that the migration exposed raw
+`comp_fapp0` DefIso cancellation inside a hom-action argument. Adding runtime
+raw DefIso cancellation restored the focused DefIso check. Full diagnostics
+then exposed a weighted-limit beta residue where
+`Prof_reindex_transf(from) · Prof_reindex_transf(to)` was hidden behind a
+stable projection head. Adding identity/composition joins for
+`Prof_reindex_transf` restored full `make check`.
+
+Validation after first-layer fold, precomp accumulation, raw DefIso
+cancellation, and `Prof_reindex_transf` joins:
+
+```text
+make check: passed
+warning-summary: 1631 warning(s)
+ 1464 unjoinable critical pair
+  167 replaceable pattern variable
+```
+
+Adding runtime fold rules for tele-level post/pre higher action also passed:
+
+```text
+action(e_gh) o action(e_fg) -> action(e_gh o e_fg)
+
+make check: passed
+warning-summary: 1667 warning(s)
+ 1500 unjoinable critical pair
+  167 replaceable pattern variable
+```
+
+The endpoint-correct partial off-diagonal vertical-composite folds checked
+but did not make representable interchange reflexive:
+
+```text
+theta[Y] · eta[p] -> (theta · eta)[p]
+theta[q] · eta[X] -> (theta · eta)[q]
+```
+
+The successful pre-configured arbitrary-hom representable interchange probe
+required the general off-diagonal fold:
+
+```text
+theta[q] · eta[p] -> (theta · eta)[q · p].
+```
+
+with inferred source/middle/target endpoint slots on the `comp_fapp0` LHS.
+The explicit-endpoint variant typechecked but failed to match the
+representable statement after endpoint projection normalized to stable
+`hom_postcomp_fapp0` heads.
+
+Focused probe:
+
+```text
+tmp/probes/orientation_representable_interchange_probe.lp
+```
+
+Result:
+
+```text
+((e_gh)_*[beta]) · ((e_fg)_*[alpha])
+  ≡
+(e_gh · e_fg)_*[beta · alpha]
+```
+
+checks by conversion in the detached baseline.
+
+Validation for the complete detached package:
+
+```text
+make check: passed
+make examples: passed
+warning-summary: 1704 warning(s)
+ 1537 unjoinable critical pair
+  167 replaceable pattern variable
+```
+
+The LHS audit reports eight reconstructible compound slots across four new
+unreviewed rule clauses. The flagged clauses are the migrated first-layer
+post/pre functor-level folds, the new precomposition codomain accumulation,
+and the `Prof_reindex_transf` composition bridge. Before promotion, each must
+be probed with `_` replacements or annotated with a measured
+`lhs-audit: keep ...` reason.
+
+Architectural conclusion:
+the fold-oriented design is computationally feasible enough to continue, and
+it directly supports the desired pre-configured representable interchange.
+It is not a small EH-local patch. It is a kernel normal-form migration whose
+promotion would require a reviewed package of projection-ladder joins,
+warning-family classification, and LHS hygiene work.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 
