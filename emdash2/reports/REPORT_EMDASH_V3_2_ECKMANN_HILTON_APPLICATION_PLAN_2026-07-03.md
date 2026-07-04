@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; full EH proof shape succeeds in scratch with two local identity bridges; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; full EH proof shape succeeds in an owner-position full-file probe with two runtime identity bridges; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
 
 ## Purpose
 
@@ -1637,8 +1637,47 @@ vcomp(beta,alpha) = vcomp(alpha,beta)
 The two shared-middle lemmas are direct instances of
 `hom_postcomp_representable_interchange_eq`; the final `EH_comm` proof is
 `eq_trans` through the shared middle. Thus the overall EH application is now
-computably feasible, but active-kernel promotion still needs owner-position
-probing and warning classification for the two identity bridges.
+computably feasible.
+
+An owner-position full-file probe for the two identity bridges has also
+passed:
+
+```text
+tmp/probes/emdash3_2_eh_identity_bridges_full_probe.lp
+```
+
+It installs the rules at their intended owners:
+
+```text
+tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
+hom_precomp_along_fapp1_fapp0(id_X,alpha) -> alpha
+```
+
+and appends the compact EH proof consumer. The probe omits the earlier
+`EH_interchange_left_degenerate_from_representable_probe` and
+`EH_interchange_right_degenerate_from_representable_probe` aliases; those
+diagnostic surfaces are no longer needed for the promoted theorem because the
+two shared-middle lemmas instantiate `hom_postcomp_representable_interchange_eq`
+directly.
+
+Validation:
+
+```text
+quiet full-file probe:           passed
+warning-enabled full-file probe: passed
+strict LHS audit on probe:       passed
+```
+
+Single-file warning comparison:
+
+```text
+active component baseline:       1409 warning lines
+identity-bridge full-file probe: 1428 warning lines
+delta:                            +19 warning lines
+```
+
+The warning delta is diagnostic, not a veto. It should be recorded if the
+bridges are promoted.
 
 Statement-only EH surfaces were then probed without adding proofs or axioms
 to the active kernel. The scratch surface defines:
@@ -2428,6 +2467,7 @@ Scratch probes:
 tmp/probes/eckmann_hilton_current_reflexivity_probe.lp
 tmp/probes/eckmann_hilton_right_unit_runtime_identity_bridges_probe.lp
 tmp/probes/eckmann_hilton_degenerate_interchange_runtime_bridges_probe.lp
+tmp/probes/emdash3_2_eh_identity_bridges_full_probe.lp
 ```
 
 Current active-kernel computation already proves the left horizontal unit by
@@ -2466,11 +2506,12 @@ where both equalities to the shared middle are instantiated
 representable-interchange lemmas, and the final step uses `eq_sym`.
 
 Conclusion:
-the EH application is now feasible as an implementation task. The next kernel
-work is not to discover the proof shape; it is to promote or redesign the two
-identity bridges after owner-position full-file probes and warning
-classification, then move the EH aliases and proof symbols into
-`emdash3_2.lp`.
+the EH application is now feasible as an implementation task. The
+owner-position probe for the two runtime identity bridges passes quietly and
+warning-enabled, with a `+19` single-file warning-line delta over the active
+component baseline. The next kernel work is to promote those bridges as
+general infrastructure, document the warning delta, then move the compact EH
+aliases/shared-middle lemmas/`EH_comm` proof into `emdash3_2.lp`.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 
