@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
 
 ## Purpose
 
@@ -1287,27 +1287,300 @@ tapp1_fapp0 epsilon id_X = tapp0_fapp0 X epsilon
 
 is already usable as a one-step proof-time equality, but it does not compose
 transitively with later runtime component reduction. The successful probe
-therefore keeps that comparison proof-time and adds a separate runtime
-component projection for the identity-functor postcomposition telescope:
+therefore keeps that comparison proof-time and tests a separate component
+projection for the identity-functor postcomposition telescope:
 
 ```text
 tapp0_fapp0 u (hom_postcomp_tele_fapp1_fapp0(id_func, alpha))
   -> u^*(alpha)
 ```
 
-in the identity-functor case. The EH right-unit proof then succeeds as an
-explicit two-step `eq_trans`: first from `tapp1_fapp0 ... id` to the point
-component, then from the point component to `beta`. Probe:
+in the identity-functor case. However, this candidate deliberately routes a
+postcomposition-telescope component through the stable precomposition action:
+
+```text
+rule @tapp0_fapp0
+      _ _
+      _ _
+      $u
+      (@hom_postcomp_tele_fapp1_fapp0 $A $A (@id_func $A)
+        $W $X $Y $f $g $alpha)
+  ↪ @hom_precomp_along_fapp1_fapp0
+      $A
+      $A
+      (@id_func $A)
+      $Y
+      $W
+      $X
+      $u
+      $f
+      $g
+      $alpha;
+```
+
+That post-to-pre presentation change is mathematically plausible in the
+identity-functor case, but it is not yet a settled runtime owner. It may be
+better as an explicit proof step, a narrow `unif_rule`, or a new stable
+component owner that exposes the intended component without mixing owners on
+the RHS. Do not promote this rule as runtime infrastructure before that
+semantic review.
+
+With the narrow rule present only in the probe, the EH right-unit proof
+succeeds as an explicit two-step `eq_trans`: first from
+`tapp1_fapp0 ... id` to the point component, then from the point component to
+`beta`. Probe:
 
 ```text
 tmp/probes/hom_postcomp_tele_tapp0_identity_ordered_proof_probe.lp
 ```
 
-The fully general `F`-parametric component rule was also probed but failed
-subject reduction because the RHS normalized through the identity-functor
-precomposition presentation while the LHS endpoints remained the general
+For reference, the fully general `F`-parametric rule that was attempted was:
+
+```text
+rule @tapp0_fapp0
+      (Hom_cat $A $W (@fapp0 $B $A $F $X))
+      (Hom_cat $A $W (@fapp0 $B $A $F $Y))
+      (@hom_postcomp_func $A $B $F $W $X $Y $f)
+      (@hom_postcomp_func $A $B $F $W $X $Y $g)
+      $u
+      (@hom_postcomp_tele_fapp1_fapp0
+        $A $B $F $W $X $Y $f $g $alpha)
+  ↪ @hom_precomp_along_fapp1_fapp0
+      $A
+      $A
+      (@id_func $A)
+      (@fapp0 $B $A $F $Y)
+      $W
+      (@fapp0 $B $A $F $X)
+      $u
+      (@fapp1_fapp0 $B $A $F $X $Y $f)
+      (@fapp1_fapp0 $B $A $F $X $Y $g)
+      (@fapp1_fapp0
+        (Hom_cat $B $X $Y)
+        (Hom_cat $A
+          (@fapp0 $B $A $F $X)
+          (@fapp0 $B $A $F $Y))
+        (@fapp1_func $B $A $F $X $Y)
+        $f
+        $g
+        $alpha);
+```
+
+Probe:
+
+```text
+tmp/probes/hom_postcomp_tele_tapp0_component_probe.lp
+```
+
+This failed subject reduction: the RHS normalized through an identity-functor
+precomposition presentation, while the LHS endpoints remained general
 `F`-postcomposition heads. That broader rule should not be promoted in that
-form.
+form. More precisely, the intended mathematical formula is valid in ordinary
+notation:
+
+```text
+((hom_A(W,F[-]))[alpha])[u] = u^*(F[alpha])
+```
+
+where `alpha : f => g` in `Hom_B(X,Y)` and `u : W -> F[X]`. Both sides are
+2-cells
+
+```text
+F[f] o u  =>  F[g] o u
+```
+
+inside `Hom_A(W,F[Y])`. The implementation problem is syntactic/kernel-level:
+the active stable endpoints do not currently join in one proof-time step. A
+statement-only probe for the fully general equality leaves these endpoint
+obligations unsolved:
+
+```text
+(F g)_*(u)
+  ?=
+(id_A F[g])_*(u)
+
+(F f)_*(u)
+  ?=
+(id_A F[f])_*(u)
+```
+
+Probe:
+
+```text
+tmp/probes/hom_postcomp_tele_component_formability_probe.lp
+```
+
+The existing first-layer unification rules
+
+```text
+hom_postcomp_fapp0(...)      ~~ comp_fapp0(...)
+hom_precomp_along_fapp0(...) ~~ comp_fapp0(...)
+```
+
+are enough to prove each endpoint equal to the shared raw composite, but they
+do not compose transitively as proof search. Focused probes confirm:
+
+```text
+(F g)_*(u) = F[g] o u
+(id_A F[g])_*(u) = F[g] o u
+```
+
+both close by `eq_refl` via the existing unification rules:
+
+```text
+tmp/probes/hom_postcomp_endpoint_general_to_raw_probe.lp
+tmp/probes/hom_postcomp_endpoint_id_to_raw_probe.lp
+```
+
+The direct stable-head comparison
+
+```text
+(F g)_*(u) = (id_A F[g])_*(u)
+```
+
+does not close by one `eq_refl`:
+
+```text
+tmp/probes/hom_postcomp_endpoint_general_to_idpost_probe.lp
+```
+
+but an explicit `eq_trans` through raw composition does:
+
+```text
+tmp/probes/hom_postcomp_endpoint_general_to_idpost_trans_probe.lp
+```
+
+and the following proof-time stable-head bridge also checks:
+
+```text
+hom_postcomp_fapp0(A,B,F,W,X,Y,h,g)
+  ~~
+hom_postcomp_fapp0(A,A,id_A,W,F[X],F[Y],F[h],g)
+```
+
+Probe:
+
+```text
+tmp/probes/hom_postcomp_endpoint_bridge_unif_probe.lp
+```
+
+Adding that endpoint bridge in a scratch file makes the fully general
+component comparison formable:
+
+```text
+tmp/probes/hom_postcomp_component_with_endpoint_unif_probe.lp
+```
+
+and even lets the broad runtime component rule check with a focused
+`eq_refl` consumer:
+
+```text
+tmp/probes/hom_postcomp_component_runtime_with_endpoint_unif_probe.lp
+```
+
+The warning-enabled version of that last probe also terminates, but it emits
+local critical-pair families at the candidate component rule, especially
+where the functor argument has its own projection ladder
+(`sym_*`, `diag_*`, profunctor constructors, path induction, and related
+stable heads). These warnings are diagnostic rather than vetoes, but they
+mean the broad runtime component rule is not yet promotion-ready without
+owning-position full-file classification.
+
+The identity-functor specialization is better behaved. The equality type
+
+```text
+tapp0_fapp0 u
+  (hom_postcomp_tele_fapp1_fapp0(id_A, alpha))
+  =
+u^*(alpha)
+```
+
+is formable, but it is not reflexive by existing conversion:
+
+```text
+tmp/probes/hom_postcomp_tele_component_identity_formability_probe.lp
+```
+
+A narrow proof-time unification rule for this identity-functor comparison
+does check:
+
+```text
+tmp/probes/hom_postcomp_tele_tapp0_identity_unif_probe.lp
+```
+
+This is current evidence that the identity case is a plausible proof-time
+bridge. The fully general `F`-parametric runtime rule now looks semantically
+right but architecturally broad: it requires the endpoint stable-head bridge
+and would need warning-family classification before promotion.
+
+The actual EH right unit still does not follow by a single `eq_refl` from that
+component bridge alone:
+
+```text
+tmp/probes/hom_postcomp_tele_tapp0_identity_unif_eh_unit_probe.lp
+```
+
+This is expected because the existing
+`tapp1_fapp0 epsilon id_X ≡ tapp0_fapp0 X epsilon` rule and the new component
+bridge do not compose transitively as proof search. In addition, identity
+precomposition on 2-cells is itself only statement-formable today, not
+reflexive:
+
+```text
+hom_precomp_along_fapp1_fapp0(id_X, alpha) = alpha
+```
+
+Probe:
+
+```text
+tmp/probes/hom_precomp_along_fapp1_identity_action_probe.lp
+```
+
+So the next proof-oriented subgoal should be one of:
+
+1. an explicit equality chain through raw composition and existing
+   unification rules;
+2. a narrow proof-time bridge package for the identity-specialized EH unit;
+3. a broader endpoint-bridge plus component-rule package, but only after
+   owner-position probing and warning-family classification.
+
+Statement-only EH surfaces were then probed without adding proofs or axioms
+to the active kernel. The scratch surface defines:
+
+```text
+1_i = id_{Hom_B(x,x)}(id_x)
+hcomp(beta,alpha) = beta_*[alpha]
+```
+
+and checks the following target statements as well-typed declarations:
+
+```text
+hcomp(1_i, alpha) = alpha
+hcomp(beta, 1_i) = beta
+
+vcomp(hcomp(beta,1_i), hcomp(1_i,alpha))
+  =
+hcomp(vcomp(beta,1_i), vcomp(1_i,alpha))
+
+vcomp(hcomp(1_i,alpha), hcomp(beta,1_i))
+  =
+hcomp(vcomp(1_i,beta), vcomp(alpha,1_i))
+
+vcomp(beta,alpha) = hcomp(beta,alpha)
+vcomp(alpha,beta) = hcomp(beta,alpha)
+vcomp(beta,alpha) = vcomp(alpha,beta)
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_statement_surfaces_probe.lp
+```
+
+This probe is intentionally statement-level. It does not prove the unit laws,
+the degenerate interchange instances, the shared-middle comparisons, or
+`EH_comm`. It fixes a concrete formulation for the next proof probes while
+leaving the post-to-pre component bridge under semantic review.
 
 ## Rewrite-Rule SOP For This Plan
 
@@ -1960,6 +2233,34 @@ equality proof:
 ```
 
 Its proof is `eq_refl` against the fold-oriented kernel normal form.
+
+### 2026-07-04: EH Statement-Surface Probe
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_statement_surfaces_probe.lp
+```
+
+The probe adds no active kernel declarations. It verifies that the next
+Eckmann-Hilton application surfaces are well typed when written over the
+promoted `EH_2End` and `EH_vcomp` layer:
+
+- `1_i` as the identity 2-cell on `id_B(x)`;
+- `hcomp(beta,alpha)` as the pre-configured representable action
+  `beta_*[alpha]`;
+- left and right horizontal-unit target statements;
+- the two degenerate representable-interchange target statements;
+- the two comparisons from vertical composites to the shared middle
+  `beta_*[alpha]`;
+- the final commutativity statement
+  `vcomp(beta,alpha) = vcomp(alpha,beta)`.
+
+This probe intentionally stops at statements. The next proof probes should
+try to derive the degenerate interchange statements from
+`hom_postcomp_representable_interchange_eq` and separately classify the
+`hcomp(beta,1_i) = beta` unit gap before adding any post-to-pre component
+bridge to the active kernel.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 
