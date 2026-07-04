@@ -2670,23 +2670,21 @@ rule @hom_postcomp_func $A $B $F $W $X $X (@id $B $X)
 rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
   ↪ $g;
 
-rule @hom_postcomp_func
-      $A $B $F $W $X $Z
-      (@comp_fapp0 $B $X $Y $Z $q $p)
-  ↪ @comp_cat_fapp0
-      (Hom_cat $A $W (@fapp0 $B $A $F $X))
-      (Hom_cat $A $W (@fapp0 $B $A $F $Y))
-      (Hom_cat $A $W (@fapp0 $B $A $F $Z))
+rule @comp_cat_fapp0
+      _ _ _
       (@hom_postcomp_func $A $B $F $W $Y $Z $q)
-      (@hom_postcomp_func $A $B $F $W $X $Y $p);
+      (@hom_postcomp_func $A $B $F $W $X $Y $p)
+  ↪ @hom_postcomp_func
+      $A $B $F $W $X $Z
+      (@comp_fapp0 $B $X $Y $Z $q $p);
 
 rule @hom_postcomp_fapp0
+      $A $B $F $W $Y $Z $q
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $p $g)
+  ↪ @hom_postcomp_fapp0
       $A $B $F $W $X $Z
       (@comp_fapp0 $B $X $Y $Z $q $p)
-      $g
-  ↪ @hom_postcomp_fapp0
-      $A $B $F $W $Y $Z $q
-      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $p $g);
+      $g;
 
 rule @hom_postcomp_fapp0
       $A $A (@id_func $A) $W $X $Z
@@ -2882,35 +2880,25 @@ rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
-// Proof-time functoriality of the tele-level postcomposition stable head.
-// Runtime generic functoriality can be hidden once the stable projection head
-// is exposed, while a direct runtime bridge currently needs a larger
-// confluence package. Keep this as proof-time identification for now.
-unif_rule @hom_postcomp_tele_fapp1_fapp0
-      $A
-      $B
-      $F
-      $W
-      $X
-      $Y
-      $f
-      $f
+// Probe: runtime functoriality of the tele-level postcomposition stable head.
+rule @hom_postcomp_tele_fapp1_fapp0
+      $A $B $F $W $X $Y
+      $f $f
       (@id _ $f)
-  ≡ @id
+  ↪ @id
       (Functor_cat
         (Hom_cat $A $W (@fapp0 $B $A $F $X))
         (Hom_cat $A $W (@fapp0 $B $A $F $Y)))
-      (@hom_postcomp_func $A $B $F $W $X $Y $f)
-  ↪ [ tt ≡ tt ];
+      (@hom_postcomp_func $A $B $F $W $X $Y $f);
 
-unif_rule @comp_fapp0
+rule @comp_fapp0
       _
       _
       _
       _
       (@hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $g $h $e_gh)
       (@hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $e_fg)
-  ≡ @hom_postcomp_tele_fapp1_fapp0
+  ↪ @hom_postcomp_tele_fapp1_fapp0
       $A
       $B
       $F
@@ -2919,58 +2907,7 @@ unif_rule @comp_fapp0
       $Y
       $f
       $h
-      (@comp_fapp0 (Hom_cat $B $X $Y) $f $g $h $e_gh $e_fg)
-  ↪ [ tt ≡ tt ];
-
-symbol hom_postcomp_tele_fapp1_fapp0_id_eq
-  [A B : Cat]
-  (F : τ (Functor B A))
-  (W : τ (Obj A))
-  [X Y : τ (Obj B)]
-  (f : τ (Hom B X Y))
-  : τ (
-      @hom_postcomp_tele_fapp1_fapp0
-        A B F W X Y f f
-        (@id (Hom_cat B X Y) f)
-      =
-      @id
-        (Functor_cat
-          (Hom_cat A W (@fapp0 B A F X))
-          (Hom_cat A W (@fapp0 B A F Y)))
-        (@hom_postcomp_func A B F W X Y f))
-≔ eq_refl
-    (@id
-      (Functor_cat
-        (Hom_cat A W (@fapp0 B A F X))
-        (Hom_cat A W (@fapp0 B A F Y)))
-      (@hom_postcomp_func A B F W X Y f));
-
-symbol hom_postcomp_tele_fapp1_fapp0_comp_eq
-  [A B : Cat]
-  (F : τ (Functor B A))
-  (W : τ (Obj A))
-  [X Y : τ (Obj B)]
-  (f g h : τ (Hom B X Y))
-  (e_fg : τ (Hom (Hom_cat B X Y) f g))
-  (e_gh : τ (Hom (Hom_cat B X Y) g h))
-  : τ (
-      @comp_fapp0
-        (Functor_cat
-          (Hom_cat A W (@fapp0 B A F X))
-          (Hom_cat A W (@fapp0 B A F Y)))
-        (@hom_postcomp_func A B F W X Y f)
-        (@hom_postcomp_func A B F W X Y g)
-        (@hom_postcomp_func A B F W X Y h)
-        (@hom_postcomp_tele_fapp1_fapp0 A B F W X Y g h e_gh)
-        (@hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g e_fg)
-      =
-      @hom_postcomp_tele_fapp1_fapp0
-        A B F W X Y f h
-        (@comp_fapp0 (Hom_cat B X Y) f g h e_gh e_fg))
-≔ eq_refl
-    (@hom_postcomp_tele_fapp1_fapp0
-      A B F W X Y f h
-      (@comp_fapp0 (Hom_cat B X Y) f g h e_gh e_fg));
+      (@comp_fapp0 (Hom_cat $B $X $Y) $f $g $h $e_gh $e_fg);
 
 // Hom-action of capped postcomposition on alpha : g ->^(Hom_A(W,F[X])) h.
 symbol hom_postcomp_fapp1_func [A B : Cat]
@@ -3203,10 +3140,23 @@ with @comp_catd_fapp0
       (@defiso_from (@Catd_cat $K) $E $D $i)
   ↪ @id_funcd $K $D;
 
-// Proof-time raw-composition view of DefIso cancellation. Runtime
-// cancellation remains owned by `hom_postcomp_fapp0`; this bridge exists so
-// ordinary propositional `IsoEvidence` witnesses can be built by reflexivity
-// when their statement is phrased with the raw `comp_fapp0` head.
+// Probe: fold-oriented hom-action normal forms can expose raw DefIso
+// cancellation. Keep these runtime joins in the detached orientation probe to
+// test whether the raw view must compute under the migrated normal form.
+rule @comp_fapp0
+      $C $x $y $x
+      (@defiso_from $C $x $y $i)
+      (@defiso_to $C $x $y $i)
+  ↪ @id $C $x;
+
+rule @comp_fapp0
+      $C $y $x $y
+      (@defiso_to $C $x $y $i)
+      (@defiso_from $C $x $y $i)
+  ↪ @id $C $y;
+
+// Proof-time raw-composition view of DefIso cancellation. This remains as a
+// compatibility bridge during the probe.
 unif_rule @comp_fapp0
       $C $x $y $x
       (@defiso_from $C $x $y $i)
@@ -3454,23 +3404,21 @@ rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
 rule @hom_precomp_along_fapp0 $A $B $F $Z $X $X (@id $A $X) $g
   ↪ $g;
 
-rule @hom_precomp_along_func
-      $A $B $F $Z $W $Y
-      (@comp_fapp0 $A $W $X $Y $q $p)
-  ↪ @comp_cat_fapp0
-      (Hom_cat $B (@fapp0 $A $B $F $Y) $Z)
-      (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
-      (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
+rule @comp_cat_fapp0
+      _ _ _
       (@hom_precomp_along_func $A $B $F $Z $W $X $p)
-      (@hom_precomp_along_func $A $B $F $Z $X $Y $q);
+      (@hom_precomp_along_func $A $B $F $Z $X $Y $q)
+  ↪ @hom_precomp_along_func
+      $A $B $F $Z $W $Y
+      (@comp_fapp0 $A $W $X $Y $q $p);
 
 rule @hom_precomp_along_fapp0
+      $A $B $F $Z $W $X $p
+      (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g)
+  ↪ @hom_precomp_along_fapp0
       $A $B $F $Z $W $Y
       (@comp_fapp0 $A $W $X $Y $q $p)
-      $g
-  ↪ @hom_precomp_along_fapp0
-      $A $B $F $Z $W $X $p
-      (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g);
+      $g;
 
 // Precomposing the identity at F[X] by h returns the functorial action F[h].
 // The first rule covers unreduced generic identities; the `Cat_cat` and
@@ -3518,6 +3466,24 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
   ↪ [ tt ≡ tt ];
+
+// Candidate fold-direction codomain accumulation for precomposition.
+rule @comp_fapp0
+      $B
+      _
+      $Z
+      $U
+      $k
+      (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $p $g)
+  ↪ @hom_precomp_along_fapp0
+      $A
+      $B
+      $F
+      $U
+      $W
+      $X
+      $p
+      (@comp_fapp0 $B (@fapp0 $A $B $F $X) $Z $U $k $g);
 
 // Identity-functor precomposition uses postcomposition as its canonical
 // runtime presentation. The ordinary `comp_fapp0` reading remains proof-time
@@ -3663,34 +3629,25 @@ rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
-// Proof-time functoriality of the tele-level precomposition stable head.
-// As above, this records the mathematical functoriality needed by proofs
-// without changing the current runtime normal form.
-unif_rule @hom_precomp_along_tele_fapp1_fapp0
-      $A
-      $B
-      $F
-      $Z
-      $W
-      $X
-      $h
-      $h
+// Probe: runtime functoriality of the tele-level precomposition stable head.
+rule @hom_precomp_along_tele_fapp1_fapp0
+      $A $B $F $Z $W $X
+      $h $h
       (@id _ $h)
-  ≡ @id
+  ↪ @id
       (Functor_cat
         (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
         (Hom_cat $B (@fapp0 $A $B $F $W) $Z))
-      (@hom_precomp_along_func $A $B $F $Z $W $X $h)
-  ↪ [ tt ≡ tt ];
+      (@hom_precomp_along_func $A $B $F $Z $W $X $h);
 
-unif_rule @comp_fapp0
+rule @comp_fapp0
       _
       _
       _
       _
       (@hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $g $h $e_gh)
       (@hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $f $g $e_fg)
-  ≡ @hom_precomp_along_tele_fapp1_fapp0
+  ↪ @hom_precomp_along_tele_fapp1_fapp0
       $A
       $B
       $F
@@ -3699,58 +3656,7 @@ unif_rule @comp_fapp0
       $X
       $f
       $h
-      (@comp_fapp0 (Hom_cat $A $W $X) $f $g $h $e_gh $e_fg)
-  ↪ [ tt ≡ tt ];
-
-symbol hom_precomp_along_tele_fapp1_fapp0_id_eq
-  [A B : Cat]
-  (F : τ (Functor A B))
-  (Z : τ (Obj B))
-  [W X : τ (Obj A)]
-  (h : τ (Hom A W X))
-  : τ (
-      @hom_precomp_along_tele_fapp1_fapp0
-        A B F Z W X h h
-        (@id (Hom_cat A W X) h)
-      =
-      @id
-        (Functor_cat
-          (Hom_cat B (@fapp0 A B F X) Z)
-          (Hom_cat B (@fapp0 A B F W) Z))
-        (@hom_precomp_along_func A B F Z W X h))
-≔ eq_refl
-    (@id
-      (Functor_cat
-        (Hom_cat B (@fapp0 A B F X) Z)
-        (Hom_cat B (@fapp0 A B F W) Z))
-      (@hom_precomp_along_func A B F Z W X h));
-
-symbol hom_precomp_along_tele_fapp1_fapp0_comp_eq
-  [A B : Cat]
-  (F : τ (Functor A B))
-  (Z : τ (Obj B))
-  [W X : τ (Obj A)]
-  (f g h : τ (Hom A W X))
-  (e_fg : τ (Hom (Hom_cat A W X) f g))
-  (e_gh : τ (Hom (Hom_cat A W X) g h))
-  : τ (
-      @comp_fapp0
-        (Functor_cat
-          (Hom_cat B (@fapp0 A B F X) Z)
-          (Hom_cat B (@fapp0 A B F W) Z))
-        (@hom_precomp_along_func A B F Z W X f)
-        (@hom_precomp_along_func A B F Z W X g)
-        (@hom_precomp_along_func A B F Z W X h)
-        (@hom_precomp_along_tele_fapp1_fapp0 A B F Z W X g h e_gh)
-        (@hom_precomp_along_tele_fapp1_fapp0 A B F Z W X f g e_fg)
-      =
-      @hom_precomp_along_tele_fapp1_fapp0
-        A B F Z W X f h
-        (@comp_fapp0 (Hom_cat A W X) f g h e_gh e_fg))
-≔ eq_refl
-    (@hom_precomp_along_tele_fapp1_fapp0
-      A B F Z W X f h
-      (@comp_fapp0 (Hom_cat A W X) f g h e_gh e_fg));
+      (@comp_fapp0 (Hom_cat $A $W $X) $f $g $h $e_gh $e_fg);
 
 // Hom-action of capped precomposition on alpha : g ->^(Hom_B(F[X],Z)) k.
 symbol hom_precomp_along_fapp1_func [A B : Cat]
@@ -5275,6 +5181,58 @@ rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
 rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
+// Probe: off-diagonal vertical-composite folds for ordinary transfors.
+rule @comp_fapp0
+      $B
+      _
+      _
+      _
+      (@tapp0_fapp0 $A $B $G $H $Y $η)
+      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
+  ↪ @tapp1_fapp0
+      $A
+      $B
+      $F
+      $H
+      $X
+      $Y
+      (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
+      $f;
+
+rule @comp_fapp0
+      $B
+      _
+      _
+      _
+      (@tapp1_fapp0 $A $B $G $H $X $Y $η $f)
+      (@tapp0_fapp0 $A $B $F $G $X $ϵ)
+  ↪ @tapp1_fapp0
+      $A
+      $B
+      $F
+      $H
+      $X
+      $Y
+      (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
+      $f;
+
+rule @comp_fapp0
+      $B
+      _
+      _
+      _
+      (@tapp1_fapp0 $A $B $G $H $Y $Z $η $q)
+      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $p)
+  ↪ @tapp1_fapp0
+      $A
+      $B
+      $F
+      $H
+      $X
+      $Z
+      (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
+      (@comp_fapp0 $A $X $Y $Z $q $p);
+
 // Full strict naturality for ordinary transfors, oriented as cut elimination.
 // The post/left rule accumulates a codomain arrow through the off-diagonal
 // hom-action:
@@ -5343,496 +5301,6 @@ rule comp_fapp0
 unif_rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
   ≡ @tapp0_fapp0 $A $B $F $G $X $ϵ
   ↪ [ tt ≡ tt ];
-
-// The diagonal component can be used as the off-diagonal component at an
-// identity base arrow in theorem proofs.
-symbol transf_diag_to_offdiag_id
-  [X Y : Cat]
-  [Q R : τ (Functor X Y)]
-  (theta : τ (Transf Q R))
-  (a : τ (Obj X))
-  : τ (
-      @tapp0_fapp0 X Y Q R a theta
-      =
-      @tapp1_fapp0 X Y Q R a a theta (@id X a))
-≔ eq_refl
-    (@tapp0_fapp0 X Y Q R a theta);
-
-// Component-level strict naturality, split into the two reductions to the
-// off-diagonal component and then composed as an equality proof.
-symbol transf_naturality_left
-  [X Y : Cat]
-  [Q R : τ (Functor X Y)]
-  (theta : τ (Transf Q R))
-  [a b : τ (Obj X)]
-  (p : τ (Hom X a b))
-  : τ (
-      @comp_fapp0 Y
-        (@fapp0 X Y Q a)
-        (@fapp0 X Y R a)
-        (@fapp0 X Y R b)
-        (@fapp1_fapp0 X Y R a b p)
-        (@tapp0_fapp0 X Y Q R a theta)
-      =
-      @tapp1_fapp0 X Y Q R a b theta p)
-≔ eq_trans
-    (@eq_ap
-      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R a))
-      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R b))
-      (λ m : τ (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R a)),
-        @comp_fapp0 Y
-          (@fapp0 X Y Q a)
-          (@fapp0 X Y R a)
-          (@fapp0 X Y R b)
-          (@fapp1_fapp0 X Y R a b p)
-          m)
-      (@tapp0_fapp0 X Y Q R a theta)
-      (@tapp1_fapp0 X Y Q R a a theta (@id X a))
-      (@transf_diag_to_offdiag_id X Y Q R theta a))
-    (eq_refl
-      (@tapp1_fapp0 X Y Q R a b theta p));
-
-symbol transf_naturality_right
-  [X Y : Cat]
-  [Q R : τ (Functor X Y)]
-  (theta : τ (Transf Q R))
-  [a b : τ (Obj X)]
-  (p : τ (Hom X a b))
-  : τ (
-      @comp_fapp0 Y
-        (@fapp0 X Y Q a)
-        (@fapp0 X Y Q b)
-        (@fapp0 X Y R b)
-        (@tapp0_fapp0 X Y Q R b theta)
-        (@fapp1_fapp0 X Y Q a b p)
-      =
-      @tapp1_fapp0 X Y Q R a b theta p)
-≔ eq_trans
-    (@eq_ap
-      (Hom Y (@fapp0 X Y Q b) (@fapp0 X Y R b))
-      (Hom Y (@fapp0 X Y Q a) (@fapp0 X Y R b))
-      (λ m : τ (Hom Y (@fapp0 X Y Q b) (@fapp0 X Y R b)),
-        @comp_fapp0 Y
-          (@fapp0 X Y Q a)
-          (@fapp0 X Y Q b)
-          (@fapp0 X Y R b)
-          m
-          (@fapp1_fapp0 X Y Q a b p))
-      (@tapp0_fapp0 X Y Q R b theta)
-      (@tapp1_fapp0 X Y Q R b b theta (@id X b))
-      (@transf_diag_to_offdiag_id X Y Q R theta b))
-    (eq_refl
-      (@tapp1_fapp0 X Y Q R a b theta p));
-
-symbol transf_naturality_component
-  [X Y : Cat]
-  [Q R : τ (Functor X Y)]
-  (theta : τ (Transf Q R))
-  [a b : τ (Obj X)]
-  (p : τ (Hom X a b))
-  : τ (
-      @comp_fapp0 Y
-        (@fapp0 X Y Q a)
-        (@fapp0 X Y R a)
-        (@fapp0 X Y R b)
-        (@fapp1_fapp0 X Y R a b p)
-        (@tapp0_fapp0 X Y Q R a theta)
-      =
-      @comp_fapp0 Y
-        (@fapp0 X Y Q a)
-        (@fapp0 X Y Q b)
-        (@fapp0 X Y R b)
-        (@tapp0_fapp0 X Y Q R b theta)
-        (@fapp1_fapp0 X Y Q a b p))
-≔ eq_trans
-    (@transf_naturality_left X Y Q R theta a b p)
-    (eq_sym
-      (@transf_naturality_right X Y Q R theta a b p));
-
-// Arrow-level square pasting used by the ordinary-transfor component
-// interchange proof below.
-symbol arrow_square_pasting_step1
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a3 a5
-        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-        (@comp_fapp0 Z a0 a1 a3 Qalpha eta)
-      =
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a3 a5
-          (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-          Qalpha)
-        eta)
-≔ @comp_assoc Z a0 a1 a3 a5
-    (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-    Qalpha
-    eta;
-
-symbol arrow_square_pasting_step2
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a3 a5
-          (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-          Qalpha)
-        eta
-      =
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a4 a5
-          Rbeta
-          (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-        eta)
-≔ @eq_ap
-    (Hom Z a1 a5)
-    (Hom Z a0 a5)
-    (λ m : τ (Hom Z a1 a5), @comp_fapp0 Z a0 a1 a5 m eta)
-    (@comp_fapp0 Z a1 a3 a5
-      (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-      Qalpha)
-    (@comp_fapp0 Z a1 a4 a5
-      Rbeta
-      (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-    (@eq_sym
-      (Hom Z a1 a5)
-      (@comp_fapp0 Z a1 a4 a5
-        Rbeta
-        (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-      (@comp_fapp0 Z a1 a3 a5
-        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-        Qalpha)
-      (@comp_assoc Z a1 a3 a4 a5 Rbeta thetaG Qalpha));
-
-symbol arrow_square_pasting_step3
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a4 a5
-          Rbeta
-          (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-        eta
-      =
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a4 a5
-          Rbeta
-          (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
-        eta)
-≔ @eq_ap
-    (Hom Z a1 a4)
-    (Hom Z a0 a5)
-    (λ m : τ (Hom Z a1 a4),
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a4 a5 Rbeta m)
-        eta)
-    (@comp_fapp0 Z a1 a3 a4 thetaG Qalpha)
-    (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF)
-    (eq_sym nat);
-
-symbol arrow_square_pasting_step4
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a4 a5
-          Rbeta
-          (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
-        eta
-      =
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a2 a5
-          (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
-          thetaF)
-        eta)
-≔ @eq_ap
-    (Hom Z a1 a5)
-    (Hom Z a0 a5)
-    (λ m : τ (Hom Z a1 a5), @comp_fapp0 Z a0 a1 a5 m eta)
-    (@comp_fapp0 Z a1 a4 a5
-      Rbeta
-      (@comp_fapp0 Z a1 a2 a4 Ralpha thetaF))
-    (@comp_fapp0 Z a1 a2 a5
-      (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
-      thetaF)
-    (@comp_assoc Z a1 a2 a4 a5 Rbeta Ralpha thetaF);
-
-symbol arrow_square_pasting_step5
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a2 a5
-          (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
-          thetaF)
-        eta
-      =
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
-        eta)
-≔ @eq_ap
-    (Hom Z a2 a5)
-    (Hom Z a0 a5)
-    (λ m : τ (Hom Z a2 a5),
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a2 a5 m thetaF)
-        eta)
-    (@comp_fapp0 Z a2 a4 a5 Rbeta Ralpha)
-    Rbeta_alpha
-    func;
-
-symbol arrow_square_pasting_step6
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a1 a5
-        (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
-        eta
-      =
-      @comp_fapp0 Z a0 a2 a5
-        Rbeta_alpha
-        (@comp_fapp0 Z a0 a1 a2 thetaF eta))
-≔ @eq_sym
-    (Hom Z a0 a5)
-    (@comp_fapp0 Z a0 a2 a5
-      Rbeta_alpha
-      (@comp_fapp0 Z a0 a1 a2 thetaF eta))
-    (@comp_fapp0 Z a0 a1 a5
-      (@comp_fapp0 Z a1 a2 a5 Rbeta_alpha thetaF)
-      eta)
-    (@comp_assoc Z a0 a1 a2 a5 Rbeta_alpha thetaF eta);
-
-symbol arrow_square_pasting_right_to_left
-  [Z : Cat]
-  [a0 a1 a2 a3 a4 a5 : τ (Obj Z)]
-  (eta : τ (Hom Z a0 a1))
-  (thetaF : τ (Hom Z a1 a2))
-  (Qalpha : τ (Hom Z a1 a3))
-  (Ralpha : τ (Hom Z a2 a4))
-  (thetaG : τ (Hom Z a3 a4))
-  (Rbeta : τ (Hom Z a4 a5))
-  (Rbeta_alpha : τ (Hom Z a2 a5))
-  (nat : τ (
-      @comp_fapp0 Z a1 a2 a4 Ralpha thetaF
-      =
-      @comp_fapp0 Z a1 a3 a4 thetaG Qalpha))
-  (func : τ (
-      @comp_fapp0 Z a2 a4 a5 Rbeta Ralpha
-      =
-      Rbeta_alpha))
-  : τ (
-      @comp_fapp0 Z a0 a3 a5
-        (@comp_fapp0 Z a3 a4 a5 Rbeta thetaG)
-        (@comp_fapp0 Z a0 a1 a3 Qalpha eta)
-      =
-      @comp_fapp0 Z a0 a2 a5
-        Rbeta_alpha
-        (@comp_fapp0 Z a0 a1 a2 thetaF eta))
-≔ eq_trans
-    (@arrow_square_pasting_step1 Z a0 a1 a2 a3 a4 a5
-      eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
-    (eq_trans
-      (@arrow_square_pasting_step2 Z a0 a1 a2 a3 a4 a5
-        eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
-      (eq_trans
-        (@arrow_square_pasting_step3 Z a0 a1 a2 a3 a4 a5
-          eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
-        (eq_trans
-          (@arrow_square_pasting_step4 Z a0 a1 a2 a3 a4 a5
-            eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
-          (eq_trans
-            (@arrow_square_pasting_step5 Z a0 a1 a2 a3 a4 a5
-              eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)
-            (@arrow_square_pasting_step6 Z a0 a1 a2 a3 a4 a5
-              eta thetaF Qalpha Ralpha thetaG Rbeta Rbeta_alpha nat func)))));
-
-// Horizontal composite of ordinary transfors, at the component-level
-// theorem surface used by the first four-cell interchange result.
-symbol transf_hcomp
-  [X Y Z : Cat]
-  [P Q : τ (Functor Y Z)]
-  (eta : τ (Transf P Q))
-  [F G : τ (Functor X Y)]
-  (alpha : τ (Transf F G))
-  : τ (Transf
-      (@comp_cat_fapp0 X Y Z P F)
-      (@comp_cat_fapp0 X Y Z Q G))
-≔ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z P Q eta F G alpha;
-
-symbol transf_interchange_component
-  [X Y Z : Cat]
-  [P Q R : τ (Functor Y Z)]
-  (eta : τ (Transf P Q))
-  (theta : τ (Transf Q R))
-  [F G H : τ (Functor X Y)]
-  (alpha : τ (Transf F G))
-  (beta : τ (Transf G H))
-  (a : τ (Obj X))
-  : τ (
-      @tapp0_fapp0
-        X Z
-        (@comp_cat_fapp0 X Y Z P F)
-        (@comp_cat_fapp0 X Y Z R H)
-        a
-        (@comp_fapp0
-          (Functor_cat X Z)
-          (@comp_cat_fapp0 X Y Z P F)
-          (@comp_cat_fapp0 X Y Z Q G)
-          (@comp_cat_fapp0 X Y Z R H)
-          (@transf_hcomp X Y Z Q R theta G H beta)
-          (@transf_hcomp X Y Z P Q eta F G alpha))
-      =
-      @tapp0_fapp0
-        X Z
-        (@comp_cat_fapp0 X Y Z P F)
-        (@comp_cat_fapp0 X Y Z R H)
-        a
-        (@transf_hcomp
-          X Y Z
-          P R
-          (@comp_fapp0 (Functor_cat Y Z) P Q R theta eta)
-          F H
-          (@comp_fapp0 (Functor_cat X Y) F G H beta alpha)))
-≔ @arrow_square_pasting_right_to_left
-    Z
-    (@fapp0 Y Z P (@fapp0 X Y F a))
-    (@fapp0 Y Z Q (@fapp0 X Y F a))
-    (@fapp0 Y Z R (@fapp0 X Y F a))
-    (@fapp0 Y Z Q (@fapp0 X Y G a))
-    (@fapp0 Y Z R (@fapp0 X Y G a))
-    (@fapp0 Y Z R (@fapp0 X Y H a))
-    (@tapp0_fapp0 Y Z P Q (@fapp0 X Y F a) eta)
-    (@tapp0_fapp0 Y Z Q R (@fapp0 X Y F a) theta)
-    (@fapp1_fapp0 Y Z Q
-      (@fapp0 X Y F a)
-      (@fapp0 X Y G a)
-      (@tapp0_fapp0 X Y F G a alpha))
-    (@fapp1_fapp0 Y Z R
-      (@fapp0 X Y F a)
-      (@fapp0 X Y G a)
-      (@tapp0_fapp0 X Y F G a alpha))
-    (@tapp0_fapp0 Y Z Q R (@fapp0 X Y G a) theta)
-    (@fapp1_fapp0 Y Z R
-      (@fapp0 X Y G a)
-      (@fapp0 X Y H a)
-      (@tapp0_fapp0 X Y G H a beta))
-    (@fapp1_fapp0 Y Z R
-      (@fapp0 X Y F a)
-      (@fapp0 X Y H a)
-      (@comp_fapp0 Y
-        (@fapp0 X Y F a)
-        (@fapp0 X Y G a)
-        (@fapp0 X Y H a)
-        (@tapp0_fapp0 X Y G H a beta)
-        (@tapp0_fapp0 X Y F G a alpha)))
-    (@transf_naturality_component
-      Y Z Q R theta
-      (@fapp0 X Y F a)
-      (@fapp0 X Y G a)
-      (@tapp0_fapp0 X Y F G a alpha))
-    (eq_refl
-      (@comp_fapp0 Z
-        (@fapp0 Y Z R (@fapp0 X Y F a))
-        (@fapp0 Y Z R (@fapp0 X Y G a))
-        (@fapp0 Y Z R (@fapp0 X Y H a))
-        (@fapp1_fapp0 Y Z R
-          (@fapp0 X Y G a)
-          (@fapp0 X Y H a)
-          (@tapp0_fapp0 X Y G H a beta))
-        (@fapp1_fapp0 Y Z R
-          (@fapp0 X Y F a)
-          (@fapp0 X Y G a)
-          (@tapp0_fapp0 X Y F G a alpha))));
 
 // Cat-valued object-level projections of strict naturality. Both composites
 // fold to the off-diagonal component at the base arrow.
@@ -10618,6 +10086,31 @@ rule @Prof_reindex_transf
       (@id_func $A)
       (@id_func $B)
   ↪ $r;
+
+// Probe: stable arrow action of profunctor reindexing should not hide
+// ordinary functoriality under the fold-oriented hom-action normal form.
+rule @Prof_reindex_transf
+      $A $A2 $B $B2
+      $R $R
+      (@id_funcd (Product_cat (Op_cat $A) $B) $R)
+      $F $G
+  ↪ @id_funcd
+      (Product_cat (Op_cat $A2) $B2)
+      (@Prof_reindex $A $A2 $B $B2 $R $F $G);
+
+rule @comp_catd_fapp0
+      _
+      _ _ _
+      (@Prof_reindex_transf $A $A2 $B $B2 $S $T $s $F $G)
+      (@Prof_reindex_transf $A $A2 $B $B2 $R $S $r $F $G)
+  ↪ @Prof_reindex_transf
+      $A $A2 $B $B2
+      $R $T
+      (@comp_catd_fapp0
+        (Product_cat (Op_cat $A) $B)
+        $R $S $T
+        $s $r)
+      $F $G;
 
 rule @hom_postcomp_fapp0
       (@Catd_cat (Product_cat (Op_cat $A2) $B2))

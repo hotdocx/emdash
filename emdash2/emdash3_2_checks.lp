@@ -3168,11 +3168,11 @@ assert [B : Cat] (M N L : τ (Obj B))
         f
         g
         e_fg))
-  ≡ @comp_cat_fapp0
-    (Hom_cat (Hom_cat B M N) X Y)
-    (Hom_cat (Hom_cat B M N) X Z)
-    (Hom_cat
-      (Hom_cat B M L)
+	  ≡ @comp_cat_fapp0
+	    (Hom_cat (Hom_cat B M N) X Y)
+	    (Hom_cat (Hom_cat B M N) X Z)
+	    (Hom_cat
+	      (Hom_cat B M L)
       (fapp0 (@hom_postcomp_func B B (@id_func B) M N L f) X)
       (fapp0 (@hom_postcomp_func B B (@id_func B) M N L g) Z))
     (@tapp1_func
@@ -3193,10 +3193,57 @@ assert [B : Cat] (M N L : τ (Obj B))
       (Hom_cat B M N)
       (Hom_cat B M N)
       (@id_func (Hom_cat B M N))
-      X
+	      X
+	      Y
+	      Z
+	      β);
+
+// Pre-configured four-cell interchange for the Cat-valued representable
+// `hom_` (postcomposition). This is the generalized form needed before the
+// Eckmann-Hilton specialization:
+//   ((e_gh)_*[beta]) · ((e_fg)_*[alpha])
+//     -> (e_gh · e_fg)_*[beta · alpha].
+assert [B : Cat] [M N L : τ (Obj B)]
+  [f g h : τ (Hom B N L)]
+  (e_fg : τ (Hom (Hom_cat B N L) f g))
+  (e_gh : τ (Hom (Hom_cat B N L) g h))
+  [X Y Z : τ (Hom B M N)]
+  (alpha : τ (Hom (Hom_cat B M N) X Y))
+  (beta : τ (Hom (Hom_cat B M N) Y Z)) ⊢
+  @comp_fapp0
+    (Hom_cat B M L)
+    (@hom_postcomp_fapp0 B B (@id_func B) M N L f X)
+    (@hom_postcomp_fapp0 B B (@id_func B) M N L g Y)
+    (@hom_postcomp_fapp0 B B (@id_func B) M N L h Z)
+    (@tapp1_fapp0
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L g)
+      (@hom_postcomp_func B B (@id_func B) M N L h)
       Y
       Z
-      β);
+      (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L g h e_gh)
+      beta)
+    (@tapp1_fapp0
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L f)
+      (@hom_postcomp_func B B (@id_func B) M N L g)
+      X
+      Y
+      (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L f g e_fg)
+      alpha)
+  ≡ @tapp1_fapp0
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L f)
+      (@hom_postcomp_func B B (@id_func B) M N L h)
+      X
+      Z
+      (@hom_postcomp_tele_fapp1_fapp0
+        B B (@id_func B) M N L f h
+        (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
+      (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha);
 
 // From emdash3_2.lp:2777.
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
