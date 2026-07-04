@@ -1,0 +1,695 @@
+# EMDASH v3.2 Cat/Catd Specialization Alias Migration Plan
+
+Date: 2026-07-04
+Last reviewed: 2026-07-04
+
+Plan-ID: EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04
+Depends-On: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-ECKMANN-HILTON-APPLICATION-2026-07-03; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
+Supersedes: no whole report; refines and corrects the Cat-specialized cleanup target in section 5 of REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md
+Side-Task-Ledger: #side-task-ledger
+Infinity-Codex-Origin: current-session-analysis-2026-07-04
+Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
+Status: proposed dedicated subplan; no source changes from this report have
+been promoted yet
+
+## Purpose
+
+This report isolates the Cat/Catd specialization cleanup from the broader
+DefIso, hom-action, and ProfComparison migration plan.
+
+The corrected goal is stronger than the older "keep `comp_cat_fapp0` as the
+single Cat object-action owner" wording.  The final rewrite-facing owners
+should be the general, non-specialized identity/composition/hom-action heads:
+
+```text
+id
+comp_fapp0
+hom_postcomp_*
+hom_precomp_along_*
+hom_int*
+homd_int*
+```
+
+The `Cat_cat` / `Catd_cat` convenience heads should remain primitive only
+when the specialization exposes structure not available in a generic
+category, such as ordinary transfor or displayed-transfor projection ladders.
+Pure identity, composition, object-action, and currying helpers should become
+transparent aliases/views over the generic owners.
+
+## Relationship To Parent Plans
+
+The immediate parent context is
+`REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`,
+especially its Section 5:
+
+```text
+Cat-specialized symbols should be justified by extra Cat structure.
+```
+
+That section correctly identifies the principle but is now too weak in one
+important place: it treats `comp_cat_fapp0` as the likely single Cat
+object-action owner for v3.2.  The corrected target is that
+`comp_cat_fapp0` itself is a Cat-specialized presentation of generic
+composition:
+
+```text
+comp_cat_fapp0(F,G)  =  comp_fapp0(Cat_cat,F,G).
+```
+
+The Eckmann-Hilton plan is orthogonal but reinforces the same direction.  Its
+current promoted slices rely on generic `hom_*` accumulation and ordinary
+`comp_fapp0` normal forms.  This cleanup should not be mixed into the
+Eckmann-Hilton application work, but it should preserve that generic-owner
+orientation.
+
+## Current Baseline
+
+The current active files, after the orthogonal Eckmann-Hilton work, still use
+primitive Cat/Catd specialization heads:
+
+```text
+id_func
+id_funcd
+comp_cat_fapp0
+comp_catd_fapp0
+comp_cat_cov_func
+comp_cat_cov_func_func
+comp_cat_con_func
+comp_cat_con_func_func
+comp_cat_cov_fapp1_func
+comp_cat_con_fapp1_func
+comp_cat_cov_func_func_fapp1_func
+comp_cat_con_func_func_fapp1_func
+```
+
+The source also has Cat-only higher heads that should not be demoted merely
+because their names begin with `comp_cat`:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+comp_cat_cov_func_func_transf
+comp_cat_con_func_func_transf
+comp_cat_cov_func_func_tapp1_func
+comp_cat_cov_func_func_tapp1_fapp0
+```
+
+The baseline check on 2026-07-04 passed:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+```
+
+## Architectural Decision
+
+### 1. Treat specialized identity heads as aliases
+
+The current primitive identity heads:
+
+```text
+id_func A
+id_funcd K E
+```
+
+are convenience names for generic identity at visible specialized
+categories:
+
+```text
+id_func A     := @id Cat_cat A
+id_funcd K E  := @id (@Catd_cat K) E
+```
+
+The migration should delete or replace rewrite LHSs that key on
+`id_func` or `id_funcd`.  Rules that are still semantically necessary should
+key on the generic identity head specialized to `Cat_cat` or `Catd_cat`:
+
+```text
+@id Cat_cat A
+@id (@Catd_cat K) E
+```
+
+This does not mean all identity-specific rules disappear.  Some projections
+are still Cat/Catd-specific because generic categories do not have object
+application or displayed components.  For example, the following kinds of
+rules remain meaningful after migration, but should be written against the
+generic specialized head:
+
+```text
+fapp0 (@id Cat_cat A) x
+fapp1_fapp0 (@id Cat_cat A) p
+tapp0_fapp0 ... (@id (@Catd_cat K) E)
+```
+
+### 2. Treat specialized composition heads as aliases
+
+The current primitive composition heads:
+
+```text
+comp_cat_fapp0 A B C F G
+comp_catd_fapp0 K E D C FF GG
+```
+
+are convenience names for generic composition at visible specialized
+categories:
+
+```text
+comp_cat_fapp0 A B C F G
+  := @comp_fapp0 Cat_cat A B C F G
+
+comp_catd_fapp0 K E D C FF GG
+  := @comp_fapp0 (@Catd_cat K) E D C FF GG
+```
+
+The fold rules from generic composition to specialized heads should not
+survive this alias migration:
+
+```text
+@comp_fapp0 Cat_cat ...       -> comp_cat_fapp0 ...
+@comp_fapp0 (Catd_cat K) ...  -> comp_catd_fapp0 ...
+```
+
+Keeping both a transparent alias and the reverse fold would create a bad
+fold/unfold family.  Instead, every necessary specialized rule should be
+rewritten to the generic LHS.
+
+Examples of rules to migrate, not simply delete:
+
+```text
+fapp0 (@comp_fapp0 Cat_cat A B C F G) x
+fapp1_fapp0 (@comp_fapp0 Cat_cat A B C F G) p
+tapp0_fapp0 ... (@comp_fapp0 (@Catd_cat K) E D C FF GG)
+```
+
+Examples of rules to delete if the generic owner already covers them after
+the alias migration:
+
+```text
+specialized identity-composition rules whose only role was
+  comp_cat_fapp0(...,id_func,...) -> ...
+
+specialized displayed identity-composition rules whose only role was
+  comp_catd_fapp0(...,id_funcd,...) -> ...
+```
+
+These deletions must be probe-confirmed.  Generic identity composition may
+cover more cases once `id_func` and `id_funcd` are transparent aliases for
+`id`.
+
+### 3. Treat pure curried Cat composition helpers as aliases
+
+The current pure object/functor-action helpers:
+
+```text
+comp_cat_cov_func
+comp_cat_cov_func_func
+comp_cat_con_func
+comp_cat_con_func_func
+```
+
+are the identity-family cases of the generic hom-action hierarchy.  The first
+stage should keep exactly that specialization:
+
+```text
+comp_cat_cov_func X Y Z G
+  := @hom_postcomp_func
+       Cat_cat Cat_cat
+       (@id Cat_cat Cat_cat)
+       X Y Z G
+
+comp_cat_cov_func_func X Y Z
+  := @hom_postcomp_tele_func
+       Cat_cat Cat_cat
+       (@id Cat_cat Cat_cat)
+       X Y Z
+
+comp_cat_con_func X Y Z F
+  := @hom_precomp_along_func
+       Cat_cat Cat_cat
+       (@id Cat_cat Cat_cat)
+       Z X Y F
+
+comp_cat_con_func_func X Y Z
+  := @hom_precomp_along_tele_func
+       Cat_cat Cat_cat
+       (@id Cat_cat Cat_cat)
+       Z X Y
+```
+
+Rules whose LHS currently mentions these helpers should be migrated to the
+corresponding `hom_postcomp_*` or `hom_precomp_along_*` head.  Some old rules
+then become direct duplicates of existing generic projection rules and should
+be deleted rather than restated.
+
+### 4. Do not introduce generalized `comp_cat*` counterparts for `hom_*`
+
+There is a natural question whether a later stage should generalize the
+`comp_cat_cov/con_*` names by adding the same functor argument that the
+generic `hom_*` hierarchy already has.
+
+For postcomposition, the useful general type is already:
+
+```text
+hom_postcomp_func Cat_cat K E W x y p
+```
+
+where:
+
+```text
+E : Functor K Cat_cat
+p : Hom_K(x,y)
+```
+
+It maps:
+
+```text
+Functor(W,E[x]) -> Functor(W,E[y]).
+```
+
+For precomposition, the useful general type is already:
+
+```text
+hom_precomp_along_func K Cat_cat E Z x y p
+```
+
+where:
+
+```text
+E : Functor K Cat_cat
+p : Hom_K(x,y)
+```
+
+It maps:
+
+```text
+Functor(E[y],Z) -> Functor(E[x],Z).
+```
+
+Therefore a generalized `comp_cat*` with an extra functor argument would
+mostly rename the generic `hom_*` API.  The default decision is:
+
+```text
+Do not add generalized comp_cat* counterparts to hom_*.
+Use hom_* directly for arbitrary Cat-valued families.
+Keep first-stage comp_cat* aliases only as the identity-family readability
+views.
+```
+
+The candidate type `F : Functor Cat_cat A` is not a Cat-composition helper in
+this sense.  It lands in an arbitrary category `A`, so it belongs to the
+generic hom-action API rather than the Cat-specific composition surface.
+
+### 5. Keep primitive heads only for extra Cat/Catd structure
+
+The following heads expose ordinary transfor or horizontal-composite
+structure that is not available from an arbitrary category:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+comp_cat_cov_func_func_transf
+comp_cat_con_func_func_transf
+comp_cat_cov_func_func_tapp1_func
+comp_cat_cov_func_func_tapp1_fapp0
+```
+
+They may remain stable heads, but their generic owners must be documented.
+For example:
+
+```text
+comp_cat_cov_transf
+  is the Cat-specialized component normal form of
+  hom_postcomp_fapp1_fapp0
+  at Cat_cat, id_Cat.
+
+comp_cat_con_transf
+  is the Cat-specialized component normal form of
+  hom_precomp_along_fapp1_fapp0
+  at Cat_cat, id_Cat.
+```
+
+The migration should prefer rules of the form:
+
+```text
+hom_postcomp_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+  -> comp_cat_cov_transf(...)
+
+hom_precomp_along_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+  -> comp_cat_con_transf(...)
+```
+
+rather than rules whose LHS first goes through a pure `comp_cat_*` alias.
+
+## Current Rule Families To Audit
+
+The first implementation pass should classify existing rules into four
+buckets.
+
+### Bucket A: delete reverse folds and alias-headed duplicates
+
+Delete or replace reverse folds from generic heads to specialized aliases:
+
+```text
+@id Cat_cat A                         -> id_func A
+@id (Catd_cat K) E                    -> id_funcd K E
+@comp_fapp0 Cat_cat ...               -> comp_cat_fapp0 ...
+@comp_fapp0 (Catd_cat K) ...          -> comp_catd_fapp0 ...
+```
+
+Also delete or replace pure alias-headed projection rules once their generic
+`hom_*` owner covers the same computation:
+
+```text
+fapp0 (comp_cat_cov_func ...) ...     -> ...
+fapp0 (comp_cat_con_func ...) ...     -> ...
+```
+
+After alias migration, the reverse folds become fold/unfold hazards, and the
+pure alias-headed projection rules duplicate generic projection rules.
+
+### Bucket B: keep specialized projections on generic heads
+
+Keep rules that express structure available only once the generic head is
+specialized to `Cat_cat` or `Catd_cat`, but rewrite their LHSs to the generic
+head:
+
+```text
+fapp0 (@id Cat_cat A) x
+fapp1_fapp0 (@id Cat_cat A) p
+
+fapp0 (@comp_fapp0 Cat_cat A B C F G) x
+fapp1_fapp0 (@comp_fapp0 Cat_cat A B C F G) p
+fapp1_func (@comp_fapp0 Cat_cat A B C F G) x y
+
+tapp0_fapp0 ... (@id (@Catd_cat K) E)
+tapp0_fapp0 ... (@comp_fapp0 (@Catd_cat K) E D C FF GG)
+```
+
+These are not duplicated generic category laws.  They are projections from a
+generic category-level arrow after the ambient category is known to be
+`Cat_cat` or `Catd_cat`.
+
+### Bucket C: retain Cat-only transfor owners
+
+Keep stable heads that own component and off-diagonal transfor structure:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+comp_cat_cov_func_func_transf
+comp_cat_con_func_func_transf
+comp_cat_cov_func_func_tapp1_func
+comp_cat_cov_func_func_tapp1_fapp0
+```
+
+Migrate their inbound owner rules from `comp_cat_*` aliases to specialized
+`hom_*` heads.  Their own projection rules such as `tapp0_fapp0`,
+`tapp1_func`, and `tapp1_fapp0` may remain headed by the stable transfor
+owner.
+
+### Bucket D: compatibility aliases and public readability names
+
+Keep public names as transparent aliases for readability when they are still
+used in comments, examples, or downstream theorem statements:
+
+```text
+id_func
+id_funcd
+comp_cat_fapp0
+comp_catd_fapp0
+comp_cat_cov_func
+comp_cat_cov_func_func
+comp_cat_con_func
+comp_cat_con_func_func
+```
+
+The rule is:
+
+```text
+Readable aliases may appear in declarations and RHSs.
+They must not be rewrite discriminators.
+```
+
+When a downstream check is meant to assert the alias spelling itself, use a
+typed `eq_refl` or an explicit compatibility theorem rather than a runtime
+rewrite rule keyed on the alias.
+
+## Proposed Implementation Phases
+
+### Phase 0: inventory and baseline probes
+
+1. Capture current quiet baseline:
+
+   ```text
+   EMDASH_TYPECHECK_TIMEOUT=60s make check
+   ```
+
+2. Capture warning baseline:
+
+   ```text
+   make warning-summary
+   ```
+
+3. Inventory all rewrite LHSs headed by:
+
+   ```text
+   id_func
+   id_funcd
+   comp_cat_fapp0
+   comp_catd_fapp0
+   comp_cat_cov_func
+   comp_cat_cov_func_func
+   comp_cat_con_func
+   comp_cat_con_func_func
+   comp_cat_cov_fapp1_func
+   comp_cat_con_fapp1_func
+   comp_cat_cov_func_func_fapp1_func
+   comp_cat_con_func_func_fapp1_func
+   ```
+
+4. For each LHS, mark one of:
+
+   ```text
+   delete as duplicate
+   migrate to id/comp_fapp0
+   migrate to hom_postcomp_*
+   migrate to hom_precomp_along_*
+   retain as Cat-only transfor projection owner
+   ```
+
+### Phase 1: identity alias probe
+
+Probe in a temporary full-file copy:
+
+```text
+id_func A     := @id Cat_cat A
+id_funcd K E  := @id (@Catd_cat K) E
+```
+
+Remove reverse folds:
+
+```text
+@id Cat_cat A -> id_func A
+@id (Catd_cat K) E -> id_funcd K E
+```
+
+Migrate essential LHSs to generic specialized identity heads.
+
+Regression checks should include:
+
+```text
+fapp0 (@id Cat_cat A) x
+fapp1_fapp0 (@id Cat_cat A) p
+tapp0_fapp0 ... (@id (@Catd_cat K) E)
+hom_precomp_along_fapp0(..., @id Cat_cat ...)
+hom_precomp_along_fapp0(..., @id (@Catd_cat K) ...)
+```
+
+### Phase 2: raw Cat/Catd composition alias probe
+
+Probe:
+
+```text
+comp_cat_fapp0 A B C F G
+  := @comp_fapp0 Cat_cat A B C F G
+
+comp_catd_fapp0 K E D C FF GG
+  := @comp_fapp0 (@Catd_cat K) E D C FF GG
+```
+
+Remove reverse folds and migrate essential rules to generic LHSs.
+
+Regression checks should include:
+
+```text
+fapp0 (@comp_fapp0 Cat_cat A B C F G) x
+fapp1_fapp0 (@comp_fapp0 Cat_cat A B C F G) p
+fapp1_func (@comp_fapp0 Cat_cat A B C F G) x y
+tapp0_fapp0 ... (@comp_fapp0 (@Catd_cat K) E D C FF GG)
+```
+
+The existing Cat-specific left-associated composition normal form should be
+audited.  If it is still semantically intended as runtime computation, keep
+it as a rule on `@comp_fapp0 Cat_cat ...`, not on `comp_cat_fapp0`.
+
+### Phase 3: pure curried Cat helper alias probe
+
+Probe transparent aliases for:
+
+```text
+comp_cat_cov_func
+comp_cat_cov_func_func
+comp_cat_con_func
+comp_cat_con_func_func
+```
+
+through the identity-family `hom_postcomp_*` and `hom_precomp_along_*`
+specializations described above.
+
+Delete object-action rules that merely duplicate:
+
+```text
+fapp0 (hom_postcomp_tele_func ...)
+fapp0 (hom_postcomp_func ...)
+fapp0 (hom_precomp_along_tele_func ...)
+fapp0 (hom_precomp_along_func ...)
+```
+
+Keep checks that prove the old public names remain readable aliases, but do
+not keep alias-headed runtime rules.
+
+### Phase 4: higher Cat transfor owner bridge probe
+
+Migrate inbound rules for:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+comp_cat_cov_func_func_transf
+comp_cat_con_func_func_transf
+```
+
+so that the LHS is the generic specialized `hom_*` owner:
+
+```text
+hom_postcomp_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+hom_precomp_along_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+hom_postcomp_tele_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+hom_precomp_along_tele_fapp1_fapp0(Cat_cat,Cat_cat,id_Cat,...)
+```
+
+The stable RHS may remain the Cat-only transfor head.  Its component
+projection rules remain the real reason the head exists.
+
+### Phase 5: diagnostics, catalog, and status updates
+
+After active-file promotion:
+
+1. Update `emdash3_2_checks.lp` to check generic-owner normal forms and public
+   alias compatibility separately.
+2. Run:
+
+   ```text
+   EMDASH_TYPECHECK_TIMEOUT=60s make check
+   make warning-summary
+   make catalog
+   ```
+
+3. For substantial source changes, run:
+
+   ```text
+   make ci
+   ```
+
+4. Update:
+
+   ```text
+   REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md
+   REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md
+   ```
+
+   only after the implementation has landed.  This dedicated report is the
+   authority for the proposed direction until then.
+
+## Probe And Warning Requirements
+
+This migration changes kernel normal forms.  It must be probe-first.
+
+For each phase:
+
+1. Use a temporary full-file copy or focused appended probe.
+2. Include a small assertion exercising the intended normal form.
+3. Run the quiet check with a timeout.
+4. Run warning-enabled comparison when a rewrite family is changed.
+5. Inspect any new nonjoinable critical pair whose top heads include:
+
+   ```text
+   id
+   comp_fapp0
+   fapp0
+   fapp1_func
+   fapp1_fapp0
+   tapp0_fapp0
+   tapp1_func
+   tapp1_fapp0
+   hom_postcomp_fapp0
+   hom_precomp_along_fapp0
+   ```
+
+Warning count is diagnostic, not a veto.  The intended gate is whether the
+new owner is semantically correct, subject-reduction safe, and needed by
+concrete consumers.
+
+## Success Criteria
+
+The migration is successful when:
+
+```text
+id_func and id_funcd are transparent aliases, not rewrite owners;
+comp_cat_fapp0 and comp_catd_fapp0 are transparent aliases, not rewrite owners;
+pure comp_cat_cov/con object-action helpers are transparent identity-family
+  views of hom_postcomp/hom_precomp;
+no rewrite LHS discriminates on those transparent aliases;
+Cat-only transfor projection heads remain only where they expose tapp0/tapp1
+  structure;
+diagnostics distinguish generic-owner normal forms from public alias
+  compatibility;
+make check passes;
+warning-summary deltas are classified.
+```
+
+## Open Questions
+
+1. Should public alias names remain indefinitely?
+
+   Current leaning: yes for readability, comments, and theorem statements,
+   but never as rewrite discriminators.
+
+2. Should generalized `comp_cat*` names be introduced for arbitrary
+   `E : Functor K Cat_cat`?
+
+   Current leaning: no.  The generic `hom_postcomp_*` and
+   `hom_precomp_along_*` APIs already express these types directly.
+
+3. Should Cat-specialized left-associated composition remain runtime?
+
+   Current leaning: preserve current runtime behavior initially, but move the
+   rule to `@comp_fapp0 Cat_cat ...`.  Reassess after warning-enabled probes.
+
+4. Should `comp_cat_cov_fapp1_func`, `comp_cat_con_fapp1_func`, and the
+   `*_func_func_fapp1_func` heads remain?
+
+   Current leaning: demote them if their only role is a functor-level wrapper
+   around the generic `hom_*_fapp1_func` owner.  Keep the capped transfor
+   heads that own `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`.
+
+## Side-Task Ledger
+
+- `CATALIAS-01`: Inventory alias-headed rewrite LHSs in active source.
+- `CATALIAS-02`: Probe transparent `id_func` / `id_funcd` aliases.
+- `CATALIAS-03`: Probe transparent `comp_cat_fapp0` / `comp_catd_fapp0`
+  aliases.
+- `CATALIAS-04`: Probe pure `comp_cat_cov/con_func*` aliases through
+  identity-family `hom_*`.
+- `CATALIAS-05`: Migrate Cat-only transfor inbound bridges to generic
+  specialized `hom_*` LHSs.
+- `CATALIAS-06`: Update diagnostics and warning inventory after promotion.

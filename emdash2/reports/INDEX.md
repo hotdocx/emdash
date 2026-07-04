@@ -45,6 +45,11 @@ decisions.
   proposed subplan for the `UNI-DEFISO` migration: stable hom-action owners,
   generic `hom_int` precomposition, Cat-specialized owner cleanup, and
   factoring `ProfComparison` through `DefIso`.
+- `REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`:
+  dedicated proposed subplan for demoting pure `Cat_cat`/`Catd_cat`
+  specialized identity, composition, and curried-composition helpers to
+  transparent aliases over generic `id`, `comp_fapp0`, and `hom_*` owners,
+  while retaining Cat-only transfor projection heads.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
