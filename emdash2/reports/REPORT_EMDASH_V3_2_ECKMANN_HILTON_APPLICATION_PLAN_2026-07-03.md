@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; full EH proof shape succeeds in an owner-position full-file probe with two runtime identity bridges; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; runtime identity bridges for `tapp1_fapp0(...,id)` and identity precomposition on 2-cells promoted; compact Eckmann-Hilton aliases, shared-middle lemmas, and `EH_comm` are promoted in `emdash3_2.lp`; broader textbook four-cell interchange and polished surface syntax remain follow-up work
 
 ## Purpose
 
@@ -1266,18 +1266,19 @@ should let the final commutativity proof compare `beta · alpha` and
 one raw horizontal-composition presentation to reduce directly to vertical
 composition globally.
 
-The current known gap is the right identity whiskering/unit:
+The key historical gap was the right identity whiskering/unit:
 
 ```text
 beta_*[1_i] = beta
 ```
 
-The existing general unification rule
-`tapp1_fapp0 epsilon id_X ≡ tapp0_fapp0 X epsilon` suggests the missing
-kernel comparison may be a stable component rule for
+The earlier general unification rule
+`tapp1_fapp0 epsilon id_X ≡ tapp0_fapp0 X epsilon` suggested that the missing
+kernel comparison might be a stable component rule for
 `tapp0_fapp0 x (hom_postcomp_tele_fapp1_fapp0 ... beta)`, or an explicit
-EH-local proof over that component. This should be investigated separately
-before adding a broad `EH_hcomp_to_vcomp` bridge.
+EH-local proof over that component. The final promoted route replaces that
+proof-time comparison by a runtime identity-action rule at the ordinary
+`tapp1_fapp0` owner and avoids adding a broad `EH_hcomp_to_vcomp` bridge.
 
 Follow-up probes refined this diagnosis. The comparison
 
@@ -1549,18 +1550,17 @@ This identity-specialized probe is superseded by the promoted fully general
 endpoint/component package. It remains useful historical evidence that the
 identity case was the first concrete EH pressure point.
 
-The actual EH right unit still does not follow by a single `eq_refl` from that
-component bridge alone:
+Before the final identity bridges were promoted, the actual EH right unit did
+not follow by a single `eq_refl` from the component bridge alone:
 
 ```text
 tmp/probes/hom_postcomp_tele_tapp0_identity_unif_eh_unit_probe.lp
 ```
 
-This is expected because the existing
+This was expected because the then-existing
 `tapp1_fapp0 epsilon id_X ≡ tapp0_fapp0 X epsilon` rule and the new component
-bridge do not compose transitively as proof search. In addition, identity
-precomposition on 2-cells is itself only statement-formable today, not
-reflexive:
+bridge did not compose transitively as proof search. In addition, identity
+precomposition on 2-cells was itself only statement-formable, not reflexive:
 
 ```text
 hom_precomp_along_fapp1_fapp0(id_X, alpha) = alpha
@@ -1572,15 +1572,15 @@ Probe:
 tmp/probes/hom_precomp_along_fapp1_identity_action_probe.lp
 ```
 
-The next proof-oriented subgoal should now use the promoted component
-computation and focus on the remaining identity-action comparison:
+The follow-up proof-oriented subgoal therefore focused on the remaining
+identity-action comparison:
 
 ```text
 hom_precomp_along_fapp1_fapp0(id_X, alpha) = alpha
 ```
 
-If the EH proof still needs a bridge here, prefer another focused,
-owner-position probe before adding a global runtime rule.
+That comparison is now solved by the promoted runtime rule at the
+`hom_precomp_along_fapp1_fapp0` owner.
 
 Follow-up EH proof probes confirm the remaining shape precisely:
 
@@ -1588,22 +1588,22 @@ Follow-up EH proof probes confirm the remaining shape precisely:
 tmp/probes/eckmann_hilton_current_reflexivity_probe.lp
 ```
 
-shows that the left horizontal unit
+showed that the left horizontal unit
 
 ```text
 hcomp(1_i, alpha) = alpha
 ```
 
-is reflexive in the active kernel, while the right unit
+was reflexive in the active kernel, while the right unit
 
 ```text
 hcomp(beta, 1_i) = beta
 ```
 
-is not reflexive yet. Adding only the precomposition identity-action rule is
-not enough, because the active `tapp1_fapp0(epsilon,id)` comparison is still
-proof-time-only and does not compose transitively with later runtime
-component reduction.
+was not reflexive yet. Adding only the precomposition identity-action rule was
+not enough, because the active `tapp1_fapp0(epsilon,id)` comparison was still
+proof-time-only and did not compose transitively with later runtime component
+reduction.
 
 The following scratch probe adds two local runtime identity bridges:
 
@@ -1618,7 +1618,9 @@ Probe:
 tmp/probes/eckmann_hilton_right_unit_runtime_identity_bridges_probe.lp
 ```
 
-With those local bridges, `hcomp(beta,1_i) = beta` closes by `eq_refl`.
+With those local bridges, `hcomp(beta,1_i) = beta` closed by `eq_refl`. Those
+bridges are now promoted, so the right unit lemma is active as
+`EH_hcomp_right_unit`.
 
 The complete degenerate-interchange/EH proof shape then checks in:
 
@@ -1676,8 +1678,8 @@ identity-bridge full-file probe: 1428 warning lines
 delta:                            +19 warning lines
 ```
 
-The warning delta is diagnostic, not a veto. It should be recorded if the
-bridges are promoted.
+The warning delta is diagnostic, not a veto. It is recorded here because the
+bridges are now promoted.
 
 Statement-only EH surfaces were then probed without adding proofs or axioms
 to the active kernel. The scratch surface defines:
@@ -1847,113 +1849,74 @@ Current implementation status:
 the ordinary-transfor component route succeeded in the superseded
 post-`3f9ee5f` attempt but is not active. No whole-transfor interchange
 theorem has been promoted. The arbitrary-hom representable pre-configured
-diagnostic now computes by conversion, and the next implementation target is
-the reviewer-facing theorem over that surface.
+diagnostic computes by conversion, and the reviewer-facing theorem over that
+surface is promoted as `hom_postcomp_representable_interchange_eq`. The
+compact EH proof specializes that theorem through shared-middle lemmas. The
+remaining Phase 2 work is the broader arbitrary-hom/textbook four-cell
+interchange theorem, not the degenerate EH specialization.
 
 Do not add a four-cell interchange rewrite rule merely because the direct
 `eq_refl` candidates fail. The component probe shows ordinary mathematical
 proof obligations, not yet a proof that runtime normalization should choose
 one side as canonical.
 
-### Phase 3: Reviewer-Facing Computation Lemmas
+### Phase 3: Compact Reviewer-Facing EH Slice
 
-Add a new subsection under applications in `emdash3_2.lp`, after the current
-path-induction/transitivity examples unless a later reorganization plan chooses
-a separate examples module.
+Status: complete for the compact, pre-configured EH application.
 
-Promote only the `eq_refl` lemmas already validated:
+The promoted reviewer-facing layer in `emdash3_2.lp` now includes:
 
 - `EH_2End`
 - `EH_vcomp`
-- `EH_identity_postcomp`
-- `EH_identity_whisker`
+- `EH_one`
+- `EH_hcomp`
+- `EH_hcomp_left_unit`
+- `EH_hcomp_right_unit`
+- `EH_vcomp_to_shared_middle`
+- `EH_swapped_vcomp_to_shared_middle`
+- `EH_comm`
 
-Add corresponding concise comments explaining the EH reading.
+`EH_hcomp` is intentionally a transparent alias over the represented
+postcomposition/off-diagonal action owners. It is not a new primitive
+horizontal-composition operator.
 
-Add diagnostic assertions to `emdash3_2_checks.lp` only for regression
-coverage of the promoted computations, and regenerate the catalog if new
-checks are added.
+### Phase 4: Completed Infrastructure Decision
 
-### Phase 4: Horizontal Composition Facade
-
-Add `EH_hcomp_raw` as a transparent alias over the current hom-action owners.
-
-Run compute probes for:
-
-- `EH_hcomp_raw beta alpha`
-- `EH_vcomp beta alpha`
-- left and right horizontal unit candidates
-- the existing representable interchange specialized to `x`
-
-Do not add a runtime rule yet.
-
-### Phase 5: Proof-Term Attempt
-
-Try to prove:
+The local EH-only `tapp1_fapp0(...hom_postcomp_tele...,alpha) -> beta · alpha`
+bridge was not promoted. The accepted infrastructure is instead:
 
 ```text
-EH_hcomp_to_vcomp
+tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
+hom_precomp_along_fapp1_fapp0(id_X,alpha) -> alpha
 ```
 
-using:
+These are general identity-action computations at the established ordinary
+transfor and precomposition owners. They make the horizontal unit comparisons
+reflexive without adding an ad hoc EH-local horizontal-to-vertical bridge.
 
-- `eq_trans`
-- `eq_sym`
-- `eq_ap`
-- existing `EH_identity_*` lemmas
-- existing naturality/interchange computation from the full-naturality layer
+### Phase 5: Current Eckmann-Hilton Theorem
 
-If this succeeds without new rules, proceed to `EH_comm`.
-
-If it fails at the known normal-form gap, record the exact stuck goal in this
-report before considering kernel infrastructure.
-
-### Phase 6: Infrastructure Decision Point
-
-Only after Phase 5 fails, choose one:
-
-1. Keep `EH_hcomp_to_vcomp` as explicit non-reflexive evidence with a more
-   detailed proof term.
-2. Add a proof-time `unif_rule` if the comparison is intended only for proof
-   elaboration and not runtime normalization.
-3. Add a runtime bridge if the comparison is the intended computational normal
-   form.
-4. Add a more general stable owner if the raw bridge is too ad hoc.
-
-Candidate runtime bridge from the probe:
-
-```text
-tapp1_fapp0
-  (id_func (Hom_cat B x x))
-  (id_func (Hom_cat B x x))
-  (hom_postcomp_tele_fapp1_fapp0 B B id_B x x x id_x id_x beta)
-  alpha
-  -> comp_fapp0 (Hom_cat B x x) id_x id_x id_x beta alpha
-```
-
-This exact bridge is not currently approved. Before promotion:
-
-- install it in a temporary full-file copy at the intended owning position;
-- run quiet and warning-enabled full checks;
-- compare warning counts and first-warning families;
-- inspect decision-tree impact if needed;
-- test both owner-first and projection-first reduction paths;
-- document any remaining overlap family in this report.
-
-### Phase 7: Eckmann-Hilton Theorem
-
-Implement `EH_comm` as a proof-term chain. It should be readable enough that a
-reviewer can see the Eckmann-Hilton argument:
+`EH_comm` is implemented as a proof-term chain:
 
 ```text
 vertical
-  = horizontal
-  = interchange with units
-  = horizontal in the opposite order
-  = vertical in the opposite order
+  = shared horizontal middle
+  = swapped vertical
 ```
 
-Prefer small named lemmas over one giant `eq_trans` term.
+The two comparisons with the shared middle are direct instances of
+`hom_postcomp_representable_interchange_eq`, with identity 1-cells and
+identity/unit 2-cells chosen so computation removes the degenerate structure.
+
+### Phase 6: Next Roadmap
+
+The next implementation work should not reprove compact EH. It should either:
+
+1. polish the surface syntax/comments around `EH_hcomp` and the shared-middle
+   lemmas; or
+2. return to Phase 2 and generalize from the promoted
+   `hom_postcomp_representable_interchange_eq` to the broader arbitrary-hom or
+   textbook four-cell interchange theorem.
 
 ## Side-Task Ledger
 
@@ -2072,8 +2035,8 @@ stable endpoint projection had already normalized.
 ### EH-HCOMP-JOIN
 
 Trigger:
-`EH_hcomp_to_vcomp` cannot be proved without identifying the raw horizontal
-normal form with vertical composition.
+the original `EH_hcomp_to_vcomp` idea could not be proved by asking the raw
+horizontal normal form to reduce directly to vertical composition.
 
 Required audit:
 classify whether the join belongs to `tapp1_fapp0`, to the postcomposition
@@ -2081,7 +2044,13 @@ telescope higher-action owner, to a new EH-local facade, or only to proof-time
 equality.
 
 Status:
-open; temporary imported bridge succeeds but adds 12 warning reports.
+complete for the compact EH theorem. The EH-local raw horizontal-to-vertical
+bridge was not promoted. Instead, two general identity-action rules make the
+left and right horizontal unit comparisons reflexive, and the theorem passes
+through the shared middle supplied by
+`hom_postcomp_representable_interchange_eq`. A broader non-degenerate
+horizontal-composition facade remains future surface-syntax work, not a
+blocker for `EH_comm`.
 
 ### EH-INTERCHANGE-THEOREM
 
@@ -2129,9 +2098,9 @@ Status:
 partially complete. Whole-transfor equality remains deferred without
 extensionality. The arbitrary-hom representable pre-configured interchange
 diagnostic computes by conversion in `emdash3_2_checks.lp`, and the
-reviewer-facing equality theorem is promoted in `emdash3_2.lp`. The next
-target is to specialize that theorem toward Eckmann-Hilton and resolve the
-right-identity whiskering/component gap.
+reviewer-facing equality theorem is promoted in `emdash3_2.lp`. The
+Eckmann-Hilton specialization is now complete through `EH_comm`. The remaining
+target is the broader arbitrary-hom/textbook four-cell interchange theorem.
 
 ### EH-SURFACE-SYNTAX
 
@@ -2143,7 +2112,9 @@ add transparent aliases only; no semantic duplication and no helper alias with
 a copied body that bypasses the named owner.
 
 Status:
-open.
+partially complete. The compact EH aliases `EH_one`, `EH_hcomp`, and the
+shared-middle lemmas are promoted, but the broader notation layer for
+horizontal composition remains open.
 
 ## Implementation Log
 
@@ -2477,8 +2448,8 @@ reflexivity:
 hcomp(1_i, alpha) = alpha
 ```
 
-The right horizontal unit requires two local identity bridges in the scratch
-probe:
+The right horizontal unit originally required two local identity bridges in the
+scratch probe:
 
 ```text
 tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
@@ -2506,12 +2477,49 @@ where both equalities to the shared middle are instantiated
 representable-interchange lemmas, and the final step uses `eq_sym`.
 
 Conclusion:
-the EH application is now feasible as an implementation task. The
-owner-position probe for the two runtime identity bridges passes quietly and
-warning-enabled, with a `+19` single-file warning-line delta over the active
-component baseline. The next kernel work is to promote those bridges as
-general infrastructure, document the warning delta, then move the compact EH
-aliases/shared-middle lemmas/`EH_comm` proof into `emdash3_2.lp`.
+the compact EH application is implemented in the active kernel. The
+owner-position probe for the two runtime identity bridges passed quietly and
+warning-enabled, with a `+19` single-file critical-pair warning-line delta
+over the active component baseline. The active promotion installs the bridges
+as general infrastructure and adds the compact EH aliases, shared-middle
+lemmas, and `EH_comm` proof to `emdash3_2.lp`.
+
+Promoted runtime identity bridges:
+
+```text
+tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
+hom_precomp_along_fapp1_fapp0(id_X,alpha) -> alpha
+```
+
+Promoted EH proof surface:
+
+```text
+EH_one
+EH_hcomp
+EH_hcomp_left_unit
+EH_hcomp_right_unit
+EH_vcomp_to_shared_middle
+EH_swapped_vcomp_to_shared_middle
+EH_comm
+```
+
+Active validation after promotion:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check      passed
+EMDASH_TYPECHECK_TIMEOUT=60s make examples   passed
+python3 scripts/audit_rule_lhs.py --show-kept passed
+make warning-summary                         passed
+EMDASH_TYPECHECK_TIMEOUT=60s make ci         passed
+```
+
+The current warning summary is:
+
+```text
+1600 total warnings
+1428 unjoinable critical pair
+ 172 replaceable pattern variable
+```
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 

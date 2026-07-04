@@ -3747,6 +3747,20 @@ rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
+// Precomposition along an identity base arrow acts as the identity on 2-cells.
+rule @hom_precomp_along_fapp1_fapp0
+      $A
+      $B
+      $F
+      $Z
+      $X
+      $X
+      (@id $A $X)
+      $g
+      $k
+      $alpha
+  ↪ $alpha;
+
 // Identity 2-cell under precomposition maps to the identity at the stable
 // precomposition object action.
 rule @hom_precomp_along_fapp1_fapp0
@@ -5316,6 +5330,10 @@ rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
 rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
+// Off-diagonal action at an identity base arrow is the ordinary component.
+rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
+  ↪ @tapp0_fapp0 $A $B $F $G $X $ϵ;
+
 // Off-diagonal vertical-composite folds for ordinary transfors.
 rule @comp_fapp0
       $B
@@ -5503,13 +5521,6 @@ rule comp_fapp0
       (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
       (@fapp1_fapp0 $A $B $F $X0 $X $g)
   ↪ tapp1_fapp0 $ϵ (comp_fapp0 $f $g);
-
-// Arrow-indexed component at an identity base arrow is definitionally usable as
-// the ordinary diagonal component, without rewriting away the stable
-// `tapp1_fapp0` head.
-unif_rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
-  ≡ @tapp0_fapp0 $A $B $F $G $X $ϵ
-  ↪ [ tt ≡ tt ];
 
 // Cat-valued object-level projections of strict naturality. Both composites
 // fold to the off-diagonal component at the base arrow.
@@ -13019,6 +13030,121 @@ symbol EH_vcomp_alias
       (@id B x)
       beta
       alpha);
+
+// Horizontal unit 2-cell for the identity 1-cell.
+symbol EH_one
+  [B : Cat]
+  (x : τ (Obj B))
+  : τ (Obj (@EH_2End B x))
+≔ @id (Hom_cat B x x) (@id B x);
+
+// Pre-configured horizontal composition of two 2-endomorphisms, expressed as
+// represented postcomposition action. This is the computational surface used
+// by the Eckmann-Hilton proof rather than a separate primitive hcomp.
+symbol EH_hcomp
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta alpha : τ (Obj (@EH_2End B x)))
+  : τ (Obj (@EH_2End B x))
+≔ @tapp1_fapp0
+    (Hom_cat B x x)
+    (Hom_cat B x x)
+    (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+    (@hom_postcomp_func B B (@id_func B) x x x (@id B x))
+    (@id B x)
+    (@id B x)
+    (@hom_postcomp_tele_fapp1_fapp0
+      B B (@id_func B) x x x (@id B x) (@id B x) beta)
+    alpha;
+
+symbol EH_hcomp_left_unit
+  [B : Cat]
+  (x : τ (Obj B))
+  (alpha : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_hcomp B x (@EH_one B x) alpha
+      =
+      alpha)
+≔ eq_refl alpha;
+
+symbol EH_hcomp_right_unit
+  [B : Cat]
+  (x : τ (Obj B))
+  (beta : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_hcomp B x beta (@EH_one B x)
+      =
+      beta)
+≔ eq_refl beta;
+
+// First shared-middle equality for the Eckmann-Hilton chain:
+//   beta · alpha = beta * alpha.
+symbol EH_vcomp_to_shared_middle
+  [B : Cat]
+  (x : τ (Obj B))
+  (alpha beta : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_vcomp B x beta alpha
+      =
+      @EH_hcomp B x beta alpha)
+≔ @hom_postcomp_representable_interchange_eq
+    B
+    x
+    x
+    x
+    (@id B x)
+    (@id B x)
+    (@id B x)
+    (@EH_one B x)
+    beta
+    (@id B x)
+    (@id B x)
+    (@id B x)
+    alpha
+    (@EH_one B x);
+
+// Second shared-middle equality:
+//   alpha · beta = beta * alpha.
+symbol EH_swapped_vcomp_to_shared_middle
+  [B : Cat]
+  (x : τ (Obj B))
+  (alpha beta : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_vcomp B x alpha beta
+      =
+      @EH_hcomp B x beta alpha)
+≔ @hom_postcomp_representable_interchange_eq
+    B
+    x
+    x
+    x
+    (@id B x)
+    (@id B x)
+    (@id B x)
+    beta
+    (@EH_one B x)
+    (@id B x)
+    (@id B x)
+    (@id B x)
+    (@EH_one B x)
+    alpha;
+
+// Eckmann-Hilton commutativity for 2-endomorphisms of an identity 1-cell.
+symbol EH_comm
+  [B : Cat]
+  (x : τ (Obj B))
+  (alpha beta : τ (Obj (@EH_2End B x)))
+  : τ (
+      @EH_vcomp B x beta alpha
+      =
+      @EH_vcomp B x alpha beta)
+≔ @eq_trans
+    (Hom (Hom_cat B x x) (@id B x) (@id B x))
+    (@EH_vcomp B x beta alpha)
+    (@EH_hcomp B x beta alpha)
+    (@EH_vcomp B x alpha beta)
+    (@EH_vcomp_to_shared_middle B x alpha beta)
+    (eq_sym (@EH_swapped_vcomp_to_shared_middle B x alpha beta));
 
 // -------------------------------------------------------------------------------------------------
 // 20. Check catalog
