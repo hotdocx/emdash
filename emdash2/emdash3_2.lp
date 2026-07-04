@@ -1554,16 +1554,11 @@ symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E)
 
 // Displayed-functor composition.
 symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)] [C : τ (Catd K)]
-  (FF : τ (Functord D C)) (GG : τ (Functord E D)) : τ (Functord E C);
+  (FF : τ (Functord D C)) (GG : τ (Functord E D)) : τ (Functord E C)
+≔ @comp_fapp0 (@Catd_cat K) E D C FF GG;
 
-// Stable displayed-composition head, parallel to `comp_cat_fapp0`.
-rule @comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG
-  ↪ @comp_catd_fapp0 $K $E $D $C $FF $GG;
-
-rule @comp_catd_fapp0 $K $E $E $C $FF (@id (@Catd_cat $K) $E)
-  ↪ $FF;
-rule @comp_catd_fapp0 $K $E $D $D (@id (@Catd_cat $K) $D) $GG
-  ↪ $GG;
+// Displayed-composition identity units are inherited from generic
+// `comp_fapp0` at `Catd_cat K`.
 
 // Canonical Catd specialization of the global strict-functor identity cut.
 // This is generic for every functor out of Catd_cat; individual functor
@@ -1580,8 +1575,9 @@ rule @fapp1_fapp0
 // Canonical Catd specialization of the global strict-functor composition
 // cut. The three family endpoints are inferred from the two arrow actions;
 // keeping them implicit lets this rule survive object-action normalization.
-rule @comp_catd_fapp0
-      $K
+// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed-functor action.
+rule @comp_fapp0
+      (@Catd_cat $K)
       _ _ _
       (@fapp1_fapp0
         $A (@Catd_cat $K) $F $Y $Z $g)
@@ -1655,23 +1651,24 @@ rule @fapp1_fapp0 $A $A (@id Cat_cat $A) $x $y $p ↪ $p;
 
 // Stable composition head: comp_cat_fapp0(F,G) = F ∘ G.
 symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
-  (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C);
+  (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C)
+≔ @comp_fapp0 Cat_cat A B C F G;
 
-// Cat_cat composition folds and point/arrow actions of composed functors.
-rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
-rule @comp_cat_fapp0 $A $B $B (@id Cat_cat $B) $F ↪ $F;
-rule @comp_cat_fapp0 $A $A $C $F (@id Cat_cat $A) ↪ $F;
+// Cat_cat composition point/arrow actions of composed functors. Identity
+// units are inherited from generic `comp_fapp0` at `Cat_cat`.
 // Canonical left-associated normal form for iterated functor composition.
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       $A $C $E
       $H
-      (@comp_cat_fapp0 $A $B $C $G $F)
-  ↪ @comp_cat_fapp0
+      (@comp_fapp0 Cat_cat $A $B $C $G $F)
+  ↪ @comp_fapp0
+      Cat_cat
       $A $B $E
-      (@comp_cat_fapp0 $B $C $E $H $G)
+      (@comp_fapp0 Cat_cat $B $C $E $H $G)
       $F;
-rule @fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
-rule @fapp1_fapp0 $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y $f
+rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
+rule @fapp1_fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y $f
   ↪ @fapp1_fapp0
       $B
       $C
@@ -2350,7 +2347,7 @@ rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
 
 // Opposite preserves identity and ordinary functor composition.
 rule @Op_func _ _ (@id Cat_cat $A) ↪ @id Cat_cat (Op_cat $A);
-rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
+rule @Op_func _ _ (@comp_fapp0 Cat_cat $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
 
 // Terminal category and points-as-functors are needed to derive unary homs from
@@ -2404,9 +2401,9 @@ rule @fapp1_func $A $B (@Const_func $A $B $b) $x $y
 rule @fapp1_fapp0 $A $B (@Const_func $A $B $b) $x $y $_ ↪ @id $B $b;
 rule @Op_func $A $B (@Const_func $A $B $b)
   ↪ @Const_func (Op_cat $A) (Op_cat $B) $b;
-rule @comp_cat_fapp0 $A $B $C $F (@Const_func $A $B $b)
+rule @comp_fapp0 Cat_cat $A $B $C $F (@Const_func $A $B $b)
   ↪ @Const_func $A $C (@fapp0 $B $C $F $b);
-rule @comp_cat_fapp0 $A $B $C (@Const_func $B $C $c) $G
+rule @comp_fapp0 Cat_cat $A $B $C (@Const_func $B $C $c) $G
   ↪ @Const_func $A $C $c;
 
 // Point object as a functor from the terminal category.
@@ -2670,7 +2667,8 @@ rule @hom_postcomp_func $A $B $F $W $X $X (@id $B $X)
 rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
   ↪ $g;
 
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       _ _ _
       (@hom_postcomp_func $A $B $F $W $Y $Z $q)
       (@hom_postcomp_func $A $B $F $W $X $Y $p)
@@ -3005,7 +3003,8 @@ rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
       (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f);
 
 unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
-  ≡ @comp_cat_fapp0
+  ≡ @comp_fapp0
+      Cat_cat
       $W
       (@fapp0 Cat_cat Cat_cat $E $X)
       (@fapp0 Cat_cat Cat_cat $E $Y)
@@ -3048,7 +3047,7 @@ unif_rule @hom_postcomp_fapp0
     (@Catd_cat $K)
     (@id Cat_cat (@Catd_cat $K))
     $E $D $C $FF $GG
-  ≡ @comp_catd_fapp0 $K $E $D $C $FF $GG
+  ≡ @comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG
   ↪ [ tt ≡ tt ];
 
 rule @hom_postcomp_fapp0
@@ -3062,8 +3061,9 @@ rule @hom_postcomp_fapp0
       $r
   ↪ $r;
 
-rule @comp_catd_fapp0
-      $K
+// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed postcomposition.
+rule @comp_fapp0
+      (@Catd_cat $K)
       $S
       $R
       $Q
@@ -3158,16 +3158,19 @@ with @hom_postcomp_fapp0
       (@defiso_from $C $x $y $i)
   ↪ @id $C $y;
 
-rule @comp_catd_fapp0
-      $K
+// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed DefIso cancellation.
+rule @comp_fapp0
+      (@Catd_cat $K)
       $E
       $D
       $E
       (@defiso_from (@Catd_cat $K) $E $D $i)
       (@defiso_to (@Catd_cat $K) $E $D $i)
-  ↪ @id_funcd $K $E
-with @comp_catd_fapp0
-      $K
+  ↪ @id_funcd $K $E;
+
+// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed DefIso cancellation.
+rule @comp_fapp0
+      (@Catd_cat $K)
       $D
       $E
       $D
@@ -3439,7 +3442,8 @@ rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
 rule @hom_precomp_along_fapp0 $A $B $F $Z $X $X (@id $A $X) $g
   ↪ $g;
 
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       _ _ _
       (@hom_precomp_along_func $A $B $F $Z $W $X $p)
       (@hom_precomp_along_func $A $B $F $Z $X $Y $q)
@@ -4051,21 +4055,26 @@ rule @fapp1_fapp0
       (sigma_Snd $h)
       (sigma_Fst $h);
 
-rule @comp_cat_fapp0
-      _
-      _
-      _
+// lhs-audit: keep 2,3,4 -- product source/middle/target categories guard the symmetry involution rule.
+rule @comp_fapp0
+      Cat_cat
+      (Product_cat $A $B)
+      (Product_cat $B $A)
+      (Product_cat $A $B)
       (@Product_swap_func $B $A)
       (@Product_swap_func $A $B)
   ↪ @id_func (Product_cat $A $B);
 
 // Pulling an arbitrary functor back along product symmetry twice is neutral
 // in the canonical left-associated composition normal form.
-rule @comp_cat_fapp0
-      _
-      _
+// lhs-audit: keep 2,3 -- product source/middle categories guard the symmetry-involution pullback rule.
+rule @comp_fapp0
+      Cat_cat
+      (Product_cat $A $B)
+      (Product_cat $B $A)
       $C
-      (@comp_cat_fapp0
+      (@comp_fapp0
+        Cat_cat
         (Product_cat $B $A)
         (Product_cat $A $B)
         $C
@@ -5197,7 +5206,8 @@ unif_rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
       (Functor_cat
         (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
         (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_cat_fapp0
+      (@comp_fapp0
+        Cat_cat
         (Functor_cat $W $X)
         (Functor_cat
           (@fapp0 Cat_cat Cat_cat $E $W)
@@ -5220,7 +5230,8 @@ unif_rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H 
       (Functor_cat
         (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
         (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_cat_fapp0
+      (@comp_fapp0
+        Cat_cat
         (Functor_cat $W $X)
         (Functor_cat
           (@fapp0 Cat_cat Cat_cat $E $W)
@@ -5469,10 +5480,14 @@ symbol hom_postcomp_representable_interchange_eq
 // pattern variable. Typing forces it to be F[X], but this lets the rule still
 // match when F[X] has already reduced, as in representable postcomposition
 // regressions.
-rule comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
       (@hom_postcomp_func $B $A $G $FX $Y $Z $g)
       (@tapp1_func $A $B $F $G $X $Y $ϵ)
-  ↪ comp_cat_fapp0
+  ↪ @comp_fapp0
+      Cat_cat
+      _ _ _
       (@tapp1_func $A $B $F $G $X $Z $ϵ)
       (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
 
@@ -5482,27 +5497,39 @@ rule comp_cat_fapp0
 // `hom_precomp_along_func` is the stable projection for the left functor. The
 // raw semantic owner over opposites folds to this head above, so the
 // accumulation rule does not need to expose `hom_`/`Op_func` internals.
-rule comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
       (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $G $Y) $W $X $h)
       (@tapp1_func $A $B $F $G $X $Y $ϵ)
-  ↪ comp_cat_fapp0
+  ↪ @comp_fapp0
+      Cat_cat
+      _ _ _
       (@tapp1_func $A $B $F $G $W $Y $ϵ)
       (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
 
 // Full strict functoriality for ordinary functors. These are first-class
 // single-functor accumulation rules; they are distinct from the later rule for
 // the hom-action of a composite functor F ∘ G.
-rule comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
       (@hom_postcomp_func $B $A $F $FX $Y $Z $g)
       (@fapp1_func $A $B $F $X $Y)
-  ↪ comp_cat_fapp0
+  ↪ @comp_fapp0
+      Cat_cat
+      _ _ _
       (@fapp1_func $A $B $F $X $Z)
       (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
 
-rule comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
       (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $F $Y) $W $X $h)
       (@fapp1_func $A $B $F $X $Y)
-  ↪ comp_cat_fapp0
+  ↪ @comp_fapp0
+      Cat_cat
+      _ _ _
       (@fapp1_func $A $B $F $W $Y)
       (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
 
@@ -5900,7 +5927,8 @@ rule @fapp1_fapp0 _ _
 //
 // Surface/formula:
 //   Eval_func ∘ Eval_at_func(x) = fapp0_func(x).
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       _
       _
       $B
@@ -6441,7 +6469,7 @@ rule @fapp0 _ _
   specializations have been declared.
 */
 unif_rule
-  @comp_cat_fapp0 $A $B Cat_cat $E $F
+  @comp_fapp0 Cat_cat $A $B Cat_cat $E $F
   ≡ @Pullback_catd $A $B $E $F
   ↪ [ tt ≡ tt ];
 
@@ -6455,7 +6483,8 @@ unif_rule
 rule @fapp1_fapp0
       (Op_cat Cat_cat)
       Cat_cat
-      (@comp_cat_fapp0
+      (@comp_fapp0
+        Cat_cat
         (Op_cat Cat_cat)
         (Catd_cat Cat_cat)
         Cat_cat
@@ -6497,7 +6526,7 @@ rule @tapp0_fapp0
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
-rule @comp_cat_fapp0 $A $B Cat_cat (@Const_catd $B $C) $F
+rule @comp_fapp0 Cat_cat $A $B Cat_cat (@Const_catd $B $C) $F
   ↪ @Const_catd $A $C;
 rule @Pullback_catd $A $B (@Const_catd $B $C) $F
   ↪ @Const_catd $A $C;
@@ -6530,7 +6559,7 @@ injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 rule @fapp0 _ _ (@Op_catd_func $K) $E
   ↪ @Op_catd $K $E;
 
-rule @comp_cat_fapp0 $K Cat_cat Cat_cat op $E
+rule @comp_fapp0 Cat_cat $K Cat_cat Cat_cat op $E
   ↪ @Op_catd $K $E;
 rule @Pullback_catd $K Cat_cat op $E
   ↪ @Op_catd $K $E;
@@ -6575,8 +6604,9 @@ rule @tapp0_fapp0
 // functor projects to the ordinary composite of fibre functors.
 rule @tapp0_fapp0
       $K Cat_cat $E $C $x
-      (@comp_catd_fapp0 $K $E $D $C $FF $GG)
-  ↪ @comp_cat_fapp0
+      (@comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG)
+  ↪ @comp_fapp0
+      Cat_cat
       (Fibre_cat $E $x)
       (Fibre_cat $D $x)
       (Fibre_cat $C $x)
@@ -6920,7 +6950,8 @@ injective symbol Sigma_proj1_pullback_catd [K : Cat]
   (R D : τ (Catd K))
   : τ (Catd (@Sigma_cat K R));
 
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       _
       $K
       Cat_cat
@@ -6969,7 +7000,7 @@ rule @fapp0 _ _
       $k
       (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
 
-rule @comp_cat_fapp0 _ _ _
+rule @comp_fapp0 Cat_cat _ _ _
       (@Sigma_proj1_func $K $D)
       (@sigma_map_func $K $E $D $η)
   ↪ @Sigma_proj1_func $K $E;
@@ -9110,8 +9141,9 @@ rule @tapp0_fapp0
 // instead of falling back to capped `fapp1_fapp0` computation only.
 rule @fapp1_func $A $A (@id Cat_cat $A) $x $y ↪ @id Cat_cat (Hom_cat $A $x $y);
 
-rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
-  ↪ @comp_cat_fapp0
+rule @fapp1_func $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y
+  ↪ @comp_fapp0
+      Cat_cat
       (Hom_cat $A $x $y)
       (Hom_cat $B
         (@fapp0 $A $B $G $x)
@@ -10319,16 +10351,17 @@ rule @Prof_reindex_transf
         (Product_cat (Op_cat $A2) $B2))
       (@Prof_reindex $A $A2 $B $B2 $R $F $G);
 
-rule @comp_catd_fapp0
-      _
+// lhs-audit: keep 1 -- target Prof_reindex_transf lives over this explicit reindexed product base.
+rule @comp_fapp0
+      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
       _ _ _
       (@Prof_reindex_transf $A $A2 $B $B2 $S $T $s $F $G)
       (@Prof_reindex_transf $A $A2 $B $B2 $R $S $r $F $G)
   ↪ @Prof_reindex_transf
       $A $A2 $B $B2
       $R $T
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat $A) $B)
+      (@comp_fapp0
+        (@Catd_cat (Product_cat (Op_cat $A) $B))
         $R $S $T
         $s $r)
       $F $G;
@@ -12174,14 +12207,16 @@ symbol join_elim_cross_transf [A B E : Cat]
 rule @join_elim_cross_transf $A $B $E $first $second $cross
   ↪ $cross;
 
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       $A
       _
       $E
       (@join_elim_func $A $B $E $first $second $cross)
       (@join_fst_func $A $B)
   ↪ $first
-with @comp_cat_fapp0
+with @comp_fapp0
+      Cat_cat
       $B
       _
       $E
@@ -12204,7 +12239,8 @@ with @comp_cat_fapp0
 // opaque product object that would require the rejected broad product eta law.
 
 // Runtime accumulation of Cat-valued pullback through outer composition.
-rule @comp_cat_fapp0
+rule @comp_fapp0
+      Cat_cat
       $A
       $B
       Cat_cat
@@ -12214,18 +12250,20 @@ rule @comp_cat_fapp0
       $A
       $C
       $E
-      (@comp_cat_fapp0 $A $B $C $F $H);
+      (@comp_fapp0 Cat_cat $A $B $C $F $H);
 
-rule @comp_cat_fapp0
-      _
-      _
-      _
+// lhs-audit: keep 2,3,4 -- product source/middle/target categories guard componentwise product-map composition.
+rule @comp_fapp0
+      Cat_cat
+      (Product_cat $A0 $B0)
+      (Product_cat $A1 $B1)
+      (Product_cat $A2 $B2)
       (@Product_map_func $A1 $A2 $B1 $B2 $F12 $G12)
       (@Product_map_func $A0 $A1 $B0 $B1 $F01 $G01)
   ↪ @Product_map_func
       $A0 $A2 $B0 $B2
-      (@comp_cat_fapp0 $A0 $A1 $A2 $F12 $F01)
-      (@comp_cat_fapp0 $B0 $B1 $B2 $G12 $G01);
+      (@comp_fapp0 Cat_cat $A0 $A1 $A2 $F12 $F01)
+      (@comp_fapp0 Cat_cat $B0 $B1 $B2 $G12 $G01);
 
 /*
   Product-map identity comparisons.

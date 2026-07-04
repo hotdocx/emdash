@@ -1979,10 +1979,10 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
   this file. The current runtime owners are the stable hom-precomposition heads.
   A focused 2026-06-27 probe showed that adding separate
   `comp_cat_cov_fapp0` and `comp_cat_con_fapp0` heads is technically possible,
-  but architecturally wrong: `comp_cat_fapp0` is already the unique stable
-  object-action head for Cat composition. Until the telescope comparisons are
-  restated against that single owner, keep these checks out of the diagnostic
-  gate.
+  but architecturally wrong: generic `comp_fapp0` specialized at `Cat_cat` is
+  now the composition owner. Until the telescope comparisons are restated
+  against the generic owner or the Phase 3 hom-action aliases, keep these
+  checks out of the diagnostic gate.
 */
 
 // From emdash3_2.lp:994.
@@ -3895,6 +3895,36 @@ assert [A : Cat] (x y : τ (Obj A)) ⊢
   @fapp1_func A A (@id_func A) x y
     ≡ @id_func (Hom_cat A x y);
 
+// CATALIAS-03: generic `Cat_cat` composition owner, separate from public alias spelling.
+assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢
+  @comp_cat_fapp0 A B C F G ≡ @comp_fapp0 Cat_cat A B C F G;
+
+assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
+  (x : τ (Obj A)) ⊢
+  @fapp0 A C (@comp_fapp0 Cat_cat A B C F G) x
+  ≡ @fapp0 B C F (@fapp0 A B G x);
+
+assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
+  (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
+  @fapp1_fapp0 A C (@comp_fapp0 Cat_cat A B C F G) x y p
+  ≡ @fapp1_fapp0 B C F
+      (@fapp0 A B G x)
+      (@fapp0 A B G y)
+      (@fapp1_fapp0 A B G x y p);
+
+assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func A C (@comp_fapp0 Cat_cat A B C F G) x y
+  ≡ @comp_fapp0
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B G x) (@fapp0 A B G y))
+      (Hom_cat C
+        (@fapp0 B C F (@fapp0 A B G x))
+        (@fapp0 B C F (@fapp0 A B G y)))
+      (@fapp1_func B C F (@fapp0 A B G x) (@fapp0 A B G y))
+      (@fapp1_func A B G x y);
+
 // From emdash3_2.lp:6242.
 assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B))
   (x y : τ (Obj A)) ⊢
@@ -5419,6 +5449,12 @@ assert [K : Cat] (E D C : τ (Catd K))
   (GG : τ (Functord E D)) ⊢
   @comp_fapp0 (@Catd_cat K) E D C FF GG
     ≡ @comp_catd_fapp0 K E D C FF GG;
+
+// CATALIAS-03: generic `Catd_cat` composition owner, separate from public alias spelling.
+assert [K : Cat] [E D C : τ (Catd K)]
+  (FF : τ (Functord D C)) (GG : τ (Functord E D)) ⊢
+  @comp_catd_fapp0 K E D C FF GG
+  ≡ @comp_fapp0 (@Catd_cat K) E D C FF GG;
 
 // From emdash3_2.lp:7598.
 assert [K : Cat] (E C : τ (Catd K))

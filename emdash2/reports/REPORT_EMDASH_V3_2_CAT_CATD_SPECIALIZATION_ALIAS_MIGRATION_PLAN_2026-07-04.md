@@ -9,8 +9,9 @@ Supersedes: no whole report; refines and corrects the Cat-specialized cleanup ta
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
-Status: Phase 1 identity-alias migration promoted on 2026-07-04; composition
-alias and pure curried-helper phases remain pending
+Status: Phases 1-2 identity/composition alias migrations promoted on
+2026-07-04; pure curried-helper and Cat-only transfor bridge phases remain
+pending
 
 ## Purpose
 
@@ -711,6 +712,105 @@ composition/hom-action families (`comp_fapp0`, `hom_postcomp_fapp0`,
 Phase 1 being an identity-owner normalization, not yet the raw composition
 alias migration.
 
+## Implementation Checkpoint 2026-07-04, Phase 2
+
+Phase 2 has been promoted to the active files.
+
+Implemented decisions:
+
+- `comp_cat_fapp0 A B C F G` is now a transparent alias for
+  `@comp_fapp0 Cat_cat A B C F G`.
+- `comp_catd_fapp0 K E D C FF GG` is now a transparent alias for
+  `@comp_fapp0 (@Catd_cat K) E D C FF GG`.
+- The reverse folds from generic composition into `comp_cat_fapp0` and
+  `comp_catd_fapp0` have been removed.
+- Specialized identity-unit rules for those aliases have been deleted;
+  the generic `comp_fapp0` identity-unit rules now own those reductions.
+- Cat/Catd projection and bridge rules that still require specialized
+  structure now key on generic specialized composition, for example
+  `@comp_fapp0 Cat_cat ...` and `@comp_fapp0 (@Catd_cat K) ...`.
+- The Cat left-associated functor-composition runtime rule remains active,
+  but its LHS/RHS now use `@comp_fapp0 Cat_cat ...`.
+- Public alias spellings remain usable in definitions, theorem statements,
+  compatibility diagnostics, and RHS readability positions.
+
+The promoted source migration covered the currently active raw-composition
+LHS families, including:
+
+```text
+Cat object and arrow projections of composed functors
+Cat full hom-action projection of composed functors
+Catd displayed-functor composition action
+Op_func and constant functor composition bridges
+hom_postcomp and hom_precomp composition accumulation
+hom_postcomp_fapp0 proof-time comparison with Cat/Catd composition
+DefIso cancellation over displayed-family composition
+strict naturality accumulation over hom-action projections
+Product_swap, Product_map_func, Eval_at_func, Pullback_catd, Sigma_proj1
+  and join-elim composition cuts
+Prof_reindex_transf composition
+```
+
+One source-side repair was required after the initial probe.  The
+`Prof_reindex_transf` composition rule must keep the target displayed base
+explicit:
+
+```text
+@comp_fapp0 (@Catd_cat (Product_cat (Op_cat A2) B2)) ...
+```
+
+but it must leave the three source/middle/target profunctor endpoint slots
+inferred.  Reindexing can reduce those endpoints before the composition rule
+fires, and explicit unreduced `Prof_reindex(...)` endpoint patterns miss the
+weighted-limit pull-after-push normal form.  The earlier fully underscored
+displayed base was too weak and failed subject reduction.
+
+Post-promotion audit:
+
+```text
+No rule/with/unif_rule pre-arrow pattern in emdash3_2.lp contains
+comp_cat_fapp0 or comp_catd_fapp0.
+```
+
+Diagnostics now include generic-owner checks for:
+
+```text
+@comp_cat_fapp0 ... ≡ @comp_fapp0 Cat_cat ...
+fapp0 (@comp_fapp0 Cat_cat ...)
+fapp1_fapp0 (@comp_fapp0 Cat_cat ...)
+fapp1_func (@comp_fapp0 Cat_cat ...)
+@comp_catd_fapp0 ... ≡ @comp_fapp0 (@Catd_cat K) ...
+```
+
+Probe and validation commands run during promotion:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase2_comp.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase2_comp.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase2_prof_reindex_endpoint_probe.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/generate_check_catalog.py --strict
+make warning-summary
+```
+
+Warning-enabled results:
+
+```text
+catalias_phase2_comp probe: 1398 total warnings
+  1231 unjoinable critical pair
+   167 replaceable pattern variable
+
+active make warning-summary: 1382 total warnings
+  1215 unjoinable critical pair
+   167 replaceable pattern variable
+```
+
+This is lower than the Phase 1 active baseline of 1569 total warnings.  The
+remaining top critical-pair heads are still the known composition/hom-action
+families headed by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`,
+`fapp1_fapp0`, and related projection heads.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -757,15 +857,15 @@ warning-summary deltas are classified.
 ## Side-Task Ledger
 
 - `CATALIAS-01`: Inventory alias-headed rewrite LHSs in active source.
-  Status: complete for identity aliases; composition and curried helpers remain
-  pending.
+  Status: complete for identity and raw composition aliases; curried helpers
+  remain pending.
 - `CATALIAS-02`: Probe transparent `id_func` / `id_funcd` aliases.
   Status: promoted on 2026-07-04.
 - `CATALIAS-03`: Probe transparent `comp_cat_fapp0` / `comp_catd_fapp0`
-  aliases.  Status: pending.
+  aliases.  Status: promoted on 2026-07-04.
 - `CATALIAS-04`: Probe pure `comp_cat_cov/con_func*` aliases through
   identity-family `hom_*`.  Status: pending.
 - `CATALIAS-05`: Migrate Cat-only transfor inbound bridges to generic
   specialized `hom_*` LHSs.  Status: pending.
 - `CATALIAS-06`: Update diagnostics and warning inventory after promotion.
-  Status: complete for Phase 1.
+  Status: complete for Phases 1-2.

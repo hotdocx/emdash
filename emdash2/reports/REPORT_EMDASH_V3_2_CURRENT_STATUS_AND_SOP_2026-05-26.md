@@ -123,11 +123,11 @@ head required by generic functor identity.
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
 pullback cuts, and focused constant/opposite/Sigma-projection collapses are
-active. Broad global folds from every `comp_cat_fapp0(E,F)` or
-`comp_cat_con_func(F)` were rejected because they affected unrelated
-Cat-valued Došen cuts and increased non-joinable overlaps. The corresponding
-proof-time unification rules remain active for the broad
-`comp_cat_fapp0(E,F)` and `comp_cat_con_func(F)` comparisons. The special
+active. Broad global folds from every generic Cat composition
+`@comp_fapp0 Cat_cat E F` or `comp_cat_con_func(F)` were rejected because
+they affected unrelated Cat-valued Došen cuts and increased non-joinable
+overlaps. The corresponding proof-time unification rules remain active for
+the broad generic-composition and `comp_cat_con_func(F)` comparisons. The special
 accumulated comparison between `comp(Pullback(E,F),H)` and
 `Pullback(E,F o H)` is now a runtime rewrite, installed late after the
 pullback specializations so it participates as a focused Došen cut rather
@@ -336,8 +336,9 @@ weighted-cone profunctor and `Hom_prof(L)`. Reindexing internalizes every
 shaped probe `M`; `weighted_limit_cov_push/pull` are inverse on arbitrary
 incoming maps, while `weighted_limit_cov_univ_transf` and
 `weighted_limit_cov_cone_transf` are selected identity applications.
-Cancellation is owned by the comparison eliminators and vertical
-`comp_catd_fapp0`, not duplicate `Prof_comp_transf` rules.
+Cancellation is owned by the comparison eliminators and vertical generic
+displayed composition `@comp_fapp0 (@Catd_cat ...)`, with `comp_catd_fapp0`
+remaining only a public alias, not by duplicate `Prof_comp_transf` rules.
 
 `Adjunction_prof_transpose` and `Adjunction_prof_untranspose` remain the narrow
 unit/counit-based representable bridge
@@ -509,9 +510,9 @@ the generic actions of that functor; their fibre component computes through
 
 No representable-specific identity or composition rules are active. Strictness
 comes from the global functor cuts. A generic `Catd_cat` specialization of the
-global composition cut was added because target composition canonicalizes to
-`comp_catd_fapp0` before the generic `comp_fapp0` rule can match. The earlier
-probe's broad `hom_postcomp_func` laws and constructor-specific
+global composition cut remains active, now keyed directly on
+`@comp_fapp0 (@Catd_cat ...)` with the displayed base explicit where needed.
+The earlier probe's broad `hom_postcomp_func` laws and constructor-specific
 `Hom_prof_func_transf` laws remain rejected.
 
 The canonical surface syntax is a presentation layer over this kernel, not a

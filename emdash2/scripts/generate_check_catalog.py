@@ -292,6 +292,7 @@ AREAS: list[Area] = [
         "Ordinary functor identity/composition laws",
         (
             "comp_cat_fapp0",
+            "@comp_fapp0 Cat_cat",
             "fapp1_fapp0",
             "fapp1_func",
             "@fapp0 A A (@id Cat_cat",

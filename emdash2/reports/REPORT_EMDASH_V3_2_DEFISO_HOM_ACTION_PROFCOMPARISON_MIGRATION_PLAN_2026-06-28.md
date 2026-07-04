@@ -325,6 +325,12 @@ Current recommendation: choose option 1 for the v3.2 migration. It preserves a
 single runtime normal form for Cat composition while still allowing
 Cat-specific transfor heads where additional structure exists.
 
+Postscript 2026-07-04: this recommendation has been refined by
+`REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`.
+The single runtime owner is now the generic `@comp_fapp0 Cat_cat ...`;
+`comp_cat_fapp0` and `comp_catd_fapp0` are transparent public aliases, not
+rewrite discriminators.
+
 ## DefIso Layer
 
 `DefIso(C,x,y)` is a Lambdapi-specific strict/computational isomorphism
@@ -850,8 +856,10 @@ Promoted validation:
 
 3. Should final Cat object-action symmetry introduce cov/con fapp0 heads?
 
-   Current leaning for v3.2: no. Keep `comp_cat_fapp0` as the unique runtime
-   object-action owner. Revisit only after the Cat-specialized cleanup audit.
+   Current leaning for v3.2: no. Postscript 2026-07-04: the unique runtime
+   object-action owner is now generic `@comp_fapp0 Cat_cat ...`; keep
+   `comp_cat_fapp0` only as a transparent public alias. Revisit cov/con
+   fapp0 heads only after the remaining Cat-specialized cleanup phases.
 
 4. How much of `ProfComparison` should remain after DefIso migration?
 
