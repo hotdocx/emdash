@@ -2862,43 +2862,6 @@ symbol hom_postcomp_fapp0_source_accumulation_eq
     (@hom_postcomp_fapp0 A B F V X Y f
       (@comp_fapp0 A V W (@fapp0 B A F X) g h));
 
-symbol hom_postcomp_fapp0_raw_adjacent_fold_eq
-  [A B : Cat]
-  (F : τ (Functor B A))
-  (W : τ (Obj A))
-  [X Y Z : τ (Obj B)]
-  (p : τ (Hom B X Y))
-  (q : τ (Hom B Y Z))
-  (g : τ (Hom A W (@fapp0 B A F X)))
-  : τ (
-      @comp_fapp0
-        A
-        W
-        (@fapp0 B A F Y)
-        (@fapp0 B A F Z)
-        (@fapp1_fapp0 B A F Y Z q)
-        (@hom_postcomp_fapp0 A B F W X Y p g)
-      =
-      @hom_postcomp_fapp0
-        A
-        B
-        F
-        W
-        X
-        Z
-        (@comp_fapp0 B X Y Z q p)
-        g)
-≔ eq_refl
-    (@hom_postcomp_fapp0
-      A
-      B
-      F
-      W
-      X
-      Z
-      (@comp_fapp0 B X Y Z q p)
-      g);
-
 // Hom-action of the telescope as f varies: alpha : f ->^(Hom_B(X,Y)) g.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
@@ -3666,43 +3629,6 @@ symbol hom_precomp_along_fapp0_comp_fold_eq
       =
       @hom_precomp_along_fapp0 A B F Z W Y (@comp_fapp0 A W X Y q p) g)
 ≔ eq_sym (@hom_precomp_along_fapp0_comp_eq A B F Z W X Y p q g);
-
-symbol hom_precomp_along_fapp0_raw_adjacent_fold_eq
-  [A B : Cat]
-  (F : τ (Functor A B))
-  (Z : τ (Obj B))
-  [V W X : τ (Obj A)]
-  (q : τ (Hom A V W))
-  (p : τ (Hom A W X))
-  (g : τ (Hom B (@fapp0 A B F X) Z))
-  : τ (
-      @comp_fapp0
-        B
-        (@fapp0 A B F V)
-        (@fapp0 A B F W)
-        Z
-        (@hom_precomp_along_fapp0 A B F Z W X p g)
-        (@fapp1_fapp0 A B F V W q)
-      =
-      @hom_precomp_along_fapp0
-        A
-        B
-        F
-        Z
-        V
-        X
-        (@comp_fapp0 A V W X p q)
-        g)
-≔ eq_refl
-    (@hom_precomp_along_fapp0
-      A
-      B
-      F
-      Z
-      V
-      X
-      (@comp_fapp0 A V W X p q)
-      g);
 
 // Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]

@@ -1279,6 +1279,36 @@ kernel comparison may be a stable component rule for
 EH-local proof over that component. This should be investigated separately
 before adding a broad `EH_hcomp_to_vcomp` bridge.
 
+Follow-up probes refined this diagnosis. The comparison
+
+```text
+tapp1_fapp0 epsilon id_X = tapp0_fapp0 X epsilon
+```
+
+is already usable as a one-step proof-time equality, but it does not compose
+transitively with later runtime component reduction. The successful probe
+therefore keeps that comparison proof-time and adds a separate runtime
+component projection for the identity-functor postcomposition telescope:
+
+```text
+tapp0_fapp0 u (hom_postcomp_tele_fapp1_fapp0(id_func, alpha))
+  -> u^*(alpha)
+```
+
+in the identity-functor case. The EH right-unit proof then succeeds as an
+explicit two-step `eq_trans`: first from `tapp1_fapp0 ... id` to the point
+component, then from the point component to `beta`. Probe:
+
+```text
+tmp/probes/hom_postcomp_tele_tapp0_identity_ordered_proof_probe.lp
+```
+
+The fully general `F`-parametric component rule was also probed but failed
+subject reduction because the RHS normalized through the identity-functor
+precomposition presentation while the LHS endpoints remained the general
+`F`-postcomposition heads. That broader rule should not be promoted in that
+form.
+
 ## Rewrite-Rule SOP For This Plan
 
 Any proposed rewrite or unification rule must follow the active SOP in
@@ -1873,8 +1903,8 @@ veto on this semantically intended runtime normal form.
 
 Promoted in `emdash3_2.lp`:
 
-- `hom_postcomp_fapp0_raw_adjacent_fold_eq`
-- `hom_precomp_along_fapp0_raw_adjacent_fold_eq`
+- raw adjacent postcomposition fold
+- raw adjacent source-side precomposition fold
 - `hom_postcomp_representable_interchange_eq`
 
 The new runtime folds are:
@@ -1914,6 +1944,10 @@ warning-summary: 1573 warning(s)
 The delta from the previous active `1479` inventory is concentrated at
 `comp_fapp0`, as expected for these raw adjacent bridges. This is recorded as
 diagnostic follow-up evidence, not as a veto.
+
+The two raw folds are regression-tested as diagnostic conversion checks in
+`emdash3_2_checks.lp`; their earlier main-file equality symbols were removed
+as non-user-facing sanity lemmas.
 
 The theorem `hom_postcomp_representable_interchange_eq` promotes the
 pre-configured representable interchange diagnostic to a reviewer-facing

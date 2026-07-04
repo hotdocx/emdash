@@ -3198,6 +3198,41 @@ assert [B : Cat] (M N L : τ (Obj B))
 	      Z
 	      β);
 
+// Raw adjacent hom-action folds. These are diagnostic conversion checks for
+// runtime accumulation rules kept in `emdash3_2.lp`, not reviewer-facing
+// mathematical lemmas.
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A F X))) ⊢
+  @comp_fapp0
+    A
+    W
+    (@fapp0 B A F Y)
+    (@fapp0 B A F Z)
+    (@fapp1_fapp0 B A F Y Z q)
+    (@hom_postcomp_fapp0 A B F W X Y p g)
+  ≡ @hom_postcomp_fapp0
+      A B F W X Z
+      (@comp_fapp0 B X Y Z q p)
+      g;
+
+assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
+  [V W X : τ (Obj A)]
+  (q : τ (Hom A V W)) (p : τ (Hom A W X))
+  (g : τ (Hom B (@fapp0 A B F X) Z)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F V)
+    (@fapp0 A B F W)
+    Z
+    (@hom_precomp_along_fapp0 A B F Z W X p g)
+    (@fapp1_fapp0 A B F V W q)
+  ≡ @hom_precomp_along_fapp0
+      A B F Z V X
+      (@comp_fapp0 A V W X p q)
+      g;
+
 // Pre-configured four-cell interchange for the Cat-valued representable
 // `hom_` (postcomposition). This is the generalized form needed before the
 // Eckmann-Hilton specialization:
