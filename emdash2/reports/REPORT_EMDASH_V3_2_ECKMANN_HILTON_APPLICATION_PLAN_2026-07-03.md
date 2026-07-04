@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; pre-configured representable interchange now has an active conversion regression; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
 
 ## Purpose
 
@@ -177,9 +177,9 @@ the current fold normal form
 (F(q o p))_*(g)
 ```
 
-This bridge is not yet approved because it still needs owning-position
-warning classification and join analysis, but it is no longer classified as
-unwanted by default.
+This bridge is now active runtime infrastructure. It was promoted with the
+matching source-side precomposition bridge after append and owning-position
+full-copy probes checked quietly and warning-enabled.
 
 - postcomposition already has the represented-source accumulation:
 
@@ -187,8 +187,7 @@ unwanted by default.
 ((F[p])_*(g)) o k  ->  (F[p])_*(g o k)
 ```
 
-This is active runtime infrastructure and should remain the model for the
-missing precomposition counterpart below.
+This is active runtime infrastructure.
 
 - the analogous codomain-side precomposition term
 
@@ -208,17 +207,13 @@ k o ((F[p])^*(g))  ->  (F[p])^*(k o g)
 ((F[p])^*(g)) o F[q]
 ```
 
-also currently stays as a raw `comp_fapp0`. It should be audited as a second
-precomposition accumulation/functoriality bridge:
+is now active runtime accumulation:
 
 ```text
 ((F[p])^*(g)) o F[q]  ->  (F[p o q])^*(g)
 ```
 
-with the exact order fixed against the active `comp_fapp0` convention. The
-existing `hom_precomp_along_fapp0` unification rule is still useful
-proof-time compatibility, but it is not a reason to rule out the runtime
-accumulation if that is the intended normal form.
+with the order fixed against the active `comp_fapp0` convention.
 
 - the corresponding naturality/ordinary-transfor accumulation is represented
   in the active file. At the capped component level:
@@ -917,6 +912,9 @@ Computable feasibility is mixed:
   critical pairs and `167` replaceable-pattern reports). After LHS endpoint
   hygiene in the active file, `make warning-summary` reports `1479` warnings
   (`1312` unjoinable critical pairs and `167` replaceable-pattern reports).
+  After promoting the two remaining raw adjacent hom-action folds, the active
+  inventory is `1573` warnings (`1406` unjoinable critical pairs and `167`
+  replaceable-pattern reports).
   The strict LHS audit passes. These warnings are diagnostic evidence for
   follow-up joins and not a semantic veto on the promoted normal form.
 
@@ -938,10 +936,14 @@ Settled decisions after the 2026-07-03 review:
    oriented in the fold direction at both the functor level and the capped
    `fapp0`-projected level. This is a kernel normal-form migration, not an
    EH-local shortcut.
-4. `k o ((F[p])^*(g)) -> (F[p])^*(k o g)` is active runtime
-   accumulation. Raw terms such as `F[q] o ((F[p])_*(g))` and
-   `((F[p])^*(g)) o F[q]` still require individual audit before any
-   additional raw bridge is promoted.
+4. The identified raw adjacent hom-action folds are active runtime
+   accumulation:
+
+```text
+F[q] o ((F[p])_*(g))       ->  (F[q o p])_*(g)
+k o ((F[p])^*(g))          ->  (F[p])^*(k o g)
+((F[p])^*(g)) o F[q]       ->  (F[p o q])^*(g)
+```
 5. Ordinary naturality accumulation is represented by the full `tapp1_func`
    naturality rules and the capped `tapp1_fapp0` rules. Off-diagonal vertical
    composites now fold to the composite transfor action; this is the chosen
@@ -955,17 +957,18 @@ Settled decisions after the 2026-07-03 review:
    infrastructure in the fold direction. The previous proof-time `unif_rule`
    workaround is superseded.
 8. The pre-configured arbitrary-hom representable interchange regression is
-   now active and reflexive by conversion. This is the next mathematical
-   surface to turn into a reviewer-facing equality theorem in `emdash3_2.lp`.
+   active and reflexive by conversion. The reviewer-facing equality theorem
+   `hom_postcomp_representable_interchange_eq` is now promoted in
+   `emdash3_2.lp`.
 
 The remaining decisions are now:
 
-1. Interchange extension surface.
+1. EH specialization surface.
 
-   Promote the pre-configured arbitrary-hom representable theorem before an
-   EH-specialized instance, once the underlying infrastructure is accepted.
-   Whole-transfor equality should stay deferred unless a checked transfor
-   extensionality principle is added.
+   Specialize `hom_postcomp_representable_interchange_eq` toward the
+   identity-endomorphism setting before attempting a symmetric textbook
+   whole-transfor interchange statement. Whole-transfor equality should stay
+   deferred unless a checked transfor extensionality principle is added.
 
 2. Warning-family follow-up for the promoted fold package.
 
@@ -975,27 +978,21 @@ The remaining decisions are now:
    joins. Add joins only when they express intended computation or repair a
    concrete consumer.
 
-3. Raw adjacent bridge audit.
-
-   Decide rule by rule whether raw adjacent presentations such as
-   `F[q] o ((F[p])_*(g))` and `((F[p])^*(g)) o F[q]` should remain proof-time
-   compatible only or become runtime accumulation bridges.
-
-4. Horizontal-composition facade.
+3. Horizontal-composition facade.
 
    Decide whether `EH_hcomp_raw` remains a transparent alias over the current
    owner stack, or whether a named stable facade is needed. A facade must not
    hide semantic duplication; it should route through the chosen hom-action
    owner.
 
-5. Horizontal-to-vertical proof route.
+4. Horizontal-to-vertical proof route.
 
    Decide the intended status of `EH_hcomp_to_vcomp`: explicit equality proof,
    proof-time `unif_rule`, or runtime bridge. The promoted representable
    interchange computation should be used first before considering an
    EH-specific bridge.
 
-6. Alias elaboration surface.
+5. Alias elaboration surface.
 
    Probe the proposed `EH_*` aliases in their final alias form before
    promotion, because unfolded `Hom` types may elaborate more robustly than
@@ -1246,6 +1243,41 @@ The proof should be an explicit equality chain. The expected ingredients are:
   selected bridge or by explicit proof;
 - `EH_interchange`;
 - `EH_hcomp_to_vcomp` in the required orientations.
+
+The currently best pre-configured route is to engineer the EH proof backward
+from `hom_postcomp_representable_interchange_eq`, not from a fully symmetric
+surface statement. With `i = id_B(x)` and `1_i = id_{Hom_B(x,x)}(i)`, the
+useful degenerate instances are:
+
+```text
+(beta_*[1_i]) · (1_i_*[alpha])
+  =
+(beta · 1_i)_*[1_i · alpha]
+
+(1_i_*[alpha]) · (beta_*[1_i])
+  =
+(1_i · beta)_*[alpha · 1_i]
+```
+
+The right sides are designed to meet at the same horizontal composite
+`beta_*[alpha]` after vertical-unit and identity-action computation. This
+should let the final commutativity proof compare `beta · alpha` and
+`alpha · beta` through a shared computational middle term, instead of asking
+one raw horizontal-composition presentation to reduce directly to vertical
+composition globally.
+
+The current known gap is the right identity whiskering/unit:
+
+```text
+beta_*[1_i] = beta
+```
+
+The existing general unification rule
+`tapp1_fapp0 epsilon id_X ≡ tapp0_fapp0 X epsilon` suggests the missing
+kernel comparison may be a stable component rule for
+`tapp0_fapp0 x (hom_postcomp_tele_fapp1_fapp0 ... beta)`, or an explicit
+EH-local proof over that component. This should be investigated separately
+before adding a broad `EH_hcomp_to_vcomp` bridge.
 
 ## Rewrite-Rule SOP For This Plan
 
@@ -1516,29 +1548,30 @@ consumers.
 
 Trigger:
 raw adjacent terms such as `F[q] o ((F[p])_*(g))` and
-`((F[p])^*(g)) o F[q]` stay as raw `comp_fapp0` terms. The
-codomain-side precomposition form `k o ((F[p])^*(g))` is also raw.
+`((F[p])^*(g)) o F[q]` used to stay as raw `comp_fapp0` terms. The
+codomain-side precomposition form `k o ((F[p])^*(g))` was the first active
+accumulation promoted in this family.
 
 Required audit:
-classify these raw shapes rule by rule. The codomain-side precomposition
-shape should be probed first as the likely missing accumulation:
+classify these raw shapes rule by rule. The promoted family is:
 
 ```text
+F[q] o ((F[p])_*(g)) -> (F[q o p])_*(g)
 k o ((F[p])^*(g)) -> (F[p])^*(k o g).
+((F[p])^*(g)) o F[q] -> (F[p o q])^*(g)
 ```
 
-The postcomposition adjacent-codomain bridge and the precomposition
-source-side bridge are also live candidates. Existing proof-time unification
-from `hom_postcomp_fapp0` and `hom_precomp_along_fapp0` to raw
-`comp_fapp0` remains useful compatibility evidence, but it does not settle
-runtime semantics.
+Existing proof-time unification from `hom_postcomp_fapp0` and
+`hom_precomp_along_fapp0` to raw `comp_fapp0` remains useful compatibility
+evidence for other surfaces, but these three shapes now have intended runtime
+normal forms.
 
 Status:
-partially complete. The codomain-side precomposition accumulation is active.
-The adjacent postcomposition and source-side precomposition raw bridges
-remain open rule-specific candidates. Quiet append probes proved local
-assertions, and warning-enabled append probes exposed overlap families; those
-warnings remain diagnostic evidence, not a semantic veto.
+complete for the currently identified adjacent raw hom-action shapes. The
+postcomposition adjacent-codomain and precomposition source-side folds were
+promoted after append and owner-position full-copy probes. Warning-enabled
+checking exposed additional overlap families concentrated at `comp_fapp0`;
+those warnings remain diagnostic evidence, not a semantic veto.
 
 ### EH-TELE-HIGHER-ACTION-FUNCTORIALITY
 
@@ -1634,10 +1667,12 @@ not require whole-transfor extensionality for the arbitrary-hom result.
 Status:
 partially complete. The active diagnostics now include a conversion
 regression for the pre-configured arbitrary-hom representable theorem in
-`emdash3_2_checks.lp`. The reviewer-facing equality theorem in
-`emdash3_2.lp` and any EH-specialized interchange theorem remain open. The
-previous `transf_interchange_component` theorem was part of the superseded
-post-baseline attempt and is no longer in the active kernel.
+`emdash3_2_checks.lp`, and `emdash3_2.lp` now promotes the corresponding
+reviewer-facing equality theorem
+`hom_postcomp_representable_interchange_eq`. Any EH-specialized interchange
+theorem remains open. The previous `transf_interchange_component` theorem was
+part of the superseded post-baseline attempt and is no longer in the active
+kernel.
 
 ### EH-FOUR-CELL-INTERCHANGE
 
@@ -1655,9 +1690,10 @@ proof-time comparison, or a runtime bridge.
 Status:
 partially complete. Whole-transfor equality remains deferred without
 extensionality. The arbitrary-hom representable pre-configured interchange
-diagnostic now computes by conversion in `emdash3_2_checks.lp`; the next
-target is to promote a reviewer-facing equality theorem in `emdash3_2.lp`,
-then specialize that theorem toward Eckmann-Hilton.
+diagnostic computes by conversion in `emdash3_2_checks.lp`, and the
+reviewer-facing equality theorem is promoted in `emdash3_2.lp`. The next
+target is to specialize that theorem toward Eckmann-Hilton and resolve the
+right-identity whiskering/component gap.
 
 ### EH-SURFACE-SYNTAX
 
@@ -1832,6 +1868,64 @@ supports the desired pre-configured representable interchange and remains a
 general infrastructure migration, not a small EH-local patch. Warning-family
 classification remains useful follow-up work, but warnings alone were not a
 veto on this semantically intended runtime normal form.
+
+### 2026-07-04: Raw Adjacent Folds And Representable Interchange Theorem
+
+Promoted in `emdash3_2.lp`:
+
+- `hom_postcomp_fapp0_raw_adjacent_fold_eq`
+- `hom_precomp_along_fapp0_raw_adjacent_fold_eq`
+- `hom_postcomp_representable_interchange_eq`
+
+The new runtime folds are:
+
+```text
+F[q] o ((F[p])_*(g))       ->  (F[q o p])_*(g)
+((F[p])^*(g)) o F[q]       ->  (F[p o q])^*(g)
+```
+
+Together with the already active codomain-side precomposition fold:
+
+```text
+k o ((F[p])^*(g))          ->  (F[p])^*(k o g)
+```
+
+these complete the currently identified raw adjacent hom-action accumulation
+family.
+
+Probe history:
+
+```text
+tmp/probes/hom_action_raw_adjacent_fold_current_probe.lp
+tmp/probes/emdash3_2_raw_adjacent_fold_full_probe.lp
+tmp/probes/representable_interchange_eq_symbol_probe.lp
+```
+
+The append probe and owner-position full-copy probe checked quietly and
+warning-enabled. The full-copy warning-enabled inventory matched the promoted
+result:
+
+```text
+warning-summary: 1573 warning(s)
+ 1406 unjoinable critical pair
+  167 replaceable pattern variable
+```
+
+The delta from the previous active `1479` inventory is concentrated at
+`comp_fapp0`, as expected for these raw adjacent bridges. This is recorded as
+diagnostic follow-up evidence, not as a veto.
+
+The theorem `hom_postcomp_representable_interchange_eq` promotes the
+pre-configured representable interchange diagnostic to a reviewer-facing
+equality proof:
+
+```text
+((e_gh)_*[beta]) · ((e_fg)_*[alpha])
+  =
+(e_gh · e_fg)_*[beta · alpha]
+```
+
+Its proof is `eq_refl` against the fold-oriented kernel normal form.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 

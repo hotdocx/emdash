@@ -2686,6 +2686,25 @@ rule @hom_postcomp_fapp0
       (@comp_fapp0 $B $X $Y $Z $q $p)
       $g;
 
+// Raw adjacent-codomain postcomposition fold:
+// F[q] o ((F[p])_*(g)) -> (F[q o p])_*(g).
+rule @comp_fapp0
+      $A
+      _
+      _
+      _
+      (@fapp1_fapp0 $B $A $F $Y $Z $q)
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $p $g)
+  ↪ @hom_postcomp_fapp0
+      $A
+      $B
+      $F
+      $W
+      $X
+      $Z
+      (@comp_fapp0 $B $X $Y $Z $q $p)
+      $g;
+
 rule @hom_postcomp_fapp0
       $A $A (@id_func $A) $W $X $Z
       (@hom_postcomp_fapp0 $A $A (@id_func $A) $X $Y $Z $q $p)
@@ -2843,6 +2862,43 @@ symbol hom_postcomp_fapp0_source_accumulation_eq
     (@hom_postcomp_fapp0 A B F V X Y f
       (@comp_fapp0 A V W (@fapp0 B A F X) g h));
 
+symbol hom_postcomp_fapp0_raw_adjacent_fold_eq
+  [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y))
+  (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A F X)))
+  : τ (
+      @comp_fapp0
+        A
+        W
+        (@fapp0 B A F Y)
+        (@fapp0 B A F Z)
+        (@fapp1_fapp0 B A F Y Z q)
+        (@hom_postcomp_fapp0 A B F W X Y p g)
+      =
+      @hom_postcomp_fapp0
+        A
+        B
+        F
+        W
+        X
+        Z
+        (@comp_fapp0 B X Y Z q p)
+        g)
+≔ eq_refl
+    (@hom_postcomp_fapp0
+      A
+      B
+      F
+      W
+      X
+      Z
+      (@comp_fapp0 B X Y Z q p)
+      g);
+
 // Hom-action of the telescope as f varies: alpha : f ->^(Hom_B(X,Y)) g.
 symbol hom_postcomp_tele_fapp1_func [A B : Cat]
   (F : τ (Functor B A)) (W : τ (Obj A))
@@ -2880,7 +2936,7 @@ rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
 
-// Probe: runtime functoriality of the tele-level postcomposition stable head.
+// Runtime functoriality of the tele-level postcomposition stable head.
 rule @hom_postcomp_tele_fapp1_fapp0
       $A $B $F $W $X $Y
       $f $f
@@ -3420,6 +3476,25 @@ rule @hom_precomp_along_fapp0
       (@comp_fapp0 $A $W $X $Y $q $p)
       $g;
 
+// Raw adjacent-source precomposition fold:
+// ((F[p])^*(g)) o F[q] -> (F[p o q])^*(g).
+rule @comp_fapp0
+      $B
+      _
+      _
+      _
+      (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $p $g)
+      (@fapp1_fapp0 $A $B $F $V $W $q)
+  ↪ @hom_precomp_along_fapp0
+      $A
+      $B
+      $F
+      $Z
+      $V
+      $X
+      (@comp_fapp0 $A $V $W $X $p $q)
+      $g;
+
 // Precomposing the identity at F[X] by h returns the functorial action F[h].
 // The first rule covers unreduced generic identities; the `Cat_cat` and
 // `Catd_cat` rules cover the normal forms of category and displayed-category
@@ -3467,7 +3542,7 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
-// Candidate fold-direction codomain accumulation for precomposition.
+// Fold-direction codomain accumulation for precomposition.
 rule @comp_fapp0
       $B
       _
@@ -3592,6 +3667,43 @@ symbol hom_precomp_along_fapp0_comp_fold_eq
       @hom_precomp_along_fapp0 A B F Z W Y (@comp_fapp0 A W X Y q p) g)
 ≔ eq_sym (@hom_precomp_along_fapp0_comp_eq A B F Z W X Y p q g);
 
+symbol hom_precomp_along_fapp0_raw_adjacent_fold_eq
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [V W X : τ (Obj A)]
+  (q : τ (Hom A V W))
+  (p : τ (Hom A W X))
+  (g : τ (Hom B (@fapp0 A B F X) Z))
+  : τ (
+      @comp_fapp0
+        B
+        (@fapp0 A B F V)
+        (@fapp0 A B F W)
+        Z
+        (@hom_precomp_along_fapp0 A B F Z W X p g)
+        (@fapp1_fapp0 A B F V W q)
+      =
+      @hom_precomp_along_fapp0
+        A
+        B
+        F
+        Z
+        V
+        X
+        (@comp_fapp0 A V W X p q)
+        g)
+≔ eq_refl
+    (@hom_precomp_along_fapp0
+      A
+      B
+      F
+      Z
+      V
+      X
+      (@comp_fapp0 A V W X p q)
+      g);
+
 // Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
   (F : τ (Functor A B)) (Z : τ (Obj B))
@@ -3629,7 +3741,7 @@ rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
 
-// Probe: runtime functoriality of the tele-level precomposition stable head.
+// Runtime functoriality of the tele-level precomposition stable head.
 rule @hom_precomp_along_tele_fapp1_fapp0
       $A $B $F $Z $W $X
       $h $h
@@ -5181,7 +5293,7 @@ rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
 rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
-// Probe: off-diagonal vertical-composite folds for ordinary transfors.
+// Off-diagonal vertical-composite folds for ordinary transfors.
 rule @comp_fapp0
       $B
       _
@@ -5232,6 +5344,80 @@ rule @comp_fapp0
       $Z
       (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
       (@comp_fapp0 $A $X $Y $Z $q $p);
+
+// Pre-configured four-cell interchange for the Cat-valued representable
+// `hom_` (postcomposition).
+symbol hom_postcomp_representable_interchange_eq
+  [B : Cat]
+  [M N L : τ (Obj B)]
+  [f g h : τ (Hom B N L)]
+  (e_fg : τ (Hom (Hom_cat B N L) f g))
+  (e_gh : τ (Hom (Hom_cat B N L) g h))
+  [X Y Z : τ (Hom B M N)]
+  (alpha : τ (Hom (Hom_cat B M N) X Y))
+  (beta : τ (Hom (Hom_cat B M N) Y Z))
+  : τ (
+      @comp_fapp0
+        (Hom_cat B M L)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L f X)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L g Y)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L h Z)
+        (@tapp1_fapp0
+          (Hom_cat B M N)
+          (Hom_cat B M L)
+          (@hom_postcomp_func B B (@id_func B) M N L g)
+          (@hom_postcomp_func B B (@id_func B) M N L h)
+          Y
+          Z
+          (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L g h e_gh)
+          beta)
+        (@tapp1_fapp0
+          (Hom_cat B M N)
+          (Hom_cat B M L)
+          (@hom_postcomp_func B B (@id_func B) M N L f)
+          (@hom_postcomp_func B B (@id_func B) M N L g)
+          X
+          Y
+          (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L f g e_fg)
+          alpha)
+      =
+      @tapp1_fapp0
+        (Hom_cat B M N)
+        (Hom_cat B M L)
+        (@hom_postcomp_func B B (@id_func B) M N L f)
+        (@hom_postcomp_func B B (@id_func B) M N L h)
+        X
+        Z
+        (@hom_postcomp_tele_fapp1_fapp0
+          B
+          B
+          (@id_func B)
+          M
+          N
+          L
+          f
+          h
+          (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
+        (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha))
+≔ eq_refl
+    (@tapp1_fapp0
+      (Hom_cat B M N)
+      (Hom_cat B M L)
+      (@hom_postcomp_func B B (@id_func B) M N L f)
+      (@hom_postcomp_func B B (@id_func B) M N L h)
+      X
+      Z
+      (@hom_postcomp_tele_fapp1_fapp0
+        B
+        B
+        (@id_func B)
+        M
+        N
+        L
+        f
+        h
+        (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
+      (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha));
 
 // Full strict naturality for ordinary transfors, oriented as cut elimination.
 // The post/left rule accumulates a codomain arrow through the off-diagonal
