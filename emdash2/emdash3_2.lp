@@ -1549,8 +1549,8 @@ unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
 // directed-family route below both join at `Functord_cat K E D`.
 rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 
-constant symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E);
-rule @id (@Catd_cat $K) $E ↪ @id_funcd $K $E;
+symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E)
+≔ @id (@Catd_cat K) E;
 
 // Displayed-functor composition.
 symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)] [C : τ (Catd K)]
@@ -1560,9 +1560,9 @@ symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)] [C : τ (Catd K)]
 rule @comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG
   ↪ @comp_catd_fapp0 $K $E $D $C $FF $GG;
 
-rule @comp_catd_fapp0 $K $E $E $C $FF (@id_funcd $K $E)
+rule @comp_catd_fapp0 $K $E $E $C $FF (@id (@Catd_cat $K) $E)
   ↪ $FF;
-rule @comp_catd_fapp0 $K $E $D $D (@id_funcd $K $D) $GG
+rule @comp_catd_fapp0 $K $E $D $D (@id (@Catd_cat $K) $D) $GG
   ↪ $GG;
 
 // Canonical Catd specialization of the global strict-functor identity cut.
@@ -1574,7 +1574,7 @@ rule @fapp1_fapp0
       $B
       $F
       $E $E
-      (@id_funcd $K $E)
+      (@id (@Catd_cat $K) $E)
   ↪ @id $B (@fapp0 (@Catd_cat $K) $B $F $E);
 
 // Canonical Catd specialization of the global strict-functor composition
@@ -1646,12 +1646,12 @@ rule @id (@Functord_cat $K $E $D) $FF
     (F ∘ G)[f]             = F[G[f]]
 */
 // Stable identity functor head: id_func(A) = id_A : A ⊢ A.
-constant symbol id_func [A: Cat] : τ (Functor A A);
+symbol id_func [A: Cat] : τ (Functor A A)
+≔ @id Cat_cat A;
 
 // Cat_cat identity and point/arrow actions of the ordinary identity functor.
-rule @id Cat_cat $A ↪ @id_func $A;
-rule fapp0 (@id_func $A) $xA ↪ $xA;
-rule @fapp1_fapp0 $A $A (@id_func $A) $x $y $p ↪ $p;
+rule @fapp0 $A $A (@id Cat_cat $A) $xA ↪ $xA;
+rule @fapp1_fapp0 $A $A (@id Cat_cat $A) $x $y $p ↪ $p;
 
 // Stable composition head: comp_cat_fapp0(F,G) = F ∘ G.
 symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
@@ -1659,8 +1659,8 @@ symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
 
 // Cat_cat composition folds and point/arrow actions of composed functors.
 rule @comp_fapp0 Cat_cat $A $B $C $F $G ↪ @comp_cat_fapp0 $A $B $C $F $G;
-rule @comp_cat_fapp0 $A $B $B (@id_func $B) $F ↪ $F;
-rule @comp_cat_fapp0 $A $A $C $F (@id_func $A) ↪ $F;
+rule @comp_cat_fapp0 $A $B $B (@id Cat_cat $B) $F ↪ $F;
+rule @comp_cat_fapp0 $A $A $C $F (@id Cat_cat $A) ↪ $F;
 // Canonical left-associated normal form for iterated functor composition.
 rule @comp_cat_fapp0
       $A $C $E
@@ -2349,7 +2349,7 @@ rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
   ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
 
 // Opposite preserves identity and ordinary functor composition.
-rule @Op_func _ _ (@id_func $A) ↪ @id_func (Op_cat $A);
+rule @Op_func _ _ (@id Cat_cat $A) ↪ @id Cat_cat (Op_cat $A);
 rule @Op_func _ _ (@comp_cat_fapp0 $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
 
@@ -2706,12 +2706,12 @@ rule @comp_fapp0
       $g;
 
 rule @hom_postcomp_fapp0
-      $A $A (@id_func $A) $W $X $Z
-      (@hom_postcomp_fapp0 $A $A (@id_func $A) $X $Y $Z $q $p)
+      $A $A (@id Cat_cat $A) $W $X $Z
+      (@hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $X $Y $Z $q $p)
       $g
   ↪ @hom_postcomp_fapp0
-      $A $A (@id_func $A) $W $Y $Z $q
-      (@hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $p $g);
+      $A $A (@id Cat_cat $A) $W $Y $Z $q
+      (@hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $p $g);
 
 // Postcomposition commutes with precomposition in the represented source
 // object. This generic join is the hom-action replacement for profunctor-
@@ -2736,8 +2736,8 @@ rule @comp_fapp0
 // Identity cuts for the identity-functor postcomposition owner. These keep
 // composition normalization at the stable postcomposition head instead of
 // erasing to the shared `comp_fapp0` head.
-rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $X (@id $A $X) $f ↪ $f
-with @hom_postcomp_fapp0 $A $A (@id_func $A) $X $X $Y $f (@id $A $X) ↪ $f;
+rule @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $X (@id $A $X) $f ↪ $f
+with @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $X $X $Y $f (@id $A $X) ↪ $f;
 
 // Reviewer-facing computation lemmas for first-layer postcomposition
 // hom-actions. The fold lemmas record the usual mathematical reading as
@@ -3023,7 +3023,7 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $g
   ↪ [ tt ≡ tt ];
 
-unif_rule @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Y $h $g
+unif_rule @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $h $g
   ≡ @comp_fapp0 $A $W $X $Y $h $g
   ↪ [ tt ≡ tt ];
 
@@ -3035,7 +3035,7 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
   ≡ @hom_postcomp_fapp0
       $A
       $A
-      (@id_func $A)
+      (@id Cat_cat $A)
       $W
       (@fapp0 $B $A $F $X)
       (@fapp0 $B $A $F $Y)
@@ -3046,7 +3046,7 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
 unif_rule @hom_postcomp_fapp0
     (@Catd_cat $K)
     (@Catd_cat $K)
-    (@id_func (@Catd_cat $K))
+    (@id Cat_cat (@Catd_cat $K))
     $E $D $C $FF $GG
   ≡ @comp_catd_fapp0 $K $E $D $C $FF $GG
   ↪ [ tt ≡ tt ];
@@ -3054,11 +3054,11 @@ unif_rule @hom_postcomp_fapp0
 rule @hom_postcomp_fapp0
       (@Catd_cat $K)
       (@Catd_cat $K)
-      (@id_func (@Catd_cat $K))
+      (@id Cat_cat (@Catd_cat $K))
       $R
       $P
       $P
-      (@id_funcd $K $P)
+      (@id (@Catd_cat $K) $P)
       $r
   ↪ $r;
 
@@ -3070,7 +3070,7 @@ rule @comp_catd_fapp0
       (@hom_postcomp_fapp0
         (@Catd_cat $K)
         (@Catd_cat $K)
-        (@id_func (@Catd_cat $K))
+        (@id Cat_cat (@Catd_cat $K))
         $R $P $Q
         $to
         $r)
@@ -3078,7 +3078,7 @@ rule @comp_catd_fapp0
   ↪ @hom_postcomp_fapp0
       (@Catd_cat $K)
       (@Catd_cat $K)
-      (@id_func (@Catd_cat $K))
+      (@id Cat_cat (@Catd_cat $K))
       $S $P $Q
       $to
       (@comp_catd_fapp0 $K $S $R $P $r $h);
@@ -3148,12 +3148,12 @@ with @hom_postcomp_fapp0
   ↪ $g;
 
 rule @hom_postcomp_fapp0
-      $C $C (@id_func $C) $x $y $x
+      $C $C (@id Cat_cat $C) $x $y $x
       (@defiso_from $C $x $y $i)
       (@defiso_to $C $x $y $i)
   ↪ @id $C $x
 with @hom_postcomp_fapp0
-      $C $C (@id_func $C) $y $x $y
+      $C $C (@id Cat_cat $C) $y $x $y
       (@defiso_to $C $x $y $i)
       (@defiso_from $C $x $y $i)
   ↪ @id $C $y;
@@ -3249,24 +3249,24 @@ with @defiso_from $C $x $z (@defiso_comp $C $x $y $z $j $i)
       (@defiso_from $C $y $z $j);
 
 rule @hom_postcomp_fapp0
-      $C $C (@id_func $C) $x $z $x
+      $C $C (@id Cat_cat $C) $x $z $x
       (@hom_postcomp_fapp0
-        $C $C (@id_func $C) $z $y $x
+        $C $C (@id Cat_cat $C) $z $y $x
         (@defiso_from $C $x $y $i)
         (@defiso_from $C $y $z $j))
       (@hom_postcomp_fapp0
-        $C $C (@id_func $C) $x $y $z
+        $C $C (@id Cat_cat $C) $x $y $z
         (@defiso_to $C $y $z $j)
         (@defiso_to $C $x $y $i))
   ↪ @id $C $x
 with @hom_postcomp_fapp0
-      $C $C (@id_func $C) $z $x $z
+      $C $C (@id Cat_cat $C) $z $x $z
       (@hom_postcomp_fapp0
-        $C $C (@id_func $C) $x $y $z
+        $C $C (@id Cat_cat $C) $x $y $z
         (@defiso_to $C $y $z $j)
         (@defiso_to $C $x $y $i))
       (@hom_postcomp_fapp0
-        $C $C (@id_func $C) $z $y $x
+        $C $C (@id Cat_cat $C) $z $y $x
         (@defiso_from $C $x $y $i)
         (@defiso_from $C $y $z $j))
   ↪ @id $C $z;
@@ -3290,7 +3290,7 @@ with @defiso_from
   ↪ @fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i);
 
 rule @hom_postcomp_fapp0
-      $D $D (@id_func $D)
+      $D $D (@id Cat_cat $D)
       (@fapp0 $C $D $F $x)
       (@fapp0 $C $D $F $y)
       (@fapp0 $C $D $F $x)
@@ -3298,7 +3298,7 @@ rule @hom_postcomp_fapp0
       (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
   ↪ @id $D (@fapp0 $C $D $F $x)
 with @hom_postcomp_fapp0
-      $D $D (@id_func $D)
+      $D $D (@id Cat_cat $D)
       (@fapp0 $C $D $F $y)
       (@fapp0 $C $D $F $x)
       (@fapp0 $C $D $F $y)
@@ -3307,21 +3307,21 @@ with @hom_postcomp_fapp0
   ↪ @id $D (@fapp0 $C $D $F $y);
 
 rule @hom_postcomp_fapp0
-      $D $D (@id_func $D)
+      $D $D (@id Cat_cat $D)
       $W _ _
       (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
       (@hom_postcomp_fapp0
-        $D $D (@id_func $D)
+        $D $D (@id Cat_cat $D)
         $W _ _
         (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
         $f)
   ↪ $f
 with @hom_postcomp_fapp0
-      $D $D (@id_func $D)
+      $D $D (@id Cat_cat $D)
       $W _ _
       (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
       (@hom_postcomp_fapp0
-        $D $D (@id_func $D)
+        $D $D (@id Cat_cat $D)
         $W _ _
         (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
         $g)
@@ -3497,7 +3497,7 @@ rule @hom_precomp_along_fapp0
       $W
       $X
       $h
-      (@id_func _)
+      (@id Cat_cat _)
   ↪ @fapp1_fapp0 $A Cat_cat $F $W $X $h;
 
 rule @hom_precomp_along_fapp0
@@ -3508,7 +3508,7 @@ rule @hom_precomp_along_fapp0
       $W
       $X
       $h
-      (@id_funcd $K _)
+      (@id (@Catd_cat $K) _)
   ↪ @fapp1_fapp0 $A (@Catd_cat $K) $F $W $X $h;
 
 unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
@@ -3543,8 +3543,8 @@ rule @comp_fapp0
 // runtime presentation. The ordinary `comp_fapp0` reading remains proof-time
 // compatibility through the unification rule above.
 rule @hom_precomp_along_fapp0
-      $A $A (@id_func $A) $Z $W $X $h $g
-  ↪ @hom_postcomp_fapp0 $A $A (@id_func $A) $W $X $Z $g $h;
+      $A $A (@id Cat_cat $A) $Z $W $X $h $g
+  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Z $g $h;
 
 // Reviewer-facing computation lemmas for first-layer precomposition
 // hom-actions. The fold lemmas record the usual mathematical reading as
@@ -3943,8 +3943,8 @@ injective symbol Product_projR_func [A B : Cat]
   : τ (Functor (Product_cat A B) B);
 
 // The identity functor of a product is the paired projection functor.
-rule sigma_Fst (@id_func (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
-rule sigma_Snd (@id_func (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
+rule sigma_Fst (@id Cat_cat (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
+rule sigma_Snd (@id Cat_cat (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
 
 // Projection functors act by object projections.
 rule @fapp0 _ _ (@Product_projL_func $A $B) $p
@@ -4481,7 +4481,7 @@ rule @tapp0_fapp0
   ↪ @hom_precomp_along_fapp1_fapp0
       $A
       $A
-      (@id_func $A)
+      (@id Cat_cat $A)
       (@fapp0 $B $A $F $Y)
       $W
       (@fapp0 $B $A $F $X)
@@ -4568,8 +4568,8 @@ rule @tapp0_fapp0 $A $B $F $F $Y (@id (Functor_cat $A $B) $F)
   ↪ @id $B (@fapp0 $A $B $F $Y);
 
 // Displayed identity components are identity functors on fibres.
-rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id_funcd $K $E)
-  ↪ @id_func (@fapp0 $K Cat_cat $E $Y);
+rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id (@Catd_cat $K) $E)
+  ↪ @id Cat_cat (@fapp0 $K Cat_cat $E $Y);
 
 // Vertical composite components compose pointwise.
 //
@@ -6552,8 +6552,8 @@ injective symbol Op_funcd [K : Cat] [E D : τ (Catd K)]
 rule @Op_funcd $K (@Op_catd $K $E) (@Op_catd $K $D) (@Op_funcd $K $E $D $FF)
   ↪ $FF;
 
-rule @Op_funcd $K $E $E (@id_funcd $K $E)
-  ↪ @id_funcd $K (@Op_catd $K $E);
+rule @Op_funcd $K $E $E (@id (@Catd_cat $K) $E)
+  ↪ @id (@Catd_cat $K) (@Op_catd $K $E);
 
 // Pointwise projection of displayed opposite. The source/target family slots
 // are deliberately implicit; the explicit `Op_funcd` argument is the
@@ -7242,7 +7242,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
 
 symbol Rep_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
-≔ @hom_int Z Z (@id_func Z);
+≔ @hom_int Z Z (@id Cat_cat Z);
 
 // Fixed-source representable family.
 //
@@ -7263,7 +7263,7 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
 symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
   : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
-≔ @hom_int_precomp_func Z Z (@id_func Z) y x p;
+≔ @hom_int_precomp_func Z Z (@id Cat_cat Z) y x p;
 
 // 11b. Opposite-edge and presheaf classifiers.
 
@@ -7275,7 +7275,7 @@ symbol Edge_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
 ≔ comp_cat_fapp0
      (@Op_catd_func Z)
-     (@hom_int Z Z (@id_func Z));
+     (@hom_int Z Z (@id Cat_cat Z));
 
 // Internalized classifier: presheaf category over each fibre of a family.
 //
@@ -8612,23 +8612,23 @@ rule @fdapp1_int_cell
 // implicit.
 rule @fdapp1_int_cell
       $Z _ _
-      (@hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p)
+      (@hom_int_precomp_func $Z $Z (@id Cat_cat $Z) $y $x $p)
       $y $z $q (@id $Z $y)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@hom_postcomp_fapp0 $Z $Z (@id_func $Z) $x $y $z $q $p);
+      (@hom_postcomp_fapp0 $Z $Z (@id Cat_cat $Z) $x $y $z $q $p);
 
 // Representable precomposition is strict/cartesian already at the Sigma-map
 // fibre projection: applying the internal-hom action to the canonical identity
 // fibre arrow gives the identity at the composite arrow.
 rule @fdapp1_int_hom_fapp0
       $Z _ _
-      (@hom_int_precomp_func $Z $Z (@id_func $Z) $y $x $p)
+      (@hom_int_precomp_func $Z $Z (@id Cat_cat $Z) $y $x $p)
       $y $z $q
       (@id $Z $y) $q (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@hom_postcomp_fapp0 $Z $Z (@id_func $Z) $x $y $z $q $p);
+      (@hom_postcomp_fapp0 $Z $Z (@id Cat_cat $Z) $x $y $z $q $p);
 
 
 // -------------------------------------------------------------------------------------------------
@@ -9108,7 +9108,7 @@ rule @tapp0_fapp0
 // Generic full hom-action for identity and composition of ordinary functors.
 // These rules let semantic aliases such as curry expose functor-level action
 // instead of falling back to capped `fapp1_fapp0` computation only.
-rule @fapp1_func $A $A (@id_func $A) $x $y ↪ @id_func (Hom_cat $A $x $y);
+rule @fapp1_func $A $A (@id Cat_cat $A) $x $y ↪ @id Cat_cat (Hom_cat $A $x $y);
 
 rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
   ↪ @comp_cat_fapp0
@@ -9130,8 +9130,8 @@ rule @fapp1_func $A $C (@comp_cat_fapp0 $A $B $C $F $G) $x $y
 // Stable pullback cut elimination and arrow projections. These are placed
 // after the generic identity/composition action so competing paths can use
 // those global rules while Lambdapi checks local confluence.
-rule @Pullback_catd $A $A $E (@id_func $A) ↪ $E;
-rule @Pullback_catd $A Cat_cat (@id_func Cat_cat) $F ↪ $F;
+rule @Pullback_catd $A $A $E (@id Cat_cat $A) ↪ $E;
+rule @Pullback_catd $A Cat_cat (@id Cat_cat Cat_cat) $F ↪ $F;
 
 rule @Pullback_catd
       $A $B
@@ -10153,8 +10153,8 @@ symbol prof_comparison_fmap
 rule @Prof_reindex
       $A $A $B $B
       $R
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
   ↪ $R;
 
 // Nested reindexing accumulates both endpoint functors.
@@ -10303,8 +10303,8 @@ rule @Prof_reindex_transf
       $A $A $B $B
       $R $S
       $r
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
   ↪ $r;
 
 // Probe: stable arrow action of profunctor reindexing should not hide
@@ -10312,10 +10312,11 @@ rule @Prof_reindex_transf
 rule @Prof_reindex_transf
       $A $A2 $B $B2
       $R $R
-      (@id_funcd (Product_cat (Op_cat $A) $B) $R)
+      (@id (@Catd_cat (Product_cat (Op_cat $A) $B)) $R)
       $F $G
-  ↪ @id_funcd
-      (Product_cat (Op_cat $A2) $B2)
+  ↪ @id
+      (@Catd_cat
+        (Product_cat (Op_cat $A2) $B2))
       (@Prof_reindex $A $A2 $B $B2 $R $F $G);
 
 rule @comp_catd_fapp0
@@ -10335,7 +10336,7 @@ rule @comp_catd_fapp0
 rule @hom_postcomp_fapp0
       (@Catd_cat (Product_cat (Op_cat $A2) $B2))
       (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
       $R _ _
       (@Prof_reindex_transf
         $A $A2 $B $B2
@@ -10347,7 +10348,7 @@ rule @hom_postcomp_fapp0
       (@hom_postcomp_fapp0
         (@Catd_cat (Product_cat (Op_cat $A2) $B2))
         (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
         $R _ _
         (@Prof_reindex_transf
           $A $A2 $B $B2
@@ -10361,7 +10362,7 @@ rule @hom_postcomp_fapp0
 with @hom_postcomp_fapp0
       (@Catd_cat (Product_cat (Op_cat $A2) $B2))
       (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
       $R _ _
       (@Prof_reindex_transf
         $A $A2 $B $B2
@@ -10373,7 +10374,7 @@ with @hom_postcomp_fapp0
       (@hom_postcomp_fapp0
         (@Catd_cat (Product_cat (Op_cat $A2) $B2))
         (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@id_func (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
         $R _ _
         (@Prof_reindex_transf
           $A $A2 $B $B2
@@ -10409,7 +10410,7 @@ symbol Prof_func_hom [A B : Cat]
   (F : τ (Functor A B))
   : τ (@Prof_hom A B B F (@Unit_prof B) F);
 
-rule @Prof_func_hom $A $A (@id_func $A)
+rule @Prof_func_hom $A $A (@id Cat_cat $A)
   ↪ @Prof_id_hom $A;
 
 // Component of a functor-induced shaped unit is the ordinary hom-action.
@@ -10420,7 +10421,7 @@ rule @Prof_func_hom $A $A (@id_func $A)
 rule @tapp0_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
-      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+      (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
       (@Hom_prof_along $A $A $B $F $F)
       $ab
       (@Prof_func_hom $A $B $F)
@@ -10440,7 +10441,7 @@ rule @tapp0_fapp0
 rule @tapp1_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
-      (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+      (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
       (@Hom_prof_along $A $A $B $F $F)
       $ab
       $ab'
@@ -10638,17 +10639,17 @@ rule @tapp0_fapp0
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $B $B $P
-        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B)))
+        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B)))
       $P
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
       $F
       $M
       (@Prof_coyoneda_cov_map $A $B $P)
       (@Prof_tensor_hom_hom
         $I $A $B $B
         $P
-        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B))
         $F
         $M
         $M
@@ -10660,10 +10661,10 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $B $B $P
-        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B)))
+        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B)))
       $P'
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
       $F
       $M
       (@tapp1_fapp0
@@ -10675,7 +10676,7 @@ rule @Prof_cell_apply
       (@Prof_tensor_hom_hom
         $I $A $B $B
         $P
-        (@Hom_prof_along $B $B $B (@id_func $B) (@id_func $B))
+        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B))
         $F
         $M
         $M
@@ -10693,17 +10694,17 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $A $B
-        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
         $P)
       $P
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
       $F
       $G
       (@Prof_coyoneda_con_map $A $B $P)
       (@Prof_tensor_hom_hom
         $I $A $A $B
-        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
         $P
         $F
         $G
@@ -10716,11 +10717,11 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $A $B
-        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
         $P)
       $P'
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
       $F
       $G
       (@tapp1_fapp0
@@ -10731,7 +10732,7 @@ rule @Prof_cell_apply
         $pp)
       (@Prof_tensor_hom_hom
         $I $A $A $B
-        (@Hom_prof_along $A $A $A (@id_func $A) (@id_func $A))
+        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
         $P
         $F
         $G
@@ -10880,8 +10881,8 @@ symbol Prof_imply_cov_transf
 rule @Prof_imply_cov_transf
       $A $A $B $B $X
       $O $O' $Q $Q'
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
       $o $q
   ↪ @fapp1_fapp0
       (Product_cat
@@ -12238,8 +12239,8 @@ rule @comp_cat_fapp0
 unif_rule
   @Product_map_func
     $A $A $B $B
-    (@id_func $A)
-    (@id_func $B)
+    (@id Cat_cat $A)
+    (@id Cat_cat $B)
   ≡ @Struct_sigma
       (Obj (Functor_cat (Product_cat $A $B) $A))
       (λ _ : τ (Obj (Functor_cat (Product_cat $A $B) $A)),
@@ -12249,11 +12250,11 @@ unif_rule
   ↪ [ tt ≡ tt ];
 
 unif_rule
-  @id_func (Product_cat $A $B)
+  @id Cat_cat (Product_cat $A $B)
   ≡ @Product_map_func
       $A $A $B $B
-      (@id_func $A)
-      (@id_func $B)
+      (@id Cat_cat $A)
+      (@id Cat_cat $B)
   ↪ [ tt ≡ tt ];
 
 /*
@@ -12759,9 +12760,9 @@ rule @tdapp0_fapp0 $Z _ _ _ _ $x (@PathInd_transfd $Z)
 // focused probe establishes a replacement decision-tree shape.
 // lhs-audit: keep 1,3 -- measured subject-reduction and performance guard
 rule @tapp0_fapp0
-      (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x))
+      (@Sigma_cat $Z (@hom_ $Z $Z (@id Cat_cat $Z) $x))
       Cat_cat
-      (@Const_catd (@Sigma_cat $Z (@hom_ $Z $Z (@id_func $Z) $x)) Terminal_cat)
+      (@Const_catd (@Sigma_cat $Z (@hom_ $Z $Z (@id Cat_cat $Z) $x)) Terminal_cat)
       $E
       (Struct_sigma $y $p)
       (@path_ind_sec $Z $x $E $u)
@@ -12781,7 +12782,7 @@ rule @tapp0_fapp0
         (@pathout_refl_arrow $Z $x $y $p));
 
 rule @path_ind_sec $Z $x
-      (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id_func $Z) $x) $D)
+      (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id Cat_cat $Z) $x) $D)
       $u
   ↪ @fib_cov_transf $Z $D $x $u;
 

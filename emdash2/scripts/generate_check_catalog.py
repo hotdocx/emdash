@@ -294,6 +294,7 @@ AREAS: list[Area] = [
             "comp_cat_fapp0",
             "fapp1_fapp0",
             "fapp1_func",
+            "@fapp0 A A (@id Cat_cat",
             "id_func",
             "fapp0_func",
             "Const_func",

@@ -2018,6 +2018,15 @@ assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
   @fapp1_fapp0 A A (@id_func A) x y p
     ≡ p;
 
+// CATALIAS-02: generic `Cat_cat` identity owner, separate from public alias spelling.
+assert [A : Cat] ⊢ @id_func A ≡ @id Cat_cat A;
+
+assert [A : Cat] (x : τ (Obj A)) ⊢
+  @fapp0 A A (@id Cat_cat A) x ≡ x;
+
+assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
+  @fapp1_fapp0 A A (@id Cat_cat A) x y p ≡ p;
+
 // From emdash3_2.lp:1170.
 assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢
   @Product_projL A B (@Product_pair A B x u) ≡ x;
@@ -5417,6 +5426,17 @@ assert [K : Cat] (E C : τ (Catd K))
   @comp_catd_fapp0 K E E C FF (@id_funcd K E)
     ≡ FF;
 
+// CATALIAS-02: generic `Catd_cat` identity owner, separate from public alias spelling.
+assert [K : Cat] (E : τ (Catd K)) ⊢
+  @id_funcd K E ≡ @id (@Catd_cat K) E;
+
+assert [K : Cat] [E C : τ (Catd K)] (FF : τ (Functord E C)) ⊢
+  @comp_catd_fapp0 K E E C FF (@id (@Catd_cat K) E) ≡ FF;
+
+assert [K : Cat] [B : Cat] (F : τ (Functor (@Catd_cat K) B)) [E : τ (Catd K)] ⊢
+  @fapp1_fapp0 (@Catd_cat K) B F E E (@id (@Catd_cat K) E)
+    ≡ @id B (@fapp0 (@Catd_cat K) B F E);
+
 // From emdash3_2.lp:7603.
 assert [K : Cat] (E D : τ (Catd K))
   (GG : τ (Functord E D)) ⊢
@@ -5442,6 +5462,10 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
 assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢
   @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E)
     ≡ @id_func (Fibre_cat E y);
+
+assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat E E y (@id (@Catd_cat K) E)
+    ≡ @id Cat_cat (@fapp0 K Cat_cat E y);
 
 // From emdash3_2.lp:7635.
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))

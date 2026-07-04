@@ -9,8 +9,8 @@ Supersedes: no whole report; refines and corrects the Cat-specialized cleanup ta
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
-Status: proposed dedicated subplan; no source changes from this report have
-been promoted yet
+Status: Phase 1 identity-alias migration promoted on 2026-07-04; composition
+alias and pure curried-helper phases remain pending
 
 ## Purpose
 
@@ -639,6 +639,78 @@ Warning count is diagnostic, not a veto.  The intended gate is whether the
 new owner is semantically correct, subject-reduction safe, and needed by
 concrete consumers.
 
+## Implementation Checkpoint 2026-07-04
+
+Phase 1 has been promoted to the active files.
+
+Implemented decisions:
+
+- `id_func A` is now a transparent alias for `@id Cat_cat A`.
+- `id_funcd K E` is now a transparent alias for `@id (@Catd_cat K) E`.
+- The reverse identity folds into `id_func` and `id_funcd` have been removed.
+- Essential Cat/Catd identity projection rules now key on the generic
+  specialized identity head, for example `@id Cat_cat A` and
+  `@id (@Catd_cat K) E`.
+- Existing compatibility checks using the public alias spellings remain, and
+  new diagnostics separately check generic-owner normal forms.
+- The check catalog classifier now recognizes the new generic Cat identity
+  object-action check.
+
+The promoted source migration covered the currently active identity-alias LHS
+families, including:
+
+```text
+fapp0 / fapp1_fapp0 / fapp1_func identity functor projections
+comp_cat_fapp0 and comp_catd_fapp0 identity-unit rules
+Catd generic fapp1_fapp0 identity action
+Op_func and Op_funcd identity bridges
+hom_postcomp_fapp0 / hom_precomp_along_fapp0 identity bridges
+DefIso cancellation rules using identity-family hom-action
+tapp0_fapp0 displayed identity components
+Prof_reindex and Prof_reindex_transf identity reindexing
+Prof_func_hom identity and component guards
+fixed co-Yoneda unit beta/naturality guards
+Prof_imply_cov_transf fixed-endpoint identity guard
+Product identity projection guards
+Pullback_catd identity rules
+Product_map_func proof-time identity comparisons
+Path-induction representable guards using hom_(id)
+```
+
+Post-promotion audit:
+
+```text
+No rule/with/unif_rule pre-arrow pattern in emdash3_2.lp contains
+@id_func or @id_funcd.
+```
+
+Validation commands run after promotion:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+git diff --check
+```
+
+Results:
+
+```text
+make check: passed
+make catalog: passed, 743 checks, 0 unclassified
+git diff --check: passed
+warning-summary: 1569 total warnings
+  1398 unjoinable critical pair
+   171 replaceable pattern variable
+```
+
+The warning inventory improved relative to the 2026-07-04 pre-migration
+baseline of 1600 total warnings.  The main heads remain the known
+composition/hom-action families (`comp_fapp0`, `hom_postcomp_fapp0`,
+`comp_cat_fapp0`, `fapp1_fapp0`, `tapp0_fapp0`).  This is consistent with
+Phase 1 being an identity-owner normalization, not yet the raw composition
+alias migration.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -685,11 +757,15 @@ warning-summary deltas are classified.
 ## Side-Task Ledger
 
 - `CATALIAS-01`: Inventory alias-headed rewrite LHSs in active source.
+  Status: complete for identity aliases; composition and curried helpers remain
+  pending.
 - `CATALIAS-02`: Probe transparent `id_func` / `id_funcd` aliases.
+  Status: promoted on 2026-07-04.
 - `CATALIAS-03`: Probe transparent `comp_cat_fapp0` / `comp_catd_fapp0`
-  aliases.
+  aliases.  Status: pending.
 - `CATALIAS-04`: Probe pure `comp_cat_cov/con_func*` aliases through
-  identity-family `hom_*`.
+  identity-family `hom_*`.  Status: pending.
 - `CATALIAS-05`: Migrate Cat-only transfor inbound bridges to generic
-  specialized `hom_*` LHSs.
+  specialized `hom_*` LHSs.  Status: pending.
 - `CATALIAS-06`: Update diagnostics and warning inventory after promotion.
+  Status: complete for Phase 1.
