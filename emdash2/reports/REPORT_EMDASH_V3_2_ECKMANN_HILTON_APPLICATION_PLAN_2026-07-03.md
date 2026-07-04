@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: this-report#side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-03
 Infinity-Codex-Decision-Responses: none-yet
-Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
+Status: fold-oriented hom-action/interchange infrastructure promoted to the active kernel on 2026-07-04; safe EH slice and first-layer hom-action proof lemmas retained; raw adjacent hom-action folds promoted; pre-configured representable interchange now has a reviewer-facing equality theorem; EH statement surfaces were probed in scratch form; postcomposition-telescope component computation promoted as backtrackable runtime infrastructure; full EH proof shape succeeds in scratch with two local identity bridges; prior proof-time tele workaround and component-level ordinary-transfor interchange were superseded by the promotion
 
 ## Purpose
 
@@ -1582,6 +1582,64 @@ hom_precomp_along_fapp1_fapp0(id_X, alpha) = alpha
 If the EH proof still needs a bridge here, prefer another focused,
 owner-position probe before adding a global runtime rule.
 
+Follow-up EH proof probes confirm the remaining shape precisely:
+
+```text
+tmp/probes/eckmann_hilton_current_reflexivity_probe.lp
+```
+
+shows that the left horizontal unit
+
+```text
+hcomp(1_i, alpha) = alpha
+```
+
+is reflexive in the active kernel, while the right unit
+
+```text
+hcomp(beta, 1_i) = beta
+```
+
+is not reflexive yet. Adding only the precomposition identity-action rule is
+not enough, because the active `tapp1_fapp0(epsilon,id)` comparison is still
+proof-time-only and does not compose transitively with later runtime
+component reduction.
+
+The following scratch probe adds two local runtime identity bridges:
+
+```text
+tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
+hom_precomp_along_fapp1_fapp0(id_X,alpha) -> alpha
+```
+
+Probe:
+
+```text
+tmp/probes/eckmann_hilton_right_unit_runtime_identity_bridges_probe.lp
+```
+
+With those local bridges, `hcomp(beta,1_i) = beta` closes by `eq_refl`.
+
+The complete degenerate-interchange/EH proof shape then checks in:
+
+```text
+tmp/probes/eckmann_hilton_degenerate_interchange_runtime_bridges_probe.lp
+```
+
+This probe proves, still with the two bridges local:
+
+```text
+vcomp(beta,alpha) = hcomp(beta,alpha)
+vcomp(alpha,beta) = hcomp(beta,alpha)
+vcomp(beta,alpha) = vcomp(alpha,beta)
+```
+
+The two shared-middle lemmas are direct instances of
+`hom_postcomp_representable_interchange_eq`; the final `EH_comm` proof is
+`eq_trans` through the shared middle. Thus the overall EH application is now
+computably feasible, but active-kernel promotion still needs owner-position
+probing and warning classification for the two identity bridges.
+
 Statement-only EH surfaces were then probed without adding proofs or axioms
 to the active kernel. The scratch surface defines:
 
@@ -2361,6 +2419,58 @@ through the existing stable precomposition action rather than introducing a
 new direct component owner. If later EH or interchange proofs show that this
 normal form is inconvenient, reconsider the choice as proof-time
 identification or as a new semantic component owner.
+
+### 2026-07-04: EH Proof-Shape Scratch Success
+
+Scratch probes:
+
+```text
+tmp/probes/eckmann_hilton_current_reflexivity_probe.lp
+tmp/probes/eckmann_hilton_right_unit_runtime_identity_bridges_probe.lp
+tmp/probes/eckmann_hilton_degenerate_interchange_runtime_bridges_probe.lp
+```
+
+Current active-kernel computation already proves the left horizontal unit by
+reflexivity:
+
+```text
+hcomp(1_i, alpha) = alpha
+```
+
+The right horizontal unit requires two local identity bridges in the scratch
+probe:
+
+```text
+tapp1_fapp0(epsilon,id_X) -> tapp0_fapp0(X,epsilon)
+hom_precomp_along_fapp1_fapp0(id_X,alpha) -> alpha
+```
+
+With those bridges local, the right unit becomes reflexive, the two
+degenerate representable-interchange instances specialize directly from
+`hom_postcomp_representable_interchange_eq`, and the final theorem checks:
+
+```text
+EH_comm_from_shared_middle_probe
+  : vcomp(beta,alpha) = vcomp(alpha,beta)
+```
+
+Proof shape:
+
+```text
+vcomp(beta,alpha)
+  = hcomp(beta,alpha)
+  = vcomp(alpha,beta)
+```
+
+where both equalities to the shared middle are instantiated
+representable-interchange lemmas, and the final step uses `eq_sym`.
+
+Conclusion:
+the EH application is now feasible as an implementation task. The next kernel
+work is not to discover the proof shape; it is to promote or redesign the two
+identity bridges after owner-position full-file probes and warning
+classification, then move the EH aliases and proof symbols into
+`emdash3_2.lp`.
 
 ### 2026-07-03: Post-Implementation Roadmap Correction
 
