@@ -151,7 +151,8 @@ Postscript 2026-07-05e: `hom_precomp_along_cat_tele_transf` also owns its
 generalized `tapp1_func` / `tapp1_fapp0` off-diagonal projection ladder.  The
 ordinary dual helper `comp_cat_con_func_func_tapp1_func` is a small functor in
 `eta : G => H` whose object action reuses the existing horizontal-composite
-head `comp_cat_cov_func_func_tapp1_fapp0`.
+head `comp_cat_func_func_tapp1_fapp0`.  That capped head is intentionally
+neutral; `cov` and `con` are kept only on the curried functor-level views.
 
 The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
 and `Prof` are transparent aliases for families on `A^op × B`.
@@ -636,7 +637,7 @@ left implicit:
   `comp_cat_cov_fapp1_func`, `comp_cat_cov_transf`,
   `comp_cat_cov_func_func_fapp1_func`, `comp_cat_cov_func_func_transf`,
   `comp_cat_cov_func_func_tapp1_func`,
-  `comp_cat_cov_func_func_tapp1_fapp0`, `comp_cat_con_func_func`,
+  `comp_cat_func_func_tapp1_fapp0`, `comp_cat_con_func_func`,
   `comp_cat_con_func_func_fapp1_func`, `comp_cat_con_func_func_transf`,
   `comp_cat_con_fapp1_func`, and `comp_cat_con_transf`, giving
   functor-level off-diagonal transfor components,

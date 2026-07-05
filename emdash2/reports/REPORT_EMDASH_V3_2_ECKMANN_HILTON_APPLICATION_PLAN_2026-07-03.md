@@ -93,7 +93,7 @@ The active kernel already has the relevant 2-categorical substrate:
 - `hom_postcomp_tele_fapp1_func` and `hom_postcomp_tele_fapp1_fapp0` expose
   the higher action of postcomposition as the postcomposing arrow varies.
 - `tapp1_func` and `tapp1_fapp0` expose off-diagonal transfor action.
-- `comp_cat_cov_func_func_tapp1_fapp0` is the ordinary-transfor horizontal
+- `comp_cat_func_func_tapp1_fapp0` is the ordinary-transfor horizontal
   composite owner in the Cat-specialized functor-composition layer.
 - `eq_refl`, `eq_trans`, `eq_sym`, and `eq_ap` are available for mathematical
   equality proofs.
@@ -779,7 +779,7 @@ theta : Q => R
 ```
 
 with horizontal composition expressed by the current
-`comp_cat_cov_func_func_tapp1_fapp0` owner:
+`comp_cat_func_func_tapp1_fapp0` owner:
 
 ```text
 lhs = hcomp(theta,beta) · hcomp(eta,alpha)
@@ -1187,7 +1187,7 @@ symbol transf_interchange
 ```
 
 Here `hcomp` should be the existing
-`comp_cat_cov_func_func_tapp1_fapp0` owner or a transparent readability alias
+`comp_cat_func_func_tapp1_fapp0` owner or a transparent readability alias
 over it. The superseded `transf_interchange_component` proof showed that this
 route is possible componentwise, but it is no longer the active primary route
 to the EH application.

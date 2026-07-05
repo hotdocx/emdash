@@ -99,7 +99,7 @@ comp_cat_con_transf
 comp_cat_cov_func_func_transf
 comp_cat_con_func_func_transf
 comp_cat_cov_func_func_tapp1_func
-comp_cat_cov_func_func_tapp1_fapp0
+comp_cat_func_func_tapp1_fapp0
 ```
 
 The baseline check on 2026-07-04 passed:
@@ -317,7 +317,7 @@ comp_cat_con_transf
 comp_cat_cov_func_func_transf
 comp_cat_con_func_func_transf
 comp_cat_cov_func_func_tapp1_func
-comp_cat_cov_func_func_tapp1_fapp0
+comp_cat_func_func_tapp1_fapp0
 ```
 
 They may remain stable heads, but their generic owners must be documented.
@@ -406,7 +406,7 @@ comp_cat_con_transf
 comp_cat_cov_func_func_transf
 comp_cat_con_func_func_transf
 comp_cat_cov_func_func_tapp1_func
-comp_cat_cov_func_func_tapp1_fapp0
+comp_cat_func_func_tapp1_fapp0
 ```
 
 Migrate their inbound owner rules from `comp_cat_*` aliases to specialized
@@ -1757,11 +1757,19 @@ projections.
 Promotion update 2026-07-05: the remaining tele-precomposition
 off-diagonal ladder was promoted by adding the small dual helper
 `comp_cat_con_func_func_tapp1_func`.  This helper is the same ordinary
-horizontal-composite object as `comp_cat_cov_func_func_tapp1_fapp0`, but
+horizontal-composite object as `comp_cat_func_func_tapp1_fapp0`, but
 curried in the ordinary transfor `eta : G => H`; its `fapp0` rule routes
-directly to `comp_cat_cov_func_func_tapp1_fapp0`.  The generalized
+directly to `comp_cat_func_func_tapp1_fapp0`.  The generalized
 `hom_precomp_along_cat_tele_transf` `tapp1_func` and `tapp1_fapp0` rules then
 instantiate that helper in the fibres `E[x]`, `E[y]`.
+The capped object intentionally uses the neutral name
+`comp_cat_func_func_tapp1_fapp0`; `cov` and `con` remain only on the two
+curried `tapp1_func` views.
+Naming cleanup 2026-07-05: this neutral name replaced the earlier
+`comp_cat_cov_func_func_tapp1_fapp0` spelling in source, diagnostics, and
+active reports.  `make check`, `make catalog`, `make warning-summary`,
+`python3 scripts/audit_rule_lhs.py --strict`, `git diff --check`, and
+`make ci` passed after the rename; the warning count stayed at `1317`.
 
 Focused probe:
 
@@ -1900,6 +1908,6 @@ warning-summary deltas are classified.
   projection ladder for `hom_precomp_along_cat_tele_transf`.
   Status: promoted on 2026-07-05 through the dual helper
   `comp_cat_con_func_func_tapp1_func`, whose object rule reuses
-  `comp_cat_cov_func_func_tapp1_fapp0`.  `make check`, `make catalog`,
+  `comp_cat_func_func_tapp1_fapp0`.  `make check`, `make catalog`,
   `make warning-summary`, `python3 scripts/audit_rule_lhs.py --strict`,
   `git diff --check`, and `make ci` passed after promotion.

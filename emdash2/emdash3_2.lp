@@ -5158,14 +5158,14 @@ rule @tapp0_fapp0
         $H
         $alpha);
 
-// Off-diagonal action of `comp_cat_cov_func_func_transf`. This is the
-// horizontal composite `(H alpha) ∘ (eta F)`.
+// Neutral capped off-diagonal action of ordinary functor composition. This is
+// the horizontal composite `(H alpha) ∘ (eta F)`.
 //
 // Mathematical notation:
 //   eta : G => H, alpha : F => K
-//   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
+//   comp_cat_func_func_tapp1_fapp0(eta,alpha)
 //     : G ∘ F => H ∘ K
-//   comp_cat_cov_func_func_tapp1_fapp0(eta,alpha)
+//   comp_cat_func_func_tapp1_fapp0(eta,alpha)
 //     = (H alpha) ∘ (eta F).
 symbol comp_cat_cov_func_func_tapp1_func [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
@@ -5179,7 +5179,7 @@ symbol comp_cat_cov_func_func_tapp1_func [X Y Z : Cat]
         (@comp_cat_fapp0 X Y Z G F)
         (@comp_cat_fapp0 X Y Z H K)));
 
-symbol comp_cat_cov_func_func_tapp1_fapp0 [X Y Z : Cat]
+symbol comp_cat_func_func_tapp1_fapp0 [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
   (eta : τ (Transf G H))
   [F K : τ (Functor X Y)]
@@ -5195,9 +5195,9 @@ symbol comp_cat_cov_func_func_tapp1_fapp0 [X Y Z : Cat]
     (@comp_cat_cov_transf Cat_cat (@id Cat_cat Cat_cat) X Y Z H F K alpha)
     (@comp_cat_con_transf Cat_cat (@id Cat_cat Cat_cat) Z X Y F G H eta);
 
-// Dual off-diagonal helper for `comp_cat_con_func_func_transf`. This is the
-// same horizontal composite as `comp_cat_cov_func_func_tapp1_fapp0`, but
-// curried in the ordinary transfor `eta : G => H`.
+// Dual curried off-diagonal helper for `comp_cat_con_func_func_transf`. It
+// lands in the same neutral capped object, but is curried in the ordinary
+// transfor `eta : G => H`.
 symbol comp_cat_con_func_func_tapp1_func [X Y Z : Cat]
   [F K : τ (Functor X Y)]
   (alpha : τ (Transf F K))
@@ -5213,7 +5213,7 @@ symbol comp_cat_con_func_func_tapp1_func [X Y Z : Cat]
 rule fapp0
       (@comp_cat_con_func_func_tapp1_func $X $Y $Z $F $K $alpha $G $H)
       $eta
-  ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
+  ↪ @comp_cat_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
 
 // Off-diagonal action of postcomposition-in-G.
 rule @tapp1_func
@@ -5245,7 +5245,7 @@ rule @tapp1_func
 rule fapp0
       (@comp_cat_cov_func_func_tapp1_func $X $Y $Z $G $H $eta $F $K)
       $alpha
-  ↪ @comp_cat_cov_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
+  ↪ @comp_cat_func_func_tapp1_fapp0 $X $Y $Z $G $H $eta $F $K $alpha;
 
 // Capped horizontal composite of two ordinary transfors.
 rule @tapp1_fapp0
@@ -5257,7 +5257,7 @@ rule @tapp1_fapp0
       $K
       (@hom_postcomp_cat_tele_transf $L $E $W $X $Y $G $H $eta)
       $alpha
-  ↪ @comp_cat_cov_func_func_tapp1_fapp0
+  ↪ @comp_cat_func_func_tapp1_fapp0
       $W
       (@fapp0 $L Cat_cat $E $X)
       (@fapp0 $L Cat_cat $E $Y)
@@ -5312,7 +5312,7 @@ rule @tapp1_fapp0
       $J
       (@hom_precomp_along_cat_tele_transf $L $E $Z $X $Y $F $H $alpha)
       $eta
-  ↪ @comp_cat_cov_func_func_tapp1_fapp0
+  ↪ @comp_cat_func_func_tapp1_fapp0
       (@fapp0 $L Cat_cat $E $X)
       (@fapp0 $L Cat_cat $E $Y)
       $Z

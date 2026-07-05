@@ -292,7 +292,7 @@ comp_cat_con_transf
 comp_cat_cov_func_func_transf
 comp_cat_con_func_func_transf
 comp_cat_cov_func_func_tapp1_func
-comp_cat_cov_func_func_tapp1_fapp0
+comp_cat_func_func_tapp1_fapp0
 ```
 
 These expose `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` structure that is

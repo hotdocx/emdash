@@ -2045,7 +2045,7 @@ assert [K : Cat]
     Q
     (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
     beta
-  ≡ @comp_cat_cov_func_func_tapp1_fapp0
+  ≡ @comp_cat_func_func_tapp1_fapp0
       W
       (@fapp0 K Cat_cat E x)
       (@fapp0 K Cat_cat E y)
@@ -2219,7 +2219,7 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
   (alpha : τ (Transf F K)) (G H : τ (Functor Y Z))
   (eta : τ (Transf G H)) ⊢
   fapp0 (@comp_cat_con_func_func_tapp1_func X Y Z F K alpha G H) eta
-    ≡ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
+    ≡ @comp_cat_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
 
 assert [X Y Z : Cat] (F K : τ (Functor X Y))
   (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) ⊢
@@ -2245,7 +2245,7 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
     H
     (@comp_cat_con_func_func_transf X Y Z F K alpha)
     eta
-  ≡ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
+  ≡ @comp_cat_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
 
 assert [K : Cat]
   (E : τ (Functor K Cat_cat))
@@ -2297,7 +2297,7 @@ assert [K : Cat]
     Q
     (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
     beta
-  ≡ @comp_cat_cov_func_func_tapp1_fapp0
+  ≡ @comp_cat_func_func_tapp1_fapp0
       (@fapp0 K Cat_cat E x)
       (@fapp0 K Cat_cat E y)
       Z
@@ -2666,7 +2666,7 @@ assert [X Y Z : Cat] (G H : τ (Functor Y Z))
     K
     (@comp_cat_cov_func_func_transf X Y Z G H eta)
     alpha
-  ≡ @comp_cat_cov_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
+  ≡ @comp_cat_func_func_tapp1_fapp0 X Y Z G H eta F K alpha;
 
 // From emdash3_2.lp:1946.
 assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
