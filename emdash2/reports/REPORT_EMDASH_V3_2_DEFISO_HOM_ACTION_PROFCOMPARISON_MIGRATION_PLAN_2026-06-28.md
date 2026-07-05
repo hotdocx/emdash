@@ -10,7 +10,7 @@ Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
 Status: active incremental migration plan; Phases 1-3, Phase 5, the
 adjunction-mate DefIso owner correction, and the dedicated Cat/Catd alias
-cleanup Phases 1-4 promoted
+cleanup Phases 1-5 promoted
 
 Parent plan:
 `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`,
@@ -334,8 +334,10 @@ rewrite discriminators. Later checkpoints in that dedicated report also
 promoted the pure curried Cat helper aliases through identity-family
 `hom_postcomp_*` and `hom_precomp_along_*`, then routed identity-family capped
 higher-action paths from the specialized generic `hom_*_fapp1_fapp0` owners
-into the Cat-only transfor heads. Cat-specialized primitive heads are reserved
-for transfor/projection structure.
+into the Cat-only transfor heads. The functor-level `*_fapp1_func` wrappers
+are also transparent aliases over the identity-family generic
+`hom_*_fapp1_func` owners. Cat-specialized primitive heads are reserved for
+transfor/projection structure.
 
 ## DefIso Layer
 

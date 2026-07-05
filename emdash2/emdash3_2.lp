@@ -4803,7 +4803,17 @@ symbol comp_cat_cov_fapp1_func [X Y Z : Cat]
       (@Transf_cat
         X Z
         (@comp_cat_fapp0 X Y Z G F)
-        (@comp_cat_fapp0 X Y Z G H)));
+        (@comp_cat_fapp0 X Y Z G H)))
+≔ @hom_postcomp_fapp1_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    X
+    Y
+    Z
+    G
+    F
+    H;
 
 symbol comp_cat_cov_transf [X Y Z : Cat]
   (G : τ (Functor Y Z))
@@ -4812,16 +4822,6 @@ symbol comp_cat_cov_transf [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z G H));
-
-unif_rule @hom_postcomp_fapp1_func Cat_cat Cat_cat $E $W $X $Y $f $G $H
-  ≡ @comp_cat_cov_fapp1_func
-      $W
-      (@fapp0 Cat_cat Cat_cat $E $X)
-      (@fapp0 Cat_cat Cat_cat $E $Y)
-      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
-      $G
-      $H
-  ↪ [ tt ≡ tt ];
 
 unif_rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
   ≡ @comp_cat_cov_transf
@@ -4846,9 +4846,6 @@ rule @hom_postcomp_fapp1_fapp0
       $F
       $H
       $eta
-  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
-
-rule fapp0 (@comp_cat_cov_fapp1_func $X $Y $Z $G $F $H) $eta
   ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
 
 // Component of postcomposition by G.
@@ -4948,7 +4945,16 @@ symbol comp_cat_cov_func_func_fapp1_func [X Y Z : Cat]
         (Functor_cat X Y)
         (Functor_cat X Z)
         (@comp_cat_cov_func X Y Z G)
-        (@comp_cat_cov_func X Y Z H)));
+        (@comp_cat_cov_func X Y Z H)))
+≔ @hom_postcomp_tele_fapp1_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    X
+    Y
+    Z
+    G
+    H;
 
 symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
@@ -4956,9 +4962,6 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_cov_func X Y Z G)
       (@comp_cat_cov_func X Y Z H));
-
-rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
-  ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
 
 // Identity-family tele-postcomposition exposes ordinary transfor projections.
 rule @hom_postcomp_tele_fapp1_fapp0
@@ -4995,7 +4998,17 @@ symbol comp_cat_con_fapp1_func [X Y Z : Cat]
       (@Transf_cat
         X Z
         (@comp_cat_fapp0 X Y Z G F)
-        (@comp_cat_fapp0 X Y Z H F)));
+        (@comp_cat_fapp0 X Y Z H F)))
+≔ @hom_precomp_along_fapp1_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    Z
+    X
+    Y
+    F
+    G
+    H;
 
 symbol comp_cat_con_transf [X Y Z : Cat]
   (F : τ (Functor X Y))
@@ -5013,7 +5026,16 @@ symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
         (Functor_cat Y Z)
         (Functor_cat X Z)
         (@comp_cat_con_func X Y Z F)
-        (@comp_cat_con_func X Y Z K)));
+        (@comp_cat_con_func X Y Z K)))
+≔ @hom_precomp_along_tele_fapp1_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    Z
+    X
+    Y
+    F
+    K;
 
 // Hom-action of precomposition as a functor in the precomposing functor.
 //
@@ -5026,10 +5048,6 @@ symbol comp_cat_con_func_func_transf [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_con_func X Y Z F)
       (@comp_cat_con_func X Y Z K));
-
-// Projection ladder for the hom-action of precomposition-in-F.
-rule fapp0 (@comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K) $alpha
-  ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
 
 // Component of the precomposition-in-F hom-action at G.
 //
@@ -5246,9 +5264,6 @@ rule @hom_precomp_along_tele_fapp1_fapp0
       $K
       $alpha
   ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
-
-rule fapp0 (@comp_cat_con_fapp1_func $X $Y $Z $F $G $H) $eta
-  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
 
 // Component of precomposition by F.
 //

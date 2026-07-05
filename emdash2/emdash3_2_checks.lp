@@ -1767,6 +1767,11 @@ assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
     eta
   ≡ @comp_cat_con_transf X Y Z F G H eta;
 
+assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
+  (eta : τ (Transf G H)) ⊢
+  fapp0 (@comp_cat_con_fapp1_func X Y Z F G H) eta
+    ≡ @comp_cat_con_transf X Y Z F G H eta;
+
 assert [X Y Z : Cat] ⊢
   @comp_cat_cov_func_func X Y Z
     ≡ @hom_postcomp_tele_func
@@ -1823,6 +1828,11 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
     eta
   ≡ @comp_cat_cov_transf X Y Z G F H eta;
 
+assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
+  (eta : τ (Transf F H)) ⊢
+  fapp0 (@comp_cat_cov_fapp1_func X Y Z G F H) eta
+    ≡ @comp_cat_cov_transf X Y Z G F H eta;
+
 // Higher action of the tele-level postcomposition stable head.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y : τ (Obj B)) (f g : τ (Hom B X Y)) ⊢
@@ -1876,6 +1886,10 @@ assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
     H
     eta
   ≡ @comp_cat_cov_func_func_transf W X Y G H eta;
+
+assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
+  fapp0 (@comp_cat_cov_func_func_fapp1_func W X Y G H) eta
+    ≡ @comp_cat_cov_func_func_transf W X Y G H eta;
 
 // Higher action of the tele-level precomposition-along stable head.
 assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
@@ -1947,6 +1961,11 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
     K
     alpha
   ≡ @comp_cat_con_func_func_transf X Y Z F K alpha;
+
+assert [X Y Z : Cat] (F K : τ (Functor X Y))
+  (alpha : τ (Transf F K)) ⊢
+  fapp0 (@comp_cat_con_func_func_fapp1_func X Y Z F K) alpha
+    ≡ @comp_cat_con_func_func_transf X Y Z F K alpha;
 
 assert [X Y Z : Cat] (F K : τ (Functor X Y))
   (alpha : τ (Transf F K)) (G : τ (Functor Y Z)) ⊢

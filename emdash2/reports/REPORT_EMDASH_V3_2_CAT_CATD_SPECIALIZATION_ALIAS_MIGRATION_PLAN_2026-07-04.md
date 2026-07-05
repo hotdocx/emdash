@@ -9,10 +9,9 @@ Supersedes: no whole report; refines and corrects the Cat-specialized cleanup ta
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
-Status: Phases 1-4 identity/composition/pure-curried-helper alias migrations
-and identity-family Cat-only transfor inbound bridges promoted by 2026-07-05;
-remaining question is whether to demote the functor-level `*_fapp1_func`
-wrappers.
+Status: Phases 1-5 identity/composition/pure-curried-helper alias migrations,
+identity-family Cat-only transfor inbound bridges, and functor-level
+`*_fapp1_func` wrapper demotions promoted by 2026-07-05.
 
 ## Purpose
 
@@ -976,6 +975,155 @@ That is expected because the new identity-family bridge intentionally overlaps
 the existing generic higher-action/functoriality paths and joins them at the
 Cat-only transfor projection normal form.
 
+## Corrected Assessment 2026-07-05: Phase 5 Is Required
+
+The Phase 4 checkpoint left one architectural gap.  The following
+functor-level wrappers still existed as primitive presentation heads:
+
+```text
+comp_cat_cov_fapp1_func
+comp_cat_con_fapp1_func
+comp_cat_cov_func_func_fapp1_func
+comp_cat_con_func_func_fapp1_func
+```
+
+These heads do not themselves expose Cat-only `tapp0_fapp0`, `tapp1_func`, or
+`tapp1_fapp0` structure.  They are functor-level wrappers around the generic
+`hom_*_fapp1_func` hierarchy, so leaving them primitive is not complete with
+respect to the original plan's owner principle.
+
+The corrected target is to keep the public names only as transparent
+identity-family aliases:
+
+```text
+comp_cat_cov_fapp1_func(G,F,H)
+  := @hom_postcomp_fapp1_func
+       Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+       X Y Z G F H
+
+comp_cat_cov_func_func_fapp1_func(G,H)
+  := @hom_postcomp_tele_fapp1_func
+       Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+       X Y Z G H
+
+comp_cat_con_fapp1_func(F,G,H)
+  := @hom_precomp_along_fapp1_func
+       Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+       Z X Y F G H
+
+comp_cat_con_func_func_fapp1_func(F,K)
+  := @hom_precomp_along_tele_fapp1_func
+       Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+       Z X Y F K
+```
+
+The direct `fapp0` rules headed by those wrapper aliases should then be
+deleted.  Their old public paths compute by:
+
+```text
+public alias
+  -> generic hom_*_fapp1_func
+  -> generic hom_*_fapp1_fapp0
+  -> Phase 4 Cat-only transfor bridge
+```
+
+This preserves the real Cat-only primitive heads:
+
+```text
+comp_cat_cov_transf
+comp_cat_con_transf
+comp_cat_cov_func_func_transf
+comp_cat_con_func_func_transf
+```
+
+Those capped heads remain justified because they expose the ordinary transfor
+projection ladder.  The arbitrary-family `E : Functor K Cat_cat` API should
+continue to use `hom_*` directly rather than introducing generalized
+`comp_cat*` names that merely rename the generic API.
+
+Focused probe result before active promotion:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase5_func_wrappers_alias_probe.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase5_func_wrappers_alias_probe.lp
+```
+
+Both probes passed.  The warning-enabled probe reported the same unjoinable
+count as the active Phase 4 baseline (`1150`), so the alias demotion is
+mechanically feasible and does not add a new warning family in the focused
+probe.
+
+## Implementation Checkpoint 2026-07-05, Phase 5
+
+Phase 5 has been promoted to the active files.
+
+Implemented decisions:
+
+- `comp_cat_cov_fapp1_func` is now a transparent identity-family alias for
+  `@hom_postcomp_fapp1_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...`.
+- `comp_cat_cov_func_func_fapp1_func` is now a transparent identity-family
+  alias for `@hom_postcomp_tele_fapp1_func Cat_cat Cat_cat
+  (@id Cat_cat Cat_cat) ...`.
+- `comp_cat_con_fapp1_func` is now a transparent identity-family alias for
+  `@hom_precomp_along_fapp1_func Cat_cat Cat_cat
+  (@id Cat_cat Cat_cat) ...`.
+- `comp_cat_con_func_func_fapp1_func` is now a transparent identity-family
+  alias for `@hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat
+  (@id Cat_cat Cat_cat) ...`.
+- The direct `fapp0` rewrite rules headed by those four wrapper aliases have
+  been deleted.  Their public compatibility paths now compute through the
+  generic `hom_*_fapp1_func` projection rules and the Phase 4 capped bridges.
+- The broad proof-time comparison between arbitrary-family
+  `hom_postcomp_fapp1_func` and `comp_cat_cov_fapp1_func` has been removed.
+  Arbitrary-family consumers should use `hom_postcomp_fapp1_func` directly.
+
+Diagnostics now include explicit public-path checks for:
+
+```text
+fapp0(comp_cat_cov_fapp1_func(G), eta)
+  -> comp_cat_cov_transf(G,eta)
+
+fapp0(comp_cat_cov_func_func_fapp1_func, eta)
+  -> comp_cat_cov_func_func_transf(eta)
+
+fapp0(comp_cat_con_fapp1_func(F), eta)
+  -> comp_cat_con_transf(F,eta)
+
+fapp0(comp_cat_con_func_func_fapp1_func, alpha)
+  -> comp_cat_con_func_func_transf(alpha)
+```
+
+Post-promotion audit:
+
+```text
+No rule/with/unif_rule pre-arrow pattern in emdash3_2.lp discriminates on
+comp_cat_cov_fapp1_func, comp_cat_con_fapp1_func,
+comp_cat_cov_func_func_fapp1_func, or comp_cat_con_func_func_fapp1_func.
+```
+
+Validation commands run during promotion:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+```
+
+Warning-enabled results after active promotion:
+
+```text
+active make warning-summary: 1314 total warnings
+  1150 unjoinable critical pair
+   164 replaceable pattern variable
+```
+
+This is unchanged from the Phase 4 active baseline.  The remaining top
+critical-pair heads are still the known composition/hom-action families headed
+by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`, `fapp1_fapp0`,
+`fapp1_func`, and `hom_precomp_along_fapp0`.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -988,6 +1136,8 @@ pure comp_cat_cov/con object-action helpers are transparent identity-family
 no rewrite LHS discriminates on those transparent aliases;
 Cat-only transfor projection heads remain only where they expose tapp0/tapp1
   structure;
+functor-level comp_cat_*_fapp1_func wrappers are transparent aliases of
+  identity-family hom_*_fapp1_func owners;
 diagnostics distinguish generic-owner normal forms from public alias
   compatibility;
 make check passes;
@@ -1015,9 +1165,10 @@ warning-summary deltas are classified.
 4. Should `comp_cat_cov_fapp1_func`, `comp_cat_con_fapp1_func`, and the
    `*_func_func_fapp1_func` heads remain?
 
-   Current leaning: demote them if their only role is a functor-level wrapper
-   around the generic `hom_*_fapp1_func` owner.  Keep the capped transfor
-   heads that own `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`.
+   Resolved by the 2026-07-05 corrected assessment: demote them to transparent
+   identity-family aliases of the generic `hom_*_fapp1_func` owners.  Keep the
+   capped transfor heads that own `tapp0_fapp0`, `tapp1_func`, and
+   `tapp1_fapp0`.
 
 ## Side-Task Ledger
 
@@ -1034,4 +1185,7 @@ warning-summary deltas are classified.
   specialized `hom_*` LHSs.  Status: promoted on 2026-07-05 for the capped
   identity-family bridges.
 - `CATALIAS-06`: Update diagnostics and warning inventory after promotion.
-  Status: complete for Phases 1-4.
+  Status: complete for Phases 1-5.
+- `CATALIAS-07`: Demote functor-level Cat higher-action wrappers to
+  identity-family `hom_*_fapp1_func` aliases.  Status: promoted on
+  2026-07-05.
