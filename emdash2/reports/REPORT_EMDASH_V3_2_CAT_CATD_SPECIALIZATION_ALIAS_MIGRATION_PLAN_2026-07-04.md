@@ -15,7 +15,12 @@ identity-family Cat-only transfor inbound bridges, functor-level
 Cat bridge/runtime cleanup promoted.  Phase 6 generalized arbitrary-base
 fixed capped Cat transfor bridges and linked tele Cat projection heads are
 promoted for the currently needed component and postcomposition off-diagonal
-projection ladders.
+projection ladders.  A 2026-07-05 follow-up correction records that the fixed
+`comp_cat_cov_transf` / `comp_cat_con_transf` heads themselves still need the
+stronger as-general-as-feasible `K,E` generalization; a focused probe shows it
+is feasible with raw Cat-composition endpoints.  The
+`hom_precomp_along_cat_tele_transf` off-diagonal projection ladder also remains
+deferred.
 
 ## Purpose
 
@@ -1323,9 +1328,10 @@ normal-form mismatch this plan is trying to remove.
 
 The Phase 6 design target is therefore:
 
-- reuse the existing `comp_cat_cov_transf` and `comp_cat_con_transf` heads for
-  fixed capped arbitrary-base bridges, because their arguments can be
-  instantiated with fibres `E[x]`, `E[y]`, and functorial action `E[f]`;
+- initially route fixed capped arbitrary-base bridges through
+  `comp_cat_cov_transf` and `comp_cat_con_transf` instantiated at fibres
+  `E[x]`, `E[y]`, and functorial action `E[f]`; the corrected follow-up below
+  upgrades this to generalizing those fixed heads themselves;
 - introduce new generalized tele heads whose endpoints are generic
   `hom_postcomp_func` / `hom_precomp_along_func` endpoints, not identity-family
   `comp_cat_*` endpoints;
@@ -1601,6 +1607,125 @@ composition/hom-action/projection families (`comp_fapp0`,
 `hom_postcomp_fapp0`, `tapp0_fapp0`, `fapp1_fapp0`, and
 `hom_postcomp_tele_fapp1_fapp0`).
 
+## Corrected Assessment 2026-07-05: Fixed Heads Still Need Generalization
+
+The Phase 6 checkpoint above promoted arbitrary-base bridge rules for fixed
+capped Cat actions, but it did not yet generalize the fixed primitive heads
+themselves.  Therefore the active implementation is incomplete relative to the
+stronger "as-general-as-feasible Cat specialization" principle.
+
+The active bridge rules currently have the shape:
+
+```text
+hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
+  -> comp_cat_cov_transf(W,E[x],E[y],E[f],G,H,eta)
+
+hom_precomp_along_fapp1_fapp0 K Cat_cat E Z x y f G H eta
+  -> comp_cat_con_transf(E[x],E[y],Z,E[f],G,H,eta)
+```
+
+This makes arbitrary-family `hom_*` terms enter the Cat transfor projection
+ladder, but the target heads are still ordinary identity-family-shaped
+presentations.  The intended next fixed-head migration is to let those
+Cat-specialized transfor heads carry the arbitrary family directly:
+
+```text
+comp_cat_cov_transf K E W x y f G H eta
+  : Transf
+      (comp_cat_fapp0 W E[x] E[y] E[f] G)
+      (comp_cat_fapp0 W E[x] E[y] E[f] H)
+
+comp_cat_con_transf K E Z x y f G H eta
+  : Transf
+      (comp_cat_fapp0 E[x] E[y] Z G E[f])
+      (comp_cat_fapp0 E[x] E[y] Z H E[f])
+```
+
+The old public ordinary Cat presentations should then be rewritten as
+identity-family specializations:
+
+```text
+comp_cat_cov_transf(X,Y,Z,G,F,H,eta)
+  := comp_cat_cov_transf Cat_cat (id Cat_cat) X Y Z G F H eta
+
+comp_cat_con_transf(X,Y,Z,F,G,H,eta)
+  := comp_cat_con_transf Cat_cat (id Cat_cat) Z X Y F G H eta
+```
+
+This is analogous to the already-promoted tele-level solution:
+`comp_cat_cov_func_func_transf` and `comp_cat_con_func_func_transf` became
+identity-family aliases of the generalized
+`hom_postcomp_cat_tele_transf` and `hom_precomp_along_cat_tele_transf` heads.
+
+Focused probe result:
+
+```text
+tmp/probes/catalias_phase6_general_fixed_heads_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_general_fixed_heads_probe.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_general_fixed_heads_probe.lp
+```
+
+Both probes passed.  The warning-enabled probe reported:
+
+```text
+1312 total warnings
+  1146 unjoinable critical pair
+   166 replaceable pattern variable
+```
+
+One attempted variant used generic `hom_postcomp_fapp0` /
+`hom_precomp_along_fapp0` endpoints for the fixed heads.  That variant failed
+subject preservation because the existing `tapp1_*` projection rules compute
+through ordinary Cat composition endpoints.  Therefore the feasible fixed-head
+generalization should use raw Cat-composition endpoints as shown above.  This
+differs from the tele heads, whose endpoints must remain generic
+`hom_postcomp_func` / `hom_precomp_along_func` endpoints to preserve the
+generic owner of the whole tele-level action.
+
+The generalized fixed heads should own generalized projection rules directly.
+For example, the LHS should be headed by the generalized symbol:
+
+```text
+tapp0_fapp0(..., comp_cat_cov_transf K E W x y f G H eta)
+  -> E[f][eta[-]]
+
+tapp1_func(..., comp_cat_cov_transf K E W x y f G H eta)
+  -> E[f][eta[-]]
+
+tapp1_fapp0(..., comp_cat_cov_transf K E W x y f G H eta, p)
+  -> E[f][eta[p]]
+
+tapp0_fapp0(..., comp_cat_con_transf K E Z x y f G H eta)
+  -> eta[E[f][-]]
+
+tapp1_func(..., comp_cat_con_transf K E Z x y f G H eta)
+  -> eta[E[f][-]]
+
+tapp1_fapp0(..., comp_cat_con_transf K E Z x y f G H eta, p)
+  -> eta[E[f][p]]
+```
+
+The active tele heads already follow the as-general-as-feasible principle for
+their promoted projection surface.  In the active source,
+`hom_postcomp_cat_tele_transf K E W x y f g alpha` is linked by runtime rewrite
+from `hom_postcomp_tele_fapp1_fapp0 Cat_cat K E ...` and already owns
+generalized `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections.
+Likewise, `hom_precomp_along_cat_tele_transf K E Z x y f g alpha` is linked by
+runtime rewrite from `hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E ...` and
+already owns its generalized `tapp0_fapp0` projection.
+
+The remaining tele-level semantic-completeness gap is specifically:
+
+```text
+hom_precomp_along_cat_tele_transf
+  missing generalized tapp1_func / tapp1_fapp0 off-diagonal projection ladder
+```
+
+That deferred ladder should be implemented after or alongside the fixed-head
+generalization, because its natural RHS will route through the generalized
+fixed `comp_cat_cov_transf` / `comp_cat_con_transf` surface and possibly a
+dual horizontal-composite helper.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -1613,6 +1738,14 @@ pure comp_cat_cov/con object-action helpers are transparent identity-family
 no rewrite LHS discriminates on those transparent aliases;
 Cat-only transfor projection heads remain only where they expose tapp0/tapp1
   structure;
+fixed `comp_cat_cov_transf` and `comp_cat_con_transf` heads carry arbitrary
+  `K,E` Cat-family parameters, with old ordinary Cat spellings as
+  identity-family aliases;
+generalized fixed `comp_cat_cov_transf` and `comp_cat_con_transf` own their
+  `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules;
+generalized `hom_postcomp_cat_tele_transf` owns its component and off-diagonal
+  projection rules, and generalized `hom_precomp_along_cat_tele_transf` owns
+  the same once the deferred ladder is promoted;
 functor-level comp_cat_*_fapp1_func wrappers are transparent aliases of
   identity-family hom_*_fapp1_func owners;
 diagnostics distinguish generic-owner normal forms from public alias
@@ -1631,9 +1764,11 @@ warning-summary deltas are classified.
 2. Should generalized Cat-specialized transfor heads be introduced for
    arbitrary `E : Functor K Cat_cat`?
 
-   Current leaning: yes, but only for capped transfor projection heads that
+   Resolved direction: yes, but only for capped transfor projection heads that
    expose extra Cat structure.  Do not introduce generalized pure
-   `comp_cat*` aliases merely to rename the generic `hom_*` API.
+   `comp_cat*` aliases merely to rename the generic `hom_*` API.  The fixed
+   `comp_cat_cov_transf` / `comp_cat_con_transf` heads should be generalized
+   to arbitrary `K,E`; the pure `comp_cat_*_func*` helpers remain aliases.
 
 3. Should Cat-specialized left-associated composition remain runtime?
 
@@ -1673,12 +1808,23 @@ warning-summary deltas are classified.
   2026-07-05.
 - `CATALIAS-09`: Design generalized arbitrary-base Cat-family transfor
   projection heads for `E : Functor K Cat_cat`.  Status: feasibility reviewed
-  on 2026-07-05, design clarified, and promoted for fixed capped bridges,
-  linked tele heads, tele-postcomposition component/off-diagonal projections,
-  and tele-precomposition component projection.  Tele-precomposition
-  off-diagonal projections remain deferred.
+  on 2026-07-05, design clarified, and promoted for arbitrary-base bridge
+  rules, linked tele heads, tele-postcomposition component/off-diagonal
+  projections, and tele-precomposition component projection.  The stronger
+  fixed-head `K,E` generalization and tele-precomposition off-diagonal
+  projections remain deferred.
 - `CATALIAS-10`: Resolve the staged 2026-07-05 cleanup before promotion.
   Status: complete.  The duplicate raw DefIso runtime pair is absent from the
   active source, and the retained identity-family
   `hom_precomp_along_fapp0` proof-time bridge has a typed `eq_refl`
   diagnostic.
+- `CATALIAS-11`: Generalize fixed `comp_cat_cov_transf` /
+  `comp_cat_con_transf` heads to arbitrary `K,E`, demote old ordinary Cat
+  spellings to identity-family aliases, and migrate their `tapp0_fapp0`,
+  `tapp1_func`, and `tapp1_fapp0` projection rules to the generalized heads.
+  Status: focused full-file probe passed on 2026-07-05 with raw
+  Cat-composition endpoints; active-file promotion deferred to the next
+  implementation turn.
+- `CATALIAS-12`: Add generalized `tapp1_func` / `tapp1_fapp0` off-diagonal
+  projection ladder for `hom_precomp_along_cat_tele_transf`.
+  Status: deferred; should be probed after or alongside `CATALIAS-11`.
