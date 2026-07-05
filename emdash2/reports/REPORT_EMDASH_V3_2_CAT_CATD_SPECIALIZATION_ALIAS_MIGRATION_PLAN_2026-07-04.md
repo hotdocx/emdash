@@ -12,8 +12,10 @@ Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb810
 Status: Phases 1-5 identity/composition/pure-curried-helper alias migrations,
 identity-family Cat-only transfor inbound bridges, functor-level
 `*_fapp1_func` wrapper demotions, and the 2026-07-05 postcomposition capped
-Cat bridge/runtime cleanup promoted.  Generalized arbitrary-family Cat transfor
-projection heads remain deferred to a later phase.
+Cat bridge/runtime cleanup promoted.  Phase 6 generalized arbitrary-base
+fixed capped Cat transfor bridges and linked tele Cat projection heads are
+promoted for the currently needed component and postcomposition off-diagonal
+projection ladders.
 
 ## Purpose
 
@@ -1485,6 +1487,120 @@ primitive is justified only because it owns Cat-specific `tapp0/tapp1`
 projections, while generic functoriality, identity, and composition remain
 owned by `hom_*`.
 
+## Implementation Checkpoint 2026-07-05, Phase 6
+
+Phase 6 has been promoted for the arbitrary-base Cat-valued transfor projection
+paths currently needed by the migration.
+
+Implemented decisions:
+
+- The capped postcomposition bridge is now arbitrary-base:
+
+  ```text
+  hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
+    -> comp_cat_cov_transf(W,E[x],E[y],E[f],G,H,eta)
+  ```
+
+- The redundant identity-family capped postcomposition bridge was deleted;
+  the arbitrary-base bridge covers it by `K = Cat_cat` and
+  `E = id Cat_cat`.
+- The capped precomposition bridge is now arbitrary-base:
+
+  ```text
+  hom_precomp_along_fapp1_fapp0 K Cat_cat E Z x y f G H eta
+    -> comp_cat_con_transf(E[x],E[y],Z,E[f],G,H,eta)
+  ```
+
+- Two linked generalized tele heads were introduced:
+
+  ```text
+  hom_postcomp_cat_tele_transf(K,E,W,x,y,f,g,alpha)
+    : Transf
+        (hom_postcomp_func Cat_cat K E W x y f)
+        (hom_postcomp_func Cat_cat K E W x y g)
+
+  hom_precomp_along_cat_tele_transf(K,E,Z,x,y,f,g,alpha)
+    : Transf
+        (hom_precomp_along_func K Cat_cat E Z x y f)
+        (hom_precomp_along_func K Cat_cat E Z x y g)
+  ```
+
+- Runtime bridge rules link the generic owners to those heads:
+
+  ```text
+  hom_postcomp_tele_fapp1_fapp0 Cat_cat K E W x y f g alpha
+    -> hom_postcomp_cat_tele_transf(K,E,W,x,y,f,g,alpha)
+
+  hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E Z x y f g alpha
+    -> hom_precomp_along_cat_tele_transf(K,E,Z,x,y,f,g,alpha)
+  ```
+
+- The old identity-family public heads are now transparent aliases:
+
+  ```text
+  comp_cat_cov_func_func_transf(X,Y,Z,G,H,eta)
+    := hom_postcomp_cat_tele_transf(Cat_cat,id_Cat,X,Y,Z,G,H,eta)
+
+  comp_cat_con_func_func_transf(X,Y,Z,F,K,alpha)
+    := hom_precomp_along_cat_tele_transf(Cat_cat,id_Cat,Z,X,Y,F,K,alpha)
+  ```
+
+- The generalized tele-postcomposition head owns `tapp0_fapp0`,
+  `tapp1_func`, and `tapp1_fapp0` by routing components and off-diagonal
+  capped projections through the existing ordinary horizontal-composite
+  helpers.
+- The generalized tele-precomposition head currently owns `tapp0_fapp0`.
+  Its off-diagonal `tapp1_func` / `tapp1_fapp0` ladder remains deferred,
+  matching the previous identity-family situation where
+  `comp_cat_con_func_func_transf` only had the component projection consumed
+  by active checks.
+- The retained identity-family proof-time bridge
+  `hom_precomp_along_fapp0 A A (id A) ... == comp_fapp0 A ...` now has a
+  typed `eq_refl` diagnostic, so it is no longer only syntactically plausible.
+
+Diagnostics were added for:
+
+```text
+arbitrary-base capped postcomposition bridge;
+arbitrary-base capped precomposition bridge;
+generic tele owner -> linked generalized Cat tele head bridges;
+old comp_cat_*_func_func_transf public aliases as identity-family views;
+generalized tele-postcomposition tapp0_fapp0, tapp1_func, tapp1_fapp0;
+generalized tele-precomposition tapp0_fapp0;
+identity-family hom_precomp_along_fapp0 proof-time bridge.
+```
+
+Probe and validation commands run during promotion:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_fixed_bridges.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_fixed_bridges.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_tele_heads.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_tele_heads.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+```
+
+Warning-enabled results after active promotion:
+
+```text
+active make warning-summary: 1313 total warnings
+  1147 unjoinable critical pair
+   166 replaceable pattern variable
+```
+
+The warning count is lower than the immediately preceding active summary
+recorded in this report (`1316 = 1152 + 164`).  The replaceable-pattern count
+increased by two because the retained identity-family precomposition
+proof-time bridge is now active and documented by a typed diagnostic.  The
+critical-pair count decreased by five; remaining top heads are the known
+composition/hom-action/projection families (`comp_fapp0`,
+`hom_postcomp_fapp0`, `tapp0_fapp0`, `fapp1_fapp0`, and
+`hom_postcomp_tele_fapp1_fapp0`).
+
 ## Success Criteria
 
 The migration is successful when:
@@ -1557,11 +1673,12 @@ warning-summary deltas are classified.
   2026-07-05.
 - `CATALIAS-09`: Design generalized arbitrary-base Cat-family transfor
   projection heads for `E : Functor K Cat_cat`.  Status: feasibility reviewed
-  on 2026-07-05 and design clarified.  Fixed capped bridges are mechanically
-  feasible; tele-level arbitrary-base projection heads need linked generalized
-  owners with generic `hom_*` endpoints, and the old identity-family tele heads
-  should become aliases/special cases rather than independent primitive owners.
+  on 2026-07-05, design clarified, and promoted for fixed capped bridges,
+  linked tele heads, tele-postcomposition component/off-diagonal projections,
+  and tele-precomposition component projection.  Tele-precomposition
+  off-diagonal projections remain deferred.
 - `CATALIAS-10`: Resolve the staged 2026-07-05 cleanup before promotion.
-  Status: open.  Delete the duplicate raw DefIso runtime pair, and either
-  justify the new identity-family `hom_precomp_along_fapp0` proof-time bridge
-  with a concrete diagnostic or defer it.
+  Status: complete.  The duplicate raw DefIso runtime pair is absent from the
+  active source, and the retained identity-family
+  `hom_precomp_along_fapp0` proof-time bridge has a typed `eq_refl`
+  diagnostic.

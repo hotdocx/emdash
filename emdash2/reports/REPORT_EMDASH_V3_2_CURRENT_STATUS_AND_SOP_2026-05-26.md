@@ -128,7 +128,18 @@ is now a runtime rewrite, because it exposes the ordinary transfor projection
 ladder.  The stale tele-precomposition proof-time comparisons against ordinary
 functor-composition action were removed; generalized arbitrary-base
 `E : K -> Cat` transfor projection heads remain a deferred Cat-family design
-task.
+task.  Postscript 2026-07-05c: the first generalized arbitrary-base Cat-family
+slice is now active.  Fixed capped bridges normalize to the existing
+`comp_cat_cov_transf` and `comp_cat_con_transf` heads after applying `E` to the
+base arrow.  New linked tele heads
+`hom_postcomp_cat_tele_transf` and `hom_precomp_along_cat_tele_transf` are the
+Cat-valued projection normal forms of generic
+`hom_postcomp_tele_fapp1_fapp0` and
+`hom_precomp_along_tele_fapp1_fapp0`; the old
+`comp_cat_cov_func_func_transf` and `comp_cat_con_func_func_transf` names are
+identity-family aliases.  Tele-postcomposition exposes component and
+off-diagonal projections; tele-precomposition currently exposes the component
+projection, with off-diagonal projections deferred.
 
 The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
 and `Prof` are transparent aliases for families on `A^op × B`.

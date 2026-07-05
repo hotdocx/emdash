@@ -1380,6 +1380,17 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   fapp0 (@hom_precomp_along_func A B F z w x h) g
     ≡ @hom_precomp_along_fapp0 A B F z w x h g;
 
+// This typed `eq_refl` exercises the proof-time unification bridge between
+// identity-family precomposition and ordinary raw composition.
+assert [A : Cat] (z w x : τ (Obj A))
+  (h : τ (Hom A w x))
+  (g : τ (Hom A x z)) ⊢
+  eq_refl (@hom_precomp_along_fapp0 A A (@id Cat_cat A) z w x h g)
+  : τ (
+      @hom_precomp_along_fapp0 A A (@id Cat_cat A) z w x h g
+      =
+      @comp_fapp0 A w x z g h);
+
 // Hom-action functoriality joins for precomposition.
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (x : τ (Obj A)) ⊢
@@ -1756,6 +1767,23 @@ assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat)
     eta
   ≡ @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat F Z W X H G K eta;
 
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (Z : Cat)
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y))
+  [G H : τ (Functor (@fapp0 K Cat_cat E y) Z)]
+  (eta : τ (Transf G H)) ⊢
+  @hom_precomp_along_fapp1_fapp0 K Cat_cat E Z x y f G H eta
+  ≡ @comp_cat_con_transf
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      Z
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      G
+      H
+      eta;
+
 assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
   (eta : τ (Transf G H)) ⊢
   @fapp1_fapp0
@@ -1817,6 +1845,23 @@ assert (E : τ (Functor Cat_cat Cat_cat)) (W X Y : Cat)
     eta
   ≡ @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat E W X Y L G K eta;
 
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (W : Cat)
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y))
+  [G H : τ (Functor W (@fapp0 K Cat_cat E x))]
+  (eta : τ (Transf G H)) ⊢
+  @hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
+  ≡ @comp_cat_cov_transf
+      W
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      G
+      H
+      eta;
+
 assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
   (eta : τ (Transf F H)) ⊢
   @fapp1_fapp0
@@ -1860,6 +1905,15 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
     alpha
   ≡ @hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g alpha;
 
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (W : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g)) ⊢
+  @hom_postcomp_tele_fapp1_fapp0 Cat_cat K E W x y f g alpha
+  ≡ @hom_postcomp_cat_tele_transf K E W x y f g alpha;
+
 assert (W X Y : Cat) (G H : τ (Functor X Y)) ⊢
   @fapp1_func
     (Functor_cat X Y)
@@ -1887,9 +1941,122 @@ assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
     eta
   ≡ @comp_cat_cov_func_func_transf W X Y G H eta;
 
+assert (W X Y : Cat) [G H : τ (Functor X Y)]
+  (eta : τ (Transf G H)) ⊢
+  @comp_cat_cov_func_func_transf W X Y G H eta
+  ≡ @hom_postcomp_cat_tele_transf
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      W
+      X
+      Y
+      G
+      H
+      eta;
+
 assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
   fapp0 (@comp_cat_cov_func_func_fapp1_func W X Y G H) eta
     ≡ @comp_cat_cov_func_func_transf W X Y G H eta;
+
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (W : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g))
+  (P : τ (Functor W (@fapp0 K Cat_cat E x))) ⊢
+  @tapp0_fapp0
+    (Functor_cat W (@fapp0 K Cat_cat E x))
+    (Functor_cat W (@fapp0 K Cat_cat E y))
+    (@hom_postcomp_func Cat_cat K E W x y f)
+    (@hom_postcomp_func Cat_cat K E W x y g)
+    P
+    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+  ≡ @comp_cat_con_transf
+      W
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      P
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      (@fapp1_fapp0 K Cat_cat E x y g)
+      (@fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat
+          (@fapp0 K Cat_cat E x)
+          (@fapp0 K Cat_cat E y))
+        (@fapp1_func K Cat_cat E x y)
+        f
+        g
+        alpha);
+
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (W : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g))
+  (P Q : τ (Functor W (@fapp0 K Cat_cat E x))) ⊢
+  @tapp1_func
+    (Functor_cat W (@fapp0 K Cat_cat E x))
+    (Functor_cat W (@fapp0 K Cat_cat E y))
+    (@hom_postcomp_func Cat_cat K E W x y f)
+    (@hom_postcomp_func Cat_cat K E W x y g)
+    P
+    Q
+    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+  ≡ @comp_cat_cov_func_func_tapp1_func
+      W
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      (@fapp1_fapp0 K Cat_cat E x y g)
+      (@fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat
+          (@fapp0 K Cat_cat E x)
+          (@fapp0 K Cat_cat E y))
+        (@fapp1_func K Cat_cat E x y)
+        f
+        g
+        alpha)
+      P
+      Q;
+
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (W : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g))
+  (P Q : τ (Functor W (@fapp0 K Cat_cat E x)))
+  (beta : τ (Transf P Q)) ⊢
+  @tapp1_fapp0
+    (Functor_cat W (@fapp0 K Cat_cat E x))
+    (Functor_cat W (@fapp0 K Cat_cat E y))
+    (@hom_postcomp_func Cat_cat K E W x y f)
+    (@hom_postcomp_func Cat_cat K E W x y g)
+    P
+    Q
+    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+    beta
+  ≡ @comp_cat_cov_func_func_tapp1_fapp0
+      W
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      (@fapp1_fapp0 K Cat_cat E x y g)
+      (@fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat
+          (@fapp0 K Cat_cat E x)
+          (@fapp0 K Cat_cat E y))
+        (@fapp1_func K Cat_cat E x y)
+        f
+        g
+        alpha)
+      P
+      Q
+      beta;
 
 // Higher action of the tele-level precomposition-along stable head.
 assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
@@ -1917,6 +2084,15 @@ assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
     k
     alpha
   ≡ @hom_precomp_along_tele_fapp1_fapp0 A B F Z W X h k alpha;
+
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (Z : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g)) ⊢
+  @hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E Z x y f g alpha
+  ≡ @hom_precomp_along_cat_tele_transf K E Z x y f g alpha;
 
 assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
   (W X : τ (Obj A)) (h k : τ (Hom A W X))
@@ -1962,6 +2138,19 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
     alpha
   ≡ @comp_cat_con_func_func_transf X Y Z F K alpha;
 
+assert [X Y Z : Cat] [F K : τ (Functor X Y)]
+  (alpha : τ (Transf F K)) ⊢
+  @comp_cat_con_func_func_transf X Y Z F K alpha
+  ≡ @hom_precomp_along_cat_tele_transf
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      Z
+      X
+      Y
+      F
+      K
+      alpha;
+
 assert [X Y Z : Cat] (F K : τ (Functor X Y))
   (alpha : τ (Transf F K)) ⊢
   fapp0 (@comp_cat_con_func_func_fapp1_func X Y Z F K) alpha
@@ -1977,6 +2166,37 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
     G
     (@comp_cat_con_func_func_transf X Y Z F K alpha)
   ≡ @comp_cat_cov_transf X Y Z G F K alpha;
+
+assert [K : Cat]
+  (E : τ (Functor K Cat_cat))
+  (Z : Cat)
+  [x y : τ (Obj K)]
+  [f g : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) f g))
+  (P : τ (Functor (@fapp0 K Cat_cat E y) Z)) ⊢
+  @tapp0_fapp0
+    (Functor_cat (@fapp0 K Cat_cat E y) Z)
+    (Functor_cat (@fapp0 K Cat_cat E x) Z)
+    (@hom_precomp_along_func K Cat_cat E Z x y f)
+    (@hom_precomp_along_func K Cat_cat E Z x y g)
+    P
+    (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
+  ≡ @comp_cat_cov_transf
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      Z
+      P
+      (@fapp1_fapp0 K Cat_cat E x y f)
+      (@fapp1_fapp0 K Cat_cat E x y g)
+      (@fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat
+          (@fapp0 K Cat_cat E x)
+          (@fapp0 K Cat_cat E y))
+        (@fapp1_func K Cat_cat E x y)
+        f
+        g
+        alpha);
 
 /*
   Deferred diagnostic: Cat-specialized precomposition telescope higher-actions
