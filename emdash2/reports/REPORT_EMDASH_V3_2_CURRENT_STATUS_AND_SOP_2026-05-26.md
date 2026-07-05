@@ -138,8 +138,20 @@ Cat-valued projection normal forms of generic
 `hom_precomp_along_tele_fapp1_fapp0`; the old
 `comp_cat_cov_func_func_transf` and `comp_cat_con_func_func_transf` names are
 identity-family aliases.  Tele-postcomposition exposes component and
-off-diagonal projections; tele-precomposition currently exposes the component
-projection, with off-diagonal projections deferred.
+off-diagonal projections; tele-precomposition now exposes the component and
+off-diagonal projections as well.  Postscript 2026-07-05d:
+the fixed Cat transfor heads `comp_cat_cov_transf` and `comp_cat_con_transf`
+now carry the arbitrary Cat-family parameters `K,E` directly, and their
+`tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules are owned by
+the generalized heads.  The ordinary Cat surface is the identity-family
+specialization `K := Cat_cat, E := id_Cat`.  The generalized projection LHSs
+infer reconstructible category slots so identity-family arguments such as
+`fapp0(id_Cat,Z)` cannot normalize away before the owner rule matches.
+Postscript 2026-07-05e: `hom_precomp_along_cat_tele_transf` also owns its
+generalized `tapp1_func` / `tapp1_fapp0` off-diagonal projection ladder.  The
+ordinary dual helper `comp_cat_con_func_func_tapp1_func` is a small functor in
+`eta : G => H` whose object action reuses the existing horizontal-composite
+head `comp_cat_cov_func_func_tapp1_fapp0`.
 
 The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
 and `Prof` are transparent aliases for families on `A^op × B`.

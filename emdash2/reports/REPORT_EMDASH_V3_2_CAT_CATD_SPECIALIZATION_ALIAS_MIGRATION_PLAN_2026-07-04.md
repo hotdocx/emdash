@@ -14,13 +14,11 @@ identity-family Cat-only transfor inbound bridges, functor-level
 `*_fapp1_func` wrapper demotions, and the 2026-07-05 postcomposition capped
 Cat bridge/runtime cleanup promoted.  Phase 6 generalized arbitrary-base
 fixed capped Cat transfor bridges and linked tele Cat projection heads are
-promoted for the currently needed component and postcomposition off-diagonal
-projection ladders.  A 2026-07-05 follow-up correction records that the fixed
-`comp_cat_cov_transf` / `comp_cat_con_transf` heads themselves still need the
-stronger as-general-as-feasible `K,E` generalization; a focused probe shows it
-is feasible with raw Cat-composition endpoints.  The
-`hom_precomp_along_cat_tele_transf` off-diagonal projection ladder also remains
-deferred.
+promoted.  A 2026-07-05 follow-up generalized the fixed
+`comp_cat_cov_transf` / `comp_cat_con_transf` heads themselves to the stronger
+as-general-as-feasible `K,E` form with raw Cat-composition endpoints.  The
+`hom_precomp_along_cat_tele_transf` off-diagonal projection ladder is now
+promoted through a small dual horizontal-composite helper.
 
 ## Purpose
 
@@ -967,6 +965,7 @@ python3 scripts/generate_check_catalog.py --strict
 make warning-summary
 python3 scripts/audit_rule_lhs.py --strict
 git diff --check
+make ci
 ```
 
 Warning-enabled results after active promotion:
@@ -1118,6 +1117,7 @@ make catalog
 make warning-summary
 python3 scripts/audit_rule_lhs.py --strict
 git diff --check
+make ci
 ```
 
 Warning-enabled results after active promotion:
@@ -1673,6 +1673,45 @@ Both probes passed.  The warning-enabled probe reported:
    166 replaceable pattern variable
 ```
 
+Promotion update 2026-07-05: the generalized fixed heads were promoted in
+`emdash3_2.lp`, and the diagnostics in `emdash3_2_checks.lp` were migrated to
+the new `K,E` arity.  The active promotion required one additional
+LHS-hygiene correction: the generalized `tapp0_fapp0`, `tapp1_func`, and
+`tapp1_fapp0` projection rules for both `comp_cat_cov_transf` and
+`comp_cat_con_transf` now infer the reconstructible source/target category
+slots instead of matching reducible terms such as `fapp0(id_Cat, Z)`.  Without
+that correction, the ordinary identity-family public surface could normalize
+the inner category argument before the projection rule matched.  The focused
+probe was:
+
+```text
+tmp/probes/catalias_phase6_general_fixed_lhs_hygiene_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_general_fixed_lhs_hygiene_probe.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase6_general_fixed_lhs_hygiene_probe.lp
+```
+
+The active validation after promotion was:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+```
+
+The warning summary after promotion is:
+
+```text
+1315 total warnings
+  1149 unjoinable critical pair
+   166 replaceable pattern variable
+```
+
+This small critical-pair increase is accepted under the SOP because the
+generalized transfor term is the semantic owner of the projection, while the
+category arguments are reconstructible typing information.
+
 One attempted variant used generic `hom_postcomp_fapp0` /
 `hom_precomp_along_fapp0` endpoints for the fixed heads.  That variant failed
 subject preservation because the existing `tapp1_*` projection rules compute
@@ -1712,19 +1751,48 @@ from `hom_postcomp_tele_fapp1_fapp0 Cat_cat K E ...` and already owns
 generalized `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections.
 Likewise, `hom_precomp_along_cat_tele_transf K E Z x y f g alpha` is linked by
 runtime rewrite from `hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E ...` and
-already owns its generalized `tapp0_fapp0` projection.
+owns its generalized `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`
+projections.
 
-The remaining tele-level semantic-completeness gap is specifically:
+Promotion update 2026-07-05: the remaining tele-precomposition
+off-diagonal ladder was promoted by adding the small dual helper
+`comp_cat_con_func_func_tapp1_func`.  This helper is the same ordinary
+horizontal-composite object as `comp_cat_cov_func_func_tapp1_fapp0`, but
+curried in the ordinary transfor `eta : G => H`; its `fapp0` rule routes
+directly to `comp_cat_cov_func_func_tapp1_fapp0`.  The generalized
+`hom_precomp_along_cat_tele_transf` `tapp1_func` and `tapp1_fapp0` rules then
+instantiate that helper in the fibres `E[x]`, `E[y]`.
+
+Focused probe:
 
 ```text
-hom_precomp_along_cat_tele_transf
-  missing generalized tapp1_func / tapp1_fapp0 off-diagonal projection ladder
+tmp/probes/catalias_phase12_precomp_tele_offdiag_probe.lp
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase12_precomp_tele_offdiag_probe.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase12_precomp_tele_offdiag_probe.lp
 ```
 
-That deferred ladder should be implemented after or alongside the fixed-head
-generalization, because its natural RHS will route through the generalized
-fixed `comp_cat_cov_transf` / `comp_cat_con_transf` surface and possibly a
-dual horizontal-composite helper.
+Final active validation after CATALIAS-12:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+make ci
+```
+
+Final warning summary:
+
+```text
+1317 total warnings
+  1151 unjoinable critical pair
+   166 replaceable pattern variable
+```
+
+The CATALIAS-12 promotion accounts for the final +2 critical-pair delta over
+the CATALIAS-11 state; this is accepted because the new rules expose a
+previously missing semantic projection ladder.
 
 ## Success Criteria
 
@@ -1745,7 +1813,7 @@ generalized fixed `comp_cat_cov_transf` and `comp_cat_con_transf` own their
   `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules;
 generalized `hom_postcomp_cat_tele_transf` owns its component and off-diagonal
   projection rules, and generalized `hom_precomp_along_cat_tele_transf` owns
-  the same once the deferred ladder is promoted;
+  the same;
 functor-level comp_cat_*_fapp1_func wrappers are transparent aliases of
   identity-family hom_*_fapp1_func owners;
 diagnostics distinguish generic-owner normal forms from public alias
@@ -1767,7 +1835,7 @@ warning-summary deltas are classified.
    Resolved direction: yes, but only for capped transfor projection heads that
    expose extra Cat structure.  Do not introduce generalized pure
    `comp_cat*` aliases merely to rename the generic `hom_*` API.  The fixed
-   `comp_cat_cov_transf` / `comp_cat_con_transf` heads should be generalized
+   `comp_cat_cov_transf` / `comp_cat_con_transf` heads have been generalized
    to arbitrary `K,E`; the pure `comp_cat_*_func*` helpers remain aliases.
 
 3. Should Cat-specialized left-associated composition remain runtime?
@@ -1811,8 +1879,9 @@ warning-summary deltas are classified.
   on 2026-07-05, design clarified, and promoted for arbitrary-base bridge
   rules, linked tele heads, tele-postcomposition component/off-diagonal
   projections, and tele-precomposition component projection.  The stronger
-  fixed-head `K,E` generalization and tele-precomposition off-diagonal
-  projections remain deferred.
+  fixed-head `K,E` generalization is promoted under `CATALIAS-11`;
+  tele-precomposition off-diagonal projections are promoted under
+  `CATALIAS-12`.
 - `CATALIAS-10`: Resolve the staged 2026-07-05 cleanup before promotion.
   Status: complete.  The duplicate raw DefIso runtime pair is absent from the
   active source, and the retained identity-family
@@ -1822,9 +1891,15 @@ warning-summary deltas are classified.
   `comp_cat_con_transf` heads to arbitrary `K,E`, demote old ordinary Cat
   spellings to identity-family aliases, and migrate their `tapp0_fapp0`,
   `tapp1_func`, and `tapp1_fapp0` projection rules to the generalized heads.
-  Status: focused full-file probe passed on 2026-07-05 with raw
-  Cat-composition endpoints; active-file promotion deferred to the next
-  implementation turn.
+  Status: promoted on 2026-07-05 with raw Cat-composition endpoints and
+  inferred reconstructible category slots on the generalized projection LHSs.
+  `make check`, `make catalog`, `make warning-summary`,
+  `python3 scripts/audit_rule_lhs.py --strict`, `git diff --check`, and
+  `make ci` passed after promotion.
 - `CATALIAS-12`: Add generalized `tapp1_func` / `tapp1_fapp0` off-diagonal
   projection ladder for `hom_precomp_along_cat_tele_transf`.
-  Status: deferred; should be probed after or alongside `CATALIAS-11`.
+  Status: promoted on 2026-07-05 through the dual helper
+  `comp_cat_con_func_func_tapp1_func`, whose object rule reuses
+  `comp_cat_cov_func_func_tapp1_fapp0`.  `make check`, `make catalog`,
+  `make warning-summary`, `python3 scripts/audit_rule_lhs.py --strict`,
+  `git diff --check`, and `make ci` passed after promotion.
