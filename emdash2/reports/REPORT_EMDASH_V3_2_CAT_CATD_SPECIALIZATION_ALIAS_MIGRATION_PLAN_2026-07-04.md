@@ -10,8 +10,10 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
 Status: Phases 1-5 identity/composition/pure-curried-helper alias migrations,
-identity-family Cat-only transfor inbound bridges, and functor-level
-`*_fapp1_func` wrapper demotions promoted by 2026-07-05.
+identity-family Cat-only transfor inbound bridges, functor-level
+`*_fapp1_func` wrapper demotions, and the 2026-07-05 postcomposition capped
+Cat bridge/runtime cleanup promoted.  Generalized arbitrary-family Cat transfor
+projection heads remain deferred to a later phase.
 
 ## Purpose
 
@@ -1124,6 +1126,105 @@ critical-pair heads are still the known composition/hom-action families headed
 by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`, `fapp1_fapp0`,
 `fapp1_func`, and `hom_precomp_along_fapp0`.
 
+## Corrected Assessment 2026-07-05: Postcomposition Bridge Promotion
+
+The Cat_cat-indexed Cat-valued capped postcomposition comparison:
+
+```text
+@hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat E W X Y f G H eta
+  == comp_cat_cov_transf(W,E[X],E[Y],E[f],G,H,eta)
+```
+
+was previously installed as a proof-time `unif_rule`.  That was too weak for
+the intended Cat-specialized semantics: the right-hand side exposes ordinary
+transfor projections (`tapp0_fapp0`, `tapp1_func`, `tapp1_fapp0`), so the bridge
+is a runtime normal-form choice rather than mere elaboration compatibility.
+
+The bridge is now promoted to a rewrite rule:
+
+```text
+@hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat E W X Y f G H eta
+  -> comp_cat_cov_transf(W,E[X],E[Y],E[f],G,H,eta)
+```
+
+This deliberately makes Cat-valued capped postcomposition enter the existing
+`comp_cat_cov_transf` projection ladder, including for non-identity
+`E : Functor Cat_cat Cat_cat`.
+
+Two stale proof-time tele-precomposition compatibility rules were also removed:
+
+```text
+@hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat E ...
+@hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat E ...
+```
+
+They were originally runtime folds introduced during the naturality/functoriality
+work, then downgraded to `unif_rule` after the hom-precomposition endpoint owner
+changed.  A focused full-file deletion probe passed both normal and
+warning-enabled checks, and current diagnostics do not consume those
+proof-time comparisons.  The remaining precomposition story is the
+identity-family runtime bridge plus the generic `hom_precomp_along_*` owner.
+
+The following unification-rule hygiene cleanup was also promoted: reconstructible
+source/target endpoint arguments on the non-owning side of three `unif_rule`s
+were replaced by `_`, matching the same inferred-slot discipline used for
+rewrite LHSs.
+
+Validation:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+```
+
+Warning-enabled results after this promotion:
+
+```text
+active make warning-summary: 1316 total warnings
+  1152 unjoinable critical pair
+   164 replaceable pattern variable
+```
+
+This is +2 unjoinable critical-pair warnings relative to the Phase 5 active
+baseline.  The new classified family is headed by `hom_postcomp_fapp1_fapp0`
+and comes from the intended overlap between the broad Cat-valued postcomposition
+bridge and existing generic identity/opposite postcomposition paths.  This is a
+runtime semantics choice, not a reason to demote the bridge back to
+proof-time-only compatibility.
+
+## Deferred Phase 6: Generalized Cat-Family Transfor Projection Heads
+
+The postcomposition bridge promotion does not yet solve the full arbitrary-base
+case `E : Functor K Cat_cat`.  The current promoted broad bridge is still
+specialized to `Cat_cat Cat_cat E`, while true directed Cat-valued families use
+an arbitrary base category `K`.
+
+The plausible next design is to add owner-preserving generalized Cat-family
+transfor projection heads for the capped higher-action owners:
+
+```text
+hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
+  -> generalized Cat cov-transfor head
+
+hom_precomp_along_fapp1_fapp0 Cat_cat K E Z x y f G H eta
+  -> generalized Cat con-transfor head
+
+hom_postcomp_tele_fapp1_fapp0 Cat_cat K E W x y f g alpha
+  -> generalized Cat tele-postcomposition transfor head
+
+hom_precomp_along_tele_fapp1_fapp0 Cat_cat K E Z x y f g alpha
+  -> generalized Cat tele-precomposition transfor head
+```
+
+Those heads should use generic `hom_*` endpoints as their owning normal forms,
+not raw `comp_cat_fapp0` endpoints, so they do not reintroduce the endpoint
+normal-form mismatch that motivated the earlier deferred precomposition folds.
+The existing identity-family `comp_cat_*_transf` heads can later be treated as
+specializations or public views of the generalized heads if focused probes show
+that this is coherent.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -1151,11 +1252,12 @@ warning-summary deltas are classified.
    Current leaning: yes for readability, comments, and theorem statements,
    but never as rewrite discriminators.
 
-2. Should generalized `comp_cat*` names be introduced for arbitrary
-   `E : Functor K Cat_cat`?
+2. Should generalized Cat-specialized transfor heads be introduced for
+   arbitrary `E : Functor K Cat_cat`?
 
-   Current leaning: no.  The generic `hom_postcomp_*` and
-   `hom_precomp_along_*` APIs already express these types directly.
+   Current leaning: yes, but only for capped transfor projection heads that
+   expose extra Cat structure.  Do not introduce generalized pure
+   `comp_cat*` aliases merely to rename the generic `hom_*` API.
 
 3. Should Cat-specialized left-associated composition remain runtime?
 
@@ -1189,3 +1291,10 @@ warning-summary deltas are classified.
 - `CATALIAS-07`: Demote functor-level Cat higher-action wrappers to
   identity-family `hom_*_fapp1_func` aliases.  Status: promoted on
   2026-07-05.
+- `CATALIAS-08`: Promote Cat_cat-indexed Cat-valued capped postcomposition
+  bridge from proof-time compatibility to runtime projection bridge; remove
+  stale tele-precomposition proof-time scaffolding.  Status: promoted on
+  2026-07-05.
+- `CATALIAS-09`: Design generalized arbitrary-base Cat-family transfor
+  projection heads for `E : Functor K Cat_cat`.  Status: deferred to the next
+  phase.

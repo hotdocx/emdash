@@ -109,6 +109,15 @@ During early development, a “hung” typecheck usually indicates a rewrite/uni
   critical pairs; do not treat the warning count itself as a gate. A lower
   warning count from a proof-time variant is not by itself evidence that the
   proof-time variant is the correct architecture.
+- Apply the inferred-slot hygiene discipline to unification rules on both sides
+  of the comparison. If a source/target/category endpoint is reconstructible and
+  is not the intended discriminator, prefer `_` after a focused probe confirms
+  the rule still checks. Keep explicit compound expressions only when they are
+  real guards or measured subject-reduction aids, and document that reason just
+  as for rewrite-rule LHS exceptions. Do not use a verbose `unif_rule` side as
+  hidden scaffolding for a missing runtime owner; if a comparison is meant to
+  expose a computational projection ladder, probe a rewrite at the owning head
+  instead.
 - A `constant` symbol cannot head a rewrite LHS. Changing it to `injective` is
   permitted only as an explicit kernel normal-form migration: probe all
   downstream consumers, subject reduction, and the warning inventory first.

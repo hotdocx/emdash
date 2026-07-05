@@ -121,7 +121,14 @@ Cat-only heads remain exactly where they expose extra `tapp0_fapp0`,
 `comp_cat_con_func_func_fapp1_func` are transparent identity-family aliases of
 generic `hom_*_fapp1_func` owners, not rewrite discriminators.  Broad
 arbitrary-family folds remain deferred; arbitrary-family consumers should use
-`hom_*` directly.
+`hom_*` directly.  Postscript 2026-07-05b: the capped Cat-valued
+postcomposition bridge
+`hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat E ... -> comp_cat_cov_transf(...)`
+is now a runtime rewrite, because it exposes the ordinary transfor projection
+ladder.  The stale tele-precomposition proof-time comparisons against ordinary
+functor-composition action were removed; generalized arbitrary-base
+`E : K -> Cat` transfor projection heads remain a deferred Cat-family design
+task.
 
 The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
 and `Prof` are transparent aliases for families on `A^op × B`.
@@ -1140,6 +1147,15 @@ bare-variable eta pattern may typecheck as a rule but fail to solve the
 intended goal. A `constant` cannot head a rewrite LHS. Reclassifying one as
 `injective` is a global normal-form migration and requires downstream
 subject-reduction and warning audits, not just a focused beta assertion.
+
+Apply the inferred-slot hygiene discipline to unification rules on both sides
+of the comparison.  If a source/target/category endpoint is reconstructible and
+is not the intended discriminator, prefer `_` after a focused probe confirms the
+rule still checks.  Keep explicit compound expressions only when they are real
+guards or measured subject-reduction aids, and document that reason just as for
+rewrite-rule LHS exceptions.  Do not use a verbose `unif_rule` side as hidden
+scaffolding for a missing runtime owner; if a comparison is meant to expose a
+computational projection ladder, probe a rewrite at the owning head instead.
 
 Do not treat a failed bare `assert t ≡ u` as decisive when the real consumer
 has an expected type that forces a canonical presentation. Lambdapi infers the

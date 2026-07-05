@@ -2933,8 +2933,8 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
   ≡ @comp_fapp0
       Cat_cat
       $W
-      (@fapp0 Cat_cat Cat_cat $E $X)
-      (@fapp0 Cat_cat Cat_cat $E $Y)
+      _
+      _
       (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
       $G
   ↪ [ tt ≡ tt ];
@@ -3433,8 +3433,8 @@ rule @hom_precomp_along_fapp0
 unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
   ≡ @comp_fapp0
       $B
-      (@fapp0 $A $B $F $W)
-      (@fapp0 $A $B $F $X)
+      _
+      _
       $Z
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
@@ -4823,16 +4823,16 @@ symbol comp_cat_cov_transf [X Y Z : Cat]
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z G H));
 
-unif_rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
-  ≡ @comp_cat_cov_transf
+// Cat-valued capped postcomposition exposes ordinary transfor projections.
+rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
+  ↪ @comp_cat_cov_transf
       $W
       (@fapp0 Cat_cat Cat_cat $E $X)
       (@fapp0 Cat_cat Cat_cat $E $Y)
       (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
       $G
       $H
-      $eta
-  ↪ [ tt ≡ tt ];
+      $eta;
 
 // Identity-family Cat postcomposition exposes ordinary transfor projections.
 rule @hom_postcomp_fapp1_fapp0
@@ -5145,8 +5145,8 @@ unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
       Cat_cat
       (@id Cat_cat Cat_cat)
       $Z
-      (@fapp0 Cat_cat Cat_cat $F $W)
-      (@fapp0 Cat_cat Cat_cat $F $X)
+      _
+      _
       (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
@@ -5194,63 +5194,6 @@ rule @hom_precomp_along_fapp1_fapp0
       $H
       $eta
   ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
-
-// Tele-level Cat-specialized precomposition hom-action agrees proof-time with
-// ordinary functor-composition action.
-unif_rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
-  ≡ @fapp1_func
-      (Functor_cat $W $X)
-      (Functor_cat
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_fapp0
-        Cat_cat
-        (Functor_cat $W $X)
-        (Functor_cat
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-        (@hom_precomp_along_tele_func
-          Cat_cat
-          Cat_cat
-          (@id Cat_cat Cat_cat)
-          $Z
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X))
-        (@fapp1_func Cat_cat Cat_cat $E $W $X))
-      $G
-      $H
-  ↪ [ tt ≡ tt ];
-
-unif_rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H $eta
-  ≡ @fapp1_fapp0
-      (Functor_cat $W $X)
-      (Functor_cat
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_fapp0
-        Cat_cat
-        (Functor_cat $W $X)
-        (Functor_cat
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-          (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-        (@hom_precomp_along_tele_func
-          Cat_cat
-          Cat_cat
-          (@id Cat_cat Cat_cat)
-          $Z
-          (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X))
-        (@fapp1_func Cat_cat Cat_cat $E $W $X))
-      $G
-      $H
-      $eta
-  ↪ [ tt ≡ tt ];
 
 // Identity-family tele-precomposition exposes ordinary transfor projections.
 rule @hom_precomp_along_tele_fapp1_fapp0
