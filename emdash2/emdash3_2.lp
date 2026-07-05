@@ -2925,26 +2925,12 @@ rule @hom_postcomp_fapp1_fapp0
       (Hom_cat $A $W (@fapp0 $B $A $F $Y))
       (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g);
 
-// Cat-valued postcomposition remains owned by the generic hom-action heads.
-// The Cat helper names are now transparent aliases for the identity-family
-// case, so reverse folds from `hom_postcomp_*` to `comp_cat_*` are omitted.
-
-unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
-  ≡ @comp_fapp0
-      Cat_cat
-      $W
-      _
-      _
-      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f)
-      $G
-  ↪ [ tt ≡ tt ];
-
 unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
   ≡ @comp_fapp0
       $A
       $W
-      (@fapp0 $B $A $F $X)
-      (@fapp0 $B $A $F $Y)
+      _
+      _
       (@fapp1_fapp0 $B $A $F $X $Y $h)
       $g
   ↪ [ tt ≡ tt ];
@@ -2963,18 +2949,10 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $A
       (@id Cat_cat $A)
       $W
-      (@fapp0 $B $A $F $X)
-      (@fapp0 $B $A $F $Y)
+      _
+      _
       (@fapp1_fapp0 $B $A $F $X $Y $h)
       $g
-  ↪ [ tt ≡ tt ];
-
-unif_rule @hom_postcomp_fapp0
-    (@Catd_cat $K)
-    (@Catd_cat $K)
-    (@id Cat_cat (@Catd_cat $K))
-    $E $D $C $FF $GG
-  ≡ @comp_fapp0 (@Catd_cat $K) $E $D $C $FF $GG
   ↪ [ tt ≡ tt ];
 
 rule @hom_postcomp_fapp0
@@ -3085,56 +3063,17 @@ with @hom_postcomp_fapp0
       (@defiso_from $C $x $y $i)
   ↪ @id $C $y;
 
-// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed DefIso cancellation.
-rule @comp_fapp0
-      (@Catd_cat $K)
-      $E
-      $D
-      $E
-      (@defiso_from (@Catd_cat $K) $E $D $i)
-      (@defiso_to (@Catd_cat $K) $E $D $i)
-  ↪ @id_funcd $K $E;
-
-// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed DefIso cancellation.
-rule @comp_fapp0
-      (@Catd_cat $K)
-      $D
-      $E
-      $D
-      (@defiso_to (@Catd_cat $K) $E $D $i)
-      (@defiso_from (@Catd_cat $K) $E $D $i)
-  ↪ @id_funcd $K $D;
-
-// Probe: fold-oriented hom-action normal forms can expose raw DefIso
-// cancellation. Keep these runtime joins in the detached orientation probe to
-// test whether the raw view must compute under the migrated normal form.
 rule @comp_fapp0
       $C $x $y $x
       (@defiso_from $C $x $y $i)
       (@defiso_to $C $x $y $i)
-  ↪ @id $C $x;
+  ↪  @id $C $x;
 
 rule @comp_fapp0
       $C $y $x $y
       (@defiso_to $C $x $y $i)
       (@defiso_from $C $x $y $i)
-  ↪ @id $C $y;
-
-// Proof-time raw-composition view of DefIso cancellation. This remains as a
-// compatibility bridge during the probe.
-unif_rule @comp_fapp0
-      $C $x $y $x
-      (@defiso_from $C $x $y $i)
-      (@defiso_to $C $x $y $i)
-  ≡ @id $C $x
-  ↪ [ tt ≡ tt ];
-
-unif_rule @comp_fapp0
-      $C $y $x $y
-      (@defiso_to $C $x $y $i)
-      (@defiso_from $C $x $y $i)
-  ≡ @id $C $y
-  ↪ [ tt ≡ tt ];
+  ↪  @id $C $y;
 
 symbol defiso_iso_evidence
   [C : Cat]
@@ -3438,6 +3377,16 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       $Z
       $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
+  ↪ [ tt ≡ tt ];
+
+unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
+  ≡ @comp_fapp0
+      $A
+      _
+      _
+      $Z
+      $g
+      $h
   ↪ [ tt ≡ tt ];
 
 // Fold-direction codomain accumulation for precomposition.
