@@ -279,9 +279,9 @@ comp_cat_con_func_func
 
 These primarily curry/uncurry ordinary Cat composition. Long-term they should
 be candidates for transparent definitions/aliases around generic
-`comp_cat_fapp0`/generic functor action, unless a concrete LHS needs them as
-stable heads. If they become aliases, rules should use their unfolded semantic
-owner on the LHS.
+`hom_postcomp_*` / `hom_precomp_along_*` identity-family action, unless a
+concrete LHS needs extra Cat-only transfor structure. If they become aliases,
+rules should use their unfolded semantic owner on the LHS.
 
 Class B: Cat-specific higher structure.
 
@@ -329,7 +329,10 @@ Postscript 2026-07-04: this recommendation has been refined by
 `REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`.
 The single runtime owner is now the generic `@comp_fapp0 Cat_cat ...`;
 `comp_cat_fapp0` and `comp_catd_fapp0` are transparent public aliases, not
-rewrite discriminators.
+rewrite discriminators. A later 2026-07-04 checkpoint in that dedicated report
+also promoted the pure curried Cat helper aliases through identity-family
+`hom_postcomp_*` and `hom_precomp_along_*`; Cat-specialized primitive heads are
+reserved for transfor/projection structure.
 
 ## DefIso Layer
 

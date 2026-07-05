@@ -2477,56 +2477,6 @@ symbol Catd_catd_con [L : Cat] (K : τ (Catd L)) : τ (Catd (Op_cat L))
      Catd_cat_func
      (@Op_func L Cat_cat K);
 
-// Curried postcomposition in Cat, used to build constructor pipelines.
-//
-// Surface/formula:
-//   comp_cat_cov_func(G) : (X ⊢ Y) ⊢ (X ⊢ Z)
-//   comp_cat_cov_func(G)[F] = G ∘ F.
-symbol comp_cat_cov_func : Π [X Y Z : Cat],
-  Π (G : τ (Functor Y Z)),
-  τ (Functor (Functor_cat X Y) (Functor_cat X Z));
-
-rule fapp0 (@comp_cat_cov_func $X $Y $Z $G) $F
-  ↪ comp_cat_fapp0 $G $F;
-
-// Postcomposition packaged as a functor in the postcomposing functor.
-//
-// Surface/formula:
-//   comp_cat_cov_func_func[X,Y,Z][G] = comp_cat_cov_func(G)
-//   : (Y ⊢ Z) ⊢ ((X ⊢ Y) ⊢ (X ⊢ Z)).
-symbol comp_cat_cov_func_func [X Y Z : Cat]
-  : τ (Functor
-      (Functor_cat Y Z)
-      (Functor_cat (Functor_cat X Y) (Functor_cat X Z)));
-
-rule fapp0 (@comp_cat_cov_func_func $X $Y $Z) $G
-  ↪ @comp_cat_cov_func $X $Y $Z $G;
-
-// Precomposition by a fixed functor.
-//
-// Surface/formula:
-//   comp_cat_con_func(F)[G] = G ∘ F
-//   : (Y ⊢ Z) ⊢ (X ⊢ Z).
-symbol comp_cat_con_func [X Y Z : Cat]
-  (F : τ (Functor X Y))
-  : τ (Functor (Functor_cat Y Z) (Functor_cat X Z));
-
-rule fapp0 (@comp_cat_con_func $X $Y $Z $F) $G
-  ↪ @comp_cat_fapp0 $X $Y $Z $G $F;
-
-// Precomposition packaged as a functor in the precomposing functor.
-//
-// Surface/formula:
-//   comp_cat_con_func_func[X,Y,Z][F] = comp_cat_con_func(F)
-//   : (X ⊢ Y) ⊢ ((Y ⊢ Z) ⊢ (X ⊢ Z)).
-symbol comp_cat_con_func_func [X Y Z : Cat]
-  : τ (Functor
-      (Functor_cat X Y)
-      (Functor_cat (Functor_cat Y Z) (Functor_cat X Z)));
-
-rule fapp0 (@comp_cat_con_func_func $X $Y $Z) $F
-  ↪ @comp_cat_con_func $X $Y $Z $F;
-
 // Internalized pointwise opposite on directed families. This is the packaged
 // functorial version of `Op_catd`; the object-level result remains the
 // canonical normal form.
@@ -2534,9 +2484,6 @@ rule fapp0 (@comp_cat_con_func_func $X $Y $Z) $F
 // Surface/formula:
 //   Op_catd_func(Z)[E] = E^op.
 injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z));
-
-rule @comp_cat_cov_func $Z Cat_cat Cat_cat op
-  ↪ @Op_catd_func $Z;
 
 // -------------------------------------------------------------------------------------------------
 // 4. Ordinary internal hom and hom actions
@@ -2978,29 +2925,9 @@ rule @hom_postcomp_fapp1_fapp0
       (Hom_cat $A $W (@fapp0 $B $A $F $Y))
       (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g);
 
-// Cat-valued postcomposition telescope reduces to ordinary functor composition.
-rule @hom_postcomp_tele_func Cat_cat Cat_cat $E $W $X $Y
-  ↪ @comp_cat_fapp0
-      (Functor_cat $X $Y)
-      (Functor_cat
-        (@fapp0 Cat_cat Cat_cat $E $X)
-        (@fapp0 Cat_cat Cat_cat $E $Y))
-      (Functor_cat
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
-      (@comp_cat_cov_func_func
-        $W
-        (@fapp0 Cat_cat Cat_cat $E $X)
-        (@fapp0 Cat_cat Cat_cat $E $Y))
-      (@fapp1_func Cat_cat Cat_cat $E $X $Y);
-
-// Cat-valued capped postcomposition reduces to comp_cat_cov_func.
-rule @hom_postcomp_func Cat_cat Cat_cat $E $W $X $Y $f
-  ↪ @comp_cat_cov_func
-      $W
-      (@fapp0 Cat_cat Cat_cat $E $X)
-      (@fapp0 Cat_cat Cat_cat $E $Y)
-      (@fapp1_fapp0 Cat_cat Cat_cat $E $X $Y $f);
+// Cat-valued postcomposition remains owned by the generic hom-action heads.
+// The Cat helper names are now transparent aliases for the identity-family
+// case, so reverse folds from `hom_postcomp_*` to `comp_cat_*` are omitted.
 
 unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G
   ≡ @comp_fapp0
@@ -3389,21 +3316,9 @@ symbol hom_precomp_along_tele_func [A B : Cat]
         (Hom_cat B (@fapp0 A B F X) Z)
         (Hom_cat B (@fapp0 A B F W) Z)));
 
-// Cat-valued precomposition telescope reduces to ordinary functor composition.
-rule @hom_precomp_along_tele_func Cat_cat Cat_cat $E $Z $W $X
-  ↪ @comp_cat_fapp0
-      (Functor_cat $W $X)
-      (Functor_cat
-        (@fapp0 Cat_cat Cat_cat $E $W)
-        (@fapp0 Cat_cat Cat_cat $E $X))
-      (Functor_cat
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
-        (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-      (@comp_cat_con_func_func
-        (@fapp0 Cat_cat Cat_cat $E $W)
-        (@fapp0 Cat_cat Cat_cat $E $X)
-        $Z)
-      (@fapp1_func Cat_cat Cat_cat $E $W $X);
+// Cat-valued precomposition remains owned by the generic hom-action heads.
+// The Cat helper names are now transparent aliases for the identity-family
+// case, so reverse folds from `hom_precomp_along_*` to `comp_cat_*` are omitted.
 
 // Capped precomposition functor: hom_precomp_along_func(h)[g] = g ∘ F[h].
 symbol hom_precomp_along_func [A B : Cat]
@@ -4774,6 +4689,87 @@ rule @tapp1_fapp0 $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p) $_
   ↪ $p;
 
 /*
+  Pure Cat/Catd convenience helpers.
+
+  These names are transparent presentations of the generic hom-action
+  architecture specialized to the identity family on `Cat_cat`. They remain
+  useful in readable semantic bodies, but rewrite rules should key on the
+  corresponding generic `hom_*` owner unless a later Cat-only transfor
+  projection is the actual extra structure.
+*/
+
+// Curried postcomposition in Cat, used to build constructor pipelines.
+//
+// Surface/formula:
+//   comp_cat_cov_func(G) : (X ⊢ Y) ⊢ (X ⊢ Z)
+//   comp_cat_cov_func(G)[F] = G ∘ F.
+symbol comp_cat_cov_func [X Y Z : Cat]
+  (G : τ (Functor Y Z))
+  : τ (Functor (Functor_cat X Y) (Functor_cat X Z))
+≔ @hom_postcomp_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    X
+    Y
+    Z
+    G;
+
+// Postcomposition packaged as a functor in the postcomposing functor.
+//
+// Surface/formula:
+//   comp_cat_cov_func_func[X,Y,Z][G] = comp_cat_cov_func(G)
+//   : (Y ⊢ Z) ⊢ ((X ⊢ Y) ⊢ (X ⊢ Z)).
+symbol comp_cat_cov_func_func [X Y Z : Cat]
+  : τ (Functor
+      (Functor_cat Y Z)
+      (Functor_cat (Functor_cat X Y) (Functor_cat X Z)))
+≔ @hom_postcomp_tele_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    X
+    Y
+    Z;
+
+// Precomposition by a fixed functor.
+//
+// Surface/formula:
+//   comp_cat_con_func(F)[G] = G ∘ F
+//   : (Y ⊢ Z) ⊢ (X ⊢ Z).
+symbol comp_cat_con_func [X Y Z : Cat]
+  (F : τ (Functor X Y))
+  : τ (Functor (Functor_cat Y Z) (Functor_cat X Z))
+≔ @hom_precomp_along_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    Z
+    X
+    Y
+    F;
+
+// Precomposition packaged as a functor in the precomposing functor.
+//
+// Surface/formula:
+//   comp_cat_con_func_func[X,Y,Z][F] = comp_cat_con_func(F)
+//   : (X ⊢ Y) ⊢ ((Y ⊢ Z) ⊢ (X ⊢ Z)).
+symbol comp_cat_con_func_func [X Y Z : Cat]
+  : τ (Functor
+      (Functor_cat X Y)
+      (Functor_cat (Functor_cat Y Z) (Functor_cat X Z)))
+≔ @hom_precomp_along_tele_func
+    Cat_cat
+    Cat_cat
+    (@id Cat_cat Cat_cat)
+    Z
+    X
+    Y;
+
+rule @hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $Z Cat_cat Cat_cat op
+  ↪ @Op_catd_func $Z;
+
+/*
   Cat-specialized semantic heads package extra structure exposed only when the
   ambient category is `Cat_cat`. The generic `hom_postcomp_*` and
   `hom_precomp_along_*` owners still describe the hom-action, but after
@@ -4838,13 +4834,7 @@ unif_rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
       $eta
   ↪ [ tt ≡ tt ];
 
-rule @fapp1_func _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H
-  ↪ @comp_cat_cov_fapp1_func $X $Y $Z $G $F $H;
-
 rule fapp0 (@comp_cat_cov_fapp1_func $X $Y $Z $G $F $H) $eta
-  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
-
-rule @fapp1_fapp0 _ _ (@comp_cat_cov_func $X $Y $Z $G) $F $H $eta
   ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
 
 // Component of postcomposition by G.
@@ -4953,59 +4943,13 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
       (@comp_cat_cov_func X Y Z G)
       (@comp_cat_cov_func X Y Z H));
 
-rule @fapp1_func _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H
-  ↪ @comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H;
-
 rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
   ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
 
-rule @fapp1_fapp0 _ _ (@comp_cat_cov_func_func $X $Y $Z) $G $H $eta
-  ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
-
-rule @hom_postcomp_tele_fapp1_func Cat_cat Cat_cat $E $W $X $Y $G $H
-  ↪ @fapp1_func
-      (Functor_cat $X $Y)
-      (Functor_cat
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
-      (@comp_cat_fapp0
-        (Functor_cat $X $Y)
-        (Functor_cat
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          (@fapp0 Cat_cat Cat_cat $E $Y))
-        (Functor_cat
-          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
-          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
-        (@comp_cat_cov_func_func
-          $W
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          (@fapp0 Cat_cat Cat_cat $E $Y))
-        (@fapp1_func Cat_cat Cat_cat $E $X $Y))
-      $G
-      $H;
-
-rule @hom_postcomp_tele_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $G $H $eta
-  ↪ @fapp1_fapp0
-      (Functor_cat $X $Y)
-      (Functor_cat
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
-        (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
-      (@comp_cat_fapp0
-        (Functor_cat $X $Y)
-        (Functor_cat
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          (@fapp0 Cat_cat Cat_cat $E $Y))
-        (Functor_cat
-          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $X))
-          (Functor_cat $W (@fapp0 Cat_cat Cat_cat $E $Y)))
-        (@comp_cat_cov_func_func
-          $W
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          (@fapp0 Cat_cat Cat_cat $E $Y))
-        (@fapp1_func Cat_cat Cat_cat $E $X $Y))
-      $G
-      $H
-      $eta;
+// The generic `hom_postcomp_tele_fapp1_*` heads own higher action for
+// Cat-valued postcomposition. Earlier Cat folds through
+// `comp_cat_cov_func_func` are intentionally omitted after the helper alias
+// migration because their endpoints use the older `comp_fapp0` normal form.
 
 /*
   Precomposition of transfors by a fixed functor.
@@ -5062,13 +5006,7 @@ symbol comp_cat_con_func_func_transf [X Y Z : Cat]
       (@comp_cat_con_func X Y Z K));
 
 // Projection ladder for the hom-action of precomposition-in-F.
-rule @fapp1_func _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K
-  ↪ @comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K;
-
 rule fapp0 (@comp_cat_con_func_func_fapp1_func $X $Y $Z $F $K) $alpha
-  ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
-
-rule @fapp1_fapp0 _ _ (@comp_cat_con_func_func $X $Y $Z) $F $K $alpha
   ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
 
 // Component of the precomposition-in-F hom-action at G.
@@ -5162,10 +5100,13 @@ rule @tapp1_fapp0
 // precomposition. Runtime object action remains owned by
 // `hom_precomp_along_fapp0`.
 unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
-  ≡ @comp_cat_con_func
+  ≡ @hom_precomp_along_func
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      $Z
       (@fapp0 Cat_cat Cat_cat $F $W)
       (@fapp0 Cat_cat Cat_cat $F $X)
-      $Z
       (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
@@ -5215,10 +5156,13 @@ unif_rule @hom_precomp_along_tele_fapp1_func Cat_cat Cat_cat $E $Z $W $X $G $H
         (Functor_cat
           (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
           (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-        (@comp_cat_con_func_func
+        (@hom_precomp_along_tele_func
+          Cat_cat
+          Cat_cat
+          (@id Cat_cat Cat_cat)
+          $Z
           (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          $Z)
+          (@fapp0 Cat_cat Cat_cat $E $X))
         (@fapp1_func Cat_cat Cat_cat $E $W $X))
       $G
       $H
@@ -5239,23 +5183,20 @@ unif_rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H 
         (Functor_cat
           (Functor_cat (@fapp0 Cat_cat Cat_cat $E $X) $Z)
           (Functor_cat (@fapp0 Cat_cat Cat_cat $E $W) $Z))
-        (@comp_cat_con_func_func
+        (@hom_precomp_along_tele_func
+          Cat_cat
+          Cat_cat
+          (@id Cat_cat Cat_cat)
+          $Z
           (@fapp0 Cat_cat Cat_cat $E $W)
-          (@fapp0 Cat_cat Cat_cat $E $X)
-          $Z)
+          (@fapp0 Cat_cat Cat_cat $E $X))
         (@fapp1_func Cat_cat Cat_cat $E $W $X))
       $G
       $H
       $eta
   ↪ [ tt ≡ tt ];
 
-rule @fapp1_func _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H
-  ↪ @comp_cat_con_fapp1_func $X $Y $Z $F $G $H;
-
 rule fapp0 (@comp_cat_con_fapp1_func $X $Y $Z $F $G $H) $eta
-  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
-
-rule @fapp1_fapp0 _ _ (@comp_cat_con_func $X $Y $Z $F) $G $H $eta
   ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
 
 // Component of precomposition by F.
@@ -6474,7 +6415,7 @@ unif_rule
   ↪ [ tt ≡ tt ];
 
 unif_rule
-  @comp_cat_con_func $A $B Cat_cat $F
+  @hom_precomp_along_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) Cat_cat $A $B $F
   ≡ @Pullback_catd_func $A $B $F
   ↪ [ tt ≡ tt ];
 

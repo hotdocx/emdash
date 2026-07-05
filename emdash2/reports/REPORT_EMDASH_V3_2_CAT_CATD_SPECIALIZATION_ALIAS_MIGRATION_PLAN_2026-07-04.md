@@ -9,9 +9,8 @@ Supersedes: no whole report; refines and corrects the Cat-specialized cleanup ta
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
-Status: Phases 1-2 identity/composition alias migrations promoted on
-2026-07-04; pure curried-helper and Cat-only transfor bridge phases remain
-pending
+Status: Phases 1-3 identity/composition/pure-curried-helper alias migrations
+promoted on 2026-07-04; Cat-only transfor bridge phase remains pending
 
 ## Purpose
 
@@ -811,6 +810,78 @@ remaining top critical-pair heads are still the known composition/hom-action
 families headed by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`,
 `fapp1_fapp0`, and related projection heads.
 
+## Implementation Checkpoint 2026-07-04, Phase 3
+
+Phase 3 has been promoted to the active files.
+
+Implemented decisions:
+
+- `comp_cat_cov_func(G)` is now a transparent identity-family alias for
+  `@hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) ... G`.
+- `comp_cat_cov_func_func` is now a transparent identity-family alias for
+  `@hom_postcomp_tele_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...`.
+- `comp_cat_con_func(F)` is now a transparent identity-family alias for
+  `@hom_precomp_along_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) ... F`.
+- `comp_cat_con_func_func` is now a transparent identity-family alias for
+  `@hom_precomp_along_tele_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...`.
+- The old reverse folds from Cat-valued generic `hom_postcomp_*` and
+  `hom_precomp_along_*` heads into these pure helper names have been removed.
+- Alias-headed `fapp1_func` / `fapp1_fapp0` projection rules for these pure
+  helpers have been removed. The generic `hom_*_fapp1_*` heads now own those
+  functor-level actions.
+- Existing Cat-only transfor heads such as `comp_cat_cov_transf`,
+  `comp_cat_con_transf`, `comp_cat_cov_func_func_transf`, and
+  `comp_cat_con_func_func_transf` remain explicit semantic heads because they
+  expose `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` structure. Their
+  inbound bridge cleanup is still Phase 4.
+- `Op_catd_func` is still a named semantic package, but its special
+  postcomposition bridge now keys on the generic identity-family
+  `hom_postcomp_func` head instead of the `comp_cat_cov_func` alias.
+
+The check updates intentionally retargeted several curry/uncurry diagnostics.
+After Phase 3, semantic curry and uncurry normal forms stop at generic
+`hom_postcomp_*` / `hom_precomp_along_*` stable heads instead of expanding all
+the way to the older Cat-specialized `comp_cat_*` presentations. This is the
+intended Phase 3 behavior: the generic hom-action owner is the runtime normal
+form, while Cat-only transfor heads are reserved for extra projection
+structure.
+
+Post-promotion audit:
+
+```text
+No rule/with/unif_rule pre-arrow pattern in emdash3_2.lp discriminates on the
+exact helper aliases comp_cat_cov_func, comp_cat_cov_func_func,
+comp_cat_con_func, or comp_cat_con_func_func. Derived Cat-only transfor heads
+with longer names remain intentionally available.
+```
+
+Probe and validation commands run during promotion:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase3_curried_helpers.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase3_curried_helpers.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/generate_check_catalog.py --strict
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+make ci
+```
+
+Warning-enabled results:
+
+```text
+active make warning-summary: 1303 total warnings
+  1139 unjoinable critical pair
+   164 replaceable pattern variable
+```
+
+This is lower than the Phase 2 active baseline of 1382 total warnings. The
+remaining top critical-pair heads are still the known composition/hom-action
+families headed by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`,
+`fapp1_fapp0`, `fapp1_func`, and `hom_precomp_along_fapp0`.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -857,15 +928,15 @@ warning-summary deltas are classified.
 ## Side-Task Ledger
 
 - `CATALIAS-01`: Inventory alias-headed rewrite LHSs in active source.
-  Status: complete for identity and raw composition aliases; curried helpers
-  remain pending.
+  Status: complete for identity, raw composition, and pure curried-helper
+  aliases.
 - `CATALIAS-02`: Probe transparent `id_func` / `id_funcd` aliases.
   Status: promoted on 2026-07-04.
 - `CATALIAS-03`: Probe transparent `comp_cat_fapp0` / `comp_catd_fapp0`
   aliases.  Status: promoted on 2026-07-04.
 - `CATALIAS-04`: Probe pure `comp_cat_cov/con_func*` aliases through
-  identity-family `hom_*`.  Status: pending.
+  identity-family `hom_*`.  Status: promoted on 2026-07-04.
 - `CATALIAS-05`: Migrate Cat-only transfor inbound bridges to generic
   specialized `hom_*` LHSs.  Status: pending.
 - `CATALIAS-06`: Update diagnostics and warning inventory after promotion.
-  Status: complete for Phases 1-2.
+  Status: complete for Phases 1-3.
