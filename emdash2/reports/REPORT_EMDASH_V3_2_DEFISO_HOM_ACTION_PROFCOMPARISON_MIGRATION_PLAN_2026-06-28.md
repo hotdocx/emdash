@@ -1,15 +1,16 @@
 # EMDASH v3.2 DefIso, Hom-Action, And ProfComparison Migration Plan
 
 Date: 2026-06-28
-Last reviewed: 2026-06-28
+Last reviewed: 2026-07-05
 Plan-ID: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28
 Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23
 Supersedes: none
 Side-Task-Ledger: none
 Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019f0838-53c1-79a0-832c-654983859441
-Status: active incremental migration plan; Phases 1-3, Phase 5, and the
-adjunction-mate DefIso owner correction promoted
+Status: active incremental migration plan; Phases 1-3, Phase 5, the
+adjunction-mate DefIso owner correction, and the dedicated Cat/Catd alias
+cleanup Phases 1-4 promoted
 
 Parent plan:
 `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`,
@@ -325,14 +326,16 @@ Current recommendation: choose option 1 for the v3.2 migration. It preserves a
 single runtime normal form for Cat composition while still allowing
 Cat-specific transfor heads where additional structure exists.
 
-Postscript 2026-07-04: this recommendation has been refined by
+Postscript 2026-07-05: this recommendation has been refined by
 `REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`.
 The single runtime owner is now the generic `@comp_fapp0 Cat_cat ...`;
 `comp_cat_fapp0` and `comp_catd_fapp0` are transparent public aliases, not
-rewrite discriminators. A later 2026-07-04 checkpoint in that dedicated report
-also promoted the pure curried Cat helper aliases through identity-family
-`hom_postcomp_*` and `hom_precomp_along_*`; Cat-specialized primitive heads are
-reserved for transfor/projection structure.
+rewrite discriminators. Later checkpoints in that dedicated report also
+promoted the pure curried Cat helper aliases through identity-family
+`hom_postcomp_*` and `hom_precomp_along_*`, then routed identity-family capped
+higher-action paths from the specialized generic `hom_*_fapp1_fapp0` owners
+into the Cat-only transfor heads. Cat-specialized primitive heads are reserved
+for transfor/projection structure.
 
 ## DefIso Layer
 
@@ -859,10 +862,10 @@ Promoted validation:
 
 3. Should final Cat object-action symmetry introduce cov/con fapp0 heads?
 
-   Current leaning for v3.2: no. Postscript 2026-07-04: the unique runtime
+   Current leaning for v3.2: no. Postscript 2026-07-05: the unique runtime
    object-action owner is now generic `@comp_fapp0 Cat_cat ...`; keep
    `comp_cat_fapp0` only as a transparent public alias. Revisit cov/con
-   fapp0 heads only after the remaining Cat-specialized cleanup phases.
+   fapp0 heads only if a later concrete consumer needs them.
 
 4. How much of `ProfComparison` should remain after DefIso migration?
 

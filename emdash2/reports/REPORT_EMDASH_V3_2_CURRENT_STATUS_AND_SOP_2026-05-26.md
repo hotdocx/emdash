@@ -104,16 +104,20 @@ telescope, and semantic uncurry routes through right-ordered `Eval_func` plus
 the `Product_cat_func` stable projection ladder. The transfor action of
 semantic uncurry remains deferred.
 
-Postscript 2026-07-04: the Cat/Catd specialization alias migration has now
-promoted Phases 1-3. `id_func`/`id_funcd`, `comp_cat_fapp0`/`comp_catd_fapp0`,
-and the pure curried helpers `comp_cat_cov_func`,
-`comp_cat_cov_func_func`, `comp_cat_con_func`, and
-`comp_cat_con_func_func` are transparent public aliases over generic
-`id`, `comp_fapp0`, `hom_postcomp_*`, and `hom_precomp_along_*` owners.
-Semantic curry/uncurry diagnostics now stop at those generic hom-action
-stable heads. Cat-only transfor heads remain only where they expose extra
-`tapp0_fapp0`, `tapp1_func`, or `tapp1_fapp0` structure; migrating their
-inbound bridges is the remaining dedicated Cat-specialization phase.
+Postscript 2026-07-05: the Cat/Catd specialization alias migration has now
+promoted Phases 1-4. `id_func`/`id_funcd`,
+`comp_cat_fapp0`/`comp_catd_fapp0`, and the pure curried helpers
+`comp_cat_cov_func`, `comp_cat_cov_func_func`, `comp_cat_con_func`, and
+`comp_cat_con_func_func` are transparent public aliases over generic `id`,
+`comp_fapp0`, `hom_postcomp_*`, and `hom_precomp_along_*` owners.  The
+identity-family capped higher-action paths now enter the remaining Cat-only
+transfor heads from specialized generic `hom_*_fapp1_fapp0` owners:
+`comp_cat_cov_transf`, `comp_cat_con_transf`,
+`comp_cat_cov_func_func_transf`, and `comp_cat_con_func_func_transf`.  These
+Cat-only heads remain exactly where they expose extra `tapp0_fapp0`,
+`tapp1_func`, or `tapp1_fapp0` structure.  Broad arbitrary-family folds and
+the question whether to demote the functor-level `*_fapp1_func` wrappers
+remain deferred.
 
 The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
 and `Prof` are transparent aliases for families on `A^op × B`.

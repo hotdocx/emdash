@@ -4834,6 +4834,20 @@ unif_rule @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat $E $W $X $Y $f $G $H $eta
       $eta
   ↪ [ tt ≡ tt ];
 
+// Identity-family Cat postcomposition exposes ordinary transfor projections.
+rule @hom_postcomp_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      $X
+      $Y
+      $Z
+      $G
+      $F
+      $H
+      $eta
+  ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
+
 rule fapp0 (@comp_cat_cov_fapp1_func $X $Y $Z $G $F $H) $eta
   ↪ @comp_cat_cov_transf $X $Y $Z $G $F $H $eta;
 
@@ -4946,10 +4960,18 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
 rule fapp0 (@comp_cat_cov_func_func_fapp1_func $X $Y $Z $G $H) $eta
   ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
 
-// The generic `hom_postcomp_tele_fapp1_*` heads own higher action for
-// Cat-valued postcomposition. Earlier Cat folds through
-// `comp_cat_cov_func_func` are intentionally omitted after the helper alias
-// migration because their endpoints use the older `comp_fapp0` normal form.
+// Identity-family tele-postcomposition exposes ordinary transfor projections.
+rule @hom_postcomp_tele_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      $X
+      $Y
+      $Z
+      $G
+      $H
+      $eta
+  ↪ @comp_cat_cov_func_func_transf $X $Y $Z $G $H $eta;
 
 /*
   Precomposition of transfors by a fixed functor.
@@ -5116,8 +5138,10 @@ unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
   After `hom_precomp_along_fapp0` became the runtime owner of precomposition
   object action, these previous folds no longer preserve the runtime endpoint
   normal form: `comp_cat_con_*` exposes raw `comp_cat_fapp0` endpoints. Keep
-  the object-level Cat fold above, but leave the higher-action folds to a later
-  owner-preserving Cat-specialized wrapper if a concrete consumer needs them.
+  the object-level Cat fold above, and keep the broad arbitrary-family
+  higher-action folds deferred. The identity-family bridge below is narrower:
+  it exposes the ordinary Cat transfor projection ladder after the pure
+  `comp_cat_con_func` alias has already unfolded to `hom_precomp_along_func`.
 
   rule @hom_precomp_along_fapp1_func Cat_cat Cat_cat $F $Z $W $X $h $G $H
     ↪ @comp_cat_con_fapp1_func
@@ -5138,6 +5162,20 @@ unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
         $H
         $eta;
 */
+
+// Identity-family Cat precomposition exposes ordinary transfor projections.
+rule @hom_precomp_along_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      $Z
+      $X
+      $Y
+      $F
+      $G
+      $H
+      $eta
+  ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;
 
 // Tele-level Cat-specialized precomposition hom-action agrees proof-time with
 // ordinary functor-composition action.
@@ -5195,6 +5233,19 @@ unif_rule @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat $E $Z $W $X $G $H 
       $H
       $eta
   ↪ [ tt ≡ tt ];
+
+// Identity-family tele-precomposition exposes ordinary transfor projections.
+rule @hom_precomp_along_tele_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      $Z
+      $X
+      $Y
+      $F
+      $K
+      $alpha
+  ↪ @comp_cat_con_func_func_transf $X $Y $Z $F $K $alpha;
 
 rule fapp0 (@comp_cat_con_fapp1_func $X $Y $Z $F $G $H) $eta
   ↪ @comp_cat_con_transf $X $Y $Z $F $G $H $eta;

@@ -1,7 +1,7 @@
 # EMDASH v3.2 Cat/Catd Specialization Alias Migration Plan
 
 Date: 2026-07-04
-Last reviewed: 2026-07-04
+Last reviewed: 2026-07-05
 
 Plan-ID: EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04
 Depends-On: EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-ECKMANN-HILTON-APPLICATION-2026-07-03; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
@@ -9,8 +9,10 @@ Supersedes: no whole report; refines and corrects the Cat-specialized cleanup ta
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-04
 Infinity-Codex-Decision-Responses: infinity-codex:019f248f-4d5f-7a71-95a2-7eb8106d6225:019f270d-b800-7611-be54-abf9ff3106de
-Status: Phases 1-3 identity/composition/pure-curried-helper alias migrations
-promoted on 2026-07-04; Cat-only transfor bridge phase remains pending
+Status: Phases 1-4 identity/composition/pure-curried-helper alias migrations
+and identity-family Cat-only transfor inbound bridges promoted by 2026-07-05;
+remaining question is whether to demote the functor-level `*_fapp1_func`
+wrappers.
 
 ## Purpose
 
@@ -832,8 +834,9 @@ Implemented decisions:
 - Existing Cat-only transfor heads such as `comp_cat_cov_transf`,
   `comp_cat_con_transf`, `comp_cat_cov_func_func_transf`, and
   `comp_cat_con_func_func_transf` remain explicit semantic heads because they
-  expose `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` structure. Their
-  inbound bridge cleanup is still Phase 4.
+  expose `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` structure. At this
+  checkpoint their inbound bridge cleanup was still Phase 4; the next
+  checkpoint below promotes the capped identity-family bridges.
 - `Op_catd_func` is still a named semantic package, but its special
   postcomposition bridge now keys on the generic identity-family
   `hom_postcomp_func` head instead of the `comp_cat_cov_func` alias.
@@ -881,6 +884,97 @@ This is lower than the Phase 2 active baseline of 1382 total warnings. The
 remaining top critical-pair heads are still the known composition/hom-action
 families headed by `comp_fapp0`, `hom_postcomp_fapp0`, `tapp0_fapp0`,
 `fapp1_fapp0`, `fapp1_func`, and `hom_precomp_along_fapp0`.
+
+## Implementation Checkpoint 2026-07-05, Phase 4
+
+Phase 4 has been promoted to the active files.
+
+Implemented decisions:
+
+- The identity-family capped postcomposition action now normalizes from the
+  generic owner to the Cat-only transfor head:
+
+  ```text
+  @hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...
+    -> comp_cat_cov_transf(...)
+  ```
+
+- The identity-family capped tele-postcomposition action now normalizes to:
+
+  ```text
+  @hom_postcomp_tele_fapp1_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...
+    -> comp_cat_cov_func_func_transf(...)
+  ```
+
+- The identity-family capped precomposition action now normalizes to:
+
+  ```text
+  @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...
+    -> comp_cat_con_transf(...)
+  ```
+
+- The identity-family capped tele-precomposition action now normalizes to:
+
+  ```text
+  @hom_precomp_along_tele_fapp1_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) ...
+    -> comp_cat_con_func_func_transf(...)
+  ```
+
+- Broad arbitrary-family precomposition folds remain deferred.  The promoted
+  precomposition bridge is deliberately restricted to the identity family so
+  it does not reintroduce the endpoint-normal-form mismatch that motivated the
+  earlier deferred comment.
+- The `fapp1_func` diagnostics remain generic-owner checks.  This phase only
+  migrates capped `fapp1_fapp0` paths to the Cat-only transfor heads, where
+  the extra `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections are
+  available.
+
+Diagnostics now check the public alias paths:
+
+```text
+fapp1_fapp0(comp_cat_cov_func(G), eta)
+  -> comp_cat_cov_transf(G,eta)
+
+fapp1_fapp0(comp_cat_cov_func_func, eta)
+  -> comp_cat_cov_func_func_transf(eta)
+
+fapp1_fapp0(comp_cat_con_func(F), eta)
+  -> comp_cat_con_transf(F,eta)
+
+fapp1_fapp0(comp_cat_con_func_func, alpha)
+  -> comp_cat_con_func_func_transf(alpha)
+```
+
+The generic arbitrary-family diagnostics still assert the `hom_*_fapp1_fapp0`
+normal forms when the family argument is not visibly `@id Cat_cat Cat_cat`.
+
+Probe and validation commands run during promotion:
+
+```text
+EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase4_transfor_bridges.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=60s scripts/probe.sh tmp/probes/catalias_phase4_transfor_bridges.lp
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+make catalog
+python3 scripts/generate_check_catalog.py --strict
+make warning-summary
+python3 scripts/audit_rule_lhs.py --strict
+git diff --check
+```
+
+Warning-enabled results after active promotion:
+
+```text
+active make warning-summary: 1314 total warnings
+  1150 unjoinable critical pair
+   164 replaceable pattern variable
+```
+
+This is an increase of 11 warnings over the Phase 3 active baseline of 1303.
+The increase is localized to the newly promoted bridge family; the summary now
+lists `hom_postcomp_tele_fapp1_fapp0` among the top critical-pair term heads.
+That is expected because the new identity-family bridge intentionally overlaps
+the existing generic higher-action/functoriality paths and joins them at the
+Cat-only transfor projection normal form.
 
 ## Success Criteria
 
@@ -937,6 +1031,7 @@ warning-summary deltas are classified.
 - `CATALIAS-04`: Probe pure `comp_cat_cov/con_func*` aliases through
   identity-family `hom_*`.  Status: promoted on 2026-07-04.
 - `CATALIAS-05`: Migrate Cat-only transfor inbound bridges to generic
-  specialized `hom_*` LHSs.  Status: pending.
+  specialized `hom_*` LHSs.  Status: promoted on 2026-07-05 for the capped
+  identity-family bridges.
 - `CATALIAS-06`: Update diagnostics and warning inventory after promotion.
-  Status: complete for Phases 1-3.
+  Status: complete for Phases 1-4.
