@@ -1225,6 +1225,132 @@ The existing identity-family `comp_cat_*_transf` heads can later be treated as
 specializations or public views of the generalized heads if focused probes show
 that this is coherent.
 
+## Review Checkpoint 2026-07-05: Staged Cleanup And Phase 6 Feasibility
+
+This checkpoint records the review state after the manual staged cleanup that
+followed the postcomposition bridge promotion.  The staged cleanup is not yet
+an active promoted checkpoint.
+
+The following staged edits are coherent with the owner principle:
+
+- removing the Cat-valued `hom_postcomp_fapp0 Cat_cat Cat_cat E ...`
+  proof-time comparison, because the generic `hom_postcomp_fapp0` comparison
+  already subsumes it;
+- replacing reconstructible endpoint arguments by `_` in proof-time
+  `hom_postcomp_fapp0` comparisons;
+- removing the Catd identity-family `hom_postcomp_fapp0` proof-time comparison,
+  because the generic identity-family comparison already covers
+  `A = Catd_cat K`.
+
+Two staged items need resolution before promotion:
+
+- The raw `DefIso` cancellation rules for `comp_fapp0(defiso_from,defiso_to)`
+  and `comp_fapp0(defiso_to,defiso_from)` are duplicated.  This is a source
+  coherence and rule-hygiene problem, not a warning-count veto.  Keep one
+  runtime pair and delete the duplicate pair, with a single accurate comment.
+- The new identity-family proof-time bridge
+  `hom_precomp_along_fapp0 A A (id A) ... == comp_fapp0 A ...` typechecks, but
+  no current diagnostic consumes it.  Either add a focused typed consumer check
+  that justifies it, or defer it to Phase 6 precomposition endpoint work.  A
+  proof-time bridge should not be kept solely because it is syntactically
+  plausible.
+
+Current staged validation before cleanup resolution:
+
+```text
+EMDASH_TYPECHECK_TIMEOUT=60s make check: passed
+make warning-summary:
+  1332 total warnings
+  1166 unjoinable critical pair
+   166 replaceable pattern variable
+python3 scripts/audit_rule_lhs.py --strict: passed
+git diff --check --cached: passed
+```
+
+Focused probes on the staged source showed:
+
+```text
+delete only the duplicate raw DefIso runtime pair:
+  warning-summary equivalent:
+  1152 unjoinable critical pair
+   165 replaceable pattern variable
+
+delete the duplicate DefIso pair and also defer the new
+hom_precomp_along_fapp0 identity-family unif_rule:
+  warning-summary equivalent:
+  1152 unjoinable critical pair
+   164 replaceable pattern variable
+```
+
+These warning deltas are diagnostic evidence only.  The promotion decision is
+semantic: eliminate the duplicate rule pair, and keep the new precomposition
+proof-time bridge only if a concrete consumer or diagnostic needs it.
+
+Phase 6 feasibility is positive in two layers.
+
+First, the fixed capped projection bridges can be generalized directly to
+arbitrary Cat-valued bases.  Focused full-file probes passed for the following
+shapes:
+
+```text
+hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
+  -> comp_cat_cov_transf
+       W E[x] E[y] E[f] G H eta
+
+hom_precomp_along_fapp1_fapp0 K Cat_cat E Z x y f G H eta
+  -> comp_cat_con_transf
+       E[x] E[y] Z E[f] G H eta
+```
+
+The generalized postcomposition bridge added no new warning family in the
+focused probe.  The generalized precomposition bridge added one localized
+critical-pair warning in the clean probe.  Per the SOP, that warning is not a
+veto; it should be documented as the intended overlap between the generic
+hom-action owner and the Cat-only transfor projection ladder if the rule is
+promoted.
+
+Second, the tele-level arbitrary-base case should not rewrite directly into
+the existing identity-family heads
+`comp_cat_cov_func_func_transf` and `comp_cat_con_func_func_transf`.  A focused
+tele-postcomposition probe failed subject preservation because those existing
+heads have identity-family endpoints such as
+`hom_postcomp_func Cat_cat Cat_cat (id Cat_cat) ...`, while the arbitrary-base
+owner has endpoints such as `hom_postcomp_func Cat_cat K E ...`.  Adding broad
+endpoint coercion just to reuse the old head would reintroduce the endpoint
+normal-form mismatch this plan is trying to remove.
+
+The Phase 6 design target is therefore:
+
+- reuse the existing `comp_cat_cov_transf` and `comp_cat_con_transf` heads for
+  fixed capped arbitrary-base bridges, because their arguments can be
+  instantiated with fibres `E[x]`, `E[y]`, and functorial action `E[f]`;
+- introduce new generalized tele heads whose endpoints are generic
+  `hom_postcomp_func` / `hom_precomp_along_func` endpoints, not identity-family
+  `comp_cat_*` endpoints;
+- compute the base 2-cell action as:
+
+  ```text
+  E[alpha] =
+    fapp1_fapp0
+      (Hom_cat K x y)
+      (Functor_cat E[x] E[y])
+      (fapp1_func K Cat_cat E x y)
+      f g alpha
+  ```
+
+- for tele-postcomposition, the component at `G : Functor W E[x]` should be
+  ordinary precomposition of `E[alpha]` by `G`;
+- for tele-precomposition, the component at `G : Functor E[y] Z` should be
+  ordinary postcomposition of `E[alpha]` by `G`;
+- investigate the off-diagonal `tapp1_func` and `tapp1_fapp0` ladders
+  separately, especially for tele-precomposition, because the current
+  identity-family `comp_cat_con_func_func_transf` head has only the component
+  projection ladder currently needed by active consumers.
+
+This keeps Phase 6 aligned with the original goal: do not create generalized
+pure `comp_cat*` aliases that merely rename `hom_*`, but do add Cat-specialized
+heads where arbitrary-base Cat structure exposes real transfor projections.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -1296,5 +1422,11 @@ warning-summary deltas are classified.
   stale tele-precomposition proof-time scaffolding.  Status: promoted on
   2026-07-05.
 - `CATALIAS-09`: Design generalized arbitrary-base Cat-family transfor
-  projection heads for `E : Functor K Cat_cat`.  Status: deferred to the next
-  phase.
+  projection heads for `E : Functor K Cat_cat`.  Status: feasibility reviewed
+  on 2026-07-05.  Fixed capped bridges are mechanically feasible; tele-level
+  arbitrary-base projection heads need new generalized owners with generic
+  `hom_*` endpoints.
+- `CATALIAS-10`: Resolve the staged 2026-07-05 cleanup before promotion.
+  Status: open.  Delete the duplicate raw DefIso runtime pair, and either
+  justify the new identity-family `hom_precomp_along_fapp0` proof-time bridge
+  with a concrete diagnostic or defer it.
