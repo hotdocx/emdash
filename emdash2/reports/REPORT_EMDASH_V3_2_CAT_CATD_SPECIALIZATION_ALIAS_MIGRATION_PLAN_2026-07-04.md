@@ -1351,6 +1351,140 @@ This keeps Phase 6 aligned with the original goal: do not create generalized
 pure `comp_cat*` aliases that merely rename `hom_*`, but do add Cat-specialized
 heads where arbitrary-base Cat structure exposes real transfor projections.
 
+## Design Clarification 2026-07-05: Generalized Tele Heads Must Be Linked Owners
+
+The proposed generalized tele heads must not be unrelated new primitives.  If
+they are introduced, they must be explicitly the Cat-valued projection normal
+forms of the existing generic tele hom-action heads.
+
+The generic owners are:
+
+```text
+hom_postcomp_tele_fapp1_fapp0
+hom_precomp_along_tele_fapp1_fapp0
+```
+
+The linking should be a rewrite rule, not merely a `unif_rule`, if the goal is
+runtime `tapp0_fapp0` / `tapp1_*` computation:
+
+```text
+hom_postcomp_tele_fapp1_fapp0 Cat_cat K E W x y f g alpha
+  -> hom_postcomp_cat_tele_transf K E W x y f g alpha
+
+hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E Z x y f g alpha
+  -> hom_precomp_along_cat_tele_transf K E Z x y f g alpha
+```
+
+A `unif_rule` would only help elaboration/equality search.  It would not make
+`tapp0_fapp0` projections compute on the generic tele term.  Since the reason
+for the Cat-specialized head is exactly to expose transfor projections, the
+bridge should be runtime if promoted.
+
+The proposed heads are provisional names.  Their important feature is that
+they are typed with generic `hom_*` endpoints:
+
+```text
+hom_postcomp_cat_tele_transf(K,E,W,x,y,f,g,alpha)
+  : Transf
+      (hom_postcomp_func Cat_cat K E W x y f)
+      (hom_postcomp_func Cat_cat K E W x y g)
+
+hom_precomp_along_cat_tele_transf(K,E,Z,x,y,f,g,alpha)
+  : Transf
+      (hom_precomp_along_func K Cat_cat E Z x y f)
+      (hom_precomp_along_func K Cat_cat E Z x y g)
+```
+
+This is the whole point of introducing the generalized heads.  The failed
+tele-postcomposition probe tried to land the arbitrary-base term in the old
+identity-family head.  That cannot preserve types, because the old head has
+endpoints like:
+
+```text
+hom_postcomp_func Cat_cat Cat_cat (id Cat_cat) ...
+hom_precomp_along_func Cat_cat Cat_cat (id Cat_cat) ...
+```
+
+while the arbitrary-base term has endpoints like:
+
+```text
+hom_postcomp_func Cat_cat K E ...
+hom_precomp_along_func K Cat_cat E ...
+```
+
+So the generalized heads are not a new mathematical layer.  They are the same
+tele-level concept, generalized from the identity-family case to arbitrary
+`E : K -> Cat`.
+
+The relationship to the existing identity-family heads should be:
+
+```text
+comp_cat_cov_func_func_transf(X,Y,Z,G,H,eta)
+  = hom_postcomp_cat_tele_transf
+      Cat_cat (id Cat_cat) X Y Z G H eta
+
+comp_cat_con_func_func_transf(X,Y,Z,F,K,alpha)
+  = hom_precomp_along_cat_tele_transf
+      Cat_cat (id Cat_cat) Z X Y F K alpha
+```
+
+Long-term, they should not coexist as independent primitive owners.  The two
+coherent implementation options are:
+
+```text
+Option 1:
+  introduce better-named generalized heads and demote the old
+  comp_cat_*_func_func_transf heads to transparent identity-family aliases.
+
+Option 2:
+  generalize the existing comp_cat_*_func_func_transf heads themselves by
+  adding K and E parameters, then keep old identity-family public aliases.
+```
+
+The current staged preference is Option 1.  It is less disruptive because it
+does not immediately change the type of existing public heads, while preserving
+the invariant that there is one semantic owner and the old identity-family
+names become aliases.
+
+The component rules would use:
+
+```text
+Ef =
+  fapp1_fapp0 K Cat_cat E x y f
+
+Eg =
+  fapp1_fapp0 K Cat_cat E x y g
+
+Ealpha =
+  fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat E[x] E[y])
+    (fapp1_func K Cat_cat E x y)
+    f g alpha
+```
+
+Then:
+
+```text
+tapp0_fapp0(hom_postcomp_cat_tele_transf(E,alpha), G)
+  -> comp_cat_con_transf W E[x] E[y] G Ef Eg Ealpha
+```
+
+and:
+
+```text
+tapp0_fapp0(hom_precomp_along_cat_tele_transf(E,alpha), G)
+  -> comp_cat_cov_transf E[x] E[y] Z G Ef Eg Ealpha
+```
+
+This solves the failed tele probe in the intended way: the rewrite from the
+generic `hom_*_tele_fapp1_fapp0` owner lands in a head whose type has the same
+generic `hom_*_func` endpoints, so subject preservation is not forced to
+identify arbitrary-base endpoints with identity-family endpoints.  The new
+primitive is justified only because it owns Cat-specific `tapp0/tapp1`
+projections, while generic functoriality, identity, and composition remain
+owned by `hom_*`.
+
 ## Success Criteria
 
 The migration is successful when:
@@ -1423,9 +1557,10 @@ warning-summary deltas are classified.
   2026-07-05.
 - `CATALIAS-09`: Design generalized arbitrary-base Cat-family transfor
   projection heads for `E : Functor K Cat_cat`.  Status: feasibility reviewed
-  on 2026-07-05.  Fixed capped bridges are mechanically feasible; tele-level
-  arbitrary-base projection heads need new generalized owners with generic
-  `hom_*` endpoints.
+  on 2026-07-05 and design clarified.  Fixed capped bridges are mechanically
+  feasible; tele-level arbitrary-base projection heads need linked generalized
+  owners with generic `hom_*` endpoints, and the old identity-family tele heads
+  should become aliases/special cases rather than independent primitive owners.
 - `CATALIAS-10`: Resolve the staged 2026-07-05 cleanup before promotion.
   Status: open.  Delete the duplicate raw DefIso runtime pair, and either
   justify the new identity-family `hom_precomp_along_fapp0` proof-time bridge
