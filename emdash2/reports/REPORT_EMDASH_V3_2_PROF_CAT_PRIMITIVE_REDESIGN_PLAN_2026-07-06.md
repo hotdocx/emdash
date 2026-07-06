@@ -24,8 +24,17 @@ capped action of `Prof_imply_cov_func2` on a product arrow. The primitive
 `Prof_cat` migration should therefore clean this wrapper away and keep
 `Prof_imply_cov_func2` / `Prof_imply_cov_func(Q)` as the public functorial
 surface. The contravariant placeholder `Prof_imply_con_transf` is a parallel
-cleanup candidate, but its replacement should wait for an internalized
-contravariant mixed functor.
+cleanup candidate; the follow-up note below strengthens this to immediate
+deletion rather than waiting for a future contravariant mixed functor.
+
+Review update 2026-07-06c: after reviewing the whole closed-implication
+equipment-view cluster, `Prof_imply_con_transf` should be deleted now rather
+than deferred. It is a `constant symbol`, has no computation rule, and has no
+source consumer beyond its type check. The endpoint-changing
+`Prof_eval_*_transf` / `Prof_lambda_*_transf` wrappers, including the shaped
+`*_hom_transf` variants, are likewise historical equipment-style compatibility
+views. The fixed-endpoint `*_map` cores and shaped `*_hom_map` cores remain the
+actual computational owners.
 
 ## Purpose
 
@@ -395,10 +404,37 @@ component projection rule should be invented now.
 
 The contravariant sibling `Prof_imply_con_transf` is also suspicious: it is a
 `constant symbol`, has no computation rule, and source/normalized search shows
-no current consumer beyond its type check. Because the file does not yet have a
-`Prof_imply_con_func2` mixed functor analogous to `Prof_imply_cov_func2`, this
-should be recorded as a deferred cleanup/rearchitecture item rather than
-silently replaced during the covariant cleanup.
+no current consumer beyond its type check. It should be deleted as immediate
+cleanup. A later `Prof_imply_con_func2` mixed functor may still be desirable,
+but absence of that future owner is not a reason to retain an unusable
+placeholder.
+
+The endpoint-changing eval/lambda wrappers should be treated the same way:
+
+```text
+delete Prof_eval_cov_transf;
+delete Prof_lambda_cov_transf;
+delete Prof_eval_con_transf;
+delete Prof_lambda_con_transf;
+delete Prof_eval_cov_hom_transf;
+delete Prof_lambda_cov_transf_hom;
+delete Prof_eval_con_hom_transf;
+delete Prof_lambda_con_transf_hom;
+```
+
+These are transparent reindexed equipment views around the fixed-endpoint
+cores. Source search shows they are only used by their own inverse checks. The
+checks should be removed or rewritten against the fixed-endpoint owners:
+
+```text
+Prof_eval_cov_map / Prof_lambda_cov_map;
+Prof_eval_con_map / Prof_lambda_con_map;
+Prof_eval_cov_hom_map / Prof_lambda_cov_hom_map;
+Prof_eval_con_hom_map / Prof_lambda_con_hom_map.
+```
+
+Those `*_map` families should stay: they are the genuine closed-core
+computational API, and their beta/eta rules are still useful.
 
 For each, verify:
 
@@ -553,14 +589,26 @@ needed raw Catd/Product discriminator.
 Exit criteria: each promoted cluster has focused checks and no broad global
 folds are introduced.
 
-### PROF-CAT-PRIM-005: Prof implication mixed-functor cleanup
+### PROF-CAT-PRIM-005: Prof implication mixed-functor and equipment-view cleanup
 
 Status: proposed.
 
-Scope: delete `Prof_imply_cov_transf`, rewrite its coverage around direct
-`Prof_imply_cov_func2` generic action checks, and audit
-`Prof_imply_con_transf` as a deferred sibling cleanup.
+Scope: delete `Prof_imply_cov_transf`, delete `Prof_imply_con_transf`, rewrite
+or remove their coverage around direct `Prof_imply_cov_func2` generic action
+checks, and remove the endpoint-changing eval/lambda equipment wrappers:
+
+```text
+Prof_eval_cov_transf;
+Prof_lambda_cov_transf;
+Prof_eval_con_transf;
+Prof_lambda_con_transf;
+Prof_eval_cov_hom_transf;
+Prof_lambda_cov_transf_hom;
+Prof_eval_con_hom_transf;
+Prof_lambda_con_transf_hom.
+```
 
 Exit criteria: weighted-limit and right-adjoint consumers still use
-`Prof_imply_cov_func(Q)` and `Prof_imply_cov_func2` directly; no
-constructor-specific implication functoriality rule is introduced.
+`Prof_imply_cov_func(Q)` and `Prof_imply_cov_func2` directly; fixed-endpoint
+eval/lambda `*_map` beta/eta checks still pass; no constructor-specific
+implication functoriality rule is introduced.
