@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-03
+Last consolidated: 2026-07-06
 
 This report is the current orientation point for `emdash3_2.lp`. It consolidates
 the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
@@ -154,21 +154,30 @@ ordinary dual helper `comp_cat_con_func_func_tapp1_func` is a small functor in
 head `comp_cat_func_func_tapp1_fapp0`.  That capped head is intentionally
 neutral; `cov` and `con` are kept only on the curried functor-level views.
 
-The first Cat-valued profunctor slice is now active. `Prof_base`, `Prof_cat`,
-and `Prof` are transparent aliases for families on `A^op × B`.
-`Hom_prof_along(F,G)` is the sole stable representable head, with direct fibre
-computation and a full base-arrow action computing as postcomposition after
-precomposition. `Hom_prof(G)` and `Unit_prof(X)` are transparent identity-left
-specializations. `Product_map_func(F,G)` is now a primitive stable
-componentwise product-map constructor with object, full-hom, and capped-arrow
-projections. Its composition cut accumulates the two component functors. There
-is deliberately no runtime whole-constructor identity collapse: the attempted
-`Product_map_func(id,id) -> id` and projection-pair rewrites create competing
-object and hom-action paths. Proof-time unification now identifies
-`Product_map_func(id,id)` with both `id_func(A x B)` and the explicit
-projection pair. Product-arrow identity similarly has a proof-time eta rule
-against the pair of component identities while retaining the runtime `id`
-head required by generic functor identity.
+The first Cat-valued profunctor slice is now active. `Prof_base(A,B)` remains
+the transparent readability alias `Product_cat(Op_cat A) B`, while
+`Prof_cat(A,B)` is now the primitive public fixed-endpoint profunctor category
+head. Its object and hom projections compute to the existing
+`Catd_cat(Product_cat(Op_cat A) B)` semantics, and a guarded proof-time
+compatibility rule identifies `Prof_cat(A,B)` with
+`Catd_cat(Product_cat A0 B)` when `A` is `Op_cat A0`. Public fixed-endpoint
+vertical statements should use generic `@id (Prof_cat A B)` and
+`@comp_fapp0 (Prof_cat A B)`; raw Catd/Product spelling remains appropriate
+only for semantic bodies and projection checks whose discriminator is the
+displayed-family base. `Prof(A,B)` is the object classifier
+`Obj(Prof_cat(A,B))`. `Hom_prof_along(F,G)` is the sole stable representable
+head, with direct fibre computation and a full base-arrow action computing as
+postcomposition after precomposition. `Hom_prof(G)` and `Unit_prof(X)` now
+expose `τ(Prof X B)` and `τ(Prof X X)` surfaces. `Product_map_func(F,G)` is
+now a primitive stable componentwise product-map constructor with object,
+full-hom, and capped-arrow projections. Its composition cut accumulates the
+two component functors. There is deliberately no runtime whole-constructor
+identity collapse: the attempted `Product_map_func(id,id) -> id` and
+projection-pair rewrites create competing object and hom-action paths.
+Proof-time unification now identifies `Product_map_func(id,id)` with both
+`id_func(A x B)` and the explicit projection pair. Product-arrow identity
+similarly has a proof-time eta rule against the pair of component identities
+while retaining the runtime `id` head required by generic functor identity.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
@@ -300,9 +309,11 @@ parallel to the existing global Catd composition specialization. This one
 generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
-The active warning inventory after the first groupoid-univalence Phase 1 slice
-is now 1,121: 958 unjoinable critical-pair reports and 163
-replaceable-pattern reports. The runtime
+The active warning inventory after the 2026-07-06 primitive `Prof_cat`
+migration is now 1,292: 1,127 unjoinable critical-pair reports and 165
+replaceable-pattern reports. The largest reported heads are still the shared
+generic composition and hom-action families, especially `comp_fapp0` and
+`hom_postcomp_fapp0`. The earlier runtime
 `comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
 the 1,108 post-product-map-reindex inventory; the classified families include
 constant, opposite, Sigma-projection, identity, and higher profunctor-duality
@@ -443,7 +454,8 @@ deferred: the direct reindex fold caused a focused-probe typecheck loop.
 Contravariant weighted colimits are now a transparent dual presentation:
 `WeightedColimit_con(F,W,L)` is definitionally
 `WeightedLimit_cov(Op_func(F),Op_prof(W),Op_func(L))` in the opposite ambient
-and index categories. `Op_weighted_limit_cov` and
+and index categories, with `W` exposed as a public `τ(Prof J J')` weight.
+`Op_weighted_limit_cov` and
 `Op_weighted_colimit_con` are identity wrappers after opposite and
 double-swap normalization. The full
 `left_adjoint_preserves_weighted_colimit_con` witness is the existing
@@ -685,16 +697,23 @@ left implicit:
   evidence-irrelevance/projection unification rules are intentionally not
   installed unless a future focused probe shows a concrete need;
 - a first Cat-valued profunctor facade:
-  `Prof_base(A,B) = A^op × B`, `Prof_cat(A,B) = Catd_cat(Prof_base(A,B))`,
-  and `Prof(A,B) = Obj(Prof_cat(A,B))` are transparent aliases;
+  `Prof_base(A,B) = A^op × B` remains a transparent readability alias, while
+  `Prof_cat(A,B)` is the primitive public fixed-endpoint category head with
+  runtime `Obj`/`Hom_cat` projections to
+  `Catd_cat(Product_cat(Op_cat A) B)` and guarded proof-time compatibility
+  with `Catd_cat(Product_cat A0 B)` when `A = Op_cat A0`; `Prof(A,B) =
+  Obj(Prof_cat(A,B))` is the object classifier;
   `Product_map_func(F,G)` is the stable componentwise product-map constructor;
   `Pullback_catd(E,F)` is the stable Cat-valued pullback constructor;
   `Prof_reindex_base_func(F,G)` is a transparent readability alias for
   `Product_map_func(Op_func(F),G)`;
   pulling back along `Product_map_func(F,G)` folds at both object and functor
   level to profunctor reindexing along `Op_func(F),G`;
-  `Prof_reindex(R,F,G)` and `Prof_reindex_fapp1_func` expose object, full,
-  and capped pullback action along the generic product base map;
+  public fixed-endpoint constructor signatures now prefer `τ(Prof A B)` and
+  `ProfMap` over raw `τ(Catd(Product_cat(Op_cat A) B))` where the symbol is a
+  profunctor-facing API; `Prof_reindex(R,F,G)` and
+  `Prof_reindex_fapp1_func` expose object, full, and capped pullback action
+  along the generic product base map;
   `Hom_prof_along(F,G)` is the single stable representable constructor;
   `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
   the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.

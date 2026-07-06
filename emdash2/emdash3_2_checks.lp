@@ -3131,7 +3131,7 @@ assert [A B : Cat] ⊢
   ≡ @Product_swap_func (Op_cat A) (Op_cat B);
 
 assert [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (a : τ (Obj A))
   (b : τ (Obj B)) ⊢
   @fapp0
@@ -6918,7 +6918,10 @@ assert [A B : Cat] ⊢
   Prof_base A B ≡ Product_cat (Op_cat A) B;
 
 assert [A B : Cat] ⊢
-  Prof_cat A B ≡ Catd_cat (Product_cat (Op_cat A) B);
+  @eq_refl Cat_grpd (Prof_cat A B)
+  : τ (@= Cat_grpd
+      (Prof_cat A B)
+      (Catd_cat (Product_cat (Op_cat A) B)));
 
 assert [A B : Cat] ⊢
   Prof A B ≡ Obj (Catd_cat (Product_cat (Op_cat A) B));
@@ -7215,7 +7218,7 @@ assert [A B : Cat]
 
 // Stable profunctor reindexing and its representable fold.
 assert [A A' B B' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   (a : τ (Obj A'))
@@ -7228,7 +7231,7 @@ assert [A A' B B' : Cat]
       (@Product_pair (Op_cat A) B (fapp0 F a) (fapp0 G b));
 
 assert [A A' B B' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   (a a' : τ (Obj A'))
@@ -7245,7 +7248,7 @@ assert [A A' B B' : Cat]
       (Struct_sigma a' b');
 
 assert [A A' B B' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   (a a' : τ (Obj A'))
@@ -7337,20 +7340,18 @@ assert [J B : Cat]
   (G : τ (Functor J B)) ⊢
   @fapp1_fapp0
     (Functor_cat J B)
-    (@Catd_cat (Product_cat (Op_cat B) J))
+    (@Prof_cat B J)
     (@Hom_prof_func J B)
     G G
     (@id (Functor_cat J B) G)
-  ≡ @id_funcd
-      (Product_cat (Op_cat B) J)
-      (@Hom_prof J B G);
+  ≡ @id (@Prof_cat B J) (@Hom_prof J B G);
 
 assert [J B : Cat]
   [G H K : τ (Functor J B)]
   (eta : τ (Transf H K))
   (epsilon : τ (Transf G H)) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat B) J)
+  @comp_fapp0
+    (@Prof_cat B J)
     (@Hom_prof J B G)
     (@Hom_prof J B H)
     (@Hom_prof J B K)
@@ -7358,7 +7359,7 @@ assert [J B : Cat]
     (fapp1_fapp0 (@Hom_prof_func J B) epsilon)
   ≡ @fapp1_fapp0
       (Functor_cat J B)
-      (@Catd_cat (Product_cat (Op_cat B) J))
+      (@Prof_cat B J)
       (@Hom_prof_func J B)
       G K
       (@comp_fapp0
@@ -7390,9 +7391,9 @@ assert [B J : Cat]
 
 // Shaped profunctor cells and elements.
 assert [A A' B B' : Cat]
-  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (R' : τ (Prof A' B'))
   (F : τ (Functor A' A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor B' B)) ⊢
   @Prof_transf_cat A A' B B' R' F R G
   ≡ @Functord_cat
@@ -7402,7 +7403,7 @@ assert [A A' B B' : Cat]
 
 assert [I A B : Cat]
   (F : τ (Functor I A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor I B)) ⊢
   @Prof_hom_cat I A B F R G
   ≡ @Functord_cat
@@ -7412,7 +7413,7 @@ assert [I A B : Cat]
 
 assert [I A B : Cat]
   (F : τ (Functor I A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor I B)) ⊢
   @Prof_hom I A B F R G
   ≡ Obj
@@ -7430,8 +7431,8 @@ assert [I C : Cat]
       (@Hom_prof_along I I C F G);
 
 assert [I A' B' A B : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [R' : τ (Prof A' B')]
+  [R : τ (Prof A B)]
   [F : τ (Functor A' A)]
   [G : τ (Functor B' B)]
   [a : τ (Functor I A')]
@@ -7446,7 +7447,7 @@ assert [I A' B' A B : Cat]
       (@comp_cat_fapp0 I B' B G b));
 
 assert [A A' B B' X : Cat]
-  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (R' : τ (Prof A' B'))
   (F : τ (Functor A' A))
   (H : τ (Functor A X))
   (K : τ (Functor B X))
@@ -7467,13 +7468,13 @@ assert [A A' B B' X : Cat]
 
 // Primitive profunctor tensor and exposed-endpoint reindexing.
 assert [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  (R : τ (Prof A B)) ⊢
   @Prof_reindex A A B B R (@id_func A) (@id_func B)
   ≡ R;
 
 assert [A A' B X X' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  (S : τ (Catd (Product_cat (Op_cat B) X)))
+  (R : τ (Prof A B))
+  (S : τ (Prof B X))
   (F : τ (Functor A' A))
   (G : τ (Functor X' X)) ⊢
   @Prof_reindex
@@ -7487,8 +7488,8 @@ assert [A A' B X X' : Cat]
       (@Prof_reindex B B X X' S (@id_func B) G);
 
 assert [A A' B X : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  (S : τ (Catd (Product_cat (Op_cat B) X)))
+  (R : τ (Prof A B))
+  (S : τ (Prof B X))
   (F : τ (Functor A' A)) ⊢
   @Prof_reindex
     A A' X X
@@ -7501,8 +7502,8 @@ assert [A A' B X : Cat]
       S;
 
 assert [A B X X' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  (S : τ (Catd (Product_cat (Op_cat B) X)))
+  (R : τ (Prof A B))
+  (S : τ (Prof B X))
   (G : τ (Functor X' X)) ⊢
   @Prof_reindex
     A A X X'
@@ -7515,8 +7516,8 @@ assert [A B X X' : Cat]
       (@Prof_reindex B B X X' S (@id_func B) G);
 
 assert [A B X : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  (S : τ (Catd (Product_cat (Op_cat B) X))) ⊢
+  (R : τ (Prof A B))
+  (S : τ (Prof B X)) ⊢
   @Prof_reindex
     A A X X
     (@Prof_tensor A B X R S)
@@ -7527,7 +7528,7 @@ assert [A B X : Cat]
 assert [A A' B X Y : Cat]
   (H : τ (Functor A Y))
   (K : τ (Functor B Y))
-  (S : τ (Catd (Product_cat (Op_cat B) X)))
+  (S : τ (Prof B X))
   (F : τ (Functor A' A)) ⊢
   @Prof_reindex
     A A' X X
@@ -7586,8 +7587,8 @@ assert [A B X : Cat]
   ≡ @Prof_tensor_map A B X P P' Q Q' r s;
 
 assert [I A B X : Cat]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [R : τ (Prof A B)]
+  [S : τ (Prof B X)]
   [F : τ (Functor I A)]
   [G : τ (Functor I X)]
   (M : τ (Functor I B))
@@ -7619,9 +7620,7 @@ assert [A B : Cat]
       (@Unit_prof B)
       (@Unit_prof B)
       r
-      (@id_funcd
-        (Product_cat (Op_cat B) B)
-        (@Unit_prof B));
+      (@id (@Prof_cat B B) (@Unit_prof B));
 
 assert [A B : Cat] ⊢
   @Prof_coyoneda_cov_transf A B
@@ -7684,9 +7683,7 @@ assert [A B : Cat]
       (@Unit_prof A)
       (@Unit_prof A)
       P P'
-      (@id_funcd
-        (Product_cat (Op_cat A) A)
-        (@Unit_prof A))
+      (@id (@Prof_cat A A) (@Unit_prof A))
       r;
 
 assert [A B : Cat] ⊢
@@ -7742,7 +7739,7 @@ assert [A B C D : Cat]
       F;
 
 assert [A A' A'' B B' B'' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
   (F' : τ (Functor A'' A'))
@@ -7761,10 +7758,10 @@ assert [A A' A'' B B' B'' : Cat]
 assert [A A' B B' : Cat]
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
-  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  (R : τ (Prof A B)) ⊢
   @fapp0
-    (@Catd_cat (Product_cat (Op_cat A) B))
-    (@Catd_cat (Product_cat (Op_cat A') B'))
+    (@Prof_cat A B)
+    (@Prof_cat A' B')
     (@Prof_reindex_func A A' B B' F G)
     R
   ≡ @Prof_reindex A A' B B' R F G;
@@ -7875,18 +7872,18 @@ assert [A A' B B' : Cat]
   ≡ @Const_catd (Product_cat (Op_cat A') B') C;
 
 assert [A A' B B' : Cat]
-  [R S : τ (Catd (Product_cat (Op_cat A) B))]
-  (r : τ (Functord R S))
+  [R S : τ (Prof A B)]
+  (r : τ (ProfMap R S))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B)) ⊢
   @Prof_reindex_transf A A' B B' R S r F G
-  : τ (Functord
+  : τ (ProfMap
       (@Prof_reindex A A' B B' R F G)
       (@Prof_reindex A A' B B' S F G));
 
 assert [A B : Cat]
-  [R S : τ (Catd (Product_cat (Op_cat A) B))]
-  (r : τ (Functord R S)) ⊢
+  [R S : τ (Prof A B)]
+  (r : τ (ProfMap R S)) ⊢
   @Prof_reindex_transf
     A A B B
     R S r
@@ -7895,7 +7892,7 @@ assert [A B : Cat]
   ≡ r;
 
 assert [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢
+  (R : τ (Prof A B)) ⊢
   @Op_prof_map
     A B R R
     (@id (@Prof_cat A B) R)
@@ -7905,7 +7902,7 @@ assert [A B : Cat]
 
 assert [B J J' : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L)) ⊢
   @Op_weighted_colimit_con
@@ -7920,7 +7917,7 @@ assert [B J J' : Cat]
 
 assert [A J J' B : Cat]
   [F : τ (Functor J A)]
-  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [W : τ (Prof J J')]
   [L : τ (Functor J' A)]
   (isc : τ (@WeightedColimit_con A J J' F W L))
   (adj : τ (Adjunction A B)) ⊢
@@ -7943,7 +7940,7 @@ assert [A B : Cat]
   ≡ Terminal_cat;
 
 assert [I A' B' A B : Cat]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [R : τ (Prof A B)]
   [F : τ (Functor A' A)]
   [G : τ (Functor B' B)]
   [a : τ (Functor I A')]
@@ -8199,10 +8196,10 @@ assert [I A B : Cat]
     F
     M
     (@tapp0_fapp0
-      (@Catd_cat (Product_cat (Op_cat A) B))
-      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_cat A B)
+      (@Prof_cat A B)
       (@Prof_tensor_right_unit_func A B)
-      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      (@id_func (@Prof_cat A B))
       P
       (@Prof_coyoneda_cov_transf A B))
     (@Prof_tensor_hom_hom
@@ -8233,10 +8230,10 @@ assert [I A B : Cat]
     F
     M
     (@tapp1_fapp0
-      (@Catd_cat (Product_cat (Op_cat A) B))
-      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_cat A B)
+      (@Prof_cat A B)
       (@Prof_tensor_right_unit_func A B)
-      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      (@id_func (@Prof_cat A B))
       P P'
       (@Prof_coyoneda_cov_transf A B)
       pp)
@@ -8275,10 +8272,10 @@ assert [I A B : Cat]
     F
     G
     (@tapp0_fapp0
-      (@Catd_cat (Product_cat (Op_cat A) B))
-      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_cat A B)
+      (@Prof_cat A B)
       (@Prof_tensor_left_unit_func A B)
-      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      (@id_func (@Prof_cat A B))
       P
       (@Prof_coyoneda_con_transf A B))
     (@Prof_tensor_hom_hom
@@ -8310,10 +8307,10 @@ assert [I A B : Cat]
     F
     G
     (@tapp1_fapp0
-      (@Catd_cat (Product_cat (Op_cat A) B))
-      (@Catd_cat (Product_cat (Op_cat A) B))
+      (@Prof_cat A B)
+      (@Prof_cat A B)
       (@Prof_tensor_left_unit_func A B)
-      (@id_func (@Catd_cat (Product_cat (Op_cat A) B)))
+      (@id_func (@Prof_cat A B))
       P P'
       (@Prof_coyoneda_con_transf A B)
       pp)
@@ -8337,8 +8334,8 @@ assert [I A B : Cat]
 
 // Covariant profunctor implication and eval/lambda calculus.
 assert [A A' B B' X : Cat]
-  (O : τ (Catd (Product_cat (Op_cat A) X)))
-  (Q : τ (Catd (Product_cat (Op_cat B) X)))
+  (O : τ (Prof A X))
+  (Q : τ (Prof B X))
   (F : τ (Functor A' A))
   (M : τ (Functor B' B)) ⊢
   @Prof_reindex
@@ -8352,8 +8349,8 @@ assert [A A' B B' X : Cat]
       (@Prof_reindex B B' X X Q M (@id_func X));
 
 assert [A B X : Cat]
-  (O : τ (Catd (Product_cat (Op_cat A) X)))
-  (Q : τ (Catd (Product_cat (Op_cat B) X))) ⊢
+  (O : τ (Prof A X))
+  (Q : τ (Prof B X)) ⊢
   @Prof_reindex
     A A B B
     (@Prof_imply_cov A B X O Q)
@@ -8400,17 +8397,15 @@ assert [A B X : Cat]
     (@Prof_imply_cov_func A B X Q)
     O O
     (@id (@Prof_cat A X) O)
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
-      (@Prof_imply_cov A B X O Q);
+  ≡ @id (@Prof_cat A B) (@Prof_imply_cov A B X O Q);
 
 assert [A B X : Cat]
   (Q : τ (Prof B X))
   [O O' O'' : τ (Prof A X)]
-  (o : τ (Functord O O'))
-  (o' : τ (Functord O' O'')) ⊢
-  @comp_catd_fapp0
-      (Product_cat (Op_cat A) B)
+  (o : τ (ProfMap O O'))
+  (o' : τ (ProfMap O' O'')) ⊢
+  @comp_fapp0
+      (@Prof_cat A B)
       (@Prof_imply_cov A B X O Q)
       (@Prof_imply_cov A B X O' Q)
       (@Prof_imply_cov A B X O'' Q)
@@ -8423,8 +8418,8 @@ assert [A B X : Cat]
   ≡ fapp1_fapp0
       (@Prof_imply_cov_func A B X Q)
       [O] [O'']
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat A) X)
+      (@comp_fapp0
+        (@Prof_cat A X)
         O O' O'' o' o);
 
 assert [A B X : Cat]
@@ -8506,8 +8501,8 @@ assert [A B X : Cat]
         (Prof_cat A X)
         (Op_cat (Prof_cat B X)))
       oq)
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
+  ≡ @id
+      (@Prof_cat A B)
       (@Prof_imply_cov
         A B X
         (sigma_Fst oq)
@@ -8562,8 +8557,8 @@ assert [A B X : Cat]
   ≡ t;
 
 assert [A B B' X X' : Cat]
-  (P : τ (Catd (Product_cat (Op_cat A) B)))
-  (O : τ (Catd (Product_cat (Op_cat A) X)))
+  (P : τ (Prof A B))
+  (O : τ (Prof A X))
   (M : τ (Functor B' B))
   (G : τ (Functor X' X)) ⊢
   @Prof_reindex
@@ -8577,8 +8572,8 @@ assert [A B B' X X' : Cat]
       (@Prof_reindex A A X X' O (@id_func A) G);
 
 assert [A B X : Cat]
-  (P : τ (Catd (Product_cat (Op_cat A) B)))
-  (O : τ (Catd (Product_cat (Op_cat A) X))) ⊢
+  (P : τ (Prof A B))
+  (O : τ (Prof A X)) ⊢
   @Prof_reindex
     B B X X
     (@Prof_imply_con A B X P O)
@@ -8650,28 +8645,26 @@ assert [A B : Cat]
 assert [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (@ProfComparison A B P Q)) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat A) B)
+  @comp_fapp0
+    (@Prof_cat A B)
     P Q P
     (@prof_comparison_from A B P Q i)
     (@prof_comparison_to A B P Q i)
-  ≡ @id_funcd
-      (Product_cat (Op_cat A) B)
-      P;
+  ≡ @id (@Prof_cat A B) P;
 
 assert [A B : Cat]
   [P Q R S : τ (Prof A B)]
   (i : τ (@ProfComparison A B P Q))
   (r : τ (@ProfMap A B R P))
   (h : τ (@ProfMap A B S R)) ⊢
-  @comp_catd_fapp0
-    (Product_cat (Op_cat A) B)
+  @comp_fapp0
+    (@Prof_cat A B)
     S R Q
     (@prof_comparison_push A B P Q i R r)
     h
   ≡ @prof_comparison_push A B P Q i S
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
+      (@comp_fapp0
+        (@Prof_cat A B)
         S R P r h);
 
 assert [A B : Cat]
@@ -8803,7 +8796,7 @@ assert [B J J' A : Cat]
 
 assert [B J J' I : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L))
   (M : τ (Functor I B)) ⊢
@@ -8825,7 +8818,7 @@ assert [B J J' I : Cat]
 
 assert [B J J' I : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L))
   (M : τ (Functor I B)) ⊢
@@ -9103,13 +9096,13 @@ assert [B J J' A : Cat]
     _
     (@right_adjoint_preserves_weighted_limit_cov_iso
       B J J' A W F L isl adj)
-  ≡ @comp_catd_fapp0
-      (Product_cat (Op_cat A) J')
+  ≡ @comp_fapp0
+      (@Prof_cat A J')
       _ _ _
       (@Adjunction_prof_transpose
         A B adj A J' (@id_func A) L)
-      (@comp_catd_fapp0
-        (Product_cat (Op_cat A) J')
+      (@comp_fapp0
+        (@Prof_cat A J')
         _ _ _
         (@iso_evidence_to
           (Prof_cat A J')

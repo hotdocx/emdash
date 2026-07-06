@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the long-term note that making `Prof_cat` p
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
-Status: cleanup slice promoted 2026-07-06; primitive `Prof_cat` redesign still pending
+Status: primitive `Prof_cat` head and first public-surface migration promoted 2026-07-06; further semantic-boundary cleanup remains staged
 
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
@@ -56,6 +56,38 @@ endpoint-changing implication eval/lambda `*_transf` wrappers, shaped
 `*_hom_map` primitives, and their direct checks. No `Prof_cat` primitive
 projection change has been promoted yet.
 
+Implementation update 2026-07-06f: the first primitive-`Prof_cat` migration
+has now been promoted. `Prof_cat(A,B)` is an injective primitive category head;
+`Obj(Prof_cat A B)` and `Hom_cat(Prof_cat A B)` project at runtime to the
+existing `Catd_cat(Product_cat(Op_cat A) B)` semantics, and the guarded
+proof-time rule
+
+```text
+Prof_cat A B == Catd_cat(Product_cat A0 B)  when A == Op_cat A0
+```
+
+keeps elaboration compatible with semantic bodies whose canonical category is
+still the raw displayed-family presentation. The active migration also rekeys
+the `Hom_prof_func` component rule and `Prof_reindex_transf` identity,
+composition, and DefIso hom-action bridges to the public `Prof_cat` head.
+Diagnostic checks now use generic `@comp_fapp0 (Prof_cat A B)` and
+`@id (Prof_cat A B)` for the public vertical profunctor normal form, including
+the `Hom_prof_func`, co-Yoneda unit, fixed-weight implication,
+`ProfComparison`, and right-adjoint iso-evidence clusters. The first public
+constructor signature slice has also moved from raw
+`τ(Catd(Product_cat(Op_cat A) B))` spelling to `τ(Prof A B)`/`ProfMap` for
+`Op_prof`, `Prof_reindex`, representables, shaped cells, tensor,
+fixed-endpoint implication objects, `Terminal_prof`, and cell evaluation.
+The contravariant weighted-colimit compatibility wrappers now also take
+public `τ(Prof ...)` weights.
+Raw `Catd_cat(Product_cat(...))` remains in semantic bodies and projection
+tests where it is the actual displayed-family discriminator. The promoted
+warning-enabled check completes with 1,292 warnings: 1,127 unjoinable
+critical-pair reports and 165 replaceable-pattern reports. The largest
+reported heads remain the shared `comp_fapp0` / `hom_postcomp_fapp0`
+families, so these warnings are recorded as the current diagnostic inventory,
+not as a reason to weaken the intended primitive-head runtime projections.
+
 ## Purpose
 
 This report records the proposed redesign of the profunctor category surface:
@@ -85,15 +117,18 @@ The active code currently has:
 
 ```text
 Prof_base(A,B) := Product_cat(Op_cat A,B)
-Prof_cat(A,B)  := Catd_cat(Prof_base(A,B))
+Prof_cat(A,B)  : primitive Cat head
 Prof(A,B)      := Obj(Prof_cat(A,B))
 ProfMap(P,Q)   := Obj(Hom_cat(Prof_cat(A,B),P,Q))
 ```
 
-This makes `Prof_cat` a transparent alias. It also means that vertical
-profunctor identities, composition, and many DefIso/ProfComparison facts
-currently compute because `Prof_cat(A,B)` reduces to
-`Catd_cat(Product_cat(Op_cat A) B)`.
+Before the 2026-07-06f promotion, `Prof_cat` was a transparent alias for the
+raw displayed-family category. It is now a stable public head with explicit
+runtime projections into `Catd_cat(Product_cat(Op_cat A) B)`. Vertical
+profunctor identities, composition, and DefIso/ProfComparison facts should be
+stated over `Prof_cat(A,B)` when that is the visible ambient category, while
+semantic bodies can still use the raw Catd/Product presentation behind the
+projection layer.
 
 A source map on 2026-07-06 found the migration is not just a local rule change:
 
@@ -597,7 +632,7 @@ and composition in `Prof_cat(A,B)`.
 
 ### PROF-CAT-PRIM-001: Primitive `Prof_cat` projection probe
 
-Status: proposed.
+Status: promoted 2026-07-06.
 
 Scope:
 
@@ -609,12 +644,14 @@ basic Prof/ProfMap/id/comp checks.
 ```
 
 Exit criteria: bounded probe succeeds and identifies the next missing public
-vertical normal form.
+vertical normal form. Completed by the promoted primitive head, runtime
+`Obj`/`Hom_cat` projections, guarded `Prof_cat`/`Catd_cat(Product_cat...)`
+unification rule, and public `Prof`/`ProfMap`/identity/composition checks.
 
 ### PROF-CAT-PRIM-002: ProfComparison public composition migration and cleanup
 
-Status: cleanup subset promoted 2026-07-06; public `Prof_cat` composition
-migration pending.
+Status: cleanup subset and first public `Prof_cat` composition migration
+promoted 2026-07-06.
 
 Scope: remove stale Catd-semantics comparison helpers, keep only the
 `ProfComparison` compatibility surface that still has current consumers, and
@@ -625,6 +662,8 @@ migrate any retained public vertical equality targets from
 Exit criteria: comparison beta/eta, weighted-limit comparison, and adjunction
 comparison checks still pass; no retained statement exposes raw Catd
 composition unless it is explicitly testing the projection layer.
+The promoted slice rekeys retained public comparison and co-Yoneda/implication
+checks to generic `@comp_fapp0 (Prof_cat A B)` / `@id (Prof_cat A B)`.
 
 ### PROF-CAT-PRIM-003: Catd hom-action bridge cleanup
 
@@ -640,7 +679,7 @@ consumer fails without it.
 
 ### PROF-CAT-PRIM-004: Public constructor signature migration
 
-Status: proposed.
+Status: first slice promoted 2026-07-06.
 
 Scope: replace raw fixed-endpoint profunctor family argument types by
 `τ (Prof A B)` where doing so improves the public surface and does not remove a
@@ -648,6 +687,11 @@ needed raw Catd/Product discriminator.
 
 Exit criteria: each promoted cluster has focused checks and no broad global
 folds are introduced.
+The promoted slice covers the public fixed-endpoint arguments and results for
+the main representable, reindexing, shaped-cell, tensor, implication,
+terminal, and cell-evaluation constructors. Lower-level semantic projection
+rules may still keep raw Catd/Product arguments when those are the intended
+discriminators.
 
 ### PROF-CAT-PRIM-005: Prof implication mixed-functor and equipment-view cleanup
 

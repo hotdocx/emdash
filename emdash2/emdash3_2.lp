@@ -9485,8 +9485,16 @@ symbol Prof_base (A B : Cat) : Cat
 ≔ Product_cat (Op_cat A) B;
 
 // Category of Cat-valued profunctors A -/-> B.
-symbol Prof_cat (A B : Cat) : Cat
-≔ Catd_cat (Prof_base A B);
+injective symbol Prof_cat (A B : Cat) : Cat;
+
+rule Obj (Prof_cat $A $B)
+  ↪ Obj (Catd_cat (Product_cat (Op_cat $A) $B));
+
+rule Hom_cat (Prof_cat $A $B) $P $Q
+  ↪ @Functord_cat (Product_cat (Op_cat $A) $B) $P $Q;
+
+unif_rule Prof_cat $A $B ≡ Catd_cat (Product_cat $A0 $B)
+  ↪ [ $A ≡ Op_cat $A0 ];
 
 // Object/type classifier of Cat-valued profunctors.
 symbol Prof (A B : Cat) : Grpd
@@ -9534,8 +9542,8 @@ symbol ProfMap
   Applying `Op_catd` pointwise would incorrectly add a second fibre opposite.
 */
 injective symbol Op_prof [A B : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  : τ (Catd (Product_cat B (Op_cat A)));
+  (R : τ (Prof A B))
+  : τ (Prof (Op_cat B) (Op_cat A));
 
 rule @fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba
   ↪ @fapp0
@@ -9700,10 +9708,10 @@ symbol Op_prof_map
   Product_map_func(Op_func(F),G) base map directly.
 */
 symbol Prof_reindex [A A' B B' : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
-  : τ (Catd (Product_cat (Op_cat A') B'));
+  : τ (Prof A' B');
 
 // Reindexing object-level profunctor opposite is owned by the semantic
 // `Op_prof` head, not by the unfolded pullback/product-swap presentation.
@@ -9871,7 +9879,7 @@ rule @fapp1_fapp0
 injective symbol Hom_prof_along [A B X : Cat]
   (F : τ (Functor A X))
   (G : τ (Functor B X))
-  : τ (Catd (Product_cat (Op_cat A) B));
+  : τ (Prof A B);
 
 // Direct fibre computation, formulated for an arbitrary product object.
 rule @fapp0
@@ -9971,12 +9979,12 @@ rule @fapp1_fapp0
 // Right-representable hom profunctor, as the identity-left specialization.
 symbol Hom_prof [B X : Cat]
   (G : τ (Functor B X))
-  : τ (Catd (Product_cat (Op_cat X) B))
+  : τ (Prof X B)
 ≔ @Hom_prof_along X B X (@id_func X) G;
 
 // Identity/unit hom profunctor.
 symbol Unit_prof (X : Cat)
-  : τ (Catd (Product_cat (Op_cat X) X))
+  : τ (Prof X X)
 ≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
 
 /*
@@ -10034,7 +10042,7 @@ rule @tapp0_fapp0
       $bj
       (@fapp1_fapp0
         (Functor_cat $J $B)
-        (@Catd_cat (Product_cat (Op_cat $B) $J))
+        (@Prof_cat $B $J)
         (@Hom_prof_func $J $B)
         $G $H $eta)
   ↪ @tapp0_fapp0
@@ -10255,9 +10263,9 @@ rule @Prof_reindex
   representable fold above supplies the useful normal form.
 */
 symbol Prof_transf_cat [A A' B B' : Cat]
-  (R' : τ (Catd (Product_cat (Op_cat A') B')))
+  (R' : τ (Prof A' B'))
   (F : τ (Functor A' A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor B' B))
   : Cat
 ≔ @Functord_cat
@@ -10267,7 +10275,7 @@ symbol Prof_transf_cat [A A' B B' : Cat]
 
 symbol Prof_hom_cat [I A B : Cat]
   (F : τ (Functor I A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor I B))
   : Cat
 ≔ @Prof_transf_cat
@@ -10279,7 +10287,7 @@ symbol Prof_hom_cat [I A B : Cat]
 
 symbol Prof_hom [I A B : Cat]
   (F : τ (Functor I A))
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
+  (R : τ (Prof A B))
   (G : τ (Functor I B))
   : Grpd
 ≔ Obj (@Prof_hom_cat I A B F R G);
@@ -10293,8 +10301,8 @@ symbol Prof_hom [I A B : Cat]
 */
 symbol Prof_cell_apply
   [I A' B' A B : Cat]
-  [R' : τ (Catd (Product_cat (Op_cat A') B'))]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [R' : τ (Prof A' B')]
+  [R : τ (Prof A B)]
   [F : τ (Functor A' A)]
   [G : τ (Functor B' B)]
   [a : τ (Functor I A')]
@@ -10327,11 +10335,11 @@ rule @fapp0
   ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
 
 symbol Prof_reindex_transf [A A' B B' : Cat]
-  [R S : τ (Catd (Product_cat (Op_cat A) B))]
-  (r : τ (Functord R S))
+  [R S : τ (Prof A B)]
+  (r : τ (ProfMap R S))
   (F : τ (Functor A' A))
   (G : τ (Functor B' B))
-  : τ (Functord
+  : τ (ProfMap
       (@Prof_reindex A A' B B' R F G)
       (@Prof_reindex A A' B B' S F G));
 
@@ -10357,16 +10365,15 @@ rule @Prof_reindex_transf
 rule @Prof_reindex_transf
       $A $A2 $B $B2
       $R $R
-      (@id (@Catd_cat (Product_cat (Op_cat $A) $B)) $R)
+      (@id (@Prof_cat $A $B) $R)
       $F $G
   ↪ @id
-      (@Catd_cat
-        (Product_cat (Op_cat $A2) $B2))
+      (@Prof_cat $A2 $B2)
       (@Prof_reindex $A $A2 $B $B2 $R $F $G);
 
-// lhs-audit: keep 1 -- target Prof_reindex_transf lives over this explicit reindexed product base.
+// lhs-audit: keep 1 -- Prof_cat is the target-category discriminator for reindexing composition.
 rule @comp_fapp0
-      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
+      (@Prof_cat $A2 $B2)
       _ _ _
       (@Prof_reindex_transf $A $A2 $B $B2 $S $T $s $F $G)
       (@Prof_reindex_transf $A $A2 $B $B2 $R $S $r $F $G)
@@ -10374,59 +10381,59 @@ rule @comp_fapp0
       $A $A2 $B $B2
       $R $T
       (@comp_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A) $B))
+        (@Prof_cat $A $B)
         $R $S $T
         $s $r)
       $F $G;
 
 rule @hom_postcomp_fapp0
-      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      (@Prof_cat $A2 $B2)
+      (@Prof_cat $A2 $B2)
+      (@id Cat_cat (@Prof_cat $A2 $B2))
       $R _ _
       (@Prof_reindex_transf
         $A $A2 $B $B2
         $y $x
         (@defiso_from
-          (@Catd_cat (Product_cat (Op_cat $A) $B))
+          (@Prof_cat $A $B)
           $x $y $i)
         $F $G)
       (@hom_postcomp_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        (@Prof_cat $A2 $B2)
+        (@Prof_cat $A2 $B2)
+        (@id Cat_cat (@Prof_cat $A2 $B2))
         $R _ _
         (@Prof_reindex_transf
           $A $A2 $B $B2
           $x $y
           (@defiso_to
-            (@Catd_cat (Product_cat (Op_cat $A) $B))
+            (@Prof_cat $A $B)
             $x $y $i)
           $F $G)
         $r)
   ↪ $r
 with @hom_postcomp_fapp0
-      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-      (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+      (@Prof_cat $A2 $B2)
+      (@Prof_cat $A2 $B2)
+      (@id Cat_cat (@Prof_cat $A2 $B2))
       $R _ _
       (@Prof_reindex_transf
         $A $A2 $B $B2
         $x $y
         (@defiso_to
-          (@Catd_cat (Product_cat (Op_cat $A) $B))
+          (@Prof_cat $A $B)
           $x $y $i)
         $F $G)
       (@hom_postcomp_fapp0
-        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@Catd_cat (Product_cat (Op_cat $A2) $B2))
-        (@id Cat_cat (@Catd_cat (Product_cat (Op_cat $A2) $B2)))
+        (@Prof_cat $A2 $B2)
+        (@Prof_cat $A2 $B2)
+        (@id Cat_cat (@Prof_cat $A2 $B2))
         $R _ _
         (@Prof_reindex_transf
           $A $A2 $B $B2
           $y $x
           (@defiso_from
-            (@Catd_cat (Product_cat (Op_cat $A) $B))
+            (@Prof_cat $A $B)
             $x $y $i)
           $F $G)
         $s)
@@ -10528,9 +10535,9 @@ rule @tapp1_fapp0
   exposed endpoints; the shared middle category B remains fixed.
 */
 symbol Prof_tensor [A B X : Cat]
-  (R : τ (Catd (Product_cat (Op_cat A) B)))
-  (S : τ (Catd (Product_cat (Op_cat B) X)))
-  : τ (Catd (Product_cat (Op_cat A) X));
+  (R : τ (Prof A B))
+  (S : τ (Prof B X))
+  : τ (Prof A X);
 
 rule @Prof_reindex
       $A $A'
@@ -10593,8 +10600,8 @@ rule @fapp1_fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ $PQ' $rs
 // Compose shaped elements through a common middle probe M.
 constant symbol Prof_tensor_hom_hom
   [I A B X : Cat]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
-  [S : τ (Catd (Product_cat (Op_cat B) X))]
+  [R : τ (Prof A B)]
+  [S : τ (Prof B X)]
   [F : τ (Functor I A)]
   [G : τ (Functor I X)]
   (M : τ (Functor I B))
@@ -10806,9 +10813,9 @@ rule @Prof_cell_apply
   eval/lambda calculus below.
 */
 symbol Prof_imply_cov [A B X : Cat]
-  (O : τ (Catd (Product_cat (Op_cat A) X)))
-  (Q : τ (Catd (Product_cat (Op_cat B) X)))
-  : τ (Catd (Product_cat (Op_cat A) B));
+  (O : τ (Prof A X))
+  (Q : τ (Prof B X))
+  : τ (Prof A B);
 
 // Reindexing the implication result acts on the left endpoints of both inputs.
 rule @Prof_reindex
@@ -10947,9 +10954,9 @@ with @Prof_eval_cov_map
   content is exposed through reindexing and the eval/lambda calculus.
 */
 symbol Prof_imply_con [A B X : Cat]
-  (P : τ (Catd (Product_cat (Op_cat A) B)))
-  (O : τ (Catd (Product_cat (Op_cat A) X)))
-  : τ (Catd (Product_cat (Op_cat B) X));
+  (P : τ (Prof A B))
+  (O : τ (Prof A X))
+  : τ (Prof B X);
 
 // Reindexing the implication result acts on the right endpoints of both inputs.
 rule @Prof_reindex
@@ -11721,7 +11728,7 @@ symbol right_adjoint_preserves_weighted_limit_cov
 */
 symbol WeightedColimit_con [B J J' : Cat]
   (F : τ (Functor J B))
-  (W : τ (Catd (Product_cat (Op_cat J) J')))
+  (W : τ (Prof J J'))
   (L : τ (Functor J' B))
   : Grpd
 ≔ @WeightedLimit_cov
@@ -11737,7 +11744,7 @@ symbol WeightedColimit_con [B J J' : Cat]
 symbol Op_weighted_limit_cov
   [B J J' : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J') J))]
+  [W : τ (Prof J' J)]
   [L : τ (Functor J' B)]
   (isl : τ (@WeightedLimit_cov B J J' F W L))
   : τ (@WeightedColimit_con
@@ -11752,7 +11759,7 @@ symbol Op_weighted_limit_cov
 symbol Op_weighted_colimit_con
   [B J J' : Cat]
   [F : τ (Functor J B)]
-  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [W : τ (Prof J J')]
   [L : τ (Functor J' B)]
   (isc : τ (@WeightedColimit_con B J J' F W L))
   : τ (@WeightedLimit_cov
@@ -11774,7 +11781,7 @@ symbol Op_weighted_colimit_con
 symbol left_adjoint_preserves_weighted_colimit_con
   [A J J' B : Cat]
   [F : τ (Functor J A)]
-  [W : τ (Catd (Product_cat (Op_cat J) J'))]
+  [W : τ (Prof J J')]
   [L : τ (Functor J' A)]
   (isc : τ (@WeightedColimit_con A J J' F W L))
   (adj : τ (Adjunction A B))
@@ -11810,7 +11817,7 @@ symbol left_adjoint_preserves_weighted_colimit_con
 
 // Constant terminal Cat-valued profunctor.
 symbol Terminal_prof (A B : Cat)
-  : τ (Catd (Product_cat (Op_cat A) B))
+  : τ (Prof A B)
 ≔ @Const_catd (Product_cat (Op_cat A) B) Terminal_cat;
 
 // Unique shaped element of the terminal profunctor.
@@ -11822,7 +11829,7 @@ constant symbol Prof_terminal_hom [I A B : Cat]
 // Terminal-source specialization of narrow cell application.
 symbol Prof_cell_eval
   [I A' B' A B : Cat]
-  [R : τ (Catd (Product_cat (Op_cat A) B))]
+  [R : τ (Prof A B)]
   [F : τ (Functor A' A)]
   [G : τ (Functor B' B)]
   [a : τ (Functor I A')]
