@@ -50,6 +50,11 @@ decisions.
   specialized identity, composition, and curried-composition helpers to
   transparent aliases over generic `id`, `comp_fapp0`, and `hom_*` owners,
   while retaining Cat-only transfor projection heads.
+- `REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md`:
+  proposed plan for making `Prof_cat(A,B)` a primitive fixed-endpoint
+  profunctor category head, with explicit `Obj`/`Hom_cat` projections to the
+  existing `Catd_cat(Product_cat(Op_cat A) B)` semantics and public vertical
+  normal forms over generic `@comp_fapp0 (Prof_cat A B)`.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
