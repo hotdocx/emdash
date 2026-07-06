@@ -43,8 +43,9 @@ would be derivable from `Prof_eval_*_map` / `Prof_lambda_*_map` plus full
 co-Yoneda unit equivalences. The active code currently has only the one-way
 co-Yoneda maps `Unit tensor P -> P` and `P tensor Unit -> P`, so the eval
 direction is not derivable judgmentally today. Since the shaped `*_hom_map`
-pairs have no source consumer beyond their own checks, they should be cleaned
-or deferred as future derived wrappers rather than kept as primitive owners.
+pairs have no source consumer beyond their own checks, they should be deleted
+from the kernel now. They may be reintroduced later as derived wrappers after
+the unit/co-Yoneda comparison is represented as a full invertible comparison.
 
 ## Purpose
 
@@ -479,9 +480,11 @@ shaped elements. The same asymmetry holds on the right-unit/contravariant
 side. Therefore the shaped `*_hom_map` pairs are currently extra primitive
 closed-structure assertions, not derivations from the general core.
 
-Recommendation: delete the shaped `*_hom_map` pairs during cleanup unless a
-near-term consumer needs them. Reintroduce them later as derived wrappers after
-the unit/co-Yoneda comparison is represented as a full invertible comparison.
+Recommendation: delete the shaped `*_hom_map` pairs during cleanup, together
+with their direct beta/eta checks and the dependent `*_hom_transf` wrappers.
+Do not retain them as primitive placeholders for future consumers; any future
+surface should be derived from the general core plus a full co-Yoneda unit
+comparison.
 
 For each, verify:
 
@@ -642,7 +645,8 @@ Status: proposed.
 
 Scope: delete `Prof_imply_cov_transf`, delete `Prof_imply_con_transf`, rewrite
 or remove their coverage around direct `Prof_imply_cov_func2` generic action
-checks, and remove the closed-implication shaped/equipment wrappers:
+checks, and remove the closed-implication shaped/equipment wrappers and their
+direct checks:
 
 ```text
 Prof_eval_cov_transf;
