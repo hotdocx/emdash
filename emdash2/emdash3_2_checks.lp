@@ -8361,31 +8361,6 @@ assert [A B X : Cat]
     (@id_func B)
   ≡ @Prof_imply_cov A B X O Q;
 
-assert [A A' B B' X : Cat]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [O' : τ (Catd (Product_cat (Op_cat A') X))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [Q' : τ (Catd (Product_cat (Op_cat B') X))]
-  [F : τ (Functor A A')]
-  [M : τ (Functor B' B)]
-  (o : τ (Obj (@Prof_transf_cat A' A X X O F O' (@id_func X))))
-  (q : τ (Obj (@Prof_transf_cat B B' X X Q' M Q (@id_func X)))) ⊢
-  @Prof_imply_cov_transf
-    A A' B B' X
-    O O' Q Q' F M
-    o q
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A B' B'
-        (@Prof_reindex
-          A A B B'
-          (@Prof_imply_cov A B X O Q)
-          (@id_func A)
-          M)
-        F
-        (@Prof_imply_cov A' B' X O' Q')
-        (@id_func B')));
-
 assert [A B X : Cat]
   (Q : τ (Prof B X))
   (O : τ (Prof A X)) ⊢
@@ -8569,27 +8544,6 @@ assert [A B X : Cat]
         oq0 oq1 oq2 r12 r01);
 
 assert [A B X : Cat]
-  [O O' : τ (Prof A X)]
-  [Q Q' : τ (Prof B X)]
-  (o : τ (Functord O O'))
-  (q : τ (Functord Q' Q)) ⊢
-  @Prof_imply_cov_transf
-    A A B B X
-    O O' Q Q'
-    (@id_func A)
-    (@id_func B)
-    o q
-  ≡ @fapp1_fapp0
-      (Product_cat
-        (Prof_cat A X)
-        (Op_cat (Prof_cat B X)))
-      (Prof_cat A B)
-      (@Prof_imply_cov_func2 A B X)
-      (Struct_sigma O Q)
-      (Struct_sigma O' Q')
-      (Struct_sigma o q);
-
-assert [A B X : Cat]
   [P : τ (Prof A B)]
   [Q : τ (Prof B X)]
   [O : τ (Prof A X)]
@@ -8605,99 +8559,6 @@ assert [A B X : Cat]
   (t : τ (ProfMap (@Prof_tensor A B X P Q) O)) ⊢
   @Prof_eval_cov_map A B X P Q O
     (@Prof_lambda_cov_map A B X P Q O t)
-  ≡ t;
-
-assert [A B X A' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A' A B B
-      P
-      F
-      (@Prof_imply_cov A' B X O Q)
-      (@id_func B)))) ⊢
-  @Prof_lambda_cov_transf
-    A B X A'
-    P Q O F
-    (@Prof_eval_cov_transf
-      A B X A'
-      P Q O F
-      t)
-  ≡ t;
-
-assert [A B X A' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A' A X X
-      (@Prof_tensor A B X P Q)
-      F
-      O
-      (@id_func X)))) ⊢
-  @Prof_eval_cov_transf
-    A B X A'
-    P Q O F
-    (@Prof_lambda_cov_transf
-      A B X A'
-      P Q O F
-      t)
-  ≡ t;
-
-assert [A X : Cat]
-  [Q O : τ (Prof A X)]
-  (t : τ (@Prof_hom
-    A A A
-    (@id_func A)
-    (@Prof_imply_cov A A X O Q)
-    (@id_func A))) ⊢
-  @Prof_lambda_cov_hom_map A X Q O
-    (@Prof_eval_cov_hom_map A X Q O t)
-  ≡ t;
-
-assert [A X : Cat]
-  [Q O : τ (Prof A X)]
-  (t : τ (ProfMap Q O)) ⊢
-  @Prof_eval_cov_hom_map A X Q O
-    (@Prof_lambda_cov_hom_map A X Q O t)
-  ≡ t;
-
-assert [A X A' : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
-  [F : τ (Functor A A')]
-  (t : τ (@Prof_hom
-    A A' A
-    F
-    (@Prof_imply_cov A' A X O Q)
-    (@id_func A))) ⊢
-  @Prof_lambda_cov_transf_hom
-    A X A'
-    Q O F
-    (@Prof_eval_cov_hom_transf
-      A X A'
-      Q O F
-      t)
-  ≡ t;
-
-assert [A X A' : Cat]
-  [Q : τ (Catd (Product_cat (Op_cat A) X))]
-  [O : τ (Catd (Product_cat (Op_cat A') X))]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat A' A X X Q F O (@id_func X)))) ⊢
-  @Prof_eval_cov_hom_transf
-    A X A'
-    Q O F
-    (@Prof_lambda_cov_transf_hom
-      A X A'
-      Q O F
-      t)
   ≡ t;
 
 assert [A B B' X X' : Cat]
@@ -8725,31 +8586,6 @@ assert [A B X : Cat]
     (@id_func X)
   ≡ @Prof_imply_con A B X P O;
 
-assert [A B B' X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [O' : τ (Catd (Product_cat (Op_cat A) X'))]
-  [M : τ (Functor B' B)]
-  [G : τ (Functor X X')]
-  (p : τ (Obj (@Prof_transf_cat A A B B' P' (@id_func A) P M)))
-  (o : τ (Obj (@Prof_transf_cat A A X' X O (@id_func A) O' G))) ⊢
-  @Prof_imply_con_transf
-    A B B' X X'
-    P P' O O' M G
-    p o
-  : τ (Obj
-      (@Prof_transf_cat
-        B' B' X' X
-        (@Prof_reindex
-          B B' X X
-          (@Prof_imply_con A B X P O)
-          M
-          (@id_func X))
-        (@id_func B')
-        (@Prof_imply_con A B' X' P' O')
-        G));
-
 assert [A B X : Cat]
   [P : τ (Prof A B)]
   [Q : τ (Prof B X)]
@@ -8766,99 +8602,6 @@ assert [A B X : Cat]
   (t : τ (ProfMap (@Prof_tensor A B X P Q) O)) ⊢
   @Prof_eval_con_map A B X P Q O
     (@Prof_lambda_con_map A B X P Q O t)
-  ≡ t;
-
-assert [A B X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A) X'))]
-  [G : τ (Functor X X')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      B B X' X
-      Q
-      (@id_func B)
-      (@Prof_imply_con A B X' P O)
-      G))) ⊢
-  @Prof_lambda_con_transf
-    A B X X'
-    P Q O G
-    (@Prof_eval_con_transf
-      A B X X'
-      P Q O G
-      t)
-  ≡ t;
-
-assert [A B X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [O : τ (Catd (Product_cat (Op_cat A) X'))]
-  [G : τ (Functor X X')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A A X' X
-      (@Prof_tensor A B X P Q)
-      (@id_func A)
-      O
-      G))) ⊢
-  @Prof_eval_con_transf
-    A B X X'
-    P Q O G
-    (@Prof_lambda_con_transf
-      A B X X'
-      P Q O G
-      t)
-  ≡ t;
-
-assert [A B : Cat]
-  [P O : τ (Prof A B)]
-  (t : τ (@Prof_hom
-    B B B
-    (@id_func B)
-    (@Prof_imply_con A B B P O)
-    (@id_func B))) ⊢
-  @Prof_lambda_con_hom_map A B P O
-    (@Prof_eval_con_hom_map A B P O t)
-  ≡ t;
-
-assert [A B : Cat]
-  [P O : τ (Prof A B)]
-  (t : τ (ProfMap P O)) ⊢
-  @Prof_eval_con_hom_map A B P O
-    (@Prof_lambda_con_hom_map A B P O t)
-  ≡ t;
-
-assert [A B X : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [G : τ (Functor B X)]
-  (t : τ (@Prof_hom
-    B B X
-    (@id_func B)
-    (@Prof_imply_con A B X P O)
-    G)) ⊢
-  @Prof_lambda_con_transf_hom
-    A B X
-    P O G
-    (@Prof_eval_con_hom_transf
-      A B X
-      P O G
-      t)
-  ≡ t;
-
-assert [A B X : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [G : τ (Functor B X)]
-  (t : τ (Obj
-    (@Prof_transf_cat A A X B P (@id_func A) O G))) ⊢
-  @Prof_eval_con_hom_transf
-    A B X
-    P O G
-    (@Prof_lambda_con_transf_hom
-      A B X
-      P O G
-      t)
   ≡ t;
 
 assert [B J J' : Cat]
@@ -8907,18 +8650,6 @@ assert [A B : Cat]
 assert [A B : Cat]
   [P Q : τ (Prof A B)]
   (i : τ (@ProfComparison A B P Q)) ⊢
-  @prof_comparison_to_evidence A B P Q i
-  ≡ eq_refl (@prof_comparison_to A B P Q i);
-
-assert [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (@ProfComparison A B P Q)) ⊢
-  @prof_comparison_from_evidence A B P Q i
-  ≡ eq_refl (@prof_comparison_from A B P Q i);
-
-assert [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (@ProfComparison A B P Q)) ⊢
   @comp_catd_fapp0
     (Product_cat (Op_cat A) B)
     P Q P
@@ -8927,22 +8658,6 @@ assert [A B : Cat]
   ≡ @id_funcd
       (Product_cat (Op_cat A) B)
       P;
-
-assert [A B : Cat]
-  [P Q R : τ (Prof A B)]
-  (i : τ (@ProfComparison A B P Q))
-  (r : τ (@ProfMap A B R P)) ⊢
-  @prof_comparison_push_semantics A B P Q i R r
-  : τ (
-      @prof_comparison_push A B P Q i R r
-      =
-      @comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
-        R P Q
-        (@iso_evidence_to
-          (Prof_cat A B) P Q
-        (@prof_comparison_evidence A B P Q i))
-        r);
 
 assert [A B : Cat]
   [P Q R S : τ (Prof A B)]
@@ -8958,25 +8673,6 @@ assert [A B : Cat]
       (@comp_catd_fapp0
         (Product_cat (Op_cat A) B)
         S R P r h);
-
-assert [A B : Cat]
-  [P Q R : τ (Prof A B)]
-  (i : τ (@ProfComparison A B P Q))
-  (r : τ (@ProfMap A B R P)) ⊢
-	  @fapp0
-	    (Hom_cat (Prof_cat A B) R P)
-	    (Hom_cat (Prof_cat A B) R Q)
-	    (@prof_comparison_push_func A B P Q i R)
-	    r
-	  ≡ @hom_postcomp_fapp0
-	      (Prof_cat A B)
-	      (Prof_cat A B)
-	      (@id_func (Prof_cat A B))
-	      R
-	      P
-	      Q
-	      (@prof_comparison_to A B P Q i)
-	      r;
 
 assert [A B : Cat]
   [P Q R : τ (Prof A B)]

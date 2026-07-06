@@ -242,9 +242,7 @@ opaque symbolic right adjoint to tensoring on the right by `Q`, while
 left by `P`. Covariant implication reindexes the left endpoints of its inputs
 and is covariant in `O`, contravariant in `Q`; contravariant implication
 reindexes the right endpoints of its inputs and is contravariant in `P`,
-covariant in `O`. Both sides have checked inverse eval/lambda operations for
-general cells and shaped specializations. The fixed-weight covariant operation
-is now internalized as
+covariant in `O`. The fixed-weight covariant operation is now internalized as
 `Prof_imply_cov_func(Q) : Prof_cat(A,X) -> Prof_cat(A,B)`. Its object, full
 hom, and capped arrow actions remain the generic `fapp*` projections. It is
 defined semantically by composing the mixed-variance implication functor with
@@ -275,13 +273,17 @@ Prof_eval_con_map / Prof_lambda_con_map
 ```
 
 These are inverse operations between vertical `ProfMap` classifiers. The
-fixed-endpoint shaped specializations are
-`Prof_eval_cov_hom_map`/`Prof_lambda_cov_hom_map` and
-`Prof_eval_con_hom_map`/`Prof_lambda_con_hom_map`. The existing
-endpoint-changing `Prof_eval_*_transf` and `Prof_lambda_*_transf` names are
-transparent equipment views obtained by reindexing the target and applying
-the vertical core. Their former primitive cancellation rules are no longer
-needed.
+former fixed-endpoint shaped `*_hom_map` specializations and
+endpoint-changing `Prof_eval_*_transf` / `Prof_lambda_*_transf` equipment
+views have been removed. Future shaped closed APIs should be derived from this
+general core plus a full co-Yoneda unit comparison, not restored as
+independent primitive inverses.
+
+The 2026-07-06 cleanup before the primitive `Prof_cat` migration also removed
+`Prof_imply_cov_transf` and the unusable placeholder
+`Prof_imply_con_transf`. The retained functorial surface is
+`Prof_imply_cov_func2` / `Prof_imply_cov_func(Q)`, whose arrow behavior is the
+generic action of declared functors.
 
 The earlier `Prof_imply_cov_subst_transf` and
 `Prof_imply_con_subst_transf` explicit-substitution heads have been removed.
@@ -498,10 +500,10 @@ pull(i,s) o h -> pull(i,s o h).
 
 The opposite expansion orientation was rejected after producing twelve
 focused critical pairs. General push/pull postcomposition semantics is now a
-transparent `eq_trans`/`eq_ap` derivation, not primitive evidence.
-`prof_comparison_push_func` and `prof_comparison_pull_func` use the generic
-`hom_postcomp_func`; their object actions compute to push/pull, and their
-higher-arrow actions are inherited from the existing hom calculus.
+matter for the generic hom-action and DefIso owners, not separate
+ProfComparison helper evidence. The 2026-07-06 cleanup removed the stale
+`prof_comparison_*_selected`, `*_semantics`, `*_func`, and
+`*_to/from_evidence` compatibility layer.
 Reflexivity, symmetry, and composition compute structurally; functorial image
 is a stable certified comparison whose evidence computes through
 `iso_evidence_fmap`.
@@ -712,11 +714,12 @@ left implicit:
   composition;
   named left/right co-Yoneda cells and their identity-representable beta laws
   are active;
-  `Prof_imply_cov`, the fixed-endpoint
-  `Prof_eval_cov_map`/`Prof_lambda_cov_map` pair, and its shaped pair provide
-  the primitive profunctor internal-hom calculus; endpoint-changing
-  `Prof_eval_cov_transf`/`Prof_lambda_cov_transf` are transparent reindexed
-  views;
+  `Prof_imply_cov`, `Prof_imply_con`, and the fixed-endpoint
+  `Prof_eval_cov_map`/`Prof_lambda_cov_map` and
+  `Prof_eval_con_map`/`Prof_lambda_con_map` pairs provide the remaining
+  primitive profunctor internal-hom calculus; shaped `_hom_map` and
+  endpoint-changing `*_transf` wrappers are removed until they can be derived
+  from full co-Yoneda unit comparison;
 - `Pi_cat` as a section-category alias through `Functord_cat`;
 - Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
 - the fundamental `Hom(Sigma)` characterization in the Sigma section, plus

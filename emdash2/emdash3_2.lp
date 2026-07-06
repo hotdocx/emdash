@@ -2955,39 +2955,6 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $g
   ↪ [ tt ≡ tt ];
 
-rule @hom_postcomp_fapp0
-      (@Catd_cat $K)
-      (@Catd_cat $K)
-      (@id Cat_cat (@Catd_cat $K))
-      $R
-      $P
-      $P
-      (@id (@Catd_cat $K) $P)
-      $r
-  ↪ $r;
-
-// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed postcomposition.
-rule @comp_fapp0
-      (@Catd_cat $K)
-      $S
-      $R
-      $Q
-      (@hom_postcomp_fapp0
-        (@Catd_cat $K)
-        (@Catd_cat $K)
-        (@id Cat_cat (@Catd_cat $K))
-        $R $P $Q
-        $to
-        $r)
-      $h
-  ↪ @hom_postcomp_fapp0
-      (@Catd_cat $K)
-      (@Catd_cat $K)
-      (@id Cat_cat (@Catd_cat $K))
-      $S $P $Q
-      $to
-      (@comp_catd_fapp0 $K $S $R $P $r $h);
-
 /*
   Definitional/computational isomorphisms.
 
@@ -10189,171 +10156,9 @@ symbol prof_comparison_evidence
   : τ (IsoEvidence (Prof_cat A B) P Q)
 ≔ @defiso_iso_evidence (@Prof_cat A B) P Q i;
 
-// Incoming-map naturality and selected-arrow agreement are now inherited from
+// Incoming-map naturality and selected-arrow agreement are inherited from
 // the generic hom-action and DefIso owners. `ProfComparison` keeps only a
 // compatibility surface while downstream code migrates to `DefIso` directly.
-
-symbol prof_comparison_to_evidence
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  : τ (
-      @prof_comparison_to A B P Q i
-      =
-      @iso_evidence_to
-        (Prof_cat A B) P Q
-        (@prof_comparison_evidence A B P Q i))
-≔ eq_refl
-    (@prof_comparison_to A B P Q i);
-
-symbol prof_comparison_from_evidence
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  : τ (
-      @prof_comparison_from A B P Q i
-      =
-      @iso_evidence_from
-        (Prof_cat A B) P Q
-        (@prof_comparison_evidence A B P Q i))
-≔ eq_refl
-    (@prof_comparison_from A B P Q i);
-
-// Accumulation identifies the eliminators with postcomposition by the
-// selected arrows before relating those arrows to ordinary evidence.
-symbol prof_comparison_push_selected
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  [R : τ (Prof A B)]
-  (r : τ (ProfMap R P))
-  : τ (
-      @prof_comparison_push A B P Q i R r
-      =
-      @comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
-        R P Q
-        (@prof_comparison_to A B P Q i)
-        r)
-≔ eq_refl
-    (@prof_comparison_push A B P Q i R r);
-
-symbol prof_comparison_pull_selected
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  [R : τ (Prof A B)]
-  (s : τ (ProfMap R Q))
-  : τ (
-      @prof_comparison_pull A B P Q i R s
-      =
-      @comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
-        R Q P
-        (@prof_comparison_from A B P Q i)
-        s)
-≔ eq_refl
-    (@prof_comparison_pull A B P Q i R s);
-
-symbol prof_comparison_push_semantics
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  [R : τ (Prof A B)]
-  (r : τ (ProfMap R P))
-  : τ (
-      @prof_comparison_push A B P Q i R r
-      =
-      @comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
-        R P Q
-        (@iso_evidence_to
-          (Prof_cat A B) P Q
-          (@prof_comparison_evidence A B P Q i))
-        r)
-≔ eq_trans
-    (@prof_comparison_push_selected A B P Q i R r)
-    (@eq_ap
-      (@ProfMap A B P Q)
-      (@ProfMap A B R Q)
-      (λ f : τ (@ProfMap A B P Q),
-        @comp_catd_fapp0
-          (Product_cat (Op_cat A) B)
-          R P Q
-          f r)
-      (@prof_comparison_to A B P Q i)
-      (@iso_evidence_to
-        (Prof_cat A B) P Q
-        (@prof_comparison_evidence A B P Q i))
-      (@prof_comparison_to_evidence A B P Q i));
-
-symbol prof_comparison_pull_semantics
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  [R : τ (Prof A B)]
-  (s : τ (ProfMap R Q))
-  : τ (
-      @prof_comparison_pull A B P Q i R s
-      =
-      @comp_catd_fapp0
-        (Product_cat (Op_cat A) B)
-        R Q P
-        (@iso_evidence_from
-          (Prof_cat A B) P Q
-          (@prof_comparison_evidence A B P Q i))
-        s)
-≔ eq_trans
-    (@prof_comparison_pull_selected A B P Q i R s)
-    (@eq_ap
-      (@ProfMap A B Q P)
-      (@ProfMap A B R P)
-      (λ f : τ (@ProfMap A B Q P),
-        @comp_catd_fapp0
-          (Product_cat (Op_cat A) B)
-          R Q P
-          f s)
-      (@prof_comparison_from A B P Q i)
-      (@iso_evidence_from
-        (Prof_cat A B) P Q
-        (@prof_comparison_evidence A B P Q i))
-      (@prof_comparison_from_evidence A B P Q i));
-
-/*
-  Generic functorial owners for comparison action. Their object actions reduce
-  to `prof_comparison_push/pull` through ordinary hom postcomposition and the
-  inward accumulation rules. Higher-arrow behavior is inherited from the
-  existing `hom_postcomp_*` infrastructure.
-*/
-symbol prof_comparison_push_func
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  (R : τ (Prof A B))
-  : τ (Functor
-      (Hom_cat (Prof_cat A B) R P)
-      (Hom_cat (Prof_cat A B) R Q))
-≔ @hom_postcomp_func
-    (Prof_cat A B)
-    (Prof_cat A B)
-    (@id_func (Prof_cat A B))
-    R P Q
-    (@prof_comparison_to A B P Q i);
-
-symbol prof_comparison_pull_func
-  [A B : Cat]
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  (R : τ (Prof A B))
-  : τ (Functor
-      (Hom_cat (Prof_cat A B) R Q)
-      (Hom_cat (Prof_cat A B) R P))
-≔ @hom_postcomp_func
-    (Prof_cat A B)
-    (Prof_cat A B)
-    (@id_func (Prof_cat A B))
-    R Q P
-    (@prof_comparison_from A B P Q i);
 
 symbol prof_comparison_refl
   [A B : Cat]
@@ -11093,48 +10898,6 @@ rule fapp0
       $O
   ↪ @Prof_imply_cov $A $B $X $O $Q;
 
-// Implication is covariant in O and contravariant in Q.
-symbol Prof_imply_cov_transf
-  [A A' B B' X : Cat]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [O' : τ (Catd (Product_cat (Op_cat A') X))]
-  [Q : τ (Catd (Product_cat (Op_cat B) X))]
-  [Q' : τ (Catd (Product_cat (Op_cat B') X))]
-  [F : τ (Functor A A')]
-  [M : τ (Functor B' B)]
-  (o : τ (Obj (@Prof_transf_cat A' A X X O F O' (@id_func X))))
-  (q : τ (Obj (@Prof_transf_cat B B' X X Q' M Q (@id_func X))))
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A B' B'
-        (@Prof_reindex
-          A A B B'
-          (@Prof_imply_cov A B X O Q)
-          (@id_func A)
-          M)
-        F
-        (@Prof_imply_cov A' B' X O' Q')
-        (@id_func B')));
-
-// The fixed-endpoint general cell is the mixed functor action. Unary
-// fixed-weight action is inherited by composing this functor with
-// Prof_imply_cov_fixed_weight_func.
-rule @Prof_imply_cov_transf
-      $A $A $B $B $X
-      $O $O' $Q $Q'
-      (@id Cat_cat $A)
-      (@id Cat_cat $B)
-      $o $q
-  ↪ @fapp1_fapp0
-      (Product_cat
-        (Prof_cat $A $X)
-        (Op_cat (Prof_cat $B $X)))
-      (Prof_cat $A $B)
-      (@Prof_imply_cov_func2 $A $B $X)
-      (Struct_sigma $O $Q)
-      (Struct_sigma $O' $Q')
-      (Struct_sigma $o $q);
-
 /*
   Vertical covariant closed core.
 
@@ -11143,8 +10906,9 @@ rule @Prof_imply_cov_transf
 
     ProfMap(P, O ⇒ Q)  <->  ProfMap(P tensor Q, O).
 
-  Endpoint-changing equipment views below are transparent applications of this
-  core after reindexing O.
+  Endpoint-changing equipment views are intentionally absent. They are
+  historical compatibility wrappers around this fixed-endpoint core and should
+  be reintroduced only as derived APIs when a concrete consumer needs them.
 */
 symbol Prof_eval_cov_map
   [A B X : Cat]
@@ -11170,120 +10934,6 @@ with @Prof_eval_cov_map
       $A $B $X $P $Q $O
       (@Prof_lambda_cov_map $A $B $X $P $Q $O $t)
   ↪ $t;
-
-// Derived endpoint-changing equipment view.
-symbol Prof_eval_cov_transf
-  [A B X A' : Cat]
-  [P : τ (Prof A B)]
-  [Q : τ (Prof B X)]
-  [O : τ (Prof A' X)]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A' A B B
-      P F
-      (@Prof_imply_cov A' B X O Q)
-      (@id_func B))))
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A X X
-        (@Prof_tensor A B X P Q)
-        F O
-        (@id_func X)))
-≔ @Prof_eval_cov_map
-    A B X P Q
-    (@Prof_reindex A' A X X O F (@id_func X))
-    t;
-
-symbol Prof_lambda_cov_transf
-  [A B X A' : Cat]
-  [P : τ (Prof A B)]
-  [Q : τ (Prof B X)]
-  [O : τ (Prof A' X)]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A' A X X
-      (@Prof_tensor A B X P Q)
-      F O
-      (@id_func X))))
-  : τ (Obj
-      (@Prof_transf_cat
-        A' A B B
-        P F
-        (@Prof_imply_cov A' B X O Q)
-        (@id_func B)))
-≔ @Prof_lambda_cov_map
-    A B X P Q
-    (@Prof_reindex A' A X X O F (@id_func X))
-    t;
-
-/*
-  Fixed-endpoint shaped specialization. This packages the unit/co-Yoneda
-  reduction separately from the general tensor-hom bijection.
-*/
-symbol Prof_eval_cov_hom_map
-  [A X : Cat]
-  [Q O : τ (Prof A X)]
-  (t : τ (@Prof_hom
-    A A A
-    (@id_func A)
-    (@Prof_imply_cov A A X O Q)
-    (@id_func A)))
-  : τ (ProfMap Q O);
-
-symbol Prof_lambda_cov_hom_map
-  [A X : Cat]
-  [Q O : τ (Prof A X)]
-  (t : τ (ProfMap Q O))
-  : τ (@Prof_hom
-      A A A
-      (@id_func A)
-      (@Prof_imply_cov A A X O Q)
-      (@id_func A));
-
-rule @Prof_lambda_cov_hom_map
-      $A $X $Q $O
-      (@Prof_eval_cov_hom_map $A $X $Q $O $t)
-  ↪ $t
-with @Prof_eval_cov_hom_map
-      $A $X $Q $O
-      (@Prof_lambda_cov_hom_map $A $X $Q $O $t)
-  ↪ $t;
-
-symbol Prof_eval_cov_hom_transf
-  [A X A' : Cat]
-  [Q : τ (Prof A X)]
-  [O : τ (Prof A' X)]
-  [F : τ (Functor A A')]
-  (t : τ (@Prof_hom
-    A A' A
-    F
-    (@Prof_imply_cov A' A X O Q)
-    (@id_func A)))
-  : τ (Obj
-      (@Prof_transf_cat A' A X X Q F O (@id_func X)))
-≔ @Prof_eval_cov_hom_map
-    A X Q
-    (@Prof_reindex A' A X X O F (@id_func X))
-    t;
-
-symbol Prof_lambda_cov_transf_hom
-  [A X A' : Cat]
-  [Q : τ (Prof A X)]
-  [O : τ (Prof A' X)]
-  [F : τ (Functor A A')]
-  (t : τ (Obj
-    (@Prof_transf_cat A' A X X Q F O (@id_func X))))
-  : τ (@Prof_hom
-      A A' A
-      F
-      (@Prof_imply_cov A' A X O Q)
-      (@id_func A))
-≔ @Prof_lambda_cov_hom_map
-    A X Q
-    (@Prof_reindex A' A X X O F (@id_func X))
-    t;
 
 /*
   Contravariant profunctor implication.
@@ -11321,29 +10971,6 @@ rule @Prof_reindex
         (@id_func $A)
         $G);
 
-// Implication is contravariant in P and covariant in O.
-constant symbol Prof_imply_con_transf
-  [A B B' X X' : Cat]
-  [P : τ (Catd (Product_cat (Op_cat A) B))]
-  [P' : τ (Catd (Product_cat (Op_cat A) B'))]
-  [O : τ (Catd (Product_cat (Op_cat A) X))]
-  [O' : τ (Catd (Product_cat (Op_cat A) X'))]
-  [M : τ (Functor B' B)]
-  [G : τ (Functor X X')]
-  (p : τ (Obj (@Prof_transf_cat A A B B' P' (@id_func A) P M)))
-  (o : τ (Obj (@Prof_transf_cat A A X' X O (@id_func A) O' G)))
-  : τ (Obj
-      (@Prof_transf_cat
-        B' B' X' X
-        (@Prof_reindex
-          B B' X X
-          (@Prof_imply_con A B X P O)
-          M
-          (@id_func X))
-        (@id_func B')
-        (@Prof_imply_con A B' X' P' O')
-        G));
-
 /*
   Vertical contravariant closed core:
 
@@ -11375,118 +11002,6 @@ with @Prof_eval_con_map
   ↪ $t;
 
 // Derived endpoint-changing equipment view.
-symbol Prof_eval_con_transf
-  [A B X X' : Cat]
-  [P : τ (Prof A B)]
-  [Q : τ (Prof B X)]
-  [O : τ (Prof A X')]
-  [G : τ (Functor X X')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      B B X' X
-      Q
-      (@id_func B)
-      (@Prof_imply_con A B X' P O)
-      G)))
-  : τ (Obj
-      (@Prof_transf_cat
-        A A X' X
-        (@Prof_tensor A B X P Q)
-        (@id_func A)
-        O G))
-≔ @Prof_eval_con_map
-    A B X P Q
-    (@Prof_reindex A A X' X O (@id_func A) G)
-    t;
-
-symbol Prof_lambda_con_transf
-  [A B X X' : Cat]
-  [P : τ (Prof A B)]
-  [Q : τ (Prof B X)]
-  [O : τ (Prof A X')]
-  [G : τ (Functor X X')]
-  (t : τ (Obj
-    (@Prof_transf_cat
-      A A X' X
-      (@Prof_tensor A B X P Q)
-      (@id_func A)
-      O G)))
-  : τ (Obj
-      (@Prof_transf_cat
-        B B X' X
-        Q
-        (@id_func B)
-        (@Prof_imply_con A B X' P O)
-        G))
-≔ @Prof_lambda_con_map
-    A B X P Q
-    (@Prof_reindex A A X' X O (@id_func A) G)
-    t;
-
-// Fixed-endpoint shaped specialization.
-symbol Prof_eval_con_hom_map
-  [A B : Cat]
-  [P O : τ (Prof A B)]
-  (t : τ (@Prof_hom
-    B B B
-    (@id_func B)
-    (@Prof_imply_con A B B P O)
-    (@id_func B)))
-  : τ (ProfMap P O);
-
-symbol Prof_lambda_con_hom_map
-  [A B : Cat]
-  [P O : τ (Prof A B)]
-  (t : τ (ProfMap P O))
-  : τ (@Prof_hom
-      B B B
-      (@id_func B)
-      (@Prof_imply_con A B B P O)
-      (@id_func B));
-
-rule @Prof_lambda_con_hom_map
-      $A $B $P $O
-      (@Prof_eval_con_hom_map $A $B $P $O $t)
-  ↪ $t
-with @Prof_eval_con_hom_map
-      $A $B $P $O
-      (@Prof_lambda_con_hom_map $A $B $P $O $t)
-  ↪ $t;
-
-symbol Prof_eval_con_hom_transf
-  [A B X : Cat]
-  [P : τ (Prof A B)]
-  [O : τ (Prof A X)]
-  [G : τ (Functor B X)]
-  (t : τ (@Prof_hom
-    B B X
-    (@id_func B)
-    (@Prof_imply_con A B X P O)
-    G))
-  : τ (Obj
-      (@Prof_transf_cat A A X B P (@id_func A) O G))
-≔ @Prof_eval_con_hom_map
-    A B P
-    (@Prof_reindex A A X B O (@id_func A) G)
-    t;
-
-symbol Prof_lambda_con_transf_hom
-  [A B X : Cat]
-  [P : τ (Prof A B)]
-  [O : τ (Prof A X)]
-  [G : τ (Functor B X)]
-  (t : τ (Obj
-    (@Prof_transf_cat A A X B P (@id_func A) O G)))
-  : τ (@Prof_hom
-      B B X
-      (@id_func B)
-      (@Prof_imply_con A B X P O)
-      G)
-≔ @Prof_lambda_con_hom_map
-    A B P
-    (@Prof_reindex A A X B O (@id_func A) G)
-    t;
-
 // Ordinary weighted-limit representability, kept separate from the stronger
 // computational `WeightedLimit_cov` interface below.
 symbol WeightedCone_prof

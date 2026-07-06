@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the long-term note that making `Prof_cat` p
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
-Status: proposed plan for review; no active code promoted
+Status: cleanup slice promoted 2026-07-06; primitive `Prof_cat` redesign still pending
 
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
@@ -46,6 +46,15 @@ direction is not derivable judgmentally today. Since the shaped `*_hom_map`
 pairs have no source consumer beyond their own checks, they should be deleted
 from the kernel now. They may be reintroduced later as derived wrappers after
 the unit/co-Yoneda comparison is represented as a full invertible comparison.
+
+Implementation update 2026-07-06e: the cleanup slice has been promoted in
+`emdash3_2.lp` and `emdash3_2_checks.lp`. The promoted cleanup removed the
+stale Catd-specific `hom_postcomp_fapp0` bridge pair, the Catd-semantics
+`ProfComparison` helper layer (`*_selected`, `*_semantics`, `*_func`, and
+`*_evidence` wrappers), `Prof_imply_cov_transf`, `Prof_imply_con_transf`,
+endpoint-changing implication eval/lambda `*_transf` wrappers, shaped
+`*_hom_map` primitives, and their direct checks. No `Prof_cat` primitive
+projection change has been promoted yet.
 
 ## Purpose
 
@@ -604,7 +613,8 @@ vertical normal form.
 
 ### PROF-CAT-PRIM-002: ProfComparison public composition migration and cleanup
 
-Status: proposed.
+Status: cleanup subset promoted 2026-07-06; public `Prof_cat` composition
+migration pending.
 
 Scope: remove stale Catd-semantics comparison helpers, keep only the
 `ProfComparison` compatibility surface that still has current consumers, and
@@ -618,7 +628,7 @@ composition unless it is explicitly testing the projection layer.
 
 ### PROF-CAT-PRIM-003: Catd hom-action bridge cleanup
 
-Status: proposed.
+Status: promoted 2026-07-06.
 
 Scope: delete the stale Catd-specific `hom_postcomp_fapp0` identity and
 source-accumulation bridge if the generic rules cover the same behavior.
@@ -641,7 +651,7 @@ folds are introduced.
 
 ### PROF-CAT-PRIM-005: Prof implication mixed-functor and equipment-view cleanup
 
-Status: proposed.
+Status: promoted 2026-07-06.
 
 Scope: delete `Prof_imply_cov_transf`, delete `Prof_imply_con_transf`, rewrite
 or remove their coverage around direct `Prof_imply_cov_func2` generic action
