@@ -88,6 +88,24 @@ reported heads remain the shared `comp_fapp0` / `hom_postcomp_fapp0`
 families, so these warnings are recorded as the current diagnostic inventory,
 not as a reason to weaken the intended primitive-head runtime projections.
 
+Review update 2026-07-06g: a follow-up review identified two more cleanup
+clusters to stage before any deeper `Hom_prof*` redesign. First,
+`Hom_prof_func(J,B)` is a narrow asymmetric right-representable functor wrapper
+whose active source consumers are only its own rules/checks. The real stable
+representable owner is `Hom_prof_along(F,G)` plus
+`Hom_prof_along_fapp1_func`; if a functorial embedding is needed later, it
+should be a mixed-variance binary owner over
+`Product_cat(Op_cat(Functor_cat I X), Functor_cat J X) -> Prof_cat I J`, with
+the current one-variable `Hom_prof_func` at most a derived specialization.
+Second, the weighted-limit/right-adjoint cluster has duplicated compatibility
+names around the stronger `ProfComparison` API. The canonical computational
+surface should be `IsWeightedLimit_cov_comp`, `weighted_limit_cov_push/pull`,
+`Adjunction_hom_prof_comparison(_along)`, and
+`right_adjoint_preserves_weighted_limit_cov_comp`. Selected identity
+applications, unsuffixed aliases, legacy transpose/untranspose views, and the
+parallel `_iso` right-adjoint preservation branch should be deleted or routed
+through generic comparison-to-iso evidence instead of kept as independent API.
+
 ## Purpose
 
 This report records the proposed redesign of the profunctor category surface:
@@ -404,13 +422,37 @@ Audit and migrate the functors whose source or target is `Prof_cat`:
 
 ```text
 Op_prof_func
-Hom_prof_func
 Prof_reindex_func
 Prof_tensor_func
 Prof_imply_cov_func2
 Prof_imply_cov_fixed_weight_func
 Prof_imply_cov_func
 ```
+
+`Hom_prof_func` is no longer a migration target. It should be deleted as a
+narrow compatibility wrapper unless a concrete source consumer is found during
+the cleanup probe. The retained representable API is:
+
+```text
+Hom_prof_along(F,G);
+Hom_prof_along_fapp1_func(F,G);
+Hom_prof(G) := Hom_prof_along(id,G);
+Unit_prof(X) := Hom_prof_along(id,id).
+```
+
+If later work needs functoriality in both representable endpoints, introduce a
+new mixed-variance binary owner rather than repairing the asymmetric wrapper:
+
+```text
+Hom_prof_func2 :
+  Product_cat (Op_cat (Functor_cat I X)) (Functor_cat J X)
+    -> Prof_cat I J
+```
+
+with object action `(F,G) |-> Hom_prof_along(F,G)` and arrow action
+`(alpha : F' -> F, beta : G -> G') |-> (h |-> beta[j] o h o alpha[i])`.
+Do not add constructor-specific identity/composition rules for this future
+owner; generic functoriality should own those cuts.
 
 The `Prof_imply_cov` cluster should be simplified before the primitive
 `Prof_cat` migration:
@@ -539,6 +581,65 @@ identity behavior;
 composition behavior;
 compatibility with ProfMap and ProfComparison.
 ```
+
+The weighted-limit/right-adjoint cluster should be consolidated around the
+comparison API in the same cleanup pass:
+
+```text
+keep IsWeightedLimit_cov_comp;
+keep weighted_limit_cov_push;
+keep weighted_limit_cov_pull;
+keep Adjunction_hom_prof_comparison;
+keep Adjunction_hom_prof_comparison_along;
+keep right_adjoint_preserves_weighted_limit_cov_comp;
+```
+
+Delete the selected-map wrappers unless a concrete downstream user needs the
+names as notation:
+
+```text
+weighted_limit_cov_comp_univ_transf;
+weighted_limit_cov_comp_cone_transf;
+weighted_limit_cov_univ_transf;
+weighted_limit_cov_cone_transf.
+```
+
+Delete the legacy adjunction selected-arrow wrappers:
+
+```text
+Adjunction_prof_transpose;
+Adjunction_prof_untranspose.
+```
+
+Prefer the explicit `_comp` names as the canonical API. Delete the transparent
+unsuffixed compatibility aliases unless a reviewer-facing compatibility need
+is identified before implementation:
+
+```text
+WeightedLimit_cov;
+right_adjoint_preserves_weighted_limit_cov.
+```
+
+Migrate `WeightedColimit_con`, `Op_weighted_limit_cov`,
+`Op_weighted_colimit_con`, and `left_adjoint_preserves_weighted_colimit_con`
+to call the computational names directly.
+
+Delete the parallel ordinary-iso right-adjoint preservation branch unless a
+concrete consumer needs a theorem from only ordinary `IsWeightedLimit_cov_iso`
+evidence:
+
+```text
+right_adjoint_weighted_limit_iso_step1;
+right_adjoint_weighted_limit_iso_step2;
+right_adjoint_weighted_limit_iso_step3;
+right_adjoint_preserves_weighted_limit_cov_iso.
+```
+
+If ordinary iso evidence is still useful, obtain it from the computational
+comparison by `prof_comparison_evidence`. Similarly, keep
+`Adjunction_hom_prof_iso_evidence(_along)` only if a non-deleted consumer
+actually needs the named ordinary `IsoEvidence`; otherwise derive it at use
+sites from `Adjunction_hom_prof_comparison(_along)`.
 
 ### Phase 4: Constructor signatures
 
@@ -723,3 +824,67 @@ general eval/lambda `*_map` beta/eta checks still pass; no constructor-specific
 implication functoriality rule is introduced. If shaped closed maps are needed
 later, they should be derived from the general core plus a full co-Yoneda unit
 comparison, not reintroduced as independent primitive inverses.
+
+### PROF-CAT-PRIM-006: `Hom_prof_func` cleanup and future binary owner note
+
+Status: proposed.
+
+Scope: delete `Hom_prof_func`, its `fapp0` rule, its capped
+`tapp0_fapp0(fapp1_fapp0 Hom_prof_func ...)` projection rule, and the direct
+checks whose only purpose is to exercise that wrapper. Keep
+`Hom_prof_along`, `Hom_prof_along_fapp1_func`, `Hom_prof`, and `Unit_prof` as
+the representable surface.
+
+Exit criteria: all downstream weighted-limit, adjunction, companion/conjoint,
+and representability checks still route through `Hom_prof_along` /
+`Hom_prof`; no asymmetric one-variable representable functor remains. If a
+future consumer needs a functorial representable embedding, add it as a
+mixed-variance binary `Hom_prof_func2` owner after a separate probe.
+
+### PROF-CAT-PRIM-007: weighted-limit and adjunction compatibility cleanup
+
+Status: proposed.
+
+Scope: consolidate the weighted-limit/right-adjoint preservation area around
+the computational `ProfComparison` API. Keep:
+
+```text
+IsWeightedLimit_cov_comp;
+weighted_limit_cov_push;
+weighted_limit_cov_pull;
+Adjunction_hom_prof_comparison;
+Adjunction_hom_prof_comparison_along;
+right_adjoint_preserves_weighted_limit_cov_comp.
+```
+
+Delete selected-map, unsuffixed-alias, legacy mate-arrow, and duplicated
+ordinary-iso preservation wrappers unless a concrete current consumer prevents
+removal:
+
+```text
+weighted_limit_cov_comp_univ_transf;
+weighted_limit_cov_comp_cone_transf;
+weighted_limit_cov_univ_transf;
+weighted_limit_cov_cone_transf;
+WeightedLimit_cov;
+Adjunction_prof_transpose;
+Adjunction_prof_untranspose;
+right_adjoint_weighted_limit_iso_step1;
+right_adjoint_weighted_limit_iso_step2;
+right_adjoint_weighted_limit_iso_step3;
+right_adjoint_preserves_weighted_limit_cov_iso;
+right_adjoint_preserves_weighted_limit_cov.
+```
+
+Audit `IsWeightedLimit_cov_iso` and
+`Adjunction_hom_prof_iso_evidence(_along)` during implementation. Keep them
+only if useful as ordinary `IsoEvidence` surfaces after the stronger
+comparison path is canonical; otherwise derive ordinary evidence by
+`prof_comparison_evidence` at the remaining use sites.
+
+Exit criteria: `WeightedColimit_con`, opposite conversions, and
+left-adjoint-colimit preservation call the computational names directly;
+right-adjoint preservation has one canonical theorem; selected identity maps
+are expressed by `weighted_limit_cov_push/pull` at use sites; no remaining
+checks exist solely to prove a deleted compatibility alias unfolds to the
+canonical comparison.
