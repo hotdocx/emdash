@@ -310,10 +310,10 @@ generic bridge replaces constructor-specific identity rules for functors whose
 source category is a profunctor category.
 
 The active warning inventory after the 2026-07-06 primitive `Prof_cat`
-migration is now 1,292: 1,127 unjoinable critical-pair reports and 165
-replaceable-pattern reports. The largest reported heads are still the shared
-generic composition and hom-action families, especially `comp_fapp0` and
-`hom_postcomp_fapp0`. The earlier runtime
+migration and follow-up cleanup is now 1,291: 1,126 unjoinable critical-pair
+reports and 165 replaceable-pattern reports. The largest reported heads are
+still the shared generic composition and hom-action families, especially
+`comp_fapp0` and `hom_postcomp_fapp0`. The earlier runtime
 `comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
 the 1,108 post-product-map-reindex inventory; the classified families include
 constant, opposite, Sigma-projection, identity, and higher profunctor-duality
@@ -393,41 +393,28 @@ functor law is added. It does not transfer a conclusion from one member or
 rule of the cluster to another.
 
 The weighted-limit public API has completed its representability cutover.
-`WeightedLimit_cov(F,W,L)` is a transparent compatibility name for
-`IsWeightedLimit_cov_comp(F,W,L)`, one ambient `ProfComparison` between the
-weighted-cone profunctor and `Hom_prof(L)`. Reindexing internalizes every
-shaped probe `M`; `weighted_limit_cov_push/pull` are inverse on arbitrary
-incoming maps, while `weighted_limit_cov_univ_transf` and
-`weighted_limit_cov_cone_transf` are selected identity applications.
-Cancellation is owned by the comparison eliminators and vertical generic
-displayed composition `@comp_fapp0 (@Catd_cat ...)`, with `comp_catd_fapp0`
-remaining only a public alias, not by duplicate `Prof_comp_transf` rules.
+`IsWeightedLimit_cov_comp(F,W,L)` is the canonical computational property: one
+ambient `ProfComparison` between the weighted-cone profunctor and
+`Hom_prof(L)`. Reindexing internalizes every shaped probe `M`, and
+`weighted_limit_cov_push/pull` are inverse on arbitrary incoming maps.
+Selected universal and cone maps are now use-site identity applications of
+those operations; the former selected wrapper heads and the transparent
+`WeightedLimit_cov` alias were removed. Cancellation is owned by the
+comparison eliminators and vertical generic displayed composition
+`@comp_fapp0 (@Catd_cat ...)`, with `comp_catd_fapp0` remaining only a public
+alias, not by duplicate `Prof_comp_transf` rules.
 
-`Adjunction_prof_transpose` and `Adjunction_prof_untranspose` remain the narrow
-unit/counit-based representable bridge
-`Hom_B(left(M),F) <-> Hom_A(M,right(F))`.
-`right_adjoint_preserves_weighted_limit_cov` is now transparently
-`right_adjoint_preserves_weighted_limit_cov_comp`, the composition of three
-certified comparisons. The former stable universal-map head, giant
-exact-syntax fold, implication helper, primitive witness, and
-constructor-local beta/eta joins are retired.
-
-The representability redesign now also has a fully ambient ordinary
-isomorphism layer. `Adjunction_hom_prof_iso_evidence(adj)` packages the
-adjunction mate in `IsoEvidence` inside `Prof_cat(A,B)`, and
-`Adjunction_hom_prof_iso_evidence_along(adj,M,F)` is obtained by applying
-`iso_evidence_fmap` to `Prof_reindex_func(M,F)`. Its forward and inverse
-projections compute to the existing shaped
-`Adjunction_prof_transpose/untranspose` operations. Those operations now
-cancel directly under vertical `comp_catd_fapp0`; the rules are
-adjunction-specific and do not impose generic judgmental cancellation on
-arbitrary isomorphism evidence.
-
-Consequently, `right_adjoint_preserves_weighted_limit_cov_iso` is a transparent theorem:
-it maps the inverse mate through `Prof_imply_cov_func(W)`, reindexes the given
-ordinary weighted-limit evidence along the left adjoint, and composes with the
-mate at the limit. The unsuffixed theorem is the stronger computational
-comparison theorem and forgets exactly to this propositional result.
+`Adjunction_hom_prof_comparison` and
+`Adjunction_hom_prof_comparison_along` are the adjunction mate owners.
+Selected transpose/untranspose maps should be obtained at the use site from
+`prof_comparison_push/pull` or ordinary `defiso_to/from`; the old
+`Adjunction_prof_transpose/untranspose` heads and named adjunction
+iso-evidence wrappers were removed. The right-adjoint preservation theorem is
+the computational comparison
+`right_adjoint_preserves_weighted_limit_cov_comp`, a transparent composition
+of three certified comparisons. The unsuffixed compatibility alias and the
+separate `_iso` preservation branch were removed; ordinary evidence is
+obtained from comparison evidence when needed.
 Cutover validation reduced the warning inventory from 1,139 to 1,043 before
 the later mixed-variance internalization:
 unjoinable critical pairs fell from 986 to 890 while the 153 replaceable
@@ -453,8 +440,9 @@ deferred: the direct reindex fold caused a focused-probe typecheck loop.
 
 Contravariant weighted colimits are now a transparent dual presentation:
 `WeightedColimit_con(F,W,L)` is definitionally
-`WeightedLimit_cov(Op_func(F),Op_prof(W),Op_func(L))` in the opposite ambient
-and index categories, with `W` exposed as a public `τ(Prof J J')` weight.
+`IsWeightedLimit_cov_comp(Op_func(F),Op_prof(W),Op_func(L))` in the opposite
+ambient and index categories, with `W` exposed as a public `τ(Prof J J')`
+weight.
 `Op_weighted_limit_cov` and
 `Op_weighted_colimit_con` are identity wrappers after opposite and
 double-swap normalization. The full
@@ -532,19 +520,18 @@ the later mixed-variance implication slice documented above.
 `IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
 representability property. One ambient `ProfComparison` is reindexed to every
 shaped probe `M`, and `weighted_limit_cov_push/pull` act inversely on every
-incoming profunctor map. The selected
-`weighted_limit_cov_comp_univ_transf` and
-`weighted_limit_cov_comp_cone_transf` are identity applications of those
-operations. `Adjunction_hom_prof_comparison` is the atomic computational mate
-and forgets to the existing unit/counit-based evidence.
+incoming profunctor map. Selected universal and cone maps are direct identity
+applications of those operations rather than named kernel symbols.
+`Adjunction_hom_prof_comparison` is the atomic computational mate; its
+ordinary isomorphism view is obtained by `prof_comparison_evidence`.
 
 `right_adjoint_preserves_weighted_limit_cov_comp` is a transparent
 composition of three certified comparisons: the inverse mate through
 fixed-weight implication, the given limit comparison reindexed along the left
-adjoint, and the mate at the candidate limit. Its evidence projection reduces
-exactly to `right_adjoint_preserves_weighted_limit_cov_iso`, and its
-universality computes through generic push/pull beta/eta. The established
-unsuffixed name is now a transparent compatibility alias for this theorem.
+adjoint, and the mate at the candidate limit. Its universality computes
+through generic push/pull beta/eta. The former unsuffixed compatibility name
+and separate `_iso` theorem were removed; use comparison evidence when an
+ordinary `IsoEvidence` proof is required.
 
 The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
 propositional `comp_assoc`, transparent `iso_evidence_comp`, and
@@ -562,22 +549,22 @@ active kernel check quickly with associativity enabled. Transparent
 `IsRepresentedBy_iso`/`Representation_iso` layer are also active.
 `WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now expose the
 ordinary representability statement separately from the stronger
-computational `WeightedLimit_cov` API, and ordinary isomorphism evidence maps
-through the active `Prof_imply_cov_func(W)`.
+computational comparison API, and ordinary isomorphism evidence maps through
+the active `Prof_imply_cov_func(W)`.
 
-`Hom_prof_func(J,B) : Functor(Functor_cat(J,B),Prof_cat(B,J))` is now active.
-It is the stable opaque view of a semantic pipeline through
-`comp_cat_con_func_func`, precomposition by `hom_int(id_B)`, and uncurry. Its
-object action computes to `Hom_prof(G)`. The whole and capped arrow actions are
-the generic actions of that functor; their fibre component computes through
-`comp_cat_cov_transf` and the existing postcomposition telescope.
+`Hom_prof_func(J,B) : Functor(Functor_cat(J,B),Prof_cat(B,J))` was removed as
+a narrow asymmetric wrapper around the right-representable surface. The active
+representable owner remains `Hom_prof_along(F,G)`, with `Hom_prof(G)` and
+`Unit_prof(X)` as transparent specializations. A future mixed-variance binary
+owner should be designed and probed separately if a concrete consumer needs
+one.
 
 No representable-specific identity or composition rules are active. Strictness
 comes from the global functor cuts. A generic `Catd_cat` specialization of the
 global composition cut remains active, now keyed directly on
 `@comp_fapp0 (@Catd_cat ...)` with the displayed base explicit where needed.
 The earlier probe's broad `hom_postcomp_func` laws and constructor-specific
-`Hom_prof_func_transf` laws remain rejected.
+representable functor laws remain rejected.
 
 The canonical surface syntax is a presentation layer over this kernel, not a
 replacement for it. The current binder convention uses one indexed binder
@@ -591,9 +578,12 @@ Current validation observed during this review:
 
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
+make warning-summary
 ```
 
-checks `emdash3_2.lp` and `emdash3_2_checks.lp`.
+checks `emdash3_2.lp` and `emdash3_2_checks.lp`; the warning-enabled kernel
+inventory reports 1,291 warnings, split as 1,126 unjoinable critical-pair
+reports and 165 replaceable-pattern reports.
 
 ### Maintenance Review 2026-06-05
 

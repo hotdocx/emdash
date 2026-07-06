@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the long-term note that making `Prof_cat` p
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
-Status: primitive `Prof_cat` head and first public-surface migration promoted 2026-07-06; further semantic-boundary cleanup remains staged
+Status: primitive `Prof_cat` head, first public-surface migration, and cleanup through `Hom_prof_func`/weighted-limit compatibility promoted 2026-07-06; further `Hom_prof*` redesign remains deferred
 
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
@@ -68,12 +68,11 @@ Prof_cat A B == Catd_cat(Product_cat A0 B)  when A == Op_cat A0
 
 keeps elaboration compatible with semantic bodies whose canonical category is
 still the raw displayed-family presentation. The active migration also rekeys
-the `Hom_prof_func` component rule and `Prof_reindex_transf` identity,
-composition, and DefIso hom-action bridges to the public `Prof_cat` head.
+`Prof_reindex_transf` identity, composition, and DefIso hom-action bridges to
+the public `Prof_cat` head.
 Diagnostic checks now use generic `@comp_fapp0 (Prof_cat A B)` and
 `@id (Prof_cat A B)` for the public vertical profunctor normal form, including
-the `Hom_prof_func`, co-Yoneda unit, fixed-weight implication,
-`ProfComparison`, and right-adjoint iso-evidence clusters. The first public
+co-Yoneda unit, fixed-weight implication, and `ProfComparison` clusters. The first public
 constructor signature slice has also moved from raw
 `τ(Catd(Product_cat(Op_cat A) B))` spelling to `τ(Prof A B)`/`ProfMap` for
 `Op_prof`, `Prof_reindex`, representables, shaped cells, tensor,
@@ -82,11 +81,12 @@ The contravariant weighted-colimit compatibility wrappers now also take
 public `τ(Prof ...)` weights.
 Raw `Catd_cat(Product_cat(...))` remains in semantic bodies and projection
 tests where it is the actual displayed-family discriminator. The promoted
-warning-enabled check completes with 1,292 warnings: 1,127 unjoinable
-critical-pair reports and 165 replaceable-pattern reports. The largest
-reported heads remain the shared `comp_fapp0` / `hom_postcomp_fapp0`
-families, so these warnings are recorded as the current diagnostic inventory,
-not as a reason to weaken the intended primitive-head runtime projections.
+warning-enabled check after the follow-up cleanup completes with 1,291
+warnings: 1,126 unjoinable critical-pair reports and 165 replaceable-pattern
+reports. The largest reported heads remain the shared `comp_fapp0` /
+`hom_postcomp_fapp0` families, so these warnings are recorded as the current
+diagnostic inventory, not as a reason to weaken the intended primitive-head
+runtime projections.
 
 Review update 2026-07-06g: a follow-up review identified two more cleanup
 clusters to stage before any deeper `Hom_prof*` redesign. First,
@@ -105,6 +105,23 @@ surface should be `IsWeightedLimit_cov_comp`, `weighted_limit_cov_push/pull`,
 applications, unsuffixed aliases, legacy transpose/untranspose views, and the
 parallel `_iso` right-adjoint preservation branch should be deleted or routed
 through generic comparison-to-iso evidence instead of kept as independent API.
+
+Implementation update 2026-07-06h: the cleanup clusters from
+`PROF-CAT-PRIM-006` and `PROF-CAT-PRIM-007` have been promoted.
+`Hom_prof_func` and its direct checks were deleted; the retained representable
+surface is `Hom_prof_along`, `Hom_prof_along_fapp1_func`, `Hom_prof`, and
+`Unit_prof`. The weighted-limit/right-adjoint layer is now consolidated around
+`IsWeightedLimit_cov_comp`, `weighted_limit_cov_push/pull`,
+`Adjunction_hom_prof_comparison(_along)`, and
+`right_adjoint_preserves_weighted_limit_cov_comp`. The selected universal/cone
+wrappers, unsuffixed `WeightedLimit_cov` and
+`right_adjoint_preserves_weighted_limit_cov` aliases,
+`Adjunction_prof_transpose/untranspose`, the named adjunction iso-evidence
+wrappers, and the right-adjoint `_iso` preservation branch were removed.
+`WeightedColimit_con`, opposite conversions, and left-adjoint colimit
+preservation now call the computational comparison names directly.
+`IsWeightedLimit_cov_iso` remains only as the ordinary representability
+surface obtainable from a comparison by `prof_comparison_evidence`.
 
 ## Purpose
 
@@ -827,7 +844,7 @@ comparison, not reintroduced as independent primitive inverses.
 
 ### PROF-CAT-PRIM-006: `Hom_prof_func` cleanup and future binary owner note
 
-Status: proposed.
+Status: promoted 2026-07-06.
 
 Scope: delete `Hom_prof_func`, its `fapp0` rule, its capped
 `tapp0_fapp0(fapp1_fapp0 Hom_prof_func ...)` projection rule, and the direct
@@ -840,10 +857,13 @@ and representability checks still route through `Hom_prof_along` /
 `Hom_prof`; no asymmetric one-variable representable functor remains. If a
 future consumer needs a functorial representable embedding, add it as a
 mixed-variance binary `Hom_prof_func2` owner after a separate probe.
+Completed by deleting `Hom_prof_func`, its projection rules, and direct
+diagnostics while preserving downstream checks through `Hom_prof_along` and
+`Hom_prof`.
 
 ### PROF-CAT-PRIM-007: weighted-limit and adjunction compatibility cleanup
 
-Status: proposed.
+Status: promoted 2026-07-06.
 
 Scope: consolidate the weighted-limit/right-adjoint preservation area around
 the computational `ProfComparison` API. Keep:
@@ -876,11 +896,11 @@ right_adjoint_preserves_weighted_limit_cov_iso;
 right_adjoint_preserves_weighted_limit_cov.
 ```
 
-Audit `IsWeightedLimit_cov_iso` and
-`Adjunction_hom_prof_iso_evidence(_along)` during implementation. Keep them
-only if useful as ordinary `IsoEvidence` surfaces after the stronger
-comparison path is canonical; otherwise derive ordinary evidence by
-`prof_comparison_evidence` at the remaining use sites.
+Audit result: `IsWeightedLimit_cov_iso` remains as the ordinary
+representability surface. `Adjunction_hom_prof_iso_evidence(_along)` had no
+remaining non-compatibility consumer after deleting the `_iso` preservation
+branch, so it was removed; ordinary evidence should be derived from
+`prof_comparison_evidence` at use sites.
 
 Exit criteria: `WeightedColimit_con`, opposite conversions, and
 left-adjoint-colimit preservation call the computational names directly;
@@ -888,3 +908,7 @@ right-adjoint preservation has one canonical theorem; selected identity maps
 are expressed by `weighted_limit_cov_push/pull` at use sites; no remaining
 checks exist solely to prove a deleted compatibility alias unfolds to the
 canonical comparison.
+Completed by migrating colimit/opposite wrappers to `_comp`, deleting selected
+identity-map wrappers and unsuffixed aliases, and retaining only the
+comparison-owner checks plus the ordinary `IsWeightedLimit_cov_iso` evidence
+projection check.
