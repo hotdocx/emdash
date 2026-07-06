@@ -61,17 +61,7 @@ with initial datum `id : Rep_Z(x) ⊢ Rep_Z(x)`, this computes to ordinary compo
 Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 ```
 
-In the current kernel the runtime owner for this reduction is the hom-action cut
-
-```
-hom_postcomp_fapp0(id_Z,q,p),
-```
-
-while the ordinary composition presentation remains available as the typed proof-time view
-
-```
-comp_fapp0(q,p).
-```
+In the current kernel the runtime owner for this reduction is the hom-action cut `(q)_*(p)` a.k.a. `hom_postcomp_fapp0(id_Z,q,p)` while the ordinary composition presentation remains available as the typed proof-time view `q ∘ p`.
 
 The new phenomenon appears when the source object `x` itself is internalized. For an arrow `r : x → y`, precomposition gives
 
@@ -103,15 +93,13 @@ The expanded draft now also contains checked slices of a larger profunctor calcu
 Prof(A,B) = A^op × B ⊢ Cat.
 ```
 
-The kernel includes representables `Hom_prof_along(F,G)`, reindexing, shaped profunctor cells, a symbolic tensor `Prof_tensor`, fixed tensor action `Prof_tensor_func`, co-Yoneda maps, and covariant/contravariant internal homs with eval/lambda cancellation. Weighted limits are expressed as profunctor representability:
+The kernel includes representables `Hom(F ~, G —)`, reindexing, shaped profunctor cells, a symbolic tensor `⊗`, co-Yoneda maps, and covariant/contravariant internal homs with eval/lambda cancellation. Weighted limits are expressed as profunctor representability:
 
 ```
 WeightedLimit_cov(F,W,L)
-  = ProfComparison(Prof_imply_cov(Hom_prof(F),W), Hom_prof(L)).
+  = ProfComparison(Prof_imply_cov(Hom(~, F _), W(—, _)), Hom(~, L —)).
 ```
 
 With that interface, right adjoints preserve weighted limits by composing three checked profunctor comparisons: inverse adjunction mate, reindexing of the given limit comparison along the left adjoint, and the mate at the candidate limit. The dual theorem that left adjoints preserve weighted colimits is obtained by opposite normalization, not by duplicating the proof. There is also a primitive directed-inductive join category with two inclusions and one internally natural cross cell.
-
-The supporting MathOps/DevOps layer has grown as well: the repository now has a check catalog, warning summaries, health reports, rewrite-LHS audits, and an "Infinity Codex" final-response archive used only as recovery evidence after interruptions or context compaction.
 
 This is the lax naturality / functoriality layer exposed by the internalized formulation of directed path induction, now connected to a checked profunctor, tensor, weighted-limit, duality, and join calculus in `emdash` v3.2. I would be very interested to know whether this phenomenon has an established name or prior formulation in categorical logic, HoTT, or higher category theory.
