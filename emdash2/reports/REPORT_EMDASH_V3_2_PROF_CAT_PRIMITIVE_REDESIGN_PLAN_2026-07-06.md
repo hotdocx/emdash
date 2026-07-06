@@ -33,8 +33,18 @@ than deferred. It is a `constant symbol`, has no computation rule, and has no
 source consumer beyond its type check. The endpoint-changing
 `Prof_eval_*_transf` / `Prof_lambda_*_transf` wrappers, including the shaped
 `*_hom_transf` variants, are likewise historical equipment-style compatibility
-views. The fixed-endpoint `*_map` cores and shaped `*_hom_map` cores remain the
-actual computational owners.
+views. The general fixed-endpoint `*_map` cores remain the actual
+computational owners; the follow-up note below reclassifies the shaped
+`*_hom_map` pairs as cleanup/deferred-derived API.
+
+Review update 2026-07-06d: the shaped `*_hom_map` pairs are mathematically
+unit-tensor specializations of the general fixed-endpoint closed core. They
+would be derivable from `Prof_eval_*_map` / `Prof_lambda_*_map` plus full
+co-Yoneda unit equivalences. The active code currently has only the one-way
+co-Yoneda maps `Unit tensor P -> P` and `P tensor Unit -> P`, so the eval
+direction is not derivable judgmentally today. Since the shaped `*_hom_map`
+pairs have no source consumer beyond their own checks, they should be cleaned
+or deferred as future derived wrappers rather than kept as primitive owners.
 
 ## Purpose
 
@@ -424,17 +434,54 @@ delete Prof_lambda_con_transf_hom;
 
 These are transparent reindexed equipment views around the fixed-endpoint
 cores. Source search shows they are only used by their own inverse checks. The
-checks should be removed or rewritten against the fixed-endpoint owners:
+checks should be removed or rewritten against the retained general
+fixed-endpoint owners:
 
 ```text
 Prof_eval_cov_map / Prof_lambda_cov_map;
-Prof_eval_con_map / Prof_lambda_con_map;
+Prof_eval_con_map / Prof_lambda_con_map.
+```
+
+The general fixed-endpoint pairs should stay:
+
+```text
+Prof_eval_cov_map / Prof_lambda_cov_map;
+Prof_eval_con_map / Prof_lambda_con_map.
+```
+
+They are the genuine closed-core computational API. By contrast, the shaped
+`*_hom_map` pairs:
+
+```text
 Prof_eval_cov_hom_map / Prof_lambda_cov_hom_map;
 Prof_eval_con_hom_map / Prof_lambda_con_hom_map.
 ```
 
-Those `*_map` families should stay: they are the genuine closed-core
-computational API, and their beta/eta rules are still useful.
+should be treated as cleanup or deferred-derived API. Semantically, for
+example, `Prof_lambda_cov_hom_map` can be recovered from
+`Prof_lambda_cov_map` by first composing a map `Q -> O` with the left-unit
+co-Yoneda map:
+
+```text
+Unit_prof(A) tensor Q -> Q -> O.
+```
+
+But `Prof_eval_cov_hom_map` would need the reverse unit map:
+
+```text
+Q -> Unit_prof(A) tensor Q,
+```
+
+or a full `ProfComparison`/DefIso unit law for the co-Yoneda unitor. The active
+co-Yoneda layer exposes only the one-way map
+`Unit_prof(A) tensor Q -> Q`, plus beta/fusion rules for tensor-introduced
+shaped elements. The same asymmetry holds on the right-unit/contravariant
+side. Therefore the shaped `*_hom_map` pairs are currently extra primitive
+closed-structure assertions, not derivations from the general core.
+
+Recommendation: delete the shaped `*_hom_map` pairs during cleanup unless a
+near-term consumer needs them. Reintroduce them later as derived wrappers after
+the unit/co-Yoneda comparison is represented as a full invertible comparison.
 
 For each, verify:
 
@@ -595,13 +642,17 @@ Status: proposed.
 
 Scope: delete `Prof_imply_cov_transf`, delete `Prof_imply_con_transf`, rewrite
 or remove their coverage around direct `Prof_imply_cov_func2` generic action
-checks, and remove the endpoint-changing eval/lambda equipment wrappers:
+checks, and remove the closed-implication shaped/equipment wrappers:
 
 ```text
 Prof_eval_cov_transf;
 Prof_lambda_cov_transf;
 Prof_eval_con_transf;
 Prof_lambda_con_transf;
+Prof_eval_cov_hom_map;
+Prof_lambda_cov_hom_map;
+Prof_eval_con_hom_map;
+Prof_lambda_con_hom_map;
 Prof_eval_cov_hom_transf;
 Prof_lambda_cov_transf_hom;
 Prof_eval_con_hom_transf;
@@ -610,5 +661,7 @@ Prof_lambda_con_transf_hom.
 
 Exit criteria: weighted-limit and right-adjoint consumers still use
 `Prof_imply_cov_func(Q)` and `Prof_imply_cov_func2` directly; fixed-endpoint
-eval/lambda `*_map` beta/eta checks still pass; no constructor-specific
-implication functoriality rule is introduced.
+general eval/lambda `*_map` beta/eta checks still pass; no constructor-specific
+implication functoriality rule is introduced. If shaped closed maps are needed
+later, they should be derived from the general core plus a full co-Yoneda unit
+comparison, not reintroduced as independent primitive inverses.
