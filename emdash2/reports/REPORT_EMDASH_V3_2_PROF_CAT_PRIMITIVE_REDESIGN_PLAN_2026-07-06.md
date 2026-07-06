@@ -10,6 +10,13 @@ Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
 Status: proposed plan for review; no active code promoted
 
+Review update 2026-07-06: a follow-up source review found that the proposed
+`Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
+overfitted to a stale Catd-specific bridge. The active generic hom-action
+rules already provide the intended identity and source-accumulation behavior.
+This plan now treats the Catd-specific bridge and several old
+`ProfComparison` helpers as cleanup candidates, not patterns to clone.
+
 ## Purpose
 
 This report records the proposed redesign of the profunctor category surface:
@@ -130,59 +137,76 @@ lemmas, co-Yoneda maps, and fixed-endpoint closed operations should prefer
 `@comp_fapp0 (Prof_cat A B)` in their public equality targets when the ambient
 category is visibly a profunctor category.
 
-### 4. Add `Prof_cat` hom-action bridges where needed
+### 4. Do not clone stale Catd hom-action bridges
 
-The current generic hom-action layer has Catd-specific bridges such as:
+The current generic hom-action layer already has the ordinary identity and
+incoming-map accumulation rules needed by identity-functor postcomposition:
 
 ```text
-hom_postcomp_fapp0(Catd_cat K, Catd_cat K, id, ...)
+rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
+  ↪ $g;
+
+rule @comp_fapp0
+      $A
+      $V
+      $W
+      _
+      (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g)
+      $h
+  ↪ @hom_postcomp_fapp0
+      $A $B $F $V $X $Y $f
+      (@comp_fapp0
+        $A
+        $V
+        $W
+        (@fapp0 $B $A $F $X)
+        $g
+        $h);
 ```
 
-For primitive `Prof_cat`, the analogous fixed-endpoint bridges should be added
-at the profunctor boundary. The likely core pair is:
+Instantiating these rules at:
+
+```text
+X = Prof_cat A B
+F = id_(Prof_cat A B)
+```
+
+already covers the proposed `Prof_cat` identity and accumulation shapes. Adding
+parallel `Prof_cat`-specific rules would duplicate the generic owner and create
+avoidable overlap.
+
+The existing Catd-specific pair:
 
 ```text
 rule @hom_postcomp_fapp0
-      (@Prof_cat $A $B)
-      (@Prof_cat $A $B)
-      (@id Cat_cat (@Prof_cat $A $B))
-      $R
-      $P
-      $P
-      (@id (@Prof_cat $A $B) $P)
-      $r
-  ↪ $r;
-```
+      (@Catd_cat $K)
+      (@Catd_cat $K)
+      (@id Cat_cat (@Catd_cat $K))
+      ...
+  ↪ ...
 
-and the incoming-map accumulation bridge:
-
-```text
 rule @comp_fapp0
-      (@Prof_cat $A $B)
-      $S
-      $R
-      $Q
+      (@Catd_cat $K)
+      ...
       (@hom_postcomp_fapp0
-        (@Prof_cat $A $B)
-        (@Prof_cat $A $B)
-        (@id Cat_cat (@Prof_cat $A $B))
-        $R $P $Q
-        $to
-        $r)
-      $h
-  ↪ @hom_postcomp_fapp0
-      (@Prof_cat $A $B)
-      (@Prof_cat $A $B)
-      (@id Cat_cat (@Prof_cat $A $B))
-      $S $P $Q
-      $to
-      (@comp_fapp0 (@Prof_cat $A $B) $S $R $P $r $h);
+        (@Catd_cat $K)
+        (@Catd_cat $K)
+        (@id Cat_cat (@Catd_cat $K))
+        ...)
+      ...
+  ↪ ...
 ```
 
-These are not new profunctor-specific functoriality laws. They are
-projection-boundary joins, analogous to the existing Catd-specific hom-action
-bridges, needed because the public category head is no longer definitionally
-`Catd_cat(Product_cat(Op_cat A) B)`.
+should be audited for deletion before any `Prof_cat` migration. The second
+rule's RHS uses `comp_catd_fapp0`, but after the Cat/Catd alias migration that
+symbol is only a transparent public alias over generic
+`@comp_fapp0 (@Catd_cat K)`. Therefore the Catd bridge is likely historical
+cleanup debt rather than an active semantic owner.
+
+A future `Prof_cat`-specific hom-action bridge should be added only after a
+concrete consumer fails and a focused check shows that the generic rule cannot
+express the desired public normal form. It should then be documented as a
+projection-ladder confluence bridge, not as basic profunctor functoriality.
 
 ### 5. Add proof-time compatibility, not broad runtime folding
 
@@ -249,6 +273,16 @@ Do not yet migrate all constructor signatures.
 
 ### Phase 2: Fixed vertical normal forms
 
+Before migrating public `ProfComparison` statements, clean up the stale
+generic/Catd boundary:
+
+```text
+audit/delete Catd-specific hom_postcomp_fapp0 identity bridge;
+audit/delete Catd-specific hom_postcomp_fapp0 source-accumulation bridge;
+verify generic hom_postcomp_fapp0 identity and accumulation checks cover the
+  former cases.
+```
+
 Migrate the first public profunctor vertical statements from
 `comp_catd_fapp0(Product_cat(Op_cat A) B,...)` to:
 
@@ -256,21 +290,39 @@ Migrate the first public profunctor vertical statements from
 @comp_fapp0 (Prof_cat A B) ...
 ```
 
-Add the `Prof_cat`-specialized `hom_postcomp_fapp0` identity and accumulation
-bridges only if a concrete `ProfComparison` or weighted-limit check needs them.
-
 The immediate target cluster is:
 
 ```text
 ProfMap
 ProfComparison
+prof_comparison_push
+prof_comparison_pull
+prof_comparison_to/from
+prof_comparison_evidence
+```
+
+The following names look stale after the DefIso/hom-action migration and should
+be deleted or replaced by generic `DefIso`/`hom_postcomp_*` checks unless a
+current consumer proves otherwise:
+
+```text
 prof_comparison_push_selected
 prof_comparison_pull_selected
 prof_comparison_push_semantics
 prof_comparison_pull_semantics
 prof_comparison_push_func
 prof_comparison_pull_func
+prof_comparison_to_evidence
+prof_comparison_from_evidence
 ```
+
+The first four expose old Catd-composition semantics. The functor wrappers are
+transparent uses of `hom_postcomp_func`, and current source search shows no
+active implementation dependency beyond their checks. The `to/from_evidence`
+proofs are only used by the stale semantic lemmas. By contrast,
+`prof_comparison_evidence` is still a useful compatibility map from
+`ProfComparison` to `IsoEvidence` and is used by weighted-limit and adjunction
+checks.
 
 ### Phase 3: Internalized profunctor functors
 
@@ -402,28 +454,31 @@ basic Prof/ProfMap/id/comp checks.
 Exit criteria: bounded probe succeeds and identifies the next missing public
 vertical normal form.
 
-### PROF-CAT-PRIM-002: ProfComparison public composition migration
+### PROF-CAT-PRIM-002: ProfComparison public composition migration and cleanup
 
 Status: proposed.
 
-Scope: migrate selected `ProfComparison` semantic equality targets from
+Scope: remove stale Catd-semantics comparison helpers, keep only the
+`ProfComparison` compatibility surface that still has current consumers, and
+migrate any retained public vertical equality targets from
 `comp_catd_fapp0(Product_cat(Op_cat A) B,...)` to
-`@comp_fapp0 (Prof_cat A B) ...` where the statement is public fixed-endpoint
-profunctor syntax.
+`@comp_fapp0 (Prof_cat A B) ...`.
 
-Exit criteria: existing comparison beta/eta and weighted-limit comparison
-checks still pass.
+Exit criteria: comparison beta/eta, weighted-limit comparison, and adjunction
+comparison checks still pass; no retained statement exposes raw Catd
+composition unless it is explicitly testing the projection layer.
 
-### PROF-CAT-PRIM-003: Prof-specific hom-action bridges
+### PROF-CAT-PRIM-003: Catd hom-action bridge cleanup
 
 Status: proposed.
 
-Scope: add the minimal `hom_postcomp_fapp0` bridge family over `Prof_cat(A,B)`
-needed by `ProfComparison` and later weighted-limit/co-Yoneda consumers.
+Scope: delete the stale Catd-specific `hom_postcomp_fapp0` identity and
+source-accumulation bridge if the generic rules cover the same behavior.
 
-Exit criteria: warning-enabled probe classifies any overlap with the generic
-Catd bridge and confirms the bridge is a projection-boundary join, not a
-second owner of functoriality.
+Exit criteria: focused checks demonstrate the generic identity and accumulation
+rules cover the former Catd cases; warning-enabled check shows no new problem.
+Do not introduce any analogous `Prof_cat` bridge unless a concrete later
+consumer fails without it.
 
 ### PROF-CAT-PRIM-004: Public constructor signature migration
 
@@ -435,4 +490,3 @@ needed raw Catd/Product discriminator.
 
 Exit criteria: each promoted cluster has focused checks and no broad global
 folds are introduced.
-
