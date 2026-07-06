@@ -17,6 +17,16 @@ rules already provide the intended identity and source-accumulation behavior.
 This plan now treats the Catd-specific bridge and several old
 `ProfComparison` helpers as cleanup candidates, not patterns to clone.
 
+Review update 2026-07-06b: a further source review found that
+`Prof_imply_cov_transf` is also likely stale. It is used only by its own
+definition/checks, and its fixed-endpoint computation is just the generic
+capped action of `Prof_imply_cov_func2` on a product arrow. The primitive
+`Prof_cat` migration should therefore clean this wrapper away and keep
+`Prof_imply_cov_func2` / `Prof_imply_cov_func(Q)` as the public functorial
+surface. The contravariant placeholder `Prof_imply_con_transf` is a parallel
+cleanup candidate, but its replacement should wait for an internalized
+contravariant mixed functor.
+
 ## Purpose
 
 This report records the proposed redesign of the profunctor category surface:
@@ -338,6 +348,58 @@ Prof_imply_cov_fixed_weight_func
 Prof_imply_cov_func
 ```
 
+The `Prof_imply_cov` cluster should be simplified before the primitive
+`Prof_cat` migration:
+
+```text
+delete Prof_imply_cov_transf;
+delete or rewrite its checks as direct checks of
+  fapp1_fapp0(Prof_imply_cov_func2, Struct_sigma o q);
+keep Prof_imply_cov_func2 as the mixed-variance functor owner;
+keep Prof_imply_cov_fixed_weight_func(Q) as the product insertion
+  O |-> (O,Q);
+keep Prof_imply_cov_func(Q) as the opaque fixed-weight semantic composite.
+```
+
+The current `Prof_imply_cov_transf` type packages an endpoint-changing
+equipment view, but its only promoted computation is the fixed-endpoint case:
+
+```text
+Prof_imply_cov_transf(id,id,o,q)
+  -> fapp1_fapp0(Prof_imply_cov_func2, Struct_sigma(o,q)).
+```
+
+That makes the named transf a compatibility wrapper around the generic mixed
+functor action, not an owner. Its presence adds noise to the future
+`Prof_cat`-primitive migration because it preserves raw Catd/Product endpoint
+spelling and suggests constructor-specific functoriality that the SOP says
+should remain with `fapp*`.
+
+The current `Prof_imply_cov_func2` / `Prof_imply_cov_func(Q)` architecture is
+mostly the right idiom:
+
+```text
+Prof_imply_cov_func2 :
+  Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X)) -> Prof_cat A B
+
+Prof_imply_cov_func(Q)
+  := Prof_imply_cov_func2 o Prof_imply_cov_fixed_weight_func(Q)
+```
+
+This mirrors the Product/Hom pattern: keep a stable semantic functor head, add
+an object-action rule, let generic `fapp1_func` / `fapp1_fapp0` own identity
+and composition, and make the fixed-weight operation an opaque semantic
+composite with a direct object-action rule. Unlike `Product_map_func`, there is
+no available end-level arrow formula for implication maps, so no product-style
+component projection rule should be invented now.
+
+The contravariant sibling `Prof_imply_con_transf` is also suspicious: it is a
+`constant symbol`, has no computation rule, and source/normalized search shows
+no current consumer beyond its type check. Because the file does not yet have a
+`Prof_imply_con_func2` mixed functor analogous to `Prof_imply_cov_func2`, this
+should be recorded as a deferred cleanup/rearchitecture item rather than
+silently replaced during the covariant cleanup.
+
 For each, verify:
 
 ```text
@@ -490,3 +552,15 @@ needed raw Catd/Product discriminator.
 
 Exit criteria: each promoted cluster has focused checks and no broad global
 folds are introduced.
+
+### PROF-CAT-PRIM-005: Prof implication mixed-functor cleanup
+
+Status: proposed.
+
+Scope: delete `Prof_imply_cov_transf`, rewrite its coverage around direct
+`Prof_imply_cov_func2` generic action checks, and audit
+`Prof_imply_con_transf` as a deferred sibling cleanup.
+
+Exit criteria: weighted-limit and right-adjoint consumers still use
+`Prof_imply_cov_func(Q)` and `Prof_imply_cov_func2` directly; no
+constructor-specific implication functoriality rule is introduced.
