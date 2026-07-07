@@ -1,14 +1,14 @@
 # EMDASH v3.2 Primitive Prof Cat Redesign Plan
 
 Date: 2026-07-06
-Last reviewed: 2026-07-06
+Last reviewed: 2026-07-07
 Plan-ID: EMDASH-V3-2-PROF-CAT-PRIMITIVE-REDESIGN-2026-07-06
 Depends-On: EMDASH-V3-2-PROFUNCTOR-WEIGHTED-LIMITS-2026-06-17; EMDASH-V3-2-PROFUNCTOR-REPRESENTABILITY-2026-06-19; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Supersedes: no whole report; refines the long-term note that making `Prof_cat` primitive is a separate foundation-level migration
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
-Status: primitive `Prof_cat` head, first public-surface migration, and cleanup through `Hom_prof_func`/weighted-limit compatibility promoted 2026-07-06; further `Hom_prof*` redesign remains deferred
+Status: primitive `Prof_cat` head, first public-surface migration, and cleanup through `Hom_prof_func`/weighted-limit compatibility promoted 2026-07-06; active goal: `Unit_prof` primitive / `Hom_prof_along`-as-reindex normal-form migration
 
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
@@ -122,6 +122,72 @@ wrappers, and the right-adjoint `_iso` preservation branch were removed.
 preservation now call the computational comparison names directly.
 `IsWeightedLimit_cov_iso` remains only as the ordinary representability
 surface obtainable from a comparison by `prof_comparison_evidence`.
+
+Review update 2026-07-07: the next active goal is a deeper `Hom_prof*`
+normal-form migration. The approved boundary is to separate the pure
+uncurried hom profunctor from endpoint reindexing:
+
+```text
+injective symbol Unit_prof (X : Cat) : τ (Prof X X);
+
+symbol Hom_prof_along [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  : τ (Prof A B)
+≔ @Prof_reindex X A X B (@Unit_prof X) F G;
+```
+
+The current source has the opposite ownership: `Hom_prof_along(F,G)` is the
+primitive rewrite-facing representable head, while `Unit_prof(X)` is only the
+transparent specialization `Hom_prof_along(id_X,id_X)`. This makes
+`Hom_prof_along` own both the pure hom-profunctor semantics and the two
+endpoint functor arguments. The new boundary makes `Unit_prof` the
+uncurried/product form of `hom_int`, with no extra endpoint-functor arguments,
+and makes `Prof_reindex` the owner of all endpoint variation in expressions
+such as `Prof_reindex(R,F,G)`.
+
+`Unit_prof` should be primitive and injective. `Hom_prof_along` should most
+likely become a transparent alias, not an injective primitive. Once
+`Hom_prof_along` is no longer a rewrite discriminator, injectivity is not
+needed and is slightly against the SOP: the stable normal-form heads should be
+`Unit_prof` and `Prof_reindex`. The readable `Hom_prof_along(F,G)` surface can
+remain available, but its computation should be inherited from
+`Prof_reindex(Unit_prof X,F,G)`.
+
+Feasibility assessment: this is viable but is a real normal-form migration,
+not a local alias tweak. The core migration should:
+
+```text
+1. Move the current Hom_prof_along fibre and base-arrow rules onto Unit_prof.
+2. Delete Hom_prof_along_fapp1_func unless a focused probe shows that the
+   generic Prof_reindex_fapp1_func + Unit_prof path fails to expose the
+   intended action.
+3. Delete the special Prof_reindex(Hom_prof_along(...),F',G') fold; nested
+   Prof_reindex should accumulate by the generic nested-reindex rule.
+4. Rewrite LHS discriminators in Prof_func_hom and co-Yoneda rules from
+   Hom_prof_along(id,id) to Unit_prof, and from general Hom_prof_along(F,G)
+   to the Prof_reindex(Unit_prof X,F,G) normal form where that expression is
+   the actual owner.
+5. Keep readable Hom_prof_along in non-discriminator positions at first,
+   especially in weighted-limit and adjunction statements, then migrate those
+   surfaces only after the core normal form checks pass.
+```
+
+The main risk is not ordinary typing; it is confluence and normal-form
+competition around:
+
+```text
+fapp1_fapp0(Prof_reindex(Unit_prof X,F,G), ...)
+```
+
+The first implementation probe should therefore verify that this term reduces
+through `Prof_reindex_fapp1_func`, the product base map
+`Product_map_func(Op_func F,G)`, and the new `Unit_prof` action to the same
+postcomposition-after-precomposition composite currently produced directly by
+`Hom_prof_along_fapp1_func`. If that path is too weak or too slow, the
+fallback should be a narrow projection owner at the `Prof_reindex(Unit_prof
+X,F,G)` boundary, not a restoration of `Hom_prof_along` as the primitive
+semantic owner.
 
 ## Purpose
 
@@ -912,3 +978,141 @@ Completed by migrating colimit/opposite wrappers to `_comp`, deleting selected
 identity-map wrappers and unsuffixed aliases, and retaining only the
 comparison-owner checks plus the ordinary `IsWeightedLimit_cov_iso` evidence
 projection check.
+
+### PROF-CAT-PRIM-008: `Unit_prof` primitive and `Hom_prof_along` as reindex
+
+Status: active goal 2026-07-07.
+
+Scope: migrate the representable profunctor normal form so that `Unit_prof(X)`
+is the primitive uncurried/product form of `hom_int(id_X)`, and
+`Hom_prof_along(F,G)` is a transparent readable alias for reindexing that unit
+along the endpoint functors:
+
+```text
+injective symbol Unit_prof (X : Cat) : τ (Prof X X);
+
+symbol Hom_prof_along [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  : τ (Prof A B)
+≔ @Prof_reindex X A X B (@Unit_prof X) F G;
+```
+
+Design reason: the present source makes `Hom_prof_along(F,G)` the primitive
+representable head and defines `Unit_prof(X)` as `Hom_prof_along(id_X,id_X)`.
+That couples two concerns: the pure hom profunctor on `X` and the endpoint
+functors `F : A -> X`, `G : B -> X`. The approved redesign separates these
+concerns. `Unit_prof` owns only the hom-category fibre and base-arrow action
+of the identity hom profunctor; `Prof_reindex` owns the endpoint functor
+arguments and is therefore the right place to internalize their future
+functorial or natural variation.
+
+Normal-form policy:
+
+```text
+stable primitive heads:
+  Unit_prof
+  Prof_reindex
+
+readable transparent surface:
+  Hom_prof_along(F,G) := Prof_reindex(Unit_prof X,F,G)
+  Hom_prof(G)        := Hom_prof_along(id,G)
+  Companion_prof(F)  := Hom_prof_along(F,id)
+  Conjoint_prof(F)   := Hom_prof(F)
+```
+
+`Hom_prof_along` should not remain injective unless a focused probe identifies
+a concrete discrimination or performance need that cannot be met at the
+`Unit_prof` or `Prof_reindex` owner. If it is not a rewrite discriminator, an
+injective declaration would add a second stable head without a normal-form
+justification.
+
+Implementation staging:
+
+```text
+1. Probe Unit_prof as an injective primitive with object and base-arrow
+   projection rules copied from the current Hom_prof_along identity case:
+
+     Unit_prof(X)[x,y] = Hom_X(x,y)
+     Unit_prof(X)[p,q] = postcompose(q) after precompose(p)
+
+2. Define Hom_prof_along transparently as
+   Prof_reindex(Unit_prof X,F,G), and keep Hom_prof/Companion/Conjoint as
+   readable transparent specializations.
+
+3. Check whether the generic path
+
+     fapp1_fapp0(Prof_reindex(Unit_prof X,F,G),pq)
+
+   reduces through Prof_reindex_fapp1_func, Product_map_func(Op_func F,G),
+   and the Unit_prof action to the current post/precomposition composite.
+
+4. If that generic path works, delete Hom_prof_along_fapp1_func and its direct
+   projection rules/checks. If it does not, add only a narrow projection owner
+   at the Prof_reindex(Unit_prof X,F,G) boundary, not a restored primitive
+   Hom_prof_along semantic head.
+
+5. Delete the special reindexing fold
+
+     Prof_reindex(Hom_prof_along(F,G),F',G')
+
+   because the generic nested Prof_reindex accumulation rule should now own
+   the same computation.
+
+6. Rewrite LHS discriminators in Prof_func_hom and fixed co-Yoneda
+   beta/fusion rules:
+
+     Hom_prof_along(X,X,X,id,id)  ->  Unit_prof(X)
+     Hom_prof_along(F,G)          ->  Prof_reindex(Unit_prof X,F,G)
+
+   when the expression is the actual runtime owner.
+
+7. Leave weighted-limit and adjunction statements using readable
+   Hom_prof_along in non-discriminator positions during the first slice.
+   Migrate those to explicit Prof_reindex(Unit_prof,...) only if a typecheck
+   or normal-form check requires the canonical spelling.
+```
+
+Focused probes before promotion:
+
+```text
+Unit_prof fibre:
+  Fibre_cat(Unit_prof X, Struct_sigma x y) == Hom_cat X x y
+
+Unit_prof arrow action:
+  fapp1_fapp0(Unit_prof X, Struct_sigma p q)
+  == hom_postcomp_func(X,id_X,q) o hom_precomp_along_func(X,id_X,p)
+
+Representable alias fibre:
+  Fibre_cat(Hom_prof_along(F,G), Struct_sigma a b)
+  == Hom_cat X (F[a]) (G[b])
+
+Representable alias arrow action:
+  fapp1_fapp0(Hom_prof_along(F,G), Struct_sigma p q)
+  == current post/precomposition composite
+
+Nested reindex:
+  Prof_reindex(Hom_prof_along(F,G),F',G')
+  == Hom_prof_along(F o F', G o G')
+
+Public consumers:
+  Prof_func_hom component and capped action checks
+  fixed co-Yoneda beta/fusion checks
+  weighted-limit comparison checks
+  adjunction mate comparison checks
+```
+
+Risk classification: the main risk is confluence and normal-form competition,
+not basic typing. In particular, the migration changes the critical path for
+the action of a representable from a direct `Hom_prof_along_fapp1_func` rule
+to a composed `Prof_reindex_fapp1_func` / `Product_map_func` / `Unit_prof`
+path. Promote only after a bounded full check and warning-enabled comparison
+classify any warning inventory delta.
+
+Exit criteria: `Unit_prof` is the only primitive representable hom head;
+`Hom_prof_along` is transparent or otherwise non-discriminating; no
+`Hom_prof_along_fapp1_func` rule remains unless it is justified by a failed
+generic-path probe; nested reindexing of representables is owned by generic
+`Prof_reindex`; public checks for fibres, arrow actions, `Prof_func_hom`,
+co-Yoneda, weighted limits, and adjunction comparisons pass; the active status
+report is updated with the new normal-form boundary and validation results.
