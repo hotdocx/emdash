@@ -374,16 +374,16 @@ flag "print_meta_args" on;
     - Generic Sigma/Pi weakening and ordinary structural-logic helpers have
       basic stable beta assertions; any richer coherence helpers remain
       deferred until needed.
-    - `Prof_base`, `Prof_cat`, and `Prof` are transparent aliases for
-      Cat-valued profunctors on `A^op × B`. `Hom_prof_along(F,G)` is the sole
-      stable representable head; `Hom_prof(G)` and `Unit_prof(X)` are
-      transparent identity-left specializations. Its base-arrow action is
-      owned by `Hom_prof_along_fapp1_func` and computes as postcomposition
-      after precomposition. `Product_map_func(F,G)` is the transparent general
-      product map. `Prof_reindex(R,F,G)` is a stable non-injective head whose
-      object and arrow projections are pullback along `Op_func(F) × G`;
-      representable reindexing accumulates endpoint functors. Profunctor
-      transformations and curry comparison remain later implementation phases.
+    - `Prof_cat` is the primitive public category of Cat-valued profunctors
+      on `A^op × B`, with `Prof_base` retained as a transparent base alias.
+      `Unit_prof(X)` is the primitive uncurried hom profunctor.
+      `Hom_prof_along(F,G)` is now the transparent readable surface for
+      `Prof_reindex(Unit_prof X,F,G)`, so endpoint functor arguments are owned
+      by `Prof_reindex`. `Product_map_func(F,G)` is the stable componentwise
+      product map used by reindexing. Projections for representable action
+      compute through `Prof_reindex`, `Product_map_func`, and `Unit_prof`.
+      Profunctor transformations and curry comparison remain later
+      implementation phases.
 */
 
 // -------------------------------------------------------------------------------------------------
@@ -9457,13 +9457,12 @@ rule @fdapp1_int_cell
     Prof_cat(A,B)  = (A^op × B) ⊢ Cat
     R : Prof(A,B)  means R : A^op × B ⊢ Cat
 
+    Unit_prof(X)[x,y] = Hom_X(x,y)
     Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b])
 
-  for F : A ⊢ X and G : B ⊢ X.
-
-  The binary `Hom_prof_along` head is the sole rewrite-facing representable
-  constructor. `Hom_prof(G)` and `Unit_prof(X)` below are transparent
-  specializations, so there are no competing primitive normal forms.
+  for F : A ⊢ X and G : B ⊢ X. `Unit_prof(X)` is the primitive
+  uncurried hom profunctor; `Hom_prof_along(F,G)` is the readable
+  transparent surface for reindexing that unit along F and G.
 
   For a base arrow (p,q) : (a,b) -> (a',b') in A^op × B, equivalently
 
@@ -9474,10 +9473,9 @@ rule @fdapp1_int_cell
 
     h |-> G[q] o h o F[p].
 
-  `Hom_prof_along_fapp1_func` keeps the whole functorial action over product
-  homs visible. The capped rule joins the generic
-  `fapp0(fapp1_func(...),...)` projection at the same pre/postcomposition
-  composite.
+  Endpoint functor arguments are owned by `Prof_reindex`, so the public
+  representable action now computes through the generic reindex/product-map
+  projection ladder and the primitive `Unit_prof` action.
 */
 
 // Profunctor base: A^op × B.
@@ -9872,109 +9870,112 @@ rule @fapp1_fapp0
         $ab'
         $pq);
 
-// Binary representable hom profunctor.
-//
-// Surface/formula:
-//   Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b]).
-injective symbol Hom_prof_along [A B X : Cat]
-  (F : τ (Functor A X))
-  (G : τ (Functor B X))
-  : τ (Prof A B);
+// Identity/unit hom profunctor, the uncurried/product form of hom_int(id_X).
+injective symbol Unit_prof (X : Cat)
+  : τ (Prof X X);
 
 // Direct fibre computation, formulated for an arbitrary product object.
 rule @fapp0
       _
       Cat_cat
-      (@Hom_prof_along $A $B $X $F $G)
-      $ab
+      (@Unit_prof $X)
+      $xy
   ↪ Hom_cat
       $X
-      (@fapp0 $A $X $F (sigma_Fst $ab))
-      (@fapp0 $B $X $G (sigma_Snd $ab));
+      (sigma_Fst $xy)
+      (sigma_Snd $xy);
 
-// Full base-arrow action of the representable hom profunctor.
-symbol Hom_prof_along_fapp1_func [A B X : Cat]
-  (F : τ (Functor A X))
-  (G : τ (Functor B X))
-  [ab ab' : τ (Obj (Product_cat (Op_cat A) B))]
+// Full base-arrow action of the unit hom profunctor.
+symbol Unit_prof_fapp1_func [X : Cat]
+  [xy xy' : τ (Obj (Product_cat (Op_cat X) X))]
   : τ (Functor
-      (Hom_cat (Product_cat (Op_cat A) B) ab ab')
+      (Hom_cat (Product_cat (Op_cat X) X) xy xy')
       (Functor_cat
         (Hom_cat X
-          (@fapp0 A X F (sigma_Fst ab))
-          (@fapp0 B X G (sigma_Snd ab)))
+          (sigma_Fst xy)
+          (sigma_Snd xy))
         (Hom_cat X
-          (@fapp0 A X F (sigma_Fst ab'))
-          (@fapp0 B X G (sigma_Snd ab')))));
+          (sigma_Fst xy')
+          (sigma_Snd xy'))));
 
 rule @fapp1_func
       _
       Cat_cat
-      (@Hom_prof_along $A $B $X $F $G)
-      $ab
-      $ab'
-  ↪ @Hom_prof_along_fapp1_func
-      $A $B $X $F $G $ab $ab';
+      (@Unit_prof $X)
+      $xy
+      $xy'
+  ↪ @Unit_prof_fapp1_func
+      $X $xy $xy';
 
 // Applying the full action to a product arrow gives precomposition followed
 // by postcomposition.
 rule fapp0
-      (@Hom_prof_along_fapp1_func
-        $A $B $X $F $G $ab $ab')
+      (@Unit_prof_fapp1_func
+        $X $xy $xy')
       $pq
   ↪ @comp_cat_fapp0
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab))
-        (@fapp0 $B $X $G (sigma_Snd $ab)))
+        (sigma_Fst $xy)
+        (sigma_Snd $xy))
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (@fapp0 $B $X $G (sigma_Snd $ab)))
+        (sigma_Fst $xy')
+        (sigma_Snd $xy))
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (@fapp0 $B $X $G (sigma_Snd $ab')))
+        (sigma_Fst $xy')
+        (sigma_Snd $xy'))
       (@hom_postcomp_func
-        $X $B $G
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (sigma_Snd $ab)
-        (sigma_Snd $ab')
+        $X $X (@id Cat_cat $X)
+        (sigma_Fst $xy')
+        (sigma_Snd $xy)
+        (sigma_Snd $xy')
         (sigma_Snd $pq))
       (@hom_precomp_along_func
-        $A $X $F
-        (@fapp0 $B $X $G (sigma_Snd $ab))
-        (sigma_Fst $ab')
-        (sigma_Fst $ab)
+        $X $X (@id Cat_cat $X)
+        (sigma_Snd $xy)
+        (sigma_Fst $xy')
+        (sigma_Fst $xy)
         (sigma_Fst $pq));
 
 // Capped base-arrow action, joined with the full-action projection above.
 rule @fapp1_fapp0
       _
       Cat_cat
-      (@Hom_prof_along $A $B $X $F $G)
-      $ab
-      $ab'
+      (@Unit_prof $X)
+      $xy
+      $xy'
       $pq
   ↪ @comp_cat_fapp0
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab))
-        (@fapp0 $B $X $G (sigma_Snd $ab)))
+        (sigma_Fst $xy)
+        (sigma_Snd $xy))
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (@fapp0 $B $X $G (sigma_Snd $ab)))
+        (sigma_Fst $xy')
+        (sigma_Snd $xy))
       (Hom_cat $X
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (@fapp0 $B $X $G (sigma_Snd $ab')))
+        (sigma_Fst $xy')
+        (sigma_Snd $xy'))
       (@hom_postcomp_func
-        $X $B $G
-        (@fapp0 $A $X $F (sigma_Fst $ab'))
-        (sigma_Snd $ab)
-        (sigma_Snd $ab')
+        $X $X (@id Cat_cat $X)
+        (sigma_Fst $xy')
+        (sigma_Snd $xy)
+        (sigma_Snd $xy')
         (sigma_Snd $pq))
       (@hom_precomp_along_func
-        $A $X $F
-        (@fapp0 $B $X $G (sigma_Snd $ab))
-        (sigma_Fst $ab')
-        (sigma_Fst $ab)
+        $X $X (@id Cat_cat $X)
+        (sigma_Snd $xy)
+        (sigma_Fst $xy')
+        (sigma_Fst $xy)
         (sigma_Fst $pq));
+
+// Binary representable hom profunctor as endpoint reindexing of Unit_prof.
+//
+// Surface/formula:
+//   Hom_prof_along(F,G)[a,b] = Hom_X(F[a],G[b]).
+symbol Hom_prof_along [A B X : Cat]
+  (F : τ (Functor A X))
+  (G : τ (Functor B X))
+  : τ (Prof A B)
+≔ @Prof_reindex X A X B (@Unit_prof X) F G;
 
 // Right-representable hom profunctor, as the identity-left specialization.
 symbol Hom_prof [B X : Cat]
@@ -9982,13 +9983,8 @@ symbol Hom_prof [B X : Cat]
   : τ (Prof X B)
 ≔ @Hom_prof_along X B X (@id_func X) G;
 
-// Identity/unit hom profunctor.
-symbol Unit_prof (X : Cat)
-  : τ (Prof X X)
-≔ @Hom_prof_along X X X (@id_func X) (@id_func X);
-
 // Standard equipment names for the two representables induced by a functor.
-// They are transparent views of the sole rewrite-facing Hom_prof_along head.
+// They are transparent views of the Unit_prof/Prof_reindex normal form.
 symbol Companion_prof [A B : Cat]
   (F : τ (Functor A B))
   : τ (Prof A B)
@@ -10144,22 +10140,6 @@ rule @Prof_reindex
       $R
       (@comp_cat_fapp0 $A'' $A' $A $F $F')
       (@comp_cat_fapp0 $B'' $B' $B $G $G');
-
-// Reindexing a representable accumulates both endpoint functors.
-rule @Prof_reindex
-      $A
-      $A'
-      $B
-      $B'
-      (@Hom_prof_along $A $B $X $F $G)
-      $F'
-      $G'
-  ↪ @Hom_prof_along
-      $A'
-      $B'
-      $X
-      (@comp_cat_fapp0 $A' $A $X $F $F')
-      (@comp_cat_fapp0 $B' $B $X $G $G');
 
 // Reindexing a constant profunctor remains constant.
 rule @Prof_reindex
@@ -10395,8 +10375,8 @@ rule @Prof_func_hom $A $A (@id Cat_cat $A)
 rule @tapp0_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
-      (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
-      (@Hom_prof_along $A $A $B $F $F)
+      (@Unit_prof $A)
+      (@Prof_reindex $B $A $B $A (@Unit_prof $B) $F $F)
       $ab
       (@Prof_func_hom $A $B $F)
   ↪ @fapp1_func
@@ -10415,8 +10395,8 @@ rule @tapp0_fapp0
 rule @tapp1_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
-      (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
-      (@Hom_prof_along $A $A $B $F $F)
+      (@Unit_prof $A)
+      (@Prof_reindex $B $A $B $A (@Unit_prof $B) $F $F)
       $ab
       $ab'
       (@Prof_func_hom $A $B $F)
@@ -10613,7 +10593,7 @@ rule @tapp0_fapp0
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $B $B $P
-        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B)))
+        (@Unit_prof $B))
       $P
       (@id Cat_cat $A)
       (@id Cat_cat $B)
@@ -10623,7 +10603,7 @@ rule @Prof_cell_apply
       (@Prof_tensor_hom_hom
         $I $A $B $B
         $P
-        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B))
+        (@Unit_prof $B)
         $F
         $M
         $M
@@ -10635,7 +10615,7 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $B $B $P
-        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B)))
+        (@Unit_prof $B))
       $P'
       (@id Cat_cat $A)
       (@id Cat_cat $B)
@@ -10650,7 +10630,7 @@ rule @Prof_cell_apply
       (@Prof_tensor_hom_hom
         $I $A $B $B
         $P
-        (@Hom_prof_along $B $B $B (@id Cat_cat $B) (@id Cat_cat $B))
+        (@Unit_prof $B)
         $F
         $M
         $M
@@ -10668,7 +10648,7 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $A $B
-        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
+        (@Unit_prof $A)
         $P)
       $P
       (@id Cat_cat $A)
@@ -10678,7 +10658,7 @@ rule @Prof_cell_apply
       (@Prof_coyoneda_con_map $A $B $P)
       (@Prof_tensor_hom_hom
         $I $A $A $B
-        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
+        (@Unit_prof $A)
         $P
         $F
         $G
@@ -10691,7 +10671,7 @@ rule @Prof_cell_apply
 rule @Prof_cell_apply
       $I $A $B $A $B
       (@Prof_tensor $A $A $B
-        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
+        (@Unit_prof $A)
         $P)
       $P'
       (@id Cat_cat $A)
@@ -10706,7 +10686,7 @@ rule @Prof_cell_apply
         $pp)
       (@Prof_tensor_hom_hom
         $I $A $A $B
-        (@Hom_prof_along $A $A $A (@id Cat_cat $A) (@id Cat_cat $A))
+        (@Unit_prof $A)
         $P
         $F
         $G

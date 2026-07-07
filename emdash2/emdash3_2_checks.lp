@@ -6961,8 +6961,8 @@ assert [A B X : Cat]
     (@Hom_prof_along A B X F G)
     (Struct_sigma a b)
     (Struct_sigma a' b')
-  ≡ @Hom_prof_along_fapp1_func
-      A B X F G
+  ≡ @Prof_reindex_fapp1_func
+      X A X B (@Unit_prof X) F G
       (Struct_sigma a b)
       (Struct_sigma a' b');
 
@@ -6985,9 +6985,17 @@ assert [A B X : Cat]
       (Hom_cat X (fapp0 F a') (fapp0 G b))
       (Hom_cat X (fapp0 F a') (fapp0 G b'))
       (@hom_postcomp_func
-        X B G (fapp0 F a') b b' q)
+        X X (@id Cat_cat X)
+        (fapp0 F a')
+        (fapp0 G b)
+        (fapp0 G b')
+        (@fapp1_fapp0 B X G b b' q))
       (@hom_precomp_along_func
-        A X F (fapp0 G b) a' a p);
+        X X (@id Cat_cat X)
+        (fapp0 G b)
+        (fapp0 F a')
+        (fapp0 F a)
+        (@fapp1_fapp0 A X F a' a p));
 
 assert [A B X : Cat]
   (F : τ (Functor A X))
@@ -7008,20 +7016,20 @@ assert [A B X : Cat]
 	    h
 	  ≡ @hom_postcomp_fapp0
 	      X
-	      B
-	      G
+	      X
+	      (@id Cat_cat X)
 	      (fapp0 F a')
-	      b
-	      b'
-	      q
+	      (fapp0 G b)
+	      (fapp0 G b')
+	      (@fapp1_fapp0 B X G b b' q)
 	      (@hom_precomp_along_fapp0
-	        A
 	        X
-	        F
+	        X
+	        (@id Cat_cat X)
 	        (fapp0 G b)
-	        a'
-	        a
-	        p
+	        (fapp0 F a')
+	        (fapp0 F a)
+	        (@fapp1_fapp0 A X F a' a p)
 	        h);
 
 assert [B X : Cat]
@@ -7035,6 +7043,37 @@ assert [X : Cat]
   (x y : τ (Obj X)) ⊢
   Fibre_cat (@Unit_prof X) (Struct_sigma x y)
   ≡ Hom_cat X x y;
+
+assert [X : Cat]
+  (x x' y y' : τ (Obj X)) ⊢
+  @fapp1_func
+    (Product_cat (Op_cat X) X)
+    Cat_cat
+    (@Unit_prof X)
+    (Struct_sigma x y)
+    (Struct_sigma x' y')
+  ≡ @Unit_prof_fapp1_func
+      X
+      (Struct_sigma x y)
+      (Struct_sigma x' y');
+
+assert [X : Cat]
+  (x x' y y' : τ (Obj X))
+  (p : τ (Hom X x' x))
+  (q : τ (Hom X y y')) ⊢
+  @fapp1_fapp0
+    (Product_cat (Op_cat X) X)
+    Cat_cat
+    (@Unit_prof X)
+    (Struct_sigma x y)
+    (Struct_sigma x' y')
+    (Struct_sigma p q)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X x y)
+      (Hom_cat X x' y)
+      (Hom_cat X x' y')
+      (@hom_postcomp_func X X (@id Cat_cat X) x' y y' q)
+      (@hom_precomp_along_func X X (@id Cat_cat X) y x' x p);
 
 assert [A B X : Cat]
   (F : τ (Functor A X))

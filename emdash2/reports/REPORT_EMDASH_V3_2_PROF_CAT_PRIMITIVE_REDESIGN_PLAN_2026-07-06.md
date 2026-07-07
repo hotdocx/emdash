@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the long-term note that making `Prof_cat` p
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
-Status: primitive `Prof_cat` head, first public-surface migration, and cleanup through `Hom_prof_func`/weighted-limit compatibility promoted 2026-07-06; active goal: `Unit_prof` primitive / `Hom_prof_along`-as-reindex normal-form migration
+Status: primitive `Prof_cat` head, first public-surface migration, cleanup through `Hom_prof_func`/weighted-limit compatibility, and `Unit_prof` primitive / `Hom_prof_along`-as-reindex migration promoted
 
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
@@ -91,10 +91,10 @@ runtime projections.
 Review update 2026-07-06g: a follow-up review identified two more cleanup
 clusters to stage before any deeper `Hom_prof*` redesign. First,
 `Hom_prof_func(J,B)` is a narrow asymmetric right-representable functor wrapper
-whose active source consumers are only its own rules/checks. The real stable
-representable owner is `Hom_prof_along(F,G)` plus
-`Hom_prof_along_fapp1_func`; if a functorial embedding is needed later, it
-should be a mixed-variance binary owner over
+whose active source consumers are only its own rules/checks. At this cleanup
+stage, before `PROF-CAT-PRIM-008`, the representable surface was still
+`Hom_prof_along(F,G)` plus `Hom_prof_along_fapp1_func`; if a functorial
+embedding is needed later, it should be a mixed-variance binary owner over
 `Product_cat(Op_cat(Functor_cat I X), Functor_cat J X) -> Prof_cat I J`, with
 the current one-variable `Hom_prof_func` at most a derived specialization.
 Second, the weighted-limit/right-adjoint cluster has duplicated compatibility
@@ -108,9 +108,10 @@ through generic comparison-to-iso evidence instead of kept as independent API.
 
 Implementation update 2026-07-06h: the cleanup clusters from
 `PROF-CAT-PRIM-006` and `PROF-CAT-PRIM-007` have been promoted.
-`Hom_prof_func` and its direct checks were deleted; the retained representable
-surface is `Hom_prof_along`, `Hom_prof_along_fapp1_func`, `Hom_prof`, and
-`Unit_prof`. The weighted-limit/right-adjoint layer is now consolidated around
+`Hom_prof_func` and its direct checks were deleted; at that point the retained
+representable surface was `Hom_prof_along`, `Hom_prof_along_fapp1_func`,
+`Hom_prof`, and `Unit_prof` (superseded by `PROF-CAT-PRIM-008`). The
+weighted-limit/right-adjoint layer is now consolidated around
 `IsWeightedLimit_cov_comp`, `weighted_limit_cov_push/pull`,
 `Adjunction_hom_prof_comparison(_along)`, and
 `right_adjoint_preserves_weighted_limit_cov_comp`. The selected universal/cone
@@ -122,6 +123,36 @@ wrappers, and the right-adjoint `_iso` preservation branch were removed.
 preservation now call the computational comparison names directly.
 `IsWeightedLimit_cov_iso` remains only as the ordinary representability
 surface obtainable from a comparison by `prof_comparison_evidence`.
+
+Implementation update 2026-07-07i: `PROF-CAT-PRIM-008` has been promoted.
+`Unit_prof(X)` is now an injective primitive profunctor with direct fibre,
+full-action, and capped-action projections. `Hom_prof_along(F,G)` is a
+transparent readable alias for `Prof_reindex(Unit_prof X,F,G)`, and
+`Hom_prof_along_fapp1_func` has been deleted. The old special fold
+`Prof_reindex(Hom_prof_along(F,G),F',G')` has also been deleted; nested
+representable reindexing is now owned by the generic nested `Prof_reindex`
+rule. `Prof_func_hom` and the fixed co-Yoneda beta/fusion rules now use
+`Unit_prof` and `Prof_reindex(Unit_prof,...)` in the true projection-rule
+discriminators.
+
+Important normal-form correction: the promoted representable arrow action is
+the generic `Prof_reindex`/`Product_map_func`/`Unit_prof` normal form. Thus
+`fapp1_fapp0(Hom_prof_along(F,G),(p,q))` computes to identity-family
+post/precomposition in `X` along the actual arrows `G[q]` and `F[p]`, not to
+the retired direct `Hom_prof_along_fapp1_func` presentation with
+`hom_postcomp_func(X,B,G,q)` and `hom_precomp_along_func(A,X,F,p)`. A probe
+branch that tried to add generic hom-action folds back to the old presentation
+was rejected as the wrong ownership boundary; existing `hom_*` runtime and
+proof-time rules remain the hom-action owners.
+
+Validation for the promoted slice: `EMDASH_TYPECHECK_TIMEOUT=60s make check`
+passes, `make catalog` refreshed the check catalog, `make health` refreshed
+`REPORT_EMDASH_HEALTH.md`, `make warning-summary` completes with 1,298
+warnings (1,133 unjoinable critical-pair reports and 165 replaceable-pattern
+reports), and `EMDASH_TYPECHECK_TIMEOUT=60s make ci` passes. The warning delta
+from the prior recorded 1,291-warning inventory is classified as overlap in
+the existing shared `comp_fapp0` / `hom_postcomp_fapp0` families, not as a
+reason to restore the retired `Hom_prof_along_fapp1_func` owner.
 
 Review update 2026-07-07: the next active goal is a deeper `Hom_prof*`
 normal-form migration. The approved boundary is to separate the pure
@@ -517,10 +548,9 @@ narrow compatibility wrapper unless a concrete source consumer is found during
 the cleanup probe. The retained representable API is:
 
 ```text
-Hom_prof_along(F,G);
-Hom_prof_along_fapp1_func(F,G);
-Hom_prof(G) := Hom_prof_along(id,G);
-Unit_prof(X) := Hom_prof_along(id,id).
+Unit_prof(X);
+Hom_prof_along(F,G) := Prof_reindex(Unit_prof X,F,G);
+Hom_prof(G) := Hom_prof_along(id,G).
 ```
 
 If later work needs functoriality in both representable endpoints, introduce a
@@ -915,8 +945,9 @@ Status: promoted 2026-07-06.
 Scope: delete `Hom_prof_func`, its `fapp0` rule, its capped
 `tapp0_fapp0(fapp1_fapp0 Hom_prof_func ...)` projection rule, and the direct
 checks whose only purpose is to exercise that wrapper. Keep
-`Hom_prof_along`, `Hom_prof_along_fapp1_func`, `Hom_prof`, and `Unit_prof` as
-the representable surface.
+`Hom_prof_along`, `Hom_prof`, and `Unit_prof` as the representable surface.
+After `PROF-CAT-PRIM-008`, `Unit_prof` is primitive and `Hom_prof_along` is a
+transparent `Prof_reindex(Unit_prof,...)` alias.
 
 Exit criteria: all downstream weighted-limit, adjunction, companion/conjoint,
 and representability checks still route through `Hom_prof_along` /
@@ -981,7 +1012,7 @@ projection check.
 
 ### PROF-CAT-PRIM-008: `Unit_prof` primitive and `Hom_prof_along` as reindex
 
-Status: active goal 2026-07-07.
+Status: promoted 2026-07-07.
 
 Scope: migrate the representable profunctor normal form so that `Unit_prof(X)`
 is the primitive uncurried/product form of `hom_int(id_X)`, and
@@ -1045,12 +1076,15 @@ Implementation staging:
      fapp1_fapp0(Prof_reindex(Unit_prof X,F,G),pq)
 
    reduces through Prof_reindex_fapp1_func, Product_map_func(Op_func F,G),
-   and the Unit_prof action to the current post/precomposition composite.
+   and the Unit_prof action to the intended post/precomposition composite.
 
 4. If that generic path works, delete Hom_prof_along_fapp1_func and its direct
    projection rules/checks. If it does not, add only a narrow projection owner
    at the Prof_reindex(Unit_prof X,F,G) boundary, not a restored primitive
    Hom_prof_along semantic head.
+
+   Promoted result: the generic path works in the new owner presentation. The
+   old direct representable-action presentation is intentionally not restored.
 
 5. Delete the special reindexing fold
 
@@ -1089,7 +1123,9 @@ Representable alias fibre:
 
 Representable alias arrow action:
   fapp1_fapp0(Hom_prof_along(F,G), Struct_sigma p q)
-  == current post/precomposition composite
+  == comp(
+       hom_postcomp_func(X,X,id_X,G[q]),
+       hom_precomp_along_func(X,X,id_X,F[p]))
 
 Nested reindex:
   Prof_reindex(Hom_prof_along(F,G),F',G')
@@ -1111,8 +1147,7 @@ classify any warning inventory delta.
 
 Exit criteria: `Unit_prof` is the only primitive representable hom head;
 `Hom_prof_along` is transparent or otherwise non-discriminating; no
-`Hom_prof_along_fapp1_func` rule remains unless it is justified by a failed
-generic-path probe; nested reindexing of representables is owned by generic
+`Hom_prof_along_fapp1_func` rule remains; nested reindexing of representables is owned by generic
 `Prof_reindex`; public checks for fibres, arrow actions, `Prof_func_hom`,
 co-Yoneda, weighted limits, and adjunction comparisons pass; the active status
 report is updated with the new normal-form boundary and validation results.

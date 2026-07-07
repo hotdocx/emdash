@@ -165,10 +165,12 @@ vertical statements should use generic `@id (Prof_cat A B)` and
 `@comp_fapp0 (Prof_cat A B)`; raw Catd/Product spelling remains appropriate
 only for semantic bodies and projection checks whose discriminator is the
 displayed-family base. `Prof(A,B)` is the object classifier
-`Obj(Prof_cat(A,B))`. `Hom_prof_along(F,G)` is the sole stable representable
-head, with direct fibre computation and a full base-arrow action computing as
-postcomposition after precomposition. `Hom_prof(G)` and `Unit_prof(X)` now
-expose `τ(Prof X B)` and `τ(Prof X X)` surfaces. `Product_map_func(F,G)` is
+`Obj(Prof_cat(A,B))`. `Unit_prof(X)` is now the primitive uncurried hom
+profunctor, with direct fibre computation and full/capped base-arrow action.
+`Hom_prof_along(F,G)` is the transparent readable surface
+`Prof_reindex(Unit_prof X,F,G)`, so endpoint functor arguments are owned by
+`Prof_reindex` rather than by a representable-specific head. `Hom_prof(G)`
+continues to expose the identity-left readable surface. `Product_map_func(F,G)` is
 now a primitive stable componentwise product-map constructor with object,
 full-hom, and capped-arrow projections. Its composition cut accumulates the
 two component functors. There is deliberately no runtime whole-constructor
@@ -178,6 +180,14 @@ Proof-time unification now identifies `Product_map_func(id,id)` with both
 `id_func(A x B)` and the explicit projection pair. Product-arrow identity
 similarly has a proof-time eta rule against the pair of component identities
 while retaining the runtime `id` head required by generic functor identity.
+
+Postscript 2026-07-07: the `Unit_prof` primitive migration keeps the public
+representable action on the generic reindex/product-map/unit projection path.
+The warning-enabled inventory after this slice is 1,298 warnings: 1,133
+unjoinable critical-pair reports and 165 replaceable-pattern reports. The top
+reported heads remain the shared `comp_fapp0` and `hom_postcomp_fapp0`
+families; the warning delta is recorded as overlap diagnostics, not as a
+reason to restore a representable-specific action owner.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
@@ -214,7 +224,8 @@ the RHS. The object-level fold is installed for direct-authored
 as real guards on the product-map base; the underscored variant typechecked
 but produced broader underconstrained overlap diagnostics. Applying `fapp0` to
 the functor-level fold still joins the same normal form. Representable
-reindexing accumulates both endpoint functors.
+reindexing accumulates both endpoint functors through the generic nested
+`Prof_reindex` rule.
 `Prof_transf_cat(R',F,R,G)` is the transparent category of natural family
 morphisms from `R'` to `Prof_reindex(R,F,G)`.
 `Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
@@ -554,10 +565,11 @@ the active `Prof_imply_cov_func(W)`.
 
 `Hom_prof_func(J,B) : Functor(Functor_cat(J,B),Prof_cat(B,J))` was removed as
 a narrow asymmetric wrapper around the right-representable surface. The active
-representable owner remains `Hom_prof_along(F,G)`, with `Hom_prof(G)` and
-`Unit_prof(X)` as transparent specializations. A future mixed-variance binary
-owner should be designed and probed separately if a concrete consumer needs
-one.
+representable owners are now `Unit_prof(X)` for the pure hom profunctor and
+`Prof_reindex` for endpoint variation; `Hom_prof_along(F,G)` and
+`Hom_prof(G)` are transparent readable surfaces. A future mixed-variance
+binary owner should be designed and probed separately if a concrete consumer
+needs one.
 
 No representable-specific identity or composition rules are active. Strictness
 comes from the global functor cuts. A generic `Catd_cat` specialization of the
@@ -704,11 +716,14 @@ left implicit:
   profunctor-facing API; `Prof_reindex(R,F,G)` and
   `Prof_reindex_fapp1_func` expose object, full, and capped pullback action
   along the generic product base map;
-  `Hom_prof_along(F,G)` is the single stable representable constructor;
-  `Hom_prof_along_fapp1_func` exposes its full action over product homs; and
-  the checked action sends `(p,q,h)` to `G[q] o h o F[p]`.
-  reindexing a representable folds to endpoint composition;
-  `Hom_prof(G)` and `Unit_prof(X)` are transparent specializations;
+  `Unit_prof(X)` is the primitive representable hom constructor;
+  `Hom_prof_along(F,G)` is transparent
+  `Prof_reindex(Unit_prof X,F,G)`, so its checked action goes through the
+  generic product-map/reindex ladder and the unit action, sending `(p,q,h)`
+  to `G[q] o h o F[p]` in that presentation;
+  reindexing a representable accumulates endpoint composition through generic
+  nested `Prof_reindex`;
+  `Hom_prof(G)` is a transparent identity-left specialization;
   `Prof_transf_cat(R',F,R,G)`, `Prof_hom_cat(F,R,G)`, and
   `Prof_hom(F,R,G)` provide the transparent shaped-cell and shaped-element
   layer through `Functord_cat`; ordinary-transformation and curry comparisons
