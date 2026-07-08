@@ -160,9 +160,11 @@ Its object action computes to ordinary functor composition because
 `Hom_cat Cat_cat A B` computes to `Functor_cat A B`.
 
 Do not add a default rewrite from `comp_prod_fapp1_fapp0 Cat_cat` to the
-existing Cat-specific horizontal composite head. Conceptually, the direction
-is the opposite: the Cat-specific helper should eventually become a transparent
-view of the Cat instance of `comp_prod_fapp1_fapp0`.
+existing Cat-specific horizontal composite head in the immediate `Unit_prof`
+slice. The correct longer-term owner is still `comp_prod_fapp1_fapp0`; the
+warning is only that the Cat-specialized reductions should be probed as a
+separate telescope-transfor/action slice because they overlap with identity
+specializations.
 
 The deferred target is:
 
@@ -281,6 +283,110 @@ require generic `hom_precomp_along_tele_transf` and
 arrow-level bridges until a concrete check requires them and the
 warning-enabled interaction has been classified.
 
+## Clarified Cat-Specialization Ownership
+
+The agreed longer-term factorization is:
+
+```text
+hom_*_tele_transf owns generic telescope projection.
+comp_prod* owns product-composition arrow action.
+comp_cat_* owns Cat_cat-specialized transfor normal forms.
+```
+
+In particular, Cat-specific computation should move away from the
+`hom_precomp_along_cat_tele_transf` and `hom_postcomp_cat_tele_transf` heads.
+Those heads currently exist because the generic telescope-transfor projection
+ladder is missing. Once the unspecialized heads exist, their projections
+should be generic and should target `comp_prod*` first.
+
+For precomposition, with
+`theta = hom_precomp_along_tele_transf(F,alpha)` and
+`Falpha = F[alpha]`, the generic projection rules should have the schematic
+shape:
+
+```text
+tapp0_fapp0 theta g
+  -> comp_prod_fapp1_fapp0 (Falpha,id_g)
+
+tapp1_func theta g g'
+  -> comp_prod_fapp1_func after pairing constant Falpha with the varying
+     second component
+
+tapp1_fapp0 theta beta
+  -> comp_prod_fapp1_fapp0 (Falpha,beta)
+```
+
+For postcomposition, with
+`theta = hom_postcomp_tele_transf(F,alpha)` and `Falpha = F[alpha]`, the
+orientation is dual:
+
+```text
+tapp0_fapp0 theta u
+  -> comp_prod_fapp1_fapp0 (id_u,Falpha)
+
+tapp1_func theta u u'
+  -> comp_prod_fapp1_func after pairing the varying first component with
+     constant Falpha
+
+tapp1_fapp0 theta beta
+  -> comp_prod_fapp1_fapp0 (beta,Falpha)
+```
+
+After those generic rules, the Cat-specific computation belongs downstream at
+the Cat instance of `comp_prod*`. The intended Cat reductions are schematic:
+
+```text
+comp_prod_fapp1_fapp0 Cat_cat (Ealpha,id_G)
+  -> comp_cat_cov_transf ...
+
+comp_prod_fapp1_fapp0 Cat_cat (id_F,Ealpha)
+  -> comp_cat_con_transf ...
+
+comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
+  -> comp_cat_func_func_tapp1_fapp0 eta alpha
+```
+
+The whole-functor projections should similarly factor through
+`comp_prod_fapp1_func` first:
+
+```text
+precomposition tapp1_func
+  -> comp_prod_fapp1_func after pairing constant Ealpha with the varying
+     second component
+  -> comp_cat_con_func_func_tapp1_func ...   // Cat_cat specialization
+
+postcomposition tapp1_func
+  -> comp_prod_fapp1_func after pairing the varying first component with
+     constant Ealpha
+  -> comp_cat_cov_func_func_tapp1_func ...   // Cat_cat specialization
+```
+
+This means the old direct rules of the form:
+
+```text
+tapp*_projection (hom_*_cat_tele_transf ...)
+  -> comp_cat_* ...
+```
+
+should eventually be replaced by two steps:
+
+```text
+tapp*_projection (hom_*_tele_transf ...)
+  -> comp_prod* ...
+
+comp_prod* Cat_cat ...
+  -> comp_cat_* ...
+```
+
+The broad arbitrary-pair Cat rule and the focused identity-slot Cat rules
+overlap. For example, `(alpha,id)` can match both the arbitrary
+`comp_cat_func_func_tapp1_fapp0` route and the focused `comp_cat_cov_transf`
+route. This does not invalidate the architecture, but it makes the
+implementation a separate probe-first task. The eventual orientation must make
+the identity-slot cases either reduce directly to the existing covariant or
+contravariant transfor normal forms, or join cleanly through the arbitrary
+horizontal-composite head.
+
 ## Non-Goals
 
 Do not add kernel symbols such as:
@@ -346,9 +452,12 @@ hom_postcomp_cat_tele_transf
 The existing `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` rules currently
 attached to the Cat-specific heads should then move to the generic heads and
 be expressed through `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` where
-appropriate. This is one linked follow-up with the future demotion of
-`comp_cat_func_func_tapp1_fapp0` to a Cat-specific view of
-`comp_prod_fapp1_fapp0`.
+appropriate. The Cat-specific normal forms that the old rules currently
+return should not remain attached to the generic `hom_*_tele_transf` heads;
+they should be reattached downstream as Cat-instance reductions of
+`comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0`. This is one linked follow-up
+with the future demotion of `comp_cat_func_func_tapp1_fapp0` to a Cat-specific
+view of `comp_prod_fapp1_fapp0`.
 
 This unspecialization is not part of the immediate `Unit_prof` migration. It
 is recorded because it is the coherent future owner of the arrow-level bridge
@@ -385,8 +494,9 @@ historical proof-symbol wrappers are cleanup targets.
 2. Add `comp_prod_func` with object, full-action, and capped-action projection
    heads.
 3. Add the transparent `Functor_comp_pair_func` Cat specialization.
-4. Do not add a Cat rewrite from `comp_prod_fapp1_fapp0` to
-   `comp_cat_func_func_tapp1_fapp0` in the immediate slice.
+4. Do not add Cat-specific `comp_prod*` reductions in the immediate slice;
+   record them as the deferred owner for the later telescope-transfor
+   unspecialization.
 5. Replace `Unit_prof_fapp1_func` with the generic
    `Functor_comp_pair_func o Product_map_func(preTele,postTele)` full action.
 6. Keep or reorient the direct capped `Unit_prof` action only as a projection
@@ -409,7 +519,9 @@ historical proof-symbol wrappers are cleanup targets.
   `hom_int_precomp_along_tele_func`.
 - Deferred: add unspecialized `hom_precomp_along_tele_transf` and
   `hom_postcomp_tele_transf`, move Cat-specific `tapp*` projections to those
-  generic heads, and demote `hom_*_cat_tele_transf` to aliases or delete them.
+  generic heads as generic `comp_prod*` projections, move the Cat-specific
+  normal forms downstream to Cat-instance `comp_prod*` reductions, and demote
+  `hom_*_cat_tele_transf` to aliases or delete them.
 - Deferred: recast `comp_cat_func_func_tapp1_fapp0` as the Cat instance of
   `comp_prod_fapp1_fapp0`, after probing whether its current body is
   judgmentally recovered from the generic owner plus Cat projections.
