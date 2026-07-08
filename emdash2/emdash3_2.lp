@@ -3799,6 +3799,74 @@ symbol Functor_comp_pair_func [A B C : Cat]
 ≔ @comp_prod_func Cat_cat A B C;
 
 /*
+  General two-endpoint action of the ordinary hom-category.
+
+  Surface/formula:
+    Hom_tele_func[x,x',y,y'][(g,f)] = Hom_func(g,f)
+    Hom_func(g,f)[h] = f o h o g
+
+  This is the ambient-category owner formerly hidden in the
+  profunctor-specific `Unit_prof_fapp1_func`: it packages the action of
+  Hom_A(-,-) on both endpoints without mentioning profunctors.
+*/
+symbol Hom_tele_func [A : Cat]
+  [x x' y y' : τ (Obj A)]
+  : τ (Functor
+      (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y')));
+
+symbol Hom_func [A : Cat]
+  [x x' y y' : τ (Obj A)]
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  : τ (Functor
+      (Hom_cat A x y)
+      (Hom_cat A x' y'));
+
+symbol Hom_fapp0 [A : Cat]
+  [x x' y y' : τ (Obj A)]
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y))
+  : τ (Hom A x' y');
+
+rule fapp0 (@Hom_tele_func $A $x $x' $y $y') (Struct_sigma $g $f)
+  ↪ @Hom_func $A $x $x' $y $y' $g $f;
+
+rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
+  ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
+
+// Identity middle arrow collapses to the existing one-slot postcomposition
+// normal form. This joins subject-reduction paths for older rules that expose
+// the point action of a two-endpoint Hom_func at an identity arrow.
+rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
+  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g;
+
+// Proof-time bridges for the semantic reading of Hom_fapp0. Runtime keeps the
+// stable Hom_fapp0 head; elaboration may identify it with raw composition or
+// with the normalized identity-functor postcomposition presentation reached
+// from one-slot pre/postcomposition actions.
+unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
+  ≡ @comp_fapp0
+      $A
+      $x'
+      _
+      $y'
+      $f
+      (@comp_fapp0 $A $x' $x $y $h $g)
+  ↪ [ tt ≡ tt ];
+
+unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
+  ≡ @hom_postcomp_fapp0
+      $A $A (@id Cat_cat $A)
+      $x'
+      $x
+      $y'
+      (@comp_fapp0 $A $x $y $y' $f $h)
+      $g
+  ↪ [ tt ≡ tt ];
+
+/*
   Ordinary isomorphism evidence is closed under explicit product-category
   pairs. This is the 1-categorical staging analogue of `omega_equiv_product`.
   The inverse-proof projections are intentionally left opaque until a
@@ -5837,6 +5905,53 @@ rule @fapp1_fapp0 _ _
         $B $B' $G
         (sigma_Snd $ab) (sigma_Snd $ab')
         (sigma_Snd $pq));
+
+// The product-composition presentation of two-endpoint hom action folds to
+// the dedicated Hom_cat action owner.
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
+      (@comp_prod_func
+        Cat_cat
+        (Hom_cat $A $x $y)
+        (Hom_cat $A $x' $y)
+        (Hom_cat $A $x' $y'))
+      (@Product_map_func
+        (Hom_cat $A $x' $x)
+        (Functor_cat
+          (Hom_cat $A $x $y)
+          (Hom_cat $A $x' $y))
+        (Hom_cat $A $y $y')
+        (Functor_cat
+          (Hom_cat $A $x' $y)
+          (Hom_cat $A $x' $y'))
+        (@hom_precomp_along_tele_func
+          $A $A (@id Cat_cat $A)
+          $y
+          $x'
+          $x)
+        (@hom_postcomp_tele_func
+          $A $A (@id Cat_cat $A)
+          $x'
+          $y
+          $y'))
+  ↪ @Hom_tele_func $A $x $x' $y $y';
+
+// Capped functor-level two-endpoint hom-action folds. Both one-slot orders
+// normalize to the same Hom_func owner.
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
+      (@hom_postcomp_func $A $A (@id Cat_cat $A) $x' $y $y' $f)
+      (@hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g)
+  ↪ @Hom_func $A $x $x' $y $y' $g $f;
+
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
+      (@hom_precomp_along_func $A $A (@id Cat_cat $A) $y' $x' $x $g)
+      (@hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f)
+  ↪ @Hom_func $A $x $x' $y $y' $g $f;
 
 /*
   Product evaluation: apply a functor to an object.
@@ -9727,52 +9842,16 @@ rule @fapp0
       (sigma_Snd $xy);
 
 // Full base-arrow action of the unit hom profunctor at constructed product
-// endpoints. The generic composite first maps a base arrow `(p,q)` to the pair
-// of pre/postcomposition functors, then composes that pair with
-// `Functor_comp_pair_func`.
+// endpoints. The public normal form is the general Hom_cat endpoint-action
+// owner; the product-composition presentation folds to this owner separately.
+// lhs-audit: keep 4 -- constructed pair endpoint is decomposed by the rule.
 rule @fapp1_func
-      (Product_cat (Op_cat $X) $X)
+      _
       Cat_cat
       (@Unit_prof $X)
       (Struct_sigma $x $y)
       (Struct_sigma $x' $y')
-  ↪ @comp_cat_fapp0
-      (Product_cat
-        (Hom_cat $X $x' $x)
-        (Hom_cat $X $y $y'))
-      (Product_cat
-        (Functor_cat
-          (Hom_cat $X $x $y)
-          (Hom_cat $X $x' $y))
-        (Functor_cat
-          (Hom_cat $X $x' $y)
-          (Hom_cat $X $x' $y')))
-      (Functor_cat
-        (Hom_cat $X $x $y)
-        (Hom_cat $X $x' $y'))
-      (@Functor_comp_pair_func
-        (Hom_cat $X $x $y)
-        (Hom_cat $X $x' $y)
-        (Hom_cat $X $x' $y'))
-      (@Product_map_func
-        (Hom_cat $X $x' $x)
-        (Functor_cat
-          (Hom_cat $X $x $y)
-          (Hom_cat $X $x' $y))
-        (Hom_cat $X $y $y')
-        (Functor_cat
-          (Hom_cat $X $x' $y)
-          (Hom_cat $X $x' $y'))
-        (@hom_precomp_along_tele_func
-          $X $X (@id Cat_cat $X)
-          $y
-          $x'
-          $x)
-        (@hom_postcomp_tele_func
-          $X $X (@id Cat_cat $X)
-          $x'
-          $y
-          $y'));
+  ↪ @Hom_tele_func $X $x $x' $y $y';
 
 // Capped base-arrow action, joined with the full-action projection above.
 rule @fapp1_fapp0
@@ -9782,28 +9861,14 @@ rule @fapp1_fapp0
       $xy
       $xy'
       $pq
-  ↪ @comp_cat_fapp0
-      (Hom_cat $X
-        (sigma_Fst $xy)
-        (sigma_Snd $xy))
-      (Hom_cat $X
-        (sigma_Fst $xy')
-        (sigma_Snd $xy))
-      (Hom_cat $X
-        (sigma_Fst $xy')
-        (sigma_Snd $xy'))
-      (@hom_postcomp_func
-        $X $X (@id Cat_cat $X)
-        (sigma_Fst $xy')
-        (sigma_Snd $xy)
-        (sigma_Snd $xy')
-        (sigma_Snd $pq))
-      (@hom_precomp_along_func
-        $X $X (@id Cat_cat $X)
-        (sigma_Snd $xy)
-        (sigma_Fst $xy')
-        (sigma_Fst $xy)
-        (sigma_Fst $pq));
+  ↪ @Hom_func
+      $X
+      (sigma_Fst $xy)
+      (sigma_Fst $xy')
+      (sigma_Snd $xy)
+      (sigma_Snd $xy')
+      (sigma_Fst $pq)
+      (sigma_Snd $pq);
 
 // Binary representable hom profunctor as endpoint reindexing of Unit_prof.
 //

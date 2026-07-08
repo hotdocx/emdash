@@ -2459,6 +2459,164 @@ assert [A B C : Cat]
   fapp0 (@Functor_comp_pair_func A B C) (Struct_sigma F G)
   ≡ @comp_cat_fapp0 A B C G F;
 
+// General Hom_cat endpoint-action owner.
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y')) ⊢
+  fapp0 (@Hom_tele_func A x x' y y') (Struct_sigma g f)
+  ≡ @Hom_func A x x' y y' g f;
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  fapp0 (@Hom_func A x x' y y' g f) h
+  ≡ @Hom_fapp0 A x x' y y' g f h;
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  : τ (
+      @Hom_fapp0 A x x' y y' g f h
+      =
+      @comp_fapp0
+        A
+        x'
+        y
+        y'
+        f
+        (@comp_fapp0 A x' x y h g));
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  : τ (
+      @Hom_fapp0 A x x' y y' g f h
+      =
+      @hom_postcomp_fapp0
+        A A (@id Cat_cat A)
+        x'
+        x
+        y'
+        (@comp_fapp0 A x y y' f h)
+        g);
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  : τ (
+      @Hom_fapp0 A x x' y y' g f h
+      =
+      @hom_postcomp_fapp0
+        A A (@id Cat_cat A)
+        x'
+        y
+        y'
+        f
+        (@hom_precomp_along_fapp0
+          A A (@id Cat_cat A)
+          y
+          x'
+          x
+          g
+          h));
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  : τ (
+      @Hom_fapp0 A x x' y y' g f h
+      =
+      @hom_precomp_along_fapp0
+        A A (@id Cat_cat A)
+        y'
+        x'
+        x
+        g
+        (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f h));
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A)) ⊢
+  @comp_fapp0
+    Cat_cat
+    (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
+    (Product_cat
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y))
+      (Functor_cat (Hom_cat A x' y) (Hom_cat A x' y')))
+    (Functor_cat (Hom_cat A x y) (Hom_cat A x' y'))
+    (@comp_prod_func
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat A x' y)
+      (Hom_cat A x' y'))
+    (@Product_map_func
+      (Hom_cat A x' x)
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y))
+      (Hom_cat A y y')
+      (Functor_cat (Hom_cat A x' y) (Hom_cat A x' y'))
+      (@hom_precomp_along_tele_func A A (@id Cat_cat A) y x' x)
+      (@hom_postcomp_tele_func A A (@id Cat_cat A) x' y y'))
+  ≡ @Hom_tele_func A x x' y y';
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A)) ⊢
+  @comp_cat_fapp0
+    (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
+    (Product_cat
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y))
+      (Functor_cat (Hom_cat A x' y) (Hom_cat A x' y')))
+    (Functor_cat (Hom_cat A x y) (Hom_cat A x' y'))
+    (@Functor_comp_pair_func
+      (Hom_cat A x y)
+      (Hom_cat A x' y)
+      (Hom_cat A x' y'))
+    (@Product_map_func
+      (Hom_cat A x' x)
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y))
+      (Hom_cat A y y')
+      (Functor_cat (Hom_cat A x' y) (Hom_cat A x' y'))
+      (@hom_precomp_along_tele_func A A (@id Cat_cat A) y x' x)
+      (@hom_postcomp_tele_func A A (@id Cat_cat A) x' y y'))
+  ≡ @Hom_tele_func A x x' y y';
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y')) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A x y)
+    (Hom_cat A x' y)
+    (Hom_cat A x' y')
+    (@hom_postcomp_func A A (@id Cat_cat A) x' y y' f)
+    (@hom_precomp_along_func A A (@id Cat_cat A) y x' x g)
+  ≡ @Hom_func A x x' y y' g f;
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y')) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A x y)
+    (Hom_cat A x y')
+    (Hom_cat A x' y')
+    (@hom_precomp_along_func A A (@id Cat_cat A) y' x' x g)
+    (@hom_postcomp_func A A (@id Cat_cat A) x y y' f)
+  ≡ @Hom_func A x x' y y' g f;
+
 // From emdash3_2.lp:1211.
 assert [A B I : Cat]
   (F : τ (Functor I A))
@@ -7025,22 +7183,14 @@ assert [A B X : Cat]
     (Struct_sigma a b)
     (Struct_sigma a' b')
     (Struct_sigma p q)
-  ≡ @comp_cat_fapp0
-      (Hom_cat X (fapp0 F a) (fapp0 G b))
-      (Hom_cat X (fapp0 F a') (fapp0 G b))
-      (Hom_cat X (fapp0 F a') (fapp0 G b'))
-      (@hom_postcomp_func
-        X X (@id Cat_cat X)
-        (fapp0 F a')
-        (fapp0 G b)
-        (fapp0 G b')
-        (@fapp1_fapp0 B X G b b' q))
-      (@hom_precomp_along_func
-        X X (@id Cat_cat X)
-        (fapp0 G b)
-        (fapp0 F a')
-        (fapp0 F a)
-        (@fapp1_fapp0 A X F a' a p));
+  ≡ @Hom_func
+      X
+      (fapp0 F a)
+      (fapp0 F a')
+      (fapp0 G b)
+      (fapp0 G b')
+      (@fapp1_fapp0 A X F a' a p)
+      (@fapp1_fapp0 B X G b b' q);
 
 assert [A B X : Cat]
   (F : τ (Functor A X))
@@ -7058,24 +7208,16 @@ assert [A B X : Cat]
       (Struct_sigma a b)
       (Struct_sigma a' b')
       (Struct_sigma p q))
-	    h
-	  ≡ @hom_postcomp_fapp0
-	      X
-	      X
-	      (@id Cat_cat X)
-	      (fapp0 F a')
-	      (fapp0 G b)
-	      (fapp0 G b')
-	      (@fapp1_fapp0 B X G b b' q)
-	      (@hom_precomp_along_fapp0
-	        X
-	        X
-	        (@id Cat_cat X)
-	        (fapp0 G b)
-	        (fapp0 F a')
-	        (fapp0 F a)
-	        (@fapp1_fapp0 A X F a' a p)
-	        h);
+    h
+  ≡ @Hom_fapp0
+      X
+      (fapp0 F a)
+      (fapp0 F a')
+      (fapp0 G b)
+      (fapp0 G b')
+      (@fapp1_fapp0 A X F a' a p)
+      (@fapp1_fapp0 B X G b b' q)
+      h;
 
 assert [B X : Cat]
   (G : τ (Functor B X))
@@ -7101,12 +7243,24 @@ assert [X : Cat]
       (Struct_sigma x y)
       (Struct_sigma x' y'))
     (Struct_sigma p q)
-  ≡ @comp_cat_fapp0
-      (Hom_cat X x y)
-      (Hom_cat X x' y)
-      (Hom_cat X x' y')
-      (@hom_postcomp_func X X (@id Cat_cat X) x' y y' q)
-      (@hom_precomp_along_func X X (@id Cat_cat X) y x' x p);
+  ≡ @Hom_func X x x' y y' p q;
+
+assert [X : Cat]
+  (x x' y y' : τ (Obj X))
+  (p : τ (Hom X x' x))
+  (q : τ (Hom X y y'))
+  (h : τ (Hom X x y)) ⊢
+  fapp0
+    (fapp0
+      (@fapp1_func
+        (Product_cat (Op_cat X) X)
+        Cat_cat
+        (@Unit_prof X)
+        (Struct_sigma x y)
+        (Struct_sigma x' y'))
+      (Struct_sigma p q))
+    h
+  ≡ @Hom_fapp0 X x x' y y' p q h;
 
 assert [X : Cat]
   (x x' y y' : τ (Obj X))
@@ -7119,12 +7273,7 @@ assert [X : Cat]
     (Struct_sigma x y)
     (Struct_sigma x' y')
     (Struct_sigma p q)
-  ≡ @comp_cat_fapp0
-      (Hom_cat X x y)
-      (Hom_cat X x' y)
-      (Hom_cat X x' y')
-      (@hom_postcomp_func X X (@id Cat_cat X) x' y y' q)
-      (@hom_precomp_along_func X X (@id Cat_cat X) y x' x p);
+  ≡ @Hom_func X x x' y y' p q;
 
 assert [A B X : Cat]
   (F : τ (Functor A X))

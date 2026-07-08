@@ -140,6 +140,10 @@ AREAS: list[Area] = [
         ("IsoEvidence", "iso_evidence"),
     ),
     Area(
+        "Hom-category endpoint action",
+        ("Hom_tele_func", "Hom_func", "Hom_fapp0"),
+    ),
+    Area(
         "Categorical univalence and omega equivalence",
         (
             "idtoiso_cat",
