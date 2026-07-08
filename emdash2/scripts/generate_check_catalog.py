@@ -208,7 +208,7 @@ AREAS: list[Area] = [
     ),
     Area(
         "Products, evaluation, curry/uncurry",
-        ("Product", "Eval", "curry", "uncurry"),
+        ("Product", "comp_prod", "Functor_comp_pair", "Eval", "curry", "uncurry"),
     ),
     Area(
         "Sigma/Pi totals, sections, and directed family calculus",

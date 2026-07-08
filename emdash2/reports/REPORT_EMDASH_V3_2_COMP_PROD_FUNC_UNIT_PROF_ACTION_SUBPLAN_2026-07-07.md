@@ -265,6 +265,65 @@ generic projection path is sufficient in every active consumer. Its RHS should
 be either the existing capped normal form or the corresponding `fapp0` of the
 new composite, whichever gives the cleaner stable normal form after probing.
 
+### Implementation Note 2026-07-08
+
+The first promoted slice found a useful source-presentation boundary. The
+generic composite above typechecks and works as the full-action normal form
+for constructed product endpoints:
+
+```text
+fapp1_func(Unit_prof X,(x,y),(x',y'))
+  -> Functor_comp_pair_func(A0,A1,A2)
+       o Product_map_func(preTele,postTele)
+```
+
+where:
+
+```text
+A0 = Hom_X(x,y)
+A1 = Hom_X(x',y)
+A2 = Hom_X(x',y')
+preTele  : Hom_X(x',x) -> (A0 -> A1)
+postTele : Hom_X(y,y') -> (A1 -> A2)
+```
+
+The fully opaque endpoint rule:
+
+```text
+fapp1_func(Unit_prof X,xy,xy')
+```
+
+did not promote directly. The composite term naturally has source:
+
+```text
+Product_cat
+  (Hom_cat X (sigma_Fst xy') (sigma_Fst xy))
+  (Hom_cat X (sigma_Snd xy)  (sigma_Snd xy'))
+```
+
+while the generic `fapp1_func` type presents the source as:
+
+```text
+Hom_cat (Product_cat (Op_cat X) X) xy xy'
+```
+
+The categories convert, and the corresponding `Functor` classifiers convert,
+but Lambdapi still does not accept the whole composite as a term across this
+boundary in the opaque-endpoint rewrite. A transparent alias with the old
+opaque full-action type failed for the same reason. The promoted rule is
+therefore the constructed-endpoint rule, and the arbitrary capped
+`fapp1_fapp0(Unit_prof X,xy,xy',pq)` rule remains the join for active
+consumers.
+
+This also clarifies the `comp_prod_fapp1_func` level: the full
+`fapp1_func(Unit_prof X,...)` projection is not itself literally
+`comp_prod_fapp1_func`. It is the functor obtained by composing
+`Product_map_func(preTele,postTele)` with `Functor_comp_pair_func`, i.e. with
+`comp_prod_func Cat_cat` at object level. `comp_prod_fapp1_func` belongs one
+projection later, to the arrow action of that product-composition functor on
+2-cells between paired pre/postcomposition functors, and to the later
+Cat-horizontal-action migration.
+
 ## Bridge Policy
 
 The product owner is the uncurried/product counterpart of `comp_fapp0`.
@@ -858,10 +917,24 @@ historical proof-symbol wrappers are cleanup targets.
 
 ## Side-Task Ledger
 
-- Active: implement `comp_prod_func` and migrate `Unit_prof` action away from
-  `Unit_prof_fapp1_func`.
-- Active cleanup: delete historical hom-action named equality wrappers listed
-  above.
+- Completed 2026-07-08: deleted the historical hom-action named equality
+  wrappers listed above.
+- Completed 2026-07-08: promoted `comp_prod_func`,
+  `comp_prod_fapp1_func`, `comp_prod_fapp1_fapp0`, and the transparent
+  `Functor_comp_pair_func` Cat specialization with focused checks.
+- Completed 2026-07-08: deleted `Unit_prof_fapp1_func` from the kernel and
+  routed constructed-endpoint `Unit_prof` full action through
+  `Functor_comp_pair_func o Product_map_func(preTele,postTele)`.
+- Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
+  after the cleanup/core migration; `make catalog` regenerates the check
+  catalog without unclassified checks; `make warning-summary` reports 1,306
+  warnings (1,141 unjoinable critical pairs and 165 replaceable-pattern
+  warnings), still dominated by the broad `comp_fapp0`,
+  `hom_postcomp_fapp0`, and `tapp0_fapp0` overlap families.
+- Active follow-up: investigate a generic product-hom source bridge, if a
+  concrete consumer needs opaque-endpoint `fapp1_func(Unit_prof X,xy,xy')` to
+  normalize to the same composite rather than relying on the arbitrary capped
+  action join.
 - Active follow-up after the initial product-owner promotion: replace
   `comp_cat_cov_transf` and `comp_cat_con_transf` by identity-slot
   `comp_prod_fapp1_fapp0 Cat_cat` forms, moving their projection ladders before

@@ -2414,6 +2414,51 @@ assert [A B : Cat]
         (@comp_fapp0 A x y z g f)
         (@comp_fapp0 B u v w beta alpha);
 
+// Product/uncurried composition owner.
+assert [A : Cat]
+  [W X Z : τ (Obj A)]
+  (f : τ (Hom A W X))
+  (g : τ (Hom A X Z)) ⊢
+  fapp0 (@comp_prod_func A W X Z) (Struct_sigma f g)
+  ≡ @comp_fapp0 A W X Z g f;
+
+assert [A : Cat]
+  [W X Z : τ (Obj A)]
+  (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z))))
+  (alpha : τ (Hom
+    (Product_cat (Hom_cat A W X) (Hom_cat A X Z))
+    pg
+    pg')) ⊢
+  @fapp1_func
+    (Product_cat (Hom_cat A W X) (Hom_cat A X Z))
+    (Hom_cat A W Z)
+    (@comp_prod_func A W X Z)
+    pg
+    pg'
+  ≡ @comp_prod_fapp1_func A W X Z pg pg';
+
+assert [A : Cat]
+  [W X Z : τ (Obj A)]
+  (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z))))
+  (alpha : τ (Hom
+    (Product_cat (Hom_cat A W X) (Hom_cat A X Z))
+    pg
+    pg')) ⊢
+  @fapp1_fapp0
+    (Product_cat (Hom_cat A W X) (Hom_cat A X Z))
+    (Hom_cat A W Z)
+    (@comp_prod_func A W X Z)
+    pg
+    pg'
+    alpha
+  ≡ @comp_prod_fapp1_fapp0 A W X Z pg pg' alpha;
+
+assert [A B C : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor B C)) ⊢
+  fapp0 (@Functor_comp_pair_func A B C) (Struct_sigma F G)
+  ≡ @comp_cat_fapp0 A B C G F;
+
 // From emdash3_2.lp:1211.
 assert [A B I : Cat]
   (F : τ (Functor I A))
@@ -7045,17 +7090,23 @@ assert [X : Cat]
   ≡ Hom_cat X x y;
 
 assert [X : Cat]
-  (x x' y y' : τ (Obj X)) ⊢
-  @fapp1_func
-    (Product_cat (Op_cat X) X)
-    Cat_cat
-    (@Unit_prof X)
-    (Struct_sigma x y)
-    (Struct_sigma x' y')
-  ≡ @Unit_prof_fapp1_func
-      X
+  (x x' y y' : τ (Obj X))
+  (p : τ (Hom X x' x))
+  (q : τ (Hom X y y')) ⊢
+  fapp0
+    (@fapp1_func
+      (Product_cat (Op_cat X) X)
+      Cat_cat
+      (@Unit_prof X)
       (Struct_sigma x y)
-      (Struct_sigma x' y');
+      (Struct_sigma x' y'))
+    (Struct_sigma p q)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X x y)
+      (Hom_cat X x' y)
+      (Hom_cat X x' y')
+      (@hom_postcomp_func X X (@id Cat_cat X) x' y y' q)
+      (@hom_precomp_along_func X X (@id Cat_cat X) y x' x p);
 
 assert [X : Cat]
   (x x' y y' : τ (Obj X))
