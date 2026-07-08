@@ -440,6 +440,202 @@ The endpoint labels matter: after the first one-slot action `(id_F,eta)`, the
 second functor slot has moved from `G` to `H`, so the second one-slot action is
 `(alpha,id_H)`, not `(alpha,id_G)`.
 
+## Identity-Slot Projection Ladder Formulation
+
+The following `CovProd` and `ConProd` names are report-level abbreviations
+only. Do not add kernel symbols with these names unless a focused probe shows
+that direct `comp_prod_fapp1_fapp0` LHSs are infeasible. In promoted rules, use
+the actual product pair representation that checks best. `Product_pair` is the
+readable spelling; because it is transparent, an actual rule LHS may need the
+underlying `Struct_sigma` form after probing.
+
+Readable product notation:
+
+```text
+PairObj(A,B,x,y)
+  := Product_pair x y
+
+PairArr(A,B,x,x',y,y',alpha,beta)
+  := Product_pair alpha beta
+```
+
+### Covariant One-Slot Action
+
+This replaces current `comp_cat_cov_transf`.
+
+Use current file-style abbreviations:
+
+```text
+EX := @fapp0 K Cat_cat E X
+EY := @fapp0 K Cat_cat E Y
+L  := @fapp1_fapp0 K Cat_cat E X Y f
+
+P Q : Functor W EX
+eta : Transf P Q
+```
+
+Here `L : Functor EX EY`, so the old postcomposition-by-`L` transfor
+`comp_cat_cov_transf(K,E,W,X,Y,f,P,Q,eta)` should become the identity-second
+slot Cat instance:
+
+```text
+CovProd(K,E,W,X,Y,f,P,Q,eta)
+  := @comp_prod_fapp1_fapp0
+       Cat_cat
+       W EX EY
+       (@Product_pair
+          (Functor_cat W EX)
+          (Functor_cat EX EY)
+          P L)
+       (@Product_pair
+          (Functor_cat W EX)
+          (Functor_cat EX EY)
+          Q L)
+       (@Product_pair
+          (Hom_cat (Functor_cat W EX) P Q)
+          (Hom_cat (Functor_cat EX EY) L L)
+          eta
+          (@id (Functor_cat EX EY) L))
+```
+
+The old `comp_cat_cov_transf` projection ladder should move to LHSs headed by
+this identity-second-slot `comp_prod_fapp1_fapp0 Cat_cat` form:
+
+```text
+tapp0_fapp0 CovProd i
+  -> @fapp1_fapp0
+       EX EY L
+       (@fapp0 W EX P i)
+       (@fapp0 W EX Q i)
+       (@tapp0_fapp0 W EX P Q i eta)
+
+tapp1_func CovProd i j
+  -> @comp_cat_fapp0
+       (Hom_cat W i j)
+       (Hom_cat EX
+         (@fapp0 W EX P i)
+         (@fapp0 W EX Q j))
+       (Hom_cat EY
+         (@fapp0 EX EY L (@fapp0 W EX P i))
+         (@fapp0 EX EY L (@fapp0 W EX Q j)))
+       (@fapp1_func
+         EX EY L
+         (@fapp0 W EX P i)
+         (@fapp0 W EX Q j))
+       (@tapp1_func W EX P Q i j eta)
+
+tapp1_fapp0 CovProd p
+  -> @fapp1_fapp0
+       EX EY L
+       (@fapp0 W EX P i)
+       (@fapp0 W EX Q j)
+       (@tapp1_fapp0 W EX P Q i j eta p)
+```
+
+The identity collapse should also move:
+
+```text
+CovProd(K,E,W,X,Y,f,P,P,@id (Functor_cat W EX) P)
+  -> @id
+       (Functor_cat W EY)
+       (@comp_cat_fapp0 W EX EY L P)
+```
+
+### Contravariant One-Slot Action
+
+This replaces current `comp_cat_con_transf`.
+
+Use current file-style abbreviations:
+
+```text
+EX := @fapp0 K Cat_cat E X
+EY := @fapp0 K Cat_cat E Y
+L  := @fapp1_fapp0 K Cat_cat E X Y F
+
+R S : Functor EY Z
+eta : Transf R S
+```
+
+Here `L : Functor EX EY`, so the old precomposition-by-`L` transfor
+`comp_cat_con_transf(K,E,Z,X,Y,F,R,S,eta)` should become the identity-first
+slot Cat instance:
+
+```text
+ConProd(K,E,Z,X,Y,F,R,S,eta)
+  := @comp_prod_fapp1_fapp0
+       Cat_cat
+       EX EY Z
+       (@Product_pair
+          (Functor_cat EX EY)
+          (Functor_cat EY Z)
+          L R)
+       (@Product_pair
+          (Functor_cat EX EY)
+          (Functor_cat EY Z)
+          L S)
+       (@Product_pair
+          (Hom_cat (Functor_cat EX EY) L L)
+          (Hom_cat (Functor_cat EY Z) R S)
+          (@id (Functor_cat EX EY) L)
+          eta)
+```
+
+The old `comp_cat_con_transf` projection ladder should move to LHSs headed by
+this identity-first-slot `comp_prod_fapp1_fapp0 Cat_cat` form:
+
+```text
+tapp0_fapp0 ConProd i
+  -> @tapp0_fapp0
+       EY Z R S
+       (@fapp0 EX EY L i)
+       eta
+
+tapp1_func ConProd i j
+  -> @comp_cat_fapp0
+       (Hom_cat EX i j)
+       (Hom_cat EY
+         (@fapp0 EX EY L i)
+         (@fapp0 EX EY L j))
+       (Hom_cat Z
+         (@fapp0 EY Z R (@fapp0 EX EY L i))
+         (@fapp0 EY Z S (@fapp0 EX EY L j)))
+       (@tapp1_func
+         EY Z R S
+         (@fapp0 EX EY L i)
+         (@fapp0 EX EY L j)
+         eta)
+       (@fapp1_func EX EY L i j)
+
+tapp1_fapp0 ConProd p
+  -> @tapp1_fapp0
+       EY Z R S
+       (@fapp0 EX EY L i)
+       (@fapp0 EX EY L j)
+       eta
+       (@fapp1_fapp0 EX EY L i j p)
+```
+
+The identity collapse should also move:
+
+```text
+ConProd(K,E,Z,X,Y,F,R,R,@id (Functor_cat EY Z) R)
+  -> @id
+       (Functor_cat EX Z)
+       (@comp_cat_fapp0 EX EY Z R L)
+```
+
+This section deliberately does not restate the entry-point rules from
+`hom_postcomp_fapp1_fapp0`, `hom_precomp_along_fapp1_fapp0`, or the future
+generic telescope-transfor heads. Those are covered by the surrounding
+ownership plan and should be formulated against the exact checked
+`comp_prod_fapp1_fapp0` term after the core owner exists. The point here is
+only the one-slot projection-ladder migration:
+
+```text
+old comp_cat_cov_transf / comp_cat_con_transf projection ladders
+  -> identity-slot comp_prod_fapp1_fapp0 Cat_cat projection ladders
+```
+
 ## Non-Goals
 
 Do not add kernel symbols such as:
