@@ -2476,78 +2476,24 @@ assert [A : Cat]
   ≡ @Hom_fapp0 A x x' y y' g f h;
 
 assert [A : Cat]
-  (x x' y y' : τ (Obj A))
-  (g : τ (Hom A x' x))
+  (x y y' : τ (Obj A))
   (f : τ (Hom A y y'))
   (h : τ (Hom A x y)) ⊢
-  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  eq_refl (@Hom_fapp0 A x x y y' (@id A x) f h)
   : τ (
-      @Hom_fapp0 A x x' y y' g f h
+      @Hom_fapp0 A x x y y' (@id A x) f h
       =
-      @comp_fapp0
-        A
-        x'
-        y
-        y'
-        f
-        (@comp_fapp0 A x' x y h g));
+      @comp_fapp0 A x y y' f h);
 
 assert [A : Cat]
-  (x x' y y' : τ (Obj A))
+  (x x' y : τ (Obj A))
   (g : τ (Hom A x' x))
-  (f : τ (Hom A y y'))
   (h : τ (Hom A x y)) ⊢
-  eq_refl (@Hom_fapp0 A x x' y y' g f h)
+  eq_refl (@Hom_fapp0 A x x' y y g (@id A y) h)
   : τ (
-      @Hom_fapp0 A x x' y y' g f h
+      @Hom_fapp0 A x x' y y g (@id A y) h
       =
-      @hom_postcomp_fapp0
-        A A (@id Cat_cat A)
-        x'
-        x
-        y'
-        (@comp_fapp0 A x y y' f h)
-        g);
-
-assert [A : Cat]
-  (x x' y y' : τ (Obj A))
-  (g : τ (Hom A x' x))
-  (f : τ (Hom A y y'))
-  (h : τ (Hom A x y)) ⊢
-  eq_refl (@Hom_fapp0 A x x' y y' g f h)
-  : τ (
-      @Hom_fapp0 A x x' y y' g f h
-      =
-      @hom_postcomp_fapp0
-        A A (@id Cat_cat A)
-        x'
-        y
-        y'
-        f
-        (@hom_precomp_along_fapp0
-          A A (@id Cat_cat A)
-          y
-          x'
-          x
-          g
-          h));
-
-assert [A : Cat]
-  (x x' y y' : τ (Obj A))
-  (g : τ (Hom A x' x))
-  (f : τ (Hom A y y'))
-  (h : τ (Hom A x y)) ⊢
-  eq_refl (@Hom_fapp0 A x x' y y' g f h)
-  : τ (
-      @Hom_fapp0 A x x' y y' g f h
-      =
-      @hom_precomp_along_fapp0
-        A A (@id Cat_cat A)
-        y'
-        x'
-        x
-        g
-        (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f h));
+      @comp_fapp0 A x' x y h g);
 
 assert [A : Cat]
   (x x' y y' : τ (Obj A)) ⊢

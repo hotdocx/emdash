@@ -3842,28 +3842,15 @@ rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
 rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
   ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g;
 
-// Proof-time bridges for the semantic reading of Hom_fapp0. Runtime keeps the
-// stable Hom_fapp0 head; elaboration may identify it with raw composition or
-// with the normalized identity-functor postcomposition presentation reached
-// from one-slot pre/postcomposition actions.
-unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
-  ≡ @comp_fapp0
-      $A
-      $x'
-      _
-      $y'
-      $f
-      (@comp_fapp0 $A $x' $x $y $h $g)
+// Narrow proof-time bridges for identity endpoint actions. Runtime keeps the
+// stable Hom_fapp0 head; broader two-slot semantic comparisons are deferred
+// until the precomposition/postcomposition normal-form boundary is retargeted.
+unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
+  ≡ @comp_fapp0 $A $x $y $y' $f $h
   ↪ [ tt ≡ tt ];
 
-unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
-  ≡ @hom_postcomp_fapp0
-      $A $A (@id Cat_cat $A)
-      $x'
-      $x
-      $y'
-      (@comp_fapp0 $A $x $y $y' $f $h)
-      $g
+unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
+  ≡ @comp_fapp0 $A $x' $x $y $h $g
   ↪ [ tt ≡ tt ];
 
 /*

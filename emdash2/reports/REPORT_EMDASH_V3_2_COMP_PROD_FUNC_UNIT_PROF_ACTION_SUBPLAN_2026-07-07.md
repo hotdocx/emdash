@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: active subtask; cleanup, `comp_prod_func`, and the general `Hom_*` action-owner correction have been promoted; next phase is Cat-horizontal-action migration
+Status: active subtask; cleanup, `comp_prod_func`, and the general `Hom_*` action-owner correction have been promoted; current correction narrows `Hom_fapp0` proof-time bridges to identity endpoints and records the broader object-level cleanup as deferred; next phase is Cat-horizontal-action migration
 
 ## Active Goal
 
@@ -521,31 +521,50 @@ hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h))
   -> Hom_fapp0(g,f,h)
 ```
 
-Those runtime rules compete with the existing identity-functor
-precomposition-to-postcomposition canonicalization and the older
-nested-postcomposition accumulation rules. The correct immediate join is
-proof-time compatibility for `Hom_fapp0`, not another object-level runtime
-normal form:
+Those runtime rules typecheck under the current legacy normal-form boundary,
+but their intended conversion assertions do not pass: the existing
+identity-functor precomposition-to-postcomposition rule rewrites the
+precomposition subterm away before the new `Hom_fapp0` fold can become the
+ordinary normal form. A warning-enabled probe also showed that adding the two
+object folds now increases overlap noise without a passing checked consumer.
+
+The corrected immediate join is therefore narrower than the first promoted
+draft. Do not keep broad proof-time bridges asserting the fully two-slot
+reading
 
 ```text
 Hom_fapp0(g,f,h) == f o (h o g)
-Hom_fapp0(g,f,h) == (f o h)_*(g)
+Hom_fapp0(g,f,h) == hom_postcomp_fapp0(id_A, f o h, g)
 ```
 
-The second equality is written in the kernel as the normalized identity-functor
-postcomposition presentation:
+as a general proof-time comparison. Instead, keep only the one-slot
+identity-endpoint degeneracies:
 
 ```text
-hom_postcomp_fapp0(id_A, comp_fapp0(f,h), g)
+Hom_fapp0(id_x,f,h) == f o h
+Hom_fapp0(g,id_y,h) == h o g
 ```
 
-The surface one-slot expressions involving
-`hom_postcomp_fapp0(f, hom_precomp_along_fapp0(g,h))` and
-`hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h))` reduce to that normalized
-postcomposition presentation, and then elaborate by the direct `Hom_fapp0`
-unification bridge. This is intentionally proof-time only: ordinary conversion
-assertions should not expect these object-level terms to reduce to
-`Hom_fapp0`.
+These identity-slot bridges support the cases where one endpoint action is
+already trivial, without claiming that the current runtime presentation has
+settled the fully two-sided object-level hom action.
+
+The broader object-level design is deferred to a retargeting cleanup. That
+cleanup should delete or demote the legacy runtime canonicalization
+
+```text
+hom_precomp_along_fapp0(id_A,h,g) -> hom_postcomp_fapp0(id_A,g,h)
+```
+
+and then retarget downstream consumers that currently rely on that
+postcomposition normal form. Known probe failures point at the component rules
+around `hom_postcomp_tele_fapp1_fapp0` and the representable-precomposition
+strictness rules around `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`. After that
+retargeting, re-probe the two object-level `Hom_fapp0` folds above with
+ordinary conversion assertions. A larger future rearchitecture may replace
+identity-functor precomposition-as-postcomposition runtime normalization by
+primitive contravariant hom-action owners related to the covariant owners only
+by proof-time rules.
 
 This correction means `comp_prod_func` remains part of the architecture, but
 it is not the final public normal form for the `Unit_prof` endpoint action.
@@ -1152,14 +1171,15 @@ Updated order after the 2026-07-08 `Hom_*` correction:
      LHS, to `Hom_tele_func`;
    - add capped folds from both one-slot compositions
      `post_f o pre_g` and `pre_g_at_y' o post_f` to `Hom_func`;
-   - do not add object-level runtime folds to `Hom_fapp0`; instead add
-     proof-time `Hom_fapp0` bridges to raw nested `comp_fapp0` and to the
-     normalized identity-functor postcomposition presentation.
+   - do not add object-level runtime folds to `Hom_fapp0`; after the latest
+     correction, keep only the narrow identity-slot proof-time bridges
+     `Hom_fapp0(id_x,f,h) == f o h` and
+     `Hom_fapp0(g,id_y,h) == h o g`.
 8. Completed: add focused checks for:
    - full and capped `Unit_prof` action through `Hom_*`;
    - the product-composition presentation folding into `Hom_*`;
-   - both pointwise one-slot object orders joining proof-time through
-     `Hom_fapp0` by `eq_refl` checks;
+   - identity-left and identity-right endpoint actions joining proof-time
+     through `Hom_fapp0` by `eq_refl` checks;
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
 9. Completed: run bounded `make check`, refresh catalog, and run warning
    summary after the `Hom_*` correction.
@@ -1195,15 +1215,26 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   capped `Unit_prof` base-arrow action to that owner; added folds from the
   product-composition presentation to `Hom_tele_func`; added capped
   functor-level one-slot folds to `Hom_func`.
-- Completed 2026-07-08: did not promote object-level runtime folds from
-  nested `hom_postcomp_fapp0` / `hom_precomp_along_fapp0` presentations to
-  `Hom_fapp0`. Probe `tmp/probes/hom_action_owner_probe4.lp` showed those
-  rules fight existing identity-functor precomposition and nested
-  postcomposition normal forms. Instead, promoted proof-time `Hom_fapp0`
-  bridges to raw nested `comp_fapp0` and to the normalized identity-functor
-  postcomposition presentation; probe
-  `tmp/probes/hom_fapp0_unif_normalized_probe.lp` checked the raw and both
-  one-slot surface presentations by `eq_refl`.
+- Corrected 2026-07-08: do not promote object-level runtime folds from nested
+  `hom_postcomp_fapp0` / `hom_precomp_along_fapp0` presentations to
+  `Hom_fapp0`, and do not keep the broad proof-time bridges from arbitrary
+  `Hom_fapp0(g,f,h)` to raw nested `comp_fapp0` or to normalized
+  identity-functor postcomposition. Keep only the two narrow identity-slot
+  unification bridges:
+  `Hom_fapp0(id_x,f,h) == comp_fapp0(f,h)` and
+  `Hom_fapp0(g,id_y,h) == comp_fapp0(h,g)`.
+- Deferred `Hom_fapp0` object-action cleanup: delete or demote the legacy
+  runtime rule
+  `hom_precomp_along_fapp0(id_A,h,g) -> hom_postcomp_fapp0(id_A,g,h)`, retarget
+  downstream consumers that currently depend on the postcomposition normal
+  form, especially rules around `hom_postcomp_tele_fapp1_fapp0` and
+  `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`, then re-probe the two direct
+  object-level folds
+  `hom_postcomp_fapp0(f, hom_precomp_along_fapp0(g,h)) -> Hom_fapp0(g,f,h)`
+  and
+  `hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h)) -> Hom_fapp0(g,f,h)`
+  with ordinary conversion assertions and warning-enabled overlap
+  classification.
 - Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
   after the `Hom_*` correction; `make catalog` regenerates the check catalog
   without unclassified checks; `make ci` passes, including strict LHS audit;
