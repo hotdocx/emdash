@@ -5,26 +5,38 @@ Last reviewed: 2026-07-08
 Plan-ID: EMDASH-V3-2-COMP-PROD-FUNC-UNIT-PROF-ACTION-2026-07-07
 Depends-On: EMDASH-V3-2-PROF-CAT-PRIMITIVE-REDESIGN-2026-07-06; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Parent-Plan: REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md
-Supersedes: no whole report; refines the promoted `Unit_prof` action slice by replacing the residual `Unit_prof_fapp1_func` stable head with a general product-composition owner
+Supersedes: no whole report; refines the promoted `Unit_prof` action slice by replacing the residual profunctor-specific `Unit_prof_fapp1_func` stable head with a general hom-bifunctor action owner, using `comp_prod_func` as the product-composition layer underneath
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: proposed active subtask for the next implementation slice
+Status: active subtask; cleanup and `comp_prod_func` core have been promoted, next phase is the general `Hom_*` action-owner correction before Cat-horizontal-action migration
 
 ## Active Goal
 
-The next active goal is to remove the residual `Unit_prof_fapp1_func` owner by
-introducing a general product/uncurried composition functor for ordinary homs.
-This new owner is the product-form counterpart of the existing object-level
-`comp_fapp0`, and the proof-time counterpart of the existing curried/telescope
-hom-action owners such as `hom_precomp_along_tele_func` and
-`hom_postcomp_tele_func`.
+The active goal has two layers.
+
+The first layer, already promoted, removes the residual profunctor-specific
+`Unit_prof_fapp1_func` owner by introducing a general product/uncurried
+composition functor for ordinary homs. This new owner is the product-form
+counterpart of the existing object-level `comp_fapp0`, and the proof-time
+counterpart of the existing curried/telescope hom-action owners such as
+`hom_precomp_along_tele_func` and `hom_postcomp_tele_func`.
+
+The second layer is the correction discovered after reviewing the promoted
+`fapp1_func(Unit_prof)` rule: the kernel still needs a stable general owner for
+the two-endpoint arrow action of `Hom_cat` itself. The deleted
+`Unit_prof_fapp1_func` was too profunctor-specific, but the underlying stable
+head should reappear as a general hom-bifunctor action owner, tentatively
+named `Hom_tele_func` / `Hom_func` / `Hom_fapp0`. The `comp_prod_func` and
+`Product_map_func` composite should fold into this `Hom_*` owner rather than
+remain the public normal form of `Unit_prof` base-arrow action.
 
 The intended ownership boundary is:
 
 ```text
 comp_fapp0        : less-internalized object-level composition
 comp_prod_func    : product/uncurried functorial composition owner
+Hom_*             : general two-endpoint action owner of Hom_cat
 hom_*_tele_func   : curried/telescope hom-action owners
 Unit_prof         : profunctor whose action should use the generic owner
 ```
@@ -33,7 +45,9 @@ The earlier working name `hom_uncurry_func` is now only explanatory. The
 preferred kernel-facing name for the new general owner is `comp_prod_func`.
 The shorter name `comp_func` remains possible, but `comp_prod_func` better
 signals that the domain is a product of hom categories and avoids confusion
-with the existing object-level `comp_fapp0`.
+with the existing object-level `comp_fapp0`. The `Hom_*` names are separate:
+they are not a replacement for `comp_prod_func`; they package the specific
+bifunctorial action of `Hom_cat` on both endpoints.
 
 ## Source Review
 
@@ -54,7 +68,10 @@ The current source has:
   so deleting them requires moving those projection ladders to the
   corresponding identity-slot instances of `comp_prod_fapp1_fapp0 Cat_cat`.
 - `Unit_prof_fapp1_func`, a residual profunctor-specific stable head whose
-  object action is just "precompose, postcompose, then compose".
+  object action is just "precompose, postcompose, then compose". The first
+  promoted slice deleted this name, but the corrected plan restores the
+  concept as a general `Hom_cat` action owner, not as a `Unit_prof`-specific
+  owner.
 - Cat-specialized telescope-transfor heads
   `hom_precomp_along_cat_tele_transf` and
   `hom_postcomp_cat_tele_transf`, whose `tapp*` projection rules are better
@@ -69,8 +86,10 @@ hom_precomp_along_fapp0(F,h,g) == comp_fapp0(g,F[h])
 hom_postcomp_fapp0(F,h,g)      == comp_fapp0(F[h],g)
 ```
 
-The next slice should extend this architecture by adding the missing
-product-form composition owner, not by adding a representable-specific or
+The first slice extended this architecture by adding the missing product-form
+composition owner. The next slice should add the missing `Hom_cat`-specific
+two-endpoint action owner. That owner is general in the ambient category `A`
+and should be used by `Unit_prof`; it should not be a representable-specific or
 Cat-specific owner.
 
 ## Core Owner
@@ -222,7 +241,13 @@ component and off-diagonal transfor projections.
 
 ## Unit Prof Migration
 
-After `comp_prod_func` exists, `Unit_prof_fapp1_func` should be deleted.
+After `comp_prod_func` exists, the profunctor-specific
+`Unit_prof_fapp1_func` name should be deleted, but the stable owner concept
+should not disappear. The corrected target is a general `Hom_cat`
+two-endpoint action owner, described in the next section. The first promoted
+slice temporarily routed constructed-endpoint `Unit_prof` full action directly
+through the product-composition composite below; the corrected plan makes that
+composite fold into the general `Hom_*` owner.
 
 For `xy xy' : Obj(Product_cat(Op_cat X) X)`, define:
 
@@ -244,7 +269,7 @@ postTele =
     (sigma_Snd xy')
 ```
 
-Then the full action of `Unit_prof` should be the composite:
+The intermediate product-composition presentation of the full action is:
 
 ```text
 Functor_comp_pair_func A0 A1 A2
@@ -261,9 +286,9 @@ hom_postcomp_func(id_X,q) o hom_precomp_along_func(id_X,p)
 
 The direct capped `@fapp1_fapp0 _ Cat_cat (@Unit_prof X)` rule should remain
 as a join for the full-action projection path unless a focused probe shows the
-generic projection path is sufficient in every active consumer. Its RHS should
-be either the existing capped normal form or the corresponding `fapp0` of the
-new composite, whichever gives the cleaner stable normal form after probing.
+generic projection path is sufficient in every active consumer. Under the
+corrected plan, its RHS should become the capped `Hom_func` owner rather than
+the explicit composite of one-slot pre/postcomposition functors.
 
 ### Implementation Note 2026-07-08
 
@@ -323,6 +348,196 @@ This also clarifies the `comp_prod_fapp1_func` level: the full
 projection later, to the arrow action of that product-composition functor on
 2-cells between paired pre/postcomposition functors, and to the later
 Cat-horizontal-action migration.
+
+### Correction 2026-07-08: General Hom Action Owner
+
+The promoted composite-based `Unit_prof` rule exposed a missing owner. The old
+`Unit_prof_fapp1_func` should not return as a profunctor-specific symbol, but
+the kernel does need a stable general action owner for `Hom_cat` itself. This
+owner packages the action of `Hom_A(-,-)` on a pair of endpoint arrows:
+
+```text
+g : Hom_A(x',x)
+f : Hom_A(y,y')
+h : Hom_A(x,y)
+
+Hom_A(g,f)(h) = f o h o g
+```
+
+Tentative kernel names:
+
+```text
+symbol Hom_tele_func [A : Cat]
+  [x x' y y' : tau (Obj A)]
+  : tau (Functor
+      (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x' y')));
+
+symbol Hom_func [A : Cat]
+  [x x' y y' : tau (Obj A)]
+  (g : tau (Hom A x' x))
+  (f : tau (Hom A y y'))
+  : tau (Functor
+      (Hom_cat A x y)
+      (Hom_cat A x' y'));
+
+symbol Hom_fapp0 [A : Cat]
+  [x x' y y' : tau (Obj A)]
+  (g : tau (Hom A x' x))
+  (f : tau (Hom A y y'))
+  (h : tau (Hom A x y))
+  : tau (Hom A x' y');
+```
+
+The exact names can still be adjusted during probing. `Hom_func` is the
+shortest name and matches the user-facing intent, but it is close to the
+existing classifier name `Hom`; if this reads too ambiguously in the kernel,
+`Hom_action_func` / `Hom_action_fapp0` would be the conservative fallback.
+
+The projection ladder should be:
+
+```text
+rule fapp0 (@Hom_tele_func A x x' y y') (Struct_sigma g f)
+  -> @Hom_func A x x' y y' g f
+
+rule fapp0 (@Hom_func A x x' y y' g f) h
+  -> @Hom_fapp0 A x x' y y' g f h
+```
+
+Add the corresponding full/capped `fapp1_*` projections only after the
+object-level and functor-level owner has stabilized. The immediate
+`Unit_prof` correction needs `Hom_tele_func`, `Hom_func`, and `Hom_fapp0`;
+the higher-arrow projections can be introduced as the concrete checks demand
+them.
+
+The `Unit_prof` rules should then become:
+
+```text
+rule @fapp1_func
+      (Product_cat (Op_cat A) A)
+      Cat_cat
+      (@Unit_prof A)
+      (Struct_sigma x y)
+      (Struct_sigma x' y')
+  -> @Hom_tele_func A x x' y y'
+
+rule @fapp1_fapp0
+      _
+      Cat_cat
+      (@Unit_prof A)
+      xy
+      xy'
+      pq
+  -> @Hom_func
+       A
+       (sigma_Fst xy)
+       (sigma_Fst xy')
+       (sigma_Snd xy)
+       (sigma_Snd xy')
+       (sigma_Fst pq)
+       (sigma_Snd pq)
+```
+
+For opaque endpoints, the same source-presentation issue found in the first
+slice may still appear. If so, start with constructed endpoints for
+`fapp1_func(Unit_prof)` and keep the opaque capped `fapp1_fapp0(Unit_prof)`
+join, exactly as the first slice did.
+
+The composite product presentation should fold to `Hom_tele_func`. Per SOP,
+the LHS should use the unfolded `Functor_comp_pair_func` body, i.e.
+`@comp_prod_func Cat_cat A0 A1 A2`, rather than relying on the transparent
+alias as the discriminator:
+
+```text
+@comp_cat_fapp0
+  (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
+  (Product_cat
+    (Functor_cat A0 A1)
+    (Functor_cat A1 A2))
+  (Functor_cat A0 A2)
+  (@comp_prod_func Cat_cat A0 A1 A2)
+  (@Product_map_func
+    (Hom_cat A x' x)
+    (Functor_cat A0 A1)
+    (Hom_cat A y y')
+    (Functor_cat A1 A2)
+    preTele
+    postTele)
+  -> @Hom_tele_func A x x' y y'
+```
+
+where:
+
+```text
+A0 = Hom_cat A x  y
+A1 = Hom_cat A x' y
+A2 = Hom_cat A x' y'
+preTele  = hom_precomp_along_tele_func A A id_A y  x' x
+postTele = hom_postcomp_tele_func       A A id_A x' y  y'
+```
+
+The capped one-slot composite should fold to `Hom_func`:
+
+```text
+post_f o pre_g
+  -> Hom_func(g,f)
+
+pre_g_at_y' o post_f
+  -> Hom_func(g,f)
+```
+
+In kernel-shaped notation, the first fold is the current normal form:
+
+```text
+@comp_cat_fapp0
+  (Hom_cat A x y)
+  (Hom_cat A x' y)
+  (Hom_cat A x' y')
+  (@hom_postcomp_func A A id_A x' y y' f)
+  (@hom_precomp_along_func A A id_A y x' x g)
+  -> @Hom_func A x x' y y' g f
+```
+
+The second fold is the alternate order that solves the associativity problem:
+
+```text
+@comp_cat_fapp0
+  (Hom_cat A x y)
+  (Hom_cat A x y')
+  (Hom_cat A x' y')
+  (@hom_precomp_along_func A A id_A y' x' x g)
+  (@hom_postcomp_func A A id_A x y y' f)
+  -> @Hom_func A x x' y y' g f
+```
+
+At object level, both one-slot paths should join:
+
+```text
+hom_postcomp_fapp0(f, hom_precomp_along_fapp0(g,h))
+  -> Hom_fapp0(g,f,h)
+
+hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h))
+  -> Hom_fapp0(g,f,h)
+```
+
+Raw associativity folds may also be desirable:
+
+```text
+f o (h o g) -> Hom_fapp0(g,f,h)
+(f o h) o g -> Hom_fapp0(g,f,h)
+```
+
+but those raw `comp_fapp0` folds should be treated as higher-risk
+associativity joins. Probe the stable hom-action folds first. Promote raw
+folds only if a concrete check needs them and a warning-enabled probe
+classifies the interaction.
+
+This correction means `comp_prod_func` remains part of the architecture, but
+it is not the final public normal form for the `Unit_prof` endpoint action.
+The public normal form should be the general `Hom_*` owner. This should be
+implemented before continuing the planned migration of `comp_cat_cov_transf`,
+`comp_cat_con_transf`, and `comp_cat_func_func_tapp1_fapp0` to
+`comp_prod_fapp1_fapp0 Cat_cat` forms.
 
 ## Bridge Policy
 
@@ -888,32 +1103,59 @@ historical proof-symbol wrappers are cleanup targets.
 
 ## Implementation Order
 
-1. Delete the named equality-wrapper cleanup slice and update checks/catalog
-   only if references exist.
-2. Add `comp_prod_func` with object, full-action, and capped-action projection
-   heads.
-3. Add the transparent `Functor_comp_pair_func` Cat specialization.
-4. Add focused checks for the product owner:
+Updated order after the 2026-07-08 `Hom_*` correction:
+
+1. Completed: delete the named equality-wrapper cleanup slice and update
+   checks/catalog only if references exist.
+2. Completed: add `comp_prod_func` with object, full-action, and capped-action
+   projection heads.
+3. Completed: add the transparent `Functor_comp_pair_func` Cat
+   specialization.
+4. Completed: add focused checks for the product owner:
    - object action of `comp_prod_func`;
    - capped action through `comp_prod_fapp1_fapp0`;
    - Cat object action as ordinary functor composition.
-5. Replace `Unit_prof_fapp1_func` with the generic
-   `Functor_comp_pair_func o Product_map_func(preTele,postTele)` full action.
-6. Keep or reorient the direct capped `Unit_prof` action only as a projection
-   join, based on focused checks.
-7. Add focused checks for:
-   - full and capped `Unit_prof` action;
+5. Completed as an interim slice, now corrected by the next phase: replace the
+   old profunctor-specific `Unit_prof_fapp1_func` with the generic
+   `Functor_comp_pair_func o Product_map_func(preTele,postTele)` full action
+   for constructed endpoints, and keep the direct capped `Unit_prof` join.
+6. Next active phase: introduce the general `Hom_cat` endpoint-action owner:
+   - choose final names, starting from `Hom_tele_func`, `Hom_func`,
+     `Hom_fapp0`;
+   - add object/projection rules from `Hom_tele_func` to `Hom_func` and from
+     `Hom_func` to `Hom_fapp0`;
+   - add focused checks for the endpoint action on `g : x' -> x`,
+     `f : y -> y'`, and `h : x -> y`;
+   - probe whether constructed endpoints are sufficient or whether an opaque
+     endpoint source bridge is needed.
+7. In the same active phase, reorient `Unit_prof` action to the new owner:
+   - `fapp1_func(Unit_prof A,(x,y),(x',y')) -> Hom_tele_func(A,x,x',y,y')`;
+   - `fapp1_fapp0(Unit_prof A,xy,xy',pq) -> Hom_func(A,...)`;
+   - add folds from the product-composition presentation, using unfolded
+     `@comp_prod_func Cat_cat ...` instead of `Functor_comp_pair_func` on the
+     LHS, to `Hom_tele_func`;
+   - add capped folds from both one-slot compositions
+     `post_f o pre_g` and `pre_g_at_y' o post_f` to `Hom_func`;
+   - add object-level stable hom-action folds to `Hom_fapp0`, and only then
+     consider raw associativity folds if concrete checks require them.
+8. Add focused checks for:
+   - full and capped `Unit_prof` action through `Hom_*`;
+   - the product-composition presentation folding into `Hom_*`;
+   - both pointwise orders `(f o h) o g` and `f o (h o g)` joining through
+     `Hom_fapp0` when the corresponding folds are promoted;
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
-8. In the follow-up Cat-horizontal-action slice, move uses of
-   `comp_cat_cov_transf` and `comp_cat_con_transf` to identity-slot
-   `comp_prod_fapp1_fapp0 Cat_cat` forms, move their projection ladders to
-   those forms, and delete or temporarily alias the old names.
-9. In the same follow-up slice, demote or delete
-   `comp_cat_func_func_tapp1_fapp0` by making the arbitrary pair
-   `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` the normal form and adding the
-   probed composition fold that joins the old two one-slot action body.
-10. Run bounded `make check`, refresh catalog/health if checks changed, and run
-   warning summary before promotion.
+9. Run bounded `make check`, refresh catalog if checks changed, and run warning
+   summary after the `Hom_*` correction.
+10. Only after the `Hom_*` correction is stable, start the Cat-horizontal-action
+    slice: move uses of `comp_cat_cov_transf` and `comp_cat_con_transf` to
+    identity-slot `comp_prod_fapp1_fapp0 Cat_cat` forms, move their projection
+    ladders to those forms, and delete or temporarily alias the old names.
+11. In the same Cat-horizontal-action slice, demote or delete
+    `comp_cat_func_func_tapp1_fapp0` by making the arbitrary pair
+    `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` the normal form and adding the
+    probed composition fold that joins the old two one-slot action body.
+12. Run bounded `make check`, refresh catalog/health if checks changed, and run
+    warning summary before promotion.
 
 ## Side-Task Ledger
 
@@ -925,16 +1167,23 @@ historical proof-symbol wrappers are cleanup targets.
 - Completed 2026-07-08: deleted `Unit_prof_fapp1_func` from the kernel and
   routed constructed-endpoint `Unit_prof` full action through
   `Functor_comp_pair_func o Product_map_func(preTele,postTele)`.
+- Correction 2026-07-08: the preceding route is now understood as an interim
+  product-composition presentation, not the final public normal form. The next
+  active implementation phase is to introduce a general `Hom_cat` endpoint
+  action owner (`Hom_tele_func` / `Hom_func` / `Hom_fapp0`, names tentative),
+  fold the product-composition presentation into it, and make `Unit_prof`
+  full/capped action project to it.
 - Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
   after the cleanup/core migration; `make catalog` regenerates the check
   catalog without unclassified checks; `make warning-summary` reports 1,306
   warnings (1,141 unjoinable critical pairs and 165 replaceable-pattern
   warnings), still dominated by the broad `comp_fapp0`,
   `hom_postcomp_fapp0`, and `tapp0_fapp0` overlap families.
-- Active follow-up: investigate a generic product-hom source bridge, if a
-  concrete consumer needs opaque-endpoint `fapp1_func(Unit_prof X,xy,xy')` to
-  normalize to the same composite rather than relying on the arbitrary capped
-  action join.
+- Active follow-up in the `Hom_*` phase: investigate a generic product-hom
+  source bridge only if a concrete consumer needs opaque-endpoint
+  `fapp1_func(Unit_prof X,xy,xy')` to normalize directly to the same
+  `Hom_tele_func` owner rather than relying on constructed endpoints and the
+  arbitrary capped action join.
 - Active follow-up after the initial product-owner promotion: replace
   `comp_cat_cov_transf` and `comp_cat_con_transf` by identity-slot
   `comp_prod_fapp1_fapp0 Cat_cat` forms, moving their projection ladders before
