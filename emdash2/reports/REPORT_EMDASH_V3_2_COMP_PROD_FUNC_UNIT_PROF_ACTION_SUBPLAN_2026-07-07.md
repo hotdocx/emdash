@@ -442,12 +442,17 @@ second functor slot has moved from `G` to `H`, so the second one-slot action is
 
 ## Identity-Slot Projection Ladder Formulation
 
-The following `CovProd` and `ConProd` names are report-level abbreviations
-only. Do not add kernel symbols with these names unless a focused probe shows
-that direct `comp_prod_fapp1_fapp0` LHSs are infeasible. In promoted rules, use
-the actual product pair representation that checks best. `Product_pair` is the
-readable spelling; because it is transparent, an actual rule LHS may need the
-underlying `Struct_sigma` form after probing.
+The SOP-first formulation is not to match explicit product constructors on the
+rule LHS. Prefer an opaque product input and project its components on the RHS
+with `sigma_Fst` / `sigma_Snd`. This keeps the product-arrow action generic,
+lets authored `Product_pair` / `Struct_sigma` inputs compute into the same
+owner, and avoids making constructor shape an accidental discriminator.
+
+The following `HComp`, `CovProd`, and `ConProd` names are report-level
+abbreviations only. Do not add kernel symbols with these names unless a
+focused probe shows that direct `comp_prod_fapp1_fapp0` LHSs are infeasible.
+`Product_pair` remains useful in examples and temporary aliases, but promoted
+projection rules should first try the generic sigma-projection LHS.
 
 Readable product notation:
 
@@ -458,6 +463,89 @@ PairObj(A,B,x,y)
 PairArr(A,B,x,x',y,y',alpha,beta)
   := Product_pair alpha beta
 ```
+
+### Generic Arbitrary-Pair Cat Action
+
+Use current file-style abbreviations:
+
+```text
+FG FG' : Obj(Product_cat (Functor_cat X Y) (Functor_cat Y Z))
+theta  : Hom(Product_cat (Functor_cat X Y) (Functor_cat Y Z)) FG FG'
+
+F      := sigma_Fst FG
+G      := sigma_Snd FG
+F'     := sigma_Fst FG'
+G'     := sigma_Snd FG'
+alpha  := sigma_Fst theta
+eta    := sigma_Snd theta
+```
+
+The preferred Cat horizontal-action normal form is:
+
+```text
+HComp(X,Y,Z,FG,FG',theta)
+  := @comp_prod_fapp1_fapp0 Cat_cat X Y Z FG FG' theta
+```
+
+The preferred generic projection ladder is:
+
+```text
+tapp0_fapp0 HComp i
+  -> @tapp1_fapp0
+       Y Z G G'
+       (@fapp0 X Y F i)
+       (@fapp0 X Y F' i)
+       eta
+       (@tapp0_fapp0 X Y F F' i alpha)
+
+tapp1_func HComp i j
+  -> @comp_cat_fapp0
+       (Hom_cat X i j)
+       (Hom_cat Y
+         (@fapp0 X Y F i)
+         (@fapp0 X Y F' j))
+       (Hom_cat Z
+         (@fapp0 Y Z G  (@fapp0 X Y F i))
+         (@fapp0 Y Z G' (@fapp0 X Y F' j)))
+       (@tapp1_func
+         Y Z G G'
+         (@fapp0 X Y F i)
+         (@fapp0 X Y F' j)
+         eta)
+       (@tapp1_func
+         X Y F F'
+         i j
+         alpha)
+
+tapp1_fapp0 HComp p
+  -> @tapp1_fapp0
+       Y Z G G'
+       (@fapp0 X Y F i)
+       (@fapp0 X Y F' j)
+       eta
+       (@tapp1_fapp0 X Y F F' i j alpha p)
+```
+
+This formulation makes the old covariant and contravariant one-slot cases
+ordinary specializations:
+
+```text
+CovProd = HComp with FG=(P,L), FG'=(Q,L), theta=(eta,id_L)
+ConProd = HComp with FG=(L,R), FG'=(L,S), theta=(id_L,eta)
+```
+
+The existing generic transfor rules then recover the old one-slot component
+formulas:
+
+```text
+tapp1_fapp0 id_L (eta[i])  -> L[eta[i]]
+tapp1_fapp0 eta (id)       -> eta[L[i]]
+tapp1_func id_L            -> fapp1_func L
+```
+
+If this arbitrary-pair ladder proves too broad or creates unmanageable
+overlaps, the identity-slot rules below are the fallback shape to probe. They
+are explanatory special cases, not the preferred first implementation.
 
 ### Covariant One-Slot Action
 
