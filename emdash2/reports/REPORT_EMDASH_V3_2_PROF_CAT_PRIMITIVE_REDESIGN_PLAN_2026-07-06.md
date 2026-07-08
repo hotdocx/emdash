@@ -10,6 +10,13 @@ Infinity-Codex-Origin: current-session-analysis-2026-07-06
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3823-a12a-7901-b834-2dc4d4ef0519
 Status: primitive `Prof_cat` head, first public-surface migration, cleanup through `Hom_prof_func`/weighted-limit compatibility, and `Unit_prof` primitive / `Hom_prof_along`-as-reindex migration promoted
 
+Active subplan 2026-07-07:
+`REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-07.md`
+is now the active follow-up task. It refines the promoted `Unit_prof` slice by
+adding a general product/uncurried composition owner `comp_prod_func`, deleting
+the residual `Unit_prof_fapp1_func` action head, and cleaning historical
+hom-action equality wrappers.
+
 Review update 2026-07-06: a follow-up source review found that the proposed
 `Prof_cat`-specific `hom_postcomp_fapp0` identity and incoming-map bridge were
 overfitted to a stale Catd-specific bridge. The active generic hom-action

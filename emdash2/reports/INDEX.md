@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-06-23
+Date: 2026-07-07
 
 Use this file as the first stop for report discovery. The active code authority
 is still `emdash3_2.lp`; reports explain status, notation, plans, and review
@@ -55,6 +55,11 @@ decisions.
   profunctor category head, with explicit `Obj`/`Hom_cat` projections to the
   existing `Catd_cat(Product_cat(Op_cat A) B)` semantics and public vertical
   normal forms over generic `@comp_fapp0 (Prof_cat A B)`.
+- `REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-07.md`:
+  active subplan of the primitive-`Prof_cat` migration for adding the general
+  product/uncurried composition owner `comp_prod_func`, deleting the residual
+  `Unit_prof_fapp1_func` stable head, and cleaning historical hom-action
+  equality wrappers.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
