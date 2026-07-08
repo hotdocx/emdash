@@ -1,7 +1,7 @@
 # EMDASH v3.2 Product Composition Function And Unit Prof Action Subplan
 
 Date: 2026-07-07
-Last reviewed: 2026-07-07
+Last reviewed: 2026-07-08
 Plan-ID: EMDASH-V3-2-COMP-PROD-FUNC-UNIT-PROF-ACTION-2026-07-07
 Depends-On: EMDASH-V3-2-PROF-CAT-PRIMITIVE-REDESIGN-2026-07-06; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Parent-Plan: REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md
@@ -50,6 +50,11 @@ The current source has:
   of ordinary transfors.
 - `Unit_prof_fapp1_func`, a residual profunctor-specific stable head whose
   object action is just "precompose, postcompose, then compose".
+- Cat-specialized telescope-transfor heads
+  `hom_precomp_along_cat_tele_transf` and
+  `hom_postcomp_cat_tele_transf`, whose `tapp*` projection rules are better
+  understood as future generic projection rules on unspecialized
+  `hom_*_tele_transf` heads.
 
 The existing object-level proof-time bridges already identify the stable
 hom-action object actions with ordinary `comp_fapp0` readings:
@@ -128,6 +133,11 @@ For arbitrary `A`, `comp_prod_fapp1_fapp0` is the neutral generic horizontal
 composition head for 2-cells in the hom-categories of `A`. Do not attempt to
 force the Cat-specialized transfor helper into this general layer.
 
+The immediate `Unit_prof` migration only needs the object action of
+`comp_prod_func`. The full/capped arrow-action heads should be added only as
+the stable projection ladder for the new owner, not as a reason to add a
+Cat-specific rewrite immediately.
+
 Identity and composition folds for `comp_prod_fapp1_fapp0` should be probed
 only if a concrete projection check or consumer needs them. If added, they
 must follow the stable-head projection-ladder exception in the SOP: they join
@@ -149,30 +159,23 @@ symbol Functor_comp_pair_func [A B C : Cat]
 Its object action computes to ordinary functor composition because
 `Hom_cat Cat_cat A B` computes to `Functor_cat A B`.
 
-For the capped arrow action, the `Cat_cat` specialization should route to the
-existing horizontal transfor-composite head:
+Do not add a default rewrite from `comp_prod_fapp1_fapp0 Cat_cat` to the
+existing Cat-specific horizontal composite head. Conceptually, the direction
+is the opposite: the Cat-specific helper should eventually become a transparent
+view of the Cat instance of `comp_prod_fapp1_fapp0`.
+
+The deferred target is:
 
 ```text
-rule @comp_prod_fapp1_fapp0
-      Cat_cat
-      $A $B $C
-      $FG
-      $F'G'
-      $alpha_eta
-  -> @comp_cat_func_func_tapp1_fapp0
-      $A $B $C
-      (sigma_Snd $FG)
-      (sigma_Snd $F'G')
-      (sigma_Snd $alpha_eta)
-      (sigma_Fst $FG)
-      (sigma_Fst $F'G')
-      (sigma_Fst $alpha_eta);
+comp_cat_func_func_tapp1_fapp0(eta,alpha)
+  := comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 ```
 
-Here `FG` represents `(F,G)`, `F'G'` represents `(F',G')`, and `alpha_eta`
-represents `(alpha,eta)`. The target is the usual horizontal composite
-`(G' alpha) o (eta F)`, already packaged by
-`comp_cat_func_func_tapp1_fapp0`.
+where `(alpha,eta)` is the product arrow from `(F,G)` to `(K,H)`. Whether the
+current body of `comp_cat_func_func_tapp1_fapp0` is judgmentally recovered from
+the Cat instance of `comp_prod_fapp1_fapp0` depends on later Cat-specific
+projection rules for `comp_prod_fapp1_fapp0`; this is a follow-up probe, not
+part of the immediate `Unit_prof` migration.
 
 ## Unit Prof Migration
 
@@ -240,22 +243,43 @@ fapp0(comp_prod_func)(h,g) -> comp_fapp0(g,h)
 ```
 
 Additional proof-time bridges may be useful, but should be narrow and probed.
-Schematic precomposition-in-the-first-slot examples are:
+The generic telescope-transfor projection rules should eventually have this
+shape. For precomposition, with
+`theta = hom_precomp_along_tele_transf(F,alpha)` and
+`Falpha = F[alpha]`:
 
 ```text
-hom_precomp_along_tele action on alpha at g
-  == comp_prod action (F[alpha], id_g)
+tapp0_fapp0 theta g
+  -> comp_prod_fapp1_fapp0 (Falpha,id_g)
 
-hom_precomp_along_tele action on alpha and beta
-  == comp_prod action (F[alpha], beta)
+tapp1_func theta g g'
+  -> functor obtained by pairing constant Falpha with the varying second
+     component, then applying comp_prod_fapp1_func
+
+tapp1_fapp0 theta beta
+  -> comp_prod_fapp1_fapp0 (Falpha,beta)
 ```
 
-Postcomposition-in-the-second-slot has the dual orientation. These are
-arrow-level analogues of the existing object-level bridges. They may require
-extending the projection ladder beyond the current
-`hom_precomp_along_tele_fapp1_fapp0` / `hom_postcomp_tele_fapp1_fapp0` level.
-Do not promote broad arrow-level bridges until a concrete check requires them
-and the warning-enabled interaction has been classified.
+For postcomposition, with
+`theta = hom_postcomp_tele_transf(F,alpha)` and `Falpha = F[alpha]`:
+
+```text
+tapp0_fapp0 theta u
+  -> comp_prod_fapp1_fapp0 (id_u,Falpha)
+
+tapp1_func theta u u'
+  -> functor obtained by pairing the varying first component with constant
+     Falpha, then applying comp_prod_fapp1_func
+
+tapp1_fapp0 theta beta
+  -> comp_prod_fapp1_fapp0 (beta,Falpha)
+```
+
+These are arrow-level analogues of the existing object-level bridges. They
+require generic `hom_precomp_along_tele_transf` and
+`hom_postcomp_tele_transf` heads, described below. Do not promote broad
+arrow-level bridges until a concrete check requires them and the
+warning-enabled interaction has been classified.
 
 ## Non-Goals
 
@@ -277,19 +301,58 @@ being considered under the possible future name
 `hom_int_precomp_along_tele_func`. A future rename can be considered as a
 separate naming cleanup.
 
-## Possible Follow-Up
+## Deferred Telescope-Transfor Unspecialization
 
-The Cat-specialized `hom_precomp_along_cat_tele_transf` may be a temporary
-specialization of a more general projection ladder for
-`hom_precomp_along_tele_fapp1_fapp0`. In a later task, consider whether the
-`tapp0_*` and `tapp1_*` projection rules currently attached to the Cat-specific
-head should instead be available directly at the generic
+The current Cat-specific heads should be understood as temporary compatibility
+surfaces:
+
+```text
+hom_precomp_along_cat_tele_transf
+hom_postcomp_cat_tele_transf
+```
+
+The correct long-term owners are unspecialized heads:
+
+```text
+hom_precomp_along_tele_transf
+  : Transf
+      (hom_precomp_along_func F Z h)
+      (hom_precomp_along_func F Z k)
+
+hom_postcomp_tele_transf
+  : Transf
+      (hom_postcomp_func F W f)
+      (hom_postcomp_func F W g)
+```
+
+These generic transfor heads are meaningful because
 `hom_precomp_along_tele_fapp1_fapp0` and
-`hom_postcomp_tele_fapp1_fapp0` heads.
+`hom_postcomp_tele_fapp1_fapp0` already land in a hom of a `Functor_cat`, and
+`Hom_cat(Functor_cat D E,F,G)` computes to `Transf_cat F G`. Therefore
+`tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections are not inherently
+Cat-specific.
 
-This is not part of the immediate `Unit_prof` migration. It is recorded only
-because the arrow-level bridge story for `comp_prod_func` may eventually need
-the same generalized projection ladder.
+After the generic heads exist, the current Cat-specific names should become
+aliases or compatibility views:
+
+```text
+hom_precomp_along_cat_tele_transf
+  := hom_precomp_along_tele_transf ... Cat_cat ...
+
+hom_postcomp_cat_tele_transf
+  := hom_postcomp_tele_transf Cat_cat ...
+```
+
+The existing `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` rules currently
+attached to the Cat-specific heads should then move to the generic heads and
+be expressed through `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` where
+appropriate. This is one linked follow-up with the future demotion of
+`comp_cat_func_func_tapp1_fapp0` to a Cat-specific view of
+`comp_prod_fapp1_fapp0`.
+
+This unspecialization is not part of the immediate `Unit_prof` migration. It
+is recorded because it is the coherent future owner of the arrow-level bridge
+story for `comp_prod_func`.
 
 ## Cleanup Slice
 
@@ -322,8 +385,8 @@ historical proof-symbol wrappers are cleanup targets.
 2. Add `comp_prod_func` with object, full-action, and capped-action projection
    heads.
 3. Add the transparent `Functor_comp_pair_func` Cat specialization.
-4. Add the Cat-specialized capped arrow-action bridge to
-   `comp_cat_func_func_tapp1_fapp0`.
+4. Do not add a Cat rewrite from `comp_prod_fapp1_fapp0` to
+   `comp_cat_func_func_tapp1_fapp0` in the immediate slice.
 5. Replace `Unit_prof_fapp1_func` with the generic
    `Functor_comp_pair_func o Product_map_func(preTele,postTele)` full action.
 6. Keep or reorient the direct capped `Unit_prof` action only as a projection
@@ -331,7 +394,6 @@ historical proof-symbol wrappers are cleanup targets.
 7. Add focused checks for:
    - object action of `comp_prod_func`;
    - Cat object action as ordinary functor composition;
-   - Cat capped arrow action as `comp_cat_func_func_tapp1_fapp0`;
    - full and capped `Unit_prof` action;
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
 8. Run bounded `make check`, refresh catalog/health if checks changed, and run
@@ -345,6 +407,9 @@ historical proof-symbol wrappers are cleanup targets.
   above.
 - Deferred: possible rename `hom_int_precomp_tele_func` to
   `hom_int_precomp_along_tele_func`.
-- Deferred: possible unspecialization of `hom_precomp_along_cat_tele_transf`
-  and related Cat-specific `tapp*` projections into generic
-  `hom_*_tele_fapp1_fapp0` projection ladders.
+- Deferred: add unspecialized `hom_precomp_along_tele_transf` and
+  `hom_postcomp_tele_transf`, move Cat-specific `tapp*` projections to those
+  generic heads, and demote `hom_*_cat_tele_transf` to aliases or delete them.
+- Deferred: recast `comp_cat_func_func_tapp1_fapp0` as the Cat instance of
+  `comp_prod_fapp1_fapp0`, after probing whether its current body is
+  judgmentally recovered from the generic owner plus Cat projections.
