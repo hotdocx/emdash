@@ -48,6 +48,11 @@ The current source has:
   `hom_int_precomp_along_tele_func`.
 - `comp_cat_func_func_tapp1_fapp0`, the Cat-specialized horizontal composite
   of ordinary transfors.
+- `comp_cat_cov_transf` and `comp_cat_con_transf`, current Cat-specialized
+  one-slot horizontal-action heads. They presently own real
+  `tapp0_fapp0`, `tapp1_func`, `tapp1_fapp0`, and identity-collapse rules,
+  so deleting them requires moving those projection ladders to the
+  corresponding identity-slot instances of `comp_prod_fapp1_fapp0 Cat_cat`.
 - `Unit_prof_fapp1_func`, a residual profunctor-specific stable head whose
   object action is just "precompose, postcompose, then compose".
 - Cat-specialized telescope-transfor heads
@@ -130,8 +135,10 @@ rule @fapp1_fapp0 _ _ (@comp_prod_func $A $W $X $Z) $pg $pg' $alpha
 ```
 
 For arbitrary `A`, `comp_prod_fapp1_fapp0` is the neutral generic horizontal
-composition head for 2-cells in the hom-categories of `A`. Do not attempt to
-force the Cat-specialized transfor helper into this general layer.
+composition head for 2-cells in the hom-categories of `A`. In the Cat
+instance, it should also become the public horizontal-action normal form for
+ordinary transfors. The current Cat-specific helper names should not remain
+upstream targets of `comp_prod_fapp1_fapp0`.
 
 The immediate `Unit_prof` migration only needs the object action of
 `comp_prod_func`. The full/capped arrow-action heads should be added only as
@@ -139,10 +146,21 @@ the stable projection ladder for the new owner, not as a reason to add a
 Cat-specific rewrite immediately.
 
 Identity and composition folds for `comp_prod_fapp1_fapp0` should be probed
-only if a concrete projection check or consumer needs them. If added, they
-must follow the stable-head projection-ladder exception in the SOP: they join
-owner-first and projection-first paths and must not become a second statement
-of generic functoriality.
+as stable-head projection-ladder folds. They are not generic functoriality
+restated for every constructor; they join paths where the stable capped owner
+would otherwise hide the literal `fapp1_fapp0(comp_prod_func,...)` expression
+from the global functoriality rules. The expected composition fold is:
+
+```text
+comp_fapp0
+  (comp_prod_fapp1_fapp0 q)
+  (comp_prod_fapp1_fapp0 p)
+    -> comp_prod_fapp1_fapp0 (q o p)
+```
+
+where `p` and `q` are product-category arrows between the product inputs.
+For explicit paired arrows, the existing product-category composition rule
+reduces `q o p` componentwise.
 
 ## Cat Specialization
 
@@ -159,25 +177,48 @@ symbol Functor_comp_pair_func [A B C : Cat]
 Its object action computes to ordinary functor composition because
 `Hom_cat Cat_cat A B` computes to `Functor_cat A B`.
 
-Do not add a default rewrite from `comp_prod_fapp1_fapp0 Cat_cat` to the
-existing Cat-specific horizontal composite head in the immediate `Unit_prof`
-slice. The correct longer-term owner is still `comp_prod_fapp1_fapp0`; the
-warning is only that the Cat-specialized reductions should be probed as a
-separate telescope-transfor/action slice because they overlap with identity
-specializations.
-
-The deferred target is:
+Do not add a rewrite from `comp_prod_fapp1_fapp0 Cat_cat` to an old
+Cat-specific helper. That direction would preserve the stale owner. The
+correct Cat instance is:
 
 ```text
+comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
+```
+
+where `(alpha,eta)` is the product arrow from `(F,G)` to `(K,H)` in
+`Product_cat(Functor_cat X Y,Functor_cat Y Z)`.
+
+The old Cat-specific names should be deleted after their projection ladders
+are moved, or temporarily demoted to transparent compatibility aliases during
+the migration:
+
+```text
+comp_cat_cov_transf(G,alpha) := comp_prod_fapp1_fapp0 Cat_cat (alpha,id_G)
+comp_cat_con_transf(F,eta)   := comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
+
 comp_cat_func_func_tapp1_fapp0(eta,alpha)
   := comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 ```
 
-where `(alpha,eta)` is the product arrow from `(F,G)` to `(K,H)`. Whether the
-current body of `comp_cat_func_func_tapp1_fapp0` is judgmentally recovered from
-the Cat instance of `comp_prod_fapp1_fapp0` depends on later Cat-specific
-projection rules for `comp_prod_fapp1_fapp0`; this is a follow-up probe, not
-part of the immediate `Unit_prof` migration.
+The current body of `comp_cat_func_func_tapp1_fapp0` is the composite of two
+one-slot actions:
+
+```text
+comp_prod_fapp1_fapp0 Cat_cat (alpha,id_H)
+  o comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
+```
+
+with the endpoint order determined by the current body
+`(H alpha) o (eta F)`. The new owner should fold that composite to:
+
+```text
+comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
+```
+
+This is a concrete Cat instance of the general `comp_prod_fapp1_fapp0`
+composition fold above. It should be probed together with the projection
+ladder migration because the old one-slot helper heads currently own the
+component and off-diagonal transfor projections.
 
 ## Unit Prof Migration
 
@@ -290,7 +331,7 @@ The agreed longer-term factorization is:
 ```text
 hom_*_tele_transf owns generic telescope projection.
 comp_prod* owns product-composition arrow action.
-comp_cat_* owns Cat_cat-specialized transfor normal forms.
+old comp_cat_* names are compatibility surfaces to delete or alias away.
 ```
 
 In particular, Cat-specific computation should move away from the
@@ -333,17 +374,19 @@ tapp1_fapp0 theta beta
 ```
 
 After those generic rules, the Cat-specific computation belongs downstream at
-the Cat instance of `comp_prod*`. The intended Cat reductions are schematic:
+the Cat instance of `comp_prod*`. The corrected target is not a reduction from
+`comp_prod*` to the old Cat-specific names. The old names should be replaced
+by the relevant `comp_prod_fapp1_fapp0 Cat_cat` forms:
 
 ```text
-comp_prod_fapp1_fapp0 Cat_cat (Ealpha,id_G)
-  -> comp_cat_cov_transf ...
+comp_cat_cov_transf(...)
+  := comp_prod_fapp1_fapp0 Cat_cat (Ealpha,id_G)
 
-comp_prod_fapp1_fapp0 Cat_cat (id_F,Ealpha)
-  -> comp_cat_con_transf ...
+comp_cat_con_transf(...)
+  := comp_prod_fapp1_fapp0 Cat_cat (id_F,Ealpha)
 
-comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
-  -> comp_cat_func_func_tapp1_fapp0 eta alpha
+comp_cat_func_func_tapp1_fapp0(eta,alpha)
+  := comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 ```
 
 The whole-functor projections should similarly factor through
@@ -353,12 +396,12 @@ The whole-functor projections should similarly factor through
 precomposition tapp1_func
   -> comp_prod_fapp1_func after pairing constant Ealpha with the varying
      second component
-  -> comp_cat_con_func_func_tapp1_func ...   // Cat_cat specialization
+  -> old comp_cat_con_func_func_tapp1_func only as a temporary alias, if kept
 
 postcomposition tapp1_func
   -> comp_prod_fapp1_func after pairing the varying first component with
      constant Ealpha
-  -> comp_cat_cov_func_func_tapp1_func ...   // Cat_cat specialization
+  -> old comp_cat_cov_func_func_tapp1_func only as a temporary alias, if kept
 ```
 
 This means the old direct rules of the form:
@@ -374,18 +417,28 @@ should eventually be replaced by two steps:
 tapp*_projection (hom_*_tele_transf ...)
   -> comp_prod* ...
 
-comp_prod* Cat_cat ...
-  -> comp_cat_* ...
+old comp_cat_* names, if still present
+  -> transparent aliases to comp_prod* Cat_cat ...
 ```
 
-The broad arbitrary-pair Cat rule and the focused identity-slot Cat rules
-overlap. For example, `(alpha,id)` can match both the arbitrary
-`comp_cat_func_func_tapp1_fapp0` route and the focused `comp_cat_cov_transf`
-route. This does not invalidate the architecture, but it makes the
-implementation a separate probe-first task. The eventual orientation must make
-the identity-slot cases either reduce directly to the existing covariant or
-contravariant transfor normal forms, or join cleanly through the arbitrary
-horizontal-composite head.
+The old `comp_cat_cov_transf` and `comp_cat_con_transf` heads currently own
+component and off-diagonal projection ladders. Deleting them is therefore not
+a textual rename: the `tapp0_fapp0`, `tapp1_func`, `tapp1_fapp0`, and
+identity-collapse rules must move to the identity-slot `comp_prod_fapp1_fapp0
+Cat_cat` forms. After that move, the arbitrary-pair form
+`comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` is the neutral Cat horizontal
+action, and the old `comp_cat_func_func_tapp1_fapp0` body should be joined by
+the stable-head composition fold:
+
+```text
+comp_prod_fapp1_fapp0 Cat_cat (alpha,id_H)
+  o comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
+    -> comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
+```
+
+The endpoint labels matter: after the first one-slot action `(id_F,eta)`, the
+second functor slot has moved from `G` to `H`, so the second one-slot action is
+`(alpha,id_H)`, not `(alpha,id_G)`.
 
 ## Non-Goals
 
@@ -452,12 +505,15 @@ hom_postcomp_cat_tele_transf
 The existing `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` rules currently
 attached to the Cat-specific heads should then move to the generic heads and
 be expressed through `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` where
-appropriate. The Cat-specific normal forms that the old rules currently
-return should not remain attached to the generic `hom_*_tele_transf` heads;
-they should be reattached downstream as Cat-instance reductions of
-`comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0`. This is one linked follow-up
-with the future demotion of `comp_cat_func_func_tapp1_fapp0` to a Cat-specific
-view of `comp_prod_fapp1_fapp0`.
+appropriate. The one-slot Cat projection rules currently owned by
+`comp_cat_cov_transf` and `comp_cat_con_transf` should move to the identity
+slots of `comp_prod_fapp1_fapp0 Cat_cat`. The old Cat names should not remain
+normal forms; they should be deleted or kept only as transparent aliases while
+call sites migrate.
+
+This is one linked follow-up with the deletion or demotion of
+`comp_cat_func_func_tapp1_fapp0` to a compatibility alias for the arbitrary
+pair Cat instance of `comp_prod_fapp1_fapp0`.
 
 This unspecialization is not part of the immediate `Unit_prof` migration. It
 is recorded because it is the coherent future owner of the arrow-level bridge
@@ -494,19 +550,26 @@ historical proof-symbol wrappers are cleanup targets.
 2. Add `comp_prod_func` with object, full-action, and capped-action projection
    heads.
 3. Add the transparent `Functor_comp_pair_func` Cat specialization.
-4. Do not add Cat-specific `comp_prod*` reductions in the immediate slice;
-   record them as the deferred owner for the later telescope-transfor
-   unspecialization.
+4. Add focused checks for the product owner:
+   - object action of `comp_prod_func`;
+   - capped action through `comp_prod_fapp1_fapp0`;
+   - Cat object action as ordinary functor composition.
 5. Replace `Unit_prof_fapp1_func` with the generic
    `Functor_comp_pair_func o Product_map_func(preTele,postTele)` full action.
 6. Keep or reorient the direct capped `Unit_prof` action only as a projection
    join, based on focused checks.
 7. Add focused checks for:
-   - object action of `comp_prod_func`;
-   - Cat object action as ordinary functor composition;
    - full and capped `Unit_prof` action;
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
-8. Run bounded `make check`, refresh catalog/health if checks changed, and run
+8. In the follow-up Cat-horizontal-action slice, move uses of
+   `comp_cat_cov_transf` and `comp_cat_con_transf` to identity-slot
+   `comp_prod_fapp1_fapp0 Cat_cat` forms, move their projection ladders to
+   those forms, and delete or temporarily alias the old names.
+9. In the same follow-up slice, demote or delete
+   `comp_cat_func_func_tapp1_fapp0` by making the arbitrary pair
+   `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` the normal form and adding the
+   probed composition fold that joins the old two one-slot action body.
+10. Run bounded `make check`, refresh catalog/health if checks changed, and run
    warning summary before promotion.
 
 ## Side-Task Ledger
@@ -515,13 +578,18 @@ historical proof-symbol wrappers are cleanup targets.
   `Unit_prof_fapp1_func`.
 - Active cleanup: delete historical hom-action named equality wrappers listed
   above.
+- Active follow-up after the initial product-owner promotion: replace
+  `comp_cat_cov_transf` and `comp_cat_con_transf` by identity-slot
+  `comp_prod_fapp1_fapp0 Cat_cat` forms, moving their projection ladders before
+  deleting or aliasing the old names.
+- Active follow-up after the initial product-owner promotion: replace
+  `comp_cat_func_func_tapp1_fapp0` by the arbitrary-pair
+  `comp_prod_fapp1_fapp0 Cat_cat` form and add the probed stable-head
+  composition fold joining the old body.
 - Deferred: possible rename `hom_int_precomp_tele_func` to
   `hom_int_precomp_along_tele_func`.
 - Deferred: add unspecialized `hom_precomp_along_tele_transf` and
   `hom_postcomp_tele_transf`, move Cat-specific `tapp*` projections to those
-  generic heads as generic `comp_prod*` projections, move the Cat-specific
-  normal forms downstream to Cat-instance `comp_prod*` reductions, and demote
-  `hom_*_cat_tele_transf` to aliases or delete them.
-- Deferred: recast `comp_cat_func_func_tapp1_fapp0` as the Cat instance of
-  `comp_prod_fapp1_fapp0`, after probing whether its current body is
-  judgmentally recovered from the generic owner plus Cat projections.
+  generic heads as generic `comp_prod*` projections, and demote
+  `hom_*_cat_tele_transf` to aliases or delete them once equivalent generic
+  projection ladders exist.
