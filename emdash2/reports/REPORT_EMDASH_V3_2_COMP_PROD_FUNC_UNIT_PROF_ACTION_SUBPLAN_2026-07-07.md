@@ -1,7 +1,7 @@
 # EMDASH v3.2 Product Composition Function And Unit Prof Action Subplan
 
 Date: 2026-07-07
-Last reviewed: 2026-07-08
+Last reviewed: 2026-07-09
 Plan-ID: EMDASH-V3-2-COMP-PROD-FUNC-UNIT-PROF-ACTION-2026-07-07
 Depends-On: EMDASH-V3-2-PROF-CAT-PRIMITIVE-REDESIGN-2026-07-06; EMDASH-V3.2-DEFISO-HOM-ACTION-PROFCOMP-MIGRATION-2026-06-28; EMDASH-V3-2-CAT-CATD-SPECIALIZATION-ALIAS-MIGRATION-2026-07-04; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Parent-Plan: REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md
@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: active subtask; cleanup, `comp_prod_func`, and the general `Hom_*` action-owner correction have been promoted; current correction narrows `Hom_fapp0` proof-time bridges to identity endpoints and records the broader object-level cleanup as deferred; next phase is Cat-horizontal-action migration
+Status: active subtask; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, and the first Cat-horizontal-action slice have been promoted and validated; the broader `Hom_fapp0` object-level cleanup and full deletion/demotion of old Cat cov/con heads remain deferred
 
 ## Active Goal
 
@@ -1183,16 +1183,28 @@ Updated order after the 2026-07-08 `Hom_*` correction:
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
 9. Completed: run bounded `make check`, refresh catalog, and run warning
    summary after the `Hom_*` correction.
-10. Next active phase: start the Cat-horizontal-action
-    slice: move uses of `comp_cat_cov_transf` and `comp_cat_con_transf` to
-    identity-slot `comp_prod_fapp1_fapp0 Cat_cat` forms, move their projection
-    ladders to those forms, and delete or temporarily alias the old names.
-11. In the same Cat-horizontal-action slice, demote or delete
-    `comp_cat_func_func_tapp1_fapp0` by making the arbitrary pair
-    `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` the normal form and adding the
-    probed composition fold that joins the old two one-slot action body.
-12. Run bounded `make check`, refresh catalog/health if checks changed, and run
-    warning summary before promotion.
+10. Partially completed: first Cat-horizontal-action slice:
+    - add the generic Cat instance projection ladder for arbitrary-pair
+      `comp_prod_fapp1_fapp0 Cat_cat`;
+    - retarget the fixed `hom_postcomp_fapp1_fapp0 Cat_cat` and
+      `hom_precomp_along_fapp1_fapp0 K Cat_cat` entries to identity-slot
+      product forms;
+    - retarget the `tapp0_fapp0` component rules of
+      `hom_postcomp_cat_tele_transf` and
+      `hom_precomp_along_cat_tele_transf` to identity-slot product forms;
+    - keep `comp_cat_cov_transf` and `comp_cat_con_transf` as compatibility
+      heads for now because their remaining projection and identity-collapse
+      ladders have not all moved.
+11. Partially completed in the same slice: redefine
+    `comp_cat_func_func_tapp1_fapp0` as the arbitrary-pair
+    `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)` form. The old two one-slot
+    body is no longer the definition, but a separate compatibility fold from
+    an explicitly authored old composite to the arbitrary-pair product owner
+    remains deferred until a concrete consumer needs it.
+12. Completed for this slice: bounded `make check`, catalog refresh, warning
+    summary, `make ci`, and health refresh. The promoted slice is feasible and
+    validated, but still incomplete relative to the full deletion goal for the
+    old cov/con heads.
 
 ## Side-Task Ledger
 
@@ -1246,14 +1258,45 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   `fapp1_func(Unit_prof X,xy,xy')` to normalize directly to the same
   `Hom_tele_func` owner rather than relying on constructed endpoints and the
   arbitrary capped action join.
-- Next active Cat-horizontal-action follow-up: replace
+- Promoted 2026-07-09: first Cat-horizontal-action slice, using the focused
+  probes `tmp/probes/cat_hcomp_generic_prod_probe.lp` and
+  `tmp/probes/cat_hcomp_generic_prod_checks_probe.lp` before editing the
+  active files. The promoted source adds the arbitrary-pair Cat projection
+  ladder for `comp_prod_fapp1_fapp0 Cat_cat`, retargets fixed pre/post
+  component entries to identity-slot product forms, retargets the
+  `tapp0_fapp0` component rules for the current Cat telescope-transfor heads,
+  and adds focused diagnostic checks for those new normal forms.
+- Promoted 2026-07-09: `comp_cat_func_func_tapp1_fapp0` now has the
+  arbitrary-pair product owner as its body:
+  `comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)`. The old two one-slot
+  composition body is no longer used by the definition.
+- Validation 2026-07-09: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes;
+  `make catalog` refreshes `REPORT_EMDASH_CHECK_CATALOG.md`;
+  `make warning-summary` reports 1,340 warnings (1,175 unjoinable critical
+  pairs and 165 replaceable-pattern warnings), with the new
+  `comp_prod_fapp1_fapp0` overlap family visible in the top heads; `make ci`
+  passes, including strict catalog freshness and strict LHS audit; `make
+  health` refreshes `REPORT_EMDASH_HEALTH.md`.
+- Deferred after 2026-07-09 probing: do not yet delete, alias, or add runtime
+  demotion rules for `comp_cat_cov_transf` and `comp_cat_con_transf`.
+  Temporary probe rules reducing those old heads directly to identity-slot
+  `comp_prod_fapp1_fapp0 Cat_cat` forms typechecked in isolation but broke an
+  existing identity-collapse diagnostic. Their `tapp0_fapp0`, `tapp1_func`,
+  `tapp1_fapp0`, and identity-collapse ladders must be retargeted before the
+  old names can safely disappear.
+- Deferred after 2026-07-09 probing: the explicit paired-identity collapse for
+  `comp_prod_fapp1_fapp0 Cat_cat` is present as a source rule, but a direct
+  diagnostic assertion for that exact normal form was brittle and is not
+  promoted as a check. Keep the existing old one-slot identity checks until
+  the identity-slot projection/identity migration is completed.
+- Next active Cat-horizontal-action follow-up: finish replacing
   `comp_cat_cov_transf` and `comp_cat_con_transf` by identity-slot
-  `comp_prod_fapp1_fapp0 Cat_cat` forms, moving their projection ladders before
-  deleting or aliasing the old names.
-- Next active Cat-horizontal-action follow-up: replace
-  `comp_cat_func_func_tapp1_fapp0` by the arbitrary-pair
-  `comp_prod_fapp1_fapp0 Cat_cat` form and add the probed stable-head
-  composition fold joining the old body.
+  `comp_prod_fapp1_fapp0 Cat_cat` forms by moving all remaining projection and
+  identity-collapse rules before deleting or aliasing the old names.
+- Next active Cat-horizontal-action follow-up: add a compatibility fold, only
+  if needed by a checked consumer, from an explicitly authored old two one-slot
+  horizontal-composition composite to the arbitrary-pair
+  `comp_prod_fapp1_fapp0 Cat_cat` owner.
 - Deferred: possible rename `hom_int_precomp_tele_func` to
   `hom_int_precomp_along_tele_func`.
 - Deferred: add unspecialized `hom_precomp_along_tele_transf` and

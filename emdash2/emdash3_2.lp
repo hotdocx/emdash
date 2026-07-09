@@ -4461,6 +4461,104 @@ rule @tapp1_func
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp1_func $A $B $F $G $y $x $eta;
 
+// Cat instance of product-composition arrow action. This is the generic
+// horizontal action owner for ordinary transfors; the older covariant and
+// contravariant Cat heads are compatibility surfaces for one-slot views.
+rule @tapp0_fapp0
+      _ _
+      _ _
+      $i
+      (@comp_prod_fapp1_fapp0 Cat_cat $X $Y $Z $FG $FG' $theta)
+  ↪ @tapp1_fapp0
+      $Y
+      $Z
+      (sigma_Snd $FG)
+      (sigma_Snd $FG')
+      (@fapp0 $X $Y (sigma_Fst $FG) $i)
+      (@fapp0 $X $Y (sigma_Fst $FG') $i)
+      (sigma_Snd $theta)
+      (@tapp0_fapp0
+        $X
+        $Y
+        (sigma_Fst $FG)
+        (sigma_Fst $FG')
+        $i
+        (sigma_Fst $theta));
+
+rule @tapp1_func
+      _ _
+      _ _
+      $i
+      $j
+      (@comp_prod_fapp1_fapp0 Cat_cat $X $Y $Z $FG $FG' $theta)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $X $i $j)
+      (Hom_cat
+        $Y
+        (@fapp0 $X $Y (sigma_Fst $FG) $i)
+        (@fapp0 $X $Y (sigma_Fst $FG') $j))
+      (Hom_cat
+        $Z
+        (@fapp0 $Y $Z (sigma_Snd $FG) (@fapp0 $X $Y (sigma_Fst $FG) $i))
+        (@fapp0 $Y $Z (sigma_Snd $FG') (@fapp0 $X $Y (sigma_Fst $FG') $j)))
+      (@tapp1_func
+        $Y
+        $Z
+        (sigma_Snd $FG)
+        (sigma_Snd $FG')
+        (@fapp0 $X $Y (sigma_Fst $FG) $i)
+        (@fapp0 $X $Y (sigma_Fst $FG') $j)
+        (sigma_Snd $theta))
+      (@tapp1_func
+        $X
+        $Y
+        (sigma_Fst $FG)
+        (sigma_Fst $FG')
+        $i
+        $j
+        (sigma_Fst $theta));
+
+rule @tapp1_fapp0
+      _ _
+      _ _
+      $i
+      $j
+      (@comp_prod_fapp1_fapp0 Cat_cat $X $Y $Z $FG $FG' $theta)
+      $p
+  ↪ @tapp1_fapp0
+      $Y
+      $Z
+      (sigma_Snd $FG)
+      (sigma_Snd $FG')
+      (@fapp0 $X $Y (sigma_Fst $FG) $i)
+      (@fapp0 $X $Y (sigma_Fst $FG') $j)
+      (sigma_Snd $theta)
+      (@tapp1_fapp0
+        $X
+        $Y
+        (sigma_Fst $FG)
+        (sigma_Fst $FG')
+        $i
+        $j
+        (sigma_Fst $theta)
+        $p);
+
+rule @comp_prod_fapp1_fapp0
+      Cat_cat
+      $X
+      $Y
+      $Z
+      (@Product_pair (Functor_cat $X $Y) (Functor_cat $Y $Z) $F $G)
+      (@Product_pair (Functor_cat $X $Y) (Functor_cat $Y $Z) $F $G)
+      (@Product_pair
+        (Hom_cat (Functor_cat $X $Y) $F $F)
+        (Hom_cat (Functor_cat $Y $Z) $G $G)
+        (@id (Functor_cat $X $Y) $F)
+        (@id (Functor_cat $Y $Z) $G))
+  ↪ @id
+      (Functor_cat $X $Z)
+      (@comp_cat_fapp0 $X $Y $Z $G $F);
+
 /*
   Constant transfor induced by an arrow in the codomain.
 
@@ -4650,16 +4748,31 @@ symbol comp_cat_cov_transf [K : Cat]
 
 // Cat-valued capped postcomposition exposes ordinary transfor projections.
 rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
-  ↪ @comp_cat_cov_transf
-      $K
-      $E
+  ↪ @comp_prod_fapp1_fapp0
+      Cat_cat
       $W
-      $X
-      $Y
-      $f
-      $G
-      $H
-      $eta;
+      (@fapp0 $K Cat_cat $E $X)
+      (@fapp0 $K Cat_cat $E $Y)
+      (@Product_pair
+        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        $G
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $f))
+      (@Product_pair
+        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        $H
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $f))
+      (@Product_pair
+        (Hom_cat (Functor_cat $W (@fapp0 $K Cat_cat $E $X)) $G $H)
+        (Hom_cat
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $f))
+        $eta
+        (@id
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)));
 
 // Component of postcomposition by G.
 //
@@ -4909,24 +5022,37 @@ rule @tapp0_fapp0
       _
       $F
       (@hom_postcomp_cat_tele_transf $K $E $W $X $Y $G $H $eta)
-  ↪ @comp_cat_con_transf
+  ↪ @comp_prod_fapp1_fapp0
       Cat_cat
-      (@id Cat_cat Cat_cat)
-      (@fapp0 $K Cat_cat $E $Y)
       $W
       (@fapp0 $K Cat_cat $E $X)
-      $F
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $G)
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $H)
-      (@fapp1_fapp0
-        (Hom_cat $K $X $Y)
-        (Functor_cat
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y))
-        (@fapp1_func $K Cat_cat $E $X $Y)
-        $G
-        $H
-        $eta);
+      (@fapp0 $K Cat_cat $E $Y)
+      (@Product_pair
+        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        $F
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $G))
+      (@Product_pair
+        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        $F
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
+      (@Product_pair
+        (Hom_cat (Functor_cat $W (@fapp0 $K Cat_cat $E $X)) $F $F)
+        (Hom_cat
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $G)
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
+        (@id (Functor_cat $W (@fapp0 $K Cat_cat $E $X)) $F)
+        (@fapp1_fapp0
+          (Hom_cat $K $X $Y)
+          (Functor_cat
+            (@fapp0 $K Cat_cat $E $X)
+            (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_func $K Cat_cat $E $X $Y)
+          $G
+          $H
+          $eta));
 
 symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
   [F K : τ (Functor X Y)]
@@ -5002,24 +5128,37 @@ rule @tapp0_fapp0
       _
       $G
       (@hom_precomp_along_cat_tele_transf $K $E $Z $X $Y $F $H $alpha)
-  ↪ @comp_cat_cov_transf
+  ↪ @comp_prod_fapp1_fapp0
       Cat_cat
-      (@id Cat_cat Cat_cat)
       (@fapp0 $K Cat_cat $E $X)
       (@fapp0 $K Cat_cat $E $Y)
       $Z
-      $G
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $H)
-      (@fapp1_fapp0
-        (Hom_cat $K $X $Y)
-        (Functor_cat
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y))
-        (@fapp1_func $K Cat_cat $E $X $Y)
-        $F
-        $H
-        $alpha);
+      (@Product_pair
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
+        $G)
+      (@Product_pair
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $H)
+        $G)
+      (@Product_pair
+        (Hom_cat
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
+        (Hom_cat (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z) $G $G)
+        (@fapp1_fapp0
+          (Hom_cat $K $X $Y)
+          (Functor_cat
+            (@fapp0 $K Cat_cat $E $X)
+            (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_func $K Cat_cat $E $X $Y)
+          $F
+          $H
+          $alpha)
+        (@id (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z) $G));
 
 // Neutral capped off-diagonal action of ordinary functor composition. This is
 // the horizontal composite `(H alpha) ∘ (eta F)`.
@@ -5050,13 +5189,18 @@ symbol comp_cat_func_func_tapp1_fapp0 [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_fapp0 X Y Z G F)
       (@comp_cat_fapp0 X Y Z H K))
-≔ @comp_fapp0
-    (Functor_cat X Z)
-    (@comp_cat_fapp0 X Y Z G F)
-    (@comp_cat_fapp0 X Y Z H F)
-    (@comp_cat_fapp0 X Y Z H K)
-    (@comp_cat_cov_transf Cat_cat (@id Cat_cat Cat_cat) X Y Z H F K alpha)
-    (@comp_cat_con_transf Cat_cat (@id Cat_cat Cat_cat) Z X Y F G H eta);
+≔ @comp_prod_fapp1_fapp0
+    Cat_cat
+    X
+    Y
+    Z
+    (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) F G)
+    (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) K H)
+    (@Product_pair
+      (Hom_cat (Functor_cat X Y) F K)
+      (Hom_cat (Functor_cat Y Z) G H)
+      alpha
+      eta);
 
 // Dual curried off-diagonal helper for `comp_cat_con_func_func_transf`. It
 // lands in the same neutral capped object, but is curried in the ordinary
@@ -5251,16 +5395,31 @@ rule @hom_precomp_along_fapp1_fapp0
       $G
       $H
       $eta
-  ↪ @comp_cat_con_transf
-      $K
-      $E
+  ↪ @comp_prod_fapp1_fapp0
+      Cat_cat
+      (@fapp0 $K Cat_cat $E $X)
+      (@fapp0 $K Cat_cat $E $Y)
       $Z
-      $X
-      $Y
-      $F
-      $G
-      $H
-      $eta;
+      (@Product_pair
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
+        $G)
+      (@Product_pair
+        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
+        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
+        $H)
+      (@Product_pair
+        (Hom_cat
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F))
+        (Hom_cat (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z) $G $H)
+        (@id
+          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
+          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F))
+        $eta);
 
 // Component of precomposition by F.
 //

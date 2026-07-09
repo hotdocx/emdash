@@ -1775,16 +1775,31 @@ assert [K : Cat]
   [G H : τ (Functor (@fapp0 K Cat_cat E y) Z)]
   (eta : τ (Transf G H)) ⊢
   @hom_precomp_along_fapp1_fapp0 K Cat_cat E Z x y f G H eta
-  ≡ @comp_cat_con_transf
-      K
-      E
+  ≡ @comp_prod_fapp1_fapp0
+      Cat_cat
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
       Z
-      x
-      y
-      f
-      G
-      H
-      eta;
+      (@Product_pair
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        (Functor_cat (@fapp0 K Cat_cat E y) Z)
+        (@fapp1_fapp0 K Cat_cat E x y f)
+        G)
+      (@Product_pair
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        (Functor_cat (@fapp0 K Cat_cat E y) Z)
+        (@fapp1_fapp0 K Cat_cat E x y f)
+        H)
+      (@Product_pair
+        (Hom_cat
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f)
+          (@fapp1_fapp0 K Cat_cat E x y f))
+        (Hom_cat (Functor_cat (@fapp0 K Cat_cat E y) Z) G H)
+        (@id
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f))
+        eta);
 
 assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
   (eta : τ (Transf G H)) ⊢
@@ -1795,12 +1810,32 @@ assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
     G
     H
     eta
-  ≡ @comp_cat_con_transf Cat_cat (@id Cat_cat Cat_cat) Z X Y F G H eta;
+  ≡ @hom_precomp_along_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      Z
+      X
+      Y
+      F
+      G
+      H
+      eta;
 
 assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z))
   (eta : τ (Transf G H)) ⊢
   fapp0 (@comp_cat_con_fapp1_func X Y Z F G H) eta
-    ≡ @comp_cat_con_transf Cat_cat (@id Cat_cat Cat_cat) Z X Y F G H eta;
+    ≡ @hom_precomp_along_fapp1_fapp0
+        Cat_cat
+        Cat_cat
+        (@id Cat_cat Cat_cat)
+        Z
+        X
+        Y
+        F
+        G
+        H
+        eta;
 
 assert [X Y Z : Cat] ⊢
   @comp_cat_cov_func_func X Y Z
@@ -1855,16 +1890,31 @@ assert [K : Cat]
   [G H : τ (Functor W (@fapp0 K Cat_cat E x))]
   (eta : τ (Transf G H)) ⊢
   @hom_postcomp_fapp1_fapp0 Cat_cat K E W x y f G H eta
-  ≡ @comp_cat_cov_transf
-      K
-      E
+  ≡ @comp_prod_fapp1_fapp0
+      Cat_cat
       W
-      x
-      y
-      f
-      G
-      H
-      eta;
+      (@fapp0 K Cat_cat E x)
+      (@fapp0 K Cat_cat E y)
+      (@Product_pair
+        (Functor_cat W (@fapp0 K Cat_cat E x))
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        G
+        (@fapp1_fapp0 K Cat_cat E x y f))
+      (@Product_pair
+        (Functor_cat W (@fapp0 K Cat_cat E x))
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        H
+        (@fapp1_fapp0 K Cat_cat E x y f))
+      (@Product_pair
+        (Hom_cat (Functor_cat W (@fapp0 K Cat_cat E x)) G H)
+        (Hom_cat
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f)
+          (@fapp1_fapp0 K Cat_cat E x y f))
+        eta
+        (@id
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f)));
 
 assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
   (eta : τ (Transf F H)) ⊢
@@ -1875,12 +1925,32 @@ assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
     F
     H
     eta
-  ≡ @comp_cat_cov_transf Cat_cat (@id Cat_cat Cat_cat) X Y Z G F H eta;
+  ≡ @hom_postcomp_fapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      X
+      Y
+      Z
+      G
+      F
+      H
+      eta;
 
 assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y))
   (eta : τ (Transf F H)) ⊢
   fapp0 (@comp_cat_cov_fapp1_func X Y Z G F H) eta
-    ≡ @comp_cat_cov_transf Cat_cat (@id Cat_cat Cat_cat) X Y Z G F H eta;
+    ≡ @hom_postcomp_fapp1_fapp0
+        Cat_cat
+        Cat_cat
+        (@id Cat_cat Cat_cat)
+        X
+        Y
+        Z
+        G
+        F
+        H
+        eta;
 
 // Higher action of the tele-level postcomposition stable head.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
@@ -1976,24 +2046,37 @@ assert [K : Cat]
     (@hom_postcomp_func Cat_cat K E W x y g)
     P
     (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
-  ≡ @comp_cat_con_transf
+  ≡ @comp_prod_fapp1_fapp0
       Cat_cat
-      (@id Cat_cat Cat_cat)
-      (@fapp0 K Cat_cat E y)
       W
       (@fapp0 K Cat_cat E x)
-      P
-      (@fapp1_fapp0 K Cat_cat E x y f)
-      (@fapp1_fapp0 K Cat_cat E x y g)
-      (@fapp1_fapp0
-        (Hom_cat K x y)
-        (Functor_cat
-          (@fapp0 K Cat_cat E x)
-          (@fapp0 K Cat_cat E y))
-        (@fapp1_func K Cat_cat E x y)
-        f
-        g
-        alpha);
+      (@fapp0 K Cat_cat E y)
+      (@Product_pair
+        (Functor_cat W (@fapp0 K Cat_cat E x))
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        P
+        (@fapp1_fapp0 K Cat_cat E x y f))
+      (@Product_pair
+        (Functor_cat W (@fapp0 K Cat_cat E x))
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        P
+        (@fapp1_fapp0 K Cat_cat E x y g))
+      (@Product_pair
+        (Hom_cat (Functor_cat W (@fapp0 K Cat_cat E x)) P P)
+        (Hom_cat
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f)
+          (@fapp1_fapp0 K Cat_cat E x y g))
+        (@id (Functor_cat W (@fapp0 K Cat_cat E x)) P)
+        (@fapp1_fapp0
+          (Hom_cat K x y)
+          (Functor_cat
+            (@fapp0 K Cat_cat E x)
+            (@fapp0 K Cat_cat E y))
+          (@fapp1_func K Cat_cat E x y)
+          f
+          g
+          alpha));
 
 assert [K : Cat]
   (E : τ (Functor K Cat_cat))
@@ -2171,16 +2254,18 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
     (@comp_cat_con_func X Y Z K)
     G
     (@comp_cat_con_func_func_transf X Y Z F K alpha)
-  ≡ @comp_cat_cov_transf
+  ≡ @comp_prod_fapp1_fapp0
       Cat_cat
-      (@id Cat_cat Cat_cat)
       X
       Y
       Z
-      G
-      F
-      K
-      alpha;
+      (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) F G)
+      (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) K G)
+      (@Product_pair
+        (Hom_cat (Functor_cat X Y) F K)
+        (Hom_cat (Functor_cat Y Z) G G)
+        alpha
+        (@id (Functor_cat Y Z) G));
 
 assert [K : Cat]
   (E : τ (Functor K Cat_cat))
@@ -2196,24 +2281,37 @@ assert [K : Cat]
     (@hom_precomp_along_func K Cat_cat E Z x y g)
     P
     (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
-  ≡ @comp_cat_cov_transf
+  ≡ @comp_prod_fapp1_fapp0
       Cat_cat
-      (@id Cat_cat Cat_cat)
       (@fapp0 K Cat_cat E x)
       (@fapp0 K Cat_cat E y)
       Z
-      P
-      (@fapp1_fapp0 K Cat_cat E x y f)
-      (@fapp1_fapp0 K Cat_cat E x y g)
-      (@fapp1_fapp0
-        (Hom_cat K x y)
-        (Functor_cat
-          (@fapp0 K Cat_cat E x)
-          (@fapp0 K Cat_cat E y))
-        (@fapp1_func K Cat_cat E x y)
-        f
-        g
-        alpha);
+      (@Product_pair
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        (Functor_cat (@fapp0 K Cat_cat E y) Z)
+        (@fapp1_fapp0 K Cat_cat E x y f)
+        P)
+      (@Product_pair
+        (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+        (Functor_cat (@fapp0 K Cat_cat E y) Z)
+        (@fapp1_fapp0 K Cat_cat E x y g)
+        P)
+      (@Product_pair
+        (Hom_cat
+          (Functor_cat (@fapp0 K Cat_cat E x) (@fapp0 K Cat_cat E y))
+          (@fapp1_fapp0 K Cat_cat E x y f)
+          (@fapp1_fapp0 K Cat_cat E x y g))
+        (Hom_cat (Functor_cat (@fapp0 K Cat_cat E y) Z) P P)
+        (@fapp1_fapp0
+          (Hom_cat K x y)
+          (Functor_cat
+            (@fapp0 K Cat_cat E x)
+            (@fapp0 K Cat_cat E y))
+          (@fapp1_func K Cat_cat E x y)
+          f
+          g
+          alpha)
+        (@id (Functor_cat (@fapp0 K Cat_cat E y) Z) P));
 
 assert [X Y Z : Cat] (F K : τ (Functor X Y))
   (alpha : τ (Transf F K)) (G H : τ (Functor Y Z))
@@ -2458,6 +2556,107 @@ assert [A B C : Cat]
   (G : τ (Functor B C)) ⊢
   fapp0 (@Functor_comp_pair_func A B C) (Struct_sigma F G)
   ≡ @comp_cat_fapp0 A B C G F;
+
+assert [X Y Z : Cat]
+  (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z))))
+  (theta : τ (Hom
+    (Product_cat (Functor_cat X Y) (Functor_cat Y Z))
+    FG
+    FG'))
+  (i : τ (Obj X)) ⊢
+  @tapp0_fapp0
+    _
+    _
+    _
+    _
+    i
+    (@comp_prod_fapp1_fapp0 Cat_cat X Y Z FG FG' theta)
+  ≡ @tapp1_fapp0
+      Y
+      Z
+      (sigma_Snd FG)
+      (sigma_Snd FG')
+      (@fapp0 X Y (sigma_Fst FG) i)
+      (@fapp0 X Y (sigma_Fst FG') i)
+      (sigma_Snd theta)
+      (@tapp0_fapp0 X Y (sigma_Fst FG) (sigma_Fst FG') i (sigma_Fst theta));
+
+assert [X Y Z : Cat]
+  (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z))))
+  (theta : τ (Hom
+    (Product_cat (Functor_cat X Y) (Functor_cat Y Z))
+    FG
+    FG'))
+  (i j : τ (Obj X)) ⊢
+  @tapp1_func
+    _
+    _
+    _
+    _
+    i
+    j
+    (@comp_prod_fapp1_fapp0 Cat_cat X Y Z FG FG' theta)
+  ≡ @comp_cat_fapp0
+      (Hom_cat X i j)
+      (Hom_cat
+        Y
+        (@fapp0 X Y (sigma_Fst FG) i)
+        (@fapp0 X Y (sigma_Fst FG') j))
+      (Hom_cat
+        Z
+        (@fapp0 Y Z (sigma_Snd FG) (@fapp0 X Y (sigma_Fst FG) i))
+        (@fapp0 Y Z (sigma_Snd FG') (@fapp0 X Y (sigma_Fst FG') j)))
+      (@tapp1_func
+        Y
+        Z
+        (sigma_Snd FG)
+        (sigma_Snd FG')
+        (@fapp0 X Y (sigma_Fst FG) i)
+        (@fapp0 X Y (sigma_Fst FG') j)
+        (sigma_Snd theta))
+      (@tapp1_func
+        X
+        Y
+        (sigma_Fst FG)
+        (sigma_Fst FG')
+        i
+        j
+        (sigma_Fst theta));
+
+assert [X Y Z : Cat]
+  (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z))))
+  (theta : τ (Hom
+    (Product_cat (Functor_cat X Y) (Functor_cat Y Z))
+    FG
+    FG'))
+  (i j : τ (Obj X))
+  (p : τ (Hom X i j)) ⊢
+  @tapp1_fapp0
+    _
+    _
+    _
+    _
+    i
+    j
+    (@comp_prod_fapp1_fapp0 Cat_cat X Y Z FG FG' theta)
+    p
+  ≡ @tapp1_fapp0
+      Y
+      Z
+      (sigma_Snd FG)
+      (sigma_Snd FG')
+      (@fapp0 X Y (sigma_Fst FG) i)
+      (@fapp0 X Y (sigma_Fst FG') j)
+      (sigma_Snd theta)
+      (@tapp1_fapp0
+        X
+        Y
+        (sigma_Fst FG)
+        (sigma_Fst FG')
+        i
+        j
+        (sigma_Fst theta)
+        p);
 
 // General Hom_cat endpoint-action owner.
 assert [A : Cat]
@@ -2787,7 +2986,18 @@ assert [X Y Z : Cat] (G H : τ (Functor Y Z))
     (@comp_cat_cov_func X Y Z H)
     F
     (@comp_cat_cov_func_func_transf X Y Z G H eta)
-  ≡ @comp_cat_con_transf Cat_cat (@id Cat_cat Cat_cat) Z X Y F G H eta;
+  ≡ @comp_prod_fapp1_fapp0
+      Cat_cat
+      X
+      Y
+      Z
+      (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) F G)
+      (@Product_pair (Functor_cat X Y) (Functor_cat Y Z) F H)
+      (@Product_pair
+        (Hom_cat (Functor_cat X Y) F F)
+        (Hom_cat (Functor_cat Y Z) G H)
+        (@id (Functor_cat X Y) F)
+        eta);
 
 // From emdash3_2.lp:1845.
 assert [X Y Z : Cat] (G H : τ (Functor Y Z))
