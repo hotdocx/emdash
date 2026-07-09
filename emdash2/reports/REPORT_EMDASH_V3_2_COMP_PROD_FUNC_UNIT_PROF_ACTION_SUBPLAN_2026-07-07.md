@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: promoted and validated through generic telescope-transfor unspecialization; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, and deletion of the old Cat telescope-transfor compatibility names have been promoted; the broader `Hom_fapp0` object-level cleanup and fully generic off-diagonal telescope projection formulation remain deferred
+Status: promoted and validated through Cat-instance off-diagonal telescope projection cleanup; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, and the Cat-instance off-diagonal product cleanup have been promoted; the broader `Hom_fapp0` object-level cleanup and arbitrary-ambient off-diagonal telescope projection formulation remain deferred
 
 ## Active Goal
 
@@ -60,15 +60,17 @@ The current source has:
 - `hom_int_precomp_tele_func`, already the internalized represented-object
   action that was being sketched under the possible future name
   `hom_int_precomp_along_tele_func`.
-- `comp_cat_func_func_tapp1_fapp0`, the Cat-specialized horizontal composite
-  of ordinary transfors.
+- Former `comp_cat_func_func_tapp1_fapp0`, the Cat-specialized horizontal
+  composite of ordinary transfors. It was deleted after the Cat-instance
+  off-diagonal rules and diagnostics moved to direct arbitrary-pair
+  `comp_prod_fapp1_fapp0 Cat_cat` spelling.
 - `comp_cat_cov_transf` and `comp_cat_con_transf`, former Cat-specialized
   one-slot horizontal-action heads. They were deleted after their projection
   ladders moved to the corresponding identity-slot instances of
   `comp_prod_fapp1_fapp0 Cat_cat`.
-- `Unit_prof_fapp1_func`, a residual profunctor-specific stable head whose
-  object action is just "precompose, postcompose, then compose". The first
-  promoted slice deleted this name, but the corrected plan restores the
+- Former `Unit_prof_fapp1_func`, a residual profunctor-specific stable head
+  whose object action was just "precompose, postcompose, then compose". The
+  first promoted slice deleted this name, but the corrected plan restores the
   concept as a general `Hom_cat` action owner, not as a `Unit_prof`-specific
   owner.
 - Former Cat-specialized telescope-transfor heads
@@ -1112,11 +1114,73 @@ one-slot Cat projection rules formerly owned by `comp_cat_cov_transf` and
 `comp_cat_con_transf` already moved to the identity slots of
 `comp_prod_fapp1_fapp0 Cat_cat`.
 
-Remaining follow-up: decide whether `comp_cat_func_func_tapp1_fapp0` should
-also be deleted or demoted to a compatibility alias for the arbitrary-pair Cat
-instance of `comp_prod_fapp1_fapp0`. The unspecialized telescope-transfor
-owners are now the coherent owner of this part of the arrow-level bridge story
-for `comp_prod_func`.
+Promoted follow-up: `comp_cat_func_func_tapp1_fapp0` and the two curried
+off-diagonal helpers were deleted after the active Cat-instance projection
+rules and diagnostics moved to direct arbitrary-pair product-owner spelling.
+The unspecialized telescope-transfor owners are now the coherent owner of this
+part of the arrow-level bridge story for `comp_prod_func`.
+
+## Promoted Cat-Instance Off-Diagonal Product Cleanup
+
+Status 2026-07-09: promoted and validated. The promoted unspecialized
+telescope-transfor heads are now the discriminators, and their Cat-instance
+off-diagonal projection rules no longer route through the historical curried
+helper heads:
+
+```text
+comp_cat_cov_func_func_tapp1_func
+comp_cat_con_func_func_tapp1_func
+comp_cat_func_func_tapp1_fapp0
+```
+
+These helpers were removed from active normal forms. The capped rules now
+target the arbitrary-pair product owner directly:
+
+```text
+tapp1_fapp0(hom_postcomp_tele_transf Cat_cat ..., beta)
+  -> comp_prod_fapp1_fapp0 Cat_cat (beta,Eeta)
+
+tapp1_fapp0(hom_precomp_along_tele_transf ... Cat_cat ..., eta)
+  -> comp_prod_fapp1_fapp0 Cat_cat (Ealpha,eta)
+```
+
+The functor-level rules now target `comp_prod_fapp1_func Cat_cat` composed
+with the appropriate product-valued pairing functor:
+
+```text
+postcomposition:
+  Transf(P,Q)
+    -- (id, const Eeta) -->
+  Hom(Product_cat(...), (P,EG), (Q,EH))
+    -- comp_prod_fapp1_func Cat_cat -->
+  Transf(EG o P, EH o Q)
+
+precomposition:
+  Transf(G,J)
+    -- (const Ealpha, id) -->
+  Hom(Product_cat(...), (EF,G), (EH,J))
+    -- comp_prod_fapp1_func Cat_cat -->
+  Transf(G o EF, J o EH)
+```
+
+The promoted source uses the existing product-valued functor encoding
+(`Struct_sigma` of component functors), `id_func`, and `Const_func`; no new
+pairing helper was needed. Active projection rules and diagnostics no longer
+reference the historical helper names, so those helper symbols were deleted.
+
+This is not yet the arbitrary-ambient formulation. The arbitrary-ambient
+version would remove the `Cat_cat` specialization from the projection rules
+and express the same pattern for a general ambient category. That remains a
+separate follow-up because it may expose endpoint-normal-form interactions
+between stable `hom_*_fapp0` heads and raw `comp_fapp0` endpoints.
+
+Validation 2026-07-09: focused source/check probes
+`tmp/probes/cat_offdiag_prod_cleanup_probe.lp` and
+`tmp/probes/cat_offdiag_prod_cleanup_checks_probe.lp` pass; warning-enabled
+source probe passes; promoted active validation passes with
+`EMDASH_TYPECHECK_TIMEOUT=60s make check`, `make catalog`,
+`make warning-summary`, `make ci`, and `make health`. Warning summary remains
+at 1,317 warnings.
 
 ## Cleanup Slice
 
@@ -1237,6 +1301,20 @@ Updated order after the 2026-07-08 `Hom_*` correction:
       1,317 warnings, up from the earlier 1,311-warning baseline; this delta
       is recorded as accepted diagnostic evidence for the new generic
       telescope-transfor overlap family.
+14. Completed 2026-07-09: Cat-instance off-diagonal product cleanup:
+    - replaced the remaining `tapp1_func` rules on
+      `hom_postcomp_tele_transf Cat_cat ...` and
+      `hom_precomp_along_tele_transf ... Cat_cat ...` with direct
+      `comp_prod_fapp1_func Cat_cat` composites after pairing the varying
+      transfor with the fixed transformed base transfor;
+    - replaced the remaining capped `tapp1_fapp0` rules with direct
+      `comp_prod_fapp1_fapp0 Cat_cat` arbitrary-pair terms;
+    - deleted `comp_cat_cov_func_func_tapp1_func`,
+      `comp_cat_con_func_func_tapp1_func`, and
+      `comp_cat_func_func_tapp1_fapp0` after active checks no longer consumed
+      them;
+    - kept arbitrary-ambient off-diagonal projection rules deferred until a
+      separate probe classifies endpoint-normal-form and warning interactions.
 
 ## Side-Task Ledger
 
@@ -1350,14 +1428,35 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   warnings (1,146 unjoinable critical pairs and 165 replaceable-pattern
   warnings); `make ci` passes; `make health` refreshes
   `REPORT_EMDASH_HEALTH.md`.
-- Next active Cat-horizontal-action follow-up: add a compatibility fold, only
+- Promoted 2026-07-09: unspecialized telescope-transfor owners
+  `hom_postcomp_tele_transf` and `hom_precomp_along_tele_transf` replaced the
+  old Cat-specific telescope-transfor compatibility names. Their Cat-instance
+  `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules were moved
+  onto the generic heads. Validation passed with focused probes, bounded
+  `make check`, `make catalog`, `make warning-summary`, `make ci`, and
+  `make health`; warning summary was 1,317 warnings.
+- Promoted 2026-07-09: Cat-instance off-diagonal product cleanup deleted
+  `comp_cat_cov_func_func_tapp1_func`,
+  `comp_cat_con_func_func_tapp1_func`, and
+  `comp_cat_func_func_tapp1_fapp0`. The Cat-instance off-diagonal
+  `tapp1_func` projections now compute as `comp_cat_fapp0` over
+  `comp_prod_fapp1_func Cat_cat` applied to a `Struct_sigma` pairing functor,
+  and the capped projections now compute directly to arbitrary-pair
+  `comp_prod_fapp1_fapp0 Cat_cat` terms. Focused source/check probes
+  `tmp/probes/cat_offdiag_prod_cleanup_probe.lp` and
+  `tmp/probes/cat_offdiag_prod_cleanup_checks_probe.lp` pass, as does a
+  warning-enabled source probe. Validation after promotion:
+  `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes; `make catalog` refreshes
+  `REPORT_EMDASH_CHECK_CATALOG.md`; `make warning-summary` remains at 1,317
+  warnings; `make ci` passes; `make health` refreshes
+  `REPORT_EMDASH_HEALTH.md`.
+- Deferred conditional Cat-horizontal-action follow-up: add a compatibility fold, only
   if needed by a checked consumer, from an explicitly authored old two one-slot
   horizontal-composition composite to the arbitrary-pair
   `comp_prod_fapp1_fapp0 Cat_cat` owner.
 - Deferred: possible rename `hom_int_precomp_tele_func` to
   `hom_int_precomp_along_tele_func`.
-- Deferred: add unspecialized `hom_precomp_along_tele_transf` and
-  `hom_postcomp_tele_transf`, move Cat-specific `tapp*` projections to those
-  generic heads as generic `comp_prod*` projections, and demote
-  `hom_*_cat_tele_transf` to aliases or delete them once equivalent generic
-  projection ladders exist.
+- Deferred: arbitrary-ambient off-diagonal telescope projection formulation.
+  The Cat-instance rules now use direct `comp_prod*` product-owner normal
+  forms, but the broader non-`Cat_cat` version still needs a focused probe to
+  classify endpoint-normal-form and warning interactions before promotion.

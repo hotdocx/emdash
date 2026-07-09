@@ -14,7 +14,7 @@ text.
 
 ## Summary
 
-- Total checks: 744
+- Total checks: 743
 - Mapped areas: 19
 - Legacy source-line tags: 328
 - Unclassified checks: 0
@@ -30,12 +30,12 @@ text.
 | Adjunction triangle cut-elimination | 10 |
 | Directed inductive join category | 18 |
 | Cat-valued profunctor facade | 96 |
-| Products, evaluation, curry/uncurry | 79 |
+| Products, evaluation, curry/uncurry | 87 |
 | Sigma/Pi totals, sections, and directed family calculus | 90 |
 | Dependent homs and covariant fibre transport | 37 |
 | Displayed hom-action and laxity extraction | 23 |
 | Universe categories and displayed-family category heads | 9 |
-| Ordinary transformations and structural logic | 78 |
+| Ordinary transformations and structural logic | 69 |
 | Ordinary internal hom and composition actions | 57 |
 | DefIso and computational isomorphism comparisons | 7 |
 | Displayed families, fibres, and displayed functor structure | 20 |
@@ -129,17 +129,17 @@ text.
 | 121 | 1080 | `assert [C : Cat] [w x y z : τ (Obj C)] (h : τ (Hom C y z)) (g : τ (Hom C x y)) (f : τ (Hom C w x)) ⊢ @comp_assoc C w ...` |
 | 164 | 1385 | `assert [A : Cat] (z w x : τ (Obj A)) (h : τ (Hom A w x)) (g : τ (Hom A x z)) ⊢ eq_refl (@hom_precomp_along_fapp0 A A ...` |
 | 188 | 1731 | `assert (F : τ (Functor Cat_cat Cat_cat)) (Z W X : Cat) (H : τ (Functor W X)) ⊢ eq_refl (@hom_precomp_along_func Cat_ ...` |
-| 248 | 2679 | `assert [A : Cat] (x y y' : τ (Obj A)) (f : τ (Hom A y y')) (h : τ (Hom A x y)) ⊢ eq_refl (@Hom_fapp0 A x x y y' (@id ...` |
-| 249 | 2689 | `assert [A : Cat] (x x' y : τ (Obj A)) (g : τ (Hom A x' x)) (h : τ (Hom A x y)) ⊢ eq_refl (@Hom_fapp0 A x x' y y g (@ ...` |
-| 312 | 3629 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ eq_refl (@Op_prof A B R) : τ ( @Op_prof A B R = @Pullback_catd (Product_cat ...` |
-| 313 | 3641 | `assert [A B : Cat] ⊢ eq_refl (@Op_prof_func A B) : τ ( @Op_prof_func A B = @Pullback_catd_func (Product_cat B (Op_ca ...` |
-| 409 | 5357 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) ⊢ eq_refl (@comp_cat_fapp0 A B Cat_cat E F) : τ ( @comp_ca ...` |
-| 410 | 5366 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ eq_refl (@comp_cat_con_func A B Cat_cat F) : τ ( @comp_cat_con_func A B C ...` |
-| 411 | 5374 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) ⊢ eq_refl (@comp_cat_fapp0 A B Cat ...` |
-| 588 | 7351 | `assert [A B : Cat] ⊢ @eq_refl Cat_grpd (Prof_cat A B) : τ (@= Cat_grpd (Prof_cat A B) (Catd_cat (Product_cat (Op_cat ...` |
-| 609 | 7633 | `assert [A B : Cat] ⊢ eq_refl (@Product_map_func A A B B (@id_func A) (@id_func B)) : τ ( @Product_map_func A A B B ( ...` |
-| 610 | 7646 | `assert [A B : Cat] ⊢ eq_refl (@Product_map_func A A B B (@id_func A) (@id_func B)) : τ ( @Product_map_func A A B B ( ...` |
-| 612 | 7673 | `assert [A B : Cat] (xy : τ (Obj (Product_cat A B))) ⊢ eq_refl (@id (Product_cat A B) xy) : τ ( @id (Product_cat A B) ...` |
+| 247 | 2814 | `assert [A : Cat] (x y y' : τ (Obj A)) (f : τ (Hom A y y')) (h : τ (Hom A x y)) ⊢ eq_refl (@Hom_fapp0 A x x y y' (@id ...` |
+| 248 | 2824 | `assert [A : Cat] (x x' y : τ (Obj A)) (g : τ (Hom A x' x)) (h : τ (Hom A x y)) ⊢ eq_refl (@Hom_fapp0 A x x' y y g (@ ...` |
+| 311 | 3797 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ eq_refl (@Op_prof A B R) : τ ( @Op_prof A B R = @Pullback_catd (Product_cat ...` |
+| 312 | 3809 | `assert [A B : Cat] ⊢ eq_refl (@Op_prof_func A B) : τ ( @Op_prof_func A B = @Pullback_catd_func (Product_cat B (Op_ca ...` |
+| 408 | 5525 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) ⊢ eq_refl (@comp_cat_fapp0 A B Cat_cat E F) : τ ( @comp_ca ...` |
+| 409 | 5534 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ eq_refl (@comp_cat_con_func A B Cat_cat F) : τ ( @comp_cat_con_func A B C ...` |
+| 410 | 5542 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) ⊢ eq_refl (@comp_cat_fapp0 A B Cat ...` |
+| 587 | 7519 | `assert [A B : Cat] ⊢ @eq_refl Cat_grpd (Prof_cat A B) : τ (@= Cat_grpd (Prof_cat A B) (Catd_cat (Product_cat (Op_cat ...` |
+| 608 | 7801 | `assert [A B : Cat] ⊢ eq_refl (@Product_map_func A A B B (@id_func A) (@id_func B)) : τ ( @Product_map_func A A B B ( ...` |
+| 609 | 7814 | `assert [A B : Cat] ⊢ eq_refl (@Product_map_func A A B B (@id_func A) (@id_func B)) : τ ( @Product_map_func A A B B ( ...` |
+| 611 | 7841 | `assert [A B : Cat] (xy : τ (Obj (Product_cat A B))) ⊢ eq_refl (@id (Product_cat A B) xy) : τ ( @id (Product_cat A B) ...` |
 
 ### Ordinary categorical isomorphism evidence
 
@@ -165,26 +165,26 @@ text.
 | 153 | 1288 | `assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢ @defiso_iso_evidence C x y i : τ (@IsoEvidence C x y);` |
 | 154 | 1292 | `assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢ @iso_evidence_to C x y (@defiso_iso_evidence C x y i) ≡ ...` |
 | 155 | 1296 | `assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢ @iso_evidence_from C x y (@defiso_iso_evidence C x y i) ...` |
-| 620 | 7773 | `assert [B J : Cat] (P : τ (Prof B J)) (L : τ (Functor J B)) ⊢ @IsRepresentedBy_iso B J P L ≡ IsoEvidence (Prof_cat B ...` |
-| 705 | 9007 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) (L : τ (Functor J' B)) ⊢ @IsWeightedLimit_cov_iso B ...` |
-| 706 | 9020 | `assert [B J J' : Cat] (W : τ (Prof J' J)) [O O' : τ (Prof B J)] (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢ @iso_e ...` |
-| 707 | 9035 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @prof_comparison_evidence A B P Q i : τ ...` |
+| 619 | 7941 | `assert [B J : Cat] (P : τ (Prof B J)) (L : τ (Functor J B)) ⊢ @IsRepresentedBy_iso B J P L ≡ IsoEvidence (Prof_cat B ...` |
+| 704 | 9175 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) (L : τ (Functor J' B)) ⊢ @IsWeightedLimit_cov_iso B ...` |
+| 705 | 9188 | `assert [B J J' : Cat] (W : τ (Prof J' J)) [O O' : τ (Prof B J)] (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢ @iso_e ...` |
+| 706 | 9203 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @prof_comparison_evidence A B P Q i : τ ...` |
 
 ### Hom-category endpoint action
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 246 | 2664 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ fapp0 (@Hom_tele_func A x x' y ...` |
-| 247 | 2671 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) (h : τ (Hom A x y)) ⊢ fapp0 (@Hom ...` |
-| 250 | 2699 | `assert [A : Cat] (x x' y y' : τ (Obj A)) ⊢ @comp_fapp0 Cat_cat (Product_cat (Hom_cat A x' x) (Hom_cat A y y')) (Prod ...` |
-| 251 | 2722 | `assert [A : Cat] (x x' y y' : τ (Obj A)) ⊢ @comp_cat_fapp0 (Product_cat (Hom_cat A x' x) (Hom_cat A y y')) (Product_ ...` |
-| 252 | 2743 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ @comp_cat_fapp0 (Hom_cat A x y) ...` |
-| 253 | 2755 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ @comp_cat_fapp0 (Hom_cat A x y) ...` |
-| 595 | 7400 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A ...` |
-| 596 | 7423 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A ...` |
-| 599 | 7462 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) ⊢ fapp0 (@fapp1_func (Product_cat ...` |
-| 600 | 7476 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) (h : τ (Hom X x y)) ⊢ fapp0 (fapp ...` |
-| 601 | 7493 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) ⊢ @fapp1_fapp0 (Product_cat (Op_c ...` |
+| 245 | 2799 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ fapp0 (@Hom_tele_func A x x' y ...` |
+| 246 | 2806 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) (h : τ (Hom A x y)) ⊢ fapp0 (@Hom ...` |
+| 249 | 2834 | `assert [A : Cat] (x x' y y' : τ (Obj A)) ⊢ @comp_fapp0 Cat_cat (Product_cat (Hom_cat A x' x) (Hom_cat A y y')) (Prod ...` |
+| 250 | 2857 | `assert [A : Cat] (x x' y y' : τ (Obj A)) ⊢ @comp_cat_fapp0 (Product_cat (Hom_cat A x' x) (Hom_cat A y y')) (Product_ ...` |
+| 251 | 2878 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ @comp_cat_fapp0 (Hom_cat A x y) ...` |
+| 252 | 2890 | `assert [A : Cat] (x x' y y' : τ (Obj A)) (g : τ (Hom A x' x)) (f : τ (Hom A y y')) ⊢ @comp_cat_fapp0 (Hom_cat A x y) ...` |
+| 594 | 7568 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A ...` |
+| 595 | 7591 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A ...` |
+| 598 | 7630 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) ⊢ fapp0 (@fapp1_func (Product_cat ...` |
+| 599 | 7644 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) (h : τ (Hom X x y)) ⊢ fapp0 (fapp ...` |
+| 600 | 7661 | `assert [X : Cat] (x x' y y' : τ (Obj X)) (p : τ (Hom X x' x)) (q : τ (Hom X y y')) ⊢ @fapp1_fapp0 (Product_cat (Op_c ...` |
 
 ### Categorical univalence and omega equivalence
 
@@ -222,199 +222,199 @@ text.
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 343 | 4112 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathInd_src_catd Z x) E ≡ Fibre_cat ...` |
-| 344 | 4117 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @PathInd_src_catd Z x ≡ @pathout_refl_eval_func Z x;` |
-| 345 | 4122 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathInd_tgt_catd Z x) E ≡ Pi_cat E;` |
-| 346 | 4127 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
-| 347 | 4138 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat ...` |
-| 350 | 4164 | `assert [Z : Cat] (x y : τ (Obj Z)) ⊢ Fibre_cat (@CompTarget_catd Z x) y ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd ...` |
-| 352 | 4174 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x) ≡ @Functord_cat Z (@Rep_catd Z ...` |
-| 353 | 4179 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @path_ind_sec Z x (@CompMotive_catd Z x) (@id_funcd Z (@Rep_catd Z x)) ≡ @path_co ...` |
-| 354 | 4188 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp1_fapp0 Z Cat_cat (@CompTarget_catd Z x) x y p ≡ @Comp ...` |
-| 355 | 4209 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (Hom_cat Z x y) (@Functord_cat Z (@Rep_catd Z y) (@R ...` |
-| 356 | 4225 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
-| 357 | 4242 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
-| 358 | 4269 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tdapp0_fapp0 Z (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) (@PathOutReflEva ...` |
-| 359 | 4281 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat ...` |
-| 360 | 4299 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
-| 361 | 4323 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x)) (@Pi_cat (@Path ...` |
-| 362 | 4345 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
-| 364 | 4417 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Sigma_cat Z (@PathOutMotives_cat ...` |
-| 365 | 4428 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
-| 366 | 4445 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x)) (@Pi_cat (@Path ...` |
-| 367 | 4460 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
-| 396 | 5235 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_pi_transport_fun ...` |
-| 397 | 5245 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @PathIndTgt_transport_fun ...` |
-| 398 | 5251 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @fdapp1_int_cell Z (@Path ...` |
-| 399 | 5265 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
-| 400 | 5283 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
-| 401 | 5309 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
-| 482 | 6097 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @PathOut_cat Z x ≡ @Sigma_cat Z (@Rep_catd Z x);` |
-| 483 | 6102 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Op_cat Z) Cat_cat (@PathOut_cat_func Z) x ≡ @PathOut_cat Z x;` |
-| 484 | 6107 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ Fibre_cat (@PathOutMotives_catd Z) x ≡ @Catd_cat (@PathOut_cat Z x);` |
-| 485 | 6112 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat_cat (@pathout_refl_eval_func Z x) (@Rep ...` |
-| 486 | 6124 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) x (@PathO ...` |
-| 487 | 6135 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@fapp0 (@Catd_ ...` |
-| 488 | 6153 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
-| 489 | 6169 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @PathOut_transport_func Z x y p ≡ @fapp1_fapp0 (Op_cat Z) C ...` |
-| 490 | 6180 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (@PathOut_cat Z y) (@PathOut_c ...` |
-| 491 | 6194 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
-| 492 | 6204 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
-| 493 | 6216 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (@PathOut_cat Z y) (@PathOut_cat Z x) (@PathOut_tran ...` |
-| 496 | 6245 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp1_fapp0 (@PathOut_cat Z y) (@Pat ...` |
-| 497 | 6271 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @comp_fapp0 (@PathOut_cat Z x) (@path ...` |
-| 498 | 6305 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_refl_eval_base_f ...` |
-| 499 | 6317 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
-| 500 | 6340 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) x (@PathO ...` |
-| 501 | 6351 | `assert [Z : Cat] ⊢ @PathOutPi_funcd Z ≡ @Pi_pullback_funcd Z (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));` |
-| 502 | 6358 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x ...` |
-| 503 | 6363 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x ...` |
-| 504 | 6368 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndSrc_ca ...` |
-| 505 | 6376 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @PathIndSrc_transport_fun ...` |
-| 506 | 6382 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
-| 510 | 6430 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @piapp0 (@PathOut_cat Z x) (@Rep_catd (@PathOut_cat Z x) (@ ...` |
-| 511 | 6439 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_c ...` |
-| 513 | 6456 | `assert [Z : Cat] (x : τ (Obj Z)) (E D : τ (Catd (@PathOut_cat Z x))) (η : τ (Functord E D)) ⊢ @fapp1_fapp0 (@Catd_ca ...` |
-| 515 | 6480 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
+| 342 | 4280 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathInd_src_catd Z x) E ≡ Fibre_cat ...` |
+| 343 | 4285 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @PathInd_src_catd Z x ≡ @pathout_refl_eval_func Z x;` |
+| 344 | 4290 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathInd_tgt_catd Z x) E ≡ Pi_cat E;` |
+| 345 | 4295 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
+| 346 | 4306 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat ...` |
+| 349 | 4332 | `assert [Z : Cat] (x y : τ (Obj Z)) ⊢ Fibre_cat (@CompTarget_catd Z x) y ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd ...` |
+| 351 | 4342 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x) ≡ @Functord_cat Z (@Rep_catd Z ...` |
+| 352 | 4347 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @path_ind_sec Z x (@CompMotive_catd Z x) (@id_funcd Z (@Rep_catd Z x)) ≡ @path_co ...` |
+| 353 | 4356 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp1_fapp0 Z Cat_cat (@CompTarget_catd Z x) x y p ≡ @Comp ...` |
+| 354 | 4377 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (Hom_cat Z x y) (@Functord_cat Z (@Rep_catd Z y) (@R ...` |
+| 355 | 4393 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
+| 356 | 4410 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
+| 357 | 4437 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tdapp0_fapp0 Z (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) (@PathOutReflEva ...` |
+| 358 | 4449 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat ...` |
+| 359 | 4467 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
+| 360 | 4491 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x)) (@Pi_cat (@Path ...` |
+| 361 | 4513 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
+| 363 | 4585 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @tapp0_fapp0 (@Sigma_cat Z (@PathOutMotives_cat ...` |
+| 364 | 4596 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@pathout_refl_obj Z x)) ...` |
+| 365 | 4613 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Fibre_cat (@CompMotive_catd Z x) (@pathout_refl_obj Z x)) (@Pi_cat (@Path ...` |
+| 366 | 4628 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (Hom_cat Z y z) (Hom_cat Z x z ...` |
+| 395 | 5403 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_pi_transport_fun ...` |
+| 396 | 5413 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @PathIndTgt_transport_fun ...` |
+| 397 | 5419 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @fdapp1_int_cell Z (@Path ...` |
+| 398 | 5433 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
+| 399 | 5451 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
+| 400 | 5477 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (s : τ (Obj (@Pi_cat (@Path ...` |
+| 481 | 6265 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @PathOut_cat Z x ≡ @Sigma_cat Z (@Rep_catd Z x);` |
+| 482 | 6270 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (Op_cat Z) Cat_cat (@PathOut_cat_func Z) x ≡ @PathOut_cat Z x;` |
+| 483 | 6275 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ Fibre_cat (@PathOutMotives_catd Z) x ≡ @Catd_cat (@PathOut_cat Z x);` |
+| 484 | 6280 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @fapp0 (@Catd_cat (@PathOut_cat Z x)) Cat_cat (@pathout_refl_eval_func Z x) (@Rep ...` |
+| 485 | 6292 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) x (@PathO ...` |
+| 486 | 6303 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@fapp0 (@Catd_ ...` |
+| 487 | 6321 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
+| 488 | 6337 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @PathOut_transport_func Z x y p ≡ @fapp1_fapp0 (Op_cat Z) C ...` |
+| 489 | 6348 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp0 (@PathOut_cat Z y) (@PathOut_c ...` |
+| 490 | 6362 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
+| 491 | 6372 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_motive_transport ...` |
+| 492 | 6384 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (@PathOut_cat Z y) (@PathOut_cat Z x) (@PathOut_tran ...` |
+| 495 | 6413 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @fapp1_fapp0 (@PathOut_cat Z y) (@Pat ...` |
+| 496 | 6439 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) (q : τ (Hom Z y z)) ⊢ @comp_fapp0 (@PathOut_cat Z x) (@path ...` |
+| 497 | 6473 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @pathout_refl_eval_base_f ...` |
+| 498 | 6485 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
+| 499 | 6508 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat) x (@PathO ...` |
+| 500 | 6519 | `assert [Z : Cat] ⊢ @PathOutPi_funcd Z ≡ @Pi_pullback_funcd Z (@Op_func (Op_cat Z) Cat_cat (@PathOut_cat_func Z));` |
+| 501 | 6526 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndTgt_catd Z) (Struct_sigma x ...` |
+| 502 | 6531 | `assert [Z : Cat] (x : τ (Obj Z)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndSrc_catd Z) (Struct_sigma x ...` |
+| 503 | 6536 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ Fibre_cat (@PathIndSrc_ca ...` |
+| 504 | 6544 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) ⊢ @PathIndSrc_transport_fun ...` |
+| 505 | 6550 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
+| 509 | 6598 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @piapp0 (@PathOut_cat Z x) (@Rep_catd (@PathOut_cat Z x) (@ ...` |
+| 510 | 6607 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_c ...` |
+| 512 | 6624 | `assert [Z : Cat] (x : τ (Obj Z)) (E D : τ (Catd (@PathOut_cat Z x))) (η : τ (Functord E D)) ⊢ @fapp1_fapp0 (@Catd_ca ...` |
+| 514 | 6648 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) (E : τ (Catd (@PathOut_cat Z x))) (u : τ (Obj (Fibre_cat E (@ ...` |
 
 ### Adjunction triangle cut-elimination
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 295 | 3376 | `assert [R L : Cat] (J : τ (Adjunction R L)) (X X' : τ (Obj R)) (Y : τ (Obj L)) (g : τ (Hom R X X')) (f : τ (Hom L (@ ...` |
-| 296 | 3422 | `assert [R L : Cat] (J : τ (Adjunction R L)) (X : τ (Obj R)) (Y' Y : τ (Obj L)) (f : τ (Hom R X (@fapp0 L R (@right_a ...` |
-| 300 | 3493 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @left_adj_func (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @Op_ ...` |
-| 301 | 3500 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @right_adj_func (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @Op ...` |
-| 302 | 3507 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @unit_adj_transf (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @O ...` |
-| 303 | 3521 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @counit_adj_transf (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ ...` |
-| 665 | 8314 | `assert [A J J' B : Cat] [F : τ (Functor J A)] [W : τ (Prof J J')] [L : τ (Functor J' A)] (isc : τ (@WeightedColimit_ ...` |
-| 717 | 9144 | `assert [B J J' A : Cat] [W : τ (Prof J' J)] [F : τ (Functor J B)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
-| 718 | 9164 | `assert [A B I K : Cat] (adj : τ (Adjunction A B)) (M : τ (Functor I A)) (F : τ (Functor K B)) [R : τ (Prof I K)] (r ...` |
-| 719 | 9201 | `assert [A B I K : Cat] (adj : τ (Adjunction A B)) (M : τ (Functor I A)) (F : τ (Functor K B)) [R : τ (Prof I K)] (s ...` |
+| 294 | 3544 | `assert [R L : Cat] (J : τ (Adjunction R L)) (X X' : τ (Obj R)) (Y : τ (Obj L)) (g : τ (Hom R X X')) (f : τ (Hom L (@ ...` |
+| 295 | 3590 | `assert [R L : Cat] (J : τ (Adjunction R L)) (X : τ (Obj R)) (Y' Y : τ (Obj L)) (f : τ (Hom R X (@fapp0 L R (@right_a ...` |
+| 299 | 3661 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @left_adj_func (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @Op_ ...` |
+| 300 | 3668 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @right_adj_func (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @Op ...` |
+| 301 | 3675 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @unit_adj_transf (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ @O ...` |
+| 302 | 3689 | `assert [A B : Cat] (adj : τ (Adjunction A B)) ⊢ @counit_adj_transf (Op_cat B) (Op_cat A) (@Op_adjunction A B adj) ≡ ...` |
+| 664 | 8482 | `assert [A J J' B : Cat] [F : τ (Functor J A)] [W : τ (Prof J J')] [L : τ (Functor J' A)] (isc : τ (@WeightedColimit_ ...` |
+| 716 | 9312 | `assert [B J J' A : Cat] [W : τ (Prof J' J)] [F : τ (Functor J B)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
+| 717 | 9332 | `assert [A B I K : Cat] (adj : τ (Adjunction A B)) (M : τ (Functor I A)) (F : τ (Functor K B)) [R : τ (Prof I K)] (r ...` |
+| 718 | 9369 | `assert [A B I K : Cat] (adj : τ (Adjunction A B)) (M : τ (Functor I A)) (F : τ (Functor K B)) [R : τ (Prof I K)] (s ...` |
 
 ### Directed inductive join category
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 666 | 8328 | `assert [A B : Cat] (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Terminal_prof A B) ...` |
-| 667 | 8338 | `assert [I A' B' A B : Cat] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] [a : τ (Functor I A')] [ ...` |
-| 668 | 8356 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Prof_func_hom A B F : τ (@Prof_hom A B B F (@Unit_prof B) F);` |
-| 670 | 8367 | `assert [A : Cat] ⊢ @Prof_func_hom A A (@id_func A) ≡ @Prof_id_hom A;` |
-| 671 | 8371 | `assert [A B : Cat] (F : τ (Functor A B)) (ab : τ (Obj (Product_cat (Op_cat A) A))) ⊢ @tapp0_fapp0 (Product_cat (Op_c ...` |
-| 672 | 8388 | `assert [A B : Cat] (F : τ (Functor A B)) (ab ab' : τ (Obj (Product_cat (Op_cat A) A))) (pq : τ (Hom (Product_cat (Op ...` |
-| 673 | 8424 | `assert [A B : Cat] ⊢ @join_cross_transf A B : τ (Obj (@Prof_transf_cat (@Join_cat A B) A (@Join_cat A B) B (@Termina ...` |
-| 674 | 8435 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
-| 675 | 8453 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
-| 676 | 8471 | `assert [A B I : Cat] (a : τ (Functor I A)) (b : τ (Functor I B)) ⊢ @join_cross_hom A B I a b : τ (@Prof_hom I (@Join ...` |
-| 677 | 8489 | `assert [A B I : Cat] (a : τ (Functor I A)) (b : τ (Functor I B)) ⊢ @join_cross_hom A B I a b ≡ @Prof_cell_eval I A B ...` |
-| 678 | 8503 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
-| 679 | 8522 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
-| 680 | 8535 | `assert [A B E I : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E ...` |
-| 682 | 8579 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (p : τ (@Prof_hom I A B F P M)) ...` |
-| 683 | 8612 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
-| 684 | 8654 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (p : τ (@Prof_hom I A B F P G)) ...` |
-| 685 | 8688 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
+| 665 | 8496 | `assert [A B : Cat] (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Terminal_prof A B) ...` |
+| 666 | 8506 | `assert [I A' B' A B : Cat] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] [a : τ (Functor I A')] [ ...` |
+| 667 | 8524 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Prof_func_hom A B F : τ (@Prof_hom A B B F (@Unit_prof B) F);` |
+| 669 | 8535 | `assert [A : Cat] ⊢ @Prof_func_hom A A (@id_func A) ≡ @Prof_id_hom A;` |
+| 670 | 8539 | `assert [A B : Cat] (F : τ (Functor A B)) (ab : τ (Obj (Product_cat (Op_cat A) A))) ⊢ @tapp0_fapp0 (Product_cat (Op_c ...` |
+| 671 | 8556 | `assert [A B : Cat] (F : τ (Functor A B)) (ab ab' : τ (Obj (Product_cat (Op_cat A) A))) (pq : τ (Hom (Product_cat (Op ...` |
+| 672 | 8592 | `assert [A B : Cat] ⊢ @join_cross_transf A B : τ (Obj (@Prof_transf_cat (@Join_cat A B) A (@Join_cat A B) B (@Termina ...` |
+| 673 | 8603 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
+| 674 | 8621 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
+| 675 | 8639 | `assert [A B I : Cat] (a : τ (Functor I A)) (b : τ (Functor I B)) ⊢ @join_cross_hom A B I a b : τ (@Prof_hom I (@Join ...` |
+| 676 | 8657 | `assert [A B I : Cat] (a : τ (Functor I A)) (b : τ (Functor I B)) ⊢ @join_cross_hom A B I a b ≡ @Prof_cell_eval I A B ...` |
+| 677 | 8671 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
+| 678 | 8690 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
+| 679 | 8703 | `assert [A B E I : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E ...` |
+| 681 | 8747 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (p : τ (@Prof_hom I A B F P M)) ...` |
+| 682 | 8780 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
+| 683 | 8822 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (p : τ (@Prof_hom I A B F P G)) ...` |
+| 684 | 8856 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
 
 ### Cat-valued profunctor facade
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 307 | 3564 | `assert [A B : Cat] (R : τ (Prof A B)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_cat B (Op_cat A)) Cat_cat (@ ...` |
-| 308 | 3579 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_c ...` |
-| 309 | 3594 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat (Op_cat B) (Op_cat A)) (@Op_prof_func A B) ...` |
-| 310 | 3603 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Op_prof (Op_cat B) (Op_cat A) (@Op_prof A B R) ≡ R;` |
-| 311 | 3608 | `assert [A B : Cat] (R : τ (Prof A B)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A a' a)) (q : τ (Hom B b b') ...` |
-| 314 | 3651 | `assert [A B : Cat] [P Q : τ (Prof A B)] (r : τ (ProfMap P Q)) ⊢ @Op_prof_map A B P Q r : τ (@ProfMap (Op_cat B) (Op_ ...` |
-| 315 | 3661 | `assert [A A' B B' : Cat] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] ⊢ @Prof_reindex (Op_cat B) ...` |
-| 587 | 7348 | `assert [A B : Cat] ⊢ Prof_base A B ≡ Product_cat (Op_cat A) B;` |
-| 590 | 7360 | `assert [A B : Cat] (P Q : τ (Prof A B)) ⊢ ProfMap P Q ≡ Functord P Q;` |
-| 591 | 7364 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @id (Prof_cat A B) P : τ (ProfMap P P);` |
-| 592 | 7368 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (q : τ (ProfMap Q R)) (p : τ (ProfMap P Q)) ⊢ @comp_fapp0 (Prof_cat A B) P ...` |
-| 593 | 7374 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_p ...` |
-| 594 | 7384 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ @fapp1_func ...` |
-| 597 | 7450 | `assert [B X : Cat] (G : τ (Functor B X)) (x : τ (Obj X)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_prof B X G) (Struct_sigma ...` |
-| 598 | 7457 | `assert [X : Cat] (x y : τ (Obj X)) ⊢ Fibre_cat (@Unit_prof X) (Struct_sigma x y) ≡ Hom_cat X x y;` |
-| 602 | 7506 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_c ...` |
-| 611 | 7654 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a : τ (Obj A')) (b : τ (Obj B')) ⊢ @fapp0 (P ...` |
-| 613 | 7687 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a : τ (Obj A')) (b : τ (O ...` |
-| 614 | 7700 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a a' : τ (Obj A')) (b b' ...` |
-| 615 | 7717 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a a' : τ (Obj A')) (b b' ...` |
-| 616 | 7740 | `assert [A A' B B' X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (F' : τ (Functor A' A)) (G' : τ (Functor B' B ...` |
-| 617 | 7755 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) ⊢ @Prof_reindex X A B B (@Hom_prof B X G) F (@id_fu ...` |
-| 618 | 7765 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Companion_prof A B F ≡ @Hom_prof_along A B B F (@id_func B);` |
-| 619 | 7769 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Conjoint_prof A B F ≡ @Hom_prof A B F;` |
-| 621 | 7782 | `assert [B J : Cat] (P : τ (Prof B J)) ⊢ @Representation_iso B J P ≡ `Σ_ L : τ (Functor J B), @IsRepresentedBy_iso B ...` |
-| 622 | 7789 | `assert [A A' B B' : Cat] (R' : τ (Prof A' B')) (F : τ (Functor A' A)) (R : τ (Prof A B)) (G : τ (Functor B' B)) ⊢ @P ...` |
-| 623 | 7800 | `assert [I A B : Cat] (F : τ (Functor I A)) (R : τ (Prof A B)) (G : τ (Functor I B)) ⊢ @Prof_hom_cat I A B F R G ≡ @F ...` |
-| 624 | 7810 | `assert [I A B : Cat] (F : τ (Functor I A)) (R : τ (Prof A B)) (G : τ (Functor I B)) ⊢ @Prof_hom I A B F R G ≡ Obj (@ ...` |
-| 625 | 7821 | `assert [I C : Cat] (F G : τ (Functor I C)) ⊢ @Prof_hom_cat I C C F (@Unit_prof C) G ≡ @Functord_cat (Product_cat (Op ...` |
-| 626 | 7829 | `assert [I A' B' A B : Cat] [R' : τ (Prof A' B')] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] [a ...` |
-| 627 | 7845 | `assert [A A' B B' X : Cat] (R' : τ (Prof A' B')) (F : τ (Functor A' A)) (H : τ (Functor A X)) (K : τ (Functor B X)) ...` |
-| 628 | 7866 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Prof_reindex A A B B R (@id_func A) (@id_func B) ≡ R;` |
-| 629 | 7871 | `assert [A A' B X X' : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (F : τ (Functor A' A)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
-| 630 | 7886 | `assert [A A' B X : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (F : τ (Functor A' A)) ⊢ @Prof_reindex A A' X X (@Prof ...` |
-| 631 | 7900 | `assert [A B X X' : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (G : τ (Functor X' X)) ⊢ @Prof_reindex A A X X' (@Prof ...` |
-| 632 | 7914 | `assert [A B X : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) ⊢ @Prof_reindex A A X X (@Prof_tensor A B X R S) (@id_fun ...` |
-| 633 | 7924 | `assert [A A' B X Y : Cat] (H : τ (Functor A Y)) (K : τ (Functor B Y)) (S : τ (Prof B X)) (F : τ (Functor A' A)) ⊢ @P ...` |
-| 634 | 7945 | `assert [A B X : Cat] [P P' : τ (Prof A B)] [Q Q' : τ (Prof B X)] (r : τ (ProfMap P P')) (s : τ (ProfMap Q Q')) ⊢ @Pr ...` |
-| 635 | 7955 | `assert [A B X : Cat] ⊢ @Prof_tensor_func A B X : τ (Functor (Product_cat (@Prof_cat A B) (@Prof_cat B X)) (@Prof_cat ...` |
-| 636 | 7961 | `assert [A B X : Cat] (P : τ (Prof A B)) (Q : τ (Prof B X)) ⊢ @fapp0 (Product_cat (@Prof_cat A B) (@Prof_cat B X)) (@ ...` |
-| 637 | 7971 | `assert [A B X : Cat] [P P' : τ (Prof A B)] [Q Q' : τ (Prof B X)] (r : τ (ProfMap P P')) (s : τ (ProfMap Q Q')) ⊢ @fa ...` |
-| 638 | 7985 | `assert [I A B X : Cat] [R : τ (Prof A B)] [S : τ (Prof B X)] [F : τ (Functor I A)] [G : τ (Functor I X)] (M : τ (Fun ...` |
-| 639 | 7996 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Prof_tensor_right_unit_func A B) P ...` |
-| 640 | 8005 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @fapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
-| 641 | 8021 | `assert [A B : Cat] ⊢ @Prof_coyoneda_cov_transf A B : τ (Transf (@Prof_tensor_right_unit_func A B) (@id_func (@Prof_c ...` |
-| 642 | 8027 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_cov_map A B P : τ (ProfMap (@Prof_tensor A B B P (@Unit_prof ...` |
-| 643 | 8034 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_cov_map A B P ≡ @tapp0_fapp0 (@Prof_cat A B) (@Prof_cat A B) ...` |
-| 644 | 8045 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @tapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
-| 645 | 8060 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Prof_tensor_left_unit_func A B) P ≡ ...` |
-| 646 | 8069 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @fapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
-| 647 | 8085 | `assert [A B : Cat] ⊢ @Prof_coyoneda_con_transf A B : τ (Transf (@Prof_tensor_left_unit_func A B) (@id_func (@Prof_ca ...` |
-| 648 | 8091 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_con_map A B P : τ (ProfMap (@Prof_tensor A A B (@Unit_prof A) ...` |
-| 649 | 8098 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_con_map A B P ≡ @tapp0_fapp0 (@Prof_cat A B) (@Prof_cat A B) ...` |
-| 650 | 8109 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @tapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
-| 652 | 8137 | `assert [A A' A'' B B' B'' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (F' : τ (Functor A ...` |
-| 653 | 8154 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (R : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) ( ...` |
-| 654 | 8165 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢ @ ...` |
-| 655 | 8179 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) ⊢ @Pullback_catd_func (Product_cat (Op_cat A' ...` |
-| 656 | 8188 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) ⊢ @Pullback_catd_func (Product_cat A B) (Prod ...` |
-| 657 | 8203 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @Pullbac ...` |
-| 658 | 8221 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @fapp0 ( ...` |
-| 660 | 8260 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (C : Cat) ⊢ @Prof_reindex A A' B B' (@Const_c ...` |
-| 661 | 8270 | `assert [A A' B B' : Cat] [R S : τ (Prof A B)] (r : τ (ProfMap R S)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) ⊢ ...` |
-| 662 | 8280 | `assert [A B : Cat] [R S : τ (Prof A B)] (r : τ (ProfMap R S)) ⊢ @Prof_reindex_transf A A B B R S r (@id_func A) (@id ...` |
-| 663 | 8290 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Op_prof_map A B R R (@id (@Prof_cat A B) R) ≡ @id (@Prof_cat (Op_cat B) (Op ...` |
-| 664 | 8299 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
-| 669 | 8361 | `assert [A : Cat] ⊢ @Prof_id_hom A ≡ @id_funcd (Product_cat (Op_cat A) A) (@Unit_prof A);` |
-| 681 | 8560 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (s : τ (ProfMap Q R)) (r : τ (ProfMap P Q)) ⊢ @comp_fapp0 (@Prof_cat (Op_c ...` |
-| 686 | 8732 | `assert [A A' B B' X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) (F : τ (Functor A' A)) (M : τ (Functor B' B)) ⊢ @Pr ...` |
-| 687 | 8747 | `assert [A B X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) ⊢ @Prof_reindex A A B B (@Prof_imply_cov A B X O Q) (@id_ ...` |
-| 688 | 8757 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ fapp0 (@Prof_imply_cov_func A B X Q) O ≡ @Prof_imply_co ...` |
-| 689 | 8763 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] ⊢ fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O'] : ...` |
-| 690 | 8776 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] (o : τ (Functord O O')) ⊢ fapp1_fapp0 (@Prof_imply_cov ...` |
-| 691 | 8787 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ @fapp1_fapp0 (@Prof_cat A X) (@Prof_cat A B) (@Prof_imp ...` |
-| 692 | 8798 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' O'' : τ (Prof A X)] (o : τ (ProfMap O O')) (o' : τ (ProfMap O' O'')) ⊢ ...` |
-| 693 | 8821 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp0 (Product_cat (Prof ...` |
-| 694 | 8838 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] ⊢ @fapp1_func (Product_ ...` |
-| 695 | 8861 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r : τ (Hom (Product_ca ...` |
-| 696 | 8883 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp1_fapp0 (Product_cat ...` |
-| 697 | 8907 | `assert [A B X : Cat] [oq0 oq1 oq2 : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r01 : τ (Hom (Pro ...` |
-| 698 | 8937 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap P (@Prof_imply_cov A B ...` |
-| 699 | 8946 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
-| 700 | 8955 | `assert [A B B' X X' : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) (M : τ (Functor B' B)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
-| 701 | 8970 | `assert [A B X : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) ⊢ @Prof_reindex B B X X (@Prof_imply_con A B X P O) (@id_ ...` |
-| 702 | 8980 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap Q (@Prof_imply_con A B ...` |
-| 703 | 8989 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
-| 704 | 8998 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) ⊢ @WeightedCone_prof B J J' F W ≡ @Prof_imply_cov B ...` |
-| 708 | 9041 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @comp_fapp0 (@Prof_cat A B) P Q P (@prof ...` |
-| 709 | 9051 | `assert [A B : Cat] [P Q R S : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) (h : τ (@Pr ...` |
-| 710 | 9066 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) ⊢ @prof_compa ...` |
-| 711 | 9074 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (s : τ (@ProfMap A B R Q)) ⊢ @prof_compa ...` |
-| 712 | 9082 | `assert [A B : Cat] [P R : τ (Prof A B)] (r : τ (@ProfMap A B R P)) ⊢ @prof_comparison_push A B P P (@prof_comparison ...` |
-| 713 | 9091 | `assert [A B : Cat] [P Q S R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (j : τ (@ProfComparison A B Q S)) (r : ...` |
-| 714 | 9103 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
-| 715 | 9115 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
-| 716 | 9132 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
+| 306 | 3732 | `assert [A B : Cat] (R : τ (Prof A B)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_cat B (Op_cat A)) Cat_cat (@ ...` |
+| 307 | 3747 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Product_c ...` |
+| 308 | 3762 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat (Op_cat B) (Op_cat A)) (@Op_prof_func A B) ...` |
+| 309 | 3771 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Op_prof (Op_cat B) (Op_cat A) (@Op_prof A B R) ≡ R;` |
+| 310 | 3776 | `assert [A B : Cat] (R : τ (Prof A B)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ (Hom A a' a)) (q : τ (Hom B b b') ...` |
+| 313 | 3819 | `assert [A B : Cat] [P Q : τ (Prof A B)] (r : τ (ProfMap P Q)) ⊢ @Op_prof_map A B P Q r : τ (@ProfMap (Op_cat B) (Op_ ...` |
+| 314 | 3829 | `assert [A A' B B' : Cat] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] ⊢ @Prof_reindex (Op_cat B) ...` |
+| 586 | 7516 | `assert [A B : Cat] ⊢ Prof_base A B ≡ Product_cat (Op_cat A) B;` |
+| 589 | 7528 | `assert [A B : Cat] (P Q : τ (Prof A B)) ⊢ ProfMap P Q ≡ Functord P Q;` |
+| 590 | 7532 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @id (Prof_cat A B) P : τ (ProfMap P P);` |
+| 591 | 7536 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (q : τ (ProfMap Q R)) (p : τ (ProfMap P Q)) ⊢ @comp_fapp0 (Prof_cat A B) P ...` |
+| 592 | 7542 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_p ...` |
+| 593 | 7552 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ @fapp1_func ...` |
+| 596 | 7618 | `assert [B X : Cat] (G : τ (Functor B X)) (x : τ (Obj X)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_prof B X G) (Struct_sigma ...` |
+| 597 | 7625 | `assert [X : Cat] (x y : τ (Obj X)) ⊢ Fibre_cat (@Unit_prof X) (Struct_sigma x y) ≡ Hom_cat X x y;` |
+| 601 | 7674 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ Fibre_cat (@Hom_c ...` |
+| 610 | 7822 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a : τ (Obj A')) (b : τ (Obj B')) ⊢ @fapp0 (P ...` |
+| 612 | 7855 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a : τ (Obj A')) (b : τ (O ...` |
+| 613 | 7868 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a a' : τ (Obj A')) (b b' ...` |
+| 614 | 7885 | `assert [A A' B B' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (a a' : τ (Obj A')) (b b' ...` |
+| 615 | 7908 | `assert [A A' B B' X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) (F' : τ (Functor A' A)) (G' : τ (Functor B' B ...` |
+| 616 | 7923 | `assert [A B X : Cat] (F : τ (Functor A X)) (G : τ (Functor B X)) ⊢ @Prof_reindex X A B B (@Hom_prof B X G) F (@id_fu ...` |
+| 617 | 7933 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Companion_prof A B F ≡ @Hom_prof_along A B B F (@id_func B);` |
+| 618 | 7937 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Conjoint_prof A B F ≡ @Hom_prof A B F;` |
+| 620 | 7950 | `assert [B J : Cat] (P : τ (Prof B J)) ⊢ @Representation_iso B J P ≡ `Σ_ L : τ (Functor J B), @IsRepresentedBy_iso B ...` |
+| 621 | 7957 | `assert [A A' B B' : Cat] (R' : τ (Prof A' B')) (F : τ (Functor A' A)) (R : τ (Prof A B)) (G : τ (Functor B' B)) ⊢ @P ...` |
+| 622 | 7968 | `assert [I A B : Cat] (F : τ (Functor I A)) (R : τ (Prof A B)) (G : τ (Functor I B)) ⊢ @Prof_hom_cat I A B F R G ≡ @F ...` |
+| 623 | 7978 | `assert [I A B : Cat] (F : τ (Functor I A)) (R : τ (Prof A B)) (G : τ (Functor I B)) ⊢ @Prof_hom I A B F R G ≡ Obj (@ ...` |
+| 624 | 7989 | `assert [I C : Cat] (F G : τ (Functor I C)) ⊢ @Prof_hom_cat I C C F (@Unit_prof C) G ≡ @Functord_cat (Product_cat (Op ...` |
+| 625 | 7997 | `assert [I A' B' A B : Cat] [R' : τ (Prof A' B')] [R : τ (Prof A B)] [F : τ (Functor A' A)] [G : τ (Functor B' B)] [a ...` |
+| 626 | 8013 | `assert [A A' B B' X : Cat] (R' : τ (Prof A' B')) (F : τ (Functor A' A)) (H : τ (Functor A X)) (K : τ (Functor B X)) ...` |
+| 627 | 8034 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Prof_reindex A A B B R (@id_func A) (@id_func B) ≡ R;` |
+| 628 | 8039 | `assert [A A' B X X' : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (F : τ (Functor A' A)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
+| 629 | 8054 | `assert [A A' B X : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (F : τ (Functor A' A)) ⊢ @Prof_reindex A A' X X (@Prof ...` |
+| 630 | 8068 | `assert [A B X X' : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) (G : τ (Functor X' X)) ⊢ @Prof_reindex A A X X' (@Prof ...` |
+| 631 | 8082 | `assert [A B X : Cat] (R : τ (Prof A B)) (S : τ (Prof B X)) ⊢ @Prof_reindex A A X X (@Prof_tensor A B X R S) (@id_fun ...` |
+| 632 | 8092 | `assert [A A' B X Y : Cat] (H : τ (Functor A Y)) (K : τ (Functor B Y)) (S : τ (Prof B X)) (F : τ (Functor A' A)) ⊢ @P ...` |
+| 633 | 8113 | `assert [A B X : Cat] [P P' : τ (Prof A B)] [Q Q' : τ (Prof B X)] (r : τ (ProfMap P P')) (s : τ (ProfMap Q Q')) ⊢ @Pr ...` |
+| 634 | 8123 | `assert [A B X : Cat] ⊢ @Prof_tensor_func A B X : τ (Functor (Product_cat (@Prof_cat A B) (@Prof_cat B X)) (@Prof_cat ...` |
+| 635 | 8129 | `assert [A B X : Cat] (P : τ (Prof A B)) (Q : τ (Prof B X)) ⊢ @fapp0 (Product_cat (@Prof_cat A B) (@Prof_cat B X)) (@ ...` |
+| 636 | 8139 | `assert [A B X : Cat] [P P' : τ (Prof A B)] [Q Q' : τ (Prof B X)] (r : τ (ProfMap P P')) (s : τ (ProfMap Q Q')) ⊢ @fa ...` |
+| 637 | 8153 | `assert [I A B X : Cat] [R : τ (Prof A B)] [S : τ (Prof B X)] [F : τ (Functor I A)] [G : τ (Functor I X)] (M : τ (Fun ...` |
+| 638 | 8164 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Prof_tensor_right_unit_func A B) P ...` |
+| 639 | 8173 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @fapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
+| 640 | 8189 | `assert [A B : Cat] ⊢ @Prof_coyoneda_cov_transf A B : τ (Transf (@Prof_tensor_right_unit_func A B) (@id_func (@Prof_c ...` |
+| 641 | 8195 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_cov_map A B P : τ (ProfMap (@Prof_tensor A B B P (@Unit_prof ...` |
+| 642 | 8202 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_cov_map A B P ≡ @tapp0_fapp0 (@Prof_cat A B) (@Prof_cat A B) ...` |
+| 643 | 8213 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @tapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
+| 644 | 8228 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Prof_tensor_left_unit_func A B) P ≡ ...` |
+| 645 | 8237 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @fapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
+| 646 | 8253 | `assert [A B : Cat] ⊢ @Prof_coyoneda_con_transf A B : τ (Transf (@Prof_tensor_left_unit_func A B) (@id_func (@Prof_ca ...` |
+| 647 | 8259 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_con_map A B P : τ (ProfMap (@Prof_tensor A A B (@Unit_prof A) ...` |
+| 648 | 8266 | `assert [A B : Cat] (P : τ (Prof A B)) ⊢ @Prof_coyoneda_con_map A B P ≡ @tapp0_fapp0 (@Prof_cat A B) (@Prof_cat A B) ...` |
+| 649 | 8277 | `assert [A B : Cat] [P P' : τ (Prof A B)] (r : τ (ProfMap P P')) ⊢ @tapp1_fapp0 (@Prof_cat A B) (@Prof_cat A B) (@Pro ...` |
+| 651 | 8305 | `assert [A A' A'' B B' B'' : Cat] (R : τ (Prof A B)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) (F' : τ (Functor A ...` |
+| 652 | 8322 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (R : τ (Prof A B)) ⊢ @fapp0 (@Prof_cat A B) ( ...` |
+| 653 | 8333 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (R : τ (Catd (Product_cat (Op_cat A) B))) ⊢ @ ...` |
+| 654 | 8347 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) ⊢ @Pullback_catd_func (Product_cat (Op_cat A' ...` |
+| 655 | 8356 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) ⊢ @Pullback_catd_func (Product_cat A B) (Prod ...` |
+| 656 | 8371 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @Pullbac ...` |
+| 657 | 8389 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @fapp0 ( ...` |
+| 659 | 8428 | `assert [A A' B B' : Cat] (F : τ (Functor A' A)) (G : τ (Functor B' B)) (C : Cat) ⊢ @Prof_reindex A A' B B' (@Const_c ...` |
+| 660 | 8438 | `assert [A A' B B' : Cat] [R S : τ (Prof A B)] (r : τ (ProfMap R S)) (F : τ (Functor A' A)) (G : τ (Functor B' B)) ⊢ ...` |
+| 661 | 8448 | `assert [A B : Cat] [R S : τ (Prof A B)] (r : τ (ProfMap R S)) ⊢ @Prof_reindex_transf A A B B R S r (@id_func A) (@id ...` |
+| 662 | 8458 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Op_prof_map A B R R (@id (@Prof_cat A B) R) ≡ @id (@Prof_cat (Op_cat B) (Op ...` |
+| 663 | 8467 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
+| 668 | 8529 | `assert [A : Cat] ⊢ @Prof_id_hom A ≡ @id_funcd (Product_cat (Op_cat A) A) (@Unit_prof A);` |
+| 680 | 8728 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (s : τ (ProfMap Q R)) (r : τ (ProfMap P Q)) ⊢ @comp_fapp0 (@Prof_cat (Op_c ...` |
+| 685 | 8900 | `assert [A A' B B' X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) (F : τ (Functor A' A)) (M : τ (Functor B' B)) ⊢ @Pr ...` |
+| 686 | 8915 | `assert [A B X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) ⊢ @Prof_reindex A A B B (@Prof_imply_cov A B X O Q) (@id_ ...` |
+| 687 | 8925 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ fapp0 (@Prof_imply_cov_func A B X Q) O ≡ @Prof_imply_co ...` |
+| 688 | 8931 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] ⊢ fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O'] : ...` |
+| 689 | 8944 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] (o : τ (Functord O O')) ⊢ fapp1_fapp0 (@Prof_imply_cov ...` |
+| 690 | 8955 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ @fapp1_fapp0 (@Prof_cat A X) (@Prof_cat A B) (@Prof_imp ...` |
+| 691 | 8966 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' O'' : τ (Prof A X)] (o : τ (ProfMap O O')) (o' : τ (ProfMap O' O'')) ⊢ ...` |
+| 692 | 8989 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp0 (Product_cat (Prof ...` |
+| 693 | 9006 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] ⊢ @fapp1_func (Product_ ...` |
+| 694 | 9029 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r : τ (Hom (Product_ca ...` |
+| 695 | 9051 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp1_fapp0 (Product_cat ...` |
+| 696 | 9075 | `assert [A B X : Cat] [oq0 oq1 oq2 : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r01 : τ (Hom (Pro ...` |
+| 697 | 9105 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap P (@Prof_imply_cov A B ...` |
+| 698 | 9114 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
+| 699 | 9123 | `assert [A B B' X X' : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) (M : τ (Functor B' B)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
+| 700 | 9138 | `assert [A B X : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) ⊢ @Prof_reindex B B X X (@Prof_imply_con A B X P O) (@id_ ...` |
+| 701 | 9148 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap Q (@Prof_imply_con A B ...` |
+| 702 | 9157 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
+| 703 | 9166 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) ⊢ @WeightedCone_prof B J J' F W ≡ @Prof_imply_cov B ...` |
+| 707 | 9209 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @comp_fapp0 (@Prof_cat A B) P Q P (@prof ...` |
+| 708 | 9219 | `assert [A B : Cat] [P Q R S : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) (h : τ (@Pr ...` |
+| 709 | 9234 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) ⊢ @prof_compa ...` |
+| 710 | 9242 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (s : τ (@ProfMap A B R Q)) ⊢ @prof_compa ...` |
+| 711 | 9250 | `assert [A B : Cat] [P R : τ (Prof A B)] (r : τ (@ProfMap A B R P)) ⊢ @prof_comparison_push A B P P (@prof_comparison ...` |
+| 712 | 9259 | `assert [A B : Cat] [P Q S R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (j : τ (@ProfComparison A B Q S)) (r : ...` |
+| 713 | 9271 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
+| 714 | 9283 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
+| 715 | 9300 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
 
 ### Products, evaluation, curry/uncurry
 
@@ -427,78 +427,86 @@ text.
 | 191 | 1770 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] (f : τ (Hom K x y)) [G H : τ (Functor (@fap ...` |
 | 198 | 1885 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] (f : τ (Hom K x y)) [G H : τ (Functor W (@f ...` |
 | 208 | 2036 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 219 | 2250 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G : τ (Functor Y Z)) ⊢ @tapp0_fapp0 (Functor_ ...` |
-| 220 | 2272 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 232 | 2462 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @Product_projL A B (@Product_pair A B x u) ≡ x;` |
-| 233 | 2466 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @Product_projR A B (@Product_pair A B x u) ≡ u;` |
-| 234 | 2470 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) ⊢ @Hom_cat (Product_cat A B) p q ≡ @Product_cat (Hom_cat A (sig ...` |
-| 235 | 2478 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @id (Product_cat A B) (Struct_sigma x u) ≡ @Struct_sigma (Obj ( ...` |
-| 236 | 2486 | `assert [A B : Cat] (xu : τ (Obj (Product_cat A B))) ⊢ sigma_Fst (@id (Product_cat A B) xu) ≡ @id A (sigma_Fst xu);` |
-| 237 | 2491 | `assert [A B : Cat] (xu : τ (Obj (Product_cat A B))) ⊢ sigma_Snd (@id (Product_cat A B) xu) ≡ @id B (sigma_Snd xu);` |
-| 238 | 2497 | `assert [A B : Cat] (x y z : τ (Obj A)) (u v w : τ (Obj B)) (f : τ (Hom A x y)) (g : τ (Hom A y z)) (alpha : τ (Hom B ...` |
-| 239 | 2518 | `assert [A : Cat] [W X Z : τ (Obj A)] (f : τ (Hom A W X)) (g : τ (Hom A X Z)) ⊢ fapp0 (@comp_prod_func A W X Z) (Stru ...` |
-| 240 | 2525 | `assert [A : Cat] [W X Z : τ (Obj A)] (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z)))) (alpha : τ (Ho ...` |
-| 241 | 2540 | `assert [A : Cat] [W X Z : τ (Obj A)] (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z)))) (alpha : τ (Ho ...` |
-| 242 | 2556 | `assert [A B C : Cat] (F : τ (Functor A B)) (G : τ (Functor B C)) ⊢ fapp0 (@Functor_comp_pair_func A B C) (Struct_sig ...` |
-| 243 | 2562 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
-| 244 | 2586 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
-| 245 | 2628 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
-| 254 | 2768 | `assert [A B I : Cat] (F : τ (Functor I A)) (G : τ (Functor I B)) (i : τ (Obj I)) ⊢ @fapp0 I (Product_cat A B) (@Stru ...` |
-| 255 | 2786 | `assert [A B I : Cat] (F : τ (Functor I A)) (G : τ (Functor I B)) (i j : τ (Obj I)) ⊢ @fapp1_func I (Product_cat A B) ...` |
-| 256 | 2812 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) ⊢ @fapp1_func (Product_cat A B) A (@Product_projL_func A B) p q ...` |
-| 257 | 2820 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) (h : τ (Hom (Product_cat A B) p q)) ⊢ @fapp1_fapp0 (Product_cat ...` |
-| 258 | 2827 | `assert [I A B : Cat] (H : τ (Functor I (Product_cat A B))) (i : τ (Obj I)) ⊢ sigma_Fst (@fapp0 I (Product_cat A B) H ...` |
-| 261 | 2842 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i : τ (Obj ...` |
-| 263 | 2862 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i j : τ (O ...` |
-| 267 | 2904 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i : τ (Obj X)) ⊢ @tapp0_f ...` |
-| 268 | 2933 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i j : τ (Obj X)) ⊢ @tapp1 ...` |
-| 269 | 2970 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i j : τ (Obj X)) (p : τ ( ...` |
-| 270 | 2999 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F : τ (Functor X Y)) ⊢ @comp_prod_fapp1_fapp0 Cat_cat X Y Z (@Product_pa ...` |
-| 271 | 3017 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F : τ (Functor X Y)) ⊢ @tapp0_fapp0 (Functor_ca ...` |
-| 274 | 3068 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i : τ (Obj X)) ⊢ @tapp0_f ...` |
-| 275 | 3097 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i j : τ (Obj X)) ⊢ @tapp1 ...` |
-| 276 | 3136 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i j : τ (Obj X)) (p : τ ( ...` |
-| 277 | 3167 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G : τ (Functor Y Z)) ⊢ @comp_prod_fapp1_fapp0 Cat_cat X Y Z (@Product_pa ...` |
-| 278 | 3185 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i j : τ (O ...` |
-| 279 | 3194 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Fst (fapp0 (@Product_cat_fapp1_ ...` |
-| 280 | 3201 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Snd (fapp0 (@Product_cat_fapp1_ ...` |
-| 281 | 3208 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x')) (q : τ (Hom ...` |
-| 282 | 3222 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x')) (q : τ (Hom ...` |
-| 283 | 3236 | `assert [A A' B : Cat] (G : τ (Functor A A')) ⊢ @fapp0 (Functor_cat A A') (Functor_cat (Product_cat A B) (Product_cat ...` |
-| 284 | 3245 | `assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢ fapp0 (@Eval_func A B) (Struct_sigma F x) ≡ fapp0 F x;` |
-| 285 | 3250 | `assert [A B : Cat] (F G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func (Product_cat (Functor_cat A B) A) B (@Eva ...` |
-| 286 | 3262 | `assert [A B : Cat] (F G : τ (Functor A B)) (x y : τ (Obj A)) (eta : τ (Transf F G)) (p : τ (Hom A x y)) ⊢ @fapp1_fap ...` |
-| 290 | 3304 | `assert [A B : Cat] (x : τ (Obj A)) ⊢ @comp_cat_fapp0 (Functor_cat A B) (Product_cat (Functor_cat A B) A) B (@Eval_fu ...` |
-| 291 | 3314 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ fapp0 (uncurry_func G) ...` |
-| 292 | 3334 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x') ...` |
-| 293 | 3364 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) ⊢ fapp0 curry_func_func F ≡ curry_func F;` |
-| 294 | 3370 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) ⊢ fapp0 uncurry_func_func G ≡ uncurry_func G;` |
-| 304 | 3535 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 (Product_cat A B) (Product_cat B A) (@Product_swap_func ...` |
-| 305 | 3548 | `assert [A B : Cat] ⊢ @comp_cat_fapp0 (Product_cat A B) (Product_cat B A) (Product_cat A B) (@Product_swap_func B A) ...` |
-| 306 | 3557 | `assert [A B : Cat] ⊢ @Op_func (Product_cat A B) (Product_cat B A) (@Product_swap_func A B) ≡ @Product_swap_func (Op_ ...` |
-| 377 | 4600 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Fst (@fapp0 B (Product_cat A B) (@fapp0 A (Functor_cat B ...` |
-| 378 | 4614 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Snd (@fapp0 B (Product_cat A B) (@fapp0 A (Functor_cat B ...` |
-| 379 | 4628 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y : τ (Obj B)) ⊢ sigma_Fst (@tapp0_fapp0 B (Product_cat ...` |
-| 380 | 4644 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y : τ (Obj B)) ⊢ sigma_Snd (@tapp0_fapp0 B (Product_cat ...` |
-| 381 | 4660 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y y' : τ (Obj B)) ⊢ sigma_Fst (@tapp1_func B (Product_ca ...` |
-| 382 | 4676 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y y' : τ (Obj B)) ⊢ sigma_Snd (@tapp1_func B (Product_ca ...` |
-| 389 | 4747 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) ⊢ @fapp1_func (Functor_cat (Product_cat A B) C) (Functo ...` |
-| 390 | 4847 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) ⊢ @fapp1_fapp0 (Functor_cat (Pro ...` |
-| 391 | 4893 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) (x : τ (Obj A)) ⊢ @tapp0_fapp0 A ...` |
-| 392 | 4982 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) (x : τ (Obj A)) (y : τ (Obj B)) ...` |
-| 393 | 5122 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 B C (@fapp0 A (F ...` |
-| 394 | 5153 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 (Product_cat A B ...` |
-| 395 | 5194 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 B C (@fapp0 A (F ...` |
-| 472 | 6012 | `assert [K A : Cat] ⊢ @Sigma_cat K (@Const_catd K A) ≡ Product_cat K A;` |
-| 473 | 6016 | `assert [K A : Cat] (x y : τ (Obj K)) (u v : τ (Obj A)) ⊢ @Hom_cat (@Sigma_cat K (@Const_catd K A)) (Struct_sigma x u ...` |
-| 589 | 7357 | `assert [A B : Cat] ⊢ Prof A B ≡ Obj (Catd_cat (Product_cat (Op_cat A) B));` |
-| 603 | 7533 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Pro ...` |
-| 604 | 7545 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ ...` |
-| 605 | 7562 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ ...` |
-| 606 | 7579 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ sigma ...` |
-| 607 | 7598 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ sigma ...` |
-| 608 | 7617 | `assert [A0 A1 A2 B0 B1 B2 : Cat] (F01 : τ (Functor A0 A1)) (F12 : τ (Functor A1 A2)) (G01 : τ (Functor B0 B1)) (G12 ...` |
-| 659 | 8242 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @fapp0 ( ...` |
+| 209 | 2082 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 210 | 2152 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 219 | 2300 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G : τ (Functor Y Z)) ⊢ @tapp0_fapp0 (Functor_ ...` |
+| 220 | 2322 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 221 | 2368 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) ⊢ @tapp1_func (Functor ...` |
+| 222 | 2402 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) ...` |
+| 223 | 2427 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 224 | 2505 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 231 | 2597 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @Product_projL A B (@Product_pair A B x u) ≡ x;` |
+| 232 | 2601 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @Product_projR A B (@Product_pair A B x u) ≡ u;` |
+| 233 | 2605 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) ⊢ @Hom_cat (Product_cat A B) p q ≡ @Product_cat (Hom_cat A (sig ...` |
+| 234 | 2613 | `assert [A B : Cat] (x : τ (Obj A)) (u : τ (Obj B)) ⊢ @id (Product_cat A B) (Struct_sigma x u) ≡ @Struct_sigma (Obj ( ...` |
+| 235 | 2621 | `assert [A B : Cat] (xu : τ (Obj (Product_cat A B))) ⊢ sigma_Fst (@id (Product_cat A B) xu) ≡ @id A (sigma_Fst xu);` |
+| 236 | 2626 | `assert [A B : Cat] (xu : τ (Obj (Product_cat A B))) ⊢ sigma_Snd (@id (Product_cat A B) xu) ≡ @id B (sigma_Snd xu);` |
+| 237 | 2632 | `assert [A B : Cat] (x y z : τ (Obj A)) (u v w : τ (Obj B)) (f : τ (Hom A x y)) (g : τ (Hom A y z)) (alpha : τ (Hom B ...` |
+| 238 | 2653 | `assert [A : Cat] [W X Z : τ (Obj A)] (f : τ (Hom A W X)) (g : τ (Hom A X Z)) ⊢ fapp0 (@comp_prod_func A W X Z) (Stru ...` |
+| 239 | 2660 | `assert [A : Cat] [W X Z : τ (Obj A)] (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z)))) (alpha : τ (Ho ...` |
+| 240 | 2675 | `assert [A : Cat] [W X Z : τ (Obj A)] (pg pg' : τ (Obj (Product_cat (Hom_cat A W X) (Hom_cat A X Z)))) (alpha : τ (Ho ...` |
+| 241 | 2691 | `assert [A B C : Cat] (F : τ (Functor A B)) (G : τ (Functor B C)) ⊢ fapp0 (@Functor_comp_pair_func A B C) (Struct_sig ...` |
+| 242 | 2697 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
+| 243 | 2721 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
+| 244 | 2763 | `assert [X Y Z : Cat] (FG FG' : τ (Obj (Product_cat (Functor_cat X Y) (Functor_cat Y Z)))) (theta : τ (Hom (Product_c ...` |
+| 253 | 2903 | `assert [A B I : Cat] (F : τ (Functor I A)) (G : τ (Functor I B)) (i : τ (Obj I)) ⊢ @fapp0 I (Product_cat A B) (@Stru ...` |
+| 254 | 2921 | `assert [A B I : Cat] (F : τ (Functor I A)) (G : τ (Functor I B)) (i j : τ (Obj I)) ⊢ @fapp1_func I (Product_cat A B) ...` |
+| 255 | 2947 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) ⊢ @fapp1_func (Product_cat A B) A (@Product_projL_func A B) p q ...` |
+| 256 | 2955 | `assert [A B : Cat] (p q : τ (Obj (Product_cat A B))) (h : τ (Hom (Product_cat A B) p q)) ⊢ @fapp1_fapp0 (Product_cat ...` |
+| 257 | 2962 | `assert [I A B : Cat] (H : τ (Functor I (Product_cat A B))) (i : τ (Obj I)) ⊢ sigma_Fst (@fapp0 I (Product_cat A B) H ...` |
+| 260 | 2977 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i : τ (Obj ...` |
+| 262 | 2997 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i j : τ (O ...` |
+| 266 | 3039 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i : τ (Obj X)) ⊢ @tapp0_f ...` |
+| 267 | 3068 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i j : τ (Obj X)) ⊢ @tapp1 ...` |
+| 268 | 3105 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F H : τ (Functor X Y)) (eta : τ (Transf F H)) (i j : τ (Obj X)) (p : τ ( ...` |
+| 269 | 3134 | `assert [X Y Z : Cat] (G : τ (Functor Y Z)) (F : τ (Functor X Y)) ⊢ @comp_prod_fapp1_fapp0 Cat_cat X Y Z (@Product_pa ...` |
+| 270 | 3152 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F : τ (Functor X Y)) ⊢ @tapp0_fapp0 (Functor_ca ...` |
+| 271 | 3175 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F K : τ (Functor X Y)) ⊢ @tapp1_func (Functor_c ...` |
+| 272 | 3210 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ...` |
+| 273 | 3236 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i : τ (Obj X)) ⊢ @tapp0_f ...` |
+| 274 | 3265 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i j : τ (Obj X)) ⊢ @tapp1 ...` |
+| 275 | 3304 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (i j : τ (Obj X)) (p : τ ( ...` |
+| 276 | 3335 | `assert [X Y Z : Cat] (F : τ (Functor X Y)) (G : τ (Functor Y Z)) ⊢ @comp_prod_fapp1_fapp0 Cat_cat X Y Z (@Product_pa ...` |
+| 277 | 3353 | `assert [X A B : Cat] (F G : τ (Functor X (Product_cat A B))) (eta : τ (@Transf X (Product_cat A B) F G)) (i j : τ (O ...` |
+| 278 | 3362 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Fst (fapp0 (@Product_cat_fapp1_ ...` |
+| 279 | 3369 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Snd (fapp0 (@Product_cat_fapp1_ ...` |
+| 280 | 3376 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x')) (q : τ (Hom ...` |
+| 281 | 3390 | `assert [A A' B : Cat] (G : τ (Functor A A')) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x')) (q : τ (Hom ...` |
+| 282 | 3404 | `assert [A A' B : Cat] (G : τ (Functor A A')) ⊢ @fapp0 (Functor_cat A A') (Functor_cat (Product_cat A B) (Product_cat ...` |
+| 283 | 3413 | `assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢ fapp0 (@Eval_func A B) (Struct_sigma F x) ≡ fapp0 F x;` |
+| 284 | 3418 | `assert [A B : Cat] (F G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func (Product_cat (Functor_cat A B) A) B (@Eva ...` |
+| 285 | 3430 | `assert [A B : Cat] (F G : τ (Functor A B)) (x y : τ (Obj A)) (eta : τ (Transf F G)) (p : τ (Hom A x y)) ⊢ @fapp1_fap ...` |
+| 289 | 3472 | `assert [A B : Cat] (x : τ (Obj A)) ⊢ @comp_cat_fapp0 (Functor_cat A B) (Product_cat (Functor_cat A B) A) B (@Eval_fu ...` |
+| 290 | 3482 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ fapp0 (uncurry_func G) ...` |
+| 291 | 3502 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x x' : τ (Obj A)) (y y' : τ (Obj B)) (p : τ (Hom A x x') ...` |
+| 292 | 3532 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) ⊢ fapp0 curry_func_func F ≡ curry_func F;` |
+| 293 | 3538 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) ⊢ fapp0 uncurry_func_func G ≡ uncurry_func G;` |
+| 303 | 3703 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 (Product_cat A B) (Product_cat B A) (@Product_swap_func ...` |
+| 304 | 3716 | `assert [A B : Cat] ⊢ @comp_cat_fapp0 (Product_cat A B) (Product_cat B A) (Product_cat A B) (@Product_swap_func B A) ...` |
+| 305 | 3725 | `assert [A B : Cat] ⊢ @Op_func (Product_cat A B) (Product_cat B A) (@Product_swap_func A B) ≡ @Product_swap_func (Op_ ...` |
+| 376 | 4768 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Fst (@fapp0 B (Product_cat A B) (@fapp0 A (Functor_cat B ...` |
+| 377 | 4782 | `assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢ sigma_Snd (@fapp0 B (Product_cat A B) (@fapp0 A (Functor_cat B ...` |
+| 378 | 4796 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y : τ (Obj B)) ⊢ sigma_Fst (@tapp0_fapp0 B (Product_cat ...` |
+| 379 | 4812 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y : τ (Obj B)) ⊢ sigma_Snd (@tapp0_fapp0 B (Product_cat ...` |
+| 380 | 4828 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y y' : τ (Obj B)) ⊢ sigma_Fst (@tapp1_func B (Product_ca ...` |
+| 381 | 4844 | `assert [A B : Cat] (x x' : τ (Obj A)) (p : τ (Hom A x x')) (y y' : τ (Obj B)) ⊢ sigma_Snd (@tapp1_func B (Product_ca ...` |
+| 388 | 4915 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) ⊢ @fapp1_func (Functor_cat (Product_cat A B) C) (Functo ...` |
+| 389 | 5015 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) ⊢ @fapp1_fapp0 (Functor_cat (Pro ...` |
+| 390 | 5061 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) (x : τ (Obj A)) ⊢ @tapp0_fapp0 A ...` |
+| 391 | 5150 | `assert [A B C : Cat] (F G : τ (Functor (Product_cat A B) C)) (eta : τ (Transf F G)) (x : τ (Obj A)) (y : τ (Obj B)) ...` |
+| 392 | 5290 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 B C (@fapp0 A (F ...` |
+| 393 | 5321 | `assert [A B C : Cat] (F : τ (Functor (Product_cat A B) C)) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 (Product_cat A B ...` |
+| 394 | 5362 | `assert [A B C : Cat] (G : τ (Functor A (Functor_cat B C))) (x : τ (Obj A)) (y : τ (Obj B)) ⊢ @fapp0 B C (@fapp0 A (F ...` |
+| 471 | 6180 | `assert [K A : Cat] ⊢ @Sigma_cat K (@Const_catd K A) ≡ Product_cat K A;` |
+| 472 | 6184 | `assert [K A : Cat] (x y : τ (Obj K)) (u v : τ (Obj A)) ⊢ @Hom_cat (@Sigma_cat K (@Const_catd K A)) (Struct_sigma x u ...` |
+| 588 | 7525 | `assert [A B : Cat] ⊢ Prof A B ≡ Obj (Catd_cat (Product_cat (Op_cat A) B));` |
+| 602 | 7701 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 (Pro ...` |
+| 603 | 7713 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ ...` |
+| 604 | 7730 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) (p : τ ...` |
+| 605 | 7747 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ sigma ...` |
+| 606 | 7766 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (a a' : τ (Obj A)) (b b' : τ (Obj B)) ⊢ sigma ...` |
+| 607 | 7785 | `assert [A0 A1 A2 B0 B1 B2 : Cat] (F01 : τ (Functor A0 A1)) (F12 : τ (Functor A1 A2)) (G01 : τ (Functor B0 B1)) (G12 ...` |
+| 658 | 8410 | `assert [A A' B B' : Cat] (F : τ (Functor A A')) (G : τ (Functor B B')) (R : τ (Catd (Product_cat A' B'))) ⊢ @fapp0 ( ...` |
 
 ### Sigma/Pi totals, sections, and directed family calculus
 
@@ -506,164 +514,164 @@ text.
 | ---: | ---: | --- |
 | 67 | 657 | `assert [A : Grpd] [P : τ A → Grpd] (u : @τΣ_ A P) ⊢ sigma_path_fibre (sigma_path_refl u) ≡ @pathover_refl A P (sigma ...` |
 | 106 | 938 | `assert [A : Grpd] [P : τ A → Grpd] (u v : @τΣ_ A P) ⊢ @= (@Σ_ A P) u v ≡ @SigmaPathView A P u v;` |
-| 348 | 4149 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@Homd_target_catd Z E) x ≡ Pi_cat (@Homd_targe ...` |
-| 349 | 4154 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat D x))) ⊢ @path_ind_sec Z x (@Sigma_proj1_pu ...` |
-| 363 | 4389 | `assert [K : Cat] (R : τ (Catd K)) (S T : τ (Functord R (@Const_catd K Cat_cat))) (eta : τ (Transfd S T)) (k : τ (Obj ...` |
-| 376 | 4591 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_sect ...` |
-| 403 | 5334 | `assert [K : Cat] (A : Cat) (k : τ (Obj K)) ⊢ Fibre_cat (Const_catd K A) k ≡ A;` |
-| 405 | 5342 | `assert [K : Cat] ⊢ Terminal_catd K ≡ Const_catd K Terminal_cat;` |
-| 407 | 5350 | `assert [K : Cat] (A : Cat) ⊢ Op_catd (Const_catd K A) ≡ Const_catd K (Op_cat A);` |
-| 408 | 5354 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢ Fibre_cat (Pullback_catd E F) a ≡ Fibre_ ...` |
-| 412 | 5393 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) (a : τ (Obj A)) ⊢ @fapp0 A Cat_cat ...` |
-| 413 | 5413 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ @fapp1_fapp0 A C ...` |
-| 414 | 5427 | `assert [A : Cat] (E : τ (Catd A)) ⊢ @Pullback_catd A A E (@id_func A) ≡ E;` |
-| 415 | 5430 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) ⊢ @Pullback_catd A B (@Pullback_ca ...` |
-| 416 | 5439 | `assert [A B : Cat] (F : τ (Functor A B)) (C : Cat) ⊢ @Pullback_catd A B (@Const_catd B C) F ≡ @Const_catd A C;` |
-| 417 | 5443 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Pullback_catd K Cat_cat op E ≡ @Op_catd K E;` |
-| 418 | 5448 | `assert [K : Cat] ⊢ @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K ≡ Catd_cat K;` |
-| 419 | 5453 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @fapp1_fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func B A F ≡ @Pullback_cat ...` |
-| 420 | 5464 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func ...` |
-| 422 | 5473 | `assert [L : Cat] (K : τ (Catd L)) (x y : τ (Obj L)) (p : τ (Hom L x y)) ⊢ @fapp1_fapp0 (Op_cat L) Cat_cat (@Catd_cat ...` |
-| 423 | 5488 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) ⊢ @fapp1_fapp0 (@Catd_cat (Op_cat Cat_cat)) (@Catd_cat K) (@Pu ...` |
-| 424 | 5499 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat (@Pullback_catd K (Op ...` |
-| 425 | 5511 | `assert [K : Cat] (E : τ (Catd K)) ⊢ fapp1_fapp0 (Pi_func K) id_funcd ≡ id_func;` |
-| 426 | 5515 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;` |
-| 427 | 5519 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Functord_cat K (@Terminal_catd K) E ≡ Pi_cat E;` |
-| 428 | 5523 | `assert [K : Cat] (A : Cat) ⊢ Pi_cat (Const_catd K A) ≡ Functor_cat K A;` |
-| 429 | 5527 | `assert [K : Cat] (E : τ (Catd K)) (s t : τ (Obj (Pi_cat E))) ⊢ Hom_cat (Pi_cat E) s t ≡ @Transfd_cat K (@Const_catd ...` |
-| 430 | 5532 | `assert [K : Cat] (A : Cat) (s t : τ (Obj (Pi_cat (@Const_catd K A)))) ⊢ Hom_cat (Pi_cat (@Const_catd K A)) s t ≡ Tra ...` |
-| 431 | 5538 | `assert [K : Cat] (A : Cat) (F : τ (Obj (Pi_cat (Const_catd K A)))) (k : τ (Obj K)) ⊢ @piapp0 K (@Const_catd K A) F k ...` |
-| 432 | 5545 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ @fapp0 Terminal_cat (Fibre_cat E k) (@t ...` |
-| 433 | 5556 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;` |
-| 434 | 5560 | `assert [K : Cat] ⊢ @tapp0_fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func (@Const_catd (Op_cat Cat_cat) Cat_cat) K Pi_i ...` |
-| 435 | 5571 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (Fibre_cat E k) (@Sigma_cat ...` |
-| 436 | 5592 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ @fapp0 (Pi_cat E) (Fibre_cat E k) (@tap ...` |
-| 437 | 5609 | `assert [K : Cat] (A : Cat) (a : τ (Obj A)) ⊢ @fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_section_func K A) a ≡ @C ...` |
-| 439 | 5619 | `assert [A : Cat] (a : τ (Obj A)) ⊢ @fapp0 A (@Pi_cat Terminal_cat (@Const_catd Terminal_cat A)) (@const_section_func ...` |
-| 442 | 5636 | `assert [K : Cat] (A : Cat) (a : τ (Obj A)) (k : τ (Obj K)) ⊢ @piapp0 K (@Const_catd K A) (@fapp0 A (@Pi_cat K (@Cons ...` |
-| 460 | 5902 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) ...` |
-| 461 | 5912 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) ...` |
-| 462 | 5927 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @tapp0_fapp0 (@Catd_cat B) Cat_cat (@Pi_func B) (@comp_c ...` |
-| 463 | 5943 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @fdapp1_int_cell (Op_cat Cat_cat) Catd_cat_func (@Const_ ...` |
-| 464 | 5956 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) (x y : τ (Obj K)) (p : τ (Hom K x y)) (E : τ (Catd (@fapp0 K ( ...` |
-| 465 | 5976 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) Cat_cat (Sigma_func K) E ≡ Sigma_cat E;` |
-| 466 | 5980 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @fapp1_fapp0 (Catd_cat K) Cat_cat (@Sigma_func K) E D η ...` |
-| 467 | 5985 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ fapp0 (Sigma_proj1_func E) (Struct ...` |
-| 468 | 5989 | `assert [K : Cat] (R D : τ (Catd K)) ⊢ @Pullback_catd (@Sigma_cat K R) K D (@Sigma_proj1_func K R) ≡ @Sigma_proj1_pul ...` |
-| 469 | 5994 | `assert [K : Cat] (R D : τ (Catd K)) (k : τ (Obj K)) (r : τ (Obj (Fibre_cat R k))) ⊢ Fibre_cat (@Sigma_proj1_pullback ...` |
-| 470 | 6001 | `assert [K : Cat] (R D : τ (Catd K)) ⊢ @Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D) ≡ @Functord_cat K R D;` |
-| 471 | 6006 | `assert [K : Cat] (R D : τ (Catd K)) (s t : τ (Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)))) ⊢ ...` |
-| 474 | 6028 | `assert [K A : Cat] (x y : τ (Obj K)) (u v : τ (Obj A)) (p : τ (Hom K x y)) (alpha : τ (Hom A u v)) ⊢ @sigma_arrow K ...` |
-| 477 | 6057 | `assert [K : Cat] (E : τ (Catd K)) (X : τ (Obj (Pi_cat (Op_catd E)))) (Y : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ Fibr ...` |
-| 478 | 6068 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B))))) (GG ...` |
-| 479 | 6078 | `assert [K : Cat] (X : τ (Obj (Pi_cat (Op_catd (Const_catd K Cat_cat))))) (Y : τ (Obj (Pi_cat (Const_catd K Cat_cat)) ...` |
-| 480 | 6085 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B))))) (GG ...` |
-| 495 | 6234 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @pathout_refl_arrow Z x y p ≡ @sigma_transport_arrow Z (@Re ...` |
-| 509 | 6425 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ fapp0 (@Sigma_proj1_func Z (@Rep_catd Z x)) (@pathout_obj Z ...` |
-| 519 | 6522 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@Homd_target_catd Z E) x ≡ Pi_cat (Functor_cat ...` |
-| 541 | 6665 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢ @tdapp1_int_fapp0_transfd K (@Const_catd K Terminal_cat ...` |
-| 551 | 6770 | `assert [K : Cat] (E : τ (Catd K)) (x y z : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (w ...` |
-| 557 | 6914 | `assert [K : Cat] (R : τ (Catd K)) (FF : τ (Functord R (@Const_catd K Cat_cat))) (x y : τ (Obj K)) (p : τ (Hom K x y) ...` |
-| 565 | 7000 | `assert [K : Cat] (x : τ (Obj K)) ⊢ @homd_src_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_cat) (@id_f ...` |
-| 566 | 7016 | `assert [K : Cat] (x : τ (Obj K)) ⊢ @Fibre_func K (@Op_catd K (@Const_catd K Terminal_cat)) (@Homd_target_catd K (@Co ...` |
-| 567 | 7037 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp ...` |
-| 568 | 7051 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp0 (Op_cat Z) (@Functor_cat ...` |
-| 570 | 7073 | `assert [K : Cat] (x y : τ (Obj K)) ⊢ @homd_tgt_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_cat) (@id ...` |
-| 571 | 7088 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @homd_t ...` |
-| 572 | 7107 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp0 ...` |
-| 573 | 7130 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 ( ...` |
-| 574 | 7145 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
-| 575 | 7171 | `assert [K : Cat] (x y : τ (Obj K)) ⊢ fapp0 (@homd_tgt_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_ca ...` |
-| 586 | 7325 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ @homd_ K (@Const_catd K Terminal_cat) ...` |
-| 720 | 9239 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 721 | 9251 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 722 | 9274 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 726 | 9361 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ @fib_cov_tapp0_func K (@ ...` |
-| 727 | 9368 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (f : τ (Hom K x y)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ fapp ...` |
-| 729 | 9389 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_src_obj K ...` |
-| 730 | 9397 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ fapp0 (homd_ (@id ...` |
-| 731 | 9412 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @fapp0 (Op_cat (H ...` |
-| 732 | 9432 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_s ...` |
-| 735 | 9489 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_fapp0 K E ...` |
-| 736 | 9497 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_f ...` |
-| 737 | 9505 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ Ho ...` |
-| 738 | 9516 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (@ ...` |
-| 739 | 9530 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
-| 740 | 9554 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
-| 741 | 9603 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre_ ...` |
-| 742 | 9627 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K (@S ...` |
-| 743 | 9634 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x : τ (Obj K)) ⊢ @fapp0 (Fibre_cat (@Op_catd K (@Const_c ...` |
-| 744 | 9662 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
+| 347 | 4317 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@Homd_target_catd Z E) x ≡ Pi_cat (@Homd_targe ...` |
+| 348 | 4322 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat D x))) ⊢ @path_ind_sec Z x (@Sigma_proj1_pu ...` |
+| 362 | 4557 | `assert [K : Cat] (R : τ (Catd K)) (S T : τ (Functord R (@Const_catd K Cat_cat))) (eta : τ (Transfd S T)) (k : τ (Obj ...` |
+| 375 | 4759 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_sect ...` |
+| 402 | 5502 | `assert [K : Cat] (A : Cat) (k : τ (Obj K)) ⊢ Fibre_cat (Const_catd K A) k ≡ A;` |
+| 404 | 5510 | `assert [K : Cat] ⊢ Terminal_catd K ≡ Const_catd K Terminal_cat;` |
+| 406 | 5518 | `assert [K : Cat] (A : Cat) ⊢ Op_catd (Const_catd K A) ≡ Const_catd K (Op_cat A);` |
+| 407 | 5522 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a : τ (Obj A)) ⊢ Fibre_cat (Pullback_catd E F) a ≡ Fibre_ ...` |
+| 411 | 5561 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) (a : τ (Obj A)) ⊢ @fapp0 A Cat_cat ...` |
+| 412 | 5581 | `assert [A B : Cat] (E : τ (Catd B)) (F : τ (Functor A B)) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ @fapp1_fapp0 A C ...` |
+| 413 | 5595 | `assert [A : Cat] (E : τ (Catd A)) ⊢ @Pullback_catd A A E (@id_func A) ≡ E;` |
+| 414 | 5598 | `assert [A B C : Cat] (E : τ (Catd C)) (F : τ (Functor B C)) (H : τ (Functor A B)) ⊢ @Pullback_catd A B (@Pullback_ca ...` |
+| 415 | 5607 | `assert [A B : Cat] (F : τ (Functor A B)) (C : Cat) ⊢ @Pullback_catd A B (@Const_catd B C) F ≡ @Const_catd A C;` |
+| 416 | 5611 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Pullback_catd K Cat_cat op E ≡ @Op_catd K E;` |
+| 417 | 5616 | `assert [K : Cat] ⊢ @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K ≡ Catd_cat K;` |
+| 418 | 5621 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @fapp1_fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func B A F ≡ @Pullback_cat ...` |
+| 419 | 5632 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @fapp0 (@Catd_cat B) (@Catd_cat A) (@Pullback_catd_func ...` |
+| 421 | 5641 | `assert [L : Cat] (K : τ (Catd L)) (x y : τ (Obj L)) (p : τ (Hom L x y)) ⊢ @fapp1_fapp0 (Op_cat L) Cat_cat (@Catd_cat ...` |
+| 422 | 5656 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) ⊢ @fapp1_fapp0 (@Catd_cat (Op_cat Cat_cat)) (@Catd_cat K) (@Pu ...` |
+| 423 | 5667 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat (@Pullback_catd K (Op ...` |
+| 424 | 5679 | `assert [K : Cat] (E : τ (Catd K)) ⊢ fapp1_fapp0 (Pi_func K) id_funcd ≡ id_func;` |
+| 425 | 5683 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;` |
+| 426 | 5687 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Functord_cat K (@Terminal_catd K) E ≡ Pi_cat E;` |
+| 427 | 5691 | `assert [K : Cat] (A : Cat) ⊢ Pi_cat (Const_catd K A) ≡ Functor_cat K A;` |
+| 428 | 5695 | `assert [K : Cat] (E : τ (Catd K)) (s t : τ (Obj (Pi_cat E))) ⊢ Hom_cat (Pi_cat E) s t ≡ @Transfd_cat K (@Const_catd ...` |
+| 429 | 5700 | `assert [K : Cat] (A : Cat) (s t : τ (Obj (Pi_cat (@Const_catd K A)))) ⊢ Hom_cat (Pi_cat (@Const_catd K A)) s t ≡ Tra ...` |
+| 430 | 5706 | `assert [K : Cat] (A : Cat) (F : τ (Obj (Pi_cat (Const_catd K A)))) (k : τ (Obj K)) ⊢ @piapp0 K (@Const_catd K A) F k ...` |
+| 431 | 5713 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ @fapp0 Terminal_cat (Fibre_cat E k) (@t ...` |
+| 432 | 5724 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;` |
+| 433 | 5728 | `assert [K : Cat] ⊢ @tapp0_fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func (@Const_catd (Op_cat Cat_cat) Cat_cat) K Pi_i ...` |
+| 434 | 5739 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (Fibre_cat E k) (@Sigma_cat ...` |
+| 435 | 5760 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ @fapp0 (Pi_cat E) (Fibre_cat E k) (@tap ...` |
+| 436 | 5777 | `assert [K : Cat] (A : Cat) (a : τ (Obj A)) ⊢ @fapp0 A (@Pi_cat K (@Const_catd K A)) (@const_section_func K A) a ≡ @C ...` |
+| 438 | 5787 | `assert [A : Cat] (a : τ (Obj A)) ⊢ @fapp0 A (@Pi_cat Terminal_cat (@Const_catd Terminal_cat A)) (@const_section_func ...` |
+| 441 | 5804 | `assert [K : Cat] (A : Cat) (a : τ (Obj A)) (k : τ (Obj K)) ⊢ @piapp0 K (@Const_catd K A) (@fapp0 A (@Pi_cat K (@Cons ...` |
+| 459 | 6070 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) ...` |
+| 460 | 6080 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) ...` |
+| 461 | 6095 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @tapp0_fapp0 (@Catd_cat B) Cat_cat (@Pi_func B) (@comp_c ...` |
+| 462 | 6111 | `assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢ @fdapp1_int_cell (Op_cat Cat_cat) Catd_cat_func (@Const_ ...` |
+| 463 | 6124 | `assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat))) (x y : τ (Obj K)) (p : τ (Hom K x y)) (E : τ (Catd (@fapp0 K ( ...` |
+| 464 | 6144 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) Cat_cat (Sigma_func K) E ≡ Sigma_cat E;` |
+| 465 | 6148 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @fapp1_fapp0 (Catd_cat K) Cat_cat (@Sigma_func K) E D η ...` |
+| 466 | 6153 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ fapp0 (Sigma_proj1_func E) (Struct ...` |
+| 467 | 6157 | `assert [K : Cat] (R D : τ (Catd K)) ⊢ @Pullback_catd (@Sigma_cat K R) K D (@Sigma_proj1_func K R) ≡ @Sigma_proj1_pul ...` |
+| 468 | 6162 | `assert [K : Cat] (R D : τ (Catd K)) (k : τ (Obj K)) (r : τ (Obj (Fibre_cat R k))) ⊢ Fibre_cat (@Sigma_proj1_pullback ...` |
+| 469 | 6169 | `assert [K : Cat] (R D : τ (Catd K)) ⊢ @Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D) ≡ @Functord_cat K R D;` |
+| 470 | 6174 | `assert [K : Cat] (R D : τ (Catd K)) (s t : τ (Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)))) ⊢ ...` |
+| 473 | 6196 | `assert [K A : Cat] (x y : τ (Obj K)) (u v : τ (Obj A)) (p : τ (Hom K x y)) (alpha : τ (Hom A u v)) ⊢ @sigma_arrow K ...` |
+| 476 | 6225 | `assert [K : Cat] (E : τ (Catd K)) (X : τ (Obj (Pi_cat (Op_catd E)))) (Y : τ (Obj (Pi_cat E))) (k : τ (Obj K)) ⊢ Fibr ...` |
+| 477 | 6236 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B))))) (GG ...` |
+| 478 | 6246 | `assert [K : Cat] (X : τ (Obj (Pi_cat (Op_catd (Const_catd K Cat_cat))))) (Y : τ (Obj (Pi_cat (Const_catd K Cat_cat)) ...` |
+| 479 | 6253 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B))))) (GG ...` |
+| 494 | 6402 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @pathout_refl_arrow Z x y p ≡ @sigma_transport_arrow Z (@Re ...` |
+| 508 | 6593 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ fapp0 (@Sigma_proj1_func Z (@Rep_catd Z x)) (@pathout_obj Z ...` |
+| 518 | 6690 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@Homd_target_catd Z E) x ≡ Pi_cat (Functor_cat ...` |
+| 540 | 6833 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢ @tdapp1_int_fapp0_transfd K (@Const_catd K Terminal_cat ...` |
+| 550 | 6938 | `assert [K : Cat] (E : τ (Catd K)) (x y z : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (w ...` |
+| 556 | 7082 | `assert [K : Cat] (R : τ (Catd K)) (FF : τ (Functord R (@Const_catd K Cat_cat))) (x y : τ (Obj K)) (p : τ (Hom K x y) ...` |
+| 564 | 7168 | `assert [K : Cat] (x : τ (Obj K)) ⊢ @homd_src_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_cat) (@id_f ...` |
+| 565 | 7184 | `assert [K : Cat] (x : τ (Obj K)) ⊢ @Fibre_func K (@Op_catd K (@Const_catd K Terminal_cat)) (@Homd_target_catd K (@Co ...` |
+| 566 | 7205 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp ...` |
+| 567 | 7219 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp0 (Op_cat Z) (@Functor_cat ...` |
+| 569 | 7241 | `assert [K : Cat] (x y : τ (Obj K)) ⊢ @homd_tgt_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_cat) (@id ...` |
+| 570 | 7256 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @homd_t ...` |
+| 571 | 7275 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @piapp0 ...` |
+| 572 | 7298 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 ( ...` |
+| 573 | 7313 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
+| 574 | 7339 | `assert [K : Cat] (x y : τ (Obj K)) ⊢ fapp0 (@homd_tgt_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_ca ...` |
+| 585 | 7493 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ @homd_ K (@Const_catd K Terminal_cat) ...` |
+| 719 | 9407 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 720 | 9419 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 721 | 9442 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 725 | 9529 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ @fib_cov_tapp0_func K (@ ...` |
+| 726 | 9536 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (f : τ (Hom K x y)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ fapp ...` |
+| 728 | 9557 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_src_obj K ...` |
+| 729 | 9565 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ fapp0 (homd_ (@id ...` |
+| 730 | 9580 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @fapp0 (Op_cat (H ...` |
+| 731 | 9600 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_s ...` |
+| 734 | 9657 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_fapp0 K E ...` |
+| 735 | 9665 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_f ...` |
+| 736 | 9673 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ Ho ...` |
+| 737 | 9684 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (@ ...` |
+| 738 | 9698 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
+| 739 | 9722 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
+| 740 | 9771 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre_ ...` |
+| 741 | 9795 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K (@S ...` |
+| 742 | 9802 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x : τ (Obj K)) ⊢ @fapp0 (Fibre_cat (@Op_catd K (@Const_c ...` |
+| 743 | 9830 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
 
 ### Dependent homs and covariant fibre transport
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 342 | 4101 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @tapp0_fapp0 Z Cat_cat (@Rep_catd Z y) (@Rep_catd Z x) z ...` |
-| 351 | 4169 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ Fibre_cat (@CompMotive_catd Z x) (@pathout_obj Z x y p) ≡ @ ...` |
-| 368 | 4497 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x : τ (Obj K)) (u : τ (Obj ( ...` |
-| 370 | 4527 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (u : τ (Obj ...` |
-| 371 | 4541 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (p : τ (Hom ...` |
-| 481 | 6092 | `assert [Z : Cat] (x y : τ (Obj Z)) ⊢ Fibre_cat (@Rep_catd Z x) y ≡ Hom_cat Z x y;` |
-| 494 | 6225 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (Fibre_cat (@Rep_catd Z x) x) (Fibre_cat (@Rep_catd ...` |
-| 507 | 6407 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @pathout_obj Z x y p ≡ @Struct_sigma (Obj Z) (λ yy : τ (Obj ...` |
-| 508 | 6416 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @pathout_refl_obj Z x ≡ @Struct_sigma (Obj Z) (λ yy : τ (Obj Z), Obj (Fibre_cat ( ...` |
-| 514 | 6475 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢ Fibre_cat (@FibCov_target_catd Z D) x ≡ @Functord_cat Z (@Rep_ca ...` |
-| 516 | 6502 | `assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_ ...` |
-| 517 | 6509 | `assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢ Fibre_cat (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_ ...` |
-| 518 | 6514 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @Homd_target_section_catd Z E x ≡ @Functor_catd (Op_cat Z) E (@f ...` |
-| 520 | 6530 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ Fibre_cat (@FibCov_target_catd K E) x ≡ @Functord_cat K (@hom_ K ...` |
-| 521 | 6535 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ Obj (Fibre_cat (@FibCov_target_catd K E) x) ≡ @Functord K (@hom_ ...` |
-| 523 | 6545 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E (@FibCov_target_catd K E) x (@fib_cov_i ...` |
-| 524 | 6557 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@fib_cov_src_func K E x) u ...` |
-| 525 | 6564 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tapp0_fapp0 K Cat_cat (@hom_ K ...` |
-| 558 | 6934 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@Op_catd Z E) ...` |
-| 559 | 6946 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) ⊢ @Fibre_func Z (@Op_catd Z E) (@Homd_ta ...` |
-| 560 | 6957 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat (@Op_catd Z E) x) ...` |
-| 561 | 6968 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@Op_catd Z E) (@Homd_target_catd Z E) x ...` |
-| 563 | 6986 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@ ...` |
-| 564 | 6993 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@homd_src_func Z E E (@id_f ...` |
-| 569 | 7065 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ fa ...` |
-| 576 | 7184 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
-| 577 | 7192 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
-| 578 | 7208 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ @h ...` |
-| 582 | 7266 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @Fibre_t ...` |
-| 584 | 7296 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
-| 585 | 7310 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 723 | 9300 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 724 | 9312 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 725 | 9335 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 728 | 9376 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f : ...` |
-| 733 | 9440 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
-| 734 | 9463 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
+| 341 | 4269 | `assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @tapp0_fapp0 Z Cat_cat (@Rep_catd Z y) (@Rep_catd Z x) z ...` |
+| 350 | 4337 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ Fibre_cat (@CompMotive_catd Z x) (@pathout_obj Z x y p) ≡ @ ...` |
+| 367 | 4665 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x : τ (Obj K)) (u : τ (Obj ( ...` |
+| 369 | 4695 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (u : τ (Obj ...` |
+| 370 | 4709 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (p : τ (Hom ...` |
+| 480 | 6260 | `assert [Z : Cat] (x y : τ (Obj Z)) ⊢ Fibre_cat (@Rep_catd Z x) y ≡ Hom_cat Z x y;` |
+| 493 | 6393 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @fapp0 (Fibre_cat (@Rep_catd Z x) x) (Fibre_cat (@Rep_catd ...` |
+| 506 | 6575 | `assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢ @pathout_obj Z x y p ≡ @Struct_sigma (Obj Z) (λ yy : τ (Obj ...` |
+| 507 | 6584 | `assert [Z : Cat] (x : τ (Obj Z)) ⊢ @pathout_refl_obj Z x ≡ @Struct_sigma (Obj Z) (λ yy : τ (Obj Z), Obj (Fibre_cat ( ...` |
+| 513 | 6643 | `assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢ Fibre_cat (@FibCov_target_catd Z D) x ≡ @Functord_cat Z (@Rep_ca ...` |
+| 515 | 6670 | `assert [Z : Cat] (x : τ (Obj (Op_cat Z))) (y : τ (Obj Z)) ⊢ @fapp0 Z Cat_cat (@fapp0 (Op_cat Z) (Catd_cat Z) (@Edge_ ...` |
+| 516 | 6677 | `assert [Z : Cat] (x : τ (Obj Z)) (y : τ (Obj (Op_cat Z))) ⊢ Fibre_cat (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_ ...` |
+| 517 | 6682 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @Homd_target_section_catd Z E x ≡ @Functor_catd (Op_cat Z) E (@f ...` |
+| 519 | 6698 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ Fibre_cat (@FibCov_target_catd K E) x ≡ @Functord_cat K (@hom_ K ...` |
+| 520 | 6703 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ Obj (Fibre_cat (@FibCov_target_catd K E) x) ≡ @Functord K (@hom_ ...` |
+| 522 | 6713 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E (@FibCov_target_catd K E) x (@fib_cov_i ...` |
+| 523 | 6725 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@fib_cov_src_func K E x) u ...` |
+| 524 | 6732 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tapp0_fapp0 K Cat_cat (@hom_ K ...` |
+| 557 | 7102 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@Op_catd Z E) ...` |
+| 558 | 7114 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) ⊢ @Fibre_func Z (@Op_catd Z E) (@Homd_ta ...` |
+| 559 | 7125 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat (@Op_catd Z E) x) ...` |
+| 560 | 7136 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) ⊢ @tapp0_fapp0 Z Cat_cat (@Op_catd Z E) (@Homd_target_catd Z E) x ...` |
+| 562 | 7154 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@ ...` |
+| 563 | 7161 | `assert [Z : Cat] (E : τ (Catd Z)) (x : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) ⊢ fapp0 (@homd_src_func Z E E (@id_f ...` |
+| 568 | 7233 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ fa ...` |
+| 575 | 7352 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
+| 576 | 7360 | `assert [Z : Cat] (D E : τ (Catd Z)) (FF : τ (Functord D E)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
+| 577 | 7376 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ @h ...` |
+| 581 | 7434 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @Fibre_t ...` |
+| 583 | 7464 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
+| 584 | 7478 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 722 | 9468 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 723 | 9480 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 724 | 9503 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 727 | 9544 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f : ...` |
+| 732 | 9608 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
+| 733 | 9631 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
 
 ### Displayed hom-action and laxity extraction
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 369 | 4518 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (u : τ (Obj ...` |
-| 372 | 4556 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (p : τ (Hom ...` |
-| 373 | 4568 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tdapp1_ ...` |
-| 374 | 4575 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tdapp ...` |
-| 375 | 4582 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 538 | 6647 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) ⊢ fapp0 (@tdapp1_int_f ...` |
-| 539 | 6653 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ ϵ' : τ (@Transfd K E D FF GG)) ⊢ @fapp1_func _ _ ( ...` |
-| 540 | 6659 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ @tdapp1_int_fapp0_transfd K E D FF FF (@id (@Functord_ ...` |
-| 542 | 6676 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢ fapp ...` |
-| 547 | 6722 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) (z : τ (Obj K)) ⊢ @Fib ...` |
-| 548 | 6728 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) (z : τ (Obj K)) (u : τ ...` |
-| 549 | 6742 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢ @catd_transport_func K E x y p ≡ @fapp1_fa ...` |
-| 550 | 6749 | `assert [K : Cat] (E : τ (Catd K)) (x y z : τ (Obj K)) (p : τ (Hom K x y)) (q : τ (Hom K y z)) (u : τ (Obj (Fibre_cat ...` |
-| 552 | 6835 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢ @functord_transp ...` |
-| 553 | 6842 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 554 | 6862 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 555 | 6882 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 556 | 6898 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 562 | 6980 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ fapp0 (@tdapp1_int_func_transfd K E D FF FF) (@id (@Fu ...` |
-| 579 | 7220 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 580 | 7232 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 581 | 7246 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 583 | 7287 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ tapp0_ ...` |
+| 368 | 4686 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (u : τ (Obj ...` |
+| 371 | 4724 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (Transfd FF GG)) (x y : τ (Obj K)) (p : τ (Hom ...` |
+| 372 | 4736 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tdapp1_ ...` |
+| 373 | 4743 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @tdapp ...` |
+| 374 | 4750 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 537 | 6815 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) ⊢ fapp0 (@tdapp1_int_f ...` |
+| 538 | 6821 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ ϵ' : τ (@Transfd K E D FF GG)) ⊢ @fapp1_func _ _ ( ...` |
+| 539 | 6827 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ @tdapp1_int_fapp0_transfd K E D FF FF (@id (@Functord_ ...` |
+| 541 | 6844 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢ fapp ...` |
+| 546 | 6890 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) (z : τ (Obj K)) ⊢ @Fib ...` |
+| 547 | 6896 | `assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D)) (ϵ : τ (@Transfd K E D FF GG)) (z : τ (Obj K)) (u : τ ...` |
+| 548 | 6910 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢ @catd_transport_func K E x y p ≡ @fapp1_fa ...` |
+| 549 | 6917 | `assert [K : Cat] (E : τ (Catd K)) (x y z : τ (Obj K)) (p : τ (Hom K x y)) (q : τ (Hom K y z)) (u : τ (Obj (Fibre_cat ...` |
+| 551 | 7003 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢ @functord_transp ...` |
+| 552 | 7010 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 553 | 7030 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 554 | 7050 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 555 | 7066 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 561 | 7148 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ fapp0 (@tdapp1_int_func_transfd K E D FF FF) (@id (@Fu ...` |
+| 578 | 7388 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 579 | 7400 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 580 | 7414 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 582 | 7455 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ tapp0_ ...` |
 
 ### Universe categories and displayed-family category heads
 
@@ -676,8 +684,8 @@ text.
 | 130 | 1142 | `assert [K : Cat] (E D : τ (Catd K)) ⊢ Hom_cat (Catd_cat K) E D ≡ Functord_cat E D;` |
 | 131 | 1146 | `assert [K : Cat] [E D : τ (Catd K)] (FF GG : τ (Functord E D)) ⊢ Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG;` |
 | 132 | 1150 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ @id (@Functord_cat K E D) FF ≡ @id_transfd K E D FF;` |
-| 259 | 2834 | `assert [K : Cat] (E D : τ (Catd K)) ⊢ Hom_cat (Catd_cat K) E D ≡ @Transf_cat K Cat_cat E D;` |
-| 260 | 2838 | `assert [K : Cat] (E D : τ (Catd K)) ⊢ Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;` |
+| 258 | 2969 | `assert [K : Cat] (E D : τ (Catd K)) ⊢ Hom_cat (Catd_cat K) E D ≡ @Transf_cat K Cat_cat E D;` |
+| 259 | 2973 | `assert [K : Cat] (E D : τ (Catd K)) ⊢ Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;` |
 
 ### Ordinary transformations and structural logic
 
@@ -698,69 +706,60 @@ text.
 | 205 | 2008 | `assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢ @fapp1_fapp0 (Functor_cat X Y) (Functor_cat (F ...` |
 | 206 | 2018 | `assert (W X Y : Cat) [G H : τ (Functor X Y)] (eta : τ (Transf G H)) ⊢ @comp_cat_cov_func_func_transf W X Y G H eta ≡ ...` |
 | 207 | 2032 | `assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢ fapp0 (@comp_cat_cov_func_func_fapp1_func W X ...` |
-| 209 | 2082 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 210 | 2115 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 215 | 2203 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) ⊢ @fapp1_func (Functor_cat X Y) (Functor_cat (Functor_cat Y Z) (Functor ...` |
-| 216 | 2220 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ⊢ @fapp1_fapp0 (Functor_cat X Y) (Functor_cat ...` |
-| 217 | 2231 | `assert [X Y Z : Cat] [F K : τ (Functor X Y)] (alpha : τ (Transf F K)) ⊢ @comp_cat_con_func_func_transf X Y Z F K alp ...` |
-| 218 | 2245 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ⊢ fapp0 (@comp_cat_con_func_func_fapp1_func X ...` |
-| 221 | 2318 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) ...` |
-| 222 | 2324 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) ⊢ @tapp1_func (Functor ...` |
-| 223 | 2336 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) ...` |
-| 224 | 2350 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 225 | 2383 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 262 | 2850 | `assert [A B : Cat] (F : τ (Functor B A)) (x y : τ (Obj A)) (p : τ (Hom A x y)) (b : τ (Obj B)) ⊢ @tapp0_fapp0 B Cat_ ...` |
-| 264 | 2870 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k : τ (Obj K)) ⊢ @tapp0_fapp0 K A (@Const_func K A x) (@Co ...` |
-| 265 | 2881 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k k' : τ (Obj K)) ⊢ @tapp1_func K A (@Const_func K A x) (@ ...` |
-| 266 | 2892 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k k' : τ (Obj K)) (q : τ (Hom K k k')) ⊢ @tapp1_fapp0 K A ...` |
-| 272 | 3040 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F K : τ (Functor X Y)) ⊢ @tapp1_func (Functor_c ...` |
-| 273 | 3053 | `assert [X Y Z : Cat] (G H : τ (Functor Y Z)) (eta : τ (Transf G H)) (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ...` |
-| 288 | 3282 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) ⊢ @fapp1_func (Functor_cat A B) B (@fapp0_func A B x) F G ...` |
-| 289 | 3292 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) (eta : τ (Transf F G)) ⊢ @fapp1_fapp0 (Functor_cat A B) B ...` |
-| 297 | 3468 | `assert [A B : Cat] [F G : τ (Functor A B)] (eta : τ (Transf F G)) ⊢ @Op_transf A B F G eta : τ (Transf (@Op_func A B ...` |
-| 298 | 3474 | `assert [A B : Cat] [F G : τ (Functor A B)] (eta : τ (Transf F G)) ⊢ @Op_transf (Op_cat A) (Op_cat B) (@Op_func A B G ...` |
-| 299 | 3484 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Op_transf A B F F (@id (Functor_cat A B) F) ≡ @id (Functor_cat (Op_cat A ...` |
-| 316 | 3678 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @tapp0_fapp0 (Op_cat A) (@Catd_cat A) (@hom_int A A (@id_ ...` |
-| 317 | 3694 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @tapp1_at_transf A B F F X (id (Functor_cat A B) F) ≡ @fa ...` |
-| 318 | 3699 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat (@hom_ A A (@id_func A) X) (@hom ...` |
-| 319 | 3710 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat _ _ Y (@tapp0_fapp0 (Op_cat A) ( ...` |
-| 321 | 3733 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X : τ (Obj A)) ⊢ @tapp0_fapp0 (Op_cat A) (@Catd_cat ...` |
-| 322 | 3750 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat (@hom_ A ...` |
-| 323 | 3762 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat _ _ Y (@t ...` |
-| 324 | 3780 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) ⊢ fapp0 (@tapp1_int_func_transf A B F G) ϵ ≡ @tapp1_ ...` |
-| 325 | 3785 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ ϵ' : τ (Transf F G)) ⊢ @fapp1_func _ _ (@tapp1_int_func_transf A B F G ...` |
-| 326 | 3791 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Trans ...` |
-| 327 | 3807 | `assert [A B : Cat] (F G : τ (Functor A B)) (X0 X Y : τ (Obj A)) (g : τ (Hom A X0 X)) (f : τ (Hom A X Y)) (ϵ : τ (Tra ...` |
-| 328 | 3823 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢ @comp_cat_ ...` |
-| 329 | 3838 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Trans ...` |
-| 330 | 3852 | `assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (ϵ : τ (Transf F G)) ⊢ @comp_cat_ ...` |
-| 331 | 3867 | `assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (f : τ (Hom A X Y)) (ϵ : τ (Trans ...` |
-| 336 | 3941 | `assert [B : Cat] (M N L : τ (Obj B)) (f g : τ (Hom B N L)) (e_fg : τ (Hom (Hom_cat B N L) f g)) (X Y Z : τ (Hom B M ...` |
-| 339 | 4048 | `assert [B : Cat] [M N L : τ (Obj B)] [f g h : τ (Hom B N L)] (e_fg : τ (Hom (Hom_cat B N L) f g)) (e_gh : τ (Hom (Ho ...` |
-| 340 | 4091 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @tapp1_int_fapp0_transf A B F F (id (Functor_cat A B) F) ≡ @fapp1_int_tra ...` |
-| 341 | 4096 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ fapp0 (@tapp1_int_func_transf A B F F) (id (Functor_cat A B) F) ≡ @fapp1_ ...` |
-| 444 | 5652 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) ⊢ @fapp1_fapp0 B (Functor_cat A B) (@Const_func_func A B) x ...` |
-| 445 | 5661 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) (a : τ (Obj A)) ⊢ @tapp0_fapp0 A B (@Const_func A B x) (@Co ...` |
-| 446 | 5677 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) (a a' : τ (Obj A)) (q : τ (Hom A a a')) ⊢ @tapp1_fapp0 A B ...` |
-| 447 | 5695 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) ⊢ @fapp0 (Functor_cat A (Functor_cat B C)) (Functor_cat B ...` |
-| 448 | 5704 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 A C (@fapp0 B (F ...` |
-| 449 | 5722 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) (b : τ (Obj B)) ⊢ ...` |
-| 450 | 5740 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢ @fapp1_fapp0 B ...` |
-| 451 | 5752 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a : τ (Obj A)) (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢ ...` |
-| 452 | 5770 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) (b b' : τ (Obj B) ...` |
-| 453 | 5793 | `assert [A B C : Cat] (H K : τ (Functor A (Functor_cat B C))) (eta : τ (Transf H K)) (b : τ (Obj B)) ⊢ @tapp0_fapp0 B ...` |
-| 454 | 5813 | `assert [A B C : Cat] (H K : τ (Functor A (Functor_cat B C))) (eta : τ (Transf H K)) (a : τ (Obj A)) (b : τ (Obj B)) ...` |
-| 455 | 5833 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) ⊢ @fapp0 (Functor_cat A (Functor_cat A C)) (Functor_cat A C ...` |
-| 456 | 5842 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a : τ (Obj A)) ⊢ @fapp0 A C (@diag_func A C H) a ≡ @fapp0 ...` |
-| 457 | 5848 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ @fapp1_fapp0 A C ...` |
-| 458 | 5862 | `assert [A C : Cat] (H K : τ (Functor A (Functor_cat A C))) (eta : τ (Transf H K)) (a : τ (Obj A)) ⊢ @tapp0_fapp0 A C ...` |
-| 459 | 5888 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ fapp0 (@fapp1_fun ...` |
-| 512 | 6444 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) (η : τ (Transf F G)) ⊢ @fapp1_fapp0 (@Functor_cat A B) B ...` |
-| 522 | 6540 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E ≡ @Functord_c ...` |
-| 535 | 6623 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat (@Op_catd K E) ...` |
-| 536 | 6638 | `assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E) ≡ @id_func (Fibre_c ...` |
-| 537 | 6642 | `assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E E y (@id (@Catd_cat K) E) ≡ @id Cat_cat ...` |
-| 543 | 6682 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) ⊢ @Fibre_func K E D FF z ≡ @tapp0_fapp0 ...` |
+| 215 | 2253 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) ⊢ @fapp1_func (Functor_cat X Y) (Functor_cat (Functor_cat Y Z) (Functor ...` |
+| 216 | 2270 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ⊢ @fapp1_fapp0 (Functor_cat X Y) (Functor_cat ...` |
+| 217 | 2281 | `assert [X Y Z : Cat] [F K : τ (Functor X Y)] (alpha : τ (Transf F K)) ⊢ @comp_cat_con_func_func_transf X Y Z F K alp ...` |
+| 218 | 2295 | `assert [X Y Z : Cat] (F K : τ (Functor X Y)) (alpha : τ (Transf F K)) ⊢ fapp0 (@comp_cat_con_func_func_fapp1_func X ...` |
+| 261 | 2985 | `assert [A B : Cat] (F : τ (Functor B A)) (x y : τ (Obj A)) (p : τ (Hom A x y)) (b : τ (Obj B)) ⊢ @tapp0_fapp0 B Cat_ ...` |
+| 263 | 3005 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k : τ (Obj K)) ⊢ @tapp0_fapp0 K A (@Const_func K A x) (@Co ...` |
+| 264 | 3016 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k k' : τ (Obj K)) ⊢ @tapp1_func K A (@Const_func K A x) (@ ...` |
+| 265 | 3027 | `assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) (k k' : τ (Obj K)) (q : τ (Hom K k k')) ⊢ @tapp1_fapp0 K A ...` |
+| 287 | 3450 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) ⊢ @fapp1_func (Functor_cat A B) B (@fapp0_func A B x) F G ...` |
+| 288 | 3460 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) (eta : τ (Transf F G)) ⊢ @fapp1_fapp0 (Functor_cat A B) B ...` |
+| 296 | 3636 | `assert [A B : Cat] [F G : τ (Functor A B)] (eta : τ (Transf F G)) ⊢ @Op_transf A B F G eta : τ (Transf (@Op_func A B ...` |
+| 297 | 3642 | `assert [A B : Cat] [F G : τ (Functor A B)] (eta : τ (Transf F G)) ⊢ @Op_transf (Op_cat A) (Op_cat B) (@Op_func A B G ...` |
+| 298 | 3652 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @Op_transf A B F F (@id (Functor_cat A B) F) ≡ @id (Functor_cat (Op_cat A ...` |
+| 315 | 3846 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @tapp0_fapp0 (Op_cat A) (@Catd_cat A) (@hom_int A A (@id_ ...` |
+| 316 | 3862 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @tapp1_at_transf A B F F X (id (Functor_cat A B) F) ≡ @fa ...` |
+| 317 | 3867 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat (@hom_ A A (@id_func A) X) (@hom ...` |
+| 318 | 3878 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat _ _ Y (@tapp0_fapp0 (Op_cat A) ( ...` |
+| 320 | 3901 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X : τ (Obj A)) ⊢ @tapp0_fapp0 (Op_cat A) (@Catd_cat ...` |
+| 321 | 3918 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat (@hom_ A ...` |
+| 322 | 3930 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 A Cat_cat _ _ Y (@t ...` |
+| 323 | 3948 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ : τ (Transf F G)) ⊢ fapp0 (@tapp1_int_func_transf A B F G) ϵ ≡ @tapp1_ ...` |
+| 324 | 3953 | `assert [A B : Cat] (F G : τ (Functor A B)) (ϵ ϵ' : τ (Transf F G)) ⊢ @fapp1_func _ _ (@tapp1_int_func_transf A B F G ...` |
+| 325 | 3959 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Trans ...` |
+| 326 | 3975 | `assert [A B : Cat] (F G : τ (Functor A B)) (X0 X Y : τ (Obj A)) (g : τ (Hom A X0 X)) (f : τ (Hom A X Y)) (ϵ : τ (Tra ...` |
+| 327 | 3991 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢ @comp_cat_ ...` |
+| 328 | 4006 | `assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Trans ...` |
+| 329 | 4020 | `assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (ϵ : τ (Transf F G)) ⊢ @comp_cat_ ...` |
+| 330 | 4035 | `assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (f : τ (Hom A X Y)) (ϵ : τ (Trans ...` |
+| 335 | 4109 | `assert [B : Cat] (M N L : τ (Obj B)) (f g : τ (Hom B N L)) (e_fg : τ (Hom (Hom_cat B N L) f g)) (X Y Z : τ (Hom B M ...` |
+| 338 | 4216 | `assert [B : Cat] [M N L : τ (Obj B)] [f g h : τ (Hom B N L)] (e_fg : τ (Hom (Hom_cat B N L) f g)) (e_gh : τ (Hom (Ho ...` |
+| 339 | 4259 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ @tapp1_int_fapp0_transf A B F F (id (Functor_cat A B) F) ≡ @fapp1_int_tra ...` |
+| 340 | 4264 | `assert [A B : Cat] (F : τ (Functor A B)) ⊢ fapp0 (@tapp1_int_func_transf A B F F) (id (Functor_cat A B) F) ≡ @fapp1_ ...` |
+| 443 | 5820 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) ⊢ @fapp1_fapp0 B (Functor_cat A B) (@Const_func_func A B) x ...` |
+| 444 | 5829 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) (a : τ (Obj A)) ⊢ @tapp0_fapp0 A B (@Const_func A B x) (@Co ...` |
+| 445 | 5845 | `assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y)) (a a' : τ (Obj A)) (q : τ (Hom A a a')) ⊢ @tapp1_fapp0 A B ...` |
+| 446 | 5863 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) ⊢ @fapp0 (Functor_cat A (Functor_cat B C)) (Functor_cat B ...` |
+| 447 | 5872 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @fapp0 A C (@fapp0 B (F ...` |
+| 448 | 5890 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) (b : τ (Obj B)) ⊢ ...` |
+| 449 | 5908 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢ @fapp1_fapp0 B ...` |
+| 450 | 5920 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a : τ (Obj A)) (b b' : τ (Obj B)) (q : τ (Hom B b b')) ⊢ ...` |
+| 451 | 5938 | `assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) (b b' : τ (Obj B) ...` |
+| 452 | 5961 | `assert [A B C : Cat] (H K : τ (Functor A (Functor_cat B C))) (eta : τ (Transf H K)) (b : τ (Obj B)) ⊢ @tapp0_fapp0 B ...` |
+| 453 | 5981 | `assert [A B C : Cat] (H K : τ (Functor A (Functor_cat B C))) (eta : τ (Transf H K)) (a : τ (Obj A)) (b : τ (Obj B)) ...` |
+| 454 | 6001 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) ⊢ @fapp0 (Functor_cat A (Functor_cat A C)) (Functor_cat A C ...` |
+| 455 | 6010 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a : τ (Obj A)) ⊢ @fapp0 A C (@diag_func A C H) a ≡ @fapp0 ...` |
+| 456 | 6016 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ @fapp1_fapp0 A C ...` |
+| 457 | 6030 | `assert [A C : Cat] (H K : τ (Functor A (Functor_cat A C))) (eta : τ (Transf H K)) (a : τ (Obj A)) ⊢ @tapp0_fapp0 A C ...` |
+| 458 | 6056 | `assert [A C : Cat] (H : τ (Functor A (Functor_cat A C))) (a a' : τ (Obj A)) (p : τ (Hom A a a')) ⊢ fapp0 (@fapp1_fun ...` |
+| 511 | 6612 | `assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B)) (η : τ (Transf F G)) ⊢ @fapp1_fapp0 (@Functor_cat A B) B ...` |
+| 521 | 6708 | `assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢ @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E ≡ @Functord_c ...` |
+| 534 | 6791 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat (@Op_catd K E) ...` |
+| 535 | 6806 | `assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E E y (@id_funcd K E) ≡ @id_func (Fibre_c ...` |
+| 536 | 6810 | `assert [K : Cat] (E : τ (Catd K)) (y : τ (Obj K)) ⊢ @tapp0_fapp0 K Cat_cat E E y (@id (@Catd_cat K) E) ≡ @id Cat_cat ...` |
+| 542 | 6850 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) ⊢ @Fibre_func K E D FF z ≡ @tapp0_fapp0 ...` |
 
 ### Ordinary internal hom and composition actions
 
@@ -812,17 +811,17 @@ text.
 | 201 | 1956 | `assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (X Y : τ (Obj B)) (f g : τ (Hom B X Y)) ⊢ @fapp1_func (Hom_ ...` |
 | 202 | 1968 | `assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (X Y : τ (Obj B)) (f g : τ (Hom B X Y)) (alpha : τ (Hom (Ho ...` |
 | 203 | 1982 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (W : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 211 | 2152 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) ⊢ @fapp1_func (Hom_ ...` |
-| 212 | 2164 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) (alpha : τ (Hom (Ho ...` |
-| 213 | 2178 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
-| 214 | 2187 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) (alpha : τ (Hom (Ho ...` |
-| 226 | 2420 | `assert [A : Cat] (x y z : τ (Obj A)) (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢ @fapp0 (Hom_cat A x y) (Hom_cat A x z ...` |
-| 332 | 3881 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A)) (g : τ (Hom A Y Z)) ⊢ @comp_cat_fapp0 (Hom_cat A X Y) ( ...` |
-| 333 | 3896 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) ⊢ fapp0 (@comp_ ...` |
-| 334 | 3910 | `assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) ⊢ @comp_cat_fapp0 (Hom_cat A X Y) ( ...` |
-| 335 | 3925 | `assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (f : τ (Hom A X Y)) ⊢ fapp0 (@comp_ ...` |
-| 337 | 4011 | `assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) [X Y Z : τ (Obj B)] (p : τ (Hom B X Y)) (q : τ (Hom B Y Z)) ...` |
-| 338 | 4027 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) [V W X : τ (Obj A)] (q : τ (Hom A V W)) (p : τ (Hom A W X)) ...` |
+| 211 | 2202 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) ⊢ @fapp1_func (Hom_ ...` |
+| 212 | 2214 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) (alpha : τ (Hom (Ho ...` |
+| 213 | 2228 | `assert [K : Cat] (E : τ (Functor K Cat_cat)) (Z : Cat) [x y : τ (Obj K)] [f g : τ (Hom K x y)] (alpha : τ (Hom (Hom_ ...` |
+| 214 | 2237 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) (W X : τ (Obj A)) (h k : τ (Hom A W X)) (alpha : τ (Hom (Ho ...` |
+| 225 | 2555 | `assert [A : Cat] (x y z : τ (Obj A)) (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢ @fapp0 (Hom_cat A x y) (Hom_cat A x z ...` |
+| 331 | 4049 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A)) (g : τ (Hom A Y Z)) ⊢ @comp_cat_fapp0 (Hom_cat A X Y) ( ...` |
+| 332 | 4064 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A)) (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) ⊢ fapp0 (@comp_ ...` |
+| 333 | 4078 | `assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) ⊢ @comp_cat_fapp0 (Hom_cat A X Y) ( ...` |
+| 334 | 4093 | `assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A)) (h : τ (Hom A W X)) (f : τ (Hom A X Y)) ⊢ fapp0 (@comp_ ...` |
+| 336 | 4179 | `assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) [X Y Z : τ (Obj B)] (p : τ (Hom B X Y)) (q : τ (Hom B Y Z)) ...` |
+| 337 | 4195 | `assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B)) [V W X : τ (Obj A)] (q : τ (Hom A V W)) (p : τ (Hom A W X)) ...` |
 
 ### DefIso and computational isomorphism comparisons
 
@@ -840,44 +839,44 @@ text.
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 402 | 5330 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat E k ≡ @fapp0 K Cat_cat E k;` |
-| 404 | 5338 | `assert [K : Cat] (k : τ (Obj K)) ⊢ Fibre_cat (Terminal_catd K) k ≡ Terminal_cat;` |
-| 406 | 5346 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat (Op_catd E) k ≡ Op_cat (Fibre_cat E k);` |
-| 421 | 5469 | `assert [L : Cat] (K : τ (Catd L)) (l : τ (Obj L)) ⊢ Fibre_cat (Catd_catd_con K) l ≡ Catd_cat (Fibre_cat K l);` |
-| 438 | 5615 | `assert [A : Cat] (a : τ (Obj A)) ⊢ @Obj_func A a ≡ @Const_func Terminal_cat A a;` |
-| 440 | 5625 | `assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat)) ⊢ @fapp1_func Terminal_cat A (@Obj_func A a) x y ≡ @Ob ...` |
-| 441 | 5630 | `assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat)) (f : τ (Hom Terminal_cat x y)) ⊢ @fapp1_fapp0 Terminal ...` |
-| 475 | 6041 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat (Functor_catd A B) k ≡ Funct ...` |
-| 476 | 6046 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) (Catd_cat K) (@fapp0 (Op_cat (Catd ...` |
-| 526 | 6577 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Op_funcd K E E (@id_funcd K E) ≡ @id_funcd K (@Op_catd K E);` |
-| 527 | 6582 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K ...` |
-| 528 | 6587 | `assert [K : Cat] (E D C : τ (Catd K)) (FF : τ (Functord D C)) (GG : τ (Functord E D)) ⊢ @comp_fapp0 (@Catd_cat K) E ...` |
-| 529 | 6594 | `assert [K : Cat] [E D C : τ (Catd K)] (FF : τ (Functord D C)) (GG : τ (Functord E D)) ⊢ @comp_catd_fapp0 K E D C FF ...` |
-| 530 | 6600 | `assert [K : Cat] (E C : τ (Catd K)) (FF : τ (Functord E C)) ⊢ @comp_catd_fapp0 K E E C FF (@id_funcd K E) ≡ FF;` |
-| 531 | 6606 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @id_funcd K E ≡ @id (@Catd_cat K) E;` |
-| 532 | 6609 | `assert [K : Cat] [E C : τ (Catd K)] (FF : τ (Functord E C)) ⊢ @comp_catd_fapp0 K E E C FF (@id (@Catd_cat K) E) ≡ FF;` |
-| 534 | 6617 | `assert [K : Cat] (E D : τ (Catd K)) (GG : τ (Functord E D)) ⊢ @comp_catd_fapp0 K E D D (@id_funcd K D) GG ≡ GG;` |
-| 544 | 6688 | `assert [K : Cat] (E : τ (Catd K)) (z : τ (Obj K)) ⊢ @Fibre_func K E E (@id_funcd K E) z ≡ @id_func (Fibre_cat E z);` |
-| 545 | 6693 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) ⊢ @Fibre_func K (@Op_catd K E) (@Op_catd ...` |
-| 546 | 6707 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) (u : τ (Obj (Fibre_cat (@Op_catd K E) z) ...` |
+| 401 | 5498 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat E k ≡ @fapp0 K Cat_cat E k;` |
+| 403 | 5506 | `assert [K : Cat] (k : τ (Obj K)) ⊢ Fibre_cat (Terminal_catd K) k ≡ Terminal_cat;` |
+| 405 | 5514 | `assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat (Op_catd E) k ≡ Op_cat (Fibre_cat E k);` |
+| 420 | 5637 | `assert [L : Cat] (K : τ (Catd L)) (l : τ (Obj L)) ⊢ Fibre_cat (Catd_catd_con K) l ≡ Catd_cat (Fibre_cat K l);` |
+| 437 | 5783 | `assert [A : Cat] (a : τ (Obj A)) ⊢ @Obj_func A a ≡ @Const_func Terminal_cat A a;` |
+| 439 | 5793 | `assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat)) ⊢ @fapp1_func Terminal_cat A (@Obj_func A a) x y ≡ @Ob ...` |
+| 440 | 5798 | `assert [A : Cat] (a : τ (Obj A)) (x y : τ (Obj Terminal_cat)) (f : τ (Hom Terminal_cat x y)) ⊢ @fapp1_fapp0 Terminal ...` |
+| 474 | 6209 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢ Fibre_cat (Functor_catd A B) k ≡ Funct ...` |
+| 475 | 6214 | `assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) ⊢ @fapp0 (Catd_cat K) (Catd_cat K) (@fapp0 (Op_cat (Catd ...` |
+| 525 | 6745 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @Op_funcd K E E (@id_funcd K E) ≡ @id_funcd K (@Op_catd K E);` |
+| 526 | 6750 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢ @Op_funcd K (@Op_catd K E) (@Op_catd K D) (@Op_funcd K ...` |
+| 527 | 6755 | `assert [K : Cat] (E D C : τ (Catd K)) (FF : τ (Functord D C)) (GG : τ (Functord E D)) ⊢ @comp_fapp0 (@Catd_cat K) E ...` |
+| 528 | 6762 | `assert [K : Cat] [E D C : τ (Catd K)] (FF : τ (Functord D C)) (GG : τ (Functord E D)) ⊢ @comp_catd_fapp0 K E D C FF ...` |
+| 529 | 6768 | `assert [K : Cat] (E C : τ (Catd K)) (FF : τ (Functord E C)) ⊢ @comp_catd_fapp0 K E E C FF (@id_funcd K E) ≡ FF;` |
+| 530 | 6774 | `assert [K : Cat] (E : τ (Catd K)) ⊢ @id_funcd K E ≡ @id (@Catd_cat K) E;` |
+| 531 | 6777 | `assert [K : Cat] [E C : τ (Catd K)] (FF : τ (Functord E C)) ⊢ @comp_catd_fapp0 K E E C FF (@id (@Catd_cat K) E) ≡ FF;` |
+| 533 | 6785 | `assert [K : Cat] (E D : τ (Catd K)) (GG : τ (Functord E D)) ⊢ @comp_catd_fapp0 K E D D (@id_funcd K D) GG ≡ GG;` |
+| 543 | 6856 | `assert [K : Cat] (E : τ (Catd K)) (z : τ (Obj K)) ⊢ @Fibre_func K E E (@id_funcd K E) z ≡ @id_func (Fibre_cat E z);` |
+| 544 | 6861 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) ⊢ @Fibre_func K (@Op_catd K E) (@Op_catd ...` |
+| 545 | 6875 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (z : τ (Obj K)) (u : τ (Obj (Fibre_cat (@Op_catd K E) z) ...` |
 
 ### Ordinary functor identity/composition laws
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 227 | 2430 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) (f : τ (Hom A x y)) ⊢ @fapp1_fapp ...` |
-| 228 | 2448 | `assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A A (@id_func A) x y p ≡ p;` |
-| 229 | 2453 | `assert [A : Cat] ⊢ @id_func A ≡ @id Cat_cat A;` |
-| 230 | 2455 | `assert [A : Cat] (x : τ (Obj A)) ⊢ @fapp0 A A (@id Cat_cat A) x ≡ x;` |
-| 231 | 2458 | `assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A A (@id Cat_cat A) x y p ≡ p;` |
-| 287 | 3277 | `assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢ fapp0 (fapp0_func x) F ≡ fapp0 F x;` |
-| 320 | 3727 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) (f : τ (Hom A X Y)) ⊢ fapp0 (@fapp1_func A B F X Y) f ≡ @ ...` |
-| 383 | 4692 | `assert [A : Cat] (x y : τ (Obj A)) ⊢ @fapp1_func A A (@id_func A) x y ≡ @id_func (Hom_cat A x y);` |
-| 384 | 4697 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢ @comp_cat_fapp0 A B C F G ≡ @comp_fapp0 Cat_cat A ...` |
-| 385 | 4700 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x : τ (Obj A)) ⊢ @fapp0 A C (@comp_fapp0 Cat_cat A ...` |
-| 386 | 4705 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp ...` |
-| 387 | 4713 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func A C (@comp_fapp0 Ca ...` |
-| 388 | 4727 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func A C (@comp_cat_fapp ...` |
-| 443 | 5647 | `assert [A B : Cat] (b : τ (Obj B)) ⊢ @fapp0 B (Functor_cat A B) (@Const_func_func A B) b ≡ @Const_func A B b;` |
-| 533 | 6612 | `assert [K : Cat] [B : Cat] (F : τ (Functor (@Catd_cat K) B)) [E : τ (Catd K)] ⊢ @fapp1_fapp0 (@Catd_cat K) B F E E ( ...` |
-| 651 | 8125 | `assert [A B C D : Cat] (F : τ (Functor A B)) (G : τ (Functor B C)) (H : τ (Functor C D)) ⊢ @comp_cat_fapp0 A C D H ( ...` |
+| 226 | 2565 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) (f : τ (Hom A x y)) ⊢ @fapp1_fapp ...` |
+| 227 | 2583 | `assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A A (@id_func A) x y p ≡ p;` |
+| 228 | 2588 | `assert [A : Cat] ⊢ @id_func A ≡ @id Cat_cat A;` |
+| 229 | 2590 | `assert [A : Cat] (x : τ (Obj A)) ⊢ @fapp0 A A (@id Cat_cat A) x ≡ x;` |
+| 230 | 2593 | `assert [A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp0 A A (@id Cat_cat A) x y p ≡ p;` |
+| 286 | 3445 | `assert [A B : Cat] (x : τ (Obj A)) (F : τ (Functor A B)) ⊢ fapp0 (fapp0_func x) F ≡ fapp0 F x;` |
+| 319 | 3895 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) (f : τ (Hom A X Y)) ⊢ fapp0 (@fapp1_func A B F X Y) f ≡ @ ...` |
+| 382 | 4860 | `assert [A : Cat] (x y : τ (Obj A)) ⊢ @fapp1_func A A (@id_func A) x y ≡ @id_func (Hom_cat A x y);` |
+| 383 | 4865 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢ @comp_cat_fapp0 A B C F G ≡ @comp_fapp0 Cat_cat A ...` |
+| 384 | 4868 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x : τ (Obj A)) ⊢ @fapp0 A C (@comp_fapp0 Cat_cat A ...` |
+| 385 | 4873 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢ @fapp1_fapp ...` |
+| 386 | 4881 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func A C (@comp_fapp0 Ca ...` |
+| 387 | 4895 | `assert [A B C : Cat] (F : τ (Functor B C)) (G : τ (Functor A B)) (x y : τ (Obj A)) ⊢ @fapp1_func A C (@comp_cat_fapp ...` |
+| 442 | 5815 | `assert [A B : Cat] (b : τ (Obj B)) ⊢ @fapp0 B (Functor_cat A B) (@Const_func_func A B) b ≡ @Const_func A B b;` |
+| 532 | 6780 | `assert [K : Cat] [B : Cat] (F : τ (Functor (@Catd_cat K) B)) [E : τ (Catd K)] ⊢ @fapp1_fapp0 (@Catd_cat K) B F E E ( ...` |
+| 650 | 8293 | `assert [A B C D : Cat] (F : τ (Functor A B)) (G : τ (Functor B C)) (H : τ (Functor C D)) ⊢ @comp_cat_fapp0 A C D H ( ...` |
