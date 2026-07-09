@@ -2711,15 +2711,30 @@ symbol hom_postcomp_tele_fapp1_fapp0 [A B : Cat]
       (@hom_postcomp_func A B F W X Y f)
       (@hom_postcomp_func A B F W X Y g));
 
+// Unspecialized transfor owner for the postcomposition telescope. Cat-valued
+// instances expose ordinary transfor projections, but the owner itself is not
+// Cat-specific.
+symbol hom_postcomp_tele_transf [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  [f g : τ (Hom B X Y)]
+  (alpha : τ (Hom (Hom_cat B X Y) f g))
+  : τ (Hom
+      (Functor_cat
+        (Hom_cat A W (@fapp0 B A F X))
+        (Hom_cat A W (@fapp0 B A F Y)))
+      (@hom_postcomp_func A B F W X Y f)
+      (@hom_postcomp_func A B F W X Y g));
+
 // Projection rules for the telescope hom-action.
 rule @fapp1_func _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g
   ↪ @hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g;
 
 rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
-  ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
+  ↪ @hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $alpha;
 
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
-  ↪ @hom_postcomp_tele_fapp1_fapp0 $A $B $F $W $X $Y $f $g $alpha;
+  ↪ @hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $alpha;
 
 // Runtime functoriality of the tele-level postcomposition stable head.
 rule @hom_postcomp_tele_fapp1_fapp0
@@ -3285,15 +3300,28 @@ symbol hom_precomp_along_tele_fapp1_fapp0 [A B : Cat]
       (@hom_precomp_along_func A B F Z W X h)
       (@hom_precomp_along_func A B F Z W X k));
 
+// Unspecialized transfor owner for the precomposition telescope.
+symbol hom_precomp_along_tele_transf [A B : Cat]
+  (F : τ (Functor A B)) (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  [h k : τ (Hom A W X)]
+  (alpha : τ (Hom (Hom_cat A W X) h k))
+  : τ (Hom
+      (Functor_cat
+        (Hom_cat B (@fapp0 A B F X) Z)
+        (Hom_cat B (@fapp0 A B F W) Z))
+      (@hom_precomp_along_func A B F Z W X h)
+      (@hom_precomp_along_func A B F Z W X k));
+
 // Projection rules for the precomposition telescope hom-action.
 rule @fapp1_func _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k
   ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
 
 rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
-  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
+  ↪ @hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha;
 
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
-  ↪ @hom_precomp_along_tele_fapp1_fapp0 $A $B $F $Z $W $X $h $k $alpha;
+  ↪ @hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha;
 
 // Runtime functoriality of the tele-level precomposition stable head.
 rule @hom_precomp_along_tele_fapp1_fapp0
@@ -3443,6 +3471,11 @@ rule @hom_postcomp_tele_fapp1_fapp0
       $B $A (@Op_func _ _ $F)
       $Z $X $W $h $k $alpha
   ↪ @hom_precomp_along_tele_fapp1_fapp0 (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k $alpha;
+
+rule @hom_postcomp_tele_transf
+      $B $A (@Op_func _ _ $F)
+      $Z $X $W $h $k $alpha
+  ↪ @hom_precomp_along_tele_transf (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k $alpha;
 
 // Internalized hom classifier.
 //
@@ -4794,17 +4827,8 @@ symbol comp_cat_cov_func_func_fapp1_func [X Y Z : Cat]
     G
     H;
 
-symbol hom_postcomp_cat_tele_transf [K : Cat]
-  (E : τ (Functor K Cat_cat))
-  (W : Cat)
-  [X Y : τ (Obj K)]
-  [G H : τ (Hom K X Y)]
-  (eta : τ (Hom (Hom_cat K X Y) G H))
-  : τ (Transf
-      (@hom_postcomp_func Cat_cat K E W X Y G)
-      (@hom_postcomp_func Cat_cat K E W X Y H));
-
-// Cat-valued tele-postcomposition exposes ordinary transfor projections.
+// Cat-valued tele-postcomposition exposes ordinary transfor projections
+// through the unspecialized telescope-transfor owner.
 rule @hom_postcomp_tele_fapp1_fapp0
       Cat_cat
       $K
@@ -4815,7 +4839,7 @@ rule @hom_postcomp_tele_fapp1_fapp0
       $G
       $H
       $eta
-  ↪ @hom_postcomp_cat_tele_transf $K $E $W $X $Y $G $H $eta;
+  ↪ @hom_postcomp_tele_transf Cat_cat $K $E $W $X $Y $G $H $eta;
 
 symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
@@ -4823,7 +4847,8 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_cov_func X Y Z G)
       (@comp_cat_cov_func X Y Z H))
-≔ @hom_postcomp_cat_tele_transf
+≔ @hom_postcomp_tele_transf
+    Cat_cat
     Cat_cat
     (@id Cat_cat Cat_cat)
     X
@@ -4875,7 +4900,7 @@ rule @tapp0_fapp0
       _
       _
       $F
-      (@hom_postcomp_cat_tele_transf $K $E $W $X $Y $G $H $eta)
+      (@hom_postcomp_tele_transf Cat_cat $K $E $W $X $Y $G $H $eta)
   ↪ @comp_prod_fapp1_fapp0
       Cat_cat
       $W
@@ -4932,17 +4957,8 @@ symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
 // Surface/formula:
 //   alpha : F => K
 //   comp_cat_con_func_func_transf(alpha)[G] = G alpha.
-symbol hom_precomp_along_cat_tele_transf [K : Cat]
-  (E : τ (Functor K Cat_cat))
-  (Z : Cat)
-  [X Y : τ (Obj K)]
-  [F H : τ (Hom K X Y)]
-  (alpha : τ (Hom (Hom_cat K X Y) F H))
-  : τ (Transf
-      (@hom_precomp_along_func K Cat_cat E Z X Y F)
-      (@hom_precomp_along_func K Cat_cat E Z X Y H));
-
-// Cat-valued tele-precomposition exposes ordinary transfor projections.
+// Cat-valued tele-precomposition exposes ordinary transfor projections through
+// the unspecialized telescope-transfor owner.
 rule @hom_precomp_along_tele_fapp1_fapp0
       $K
       Cat_cat
@@ -4953,7 +4969,7 @@ rule @hom_precomp_along_tele_fapp1_fapp0
       $F
       $H
       $alpha
-  ↪ @hom_precomp_along_cat_tele_transf $K $E $Z $X $Y $F $H $alpha;
+  ↪ @hom_precomp_along_tele_transf $K Cat_cat $E $Z $X $Y $F $H $alpha;
 
 symbol comp_cat_con_func_func_transf [X Y Z : Cat]
   [F K : τ (Functor X Y)]
@@ -4961,7 +4977,8 @@ symbol comp_cat_con_func_func_transf [X Y Z : Cat]
   : τ (Transf
       (@comp_cat_con_func X Y Z F)
       (@comp_cat_con_func X Y Z K))
-≔ @hom_precomp_along_cat_tele_transf
+≔ @hom_precomp_along_tele_transf
+    Cat_cat
     Cat_cat
     (@id Cat_cat Cat_cat)
     Z
@@ -4981,7 +4998,7 @@ rule @tapp0_fapp0
       _
       _
       $G
-      (@hom_precomp_along_cat_tele_transf $K $E $Z $X $Y $F $H $alpha)
+      (@hom_precomp_along_tele_transf $K Cat_cat $E $Z $X $Y $F $H $alpha)
   ↪ @comp_prod_fapp1_fapp0
       Cat_cat
       (@fapp0 $K Cat_cat $E $X)
@@ -5084,7 +5101,7 @@ rule @tapp1_func
       _
       $F
       $K
-      (@hom_postcomp_cat_tele_transf $L $E $W $X $Y $G $H $eta)
+      (@hom_postcomp_tele_transf Cat_cat $L $E $W $X $Y $G $H $eta)
   ↪ @comp_cat_cov_func_func_tapp1_func
       $W
       (@fapp0 $L Cat_cat $E $X)
@@ -5116,7 +5133,7 @@ rule @tapp1_fapp0
       _
       $F
       $K
-      (@hom_postcomp_cat_tele_transf $L $E $W $X $Y $G $H $eta)
+      (@hom_postcomp_tele_transf Cat_cat $L $E $W $X $Y $G $H $eta)
       $alpha
   ↪ @comp_cat_func_func_tapp1_fapp0
       $W
@@ -5145,7 +5162,7 @@ rule @tapp1_func
       _
       $G
       $J
-      (@hom_precomp_along_cat_tele_transf $L $E $Z $X $Y $F $H $alpha)
+      (@hom_precomp_along_tele_transf $L Cat_cat $E $Z $X $Y $F $H $alpha)
   ↪ @comp_cat_con_func_func_tapp1_func
       (@fapp0 $L Cat_cat $E $X)
       (@fapp0 $L Cat_cat $E $Y)
@@ -5171,7 +5188,7 @@ rule @tapp1_fapp0
       _
       $G
       $J
-      (@hom_precomp_along_cat_tele_transf $L $E $Z $X $Y $F $H $alpha)
+      (@hom_precomp_along_tele_transf $L Cat_cat $E $Z $X $Y $F $H $alpha)
       $eta
   ↪ @comp_cat_func_func_tapp1_fapp0
       (@fapp0 $L Cat_cat $E $X)

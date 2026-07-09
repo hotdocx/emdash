@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: active subtask; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, and deletion of the old Cat cov/con compatibility names have been promoted and validated; the broader `Hom_fapp0` object-level cleanup and generic telescope-transfor unspecialization remain deferred
+Status: promoted and validated through generic telescope-transfor unspecialization; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, and deletion of the old Cat telescope-transfor compatibility names have been promoted; the broader `Hom_fapp0` object-level cleanup and fully generic off-diagonal telescope projection formulation remain deferred
 
 ## Active Goal
 
@@ -62,21 +62,19 @@ The current source has:
   `hom_int_precomp_along_tele_func`.
 - `comp_cat_func_func_tapp1_fapp0`, the Cat-specialized horizontal composite
   of ordinary transfors.
-- `comp_cat_cov_transf` and `comp_cat_con_transf`, current Cat-specialized
-  one-slot horizontal-action heads. They presently own real
-  `tapp0_fapp0`, `tapp1_func`, `tapp1_fapp0`, and identity-collapse rules,
-  so deleting them requires moving those projection ladders to the
-  corresponding identity-slot instances of `comp_prod_fapp1_fapp0 Cat_cat`.
+- `comp_cat_cov_transf` and `comp_cat_con_transf`, former Cat-specialized
+  one-slot horizontal-action heads. They were deleted after their projection
+  ladders moved to the corresponding identity-slot instances of
+  `comp_prod_fapp1_fapp0 Cat_cat`.
 - `Unit_prof_fapp1_func`, a residual profunctor-specific stable head whose
   object action is just "precompose, postcompose, then compose". The first
   promoted slice deleted this name, but the corrected plan restores the
   concept as a general `Hom_cat` action owner, not as a `Unit_prof`-specific
   owner.
-- Cat-specialized telescope-transfor heads
+- Former Cat-specialized telescope-transfor heads
   `hom_precomp_along_cat_tele_transf` and
-  `hom_postcomp_cat_tele_transf`, whose `tapp*` projection rules are better
-  understood as future generic projection rules on unspecialized
-  `hom_*_tele_transf` heads.
+  `hom_postcomp_cat_tele_transf`. They were deleted after their `tapp*`
+  projection rules moved to the unspecialized `hom_*_tele_transf` heads.
 
 The existing object-level proof-time bridges already identify the stable
 hom-action object actions with ordinary `comp_fapp0` readings:
@@ -207,9 +205,8 @@ comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 where `(alpha,eta)` is the product arrow from `(F,G)` to `(K,H)` in
 `Product_cat(Functor_cat X Y,Functor_cat Y Z)`.
 
-The old Cat-specific names should be deleted after their projection ladders
-are moved, or temporarily demoted to transparent compatibility aliases during
-the migration:
+The old one-slot Cat-specific names were deleted after their projection
+ladders moved. Their intended replacement forms are:
 
 ```text
 comp_cat_cov_transf(G,alpha) := comp_prod_fapp1_fapp0 Cat_cat (alpha,id_G)
@@ -219,7 +216,7 @@ comp_cat_func_func_tapp1_fapp0(eta,alpha)
   := comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 ```
 
-The current body of `comp_cat_func_func_tapp1_fapp0` is the composite of two
+The former body of `comp_cat_func_func_tapp1_fapp0` was the composite of two
 one-slot actions:
 
 ```text
@@ -227,17 +224,17 @@ comp_prod_fapp1_fapp0 Cat_cat (alpha,id_H)
   o comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
 ```
 
-with the endpoint order determined by the current body
-`(H alpha) o (eta F)`. The new owner should fold that composite to:
+with endpoint order determined by `(H alpha) o (eta F)`. The promoted owner is
+now:
 
 ```text
 comp_prod_fapp1_fapp0 Cat_cat (alpha,eta)
 ```
 
 This is a concrete Cat instance of the general `comp_prod_fapp1_fapp0`
-composition fold above. It should be probed together with the projection
-ladder migration because the old one-slot helper heads currently own the
-component and off-diagonal transfor projections.
+composition fold above. A separate compatibility fold from an explicitly
+authored old two-one-slot composite to this arbitrary-pair product owner
+remains deferred until a concrete consumer needs it.
 
 ## Unit Prof Migration
 
@@ -642,11 +639,12 @@ comp_prod* owns product-composition arrow action.
 old comp_cat_* names are compatibility surfaces to delete or alias away.
 ```
 
-In particular, Cat-specific computation should move away from the
+The Cat-specific computation has now moved away from the former
 `hom_precomp_along_cat_tele_transf` and `hom_postcomp_cat_tele_transf` heads.
-Those heads currently exist because the generic telescope-transfor projection
-ladder is missing. Once the unspecialized heads exist, their projections
-should be generic and should target `comp_prod*` first.
+Those heads existed because the generic telescope-transfor projection ladder
+was missing. The promoted slice introduces the unspecialized heads and moves
+the Cat-instance projections there. A fully generic off-diagonal
+`comp_prod_fapp1_func` formulation remains deferred.
 
 For precomposition, with
 `theta = hom_precomp_along_tele_transf(F,alpha)` and
@@ -1052,10 +1050,22 @@ being considered under the possible future name
 `hom_int_precomp_along_tele_func`. A future rename can be considered as a
 separate naming cleanup.
 
-## Deferred Telescope-Transfor Unspecialization
+## Promoted Telescope-Transfor Unspecialization
 
-The current Cat-specific heads should be understood as temporary compatibility
-surfaces:
+Status 2026-07-09: promoted and validated. The product horizontal-action
+owner is in place, the old one-slot Cat cov/con heads have been deleted, and
+the telescope-transfor projection layer now uses the generic owners
+`hom_postcomp_tele_transf` and `hom_precomp_along_tele_transf`. The
+Cat-instance `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules
+were moved from the old Cat-specific heads to the corresponding Cat instances
+of these generic heads. The old compatibility names
+`hom_postcomp_cat_tele_transf` and `hom_precomp_along_cat_tele_transf` were
+deleted rather than kept as aliases.
+
+This was done before the broader `Hom_fapp0` object-level cleanup, so the
+known precomposition/postcomposition object-normal-form issue remains isolated.
+
+The former Cat-specific heads were temporary compatibility surfaces:
 
 ```text
 hom_precomp_along_cat_tele_transf
@@ -1083,8 +1093,8 @@ These generic transfor heads are meaningful because
 `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projections are not inherently
 Cat-specific.
 
-After the generic heads exist, the current Cat-specific names should become
-aliases or compatibility views:
+The alias option was not used. The current kernel exposes the generic heads
+directly; formerly equivalent Cat-specialized views would have been:
 
 ```text
 hom_precomp_along_cat_tele_transf
@@ -1094,22 +1104,19 @@ hom_postcomp_cat_tele_transf
   := hom_postcomp_tele_transf Cat_cat ...
 ```
 
-The existing `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` rules currently
-attached to the Cat-specific heads should then move to the generic heads and
-be expressed through `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` where
-appropriate. The one-slot Cat projection rules currently owned by
-`comp_cat_cov_transf` and `comp_cat_con_transf` should move to the identity
-slots of `comp_prod_fapp1_fapp0 Cat_cat`. The old Cat names should not remain
-normal forms; they should be deleted or kept only as transparent aliases while
-call sites migrate.
+The `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` rules formerly attached to
+the Cat-specific heads now key on the generic heads. The promoted slice keeps
+the off-diagonal rules as Cat-instance rules on the generic heads; a fully
+generic `comp_prod_fapp1_func` formulation remains a deferred follow-up. The
+one-slot Cat projection rules formerly owned by `comp_cat_cov_transf` and
+`comp_cat_con_transf` already moved to the identity slots of
+`comp_prod_fapp1_fapp0 Cat_cat`.
 
-This is one linked follow-up with the deletion or demotion of
-`comp_cat_func_func_tapp1_fapp0` to a compatibility alias for the arbitrary
-pair Cat instance of `comp_prod_fapp1_fapp0`.
-
-This unspecialization is not part of the immediate `Unit_prof` migration. It
-is recorded because it is the coherent future owner of the arrow-level bridge
-story for `comp_prod_func`.
+Remaining follow-up: decide whether `comp_cat_func_func_tapp1_fapp0` should
+also be deleted or demoted to a compatibility alias for the arbitrary-pair Cat
+instance of `comp_prod_fapp1_fapp0`. The unspecialized telescope-transfor
+owners are now the coherent owner of this part of the arrow-level bridge story
+for `comp_prod_func`.
 
 ## Cleanup Slice
 
@@ -1209,6 +1216,27 @@ Updated order after the 2026-07-08 `Hom_*` correction:
     catalog refresh, warning summary, `make ci`, and health refresh pass.
     The promoted slice is feasible and validated; the old cov/con names no
     longer exist as active kernel symbols.
+13. Completed 2026-07-09: generic telescope-transfor unspecialization:
+    - introduced unspecialized `hom_postcomp_tele_transf` and
+      `hom_precomp_along_tele_transf` owners using the pre-`Transf_cat`
+      explicit `Hom(Functor_cat,...)` classifier shape required by source
+      order;
+    - retargeted `fapp0(hom_*_tele_fapp1_func,alpha)` and
+      `fapp1_fapp0(hom_*_tele_func,alpha)` to the generic heads;
+    - retargeted the Cat-specialized `hom_*_tele_fapp1_fapp0` reductions to
+      the generic heads;
+    - moved the Cat-instance `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`
+      rules from `hom_postcomp_cat_tele_transf` /
+      `hom_precomp_along_cat_tele_transf` to the generic heads;
+    - deleted the old Cat-specific telescope-transfor compatibility names;
+    - kept the fully generic off-diagonal `comp_prod_fapp1_func` formulation
+      deferred, while the Cat-instance projection behavior is promoted and
+      checked;
+    - validation passed: focused probes, bounded `make check`, `make catalog`,
+      `make warning-summary`, `make ci`, and `make health`. Warning summary is
+      1,317 warnings, up from the earlier 1,311-warning baseline; this delta
+      is recorded as accepted diagnostic evidence for the new generic
+      telescope-transfor overlap family.
 
 ## Side-Task Ledger
 

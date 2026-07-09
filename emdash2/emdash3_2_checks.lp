@@ -1977,7 +1977,7 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
     f
     g
     alpha
-  ≡ @hom_postcomp_tele_fapp1_fapp0 A B F W X Y f g alpha;
+  ≡ @hom_postcomp_tele_transf A B F W X Y f g alpha;
 
 assert [K : Cat]
   (E : τ (Functor K Cat_cat))
@@ -1986,7 +1986,7 @@ assert [K : Cat]
   [f g : τ (Hom K x y)]
   (alpha : τ (Hom (Hom_cat K x y) f g)) ⊢
   @hom_postcomp_tele_fapp1_fapp0 Cat_cat K E W x y f g alpha
-  ≡ @hom_postcomp_cat_tele_transf K E W x y f g alpha;
+  ≡ @hom_postcomp_tele_transf Cat_cat K E W x y f g alpha;
 
 assert (W X Y : Cat) (G H : τ (Functor X Y)) ⊢
   @fapp1_func
@@ -2018,7 +2018,8 @@ assert (W X Y : Cat) (G H : τ (Functor X Y)) (eta : τ (Transf G H)) ⊢
 assert (W X Y : Cat) [G H : τ (Functor X Y)]
   (eta : τ (Transf G H)) ⊢
   @comp_cat_cov_func_func_transf W X Y G H eta
-  ≡ @hom_postcomp_cat_tele_transf
+  ≡ @hom_postcomp_tele_transf
+      Cat_cat
       Cat_cat
       (@id Cat_cat Cat_cat)
       W
@@ -2045,7 +2046,7 @@ assert [K : Cat]
     (@hom_postcomp_func Cat_cat K E W x y f)
     (@hom_postcomp_func Cat_cat K E W x y g)
     P
-    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+    (@hom_postcomp_tele_transf Cat_cat K E W x y f g alpha)
   ≡ @comp_prod_fapp1_fapp0
       Cat_cat
       W
@@ -2092,7 +2093,7 @@ assert [K : Cat]
     (@hom_postcomp_func Cat_cat K E W x y g)
     P
     Q
-    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+    (@hom_postcomp_tele_transf Cat_cat K E W x y f g alpha)
   ≡ @comp_cat_cov_func_func_tapp1_func
       W
       (@fapp0 K Cat_cat E x)
@@ -2126,7 +2127,7 @@ assert [K : Cat]
     (@hom_postcomp_func Cat_cat K E W x y g)
     P
     Q
-    (@hom_postcomp_cat_tele_transf K E W x y f g alpha)
+    (@hom_postcomp_tele_transf Cat_cat K E W x y f g alpha)
     beta
   ≡ @comp_cat_func_func_tapp1_fapp0
       W
@@ -2172,7 +2173,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
     h
     k
     alpha
-  ≡ @hom_precomp_along_tele_fapp1_fapp0 A B F Z W X h k alpha;
+  ≡ @hom_precomp_along_tele_transf A B F Z W X h k alpha;
 
 assert [K : Cat]
   (E : τ (Functor K Cat_cat))
@@ -2181,7 +2182,7 @@ assert [K : Cat]
   [f g : τ (Hom K x y)]
   (alpha : τ (Hom (Hom_cat K x y) f g)) ⊢
   @hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E Z x y f g alpha
-  ≡ @hom_precomp_along_cat_tele_transf K E Z x y f g alpha;
+  ≡ @hom_precomp_along_tele_transf K Cat_cat E Z x y f g alpha;
 
 assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
   (W X : τ (Obj A)) (h k : τ (Hom A W X))
@@ -2197,7 +2198,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
       h
       k)
     alpha
-  ≡ @hom_precomp_along_tele_fapp1_fapp0 A B F Z W X h k alpha;
+  ≡ @hom_precomp_along_tele_transf A B F Z W X h k alpha;
 
 assert [X Y Z : Cat] (F K : τ (Functor X Y)) ⊢
   @fapp1_func
@@ -2230,7 +2231,8 @@ assert [X Y Z : Cat] (F K : τ (Functor X Y))
 assert [X Y Z : Cat] [F K : τ (Functor X Y)]
   (alpha : τ (Transf F K)) ⊢
   @comp_cat_con_func_func_transf X Y Z F K alpha
-  ≡ @hom_precomp_along_cat_tele_transf
+  ≡ @hom_precomp_along_tele_transf
+      Cat_cat
       Cat_cat
       (@id Cat_cat Cat_cat)
       Z
@@ -2280,7 +2282,7 @@ assert [K : Cat]
     (@hom_precomp_along_func K Cat_cat E Z x y f)
     (@hom_precomp_along_func K Cat_cat E Z x y g)
     P
-    (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
+    (@hom_precomp_along_tele_transf K Cat_cat E Z x y f g alpha)
   ≡ @comp_prod_fapp1_fapp0
       Cat_cat
       (@fapp0 K Cat_cat E x)
@@ -2359,7 +2361,7 @@ assert [K : Cat]
     (@hom_precomp_along_func K Cat_cat E Z x y g)
     P
     Q
-    (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
+    (@hom_precomp_along_tele_transf K Cat_cat E Z x y f g alpha)
   ≡ @comp_cat_con_func_func_tapp1_func
       (@fapp0 K Cat_cat E x)
       (@fapp0 K Cat_cat E y)
@@ -2393,7 +2395,7 @@ assert [K : Cat]
     (@hom_precomp_along_func K Cat_cat E Z x y g)
     P
     Q
-    (@hom_precomp_along_cat_tele_transf K E Z x y f g alpha)
+    (@hom_precomp_along_tele_transf K Cat_cat E Z x y f g alpha)
     beta
   ≡ @comp_cat_func_func_tapp1_fapp0
       (@fapp0 K Cat_cat E x)
