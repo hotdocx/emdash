@@ -4548,11 +4548,9 @@ rule @comp_prod_fapp1_fapp0
       $X
       $Y
       $Z
-      (@Product_pair (Functor_cat $X $Y) (Functor_cat $Y $Z) $F $G)
-      (@Product_pair (Functor_cat $X $Y) (Functor_cat $Y $Z) $F $G)
-      (@Product_pair
-        (Hom_cat (Functor_cat $X $Y) $F $F)
-        (Hom_cat (Functor_cat $Y $Z) $G $G)
+      (Struct_sigma $F $G)
+      (Struct_sigma $F $G)
+      (Struct_sigma
         (@id (Functor_cat $X $Y) $F)
         (@id (Functor_cat $Y $Z) $G))
   ↪ @id
@@ -4744,7 +4742,32 @@ symbol comp_cat_cov_transf [K : Cat]
         (@fapp0 K Cat_cat E X)
         (@fapp0 K Cat_cat E Y)
         (@fapp1_fapp0 K Cat_cat E X Y f)
-        H));
+        H))
+≔ @comp_prod_fapp1_fapp0
+    Cat_cat
+    W
+    (@fapp0 K Cat_cat E X)
+    (@fapp0 K Cat_cat E Y)
+    (@Product_pair
+      (Functor_cat W (@fapp0 K Cat_cat E X))
+      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+      G
+      (@fapp1_fapp0 K Cat_cat E X Y f))
+    (@Product_pair
+      (Functor_cat W (@fapp0 K Cat_cat E X))
+      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+      H
+      (@fapp1_fapp0 K Cat_cat E X Y f))
+    (@Product_pair
+      (Hom_cat (Functor_cat W (@fapp0 K Cat_cat E X)) G H)
+      (Hom_cat
+        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+        (@fapp1_fapp0 K Cat_cat E X Y f)
+        (@fapp1_fapp0 K Cat_cat E X Y f))
+      eta
+      (@id
+        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+        (@fapp1_fapp0 K Cat_cat E X Y f)));
 
 // Cat-valued capped postcomposition exposes ordinary transfor projections.
 rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
@@ -4774,112 +4797,8 @@ rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
           (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
           (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)));
 
-// Component of postcomposition by G.
-//
-// Surface/formula:
-//   (G eta)[i] = G[eta[i]].
-rule @tapp0_fapp0
-      $W
-      _
-      _
-      _
-      $i
-      (@comp_cat_cov_transf $K $E $W $X $Y $f $G $H $eta)
-  ↪ @fapp1_fapp0
-      (@fapp0 $K Cat_cat $E $X)
-      (@fapp0 $K Cat_cat $E $Y)
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-      (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $G $i)
-      (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $H $i)
-      (@tapp0_fapp0
-        $W
-        (@fapp0 $K Cat_cat $E $X)
-        $G
-        $H
-        $i
-        $eta);
-
-// Off-diagonal action of postcomposition by G.
-//
-// Surface/formula:
-//   (G eta)[p] = G[eta[p]].
-rule @tapp1_func
-      $W
-      _
-      _
-      _
-      $i
-      $j
-      (@comp_cat_cov_transf $K $E $W $X $Y $f $G $H $eta)
-  ↪ @comp_cat_fapp0
-      (Hom_cat $W $i $j)
-      (Hom_cat
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $G $i)
-        (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $H $j))
-      (Hom_cat
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-          (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $G $i))
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-          (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $H $j)))
-      (@fapp1_func
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-        (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $G $i)
-        (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $H $j))
-      (@tapp1_func
-        $W
-        (@fapp0 $K Cat_cat $E $X)
-        $G
-        $H
-        $i
-        $j
-        $eta);
-
-// Capped off-diagonal action of postcomposition by G.
-rule @tapp1_fapp0
-      $W
-      _
-      _
-      _
-      $i
-      $j
-      (@comp_cat_cov_transf $K $E $W $X $Y $f $G $H $eta)
-      $p
-  ↪ @fapp1_fapp0
-      (@fapp0 $K Cat_cat $E $X)
-      (@fapp0 $K Cat_cat $E $Y)
-      (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-      (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $G $i)
-      (@fapp0 $W (@fapp0 $K Cat_cat $E $X) $H $j)
-      (@tapp1_fapp0
-        $W
-        (@fapp0 $K Cat_cat $E $X)
-        $G
-        $H
-        $i
-        $j
-        $eta
-        $p);
-
-// Postcomposition preserves identity transfors.
-rule @comp_cat_cov_transf $K $E $W $X $Y $f $G $G (@id _ $G)
-  ↪ @id
-      (Functor_cat $W (@fapp0 $K Cat_cat $E $Y))
-      (@comp_cat_fapp0
-        $W
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)
-        $G);
+// `comp_cat_cov_transf` is a compatibility alias; the Cat product-composition
+// owner exposes its projections and identity collapse.
 
 /*
   Hom-action of postcomposition as a functor in the postcomposing functor.
@@ -5012,7 +4931,32 @@ symbol comp_cat_con_transf [K : Cat]
         (@fapp0 K Cat_cat E Y)
         Z
         H
-        (@fapp1_fapp0 K Cat_cat E X Y F)));
+        (@fapp1_fapp0 K Cat_cat E X Y F)))
+≔ @comp_prod_fapp1_fapp0
+    Cat_cat
+    (@fapp0 K Cat_cat E X)
+    (@fapp0 K Cat_cat E Y)
+    Z
+    (@Product_pair
+      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+      (Functor_cat (@fapp0 K Cat_cat E Y) Z)
+      (@fapp1_fapp0 K Cat_cat E X Y F)
+      G)
+    (@Product_pair
+      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+      (Functor_cat (@fapp0 K Cat_cat E Y) Z)
+      (@fapp1_fapp0 K Cat_cat E X Y F)
+      H)
+    (@Product_pair
+      (Hom_cat
+        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+        (@fapp1_fapp0 K Cat_cat E X Y F)
+        (@fapp1_fapp0 K Cat_cat E X Y F))
+      (Hom_cat (Functor_cat (@fapp0 K Cat_cat E Y) Z) G H)
+      (@id
+        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
+        (@fapp1_fapp0 K Cat_cat E X Y F))
+      eta);
 
 // Component of tele-postcomposition in a Cat-valued family.
 rule @tapp0_fapp0
@@ -5421,140 +5365,8 @@ rule @hom_precomp_along_fapp1_fapp0
           (@fapp1_fapp0 $K Cat_cat $E $X $Y $F))
         $eta);
 
-// Component of precomposition by F.
-//
-// Surface/formula:
-//   (eta ∘ F)[i] = eta[F[i]].
-rule @tapp0_fapp0
-      _
-      $Z
-      _
-      _
-      $i
-      (@comp_cat_con_transf $K $E $Z $X $Y $F $G $H $eta)
-  ↪ @tapp0_fapp0
-      (@fapp0 $K Cat_cat $E $Y)
-      $Z
-      $G
-      $H
-      (@fapp0
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $i)
-      $eta;
-
-// Off-diagonal action of precomposition by F.
-//
-// Surface/formula:
-//   (eta ∘ F)[p] = eta[F[p]].
-rule @tapp1_func
-      _
-      $Z
-      _
-      _
-      $i
-      $j
-      (@comp_cat_con_transf $K $E $Z $X $Y $F $G $H $eta)
-  ↪ @comp_cat_fapp0
-      (Hom_cat (@fapp0 $K Cat_cat $E $X) $i $j)
-      (Hom_cat
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-          $i)
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-          $j))
-      (Hom_cat $Z
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $Y)
-          $Z
-          $G
-          (@fapp0
-            (@fapp0 $K Cat_cat $E $X)
-            (@fapp0 $K Cat_cat $E $Y)
-            (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-            $i))
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $Y)
-          $Z
-          $H
-          (@fapp0
-            (@fapp0 $K Cat_cat $E $X)
-            (@fapp0 $K Cat_cat $E $Y)
-            (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-            $j)))
-      (@tapp1_func
-        (@fapp0 $K Cat_cat $E $Y)
-        $Z
-        $G
-        $H
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-          $i)
-        (@fapp0
-          (@fapp0 $K Cat_cat $E $X)
-          (@fapp0 $K Cat_cat $E $Y)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-          $j)
-        $eta)
-      (@fapp1_func
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $i
-        $j);
-
-rule @tapp1_fapp0
-      _
-      $Z
-      _
-      _
-      $i
-      $j
-      (@comp_cat_con_transf $K $E $Z $X $Y $F $G $H $eta)
-      $p
-  ↪ @tapp1_fapp0
-      (@fapp0 $K Cat_cat $E $Y)
-      $Z
-      $G
-      $H
-      (@fapp0
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $i)
-      (@fapp0
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $j)
-      $eta
-      (@fapp1_fapp0
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $i
-        $j
-        $p);
-
-// Precomposition preserves identity transfors.
-rule @comp_cat_con_transf $K $E $Z $X $Y $F $G $G (@id _ $G)
-  ↪ @id
-      (Functor_cat (@fapp0 $K Cat_cat $E $X) $Z)
-      (@comp_cat_fapp0
-        (@fapp0 $K Cat_cat $E $X)
-        (@fapp0 $K Cat_cat $E $Y)
-        $Z
-        $G
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F));
+// `comp_cat_con_transf` is a compatibility alias; the Cat product-composition
+// owner exposes its projections and identity collapse.
 
 // Product-valued capped off-diagonal components project componentwise.
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
