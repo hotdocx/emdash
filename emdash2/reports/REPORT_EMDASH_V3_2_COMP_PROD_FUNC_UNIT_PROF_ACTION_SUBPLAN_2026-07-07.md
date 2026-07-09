@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: promoted and validated through Cat-instance off-diagonal telescope projection cleanup; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, and the Cat-instance off-diagonal product cleanup have been promoted; the broader `Hom_fapp0` object-level cleanup and arbitrary-ambient off-diagonal telescope projection formulation remain deferred
+Status: promoted and validated through arbitrary-ambient off-diagonal telescope projection formulation; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, the Cat-instance off-diagonal product cleanup, and the arbitrary-ambient off-diagonal formulation have been promoted; the broader `Hom_fapp0` object-level cleanup remains deferred
 
 ## Active Goal
 
@@ -1168,11 +1168,11 @@ The promoted source uses the existing product-valued functor encoding
 pairing helper was needed. Active projection rules and diagnostics no longer
 reference the historical helper names, so those helper symbols were deleted.
 
-This is not yet the arbitrary-ambient formulation. The arbitrary-ambient
-version would remove the `Cat_cat` specialization from the projection rules
-and express the same pattern for a general ambient category. That remains a
-separate follow-up because it may expose endpoint-normal-form interactions
-between stable `hom_*_fapp0` heads and raw `comp_fapp0` endpoints.
+This slice was still not the arbitrary-ambient formulation. The
+arbitrary-ambient version removes the `Cat_cat` specialization from the
+projection rules and expresses the same pattern for a general ambient category.
+That follow-up was promoted in the next slice after focused probes classified
+the endpoint-normal-form and warning interactions.
 
 Validation 2026-07-09: focused source/check probes
 `tmp/probes/cat_offdiag_prod_cleanup_probe.lp` and
@@ -1181,6 +1181,77 @@ source probe passes; promoted active validation passes with
 `EMDASH_TYPECHECK_TIMEOUT=60s make check`, `make catalog`,
 `make warning-summary`, `make ci`, and `make health`. Warning summary remains
 at 1,317 warnings.
+
+## Promoted Arbitrary-Ambient Off-Diagonal Formulation
+
+Status 2026-07-09: promoted and validated. The Cat-instance off-diagonal
+rules already used the correct product-composition owner, but their LHSs still
+specialized the ambient category to `Cat_cat`:
+
+```text
+hom_postcomp_tele_transf Cat_cat ...
+hom_precomp_along_tele_transf ... Cat_cat ...
+```
+
+This slice promotes arbitrary-ambient versions. Semantically, these rules are
+horizontal composition in the hom-categories of the ambient category:
+
+```text
+tapp1_fapp0(hom_postcomp_tele_transf A B F W X Y f g alpha, beta)
+  -> comp_prod_fapp1_fapp0 A
+       (beta, F[alpha])
+
+tapp1_fapp0(hom_precomp_along_tele_transf A B F Z W X h k alpha, beta)
+  -> comp_prod_fapp1_fapp0 B
+       (F[alpha], beta)
+```
+
+The functor-level forms are the same product-owner formulation as the promoted
+Cat slice:
+
+```text
+postcomposition:
+  Hom_A(u,v)
+    -- (id, const F[alpha]) -->
+  Hom(Product_cat(...), (u,F[f]), (v,F[g]))
+    -- comp_prod_fapp1_func A -->
+  Hom_A(F[f] o u, F[g] o v)
+
+precomposition:
+  Hom_B(g,j)
+    -- (const F[alpha], id) -->
+  Hom(Product_cat(...), (F[h],g), (F[k],j))
+    -- comp_prod_fapp1_func B -->
+  Hom_B(g o F[h], j o F[k])
+```
+
+Promoted implementation:
+
+1. Generic `tapp0_fapp0` component rules were promoted first. They are
+   identity-slot instances of the off-diagonal formulas and expose the same
+   product-owner normal forms without needing Cat-specific heads.
+2. Generic capped `tapp1_fapp0` rules were promoted for both
+   `hom_postcomp_tele_transf` and `hom_precomp_along_tele_transf`.
+3. Generic `tapp1_func` rules were promoted using `Struct_sigma` pairing
+   functors, `id_func`, `Const_func`, and `comp_prod_fapp1_func`.
+4. The Cat-specialized off-diagonal `tapp*` discriminators were deleted rather
+   than retained as overlapping rules, because the generic rules subsume their
+   Cat instances. The separate Cat-valued `hom_*_tele_fapp1_fapp0` bridges
+   still target the generic `hom_*_tele_transf` heads.
+5. Diagnostics were migrated to arbitrary-ambient assertions. Stale checks for
+   the deleted `comp_cat_cov_func_func_transf` projection ladder were removed.
+   The old representable-hom exchange-law diagnostic was also removed because
+   it encoded an obsolete `hom_postcomp_tele_func` normal form rather than the
+   promoted product-owner off-diagonal normal form. A future interchange check
+   should be reintroduced only in direct `comp_prod_fapp1_func` /
+   `comp_prod_fapp1_fapp0` spelling.
+6. Validation passed with focused source/check probes
+   `tmp/probes/ambient_offdiag_probe.lp` and
+   `tmp/probes/ambient_offdiag_checks_probe.lp`; the source probe also passed
+   warning-enabled. Active validation passed with
+   `EMDASH_TYPECHECK_TIMEOUT=60s make check`, `make catalog`,
+   `make warning-summary`, `make ci`, and `make health`. Warning summary
+   remains at 1,317 warnings.
 
 ## Cleanup Slice
 
@@ -1313,8 +1384,22 @@ Updated order after the 2026-07-08 `Hom_*` correction:
       `comp_cat_con_func_func_tapp1_func`, and
       `comp_cat_func_func_tapp1_fapp0` after active checks no longer consumed
       them;
-    - kept arbitrary-ambient off-diagonal projection rules deferred until a
-      separate probe classifies endpoint-normal-form and warning interactions.
+    - the arbitrary-ambient off-diagonal projection rules were deferred only
+      until the next probe slice, then promoted by step 15.
+15. Completed 2026-07-09: arbitrary-ambient off-diagonal telescope projection
+    formulation:
+    - replaced the remaining `Cat_cat`-specialized `tapp0_fapp0`,
+      `tapp1_func`, and `tapp1_fapp0` rules on `hom_postcomp_tele_transf`
+      with rules generic in ambient `A` and base `B`;
+    - replaced the corresponding `hom_precomp_along_tele_transf` rules with
+      rules generic in source `A` and ambient `B`;
+    - kept `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` as the product
+      owner for both arbitrary and Cat-specialized off-diagonal projections;
+    - removed stale diagnostics for `comp_cat_cov_func_func_transf` and the
+      obsolete representable-hom exchange-law normal form;
+    - validation passed: focused source/check probes, warning-enabled source
+      probe, bounded `make check`, `make catalog`, `make warning-summary`,
+      `make ci`, and `make health`. Warning summary remains 1,317 warnings.
 
 ## Side-Task Ledger
 
@@ -1450,13 +1535,30 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   `REPORT_EMDASH_CHECK_CATALOG.md`; `make warning-summary` remains at 1,317
   warnings; `make ci` passes; `make health` refreshes
   `REPORT_EMDASH_HEALTH.md`.
+- Promoted 2026-07-09: arbitrary-ambient off-diagonal telescope projection
+  formulation. The source rules for `tapp0_fapp0`, `tapp1_func`, and
+  `tapp1_fapp0` on `hom_postcomp_tele_transf` now work in arbitrary ambient
+  category `A`; the corresponding `hom_precomp_along_tele_transf` rules now
+  work in arbitrary ambient category `B`. Both directions route through
+  `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0`, so Cat is now just an
+  instance of the generic product-owner formulation rather than the owner of
+  the rule. Focused source/check probes
+  `tmp/probes/ambient_offdiag_probe.lp` and
+  `tmp/probes/ambient_offdiag_checks_probe.lp` pass, as does a
+  warning-enabled source probe. Validation after promotion:
+  `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes; `make catalog` refreshes
+  `REPORT_EMDASH_CHECK_CATALOG.md`; `make warning-summary` remains at 1,317
+  warnings (1,152 unjoinable critical pairs and 165 replaceable-pattern
+  warnings); `make ci` passes; `make health` refreshes
+  `REPORT_EMDASH_HEALTH.md`.
+- Superseded 2026-07-09: the old representable-hom exchange-law diagnostic
+  against the `hom_postcomp_tele_func` normal form was removed during the
+  arbitrary-ambient promotion. It should be replaced only by a future
+  diagnostic stated directly through the product-owner off-diagonal normal
+  form, if a checked consumer needs that interchange instance.
 - Deferred conditional Cat-horizontal-action follow-up: add a compatibility fold, only
   if needed by a checked consumer, from an explicitly authored old two one-slot
   horizontal-composition composite to the arbitrary-pair
   `comp_prod_fapp1_fapp0 Cat_cat` owner.
 - Deferred: possible rename `hom_int_precomp_tele_func` to
   `hom_int_precomp_along_tele_func`.
-- Deferred: arbitrary-ambient off-diagonal telescope projection formulation.
-  The Cat-instance rules now use direct `comp_prod*` product-owner normal
-  forms, but the broader non-`Cat_cat` version still needs a focused probe to
-  classify endpoint-normal-form and warning interactions before promotion.

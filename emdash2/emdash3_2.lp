@@ -4893,45 +4893,43 @@ symbol comp_cat_con_fapp1_func [X Y Z : Cat]
     G
     H;
 
-// Component of tele-postcomposition in a Cat-valued family.
+// Component of tele-postcomposition in an arbitrary ambient category.
 rule @tapp0_fapp0
       _
       _
       _
       _
-      $F
-      (@hom_postcomp_tele_transf Cat_cat $K $E $W $X $Y $G $H $eta)
+      $u
+      (@hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $alpha)
   ↪ @comp_prod_fapp1_fapp0
-      Cat_cat
+      $A
       $W
-      (@fapp0 $K Cat_cat $E $X)
-      (@fapp0 $K Cat_cat $E $Y)
+      (@fapp0 $B $A $F $X)
+      (@fapp0 $B $A $F $Y)
       (@Product_pair
-        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
-        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-        $F
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $G))
+        (Hom_cat $A $W (@fapp0 $B $A $F $X))
+        (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+        $u
+        (@fapp1_fapp0 $B $A $F $X $Y $f))
       (@Product_pair
-        (Functor_cat $W (@fapp0 $K Cat_cat $E $X))
-        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-        $F
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
+        (Hom_cat $A $W (@fapp0 $B $A $F $X))
+        (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+        $u
+        (@fapp1_fapp0 $B $A $F $X $Y $g))
       (@Product_pair
-        (Hom_cat (Functor_cat $W (@fapp0 $K Cat_cat $E $X)) $F $F)
+        (Hom_cat (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u $u)
         (Hom_cat
-          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $G)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
-        (@id (Functor_cat $W (@fapp0 $K Cat_cat $E $X)) $F)
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          (@fapp1_fapp0 $B $A $F $X $Y $f)
+          (@fapp1_fapp0 $B $A $F $X $Y $g))
+        (@id (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u)
         (@fapp1_fapp0
-          (Hom_cat $K $X $Y)
-          (Functor_cat
-            (@fapp0 $K Cat_cat $E $X)
-            (@fapp0 $K Cat_cat $E $Y))
-          (@fapp1_func $K Cat_cat $E $X $Y)
-          $G
-          $H
-          $eta));
+          (Hom_cat $B $X $Y)
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          (@fapp1_func $B $A $F $X $Y)
+          $f
+          $g
+          $alpha));
 
 symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
   [F K : τ (Functor X Y)]
@@ -4988,7 +4986,7 @@ symbol comp_cat_con_func_func_transf [X Y Z : Cat]
     K
     alpha;
 
-// Component of tele-precomposition in a Cat-valued family.
+// Component of tele-precomposition in an arbitrary ambient category.
 //
 // Surface/formula:
 //   comp_cat_con_func_func_transf(alpha)[G] = G alpha.
@@ -4997,39 +4995,37 @@ rule @tapp0_fapp0
       _
       _
       _
-      $G
-      (@hom_precomp_along_tele_transf $K Cat_cat $E $Z $X $Y $F $H $alpha)
+      $g
+      (@hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha)
   ↪ @comp_prod_fapp1_fapp0
-      Cat_cat
-      (@fapp0 $K Cat_cat $E $X)
-      (@fapp0 $K Cat_cat $E $Y)
+      $B
+      (@fapp0 $A $B $F $W)
+      (@fapp0 $A $B $F $X)
       $Z
       (@Product_pair
-        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-        $G)
+        (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+        (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+        (@fapp1_fapp0 $A $B $F $W $X $h)
+        $g)
       (@Product_pair
-        (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-        (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z)
-        (@fapp1_fapp0 $K Cat_cat $E $X $Y $H)
-        $G)
+        (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+        (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+        (@fapp1_fapp0 $A $B $F $W $X $k)
+        $g)
       (@Product_pair
         (Hom_cat
-          (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $F)
-          (@fapp1_fapp0 $K Cat_cat $E $X $Y $H))
-        (Hom_cat (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z) $G $G)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (@fapp1_fapp0 $A $B $F $W $X $h)
+          (@fapp1_fapp0 $A $B $F $W $X $k))
+        (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $g)
         (@fapp1_fapp0
-          (Hom_cat $K $X $Y)
-          (Functor_cat
-            (@fapp0 $K Cat_cat $E $X)
-            (@fapp0 $K Cat_cat $E $Y))
-          (@fapp1_func $K Cat_cat $E $X $Y)
-          $F
-          $H
+          (Hom_cat $A $W $X)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (@fapp1_func $A $B $F $W $X)
+          $h
+          $k
           $alpha)
-        (@id (Functor_cat (@fapp0 $K Cat_cat $E $Y) $Z) $G));
+        (@id (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g));
 
 // Off-diagonal action of postcomposition-in-G.
 rule @tapp1_func
@@ -5037,70 +5033,70 @@ rule @tapp1_func
       _
       _
       _
-      $F
-      $K
-      (@hom_postcomp_tele_transf Cat_cat $L $E $W $X $Y $G $H $eta)
+      $u
+      $v
+      (@hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $eta)
   ↪ @comp_cat_fapp0
-      (Hom_cat (Functor_cat $W (@fapp0 $L Cat_cat $E $X)) $F $K)
+      (Hom_cat (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u $v)
       (Hom_cat
         (Product_cat
-          (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y)))
+          (Hom_cat $A $W (@fapp0 $B $A $F $X))
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y)))
         (@Product_pair
-          (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          $F
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $G))
+          (Hom_cat $A $W (@fapp0 $B $A $F $X))
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          $u
+          (@fapp1_fapp0 $B $A $F $X $Y $f))
         (@Product_pair
-          (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          $K
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)))
+          (Hom_cat $A $W (@fapp0 $B $A $F $X))
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          $v
+          (@fapp1_fapp0 $B $A $F $X $Y $g)))
       (Hom_cat
-        (Functor_cat $W (@fapp0 $L Cat_cat $E $Y))
-        (@comp_cat_fapp0
+        (Hom_cat $A $W (@fapp0 $B $A $F $Y))
+        (@comp_fapp0
+          $A
           $W
-          (@fapp0 $L Cat_cat $E $X)
-          (@fapp0 $L Cat_cat $E $Y)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $G)
-          $F)
-        (@comp_cat_fapp0
+          (@fapp0 $B $A $F $X)
+          (@fapp0 $B $A $F $Y)
+          (@fapp1_fapp0 $B $A $F $X $Y $f)
+          $u)
+        (@comp_fapp0
+          $A
           $W
-          (@fapp0 $L Cat_cat $E $X)
-          (@fapp0 $L Cat_cat $E $Y)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)
-          $K))
+          (@fapp0 $B $A $F $X)
+          (@fapp0 $B $A $F $Y)
+          (@fapp1_fapp0 $B $A $F $X $Y $g)
+          $v))
       (@comp_prod_fapp1_func
-        Cat_cat
+        $A
         $W
-        (@fapp0 $L Cat_cat $E $X)
-        (@fapp0 $L Cat_cat $E $Y)
+        (@fapp0 $B $A $F $X)
+        (@fapp0 $B $A $F $Y)
         (@Product_pair
-          (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          $F
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $G))
+          (Hom_cat $A $W (@fapp0 $B $A $F $X))
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          $u
+          (@fapp1_fapp0 $B $A $F $X $Y $f))
         (@Product_pair
-          (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          $K
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)))
+          (Hom_cat $A $W (@fapp0 $B $A $F $X))
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          $v
+          (@fapp1_fapp0 $B $A $F $X $Y $g)))
       (Struct_sigma
-        (@id_func (Hom_cat (Functor_cat $W (@fapp0 $L Cat_cat $E $X)) $F $K))
+        (@id_func (Hom_cat (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u $v))
         (@Const_func
-          (Hom_cat (Functor_cat $W (@fapp0 $L Cat_cat $E $X)) $F $K)
+          (Hom_cat (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u $v)
           (Hom_cat
-            (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-            (@fapp1_fapp0 $L Cat_cat $E $X $Y $G)
-            (@fapp1_fapp0 $L Cat_cat $E $X $Y $H))
+            (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+            (@fapp1_fapp0 $B $A $F $X $Y $f)
+            (@fapp1_fapp0 $B $A $F $X $Y $g))
           (@fapp1_fapp0
-            (Hom_cat $L $X $Y)
-            (Functor_cat
-              (@fapp0 $L Cat_cat $E $X)
-              (@fapp0 $L Cat_cat $E $Y))
-            (@fapp1_func $L Cat_cat $E $X $Y)
-            $G
-            $H
+            (Hom_cat $B $X $Y)
+            (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+            (@fapp1_func $B $A $F $X $Y)
+            $f
+            $g
             $eta)));
 
 // Capped horizontal composite of two ordinary transfors.
@@ -5109,40 +5105,38 @@ rule @tapp1_fapp0
       _
       _
       _
-      $F
-      $K
-      (@hom_postcomp_tele_transf Cat_cat $L $E $W $X $Y $G $H $eta)
-      $alpha
+      $u
+      $v
+      (@hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $eta)
+      $beta
   ↪ @comp_prod_fapp1_fapp0
-      Cat_cat
+      $A
       $W
-      (@fapp0 $L Cat_cat $E $X)
-      (@fapp0 $L Cat_cat $E $Y)
+      (@fapp0 $B $A $F $X)
+      (@fapp0 $B $A $F $Y)
       (@Product_pair
-        (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-        (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-        $F
-        (@fapp1_fapp0 $L Cat_cat $E $X $Y $G))
+        (Hom_cat $A $W (@fapp0 $B $A $F $X))
+        (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+        $u
+        (@fapp1_fapp0 $B $A $F $X $Y $f))
       (@Product_pair
-        (Functor_cat $W (@fapp0 $L Cat_cat $E $X))
-        (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-        $K
-        (@fapp1_fapp0 $L Cat_cat $E $X $Y $H))
+        (Hom_cat $A $W (@fapp0 $B $A $F $X))
+        (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+        $v
+        (@fapp1_fapp0 $B $A $F $X $Y $g))
       (@Product_pair
-        (Hom_cat (Functor_cat $W (@fapp0 $L Cat_cat $E $X)) $F $K)
+        (Hom_cat (Hom_cat $A $W (@fapp0 $B $A $F $X)) $u $v)
         (Hom_cat
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $G)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H))
-        $alpha
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          (@fapp1_fapp0 $B $A $F $X $Y $f)
+          (@fapp1_fapp0 $B $A $F $X $Y $g))
+        $beta
         (@fapp1_fapp0
-          (Hom_cat $L $X $Y)
-          (Functor_cat
-            (@fapp0 $L Cat_cat $E $X)
-            (@fapp0 $L Cat_cat $E $Y))
-          (@fapp1_func $L Cat_cat $E $X $Y)
-          $G
-          $H
+          (Hom_cat $B $X $Y)
+          (Hom_cat $A (@fapp0 $B $A $F $X) (@fapp0 $B $A $F $Y))
+          (@fapp1_func $B $A $F $X $Y)
+          $f
+          $g
           $eta));
 
 // Off-diagonal action of precomposition-in-F.
@@ -5151,112 +5145,110 @@ rule @tapp1_func
       _
       _
       _
-      $G
-      $J
-      (@hom_precomp_along_tele_transf $L Cat_cat $E $Z $X $Y $F $H $alpha)
+      $g
+      $j
+      (@hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha)
   ↪ @comp_cat_fapp0
-      (Hom_cat (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z) $G $J)
+      (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $j)
       (Hom_cat
         (Product_cat
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z))
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (Hom_cat $B (@fapp0 $A $B $F $X) $Z))
         (@Product_pair
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $F)
-          $G)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+          (@fapp1_fapp0 $A $B $F $W $X $h)
+          $g)
         (@Product_pair
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)
-          $J))
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+          (@fapp1_fapp0 $A $B $F $W $X $k)
+          $j))
       (Hom_cat
-        (Functor_cat (@fapp0 $L Cat_cat $E $X) $Z)
-        (@comp_cat_fapp0
-          (@fapp0 $L Cat_cat $E $X)
-          (@fapp0 $L Cat_cat $E $Y)
+        (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
+        (@comp_fapp0
+          $B
+          (@fapp0 $A $B $F $W)
+          (@fapp0 $A $B $F $X)
           $Z
-          $G
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $F))
-        (@comp_cat_fapp0
-          (@fapp0 $L Cat_cat $E $X)
-          (@fapp0 $L Cat_cat $E $Y)
+          $g
+          (@fapp1_fapp0 $A $B $F $W $X $h))
+        (@comp_fapp0
+          $B
+          (@fapp0 $A $B $F $W)
+          (@fapp0 $A $B $F $X)
           $Z
-          $J
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)))
+          $j
+          (@fapp1_fapp0 $A $B $F $W $X $k)))
       (@comp_prod_fapp1_func
-        Cat_cat
-        (@fapp0 $L Cat_cat $E $X)
-        (@fapp0 $L Cat_cat $E $Y)
+        $B
+        (@fapp0 $A $B $F $W)
+        (@fapp0 $A $B $F $X)
         $Z
         (@Product_pair
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $F)
-          $G)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+          (@fapp1_fapp0 $A $B $F $W $X $h)
+          $g)
         (@Product_pair
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)
-          $J))
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+          (@fapp1_fapp0 $A $B $F $W $X $k)
+          $j))
       (Struct_sigma
         (@Const_func
-          (Hom_cat (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z) $G $J)
+          (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $j)
           (Hom_cat
-            (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-            (@fapp1_fapp0 $L Cat_cat $E $X $Y $F)
-            (@fapp1_fapp0 $L Cat_cat $E $X $Y $H))
+            (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+            (@fapp1_fapp0 $A $B $F $W $X $h)
+            (@fapp1_fapp0 $A $B $F $W $X $k))
           (@fapp1_fapp0
-            (Hom_cat $L $X $Y)
-            (Functor_cat
-              (@fapp0 $L Cat_cat $E $X)
-              (@fapp0 $L Cat_cat $E $Y))
-            (@fapp1_func $L Cat_cat $E $X $Y)
-            $F
-            $H
+            (Hom_cat $A $W $X)
+            (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+            (@fapp1_func $A $B $F $W $X)
+            $h
+            $k
             $alpha))
-        (@id_func (Hom_cat (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z) $G $J)));
+        (@id_func (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $j)));
 
 rule @tapp1_fapp0
       _
       _
       _
       _
-      $G
-      $J
-      (@hom_precomp_along_tele_transf $L Cat_cat $E $Z $X $Y $F $H $alpha)
-      $eta
+      $g
+      $j
+      (@hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha)
+      $beta
   ↪ @comp_prod_fapp1_fapp0
-      Cat_cat
-      (@fapp0 $L Cat_cat $E $X)
-      (@fapp0 $L Cat_cat $E $Y)
+      $B
+      (@fapp0 $A $B $F $W)
+      (@fapp0 $A $B $F $X)
       $Z
       (@Product_pair
-        (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-        (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-        (@fapp1_fapp0 $L Cat_cat $E $X $Y $F)
-        $G)
+        (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+        (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+        (@fapp1_fapp0 $A $B $F $W $X $h)
+        $g)
       (@Product_pair
-        (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-        (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z)
-        (@fapp1_fapp0 $L Cat_cat $E $X $Y $H)
-        $J)
+        (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+        (Hom_cat $B (@fapp0 $A $B $F $X) $Z)
+        (@fapp1_fapp0 $A $B $F $W $X $k)
+        $j)
       (@Product_pair
         (Hom_cat
-          (Functor_cat (@fapp0 $L Cat_cat $E $X) (@fapp0 $L Cat_cat $E $Y))
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $F)
-          (@fapp1_fapp0 $L Cat_cat $E $X $Y $H))
-        (Hom_cat (Functor_cat (@fapp0 $L Cat_cat $E $Y) $Z) $G $J)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (@fapp1_fapp0 $A $B $F $W $X $h)
+          (@fapp1_fapp0 $A $B $F $W $X $k))
+        (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $j)
         (@fapp1_fapp0
-          (Hom_cat $L $X $Y)
-          (Functor_cat
-            (@fapp0 $L Cat_cat $E $X)
-            (@fapp0 $L Cat_cat $E $Y))
-          (@fapp1_func $L Cat_cat $E $X $Y)
-          $F
-          $H
+          (Hom_cat $A $W $X)
+          (Hom_cat $B (@fapp0 $A $B $F $W) (@fapp0 $A $B $F $X))
+          (@fapp1_func $A $B $F $W $X)
+          $h
+          $k
           $alpha)
-        $eta);
+        $beta);
 
 // Cat-specialized generalized precomposition agrees proof-time with ordinary
 // precomposition. Runtime object action remains owned by
