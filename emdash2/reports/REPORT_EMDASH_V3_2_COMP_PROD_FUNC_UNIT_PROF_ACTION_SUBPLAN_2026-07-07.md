@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: active subtask; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the first Cat-horizontal-action slice, and the old Cat cov/con alias migration have been promoted and validated; the broader `Hom_fapp0` object-level cleanup and optional deletion of old Cat compatibility names remain deferred
+Status: active subtask; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, and deletion of the old Cat cov/con compatibility names have been promoted and validated; the broader `Hom_fapp0` object-level cleanup and generic telescope-transfor unspecialization remain deferred
 
 ## Active Goal
 
@@ -1192,8 +1192,10 @@ Updated order after the 2026-07-08 `Hom_*` correction:
     - retarget the `tapp0_fapp0` component rules of
       `hom_postcomp_cat_tele_transf` and
       `hom_precomp_along_cat_tele_transf` to identity-slot product forms;
-    - make `comp_cat_cov_transf` and `comp_cat_con_transf` transparent
-      compatibility aliases to the corresponding identity-slot product forms;
+    - make the old one-slot cov/con surfaces compute through the corresponding
+      identity-slot product forms;
+    - delete the old `comp_cat_cov_transf` and `comp_cat_con_transf` names
+      after migrating active diagnostics to direct product-owner spelling;
     - delete their old bespoke `tapp0_fapp0`, `tapp1_func`, `tapp1_fapp0`,
       and identity-collapse rules; these now compute through the generic
       product owner.
@@ -1203,11 +1205,10 @@ Updated order after the 2026-07-08 `Hom_*` correction:
     body is no longer the definition, but a separate compatibility fold from
     an explicitly authored old composite to the arbitrary-pair product owner
     remains deferred until a concrete consumer needs it.
-12. Completed for the alias migration: bounded `make check`, warning summary,
-    `make ci`, and health refresh pass. The promoted slice is feasible and
-    validated; the old cov/con names remain only as compatibility aliases, so
-    their optional deletion is a later surface cleanup rather than a missing
-    computation owner.
+12. Completed for the cov/con deletion migration: bounded `make check`,
+    catalog refresh, warning summary, `make ci`, and health refresh pass.
+    The promoted slice is feasible and validated; the old cov/con names no
+    longer exist as active kernel symbols.
 
 ## Side-Task Ledger
 
@@ -1309,11 +1310,18 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   pairs and 165 replaceable-pattern warnings), down from the previous 1,340
   warning inventory; `make ci` passes, including strict catalog freshness and
   strict LHS audit; `make health` refreshes `REPORT_EMDASH_HEALTH.md`.
-- Deferred optional Cat-horizontal-action follow-up: delete the old
-  compatibility names `comp_cat_cov_transf` and `comp_cat_con_transf` only
-  after all external/current call sites have been migrated to direct
-  identity-slot `comp_prod_fapp1_fapp0 Cat_cat` spelling. This is now a naming
-  cleanup, not a missing projection-ladder task.
+- Promoted 2026-07-09: deleted the old compatibility names
+  `comp_cat_cov_transf` and `comp_cat_con_transf` from the kernel after
+  migrating active diagnostics to direct identity-slot
+  `comp_prod_fapp1_fapp0 Cat_cat` spelling. Focused source/check probes
+  `tmp/probes/cat_hcomp_delete_old_covcon_names_probe.lp` and
+  `tmp/probes/cat_hcomp_delete_old_covcon_names_checks_probe.lp` pass, as
+  does a warning-enabled source probe. Validation after promotion:
+  `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes; `make catalog` refreshes
+  `REPORT_EMDASH_CHECK_CATALOG.md`; `make warning-summary` remains at 1,311
+  warnings (1,146 unjoinable critical pairs and 165 replaceable-pattern
+  warnings); `make ci` passes; `make health` refreshes
+  `REPORT_EMDASH_HEALTH.md`.
 - Next active Cat-horizontal-action follow-up: add a compatibility fold, only
   if needed by a checked consumer, from an explicitly authored old two one-slot
   horizontal-composition composite to the arbitrary-pair

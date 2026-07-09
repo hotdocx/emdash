@@ -4693,8 +4693,9 @@ rule @hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $Z Cat_cat Cat_cat
     comp_cat_cov_fapp1_func(G)
       : Transf(F,H) ⊢ Transf(G ∘ F, G ∘ H)
 
-    comp_cat_cov_transf(G,eta) = G eta
-    comp_cat_cov_transf(G,eta)[i] = G[eta[i]]
+    hom_postcomp_fapp1_fapp0(G,eta)
+      = comp_prod_fapp1_fapp0 Cat_cat (eta,id_G)
+    hom_postcomp_fapp1_fapp0(G,eta)[i] = G[eta[i]]
 
   Faithful surface syntax:
     eta : F => H
@@ -4722,52 +4723,6 @@ symbol comp_cat_cov_fapp1_func [X Y Z : Cat]
     G
     F
     H;
-
-symbol comp_cat_cov_transf [K : Cat]
-  (E : τ (Functor K Cat_cat))
-  (W : Cat)
-  [X Y : τ (Obj K)]
-  (f : τ (Hom K X Y))
-  [G H : τ (Functor W (@fapp0 K Cat_cat E X))]
-  (eta : τ (Transf G H))
-  : τ (Transf
-      (@comp_cat_fapp0
-        W
-        (@fapp0 K Cat_cat E X)
-        (@fapp0 K Cat_cat E Y)
-        (@fapp1_fapp0 K Cat_cat E X Y f)
-        G)
-      (@comp_cat_fapp0
-        W
-        (@fapp0 K Cat_cat E X)
-        (@fapp0 K Cat_cat E Y)
-        (@fapp1_fapp0 K Cat_cat E X Y f)
-        H))
-≔ @comp_prod_fapp1_fapp0
-    Cat_cat
-    W
-    (@fapp0 K Cat_cat E X)
-    (@fapp0 K Cat_cat E Y)
-    (@Product_pair
-      (Functor_cat W (@fapp0 K Cat_cat E X))
-      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-      G
-      (@fapp1_fapp0 K Cat_cat E X Y f))
-    (@Product_pair
-      (Functor_cat W (@fapp0 K Cat_cat E X))
-      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-      H
-      (@fapp1_fapp0 K Cat_cat E X Y f))
-    (@Product_pair
-      (Hom_cat (Functor_cat W (@fapp0 K Cat_cat E X)) G H)
-      (Hom_cat
-        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-        (@fapp1_fapp0 K Cat_cat E X Y f)
-        (@fapp1_fapp0 K Cat_cat E X Y f))
-      eta
-      (@id
-        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-        (@fapp1_fapp0 K Cat_cat E X Y f)));
 
 // Cat-valued capped postcomposition exposes ordinary transfor projections.
 rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
@@ -4797,8 +4752,8 @@ rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
           (Functor_cat (@fapp0 $K Cat_cat $E $X) (@fapp0 $K Cat_cat $E $Y))
           (@fapp1_fapp0 $K Cat_cat $E $X $Y $f)));
 
-// `comp_cat_cov_transf` is a compatibility alias; the Cat product-composition
-// owner exposes its projections and identity collapse.
+// The old `comp_cat_cov_transf` compatibility name has been removed; the Cat
+// product-composition owner exposes its projections and identity collapse.
 
 /*
   Hom-action of postcomposition as a functor in the postcomposing functor.
@@ -4817,8 +4772,8 @@ rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
     eta : G => H
     eta ∘ F : G ∘ F => H ∘ F
 
-  Its object component at F is precomposition of eta by F, implemented by
-  `comp_cat_con_transf(F,eta)`.
+  Its object component at F is precomposition of eta by F, implemented by the
+  identity-first Cat instance of `comp_prod_fapp1_fapp0`.
 */
 symbol comp_cat_cov_func_func_fapp1_func [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
@@ -4885,8 +4840,9 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
     comp_cat_con_fapp1_func(F)
       : Transf(G,H) ⊢ Transf(G ∘ F,H ∘ F)
 
-    comp_cat_con_transf(F,eta) = eta ∘ F
-    comp_cat_con_transf(F,eta)[i] = eta[F[i]]
+    hom_precomp_along_fapp1_fapp0(F,eta)
+      = comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
+    hom_precomp_along_fapp1_fapp0(F,eta)[i] = eta[F[i]]
 
   Faithful surface syntax:
     eta : G => H
@@ -4911,52 +4867,6 @@ symbol comp_cat_con_fapp1_func [X Y Z : Cat]
     F
     G
     H;
-
-symbol comp_cat_con_transf [K : Cat]
-  (E : τ (Functor K Cat_cat))
-  (Z : Cat)
-  [X Y : τ (Obj K)]
-  (F : τ (Hom K X Y))
-  [G H : τ (Functor (@fapp0 K Cat_cat E Y) Z)]
-  (eta : τ (Transf G H))
-  : τ (Transf
-      (@comp_cat_fapp0
-        (@fapp0 K Cat_cat E X)
-        (@fapp0 K Cat_cat E Y)
-        Z
-        G
-        (@fapp1_fapp0 K Cat_cat E X Y F))
-      (@comp_cat_fapp0
-        (@fapp0 K Cat_cat E X)
-        (@fapp0 K Cat_cat E Y)
-        Z
-        H
-        (@fapp1_fapp0 K Cat_cat E X Y F)))
-≔ @comp_prod_fapp1_fapp0
-    Cat_cat
-    (@fapp0 K Cat_cat E X)
-    (@fapp0 K Cat_cat E Y)
-    Z
-    (@Product_pair
-      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-      (Functor_cat (@fapp0 K Cat_cat E Y) Z)
-      (@fapp1_fapp0 K Cat_cat E X Y F)
-      G)
-    (@Product_pair
-      (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-      (Functor_cat (@fapp0 K Cat_cat E Y) Z)
-      (@fapp1_fapp0 K Cat_cat E X Y F)
-      H)
-    (@Product_pair
-      (Hom_cat
-        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-        (@fapp1_fapp0 K Cat_cat E X Y F)
-        (@fapp1_fapp0 K Cat_cat E X Y F))
-      (Hom_cat (Functor_cat (@fapp0 K Cat_cat E Y) Z) G H)
-      (@id
-        (Functor_cat (@fapp0 K Cat_cat E X) (@fapp0 K Cat_cat E Y))
-        (@fapp1_fapp0 K Cat_cat E X Y F))
-      eta);
 
 // Component of tele-postcomposition in a Cat-valued family.
 rule @tapp0_fapp0
@@ -5316,15 +5226,9 @@ unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
         $G
         $H;
 
-  rule @hom_precomp_along_fapp1_fapp0 Cat_cat Cat_cat $F $Z $W $X $h $G $H $eta
-    ↪ @comp_cat_con_transf
-        (@fapp0 Cat_cat Cat_cat $F $W)
-        (@fapp0 Cat_cat Cat_cat $F $X)
-        $Z
-        (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
-        $G
-        $H
-        $eta;
+  The capped fold now targets the identity-first `comp_prod_fapp1_fapp0
+  Cat_cat` owner directly; the older one-slot compatibility name has been
+  removed.
 */
 
 // Cat-valued capped precomposition exposes ordinary transfor projections.
@@ -5365,8 +5269,8 @@ rule @hom_precomp_along_fapp1_fapp0
           (@fapp1_fapp0 $K Cat_cat $E $X $Y $F))
         $eta);
 
-// `comp_cat_con_transf` is a compatibility alias; the Cat product-composition
-// owner exposes its projections and identity collapse.
+// The old `comp_cat_con_transf` compatibility name has been removed; the Cat
+// product-composition owner exposes its projections and identity collapse.
 
 // Product-valued capped off-diagonal components project componentwise.
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
