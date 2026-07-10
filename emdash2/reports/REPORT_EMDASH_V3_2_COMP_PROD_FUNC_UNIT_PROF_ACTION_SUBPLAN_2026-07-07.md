@@ -9,7 +9,7 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: promoted and validated; the delegated `Hom_fapp0` object-level cleanup and prerequisite variance separation are completed in `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`
+Status: promoted and validated; the delegated variance separation and final rigid-`Hom` boundary are completed in `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`
 
 ## Active Goal
 
@@ -23,7 +23,8 @@ reports/REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_20
 
 That report is the implementation authority for the promoted primitive
 `hom_con` / `hom_con_int` mirror, proof-time opposite and identity duality,
-runtime variance separation, and the final `Hom_fapp0` folds.
+runtime variance separation, and the final rigid-`Hom` relationship to
+independently factored pre/post cuts.
 
 The active goal has two layers.
 
@@ -1320,18 +1321,17 @@ Updated order after the 2026-07-08 `Hom_*` correction:
 7. Completed in the same phase: reorient `Unit_prof` action to the new owner:
    - `fapp1_func(Unit_prof A,(x,y),(x',y')) -> Hom_tele_func(A,x,x',y,y')`;
    - `fapp1_fapp0(Unit_prof A,xy,xy',pq) -> Hom_func(A,...)`;
-   - add folds from the product-composition presentation, using unfolded
-     `@comp_prod_func Cat_cat ...` instead of `Functor_comp_pair_func` on the
-     LHS, to `Hom_tele_func`;
-   - add capped folds from both one-slot compositions
-     `post_f o pre_g` and `pre_g_at_y' o post_f` to `Hom_func`;
-   - this phase initially deferred object-level runtime folds to the dedicated
-     variance-separation task. That task has now promoted both object folds and
-     coherent inactive-endpoint reductions, while retaining the narrow
-     identity-slot proof-time raw-composition bridges.
+   - retain direct `Unit_prof` projections to the rigid `Hom_*` ladder;
+   - compare the product-composition presentation, both capped one-slot
+     compositions, and both pointwise evaluation orders with `Hom_*` by direct
+     proof-time bridges rather than runtime folds;
+   - keep endpoint degenerations proof-time, retain the narrow identity-slot
+     raw-composition readings, and give the rigid `Hom_*` heads their measured
+     identity/composition projection joins.
 8. Completed: add focused checks for:
    - full and capped `Unit_prof` action through `Hom_*`;
-   - the product-composition presentation folding into `Hom_*`;
+   - typed proof-time comparison of the product-composition presentation with
+     `Hom_*`;
    - identity-left and identity-right endpoint actions joining proof-time
      through `Hom_fapp0` by `eq_refl` checks;
    - `Hom_prof_along` action through `Prof_reindex/Product_map_func/Unit_prof`.
@@ -1442,7 +1442,7 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   unification bridges:
   `Hom_fapp0(id_x,f,h) == comp_fapp0(f,h)` and
   `Hom_fapp0(g,id_y,h) == comp_fapp0(h,g)`.
-- Completed delegated subplan 2026-07-10: the `Hom_fapp0` object-action cleanup
+- Completed delegated subplan 2026-07-10: the `Hom_fapp0` object-action review
   and its prerequisite variance-separation architecture are implemented and
   recorded in
   `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`.
@@ -1451,13 +1451,17 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   `hom_precomp_along_fapp0(id_A,h,g) -> hom_postcomp_fapp0(id_A,g,h)`, retarget
   downstream consumers that currently depend on the postcomposition normal
   form, including higher component endpoints, curry, path-induction, and
-  `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`, then promoted the two direct
-  object-level folds
-  `hom_postcomp_fapp0(f, hom_precomp_along_fapp0(g,h)) -> Hom_fapp0(g,f,h)`
-  and
-  `hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h)) -> Hom_fapp0(g,f,h)`
-  with ordinary conversion assertions, coherent identity-endpoint
-  degenerations, and warning-enabled overlap classification.
+  `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`. A final Phase 8 comparison then
+  selected rigid `Hom_*`: the two pointwise factorizations, capped
+  factorizations, and endpoint degenerations are direct proof-time bridges,
+  while `Hom_func` / `Hom_fapp0` retain focused runtime identity and
+  composition joins. Global inferred-endpoint composition identity rules were
+  not promoted; the PathOut/Sigma identity composite remains a separate
+  coherence task.
+- Final delegated validation 2026-07-10: `make check`, all six reviewer
+  examples, strict LHS audit, catalog freshness, `make ci`, and `make health`
+  pass. The final warning inventory is 1,297 total: 1,132 unjoinable
+  critical-pair reports and 165 replaceable-pattern reports.
 - Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
   after the `Hom_*` correction; `make catalog` regenerates the check catalog
   without unclassified checks; `make ci` passes, including strict LHS audit;

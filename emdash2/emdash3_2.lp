@@ -3938,48 +3938,53 @@ rule fapp0 (@Hom_tele_func $A $x $x' $y $y') (Struct_sigma $g $f)
 rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
   ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
 
-// Pointwise two-endpoint folds. Directly nested object actions do not pass
-// through the functor-level composition folds, so both evaluation orders join
-// the stable Hom_fapp0 owner here.
-rule @hom_postcomp_fapp0
+// The primitive Unit_prof projection keeps the Hom action rigid at runtime.
+// Its two factorizations through one-slot pre/postcomposition remain available
+// during typed elaboration without choosing either factorization as the
+// computational normal form.
+unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
+  ≡ @hom_postcomp_fapp0
       $A $A (@id Cat_cat $A)
       $x' $y $y' $f
       (@hom_precomp_along_fapp0
         $A $A (@id Cat_cat $A)
         $y $x' $x $g $h)
-  ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
+  ↪ [ tt ≡ tt ];
 
-rule @hom_precomp_along_fapp0
+unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
+  ≡ @hom_precomp_along_fapp0
       $A $A (@id Cat_cat $A)
       $y' $x' $x $g
       (@hom_postcomp_fapp0
         $A $A (@id Cat_cat $A)
         $x $y $y' $f $h)
-  ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
+  ↪ [ tt ≡ tt ];
 
-// Removing an identity endpoint from the two-endpoint owner recovers the
-// corresponding one-slot functor and point-action owner.
-rule @Hom_func $A $x $x $y $y' (@id $A $x) $f
-  ↪ @hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f;
+// One active endpoint and an identity middle arrow are proof-time
+// degenerations of the rigid Hom owner, not runtime unfoldings of it.
+unif_rule @Hom_func $A $x $x $y $y' (@id $A $x) $f
+  ≡ @hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f
+  ↪ [ tt ≡ tt ];
 
-rule @Hom_func $A $x $x' $y $y $g (@id $A $y)
-  ↪ @hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g;
+unif_rule @Hom_func $A $x $x' $y $y $g (@id $A $y)
+  ≡ @hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g
+  ↪ [ tt ≡ tt ];
 
-rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
-  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x $y $y' $f $h;
+unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
+  ≡ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x $y $y' $f $h
+  ↪ [ tt ≡ tt ];
 
-rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
-  ↪ @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $y $x' $x $g $h;
+unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
+  ≡ @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $y $x' $x $g $h
+  ↪ [ tt ≡ tt ];
 
-// Identity middle arrow collapses to the existing one-slot postcomposition
-// normal form. This joins subject-reduction paths for older rules that expose
-// the point action of a two-endpoint Hom_func at an identity arrow.
-rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
-  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g;
+unif_rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
+  ≡ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g
+  ↪ [ tt ≡ tt ];
 
 // Narrow proof-time raw-composition readings for identity endpoint actions.
-// Runtime now removes an inactive endpoint through the one-slot owner above;
-// these comparisons remain useful when elaboration expects `comp_fapp0`.
+// Runtime preserves the rigid Hom head for a single inactive endpoint; these
+// comparisons remain useful when elaboration expects `comp_fapp0`.
 unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
   ≡ @comp_fapp0 $A $x $y $y' $f $h
   ↪ [ tt ≡ tt ];
@@ -3987,6 +3992,34 @@ unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
 unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
   ≡ @comp_fapp0 $A $x' $x $y $h $g
   ↪ [ tt ≡ tt ];
+
+// Functoriality after projection to rigid Hom heads. The generic action is
+// owned by Hom_tele_func, but its literal fapp1 pattern is no longer visible
+// after capping to Hom_func/Hom_fapp0, so these are projection-order joins.
+rule @Hom_func $A $x $x $y $y (@id $A $x) (@id $A $y)
+  ↪ @id_func (Hom_cat $A $x $y);
+
+rule @Hom_fapp0 $A $x $x $y $y (@id $A $x) (@id $A $y) $h
+  ↪ $h;
+
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
+      (@Hom_func $A $x1 $x2 $y1 $y2 $g12 $f12)
+      (@Hom_func $A $x0 $x1 $y0 $y1 $g01 $f01)
+  ↪ @Hom_func
+      $A $x0 $x2 $y0 $y2
+      (@comp_fapp0 $A $x2 $x1 $x0 $g01 $g12)
+      (@comp_fapp0 $A $y0 $y1 $y2 $f12 $f01);
+
+rule @Hom_fapp0
+      $A $x1 $x2 $y1 $y2 $g12 $f12
+      (@Hom_fapp0 $A $x0 $x1 $y0 $y1 $g01 $f01 $h)
+  ↪ @Hom_fapp0
+      $A $x0 $x2 $y0 $y2
+      (@comp_fapp0 $A $x2 $x1 $x0 $g01 $g12)
+      (@comp_fapp0 $A $y0 $y1 $y2 $f12 $f01)
+      $h;
 
 /*
   Ordinary isomorphism evidence is closed under explicit product-category
@@ -6038,9 +6071,11 @@ rule @fapp1_fapp0 _ _
         (sigma_Snd $ab) (sigma_Snd $ab')
         (sigma_Snd $pq));
 
-// The product-composition presentation of two-endpoint hom action folds to
-// the dedicated Hom_cat action owner.
-rule @comp_fapp0
+// Product/one-slot factorizations of the primitive Hom action are proof-time
+// comparisons. Runtime preserves the factored cuts and the rigid Unit_prof
+// projection as distinct normal forms.
+unif_rule @Hom_tele_func $A $x $x' $y $y'
+  ≡ @comp_fapp0
       Cat_cat
       _ _ _
       (@comp_prod_func
@@ -6067,23 +6102,23 @@ rule @comp_fapp0
           $x'
           $y
           $y'))
-  ↪ @Hom_tele_func $A $x $x' $y $y';
+  ↪ [ tt ≡ tt ];
 
-// Capped functor-level two-endpoint hom-action folds. Both one-slot orders
-// normalize to the same Hom_func owner.
-rule @comp_fapp0
+unif_rule @Hom_func $A $x $x' $y $y' $g $f
+  ≡ @comp_fapp0
       Cat_cat
       _ _ _
       (@hom_postcomp_func $A $A (@id Cat_cat $A) $x' $y $y' $f)
       (@hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g)
-  ↪ @Hom_func $A $x $x' $y $y' $g $f;
+  ↪ [ tt ≡ tt ];
 
-rule @comp_fapp0
+unif_rule @Hom_func $A $x $x' $y $y' $g $f
+  ≡ @comp_fapp0
       Cat_cat
       _ _ _
       (@hom_precomp_along_func $A $A (@id Cat_cat $A) $y' $x' $x $g)
       (@hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f)
-  ↪ @Hom_func $A $x $x' $y $y' $g $f;
+  ↪ [ tt ≡ tt ];
 
 /*
   Product evaluation: apply a functor to an object.

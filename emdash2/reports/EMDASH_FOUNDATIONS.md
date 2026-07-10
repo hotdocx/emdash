@@ -201,10 +201,21 @@ When both endpoints move, the simultaneous owner is the hom bifunctor action:
 Hom_func(g,f)[h] = Hom_fapp0(g,f,h) = f o h o g.
 ```
 
-Both pointwise evaluation orders normalize to `Hom_fapp0`. If one endpoint is
-an identity, the inactive slot is removed and the result returns to the
-surviving one-slot precomposition or postcomposition owner. `Unit_prof(A)` is
-the uncurried product form of this same hom bifunctor.
+Direct action of `Unit_prof` normalizes through the rigid `Hom_*` projection
+ladder. Independently factored pre/postcomposition orders and the cases with
+one active endpoint remain distinct runtime presentations; narrow proof-time
+unification rules identify them with the corresponding `Hom_func` /
+`Hom_fapp0` values when typed elaboration needs the mathematical comparison.
+The rigid owner itself computes its full identity and composition laws:
+
+```text
+Hom_func(id,id) = id
+Hom_func(g2,f2) o Hom_func(g1,f1)
+  = Hom_func(g1 o g2,f2 o f1),
+```
+
+with matching point-action rules for `Hom_fapp0`. `Unit_prof(A)` is the
+uncurried product form of this same hom bifunctor.
 
 These are the higher-categorical analogue of keeping substitution or
 cut-elimination under the constructor that owns it. Raw expanded presentations

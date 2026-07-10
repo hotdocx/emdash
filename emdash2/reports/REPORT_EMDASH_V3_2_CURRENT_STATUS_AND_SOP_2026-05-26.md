@@ -198,16 +198,22 @@ The eight `Op_func`-keyed postcomposition-to-precomposition rewrites and the
 identity-family precomposition-to-postcomposition rewrite have been removed.
 Required dual presentations are related by constrained two-rigid-head
 `unif_rule`s, while runtime preserves `hom_postcomp_*` versus
-`hom_precomp_along_*` ownership. Both nested point-evaluation orders now fold
-to `Hom_fapp0(g,f,h)`; an identity endpoint reduces the simultaneous
-`Hom_func` / `Hom_fapp0` owner to the surviving one-slot owner. Cat horizontal
+`hom_precomp_along_*` ownership. Direct `Unit_prof` action computes through the
+rigid `Hom_tele_func` / `Hom_func` / `Hom_fapp0` projection ladder. Independently
+factored pre/post cuts and one-active-endpoint degenerations remain distinct
+runtime presentations and elaborate against `Hom_*` through direct proof-time
+bridges. The rigid owner has focused identity and composition joins of its own;
+for example, `Hom_func(id,id)` computes to the identity functor and composition
+of two `Hom_func` values accumulates both endpoint actions. Cat horizontal
 action is owned by the generic `comp_prod_fapp1_*` projection ladder; the old
 Cat cov/con and Cat telescope-transfor compatibility names have been deleted.
-The warning-enabled inventory after this completed slice is 1,341 warnings:
-1,176 unjoinable critical-pair reports and 165 replaceable-pattern reports.
-Focused checks establish the promoted nondegenerate and identity reduction
-orders; broader arbitrary nesting remains consumer-driven rather than being
-generated mechanically from the warning inventory.
+The warning-enabled inventory after the rigid-Hom migration is 1,297 warnings:
+1,132 unjoinable critical-pair reports and 165 replaceable-pattern reports.
+Focused typed checks cover both factorizations and endpoint degenerations;
+ordinary conversion checks cover the rigid owner's own identity and
+composition. Broad inferred-endpoint composition identity rules were rejected
+after they added unrelated overlap families, so the PathOut/Sigma
+composite-of-identities remains a separate focused coherence task.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested

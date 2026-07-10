@@ -61,13 +61,13 @@ decisions.
   `Unit_prof_fapp1_func` stable head, and cleaning historical hom-action
   equality wrappers.
 - `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`:
-  Phases 0-7 are implemented and validated: covariant and contravariant hom
-  owners remain distinct at runtime, opposite/identity duality uses narrow
-  proof-time bridges, and the first `Hom_fapp0` object folds are active. The
-  report is reopened for active Phase 8 probes comparing that runtime-Hom
-  baseline with a rigid-`Hom` proof-time-factorization design and testing
-  inference-friendly generic composition-identity rules on the PathOut/Sigma
-  coherence case.
+  implementation and decision record for the hom-variance separation and
+  rigid-`Hom` migration. Direct `Unit_prof` action computes through `Hom_*`,
+  independently factored pre/post cuts and endpoint degenerations are related
+  by proof-time bridges, and focused `Hom_*` identity/composition joins retain
+  functorial computation. Phase 8 rejected global inferred-endpoint identity
+  rules; the PathOut/Sigma identity composite remains a separate coherence
+  task.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
