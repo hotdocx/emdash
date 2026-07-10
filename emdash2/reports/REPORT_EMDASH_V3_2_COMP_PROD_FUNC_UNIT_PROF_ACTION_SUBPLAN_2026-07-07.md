@@ -9,9 +9,20 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: promoted and validated through arbitrary-ambient off-diagonal telescope projection formulation; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, the Cat-instance off-diagonal product cleanup, and the arbitrary-ambient off-diagonal formulation have been promoted; the broader `Hom_fapp0` object-level cleanup remains deferred
+Status: promoted and validated through arbitrary-ambient off-diagonal telescope projection formulation; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, the Cat-instance off-diagonal product cleanup, and the arbitrary-ambient off-diagonal formulation have been promoted; the broader `Hom_fapp0` object-level cleanup is delegated to `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`
 
 ## Active Goal
+
+The remaining `Hom_fapp0` object-action cleanup and its prerequisite
+covariant/contravariant runtime-owner separation now have a dedicated proposed
+subplan:
+
+```text
+reports/REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md
+```
+
+That report is the design authority for the deferred cleanup while it is being
+refined. No implementation from it has yet been promoted.
 
 The active goal has two layers.
 
@@ -1430,7 +1441,10 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   unification bridges:
   `Hom_fapp0(id_x,f,h) == comp_fapp0(f,h)` and
   `Hom_fapp0(g,id_y,h) == comp_fapp0(h,g)`.
-- Deferred `Hom_fapp0` object-action cleanup: delete or demote the legacy
+- Delegated proposed subplan: the `Hom_fapp0` object-action cleanup and its
+  prerequisite variance-separation architecture are now specified in
+  `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`.
+  The extracted task will delete or demote the legacy
   runtime rule
   `hom_precomp_along_fapp0(id_A,h,g) -> hom_postcomp_fapp0(id_A,g,h)`, retarget
   downstream consumers that currently depend on the postcomposition normal
