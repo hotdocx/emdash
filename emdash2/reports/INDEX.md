@@ -65,9 +65,11 @@ decisions.
   rigid-`Hom` migration. Direct `Unit_prof` action computes through `Hom_*`,
   independently factored pre/post cuts and endpoint degenerations are related
   by proof-time bridges, and focused `Hom_*` identity/composition joins retain
-  functorial computation. Phase 8 rejected global inferred-endpoint identity
-  rules; the PathOut/Sigma identity composite remains a separate coherence
-  task.
+  functorial computation. Phase 8 did not promote global inferred-endpoint
+  identity rules; a follow-up establishes typed `eq_refl` joinability of the
+  competing PathOut/Sigma identities, leaving the generic
+  runtime-versus-proof-time matching policy as a separate task. Candidate A
+  remains documented as a future complete accumulation/confluence redesign.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
   detailed redesign plan for retiring remaining `Prof_comp_transf`/
   equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,

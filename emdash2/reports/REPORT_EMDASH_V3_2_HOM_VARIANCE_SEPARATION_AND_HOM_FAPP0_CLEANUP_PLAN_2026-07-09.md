@@ -103,6 +103,15 @@ also has the largest accumulation and confluence obligation. The current
 warning delta and arbitrary-nesting cases show that this obligation is not yet
 globally closed.
 
+Candidate A is not considered mathematically wrong or permanently rejected.
+It remains the viable stronger-normalization follow-up if a future task
+deliberately specifies, probes, and validates the complete `Hom_*`
+accumulation theory, including outer pre/post actions, arbitrary nesting,
+identity endpoints, and the resulting confluence joins. Candidate B is the
+selected architecture for the infrastructure currently available; reopening
+Candidate A requires that larger closure task rather than restoring only the
+two original mixed-action folds.
+
 ### Candidate B: Rigid Hom action with proof-time comparisons
 
 In this candidate, `Hom_tele_func`, `Hom_func`, and `Hom_fapp0` remain runtime
@@ -400,11 +409,35 @@ discussion:
   inferred left rule adds nine, involving unrelated `Op_cat`, `Path_cat`,
   `Functord_cat`, identity-expansion, and associativity paths.
 
-Consequently, Phase 8 does not promote a global inferred-endpoint identity
-rule. The PathOut composite-of-identities remains a separate focused
-PathOut/Sigma coherence task. The experiment establishes feasibility of the
-matching technique, but its global computational boundary is too broad for
-this migration.
+A follow-up typed probe corrects an overly strong reading of the failed
+ordinary-conversion assertion. With both inferred rules installed, typed
+`eq_refl` succeeds for both the core composite and the full PathOut/Sigma
+consumer. Thus the two selected identities are proof-time joinable through the
+existing pre/post bridge even though they are not ordinarily runtime
+convertible. This passes both in the historical full-file identity experiment
+`tmp/probes/hom_phase8_identity_inferred_both_eqrefl_probe.lp` and against the
+promoted rigid-Hom architecture in
+`tmp/probes/hom_phase8_candidate_b_inferred_both_eqrefl_probe.lp`.
+
+Consequently, Phase 8 still does not promote a global inferred-endpoint
+identity rule, but it also does not classify the design as semantically
+failed. The remaining question is whether ordinary identity normalization is
+intended to match across proof-time endpoint compatibility. If yes, the
+SOP-style candidates are precisely the inferred-slot forms
+
+```text
+comp A _ _ Z g (id A Y) -> g
+comp A X _ _ (id A Z) f -> f.
+```
+
+If no, the repeated endpoint variables in the current rules are semantic
+runtime guards rather than redundant inferred slots. This is a real
+runtime-versus-proof-time design decision: `_` permits the rewrite matcher to
+use the experimental unification theory, so it is not justified solely by the
+general inferred-slot hygiene rule. The warning delta is diagnostic evidence,
+not an automatic veto. A follow-up may promote the inferred forms only after
+explicitly accepting proof-time joinability, rather than ordinary conversion,
+as the intended join criterion for this generic identity critical pair.
 
 Candidate B promotion inventory:
 
@@ -1668,11 +1701,13 @@ Phase 8 is complete only after the report answers all of the following:
   shell syntax, whitespace, active-reference and report-header lints, strict
   LHS audit, and strict catalog freshness. `make health` records exit 0 for the
   kernel, diagnostics, and all six reviewer examples.
-- No inferred-endpoint generic identity rule was promoted. Right-only and
-  left-only probes each simplified the PathOut/Sigma identity composite, but
-  together they exposed competing identity presentations and each broadened
-  unrelated overlap families. PathOut/Sigma coherence remains a separate
-  focused side task.
+- No inferred-endpoint generic identity rule was promoted in Phase 8.
+  Right-only and left-only probes each simplified the PathOut/Sigma identity
+  composite; together they exposed competing runtime identity presentations
+  and broadened unrelated overlap families. A subsequent typed probe confirms
+  that both the core and full Sigma terms nevertheless join by `eq_refl`.
+  Whether generic identity rewriting should deliberately use that proof-time
+  endpoint compatibility remains a separate focused side task.
 
 ## Feasibility Assessment
 
@@ -1866,10 +1901,11 @@ does not alter the primitive covariant/contravariant variance separation.
 - The rigid `Hom_*` owner retains focused runtime identity and composition
   joins where projection has hidden the generic functor-action pattern.
 
-The Phase 8 empirical questions are settled. Global inferred identity LHS
-slots are not part of this migration; the minimal rigid-head bridge set and
+The Phase 8 rigid-Hom questions are settled. Global inferred identity LHS
+slots are not part of that migration; the minimal rigid-head bridge set and
 stable-head functoriality joins are the promoted implementation. The remaining
-PathOut/Sigma identity composite is tracked as a separate coherence problem.
+generic identity/PathOut question is tracked separately: ordinary conversion
+selects one of two runtime identity heads, while typed `eq_refl` joins them.
 
 ## Side-Task Ledger
 
@@ -1914,11 +1950,17 @@ PathOut/Sigma identity composite is tracked as a separate coherence problem.
   `Unit_prof` action remains rigid `Hom_*`; factored pre/post cuts and endpoint
   degenerations use direct proof-time bridges; four focused `Hom_*`
   identity/composition joins retain computation after projection.
-- Deferred after Phase 8: solve the PathOut/Sigma composite-of-identities at a
-  focused semantic owner. Do not promote the probed global inferred-endpoint
-  composition identity rules, which broaden unrelated overlap families.
-- Candidate A accumulation laws for arbitrary nesting are no longer part of
-  the active architecture and should not be generated mechanically from the
+- Deferred after Phase 8: decide whether the generic identity rules should use
+  inferred endpoint slots and therefore match across proof-time-compatible
+  endpoints. The combined inferred-rule probe fails ordinary conversion to
+  one chosen identity but passes typed `eq_refl` for both the core and full
+  PathOut/Sigma consumers. Promotion requires an explicit decision that this
+  proof-time join is the intended generic runtime-critical-pair criterion,
+  plus classification of the unrelated overlap delta.
+- Candidate A accumulation laws for arbitrary nesting are not part of the
+  active Candidate B architecture. Candidate A remains a viable future
+  stronger-normalization design, but it must be reopened as a complete
+  accumulation/confluence task rather than generated mechanically from the
   historical warning inventory.
 - Conditional future naming cleanup: consider whether
   `hom_int_precomp_tele_func` should be renamed

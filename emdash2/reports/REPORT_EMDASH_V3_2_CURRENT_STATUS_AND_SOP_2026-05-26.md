@@ -211,9 +211,16 @@ The warning-enabled inventory after the rigid-Hom migration is 1,297 warnings:
 1,132 unjoinable critical-pair reports and 165 replaceable-pattern reports.
 Focused typed checks cover both factorizations and endpoint degenerations;
 ordinary conversion checks cover the rigid owner's own identity and
-composition. Broad inferred-endpoint composition identity rules were rejected
-after they added unrelated overlap families, so the PathOut/Sigma
-composite-of-identities remains a separate focused coherence task.
+composition. Broad inferred-endpoint composition identity rules were not
+promoted in this migration. One-sided variants simplify the PathOut/Sigma
+identity composite, and the combined variant has two runtime identity results;
+a follow-up typed probe confirms that both the core and full Sigma consumers
+join by `eq_refl` through the pre/post unification bridge. The open generic
+identity question is therefore whether rewrite matching is intentionally
+allowed to use proof-time endpoint compatibility. Inferred-slot hygiene alone
+does not settle that runtime-versus-proof-time boundary. Candidate A remains a
+viable future stronger-normalization design only together with its complete
+`Hom_*` accumulation and confluence theory.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested

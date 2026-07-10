@@ -1456,8 +1456,11 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   factorizations, and endpoint degenerations are direct proof-time bridges,
   while `Hom_func` / `Hom_fapp0` retain focused runtime identity and
   composition joins. Global inferred-endpoint composition identity rules were
-  not promoted; the PathOut/Sigma identity composite remains a separate
-  coherence task.
+  not promoted in this phase. A later typed probe shows that the competing
+  PathOut/Sigma runtime identities join by `eq_refl`; deciding whether generic
+  identity matching should intentionally use that proof-time endpoint
+  compatibility remains a separate task. Candidate A remains a future option
+  only as a complete `Hom_*` accumulation/confluence redesign.
 - Final delegated validation 2026-07-10: `make check`, all six reviewer
   examples, strict LHS audit, catalog freshness, `make ci`, and `make health`
   pass. The final warning inventory is 1,297 total: 1,132 unjoinable
