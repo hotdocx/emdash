@@ -9,7 +9,7 @@ Supersedes: no whole report; extracts and expands the deferred `Hom_fapp0` objec
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4
-Status: proposed design/refinement plan; no implementation or probe from this plan has been promoted
+Status: design reviewed and implementation-ready for phased probe-first execution; no implementation or probe from this plan has been promoted
 
 ## Active Goal
 
@@ -48,10 +48,11 @@ runtime                         preserves the variance owner
 proof time                      relates dual/opposite presentations
 ```
 
-The plan remains in refinement status. The exact proof-time bridge inventory,
-the full higher projection ladders for both internalized owners, and the scope
-of the first promoted implementation slice must be settled before code changes
-begin.
+The architecture is settled enough to begin phased probe-first execution. The
+remaining proof-time bridge inventory, inferred-slot spelling, and downstream
+consumer classification are implementation-phase discoveries with explicit
+gates below; they do not require reopening the owner hierarchy before Phase 0
+and Phase 1 begin.
 
 ## Parent-Plan Status
 
@@ -424,7 +425,7 @@ add another constructor-specific point rule.
 #### Target endpoint internalized
 
 The mirror is not supplied by `hom_int`; it has a distinct type and should be
-added as a candidate primitive owner:
+added as a primitive owner:
 
 ```text
 injective symbol hom_con_int [A B : Cat]
@@ -445,6 +446,46 @@ The mirror endpoint-action owners should be:
 hom_con_int_postcomp_tele_func(F)
 hom_con_int_postcomp_func(F,f).
 ```
+
+Their full planned declarations are:
+
+```text
+symbol hom_con_int_postcomp_tele_func [A B : Cat]
+  (F : tau (Functor B A))
+  [W X : tau (Obj A)]
+  : tau (Functor
+      (Hom_cat A W X)
+      (Hom_cat
+        (@Catd_cat (Op_cat B))
+        (@hom_con A W B F)
+        (@hom_con A X B F)));
+
+symbol hom_con_int_postcomp_func [A B : Cat]
+  (F : tau (Functor B A))
+  [W X : tau (Obj A)]
+  (f : tau (Hom A W X))
+  : tau (Hom
+      (@Catd_cat (Op_cat B))
+      (@hom_con A W B F)
+      (@hom_con A X B F));
+```
+
+The projection ladder should be:
+
+```text
+rule @fapp1_func _ _ (@hom_con_int $A $B $F) $W $X
+  -> @hom_con_int_postcomp_tele_func $A $B $F $W $X;
+
+rule @fapp1_fapp0 _ _ (@hom_con_int $A $B $F) $W $X $f
+  -> @hom_con_int_postcomp_func $A $B $F $W $X $f;
+
+rule fapp0 (@hom_con_int_postcomp_tele_func $A $B $F $W $X) $f
+  -> @hom_con_int_postcomp_func $A $B $F $W $X $f;
+```
+
+The explicit slots are the type-level contract, not a final LHS decision;
+focused probes must replace reconstructible slots by `_` where permitted by
+the SOP.
 
 For `f : Hom_A(W,X)`, their component should be ordinary postcomposition:
 
@@ -491,6 +532,28 @@ Struct_sigma
     (Hom_cat (Op_cat B) b c)
     (Hom_cat A W X)
     f).
+```
+
+Writing `Fb = fapp0(F,b)` and `Fc = fapp0(F,c)`, the full kernel-shaped mirror
+RHS is approximately:
+
+```text
+@comp_fapp0
+  Cat_cat
+  (Hom_cat (Op_cat B) b c)
+  (Product_cat
+    (Hom_cat A Fc Fb)
+    (Hom_cat A W X))
+  (Functor_cat
+    (Hom_cat A Fb W)
+    (Hom_cat A Fc X))
+  (@Hom_tele_func A Fb Fc W X)
+  (Struct_sigma
+    (@fapp1_func B A F c b)
+    (@Const_func
+      (Hom_cat (Op_cat B) b c)
+      (Hom_cat A W X)
+      f)).
 ```
 
 The conversion `Hom_Op(B)(b,c) = Hom_B(c,b)` supplies the common source of
@@ -711,23 +774,13 @@ with `lhs-audit` reasoning.
    precomposition-to-postcomposition rule.
 3. Classify expected normal forms in `emdash3_2_checks.lp` as covariant,
    contravariant, combined, or proof-time compatibility.
-4. Write the exact types of `hom_con_int`,
+4. Verify the planned types of `hom_con_int`,
    `hom_con_int_postcomp_tele_func`, and
-   `hom_con_int_postcomp_func`, including all endpoint orientations.
+   `hom_con_int_postcomp_func`, including all endpoint orientations, in a
+   declaration-only focused probe.
 5. Record any correction to this architecture before editing the kernel.
 
-### Phase 1: primitive contravariant represented family
-
-1. In a temporary full-file probe, remove the definitional body of `hom_con`
-   and retain it as an injective primitive.
-2. Add its direct object projection.
-3. Add direct full and capped arrow projections to
-   `hom_precomp_along_tele_func` / `hom_precomp_along_func`.
-4. Add focused object, functor, and capped-action assertions.
-5. Classify whether a distinct `hom_con_*` stable projection head is actually
-   required. Do not add one speculatively.
-
-### Phase 2: complete the hom_int higher projection ladder
+### Phase 1: complete the hom_int higher projection ladder
 
 1. Probe `tapp1_fapp0(hom_int_precomp_func(F,p),q)` with target
    `Hom_func(p,F[q])`.
@@ -742,6 +795,21 @@ with `lhs-audit` reasoning.
    `Hom_func` join.
 6. Validate the existing `tapp0_fapp0` component and the new off-diagonal
    ladder together.
+
+This additive phase is deliberately first. It validates the settled
+`Hom_tele_func` semantic-composite pattern against an existing owner before
+the plan changes the runtime status of `hom_con` or introduces its mirror.
+
+### Phase 2: primitive contravariant represented family
+
+1. In a temporary full-file probe, remove the definitional body of `hom_con`
+   and retain it as an injective primitive.
+2. Add its direct object projection.
+3. Add direct full and capped arrow projections to
+   `hom_precomp_along_tele_func` / `hom_precomp_along_func`.
+4. Add focused object, functor, and capped-action assertions.
+5. Classify whether a distinct `hom_con_*` stable projection head is actually
+   required. Do not add one speculatively.
 
 ### Phase 3: add the mirror hom_con_int owner
 
@@ -875,28 +943,25 @@ Warning counts are diagnostic evidence, not a veto. The acceptance condition
 is that the intended reduction orders join and checked consumers normalize to
 their semantic owners.
 
-## Open Design Decisions
+## Probe-Time Implementation Decisions
 
-These questions remain intentionally open for the next refinement turns:
+No remaining item in this section blocks the selected architecture. Resolve
+these questions empirically in the owning implementation phase and record the
+result before promotion:
 
-1. Should the existing `hom_con` name remain the primitive public owner, or
-   should a more explicit name be introduced with `hom_con` as a transparent
-   surface alias? Current recommendation: retain `hom_con`.
-2. Do the direct `fapp1_func` / `fapp1_fapp0` projections from `hom_con` to
+1. Do the direct `fapp1_func` / `fapp1_fapp0` projections from primitive
+   `hom_con` to
    existing `hom_precomp_along_*` heads typecheck cleanly, or is one
-   contravariant projection intermediary needed?
-3. What is the final exact argument order and kernel name for
-   `hom_con_int_postcomp_tele_func` / `hom_con_int_postcomp_func`, and how
-   should this base-level owner be distinguished from the future
-   `hom_con_int_func(G)` package which varies an endpoint functor?
-4. Which members of the old `Op_func` runtime ladder need explicit
+   contravariant projection intermediary required by source presentation?
+   Default: reuse the existing heads without a new intermediary.
+2. Which members of the old `Op_func` runtime ladder need explicit
    proof-time replacements? Current recommendation: only those required by
    typed consumers, using two rigid semantic heads and side constraints where
    feasible, because unification is not transitive.
-5. Which existing path-induction and representable checks are genuinely
+3. Which existing path-induction and representable checks are genuinely
    covariant and should retain `hom_postcomp_fapp0(id,q,p)`, versus
    contravariant and should move to `hom_precomp_along_fapp0(id,p,q)`?
-6. After variance separation, are both `Hom_fapp0` folds needed as runtime
+4. After variance separation, are both `Hom_fapp0` folds needed as runtime
    joins, or does one follow reliably through the promoted functor-level
    `Hom_func` fold and generic projection? Current expectation: probe both;
    keep each only if it owns a distinct reduction path.
@@ -921,13 +986,16 @@ These questions remain intentionally open for the next refinement turns:
 
 ## Acceptance Criteria
 
-The design is implementation-ready when:
+The architecture is ready to begin implementation. Before the corresponding
+phases may be promoted, the following gates must be satisfied:
 
-1. the primitive status and direct projection ladder of `hom_con` are settled;
-2. the exact types and projection ladders of `hom_con_int` and its
-   `hom_con_int_postcomp_*` actions are settled;
-3. the `tapp1_func` / `tapp1_fapp0` normal forms for both internalized owners
-   are specified through `Hom_tele_func` / `Hom_func` / `Hom_fapp0`;
+1. focused probes confirm the planned primitive status and direct projection
+   ladder of `hom_con`;
+2. declaration and projection probes confirm the planned types of
+   `hom_con_int` and its `hom_con_int_postcomp_*` actions;
+3. focused checks confirm the specified `tapp1_func` / `tapp1_fapp0` normal
+   forms for both internalized owners through
+   `Hom_tele_func` / `Hom_func` / `Hom_fapp0`;
 4. the runtime/proof-time disposition of every old `Op_func` bridge family is
    listed explicitly;
 5. known consumers of the identity-functor precomposition-to-postcomposition
@@ -937,6 +1005,11 @@ The design is implementation-ready when:
    `eq_refl` separately;
 8. each implementation phase has an independent rollback/debug boundary and
    bounded validation command.
+
+Items 4 and 5 above intentionally finish during the probe-first phases: the
+plan fixes their policy and classification criteria, while the active source
+and typed diagnostics determine the minimal concrete inventory. They are not
+preconditions for beginning Phase 0 or Phase 1.
 
 The implementation is complete when:
 
@@ -953,14 +1026,45 @@ The implementation is complete when:
 7. active checks, catalog, CI, health, and the warning inventory pass with any
    warning delta classified in this report.
 
+## Final Pre-Implementation Review
+
+Review conclusion 2026-07-09: the plan is globally coherent and ready to
+begin Phase 0 followed by the additive Phase 1 probe slice.
+
+- The covariant/contravariant owner square has distinct, well-motivated types;
+  `hom_con_int` is not a duplicate of `hom_int`.
+- The endpoint orientations of both off-diagonal actions produce exactly
+  `Hom_func(p,F[q])` and `Hom_func(F[q],f)`.
+- Existing `Const_func`, product-valued `Struct_sigma`, generic
+  `comp_fapp0 Cat_cat`, and `Hom_tele_func` infrastructure express both full
+  `tapp1_func` terms; no new general pairing or composition primitive is
+  indicated.
+- Direct capped `tapp1_fapp0 -> Hom_func` rules are justified projection-order
+  joins, while the point action continues through generic
+  `fapp0(Hom_func) -> Hom_fapp0`.
+- `Unit_prof` remains the sole uncurried/product hom-bifunctor owner.
+- The absent specialized higher action of `Hom_tele_func` is the ordinary next
+  omega-categorical projection rung and is not a blocker for this plan.
+- The constrained proof-time treatment of opposite presentations preserves
+  the intended duality without retaining `Op_func` as a runtime discriminator.
+- The final nested object folds remain correctly ordered after variance
+  separation and downstream retargeting.
+
+Remaining uncertainty is deliberately empirical: inferred LHS slots,
+Lambdapi source-presentation conversion, the minimal unification bridge set,
+and the concrete downstream consumer inventory. The probe-first phases own
+those questions and have independent promotion gates.
+
 ## Side-Task Ledger
 
-- Active design task: refine primitive `hom_con` and its direct projection
-  ladder.
-- Active design task: specify the missing `tapp1_func` / `tapp1_fapp0`
-  projections of `hom_int_precomp_func` through the `Hom_*` owners.
-- Active design task: specify `hom_con_int` and the complete mirror
-  `hom_con_int_postcomp_*` projection ladder.
+- Settled design, Phase 1 implementation task: promote the specified
+  `tapp1_func` / `tapp1_fapp0` projections of `hom_int_precomp_func` through
+  the `Hom_*` owners.
+- Settled design, Phase 2 implementation task: promote primitive `hom_con`
+  with direct projections to the existing `hom_precomp_along_*` owners unless
+  a focused source-presentation probe requires one intermediary.
+- Settled design, Phase 3 implementation task: promote `hom_con_int` and the
+  complete mirror `hom_con_int_postcomp_*` projection ladder.
 - Settled design clarification: `Unit_prof` is the existing uncurried hom
   bifunctor; no separate `Hom_bifunctor`, `Hom_`, or `Hom_con_` symbol is
   planned.
@@ -973,13 +1077,14 @@ The implementation is complete when:
   `fapp1_func` / `fapp1_fapp0` projections of `Hom_tele_func`, the next rung
   after the current `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0`
   prototype ladder.
-- Active design task: inventory the old `Op_func` runtime bridge ladder and
-  decide the minimum two-rigid-head, constraint-based proof-time replacement
-  set.
-- Active design task: classify downstream consumers of identity-functor
-  precomposition-to-postcomposition normalization.
-- Deferred until those decisions are complete: probe and promote the two
-  `Hom_fapp0` object folds.
+- Settled policy, Phase 4 implementation task: inventory the old `Op_func`
+  runtime bridge ladder and promote the minimum two-rigid-head,
+  constraint-based proof-time replacement set required by typed consumers.
+- Settled policy, Phase 5 implementation task: classify and retarget downstream
+  consumers of identity-functor precomposition-to-postcomposition
+  normalization.
+- Phase 6 implementation task after those gates: probe and promote each
+  required `Hom_fapp0` object fold.
 - Conditional future naming cleanup: consider whether
   `hom_int_precomp_tele_func` should be renamed
   `hom_int_precomp_along_tele_func`; this is not required by the variance
