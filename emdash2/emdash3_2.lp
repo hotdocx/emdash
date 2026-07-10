@@ -1677,9 +1677,13 @@ rule @fapp1_fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y $f
       (@fapp0 $A $B $G $y)
       (@fapp1_fapp0 $A $B $G $x $y $f);
 
-// Ordinary category identity cuts: g ∘ id ↪ g and id ∘ f ↪ f.
-rule @comp_fapp0 $A $Y $Y $Z $g (@id $A $Y) ↪ $g;
-rule @comp_fapp0 $A $X $Z $Z (@id $A $Z) $f ↪ $f;
+// Ordinary category identity cuts: g ∘ id ↪ g and id ∘ f ↪ f. The omitted
+// endpoints are intentionally inferred: unlike the repeated-variable spelling,
+// these rules may match when endpoint presentations are proof-time compatible.
+// This treats identity elimination as presentation-independent computation;
+// the resulting critical pair is required to join by typed proof-time equality.
+rule @comp_fapp0 $A _ _ _ $g (@id $A _) ↪ $g;
+rule @comp_fapp0 $A _ _ _ (@id $A _) $f ↪ $f;
 
 // Reflexive ordinary isomorphism evidence requires the identity-cut rules
 // above so that both propositional inverse equations are reflexivity.

@@ -9,7 +9,7 @@ Supersedes: no whole report; extracts and expands the deferred `Hom_fapp0` objec
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4d18-fa70-7ff3-a4d3-1d3bbbecd2e9
-Status: completed and validated; Phase 8 Candidate B is the promoted rigid-Hom architecture, with PathOut/Sigma coherence deferred separately
+Status: completed and validated; Phase 8 Candidate B and the post-Phase-8 inferred-endpoint identity migration are promoted
 
 ## Completed Goal: Phase 8 Rigid-Hom Promotion
 
@@ -71,7 +71,7 @@ remaining one-slot owner. This joins the two current identity-first and
 mixed-fold-first runtime paths, but it makes `Hom_func` / `Hom_fapp0`
 reducible on identity endpoint inputs.
 
-If Candidate A remains selected, its controlled accumulation theory must be
+If Candidate A is reconsidered, its controlled accumulation theory must be
 completed rather than treating `Hom_fapp0` as an opaque terminal result. For:
 
 ```text
@@ -343,6 +343,7 @@ The measured results are:
 | Candidate B plus internal `Hom_*` functoriality | 1297 | 1132 | 165 | passes full retargeted diagnostics and all examples |
 | Candidate C plus internal `Hom_*` functoriality | 1337 | 1172 | 165 | passes only after an extra non-transitive consumer bridge |
 | Candidate B plus inferred right identity | 1303 | 1139 | 164 | PathOut simplifies, but seven unrelated critical pairs are added |
+| Candidate B plus both inferred identities | 1306 | 1143 | 163 | typed core and full PathOut/Sigma checks pass; selected follow-up |
 
 The proof-time/runtime discriminator behaved exactly as required by Candidate
 B:
@@ -426,8 +427,8 @@ intended to match across proof-time endpoint compatibility. If yes, the
 SOP-style candidates are precisely the inferred-slot forms
 
 ```text
-comp A _ _ Z g (id A Y) -> g
-comp A X _ _ (id A Z) f -> f.
+comp A _ _ _ g (id A _) -> g
+comp A _ _ _ (id A _) f -> f.
 ```
 
 If no, the repeated endpoint variables in the current rules are semantic
@@ -438,6 +439,43 @@ general inferred-slot hygiene rule. The warning delta is diagnostic evidence,
 not an automatic veto. A follow-up may promote the inferred forms only after
 explicitly accepting proof-time joinability, rather than ordinary conversion,
 as the intended join criterion for this generic identity critical pair.
+
+### Post-Phase-8 inferred-identity promotion
+
+The follow-up decision accepts that criterion. For ordinary composition
+identity, the repeated endpoint variables were not intended as semantic
+runtime guards. Identity elimination is presentation-independent computation,
+and the rewrite matcher is intentionally allowed to use proof-time-compatible
+endpoint presentations. The promoted rules are:
+
+```text
+rule comp A _ _ _ g (id A _) -> g
+rule comp A _ _ _ (id A _) f -> f.
+```
+
+This is an explicit semantic decision, not a mechanical `_` cleanup. The same
+spelling would be wrong where repeated endpoint variables are an actual
+constructor discriminator or subject-reduction guard. Here both rules pass a
+full-file Candidate B probe, the typed core `id_pre o id_post` regression, and
+the complete PathOut/Sigma regression. The two possible runtime identity heads
+join by typed `eq_refl` through the existing pre/post unification rule; ordinary
+conversion alone is not the selected join criterion for this overlap.
+
+The final warning-enabled kernel reports 1,306 warnings: 1,143 unjoinable
+critical-pair reports and 163 replaceable-pattern reports. This is an
+11-critical-pair increase over the 1,297-warning rigid-Hom baseline. Fully
+inferring all reconstructible identity-rule endpoints also removes two
+replaceable-pattern warnings relative to that baseline. The critical-pair
+delta is accepted as the measured consequence of the intended global identity
+law rather than used as a veto. The source comments and diagnostics record the
+runtime/proof-time boundary explicitly.
+
+The broader matching boundary also has a measured performance cost. The
+eight-target CI typecheck total increased from approximately 10.8 seconds for
+the rigid-Hom baseline to 25.6 seconds after promotion; refreshed health
+timings remain approximately 3.0-3.9 seconds per target, well below the
+60-second per-target timeout. This cost is recorded as part of the selected
+tradeoff rather than hidden by the successful checks.
 
 Candidate B promotion inventory:
 
@@ -1701,13 +1739,13 @@ Phase 8 is complete only after the report answers all of the following:
   shell syntax, whitespace, active-reference and report-header lints, strict
   LHS audit, and strict catalog freshness. `make health` records exit 0 for the
   kernel, diagnostics, and all six reviewer examples.
-- No inferred-endpoint generic identity rule was promoted in Phase 8.
+- No inferred-endpoint generic identity rule was promoted inside Phase 8.
   Right-only and left-only probes each simplified the PathOut/Sigma identity
   composite; together they exposed competing runtime identity presentations
   and broadened unrelated overlap families. A subsequent typed probe confirms
   that both the core and full Sigma terms nevertheless join by `eq_refl`.
-  Whether generic identity rewriting should deliberately use that proof-time
-  endpoint compatibility remains a separate focused side task.
+  The post-Phase-8 follow-up now deliberately promotes both inferred rules and
+  accepts proof-time endpoint compatibility as their join criterion.
 
 ## Feasibility Assessment
 
@@ -1901,11 +1939,11 @@ does not alter the primitive covariant/contravariant variance separation.
 - The rigid `Hom_*` owner retains focused runtime identity and composition
   joins where projection has hidden the generic functor-action pattern.
 
-The Phase 8 rigid-Hom questions are settled. Global inferred identity LHS
-slots are not part of that migration; the minimal rigid-head bridge set and
-stable-head functoriality joins are the promoted implementation. The remaining
-generic identity/PathOut question is tracked separately: ordinary conversion
-selects one of two runtime identity heads, while typed `eq_refl` joins them.
+The Phase 8 rigid-Hom questions are settled. The subsequent generic identity
+follow-up promotes inferred endpoint slots independently of that migration.
+Ordinary conversion may select one of two runtime identity heads, while typed
+`eq_refl` joins them; this proof-time join is the documented intended criterion
+for the generic identity overlap.
 
 ## Side-Task Ledger
 
@@ -1950,13 +1988,14 @@ selects one of two runtime identity heads, while typed `eq_refl` joins them.
   `Unit_prof` action remains rigid `Hom_*`; factored pre/post cuts and endpoint
   degenerations use direct proof-time bridges; four focused `Hom_*`
   identity/composition joins retain computation after projection.
-- Deferred after Phase 8: decide whether the generic identity rules should use
-  inferred endpoint slots and therefore match across proof-time-compatible
-  endpoints. The combined inferred-rule probe fails ordinary conversion to
-  one chosen identity but passes typed `eq_refl` for both the core and full
-  PathOut/Sigma consumers. Promotion requires an explicit decision that this
-  proof-time join is the intended generic runtime-critical-pair criterion,
-  plus classification of the unrelated overlap delta.
+- Completed after Phase 8: promoted inferred endpoint slots on both generic
+  composition identity rules. The combined rules pass typed `eq_refl` for the
+  core and full PathOut/Sigma consumers. Proof-time joinability is explicitly
+  accepted as the intended criterion for this critical pair; the measured
+  warning delta is 11 additional critical-pair reports. `make check`, all six
+  examples, strict LHS audit, catalog freshness, `make ci`, and `make health`
+  pass; the broader matching boundary increases the eight-target typecheck
+  total from approximately 10.8 to 25.6 seconds.
 - Candidate A accumulation laws for arbitrary nesting are not part of the
   active Candidate B architecture. Candidate A remains a viable future
   stronger-normalization design, but it must be reopened as a complete

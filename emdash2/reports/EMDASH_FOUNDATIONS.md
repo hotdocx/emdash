@@ -217,6 +217,14 @@ Hom_func(g2,f2) o Hom_func(g1,f1)
 with matching point-action rules for `Hom_fapp0`. `Unit_prof(A)` is the
 uncurried product form of this same hom bifunctor.
 
+Ordinary composition identity eliminates an identity arrow independently of
+the chosen endpoint presentation. Its kernel rules infer the non-result
+endpoints, so rewrite matching may use the proof-time compatibility between
+the covariant and contravariant presentations above. In the PathOut/Sigma
+benchmark this reduces the composite fibre proof to one identity; the two
+possible runtime identity spellings are joined by typed reflexivity through
+the pre/post unification bridge.
+
 These are the higher-categorical analogue of keeping substitution or
 cut-elimination under the constructor that owns it. Raw expanded presentations
 such as `F[q] o ((F[p])_*(g))` and `((F[p])^*(g)) o F[q]` normally remain raw

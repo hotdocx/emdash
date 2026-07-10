@@ -1688,6 +1688,32 @@ assert [A : Cat] (x y z : τ (Obj A))
         =
         @hom_postcomp_fapp0 A A (@id Cat_cat A) x y z q p);
 
+// Inferred generic identity cuts eliminate the PathOut fibre-proof core. The
+// selected runtime identity presentation joins the contravariant one through
+// the proof-time pre/post bridge.
+assert [A : Cat] (x y z : τ (Obj A))
+  (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
+  eq_refl
+    (@id
+      (Hom_cat A x z)
+      (@hom_precomp_along_fapp0 A A (@id Cat_cat A) z x y p q))
+  : τ (
+      @comp_fapp0
+        (Hom_cat A x z)
+        (@comp_fapp0 A x y z q p)
+        (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y z q p)
+        (@hom_precomp_along_fapp0 A A (@id Cat_cat A) z x y p q)
+        (@id
+          (Hom_cat A x z)
+          (@hom_precomp_along_fapp0 A A (@id Cat_cat A) z x y p q))
+        (@id
+          (Hom_cat A x z)
+          (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y z q p))
+      =
+      @id
+        (Hom_cat A x z)
+        (@hom_precomp_along_fapp0 A A (@id Cat_cat A) z x y p q));
+
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x : τ (Obj A)) (h : τ (Hom A w x))
   (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
@@ -6600,6 +6626,56 @@ assert [Z : Cat] (x y z : τ (Obj Z))
           (@id
             (Hom_cat Z x z)
             (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p)));
+
+// The same inferred identity package collapses the complete PathOut/Sigma
+// fibre proof to one identity, with endpoint presentation joined at proof time.
+assert [Z : Cat] (x y z : τ (Obj Z))
+  (p : τ (Hom Z x y))
+  (q : τ (Hom Z y z)) ⊢
+  eq_refl
+    (@Struct_sigma
+      (Obj (Hom_cat Z x z))
+      (λ f : τ (Obj (Hom_cat Z x z)),
+        Obj
+          (Hom_cat
+            (Hom_cat Z x z)
+            f
+            (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)))
+      (@comp_fapp0 Z x y z q p)
+      (@id
+        (Hom_cat Z x z)
+        (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)))
+  : τ (
+      @comp_fapp0
+        (@PathOut_cat Z x)
+        (@pathout_refl_obj Z x)
+        (@pathout_obj Z x y p)
+        (@pathout_obj
+          Z
+          x
+          z
+          (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q))
+        (@fapp1_fapp0
+          (@PathOut_cat Z y)
+          (@PathOut_cat Z x)
+          (@PathOut_transport_func Z x y p)
+          (@pathout_refl_obj Z y)
+          (@pathout_obj Z y z q)
+          (@pathout_refl_arrow Z y z q))
+        (@pathout_refl_arrow Z x y p)
+      =
+      @Struct_sigma
+        (Obj (Hom_cat Z x z))
+        (λ f : τ (Obj (Hom_cat Z x z)),
+          Obj
+            (Hom_cat
+              (Hom_cat Z x z)
+              f
+              (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)))
+        (@comp_fapp0 Z x y z q p)
+        (@id
+          (Hom_cat Z x z)
+          (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)));
 
 // From emdash3_2.lp:7280.
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))

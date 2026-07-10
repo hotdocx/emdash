@@ -211,16 +211,21 @@ The warning-enabled inventory after the rigid-Hom migration is 1,297 warnings:
 1,132 unjoinable critical-pair reports and 165 replaceable-pattern reports.
 Focused typed checks cover both factorizations and endpoint degenerations;
 ordinary conversion checks cover the rigid owner's own identity and
-composition. Broad inferred-endpoint composition identity rules were not
-promoted in this migration. One-sided variants simplify the PathOut/Sigma
-identity composite, and the combined variant has two runtime identity results;
-a follow-up typed probe confirms that both the core and full Sigma consumers
-join by `eq_refl` through the pre/post unification bridge. The open generic
-identity question is therefore whether rewrite matching is intentionally
-allowed to use proof-time endpoint compatibility. Inferred-slot hygiene alone
-does not settle that runtime-versus-proof-time boundary. Candidate A remains a
+composition. A post-migration follow-up promotes inferred endpoint slots on
+both generic composition identity rules. This intentionally lets identity
+elimination match across proof-time-compatible endpoint presentations; it is
+not a mechanical `_` cleanup. The combined rules can select two runtime
+identity presentations, but typed core and full PathOut/Sigma checks join them
+by `eq_refl` through the pre/post unification bridge. Proof-time joinability is
+the selected criterion for this generic identity overlap. Repeated endpoint
+variables remain appropriate elsewhere when they are genuine constructor or
+subject-reduction guards. The warning-enabled inventory becomes 1,306 total:
+1,143 critical-pair and 163 replaceable-pattern reports. Candidate A remains a
 viable future stronger-normalization design only together with its complete
-`Hom_*` accumulation and confluence theory.
+`Hom_*` accumulation and confluence theory. The inferred matching boundary
+increases the eight-target CI typecheck total from approximately 10.8 to 25.6
+seconds; current per-target health timings remain below four seconds and the
+60-second timeout.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
