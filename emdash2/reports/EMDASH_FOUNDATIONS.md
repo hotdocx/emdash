@@ -154,12 +154,11 @@ whose objects are transformations from `F` to `G`. A transformation
 ϵ[x] : Hom_B(F[x],G[x])
 ```
 
-Implementation note: some Cat-specialized kernel heads, such as the
-`comp_cat_cov_*` and `comp_cat_con_*` families, package structure that only
-appears once the ambient category is `Cat`. A generic hom-action may already
-express the same Cat case, but the Cat-specialized result is a transfor and
-therefore exposes component and off-diagonal projections such as
-`tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`.
+Implementation note: Cat-valued horizontal action is now expressed through the
+generic product-composition owners `comp_prod_fapp1_func` and
+`comp_prod_fapp1_fapp0`, including their Cat instance projection ladder. The
+former compatibility-only `comp_cat_cov_*` and `comp_cat_con_*` heads are no
+longer active kernel owners.
 
 ### Hom-Actions And Controlled Associativity
 
@@ -180,6 +179,32 @@ For example:
 ((F f)_*(g)) o h           -> (F f)_*(g o h)
 (F(q o p))^*(g)            -> (F p)^*((F q)^*(g))
 ```
+
+Covariant and contravariant represented families now remain distinct during
+runtime normalization:
+
+```text
+hom_(F,W)       owns postcomposition in the varying target
+hom_con(W,F)    owns precomposition in the varying source
+hom_int(F)      internalizes the represented source endpoint
+hom_con_int(F)  internalizes the represented target endpoint.
+```
+
+Their mathematical comparison through opposite categories, and the comparison
+between identity-family precomposition and postcomposition, are proof-time
+unification facts rather than runtime orientations. This preserves the
+antecedential/consequential distinction needed by the cut-elimination reading.
+
+When both endpoints move, the simultaneous owner is the hom bifunctor action:
+
+```text
+Hom_func(g,f)[h] = Hom_fapp0(g,f,h) = f o h o g.
+```
+
+Both pointwise evaluation orders normalize to `Hom_fapp0`. If one endpoint is
+an identity, the inactive slot is removed and the result returns to the
+surviving one-slot precomposition or postcomposition owner. `Unit_prof(A)` is
+the uncurried product form of this same hom bifunctor.
 
 These are the higher-categorical analogue of keeping substitution or
 cut-elimination under the constructor that owns it. Raw expanded presentations

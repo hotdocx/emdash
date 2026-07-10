@@ -3,9 +3,9 @@
 
   This shows the application layer: the fixed-source path-induction theorem
   computes to the composition section, and evaluating that section at a base
-  arrow gives the expected stable postcomposition normal form. The ordinary
+  arrow gives the expected stable precomposition normal form. The ordinary
   categorical-composition surface remains available proof-time through the
-  `hom_postcomp_fapp0`/`comp_fapp0` unification bridge.
+  `hom_precomp_along_fapp0`/`comp_fapp0` unification bridge.
 */
 
 require open emdash.emdash3_2;
@@ -38,7 +38,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
       z
       (@path_comp_func Z x y p))
     q
-    ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
+    ≡ @hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q;
 
 symbol path_induction_transitivity_comp_view
   [Z : Cat]
@@ -57,4 +57,4 @@ symbol path_induction_transitivity_comp_view
         q
       =
       @comp_fapp0 Z x y z q p)
-≔ eq_refl (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p);
+≔ eq_refl (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q);

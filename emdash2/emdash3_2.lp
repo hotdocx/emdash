@@ -3082,8 +3082,12 @@ rule @defiso_iso_evidence
 // Surface/formula:
 //   hom_con(W,F)[y] = Hom_A(F[y],W).
 injective symbol hom_con [A : Cat] (W : τ (Obj A)) [B : Cat] (F : τ (Functor B A))
-  : τ (Functor (Op_cat B) Cat_cat)
-≔ @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W;
+  : τ (Functor (Op_cat B) Cat_cat);
+
+// Direct object projection preserves contravariant runtime ownership without
+// discriminating on an opposite-functor presentation.
+rule @fapp0 _ Cat_cat (@hom_con $A $W $B $F) $x
+  ↪ Hom_cat $A (@fapp0 $B $A $F $x) $W;
 
 /*
   Generalized precomposition along a functor, routed through the semantic
@@ -3138,6 +3142,35 @@ symbol hom_precomp_along_fapp0 [A B : Cat]
   (h : τ (Hom A W X))
   (g : τ (Hom B (@fapp0 A B F X) Z))
   : τ (Hom B (@fapp0 A B F W) Z);
+
+// Full contravariant action with the source category retained in its literal
+// opposite presentation. Its object projection returns the existing
+// precomposition owner.
+symbol hom_con_precomp_tele_func [A B : Cat]
+  (F : τ (Functor B A)) (W : τ (Obj A))
+  [X Y : τ (Obj B)]
+  : τ (Functor
+      (Hom_cat (Op_cat B) X Y)
+      (Functor_cat
+        (Hom_cat A (@fapp0 B A F X) W)
+        (Hom_cat A (@fapp0 B A F Y) W)));
+
+// Arrow projections of hom_con route to the literal-opposite full owner and
+// the existing capped precomposition owner.
+rule @fapp1_func
+      _ Cat_cat
+      (@hom_con $A $W $B $F)
+      $X $Y
+  ↪ @hom_con_precomp_tele_func $A $B $F $W $X $Y;
+
+rule fapp0 (@hom_con_precomp_tele_func $A $B $F $W $X $Y) $p
+  ↪ @hom_precomp_along_func $B $A $F $W $Y $X $p;
+
+rule @fapp1_fapp0
+      _ Cat_cat
+      (@hom_con $A $W $B $F)
+      $X $Y $p
+  ↪ @hom_precomp_along_func $B $A $F $W $Y $X $p;
 
 // Applying the telescope to h yields the capped precomposition functor.
 rule fapp0 (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h
@@ -3248,6 +3281,30 @@ unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
       $h
   ↪ [ tt ≡ tt ];
 
+// Proof-time endpoint bridge for the component of a general postcomposition
+// action. Runtime keeps the precomposition and postcomposition owners
+// distinct; this direct comparison avoids relying on transitive unification
+// through their separate identity-postcomposition and raw-composition views.
+unif_rule @hom_postcomp_fapp0
+      $A $B $F $W $X $Y $h $g
+  ≡ @hom_precomp_along_fapp0
+      $A $A (@id Cat_cat $A)
+      (@fapp0 $B $A $F $Y)
+      $W
+      (@fapp0 $B $A $F $X)
+      $g
+      (@fapp1_fapp0 $B $A $F $X $Y $h)
+  ↪ [ tt ≡ tt ];
+
+// The already-normalized identity-family presentation needs its own direct
+// rigid-head bridge because unification does not reliably reduce the generic
+// functor-action arguments while selecting the rule above.
+unif_rule @hom_precomp_along_fapp0
+      $A $A (@id Cat_cat $A) $Z $W $X $h $g
+  ≡ @hom_postcomp_fapp0
+      $A $A (@id Cat_cat $A) $W $X $Z $g $h
+  ↪ [ tt ≡ tt ];
+
 // Fold-direction codomain accumulation for precomposition.
 rule @comp_fapp0
       $B
@@ -3265,13 +3322,6 @@ rule @comp_fapp0
       $X
       $p
       (@comp_fapp0 $B (@fapp0 $A $B $F $X) $Z $U $k $g);
-
-// Identity-functor precomposition uses postcomposition as its canonical
-// runtime presentation. The ordinary `comp_fapp0` reading remains proof-time
-// compatibility through the unification rule above.
-rule @hom_precomp_along_fapp0
-      $A $A (@id Cat_cat $A) $Z $W $X $h $g
-  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Z $g $h;
 
 // Hom-action of the telescope as h varies: alpha : h ->^(Hom_A(W,X)) k.
 symbol hom_precomp_along_tele_fapp1_func [A B : Cat]
@@ -3418,64 +3468,45 @@ rule @hom_precomp_along_fapp1_fapp0
       (Hom_cat $B (@fapp0 $A $B $F $W) $Z)
       (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g);
 
-// Opposite-specialized postcomposition is canonicalized to generalized
-// precomposition. The true discriminee is the `Op_func` argument; surrounding
-// `Op_cat` source/target categories are presentation wrappers and may already
-// have normalized away. This makes the generic postcomposition route join the
-// contravariant `hom_`-over-opposites route at the stable projection heads.
-rule @hom_postcomp_tele_func
-      $B $A (@Op_func _ _ $F)
+// Proof-time duality between covariant postcomposition and contravariant
+// precomposition. Runtime preserves the two variance owners. Only the three
+// currently consumed projection rungs are bridged; unification is not assumed
+// to propagate transitively to the higher-cell ladders.
+unif_rule @hom_postcomp_tele_func
+      $B $A $F
       $Z $X $W
-  ↪ @hom_precomp_along_tele_func (Op_cat $A) (Op_cat $B) $F $Z $W $X;
+  ≡ @hom_precomp_along_tele_func
+      $A0 $B0 $F0
+      $Z $W $X
+  ↪ [
+      (Op_cat $B) ≡ $B0;
+      (Op_cat $A) ≡ $A0;
+      $F ≡ (@Op_func $A0 $B0 $F0)
+    ];
 
-rule @hom_postcomp_func
-      $B $A (@Op_func _ _ $F)
+unif_rule @hom_postcomp_func
+      $B $A $F
       $Z $X $W $h
-  ↪ @hom_precomp_along_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h;
+  ≡ @hom_precomp_along_func
+      $A0 $B0 $F0
+      $Z $W $X $h
+  ↪ [
+      (Op_cat $B) ≡ $B0;
+      (Op_cat $A) ≡ $A0;
+      $F ≡ (@Op_func $A0 $B0 $F0)
+    ];
 
-rule @hom_postcomp_fapp0
-      $B
-      $A
-      (@Op_func _ _ $F)
-      $Z
-      $X
-      $W
-      $h
-      $g
-  ↪ @hom_precomp_along_fapp0
-      (Op_cat $A)
-      (Op_cat $B)
-      $F
-      $Z
-      $W
-      $X
-      $h
-      $g;
-
-rule @hom_postcomp_fapp1_func
-      $B $A (@Op_func _ _ $F)
-      $Z $X $W $h $g $k
-  ↪ @hom_precomp_along_fapp1_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $g $k;
-
-rule @hom_postcomp_fapp1_fapp0
-      $B $A (@Op_func _ _ $F)
-      $Z $X $W $h $g $k $alpha
-  ↪ @hom_precomp_along_fapp1_fapp0 (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $g $k $alpha;
-
-rule @hom_postcomp_tele_fapp1_func
-      $B $A (@Op_func _ _ $F)
-      $Z $X $W $h $k
-  ↪ @hom_precomp_along_tele_fapp1_func (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k;
-
-rule @hom_postcomp_tele_fapp1_fapp0
-      $B $A (@Op_func _ _ $F)
-      $Z $X $W $h $k $alpha
-  ↪ @hom_precomp_along_tele_fapp1_fapp0 (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k $alpha;
-
-rule @hom_postcomp_tele_transf
-      $B $A (@Op_func _ _ $F)
-      $Z $X $W $h $k $alpha
-  ↪ @hom_precomp_along_tele_transf (Op_cat $A) (Op_cat $B) $F $Z $W $X $h $k $alpha;
+unif_rule @hom_postcomp_fapp0
+      $B $A $F
+      $Z $X $W $h $g
+  ≡ @hom_precomp_along_fapp0
+      $A0 $B0 $F0
+      $Z $W $X $h $g
+  ↪ [
+      (Op_cat $B) ≡ $B0;
+      (Op_cat $A) ≡ $A0;
+      $F ≡ (@Op_func $A0 $B0 $F0)
+    ];
 
 // Internalized hom classifier.
 //
@@ -3517,6 +3548,44 @@ rule @fapp1_fapp0 _ _ (@hom_int $A $B $F) $Y $X $p
 
 rule @fapp0 _ _ (@hom_int_precomp_tele_func $A $B $F $Y $X) $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
+
+// Target-internalized mirror of hom_int.
+//
+// Surface/formula:
+//   hom_con_int(F)[W][b] = Hom_A(F[b],W).
+injective symbol hom_con_int [A B : Cat] (F : τ (Functor B A))
+  : τ (Functor A (Catd_cat (Op_cat B)));
+
+rule @fapp0 _ _ (@hom_con_int $A $B $F) $W
+  ↪ @hom_con $A $W $B $F;
+
+symbol hom_con_int_postcomp_tele_func [A B : Cat]
+  (F : τ (Functor B A))
+  [W X : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A W X)
+      (Hom_cat
+        (@Catd_cat (Op_cat B))
+        (@hom_con A W B F)
+        (@hom_con A X B F)));
+
+symbol hom_con_int_postcomp_func [A B : Cat]
+  (F : τ (Functor B A))
+  [W X : τ (Obj A)]
+  (f : τ (Hom A W X))
+  : τ (Hom
+      (@Catd_cat (Op_cat B))
+      (@hom_con A W B F)
+      (@hom_con A X B F));
+
+rule @fapp1_func _ _ (@hom_con_int $A $B $F) $W $X
+  ↪ @hom_con_int_postcomp_tele_func $A $B $F $W $X;
+
+rule @fapp1_fapp0 _ _ (@hom_con_int $A $B $F) $W $X $f
+  ↪ @hom_con_int_postcomp_func $A $B $F $W $X $f;
+
+rule fapp0 (@hom_con_int_postcomp_tele_func $A $B $F $W $X) $f
+  ↪ @hom_con_int_postcomp_func $A $B $F $W $X $f;
 
 /*
   Ordinary internal-hom computations.
@@ -3869,15 +3938,48 @@ rule fapp0 (@Hom_tele_func $A $x $x' $y $y') (Struct_sigma $g $f)
 rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
   ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
 
+// Pointwise two-endpoint folds. Directly nested object actions do not pass
+// through the functor-level composition folds, so both evaluation orders join
+// the stable Hom_fapp0 owner here.
+rule @hom_postcomp_fapp0
+      $A $A (@id Cat_cat $A)
+      $x' $y $y' $f
+      (@hom_precomp_along_fapp0
+        $A $A (@id Cat_cat $A)
+        $y $x' $x $g $h)
+  ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
+
+rule @hom_precomp_along_fapp0
+      $A $A (@id Cat_cat $A)
+      $y' $x' $x $g
+      (@hom_postcomp_fapp0
+        $A $A (@id Cat_cat $A)
+        $x $y $y' $f $h)
+  ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
+
+// Removing an identity endpoint from the two-endpoint owner recovers the
+// corresponding one-slot functor and point-action owner.
+rule @Hom_func $A $x $x $y $y' (@id $A $x) $f
+  ↪ @hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f;
+
+rule @Hom_func $A $x $x' $y $y $g (@id $A $y)
+  ↪ @hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g;
+
+rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
+  ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x $y $y' $f $h;
+
+rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
+  ↪ @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $y $x' $x $g $h;
+
 // Identity middle arrow collapses to the existing one-slot postcomposition
 // normal form. This joins subject-reduction paths for older rules that expose
 // the point action of a two-endpoint Hom_func at an identity arrow.
 rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
   ↪ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g;
 
-// Narrow proof-time bridges for identity endpoint actions. Runtime keeps the
-// stable Hom_fapp0 head; broader two-slot semantic comparisons are deferred
-// until the precomposition/postcomposition normal-form boundary is retargeted.
+// Narrow proof-time raw-composition readings for identity endpoint actions.
+// Runtime now removes an inactive endpoint through the one-slot owner above;
+// these comparisons remain useful when elaboration expects `comp_fapp0`.
 unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
   ≡ @comp_fapp0 $A $x $y $y' $f $h
   ↪ [ tt ≡ tt ];
@@ -4439,6 +4541,17 @@ rule @tapp0_fapp0
 
 // Component of `hom_int` in the represented object is precomposition.
 
+// Component of the target-internalized mirror is postcomposition by f.
+rule @tapp0_fapp0
+      _ Cat_cat
+      _ _
+      $b
+      (@hom_con_int_postcomp_func $A $B $F $W $X $f)
+  ↪ @hom_postcomp_func
+      $A $A (@id_func $A)
+      (@fapp0 $B $A $F $b)
+      $W $X $f;
+
 // Reserved capped ordinary hom-action surface. It is not used by v3.2 rules
 // yet.
 //
@@ -4474,6 +4587,105 @@ symbol tapp1_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
 //   tapp1_func(epsilon,X,Y)[f] = tapp1_fapp0(epsilon,f).
 rule fapp0 (@tapp1_func $A $B $F $G $X $Y $ϵ) $f
   ↪ @tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f;
+
+// The higher action of internalized precomposition is the two-endpoint Hom
+// action on the fixed represented arrow and the varying arrow of F.
+// lhs-audit: keep 3,4 -- required subject-reduction endpoints of the Catd-valued hom component.
+rule @tapp1_func
+      $B Cat_cat
+      (@hom_ $A $B $F $Y)
+      (@hom_ $A $B $F $X)
+      $b $c
+      (@hom_int_precomp_func $A $B $F $Y $X $p)
+  ↪ @comp_fapp0
+      Cat_cat
+      (Hom_cat $B $b $c)
+      (Product_cat
+        (Hom_cat $A $X $Y)
+        (Hom_cat
+          $A
+          (@fapp0 $B $A $F $b)
+          (@fapp0 $B $A $F $c)))
+      (Functor_cat
+        (Hom_cat $A $Y (@fapp0 $B $A $F $b))
+        (Hom_cat $A $X (@fapp0 $B $A $F $c)))
+      (@Hom_tele_func
+        $A
+        $Y
+        $X
+        (@fapp0 $B $A $F $b)
+        (@fapp0 $B $A $F $c))
+      (Struct_sigma
+        (@Const_func
+          (Hom_cat $B $b $c)
+          (Hom_cat $A $X $Y)
+          $p)
+        (@fapp1_func $B $A $F $b $c));
+
+// Projection-order join for the capped off-diagonal component.
+// lhs-audit: keep 3,4 -- required subject-reduction endpoints of the Catd-valued hom component.
+rule @tapp1_fapp0
+      $B Cat_cat
+      (@hom_ $A $B $F $Y)
+      (@hom_ $A $B $F $X)
+      $b $c
+      (@hom_int_precomp_func $A $B $F $Y $X $p)
+      $q
+  ↪ @Hom_func
+      $A
+      $Y
+      $X
+      (@fapp0 $B $A $F $b)
+      (@fapp0 $B $A $F $c)
+      $p
+      (@fapp1_fapp0 $B $A $F $b $c $q);
+
+// Higher action of target-internalized postcomposition:
+// q |-> Hom_func(F[q],f).
+rule @tapp1_func
+      _ Cat_cat
+      _ _
+      $b $c
+      (@hom_con_int_postcomp_func $A $B $F $W $X $f)
+  ↪ @comp_fapp0
+      Cat_cat
+      (Hom_cat (Op_cat $B) $b $c)
+      (Product_cat
+        (Hom_cat
+          $A
+          (@fapp0 $B $A $F $c)
+          (@fapp0 $B $A $F $b))
+        (Hom_cat $A $W $X))
+      (Functor_cat
+        (Hom_cat $A (@fapp0 $B $A $F $b) $W)
+        (Hom_cat $A (@fapp0 $B $A $F $c) $X))
+      (@Hom_tele_func
+        $A
+        (@fapp0 $B $A $F $b)
+        (@fapp0 $B $A $F $c)
+        $W
+        $X)
+      (Struct_sigma
+        (@fapp1_func $B $A $F $c $b)
+        (@Const_func
+          (Hom_cat (Op_cat $B) $b $c)
+          (Hom_cat $A $W $X)
+          $f));
+
+rule @tapp1_fapp0
+      _ Cat_cat
+      _ _
+      $b $c
+      (@hom_con_int_postcomp_func $A $B $F $W $X $f)
+      $q
+  ↪ @Hom_func
+      $A
+      (@fapp0 $B $A $F $b)
+      (@fapp0 $B $A $F $c)
+      $W
+      $X
+      (@fapp1_fapp0 $B $A $F $c $b $q)
+      $f;
 
 // Product-valued off-diagonal components project componentwise.
 rule sigma_Fst (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
@@ -6581,6 +6793,16 @@ rule @Pullback_catd $A $B $E (@Const_func $A $B $b)
   ↪ @Const_catd $A (@fapp0 $B Cat_cat $E $b);
 rule @hom_ $A $B (@Const_func $B $A $u) $w
   ↪ @Const_catd $B (Hom_cat $A $w $u);
+
+// Constant target diagrams give constant contravariant represented families.
+rule @hom_con $A $W $B (@Const_func $B $A $u)
+  ↪ @Const_catd (Op_cat $B) (Hom_cat $A $u $W);
+
+// A contravariant representable into the terminal category is the constant
+// terminal family. This whole-family degeneration is needed by the
+// terminal-source section-action pipeline.
+rule @hom_con Terminal_cat _ $B _
+  ↪ @Const_catd (Op_cat $B) Terminal_cat;
 
 rule @fapp1_func $K Cat_cat (@Const_catd $K $A) $x $y
   ↪ @Const_func
@@ -8694,7 +8916,8 @@ rule @fdapp1_int_cell
       $y $z $q (@id $Z $y)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@hom_postcomp_fapp0 $Z $Z (@id Cat_cat $Z) $x $y $z $q $p);
+      (@hom_precomp_along_fapp0
+        $Z $Z (@id Cat_cat $Z) $z $x $y $p $q);
 
 // Representable precomposition is strict/cartesian already at the Sigma-map
 // fibre projection: applying the internal-hom action to the canonical identity
@@ -8706,7 +8929,8 @@ rule @fdapp1_int_hom_fapp0
       (@id $Z $y) $q (@id (Hom_cat $Z $y $z) $q)
   ↪ @id
       (Hom_cat $Z $x $z)
-      (@hom_postcomp_fapp0 $Z $Z (@id Cat_cat $Z) $x $y $z $q $p);
+      (@hom_precomp_along_fapp0
+        $Z $Z (@id Cat_cat $Z) $z $x $y $p $q);
 
 
 // -------------------------------------------------------------------------------------------------

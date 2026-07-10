@@ -9,20 +9,21 @@ Supersedes: no whole report; refines the promoted `Unit_prof` action slice by re
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-07
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f3ac2-9e29-7d83-be19-be1915b79d1c
-Status: promoted and validated through arbitrary-ambient off-diagonal telescope projection formulation; cleanup, `comp_prod_func`, the general `Hom_*` action-owner correction, the Cat-horizontal-action owner migration, deletion of the old Cat cov/con compatibility names, deletion of the old Cat telescope-transfor compatibility names, generic telescope-transfor unspecialization, the Cat-instance off-diagonal product cleanup, and the arbitrary-ambient off-diagonal formulation have been promoted; the broader `Hom_fapp0` object-level cleanup is delegated to `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`
+Status: promoted and validated; the delegated `Hom_fapp0` object-level cleanup and prerequisite variance separation are completed in `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`
 
 ## Active Goal
 
-The remaining `Hom_fapp0` object-action cleanup and its prerequisite
-covariant/contravariant runtime-owner separation now have a dedicated proposed
-subplan:
+The `Hom_fapp0` object-action cleanup and its prerequisite
+covariant/contravariant runtime-owner separation were completed under the
+dedicated subplan:
 
 ```text
 reports/REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md
 ```
 
-That report is the design authority for the deferred cleanup while it is being
-refined. No implementation from it has yet been promoted.
+That report is the implementation authority for the promoted primitive
+`hom_con` / `hom_con_int` mirror, proof-time opposite and identity duality,
+runtime variance separation, and the final `Hom_fapp0` folds.
 
 The active goal has two layers.
 
@@ -1324,10 +1325,10 @@ Updated order after the 2026-07-08 `Hom_*` correction:
      LHS, to `Hom_tele_func`;
    - add capped folds from both one-slot compositions
      `post_f o pre_g` and `pre_g_at_y' o post_f` to `Hom_func`;
-   - do not add object-level runtime folds to `Hom_fapp0`; after the latest
-     correction, keep only the narrow identity-slot proof-time bridges
-     `Hom_fapp0(id_x,f,h) == f o h` and
-     `Hom_fapp0(g,id_y,h) == h o g`.
+   - this phase initially deferred object-level runtime folds to the dedicated
+     variance-separation task. That task has now promoted both object folds and
+     coherent inactive-endpoint reductions, while retaining the narrow
+     identity-slot proof-time raw-composition bridges.
 8. Completed: add focused checks for:
    - full and capped `Unit_prof` action through `Hom_*`;
    - the product-composition presentation folding into `Hom_*`;
@@ -1433,7 +1434,7 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   capped `Unit_prof` base-arrow action to that owner; added folds from the
   product-composition presentation to `Hom_tele_func`; added capped
   functor-level one-slot folds to `Hom_func`.
-- Corrected 2026-07-08: do not promote object-level runtime folds from nested
+- Historical correction 2026-07-08: do not promote object-level runtime folds from nested
   `hom_postcomp_fapp0` / `hom_precomp_along_fapp0` presentations to
   `Hom_fapp0`, and do not keep the broad proof-time bridges from arbitrary
   `Hom_fapp0(g,f,h)` to raw nested `comp_fapp0` or to normalized
@@ -1441,21 +1442,22 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   unification bridges:
   `Hom_fapp0(id_x,f,h) == comp_fapp0(f,h)` and
   `Hom_fapp0(g,id_y,h) == comp_fapp0(h,g)`.
-- Delegated proposed subplan: the `Hom_fapp0` object-action cleanup and its
-  prerequisite variance-separation architecture are now specified in
+- Completed delegated subplan 2026-07-10: the `Hom_fapp0` object-action cleanup
+  and its prerequisite variance-separation architecture are implemented and
+  recorded in
   `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`.
-  The extracted task will delete or demote the legacy
+  The extracted task deleted the legacy
   runtime rule
   `hom_precomp_along_fapp0(id_A,h,g) -> hom_postcomp_fapp0(id_A,g,h)`, retarget
   downstream consumers that currently depend on the postcomposition normal
-  form, especially rules around `hom_postcomp_tele_fapp1_fapp0` and
-  `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`, then re-probe the two direct
+  form, including higher component endpoints, curry, path-induction, and
+  `fdapp1_int_hom_fapp0` / `fdapp1_int_cell`, then promoted the two direct
   object-level folds
   `hom_postcomp_fapp0(f, hom_precomp_along_fapp0(g,h)) -> Hom_fapp0(g,f,h)`
   and
   `hom_precomp_along_fapp0(g, hom_postcomp_fapp0(f,h)) -> Hom_fapp0(g,f,h)`
-  with ordinary conversion assertions and warning-enabled overlap
-  classification.
+  with ordinary conversion assertions, coherent identity-endpoint
+  degenerations, and warning-enabled overlap classification.
 - Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
   after the `Hom_*` correction; `make catalog` regenerates the check catalog
   without unclassified checks; `make ci` passes, including strict LHS audit;

@@ -189,6 +189,26 @@ reported heads remain the shared `comp_fapp0` and `hom_postcomp_fapp0`
 families; the warning delta is recorded as overlap diagnostics, not as a
 reason to restore a representable-specific action owner.
 
+Postscript 2026-07-10: the hom-variance migration supersedes the older
+identity/opposite runtime shortcuts described in the 2026-07-05 postscripts.
+`hom_con` is now a primitive contravariant represented-family owner, with the
+target-internalized mirror `hom_con_int`; `hom_int` and `hom_con_int` expose
+off-diagonal actions through `Hom_tele_func`, `Hom_func`, and `Hom_fapp0`.
+The eight `Op_func`-keyed postcomposition-to-precomposition rewrites and the
+identity-family precomposition-to-postcomposition rewrite have been removed.
+Required dual presentations are related by constrained two-rigid-head
+`unif_rule`s, while runtime preserves `hom_postcomp_*` versus
+`hom_precomp_along_*` ownership. Both nested point-evaluation orders now fold
+to `Hom_fapp0(g,f,h)`; an identity endpoint reduces the simultaneous
+`Hom_func` / `Hom_fapp0` owner to the surviving one-slot owner. Cat horizontal
+action is owned by the generic `comp_prod_fapp1_*` projection ladder; the old
+Cat cov/con and Cat telescope-transfor compatibility names have been deleted.
+The warning-enabled inventory after this completed slice is 1,341 warnings:
+1,176 unjoinable critical-pair reports and 165 replaceable-pattern reports.
+Focused checks establish the promoted nondegenerate and identity reduction
+orders; broader arbitrary nesting remains consumer-driven rather than being
+generated mechanically from the warning inventory.
+
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested
 pullback cuts, and focused constant/opposite/Sigma-projection collapses are

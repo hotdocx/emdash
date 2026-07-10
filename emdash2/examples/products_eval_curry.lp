@@ -32,13 +32,14 @@ assert [A B C : Cat]
         (@fapp0
           A
           (Functor_cat B C)
-          (@hom_postcomp_fapp0
+          (@hom_precomp_along_fapp0
             Cat_cat
             Cat_cat
             (@id Cat_cat Cat_cat)
+            (Functor_cat B C)
             A
             (Product_cat (Functor_cat B A) (Functor_cat B B))
-            (Functor_cat B C)
+            (@Product_pair_tele_func A B)
             (@hom_postcomp_func
               Cat_cat
               Cat_cat
@@ -46,8 +47,7 @@ assert [A B C : Cat]
               B
               (Product_cat A B)
               C
-              F)
-            (@Product_pair_tele_func A B))
+              F))
           x)
         y;
 

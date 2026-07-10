@@ -1159,6 +1159,47 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (x : τ (Obj (Op_cat B))) ⊢
   @fapp0 (Op_cat B) Cat_cat (@hom_con A W B F) x ≡ Hom_cat A (@fapp0 B A F x) W;
 
+// Primitive contravariant represented-family action.
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) ⊢
+  @fapp1_func _ Cat_cat (@hom_con A W B F) X Y
+    ≡ @hom_con_precomp_tele_func A B F W X Y;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (p : τ (Hom (Op_cat B) X Y)) ⊢
+  @fapp0
+    (Hom_cat (Op_cat B) X Y)
+    (Functor_cat
+      (Hom_cat A (@fapp0 B A F X) W)
+      (Hom_cat A (@fapp0 B A F Y) W))
+    (@hom_con_precomp_tele_func A B F W X Y)
+    p
+  ≡ @hom_precomp_along_func B A F W Y X p;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (p : τ (Hom (Op_cat B) X Y)) ⊢
+  @fapp1_fapp0 _ Cat_cat (@hom_con A W B F) X Y p
+    ≡ @hom_precomp_along_func B A F W Y X p;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+  (X Y : τ (Obj B)) (p : τ (Hom (Op_cat B) X Y))
+  (g : τ (Hom A (@fapp0 B A F X) W)) ⊢
+  @fapp0
+    (Hom_cat A (@fapp0 B A F X) W)
+    (Hom_cat A (@fapp0 B A F Y) W)
+    (@fapp1_fapp0 _ Cat_cat (@hom_con A W B F) X Y p)
+    g
+  ≡ @hom_precomp_along_fapp0 B A F W Y X p g;
+
+assert [B : Cat] (F : τ (Functor B Terminal_cat))
+  (W : τ (Obj Terminal_cat)) ⊢
+  @hom_con Terminal_cat W B F
+    ≡ @Const_catd (Op_cat B) Terminal_cat;
+
+assert [A B : Cat] (u W : τ (Obj A)) ⊢
+  @hom_con A W B (@Const_func B A u)
+    ≡ @Const_catd (Op_cat B) (Hom_cat A u W);
+
 // From emdash3_2.lp:971.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj (Op_cat A))) ⊢
   @fapp0 (Op_cat A) (Catd_cat B) (@hom_int A B F) W
@@ -1189,6 +1230,269 @@ assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
     b
     (@hom_int_precomp_func A B F y x p)
     ≡ @hom_precomp_along_func A A (@id_func A) (@fapp0 B A F b) x y p;
+
+// Higher represented-object action: q |-> Hom_func(p,F[q]).
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b c : τ (Obj B)) ⊢
+  @tapp1_func
+    B Cat_cat
+    (@hom_ A B F y) (@hom_ A B F x)
+    b c
+    (@hom_int_precomp_func A B F y x p)
+  ≡ @comp_fapp0
+      Cat_cat
+      (Hom_cat B b c)
+      (Product_cat
+        (Hom_cat A x y)
+        (Hom_cat A (@fapp0 B A F b) (@fapp0 B A F c)))
+      (Functor_cat
+        (Hom_cat A y (@fapp0 B A F b))
+        (Hom_cat A x (@fapp0 B A F c)))
+      (@Hom_tele_func A y x (@fapp0 B A F b) (@fapp0 B A F c))
+      (Struct_sigma
+        (@Const_func (Hom_cat B b c) (Hom_cat A x y) p)
+        (@fapp1_func B A F b c));
+
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b c : τ (Obj B))
+  (q : τ (Hom B b c)) ⊢
+  @tapp1_fapp0
+    B Cat_cat
+    (@hom_ A B F y) (@hom_ A B F x)
+    b c
+    (@hom_int_precomp_func A B F y x p)
+    q
+  ≡ @Hom_func
+      A y x
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      p
+      (@fapp1_fapp0 B A F b c q);
+
+// Owner-first evaluation of the semantic composite reaches the same cap.
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b c : τ (Obj B))
+  (q : τ (Hom B b c)) ⊢
+  @fapp0
+    (Hom_cat B b c)
+    (Functor_cat
+      (Hom_cat A y (@fapp0 B A F b))
+      (Hom_cat A x (@fapp0 B A F c)))
+    (@comp_fapp0
+      Cat_cat
+      (Hom_cat B b c)
+      (Product_cat
+        (Hom_cat A x y)
+        (Hom_cat A (@fapp0 B A F b) (@fapp0 B A F c)))
+      (Functor_cat
+        (Hom_cat A y (@fapp0 B A F b))
+        (Hom_cat A x (@fapp0 B A F c)))
+      (@Hom_tele_func A y x (@fapp0 B A F b) (@fapp0 B A F c))
+      (Struct_sigma
+        (@Const_func (Hom_cat B b c) (Hom_cat A x y) p)
+        (@fapp1_func B A F b c)))
+    q
+  ≡ @Hom_func
+      A y x
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      p
+      (@fapp1_fapp0 B A F b c q);
+
+// Projection-first evaluation reaches the direct capped join.
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b c : τ (Obj B))
+  (q : τ (Hom B b c)) ⊢
+  @fapp0
+    (Hom_cat B b c)
+    (Functor_cat
+      (Hom_cat A y (@fapp0 B A F b))
+      (Hom_cat A x (@fapp0 B A F c)))
+    (@tapp1_func
+      B Cat_cat
+      (@hom_ A B F y) (@hom_ A B F x)
+      b c
+      (@hom_int_precomp_func A B F y x p))
+    q
+  ≡ @Hom_func
+      A y x
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      p
+      (@fapp1_fapp0 B A F b c q);
+
+assert [A B : Cat] (F : τ (Functor B A)) (y x : τ (Obj A))
+  (p : τ (Hom (Op_cat A) y x)) (b c : τ (Obj B))
+  (q : τ (Hom B b c))
+  (h : τ (Hom A y (@fapp0 B A F b))) ⊢
+  @fapp0
+    (Hom_cat A y (@fapp0 B A F b))
+    (Hom_cat A x (@fapp0 B A F c))
+    (@fapp0
+      (Hom_cat B b c)
+      (Functor_cat
+        (Hom_cat A y (@fapp0 B A F b))
+        (Hom_cat A x (@fapp0 B A F c)))
+      (@tapp1_func
+        B Cat_cat
+        (@hom_ A B F y) (@hom_ A B F x)
+        b c
+        (@hom_int_precomp_func A B F y x p))
+      q)
+    h
+  ≡ @Hom_fapp0
+      A y x
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      p
+      (@fapp1_fapp0 B A F b c q)
+      h;
+
+// Target-internalized mirror: f varies covariantly and each fibre is hom_con.
+assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) ⊢
+  @fapp0 A (@Catd_cat (Op_cat B)) (@hom_con_int A B F) W
+    ≡ @hom_con A W B F;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A)) ⊢
+  @fapp1_func A (@Catd_cat (Op_cat B)) (@hom_con_int A B F) W X
+    ≡ @hom_con_int_postcomp_tele_func A B F W X;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) ⊢
+  @fapp1_fapp0 A (@Catd_cat (Op_cat B)) (@hom_con_int A B F) W X f
+    ≡ @hom_con_int_postcomp_func A B F W X f;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) ⊢
+  @fapp0
+    (Hom_cat A W X)
+    (Hom_cat
+      (@Catd_cat (Op_cat B))
+      (@hom_con A W B F)
+      (@hom_con A X B F))
+    (@hom_con_int_postcomp_tele_func A B F W X)
+    f
+  ≡ @hom_con_int_postcomp_func A B F W X f;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b : τ (Obj B)) ⊢
+  @tapp0_fapp0
+    (Op_cat B) Cat_cat
+    (@hom_con A W B F) (@hom_con A X B F)
+    b
+    (@hom_con_int_postcomp_func A B F W X f)
+  ≡ @hom_postcomp_func
+      A A (@id_func A)
+      (@fapp0 B A F b)
+      W X f;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b c : τ (Obj B)) ⊢
+  @tapp1_func
+    (Op_cat B) Cat_cat
+    (@hom_con A W B F) (@hom_con A X B F)
+    b c
+    (@hom_con_int_postcomp_func A B F W X f)
+  ≡ @comp_fapp0
+      Cat_cat
+      (Hom_cat (Op_cat B) b c)
+      (Product_cat
+        (Hom_cat A (@fapp0 B A F c) (@fapp0 B A F b))
+        (Hom_cat A W X))
+      (Functor_cat
+        (Hom_cat A (@fapp0 B A F b) W)
+        (Hom_cat A (@fapp0 B A F c) X))
+      (@Hom_tele_func
+        A (@fapp0 B A F b) (@fapp0 B A F c) W X)
+      (Struct_sigma
+        (@fapp1_func B A F c b)
+        (@Const_func (Hom_cat (Op_cat B) b c) (Hom_cat A W X) f));
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b c : τ (Obj B))
+  (q : τ (Hom (Op_cat B) b c)) ⊢
+  @tapp1_fapp0
+    (Op_cat B) Cat_cat
+    (@hom_con A W B F) (@hom_con A X B F)
+    b c
+    (@hom_con_int_postcomp_func A B F W X f)
+    q
+  ≡ @Hom_func
+      A
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      W X
+      (@fapp1_fapp0 B A F c b q)
+      f;
+
+// Owner-first evaluation of the mirror semantic composite reaches the cap.
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b c : τ (Obj B))
+  (q : τ (Hom (Op_cat B) b c)) ⊢
+  @fapp0
+    (Hom_cat (Op_cat B) b c)
+    (Functor_cat
+      (Hom_cat A (@fapp0 B A F b) W)
+      (Hom_cat A (@fapp0 B A F c) X))
+    (@comp_fapp0
+      Cat_cat
+      (Hom_cat (Op_cat B) b c)
+      (Product_cat
+        (Hom_cat A (@fapp0 B A F c) (@fapp0 B A F b))
+        (Hom_cat A W X))
+      (Functor_cat
+        (Hom_cat A (@fapp0 B A F b) W)
+        (Hom_cat A (@fapp0 B A F c) X))
+      (@Hom_tele_func
+        A (@fapp0 B A F b) (@fapp0 B A F c) W X)
+      (Struct_sigma
+        (@fapp1_func B A F c b)
+        (@Const_func (Hom_cat (Op_cat B) b c) (Hom_cat A W X) f)))
+    q
+  ≡ @Hom_func
+      A
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      W X
+      (@fapp1_fapp0 B A F c b q)
+      f;
+
+// Projection-first evaluation reaches the direct capped mirror.
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b c : τ (Obj B))
+  (q : τ (Hom (Op_cat B) b c)) ⊢
+  @fapp0
+    (Hom_cat (Op_cat B) b c)
+    (Functor_cat
+      (Hom_cat A (@fapp0 B A F b) W)
+      (Hom_cat A (@fapp0 B A F c) X))
+    (@tapp1_func
+      (Op_cat B) Cat_cat
+      (@hom_con A W B F) (@hom_con A X B F)
+      b c
+      (@hom_con_int_postcomp_func A B F W X f))
+    q
+  ≡ @Hom_func
+      A
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      W X
+      (@fapp1_fapp0 B A F c b q)
+      f;
+
+assert [A B : Cat] (F : τ (Functor B A)) (W X : τ (Obj A))
+  (f : τ (Hom A W X)) (b c : τ (Obj B))
+  (q : τ (Hom (Op_cat B) b c))
+  (h : τ (Hom A (@fapp0 B A F b) W)) ⊢
+  @fapp0
+    (Hom_cat A (@fapp0 B A F b) W)
+    (Hom_cat A (@fapp0 B A F c) X)
+    (@tapp1_fapp0
+      (Op_cat B) Cat_cat
+      (@hom_con A W B F) (@hom_con A X B F)
+      b c
+      (@hom_con_int_postcomp_func A B F W X f)
+      q)
+    h
+  ≡ @Hom_fapp0
+      A
+      (@fapp0 B A F b) (@fapp0 B A F c)
+      W X
+      (@fapp1_fapp0 B A F c b q)
+      f h;
 
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
   @Rep_transport_func Z x y p
@@ -1372,7 +1676,17 @@ assert [A : Cat] (x y z : τ (Obj A))
     (Hom_cat A x z)
     (@hom_precomp_along_func A A (@id_func A) z x y p)
     q
-    ≡ @hom_postcomp_fapp0 A A (@id_func A) x y z q p;
+    ≡ @hom_precomp_along_fapp0 A A (@id_func A) z x y p q;
+
+// Identity-family precomposition and postcomposition remain proof-time
+// compatible without selecting either one as the other's runtime normal form.
+assert [A : Cat] (x y z : τ (Obj A))
+  (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
+  eq_refl (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y z q p)
+    : τ (
+        @hom_precomp_along_fapp0 A A (@id Cat_cat A) z x y p q
+        =
+        @hom_postcomp_fapp0 A A (@id Cat_cat A) x y z q p);
 
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x : τ (Obj A)) (h : τ (Hom A w x))
@@ -1461,10 +1775,14 @@ symbol hom_postcomp_opfunc_general_tele_visible_check
     (@Op_func A B F)
     z x w;
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
-  (w x : τ (Obj A)) ⊢
-  @hom_postcomp_opfunc_general_tele_visible_check A B F z w x
-    ≡ @hom_precomp_along_tele_func A B F z w x;
+symbol hom_postcomp_opfunc_general_tele_eq_refl_check
+  [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A))
+  : τ (
+      @hom_postcomp_opfunc_general_tele_visible_check A B F z w x
+      =
+      @hom_precomp_along_tele_func A B F z w x)
+≔ eq_refl (@hom_precomp_along_tele_func A B F z w x);
 
 symbol hom_postcomp_opfunc_general_func_visible_check
   [A B : Cat]
@@ -1481,10 +1799,14 @@ symbol hom_postcomp_opfunc_general_func_visible_check
     (@Op_func A B F)
     z x w h;
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
-  (w x : τ (Obj A)) (h : τ (Hom A w x)) ⊢
-  @hom_postcomp_opfunc_general_func_visible_check A B F z w x h
-    ≡ @hom_precomp_along_func A B F z w x h;
+symbol hom_postcomp_opfunc_general_func_eq_refl_check
+  [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A w x))
+  : τ (
+      @hom_postcomp_opfunc_general_func_visible_check A B F z w x h
+      =
+      @hom_precomp_along_func A B F z w x h)
+≔ eq_refl (@hom_precomp_along_func A B F z w x h);
 
 symbol hom_postcomp_opfunc_general_visible_check
   [A B : Cat]
@@ -1500,37 +1822,16 @@ symbol hom_postcomp_opfunc_general_visible_check
     (@Op_func A B F)
     z x w h g;
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+symbol hom_postcomp_opfunc_general_eq_refl_check
+  [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x : τ (Obj A))
   (h : τ (Hom A w x))
-  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
-  @hom_postcomp_opfunc_general_visible_check A B F z w x h g
-    ≡ @hom_precomp_along_fapp0 A B F z w x h g;
-
-symbol hom_postcomp_opfunc_general_cell_visible_check
-  [A B : Cat]
-  (F : τ (Functor A B))
-  (z : τ (Obj B))
-  [w x : τ (Obj A)]
-  (h : τ (Hom A w x))
-  [g k : τ (Hom B (@fapp0 A B F x) z)]
-  (alpha : τ (Hom (Hom_cat B (@fapp0 A B F x) z) g k))
-  : τ (Hom
-      (Hom_cat B (@fapp0 A B F w) z)
-      (@hom_precomp_along_fapp0 A B F z w x h g)
-      (@hom_precomp_along_fapp0 A B F z w x h k))
-≔ @hom_postcomp_fapp1_fapp0
-    (Op_cat B)
-    (Op_cat A)
-    (@Op_func A B F)
-    z x w h g k alpha;
-
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
-  (w x : τ (Obj A)) (h : τ (Hom A w x))
-  [g k : τ (Hom B (@fapp0 A B F x) z)]
-  (alpha : τ (Hom (Hom_cat B (@fapp0 A B F x) z) g k)) ⊢
-  @hom_postcomp_opfunc_general_cell_visible_check A B F z w x h g k alpha
-    ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
+  (g : τ (Hom B (@fapp0 A B F x) z))
+  : τ (
+      @hom_postcomp_opfunc_general_visible_check A B F z w x h g
+      =
+      @hom_precomp_along_fapp0 A B F z w x h g)
+≔ eq_refl (@hom_precomp_along_fapp0 A B F z w x h g);
 
 symbol hom_postcomp_opfunc_general_double_op_check
   [A B : Cat]
@@ -1547,45 +1848,14 @@ symbol hom_postcomp_opfunc_general_double_op_check
     (@Op_func (Op_cat A) (Op_cat B) F)
     z x w h;
 
-assert [A B : Cat] (F : τ (Functor (Op_cat A) (Op_cat B))) (z : τ (Obj B))
-  (w x : τ (Obj A)) (h : τ (Hom A x w)) ⊢
-  @hom_postcomp_opfunc_general_double_op_check A B F z w x h
-    ≡ @hom_precomp_along_func (Op_cat A) (Op_cat B) F z w x h;
-
-// The raw double-op hom_int expression needs an expected canonical Catd hom
-// type before ordinary conversion observes the generalized Op_func bridge.
-// This mirrors real consumers whose declarations fix the surrounding hom
-// category, and it is checked below by both conversion and typed `eq_refl`.
-symbol hom_postcomp_opfunc_general_hom_int_check
-  [Z : Cat]
-  [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
-  : τ (Hom (@Catd_cat Z)
-      (@hom_ Z Z (@id_func Z) y)
-      (@hom_ Z Z (@id_func Z) x))
-≔ @hom_postcomp_fapp0
-    (Op_cat (@Catd_cat Z))
-    Z
-    (@Op_func (Op_cat Z) (@Catd_cat Z) (@hom_int Z Z (@id_func Z)))
-    (@hom_ Z Z (@id_func Z) x)
-    x
-    y
-    p
-    (@id_funcd Z (@hom_ Z Z (@id_func Z) x));
-
-assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
-  @hom_postcomp_opfunc_general_hom_int_check Z x y p
-    ≡ @hom_int_precomp_func Z Z (@id_func Z) y x p;
-
-symbol hom_postcomp_opfunc_general_hom_int_eq_refl_check
-  [Z : Cat]
-  [x y : τ (Obj Z)]
-  (p : τ (Hom Z x y))
+symbol hom_postcomp_opfunc_general_double_op_eq_refl_check
+  [A B : Cat] (F : τ (Functor (Op_cat A) (Op_cat B))) (z : τ (Obj B))
+  (w x : τ (Obj A)) (h : τ (Hom A x w))
   : τ (
-      @hom_postcomp_opfunc_general_hom_int_check Z x y p
+      @hom_postcomp_opfunc_general_double_op_check A B F z w x h
       =
-      @hom_int_precomp_func Z Z (@id_func Z) y x p)
-≔ eq_refl (@hom_int_precomp_func Z Z (@id_func Z) y x p);
+      @hom_precomp_along_func (Op_cat A) (Op_cat B) F z w x h)
+≔ eq_refl (@hom_precomp_along_func (Op_cat A) (Op_cat B) F z w x h);
 
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x y : τ (Obj A))
@@ -1617,7 +1887,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   @fapp1_fapp0
     (Op_cat A)
     Cat_cat
-    (@hom_ (Op_cat B) (Op_cat A) (@Op_func A B F) z)
+    (@hom_con B z A F)
     x
     w
     h
@@ -1665,54 +1935,32 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
       (Hom_cat B (@fapp0 A B F w) z)
       (@hom_precomp_along_fapp0 A B F z w x h g);
 
-// Opposite-specialized postcomposition bridges to precomposition-along after
-// projection. Direct head equality over unreduced opposites is intentionally
-// not the diagnostic surface.
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
-  (w x : τ (Obj A)) (h : τ (Hom A w x)) ⊢
-  fapp0
-    (@hom_postcomp_tele_func
-      (Op_cat B)
-      (Op_cat A)
-      (@Op_func A B F)
-      z
-      x
-      w)
-    h
-  ≡ @hom_precomp_along_func A B F z w x h;
-
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+// Projection checks exercise the same proof-time bridges after generic
+// telescope and functor evaluation.
+symbol hom_postcomp_opfunc_projected_func_eq_refl_check
+  [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x : τ (Obj A)) (h : τ (Hom A w x))
-  (g : τ (Hom B (@fapp0 A B F x) z)) ⊢
-  fapp0
-    (@hom_postcomp_func
-      (Op_cat B)
-      (Op_cat A)
-      (@Op_func A B F)
-      z
-      x
-      w
-      h)
-    g
-  ≡ @hom_precomp_along_fapp0 A B F z w x h g;
+  : τ (
+      fapp0
+        (@hom_postcomp_tele_func
+          (Op_cat B) (Op_cat A) (@Op_func A B F) z x w)
+        h
+      =
+      @hom_precomp_along_func A B F z w x h)
+≔ eq_refl (@hom_precomp_along_func A B F z w x h);
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+symbol hom_postcomp_opfunc_projected_fapp0_eq_refl_check
+  [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x : τ (Obj A)) (h : τ (Hom A w x))
-  (g k : τ (Hom B (@fapp0 A B F x) z))
-  (alpha : τ (Hom (Hom_cat B (@fapp0 A B F x) z) g k)) ⊢
-  fapp0
-    (@hom_postcomp_fapp1_func
-      (Op_cat B)
-      (Op_cat A)
-      (@Op_func A B F)
-      z
-      x
-      w
-      h
-      g
-      k)
-    alpha
-  ≡ @hom_precomp_along_fapp1_fapp0 A B F z w x h g k alpha;
+  (g : τ (Hom B (@fapp0 A B F x) z))
+  : τ (
+      fapp0
+        (@hom_postcomp_func
+          (Op_cat B) (Op_cat A) (@Op_func A B F) z x w h)
+        g
+      =
+      @hom_precomp_along_fapp0 A B F z w x h g)
+≔ eq_refl (@hom_precomp_along_fapp0 A B F z w x h g);
 
 assert [X Y Z : Cat] (F : τ (Functor X Y)) ⊢
   fapp0 (@comp_cat_con_func_func X Y Z) F
@@ -2219,22 +2467,6 @@ assert [K : Cat]
   @hom_precomp_along_tele_fapp1_fapp0 K Cat_cat E Z x y f g alpha
   ≡ @hom_precomp_along_tele_transf K Cat_cat E Z x y f g alpha;
 
-assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
-  (W X : τ (Obj A)) (h k : τ (Hom A W X))
-  (alpha : τ (Hom (Hom_cat A W X) h k)) ⊢
-  fapp0
-    (@hom_postcomp_tele_fapp1_func
-      (Op_cat B)
-      (Op_cat A)
-      (@Op_func A B F)
-      Z
-      X
-      W
-      h
-      k)
-    alpha
-  ≡ @hom_precomp_along_tele_transf A B F Z W X h k alpha;
-
 assert [X Y Z : Cat] (F K : τ (Functor X Y)) ⊢
   @fapp1_func
     (Functor_cat X Y)
@@ -2693,6 +2925,97 @@ assert [A : Cat]
   (h : τ (Hom A x y)) ⊢
   fapp0 (@Hom_func A x x' y y' g f) h
   ≡ @Hom_fapp0 A x x' y y' g f h;
+
+// Both direct one-slot evaluation orders fold to the pointwise two-endpoint
+// owner.
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  @hom_postcomp_fapp0 A A (@id Cat_cat A) x' y y' f
+    (@hom_precomp_along_fapp0 A A (@id Cat_cat A) y x' x g h)
+  ≡ @Hom_fapp0 A x x' y y' g f h;
+
+assert [A : Cat]
+  (x x' y y' : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  @hom_precomp_along_fapp0 A A (@id Cat_cat A) y' x' x g
+    (@hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f h)
+  ≡ @Hom_fapp0 A x x' y y' g f h;
+
+// Removing an identity endpoint recovers the corresponding one-slot owner at
+// both functor and point levels.
+assert [A : Cat]
+  (x y y' : τ (Obj A))
+  (f : τ (Hom A y y')) ⊢
+  @Hom_func A x x y y' (@id A x) f
+  ≡ @hom_postcomp_func A A (@id Cat_cat A) x y y' f;
+
+assert [A : Cat]
+  (x x' y : τ (Obj A))
+  (g : τ (Hom A x' x)) ⊢
+  @Hom_func A x x' y y g (@id A y)
+  ≡ @hom_precomp_along_func A A (@id Cat_cat A) y x' x g;
+
+assert [A : Cat]
+  (x y y' : τ (Obj A))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  @Hom_fapp0 A x x y y' (@id A x) f h
+  ≡ @hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f h;
+
+assert [A : Cat]
+  (x x' y : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (h : τ (Hom A x y)) ⊢
+  @Hom_fapp0 A x x' y y g (@id A y) h
+  ≡ @hom_precomp_along_fapp0 A A (@id Cat_cat A) y x' x g h;
+
+// Identity-first and two-endpoint-fold-first reduction orders join.
+assert [A : Cat]
+  (x y y' : τ (Obj A))
+  (f : τ (Hom A y y'))
+  (h : τ (Hom A x y)) ⊢
+  @hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f
+    (@hom_precomp_along_fapp0 A A (@id Cat_cat A)
+      y x x (@id A x) h)
+  ≡ @hom_postcomp_fapp0 A A (@id Cat_cat A) x y y' f h;
+
+assert [A : Cat]
+  (x x' y : τ (Obj A))
+  (g : τ (Hom A x' x))
+  (h : τ (Hom A x y)) ⊢
+  @hom_precomp_along_fapp0 A A (@id Cat_cat A) y x' x g
+    (@hom_postcomp_fapp0 A A (@id Cat_cat A)
+      x y y (@id A y) h)
+  ≡ @hom_precomp_along_fapp0 A A (@id Cat_cat A) y x' x g h;
+
+assert [A : Cat]
+  (x y y' : τ (Obj A))
+  (f : τ (Hom A y y')) ⊢
+  @comp_fapp0
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat A x y)
+    (Hom_cat A x y')
+    (@hom_postcomp_func A A (@id Cat_cat A) x y y' f)
+    (@hom_precomp_along_func A A (@id Cat_cat A) y x x (@id A x))
+  ≡ @hom_postcomp_func A A (@id Cat_cat A) x y y' f;
+
+assert [A : Cat]
+  (x x' y : τ (Obj A))
+  (g : τ (Hom A x' x)) ⊢
+  @comp_fapp0
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat A x y)
+    (Hom_cat A x' y)
+    (@hom_precomp_along_func A A (@id Cat_cat A) y x' x g)
+    (@hom_postcomp_func A A (@id Cat_cat A) x y y (@id A y))
+  ≡ @hom_precomp_along_func A A (@id Cat_cat A) y x' x g;
 
 assert [A : Cat]
   (x y y' : τ (Obj A))
@@ -3842,7 +4165,7 @@ assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
       (@tapp1_func A B F G X Y ϵ))
     f
   ≡ @tapp1_fapp0 A B F G W Y ϵ
-      (@hom_postcomp_fapp0 A A (@id_func A) W X Y f h);
+      (@hom_precomp_along_fapp0 A A (@id_func A) Y W X h f);
 
 // Full strict functoriality: post/left accumulation for a single functor.
 assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
@@ -3900,7 +4223,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
       (@fapp1_func A B F X Y))
     f
   ≡ @fapp1_fapp0 A B F W Y
-      (@hom_postcomp_fapp0 A A (@id_func A) W X Y f h);
+      (@hom_precomp_along_fapp0 A A (@id_func A) Y W X h f);
 
 // Raw adjacent hom-action folds. These are diagnostic conversion checks for
 // runtime accumulation rules kept in `emdash3_2.lp`, not reviewer-facing
@@ -4098,9 +4421,9 @@ assert [Z : Cat] (x y : τ (Obj Z))
 // These assert the same mathematical strength as the original benchmark:
 // fixed-x path induction computes to representable precomposition, and
 // observing that result at q computes to categorical composition. The adapted
-// final normal form is the stable postcomposition owner
-// `hom_postcomp_fapp0(id,q,p)`, which is now the canonical runtime form for
-// `q ∘ p`.
+// final normal form is the stable precomposition owner
+// `hom_precomp_along_fapp0(id,p,q)`, preserving the represented source
+// variance while still computing the composite `q ∘ p`.
 
 // From emdash3_2.lp:4452.
 assert [Z : Cat] (x y : τ (Obj Z))
@@ -4133,7 +4456,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
       z
       (@path_comp_func Z x y p))
     q
-    ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
+    ≡ @hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q;
 
 // From emdash3_2.lp:4483.
 assert [Z : Cat] (x y z : τ (Obj Z))
@@ -4160,7 +4483,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
           (@path_comp_sec Z x))
         p))
     q
-    ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
+    ≡ @hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q;
 
 // From emdash3_2.lp:4827.
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
@@ -4280,7 +4603,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
             (@id_funcd Z (@Rep_catd Z x))))
         p))
     q
-    ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
+    ≡ @hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q;
 
 // From emdash3_2.lp:4953.
 assert [K : Cat] (R : τ (Catd K))
@@ -4388,7 +4711,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
             (@id_funcd Z (@Rep_catd Z x))))
         p))
     q
-    ≡ @hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p;
+    ≡ @hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q;
 
 // From emdash3_2.lp:5874.
 assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
@@ -4674,13 +4997,14 @@ assert [A B C : Cat]
       (@Transf_cat
         A
         (Functor_cat B C)
-        (@hom_postcomp_fapp0
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4688,15 +5012,15 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            F)
-          (@Product_pair_tele_func A B))
-        (@hom_postcomp_fapp0
+            F))
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4704,8 +5028,7 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            G)
-          (@Product_pair_tele_func A B)))
+            G)))
       (@hom_precomp_along_fapp1_func
         Cat_cat
         Cat_cat
@@ -4807,13 +5130,14 @@ assert [A B C : Cat]
   ≡ @tapp0_fapp0
       A
       (Functor_cat B C)
-      (@hom_postcomp_fapp0
+      (@hom_precomp_along_fapp0
         Cat_cat
         Cat_cat
         (@id Cat_cat Cat_cat)
+        (Functor_cat B C)
         A
         (Product_cat (Functor_cat B A) (Functor_cat B B))
-        (Functor_cat B C)
+        (@Product_pair_tele_func A B)
         (@hom_postcomp_func
           Cat_cat
           Cat_cat
@@ -4821,15 +5145,15 @@ assert [A B C : Cat]
           B
           (Product_cat A B)
           C
-          F)
-        (@Product_pair_tele_func A B))
-      (@hom_postcomp_fapp0
+          F))
+      (@hom_precomp_along_fapp0
         Cat_cat
         Cat_cat
         (@id Cat_cat Cat_cat)
+        (Functor_cat B C)
         A
         (Product_cat (Functor_cat B A) (Functor_cat B B))
-        (Functor_cat B C)
+        (@Product_pair_tele_func A B)
         (@hom_postcomp_func
           Cat_cat
           Cat_cat
@@ -4837,8 +5161,7 @@ assert [A B C : Cat]
           B
           (Product_cat A B)
           C
-          G)
-        (@Product_pair_tele_func A B))
+          G))
       x
       (@hom_precomp_along_fapp1_fapp0
         Cat_cat
@@ -4906,13 +5229,14 @@ assert [A B C : Cat]
       (@fapp0
         A
         (Functor_cat B C)
-        (@hom_postcomp_fapp0
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4920,19 +5244,19 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            F)
-          (@Product_pair_tele_func A B))
+            F))
         x)
       (@fapp0
         A
         (Functor_cat B C)
-        (@hom_postcomp_fapp0
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4940,20 +5264,20 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            G)
-          (@Product_pair_tele_func A B))
+            G))
         x)
       y
       (@tapp0_fapp0
         A
         (Functor_cat B C)
-        (@hom_postcomp_fapp0
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4961,15 +5285,15 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            F)
-          (@Product_pair_tele_func A B))
-        (@hom_postcomp_fapp0
+            F))
+        (@hom_precomp_along_fapp0
           Cat_cat
           Cat_cat
           (@id Cat_cat Cat_cat)
+          (Functor_cat B C)
           A
           (Product_cat (Functor_cat B A) (Functor_cat B B))
-          (Functor_cat B C)
+          (@Product_pair_tele_func A B)
           (@hom_postcomp_func
             Cat_cat
             Cat_cat
@@ -4977,8 +5301,7 @@ assert [A B C : Cat]
             B
             (Product_cat A B)
             C
-            G)
-          (@Product_pair_tele_func A B))
+            G))
         x
         (@hom_precomp_along_fapp1_fapp0
           Cat_cat
@@ -5027,13 +5350,14 @@ assert [A B C : Cat]
         (@fapp0
           A
           (Functor_cat B C)
-          (@hom_postcomp_fapp0
+          (@hom_precomp_along_fapp0
             Cat_cat
             Cat_cat
             (@id Cat_cat Cat_cat)
+            (Functor_cat B C)
             A
             (Product_cat (Functor_cat B A) (Functor_cat B B))
-            (Functor_cat B C)
+            (@Product_pair_tele_func A B)
             (@hom_postcomp_func
               Cat_cat
               Cat_cat
@@ -5041,8 +5365,7 @@ assert [A B C : Cat]
               B
               (Product_cat A B)
               C
-              F)
-            (@Product_pair_tele_func A B))
+              F))
           x)
         y;
 
@@ -5069,13 +5392,14 @@ assert [A B C : Cat]
             A
             (Functor_cat B C)
             B
-            (@hom_postcomp_fapp0
+            (@hom_precomp_along_fapp0
               Cat_cat
               Cat_cat
               (@id Cat_cat Cat_cat)
+              (Functor_cat B C)
               A
               (Product_cat (Functor_cat B A) (Functor_cat B B))
-              (Functor_cat B C)
+              (@Product_pair_tele_func A B)
               (@hom_postcomp_func
                 Cat_cat
                 Cat_cat
@@ -5083,8 +5407,7 @@ assert [A B C : Cat]
                 B
                 (Product_cat A B)
                 C
-                F)
-              (@Product_pair_tele_func A B))))
+                F))))
         (Struct_sigma x y);
 
 // From emdash3_2.lp:6392.
@@ -5101,13 +5424,14 @@ assert [A B C : Cat]
         (@fapp0
           A
           (Functor_cat B C)
-          (@hom_postcomp_fapp0
+          (@hom_precomp_along_fapp0
             Cat_cat
             Cat_cat
             (@id Cat_cat Cat_cat)
+            (Functor_cat B C)
             A
             (Product_cat (Functor_cat B A) (Functor_cat B B))
-            (Functor_cat B C)
+            (@Product_pair_tele_func A B)
             (@hom_postcomp_func
               Cat_cat
               Cat_cat
@@ -5123,8 +5447,7 @@ assert [A B C : Cat]
                 (Product_cat (Functor_cat B C) B)
                 C
                 (@Eval_func B C)
-                (@Product_cat_fapp1_tapp0_func A (Functor_cat B C) B G)))
-            (@Product_pair_tele_func A B))
+                (@Product_cat_fapp1_tapp0_func A (Functor_cat B C) B G))))
           x)
         y;
 
@@ -6085,7 +6408,7 @@ assert [Z : Cat] (x y z : τ (Obj Z)) (p : τ (Hom Z x y))
         Z
         x
         z
-        (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p);
+        (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q);
 
 // From emdash3_2.lp:7187.
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))
@@ -6176,7 +6499,7 @@ assert [Z : Cat] (x y z : τ (Obj Z))
       Z
       x
       z
-      (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p))
+      (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q))
     (@fapp1_fapp0
       (@PathOut_cat Z y)
       (@PathOut_cat Z x)
@@ -6192,11 +6515,19 @@ assert [Z : Cat] (x y z : τ (Obj Z))
             (Hom_cat
               (Hom_cat Z x z)
               f
-              (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p)))
+              (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)))
         (@comp_fapp0 Z x y z q p)
-        (@id
+        (@comp_fapp0
           (Hom_cat Z x z)
-          (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p));
+          (@comp_fapp0 Z x y z q p)
+          (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p)
+          (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q)
+          (@id
+            (Hom_cat Z x z)
+            (@hom_precomp_along_fapp0 Z Z (@id_func Z) z x y p q))
+          (@id
+            (Hom_cat Z x z)
+            (@hom_postcomp_fapp0 Z Z (@id_func Z) x y z q p)));
 
 // From emdash3_2.lp:7280.
 assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y))

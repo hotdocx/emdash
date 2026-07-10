@@ -9,7 +9,7 @@ Supersedes: no whole report; extracts and expands the deferred `Hom_fapp0` objec
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e
 Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4
-Status: design reviewed and implementation-ready for phased probe-first execution; no implementation or probe from this plan has been promoted
+Status: completed and closed; Phases 0-7 promoted and validated
 
 ## Active Goal
 
@@ -272,23 +272,30 @@ rule @fapp0 (Op_cat $B) Cat_cat (@hom_con $A $W $B $F) $x
 The explicit category slots above are schematic. The promoted rule must apply
 the inferred-slot SOP after a focused probe.
 
-The preferred first design is to route its arrow projections directly to the
-existing precomposition owners, without matching an `Op_func` subterm:
+The capped projection routes directly to the existing precomposition owner,
+without matching an `Op_func` subterm. The promoted full projection retains
+one source-presentation owner because its literal domain is
+`Hom_cat(Op_cat B,X,Y)`:
 
 ```text
 fapp1_func(hom_con(W,F),X,Y)
-  -> hom_precomp_along_tele_func(F,W,Y,X)
+  -> hom_con_precomp_tele_func(F,W,X,Y)
+
+fapp0(hom_con_precomp_tele_func(F,W,X,Y),h)
+  -> hom_precomp_along_func(F,W,Y,X,h)
 
 fapp1_fapp0(hom_con(W,F),X,Y,h)
   -> hom_precomp_along_func(F,W,Y,X,h).
 ```
 
 The endpoint reversal `Y,X` accounts for
-`Hom_(Op B)(X,Y) = Hom_B(Y,X)`. Exact Lambdapi terms and whether an additional
-stable `hom_con_*` projection head is needed remain probe questions. The
-default recommendation is to reuse `hom_precomp_along_*`, because those heads
-already own the full telescope, capped, object, and higher-arrow projection
-ladder.
+`Hom_(Op B)(X,Y) = Hom_B(Y,X)`. The Phase 2 probe showed that a homogeneous
+whole-functor assertion cannot directly elaborate the existing
+`hom_precomp_along_tele_func` presentation even though the raw rewrite passes
+subject reduction. The minimal `hom_con_precomp_tele_func` owner preserves the
+literal opposite source category; its object and direct capped projections
+immediately reuse `hom_precomp_along_func`, so it does not duplicate the lower
+precomposition ladder.
 
 ### Paired internal-hom owners
 
@@ -800,6 +807,64 @@ This additive phase is deliberately first. It validates the settled
 `Hom_tele_func` semantic-composite pattern against an existing owner before
 the plan changes the runtime status of `hom_con` or introduces its mirror.
 
+#### Phase 1 implementation record (2026-07-09)
+
+Phase 1 is promoted and validated.
+
+- The bounded pre-edit baseline passed `make check`. Its warning inventory was
+  1,317 total: 1,152 unjoinable critical-pair reports and 165 replaceable
+  pattern-variable reports.
+- A minimal LHS with inferred outer functor endpoints failed subject reduction.
+  The promoted `tapp1_func` and `tapp1_fapp0` rules therefore retain the two
+  explicit `@hom_ A B F Y` / `@hom_ A B F X` endpoint slots. They are measured
+  subject-reduction guards and are annotated for the strict LHS audit.
+- The full rule computes through
+  `comp_fapp0 Cat_cat`, `Struct_sigma(Const_func(p),fapp1_func(F))`, and
+  `Hom_tele_func`. No new full-action stable head was needed.
+- The capped rule computes directly to `Hom_func(p,F[q])` as the required
+  projection-order join. Focused diagnostics cover the full rule, the direct
+  cap, explicit owner-first evaluation of the semantic composite, the generic
+  projection-first path, and the final generic point projection to
+  `Hom_fapp0(p,F[q],h)`.
+- The promoted active kernel and diagnostics pass bounded `make check`; the
+  strict rule-LHS audit reports zero unreviewed clauses.
+- The warning-enabled full-file probe measured 1,325 total warnings: 1,160
+  unjoinable critical-pair reports and the unchanged 165 replaceable-pattern
+  reports. The +8 critical-pair delta is localized to the new `tapp1_*`
+  branches interacting with the generic projection, identity, and naturality
+  ladders; the probe terminates promptly and all intended typed nondegenerate
+  paths compute.
+
+The probe exposed one important dependency which was implicit in the original
+Phase 1 wording. At an identity base arrow, the generic rule
+
+```text
+tapp1_fapp0(eta,id_b) -> tapp0_fapp0(eta,b)
+```
+
+reaches the existing one-slot `hom_precomp_along_func` presentation, while the
+new direct branch reaches `Hom_func(p,id)`. These functors are mathematically
+the same but are not currently runtime-convertible. A candidate degeneration
+
+```text
+Hom_func(p,id) -> hom_precomp_along_func(p)
+```
+
+typechecked and closed that isolated typed comparison, but increased the
+warning inventory to 1,330 by creating fresh overlaps with
+`fapp0(Hom_func) -> Hom_fapp0` and the legacy object-action normal form. It was
+not promoted. Orienting the one-slot owner toward `Hom_func` would likewise be
+a broader normal-form migration and cannot be done coherently while the
+identity-functor precomposition-to-postcomposition object rule remains.
+
+Accordingly, Phase 1's arbitrary-arrow owner-first and projection-first join
+is complete, while its identity degeneration is now an explicit dependency of
+Phases 5 and 6. Those phases must settle the one-slot/two-endpoint degeneration
+at functor and object levels together. This is not a reason to weaken the new
+runtime action to a proof-time comparison, but it must remain a tracked
+temporary overlap family during the staged migration. The Phase 3 mirror must
+apply the same identity-arrow audit.
+
 ### Phase 2: primitive contravariant represented family
 
 1. In a temporary full-file probe, remove the definitional body of `hom_con`
@@ -810,6 +875,40 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 4. Add focused object, functor, and capped-action assertions.
 5. Classify whether a distinct `hom_con_*` stable projection head is actually
    required. Do not add one speculatively.
+
+#### Phase 2 implementation record (2026-07-09)
+
+Phase 2 is promoted and validated.
+
+- `hom_con` is now an injective primitive with direct object computation to
+  `Hom_cat A (F[x]) W`; it no longer unfolds through `hom_`, `Op_cat`, and
+  `Op_func`.
+- All three projection LHSs infer their source category. This is required for
+  the active `FibCov_target_catd` instance where `B = Op_cat K` and the literal
+  source `Op_cat(Op_cat K)` may normalize before projection.
+- The full arrow projection required one new stable source-presentation owner,
+  `hom_con_precomp_tele_func`. Its domain remains literally
+  `Hom_cat(Op_cat B,X,Y)`, and its object projection reaches
+  `hom_precomp_along_func B A F W Y X`. The direct capped projection of
+  `hom_con` reaches the same existing precomposition owner. No separate capped
+  or point owner was added.
+- Removing the old semantic body exposed two genuine whole-family beta laws
+  used by existing code: a constant diagram gives
+  `Const_catd(Op B,Hom_A(u,W))`, and any contravariant representable into
+  `Terminal_cat` gives the constant terminal family. These narrow rules restore
+  the existing constant dependent-hom and terminal-source section pipelines;
+  no broad alias-compatibility rule was needed.
+- Focused diagnostics cover object, full owner, full-owner evaluation, direct
+  cap, point action, constant-diagram degeneration, and terminal degeneration.
+  The complete pre-existing diagnostic suite also passes.
+- Bounded `make check` and the strict rule-LHS audit pass. The post-Phase 2
+  warning inventory is 1,341 total: 1,176 unjoinable critical-pair reports and
+  the unchanged 165 replaceable-pattern reports. Relative to the Phase 1
+  baseline this is a +16 critical-pair delta, localized to primitive
+  `hom_con` projection identity/functoriality paths, generic projections of
+  the new full owner, and the two whole-family degenerations. Checks terminate
+  promptly; the later opposite-duality and identity-variance phases are
+  expected to retarget part of this overlap family.
 
 ### Phase 3: add the mirror hom_con_int owner
 
@@ -828,6 +927,46 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 7. Reconcile the name with the distinct future `hom_con_int_func(G)` package
    documented by the profunctor plans.
 
+#### Phase 3 implementation record (2026-07-09)
+
+Phase 3 is promoted and validated.
+
+- Added primitive `hom_con_int(F) : A -> Catd_cat(Op_cat B)` with object
+  projection `hom_con_int(F)[W] -> hom_con(W,F)`.
+- Added `hom_con_int_postcomp_tele_func` and
+  `hom_con_int_postcomp_func`, with the complete generic `fapp1_func`,
+  `fapp1_fapp0`, and telescope-evaluation ladder. No additional
+  source-presentation intermediary was needed at this layer.
+- The component at `b` computes to ordinary
+  `hom_postcomp_func(id_A,F[b],f)`.
+- The full off-diagonal action computes through
+  `comp_fapp0 Cat_cat`, the pair `(fapp1_func(F,c,b),Const_func(f))`, and
+  `Hom_tele_func(A,F[b],F[c],W,X)`. The direct cap computes to
+  `Hom_func(F[q],f)`, and generic `fapp0(Hom_func)` reaches
+  `Hom_fapp0(F[q],f,h)`.
+- Focused diagnostics cover owner declarations, component action, full action,
+  direct cap, explicit owner-first evaluation, generic projection-first
+  evaluation, and point action. The two off-diagonal LHSs pass subject
+  reduction with all family endpoints inferred, so no new LHS-audit exception
+  was introduced.
+- Bounded `make check`, catalog generation, and the strict rule-LHS audit pass.
+  The post-Phase 3 warning inventory is 1,356 total: 1,191 unjoinable
+  critical-pair reports and the unchanged 165 replaceable-pattern reports.
+  This is a +15 critical-pair delta over Phase 2, concentrated in the expected
+  new owner identity/functoriality, generic projection, component, and
+  off-diagonal naturality interactions. The full-file warning probe and active
+  check terminate promptly.
+
+As on the Phase 1 side, identity arrows expose a temporary stable-owner versus
+generic-identity overlap. The coordinated Phase 5/6 degeneration cleanup must
+audit both `Hom_func(p,id)` and its mirror `Hom_func(id,f)`; no isolated
+identity fold is promoted during Phase 3.
+
+The short name `hom_con_int` denotes the base-level target-internalized hom
+classifier added here. It remains distinct from the future
+`hom_con_int_func(G)` package discussed in the profunctor/weighted-limit plans,
+which varies an entire endpoint functor.
+
 ### Phase 4: opposite-duality runtime demotion
 
 1. Probe removal of the `Op_func`-keyed postcomposition-to-precomposition
@@ -843,6 +982,43 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 6. Promote this phase separately if it is coherent; do not combine an
    unresolved opposite-duality migration with the final object folds.
 
+#### Phase 4 implementation record (2026-07-09)
+
+Phase 4 is promoted and validated.
+
+- Deleted all eight runtime rewrites whose postcomposition LHS discriminated
+  on an `Op_func` argument: telescope, capped functor, object action, capped
+  higher action, telescope higher action, and transfor rungs.
+- The bridge-free kernel typechecked immediately, confirming that the
+  primitive `hom_con` / `hom_con_int` ownership introduced in Phases 2 and 3
+  removed every runtime dependency on this semantic shortcut.
+- Added generic constrained `unif_rule`s only for the three actively consumed
+  rungs: `hom_postcomp_tele_func`, `hom_postcomp_func`, and
+  `hom_postcomp_fapp0`. Each compares two rigid semantic heads and reconstructs
+  the opposite categories and `Op_func` relationship in side equations; no
+  unification rule uses `Op_func` as a runtime discriminator.
+- Converted the corresponding direct and projected compatibility diagnostics
+  from conversion assertions to typed `eq_refl` proofs. The checks cover the
+  telescope head, capped functor head, object head, projection through
+  `fapp0`, and an already-double-op-normalized functor presentation.
+- No kernel consumer uses the five higher bridge rungs. A direct higher-cell
+  `eq_refl` probe was blocked by dependent endpoint types before the outer
+  unification rule could solve the comparison. Those speculative unification
+  rules and their historical compatibility-only checks were therefore not
+  promoted.
+- Removed the historical raw `postcomp(Op hom_int)` helper. Its desired target
+  required transitivity from the generic object bridge through the separate
+  identity precomposition projection to `hom_int_precomp_func`, while
+  unification is not transitive. The primitive `hom_int_precomp_func` is now
+  the public runtime action, so no compound special-case bridge is justified.
+- Retargeted the old opposite-encoded `hom_` projection diagnostic to the new
+  primitive `hom_con` surface.
+- Bounded `make check`, catalog generation, and the strict LHS audit pass. The
+  warning inventory falls from 1,356 to 1,296 total: 1,131 unjoinable
+  critical-pair reports and the unchanged 165 replaceable-pattern reports.
+  Removing the runtime bridge ladder therefore eliminates 60 critical-pair
+  reports while preserving the required typed proof-time compatibility.
+
 ### Phase 5: identity-family variance separation
 
 1. Probe deletion of the runtime rule
@@ -856,6 +1032,46 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 5. Confirm that the active kernel and checks terminate before introducing the
    `Hom_fapp0` folds.
 
+#### Phase 5 implementation record (2026-07-10)
+
+Phase 5 is promoted and validated.
+
+- Deleted the runtime rule which rewrote
+  `hom_precomp_along_fapp0(id,h,g)` to
+  `hom_postcomp_fapp0(id,g,h)`. Identity-family precomposition now retains its
+  contravariant stable head at runtime.
+- Added two direct proof-time bridges. The first relates a general
+  postcomposition endpoint to the corresponding identity-family
+  precomposition endpoint after applying the indexing functor. It is required
+  by the component type of `hom_postcomp_tele_fapp1_fapp0`. The second relates
+  the already-normalized identity-family pre/post heads. Both are needed
+  because unification is head-sensitive and not transitive; neither changes
+  runtime reduction.
+- Retargeted the strict representable rules for `fdapp1_int_cell` and
+  `fdapp1_int_hom_fapp0` to identities at
+  `hom_precomp_along_fapp0(id,p,q)`.
+- Classified and retargeted diagnostics which had encoded the old normal
+  form: strict pre/right naturality and functoriality, the path-composition and
+  path-induction transitivity benchmark, `PathOut` source transport, and the
+  precomposition endpoint layer of semantic curry. Genuinely covariant inner
+  postcomposition actions, including evaluation and target-side accumulation,
+  remain unchanged.
+- Added a typed `eq_refl` diagnostic for identity-family pre/post proof-time
+  compatibility, separate from the runtime projection assertion which now
+  expects the precomposition owner.
+- One staged reduction artifact is now explicit in the `PathOut` reflexive
+  arrow coherence check: its fibre proof is temporarily a composition of an
+  identity at the old postcomposition endpoint with an identity at the new
+  precomposition endpoint. This is not a new semantic normal form. It is a
+  concrete Phase 6 join target for the one-slot/two-endpoint identity
+  degeneration; do not restore the deleted cross-variance runtime rule to hide
+  it.
+- Bounded `make check`, the strict LHS audit, catalog generation, and the
+  warning-enabled kernel check pass. The warning inventory is now 1,289 total:
+  1,124 unjoinable critical-pair reports and the unchanged 165 replaceable
+  pattern-variable reports. This is seven fewer critical-pair reports than the
+  post-Phase 4 baseline.
+
 ### Phase 6: Hom_fapp0 object-action completion
 
 1. Probe the two intended runtime folds in an owning-position temporary copy.
@@ -866,6 +1082,58 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 5. Promote only when `Hom_fapp0` is the actual runtime normal form in both
    assertions.
 
+#### Phase 6 implementation record (2026-07-10)
+
+Phase 6 is promoted and validated.
+
+- Added both direct pointwise folds:
+
+  ```text
+  hom_postcomp_fapp0(f,hom_precomp_along_fapp0(g,h))
+    -> Hom_fapp0(g,f,h)
+
+  hom_precomp_along_fapp0(g,hom_postcomp_fapp0(f,h))
+    -> Hom_fapp0(g,f,h).
+  ```
+
+  Directly nested point actions cannot reconstruct the already-promoted
+  functor-level composition folds, so these object rules are genuine missing
+  projection joins rather than duplicates.
+- Settled the Phase 1/3 identity dependency by adding the coherent inactive
+  endpoint package:
+
+  ```text
+  Hom_func(id,f)     -> hom_postcomp_func(f)
+  Hom_func(g,id)     -> hom_precomp_along_func(g)
+  Hom_fapp0(id,f,h)  -> hom_postcomp_fapp0(f,h)
+  Hom_fapp0(g,id,h)  -> hom_precomp_along_fapp0(g,h).
+  ```
+
+  This does not identify covariance and contravariance. It removes an
+  identity endpoint from the simultaneous two-endpoint owner and returns the
+  surviving one-slot owner.
+- Added runtime diagnostics for both object evaluation orders, all four
+  identity degenerations, and the object/functor identity-first versus
+  fold-first joins. The existing typed `eq_refl` checks continue to exercise
+  the proof-time raw-composition readings separately.
+- Quiet full-kernel and diagnostic probes, promoted `make check`, catalog
+  generation, and the strict LHS audit pass. The explicit tests establish that
+  both nondegenerate folds reach `Hom_fapp0`, while identity cases reach the
+  corresponding one-slot owner regardless of reduction order.
+- The warning inventory is now 1,341 total: 1,176 unjoinable critical-pair
+  reports and the unchanged 165 replaceable pattern-variable reports. This is
+  a +52 critical-pair delta over Phase 5: +31 after the two object folds and a
+  further +21 after the four inactive-endpoint rules. The reported family
+  includes identity, existing pre/post accumulation, DefIso cancellation, and
+  deeper nested associativity paths. The concrete owner and identity paths
+  required by this phase are checked to join; broader arbitrary nesting is not
+  closed by mechanically generating an associativity theory for `Hom_fapp0`.
+- The temporary composite-of-identities exposed by the Phase 5 `PathOut`
+  reflexive-arrow coherence diagnostic is unaffected by the `Hom_*` rules: its
+  normal form contains no `Hom_func` or `Hom_fapp0` head. It is therefore
+  reclassified as a separate `PathOut`/Sigma transport coherence follow-up,
+  not a blocker or an appropriate target for a Hom-specific bridge.
+
 ### Phase 7: validation and documentation
 
 1. Run `EMDASH_TYPECHECK_TIMEOUT=60s make check`.
@@ -874,6 +1142,36 @@ the plan changes the runtime status of `hom_con` or introduces its mirror.
 4. Run `make ci` and `make health` after promotion.
 5. Update this report, the parent subplan, and the foundations/SOP only where
    the promoted architecture changes current guidance.
+
+#### Phase 7 implementation record (2026-07-10)
+
+Phase 7 is complete.
+
+- Retargeted the reviewer milestones
+  `examples/path_induction_transitivity.lp` and
+  `examples/products_eval_curry.lp` from the former identity-family
+  postcomposition spelling to the promoted precomposition owner. Their
+  genuinely covariant inner actions remain postcomposition.
+- Updated `EMDASH_FOUNDATIONS.md` with the primitive covariant/contravariant
+  owner split, paired `hom_int` / `hom_con_int` internalizations, combined
+  `Hom_*` action, identity-endpoint behavior, and current generic
+  `comp_prod_fapp1_*` Cat-horizontal-action owner.
+- Updated the current SOP/status report, the parent product/Unit-prof subplan,
+  and `reports/INDEX.md`; the delegated object-action task is now closed.
+- Final `make check`, `make examples`, strict LHS audit, catalog freshness,
+  and `git diff --check` pass. `make ci` passes all eight Lambdapi targets,
+  Python and Infinity Codex tests, shell syntax, active-reference and report
+  header lints, strict LHS audit, and strict catalog freshness.
+- `make health` was refreshed on 2026-07-10. The active kernel, diagnostics,
+  and all six reviewer examples report exit 0.
+- Final warning inventory remains 1,341 total: 1,176 unjoinable critical-pair
+  reports and 165 replaceable pattern-variable reports. The Phase 6 delta and
+  its consumer-driven deferred associativity boundary are recorded above.
+
+The plan's original intended result is achieved: runtime preserves hom
+variance, proof-time bridges own semantic duality, both internalized endpoint
+directions expose their off-diagonal action, and both direct pointwise
+evaluation orders compute through the general `Hom_fapp0` owner.
 
 ## Feasibility Assessment
 
@@ -986,8 +1284,7 @@ result before promotion:
 
 ## Acceptance Criteria
 
-The architecture is ready to begin implementation. Before the corresponding
-phases may be promoted, the following gates must be satisfied:
+The architecture passed the following promotion gates during implementation:
 
 1. focused probes confirm the planned primitive status and direct projection
    ladder of `hom_con`;
@@ -1026,10 +1323,13 @@ The implementation is complete when:
 7. active checks, catalog, CI, health, and the warning inventory pass with any
    warning delta classified in this report.
 
-## Final Pre-Implementation Review
+## Final Architecture Review
 
-Review conclusion 2026-07-09: the plan is globally coherent and ready to
-begin Phase 0 followed by the additive Phase 1 probe slice.
+Review conclusion updated 2026-07-10: the owner hierarchy remains globally
+coherent. Phases 0 through 6 are promoted; Phase 7 validation and current
+guidance updates are active. The promoted variance separation and two-endpoint
+completion join the identity one-slot/two-endpoint degeneration without
+restoring runtime conversion between precomposition and postcomposition.
 
 - The covariant/contravariant owner square has distinct, well-motivated types;
   `hom_con_int` is not a duplicate of `hom_int`.
@@ -1057,14 +1357,21 @@ those questions and have independent promotion gates.
 
 ## Side-Task Ledger
 
-- Settled design, Phase 1 implementation task: promote the specified
-  `tapp1_func` / `tapp1_fapp0` projections of `hom_int_precomp_func` through
-  the `Hom_*` owners.
-- Settled design, Phase 2 implementation task: promote primitive `hom_con`
-  with direct projections to the existing `hom_precomp_along_*` owners unless
-  a focused source-presentation probe requires one intermediary.
-- Settled design, Phase 3 implementation task: promote `hom_con_int` and the
-  complete mirror `hom_con_int_postcomp_*` projection ladder.
+- Completed 2026-07-09, Phase 1: promoted the specified `tapp1_func` /
+  `tapp1_fapp0` projections of `hom_int_precomp_func` through the `Hom_*`
+  owners, with full/capped/point diagnostics and bounded validation.
+- Tracked Phase 5/6 dependency discovered by Phase 1: settle the identity
+  degeneration `Hom_func(p,id)` versus `hom_precomp_along_func(p)` together
+  with the object-level variance boundary. Do not promote the isolated
+  `Hom_func -> precomp` candidate, which creates additional projection
+  overlaps under the current legacy object normal form.
+- Completed 2026-07-09, Phase 2: promoted primitive `hom_con`, the minimal
+  `hom_con_precomp_tele_func` source-presentation intermediary, direct capped
+  projection to `hom_precomp_along_func`, and the required constant/terminal
+  whole-family degenerations.
+- Completed 2026-07-09, Phase 3: promoted `hom_con_int` and the complete mirror
+  `hom_con_int_postcomp_*` component/full/capped projection ladder through the
+  `Hom_*` owners.
 - Settled design clarification: `Unit_prof` is the existing uncurried hom
   bifunctor; no separate `Hom_bifunctor`, `Hom_`, or `Hom_con_` symbol is
   planned.
@@ -1077,14 +1384,24 @@ those questions and have independent promotion gates.
   `fapp1_func` / `fapp1_fapp0` projections of `Hom_tele_func`, the next rung
   after the current `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0`
   prototype ladder.
-- Settled policy, Phase 4 implementation task: inventory the old `Op_func`
-  runtime bridge ladder and promote the minimum two-rigid-head,
-  constraint-based proof-time replacement set required by typed consumers.
-- Settled policy, Phase 5 implementation task: classify and retarget downstream
-  consumers of identity-functor precomposition-to-postcomposition
-  normalization.
-- Phase 6 implementation task after those gates: probe and promote each
-  required `Hom_fapp0` object fold.
+- Completed 2026-07-09, Phase 4: deleted all eight `Op_func` runtime bridges,
+  promoted the minimum three two-rigid-head constrained proof-time bridges,
+  and removed/retargeted compatibility-only diagnostics which depended on
+  runtime variance collapse.
+- Completed 2026-07-10, Phase 5: removed identity-family runtime variance
+  collapse, promoted the two required direct proof-time endpoint bridges, and
+  retargeted contravariant strictness, path, and curry diagnostics.
+- Completed 2026-07-10, Phase 6: promoted both pointwise `Hom_fapp0` folds and
+  the four coherent inactive-endpoint reductions for `Hom_func` /
+  `Hom_fapp0`, with explicit nondegenerate and identity reduction-order
+  diagnostics.
+- Deferred as a separate path-transport coherence task: replace the temporary
+  `PathOut` composite of proof-time-compatible identities by a semantic
+  `PathOut`/Sigma coherence owner. The normalized term contains no `Hom_*`
+  head, so a Hom-specific rewrite would be misplaced.
+- Deferred until a concrete consumer requires it: broader accumulation laws
+  for arbitrarily nested `Hom_fapp0` with additional pre/post actions. Do not
+  generate them mechanically from the warning inventory.
 - Conditional future naming cleanup: consider whether
   `hom_int_precomp_tele_func` should be renamed
   `hom_int_precomp_along_tele_func`; this is not required by the variance
