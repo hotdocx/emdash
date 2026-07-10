@@ -218,7 +218,8 @@ with matching point-action rules for `Hom_fapp0`. `Unit_prof(A)` is the
 uncurried product form of this same hom bifunctor.
 
 Ordinary composition identity eliminates an identity arrow independently of
-the chosen endpoint presentation. Its kernel rules infer the non-result
+the chosen external endpoint presentation. Its kernel rules retain the shared
+middle object as the composition-interface guard and infer the outer
 endpoints, so rewrite matching may use the proof-time compatibility between
 the covariant and contravariant presentations above. In the PathOut/Sigma
 benchmark this reduces the composite fibre proof to one identity; the two

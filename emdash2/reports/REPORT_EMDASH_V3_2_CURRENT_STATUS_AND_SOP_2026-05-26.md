@@ -211,21 +211,22 @@ The warning-enabled inventory after the rigid-Hom migration is 1,297 warnings:
 1,132 unjoinable critical-pair reports and 165 replaceable-pattern reports.
 Focused typed checks cover both factorizations and endpoint degenerations;
 ordinary conversion checks cover the rigid owner's own identity and
-composition. A post-migration follow-up promotes inferred endpoint slots on
-both generic composition identity rules. This intentionally lets identity
-elimination match across proof-time-compatible endpoint presentations; it is
-not a mechanical `_` cleanup. The combined rules can select two runtime
-identity presentations, but typed core and full PathOut/Sigma checks join them
-by `eq_refl` through the pre/post unification bridge. Proof-time joinability is
-the selected criterion for this generic identity overlap. Repeated endpoint
-variables remain appropriate elsewhere when they are genuine constructor or
-subject-reduction guards. The warning-enabled inventory becomes 1,306 total:
-1,143 critical-pair and 163 replaceable-pattern reports. Candidate A remains a
-viable future stronger-normalization design only together with its complete
-`Hom_*` accumulation and confluence theory. The inferred matching boundary
-increases the eight-target CI typecheck total from approximately 10.8 to 25.6
-seconds; current per-target health timings remain below four seconds and the
-60-second timeout.
+composition. A post-migration follow-up promotes middle-constrained generic
+composition identity rules. The shared middle object remains the intentional
+cut-interface guard; outer endpoints are inferred so identity elimination may
+match proof-time-compatible presentations. This is not a mechanical `_`
+cleanup. The rules can select two runtime identity presentations, but typed
+core and full PathOut/Sigma checks join them by `eq_refl` through the pre/post
+unification bridge. Proof-time joinability is the selected criterion for this
+generic identity overlap. Repeated endpoint variables remain appropriate when
+they are genuine interfaces, constructor discriminators, or subject-reduction
+guards. The warning-enabled inventory is 1,303 total: 1,140 critical-pair and
+163 replaceable-pattern reports. Candidate A remains a viable future
+stronger-normalization design only together with its complete `Hom_*`
+accumulation and confluence theory. Eight-target CI typechecking takes 12.237
+seconds, compared with 25.604 for the rejected fully inferred pair and
+approximately 10.787 for the rigid-Hom baseline; current per-target health
+timings are 1.361-1.658 seconds.
 
 `Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
 precomposition heads. Their object/arrow projections, identity and nested

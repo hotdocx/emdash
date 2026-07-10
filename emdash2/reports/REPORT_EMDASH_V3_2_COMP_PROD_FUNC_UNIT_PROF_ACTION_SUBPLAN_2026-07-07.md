@@ -1456,20 +1456,21 @@ Updated order after the 2026-07-08 `Hom_*` correction:
   factorizations, and endpoint degenerations are direct proof-time bridges,
   while `Hom_func` / `Hom_fapp0` retain focused runtime identity and
   composition joins. Global inferred-endpoint composition identity rules were
-  not promoted inside Phase 8, but a completed follow-up now promotes both
-  rules. The competing PathOut/Sigma runtime identities join by typed
-  `eq_refl`; generic identity matching intentionally uses that proof-time
-  endpoint compatibility. Candidate A remains a future option only as a
-  complete `Hom_*` accumulation/confluence redesign.
+  not promoted inside Phase 8, but a completed follow-up now promotes the
+  middle-constrained pair. The competing PathOut/Sigma runtime identities join
+  by typed `eq_refl`; generic identity matching intentionally uses proof-time
+  endpoint compatibility while retaining the shared cut interface as a guard.
+  Candidate A remains a future option only as a complete `Hom_*`
+  accumulation/confluence redesign.
 - Phase 8 delegated validation 2026-07-10: `make check`, all six reviewer
   examples, strict LHS audit, catalog freshness, `make ci`, and `make health`
   pass. The final warning inventory is 1,297 total: 1,132 unjoinable
   critical-pair reports and 165 replaceable-pattern reports.
-- Post-Phase-8 inferred-identity validation 2026-07-10: the same gates pass;
-  the current warning inventory is 1,306 total (1,143 critical-pair and 163
-  replaceable-pattern reports). The eight-target typecheck total increases
-  from approximately 10.8 to 25.6 seconds but remains bounded well below the
-  configured per-target timeout.
+- Post-Phase-8 middle-constrained identity validation 2026-07-10: the same
+  gates pass; the current warning inventory is 1,303 total (1,140 critical-pair
+  and 163 replaceable-pattern reports). The eight-target typecheck total is
+  12.237 seconds, versus 25.604 for full inference and approximately 10.787 for
+  the rigid-Hom baseline.
 - Validation 2026-07-08: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
   after the `Hom_*` correction; `make catalog` regenerates the check catalog
   without unclassified checks; `make ci` passes, including strict LHS audit;

@@ -65,7 +65,7 @@ decisions.
   rigid-`Hom` migration. Direct `Unit_prof` action computes through `Hom_*`,
   independently factored pre/post cuts and endpoint degenerations are related
   by proof-time bridges, and focused `Hom_*` identity/composition joins retain
-  functorial computation. A post-Phase-8 follow-up promotes inferred-endpoint
+  functorial computation. A post-Phase-8 follow-up promotes middle-constrained
   generic identity rules and records typed `eq_refl` joinability of the
   competing PathOut/Sigma runtime identities. Candidate A remains documented
   as a future complete accumulation/confluence redesign.
