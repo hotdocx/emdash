@@ -1,26 +1,332 @@
 # EMDASH v3.2 Hom Variance Separation And Hom_fapp0 Cleanup Plan
 
 Date: 2026-07-09
-Last reviewed: 2026-07-09
+Last reviewed: 2026-07-10
 Plan-ID: EMDASH-V3-2-HOM-VARIANCE-SEPARATION-HOM-FAPP0-2026-07-09
 Depends-On: EMDASH-V3-2-COMP-PROD-FUNC-UNIT-PROF-ACTION-2026-07-07; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Parent-Plan: REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-07.md
 Supersedes: no whole report; extracts and expands the deferred `Hom_fapp0` object-action cleanup from the parent subplan
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e
-Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4
-Status: completed and closed; Phases 0-7 promoted and validated
+Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4d18-fa70-7ff3-a4d3-1d3bbbecd2e9
+Status: Phases 0-7 promoted and validated; reopened for active Phase 8 rigid-Hom and inferred-identity design probes
 
-## Active Goal
+## Active Goal: Phase 8 Runtime-Hom Versus Rigid-Hom Decision
 
-Complete the deferred object-level action of the general `Hom_cat`
+The variance-separation migration and the first `Hom_fapp0` implementation
+remain completed and validated. The report is reopened for a bounded follow-up
+probe phase before treating the currently promoted runtime orientation as the
+final architecture.
+
+The active question is whether the hom-bifunctor action should be the runtime
+normal form of factored pre/postcomposition cuts, or whether the primitive
+`Unit_prof` projection should remain rigid and those factorizations should be
+related only during proof-time unification.
+
+The current projection ladder is:
+
+```text
+fapp1_func(Unit_prof)  -> Hom_tele_func
+fapp1_fapp0(Unit_prof) -> Hom_func
+fapp0(Hom_func,h)      -> Hom_fapp0.
+```
+
+Thus `Hom_tele_func` is the full stable `fapp1` owner of `Unit_prof`, while
+`Hom_func` and `Hom_fapp0` are its capped and point projections. Under every
+candidate architecture, direct projection from `Unit_prof` continues to
+compute through this ladder. The open decision concerns the relationship
+between these primitive-action heads and independently constructed
+`hom_postcomp_*` / `hom_precomp_along_*` cuts.
+
+No active kernel rule is to be changed until the probe matrix below has
+separated runtime conversion, proof-time unification, rewrite matching, subject
+reduction, and warning behavior.
+
+### Candidate A: Runtime mixed-action owner
+
+This is the currently promoted Phase 6 architecture:
+
+```text
+post(f,pre(g,h)) -> Hom(g,f,h)
+pre(g,post(f,h)) -> Hom(g,f,h)
+
+Hom(id,f,h) -> post(f,h)
+Hom(g,id,h) -> pre(g,h).
+
+Hom_func(id,f) -> post_func(f)
+Hom_func(g,id) -> pre_func(g)
+Hom(g,f,id)    -> post(f,g).
+```
+
+Here `Hom_fapp0(g,f,h)` is the runtime owner of a genuinely two-sided cut,
+with mathematical reading:
+
+```text
+Hom_fapp0(g,f,h) = f o h o g.
+```
+
+An identity endpoint is treated as an inactive cut and eliminated back to the
+remaining one-slot owner. This joins the two current identity-first and
+mixed-fold-first runtime paths, but it makes `Hom_func` / `Hom_fapp0`
+reducible on identity endpoint inputs.
+
+If Candidate A remains selected, its controlled accumulation theory must be
+completed rather than treating `Hom_fapp0` as an opaque terminal result. For:
+
+```text
+g : x' -> x
+h : x  -> y
+f : y  -> y'
+q : y' -> y''
+k : x'' -> x',
+```
+
+the canonical outer laws are expected to have the forms:
+
+```text
+post(q,Hom(g,f,h)) -> Hom(g,q o f,h)
+pre(k,Hom(g,f,h))  -> Hom(g o k,f,h)
+
+q o Hom(g,f,h) o k -> Hom(g o k,q o f,h).
+```
+
+The functor-level analogue should primarily be inherited from
+`Hom_tele_func`. A direct stable-head rule such as a composition of two
+`Hom_func` values is justified only when projection to `Hom_func` has erased
+the literal generic functor-action pattern before generic functoriality can
+fire. Such rules are projection-order joins, not a second independent theory
+of functoriality.
+
+Candidate A gives the strongest Došen-style runtime cut elimination, but it
+also has the largest accumulation and confluence obligation. The current
+warning delta and arbitrary-nesting cases show that this obligation is not yet
+globally closed.
+
+### Candidate B: Rigid Hom action with proof-time comparisons
+
+In this candidate, `Hom_tele_func`, `Hom_func`, and `Hom_fapp0` remain runtime
+heads produced by `Unit_prof`, but they do not runtime-reduce to one-slot
+pre/post presentations. Independently constructed factorizations also retain
+their own runtime heads. Their mathematical equality is represented by
+narrow, rigid-head unification rules at each consumed projection rung:
+
+```text
+unif_rule post_func o pre_func == Hom_func
+unif_rule pre_func o post_func == Hom_func
+
+unif_rule post(f,pre(g,h)) == Hom(g,f,h)
+unif_rule pre(g,post(f,h)) == Hom(g,f,h)
+
+unif_rule Hom(id,f,h) == post(f,h)
+unif_rule Hom(g,id,h) == pre(g,h)
+unif_rule Hom(g,f,id) == post(f,g)
+
+unif_rule Hom_func(id,f) == post_func(f)
+unif_rule Hom_func(g,id) == pre_func(g).
+```
+
+These formulas are schematic. Exact promoted rules must use the full typed
+heads, inferred-slot hygiene, and only the bridge rungs demanded by typed
+consumers. Unification is not assumed to be transitive.
+
+`Hom_*` remains a computational functor action in this design. Rigid means
+that it is not unfolded into pre/post factorizations; it does not mean that
+its own identity and composition laws are absent. Stable-head joins may still
+be required, schematically:
+
+```text
+Hom(id,id) -> id
+Hom(g2,f2) o Hom(g1,f1)
+  -> Hom(composite-source-action,composite-target-action).
+```
+
+The exact source-action order must be derived from the product/opposite
+endpoint types in a focused probe.
+
+Candidate B preserves the literal provenance of the primitive `Unit_prof`
+action and should reduce runtime overlap. Its costs are weaker cut
+elimination for factored expressions, additional direct proof-time bridges,
+and possible elaboration failures because `unif_rule` is experimental,
+head-sensitive, and non-transitive. Ordinary conversion assertions will not
+by themselves exercise these comparisons; typed `eq_refl` consumers are
+required.
+
+### Candidate C: Runtime mixed fold with proof-time identity degeneration
+
+The intermediate candidate retains:
+
+```text
+post(pre) -> Hom
+pre(post) -> Hom
+```
+
+but replaces:
+
+```text
+Hom(id,f,h) -> post(f,h)
+Hom(g,id,h) -> pre(g,h)
+
+Hom_func(id,f) -> post_func(f)
+Hom_func(g,id) -> pre_func(g)
+```
+
+by proof-time unification rules. The separate middle-arrow degeneration
+`Hom(g,f,id) -> post(f,g)` must also be tested as runtime versus proof-time,
+but it is not the source of the endpoint overlap below. Abstractly this
+exposes an identity overlap:
+
+```text
+post(f,pre(id,h))
+  -> post(f,h)       // one-slot identity first
+  -> Hom(id,f,h)     // mixed fold first.
+```
+
+This candidate must not be rejected solely from that schematic picture. The
+existing rigid-head unification bridge between identity-family precomposition
+and postcomposition may allow inferred rewrite-LHS endpoints to match the two
+presentations interchangeably. Whether that is sufficient for runtime joins
+is a Lambdapi behavior question and is part of the active probe matrix.
+
+### PathOut and inferred identity matching
+
+The current PathOut/Sigma diagnostic contains three presentations of the same
+composite arrow:
+
+```text
+raw(q,p)  = comp_fapp0(q,p)
+post(q,p) = hom_postcomp_fapp0(q,p)
+pre(p,q)  = hom_precomp_along_fapp0(p,q).
+```
+
+They are proof-time compatible, while runtime intentionally keeps the
+one-slot variance owners distinct. The current Sigma fibre proof normalizes
+schematically to:
+
+```text
+id_at_pre(p,q) o id_at_post(q,p)
+```
+
+instead of one identity. The present strict generic identity rules repeat the
+literal middle endpoint on their LHSs:
+
+```text
+comp_A[Y,Y,Z](g,id_Y) -> g
+comp_A[X,Z,Z](id_Z,f) -> f.
+```
+
+A possible more inference-friendly spelling is:
+
+```text
+rule @comp_fapp0 $A _ _ $Z $g (@id $A $Y) -> $g;
+rule @comp_fapp0 $A $X _ _ (@id $A $Z) $f -> $f;
+```
+
+It is not yet known whether Lambdapi reconstructs the omitted slots as
+literally equal, making these equivalent to the current rules, or leaves enough
+endpoint flexibility for the existing post/pre unification bridge to
+participate during rewrite matching. It is also not known whether applying
+both inferred identity laws to `id_pre o id_post` yields a common runtime
+normal form or merely two proof-time-compatible identity heads.
+
+This question must be probed rather than settled abstractly. A successful
+candidate must preserve subject reduction and must not silently turn every
+proof-time endpoint comparison in the kernel into a global runtime transport
+erasure.
+
+### Mechanisms that must be tested separately
+
+The probes must not use these mechanisms interchangeably:
+
+```text
+runtime conversion       assert t == u
+proof-time unification   eq_refl t : t = u
+rewrite matching         matching a rule LHS against t
+```
+
+In particular, an ordinary conversion assertion does not test a unification
+rule. Conversely, a successful typed `eq_refl` comparison does not prove that
+the two terms have one runtime normal form. Rewrite matching with inferred
+endpoint slots may have behavior not predicted by either isolated check.
+
+### Phase 8 probe matrix
+
+1. Preserve the current active source as the Candidate A baseline. Record a
+   bounded quiet check, the warning inventory, the relevant runtime normal
+   forms, and the existing PathOut composite-of-identities result.
+2. In a focused temporary full-file copy, test the existing post/pre bridge on
+   identities with both an ordinary conversion assertion and a typed
+   `eq_refl` comparison:
+
+   ```text
+   assert id_post == id_pre
+   eq_refl id_post : id_post = id_pre.
+   ```
+
+3. Probe inferred-slot variants of the generic right-identity rule alone,
+   left-identity rule alone, and both together. For each variant, inspect the
+   exact `compute` normal form and the `comp_fapp0` decision tree.
+4. Exercise `comp(id_pre,id_post)` directly and through the full PathOut/Sigma
+   consumer. Determine whether each path reaches one identity by runtime
+   conversion, only elaborates through unification, or remains unmatched.
+5. Run a warning-enabled owning-position check for every inferred-identity
+   variant. Classify subject-reduction behavior and the critical-pair delta;
+   do not promote a broad identity rule solely because the PathOut assertion
+   passes.
+6. Build a full Candidate B temporary variant. Remove the runtime pre/post to
+   `Hom_*` folds, the two `Hom_func` endpoint degenerations, the two
+   `Hom_fapp0` endpoint degenerations, and the separate `Hom_fapp0` middle-id
+   degeneration. Replace them with the minimum direct rigid-head unification
+   bridges at the functor and point levels. Keep the direct
+   `Unit_prof -> Hom_*` projection ladder runtime.
+7. In Candidate B, test direct `Unit_prof` action, both factored pre/post
+   orders, both identity endpoint cases, typed raw-composition readings,
+   `Hom_func` identity/composition, known DefIso consumers, and the current
+   PathOut/path-induction examples. Add a stable-head functoriality rule only
+   after a focused projection-order probe demonstrates that the generic
+   `Hom_tele_func` owner is hidden.
+8. Build Candidate C separately by retaining the mixed runtime folds while
+   demoting only identity degenerations. Test the exact identity-first versus
+   fold-first terms and determine whether inferred matching plus unification
+   gives a genuine runtime join.
+9. Compare all candidates on termination, subject reduction, conversion
+   behavior, typed elaboration, warning families, required bridge count, and
+   preservation of the public `Unit_prof` action.
+10. Record the final architectural decision in this report before promoting
+    any kernel change. If Candidate B wins, specify every runtime rule removed
+    and every proof-time bridge retained. If Candidate A wins, specify the
+    consumer-driven accumulation family required next. If an inferred generic
+    identity rule is promoted, document why its matching boundary is safe and
+    how both identity reduction orders join.
+
+### Phase 8 acceptance matrix
+
+| Property | Candidate A runtime Hom | Candidate B rigid Hom | Candidate C hybrid |
+|---|---:|---:|---:|
+| Direct `Unit_prof` projection remains `Hom_*` | required | required | required |
+| Factored pre/post cuts runtime-normalize to `Hom_*` | yes | no | yes |
+| Factored and primitive actions elaborate together | yes | must pass typed probes | must pass typed probes |
+| Identity endpoints preserve the `Hom_*` head | no | yes | yes |
+| `Hom_*` identity/composition computes | incomplete | must be probed | must be probed |
+| Identity-first and fold-first paths runtime-join | checked current cases | not applicable to proof-only fold | must be established |
+| PathOut reaches one runtime identity | currently no | identity-rule dependent | identity-rule dependent |
+| Warning and termination behavior | known baseline | unknown | unknown |
+
+No candidate is selected in advance. The decision criterion is not the raw
+warning count alone. The selected architecture must have a coherent semantic
+owner hierarchy, explicit runtime versus proof-time intent, bounded checking,
+subject reduction, and typed evidence for every required comparison.
+
+## Completed Original Goal
+
+The original goal was to complete the deferred object-level action of the
+general `Hom_cat`
 two-endpoint owner:
 
 ```text
 Hom_fapp0(g,f,h) = f o h o g.
 ```
 
-The final runtime folds should identify both one-slot evaluation orders with
+The promoted Phase 6 runtime folds identify both one-slot evaluation orders with
 the same stable two-endpoint owner:
 
 ```text
@@ -48,11 +354,10 @@ runtime                         preserves the variance owner
 proof time                      relates dual/opposite presentations
 ```
 
-The architecture is settled enough to begin phased probe-first execution. The
-remaining proof-time bridge inventory, inferred-slot spelling, and downstream
-consumer classification are implementation-phase discoveries with explicit
-gates below; they do not require reopening the owner hierarchy before Phase 0
-and Phase 1 begin.
+Phases 0 through 7 completed this migration and passed their validation gates.
+Phase 8 does not undo that implementation record; it reopens only the final
+runtime-versus-proof-time status of the `Hom_*` comparison and the related
+inferred identity-composition question.
 
 ## Parent-Plan Status
 
@@ -67,13 +372,13 @@ promoted and validated. It has completed:
 - generic telescope-transfor owners and arbitrary-ambient off-diagonal
   projections through the `comp_prod*` owners.
 
-The deferred `Hom_fapp0` object-action cleanup is the primary remaining item
-from that subplan. This report is now the dedicated design authority for that
-item.
+The deferred `Hom_fapp0` object-action cleanup was completed by Phases 0-7.
+This report remains the design authority for that implementation and is now
+also the authority for the Phase 8 runtime-versus-proof-time follow-up.
 
-## Current Obstruction
+## Historical Obstruction
 
-The immediate obstructing rule is:
+The immediate rule which obstructed the original migration was:
 
 ```text
 rule @hom_precomp_along_fapp0
@@ -149,10 +454,11 @@ f_*(g^*(h)) = Hom_A(g,f)(h)
 g^*(f_*(h)) = Hom_A(g,f)(h).
 ```
 
-They are therefore semantically justified runtime folds into the stable
-two-endpoint owner. They are not merely proof-time equalities between two
-arbitrary semantic presentations: the public computational intent is that the
-combined two-slot cut normalizes to `Hom_fapp0`.
+They are therefore semantically justified comparisons with the stable
+two-endpoint owner. Phases 0-7 selected and implemented them as runtime folds.
+Phase 8 reopens whether this semantic comparison should choose a runtime
+normal form or should remain a direct proof-time relation between the
+primitive `Unit_prof` action and its two factorizations.
 
 By contrast, the equivalence between a covariant hom action over opposite
 categories and a contravariant hom action is semantic duality. It should not
@@ -588,8 +894,11 @@ Hom_func
 Hom_fapp0.
 ```
 
-They own the simultaneous contravariant/covariant action and are the intended
-normal form after both endpoint cuts are present.
+They own the simultaneous contravariant/covariant action produced by
+`Unit_prof`. The currently promoted implementation also makes them the runtime
+normal form after independently constructed endpoint cuts are both present.
+Phase 8 tests the coherent alternative in which that latter comparison is
+proof-time only.
 
 `Unit_prof(A)` is already the uncurried/product hom bifunctor
 `Hom_A(-,-) : Op(A) x A -> Cat` in the profunctor layer. Its object and arrow
@@ -617,6 +926,13 @@ concrete higher-cell consumer requires it; it is not a prerequisite for the
 current `tapp1_func` / `tapp1_fapp0` implementation.
 
 ## Runtime And Proof-Time Policy
+
+The text in this section records the policy selected for Phases 0-7 and the
+currently promoted kernel. The active Phase 8 probes explicitly reopen only
+the pre/post-factorization versus `Hom_*` boundary. The distinct runtime
+ownership of covariant `hom_postcomp_*` and contravariant
+`hom_precomp_along_*`, together with their opposite-category proof-time
+duality, remains settled.
 
 Runtime reduction should preserve variance:
 
@@ -671,15 +987,18 @@ check and be tested with an explicit typed `eq_refl` term rather than only an
 classified by projection level; only the needed proof-time bridges should be
 promoted.
 
-Do not replace the desired `Hom_fapp0` runtime folds by a broad unification
-rule such as:
+The Phase 0-7 policy did not replace the desired `Hom_fapp0` runtime folds by
+a broad unification rule such as:
 
 ```text
 Hom_fapp0(g,f,h) == f o (h o g).
 ```
 
-That would hide the missing runtime owner rather than complete it. Retain the
-existing narrow identity-slot proof-time bridges:
+At that stage such a rule would have hidden the missing runtime owner rather
+than completed it. Phase 8 now tests direct rigid-head proof-time comparisons
+only after the `Unit_prof -> Hom_*` projection owner exists and computes. It
+does not propose an unconstrained raw-composition eta rule. The currently
+promoted narrow identity-slot proof-time bridges are:
 
 ```text
 Hom_fapp0(id_x,f,h) == comp_fapp0(f,h)
@@ -736,10 +1055,11 @@ both endpoint actions are present     fold to Hom_*
 only equality of presentations needed use a narrow unif_rule.
 ```
 
-## Intended Hom_fapp0 Folds
+## Currently Promoted Hom_fapp0 Folds
 
-After the cross-variance runtime rule has been removed or demoted and its
-consumers retargeted, probe these exact identity-family folds.
+After the cross-variance runtime rule was removed and its consumers retargeted,
+Phase 6 promoted these exact identity-family folds. They are the Candidate A
+baseline which Phase 8 compares with rigid-head proof-time variants.
 
 Postcomposition after precomposition:
 
@@ -1173,7 +1493,49 @@ variance, proof-time bridges own semantic duality, both internalized endpoint
 directions expose their off-diagonal action, and both direct pointwise
 evaluation orders compute through the general `Hom_fapp0` owner.
 
+### Phase 8: rigid-Hom and inferred-identity design probes
+
+Phase 8 is the active immediate goal. It follows the detailed probe matrix in
+the opening active-goal section and has no preselected winner.
+
+1. Establish the current Candidate A runtime, warning, and PathOut baselines.
+2. Separate ordinary conversion, typed proof-time unification, and inferred
+   rewrite matching for identity arrows at post/pre-compatible endpoints.
+3. Probe right-only, left-only, and combined inferred-slot generic identity
+   rules in temporary full-file copies.
+4. Probe Candidate B with rigid `Hom_*` heads and proof-time-only
+   factorization/identity comparisons.
+5. Probe Candidate C with runtime mixed folds and proof-time-only identity
+   degeneration.
+6. Compare runtime normal forms, typed elaboration, subject reduction,
+   decision trees, warning families, check time, and downstream consumers.
+7. Record the selected architecture and exact promotion/removal inventory in
+   this report before changing the active kernel.
+
+Phase 8 is complete only after the report answers all of the following:
+
+- Does the existing pre/post unification rule make `id_post` and `id_pre`
+  ordinarily convertible, only proof-time compatible, or also
+  interchangeable during inferred-LHS matching?
+- Can a generic inferred-endpoint identity rule simplify the PathOut fibre
+  proof without broad subject-reduction or confluence regressions?
+- Does Candidate B elaborate all concrete current consumers with a bounded,
+  maintainable direct unification bridge set?
+- Which stable-head identity/composition joins are genuinely required for
+  `Hom_tele_func` / `Hom_func` after generic functoriality is projected?
+- Does Candidate C have a genuine runtime join at identity endpoints, or only
+  a proof-time compatibility result?
+- Which candidate best preserves the primitive `Unit_prof` action, the
+  covariant/contravariant runtime distinction, and the intended
+  cut-elimination boundary?
+
 ## Feasibility Assessment
+
+The following assessment was established for the original variance-separation
+implementation and remains valid for its shared owner hierarchy. Phase 8 adds
+a comparative feasibility question about the final `Hom_*` bridge
+orientation; its candidate-specific risks and acceptance matrix are stated in
+the active-goal section.
 
 ### Semantic feasibility
 
@@ -1241,11 +1603,11 @@ Warning counts are diagnostic evidence, not a veto. The acceptance condition
 is that the intended reduction orders join and checked consumers normalize to
 their semantic owners.
 
-## Probe-Time Implementation Decisions
+## Original Probe-Time Implementation Decisions
 
-No remaining item in this section blocks the selected architecture. Resolve
-these questions empirically in the owning implementation phase and record the
-result before promotion:
+The following questions governed Phases 0-7 and are retained as their
+historical decision record. The active unresolved probes are now the Phase 8
+matrix at the front of this report.
 
 1. Do the direct `fapp1_func` / `fapp1_fapp0` projections from primitive
    `hom_con` to
@@ -1282,7 +1644,7 @@ result before promotion:
 - Do not promote the `Hom_fapp0` folds before the cross-variance normal-form
   rule and its consumers have been addressed.
 
-## Acceptance Criteria
+## Original Acceptance Criteria
 
 The architecture passed the following promotion gates during implementation:
 
@@ -1308,7 +1670,7 @@ plan fixes their policy and classification criteria, while the active source
 and typed diagnostics determine the minimal concrete inventory. They are not
 preconditions for beginning Phase 0 or Phase 1.
 
-The implementation is complete when:
+The original Phases 0-7 implementation was complete when:
 
 1. covariant and contravariant represented families retain distinct runtime
    owners;
@@ -1323,13 +1685,19 @@ The implementation is complete when:
 7. active checks, catalog, CI, health, and the warning inventory pass with any
    warning delta classified in this report.
 
+Those conditions are satisfied by the current Candidate A baseline. They do
+not predetermine the Phase 8 result: under Candidate B, item 6 is replaced by
+typed proof-time compatibility of both factorizations with the rigid
+`Hom_fapp0` projection rather than runtime normalization of the
+factorizations themselves.
+
 ## Final Architecture Review
 
 Review conclusion updated 2026-07-10: the owner hierarchy remains globally
-coherent. Phases 0 through 6 are promoted; Phase 7 validation and current
-guidance updates are active. The promoted variance separation and two-endpoint
-completion join the identity one-slot/two-endpoint degeneration without
-restoring runtime conversion between precomposition and postcomposition.
+coherent. Phases 0 through 7 are promoted and validated. Phase 8 is active and
+reopens the final runtime-versus-proof-time relationship between primitive
+`Hom_*` action and independently factored pre/post cuts. It does not reopen
+the primitive covariant/contravariant variance separation.
 
 - The covariant/contravariant owner square has distinct, well-motivated types;
   `hom_con_int` is not a duplicate of `hom_int`.
@@ -1347,13 +1715,15 @@ restoring runtime conversion between precomposition and postcomposition.
   omega-categorical projection rung and is not a blocker for this plan.
 - The constrained proof-time treatment of opposite presentations preserves
   the intended duality without retaining `Op_func` as a runtime discriminator.
-- The final nested object folds remain correctly ordered after variance
-  separation and downstream retargeting.
+- The final nested object folds are the current Candidate A baseline after
+  variance separation and downstream retargeting; Phase 8 tests whether they
+  should remain runtime or become direct proof-time comparisons.
 
-Remaining uncertainty is deliberately empirical: inferred LHS slots,
-Lambdapi source-presentation conversion, the minimal unification bridge set,
-and the concrete downstream consumer inventory. The probe-first phases own
-those questions and have independent promotion gates.
+The active uncertainty is deliberately empirical: inferred identity LHS
+slots, rewrite matching at proof-time-compatible endpoints, the minimal rigid
+`Hom_*` unification bridge set, stable-head functoriality joins, and the
+concrete downstream consumer inventory. Phase 8 owns those questions and has
+the independent promotion gates stated at the front of this report.
 
 ## Side-Task Ledger
 
@@ -1395,13 +1765,18 @@ those questions and have independent promotion gates.
   the four coherent inactive-endpoint reductions for `Hom_func` /
   `Hom_fapp0`, with explicit nondegenerate and identity reduction-order
   diagnostics.
-- Deferred as a separate path-transport coherence task: replace the temporary
-  `PathOut` composite of proof-time-compatible identities by a semantic
-  `PathOut`/Sigma coherence owner. The normalized term contains no `Hom_*`
-  head, so a Hom-specific rewrite would be misplaced.
-- Deferred until a concrete consumer requires it: broader accumulation laws
-  for arbitrarily nested `Hom_fapp0` with additional pre/post actions. Do not
-  generate them mechanically from the warning inventory.
+- Active Phase 8: compare the current runtime mixed-action owner with a rigid
+  `Hom_*` / proof-time-factorization architecture and the identity-only
+  hybrid. The currently promoted Phase 6 rules remain the baseline during
+  temporary probes, not the predetermined final answer.
+- Reopened inside Phase 8: determine whether inference-friendly generic
+  composition-identity LHSs can collapse the temporary PathOut composite of
+  proof-time-compatible identities safely. If not, the task returns to the
+  separate semantic `PathOut`/Sigma coherence-owner ledger.
+- Conditional on Candidate A remaining selected: broader accumulation laws
+  for arbitrarily nested `Hom_fapp0` with additional pre/post actions become
+  the next consumer-driven task. Do not generate them mechanically from the
+  warning inventory.
 - Conditional future naming cleanup: consider whether
   `hom_int_precomp_tele_func` should be renamed
   `hom_int_precomp_along_tele_func`; this is not required by the variance
