@@ -8,7 +8,7 @@ Parent-Plan: REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-
 Supersedes: no whole report; extracts and expands the deferred `Hom_fapp0` object-action cleanup from the parent subplan
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e
-Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7
+Infinity-Codex-Decision-Responses: infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f48a6-337d-78a1-8135-c6b85220f69e; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f4964-f896-74c0-85dc-062f1d01cff7; infinity-codex:019f3811-100c-7ea0-8c38-5534271c1cde:019f49b8-33d5-7e72-8128-dcbf40a9d7d4
 Status: proposed design/refinement plan; no implementation or probe from this plan has been promoted
 
 ## Active Goal
@@ -361,10 +361,65 @@ The full `tapp1_func` projection must internalize the varying `q`:
 q |-> Hom_func(p,F[q]).
 ```
 
-Its likely semantic body is `Hom_tele_func` after pairing the constant first
-component `p` with `fapp1_func(F,b,c)`. A primitive stable intermediary should
-be added only if the semantic composite does not expose the required
-projection ladder or fails the opaque-endpoint/source-presentation boundary.
+This design is now settled at the current projection level: its runtime RHS
+should be the semantic composite through `Hom_tele_func`, with no new named
+`hom_int_precomp_tapp1_func` intermediary. Let:
+
+```text
+Fb = fapp0(F,b)
+Fc = fapp0(F,c).
+```
+
+Then the mathematical composite is:
+
+```text
+Hom_B(b,c)
+  -- q |-> (p,F[q]) -->
+Product(Hom_A(X,Y),Hom_A(Fb,Fc))
+  -- Hom_tele_func(A,Y,X,Fb,Fc) -->
+Functor(Hom_A(Y,Fb),Hom_A(X,Fc)).
+```
+
+A kernel-shaped RHS is approximately:
+
+```text
+@comp_fapp0
+  Cat_cat
+  (Hom_cat B b c)
+  (Product_cat
+    (Hom_cat A X Y)
+    (Hom_cat A Fb Fc))
+  (Functor_cat
+    (Hom_cat A Y Fb)
+    (Hom_cat A X Fc))
+  (@Hom_tele_func A Y X Fb Fc)
+  (Struct_sigma
+    (@Const_func
+      (Hom_cat B b c)
+      (Hom_cat A X Y)
+      p)
+    (@fapp1_func B A F b c)).
+```
+
+The exact promoted spelling must still apply inferred-slot hygiene, but no
+missing general constructor is apparent: `Const_func` supplies the fixed
+component, `Struct_sigma` is the canonical product-valued-functor encoding,
+`fapp1_func(F,b,c)` supplies the varying component, and generic
+`comp_fapp0 Cat_cat` composes with `Hom_tele_func`.
+
+The direct capped rule remains necessary as a projection-order join:
+
+```text
+tapp1_fapp0(hom_int_precomp_func(F,p),q)
+  -> Hom_func(p,F[q]).
+```
+
+The owner-first path reduces `tapp1_func` to the semantic composite and then
+applies it to `q`; the projection-first path uses the generic
+`fapp0(tapp1_func(...),q) -> tapp1_fapp0(...,q)` rule. The direct capped rule
+makes both paths reach `Hom_func`. Applying that result to `h` then uses the
+existing generic `fapp0(Hom_func(...),h) -> Hom_fapp0(...)` projection; do not
+add another constructor-specific point rule.
 
 #### Target endpoint internalized
 
@@ -414,7 +469,39 @@ Hom_fapp0(F[q],f,h) = f o h o F[q].
 
 The full `tapp1_func` mirror should internalize
 `q^op |-> Hom_func(F[q],f)` by pairing the varying first component with the
-constant second component `f`, then using `Hom_tele_func`.
+constant second component `f`, then using `Hom_tele_func`. This semantic
+composite is also the settled design; no separate named full-action owner is
+planned. For `q^op : b -> c` in `Op(B)`, equivalently `q : c -> b` in `B`, the
+mathematical composite is:
+
+```text
+Hom_Op(B)(b,c)
+  -- q^op |-> (F[q],f) -->
+Product(Hom_A(F[c],F[b]),Hom_A(W,X))
+  -- Hom_tele_func(A,F[b],F[c],W,X) -->
+Functor(Hom_A(F[b],W),Hom_A(F[c],X)).
+```
+
+Its pairing functor is approximately:
+
+```text
+Struct_sigma
+  (@fapp1_func B A F c b)
+  (@Const_func
+    (Hom_cat (Op_cat B) b c)
+    (Hom_cat A W X)
+    f).
+```
+
+The conversion `Hom_Op(B)(b,c) = Hom_B(c,b)` supplies the common source of
+the two paired components. The direct capped mirror is:
+
+```text
+tapp1_fapp0(hom_con_int_postcomp_func(F,f),q^op)
+  -> Hom_func(F[q],f),
+```
+
+again followed generically by `fapp0(Hom_func(...),h) -> Hom_fapp0(...)`.
 
 This base-level `hom_con_int` should not be confused with the separately
 discussed future `hom_con_int_func(G)` from the profunctor/weighted-limit
@@ -440,6 +527,24 @@ projections already target `Hom_cat`, `Hom_tele_func`, and `Hom_func`.
 Therefore this plan should not add separate `Hom_bifunctor`, `Hom_`, or
 `Hom_con_` symbols. The earlier mention of such a possible parent was a naming
 ambiguity, not a missing mathematical construction.
+
+The current projection ladder is intentionally staged:
+
+```text
+fapp1_func(Unit_prof) -> Hom_tele_func
+fapp0(Hom_tele_func)  -> Hom_func
+fapp0(Hom_func)       -> Hom_fapp0.
+```
+
+This is the usual lower-dimensional prototype used throughout v3.2 before
+promoting the next full omega-categorical projection rung. `Hom_tele_func`
+does not yet have specialized `fapp1_func` / `fapp1_fapp0` rules of its own,
+so the arrow action of the new semantic composites on higher arrows between
+`q`s remains abstract. Nothing exceptional is happening: the functor is
+well-typed and its object/capped action computes completely at the level
+needed here. Promote the next `Hom_tele_func` higher-action ladder only when a
+concrete higher-cell consumer requires it; it is not a prerequisite for the
+current `tapp1_func` / `tapp1_fapp0` implementation.
 
 ## Runtime And Proof-Time Policy
 
@@ -628,11 +733,14 @@ with `lhs-audit` reasoning.
    `Hom_func(p,F[q])`.
 2. Add the point projection check through `fapp0` to
    `Hom_fapp0(p,F[q],h)`.
-3. Probe the full `tapp1_func` as the semantic composite which pairs constant
+3. Probe the settled full `tapp1_func` semantic composite which pairs constant
    `p` with `fapp1_func(F)` and applies `Hom_tele_func`.
-4. Introduce a stable intermediary only if the semantic composite cannot
-   support the required projections or source presentation.
-5. Validate the existing `tapp0_fapp0` component and the new off-diagonal
+4. Do not add a named full-action intermediary unless the settled composite
+   fails a concrete typed consumer after inferred-slot/source-presentation
+   adjustments.
+5. Check both owner-first and projection-first reductions to the direct capped
+   `Hom_func` join.
+6. Validate the existing `tapp0_fapp0` component and the new off-diagonal
    ladder together.
 
 ### Phase 3: add the mirror hom_con_int owner
@@ -644,9 +752,12 @@ with `lhs-audit` reasoning.
 3. Add the `tapp0_fapp0` component to `hom_postcomp_func`.
 4. Probe the capped off-diagonal projection to `Hom_func(F[q],f)` and its
    point projection to `Hom_fapp0(F[q],f,h)`.
-5. Probe the full `tapp1_func` by pairing the varying `F[q]` component with
-   constant `f` before applying `Hom_tele_func`.
-6. Reconcile the name with the distinct future `hom_con_int_func(G)` package
+5. Probe the settled full `tapp1_func` semantic composite by pairing the
+   varying `F[q]` component with constant `f` before applying
+   `Hom_tele_func`.
+6. Check both owner-first and projection-first reductions to the direct capped
+   `Hom_func` join; do not add a separate named full-action owner by default.
+7. Reconcile the name with the distinct future `hom_con_int_func(G)` package
    documented by the profunctor plans.
 
 ### Phase 4: opposite-duality runtime demotion
@@ -733,13 +844,19 @@ operations.
 
 The `Op_func` bridge ladder remains the highest-risk portion because it spans
 telescope, functor, capped, and higher-action levels. The new
-`tapp1_func` projections are also nontrivial: their result must internalize a
-varying base arrow and may encounter the same opaque endpoint/source
-presentation boundary previously seen around `Unit_prof`. Both should be
-developed in separate phases with focused typed consumers. The
+`tapp1_func` projections have a settled semantic formulation using existing
+product-valued functor and composition infrastructure; their remaining risk is
+ordinary Lambdapi endpoint inference and reduction-order validation rather
+than a missing architectural owner. These areas should still be developed in
+separate phases with focused typed consumers. The
 identity-family rule is narrower and likely easier, but should still follow
 the upstream ownership decision so the migration does not leave two competing
 architectural stories.
+
+The absent specialized `fapp1_*` ladder of `Hom_tele_func` concerns the next
+higher-cell projection rung. It is the expected continuation of the current
+lower-dimensional prototype, not a feasibility problem for the object/capped
+off-diagonal rules in this plan.
 
 ### Normalization and confluence risk
 
@@ -768,21 +885,18 @@ These questions remain intentionally open for the next refinement turns:
 2. Do the direct `fapp1_func` / `fapp1_fapp0` projections from `hom_con` to
    existing `hom_precomp_along_*` heads typecheck cleanly, or is one
    contravariant projection intermediary needed?
-3. Can the full `tapp1_func(hom_int_precomp_func(F,p))` and its
-   `hom_con_int_postcomp_func` mirror remain semantic composites through
-   `Hom_tele_func`, or do they need named stable projection owners?
-4. What is the final exact argument order and kernel name for
+3. What is the final exact argument order and kernel name for
    `hom_con_int_postcomp_tele_func` / `hom_con_int_postcomp_func`, and how
    should this base-level owner be distinguished from the future
    `hom_con_int_func(G)` package which varies an endpoint functor?
-5. Which members of the old `Op_func` runtime ladder need explicit
+4. Which members of the old `Op_func` runtime ladder need explicit
    proof-time replacements? Current recommendation: only those required by
    typed consumers, using two rigid semantic heads and side constraints where
    feasible, because unification is not transitive.
-6. Which existing path-induction and representable checks are genuinely
+5. Which existing path-induction and representable checks are genuinely
    covariant and should retain `hom_postcomp_fapp0(id,q,p)`, versus
    contravariant and should move to `hom_precomp_along_fapp0(id,p,q)`?
-7. After variance separation, are both `Hom_fapp0` folds needed as runtime
+6. After variance separation, are both `Hom_fapp0` folds needed as runtime
    joins, or does one follow reliably through the promoted functor-level
    `Hom_func` fold and generic projection? Current expectation: probe both;
    keep each only if it owns a distinct reduction path.
@@ -850,6 +964,15 @@ The implementation is complete when:
 - Settled design clarification: `Unit_prof` is the existing uncurried hom
   bifunctor; no separate `Hom_bifunctor`, `Hom_`, or `Hom_con_` symbol is
   planned.
+- Settled design decision: the two full internalized `tapp1_func` projections
+  are semantic composites through paired `Const_func` / `fapp1_func`
+  components and `Hom_tele_func`; their direct capped joins target
+  `Hom_func`, and generic `fapp0(Hom_func)` reaches `Hom_fapp0`. No new named
+  full-action owner is planned.
+- Deferred only on concrete higher-cell demand: specialized
+  `fapp1_func` / `fapp1_fapp0` projections of `Hom_tele_func`, the next rung
+  after the current `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0`
+  prototype ladder.
 - Active design task: inventory the old `Op_func` runtime bridge ladder and
   decide the minimum two-rigid-head, constraint-based proof-time replacement
   set.
