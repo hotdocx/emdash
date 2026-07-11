@@ -39,17 +39,17 @@ make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples             8
-diagnostic assertions              764
+diagnostic assertions              774
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
-intentional LHS annotations        28 slots across 16 clauses
-warning inventory                  1,303
-  unjoinable critical pairs        1,140
+intentional LHS annotations        37 slots across 21 clauses
+warning inventory                  1,253
+  unjoinable critical pairs        1,090
   replaceable pattern variables      163
 ```
 
 The largest warning families are headed by `comp_fapp0`,
-`hom_postcomp_fapp0`, `tapp0_fapp0`, and `fapp1_fapp0`. These reports are
+`hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
 diagnostic evidence for locating overlap families. They are not an automatic
 veto on semantically required computation and are not a confluence proof.
 
@@ -85,9 +85,11 @@ Obj(Cat_cat) = Cat
 Hom_cat Cat_cat A B = Functor_cat A B.
 ```
 
-`Catd_cat K` is the canonical Cat-valued-functor category over `K`.
-`Functord_cat` and `Transfd_cat` provide natural/displayed functor and transfor
-layers.
+`Catd_cat K`, `Functord_cat`, and `Transfd_cat` are stable displayed facades
+for the ordinary Cat-valued functor, transfor, and next-hom presentations.
+Their category equalities are proof-time comparisons. Runtime computation
+crosses the boundary through documented `Obj` and `Hom_cat` projections, so
+neither ordinary nor displayed category heads are erased prematurely.
 
 Generic identity, composition, functor action, and naturality are owned by the
 global `id`, `comp_fapp0`, `fapp*`, and `tapp*` calculus. Specialized
@@ -168,8 +170,13 @@ categories, and internalized Pi over varying bases.
 
 ```text
 Pi_cat(E) = Functord_cat(Terminal_catd K,E)
-Pi_cat(Const_catd K A) = Functor_cat K A.
+Pi_cat(Const_catd K A) ≃ Functor_cat K A  (proof-time comparison).
 ```
+
+Runtime evaluation of a constant-family section still computes through
+`piapp0` to ordinary `fapp0`. Its displayed hom action is owned by
+`Const_transfd_func` / `Const_transfd`, rather than by an ordinary transfor
+category fold.
 
 Sigma total objects are dependent pairs. A total arrow consists of a base
 arrow and a fibre arrow:
@@ -181,8 +188,9 @@ alpha : E[p](u) -> v.
 
 `sigma_arrow` and `sigma_transport_arrow` are defined through this hom
 characterization. `sigma_map_func` uses the displayed internal-hom projection
-ladder for its fibre action; arbitrary displayed functors are lax rather than
-silently strict/cartesian.
+ladder for its fibre action; `sigma_map_transf` exposes the next generic hom
+action as an ordinary transfor between total maps. Arbitrary displayed
+functors are lax rather than silently strict/cartesian.
 
 `Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
 constructors. Pointwise formulas do not replace their required base-arrow
@@ -220,7 +228,9 @@ laxity interface remains deferred.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section
-pullback, and internal Pi action.
+pullback, and internal Pi action. Ordinary weakening `Const_func_func` is a
+stable ordinary owner separate from the proof-time-only displayed
+`const_section_func` facade.
 
 ### Section 18: Cat-valued profunctors and computational comparison
 
@@ -293,6 +303,28 @@ eq_refl(t) : τ(t = u)
 
 to exercise a proof-time unification comparison. Do not infer runtime
 joinability from a successful typed `eq_refl` probe.
+
+### Displayed facade tower
+
+The first three displayed heads remain stable:
+
+```text
+Catd_cat K
+Functord_cat K E D
+Transfd_cat K E D FF GG.
+```
+
+They compare at proof time with `Functor_cat K Cat_cat`,
+`Transf_cat K Cat_cat E D`, and the corresponding ordinary iterated hom.
+Their `Obj` projections compute toward the ordinary presentations, while their
+`Hom_cat` projections expose the next displayed rung. Add direct comparisons
+at every represented rung; do not rely on unification-rule transitivity.
+
+The specialized runtime contraction for sections over
+`Sigma_proj1_pullback_catd` remains a measured exception. A demotion probe
+fails subject reduction at `path_ind_sec -> fib_cov_transf`; removing that
+fold requires a stable path-induction section result owner and component
+projection, not an ad hoc global `Obj` join.
 
 ### One generic owner for ordinary laws
 
@@ -605,6 +637,11 @@ The following remain explicit future work rather than hidden assumptions:
 - semantic uncurry action on arbitrary transfors;
 - whole-transfor displayed laxity beyond `fdapp1_int_cell`;
 - the arrow action of `sigma_intro_tapp0_func`;
+- a stable section-facade result owner for the
+  `path_ind_sec -> fib_cov_transf` computation, prerequisite to demoting the
+  Sigma-first-projection section-category fold;
+- off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current
+  point-component computation;
 - a fully internalized general coend/coinserter semantics for profunctor tensor;
 - general tensor associativity/coherence and complete co-Yoneda equivalences;
 - dependent elimination and semantic collage construction for primitive join;

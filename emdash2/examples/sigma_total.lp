@@ -3,7 +3,8 @@
 
   Sigma totals are dependent sums of directed Cat-valued families. These checks
   expose the total-category constructor, first projection, constant-family
-  product specialization, and Sigma-map object action.
+  product specialization, Sigma-map object action, and the next hom action on
+  displayed transformations.
 */
 
 require open emdash.emdash3_2;
@@ -29,3 +30,14 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D))
         (@fapp0 (Fibre_cat E k) (Fibre_cat D k)
           (@tapp0_fapp0 K Cat_cat E D k η)
           u);
+
+assert [K : Cat]
+  [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (eta : τ (Transfd FF GG)) ⊢
+  @fapp1_fapp0
+    (@Functord_cat K E D)
+    (Functor_cat (@Sigma_cat K E) (@Sigma_cat K D))
+    (@fapp1_func (@Catd_cat K) Cat_cat (@Sigma_func K) E D)
+    FF GG eta
+  ≡ @sigma_map_transf K E D FF GG eta;

@@ -1131,13 +1131,32 @@ assert ⊢ τ (Obj Cat_cat) ≡ Cat;
 
 assert (A B : Cat) ⊢ Hom_cat Cat_cat A B ≡ Functor_cat A B;
 
-assert [K : Cat] ⊢ Functor_cat K Cat_cat ≡ Catd_cat K;
+assert [K : Cat] ⊢
+  @eq_refl Cat_grpd (Catd_cat K)
+  : τ (@= Cat_grpd (Catd_cat K) (Functor_cat K Cat_cat));
+
+assert [K : Cat] ⊢
+  Obj (Catd_cat K) ≡ Obj (Functor_cat K Cat_cat);
 
 assert [K : Cat] (E D : τ (Catd K)) ⊢
   Hom_cat (Catd_cat K) E D ≡ Functord_cat E D;
 
+assert [K : Cat] (E D : τ (Catd K)) ⊢
+  Obj (@Functord_cat K E D)
+    ≡ Obj (@Transf_cat K Cat_cat E D);
+
 assert [K : Cat] [E D : τ (Catd K)] (FF GG : τ (Functord E D)) ⊢
   Hom_cat (Functord_cat E D) FF GG ≡ Transfd_cat FF GG;
+
+assert [K : Cat] [E D : τ (Catd K)] (FF GG : τ (Functord E D)) ⊢
+  Obj (@Transfd_cat K E D FF GG)
+    ≡ Obj (Hom_cat (@Transf_cat K Cat_cat E D) FF GG);
+
+assert [K : Cat] [E D : τ (Catd K)] (FF GG : τ (Functord E D)) ⊢
+  @eq_refl Cat_grpd (@Transfd_cat K E D FF GG)
+  : τ (@= Cat_grpd
+      (@Transfd_cat K E D FF GG)
+      (Hom_cat (@Transf_cat K Cat_cat E D) FF GG));
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
   @id (@Functord_cat K E D) FF
@@ -3243,10 +3262,16 @@ assert [I A B : Cat]
     ≡ @fapp0 I A (sigma_Fst H) i;
 
 assert [K : Cat] (E D : τ (Catd K)) ⊢
-  Hom_cat (Catd_cat K) E D ≡ @Transf_cat K Cat_cat E D;
+  @eq_refl Cat_grpd (Hom_cat (Catd_cat K) E D)
+  : τ (@= Cat_grpd
+      (Hom_cat (Catd_cat K) E D)
+      (@Transf_cat K Cat_cat E D));
 
 assert [K : Cat] (E D : τ (Catd K)) ⊢
-  Hom_cat (Functor_cat K Cat_cat) E D ≡ @Functord_cat K E D;
+  @eq_refl Cat_grpd (Hom_cat (Functor_cat K Cat_cat) E D)
+  : τ (@= Cat_grpd
+      (Hom_cat (Functor_cat K Cat_cat) E D)
+      (@Functord_cat K E D));
 
 assert [X A B : Cat]
   (F G : τ (Functor X (Product_cat A B)))
@@ -4805,7 +4830,19 @@ assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
       (@Pi_cat K (@Const_catd K A))
       (@const_section_func K A)
       x y p
-    ≡ @Const_transf K A x y p;
+    ≡ @Const_transfd K A x y p;
+
+assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y))
+  (k : τ (Obj K)) ⊢
+  @tdapp0_fapp0
+    K
+    (@Const_catd K Terminal_cat)
+    (@Const_catd K A)
+    (@Const_func K A x)
+    (@Const_func K A y)
+    k
+    (@Const_transfd K A x y p)
+  ≡ @Const_transf Terminal_cat A x y p;
 
 assert [A B : Cat] (x : τ (Obj A)) (y : τ (Obj B)) ⊢
   sigma_Fst
@@ -5628,8 +5665,11 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
     ≡ @Op_catd K E;
 
 assert [K : Cat] ⊢
-  @fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K
-    ≡ Catd_cat K;
+  @eq_refl Cat_grpd
+    (@fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K)
+  : τ (@= Cat_grpd
+      (@fapp0 (Op_cat Cat_cat) Cat_cat Catd_cat_func K)
+      (Catd_cat K));
 
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
   @fapp1_fapp0
@@ -5647,8 +5687,10 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
 
 // Derived classifier for displayed categories over the fibres of K.
 assert [L : Cat] (K : τ (Catd L)) (l : τ (Obj L)) ⊢
-  Fibre_cat (Catd_catd_con K) l
-    ≡ Catd_cat (Fibre_cat K l);
+  @eq_refl Cat_grpd (Fibre_cat (Catd_catd_con K) l)
+  : τ (@= Cat_grpd
+      (Fibre_cat (Catd_catd_con K) l)
+      (Catd_cat (Fibre_cat K l)));
 
 assert [L : Cat] (K : τ (Catd L)) (x y : τ (Obj L))
   (p : τ (Hom L x y)) ⊢
@@ -5689,13 +5731,55 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
   fapp1_fapp0 (Pi_func K) id_funcd ≡ id_func;
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
-  @Transf_cat K Cat_cat (@Terminal_catd K) E ≡ Pi_cat E;
+  @eq_refl Cat_grpd (@Transf_cat K Cat_cat (@Terminal_catd K) E)
+  : τ (@= Cat_grpd
+      (@Transf_cat K Cat_cat (@Terminal_catd K) E)
+      (Pi_cat E));
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @Functord_cat K (@Terminal_catd K) E ≡ Pi_cat E;
 
 assert [K : Cat] (A : Cat) ⊢
-  Pi_cat (Const_catd K A) ≡ Functor_cat K A;
+  @eq_refl Cat_grpd (Pi_cat (Const_catd K A))
+  : τ (@= Cat_grpd
+      (Pi_cat (Const_catd K A))
+      (Functor_cat K A));
+
+assert [K : Cat] (A : Cat) ⊢
+  @eq_refl Grpd_grpd (Obj (Pi_cat (Const_catd K A)))
+  : τ (@= Grpd_grpd
+      (Obj (Pi_cat (Const_catd K A)))
+      (Obj (Functor_cat K A)));
+
+assert [K : Cat] (A : Cat) ⊢
+  @eq_refl Grpd_grpd
+    (Obj
+      (@Transf_cat
+        K Cat_cat
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K A)))
+  : τ (@= Grpd_grpd
+      (Obj
+        (@Transf_cat
+          K Cat_cat
+          (@Const_catd K Terminal_cat)
+          (@Const_catd K A)))
+      (Obj (Functor_cat K A)));
+
+assert [K : Cat] (A : Cat) ⊢
+  @eq_refl Grpd_grpd
+    (Obj
+      (@Functord_cat
+        K
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K A)))
+  : τ (@= Grpd_grpd
+      (Obj
+        (@Functord_cat
+          K
+          (@Const_catd K Terminal_cat)
+          (@Const_catd K A)))
+      (Obj (Functor_cat K A)));
 
 assert [K : Cat] (E : τ (Catd K)) (s t : τ (Obj (Pi_cat E))) ⊢
   Hom_cat (Pi_cat E) s t
@@ -5703,8 +5787,11 @@ assert [K : Cat] (E : τ (Catd K)) (s t : τ (Obj (Pi_cat E))) ⊢
 
 assert [K : Cat] (A : Cat)
   (s t : τ (Obj (Pi_cat (@Const_catd K A)))) ⊢
-  Hom_cat (Pi_cat (@Const_catd K A)) s t
-    ≡ Transf_cat s t;
+  @eq_refl Cat_grpd
+    (Hom_cat (Pi_cat (@Const_catd K A)) s t)
+  : τ (@= Cat_grpd
+      (Hom_cat (Pi_cat (@Const_catd K A)) s t)
+      (@Transf_cat K A s t));
 
 assert [K : Cat] (A : Cat)
   (F : τ (Obj (Pi_cat (Const_catd K A))))
@@ -6117,6 +6204,60 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
   @fapp1_fapp0 (Catd_cat K) Cat_cat (@Sigma_func K) E D η
     ≡ @sigma_map_func K E D η;
 
+// The generic second hom action of Sigma totalization reaches the stable
+// totalized-transfor projection.
+assert [K : Cat]
+  [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (eta : τ (Transfd FF GG)) ⊢
+  @fapp1_fapp0
+    (@Functord_cat K E D)
+    (Functor_cat (@Sigma_cat K E) (@Sigma_cat K D))
+    (@fapp1_func
+      (@Catd_cat K)
+      Cat_cat
+      (@Sigma_func K)
+      E D)
+    FF GG eta
+  ≡ @sigma_map_transf K E D FF GG eta;
+
+// Its point component is the fibrewise component over the identity base
+// arrow, packaged as an arrow of the Sigma-total category.
+assert [K : Cat]
+  [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (eta : τ (Transfd FF GG))
+  (k : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E k))) ⊢
+  @tapp0_fapp0
+    (@Sigma_cat K E)
+    (@Sigma_cat K D)
+    (@sigma_map_func K E D FF)
+    (@sigma_map_func K E D GG)
+    (Struct_sigma k u)
+    (@sigma_map_transf K E D FF GG eta)
+  ≡ @sigma_arrow
+      K D
+      k k
+      (@fapp0
+        (Fibre_cat E k)
+        (Fibre_cat D k)
+        (@Fibre_func K E D FF k)
+        u)
+      (@fapp0
+        (Fibre_cat E k)
+        (Fibre_cat D k)
+        (@Fibre_func K E D GG k)
+        u)
+      (@id K k)
+      (@tapp0_fapp0
+        (Fibre_cat E k)
+        (Fibre_cat D k)
+        (@Fibre_func K E D FF k)
+        (@Fibre_func K E D GG k)
+        u
+        (@tdapp0_fapp0 K E D FF GG k eta));
+
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k;
 
@@ -6223,8 +6364,10 @@ assert [Z : Cat] (x : τ (Obj Z)) ⊢
     ≡ @PathOut_cat Z x;
 
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
-  Fibre_cat (@PathOutMotives_catd Z) x
-    ≡ @Catd_cat (@PathOut_cat Z x);
+  @eq_refl Cat_grpd (Fibre_cat (@PathOutMotives_catd Z) x)
+  : τ (@= Cat_grpd
+      (Fibre_cat (@PathOutMotives_catd Z) x)
+      (@Catd_cat (@PathOut_cat Z x)));
 
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
   @fapp0
@@ -6676,8 +6819,11 @@ assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
     ≡ @Functord K (@hom_ K K (@id_func K) x) E;
 
 assert [K : Cat] (E : τ (Catd K)) (x : τ (Obj K)) ⊢
-  @Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E
-    ≡ @Functord_cat K (@hom_ K K (@id_func K) x) E;
+  @eq_refl Cat_grpd
+    (@Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E)
+  : τ (@= Cat_grpd
+      (@Transf_cat K Cat_cat (@hom_ K K (@id_func K) x) E)
+      (@Functord_cat K (@hom_ K K (@id_func K) x) E));
 
 assert [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K)) ⊢

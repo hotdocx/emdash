@@ -18,10 +18,6 @@ notation, implementation plans, and historical decisions.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_DISPLAYED_FACADE_TOWER_REARCHITECTURE_PLAN_2026-07-11.md`:
-  proposed levelwise runtime/proof-time boundary between the displayed
-  `Catd`/`Functord`/`Transfd` tower and the ordinary iterated-hom hierarchy,
-  including Sigma omega-iteration and constant-section follow-up probes.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -51,6 +47,11 @@ notation, implementation plans, and historical decisions.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_DISPLAYED_FACADE_TOWER_REARCHITECTURE_PLAN_2026-07-11.md`:
+  promoted the levelwise proof-time/runtime boundary for the displayed
+  `Catd`/`Functord`/`Transfd` tower, constant-section owner split,
+  `sigma_map_transf`, and explicit `Prof_cat` endpoint recovery; records the
+  deferred path-induction section-owner and Sigma off-diagonal prerequisites.
 - `REPORT_EMDASH_V3_2_DOCUMENTATION_KERNEL_MAINTENANCE_IMPLEMENTATION_PLAN_2026-07-10.md`:
   completed authority consolidation, mathematical/notation refresh, adjacent
   documentation across executable sections 0–19, and diagnostic-navigation

@@ -8,7 +8,7 @@ Supersedes: no whole report; proposes a representation-boundary migration refini
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-11
 Infinity-Codex-Decision-Responses: infinity-codex:019f526a-dafb-77d0-9dea-2778a57275b7:019f526d-c79f-7850-8802-f99a59b0a028; infinity-codex:019f526a-dafb-77d0-9dea-2778a57275b7:019f52bb-060e-75c0-87bb-ef593b24310b
-Status: proposed architecture plan; continuation probes select a proof-time constant-section boundary and a provisional Sigma higher-hom projection, but no active kernel migration has been promoted
+Status: core architecture promoted 2026-07-11; Sigma-first-projection section-fold demotion and sigma_map_transf off-diagonal action remain explicit deferred follow-ups
 
 ## Goal
 
@@ -382,8 +382,8 @@ to the fibrewise component over `id_k`, packaged by `sigma_arrow`. The full
 source and check probes pass. A second variant introduced a new stable owner
 for the entire first-hom functor; it also passed, but added another global
 owner and four more critical-pair warnings than the narrower projection. The
-narrow `sigma_map_transf` design is therefore the provisional promotion
-candidate.
+narrow `sigma_map_transf` design was therefore selected and is now the
+promoted projection.
 
 `Sigma_transfd_funcd` is not that second-hom action. Its result is a displayed
 functor between the two `Sigma_catd_functord_catd` families, whereas
@@ -468,7 +468,7 @@ For every option, test:
 - the terminal-source component rule used by the homd/section pipeline;
 - warning and subject-reduction effects.
 
-The three-option continuation probe selects option 3 provisionally:
+The three-option continuation probe selected option 3:
 
 - the section-category comparison is proof-time;
 - the terminal-to-constant object comparison is also proof-time, with direct
@@ -489,8 +489,8 @@ This is not cosmetic duplication: the two constructors now live on opposite
 sides of a proof-time-only facade boundary.
 
 The complete source/check probes pass for all three options, but option 3 has
-the clearest runtime ownership and the smallest warning inventory. This is a
-probe-level architectural selection, not active-kernel promotion.
+the clearest runtime ownership and the smallest warning inventory. It was
+subsequently promoted as recorded below.
 
 ## Probe Evidence At Plan Creation
 
@@ -579,6 +579,69 @@ combined inventory to `1261 = 1097 + 164` before the unused-pattern cleanup.
 Warning counts remain diagnostic evidence rather than a semantic selection
 criterion.
 
+## Active Promotion And Wider-Fold Audit, 2026-07-11
+
+The selected combined candidate has been promoted to `emdash3_2.lp` and
+`emdash3_2_checks.lp`. The active implementation now contains all three facade
+rungs, explicit `Prof_cat` endpoint recovery, the proof-time constant-section
+boundary, displayed constant-transformation owners, the separate ordinary
+weakening owner, and `sigma_map_transf` with its point projection.
+
+The active warning inventory is the measured combined result:
+
+```text
+active warnings                          1253 = 1090 + 163
+previous active warnings                 1303 = 1140 + 163
+```
+
+Promotion validation passes:
+
+```text
+make check
+make examples
+make warning-summary
+make audit-rules
+make catalog
+make health
+make ci
+git diff --check
+```
+
+The diagnostic catalog contains `774` classified checks with zero
+unclassified entries. The Sigma reviewer example includes the generic
+second-hom action to `sigma_map_transf`.
+
+The wider semantic-fold audit examined the remaining runtime contraction:
+
+```text
+Functord_cat
+  (Sigma_cat K R)
+  (Const_catd (Sigma_cat K R) Terminal_cat)
+  (Sigma_proj1_pullback_catd K R D)
+    -> Functord_cat K R D.
+```
+
+The owner-position probe
+`tmp/probes/dfacade_sigma_projection_section_prooftime_probe.lp` replaced it
+with direct proof-time category, object, ordinary-object, and next-hom
+comparisons. Source checking failed subject reduction at the existing
+computation:
+
+```text
+path_ind_sec
+  (Sigma_proj1_pullback_catd Z (Rep_catd Z x) D)
+  u
+    -> fib_cov_transf Z D x u.
+```
+
+The left side is owned by the section facade over the Sigma total, while the
+right side is owned by `Functord_cat Z (Rep_catd Z x) D`. A proof-time category
+comparison does not establish runtime subject reduction for that rule. The
+global contraction is therefore retained as a measured exception. Its proper
+prerequisite is a stable path-induction section result owner, with component
+projections to the existing `fib_cov_transf` computation; an ad hoc `Obj` join
+would recreate the boundary problem one layer lower.
+
 ## Implementation Phases
 
 ### Phase 0: Plan, inventory, and reproducible baseline
@@ -611,8 +674,9 @@ criterion.
    projection.
 4. Add typed diagnostics which prove that no comparison depends on
    unification-rule transitivity.
-5. Install only the measured terminal-to-constant object join required for
-   source subject reduction, pending the full section-fold decision.
+5. The original staging proposal for a terminal-to-constant object join was
+   superseded by the completed Phase 4 probe; no such runtime join is
+   promoted.
 
 Phases 1 and 2 may be promoted together if separating them leaves the active
 kernel in an architecture which typechecks only through temporary compatibility
@@ -633,12 +697,12 @@ scaffolding.
 
 ### Phase 4: Constant-section fold decision
 
-The three-option probe is complete and provisionally selects option 3. Before
-promotion, transfer the direct category/object/next-hom unification rules,
-the displayed constant-transformation owner, the ordinary weakening-owner
-split, and their focused diagnostics as one coherent change. Do not preserve
-the old whole-category or terminal-to-constant `Obj` runtime folds as
-compatibility scaffolding.
+The three-option probe selected option 3. The direct
+category/object/next-hom unification rules, displayed
+constant-transformation owner, ordinary weakening-owner split, and focused
+diagnostics were promoted as one coherent change. The old whole-category and
+terminal-to-constant `Obj` runtime folds were not retained as compatibility
+scaffolding.
 
 ### Phase 5: Wider semantic-fold audit
 
@@ -652,6 +716,12 @@ projections, especially:
 
 Do not demote them mechanically. Each fold requires a concrete owner,
 consumer, and both-order probe.
+
+The first audit pass is complete. Product-valued transfor computation remains
+a genuine ordinary runtime projection. The Sigma-first-projection section fold
+is retained for the `path_ind_sec -> fib_cov_transf` consumer, with the stable
+section-result prerequisite recorded above. No other whole-category facade
+collapse was found that should be changed in this migration.
 
 ### Phase 6: Promotion and documentation
 
@@ -770,23 +840,26 @@ The redesign is successful when:
 - `DFACADE-03`: Create and index the dedicated proposed architecture plan.
   Status: complete 2026-07-11; no kernel promotion is authorized by this item.
 - `DFACADE-04`: Promote or revise the rung-0 object projection and category
-  comparison after final warning/decision-tree review. Status: pending.
+  comparison after final warning/decision-tree review. Status: complete and
+  promoted 2026-07-11.
 - `DFACADE-05`: Promote or revise the rung-1 and rung-2 facade comparisons and
-  projections. Status: pending; should be coordinated with `DFACADE-04` if an
-  intermediate active state is brittle.
+  projections. Status: complete and promoted with `DFACADE-04`.
 - `DFACADE-06`: Probe the full first- and second-hom action of `Sigma_func`,
   including its precise relation to `Sigma_transfd_funcd`. Status: core probe
-  complete; the generic iterable action and narrow `sigma_map_transf` point
-  projection pass, and the two Sigma constructions have distinct types.
-  Off-diagonal action remains a prerequisite for any broader Sigma rule.
+  complete and the narrow `sigma_map_transf` point projection is promoted;
+  the generic iterable action passes, and the two Sigma constructions have
+  distinct types. Off-diagonal action remains a prerequisite for any broader
+  Sigma rule.
 - `DFACADE-07`: Resolve the constant-section whole-category fold through the
-  three-option category/object/hom probe. Status: complete at probe level;
-  option 3 is provisionally selected with displayed constant-transformation
-  and separate ordinary weakening owners. Active promotion remains pending.
+  three-option category/object/hom probe. Status: complete; option 3, with
+  displayed constant-transformation and separate ordinary weakening owners,
+  was promoted 2026-07-11.
 - `DFACADE-08`: Audit the Sigma-projection section fold and other competing
-  whole-category semantic folds. Status: pending.
+  whole-category semantic folds. Status: first audit complete; the Sigma fold
+  is retained because demotion fails subject reduction at `path_ind_sec`.
+  Stable path-induction section-result ownership is deferred.
 - `DFACADE-09`: Update the `Prof_cat` rule to recover `$B0` explicitly and add
-  a focused inferred-endpoint diagnostic. Status: mechanically validated in
-  the combined probe; active promotion pending.
+  a focused inferred-endpoint diagnostic. Status: complete and promoted.
 - `DFACADE-10`: Migrate diagnostics, comments, SOP, Foundations, catalog, and
-  health report; run the complete handoff gate. Status: pending.
+  health report; run the complete handoff gate. Status: complete; all listed
+  validation commands pass 2026-07-11.

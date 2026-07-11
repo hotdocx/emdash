@@ -1521,7 +1521,8 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
 
 // 3d. Directed-family and displayed-arrow classifiers
 //
-// Directed Cat-valued families are canonical Cat-valued functors.
+// Directed Cat-valued families form a stable displayed facade over ordinary
+// Cat-valued functors.
 //
 // Surface/formula:
 //   Catd_cat(K) = K ⊢ Cat
@@ -1533,8 +1534,15 @@ injective symbol Catd_cat (K : Cat) : Cat;
 injective symbol Catd (K : Cat) : Grpd
 ≔ Obj (Catd_cat K);
 
-// Canonical fold: ordinary Cat-valued functors form `Catd_cat(K)`.
-rule Functor_cat $K Cat_cat ↪ @Catd_cat $K;
+// Runtime object projection: a directed family is represented by an ordinary
+// Cat-valued functor while the `Catd_cat` category head remains visible.
+rule Obj (@Catd_cat $K)
+  ↪ Obj (Functor_cat $K Cat_cat);
+
+// Proof-time comparison only: the ordinary and displayed category
+// presentations recover the same base.
+unif_rule Functor_cat $K Cat_cat ≡ @Catd_cat $K'
+  ↪ [ $K ≡ $K' ];
 
 // Proof-time inversion for two rigid directed-family category heads.
 unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
@@ -1554,12 +1562,9 @@ injective symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
 unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D' ];
 
-// `Catd_cat K` is the canonical normal form of `Functor_cat K Cat_cat`.
-// Therefore `Hom_cat (Catd_cat K) E D` does not route through a direct
-// `Transf_cat K Cat_cat E D` rewrite. The ordinary-functor route
-// `Hom_cat (Functor_cat K Cat_cat) E D ↪ Transf_cat K Cat_cat E D` and the
-// directed-family route below both join at `Functord_cat K E D`.
-// Hom projection in `Catd_cat`: arrows are natural/displayed functor families.
+// Hom projection in `Catd_cat`: arrows are natural/displayed functor
+// families. The ordinary `Transf_cat` presentation is related to this stable
+// displayed head at proof time below, rather than by a category rewrite.
 rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 
 // Transparent displayed identity: generic identity at `Catd_cat(K)`.
@@ -4545,11 +4550,41 @@ unif_rule Obj (@Transf_cat $A $B $F $G) ≡ Obj (@Transf_cat $A' $B' $F' $G')
 //   Hom_{A ⊢ B}(F,G) = F => G.
 rule Hom_cat (Functor_cat _ _) $F $G ↪ Transf_cat $F $G;
 
-// Cat-valued transfors are displayed/natural family morphisms.
+// Proof-time comparison only: ordinary Cat-valued transfors and displayed
+// functor families are two stable presentations of the same first hom.
 //
 // Surface/formula:
 //   E => D over K = k :^n K ; E[k] ⊢ D[k].
-rule @Transf_cat $K Cat_cat $E $D ↪ @Functord_cat $K $E $D;
+unif_rule
+  @Transf_cat $K Cat_cat $E $D
+  ≡ @Functord_cat $K' $E' $D'
+  ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D' ];
+
+// Runtime object projection from the displayed first-hom facade.
+rule Obj (@Functord_cat $K $E $D)
+  ↪ Obj (@Transf_cat $K Cat_cat $E $D);
+
+// Runtime object projection from the displayed second-hom facade to the
+// corresponding ordinary iterated hom category.
+rule Obj (@Transfd_cat $K $E $D $FF $GG)
+  ↪ Obj
+      (Hom_cat
+        (@Transf_cat $K Cat_cat $E $D)
+        $FF
+        $GG);
+
+// Direct proof-time second-hom comparison. Do not rely on transitivity of the
+// lower Functor/Catd and Transf/Functord comparisons.
+unif_rule
+  Hom_cat (@Transf_cat $K Cat_cat $E $D) $FF $GG
+  ≡ @Transfd_cat $K' $E' $D' $FF' $GG'
+  ↪ [
+      $K ≡ $K';
+      $E ≡ $E';
+      $D ≡ $D';
+      $FF ≡ $FF';
+      $GG ≡ $GG'
+    ];
 
 // Product-valued transfors project componentwise.
 //
@@ -7064,7 +7099,7 @@ rule @fapp1_fapp0
       (@comp_fapp0
         Cat_cat
         (Op_cat Cat_cat)
-        (Catd_cat Cat_cat)
+        (Functor_cat Cat_cat Cat_cat)
         Cat_cat
         (@fapp0_func Cat_cat Cat_cat Cat_cat)
         Functor_cat_func)
@@ -7102,6 +7137,28 @@ rule @tapp0_fapp0
 // Surface/formula:
 //   const_K(A)[k] = A.
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
+
+// Proof-time terminal-to-constant object comparison in the ordinary transfor
+// presentation. Runtime access uses the section/component projection ladder.
+unif_rule
+  Obj
+    (@Transf_cat
+      $K Cat_cat
+      (@Const_catd $K Terminal_cat)
+      (@Const_catd $K $A))
+  ≡ Obj (Functor_cat $K' $A')
+  ↪ [ $K ≡ $K'; $A ≡ $A' ];
+
+// Direct proof-time terminal-to-constant object comparison in the displayed
+// presentation; do not rely on transitivity through Transf/Functord.
+unif_rule
+  Obj
+    (@Functord_cat
+      $K
+      (@Const_catd $K Terminal_cat)
+      (@Const_catd $K $A))
+  ≡ Obj (Functor_cat $K' $A')
+  ↪ [ $K ≡ $K'; $A ≡ $A' ];
 
 // Constant-family fibre: const_K(A)[k] ↪ A.
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
@@ -7227,9 +7284,28 @@ rule @tapp0_fapp0
 symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat
 ≔ @Functord_cat K (@Const_catd K Terminal_cat) E;
 
-// Sections of a constant family are ordinary functors: Π_k A ≃ (K ⊢ A).
-rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
-  ↪ Functor_cat $K $A;
+// Proof-time comparison only: sections of a constant family are ordinary
+// functors, while the displayed section-category head remains stable.
+unif_rule
+  @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
+  ≡ Functor_cat $K' $A'
+  ↪ [ $K ≡ $K'; $A ≡ $A' ];
+
+// Direct proof-time comparison of arrows between constant sections with
+// ordinary transfors. This avoids unification-rule transitivity.
+unif_rule
+  @Transfd_cat
+    $K
+    (@Const_catd $K Terminal_cat)
+    (@Const_catd $K $A)
+    $F $G
+  ≡ @Transf_cat $K' $A' $F' $G'
+  ↪ [
+      $K ≡ $K';
+      $A ≡ $A';
+      $F ≡ $F';
+      $G ≡ $G'
+    ];
 
 // Fixed-base layer: functorial section-category constructor at a fixed base.
 //
@@ -7605,9 +7681,34 @@ injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
+// Stable second-hom projection of Sigma totalization. A displayed transfor
+// between displayed maps induces an ordinary transfor between total maps.
+injective symbol sigma_map_transf [K : Cat] [E D : τ (Catd K)]
+  [FF GG : τ (Functord E D)]
+  (eta : τ (Transfd FF GG))
+  : τ (@Transf
+      (@Sigma_cat K E)
+      (@Sigma_cat K D)
+      (@sigma_map_func K E D FF)
+      (@sigma_map_func K E D GG));
+
 // Hom-action of totalization: Sigma_func(K)[η] ↪ sigma_map_func(η).
 rule @fapp1_fapp0 _ Cat_cat (@Sigma_func $K) $E $D $η
   ↪ @sigma_map_func $K $E $D $η;
+
+// Higher hom projection: the generic next action of Sigma_func totalizes a
+// displayed transfor. Generic `fapp*` remains the functoriality owner.
+// lhs-audit: keep 1,2 -- measured critical-pair guards for the iterated Sigma action
+rule @fapp1_fapp0
+      (@Functord_cat $K $E $D)
+      (Functor_cat (@Sigma_cat $K $E) (@Sigma_cat $K $D))
+      (@fapp1_func
+        (@Catd_cat $K)
+        Cat_cat
+        (@Sigma_func $K)
+        $E $D)
+      $FF $GG $eta
+  ↪ @sigma_map_transf $K $E $D $FF $GG $eta;
 
 // Object action of a Sigma map: Sigma(η)[(k,u)] ↪ (k,η[k][u]).
 rule @fapp0 _ _
@@ -8420,6 +8521,35 @@ rule @tapp0_fapp0
         $T
         $k
         $eta);
+
+// Point component of the totalized displayed transfor at (k,u): the
+// fibrewise component lies over the identity base arrow.
+rule @tapp0_fapp0
+      _ _
+      _ _
+      (Struct_sigma $k $u)
+      (@sigma_map_transf $K $E $D $FF $GG $eta)
+  ↪ @sigma_arrow
+      $K $D
+      $k $k
+      (@fapp0
+        (Fibre_cat $E $k)
+        (Fibre_cat $D $k)
+        (@Fibre_func $K $E $D $FF $k)
+        $u)
+      (@fapp0
+        (Fibre_cat $E $k)
+        (Fibre_cat $D $k)
+        (@Fibre_func $K $E $D $GG $k)
+        $u)
+      (@id $K $k)
+      (@tapp0_fapp0
+        (Fibre_cat $E $k)
+        (Fibre_cat $D $k)
+        (@Fibre_func $K $E $D $FF $k)
+        (@Fibre_func $K $E $D $GG $k)
+        $u
+        (@tdapp0_fapp0 $K $E $D $FF $GG $k $eta));
 
 // Readable component alias.
 //
@@ -9390,15 +9520,53 @@ rule @tapp0_fapp0
 injective symbol const_section_func (K : Cat) (A : Cat)
   : τ (Functor A (@Pi_cat K (@Const_catd K A)));
 
+// Displayed hom action of the constant-section constructor.
+//
+// Surface/formula:
+//   Const_transfd_func(K,A,x,y) : Hom_A(x,y) ⊢ const(x) =>_[K] const(y).
+injective symbol Const_transfd_func [K A : Cat] [x y : τ (Obj A)]
+  : τ (Functor
+      (Hom_cat A x y)
+      (@Transfd_cat
+        K
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K A)
+        (@Const_func K A x)
+        (@Const_func K A y)));
+
+// Displayed constant transformation selected by p.
+injective symbol Const_transfd [K A : Cat] [x y : τ (Obj A)]
+  (p : τ (Hom A x y))
+  : τ (@Transfd
+      K
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K A)
+      (@Const_func K A x)
+      (@Const_func K A y));
+
 // Object action: const_section_func(K,A)[a] ↪ const_K(a).
 rule @fapp0 $A _ (@const_section_func $K $A) $a ↪ @Const_func $K $A $a;
 
-// Hom-functor action sends Hom_A(x,y) to constant transfors on K.
-rule @fapp1_func $A _ (@const_section_func $K $A) $x $y ↪ @Const_transf_func $K $A $x $y;
+// Hom-functor action stays in the displayed next-hom facade.
+rule @fapp1_func $A _ (@const_section_func $K $A) $x $y
+  ↪ @Const_transfd_func $K $A $x $y;
 
-// Capped arrow action: p ↦ the constant transfor with component p.
+// Capped arrow action: p ↦ the displayed constant transfor.
 rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
-  ↪ @Const_transf $K $A $x $y $p;
+  ↪ @Const_transfd $K $A $x $y $p;
+
+// Fibre component of a displayed constant transfor: the ordinary constant
+// transfor on the terminal source fibre.
+// lhs-audit: keep 2,3,4,5 -- measured section-facade component discriminators
+rule @tdapp0_fapp0
+      $K
+      (@Const_catd $K Terminal_cat)
+      (@Const_catd $K $A)
+      (@Const_func $K $A $x)
+      (@Const_func $K $A $y)
+      $_
+      (@Const_transfd $K $A $x $y $p)
+  ↪ @Const_transf Terminal_cat $A $x $y $p;
 
 // Pairing telescope for products.
 //
@@ -9443,19 +9611,34 @@ rule @fapp1_fapp0 _ _
     sym_func_func(A,B,C) : (A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))
     diag_func_func(A,C)  : (A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)
 
-  Weakening is a readable alias through `const_section_func`; exchange and
-  contraction are stable heads because later displayed analogues should
-  recognize these structural operations directly, rather than through
-  product/curry encodings.
+  Ordinary weakening is a stable owner separate from the displayed
+  `const_section_func` facade. Exchange and contraction are also stable heads
+  because later displayed analogues should recognize these structural
+  operations directly, rather than through product/curry encodings.
 */
 
-// Weakening for ordinary functor categories.
+// Stable weakening owner for ordinary functor categories. This does not fold
+// through the proof-time-only constant-section facade.
 //
 // Surface/formula:
 //   Const_func_func(A,B)[b] = const_A(b) : A ⊢ B.
-symbol Const_func_func [A B : Cat]
-  : τ (Functor B (Functor_cat A B))
-≔ @const_section_func A B;
+injective symbol Const_func_func [A B : Cat]
+  : τ (Functor B (Functor_cat A B));
+
+// Object action of ordinary weakening.
+// lhs-audit: keep 2 -- measured ordinary-weakening codomain discriminator
+rule @fapp0 $B (Functor_cat $A $B) (@Const_func_func $A $B) $b
+  ↪ @Const_func $A $B $b;
+
+// Full hom action of ordinary weakening.
+// lhs-audit: keep 2 -- measured ordinary-weakening codomain discriminator
+rule @fapp1_func $B (Functor_cat $A $B) (@Const_func_func $A $B) $x $y
+  ↪ @Const_transf_func $A $B $x $y;
+
+// Capped arrow action of ordinary weakening.
+// lhs-audit: keep 2 -- measured ordinary-weakening codomain discriminator
+rule @fapp1_fapp0 $B (Functor_cat $A $B) (@Const_func_func $A $B) $x $y $p
+  ↪ @Const_transf $A $B $x $y $p;
 
 // Exchange of two ordinary functor arguments.
 //
@@ -10003,9 +10186,10 @@ rule Obj (Prof_cat $A $B)
 rule Hom_cat (Prof_cat $A $B) $P $Q
   ↪ @Functord_cat (Product_cat (Op_cat $A) $B) $P $Q;
 
-// Proof-time endpoint recovery only: the displayed-family base determines A.
-unif_rule Prof_cat $A $B ≡ Catd_cat (Product_cat $A0 $B)
-  ↪ [ $A ≡ Op_cat $A0 ];
+// Proof-time endpoint recovery only: both displayed-family base components
+// are recovered explicitly.
+unif_rule Prof_cat $A $B ≡ Catd_cat (Product_cat $A0 $B0)
+  ↪ [ $A ≡ Op_cat $A0; $B ≡ $B0 ];
 
 // Object/type classifier of Cat-valued profunctors.
 symbol Prof (A B : Cat) : Grpd

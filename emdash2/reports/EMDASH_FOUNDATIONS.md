@@ -270,6 +270,12 @@ respectively. The words "displayed" and "family" still occur in implementation
 names, but this document uses "functorial" and "natural" to emphasize the
 variance over base arrows.
 
+These displayed names are stable category facades, not runtime abbreviations
+that erase the ordinary hierarchy. `Catd_cat`, `Functord_cat`, and
+`Transfd_cat` compare at proof time with the corresponding ordinary
+`Functor_cat`, `Transf_cat`, and iterated-hom presentations. Their object and
+hom projections provide the runtime passage between the two views.
+
 A natural family morphism has fibre functors:
 
 ```text
@@ -335,6 +341,19 @@ A natural family morphism `FF : E → D` induces a map on totals:
 ```text
 Σ(FF)(k,u) = (k, FF[k](u))
 ```
+
+A natural family transformation `eta : FF => GG` induces an ordinary
+transformation between the two total maps:
+
+```text
+Σ(eta) : Σ(FF) => Σ(GG)
+Σ(eta)[(k,u)] = (id_k, eta[k](u)).
+```
+
+The kernel names this higher projection `sigma_map_transf`. It is the next
+generic hom action of `Sigma_func`; it is distinct from
+`Sigma_transfd_funcd`, whose result is itself a displayed functor between
+uncurried telescope families.
 
 The current kernel also exposes the canonical total arrow over a base arrow:
 
@@ -440,9 +459,15 @@ functor application:
 F[k] as a section = F[k] as an ordinary functor value
 ```
 
-In `emdash3_2.lp`, this is represented by the rewrite
-`Pi_cat (Const_catd K A) ↪ Functor_cat K A` and by an assertion equating
-`piapp0 F k` with `fapp0 F k` in that case.
+In `emdash3_2.lp`, the category equality is a proof-time comparison between
+the stable displayed section facade and `Functor_cat K A`. Runtime evaluation
+crosses the boundary through the rule equating `piapp0 F k` with ordinary
+`fapp0 F k` in this case.
+
+Likewise, the hom action of `const_section_{K,A}` stays in the displayed
+transformation facade (`Const_transfd_func` / `Const_transfd`). Ordinary
+weakening has a separate stable owner `Const_func_func`; it no longer unfolds
+through the displayed section constructor.
 
 Conceptually, a section should also determine a functor into the total
 category:
@@ -681,6 +706,10 @@ const_section_{1,A}(a) = Obj_func(a) : 1 → A
 
 In the implementation, `Obj_func(a)` is a defined alias for the terminal-domain
 constant functor `Const_func(1,A,a)`.
+
+On an arrow `p : x ->^A y`, the constant-section constructor produces the
+displayed constant transformation `Const_transfd(p)`. Its component at every
+base object is the ordinary terminal-source constant transfor with value `p`.
 
 Pullback of sections along a base functor is also present:
 
@@ -1070,13 +1099,15 @@ vocabulary.
 | `Π_k E[k]` | `Pi_cat E` |
 | `s[k]` | `piapp0 s k` |
 | `s[f]` | `piapp1_fapp0 s f` |
-| `Π_K Const_K(A) = Functor(K,A)` | rewrite for `Pi_cat (Const_catd K A)` |
+| `Π_K Const_K(A) = Functor(K,A)` | proof-time comparison for `Pi_cat (Const_catd K A)` |
 | `const_section_{K,A}` | `const_section_func K A` |
 | `const_section_{K,A}(a)` | `Const_func K A a` |
+| `const_section_{K,A}(p)` | `Const_transfd K A p` |
 | `Σ_k E[k]` | `Sigma_cat E` |
 | `(k,u)` | `Struct_sigma k u` |
 | `π₁` | `Sigma_proj1_func E` |
 | `Σ(FF)` | `sigma_map_func FF` |
+| `Σ(eta) : Σ(FF) => Σ(GG)` | `sigma_map_transf eta` |
 | `E[f](u)` | `fapp0 (fib_cov_tapp0_func E x y u) f` |
 | `homd_E(x,u,y,v)` | `homd_ (id_funcd E) x u y v` |
 | Natural family morphisms | `Functord_cat E D` / `Functord E D` |
