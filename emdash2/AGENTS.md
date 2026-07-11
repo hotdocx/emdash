@@ -98,6 +98,9 @@ with warnings enabled before rejecting the proposed rule.
   `// lhs-audit: keep SLOT[,SLOT] -- reason`.
 - Never apply inferred-slot cleanup mechanically. Run the focused probe,
   bounded full check, and warning comparison when relevant.
+- LHS minimality is not a blanket implicit-argument cleanup: RHSs and defined
+  bodies must retain parameters not syntactically recoverable from visible
+  data, while diagnostic assertions may keep canonical endpoints explicit.
 - Avoid outer-eliminator/inner-cut commuting conversions such as
   `sigma_Fst(comp_fapp0(...))`. Prefer a constructor beta rule, existing
   projection ladder, stable intermediate component, or equation at the
@@ -121,6 +124,9 @@ with warnings enabled before rejecting the proposed rule.
   reducible explicit endpoint.
 - Do not duplicate semantic bodies in helper aliases. Route readable aliases
   through the named semantic constructor.
+- Do not promote notation-only aliases or mathematical equivalences (for
+  example `Fibre_cat` injectivity or broad terminal-source collapses) to global
+  computation without a concrete consumer and full normal-form audits.
 - Prefer canonical endpoint forms such as `Hom_cat` and `Functord_cat` in
   conversion-sensitive rules/assertions over reducible readability wrappers.
 - If a functor-level fold gives the object-level result through `fapp0`, keep

@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-10
+Last consolidated: 2026-07-11
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -32,7 +32,7 @@ needed.
 
 ## Validated Current Baseline
 
-The 2026-07-10 baseline is:
+The 2026-07-11 baseline is:
 
 ```text
 make check                         pass
@@ -385,6 +385,37 @@ measured exception immediately above the rule:
 // lhs-audit: keep SLOT[,SLOT] -- reason
 ```
 
+The rule applies at rewrite-family scale, not only one slot at a time. Match on
+the true stable discriminee and do not copy surrounding presentation wrappers
+across sibling rules. For example, when `Op_func(_,_,F)` selects the case,
+extra `Op_cat A`, `Op_cat B`, product-functor, or transparent-alias endpoints
+should remain inferred unless the theorem genuinely distinguishes those
+wrappers. A surface pattern that works for a variable endpoint may otherwise
+stop matching when that endpoint normalizes to a product or functor category.
+
+### Explicitness depends on the surface
+
+Do not apply LHS minimality as a blind whole-file formatting rule. The four
+main surfaces have different needs:
+
+1. **Rewrite and unification patterns:** keep the stable discriminator
+   explicit and reconstructible endpoint/category/family slots implicit.
+   Apply this discipline to both sides of a `unif_rule`.
+2. **Rule RHSs and defined-symbol bodies:** omit only arguments that are
+   syntactically recoverable from the visible data. A fixed parameter that is
+   not determined by the remaining arguments must stay visible even if an
+   expected type happens to recover it in one probe.
+3. **Theorem-style examples:** prefer the compact mathematical formula;
+   projectionwise product/Sigma statements are often clearer and more robust
+   than raw dependent-constructor equality.
+4. **Diagnostic assertions:** keep canonical source/target endpoints explicit
+   when the purpose is to expose the full `fapp1_func`, `fapp1_fapp0`, product,
+   or displayed-action shape. Compactness must not turn a regression into a
+   test of accidental endpoint inference.
+
+This distinction preserves readability without erasing the information needed
+for matching, subject reduction, or a stable diagnostic.
+
 ### Outer eliminators over active cuts
 
 Treat an LHS such as:
@@ -421,7 +452,17 @@ document why.
 
 A bare `assert t ≡ u` lets Lambdapi infer both sides independently. When a real
 consumer supplies an expected type, test that typed shape explicitly before
-concluding that conversion fails.
+concluding that conversion fails: first check the raw term at the intended
+type `T` (or bind it with a temporary helper returning `T`), then test
+conversion or typed reflexivity using that term. Keep a bare conversion
+assertion only when both sides are expected to elaborate without contextual
+type information.
+
+Do not introduce decoded `*_TYPE` or parallel classifier heads merely to make
+binders shorter. Such a head needs to join the existing category/classifier
+reductions and can create a second semantic layer. Keep ownership at canonical
+heads such as `Transf_cat`, `Functord_cat`, and `Product_cat`; use narrow
+`Obj(...)` elaboration aids only when a measured consumer requires them.
 
 ### Constants and unification limits
 
@@ -432,6 +473,30 @@ and decision-tree review.
 Unification rules are experimental and not reliably transitive. Prefer two
 rigid heads or a stable intermediary. Apply inferred-slot hygiene to both sides
 of a `unif_rule`.
+
+### Stable heads and semantic equivalences
+
+Add a stable head only when later rules need a visible constructor or a focused
+probe establishes a real discrimination/performance boundary that a smaller
+projection or canonical endpoint cannot solve. A surface-readable name alone
+is not enough; transparent aliases should normally remain definitions.
+
+Notation-only heads such as `Fibre_cat(E,k) = fapp0(E,k)` should not receive
+broad injectivity or inversion rules: equality of two fibres must not generally
+recover the entire family and index.
+
+Likewise, familiar equivalences for maps out of the terminal category are not
+global runtime computation by default:
+
+```text
+Functor_cat(1,A) ≃ A
+Transf_cat(const(u),const(v)) ≃ Hom_A(u,v).
+```
+
+Prefer a consumer-local projection/fold through the existing section and
+component owners. Promote a global terminal-source rewrite only after a
+concrete consumer, both reduction orders, and the warning/subject-reduction
+effects have been measured.
 
 ## Identity Normal Forms
 

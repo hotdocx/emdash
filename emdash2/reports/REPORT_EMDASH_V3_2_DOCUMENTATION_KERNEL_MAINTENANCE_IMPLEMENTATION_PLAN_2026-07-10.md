@@ -8,6 +8,7 @@ Supersedes: no whole report; consolidates the maintenance work previously distri
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-10
 Infinity-Codex-Decision-Responses: none
+Baseline-Audit-Commit: 473d4101f64db18584faf5684047e2d8540f375b
 Status: completed 2026-07-11; documentation-authority consolidation and nonsemantic source cleanup promoted
 
 ## Goal
@@ -460,9 +461,9 @@ backlog is confined to sections 18–19 (profunctors and applications); section
 The final comment-only source batch completes the adjacent-command pass for
 the profunctor and application layers. Every matched symbol declaration,
 `rule` command, and `unif_rule` command in executable sections 0–19 now has an
-immediately adjacent comment. Section 20 remains a comment-only map of the
-external diagnostic module and therefore contains no executable commands to
-classify.
+immediately adjacent comment. The later baseline-preservation audit retired
+the comment-only section 20; the generated check catalog is now the sole
+reviewer-facing diagnostic map.
 
 Section 18 now labels the profunctor reindexing ladder, shaped cells, tensor
 and co-Yoneda maps, covariant/contravariant closure, weighted-limit comparison
@@ -477,12 +478,68 @@ at 1,303; all eight CI typecheck targets pass; strict LHS audit reports zero
 unreviewed clauses; the 764-check catalog is fresh and has zero unclassified
 checks.
 
+### Post-completion preservation audit 2026-07-11
+
+Commit `473d4101f64db18584faf5684047e2d8540f375b` was reviewed as the
+pre-maintenance baseline. The former 1,928-line chronological SOP and
+1,524-line AGENTS file mixed durable kernel policy with dated warning counts,
+superseded owner inventories, obsolete names, historical experiments, and
+copied Lambdapi reference material. The audit classified rather than blindly
+restored deleted prose.
+
+After stripping comments and whitespace, both executable modules have
+identical normalized-text SHA-256 digests to that baseline:
+
+```text
+emdash3_2.lp         9e68b0f5548dc31e80afba5cc89b54977b4e1cecde6310ac543fba77b5179061
+emdash3_2_checks.lp  8f00b3d80f7345db6857e9e96088b74c86d31eb811dffa14af5966532ede9257
+```
+
+Thus the complete maintenance series changed documentation, comments, and
+navigation only; it did not change a declaration, rule, unification rule, or
+diagnostic assertion.
+
+Durable policies have the following current homes:
+
+| Baseline insight | Consolidated authority |
+| --- | --- |
+| non-discriminating inferred LHS arguments stay `_`; explicit exceptions require measured guards | AGENTS, living SOP “Minimal inferred slots”, and local `lhs-audit` annotations |
+| the true stable discriminee matters more than reducible endpoint/presentation wrappers | living SOP “Minimal inferred slots” |
+| LHS, RHS/body, theorem-style, and diagnostic surfaces require different levels of explicitness | AGENTS and living SOP “Explicitness depends on the surface” |
+| runtime rewriting differs from proof-time unification; typed `eq_refl` is required to exercise `unif_rule` | AGENTS and living SOP “Runtime computation versus proof-time comparison” |
+| expected-type consumers can be more authoritative than a bare conversion assertion | living SOP “Canonical types and expected-type probes” |
+| outer-eliminator/inner-cut commuting conversions require both-order owner-position probes | AGENTS and living SOP “Outer eliminators over active cuts” |
+| ordinary functoriality/naturality has one generic owner; Cat-specialized heads require extra projection structure | AGENTS “Generic Owners And Higher Structure” and living SOP “One generic owner” |
+| stable heads require a measured need; notation-only heads and terminal-source equivalences are not broad computation | AGENTS and living SOP “Stable heads and semantic equivalences” |
+| identity is a family of normal forms and should be handled by narrow consumers | AGENTS and living SOP “Identity Normal Forms” |
+| varying categorical indices require base-arrow and higher/transfor action, not only pointwise formulas | AGENTS and living SOP “Omega-friendly structure” |
+| hom-shaped varying endpoints should use `hom_int`, `hom_con`, or `homd_int` owners | AGENTS “Generic Owners And Higher Structure” and adjacent kernel comments |
+| bounded probes, warning diagnosis, strict LHS/catalog audits, CI, health, and compaction recovery | AGENTS and living SOP development workflow |
+
+The audit intentionally did not preserve stale or non-authoritative content:
+
+- chronological postscripts, superseded symbol inventories, and historical
+  warning/timing counts remain in dated decision reports or Git history;
+- the baseline hom-action accumulation prose used the reverse of the active
+  runtime orientation and was corrected during implementation;
+- copied Lambdapi manuals remain under `docs/` and `lambdapi-examples/` rather
+  than inside AGENTS;
+- obsolete v2/v3.1 names and source-line tags remain retired.
+
+The source-navigation residuals were also closed: the migrated maintenance
+inventory was removed from the global preamble after its current conclusions
+were consolidated in the living SOP and adjacent comments, and the 264-line
+comment-only check catalog was removed from `emdash3_2.lp` in favor of
+`REPORT_EMDASH_CHECK_CATALOG.md`.
+
 - Completed first batch: consolidate the living SOP around current selected
   owners without the superseded chronological postscripts.
 - Completed first batch: extend Foundations through the currently promoted
   univalence, profunctor, join, and Eckmann-Hilton staging layers.
 - Completed 2026-07-11: adjacent-command documentation across executable
   sections 0–19.
+- Completed 2026-07-11: baseline-policy preservation audit, shortened source
+  preamble, and retirement of the comment-only source catalog.
 - Completed first batch: remove legacy check source-line tags; stable semantic
   headings may still be refined without reordering assertions.
 - Deferred: split `emdash3_2.lp` into modules; first complete the comment and
