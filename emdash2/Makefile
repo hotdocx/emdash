@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check check-warnings warning-summary audit-rules examples catalog ci ci-render health watch infinity-codex-test prune-logs clean
+.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render health watch infinity-codex-test prune-logs clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -23,6 +23,7 @@ ci:
 > python3 -m unittest tests.test_infinity_codex
 > bash -n scripts/*.sh
 > git diff --check
+> python3 scripts/check_source_toc.py
 > ./scripts/lint_active_refs.sh
 > python3 scripts/lint_report_headers.py
 > python3 scripts/audit_rule_lhs.py --strict
@@ -33,6 +34,9 @@ examples:
 
 catalog:
 > python3 scripts/generate_check_catalog.py
+
+toc:
+> python3 scripts/check_source_toc.py
 
 ci-render:
 > npm run check:render

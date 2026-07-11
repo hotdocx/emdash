@@ -27,113 +27,91 @@
   Table of contents / source section map:
 
     0. Groupoid universe and equality
-       - groupoid universe, decoding, equality, induction, and transport;
-       - observational Sigma/Pi/Product path skeletons;
-       - type equivalences, path/equivalence decoders, and univalence
-         staging.
-
     1. Encoded Sigma types for object layers
-       - dependent-pair encoding, projections, and pathover helpers;
-       - groupoid-level dependent products and type-equivalence basics;
-       - constructor-specific TypeEquiv scaffolding.
-
+      1a. Encoded dependent pairs, projections, and Sigma path views
+      1b. Minimal groupoid-level dependent products and type equivalences
     2. Core categories
-       - category interface, hom-categories, identities, and composition;
-       - inference-helper policy and composition associativity;
-       - path-category computation laws.
-
     3. Functor, displayed-family, and universe categories
-       - ordinary functor classifier and action;
-       - categorical isomorphism evidence and univalence/OmegaEquiv staging;
-       - universe-category and displayed-family category heads;
-       - internalized universe-level constructor packages.
-
+      3a. Ordinary functor classifier and action
+      3b. Ordinary categorical isomorphism evidence
+      3c. Universe categories
+      3d. Directed-family and displayed-arrow classifiers
+      3e. Ordinary identity, composition, opposite, terminal, and constant functors
+      3f. Internalized universe-level constructor packages
     4. Ordinary internal hom and hom actions
-       - ordinary internal hom classifiers;
-       - stable postcomposition/precomposition hom-action presentations;
-       - DefIso-facing cancellation and opposite post/pre bridges;
-       - ordinary internal-hom computation joins.
-
+      4a. Covariant represented hom families and postcomposition action
+      4b. Computational isomorphisms under the represented hom-action owner
+      4c. Contravariant represented hom families and precomposition action
+      4d. Internalized source/target endpoints and variance comparison
     5. Ordinary binary products of categories
-       - product categories, projections, pairing, and symmetry;
-       - product closure for isomorphism evidence;
-       - product closure for omega-equivalence.
-
+      5a. Product categories, projections, and paired functors
+      5b. Product symmetry, identities, and composition
+      5c. Product and uncurried composition action
+      5d. Rigid two-endpoint Hom action
+      5e. Product closure for ordinary isomorphism evidence
+      5f. Product closure for omega-equivalence
+      5g. Product-pair telescope declaration
     6. Ordinary transformations and functor composition actions
-       - transformation classifier and projection calculus;
-       - Cat-valued/displayed-functor interpretation of transformations;
-       - constant transformations, opposite transformations, and
-         Cat-specialized composition-action projections.
-
+      6a. Transformation classifier, components, and generic projection calculus
+      6b. Internalized hom endpoint actions and rigid two-sided projections
+      6c. Constant/opposite transfors and Cat-valued composition projections
+      6d. Full ordinary naturality and projection-order joins
     7. Product functor packages, evaluation, curry, and ordinary internal action
-       - internalized product formation and evaluation;
-       - product curry/uncurry scaffolding;
-       - ordinary adjunctions and opposite adjunctions;
-       - ordinary internal hom-action packages.
-
+      7a. Internalized product formation and product maps
+      7b. Evaluation and fixed-object evaluation
+      7c. Ordinary curry and uncurry
+      7d. Adjunctions and opposite adjunctions
+      7e. Internal ordinary hom-action packages
     8. Directed Cat-valued family constructors
-       - fibre notation, pullback, and base-arrow transport;
-       - constant, terminal, opposite, and displayed composition;
-       - section categories, Pi action, fibre covariance, and dependent-hom
-         endpoints.
-
+      8a. Fibre notation, pullback, and base-arrow transport
+      8b. Constant, terminal, opposite, and displayed composition
+      8c. Section categories and Pi action
+      8d. Fibre covariance and dependent-hom endpoint notation
     9. Directed Sigma categories and maps between totals
-       - Sigma totals, Sigma homs, and projection;
-       - Sigma maps and canonical transport arrows;
-       - families over Sigma totals and displayed-transfor uncurrying.
-
+      9a. Sigma totals, Sigma homs, and projection
+      9b. Sigma maps and canonical transport arrows
+      9c. Families over Sigma totals and displayed-transfor uncurrying
     10. Mixed-variance family functor
-        - stable mixed-variance family constructors;
-        - source/target transport shape for mixed variance.
-
     11. Representables and presheaf-family classifiers
-        - representable displayed families;
-        - opposite-edge and presheaf classifiers.
-
+      11a. Representables
+      11b. Opposite-edge and presheaf classifiers
     12. Directed homd target and internal homd functor
-        - Homd target architecture;
-        - internal homd functor entry point.
-
     13. Dependent-hom projections and covariant fibre transport
-        - covariant fibre-transport architecture;
-        - internal dependent-hom projection cascade.
-
     14. Section action over dependent homs
-        - section action source endpoint;
-        - section-level dependent-hom action entry point.
-
     15. Internal displayed hom-action heads
-        - internal displayed hom-action constructors;
-        - displayed source/target action surfaces.
-
     16. Displayed components, displayed hom-action, and laxity extraction
-        - fibre-level displayed notation;
-        - displayed laxity and whole-transfor interfaces;
-        - section action over base arrows and displayed internal-hom action
-          projections.
-
-    17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed
-        projection helpers
-        - generic Sigma/Pi introduction and evaluation;
-        - constant sections and delayed product-pair telescope rules;
-        - ordinary functor structural logic;
-        - generic ordinary functor hom-action, section pullback, and internal
-          Pi action.
-
+      16a. Fibre-level displayed components
+      16b. Identity-specialized displayed hom action and Sigma-map action
+      16c. Section action and displayed laxity cells
+      16d. Arbitrary displayed-transfor hom-action projections
+      16e. Strict/cartesian and terminal-source specializations
+    17. Generic Sigma/Pi weakening, ordinary structural logic, and delayed projection helpers
+      17a. Generic Sigma/Pi introduction and evaluation
+      17b. Constant sections and delayed product-pair telescope rules
+      17c. Ordinary functor structural logic
+      17d. Generic ordinary functor hom-action
+      17e. Section pullback and internal Pi action
     18. Cat-valued profunctors
-        - profunctor facade, opposite, reindexing, and shaped cells;
-        - right-representables, comparison action, and DefIso migration
-          compatibility;
-        - equipment-cell composition, duality, tensor, and co-Yoneda maps;
-        - covariant/contravariant implication and vertical closed cores;
-        - weighted-limit representability and adjunction-mate preservation;
-        - directed-inductive join category and late cross-section bridges.
-
+      18a. Fixed-endpoint profunctor category and vertical maps
+      18b. Opposite profunctors and fixed-endpoint duality
+      18c. Endpoint reindexing and product-base action
+      18d. Unit hom profunctor and readable representables
+      18e. Computational comparison as the profunctor-facing DefIso view
+      18f. Shaped profunctor cells and endpoint-changing application
+      18g. Internalized reindexing and equipment-style cell composition
+      18h. Tensor, shaped introduction, and fixed-endpoint co-Yoneda maps
+      18i. Covariant/contravariant implication and vertical closed cores
+      18j. Weighted representability and adjunction-mate preservation
+      18k. Directed-inductive join and internally natural cross arrows
+      18z. Late cross-section normalization bridges
     19. Applications: PathOut, path induction, and transitivity
-        - outgoing-path categories and fixed-source path induction;
-        - PathOut motives and Sigma-total path induction presentation;
-        - transitivity benchmark and target-transport aliases;
-        - nested telescope stress examples.
+      19a. Outgoing-path categories and fixed-source path induction
+      19b. PathOut motives and fixed-source path induction
+      19c. Sigma-total presentation of path induction
+      19d. Transitivity benchmark
+      19e. Path-induction target transport aliases
+      19f. Nested telescope stress examples
+      19g. Eckmann-Hilton first computation slice
 
   Grouped architecture map:
     - Kernel foundations: 0-3.
@@ -424,7 +402,7 @@ inductive nat : TYPE ≔
 // 1. Encoded Sigma types for object layers
 // -------------------------------------------------------------------------------------------------
 
-// 1a. Encoded dependent pairs, projections, and Sigma path views.
+// 1a. Encoded dependent pairs, projections, and Sigma path views
 
 // Decoded dependent-pair representation for the groupoid code `Σ_ P`.
 inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
@@ -1189,7 +1167,7 @@ symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 // 3. Functor, displayed-family, and universe categories
 // -------------------------------------------------------------------------------------------------
 
-// 3a. Ordinary functor classifier and action.
+// 3a. Ordinary functor classifier and action
 /*
   Ordinary functor category and classifier.
 
@@ -1370,7 +1348,7 @@ symbol iso_evidence_sym
         (iso_evidence_right i)
         (iso_evidence_left i)));
 
-// 3c. Universe categories.
+// 3c. Universe categories
 /*
   Universe classifiers and their category structures.
 
@@ -1541,7 +1519,7 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
     Hom_Cat(A,B)  = A ⊢ B.
 */
 
-// 3d. Directed-family and displayed-arrow classifiers.
+// 3d. Directed-family and displayed-arrow classifiers
 //
 // Directed Cat-valued families are canonical Cat-valued functors.
 //
@@ -1670,8 +1648,7 @@ rule @id (@Functord_cat $K $E $D) $FF
     Hom_Functord(FF,GG) = k :^n K ; FF[k] => GG[k].
 */
 
-// 3e. Ordinary identity, composition, opposite, terminal, and constant
-// functor packages.
+// 3e. Ordinary identity, composition, opposite, terminal, and constant functors
 /*
   Ordinary identity/composition in Cat_cat.
 
@@ -2540,7 +2517,7 @@ rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 // Arrow action of the internal opposite functor is `Op_func`.
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
-// 3f. Internalized universe-level constructor packages.
+// 3f. Internalized universe-level constructor packages
 //
 // Internalized ordinary functor-category formation. The total package has no
 // recoverable parameters; the partial stage is injective so equality of
@@ -2608,7 +2585,7 @@ injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z))
 // 4. Ordinary internal hom and hom actions
 // -------------------------------------------------------------------------------------------------
 
-// 4a. Covariant represented hom families and postcomposition action.
+// 4a. Covariant represented hom families and postcomposition action
 
 /*
   Ordinary internal hom classifiers.
@@ -2979,7 +2956,7 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $g
   ↪ [ tt ≡ tt ];
 
-// 4b. Computational isomorphisms under the represented hom-action owner.
+// 4b. Computational isomorphisms under the represented hom-action owner
 
 /*
   Definitional/computational isomorphisms.
@@ -3237,7 +3214,7 @@ rule @defiso_iso_evidence
       $C $D $F $x $y
       (@defiso_iso_evidence $C $x $y $i);
 
-// 4c. Contravariant represented hom families and precomposition action.
+// 4c. Contravariant represented hom families and precomposition action
 
 // Contravariant represented-object classifier.
 //
@@ -3687,7 +3664,7 @@ unif_rule @hom_postcomp_fapp0
       $F ≡ (@Op_func $A0 $B0 $F0)
     ];
 
-// 4d. Internalized source/target endpoints and variance comparison.
+// 4d. Internalized source/target endpoints and variance comparison
 
 // Internalized hom classifier.
 //
@@ -3793,6 +3770,7 @@ rule fapp0 (@hom_con_int_postcomp_tele_func $A $B $F $W $X) $f
 // 5. Ordinary binary products of categories
 // -------------------------------------------------------------------------------------------------
 
+// 5a. Product categories, projections, and paired functors
 /*
   Minimal ordinary product package.
 
@@ -3915,6 +3893,7 @@ rule @fapp1_fapp0 _ _ (@Product_projL_func $A $B) $p $q $h
 rule @fapp1_fapp0 _ _ (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
+// 5b. Product symmetry, identities, and composition
 /*
   Product symmetry.
 
@@ -4041,6 +4020,7 @@ rule @comp_fapp0
       (@comp_fapp0 $A $x $y $z $g1 $f1)
       (@comp_fapp0 $B $u $v $w $g2 $f2);
 
+// 5c. Product and uncurried composition action
 /*
   Product/uncurried composition as a functor.
 
@@ -4111,6 +4091,7 @@ symbol Functor_comp_pair_func [A B C : Cat]
       (Functor_cat A C))
 ≔ @comp_prod_func Cat_cat A B C;
 
+// 5d. Rigid two-endpoint Hom action
 /*
   General two-endpoint action of the ordinary hom-category.
 
@@ -4246,6 +4227,7 @@ rule @Hom_fapp0
       (@comp_fapp0 $A $y0 $y1 $y2 $f12 $f01)
       $h;
 
+// 5e. Product closure for ordinary isomorphism evidence
 /*
   Ordinary isomorphism evidence is closed under explicit product-category
   pairs. This is the 1-categorical staging analogue of `omega_equiv_product`.
@@ -4349,6 +4331,7 @@ rule @idtoiso_cat
           $pA
           $pB));
 
+// 5f. Product closure for omega-equivalence
 /*
   Omega-equivalence is closed under explicit product-category pairs.
 
@@ -4517,6 +4500,8 @@ rule @idtoequiv_cat
           $pA
           $pB));
 
+// 5g. Product-pair telescope declaration
+
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.
 //
@@ -4529,7 +4514,7 @@ symbol Product_pair_tele_func [A B : Cat]
 // 6. Ordinary transformations and functor composition actions
 // -------------------------------------------------------------------------------------------------
 
-// 6a. Transformation classifier, components, and generic projection calculus.
+// 6a. Transformation classifier, components, and generic projection calculus
 
 /*
   Ordinary transfor/natural-transformation category.
@@ -4782,7 +4767,7 @@ rule @tapp0_fapp0
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp0_fapp0 $A $B $F $G $x $eta;
 
-// 6b. Internalized hom endpoint actions and rigid two-sided projections.
+// 6b. Internalized hom endpoint actions and rigid two-sided projections
 
 // Component of `hom_int` along its contravariant represented-object argument.
 // For f : X ->^A Y, the displayed functor Hom(Y,F-) ⊢ Hom(X,F-) is
@@ -5089,7 +5074,7 @@ rule @comp_prod_fapp1_fapp0
       (Functor_cat $X $Z)
       (@comp_cat_fapp0 $X $Y $Z $G $F);
 
-// 6c. Constant/opposite transfors and Cat-valued composition projections.
+// 6c. Constant/opposite transfors and Cat-valued composition projections
 
 /*
   Constant transfor induced by an arrow in the codomain.
@@ -5983,7 +5968,7 @@ symbol hom_postcomp_representable_interchange_eq
         (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
       (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha));
 
-// 6d. Full ordinary naturality and projection-order joins.
+// 6d. Full ordinary naturality and projection-order joins
 
 // Full strict naturality for ordinary transfors, oriented as cut elimination.
 // The post/left rule accumulates a codomain arrow through the off-diagonal
@@ -6090,6 +6075,7 @@ rule fapp0
 // 7. Product functor packages, evaluation, curry, and ordinary internal action
 // -------------------------------------------------------------------------------------------------
 
+// 7a. Internalized product formation and product maps
 /*
   Internalized product formation in Cat.
 
@@ -6404,6 +6390,7 @@ unif_rule @Hom_func $A $x $x' $y $y' $g $f
       (@hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f)
   ↪ [ tt ≡ tt ];
 
+// 7b. Evaluation and fixed-object evaluation
 /*
   Product evaluation: apply a functor to an object.
 
@@ -6517,6 +6504,7 @@ rule @comp_fapp0
       (@Eval_at_func $A $B $x)
   ↪ fapp0_func $x;
 
+// 7c. Ordinary curry and uncurry
 /*
   Ordinary product curry/uncurry scaffold.
 
@@ -6608,6 +6596,7 @@ symbol uncurry_func [A B C : Cat]
 // of `Product_cat_func` on a transfor `theta`. Keep it deferred rather than
 // reinstating an independent `Product_mapL_transf` stable package.
 
+// 7d. Adjunctions and opposite adjunctions
 /*
   Ordinary functor adjunctions.
 
@@ -6780,6 +6769,7 @@ rule @counit_adj_transf
         (@left_adj_func $A $B $adj))
       (@unit_adj_transf $A $B $adj);
 
+// 7e. Internal ordinary hom-action packages
 /*
   More-internal ordinary hom-action.
 
@@ -6966,7 +6956,7 @@ rule @tapp0_fapp0
     piapp0(s,k)               = s[k]
 */
 
-// 8a. Fibre notation, pullback, and base-arrow transport.
+// 8a. Fibre notation, pullback, and base-arrow transport
 
 // Fixed-base notation: fibre of a directed family.
 //
@@ -7105,7 +7095,7 @@ rule @tapp0_fapp0
       (@fapp0 $A $B $F $a)
       $η;
 
-// 8b. Constant, terminal, opposite, and displayed composition.
+// 8b. Constant, terminal, opposite, and displayed composition
 //
 // Fixed-base layer: constant Cat-valued family.
 //
@@ -7226,7 +7216,7 @@ rule @tapp0_fapp0
       (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
-// 8c. Section categories and Pi action.
+// 8c. Section categories and Pi action
 //
 // Fixed-base layer: section category of a displayed family.
 //
@@ -7346,7 +7336,7 @@ symbol piapp0 : Π [K : Cat], Π [E : τ (Catd K)],
   τ (Obj (Fibre_cat E k))
 ≔ λ K E s k, @fapp0 (Pi_cat E) (Fibre_cat E k) (@piapp0_func K E k) s;
 
-// 8d. Fibre covariance and dependent-hom endpoint notation.
+// 8d. Fibre covariance and dependent-hom endpoint notation
 //
 // Fixed-base covariant transport from a fibre object.
 //
@@ -7409,7 +7399,7 @@ injective symbol homd_ [Z : Cat] [D E : τ (Catd Z)]
     sigma_map_func(η)(k,u)    = (k, η_k(u))
 */
 
-// 9a. Sigma totals, Sigma homs, and projection.
+// 9a. Sigma totals, Sigma homs, and projection
 
 // Fixed-base layer: total category of a directed family.
 //
@@ -7604,7 +7594,7 @@ rule @Functord_cat
       (@Sigma_proj1_pullback_catd $K $R $D)
   ↪ @Functord_cat $K $R $D;
 
-// 9b. Sigma maps and canonical transport arrows.
+// 9b. Sigma maps and canonical transport arrows
 //
 // Fixed-base layer: total map induced by a displayed functor.
 //
@@ -7720,7 +7710,7 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
 	    u))
     (@sigma_transport_arrow K E x y p u);
 
-// 9c. Families over Sigma totals and displayed-transfor uncurrying.
+// 9c. Families over Sigma totals and displayed-transfor uncurrying
 //
 // Internalized-x prerequisite: Cat-valued family over a total category induced
 // by a displayed functor into the constant category universe.
@@ -7905,7 +7895,7 @@ rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
     HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
 */
 
-// 11a. Representables.
+// 11a. Representables
 
 symbol Rep_catd_func [Z : Cat]
   : τ (Functor (Op_cat Z) (Catd_cat Z))
@@ -7932,7 +7922,7 @@ symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   : τ (Functord (@Rep_catd Z y) (@Rep_catd Z x))
 ≔ @hom_int_precomp_func Z Z (@id Cat_cat Z) y x p;
 
-// 11b. Opposite-edge and presheaf classifiers.
+// 11b. Opposite-edge and presheaf classifiers
 
 // Internalized classifier: pointwise opposite representable.
 //
@@ -8356,6 +8346,7 @@ rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
 // 16. Displayed components, displayed hom-action, and laxity extraction
 // -------------------------------------------------------------------------------------------------
 
+// 16a. Fibre-level displayed components
 /*
   Fibre-level notation for displayed functors and displayed transfors.
 
@@ -8527,6 +8518,7 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
 
+// 16b. Identity-specialized displayed hom action and Sigma-map action
 /*
   Deferred whole-transfor displayed laxity interface.
 
@@ -8929,6 +8921,7 @@ rule fapp0
       $alpha
   ↪ @fdapp1_int_hom_fapp0 $K $E $D $FF $x $y $p $u $v $alpha;
 
+// 16c. Section action and displayed laxity cells
 /*
   Full section action over a base arrow.
 
@@ -9013,6 +9006,7 @@ rule @fdapp1_int_hom_fapp0
       $p
       Terminal_obj;
 
+// 16d. Arbitrary displayed-transfor hom-action projections
 /*
   Generic displayed internal-hom action projections.
 
@@ -9272,6 +9266,8 @@ rule fapp0 (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _) (@id _ _)
 rule @tdapp1_int_cell $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
+// 16e. Strict/cartesian and terminal-source specializations
+
 // Terminal-source displayed laxity is ordinary functor arrow action.
 //
 // Surface/formula:
@@ -9339,7 +9335,7 @@ rule @fdapp1_int_hom_fapp0
   displayed-action projection packages.
 */
 
-// 17a. Generic Sigma/Pi introduction and evaluation.
+// 17a. Generic Sigma/Pi introduction and evaluation
 
 // Generic Sigma helper: include a fibre object as a total object.
 //
@@ -9384,7 +9380,7 @@ rule @tapp0_fapp0
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;
 
-// 17b. Constant sections and delayed product-pair telescope rules.
+// 17b. Constant sections and delayed product-pair telescope rules
 //
 // Fixed-base layer: constant section constructor.
 //
@@ -9437,7 +9433,7 @@ rule @fapp1_fapp0 _ _
       (@Const_transf $B $A $x $x' $p)
       (@id (Functor_cat $B $B) (@id_func $B));
 
-// 17c. Ordinary functor structural logic.
+// 17c. Ordinary functor structural logic
 
 /*
   Usual structural operations for nested ordinary functor categories.
@@ -9807,7 +9803,7 @@ rule @tapp0_fapp0
       $a
       (@tapp0_fapp0 $A (Functor_cat $A $C) $H $K $a $eta);
 
-// 17d. Generic ordinary functor hom-action.
+// 17d. Generic ordinary functor hom-action
 //
 // Generic full hom-action for identity and composition of ordinary functors.
 // These rules let semantic aliases such as curry expose functor-level action
@@ -9882,7 +9878,7 @@ rule @fapp1_fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a' $p
 // computation rules, because the primary curry package is a definition through
 // that telescope rather than a primitive object-action rewrite rule.
 
-// 17e. Section pullback and internal Pi action.
+// 17e. Section pullback and internal Pi action
 //
 // Internalized-x prerequisite: pull a section back along a base functor.
 //
@@ -9961,7 +9957,7 @@ rule @fdapp1_int_cell
 // 18. Cat-valued profunctors
 // -------------------------------------------------------------------------------------------------
 
-// 18a. Fixed-endpoint profunctor category and vertical maps.
+// 18a. Fixed-endpoint profunctor category and vertical maps
 
 /*
   A v3.2 profunctor from A to B is a Cat-valued functor on A^op × B.
@@ -10044,7 +10040,7 @@ symbol ProfMap
   : Grpd
 ≔ Obj (Hom_cat (Prof_cat A B) P Q);
 
-// 18b. Opposite profunctors and fixed-endpoint duality.
+// 18b. Opposite profunctors and fixed-endpoint duality
 
 /*
   Object-level opposite profunctor.
@@ -10211,7 +10207,7 @@ symbol Op_prof_map
     (@Op_prof_func A B)
     P Q r;
 
-// 18c. Endpoint reindexing and product-base action.
+// 18c. Endpoint reindexing and product-base action
 
 /*
   Profunctor reindexing.
@@ -10400,7 +10396,7 @@ rule @fapp1_fapp0
         $ab'
         $pq);
 
-// 18d. Unit hom profunctor and readable representables.
+// 18d. Unit hom profunctor and readable representables
 
 // Identity/unit hom profunctor, the uncurried/product form of hom_int(id_X).
 injective symbol Unit_prof (X : Cat)
@@ -10494,7 +10490,7 @@ symbol Representation_iso
 ≔ `Σ_ L : τ (Functor J B),
     @IsRepresentedBy_iso B J P L;
 
-// 18e. Computational comparison as the profunctor-facing DefIso view.
+// 18e. Computational comparison as the profunctor-facing DefIso view
 
 /*
   Computational comparisons between profunctors.
@@ -10641,7 +10637,7 @@ rule @Prof_reindex
       $G
   ↪ @Const_catd (Product_cat (Op_cat $A') $B') $C;
 
-// 18f. Shaped profunctor cells and endpoint-changing application.
+// 18f. Shaped profunctor cells and endpoint-changing application
 
 /*
   Shaped profunctor cells.
@@ -10711,7 +10707,7 @@ symbol Prof_cell_apply
       R
       (@comp_cat_fapp0 I B' B G b));
 
-// 18g. Internalized reindexing and equipment-style cell composition.
+// 18g. Internalized reindexing and equipment-style cell composition
 
 /*
   Internalized profunctor reindexing.
@@ -10927,7 +10923,7 @@ rule @tapp1_fapp0
         (sigma_Fst $pq))
       (sigma_Snd $pq);
 
-// 18h. Tensor, shaped introduction, and fixed-endpoint co-Yoneda maps.
+// 18h. Tensor, shaped introduction, and fixed-endpoint co-Yoneda maps
 
 /*
   Primitive tensor/composition of Cat-valued profunctors.
@@ -11218,7 +11214,7 @@ rule @Prof_cell_apply
       $F $G
       $pp $p;
 
-// 18i. Covariant/contravariant implication and vertical closed cores.
+// 18i. Covariant/contravariant implication and vertical closed cores
 
 /*
   Covariant profunctor implication.
@@ -11434,7 +11430,7 @@ with @Prof_eval_con_map
       (@Prof_lambda_con_map $A $B $X $P $Q $O $t)
   ↪ $t;
 
-// 18j. Weighted representability and adjunction-mate preservation.
+// 18j. Weighted representability and adjunction-mate preservation
 
 // Ordinary weighted-limit representability, kept separate from the stronger
 // computational comparison interface below.
@@ -11815,7 +11811,7 @@ symbol left_adjoint_preserves_weighted_colimit_con
     isc
     (@Op_adjunction A B adj);
 
-// 18k. Directed-inductive join and internally natural cross arrows.
+// 18k. Directed-inductive join and internally natural cross arrows
 
 /*
   Directed-inductive join category.
@@ -12086,7 +12082,7 @@ rule @Pullback_catd_func
 // 19. Applications: PathOut, path induction, and transitivity
 // -------------------------------------------------------------------------------------------------
 
-// 19a. Outgoing-path categories and fixed-source path induction.
+// 19a. Outgoing-path categories and fixed-source path induction
 
 // Fixed-x layer: outgoing-path category at a fixed source object.
 //
@@ -12128,7 +12124,7 @@ symbol PathOut_transport_func [Z : Cat] [x y : τ (Obj Z)]
     x
     p;
 
-// 19b. PathOut motives and fixed-source path induction.
+// 19b. PathOut motives and fixed-source path induction
 //
 // Internalized-x layer: family of motive categories over source objects.
 //
@@ -12422,7 +12418,7 @@ constant symbol PathInd_transfd [Z : Cat]
       (@PathOutReflEval_funcd Z)
       (@PathOutPi_funcd Z));
 
-// 19c. Sigma-total presentation of path induction.
+// 19c. Sigma-total presentation of path induction
 //
 // Internalized-x source layer: total source family over moving `(x,E)`.
 //
@@ -12484,7 +12480,7 @@ symbol PathInd_funcd [Z : Cat]
   generic uncurrying projection, after `tdapp0_fapp0` is available.
 */
 
-// 19d. Transitivity benchmark.
+// 19d. Transitivity benchmark
 //
 // Transitivity benchmark layer: target family for composition out of a fixed
 // source x.
@@ -12627,7 +12623,7 @@ symbol path_comp_func [Z : Cat] [x y : τ (Obj Z)]
 // The semantic `hom_con` presentation of `CompTarget_catd` computes without a
 // CompTarget-specific identity shortcut.
 
-// 19e. Path-induction target transport aliases.
+// 19e. Path-induction target transport aliases
 //
 // Internalized-x target layer: target-side path-out transport. The transported
 // motive remains canonically `PathOutMotives[p](E)`; this helper exposes its
@@ -12672,7 +12668,7 @@ symbol PathIndTgt_transport_func [Z : Cat] [x y : τ (Obj Z)]
 */
 
 
-// 19f. Nested telescope stress examples.
+// 19f. Nested telescope stress examples
 
 /*
   Mixed-variance family constructors.
@@ -12734,7 +12730,7 @@ symbol Nested_transfd_telescope_cat [K Z : Cat]
   : Cat
 ≔ @Functord_cat K C (@Nested_transfd_telescope_catd K Z E D FF GG);
 
-// 19g. Eckmann-Hilton first computation slice.
+// 19g. Eckmann-Hilton first computation slice
 
 /*
   This is the conservative first slice of the Eckmann-Hilton application.

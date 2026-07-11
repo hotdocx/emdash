@@ -70,6 +70,7 @@ make check-warnings        # warning-enabled kernel check
 make warning-summary       # compact warning inventory + raw log
 make audit-rules           # strict inferred-LHS-slot audit
 make catalog               # regenerate the check catalog
+make toc                   # verify header/source heading equality
 make health                # refresh generated health metrics
 ```
 

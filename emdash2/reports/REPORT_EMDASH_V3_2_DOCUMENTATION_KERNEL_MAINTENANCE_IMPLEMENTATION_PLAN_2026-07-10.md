@@ -295,6 +295,48 @@ Acceptance:
   comment-only batch;
 - bounded typechecking remains unchanged.
 
+### Phase 4 extension: exact source map and remaining large sections
+
+The 2026-07-11 post-completion review found that the header map was
+mathematically coherent but not a faithful structural index. Its descriptive
+bullets compressed formal source boundaries: for example, section 3 had four
+TOC bullets but six source subsections, section 18 had six bullets but twelve
+formal subsections, and section 19 had four bullets but seven subsections.
+
+The accepted extension is:
+
+1. make the header TOC an exact ordered mirror of every formal `// N.` and
+   `// Na.` source heading;
+2. retain high-level interpretation in the separate grouped architecture map
+   and in section-local mathematical introductions rather than mixing it into
+   the structural index;
+3. add formal subdivisions to the remaining large unsplit sections 5, 7, and
+   16;
+4. normalize formal heading punctuation and keep each title on one line;
+5. add a lightweight checker to compare the header map with source headings
+   and run it in CI;
+6. do not introduce sub-subsections: the source currently has none, and the
+   section/subsection levels are sufficient.
+
+The new boundaries are intended to be:
+
+- section 5: product foundations; symmetry/identity/composition;
+  product-composition action; rigid two-endpoint `Hom`; ordinary-isomorphism
+  closure; omega-equivalence closure; deferred product-pair telescope;
+- section 7: internalized product formation/maps; evaluation; curry/uncurry;
+  adjunctions/opposites; internal ordinary hom-action;
+- section 16: fibre-level displayed components; identity-specialized displayed
+  hom/Sigma-map action; section action/laxity; arbitrary displayed-transfor
+  projections; strict/cartesian specializations.
+
+Acceptance:
+
+- the TOC checker reports exact title and order equality;
+- sections 5, 7, and 16 have formal source boundaries matching the map;
+- no declaration or executable command moves or changes;
+- normalized executable content remains identical to the pre-maintenance
+  baseline and all ordinary validation gates pass.
+
 ### Phase 5: Extend adjacent declaration/rule documentation
 
 Work section by section rather than applying a blind formatter:
@@ -359,6 +401,7 @@ Use the smallest relevant loop:
 EMDASH_TYPECHECK_TIMEOUT=60s make check
 python3 scripts/audit_rule_lhs.py --strict
 python3 scripts/generate_check_catalog.py --check --strict
+make toc
 git diff --check
 ```
 
@@ -532,6 +575,26 @@ were consolidated in the living SOP and adjacent comments, and the 264-line
 comment-only check catalog was removed from `emdash3_2.lp` in favor of
 `REPORT_EMDASH_CHECK_CATALOG.md`.
 
+### Granular source-map extension checkpoint 2026-07-11
+
+The accepted Phase 4 extension is complete:
+
+- the header source map exactly mirrors all 86 formal section/subsection
+  headings in source order;
+- sections 5, 7, and 16 now have respectively `5a–5g`, `7a–7e`, and
+  `16a–16e` boundaries at their existing mathematical block boundaries;
+- all formal titles are single-line and use consistent punctuation;
+- no sub-subsection layer was introduced;
+- `scripts/check_source_toc.py` validates unique identifiers, contiguous
+  top-level sections `0–19`, exact titles, and exact order;
+- `make toc` exposes the check directly, while `make ci` now enforces it.
+
+The extension changes comments and tooling only. Normalized executable hashes
+remain identical to baseline commit
+`473d4101f64db18584faf5684047e2d8540f375b`; the warning inventory remains
+1,303, all eight CI targets pass, the strict LHS audit has zero unreviewed
+clauses, and the 764-check catalog remains fresh with zero unclassified checks.
+
 - Completed first batch: consolidate the living SOP around current selected
   owners without the superseded chronological postscripts.
 - Completed first batch: extend Foundations through the currently promoted
@@ -540,6 +603,8 @@ comment-only check catalog was removed from `emdash3_2.lp` in favor of
   sections 0–19.
 - Completed 2026-07-11: baseline-policy preservation audit, shortened source
   preamble, and retirement of the comment-only source catalog.
+- Completed 2026-07-11: exact 86-heading source map, new section 5/7/16
+  subdivisions, and CI-enforced TOC consistency.
 - Completed first batch: remove legacy check source-line tags; stable semantic
   headings may still be refined without reordering assertions.
 - Deferred: split `emdash3_2.lp` into modules; first complete the comment and

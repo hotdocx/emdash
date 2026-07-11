@@ -574,13 +574,15 @@ confluence, `d` decision-tree compilation, and `i` typing. Never use
 ```bash
 make examples
 make catalog
+make toc
 make ci
 make health
 ```
 
 `make catalog` can be non-strict during exploration; `make ci` requires a fresh
-catalog and zero unclassified checks. Run `make health` after meaningful
-architecture/check changes.
+catalog and zero unclassified checks. `make toc` requires the header source map
+to match every formal section/subsection heading exactly and is also part of
+CI. Run `make health` after meaningful architecture/check changes.
 
 ### Type-aware search
 
