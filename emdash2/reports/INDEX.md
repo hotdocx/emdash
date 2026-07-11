@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-10
+Date: 2026-07-11
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active code authority; reports explain current status, mathematics,
@@ -18,9 +18,6 @@ notation, implementation plans, and historical decisions.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_DOCUMENTATION_KERNEL_MAINTENANCE_IMPLEMENTATION_PLAN_2026-07-10.md`:
-  active authority consolidation, mathematical/notation refresh, adjacent
-  source documentation, diagnostic navigation, and later naming audit.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -50,6 +47,10 @@ notation, implementation plans, and historical decisions.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_DOCUMENTATION_KERNEL_MAINTENANCE_IMPLEMENTATION_PLAN_2026-07-10.md`:
+  completed authority consolidation, mathematical/notation refresh, adjacent
+  documentation across executable sections 0–19, and diagnostic-navigation
+  cleanup; broad naming and module-split work remains explicitly deferred.
 - `REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
   completed local final-response archive and compaction/resume recovery flow.
 - `REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:

@@ -10404,6 +10404,7 @@ symbol Prof_reindex_fapp1_func [A A' B B' : Cat]
           (@Prof_reindex A A' B B' R F G)
           ab')));
 
+// Hom-action projection of reindexing at product-base endpoints ab,ab'.
 rule @fapp1_func
       _
       Cat_cat
@@ -10774,6 +10775,7 @@ symbol Prof_transf_cat [A A' B B' : Cat]
     R'
     (@Prof_reindex A A' B B' R F G);
 
+// Shaped-cell category: Prof_hom_cat(F,R,G) = Cell(Unit_I,R;F,G).
 symbol Prof_hom_cat [I A B : Cat]
   (F : τ (Functor I A))
   (R : τ (Prof A B))
@@ -10786,6 +10788,7 @@ symbol Prof_hom_cat [I A B : Cat]
     R
     G;
 
+// Objects of the shaped-cell category: Prof_hom(F,R,G) = Obj Prof_hom_cat(F,R,G).
 symbol Prof_hom [I A B : Cat]
   (F : τ (Functor I A))
   (R : τ (Prof A B))
@@ -10830,6 +10833,7 @@ symbol Prof_reindex_func [A A' B B' : Cat]
   (G : τ (Functor B' B))
   : τ (Functor (Prof_cat A B) (Prof_cat A' B'));
 
+// Object action of internal reindexing: Prof_reindex_func(F,G)[R] ↪ R(F-,G-).
 rule @fapp0
       _
       _
@@ -10837,6 +10841,7 @@ rule @fapp0
       $R
   ↪ @Prof_reindex $A $A' $B $B' $R $F $G;
 
+// Vertical-map action of profunctor reindexing.
 symbol Prof_reindex_transf [A A' B B' : Cat]
   [R S : τ (Prof A B)]
   (r : τ (ProfMap R S))
@@ -10846,6 +10851,7 @@ symbol Prof_reindex_transf [A A' B B' : Cat]
       (@Prof_reindex A A' B B' R F G)
       (@Prof_reindex A A' B B' S F G));
 
+// Capped hom-action: Prof_reindex_func(F,G)[r] ↪ Prof_reindex_transf(r,F,G).
 rule @fapp1_fapp0
       _
       _
@@ -10855,6 +10861,7 @@ rule @fapp1_fapp0
       $r
   ↪ @Prof_reindex_transf $A $A' $B $B' $R $S $r $F $G;
 
+// Identity endpoint reindexing leaves a vertical profunctor map unchanged.
 rule @Prof_reindex_transf
       $A $A $B $B
       $R $S
@@ -10889,6 +10896,7 @@ rule @comp_fapp0
         $s $r)
       $F $G;
 
+// Reindexed DefIso cancellation under represented postcomposition.
 rule @hom_postcomp_fapp0
       (@Prof_cat $A2 $B2)
       (@Prof_cat $A2 $B2)
@@ -10966,6 +10974,7 @@ symbol Prof_func_hom [A B : Cat]
   (F : τ (Functor A B))
   : τ (@Prof_hom A B B F (@Unit_prof B) F);
 
+// Identity functor induces the canonical shaped identity of Unit_prof(A).
 rule @Prof_func_hom $A $A (@id Cat_cat $A)
   ↪ @Prof_id_hom $A;
 
@@ -11044,6 +11053,7 @@ symbol Prof_tensor [A B X : Cat]
   (S : τ (Prof B X))
   : τ (Prof A X);
 
+// Tensor reindexing acts only at its two exposed endpoints.
 rule @Prof_reindex
       $A $A'
       $X $X'
@@ -11081,17 +11091,20 @@ symbol Prof_tensor_map
       (@Prof_tensor A B X P Q)
       (@Prof_tensor A B X P' Q'));
 
+// Bifunctor package for fixed-endpoint profunctor tensor.
 symbol Prof_tensor_func [A B X : Cat]
   : τ (Functor
       (Product_cat (@Prof_cat A B) (@Prof_cat B X))
       (@Prof_cat A X));
 
+// Object action: Prof_tensor_func[(P,Q)] ↪ P tensor Q.
 rule @fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ
   ↪ @Prof_tensor
       $A $B $X
       (sigma_Fst $PQ)
       (sigma_Snd $PQ);
 
+// Capped arrow action: (r,s) ↦ Prof_tensor_map(r,s).
 rule @fapp1_fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ $PQ' $rs
   ↪ @Prof_tensor_map
       $A $B $X
@@ -11130,6 +11143,7 @@ symbol Prof_tensor_right_unit_pair_func [A B : Cat]
     (@id_func (@Prof_cat A B))
     (@Const_func (@Prof_cat A B) (@Prof_cat B B) (@Unit_prof B));
 
+// Right-unit tensor endofunctor: P ↦ P tensor Unit_prof(B).
 symbol Prof_tensor_right_unit_func [A B : Cat]
   : τ (Functor (Prof_cat A B) (Prof_cat A B))
 ≔ @comp_cat_fapp0
@@ -11139,6 +11153,7 @@ symbol Prof_tensor_right_unit_func [A B : Cat]
     (@Prof_tensor_func A B B)
     (@Prof_tensor_right_unit_pair_func A B);
 
+// Pairing for the left-unit tensor endofunctor: P ↦ (Unit_prof(A),P).
 symbol Prof_tensor_left_unit_pair_func [A B : Cat]
   : τ (Functor
       (@Prof_cat A B)
@@ -11147,6 +11162,7 @@ symbol Prof_tensor_left_unit_pair_func [A B : Cat]
     (@Const_func (@Prof_cat A B) (@Prof_cat A A) (@Unit_prof A))
     (@id_func (@Prof_cat A B));
 
+// Left-unit tensor endofunctor: P ↦ Unit_prof(A) tensor P.
 symbol Prof_tensor_left_unit_func [A B : Cat]
   : τ (Functor (Prof_cat A B) (Prof_cat A B))
 ≔ @comp_cat_fapp0
@@ -11156,11 +11172,13 @@ symbol Prof_tensor_left_unit_func [A B : Cat]
     (@Prof_tensor_func A A B)
     (@Prof_tensor_left_unit_pair_func A B);
 
+// Covariant co-Yoneda natural transformation: (- tensor Unit_B) => id.
 symbol Prof_coyoneda_cov_transf [A B : Cat]
   : τ (Transf
       (@Prof_tensor_right_unit_func A B)
       (@id_func (@Prof_cat A B)));
 
+// Contravariant co-Yoneda natural transformation: (Unit_A tensor -) => id.
 symbol Prof_coyoneda_con_transf [A B : Cat]
   : τ (Transf
       (@Prof_tensor_left_unit_func A B)
@@ -11173,12 +11191,14 @@ symbol Prof_coyoneda_cov_map [A B : Cat]
       (@Prof_tensor A B B P (@Unit_prof B))
       P);
 
+// Left-unit co-Yoneda component: Unit_A tensor P -> P.
 symbol Prof_coyoneda_con_map [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfMap
       (@Prof_tensor A A B (@Unit_prof A) P)
       P);
 
+// Component projection of the covariant co-Yoneda transformation at P.
 rule @tapp0_fapp0
       _ _
       _ _
@@ -11186,6 +11206,7 @@ rule @tapp0_fapp0
       (@Prof_coyoneda_cov_transf $A $B)
   ↪ @Prof_coyoneda_cov_map $A $B $P;
 
+// Component projection of the contravariant co-Yoneda transformation at P.
 rule @tapp0_fapp0
       _ _
       _ _
@@ -11361,6 +11382,7 @@ symbol Prof_imply_cov_func2 [A B X : Cat]
         (Op_cat (Prof_cat B X)))
       (Prof_cat A B));
 
+// Object action: (O,Q) ↦ Prof_imply_cov(O,Q), contravariant in Q.
 rule @fapp0
       _ _
       (@Prof_imply_cov_func2 $A $B $X)
@@ -11407,6 +11429,7 @@ symbol Prof_imply_cov_func [A B X : Cat]
 
 opaque Prof_imply_cov_func;
 
+// Fixed-weight object projection: Prof_imply_cov_func(Q)[O] ↪ O ⇒ Q.
 rule fapp0
       (@Prof_imply_cov_func $A $B $X $Q)
       $O
@@ -11432,6 +11455,7 @@ symbol Prof_eval_cov_map
   (t : τ (ProfMap P (@Prof_imply_cov A B X O Q)))
   : τ (ProfMap (@Prof_tensor A B X P Q) O);
 
+// Covariant currying: ProfMap(P tensor Q,O) -> ProfMap(P,O ⇒ Q).
 symbol Prof_lambda_cov_map
   [A B X : Cat]
   [P : τ (Prof A B)]
@@ -11440,6 +11464,7 @@ symbol Prof_lambda_cov_map
   (t : τ (ProfMap (@Prof_tensor A B X P Q) O))
   : τ (ProfMap P (@Prof_imply_cov A B X O Q));
 
+// Covariant beta/eta: lambda(eval(t)) ↪ t and eval(lambda(t)) ↪ t.
 rule @Prof_lambda_cov_map
       $A $B $X $P $Q $O
       (@Prof_eval_cov_map $A $B $X $P $Q $O $t)
@@ -11498,6 +11523,7 @@ symbol Prof_eval_con_map
   (t : τ (ProfMap Q (@Prof_imply_con A B X P O)))
   : τ (ProfMap (@Prof_tensor A B X P Q) O);
 
+// Contravariant currying: ProfMap(P tensor Q,O) -> ProfMap(Q,P ⇒ O).
 symbol Prof_lambda_con_map
   [A B X : Cat]
   [P : τ (Prof A B)]
@@ -11506,6 +11532,7 @@ symbol Prof_lambda_con_map
   (t : τ (ProfMap (@Prof_tensor A B X P Q) O))
   : τ (ProfMap Q (@Prof_imply_con A B X P O));
 
+// Contravariant beta/eta: lambda(eval(t)) ↪ t and eval(lambda(t)) ↪ t.
 rule @Prof_lambda_con_map
       $A $B $X $P $Q $O
       (@Prof_eval_con_map $A $B $X $P $Q $O $t)
@@ -11529,6 +11556,7 @@ symbol WeightedCone_prof
     (@Hom_prof J B F)
     W;
 
+// Ordinary weighted-limit property: WeightedCone(F,W) is represented by L.
 symbol IsWeightedLimit_cov_iso
   [B J J' : Cat]
   (F : τ (Functor J B))
@@ -11560,6 +11588,7 @@ symbol IsWeightedLimit_cov_comp
     (@WeightedCone_prof B J J' F W)
     (@Hom_prof J' B L);
 
+// Forward universal operation after reindexing the limit comparison along M.
 symbol weighted_limit_cov_push
   [B J J' : Cat]
   [F : τ (Functor J B)]
@@ -11589,6 +11618,7 @@ symbol weighted_limit_cov_push
     R
     r;
 
+// Inverse universal operation after reindexing the limit comparison along M.
 symbol weighted_limit_cov_pull
   [B J J' : Cat]
   [F : τ (Functor J B)]
@@ -11643,6 +11673,7 @@ injective symbol Adjunction_hom_prof_comparison
         (@id_func A)
         (@right_adj_func A B adj)));
 
+// Reindexed adjunction mate: Hom_B(LM,F) ≃ Hom_A(M,RF).
 symbol Adjunction_hom_prof_comparison_along
   [A B : Cat]
   (adj : τ (Adjunction A B))
@@ -11721,6 +11752,7 @@ symbol right_adjoint_weighted_limit_comp_step1
         (@id_func A)
         F));
 
+// Preservation step 2: reindex the supplied weighted-limit comparison along L.
 symbol right_adjoint_weighted_limit_comp_step2
   [B J J' A : Cat]
   [W : τ (Prof J' J)]
@@ -11750,6 +11782,7 @@ symbol right_adjoint_weighted_limit_comp_step2
     _
     isl;
 
+// Preservation step 3: apply the adjunction mate to the candidate limit L.
 symbol right_adjoint_weighted_limit_comp_step3
   [B J J' A : Cat]
   [L : τ (Functor J' B)]
@@ -11771,6 +11804,7 @@ symbol right_adjoint_weighted_limit_comp_step3
     (@id_func A)
     L;
 
+// Composite certificate that a right adjoint preserves the weighted limit.
 symbol right_adjoint_preserves_weighted_limit_cov_comp
   [B J J' A : Cat]
   [W : τ (Prof J' J)]
@@ -11843,6 +11877,7 @@ symbol Op_weighted_limit_cov
       (@Op_func J' B L))
 ≔ isl;
 
+// Convert a weighted colimit witness to the opposite weighted-limit witness.
 symbol Op_weighted_colimit_con
   [B J J' : Cat]
   [F : τ (Functor J B)]
@@ -11942,9 +11977,11 @@ symbol Prof_cell_eval
 // Primitive join and its two category introductions.
 injective symbol Join_cat (A B : Cat) : Cat;
 
+// Left join introduction: inl : A ⊢ A ⋆ B.
 constant symbol join_fst_func (A B : Cat)
   : τ (Functor A (@Join_cat A B));
 
+// Right join introduction: inr : B ⊢ A ⋆ B.
 constant symbol join_snd_func (A B : Cat)
   : τ (Functor B (@Join_cat A B));
 
@@ -12023,9 +12060,11 @@ symbol join_elim_cross_transf [A B E : Cat]
         (@Unit_prof E)
         second));
 
+// Join recursor beta on the natural cross-cell datum.
 rule @join_elim_cross_transf $A $B $E $first $second $cross
   ↪ $cross;
 
+// Join recursor betas: elim ∘ inl ↪ first and elim ∘ inr ↪ second.
 rule @comp_fapp0
       Cat_cat
       $A
@@ -12137,6 +12176,7 @@ rule @Pullback_catd
       (@Op_func $A $A' $F)
       $G;
 
+// Functor-level product-map pullback folds to profunctor reindexing.
 rule @Pullback_catd_func
       _
       _
@@ -12284,6 +12324,7 @@ symbol pathout_refl_eval_func [Z : Cat] (x : τ (Obj Z))
 constant symbol PathOutReflEval_funcd [Z : Cat]
   : τ (Functord (@PathOutMotives_catd Z) (@Const_catd Z Cat_cat));
 
+// Source component: PathOutReflEval_Z[x] ↪ evaluation at (x,id_x).
 rule @tapp0_fapp0
       _
       Cat_cat
@@ -12433,6 +12474,7 @@ symbol path_ind_func_fapp0 [Z : Cat] (x : τ (Obj Z))
       (Fibre_cat E (@pathout_refl_obj Z x))
       (Pi_cat E));
 
+// Object action: the eliminator sends u to the section path_ind_sec(x,E,u).
 rule @fapp0 _ _ (@path_ind_func_fapp0 $Z $x $E) $u
   ↪ @path_ind_sec $Z $x $E $u;
 
@@ -12446,6 +12488,7 @@ constant symbol PathInd_func [Z : Cat] (x : τ (Obj Z))
       (@PathInd_src_catd Z x)
       (@PathInd_tgt_catd Z x));
 
+// Motive component: PathInd_func(Z,x)[E] ↪ path_ind_func_fapp0(Z,x,E).
 rule @tapp0_fapp0
       _
       Cat_cat
@@ -12638,6 +12681,7 @@ rule @tapp0_fapp0
           $u)
         (@pathout_refl_arrow $Z $x $y $p));
 
+// Sigma-pullback motive computation: path induction folds to fibre covariance.
 rule @path_ind_sec $Z $x
       (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id Cat_cat $Z) $x) $D)
       $u
@@ -12915,6 +12959,7 @@ symbol EH_hcomp
       B B (@id_func B) x x x (@id B x) (@id B x) beta)
     alpha;
 
+// Left horizontal unit: 1 * alpha = alpha.
 symbol EH_hcomp_left_unit
   [B : Cat]
   (x : τ (Obj B))
@@ -12925,6 +12970,7 @@ symbol EH_hcomp_left_unit
       alpha)
 ≔ eq_refl alpha;
 
+// Right horizontal unit: beta * 1 = beta.
 symbol EH_hcomp_right_unit
   [B : Cat]
   (x : τ (Obj B))

@@ -1,14 +1,14 @@
 # EMDASH v3.2 Documentation And Kernel Maintenance Implementation Plan
 
 Date: 2026-07-10
-Last reviewed: 2026-07-10
+Last reviewed: 2026-07-11
 Plan-ID: EMDASH-V3-2-DOCUMENTATION-KERNEL-MAINTENANCE-2026-07-10
 Depends-On: REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Supersedes: no whole report; consolidates the maintenance work previously distributed across the living SOP, README, AGENTS, source preamble, check-catalog tail, and the proposed single-file reorganization plan
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-10
 Infinity-Codex-Decision-Responses: none
-Status: active implementation plan; documentation-authority consolidation and nonsemantic source cleanup in progress
+Status: completed 2026-07-11; documentation-authority consolidation and nonsemantic source cleanup promoted
 
 ## Goal
 
@@ -455,11 +455,34 @@ sections 7–10 and sections 13–17 sub-batches. The remaining adjacent-command
 backlog is confined to sections 18–19 (profunctors and applications); section
 20 is intentionally comment-only staging material.
 
+### Completion checkpoint 2026-07-11: sections 18–19
+
+The final comment-only source batch completes the adjacent-command pass for
+the profunctor and application layers. Every matched symbol declaration,
+`rule` command, and `unif_rule` command in executable sections 0–19 now has an
+immediately adjacent comment. Section 20 remains a comment-only map of the
+external diagnostic module and therefore contains no executable commands to
+classify.
+
+Section 18 now labels the profunctor reindexing ladder, shaped cells, tensor
+and co-Yoneda maps, covariant/contravariant closure, weighted-limit comparison
+operations, adjunction-mate preservation, join constructors, and late
+product-pullback bridges. Section 19 now labels the PathOut/path-induction
+component projections and the two Eckmann–Hilton horizontal-unit witnesses.
+
+Review found no stale owner or normal-form claim requiring an executable
+change. The batch adds comments only; the final validation evidence is
+recorded by the refreshed generated health report: warning inventory unchanged
+at 1,303; all eight CI typecheck targets pass; strict LHS audit reports zero
+unreviewed clauses; the 764-check catalog is fresh and has zero unclassified
+checks.
+
 - Completed first batch: consolidate the living SOP around current selected
   owners without the superseded chronological postscripts.
 - Completed first batch: extend Foundations through the currently promoted
   univalence, profunctor, join, and Eckmann-Hilton staging layers.
-- Active: finish the adjacent-comment tiers in sections 18–19.
+- Completed 2026-07-11: adjacent-command documentation across executable
+  sections 0–19.
 - Completed first batch: remove legacy check source-line tags; stable semantic
   headings may still be refined without reordering assertions.
 - Deferred: split `emdash3_2.lp` into modules; first complete the comment and
