@@ -401,6 +401,34 @@ The first batch is intentionally executable-code neutral. Bounded checking and
 strict catalog regeneration pass. Remaining adjacent-comment work begins with
 sections 3–6, followed by the rest of section 18 and the applications.
 
+### Continuation checkpoint 2026-07-10: sections 3–6
+
+The second comment-only batch completes command-level adjacent documentation
+for sections 3–6:
+
+- every matched symbol declaration, `rule` command, and `unif_rule` command in
+  sections 0–6 now has an immediately adjacent mathematical/ownership comment;
+- cohesive `with` clauses intentionally share the comment on their leading
+  rule command rather than repeating identical prose;
+- section 3 now labels functor/universe projections, groupoid and categorical
+  univalence staging, omega-equivalence destructors, displayed-family
+  classifiers, ordinary isomorphism composition steps, and ordinary
+  identity/composition packages;
+- section 4 now labels post/precomposition accumulation, runtime versus
+  proof-time comparisons, all `DefIso` projections/cancellation/forgetful
+  views, and both internalized hom variances;
+- sections 5–6 now label product and rigid-`Hom` projections, product closure
+  of equivalence data, transfor component/off-diagonal actions, Cat-valued
+  composition projections, and strict naturality joins;
+- review against the active rules corrected a stale formula in the living SOP
+  and Foundations: consecutive hom actions fold to the single action indexed
+  by the composite arrow, not in the reverse direction.
+
+Bounded checking after sections 3 and 4–6 passes with no executable Lambdapi
+change. The next adjacent-command batches are sections 7–10 and 13–17, then
+the remaining profunctor/application declarations and commands in sections
+18–19.
+
 - Completed first batch: consolidate the living SOP around current selected
   owners without the superseded chronological postscripts.
 - Completed first batch: extend Foundations through the currently promoted

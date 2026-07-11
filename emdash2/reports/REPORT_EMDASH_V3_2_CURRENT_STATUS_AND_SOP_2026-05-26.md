@@ -312,13 +312,17 @@ Never install both orientations or generate such bridges mechanically.
 
 ### Hom variance and Došen cuts
 
-When a term is already expressed through a stable hom-action owner, keep
-associativity/cut elimination under that owner:
+When a term is already expressed through a stable hom-action owner, fold
+consecutive actions to the one action indexed by the composite arrow:
 
 ```text
-(F(q o p))_*(g) -> (F q)_*((F p)_*(g))
-(F(q o p))^*(g) -> (F p)^*((F q)^*(g)).
+(F q)_*((F p)_*(g)) -> (F(q o p))_*(g)
+(F p)^*((F q)^*(g)) -> (F(q o p))^*(g).
 ```
+
+The second formula reflects contravariance: `q o p` first traverses `p`, then
+`q`, while the induced precomposition actions are encountered in the reverse
+endpoint order. These are the current runtime accumulation orientations.
 
 Raw expanded compositions should normally remain `comp_fapp0` terms. Use the
 existing proof-time bridges when a theorem compares them with stable hom-action

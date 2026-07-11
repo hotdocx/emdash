@@ -1310,9 +1310,11 @@ symbol Core_cat (C : Cat) : Cat ≔ Path_cat (Obj C);
 */
 injective symbol Functor_cat : Π (A B : Cat), Cat;
 
+// Object/type classifier of the ordinary functor category.
 injective symbol Functor (A B : Cat) : Grpd
 ≔ Obj (Functor_cat A B);
 
+// Proof-time inversion for object classifiers of two rigid functor categories.
 unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'; $B ≡ $B' ];
 
 /*
@@ -1325,6 +1327,7 @@ unif_rule Obj (Functor_cat $A $B) ≡ Obj (Functor_cat $A' $B') ↪ [ $A ≡ $A'
 symbol fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   τ (Obj A) → τ (Obj B);
 
+// Full hom-category action `F_1[X,Y]` before capping at one arrow.
 symbol fapp1_func : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   Π [X_A Y_A : τ (Obj A)],
   τ (Functor (Hom_cat A X_A Y_A) (Hom_cat B (fapp0 F_AB X_A) (fapp0 F_AB Y_A)));
@@ -1335,12 +1338,14 @@ symbol fapp1_fapp0 : Π [A B : Cat], Π (F_AB : τ (Functor A B)),
   Π (f : τ (Hom A X_A Y_A)),
   τ (Hom B (fapp0 F_AB X_A) (fapp0 F_AB Y_A));
 
+// Projection beta: applying the full hom action yields capped arrow action.
 rule fapp0 (fapp1_func $F_AB) $f ↪ fapp1_fapp0 $F_AB $f;
 
 // Strict functoriality, oriented as cut elimination.
 rule @fapp1_fapp0 $A $B $F $X $X (@id $A $X)
   ↪ @id $B (@fapp0 $A $B $F $X);
 
+// Strict composition cut: `F[g] o F[f] -> F[g o f]`.
 rule @comp_fapp0
       $B
       _
@@ -1373,11 +1378,14 @@ injective symbol Core_incl_func
   (C : Cat)
   : τ (Functor (Core_cat C) C);
 
+// Object beta for the inclusion of the path core.
 rule @fapp0 _ _ (Core_incl_func _) $x ↪ $x;
 
+// Reflexive path maps to the categorical identity arrow.
 rule @fapp1_fapp0 _ _ (Core_incl_func $C) $x $x (eq_refl $x)
   ↪ @id $C $x;
 
+// Read a path in `Obj(C)` as the corresponding arrow through the core inclusion.
 symbol path_to_hom
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1414,6 +1422,7 @@ symbol IsoEvidence
         =
       @id C y;
 
+// Forward-arrow projection of ordinary isomorphism evidence.
 symbol iso_evidence_to
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1421,6 +1430,7 @@ symbol iso_evidence_to
   : τ (Hom C x y)
 ≔ sigma_Fst i;
 
+// Inverse-arrow projection of ordinary isomorphism evidence.
 symbol iso_evidence_from
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1428,6 +1438,7 @@ symbol iso_evidence_from
   : τ (Hom C y x)
 ≔ sigma_Fst (sigma_Snd i);
 
+// Left inverse path: `from(i) o to(i) = id_x`.
 symbol iso_evidence_left
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1440,6 +1451,7 @@ symbol iso_evidence_left
       @id C x)
 ≔ sigma_Fst (sigma_Snd (sigma_Snd i));
 
+// Right inverse path: `to(i) o from(i) = id_y`.
 symbol iso_evidence_right
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1452,6 +1464,7 @@ symbol iso_evidence_right
       @id C y)
 ≔ sigma_Snd (sigma_Snd (sigma_Snd i));
 
+// Symmetry swaps the two arrows and the two inverse witnesses.
 symbol iso_evidence_sym
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1476,26 +1489,37 @@ symbol iso_evidence_sym
 
 // Category of groupoid/type classifiers.
 constant symbol Grpd_cat : Cat;
+
+// Object classifier of `Grpd_cat`, definitionally the groupoid universe.
 injective symbol Grpd_grpd : Grpd ≔ Obj Grpd_cat;
+
+// Universe-object decoding: `Obj(Grpd_cat)` decodes to `Grpd`.
 rule τ (Obj Grpd_cat) ↪ Grpd;
+
+// Homs in `Grpd_cat` decode to ordinary functions.
 rule τ (Obj (Hom_cat Grpd_cat $X $Y)) ↪ (τ $X → τ $Y);
 
+// Transport an element along equality of groupoid classifiers.
 symbol coe_grpd
   [A B : Grpd]
   (p : τ (@= Grpd_grpd A B))
   (a : τ A)
   : τ B;
 
+// Transport along reflexivity is the identity on elements.
 rule @coe_grpd $A $A (eq_refl $A) $a ↪ $a;
 
+// Convert equality of groupoid classifiers to a type equivalence.
 symbol idtoequiv_grpd
   [A B : Grpd]
   (p : τ (@= Grpd_grpd A B))
   : τ (TypeEquiv A B);
 
+// Reflexive universe equality decodes to reflexive type equivalence.
 rule @idtoequiv_grpd $A $A (eq_refl $A)
   ↪ @type_equiv_refl $A;
 
+// Componentwise path view between two groupoid-level product classifiers.
 symbol ProductGrpdPathView
   [A A' B B' : Grpd]
   : Grpd
@@ -1511,6 +1535,7 @@ symbol product_grpd_path
   (pB : τ (@PathOver Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B'))
   : τ (@= Grpd_grpd (Product_grpd A B) (Product_grpd A' B'));
 
+// Univalence capability: `idtoequiv_grpd` is an equivalence for all A,B.
 symbol GrpdUnivalence : Grpd
 ≔ @Pi_grpd Grpd_grpd
     (λ A : Grpd,
@@ -1521,23 +1546,28 @@ symbol GrpdUnivalence : Grpd
             (TypeEquiv A B)
             (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)));
 
+// Decode a type equivalence to universe equality using a univalence capability.
 symbol ua_grpd
   (U : τ GrpdUnivalence)
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
   : τ (@= Grpd_grpd A B);
 
+// Computational univalence beta: transport along `ua(e)` applies `e.to`.
 rule @coe_grpd $A $B (@ua_grpd _ $A $B $e) $a
   ↪ type_equiv_to $e $a;
 
+// Selected decoder from type equivalence to groupoid-universe equality.
 symbol grpd_equiv_path
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
   : τ (@= Grpd_grpd A B);
 
+// Decoder beta on reflexive type equivalence.
 rule @grpd_equiv_path $A $A (@type_equiv_refl $A)
   ↪ eq_refl $A;
 
+// Decoder for product equivalence builds the componentwise product path.
 rule @grpd_equiv_path
       (Product_grpd $A $B)
       (Product_grpd $A' $B')
@@ -1558,6 +1588,7 @@ rule @grpd_equiv_path
         (@grpd_equiv_path $A $A' $eA)
         (@grpd_equiv_path $B $B' $eB));
 
+// Encoding a componentwise product path yields the componentwise equivalence.
 rule @idtoequiv_grpd
       (Product_grpd $A $B)
       (Product_grpd $A' $B')
@@ -1581,6 +1612,7 @@ rule @idtoequiv_grpd
           $pA
           $pB));
 
+// Specified-inverse presentation of groupoid univalence via the selected decoder.
 symbol GrpdUnivalenceByDecoder : Grpd
 ≔ @Pi_grpd Grpd_grpd
     (λ A : Grpd,
@@ -1592,13 +1624,20 @@ symbol GrpdUnivalenceByDecoder : Grpd
             (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
             (λ e : τ (TypeEquiv A B), @grpd_equiv_path A B e)));
 
+// Global decoder-oriented groupoid-univalence capability.
 symbol grpd_univalence_by_decoder
   : τ GrpdUnivalenceByDecoder;
 
 // Category of categories.
 constant symbol Cat_cat : Cat;
+
+// Object classifier of the category universe.
 injective symbol Cat_grpd  : Grpd ≔ Obj Cat_cat;
+
+// Universe-object decoding: `Obj(Cat_cat)` decodes to the meta-type `Cat`.
 rule τ (Obj Cat_cat)  ↪ Cat;
+
+// Directed-universe beta: a hom in `Cat_cat` is an ordinary functor category.
 rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
 
 /*
@@ -1620,11 +1659,14 @@ rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
 //   E[k]        = fapp0 E k, usually via Fibre_cat E k.
 injective symbol Catd_cat (K : Cat) : Cat;
 
+// Object/type classifier of directed Cat-valued families over K.
 injective symbol Catd (K : Cat) : Grpd
 ≔ Obj (Catd_cat K);
 
+// Canonical fold: ordinary Cat-valued functors form `Catd_cat(K)`.
 rule Functor_cat $K Cat_cat ↪ @Catd_cat $K;
 
+// Proof-time inversion for two rigid directed-family category heads.
 unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
 
 // Natural/displayed families of functors between directed Cat-valued families.
@@ -1634,9 +1676,11 @@ unif_rule Obj (@Catd_cat $K) ≡ Obj (@Catd_cat $K') ↪ [ $K ≡ $K' ];
 //   Functord(E,D)     = Obj(Functord_cat(E,D)).
 injective symbol Functord_cat [K : Cat] (E D : τ (Catd K)) : Cat;
 
+// Object/type classifier of natural/displayed functor families.
 injective symbol Functord [K : Cat] (E D : τ (Catd K)) : Grpd
 ≔ Obj (@Functord_cat K E D);
 
+// Proof-time inversion for two rigid displayed-functor category heads.
 unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D' ];
 
@@ -1645,8 +1689,10 @@ unif_rule Obj (@Functord_cat $K $E $D) ≡ Obj (@Functord_cat $K' $E' $D')
 // `Transf_cat K Cat_cat E D` rewrite. The ordinary-functor route
 // `Hom_cat (Functor_cat K Cat_cat) E D ↪ Transf_cat K Cat_cat E D` and the
 // directed-family route below both join at `Functord_cat K E D`.
+// Hom projection in `Catd_cat`: arrows are natural/displayed functor families.
 rule Hom_cat (@Catd_cat $K) $E $D ↪ @Functord_cat $K $E $D;
 
+// Transparent displayed identity: generic identity at `Catd_cat(K)`.
 symbol id_funcd [K : Cat] [E : τ (Catd K)] : τ (Functord E E)
 ≔ @id (@Catd_cat K) E;
 
@@ -1698,13 +1744,16 @@ rule @comp_fapp0
 injective symbol Transfd_cat [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Cat;
 
+// Object/type classifier of natural/displayed transformations.
 injective symbol Transfd [K : Cat] [E D : τ (Catd K)]
   (FF GG : τ (Functord E D)) : Grpd
 ≔ Obj (@Transfd_cat K E D FF GG);
 
+// Proof-time inversion for two rigid displayed-transformation category heads.
 unif_rule Obj (@Transfd_cat $K $E $D $FF $GG) ≡ Obj (@Transfd_cat $K' $E' $D' $FF' $GG')
   ↪ [ $K ≡ $K'; $E ≡ $E'; $D ≡ $D'; $FF ≡ $FF'; $GG ≡ $GG' ];
 
+// Hom projection in `Functord_cat`: arrows are displayed transformations.
 rule Hom_cat (@Functord_cat $K $E $D) $FF $GG
   ↪ @Transfd_cat $K $E $D $FF $GG;
 
@@ -1716,6 +1765,7 @@ constant symbol id_transfd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   : τ (@Transfd K E D FF FF);
 
+// Displayed identity projection at a visible `Functord_cat` head.
 rule @id (@Functord_cat $K $E $D) $FF
   ↪ @id_transfd $K $E $D $FF;
 
@@ -1745,6 +1795,8 @@ symbol id_func [A: Cat] : τ (Functor A A)
 
 // Cat_cat identity and point/arrow actions of the ordinary identity functor.
 rule @fapp0 $A $A (@id Cat_cat $A) $xA ↪ $xA;
+
+// Identity functor acts trivially on arrows.
 rule @fapp1_fapp0 $A $A (@id Cat_cat $A) $x $y $p ↪ $p;
 
 // Stable composition head: comp_cat_fapp0(F,G) = F ∘ G.
@@ -1765,7 +1817,11 @@ rule @comp_fapp0
       $A $B $E
       (@comp_fapp0 Cat_cat $B $C $E $H $G)
       $F;
+
+// Object beta for composed functors: `(F o G)[x] = F[G[x]]`.
 rule @fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x ↪ @fapp0 $B $C $F (@fapp0 $A $B $G $x);
+
+// Arrow beta for composed functors: `(F o G)[f] = F[G[f]]`.
 rule @fapp1_fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y $f
   ↪ @fapp1_fapp0
       $B
@@ -1780,6 +1836,8 @@ rule @fapp1_fapp0 $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y $f
 // endpoints remain inferred and may use proof-time-compatible presentations.
 // The resulting critical pair is required to join by typed proof-time equality.
 rule @comp_fapp0 $A _ $Y _ $g (@id $A $Y) ↪ $g;
+
+// Left identity cut with the shared middle object as the matching guard.
 rule @comp_fapp0 $A _ $Y _ (@id $A $Y) $f ↪ $f;
 
 // Reflexive ordinary isomorphism evidence requires the identity-cut rules
@@ -1789,15 +1847,19 @@ injective symbol iso_evidence_refl
   (x : τ (Obj C))
   : τ (IsoEvidence C x x);
 
+// Forward arrow of reflexive isomorphism evidence is identity.
 rule sigma_Fst (@iso_evidence_refl $C $x)
   ↪ @id $C $x;
 
+// Inverse arrow of reflexive isomorphism evidence is identity.
 rule sigma_Fst (sigma_Snd (@iso_evidence_refl $C $x))
   ↪ @id $C $x;
 
+// Left inverse proof of reflexive evidence is reflexivity.
 rule sigma_Fst (sigma_Snd (sigma_Snd (@iso_evidence_refl $C $x)))
   ↪ eq_refl (@id $C $x);
 
+// Right inverse proof of reflexive evidence is reflexivity.
 rule sigma_Snd (sigma_Snd (sigma_Snd (@iso_evidence_refl $C $x)))
   ↪ eq_refl (@id $C $x);
 
@@ -1810,15 +1872,18 @@ rule sigma_Snd (sigma_Snd (sigma_Snd (@iso_evidence_refl $C $x)))
   the recursive omega-categorical equivalence below.
 */
 
+// Convert object equality to ordinary categorical isomorphism evidence.
 symbol idtoiso_cat
   [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (x = y))
   : τ (IsoEvidence C x y);
 
+// Reflexive object equality maps to reflexive isomorphism evidence.
 rule @idtoiso_cat $C $x $x (eq_refl $x)
   ↪ @iso_evidence_refl $C $x;
 
+// 1-categorical univalence capability for `idtoiso_cat`.
 symbol CatIsoUnivalence
   (C : Cat)
   : Grpd
@@ -1831,6 +1896,7 @@ symbol CatIsoUnivalence
             (IsoEvidence C x y)
             (λ p : τ (@= (Obj C) x y), @idtoiso_cat C x y p)));
 
+// Decode ordinary isomorphism evidence to object equality using a capability.
 symbol isotoid_cat
   [C : Cat]
   (U : τ (CatIsoUnivalence C))
@@ -1848,15 +1914,18 @@ symbol isotoid_cat
       (U x y))
     i;
 
+// Selected global decoder from ordinary isomorphism evidence to object equality.
 symbol iso_evidence_path
   [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y))
   : τ (x = y);
 
+// Decoder beta on reflexive ordinary isomorphism evidence.
 rule @iso_evidence_path $C $x $x (@iso_evidence_refl $C $x)
   ↪ eq_refl $x;
 
+// Specified-inverse 1-categorical univalence presentation.
 symbol CatIsoUnivalenceByDecoder
   (C : Cat)
   : Grpd
@@ -1877,6 +1946,7 @@ symbol cat_iso_univalence
   (C : Cat)
   : τ (CatIsoUnivalence C);
 
+// Global decoder-oriented 1-categorical univalence capability.
 symbol cat_iso_univalence_by_decoder
   (C : Cat)
   : τ (CatIsoUnivalenceByDecoder C);
@@ -1893,24 +1963,28 @@ constant symbol OmegaEquiv
   (x y : τ (Obj C))
   : Grpd;
 
+// Forward arrow of an omega-equivalence.
 symbol omega_equiv_to
   [C : Cat]
   [x y : τ (Obj C)]
   (e : τ (OmegaEquiv C x y))
   : τ (Hom C x y);
 
+// Selected left-inverse arrow of an omega-equivalence.
 symbol omega_equiv_left_inv
   [C : Cat]
   [x y : τ (Obj C)]
   (e : τ (OmegaEquiv C x y))
   : τ (Hom C y x);
 
+// Selected right-inverse arrow of an omega-equivalence.
 symbol omega_equiv_right_inv
   [C : Cat]
   [x y : τ (Obj C)]
   (e : τ (OmegaEquiv C x y))
   : τ (Hom C y x);
 
+// Higher equivalence witnessing `left_inv o to ~ id_x`.
 symbol omega_equiv_left_cell
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1922,6 +1996,7 @@ symbol omega_equiv_left_cell
         (omega_equiv_to e))
       (@id C x));
 
+// Higher equivalence witnessing `to o right_inv ~ id_y`.
 symbol omega_equiv_right_cell
   [C : Cat]
   [x y : τ (Obj C)]
@@ -1933,15 +2008,18 @@ symbol omega_equiv_right_cell
         (omega_equiv_right_inv e))
       (@id C y));
 
+// Reflexive omega-equivalence generator.
 injective symbol omega_equiv_refl
   [C : Cat]
   (x : τ (Obj C))
   : τ (OmegaEquiv C x x);
 
+// Reflexive omega-equivalence projects to identity arrows in all arrow slots.
 rule omega_equiv_to (omega_equiv_refl $x) ↪ @id _ $x
 with omega_equiv_left_inv (omega_equiv_refl $x) ↪ @id _ $x
 with omega_equiv_right_inv (omega_equiv_refl $x) ↪ @id _ $x;
 
+// Higher inverse cells of reflexive equivalence are recursively reflexive.
 rule omega_equiv_left_cell (omega_equiv_refl $x)
   ↪ omega_equiv_refl (@id _ $x)
 with omega_equiv_right_cell (omega_equiv_refl $x)
@@ -1966,6 +2044,7 @@ symbol path_cat_omega_path
   : τ (x = y)
 ≔ omega_equiv_to e;
 
+// Extract the underlying equality path from path-category isomorphism evidence.
 symbol path_cat_iso_path
   [A : Grpd]
   [x y : τ A]
@@ -1973,15 +2052,18 @@ symbol path_cat_iso_path
   : τ (x = y)
 ≔ iso_evidence_to i;
 
+// Opposite closure reverses the endpoints of an omega-equivalence.
 injective symbol omega_equiv_op
   [C : Cat]
   [x y : τ (Obj C)]
   (e : τ (OmegaEquiv C x y))
   : τ (OmegaEquiv (Op_cat C) y x);
 
+// Opposite of reflexive omega-equivalence is reflexive.
 rule @omega_equiv_op $C $x $x (@omega_equiv_refl $C $x)
   ↪ @omega_equiv_refl (Op_cat $C) $x;
 
+// Opposite swaps the selected inverse directions while preserving the arrow view.
 rule @omega_equiv_to
       (Op_cat $C)
       $y
@@ -2001,6 +2083,7 @@ with @omega_equiv_right_inv
       (@omega_equiv_op $C $x $y $e)
   ↪ @omega_equiv_left_inv $C $x $y $e;
 
+// Opposite exchanges the two higher inverse cells.
 rule @omega_equiv_left_cell
       (Op_cat $C)
       $y
@@ -2014,24 +2097,29 @@ with @omega_equiv_right_cell
       (@omega_equiv_op $C $x $y $e)
   ↪ @omega_equiv_left_cell $C $x $y $e;
 
+// Convert object equality to recursive omega-equivalence.
 symbol idtoequiv_cat
   [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (x = y))
   : τ (OmegaEquiv C x y);
 
+// Reflexive object equality maps to reflexive omega-equivalence.
 rule @idtoequiv_cat $C $x $x (eq_refl $x)
   ↪ @omega_equiv_refl $C $x;
 
+// Selected decoder from omega-equivalence to object equality.
 symbol omega_equiv_path
   [C : Cat]
   [x y : τ (Obj C)]
   (e : τ (OmegaEquiv C x y))
   : τ (x = y);
 
+// Decoder beta on reflexive omega-equivalence.
 rule @omega_equiv_path $C $x $x (@omega_equiv_refl $C $x)
   ↪ eq_refl $x;
 
+// Omega-categorical univalence capability for `idtoequiv_cat`.
 symbol CatUnivalence
   (C : Cat)
   : Grpd
@@ -2044,6 +2132,7 @@ symbol CatUnivalence
             (OmegaEquiv C x y)
             (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)));
 
+// Specified-inverse omega-categorical univalence presentation.
 symbol CatUnivalenceByDecoder
   (C : Cat)
   : Grpd
@@ -2057,6 +2146,7 @@ symbol CatUnivalenceByDecoder
             (λ p : τ (@= (Obj C) x y), @idtoequiv_cat C x y p)
             (λ e : τ (OmegaEquiv C x y), @omega_equiv_path C x y e)));
 
+// Decode omega-equivalence to object equality using a univalence capability.
 symbol equivtoid_cat
   [C : Cat]
   (U : τ (CatUnivalence C))
@@ -2082,6 +2172,7 @@ symbol cat_univalence
   (C : Cat)
   : τ (CatUnivalence C);
 
+// Global decoder-oriented omega-categorical univalence capability.
 symbol cat_univalence_by_decoder
   (C : Cat)
   : τ (CatUnivalenceByDecoder C);
@@ -2137,6 +2228,7 @@ symbol iso_evidence_comp_left_step1
         (@iso_evidence_to C y z j)
         (@iso_evidence_to C x y i)));
 
+// Left-cancellation proof step 2: reassociate around the j inverse pair.
 symbol iso_evidence_comp_left_step2
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2180,6 +2272,7 @@ symbol iso_evidence_comp_left_step2
       (@iso_evidence_to C y z j)
       (@iso_evidence_to C x y i));
 
+// Left-cancellation proof step 3: replace `from(j) o to(j)` by identity.
 symbol iso_evidence_comp_left_step3
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2212,6 +2305,7 @@ symbol iso_evidence_comp_left_step3
     (@id C y)
     (@iso_evidence_left C y z j);
 
+// Left inverse proof for the composite ordinary isomorphism evidence.
 symbol iso_evidence_comp_left
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2235,6 +2329,7 @@ symbol iso_evidence_comp_left
         (@iso_evidence_comp_left_step3 C x y z j i)
         (@iso_evidence_left C x y i)));
 
+// Right-cancellation proof step 1: reassociate the outer composite.
 symbol iso_evidence_comp_right_step1
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2279,6 +2374,7 @@ symbol iso_evidence_comp_right_step1
         (@iso_evidence_from C x y i)
         (@iso_evidence_from C y z j)));
 
+// Right-cancellation proof step 2: reassociate around the i inverse pair.
 symbol iso_evidence_comp_right_step2
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2322,6 +2418,7 @@ symbol iso_evidence_comp_right_step2
       (@iso_evidence_from C x y i)
       (@iso_evidence_from C y z j));
 
+// Right-cancellation proof step 3: replace `to(i) o from(i)` by identity.
 symbol iso_evidence_comp_right_step3
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2354,6 +2451,7 @@ symbol iso_evidence_comp_right_step3
     (@id C y)
     (@iso_evidence_right C x y i);
 
+// Right inverse proof for the composite ordinary isomorphism evidence.
 symbol iso_evidence_comp_right
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2377,6 +2475,7 @@ symbol iso_evidence_comp_right
         (@iso_evidence_comp_right_step3 C x y z j i)
         (@iso_evidence_right C y z j)));
 
+// Composition of ordinary isomorphism evidence.
 symbol iso_evidence_comp
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -2441,13 +2540,21 @@ injective symbol Op_func : Π [A B : Cat],
 
 // Opposite-functor involution and pointwise object/arrow computations.
 rule Op_func (@Op_func $A $B $F) ↪ $F;
+
+// Opposite functor has the same object action.
 rule @fapp0 _ _ (@Op_func $A $B $F) $xA ↪ @fapp0 $A $B $F $xA;
+
+// Full hom action of opposite reverses the source endpoints.
 rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y ↪ @fapp1_func $A $B $F $Y $X;
+
+// Capped arrow action of opposite reuses the underlying arrow action.
 rule @fapp1_fapp0 _ _ (@Op_func $A $B $F) $X $Y $f
   ↪ @fapp1_fapp0 $A $B $F $Y $X $f;
 
 // Opposite preserves identity and ordinary functor composition.
 rule @Op_func _ _ (@id Cat_cat $A) ↪ @id Cat_cat (Op_cat $A);
+
+// Projection-order bridge: opposite sends a composite functor to the composite of opposites.
 rule @Op_func _ _ (@comp_fapp0 Cat_cat $A $B $C $F $G)
   ↪ comp_cat_fapp0 (Op_func $F) (Op_func $G);
 
@@ -2462,12 +2569,20 @@ constant symbol Terminal_cat : Cat;
 
 // Terminal normal forms: Obj(1)=Unit, Hom_1(*,*)=1, id/comp are Terminal_obj.
 rule Op_cat Terminal_cat ↪ Terminal_cat;
+
+// Object classifier of the terminal category is the unit groupoid.
 rule Obj Terminal_cat ↪ Unit_grpd;
+
+// Every terminal hom-category is terminal.
 rule Hom_cat Terminal_cat _ _ ↪ Terminal_cat;
 
 // Unique object of the terminal category.
 constant symbol Terminal_obj : τ (Obj Terminal_cat);
+
+// Terminal identity is the unique terminal object/arrow.
 rule @id Terminal_cat _ ↪ Terminal_obj;
+
+// Terminal composition is the unique terminal object/arrow.
 rule @comp_fapp0 Terminal_cat _ _ _ _ _ ↪ Terminal_obj;
 
 // Unique functor into the terminal category.
@@ -2494,16 +2609,23 @@ rule fapp0 (fapp0_func $x) $F ↪ fapp0 $F $x;
 injective symbol Const_func [A B : Cat] (b : τ (Obj B)) : τ (Functor A B);
 // Constant-functor object/arrow actions and functorial compatibility.
 rule @fapp0 $A $B (@Const_func $A $B $b) $_ ↪ $b;
+
+// Full hom action of a constant functor is constant at `id_b`.
 rule @fapp1_func $A $B (@Const_func $A $B $b) $x $y
   ↪ @Const_func
       (Hom_cat $A $x $y)
       (Hom_cat $B $b $b)
       (@id $B $b);
+// Capped arrow action of a constant functor is `id_b`.
 rule @fapp1_fapp0 $A $B (@Const_func $A $B $b) $x $y $_ ↪ @id $B $b;
+
+// Opposite preserves constant functors pointwise.
 rule @Op_func $A $B (@Const_func $A $B $b)
   ↪ @Const_func (Op_cat $A) (Op_cat $B) $b;
+// Postcomposing a constant functor evaluates the outer functor at its value.
 rule @comp_fapp0 Cat_cat $A $B $C $F (@Const_func $A $B $b)
   ↪ @Const_func $A $C (@fapp0 $B $C $F $b);
+// Precomposing a constant functor leaves it constant.
 rule @comp_fapp0 Cat_cat $A $B $C (@Const_func $B $C $c) $G
   ↪ @Const_func $A $C $c;
 
@@ -2523,6 +2645,7 @@ injective symbol Obj_func [Y : Cat] (y : τ (Obj Y)) : τ (Functor Terminal_cat 
 constant symbol op : τ (Functor Cat_cat Cat_cat);
 // Internal opposite action on categories and functors.
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
+// Arrow action of the internal opposite functor is `Op_func`.
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
 // 3f. Internalized universe-level constructor packages.
@@ -2535,10 +2658,13 @@ rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 //   Functor_cat_func[A][B] = A ⊢ B.
 constant symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
 
+// Partial internalized functor-category constructor at fixed source A.
 injective symbol Functor_cat_fapp0_func (A : Cat) : τ (Functor Cat_cat Cat_cat);
 
+// First application of the binary constructor fixes the source category.
 rule @fapp0 _ _ Functor_cat_func $A
   ↪ Functor_cat_fapp0_func $A;
+// Second application yields the ordinary functor category `A ⊢ B`.
 rule @fapp0 Cat_cat Cat_cat (Functor_cat_fapp0_func $A) $B
   ↪ Functor_cat $A $B;
 
@@ -2714,9 +2840,11 @@ rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
 rule @hom_postcomp_func $A $B $F $W $X $X (@id $B $X)
   ↪ @id_func (Hom_cat $A $W (@fapp0 $B $A $F $X));
 
+// Identity base arrow acts trivially at the stable postcomposition point head.
 rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
   ↪ $g;
 
+// Functor-level accumulation: consecutive postcomposition actions combine.
 rule @comp_fapp0
       Cat_cat
       _ _ _
@@ -2726,6 +2854,7 @@ rule @comp_fapp0
       $A $B $F $W $X $Z
       (@comp_fapp0 $B $X $Y $Z $q $p);
 
+// Point-level accumulation of consecutive postcomposition actions.
 rule @hom_postcomp_fapp0
       $A $B $F $W $Y $Z $q
       (@hom_postcomp_fapp0 $A $B $F $W $X $Y $p $g)
@@ -2753,6 +2882,7 @@ rule @comp_fapp0
       (@comp_fapp0 $B $X $Y $Z $q $p)
       $g;
 
+// Identity-family nested postcomposition reassociates under the stable owner.
 rule @hom_postcomp_fapp0
       $A $A (@id Cat_cat $A) $W $X $Z
       (@hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $X $Y $Z $q $p)
@@ -2833,9 +2963,11 @@ symbol hom_postcomp_tele_transf [A B : Cat]
 rule @fapp1_func _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g
   ↪ @hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g;
 
+// Applying the full telescope hom action yields its transfor component.
 rule fapp0 (@hom_postcomp_tele_fapp1_func $A $B $F $W $X $Y $f $g) $alpha
   ↪ @hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $alpha;
 
+// Direct capped telescope action joins the full-action projection.
 rule @fapp1_fapp0 _ _ (@hom_postcomp_tele_func $A $B $F $W $X $Y) $f $g $alpha
   ↪ @hom_postcomp_tele_transf $A $B $F $W $X $Y $f $g $alpha;
 
@@ -2850,6 +2982,7 @@ rule @hom_postcomp_tele_fapp1_fapp0
         (Hom_cat $A $W (@fapp0 $B $A $F $Y)))
       (@hom_postcomp_func $A $B $F $W $X $Y $f);
 
+// Telescope 2-cell composition accumulates inside the stable action head.
 rule @comp_fapp0
       _
       _
@@ -2897,9 +3030,11 @@ symbol hom_postcomp_fapp1_fapp0 [A B : Cat]
 rule @fapp1_func _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h
   ↪ @hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h;
 
+// Applying the full capped-action hom functor yields its point action.
 rule fapp0 (@hom_postcomp_fapp1_func $A $B $F $W $X $Y $f $g $h) $alpha
   ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
 
+// Direct capped 2-cell action joins the full-action projection.
 rule @fapp1_fapp0 _ _ (@hom_postcomp_func $A $B $F $W $X $Y $f) $g $h $alpha
   ↪ @hom_postcomp_fapp1_fapp0 $A $B $F $W $X $Y $f $g $h $alpha;
 
@@ -2920,6 +3055,7 @@ rule @hom_postcomp_fapp1_fapp0
       (Hom_cat $A $W (@fapp0 $B $A $F $Y))
       (@hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g);
 
+// Proof-time raw-composition reading of the stable postcomposition point head.
 unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
   ≡ @comp_fapp0
       $A
@@ -2930,6 +3066,7 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $g
   ↪ [ tt ≡ tt ];
 
+// Proof-time identity-family comparison with ordinary raw composition.
 unif_rule @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $h $g
   ≡ @comp_fapp0 $A $W $X $Y $h $g
   ↪ [ tt ≡ tt ];
@@ -2966,39 +3103,46 @@ injective symbol DefIso
   (x y : τ (Obj C))
   : Grpd;
 
+// Selected forward arrow of a computational isomorphism.
 symbol defiso_to
   [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y))
   : τ (Hom C x y);
 
+// Selected inverse arrow of a computational isomorphism.
 symbol defiso_from
   [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y))
   : τ (Hom C y x);
 
+// Reflexive computational isomorphism.
 injective symbol defiso_refl
   [C : Cat]
   (x : τ (Obj C))
   : τ (@DefIso C x x);
 
+// Forward/inverse projections of reflexivity are identity arrows.
 rule @defiso_to $C $x $x (@defiso_refl $C $x)
   ↪ @id $C $x
 with @defiso_from $C $x $x (@defiso_refl $C $x)
   ↪ @id $C $x;
 
+// Symmetry of computational isomorphism.
 injective symbol defiso_sym
   [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y))
   : τ (@DefIso C y x);
 
+// Symmetry swaps the forward and inverse projections.
 rule @defiso_to $C $y $x (@defiso_sym $C $x $y $i)
   ↪ @defiso_from $C $x $y $i
 with @defiso_from $C $y $x (@defiso_sym $C $x $y $i)
   ↪ @defiso_to $C $x $y $i;
 
+// DefIso beta: postcomposing by `to` after `from` cancels.
 rule @hom_postcomp_fapp0
       $A $C $F $W $y $x
       (@defiso_from $C $x $y $i)
@@ -3016,6 +3160,7 @@ with @hom_postcomp_fapp0
         $g)
   ↪ $g;
 
+// DefIso eta: postcomposing by `from` after `to` cancels.
 rule @hom_postcomp_fapp0
       $C $C (@id Cat_cat $C) $x $y $x
       (@defiso_from $C $x $y $i)
@@ -3027,42 +3172,50 @@ with @hom_postcomp_fapp0
       (@defiso_from $C $x $y $i)
   ↪ @id $C $y;
 
+// Raw right-inverse cut joins the same computational cancellation.
 rule @comp_fapp0
       $C $x $y $x
       (@defiso_from $C $x $y $i)
       (@defiso_to $C $x $y $i)
   ↪  @id $C $x;
 
+// Raw left-inverse cut joins the same computational cancellation.
 rule @comp_fapp0
       $C $y $x $y
       (@defiso_to $C $x $y $i)
       (@defiso_from $C $x $y $i)
   ↪  @id $C $y;
 
+// Forget a computational isomorphism to ordinary propositional evidence.
 symbol defiso_iso_evidence
   [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y))
   : τ (@IsoEvidence C x y);
 
+// Forward-arrow projection of the ordinary evidence view.
 rule sigma_Fst (@defiso_iso_evidence $C $x $y $i)
   ↪ @defiso_to $C $x $y $i;
 
+// Inverse-arrow projection of the ordinary evidence view.
 rule sigma_Fst (sigma_Snd (@defiso_iso_evidence $C $x $y $i))
   ↪ @defiso_from $C $x $y $i;
 
+// Left inverse evidence is reflexivity after computational cancellation.
 rule sigma_Fst (sigma_Snd (sigma_Snd (@defiso_iso_evidence $C $x $y $i)))
   ↪ eq_refl
       (@comp_fapp0 $C $x $y $x
         (@defiso_from $C $x $y $i)
         (@defiso_to $C $x $y $i));
 
+// Right inverse evidence is reflexivity after computational cancellation.
 rule sigma_Snd (sigma_Snd (sigma_Snd (@defiso_iso_evidence $C $x $y $i)))
   ↪ eq_refl
       (@comp_fapp0 $C $y $x $y
         (@defiso_to $C $x $y $i)
         (@defiso_from $C $x $y $i));
 
+// Composition of computational isomorphisms.
 injective symbol defiso_comp
   [C : Cat]
   [x y z : τ (Obj C)]
@@ -3070,6 +3223,7 @@ injective symbol defiso_comp
   (i : τ (@DefIso C x y))
   : τ (@DefIso C x z);
 
+// Composite forward/inverse projections compose in opposite orders.
 rule @defiso_to $C $x $z (@defiso_comp $C $x $y $z $j $i)
   ↪ @hom_postcomp_fapp0
       $C $C (@id_func $C) $x $y $z
@@ -3081,6 +3235,7 @@ with @defiso_from $C $x $z (@defiso_comp $C $x $y $z $j $i)
       (@defiso_from $C $x $y $i)
       (@defiso_from $C $y $z $j);
 
+// Composite DefIso cancellation accumulates nested stable postcomposition cuts.
 rule @hom_postcomp_fapp0
       $C $C (@id Cat_cat $C) $x $z $x
       (@hom_postcomp_fapp0
@@ -3104,6 +3259,7 @@ with @hom_postcomp_fapp0
         (@defiso_from $C $y $z $j))
   ↪ @id $C $z;
 
+// Functorial image of a computational isomorphism.
 injective symbol defiso_fmap
   [C D : Cat]
   (F : τ (Functor C D))
@@ -3111,6 +3267,7 @@ injective symbol defiso_fmap
   (i : τ (@DefIso C x y))
   : τ (@DefIso D (@fapp0 C D F x) (@fapp0 C D F y));
 
+// Functorial image projects by applying the functor to both selected arrows.
 rule @defiso_to
       $D
       _ _
@@ -3122,6 +3279,7 @@ with @defiso_from
       (@defiso_fmap $C $D $F $x $y $i)
   ↪ @fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i);
 
+// Left cancellation of a mapped DefIso under the target hom-action owner.
 rule @hom_postcomp_fapp0
       $D $D (@id Cat_cat $D)
       (@fapp0 $C $D $F $x)
@@ -3139,6 +3297,7 @@ with @hom_postcomp_fapp0
       (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
   ↪ @id $D (@fapp0 $C $D $F $y);
 
+// Right cancellation of a mapped DefIso under the target hom-action owner.
 rule @hom_postcomp_fapp0
       $D $D (@id Cat_cat $D)
       $W _ _
@@ -3160,20 +3319,24 @@ with @hom_postcomp_fapp0
         $g)
   ↪ $g;
 
+// Forgetful view preserves reflexivity.
 rule @defiso_iso_evidence $C $x $x (@defiso_refl $C $x)
   ↪ @iso_evidence_refl $C $x;
 
+// Forgetful view preserves symmetry.
 rule @defiso_iso_evidence $C $y $x (@defiso_sym $C $x $y $i)
   ↪ @iso_evidence_sym
       $C $x $y
       (@defiso_iso_evidence $C $x $y $i);
 
+// Forgetful view preserves composition.
 rule @defiso_iso_evidence $C $x $z (@defiso_comp $C $x $y $z $j $i)
   ↪ @iso_evidence_comp
       $C $x $y $z
       (@defiso_iso_evidence $C $y $z $j)
       (@defiso_iso_evidence $C $x $y $i);
 
+// Forgetful view preserves functorial image.
 rule @defiso_iso_evidence
       $D
       _ _
@@ -3270,9 +3433,11 @@ rule @fapp1_func
       $X $Y
   ↪ @hom_con_precomp_tele_func $A $B $F $W $X $Y;
 
+// Applying the contravariant telescope at p yields the capped precomposition functor.
 rule fapp0 (@hom_con_precomp_tele_func $A $B $F $W $X $Y) $p
   ↪ @hom_precomp_along_func $B $A $F $W $Y $X $p;
 
+// Direct contravariant capped action joins the telescope projection.
 rule @fapp1_fapp0
       _ Cat_cat
       (@hom_con $A $W $B $F)
@@ -3292,9 +3457,11 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
 rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
   ↪ @id_func (Hom_cat $B (@fapp0 $A $B $F $X) $Z);
 
+// Identity base arrow acts trivially at the stable precomposition point head.
 rule @hom_precomp_along_fapp0 $A $B $F $Z $X $X (@id $A $X) $g
   ↪ $g;
 
+// Functor-level contravariant accumulation of consecutive precomposition actions.
 rule @comp_fapp0
       Cat_cat
       _ _ _
@@ -3304,6 +3471,7 @@ rule @comp_fapp0
       $A $B $F $Z $W $Y
       (@comp_fapp0 $A $W $X $Y $q $p);
 
+// Point-level contravariant accumulation of consecutive precomposition actions.
 rule @hom_precomp_along_fapp0
       $A $B $F $Z $W $X $p
       (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g)
@@ -3335,6 +3503,7 @@ rule @comp_fapp0
 // The first rule covers unreduced generic identities; the `Cat_cat` and
 // `Catd_cat` rules cover the normal forms of category and displayed-category
 // identities.
+// Identity-family codomain accumulation remains under the precomposition owner.
 rule @hom_precomp_along_fapp0
       $A
       $B
@@ -3346,6 +3515,7 @@ rule @hom_precomp_along_fapp0
       (@id $B _)
   ↪ @fapp1_fapp0 $A $B $F $W $X $h;
 
+// Identity-family left identity cut for stable precomposition.
 rule @hom_precomp_along_fapp0
       $A
       Cat_cat
@@ -3357,6 +3527,7 @@ rule @hom_precomp_along_fapp0
       (@id Cat_cat _)
   ↪ @fapp1_fapp0 $A Cat_cat $F $W $X $h;
 
+// Catd-valued left identity cut for stable precomposition.
 rule @hom_precomp_along_fapp0
       $A
       (@Catd_cat $K)
@@ -3368,6 +3539,7 @@ rule @hom_precomp_along_fapp0
       (@id (@Catd_cat $K) _)
   ↪ @fapp1_fapp0 $A (@Catd_cat $K) $F $W $X $h;
 
+// Proof-time raw-composition reading of the stable precomposition point head.
 unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
   ≡ @comp_fapp0
       $B
@@ -3378,6 +3550,7 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
+// Proof-time identity-family comparison with ordinary raw composition.
 unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
   ≡ @comp_fapp0
       $A
@@ -3474,9 +3647,11 @@ symbol hom_precomp_along_tele_transf [A B : Cat]
 rule @fapp1_func _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k
   ↪ @hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k;
 
+// Applying the full precomposition telescope hom action yields its transfor.
 rule fapp0 (@hom_precomp_along_tele_fapp1_func $A $B $F $Z $W $X $h $k) $alpha
   ↪ @hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha;
 
+// Direct capped telescope action joins the full-action projection.
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_tele_func $A $B $F $Z $W $X) $h $k $alpha
   ↪ @hom_precomp_along_tele_transf $A $B $F $Z $W $X $h $k $alpha;
 
@@ -3491,6 +3666,7 @@ rule @hom_precomp_along_tele_fapp1_fapp0
         (Hom_cat $B (@fapp0 $A $B $F $W) $Z))
       (@hom_precomp_along_func $A $B $F $Z $W $X $h);
 
+// Precomposition-telescope 2-cell composition accumulates inside the stable head.
 rule @comp_fapp0
       _
       _
@@ -3538,9 +3714,11 @@ symbol hom_precomp_along_fapp1_fapp0 [A B : Cat]
 rule @fapp1_func _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k
   ↪ @hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k;
 
+// Applying the full capped precomposition action yields its point action.
 rule fapp0 (@hom_precomp_along_fapp1_func $A $B $F $Z $W $X $h $g $k) $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
+// Direct capped 2-cell action joins the full-action projection.
 rule @fapp1_fapp0 _ _ (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g $k $alpha
   ↪ @hom_precomp_along_fapp1_fapp0 $A $B $F $Z $W $X $h $g $k $alpha;
 
@@ -3591,6 +3769,7 @@ unif_rule @hom_postcomp_tele_func
       $F ≡ (@Op_func $A0 $B0 $F0)
     ];
 
+// Proof-time opposite comparison of the capped post/precomposition functors.
 unif_rule @hom_postcomp_func
       $B $A $F
       $Z $X $W $h
@@ -3603,6 +3782,7 @@ unif_rule @hom_postcomp_func
       $F ≡ (@Op_func $A0 $B0 $F0)
     ];
 
+// Proof-time opposite comparison of the post/precomposition point actions.
 unif_rule @hom_postcomp_fapp0
       $B $A $F
       $Z $X $W $h $g
@@ -3625,6 +3805,7 @@ unif_rule @hom_postcomp_fapp0
 injective symbol hom_int [A B : Cat] (F : τ (Functor B A))
   : τ (Functor (Op_cat A) (Catd_cat B));
 
+// Object projection: `hom_int(F)[W] = hom_(F,W)`.
 rule @fapp0 _ _ (@hom_int $A $B $F) $W
   ↪ @hom_ $A $B $F $W;
 
@@ -3643,18 +3824,22 @@ symbol hom_int_precomp_tele_func [A B : Cat]
         (@hom_ A B F Y)
         (@hom_ A B F X)));
 
+// Capped represented-object action of `hom_int` at p.
 symbol hom_int_precomp_func [A B : Cat]
   (F : τ (Functor B A))
   [Y X : τ (Obj A)]
   (p : τ (Hom (Op_cat A) Y X))
   : τ (Hom (@Catd_cat B) (@hom_ A B F Y) (@hom_ A B F X));
 
+// Full represented-object hom action of `hom_int`.
 rule @fapp1_func _ _ (@hom_int $A $B $F) $Y $X
   ↪ @hom_int_precomp_tele_func $A $B $F $Y $X;
 
+// Direct capped represented-object action of `hom_int`.
 rule @fapp1_fapp0 _ _ (@hom_int $A $B $F) $Y $X $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
 
+// Applying the telescope at p yields the capped represented-object action.
 rule @fapp0 _ _ (@hom_int_precomp_tele_func $A $B $F $Y $X) $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
 
@@ -3665,9 +3850,11 @@ rule @fapp0 _ _ (@hom_int_precomp_tele_func $A $B $F $Y $X) $p
 injective symbol hom_con_int [A B : Cat] (F : τ (Functor B A))
   : τ (Functor A (Catd_cat (Op_cat B)));
 
+// Object projection: `hom_con_int(F)[W] = hom_con(W,F)`.
 rule @fapp0 _ _ (@hom_con_int $A $B $F) $W
   ↪ @hom_con $A $W $B $F;
 
+// Full represented-target action of `hom_con_int`.
 symbol hom_con_int_postcomp_tele_func [A B : Cat]
   (F : τ (Functor B A))
   [W X : τ (Obj A)]
@@ -3678,6 +3865,7 @@ symbol hom_con_int_postcomp_tele_func [A B : Cat]
         (@hom_con A W B F)
         (@hom_con A X B F)));
 
+// Capped represented-target action of `hom_con_int` at f.
 symbol hom_con_int_postcomp_func [A B : Cat]
   (F : τ (Functor B A))
   [W X : τ (Obj A)]
@@ -3687,12 +3875,15 @@ symbol hom_con_int_postcomp_func [A B : Cat]
       (@hom_con A W B F)
       (@hom_con A X B F));
 
+// Full hom action of `hom_con_int` in its represented target.
 rule @fapp1_func _ _ (@hom_con_int $A $B $F) $W $X
   ↪ @hom_con_int_postcomp_tele_func $A $B $F $W $X;
 
+// Direct capped represented-target action of `hom_con_int`.
 rule @fapp1_fapp0 _ _ (@hom_con_int $A $B $F) $W $X $f
   ↪ @hom_con_int_postcomp_func $A $B $F $W $X $f;
 
+// Applying the target-action telescope at f yields the capped action.
 rule fapp0 (@hom_con_int_postcomp_tele_func $A $B $F $W $X) $f
   ↪ @hom_con_int_postcomp_func $A $B $F $W $X $f;
 
@@ -3767,12 +3958,15 @@ injective symbol Product_projR_func [A B : Cat]
 
 // The identity functor of a product is the paired projection functor.
 rule sigma_Fst (@id Cat_cat (Product_cat $A $B)) ↪ @Product_projL_func $A $B;
+
+// Second component of the product identity functor is the right projection.
 rule sigma_Snd (@id Cat_cat (Product_cat $A $B)) ↪ @Product_projR_func $A $B;
 
 // Projection functors act by object projections.
 rule @fapp0 _ _ (@Product_projL_func $A $B) $p
   ↪ sigma_Fst $p;
 
+// Right product projection acts on objects by `sigma_Snd`.
 rule @fapp0 _ _ (@Product_projR_func $A $B) $p
   ↪ sigma_Snd $p;
 
@@ -3780,6 +3974,7 @@ rule @fapp0 _ _ (@Product_projR_func $A $B) $p
 rule sigma_Fst (@fapp0 $X (Product_cat $A $B) $H $i)
   ↪ @fapp0 $X $A (sigma_Fst $H) $i;
 
+// Right projection of a product-valued functor application is pointwise.
 rule sigma_Snd (@fapp0 $X (Product_cat $A $B) $H $i)
   ↪ @fapp0 $X $B (sigma_Snd $H) $i;
 
@@ -3814,6 +4009,7 @@ rule @fapp1_func _ _ (@Product_projL_func $A $B) $p $q
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
+// Full hom action of the right projection is the right hom projection.
 rule @fapp1_func _ _ (@Product_projR_func $A $B) $p $q
   ↪ @Product_projR_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
@@ -3823,6 +4019,7 @@ rule @fapp1_func _ _ (@Product_projR_func $A $B) $p $q
 rule @fapp1_fapp0 _ _ (@Product_projL_func $A $B) $p $q $h
   ↪ sigma_Fst $h;
 
+// Capped hom action of the right projection selects the right component.
 rule @fapp1_fapp0 _ _ (@Product_projR_func $A $B) $p $q $h
   ↪ sigma_Snd $h;
 
@@ -3836,12 +4033,15 @@ rule @fapp1_fapp0 _ _ (@Product_projR_func $A $B) $p $q $h
 injective symbol Product_swap_func [A B : Cat]
   : τ (Functor (Product_cat A B) (Product_cat B A));
 
+// Left projection of product swap is the original right projection.
 rule sigma_Fst (@Product_swap_func $A $B)
   ↪ @Product_projR_func $A $B;
 
+// Right projection of product swap is the original left projection.
 rule sigma_Snd (@Product_swap_func $A $B)
   ↪ @Product_projL_func $A $B;
 
+// Product swap exchanges object components.
 rule @fapp0
       _
       _
@@ -3852,6 +4052,7 @@ rule @fapp0
       (λ _ : τ (Obj $B), Obj $A)
       $y $x;
 
+// Full hom action of product swap exchanges hom components.
 rule @fapp1_func
       _
       _
@@ -3861,6 +4062,7 @@ rule @fapp1_func
       (Hom_cat $A (sigma_Fst $p) (sigma_Fst $q))
       (Hom_cat $B (sigma_Snd $p) (sigma_Snd $q));
 
+// Capped hom action of product swap exchanges arrow components.
 rule @fapp1_fapp0
       _
       _
@@ -3902,6 +4104,7 @@ rule @comp_fapp0
       (@Product_swap_func $A $B)
   ↪ $H;
 
+// Opposite of product swap is swap between the opposite factors.
 rule @Op_func
       (Product_cat $A $B)
       (Product_cat $B $A)
@@ -3918,6 +4121,7 @@ rule @id (Product_cat $A $B) (Struct_sigma $x $u)
 rule sigma_Fst (@id (Product_cat $A _) $xu)
   ↪ @id $A (sigma_Fst $xu);
 
+// Right component of an opaque product identity is the corresponding identity.
 rule sigma_Snd (@id (Product_cat _ $B) $xu)
   ↪ @id $B (sigma_Snd $xu);
 
@@ -3963,9 +4167,11 @@ symbol comp_prod_func [A : Cat]
       (Product_cat (Hom_cat A W X) (Hom_cat A X Z))
       (Hom_cat A W Z));
 
+// Object beta: composing a pair `(g,f)` yields `f o g`.
 rule fapp0 (@comp_prod_func $A $W $X $Z) $pg
   ↪ @comp_fapp0 $A $W $X $Z (sigma_Snd $pg) (sigma_Fst $pg);
 
+// Full hom action of the product/uncurried composition functor.
 symbol comp_prod_fapp1_func [A : Cat]
   [W X Z : τ (Obj A)]
   [pg pg' : τ (Obj
@@ -3980,6 +4186,7 @@ symbol comp_prod_fapp1_func [A : Cat]
         (@comp_fapp0 A W X Z (sigma_Snd pg) (sigma_Fst pg))
         (@comp_fapp0 A W X Z (sigma_Snd pg') (sigma_Fst pg'))));
 
+// Capped hom action of product/uncurried composition.
 symbol comp_prod_fapp1_fapp0 [A : Cat]
   [W X Z : τ (Obj A)]
   [pg pg' : τ (Obj
@@ -3993,12 +4200,15 @@ symbol comp_prod_fapp1_fapp0 [A : Cat]
       (@comp_fapp0 A W X Z (sigma_Snd pg) (sigma_Fst pg))
       (@comp_fapp0 A W X Z (sigma_Snd pg') (sigma_Fst pg')));
 
+// Projection from generic full action to the stable composition-action head.
 rule @fapp1_func _ _ (@comp_prod_func $A $W $X $Z) $pg $pg'
   ↪ @comp_prod_fapp1_func $A $W $X $Z $pg $pg';
 
+// Applying the full action yields the capped componentwise composition action.
 rule fapp0 (@comp_prod_fapp1_func $A $W $X $Z $pg $pg') $alpha
   ↪ @comp_prod_fapp1_fapp0 $A $W $X $Z $pg $pg' $alpha;
 
+// Direct capped action joins the full-action projection.
 rule @fapp1_fapp0 _ _ (@comp_prod_func $A $W $X $Z) $pg $pg' $alpha
   ↪ @comp_prod_fapp1_fapp0 $A $W $X $Z $pg $pg' $alpha;
 
@@ -4026,6 +4236,7 @@ symbol Hom_tele_func [A : Cat]
       (Product_cat (Hom_cat A x' x) (Hom_cat A y y'))
       (Functor_cat (Hom_cat A x y) (Hom_cat A x' y')));
 
+// Capped two-endpoint hom action at the pair `(g,f)`.
 symbol Hom_func [A : Cat]
   [x x' y y' : τ (Obj A)]
   (g : τ (Hom A x' x))
@@ -4034,6 +4245,7 @@ symbol Hom_func [A : Cat]
       (Hom_cat A x y)
       (Hom_cat A x' y'));
 
+// Point action `Hom_A(g,f)[h] = f o h o g`.
 symbol Hom_fapp0 [A : Cat]
   [x x' y y' : τ (Obj A)]
   (g : τ (Hom A x' x))
@@ -4041,9 +4253,11 @@ symbol Hom_fapp0 [A : Cat]
   (h : τ (Hom A x y))
   : τ (Hom A x' y');
 
+// Applying the two-endpoint telescope to `(g,f)` yields `Hom_func(g,f)`.
 rule fapp0 (@Hom_tele_func $A $x $x' $y $y') (Struct_sigma $g $f)
   ↪ @Hom_func $A $x $x' $y $y' $g $f;
 
+// Applying `Hom_func(g,f)` to h yields the rigid point head.
 rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
   ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
 
@@ -4051,6 +4265,7 @@ rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
 // Its two factorizations through one-slot pre/postcomposition remain available
 // during typed elaboration without choosing either factorization as the
 // computational normal form.
+// Proof-time comparison with the pre-then-post factorization.
 unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
   ≡ @hom_postcomp_fapp0
       $A $A (@id Cat_cat $A)
@@ -4060,6 +4275,7 @@ unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
         $y $x' $x $g $h)
   ↪ [ tt ≡ tt ];
 
+// Proof-time comparison with the post-then-pre factorization.
 unif_rule @Hom_fapp0 $A $x $x' $y $y' $g $f $h
   ≡ @hom_precomp_along_fapp0
       $A $A (@id Cat_cat $A)
@@ -4075,18 +4291,22 @@ unif_rule @Hom_func $A $x $x $y $y' (@id $A $x) $f
   ≡ @hom_postcomp_func $A $A (@id Cat_cat $A) $x $y $y' $f
   ↪ [ tt ≡ tt ];
 
+// Proof-time target-identity degeneration to the precomposition functor.
 unif_rule @Hom_func $A $x $x' $y $y $g (@id $A $y)
   ≡ @hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g
   ↪ [ tt ≡ tt ];
 
+// Proof-time source-identity point degeneration to postcomposition.
 unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
   ≡ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x $y $y' $f $h
   ↪ [ tt ≡ tt ];
 
+// Proof-time target-identity point degeneration to precomposition.
 unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
   ≡ @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $y $x' $x $g $h
   ↪ [ tt ≡ tt ];
 
+// Proof-time middle-identity degeneration to the corresponding postcomposition cut.
 unif_rule @Hom_fapp0 $A $x $x' $x $y' $g $f (@id $A $x)
   ≡ @hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $x' $x $y' $f $g
   ↪ [ tt ≡ tt ];
@@ -4098,6 +4318,7 @@ unif_rule @Hom_fapp0 $A $x $x $y $y' (@id $A $x) $f $h
   ≡ @comp_fapp0 $A $x $y $y' $f $h
   ↪ [ tt ≡ tt ];
 
+// Proof-time raw-composition reading for an inactive target endpoint.
 unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
   ≡ @comp_fapp0 $A $x' $x $y $h $g
   ↪ [ tt ≡ tt ];
@@ -4108,9 +4329,11 @@ unif_rule @Hom_fapp0 $A $x $x' $y $y $g (@id $A $y) $h
 rule @Hom_func $A $x $x $y $y (@id $A $x) (@id $A $y)
   ↪ @id_func (Hom_cat $A $x $y);
 
+// Point action with both identity endpoints returns h.
 rule @Hom_fapp0 $A $x $x $y $y (@id $A $x) (@id $A $y) $h
   ↪ $h;
 
+// Projection-order join: composition of two `Hom_func` values accumulates endpoints.
 rule @comp_fapp0
       Cat_cat
       _ _ _
@@ -4121,6 +4344,7 @@ rule @comp_fapp0
       (@comp_fapp0 $A $x2 $x1 $x0 $g01 $g12)
       (@comp_fapp0 $A $y0 $y1 $y2 $f12 $f01);
 
+// Point-level accumulation of nested rigid two-endpoint actions.
 rule @Hom_fapp0
       $A $x1 $x2 $y1 $y2 $g12 $f12
       (@Hom_fapp0 $A $x0 $x1 $y0 $y1 $g01 $f01 $h)
@@ -4148,6 +4372,7 @@ injective symbol iso_evidence_product
       (Struct_sigma x0 y0)
       (Struct_sigma x1 y1));
 
+// Product closure preserves reflexive ordinary isomorphism evidence.
 rule @iso_evidence_product
       $A
       $B
@@ -4161,12 +4386,14 @@ rule @iso_evidence_product
       (Product_cat $A $B)
       (Struct_sigma $x $y);
 
+// Forward arrow of product isomorphism evidence is componentwise.
 rule sigma_Fst
       (@iso_evidence_product $A $B $x0 $x1 $y0 $y1 $iA $iB)
   ↪ Struct_sigma
       (@iso_evidence_to $A $x0 $x1 $iA)
       (@iso_evidence_to $B $y0 $y1 $iB);
 
+// Inverse arrow of product isomorphism evidence is componentwise.
 rule sigma_Fst
       (sigma_Snd
         (@iso_evidence_product $A $B $x0 $x1 $y0 $y1 $iA $iB))
@@ -4174,6 +4401,7 @@ rule sigma_Fst
       (@iso_evidence_from $A $x0 $x1 $iA)
       (@iso_evidence_from $B $y0 $y1 $iB);
 
+// Decoder of product isomorphism evidence builds the product/Sigma path view.
 rule @iso_evidence_path
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4201,6 +4429,7 @@ rule @iso_evidence_path
         (@iso_evidence_path $A $x0 $x1 $iA)
         (@iso_evidence_path $B $y0 $y1 $iB));
 
+// Encoding a product object path yields componentwise isomorphism evidence.
 rule @idtoiso_cat
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4246,6 +4475,7 @@ injective symbol omega_equiv_product
       (Struct_sigma x0 y0)
       (Struct_sigma x1 y1));
 
+// Product closure preserves reflexive omega-equivalence.
 rule @omega_equiv_product
       $A
       $B
@@ -4259,6 +4489,7 @@ rule @omega_equiv_product
       (Product_cat $A $B)
       (Struct_sigma $x $y);
 
+// Arrow and inverse projections of product omega-equivalence are componentwise.
 rule @omega_equiv_to
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4284,6 +4515,7 @@ with @omega_equiv_right_inv
       (@omega_equiv_right_inv $A $x0 $x1 $eA)
       (@omega_equiv_right_inv $B $y0 $y1 $eB);
 
+// Higher inverse cells of product omega-equivalence are componentwise.
 rule @omega_equiv_left_cell
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4337,6 +4569,7 @@ with @omega_equiv_right_cell
       (@omega_equiv_right_cell $A $x0 $x1 $eA)
       (@omega_equiv_right_cell $B $y0 $y1 $eB);
 
+// Decoder of product omega-equivalence builds the product/Sigma path view.
 rule @omega_equiv_path
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4364,6 +4597,7 @@ rule @omega_equiv_path
         (@omega_equiv_path $A $x0 $x1 $eA)
         (@omega_equiv_path $B $y0 $y1 $eB));
 
+// Encoding a product object path yields componentwise omega-equivalence.
 rule @idtoequiv_cat
       (Product_cat $A $B)
       (Struct_sigma $x0 $y0)
@@ -4417,6 +4651,7 @@ symbol Product_pair_tele_func [A B : Cat]
 */
 injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 
+// Object/type classifier of the ordinary transformation category.
 injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);
 
@@ -4466,6 +4701,7 @@ symbol tapp0_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (Y : τ (Obj A)),
   τ (Functor (Transf_cat F G) (Hom_cat B (fapp0 F Y) (fapp0 G Y)));
 
+// Point component `epsilon[Y] : F[Y] -> G[Y]`.
 symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (Y : τ (Obj A)),
   Π (ϵ : τ (Obj (Transf_cat F G))),
@@ -4511,6 +4747,7 @@ rule @tapp0_fapp0
         $g
         $alpha);
 
+// Reflexive theorem exposing the selected component formula for the telescope action.
 symbol hom_postcomp_tele_tapp0_component_eq
   [A B : Cat]
   (F : τ (Functor B A))
@@ -4568,6 +4805,7 @@ symbol hom_postcomp_tele_tapp0_component_eq
 rule sigma_Fst (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
   ↪ @tapp0_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i (sigma_Fst $eta);
 
+// Right component of a product-valued transfor component is pointwise.
 rule sigma_Snd (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
   ↪ @tapp0_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i (sigma_Snd $eta);
 
@@ -4575,6 +4813,7 @@ rule sigma_Snd (@tapp0_fapp0 $X (Product_cat $A $B) $F $G $i $eta)
 rule @fapp1_func _ $B (@fapp0_func $A $B $x) $F $G
   ↪ @tapp0_func $A $B $F $G $x;
 
+// Capped hom action of evaluation is the selected transfor component.
 rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
   ↪ @tapp0_fapp0 $A $B $F $G $x $η;
 
@@ -4610,6 +4849,7 @@ injective symbol Op_transf
       (@Op_func A B G)
       (@Op_func A B F));
 
+// Opposite-transfor involution.
 rule @Op_transf
       (Op_cat $A) (Op_cat $B)
       (@Op_func $A $B $G)
@@ -4617,6 +4857,7 @@ rule @Op_transf
       (@Op_transf $A $B $F $G $eta)
   ↪ $eta;
 
+// Opposite sends identity to identity on the opposite functor.
 rule @Op_transf
       $A $B
       $F $F
@@ -4625,6 +4866,7 @@ rule @Op_transf
       (Functor_cat (Op_cat $A) (Op_cat $B))
       (@Op_func $A $B $F);
 
+// Opposite reverses the order of vertical transfor composition.
 rule @Op_transf
       $A $B
       $F $H
@@ -4640,6 +4882,7 @@ rule @Op_transf
       (@Op_transf $A $B $F $G $epsilon)
       (@Op_transf $A $B $G $H $eta);
 
+// Components of the opposite transfor reuse the underlying component arrow.
 rule @tapp0_fapp0
       _ _
       _ _
@@ -4668,6 +4911,7 @@ rule @tapp0_fapp0
       $Y
       $f;
 
+// Direct generic `fapp1_fapp0(hom_int)` component joins the named projection.
 rule @tapp0_fapp0
       $B
       Cat_cat
@@ -4818,6 +5062,7 @@ rule @tapp1_func
           (Hom_cat $A $W $X)
           $f));
 
+// Capped higher action of target-internalized postcomposition is rigid `Hom_func`.
 rule @tapp1_fapp0
       _ Cat_cat
       _ _
@@ -4837,6 +5082,7 @@ rule @tapp1_fapp0
 rule sigma_Fst (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
   ↪ @tapp1_func $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta);
 
+// Right projection of product-valued full off-diagonal action is pointwise.
 rule sigma_Snd (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
   ↪ @tapp1_func $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta);
 
@@ -4876,6 +5122,7 @@ rule @tapp0_fapp0
         $i
         (sigma_Fst $theta));
 
+// Full off-diagonal action of generic Cat product-composition action.
 rule @tapp1_func
       _ _
       _ _
@@ -4909,6 +5156,7 @@ rule @tapp1_func
         $j
         (sigma_Fst $theta));
 
+// Capped off-diagonal action of generic Cat product-composition action.
 rule @tapp1_fapp0
       _ _
       _ _
@@ -4934,6 +5182,7 @@ rule @tapp1_fapp0
         (sigma_Fst $theta)
         $p);
 
+// Identity pair of transfors collapses to the identity on the composite functor.
 rule @comp_prod_fapp1_fapp0
       Cat_cat
       $X
@@ -4971,10 +5220,12 @@ symbol Const_transf_func [K A : Cat] [x y : τ (Obj A)]
       (Hom_cat A x y)
       (@Transf_cat K A (@Const_func K A x) (@Const_func K A y)));
 
+// Constant transfor selected by the codomain arrow p.
 symbol Const_transf [K A : Cat] [x y : τ (Obj A)]
   (p : τ (Hom A x y))
   : τ (Transf (@Const_func K A x) (@Const_func K A y));
 
+// Applying the constructor functor selects `Const_transf(p)`.
 rule fapp0 (@Const_transf_func $K $A $x $y) $p
   ↪ @Const_transf $K $A $x $y $p;
 
@@ -4986,6 +5237,7 @@ rule @tapp0_fapp0 $K $A _ _ $k (@Const_transf $K $A $x $y $p)
 rule @tapp1_func $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p)
   ↪ @Const_func (Hom_cat $K $k $k') (Hom_cat $A $x $y) $p;
 
+// Capped off-diagonal action of a constant transfor returns p.
 rule @tapp1_fapp0 $K $A _ _ $k $k' (@Const_transf $K $A $x $y $p) $_
   ↪ $p;
 
@@ -5067,6 +5319,7 @@ symbol comp_cat_con_func_func [X Y Z : Cat]
     X
     Y;
 
+// Postcomposition by internal opposite is the pointwise opposite-family functor.
 rule @hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $Z Cat_cat Cat_cat op
   ↪ @Op_catd_func $Z;
 
@@ -5201,6 +5454,7 @@ rule @hom_postcomp_tele_fapp1_fapp0
       $eta
   ↪ @hom_postcomp_tele_transf Cat_cat $K $E $W $X $Y $G $H $eta;
 
+// Transparent identity-family name for tele-postcomposition of a transfor.
 symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
   [G H : τ (Functor Y Z)]
   (eta : τ (Transf G H))
@@ -5291,6 +5545,7 @@ rule @tapp0_fapp0
           $g
           $alpha));
 
+// Full hom action of precomposition as the precomposing functor varies.
 symbol comp_cat_con_func_func_fapp1_func [X Y Z : Cat]
   [F K : τ (Functor X Y)]
   : τ (Functor
@@ -5329,6 +5584,7 @@ rule @hom_precomp_along_tele_fapp1_fapp0
       $alpha
   ↪ @hom_precomp_along_tele_transf $K Cat_cat $E $Z $X $Y $F $H $alpha;
 
+// Transparent identity-family name for tele-precomposition of a transfor.
 symbol comp_cat_con_func_func_transf [X Y Z : Cat]
   [F K : τ (Functor X Y)]
   (alpha : τ (Transf F K))
@@ -5571,6 +5827,7 @@ rule @tapp1_func
             $alpha))
         (@id_func (Hom_cat (Hom_cat $B (@fapp0 $A $B $F $X) $Z) $g $j)));
 
+// Capped horizontal action of tele-precomposition on beta.
 rule @tapp1_fapp0
       _
       _
@@ -5694,6 +5951,7 @@ rule @hom_precomp_along_fapp1_fapp0
 rule sigma_Fst (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $A (sigma_Fst $F) (sigma_Fst $G) $i $j (sigma_Fst $eta) $p;
 
+// Right projection of product-valued capped off-diagonal action is pointwise.
 rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta) $p;
 
@@ -5723,6 +5981,7 @@ rule @comp_fapp0
       (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
       $f;
 
+// Vertical composition can also accumulate an off-diagonal component on the left.
 rule @comp_fapp0
       $B
       _
@@ -5740,6 +5999,7 @@ rule @comp_fapp0
       (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
       $f;
 
+// Two off-diagonal components compose by accumulating both base arrows.
 rule @comp_fapp0
       $B
       _
@@ -5884,6 +6144,7 @@ rule @comp_fapp0
       (@fapp1_func $A $B $F $X $Z)
       (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
 
+// Contravariant form of full strict functoriality accumulation.
 rule @comp_fapp0
       Cat_cat
       _ _ _
@@ -5906,6 +6167,7 @@ rule comp_fapp0
       (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
   ↪ tapp1_fapp0 $ϵ (comp_fapp0 $g $f);
 
+// Precomposition-side strict naturality for off-diagonal components.
 rule comp_fapp0
       (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
       (@fapp1_fapp0 $A $B $F $X0 $X $g)
@@ -5926,6 +6188,7 @@ rule fapp0
       (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $x $eta) $u)
   ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
 
+// Target-component route of Cat-valued naturality joins the same off-diagonal action.
 rule fapp0
       (@tapp0_fapp0 $K Cat_cat $E $D $y $eta)
       (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)

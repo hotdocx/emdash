@@ -176,13 +176,14 @@ notation:
 (F p)^*(g) = g o F[p]
 ```
 
-The useful computational normal forms keep the stable hom-action owner visible.
-For example:
+The useful computational normal forms keep the stable hom-action owner visible
+and accumulate consecutive actions into the action indexed by the composite
+arrow. For example:
 
 ```text
-(F(q o p))_*(g)            -> (F q)_*((F p)_*(g))
+(F q)_*((F p)_*(g))        -> (F(q o p))_*(g)
 ((F f)_*(g)) o h           -> (F f)_*(g o h)
-(F(q o p))^*(g)            -> (F p)^*((F q)^*(g))
+(F p)^*((F q)^*(g))        -> (F(q o p))^*(g)
 ```
 
 Covariant and contravariant represented families now remain distinct during
