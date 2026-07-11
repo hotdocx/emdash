@@ -6241,6 +6241,7 @@ injective symbol Product_cat_fapp0_func (A : Cat)
 rule @fapp0 _ _ Product_cat_func $A
   ↪ @Product_cat_fapp0_func $A;
 
+// Second object projection: Product_cat_fapp0_func(A)[B] ↪ A × B.
 rule @fapp0 Cat_cat Cat_cat (@Product_cat_fapp0_func $A) $B
   ↪ Product_cat $A $B;
 
@@ -6277,9 +6278,11 @@ symbol Product_cat_fapp1_tapp0_func [A A' B : Cat]
 rule @fapp1_func _ _ Product_cat_func $A $A'
   ↪ Product_cat_fapp1_func;
 
+// Capped left-factor action: Product_cat_fapp1_func(A,A')[G].
 rule fapp0 (@Product_cat_fapp1_func $A $A') $G
   ↪ Product_cat_fapp1_fapp0_functord $G;
 
+// Direct capped projection of the same left-factor hom-action at G.
 rule @fapp1_fapp0 _ _ Product_cat_func $A $A' $G
   ↪ Product_cat_fapp1_fapp0_functord $G;
 
@@ -6298,9 +6301,11 @@ rule @tapp0_fapp0
 // Surface/formula:
 //   π₁ ∘ (G * 1_B) = G ∘ π₁
 //   π₂ ∘ (G * 1_B) = π₂.
+// First projection: π₁ ∘ (G * 1_B) ↪ G ∘ π₁.
 rule sigma_Fst (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
   ↪ comp_cat_fapp0 $G Product_projL_func;
 
+// Second projection: π₂ ∘ (G * 1_B) ↪ π₂.
 rule sigma_Snd (@Product_cat_fapp1_tapp0_func $A $A' $B $G)
   ↪ Product_projR_func;
 
@@ -6389,6 +6394,7 @@ injective symbol Product_map_func [A A' B B' : Cat]
   (G : τ (Functor B B'))
   : τ (Functor (Product_cat A B) (Product_cat A' B'));
 
+// First projection of F × G: π₁ ∘ (F × G) ↪ F ∘ π₁.
 rule sigma_Fst (@Product_map_func $A $A' $B $B' $F $G)
   ↪ @comp_cat_fapp0
       (Product_cat $A $B)
@@ -6397,6 +6403,7 @@ rule sigma_Fst (@Product_map_func $A $A' $B $B' $F $G)
       $F
       (@Product_projL_func $A $B);
 
+// Second projection of F × G: π₂ ∘ (F × G) ↪ G ∘ π₂.
 rule sigma_Snd (@Product_map_func $A $A' $B $B' $F $G)
   ↪ @comp_cat_fapp0
       (Product_cat $A $B)
@@ -6405,6 +6412,7 @@ rule sigma_Snd (@Product_map_func $A $A' $B $B' $F $G)
       $G
       (@Product_projR_func $A $B);
 
+// Object action is componentwise: (F × G)[(a,b)] ↪ (F[a],G[b]).
 rule @fapp0 _ _
       (@Product_map_func $A $A' $B $B' $F $G)
       $ab
@@ -6414,6 +6422,7 @@ rule @fapp0 _ _
       (@fapp0 $A $A' $F (sigma_Fst $ab))
       (@fapp0 $B $B' $G (sigma_Snd $ab));
 
+// Hom-functor action is the product of the hom-actions of F and G.
 rule @fapp1_func _ _
       (@Product_map_func $A $A' $B $B' $F $G)
       $ab
@@ -6430,6 +6439,7 @@ rule @fapp1_func _ _
       (@fapp1_func $A $A' $F (sigma_Fst $ab) (sigma_Fst $ab'))
       (@fapp1_func $B $B' $G (sigma_Snd $ab) (sigma_Snd $ab'));
 
+// Capped arrow action is componentwise: (F × G)[(p,q)] ↪ (F[p],G[q]).
 rule @fapp1_fapp0 _ _
       (@Product_map_func $A $A' $B $B' $F $G)
       $ab
@@ -6484,6 +6494,7 @@ unif_rule @Hom_tele_func $A $x $x' $y $y'
           $y'))
   ↪ [ tt ≡ tt ];
 
+// Proof-time comparison: Hom(g,f) equals precomposition followed by postcomposition.
 unif_rule @Hom_func $A $x $x' $y $y' $g $f
   ≡ @comp_fapp0
       Cat_cat
@@ -6492,6 +6503,7 @@ unif_rule @Hom_func $A $x $x' $y $y' $g $f
       (@hom_precomp_along_func $A $A (@id Cat_cat $A) $y $x' $x $g)
   ↪ [ tt ≡ tt ];
 
+// Proof-time comparison: Hom(g,f) also equals postcomposition followed by precomposition.
 unif_rule @Hom_func $A $x $x' $y $y' $g $f
   ≡ @comp_fapp0
       Cat_cat
@@ -6545,6 +6557,7 @@ rule @fapp1_func _ _ (@Eval_func $A $B) (Struct_sigma $F $x) (Struct_sigma $G $y
 rule fapp0 (@Eval_fapp1_func $A $B $F $G $x $y) (Struct_sigma $eta $p)
   ↪ tapp1_fapp0 $eta $p;
 
+// Direct capped evaluation: Eval[(eta,p)] ↪ eta[p].
 rule @fapp1_fapp0 _ _ (@Eval_func $A $B)
       (Struct_sigma $F $x)
       (Struct_sigma $G $y)
@@ -6575,6 +6588,7 @@ symbol Eval_at_func [A B : Cat] (x : τ (Obj A))
 rule sigma_Fst (@Eval_at_func $A $B $x)
   ↪ @id_func (Functor_cat $A $B);
 
+// Fixed-object projection: π₂ ∘ Eval_at(x) ↪ const(x).
 rule sigma_Snd (@Eval_at_func $A $B $x)
   ↪ Const_func $x;
 
@@ -6593,6 +6607,7 @@ rule @fapp1_func _ _
         (Hom_cat $A $x $x)
         (@id $A $x));
 
+// Arrow action pairs eta with id_x: Eval_at(x)[eta] ↪ (eta,id_x).
 rule @fapp1_fapp0 _ _
       (@Eval_at_func $A $B $x) $F $G $eta
   ↪ Struct_sigma $eta (id $A $x);
@@ -6829,21 +6844,25 @@ injective symbol Op_adjunction
   (adj : τ (Adjunction A B))
   : τ (Adjunction (Op_cat B) (Op_cat A));
 
+// Opposite is involutive on adjunction packages: (J^op)^op ↪ J.
 rule @Op_adjunction
       (Op_cat $B) (Op_cat $A)
       (@Op_adjunction $A $B $adj)
   ↪ $adj;
 
+// The left adjoint of J^op is the opposite of the right adjoint of J.
 rule @left_adj_func
       (Op_cat $B) (Op_cat $A)
       (@Op_adjunction $A $B $adj)
   ↪ @Op_func $B $A (@right_adj_func $A $B $adj);
 
+// The right adjoint of J^op is the opposite of the left adjoint of J.
 rule @right_adj_func
       (Op_cat $B) (Op_cat $A)
       (@Op_adjunction $A $B $adj)
   ↪ @Op_func $A $B (@left_adj_func $A $B $adj);
 
+// The unit of J^op is the opposite of the counit of J.
 rule @unit_adj_transf
       (Op_cat $B) (Op_cat $A)
       (@Op_adjunction $A $B $adj)
@@ -6856,6 +6875,7 @@ rule @unit_adj_transf
       (@id_func $B)
       (@counit_adj_transf $A $B $adj);
 
+// The counit of J^op is the opposite of the unit of J.
 rule @counit_adj_transf
       (Op_cat $B) (Op_cat $A)
       (@Op_adjunction $A $B $adj)
@@ -7077,6 +7097,7 @@ injective symbol Pullback_catd [A B : Cat]
   (F : τ (Functor A B))
   : τ (Catd A);
 
+// Fibre projection of reindexing: (F^*E)[a] ↪ E[F[a]].
 rule @fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a
   ↪ @fapp0 $B Cat_cat $E (@fapp0 $A $B $F $a);
 
@@ -7128,6 +7149,7 @@ injective symbol Pullback_catd_func [A B : Cat]
   (F : τ (Functor A B))
   : τ (Functor (Catd_cat B) (Catd_cat A));
 
+// Object projection of the pullback package: Pullback_catd_func(F)[E] ↪ F^*E.
 rule @fapp0 _ _
       (@Pullback_catd_func $A $B $F) $E
   ↪ @Pullback_catd $A $B $E $F;
@@ -7199,13 +7221,18 @@ rule @tapp0_fapp0
 //   const_K(A)[k] = A.
 injective symbol Const_catd (K : Cat) (A : Cat) : τ (Catd K);
 
+// Constant-family fibre: const_K(A)[k] ↪ A.
 rule @fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A;
+// Reindexing a constant family by composition remains constant.
 rule @comp_fapp0 Cat_cat $A $B Cat_cat (@Const_catd $B $C) $F
   ↪ @Const_catd $A $C;
+// Stable pullback of a constant family: F^*const_B(C) ↪ const_A(C).
 rule @Pullback_catd $A $B (@Const_catd $B $C) $F
   ↪ @Const_catd $A $C;
+// Pullback along a constant base map selects the corresponding constant fibre.
 rule @Pullback_catd $A $B $E (@Const_func $A $B $b)
   ↪ @Const_catd $A (@fapp0 $B Cat_cat $E $b);
+// A represented family along a constant diagram is pointwise Hom(w,u).
 rule @hom_ $A $B (@Const_func $B $A $u) $w
   ↪ @Const_catd $B (Hom_cat $A $w $u);
 
@@ -7219,12 +7246,14 @@ rule @hom_con $A $W $B (@Const_func $B $A $u)
 rule @hom_con Terminal_cat _ $B _
   ↪ @Const_catd (Op_cat $B) Terminal_cat;
 
+// Hom-action of a constant family is constantly the identity functor of A.
 rule @fapp1_func $K Cat_cat (@Const_catd $K $A) $x $y
   ↪ @Const_func
       (Hom_cat $K $x $y)
       (Functor_cat $A $A)
       (@id_func $A);
 
+// Every base arrow acts as id_A in the constant family.
 rule @fapp1_fapp0 $K Cat_cat (@Const_catd $K $A) $x $y $_ ↪ @id_func $A;
 
 // Fixed-base layer: terminal displayed family.
@@ -7240,18 +7269,24 @@ symbol Terminal_catd (K : Cat) : τ (Catd K)
 //   Op_catd(E)[k] = E[k]^op.
 injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
 
+// Object projection of pointwise opposite: Op_catd_func(K)[E] ↪ E^op.
 rule @fapp0 _ _ (@Op_catd_func $K) $E
   ↪ @Op_catd $K $E;
 
+// Semantic composition with op folds to pointwise displayed opposite.
 rule @comp_fapp0 Cat_cat $K Cat_cat Cat_cat op $E
   ↪ @Op_catd $K $E;
+// Stable pullback notation for the same pointwise opposite construction.
 rule @Pullback_catd $K Cat_cat op $E
   ↪ @Op_catd $K $E;
 
+// Fibre projection: E^op[k] ↪ E[k]^op.
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
   ↪ Op_cat (@fapp0 $K Cat_cat $E $k);
 
+// Pointwise opposite is involutive: (E^op)^op ↪ E.
 rule @Op_catd $K (@Op_catd $K $E) ↪ $E;
+// Opposite of a constant family is the constant family at A^op.
 rule @Op_catd $K (@Const_catd $K $A) ↪ @Const_catd $K (Op_cat $A);
 
 // Fixed-base layer: pointwise opposite of a displayed functor.
@@ -7262,9 +7297,11 @@ injective symbol Op_funcd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   : τ (Functord (Op_catd E) (Op_catd D));
 
+// Pointwise opposite is involutive on displayed functors.
 rule @Op_funcd $K (@Op_catd $K $E) (@Op_catd $K $D) (@Op_funcd $K $E $D $FF)
   ↪ $FF;
 
+// Opposite preserves the displayed identity functor.
 rule @Op_funcd $K $E $E (@id (@Catd_cat $K) $E)
   ↪ @id (@Catd_cat $K) (@Op_catd $K $E);
 
@@ -7308,6 +7345,7 @@ rule @tapp0_fapp0
 symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat
 ≔ @Functord_cat K (@Const_catd K Terminal_cat) E;
 
+// Sections of a constant family are ordinary functors: Π_k A ≃ (K ⊢ A).
 rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
   ↪ Functor_cat $K $A;
 
@@ -7317,6 +7355,7 @@ rule @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
 //   Pi_func(K)[E] = Π k :^n K, E[k].
 //                 = k :^n K ; 1[k] ⊢ E[k].
 injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
+// Object projection of the section-category package: Pi_func(K)[E] ↪ Pi_cat(E).
 rule @fapp0 _ Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
 
@@ -7346,6 +7385,7 @@ constant symbol Pi_int_funcd
       Catd_cat_func
       (@Const_catd (Op_cat Cat_cat) Cat_cat));
 
+// Base component of internal Pi: Pi_int_funcd[K] ↪ Pi_func(K).
 rule @tapp0_fapp0
       (Op_cat Cat_cat)
       Cat_cat
@@ -7374,6 +7414,7 @@ injective symbol Pi_pullback_funcd [K : Cat]
       (@Pullback_catd K (Op_cat Cat_cat) Catd_cat_func G)
       (@Const_catd K Cat_cat));
 
+// Pulling back internal Pi along G folds to the stable Pi_pullback_funcd(G).
 rule @fapp1_fapp0
       (@Catd_cat (Op_cat Cat_cat))
       _
@@ -7383,6 +7424,7 @@ rule @fapp1_fapp0
       Pi_int_funcd
   ↪ @Pi_pullback_funcd $K $G;
 
+// Pointwise projection: Pi_pullback_funcd(G)[x] ↪ Pi_func(G[x]).
 rule @tapp0_fapp0
       $K
       Cat_cat
@@ -7503,9 +7545,11 @@ rule @Sigma_cat $K (@Const_catd $K $A)
 // Surface/formula:
 //   Sigma_func(K)[E] = Sigma_cat(E).
 injective symbol Sigma_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
+// Object projection of totalization: Sigma_func(K)[E] ↪ Sigma_cat(E).
 rule @fapp0 _ Cat_cat (@Sigma_func $K) $E
   ↪ @Sigma_cat $K $E;
 
+// Objects of Sigma_cat(E) are dependent pairs (k,u) with u : E[k].
 rule τ (Obj (@Sigma_cat $K $E))
   ↪ `τΣ_ k : τ (Obj $K), Obj (Fibre_cat $E k);
 
@@ -7621,6 +7665,7 @@ rule @comp_fapp0
 injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
   : τ (Functor (Sigma_cat E) K);
 
+// First projection on objects: pi_1[(k,u)] ↪ k.
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 
 // Stable head for the computationally important projection pullback. General
@@ -7634,6 +7679,7 @@ injective symbol Sigma_proj1_pullback_catd [K : Cat]
   (R D : τ (Catd K))
   : τ (Catd (@Sigma_cat K R));
 
+// Composition presentation of D pulled back along the Sigma first projection.
 rule @comp_fapp0
       Cat_cat
       _
@@ -7643,6 +7689,7 @@ rule @comp_fapp0
       (@Sigma_proj1_func $K $R)
   ↪ @Sigma_proj1_pullback_catd $K $R $D;
 
+// Stable pullback presentation of the same projection family.
 rule @Pullback_catd
       _
       $K
@@ -7650,6 +7697,7 @@ rule @Pullback_catd
       (@Sigma_proj1_func $K $R)
   ↪ @Sigma_proj1_pullback_catd $K $R $D;
 
+// Fibre over (k,r): Sigma_proj1_pullback_catd(R,D)[(k,r)] ↪ D[k].
 rule @fapp0
       _
       Cat_cat
@@ -7657,6 +7705,7 @@ rule @fapp0
       (Struct_sigma $k $r)
   ↪ @Fibre_cat $K $D $k;
 
+// Sections over the projection pullback are displayed functors R => D.
 rule @Functord_cat
       (@Sigma_cat $K $R)
       (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
@@ -7674,9 +7723,11 @@ injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
+// Hom-action of totalization: Sigma_func(K)[η] ↪ sigma_map_func(η).
 rule @fapp1_fapp0 _ Cat_cat (@Sigma_func $K) $E $D $η
   ↪ @sigma_map_func $K $E $D $η;
 
+// Object action of a Sigma map: Sigma(η)[(k,u)] ↪ (k,η[k][u]).
 rule @fapp0 _ _
       (@sigma_map_func $K $E $D $η)
       (Struct_sigma $k $u)
@@ -7684,6 +7735,7 @@ rule @fapp0 _ _
       $k
       (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
 
+// A Sigma map lies over the identity on K: pi_1 ∘ Sigma(η) ↪ pi_1.
 rule @comp_fapp0 Cat_cat _ _ _
       (@Sigma_proj1_func $K $D)
       (@sigma_map_func $K $E $D $η)
@@ -7789,6 +7841,7 @@ symbol Sigma_catd_functord_catd [K : Cat] [R : τ (Catd K)]
   (FF : τ (Functord R (@Const_catd K Cat_cat)))
   : τ (Catd (@Sigma_cat K R));
 
+// Fibre projection: Sigma_catd_functord_catd(FF)[(k,r)] ↪ FF[k][r].
 rule @fapp0
       _
       Cat_cat
@@ -7874,6 +7927,7 @@ injective symbol Functor_catd [K : Cat]
   (B : τ (Catd K))
   : τ (Catd K);
 
+// Fibre projection: Functor_catd(A,B)[k] ↪ (A[k] ⊢ B[k]).
 rule @fapp0 $K Cat_cat (@Functor_catd $K $A $B) $k
   ↪ Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k);
 
@@ -7888,10 +7942,12 @@ injective symbol Functor_catd_fapp0_func [K : Cat]
   (A : τ (Catd (Op_cat K)))
   : τ (Functor (Catd_cat K) (Catd_cat K));
 
+// First object projection: Functor_catd_func(K)[A] ↪ Functor_catd_fapp0_func(A).
 rule @fapp0 _ _
       (@Functor_catd_func $K) $A
   ↪ @Functor_catd_fapp0_func $K $A;
 
+// Second object projection: Functor_catd_fapp0_func(A)[B] ↪ Functor_catd(A,B).
 rule @fapp0 _ _ (@Functor_catd_fapp0_func $K $A) $B
   ↪ @Functor_catd $K $A $B;
 
@@ -7905,6 +7961,7 @@ injective symbol Hom_catd [K : Cat]
   (Y : τ (Obj (Pi_cat E)))
   : τ (Catd K);
 
+// Fibre projection: Hom_catd(E,X,Y)[k] ↪ Hom_{E[k]}(X[k^-],Y[k]).
 rule @fapp0 $K Cat_cat (@Hom_catd $K $E $X $Y) $k
   ↪ Hom_cat
       (Fibre_cat $E $k)
@@ -7927,14 +7984,17 @@ injective symbol Transf_catd [K : Cat]
   (GG : τ (Obj (Pi_cat (Functor_catd A B))))
   : τ (Catd K);
 
+// Fibre projection: Transf_catd(A,B,FF,GG)[k] ↪ Transf(FF[k^-],GG[k]).
 rule @fapp0 $K Cat_cat (@Transf_catd $K $A $B $FF $GG) $k
   ↪ Transf_cat
       (@piapp0 $K (@Op_catd $K (@Functor_catd $K $A $B)) $FF $k)
       (@piapp0 $K (@Functor_catd $K $A $B) $GG $k);
 
+// Constant-Cat hom families fold to mixed-variance functor families.
 rule @Hom_catd $K (@Const_catd $K Cat_cat) $X $Y
   ↪ @Functor_catd $K (@Op_func $K (Op_cat Cat_cat) $X) $Y;
 
+// Hom in a mixed-variance functor family folds to its transfor family.
 rule @Hom_catd $K (@Functor_catd $K $A $B) $FF $GG
   ↪ @Transf_catd $K $A $B $FF $GG;
 
@@ -8141,6 +8201,7 @@ injective symbol fib_cov_transf [K : Cat] (E : τ (Catd K))
   (u : τ (Obj (Fibre_cat E x)))
   : τ (Obj (Fibre_cat (@FibCov_target_catd K E) x));
 
+// First projection: fib_cov_int(E)[x] ↪ fib_cov_src_func(E,x).
 rule @tapp0_fapp0
       $K
       Cat_cat
@@ -8150,9 +8211,11 @@ rule @tapp0_fapp0
       (@fib_cov_int $K $E)
   ↪ @fib_cov_src_func $K $E $x;
 
+// Second projection: fib_cov_src_func(E,x)[u] ↪ fib_cov_transf(E,x,u).
 rule fapp0 (@fib_cov_src_func $K $E $x) $u
   ↪ @fib_cov_transf $K $E $x $u;
 
+// Third projection: fib_cov_transf(E,x,u)[y] ↪ (f ↦ E[f](u)).
 rule @tapp0_fapp0
       $K
       Cat_cat
@@ -8359,6 +8422,7 @@ symbol tdapp1_int_fapp0_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (homd_int GG)
         (Op_funcd FF)));
 
+// Object projection: tdapp1_int_func_transfd(FF,GG)[epsilon].
 rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ
   ↪ @tdapp1_int_fapp0_transfd $K $E $D $FF $GG $ϵ;
 
@@ -8377,6 +8441,7 @@ symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
         (tdapp1_int_fapp0_transfd ϵ)
         (tdapp1_int_fapp0_transfd ϵ')));
 
+// Hom-functor projection between internal displayed hom-action components.
 rule @fapp1_func _ _ (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ $ϵ'
   ↪ @tdapp1_int_fapp1_func_transfd $K $E $D $FF $GG $ϵ $ϵ';
 
@@ -8952,6 +9017,7 @@ rule @fapp1_fapp0
       (@fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v)
   ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
+// Equivalent transfor-component projection at p of the same presheaf arrow.
 rule @tapp0_fapp0
       _
       Cat_cat
@@ -9271,6 +9337,7 @@ rule @fapp1_fapp0
       (@tdapp1_int_presheaf_arrow $K $E $D $FF $GG $ϵ $x $u $y $v)
   ↪ @tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u $v;
 
+// Equivalent transfor-component projection at p for arbitrary epsilon.
 rule @tapp0_fapp0
       _
       Cat_cat
@@ -9396,10 +9463,12 @@ injective symbol sigma_intro_transf [K : Cat] (E : τ (Catd K))
 symbol sigma_intro_tapp0_func [K : Cat] (E : τ (Catd K)) (k : τ (Obj K))
   : τ (Functor (Fibre_cat E k) (Sigma_cat E));
 
+// Component projection: sigma_intro_transf(E)[k] ↪ sigma_intro_tapp0_func(E,k).
 rule @tapp0_fapp0
       $K Cat_cat $E _ $k (@sigma_intro_transf $K $E)
   ↪ @sigma_intro_tapp0_func $K $E $k;
 
+// Object introduction into the total category: u ↦ (k,u).
 rule fapp0 (@sigma_intro_tapp0_func $K $E $k) $u
   ↪ Struct_sigma $k $u;
 
@@ -9433,10 +9502,13 @@ rule @tapp0_fapp0
 injective symbol const_section_func (K : Cat) (A : Cat)
   : τ (Functor A (@Pi_cat K (@Const_catd K A)));
 
+// Object action: const_section_func(K,A)[a] ↪ const_K(a).
 rule @fapp0 $A _ (@const_section_func $K $A) $a ↪ @Const_func $K $A $a;
 
+// Hom-functor action sends Hom_A(x,y) to constant transfors on K.
 rule @fapp1_func $A _ (@const_section_func $K $A) $x $y ↪ @Const_transf_func $K $A $x $y;
 
+// Capped arrow action: p ↦ the constant transfor with component p.
 rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
   ↪ @Const_transf $K $A $x $y $p;
 
@@ -9448,12 +9520,15 @@ rule @fapp1_fapp0 $A _ (@const_section_func $K $A) $x $y $p
 //   Product_pair_tele_func[p][y] = (p,id_y).
 rule sigma_Fst (@Product_pair_tele_func $A $B) ↪ @const_section_func $B $A;
 
+// Second telescope projection is constantly id_B.
 rule sigma_Snd (@Product_pair_tele_func $A $B) ↪ @Const_func $A (Functor_cat $B $B) (@id_func $B);
 
+// Object projection: Product_pair_tele_func[x] ↪ (const_B(x),id_B).
 rule @fapp0 _ _
       (@Product_pair_tele_func $A $B) $x
   ↪ Struct_sigma (@Const_func $B $A $x) (@id_func $B);
 
+// Hom-functor projection pairs constant-transfor action with constant id_{id_B}.
 rule @fapp1_func _ _
       (@Product_pair_tele_func $A $B) $x $x'
   ↪ Struct_sigma
@@ -9463,6 +9538,7 @@ rule @fapp1_func _ _
         (@Transf_cat $B $B (@id_func $B) (@id_func $B))
         (@id (Functor_cat $B $B) (@id_func $B)));
 
+// Capped arrow action: Product_pair_tele_func[p] ↪ (const(p),id_{id_B}).
 rule @fapp1_fapp0 _ _
       (@Product_pair_tele_func $A $B) $x $x' $p
   ↪ Struct_sigma
@@ -9601,12 +9677,15 @@ symbol sym_transf_tapp0_transf [A B C : Cat]
 rule @fapp0 _ _ (@sym_func_func $A $B $C) $H
   ↪ @sym_func $A $B $C $H;
 
+// Hom-functor projection: exchange sends eta : H => K to sym(eta).
 rule @fapp1_func _ _ (@sym_func_func $A $B $C) $H $K
   ↪ @sym_func_func_fapp1_func $A $B $C $H $K;
 
+// Object projection of exchanged hom-action: eta ↦ sym_func_func_transf(eta).
 rule fapp0 (@sym_func_func_fapp1_func $A $B $C $H $K) $eta
   ↪ @sym_func_func_transf $A $B $C $H $K $eta;
 
+// Direct capped projection of the same exchanged transfor.
 rule @fapp1_fapp0 _ _ (@sym_func_func $A $B $C) $H $K $eta
   ↪ @sym_func_func_transf $A $B $C $H $K $eta;
 
@@ -9614,12 +9693,15 @@ rule @fapp1_fapp0 _ _ (@sym_func_func $A $B $C) $H $K $eta
 rule @fapp0 _ _ (@sym_func $A $B $C $H) $b
   ↪ @sym_fapp0_func $A $B $C $H $b;
 
+// Exchanged object action: sym(H)[b][a] ↪ H[a][b].
 rule @fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a
   ↪ @fapp0 $B $C (@fapp0 $A (Functor_cat $B $C) $H $a) $b;
 
+// A-arrow hom-action of sym(H)[b].
 rule @fapp1_func $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a'
   ↪ @sym_fapp0_fapp1_func $A $B $C $H $b $a $a';
 
+// Capped A-arrow action: sym(H)[b][p] ↪ H[p][b].
 rule fapp0 (@sym_fapp0_fapp1_func $A $B $C $H $b $a $a') $p
   ↪ @tapp0_fapp0
       $B
@@ -9629,6 +9711,7 @@ rule fapp0 (@sym_fapp0_fapp1_func $A $B $C $H $b $a $a') $p
       $b
       (@fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p);
 
+// Direct capped projection of the same A-arrow action.
 rule @fapp1_fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a' $p
   ↪ @tapp0_fapp0
       $B
@@ -9642,12 +9725,15 @@ rule @fapp1_fapp0 $A $C (@sym_fapp0_func $A $B $C $H $b) $a $a' $p
 rule @fapp1_func _ _ (@sym_func $A $B $C $H) $b $b'
   ↪ @sym_fapp1_func $A $B $C $H $b $b';
 
+// Capped B-arrow action: sym(H)[q] ↪ (a ↦ H[a][q]).
 rule fapp0 (@sym_fapp1_func $A $B $C $H $b $b') $q
   ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
 
+// Direct capped projection of the same B-arrow action.
 rule @fapp1_fapp0 _ _ (@sym_func $A $B $C $H) $b $b' $q
   ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
 
+// Component at a: sym(H)[q][a] ↪ H[a][q].
 rule @tapp0_fapp0
       $A
       $C
@@ -9663,6 +9749,7 @@ rule @tapp0_fapp0
       $b'
       $q;
 
+// Mixed component: the (p,q)-cell of sym(H) is H[p][q].
 rule @tapp1_fapp0
       $A
       $C
@@ -9683,6 +9770,7 @@ rule @tapp1_fapp0
       $q;
 
 // Component projection for exchanged transfors.
+// First component: sym(eta)[b] ↪ (a ↦ eta[a][b]).
 rule @tapp0_fapp0
       _
       _
@@ -9692,6 +9780,7 @@ rule @tapp0_fapp0
       (@sym_func_func_transf $A $B $C $H $K $eta)
   ↪ @sym_transf_tapp0_transf $A $B $C $H $K $eta $b;
 
+// Second component: sym(eta)[b][a] ↪ eta[a][b].
 rule @tapp0_fapp0
       $A
       $C
@@ -9766,12 +9855,15 @@ symbol diag_func_func_transf [A C : Cat]
 rule @fapp0 _ _ (@diag_func_func $A $C) $H
   ↪ @diag_func $A $C $H;
 
+// Hom-functor projection: diagonal sends eta : H => K to diag(eta).
 rule @fapp1_func _ _ (@diag_func_func $A $C) $H $K
   ↪ @diag_func_func_fapp1_func $A $C $H $K;
 
+// Object projection of diagonal hom-action: eta ↦ diag_func_func_transf(eta).
 rule fapp0 (@diag_func_func_fapp1_func $A $C $H $K) $eta
   ↪ @diag_func_func_transf $A $C $H $K $eta;
 
+// Direct capped projection of the same diagonal transfor.
 rule @fapp1_fapp0 _ _ (@diag_func_func $A $C) $H $K $eta
   ↪ @diag_func_func_transf $A $C $H $K $eta;
 
@@ -9779,9 +9871,11 @@ rule @fapp1_fapp0 _ _ (@diag_func_func $A $C) $H $K $eta
 rule @fapp0 $A $C (@diag_func $A $C $H) $a
   ↪ @fapp0 $A $C (@fapp0 $A (Functor_cat $A $C) $H $a) $a;
 
+// Hom-functor projection for contraction at endpoints a,a'.
 rule @fapp1_func $A $C (@diag_func $A $C $H) $a $a'
   ↪ @diag_fapp1_func $A $C $H $a $a';
 
+// Capped diagonal action: diag(H)[p] ↪ H[p][p].
 rule fapp0 (@diag_fapp1_func $A $C $H $a $a') $p
   ↪ @tapp1_fapp0
       $A
@@ -9793,6 +9887,7 @@ rule fapp0 (@diag_fapp1_func $A $C $H $a $a') $p
       (@fapp1_fapp0 $A (Functor_cat $A $C) $H $a $a' $p)
       $p;
 
+// Direct capped projection of the same diagonal arrow action.
 rule @fapp1_fapp0 $A $C (@diag_func $A $C $H) $a $a' $p
   ↪ @tapp1_fapp0
       $A
@@ -9827,6 +9922,7 @@ rule @tapp0_fapp0
 // instead of falling back to capped `fapp1_fapp0` computation only.
 rule @fapp1_func $A $A (@id Cat_cat $A) $x $y ↪ @id Cat_cat (Hom_cat $A $x $y);
 
+// Hom-action of a composite: (F ∘ G)_1 ↪ F_1 ∘ G_1.
 rule @fapp1_func $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y
   ↪ @comp_fapp0
       Cat_cat
@@ -9849,8 +9945,10 @@ rule @fapp1_func $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y
 // after the generic identity/composition action so competing paths can use
 // those global rules while Lambdapi checks local confluence.
 rule @Pullback_catd $A $A $E (@id Cat_cat $A) ↪ $E;
+// Pullback of the universe identity along F is the family F itself.
 rule @Pullback_catd $A Cat_cat (@id Cat_cat Cat_cat) $F ↪ $F;
 
+// Pullback accumulation: H^*(F^*E) ↪ (F ∘ H)^*E.
 rule @Pullback_catd
       $A $B
       (@Pullback_catd $B $C $E $F)
@@ -9860,6 +9958,7 @@ rule @Pullback_catd
       $E
       (@comp_cat_fapp0 $A $B $C $F $H);
 
+// Hom-action of F^*E is E_1 after the hom-action of F.
 rule @fapp1_func _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a'
   ↪ @comp_cat_fapp0
       (Hom_cat $A $a $a')
@@ -9877,6 +9976,7 @@ rule @fapp1_func _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a'
         (@fapp0 $A $B $F $a'))
       (@fapp1_func $A $B $F $a $a');
 
+// Capped base-arrow transport: (F^*E)[p] ↪ E[F[p]].
 rule @fapp1_fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a' $p
   ↪ @fapp1_fapp0
       $B
@@ -9913,8 +10013,10 @@ symbol section_pullback_sec [A B : Cat]
   (s : τ (Obj (@Functord_cat B (@Const_catd B Terminal_cat) E)))
   : τ (Obj (@Functord_cat A (@Const_catd A Terminal_cat) (@Pullback_catd A B E F)));
 
+// Object action: section_pullback_func(F,E)[s] ↪ section_pullback_sec(F,E,s).
 rule @fapp0 _ _ (@section_pullback_func $A $B $F $E) $s ↪ @section_pullback_sec $A $B $F $E $s;
 
+// Component formula: section_pullback_sec(F,E,s)[a] ↪ s[F[a]].
 rule @tapp0_fapp0
       $A Cat_cat _ _ $a
       (@section_pullback_sec $A $B $F $E $s)
@@ -9938,12 +10040,15 @@ injective symbol section_pullback_transf [A B : Cat]
         (@Pi_func A)
         (@Pullback_catd_func A B F)));
 
+// Family component: section_pullback_transf(F)[E] ↪ section_pullback_func(F,E).
 rule @tapp0_fapp0 _ Cat_cat _ _ $E (@section_pullback_transf $A $B $F)
   ↪ @section_pullback_func $A $B $F $E;
 
+// Internal Pi action at F and E folds to ordinary section pullback.
 rule @fdapp1_int_cell _ _ _ Pi_int_funcd $B $A $F $E
   ↪ @section_pullback_func $A $B $F $E;
 
+// Pointwise internal Pi action along G[p] folds to section pullback.
 rule @fdapp1_int_cell
       $K
       _

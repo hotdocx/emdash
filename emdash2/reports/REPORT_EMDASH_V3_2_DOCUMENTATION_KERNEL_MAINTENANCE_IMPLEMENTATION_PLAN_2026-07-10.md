@@ -429,11 +429,37 @@ change. The next adjacent-command batches are sections 7–10 and 13–17, then
 the remaining profunctor/application declarations and commands in sections
 18–19.
 
+### Continuation checkpoint 2026-07-11: sections 7–17
+
+The third comment-only batch completes command-level adjacent documentation
+for sections 7–10 and 13–17. Together with the earlier batches, every matched
+symbol declaration, `rule` command, and `unif_rule` command in sections 0–17
+now has an immediately adjacent comment; cohesive `with` clauses continue to
+share the comment on their leading command.
+
+The new comments make the following ownership boundaries locally visible:
+
+- product/evaluation/curry and opposite-adjunction projections, including
+  explicit proof-time labels on the two factorizations of rigid `Hom` action;
+- pullback, constant-family, pointwise-opposite, section-category, and Sigma
+  totalization projections;
+- mixed-variance family, covariant fibre-transport, and internal displayed
+  hom-action projection ladders;
+- ordinary weakening, exchange, contraction, generic composite hom-action,
+  pullback accumulation, and section reindexing.
+
+Review of these owning blocks found their existing architecture prose aligned
+with the active runtime rules. No executable declaration, rule, assertion, or
+normal-form orientation changed. Bounded checking passes after both the
+sections 7–10 and sections 13–17 sub-batches. The remaining adjacent-command
+backlog is confined to sections 18–19 (profunctors and applications); section
+20 is intentionally comment-only staging material.
+
 - Completed first batch: consolidate the living SOP around current selected
   owners without the superseded chronological postscripts.
 - Completed first batch: extend Foundations through the currently promoted
   univalence, profunctor, join, and Eckmann-Hilton staging layers.
-- Active: define and apply the adjacent-comment tiers section by section.
+- Active: finish the adjacent-comment tiers in sections 18–19.
 - Completed first batch: remove legacy check source-line tags; stable semantic
   headings may still be refined without reordering assertions.
 - Deferred: split `emdash3_2.lp` into modules; first complete the comment and
