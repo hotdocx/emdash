@@ -18,6 +18,10 @@ notation, implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_DISPLAYED_FACADE_TOWER_REARCHITECTURE_PLAN_2026-07-11.md`:
+  proposed levelwise runtime/proof-time boundary between the displayed
+  `Catd`/`Functord`/`Transfd` tower and the ordinary iterated-hom hierarchy,
+  including Sigma omega-iteration and constant-section follow-up probes.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
