@@ -1,1928 +1,569 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-06
+Last consolidated: 2026-07-10
+Status: living current-state and kernel-development authority
 
-This report is the current orientation point for `emdash3_2.lp`. It consolidates
-the useful implementation lessons from the older HOM/FAM/PI/CONST plan and
-implementation log, plus the later Pi-alias, Sigma-projection,
-Product/curry, internal-action, Sigma-laxity, notation, and reorganization
-work.
+This report describes the active `emdash3_2.lp` architecture and the procedure
+for changing it safely. It intentionally records the current selected design,
+not the chronological sequence of earlier candidates. Dated implementation
+plans in `reports/INDEX.md` retain decision history, rejected orientations, and
+detailed probe evidence.
 
-## Current Source Of Truth
+## Sources Of Truth
 
-- Active implementation: `emdash3_2.lp`.
-- Active diagnostic/regression checks: `emdash3_2_checks.lp`.
-- Current notation authority:
-  `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`.
-- Current mathematical reading guide: `reports/EMDASH_FOUNDATIONS.md`.
-- Current open structural-logic implementation plan:
-  `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`.
-- Current open Pi-along-functor implementation plan:
-  `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`.
-- Active profunctor representability redesign plan:
-  `reports/REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`.
-- Active groupoid/computational-univalence architecture plan:
-  `reports/REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`.
-- Current notation/reorganization subplan:
-  `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`.
-- v2 retirement audit:
-  `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`.
-- Reports index:
-  `reports/INDEX.md`.
-- MathOps/DevOps implementation plan:
-  `reports/REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`.
-- Infinity Codex final-response archive plan and SOP:
-  `reports/REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`.
+- `emdash3_2.lp`: active kernel definitions and runtime/proof-time behavior.
+- `emdash3_2_checks.lp`: executable diagnostics and regressions.
+- `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
+- `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
+  authority for comments, examples, and future parser work.
+- `INDEX.md`: active plans, completed decision records, audits, and generated
+  reports.
+- `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
+- `REPORT_EMDASH_HEALTH.md`: generated source metrics and bounded timings.
 
-Reports retired by the 2026-06-05 consolidation have been archived under:
+The active source outranks every report if they disagree. Correct the report
+as part of the same maintenance task rather than preserving a known stale
+description.
+
+Ignored `.scratchpad/` material is historical recovery data, not a normal
+authority. Use the v2 retirement audit when an obsolete-baseline summary is
+needed.
+
+## Validated Current Baseline
+
+The 2026-07-10 baseline is:
 
 ```text
-.scratchpad/retired/2026-06-05_reports_consolidation/
+make check                         pass
+make examples                      pass
+make ci                            pass
+checked files/examples             8
+diagnostic assertions              764
+unclassified checks                0
+strict LHS audit                   0 unreviewed candidates
+intentional LHS annotations        28 slots across 16 clauses
+warning inventory                  1,303
+  unjoinable critical pairs        1,140
+  replaceable pattern variables      163
 ```
 
-Do not consult archived reports during normal v3.2 work. Their surviving
-design facts have been folded into this report, `EMDASH_FOUNDATIONS.md`, the
-canonical syntax report, or the structural-logic plan.
+The largest warning families are headed by `comp_fapp0`,
+`hom_postcomp_fapp0`, `tapp0_fapp0`, and `fapp1_fapp0`. These reports are
+diagnostic evidence for locating overlap families. They are not an automatic
+veto on semantically required computation and are not a confluence proof.
 
-Retired historical references:
+`emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
+`emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
 
-- The old v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report have been
-  moved to ignored `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/`.
-- The obsolete v2 baseline and consolidated v2 report have been moved to
-  ignored `.scratchpad/retired/2026-06-16_v2_reference/`; use
-  `REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md` for the retained audit.
-- Do not consult those archived files during normal v3.2 work. Recover them
-  only for explicitly requested historical comparison.
+## Current Architecture
 
-## Current Orientation Snapshot
+### Sections 0–3: kernel foundations
 
-Review snapshot: 2026-06-05.
+The kernel begins with the groupoid/type universe, equality/path induction,
+encoded Sigma/Pi/product object layers, and the core category interface.
 
-`emdash3_2.lp` remains the active v3.2 source. The current architecture is
-centered on directed Cat-valued families, with `Catd_cat K` as the canonical
-normal form of `Functor_cat K Cat_cat`, and with `Functord`/`Transfd` carrying
-the displayed or natural family layers.
+Active equality/equivalence staging includes:
 
-Top-level implementation sections now have this active order:
+- `TypeEquiv` with forward/inverse maps and inverse paths;
+- path views for encoded Sigma and Pi types;
+- `GrpdUnivalence` and decoder-based groupoid-univalence capabilities;
+- `IsoEvidence` for ordinary categorical isomorphism data;
+- `CatIsoUnivalence` for the 1-categorical staging layer;
+- recursive `OmegaEquiv` with identity/opposite/product closure;
+- `CatUnivalence` and decoder-based omega-categorical univalence
+  capabilities.
+
+These are explicit kernel interfaces and checked computation skeletons. They
+do not claim that every future univalence/coherence theorem is already
+internalized.
+
+The category universe satisfies the directed-universe principle:
 
 ```text
-0-2. Kernel foundations
-3-7. Ordinary category calculus
-8-10. Directed family calculus
-11-13. Representable and dependent-hom infrastructure
-14-16. Displayed hom-action and laxity extraction
-17. Structural logic and bridges
-18. Cat-valued profunctors
-19. Applications
-20. Check catalog
+Obj(Cat_cat) = Cat
+Hom_cat Cat_cat A B = Functor_cat A B.
 ```
 
-The primary path-induction theorem is `PathInd_transfd(Z)`. The Sigma-total
-presentation `PathInd_funcd(Z)` is derived by
-`Sigma_transfd_funcd(PathInd_transfd Z)` and should not be treated as the
-primitive theorem.
+`Catd_cat K` is the canonical Cat-valued-functor category over `K`.
+`Functord_cat` and `Transfd_cat` provide natural/displayed functor and transfor
+layers.
 
-`Pi_cat(E)` is a defined section-category alias through
-`Functord_cat(Const_catd K Terminal_cat, E)`, not a primitive kernel
-discriminator. Sigma maps now use the internal displayed-hom projection owner:
-the capped fibre component is `fdapp1_int_hom_fapp0`, the fixed-endpoint
-hom-action is induced by `fdapp1_int_presheaf_arrow`, and the canonical
-cartesian/laxity cell is `fdapp1_int_cell`. The old
-`functord_laxity_precomp_*`, `functord_transport_fibre_*`, and
-`homd_id_canonical_triangle` heads are not active guidance.
+Generic identity, composition, functor action, and naturality are owned by the
+global `id`, `comp_fapp0`, `fapp*`, and `tapp*` calculus. Specialized
+`id_func`, `id_funcd`, `comp_cat_fapp0`, and `comp_catd_fapp0` spellings are
+transparent public views or specialization surfaces, not parallel owners.
 
-Arbitrary Sigma maps do not strictly preserve canonical transport without an
-additional strict/cartesian specialization. Known strict cases should get
-focused collapses keyed on the specific strict constructor, as with
-`Rep_transport_func`.
+### Section 4: ordinary internal hom and variance-separated actions
 
-The Product/curry layer is partly rearchitected around semantic owners:
-product-valued functors reduce to products of functor categories,
-`Product_pair_tele_func` owns pairing, `curry_func_func` routes through the pair
-telescope, and semantic uncurry routes through right-ordered `Eval_func` plus
-the `Product_cat_func` stable projection ladder. The transfor action of
-semantic uncurry remains deferred.
-
-Postscript 2026-07-05: the Cat/Catd specialization alias migration has now
-promoted Phases 1-5. `id_func`/`id_funcd`,
-`comp_cat_fapp0`/`comp_catd_fapp0`, and the pure curried helpers
-`comp_cat_cov_func`, `comp_cat_cov_func_func`, `comp_cat_con_func`, and
-`comp_cat_con_func_func` are transparent public aliases over generic `id`,
-`comp_fapp0`, `hom_postcomp_*`, and `hom_precomp_along_*` owners.  The
-identity-family capped higher-action paths now enter the remaining Cat-only
-transfor heads from specialized generic `hom_*_fapp1_fapp0` owners:
-`comp_cat_cov_transf`, `comp_cat_con_transf`,
-`comp_cat_cov_func_func_transf`, and `comp_cat_con_func_func_transf`.  These
-Cat-only heads remain exactly where they expose extra `tapp0_fapp0`,
-`tapp1_func`, or `tapp1_fapp0` structure.  The functor-level wrappers
-`comp_cat_cov_fapp1_func`, `comp_cat_con_fapp1_func`,
-`comp_cat_cov_func_func_fapp1_func`, and
-`comp_cat_con_func_func_fapp1_func` are transparent identity-family aliases of
-generic `hom_*_fapp1_func` owners, not rewrite discriminators.  Broad
-arbitrary-family folds remain deferred; arbitrary-family consumers should use
-`hom_*` directly.  Postscript 2026-07-05b: the capped Cat-valued
-postcomposition bridge
-`hom_postcomp_fapp1_fapp0 Cat_cat Cat_cat E ... -> comp_cat_cov_transf(...)`
-is now a runtime rewrite, because it exposes the ordinary transfor projection
-ladder.  The stale tele-precomposition proof-time comparisons against ordinary
-functor-composition action were removed; generalized arbitrary-base
-`E : K -> Cat` transfor projection heads remain a deferred Cat-family design
-task.  Postscript 2026-07-05c: the first generalized arbitrary-base Cat-family
-slice is now active.  Fixed capped bridges normalize to the existing
-`comp_cat_cov_transf` and `comp_cat_con_transf` heads after applying `E` to the
-base arrow.  New linked tele heads
-`hom_postcomp_cat_tele_transf` and `hom_precomp_along_cat_tele_transf` are the
-Cat-valued projection normal forms of generic
-`hom_postcomp_tele_fapp1_fapp0` and
-`hom_precomp_along_tele_fapp1_fapp0`; the old
-`comp_cat_cov_func_func_transf` and `comp_cat_con_func_func_transf` names are
-identity-family aliases.  Tele-postcomposition exposes component and
-off-diagonal projections; tele-precomposition now exposes the component and
-off-diagonal projections as well.  Postscript 2026-07-05d:
-the fixed Cat transfor heads `comp_cat_cov_transf` and `comp_cat_con_transf`
-now carry the arbitrary Cat-family parameters `K,E` directly, and their
-`tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` projection rules are owned by
-the generalized heads.  The ordinary Cat surface is the identity-family
-specialization `K := Cat_cat, E := id_Cat`.  The generalized projection LHSs
-infer reconstructible category slots so identity-family arguments such as
-`fapp0(id_Cat,Z)` cannot normalize away before the owner rule matches.
-Postscript 2026-07-05e: `hom_precomp_along_cat_tele_transf` also owns its
-generalized `tapp1_func` / `tapp1_fapp0` off-diagonal projection ladder.  The
-ordinary dual helper `comp_cat_con_func_func_tapp1_func` is a small functor in
-`eta : G => H` whose object action reuses the existing horizontal-composite
-head `comp_cat_func_func_tapp1_fapp0`.  That capped head is intentionally
-neutral; `cov` and `con` are kept only on the curried functor-level views.
-
-The first Cat-valued profunctor slice is now active. `Prof_base(A,B)` remains
-the transparent readability alias `Product_cat(Op_cat A) B`, while
-`Prof_cat(A,B)` is now the primitive public fixed-endpoint profunctor category
-head. Its object and hom projections compute to the existing
-`Catd_cat(Product_cat(Op_cat A) B)` semantics, and a guarded proof-time
-compatibility rule identifies `Prof_cat(A,B)` with
-`Catd_cat(Product_cat A0 B)` when `A` is `Op_cat A0`. Public fixed-endpoint
-vertical statements should use generic `@id (Prof_cat A B)` and
-`@comp_fapp0 (Prof_cat A B)`; raw Catd/Product spelling remains appropriate
-only for semantic bodies and projection checks whose discriminator is the
-displayed-family base. `Prof(A,B)` is the object classifier
-`Obj(Prof_cat(A,B))`. `Unit_prof(X)` is now the primitive uncurried hom
-profunctor, with direct fibre computation and full/capped base-arrow action.
-`Hom_prof_along(F,G)` is the transparent readable surface
-`Prof_reindex(Unit_prof X,F,G)`, so endpoint functor arguments are owned by
-`Prof_reindex` rather than by a representable-specific head. `Hom_prof(G)`
-continues to expose the identity-left readable surface. `Product_map_func(F,G)` is
-now a primitive stable componentwise product-map constructor with object,
-full-hom, and capped-arrow projections. Its composition cut accumulates the
-two component functors. There is deliberately no runtime whole-constructor
-identity collapse: the attempted `Product_map_func(id,id) -> id` and
-projection-pair rewrites create competing object and hom-action paths.
-Proof-time unification now identifies `Product_map_func(id,id)` with both
-`id_func(A x B)` and the explicit projection pair. Product-arrow identity
-similarly has a proof-time eta rule against the pair of component identities
-while retaining the runtime `id` head required by generic functor identity.
-
-Postscript 2026-07-07: the `Unit_prof` primitive migration keeps the public
-representable action on the generic reindex/product-map/unit projection path.
-The warning-enabled inventory after this slice is 1,298 warnings: 1,133
-unjoinable critical-pair reports and 165 replaceable-pattern reports. The top
-reported heads remain the shared `comp_fapp0` and `hom_postcomp_fapp0`
-families; the warning delta is recorded as overlap diagnostics, not as a
-reason to restore a representable-specific action owner.
-
-Postscript 2026-07-10: the hom-variance migration supersedes the older
-identity/opposite runtime shortcuts described in the 2026-07-05 postscripts.
-`hom_con` is now a primitive contravariant represented-family owner, with the
-target-internalized mirror `hom_con_int`; `hom_int` and `hom_con_int` expose
-off-diagonal actions through `Hom_tele_func`, `Hom_func`, and `Hom_fapp0`.
-The eight `Op_func`-keyed postcomposition-to-precomposition rewrites and the
-identity-family precomposition-to-postcomposition rewrite have been removed.
-Required dual presentations are related by constrained two-rigid-head
-`unif_rule`s, while runtime preserves `hom_postcomp_*` versus
-`hom_precomp_along_*` ownership. Direct `Unit_prof` action computes through the
-rigid `Hom_tele_func` / `Hom_func` / `Hom_fapp0` projection ladder. Independently
-factored pre/post cuts and one-active-endpoint degenerations remain distinct
-runtime presentations and elaborate against `Hom_*` through direct proof-time
-bridges. The rigid owner has focused identity and composition joins of its own;
-for example, `Hom_func(id,id)` computes to the identity functor and composition
-of two `Hom_func` values accumulates both endpoint actions. Cat horizontal
-action is owned by the generic `comp_prod_fapp1_*` projection ladder; the old
-Cat cov/con and Cat telescope-transfor compatibility names have been deleted.
-The warning-enabled inventory after the rigid-Hom migration is 1,297 warnings:
-1,132 unjoinable critical-pair reports and 165 replaceable-pattern reports.
-Focused typed checks cover both factorizations and endpoint degenerations;
-ordinary conversion checks cover the rigid owner's own identity and
-composition. A post-migration follow-up promotes middle-constrained generic
-composition identity rules. The shared middle object remains the intentional
-cut-interface guard; outer endpoints are inferred so identity elimination may
-match proof-time-compatible presentations. This is not a mechanical `_`
-cleanup. The rules can select two runtime identity presentations, but typed
-core and full PathOut/Sigma checks join them by `eq_refl` through the pre/post
-unification bridge. Proof-time joinability is the selected criterion for this
-generic identity overlap. Repeated endpoint variables remain appropriate when
-they are genuine interfaces, constructor discriminators, or subject-reduction
-guards. The warning-enabled inventory is 1,303 total: 1,140 critical-pair and
-163 replaceable-pattern reports. Candidate A remains a viable future
-stronger-normalization design only together with its complete `Hom_*`
-accumulation and confluence theory. Eight-target CI typechecking takes 12.237
-seconds, compared with 25.604 for the rejected fully inferred pair and
-approximately 10.787 for the rigid-Hom baseline; current per-target health
-timings are 1.361-1.658 seconds.
-
-`Pullback_catd(E,F)` and `Pullback_catd_func(F)` are stable Cat-valued
-precomposition heads. Their object/arrow projections, identity and nested
-pullback cuts, and focused constant/opposite/Sigma-projection collapses are
-active. Broad global folds from every generic Cat composition
-`@comp_fapp0 Cat_cat E F` or `comp_cat_con_func(F)` were rejected because
-they affected unrelated Cat-valued Došen cuts and increased non-joinable
-overlaps. The corresponding proof-time unification rules remain active for
-the broad generic-composition and `comp_cat_con_func(F)` comparisons. The special
-accumulated comparison between `comp(Pullback(E,F),H)` and
-`Pullback(E,F o H)` is now a runtime rewrite, installed late after the
-pullback specializations so it participates as a focused Došen cut rather
-than as a global composition-to-pullback fold.
-
-`Prof_reindex(R,F,G)` is the stable profunctor reindexing normal form, and its
-object/full/capped projection rules now route through the generic base map
-`Product_map_func(Op_func(F),G)` directly. The formerly primitive
-`Prof_reindex_base_func(F,G)` has been demoted to a transparent readability
-alias for that product map; it no longer owns independent projection or
-pullback rules. The active runtime bridges are exactly:
+The represented covariant family is:
 
 ```text
-Pullback_catd(R,Product_map_func(F,G))
-  -> Prof_reindex(R,Op_func(F),G)
-
-Pullback_catd_func(Product_map_func(F,G))
-  -> Prof_reindex_func(Op_func(F),G)
+hom_(F,W)[y] = Hom_A(W,F[y]).
 ```
 
-where `F : A -> A'` is arbitrary and the opposite operation appears only on
-the RHS. The object-level fold is installed for direct-authored
-`Pullback_catd` syntax, which does not otherwise pass through the functor-level
-`fapp0` owner. Its LHS keeps the product source and target categories explicit
-as real guards on the product-map base; the underscored variant typechecked
-but produced broader underconstrained overlap diagnostics. Applying `fapp0` to
-the functor-level fold still joins the same normal form. Representable
-reindexing accumulates both endpoint functors through the generic nested
-`Prof_reindex` rule.
-`Prof_transf_cat(R',F,R,G)` is the transparent category of natural family
-morphisms from `R'` to `Prof_reindex(R,F,G)`.
-`Prof_hom_cat(F,R,G)` specializes its source to `Unit_prof(I)`, and
-`Prof_hom(F,R,G)` is its object classifier. In the representable case the
-target computes to `Hom_prof_along(F,G)`. Comparison with ordinary
-`Transf_cat(F,G)` and curry/internalized endpoint packages remain deferred;
-the first shaped-element checks do not require them.
-
-The first tensor/co-Yoneda calculus is also active. `Prof_tensor(R,S)` is an
-opaque primitive composition of Cat-valued profunctors because the kernel has
-no general coend/coinserter quotient. Reindexing a tensor distributes across
-its two exposed endpoints and keeps the middle category fixed; the newly
-active identity-reindex fold removes the unchanged middle reindexings.
-`Prof_tensor_transf` tensors two general cells over one shared middle functor,
-subsuming the old draft's separate covariant/contravariant constructors.
-`Prof_tensor_hom_hom` and `Prof_tensor_hom_transf` provide shaped introduction
-forms. The left and right named co-Yoneda cells are
-`Prof_coyoneda_unit_tensor_con_transf` and
-`Prof_coyoneda_unit_tensor_cov_transf`.
-
-The equipment-cell composition layer is now active. `Prof_reindex_func` and
-`Prof_reindex_transf` internalize endpoint reindexing, nested reindexing
-accumulates endpoint functors, and `Prof_comp_transf` is the stable
-reindex-then-compose cell head. `Prof_id_transf` supplies its identity, while
-the generic `id_funcd` behavior remains unchanged. Both left and right
-co-Yoneda maps now have checked beta rules for tensor-introduced general cells
-and shaped elements in the identity-representable case. Unit type collapses,
-general tensor associativity/coherence, and generalized co-Yoneda rules using
-the now-active `Prof_func_hom(F)` remain deferred.
-
-Both profunctor implication slices are active. `Prof_imply_cov(O,Q)` is the
-opaque symbolic right adjoint to tensoring on the right by `Q`, while
-`Prof_imply_con(P,O)` is the opaque symbolic right adjoint to tensoring on the
-left by `P`. Covariant implication reindexes the left endpoints of its inputs
-and is covariant in `O`, contravariant in `Q`; contravariant implication
-reindexes the right endpoints of its inputs and is contravariant in `P`,
-covariant in `O`. The fixed-weight covariant operation is now internalized as
-`Prof_imply_cov_func(Q) : Prof_cat(A,X) -> Prof_cat(A,B)`. Its object, full
-hom, and capped arrow actions remain the generic `fapp*` projections. It is
-defined semantically by composing the mixed-variance implication functor with
-the fixed-weight insertion `O |-> (O,Q)`, then kept opaque so generic strict
-functor cuts remain visible before that product pipeline unfolds. No
-implication-specific identity or composition rule is active.
-
-The two-variable variance is now internalized directly as the mixed-variance
-bifunctor:
+Its postcomposition action is owned by the `hom_postcomp_*` hierarchy:
 
 ```text
-Prof_imply_cov_func2 :
-  Prof_cat(A,X) x Prof_cat(B,X)^op -> Prof_cat(A,B).
+(F[p])_*(g) = F[p] o g.
 ```
 
-Its object action projects an arbitrary product object `(O,Q)` to
-`Prof_imply_cov(O,Q)`. Its full and capped arrow actions remain the ordinary
-generic action of this declared functor. The fixed-endpoint equipment-cell
-constructor folds to that generic action on the product arrow `(o,q)`;
-identity and composition are inherited globally rather than restated on a
-profunctor-specific action head.
-
-The tensor-implication bijections now have a fixed-endpoint primitive core:
+The represented contravariant family is primitive:
 
 ```text
-Prof_eval_cov_map / Prof_lambda_cov_map
-Prof_eval_con_map / Prof_lambda_con_map
+hom_con(W,F)[y] = Hom_A(F[y],W).
 ```
 
-These are inverse operations between vertical `ProfMap` classifiers. The
-former fixed-endpoint shaped `*_hom_map` specializations and
-endpoint-changing `Prof_eval_*_transf` / `Prof_lambda_*_transf` equipment
-views have been removed. Future shaped closed APIs should be derived from this
-general core plus a full co-Yoneda unit comparison, not restored as
-independent primitive inverses.
-
-The 2026-07-06 cleanup before the primitive `Prof_cat` migration also removed
-`Prof_imply_cov_transf` and the unusable placeholder
-`Prof_imply_con_transf`. The retained functorial surface is
-`Prof_imply_cov_func2` / `Prof_imply_cov_func(Q)`, whose arrow behavior is the
-generic action of declared functors.
-
-The earlier `Prof_imply_cov_subst_transf` and
-`Prof_imply_con_subst_transf` explicit-substitution heads have been removed.
-They extended endpoint-changing equipment syntax at the primitive closed
-layer. Any later tensor-cell naturality or equipment-style closed operation
-must be derived around the fixed-endpoint core and added only for a concrete
-consumer whose canonical normal form has been established.
-
-The initially rejected product presentation exposed kernel gaps rather than an
-architectural obstruction. Product identity projections compute for opaque
-product objects. In addition, the global strict-functor identity calculus now
-has a `Catd_cat` specialization for the canonical `id_funcd` normal form,
-parallel to the existing global Catd composition specialization. This one
-generic bridge replaces constructor-specific identity rules for functors whose
-source category is a profunctor category.
-
-The active warning inventory after the 2026-07-06 primitive `Prof_cat`
-migration and follow-up cleanup is now 1,291: 1,126 unjoinable critical-pair
-reports and 165 replaceable-pattern reports. The largest reported heads are
-still the shared generic composition and hom-action families, especially
-`comp_fapp0` and `hom_postcomp_fapp0`. The earlier runtime
-`comp(Pullback(E,F),H)` accumulation accounts for six diagnostic reports over
-the 1,108 post-product-map-reindex inventory; the classified families include
-constant, opposite, Sigma-projection, identity, and higher profunctor-duality
-interactions. The direct object-level product-map pullback fold adds one
-further diagnostic critical-pair report, but fixes the normal form for bare
-`Pullback_catd(R,Product_map_func(F,G))` syntax. The broader global
-composition-to-pullback folds produced 1,129 warnings and remain rejected
-because they rewrite unrelated Cat-valued composition. The proof-time product
-identity comparisons and their typed `eq_refl` checks preserve that slice's
-inventory. The 2026-06-24 `Core_incl_func` path-to-arrow promotion adds six
-classified diagnostic reports at the expected stable-projection boundary for
-the semantically intended runtime object action
-`Core_incl_func(C)[x] -> x`. Every future extension at these stable-head
-boundaries should compare warning-enabled full-file results to classify
-overlap families, not to use the count itself as a veto. Warning reports are
-diagnostic evidence for finding missing joins, better placement, or follow-up
-rules; they do not by themselves block a semantically necessary
-rewrite/unification rule. In particular, do not replace a wanted runtime
-normal form by proof-time unification merely to improve the warning count; use
-proof-time unification only when proof-time identification is the intended
-semantics.
-
-The 2026-06-22 generic-owner audit also identified older migration candidates.
-`comp_cat_cov_transf`/`comp_cat_con_transf` are named projections of existing
-composition functors; `Op_func`, `Op_transf`, and `Op_funcd` have the
-internalized owners `op`, the hom-action of `op`, and `Op_catd_func`;
-`Prof_func_transf` and `Op_prof_transf` indicate that a fully internalized
-equipment-level owner is still missing. Their existing local identity or
-composition rules must not be copied into new infrastructure. Migrate each
-cluster separately when needed, with downstream projection checks and warning
-comparison, before extending it. These clusters are discovery labels only:
-every symbol and every individual rule must be reassessed separately, and
-rules grouped together may have different diagnoses and outcomes. Here
-“migrate” begins with reassessment: a rule may be retained when it is an
-intentional projection/normal-form bridge or genuine cut rather than a
-redundant generic law. In particular,
-`Op_func(F o G) -> Op_func(F) o Op_func(G)` is not the ordinary arrow-level
-functoriality of `Op_func(F)`. The existing `op : Functor Cat_cat Cat_cat`
-already owns the higher strict equality saying that opposite maps a composite
-functor to the composite of opposites. The active rule expands the image of a
-composite, whereas the global cut discipline normally contracts a composite
-of images. Whether this reverse-oriented projection bridge is required by the
-chosen duality normal forms or should be removed/reoriented remains an open,
-rule-specific audit question. Do not change it, or add the opposite direction,
-without normal-form, critical-pair, termination, and downstream duality
-checks. An explicit bridge may still be necessary because reducing
-`fapp1_fapp0(op,F)` to the canonical `Op_func(F)` projection can hide the
-generic owner pattern before an outer composition cut fires. The current
-outward rule joins owner-first and projection-first reductions at the
-distributed composite; an inward replacement would join them at
-`Op_func(F o G)`. This is a normal-form choice, not a choice about the strict
-mathematical equality. The implication cluster was migrated immediately
-because its direct mixed owner already existed and the focused replacement
-passed.
-
-This stable-projection issue is general in principle but not a requirement to
-duplicate functor laws for every named `fapp1_*` projection. A separate bridge
-is considered only when projection erases the generic owner pattern, an outer
-generic cut competes with that projection, and the two paths do not already
-join. Constructor action equations and projections that reduce onward to
-generic structure are not duplicate functoriality rules. More internalization
-can remove a bridge at one fixed-endpoint level while leaving a distinct
-higher or varying-endpoint composition boundary. The representability
-redesign report's `General Stable-Projection Boundary` section records the
-full criteria and the bounded 2026-06-22 source inventory.
-
-These migrations are tracked by stable IDs in the representability redesign
-report's `Deferred Internalization Side-Task Ledger`: `INT-COMP`, `INT-OP`,
-`INT-PROF-FUNC`, `INT-OP-PROF`, and `INT-EQUIP-COMP`. They are demand-driven
-side tasks, not current blockers. The direct eval/lambda substitution slice
-landed without extending `comp_cat_cov_transf` or `comp_cat_con_transf`, so it
-did not trigger `INT-COMP`; broader ordinary full-naturality work may still do
-so. General co-Yoneda/join, duality/univalence, extended profunctor duality,
-and bicategory/equipment coherence respectively trigger the other clusters. A
-trigger requires an internalized-owner probe before any new constructor-local
-functor law is added. It does not transfer a conclusion from one member or
-rule of the cluster to another.
-
-The weighted-limit public API has completed its representability cutover.
-`IsWeightedLimit_cov_comp(F,W,L)` is the canonical computational property: one
-ambient `ProfComparison` between the weighted-cone profunctor and
-`Hom_prof(L)`. Reindexing internalizes every shaped probe `M`, and
-`weighted_limit_cov_push/pull` are inverse on arbitrary incoming maps.
-Selected universal and cone maps are now use-site identity applications of
-those operations; the former selected wrapper heads and the transparent
-`WeightedLimit_cov` alias were removed. Cancellation is owned by the
-comparison eliminators and vertical generic displayed composition
-`@comp_fapp0 (@Catd_cat ...)`, with `comp_catd_fapp0` remaining only a public
-alias, not by duplicate `Prof_comp_transf` rules.
-
-`Adjunction_hom_prof_comparison` and
-`Adjunction_hom_prof_comparison_along` are the adjunction mate owners.
-Selected transpose/untranspose maps should be obtained at the use site from
-`prof_comparison_push/pull` or ordinary `defiso_to/from`; the old
-`Adjunction_prof_transpose/untranspose` heads and named adjunction
-iso-evidence wrappers were removed. The right-adjoint preservation theorem is
-the computational comparison
-`right_adjoint_preserves_weighted_limit_cov_comp`, a transparent composition
-of three certified comparisons. The unsuffixed compatibility alias and the
-separate `_iso` preservation branch were removed; ordinary evidence is
-obtained from comparison evidence when needed.
-Cutover validation reduced the warning inventory from 1,139 to 1,043 before
-the later mixed-variance internalization:
-unjoinable critical pairs fell from 986 to 890 while the 153 replaceable
-pattern-variable warnings were unchanged.
-
-The first duality slices are active. `Op_transf` reverses ordinary
-transformation direction, vertical composition, and off-diagonal endpoints.
-`Op_adjunction` maps `Adjunction(A,B)` to
-`Adjunction(Op_cat B,Op_cat A)`, swaps the left/right projections, and exchanges
-unit with opposite counit. `Product_swap_func` has full object/arrow
-projections and involution. The semantic object-level `Op_prof(R)` pulls `R`
-back along product swap only. It deliberately does not apply `Op_catd` to
-fibres: under the current higher-category rule
-`Hom_cat(Op_cat X,b,a) -> Hom_cat(X,a,b)`, pointwise fibre-op would incorrectly
-dualize representable hom categories twice. `Op_prof_transf` is the stable
-duality operation on equipment cells. It swaps the two profunctor endpoints
-and applies `Op_func` to their base functors, but preserves the cell direction
-and composition order because `Op_prof` does not opposite the fibres. Its
-typing, identity, and composition laws are checked, and the involution rewrite
-is accepted by the kernel. The general semantic comparison between this
-stable cell head and the hom action of pullback along product swap remains
-deferred: the direct reindex fold caused a focused-probe typecheck loop.
-
-Contravariant weighted colimits are now a transparent dual presentation:
-`WeightedColimit_con(F,W,L)` is definitionally
-`IsWeightedLimit_cov_comp(Op_func(F),Op_prof(W),Op_func(L))` in the opposite
-ambient and index categories, with `W` exposed as a public `τ(Prof J J')`
-weight.
-`Op_weighted_limit_cov` and
-`Op_weighted_colimit_con` are identity wrappers after opposite and
-double-swap normalization. The full
-`left_adjoint_preserves_weighted_colimit_con` witness is the existing
-right-adjoint preservation theorem applied to `Op_adjunction`; no duplicate
-colimit proof calculus or new rewrite rule is required. Direct
-colimit-oriented universal/cone projection names remain deferred.
-
-The first directed-inductive join slice is active. `Terminal_prof(A,B)` is the
-constant terminal Cat-valued profunctor. `Prof_func_transf(F)` is the stable
-representable equipment cell induced by functorial hom action, with identity
-and composition reductions; `Prof_func_hom(F)` is its transparent shaped
-notation. `Join_cat(A,B)` has two inclusion functors and one internally natural
-cross cell from `Terminal_prof(A,B)` to
-`Hom_prof_along(join_fst_func,join_snd_func)`. `join_cross_hom(a,b)` derives
-the old shaped cross-arrow interface from this cell. The nondependent
-`join_elim_func` computes on both inclusions and on the general and shaped
-cross cells. This replaces the obsolete externally quantified cross family
-plus hand-written naturality equation with one `Prof_transf_cat` datum.
-Dependent elimination, generic directed-inductive types, explicit join hom
-decompositions, and a semantic collage construction remain deferred.
-
-The profunctor representability redesign has started with a bounded coherent
-foundation. `ProfMap(P,Q)` is a transparent name for the existing hom in
-`Prof_cat(A,B)`, so vertical identity and composition remain owned by
-`id_funcd` and `comp_catd_fapp0`. `IsoEvidence(C,x,y)` is active as nested
-Sigma data with forward/inverse projections, propositional left/right inverse
-equations, reflexivity, and symmetry.
-
-No generic computational `StrictIso` is active. Two candidate rewrite
-presentations passed focused assertions but failed decision-tree critical-pair
-audits: projection-expanding composition/functoriality conflicted with
-cancellation, while composition-folding conflicted with reflexivity, symmetry,
-Catd identities, and component projection. Do not reintroduce generic or
-Catd-specific strict-isomorphism cancellation based only on successful
-typechecking. See the redesign report's 2026-06-21 and 2026-06-22
-implementation checkpoints for the rejected and selected owners.
-
-The selected computational comparison owner is now the dedicated
-`ProfComparison(P,Q)` eliminator algebra. For every incoming
-`R : Prof(A,B)`, `prof_comparison_push` and `prof_comparison_pull` are
-judgmental inverses on their own heads. `prof_comparison_evidence` forgets to
-ordinary `IsoEvidence`. The selected arrows
-`prof_comparison_to/from` are push/pull applied to identities. Proof-time
-unification equates those identity applications with the normalized Sigma
-projections of the ordinary evidence, so the explicit bridge proofs are
-defined by `eq_refl`.
-
-Incoming-map naturality accumulates ordinary vertical composition inward:
+Its precomposition action is owned by `hom_precomp_along_*`:
 
 ```text
-push(i,r) o h -> push(i,r o h);
-pull(i,s) o h -> pull(i,s o h).
+(F[p])^*(h) = h o F[p].
 ```
 
-The opposite expansion orientation was rejected after producing twelve
-focused critical pairs. General push/pull postcomposition semantics is now a
-matter for the generic hom-action and DefIso owners, not separate
-ProfComparison helper evidence. The 2026-07-06 cleanup removed the stale
-`prof_comparison_*_selected`, `*_semantics`, `*_func`, and
-`*_to/from_evidence` compatibility layer.
-Reflexivity, symmetry, and composition compute structurally; functorial image
-is a stable certified comparison whose evidence computes through
-`iso_evidence_fmap`.
-
-This design was selected only after rejecting a profunctor-specialized variant
-whose arrows cancelled directly under `Prof_comp_transf`. That variant passed
-an imported probe but added two active critical pairs with
-`Op_prof_transf`; attempted dual closure increased the overlap set further.
-The dedicated eliminator adds no inverse-cancellation rule to shared
-equipment composition. Its inward vertical accumulation is coherent with the
-active kernel, and the completed cutover left 1,043 recognized warnings before
-the later mixed-variance implication slice documented above.
-
-`IsWeightedLimit_cov_comp(F,W,L)` is the parallel computational
-representability property. One ambient `ProfComparison` is reindexed to every
-shaped probe `M`, and `weighted_limit_cov_push/pull` act inversely on every
-incoming profunctor map. Selected universal and cone maps are direct identity
-applications of those operations rather than named kernel symbols.
-`Adjunction_hom_prof_comparison` is the atomic computational mate; its
-ordinary isomorphism view is obtained by `prof_comparison_evidence`.
-
-`right_adjoint_preserves_weighted_limit_cov_comp` is a transparent
-composition of three certified comparisons: the inverse mate through
-fixed-weight implication, the given limit comparison reindexed along the left
-adjoint, and the mate at the candidate limit. Its universality computes
-through generic push/pull beta/eta. The former unsuffixed compatibility name
-and separate `_iso` theorem were removed; use comparison evidence when an
-ordinary `IsoEvidence` proof is required.
-
-The ordinary evidence algebra now includes derived `eq_sym`/`eq_ap`, explicit
-propositional `comp_assoc`, transparent `iso_evidence_comp`, and
-`iso_evidence_fmap`. Ordinary composition associativity is an active
-proof-time unification equation, not a runtime arrow rewrite, and
-`comp_assoc` is transparent `eq_refl` evidence. The first historical
-associativity probe had both an endpoint-order error and a misleading
-performance failure. After correcting the equation, warning-enabled checking
-located the actual interaction in the generic strict-functor composition
-rule: its inferred target-object slots were written as reducible
-`fapp0(F,-)` expressions even though the two `fapp1_fapp0` arguments already
-determine them. Replacing those non-discriminating slots by `_` makes the full
-active kernel check quickly with associativity enabled. Transparent
-`Companion_prof`/`Conjoint_prof` names and the ordinary
-`IsRepresentedBy_iso`/`Representation_iso` layer are also active.
-`WeightedCone_prof(F,W)` and `IsWeightedLimit_cov_iso(F,W,L)` now expose the
-ordinary representability statement separately from the stronger
-computational comparison API, and ordinary isomorphism evidence maps through
-the active `Prof_imply_cov_func(W)`.
-
-`Hom_prof_func(J,B) : Functor(Functor_cat(J,B),Prof_cat(B,J))` was removed as
-a narrow asymmetric wrapper around the right-representable surface. The active
-representable owners are now `Unit_prof(X)` for the pure hom profunctor and
-`Prof_reindex` for endpoint variation; `Hom_prof_along(F,G)` and
-`Hom_prof(G)` are transparent readable surfaces. A future mixed-variance
-binary owner should be designed and probed separately if a concrete consumer
-needs one.
-
-No representable-specific identity or composition rules are active. Strictness
-comes from the global functor cuts. A generic `Catd_cat` specialization of the
-global composition cut remains active, now keyed directly on
-`@comp_fapp0 (@Catd_cat ...)` with the displayed base explicit where needed.
-The earlier probe's broad `hom_postcomp_func` laws and constructor-specific
-representable functor laws remain rejected.
-
-The canonical surface syntax is a presentation layer over this kernel, not a
-replacement for it. The current binder convention uses one indexed binder
-`:^n`; mixed variance is shown on the family occurrence, for example
-`A[z^-] ⊢_[z] B[z]` for `Functor_catd A B` and
-`aa[z^-] ->_[z]^R bb[z]` for `Hom_catd R aa bb`. Kernel/debug mode should
-preserve stable rewrite heads such as `homd_src_func`, `tdapp0_fapp0`,
-`fdapp1_int_hom_fapp0`, and `fdapp1_int_cell`.
-
-Current validation observed during this review:
-
-```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-make warning-summary
-```
-
-checks `emdash3_2.lp` and `emdash3_2_checks.lp`; the warning-enabled kernel
-inventory reports 1,291 warnings, split as 1,126 unjoinable critical-pair
-reports and 165 replaceable-pattern reports.
-
-### Maintenance Review 2026-06-05
-
-The current maintenance scan found the active v3.2 source coherent against its
-documentation:
-
-- `emdash3_2.lp` contains the implementation and human-readable normal-form
-  catalog; executable diagnostic assertions live in `emdash3_2_checks.lp`.
-- The main file has no active `assert` commands.
-- The section order in `emdash3_2.lp` matches the orientation snapshot above.
-- Direct bounded checks pass for both `emdash3_2.lp` and
-  `emdash3_2_checks.lp`; the full bounded `make check` path also passes.
-
-Known incomplete or intentionally deferred items are documented rather than
-left implicit:
-
-- ordinary structural functor logic has a first implementation slice
-  (`Const_func_func`, `sym_func_func`, `diag_func_func`), while displayed
-  structural logic and product/curry compatibility checks remain proposed in
-  `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`;
-- dependent products along arbitrary functors (`Pi_f`) remain proposed in
-  `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`;
-- semantic uncurry transfor action is deferred pending the higher
-  `Product_cat_func` action on transfors;
-- the whole-transfor displayed laxity interface is deferred; current rules stop
-  at component-level helpers such as `fdapp1_int_cell`;
-- the arrow action of `sigma_intro_tapp0_func` is deferred until the relevant
-  identity/fibre-transport normal forms for Sigma homs are clean;
-- deeper definition-level file splitting remains deferred until the current
-  assertion split and reorganization layout have settled.
-
-## Current v3.2 Status
-
-`emdash3_2.lp` now has:
-
-- directed Cat-valued families via `Catd_cat K` as the canonical normal form of
-  `Functor_cat K Cat_cat`;
-- strict functoriality rules for ordinary functors, oriented as
-  cut-elimination (`F[g] o F[f]` folds to `F[g o f]`);
-- ordinary binary products with the product-valued functor normal form
-  `Functor_cat X (Product_cat A B)` to
-  `Product_cat (Functor_cat X A) (Functor_cat X B)`, stable projection
-  functors `Product_projL_func`/`Product_projR_func`, and
-  projection-oriented computation for `fapp0`, `fapp1_func`, `fapp1_fapp0`,
-  `tapp0_fapp0`, and `tapp1_fapp0`;
-- pair-telescope/curry prerequisite layers:
-  `tapp1_at_transf`, `tapp1_func`, `Const_transf_func`, `Const_transf`,
-  `Product_pair_tele_func`, `hom_postcomp_tele_func`, `hom_postcomp_func`,
-  `hom_postcomp_tele_fapp1_func`, `hom_postcomp_tele_fapp1_fapp0`,
-  `hom_postcomp_fapp1_func`, `hom_postcomp_fapp1_fapp0`,
-  `hom_precomp_along_tele_func`, `hom_precomp_along_func`,
-  `hom_precomp_along_tele_fapp1_func`,
-  `hom_precomp_along_tele_fapp1_fapp0`,
-  `hom_precomp_along_fapp1_func`, `hom_precomp_along_fapp1_fapp0`,
-  `comp_cat_cov_fapp1_func`, `comp_cat_cov_transf`,
-  `comp_cat_cov_func_func_fapp1_func`, `comp_cat_cov_func_func_transf`,
-  `comp_cat_cov_func_func_tapp1_func`,
-  `comp_cat_func_func_tapp1_fapp0`, `comp_cat_con_func_func`,
-  `comp_cat_con_func_func_fapp1_func`, `comp_cat_con_func_func_transf`,
-  `comp_cat_con_fapp1_func`, and `comp_cat_con_transf`, giving
-  functor-level off-diagonal transfor components,
-  the fixed-source transfor projection layer, constant-transfor computation,
-  product pair-telescope computation, hom-owned post/precomposition action, and
-  Cat-specific component computation for post/precomposition of transfors;
-- semantic ordinary curry routing through the pair telescope:
-  `curry_func_func` is defined through
-  `comp_cat_con_func(Product_pair_tele_func)` and
-  `comp_cat_cov_func_func`; `curry_func` and `curry_fapp0_func` are
-  definitional projections, and the checked object beta law is
-  `curry(F)[x][y] = F[(x,y)]`; its checked transfor component law is
-  `curry(eta)[x][y] = eta[(x,y)]`, obtained through
-  `comp_cat_cov_func_func_transf` and `comp_cat_con_transf` rather than a
-  curry-only facade;
-- product evaluation through right-ordered `Eval_func` and `Eval_fapp1_func`,
-  fixed-object evaluation through `Eval_at_func`, and the fold
-  `Eval_func o Eval_at_func(x) = fapp0_func(x)`, with `fapp0_func(x)` now also
-  exposing its functor-level hom-action as `tapp0_func`;
-- internalized product formation through `Product_cat_func`, with the
-  fixed-right product action `G * 1_B` exposed through the stable ladder
-  `Product_cat_fapp1_func` / `Product_cat_fapp1_fapp0_functord` /
-  `Product_cat_fapp1_tapp0_func`;
-- semantic uncurry through `uncurry_func_func` and `uncurry_func`, now defined as
-  `Eval_func(B,C) o (G * 1_B)` and checked on objects and capped hom-action,
-  with `G * 1_B` routed through the `Product_cat_func` stable projection ladder
-  rather than through an independent `Product_mapL*` theory;
-- ordinary structural functor logic:
-  `Const_func_func(A,B)` is a semantic alias through `const_section_func(A,B)`;
-  `sym_func_func(A,B,C)` exposes exchange
-  `(A ⊢ (B ⊢ C)) ⊢ (B ⊢ (A ⊢ C))`; `diag_func_func(A,C)` exposes
-  contraction `(A ⊢ (A ⊢ C)) ⊢ (A ⊢ C)`. Their checked normal forms include
-  `sym(H)[b][a] = H[a][b]`, `sym(H)[b][p] = H[p][b]`,
-  `sym(H)[q][a] = H[a][q]`, `sym(eta)[b][a] = eta[a][b]`,
-  `diag(H)[a] = H[a][a]`, `diag(H)[p] = tapp1_fapp0(H[p],p)`, and
-  `diag(eta)[a] = eta[a][a]`. Product/curry compatibility and displayed
-  analogues remain deferred;
-- a first-class ordinary functor adjunction interface:
-  `Adjunction(R,L)`, with stable projections `left_adj_func`,
-  `right_adj_func`, `unit_adj_transf`, and `counit_adj_transf`, plus checked
-  left and right component-level triangle cut-elimination rules. This replaces
-  the draft v2 parameterized `adj` interface for v3.2; the v2
-  evidence-irrelevance/projection unification rules are intentionally not
-  installed unless a future focused probe shows a concrete need;
-- a first Cat-valued profunctor facade:
-  `Prof_base(A,B) = A^op × B` remains a transparent readability alias, while
-  `Prof_cat(A,B)` is the primitive public fixed-endpoint category head with
-  runtime `Obj`/`Hom_cat` projections to
-  `Catd_cat(Product_cat(Op_cat A) B)` and guarded proof-time compatibility
-  with `Catd_cat(Product_cat A0 B)` when `A = Op_cat A0`; `Prof(A,B) =
-  Obj(Prof_cat(A,B))` is the object classifier;
-  `Product_map_func(F,G)` is the stable componentwise product-map constructor;
-  `Pullback_catd(E,F)` is the stable Cat-valued pullback constructor;
-  `Prof_reindex_base_func(F,G)` is a transparent readability alias for
-  `Product_map_func(Op_func(F),G)`;
-  pulling back along `Product_map_func(F,G)` folds at both object and functor
-  level to profunctor reindexing along `Op_func(F),G`;
-  public fixed-endpoint constructor signatures now prefer `τ(Prof A B)` and
-  `ProfMap` over raw `τ(Catd(Product_cat(Op_cat A) B))` where the symbol is a
-  profunctor-facing API; `Prof_reindex(R,F,G)` and
-  `Prof_reindex_fapp1_func` expose object, full, and capped pullback action
-  along the generic product base map;
-  `Unit_prof(X)` is the primitive representable hom constructor;
-  `Hom_prof_along(F,G)` is transparent
-  `Prof_reindex(Unit_prof X,F,G)`, so its checked action goes through the
-  generic product-map/reindex ladder and the unit action, sending `(p,q,h)`
-  to `G[q] o h o F[p]` in that presentation;
-  reindexing a representable accumulates endpoint composition through generic
-  nested `Prof_reindex`;
-  `Hom_prof(G)` is a transparent identity-left specialization;
-  `Prof_transf_cat(R',F,R,G)`, `Prof_hom_cat(F,R,G)`, and
-  `Prof_hom(F,R,G)` provide the transparent shaped-cell and shaped-element
-  layer through `Functord_cat`; ordinary-transformation and curry comparisons
-  remain deferred;
-  `Prof_tensor(R,S)` is the primitive profunctor composite;
-  tensor reindexing distributes across exposed endpoints;
-  `Prof_tensor_transf`, `Prof_tensor_hom_hom`, and
-  both `Prof_tensor_hom_transf` and `Prof_tensor_transf_hom` provide the first
-  cell/element introduction layer;
-  `Prof_reindex_func`, `Prof_reindex_transf`, `Prof_id_transf`, and
-  `Prof_comp_transf` provide general equipment-cell reindexing and
-  composition;
-  named left/right co-Yoneda cells and their identity-representable beta laws
-  are active;
-  `Prof_imply_cov`, `Prof_imply_con`, and the fixed-endpoint
-  `Prof_eval_cov_map`/`Prof_lambda_cov_map` and
-  `Prof_eval_con_map`/`Prof_lambda_con_map` pairs provide the remaining
-  primitive profunctor internal-hom calculus; shaped `_hom_map` and
-  endpoint-changing `*_transf` wrappers are removed until they can be derived
-  from full co-Yoneda unit comparison;
-- `Pi_cat` as a section-category alias through `Functord_cat`;
-- Sigma categories and `Sigma_proj1_pullback_catd` for projection pullbacks;
-- the fundamental `Hom(Sigma)` characterization in the Sigma section, plus
-  `sigma_arrow` as the base-arrow/fibre-arrow constructor for total arrows;
-- Sigma-map fibre action through the neutral internal-hom projection heads:
-  `fdapp1_int_presheaf_arrow` gives the fixed-endpoint hom-action,
-  `fdapp1_int_hom_func` projects at a base arrow, `fdapp1_int_hom_fapp0`
-  gives the capped fibre arrow, and the transported-identity case folds to
-  `fdapp1_int_cell`;
-- generic base-arrow transport helpers:
-  `catd_transport_func`, `functord_transport_func`,
-  `functord_transport_lhs_func`, `functord_transport_rhs_func`, the canonical
-  total arrow `sigma_transport_arrow` defined through `sigma_arrow`,
-  `sigma_map_transport_arrow` for the action of Sigma maps on canonical total
-  arrows, and `Sigma_catd_transport_func` as the transparent action of
-  `Sigma_catd_functord_catd` on those canonical arrows;
-- internalized `Catd_cat_func`, `Pullback_catd_func`, `Pi_int_funcd`, and
-  `Pi_pullback_funcd`
-  infrastructure, including the checked arrow-action fold
-  `Catd_cat_func[F] == Pullback_catd_func F` and the semantic Pi-pullback fold
-  `Pullback_catd_func[G][Pi_int_funcd] == Pi_pullback_funcd G`;
-- derived `Catd_catd_con(K) := Catd_cat_func o Op_func(K)` classifier for
-  fibrewise displayed categories over `K`, with checked fibre and pullback
-  action laws;
-- fixed-`Z,x` path induction packages:
-  `PathInd_src_catd`, `PathInd_tgt_catd`, and `PathInd_func`;
-- outgoing-path family infrastructure:
-  `PathOut_cat`, `PathOut_cat_func`, `PathOutMotives_catd`,
-  `pathout_refl_obj`, `pathout_refl_eval_func`,
-  `pathout_refl_eval_base_func`, `pathout_motive_transport_obj`,
-  `PathOut_transport_func`, `PathIndSrc_transport_func`,
-  `PathIndTgt_transport_func`, and `pathout_refl_arrow_sec`, with
-  `pathout_refl_arrow` now constructed from the generic
-  `sigma_transport_arrow` and `pathout_refl_arrow_sec` derived from
-  `path_ind_sec` componentwise;
-- primary telescope path-induction packaging:
-  `PathInd_transfd : Transfd(PathOutReflEval_funcd, PathOutPi_funcd)`;
-- derived Sigma-total path-induction packaging:
-  `PathInd_funcd = Sigma_transfd_funcd(PathInd_transfd)`, with checked
-  fibre/component rules over `Sigma_cat Z (PathOutMotives_catd Z)`, with
-  `PathOutPi_funcd` restored as the semantic `Pi_int_funcd` pullback instance
-  folding through `Pi_pullback_funcd`, and checked source/target transports
-  defined directly as rho-evaluation and section pullback;
-- the fixed-`x` directed composition benchmark:
-  `path_comp_sec(x)[p][z](q) == q o p`;
-- `CompTarget_catd` as the semantic `hom_con` alias over `Catd_cat Z`, not as a
-  primitive stable family head.
-
-The current full check is:
-
-```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-```
-
-The local CI gate is:
-
-```bash
-make ci
-```
-
-Use it before handoff or after broad edits. For the ordinary agentic inner
-loop, prefer focused probes and `make check`; `make ci` also checks examples,
-script syntax, active-reference lint, strict check-catalog freshness, and
-compact source metrics. It also validates the project-local Codex hook and runs
-the Infinity Codex archive tests.
-
-The focused Infinity Codex gate is:
-
-```bash
-make infinity-codex-test
-```
-
-The hook archives only completed main-agent final responses under ignored
-`tmp/ai-responses/`. On resume it injects file pointers as model-visible
-developer context, not archived response text. On compaction, `SessionStart`
-does the same when Codex starts a compacted context; otherwise `PostCompact`
-records a private marker and the next `UserPromptSubmit` injects the same
-pointer context once. `PostCompact` can only emit a visible `systemMessage`;
-it cannot add model-visible `additionalContext`. Its warning therefore names
-the marker, archive index, and expected logical ID when available. Recovery
-context distinguishes the latest final for the current session from the latest
-final globally, gives `list --limit 5` / `latest-path` lookup commands, and
-lists pending post-compaction markers from other sessions. Raw responses are
-historical recovery evidence and must never outrank current code, this SOP, or
-the active task plan:
+`hom_int(F)` internalizes the represented source object; `hom_con_int(F)` is
+the target-internalized mirror. Both expose their off-diagonal actions through
+the rigid two-endpoint hom action:
 
 ```text
-active code/SOP -> active plan and side-task ledger
-                -> explicitly linked decision responses -> raw archive
+Hom_func(g,f)[h] = Hom_fapp0(g,f,h) = f o h o g.
 ```
 
-Use `python3 scripts/infinity_codex.py verify` after manual maintenance.
-If injected pointers are not apparent in the UI, inspect
-`tmp/ai-responses/INDEX.md`, run `python3 scripts/infinity_codex.py list
---limit 5`, or run `python3 scripts/infinity_codex.py latest-path`. Use
-`--session SESSION_ID` when the current session id is known. If a
-`PostCompact` warning names an expected logical ID, the response file may not
-exist until the turn stops and the `Stop` hook archives it. The event audit at
-`tmp/ai-responses/events.jsonl` records lifecycle metadata only; it does not
-store prompts or final-response text. Pruning is explicit and dry-run by
-default. Codex Memories are not part of this workflow.
+Runtime normalization preserves the postcomposition, precomposition, and
+rigid-`Hom` provenance. Opposite/identity presentations, independently
+factored pre/post cuts, and one-inactive-endpoint degenerations are related by
+narrow two-rigid-head `unif_rule`s. They are not global runtime folds.
 
-Reviewer-facing examples can be checked with:
+`Hom_tele_func`, `Hom_func`, and `Hom_fapp0` retain focused runtime identity
+and composition joins because projection can hide the literal generic
+functor-action pattern.
 
-```bash
-make examples
-```
+`DefIso(C,x,y)` is the computational isomorphism package whose inverse cuts
+cancel under the stable hom-action owner. `IsoEvidence` is its ordinary
+propositional view.
 
-The check catalog is refreshed with:
+### Sections 5–7: products, transfors, curry, and adjunctions
 
-```bash
-make catalog
-```
+The product architecture includes:
 
-`make catalog` is intentionally non-strict during exploration: it can write a
-catalog with an unclassified-check warning. `make ci` uses the strict catalog
-check and fails if any diagnostic assertion is not mapped to a reviewer-facing
-area. The generator strips nested Lambdapi block comments while preserving
-line numbers, so temporarily commented assertions are not counted as active
-checks.
+- `Product_cat`, componentwise homs, projections, pairing, and symmetry;
+- product-valued functor/transfor projection ladders;
+- `Product_cat_func` for internalized product formation;
+- `Product_map_func` for componentwise endpoint maps;
+- `Eval_func`, fixed-object evaluation, semantic curry, and semantic uncurry;
+- ordinary weakening, exchange, and contraction packages;
+- a first-class `Adjunction(R,L)` with left/right functor, unit/counit, and
+  both component-level triangle cut-elimination laws.
 
-The health/metrics report is refreshed with:
+Cat-valued horizontal action is expressed through the generic
+`comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` owner and its projection
+ladder. Remaining `comp_cat_cov_*` / `comp_cat_con_*` names are transparent
+readability or Cat-only projection surfaces where they expose transfor
+structure; they do not own a duplicate functor law.
 
-```bash
-make health
-```
+### Sections 8–10: directed Cat-valued families, Sigma/Pi, and mixed variance
 
-At the time of this report it checks:
+Active family constructors include fibre notation, pullback/reindexing,
+constant/terminal/opposite families, displayed composition, section
+categories, and internalized Pi over varying bases.
 
 ```text
-emdash3_2.lp
-emdash3_2_checks.lp
-examples/*.lp
+Pi_cat(E) = Functord_cat(Terminal_catd K,E)
+Pi_cat(Const_catd K A) = Functor_cat K A.
 ```
 
-For focused probes, use:
-
-```bash
-scripts/probe.sh tmp/probes/name.lp
-```
-
-For compact failure extraction from a watcher or probe log, use:
-
-```bash
-scripts/explain_failure.py logs/typecheck.log
-```
-
-For a warning-enabled log:
-
-```bash
-scripts/explain_failure.py --warning logs/typecheck.log
-```
-
-For a compact inventory of the current kernel warning stream while preserving
-the complete raw output:
-
-```bash
-make warning-summary
-```
-
-This writes `logs/warnings/latest.log`. It is an explicit diagnostic and is
-not part of `make check`, probes, or CI.
-
-Quiet checks suppress Lambdapi warnings with `-w`, which keeps the ordinary
-inner loop and CI output manageable. When a timeout, conversion explosion, or
-unexpected critical-pair interaction is not localized by the quiet run,
-repeat the smallest relevant check with warnings enabled:
-
-```bash
-timeout 20s lambdapi check emdash3_2.lp
-EMDASH_TYPECHECK_TIMEOUT=20s EMDASH_LAMBDAPI_WARNINGS=1 make check
-make check-warnings
-```
-
-`make check-warnings` checks only `emdash3_2.lp`, avoiding the duplicate
-warning stream produced when `emdash3_2_checks.lp` imports the kernel. Use
-`EMDASH_LAMBDAPI_WARNINGS=1 make check` when the complete two-file path is
-specifically required.
-
-All check/probe/metrics scripts accept:
+Sigma total objects are dependent pairs. A total arrow consists of a base
+arrow and a fibre arrow:
 
 ```text
-EMDASH_LAMBDAPI_WARNINGS=1
-EMDASH_LAMBDAPI_FLAGS='--debug=u'
+(p,alpha) : (x,u) -> (y,v)
+alpha : E[p](u) -> v.
 ```
 
-The first omits `-w`; the second appends explicit Lambdapi flags. Warning
-output can be large, so redirect it to a log and inspect the first warning
-near the newly added rule rather than treating every pre-existing warning as
-caused by the current change.
+`sigma_arrow` and `sigma_transport_arrow` are defined through this hom
+characterization. `sigma_map_func` uses the displayed internal-hom projection
+ladder for its fibre action; arbitrary displayed functors are lax rather than
+silently strict/cartesian.
 
-Useful focused debug flags are:
+`Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
+constructors. Pointwise formulas do not replace their required base-arrow
+actions.
+
+### Sections 11–17: representables, dependent hom, and displayed action
+
+The dependent-hom architecture is shared by Sigma homs, fibre transport, and
+section action. Important owners are:
 
 ```text
-u  unification                 c  conversion
-q  rewriting                   w  weak-head normalization
-s  subject reduction           k  local confluence
-d  decision-tree compilation   i  typing
+Rep_catd
+Edge_catd_func / HomPresheaf_catd_func
+homd_ / homd_int
+homd_src_func / homd_src_sec / homd_tgt_func
+fib_cov_int / fib_cov_transf
+tdapp1_int_func_transfd / fdapp1_int_transfd
+fdapp1_int_* / tdapp1_int_*
 ```
 
-Enable only the smallest relevant subset. `--record-time` reports phase
-timings, and `--too-long=SECONDS` reports commands crossing a duration
-threshold without interrupting them. `--no-sr-check` is not valid for
-promoted code or validation.
+The Sigma-map fibre projection ladder ends at:
 
-For normalized, type-aware discovery, use:
-
-```bash
-scripts/lambdapi_search.sh 'name = hom_int'
-scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
+```text
+fdapp1_int_hom_fapp0(FF,p,u,alpha)
 ```
 
-The wrapper keeps an ignored explicit database in `.cache/`. Search uses
-`with` for conjunction, `|` for disjunction, and `in` for path filtering.
-It supplements `rg`; it does not replace lexical source inspection.
+with the transported-identity specialization:
 
-Decision trees can be emitted as DOT or rendered through the installed
-Graphviz tool:
-
-```bash
-scripts/decision_tree.sh fapp1_func > /tmp/fapp1.gv
-scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func
+```text
+fdapp1_int_hom_fapp0(FF,p,u,id) -> fdapp1_int_cell(FF,p,u).
 ```
 
-The wrapper uses `--no-warnings` so the existing warning stream cannot corrupt
-DOT output.
+This is the component-level displayed laxity normal form. A whole-transfor
+laxity interface remains deferred.
 
-Accumulated checker and probe logs are cleaned only on explicit request:
+Section 17 contains generic Sigma/Pi introduction/evaluation, constant
+sections, ordinary structural logic, generic functor hom-action, section
+pullback, and internal Pi action.
 
-```bash
-make prune-logs
-EMDASH_LOG_KEEP_DAYS=7 make prune-logs
+### Section 18: Cat-valued profunctors and computational comparison
+
+`Prof_cat(A,B)` is the primitive fixed-endpoint category of Cat-valued
+profunctors on `A^op × B`; `Prof(A,B)` is its object classifier and `ProfMap`
+is its fixed-endpoint vertical hom.
+
+Active infrastructure includes:
+
+- primitive `Unit_prof(A)` with direct rigid `Hom_*` base action;
+- `Prof_reindex` through `Product_map_func(Op_func(F),G)`;
+- readable representables `Hom_prof_along`, `Hom_prof`, `Companion_prof`, and
+  `Conjoint_prof`;
+- shaped cells/elements and internalized reindexing;
+- primitive profunctor tensor and fixed-endpoint co-Yoneda maps;
+- covariant and contravariant profunctor implication;
+- fixed-endpoint eval/lambda inverse pairs;
+- weighted cone/limit comparison and the dual weighted-colimit presentation;
+- adjunction mate comparison and preservation of weighted limits/colimits;
+- primitive directed join and its internally natural cross cell.
+
+`ProfComparison(P,Q)` is a transparent compatibility name for
+`DefIso(Prof_cat(A,B),P,Q)`. Its push/pull and evidence APIs route through the
+generic `DefIso` and hom-action owners; it is not an independent eliminator
+theory.
+
+`Prof_tensor` and implication objects are symbolic primitives where the
+current kernel lacks a general coend/coinserter quotient. Their checked beta,
+reindexing, and closed-core interfaces state the active computational scope.
+
+### Section 19: PathOut, path induction, and Eckmann–Hilton
+
+For fixed `x : Z`:
+
+```text
+PathOut_Z(x) = Sigma (y : Z), Hom_Z(x,y).
 ```
 
-This maintenance command is deliberately absent from the development and CI
-paths.
+The canonical arrow from `(x,id_x)` to `(y,p)` is the generic Sigma transport
+arrow for the representable family. The primary path-induction package is the
+telescope theorem `PathInd_transfd(Z)`; `PathInd_funcd(Z)` is derived by
+`Sigma_transfd_funcd`.
 
-The old v3.1 baseline and obsolete v2 baseline are no longer part of the
-ordinary check path.
+The transitivity benchmark computes to ordinary composition. Nested telescope
+terms stress the mixed-variance surface.
 
-## Before Editing `emdash3_2.lp`
+The first Eckmann–Hilton slice defines 2-endomorphisms of an identity 1-cell,
+vertical and represented horizontal composition, the common-middle
+equalities, and commutativity `EH_comm`.
 
-Treat the file as a kernel specification, not as a surface-language document.
-Mathematical comments should explain the intended categorical operation, but
-rewrite rules should stay close to the stable heads that Lambdapi actually
-matches.
+## Core Ownership Invariants
 
-Before proposing or implementing a nontrivial change, check these points:
+### Runtime computation versus proof-time comparison
 
-1. Identify the semantic owner of the operation.
+A rewrite rule selects a runtime normal form and participates in critical
+pairs. A `unif_rule` helps elaboration/proof construction when neither side is
+chosen as the runtime normal form.
 
-   Do not add a parallel helper if an internalized functor or transfor already
-   owns the action. Prefer a projection rule or a defined alias through the
-   owner. Examples: `Product_cat_func` owns product functoriality,
-   `homd_int` owns dependent-hom projections, and `fdapp1_int_presheaf_arrow`
-   owns the fixed-endpoint Sigma-map hom-action.
+Use:
 
-   Ordinary identity, composition, and naturality are owned only by the global
-   `fapp*`/`tapp*` calculus. A constructor-specific rule whose sole content is
-   `special_action(id) = id`, preservation of composition, or an ordinary
-   naturality square is an architectural warning: the operation is missing a
-   more-internalized `Functor`/`Transf` owner, or its readable action head has
-   been detached from that owner. Add/expose the owner and route the readable
-   name through its projection. Do not repair the detachment with another
-   local functoriality rule. This does not prohibit beta/eta cancellation or
-   Došen-style cuts for universal structure such as eval/lambda.
-
-   Hom-action accumulation is one important Došen-style case. The preferred
-   runtime orientation is the stable-head one, where the hom-action owner is
-   already visible. Examples of the intended stable computation are:
-
-   ```text
-   (F(q o p))_*(g)       -> (F q)_*((F p)_*(g))
-   (F(q o p))^*(g)       -> (F p)^*((F q)^*(g))
-   ```
-
-   Raw expanded compositions such as `F[q] o ((F[p])_*(g))` should normally
-   remain raw `comp_fapp0` terms at runtime. Their compatibility with stable
-   hom-action syntax is proof-time evidence supplied by the existing
-   `hom_postcomp_fapp0` / `hom_precomp_along_fapp0` unification bridges, and by
-   ordinary `comp_fapp0` associativity unification when needed. Validate such
-   comparisons with typed `eq_refl` probes. Add a runtime raw bridge only for a
-   concrete consumer after owning-position and warning-enabled probes.
-
-2. Decide whether the new computation needs a stable head.
-
-   Add primitive/stable heads only when a focused probe shows a real
-   discrimination or performance boundary. If the problem is only a missing
-   projection, add the smaller projection instead of introducing a new semantic
-   layer.
-
-3. Keep rule left-hand sides minimal.
-
-   Inferred source/target categories and endpoint-family slots should usually
-   be `_`. Spell them out only when that slot is the actual discriminator.
-   Reducible terms such as `fapp0 F x`, `comp_cat_fapp0 F G`,
-   `Functor_catd ...`, `HomPresheaf_catd_func ...`, `Homd_target_catd ...`,
-   or `Op_cat (Hom_cat ...)` are common causes of brittle rules.
-
-   This requirement is operational, not only stylistic. The ordinary
-   associativity unification equation exposed a generic strict-functor
-   composition rule whose target endpoints were explicitly written as
-   `fapp0 F X`, `fapp0 F Y`, and `fapp0 F Z`. Those slots were not
-   discriminators; replacing them by `_` removed the unification explosion
-   while preserving the same cut-elimination rule.
-
-4. Avoid unowned commuting conversions.
-
-   A rule whose LHS has the shape:
-
-   ```text
-   outer eliminator (inner rewrite-active cut ...)
-   ```
-
-   gives the kernel competing reduction orders. Typical risky examples are:
-
-   ```text
-   sigma_Fst(comp_fapp0(...))
-   sigma_Snd(fapp0(specialized_func,...))
-   ```
-
-   These are not ordinary beta rules. The outer projection can fire first, or
-   the inner composition/application can reduce first through identities,
-   strict functoriality, naturality, or a constructor-specific rule. The
-   resulting critical pair is often exactly the semantic law the proposed
-   rule was trying to install.
-
-   Constructor beta rules remain normal:
-
-   ```text
-   sigma_Fst(Struct_sigma x u) -> x.
-   ```
-
-   A documented core projection ladder may also use a nested pattern when it
-   has one canonical semantic owner, for example the generic projection of a
-   product-valued functor application. Do not add a second specialized ladder
-   that competes with it.
-
-   Prefer, in order:
-
-   ```text
-   an existing generic projection ladder;
-   a constructor beta rule;
-   a stable intermediate projection/component head;
-   a functor-composition or naturality equation at the semantic owner;
-   propositional evidence when judgmental reduction is not required.
-   ```
-
-   A new commuting conversion is exceptional. It requires a concrete
-   downstream consumer, focused assertions for both reduction orders, a
-   temporary full-file probe with the rule at its owning declaration position,
-   and a warning-enabled comparison against the baseline. Typechecking the
-   intended normal-form assertion alone is insufficient.
-
-5. Use canonical endpoint forms in assertions and symbol types.
-
-   Prefer `Hom_cat ...` and `Functord_cat ...` when conversion search matters.
-   Readability wrappers such as `Fibre_cat (DefinedAlias ...) k` are useful in
-   prose but can make nested `fapp0` assertions harder for Lambdapi.
-
-6. Preserve omega-friendly functor-level structure.
-
-   Prefer functor-level folds over capped pointwise rewrites when the result
-   must support another hom-action. A RHS that immediately computes one cell
-   may lose the functor object needed for higher-dimensional iteration.
-
-7. Do not stop at pointwise formulas for varying variables.
-
-   A formula such as `A[x] = ...` is only the object law of a would-be
-   functorial family when `x` varies in a category. Likewise, a pointwise
-   formula such as `eta[x] = ...` is only the component law of a natural
-   transformation until its naturality/hom-action is accounted for. Before
-   turning such a sketch into a constructor, stable head, or rewrite rule,
-   identify the arrow action for `p : x -> y`, for example `F[p]` for a functor
-   or `eta[p]` / `tapp1_func eta` for a transfor, and any higher/family-argument
-   action the surrounding API will need. Capped projections such as
-   `fapp1_fapp0`/`tapp1_fapp0`, or constructor-specific action helpers, may be
-   the practical probe surface, but they do not replace the full arrow-action
-   obligation. If the arrow action is not yet available, document the formula as
-   a pointwise sketch and do not let it masquerade as the full definition.
-
-   Validation should keep these probes separate:
-
-   ```text
-   object law
-   base-arrow action law
-   transfor naturality / hom-action law, when relevant
-   action on family morphisms / transfors, when relevant
-   ```
-
-   A rule that works pointwise can still have the wrong variance, endpoints,
-   or performance behavior at arrow-action or naturality level.
-
-8. Use hom-indexed family owners for functor-shaped endpoints.
-
-   When a formula contains `Hom_A(W,F[-])`, `Hom_A(F[-],W)`, or the displayed
-   analogue, prefer the classifier that takes the functor/displayed functor as
-   an argument: `hom_int`, `hom_con`, or `homd_int(FF)`. Do not first encode the
-   same idea as a raw `comp_cat*` pipeline unless the comparison with that raw
-   pipeline is the theorem being studied. This keeps post/precomposition
-   actions under a semantic owner and avoids an extra explicit cut before
-   cut-elimination can fire.
-
-9. Probe before committing rules.
-
-   Use a temporary copy plus a focused assertion for the intended normal form.
-   A rule that typechecks but fails or times out on the assertion is not ready
-   for the active file.
-
-10. Document failed orientations when they affect the design.
-
-   If a tempting rule is rejected because it creates conversion blowups,
-   circularity, or misleading ownership, record that in this SOP report or the
-   relevant implementation report. Do not leave the lesson only in a local
-   comment near a later symbol.
-
-## SOP: Rewrite And Conversion Hygiene
-
-Probe before committing nontrivial rewrite changes:
-
-```bash
-mkdir -p tmp/probes
-cp emdash3_2.lp tmp/probes/rule_probe.lp
-scripts/probe.sh tmp/probes/rule_probe.lp
+```text
+assert t ≡ u
 ```
 
-Add a focused assertion exercising the intended normal form. A rule that
-typechecks but does not prove the assertion, or times out on it, is not ready.
-An append-only probe against the imported active module is not a complete
-critical-pair audit: it may not expose interactions with rules that occur
-later than the rule's intended declaration position. Before promotion, place
-the candidate at its owning position in a temporary full copy, or validate it
-in place, and run the warning-enabled owning-module check. The 2026-06-22
-`Struct_sigma` audit found two such later-rule interactions that an appended
-probe did not report.
-
-Separate runtime conversion from proof-time unification. A rewrite rule
-chooses a computational normal form and participates in critical pairs. A
-`unif_rule` only helps solve an otherwise stuck elaboration/unification
-problem. A proof-time variant can be a useful diagnostic, but a smaller warning
-inventory is not by itself a reason to demote a semantically intended rewrite
-rule. Validate the latter with a typed reflexive proof:
+for runtime conversion, and a typed reflexive equality:
 
 ```text
 eq_refl(t) : τ(t = u)
 ```
 
-An assertion `t ≡ u` asks for conversion and does not exercise a unification
-rule. Unification rules are experimental and not automatically transitive.
-Prefer rules between two rigid heads, or use a stable intermediary; a generic
-bare-variable eta pattern may typecheck as a rule but fail to solve the
-intended goal. A `constant` cannot head a rewrite LHS. Reclassifying one as
-`injective` is a global normal-form migration and requires downstream
-subject-reduction and warning audits, not just a focused beta assertion.
+to exercise a proof-time unification comparison. Do not infer runtime
+joinability from a successful typed `eq_refl` probe.
 
-Apply the inferred-slot hygiene discipline to unification rules on both sides
-of the comparison.  If a source/target/category endpoint is reconstructible and
-is not the intended discriminator, prefer `_` after a focused probe confirms the
-rule still checks.  Keep explicit compound expressions only when they are real
-guards or measured subject-reduction aids, and document that reason just as for
-rewrite-rule LHS exceptions.  Do not use a verbose `unif_rule` side as hidden
-scaffolding for a missing runtime owner; if a comparison is meant to expose a
-computational projection ladder, probe a rewrite at the owning head instead.
+### One generic owner for ordinary laws
 
-Do not treat a failed bare `assert t ≡ u` as decisive when the real consumer
-has an expected type that forces a canonical presentation. Lambdapi infers the
-two sides of a bare conversion assertion independently; with transparent
-aliases, opposite categories, or `Catd_cat`/`Cat_cat` presentation changes,
-the inferred types may stop at shapes such as:
+The global `fapp*`/`tapp*` calculus is the sole owner of ordinary identity,
+composition, functoriality, and naturality. A constructor-specific rule whose
+only content is one of those laws indicates a missing internalized
+functor/transfor owner or a detached projection.
 
-```text
-Hom(Op_cat B, z, F[w])
-Hom(B, F[w], z)
-```
+A specialized projection-order bridge is exceptional but legitimate when:
 
-even though a surrounding declaration would force both sides through the same
-canonical hom type. In such cases, add a focused probe in the real consumer
-shape: first check the raw term at the intended type `T`, or bind it by a
-temporary/helper symbol with result type `T`, then validate conversion and/or
-typed reflexivity against that typed term. This is not a weaker test; it
-models the expected type that actual application code supplies. Keep a bare
-`assert t ≡ u` only when both sides should elaborate and normalize without
-external expected-type information.
+1. a stable projection erases the literal generic-owner pattern;
+2. an outer generic cut competes with that projection;
+3. the two paths do not already join;
+4. a focused owner-position probe establishes one canonical orientation.
 
-Similarly, a generic identity rule headed by `@id C x` does not automatically
-cover already-normalized identity heads. If `@id Cat_cat A` reduces to
-`id_func A`, or `@id (Catd_cat K) E` reduces to `id_funcd K E`, then a
-consumer whose normal form contains `id_func`/`id_funcd` may need sibling
-rules at those heads. Prefer a coherent small package:
+Never install both orientations or generate such bridges mechanically.
+
+### Hom variance and Došen cuts
+
+When a term is already expressed through a stable hom-action owner, keep
+associativity/cut elimination under that owner:
 
 ```text
-generic @id case
-Cat_cat / id_func normal-form case
-Catd_cat / id_funcd normal-form case
+(F(q o p))_*(g) -> (F q)_*((F p)_*(g))
+(F(q o p))^*(g) -> (F p)^*((F q)^*(g)).
 ```
 
-rather than assuming the generic rule subsumes the normal-form cases.
+Raw expanded compositions should normally remain `comp_fapp0` terms. Use the
+existing proof-time bridges when a theorem compares them with stable hom-action
+syntax. Add a raw runtime bridge only for a concrete consumer after testing
+owner-first and projection-first reductions.
 
-If the quiet probe/check times out without a useful location, rerun the same
-small target with warnings enabled before concluding that the newly added rule
-is inherently too broad:
+### Omega-friendly structure
 
-```bash
-EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_PROBE_TIMEOUT=20s \
-  scripts/probe.sh tmp/probes/rule_probe.lp
-```
+Prefer functor-level folds over capped object rules when later hom action is
+needed. A RHS that computes one selected cell can lose the functor object
+required for the next dimension.
 
-Warnings can expose the existing rule whose overconstrained LHS interacts with
-the new equation. Inspect whether compound terms occur in inferred,
-non-discriminating argument positions before weakening or rejecting the new
-semantic rule.
+A formula `E[x] = ...` is only the object part of a directed family. A formula
+`eta[x] = ...` is only a transfor component. Identify the base-arrow action and
+off-diagonal/naturality action or explicitly record them as deferred.
 
-The repository provides an advisory whole-file scan:
+## Before Editing The Kernel
+
+1. Identify the semantic owner and whether the desired result is runtime or
+   proof-time.
+2. Search current declarations, rules, checks, examples, and the relevant plan
+   with `rg`.
+3. Decide whether a missing projection, transparent alias, or canonical
+   endpoint fixes the problem before introducing a stable head.
+4. Write the mathematical formula and the intended normal form.
+5. Probe the candidate in a temporary full-file copy at its owning position.
+6. Add a focused conversion assertion or typed `eq_refl` consumer.
+7. Run a bounded quiet check; enable warnings when interactions are unclear.
+8. Promote the smallest working change and add a durable diagnostic/example.
+9. Update the task report when the architecture or a rejected orientation
+   matters beyond the local rule.
+
+## Rewrite And LHS Hygiene
+
+### Minimal inferred slots
+
+Keep reconstructible source/target/category/family arguments as `_` on rule
+LHSs unless they are:
+
+- the actual constructor discriminator;
+- a composition-interface guard;
+- required for subject reduction;
+- a measured decision-tree/performance guard.
+
+Compound reducible inferred terms such as `fapp0 F x`, `Functor_catd ...`,
+`Op_cat(Hom_cat ...)`, or transparent readability aliases can cause brittle
+matching and conversion explosions.
+
+Audit candidates with:
 
 ```bash
 python3 scripts/audit_rule_lhs.py --show-kept
 make audit-rules
 ```
 
-The initial 2026-06-21 heuristic scan reported 87 reconstructible compound
-slots across 59 rule clauses. A clause-by-clause review of all 428 rewrite
-clauses then replaced 81 non-discriminating slots by `_`. The strict scan now
-has zero unreviewed candidates and six locally annotated slots across five
-intentional clauses:
-
-- two dependent-pair endpoint patterns used for decomposition;
-- one terminal-source constant-family semantic discriminator;
-- one `pi_eval_transf` source-family decision-tree guard;
-- the two coupled source/family guards on the `path_ind_sec` component rule.
-
-The last three guards were tested rather than assumed. Removing the
-`pi_eval_transf` family or either half of the `path_ind_sec` guard causes a
-bounded check timeout or a subject-reduction failure. Keep such exceptions
-explicit and annotate them immediately above the rule:
+Do not apply the scanner mechanically. Probe each `_` replacement. Mark a
+measured exception immediately above the rule:
 
 ```text
-// lhs-audit: keep 1,3 -- measured subject-reduction and performance guard
+// lhs-audit: keep SLOT[,SLOT] -- reason
 ```
 
-As a secondary diagnostic, a warning-enabled kernel check still succeeds and
-the existing `Unjoinable critical pair` warning count fell from 1,142 before
-this cleanup to 983 afterward. This is not a confluence proof, but it confirms
-that the removed indices had been creating avoidable overlap pressure.
+### Outer eliminators over active cuts
 
-The scanner is intentionally heuristic: it models the inferred slots of the
-generic application, transfor, and composition heads where this mistake is
-most likely. The manual pass also reviews specialized stable-head and
-cancellation rules; their nested compounds are semantic patterns rather than
-generic inferred indices. Vertical formatting improves readability, but the
-scanner parses balanced applications and does not depend on alignment.
-
-The scanner does not decide whether an outer eliminator is commuting across an
-inner rewrite-active cut. A clean `make audit-rules` result therefore does not
-justify rules such as `sigma_Fst(comp_fapp0(...))`. Review these patterns
-separately, identify the outer-first and inner-first reductions, and use the
-warning-enabled owning-position probe described above.
-
-`make audit-rules` runs the scanner with `--strict`, and `make ci` includes the
-same gate. Do not mechanically rewrite a candidate. Verify that variables
-remain bound by a stable data head, probe the `_` replacement, compare
-warning behavior when relevant, and run the bounded full check. If the
-compound is necessary, add a local `lhs-audit` annotation with the measured
-reason.
-
-Keep inferred source/target arguments implicit in rule LHSs unless they are the
-real discriminator. The useful discriminator is usually the explicit data head:
-for example `Op_funcd`, `comp_catd_fapp0`, `homd_int`, or `tapp0_fapp0`, not
-the reducible endpoint categories around it.
-
-The same rule applies at rewrite-family scale. Identify the true discriminee
-before copying a surface pattern across sibling heads. If the mathematical
-case split is triggered by a stable constructor argument such as
-`Op_func(_,_,F)`, do not also require surrounding presentation wrappers such
-as `Op_cat A`, `Op_cat B`, transparent aliases, or endpoint normal forms unless
-those wrappers are themselves part of the theorem. The 2026-06-28
-`hom_postcomp_*` audit replaced rules of the form
+Treat an LHS such as:
 
 ```text
-hom_postcomp_*(Op_cat B, Op_cat A, Op_func(A,B,F), ...)
+sigma_Fst(comp_fapp0(...))
+sigma_Snd(fapp0(specialized_func,...))
 ```
 
-by the more canonical family
+as a high-risk commuting conversion. The outer projection and inner cut can
+reduce in competing orders. Prefer:
+
+1. an existing generic projection ladder;
+2. a constructor beta rule;
+3. a stable intermediate component;
+4. an equation at the functor/transfor owner;
+5. propositional evidence when judgmental computation is unnecessary.
+
+A new commuting conversion requires a concrete consumer, focused checks for
+both paths, an owner-position full-file probe, and warning classification.
+
+### Canonical types and expected-type probes
+
+Prefer reduced declared types and canonical endpoints:
 
 ```text
-hom_postcomp_*(B, A, Op_func(_,_,F), ...)
-  -> hom_precomp_along_*(Op_cat A, Op_cat B, F, ...)
-```
-
-after probing both the visible-opposite surface form and the double-op
-normal-form case under typed canonical contexts.
-
-This matters especially when the endpoint category may be a functor category
-into a product. Under the current product architecture,
-`Functor_cat X (Product_cat A B)` rewrites to
-`Product_cat (Functor_cat X A) (Functor_cat X B)`. A rule LHS such as
-`tapp0_fapp0 (Functor_cat X Y) ... (stable_head ...)` may work for variable
-`Y` but fail when `Y` is `Product_cat A B`. Prefer
-`tapp0_fapp0 _ _ _ _ ... (stable_head ...)` when the stable head is the real
-discriminator.
-
-When an explicit source/target category slot is needed in an assertion or rule,
-prefer canonical normal forms:
-
-```text
+τ(Functord E D)
 Hom_cat Z x y
-Functord_cat Z (Rep_catd Z y) (Rep_catd Z x)
+Functord_cat E D
 ```
 
-over reducible readability wrappers:
+Use unreduced types only when the exact projection route is intentional and
+document why.
+
+A bare `assert t ≡ u` lets Lambdapi infer both sides independently. When a real
+consumer supplies an expected type, test that typed shape explicitly before
+concluding that conversion fails.
+
+### Constants and unification limits
+
+A `constant` cannot head a rewrite LHS. Changing it to `injective` is a global
+normal-form migration requiring full downstream, subject-reduction, warning,
+and decision-tree review.
+
+Unification rules are experimental and not reliably transitive. Prefer two
+rigid heads or a stable intermediary. Apply inferred-slot hygiene to both sides
+of a `unif_rule`.
+
+## Identity Normal Forms
+
+Identity may appear as `@id`, `id_func`, `id_funcd`, or a specialized projected
+identity. A rule for the generic surface does not automatically match every
+already-normalized presentation.
+
+Prefer narrow typed consumer rules or a coherent small specialization package
+over broad global identity rewrites. The current middle-constrained generic
+composition identity rules keep the shared middle object as the true cut
+interface while inferring outer endpoints. Competing runtime identity
+spellings are joined through the typed pre/post proof-time bridge; that
+proof-time joinability is the selected criterion for this measured overlap.
+
+## Comment And Layout SOP
+
+Put a brief comment immediately above most semantic symbols and nontrivial
+rule families:
+
+- public constructor: mathematical name/formula and primitive/defined status;
+- stable head: projection formula and generic owner;
+- transparent alias: explicitly label it an alias/view;
+- rewrite: label beta, projection, cut, accumulation, or confluence join;
+- unification: state that it is proof-time only;
+- evidence symbol: state the proposition witnessed.
+
+One comment may cover a cohesive `rule ... with ...` command.
+
+Use compact horizontal layout for simple stable-head rules. Keep vertical
+layout for nested endpoint formulas, deliberate explicit guards, and
+diagnostic assertions that expose canonical endpoints.
+
+Do not duplicate a semantic body in a readability helper. Route aliases
+through the named semantic constructor.
+
+## Development And Validation Workflow
+
+### Bounded checks
+
+```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
+timeout 20s lambdapi check emdash3_2.lp
+make check-warnings
+```
+
+If a quiet check times out or hides the interaction, rerun the smallest target
+with warnings enabled before changing the architecture.
+
+### Focused probes
+
+```bash
+scripts/probe.sh tmp/probes/name.lp
+scripts/explain_failure.py logs/probes/name.log
+```
+
+Ordinary experiments belong under ignored `tmp/probes/`. Move durable
+reviewer-facing computations to `examples/`.
+
+### Warning and decision-tree diagnosis
+
+```bash
+make warning-summary
+scripts/explain_failure.py --warning logs/warnings/latest.log
+scripts/decision_tree.sh SYMBOL
+scripts/decision_tree.sh --png /tmp/tree.png SYMBOL
+```
+
+Use the smallest Lambdapi debug flag set: `u` unification, `c` conversion, `q`
+rewriting, `w` weak-head normalization, `s` subject reduction, `k` local
+confluence, `d` decision-tree compilation, and `i` typing. Never use
+`--no-sr-check` for promoted code.
+
+### Catalog, examples, CI, and health
+
+```bash
+make examples
+make catalog
+make ci
+make health
+```
+
+`make catalog` can be non-strict during exploration; `make ci` requires a fresh
+catalog and zero unclassified checks. Run `make health` after meaningful
+architecture/check changes.
+
+### Type-aware search
+
+Use `rg` for ordinary discovery and:
+
+```bash
+scripts/lambdapi_search.sh 'name = hom_int'
+scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
+```
+
+for normalization/type-aware search.
+
+## Current Deferred Boundaries
+
+The following remain explicit future work rather than hidden assumptions:
+
+- full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F`, including the
+  planned `Pi_f`/comma-category infrastructure;
+- displayed structural logic and remaining product/curry compatibility;
+- semantic uncurry action on arbitrary transfors;
+- whole-transfor displayed laxity beyond `fdapp1_int_cell`;
+- the arrow action of `sigma_intro_tapp0_func`;
+- a fully internalized general coend/coinserter semantics for profunctor tensor;
+- general tensor associativity/coherence and complete co-Yoneda equivalences;
+- dependent elimination and semantic collage construction for primitive join;
+- specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
+  demand;
+- complete computational univalence/coherence APIs beyond the active staging
+  capabilities;
+- general higher-inductive categories and pushouts;
+- a finalized parser/surface language;
+- module splitting of the single kernel file after comment/section boundaries
+  stabilize.
+
+Consult `INDEX.md` for the active plan owning a deferred item. Do not copy a
+constructor-local law from an older plan without first rechecking the current
+generic owner.
+
+## Retirement And Recovery Policy
+
+The v3.1 and v2 baselines are retired from normal checking and design work.
+Their surviving lessons are represented in the active source, this SOP,
+Foundations, canonical syntax, current plans, and the v2 retirement audit.
+
+Infinity Codex response archives under `tmp/ai-responses/` are recovery
+evidence only. Authority remains:
 
 ```text
-Fibre_cat (CompTarget_catd Z x) y
+active code/SOP -> active plan and side-task ledger
+                -> explicitly linked decision responses -> raw archive.
 ```
 
-The wrapper may compute in isolation, but nested explicit slots can make
-conversion search brittle.
-
-Prefer semantic definitions before adding new primitive stable heads. If a
-semantic definition fails to compute, first check:
-
-- whether a corresponding capped projection rule is missing, such as
-  `fapp1_fapp0 (Op_func F)` when `fapp1_func (Op_func F)` already exists;
-- whether explicit arguments force a reducible or non-canonical form;
-- whether a helper alias duplicates a semantic body instead of routing through
-  the named semantic constructor.
-
-Do not duplicate semantic bodies in helper aliases. If a construction has a
-named semantic constructor, readable helpers should call that constructor. The
-`CompTarget_catd` cleanup is the model:
-
-```text
-CompTarget_catd Z x
-  := hom_con (Catd_cat Z) (Rep_catd Z x) (Op_cat Z) (Rep_catd_func Z)
-
-CompTarget_fapp1_func p
-  := fapp1_fapp0 (CompTarget_catd Z x) p
-```
-
-No separate `CompTarget_fapp1_func_func` alias is needed; full hom-action is the
-ordinary `fapp1_func (CompTarget_catd Z x)`.
-
-Do not install an independent stable-head theory for an action already owned by
-an internalized functor. A helper may be useful as notation, but it should be a
-definition or projection of the owning constructor's action. The product
-reassessment is the model:
-
-```text
-Product_cat_func[A][B] = Product_cat A B
-
-fapp1_func Product_cat_func A A'
-  -> Product_cat_fapp1_func(A,A')
-
-fapp1_fapp0 Product_cat_func A A' G
-  -> Product_cat_fapp1_fapp0_functord(A,A',G)
-
-G * 1_B
-  := Product_cat_fapp1_tapp0_func(A,A',B,G)
-
-G |-> G * 1_B
-  := Product_mapL_func_func(A,A',B)
-   = tapp0_func(B) o Product_cat_fapp1_func(A,A')
-```
-
-If a helper is retained for a projection from an internalized functor, it should
-be an adjacent stable projection rung, not a raw nested chain. The product
-reassessment is the model: `Product_cat_fapp1_tapp0_func` owns object and
-capped-arrow computation for `G * 1_B`; `Product_mapL_func_func` remains a
-defined functorial readability package; the former `Product_mapL_transf` stable
-bridge has been removed.
-
-### Cat-Specialized Semantic Head SOP
-
-Cat-specialized semantic heads package extra structure exposed only when the
-ambient category is `Cat_cat`.
-
-The generic owner may already express the Cat case as an arrow in a hom
-category. For example, a generic `hom_postcomp_*` or
-`hom_precomp_along_*` head can specialize to `Cat_cat`. The reason to keep a
-separate Cat-specialized head is that the specialized result is then known to be
-a transfor, so additional projections become meaningful:
-
-```text
-tapp0_fapp0(...)
-tapp1_func(...)
-tapp1_fapp0(...)
-```
-
-Do not add a Cat-specialized head merely to rename a generic construction. Add
-or keep it when it gives a stable projection ladder, packages Cat-only transfor
-structure, or avoids long brittle Cat-specialized LHS patterns. When a generic
-owner and a Cat-specialized head coexist, document the orientation and add
-focused diagnostics for the overlap/join. The current model is the
-postcomposition ladder:
-
-```text
-hom_postcomp_fapp1_fapp0(Cat,Cat,E,...)
-  -> comp_cat_cov_transf(...)
-
-hom_postcomp_tele_fapp1_fapp0(Cat,Cat,E,...,alpha)
-  -> comp_cat_cov_func_func_transf(..., E[alpha])
-```
-
-### Readability Cleanup SOP
-
-Readability cleanup is useful, but it should not erase the information that
-Lambdapi needs for rule discrimination and subject reduction. Treat the file as
-having four different surfaces:
-
-1. **Rule LHSs.** Keep these conservative. The stable discriminator should be
-   explicit, and inferred source/target arguments should remain implicit unless
-   they are the discriminator. Avoid compound reducible endpoint expressions in
-   implicit slots.
-
-2. **Rule RHSs and defined-symbol bodies.** These may be cleaned by omitting
-   redundant implicit arguments, but only after a probe confirms type
-   preservation. Do not hide parameters that are not syntactically recoverable
-   from the visible arguments. For example, `Product_cat_fapp1_tapp0_func`
-   usually needs its fixed-right factor visible as
-   `Product_cat_fapp1_tapp0_func A A' B G`; `G` alone does not determine `B`.
-
-3. **Theorem-style assertions.** Prefer the mathematical formula when Lambdapi
-   can infer it. For products, projectionwise assertions are often clearer and
-   more robust than equality of raw `Struct_sigma` constructors:
-
-   ```text
-   sigma_Fst ((G * 1_B)[(x,y)]) = G[x]
-   sigma_Snd ((G * 1_B)[(x,y)]) = y
-   ```
-
-   This avoids forcing Lambdapi to infer the dependent family argument of
-   `Struct_sigma`.
-
-4. **Diagnostic assertions.** These may remain explicit. This is especially
-   appropriate for full `fapp1_func` and capped `fapp1_fapp0` assertions,
-   product-valued hom-actions, and regression checks whose purpose is to expose
-   canonical endpoints. In those cases compact formulas can make Lambdapi
-   reconstruct endpoints through large `sigma_Fst`/`sigma_Snd` terms and fail
-   with misleading conversion goals.
-
-The Product/Eval cleanup probe is the current model. Object-level formulas such
-as `Eval_func(A,B)[(F,x)] = F[x]` can be compact. Full hom-action checks such
-as `fapp1_func Eval_func (F,x) (G,y)` should keep canonical source/target
-categories explicit, because the assertion is a projection/regression witness,
-not just a user-facing mathematical formula.
-
-### Layout And Vertical Formatting SOP
-
-Most one-argument-per-line rule blocks are a debugging convenience, not a
-Lambdapi requirement. They are useful while diagnosing hidden arity,
-stable-head discriminators, and failing conversion goals, because they make the
-argument spine visible. After a construction has stabilized, prefer mostly
-horizontal presentation for simple rules.
-
-Prefer compact/horizontal layout for:
-
-- rewrite rules whose left-hand side is just a stable head plus variables;
-- identity/specialization folds;
-- short projection rules where the discriminator is obvious;
-- short symbol declarations whose type is not a nested endpoint formula.
-
-Keep vertical layout for:
-
-- nested `Hom_cat`, `Functor_cat`, `Fibre_cat`, `Sigma_cat`, `Product_cat`, or
-  `Functor_catd` endpoints;
-- long dependent symbol types;
-- rules where source/target categories are deliberately explicit;
-- RHSs with nested composition or transport where indentation reflects the
-  computation path;
-- diagnostic assertions whose purpose is to expose canonical endpoints.
-
-Do presentation cleanup section by section and run a bounded check after each
-batch. Do not use a blind formatter: a compact rule should still reveal the
-stable discriminator and should not hide endpoint data that was intentionally
-left visible for conversion or review.
-
-### Canonical Type-Shape SOP
-
-Declared symbol types should normally be written in their reduced/canonical
-form, even when the symbol itself is a primitive stable head or a defined
-readability alias. Prefer:
-
-```text
-sym : τ (Functord E D)
-```
-
-over unreduced but convertible forms such as:
-
-```text
-sym : τ (@Transf K Cat_cat E D)
-```
-
-because `Transf_cat K Cat_cat E D` reduces to `Functord_cat E D`. The reduced
-form is easier for both humans and Lambdapi: it avoids forcing later rules and
-assertions to rely on a reducible classifier path.
-
-Use an unreduced type only when that exact shape is intentionally needed, for
-example to expose a projection route, preserve a stable diagnostic endpoint, or
-probe a rewrite interaction. In that case, document the reason near the symbol
-or assertion.
-
-Do not introduce decoded `*_TYPE` heads or extra classifier heads merely to
-shorten frequent binders. Such heads create a parallel semantic layer. For
-example, a classifier-level head for transformations would need to join with
-all existing category-level reductions:
-
-```text
-Transf_cat K Cat_cat E D -> Functord_cat E D
-Transf_cat X (Product_cat A B) F G
-  -> Product_cat (Transf_cat X A ...) (Transf_cat X B ...)
-```
-
-A decoded type rule alone, such as:
-
-```text
-τ (Obj (Transf_cat F G)) -> Transf_TYPE F G
-```
-
-would not replace unification rules about `Obj (Transf_cat ...)`, because those
-goals do not contain `τ`. Replacing such an `Obj`-level unification rule would
-require an injective classifier-level head, e.g. `Transf_grpd`, plus all
-corresponding reductions and confluence checks. That is usually more theory
-surface than the saved binder verbosity is worth.
-
-Current policy: keep the semantic owner at the category/classifier level
-(`Transf_cat`, `Functord_cat`, `Product_cat`, etc.), use reduced canonical
-types in declarations, and keep narrow `Obj(...)` unification rules only where
-they are proven useful for elaboration and rewrite stability.
-
-### Terminal-Source Equivalences Are Not Global Computation
-
-Mathematically, maps out of the terminal category satisfy familiar equivalences:
-
-```text
-Functor_cat Terminal_cat A ~= A
-Transf_cat
-  (Const_func Terminal_cat Y u)
-  (Const_func Terminal_cat Y v)
-  ~= Hom_cat Y u v
-```
-
-Do not install these equivalences as broad rewrite rules by default. They are
-semantic identifications, not projection rules. Making one of them definitional
-creates pressure to make the whole `1 -> X` equivalence definitional, including
-rules for `Functor_cat Terminal_cat A`, `Obj_func`, `Const_func`, and terminal
-evaluation. That tends to hide which projection path produced a term and can
-interfere with the stable-head normalization discipline.
-
-Prefer consumer-local projection rules instead. For example, a section-action
-normal form should reduce through `piapp0`, `tapp0_fapp0`, and the named
-displayed-action heads that express the component being consumed. If a theorem
-needs an ordinary functor view of a terminal-source section, add a focused
-assertion or a deliberately named bridge after probing, rather than adding a
-global `1 -> X = X` rewrite.
-
-The old terminal-source transformation collapse
-
-```text
-Transf_cat Terminal_cat Y (Const_func Terminal_cat Y u)
-  (Const_func Terminal_cat Y v)
-  -> Hom_cat Y u v
-```
-
-was removed from `emdash3_2.lp` after a probe showed the current development
-typechecks without it.
-
-## SOP: Dosen Cut-Elimination And Sigma/Laxity Ownership
-
-When a theorem wants a composite to normalize by "absorbing a cut", choose the
-normal form that exposes the reusable action, not a one-off composite hidden in
-an ad hoc arrow symbol. The basic patterns are:
-
-```text
-g ∘ f  -> fapp0 (precompose_by f) g
-f ∘ h  -> fapp0 (postcompose_by f) h
-```
-
-Use such a head only when the composite is genuinely a reusable functorial
-operation and the existing helper has the wrong computational orientation for
-the theorem. Otherwise prefer the already-owned semantic projection.
-
-For represented hom-actions, accumulation is the mechanism that keeps
-associativity computational at the upstream `hom_*` layer when the term is
-already routed through that owner. Typical stable computations include:
-
-```text
-(F(q o p))_*(g)            -> (F q)_*((F p)_*(g))
-((F f)_*(g)) o h           -> (F f)_*(g o h)
-(F(q o p))^*(g)            -> (F p)^*((F q)^*(g))
-```
-
-Raw expanded presentations such as `F[q] o ((F[p])_*(g))`,
-`((F[p])^*(g)) o F[q]`, and `k o ((F[p])^*(g))` should normally have no extra
-runtime behavior. First normalize both sides separately and check whether the
-term can be routed through an existing hom-action owner. When a theorem needs
-only proof-time compatibility, use the existing `hom_*_fapp0` unification
-bridges and typed `eq_refl` probes. If a concrete consumer really needs a raw
-runtime bridge, probe it at the owning declaration position, test both
-owner-first and projection-first reduction, and compare warning-enabled
-results. Warning families are diagnostics for missing joins or placement
-problems, not automatic vetoes.
-
-The current Sigma-map fibre component is owned by the internal displayed
-hom-action projection ladder, not by a separate precomposition wrapper:
-
-```text
-fdapp1_int_transfd(FF)
-  -> fdapp1_int_section_arrow(FF,x,u)
-  -> fdapp1_int_tgt_arrow(FF,x,u,y)
-  -> fdapp1_int_presheaf_arrow(FF,x,u,y,v)
-  -> fdapp1_int_hom_func(FF,p,u,v)
-  -> fdapp1_int_hom_fapp0(FF,p,u,alpha).
-```
-
-The mathematical reading of the final capped component is:
-
-```text
-fdapp1_int_hom_fapp0(FF,p,u,alpha)
-  : D[p](FF[x]u) ->^(D[y]) FF[y]v
-  morally FF[y][alpha] ∘ laxity(FF,p)[u].
-```
-
-The Sigma-map capped action is:
-
-```text
-Sigma(FF)(p,alpha)
-  = (p, fdapp1_int_hom_fapp0(FF,p,u,alpha)).
-```
-
-The fixed-endpoint hom-action of `sigma_map_func` is the opposite of the
-dependent Sigma map induced by `fdapp1_int_presheaf_arrow`. Do not reconstruct
-it as a product functor plus an independent uncurry wrapper unless a focused
-future theorem proves that such a surface is necessary.
-
-The canonical/cartesian identity case is consumed directly by
-`fdapp1_int_hom_fapp0`:
-
-```text
-fdapp1_int_hom_fapp0(FF,p,u,id_{E[p]u})
-  -> fdapp1_int_cell(FF,p,u).
-```
-
-`homd_id_canonical_triangle`, `functord_laxity_precomp_func`,
-`functord_laxity_precomp_fapp0`, and
-`functord_transport_fibre_fapp1_fapp0` were probe-era names. They should not be
-used in new plans for the active file.
-
-Simplicial ω-iteration should be documented through the existing
-`hom_int`/Sigma-hom/`homd_int`/`fdapp1_int_*` pipeline. Do not reintroduce old
-v2-style simplicial stable heads merely to name triangle/surface or
-cell-over-cell intuitions; add a new head only after a focused theorem proves a
-real computational need.
-
-Implementation checklist for this style:
-
-1. Write the mathematical formula in a comment near the symbol.
-2. Identify the owner of the reusable action before adding a new head.
-3. Separate object laws from arrow-action laws before choosing rewrites.
-4. When one endpoint varies by a functor, try the hom-indexed-family owner
-   first: `hom_int(F)`, `hom_con`, or the displayed `homd_int(FF)`.
-5. If an existing helper has the wrong orientation, add a new stable head only
-   after proving that a smaller projection rule is insufficient.
-6. Prefer `fapp0(stable_action)(argument)` over raw `comp_fapp0(...)` only when
-   the stable action will be reused.
-7. Add canonical consumer rules, such as identity/cartesian cases, only after a
-   temporary probe shows the syntactic normal form.
-
-### Functorial Variation SOP
-
-Pointwise equations are often useful sketches, but in v3.2 they are not
-complete definitions when an index varies in a directed category.
-
-For a proposed family:
-
-```text
-X[x] = Formula(x)
-```
-
-also ask for:
-
-```text
-X[p] : X[x] ⊢ X[y]
-```
-
-for every base arrow:
-
-```text
-p : x -> y.
-```
-
-For a proposed natural transformation or transfor:
-
-```text
-eta[x] = ComponentFormula(x)
-```
-
-also ask for the naturality/hom-action package:
-
-```text
-eta[p]      // capped reading
-tapp1_func eta x y
-```
-
-for every base arrow `p : x -> y`. In a focused assertion this may project
-through `tapp1_fapp0 eta p` or a constructor-specific `*_tapp1_*` helper, but
-the design obligation is still the naturality/hom-action represented by
-`tapp1_func`. If this action is deferred, say so in the implementation
-comment/report rather than leaving only the component equation.
-
-For a proposed functor between family categories, also ask how the construction
-acts on displayed functors and transfors if later consumers will need that
-level. This prevents a pointwise normal form from becoming a misleading
-stable head.
-
-The `Pi_f` plan is the current model. The fibre formula:
-
-```text
-(Pi_f E)[b] = Pi_cat(Pullback_catd(E, CommaOut_proj(f,b)))
-```
-
-is useful but incomplete until the base-arrow action along `h : b -> b'` is
-specified through `CommaOut_precomp(f,h)` and `section_pullback_func`.
-
-### Hom-Indexed Family SOP
-
-The category-theoretic idiom:
-
-```text
-Hom_B(b, f[-])
-```
-
-should normally enter the kernel through the internal hom-family package:
-
-```text
-hom_int B A f : Op_cat B ⊢ Catd_cat A
-hom_int(f)[b][a] = Hom_B(b, f[a])
-```
-
-and not by first expanding all functor composition around the endpoint. This is
-why `hom_int` carries the functor argument `f`: the action in `b` is
-precomposition, the action in `a` is postcomposition by `f`, and both actions
-are owned by the hom projection heads.
-
-For the proposed `Pi_f` comma infrastructure, this means the semantic
-expression:
-
-```text
-CommaOut_catd(f) ≃ Sigma_func(A) o hom_int B A f
-```
-
-is the right starting point for the internal family:
-
-```text
-b ↦ Σ (a :^n A), b ->^B f[a].
-```
-
-If a stable `CommaOut_catd(f)` head is later introduced, it should fold from
-this hom-indexed-family expression after a focused probe, rather than duplicate
-the object formula by hand.
-
-The displayed analogue is the same rule:
-
-```text
-homd_int(FF)
-```
-
-should be preferred when the target endpoint varies through a displayed
-functor `FF`. Expressions like:
-
-```text
-homd_int(id_D) o Op_funcd(FF)
-```
-
-are useful comparison surfaces, but they should not become the primary owner of
-dependent hom-action unless a theorem specifically concerns that comparison.
-6. Keep source/target and endpoint slots implicit on rewrite LHSs unless they
-   are the actual discriminator.
-7. Add assertions for both the reusable action form and the downstream theorem
-   normal form.
-8. Record failed orientations in an implementation report when they influence
-   the design.
-
-## SOP: Identity Normal Forms
-
-Identity terms can normalize into different specialized heads depending on the
-category visible at the moment of reduction. Examples include plain `@id`,
-`id_func`, `id_funcd`, and future higher identity heads, as well as
-constructor-specific identities for categories such as `Cat_cat`, `Catd_cat`,
-`Functor_cat`, and `Transf_cat`.
-
-Do not assume that a rule which consumes plain `@id` will also consume all
-semantically equal identity presentations. If a computation involving a
-canonical/cartesian triangle fails unexpectedly, first inspect whether the
-identity normalized past the primitive shape into a specialized identity head.
-
-Prefer narrow, typed consumer rules over broad global identity rewrites. In the
-current Sigma/laxity path, the consumer rule is deliberately attached to
-`fdapp1_int_hom_fapp0` and accepts the transported endpoint identity directly:
-
-```text
-fdapp1_int_hom_fapp0(FF,p,u,id)
-  -> fdapp1_int_cell(FF,p,u).
-```
-
-Do not reinstall a global canonical-triangle identity head merely to make one
-consumer compute. If a specialized identity head must be accepted, probe a
-consumer-local simulation/fold rule and add a focused assertion showing the
-intended normal form.
-
-## Stable Heads Policy
-
-Stable heads are justified when later rules need a visible constructor or when a
-focused probe shows that a semantic definition causes conversion blowups that
-cannot be fixed by smaller projection rules or canonical endpoints.
-
-Do not add a stable head merely because a readable alias appears in the surface
-syntax. Readable aliases should normally be definitions.
-
-Notation-only heads such as `Fibre_cat` should not receive broad injectivity or
-unification helpers. `Fibre_cat E k` is notation for `fapp0 E k`; equality of
-fibre categories should not generally recover the whole family and index.
-
-## Completed Retirement
-
-Completed on 2026-05-26:
-
-1. This report and the current path-induction reports contain the actively
-   useful SOP from the older HOM/FAM/PI/CONST plan and implementation log.
-2. `scripts/check.sh`, `Makefile`, `README.md`, and `AGENTS.md` no longer put
-   `emdash3_1.lp` in the ordinary check path.
-3. The historical files were moved to
-   `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/`:
-
-   ```text
-   emdash3_1.lp
-   reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_PLAN.md
-   reports/REPORT_EMDASH_V3_HOM_FAM_PI_CONST_IMPLEMENTATION_REPORT_2026-05-20.md
-   ```
-
-4. Validation after the move:
-
-   ```bash
-   EMDASH_TYPECHECK_TIMEOUT=60s make check
-   ```
+After compaction/interruption, re-read the active authorities and task plan,
+inspect staged/unstaged diffs, relocate symbols with `rg`, and run a bounded
+baseline check before continuing.

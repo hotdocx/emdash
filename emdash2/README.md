@@ -1,388 +1,175 @@
-Our goal is to write a Lambdapi specification for a programming language (and proof assistant) for ω-categories (strict/lax), ω-functors, ω-transformations (“transfors”), and related dependent-type structures (fibrations, comma/arrow categories).
+# m— / emdash
 
-The proof assistant is inspired by the functorial programming approach of Kosta Došen, using Lambdapi rewrite and unification rules for normalization.
+`emdash` is a Lambdapi specification for functorial programming and a future
+programming language/proof assistant for strict and lax omega-categories,
+omega-functors, omega-transformations (“transfors”), directed families, and
+dependent categorical constructions.
 
-The proof assistant is called `m—` (read “emdash”).
+The computational style is inspired by Kosta Došen’s cut elimination in
+categories: rewrite rules select useful runtime normal forms, while narrowly
+typed unification rules relate alternative proof-time presentations when no
+runtime orientation is intended.
 
-## Layout
-- `emdash3_2.lp`: active v3.2 directed-family mixed-variance development.
-- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`: current
-  v3.2 status and rewrite/debugging SOP.
-- `reports/EMDASH_FOUNDATIONS.md`: mathematician-facing reading guide for the
-  current v3.2 foundations.
+The active development is v3.2 and remains experimental.
+
+## Current Scope
+
+The checked kernel currently includes:
+
+- iterated hom-categories, ordinary functors, transfors, products, evaluation,
+  curry/uncurry infrastructure, and adjunction triangles;
+- directed Cat-valued families, natural/displayed functors and transfors,
+  Sigma total categories, section/Pi categories, dependent homs, and fibre
+  transport;
+- equality/path categories, type equivalence, ordinary and omega-categorical
+  equivalence staging, and explicit univalence capabilities;
+- covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
+  action used by the unit hom profunctor;
+- Cat-valued profunctors, reindexing, tensor, implication, computational
+  comparison, weighted-limit/colimit staging, and adjunction mates;
+- a primitive directed join slice, synthetic PathOut/path induction, and a
+  reviewer-facing Eckmann–Hilton computation.
+
+These are kernel and architecture milestones, not a finalized surface parser
+or a completed foundational theory.
+
+## Authorities And Layout
+
+- `emdash3_2.lp`: active v3.2 kernel implementation.
+- `emdash3_2_checks.lp`: executable diagnostic/regression suite.
+- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
+  current architecture and development SOP.
+- `reports/EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
-  current notation authority for comments, examples, and future parser work.
-- `reports/REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
-  design plan for structural functor logic
-  (weakening/exchange/contraction and displayed follow-ups).
-- `reports/REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
-  design and implementation plan for dependent products along functors (`Pi_f`) and
-  comma-category infrastructure.
-- `reports/REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
-  implementation plan and log for Cat-valued profunctors, tensor and
-  internal hom, weighted limits, duality, and the directed-inductive stress
-  test.
-- `reports/REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
-  notation/reorganization plan.
-- `reports/REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
-  local Codex final-response archiving and context-recovery workflow.
-- `reports/REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit explaining
-  why the old v2 baseline was retired and which ideas remain future design
-  material.
-- `reports/INDEX.md`: current report map.
-- `research/literature.md`: MathOps literature-discovery workflow.
-- Older v3/v3.2 feature reports have been consolidated into the current SOP
-  and foundations reports, then archived under `.scratchpad/retired/`.
-- `lambdapi.pkg`: package config for Lambdapi.
-- `docs/`: local copies of key Lambdapi documentation snippets (commands/syntax/queries/patterns).
-- `print/`: project-local paper renderer and Arrowgram validation tools.
+  notation authority for comments, examples, and future parser work.
+- `reports/INDEX.md`: report lifecycle and task-specific plan map.
+- `reports/REPORT_EMDASH_CHECK_CATALOG.md`: generated reviewer map of checks.
+- `reports/REPORT_EMDASH_HEALTH.md`: generated validation/source metrics.
+- `examples/`: small reviewer-facing milestones.
+- `docs/`: local Lambdapi syntax, command, query, pattern, and tactic notes.
+- `lambdapi-examples/`: upstream-style syntax and proof examples.
+- `scripts/`: checking, probing, warning, decision-tree, catalog, search, and
+  maintenance utilities.
+- `print/`: paper/Markdown renderer and Arrowgram validation support.
 
-## Quick start
-Prereq: `lambdapi` on PATH. The current workspace is tested with development
-build `3.0.0-90-gdb4f780`; this is an environment record, not a check or CI
-gate.
+Obsolete v2/v3.1 material is retired under ignored `.scratchpad/` directories
+and is not part of normal development. Use the active reports rather than
+historical files unless explicitly doing archaeology.
 
-- Check active Lambdapi files: `make check`
-- Check reviewer milestone examples: `make examples`
-- Run local CI gate: `make ci`
-- Regenerate the check catalog: `make catalog`
-- Refresh the health report: `make health`
-- Check just v3.2: `lambdapi check -w emdash3_2.lp`
-- Timeout (recommended during early development): `EMDASH_TYPECHECK_TIMEOUT=60s make check`
-- Diagnostic kernel check with Lambdapi warnings enabled:
-  `make check-warnings`
-- Compact inventory of the warning-enabled kernel check:
-  `make warning-summary`
-- Strict rewrite-LHS hygiene audit: `make audit-rules`
-- Test the Infinity Codex hooks/archive: `make infinity-codex-test`
-- Manually remove accumulated `.log` files: `make prune-logs`
+## Quick Start
 
-## Watch mode (auto typecheck on save)
-- Start a polling watcher: `make watch` (logs to `logs/typecheck.log`).
-- Tail the log in another terminal: `tail -f logs/typecheck.log`.
-- One-shot check: `python3 scripts/watch_typecheck.py --once`.
-- Tuning: `python3 scripts/watch_typecheck.py --interval 0.2` / `--no-clear`.
-- Background: `nohup make watch >/dev/null 2>&1 &` then `tail -f logs/typecheck.log`.
-
-## MathOps utilities
-- Stale active-reference lint: `./scripts/lint_active_refs.sh`.
-- Check/source metrics: `python3 scripts/check_metrics.py --write-report`.
-- Probe a temporary Lambdapi file with a compact failure summary:
-  `scripts/probe.sh tmp/probes/name.lp`.
-- Summarize an existing Lambdapi log: `scripts/explain_failure.py logs/typecheck.log`.
-- Show the first warning from a warning-enabled log:
-  `scripts/explain_failure.py --warning logs/typecheck.log`.
-- Summarize the current warning stream while preserving the raw log:
-  `make warning-summary`.
-- Audit reconstructible compound terms in inferred rewrite-rule LHS slots:
-  `python3 scripts/audit_rule_lhs.py --show-kept`.
-- Inspect rewrite compilation: `scripts/decision_tree.sh fapp1_func`.
-- Render a decision tree with Graphviz:
-  `scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func`.
-- Search the normalized Lambdapi index:
-  `scripts/lambdapi_search.sh 'type >= Prof_imply_cov'`.
-- Manually remove accumulated checker/probe logs: `make prune-logs`.
-- Inspect the local final-response archive:
-  `python3 scripts/infinity_codex.py list`.
-- Resolve a plan-linked response:
-  `python3 scripts/infinity_codex.py show
-  'infinity-codex:<session-id>:<turn-id>'`.
-- arXiv/ar5iv discovery:
-  `python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'`.
-- Reviewer milestone examples live in `examples/`.
-
-## Infinity Codex
-
-Trusted project-local hooks in `.codex/hooks.json` archive the main agent's
-completed final response after each turn. The exact response bytes and
-write-once metadata live under ignored `tmp/ai-responses/`; user prompts,
-commentary, tool calls, and subagent output are not copied. On session resume,
-Codex receives file pointers as model-visible developer context, never
-automatically injected archived prose. On context compaction, `SessionStart`
-does the same when Codex starts a compacted context; a `PostCompact` marker plus
-the next `UserPromptSubmit` provides a one-shot fallback when compaction happens
-inside an already-running session. Because Codex does not accept added
-developer context from `PostCompact`, that hook also emits a visible
-`systemMessage` warning with the marker, archive index, and expected logical ID
-when available. `PostCompact` can only emit that visible warning; it cannot add
-model-visible `additionalContext`. Recovery context lists both the latest final
-for the current session and the latest final globally, plus commands for the
-last few finals and any pending post-compaction markers from other sessions.
-
-After cloning or changing the hook definition, restart Codex and use `/hooks`
-to review and trust it. The hook is deliberately independent of Codex
-Memories. Archive authority is:
-
-```text
-active code/SOP -> active plan and side-task ledger
-                -> explicitly linked decision responses -> raw archive
-```
-
-Useful maintenance commands:
+Prerequisite: `lambdapi` on `PATH`. The current environment is tested with
+development build `3.0.0-90-gdb4f780`; this is an environment record, not a
+hard CI version gate.
 
 ```bash
-python3 scripts/infinity_codex.py latest-id
-python3 scripts/infinity_codex.py latest-path
-python3 scripts/infinity_codex.py list --limit 5
-python3 scripts/infinity_codex.py verify
-python3 scripts/infinity_codex.py reindex
-python3 scripts/infinity_codex.py prune --before 2026-01-01 --dry-run
+make check                 # active kernel and diagnostics
+make examples              # reviewer milestones
+make ci                    # local handoff gate
+make check-warnings        # warning-enabled kernel check
+make warning-summary       # compact warning inventory + raw log
+make audit-rules           # strict inferred-LHS-slot audit
+make catalog               # regenerate the check catalog
+make health                # refresh generated health metrics
 ```
 
-If no recovery pointers are visible after resume or compaction, inspect the
-archive directly with `list --limit 5`, `latest-path`, `latest-id`, or `show`,
-and check `tmp/ai-responses/events.jsonl` for hook lifecycle metadata. If the
-`PostCompact` warning names an expected logical ID, the corresponding response
-file may appear only after the turn stops and the `Stop` hook archives it. The
-event audit does not contain prompt text or final-response text.
-
-Deletion requires replacing `--dry-run` with `--apply`. The archive is local
-only; back it up separately if machine-level durability is required.
-
-Quiet project checks use Lambdapi's `-w` flag to suppress the large existing
-critical-pair warning stream. When a quiet check times out or does not identify
-the interacting rule, rerun the smallest target with warnings enabled:
+During rewrite/unification development, keep checks bounded:
 
 ```bash
+EMDASH_TYPECHECK_TIMEOUT=60s make check
 timeout 20s lambdapi check emdash3_2.lp
-EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
-EMDASH_LAMBDAPI_WARNINGS=1 scripts/probe.sh tmp/probes/name.lp
 ```
 
-All project check/probe/metrics scripts also append flags from
-`EMDASH_LAMBDAPI_FLAGS`, for example
-`EMDASH_LAMBDAPI_FLAGS='--debug=u'`. Redirect warning/debug output to a log
-when necessary.
+If a quiet run does not localize an interaction:
 
-Useful focused debug flags include `u` for unification, `c` for conversion,
-`q` for rewriting, `w` for weak-head normalization, `s` for
-subject-reduction, `k` for local confluence, `d` for decision-tree
-compilation, and `i` for typing. Enable only the smallest relevant set.
-`--record-time` reports phase timings, while `--too-long=SECONDS` reports
-individual slow commands without interrupting them. Do not use
-`--no-sr-check` for promoted code or validation.
+```bash
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
+EMDASH_LAMBDAPI_FLAGS='--debug=u' scripts/probe.sh tmp/probes/name.lp
+```
 
-The semantic-search wrapper maintains an ignored index under `.cache/`.
-Lambdapi search is normalization- and type-aware, so it supplements rather
-than replaces `rg`. Current query syntax uses `with` for conjunction, `|` for
-disjunction, and `in` for path filtering.
+## Development Loop
 
-The LHS audit is advisory. Constructor patterns such as `Op_cat`,
-`Product_cat`, `Sigma_cat`, and dependent-pair endpoints may be intentional
-discriminators. Replace a reported slot by `_` only after a focused probe and
-bounded full check. Record a justified exception immediately above the rule as
-`// lhs-audit: keep SLOT[,SLOT] -- reason`; `make audit-rules` rejects
-unreviewed candidates, and `make ci` runs the same strict gate. Vertical rule
-formatting helps human review but is not required by the scanner.
-The scanner inventories inferred compound argument slots; it does not prove
-joinability of nested outer-eliminator/inner-cut patterns. Those require
-manual classification and warning-enabled owning-position validation.
+For a nontrivial rule or unification change:
 
-## Probe-first rewrite development
-- Before adding a nontrivial rewrite rule to `emdash3_2.lp`, probe it in a
-  temporary file such as `tmp/probes/name.lp`, then run
-  `scripts/probe.sh tmp/probes/name.lp`.
-- Add at least one focused `assert` exercising the intended normal form in the
-  probe. A rule that typechecks but does not prove the assertion is not ready.
-- If a probe times out, treat that as evidence about rule placement or LHS
-  shape. Try a smaller stable-head rule, omit brittle implicit arguments, or
-  move the rule later only if there is a concrete assertion showing why it is
-  needed.
-- Keep inferred source/target categories, endpoint families, and similar
-  reconstructible arguments implicit on rule LHSs unless they are the actual
-  discriminator. In particular, avoid explicit compound or reducible expressions
-  in implicit-argument positions on rule LHSs.
-- Identify the true discriminee of a rewrite family. If the semantic trigger is
-  a stable constructor argument such as `Op_func(_,_,F)`, do not also require
-  surrounding presentation wrappers like `Op_cat A`, `Op_cat B`, transparent
-  aliases, or endpoint normal forms unless those wrappers are part of the
-  mathematical case split. Probe the generalized rule at the owning position
-  and add typed canonical-context checks for both the visible surface form and
-  the normalized form it is meant to subsume.
-- Treat `outer_eliminator(inner_rewrite_cut(...))` LHSs as high-risk
-  commuting conversions. Examples include
-  `sigma_Fst(comp_fapp0(...))` and
-  `sigma_Snd(fapp0(specialized_func,...))`. The outer projection and inner cut
-  can reduce in either order, so a rule that typechecks can still create
-  nonjoinable identity, functoriality, or naturality paths.
-- Do not confuse these with constructor beta rules such as
-  `sigma_Fst(Struct_sigma x u)`, or with an established projection ladder that
-  has one canonical semantic owner. Prefer an existing ladder, a stable
-  intermediate projection head, or a functor/composition equation. Add a new
-  commuting conversion only for a concrete computational consumer and only
-  after both reduction orders join in a warning-enabled full-file probe at the
-  rule's owning declaration position when possible. Treat warning counts and
-  nonjoinable-critical-pair reports as diagnostics for classifying concrete
-  overlap families, not as an automatic veto on a semantically necessary rule.
-  Use them to discover missing joins, better placement, or follow-up rules,
-  and document any remaining overlap families.
-- If a new rewrite or unification rule causes a timeout, use a warning-enabled
-  run to locate the existing interacting rule. Audit that rule's inferred
-  argument slots before concluding the new rule is too broad; explicit
-  `fapp0`, composition, pullback, opposite, or family expressions in
-  non-discriminator slots can create avoidable unification search.
-- During debugging, keep inferred arguments explicit when that makes errors and
-  constraints easier to read. Before finalizing, clean up redundant explicit
-  arguments after a bounded check proves Lambdapi can infer them reliably.
-- Do not add unification helpers for notation-only heads just to make surface
-  syntax elaborate. If a helper would imply injectivity that is not semantically
-  valid, keep it only as a temporary probe and remove it before final cleanup.
-- Use unification rules for proof-time equality between alternative semantic
-  presentations only when no runtime orientation is intended. Exercise such a
-  rule with a typed `eq_refl` check; an ordinary conversion assertion does not
-  invoke it. Unification rules are not automatically transitive, so use rigid
-  heads or a stable intermediary instead of a bare-variable eta pattern.
-  Warning-enabled comparisons are for consequence classification; the warning
-  count itself is not a pass/fail gate.
-- Distinguish a bare conversion assertion from a typed canonical-context
-  check. `assert t ≡ u` lets Lambdapi infer the two sides' types
-  independently; with transparent aliases or opposite-category views this may
-  stop before a common canonical type such as `Hom C x y` is forced. When the
-  real consumer has an expected type, probe that shape explicitly:
-  first check `t : T`, or define a temporary/helper term with type `T`, then
-  use `eq_refl : τ(t = u)` or an assertion against the typed helper. This is
-  not weaker than the application context; it tests the computation under the
-  same expected type real code supplies.
-- A generic identity-headed rule does not necessarily cover normalized
-  identity heads. If `@id Cat_cat A` or `@id (Catd_cat K) E` has already
-  reduced to `id_func A` or `id_funcd K E`, add/test the corresponding
-  normal-form sibling rule when that is the semantic owner. Treat the generic
-  `@id`, `Cat_cat/id_func`, and `Catd_cat/id_funcd` cases as a coherent
-  package when all three surfaces are expected.
-- When a functor-level runtime rule computes the desired object-level result
-  after applying `fapp0` or another generic projection, keep the functor as the
-  owner. Do not add a parallel object-level rewrite or unification rule for the
-  same comparison unless a concrete consumer cannot use the projected route.
-- A protected `constant` cannot head a rewrite rule. Reclassifying one as
-  `injective` changes the global computational normal form and requires a
-  full-file subject-reduction, warning, and downstream-consumer audit.
-- To audit whether an existing rule is actually used, combine static search
-  with a temporary-removal probe: copy `emdash3_2.lp`, remove only that rule,
-  run `scripts/probe.sh` on the copy, and inspect the first failing
-  rule/assertion.
-  Record the downstream dependency in the implementation report before deleting
-  the temporary copy.
-- Keep ordinary experiments untracked under ignored `tmp/probes/`, and remove
-  them after their conclusions have been transferred. Move durable,
-  reviewer-facing computations to `examples/`; retain a diagnostic probe only
-  when a report explains why it remains useful.
-- Prefer semantic definitions before introducing new stable heads. If a semantic
-  construction fails to compute, first check for missing projection rules and for
-  brittle explicit source/target slots.
-- Use stable heads only for real projection, discrimination, or performance
-  boundaries. Good stable heads are often projections from a more internalized
-  construction, not substitutes for that construction.
-- Cat-specialized semantic heads package extra structure exposed only when the
-  ambient category is `Cat_cat`. For example, a generic hom-action arrow may
-  have a Cat-specialized presentation as a transfor, where `tapp0_fapp0`,
-  `tapp1_func`, and `tapp1_fapp0` projections become meaningful. Prefer these
-  Cat heads when they keep the projection ladder readable, but document the
-  generic owner and any overlap/join with it.
-- Do not keep a parallel stable-head package for an action already owned by an
-  internalized functor. Prefer adjacent stable projection rungs before attaching
-  computation, for example
-  `Product_cat_fapp1_func` -> `Product_cat_fapp1_fapp0_functord` ->
-  `Product_cat_fapp1_tapp0_func`; retain higher helper names only as
-  definitions/aliases of that semantic owner.
-- Ordinary identity, composition, and naturality belong exclusively to the
-  generic `fapp*`/`tapp*` rules. Do not add a rule such as
-  `special_action(id) -> id` or
-  `special_action(g o f) -> special_action(g) o special_action(f)`.
-  Such a need is an internalization diagnostic: locate or introduce the
-  functor/transfor whose generic action the special term represents, then keep
-  the generic action visible or make the special name a transparent semantic
-  view. This restriction does not prohibit beta/eta rules or focused
-  cut-elimination laws for additional universal structure. It also does not
-  prohibit a measured confluence bridge when reducing to a stable projection
-  head erases the generic owner before an outer generic cut can fire. For such
-  a bridge, test owner-first and projection-first reduction, select exactly one
-  canonical orientation, and document why the generic rule alone cannot see
-  the projected normal form. Do not generate these bridges for every action
-  head.
-- For Kosta Dosen-style cut-elimination, prefer reusable precomposition or
-  postcomposition action heads over one-off heads that hide a raw composite. For
-  example, when the desired normal form is `g o f -> fapp0(precompose_by f) g`,
-  do not reuse a helper whose application rule expands in the opposite
-  direction unless a focused probe shows the critical pairs are harmless. See
-  `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
-- Treat hom-action accumulation as upstream computational control of
-  associativity when the term is already expressed through a stable hom-action
-  owner. The current runtime orientation is the stable-head one, for example
-  `(F(q o p))_*(g) -> (F q)_*((F p)_*(g))` and
-  `(F(q o p))^*(g) -> (F p)^*((F q)^*(g))`. Raw expanded terms such as
-  `F[q] o ((F[p])_*(g))` should normally stay as raw `comp_fapp0` at runtime;
-  their compatibility with stable hom-action syntax belongs to the existing
-  proof-time `hom_*_fapp0` unification bridges, validated with typed
-  `eq_refl` probes in concrete theorem contexts. Add a runtime raw bridge only
-  for a concrete consumer after the usual owning-position and warning-enabled
-  probe workflow.
-- When one endpoint of a hom varies by a functor, prefer the hom-indexed family
-  owner (`hom_int`, `hom_con`, or displayed `homd_int(FF)`) over a hand-built
-  `comp_cat*` pipeline; this keeps pre/postcomposition under the hom-action
-  projection ladder.
-- In explicit `fapp0` source/target arguments, prefer canonical normal forms
-  such as `Hom_cat ...` and `Functord_cat ...` over reducible readability
-  wrappers such as `Fibre_cat (DefinedAlias ...) k`. The wrapper may compute
-  alone but still trigger expensive conversion in nested assertions.
-- Keep readable helper aliases routed through the named semantic constructor;
-  avoid duplicating the same semantic body in multiple helper definitions.
-- Treat identities as a family of normal forms, not one syntactic shape. A
-  plain `@id` may reduce to specialized heads such as `id_func`, `id_funcd`, or
-  constructor-specific identities before a consumer rule sees it. When a
-  canonical/cartesian triangle is expected, prefer a narrow typed bridge or
-  consumer-local simulation rule for that endpoint over broad global identity
-  rewrites.
-- Do not stop at pointwise formulas when implementing internalized
-  infrastructure. A sketch like `A[x] = ...` is only the object law when `x`
-  varies functorially; a sketch like `eta[x] = ...` is only the component law
-  of a transfor. Also specify the action over `p : x -> y`, such as `A[p]` or
-  `fapp1_func A`, and `eta[p]` or `tapp1_func eta`. Capped or
-  constructor-specific `fapp1*`/`tapp1*` helpers may be the practical probe
-  surface, but they should not hide the full arrow-action obligation.
-- Distinguish capped action `fapp1_fapp0 F p` from full hom-action
-  `fapp1_func F a b`. A missing capped rule can block a valid semantic route,
-  but capped object-level helpers should not replace full synthetic action.
-- Keep theorem-style `assert`/`#check` statements near the symbols and comments
-  that explain their mathematical formula. Reserve diagnostic sections for
-  temporary normalization probes and regression checks.
-- For readability cleanup, distinguish four surfaces:
-  rule LHSs, rule RHSs/defined bodies, theorem-style assertions, and
-  diagnostic assertions. Rule LHSs should stay conservative and keep the
-  stable discriminator explicit. RHSs and defined bodies may omit inferred
-  arguments only after a probe shows type preservation still succeeds.
-  Theorem-style assertions should prefer the mathematical formula, often
-  projectionwise for products. Diagnostic assertions may remain explicit,
-  especially for full `fapp1_func`/capped `fapp1_fapp0` endpoints, hidden
-  fixed product factors such as `Product_cat_fapp1_tapp0_func A A' B G`, and
-  product-valued hom-actions where Lambdapi otherwise reconstructs endpoints
-  through large `sigma_Fst`/`sigma_Snd` terms.
-- Prefer mostly horizontal formatting for simple stable-head rules after they
-  have stabilized. Keep vertical layout for nested endpoint formulas, explicit
-  source/target categories, and diagnostic assertions. See the layout SOP in
-  `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`.
-- Write declared symbol types in reduced/canonical form by default. Prefer
-  `τ (Functord E D)` over unreduced equivalents such as
-  `τ (@Transf K Cat_cat E D)` unless the unreduced shape is intentionally
-  needed for a projection route or diagnostic assertion; document that exception
-  near the symbol. Avoid adding decoded `*_TYPE` or classifier heads merely to
-  shorten binders: they introduce a parallel theory layer and require matching
-  reductions for every semantic specialization, such as Cat-valued and
-  product-valued transfors. A decoded `TYPE` head alone also does not replace
-  `Obj(...)` unification rules; that would require a classifier-level head and
-  corresponding confluence checks.
+1. locate the semantic owner and nearby projection ladder with `rg`;
+2. place the candidate in a temporary full-file copy at its intended owning
+   position;
+3. add a focused assertion exercising the intended runtime conversion or typed
+   proof-time comparison;
+4. run `scripts/probe.sh tmp/probes/name.lp` with a short timeout;
+5. compare warning-enabled behavior when the change can affect overlaps;
+6. promote the smallest semantically correct rule/projection and run
+   `make check`;
+7. update diagnostics/catalog and run `make ci` before handoff.
 
-## Print pipeline
-Run these from this folder (`emdash2/`), independent of the parent repo workspace:
+The detailed policies for inferred LHS slots, outer-eliminator/inner-cut
+patterns, runtime versus proof-time ownership, generic `fapp*`/`tapp*`
+ownership, stable projection heads, and identity normal forms live in the
+current SOP report. `AGENTS.md` contains the mandatory condensed workflow.
 
-- Install print deps: `npm run install:print`
-- Preview paper: `npm run dev`
-- Validate diagrams/charts: `npm run validate:paper`
-- Full print render check: `npm run check:render`
+## Useful MathOps Commands
 
-## Notes
-- Alternative/related approaches exist in ignored `.scratchpad/` backups. Retired v3 material is under `.scratchpad/backup/2026-05-15_v3_retirement/`.
-- The retired v3.1 baseline and superseded HOM/FAM/PI/CONST plan/report are in
-  `.scratchpad/retired/2026-05-26_v3_1_hom_fam_pi_const/` for explicit
-  archaeology only.
-- Retired v2 surface-syntax notes, old email copy, and stale paper stubs are archived under `.scratchpad/backup/2026-05-15_project_docs_retirement/`.
-- If typechecking takes longer than ~1 minute, treat it as a bug signal (often a rewrite/unif loop or explosion). The default `make check` runs with a timeout via `scripts/check.sh`; increase it only when you intentionally accept longer runs.
+```bash
+scripts/probe.sh tmp/probes/name.lp
+scripts/explain_failure.py logs/typecheck.log
+scripts/decision_tree.sh fapp1_func
+scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func
+scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
+python3 scripts/audit_rule_lhs.py --show-kept
+python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'
+```
+
+Watch mode:
+
+```bash
+make watch
+tail -f logs/typecheck.log
+```
+
+Logs are retained for diagnosis and are pruned only on explicit request:
+
+```bash
+make prune-logs
+EMDASH_LOG_KEEP_DAYS=7 make prune-logs
+```
+
+## Check And Documentation Maintenance
+
+- Executable assertions belong in `emdash3_2_checks.lp`; keep the generated
+  catalog fresh with `make catalog`.
+- Add mathematical formulas and ownership notes adjacent to semantic symbols
+  and nontrivial rule families in `emdash3_2.lp`.
+- Use the canonical syntax report for comment/example notation.
+- Add new reports to `reports/INDEX.md` and include the required plan metadata.
+- Refresh `make health` after meaningful architecture or check changes.
+- Do not treat warning counts as an automatic veto; use warning locations and
+  term heads to classify concrete overlap families.
+
+## Infinity Codex Recovery
+
+Trusted project hooks archive completed main-agent final responses under
+ignored `tmp/ai-responses/`. The archive contains recovery evidence, not
+current instructions. Current code/SOP and the active task plan always take
+precedence.
+
+```bash
+python3 scripts/infinity_codex.py list --limit 5
+python3 scripts/infinity_codex.py latest-path
+python3 scripts/infinity_codex.py show LOGICAL_ID
+python3 scripts/infinity_codex.py verify
+```
+
+The hook does not archive user prompts, commentary, tool calls, or subagent
+output. See the indexed Infinity Codex implementation report for the complete
+recovery and retention policy.
+
+## Print Pipeline
+
+Run from this directory:
+
+```bash
+npm run install:print
+npm run dev
+npm run validate:paper
+npm run check:render
+```

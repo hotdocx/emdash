@@ -1,93 +1,84 @@
 # EMDASH Reports Index
 
-Date: 2026-07-07
+Date: 2026-07-10
 
-Use this file as the first stop for report discovery. The active code authority
-is still `emdash3_2.lp`; reports explain status, notation, plans, and review
-decisions.
+Use this file as the first stop for report discovery. `emdash3_2.lp` remains
+the active code authority; reports explain current status, mathematics,
+notation, implementation plans, and historical decisions.
 
 ## Current Orientation
 
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
-  current implementation status, validation workflow, rewrite-rule SOP, and
-  known deferred items.
-- `EMDASH_FOUNDATIONS.md`: mathematician-facing reading guide for the current
-  directed-family foundations.
-- `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: current
-  notation authority for comments, examples, and future parser work.
+  living current architecture, validation workflow, rewrite/unification SOP,
+  and deferred boundaries.
+- `EMDASH_FOUNDATIONS.md`: mathematician-facing guide to the implemented
+  foundations and explicit staging limits.
+- `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
+  authority for comments, examples, and future parser work.
 
 ## Current Plans
 
-- `REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
-  controlled local archiving of Codex final responses, compaction/resume
-  recovery pointers, plan provenance, and related agentic MathOps.
+- `REPORT_EMDASH_V3_2_DOCUMENTATION_KERNEL_MAINTENANCE_IMPLEMENTATION_PLAN_2026-07-10.md`:
+  active authority consolidation, mathematical/notation refresh, adjacent
+  source documentation, diagnostic navigation, and later naming audit.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
-  MathOps/DevOps/SOP improvement plan and implementation order.
-- `REPORT_EMDASH_V3_2_REORGANIZATION_PLAN_2026-06-16.md`: split-ready section
-  ordering plan for `emdash3_2.lp`.
+  active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
-  dependent products along functors and comma-category infrastructure.
-- `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
-  active implementation plan and log for the v3.2 profunctor facade,
-  tensor/internal-hom calculus, weighted limits, op-duality, and the
-  join/directed-inductive stress test.
+  proposed dependent products along functors and comma-category
+  infrastructure.
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`:
-  proposed representability- and isomorphism-based redesign of the profunctor
-  calculus, motivated by the current right-adjoint weighted-limit preservation
-  architecture; also owns the trigger-based deferred-internalization side-task
-  ledger.
+  active representability/computational-comparison redesign and deferred
+  internalization ledger.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
-  active architecture and staged implementation plan for observational
-  groupoid paths, type equivalence, computational univalence,
-  omega-categorical equivalence, explicit categorical-univalence capability,
-  Yoneda internalization, and generic `HomComparison`.
+  active groupoid, type-equivalence, computational-univalence,
+  omega-equivalence, and generic comparison architecture.
 - `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
-  proposed subplan for the `UNI-DEFISO` migration: stable hom-action owners,
-  generic `hom_int` precomposition, Cat-specialized owner cleanup, and
-  factoring `ProfComparison` through `DefIso`.
-- `REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`:
-  dedicated proposed subplan for demoting pure `Cat_cat`/`Catd_cat`
-  specialized identity, composition, and curried-composition helpers to
-  transparent aliases over generic `id`, `comp_fapp0`, and `hom_*` owners,
-  while retaining Cat-only transfor projection heads.
-- `REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md`:
-  proposed plan for making `Prof_cat(A,B)` a primitive fixed-endpoint
-  profunctor category head, with explicit `Obj`/`Hom_cat` projections to the
-  existing `Catd_cat(Product_cat(Op_cat A) B)` semantics and public vertical
-  normal forms over generic `@comp_fapp0 (Prof_cat A B)`.
-- `REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-07.md`:
-  promoted subplan of the primitive-`Prof_cat` migration which adds the general
-  product/uncurried composition owner `comp_prod_func`, deleting the residual
-  `Unit_prof_fapp1_func` stable head, and cleaning historical hom-action
-  equality wrappers.
-- `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`:
-  implementation and decision record for the hom-variance separation and
-  rigid-`Hom` migration. Direct `Unit_prof` action computes through `Hom_*`,
-  independently factored pre/post cuts and endpoint degenerations are related
-  by proof-time bridges, and focused `Hom_*` identity/composition joins retain
-  functorial computation. A post-Phase-8 follow-up promotes middle-constrained
-  generic identity rules and records typed `eq_refl` joinability of the
-  competing PathOut/Sigma runtime identities. Candidate A remains documented
-  as a future complete accumulation/confluence redesign.
+  active incremental `DefIso`, hom-action, and `ProfComparison` migration.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
-  detailed redesign plan for retiring remaining `Prof_comp_transf`/
-  equipment-shadow runtime ownership from tensor/co-Yoneda and primitive join,
-  while retaining semantically justified `Prof_reindex`.
-- `REPORT_EMDASH_V3_2_ECKMANN_HILTON_APPLICATION_PLAN_2026-07-03.md`:
-  proposed reviewer-facing Eckmann-Hilton application plan, including
-  proof-by-reflexivity boundaries, horizontal-composition normal-form probes,
-  interchange theorem staging, and rewrite-rule SOP gates for any missing
-  bridge.
-- `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`: full
-  naturality follow-up plan.
+  active/deferred redesign of remaining equipment-shadow, tensor,
+  co-Yoneda, and primitive-join ownership.
+- `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`:
+  full-naturality follow-up after the first implemented slice.
 - `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
-  structural functor logic and displayed follow-ups.
+  ordinary structural functor logic and displayed/product follow-ups.
+- `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
+  implementation log plus remaining profunctor, weighted-limit, duality, and
+  directed-inductive follow-ups after the first end-to-end pass.
+
+## Completed Or Promoted Decision Records
+
+These reports remain active references for exact decisions and probe evidence,
+but their promoted phases are not open implementation plans.
+
+- `REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
+  completed local final-response archive and compaction/resume recovery flow.
 - `REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
-  notation migration and checks-file split history.
+  completed notation/check-file split history with remaining work transferred
+  to current maintenance/reorganization plans.
+- `REPORT_EMDASH_V3_2_CAT_CATD_SPECIALIZATION_ALIAS_MIGRATION_PLAN_2026-07-04.md`:
+  promoted generic-owner migration for Cat/Catd specialization aliases and
+  retained Cat-only projection structure.
+- `REPORT_EMDASH_V3_2_COMP_PROD_FUNC_UNIT_PROF_ACTION_SUBPLAN_2026-07-07.md`:
+  promoted product-composition owner and direct unit-profunctor action.
+- `REPORT_EMDASH_V3_2_HOM_VARIANCE_SEPARATION_AND_HOM_FAPP0_CLEANUP_PLAN_2026-07-09.md`:
+  completed variance separation, rigid-`Hom` selection, proof-time comparison
+  boundary, and middle-constrained identity follow-up.
+- `REPORT_EMDASH_V3_2_PROF_CAT_PRIMITIVE_REDESIGN_PLAN_2026-07-06.md`:
+  promoted primitive fixed-endpoint `Prof_cat`, public surface, and
+  `Unit_prof`/representable reindex architecture.
+- `REPORT_EMDASH_V3_2_ECKMANN_HILTON_APPLICATION_PLAN_2026-07-03.md`:
+  promoted conservative Eckmann-Hilton computation and recorded broader
+  textbook/presentation follow-ups.
+
+## Deferred Reorganization And Presentation Plans
+
+- `REPORT_EMDASH_V3_2_REORGANIZATION_PLAN_2026-06-16.md`: the first
+  single-file section/assertion reorganization is reflected in the active
+  source; module splitting remains deferred until boundaries stabilize.
 - `REPORT_EMDASH_V3_2_INDEX_3_2_READABILITY_IMPLEMENTATION_PLAN_2026-06-06.md`:
-  print/index readability plan.
+  print/index readability work.
 - `REPORT_EMDASH_V3_2_RESEARCH_ARTICLE_ARCHITECTURE_2026-06-05.md`:
-  research article architecture and paper narrative plan.
+  research-article and paper narrative architecture.
 
 ## Audits And Retirements
 
@@ -95,24 +86,24 @@ decisions.
   obsolete v2 baseline and consolidated v2 report.
 
 Retired source files and superseded reports live under ignored `.scratchpad/`
-paths. Do not consult `.scratchpad/` during normal work unless explicitly
-asked for historical recovery.
+paths. Do not consult them during normal work unless historical recovery is
+explicitly requested.
 
 ## Generated Or Semi-Generated Reports
 
-The following reports are expected to be generated or refreshed by tooling:
-
-- `REPORT_EMDASH_HEALTH.md`: validation and source metrics generated by
-  `scripts/check_metrics.py`.
-- `REPORT_EMDASH_CHECK_CATALOG.md`: reviewer-facing check catalog generated by
-  `scripts/generate_check_catalog.py`.
+- `REPORT_EMDASH_HEALTH.md`: generated validation, timing, source, and section
+  metrics.
+- `REPORT_EMDASH_CHECK_CATALOG.md`: generated reviewer-facing map of the
+  diagnostic suite.
 
 ## Maintenance Rules
 
 - Add every new active report to this index.
-- Give active plan reports stable `Plan-ID`, dependency, side-task-ledger, and
-  Infinity Codex provenance fields. `make ci` enforces these fields for reports
-  listed under Current Plans.
-- Mark reports as current plans, audits, generated reports, or retired
-  references.
-- Keep active reports free of instructions to read `.scratchpad/`.
+- List only genuinely open plans under `Current Plans`; move completed promoted
+  plans to decision records without deleting their history.
+- Current plans require `Plan-ID`, dependency, supersession, side-task-ledger,
+  Infinity Codex provenance, and status fields. `make ci` enforces them.
+- Mark reports as current orientation, current plan, completed decision record,
+  deferred plan, audit, or generated report.
+- Keep normal-work instructions pointed at active authorities rather than
+  ignored historical material.

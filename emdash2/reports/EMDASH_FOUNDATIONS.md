@@ -6,7 +6,10 @@ category/type-theory notation and deliberately suppresses most Lambdapi rewrite
 engineering details.
 
 The implementation is still evolving. This note describes the current directed
-categorical foundation, not a finished proof assistant surface language.
+categorical foundation and the first checked equivalence, profunctor,
+directed-inductive, and Eckmann–Hilton staging layers. It is not a finished
+proof-assistant surface language, and a named capability interface should not
+be read as a completed metatheory.
 For parser/comment notation, use
 `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` as the authority.
 
@@ -96,9 +99,11 @@ Hom_{Path(A)}(x,y) = Path(x =_A y)
 Composition in `Path(A)` is path transitivity.
 
 This is motivation and infrastructure, not yet the full HoTT program. The
-current v3.2 theory does not yet characterize equality in Sigma types, equality
-in Pi types, equality in the universe, univalence, equivalences, or pushouts.
-Those are intentionally deferred.
+current v3.2 theory now has computational path views for the encoded Sigma/Pi
+object layers, explicit type-equivalence data, and groupoid/categorical
+univalence capability interfaces. Section 13 explains that staging. General
+higher-inductive pushouts and a complete computational account of every
+Sigma/Pi/universe equality remain deferred.
 
 ## 4. The Universe Of Categories
 
@@ -814,30 +819,231 @@ This keeps the theorem surface sequential:
 while still providing the compiled Sigma-total form needed by existing
 transport and total-category infrastructure.
 
-## 13. What Is Deferred
+## 13. Equivalence And Univalence Staging
+
+The active kernel distinguishes several levels of equivalence rather than
+using one overloaded notion.
+
+At the groupoid/type level, an equivalence package contains forward and inverse
+maps with path witnesses:
+
+```text
+e : TypeEquiv(A,B)
+e.to   : A -> B
+e.from : B -> A
+e.from(e.to(a)) = a
+e.to(e.from(b)) = b.
+```
+
+Reflexivity computes, and the encoded product, Sigma, and Pi object layers have
+the first constructor-specific closure operations. Paths can be decoded to
+equivalences by `idtoequiv_grpd`; the converse direction is exposed through a
+groupoid-univalence capability:
+
+```text
+U : GrpdUnivalence
+ua_grpd(U,e) : A = B.
+```
+
+The kernel also exposes a decoder-oriented witness
+`grpd_univalence_by_decoder`. This staging makes the computational boundary
+explicit: the interface is available and its reflexive/constructor projections
+are checked, but it is not a claim that every future HoTT computation rule has
+already been derived.
+
+At the ordinary categorical level:
+
+```text
+IsoEvidence_C(x,y)
+```
+
+contains an arrow, an inverse arrow, and propositional left/right inverse
+paths. The 1-categorical univalence capability compares object equality with
+this ordinary isomorphism evidence.
+
+For the iterated-hom reading, omega-equivalence is recursive:
+
+```text
+e : OmegaEquiv_C(x,y)
+e.to        : Hom_C(x,y)
+e.left_inv  : Hom_C(y,x)
+e.right_inv : Hom_C(y,x)
+```
+
+together with omega-equivalences in the appropriate hom-categories witnessing
+the two inverse composites. Reflexivity, opposite, and product closure are
+active. `CatUnivalence(C)` packages the comparison between object equality and
+`OmegaEquiv_C`; `cat_univalence(C)` and the decoder-oriented interface expose
+the selected capability.
+
+The distinction between `IsoEvidence` and `OmegaEquiv` is intentional.
+Ordinary isomorphism data is the 1-categorical staging layer; recursive
+omega-equivalence accounts for higher inverse cells.
+
+## 14. Computational Isomorphism And Hom-Action Cancellation
+
+Ordinary `IsoEvidence` records inverse laws propositionally. Some kernel
+computations need a stricter selected normal form in which inverse cuts cancel
+judgmentally under the stable hom-action owner. This is represented by:
+
+```text
+i : DefIso_C(x,y)
+defiso_to(i)   : x -> y
+defiso_from(i) : y -> x.
+```
+
+The selected cancellation laws compute at the represented postcomposition
+head. Reflexivity, symmetry, composition, and functorial image are active, and
+`defiso_iso_evidence(i)` forgets the computational package to ordinary
+isomorphism evidence.
+
+This is a Lambdapi/kernel notion of a chosen computational comparison. It does
+not redefine mathematical categorical equivalence. The narrower normal form is
+used when beta/eta cancellation must remain visible to rewriting.
+
+## 15. Cat-Valued Profunctors And Weighted Representability
+
+A v3.2 profunctor from `A` to `B` is a Cat-valued functor on the product base:
+
+```text
+R : Prof(A,B)
+R : A^op x B -> Cat.
+```
+
+`Prof_cat(A,B)` is the fixed-endpoint category of such profunctors. Its
+vertical maps are `ProfMap(P,Q)`. Endpoint variation is owned by reindexing:
+
+```text
+Prof_reindex(R,F,G)(a,b) = R(F[a],G[b]),
+```
+
+with the contravariant source endpoint implemented by the product base map
+`Product_map_func(Op_func(F),G)`.
+
+The unit profunctor is the uncurried hom bifunctor:
+
+```text
+Unit_prof(A)(x,y) = Hom_A(x,y).
+```
+
+Its simultaneous base action uses the rigid hom owner:
+
+```text
+Hom_A(g,f)[h] = f o h o g.
+```
+
+Readable representables are obtained by reindexing `Unit_prof`:
+
+```text
+Hom_prof_along(F,G)
+Companion_prof(F)
+Conjoint_prof(F).
+```
+
+The primitive tensor is symbolic composition of profunctors:
+
+```text
+Prof_tensor(P,Q) : Prof(A,X)
+```
+
+for `P : Prof(A,B)` and `Q : Prof(B,X)`. The current kernel does not contain a
+general coend/coinserter quotient, so the tensor object is opaque and its
+computational meaning is exposed through reindexing, shaped introduction, and
+co-Yoneda maps.
+
+Covariant and contravariant profunctor implications provide the two fixed-
+endpoint closed directions. The active eval/lambda pairs are inverse on
+vertical maps:
+
+```text
+ProfMap(P, O => Q)  <->  ProfMap(P tensor Q, O)
+ProfMap(Q, P => O)  <->  ProfMap(P tensor Q, O).
+```
+
+Weighted cones are expressed through covariant implication. A weighted-limit
+candidate `L` carries a computational comparison between the cone profunctor
+and its representable:
+
+```text
+IsWeightedLimit_cov_comp(F,W,L)
+  = ProfComparison(WeightedCone_prof(F,W), Hom_prof(L)).
+```
+
+Here `ProfComparison` is the profunctor-facing transparent view of `DefIso`.
+Reindexing the one ambient comparison supplies push/pull operations for every
+probe functor. Adjunction mate comparisons then give the checked
+right-adjoint-preserves-weighted-limits construction. Weighted colimits and
+left-adjoint preservation are obtained by the active opposite duality.
+
+## 16. Directed Join And Eckmann–Hilton
+
+The first directed-inductive join slice is primitive:
+
+```text
+Join_cat(A,B)
+join_fst_func : A -> Join_cat(A,B)
+join_snd_func : B -> Join_cat(A,B).
+```
+
+Instead of externally quantifying a separate cross arrow for every pair, the
+join carries one internally natural profunctor cell containing all arrows from
+the left inclusion to the right inclusion. `join_cross_hom(a,b)` is the shaped
+projection of that cell. The nondependent recursor computes on both inclusions
+and the cross cell.
+
+This is a checked directed-inductive staging point, not yet a semantic collage
+construction or general dependent eliminator.
+
+The first Eckmann–Hilton application uses an iterated hom-category:
+
+```text
+EH_2End(B,x) = Hom_{Hom_B(x,x)}(id_x,id_x).
+```
+
+Vertical composition is ordinary composition in `Hom_B(x,x)`. Horizontal
+composition is represented postcomposition/whiskering specialized to the
+identity 1-cell, rather than a second primitive operation. The two operations
+are connected through shared-middle interchange equalities, yielding:
+
+```text
+EH_comm(alpha,beta) : beta · alpha = alpha · beta.
+```
+
+This example is important architecturally: it demonstrates that the existing
+hom-action and transfor projection calculus can express a classical
+2-categorical theorem while remaining inside the iterated-hom omega-friendly
+representation.
+
+## 17. What Is Deferred
 
 The current foundations intentionally do not yet include:
 
-- HoTT computation rules for equality in Sigma types.
-- HoTT computation rules for equality in Pi types.
-- Universe equality or Voevodsky-style univalence.
-- Equivalence/isomorphism theory for categories.
-- Pushouts, joins, or higher inductive categories.
-- A finalized surface syntax for the future proof assistant.
-- Full coherence APIs for every Sigma/Pi helper.
-- A named `section_total(s) : K → Σ_K E` construction and its projection laws.
-- Full product/curry adjunction coherence for `Product_cat`, beyond the
+- a complete HoTT computation theory for every equality in Sigma/Pi types;
+- a completed universe/univalence metatheory beyond the active explicit
+  capabilities and constructor/reflexivity computations;
+- a complete coherence API for `OmegaEquiv` and univalent categories;
+- general higher-inductive pushouts and a generic directed-inductive schema;
+- dependent join elimination or a semantic collage construction;
+- a finalized surface syntax for the future proof assistant;
+- full coherence APIs for every Sigma/Pi helper;
+- a named `section_total(s) : K → Σ_K E` construction and its projection laws;
+- full product/curry adjunction coherence for `Product_cat`, beyond the
   current product normal form, projection computation, and functor-level
-  curry/uncurry action laws.
-- General dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
-  functors.
+  curry/uncurry action laws;
+- general dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
+  functors;
+- a general coend/coinserter implementation of profunctor tensor;
+- full tensor associativity/coherence and complete co-Yoneda equivalences;
+- all endpoint-changing closed/equipment APIs derivable from the fixed-
+  endpoint profunctor core.
 
-These are compatible future directions. The current v3.2 milestone is the
-directed categorical foundation: universes as categories, functorial
-Cat-valued families, total categories, section categories, dependent homs, and
-section action over base arrows.
+These are compatible future directions. The current v3.2 milestone combines
+the directed categorical foundation with explicit equivalence/univalence
+staging, a first computational profunctor/weighted-representability layer,
+primitive directed join, synthetic path induction, and the Eckmann–Hilton
+application.
 
-## 14. Implementation Glossary
+## 18. Implementation Glossary
 
 This table maps the mathematical notation above to the current `emdash3_2.lp`
 vocabulary.
@@ -850,6 +1056,9 @@ vocabulary.
 | `Functor(A,B)` | `Functor_cat A B` / `Functor A B` |
 | `F[x]` | `fapp0 F x` |
 | `F[f]` | `fapp1_fapp0 F f` |
+| `u_*` / `u_*(g)` | `hom_postcomp_func` / `hom_postcomp_fapp0` |
+| `u^*` / `u^*(h)` | `hom_precomp_along_func` / `hom_precomp_along_fapp0` |
+| `Hom_A(g,f)[h] = f o h o g` | `Hom_func g f` / `Hom_fapp0 g f h` |
 | `Transf(F,G)` | `Transf_cat F G` / `Transf F G` |
 | `ϵ[x]` | `tapp0_fapp0 x ϵ` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
@@ -885,6 +1094,22 @@ vocabulary.
 | `K × A` | `Product_cat K A`; also the normal form of `Sigma_cat(Const_catd K A)` |
 | `π₁ : K × A → K` | `Product_projL_func K A` |
 | `π₂ : K × A → A` | `Product_projR_func K A` |
+| type equivalence `A ≃ B` | `TypeEquiv A B` |
+| groupoid univalence capability | `GrpdUnivalence` / `grpd_univalence_by_decoder` |
+| ordinary categorical isomorphism evidence | `IsoEvidence C x y` |
+| omega-equivalence | `OmegaEquiv C x y` |
+| categorical univalence capability | `CatUnivalence C` / `cat_univalence_by_decoder C` |
+| computational isomorphism | `DefIso C x y` |
+| profunctors `A -/-> B` | `Prof_cat A B` / `Prof A B` |
+| vertical profunctor maps | `ProfMap P Q` |
+| unit hom profunctor | `Unit_prof A` |
+| endpoint reindexing | `Prof_reindex R F G` |
+| profunctor tensor | `Prof_tensor P Q` |
+| computational profunctor comparison | `ProfComparison P Q` (transparent `DefIso` view) |
+| weighted-limit comparison | `IsWeightedLimit_cov_comp F W L` |
+| directed join | `Join_cat A B` |
+| 2-endomorphisms of `id_x` | `EH_2End B x` |
+| Eckmann–Hilton commutativity | `EH_comm B x alpha beta` |
 
 The implementation contains additional projection heads to make Lambdapi
 normalization reliable. They are part of the checked kernel engineering, not

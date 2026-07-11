@@ -154,7 +154,7 @@ flag "print_domains" on;
 flag "print_meta_args" on;
 
 /*
-  Ported working conventions from the retired v2 baseline
+  Active kernel working conventions
 
   This file is intentionally kernel-like: primitives stay small, and
   computational behavior is made explicit by rewrite and unification rules.
@@ -398,7 +398,10 @@ flag "print_meta_args" on;
     τ a            is the ambient Lambdapi type of elements of a.
     Prop/P         are mapped to Grpd/τ for Lambdapi's inductive interface.
 */
+// Universe of small groupoidal/type-like classifiers.
 constant symbol Grpd : TYPE;
+
+// Decode a groupoid classifier to its ambient Lambdapi type of elements.
 injective symbol τ : Grpd → TYPE;
 builtin "T" ≔ τ;
 builtin "Prop" ≔ Grpd;
@@ -416,6 +419,7 @@ builtin "P" ≔ τ;
 injective symbol = : Π [a: Grpd], τ a → τ a → Grpd;
 notation = infix 10;
 
+// Reflexive path `refl_x : x = x`.
 injective symbol eq_refl : Π [a: Grpd], Π x: τ a, τ (x = x);
 
 // Right-based dependent path induction. This supplies the path-dependent
@@ -429,6 +433,7 @@ symbol ind_eqr
   (p : τ (x = y))
   : τ (P x p);
 
+// Path-induction beta: eliminating reflexivity returns the supplied motive.
 rule ind_eqr _ $u (eq_refl _) ↪ $u;
 
 // Equality eliminator/transport, derived as the path-independent specialization
@@ -447,7 +452,7 @@ symbol eq_trans : Π [a : Grpd], Π [x : τ a], Π [y : τ a], Π [z : τ a],
   τ (x = y) → τ (y = z) → τ (x = z)
 ≔ λ a x y z p q, ind_eq p (λ t : τ a, t = z) q;
 
-// Symmetry and nondependent action of functions on equality paths.
+// Path symmetry: `p : x = y` gives `p^-1 : y = x`.
 symbol eq_sym
   [a : Grpd]
   [x y : τ a]
@@ -457,6 +462,7 @@ symbol eq_sym
     (λ t : τ a, y = t)
     (eq_refl y);
 
+// Nondependent action on paths: `ap(f,p) : f(x) = f(y)`.
 symbol eq_ap
   [a b : Grpd]
   (f : τ a → τ b)
@@ -480,6 +486,7 @@ symbol PathOver
   : Grpd
 ≔ u = ind_eq p P v;
 
+// Reflexive dependent path over `refl_x`.
 symbol pathover_refl
   [A : Grpd]
   [P : τ A → Grpd]
@@ -511,7 +518,10 @@ builtin "eqind" ≔ ind_eq;
 // categorical core itself.
 inductive unit : TYPE ≔ | tt : unit;
 
+// Groupoid classifier whose decoded type is the one-element type `unit`.
 constant symbol Unit_grpd : Grpd;
+
+// Decoding beta for the unit classifier.
 rule τ Unit_grpd ↪ unit;
 
 inductive nat : TYPE ≔
@@ -522,6 +532,9 @@ inductive nat : TYPE ≔
 // 1. Encoded Sigma types for object layers
 // -------------------------------------------------------------------------------------------------
 
+// 1a. Encoded dependent pairs, projections, and Sigma path views.
+
+// Decoded dependent-pair representation for the groupoid code `Σ_ P`.
 inductive τΣ_ [a : Grpd] (P : τ a → Grpd) : TYPE ≔
 | Struct_sigma [a P] : Π (sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), @τΣ_ a P;
 notation τΣ_ quantifier;
@@ -537,13 +550,20 @@ notation τΣ_ quantifier;
 */
 constant symbol Σ_ [a : Grpd] (P : τ a → Grpd) : Grpd;
 notation Σ_ quantifier;
+
+// Decoding beta: elements of `Σ_ P` are encoded dependent pairs.
 rule τ (Σ_ $P) ↪ τΣ_ $P;
 
+// First projection of an encoded dependent pair.
 injective symbol sigma_Fst [a P] (s : @τΣ_ a P) : τ a;
+
+// First-projection beta: `fst(x,u) = x`.
 rule sigma_Fst (Struct_sigma $1 $2) ↪ $1;
 
 // Second projection of an encoded dependent pair.
 injective symbol sigma_Snd [a P] (s : @τΣ_ a P) : τ (P (sigma_Fst s));
+
+// Second-projection beta: `snd(x,u) = u`.
 rule sigma_Snd (Struct_sigma $1 $2) ↪ $2;
 
 // Fixed-parameter eliminator for encoded Sigma objects. The generated
@@ -557,6 +577,7 @@ symbol sigma_ind
   (s : @τΣ_ A P)
   : τ (Q s);
 
+// Sigma elimination beta: the constructor branch receives both components.
 rule sigma_ind _ $c (Struct_sigma $x $u) ↪ $c $x $u;
 
 // Observational path view for encoded Sigma objects. A path between dependent
@@ -569,6 +590,7 @@ symbol SigmaPathView
 ≔ `Σ_ p : τ (sigma_Fst u = sigma_Fst v),
    @PathOver A P (sigma_Fst u) (sigma_Fst v) p (sigma_Snd u) (sigma_Snd v);
 
+// Base-path projection of a Sigma path view.
 symbol sigma_path_base
   [A : Grpd]
   [P : τ A → Grpd]
@@ -577,6 +599,7 @@ symbol sigma_path_base
   : τ (sigma_Fst u = sigma_Fst v)
 ≔ sigma_Fst w;
 
+// Dependent fibre-path projection over `sigma_path_base`.
 symbol sigma_path_fibre
   [A : Grpd]
   [P : τ A → Grpd]
@@ -590,6 +613,7 @@ symbol sigma_path_fibre
       (sigma_Snd v))
 ≔ sigma_Snd w;
 
+// Reflexive Sigma path view: the pair of reflexive base and fibre paths.
 symbol sigma_path_refl
   [A : Grpd]
   [P : τ A → Grpd]
@@ -602,12 +626,15 @@ symbol sigma_path_refl
     (eq_refl (sigma_Fst u))
     (@pathover_refl A P (sigma_Fst u) (sigma_Snd u));
 
+// Sigma equality unfolds to its observational base-plus-fibre path view.
 rule @= (@Σ_ $A $P) $u $v
   ↪ @SigmaPathView $A $P $u $v;
 
+// First projection of Sigma reflexivity is base reflexivity.
 rule sigma_Fst (@eq_refl (@Σ_ $A _) $u)
   ↪ @eq_refl $A (sigma_Fst $u);
 
+// Second projection of Sigma reflexivity is reflexive pathover.
 rule sigma_Snd (@eq_refl (@Σ_ $A $P) $u)
   ↪ @pathover_refl $A $P (sigma_Fst $u) (sigma_Snd $u);
 
@@ -623,6 +650,7 @@ unif_rule
       $y ≡ @pathover_refl $A $P (@sigma_Fst $A $P $u) (@sigma_Snd $A $P $u)
     ];
 
+// Encode a generic Sigma equality into the observational Sigma path view.
 symbol sigma_path_encode
   [A : Grpd]
   [P : τ A → Grpd]
@@ -648,6 +676,7 @@ constant symbol Pi_grpd
   (B : τ A → Grpd)
   : Grpd;
 
+// Decoding beta for the groupoid-level dependent function classifier.
 rule τ (@Pi_grpd $A $B) ↪ Π x : τ $A, τ ($B x);
 
 // Constant-family pathover bridge: an ordinary fibre path can be viewed over
@@ -696,11 +725,13 @@ symbol const_pathover_path
     v
     q;
 
+// Nondependent function classifier `A -> B` as a constant-family Pi.
 symbol Function_grpd
   (A B : Grpd)
   : Grpd
 ≔ @Pi_grpd A (λ _ : τ A, B);
 
+// Build equality of dependent pairs from a base path and fibre pathover.
 symbol sigma_path_intro
   [A : Grpd]
   [P : τ A → Grpd]
@@ -731,6 +762,7 @@ symbol sigma_path_intro
     b
     q;
 
+// Decode the observational Sigma path view back to pair equality.
 symbol sigma_path_decode
   [A : Grpd]
   [P : τ A → Grpd]
@@ -756,6 +788,7 @@ symbol sigma_path_decode
     v
     w;
 
+// Observational Pi path view: dependent pointwise action over every base path.
 symbol PiPathView
   [A : Grpd]
   (B : τ A → Grpd)
@@ -769,9 +802,11 @@ symbol PiPathView
             (λ p : τ (x0 = x1),
               @PathOver A B x0 x1 p (f x0) (g x1))));
 
+// Pi equality unfolds to its observational dependent pointwise path view.
 rule @= (@Pi_grpd $A $B) $f $g
   ↪ @PiPathView $A $B $f $g;
 
+// Reflexive Pi path view of a dependent function.
 symbol pi_path_refl
   [A : Grpd]
   [B : τ A → Grpd]
@@ -779,9 +814,11 @@ symbol pi_path_refl
   : τ (@PiPathView A B f f)
 ≔ @eq_refl (@Pi_grpd A B) f;
 
+// Pi reflexivity evaluated over p is dependent action `apd(f,p)`.
 rule @eq_refl (@Pi_grpd $A $B) $f $x0 $x1 $p
   ↪ @eq_apd $A $B $f $x0 $x1 $p;
 
+// Encode Pi equality into the observational view (definitionally the path).
 symbol pi_path_encode
   [A : Grpd]
   [B : τ A → Grpd]
@@ -790,18 +827,21 @@ symbol pi_path_encode
   : τ (@PiPathView A B f g)
 ≔ p;
 
+// Contractibility: a chosen centre together with a path to every point.
 symbol IsContr
   (X : Grpd)
   : Grpd
 ≔ `Σ_ centre : τ X,
    @Pi_grpd X (λ x : τ X, centre = x);
 
+// Centre projection of contractibility evidence.
 symbol is_contr_center
   [X : Grpd]
   (c : τ (IsContr X))
   : τ X
 ≔ sigma_Fst c;
 
+// Contraction path from the selected centre to a point.
 symbol is_contr_path
   [X : Grpd]
   (c : τ (IsContr X))
@@ -809,6 +849,7 @@ symbol is_contr_path
   : τ (is_contr_center c = x)
 ≔ sigma_Snd c x;
 
+// Homotopy fibre of f over b: pairs `(a,p)` with `p : f(a) = b`.
 symbol HFiber
   [A B : Grpd]
   (f : τ A → τ B)
@@ -816,6 +857,7 @@ symbol HFiber
   : Grpd
 ≔ `Σ_ a : τ A, f a = b;
 
+// Domain-point projection of a homotopy-fibre element.
 symbol hfiber_point
   [A B : Grpd]
   [f : τ A → τ B]
@@ -824,6 +866,7 @@ symbol hfiber_point
   : τ A
 ≔ sigma_Fst h;
 
+// Equality-witness projection of a homotopy-fibre element.
 symbol hfiber_path
   [A B : Grpd]
   [f : τ A → τ B]
@@ -832,6 +875,7 @@ symbol hfiber_path
   : τ (f (hfiber_point h) = b)
 ≔ sigma_Snd h;
 
+// A function is an equivalence when each homotopy fibre is contractible.
 symbol IsEquivMap
   [A B : Grpd]
   (f : τ A → τ B)
@@ -839,6 +883,7 @@ symbol IsEquivMap
 ≔ @Pi_grpd B
     (λ b : τ B, IsContr (@HFiber A B f b));
 
+// Contractible-fibre projection of equivalence evidence at b.
 symbol is_equiv_fiber
   [A B : Grpd]
   [f : τ A → τ B]
@@ -847,24 +892,28 @@ symbol is_equiv_fiber
   : τ (IsContr (@HFiber A B f b))
 ≔ e b;
 
+// Type/groupoid equivalence: a function with contractible homotopy fibres.
 symbol TypeEquiv
   (A B : Grpd)
   : Grpd
 ≔ `Σ_ f : τ (Function_grpd A B),
    @IsEquivMap A B f;
 
+// Forward map of a type equivalence.
 symbol type_equiv_to
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
   : τ A → τ B
 ≔ sigma_Fst e;
 
+// Fibrewise-equivalence evidence carried by `TypeEquiv`.
 symbol type_equiv_is_equiv
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
   : τ (@IsEquivMap A B (type_equiv_to e))
 ≔ sigma_Snd e;
 
+// Contractible homotopy fibre of an equivalence over b.
 symbol type_equiv_fiber
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
@@ -872,6 +921,7 @@ symbol type_equiv_fiber
   : τ (IsContr (@HFiber A B (type_equiv_to e) b))
 ≔ type_equiv_is_equiv e b;
 
+// Selected inverse map: the centre of the contractible fibre over b.
 symbol type_equiv_from
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
@@ -880,6 +930,7 @@ symbol type_equiv_from
 ≔ @hfiber_point A B (type_equiv_to e) b
     (is_contr_center (type_equiv_fiber e b));
 
+// Right inverse path: `to(from(b)) = b`.
 symbol type_equiv_right
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
@@ -888,6 +939,7 @@ symbol type_equiv_right
 ≔ @hfiber_path A B (type_equiv_to e) b
     (is_contr_center (type_equiv_fiber e b));
 
+// Left inverse path: `from(to(a)) = a`.
 symbol type_equiv_left
   [A B : Grpd]
   (e : τ (TypeEquiv A B))
@@ -908,6 +960,7 @@ symbol type_equiv_left
         a
         (eq_refl (type_equiv_to e a))));
 
+// Every point of the identity homotopy fibre equals its reflexive centre.
 symbol hfiber_id_path
   [A : Grpd]
   [b a : τ A]
@@ -925,6 +978,7 @@ symbol hfiber_id_path
     a
     p;
 
+// Contraction path proving the identity homotopy fibre contractible.
 symbol hfiber_id_contr_path
   [A : Grpd]
   [b : τ A]
@@ -942,13 +996,16 @@ symbol hfiber_id_contr_path
     (λ a : τ A, λ p : τ (a = b), hfiber_id_path p)
     h;
 
+// Reflexive type equivalence on A.
 injective symbol type_equiv_refl
   [A : Grpd]
   : τ (TypeEquiv A A);
 
+// Forward map of reflexive equivalence is the identity function.
 rule sigma_Fst (@type_equiv_refl $A)
   ↪ λ x : τ $A, x;
 
+// Equivalence evidence for reflexivity is identity-fibre contraction.
 rule sigma_Snd (@type_equiv_refl $A)
   ↪ λ b : τ $A,
       @Struct_sigma
@@ -976,18 +1033,23 @@ injective symbol Product_grpd
   (A B : Grpd)
   : Grpd;
 
+// Product decoding is the constant-family dependent-pair representation.
 rule τ (Product_grpd $A $B)
   ↪ @τΣ_ $A (λ _ : τ $A, $B);
 
+// Product equality uses the corresponding Sigma path view.
 rule @= (Product_grpd $A $B) $p $q
   ↪ @SigmaPathView $A (λ _ : τ $A, $B) $p $q;
 
+// First component of product reflexivity.
 rule sigma_Fst (@eq_refl (Product_grpd $A _) $u)
   ↪ @eq_refl $A (sigma_Fst $u);
 
+// Second component of product reflexivity as constant-family pathover.
 rule sigma_Snd (@eq_refl (Product_grpd $A $B) $u)
   ↪ @pathover_refl $A (λ _ : τ $A, $B) (sigma_Fst $u) (sigma_Snd $u);
 
+// Pair constructor for the groupoid-level product.
 symbol Product_pair_grpd
   [A B : Grpd]
   (x : τ A)
@@ -995,6 +1057,7 @@ symbol Product_pair_grpd
   : τ (Product_grpd A B)
 ≔ @Struct_sigma A (λ _ : τ A, B) x y;
 
+// Product of equivalence maps has contractible homotopy fibres.
 symbol product_type_equiv_is_equiv
   [A A' B B' : Grpd]
   (eA : τ (TypeEquiv A A'))
@@ -1007,21 +1070,25 @@ symbol product_type_equiv_is_equiv
           (type_equiv_to eA (sigma_Fst p))
           (type_equiv_to eB (sigma_Snd p))));
 
+// Componentwise product of two type equivalences.
 injective symbol product_type_equiv
   [A A' B B' : Grpd]
   (eA : τ (TypeEquiv A A'))
   (eB : τ (TypeEquiv B B'))
   : τ (TypeEquiv (Product_grpd A B) (Product_grpd A' B'));
 
+// Forward map of product equivalence acts componentwise.
 rule sigma_Fst (@product_type_equiv $A $A' $B $B' $eA $eB)
   ↪ λ p : τ (Product_grpd $A $B),
       @Product_pair_grpd $A' $B'
         (type_equiv_to $eA (sigma_Fst p))
         (type_equiv_to $eB (sigma_Snd p));
 
+// Equivalence-evidence projection of the product equivalence.
 rule sigma_Snd (@product_type_equiv $A $A' $B $B' $eA $eB)
   ↪ @product_type_equiv_is_equiv $A $A' $B $B' $eA $eB;
 
+// Fibrewise equivalences induce an equivalence map on Sigma totals.
 symbol sigma_type_equiv_same_base_is_equiv
   [A : Grpd]
   [P Q : τ A → Grpd]
@@ -1034,6 +1101,7 @@ symbol sigma_type_equiv_same_base_is_equiv
           (sigma_Fst s)
           (type_equiv_to (e (sigma_Fst s)) (sigma_Snd s))));
 
+// Type equivalence between Sigma types over one fixed base.
 symbol sigma_type_equiv_same_base
   [A : Grpd]
   [P Q : τ A → Grpd]
@@ -1049,6 +1117,7 @@ symbol sigma_type_equiv_same_base
         (type_equiv_to (e (sigma_Fst s)) (sigma_Snd s)))
     (@sigma_type_equiv_same_base_is_equiv A P Q e);
 
+// Pointwise equivalences induce an equivalence map on dependent functions.
 symbol pi_type_equiv_same_domain_is_equiv
   [A : Grpd]
   [B C : τ A → Grpd]
@@ -1059,6 +1128,7 @@ symbol pi_type_equiv_same_domain_is_equiv
       (λ f : τ (@Pi_grpd A B),
         λ x : τ A, type_equiv_to (e x) (f x)));
 
+// Type equivalence between Pi types over one fixed domain.
 symbol pi_type_equiv_same_domain
   [A : Grpd]
   [B C : τ A → Grpd]
@@ -1103,10 +1173,13 @@ symbol EquivByInverse
     comp_fapp0(g,f)           composite g ∘ f
     Op_cat(A)                 A^op
 */
+// Meta-level type of categories in the encoded omega-categorical hierarchy.
 constant symbol Cat : TYPE;
 
+// Object groupoid/classifier of a category.
 symbol Obj : Cat → Grpd;
 
+// Iterated hom-category `Hom_A(X,Y)`.
 injective symbol Hom_cat : Π (A : Cat) (X_A Y_A : τ (Obj A)), Cat;
 
 // Object/type classifier of a hom-category.
@@ -1120,10 +1193,13 @@ injective symbol Hom (A : Cat) (X_A Y_A : τ (Obj A)) : Grpd
   "associativity of Obj" hints, not as global semantic injectivity claims for
   arbitrary category constructors.
 */
+// Proof-time inversion for object classifiers of two rigid hom-category heads.
 unif_rule Obj (Hom_cat $A $X $Y) ≡ Obj (Hom_cat $A' $X' $Y') ↪ [ $A ≡ $A'; $X ≡ $X'; $Y ≡ $Y' ];
 
+// Identity arrow `id_X : Hom_A(X,X)`.
 injective symbol id : Π (A : Cat), Π (X_A: τ (Obj A)), τ (Hom A X_A X_A);
 
+// Ordinary composition `g o f : Hom_A(X,Z)`.
 symbol comp_fapp0 : Π [A : Cat], Π [X_A Y_A : τ (Obj A)], Π [Z_A: τ (Obj A)],
   Π (g: τ (Hom A Y_A Z_A)), Π (f: τ (Hom A X_A Y_A)),
   τ (Hom A X_A Z_A);
@@ -1143,6 +1219,8 @@ unif_rule @comp_fapp0 $C $w $y $z $h
     (@comp_fapp0 $C $x $y $z $h $g)
     $f
   ↪ [ tt ≡ tt ];
+
+// Propositional associativity witness, implemented by the proof-time equation.
 symbol comp_assoc
   [C : Cat]
   [w x y z : τ (Obj C)]
@@ -1162,10 +1240,20 @@ symbol comp_assoc
 
 // Opposite category.
 injective symbol Op_cat : Cat → Cat;
+
+// Opposite involution: `(A^op)^op = A`.
 rule Op_cat (Op_cat $A) ↪ $A;
+
+// Opposite preserves the object classifier.
 rule Obj (Op_cat $A) ↪ Obj $A;
+
+// Opposite reverses hom endpoints.
 rule Hom_cat (Op_cat $A) $X $Y ↪ Hom_cat $A $Y $X;
+
+// Identity is unchanged under the opposite presentation.
 rule @id (Op_cat $A) $X ↪ @id $A $X;
+
+// Opposite composition reverses the ordered pair of factors.
 rule @comp_fapp0 (Op_cat $A) $X $Y $Z $g $f ↪ @comp_fapp0 $A $Z $Y $X $f $g;
 
 // Path categories internalize HoTT equality as a groupoidal category.
@@ -1173,10 +1261,20 @@ rule @comp_fapp0 (Op_cat $A) $X $Y $Z $g $f ↪ @comp_fapp0 $A $Z $Y $X $f $g;
 // Surface/formula:
 //   Path_cat(A) has objects x : A and arrows p : x = y.
 injective symbol Path_cat : Grpd → Cat;
+
+// Objects of `Path(A)` are elements of A.
 rule Obj (Path_cat $A) ↪ $A;
+
+// Hom categories in `Path(A)` are path categories of equality groupoids.
 rule Hom_cat (Path_cat $A) $x $y ↪ Path_cat ($x = $y);
+
+// Path-category identity is reflexivity.
 rule @id (Path_cat $A) $x ↪ eq_refl $x;
+
+// Path-category composition is equality transitivity.
 rule @comp_fapp0 (Path_cat $A) $x $y $z $q $p ↪ eq_trans $p $q;
+
+// The path category is self-opposite at this groupoidal staging level.
 rule Op_cat (Path_cat $A) ↪ Path_cat $A;
 
 // Core groupoid of objects of a category.
@@ -1630,7 +1728,7 @@ rule @id (@Functord_cat $K $E $D) $FF
     Hom_Functord(FF,GG) = k :^n K ; FF[k] => GG[k].
 */
 
-// 3d. Ordinary identity, composition, opposite, terminal, and constant
+// 3e. Ordinary identity, composition, opposite, terminal, and constant
 // functor packages.
 /*
   Ordinary identity/composition in Cat_cat.
@@ -2427,7 +2525,7 @@ constant symbol op : τ (Functor Cat_cat Cat_cat);
 rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
 rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
 
-// 3e. Internalized universe-level constructor packages.
+// 3f. Internalized universe-level constructor packages.
 //
 // Internalized ordinary functor-category formation. The total package has no
 // recoverable parameters; the partial stage is injective so equality of
@@ -2492,6 +2590,8 @@ injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z))
 // 4. Ordinary internal hom and hom actions
 // -------------------------------------------------------------------------------------------------
 
+// 4a. Covariant represented hom families and postcomposition action.
+
 /*
   Ordinary internal hom classifiers.
 
@@ -2552,7 +2652,7 @@ rule fapp0 (@fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f) $g
     hom_postcomp_tele_fapp1_func(F,W,X,Y,f,g)
       : Hom(f,g) ⊢ Hom(hom_postcomp_func(f), hom_postcomp_func(g))
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     Hom_A(W,F[-])[f](g)
 
   This is the functorial-in-f head for postcomposition. It keeps the arrow
@@ -2850,6 +2950,8 @@ unif_rule @hom_postcomp_fapp0 $A $B $F $W $X $Y $h $g
       $g
   ↪ [ tt ≡ tt ];
 
+// 4b. Computational isomorphisms under the represented hom-action owner.
+
 /*
   Definitional/computational isomorphisms.
 
@@ -3079,6 +3181,8 @@ rule @defiso_iso_evidence
   ↪ @iso_evidence_fmap
       $C $D $F $x $y
       (@defiso_iso_evidence $C $x $y $i);
+
+// 4c. Contravariant represented hom families and precomposition action.
 
 // Contravariant represented-object classifier.
 //
@@ -3510,6 +3614,8 @@ unif_rule @hom_postcomp_fapp0
       (Op_cat $A) ≡ $A0;
       $F ≡ (@Op_func $A0 $B0 $F0)
     ];
+
+// 4d. Internalized source/target endpoints and variance comparison.
 
 // Internalized hom classifier.
 //
@@ -4297,6 +4403,8 @@ symbol Product_pair_tele_func [A B : Cat]
 // 6. Ordinary transformations and functor composition actions
 // -------------------------------------------------------------------------------------------------
 
+// 6a. Transformation classifier, components, and generic projection calculus.
+
 /*
   Ordinary transfor/natural-transformation category.
 
@@ -4538,6 +4646,8 @@ rule @tapp0_fapp0
       $x
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp0_fapp0 $A $B $F $G $x $eta;
+
+// 6b. Internalized hom endpoint actions and rigid two-sided projections.
 
 // Component of `hom_int` along its contravariant represented-object argument.
 // For f : X ->^A Y, the displayed functor Hom(Y,F-) ⊢ Hom(X,F-) is
@@ -4838,6 +4948,8 @@ rule @comp_prod_fapp1_fapp0
       (Functor_cat $X $Z)
       (@comp_cat_fapp0 $X $Y $Z $G $F);
 
+// 6c. Constant/opposite transfors and Cat-valued composition projections.
+
 /*
   Constant transfor induced by an arrow in the codomain.
 
@@ -4848,7 +4960,7 @@ rule @comp_prod_fapp1_fapp0
     Const_transf(p)[k] = p
     Const_transf(p)[q] = p
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     k :^n K ; 1[k] ⊢ (p : x ->^A y)
 
   The component and off-diagonal action are constant in the K-variable. This
@@ -4978,7 +5090,7 @@ rule @hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $Z Cat_cat Cat_cat
       = comp_prod_fapp1_fapp0 Cat_cat (eta,id_G)
     hom_postcomp_fapp1_fapp0(G,eta)[i] = G[eta[i]]
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     eta : F => H
     G eta : G ∘ F => G ∘ H
 
@@ -5049,7 +5161,7 @@ rule @hom_postcomp_fapp1_fapp0 Cat_cat $K $E $W $X $Y $f $G $H $eta
     comp_cat_cov_func_func_transf(eta)[F]
       = eta ∘ F : G ∘ F => H ∘ F.
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     eta : G => H
     eta ∘ F : G ∘ F => H ∘ F
 
@@ -5117,7 +5229,7 @@ symbol comp_cat_cov_func_func_transf [X Y Z : Cat]
       = comp_prod_fapp1_fapp0 Cat_cat (id_F,eta)
     hom_precomp_along_fapp1_fapp0(F,eta)[i] = eta[F[i]]
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     eta : G => H
     eta ∘ F : G ∘ F => H ∘ F
 */
@@ -5719,6 +5831,8 @@ symbol hom_postcomp_representable_interchange_eq
         (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
       (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha));
 
+// 6d. Full ordinary naturality and projection-order joins.
+
 // Full strict naturality for ordinary transfors, oriented as cut elimination.
 // The post/left rule accumulates a codomain arrow through the off-diagonal
 // hom-action:
@@ -5838,7 +5952,7 @@ rule fapp0
     (G * 1_B)[(x,y)] = (G[x],y)
     (G * 1_B)[(p,q)] = (G[p],q)
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     A × B
     G * 1_B
 
@@ -6134,7 +6248,7 @@ unif_rule @Hom_func $A $x $x' $y $y' $g $f
       : (F => G) × Hom_A(x,y) ⊢ Hom_B(F[x],G[y])
     Eval_fapp1_func(A,B,F,G,x,y)[(eta,p)] = eta[p]
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     F[x]
     eta[p]
 */
@@ -6182,7 +6296,7 @@ rule @fapp1_fapp0 _ _ (@Eval_func $A $B)
     Eval_at_func(A,B,x)[F] = (F,x)
     Eval_func(A,B) ∘ Eval_at_func(A,B,x) = fapp0_func(A,B,x)
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     F |-> (F,x)
 */
 // Pair a functor with the fixed object x for evaluation.
@@ -6244,7 +6358,7 @@ rule @comp_fapp0
     uncurry(G)[(x,y)] = G[x][y]
     uncurry(G)[(p,q)] = G[p][q]
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     curry F
     uncurry G
 
@@ -7596,7 +7710,7 @@ symbol Rep_catd [Z : Cat] (x : τ (Obj Z))
 //   Rep_transport(p) : Rep_Z(y) ⊢ Rep_Z(x)
 //   Rep_transport(p)[z][q] = q ∘ p.
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   (q : y ->^Z z) |-> q ∘ p.
 symbol Rep_transport_func [Z : Cat] [x y : τ (Obj Z)]
   (p : τ (Hom Z x y))
@@ -8134,7 +8248,7 @@ symbol Fibre_transf_app [K : Cat] [E D : τ (Catd K)]
 //   pi_hom_fapp0(eta,k) = eta[k] : s[k] ->^(E[k]) t[k]
 //   for eta : Hom_{Π i :^n K, E[i]}(s,t).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   eta[k] : s[k] ->^(E[k]) t[k].
 //
 // This is a semantic definition over the existing displayed component
@@ -8225,7 +8339,7 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
 //   fdapp1_int(FF)[x,u][y,v][p][alpha]
 //     : D[p](FF[x]u) ->^(D[y]) FF[y]v.
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   the Sigma-map fibre component induced by the internal displayed hom-action.
 //
 // This is deliberately the owner of the Sigma-map fibre component. The surface
@@ -8310,7 +8424,7 @@ rule @fapp1_fapp0
 //     = homd_int(id_E)[x](u)
 //     : Π y :^n K^op, E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   Homd_E(x,u,—,—).
 symbol homd_id_src_sec [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
@@ -8325,7 +8439,7 @@ symbol homd_id_src_sec [K : Cat] (E : τ (Catd K))
 //     = homd_int(FF)[x](FF[x](u))
 //     : Π y :^n K^op, E[y^-] ⊢_[y] (Hom_K(x,y)^op ⊢ Cat).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   Homd_D(x,FF[x](u),—,FF[—](—)).
 symbol homd_ff_src_sec [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -8344,7 +8458,7 @@ symbol homd_ff_src_sec [K : Cat] [E D : τ (Catd K)]
 //   fdapp1_section(FF,x,u) :
 //     homd_int(id_E)[x](u) ->^(HomdTarget_E[x]) homd_int(FF)[x](FF[x](u)).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   fdapp1_int(FF)[x,u] :
 //     Homd_E(x,u,—,—) ->^(HomdTarget_E[x]) Homd_D(x,FF[x](u),—,FF[—](—)).
 //
@@ -8385,7 +8499,7 @@ rule @tapp0_fapp0
 //   homd_id_tgt_func(E,x,u,y)
 //     = homd_int(id_E)[x](u)[y].
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   Homd_E(x,u,y,—).
 symbol homd_id_tgt_func [K : Cat] (E : τ (Catd K))
   (x : τ (Obj K))
@@ -8402,7 +8516,7 @@ symbol homd_id_tgt_func [K : Cat] (E : τ (Catd K))
 //   homd_ff_tgt_func(FF,x,u,y)
 //     = homd_int(FF)[x](FF[x](u))[y].
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   Homd_D(x,FF[x](u),y,FF[y](—)).
 symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -8421,7 +8535,7 @@ symbol homd_ff_tgt_func [K : Cat] [E D : τ (Catd K)]
 //     homd_int(id_E)[x](u)[y]
 //       => homd_int(FF)[x](FF[x](u))[y].
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   fdapp1_int(FF)[x,u][y] :
 //     Homd_E(x,u,y,—) => Homd_D(x,FF[x](u),y,FF[y](—)).
 //
@@ -8465,7 +8579,7 @@ rule @tapp0_fapp0
 //     homd_int(id_E)[x](u)[y](v)
 //       ->^(HomPsh_Z(x)[y]) homd_int(FF)[x](FF[x](u))[y](v).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   fdapp1_int(FF)[x,u][y,v] :
 //     Hom_E(E[—](u),v) => Hom_D(D[—](FF[x](u)),FF[y](v)).
 //
@@ -8530,7 +8644,7 @@ rule @fapp1_func
 //     homd_(id_E,x,u,y,v)[p]
 //       ⊢ homd_(FF,x,FF[x](u),y,v)[p].
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   fdapp1_int(FF)[x,u][y,v][p].
 //
 // This deliberately keeps the endpoints at the stable `homd_` layer. A later
@@ -8645,7 +8759,7 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id)
 //     : D[p](FF[x](u)) ->^(D[y]) FF[y](E[p](u)).
 //
-// Faithful surface syntax:
+// Canonical comment syntax:
 //   fdapp1_int(FF)[x,u][y,E[p]u][p](id).
 symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -8696,7 +8810,7 @@ rule @fdapp1_int_hom_fapp0
     tdapp1_int_cell(epsilon,p,u)
       : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u)).
 
-  Faithful surface syntax:
+  Canonical comment syntax:
     epsilon[p][u] : D[p](FF[x](u)) ->^(D[y]) GG[y](E[p](u))
 
   The rules below project this cell through the same stages as
@@ -9587,6 +9701,8 @@ rule @fdapp1_int_cell
 // 18. Cat-valued profunctors
 // -------------------------------------------------------------------------------------------------
 
+// 18a. Fixed-endpoint profunctor category and vertical maps.
+
 /*
   A v3.2 profunctor from A to B is a Cat-valued functor on A^op × B.
 
@@ -9623,12 +9739,15 @@ symbol Prof_base (A B : Cat) : Cat
 // Category of Cat-valued profunctors A -/-> B.
 injective symbol Prof_cat (A B : Cat) : Cat;
 
+// Object projection: a profunctor is a Cat-valued family on `A^op x B`.
 rule Obj (Prof_cat $A $B)
   ↪ Obj (Catd_cat (Product_cat (Op_cat $A) $B));
 
+// Vertical hom projection: profunctor maps are natural family morphisms.
 rule Hom_cat (Prof_cat $A $B) $P $Q
   ↪ @Functord_cat (Product_cat (Op_cat $A) $B) $P $Q;
 
+// Proof-time endpoint recovery only: the displayed-family base determines A.
 unif_rule Prof_cat $A $B ≡ Catd_cat (Product_cat $A0 $B)
   ↪ [ $A ≡ Op_cat $A0 ];
 
@@ -9665,6 +9784,8 @@ symbol ProfMap
   : Grpd
 ≔ Obj (Hom_cat (Prof_cat A B) P Q);
 
+// 18b. Opposite profunctors and fixed-endpoint duality.
+
 /*
   Object-level opposite profunctor.
 
@@ -9681,6 +9802,7 @@ injective symbol Op_prof [A B : Cat]
   (R : τ (Prof A B))
   : τ (Prof (Op_cat B) (Op_cat A));
 
+// Fibre projection: duality evaluates R after swapping the product base.
 rule @fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba
   ↪ @fapp0
       (Product_cat (Op_cat $A) $B)
@@ -9692,6 +9814,7 @@ rule @fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba
         (@Product_swap_func $B (Op_cat $A))
         $ba);
 
+// Full base-arrow action: first apply product swap, then the original action.
 rule @fapp1_func _ Cat_cat (@Op_prof $A $B $R) $ba $ba'
   ↪ @comp_cat_fapp0
       (Hom_cat (Product_cat $B (Op_cat $A)) $ba $ba')
@@ -9747,6 +9870,7 @@ rule @fapp1_func _ Cat_cat (@Op_prof $A $B $R) $ba $ba'
         $ba
         $ba');
 
+// Capped base-arrow action of profunctor duality.
 rule @fapp1_fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba $ba' $h
   ↪ @fapp1_fapp0
       (Product_cat (Op_cat $A) $B)
@@ -9770,6 +9894,7 @@ rule @fapp1_fapp0 _ Cat_cat (@Op_prof $A $B $R) $ba $ba' $h
         $ba'
         $h);
 
+// Object-level involution: dualizing a profunctor twice returns it.
 rule @Op_prof
       _
       _
@@ -9787,9 +9912,11 @@ injective symbol Op_prof_func [A B : Cat]
       (@Prof_cat A B)
       (@Prof_cat (Op_cat B) (Op_cat A)));
 
+// Object action of the fixed-endpoint duality functor.
 rule @fapp0 _ _ (@Op_prof_func $A $B) $R
   ↪ @Op_prof $A $B $R;
 
+// Proof-time semantic view: object duality is pullback along product swap.
 unif_rule
   @Op_prof $A $B $R
   ≡ @Pullback_catd
@@ -9799,6 +9926,7 @@ unif_rule
       (@Product_swap_func $B (Op_cat $A))
   ↪ [ tt ≡ tt ];
 
+// Proof-time semantic view of the whole fixed-endpoint duality functor.
 unif_rule
   @Op_prof_func $A $B
   ≡ @Pullback_catd_func
@@ -9807,6 +9935,7 @@ unif_rule
       (@Product_swap_func $B (Op_cat $A))
   ↪ [ tt ≡ tt ];
 
+// Vertical action of profunctor duality, inherited from `Op_prof_func`.
 symbol Op_prof_map
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -9821,6 +9950,8 @@ symbol Op_prof_map
     (@Prof_cat (Op_cat B) (Op_cat A))
     (@Op_prof_func A B)
     P Q r;
+
+// 18c. Endpoint reindexing and product-base action.
 
 /*
   Profunctor reindexing.
@@ -10008,6 +10139,8 @@ rule @fapp1_fapp0
         $ab'
         $pq);
 
+// 18d. Unit hom profunctor and readable representables.
+
 // Identity/unit hom profunctor, the uncurried/product form of hom_int(id_X).
 injective symbol Unit_prof (X : Cat)
   : τ (Prof X X);
@@ -10075,6 +10208,7 @@ symbol Companion_prof [A B : Cat]
   : τ (Prof A B)
 ≔ @Hom_prof_along A B B F (@id_func B);
 
+// Conjoint of F: the right-representable `Hom_B(F[-],-)` presentation.
 symbol Conjoint_prof [A B : Cat]
   (F : τ (Functor A B))
   : τ (Prof B A)
@@ -10099,21 +10233,25 @@ symbol Representation_iso
 ≔ `Σ_ L : τ (Functor J B),
     @IsRepresentedBy_iso B J P L;
 
+// 18e. Computational comparison as the profunctor-facing DefIso view.
+
 /*
   Computational comparisons between profunctors.
 
-  The computational owner is an inverse pair of operations on every incoming
-  vertical map. Beta/eta therefore reduces on dedicated heads rather than on
-  shared generic composition heads. Ordinary
-  `IsoEvidence` and the two semantic paths retain the standard categorical
-  interpretation as postcomposition by inverse arrows.
+  `ProfComparison(P,Q)` is the transparent profunctor-facing view of
+  `DefIso(Prof_cat(A,B),P,Q)`. Push/pull are postcomposition by the selected
+  forward/inverse maps. Their cancellation is owned by the generic `DefIso`
+  and stable hom-action calculus; there is no parallel profunctor-specific
+  beta/eta theory. `IsoEvidence` is the ordinary propositional view.
 */
+// Transparent comparison classifier: `ProfComparison(P,Q) = DefIso(P,Q)`.
 symbol ProfComparison
   [A B : Cat]
   (P Q : τ (Prof A B))
   : Grpd
 ≔ @DefIso (@Prof_cat A B) P Q;
 
+// Push an incoming vertical map forward by postcomposition with `defiso_to`.
 symbol prof_comparison_push
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -10129,6 +10267,7 @@ symbol prof_comparison_push
     (@defiso_to (@Prof_cat A B) P Q i)
     r;
 
+// Pull an incoming vertical map back by postcomposition with `defiso_from`.
 symbol prof_comparison_pull
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -10152,6 +10291,7 @@ symbol prof_comparison_to
   : τ (ProfMap P Q)
 ≔ @defiso_to (@Prof_cat A B) P Q i;
 
+// Selected inverse vertical map of a computational comparison.
 symbol prof_comparison_from
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -10159,6 +10299,7 @@ symbol prof_comparison_from
   : τ (ProfMap Q P)
 ≔ @defiso_from (@Prof_cat A B) P Q i;
 
+// Forget a computational comparison to ordinary isomorphism evidence.
 symbol prof_comparison_evidence
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -10170,12 +10311,14 @@ symbol prof_comparison_evidence
 // the generic hom-action and DefIso owners. `ProfComparison` keeps only a
 // compatibility surface while downstream code migrates to `DefIso` directly.
 
+// Reflexive profunctor comparison, inherited from `defiso_refl`.
 symbol prof_comparison_refl
   [A B : Cat]
   (P : τ (Prof A B))
   : τ (ProfComparison P P)
 ≔ @defiso_refl (@Prof_cat A B) P;
 
+// Symmetry of profunctor comparison, inherited from `defiso_sym`.
 symbol prof_comparison_sym
   [A B : Cat]
   [P Q : τ (Prof A B)]
@@ -10183,6 +10326,7 @@ symbol prof_comparison_sym
   : τ (ProfComparison Q P)
 ≔ @defiso_sym (@Prof_cat A B) P Q i;
 
+// Vertical composition of comparisons, inherited from `defiso_comp`.
 symbol prof_comparison_comp
   [A B : Cat]
   [P Q R : τ (Prof A B)]
@@ -10191,6 +10335,7 @@ symbol prof_comparison_comp
   : τ (ProfComparison P R)
 ≔ @defiso_comp (@Prof_cat A B) P Q R j i;
 
+// Functorial image of a comparison, inherited from `defiso_fmap`.
 symbol prof_comparison_fmap
   [A B A' B' : Cat]
   (F : τ (Functor (Prof_cat A B) (Prof_cat A' B')))
@@ -10234,6 +10379,8 @@ rule @Prof_reindex
       $F
       $G
   ↪ @Const_catd (Product_cat (Op_cat $A') $B') $C;
+
+// 18f. Shaped profunctor cells and endpoint-changing application.
 
 /*
   Shaped profunctor cells.
@@ -10300,6 +10447,8 @@ symbol Prof_cell_apply
       (@comp_cat_fapp0 I A' A F a)
       R
       (@comp_cat_fapp0 I B' B G b));
+
+// 18g. Internalized reindexing and equipment-style cell composition.
 
 /*
   Internalized profunctor reindexing.
@@ -10508,6 +10657,8 @@ rule @tapp1_fapp0
         (@fapp1_int_transf $A $B $F)
         (sigma_Fst $pq))
       (sigma_Snd $pq);
+
+// 18h. Tensor, shaped introduction, and fixed-endpoint co-Yoneda maps.
 
 /*
   Primitive tensor/composition of Cat-valued profunctors.
@@ -10786,6 +10937,8 @@ rule @Prof_cell_apply
       $F $G
       $pp $p;
 
+// 18i. Covariant/contravariant implication and vertical closed cores.
+
 /*
   Covariant profunctor implication.
 
@@ -10994,7 +11147,8 @@ with @Prof_eval_con_map
       (@Prof_lambda_con_map $A $B $X $P $Q $O $t)
   ↪ $t;
 
-// Derived endpoint-changing equipment view.
+// 18j. Weighted representability and adjunction-mate preservation.
+
 // Ordinary weighted-limit representability, kept separate from the stronger
 // computational comparison interface below.
 symbol WeightedCone_prof
@@ -11365,6 +11519,8 @@ symbol left_adjoint_preserves_weighted_colimit_con
     (@Op_func J' A L)
     isc
     (@Op_adjunction A B adj);
+
+// 18k. Directed-inductive join and internally natural cross arrows.
 
 /*
   Directed-inductive join category.

@@ -1,9 +1,15 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
+Last reviewed: 2026-07-10
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
+
+Notation in this report is immediately authoritative for mathematical comments
+and examples. It becomes parser syntax only after a separate elaboration and
+grammar implementation; no notation below should be read as an already active
+Lambdapi parser extension.
 
 Supersedes the older v3 faithful surface-syntax plan, which is no longer an
 active report after the 2026-06-05 reports consolidation.
@@ -80,6 +86,79 @@ when `x z : Obj Z`.
 
 Do not use `->_C` for ordinary homs. The operator `->_` is reserved for
 indexed/displayed homs.
+
+## Covariant And Contravariant Hom Actions
+
+For an arrow:
+
+```text
+u : X ->^A Y
+```
+
+postcomposition by `u` is written with the standard lower-star action:
+
+```text
+u_* : (W ->^A X) ⊢ (W ->^A Y)
+u_*(g) = u o g.
+```
+
+Kernel owners:
+
+```text
+hom_postcomp_func
+hom_postcomp_fapp0.
+```
+
+Precomposition by `u` is written with the standard upper-star action:
+
+```text
+u^* : (Y ->^A Z) ⊢ (X ->^A Z)
+u^*(h) = h o u.
+```
+
+Kernel owners:
+
+```text
+hom_precomp_along_func
+hom_precomp_along_fapp0.
+```
+
+For a functor `F : B ⊢ A` and `p : X ->^B Y`, comments should expose the
+actual arrow acting on the represented hom:
+
+```text
+(F[p])_*(g)
+(F[p])^*(h).
+```
+
+Thus the preferred mathematical readings are:
+
+```text
+hom_postcomp_fapp0(F,p,g)       = (F[p])_*(g)
+hom_precomp_along_fapp0(F,p,h)  = (F[p])^*(h).
+```
+
+When both endpoints move, use the hom-bifunctor action:
+
+```text
+Hom_A(g,f)[h] = f o h o g
+              = f_*(g^*(h))
+              = g^*(f_*(h)).
+```
+
+Kernel owners:
+
+```text
+Hom_func(g,f)
+Hom_fapp0(g,f,h).
+```
+
+The equalities between the two factorizations and the rigid `Hom_*` value are
+mathematical/proof-time comparisons in the current kernel. This notation does
+not imply a runtime rewrite from post/precomposition syntax to `Hom_fapp0`.
+
+Use `_*` and `^*` for represented hom actions, not for arbitrary functor
+application. Ordinary functor application remains `F[x]` and `F[p]`.
 
 ## Indexed Homs
 

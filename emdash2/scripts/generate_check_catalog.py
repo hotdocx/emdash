@@ -345,11 +345,13 @@ def render() -> str:
         "It is intended as a reviewer-facing map of the regression suite, not as",
         "the source of truth for the checked statements.",
         "",
-        "`emdash3_2_checks.lp` still contains legacy",
-        "`// From emdash3_2.lp:<line>` comments from an older pre-split",
-        "snapshot. This report deliberately does not present those as active",
-        "source locations; the grouping below is based on the checked statement",
-        "text.",
+        (
+            "Legacy `// From emdash3_2.lp:<line>` tags remain diagnostic-only;"
+            if legacy_source_tags
+            else "Legacy pre-split source-line tags have been removed from the checks module;"
+        ),
+        "the grouping below is based on checked statement text and stable",
+        "mathematical areas rather than source locations.",
         "",
         "## Summary",
         "",

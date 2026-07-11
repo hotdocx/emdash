@@ -8,11 +8,21 @@ Supersedes: none
 Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
-Status: proposed reorganization plan; no active file split has been promoted.
+Status: first single-file section/assertion reorganization is reflected in the
+active source; definition-level module splitting remains deferred.
 
 Active file: `emdash3_2.lp`
 
-Purpose: reorganize `emdash3_2.lp` into a coherent, split-ready sequential order while keeping a single file for now. The future split should have a mostly linear dependency structure and coherent logical units.
+Purpose: retain the completed single-file organization as a split-ready map and
+record the still-deferred definition-level module split. The future split
+should have a mostly linear dependency structure and coherent logical units.
+
+Maintenance note 2026-07-10: the active source now has the 0–20 section map,
+the top-level TOC, executable assertions split into `emdash3_2_checks.lp`, and
+the generated check catalog. The historical “Current Findings” and target map
+below explain the first pass; they are not a claim that the pre-reorganization
+layout is still active. Remaining work is subsection cleanup, adjacent
+documentation, and eventual module boundaries.
 
 ## Current Findings
 
