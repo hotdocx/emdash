@@ -4596,7 +4596,8 @@ rule @Transf_cat $X (Product_cat $A $B) $F $G
       (@Transf_cat $X $B (sigma_Snd $F) (sigma_Snd $G));
 
 /*
-  Cat-valued transfors reduce to displayed functors.
+  Cat-valued transfors and displayed functors are proof-time-comparable
+  stable presentations.
 
   Surface/formula:
     Transf(K,Cat,E,D) = Functord(E,D).
@@ -8142,10 +8143,10 @@ injective symbol homd_int : Π [Z : Cat], Π [D E : τ (Catd Z)],
     fib_cov_tapp0_func(E,x,u,y)  : Hom_Z(x,y) ⊢ E[y]
     fib_cov_tapp0_func(E,x,u,y)(f) = E[f](u)
 
-  In the formal v3.2 normal form, a
-  Cat-valued transfor is a displayed functor: `Transf_cat K Cat_cat F E`
-  reduces to `Functord_cat K F E`. The declarations below keep the conceptual
-  `FibCov_target_catd` family visible; assertions document the reduced heads.
+  A Cat-valued transfor and the corresponding displayed functor category are
+  stable, proof-time-comparable presentations. The declarations below keep
+  the conceptual `FibCov_target_catd` family visible; assertions exercise the
+  displayed head and its ordinary comparison explicitly.
 
   `fib_cov_tapp0_func` remains the functor-level normal form. The object-level
   action is just `fapp0 (fib_cov_tapp0_func E x y u) f`, so it is not named by

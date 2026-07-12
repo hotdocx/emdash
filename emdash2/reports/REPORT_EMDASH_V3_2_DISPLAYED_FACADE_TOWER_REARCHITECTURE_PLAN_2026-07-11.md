@@ -621,8 +621,8 @@ Functord_cat
     -> Functord_cat K R D.
 ```
 
-The owner-position probe
-`tmp/probes/dfacade_sigma_projection_section_prooftime_probe.lp` replaced it
+The first owner-position probe,
+`tmp/probes/dfacade_sigma_projection_section_prooftime_probe.lp`, replaced it
 with direct proof-time category, object, ordinary-object, and next-hom
 comparisons. Source checking failed subject reduction at the existing
 computation:
@@ -636,11 +636,38 @@ path_ind_sec
 
 The left side is owned by the section facade over the Sigma total, while the
 right side is owned by `Functord_cat Z (Rep_catd Z x) D`. A proof-time category
-comparison does not establish runtime subject reduction for that rule. The
-global contraction is therefore retained as a measured exception. Its proper
-prerequisite is a stable path-induction section result owner, with component
-projections to the existing `fib_cov_transf` computation; an ad hoc `Obj` join
-would recreate the boundary problem one layer lower.
+comparison alone does not establish runtime subject reduction for that rule.
+
+A follow-up hybrid probe,
+`tmp/probes/dfacade_sigma_projection_section_runtime_layers_probe.lp`, kept
+the whole-category comparison at proof time but added runtime projections for
+the displayed `Obj` classifier, the ordinary `Obj(Transf_cat)` classifier
+exposed by the global facade projection, and the next `Transfd_cat` hom. Those
+runtime layers do restore subject reduction: the full source probe passes, so
+the earlier failure is specifically a missing runtime projection and not
+evidence that `Obj` must remain proof-time-only.
+
+A three-way ablation then located the minimal subject-reduction owner. Removing
+the direct displayed-`Obj` rule still passes, as does removing the next-hom
+rule; removing the projected ordinary `Obj(Transf_cat)` join fails subject
+reduction. The direct displayed-`Obj` rule is therefore redundant with the
+global facade projection followed by that ordinary join. A cleaner probe
+oriented the indispensable rule entirely between ordinary `Obj(Transf_cat)`
+classifiers and also passes. The next-hom rule remains a plausible iterable
+projection, but it is an architectural completeness choice rather than the
+cause of the `path_ind_sec` repair.
+
+The hybrid is nevertheless not promotable with the current category heads.
+A typed `eq_refl` does not exercise either the direct same-head comparison
+between the two `Functord_cat` applications or a comparison written through
+`Pi_cat`: structural unification decomposes the incompatible arguments of the
+shared `Functord_cat` head, and transparent `Pi_cat` unfolds to that same head.
+The global contraction is therefore retained as a measured exception. Its
+proper prerequisite is either a distinct stable Sigma-section category owner,
+with the measured `Obj` and next-hom projection ladder, or an explicit
+section-uncurrying functor/equivalence. The former stable owner would give a
+pair of rigid heads on which the intended proof-time comparison can actually
+operate.
 
 ## Implementation Phases
 
@@ -719,9 +746,14 @@ consumer, and both-order probe.
 
 The first audit pass is complete. Product-valued transfor computation remains
 a genuine ordinary runtime projection. The Sigma-first-projection section fold
-is retained for the `path_ind_sec -> fib_cov_transf` consumer, with the stable
-section-result prerequisite recorded above. No other whole-category facade
-collapse was found that should be changed in this migration.
+is retained for the `path_ind_sec -> fib_cov_transf` consumer. A hybrid probe
+shows that one ordinary `Obj(Transf_cat)` classifier join repairs subject
+reduction; a direct displayed-`Obj` rule is redundant, while a next-hom rule
+would provide iterable projection rather than the immediate repair. The
+whole-category proof-time comparison still requires the distinct stable
+section owner (or explicit uncurrying construction) recorded above. No other
+whole-category facade collapse was found that should be changed in this
+migration.
 
 ### Phase 6: Promotion and documentation
 
@@ -855,9 +887,14 @@ The redesign is successful when:
   displayed constant-transformation and separate ordinary weakening owners,
   was promoted 2026-07-11.
 - `DFACADE-08`: Audit the Sigma-projection section fold and other competing
-  whole-category semantic folds. Status: first audit complete; the Sigma fold
-  is retained because demotion fails subject reduction at `path_ind_sec`.
-  Stable path-induction section-result ownership is deferred.
+  whole-category semantic folds. Status: first audit and hybrid follow-up
+  complete. Ablation shows that the projected ordinary `Obj(Transf_cat)` join
+  alone repairs the `path_ind_sec` subject-reduction failure; the direct
+  displayed-`Obj` rule is redundant, and the next-hom rule is independently
+  motivated by iterability. The category comparison cannot be exercised
+  through the current same `Functord_cat` head or transparent `Pi_cat`. The
+  runtime fold remains until a distinct stable Sigma-section owner or explicit
+  section-uncurrying construction is designed.
 - `DFACADE-09`: Update the `Prof_cat` rule to recover `$B0` explicitly and add
   a focused inferred-endpoint diagnostic. Status: complete and promoted.
 - `DFACADE-10`: Migrate diagnostics, comments, SOP, Foundations, catalog, and
