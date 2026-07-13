@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-11
+Last consolidated: 2026-07-13
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -32,19 +32,19 @@ needed.
 
 ## Validated Current Baseline
 
-The 2026-07-11 baseline is:
+The 2026-07-13 baseline is:
 
 ```text
 make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples             8
-diagnostic assertions              774
+diagnostic assertions              780
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        37 slots across 21 clauses
-warning inventory                  1,253
-  unjoinable critical pairs        1,090
+warning inventory                  1,257
+  unjoinable critical pairs        1,094
   replaceable pattern variables      163
 ```
 
@@ -52,6 +52,10 @@ The largest warning families are headed by `comp_fapp0`,
 `hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
 diagnostic evidence for locating overlap families. They are not an automatic
 veto on semantically required computation and are not a confluence proof.
+The four warnings added by the primitive-Pi eliminator follow-up are the
+classified identity and generic naturality/composition overlaps of the new
+Cat-valued component-hom projection; a terminal-source-only alternative was
+measured and rejected because it added ten critical-pair warnings instead.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
@@ -169,12 +173,19 @@ constant/terminal/opposite families, displayed composition, section
 categories, and internalized Pi over varying bases.
 
 ```text
-Pi_cat(E) = Functord_cat(Terminal_catd K,E)
+Pi_cat(E) =proof-time Functord_cat(Terminal_catd K,E)
 Pi_cat(Const_catd K A) ≃ Functor_cat K A  (proof-time comparison).
 ```
 
-Runtime evaluation of a constant-family section still computes through
-`piapp0` to ordinary `fapp0`. Its displayed hom action is owned by
+`piapp0_func` and `piapp0` remain semantic definitions over terminal-source
+component evaluation; they are not parallel primitive heads. Their full hom
+action projects through the generic `tdapp0_func` owner and caps through
+`tdapp0_fapp0`, so `pi_hom_fapp0` computes without a Pi-specific bridge.
+Likewise, `piapp1_func` remains the terminal-source specialization of
+`fdapp1_int_presheaf_arrow`; its first next action reaches
+`fdapp1_int_hom_fapp0`, preserving the iterated-hom tower. Runtime evaluation
+of a constant-family section still computes through `piapp0` to ordinary
+`fapp0`. The hom action of the constant-section constructor is owned by
 `Const_transfd_func` / `Const_transfd`, rather than by an ordinary transfor
 category fold.
 

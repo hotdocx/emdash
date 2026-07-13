@@ -466,7 +466,20 @@ presentation. Its `Obj` classifier projects to the represented section
 objects, while `Hom_cat(Pi_cat E,s,t)` projects to the corresponding
 `Transfd_cat` next hom. For a constant family there is also a direct proof-time
 comparison with `Functor_cat K A`. Runtime evaluation crosses the boundary
-through the rule equating `piapp0 F k` with ordinary `fapp0 F k` in this case.
+through the semantic `piapp0_func` / `piapp0` interface. Its object action is
+terminal-source component evaluation; its hom action projects through the
+generic displayed-component functor `tdapp0_func` and caps at
+`tdapp0_fapp0`, which is named at the section surface by `pi_hom_fapp0`.
+These Pi-facing eliminator names are definitions, not a second primitive
+calculus. In the constant-family case `piapp0 F k` computes to ordinary
+`fapp0 F k`.
+
+The same policy continues one dimension higher. `piapp1_func(s,x,y)` is the
+terminal-source specialization of the generic displayed internal-hom action,
+and `piapp1_fapp0(s,f)` evaluates that section at `f`. Its action on a cell
+between base arrows reduces to `fdapp1_int_hom_fapp0`; consequently the result
+remains inside the generic iterated-hom architecture rather than stopping at
+an ad hoc Pi-specific component.
 
 For the Sigma first projection, this stable head makes section uncurrying a
 direct proof-time comparison:
@@ -1112,7 +1125,10 @@ vocabulary.
 | `Const_K(A)` | `Const_catd K A` |
 | `E^op` | `Op_catd E` |
 | `Π_k E[k]` | `Pi_cat E` |
+| section evaluation functor `s ↦ s[k]` | `piapp0_func E k` |
 | `s[k]` | `piapp0 s k` |
+| `eta[k] : s[k] → t[k]` | `pi_hom_fapp0 eta k` |
+| section-action family `f ↦ s[f]` | `piapp1_func s x y` |
 | `s[f]` | `piapp1_fapp0 s f` |
 | `Π_K Const_K(A) = Functor(K,A)` | proof-time comparison for `Pi_cat (Const_catd K A)` |
 | `const_section_{K,A}` | `const_section_func K A` |

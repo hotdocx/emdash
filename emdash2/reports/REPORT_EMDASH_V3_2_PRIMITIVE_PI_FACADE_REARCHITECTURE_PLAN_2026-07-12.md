@@ -324,7 +324,9 @@ the total warning count remains unchanged.
 
 1. Retype `pi_eval_transf` through `Const_catd K (Pi_cat E)`.
 2. Retype its component rule discriminator.
-3. Retain `piapp0_func` as the component owner.
+3. Retain `piapp0_func` as the named semantic evaluation interface; its
+   runtime object and hom owners are audited in the 2026-07-13 primitive-Pi
+   eliminator follow-up.
 
 ### Phase 3: Sigma-section uncurrying
 
@@ -392,6 +394,13 @@ The migration is complete when:
   complete.
 - `PIFACADE-07`: Complete warning comparison and the full CI/handoff gate.
   Status: complete.
+
+The follow-up
+`REPORT_EMDASH_V3_2_PRIMITIVE_PI_ELIMINATOR_AUDIT_AND_REDESIGN_PLAN_2026-07-13.md`
+confirms that `piapp0*` and `piapp1*` remain semantic definitions. It promotes
+the missing generic full/capped hom projection from Cat-valued
+`tapp0_func` evaluation to `tdapp0_func` / `tdapp0_fapp0`; it does not promote
+Pi-specific eliminator heads.
 
 ## Deferred Boundaries
 

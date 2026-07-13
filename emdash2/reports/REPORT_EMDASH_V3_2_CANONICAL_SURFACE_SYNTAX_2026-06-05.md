@@ -299,6 +299,21 @@ alias. Special mathematical identifications, such as constant sections with
 ordinary functors or Sigma-projection sections with displayed functors, are
 direct proof-time comparisons.
 
+The Pi-facing eliminators remain semantic surface names over the generic
+displayed tower:
+
+```text
+piapp0_func(D,z)       : (Π (i :^n Z), D[i]) ⊢ D[z]
+piapp0(s,z)            = s[z]
+pi_hom_fapp0(eta,z)    = eta[z]
+piapp1_func(s,x,y)[f]  = piapp1_fapp0(s,f) = s[f]
+```
+
+Their object, hom, and next-hom computations project through `tapp0_func`,
+`tdapp0_func` / `tdapp0_fapp0`, and the generic displayed internal-hom action.
+Do not read these names as additional primitive type formers merely because
+`Pi_cat` itself is a stable primitive category facade.
+
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
 category.

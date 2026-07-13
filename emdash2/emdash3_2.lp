@@ -8547,6 +8547,25 @@ symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
 
+// Cat-valued higher component: the hom action of ordinary component
+// evaluation is the displayed-transfor component at the same base object.
+// This is the generic owner used, in particular, by the hom action of
+// `piapp0_func`; it is not a Pi-specific commuting bridge.
+rule @fapp1_func
+      _
+      _
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $FF $GG
+  ↪ @tdapp0_func $K $E $D $FF $GG $z;
+
+// Direct capped projection joins the full hom-action route above.
+rule @fapp1_fapp0
+      _
+      _
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $FF $GG $eta
+  ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $eta;
+
 
 // Object-component projection for generic Sigma-total uncurrying.
 rule @tapp0_fapp0

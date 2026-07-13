@@ -5819,6 +5819,33 @@ assert [K : Cat] (E : τ (Catd K))
     Terminal_obj
     ≡ @piapp0 K E s k;
 
+// The named Pi evaluation functor computes on section objects through the
+// same terminal-source component route.
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @fapp0
+    (@Pi_cat K E)
+    (Fibre_cat E k)
+    (@piapp0_func K E k)
+    s
+    ≡ @piapp0 K E s k;
+
+// The hom action of Pi evaluation is the displayed component of the arrow
+// between sections.
+assert [K : Cat] (E : τ (Catd K))
+  (s t : τ (Obj (Pi_cat E)))
+  (eta : τ (Hom (Pi_cat E) s t))
+  (k : τ (Obj K)) ⊢
+  @fapp1_fapp0
+    (@Pi_cat K E)
+    (Fibre_cat E k)
+    (@piapp0_func K E k)
+    s
+    t
+    eta
+    ≡ @pi_hom_fapp0 K E s t eta k;
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @fapp0 (Catd_cat K) Cat_cat (Pi_func K) E ≡ Pi_cat E;
 
@@ -6970,6 +6997,19 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   (z : τ (Obj K)) (ϵ : τ (@Transfd K E D FF GG)) ⊢
   fapp0 (@tdapp0_func K E D FF GG z) ϵ
     ≡ @tdapp0_fapp0 K E D FF GG z ϵ;
+
+// Cat-valued component evaluation retains its full hom functor through the
+// stable displayed component projection.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (z : τ (Obj K)) ⊢
+  @fapp1_func
+    (@Transf_cat K Cat_cat E D)
+    (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+    (@tapp0_func K Cat_cat E D z)
+    FF
+    GG
+  ≡ @tdapp0_func K E D FF GG z;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (z : τ (Obj K)) ⊢
@@ -9725,6 +9765,38 @@ assert [K : Cat] (E : τ (Catd K))
   (f : τ (Hom K x y)) ⊢
   @piapp1_fapp0 K E s x y f
     ≡ piapp0 (@piapp1_func K E s x y) f;
+
+// First higher action of the section-action section.  Its runtime result
+// stays in the generic displayed internal-hom projection cascade.
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (f g : τ (Obj (Op_cat (Hom_cat K x y))))
+  (alpha : τ (Hom (Op_cat (Hom_cat K x y)) f g)) ⊢
+  @piapp1_fapp0
+    (Op_cat (Hom_cat K x y))
+    (@homd_
+      K E E (@id_funcd K E)
+      x (@piapp0 K E s x)
+      y (@piapp0 K E s y))
+    (@piapp1_func K E s x y)
+    f
+    g
+    alpha
+  ≡ @fdapp1_int_hom_fapp0
+      (Op_cat (Hom_cat K x y))
+      (@Const_catd (Op_cat (Hom_cat K x y)) Terminal_cat)
+      (@homd_
+        K E E (@id_funcd K E)
+        x (@piapp0 K E s x)
+        y (@piapp0 K E s y))
+      (@piapp1_func K E s x y)
+      f
+      g
+      alpha
+      Terminal_obj
+      Terminal_obj
+      Terminal_obj;
 
 assert [K : Cat] (A : Cat)
   (s : τ (Obj (Pi_cat (Const_catd K A))))
