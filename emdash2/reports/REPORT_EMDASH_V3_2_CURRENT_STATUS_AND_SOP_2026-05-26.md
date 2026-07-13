@@ -39,12 +39,12 @@ make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples             8
-diagnostic assertions              780
+diagnostic assertions              791
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        37 slots across 21 clauses
-warning inventory                  1,257
-  unjoinable critical pairs        1,094
+warning inventory                  1,272
+  unjoinable critical pairs        1,109
   replaceable pattern variables      163
 ```
 
@@ -52,10 +52,22 @@ The largest warning families are headed by `comp_fapp0`,
 `hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
 diagnostic evidence for locating overlap families. They are not an automatic
 veto on semantically required computation and are not a confluence proof.
-The four warnings added by the primitive-Pi eliminator follow-up are the
-classified identity and generic naturality/composition overlaps of the new
-Cat-valued component-hom projection; a terminal-source-only alternative was
-measured and rejected because it added ten critical-pair warnings instead.
+The displayed-identity/`tdapp0` follow-up replaced the primitive
+`id_transfd` normal form by a transparent generic-`id` view and removed 19
+older identity critical-pair reports. The complete typed projection-order
+package for Cat-valued component naturality, including both identity-base
+degenerations, adds 34 classified reports, for a net increase of 15 over the
+previous baseline. Its outer category must remain inferred: a product-valued
+target can reduce `Functor_cat(X,A×B)` to a product head before the bridge is
+selected. A rigid-head alternative fails that product-target diagnostic, and
+a broad direct `tdapp0_fapp0(comp)` rule was rejected because it duplicates
+the general inner composition surface. The reverse strict-composition
+contraction is also deferred: after both operands project to the stable
+`tdapp0_fapp0` head, the outer functor category is no longer carried
+syntactically. Its minimal inferred-slot LHS fails subject reduction, whereas
+spelling the reducible category and endpoints explicitly misses product
+normalization and violates the general LHS policy. A proof-time comparison is
+not a substitute for this missing runtime owner.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
@@ -97,8 +109,10 @@ neither ordinary nor displayed category heads are erased prematurely.
 
 Generic identity, composition, functor action, and naturality are owned by the
 global `id`, `comp_fapp0`, `fapp*`, and `tapp*` calculus. Specialized
-`id_func`, `id_funcd`, `comp_cat_fapp0`, and `comp_catd_fapp0` spellings are
-transparent public views or specialization surfaces, not parallel owners.
+`id_func`, `id_funcd`, `id_transfd`, `comp_cat_fapp0`, and
+`comp_catd_fapp0` spellings are transparent public views or specialization
+surfaces, not parallel owners. No separate ordinary `id_transf` constructor
+exists.
 
 ### Section 4: ordinary internal hom and variance-separated actions
 
@@ -181,6 +195,16 @@ Pi_cat(Const_catd K A) ≃ Functor_cat K A  (proof-time comparison).
 component evaluation; they are not parallel primitive heads. Their full hom
 action projects through the generic `tdapp0_func` owner and caps through
 `tdapp0_fapp0`, so `pi_hom_fapp0` computes without a Pi-specific bridge.
+When that capped component has already hidden a literal generic
+`fapp1_fapp0`, four documented projection-order joins recover the two
+ordinary naturality orientations and their `tapp1(epsilon,id) ->
+tapp0(epsilon)` degenerations. They accumulate to the existing
+`tapp1_fapp0` normal form; they do not add a second naturality calculus.
+These joins can share the inferred outer category with their surviving
+ordinary `tapp1`/`tapp0` operand. A cut whose two operands have both already
+projected to `tdapp0_fapp0` cannot currently do so; its strict vertical
+composition contraction remains deferred until the capped projection retains
+a stable outer-category owner.
 Likewise, `piapp1_func` remains the terminal-source specialization of
 `fdapp1_int_presheaf_arrow`; its first next action reaches
 `fdapp1_int_hom_fapp0`, preserving the iterated-hom tower. Runtime evaluation
@@ -551,9 +575,10 @@ effects have been measured.
 
 ## Identity Normal Forms
 
-Identity may appear as `@id`, `id_func`, `id_funcd`, or a specialized projected
-identity. A rule for the generic surface does not automatically match every
-already-normalized presentation.
+Identity may appear as `@id`, the transparent `id_func`, `id_funcd`, or
+`id_transfd` views, or a specialized projected identity. There is no separate
+ordinary `id_transf` constructor. A rule for the generic surface does not
+automatically match every proof-time-comparable category presentation.
 
 Prefer narrow typed consumer rules or a coherent small specialization package
 over broad global identity rewrites. The current middle-constrained generic
@@ -561,6 +586,10 @@ composition identity rules keep the shared middle object as the true cut
 interface while inferring outer endpoints. Competing runtime identity
 spellings are joined through the typed pre/post proof-time bridge; that
 proof-time joinability is the selected criterion for this measured overlap.
+Across the ordinary/displayed first-hom facade, identity-specialized
+`tdapp1_int_*` consumers explicitly accept generic `id` at both
+`Functord_cat(E,D)` and `Transf_cat(K,Cat,E,D)`. This is a typed façade package,
+not a global rewrite between the two identity terms.
 
 ## Comment And Layout SOP
 

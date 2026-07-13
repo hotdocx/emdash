@@ -342,7 +342,34 @@ beyond the four warnings already introduced by the required capped rule.
 Positive and negative evidence is retained under ignored `tmp/probes/`, with
 raw logs under `logs/probes/`.
 
-### Validation record
+### Follow-up resolution: displayed identity and higher component coherence
+
+The classified follow-up was completed later on 2026-07-13 under
+`REPORT_EMDASH_V3_2_DISPLAYED_IDENTITY_TDAPP0_COHERENCE_CLEANUP_PLAN_2026-07-13.md`.
+It made `id_transfd` a transparent view of generic `id`, migrated the six
+identity-specialized displayed internal-hom consumers to typed generic-identity
+patterns at both stable façade heads, and promoted the two exact
+`tdapp0_fapp0` naturality projection-order joins plus their identity-base
+degenerations.
+
+A direct rule expanding every `tdapp0_fapp0(comp)` into pointwise composition
+was measured and rejected: it intersects the entire inner composition
+calculus rather than only the two projection-erasure sites. The selected
+naturality bridges keep their outer category inferred because a
+product-valued target can normalize the outer functor category to a product
+before rule selection.
+
+The reverse contraction from a cut of two already-capped `tdapp0_fapp0`
+components to the component of the composite was also audited. Its minimal
+inferred-slot rewrite fails subject reduction because neither capped operand
+carries the outer functor category. Making that category and its endpoints
+explicit passes an ordinary target but misses product normalization and is not
+an acceptable LHS under the SOP. A temporary proof-time comparison establishes
+only mechanical equality elaboration and does not join runtime conversion.
+The contraction is therefore deferred until an outer-category-preserving
+projection owner is available; no explicit-endpoint workaround is promoted.
+
+### Validation record at original promotion
 
 The promoted source and documentation pass:
 

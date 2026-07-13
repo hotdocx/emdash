@@ -314,6 +314,21 @@ Their object, hom, and next-hom computations project through `tapp0_func`,
 Do not read these names as additional primitive type formers merely because
 `Pi_cat` itself is a stable primitive category facade.
 
+Likewise, write displayed identity using the generic identity notation. The
+compatibility name `id_transfd(FF)` is a transparent view of
+`id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel
+`id_transf` spelling is part of the canonical surface. At the ordinary/
+displayed façade boundary, typed consumers may distinguish the stable
+`Functord_cat(E,D)` and `Transf_cat(K,Cat,E,D)` category presentations even
+though the mathematical identity notation is the same.
+
+Write component composition mathematically as
+`eta[z] ∘ epsilon[z] = (eta ∘ epsilon)[z]`, but do not treat
+`tdapp0_fapp0` as a second strict-functor composition owner. The active
+runtime calculus accumulates the cut while the generic component-action owner
+is still visible; a fully capped/capped contraction is deferred until its
+projection retains the outer category required by the kernel.
+
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
 category.

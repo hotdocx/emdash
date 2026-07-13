@@ -1632,16 +1632,11 @@ unif_rule Obj (@Transfd_cat $K $E $D $FF $GG) ≡ Obj (@Transfd_cat $K' $E' $D' 
 rule Hom_cat (@Functord_cat $K $E $D) $FF $GG
   ↪ @Transfd_cat $K $E $D $FF $GG;
 
-// Stable displayed identity. The ordinary identity at a displayed-functor
-// category folds here when that category is still visible; terminal-source
-// section cases reach this head through the Hom_cat(Pi_cat) projection.
-constant symbol id_transfd [K : Cat] [E D : τ (Catd K)]
+// Transparent displayed identity: generic identity at `Functord_cat(E,D)`.
+symbol id_transfd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
-  : τ (@Transfd K E D FF FF);
-
-// Displayed identity projection at a visible `Functord_cat` head.
-rule @id (@Functord_cat $K $E $D) $FF
-  ↪ @id_transfd $K $E $D $FF;
+  : τ (@Transfd K E D FF FF)
+≔ @id (@Functord_cat K E D) FF;
 
 /*
   Directed-family category and displayed-arrow normal forms.
@@ -8488,7 +8483,10 @@ symbol fdapp1_int_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
 
 // Identity-specialization fold for the internal displayed hom-action.
 rule @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
-      (@id_transfd $K $E $D $FF)
+      (@id (@Functord_cat $K $E $D) $FF)
+  ↪ @fdapp1_int_transfd $K $E $D $FF
+with @tdapp1_int_fapp0_transfd $K $E $D $FF $FF
+      (@id (@Transf_cat $K Cat_cat $E $D) $FF)
   ↪ @fdapp1_int_transfd $K $E $D $FF;
 
 
@@ -8565,6 +8563,105 @@ rule @fapp1_fapp0
       (@tapp0_func $K Cat_cat $E $D $z)
       $FF $GG $eta
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $eta;
+
+// Displayed component of an identity transfor. The two clauses expose the
+// same generic identity through the stable displayed and ordinary category
+// presentations without introducing a second identity constructor.
+rule @tdapp0_fapp0
+      $K $E $D $FF $FF $z
+      (@id (@Functord_cat $K $E $D) $FF)
+  ↪ @id
+      (Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z))
+      (@Fibre_func $K $E $D $FF $z)
+with @tdapp0_fapp0
+      $K $E $D $FF $FF $z
+      (@id (@Transf_cat $K Cat_cat $E $D) $FF)
+  ↪ @id
+      (Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z))
+      (@Fibre_func $K $E $D $FF $z);
+
+// Projection-order join for pre/right naturality when the source functor is
+// Cat-valued component evaluation. The generic `fapp1_fapp0` component has
+// already projected to `tdapp0_fapp0` on the right cut.
+// Keep the outer category inferred: a product-valued target fibre can reduce
+// `Functor_cat(X,A×B)` before this projection-order bridge is selected. Share
+// that inferred head with the ordinary component's codomain.
+rule @comp_fapp0
+      $B _ _ _
+      (@tapp1_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $B
+        (@tapp0_func $K Cat_cat $E $D $z)
+        $G
+        $GG $HH $epsilon $f)
+      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
+  ↪ @tapp1_fapp0
+      (@Transf_cat $K Cat_cat $E $D)
+      $B
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $G
+      $FF $HH $epsilon
+      (@comp_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $FF $GG $HH $f $g);
+
+// Projection-order join for post/left naturality when the target functor is
+// Cat-valued component evaluation. The generic `fapp1_fapp0` component has
+// already projected to `tdapp0_fapp0` on the left cut.
+// Keep and share the outer category for the same product-target reason.
+rule @comp_fapp0
+      $B _ _ _
+      (@tdapp0_fapp0 $K $E $D $GG $HH $z $g)
+      (@tapp1_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $B
+        $F
+        (@tapp0_func $K Cat_cat $E $D $z)
+        $FF $GG $epsilon $f)
+  ↪ @tapp1_fapp0
+      (@Transf_cat $K Cat_cat $E $D)
+      $B
+      $F
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $FF $HH $epsilon
+      (@comp_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $FF $GG $HH $g $f);
+
+// Identity-base degeneration of the pre/right bridge. If the off-diagonal
+// component reduces first, `tapp1(epsilon,id)` has become `tapp0(epsilon)`.
+rule @comp_fapp0
+      $B _ _ _
+      (@tapp0_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $B
+        (@tapp0_func $K Cat_cat $E $D $z)
+        $G
+        $GG $epsilon)
+      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
+  ↪ @tapp1_fapp0
+      (@Transf_cat $K Cat_cat $E $D)
+      $B
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $G
+      $FF $GG $epsilon $g;
+
+// Identity-base degeneration of the post/left bridge.
+rule @comp_fapp0
+      $B _ _ _
+      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
+      (@tapp0_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $B
+        $F
+        (@tapp0_func $K Cat_cat $E $D $z)
+        $FF $epsilon)
+  ↪ @tapp1_fapp0
+      (@Transf_cat $K Cat_cat $E $D)
+      $B
+      $F
+      (@tapp0_func $K Cat_cat $E $D $z)
+      $FF $GG $epsilon $g;
 
 
 // Object-component projection for generic Sigma-total uncurrying.
@@ -9301,7 +9398,11 @@ rule @tapp0_fapp0
   ↪ @tdapp1_int_section_arrow $K $E $D $FF $GG $ϵ $x $u;
 
 // Displayed identity folds arbitrary section-arrow action to fdapp1.
-rule @tdapp1_int_section_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u
+rule @tdapp1_int_section_arrow
+      $K $E $D $FF $FF (@id (@Functord_cat $K $E $D) $FF) $x $u
+  ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u
+with @tdapp1_int_section_arrow
+      $K $E $D $FF $FF (@id (@Transf_cat $K Cat_cat $E $D) $FF) $x $u
   ↪ @fdapp1_int_section_arrow $K $E $D $FF $x $u;
 
 // Second projection of arbitrary displayed hom-action at y.
@@ -9341,7 +9442,11 @@ rule @tapp0_fapp0
   ↪ @tdapp1_int_tgt_arrow $K $E $D $FF $GG $ϵ $x $u $y;
 
 // Displayed identity folds arbitrary target-arrow action to fdapp1.
-rule @tdapp1_int_tgt_arrow $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y
+rule @tdapp1_int_tgt_arrow
+      $K $E $D $FF $FF (@id (@Functord_cat $K $E $D) $FF) $x $u $y
+  ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y
+with @tdapp1_int_tgt_arrow
+      $K $E $D $FF $FF (@id (@Transf_cat $K Cat_cat $E $D) $FF) $x $u $y
   ↪ @fdapp1_int_tgt_arrow $K $E $D $FF $x $u $y;
 
 // Third projection of arbitrary displayed hom-action at fibre object v.
@@ -9377,7 +9482,14 @@ rule @tapp0_fapp0
 
 // Displayed identity folds arbitrary presheaf-arrow action to fdapp1.
 rule @tdapp1_int_presheaf_arrow
-      $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $u $y $v
+      $K $E $D $FF $FF
+      (@id (@Functord_cat $K $E $D) $FF)
+      $x $u $y $v
+  ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v
+with @tdapp1_int_presheaf_arrow
+      $K $E $D $FF $FF
+      (@id (@Transf_cat $K Cat_cat $E $D) $FF)
+      $x $u $y $v
   ↪ @fdapp1_int_presheaf_arrow $K $E $D $FF $x $u $y $v;
 
 // Fourth projection of arbitrary displayed hom-action at base arrow p.
@@ -9433,7 +9545,14 @@ rule @tapp0_fapp0
 
 // Displayed identity folds arbitrary hom-action at p to fdapp1.
 rule @tdapp1_int_hom_func
-      $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u $v
+      $K $E $D $FF $FF
+      (@id (@Functord_cat $K $E $D) $FF)
+      $x $y $p $u $v
+  ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v
+with @tdapp1_int_hom_func
+      $K $E $D $FF $FF
+      (@id (@Transf_cat $K Cat_cat $E $D) $FF)
+      $x $y $p $u $v
   ↪ @fdapp1_int_hom_func $K $E $D $FF $x $y $p $u $v;
 
 // Canonical transported-identity cell for an arbitrary displayed transfor.
@@ -9461,7 +9580,11 @@ rule fapp0 (@tdapp1_int_hom_func $K $E $D $FF $GG $ϵ $x $y $p $u _) (@id _ _)
   ↪ @tdapp1_int_cell $K $E $D $FF $GG $ϵ $x $y $p $u;
 
 // Displayed identity folds arbitrary component cell to fdapp1.
-rule @tdapp1_int_cell $K $E $D $FF $FF (@id_transfd $K $E $D $FF) $x $y $p $u
+rule @tdapp1_int_cell
+      $K $E $D $FF $FF (@id (@Functord_cat $K $E $D) $FF) $x $y $p $u
+  ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u
+with @tdapp1_int_cell
+      $K $E $D $FF $FF (@id (@Transf_cat $K Cat_cat $E $D) $FF) $x $y $p $u
   ↪ @fdapp1_int_cell $K $E $D $FF $x $y $p $u;
 
 // 16e. Strict/cartesian and terminal-source specializations

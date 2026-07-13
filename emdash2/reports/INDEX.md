@@ -47,6 +47,11 @@ notation, implementation plans, and historical decisions.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_DISPLAYED_IDENTITY_TDAPP0_COHERENCE_CLEANUP_PLAN_2026-07-13.md`:
+  promoted transparent generic displayed identity and typed identity
+  consumers, plus the four `tdapp0_fapp0` naturality projection-order joins;
+  rejected inferred-slot vertical-composition workarounds and recorded the
+  required outer-category-preserving projection owner.
 - `REPORT_EMDASH_V3_2_PRIMITIVE_PI_ELIMINATOR_AUDIT_AND_REDESIGN_PLAN_2026-07-13.md`:
   retained `piapp0*`/`piapp1*` as typed semantic definitions, promoted the
   missing generic full/capped `tapp0_func` hom projections to

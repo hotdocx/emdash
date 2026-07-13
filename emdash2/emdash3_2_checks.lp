@@ -4821,10 +4821,37 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @tdapp1_int_presheaf_arrow
+      K E D FF FF (@id_transfd K E D FF) x u y v
+    ≡ @fdapp1_int_presheaf_arrow K E D FF x u y v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y))) ⊢
+  @tdapp1_int_hom_func
+      K E D FF FF (@id_transfd K E D FF) x y p u v
+    ≡ @fdapp1_int_hom_func K E D FF x y p u v;
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
   @tdapp1_int_cell
       K E D FF FF (@id_transfd K E D FF) x y p u
+    ≡ @fdapp1_int_cell K E D FF x y p u;
+
+// The proof-time-comparable ordinary identity presentation reaches the same
+// identity-specialized displayed cell owner.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tdapp1_int_cell
+      K E D FF FF (@id (@Transf_cat K Cat_cat E D) FF) x y p u
     ≡ @fdapp1_int_cell K E D FF x y p u;
 
 assert [K A : Cat] (x y : τ (Obj A)) (p : τ (Hom A x y)) ⊢
@@ -6983,6 +7010,11 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
     (@id (@Functord_cat K E D) FF)
     ≡ @fdapp1_int_transfd K E D FF;
 
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) ⊢
+  @tdapp1_int_fapp0_transfd K E D FF FF
+    (@id (@Transf_cat K Cat_cat E D) FF)
+    ≡ @fdapp1_int_transfd K E D FF;
+
 assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) ⊢
   @tdapp1_int_fapp0_transfd
     K
@@ -6998,6 +7030,24 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   fapp0 (@tdapp0_func K E D FF GG z) ϵ
     ≡ @tdapp0_fapp0 K E D FF GG z ϵ;
 
+// Displayed component identities join through both stable category
+// presentations and the generic identity owner.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0
+      K E D FF FF z (@id (@Functord_cat K E D) FF)
+    ≡ @id
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@Fibre_func K E D FF z);
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0
+      K E D FF FF z (@id (@Transf_cat K Cat_cat E D) FF)
+    ≡ @id
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@Fibre_func K E D FF z);
+
 // Cat-valued component evaluation retains its full hom functor through the
 // stable displayed component projection.
 assert [K : Cat] (E D : τ (Catd K))
@@ -7010,6 +7060,175 @@ assert [K : Cat] (E D : τ (Catd K))
     FF
     GG
   ≡ @tdapp0_func K E D FF GG z;
+
+// Projection-first and generic-first pre/right naturality have the same
+// off-diagonal component normal form.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (z : τ (Obj K))
+  (G : τ (Functor
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))))
+  (epsilon : τ (@Transf
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@tapp0_func K Cat_cat E D z)
+        G))
+  (f : τ (Transfd GG HH))
+  (g : τ (Transfd FF GG)) ⊢
+  comp_fapp0
+    (@tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@tapp0_func K Cat_cat E D z)
+      G GG HH epsilon f)
+    (@tdapp0_fapp0 K E D FF GG z g)
+  ≡ @tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@tapp0_func K Cat_cat E D z)
+      G FF HH epsilon
+      (@comp_fapp0
+        (@Transf_cat K Cat_cat E D)
+        FF GG HH f g);
+
+// The naturality bridge survives when the target fibre is product-valued and
+// the outer functor category has already reduced to a product category.
+assert [K A B C : Cat]
+  (FF GG HH : τ (Functord
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B))))
+  (z : τ (Obj K))
+  (G : τ (Functor
+        (@Transf_cat K Cat_cat
+          (@Const_catd K C)
+          (@Const_catd K (Product_cat A B)))
+        (Functor_cat C (Product_cat A B))))
+  (epsilon : τ (@Transf
+        (@Transf_cat K Cat_cat
+          (@Const_catd K C)
+          (@Const_catd K (Product_cat A B)))
+        (Functor_cat C (Product_cat A B))
+        (@tapp0_func K Cat_cat
+          (@Const_catd K C)
+          (@Const_catd K (Product_cat A B)) z)
+        G))
+  (f : τ (@Transfd K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) GG HH))
+  (g : τ (@Transfd K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) FF GG)) ⊢
+  comp_fapp0
+    (@tapp1_fapp0
+      (@Transf_cat K Cat_cat
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)))
+      (Functor_cat C (Product_cat A B))
+      (@tapp0_func K Cat_cat
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) z)
+      G GG HH epsilon f)
+    (@tdapp0_fapp0 K
+      (@Const_catd K C)
+      (@Const_catd K (Product_cat A B)) FF GG z g)
+  ≡ @tapp1_fapp0
+      (@Transf_cat K Cat_cat
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)))
+      (Functor_cat C (Product_cat A B))
+      (@tapp0_func K Cat_cat
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) z)
+      G FF HH epsilon
+      (@comp_fapp0
+        (@Transf_cat K Cat_cat
+          (@Const_catd K C)
+          (@Const_catd K (Product_cat A B)))
+        FF GG HH f g);
+
+// Post/left naturality has the mirror projection-order join.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (z : τ (Obj K))
+  (F : τ (Functor
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))))
+  (epsilon : τ (@Transf
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        F
+        (@tapp0_func K Cat_cat E D z)))
+  (g : τ (Transfd GG HH))
+  (f : τ (Transfd FF GG)) ⊢
+  comp_fapp0
+    (@tdapp0_fapp0 K E D GG HH z g)
+    (@tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      F (@tapp0_func K Cat_cat E D z)
+      FF GG epsilon f)
+  ≡ @tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      F (@tapp0_func K Cat_cat E D z)
+      FF HH epsilon
+      (@comp_fapp0
+        (@Transf_cat K Cat_cat E D)
+        FF GG HH g f);
+
+// If tapp1(epsilon,id) reduces first, the ordinary tapp0 component still
+// joins the same pre/right naturality result.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (z : τ (Obj K))
+  (G : τ (Functor
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))))
+  (epsilon : τ (@Transf
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@tapp0_func K Cat_cat E D z)
+        G))
+  (g : τ (Transfd FF GG)) ⊢
+  comp_fapp0
+    (@tapp0_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@tapp0_func K Cat_cat E D z)
+      G GG epsilon)
+    (@tdapp0_fapp0 K E D FF GG z g)
+  ≡ @tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@tapp0_func K Cat_cat E D z)
+      G FF GG epsilon g;
+
+// Identity-base post/left naturality joins symmetrically.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (z : τ (Obj K))
+  (F : τ (Functor
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))))
+  (epsilon : τ (@Transf
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        F
+        (@tapp0_func K Cat_cat E D z)))
+  (g : τ (Transfd FF GG)) ⊢
+  comp_fapp0
+    (@tdapp0_fapp0 K E D FF GG z g)
+    (@tapp0_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      F (@tapp0_func K Cat_cat E D z)
+      FF epsilon)
+  ≡ @tapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      F (@tapp0_func K Cat_cat E D z)
+      FF GG epsilon g;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (z : τ (Obj K)) ⊢

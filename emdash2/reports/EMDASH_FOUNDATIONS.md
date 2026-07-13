@@ -133,6 +133,14 @@ underlying operation has not yet been internalized far enough as a functor.
 The same principle applies to naturality after a construction has been
 internalized as a transformation.
 
+The public identity names follow this discipline uniformly. `id_func(A)`,
+`id_funcd(E)`, and `id_transfd(FF)` are transparent views of generic `id` at
+`Cat_cat`, `Catd_cat(K)`, and `Functord_cat(E,D)`, respectively. There is no
+second ordinary `id_transf` constructor. Because `Functord_cat(E,D)` and
+`Transf_cat(K,Cat,E,D)` are proof-time-comparable stable facades rather than
+runtime aliases, identity-specialized displayed consumers accept the two
+typed generic-`id` presentations explicitly.
+
 This is a useful discipline throughout the development: an equation such as
 `E[x] = ...` is only the object part of a functorial or natural construction.
 When `x` ranges over a directed category, the corresponding arrow action over
@@ -473,6 +481,24 @@ generic displayed-component functor `tdapp0_func` and caps at
 These Pi-facing eliminator names are definitions, not a second primitive
 calculus. In the constant-family case `piapp0 F k` computes to ordinary
 `fapp0 F k`.
+
+The capped projection remains coherent with higher ordinary naturality. If a
+generic action component has already projected from `fapp1_fapp0(tapp0_func)`
+to `tdapp0_fapp0`, the pre/right and post/left naturality cuts still accumulate
+to the corresponding `tapp1_fapp0` at the composite displayed arrow. The two
+identity-base cases also join after `tapp1_fapp0(epsilon,id)` has reduced to
+`tapp0_fapp0(epsilon)`. These are projection-order joins around the existing
+ordinary naturality owner, not new laws attached independently to Pi.
+
+Strict vertical composition exposes a sharper boundary. Before capping, the
+generic `fapp1_fapp0(tapp0_func)` term still carries its ordinary target
+category and the global strict-functor cut can accumulate. After both actions
+have projected to `tdapp0_fapp0`, that category is present in the type but no
+longer in the term head. A general runtime contraction cannot therefore be
+made subject-reducing merely by repeating reducible fibre endpoints on its
+LHS; it requires a future projection owner that preserves the outer category.
+The naturality joins work now precisely because one ordinary `tapp1` or
+`tapp0` operand still carries that shared category.
 
 The same policy continues one dimension higher. `piapp1_func(s,x,y)` is the
 terminal-source specialization of the generic displayed internal-hom action,
