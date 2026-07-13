@@ -459,10 +459,25 @@ functor application:
 F[k] as a section = F[k] as an ordinary functor value
 ```
 
-In `emdash3_2.lp`, the category equality is a proof-time comparison between
-the stable displayed section facade and `Functor_cat K A`. Runtime evaluation
-crosses the boundary through the rule equating `piapp0 F k` with ordinary
-`fapp0 F k` in this case.
+In `emdash3_2.lp`, `Pi_cat E` is the stable primitive section facade. It is
+proof-time-comparable with both the terminal-source displayed presentation
+`Functord_cat(Terminal_catd K,E)` and its ordinary Cat-valued-transfor
+presentation. Its `Obj` classifier projects to the represented section
+objects, while `Hom_cat(Pi_cat E,s,t)` projects to the corresponding
+`Transfd_cat` next hom. For a constant family there is also a direct proof-time
+comparison with `Functor_cat K A`. Runtime evaluation crosses the boundary
+through the rule equating `piapp0 F k` with ordinary `fapp0 F k` in this case.
+
+For the Sigma first projection, this stable head makes section uncurrying a
+direct proof-time comparison:
+
+```text
+Π_(k,r) D[k] = (k :^n K ; R[k] ⊢ D[k]).
+```
+
+Runtime object and next-hom projections supply the corresponding displayed
+functor and transfor components; the whole section category does not reduce to
+the displayed-functor category.
 
 Likewise, the hom action of `const_section_{K,A}` stays in the displayed
 transformation facade (`Const_transfd_func` / `Const_transfd`). Ordinary

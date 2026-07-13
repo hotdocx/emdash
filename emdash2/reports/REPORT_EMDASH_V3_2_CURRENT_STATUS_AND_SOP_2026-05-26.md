@@ -320,18 +320,19 @@ Their `Obj` projections compute toward the ordinary presentations, while their
 `Hom_cat` projections expose the next displayed rung. Add direct comparisons
 at every represented rung; do not rely on unification-rule transitivity.
 
-The specialized runtime contraction for sections over
-`Sigma_proj1_pullback_catd` remains a measured exception. A demotion probe
-without runtime projections fails subject reduction at
-`path_ind_sec -> fib_cov_transf`. A hybrid probe and ablation show that a
-runtime join between the projected ordinary `Obj(Transf_cat)` classifiers is
-the minimal subject-reduction repair. A direct displayed-`Obj` rule is
-redundant with the global facade projection; a next-hom rule is separately
-motivated by iterability. The whole-category proof-time comparison cannot be
-exercised through the current same `Functord_cat` head or transparent `Pi_cat`
-alias. Removing the fold therefore requires a distinct stable Sigma-section
-result owner (with the measured ordinary-`Obj` join and next-hom projection)
-or an explicit section-uncurrying functor/equivalence.
+`Pi_cat K E` is the stable section-category facade over the terminal-source
+displayed rung. It compares directly at proof time with both
+`Functord_cat K (Terminal_catd K) E` and the corresponding ordinary
+`Transf_cat`, while its `Obj` and `Hom_cat` projections expose section objects
+and the `Transfd_cat` next hom. The constant-family comparison with
+`Functor_cat K A` is also direct; do not rely on comparison transitivity.
+
+For sections over `Sigma_proj1_pullback_catd`, the distinct `Pi_cat` and
+`Functord_cat` heads now support a direct proof-time uncurrying comparison.
+Runtime subject reduction for `path_ind_sec -> fib_cov_transf` crosses the
+general Pi/displayed object ladder and one measured join between ordinary
+`Obj(Transf_cat)` classifiers. A direct specialized displayed-`Obj` rule is
+redundant. The next `Transfd_cat` projection is retained for iterability.
 
 ### One generic owner for ordinary laws
 
@@ -644,11 +645,6 @@ The following remain explicit future work rather than hidden assumptions:
 - semantic uncurry action on arbitrary transfors;
 - whole-transfor displayed laxity beyond `fdapp1_int_cell`;
 - the arrow action of `sigma_intro_tapp0_func`;
-- a distinct stable Sigma-section result owner, or explicit section-uncurrying
-  construction, for the `path_ind_sec -> fib_cov_transf` computation; the
-  measured projected ordinary-`Obj` join repairs subject reduction and a
-  next-hom projection preserves iterability, but current same-head category
-  unification does not;
 - off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current
   point-component computation;
 - a fully internalized general coend/coinserter semantics for profunctor tensor;

@@ -286,11 +286,18 @@ Kernel meaning:
 Pi_cat D
 ```
 
-Definitionally:
+Kernel comparison and runtime projections:
 
 ```text
-Pi_cat D = Functord_cat (Terminal_catd Z) D
+Pi_cat D =proof-time Functord_cat (Terminal_catd Z) D
+Obj(Pi_cat D) -> Obj(Functord_cat (Terminal_catd Z) D)
+Hom_(Pi_cat D)(s,t) -> Transfd_cat(Terminal_catd Z,D,s,t)
 ```
+
+`Pi_cat` is a stable section-category facade, not a transparent notation-only
+alias. Special mathematical identifications, such as constant sections with
+ordinary functors or Sigma-projection sections with displayed functors, are
+direct proof-time comparisons.
 
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section

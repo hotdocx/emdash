@@ -3,7 +3,7 @@
 Date: 2026-06-11
 
 Plan-ID: EMDASH-V3-2-PI-ALONG-FUNCTOR-2026-06-11
-Depends-On: none
+Depends-On: EMDASH-V3-2-PRIMITIVE-PI-FACADE-REARCHITECTURE-2026-07-12
 Supersedes: none
 Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
@@ -50,7 +50,7 @@ Relevant existing infrastructure in `emdash3_2.lp`:
 Catd_cat(K)              = K ⊢ Cat
 Pullback_catd(E,F)       = E ∘ F
 Pullback_catd_func(F)    : Catd(B) ⊢ Catd(A)
-Pi_cat(E)                = sections of E
+Pi_cat(E)                = stable section-category facade of E
 Pi_func(K)               : Catd(K) ⊢ Cat
 Pi_int_funcd             : K :^n Cat^op ; Catd(K) ⊢ Cat
 Pi_pullback_funcd(G)     : x :^n X ; Catd(G[x]) ⊢ Cat

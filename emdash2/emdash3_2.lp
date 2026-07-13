@@ -1634,8 +1634,7 @@ rule Hom_cat (@Functord_cat $K $E $D) $FF $GG
 
 // Stable displayed identity. The ordinary identity at a displayed-functor
 // category folds here when that category is still visible; terminal-source
-// section cases can use this head directly after Functord_cat contracts to
-// Pi_cat.
+// section cases reach this head through the Hom_cat(Pi_cat) projection.
 constant symbol id_transfd [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   : τ (@Transfd K E D FF FF);
@@ -4528,7 +4527,8 @@ symbol Product_pair_tele_func [A B : Cat]
     Transf_cat(F,G) = F => G
     Transf(F,G)     = Obj(F => G)
 
-  For Cat-valued functors this reduces to the displayed-family category:
+  For Cat-valued functors this is proof-time-comparable with the stable
+  displayed-family category:
     Transf_cat(K,Cat,E,D) = Functord_cat(E,D).
 */
 injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
@@ -7276,17 +7276,43 @@ rule @tapp0_fapp0
 
 // 8c. Section categories and Pi action
 //
-// Fixed-base layer: section category of a displayed family.
+// Fixed-base layer: stable section-category facade for a displayed family.
 //
 // Surface/formula:
 //   Pi_cat(E) = Π k :^n K, E[k]
 //             = k :^n K ; 1[k] ⊢ E[k]
 //   section object s has components s[k] : E[k].
-symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat
-≔ @Functord_cat K (@Const_catd K Terminal_cat) E;
+injective symbol Pi_cat [K : Cat] (E : τ (Catd K)) : Cat;
+
+// Proof-time comparison between the stable section facade and its displayed
+// terminal-source presentation.
+unif_rule
+  @Pi_cat $K $E
+  ≡ @Functord_cat $K' (@Const_catd $K' Terminal_cat) $E'
+  ↪ [ $K ≡ $K'; $E ≡ $E' ];
+
+// Direct proof-time comparison with the corresponding ordinary Cat-valued
+// transfor category; do not rely on unification-rule transitivity.
+unif_rule
+  @Pi_cat $K $E
+  ≡ @Transf_cat $K' Cat_cat (@Const_catd $K' Terminal_cat) $E'
+  ↪ [ $K ≡ $K'; $E ≡ $E' ];
+
+// Runtime classifier projection for section objects.
+rule Obj (@Pi_cat $K $E)
+  ↪ Obj (@Functord_cat $K (@Const_catd $K Terminal_cat) $E);
+
+// Runtime next-hom projection for arrows between sections.
+rule Hom_cat (@Pi_cat $K $E) $s $t
+  ↪ @Transfd_cat $K (@Const_catd $K Terminal_cat) $E $s $t;
 
 // Proof-time comparison only: sections of a constant family are ordinary
 // functors, while the displayed section-category head remains stable.
+unif_rule
+  @Pi_cat $K (@Const_catd $K $A)
+  ≡ Functor_cat $K' $A'
+  ↪ [ $K ≡ $K'; $A ≡ $A' ];
+
 unif_rule
   @Functord_cat $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
   ≡ Functor_cat $K' $A'
@@ -7664,12 +7690,34 @@ rule @fapp0
       (Struct_sigma $k $r)
   ↪ @Fibre_cat $K $D $k;
 
-// Sections over the projection pullback are displayed functors R => D.
-rule @Functord_cat
+// Proof-time uncurrying comparison: sections over a Sigma-projection
+// pullback and displayed functors R => D are stable presentations.
+unif_rule
+  @Pi_cat
+    (@Sigma_cat $K $R)
+    (@Sigma_proj1_pullback_catd $K $R $D)
+  ≡ @Functord_cat $K' $R' $D'
+  ↪ [ $K ≡ $K'; $R ≡ $R'; $D ≡ $D' ];
+
+// Runtime classifier join after the general Pi and displayed-facade
+// projections expose the ordinary Cat-valued-transfor presentation. This is
+// the minimal measured join required by path_ind_sec -> fib_cov_transf.
+rule Obj
+      (@Transf_cat
+        (@Sigma_cat $K $R)
+        Cat_cat
+        (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
+        (@Sigma_proj1_pullback_catd $K $R $D))
+  ↪ Obj (@Transf_cat $K Cat_cat $R $D);
+
+// Runtime next-hom projection: transformations between Sigma sections are
+// displayed transformations between the corresponding displayed functors.
+rule @Transfd_cat
       (@Sigma_cat $K $R)
       (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
       (@Sigma_proj1_pullback_catd $K $R $D)
-  ↪ @Functord_cat $K $R $D;
+      $s $t
+  ↪ @Transfd_cat $K $R $D $s $t;
 
 // 9b. Sigma maps and canonical transport arrows
 //
@@ -9497,7 +9545,7 @@ rule fapp0 (@sigma_intro_tapp0_func $K $E $k) $u
 //   pi_eval_transf(E)[k] = piapp0_func(E,k).
 injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
   : τ (Functord
-      (@Const_catd K (@Functord_cat K (@Const_catd K Terminal_cat) E))
+      (@Const_catd K (@Pi_cat K E))
       E);
 
 // LHS indexing guard: this source family is reconstructible from
@@ -9506,7 +9554,7 @@ injective symbol pi_eval_transf [K : Cat] (E : τ (Catd K))
 // lhs-audit: keep 3 -- measured decision-tree performance guard
 rule @tapp0_fapp0
       $K Cat_cat
-      (@Const_catd $K (@Functord_cat $K (@Const_catd $K Terminal_cat) $E))
+      (@Const_catd $K (@Pi_cat $K $E))
       $E $k
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;

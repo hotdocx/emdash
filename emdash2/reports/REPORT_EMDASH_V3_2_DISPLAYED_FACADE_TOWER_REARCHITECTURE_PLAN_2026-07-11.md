@@ -8,7 +8,7 @@ Supersedes: no whole report; proposes a representation-boundary migration refini
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-11
 Infinity-Codex-Decision-Responses: infinity-codex:019f526a-dafb-77d0-9dea-2778a57275b7:019f526d-c79f-7850-8802-f99a59b0a028; infinity-codex:019f526a-dafb-77d0-9dea-2778a57275b7:019f52bb-060e-75c0-87bb-ef593b24310b
-Status: core architecture promoted 2026-07-11; Sigma-first-projection section-fold demotion and sigma_map_transf off-diagonal action remain explicit deferred follow-ups
+Status: core architecture promoted 2026-07-11; Sigma-first-projection section-fold follow-up resolved by the primitive-Pi facade migration on 2026-07-12; sigma_map_transf off-diagonal action remains deferred
 
 ## Goal
 
@@ -669,6 +669,14 @@ section-uncurrying functor/equivalence. The former stable owner would give a
 pair of rigid heads on which the intended proof-time comparison can actually
 operate.
 
+The follow-up
+`REPORT_EMDASH_V3_2_PRIMITIVE_PI_FACADE_REARCHITECTURE_PLAN_2026-07-12.md`
+selected that general owner: `Pi_cat` is now the stable primitive section
+facade. Its distinct head makes the Sigma-section comparison effective, while
+the measured ordinary-`Obj` join and next-hom projection provide runtime
+subject reduction and iterability. This resolves the exception without an
+ad hoc Sigma-only category symbol.
+
 ## Implementation Phases
 
 ### Phase 0: Plan, inventory, and reproducible baseline
@@ -744,15 +752,13 @@ projections, especially:
 Do not demote them mechanically. Each fold requires a concrete owner,
 consumer, and both-order probe.
 
-The first audit pass is complete. Product-valued transfor computation remains
-a genuine ordinary runtime projection. The Sigma-first-projection section fold
-is retained for the `path_ind_sec -> fib_cov_transf` consumer. A hybrid probe
-shows that one ordinary `Obj(Transf_cat)` classifier join repairs subject
-reduction; a direct displayed-`Obj` rule is redundant, while a next-hom rule
-would provide iterable projection rather than the immediate repair. The
-whole-category proof-time comparison still requires the distinct stable
-section owner (or explicit uncurrying construction) recorded above. No other
-whole-category facade collapse was found that should be changed in this
+The first audit and primitive-Pi follow-up are complete. Product-valued
+transfor computation remains a genuine ordinary runtime projection. The
+Sigma-first-projection whole-category fold has been replaced by the direct
+proof-time `Pi_cat`/`Functord_cat` comparison, one ordinary
+`Obj(Transf_cat)` classifier join, and an iterable next-hom projection. A
+direct displayed-`Obj` rule remains intentionally absent as redundant. No
+other whole-category facade collapse was found that should be changed in this
 migration.
 
 ### Phase 6: Promotion and documentation
@@ -887,14 +893,11 @@ The redesign is successful when:
   displayed constant-transformation and separate ordinary weakening owners,
   was promoted 2026-07-11.
 - `DFACADE-08`: Audit the Sigma-projection section fold and other competing
-  whole-category semantic folds. Status: first audit and hybrid follow-up
-  complete. Ablation shows that the projected ordinary `Obj(Transf_cat)` join
-  alone repairs the `path_ind_sec` subject-reduction failure; the direct
-  displayed-`Obj` rule is redundant, and the next-hom rule is independently
-  motivated by iterability. The category comparison cannot be exercised
-  through the current same `Functord_cat` head or transparent `Pi_cat`. The
-  runtime fold remains until a distinct stable Sigma-section owner or explicit
-  section-uncurrying construction is designed.
+  whole-category semantic folds. Status: complete. The primitive-Pi facade
+  follow-up supplies the distinct category head; the projected ordinary
+  `Obj(Transf_cat)` join repairs `path_ind_sec` subject reduction, the direct
+  displayed-`Obj` rule is omitted as redundant, and the next-hom rule preserves
+  iterability. The old whole-category fold has been removed.
 - `DFACADE-09`: Update the `Prof_cat` rule to recover `$B0` explicitly and add
   a focused inferred-endpoint diagnostic. Status: complete and promoted.
 - `DFACADE-10`: Migrate diagnostics, comments, SOP, Foundations, catalog, and

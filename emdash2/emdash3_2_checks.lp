@@ -4432,8 +4432,11 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     ≡ @Functord_cat Z (@Rep_catd Z y) (@Rep_catd Z x);
 
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
-  @Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x)
-    ≡ @Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x);
+  @eq_refl Cat_grpd
+    (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+  : τ (@= Cat_grpd
+      (@Pi_cat (@PathOut_cat Z x) (@CompMotive_catd Z x))
+      (@Functord_cat Z (@Rep_catd Z x) (@CompTarget_catd Z x)));
 
 assert [Z : Cat] (x : τ (Obj Z)) ⊢
   @path_ind_sec
@@ -5737,7 +5740,14 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
       (Pi_cat E));
 
 assert [K : Cat] (E : τ (Catd K)) ⊢
-  @Functord_cat K (@Terminal_catd K) E ≡ Pi_cat E;
+  @eq_refl Cat_grpd (Pi_cat E)
+  : τ (@= Cat_grpd
+      (Pi_cat E)
+      (@Functord_cat K (@Terminal_catd K) E));
+
+assert [K : Cat] (E : τ (Catd K)) ⊢
+  Obj (Pi_cat E)
+    ≡ Obj (@Functord_cat K (@Terminal_catd K) E);
 
 assert [K : Cat] (A : Cat) ⊢
   @eq_refl Cat_grpd (Pi_cat (Const_catd K A))
@@ -6272,8 +6282,15 @@ assert [K : Cat] (R D : τ (Catd K))
     ≡ Fibre_cat D k;
 
 assert [K : Cat] (R D : τ (Catd K)) ⊢
-  @Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)
-    ≡ @Functord_cat K R D;
+  @eq_refl Cat_grpd
+    (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D))
+  : τ (@= Cat_grpd
+      (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D))
+      (@Functord_cat K R D));
+
+assert [K : Cat] (R D : τ (Catd K)) ⊢
+  Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D))
+    ≡ Obj (@Functord_cat K R D);
 
 assert [K : Cat] (R D : τ (Catd K))
   (s t : τ (Obj (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D)))) ⊢
@@ -6729,8 +6746,15 @@ assert [Z : Cat] (x y : τ (Obj Z)) (p : τ (Hom Z x y)) ⊢
     ≡ @pathout_refl_arrow Z x y p;
 
 assert [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) ⊢
-  @Pi_cat (@PathOut_cat Z x) (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D)
-    ≡ @Functord_cat Z (@Rep_catd Z x) D;
+  @eq_refl Cat_grpd
+    (@Pi_cat
+      (@PathOut_cat Z x)
+      (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D))
+  : τ (@= Cat_grpd
+      (@Pi_cat
+        (@PathOut_cat Z x)
+        (@Sigma_proj1_pullback_catd Z (@Rep_catd Z x) D))
+      (@Functord_cat Z (@Rep_catd Z x) D));
 
 assert [A B : Cat] (x : τ (Obj A)) (F G : τ (Functor A B))
   (η : τ (Transf F G)) ⊢

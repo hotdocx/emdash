@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-11
+Date: 2026-07-12
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active code authority; reports explain current status, mathematics,
@@ -47,6 +47,10 @@ notation, implementation plans, and historical decisions.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_PRIMITIVE_PI_FACADE_REARCHITECTURE_PLAN_2026-07-12.md`:
+  promoted `Pi_cat` from a transparent alias to the stable primitive section
+  facade, with direct proof-time comparisons, runtime `Obj`/`Hom_cat`
+  projections, and the Sigma-section uncurrying/path-induction boundary.
 - `REPORT_EMDASH_V3_2_DISPLAYED_FACADE_TOWER_REARCHITECTURE_PLAN_2026-07-11.md`:
   promoted the levelwise proof-time/runtime boundary for the displayed
   `Catd`/`Functord`/`Transfd` tower, constant-section owner split,
