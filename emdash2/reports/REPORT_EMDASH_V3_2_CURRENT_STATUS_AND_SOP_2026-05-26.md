@@ -39,7 +39,7 @@ make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples             8
-diagnostic assertions              791
+diagnostic assertions              799
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        37 slots across 21 clauses
@@ -59,15 +59,18 @@ package for Cat-valued component naturality, including both identity-base
 degenerations, adds 34 classified reports, for a net increase of 15 over the
 previous baseline. Its outer category must remain inferred: a product-valued
 target can reduce `Functor_cat(X,A×B)` to a product head before the bridge is
-selected. A rigid-head alternative fails that product-target diagnostic, and
-a broad direct `tdapp0_fapp0(comp)` rule was rejected because it duplicates
-the general inner composition surface. The reverse strict-composition
-contraction is also deferred: after both operands project to the stable
-`tdapp0_fapp0` head, the outer functor category is no longer carried
-syntactically. Its minimal inferred-slot LHS fails subject reduction, whereas
-spelling the reducible category and endpoints explicitly misses product
-normalization and violates the general LHS policy. A proof-time comparison is
-not a substitute for this missing runtime owner.
+selected. A rigid-head alternative fails that product-target diagnostic.
+Displayed vertical-composite components now project pointwise through two
+SOP-minimal `tdapp0_fapp0` clauses, mirroring the ordinary `tapp0_fapp0`
+projection beta. Their outer inferred slots are `_`; the inner composite's
+rigid `Functord_cat` or `Transf_cat` category is the discriminator and retains
+the information required for subject reduction. The rules pass the generic
+strict-action diamond, both identity units, product-target normalization, and
+one further component projection without changing the warning inventory. The
+reverse fully capped contraction remains rejected: it chooses the wrong
+component-projection normal form and its minimal LHS also fails subject
+reduction. A proof-time comparison is not a substitute for the selected
+runtime projection beta.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
@@ -201,10 +204,13 @@ ordinary naturality orientations and their `tapp1(epsilon,id) ->
 tapp0(epsilon)` degenerations. They accumulate to the existing
 `tapp1_fapp0` normal form; they do not add a second naturality calculus.
 These joins can share the inferred outer category with their surviving
-ordinary `tapp1`/`tapp0` operand. A cut whose two operands have both already
-projected to `tdapp0_fapp0` cannot currently do so; its strict vertical
-composition contraction remains deferred until the capped projection retains
-a stable outer-category owner.
+ordinary `tapp1`/`tapp0` operand. Vertical composition is handled separately
+as evaluator projection beta: a composite displayed transfor under
+`tdapp0_fapp0` expands to the pointwise composite of its displayed
+components. This is the same orientation as ordinary `tapp0_fapp0`; it joins
+the path where generic `fapp1_fapp0(tapp0_func)` strictness accumulates first
+with the path where both operands project first. It does not introduce a
+second functoriality calculus.
 Likewise, `piapp1_func` remains the terminal-source specialization of
 `fdapp1_int_presheaf_arrow`; its first next action reaches
 `fdapp1_int_hom_fapp0`, preserving the iterated-hom tower. Runtime evaluation
@@ -375,6 +381,22 @@ The global `fapp*`/`tapp*` calculus is the sole owner of ordinary identity,
 composition, functoriality, and naturality. A constructor-specific rule whose
 only content is one of those laws indicates a missing internalized
 functor/transfor owner or a detached projection.
+
+Do distinguish a duplicate structural law from projection beta. Once a
+stable evaluator head such as `tapp0_fapp0` or `tdapp0_fapp0` has erased the
+literal generic evaluation-action pattern, a rule exposing the component of a
+composite is the next rung of the evaluator ladder:
+
+```text
+tapp0(x,eta o epsilon)
+  -> tapp0(x,eta) o tapp0(x,epsilon)
+tdapp0(x,eta o epsilon)
+  -> tdapp0(x,eta) o tdapp0(x,epsilon).
+```
+
+This pointwise expansion coexists with the generic strict-functor cut
+`F[g] o F[f] -> F[g o f]` because the rules operate at different heads and
+must be tested as a joining projection diamond.
 
 A specialized projection-order bridge is exceptional but legitimate when:
 

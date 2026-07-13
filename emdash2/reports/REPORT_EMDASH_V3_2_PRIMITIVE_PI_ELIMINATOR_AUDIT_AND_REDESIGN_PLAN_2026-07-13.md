@@ -352,22 +352,26 @@ patterns at both stable façade heads, and promoted the two exact
 `tdapp0_fapp0` naturality projection-order joins plus their identity-base
 degenerations.
 
-A direct rule expanding every `tdapp0_fapp0(comp)` into pointwise composition
-was measured and rejected: it intersects the entire inner composition
-calculus rather than only the two projection-erasure sites. The selected
-naturality bridges keep their outer category inferred because a
-product-valued target can normalize the outer functor category to a product
-before rule selection.
+The later composition review corrected an earlier conflation between generic
+strict-functor cut elimination and evaluator projection beta. The active
+displayed component now mirrors the ordinary component rule:
 
-The reverse contraction from a cut of two already-capped `tdapp0_fapp0`
-components to the component of the composite was also audited. Its minimal
-inferred-slot rewrite fails subject reduction because neither capped operand
-carries the outer functor category. Making that category and its endpoints
-explicit passes an ordinary target but misses product normalization and is not
-an acceptable LHS under the SOP. A temporary proof-time comparison establishes
-only mechanical equality elaboration and does not join runtime conversion.
-The contraction is therefore deferred until an outer-category-preserving
-projection owner is available; no explicit-endpoint workaround is promoted.
+```text
+tdapp0(z,eta o epsilon)
+  -> tdapp0(z,eta) o tdapp0(z,epsilon).
+```
+
+Two typed clauses accept the stable `Functord_cat` and ordinary `Transf_cat`
+category presentations. Their reconstructible outer `tdapp0_fapp0` slots are
+`_`; the inner composite's rigid category head is the sole discriminator.
+This SOP-minimal form passes subject reduction, the generic strict-action
+diamond, identity units, product-target normalization, and a next component
+projection without increasing the warning inventory.
+
+The reverse contraction from a cut of two already-capped components remains
+rejected. It both disagrees with the ordinary/displayed evaluator orientation
+and loses the outer category needed by subject reduction. The temporary
+proof-time comparison likewise does not provide the required runtime join.
 
 ### Validation record at original promotion
 

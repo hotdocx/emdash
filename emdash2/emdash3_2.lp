@@ -8580,6 +8580,35 @@ with @tdapp0_fapp0
       (Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z))
       (@Fibre_func $K $E $D $FF $z);
 
+// Displayed vertical-composite components compose pointwise. The outer
+// inferred slots are reconstructed from the rigid category and endpoints of
+// the inner composite; this is projection beta, not a second functoriality
+// owner.
+rule @tdapp0_fapp0
+      _ _ _ _ _ $z
+      (@comp_fapp0
+        (@Functord_cat $K $E $D)
+        $FF $GG $HH $eta $epsilon)
+  ↪ @comp_fapp0
+      (Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z))
+      (@Fibre_func $K $E $D $FF $z)
+      (@Fibre_func $K $E $D $GG $z)
+      (@Fibre_func $K $E $D $HH $z)
+      (@tdapp0_fapp0 $K $E $D $GG $HH $z $eta)
+      (@tdapp0_fapp0 $K $E $D $FF $GG $z $epsilon)
+with @tdapp0_fapp0
+      _ _ _ _ _ $z
+      (@comp_fapp0
+        (@Transf_cat $K Cat_cat $E $D)
+        $FF $GG $HH $eta $epsilon)
+  ↪ @comp_fapp0
+      (Functor_cat (Fibre_cat $E $z) (Fibre_cat $D $z))
+      (@Fibre_func $K $E $D $FF $z)
+      (@Fibre_func $K $E $D $GG $z)
+      (@Fibre_func $K $E $D $HH $z)
+      (@tdapp0_fapp0 $K $E $D $GG $HH $z $eta)
+      (@tdapp0_fapp0 $K $E $D $FF $GG $z $epsilon);
+
 // Projection-order join for pre/right naturality when the source functor is
 // Cat-valued component evaluation. The generic `fapp1_fapp0` component has
 // already projected to `tdapp0_fapp0` on the right cut.

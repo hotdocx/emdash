@@ -7,8 +7,8 @@ Depends-On: EMDASH-V3-2-PRIMITIVE-PI-ELIMINATOR-AUDIT-REDESIGN-2026-07-13; EMDAS
 Supersedes: no whole report; closes the classified identity and generic naturality/composition follow-up from the primitive-Pi eliminator audit
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
-Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13
-Status: promoted; identity and naturality cleanup complete, strict vertical-composition contraction classified and deferred pending an outer-category-preserving projection owner, full handoff gate passed
+Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13; infinity-codex:019f526a-dafb-77d0-9dea-2778a57275b7:019f5c95-2f8c-74b1-b7f5-14c816bed5d0
+Status: promoted; identity, naturality, and SOP-minimal pointwise displayed vertical-composition projection beta complete, warning-neutral, and validated through the full handoff gate
 
 ## Goal
 
@@ -27,7 +27,10 @@ projection:
 The selected runtime owner remains the global `id` / `comp_fapp0` /
 `fapp*` / `tapp*` calculus. `tdapp0_func` and `tdapp0_fapp0` are projection
 heads that retain the displayed component rung; they do not become a second
-source of ordinary functor laws.
+source of ordinary functor laws. However, a beta rule exposing how a composite
+displayed transfor projects through that stable head is part of the generic
+evaluator ladder, just as the existing ordinary `tapp0_fapp0` composite beta
+is. It must not be conflated with a duplicate strict-functor action law.
 
 ## Recovered Baseline
 
@@ -108,6 +111,63 @@ First probe whether normalizing the input through the ordinary
 that owner from matching, install at most one projection rule at
 `tdapp0_fapp0`, oriented toward pointwise composition.
 
+### Corrected evaluator-ladder invariant
+
+The composition follow-up is reopened with the following uniform runtime
+normal forms:
+
+```text
+fapp0(F o G,x)
+  -> fapp0(F,fapp0(G,x))
+
+tapp0(x,eta o epsilon)
+  -> tapp0(x,eta) o tapp0(x,epsilon)
+
+tdapp0(x,eta o epsilon)
+  -> tdapp0(x,eta) o tdapp0(x,epsilon).
+```
+
+These are constructor/evaluator projection betas. They are distinct from the
+global strict-functor cut:
+
+```text
+F[g] o F[f] -> F[g o f].
+```
+
+The apparently opposite orientations operate at different heads. For the
+Cat-valued component-evaluation functor `Ev_x`, the required joining diamond
+is:
+
+```text
+comp(fapp1(Ev_x,eta),fapp1(Ev_x,epsilon))
+  -> fapp1(Ev_x,eta o epsilon)
+  -> tdapp0(x,eta o epsilon)
+  -> comp(tdapp0(x,eta),tdapp0(x,epsilon))
+
+comp(fapp1(Ev_x,eta),fapp1(Ev_x,epsilon))
+  -> comp(tdapp0(x,eta),tdapp0(x,epsilon)).
+```
+
+The earlier fully capped contraction
+
+```text
+comp(tdapp0(x,eta),tdapp0(x,epsilon))
+  -> tdapp0(x,eta o epsilon)
+```
+
+is therefore not the selected component-projection normal form. Its measured
+subject-reduction failure remains useful evidence about information erased by
+the capped heads, but it does not establish that the pointwise expansion is
+infeasible. A proof-time comparison would likewise neither repair the runtime
+diamond nor provide ordinary/displayed uniformity.
+
+The pointwise expansion must be probed with two typed source-category clauses,
+one headed by `Functord_cat(K,E,D)` and one by the proof-time-comparable
+`Transf_cat(K,Cat,E,D)`. The rigid category inside the composite is the
+semantic discriminator and retains the base, family, and endpoint information
+needed for subject reduction. Reconstructible outer `tdapp0_fapp0` slots must
+still be minimized under the rewrite-rule LHS SOP.
+
 ### Higher naturality
 
 The remaining two warnings involve generic naturality cuts whose inner
@@ -152,6 +212,12 @@ surface merely to reduce the warning count.
 3. Test both displayed and ordinary comparable category presentations.
 4. Promote the smallest consumer projections required by the stable capped
    head.
+5. For vertical composition, select the same pointwise expansion as ordinary
+   `tapp0_fapp0`; do not install the reverse capped contraction or replace the
+   runtime law by a `unif_rule`.
+6. Exercise the generic `fapp1_fapp0(tapp0_func)` composition diamond,
+   identity units, product-valued targets, and the higher-action interactions
+   reported by the warning checker.
 
 ### Phase 3: higher naturality classification
 
@@ -196,9 +262,9 @@ This cleanup is complete when:
 2. all six identity-specialized displayed internal-hom projections compute
    through the selected generic identity owner;
 3. direct `tdapp0_fapp0` identity paths join their generic
-   component-evaluation paths, and vertical composition either has a
-   subject-reducing global-owner join or is isolated with the exact stable
-   owner prerequisite rather than a brittle inferred-slot workaround;
+   component-evaluation paths, and displayed vertical composition has the
+   same subject-reducing pointwise projection-beta normal form as ordinary
+   `tapp0_fapp0` through both stable category presentations;
 4. each residual higher-naturality warning is either joined by one justified
    projection-order bridge or recorded with a precise missing owner;
 5. no `id_transf`-style parallel identity constructor is introduced;
@@ -212,10 +278,8 @@ This cleanup is complete when:
 - `IDTDAPP-02`: Probe and, if healthy, promote transparent `id_transfd` plus
   generic-identity consumer patterns. Status: complete.
 - `IDTDAPP-03`: Probe and promote the smallest `tdapp0_fapp0` identity and
-  vertical-composition joins. Status: identity join complete; the general
-  runtime vertical-composition contraction is precisely deferred because the
-  capped projection no longer carries the outer category required for subject
-  reduction.
+  vertical-composition joins. Status: complete; the identity join and the
+  two-clause pointwise projection beta are promoted.
 - `IDTDAPP-04`: Reclassify and resolve or precisely defer the two higher
   naturality/composition critical pairs. Status: complete; four typed
   projection-order joins cover both naturality orientations and their two
@@ -223,7 +287,17 @@ This cleanup is complete when:
 - `IDTDAPP-05`: Add diagnostics and synchronize active documentation. Status:
   complete.
 - `IDTDAPP-06`: Run the complete handoff gate and record final metrics.
+  Status: complete for both the original identity/naturality slice and the
+  reopened composition slice.
+- `IDTDAPP-07`: Rebuild the pointwise `tdapp0_fapp0(comp)` candidate from the
+  current active source, minimize its LHSs, and repair the focused probe import.
   Status: complete.
+- `IDTDAPP-08`: Classify the generic strict-action diamond, identity units,
+  product targets, higher actions, and warning delta for the current candidate.
+  Status: complete; all focused diagnostics pass and the warning delta is zero.
+- `IDTDAPP-09`: Promote the validated pointwise rules and durable diagnostics,
+  synchronize active architecture documentation, and rerun the complete
+  handoff gate. Status: complete.
 
 ## Implementation Results
 
@@ -269,47 +343,41 @@ three inferred `comp_fapp0` endpoints remain `_`, in accordance with the LHS
 SOP. A product-valued target diagnostic establishes why `$B` cannot be
 replaced by a rigid `Functor_cat` spelling.
 
-### Strict vertical composition: classified prerequisite
+### Strict vertical composition: pointwise projection beta promoted
 
-The desired runtime normal form remains the generic strict-functor
-orientation:
+The previous conclusion above the fully capped contraction confused generic
+strict-functor cut elimination with component projection beta. The active
+ordinary rule already selects:
 
 ```text
-comp(tdapp0(z,eta),tdapp0(z,epsilon))
-  -> tdapp0(z,comp(eta,epsilon)).
+tapp0(z,eta o epsilon)
+  -> tapp0(z,eta) o tapp0(z,epsilon).
 ```
 
-Four owner-position candidates were measured:
+The displayed stable component head now exposes the same runtime normal form.
+This is not a second functoriality owner: it is the next evaluator rung
+after the generic `fapp1_fapp0(tapp0_func)` head has projected away.
 
-1. Expanding `tdapp0(z,comp(eta,epsilon))` toward pointwise composition passed
-   focused typing but intersected the general inner composition calculus. It
-   duplicates the global functoriality owner and was rejected.
-2. The minimal contraction with `comp_fapp0 _ _ _ _` failed subject
-   reduction. Once both operands are stable `tdapp0_fapp0` heads, Lambdapi
-   cannot recover the outer functor category needed to type the result.
-3. Making the outer `Functor_cat` and the three `tapp0_fapp0` endpoints
-   explicit made the ordinary-target probe fire, but the rule missed the
-   product-valued case after
-   `Functor_cat(X,Product_cat(A,B)) -> Product_cat(...)`. Those inferred slots
-   are therefore not legitimate universal LHS discriminators or guards. This
-   candidate was rejected under the SOP rather than annotated and promoted.
-4. A temporary two-rigid-head proof-time `unif_rule` passed typed `eq_refl`
-   probes, including the product target. This established only mechanical
-   proof-time feasibility: the experimental pattern had not earned retention
-   of its inferred slots under the rewrite/unification LHS SOP. More
-   importantly, it did not join runtime conversion or the critical pair.
-   Strict functor composition is a runtime law, so even a subsequently
-   minimized unification pattern would only conceal the missing computational
-   owner.
+A fresh full-file owner-position copy was rebuilt from the active source. The
+promoted `rule ... with ...` command keeps all five inferred outer
+`tdapp0_fapp0` slots as `_`; its inner composite retains either the rigid
+`Functord_cat` or `Transf_cat` category head and binds the base, families, and
+endpoints required by the explicit RHS. This form passes subject reduction
+and the strict inferred-slot audit without an exception annotation.
 
-The remaining prerequisite is structural: a future redesign must preserve a
-stable outer-category owner through the capped projection, or otherwise keep
-the generic `fapp1_fapp0(tapp0_func)` owner visible until its composition cut
-has accumulated. It must not recover the category by hard-coding reducible
-inferred endpoints. This is narrower than, and independent of, the completed
-identity and naturality cleanup.
+Focused conversion checks cover both category presentations, direct
+`fapp1_fapp0(tapp0_func)` projection, the strict-action-first versus
+operand-projection-first diamond, both identity units, a product-valued target,
+and one further ordinary component projection. A full copy of the 791-check
+pre-change diagnostic suite also passes against the owner-position candidate.
+Eight durable diagnostics were then added to the active suite.
 
-### Warning and LHS evidence
+The earlier contraction and its temporary proof-time comparison remain
+rejected. Their failure no longer defines a missing stable-owner prerequisite
+for component composition; instead it confirms that the reverse orientation
+is both operationally brittle and architecturally non-uniform.
+
+### Final warning and LHS evidence
 
 After the identity migration and the complete naturality package, the active
 inventory is:
@@ -324,8 +392,10 @@ The naturality package adds 34 classified reports while the identity
 migration removes 19, a net increase of 15 over the recovered 1,257-warning
 baseline. Warning count was not used as a veto: the promoted rules pass typed
 two-path and product-target diagnostics. The strict LHS audit reports zero
-unreviewed candidates; the rejected vertical candidates are not present in
-the active source.
+unreviewed candidates. The SOP-minimal pointwise composition rule introduces
+no additional warning: the active inventory remains exactly 1,272. This
+supersedes the older explicit-outer-slot expansion probe, whose broader
+reported overlap family was not representative of the selected LHS.
 
 ## Final Validation Record
 
@@ -347,7 +417,7 @@ git diff --check       pass
 Final measured state:
 
 ```text
-diagnostic assertions              791
+diagnostic assertions              799
 unclassified checks                  0
 intentional LHS annotations          37 slots across 21 clauses
 warning inventory                 1,272

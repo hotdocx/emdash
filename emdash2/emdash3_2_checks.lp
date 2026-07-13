@@ -7048,6 +7048,199 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
         (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
         (@Fibre_func K E D FF z);
 
+// Displayed vertical composition projects pointwise at the stable displayed
+// category presentation.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D FF HH z
+    (@comp_fapp0
+      (@Functord_cat K E D)
+      FF GG HH eta epsilon)
+  ≡ @comp_fapp0
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@Fibre_func K E D FF z)
+      (@Fibre_func K E D GG z)
+      (@Fibre_func K E D HH z)
+      (@tdapp0_fapp0 K E D GG HH z eta)
+      (@tdapp0_fapp0 K E D FF GG z epsilon);
+
+// The proof-time-comparable ordinary category presentation reaches the same
+// runtime pointwise normal form through its own typed clause.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D FF HH z
+    (@comp_fapp0
+      (@Transf_cat K Cat_cat E D)
+      FF GG HH eta epsilon)
+  ≡ @comp_fapp0
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@Fibre_func K E D FF z)
+      (@Fibre_func K E D GG z)
+      (@Fibre_func K E D HH z)
+      (@tdapp0_fapp0 K E D GG HH z eta)
+      (@tdapp0_fapp0 K E D FF GG z epsilon);
+
+// The generic Cat-valued component action on a composite joins the direct
+// stable displayed projection.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @fapp1_fapp0
+      (@Transf_cat K Cat_cat E D)
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@tapp0_func K Cat_cat E D z)
+      FF HH
+      (@comp_fapp0
+        (@Transf_cat K Cat_cat E D)
+        FF GG HH eta epsilon)
+  ≡ @comp_fapp0
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@Fibre_func K E D FF z)
+      (@Fibre_func K E D GG z)
+      (@Fibre_func K E D HH z)
+      (@tdapp0_fapp0 K E D GG HH z eta)
+      (@tdapp0_fapp0 K E D FF GG z epsilon);
+
+// Generic strict-action-first and operand-projection-first reduction orders
+// join at the pointwise displayed component normal form.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @comp_fapp0
+      (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+      (@Fibre_func K E D FF z)
+      (@Fibre_func K E D GG z)
+      (@Fibre_func K E D HH z)
+      (@fapp1_fapp0
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@tapp0_func K Cat_cat E D z)
+        GG HH eta)
+      (@fapp1_fapp0
+        (@Transf_cat K Cat_cat E D)
+        (Functor_cat (Fibre_cat E z) (Fibre_cat D z))
+        (@tapp0_func K Cat_cat E D z)
+        FF GG epsilon)
+  ≡ @tdapp0_fapp0 K E D FF HH z
+      (@comp_fapp0
+        (@Transf_cat K Cat_cat E D)
+        FF GG HH eta epsilon);
+
+// The projection beta is coherent with the existing generic right-identity
+// cut and the displayed component-of-identity rule.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (eta : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D FF GG z
+    (@comp_fapp0
+      (@Functord_cat K E D)
+      FF FF GG eta (@id (@Functord_cat K E D) FF))
+  ≡ @tdapp0_fapp0 K E D FF GG z eta;
+
+// The ordinary category presentation also joins the generic left-identity
+// cut after pointwise projection.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (eta : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D FF GG z
+    (@comp_fapp0
+      (@Transf_cat K Cat_cat E D)
+      FF GG GG (@id (@Transf_cat K Cat_cat E D) GG) eta)
+  ≡ @tdapp0_fapp0 K E D FF GG z eta;
+
+// Product-valued target normalization must not prevent selection of the
+// pointwise projection beta.
+assert [K A B C : Cat]
+  (FF GG HH : τ (Functord
+    (@Const_catd K C)
+    (@Const_catd K (Product_cat A B))))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tdapp0_fapp0
+      K
+      (@Const_catd K C)
+      (@Const_catd K (Product_cat A B))
+      FF HH z
+      (@comp_fapp0
+        (@Functord_cat
+          K
+          (@Const_catd K C)
+          (@Const_catd K (Product_cat A B)))
+        FF GG HH eta epsilon)
+  ≡ @comp_fapp0
+      (Functor_cat C (Product_cat A B))
+      (@Fibre_func K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) FF z)
+      (@Fibre_func K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) GG z)
+      (@Fibre_func K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) HH z)
+      (@tdapp0_fapp0 K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) GG HH z eta)
+      (@tdapp0_fapp0 K
+        (@Const_catd K C)
+        (@Const_catd K (Product_cat A B)) FF GG z epsilon);
+
+// One further ordinary component projection preserves the same pointwise
+// vertical-composition orientation at the next iterated-hom rung.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG HH : τ (Functord E D))
+  (eta : τ (Transfd GG HH)) (epsilon : τ (Transfd FF GG))
+  (z : τ (Obj K)) (u : τ (Obj (Fibre_cat E z))) ⊢
+  @tapp0_fapp0
+      (Fibre_cat E z)
+      (Fibre_cat D z)
+      (@Fibre_func K E D FF z)
+      (@Fibre_func K E D HH z)
+      u
+      (@tdapp0_fapp0 K E D FF HH z
+        (@comp_fapp0
+          (@Functord_cat K E D)
+          FF GG HH eta epsilon))
+  ≡ @comp_fapp0
+      (Fibre_cat D z)
+      (@fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D FF z)
+        u)
+      (@fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D GG z)
+        u)
+      (@fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D HH z)
+        u)
+      (@tapp0_fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D GG z)
+        (@Fibre_func K E D HH z)
+        u
+        (@tdapp0_fapp0 K E D GG HH z eta))
+      (@tapp0_fapp0
+        (Fibre_cat E z)
+        (Fibre_cat D z)
+        (@Fibre_func K E D FF z)
+        (@Fibre_func K E D GG z)
+        u
+        (@tdapp0_fapp0 K E D FF GG z epsilon));
+
 // Cat-valued component evaluation retains its full hom functor through the
 // stable displayed component projection.
 assert [K : Cat] (E D : τ (Catd K))

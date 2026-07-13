@@ -490,15 +490,23 @@ identity-base cases also join after `tapp1_fapp0(epsilon,id)` has reduced to
 `tapp0_fapp0(epsilon)`. These are projection-order joins around the existing
 ordinary naturality owner, not new laws attached independently to Pi.
 
-Strict vertical composition exposes a sharper boundary. Before capping, the
-generic `fapp1_fapp0(tapp0_func)` term still carries its ordinary target
-category and the global strict-functor cut can accumulate. After both actions
-have projected to `tdapp0_fapp0`, that category is present in the type but no
-longer in the term head. A general runtime contraction cannot therefore be
-made subject-reducing merely by repeating reducible fibre endpoints on its
-LHS; it requires a future projection owner that preserves the outer category.
-The naturality joins work now precisely because one ordinary `tapp1` or
-`tapp0` operand still carries that shared category.
+Vertical composition follows the same evaluator ladder as ordinary transfor
+components:
+
+```text
+(eta o epsilon)[k] -> eta[k] o epsilon[k].
+```
+
+At the generic action layer, strict functoriality still contracts
+`Ev_k[eta] o Ev_k[epsilon]` to `Ev_k[eta o epsilon]`. After projection to the
+stable displayed-component head, the component beta expands that result back
+to the pointwise composite. The two orientations are not competing global
+normal forms: they operate at the generic action and stable evaluator heads,
+respectively, and form a joining diamond. The displayed rule has two typed
+clauses for the stable `Functord_cat` and ordinary `Transf_cat` presentations,
+with the rigid category of the inner composite retaining the information
+needed for subject reduction. The reverse contraction of two already-capped
+components is neither required nor selected.
 
 The same policy continues one dimension higher. `piapp1_func(s,x,y)` is the
 terminal-source specialization of the generic displayed internal-hom action,
