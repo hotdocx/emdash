@@ -29,6 +29,11 @@ notation, implementation plans, and historical decisions.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   active groupoid, type-equivalence, computational-univalence,
   omega-equivalence, and generic comparison architecture.
+- `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`:
+  proposed successor architecture integrating full observational equality,
+  HoTT truncation and `Prop`/`Set`/`n`-groupoid universes, directed
+  `n`-categories and `OneCat`, finite dependent-record encoding, and coherent
+  global computational univalence.
 - `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
   active incremental `DefIso`, hom-action, and `ProfComparison` migration.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
