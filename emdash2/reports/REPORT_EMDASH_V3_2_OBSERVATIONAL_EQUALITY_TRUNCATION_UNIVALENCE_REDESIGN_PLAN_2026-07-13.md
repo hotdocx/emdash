@@ -7,8 +7,8 @@ Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23; REPORT_EMD
 Supersedes: no whole report yet; proposes the successor architecture for the active groupoid/computational-univalence track after review and staged approval
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
-Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047
-Status: revised proposed integrated redesign; two careful-review passes and the indexed-structure/fixed-map feasibility probes are incorporated, but no kernel migration is promoted by this report and the current implementation remains the active draft until individual slices are refined, probed, and accepted
+Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0
+Status: revised proposed integrated redesign; the careful-review passes, fixed-map/indexed-structure probes, exact indexed triangle/higher-cell probes, and named-unit/counit runtime-versus-proof-time probe are incorporated, but no kernel migration is promoted by this report and the current implementation remains the active draft until individual slices are refined, probed, and accepted
 
 ## Goal
 
@@ -99,9 +99,26 @@ This proposal incorporates the following project directions.
     may be derived separately when a consumer truly does not know the functors.
 14. **Runtime projections are not delegated to unification rules.** A narrow
     `unif_rule` may relate an opaque compatibility view to an index at proof
-    time, but data needed by downstream reduction must compute by a transparent
-    definition or an ordinary projection/constructor beta rule.
-15. **The MVP remains subject to a foundational adequacy gate.** It may leave
+    time, but data needed by downstream reduction must either compute by a
+    transparent definition/projection beta or remain visible as the stable
+    observation selected by its consumer rule.
+15. **Indexed adjunctions retain stable unit/counit runtime observations.**
+    `F` and `G` are indices, so `left_adj_func`/`right_adj_func` disappear or
+    remain transparent migration views. In contrast, `unit_adj_transf(J)` and
+    `counit_adj_transf(J)` remain opaque stable heads because the generic
+    triangle cut-elimination rules discriminate on them. The exact two
+    indexed triangle patterns have been mechanically probed; they use `F` and
+    `G` as consistently repeated parameters, never as rewrite heads.
+16. **Preselected adjunction operations are connected proof-time by default.**
+    A named `myUnit`/`myCounit` may be related to the stable observations of
+    `myAdj : Adjunction(myF,myG)` by narrow, typed `unif_rule`s, validated with
+    typed `eq_refl`. Runtime betas from those observations to arbitrary raw
+    names are rejected by default because they can erase the triangle
+    discriminator before the outer cut rule fires. Raw named-operation
+    expressions do not thereby acquire triangle computation; a future
+    elaborator must preserve/reconstruct the stable spelling, or separately
+    generated instance rules require their own critical-pair audit.
+17. **The MVP remains subject to a foundational adequacy gate.** It may leave
     named cells as prerequisites or deferred work, but it must make the usual
     minimal HoTT kernel and its immediate category/omega analogues expressible
     without brittle per-instance rules or an architecture that blocks their
@@ -174,7 +191,7 @@ future deferral to an immediate candidate slice. It does **not** yet establish
 arbitrary structured-path substitution, nested-former scalability, public
 equality migration safety, or metatheoretic normalization.
 
-Two follow-up warning-enabled full-file probes add more specific evidence:
+Three follow-up warning-enabled full-file probes add more specific evidence:
 
 - `tmp/probes/oetu_fixed_map_followup.lp` implements the exact transitional
   `OmegaEquivAlong(F)` bridge into the current opaque `OmegaEquiv`, including
@@ -192,13 +209,38 @@ Two follow-up warning-enabled full-file probes add more specific evidence:
   typed `eq_refl` proof but intentionally does **not** make the projection
   convertible to the index. This confirms the SOP distinction between
   proof-time comparison and runtime computation;
-- dependent observation ladders must install map/functor projection betas
-  before unit/counit or higher-cell betas, because the latter result types
-  depend on the former normal forms during subject-reduction checking.
+- where a transitional constructor bridge installs dependent observation
+  betas, it must install map/functor betas before unit/counit or higher-cell
+  betas, because the latter result types depend on the former normal forms
+  during subject-reduction checking. This ordering result does not approve
+  final indexed-adjunction betas from stable unit/counit observations to raw
+  named operations;
+- exact indexed versions of **both** active adjunction triangle rules pass.
+  Their rigid semantic discriminators are the outer composition and the
+  stable unit/counit application heads; `F` and `G` are repeated indexed
+  parameters and do not need to head a rewrite pattern;
+- the exact fixed-arrow left/right inverse and recursive higher-cell endpoint
+  types pass. The fixed arrow `f` occurs as an index in those endpoints; no
+  cancellation rule needs to discriminate on a variable map;
+- a concrete preselected unit and counit can be related proof-time to the
+  stable observations by narrow `unif_rule`s: typed `eq_refl` succeeds while
+  an `assertnot` confirms that runtime conversion intentionally does not;
+- the separate negative probe
+  `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp` shows that ordinary
+  runtime betas projecting `unit_adj_transf`/`counit_adj_transf` to arbitrary
+  constructor-supplied `eta`/`epsilon` can normalize away the rigid heads
+  before the generic triangle rule matches. Both the projected spelling and
+  the already-raw `eta`/`epsilon` composite then remain stuck.
 
-All three warning-enabled redesign probes add no probe-local warning over the
-imported active warning inventory. They are feasibility evidence, not a
-replacement for owner-position migration probes of the active declarations.
+The warning-enabled runs typecheck, and the latest adjunction probes add no
+probe-local **unjoinable critical-pair** warning over the 1,109 imported active
+reports. This absence does not detect the lost-triangle computation in the
+negative probe, so explicit positive and `assertnot` reduction-order
+diagnostics are mandatory. The latest indexed probe has eight scratch-local
+replaceable-pattern-variable advisories and the negative probe has two; these
+must be minimized or annotated in an owner-position promotion probe. All four
+redesign probes remain feasibility evidence, not a replacement for migration
+probes of the active declarations.
 
 ## Four Distinct Notions That Must Remain Separate
 
@@ -491,7 +533,9 @@ has the right semantic shape. The recommended refinements are:
 Use an opaque stable facade with destructors instead when the object is
 intentionally abstract, coinductive, or operationally specified only through
 observations. Current examples include `OmegaEquiv` and the computational
-`DefIso` facade.
+`DefIso` facade. The proposed indexed `Adjunction(F,G)` is another operational
+interface: its unit/counit observations retain stable heads rather than
+projecting by ordinary record beta to arbitrary raw operations.
 
 Use nested Sigma when the package is small and genuinely existential, for
 example a map together with one property. `TypeEquiv` may retain a Sigma
@@ -646,6 +690,21 @@ omega_equiv_along_right_cell(u)
   : OmegaEquiv_{Hom_C(y,y)}(f o right_inv(u),id_y).
 ```
 
+These higher cells, rather than raw cancellation rewrites, are the recursive
+omega-equivalence witnesses. In particular, the architecture does **not** add:
+
+```text
+left_inv(u) o f  -> id_x
+f o right_inv(u) -> id_y.
+```
+
+Such equations would strictify higher equivalence into judgmental equality.
+The fixed `f` is merely an index in the endpoint types of the stable
+`left_cell`/`right_cell` observations. Reflexive, opposite, Product, and later
+constructors discriminate on their own evidence constructors/observations,
+not on the variable `f`. The exact inverse and higher-cell telescope has been
+validated in the indexed-structure probe.
+
 This arrangement retains the ordinary first-class type needed as the codomain
 of categorical univalence while making a declaration about an already-named
 arrow direct:
@@ -660,7 +719,10 @@ omega_equiv_to(myEquiv) ≡ myF.
 
 No equality witness or per-instance unification rule is required for that
 projection. The 2026-07-14 indexed-structure probe validates formation,
-introduction, and both Sigma projections with no probe-local warning.
+introduction, both Sigma projections, and the fixed-arrow recursive
+higher-cell endpoint types. Its latest warning-enabled run has no probe-local
+unjoinable critical-pair report; scratch-local replaceable-variable advisories
+remain to clean before promotion.
 
 The active `OmegaEquiv` is an opaque observation interface rather than this
 Sigma package. Migrating it is consequently a normal-form migration, not a
@@ -693,9 +755,23 @@ unit_adj_transf(J)   : id_R => G o F
 counit_adj_transf(J) : F o G => id_L.
 ```
 
-The triangle cut-elimination rules then mention `F` and `G` directly. There is
-no permanent need for a second `AdjunctionAlong(F,G)` classifier. If a
-compatibility surface is retained while consumers migrate, its old functor
+The triangle cut-elimination rules then mention `F` and `G` directly. In
+schematic surface notation, the left rule is:
+
+```text
+counit_adj_transf(J)[f] o F[unit_adj_transf(J)[g]]
+  -> f o F[g].
+```
+
+The exact two active rule shapes have been reproduced with the indexed
+relation and pass the focused probe. Neither rule discriminates on the
+variable `F` or `G`. Their rigid heads are the outer `comp_fapp0`, the stable
+`unit_adj_transf(J)`/`counit_adj_transf(J)` observations, and the surrounding
+`tapp1_fapp0`/`fapp1_fapp0` application structure. The indices are recovered
+and checked by their repeated occurrence in those patterns.
+
+There is no permanent need for a second `AdjunctionAlong(F,G)` classifier. If
+a compatibility surface is retained while consumers migrate, its old functor
 views can be transparent definitions:
 
 ```text
@@ -705,8 +781,18 @@ right_adj_func [F G] (_ : Adjunction(F,G)) := G.
 
 Because these are transparent views, no rewrite rule should be headed by them;
 rules that currently pattern-match the old opaque projections must migrate to
-the `F`/`G` indices. If a consumer genuinely needs an adjunction without
-already knowing either functor, define a separate existential package:
+the `F`/`G` indices. In particular, the opposite operation can expose its
+selected functors in its result type:
+
+```text
+Op_adjunction(J) : Adjunction(Op_func(G),Op_func(F)).
+```
+
+The current runtime rules projecting the left/right functors of an opposite
+adjunction then disappear, while the opposite unit/counit rules remain headed
+by the stable unit/counit observations. If a consumer genuinely needs an
+adjunction without already knowing either functor, define a separate
+existential package:
 
 ```text
 AdjunctionPackage(R,L)
@@ -732,10 +818,67 @@ fails conversion. It is therefore suitable only as a narrow proof-time
 migration convenience, never as the runtime authority required by functor
 application, triangle normalization, or mate computation.
 
+The unit and counit have a different role from the left/right functor views.
+They must remain stable runtime observations:
+
+```text
+unit_adj_transf(J)
+counit_adj_transf(J).
+```
+
+Suppose a concrete declaration already has named operations:
+
+```text
+myF       : Functor(R,L)
+myG       : Functor(L,R)
+myUnit    : id_R => myG o myF
+myCounit  : myF o myG => id_L
+myAdj     : Adjunction(myF,myG).
+```
+
+The selected manual declaration bridge is proof-time:
+
+```text
+unif_rule unit_adj_transf(myAdj)   ≡ myUnit   ↪ [ ... ]
+unif_rule counit_adj_transf(myAdj) ≡ myCounit ↪ [ ... ].
+```
+
+Each rule must be narrowly typed and validated with a typed reflexive path,
+schematically:
+
+```text
+my_unit_agreement
+  : unit_adj_transf(myAdj) = myUnit
+  := eq_refl(myUnit).
+```
+
+An `assertnot` conversion check records that the bridge does not select a
+runtime normal form. The canonical triangle term must retain
+`unit_adj_transf(myAdj)` and `counit_adj_transf(myAdj)`. A raw composite written
+only with `myUnit` and `myCounit` does not compute by the generic triangle rule,
+because proof-time unification does not rewrite it back to the stable heads.
+
+Ordinary constructor projection betas
+
+```text
+unit_adj_transf(AdjunctionIntro(eta,epsilon))    -> eta
+counit_adj_transf(AdjunctionIntro(eta,epsilon)) -> epsilon
+```
+
+are therefore rejected for the primary computational interface unless an
+alternative owner supplies and audits the corresponding raw triangle rules.
+The negative probe demonstrates that inner projection normalization can erase
+the observations before the outer generic triangle is selected; the warning
+checker did not report a local critical pair for this lost computation.
+
 A future `declare_equivalence` or `declare_adjunction` source generator may
-emit fixed-map evidence declarations, optional Sigma packages, and typed
-projection assertions. It should not emit per-instance unification rules as
-the sole meaning of the declaration.
+emit fixed-map evidence declarations, optional Sigma packages, narrowly typed
+proof-time operation comparisons, and their typed/negative diagnostics. A
+surface elaborator may also print a user's operation names while elaborating
+computational triangle terms to the stable observation spellings. It should
+not make per-instance unification rules the sole meaning of a declaration or
+generate instance-specific triangle rewrites by default; any such rewrite
+generation is a separate critical-pair-audited design.
 
 Consequently, `IsDiscreteCat` must be designed before `IsNCat` is promoted,
 and the blocker is specifically fixed-functor omega-equivalence
@@ -1177,7 +1320,10 @@ probe and warning comparison; the report does not promote the deletion.
 
 “As computational as feasible” means:
 
-- data constructors and named projections have beta rules;
+- ordinary finite data constructors and named data projections have beta rules
+  when those rules preserve the selected semantic redexes; abstract or
+  operational evidence may instead expose stable observations whose heads are
+  intentionally retained by downstream computation;
 - truncation-level recursion computes on level constructors;
 - carrier projections from `Prop`/`Set`/`n`-groupoid and `n`-category packages
   compute;
@@ -1187,10 +1333,15 @@ probe and warning comparison; the report does not promote the deletion.
 - fixed-map evidence takes the already-named map as an index, and its optional
   Sigma package projects back to that map by constructor/projection beta;
 - indexed structures such as `Adjunction(F,G)` use their map indices directly;
-  compatibility projections are transparent when runtime computation needs
-  them;
+  left/right compatibility views are absent or transparent, while unit/counit
+  remain stable runtime observations owned by the adjunction witness;
+- runtime unit/counit projection betas to arbitrary preselected raw operations
+  are not installed when they would erase the observations selected by generic
+  triangle computation;
 - an experimental `unif_rule` may support proof-time comparison but never
-  substitutes for required conversion or projection computation;
+  substitutes for required conversion or projection computation; in
+  particular, it does not make a triangle written only with raw named
+  unit/counit terms compute;
 - transport through univalence computes through the selected equivalence map;
 - proof fields remain propositions/evidence rather than arbitrary runtime
   erasure rules;
@@ -1263,6 +1414,8 @@ directed analogue already suggested by the iterated-hom architecture:
   including usable declaration of a concrete named equivalence;
 - indexed `Adjunction(F,G)`, its unit/counit and triangle computation, and an
   optional existential package only when the functors are not already known;
+  the benchmark must distinguish canonical stable-observation computation
+  from proof-time agreement with preselected named unit/counit terms;
 - `idtoequiv_cat`, the selected category decoder, path-to-arrow coherence, and
   the ordinary-isomorphism comparison only at the appropriate dimension;
 - strict path-category composition/opposite coherence;
@@ -1295,10 +1448,13 @@ transport/action along p computes through F at the selected boundary.
 ```
 
 The same milestone declares named `F : R ⊢ L`, `G : L ⊢ R`, and
-`J : Adjunction(F,G)`, exercises a triangle or mate computation without
-recovering `F`/`G` through equality proofs, and repeats one selected action in a
-hom-category. Missing Empty/Bool, arbitrary structured `J`, truncation
-reflectors, or closure theorems may remain named prerequisites/deferred rows;
+`J : Adjunction(F,G)`, exercises a triangle or mate computation in the
+canonical stable unit/counit spelling without recovering `F`/`G` through
+equality proofs, and validates proof-time agreement with one preselected named
+unit/counit pair without claiming that its raw spelling computes. It also
+repeats one selected action in a hom-category. Missing Empty/Bool, arbitrary
+structured `J`, truncation reflectors, or closure theorems may remain named
+prerequisites/deferred rows;
 the MVP fails only if its chosen interfaces make these standard extensions
 inexpressible or require per-instance unsound computation rules.
 
@@ -1324,8 +1480,8 @@ pass; it does not upgrade a documented first-draft coherence boundary.
 | `Cat`, functors, transfors, iterated hom actions | active | Broad generic infrastructure exists and remains the owner of ordinary functoriality/naturality. |
 | Strict coherent `Path_cat` and opposite action | prerequisite | Current first draft has unit/self-opposite coherence defects; a fresh strict local algebra is only probe evidence. |
 | First-class `OmegaEquiv` observations | active | Recursive observation/reflexivity interface exists; unrestricted introduction/corecursion is absent. |
-| Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | probed | Both the transitional bridge and primary-property/Sigma-package skeleton pass; active-owner migration and property-valuedness remain prerequisites. |
-| Indexed `Adjunction(F,G)` | probed | Indexed formation, direct `F`/`G` conversion, and the runtime-versus-unification distinction pass; the active triangle/opposite/mate migration remains a prerequisite. |
+| Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | probed | The transitional bridge, primary-property/Sigma package, and exact fixed-arrow inverse/higher-cell telescope pass; active-owner migration and property-valuedness remain prerequisites. |
+| Indexed `Adjunction(F,G)` | probed | Indexed formation, both exact triangle rules, direct `F`/`G` conversion, typed proof-time agreement with named unit/counit, and the negative runtime-erasure control pass. Active opposite/mate migration and owner-position warning/LHS audits remain prerequisites. |
 | `IsObjTruncCat` | probed | Formation is mechanically small once `IsTruncGrpd` exists. |
 | `IsDiscreteCat` | prerequisite | Needs repaired `Path_cat` and fixed-map omega-equivalence of `Core_incl_func`. |
 | Recursive `IsNCat` | probed | Recursion skeleton passes with an opaque stand-in for the discrete base. |
@@ -1475,7 +1631,9 @@ Shaped lane:
    to the Sigma package `Sigma f, OmegaEquivAlong_C(f)` in an owner-position
    full-file probe.
 3. Route inverse and higher-cell observations through the packaged evidence;
-   install map/inverse projection betas before dependent higher-cell betas.
+   install map/inverse projection betas before dependent higher-cell betas,
+   and keep cancellation represented by recursive higher equivalence cells
+   rather than raw composition-to-identity rewrites.
 4. Migrate reflexive, opposite, and Product generators without duplicating
    semantic bodies.
 5. Revalidate categorical univalence decoder domains/codomains, round trips,
@@ -1493,21 +1651,32 @@ evidence fields are erased propositionally in `NCat` paths.
 
 1. Replace the current `Adjunction(R,L)` observation package by the relation
    `Adjunction(F,G)` indexed by already-named functors.
-2. Retype unit/counit observations and triangle cut-elimination rules directly
-   over `F` and `G`.
-3. Migrate opposite adjunctions, adjunction hom/profunctor comparisons, mates,
-   checks, and the reviewer example.
-4. Remove old left/right projections where possible; retain only transparent
-   compatibility views for real migration consumers.
-5. Add `AdjunctionPackage(R,L)` as a Sigma package only if an identified
+2. Remove the semantic need for `left_adj_func`/`right_adj_func`; retain only
+   transparent compatibility views for identified migration consumers.
+3. Retype `unit_adj_transf(J)` and `counit_adj_transf(J)` directly over `F` and
+   `G`, but retain them as stable opaque runtime observations.
+4. Port both already-probed triangle cut-elimination rules with `F`/`G` as
+   repeated indexed parameters and the unit/counit application heads as the
+   rigid semantic discriminators.
+5. Type opposite adjunction directly as
+   `Adjunction(Op_func(G),Op_func(F))`; migrate its unit/counit observations,
+   adjunction hom/profunctor comparisons, mates, checks, and reviewer example.
+6. For one concrete preselected `myUnit`/`myCounit`, add narrowly typed
+   proof-time comparisons to the stable observations, validate them with typed
+   `eq_refl`, and retain `assertnot` conversion controls. Do not install
+   ordinary observation-to-raw-operation runtime betas.
+7. Add `AdjunctionPackage(R,L)` as a Sigma package only if an identified
    consumer needs existential first-class functors.
-6. Validate one concrete `J : Adjunction(F,G)`, both triangles, opposite, and a
-   mate computation; do not rely on an opaque-projection `unif_rule` for
-   runtime normalization.
+8. Validate one concrete `J : Adjunction(F,G)`, both canonical-spelling
+   triangles, opposite, and a mate computation. Also validate that the raw
+   named-operation spelling remains a documented non-computing surface unless
+   an elaborator explicitly restores the stable observations.
 
 This is a bounded but nontrivial migration: the lexical audit currently finds
 153 `Adjunction`/left/right/unit/counit occurrences across the active source,
-diagnostics, and reviewer example.
+diagnostics, and reviewer example. The fresh exact triangle probe establishes
+pattern feasibility, but the active owner-position migration, scratch-LHS
+cleanup, opposite/mate surface, and performance/warning audits remain open.
 
 ### Phase 9: Discreteness, Directed Dimension, And `OneCat`
 
@@ -1640,9 +1809,10 @@ no unif-only runtime semantics.
 
 Risk: medium to high as an active normal-form migration. The fixed-map
 telescope, transitional bridge, primary Sigma package, and computing forward
-projection all pass warning-enabled probes without a local warning. Remaining
-risk lies in migrating active recursive observations, generators, and
-univalence decoders, not in basic Lambdapi expressibility.
+projection and higher-cell endpoints all pass warning-enabled probes without
+a local unjoinable critical-pair report. Scratch-LHS cleanup remains part of
+promotion. The principal risk lies in migrating active recursive observations,
+generators, and univalence decoders, not in basic Lambdapi expressibility.
 
 ### Candidate E: `Path_cat` focused repair
 
@@ -1660,16 +1830,23 @@ shaped-reflexivity registration with path composition/symmetry.
 
 ```text
 Adjunction(F,G) indexed relation;
-unit/counit typed directly over F/G;
-transparent compatibility projections, if retained;
-one triangle, opposite, and mate migration sample;
+left/right projections removed or transparent only;
+stable unit/counit observations typed directly over F/G;
+both exact triangle rules with F/G as parameters;
+named unit/counit proof-time bridge with typed and assertnot controls;
+negative control against runtime observation-to-raw-operation betas;
+opposite and mate migration sample;
 optional existential AdjunctionPackage only for a named consumer.
 ```
 
-Risk: medium. The indexed relation and conversion behavior pass the focused
-probe, while the active migration has a bounded but broad 153-occurrence
-lexical surface across source, checks, and the adjunction reviewer example.
-An opaque projection plus `unif_rule` is explicitly not the runtime design.
+Risk: medium. The indexed relation, both triangle patterns, direct functor-index
+conversion, fixed-operation proof-time bridge, and runtime-erasure negative
+control pass focused warning-enabled probes. The active migration still has a
+bounded but broad 153-occurrence lexical surface across source, checks, and the
+adjunction reviewer example, and the scratch triangle LHSs require inferred-
+slot cleanup. An opaque left/right projection plus `unif_rule` is not the
+runtime design; narrow unit/counit unification is declaration assistance only,
+while the stable observations remain the computational owners.
 
 Candidates A and B are the safest promotion candidates. Candidates C, D, E,
 and F are all immediately available as design/owner-position probes. Candidate
@@ -1752,6 +1929,8 @@ later slice, but earlier reports do not defer the subject itself.
 - comparison of `OmegaEquivAlong(F)` with `OmegaEquivFibre(F)` propositionally;
 - inverse/map projection betas are declared before dependent higher-cell
   betas and pass subject reduction in that order;
+- fixed-arrow left/right higher-cell endpoints typecheck with `f` as an index,
+  and no broad raw inverse-composite cancellation rewrite is introduced;
 - a concrete named equivalence whose selected map is usable by downstream
   computation;
 - no semantic dependency on an untyped or unvalidated per-instance
@@ -1761,11 +1940,24 @@ later slice, but earlier reports do not defer the subject itself.
 
 - `J : Adjunction(F,G)` forms without existential recovery of either functor;
 - unit/counit endpoints mention `F` and `G` directly;
-- retained compatibility projections reduce transparently to their indices;
+- no semantic left/right projection remains; any retained compatibility view
+  reduces transparently to its index;
+- `unit_adj_transf(J)` and `counit_adj_transf(J)` remain stable runtime heads;
+- exact indexed versions of both active triangle rules compute with `F`/`G` as
+  repeated parameters, not rewrite-head discriminators;
 - an `assertnot` conversion control distinguishes an opaque unification-only
   projection from a runtime-computing view;
 - typed `eq_refl` validates every intentionally retained proof-time
-  `unif_rule`;
+  `unif_rule`, including one concrete preselected named unit/counit pair;
+- `assertnot` records that those named operations are not runtime-convertible
+  to the stable observations and that a raw named-operation triangle is not
+  falsely claimed to compute;
+- a negative constructor probe confirms that observation-to-raw-operation
+  runtime betas are rejected when they erase the triangle discriminator; this
+  diagnostic is required even when the warning checker reports no local
+  critical pair;
+- both normalization orders are exercised for every future declaration facade
+  or elaboration rule that exposes a user's unit/counit names;
 - both triangles, opposite adjunction, one mate/profunctor comparison, checks,
   and the reviewer example survive the indexed migration;
 - a first-class `AdjunctionPackage` is added only with a concrete existential
@@ -1845,21 +2037,37 @@ the constructor, decoder, subject-reduction, downstream, and warning audits.
 ### Indexed adjunction is simpler but has a broad migration surface
 
 `Adjunction(F,G)` removes unnecessary recovery of already-known functors and
-passes the focused probe. The active source, diagnostics, and reviewer example
-contain 153 relevant lexical occurrences, including opposite adjunctions,
-triangles, mates, and profunctor comparisons. Migrate these as one focused
-semantic owner change, not piecemeal compatibility rewrites and not together
-with a module split.
+passes exact focused probes for both triangles. The active source, diagnostics,
+and reviewer example contain 153 relevant lexical occurrences, including
+opposite adjunctions, triangles, mates, and profunctor comparisons. Migrate
+these as one focused semantic owner change, not piecemeal compatibility
+rewrites and not together with a module split. The fresh-rule feasibility
+result does not replace an owner-position audit or cleanup of its inferred LHS
+slots.
+
+### Named adjunction operations can erase the triangle discriminator
+
+Unlike the left/right functors, the unit/counit observations cannot simply be
+made transparent aliases for arbitrary preselected raw operations. The
+negative probe demonstrates an inner-first reduction in which constructor
+projection betas erase both stable heads before the outer triangle rule is
+selected. No local unjoinable critical-pair warning identified the lost
+computation. Promotion therefore requires explicit both-order positive and
+negative assertions, stable canonical triangle spellings, and no runtime
+operation-projection beta unless a different audited semantic owner replaces
+the observation-headed triangle rules.
 
 ### Declaration convenience can accidentally become semantic authority
 
-A generated or handwritten per-instance `unif_rule` is attractive for making
-an opaque `left_adj_func(myAdj)` elaborate as an already-named map. The focused
-probe shows the exact boundary: a typed `eq_refl` comparison can succeed while
-the terms remain non-convertible. Lambdapi unification rules are experimental
-and proof-time only. Indexed data, transparent compatibility views, and Sigma
-projection betas must remain meaningful when every convenience rule is
-removed.
+A generated or handwritten per-instance `unif_rule` is attractive for relating
+an opaque observation to an already-named map or operation. The focused probes
+show the exact boundary: a typed `eq_refl` comparison can succeed while the
+terms remain non-convertible. Lambdapi unification rules are experimental and
+proof-time only. Fixed-arrow indices, transparent functor views, stable
+unit/counit runtime observations, and Sigma projection betas remain the
+semantic architecture. The convenience rule may improve declarations and
+typed statements, but cannot be cited as the reason a raw named-unit triangle
+computes.
 
 ### Property fields affect universe equality
 
@@ -1885,9 +2093,9 @@ not reasons to add arbitrary closure axioms silently.
 | `OETU-TRUNC-UNIVERSE` | proposed follow-up; skeleton probed | `OETU-RECORD-CONVENTION`, `OETU-TRUNC-LEVEL` | low-level predicates pass | Add `TruncGrpdU`, low-level aliases, carrier/evidence projections, and an explicit no-false-universe-truncation diagnostic. |
 | `OETU-TRUNC-REFLECTOR` | deferred | observational equality and HIT elimination | a theorem needs `||A||_n`, not merely `IsTruncGrpd(n,A)` | Design propositional truncation first with restricted dependent elimination. |
 | `OETU-PATH-CAT` | proposed prerequisite repair; strict local algebra probed | current J-derived path algebra | public shaped registration, `OneCat`, or observational category equality begins | Select strict path owners, state propositional agreement with `eq_trans`/`eq_sym`, remove/probe self-opposite collapse, and add the symmetry functor/equivalence. |
-| `OETU-OMEGA-EQUIV-ALONG` | proposed normal-form migration; primary property/package and transitional bridge probed | recursive `OmegaEquiv`, Sigma/record convention, univalence decoder | fixed-functor equivalence or discreteness is consumed | Migrate to primary fixed-arrow evidence plus Sigma-packaged `OmegaEquiv`; route generators/destructors and compare with the old semantic fibre. |
-| `OETU-ADJUNCTION-INDEXED` | proposed focused migration; index/conversion skeleton probed | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)`; migrate the 153-occurrence source/check/example surface and retain only transparent compatibility views with real consumers. |
-| `OETU-STRUCTURE-DECLARATION` | proposed usability protocol | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct declarations `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)`, optional Sigma packaging, and typed assertions; consider a generator only afterward. |
+| `OETU-OMEGA-EQUIV-ALONG` | proposed normal-form migration; primary property/package, higher-cell telescope, and transitional bridge probed | recursive `OmegaEquiv`, Sigma/record convention, univalence decoder | fixed-functor equivalence or discreteness is consumed | Migrate to primary fixed-arrow evidence plus Sigma-packaged `OmegaEquiv`; route generators/destructors and compare with the old semantic fibre without adding raw cancellation rewrites. |
+| `OETU-ADJUNCTION-INDEXED` | proposed focused migration; indices, both triangles, and named-operation boundary probed | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)`; remove/transparentize left/right views, retain stable unit/counit observations, and migrate the 153-occurrence source/check/example surface with the runtime-erasure negative control. |
+| `OETU-STRUCTURE-DECLARATION` | proposed usability protocol; one adjunction operation bridge probed | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)` declarations; connect preselected unit/counit names only by typed proof-time comparisons while canonical computations retain stable observations; consider an elaborator/generator afterward. |
 | `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. |
 | `OETU-NCAT` | proposed architecture, implementation deferred | `OETU-DISCRETE-CAT`, `OETU-TRUNC-LEVEL`, record convention | `IsDiscreteCat` is stable | Add `CatDim`, recursive `IsNCat`, and packaged `NCat`. |
 | `OETU-NCAT-OBJ-TRUNC` | theorem prerequisite | `OETU-NCAT`, categorical univalence, fixed-arrow evidence truncation | `OneCat` object truncation or iso comparison is consumed | Prove/stage `IsNCat(n,C) -> IsObjTruncCat(n,C)`; state explicitly that the converse fails. |
@@ -1917,9 +2125,13 @@ Before this report becomes the active replacement plan:
 4. approve the primary `OmegaEquivAlong(F)` property plus Sigma-packaged
    `OmegaEquiv` boundary and the transitional-only role of the old semantic
    fibre/bridge;
-5. approve the indexed `Adjunction(F,G)` replacement, transparent compatibility
-   policy, and optional existential `AdjunctionPackage` boundary;
-6. approve the limited proof-time role of declaration-generated `unif_rule`s;
+5. approve the indexed `Adjunction(F,G)` replacement, absent/transparent
+   left/right compatibility policy, stable unit/counit runtime observations,
+   and optional existential `AdjunctionPackage` boundary;
+6. approve the limited proof-time role of declaration-generated `unif_rule`s,
+   including the explicit fact that raw preselected unit/counit spellings do
+   not inherit generic triangle computation and runtime projection betas are
+   rejected by default;
 7. select the strict `Path_cat` algebra owner and its propositional agreement
    boundary with J-derived `eq_trans`/`eq_sym` before public shaped promotion;
 8. decide whether Candidate A, B, C, D, E, or F is the first implementation
@@ -1946,7 +2158,11 @@ OneCat is defined through directed hom truncation/discreteness;
 fixed-map omega-equivalence is the primary property and its Sigma package
 supports usable named declarations and categorical univalence;
 Adjunction is indexed by its already-named functors, with optional existential
-packaging separated from the primary relation;
+packaging separated from the primary relation, left/right projections absent
+or transparent, and unit/counit retained as stable runtime observations;
+preselected named unit/counit operations have a typed proof-time declaration
+bridge without erasing the canonical triangle redex or falsely claiming raw-
+name runtime conversion;
 ordinary IsoEvidence univalence is OneCat-scoped;
 public equality computes observationally for records, Sigma, Pi, and universes;
 structural reflexivity, structural action, and dependent elimination have
@@ -1991,8 +2207,10 @@ warning classification, catalog checks, health refresh, and make ci.
   rules are not selected as runtime or semantic owners.
 - The 2026-07-14 feasibility findings are supported by the ignored full-file
   probes `tmp/probes/oetu_architecture_feasibility_probe.lp`,
-  `tmp/probes/oetu_fixed_map_followup.lp`, and
-  `tmp/probes/oetu_indexed_structure_architecture_probe.lp`, with the reviewed
-  warning-enabled logs ending in `20260714-141809`, `20260714-141809`, and
-  `20260714-165053` respectively. None of these scratch artifacts is promoted
-  kernel source.
+  `tmp/probes/oetu_fixed_map_followup.lp`,
+  `tmp/probes/oetu_indexed_structure_architecture_probe.lp`, and
+  `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp`, with the reviewed
+  warning-enabled logs ending in `20260714-141809`, `20260714-141809`,
+  `20260714-174532`, and `20260714-174452` respectively. The final probe is a
+  negative computation test whose expected `assertnot` statements pass. None
+  of these scratch artifacts is promoted kernel source.
