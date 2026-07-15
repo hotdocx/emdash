@@ -10,7 +10,7 @@ Implementation-Handoff: #implementation-handoff-start-here
 Current-Implementation-Slice: none started; default next slice is OETU-ELEMENTARY-HOTT / Candidate G
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
 Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f
-Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, and full-file `Path_cat` composition-owner audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
+Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, and full-file `Path_cat` composition-owner audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, groupoid/categorical decoder ownership is split around D1 and separated from `TypeEquiv` algebra, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
 
 ## Goal
 
@@ -127,7 +127,7 @@ proposed successor until its adoption/migration record is made explicit.
 | --- | --- | --- |
 | Plan review and dependency architecture | handoff-ready proposed design; every benchmark row is classified | Accept names/boundaries as each slice is promoted; formally adopt the successor plan and update the June 23 plan when appropriate. |
 | H0 elementary core | partly active (`Unit`, Pi, Sigma, equality; native `nat`), but decoded Empty/Bool/Nat are missing | Complete Candidate G with owner-position evidence and durable active checks. |
-| H1 ordinary HoTT compatibility | incomplete/hybrid | Complete Pi equivalence packaging, arbitrary Sigma/record round trips, `TypeEquiv` algebra, univalence round trips, and selected action beta. |
+| H1 ordinary HoTT compatibility | incomplete/hybrid | Complete Pi equivalence packaging, arbitrary Sigma/record round trips, `TypeEquiv` algebra, and the groupoid-decoder-owned round trips and selected action beta. |
 | H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
 | Omega0/category analogue | broad active first draft plus append-only fixed-map/indexed expressibility | First pass Candidate D0's owner-position recursive-owner/Sigma/refl/next-hom gate; only then attempt Candidate D1's public closure/decoder migration and integrated witness, followed later by discreteness/`OneCat`. |
 | Indexed adjunction migration | separate append-only feasibility track; active owner unchanged | Run the owner-position 153-occurrence migration with triangle, opposite, mate, and named-operation controls. |
@@ -176,6 +176,7 @@ The revised audit verdict is:
 | Direct universe equality | Necessary for the eventual full-observational endpoint, not the immediate H1 MVP. | Phase 13 local owner research after decoder/action stabilization; no external design is a replication target. |
 | Global ordinary-iso univalence | Exploratory compatibility approximation, not successor architecture for arbitrary `Cat`. | Freeze new uses in Phase 0; migrate/retire after OneCat-scoped replacement. |
 | Fixed-map omega-equivalence | Sigma/fixed-index direction is sound, but current probes establish telescope/package expressibility rather than the recursive owner. | Pass D0 (fresh owner plus minimal Sigma package, reflexivity, and one next-hom observation) before describing D1 as implementation-feasible; complete D1's op/Product/decoder/integrated-witness ladder before calling the public migration ready. |
+| Decoder and equivalence-algebra ownership | The earlier phase/ledger text duplicated groupoid round trips and attempted to finalize the categorical decoder before its equivalence normal form changed. | Groupoid decoder results belong only to `OETU-GRPD-UNIV-DECODER`; `TypeEquiv` algebra owns only ordinary equivalence operations; categorical decoder finalization is jointly scheduled with D1 under `OETU-CAT-UNIV-DECODER`. |
 
 ### Complete OETU probe and evidence inventory
 
@@ -334,7 +335,8 @@ Reusable property/structure infrastructure
 Ordinary HoTT compatibility
   Candidate H: Pi happly/funext equivalence under generic J
         + Sigma/record arbitrary path round trips
-        + TypeEquiv algebra and univalence decoder/action round trips
+        + TypeEquiv algebra
+        + groupoid decoder round trips and transport/action squares
         ───────────────────────────────────────────────────────> H1 MVP
 
 Public observational equality and path algebra
@@ -345,8 +347,9 @@ Public observational equality and path algebra
 Omega/category extension
   record/equality owners
         ─> Candidate D0: fixed-map owner + Sigma package + refl/next-hom gate
-  decoder normalization + passing D0
-        ─> Candidate D1: op/Product + public decoder migration + integrated witness
+  categorical decoder contract + passing D0
+        ─> Candidate D1 + categorical decoder finalization:
+           op/Product + public decoder migration + integrated witness
         ─> IsDiscreteCat / IsNCat / OneCat
         ─> one-next-hom Omega0 univalence/action witness
 
@@ -516,9 +519,11 @@ This proposal incorporates the following project directions.
     computation on arbitrary structured Pi paths.
 20. **Foundational compatibility is executable and independent of
     adjunction.** Elementary classifier/eliminator beta, Sigma/record path
-    round trips, `TypeEquiv` algebra, univalence round trips, and conversion-
-    level anti-collapse controls belong to the HoTT gate. Indexed adjunction is
-    a separate category-migration witness and cannot substitute for them.
+    round trips, `TypeEquiv` algebra, decoder-owned univalence round trips, and
+    conversion-level anti-collapse controls belong to the HoTT gate. Their
+    coexistence in one gate does not merge their semantic owners. Indexed
+    adjunction is a separate category-migration witness and cannot substitute
+    for them.
 21. **`Path_cat` has layered rather than contradictory composition owners.**
     The selected category-level candidate retains the generic
     `comp_fapp0(Path_cat(A),...)` head, with narrow `eq_refl` projection-order
@@ -550,6 +555,14 @@ This proposal incorporates the following project directions.
     described operationally as a certificate/evidence package; the
     `IsOmegaEquivArrow(F)` alias and proof-field erasure are reserved for the
     theorem that its recursive coherence makes it property-like.
+26. **Decoder ownership is split by layer and kept separate from equivalence
+    algebra.** Groupoid decoder normalization, both groupoid round trips, and
+    the `coe_grpd` action square may complete before Candidate D. The
+    categorical decoder's name/orientation is selected early, but its public
+    type, round trips, and `path_to_hom` squares finalize jointly with D1's
+    fixed-map normal-form migration. `TypeEquiv`/`IsEquivMap` identity,
+    symmetry, and composition remain the exclusive algebra task; a migration
+    may rerun decoder diagnostics but does not copy their semantic bodies.
 
 ## Current Baseline And Review Findings
 
@@ -1246,9 +1259,10 @@ globally coherent:
    higher-cell projections;
 5. implement one representative binary constructor, initially Product, and
    test constructor-first, projection-first, and decoder-first diamonds;
-6. migrate the active `omega_equiv_*` destructors, `idtoequiv_cat`,
-   `omega_equiv_path`, both univalence round trips, and one Product decoder
-   consumer to the new package in the same full-file candidate;
+6. migrate the active `omega_equiv_*` destructors, `idtoequiv_cat`, and
+   `omega_equiv_path` declarations to the new package in the same full-file
+   candidate; jointly rerun the `OETU-CAT-UNIV-DECODER`-owned round trips,
+   `path_to_hom` squares, and one Product decoder consumer;
 7. declare one concrete named functor `F`, evidence `u : OmegaEquivAlong(F)`,
    and package `(F,u)`, then exercise univalence/action and one recursive
    next-hom observation without a per-instance `unif_rule`;
@@ -1823,10 +1837,15 @@ iso_evidence_path       // OneCat-scoped in the final design
 omega_equiv_path.
 ```
 
-This owner selection belongs near the beginning of the migration, before
-constructor-specific univalence closure and before paths of packaged truncated
-universes are claimed. Otherwise new code will continue to accumulate against
-two unrelated inverse choices.
+The groupoid owner can be selected and finalized near the beginning of the
+migration, before constructor-specific univalence closure and paths of
+packaged truncated universes are claimed. The categorical **name and
+orientation contract** should also be selected early so that new code does not
+accumulate against another inverse, but its public domain/codomain, round trips,
+and constructor computation cannot be finalized before Candidate D1 replaces
+the `OmegaEquiv` normal form. That finalization is jointly scheduled with D1,
+not implemented once against the old classifier and then independently
+implemented again.
 
 Capability-oriented names should be derived aliases or connected by named
 agreement paths:
@@ -1866,7 +1885,12 @@ path_to_hom(omega_equiv_path(e))
 
 Both round trips from each `EquivByInverse` capability need named projections
 and diagnostics. Their existence inside a nested Product package is not an
-adequate public coherence API.
+adequate public coherence API. The groupoid decoder task owns its two round
+trips and the `coe_grpd` transport/action square. The categorical decoder task
+owns its two round trips and the `path_to_hom` squares; Candidate D1 must migrate
+and revalidate those diagnostics because their equivalence type changes, but
+does not become a second semantic owner. `TypeEquiv` algebra separately owns
+identity, symmetry, and composition of equivalences and `IsEquivMap` evidence.
 
 ## `Path_cat` Composition Is Probed; Symmetry Repair Remains A Prerequisite
 
@@ -2288,9 +2312,9 @@ append-only import probe and does not change the row's formal status.
 | Stable shaped record reflexivity and reflexive shaped `J` | prerequisite | The nondependent stable-head skeleton and simulated consumer registrations pass append-only with no local warning; a true owner-position/full-file-copy probe remains. |
 | Dependent/nested shaped reflexivity, structural action, and additional computational dependent `J` | prerequisite | Immediate probe tracks, but public promotion follows path-owner selection; retained generic J remains active, while action and fibrancy must not be inferred from the nondependent reflexive probe. |
 | Contractibility, fibres, `IsEquivMap`, `TypeEquiv` | active | Contractible-fibre presentation and selected map/inverse observations are active. |
-| `TypeEquiv`/`IsEquivMap` identity, symmetry, and composition compatibility | prerequisite | Reflexive evidence and selected constructor closure are active; a complete ordinary algebra and executable compatibility corpus are not. |
-| Groupoid univalence and operational reverse decoder | active | First-draft capabilities exist; decoder agreement and action coherence remain an early normalization phase. |
-| Both groupoid-univalence round trips and selected action coherence | prerequisite | Require named `idtoequiv(ua(e))`, `ua(idtoequiv(p))`, `coe(ua(e),a)`, and one nontrivial Pi or Sigma action diagnostic. |
+| `TypeEquiv`/`IsEquivMap` identity, symmetry, and composition compatibility | prerequisite | Reflexive evidence and selected constructor closure are active; `OETU-TYPE-EQUIV-ALGEBRA` owns the missing ordinary algebra and contractible-fibre closure proofs, not univalence round trips. |
+| Groupoid univalence and operational reverse decoder | active | First-draft capabilities exist; `OETU-GRPD-UNIV-DECODER` owns decoder agreement and action coherence independently of the categorical migration. |
+| Both groupoid-univalence round trips and selected action coherence | prerequisite | `OETU-GRPD-UNIV-DECODER` exclusively owns named `idtoequiv(ua(e))`, `ua(idtoequiv(p))`, `coe(ua(e),a)`, and one nontrivial Pi or Sigma action diagnostic. |
 | Direct observational equality of the groupoid/category universes | deferred beyond immediate MVP; eventual explicit track | H1 uses the encoder/decoder/action interface. `OETU-UNIVERSE-EQUALITY` later chooses a direct equality rule or identity view, shaped reflexivity/action/J, and the unstratified boundary. |
 | Truncation properties and low-level aliases | prerequisite | `TruncLevel`/`IsTruncGrpd` skeleton has append-only feasibility evidence; intended placement and active promotion remain. |
 | Packaged `PropU_grpd`/`SetU_grpd`/`GroupoidU_grpd` | prerequisite | Carrier/evidence record skeleton has append-only feasibility evidence; property paths, closure, universe-level truncation, and owner-position audit remain open. |
@@ -2301,6 +2325,7 @@ append-only import probe and does not change the row's formal status.
 | Global ordinary-iso univalence compatibility | active legacy, frozen for new design | Current `cat_iso_univalence(C)` checks remain during migration, but new general-category architecture uses `CatUnivalence`; the replacement is OneCat-scoped. |
 | First-class `OmegaEquiv` observations | active | Recursive observation/reflexivity interface exists; unrestricted introduction/corecursion is absent. |
 | Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | prerequisite | The transitional bridge, opaque evidence/Sigma package, and exact fixed-arrow inverse/higher-cell telescope have append-only feasibility evidence. D0's independent recursive owner, minimal package, reflexivity, and one next-hom computation remain unprobed at owner position; D1's op/Product generators, public decoder migration, integrated witness, and full audit follow only after D0. Property-valuedness remains separate. |
+| Categorical decoder finalization and round trips | prerequisite | `omega_equiv_path` is the reserved owner, but `OETU-CAT-UNIV-DECODER` finalizes its types, round trips, `path_to_hom` squares, and Product cases jointly with D1's fixed-map public migration rather than against the old normal form. |
 | Indexed `Adjunction(F,G)` | prerequisite | Indexed formation, both exact triangle rules, direct `F`/`G` conversion, typed proof-time agreement with named unit/counit, and the negative runtime-erasure control pass append-only. Active opposite/mate migration and owner-position warning/LHS audits remain. |
 | `IsObjTruncCat` | prerequisite | Formation is mechanically small once `IsTruncGrpd` exists, but current evidence is append-only. |
 | `IsDiscreteCat` | prerequisite | Needs repaired `Path_cat` and fixed-map omega-equivalence of `Core_incl_func`. |
@@ -2461,21 +2486,46 @@ Generic propositional uses of `ind_eqr`, including Candidate H eta, remain
 valid in both lanes. The fibrancy capability gates only additional structural
 runtime betas on arbitrary shaped path constructors.
 
-### Phase 6: Univalence Decoder Interface Normalization
+### Phase 6: Split Univalence Decoder Ownership
 
-1. Select the reverse decoder owner at the groupoid and categorical layers.
-2. Connect capability-selected inverses by named coherence data or restrict to
-   the canonical capability.
-3. Expose both round trips and the path-to-arrow/transport squares.
-4. Keep constructor closure propositional until the generic squares are
-   stable.
-5. Do not use arbitrary-capability `unif_rule`s as a replacement for missing
-   coherence.
-6. Quarantine legacy global `CatIsoUnivalence` consumers during this migration:
-   new general-category coherence uses `OmegaEquiv`; retain or introduce the
-   ordinary-iso decoder only behind `OneCat`/an explicit dimension hypothesis.
-7. Record that these decoder/action results complete the immediate H1 universe
-   surface but do not implement direct observational universe identity.
+The groupoid equivalence type is not changed by Candidate D, whereas the
+categorical equivalence type is. Their decoder work therefore has different
+implementation schedules even though both layers retain one operational
+inverse.
+
+**Phase 6G: groupoid decoder normalization:**
+
+1. Select `grpd_equiv_path` as the reverse decoder owner and connect
+   capability-selected `ua_grpd` inverses by named coherence data or restrict
+   consumers to the canonical capability.
+2. Make this task the exclusive owner of both groupoid-univalence round trips,
+   the `coe_grpd` transport/action square, and one nontrivial Pi or Sigma
+   universe-action diagnostic.
+3. Keep constructor closure propositional until the generic squares are
+   stable, and do not use arbitrary-capability `unif_rule`s as a replacement
+   for missing coherence.
+4. Record that these decoder/action results complete the immediate H1
+   groupoid-universe surface but do not implement direct observational
+   universe identity.
+
+`OETU-TYPE-EQUIV-ALGEBRA` may supply ordinary equivalence operations consumed
+by examples, but it does not own or reimplement these decoder round trips or
+transport squares.
+
+**Phase 6C: categorical decoder contract before D1:**
+
+5. Reserve `omega_equiv_path` as the categorical reverse decoder name and
+   record its intended orientation, capability-agreement obligation, two round
+   trips, and `path_to_hom` squares as the contract owned by
+   `OETU-CAT-UNIV-DECODER`.
+6. Quarantine legacy global `CatIsoUnivalence` consumers: new general-category
+   coherence uses `OmegaEquiv`, while the ordinary-iso decoder exists only
+   behind `OneCat` or an explicit dimension hypothesis.
+7. Do not finalize the categorical decoder's public types, round trips, or
+   constructor rules against the soon-to-be-replaced opaque `OmegaEquiv` normal
+   form. Retype and validate them jointly with Candidate D1. D1 owns the
+   normal-form migration and reruns the decoder diagnostics; the categorical
+   decoder task remains their sole semantic owner.
 
 ### Phase 7: Primary Fixed-Map Omega-Equivalence And Sigma Package
 
@@ -2503,8 +2553,10 @@ runtime betas on arbitrary shaped path constructors.
    promoted Sigma package and route the active public destructors through its
    fixed-map evidence.
 6. Migrate opposite and Product generators without duplicating semantic
-   bodies; revalidate categorical-univalence decoder domains/codomains, both
-   round trips, and the Product diamonds.
+   bodies. Jointly with `OETU-CAT-UNIV-DECODER`, retype its canonical decoder
+   domain/codomain and rerun its owned round trips, `path_to_hom` squares, and
+   Product diamonds. This is migration validation, not duplicate decoder
+   ownership inside Candidate D1.
 7. Validate one concrete named equivalence declaration and the first MVP
    end-to-end next-hom univalence/action witness without a per-instance
    unification rule.
@@ -2598,9 +2650,11 @@ reorganization.
    generic-J eta theorem does not wait for computational fibrancy.
 4. Add both arbitrary Sigma and dependent-record path-characterization round
    trips with their reflexive computation laws.
-5. Derive `TypeEquiv` and `IsEquivMap` identity/symmetry/composition, stabilize
-   both groupoid-univalence round trips and selected action beta, and only then
-   add further constructor closure.
+5. Complete the `OETU-TYPE-EQUIV-ALGEBRA`-owned `TypeEquiv` and `IsEquivMap`
+   identity/symmetry/composition corpus. Separately complete the
+   `OETU-GRPD-UNIV-DECODER`-owned groupoid round trips and selected action beta;
+   neither task duplicates the other's semantic bodies. Add further
+   constructor closure only after the consumers have both prerequisites.
 6. Complete the truncation closure/invariance facts needed by active packaged
    universes, including the explicit Pi/function-extensionality dependency of
    evidence property-valuedness.
@@ -2744,7 +2798,8 @@ corecursion, a productivity checker, or a terminal-coalgebra semantics.
 replace public OmegaEquiv by the promoted fixed-map Sigma package;
 route active destructors through the evidence projection;
 opposite and Product generators plus their recursive cells;
-idtoequiv_cat, omega_equiv_path, both round trips, and Product decoder migration;
+idtoequiv_cat/omega_equiv_path declaration migration;
+rerun the categorical-decoder-owned round trips, path_to_hom squares, and Product case;
 OmegaEquivFibre(F) comparison as compatibility/semantic reference;
 one concrete named equivalence and integrated next-hom univalence/action witness;
 no unif-only runtime semantics.
@@ -2969,6 +3024,13 @@ but it is also not an unowned omission: Phase 13 and
 
 ### Univalence diagnostics
 
+The first item is owned by `OETU-TYPE-EQUIV-ALGEBRA`. The groupoid round-trip,
+transport, and universe-action items are owned by
+`OETU-GRPD-UNIV-DECODER`. The categorical round-trip and `path_to_hom` items
+are owned by `OETU-CAT-UNIV-DECODER` and are rerun inside D1 because D1 changes
+their input normal form. Constructor/Product tasks may supply test data and
+migration diamonds but do not acquire a second decoder implementation.
+
 - identity, symmetry, and composition of `TypeEquiv`, plus the corresponding
   identity/composition behavior of `IsEquivMap`;
 - `idtoequiv_grpd(ua_grpd(e)) = e` and
@@ -3057,8 +3119,9 @@ criteria:
   `probed` rows, and the selected H0 surface is active before an implementation
   skeleton is claimed;
 - the elementary classifier/eliminator beta corpus, Pi equivalence package,
-  Sigma/record arbitrary path round trips, `TypeEquiv` algebra, and both
-  univalence round trips pass at the tier that claims them;
+  Sigma/record arbitrary path round trips, `TypeEquiv` algebra, and the
+  applicable decoder-owned univalence round trips pass at the tier that claims
+  them;
 - equality, transport, equivalence, univalence, and truncation examples compose
   rather than merely typecheck independently;
 - literal-reflexivity `J`, reflexive shaped `J`, structural action, and
@@ -3183,6 +3246,14 @@ public universe equality itself computes as equivalence. Conversely, the
 later goal does not license importing another system's glue or bisimulation
 mechanism without a local owner analysis. Phase 13 owns this boundary.
 
+Decoder normalization is also layer-sensitive. The groupoid decoder and its
+H1 round trips can stabilize before Candidate D. The categorical decoder's
+name can be reserved early, but finalizing it against the old opaque
+`OmegaEquiv` and then treating D1 as a second implementation would invert the
+dependency. Its finalization therefore occurs jointly with D1 under
+`OETU-CAT-UNIV-DECODER`; `OETU-TYPE-EQUIV-ALGEBRA` remains independent of both
+decoder theorem families.
+
 ### Indexed adjunction is simpler but has a broad migration surface
 
 `Adjunction(F,G)` removes unnecessary recovery of already-known functors and
@@ -3258,14 +3329,14 @@ that comparison dimension-correct.
 | `OETU-ELEMENTARY-HOTT` | **default next slice; not started**; append-only feasibility demonstrated | active universe decoding and native inductives | next implementation turn unless the user selects another bounded slice | Promote decoded Empty, Bool, and Nat classifiers/eliminators with beta and Bool non-collapse diagnostics at their active owners; keep sums, observational identity/no-confusion/higher action, canonicity, and categorical universal properties as separately statused work. |
 | `OETU-PI-FUNEXT` | immediate owner-position design track; append-only beta/eta skeleton demonstrated | active `PiPathView`, retained generic `ind_eqr`, contractible-fibre `IsEquivMap` | H1 or truncation-evidence property-valuedness is consumed | Select `PiHapply`/`PiFunext` owners, preserve related-input action, audit the reflexive proof-time boundary against shaped registration, derive generic-J propositional eta, and package `PiHapply` as an active equivalence; do not add a fibrancy dependency for that theorem. |
 | `OETU-STRUCTURAL-PATH-COMPAT` | proposed H1 compatibility slice | active Sigma paths, `OETU-RECORD-CONVENTION`, `OETU-PI-FUNEXT` where path-valued functions require it | H1 path characterization is claimed | Add arbitrary Sigma and dependent-record encode/decode round trips, reflexive betas, and one nested path-telescope case without forcing global runtime eta. |
-| `OETU-TYPE-EQUIV-ALGEBRA` | proposed H1 compatibility slice | active `IsEquivMap`/`TypeEquiv`, `OETU-PI-FUNEXT`, `OETU-UNIV-DECODER` for round trips | foundational HoTT MVP is selected | Add identity/symmetry/composition, the required contractible-fibre closure proofs, both groupoid-univalence round trips, selected transport beta, and one Pi/Sigma universe-action example. |
+| `OETU-TYPE-EQUIV-ALGEBRA` | proposed H1 compatibility slice | active `IsEquivMap`/`TypeEquiv`, `OETU-PI-FUNEXT` where function extensionality is required by contractible-fibre proofs | foundational HoTT MVP or an ordinary equivalence operation is selected | Add identity, symmetry, and composition of `TypeEquiv` plus the corresponding `IsEquivMap` closure proofs. Do not own univalence decoders, round trips, transport squares, or universe-action examples. |
 | `OETU-TRUNC-LEVEL` | proposed early slice; append-only skeleton demonstrated | existing `IsContr`, `Pi_grpd`, equality | truncation slice selected | Promote/refine `TruncLevel`, recursive `IsTruncGrpd`, and named low-level aliases with owner-position diagnostics. |
 | `OETU-TRUNC-CLOSURE` | proposed staged ledger | `OETU-TRUNC-LEVEL`, equality/equivalence | a closure fact receives a concrete consumer | Prove one fact at a time: equality lowering, monotonicity, equivalence invariance, Pi/Sigma bounds, and package-universe truncation. |
 | `OETU-TRUNC-EVIDENCE-PROP` | deferred proof | `OETU-TRUNC-LEVEL`, `OETU-PI-FUNEXT`, stable observational paths | packaged-universe equality is consumed | Derive `IsPropGrpd(IsTruncGrpd(n,A))`; do not postulate global proof irrelevance. Add ambient univalence before claiming the `(n+1)` universe theorem. |
 | `OETU-TRUNC-UNIVERSE` | proposed follow-up; append-only skeleton demonstrated | `OETU-RECORD-CONVENTION`, `OETU-TRUNC-LEVEL` | low-level predicates pass | Add `TruncGrpdU`, low-level aliases, carrier/evidence projections, and an explicit no-false-universe-truncation diagnostic at owner position. |
 | `OETU-TRUNC-REFLECTOR` | deferred | observational equality and HIT elimination | a theorem needs `||A||_n`, not merely `IsTruncGrpd(n,A)` | Design propositional truncation first with restricted dependent elimination. |
 | `OETU-PATH-CAT` | composition owner-position probed; oriented action-unit cleanup and opposite/symmetry prerequisites remain | generic `comp_fapp0`, oriented hom actions, current J-derived path algebra | public shaped registration, `OneCat`, or observational category equality begins | Promote/refine the shared-`comp_fapp0` candidate with two category-unit bridges and durable checks; owner-position clean/classify the four oriented action-unit bridges; remove the self-opposite collapse and add the symmetry functor/equivalence. |
-| `OETU-OMEGA-EQUIV-ALONG` | D0 not yet owner-position probed; D1 proposed normal-form migration; append-only evidence/package and endpoint expressibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention, univalence decoder | fixed-functor equivalence or discreteness is consumed | First pass D0 with a fresh source-position fixed-map owner, minimal Sigma package, reflexivity, and one recursive next-hom observation independent of the old owner. Then complete D1's op/Product, public destructors/decoders, named declaration, integrated witness, fibre comparison, and full audits without raw cancellation rewrites. |
+| `OETU-OMEGA-EQUIV-ALONG` | D0 not yet owner-position probed; D1 proposed normal-form migration; append-only evidence/package and endpoint expressibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention; D1 coordinates with the `OETU-CAT-UNIV-DECODER` contract | fixed-functor equivalence or discreteness is consumed | First pass D0 with a fresh source-position fixed-map owner, minimal Sigma package, reflexivity, and one recursive next-hom observation independent of the old owner. Then complete D1's op/Product, public destructor/decoder declaration migration, named declaration, integrated witness, fibre comparison, and full audits; rerun but do not duplicate the categorical-decoder-owned round trips and squares. |
 | `OETU-ADJUNCTION-INDEXED` | proposed focused migration; append-only indices, triangles, and named-operation boundary demonstrated | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)` at owner position; remove/transparentize left/right views, retain stable unit/counit observations, and migrate the 153-occurrence source/check/example surface with the runtime-erasure negative control. |
 | `OETU-STRUCTURE-DECLARATION` | proposed usability protocol; one append-only adjunction operation bridge demonstrated | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)` declarations; connect preselected unit/counit names only by typed proof-time comparisons while canonical computations retain stable observations; consider an elaborator/generator afterward. |
 | `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. |
@@ -3279,8 +3350,9 @@ that comparison dimension-correct.
 | `OETU-OBS-SHAPED-J` | split status: reflexive candidate immediate; additional arbitrary-constructor computation depends on fibrancy | `OETU-OBS-SHAPED-REFL`; for extra arbitrary-constructor betas `OETU-OBS-FIBRANCY` | shaped equality slice selected | Promote specialized reflexive `ind_eqr` when it passes; retain generic J; derive additional structured-constructor runtime rules only from a sound dependent-elimination architecture. |
 | `OETU-OBS-MIGRATE` | deferred high-risk public migration | successful shaped/MVP probe and consumer audit | one former has canonical joins | Migrate public equality one former at a time; do not combine with reorganization. |
 | `OETU-FOUNDATIONAL-ADEQUACY` | active tiered architecture/implementation gate | all relevant rows above | every slice refinement and milestone | Maintain H0/H1/H2/Omega0 status/owner/computation cells; require active H0 for an implementation skeleton, active H1 plus an integrated fixed-map univalence/action witness for a foundational HoTT MVP, and keep indexed adjunction as a separate migration witness. |
-| `OETU-UNIV-DECODER` | proposed early coherence repair | current equality and univalence interfaces | round trips, truncated-universe paths, or constructor univalence are consumed | Select decoder heads, add named capability agreement and coherence squares before further closure rules. |
-| `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; not an immediate H1 MVP gate | `OETU-UNIV-DECODER`, stable hybrid equality/action owners; categorical case also depends on promoted fixed-map omega-equivalence | direct public universe identity or full-observational completion is selected | Compare direct equality with an identity-view fallback; design shaped reflexivity/action/additional J; integrate both round trips and Product/Pi/Sigma diamonds; use external mechanisms only as comparison baselines. |
+| `OETU-GRPD-UNIV-DECODER` | proposed early H1 coherence repair | current groupoid equality, `TypeEquiv` projections, and groupoid-univalence capabilities | groupoid round trips, truncated-universe paths, or constructor univalence are consumed | Select `grpd_equiv_path`, add named capability agreement, both groupoid round trips, the `coe_grpd` transport/action square, and one Pi/Sigma universe-action example. This task exclusively owns those results; it may consume but does not duplicate `TypeEquiv` algebra. |
+| `OETU-CAT-UNIV-DECODER` | contract selected early; implementation finalization jointly scheduled with D1 | current Cat-univalence interface for contract selection; D0 before finalization, D1 co-execution, and `OETU-PATH-CAT` for final `path_to_hom` coherence | D1 begins or a categorical round trip is consumed | Reserve `omega_equiv_path` now; during D1 retype it over the fixed-map Sigma package and validate both categorical round trips, capability agreement, `path_to_hom` squares, and Product decoder cases. D1 supplies the normal-form migration and reruns these diagnostics but does not duplicate their semantic ownership. |
+| `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; not an immediate H1 MVP gate | `OETU-GRPD-UNIV-DECODER`, stable hybrid equality/action owners; categorical case also depends on `OETU-CAT-UNIV-DECODER` and promoted fixed-map omega-equivalence | direct public universe identity or full-observational completion is selected | Compare direct equality with an identity-view fallback; design shaped reflexivity/action/additional J; integrate the decoder-owned round trips and Product/Pi/Sigma diamonds without copying their bodies; use external mechanisms only as comparison baselines. |
 | `OETU-PRODUCT-DIAMOND` | proposed focused cleanup | stable equality/reflexivity policy | Product decoder migration begins | Probe preserving Product evidence provenance by removing reflexive collapse. |
 | `OETU-CAT-GLOBAL` | accepted omega-level operational policy; legacy ordinary-iso policy quarantined | none | any report/kernel text suggests non-univalent `Cat` semantics or new arbitrary-`Cat` iso univalence | Keep every `C : Cat` omega-univalent and label the policy axiomatic/unstratified; freeze global `cat_iso_univalence` for migration to `OneCat`. |
 | `OETU-CAT-SELF` | deferred metatheory | `OETU-CAT-GLOBAL` | model or universe computation is claimed | Compare stratified, impredicative, and operational self-universe readings. |
@@ -3328,12 +3400,14 @@ Before this report becomes the active replacement plan:
     `IsEquivMap` evidence;
 12. approve the executable foundational corpus: elementary classifier/
     eliminator beta, arbitrary Sigma/record path round trips, ordinary
-    equivalence algebra, both univalence round trips, selected action beta, and
-    conversion-level negative controls with their metatheoretic limitation;
+    equivalence algebra, decoder-owned groupoid-univalence round trips and
+    selected action beta, and conversion-level negative controls with their
+    metatheoretic limitation;
 13. maintain the fixed-map Omega0 equivalence/univalence/action witness and the
     indexed-adjunction triangle/mate witness as separate acceptance gates;
-14. approve the immediate-MVP boundary: decoder round trips and action beta are
-    H1, while direct computational universe identity is owned by the later
+14. approve the immediate-MVP boundary: groupoid decoder round trips and action
+    beta are H1; categorical decoder finalization is jointly scheduled with
+    D1 for Omega0; direct computational universe identity is owned by the later
     `OETU-UNIVERSE-EQUALITY` track;
 15. approve the local-first comparative-reference policy and require every
     adopted external idea to name its local rewrite/unification owner;
