@@ -9,8 +9,8 @@ Side-Task-Ledger: #side-task-ledger
 Implementation-Handoff: #implementation-handoff-start-here
 Current-Implementation-Slice: none started; default next slice is OETU-ELEMENTARY-HOTT / Candidate G
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
-Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f
-Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, full-file `Path_cat` composition/collapse-removal audit, and a minimal owner-position path-symmetry-functor audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, Candidate E is split into E0 composition/collapse removal and E1 symmetry-core promotion with later fixed-map equivalence packaging, groupoid/categorical decoder ownership is split around D1 and separated from `TypeEquiv` algebra, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
+Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f644e-f14e-70f1-9402-19d688282343
+Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, full-file `Path_cat` composition/collapse-removal audit, and a minimal owner-position path-symmetry-functor audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, Candidate E is split into E0 composition/collapse removal and E1 symmetry-core promotion with later fixed-map equivalence packaging, the exact Product boundary for `IsDiscreteCat` is selected with its homwise adequacy theorem still a promotion gate, groupoid/categorical decoder ownership is split around D1 and separated from `TypeEquiv` algebra, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
 
 ## Goal
 
@@ -131,6 +131,7 @@ proposed successor until its adoption/migration record is made explicit.
 | H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
 | Path algebra/opposite | E0 composition/collapse removal and E1 symmetry core owner-position probed; neither active | Promote E0 with durable checks and action-unit cleanup, then classify the twelve E1 warning blocks and promote its functor/action/propositional-coherence core; fixed-map packaging follows Candidate D. |
 | Omega0/category analogue | broad active first draft plus append-only fixed-map/indexed expressibility | First pass Candidate D0's owner-position recursive-owner/Sigma/refl/next-hom gate; only then attempt Candidate D1's public closure/decoder migration and integrated witness, followed later by discreteness/`OneCat`. |
+| Discreteness/directed dimension | exact `IsSetGrpd(Obj(C)) × OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))` contract selected; append-only formation and hom-action-target probe passes | After E1 and Candidate D, derive and diagnose fixed-map equivalence of every core-inclusion hom action before promoting `IsDiscreteCat` as the `IsNCat` base. |
 | Indexed adjunction migration | separate append-only feasibility track; active owner unchanged | Run the owner-position 153-occurrence migration with triangle, opposite, mate, and named-operation controls. |
 | Direct observational universe identity | later explicit research track; not an immediate MVP gate | Select a local direct-equality or identity-view architecture only after the equality/action and univalence-decoder owners are stable. |
 | Universe/metatheory | deliberately deferred | No concrete implementation slice should claim consistency, stratified closure, or a model merely from Lambdapi acceptance. |
@@ -168,14 +169,20 @@ The present feasibility assessment is positive but bounded:
    `Core_incl_func`/opposite square. That candidate reports 1,084 unjoinable
    pairs: twelve reports mention the new functor owner and remain to classify,
    while the strict inferred-LHS audit has no unreviewed slot.
-6. The best/original goal therefore remains credible as a staged
+6. The exact `IsDiscreteCat` Product contract and the type of its homwise
+   adequacy target pass an append-only warning-enabled probe. The hom action's
+   object projection computes to the existing `path_to_hom` owner. The probe
+   deliberately does not inhabit the adequacy theorem: deriving fixed-map
+   equivalence of every hom action remains a Candidate-D/Phase-9 promotion
+   obligation.
+7. The best/original goal therefore remains credible as a staged
    implementation and research program. It is not yet demonstrated as one
    globally normalizing implementation. The largest concrete risks are the
    promotion/classification of the new `Path_cat` symmetry core and its later
    fixed-map equivalence packaging, public shaped-equality migration, Pi
    equivalence packaging, active `OmegaEquiv` normal-form migration, and the
    broad adjunction consumer migration.
-7. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
+8. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
    semantic/metatheoretic justification do not block the concrete MVP, but
    every report and code comment must preserve that boundary.
 
@@ -188,6 +195,7 @@ The revised audit verdict is:
 | Direct universe equality | Necessary for the eventual full-observational endpoint, not the immediate H1 MVP. | Phase 13 local owner research after decoder/action stabilization; no external design is a replication target. |
 | Global ordinary-iso univalence | Exploratory compatibility approximation, not successor architecture for arbitrary `Cat`. | Freeze new uses in Phase 0; migrate/retire after OneCat-scoped replacement. |
 | Fixed-map omega-equivalence | Sigma/fixed-index direction is sound, but current probes establish telescope/package expressibility rather than the recursive owner. | Pass D0 (fresh owner plus minimal Sigma package, reflexivity, and one next-hom observation) before describing D1 as implementation-feasible; complete D1's op/Product/decoder/integrated-witness ladder before calling the public migration ready. |
+| `IsDiscreteCat` foundation | The exact Product contract is now selected; its set-object and fixed-core-map factors are nonredundant, and its hom-action target is mechanically well typed. | After Candidate D, derive the homwise fixed-map equivalence whose object action is `path_to_hom`, expose an arrow-to-path inverse with both round trips, and pass one recursive `IsNCat` consumer before promotion. |
 | Decoder and equivalence-algebra ownership | The earlier phase/ledger text duplicated groupoid round trips and attempted to finalize the categorical decoder before its equivalence normal form changed. | Groupoid decoder results belong only to `OETU-GRPD-UNIV-DECODER`; `TypeEquiv` algebra owns only ordinary equivalence operations; categorical decoder finalization is jointly scheduled with D1 under `OETU-CAT-UNIV-DECODER`. |
 
 ### Complete OETU probe and evidence inventory
@@ -200,6 +208,7 @@ not durable active diagnostics.
 | --- | --- | --- |
 | `tmp/probes/oetu_architecture_feasibility_probe.lp` | One-constructor dependent records, truncation codes/predicate/package, conservative record paths, a stable nondependent shaped-reflexivity head with reflexive `ind_eqr`, strict local path operations, and recursive `IsNCat` formation. | It combines several late append-only experiments. Split the selected slice, place it at each real owner, cover dependent/nested action where claimed, and audit all literal-`eq_refl` consumers. |
 | `tmp/probes/oetu_fixed_map_followup.lp` | A transitional `OmegaEquivAlong(F)` bridge into the current opaque `OmegaEquiv`, computing selected-map/inverse observations, recursive higher-cell endpoints, and the semantic homotopy fibre. | Replace or migrate the real owner; do not retain the bridge as the final two-layer architecture or infer property-valuedness. |
+| `tmp/probes/oetu_discrete_cat_contract.lp` | The selected `IsDiscreteCat` Product boundary, exact `Cat_cat` indexing of `Core_incl_func`, the hom-action functor from `Path_cat(x=y)` to `Hom_cat(C,x,y)`, its `path_to_hom` object projection, and the type of the required homwise adequacy theorem all pass append-only warning-enabled checking. | It deliberately provides no inhabitant of the homwise theorem. Derive that theorem from the promoted fixed-map owner (or document a revised evidence boundary), add inverse/round-trip diagnostics, and reprobe at owner position before promoting discreteness. |
 | `tmp/probes/oetu_indexed_structure_architecture_probe.lp` | Primary fixed-map evidence plus Sigma packaging, indexed `Adjunction(F,G)`, both exact triangle patterns, transparent versus proof-time functor views, fixed-arrow higher cells, and typed named-unit/counit comparison. | Move candidates to owner positions, minimize/annotate its eight scratch-local replaceable-pattern-variable advisories, and migrate active opposite/mate/decoder consumers. |
 | `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp` | Negative control: runtime unit/counit projection betas erase the stable triangle discriminators, leaving both the projected and raw named-operation spellings stuck as expected. | Preserve stable unit/counit observations or design a different audited triangle owner; clean its two scratch-local LHS advisories before reusing a pattern. |
 | `tmp/probes/oetu_hott_elementary_formers.lp` | Decoded Empty, Bool, and Nat classifiers; dependent eliminator facades; Bool and Nat constructor beta. | Promote at the foundations owner with active diagnostics; identity/no-confusion, higher action, canonicity, and categorical universal properties remain separate. |
@@ -231,6 +240,15 @@ both files finish checking successfully. The indexed probe still reports its
 eight scratch-local replaceable-pattern-variable advisories. These later
 passes do not change either artifact's append-only status or supply the absent
 D0 recursive-owner computation.
+
+The append-only exact-discreteness contract probe
+`oetu_discrete_cat_contract.lp` passes warning-enabled on 2026-07-15; its log
+ends in `20260715-114925`. It adds no probe-local warning family beyond the
+1,109 imported active reports. It checks the exact Product formation,
+`Cat_cat` indexing, the hom-action endpoints, and the definitional
+`path_to_hom` object projection. It intentionally types but does not inhabit
+the homwise adequacy theorem, so it is contract evidence rather than an
+`IsDiscreteCat` implementation.
 
 The original path-owner warning-enabled migrated-suite log ends in
 `20260714-234330`; a byte-identical later rerun ends in `20260715-000459`.
@@ -377,7 +395,9 @@ Omega/category extension
         ─> Candidate D1 + categorical decoder finalization:
            op/Product + public decoder migration + integrated witness
   promoted E1 symmetry core + Candidate D1 fixed-map owner
-        ─> PathSym/Core fixed-map packages ─> IsDiscreteCat / IsNCat / OneCat
+        ─> PathSym/Core fixed-map packages
+        ─> exact IsDiscreteCat Product + core-hom adequacy
+        ─> IsNCat / OneCat
         ─> one-next-hom Omega0 univalence/action witness
 
 Separate category migration lane
@@ -602,6 +622,16 @@ This proposal incorporates the following project directions.
     or second anti-composition rewrite is selected. Fixed-map equivalence
     packaging of `PathSym_A` waits for Candidate D rather than depending on the
     obsolete opaque `OmegaEquiv` interface.
+28. **`IsDiscreteCat` has an exact two-factor contract.** The selected
+    definition is `IsSetGrpd(Obj(C))` paired with fixed-map
+    `OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))` evidence. Neither factor is
+    dropped: object-set truncation alone permits directed arrows, while core
+    equivalence without set truncation can retain higher object-path data.
+    Before promotion, the fixed-map evidence must derive equivalence of every
+    hom action of `Core_incl_func`; its object action is the existing
+    `path_to_hom` map. This homwise consequence is a theorem/diagnostic, not a
+    duplicated third record field unless the general derivation is shown
+    infeasible and the decision is explicitly revised.
 
 ## Current Baseline And Review Findings
 
@@ -1176,19 +1206,73 @@ IsNCat(0,C)     := IsDiscreteCat(C)
 IsNCat(n+1,C)   := Pi x y : Obj(C), IsNCat(n,Hom_cat(C,x,y)).
 ```
 
-The base `IsDiscreteCat` is a real prerequisite. It should express that `C`
-has no directed information beyond the equality/groupoidal structure of a
-set of objects. A likely semantic formulation is:
+The base `IsDiscreteCat` is a real prerequisite. It expresses that `C` has no
+directed information beyond the equality/groupoidal structure of a set of
+objects. The selected plan-level definition is the exact Product:
 
 ```text
-IsSetGrpd(Obj(C))
-and IsOmegaEquivFunctor(Core_incl_func(C)).
+IsDiscreteCat(C)
+  := IsSetGrpd(Obj(C))
+     × OmegaEquivAlong_{Cat_cat}(Core_incl_func(C)).
 ```
 
-Here `IsOmegaEquivFunctor(F)` means equivalence structure on the **already
-selected** functor `F`. The selected architecture makes that fixed-map notion
-primary rather than recovering it as the fibre of an opaque package
-projection.
+The kernel spelling of `×` is `Product_grpd`; it is data/evidence packaging,
+not an unproved logical conjunction or an opaque predicate.
+
+Here
+
+```text
+Core_incl_func(C)
+  : Hom_{Cat_cat}(Core_cat(C),C)
+  = Functor(Core_cat(C),C),
+```
+
+so the `Cat_cat` subscript fixes the ambient category in which this already-
+selected functor is required to be an omega-equivalence. The selected
+architecture makes that fixed-map notion primary rather than recovering it as
+the fibre of an opaque package projection.
+
+The two factors are nonredundant. `IsSetGrpd(Obj(C))` alone says nothing about
+non-identity directed arrows. Conversely, equivalence with `Core_cat(C) =
+Path_cat(Obj(C))` without the set condition can preserve higher object-path
+information, so it does not by itself make `C` zero-dimensional.
+
+The required homwise adequacy consequence is also fixed now. Define the
+existing generic hom action in readable notation by:
+
+```text
+core_incl_hom_func(C,x,y)
+  := fapp1_func(Core_incl_func(C),x,y)
+  : Functor(Path_cat(x = y),Hom_cat(C,x,y)).
+
+fapp0(core_incl_hom_func(C,x,y),p)
+  -> path_to_hom_C(p).
+```
+
+Before `IsDiscreteCat` is promoted as the base of `IsNCat`, its fixed-map
+evidence must derive:
+
+```text
+discrete_core_homwise
+  : IsDiscreteCat(C)
+    -> Pi x y : Obj(C),
+       OmegaEquivAlong_{Cat_cat}(core_incl_hom_func(C,x,y)).
+```
+
+This is the recursive/full-faithfulness form of “no extra directed arrows.”
+At the immediately visible arrow level it must expose an inverse
+`hom_to_path(d,f) : x = y` and propositional/omega-coherent round trips:
+
+```text
+hom_to_path(d,path_to_hom(p)) = p
+path_to_hom(hom_to_path(d,f)) = f.
+```
+
+These are diagnostics/theorems, not broad runtime cancellation rewrites. The
+preferred owner is a general hom-action consequence of
+`OmegaEquivAlong_{Cat_cat}(F)`, with the core inclusion as its first concrete
+consumer. Duplicating homwise evidence as a third `IsDiscreteCat` field is a
+fallback only if that derivation is shown infeasible.
 
 The semantic/reference presentation is the homotopy fibre:
 
@@ -1480,10 +1564,10 @@ not make per-instance unification rules the sole meaning of a declaration or
 generate instance-specific triangle rewrites by default; any such rewrite
 generation is a separate critical-pair-audited design.
 
-Consequently, `IsDiscreteCat` must be designed before `IsNCat` is promoted,
-and the blocker is specifically fixed-functor omega-equivalence
-infrastructure—not an unspecified need for every possible notion of category
-equivalence.
+Consequently, the selected `IsDiscreteCat` contract must be implemented and
+its homwise adequacy validated before `IsNCat` is promoted. The blocker is
+specifically fixed-functor omega-equivalence and its hom-action theorem—not an
+unspecified need for every possible notion of category equivalence.
 
 The recursive definition matches the iterated-hom architecture: an ordinary
 1-category has discrete hom-categories; a 2-category has ordinary
@@ -2457,8 +2541,8 @@ append-only import probe and does not change the row's formal status.
 | Categorical decoder finalization and round trips | prerequisite | `omega_equiv_path` is the reserved owner, but `OETU-CAT-UNIV-DECODER` finalizes its types, round trips, `path_to_hom` squares, and Product cases jointly with D1's fixed-map public migration rather than against the old normal form. |
 | Indexed `Adjunction(F,G)` | prerequisite | Indexed formation, both exact triangle rules, direct `F`/`G` conversion, typed proof-time agreement with named unit/counit, and the negative runtime-erasure control pass append-only. Active opposite/mate migration and owner-position warning/LHS audits remain. |
 | `IsObjTruncCat` | prerequisite | Formation is mechanically small once `IsTruncGrpd` exists, but current evidence is append-only. |
-| `IsDiscreteCat` | prerequisite | Needs repaired `Path_cat` and fixed-map omega-equivalence of `Core_incl_func`. |
-| Recursive `IsNCat` | prerequisite | Recursion skeleton passes append-only with an opaque stand-in for the discrete base; the real base and owner-position evidence remain. |
+| `IsDiscreteCat` | selected contract; implementation prerequisite | Exact set-object/fixed-core-map Product formation and the hom-action target pass append-only. It still needs repaired `Path_cat`, promoted fixed-map omega-equivalence, the derived homwise equivalence and inverse/round-trip diagnostics, and owner-position evidence. |
+| Recursive `IsNCat` | prerequisite | Recursion skeleton passes append-only with an opaque stand-in for the discrete base; its base contract is now exact, but the real `IsDiscreteCat` implementation and an integrated homwise consumer remain. |
 | `IsNCat(n,C) -> IsObjTruncCat(n,C)` | prerequisite | Needs categorical univalence, fixed-arrow evidence truncation, and the recursive dimension proof. |
 | Packaged `OneCat` and scoped ordinary-iso univalence | prerequisite | Depends on the real discrete base, evidence paths, and the omega/ordinary comparison. |
 | One-next-hom end-to-end adequacy example | prerequisite | Generic machinery exists, but the redesigned equality/truncation/univalence stack has not yet passed this integrated test. |
@@ -2764,12 +2848,19 @@ cleanup, opposite/mate surface, and performance/warning audits remain open.
 2. Using the promoted E1 core and Candidate D fixed-map owner, package the
    exact `PathSym_A` functor as fixed-map omega-equivalence and package the
    functor-level Core/opposite comparison required by the first consumer.
-3. Select and implement `IsDiscreteCat` from object-set truncation and
-   `OmegaEquivAlong(Core_incl_func(C))`.
-4. Add `CatDim`, recursive `IsNCat`, `NCat(n)`, `ZeroCat`, and `OneCat`.
-5. State and prove or stage `IsNCat(n,C) -> IsObjTruncCat(n,C)` with its exact
+3. Implement the selected exact Product
+   `IsSetGrpd(Obj(C)) ×
+   OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))` as `IsDiscreteCat(C)`.
+4. Derive fixed-map equivalence of
+   `core_incl_hom_func(C,x,y)` for arbitrary endpoints, check that its object
+   action is `path_to_hom`, and expose an arrow-to-path inverse with both
+   round trips. Prefer a generic hom-action theorem for
+   `OmegaEquivAlong_{Cat_cat}(F)` over a duplicated discreteness field.
+5. Add `CatDim`, recursive `IsNCat`, `NCat(n)`, `ZeroCat`, and `OneCat` only
+   after the homwise gate passes.
+6. State and prove or stage `IsNCat(n,C) -> IsObjTruncCat(n,C)` with its exact
    univalence/evidence-truncation dependencies.
-6. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
+7. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
    defer the `OmegaEquiv`/`IsoEvidence` comparison there, migrate the remaining
    compatibility consumers, and retire the unscoped global claim.
 
@@ -3221,6 +3312,29 @@ but it is also not an unowned omission: Phase 13 and
   projections, and naturality before promotion; and
 - the strict inferred-LHS audit remains free of unreviewed E0/E1 candidates.
 
+### Discreteness and directed-dimension diagnostics
+
+- `IsDiscreteCat(C)` unfolds to exactly
+  `IsSetGrpd(Obj(C)) ×
+  OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))`, with computing Product
+  projections and no proof-field erasure;
+- a negative boundary records that `IsSetGrpd(Obj(C))` alone neither converts
+  to nor constructs `IsDiscreteCat(C)`;
+- `core_incl_hom_func(C,x,y)` has source `Path_cat(x=y)`, target
+  `Hom_cat(C,x,y)`, and object action definitionally equal to the existing
+  `path_to_hom_C` owner;
+- fixed-map equivalence of `Core_incl_func(C)` yields, through a general
+  hom-action theorem or an explicitly reviewed specialized derivation,
+  `OmegaEquivAlong_{Cat_cat}(core_incl_hom_func(C,x,y))` at arbitrary
+  endpoints;
+- the induced `hom_to_path` inverse satisfies both path-to-hom and hom-to-path
+  round trips propositionally/omega-coherently, with negative controls against
+  broad runtime cancellation;
+- `IsNCat(cat_zero,C)` unfolds to the exact selected `IsDiscreteCat(C)`, and
+  the successor unfolds exactly one hom level; and
+- one packaged `OneCat` consumer exercises the discrete-hom theorem through
+  the next hom level rather than merely projecting object-set evidence.
+
 ### Univalence diagnostics
 
 The first item is owned by `OETU-TYPE-EQUIV-ALGEBRA`. The groupoid round-trip,
@@ -3422,13 +3536,23 @@ remain an overstatement, but requiring fixed-map packaging before adopting
 this staged plan—or before promoting the symmetry operation itself—would invert
 the dependency on Candidate D.
 
-### `IsDiscreteCat` may expose missing category-equivalence infrastructure
+### `IsDiscreteCat` is selected, but its homwise adequacy may expose missing infrastructure
 
 Do not weaken discreteness to object-set truncation merely to make `OneCat`
-easy to declare. The concrete prerequisite is a fixed-functor
-`OmegaEquivAlong(Core_incl_func(C))` evidence layer integrated with the recursive
-Sigma-packaged `OmegaEquiv`; record it rather than postulating an opaque generic
-category-equivalence property.
+easy to declare. The exact contract is now selected as
+`IsSetGrpd(Obj(C)) ×
+OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))`, integrated with the recursive
+Sigma-packaged `OmegaEquiv` rather than an opaque generic category-equivalence
+property.
+
+That selection does not yet prove that the current/proposed certificate API
+can computationally expose full faithfulness. Promotion requires a derivation
+that every `core_incl_hom_func(C,x,y)` is a fixed-map omega-equivalence and a
+checked inverse/round-trip surface for `path_to_hom`. If the general
+`OmegaEquivAlong` hom-action theorem cannot be implemented without brittle
+choice or coherence machinery, record that concrete blocker and reconsider
+the evidence boundary; do not silently add a redundant third field or call
+object truncation “discrete.”
 
 ### Migrating `OmegaEquiv` changes a public normal form
 
@@ -3548,7 +3672,7 @@ that comparison dimension-correct.
 | `OETU-OMEGA-EQUIV-ALONG` | D0 not yet owner-position probed; D1 proposed normal-form migration; append-only evidence/package and endpoint expressibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention; D1 coordinates with the `OETU-CAT-UNIV-DECODER` contract | fixed-functor equivalence or discreteness is consumed | First pass D0 with a fresh source-position fixed-map owner, minimal Sigma package, reflexivity, and one recursive next-hom observation independent of the old owner. Then complete D1's op/Product, public destructor/decoder declaration migration, named declaration, integrated witness, fibre comparison, and full audits; rerun but do not duplicate the categorical-decoder-owned round trips and squares. |
 | `OETU-ADJUNCTION-INDEXED` | proposed focused migration; append-only indices, triangles, and named-operation boundary demonstrated | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)` at owner position; remove/transparentize left/right views, retain stable unit/counit observations, and migrate the 153-occurrence source/check/example surface with the runtime-erasure negative control. |
 | `OETU-STRUCTURE-DECLARATION` | proposed usability protocol; one append-only adjunction operation bridge demonstrated | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)` declarations; connect preselected unit/counit names only by typed proof-time comparisons while canonical computations retain stable observations; consider an elaborator/generator afterward. |
-| `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT-SYM`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. Consume the promoted symmetry core and package only the fixed maps actually required. |
+| `OETU-DISCRETE-CAT` | exact contract selected; append-only formation/hom-target probe passes; implementation blocked by explicit prerequisites | `OETU-TRUNC-LEVEL`, `OETU-PATH-CAT-SYM`, `OETU-OMEGA-EQUIV-ALONG`; homwise adequacy consumes the promoted fixed-map hom-action theorem | directed dimension slice begins | Implement `IsSetGrpd(Obj(C)) × OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))`; derive fixed-map equivalence of every `core_incl_hom_func`, expose `hom_to_path` with both round trips, and run a next-hom consumer. Do not substitute object truncation alone or duplicate homwise evidence without a recorded failed derivation. |
 | `OETU-NCAT` | proposed architecture, implementation deferred | `OETU-DISCRETE-CAT`, `OETU-TRUNC-LEVEL`, record convention | `IsDiscreteCat` is stable | Add `CatDim`, recursive `IsNCat`, and packaged `NCat`. |
 | `OETU-NCAT-OBJ-TRUNC` | theorem prerequisite | `OETU-NCAT`, categorical univalence, fixed-arrow evidence truncation | `OneCat` object truncation or iso comparison is consumed | Prove/stage `IsNCat(n,C) -> IsObjTruncCat(n,C)`; state explicitly that the converse fails. |
 | `OETU-ONECAT-ISO` | proposed replacement; global legacy interface frozen now | `OETU-NCAT`, global omega-level Cat univalence | `OneCat` exists; meanwhile any new global-iso consumer is found | Add no new arbitrary-`Cat` use; scope/derive `CatIsoUnivalence` for `OneCat`, migrate compatibility consumers, and retire the unscoped claim. |
@@ -3573,7 +3697,11 @@ Before this report becomes the active replacement plan:
 
 1. agree on kernel names for `TruncLevel`, `IsTruncGrpd`, truncated universes,
    `CatDim`, and `IsNCat`;
-2. agree on the definition boundary for `IsDiscreteCat`;
+2. approve the exact `IsDiscreteCat(C) := IsSetGrpd(Obj(C)) ×
+   OmegaEquivAlong_{Cat_cat}(Core_incl_func(C))` boundary and require, before
+   its active promotion, the homwise fixed-map equivalence whose object action
+   is `path_to_hom`, an arrow-to-path inverse, both round trips, and one
+   recursive `IsNCat` consumer;
 3. agree that the one-constructor inductive record convention is the default
    for finite named structures;
 4. approve neutral primary `OmegaEquivAlong(F)` evidence plus the Sigma-
@@ -3652,7 +3780,9 @@ agreement, no self-opposite collapse, and a genuine PathSym functor whose
 generic arrow action owns anti-composition, whose strict/J-derived symmetry and
 involution boundaries are explicit, whose Core-opposite square is coherent,
 and whose fixed-map equivalence is packaged when consumed;
-OneCat is defined through directed hom truncation/discreteness;
+OneCat is defined through recursive directed hom dimension whose exact zero
+base is the selected set-object/fixed-core-map `IsDiscreteCat`, with homwise
+`path_to_hom` adequacy established;
 fixed-map omega-equivalence is the primary evidence layer, its property-
 valuedness is proved when that claim is consumed, and its Sigma package
 supports usable named declarations and categorical univalence;
@@ -3745,6 +3875,15 @@ warning classification, catalog checks, health refresh, and make ci.
   feasibility evidence but do not confer formal owner-position `probed`
   status. In particular, the later Candidate D reruns do not constitute the
   new D0 recursive-owner probe.
+- The selected discreteness boundary is supported by the ignored append-only
+  `tmp/probes/oetu_discrete_cat_contract.lp`. Its successful warning-enabled
+  log ends in `20260715-114925`; all 1,109 warning blocks are imported from the
+  active source, with no new probe-local family. The probe combines the
+  truncation and fixed-map feasibility surfaces, checks the exact Product and
+  `Cat_cat` indices, checks that the core hom-action object projection is
+  `path_to_hom`, and types the required homwise theorem. It deliberately
+  supplies no inhabitant of that theorem and therefore does not make
+  `IsDiscreteCat` active or owner-position probed.
 - The later foundational feasibility review is supported by the ignored
   append-only probes `tmp/probes/oetu_hott_elementary_formers.lp`,
   `tmp/probes/oetu_hott_pi_adequacy.lp`, and
