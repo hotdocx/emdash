@@ -10,7 +10,7 @@ Implementation-Handoff: #implementation-handoff-start-here
 Current-Implementation-Slice: none started; default next slice is OETU-ELEMENTARY-HOTT / Candidate G
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
 Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f
-Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, and full-file `Path_cat` composition-owner audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, groupoid/categorical decoder ownership is split around D1 and separated from `TypeEquiv` algebra, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
+Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, full-file `Path_cat` composition/collapse-removal audit, and a minimal owner-position path-symmetry-functor audit are complete, Candidate G is the default first implementation slice, Candidate D is split into a D0 recursive-owner feasibility gate and a D1 public normal-form migration, Candidate E is split into E0 composition/collapse removal and E1 symmetry-core promotion with later fixed-map equivalence packaging, groupoid/categorical decoder ownership is split around D1 and separated from `TypeEquiv` algebra, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
 
 ## Goal
 
@@ -129,6 +129,7 @@ proposed successor until its adoption/migration record is made explicit.
 | H0 elementary core | partly active (`Unit`, Pi, Sigma, equality; native `nat`), but decoded Empty/Bool/Nat are missing | Complete Candidate G with owner-position evidence and durable active checks. |
 | H1 ordinary HoTT compatibility | incomplete/hybrid | Complete Pi equivalence packaging, arbitrary Sigma/record round trips, `TypeEquiv` algebra, and the groupoid-decoder-owned round trips and selected action beta. |
 | H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
+| Path algebra/opposite | E0 composition/collapse removal and E1 symmetry core owner-position probed; neither active | Promote E0 with durable checks and action-unit cleanup, then classify the twelve E1 warning blocks and promote its functor/action/propositional-coherence core; fixed-map packaging follows Candidate D. |
 | Omega0/category analogue | broad active first draft plus append-only fixed-map/indexed expressibility | First pass Candidate D0's owner-position recursive-owner/Sigma/refl/next-hom gate; only then attempt Candidate D1's public closure/decoder migration and integrated witness, followed later by discreteness/`OneCat`. |
 | Indexed adjunction migration | separate append-only feasibility track; active owner unchanged | Run the owner-position 153-occurrence migration with triangle, opposite, mate, and named-operation controls. |
 | Direct observational universe identity | later explicit research track; not an immediate MVP gate | Select a local direct-equality or identity-view architecture only after the equality/action and univalence-decoder owners are stable. |
@@ -157,13 +158,24 @@ The present feasibility assessment is positive but bounded:
    therefore currently better supported: `comp_fapp0` owns category-level
    composition, while `hom_postcomp_fapp0` and
    `hom_precomp_along_fapp0` separately own oriented runtime actions.
-5. The best/original goal therefore remains credible as a staged
+5. Removal of the self-opposite collapse in the shared-composition full-file
+   candidate also passes the entire migrated suite warning-enabled, reducing
+   the unjoinable-pair inventory further to 1,072. A minimal
+   `PathSym_A` functor from `Path(A)^op` to `Path(A)` then passes the full
+   source and migrated suite
+   with strict reflexivity and anti-composition through generic functoriality,
+   propositional `eq_sym` agreement and involution, and a pointwise
+   `Core_incl_func`/opposite square. That candidate reports 1,084 unjoinable
+   pairs: twelve reports mention the new functor owner and remain to classify,
+   while the strict inferred-LHS audit has no unreviewed slot.
+6. The best/original goal therefore remains credible as a staged
    implementation and research program. It is not yet demonstrated as one
    globally normalizing implementation. The largest concrete risks are the
-   remaining `Path_cat` symmetry/self-opposite repair, public shaped-equality
-   migration, Pi equivalence packaging, active `OmegaEquiv` normal-form
-   migration, and the broad adjunction consumer migration.
-6. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
+   promotion/classification of the new `Path_cat` symmetry core and its later
+   fixed-map equivalence packaging, public shaped-equality migration, Pi
+   equivalence packaging, active `OmegaEquiv` normal-form migration, and the
+   broad adjunction consumer migration.
+7. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
    semantic/metatheoretic justification do not block the concrete MVP, but
    every report and code comment must preserve that boundary.
 
@@ -171,7 +183,7 @@ The revised audit verdict is:
 
 | Boundary | Revised conclusion | Remaining promotion gate |
 | --- | --- | --- |
-| `Path_cat` composition | No fundamental symmetry/asymmetry contradiction. Shared category composition plus oriented pre/post runtime actions is full-file feasible. | Promote the two category-unit bridges; clean/classify four oriented action-unit bridges; remove self-opposite collapse and implement symmetry. |
+| `Path_cat` composition and opposite/symmetry | No fundamental symmetry/asymmetry contradiction. E0's shared category composition, oriented pre/post runtime actions, and collapse removal are full-file feasible. E1's minimal symmetry-functor core is now owner-position probed. | Promote E0 with its two category-unit bridges; clean/classify four oriented action-unit bridges; classify the twelve E1 warning reports and promote its functor-action/reflexivity/propositional-coherence core. Package the functor as fixed-map omega-equivalence only after Candidate D supplies that owner. |
 | Hybrid generic/shaped `J` and Candidate H | Coherent candidate. Generic primitive J may prove propositional Pi eta even when the equality classifier is shaped. | Owner-position Pi bridge and `IsEquivMap` packaging; fibrancy only for extra runtime betas on arbitrary structured constructors. |
 | Direct universe equality | Necessary for the eventual full-observational endpoint, not the immediate H1 MVP. | Phase 13 local owner research after decoder/action stabilization; no external design is a replication target. |
 | Global ordinary-iso univalence | Exploratory compatibility approximation, not successor architecture for arbitrary `Cat`. | Freeze new uses in Phase 0; migrate/retire after OneCat-scoped replacement. |
@@ -194,7 +206,9 @@ not durable active diagnostics.
 | `tmp/probes/oetu_hott_pi_adequacy.lp` | Standard diagonal `happly`, `funext` with related-input action, judgmental beta, non-judgmental arbitrary eta boundary, and reflexive propositional-eta basis. | Select stable public owners and construct the actual `IsEquivMap(PiHapply)` evidence rather than citing beta/eta sketches. |
 | `tmp/probes/oetu_hott_pi_stable_funext.lp` | Stable `PiHapply`/`PiFunext` heads, related-input action, a two-rigid-head typed proof-time reflexive bridge, and propositional eta via generic `ind_eqr`. | Reprobe at owner position, retain the explicit hybrid generic-`J` contract, and package the active equivalence; fibrancy is required only for additional structural computation, not for this generic propositional eta proof. |
 | `tmp/probes/oetu_path_oriented_owner_probe.lp` | The existing postcomposition and precomposition point heads give distinct oriented runtime presentations of path composition, each can receive both narrow `eq_refl` unit bridges, and their existing direct `unif_rule` supplies typed proof-time comparison. | Append-only action-owner evidence only. Its four replaceable-variable advisories and one local overlap with postcomposition accumulation must be cleaned/classified; it does not select either action head as the category-level composition normal form. |
-| `tmp/probes/oetu_path_shared_comp_owner_full.lp` plus `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp` | Owner-position full-file candidate: generic `comp_fapp0` remains the `Path_cat` composition head, two `eq_refl` projection-order unit bridges are added, J-derived comparison with `eq_trans` is propositional, and the entire migrated active check suite passes warning-enabled. | Promote only together with removal of the old `comp_fapp0(Path_cat)->eq_trans` fold, durable agreement/unit/associativity checks, and the still-open self-opposite/symmetry repair. |
+| `tmp/probes/oetu_path_shared_comp_owner_full.lp` plus `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp` | Owner-position E0 composition candidate: generic `comp_fapp0` remains the `Path_cat` composition head, two `eq_refl` projection-order unit bridges are added, J-derived comparison with `eq_trans` is propositional, and the entire migrated active check suite passes warning-enabled. | Promote only together with removal of the old `comp_fapp0(Path_cat)->eq_trans` fold and durable agreement/unit/associativity checks. This artifact deliberately retains the self-opposite collapse and therefore supplies no E1 evidence. |
+| `tmp/probes/oetu_path_symmetry_removal_full.lp` plus `tmp/probes/oetu_path_symmetry_removal_checks_full.lp` | E0 removal-only extension of the shared-composition candidate: deleting `Op_cat(Path_cat(A))->Path_cat(A)` still passes the full source and entire migrated suite warning-enabled, with 1,072 unjoinable-pair reports. | This is a sounder promotion intermediate, not a symmetry implementation. It proves that E0 need not retain the bad collapse while E1 is developed. |
+| `tmp/probes/oetu_path_symmetry_owner_full.lp` plus `tmp/probes/oetu_path_symmetry_owner_checks_full.lp` | Owner-position E1 core: `PathSym_A : Path(A)^op -> Path(A)` fixes objects; its arrow action is the readable `path_sym` owner; a narrow reflexivity bridge computes; generic functoriality supplies anti-composition; J supplies propositional `eq_sym` agreement and involution; and a pointwise `Core_incl_func`/opposite square is proved. The full migrated suite, warning-enabled source/checks, negative conversion controls, and strict LHS audit pass. | The 1,084 inventory contains twelve new reports mentioning `PathSym_A`; classify them with both-order consumers before promotion. Functor-level natural packaging and `OmegaEquivAlong(PathSym_A)` wait for the fixed-map owner rather than being faked through the old opaque package. |
 | `tmp/probes/oetu_path_oriented_owner_full.lp` and its focused unit/bridge/associativity consumers | Negative owner-position comparison: folding `comp_fapp0(Path_cat)` to `hom_postcomp_fapp0` preserves both units and typed pre/post agreement. | Associativity consumers exceed the bounded check, so this fold is rejected unless the global associativity interaction is redesigned and remeasured. |
 
 To reproduce any row, run the following command with that row's path:
@@ -218,12 +232,23 @@ eight scratch-local replaceable-pattern-variable advisories. These later
 passes do not change either artifact's append-only status or supply the absent
 D0 recursive-owner computation.
 
-The latest path-owner audit log ends in `20260714-234330`. The shared-
-`comp_fapp0` full-file source and migrated check suite finish successfully
-with 1,091 unjoinable-pair reports. The action-owner fold's unit and bridge
-consumers finish, while its associativity consumers time out. These positive
-and negative results are part of Candidate E's selection evidence and should
-not be collapsed into the weaker phrase “append-only feasibility.”
+The original path-owner warning-enabled migrated-suite log ends in
+`20260714-234330`; a byte-identical later rerun ends in `20260715-000459`.
+The shared-`comp_fapp0` full-file source and migrated check suite finish
+successfully with 1,091 unjoinable-pair reports. The action-owner fold's unit
+and bridge consumers finish, while its associativity consumers time out.
+These positive and negative results are part of Candidate E0's selection
+evidence and should not be collapsed into the weaker phrase “append-only
+feasibility.”
+
+The 2026-07-15 E0 collapse-removal source/check logs end in
+`20260715-015457` and `20260715-015535`; both pass, and the source reports
+1,072 unjoinable pairs. The final E1 symmetry-owner source/check logs end in
+`20260715-020314` and `20260715-020507`; both pass,
+the source reports 1,084 pairs, exactly twelve warning blocks mention
+`Path_sym_func`, the open strict/J-derived and double-symmetry conversions
+remain negative as intended, and the strict inferred-LHS audit reports zero
+unreviewed candidates. Counts are warning inventories, not confluence proofs.
 
 Older `tmp/probes/univalence_*` artifacts belong to the June 23 predecessor
 plan. They are not prerequisites for Candidate G and need not be read during
@@ -315,8 +340,8 @@ This first slice explicitly does **not** claim:
 After Candidate G, Candidates A (record convention) and B (truncation property
 kernel) are the default low-risk infrastructure slices; they may be ordered by
 the first concrete consumer. Candidate H and the H1 compatibility ledgers can
-then make the ordinary HoTT surface complete while Candidate E repairs the
-path owner required before public Candidate C registration.
+then make the ordinary HoTT surface complete while Candidate E0/E1 promotes
+the now-probed path owners required before public Candidate C registration.
 
 ### Global roadmap and dependency outline
 
@@ -340,7 +365,8 @@ Ordinary HoTT compatibility
         ───────────────────────────────────────────────────────> H1 MVP
 
 Public observational equality and path algebra
-  Candidate E: shared comp_fapp0 Path_cat owner + symmetry repair
+  Candidate E0: shared comp_fapp0 Path_cat owner + collapse removal
+        ─> Candidate E1: PathSym functor/action + propositional coherence
         ─> Candidate C: public shaped reflexivity/reflexive J
         ─> structural action ─> fibrancy/dependent J ─> former-by-former migration
 
@@ -350,7 +376,8 @@ Omega/category extension
   categorical decoder contract + passing D0
         ─> Candidate D1 + categorical decoder finalization:
            op/Product + public decoder migration + integrated witness
-        ─> IsDiscreteCat / IsNCat / OneCat
+  promoted E1 symmetry core + Candidate D1 fixed-map owner
+        ─> PathSym/Core fixed-map packages ─> IsDiscreteCat / IsNCat / OneCat
         ─> one-next-hom Omega0 univalence/action witness
 
 Separate category migration lane
@@ -362,7 +389,7 @@ Later higher layer
   stratified universes / Cat_cat:Cat metatheory remain a separate deferred research phase
 ```
 
-Candidates C, D0, E, F, and H remain available immediately as focused design
+Candidates C, D0, E0/E1, F, and H remain available immediately as focused design
 or owner-position probes; D1 waits for D0. “Immediately available” does not
 bypass their listed promotion dependencies, and Candidate F's adjunction
 witness never substitutes for H0/H1/Omega0 adequacy.
@@ -390,7 +417,8 @@ During and after a slice:
   intended owner and checked with the relevant warnings/reduction orders;
 - use `append-only feasibility demonstrated` for the seven original import
   probes and never shorten that phrase to `probed`; record the later shared-
-  `comp_fapp0` candidate separately as owner-position probed;
+  `comp_fapp0`, collapse-removal, and symmetry-owner candidates separately as
+  owner-position probed, with their differing scopes and warning inventories;
 - record new architectural decisions under “Decisions Accepted For This
   Proposal,” and record rejected runtime orientations under risks/diagnostics
   rather than silently deleting the reason;
@@ -563,6 +591,17 @@ This proposal incorporates the following project directions.
     fixed-map normal-form migration. `TypeEquiv`/`IsEquivMap` identity,
     symmetry, and composition remain the exclusive algebra task; a migration
     may rerun decoder diagnostics but does not copy their semantic bodies.
+27. **`Path_cat` symmetry is a functor action, not a second path algebra.**
+    E0 removes both the composition-to-`eq_trans` fold and the definitional
+    self-opposite collapse. E1 introduces `PathSym_A : Path(A)^op -> Path(A)`;
+    its object action is identity and its capped arrow action is the strict
+    `path_sym` owner. Generic `fapp*` functoriality owns anti-composition, with
+    one narrow reflexivity projection bridge. Agreement with J-derived
+    `eq_sym`, double-symmetry involution, and the initial `Core_incl_func`
+    opposite square are propositional. No runtime double-symmetry cancellation
+    or second anti-composition rewrite is selected. Fixed-map equivalence
+    packaging of `PathSym_A` waits for Candidate D rather than depending on the
+    obsolete opaque `OmegaEquiv` interface.
 
 ## Current Baseline And Review Findings
 
@@ -718,8 +757,8 @@ comparison remains an owner-position candidate. Its generic-J propositional eta
 is valid under the selected hybrid contract; it is not evidence that arbitrary
 structured Pi-path elimination has acquired a new computational rule.
 
-The later full-file `Path_cat` audit strengthens one boundary beyond append-only
-feasibility:
+The later full-file `Path_cat` audits strengthen this boundary beyond
+append-only feasibility:
 
 - removing `comp_fapp0(Path_cat)->eq_trans` leaves generic `comp_fapp0` as the
   category-level path-composition normal form;
@@ -732,11 +771,20 @@ feasibility:
   unjoinable-pair count reduced from 1,109 to 1,091;
 - in contrast, folding the category-level head to `hom_postcomp_fapp0` makes
   the isolated units and pre/post comparison pass but causes the bounded
-  associativity consumers to time out.
+  associativity consumers to time out;
+- deleting the remaining definitional self-opposite collapse from the shared-
+  composition candidate preserves the complete migrated suite and lowers the
+  warning inventory from 1,091 to 1,072; and
+- adding the E1 `PathSym_A` functor/action owner, reflexivity bridge,
+  propositional `eq_sym` agreement/involution, and pointwise Core-opposite
+  square preserves the complete migrated suite with 1,084 reports and a clean
+  strict LHS audit. Twelve reports mention the new functor and remain an
+  explicit classification gate.
 
-This selects the layered composition candidate for Phase 4. It does not solve
-the separate self-opposite/symmetry migration, and the warning reduction is not
-a proof of global confluence.
+This selects E0's layered composition and collapse removal and E1's minimal
+symmetry core for Phase 4. It does not yet promote either slice, classify the
+twelve E1 interactions, supply functor-level natural/equivalence packaging, or
+prove global confluence.
 
 ## Four Distinct Notions That Must Remain Separate
 
@@ -1892,7 +1940,7 @@ and revalidate those diagnostics because their equivalence type changes, but
 does not become a second semantic owner. `TypeEquiv` algebra separately owns
 identity, symmetry, and composition of equivalences and `IsEquivMap` evidence.
 
-## `Path_cat` Composition Is Probed; Symmetry Repair Remains A Prerequisite
+## `Path_cat` Composition, Collapse Removal, And Symmetry Core Are Probed
 
 The path-category redesign must precede `IsDiscreteCat`, `IsNCat`, `OneCat`,
 and any **public** shaped-reflexivity slice that registers with path
@@ -1900,19 +1948,22 @@ composition or symmetry. Shaped owner-position research probes may run earlier,
 but promoted rules must not register against an owner that a later phase plans
 to replace.
 
-Required decisions:
+The owner choices are now selected by full-file probes, but remain unpromoted:
 
-1. remove the runtime collapse `Op_cat(Path_cat(A)) -> Path_cat(A)`;
-2. represent self-oppositeness by a functor/equivalence whose arrow action is
-   path symmetry;
-3. promote or reject the now-selected shared-`comp_fapp0` composition candidate
-   using its full-file evidence;
+1. E0 removes the runtime collapse `Op_cat(Path_cat(A)) -> Path_cat(A)` and the
+   old composition fold;
+2. E1 represents self-oppositeness by `PathSym_A`, whose arrow action is the
+   strict path-symmetry owner; fixed-map equivalence packaging follows only
+   when Candidate D supplies the selected package;
+3. promote the selected shared-`comp_fapp0` composition candidate using its
+   full-file evidence;
 4. make `Path_cat` satisfy the active `Cat` contract: both units compute at
    runtime and associativity is available through the generic typed proof-time
    equation, without installing a second path-specific associativity owner;
 5. test generic associativity and both unit diamonds at arbitrary paths;
-6. reconnect `Core_incl_func` and `path_to_hom` only after the selected path
-   composition normal form is stable.
+6. retain `Core_incl_func` and `path_to_hom` under generic functorial ownership
+   and promote their opposite square propositionally before any stronger
+   functor-level packaging.
 
 Do not add a second specialized `Core_incl_func` composition owner merely to
 hide a failure in `Path_cat` itself.
@@ -1957,20 +2008,98 @@ full-file attempt to choose `hom_postcomp_fapp0` itself as the result of
 associativity consumers time out. That orientation is therefore rejected until
 the interaction with global associativity is redesigned.
 
-Symmetry is a separate remaining owner decision. The preferred MVP boundary is:
+The full-file collapse-removal audit shows that E0 can delete
+`Op_cat(Path_cat(A))->Path_cat(A)` immediately: the complete migrated suite
+still passes and the warning inventory falls to 1,072. E0 therefore does not
+need to preserve a false definitional identification while E1 is developed.
+
+E1's selected owner contract is:
 
 ```text
-Path_cat opposite action uses one strict path-symmetry owner;
-the active J-derived eq_sym remains a semantic HoTT reference;
-strict-versus-J-derived symmetry agreement begins propositionally;
-Op_cat(Path_cat(A)) is connected by a real symmetry functor/equivalence, not a collapse.
+PathSym_A : Functor(Op_cat(Path_cat(A)), Path_cat(A))
+
+PathSym_A[x] -> x
+
+path_sym(p : x = y)
+  := fapp1_fapp0(PathSym_A,p) : y = x
+
+path_sym(eq_refl(x)) -> eq_refl(x).
 ```
 
-Later evidence may justify redesigning public `eq_trans`/`eq_sym`, but neither
-comparison is definitional in this candidate. `Core_incl_func` should continue
-to use generic functoriality, with its composition diagnostic stated using the
-shared `comp_fapp0(Path_cat)` term. Transport/`ap` and the symmetry opposite
-functor are the first consumers of the propositional agreement boundary.
+The source arrow `p : x = y` is read as an arrow `y -> x` in the opposite
+path category. `path_sym` is a readable transparent view; the rigid runtime
+owner is the capped arrow action of `PathSym_A`. Consequently the existing
+generic functoriality cut, rather than a new path-specific composition rule,
+supplies the exact anti-composition computation. For `p : x = y` and
+`q : y = z`:
+
+```text
+comp_Path(path_sym(p),path_sym(q))
+  -> path_sym(comp_Path(q,p)),
+```
+
+or, with all ordered slots visible:
+
+```text
+comp_fapp0(Path_cat(A),z,y,x,path_sym(p),path_sym(q))
+  -> path_sym(comp_fapp0(Path_cat(A),x,y,z,q,p)).
+```
+
+Only the narrow arrow-action/reflexivity bridge is specialized. The generic
+`fapp*` owner still supplies identity and composition for the functor; no
+second anti-composition calculus is introduced.
+
+The initial coherence boundary is deliberately propositional:
+
+```text
+path_sym_agrees_eq_sym(p) : path_sym(p) = eq_sym(p)
+path_sym_invol(p)         : path_sym(path_sym(p)) = p.
+```
+
+Both are J-derived and reflexive at `eq_refl`. Open `path_sym(p)` and
+`eq_sym(p)` are not convertible, and open double symmetry has no runtime
+cancellation rule. At functor level the two composites
+
+```text
+PathSym_A o Op_func(PathSym_A) : Path_cat(A) -> Path_cat(A)
+Op_func(PathSym_A) o PathSym_A : Op_cat(Path_cat(A)) -> Op_cat(Path_cat(A))
+```
+
+are required to compare propositionally/naturally with the corresponding
+identity functors; they are not selected as broad runtime cancellations. The
+pointwise involution theorem is the current computationally checked basis for
+that later packaging.
+
+The exact initial `Core_incl_func` interaction is the square
+
+```text
+Core_incl_func(Op_cat(C)) o PathSym_(Obj(C))
+  ~ Op_func(Core_incl_func(C)),
+```
+
+whose arrow component for `p : x = y` is
+
+```text
+path_to_hom_(Op_cat(C))(path_sym(p))
+  = path_to_hom_C(p).
+```
+
+The pointwise arrow equation is J-derived and passes in the E1 probe. The `~`
+begins as propositional/natural comparison rather than definitional equality;
+full functor-path packaging waits for the selected Pi/funext surface. Likewise,
+`OmegaEquivAlong(PathSym_A)` is packaged only after Candidate D supplies the
+fixed-map owner. This later packaging blocks `OneCat`/discreteness consumers,
+but it is not required merely to promote the symmetry operation used by a
+public shaped-reflexivity registry.
+
+The E1 full-file source and migrated suite pass warning-enabled with 1,084
+unjoinable-pair reports and zero unreviewed strict-LHS candidates. Twelve
+reports mention `PathSym_A`: the reflexivity bridge meets oriented hom-action
+and naturality cuts, while the object projection meets generic DefIso/Product
+projection consumers. They are a measured classification/both-order gate for
+promotion, not evidence of a second semantic owner. Later evidence may justify
+redesigning public `eq_trans`/`eq_sym`, but neither strict/J-derived comparison
+is definitional in this candidate.
 
 ## Product Reflexivity Policy
 
@@ -2222,7 +2351,7 @@ directed construction:
 
 | Type/groupoid notion | Category/omega counterpart | Kind of correspondence | Initial status and iteration boundary |
 | --- | --- | --- | --- |
-| identity/path | `Path_cat`, `Core_cat`, `Core_incl_func` | groupoidal lift into directed structure | active first draft; category-level composition is owner-position probed, while opposite/symmetry repair remains a prerequisite |
+| identity/path | `Path_cat`, `Core_cat`, `Core_incl_func` | groupoidal lift into directed structure | active first draft; E0 composition/collapse removal and E1 symmetry core are owner-position probed, while warning classification, promotion, functor-level natural packaging, and later fixed-map equivalence packaging remain prerequisites |
 | functions and dependent families | functors, `Catd`, displayed functors/transfors | genuinely directed analogue | active generic owners; retain base-arrow and transfor hom-action |
 | dependent Pi/Sigma | `Pi_cat`, `Sigma_cat` and their displayed action | genuinely directed analogue | broad infrastructure active; redesigned equality/univalence next-hom witness is a prerequisite |
 | homotopies | transfors and displayed transfors | genuinely directed analogue | active through generic `tapp*` owners; record the first rung that remains iterable |
@@ -2320,8 +2449,8 @@ append-only import probe and does not change the row's formal status.
 | Packaged `PropU_grpd`/`SetU_grpd`/`GroupoidU_grpd` | prerequisite | Carrier/evidence record skeleton has append-only feasibility evidence; property paths, closure, universe-level truncation, and owner-position audit remain open. |
 | Truncation reflectors | deferred | Require the higher-constructor/restricted-elimination architecture. |
 | `Cat`, functors, transfors, iterated hom actions | active | Broad generic infrastructure exists and remains the owner of ordinary functoriality/naturality. |
-| `Path_cat` category-level composition | probed | Shared-`comp_fapp0` owner-position full-file candidate passes both runtime units, generic typed associativity, J-derived agreement, the migrated full check suite, and warning-enabled checking. Promotion and durable active checks remain. |
-| `Path_cat` opposite/symmetry action | prerequisite | The active definitional self-opposite collapse remains unsound as endpoint reversal; a real symmetry functor/equivalence and its action diamonds are still required. |
+| `Path_cat` E0 category composition and collapse removal | probed | Shared-`comp_fapp0` plus two unit bridges passes both runtime units, generic typed associativity, J-derived agreement, the migrated full check suite, and warning-enabled checking; deleting the self-opposite collapse also passes and lowers the inventory to 1,072. Promotion and durable active checks remain. |
+| `Path_cat` E1 opposite/symmetry core | probed | The owner-position `PathSym_A` functor/action, strict reflexivity and generic anti-composition, propositional `eq_sym` agreement/involution, pointwise Core-opposite square, negative controls, full migrated suite, warnings, and strict LHS audit pass. Classify twelve new warning blocks before promotion; functor-level natural and fixed-map equivalence packages remain prerequisites. |
 | Global ordinary-iso univalence compatibility | active legacy, frozen for new design | Current `cat_iso_univalence(C)` checks remain during migration, but new general-category architecture uses `CatUnivalence`; the replacement is OneCat-scoped. |
 | First-class `OmegaEquiv` observations | active | Recursive observation/reflexivity interface exists; unrestricted introduction/corecursion is absent. |
 | Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | prerequisite | The transitional bridge, opaque evidence/Sigma package, and exact fixed-arrow inverse/higher-cell telescope have append-only feasibility evidence. D0's independent recursive owner, minimal package, reflexivity, and one next-hom computation remain unprobed at owner position; D1's op/Product generators, public decoder migration, integrated witness, and full audit follow only after D0. Property-valuedness remains separate. |
@@ -2433,6 +2562,8 @@ truncation-specific mathematical promotion candidate.
 
 ### Phase 4: Path-Algebra Ownership And `Path_cat` Repair
 
+**E0 shared composition and collapse removal:**
+
 1. Promote/refine the full-file-tested category-level composition candidate:
    remove the `comp_fapp0(Path_cat)->eq_trans` fold, retain the shared generic
    `comp_fapp0` head, and add the two narrow `eq_refl` unit bridges.
@@ -2442,16 +2573,39 @@ truncation-specific mathematical promotion candidate.
    bridges demonstrated append-only. Do not fold category composition into
    either action head while the measured associativity timeout remains.
 3. State and check the J-derived propositional comparison with `eq_trans`.
-4. Remove/probe removal of definitional self-oppositeness.
-5. Introduce/probe the path-symmetry opposite functor/equivalence and its
-   propositional comparison with `eq_sym`.
-6. Add both runtime-unit diamonds and typed generic associativity diagnostics.
-7. Revalidate `Core_incl_func`, `path_to_hom`, transport/`ap`, `DefIso`,
+4. Remove definitional self-oppositeness in the same candidate. Reuse the
+   passing removal-only full source/suite evidence and keep a durable negative
+   control against reintroducing the collapse.
+5. Add both runtime-unit diamonds and typed generic associativity diagnostics;
+   revalidate `Core_incl_func`, `path_to_hom`, transport/`ap`, `DefIso`,
    opposite, and Product consumers.
 
+**E1 symmetry-functor core:**
+
+6. Promote/refine `PathSym_A : Path(A)^op -> Path(A)` at the functor owner.
+   Keep `path_sym` a transparent arrow-action view, its object action identity,
+   and the one narrow `eq_refl` arrow-action bridge.
+7. Let generic functoriality own the ordered anti-composition computation; do
+   not add a standalone `path_sym(comp)` rewrite. Retain explicit identity-
+   first/action-first and composition/action-first diagnostics.
+8. Promote J-derived propositional `path_sym = eq_sym` agreement and
+   involution, with negative controls showing that neither open comparison is
+   a runtime conversion.
+9. Promote the pointwise `Core_incl_func(Op C) o PathSym` versus
+   `Op_func(Core_incl_func C)` arrow square. Defer functor-level natural/path
+   packaging until the Pi/funext owner is stable.
+10. Classify the twelve full-file warning reports mentioning `PathSym_A`, add
+    both-order tests for their oriented hom-action, DefIso, Product-projection,
+    and naturality families, and retain the clean strict-LHS result.
+11. Package `PathSym_A` as `OmegaEquivAlong(PathSym_A)` only after Candidate D
+    supplies the fixed-map owner. Do not bridge it through the obsolete opaque
+    `OmegaEquiv` normal form merely to close Phase 4.
+
 This phase controls the composition and symmetry owners used by later public
-shaped-reflexivity registration. It does not prevent earlier isolated shaped
-research probes.
+shaped-reflexivity registration. E0 and the E1 core may promote independently
+of later fixed-map equivalence packaging; `OneCat` and discreteness still wait
+for that packaging and their other listed prerequisites. This phase does not
+prevent earlier isolated shaped research probes.
 
 ### Phase 5: Equality MVP And Immediate Shaped Fast Track
 
@@ -2607,12 +2761,15 @@ cleanup, opposite/mate surface, and performance/warning audits remain open.
 ### Phase 9: Discreteness, Directed Dimension, And `OneCat`
 
 1. Add `IsObjTruncCat` independently.
-2. Select and implement `IsDiscreteCat` from object-set truncation and
+2. Using the promoted E1 core and Candidate D fixed-map owner, package the
+   exact `PathSym_A` functor as fixed-map omega-equivalence and package the
+   functor-level Core/opposite comparison required by the first consumer.
+3. Select and implement `IsDiscreteCat` from object-set truncation and
    `OmegaEquivAlong(Core_incl_func(C))`.
-3. Add `CatDim`, recursive `IsNCat`, `NCat(n)`, `ZeroCat`, and `OneCat`.
-4. State and prove or stage `IsNCat(n,C) -> IsObjTruncCat(n,C)` with its exact
+4. Add `CatDim`, recursive `IsNCat`, `NCat(n)`, `ZeroCat`, and `OneCat`.
+5. State and prove or stage `IsNCat(n,C) -> IsObjTruncCat(n,C)` with its exact
    univalence/evidence-truncation dependencies.
-5. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
+6. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
    defer the `OmegaEquiv`/`IsoEvidence` comparison there, migrate the remaining
    compatibility consumers, and retire the unscoped global claim.
 
@@ -2768,7 +2925,7 @@ dependent/nested case, and complete-consumer audits remain promotion gates.
 This candidate is immediately available; it is not deferred behind completion
 of the conservative observational MVP. It may proceed immediately as an
 owner-position probe, but public registration with composition/symmetry follows
-Candidate E's path-owner decision.
+Candidate E1 core promotion.
 
 ### Candidate D0/D1: primary fixed-map omega-equivalence and Sigma package
 
@@ -2816,7 +2973,9 @@ until Steps 4--7 and the full audit pass with Steps 1--3 in the same public
 full-file candidate. Property-valuedness remains a separate theorem and the
 `IsOmegaEquivArrow` name is not used as evidence for it.
 
-### Candidate E: `Path_cat` focused repair
+### Candidate E0/E1: `Path_cat` focused repair
+
+**E0 shared composition and collapse removal:**
 
 ```text
 promote/refine shared comp_fapp0 category-level composition candidate;
@@ -2824,18 +2983,40 @@ add two narrow eq_refl unit bridges;
 retain oriented pre/post runtime action owners and proof-time comparison;
 clean/classify their four separately demonstrated eq_refl action-unit bridges;
 retain J-derived eq_trans only as a propositional reference;
-remove self-opposite collapse and probe the symmetry functor/equivalence.
+remove the self-opposite collapse without yet claiming a replacement symmetry.
 ```
 
-Risk: medium overall. The composition half is now owner-position probed: the
-full source and migrated check suite pass warning-enabled, including units,
-generic typed associativity, and J-derived agreement, with 1,091 rather than
-1,109 unjoinable-pair reports. The attempted fold to the postcomposition head
-is rejected because associativity consumers time out. Removing definitional
-self-oppositeness and implementing the symmetry functor/equivalence remain
-medium-high-risk prerequisites for `OneCat` and public shaped-reflexivity
-registration with symmetry; the oriented action-unit bridges also retain one
-append-only local overlap to classify before promotion.
+E0 is owner-position probed. The shared-composition source/suite passes with
+1,091 rather than the active 1,109 unjoinable-pair reports, and the same
+candidate with the collapse removed passes with 1,072. The attempted fold to
+the postcomposition head is rejected because associativity consumers time out.
+E0 may be promoted as a semantically honest intermediate without waiting for
+E1, subject to durable checks and the oriented action-unit cleanup.
+
+**E1 symmetry-functor core:**
+
+```text
+PathSym_A : Path(A)^op -> Path(A), with identity object action;
+path_sym := its capped arrow action;
+one narrow path_sym(eq_refl) -> eq_refl bridge;
+generic-functorial anti-composition, with no duplicate specialized law;
+J-derived propositional agreement with eq_sym and propositional involution;
+pointwise Core_incl_func/opposite square;
+no runtime double-symmetry cancellation;
+fixed-map OmegaEquivAlong packaging only after Candidate D.
+```
+
+E1's core is also owner-position probed: the full source and migrated suite
+pass warning-enabled with 1,084 reports, the strict LHS audit has no unreviewed
+slot, and open strict/J-derived symmetry and open double symmetry remain
+non-convertible as intended. Twelve reports mention the new functor owner and
+must receive both-order classification before promotion. The later functor-
+level natural comparison and fixed-map equivalence package remain
+prerequisites for `OneCat`/discreteness, but they do not force public shaped-
+path registration to wait after the E1 core itself is promoted.
+
+Risk: medium for E0; medium to high for E1 promotion/classification and its
+later equivalence packaging.
 
 ### Candidate F: indexed adjunction migration spike
 
@@ -2901,12 +3082,14 @@ probe but is not yet a formally `probed` matrix row.
 
 Candidate G is the default first implementation slice for a new handoff;
 Candidates A and B are the next safest promotion candidates and may be ordered
-by their first concrete consumer. Candidates C, D0, E, F, and H are all
+by their first concrete consumer. Candidates C, D0, E0/E1, F, and H are all
 immediately available as design/owner-position probes. Candidate C may become
-a narrow public equality slice only after E and its other promotion gates
+a narrow public equality slice only after E1 core promotion and its other gates
 pass. Candidate D1 begins only after D0 passes and may then migrate before the
-directed-dimension layer. Candidate E remains the prerequisite for
-`IsDiscreteCat`, `OneCat`, and public shaped path-operation registration.
+directed-dimension layer. E0 may promote before E1; E1 core promotion is the
+path-operation prerequisite for public shaped registration, while fixed-map
+packaging of `PathSym_A` and Candidate D remain prerequisites for
+`IsDiscreteCat` and `OneCat`.
 Candidate F is independent of directed dimension but must not be mixed with an
 unrelated module split. Candidate H may proceed without discarding the related-
 input Pi identity, but H1 cannot pass until its equivalence packaging is
@@ -3002,6 +3185,9 @@ but it is also not an unowned omission: Phase 13 and
 
 ### Path-category diagnostics
 
+- `Op_cat(Path_cat(A))` remains a genuine opposite head after E0 rather than
+  converting to `Path_cat(A)`; the removal-only full source and suite remain
+  passing;
 - both identity units at an arbitrary path;
 - typed generic proof-time associativity at arbitrary paths, plus bounded
   normalization of each bracketing without a path-specific runtime
@@ -3011,7 +3197,11 @@ but it is also not an unowned omission: Phase 13 and
   identity has projected to `eq_refl`, with the postcomposition-accumulation
   overlap explicitly classified;
 - opposite hom endpoints remain reversed;
-- the symmetry functor maps identity and composition correctly;
+- `PathSym_A` fixes objects, and its `path_sym` arrow action maps `eq_refl` to
+  `eq_refl` through the one narrow projection-order bridge;
+- generic functoriality supplies the ordered anti-composition conversion in
+  both action-first and composition-first spellings, without a separate
+  specialized anti-composition rewrite;
 - shared `comp_fapp0(Path_cat)` agrees propositionally with J-derived
   `eq_trans`, and the oriented pre/post runtime action heads compare by typed
   proof-time equality;
@@ -3019,8 +3209,17 @@ but it is also not an unowned omission: Phase 13 and
   bounded negative associativity control until its global interaction is
   redesigned;
 - path symmetry agrees propositionally with J-derived `eq_sym` at the selected
-  boundary;
-- `Core_incl_func` retains generic functorial ownership.
+  boundary, while their open conversion remains negative;
+- `path_sym(path_sym(p)) = p` is J-derived and reflexive at `eq_refl`, while
+  open double symmetry has no runtime cancellation;
+- the pointwise arrow square
+  `path_to_hom_(Op C)(path_sym(p)) = path_to_hom_C(p)` passes, and its later
+  functor-level natural packaging is not reported as definitional equality;
+- `Core_incl_func` retains generic functorial ownership;
+- the twelve E1 warning blocks mentioning `PathSym_A` are classified with
+  explicit both-order tests for oriented hom actions, DefIso, Product
+  projections, and naturality before promotion; and
+- the strict inferred-LHS audit remains free of unreviewed E0/E1 candidates.
 
 ### Univalence diagnostics
 
@@ -3204,15 +3403,24 @@ narrow two-rigid-head bridge against shaped-reflexivity registration before
 selecting it. A later fibrancy-derived computational rule is a comparison, not
 a prerequisite for the generic-J eta theorem.
 
-### `Path_cat` composition is selected, but symmetry is not
+### `Path_cat` E0/E1 owners are selected, but neither is promoted
 
 The shared-`comp_fapp0` candidate has stronger evidence than an ordinary
 append-only probe and resolves the apparent unit/asymmetry contradiction at the
-category-composition layer. Promotion can still expose source-order consumers
-not represented in the migrated suite, so the full-file evidence remains a
-probe rather than active truth. More importantly, it does not justify the
-current `Op_cat(Path_cat(A))->Path_cat(A)` collapse. Composition and symmetry
-must not be reported as one completed repair.
+category-composition layer. Collapse removal and the minimal `PathSym_A` core
+now also have owner-position full-file evidence. This removes the earlier
+global-selection gap at the plan level: the object/arrow owner, anti-
+composition orientation, `eq_sym` boundary, involution status, and Core square
+are explicit.
+
+It does not make the repair active. E0 still needs durable checks and oriented
+action-unit cleanup. E1 still has twelve new warning blocks to classify and
+later needs functor-level natural and fixed-map equivalence packaging when
+their consumers arise. The 1,072/1,084 warning counts are diagnostics, not
+confluence proofs. Reporting “Candidate E complete” before those gates would
+remain an overstatement, but requiring fixed-map packaging before adopting
+this staged plan—or before promoting the symmetry operation itself—would invert
+the dependency on Candidate D.
 
 ### `IsDiscreteCat` may expose missing category-equivalence infrastructure
 
@@ -3335,23 +3543,24 @@ that comparison dimension-correct.
 | `OETU-TRUNC-EVIDENCE-PROP` | deferred proof | `OETU-TRUNC-LEVEL`, `OETU-PI-FUNEXT`, stable observational paths | packaged-universe equality is consumed | Derive `IsPropGrpd(IsTruncGrpd(n,A))`; do not postulate global proof irrelevance. Add ambient univalence before claiming the `(n+1)` universe theorem. |
 | `OETU-TRUNC-UNIVERSE` | proposed follow-up; append-only skeleton demonstrated | `OETU-RECORD-CONVENTION`, `OETU-TRUNC-LEVEL` | low-level predicates pass | Add `TruncGrpdU`, low-level aliases, carrier/evidence projections, and an explicit no-false-universe-truncation diagnostic at owner position. |
 | `OETU-TRUNC-REFLECTOR` | deferred | observational equality and HIT elimination | a theorem needs `||A||_n`, not merely `IsTruncGrpd(n,A)` | Design propositional truncation first with restricted dependent elimination. |
-| `OETU-PATH-CAT` | composition owner-position probed; oriented action-unit cleanup and opposite/symmetry prerequisites remain | generic `comp_fapp0`, oriented hom actions, current J-derived path algebra | public shaped registration, `OneCat`, or observational category equality begins | Promote/refine the shared-`comp_fapp0` candidate with two category-unit bridges and durable checks; owner-position clean/classify the four oriented action-unit bridges; remove the self-opposite collapse and add the symmetry functor/equivalence. |
+| `OETU-PATH-CAT-COMP` | E0 owner-position probed; not promoted | generic `comp_fapp0`, oriented hom actions, current J-derived path algebra | path composition promotion or E1 begins | Promote/refine shared `comp_fapp0` with two category-unit bridges, durable unit/associativity/J-agreement checks, oriented action-unit cleanup, and removal of the self-opposite collapse. Reuse the passing 1,072-report source/suite candidate. |
+| `OETU-PATH-CAT-SYM` | E1 core owner-position probed; not promoted; later fixed-map package pending | `OETU-PATH-CAT-COMP`, generic functoriality, current J-derived `eq_sym`; equivalence packaging also depends on `OETU-OMEGA-EQUIV-ALONG` | public shaped symmetry registration, `OneCat`, or observational category equality begins | Classify the twelve `PathSym_A` warning blocks, promote the functor/action/reflexivity and propositional `eq_sym`/involution/Core-square core with durable both-order checks, then add functor-level natural and fixed-map equivalence packaging only when their owners are available. |
 | `OETU-OMEGA-EQUIV-ALONG` | D0 not yet owner-position probed; D1 proposed normal-form migration; append-only evidence/package and endpoint expressibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention; D1 coordinates with the `OETU-CAT-UNIV-DECODER` contract | fixed-functor equivalence or discreteness is consumed | First pass D0 with a fresh source-position fixed-map owner, minimal Sigma package, reflexivity, and one recursive next-hom observation independent of the old owner. Then complete D1's op/Product, public destructor/decoder declaration migration, named declaration, integrated witness, fibre comparison, and full audits; rerun but do not duplicate the categorical-decoder-owned round trips and squares. |
 | `OETU-ADJUNCTION-INDEXED` | proposed focused migration; append-only indices, triangles, and named-operation boundary demonstrated | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)` at owner position; remove/transparentize left/right views, retain stable unit/counit observations, and migrate the 153-occurrence source/check/example surface with the runtime-erasure negative control. |
 | `OETU-STRUCTURE-DECLARATION` | proposed usability protocol; one append-only adjunction operation bridge demonstrated | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)` declarations; connect preselected unit/counit names only by typed proof-time comparisons while canonical computations retain stable observations; consider an elaborator/generator afterward. |
-| `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. |
+| `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT-SYM`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. Consume the promoted symmetry core and package only the fixed maps actually required. |
 | `OETU-NCAT` | proposed architecture, implementation deferred | `OETU-DISCRETE-CAT`, `OETU-TRUNC-LEVEL`, record convention | `IsDiscreteCat` is stable | Add `CatDim`, recursive `IsNCat`, and packaged `NCat`. |
 | `OETU-NCAT-OBJ-TRUNC` | theorem prerequisite | `OETU-NCAT`, categorical univalence, fixed-arrow evidence truncation | `OneCat` object truncation or iso comparison is consumed | Prove/stage `IsNCat(n,C) -> IsObjTruncCat(n,C)`; state explicitly that the converse fails. |
 | `OETU-ONECAT-ISO` | proposed replacement; global legacy interface frozen now | `OETU-NCAT`, global omega-level Cat univalence | `OneCat` exists; meanwhile any new global-iso consumer is found | Add no new arbitrary-`Cat` use; scope/derive `CatIsoUnivalence` for `OneCat`, migrate compatibility consumers, and retire the unscoped claim. |
 | `OETU-OBS-MVP` | proposed conservative lane; append-only skeleton demonstrated | record convention and current equality views | a low-risk equality former is selected | Refine the direct classifier, literal-reflexivity observers, and generic `J` control case at owner position without claiming arbitrary structured action. |
-| `OETU-OBS-SHAPED-REFL` | immediate probe candidate; append-only nondependent skeleton demonstrated | `OETU-OBS-MVP` classifier shape, consumer inventory; public promotion also depends on `OETU-PATH-CAT` | shaped lane selected | Extend the stable shaped head to a dependent record and nested former; register every generic literal-reflexivity consumer at owner position after path-owner selection. |
+| `OETU-OBS-SHAPED-REFL` | immediate probe candidate; append-only nondependent skeleton demonstrated | `OETU-OBS-MVP` classifier shape, consumer inventory; public promotion also depends on the promoted `OETU-PATH-CAT-SYM` core | shaped lane selected | Extend the stable shaped head to a dependent record and nested former; register every generic literal-reflexivity consumer at owner position after E1 core promotion. Fixed-map packaging of `PathSym_A` is not an extra shaped-registration dependency. |
 | `OETU-OBS-ACTION` | immediate design/probe track | path telescopes, `PathOver`, shaped registry | a registered open term must act on a structured path | Select/probe `ObsAction`/`ObsDAction` or `ObsSubst`; account for open terms, dependent fields, composites, and next-dimensional data. |
 | `OETU-OBS-FIBRANCY` | immediate design/probe track for additional computation | `OETU-OBS-ACTION`, dependent motives, registered formers | a runtime beta on an arbitrary structured constructor is consumed | Specify which classifiers/motives carry fibrancy and derive sound additional dependent-elimination computation; retained generic propositional J does not depend on this capability, and action alone does not supply it. |
 | `OETU-OBS-SHAPED-J` | split status: reflexive candidate immediate; additional arbitrary-constructor computation depends on fibrancy | `OETU-OBS-SHAPED-REFL`; for extra arbitrary-constructor betas `OETU-OBS-FIBRANCY` | shaped equality slice selected | Promote specialized reflexive `ind_eqr` when it passes; retain generic J; derive additional structured-constructor runtime rules only from a sound dependent-elimination architecture. |
 | `OETU-OBS-MIGRATE` | deferred high-risk public migration | successful shaped/MVP probe and consumer audit | one former has canonical joins | Migrate public equality one former at a time; do not combine with reorganization. |
 | `OETU-FOUNDATIONAL-ADEQUACY` | active tiered architecture/implementation gate | all relevant rows above | every slice refinement and milestone | Maintain H0/H1/H2/Omega0 status/owner/computation cells; require active H0 for an implementation skeleton, active H1 plus an integrated fixed-map univalence/action witness for a foundational HoTT MVP, and keep indexed adjunction as a separate migration witness. |
 | `OETU-GRPD-UNIV-DECODER` | proposed early H1 coherence repair | current groupoid equality, `TypeEquiv` projections, and groupoid-univalence capabilities | groupoid round trips, truncated-universe paths, or constructor univalence are consumed | Select `grpd_equiv_path`, add named capability agreement, both groupoid round trips, the `coe_grpd` transport/action square, and one Pi/Sigma universe-action example. This task exclusively owns those results; it may consume but does not duplicate `TypeEquiv` algebra. |
-| `OETU-CAT-UNIV-DECODER` | contract selected early; implementation finalization jointly scheduled with D1 | current Cat-univalence interface for contract selection; D0 before finalization, D1 co-execution, and `OETU-PATH-CAT` for final `path_to_hom` coherence | D1 begins or a categorical round trip is consumed | Reserve `omega_equiv_path` now; during D1 retype it over the fixed-map Sigma package and validate both categorical round trips, capability agreement, `path_to_hom` squares, and Product decoder cases. D1 supplies the normal-form migration and reruns these diagnostics but does not duplicate their semantic ownership. |
+| `OETU-CAT-UNIV-DECODER` | contract selected early; implementation finalization jointly scheduled with D1 | current Cat-univalence interface for contract selection; D0 before finalization, D1 co-execution, and promoted `OETU-PATH-CAT-SYM` for final `path_to_hom` coherence | D1 begins or a categorical round trip is consumed | Reserve `omega_equiv_path` now; during D1 retype it over the fixed-map Sigma package and validate both categorical round trips, capability agreement, `path_to_hom` squares, and Product decoder cases. D1 supplies the normal-form migration and reruns these diagnostics but does not duplicate their semantic ownership. |
 | `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; not an immediate H1 MVP gate | `OETU-GRPD-UNIV-DECODER`, stable hybrid equality/action owners; categorical case also depends on `OETU-CAT-UNIV-DECODER` and promoted fixed-map omega-equivalence | direct public universe identity or full-observational completion is selected | Compare direct equality with an identity-view fallback; design shaped reflexivity/action/additional J; integrate the decoder-owned round trips and Product/Pi/Sigma diamonds without copying their bodies; use external mechanisms only as comparison baselines. |
 | `OETU-PRODUCT-DIAMOND` | proposed focused cleanup | stable equality/reflexivity policy | Product decoder migration begins | Probe preserving Product evidence provenance by removing reflexive collapse. |
 | `OETU-CAT-GLOBAL` | accepted omega-level operational policy; legacy ordinary-iso policy quarantined | none | any report/kernel text suggests non-univalent `Cat` semantics or new arbitrary-`Cat` iso univalence | Keep every `C : Cat` omega-univalent and label the policy axiomatic/unstratified; freeze global `cat_iso_univalence` for migration to `OneCat`. |
@@ -3379,10 +3588,15 @@ Before this report becomes the active replacement plan:
    including the explicit fact that raw preselected unit/counit spellings do
    not inherit generic triangle computation and runtime projection betas are
    rejected by default;
-7. approve the full-file-tested layered `Path_cat` composition owner—shared
-   generic `comp_fapp0`, oriented pre/post action heads, two `eq_refl` unit
-   bridges, and propositional `eq_trans` agreement—and separately select the
-   symmetry functor/equivalence before public shaped promotion;
+7. approve E0's full-file-tested layered `Path_cat` composition owner and
+   collapse removal—shared generic `comp_fapp0`, oriented pre/post action
+   heads, two `eq_refl` unit bridges, propositional `eq_trans` agreement, and
+   no definitional self-opposite collapse—and E1's selected `PathSym_A`
+   functor-action contract, generic anti-composition, propositional `eq_sym`
+   agreement/involution, and Core square. Formal adoption of this staged plan
+   does not require E0/E1 to be active first; actual public shaped promotion
+   waits for E1 core promotion, while fixed-map equivalence packaging waits for
+   Candidate D and blocks only its downstream consumers;
 8. use Candidate G / `OETU-ELEMENTARY-HOTT` as the default first
    implementation slice unless the user explicitly selects another bounded
    candidate; shaped, fixed-map D0, path, indexed-adjunction, and Pi-
@@ -3434,7 +3648,10 @@ truncation properties and packaged Prop/Set/n-groupoid universes are active;
 their closure, evidence-path, and universe-level truncation claims are explicit;
 Path_cat uses the shared generic composition head with runtime units, generic
 typed associativity, oriented pre/post action owners, propositional eq_trans
-agreement, and a genuine symmetry functor rather than self-opposite collapse;
+agreement, no self-opposite collapse, and a genuine PathSym functor whose
+generic arrow action owns anti-composition, whose strict/J-derived symmetry and
+involution boundaries are explicit, whose Core-opposite square is coherent,
+and whose fixed-map equivalence is packaged when consumed;
 OneCat is defined through directed hom truncation/discreteness;
 fixed-map omega-equivalence is the primary evidence layer, its property-
 valuedness is proved when that claim is consumed, and its Sigma package
@@ -3539,10 +3756,29 @@ warning classification, catalog checks, health refresh, and make ci.
 - The `Path_cat` composition conclusion is supported by the owner-position
   full-file candidate `tmp/probes/oetu_path_shared_comp_owner_full.lp` and the
   migrated entire suite
-  `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp`. Their latest
-  warning-enabled log ends in `20260714-234330` and contains 1,091 unjoinable-
-  pair reports versus the active 1,109. The contrasting
+  `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp`. The original
+  warning-enabled migrated-suite log ends in `20260714-234330`; its byte-
+  identical later rerun ends in `20260715-000459`, and it contains 1,091
+  unjoinable-pair reports versus the active 1,109. The contrasting
   `tmp/probes/oetu_path_oriented_owner_full.lp` unit/bridge consumers pass, but
   its associativity consumers time out. The append-only
   `tmp/probes/oetu_path_oriented_owner_probe.lp` separately records the
   distinct pre/post action-owner interpretation. None is promoted source.
+- The E0 collapse-removal conclusion is supported by
+  `tmp/probes/oetu_path_symmetry_removal_full.lp` and
+  `tmp/probes/oetu_path_symmetry_removal_checks_full.lp`. Their successful
+  warning-enabled logs end in `20260715-015457` and `20260715-015535`; the
+  source reports 1,072 unjoinable pairs. This pair intentionally supplies no
+  replacement symmetry and exists to prove that removal is independently
+  feasible.
+- The E1 symmetry-core conclusion is supported by
+  `tmp/probes/oetu_path_symmetry_owner_full.lp` and
+  `tmp/probes/oetu_path_symmetry_owner_checks_full.lp`. Their final successful
+  warning-enabled logs end in `20260715-020314` and `20260715-020507`. The
+  source reports 1,084 unjoinable pairs, twelve warning blocks mention
+  `Path_sym_func`, and `scripts/audit_rule_lhs.py --strict` reports no
+  unreviewed slot. The migrated suite exercises strict object/reflexivity and
+  anti-composition computation, propositional `eq_sym` agreement and
+  involution with negative conversion controls, and the pointwise
+  Core/opposite square. It does not yet package functor-level naturality or
+  `OmegaEquivAlong(PathSym_A)` and is not promoted source.
