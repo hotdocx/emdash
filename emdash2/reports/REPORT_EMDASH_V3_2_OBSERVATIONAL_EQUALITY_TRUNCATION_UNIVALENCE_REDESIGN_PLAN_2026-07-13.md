@@ -9,8 +9,8 @@ Side-Task-Ledger: #side-task-ledger
 Implementation-Handoff: #implementation-handoff-start-here
 Current-Implementation-Slice: none started; default next slice is OETU-ELEMENTARY-HOTT / Candidate G
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
-Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7
-Status: handoff-ready revised proposed integrated redesign; the review and append-only feasibility pass is complete, Candidate G is the default first implementation slice, and the architecture and implementation MVP gates are distinct; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
+Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f
+Status: handoff-ready revised proposed staged redesign; the review, append-only feasibility pass, and full-file `Path_cat` composition-owner audit are complete, Candidate G is the default first implementation slice, the hybrid generic/shaped equality contract is explicit, and the immediate MVP is distinguished from the eventual full-observational endpoint; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
 
 ## Goal
 
@@ -39,6 +39,21 @@ immediate category/omega-category analogues must remain expressible, with
 explicit prerequisites where the active file does not yet contain the needed
 classifier, constructor, action, or eliminator.
 
+The immediate H0/H1/Omega0 MVP is deliberately smaller than the eventual
+full-observational endpoint. In particular, the MVP may use the current
+univalence encoder/decoder and transport interface without yet making public
+universe equality reduce directly to equivalence data. That later universe-
+identity problem remains an explicit research and implementation track rather
+than an unacknowledged requirement of the first milestone.
+
+External systems and papers are comparative baselines, sources of examples,
+and design inspiration only. They do not specify an implementation target to
+copy. The selected owners must be rediscovered in the local Kosta--Došen/
+Emdash cut-elimination architecture and the Lambdapi distinction between
+runtime rewrites and proof-time unification. A simpler or more computational
+local formulation is preferred whenever it passes the same adequacy and
+coherence tests.
+
 ## Implementation Handoff: Start Here
 
 This section is the operational entry point for a new conversation or agent.
@@ -57,10 +72,11 @@ computational foundation in which:
 - full observational equality is available for the ordinary HoTT/MLTT core,
   including Pi, Sigma, finite dependent records, universes, and eventually
   inductive, coinductive, and higher-inductive formers;
-- structural reflexivity, action/substitution, and dependent elimination have
-  coherent owners, with shaped `eq_refl` and shaped/reflexive `J` promoted as
-  soon as safe owner-position designs exist rather than being deferred by old
-  experiments;
+- equality has a deliberate hybrid generic/shaped architecture: an unknown or
+  unsupported classifier retains the ordinary primitive `=`/`eq_refl`/`J`
+  interface and literal-reflexivity beta, while a registered shaped former may
+  additionally decompose equality, reflexivity, action/substitution, and
+  dependent elimination through coherent former-specific owners;
 - truncation properties, `Prop`/`Set`/ordinary-groupoid universes, directed
   `n`-categories, `OneCat`, and their universe packages are stated without
   conflating homotopy truncation with directed categorical dimension;
@@ -94,6 +110,11 @@ The later adequacy matrix gives the complete per-former inventory.
 | Foundational HoTT MVP | H1 is active, including standard Pi/Sigma/record path compatibility and ordinary equivalence/univalence algebra, and one integrated fixed-map Omega0 univalence/action witness passes. |
 | H2/HIT completion | Truncation reflectors and representative higher constructors have their restricted eliminators and computation; this is intentionally later. |
 
+Direct computational universe identity is not an extra hidden gate on the
+foundational HoTT MVP. H1 requires the standard `idtoequiv`/decoder round trips
+and selected transport/action computation. Making `A = B` itself expose
+equivalence/bisimulation data belongs to the later full-observational track.
+
 ### Current handoff status and feasibility verdict
 
 The current kernel has **not** been migrated by this plan. It still contains
@@ -110,6 +131,7 @@ proposed successor until its adoption/migration record is made explicit.
 | H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
 | Omega0/category analogue | broad active first draft plus append-only fixed-map/indexed feasibility | Promote fixed-map omega-equivalence, decoder coherence, one next-hom univalence/action witness, and later discreteness/`OneCat`. |
 | Indexed adjunction migration | separate append-only feasibility track; active owner unchanged | Run the owner-position 153-occurrence migration with triangle, opposite, mate, and named-operation controls. |
+| Direct observational universe identity | later explicit research track; not an immediate MVP gate | Select a local direct-equality or identity-view architecture only after the equality/action and univalence-decoder owners are stable. |
 | Universe/metatheory | deliberately deferred | No concrete implementation slice should claim consistency, stratified closure, or a model merely from Lambdapi acceptance. |
 
 The present feasibility assessment is positive but bounded:
@@ -118,19 +140,42 @@ The present feasibility assessment is positive but bounded:
    record convention, truncation-property kernel, elementary H0 classifiers,
    conservative/shaped record paths, standard Pi beta/eta surface, fixed-map
    omega-equivalence telescope, or indexed adjunction telescope.
-2. All seven OETU probes listed below pass warning-enabled checking as of
-   2026-07-14. They are append-only extensions after importing the active
-   kernel, so they establish plausibility only, not final owner placement,
-   subject-reduction behavior in source order, or global coherence.
-3. The best/original goal therefore remains credible as a staged
+2. All seven original append-only OETU probes listed below pass warning-enabled
+   checking as of 2026-07-14. They establish plausibility only, not final owner
+   placement, subject-reduction behavior in source order, or global coherence.
+3. A separate full-file `Path_cat` composition audit now supplies stronger
+   evidence. Keeping `comp_fapp0(Path_cat(A),...)` as the shared category-level
+   composition head, removing its fold to J-derived `eq_trans`, and adding two
+   narrow `eq_refl` unit bridges passes the full active source, the entire
+   migrated check suite, warning-enabled checking, runtime units, generic
+   proof-time associativity, and a J-derived propositional comparison with
+   `eq_trans`. The unjoinable-pair inventory falls from 1,109 to 1,091 in that
+   candidate; this is useful diagnostic evidence, not a confluence proof.
+4. Folding `comp_fapp0(Path_cat(A),...)` to the existing postcomposition action
+   head instead makes the unit and pre/post comparison probes pass but causes
+   associativity consumers to exceed the bounded check. The layered owner is
+   therefore currently better supported: `comp_fapp0` owns category-level
+   composition, while `hom_postcomp_fapp0` and
+   `hom_precomp_along_fapp0` separately own oriented runtime actions.
+5. The best/original goal therefore remains credible as a staged
    implementation and research program. It is not yet demonstrated as one
    globally normalizing implementation. The largest concrete risks are the
-   `Path_cat` owner repair, public shaped-equality migration, Pi equivalence
-   packaging, active `OmegaEquiv` normal-form migration, and the broad
-   adjunction consumer migration.
-4. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
+   remaining `Path_cat` symmetry/self-opposite repair, public shaped-equality
+   migration, Pi equivalence packaging, active `OmegaEquiv` normal-form
+   migration, and the broad adjunction consumer migration.
+6. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
    semantic/metatheoretic justification do not block the concrete MVP, but
    every report and code comment must preserve that boundary.
+
+The revised audit verdict is:
+
+| Boundary | Revised conclusion | Remaining promotion gate |
+| --- | --- | --- |
+| `Path_cat` composition | No fundamental symmetry/asymmetry contradiction. Shared category composition plus oriented pre/post runtime actions is full-file feasible. | Promote the two category-unit bridges; clean/classify four oriented action-unit bridges; remove self-opposite collapse and implement symmetry. |
+| Hybrid generic/shaped `J` and Candidate H | Coherent candidate. Generic primitive J may prove propositional Pi eta even when the equality classifier is shaped. | Owner-position Pi bridge and `IsEquivMap` packaging; fibrancy only for extra runtime betas on arbitrary structured constructors. |
+| Direct universe equality | Necessary for the eventual full-observational endpoint, not the immediate H1 MVP. | Phase 13 local owner research after decoder/action stabilization; no external design is a replication target. |
+| Global ordinary-iso univalence | Exploratory compatibility approximation, not successor architecture for arbitrary `Cat`. | Freeze new uses in Phase 0; migrate/retire after OneCat-scoped replacement. |
+| Fixed-map omega-equivalence | Sigma/fixed-index direction is sound, but current probes establish telescope/package expressibility rather than the recursive owner. | Complete the owner-position refl/op/Product/decoder/next-hom promotion ladder before calling it migration-ready. |
 
 ### Complete OETU probe and evidence inventory
 
@@ -146,7 +191,10 @@ not durable active diagnostics.
 | `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp` | Negative control: runtime unit/counit projection betas erase the stable triangle discriminators, leaving both the projected and raw named-operation spellings stuck as expected. | Preserve stable unit/counit observations or design a different audited triangle owner; clean its two scratch-local LHS advisories before reusing a pattern. |
 | `tmp/probes/oetu_hott_elementary_formers.lp` | Decoded Empty, Bool, and Nat classifiers; dependent eliminator facades; Bool and Nat constructor beta. | Promote at the foundations owner with active diagnostics; identity/no-confusion, higher action, canonicity, and categorical universal properties remain separate. |
 | `tmp/probes/oetu_hott_pi_adequacy.lp` | Standard diagonal `happly`, `funext` with related-input action, judgmental beta, non-judgmental arbitrary eta boundary, and reflexive propositional-eta basis. | Select stable public owners and construct the actual `IsEquivMap(PiHapply)` evidence rather than citing beta/eta sketches. |
-| `tmp/probes/oetu_hott_pi_stable_funext.lp` | Stable `PiHapply`/`PiFunext` heads, related-input action, a two-rigid-head typed proof-time reflexive bridge, and propositional eta via generic `ind_eqr`. | Reprobe at owner position, compare the proof-time bridge with shaped/fibrancy-derived coherence, and package the active equivalence. |
+| `tmp/probes/oetu_hott_pi_stable_funext.lp` | Stable `PiHapply`/`PiFunext` heads, related-input action, a two-rigid-head typed proof-time reflexive bridge, and propositional eta via generic `ind_eqr`. | Reprobe at owner position, retain the explicit hybrid generic-`J` contract, and package the active equivalence; fibrancy is required only for additional structural computation, not for this generic propositional eta proof. |
+| `tmp/probes/oetu_path_oriented_owner_probe.lp` | The existing postcomposition and precomposition point heads give distinct oriented runtime presentations of path composition, each can receive both narrow `eq_refl` unit bridges, and their existing direct `unif_rule` supplies typed proof-time comparison. | Append-only action-owner evidence only. Its four replaceable-variable advisories and one local overlap with postcomposition accumulation must be cleaned/classified; it does not select either action head as the category-level composition normal form. |
+| `tmp/probes/oetu_path_shared_comp_owner_full.lp` plus `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp` | Owner-position full-file candidate: generic `comp_fapp0` remains the `Path_cat` composition head, two `eq_refl` projection-order unit bridges are added, J-derived comparison with `eq_trans` is propositional, and the entire migrated active check suite passes warning-enabled. | Promote only together with removal of the old `comp_fapp0(Path_cat)->eq_trans` fold, durable agreement/unit/associativity checks, and the still-open self-opposite/symmetry repair. |
+| `tmp/probes/oetu_path_oriented_owner_full.lp` and its focused unit/bridge/associativity consumers | Negative owner-position comparison: folding `comp_fapp0(Path_cat)` to `hom_postcomp_fapp0` preserves both units and typed pre/post agreement. | Associativity consumers exceed the bounded check, so this fold is rejected unless the global associativity interaction is redesigned and remeasured. |
 
 To reproduce any row, run the following command with that row's path:
 
@@ -155,11 +203,18 @@ EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=60s \
   scripts/probe.sh tmp/probes/oetu_hott_elementary_formers.lp
 ```
 
-The complete set was rerun successfully on 2026-07-14; the corresponding log
+The original seven-probe set was rerun successfully on 2026-07-14; the corresponding log
 names end in `20260714-200013` under `logs/probes/`. Imported active warnings
 remain visible in those logs. Absence of a probe-local unjoinable critical
 pair is not proof of global confluence, and the named-unit negative probe
 shows why explicit positive/negative computation checks are also necessary.
+
+The latest path-owner audit log ends in `20260714-234330`. The shared-
+`comp_fapp0` full-file source and migrated check suite finish successfully
+with 1,091 unjoinable-pair reports. The action-owner fold's unit and bridge
+consumers finish, while its associativity consumers time out. These positive
+and negative results are part of Candidate E's selection evidence and should
+not be collapsed into the weaker phrase “append-only feasibility.”
 
 Older `tmp/probes/univalence_*` artifacts belong to the June 23 predecessor
 plan. They are not prerequisites for Candidate G and need not be read during
@@ -245,8 +300,8 @@ This first slice explicitly does **not** claim:
 - initial-object, coproduct, or natural-number-object universal properties in
   `Cat`;
 - a new general sum former, a truncation reflector, or any univalence closure;
-- resolution of shaped `eq_refl`, arbitrary structured-path `J`, `Path_cat`,
-  fixed-map omega-equivalence, or indexed adjunction.
+- resolution of shaped `eq_refl`, additional structured-path `J` computation,
+  `Path_cat`, fixed-map omega-equivalence, or indexed adjunction.
 
 After Candidate G, Candidates A (record convention) and B (truncation property
 kernel) are the default low-risk infrastructure slices; they may be ordered by
@@ -269,13 +324,13 @@ Reusable property/structure infrastructure
   Candidate B: truncation kernel ─┴─> packaged truncated universes
 
 Ordinary HoTT compatibility
-  Candidate H: Pi happly/funext equivalence
+  Candidate H: Pi happly/funext equivalence under generic J
         + Sigma/record arbitrary path round trips
         + TypeEquiv algebra and univalence decoder/action round trips
         ───────────────────────────────────────────────────────> H1 MVP
 
 Public observational equality and path algebra
-  Candidate E: Path_cat owner repair
+  Candidate E: shared comp_fapp0 Path_cat owner + symmetry repair
         ─> Candidate C: public shaped reflexivity/reflexive J
         ─> structural action ─> fibrancy/dependent J ─> former-by-former migration
 
@@ -290,6 +345,7 @@ Separate category migration lane
 
 Later higher layer
   truncation reflectors ─> representative HITs ─> optional H2 completion
+  computational universe identity ─> eventual full-observational endpoint
   stratified universes / Cat_cat:Cat metatheory remain a separate deferred research phase
 ```
 
@@ -319,8 +375,9 @@ During and after a slice:
 - use `active` only for promoted code covered by active diagnostics;
 - use `owner-position probed` only for a full-file candidate placed at its
   intended owner and checked with the relevant warnings/reduction orders;
-- use `append-only feasibility demonstrated` for the seven current probes;
-  never shorten that phrase to `probed`;
+- use `append-only feasibility demonstrated` for the seven original import
+  probes and never shorten that phrase to `probed`; record the later shared-
+  `comp_fapp0` candidate separately as owner-position probed;
 - record new architectural decisions under “Decisions Accepted For This
   Proposal,” and record rejected runtime orientations under risks/diagnostics
   rather than silently deleting the reason;
@@ -343,9 +400,12 @@ agent sees one coherent plan.
 
 This proposal incorporates the following project directions.
 
-1. **Full observational equality is the eventual target.** The current hybrid
-   of direct Sigma/Pi equality views and a uniform J eliminator is not the
-   intended final design.
+1. **Full observational equality is the eventual target.** A deliberate hybrid
+   generic/shaped architecture is compatible with that target: unknown or
+   unsupported classifiers keep the ordinary primitive identity interface,
+   while registered formers expose additional structural computation. What is
+   not intended as the final design is the current unregistered coexistence of
+   direct Sigma/Pi views, generic consumers, and partially shaped computation.
 2. **Truncation is an immediate architecture prerequisite.** `Prop`, `Set`,
    ordinary groupoids, `OneCat`, and general finite-dimensional variants must
    be designed together with univalence, even if their first implementation
@@ -367,12 +427,14 @@ This proposal incorporates the following project directions.
    projections.** A one-constructor dependent inductive record convention is
    the preferred explicit encoding; small existential/property packages may
    continue to use Sigma.
-8. **The equality redesign has two cooperating tracks.** A conservative
+8. **The equality redesign has two cooperating tracks inside one hybrid
+   contract.** Generic `=`/`eq_refl`/`ind_eqr` remain available at every
+   classifier, with the ordinary beta on literal reflexivity. A conservative
    classifier-and-observer MVP may be promoted without waiting for arbitrary
-   structured-path elimination, while shaped `eq_refl`, structural
-   action/substitution, and shaped `J` remain available for immediate design
-   and implementation as soon as an owner-position probe meets the promotion
-   criteria below.
+   structural computation, while registered shaped `eq_refl`, structural
+   action/substitution, and computational shaped `J` remain available for
+   immediate design and implementation as soon as an owner-position probe
+   meets the promotion criteria below.
 9. **Earlier failed encodings are evidence, not vetoes.** In particular, the
    earlier failure of a raw `eq_refl ->` path-record-constructor rewrite does
    not prohibit a stable shaped-reflexivity head, a different action owner, or
@@ -391,9 +453,10 @@ This proposal incorporates the following project directions.
     fibre such as `Sigma e, omega_equiv_to(e) = F` is a valid semantic
     specification, but it is not the selected runtime interface for declaring
     that a concrete functor is an equivalence. The proposed end state makes
-    `OmegaEquivAlong(F)`/`IsOmegaEquivArrow(F)` the fixed-map property and
-    defines the ordinary first-class equivalence type as the Sigma package of
-    a map with that property.
+    neutral `OmegaEquivAlong(F)` the fixed-map evidence layer and defines the
+    ordinary first-class equivalence type as its Sigma package. The
+    `IsOmegaEquivArrow(F)` property spelling is introduced only after
+    property-valuedness is proved.
 13. **Adjunction is likewise an indexed relation in the proposed end state.**
     Rather than retain a permanent `AdjunctionAlong(F,G)` facade alongside the
     current `Adjunction(R,L)`, migrate `Adjunction` itself to be indexed by the
@@ -437,12 +500,46 @@ This proposal incorporates the following project directions.
     should coexist with related-input action. Runtime beta is selected where it
     has a canonical observation; arbitrary eta is propositional, and
     `PiHapply` must eventually be packaged as an active `IsEquivMap` rather than
-    inferred from beta/eta sketches alone.
+    inferred from beta/eta sketches alone. Under the retained generic `J`, the
+    propositional eta proof is legitimate and does not wait for a separate
+    fibrancy implementation; it does not thereby establish new runtime
+    computation on arbitrary structured Pi paths.
 20. **Foundational compatibility is executable and independent of
     adjunction.** Elementary classifier/eliminator beta, Sigma/record path
     round trips, `TypeEquiv` algebra, univalence round trips, and conversion-
     level anti-collapse controls belong to the HoTT gate. Indexed adjunction is
     a separate category-migration witness and cannot substitute for them.
+21. **`Path_cat` has layered rather than contradictory composition owners.**
+    The selected category-level candidate retains the generic
+    `comp_fapp0(Path_cat(A),...)` head, with narrow `eq_refl` projection-order
+    unit bridges. `hom_postcomp_fapp0` and `hom_precomp_along_fapp0` remain the
+    distinct covariant/contravariant runtime action owners and compare at proof
+    time. J-derived `eq_trans` is a propositional reference operation. This is
+    the current full-file-tested reconciliation of symmetric category laws with
+    asymmetric J-derived cuts.
+22. **The immediate MVP is not the full-observational endpoint.** H1 requires
+    the public univalence decoder/encoder algebra and selected transport/action
+    beta, but not yet a direct reduction of universe equality to equivalence.
+    The latter has its own eventual track and must not be inferred from decoder
+    normalization alone.
+23. **External designs are references, not replication targets.** Narya,
+    cubical systems, observational type theories, and the HoTT literature supply
+    comparison tests and possible ingredients. Emdash must select its own
+    Kosta--Došen/Lambdapi owners, and may deliberately discover a simpler or
+    more computational formulation instead of reproducing an external glue,
+    fibrancy, or bisimulation implementation verbatim.
+24. **The new architecture is dimension-correct about ordinary isomorphism
+    from the outset.** Existing global `cat_iso_univalence` declarations are
+    frozen as legacy compatibility during migration; no new redesign owner or
+    theorem may depend on them for arbitrary `Cat`. Global new work uses
+    `CatUnivalence`/`OmegaEquiv`, and ordinary `IsoEvidence` univalence is
+    introduced only for `OneCat` or an explicit ordinary-dimensional
+    hypothesis.
+25. **Fixed-map omega-equivalence remains evidence until property-valuedness is
+    proved.** `OmegaEquivAlong(F)` is the neutral primary name. It may be
+    described operationally as a certificate/evidence package; the
+    `IsOmegaEquivArrow(F)` alias and proof-field erasure are reserved for the
+    theorem that its recursive coherence makes it property-like.
 
 ## Current Baseline And Review Findings
 
@@ -456,11 +553,13 @@ active diagnostics                           emdash3_2_checks.lp
 ```
 
 The 2026-07-14 handoff revalidation reran the bounded active check and all
-seven warning-enabled OETU probes successfully before this report-only edit.
-No kernel or active-check migration has been made by the plan. The probe logs
-and their append-only limitations are recorded in the handoff inventory and
-References; a successor must still rerun the baseline against its own current
-worktree.
+seven original warning-enabled OETU import probes successfully before this
+report-only edit. The later owner-position `Path_cat` source and migrated full
+check-suite candidate also pass warning-enabled. No kernel or active-check
+migration has been made by the plan. The probe logs and their distinct
+append-only/owner-position limitations are recorded in the handoff inventory
+and References; a successor must still rerun the baseline against its own
+current worktree.
 
 The existing architecture contains valuable first slices:
 
@@ -473,14 +572,18 @@ The existing architecture contains valuable first slices:
 - a global categorical-univalence policy stated visibly rather than hidden in
   conversion.
 
-The review nevertheless found four blocking design boundaries.
+The review nevertheless found four migration boundaries.
 
-1. `Path_cat` inherits strict generic category identity rules that do not join
-   the current one-sided J definition of `eq_trans`.
+1. The active `Path_cat` fold to one-sided J-derived `eq_trans` does not join
+   the generic category units. A later full-file audit now supplies a passing
+   shared-`comp_fapp0` repair candidate, so this is a source migration rather
+   than an unresolved architectural contradiction.
 2. `Op_cat(Path_cat(A)) -> Path_cat(A)` identifies a self-opposite equivalence
    with definitional equality and erases the endpoint reversal.
-3. Sigma/Pi equality has begun reducing observationally, while `eq_refl` and J
-   still follow the older uniform-inductive identity architecture.
+3. Sigma/Pi equality has begun reducing observationally, while the registration
+   contract between generic `eq_refl`/J and shaped former computation remains
+   incomplete. The hybrid itself is not contradictory; its owners and claims
+   need to be explicit.
 4. Capability-selected inverse maps and operational decoder heads coexist
    without named agreement, and Product reflexive collapse competes with
    structured decoder normal forms.
@@ -588,8 +691,29 @@ mechanical plausibility, not owner-position/full-file coherence. The elementary
 probe does not establish observational identity, no-confusion, higher action,
 or canonicity for its inductives. The Pi probe does not yet construct the
 active contractible-fibre `IsEquivMap(PiHapply)` package, and its proof-time
-comparison remains a candidate to compare with shaped-reflexivity or fibrancy-
-derived coherence before promotion.
+comparison remains an owner-position candidate. Its generic-J propositional eta
+is valid under the selected hybrid contract; it is not evidence that arbitrary
+structured Pi-path elimination has acquired a new computational rule.
+
+The later full-file `Path_cat` audit strengthens one boundary beyond append-only
+feasibility:
+
+- removing `comp_fapp0(Path_cat)->eq_trans` leaves generic `comp_fapp0` as the
+  category-level path-composition normal form;
+- two narrow unit bridges handle the competing projection
+  `id(Path_cat(A),x)->eq_refl(x)`;
+- generic proof-time associativity, both runtime units, a typed comparison with
+  the oriented postcomposition action, and a J-derived propositional comparison
+  with `eq_trans` all pass;
+- the entire migrated active check suite passes warning-enabled, with the
+  unjoinable-pair count reduced from 1,109 to 1,091;
+- in contrast, folding the category-level head to `hom_postcomp_fapp0` makes
+  the isolated units and pre/post comparison pass but causes the bounded
+  associativity consumers to time out.
+
+This selects the layered composition candidate for Phase 4. It does not solve
+the separate self-opposite/symmetry migration, and the warning reduction is not
+a proof of global confluence.
 
 ## Four Distinct Notions That Must Remain Separate
 
@@ -1022,9 +1146,11 @@ omega_equiv_to(e)       := sigma_Fst(e)
 omega_equiv_evidence(e) := sigma_Snd(e).
 ```
 
-`OmegaEquivAlong_C(f)`, also provisionally named
-`IsOmegaEquivArrow_C(f)`, stores or exposes the selected inverse arrows and the
-recursively required hom-equivalence/coherence data while `f` is an index. Its
+`OmegaEquivAlong_C(f)` stores or exposes the selected inverse arrows and the
+recursively required hom-equivalence/coherence data while `f` is an index. The
+name is intentionally neutral between operational certificate and proved
+property. `IsOmegaEquivArrow_C(f)` is reserved as an alias after
+property-valuedness is established. Its
 higher observations may refer to the packaged `OmegaEquiv` at the next hom
 level:
 
@@ -1085,9 +1211,43 @@ univalence decoders and their round trips.
 
 The fixed-map evidence is intended to be property-like, but that must be
 established from its recursive coherence or an equivalent contractible-fibre
-characterization; it is not licensed by the name `IsOmegaEquivArrow`. Until
-then, paths of `IsDiscreteCat`/`NCat` packages still contain an evidence-field
-obligation.
+characterization; it is not licensed by a suggestive name. Until then, paths
+of `IsDiscreteCat`/`NCat` packages still contain an evidence-field obligation.
+
+### Fixed-map omega-equivalence promotion ladder
+
+The passing probes establish the telescope and package shape, not yet the new
+recursive owner. Candidate D must advance through the following ladder before
+the report calls the migration globally coherent:
+
+1. place a general-`C` `OmegaEquivAlong_C(f)` owner and its inverse/higher-cell
+   observations at the intended source position in a full-file copy, without
+   defining those observations by the old opaque `OmegaEquiv` owner;
+2. define the first-class `OmegaEquiv_C(x,y)` Sigma package and validate generic
+   map/evidence projection beta before any dependent higher-cell beta;
+3. implement the reflexive fixed-map generator and check its recursive
+   higher-cell observations through at least the next hom level;
+4. implement opposite closure with the correct endpoint reversal and both
+   higher-cell projections;
+5. implement one representative binary constructor, initially Product, and
+   test constructor-first, projection-first, and decoder-first diamonds;
+6. migrate the active `omega_equiv_*` destructors, `idtoequiv_cat`,
+   `omega_equiv_path`, both univalence round trips, and one Product decoder
+   consumer to the new package in the same full-file candidate;
+7. declare one concrete named functor `F`, evidence `u : OmegaEquivAlong(F)`,
+   and package `(F,u)`, then exercise univalence/action and one recursive
+   next-hom observation without a per-instance `unif_rule`;
+8. compare the operational evidence propositionally in both useful directions
+   with `OmegaEquivFibre(F)`, while keeping the theorem that the evidence is a
+   proposition as a separately statused obligation; and
+9. pass source-order subject reduction, inferred-LHS audit, warning comparison,
+   both-order diagnostics, and bounded full-suite timing. No evidence field may
+   be erased before the property theorem exists.
+
+Steps 1--7 in one owner-position candidate are the minimum promotion gate for
+the recursive owner. Step 8's property theorem may remain a named prerequisite
+for the first runtime migration, but `IsDiscreteCat` package equality and any
+proof-field irrelevance continue to depend on it.
 
 ### Indexed adjunctions rather than a permanent `Along` facade
 
@@ -1286,8 +1446,8 @@ The current global symbol:
 cat_iso_univalence(C) : CatIsoUnivalence(C)
 ```
 
-should eventually be replaced or quarantined by a dimension-correct
-interface:
+is quarantined immediately for successor-architecture work and is replaced by
+the dimension-correct interface:
 
 ```text
 onecat_iso_univalence
@@ -1301,8 +1461,9 @@ The preferred final result is to derive this from:
 - the discreteness/truncation of all hom-categories of a `OneCat`;
 - a comparison between `OmegaEquiv` and `IsoEvidence` at that level.
 
-A scoped operational axiom is acceptable before the derivation, but the
-unscoped global `CatIsoUnivalence` claim should remain labelled temporary.
+A scoped operational axiom is acceptable before the derivation. The unscoped
+active symbol may remain temporarily as a compatibility surface during the
+bounded migration, but no new general-`Cat` work may consume it.
 
 ### Universes of `n`-categories
 
@@ -1347,13 +1508,68 @@ owner-position confluence, subject-reduction, and performance audits. This
 fallback does not weaken the eventual full-observational target; it prevents a
 failed global rewrite orientation from becoming the only representation.
 
+### Immediate MVP boundary and eventual universe identity
+
+The statement “universe equality is equivalence” describes the eventual
+full-observational endpoint, not the immediate H1 implementation gate. The
+near-term H1 contract is:
+
+```text
+idtoequiv_grpd : (A = B) -> TypeEquiv(A,B)
+grpd_equiv_path / ua_grpd : TypeEquiv(A,B) -> (A = B)
+both round trips propositionally;
+selected transport/action along the decoded path computes through the forward map.
+```
+
+An analogous contract uses `OmegaEquiv` at the category layer. This interface
+can be computationally useful before the public equality classifier of
+`Grpd_grpd` or `Cat_grpd` itself exposes equivalence data.
+
+The later `OETU-UNIVERSE-EQUALITY` track must choose, independently at each
+universe layer:
+
+- direct public equality reduction to `TypeEquiv`/`OmegaEquiv`, or a dedicated
+  universe identity-view classifier with encode/decode;
+- the canonical shaped universe-reflexivity owner;
+- structural action/transport and any additional computational shaped `J`;
+- both decoder round trips and Product/Pi/Sigma action diamonds;
+- the interaction with fixed-map omega-equivalence and the open-world former
+  registry; and
+- the precise unstratified `Cat_cat : Cat` boundary.
+
+Glue, bisimulation, cubical composition, or fibrancy mechanisms in external
+systems are possible comparison points, not required Emdash encodings. This
+track begins from the local Kosta--Došen cut owners and Lambdapi rewrite/unif
+capabilities and is explicitly allowed to find a smaller native formulation.
+The track is complete only after owner-position and integrated computational
+evidence; no external architecture is reproduced merely to match its surface.
+
 ### `J`, shaped reflexivity, and structural action
 
-The active `ind_eqr`/`ind_eq` interface remains a useful compatibility and
-semantic reference. A full observational implementation cannot, however,
-depend solely on one beta rule that recognizes only the literal `eq_refl`
-head. The redesign therefore separates four achievements that were previously
-too easily conflated:
+The selected candidate is a **hybrid generic/shaped equality architecture**.
+The active primitive `=`/`eq_refl`/`ind_eqr` interface is retained, not merely
+as a temporary embarrassment but as the ordinary HoTT-compatible behavior of
+an unknown or unsupported classifier. If `a : Grpd` is opaque to the rewrite
+system, equality stays opaque and generic `ind_eqr` has its traditional beta
+only on literal `eq_refl`.
+
+When `a` is a registered shaped former, its equality classifier and selected
+reflexivity/action observations may reduce structurally. Generic `ind_eqr`
+still eliminates paths at that classifier and remains available for
+propositional reasoning. Its generic judgmental beta is still only the literal
+reflexivity case unless a narrowly audited former registration adds more
+computation. Thus Candidate H's eta proof by generic J is legitimate under the
+hybrid contract and does not depend on a future fibrancy implementation. It
+also does not prove that J now computes on arbitrary structured Pi-path
+constructors.
+
+This removes the alleged architectural contradiction with traditional HoTT at
+generic types; it is not itself a normalization, consistency, or model proof.
+Every former-specific rule still requires subject reduction, overlap,
+performance, and eventually semantic justification.
+
+The design therefore separates four achievements that were previously too
+easily conflated:
 
 1. a conservative classifier MVP: equality exposes a record/Sigma/Pi path
    view; projections of literal reflexivity compute; generic `J` computes on
@@ -1364,11 +1580,13 @@ too easily conflated:
 3. structural action: registered open maps and dependent sections act on
    non-reflexive structured paths through explicit `ObsAction`/`ObsSubst`-like
    data;
-4. arbitrary structured-path dependent elimination: registered classifiers
-   and motives expose the fibrancy/elimination capability from which sound
-   structured `J` is obtained.
+4. additional computational dependent elimination on arbitrary structured
+   path constructors: registered classifiers and motives expose the
+   fibrancy/elimination capability from which sound structured `J` computation
+   is obtained.
 
-The conservative MVP does not require (3) or (4), but (2)--(4) are **not
+The conservative MVP and generic propositional J do not require (3) or (4),
+but (2)--(4) are **not
 deferred by policy**. They are immediate design/implementation tracks and may
 overtake or simplify the conservative route as soon as their probes are
 globally credible.
@@ -1427,10 +1645,13 @@ requires all of the following:
 - subject reduction, warning delta, both reduction orders, bounded full check,
   and focused typed `eq_refl` diagnostics pass.
 
-Achievements (3) and (4) are stronger. An arbitrary path-record value cannot
-soundly be eliminated by returning the reflexive branch for an arbitrary
-motive. Nor can an arbitrary Lambdapi function silently acquire structural
-path action merely because an `ObsSubst` symbol has been declared. The design
+Achievements (3) and (4) are stronger computational claims. Retaining the
+primitive generic `ind_eqr` permits ordinary propositional elimination of an
+arbitrary path, exactly as in the current HoTT-style interface. What is not
+sound is a new rewrite that recognizes an arbitrary path-record constructor
+and simply returns the reflexive branch for an arbitrary motive. Nor can an
+arbitrary Lambdapi function silently acquire structural path action merely
+because an `ObsSubst` symbol has been declared. The design
 must select whether action/fibrancy is carried by registered classifier and map
 packages, supplied by former-specific eliminators, or synthesized by a future
 surface elaborator. Immediate candidate architectures include a
@@ -1446,9 +1667,10 @@ eventually specify:
 - the fibrancy/dependent-elimination capability accepted by arbitrary motives;
 - readback or rewrite normal forms for higher composites.
 
-Until that capability is selected, generic `ind_eqr` remains the opaque
-compatibility eliminator and only explicitly registered formers may claim
-computational arbitrary structured-path `J`.
+Until that capability is selected, generic `ind_eqr` remains the ordinary
+opaque eliminator. It may support propositional theorems such as Pi eta, but
+only explicitly registered formers may claim additional runtime computation
+for arbitrary structured-path `J`.
 
 Earlier reports constrain known-bad encodings but do not veto a new solution
 that passes these criteria.
@@ -1546,6 +1768,22 @@ The operational axiom is permitted to remain while these questions are open.
 No report may infer a model-existence result merely because Lambdapi accepts
 the signature.
 
+The legacy ordinary-isomorphism capability is not part of this selected global
+policy. The active source still exposes `cat_iso_univalence(C)` for every
+`C : Cat` as an exploratory 1-categorical approximation. From Phase 0 onward:
+
+- no new redesign declaration, theorem, or computation may depend on the
+  global ordinary-iso capability;
+- existing consumers and checks are labelled compatibility-only until their
+  migration is scheduled;
+- `CatUnivalence(C)` with recursive `OmegaEquiv` is the general categorical
+  interface used by new work; and
+- `CatIsoUnivalence` returns only as a `OneCat`-scoped derivation or explicit
+  ordinary-dimensional assumption.
+
+This is an architectural quarantine from the outset even if removal of the
+legacy active symbols is staged to preserve a bounded migration.
+
 ## One Operational Inverse Per Univalence Layer
 
 The decoder-oriented interfaces are selected as the eventual operational
@@ -1602,7 +1840,7 @@ Both round trips from each `EquivByInverse` capability need named projections
 and diagnostics. Their existence inside a nested Product package is not an
 adequate public coherence API.
 
-## `Path_cat` Repair Is A Prerequisite
+## `Path_cat` Composition Is Probed; Symmetry Repair Remains A Prerequisite
 
 The path-category redesign must precede `IsDiscreteCat`, `IsNCat`, `OneCat`,
 and any **public** shaped-reflexivity slice that registers with path
@@ -1615,39 +1853,72 @@ Required decisions:
 1. remove the runtime collapse `Op_cat(Path_cat(A)) -> Path_cat(A)`;
 2. represent self-oppositeness by a functor/equivalence whose arrow action is
    path symmetry;
-3. select a path-composition owner whose interaction with both strict category
-   units is measured;
-4. make `Path_cat` a strict category by the computation required by its
-   declared type `Path_cat(A) : Cat`; if the weak route is selected instead,
-   reclassify it outside the current strict `Cat` interface rather than leaving
-   weak laws inside a supposedly strict category;
-5. test associativity and both unit diamonds at arbitrary paths;
+3. promote or reject the now-selected shared-`comp_fapp0` composition candidate
+   using its full-file evidence;
+4. make `Path_cat` satisfy the active `Cat` contract: both units compute at
+   runtime and associativity is available through the generic typed proof-time
+   equation, without installing a second path-specific associativity owner;
+5. test generic associativity and both unit diamonds at arbitrary paths;
 6. reconnect `Core_incl_func` and `path_to_hom` only after the selected path
    composition normal form is stable.
 
 Do not add a second specialized `Core_incl_func` composition owner merely to
 hide a failure in `Path_cat` itself.
 
-The feasibility probe shows that a fresh strict composition/symmetry interface
-with explicit endpoint guards can satisfy its local equations. It does not yet
-show that replacing the active `eq_trans`/`eq_sym` owners preserves every
-consumer. The repair slice therefore remains a migration audit, not merely the
-addition of the fresh probe heads.
-
-The preferred MVP orientation is:
+The full-file audit now selects a concrete composition candidate. Remove the
+active fold:
 
 ```text
-Path_cat composition uses one strict path-composition owner;
-Path_cat opposite action uses one strict path-symmetry owner;
-the active J-derived eq_trans/eq_sym remain semantic HoTT references;
-strict-versus-J-derived agreement begins propositionally.
+comp_fapp0(Path_cat(A),q,p) -> eq_trans(p,q)
 ```
 
-Later evidence may justify making the strict owner the general public HoTT
-operation or redesigning `eq_trans` itself. Until that comparison exists, the
-two operations must be named distinctly and no report may treat their
-agreement as definitional. `Core_incl_func`, transport/`ap`, and the symmetry
-opposite functor are the first consumers of the agreement boundary.
+and let the generic `comp_fapp0(Path_cat(A),q,p)` term remain the shared
+category-level path-composition normal form. Add only the two narrow
+projection-order bridges needed after `id(Path_cat(A),x)` reduces to
+`eq_refl(x)`. The generic category unit rules then supply both runtime units,
+and the existing generic `comp_fapp0` unification equation supplies typed
+proof-time associativity.
+
+This does not erase the oriented computational reading. On `Path_cat`, the
+existing `hom_postcomp_fapp0` and `hom_precomp_along_fapp0` heads remain the
+covariant and contravariant runtime cut/action owners. They inherit their own
+accumulation and `id`-headed unit behavior and compare directly at proof time.
+If the `Path_cat` identity projection has already exposed `eq_refl`, the
+append-only oriented-owner probe shows that each action head needs its own two
+narrow projection-order unit bridges. Those four bridges work but still have
+one local overlap with postcomposition accumulation plus inferred-slot
+advisories, so they require an owner-position cleanup/classification separate
+from the already-passing two category-composition bridges. Thus the ownership
+is layered:
+
+```text
+comp_fapp0(Path_cat)                 shared category composition;
+hom_postcomp_fapp0(Path_cat)         oriented postcomposition runtime action;
+hom_precomp_along_fapp0(Path_cat)    oriented precomposition runtime action;
+eq_trans                             J-derived propositional reference.
+```
+
+The J-derived agreement can be defined by path induction and is judgmentally
+reflexive in its base case. It is not a runtime fold between the heads. A
+full-file attempt to choose `hom_postcomp_fapp0` itself as the result of
+`comp_fapp0(Path_cat)` passed both units and typed pre/post agreement but made
+associativity consumers time out. That orientation is therefore rejected until
+the interaction with global associativity is redesigned.
+
+Symmetry is a separate remaining owner decision. The preferred MVP boundary is:
+
+```text
+Path_cat opposite action uses one strict path-symmetry owner;
+the active J-derived eq_sym remains a semantic HoTT reference;
+strict-versus-J-derived symmetry agreement begins propositionally;
+Op_cat(Path_cat(A)) is connected by a real symmetry functor/equivalence, not a collapse.
+```
+
+Later evidence may justify redesigning public `eq_trans`/`eq_sym`, but neither
+comparison is definitional in this candidate. `Core_incl_func` should continue
+to use generic functoriality, with its composition diagnostic stated using the
+shared `comp_fapp0(Path_cat)` term. Transport/`ap` and the symmetry opposite
+functor are the first consumers of the propositional agreement boundary.
 
 ## Product Reflexivity Policy
 
@@ -1711,6 +1982,29 @@ projections, and categorical cut elimination. It does not follow that every
 mathematical equivalence should be judgmental, or that these reductions imply
 global normalization, canonicity, or a comparison theorem with a cubical or
 observational metatheory.
+
+### Local-first comparative-reference policy
+
+For every external proposal considered by this redesign, record three distinct
+things:
+
+1. the adequacy problem or computation it demonstrates;
+2. the external mechanism used to solve that problem; and
+3. the Emdash owner actually selected after a local probe.
+
+Only (1) is automatically inherited as a comparison test. Neither the syntax
+nor the implementation mechanism in (2) becomes a requirement. A proposed
+Emdash formulation should first ask whether the existing Došen cut owners,
+iterated hom architecture, stable projections, Lambdapi rewrites, and narrow
+proof-time `unif_rule`s already expose a smaller solution. External machinery
+is imported only when a concrete local prerequisite remains and the imported
+idea has been recast with explicit runtime/proof-time ownership.
+
+Accordingly, references to glue, bisimulation, cubical composition, fibrancy,
+or observational code generation in this report mean “known comparative
+route,” not “implementation specification.” Success is measured by the local
+adequacy matrix, owner-position probes, computation, and global-coherence
+diagnostics rather than fidelity to another system.
 
 ## Foundational Adequacy And Minimal HoTT/Omega Validation Matrix
 
@@ -1821,9 +2115,12 @@ The first composite and related-input application are intended runtime
 computations. The reverse composite is propositional for arbitrary `p`. The
 append-only stable-head probe obtains its reflexive base through a narrow
 two-rigid-head proof-time comparison and then derives arbitrary eta by generic
-`ind_eqr`; that is a credible candidate, not yet the selected permanent owner.
-Promotion requires an owner-position warning/reduction-order audit and a
-comparison with any coherence supplied by shaped reflexivity or fibrancy.
+`ind_eqr`. Under the selected hybrid architecture, this is a valid ordinary-J
+proof even though the Pi equality classifier is structured. It is a credible
+candidate, not yet the selected permanent owner. Promotion requires an owner-
+position warning/reduction-order audit and a check that any later shaped
+reflexivity registration joins it. A future fibrancy-derived computational J
+may be compared with this theorem, but is not its dependency.
 
 Beta and propositional eta supply quasi-inverse data but do not by themselves
 inhabit the active contractible-fibre `IsEquivMap`. H1 therefore requires a
@@ -1860,7 +2157,8 @@ directed analogue already suggested by the iterated-hom architecture:
   from proof-time agreement with preselected named unit/counit terms;
 - `idtoequiv_cat`, the selected category decoder, path-to-arrow coherence, and
   the ordinary-isomorphism comparison only at the appropriate dimension;
-- strict path-category composition/opposite coherence;
+- shared path-category composition, oriented pre/post actions, and genuine
+  opposite/symmetry coherence;
 - `IsObjTruncCat`, `IsDiscreteCat`, recursive `IsNCat`, and packaged `OneCat`;
 - the corresponding structure one hom level higher: an object-level example
   is repeated for a hom-category or transfor hom-action so that a capped point
@@ -1872,7 +2170,7 @@ directed construction:
 
 | Type/groupoid notion | Category/omega counterpart | Kind of correspondence | Initial status and iteration boundary |
 | --- | --- | --- | --- |
-| identity/path | `Path_cat`, `Core_cat`, `Core_incl_func` | groupoidal lift into directed structure | active first draft; strict path algebra/opposite repair is a prerequisite |
+| identity/path | `Path_cat`, `Core_cat`, `Core_incl_func` | groupoidal lift into directed structure | active first draft; category-level composition is owner-position probed, while opposite/symmetry repair remains a prerequisite |
 | functions and dependent families | functors, `Catd`, displayed functors/transfors | genuinely directed analogue | active generic owners; retain base-arrow and transfor hom-action |
 | dependent Pi/Sigma | `Pi_cat`, `Sigma_cat` and their displayed action | genuinely directed analogue | broad infrastructure active; redesigned equality/univalence next-hom witness is a prerequisite |
 | homotopies | transfors and displayed transfors | genuinely directed analogue | active through generic `tapp*` owners; record the first rung that remains iterable |
@@ -1960,18 +2258,21 @@ append-only import probe and does not change the row's formal status.
 | Arbitrary Sigma/record path-characterization round trips | prerequisite | Current diagnostics cover projections and reflexive encode/decode cases, not both arbitrary round trips. |
 | Record identity classifier and reflexivity observers | prerequisite | Nondependent and dependent conservative skeletons pass in an append-only import probe; intended placement and later-consumer audit remain. |
 | Stable shaped record reflexivity and reflexive shaped `J` | prerequisite | The nondependent stable-head skeleton and simulated consumer registrations pass append-only with no local warning; a true owner-position/full-file-copy probe remains. |
-| Dependent/nested shaped reflexivity, structural action, and arbitrary dependent `J` | prerequisite | Immediate probe tracks, but public promotion follows path-owner selection; action and fibrancy must not be inferred from the nondependent reflexive probe. |
+| Dependent/nested shaped reflexivity, structural action, and additional computational dependent `J` | prerequisite | Immediate probe tracks, but public promotion follows path-owner selection; retained generic J remains active, while action and fibrancy must not be inferred from the nondependent reflexive probe. |
 | Contractibility, fibres, `IsEquivMap`, `TypeEquiv` | active | Contractible-fibre presentation and selected map/inverse observations are active. |
 | `TypeEquiv`/`IsEquivMap` identity, symmetry, and composition compatibility | prerequisite | Reflexive evidence and selected constructor closure are active; a complete ordinary algebra and executable compatibility corpus are not. |
 | Groupoid univalence and operational reverse decoder | active | First-draft capabilities exist; decoder agreement and action coherence remain an early normalization phase. |
 | Both groupoid-univalence round trips and selected action coherence | prerequisite | Require named `idtoequiv(ua(e))`, `ua(idtoequiv(p))`, `coe(ua(e),a)`, and one nontrivial Pi or Sigma action diagnostic. |
+| Direct observational equality of the groupoid/category universes | deferred beyond immediate MVP; eventual explicit track | H1 uses the encoder/decoder/action interface. `OETU-UNIVERSE-EQUALITY` later chooses a direct equality rule or identity view, shaped reflexivity/action/J, and the unstratified boundary. |
 | Truncation properties and low-level aliases | prerequisite | `TruncLevel`/`IsTruncGrpd` skeleton has append-only feasibility evidence; intended placement and active promotion remain. |
 | Packaged `PropU_grpd`/`SetU_grpd`/`GroupoidU_grpd` | prerequisite | Carrier/evidence record skeleton has append-only feasibility evidence; property paths, closure, universe-level truncation, and owner-position audit remain open. |
 | Truncation reflectors | deferred | Require the higher-constructor/restricted-elimination architecture. |
 | `Cat`, functors, transfors, iterated hom actions | active | Broad generic infrastructure exists and remains the owner of ordinary functoriality/naturality. |
-| Strict coherent `Path_cat` and opposite action | prerequisite | Current first draft has unit/self-opposite coherence defects; a fresh strict local algebra is only probe evidence. |
+| `Path_cat` category-level composition | probed | Shared-`comp_fapp0` owner-position full-file candidate passes both runtime units, generic typed associativity, J-derived agreement, the migrated full check suite, and warning-enabled checking. Promotion and durable active checks remain. |
+| `Path_cat` opposite/symmetry action | prerequisite | The active definitional self-opposite collapse remains unsound as endpoint reversal; a real symmetry functor/equivalence and its action diamonds are still required. |
+| Global ordinary-iso univalence compatibility | active legacy, frozen for new design | Current `cat_iso_univalence(C)` checks remain during migration, but new general-category architecture uses `CatUnivalence`; the replacement is OneCat-scoped. |
 | First-class `OmegaEquiv` observations | active | Recursive observation/reflexivity interface exists; unrestricted introduction/corecursion is absent. |
-| Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | prerequisite | The transitional bridge, primary-property/Sigma package, and exact fixed-arrow inverse/higher-cell telescope have append-only feasibility evidence; active-owner migration, property-valuedness, and owner-position audit remain. |
+| Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | prerequisite | The transitional bridge, opaque evidence/Sigma package, and exact fixed-arrow inverse/higher-cell telescope have append-only feasibility evidence. The recursive owner, refl/op/Product generators, decoder migration, integrated next-hom witness, property-valuedness, and owner-position audit remain. |
 | Indexed `Adjunction(F,G)` | prerequisite | Indexed formation, both exact triangle rules, direct `F`/`G` conversion, typed proof-time agreement with named unit/counit, and the negative runtime-erasure control pass append-only. Active opposite/mate migration and owner-position warning/LHS audits remain. |
 | `IsObjTruncCat` | prerequisite | Formation is mechanically small once `IsTruncGrpd` exists, but current evidence is append-only. |
 | `IsDiscreteCat` | prerequisite | Needs repaired `Path_cat` and fixed-map omega-equivalence of `Core_incl_func`. |
@@ -1994,7 +2295,7 @@ columns:
 | path characterization | Do encode/decode or `happly`/`funext` maps have both required arbitrary round trips, with judgmental versus propositional status explicit? |
 | reflexivity | Do conservative observations and any selected shaped head have one joining normal form? |
 | action/transport | Can registered open and dependent terms act on the supported paths, or is this a recorded prerequisite? |
-| fibrancy/dependent J | Which motives admit arbitrary structured-path elimination, and does that eliminator have sound betas? |
+| fibrancy/computational shaped J | Beyond retained generic propositional J, which motives and structured constructors admit additional runtime elimination, and do those betas follow from a sound capability? |
 | equivalence/univalence | Are the standard identity/symmetry/composition operations, closure, decoder round trips, and selected action beta present at the relevant universe/dimension? |
 | omega iteration | Does the construction retain the owner needed at the next hom level? |
 | negative controls | Do open paths/evidence remain non-collapsed at conversion level, without mistaking an `assertnot` for a metatheoretic non-derivability proof? |
@@ -2026,8 +2327,15 @@ path-owner phase.
    `CatIsoUnivalence` computation during the redesign. Focused equality rules
    explicitly belonging to the shaped fast track are allowed after their
    promotion probe; this freeze is not a veto on that track.
-4. Preserve the passing active baseline.
-5. Unless the user selects another bounded task, begin implementation with
+4. Freeze `cat_iso_univalence` and its decoder-oriented companion as legacy
+   compatibility: retain existing source/checks until a bounded migration, but
+   add no new arbitrary-`Cat` consumer and use `CatUnivalence`/`OmegaEquiv` in
+   all successor architecture immediately.
+5. Apply the local-first reference policy: external designs define comparison
+   tests or candidate ingredients, never an obligation to reproduce their
+   implementation.
+6. Preserve the passing active baseline.
+7. Unless the user selects another bounded task, begin implementation with
    Candidate G / `OETU-ELEMENTARY-HOTT` under the exact exclusions in the
    handoff section. This first slice does not itself adopt the later normal-
    form migrations.
@@ -2072,13 +2380,20 @@ truncation-specific mathematical promotion candidate.
 
 ### Phase 4: Path-Algebra Ownership And `Path_cat` Repair
 
-1. Select a fresh strict path-composition/symmetry owner for the MVP and state
-   its propositional comparison boundary with J-derived `eq_trans`/`eq_sym`.
-2. Remove/probe removal of definitional self-oppositeness.
-3. Introduce/probe the path-symmetry opposite functor/equivalence.
-4. Settle strict unit/associativity ownership required by `Path_cat : Cat`.
-5. Add both-order diagnostic diamonds.
-6. Revalidate `Core_incl_func`, `path_to_hom`, transport/`ap`, `DefIso`,
+1. Promote/refine the full-file-tested category-level composition candidate:
+   remove the `comp_fapp0(Path_cat)->eq_trans` fold, retain the shared generic
+   `comp_fapp0` head, and add the two narrow `eq_refl` unit bridges.
+2. Preserve `hom_postcomp_fapp0` and `hom_precomp_along_fapp0` as distinct
+   oriented runtime action owners with their existing proof-time comparisons;
+   owner-position probe and minimize/classify the four oriented `eq_refl` unit
+   bridges demonstrated append-only. Do not fold category composition into
+   either action head while the measured associativity timeout remains.
+3. State and check the J-derived propositional comparison with `eq_trans`.
+4. Remove/probe removal of definitional self-oppositeness.
+5. Introduce/probe the path-symmetry opposite functor/equivalence and its
+   propositional comparison with `eq_sym`.
+6. Add both runtime-unit diamonds and typed generic associativity diagnostics.
+7. Revalidate `Core_incl_func`, `path_to_hom`, transport/`ap`, `DefIso`,
    opposite, and Product consumers.
 
 This phase controls the composition and symmetry owners used by later public
@@ -2094,7 +2409,8 @@ Conservative lane:
 
 1. retain direct record/Sigma/Pi equality classifiers and projection observers
    where both reduction orders join;
-2. keep generic `J` computation on literal `eq_refl`;
+2. keep generic `J` formation at every classifier and its computation on
+   literal `eq_refl`;
 3. use the lane as a fallback MVP and as a control for warning/performance
    comparisons.
 
@@ -2113,6 +2429,10 @@ Shaped lane:
 6. write an exact consumer/migration audit before changing an existing public
    former.
 
+Generic propositional uses of `ind_eqr`, including Candidate H eta, remain
+valid in both lanes. The fibrancy capability gates only additional structural
+runtime betas on arbitrary shaped path constructors.
+
 ### Phase 6: Univalence Decoder Interface Normalization
 
 1. Select the reverse decoder owner at the groupoid and categorical layers.
@@ -2123,11 +2443,16 @@ Shaped lane:
    stable.
 5. Do not use arbitrary-capability `unif_rule`s as a replacement for missing
    coherence.
+6. Quarantine legacy global `CatIsoUnivalence` consumers during this migration:
+   new general-category coherence uses `OmegaEquiv`; retain or introduce the
+   ordinary-iso decoder only behind `OneCat`/an explicit dimension hypothesis.
+7. Record that these decoder/action results complete the immediate H1 universe
+   surface but do not implement direct observational universe identity.
 
 ### Phase 7: Primary Fixed-Map Omega-Equivalence And Sigma Package
 
-1. Introduce/refine `OmegaEquivAlong_C(f)`/`IsOmegaEquivArrow_C(f)` as the
-   primary fixed-arrow evidence layer.
+1. Introduce/refine neutral `OmegaEquivAlong_C(f)` as the primary fixed-arrow
+   evidence layer; reserve `IsOmegaEquivArrow_C(f)` until property-valuedness.
 2. Migrate `OmegaEquiv_C(x,y)` from the current opaque observation classifier
    to the Sigma package `Sigma f, OmegaEquivAlong_C(f)` in an owner-position
    full-file probe.
@@ -2143,6 +2468,9 @@ Shaped lane:
    `OmegaEquivFibre(F)` during compatibility staging.
 7. Validate one concrete named equivalence declaration and the first MVP
    end-to-end univalence/action witness without a per-instance unification rule.
+8. Do not promote after telescope formation alone. Complete the recorded
+   owner-position ladder through reflexive, opposite, Product, decoder, and
+   integrated next-hom consumers in one full-file candidate.
 
 Property-valuedness of the fixed-arrow evidence may remain a named theorem
 prerequisite after formation and projection migration; it is required before
@@ -2188,8 +2516,9 @@ cleanup, opposite/mate surface, and performance/warning audits remain open.
 3. Add `CatDim`, recursive `IsNCat`, `NCat(n)`, `ZeroCat`, and `OneCat`.
 4. State and prove or stage `IsNCat(n,C) -> IsObjTruncCat(n,C)` with its exact
    univalence/evidence-truncation dependencies.
-5. Scope ordinary `CatIsoUnivalence` to `OneCat` and prove or defer the
-   `OmegaEquiv`/`IsoEvidence` comparison there.
+5. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
+   defer the `OmegaEquiv`/`IsoEvidence` comparison there, migrate the remaining
+   compatibility consumers, and retire the unscoped global claim.
 
 ### Phase 10: Public Equality, Structural Action, And Fibrancy Migration
 
@@ -2199,9 +2528,11 @@ cleanup, opposite/mate surface, and performance/warning audits remain open.
 4. Eliminate the two-reflexivity-normal-form Product boundary.
 5. Promote structural action only through the selected registered-map
    architecture.
-6. Promote arbitrary structured-path `J` only through the selected
-   fibrancy/dependent-elimination capability; do not identify it with either
-   action alone or the already feasible reflexive shaped beta rule.
+6. Retain generic propositional `J` throughout. Promote additional runtime
+   rules for arbitrary structured-path constructors only through the selected
+   fibrancy/dependent-elimination capability; do not identify that computation
+   with either action alone, ordinary generic elimination, or the already
+   feasible reflexive shaped beta rule.
 7. Keep bounded checks and warning comparisons for every owner migration.
 
 This phase must not be combined with a module split or broad code
@@ -2219,7 +2550,8 @@ reorganization.
 3. Promote the standard Pi compatibility surface, including runtime diagonal
    beta, related-input action, propositional eta, and an active
    `IsEquivMap(PiHapply)`/`TypeEquiv` package. Audit any proof-time reflexive
-   bridge at owner position and against shaped/fibrancy-derived coherence.
+   bridge at owner position and against shaped-reflexivity registration. The
+   generic-J eta theorem does not wait for computational fibrancy.
 4. Add both arbitrary Sigma and dependent-record path-characterization round
    trips with their reflexive computation laws.
 5. Derive `TypeEquiv` and `IsEquivMap` identity/symmetry/composition, stabilize
@@ -2246,7 +2578,29 @@ reorganization.
    milestone claims HIT readiness beyond truncation reflectors; it is not a
    prerequisite for the first univalent MLTT/HoTT core.
 
-### Phase 13: Deferred Universe Metatheory
+### Phase 13: Eventual Computational Universe Identity
+
+This phase is part of the eventual full-observational endpoint, not the H1 MVP
+gate. Design probes may begin earlier once their immediate owners are stable.
+
+1. For `Grpd_grpd`, compare direct public equality reduction with a dedicated
+   universe identity-view fallback; select only after owner-position
+   rewrite/unification and performance evidence.
+2. Define shaped universe reflexivity, structural transport/action, and the
+   exact boundary between retained generic J and additional structured-J
+   computation.
+3. Integrate `TypeEquiv`, the selected reverse decoder, both round trips, and
+   Product/Pi/Sigma action diamonds without duplicating semantic bodies.
+4. Repeat the design question at the categorical universe using the promoted
+   fixed-map `OmegaEquivAlong`/Sigma package, while preserving the
+   unstratified-policy warning.
+5. Test at least one nontrivial universe transport through the next hom level,
+   warning behavior, subject reduction, and bounded full-suite performance.
+6. Treat external glue/bisimulation/cubical mechanisms as comparison baselines;
+   select a native Emdash mechanism from local owners and record why it is
+   sufficient.
+
+### Phase 14: Deferred Universe Metatheory
 
 Compare:
 
@@ -2319,32 +2673,47 @@ Candidate E's path-owner decision.
 
 ```text
 OmegaEquivFibre(F) as semantic reference;
-OmegaEquivAlong(F) as primary evidence;
+OmegaEquivAlong(F) as neutral primary evidence/certificate;
 OmegaEquiv(x,y) := Sigma F, OmegaEquivAlong(F);
 generic omega_equiv_to/evidence projection beta;
 transitional bridge to the old opaque owner only as needed;
+refl/op/Product generators and decoder migration in one full-file candidate;
+one recursive next-hom univalence/action witness;
 one concrete named equivalence declaration;
 no unif-only runtime semantics.
 ```
 
 Risk: medium to high as an active normal-form migration. The append-only
-fixed-map telescope, transitional bridge, primary Sigma package, and computing forward
-projection and higher-cell endpoints all pass warning-enabled probes without
-a local unjoinable critical-pair report. Scratch-LHS cleanup remains part of
-promotion. The principal risk lies in migrating active recursive observations,
-generators, and univalence decoders, not in basic Lambdapi expressibility.
+fixed-map telescope, transitional bridge, opaque evidence/Sigma package,
+computing forward projection, and higher-cell endpoint types all pass warning-
+enabled probes without a local unjoinable critical-pair report. They do not yet
+implement the new recursive owner, refl/op/Product generators, decoder
+migration, or integrated next-hom witness. Scratch-LHS cleanup remains part of
+promotion. Candidate D is “expressibility demonstrated” until Steps 1--7 of
+the fixed-map promotion ladder pass together at owner position. Property-
+valuedness remains a separate theorem and the `IsOmegaEquivArrow` name is not
+used as evidence for it.
 
 ### Candidate E: `Path_cat` focused repair
 
 ```text
-remove self-opposite collapse in an owner-position/full-file-copy probe;
-classify warning delta and downstream type failures;
-probe symmetry functor;
-test both path-category units.
+promote/refine shared comp_fapp0 category-level composition candidate;
+add two narrow eq_refl unit bridges;
+retain oriented pre/post runtime action owners and proof-time comparison;
+clean/classify their four separately demonstrated eq_refl action-unit bridges;
+retain J-derived eq_trans only as a propositional reference;
+remove self-opposite collapse and probe the symmetry functor/equivalence.
 ```
 
-Risk: medium to high. This is a prerequisite for `OneCat` and for public
-shaped-reflexivity registration with path composition/symmetry.
+Risk: medium overall. The composition half is now owner-position probed: the
+full source and migrated check suite pass warning-enabled, including units,
+generic typed associativity, and J-derived agreement, with 1,091 rather than
+1,109 unjoinable-pair reports. The attempted fold to the postcomposition head
+is rejected because associativity consumers time out. Removing definitional
+self-oppositeness and implementing the symmetry functor/equivalence remain
+medium-high-risk prerequisites for `OneCat` and public shaped-reflexivity
+registration with symmetry; the oriented action-unit bridges also retain one
+append-only local overlap to classify before promotion.
 
 ### Candidate F: indexed adjunction migration spike
 
@@ -2394,16 +2763,19 @@ PiHapply as the diagonal observation of PiPathView;
 PiFunext with related-input action by ind_eqr;
 runtime happly(funext(h)) beta;
 propositional funext(happly(p)) eta by generic J;
-owner-position comparison of proof-time versus shaped/fibrant coherence;
+owner-position comparison of the proof-time bridge with shaped-reflexivity registration;
 IsEquivMap(PiHapply) and TypeEquiv packaging;
 no global eta rewrite.
 ```
 
 Risk: medium. Both transparent and stable append-only probes pass, including a
 typed two-rigid-head reflexive comparison and arbitrary propositional eta. The
-permanent owner and contractible-fibre equivalence proof remain open, so this
-candidate is immediately feasible for an owner-position design probe but is
-not yet a formally `probed` matrix row.
+eta proof is valid under the selected hybrid primitive-generic/shaped
+architecture and does not depend on `OETU-OBS-FIBRANCY`; it claims
+propositional equality, not new runtime elimination of arbitrary structured Pi
+paths. The permanent owner and contractible-fibre equivalence proof remain
+open, so this candidate is immediately feasible for an owner-position design
+probe but is not yet a formally `probed` matrix row.
 
 Candidate G is the default first implementation slice for a new handoff;
 Candidates A and B are the next safest promotion candidates and may be ordered
@@ -2419,15 +2791,20 @@ equivalence packaging is active.
 
 ## Explicitly Deferred Work
 
-Shaped `eq_refl`, structural action/substitution, reflexive shaped `J`, and a
-sound arbitrary structured-path `J` are intentionally **not** blanket entries
-in this deferred list. They are immediate tracks. A particular attempted
+Shaped `eq_refl`, structural action/substitution, reflexive shaped `J`, and
+sound additional computation for arbitrary structured-path `J` are
+intentionally **not** blanket entries in this deferred list. They are immediate
+tracks layered over retained generic propositional J. A particular attempted
 encoding may fail or an unresolved subpart may remain a prerequisite for a
 later slice, but earlier reports do not defer the subject itself.
 
 Elementary H0 formers, standard Pi/function extensionality, Sigma/record path
 round trips, and ordinary equivalence/univalence compatibility are likewise
 immediate prerequisite or implementation tracks, not blanket deferrals.
+
+Direct observational universe identity is not part of the immediate H1 MVP,
+but it is also not an unowned omission: Phase 13 and
+`OETU-UNIVERSE-EQUALITY` explicitly own the eventual full-observational track.
 
 - a complete normalization or canonicity proof for observational equality;
 - a closed inductive-recursive universe of all groupoid/type codes;
@@ -2464,12 +2841,13 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
 - a typed `eq_refl`, not a conversion assertion, exercises any retained
   proof-time reflexive Pi coherence;
 - `PiFunext(PiHapply(p)) = p` is constructed propositionally by generic `J`,
-  with its reflexive computation checked;
+  with its reflexive computation checked; this is a retained-generic-J theorem,
+  not a claim of arbitrary structured-path runtime elimination;
 - `PiHapply` is packaged with active contractible-fibre `IsEquivMap` evidence,
   or a reviewed generic quasi-inverse-to-`IsEquivMap` theorem supplies it;
 - owner-first and application/eta-first reductions, warning deltas, and the
-  comparison with shaped/fibrancy-derived coherence are checked before
-  promotion.
+  comparison with shaped-reflexivity registration are checked before
+  promotion; computational fibrancy remains a separate stronger track.
 
 ### Record diagnostics
 
@@ -2502,11 +2880,23 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
 ### Path-category diagnostics
 
 - both identity units at an arbitrary path;
-- both associativity reduction orders;
+- typed generic proof-time associativity at arbitrary paths, plus bounded
+  normalization of each bracketing without a path-specific runtime
+  associativity rule;
+- both `id`-first and narrow-`eq_refl`-bridge-first unit reductions;
+- both units for each oriented post/pre action spelling after the `Path_cat`
+  identity has projected to `eq_refl`, with the postcomposition-accumulation
+  overlap explicitly classified;
 - opposite hom endpoints remain reversed;
 - the symmetry functor maps identity and composition correctly;
-- strict path composition/symmetry agree propositionally with the J-derived
-  reference operations at the selected boundary;
+- shared `comp_fapp0(Path_cat)` agrees propositionally with J-derived
+  `eq_trans`, and the oriented pre/post runtime action heads compare by typed
+  proof-time equality;
+- the rejected `comp_fapp0(Path_cat)->hom_postcomp_fapp0` orientation retains a
+  bounded negative associativity control until its global interaction is
+  redesigned;
+- path symmetry agrees propositionally with J-derived `eq_sym` at the selected
+  boundary;
 - `Core_incl_func` retains generic functorial ownership.
 
 ### Univalence diagnostics
@@ -2522,6 +2912,9 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
 - `path_to_hom` agrees with `idtoiso_cat`/`idtoequiv_cat` forward arrows;
 - Product reflexive constructor/decoder diamonds;
 - `OneCat` ordinary-iso comparison is not available for arbitrary `Cat`.
+- no new diagnostic or implementation consumer uses legacy global
+  `cat_iso_univalence`; retained checks are labelled compatibility-only until
+  OneCat migration;
 - `omega_equiv_to((F,u)) ≡ F` and
   `omega_equiv_evidence((F,u)) ≡ u` by generic Sigma projection;
 - during compatibility staging only,
@@ -2533,8 +2926,31 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
   and no broad raw inverse-composite cancellation rewrite is introduced;
 - a concrete named equivalence whose selected map is usable by downstream
   computation;
+- reflexive, opposite, and Product fixed-map generators and their decoder
+  diamonds pass in the same owner-position full-file candidate;
+- one recursive next-hom univalence/action witness uses the new package rather
+  than the transitional old-owner bridge;
 - no semantic dependency on an untyped or unvalidated per-instance
   `unif_rule`.
+
+### Eventual universe-identity diagnostics
+
+These diagnostics belong to Phase 13 and are not immediate H1 acceptance
+criteria:
+
+- direct universe equality or its selected identity view has one canonical
+  owner and a documented rollback boundary;
+- shaped universe reflexivity and structural transport/action join decoder
+  computation in both orders;
+- retained generic J continues to work at an opaque universe variable, while
+  every additional structured-J beta is former-registered and capability-
+  justified;
+- both univalence round trips and Product/Pi/Sigma universe-action diamonds
+  pass without copying a second decoder body;
+- the categorical universe case uses the promoted fixed-map package and states
+  the unstratified `Cat_cat : Cat` boundary explicitly;
+- at least one computation remains iterable at the next hom level and passes
+  warning, subject-reduction, and bounded timing audits.
 
 ### Indexed-structure diagnostics
 
@@ -2578,8 +2994,9 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
 - equality, transport, equivalence, univalence, and truncation examples compose
   rather than merely typecheck independently;
 - literal-reflexivity `J`, reflexive shaped `J`, structural action, and
-  arbitrary fibrant/dependent structured-path `J` are tested and reported
-  separately;
+  additional arbitrary fibrant/dependent structured-path `J` computation are
+  tested and reported separately; generic propositional J remains available
+  throughout and is not conflated with the last item;
 - conversion-level `assertnot` controls ensure that an open path does not
   collapse definitionally to reflexivity, equality reflection is not installed
   accidentally, and evidence fields do not erase globally; comments state that
@@ -2629,11 +3046,13 @@ ordering change is part of Candidate C's risk, not mere formatting.
 
 ### Structural action does not automatically supply dependent `J`
 
-An action head for registered maps does not by itself justify eliminating an
-arbitrary structured path into an arbitrary dependent motive. Treating the two
-as one capability would hide the central fibrancy obligation. The action and
-dependent-elimination interfaces therefore have separate ledger entries,
-diagnostics, and promotion claims.
+An action head for registered maps does not by itself justify adding new
+runtime elimination rules for an arbitrary structured path and arbitrary
+dependent motive. Treating the two as one capability would hide the central
+fibrancy obligation. This does not invalidate the retained primitive generic
+J or the propositional theorems derived from it. The action and additional
+computational dependent-elimination interfaces therefore have separate ledger
+entries, diagnostics, and promotion claims.
 
 ### Native inductive records interact with the current `Prop`/`P` builtins
 
@@ -2650,24 +3069,46 @@ of equivalence is contractible-fibre `IsEquivMap`. Skipping that packaging would
 overstate H1. Conversely, turning the successful reflexive proof-time bridge
 into a global eta rewrite would erase the intended distinction between runtime
 observation and propositional coherence. The owner-position design must test a
-narrow two-rigid-head bridge against shaped-reflexivity and fibrancy-derived
-alternatives before selecting it.
+narrow two-rigid-head bridge against shaped-reflexivity registration before
+selecting it. A later fibrancy-derived computational rule is a comparison, not
+a prerequisite for the generic-J eta theorem.
+
+### `Path_cat` composition is selected, but symmetry is not
+
+The shared-`comp_fapp0` candidate has stronger evidence than an ordinary
+append-only probe and resolves the apparent unit/asymmetry contradiction at the
+category-composition layer. Promotion can still expose source-order consumers
+not represented in the migrated suite, so the full-file evidence remains a
+probe rather than active truth. More importantly, it does not justify the
+current `Op_cat(Path_cat(A))->Path_cat(A)` collapse. Composition and symmetry
+must not be reported as one completed repair.
 
 ### `IsDiscreteCat` may expose missing category-equivalence infrastructure
 
 Do not weaken discreteness to object-set truncation merely to make `OneCat`
 easy to declare. The concrete prerequisite is a fixed-functor
-`OmegaEquivAlong(Core_incl_func(C))` property integrated with the recursive
+`OmegaEquivAlong(Core_incl_func(C))` evidence layer integrated with the recursive
 Sigma-packaged `OmegaEquiv`; record it rather than postulating an opaque generic
 category-equivalence property.
 
 ### Migrating `OmegaEquiv` changes a public normal form
 
-The primary-property/Sigma-package architecture is mechanically simple, but
+The primary-evidence/Sigma-package architecture is mechanically simple, but
 the active `OmegaEquiv` classifier is opaque and already owns reflexive,
 opposite, Product, and univalence observations. Replacing it is a kernel
 normal-form migration. The forward/evidence projection benefit does not waive
 the constructor, decoder, subject-reduction, downstream, and warning audits.
+Current probes type the telescope and package but do not implement that
+recursive owner. The explicit promotion ladder prevents “fixed endpoints
+typecheck” from being mistaken for “global migration is coherent.”
+
+### Immediate decoder univalence can be mistaken for full universe identity
+
+H1 deliberately stops at encoder/decoder round trips and selected action beta.
+That is enough for the immediate MVP, but not for the eventual statement that
+public universe equality itself computes as equivalence. Conversely, the
+later goal does not license importing another system's glue or bisimulation
+mechanism without a local owner analysis. Phase 13 owns this boundary.
 
 ### Indexed adjunction is simpler but has a broad migration surface
 
@@ -2725,6 +3166,16 @@ The policy is accepted operationally but may fail in a future model or under a
 constructor not closed by univalence. Such failures are architecture evidence,
 not reasons to add arbitrary closure axioms silently.
 
+The separate legacy global `cat_iso_univalence` assumption is additionally
+frozen. If new general-category work uses it before `OneCat`, the redesign
+would reintroduce the dimension collapse it is meant to remove. Existing
+compatibility declarations may survive the bounded migration, but they are not
+successor-architecture dependencies. Since both active capabilities compare
+their evidence type with the same object equality, treating both as permanent
+global principles would also induce an unrestricted comparison between
+`IsoEvidence` and recursive `OmegaEquiv`; the OneCat boundary is what makes
+that comparison dimension-correct.
+
 ## Side-Task Ledger
 
 | ID | Status | Depends on | Resume trigger | Next action |
@@ -2732,7 +3183,7 @@ not reasons to add arbitrary closure axioms silently.
 | `OETU-RECORD-CONVENTION` | proposed early slice; append-only skeleton demonstrated | current inductive/Sigma infrastructure | first concrete slice selected | Refine the passing dependent one-constructor record at owner position, including projections, generated eliminator, parameter syntax, and inferred-slot audit; compare with nested Sigma. |
 | `OETU-RECORD-GENERATOR` | deferred/optional | `OETU-RECORD-CONVENTION` | two manual records show repeated stable boilerplate | Specify a deterministic external schema generator; generated code remains reviewable Lambdapi source. |
 | `OETU-ELEMENTARY-HOTT` | **default next slice; not started**; append-only feasibility demonstrated | active universe decoding and native inductives | next implementation turn unless the user selects another bounded slice | Promote decoded Empty, Bool, and Nat classifiers/eliminators with beta and Bool non-collapse diagnostics at their active owners; keep sums, observational identity/no-confusion/higher action, canonicity, and categorical universal properties as separately statused work. |
-| `OETU-PI-FUNEXT` | immediate owner-position design track; append-only beta/eta skeleton demonstrated | active `PiPathView`, generic `ind_eqr`, contractible-fibre `IsEquivMap` | H1 or truncation-evidence property-valuedness is consumed | Select `PiHapply`/`PiFunext` owners, preserve related-input action, audit the reflexive proof-time boundary, derive propositional eta, and package `PiHapply` as an active equivalence. |
+| `OETU-PI-FUNEXT` | immediate owner-position design track; append-only beta/eta skeleton demonstrated | active `PiPathView`, retained generic `ind_eqr`, contractible-fibre `IsEquivMap` | H1 or truncation-evidence property-valuedness is consumed | Select `PiHapply`/`PiFunext` owners, preserve related-input action, audit the reflexive proof-time boundary against shaped registration, derive generic-J propositional eta, and package `PiHapply` as an active equivalence; do not add a fibrancy dependency for that theorem. |
 | `OETU-STRUCTURAL-PATH-COMPAT` | proposed H1 compatibility slice | active Sigma paths, `OETU-RECORD-CONVENTION`, `OETU-PI-FUNEXT` where path-valued functions require it | H1 path characterization is claimed | Add arbitrary Sigma and dependent-record encode/decode round trips, reflexive betas, and one nested path-telescope case without forcing global runtime eta. |
 | `OETU-TYPE-EQUIV-ALGEBRA` | proposed H1 compatibility slice | active `IsEquivMap`/`TypeEquiv`, `OETU-PI-FUNEXT`, `OETU-UNIV-DECODER` for round trips | foundational HoTT MVP is selected | Add identity/symmetry/composition, the required contractible-fibre closure proofs, both groupoid-univalence round trips, selected transport beta, and one Pi/Sigma universe-action example. |
 | `OETU-TRUNC-LEVEL` | proposed early slice; append-only skeleton demonstrated | existing `IsContr`, `Pi_grpd`, equality | truncation slice selected | Promote/refine `TruncLevel`, recursive `IsTruncGrpd`, and named low-level aliases with owner-position diagnostics. |
@@ -2740,24 +3191,25 @@ not reasons to add arbitrary closure axioms silently.
 | `OETU-TRUNC-EVIDENCE-PROP` | deferred proof | `OETU-TRUNC-LEVEL`, `OETU-PI-FUNEXT`, stable observational paths | packaged-universe equality is consumed | Derive `IsPropGrpd(IsTruncGrpd(n,A))`; do not postulate global proof irrelevance. Add ambient univalence before claiming the `(n+1)` universe theorem. |
 | `OETU-TRUNC-UNIVERSE` | proposed follow-up; append-only skeleton demonstrated | `OETU-RECORD-CONVENTION`, `OETU-TRUNC-LEVEL` | low-level predicates pass | Add `TruncGrpdU`, low-level aliases, carrier/evidence projections, and an explicit no-false-universe-truncation diagnostic at owner position. |
 | `OETU-TRUNC-REFLECTOR` | deferred | observational equality and HIT elimination | a theorem needs `||A||_n`, not merely `IsTruncGrpd(n,A)` | Design propositional truncation first with restricted dependent elimination. |
-| `OETU-PATH-CAT` | proposed prerequisite repair; append-only strict local algebra demonstrated | current J-derived path algebra | public shaped registration, `OneCat`, or observational category equality begins | Select strict path owners, state propositional agreement with `eq_trans`/`eq_sym`, run the owner-position/full-file-copy self-opposite audit, and add the symmetry functor/equivalence. |
-| `OETU-OMEGA-EQUIV-ALONG` | proposed normal-form migration; append-only primary-property/package, higher-cell, and bridge feasibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention, univalence decoder | fixed-functor equivalence or discreteness is consumed | Migrate at owner position to primary fixed-arrow evidence plus Sigma-packaged `OmegaEquiv`; route generators/destructors and compare with the old semantic fibre without adding raw cancellation rewrites. |
+| `OETU-PATH-CAT` | composition owner-position probed; oriented action-unit cleanup and opposite/symmetry prerequisites remain | generic `comp_fapp0`, oriented hom actions, current J-derived path algebra | public shaped registration, `OneCat`, or observational category equality begins | Promote/refine the shared-`comp_fapp0` candidate with two category-unit bridges and durable checks; owner-position clean/classify the four oriented action-unit bridges; remove the self-opposite collapse and add the symmetry functor/equivalence. |
+| `OETU-OMEGA-EQUIV-ALONG` | proposed normal-form migration; append-only evidence/package and endpoint expressibility demonstrated | recursive `OmegaEquiv`, Sigma/record convention, univalence decoder | fixed-functor equivalence or discreteness is consumed | Complete the nine-step promotion ladder: owner-position primary evidence plus Sigma package, refl/op/Product generators, destructors/decoders, concrete named declaration, integrated next-hom witness, fibre comparison, and audits without raw cancellation rewrites. |
 | `OETU-ADJUNCTION-INDEXED` | proposed focused migration; append-only indices, triangles, and named-operation boundary demonstrated | current adjunction triangles/opposite/mates | indexed-structure slice selected | Replace `Adjunction(R,L)` by `Adjunction(F,G)` at owner position; remove/transparentize left/right views, retain stable unit/counit observations, and migrate the 153-occurrence source/check/example surface with the runtime-erasure negative control. |
 | `OETU-STRUCTURE-DECLARATION` | proposed usability protocol; one append-only adjunction operation bridge demonstrated | primary fixed-map evidence; indexed adjunction | a second concrete named structure instance is needed | Validate direct `u : OmegaEquivAlong(F)` and `J : Adjunction(F,G)` declarations; connect preselected unit/counit names only by typed proof-time comparisons while canonical computations retain stable observations; consider an elaborator/generator afterward. |
 | `OETU-DISCRETE-CAT` | blocked by explicit prerequisites | `OETU-PATH-CAT`, `OETU-OMEGA-EQUIV-ALONG` | directed dimension slice begins | Define object-set truncation plus `OmegaEquivAlong(Core_incl_func(C))`; do not substitute object truncation alone. |
 | `OETU-NCAT` | proposed architecture, implementation deferred | `OETU-DISCRETE-CAT`, `OETU-TRUNC-LEVEL`, record convention | `IsDiscreteCat` is stable | Add `CatDim`, recursive `IsNCat`, and packaged `NCat`. |
 | `OETU-NCAT-OBJ-TRUNC` | theorem prerequisite | `OETU-NCAT`, categorical univalence, fixed-arrow evidence truncation | `OneCat` object truncation or iso comparison is consumed | Prove/stage `IsNCat(n,C) -> IsObjTruncCat(n,C)`; state explicitly that the converse fails. |
-| `OETU-ONECAT-ISO` | proposed replacement | `OETU-NCAT`, global Cat univalence | `OneCat` exists | Scope/derive `CatIsoUnivalence` for `OneCat`; retire the unscoped claim. |
+| `OETU-ONECAT-ISO` | proposed replacement; global legacy interface frozen now | `OETU-NCAT`, global omega-level Cat univalence | `OneCat` exists; meanwhile any new global-iso consumer is found | Add no new arbitrary-`Cat` use; scope/derive `CatIsoUnivalence` for `OneCat`, migrate compatibility consumers, and retire the unscoped claim. |
 | `OETU-OBS-MVP` | proposed conservative lane; append-only skeleton demonstrated | record convention and current equality views | a low-risk equality former is selected | Refine the direct classifier, literal-reflexivity observers, and generic `J` control case at owner position without claiming arbitrary structured action. |
 | `OETU-OBS-SHAPED-REFL` | immediate probe candidate; append-only nondependent skeleton demonstrated | `OETU-OBS-MVP` classifier shape, consumer inventory; public promotion also depends on `OETU-PATH-CAT` | shaped lane selected | Extend the stable shaped head to a dependent record and nested former; register every generic literal-reflexivity consumer at owner position after path-owner selection. |
 | `OETU-OBS-ACTION` | immediate design/probe track | path telescopes, `PathOver`, shaped registry | a registered open term must act on a structured path | Select/probe `ObsAction`/`ObsDAction` or `ObsSubst`; account for open terms, dependent fields, composites, and next-dimensional data. |
-| `OETU-OBS-FIBRANCY` | immediate design/probe track | `OETU-OBS-ACTION`, dependent motives, registered formers | arbitrary structured-path elimination is consumed | Specify which classifiers/motives carry fibrancy and derive a sound dependent eliminator; do not infer this capability from action alone. |
-| `OETU-OBS-SHAPED-J` | split status: reflexive candidate immediate; arbitrary depends on fibrancy | `OETU-OBS-SHAPED-REFL`; for arbitrary paths `OETU-OBS-FIBRANCY` | shaped equality slice selected | Promote specialized reflexive `ind_eqr` when it passes; derive arbitrary structured-path `J` only from a sound dependent-elimination architecture. |
+| `OETU-OBS-FIBRANCY` | immediate design/probe track for additional computation | `OETU-OBS-ACTION`, dependent motives, registered formers | a runtime beta on an arbitrary structured constructor is consumed | Specify which classifiers/motives carry fibrancy and derive sound additional dependent-elimination computation; retained generic propositional J does not depend on this capability, and action alone does not supply it. |
+| `OETU-OBS-SHAPED-J` | split status: reflexive candidate immediate; additional arbitrary-constructor computation depends on fibrancy | `OETU-OBS-SHAPED-REFL`; for extra arbitrary-constructor betas `OETU-OBS-FIBRANCY` | shaped equality slice selected | Promote specialized reflexive `ind_eqr` when it passes; retain generic J; derive additional structured-constructor runtime rules only from a sound dependent-elimination architecture. |
 | `OETU-OBS-MIGRATE` | deferred high-risk public migration | successful shaped/MVP probe and consumer audit | one former has canonical joins | Migrate public equality one former at a time; do not combine with reorganization. |
 | `OETU-FOUNDATIONAL-ADEQUACY` | active tiered architecture/implementation gate | all relevant rows above | every slice refinement and milestone | Maintain H0/H1/H2/Omega0 status/owner/computation cells; require active H0 for an implementation skeleton, active H1 plus an integrated fixed-map univalence/action witness for a foundational HoTT MVP, and keep indexed adjunction as a separate migration witness. |
 | `OETU-UNIV-DECODER` | proposed early coherence repair | current equality and univalence interfaces | round trips, truncated-universe paths, or constructor univalence are consumed | Select decoder heads, add named capability agreement and coherence squares before further closure rules. |
+| `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; not an immediate H1 MVP gate | `OETU-UNIV-DECODER`, stable hybrid equality/action owners; categorical case also depends on promoted fixed-map omega-equivalence | direct public universe identity or full-observational completion is selected | Compare direct equality with an identity-view fallback; design shaped reflexivity/action/additional J; integrate both round trips and Product/Pi/Sigma diamonds; use external mechanisms only as comparison baselines. |
 | `OETU-PRODUCT-DIAMOND` | proposed focused cleanup | stable equality/reflexivity policy | Product decoder migration begins | Probe preserving Product evidence provenance by removing reflexive collapse. |
-| `OETU-CAT-GLOBAL` | accepted operational policy | none | any report/kernel text suggests non-univalent `Cat` semantics | Keep every `C : Cat` globally univalent and label the policy axiomatic/unstratified. |
+| `OETU-CAT-GLOBAL` | accepted omega-level operational policy; legacy ordinary-iso policy quarantined | none | any report/kernel text suggests non-univalent `Cat` semantics or new arbitrary-`Cat` iso univalence | Keep every `C : Cat` omega-univalent and label the policy axiomatic/unstratified; freeze global `cat_iso_univalence` for migration to `OneCat`. |
 | `OETU-CAT-SELF` | deferred metatheory | `OETU-CAT-GLOBAL` | model or universe computation is claimed | Compare stratified, impredicative, and operational self-universe readings. |
 | `OETU-METATHEORY` | deferred research | mature observational kernel | consistency/canonicity claim is needed | Develop normalization/model evidence; Lambdapi typechecking alone is not sufficient. |
 
@@ -2770,9 +3222,10 @@ Before this report becomes the active replacement plan:
 2. agree on the definition boundary for `IsDiscreteCat`;
 3. agree that the one-constructor inductive record convention is the default
    for finite named structures;
-4. approve the primary `OmegaEquivAlong(F)` property plus Sigma-packaged
-   `OmegaEquiv` boundary and the transitional-only role of the old semantic
-   fibre/bridge;
+4. approve neutral primary `OmegaEquivAlong(F)` evidence plus the Sigma-
+   packaged `OmegaEquiv` boundary, the transitional-only role of the old
+   semantic fibre/bridge, the explicit promotion ladder, and the reservation
+   of `IsOmegaEquivArrow(F)` until property-valuedness;
 5. approve the indexed `Adjunction(F,G)` replacement, absent/transparent
    left/right compatibility policy, stable unit/counit runtime observations,
    and optional existential `AdjunctionPackage` boundary;
@@ -2780,16 +3233,19 @@ Before this report becomes the active replacement plan:
    including the explicit fact that raw preselected unit/counit spellings do
    not inherit generic triangle computation and runtime projection betas are
    rejected by default;
-7. select the strict `Path_cat` algebra owner and its propositional agreement
-   boundary with J-derived `eq_trans`/`eq_sym` before public shaped promotion;
+7. approve the full-file-tested layered `Path_cat` composition owner—shared
+   generic `comp_fapp0`, oriented pre/post action heads, two `eq_refl` unit
+   bridges, and propositional `eq_trans` agreement—and separately select the
+   symmetry functor/equivalence before public shaped promotion;
 8. use Candidate G / `OETU-ELEMENTARY-HOTT` as the default first
    implementation slice unless the user explicitly selects another bounded
    candidate; shaped, fixed-map, path, indexed-adjunction, and Pi-compatibility
    probes may still proceed immediately while respecting their public-
    promotion dependencies;
-9. specify the conservative equality MVP, stable shaped-reflexivity registry,
-   structural-action interface, and fibrancy/dependent-`J` boundary without
-   conflating them;
+9. approve the hybrid equality contract: generic primitive
+   `=`/`eq_refl`/`ind_eqr` at unknown and shaped classifiers, a stable shaped-
+   reflexivity registry, structural action, and a distinct fibrancy boundary
+   only for additional arbitrary-constructor J computation;
 10. approve the H0/H1/H2/Omega0 tier content and the distinction between an
     architecture MVP, foundational implementation skeleton, foundational HoTT
     MVP, and optional H2/HIT completion;
@@ -2802,8 +3258,15 @@ Before this report becomes the active replacement plan:
     conversion-level negative controls with their metatheoretic limitation;
 13. maintain the fixed-map Omega0 equivalence/univalence/action witness and the
     indexed-adjunction triangle/mate witness as separate acceptance gates;
-14. add a migration statement to the June 23 plan when this proposal is
-   formally adopted.
+14. approve the immediate-MVP boundary: decoder round trips and action beta are
+    H1, while direct computational universe identity is owned by the later
+    `OETU-UNIVERSE-EQUALITY` track;
+15. approve the local-first comparative-reference policy and require every
+    adopted external idea to name its local rewrite/unification owner;
+16. freeze global ordinary-iso univalence for new arbitrary-`Cat` work and use
+    only omega-level `CatUnivalence` until the OneCat-scoped replacement;
+17. add a migration statement to the June 23 plan when this proposal is
+    formally adopted.
 
 ## Long-Term Completion Criteria
 
@@ -2821,10 +3284,12 @@ TypeEquiv/IsEquivMap identity, symmetry, and composition and both groupoid-
 univalence round trips form an executable standard compatibility surface;
 truncation properties and packaged Prop/Set/n-groupoid universes are active;
 their closure, evidence-path, and universe-level truncation claims are explicit;
-Path_cat is coherent with strict category computation, or a weak replacement is
-classified outside strict Cat;
+Path_cat uses the shared generic composition head with runtime units, generic
+typed associativity, oriented pre/post action owners, propositional eq_trans
+agreement, and a genuine symmetry functor rather than self-opposite collapse;
 OneCat is defined through directed hom truncation/discreteness;
-fixed-map omega-equivalence is the primary property and its Sigma package
+fixed-map omega-equivalence is the primary evidence layer, its property-
+valuedness is proved when that claim is consumed, and its Sigma package
 supports usable named declarations and categorical univalence;
 Adjunction is indexed by its already-named functors, with optional existential
 packaging separated from the primary relation, left/right projections absent
@@ -2833,11 +3298,13 @@ preselected named unit/counit operations have a typed proof-time declaration
 bridge without erasing the canonical triangle redex or falsely claiming raw-
 name runtime conversion;
 ordinary IsoEvidence univalence is OneCat-scoped;
-public equality computes observationally for records, Sigma, Pi, and universes;
+public equality computes observationally for records, Sigma, Pi, and eventually
+universes, with the latter completion distinguished from the immediate H1 MVP;
 structural reflexivity, structural action, and dependent elimination have
 explicit canonical owners;
-reflexive shaped J, arbitrary structured-path action, and fibrant/dependent J
-are implemented and distinguished by diagnostics;
+generic propositional J, reflexive shaped J, arbitrary structured-path action,
+and additional fibrant/dependent J computation are implemented and
+distinguished by diagnostics;
 univalence forward/reverse maps have named round trips and action coherence;
 Product constructor/reflexivity/decoder reductions join;
 the minimal HoTT/omega adequacy matrix has no unacknowledged missing cell, its
@@ -2855,6 +3322,11 @@ warning classification, catalog checks, health refresh, and make ci.
 
 - The active code, diagnostics, SOP, Foundations, and canonical syntax remain
   authoritative over this proposal.
+- Every external item below is a comparative baseline, source of examples, or
+  design prompt—not a specification to reproduce. The selected implementation
+  must be restated through local Kosta--Došen/Emdash owners and Lambdapi
+  rewrite-versus-unification policy, and may intentionally be simpler or more
+  computational than the cited mechanism.
 - The recursive `n`-type convention follows the standard HoTT truncation-level
   hierarchy in the [HoTT Book](https://homotopytypetheory.org/book/).
 - The distinction between a truncation property and its higher-inductive
@@ -2862,7 +3334,9 @@ warning classification, catalog checks, health refresh, and make ci.
 - The observational target and dedicated identity records are informed by
   Michael Shulman's [Towards an Implementation of Higher Observational Type
   Theory](https://home.sandiego.edu/~shulman/papers/running-hott.pdf) and the
-  [Narya documentation](https://narya.readthedocs.io/en/latest/).
+  [Narya documentation](https://narya.readthedocs.io/en/latest/). Narya's
+  transport/lifting and glue/bisimulation implementation is one comparison
+  route, not the required Emdash universe or J architecture.
 - [Cubical Type Theory](https://arxiv.org/abs/1611.02108) provides comparison
   evidence that function extensionality, univalence, and selected higher
   constructors can receive computational treatment; it does not select
@@ -2910,3 +3384,13 @@ warning classification, catalog checks, health refresh, and make ci.
   files extend the imported active kernel rather than placing candidates at
   their intended owners, they establish feasibility only and do not confer
   formal `probed` status.
+- The `Path_cat` composition conclusion is supported by the owner-position
+  full-file candidate `tmp/probes/oetu_path_shared_comp_owner_full.lp` and the
+  migrated entire suite
+  `tmp/probes/oetu_path_shared_comp_owner_checks_full.lp`. Their latest
+  warning-enabled log ends in `20260714-234330` and contains 1,091 unjoinable-
+  pair reports versus the active 1,109. The contrasting
+  `tmp/probes/oetu_path_oriented_owner_full.lp` unit/bridge consumers pass, but
+  its associativity consumers time out. The append-only
+  `tmp/probes/oetu_path_oriented_owner_probe.lp` separately records the
+  distinct pre/post action-owner interpretation. None is promoted source.
