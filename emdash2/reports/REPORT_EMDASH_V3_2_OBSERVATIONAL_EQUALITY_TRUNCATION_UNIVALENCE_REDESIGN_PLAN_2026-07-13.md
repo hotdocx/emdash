@@ -6,9 +6,11 @@ Plan-ID: EMDASH-V3-2-OBSERVATIONAL-EQUALITY-TRUNCATION-UNIVALENCE-REDESIGN-2026-
 Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Supersedes: no whole report yet; proposes the successor architecture for the active groupoid/computational-univalence track after review and staged approval
 Side-Task-Ledger: #side-task-ledger
+Implementation-Handoff: #implementation-handoff-start-here
+Current-Implementation-Slice: none started; default next slice is OETU-ELEMENTARY-HOTT / Candidate G
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
 Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7
-Status: revised proposed integrated redesign; the careful-review passes, fixed-map/indexed-structure feasibility probes, exact indexed triangle/higher-cell feasibility probes, named-unit/counit runtime-versus-proof-time probe, and elementary-HoTT/Pi-compatibility feasibility review are incorporated; the architecture and implementation MVP gates are now distinct, but no kernel migration is promoted by this report and the current implementation remains the active draft until individual slices are refined, owner-position probed, and accepted
+Status: handoff-ready revised proposed integrated redesign; the review and append-only feasibility pass is complete, Candidate G is the default first implementation slice, and the architecture and implementation MVP gates are distinct; no redesign kernel migration has yet started or been promoted, so the current implementation remains the active draft until individual slices are owner-position probed, diagnosed, and accepted
 
 ## Goal
 
@@ -36,6 +38,306 @@ foundational-adequacy benchmark: the minimal introductory HoTT kernel and its
 immediate category/omega-category analogues must remain expressible, with
 explicit prerequisites where the active file does not yet contain the needed
 classifier, constructor, action, or eliminator.
+
+## Implementation Handoff: Start Here
+
+This section is the operational entry point for a new conversation or agent.
+It summarizes the intended endpoint, the exact current status, the evidence
+that may be reused, the default first slice, and the update protocol. The rest
+of this report contains the detailed architecture, alternatives, risks,
+phases, benchmark matrix, and acceptance criteria. No Infinity Codex response
+or raw conversation archive is required to begin implementation; those items
+are provenance only.
+
+### Original intent and wanted endpoint
+
+The wanted end state is not merely a few additional univalence rules. It is a
+computational foundation in which:
+
+- full observational equality is available for the ordinary HoTT/MLTT core,
+  including Pi, Sigma, finite dependent records, universes, and eventually
+  inductive, coinductive, and higher-inductive formers;
+- structural reflexivity, action/substitution, and dependent elimination have
+  coherent owners, with shaped `eq_refl` and shaped/reflexive `J` promoted as
+  soon as safe owner-position designs exist rather than being deferred by old
+  experiments;
+- truncation properties, `Prop`/`Set`/ordinary-groupoid universes, directed
+  `n`-categories, `OneCat`, and their universe packages are stated without
+  conflating homotopy truncation with directed categorical dimension;
+- groupoid and categorical univalence use one operational decoder per layer,
+  and categorical equivalence is usable over an already-named arrow through
+  primary `OmegaEquivAlong(F)` evidence plus a Sigma-packaged first-class
+  equivalence;
+- all active `C : Cat` continue to be treated as univalent, while the
+  unstratified `Cat_cat : Cat` policy (often abbreviated “`Cat : Cat`”),
+  universe stratification, consistency, general semantic models, and complete
+  normalization/canonicity proofs remain explicitly outside the concrete MVP;
+- the minimal introductory HoTT kernel and the immediately corresponding
+  category/omega-category notions are executable, with at least one witness
+  iterating through the next hom level; and
+- Lambdapi rewrite rules provide selected runtime computation while narrowly
+  typed `unif_rule`s provide only proof-time comparison and never masquerade
+  as runtime or semantic ownership.
+
+The staged milestones used throughout the report are:
+
+`H0` denotes the decoded dependent type-theory core, `H1` its standard
+univalent HoTT compatibility surface, `H2` truncation reflectors and broader
+higher-constructor readiness, and `Omega0` the first directed
+category/omega-category extension that remains iterable at the next hom level.
+The later adequacy matrix gives the complete per-former inventory.
+
+| Milestone | Required content |
+| --- | --- |
+| Architecture MVP | Every H0/H1/H2/Omega0 row has an honest owner, prerequisite, or deferral, and no selected interface blocks the wanted endpoint. |
+| Foundational implementation skeleton | H0 formation, decoding, elimination, beta, ordinary identity, and negative diagnostics are active; the exact H1/Omega0 boundary is recorded. |
+| Foundational HoTT MVP | H1 is active, including standard Pi/Sigma/record path compatibility and ordinary equivalence/univalence algebra, and one integrated fixed-map Omega0 univalence/action witness passes. |
+| H2/HIT completion | Truncation reflectors and representative higher constructors have their restricted eliminators and computation; this is intentionally later. |
+
+### Current handoff status and feasibility verdict
+
+The current kernel has **not** been migrated by this plan. It still contains
+the useful but hybrid first-draft equality, `OmegaEquiv`, category-univalence,
+and adjunction interfaces described under “Current Baseline And Review
+Findings.” The plan is ready for bounded implementation slices, but is still a
+proposed successor until its adoption/migration record is made explicit.
+
+| Track | Status at this handoff | Next status-changing result |
+| --- | --- | --- |
+| Plan review and dependency architecture | handoff-ready proposed design; every benchmark row is classified | Accept names/boundaries as each slice is promoted; formally adopt the successor plan and update the June 23 plan when appropriate. |
+| H0 elementary core | partly active (`Unit`, Pi, Sigma, equality; native `nat`), but decoded Empty/Bool/Nat are missing | Complete Candidate G with owner-position evidence and durable active checks. |
+| H1 ordinary HoTT compatibility | incomplete/hybrid | Complete Pi equivalence packaging, arbitrary Sigma/record round trips, `TypeEquiv` algebra, univalence round trips, and selected action beta. |
+| H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
+| Omega0/category analogue | broad active first draft plus append-only fixed-map/indexed feasibility | Promote fixed-map omega-equivalence, decoder coherence, one next-hom univalence/action witness, and later discreteness/`OneCat`. |
+| Indexed adjunction migration | separate append-only feasibility track; active owner unchanged | Run the owner-position 153-occurrence migration with triangle, opposite, mate, and named-operation controls. |
+| Universe/metatheory | deliberately deferred | No concrete implementation slice should claim consistency, stratified closure, or a model merely from Lambdapi acceptance. |
+
+The present feasibility assessment is positive but bounded:
+
+1. No concrete Lambdapi expressibility blocker has been found for the proposed
+   record convention, truncation-property kernel, elementary H0 classifiers,
+   conservative/shaped record paths, standard Pi beta/eta surface, fixed-map
+   omega-equivalence telescope, or indexed adjunction telescope.
+2. All seven OETU probes listed below pass warning-enabled checking as of
+   2026-07-14. They are append-only extensions after importing the active
+   kernel, so they establish plausibility only, not final owner placement,
+   subject-reduction behavior in source order, or global coherence.
+3. The best/original goal therefore remains credible as a staged
+   implementation and research program. It is not yet demonstrated as one
+   globally normalizing implementation. The largest concrete risks are the
+   `Path_cat` owner repair, public shaped-equality migration, Pi equivalence
+   packaging, active `OmegaEquiv` normal-form migration, and the broad
+   adjunction consumer migration.
+4. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
+   semantic/metatheoretic justification do not block the concrete MVP, but
+   every report and code comment must preserve that boundary.
+
+### Complete OETU probe and evidence inventory
+
+These are the current probe artifacts relevant to this plan. They live under
+ignored `tmp/probes/`; they are review evidence, not source authorities and
+not durable active diagnostics.
+
+| Probe | What it demonstrates | Promotion boundary that remains |
+| --- | --- | --- |
+| `tmp/probes/oetu_architecture_feasibility_probe.lp` | One-constructor dependent records, truncation codes/predicate/package, conservative record paths, a stable nondependent shaped-reflexivity head with reflexive `ind_eqr`, strict local path operations, and recursive `IsNCat` formation. | It combines several late append-only experiments. Split the selected slice, place it at each real owner, cover dependent/nested action where claimed, and audit all literal-`eq_refl` consumers. |
+| `tmp/probes/oetu_fixed_map_followup.lp` | A transitional `OmegaEquivAlong(F)` bridge into the current opaque `OmegaEquiv`, computing selected-map/inverse observations, recursive higher-cell endpoints, and the semantic homotopy fibre. | Replace or migrate the real owner; do not retain the bridge as the final two-layer architecture or infer property-valuedness. |
+| `tmp/probes/oetu_indexed_structure_architecture_probe.lp` | Primary fixed-map evidence plus Sigma packaging, indexed `Adjunction(F,G)`, both exact triangle patterns, transparent versus proof-time functor views, fixed-arrow higher cells, and typed named-unit/counit comparison. | Move candidates to owner positions, minimize/annotate its eight scratch-local replaceable-pattern-variable advisories, and migrate active opposite/mate/decoder consumers. |
+| `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp` | Negative control: runtime unit/counit projection betas erase the stable triangle discriminators, leaving both the projected and raw named-operation spellings stuck as expected. | Preserve stable unit/counit observations or design a different audited triangle owner; clean its two scratch-local LHS advisories before reusing a pattern. |
+| `tmp/probes/oetu_hott_elementary_formers.lp` | Decoded Empty, Bool, and Nat classifiers; dependent eliminator facades; Bool and Nat constructor beta. | Promote at the foundations owner with active diagnostics; identity/no-confusion, higher action, canonicity, and categorical universal properties remain separate. |
+| `tmp/probes/oetu_hott_pi_adequacy.lp` | Standard diagonal `happly`, `funext` with related-input action, judgmental beta, non-judgmental arbitrary eta boundary, and reflexive propositional-eta basis. | Select stable public owners and construct the actual `IsEquivMap(PiHapply)` evidence rather than citing beta/eta sketches. |
+| `tmp/probes/oetu_hott_pi_stable_funext.lp` | Stable `PiHapply`/`PiFunext` heads, related-input action, a two-rigid-head typed proof-time reflexive bridge, and propositional eta via generic `ind_eqr`. | Reprobe at owner position, compare the proof-time bridge with shaped/fibrancy-derived coherence, and package the active equivalence. |
+
+To reproduce any row, run the following command with that row's path:
+
+```bash
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=60s \
+  scripts/probe.sh tmp/probes/oetu_hott_elementary_formers.lp
+```
+
+The complete set was rerun successfully on 2026-07-14; the corresponding log
+names end in `20260714-200013` under `logs/probes/`. Imported active warnings
+remain visible in those logs. Absence of a probe-local unjoinable critical
+pair is not proof of global confluence, and the named-unit negative probe
+shows why explicit positive/negative computation checks are also necessary.
+
+Older `tmp/probes/univalence_*` artifacts belong to the June 23 predecessor
+plan. They are not prerequisites for Candidate G and need not be read during
+normal handoff. Consult them only when an identified univalence migration
+question requires historical evidence; never let them override active code,
+checks, this plan, or the current SOP.
+
+### Required procedure at the start of an implementation turn
+
+The authority order remains active code, active checks, current SOP,
+Foundations, canonical syntax, and then task plans/decision records. This
+handoff is self-contained as a task plan, but it does not replace those active
+authorities.
+
+1. Read `AGENTS.md`, `README.md`, the relevant regions of `emdash3_2.lp` and
+   `emdash3_2_checks.lp`,
+   `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`,
+   `reports/EMDASH_FOUNDATIONS.md`,
+   `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`,
+   `reports/INDEX.md`, and this handoff section plus the selected candidate,
+   matrix row, phase, risk, ledger row, and acceptance criteria.
+2. Run `git status --short`; inspect unstaged and staged diffs separately and
+   preserve unrelated user work. Do not assume the clean snapshot recorded
+   here still describes the workspace.
+3. Choose exactly one side-task ID. Unless the user selects another slice, use
+   `OETU-ELEMENTARY-HOTT` / Candidate G. Change `Current-Implementation-Slice`
+   and that ledger row to `in progress` with the date and bounded scope before
+   broadening the work.
+4. Relocate every relevant symbol and nearby rule with `rg`; remembered line
+   numbers and archive responses are not authorities.
+5. Run the bounded baseline before editing:
+
+   ```bash
+   EMDASH_TYPECHECK_TIMEOUT=60s make check
+   ```
+
+6. Refine the smallest candidate in a temporary **full-file copy**, placing it
+   at the intended source owner rather than merely importing `emdash3_2` and
+   appending it. Add focused runtime assertions, typed `eq_refl` checks for
+   proof-time comparisons, explicit negative controls, both reduction orders
+   where relevant, and warning comparison.
+7. Promote only the minimal coherent declarations/rules. Add durable
+   regression statements to `emdash3_2_checks.lp`, mathematical/ownership
+   comments beside the active owners, and a reviewer example only when the
+   slice has a genuine end-to-end milestone.
+8. Update this report using the protocol below, then run validation in
+   proportion to the slice. A promoted semantic slice normally requires
+   focused probes, `make check`, warning/LHS audits where relevant,
+   `make catalog`, `make health`, and `make ci`; run `make examples` when a
+   reviewer milestone changes.
+
+### Default first implementation slice: Candidate G
+
+Candidate G is selected as the default next slice because it closes the
+smallest concrete H0 gap, has a passing focused feasibility probe, does not
+depend on the unresolved public equality/path owners, and turns the adequacy
+benchmark into active foundation code. This selection does not formally adopt
+every later migration decision and may be overridden by an explicit user
+instruction.
+
+The bounded deliverable is:
+
+1. introduce a native empty carrier and Bool carrier, their decoded
+   `Empty_grpd` and `Bool_grpd` classifiers, and reviewed dependent eliminator
+   facades at the foundations owner;
+2. introduce `Nat_grpd` as a decoded facade over the active native `nat`, with
+   a reviewed groupoid-level eliminator routed through generated `ind_nat`;
+3. use Bool, rather than making the first slice also design a general binary
+   sum. A later sum former remains a separate H0 extension;
+4. add active decoding/formation assertions, both Bool constructor betas,
+   both Nat constructor betas, Empty-eliminator formation, and an appropriate
+   Bool constructor non-collapse conversion check;
+5. confirm source-order subject reduction, warning behavior, bounded runtime,
+   and that existing equality/Pi/Sigma checks remain unchanged; and
+6. update the H0 snapshot, Candidate G text, Phase 0/11 status, and
+   `OETU-ELEMENTARY-HOTT` ledger row only after the promoted code and active
+   checks pass.
+
+This first slice explicitly does **not** claim:
+
+- observational identity, no-confusion, higher action, or canonicity for
+  Empty, Bool, or Nat;
+- initial-object, coproduct, or natural-number-object universal properties in
+  `Cat`;
+- a new general sum former, a truncation reflector, or any univalence closure;
+- resolution of shaped `eq_refl`, arbitrary structured-path `J`, `Path_cat`,
+  fixed-map omega-equivalence, or indexed adjunction.
+
+After Candidate G, Candidates A (record convention) and B (truncation property
+kernel) are the default low-risk infrastructure slices; they may be ordered by
+the first concrete consumer. Candidate H and the H1 compatibility ledgers can
+then make the ordinary HoTT surface complete while Candidate E repairs the
+path owner required before public Candidate C registration.
+
+### Global roadmap and dependency outline
+
+The numbered phases below remain the detailed global migration order. The
+following lanes make the intended dependency structure explicit; plan details
+may be revised when owner-position evidence changes a boundary.
+
+```text
+Immediate H0 bootstrap
+  Candidate G: Empty / Bool / Nat decoding and eliminator beta
+
+Reusable property/structure infrastructure
+  Candidate A: record convention ─┐
+  Candidate B: truncation kernel ─┴─> packaged truncated universes
+
+Ordinary HoTT compatibility
+  Candidate H: Pi happly/funext equivalence
+        + Sigma/record arbitrary path round trips
+        + TypeEquiv algebra and univalence decoder/action round trips
+        ───────────────────────────────────────────────────────> H1 MVP
+
+Public observational equality and path algebra
+  Candidate E: Path_cat owner repair
+        ─> Candidate C: public shaped reflexivity/reflexive J
+        ─> structural action ─> fibrancy/dependent J ─> former-by-former migration
+
+Omega/category extension
+  decoder normalization + record/equality owners
+        ─> Candidate D: fixed-map OmegaEquiv + Sigma package
+        ─> IsDiscreteCat / IsNCat / OneCat
+        ─> one-next-hom Omega0 univalence/action witness
+
+Separate category migration lane
+  Candidate F: indexed Adjunction(F,G), stable unit/counit, triangles/opposite/mates
+
+Later higher layer
+  truncation reflectors ─> representative HITs ─> optional H2 completion
+  stratified universes / Cat_cat:Cat metatheory remain a separate deferred research phase
+```
+
+Candidates C, D, E, F, and H remain available immediately as focused design or
+owner-position probes. “Immediately available” does not bypass their listed
+promotion dependencies, and Candidate F's adjunction witness never substitutes
+for H0/H1/Omega0 adequacy.
+
+### Progress tracking and handoff update protocol
+
+Use this report as the status ledger rather than leaving architectural results
+only in conversation.
+
+At the start of a slice:
+
+- update `Last reviewed`, `Current-Implementation-Slice`, and the selected
+  side-task row to `in progress (YYYY-MM-DD)` with its exact exclusions;
+- record the baseline result and any pre-existing worktree changes that affect
+  the slice; and
+- create or name the owner-position probe separately from the append-only
+  evidence files above.
+
+During and after a slice:
+
+- update the applicable status-snapshot/matrix row, phase item, candidate
+  feasibility paragraph, risk, diagnostics, and ledger row together;
+- use `active` only for promoted code covered by active diagnostics;
+- use `owner-position probed` only for a full-file candidate placed at its
+  intended owner and checked with the relevant warnings/reduction orders;
+- use `append-only feasibility demonstrated` for the seven current probes;
+  never shorten that phrase to `probed`;
+- record new architectural decisions under “Decisions Accepted For This
+  Proposal,” and record rejected runtime orientations under risks/diagnostics
+  rather than silently deleting the reason;
+- add every new relevant scratch path to the probe inventory and References,
+  but move durable assertions to `emdash3_2_checks.lp`;
+- preserve staged versus unstaged user changes and do not fold unrelated work
+  into the slice; and
+- return `Current-Implementation-Slice` to `none` only when the row is marked
+  completed/promoted or when a documented blocker/transfer names the exact
+  resume trigger.
+
+A slice is complete for handoff only when its code, focused and active checks,
+warning/LHS classification, bounded performance, report/matrix/ledger status,
+catalog, health report, and relevant CI/examples agree. A passing scratch
+probe alone is never completion. If evidence changes the roadmap, update this
+top handoff, the detailed phase, and the ledger in the same edit so the next
+agent sees one coherent plan.
 
 ## Decisions Accepted For This Proposal
 
@@ -152,6 +454,13 @@ EMDASH_TYPECHECK_TIMEOUT=60s make check      pass
 active implementation                        emdash3_2.lp
 active diagnostics                           emdash3_2_checks.lp
 ```
+
+The 2026-07-14 handoff revalidation reran the bounded active check and all
+seven warning-enabled OETU probes successfully before this report-only edit.
+No kernel or active-check migration has been made by the plan. The probe logs
+and their append-only limitations are recorded in the handoff inventory and
+References; a successor must still rerun the baseline against its own current
+worktree.
 
 The existing architecture contains valuable first slices:
 
@@ -1642,8 +1951,8 @@ append-only import probe and does not change the row's formal status.
 | Ambient `Grpd_grpd` classifier and decoding | active | `Obj(Grpd_cat)` decodes to the ambient `Grpd` classifier; constructor closure is tracked separately. |
 | `Unit_grpd`, `Pi_grpd`, Sigma, and decoding | active | Present in `emdash3_2.lp`; Sigma/Pi equality is already partly observational. |
 | Native `nat` and generated `ind_nat` at ambient `TYPE` | active | The native inductive and its eliminator are active, but this is not a decoded groupoid-level Nat classifier. |
-| `Nat_grpd` and a reviewed groupoid-level eliminator facade | prerequisite | Feasibility demonstrated with decoding and zero/successor beta in `oetu_hott_elementary_formers.lp`; owner-position placement and active diagnostics remain. |
-| Empty and Bool/binary-sum decoded classifiers and eliminators | prerequisite | Feasibility demonstrated with dependent elimination and constructor beta in the append-only elementary probe; these are required H0 smoke tests rather than optional consumers. |
+| `Nat_grpd` and a reviewed groupoid-level eliminator facade | prerequisite; default Candidate G | Feasibility demonstrated with decoding and zero/successor beta in `oetu_hott_elementary_formers.lp`; owner-position placement and active diagnostics remain. |
+| Empty and Bool decoded classifiers and eliminators | prerequisite; default Candidate G | Feasibility demonstrated with dependent elimination and constructor beta in the append-only elementary probe; these are required H0 smoke tests rather than optional consumers. A general binary sum is a separately statused extension. |
 | Observational identity/no-confusion/higher action for elementary inductives | prerequisite | Not established by the formation/eliminator probe; select per-former identity owners and negative controls separately. |
 | Equality, literal `eq_refl`, generic `J`, transport, `ap`, `apd`, `PathOver` | active | Present, but the equality architecture is hybrid and not the final global owner. |
 | Standard `PiHapply`/`PiFunext` compatibility | prerequisite | Runtime diagonal beta, related-input action, typed reflexive proof-time coherence, and propositional eta are append-only feasibility evidence; owner-position ownership remains open. |
@@ -1709,7 +2018,8 @@ path-owner phase.
 
 ### Phase 0: Documentation And Freeze
 
-1. Refine and approve this proposal.
+1. The review/evidence pass and implementation-handoff packaging are complete;
+   formal adoption as the replacement plan remains a separate recorded step.
 2. Mark the June 23 univalence report as the active historical implementation
    ledger and this report as its proposed successor architecture.
 3. Add no unrelated direct equality, Product decoder, or global
@@ -1717,6 +2027,10 @@ path-owner phase.
    explicitly belonging to the shaped fast track are allowed after their
    promotion probe; this freeze is not a veto on that track.
 4. Preserve the passing active baseline.
+5. Unless the user selects another bounded task, begin implementation with
+   Candidate G / `OETU-ELEMENTARY-HOTT` under the exact exclusions in the
+   handoff section. This first slice does not itself adopt the later normal-
+   form migrations.
 
 ### Phase 1: Finite Record Convention Probe
 
@@ -1742,7 +2056,8 @@ universes.
    required for the property-kernel slice.
 6. Do not add truncation reflectors.
 
-This is the leading candidate for the first promoted mathematical slice.
+After the default elementary-H0 slice, this is the leading
+truncation-specific mathematical promotion candidate.
 
 ### Phase 3: Packaged Truncated Universes
 
@@ -2057,9 +2372,10 @@ while the stable observations remain the computational owners.
 
 ```text
 Empty_grpd and dependent empty elimination;
-Bool_grpd or reviewed binary-sum classifier and dependent elimination;
+Bool_grpd and dependent Bool elimination;
 Nat_grpd facade over native nat/ind_nat;
 constructor beta diagnostics;
+general binary sum remains a separate follow-up;
 explicitly separate observational identity/no-confusion follow-up;
 no equality-owner or categorical-universal-property claim.
 ```
@@ -2068,7 +2384,8 @@ Risk: low to medium. The append-only probe demonstrates formation, decoding,
 dependent elimination, and constructor beta. Promotion still requires intended-
 owner placement under the active `Prop`/`P` builtins and durable diagnostics;
 it must not upgrade those facts to observational identity, canonicity, or an
-initial/coproduct/NNO universal property.
+initial/coproduct/NNO universal property, and it does not claim a general sum
+former.
 
 ### Candidate H: standard Pi/function-extensionality compatibility
 
@@ -2088,15 +2405,17 @@ permanent owner and contractible-fibre equivalence proof remain open, so this
 candidate is immediately feasible for an owner-position design probe but is
 not yet a formally `probed` matrix row.
 
-Candidates A, B, and G are the safest promotion candidates. Candidates C, D,
-E, F, and H are all immediately available as design/owner-position probes.
-Candidate C may become a narrow public equality slice only after E and its
-other promotion gates pass. Candidate D may migrate before the directed-
-dimension layer. Candidate E remains the prerequisite for `IsDiscreteCat`,
-`OneCat`, and public shaped path-operation registration. Candidate F is
-independent of directed dimension but must not be mixed with an unrelated
-module split. Candidate H may proceed without discarding the related-input Pi
-identity, but H1 cannot pass until its equivalence packaging is active.
+Candidate G is the default first implementation slice for a new handoff;
+Candidates A and B are the next safest promotion candidates and may be ordered
+by their first concrete consumer. Candidates C, D, E, F, and H are all
+immediately available as design/owner-position probes. Candidate C may become
+a narrow public equality slice only after E and its other promotion gates
+pass. Candidate D may migrate before the directed-dimension layer. Candidate
+E remains the prerequisite for `IsDiscreteCat`, `OneCat`, and public shaped
+path-operation registration. Candidate F is independent of directed dimension
+but must not be mixed with an unrelated module split. Candidate H may proceed
+without discarding the related-input Pi identity, but H1 cannot pass until its
+equivalence packaging is active.
 
 ## Explicitly Deferred Work
 
@@ -2135,6 +2454,9 @@ immediate prerequisite or implementation tracks, not blanket deferrals.
   intended introductions, dependent eliminators, and constructor beta laws;
 - native `nat : TYPE` and decoded `Nat_grpd : Grpd` are tested and reported as
   different layers;
+- Candidate G checks that the two Bool constructors do not collapse by
+  conversion, while stating explicitly that this local `assertnot` is not a
+  Boolean-canonicity or normalization theorem;
 - elementary formation/elimination diagnostics do not claim observational
   identity, no-confusion, higher action, or canonicity without separate tests;
 - `PiHapply(PiFunext(h))` has runtime diagonal beta and `PiFunext(h)` acts at
@@ -2409,7 +2731,7 @@ not reasons to add arbitrary closure axioms silently.
 | --- | --- | --- | --- | --- |
 | `OETU-RECORD-CONVENTION` | proposed early slice; append-only skeleton demonstrated | current inductive/Sigma infrastructure | first concrete slice selected | Refine the passing dependent one-constructor record at owner position, including projections, generated eliminator, parameter syntax, and inferred-slot audit; compare with nested Sigma. |
 | `OETU-RECORD-GENERATOR` | deferred/optional | `OETU-RECORD-CONVENTION` | two manual records show repeated stable boilerplate | Specify a deterministic external schema generator; generated code remains reviewable Lambdapi source. |
-| `OETU-ELEMENTARY-HOTT` | immediate H0 slice; append-only feasibility demonstrated | active universe decoding and native inductives | foundational implementation skeleton is selected | Promote decoded Empty, Bool/sum, and Nat classifiers/eliminators with beta diagnostics; keep observational identity/no-confusion/higher action and categorical universal properties as separately statused work. |
+| `OETU-ELEMENTARY-HOTT` | **default next slice; not started**; append-only feasibility demonstrated | active universe decoding and native inductives | next implementation turn unless the user selects another bounded slice | Promote decoded Empty, Bool, and Nat classifiers/eliminators with beta and Bool non-collapse diagnostics at their active owners; keep sums, observational identity/no-confusion/higher action, canonicity, and categorical universal properties as separately statused work. |
 | `OETU-PI-FUNEXT` | immediate owner-position design track; append-only beta/eta skeleton demonstrated | active `PiPathView`, generic `ind_eqr`, contractible-fibre `IsEquivMap` | H1 or truncation-evidence property-valuedness is consumed | Select `PiHapply`/`PiFunext` owners, preserve related-input action, audit the reflexive proof-time boundary, derive propositional eta, and package `PiHapply` as an active equivalence. |
 | `OETU-STRUCTURAL-PATH-COMPAT` | proposed H1 compatibility slice | active Sigma paths, `OETU-RECORD-CONVENTION`, `OETU-PI-FUNEXT` where path-valued functions require it | H1 path characterization is claimed | Add arbitrary Sigma and dependent-record encode/decode round trips, reflexive betas, and one nested path-telescope case without forcing global runtime eta. |
 | `OETU-TYPE-EQUIV-ALGEBRA` | proposed H1 compatibility slice | active `IsEquivMap`/`TypeEquiv`, `OETU-PI-FUNEXT`, `OETU-UNIV-DECODER` for round trips | foundational HoTT MVP is selected | Add identity/symmetry/composition, the required contractible-fibre closure proofs, both groupoid-univalence round trips, selected transport beta, and one Pi/Sigma universe-action example. |
@@ -2460,10 +2782,11 @@ Before this report becomes the active replacement plan:
    rejected by default;
 7. select the strict `Path_cat` algebra owner and its propositional agreement
    boundary with J-derived `eq_trans`/`eq_sym` before public shaped promotion;
-8. decide whether Candidate A, B, C, D, E, F, G, or H is the first
-   implementation slice, allowing shaped, fixed-map, path, indexed-adjunction,
-   elementary-H0, and Pi-compatibility probes to proceed immediately while
-   respecting their public-promotion dependencies;
+8. use Candidate G / `OETU-ELEMENTARY-HOTT` as the default first
+   implementation slice unless the user explicitly selects another bounded
+   candidate; shaped, fixed-map, path, indexed-adjunction, and Pi-compatibility
+   probes may still proceed immediately while respecting their public-
+   promotion dependencies;
 9. specify the conservative equality MVP, stable shaped-reflexivity registry,
    structural-action interface, and fibrancy/dependent-`J` boundary without
    conflating them;
@@ -2567,21 +2890,23 @@ warning classification, catalog checks, health refresh, and make ci.
 - Lambdapi's `unif_rule` documentation in the same local manual describes the
   feature as experimental and proof-time; this is why declaration convenience
   rules are not selected as runtime or semantic owners.
-- The 2026-07-14 feasibility findings are supported by the ignored full-file
+- The 2026-07-14 feasibility findings are supported by the ignored append-only
   probes `tmp/probes/oetu_architecture_feasibility_probe.lp`,
   `tmp/probes/oetu_fixed_map_followup.lp`,
   `tmp/probes/oetu_indexed_structure_architecture_probe.lp`, and
-  `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp`, with the reviewed
-  warning-enabled logs ending in `20260714-141809`, `20260714-141809`,
-  `20260714-174532`, and `20260714-174452` respectively. The final probe is a
-  negative computation test whose expected `assertnot` statements pass. None
-  of these scratch artifacts is promoted kernel source; because all extend an
-  imported active kernel, they preserve feasibility evidence but do not confer
-  formal owner-position `probed` status.
+  `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp`. The complete probe
+  set was rerun warning-enabled on 2026-07-14; the latest logs end in
+  `20260714-200013`. The final probe is a negative computation test whose
+  expected `assertnot` statements pass. The indexed probe retains eight and
+  the negative probe two scratch-local replaceable-pattern-variable
+  advisories. None of these scratch artifacts is promoted kernel source;
+  because all extend an imported active kernel, they preserve feasibility
+  evidence but do not confer formal owner-position `probed` status.
 - The later foundational feasibility review is supported by the ignored
   append-only probes `tmp/probes/oetu_hott_elementary_formers.lp`,
   `tmp/probes/oetu_hott_pi_adequacy.lp`, and
-  `tmp/probes/oetu_hott_pi_stable_funext.lp`. Warning-enabled runs pass without
-  probe-local warnings. Because these files extend the imported active kernel
-  rather than placing candidates at their intended owners, they establish
-  feasibility only and do not confer formal `probed` status.
+  `tmp/probes/oetu_hott_pi_stable_funext.lp`. Their warning-enabled logs also
+  end in `20260714-200013` and pass without probe-local warnings. Because these
+  files extend the imported active kernel rather than placing candidates at
+  their intended owners, they establish feasibility only and do not confer
+  formal `probed` status.
