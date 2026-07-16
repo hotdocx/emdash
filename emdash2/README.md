@@ -17,14 +17,96 @@ The active development is v3.2 and remains experimental.
 The checked kernel currently includes:
 
 - iterated hom-categories, ordinary functors, transfors, products, evaluation,
-  curry/uncurry infrastructure, and adjunction triangles;
+  curry/uncurry infrastructure, and the indexed `Adjunction(F,G)` relation
+  with transparent functor views, stable unit/counit observations, both
+  triangles, opposite adjunctions, and computational mate consumers;
 - directed Cat-valued families, natural/displayed functors and transfors,
   Sigma total categories, section/Pi categories, dependent homs, and fibre
   transport;
-- equality/path categories, type equivalence, ordinary and omega-categorical
-  equivalence staging, and explicit univalence capabilities;
+- decoded Empty/Unit/Bool/Nat and general binary-sum formers, plus a named
+  finite dependent-record convention, with dependent elimination, constructor
+  beta, and visible Unit/Boolean/Nat/general-sum constructor equality whose
+  closed cases compute to Unit, Empty, predecessor equality, or component
+  equality while generic `eq_refl` retains proof provenance; the generic J
+  beta guards both its category and repeated endpoint so a foreign or
+  predecessor reflexivity proof cannot fire merely through a shared reduced
+  classifier; plus a nested-Sigma
+  observational path view, stable shaped reflexivity, projection betas, and
+  reflexive J, propositional arbitrary Sigma path round trips, transparent
+  named PathRecord path round trips that preserve shaped reflexivity, recursive
+  homotopy-truncation properties from contractible
+  through proposition/set/groupoid levels, a level-recursive one-step
+  monotonicity theorem, arbitrary-level dependent-Pi and same-level
+  dependent-Sigma truncation closure, proposition-valued truncation evidence
+  at every native level, canonical invariance under ordinary `TypeEquiv`, and
+  packaged proposition/set/ordinary-groupoid universes whose carrier and
+  retained truncation evidence project computationally. Package equality is
+  equivalent to equality of the retained carriers: proposition-valued
+  evidence reconstructs the dependent field path, and both inverse laws are
+  propositional. Composing that path equivalence with the canonical ambient
+  decoder now gives restricted univalence between package equality and
+  ordinary `TypeEquiv` data for the carriers, again without runtime package
+  eta or inverse cancellation. An explicit-inverse contractible base together
+  with successor Pi/Sigma/property closure proves `TypeEquiv(A,B)` is
+  `n`-truncated for `n`-truncated endpoints; transporting this through the
+  restricted package equivalence gives the expected
+  `IsTruncGrpd(trunc_succ n, TruncGrpdU n)` theorem without a same-level
+  universe claim or proof erasure.
+  The ordinary dependent-Pi happly/funext layer has
+  related-input action, pointwise runtime beta, generic-J propositional eta,
+  and a contractible-fibre `TypeEquiv` package, ordinary identity, symmetry,
+  and categorical-order composition of type equivalences with executable map
+  projections, plus equality/path categories
+  whose composition retains the shared categorical owner with propositional
+  J-derived transitivity agreement, a genuine opposite presentation, and
+  functor-owned path symmetry with propositional J-derived agreement and
+  involution, type equivalence, ordinary and omega-categorical equivalence
+  staging, and groupoid decoder univalence with both propositional round trips,
+  a derived canonical contractible-fibre capability, a propositional transport
+  square, and a Pi-universe action consumer. The named
+  `GrpdPathView(A,B) = TypeEquiv(A,B)` now provides a finite groupoid-universe
+  identity view with decoder-owned encode/decode, propositional inverse laws,
+  and transport agreement while public universe equality remains opaque; a
+  direct equality rule was rejected because it recursively expands the
+  unstratified self-universe normal form. The public fixed-arrow
+  `OmegaEquivAlong(f)` evidence interface and Sigma-packaged `OmegaEquiv`, whose
+  exact projections, recursive observations, reflexive/opposite/Product
+  generators, and evidence-indexed decoder compute through one owner. At the
+  categorical universe, public equality now reduces directly to
+  `CatPathView(A,B) = OmegaEquiv(Cat_cat,A,B)`: named reflexivity, decoder-owned
+  encode/decode and propositional round trips, reflexive Product action, and a
+  D0b next-hom consumer reuse that package. Generic `eq_refl` remains a
+  distinct proof form so literal J and path-action beta are preserved; the
+  unstratified self-universe normal form terminates at opaque fixed-arrow
+  evidence. Product
+  isomorphism and omega-equivalence evidence retain their componentwise
+  constructor provenance even when both components are reflexive; projections
+  and decoders compute componentwise without collapsing to the distinct
+  generic reflexive evidence heads. The
+  categorical decoder supplies a named equivalence, both propositional round
+  trips, and a propositional `path_to_hom` square. Its variable-evidence Cat
+  hom-action repairs raw inverse-action endpoints by recursive-cell components
+  and yields the first iterable next-hom univalence/action witness;
 - covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
   action used by the unit hom profunctor;
+- the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects,
+  fixed core-inclusion evidence, D0b-derived homwise omega-equivalence,
+  selected `hom_to_path`, both coherent round trips, and an iterable recursive
+  cell without broad runtime cancellation;
+- independent `IsObjTruncCat`, native `CatDim`, its recursive
+  `cat_dim_trunc_level` object-level index, recursive `IsNCat`, and
+  evidence-retaining `NCat(n)` packages with `ZeroCat`/`OneCat`; a packaged
+  one-category exposes discrete hom-categories and iterates core-inclusion
+  adequacy between parallel arrows. Fixed-map `OmegaEquivAlong(F)` now induces
+  an ordinary equivalence of object classifiers and transports
+  `IsObjTruncCat`; the index still does not itself prove the recursive
+  `IsNCat` object-truncation theorem, and ordinary-iso univalence also remains
+  separate;
+- registered `ObsAction`/`ObsDAction` packages whose selected open-map or
+  dependent-section action carries next-dimensional agreement with semantic
+  `eq_ap`/`eq_apd`; identity action and registered composition compute,
+  PathRecord maps act on shaped paths, and the dependent witness field acts
+  through `PathOver`, without granting an arbitrary-constructor J beta;
 - Cat-valued profunctors, reindexing, tensor, implication, computational
   comparison, weighted-limit/colimit staging, and adjunction mates;
 - a primitive directed join slice, synthetic PathOut/path induction, and a

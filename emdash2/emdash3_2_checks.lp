@@ -18,14 +18,2977 @@ flag "print_meta_args" on;
 
 require open emdash.emdash3_2;
 
+// Elementary decoded H0 classifiers, constructors, and dependent eliminators.
+assert ⊢ τ Empty_grpd ≡ empty;
+
+assert ⊢ τ Unit_grpd ≡ unit;
+
+assert ⊢ tt : τ Unit_grpd;
+
+assert ⊢ τ Bool_grpd ≡ bool;
+
+assert ⊢ false : τ Bool_grpd;
+
+assert ⊢ true : τ Bool_grpd;
+
+assert ⊢ nat : TYPE;
+
+assert ⊢ Nat_grpd : Grpd;
+
+assert ⊢ τ Nat_grpd ≡ nat;
+
+assert ⊢ zero : τ Nat_grpd;
+
+assert (n : nat) ⊢ succ n : τ Nat_grpd;
+
+assert
+  (P : τ Empty_grpd → Grpd)
+  (x : τ Empty_grpd)
+  ⊢ empty_elim P x : τ (P x);
+
+assert
+  (P : τ Bool_grpd → Grpd)
+  (u_false : τ (P false))
+  (u_true : τ (P true))
+  ⊢ bool_elim P u_false u_true false ≡ u_false;
+
+assert
+  (P : τ Bool_grpd → Grpd)
+  (u_false : τ (P false))
+  (u_true : τ (P true))
+  ⊢ bool_elim P u_false u_true true ≡ u_true;
+
+assert
+  (P : τ Nat_grpd → Grpd)
+  (u_zero : τ (P zero))
+  (u_succ : Π n : τ Nat_grpd, τ (P n) → τ (P (succ n)))
+  ⊢ nat_elim P u_zero u_succ zero ≡ u_zero;
+
+assert
+  (P : τ Nat_grpd → Grpd)
+  (u_zero : τ (P zero))
+  (u_succ : Π n : τ Nat_grpd, τ (P n) → τ (P (succ n)))
+  (n : τ Nat_grpd)
+  ⊢ nat_elim P u_zero u_succ (succ n)
+    ≡ u_succ n (nat_elim P u_zero u_succ n);
+
+// catalog-area: Nat observational equality
+// Visible zero/successor pairs expose Unit, Empty, or predecessor equality.
+assert ⊢ @= Nat_grpd zero zero ≡ Unit_grpd;
+
+assert (n : τ Nat_grpd) ⊢
+  @= Nat_grpd zero (succ n)
+  ≡ Empty_grpd;
+
+assert (n : τ Nat_grpd) ⊢
+  @= Nat_grpd (succ n) zero
+  ≡ Empty_grpd;
+
+assert (n m : τ Nat_grpd) ⊢
+  @= Nat_grpd (succ n) (succ m)
+  ≡ @= Nat_grpd n m;
+
+assert (n m : τ Nat_grpd) ⊢
+  @= Nat_grpd (succ (succ n)) (succ (succ m))
+  ≡ @= Nat_grpd n m;
+
+// Zero and successor reflexivity retain their generic proof heads even when
+// the classifier reduces to Unit or predecessor equality.
+assert ⊢ @eq_refl Nat_grpd zero : τ Unit_grpd;
+
+assert (n : τ Nat_grpd) ⊢
+  @eq_refl Nat_grpd (succ n)
+  : τ (@= Nat_grpd n n);
+
+assert ⊢ tt : τ (@= Nat_grpd zero zero);
+
+assert (n : τ Nat_grpd) ⊢
+  @eq_refl Nat_grpd n
+  : τ (@= Nat_grpd (succ n) (succ n));
+
+assertnot ⊢ @eq_refl Nat_grpd zero ≡ tt;
+
+assertnot ⊢
+  @eq_refl Unit_grpd (@eq_refl Nat_grpd zero)
+  : τ (@= Unit_grpd (@eq_refl Nat_grpd zero) tt);
+
+// Recursive classifier reduction does not install a proof-time equation
+// between outer successor reflexivity and predecessor reflexivity.
+assertnot (n : τ Nat_grpd) ⊢
+  @eq_refl
+    (@= Nat_grpd n n)
+    (@eq_refl Nat_grpd (succ n))
+  : τ (@=
+      (@= Nat_grpd n n)
+      (@eq_refl Nat_grpd (succ n))
+      (@eq_refl Nat_grpd n));
+
+// Generic J remains the literal-reflexivity owner at zero and successor.
+assert
+  (P : Π n : τ Nat_grpd, τ (@= Nat_grpd n zero) → Grpd)
+  (u : τ (P zero (@eq_refl Nat_grpd zero))) ⊢
+  @ind_eqr Nat_grpd zero P u zero (@eq_refl Nat_grpd zero)
+  ≡ u;
+
+assert (n : τ Nat_grpd)
+  (P : Π m : τ Nat_grpd, τ (@= Nat_grpd m (succ n)) → Grpd)
+  (u : τ (P (succ n) (@eq_refl Nat_grpd (succ n)))) ⊢
+  @ind_eqr
+    Nat_grpd (succ n) P u (succ n) (@eq_refl Nat_grpd (succ n))
+  ≡ u;
+
+assertnot ⊢
+  @ind_eqr
+    Nat_grpd zero
+    (λ n : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd n zero), Unit_grpd)
+    tt zero tt
+  ≡ tt;
+
+// Predecessor reflexivity is a literal `eq_refl`, but its endpoint does not
+// match the outer successor endpoint guarded by the generic J beta.
+assertnot (n : τ Nat_grpd) ⊢
+  @ind_eqr
+    Nat_grpd (succ n)
+    (λ m : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd m (succ n)), Unit_grpd)
+    tt (succ n) (@eq_refl Nat_grpd n)
+  ≡ tt;
+
+// Endpoint-guarded literal-reflexivity consumers compute at the outer zero/
+// successor proofs, but do not identify predecessor reflexivity with the
+// outer successor proof.
+assert ⊢
+  @path_sym Nat_grpd zero zero (@eq_refl Nat_grpd zero)
+  ≡ @eq_refl Nat_grpd zero;
+
+assert (n : τ Nat_grpd) ⊢
+  @path_sym Nat_grpd
+    (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
+  ≡ @eq_refl Nat_grpd (succ n);
+
+assert ⊢
+  @path_to_hom
+    (Path_cat Nat_grpd) zero zero (@eq_refl Nat_grpd zero)
+  ≡ @id (Path_cat Nat_grpd) zero;
+
+assert (n : τ Nat_grpd) ⊢
+  @path_to_hom
+    (Path_cat Nat_grpd)
+    (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
+  ≡ @id (Path_cat Nat_grpd) (succ n);
+
+assertnot ⊢
+  @path_sym Nat_grpd zero zero tt
+  ≡ tt;
+
+assertnot (n : τ Nat_grpd) ⊢
+  (λ p : τ (@= Nat_grpd (succ n) (succ n)), p)
+    (@path_sym Nat_grpd (succ n) (succ n) (@eq_refl Nat_grpd n))
+  ≡
+  (λ p : τ (@= Nat_grpd (succ n) (succ n)), p)
+    (@eq_refl Nat_grpd n);
+
+assert (m : τ Nat_grpd)
+  (p : τ (@= Nat_grpd zero m)) ⊢
+  @comp_fapp0
+    (Path_cat Nat_grpd) zero zero m p (@eq_refl Nat_grpd zero)
+  ≡ p;
+
+assert (m : τ Nat_grpd)
+  (p : τ (@= Nat_grpd m zero)) ⊢
+  @comp_fapp0
+    (Path_cat Nat_grpd) m zero zero (@eq_refl Nat_grpd zero) p
+  ≡ p;
+
+assert (n m : τ Nat_grpd)
+  (p : τ (@= Nat_grpd (succ n) m)) ⊢
+  @comp_fapp0
+    (Path_cat Nat_grpd)
+    (succ n) (succ n) m p (@eq_refl Nat_grpd (succ n))
+  ≡ p;
+
+assert (n m : τ Nat_grpd)
+  (p : τ (@= Nat_grpd m (succ n))) ⊢
+  @comp_fapp0
+    (Path_cat Nat_grpd)
+    m (succ n) (succ n) (@eq_refl Nat_grpd (succ n)) p
+  ≡ p;
+
+assert ⊢
+  @idtoiso_cat
+    (Path_cat Nat_grpd) zero zero (@eq_refl Nat_grpd zero)
+  ≡ @iso_evidence_refl (Path_cat Nat_grpd) zero;
+
+assert (n : τ Nat_grpd) ⊢
+  @idtoiso_cat
+    (Path_cat Nat_grpd)
+    (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
+  ≡ @iso_evidence_refl (Path_cat Nat_grpd) (succ n);
+
+assert ⊢
+  @idtoequiv_cat
+    (Path_cat Nat_grpd) zero zero (@eq_refl Nat_grpd zero)
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) zero;
+
+assert (n : τ Nat_grpd) ⊢
+  @idtoequiv_cat
+    (Path_cat Nat_grpd)
+    (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
+
+assertnot ⊢
+  @idtoequiv_cat (Path_cat Nat_grpd) zero zero tt
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) zero;
+
+assertnot (n : τ Nat_grpd) ⊢
+  @idtoequiv_cat
+    (Path_cat Nat_grpd) (succ n) (succ n) (@eq_refl Nat_grpd n)
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
+
+// Open Nat endpoints retain primitive equality/reflexivity. These controls do
+// not establish Nat canonicity, normalization, or metatheoretic no-confusion.
+assertnot (n : τ Nat_grpd) ⊢
+  @= Nat_grpd n n
+  ≡ Unit_grpd;
+
+assertnot (n : τ Nat_grpd) ⊢
+  @eq_refl Nat_grpd n
+  : τ Unit_grpd;
+
+// catalog-area: auto
+
+// catalog-area: Equality J subject-reduction guards
+// Sharing a reduced classifier does not authorize foreign reflexivity to
+// trigger J. The category and endpoint are runtime discriminators.
+assertnot ⊢
+  @ind_eqr
+    Unit_grpd tt
+    (λ u : τ Unit_grpd,
+      λ _ : τ (@= Unit_grpd u tt), Unit_grpd)
+    tt tt (@eq_refl Bool_grpd false)
+  ≡ tt;
+
+assertnot ⊢
+  @ind_eqr
+    Bool_grpd false
+    (λ b : τ Bool_grpd,
+      λ _ : τ (@= Bool_grpd b false), Unit_grpd)
+    tt false (@eq_refl Unit_grpd tt)
+  ≡ tt;
+
+assertnot ⊢
+  @ind_eqr
+    Bool_grpd true
+    (λ b : τ Bool_grpd,
+      λ _ : τ (@= Bool_grpd b true), Unit_grpd)
+    tt true (@eq_refl Bool_grpd false)
+  ≡ tt;
+
+assertnot ⊢
+  @ind_eqr
+    Nat_grpd zero
+    (λ n : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd n zero), Unit_grpd)
+    tt zero (@eq_refl Unit_grpd tt)
+  ≡ tt;
+
+// catalog-area: auto
+
+// catalog-area: Unit observational equality
+// The single visible constructor pair exposes the Unit classifier.
+assert ⊢ @= Unit_grpd tt tt ≡ Unit_grpd;
+
+// Generic reflexivity and native `tt` inhabit the reduced classifier but
+// remain distinct runtime and proof-time presentations.
+assert ⊢ @eq_refl Unit_grpd tt : τ Unit_grpd;
+
+assert ⊢ tt : τ (@= Unit_grpd tt tt);
+
+assertnot ⊢ @eq_refl Unit_grpd tt ≡ tt;
+
+assertnot ⊢
+  @eq_refl Unit_grpd (@eq_refl Unit_grpd tt)
+  : τ (@= Unit_grpd (@eq_refl Unit_grpd tt) tt);
+
+// Generic J remains the sole literal-reflexivity beta.
+assert
+  (P : Π u : τ Unit_grpd, τ (@= Unit_grpd u tt) → Grpd)
+  (v : τ (P tt (@eq_refl Unit_grpd tt))) ⊢
+  @ind_eqr Unit_grpd tt P v tt (@eq_refl Unit_grpd tt)
+  ≡ v;
+
+assertnot ⊢
+  @ind_eqr
+    Unit_grpd tt
+    (λ u : τ Unit_grpd,
+      λ _ : τ (@= Unit_grpd u tt), Unit_grpd)
+    tt tt tt
+  ≡ tt;
+
+// Existing generic literal-reflexivity consumers keep computing.
+assert ⊢
+  @path_sym Unit_grpd tt tt (@eq_refl Unit_grpd tt)
+  ≡ @eq_refl Unit_grpd tt;
+
+assert ⊢
+  @path_to_hom
+    (Path_cat Unit_grpd) tt tt (@eq_refl Unit_grpd tt)
+  ≡ @id (Path_cat Unit_grpd) tt;
+
+assertnot ⊢ @path_sym Unit_grpd tt tt tt ≡ tt;
+
+assertnot ⊢
+  @path_to_hom (Path_cat Unit_grpd) tt tt tt
+  ≡ @id (Path_cat Unit_grpd) tt;
+
+assert (u : τ Unit_grpd)
+  (p : τ (@= Unit_grpd tt u)) ⊢
+  @comp_fapp0
+    (Path_cat Unit_grpd) tt tt u p (@eq_refl Unit_grpd tt)
+  ≡ p;
+
+assert (u : τ Unit_grpd)
+  (p : τ (@= Unit_grpd u tt)) ⊢
+  @comp_fapp0
+    (Path_cat Unit_grpd) u tt tt (@eq_refl Unit_grpd tt) p
+  ≡ p;
+
+assert ⊢
+  @idtoiso_cat
+    (Path_cat Unit_grpd) tt tt (@eq_refl Unit_grpd tt)
+  ≡ @iso_evidence_refl (Path_cat Unit_grpd) tt;
+
+assert ⊢
+  @idtoequiv_cat
+    (Path_cat Unit_grpd) tt tt (@eq_refl Unit_grpd tt)
+  ≡ @omega_equiv_refl (Path_cat Unit_grpd) tt;
+
+assertnot ⊢
+  @idtoiso_cat (Path_cat Unit_grpd) tt tt tt
+  ≡ @iso_evidence_refl (Path_cat Unit_grpd) tt;
+
+assertnot ⊢
+  @idtoequiv_cat (Path_cat Unit_grpd) tt tt tt
+  ≡ @omega_equiv_refl (Path_cat Unit_grpd) tt;
+
+// Open Unit values retain primitive equality and reflexivity typing. These
+// are local conversion controls, not Unit canonicity or non-derivability.
+assertnot (u : τ Unit_grpd) ⊢
+  @= Unit_grpd u u
+  ≡ Unit_grpd;
+
+assertnot (u : τ Unit_grpd) ⊢
+  @eq_refl Unit_grpd u
+  : τ Unit_grpd;
+
+// catalog-area: auto
+
+// Local constructor anti-collapse control only; this is not a Boolean
+// canonicity, normalization, or observational no-confusion theorem.
+assertnot ⊢ false ≡ true;
+
+// catalog-area: Boolean observational equality
+// Visible Boolean constructor pairs expose the Unit/Empty path matrix.
+assert ⊢ @= Bool_grpd false false ≡ Unit_grpd;
+
+assert ⊢ @= Bool_grpd false true ≡ Empty_grpd;
+
+assert ⊢ @= Bool_grpd true false ≡ Empty_grpd;
+
+assert ⊢ @= Bool_grpd true true ≡ Unit_grpd;
+
+// Classifier reduction types both generic reflexivity and the native unit
+// constructor, but generic `eq_refl` retains its runtime provenance.
+assert ⊢ @eq_refl Bool_grpd false : τ Unit_grpd;
+
+assert ⊢ @eq_refl Bool_grpd true : τ Unit_grpd;
+
+assert ⊢ tt : τ (@= Bool_grpd false false);
+
+assert ⊢ tt : τ (@= Bool_grpd true true);
+
+assertnot ⊢ @eq_refl Bool_grpd false ≡ tt;
+
+assertnot ⊢ @eq_refl Bool_grpd true ≡ tt;
+
+// No proof-time equation identifies the two proof presentations either. The
+// negative typed-reflexivity probe is a local trust-boundary control.
+assertnot ⊢
+  @eq_refl Unit_grpd (@eq_refl Bool_grpd false)
+  : τ (@= Unit_grpd (@eq_refl Bool_grpd false) tt);
+
+// Generic J continues to own literal reflexivity without a Boolean-specific
+// consumer registration.
+assert
+  (P : Π b : τ Bool_grpd, τ (@= Bool_grpd b false) → Grpd)
+  (u : τ (P false (@eq_refl Bool_grpd false))) ⊢
+  @ind_eqr
+    Bool_grpd false P u false (@eq_refl Bool_grpd false)
+  ≡ u;
+
+assert
+  (P : Π b : τ Bool_grpd, τ (@= Bool_grpd b true) → Grpd)
+  (u : τ (P true (@eq_refl Bool_grpd true))) ⊢
+  @ind_eqr
+    Bool_grpd true P u true (@eq_refl Bool_grpd true)
+  ≡ u;
+
+// A raw `tt` proof is deliberately not promoted to a second J beta. This is
+// a local runtime boundary, not a Boolean canonicity or non-derivability claim.
+assertnot ⊢
+  @ind_eqr
+    Bool_grpd false
+    (λ b : τ Bool_grpd,
+      λ _ : τ (@= Bool_grpd b false), Unit_grpd)
+    tt false tt
+  ≡ tt;
+
+assertnot ⊢
+  @ind_eqr
+    Bool_grpd true
+    (λ b : τ Bool_grpd,
+      λ _ : τ (@= Bool_grpd b true), Unit_grpd)
+    tt true tt
+  ≡ tt;
+
+// The existing generic literal-reflexivity consumers keep computing.
+assert ⊢
+  @path_sym Bool_grpd false false (@eq_refl Bool_grpd false)
+  ≡ @eq_refl Bool_grpd false;
+
+assert ⊢
+  @path_sym Bool_grpd true true (@eq_refl Bool_grpd true)
+  ≡ @eq_refl Bool_grpd true;
+
+assert ⊢
+  @path_to_hom
+    (Path_cat Bool_grpd)
+    false false (@eq_refl Bool_grpd false)
+  ≡ @id (Path_cat Bool_grpd) false;
+
+assert ⊢
+  @path_to_hom
+    (Path_cat Bool_grpd)
+    true true (@eq_refl Bool_grpd true)
+  ≡ @id (Path_cat Bool_grpd) true;
+
+// Raw `tt` paths are not silently registered with the generic consumers.
+assertnot ⊢
+  @path_sym Bool_grpd false false tt
+  ≡ tt;
+
+assertnot ⊢
+  @path_to_hom (Path_cat Bool_grpd) false false tt
+  ≡ @id (Path_cat Bool_grpd) false;
+
+// Both shared path-category units retain their generic owner at each visible
+// constructor.
+assert (b : τ Bool_grpd)
+  (p : τ (@= Bool_grpd false b)) ⊢
+  @comp_fapp0
+    (Path_cat Bool_grpd) false false b p (@eq_refl Bool_grpd false)
+  ≡ p;
+
+assert (b : τ Bool_grpd)
+  (p : τ (@= Bool_grpd b false)) ⊢
+  @comp_fapp0
+    (Path_cat Bool_grpd) b false false (@eq_refl Bool_grpd false) p
+  ≡ p;
+
+assert (b : τ Bool_grpd)
+  (p : τ (@= Bool_grpd true b)) ⊢
+  @comp_fapp0
+    (Path_cat Bool_grpd) true true b p (@eq_refl Bool_grpd true)
+  ≡ p;
+
+assert (b : τ Bool_grpd)
+  (p : τ (@= Bool_grpd b true)) ⊢
+  @comp_fapp0
+    (Path_cat Bool_grpd) b true true (@eq_refl Bool_grpd true) p
+  ≡ p;
+
+// Both categorical equality encoders retain their generic reflexivity beta.
+assert ⊢
+  @idtoiso_cat
+    (Path_cat Bool_grpd) false false (@eq_refl Bool_grpd false)
+  ≡ @iso_evidence_refl (Path_cat Bool_grpd) false;
+
+assert ⊢
+  @idtoiso_cat
+    (Path_cat Bool_grpd) true true (@eq_refl Bool_grpd true)
+  ≡ @iso_evidence_refl (Path_cat Bool_grpd) true;
+
+assert ⊢
+  @idtoequiv_cat
+    (Path_cat Bool_grpd) false false (@eq_refl Bool_grpd false)
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) false;
+
+assert ⊢
+  @idtoequiv_cat
+    (Path_cat Bool_grpd) true true (@eq_refl Bool_grpd true)
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) true;
+
+assertnot ⊢
+  @idtoiso_cat (Path_cat Bool_grpd) false false tt
+  ≡ @iso_evidence_refl (Path_cat Bool_grpd) false;
+
+assertnot ⊢
+  @idtoequiv_cat (Path_cat Bool_grpd) false false tt
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) false;
+
+// Open Boolean values retain the generic classifier and reflexivity typing.
+assertnot (b : τ Bool_grpd) ⊢
+  @= Bool_grpd b b
+  ≡ Unit_grpd;
+
+assertnot (b : τ Bool_grpd) ⊢
+  @eq_refl Bool_grpd b
+  : τ Unit_grpd;
+
+// catalog-area: auto
+
+// General binary sum: decoding, introductions, dependent elimination, and
+// constructor beta. Non-collapse is only a conversion control, not a
+// no-confusion, canonicity, normalization, or observational-identity theorem.
+assert [A B : Grpd] ⊢
+  τ (Sum_grpd A B)
+  ≡ SumData A B;
+
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @sum_inl A B a
+  : τ (Sum_grpd A B);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @sum_inr A B b
+  : τ (Sum_grpd A B);
+
+assert [A B : Grpd]
+  (P : τ (Sum_grpd A B) → Grpd)
+  (u_inl : Π a : τ A, τ (P (@sum_inl A B a)))
+  (u_inr : Π b : τ B, τ (P (@sum_inr A B b)))
+  (s : τ (Sum_grpd A B)) ⊢
+  @sum_elim A B P u_inl u_inr s
+  : τ (P s);
+
+assert [A B : Grpd]
+  (P : τ (Sum_grpd A B) → Grpd)
+  (u_inl : Π a : τ A, τ (P (@sum_inl A B a)))
+  (u_inr : Π b : τ B, τ (P (@sum_inr A B b)))
+  (a : τ A) ⊢
+  @sum_elim A B P u_inl u_inr (@sum_inl A B a)
+  ≡ u_inl a;
+
+assert [A B : Grpd]
+  (P : τ (Sum_grpd A B) → Grpd)
+  (u_inl : Π a : τ A, τ (P (@sum_inl A B a)))
+  (u_inr : Π b : τ B, τ (P (@sum_inr A B b)))
+  (b : τ B) ⊢
+  @sum_elim A B P u_inl u_inr (@sum_inr A B b)
+  ≡ u_inr b;
+
+assertnot [A B : Grpd]
+  (a : τ A)
+  (b : τ B) ⊢
+  @sum_inl A B a
+  ≡ @sum_inr A B b;
+
+// catalog-area: Sum observational equality
+// Equal tags recurse to component equality; distinct tags expose Empty.
+assert [A B : Grpd]
+  (a0 a1 : τ A) ⊢
+  @= (Sum_grpd A B)
+    (@sum_inl A B a0) (@sum_inl A B a1)
+  ≡ @= A a0 a1;
+
+assert [A B : Grpd]
+  (a : τ A)
+  (b : τ B) ⊢
+  @= (Sum_grpd A B)
+    (@sum_inl A B a) (@sum_inr A B b)
+  ≡ Empty_grpd;
+
+assert [A B : Grpd]
+  (a : τ A)
+  (b : τ B) ⊢
+  @= (Sum_grpd A B)
+    (@sum_inr A B b) (@sum_inl A B a)
+  ≡ Empty_grpd;
+
+assert [A B : Grpd]
+  (b0 b1 : τ B) ⊢
+  @= (Sum_grpd A B)
+    (@sum_inr A B b0) (@sum_inr A B b1)
+  ≡ @= B b0 b1;
+
+assert [B : Grpd]
+  (n m : τ Nat_grpd) ⊢
+  @= (Sum_grpd Nat_grpd B)
+    (@sum_inl Nat_grpd B (succ n))
+    (@sum_inl Nat_grpd B (succ m))
+  ≡ @= Nat_grpd n m;
+
+assert [A : Grpd] ⊢
+  @= (Sum_grpd A Bool_grpd)
+    (@sum_inr A Bool_grpd false)
+    (@sum_inr A Bool_grpd true)
+  ≡ Empty_grpd;
+
+// Outer sum reflexivity and component reflexivity inhabit the reduced
+// classifier but remain distinct runtime and proof-time presentations.
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @eq_refl (Sum_grpd A B) (@sum_inl A B a)
+  : τ (@= A a a);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @eq_refl (Sum_grpd A B) (@sum_inr A B b)
+  : τ (@= B b b);
+
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @eq_refl A a
+  : τ (@=
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a));
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @eq_refl B b
+  : τ (@=
+      (Sum_grpd A B)
+      (@sum_inr A B b)
+      (@sum_inr A B b));
+
+assertnot [A B : Grpd]
+  (a : τ A) ⊢
+  (λ p : τ (@=
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a)), p)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡
+  (λ p : τ (@=
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a)), p)
+    (@eq_refl A a);
+
+assertnot [A B : Grpd]
+  (a : τ A) ⊢
+  @eq_refl
+    (@= A a a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  : τ (@=
+      (@= A a a)
+      (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+      (@eq_refl A a));
+
+assertnot [A B : Grpd]
+  (b : τ B) ⊢
+  @eq_refl
+    (@= B b b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  : τ (@=
+      (@= B b b)
+      (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+      (@eq_refl B b));
+
+// Generic J computes only on exactly matching outer reflexivity.
+assert [A B : Grpd]
+  (a : τ A)
+  (P : Π s : τ (Sum_grpd A B),
+    τ (@= (Sum_grpd A B) s (@sum_inl A B a)) → Grpd)
+  (u : τ (P
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a)))) ⊢
+  @ind_eqr
+    (Sum_grpd A B)
+    (@sum_inl A B a)
+    P u
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ u;
+
+assert [A B : Grpd]
+  (b : τ B)
+  (P : Π s : τ (Sum_grpd A B),
+    τ (@= (Sum_grpd A B) s (@sum_inr A B b)) → Grpd)
+  (u : τ (P
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b)))) ⊢
+  @ind_eqr
+    (Sum_grpd A B)
+    (@sum_inr A B b)
+    P u
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ u;
+
+assertnot [A B : Grpd]
+  (a : τ A) ⊢
+  @ind_eqr
+    (Sum_grpd A B)
+    (@sum_inl A B a)
+    (λ s : τ (Sum_grpd A B),
+      λ _ : τ (@=
+        (Sum_grpd A B) s (@sum_inl A B a)), Unit_grpd)
+    tt
+    (@sum_inl A B a)
+    (@eq_refl A a)
+  ≡ tt;
+
+assertnot [A B : Grpd]
+  (b : τ B) ⊢
+  @ind_eqr
+    (Sum_grpd A B)
+    (@sum_inr A B b)
+    (λ s : τ (Sum_grpd A B),
+      λ _ : τ (@=
+        (Sum_grpd A B) s (@sum_inr A B b)), Unit_grpd)
+    tt
+    (@sum_inr A B b)
+    (@eq_refl B b)
+  ≡ tt;
+
+// Endpoint-guarded path consumers compute on outer reflexivity only.
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @path_sym
+    (Sum_grpd A B)
+    (@sum_inl A B a)
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ @eq_refl (Sum_grpd A B) (@sum_inl A B a);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @path_sym
+    (Sum_grpd A B)
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ @eq_refl (Sum_grpd A B) (@sum_inr A B b);
+
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @path_to_hom
+    (Path_cat (Sum_grpd A B))
+    (@sum_inl A B a)
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ @id (Path_cat (Sum_grpd A B)) (@sum_inl A B a);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @path_to_hom
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ @id (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
+
+assertnot [A B : Grpd]
+  (a : τ A) ⊢
+  (λ p : τ (@=
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a)), p)
+    (@path_sym
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a)
+      (@eq_refl A a))
+  ≡
+  (λ p : τ (@=
+      (Sum_grpd A B)
+      (@sum_inl A B a)
+      (@sum_inl A B a)), p)
+    (@eq_refl A a);
+
+assertnot [A B : Grpd]
+  (b : τ B) ⊢
+  @path_to_hom
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl B b)
+  ≡ @id (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
+
+// Both path-category unit orientations retain the outer proof owner.
+assert [A B : Grpd]
+  (a : τ A)
+  (s : τ (Sum_grpd A B))
+  (p : τ (@=
+    (Sum_grpd A B) (@sum_inl A B a) s)) ⊢
+  @comp_fapp0
+    (Path_cat (Sum_grpd A B))
+    (@sum_inl A B a) (@sum_inl A B a) s
+    p (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ p;
+
+assert [A B : Grpd]
+  (a : τ A)
+  (s : τ (Sum_grpd A B))
+  (p : τ (@=
+    (Sum_grpd A B) s (@sum_inl A B a))) ⊢
+  @comp_fapp0
+    (Path_cat (Sum_grpd A B))
+    s (@sum_inl A B a) (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a)) p
+  ≡ p;
+
+assert [A B : Grpd]
+  (b : τ B)
+  (s : τ (Sum_grpd A B))
+  (p : τ (@=
+    (Sum_grpd A B) (@sum_inr A B b) s)) ⊢
+  @comp_fapp0
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b) (@sum_inr A B b) s
+    p (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ p;
+
+assert [A B : Grpd]
+  (b : τ B)
+  (s : τ (Sum_grpd A B))
+  (p : τ (@=
+    (Sum_grpd A B) s (@sum_inr A B b))) ⊢
+  @comp_fapp0
+    (Path_cat (Sum_grpd A B))
+    s (@sum_inr A B b) (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b)) p
+  ≡ p;
+
+// Categorical encoders compute only from outer reflexivity.
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @idtoiso_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inl A B a)
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ @iso_evidence_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inl A B a);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @idtoiso_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ @iso_evidence_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
+
+assert [A B : Grpd]
+  (a : τ A) ⊢
+  @idtoequiv_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inl A B a)
+    (@sum_inl A B a)
+    (@eq_refl (Sum_grpd A B) (@sum_inl A B a))
+  ≡ @omega_equiv_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inl A B a);
+
+assert [A B : Grpd]
+  (b : τ B) ⊢
+  @idtoequiv_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
+  ≡ @omega_equiv_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
+
+assertnot [A B : Grpd]
+  (a : τ A) ⊢
+  @idtoiso_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inl A B a)
+    (@sum_inl A B a)
+    (@eq_refl A a)
+  ≡ @iso_evidence_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inl A B a);
+
+assertnot [A B : Grpd]
+  (b : τ B) ⊢
+  @idtoequiv_cat
+    (Path_cat (Sum_grpd A B))
+    (@sum_inr A B b)
+    (@sum_inr A B b)
+    (@eq_refl B b)
+  ≡ @omega_equiv_refl
+      (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
+
+// Open sum endpoints retain primitive equality/reflexivity. These controls do
+// not establish sum canonicity, normalization, or metatheoretic no-confusion.
+assertnot [A B : Grpd]
+  (s : τ (Sum_grpd A B)) ⊢
+  @= (Sum_grpd A B) s s
+  ≡ Unit_grpd;
+
+assertnot [A B : Grpd]
+  (s : τ (Sum_grpd A B)) ⊢
+  @eq_refl (Sum_grpd A B) s
+  : τ Unit_grpd;
+
+// catalog-area: auto
+
+// Named finite dependent record: decoding, projections, and generated-J beta.
+assert [A : Grpd] ⊢
+  τ (PathRecord_grpd A)
+  ≡ PathRecordData A;
+
+assert [A : Grpd]
+  (src dst : τ A)
+  (witness : τ (src = dst)) ⊢
+  @Struct_path_record A src dst witness
+  : τ (PathRecord_grpd A);
+
+assert [A : Grpd]
+  (src dst : τ A)
+  (witness : τ (src = dst)) ⊢
+  path_record_src (@Struct_path_record A src dst witness)
+  ≡ src;
+
+assert [A : Grpd]
+  (src dst : τ A)
+  (witness : τ (src = dst)) ⊢
+  path_record_dst (@Struct_path_record A src dst witness)
+  ≡ dst;
+
+assert [A : Grpd]
+  (src dst : τ A)
+  (witness : τ (src = dst)) ⊢
+  path_record_witness (@Struct_path_record A src dst witness)
+  ≡ witness;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  path_record_witness r
+  : τ (path_record_src r = path_record_dst r);
+
+assert [A : Grpd]
+  (Q : τ (PathRecord_grpd A) → Grpd)
+  (c : Π (src dst : τ A),
+       Π witness : τ (src = dst),
+       τ (Q (@Struct_path_record A src dst witness)))
+  (r : τ (PathRecord_grpd A)) ⊢
+  path_record_ind Q c r
+  : τ (Q r);
+
+assert [A : Grpd]
+  (Q : τ (PathRecord_grpd A) → Grpd)
+  (c : Π (src dst : τ A),
+       Π witness : τ (src = dst),
+       τ (Q (@Struct_path_record A src dst witness)))
+  (src dst : τ A)
+  (witness : τ (src = dst)) ⊢
+  path_record_ind Q c (@Struct_path_record A src dst witness)
+  ≡ c src dst witness;
+
+// No runtime record eta is selected for the convention.
+assertnot [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  r
+  ≡ @Struct_path_record A
+      (path_record_src r)
+      (path_record_dst r)
+      (path_record_witness r);
+
+/*
+  Candidate C: shaped reflexivity and reflexive J for the genuinely dependent
+  PathRecord former. The record is viewed as a source plus a nested-Sigma tail.
+*/
+assert [A : Grpd]
+  (r s : τ (PathRecord_grpd A)) ⊢
+  @= (PathRecord_grpd A) r s
+  ≡ @PathRecordPathView A r s;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @PathRecordPathRefl A r
+  : τ (@PathRecordPathView A r r);
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @eq_refl (PathRecord_grpd A) r
+  ≡ @PathRecordPathRefl A r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_record_path_src A r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @eq_refl A (path_record_src r);
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_record_path_tail A r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @pathover_refl
+      A
+      (λ src : τ A, PathRecordTail_grpd src)
+      (path_record_src r)
+      (path_record_tail r);
+
+// Generic-J-first and shaped-reflexivity-first orders join.
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A))
+  (Q : Π s : τ (PathRecord_grpd A),
+       τ (s = r) → Grpd)
+  (u : τ (Q r (@eq_refl (PathRecord_grpd A) r))) ⊢
+  @ind_eqr
+    (PathRecord_grpd A)
+    r
+    Q
+    u
+    r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ u;
+
+// Shared category units register both literal and already-shaped spellings.
+assert [A : Grpd]
+  (r s : τ (PathRecord_grpd A))
+  (p : τ (r = s)) ⊢
+  @comp_fapp0
+    (Path_cat (PathRecord_grpd A))
+    r r s p (@eq_refl (PathRecord_grpd A) r)
+  ≡ p;
+
+assert [A : Grpd]
+  (r s : τ (PathRecord_grpd A))
+  (p : τ (r = s)) ⊢
+  @comp_fapp0
+    (Path_cat (PathRecord_grpd A))
+    r r s p (@PathRecordPathRefl A r)
+  ≡ p;
+
+assert [A : Grpd]
+  (r s : τ (PathRecord_grpd A))
+  (p : τ (r = s)) ⊢
+  @comp_fapp0
+    (Path_cat (PathRecord_grpd A))
+    r s s (@eq_refl (PathRecord_grpd A) s) p
+  ≡ p;
+
+assert [A : Grpd]
+  (r s : τ (PathRecord_grpd A))
+  (p : τ (r = s)) ⊢
+  @comp_fapp0
+    (Path_cat (PathRecord_grpd A))
+    r s s (@PathRecordPathRefl A s) p
+  ≡ p;
+
+// PathSym registers literal and already-shaped record reflexivity.
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_sym
+    (PathRecord_grpd A)
+    r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @PathRecordPathRefl A r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @fapp1_fapp0
+    (Op_cat (Path_cat (PathRecord_grpd A)))
+    (Path_cat (PathRecord_grpd A))
+    (Path_sym_func (PathRecord_grpd A))
+    r r
+    (@PathRecordPathRefl A r)
+  ≡ @PathRecordPathRefl A r;
+
+// Core inclusion registers both projection orders at a concrete category
+// whose object classifier is PathRecord_grpd(A).
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_to_hom
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @PathRecordPathRefl A r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_to_hom
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@PathRecordPathRefl A r)
+  ≡ @PathRecordPathRefl A r;
+
+// Both categorical equality encoders register the shaped head.
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @idtoiso_cat
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @iso_evidence_refl (Path_cat (PathRecord_grpd A)) r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @idtoiso_cat
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@PathRecordPathRefl A r)
+  ≡ @iso_evidence_refl (Path_cat (PathRecord_grpd A)) r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @idtoequiv_cat
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@eq_refl (PathRecord_grpd A) r)
+  ≡ @omega_equiv_refl (Path_cat (PathRecord_grpd A)) r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @idtoequiv_cat
+    (Path_cat (PathRecord_grpd A))
+    r r
+    (@PathRecordPathRefl A r)
+  ≡ @omega_equiv_refl (Path_cat (PathRecord_grpd A)) r;
+
+/*
+  Candidate C warning classification: post/precomposition unit diamonds.
+
+  Each owner is checked with its shaped action still visible and with that
+  action already projected to PathRecordPathRefl. These are the two reduction
+  orders reported against the generic hom-action calculus.
+*/
+assert [A : Grpd]
+  (w x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (w = y)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) w x x
+    (@fapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      x x (@PathRecordPathRefl A x))
+    (@hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_sym_func (PathRecord_grpd A))
+      w y x p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_sym_func (PathRecord_grpd A))
+      w y x p g;
+
+assert [A : Grpd]
+  (w x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (w = y)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) w x x
+    (@PathRecordPathRefl A x)
+    (@hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_sym_func (PathRecord_grpd A))
+      w y x p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_sym_func (PathRecord_grpd A))
+      w y x p g;
+
+assert [A : Grpd]
+  (x y z : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (q : τ (x = z)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) y y z
+    (@hom_precomp_along_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      z y x p q)
+    (@fapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      y y (@PathRecordPathRefl A y))
+  ≡ @hom_precomp_along_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      z y x p q;
+
+assert [A : Grpd]
+  (x y z : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (q : τ (x = z)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) y y z
+    (@hom_precomp_along_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      z y x p q)
+    (@PathRecordPathRefl A y)
+  ≡ @hom_precomp_along_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      z y x p q;
+
+assert [A : Grpd]
+  (w x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (w = x)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) w y y
+    (@fapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      y y (@PathRecordPathRefl A y))
+    (@hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      w x y p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      w x y p g;
+
+assert [A : Grpd]
+  (w x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (w = x)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) w y y
+    (@PathRecordPathRefl A y)
+    (@hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      w x y p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat (PathRecord_grpd A))
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      w x y p g;
+
+assert [A : Grpd]
+  (x y z : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (y = z)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) x x z
+    (@hom_precomp_along_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      z x y p g)
+    (@fapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      x x (@PathRecordPathRefl A x))
+  ≡ @hom_precomp_along_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      z x y p g;
+
+assert [A : Grpd]
+  (x y z : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (g : τ (y = z)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A)) x x z
+    (@hom_precomp_along_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      z x y p g)
+    (@PathRecordPathRefl A x)
+  ≡ @hom_precomp_along_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      z x y p g;
+
+/*
+  The four naturality overlap families have the same unit-diamond shape.
+  Again, each pair retains the action head and then exposes its shaped result.
+*/
+assert [A : Grpd]
+  (F : τ (Functor
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (y = x))
+  (eta : τ (Transf F (Path_sym_func (PathRecord_grpd A)))) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    (@fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) F x)
+    y y
+    (@fapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      y y (@PathRecordPathRefl A y))
+    (@tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Path_sym_func (PathRecord_grpd A)) x y eta p)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Path_sym_func (PathRecord_grpd A)) x y eta p;
+
+assert [A : Grpd]
+  (F : τ (Functor
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (y = x))
+  (eta : τ (Transf F (Path_sym_func (PathRecord_grpd A)))) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    (@fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) F x)
+    y y
+    (@PathRecordPathRefl A y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Path_sym_func (PathRecord_grpd A)) x y eta p)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Path_sym_func (PathRecord_grpd A)) x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (y = x))
+  (eta : τ (Transf (Path_sym_func (PathRecord_grpd A)) G)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    x x
+    (@fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) G y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A)) G x y eta p)
+    (@fapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A))
+      x x (@PathRecordPathRefl A x))
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A)) G x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (y = x))
+  (eta : τ (Transf (Path_sym_func (PathRecord_grpd A)) G)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    x x
+    (@fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) G y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A)) G x y eta p)
+    (@PathRecordPathRefl A x)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Path_sym_func (PathRecord_grpd A)) G x y eta p;
+
+assert [A : Grpd]
+  (F : τ (Functor
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (eta : τ (Transf F (Core_incl_func (Path_cat (PathRecord_grpd A))))) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    (@fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) F x)
+    y y
+    (@fapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      y y (@PathRecordPathRefl A y))
+    (@tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Core_incl_func (Path_cat (PathRecord_grpd A))) x y eta p)
+  ≡ @tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Core_incl_func (Path_cat (PathRecord_grpd A))) x y eta p;
+
+assert [A : Grpd]
+  (F : τ (Functor
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (eta : τ (Transf F (Core_incl_func (Path_cat (PathRecord_grpd A))))) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    (@fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) F x)
+    y y
+    (@PathRecordPathRefl A y)
+    (@tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Core_incl_func (Path_cat (PathRecord_grpd A))) x y eta p)
+  ≡ @tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      F (Core_incl_func (Path_cat (PathRecord_grpd A))) x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (eta : τ (Transf (Core_incl_func (Path_cat (PathRecord_grpd A))) G)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    x x
+    (@fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) G y)
+    (@tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A))) G x y eta p)
+    (@fapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A)))
+      x x (@PathRecordPathRefl A x))
+  ≡ @tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A))) G x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))))
+  (x y : τ (PathRecord_grpd A))
+  (p : τ (x = y))
+  (eta : τ (Transf (Core_incl_func (Path_cat (PathRecord_grpd A))) G)) ⊢
+  @comp_fapp0 (Path_cat (PathRecord_grpd A))
+    x x
+    (@fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A)) G y)
+    (@tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A))) G x y eta p)
+    (@PathRecordPathRefl A x)
+  ≡ @tapp1_fapp0
+      (Core_cat (Path_cat (PathRecord_grpd A)))
+      (Path_cat (PathRecord_grpd A))
+      (Core_incl_func (Path_cat (PathRecord_grpd A))) G x y eta p;
+
+// Both displayed-target overlap reports contain the same ill-typed Core
+// action: an ordinary PathRecord value cannot be an object of Catd_cat(K).
+assertnot [A : Grpd] [K : Cat]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @fapp1_fapp0
+    (Core_cat (Catd_cat K))
+    (Catd_cat K)
+    (Core_incl_func (Catd_cat K))
+    r r (@PathRecordPathRefl A r)
+  : τ Unit_grpd;
+
+// Nested former: the outer source reflexivity exposes the inner shaped head.
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd (PathRecord_grpd A))) ⊢
+  @path_record_path_src (PathRecord_grpd A) r r
+    (@eq_refl (PathRecord_grpd (PathRecord_grpd A)) r)
+  ≡ @PathRecordPathRefl A (path_record_src r);
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd (PathRecord_grpd A)))
+  (P : τ (PathRecord_grpd (PathRecord_grpd A)) → Grpd)
+  (u : τ (P r)) ⊢
+  @ind_eq
+    (PathRecord_grpd (PathRecord_grpd A))
+    r r
+    (@eq_refl (PathRecord_grpd (PathRecord_grpd A)) r)
+    P u
+  ≡ u;
+
+// The stable head is intentionally not the raw nested-Sigma constructor.
+assertnot [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @eq_refl (PathRecord_grpd A) r
+  ≡ @sigma_path_refl
+      A
+      (λ src : τ A, PathRecordTail_grpd src)
+      (path_record_as_sigma r);
+
+// No arbitrary structured-constructor J beta or symmetry action is claimed.
+assertnot [A : Grpd]
+  (r : τ (PathRecord_grpd A))
+  (P : τ (PathRecord_grpd A) → Grpd)
+  (u : τ (P r)) ⊢
+  @ind_eq
+    (PathRecord_grpd A)
+    r r
+    (@sigma_path_refl
+      A
+      (λ src : τ A, PathRecordTail_grpd src)
+      (path_record_as_sigma r))
+    P u
+  ≡ u;
+
+assertnot [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_sym
+    (PathRecord_grpd A)
+    r r
+    (@sigma_path_refl
+      A
+      (λ src : τ A, PathRecordTail_grpd src)
+      (path_record_as_sigma r))
+  ≡ @sigma_path_refl
+      A
+      (λ src : τ A, PathRecordTail_grpd src)
+      (path_record_as_sigma r);
+
+// Homotopy truncation levels and recursive property computation.
+assert ⊢ TruncLevel : TYPE;
+
+assert ⊢ trunc_minus_two : TruncLevel;
+
+assert (n : TruncLevel) ⊢ trunc_succ n : TruncLevel;
+
+assert ⊢
+  trunc_minus_one
+  ≡ trunc_succ trunc_minus_two;
+
+assert ⊢
+  trunc_zero
+  ≡ trunc_succ (trunc_succ trunc_minus_two);
+
+assert ⊢
+  trunc_one
+  ≡ trunc_succ (trunc_succ (trunc_succ trunc_minus_two));
+
+// The explicit -2 origin is not definitionally shifted away.
+assertnot ⊢ trunc_minus_two ≡ trunc_minus_one;
+
+assert (n : TruncLevel) (A : Grpd) ⊢
+  IsTruncGrpd n A
+  : Grpd;
+
+assert [A : Grpd] ⊢
+  IsTruncGrpd trunc_minus_two A
+  ≡ IsContr A;
+
+assert [A : Grpd] (n : TruncLevel) ⊢
+  IsTruncGrpd (trunc_succ n) A
+  ≡ @Pi_grpd A
+      (λ x : τ A,
+        @Pi_grpd A
+          (λ y : τ A,
+            IsTruncGrpd n (@= A x y)));
+
+assert [A : Grpd] ⊢
+  IsPropGrpd A
+  ≡ @Pi_grpd A
+      (λ x : τ A,
+        @Pi_grpd A
+          (λ y : τ A,
+            IsContr (@= A x y)));
+
+assert [A : Grpd] ⊢
+  IsSetGrpd A
+  ≡ @Pi_grpd A
+      (λ x : τ A,
+        @Pi_grpd A
+          (λ y : τ A,
+            IsPropGrpd (@= A x y)));
+
+assert [A : Grpd] ⊢
+  IsGroupoidGrpd A
+  ≡ @Pi_grpd A
+      (λ x : τ A,
+        @Pi_grpd A
+          (λ y : τ A,
+            IsSetGrpd (@= A x y)));
+
+// The definitional successor equation is the active equality-lowering step.
+assert [A : Grpd]
+  (n : TruncLevel)
+  (h : τ (IsTruncGrpd (trunc_succ n) A))
+  (x y : τ A) ⊢
+  h x y
+  : τ (IsTruncGrpd n (@= A x y));
+
+assert [A : Grpd]
+  (h : τ (IsTruncGrpd trunc_minus_two A)) ⊢
+  h
+  : τ (IsContr A);
+
+// catalog-area: Truncation monotonicity
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @eq_sym_trans_self A x y p
+  : τ (@=
+      (@= A y y)
+      (@eq_trans A y x y (@eq_sym A x y p) p)
+      (@eq_refl A y));
+
+assert [A : Grpd]
+  (x : τ A) ⊢
+  @eq_sym_trans_self A x x (@eq_refl A x)
+  ≡ @eq_refl (@= A x x) (@eq_refl A x);
+
+assert [A : Grpd]
+  (c : τ (IsContr A))
+  (x y : τ A) ⊢
+  @contractible_path_center A c x y
+  : τ (@= A x y);
+
+assert [A : Grpd]
+  (c : τ (IsContr A))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @contractible_path_contract A c x y p
+  : τ (@=
+      (@= A x y)
+      (@contractible_path_center A c x y)
+      p);
+
+assert [A : Grpd]
+  (c : τ (IsContr A)) ⊢
+  @is_contr_is_prop A c
+  : τ (IsPropGrpd A);
+
+assert (n : TruncLevel) ⊢
+  TruncMonotonicity n
+  : Grpd;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @is_trunc_grpd_succ n A h
+  : τ (IsTruncGrpd (trunc_succ n) A);
+
+assert [A : Grpd]
+  (h : τ (IsContr A)) ⊢
+  @is_trunc_grpd_succ trunc_minus_two A h
+  ≡ @is_contr_is_prop A h;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h : τ (IsTruncGrpd (trunc_succ n) A))
+  (x y : τ A) ⊢
+  @is_trunc_grpd_succ (trunc_succ n) A h x y
+  ≡ @is_trunc_grpd_succ n (@= A x y) (h x y);
+
+assert [A : Grpd]
+  (h : τ (IsContr A)) ⊢
+  @is_trunc_grpd_succ trunc_minus_two A h
+  : τ (IsPropGrpd A);
+
+assert [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @is_trunc_grpd_succ trunc_minus_one A h
+  : τ (IsSetGrpd A);
+
+assert [A : Grpd]
+  (h : τ (IsSetGrpd A)) ⊢
+  @is_trunc_grpd_succ trunc_zero A h
+  : τ (IsGroupoidGrpd A);
+
+// The selected centre path for open contractibility data is not proof-erased.
+assertnot [A : Grpd]
+  (c : τ (IsContr A))
+  (x : τ A) ⊢
+  @contractible_path_center A c x x
+  ≡ @eq_refl A x;
+
+// catalog-area: auto
+
+// catalog-area: Truncation evidence property-valuedness
+assert [A : Grpd]
+  (c d : τ (IsContr A)) ⊢
+  @is_contr_evidence_transport A c d
+  : τ (@Pi_grpd A
+      (λ x : τ A, @= A (is_contr_center c) x));
+
+assert [A : Grpd]
+  (c d : τ (IsContr A)) ⊢
+  @is_contr_evidence_pathover A c d
+  : τ (@PathOver
+      A
+      (λ centre : τ A,
+        @Pi_grpd A (λ x : τ A, @= A centre x))
+      (is_contr_center c)
+      (is_contr_center d)
+      (is_contr_path c (is_contr_center d))
+      (λ x : τ A, is_contr_path c x)
+      (λ x : τ A, is_contr_path d x));
+
+assert [A : Grpd]
+  (c d : τ (IsContr A)) ⊢
+  @is_contr_evidence_path A c d
+  : τ (@= (IsContr A) c d);
+
+assert [A : Grpd]
+  (c : τ (IsContr A)) ⊢
+  @is_contr_evidence_is_contr A c
+  : τ (IsContr (IsContr A));
+
+assert [A : Grpd] ⊢
+  @is_contr_evidence_is_prop A
+  : τ (IsPropGrpd (IsContr A));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsContr (B x))) ⊢
+  @is_contr_pi A B h
+  : τ (IsContr (@Pi_grpd A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsPropGrpd (B x))) ⊢
+  @is_prop_pi A B h
+  : τ (IsPropGrpd (@Pi_grpd A B));
+
+assert (n : TruncLevel) ⊢
+  TruncEvidenceProp n
+  : Grpd;
+
+assert (n : TruncLevel)
+  (ih : τ (TruncEvidenceProp n))
+  (A : Grpd) ⊢
+  @trunc_evidence_prop_succ n ih A
+  : τ (IsPropGrpd (IsTruncGrpd (trunc_succ n) A));
+
+assert (n : TruncLevel)
+  [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop n A
+  : τ (IsPropGrpd (IsTruncGrpd n A));
+
+assert [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop trunc_minus_two A
+  ≡ @is_contr_evidence_is_prop A;
+
+assert (n : TruncLevel)
+  [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop (trunc_succ n) A
+  ≡ @trunc_evidence_prop_succ
+      n
+      (@is_trunc_grpd_evidence_is_prop n)
+      A;
+
+assert [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop trunc_minus_two A
+  : τ (IsPropGrpd (IsContr A));
+
+assert [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop trunc_minus_one A
+  : τ (IsPropGrpd (IsPropGrpd A));
+
+assert [A : Grpd] ⊢
+  @is_trunc_grpd_evidence_is_prop trunc_zero A
+  : τ (IsPropGrpd (IsSetGrpd A));
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h k : τ (IsTruncGrpd n A)) ⊢
+  is_contr_center
+    (@is_trunc_grpd_evidence_is_prop n A h k)
+  : τ (@= (IsTruncGrpd n A) h k);
+
+// Equality of open contractibility witnesses remains propositional.
+assertnot [A : Grpd]
+  (c : τ (IsContr A)) ⊢
+  @is_contr_evidence_path A c c
+  ≡ @eq_refl (IsContr A) c;
+
+// The evidence-property theorem does not erase two open witnesses.
+assertnot (n : TruncLevel)
+  [A : Grpd]
+  (h k : τ (IsTruncGrpd n A)) ⊢
+  h ≡ k;
+
+// catalog-area: auto
+
+// catalog-area: Dependent Pi truncation closure
+assert (n : TruncLevel) ⊢
+  PiTruncClosure n
+  : Grpd;
+
+assert (n : TruncLevel)
+  (rec : τ (PiTruncClosure n))
+  (A : Grpd)
+  (B : τ A → Grpd)
+  (h : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x))) ⊢
+  @trunc_pi_succ n rec A B h
+  : τ (IsTruncGrpd (trunc_succ n) (@Pi_grpd A B));
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsTruncGrpd n (B x))) ⊢
+  @is_trunc_pi n A B h
+  : τ (IsTruncGrpd n (@Pi_grpd A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsContr (B x))) ⊢
+  @is_trunc_pi trunc_minus_two A B h
+  ≡ @is_contr_pi A B h;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x))) ⊢
+  @is_trunc_pi (trunc_succ n) A B h
+  ≡ @trunc_pi_succ
+      n
+      (@is_trunc_pi n)
+      A
+      B
+      h;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsPropGrpd (B x))) ⊢
+  @is_trunc_pi trunc_minus_one A B h
+  : τ (IsPropGrpd (@Pi_grpd A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsSetGrpd (B x))) ⊢
+  @is_trunc_pi trunc_zero A B h
+  : τ (IsSetGrpd (@Pi_grpd A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsGroupoidGrpd (B x))) ⊢
+  @is_trunc_pi trunc_one A B h
+  : τ (IsGroupoidGrpd (@Pi_grpd A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsPropGrpd (B x))) ⊢
+  @is_prop_pi A B h
+  ≡ @is_trunc_pi trunc_minus_one A B h;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (h : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x)))
+  (f g : τ (@Pi_grpd A B)) ⊢
+  @is_trunc_pi (trunc_succ n) A B h f g
+  : τ (IsTruncGrpd n (@= (@Pi_grpd A B) f g));
+
+// Open pointwise evidence remains visible to the stable recursive owner.
+assertnot (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (h k : Π x : τ A, τ (IsTruncGrpd n (B x))) ⊢
+  @is_trunc_pi n A B h
+  ≡ @is_trunc_pi n A B k;
+
+// catalog-area: auto
+
+// catalog-area: Dependent Sigma truncation closure
+assert (n : TruncLevel) ⊢
+  SigmaTruncClosure n
+  : Grpd;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsContr A))
+  (hB : Π x : τ A, τ (IsContr (B x))) ⊢
+  @is_contr_sigma A B hA hB
+  : τ (IsContr (@Σ_ A B));
+
+assert (n : TruncLevel)
+  (rec : τ (SigmaTruncClosure n))
+  (A : Grpd)
+  (B : τ A → Grpd)
+  (hA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x))) ⊢
+  @trunc_sigma_succ n rec A B hA hB
+  : τ (IsTruncGrpd (trunc_succ n) (@Σ_ A B));
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsTruncGrpd n A))
+  (hB : Π x : τ A, τ (IsTruncGrpd n (B x))) ⊢
+  @is_trunc_sigma n A B hA hB
+  : τ (IsTruncGrpd n (@Σ_ A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsContr A))
+  (hB : Π x : τ A, τ (IsContr (B x))) ⊢
+  @is_trunc_sigma trunc_minus_two A B hA hB
+  ≡ @is_contr_sigma A B hA hB;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x))) ⊢
+  @is_trunc_sigma (trunc_succ n) A B hA hB
+  ≡ @trunc_sigma_succ
+      n
+      (@is_trunc_sigma n)
+      A
+      B
+      hA
+      hB;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsPropGrpd A))
+  (hB : Π x : τ A, τ (IsPropGrpd (B x))) ⊢
+  @is_trunc_sigma trunc_minus_one A B hA hB
+  : τ (IsPropGrpd (@Σ_ A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsSetGrpd A))
+  (hB : Π x : τ A, τ (IsSetGrpd (B x))) ⊢
+  @is_trunc_sigma trunc_zero A B hA hB
+  : τ (IsSetGrpd (@Σ_ A B));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsGroupoidGrpd A))
+  (hB : Π x : τ A, τ (IsGroupoidGrpd (B x))) ⊢
+  @is_trunc_sigma trunc_one A B hA hB
+  : τ (IsGroupoidGrpd (@Σ_ A B));
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB : Π x : τ A, τ (IsTruncGrpd (trunc_succ n) (B x)))
+  (u v : @τΣ_ A B) ⊢
+  @is_trunc_sigma (trunc_succ n) A B hA hB u v
+  : τ (IsTruncGrpd n (@= (@Σ_ A B) u v));
+
+// Both base and fibre evidence remain visible to the stable theorem owner.
+assertnot (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (hA kA : τ (IsTruncGrpd n A))
+  (hB : Π x : τ A, τ (IsTruncGrpd n (B x))) ⊢
+  @is_trunc_sigma n A B hA hB
+  ≡ @is_trunc_sigma n A B kA hB;
+
+assertnot (n : TruncLevel)
+  [A : Grpd]
+  [B : τ A → Grpd]
+  (hA : τ (IsTruncGrpd n A))
+  (hB kB : Π x : τ A, τ (IsTruncGrpd n (B x))) ⊢
+  @is_trunc_sigma n A B hA hB
+  ≡ @is_trunc_sigma n A B hA kB;
+
+// catalog-area: auto
+
+// Packaged universes of n-truncated classifiers.
+assert (n : TruncLevel) ⊢
+  τ (TruncGrpdU n)
+  ≡ TruncGrpdData n;
+
+assert (n : TruncLevel)
+  (carrier : Grpd)
+  (evidence : τ (IsTruncGrpd n carrier)) ⊢
+  @Struct_trunc_grpd n carrier evidence
+  : τ (TruncGrpdU n);
+
+assert (n : TruncLevel)
+  (carrier : Grpd)
+  (evidence : τ (IsTruncGrpd n carrier)) ⊢
+  trunc_grpd_carrier (@Struct_trunc_grpd n carrier evidence)
+  ≡ carrier;
+
+assert (n : TruncLevel)
+  (carrier : Grpd)
+  (evidence : τ (IsTruncGrpd n carrier)) ⊢
+  trunc_grpd_evidence (@Struct_trunc_grpd n carrier evidence)
+  ≡ evidence;
+
+assert (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  trunc_grpd_evidence X
+  : τ (IsTruncGrpd n (trunc_grpd_carrier X));
+
+assert ⊢
+  PropU_grpd
+  ≡ TruncGrpdU trunc_minus_one;
+
+assert ⊢
+  SetU_grpd
+  ≡ TruncGrpdU trunc_zero;
+
+assert ⊢
+  GroupoidU_grpd
+  ≡ TruncGrpdU trunc_one;
+
+assert (carrier : Grpd)
+  (evidence : τ (IsPropGrpd carrier)) ⊢
+  @trunc_grpd_carrier trunc_minus_one
+    (@Struct_trunc_grpd trunc_minus_one carrier evidence)
+  ≡ carrier;
+
+assert (carrier : Grpd)
+  (evidence : τ (IsSetGrpd carrier)) ⊢
+  @trunc_grpd_carrier trunc_zero
+    (@Struct_trunc_grpd trunc_zero carrier evidence)
+  ≡ carrier;
+
+assert (carrier : Grpd)
+  (evidence : τ (IsGroupoidGrpd carrier)) ⊢
+  @trunc_grpd_carrier trunc_one
+    (@Struct_trunc_grpd trunc_one carrier evidence)
+  ≡ carrier;
+
+// No runtime package eta is selected.
+assertnot (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  X
+  ≡ @Struct_trunc_grpd n
+      (trunc_grpd_carrier X)
+      (trunc_grpd_evidence X);
+
+// Evidence fields are not erased by conversion.
+assertnot (n : TruncLevel)
+  (carrier : Grpd)
+  (evidence0 evidence1 : τ (IsTruncGrpd n carrier)) ⊢
+  @Struct_trunc_grpd n carrier evidence0
+  ≡ @Struct_trunc_grpd n carrier evidence1;
+
+// Element evidence is not falsely typed as evidence that the package universe
+// itself is n-truncated; no same-level universe theorem is installed.
+assertnot (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  trunc_grpd_evidence X
+  : τ (IsTruncGrpd n (TruncGrpdU n));
+
+// catalog-area: Truncated-universe carrier/evidence paths
+assert (n : TruncLevel)
+  (Q : τ (TruncGrpdU n) → Grpd)
+  (c : Π carrier : Grpd,
+       Π evidence : τ (IsTruncGrpd n carrier),
+       τ (Q (@Struct_trunc_grpd n carrier evidence)))
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_ind n Q c X
+  : τ (Q X);
+
+assert (n : TruncLevel)
+  (Q : τ (TruncGrpdU n) → Grpd)
+  (c : Π carrier : Grpd,
+       Π evidence : τ (IsTruncGrpd n carrier),
+       τ (Q (@Struct_trunc_grpd n carrier evidence)))
+  (A : Grpd)
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @trunc_grpd_ind n Q c (@Struct_trunc_grpd n A h)
+  ≡ c A h;
+
+assert (n : TruncLevel)
+  (X Y : τ (TruncGrpdU n)) ⊢
+  TruncGrpdPathView n X Y
+  : Grpd;
+
+assert (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_path_refl n X
+  : τ (TruncGrpdPathView n X X);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (w : τ (TruncGrpdPathView n X Y)) ⊢
+  @trunc_grpd_path_decode n X Y w
+  : τ (@= (TruncGrpdU n) X Y);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_path_encode n X Y p
+  : τ (TruncGrpdPathView n X Y);
+
+assert (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_path_decode_refl n X
+  : τ (@=
+      (@= (TruncGrpdU n) X X)
+      (@trunc_grpd_path_decode
+        n X X (@trunc_grpd_path_refl n X))
+      (@eq_refl (TruncGrpdU n) X));
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_path_decode_encode n X Y p
+  : τ (@=
+      (@= (TruncGrpdU n) X Y)
+      (@trunc_grpd_path_decode
+        n X Y (@trunc_grpd_path_encode n X Y p))
+      p);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= Grpd_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_evidence_pathover n X Y p
+  : τ (@PathOver
+      Grpd_grpd
+      (λ A : Grpd, IsTruncGrpd n A)
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y)
+      p
+      (trunc_grpd_evidence X)
+      (trunc_grpd_evidence Y));
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= Grpd_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_path_from_carrier n X Y p
+  : τ (@= (TruncGrpdU n) X Y);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= Grpd_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_carrier_path_from_carrier n X Y p
+  : τ (@=
+      (@= Grpd_grpd
+        (trunc_grpd_carrier X)
+        (trunc_grpd_carrier Y))
+      (@trunc_grpd_carrier_path
+        n X Y (@trunc_grpd_path_from_carrier n X Y p))
+      p);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_path_from_carrier_carrier_path n X Y p
+  : τ (@=
+      (@= (TruncGrpdU n) X Y)
+      (@trunc_grpd_path_from_carrier
+        n X Y (@trunc_grpd_carrier_path n X Y p))
+      p);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)] ⊢
+  @trunc_grpd_carrier_path_type_equiv n X Y
+  : τ (TypeEquiv
+      (@= (TruncGrpdU n) X Y)
+      (@= Grpd_grpd
+        (trunc_grpd_carrier X)
+        (trunc_grpd_carrier Y)));
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  type_equiv_to (@trunc_grpd_carrier_path_type_equiv n X Y) p
+  ≡ @trunc_grpd_carrier_path n X Y p;
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= Grpd_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  type_equiv_from (@trunc_grpd_carrier_path_type_equiv n X Y) p
+  ≡ @trunc_grpd_path_from_carrier n X Y p;
+
+// The propositional round trips are not runtime cancellation rules.
+assertnot (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= Grpd_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_carrier_path
+    n X Y (@trunc_grpd_path_from_carrier n X Y p)
+  ≡ p;
+
+assertnot (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_path_from_carrier
+    n X Y (@trunc_grpd_carrier_path n X Y p)
+  ≡ p;
+
+// Encoding/decoding an open package path also remains propositional.
+assertnot (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_path_decode
+    n X Y (@trunc_grpd_path_encode n X Y p)
+  ≡ p;
+
+// catalog-area: Truncated-universe restricted univalence
+assert [A B : Grpd] ⊢
+  @grpd_univalence_type_equiv A B
+  : τ (TypeEquiv (@= Grpd_grpd A B) (TypeEquiv A B));
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  type_equiv_to (@grpd_univalence_type_equiv A B) p
+  ≡ @idtoequiv_grpd A B p;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  type_equiv_from (@grpd_univalence_type_equiv A B) e
+  ≡ @grpd_equiv_path A B e;
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)] ⊢
+  @trunc_grpd_univalence_type_equiv n X Y
+  : τ (TypeEquiv
+      (@= (TruncGrpdU n) X Y)
+      (TypeEquiv
+        (trunc_grpd_carrier X)
+        (trunc_grpd_carrier Y)));
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  type_equiv_to (@trunc_grpd_univalence_type_equiv n X Y) p
+  ≡ @idtoequiv_grpd
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y)
+      (@trunc_grpd_carrier_path n X Y p);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (e : τ (TypeEquiv
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  type_equiv_from (@trunc_grpd_univalence_type_equiv n X Y) e
+  ≡ @trunc_grpd_path_from_carrier
+      n X Y
+      (@grpd_equiv_path
+        (trunc_grpd_carrier X)
+        (trunc_grpd_carrier Y)
+        e);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_idtoequiv n X Y p
+  : τ (TypeEquiv
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y));
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (e : τ (TypeEquiv
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_equiv_path n X Y e
+  : τ (@= (TruncGrpdU n) X Y);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_equiv_path_idtoequiv n X Y p
+  : τ (@=
+      (@= (TruncGrpdU n) X Y)
+      (@trunc_grpd_equiv_path
+        n X Y (@trunc_grpd_idtoequiv n X Y p))
+      p);
+
+assert (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (e : τ (TypeEquiv
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_idtoequiv_equiv_path n X Y e
+  : τ (@=
+      (TypeEquiv
+        (trunc_grpd_carrier X)
+        (trunc_grpd_carrier Y))
+      (@trunc_grpd_idtoequiv
+        n X Y (@trunc_grpd_equiv_path n X Y e))
+      e);
+
+assert (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_idtoequiv
+    n X X (@eq_refl (TruncGrpdU n) X)
+  ≡ @type_equiv_refl (trunc_grpd_carrier X);
+
+assert (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_equiv_path_refl n X
+  : τ (@=
+      (@= (TruncGrpdU n) X X)
+      (@trunc_grpd_equiv_path
+        n X X (@type_equiv_refl (trunc_grpd_carrier X)))
+      (@eq_refl (TruncGrpdU n) X));
+
+// Restricted univalence round trips remain propositional.
+assertnot (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (p : τ (@= (TruncGrpdU n) X Y)) ⊢
+  @trunc_grpd_equiv_path
+    n X Y (@trunc_grpd_idtoequiv n X Y p)
+  ≡ p;
+
+assertnot (n : TruncLevel)
+  [X Y : τ (TruncGrpdU n)]
+  (e : τ (TypeEquiv
+      (trunc_grpd_carrier X)
+      (trunc_grpd_carrier Y))) ⊢
+  @trunc_grpd_idtoequiv
+    n X Y (@trunc_grpd_equiv_path n X Y e)
+  ≡ e;
+
+// Even reflexive carrier equivalence decodes only propositionally.
+assertnot (n : TruncLevel)
+  (X : τ (TruncGrpdU n)) ⊢
+  @trunc_grpd_equiv_path
+    n X X (@type_equiv_refl (trunc_grpd_carrier X))
+  ≡ @eq_refl (TruncGrpdU n) X;
+
+// catalog-area: Truncated-universe expected level
+assert [A B : Grpd]
+  (hA : τ (IsContr A))
+  (hB : τ (IsContr B))
+  (f : τ A → τ B) ⊢
+  @contractible_map_by_inverse A B hA hB f
+  : τ (@EquivByInverse
+      A B f (λ _ : τ B, is_contr_center hA));
+
+assert [A B : Grpd]
+  (hA : τ (IsContr A))
+  (hB : τ (IsContr B))
+  (f : τ A → τ B) ⊢
+  @contractible_map_is_equiv A B hA hB f
+  : τ (@IsEquivMap A B f);
+
+assert [A B : Grpd]
+  (f : τ A → τ B) ⊢
+  @is_equiv_map_evidence_is_prop A B f
+  : τ (IsPropGrpd (@IsEquivMap A B f));
+
+assert [A B : Grpd]
+  (hA : τ (IsContr A))
+  (hB : τ (IsContr B))
+  (f : τ A → τ B) ⊢
+  @is_equiv_map_evidence_is_contr A B hA hB f
+  : τ (IsContr (@IsEquivMap A B f));
+
+assert [A B : Grpd]
+  (hA : τ (IsContr A))
+  (hB : τ (IsContr B)) ⊢
+  @contractible_type_equiv A B hA hB
+  : τ (IsContr (TypeEquiv A B));
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @prop_is_trunc_succ n A h
+  : τ (IsTruncGrpd (trunc_succ n) A);
+
+assert [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @prop_is_trunc_succ trunc_minus_two A h
+  ≡ h;
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (hB : τ (IsTruncGrpd (trunc_succ n) B)) ⊢
+  @trunc_type_equiv_succ n A B hB
+  : τ (IsTruncGrpd (trunc_succ n) (TypeEquiv A B));
+
+assert (n : TruncLevel) ⊢
+  TypeEquivTruncClosure n
+  : Grpd;
+
+assert (n : TruncLevel) ⊢
+  @is_trunc_type_equiv n
+  : τ (TypeEquivTruncClosure n);
+
+assert [A B : Grpd]
+  (hA : τ (IsContr A))
+  (hB : τ (IsContr B)) ⊢
+  @is_trunc_type_equiv trunc_minus_two A B hA hB
+  ≡ @contractible_type_equiv A B hA hB;
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (hA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB : τ (IsTruncGrpd (trunc_succ n) B)) ⊢
+  @is_trunc_type_equiv (trunc_succ n) A B hA hB
+  ≡ @trunc_type_equiv_succ n A B hB;
+
+// Source evidence is intentionally not a successor-level discriminator.
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (hA kA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB : τ (IsTruncGrpd (trunc_succ n) B)) ⊢
+  @is_trunc_type_equiv (trunc_succ n) A B hA hB
+  ≡ @is_trunc_type_equiv (trunc_succ n) A B kA hB;
+
+assert (n : TruncLevel) ⊢
+  @is_trunc_grpd_universe n
+  : τ (IsTruncGrpd
+      (trunc_succ n)
+      (TruncGrpdU n));
+
+assert ⊢
+  @is_trunc_grpd_universe trunc_minus_two
+  : τ (IsPropGrpd (TruncGrpdU trunc_minus_two));
+
+assert ⊢
+  @is_trunc_grpd_universe trunc_minus_one
+  : τ (IsSetGrpd PropU_grpd);
+
+assert ⊢
+  @is_trunc_grpd_universe trunc_zero
+  : τ (IsGroupoidGrpd SetU_grpd);
+
+// Contractible source evidence remains explicit in the base construction.
+assertnot [A B : Grpd]
+  (hA kA : τ (IsContr A))
+  (hB : τ (IsContr B))
+  (f : τ A → τ B) ⊢
+  @contractible_map_is_equiv A B hA hB f
+  ≡ @contractible_map_is_equiv A B kA hB f;
+
+// Target evidence remains explicit data in the successor helper.
+assertnot (n : TruncLevel)
+  [A B : Grpd]
+  (hA : τ (IsTruncGrpd (trunc_succ n) A))
+  (hB kB : τ (IsTruncGrpd (trunc_succ n) B)) ⊢
+  @is_trunc_type_equiv (trunc_succ n) A B hA hB
+  ≡ @is_trunc_type_equiv (trunc_succ n) A B hA kB;
+
+// The theorem does not install a same-level universe claim.
+assertnot (n : TruncLevel) ⊢
+  @is_trunc_grpd_universe n
+  : τ (IsTruncGrpd n (TruncGrpdU n));
+
+// catalog-area: auto
+
 assert [A : Grpd] ⊢ Obj (Path_cat A) ≡ A;
 
 assert [A : Grpd] (x y : τ A) ⊢ Hom_cat (Path_cat A) x y ≡ Path_cat (x = y);
 
 assert [A : Grpd] (x : τ A) ⊢ @id (Path_cat A) x ≡ eq_refl x;
 
-assert [A : Grpd] (x y z : τ A) (p : τ (x = y)) (q : τ (y = z)) ⊢
-  @comp_fapp0 (Path_cat A) x y z q p ≡ eq_trans p q;
+// E0 keeps the shared generic category-composition head. J-derived
+// transitivity agrees propositionally, not by runtime conversion.
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y))
+  [z : τ A]
+  (q : τ (y = z)) ⊢
+  @path_comp_eq_trans A x y p z q
+  : τ (
+      @comp_fapp0 (Path_cat A) x y z q p
+      = @eq_trans A x y z p q);
+
+assert [A : Grpd] (y z : τ A) (q : τ (y = z)) ⊢
+  @path_comp_eq_trans A y y (eq_refl y) z q
+  ≡ eq_refl q;
+
+assertnot [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y))
+  [z : τ A]
+  (q : τ (y = z)) ⊢
+  @comp_fapp0 (Path_cat A) x y z q p
+  ≡ @eq_trans A x y z p q;
+
+// Both unit orders join whether generic `id` or its `eq_refl` projection is
+// exposed first.
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @comp_fapp0 (Path_cat A) x x y p (@id (Path_cat A) x)
+  ≡ p;
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @comp_fapp0 (Path_cat A) x x y p (eq_refl x)
+  ≡ p;
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @comp_fapp0 (Path_cat A) x y y (@id (Path_cat A) y) p
+  ≡ p;
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @comp_fapp0 (Path_cat A) x y y (eq_refl y) p
+  ≡ p;
+
+// Generic associativity remains a proof-time equation; typed reflexivity
+// exercises that owner on arbitrary path-category arrows.
+assert [A : Grpd]
+  (w x y z : τ A)
+  (p : τ (w = x))
+  (q : τ (x = y))
+  (r : τ (y = z)) ⊢
+  eq_refl
+    (@comp_fapp0
+      (Path_cat A)
+      w y z r
+      (@comp_fapp0 (Path_cat A) w x y q p))
+  : τ (
+      @comp_fapp0
+        (Path_cat A)
+        w y z r
+        (@comp_fapp0 (Path_cat A) w x y q p)
+      = @comp_fapp0
+          (Path_cat A)
+          w x z
+          (@comp_fapp0 (Path_cat A) x y z r q)
+          p);
+
+// Opposite path categories retain reversed hom endpoints and do not collapse
+// definitionally back to the original category.
+assert [A : Grpd] (x y : τ A) ⊢
+  Hom_cat (Op_cat (Path_cat A)) x y
+  ≡ Path_cat (y = x);
+
+assertnot [A : Grpd] ⊢
+  Op_cat (Path_cat A)
+  ≡ Path_cat A;
+
+// Oriented action heads retain distinct runtime normal forms. Their existing
+// proof-time comparisons with shared category composition supply both units
+// without four additional constructor-specific runtime bridges.
+symbol path_postcomp_comp_check
+  [A : Grpd]
+  [w x y : τ A]
+  (h : τ (x = y))
+  (g : τ (w = x))
+  : τ (
+      @hom_postcomp_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        w x y h g
+      = @comp_fapp0 (Path_cat A) w x y h g)
+≔ eq_refl
+    (@hom_postcomp_fapp0
+      (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+      w x y h g);
+
+symbol path_precomp_comp_check
+  [A : Grpd]
+  [z w x : τ A]
+  (h : τ (w = x))
+  (g : τ (x = z))
+  : τ (
+      @hom_precomp_along_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        z w x h g
+      = @comp_fapp0 (Path_cat A) w x z g h)
+≔ eq_refl
+    (@hom_precomp_along_fapp0
+      (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+      z w x h g);
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @path_postcomp_comp_check A x x y p (eq_refl x)
+  : τ (
+      @hom_postcomp_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        x x y p (eq_refl x)
+      = p);
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @path_postcomp_comp_check A x y y (eq_refl y) p
+  : τ (
+      @hom_postcomp_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        x y y (eq_refl y) p
+      = p);
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @path_precomp_comp_check A y x x (eq_refl x) p
+  : τ (
+      @hom_precomp_along_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        y x x (eq_refl x) p
+      = p);
+
+assert [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @path_precomp_comp_check A y x y p (eq_refl y)
+  : τ (
+      @hom_precomp_along_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        y x y p (eq_refl y)
+      = p);
+
+assertnot [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    x x y p (eq_refl x)
+  ≡ p;
+
+assertnot [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    x y y (eq_refl y) p
+  ≡ p;
+
+assertnot [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @hom_precomp_along_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    y x x (eq_refl x) p
+  ≡ p;
+
+assertnot [A : Grpd] (x y : τ A) (p : τ (x = y)) ⊢
+  @hom_precomp_along_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    y x y p (eq_refl y)
+  ≡ p;
+
+// The oriented postcomposition and shared category-composition heads remain
+// distinct runtime normal forms; their existing proof-time comparison joins
+// them for typing.
+assert [A : Grpd]
+  (x y z : τ A)
+  (p : τ (x = y))
+  (q : τ (y = z)) ⊢
+  @eq_refl (x = z)
+    (@hom_postcomp_fapp0
+      (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+      x y z q p)
+  : τ (
+      @hom_postcomp_fapp0
+        (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+        x y z q p
+      = @comp_fapp0 (Path_cat A) x y z q p);
+
+// E1: path symmetry is the arrow action of one functor from the genuine
+// opposite path category. Generic functoriality owns its strict identity and
+// anti-composition computation.
+assert [A : Grpd] (x : τ A) ⊢
+  @fapp0
+    (Op_cat (Path_cat A))
+    (Path_cat A)
+    (Path_sym_func A)
+    x
+  ≡ x;
+
+assert [A : Grpd] (x : τ A) ⊢
+  @path_sym A x x (eq_refl x)
+  ≡ eq_refl x;
+
+// Identity-first and action-first reduction orders join: generic functor
+// identity sees the literal source identity, while Path_cat may expose refl
+// first for the focused PathSym projection bridge.
+assert [A : Grpd] (x : τ A) ⊢
+  @fapp1_fapp0
+    (Op_cat (Path_cat A))
+    (Path_cat A)
+    (Path_sym_func A)
+    x x
+    (@id (Op_cat (Path_cat A)) x)
+  ≡ eq_refl x;
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y))
+  [z : τ A]
+  (q : τ (y = z)) ⊢
+  @comp_fapp0
+    (Path_cat A)
+    z y x
+    (@path_sym A x y p)
+    (@path_sym A y z q)
+  ≡ @path_sym A x z
+      (@comp_fapp0 (Path_cat A) x y z q p);
+
+// The composition-first intermediate also joins after opposite composition
+// reverses its factors; no constructor-specific path_sym(comp) rule is used.
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y))
+  [z : τ A]
+  (q : τ (y = z)) ⊢
+  @fapp1_fapp0
+    (Op_cat (Path_cat A))
+    (Path_cat A)
+    (Path_sym_func A)
+    z x
+    (@comp_fapp0 (Op_cat (Path_cat A)) z y x p q)
+  ≡ @path_sym A x z
+      (@comp_fapp0 (Path_cat A) x y z q p);
+
+assertnot [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y)) ⊢
+  @path_sym A x y p
+  ≡ @eq_sym A x y p;
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y)) ⊢
+  @path_sym_agrees_eq_sym A x y p
+  : τ (@path_sym A x y p = @eq_sym A x y p);
+
+assert [A : Grpd] (x : τ A) ⊢
+  @path_sym_agrees_eq_sym A x x (eq_refl x)
+  ≡ eq_refl (eq_refl x);
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y)) ⊢
+  @path_sym_invol A x y p
+  : τ (
+      @path_sym A y x (@path_sym A x y p)
+      = p);
+
+assertnot [A : Grpd]
+  [x y : τ A]
+  (p : τ (x = y)) ⊢
+  @path_sym A y x (@path_sym A x y p)
+  ≡ p;
+
+assert [A : Grpd] (x : τ A) ⊢
+  @path_sym_invol A x x (eq_refl x)
+  ≡ eq_refl (eq_refl x);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y)) ⊢
+  @path_sym_core_incl_agreement C x y p
+  : τ (@=
+      (Hom C x y)
+      (@path_to_hom (Op_cat C) y x
+        (@path_sym (Obj C) x y p))
+      (@path_to_hom C x y p));
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @path_sym_core_incl_agreement C x x (eq_refl x)
+  ≡ eq_refl (@id C x);
+
+/*
+  Classification and resolution of the twelve E1 owner warnings.
+
+  Six mapped-DefIso reports exposed over-specified endpoint guards and vanish
+  after the generic owner is minimized. The post/pre and naturality families
+  are typed unit diamonds. Each pair checks the action-first spelling and the
+  spelling with the PathSym reflexivity projection already exposed. The two
+  Product projection reports are rejected below as untyped rigid-head cases.
+*/
+assert [A : Grpd]
+  (w x y : τ A)
+  (p : τ (x = y))
+  (g : τ (w = y)) ⊢
+  @comp_fapp0 (Path_cat A) w x x
+    (@path_sym A x x (eq_refl x))
+    (@hom_postcomp_fapp0
+      (Path_cat A) (Op_cat (Path_cat A)) (Path_sym_func A)
+      w y x p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat A) (Op_cat (Path_cat A)) (Path_sym_func A)
+      w y x p g;
+
+assert [A : Grpd]
+  (w x y : τ A)
+  (p : τ (x = y))
+  (g : τ (w = y)) ⊢
+  @comp_fapp0 (Path_cat A) w x x
+    (eq_refl x)
+    (@hom_postcomp_fapp0
+      (Path_cat A) (Op_cat (Path_cat A)) (Path_sym_func A)
+      w y x p g)
+  ≡ @hom_postcomp_fapp0
+      (Path_cat A) (Op_cat (Path_cat A)) (Path_sym_func A)
+      w y x p g;
+
+assert [A : Grpd]
+  (x y z : τ A)
+  (p : τ (x = y))
+  (q : τ (x = z)) ⊢
+  @comp_fapp0 (Path_cat A) y y z
+    (@hom_precomp_along_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      z y x p q)
+    (@path_sym A y y (eq_refl y))
+  ≡ @hom_precomp_along_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      z y x p q;
+
+assert [A : Grpd]
+  (x y z : τ A)
+  (p : τ (x = y))
+  (q : τ (x = z)) ⊢
+  @comp_fapp0 (Path_cat A) y y z
+    (@hom_precomp_along_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      z y x p q)
+    (eq_refl y)
+  ≡ @hom_precomp_along_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      z y x p q;
+
+// Mapped-DefIso cancellation is checked before and after all PathSym object
+// projections. Both spellings failed with explicit endpoint guards and now
+// join through the minimized generic owner, without a path-specific rule.
+assert [A : Grpd]
+  (x y : τ A)
+  (i : τ (@DefIso (Op_cat (Path_cat A)) x y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+  ≡ eq_refl x;
+
+assert [A : Grpd]
+  (x y : τ A)
+  (i : τ (@DefIso (Op_cat (Path_cat A)) x y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    x y x
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+  ≡ eq_refl x;
+
+assert [A : Grpd]
+  (x y : τ A)
+  (i : τ (@DefIso (Op_cat (Path_cat A)) x y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+  ≡ eq_refl y;
+
+assert [A : Grpd]
+  (x y : τ A)
+  (i : τ (@DefIso (Op_cat (Path_cat A)) x y)) ⊢
+  @hom_postcomp_fapp0
+    (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
+    y x y
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+    (@fapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
+      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+  ≡ eq_refl y;
+
+// Product-projection overlaps are untyped: PathSym's rigid target is a path
+// category, never a product-category head. Keep explicit negative typing
+// controls for both projection owners.
+assertnot [A : Grpd] [B C : Cat] (x : τ A) ⊢
+  sigma_Fst
+    (@fapp0
+      (Op_cat (Path_cat A)) (Product_cat B C) (Path_sym_func A) x)
+  : τ (Obj B);
+
+assertnot [A : Grpd] [B C : Cat] (x : τ A) ⊢
+  sigma_Snd
+    (@fapp0
+      (Op_cat (Path_cat A)) (Product_cat B C) (Path_sym_func A) x)
+  : τ (Obj C);
+
+assert [A : Grpd]
+  (F : τ (Functor (Op_cat (Path_cat A)) (Path_cat A)))
+  (x y : τ A)
+  (p : τ (y = x))
+  (eta : τ (Transf F (Path_sym_func A))) ⊢
+  @comp_fapp0 (Path_cat A)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) F x) y y
+    (@path_sym A y y (eq_refl y))
+    (@tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      F (Path_sym_func A) x y eta p)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      F (Path_sym_func A) x y eta p;
+
+assert [A : Grpd]
+  (F : τ (Functor (Op_cat (Path_cat A)) (Path_cat A)))
+  (x y : τ A)
+  (p : τ (y = x))
+  (eta : τ (Transf F (Path_sym_func A))) ⊢
+  @comp_fapp0 (Path_cat A)
+    (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) F x) y y
+    (eq_refl y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      F (Path_sym_func A) x y eta p)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      F (Path_sym_func A) x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor (Op_cat (Path_cat A)) (Path_cat A)))
+  (x y : τ A)
+  (p : τ (y = x))
+  (eta : τ (Transf (Path_sym_func A) G)) ⊢
+  @comp_fapp0 (Path_cat A)
+    x x (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) G y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (Path_sym_func A) G x y eta p)
+    (@path_sym A x x (eq_refl x))
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (Path_sym_func A) G x y eta p;
+
+assert [A : Grpd]
+  (G : τ (Functor (Op_cat (Path_cat A)) (Path_cat A)))
+  (x y : τ A)
+  (p : τ (y = x))
+  (eta : τ (Transf (Path_sym_func A) G)) ⊢
+  @comp_fapp0 (Path_cat A)
+    x x (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) G y)
+    (@tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (Path_sym_func A) G x y eta p)
+    (eq_refl x)
+  ≡ @tapp1_fapp0
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (Path_sym_func A) G x y eta p;
 
 // Ordinary categorical isomorphism evidence.
 assert [C : Cat] (x : τ (Obj C)) ⊢
@@ -101,6 +3064,1364 @@ assert ⊢
   cat_iso_univalence_by_decoder Cat_cat
   : τ (CatIsoUnivalenceByDecoder Cat_cat);
 
+// Candidate D0 fixed-arrow evidence, Sigma package, and recursive reflexivity.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @OmegaEquivAlong_D0 C x y f
+  : Grpd;
+
+assert [C : Cat]
+  (x y : τ (Obj C)) ⊢
+  OmegaEquiv_D0 C x y
+  : Grpd;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @Struct_sigma
+    (Hom C x y)
+    (λ g : τ (Hom C x y), @OmegaEquivAlong_D0 C x y g)
+    f
+    u
+  : τ (OmegaEquiv_D0 C x y);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_to_D0 C x y
+    (@Struct_sigma
+      (Hom C x y)
+      (λ g : τ (Hom C x y), @OmegaEquivAlong_D0 C x y g)
+      f
+      u)
+  ≡ f;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_evidence_D0 C x y
+    (@Struct_sigma
+      (Hom C x y)
+      (λ g : τ (Hom C x y), @OmegaEquivAlong_D0 C x y g)
+      f
+      u)
+  ≡ u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_inv_D0 C x y f u
+  : τ (Hom C y x);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_right_inv_D0 C x y f u
+  : τ (Hom C y x);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_cell_D0 C x y f u
+  : τ (OmegaEquiv_D0
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f)
+      (@id C x));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_right_cell_D0 C x y f u
+  : τ (OmegaEquiv_D0
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@id C y));
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_refl_D0 C x
+  : τ (@OmegaEquivAlong_D0 C x x (@id C x));
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_refl_D0 C x
+  : τ (OmegaEquiv_D0 C x x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_to_D0 C x x (@omega_equiv_refl_D0 C x)
+  ≡ @id C x;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_evidence_D0 C x x (@omega_equiv_refl_D0 C x)
+  ≡ @omega_equiv_along_refl_D0 C x;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_inv_D0
+    C x x (@id C x)
+    (@omega_equiv_evidence_D0 C x x (@omega_equiv_refl_D0 C x))
+  ≡ @id C x;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_right_inv_D0
+    C x x (@id C x)
+    (@omega_equiv_evidence_D0 C x x (@omega_equiv_refl_D0 C x))
+  ≡ @id C x;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_cell_D0
+    C x x (@id C x)
+    (@omega_equiv_along_refl_D0 C x)
+  ≡ @omega_equiv_refl_D0
+      (Hom_cat C x x)
+      (@id C x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_right_cell_D0
+    C x x (@id C x)
+    (@omega_equiv_along_refl_D0 C x)
+  ≡ @omega_equiv_refl_D0
+      (Hom_cat C x x)
+      (@id C x);
+
+// One recursive next-hom rung: project the left reflexive cell's certificate,
+// then observe its own left cell.
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_cell_D0
+    (Hom_cat C x x)
+    (@id C x)
+    (@id C x)
+    (@id (Hom_cat C x x) (@id C x))
+    (@omega_equiv_evidence_D0
+      (Hom_cat C x x)
+      (@id C x)
+      (@id C x)
+      (@omega_equiv_along_left_cell_D0
+        C x x (@id C x)
+        (@omega_equiv_along_refl_D0 C x)))
+  ≡ @omega_equiv_refl_D0
+      (Hom_cat (Hom_cat C x x) (@id C x) (@id C x))
+      (@id (Hom_cat C x x) (@id C x));
+
+// The Sigma package remains intensional: no open package eta is installed.
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv_D0 C x y)) ⊢
+  @Struct_sigma
+    (Hom C x y)
+    (λ f : τ (Hom C x y), @OmegaEquivAlong_D0 C x y f)
+    (@omega_equiv_to_D0 C x y e)
+    (@omega_equiv_evidence_D0 C x y e)
+  ≡ e;
+
+// Higher inverse evidence does not strictify either composite to identity.
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @comp_fapp0 C x y x
+    (@omega_equiv_along_left_inv_D0 C x y f u)
+    f
+  ≡ @id C x;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @comp_fapp0 C y x y
+    f
+    (@omega_equiv_along_right_inv_D0 C x y f u)
+  ≡ @id C y;
+
+// Candidate D0b variable-evidence Cat hom action and endpoint repair.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_along_fapp1_D0 A B F u x y
+  : τ (@OmegaEquivAlong_D0
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (@fapp1_func A B F x y));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @Struct_sigma
+    (Functor
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+    (λ G : τ (Functor
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))),
+      @OmegaEquivAlong_D0
+        Cat_cat
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        G)
+    (@fapp1_func A B F x y)
+    (@omega_equiv_along_fapp1_D0 A B F u x y)
+  : τ (OmegaEquiv_D0
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_to_D0
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@Struct_sigma
+      (Functor
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+      (λ G : τ (Functor
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))),
+        @OmegaEquivAlong_D0
+          Cat_cat
+          (Hom_cat A x y)
+          (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+          G)
+      (@fapp1_func A B F x y)
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ @fapp1_func A B F x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_evidence_D0
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@Struct_sigma
+      (Functor
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+      (λ G : τ (Functor
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))),
+        @OmegaEquivAlong_D0
+          Cat_cat
+          (Hom_cat A x y)
+          (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+          G)
+      (@fapp1_func A B F x y)
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ @omega_equiv_along_fapp1_D0 A B F u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F)) ⊢
+  omega_equiv_along_left_functor_D0 u
+  : τ (Functor B A);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F)) ⊢
+  omega_equiv_along_right_functor_D0 u
+  : τ (Functor B A);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x : τ (Obj A)) ⊢
+  omega_equiv_along_left_from_component_D0 u x
+  : τ (Hom A
+      x
+      (@fapp0 B A
+        (omega_equiv_along_left_functor_D0 u)
+        (@fapp0 A B F x)));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (y : τ (Obj A)) ⊢
+  omega_equiv_along_left_to_component_D0 u y
+  : τ (Hom A
+      (@fapp0 B A
+        (omega_equiv_along_left_functor_D0 u)
+        (@fapp0 A B F y))
+      y);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x : τ (Obj A)) ⊢
+  omega_equiv_along_fapp1_right_source_D0 u x
+  : τ (Hom A
+      x
+      (@fapp0 B A
+        (omega_equiv_along_right_functor_D0 u)
+        (@fapp0 A B F x)));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (y : τ (Obj A)) ⊢
+  omega_equiv_along_fapp1_right_target_D0 u y
+  : τ (Hom A
+      (@fapp0 B A
+        (omega_equiv_along_right_functor_D0 u)
+        (@fapp0 A B F y))
+      y);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_fapp1_left_inv_D0 u x y
+  : τ (Functor
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (Hom_cat A x y));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_fapp1_right_inv_D0 u x y
+  : τ (Functor
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (Hom_cat A x y));
+
+// Raw hom action of either inverse functor retains the wrong endpoints.
+assertnot [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func
+    B A
+    (omega_equiv_along_left_functor_D0 u)
+    (@fapp0 A B F x)
+    (@fapp0 A B F y)
+  : τ (Functor
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (Hom_cat A x y));
+
+assertnot [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func
+    B A
+    (omega_equiv_along_right_functor_D0 u)
+    (@fapp0 A B F x)
+    (@fapp0 A B F y)
+  : τ (Functor
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (Hom_cat A x y));
+
+// Both selected inverse observations compute to the conjugated functors.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_left_inv_D0
+    (@omega_equiv_along_fapp1_D0 A B F u x y)
+  ≡ omega_equiv_along_fapp1_left_inv_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_right_inv_D0
+    (@omega_equiv_along_fapp1_D0 A B F u x y)
+  ≡ omega_equiv_along_fapp1_right_inv_D0 u x y;
+
+// Object projections expose the inverse-functor action after endpoint repair.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A))
+  (h : τ (Hom B (@fapp0 A B F x) (@fapp0 A B F y))) ⊢
+  fapp0 (omega_equiv_along_fapp1_left_inv_D0 u x y) h
+  ≡ @Hom_fapp0
+      A
+      (@fapp0 B A
+        (omega_equiv_along_left_functor_D0 u)
+        (@fapp0 A B F x))
+      x
+      (@fapp0 B A
+        (omega_equiv_along_left_functor_D0 u)
+        (@fapp0 A B F y))
+      y
+      (omega_equiv_along_left_from_component_D0 u x)
+      (omega_equiv_along_left_to_component_D0 u y)
+      (@fapp1_fapp0
+        B A
+        (omega_equiv_along_left_functor_D0 u)
+        (@fapp0 A B F x)
+        (@fapp0 A B F y)
+        h);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A))
+  (h : τ (Hom B (@fapp0 A B F x) (@fapp0 A B F y))) ⊢
+  fapp0 (omega_equiv_along_fapp1_right_inv_D0 u x y) h
+  ≡ @Hom_fapp0
+      A
+      (@fapp0 B A
+        (omega_equiv_along_right_functor_D0 u)
+        (@fapp0 A B F x))
+      x
+      (@fapp0 B A
+        (omega_equiv_along_right_functor_D0 u)
+        (@fapp0 A B F y))
+      y
+      (omega_equiv_along_fapp1_right_source_D0 u x)
+      (omega_equiv_along_fapp1_right_target_D0 u y)
+      (@fapp1_fapp0
+        B A
+        (omega_equiv_along_right_functor_D0 u)
+        (@fapp0 A B F x)
+        (@fapp0 A B F y)
+        h);
+
+// Both recursive cell observations compute to transparent next-hom packages.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_left_cell_D0
+    (@omega_equiv_along_fapp1_D0 A B F u x y)
+  ≡ omega_equiv_along_fapp1_left_cell_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_right_cell_D0
+    (@omega_equiv_along_fapp1_D0 A B F u x y)
+  ≡ omega_equiv_along_fapp1_right_cell_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_to_D0
+    (omega_equiv_along_left_cell_D0
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ omega_equiv_along_fapp1_left_cell_to_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_evidence_D0
+    (omega_equiv_along_left_cell_D0
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ omega_equiv_along_fapp1_left_cell_evidence_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_to_D0
+    (omega_equiv_along_right_cell_D0
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ omega_equiv_along_fapp1_right_cell_to_D0 u x y;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_evidence_D0
+    (omega_equiv_along_right_cell_D0
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ omega_equiv_along_fapp1_right_cell_evidence_D0 u x y;
+
+// One more observation at each returned cell confirms recursive iterability.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_left_inv_D0
+    (omega_equiv_evidence_D0
+      (omega_equiv_along_left_cell_D0
+        (@omega_equiv_along_fapp1_D0 A B F u x y)))
+  : τ (Hom
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x y))
+      (@id_func (Hom_cat A x y))
+      (@comp_cat_fapp0
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat A x y)
+        (omega_equiv_along_fapp1_left_inv_D0 u x y)
+        (@fapp1_func A B F x y)));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_right_inv_D0
+    (omega_equiv_evidence_D0
+      (omega_equiv_along_right_cell_D0
+        (@omega_equiv_along_fapp1_D0 A B F u x y)))
+  : τ (Hom
+      (Functor_cat
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+      (@id_func
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+      (@comp_cat_fapp0
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (@fapp1_func A B F x y)
+        (omega_equiv_along_fapp1_right_inv_D0 u x y)));
+
+// D1 public fixed-map normal form and categorical decoder.
+// catalog-area: Public fixed-map omega-equivalence and categorical decoder
+assert [C : Cat]
+  [x y : τ (Obj C)] ⊢
+  OmegaEquiv C x y
+  ≡ `Σ_ f : τ (Hom C x y), @OmegaEquivAlong C x y f;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)] ⊢
+  @OmegaEquivAlong C x y f
+  ≡ @OmegaEquivAlong_D0 C x y f;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_from_along C x y f u
+  : τ (OmegaEquiv C x y);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_to C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ f;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_evidence C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_left_inv C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ @omega_equiv_along_left_inv_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_right_inv C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ @omega_equiv_along_right_inv_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_left_cell C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ @omega_equiv_along_left_cell_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_right_cell C x y
+    (@omega_equiv_from_along C x y f u)
+  ≡ @omega_equiv_along_right_cell_D0 C x y f u;
+
+// The semantic fibre comparison is a one-sided retraction, not package eta.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_along_to_fibre C x y f u
+  : τ (@OmegaEquivFibre C x y f);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_fibre_to_along C x y f
+    (@omega_equiv_along_to_fibre C x y f u)
+  ≡ u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_along_fibre_retract C x y f u
+  ≡ eq_refl u;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_from_along
+    C x y
+    (@omega_equiv_to C x y e)
+    (@omega_equiv_evidence C x y e)
+  ≡ e;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (h : τ (@OmegaEquivFibre C x y f)) ⊢
+  @omega_equiv_along_to_fibre C x y f
+    (@omega_equiv_fibre_to_along C x y f h)
+  ≡ h;
+
+// Opposite closure is evidence-owned, including its decoder square.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_evidence
+    (Op_cat C) y x (@omega_equiv_op C x y e)
+  ≡ @omega_equiv_along_op_D1
+      C x y
+      (@omega_equiv_to C x y e)
+      (@omega_equiv_evidence C x y e);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_path
+    (Op_cat C) y x (@omega_equiv_op C x y e)
+  ≡ @path_sym
+      (Obj C)
+      x
+      y
+      (@omega_equiv_path C x y e);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_evidence
+    (Op_cat C)
+    x
+    x
+    (@omega_equiv_op C x x (@omega_equiv_refl C x))
+  ≡ @omega_equiv_along_refl_D0 (Op_cat C) x;
+
+// Both reduction orders join for opposite evidence specialized to reflexivity.
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_inv_D0
+    (Op_cat C) x x (@id C x)
+    (@omega_equiv_along_op_D1
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @omega_equiv_along_left_inv_D0
+      (Op_cat C) x x (@id C x)
+      (@omega_equiv_along_refl_D0 (Op_cat C) x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_right_inv_D0
+    (Op_cat C) x x (@id C x)
+    (@omega_equiv_along_op_D1
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @omega_equiv_along_right_inv_D0
+      (Op_cat C) x x (@id C x)
+      (@omega_equiv_along_refl_D0 (Op_cat C) x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_cell_D0
+    (Op_cat C) x x (@id C x)
+    (@omega_equiv_along_op_D1
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @omega_equiv_along_left_cell_D0
+      (Op_cat C) x x (@id C x)
+      (@omega_equiv_along_refl_D0 (Op_cat C) x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_right_cell_D0
+    (Op_cat C) x x (@id C x)
+    (@omega_equiv_along_op_D1
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @omega_equiv_along_right_cell_D0
+      (Op_cat C) x x (@id C x)
+      (@omega_equiv_along_refl_D0 (Op_cat C) x);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @omega_equiv_along_path_D1
+    (Op_cat C) x x (@id C x)
+    (@omega_equiv_along_op_D1
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @omega_equiv_along_path_D1
+      (Op_cat C) x x (@id C x)
+      (@omega_equiv_along_refl_D0 (Op_cat C) x);
+
+// catalog-area: Product reflexivity provenance
+// Product closure retains the component evidence in one fixed-map owner.
+assert [A B : Cat]
+  [x0 x1 : τ (Obj A)]
+  [y0 y1 : τ (Obj B)]
+  (eA : τ (OmegaEquiv A x0 x1))
+  (eB : τ (OmegaEquiv B y0 y1)) ⊢
+  @omega_equiv_evidence
+    (Product_cat A B)
+    (Struct_sigma x0 y0)
+    (Struct_sigma x1 y1)
+    (@omega_equiv_product A B x0 x1 y0 y1 eA eB)
+  ≡ @omega_equiv_along_product_D1
+      A B x0 x1 y0 y1
+      (@omega_equiv_to A x0 x1 eA)
+      (@omega_equiv_to B y0 y1 eB)
+      (@omega_equiv_evidence A x0 x1 eA)
+      (@omega_equiv_evidence B y0 y1 eB);
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @omega_equiv_evidence
+    (Product_cat A B)
+    (Struct_sigma x y)
+    (Struct_sigma x y)
+    (@omega_equiv_product
+      A B x x y y
+      (@omega_equiv_refl A x)
+      (@omega_equiv_refl B y))
+  ≡ @omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y);
+
+// Componentwise Product evidence no longer collapses to generic reflexivity.
+assertnot [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @omega_equiv_evidence
+    (Product_cat A B)
+    (Struct_sigma x y)
+    (Struct_sigma x y)
+    (@omega_equiv_product
+      A B x x y y
+      (@omega_equiv_refl A x)
+      (@omega_equiv_refl B y))
+  ≡ @omega_equiv_along_refl_D0
+      (Product_cat A B)
+      (Struct_sigma x y);
+
+// Inverse-arrow projections still join with generic Product reflexivity.
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_left_inv_D0
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ omega_equiv_along_left_inv_D0
+      (@omega_equiv_along_refl_D0
+        (Product_cat A B) (Struct_sigma x y));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_right_inv_D0
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ omega_equiv_along_right_inv_D0
+      (@omega_equiv_along_refl_D0
+        (Product_cat A B) (Struct_sigma x y));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_left_cell_D0
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ omega_equiv_product
+      (omega_equiv_along_left_cell_D0
+        (@omega_equiv_along_refl_D0 A x))
+      (omega_equiv_along_left_cell_D0
+        (@omega_equiv_along_refl_D0 B y));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_right_cell_D0
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ omega_equiv_product
+      (omega_equiv_along_right_cell_D0
+        (@omega_equiv_along_refl_D0 A x))
+      (omega_equiv_along_right_cell_D0
+        (@omega_equiv_along_refl_D0 B y));
+
+assertnot [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_left_cell_D0
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ omega_equiv_along_left_cell_D0
+      (@omega_equiv_along_refl_D0
+        (Product_cat A B) (Struct_sigma x y));
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  sigma_Fst
+    (omega_equiv_along_path_D1
+      (@omega_equiv_along_product_D1
+        A B x x y y
+        (@id A x) (@id B y)
+        (@omega_equiv_along_refl_D0 A x)
+        (@omega_equiv_along_refl_D0 B y)))
+  ≡ @eq_refl (Obj A) x;
+
+assert [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  sigma_Snd
+    (omega_equiv_along_path_D1
+      (@omega_equiv_along_product_D1
+        A B x x y y
+        (@id A x) (@id B y)
+        (@omega_equiv_along_refl_D0 A x)
+        (@omega_equiv_along_refl_D0 B y)))
+  ≡ @const_pathover
+      (Obj A)
+      (Obj B)
+      x x y y
+      (@eq_refl (Obj A) x)
+      (@eq_refl (Obj B) y);
+
+assertnot [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  omega_equiv_along_path_D1
+    (@omega_equiv_along_product_D1
+      A B x x y y
+      (@id A x) (@id B y)
+      (@omega_equiv_along_refl_D0 A x)
+      (@omega_equiv_along_refl_D0 B y))
+  ≡ @eq_refl
+      (Obj (Product_cat A B))
+      (Struct_sigma x y);
+
+// catalog-area: auto
+
+// The canonical decoder capability owns both propositional round trips.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y)) ⊢
+  @omega_equiv_path_idtoequiv_cat C x y p
+  : τ (
+      @omega_equiv_path C x y (@idtoequiv_cat C x y p)
+      = p);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @idtoequiv_cat_omega_equiv_path C x y e
+  : τ (
+      @idtoequiv_cat C x y (@omega_equiv_path C x y e)
+      = e);
+
+assert [C : Cat] ⊢
+  @cat_univalence_from_decoder C
+  : τ (CatUnivalence C);
+
+assert [C : Cat]
+  (x y : τ (Obj C)) ⊢
+  @cat_univalence_type_equiv C x y
+  : τ (TypeEquiv (@= (Obj C) x y) (OmegaEquiv C x y));
+
+assert [C : Cat]
+  (x y : τ (Obj C))
+  (p : τ (x = y)) ⊢
+  @type_equiv_to
+    (@= (Obj C) x y)
+    (OmegaEquiv C x y)
+    (@cat_univalence_type_equiv C x y)
+    p
+  ≡ @idtoequiv_cat C x y p;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @cat_univalence_selected_path C x y e
+  ≡ @omega_equiv_path C x y e;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @equivtoid_cat C
+    (@cat_univalence_from_decoder C)
+    x y e
+  ≡ @omega_equiv_path C x y e;
+
+// The Core path square is propositional; no open runtime fold is installed.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y)) ⊢
+  @idtoequiv_cat_path_to_hom C x y p
+  : τ (
+      @omega_equiv_to C x y (@idtoequiv_cat C x y p)
+      = @path_to_hom C x y p);
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  @idtoequiv_cat_path_to_hom C x x (eq_refl x)
+  ≡ eq_refl (@id C x);
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y)) ⊢
+  @omega_equiv_to C x y (@idtoequiv_cat C x y p)
+  ≡ @path_to_hom C x y p;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (x = y)) ⊢
+  @omega_equiv_path C x y (@idtoequiv_cat C x y p)
+  ≡ p;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @idtoequiv_cat C x y (@omega_equiv_path C x y e)
+  ≡ e;
+
+// A category path produces an iterable next-hom omega-equivalence via D0b.
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @idtoequiv_cat_functor_D1 A B p
+  : τ (Functor A B);
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B))
+  (x y : τ (Obj A)) ⊢
+  @idtoequiv_cat_fapp1_along_D1 A B p x y
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B
+        (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+        (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+      (@fapp1_func A B (idtoequiv_cat_functor_D1 p) x y));
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_to
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+    (@idtoequiv_cat_fapp1_D1 A B p x y)
+  ≡ @fapp1_func A B (idtoequiv_cat_functor_D1 p) x y;
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_evidence
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+    (@idtoequiv_cat_fapp1_D1 A B p x y)
+  ≡ @idtoequiv_cat_fapp1_along_D1 A B p x y;
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_left_cell
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+      (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+    (@idtoequiv_cat_fapp1_D1 A B p x y)
+  : τ (OmegaEquiv
+      (Functor_cat (Hom_cat A x y) (Hom_cat A x y))
+      (@comp_cat_fapp0
+        (Hom_cat A x y)
+        (Hom_cat B
+          (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+          (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+        (Hom_cat A x y)
+        (@omega_equiv_left_inv
+          Cat_cat
+          (Hom_cat A x y)
+          (Hom_cat B
+            (@fapp0 A B (idtoequiv_cat_functor_D1 p) x)
+            (@fapp0 A B (idtoequiv_cat_functor_D1 p) y))
+          (@idtoequiv_cat_fapp1_D1 A B p x y))
+        (@fapp1_func A B (idtoequiv_cat_functor_D1 p) x y))
+      (@id_func (Hom_cat A x y)));
+
+// catalog-area: auto
+// Phase 9 discrete-category core and homwise adequacy.
+// catalog-area: Discrete category core-inclusion adequacy
+assert [C : Cat] ⊢
+  IsDiscreteCat C
+  ≡ @Product_grpd
+      (IsSetGrpd (Obj C))
+      (@OmegaEquivAlong
+        Cat_cat
+        (Core_cat C)
+        C
+        (Core_incl_func C));
+
+assert [C : Cat]
+  (obj_set : τ (IsSetGrpd (Obj C)))
+  (core_equiv : τ (@OmegaEquivAlong
+      Cat_cat (Core_cat C) C (Core_incl_func C))) ⊢
+  @discrete_cat_intro C obj_set core_equiv
+  : τ (IsDiscreteCat C);
+
+assert [C : Cat]
+  (obj_set : τ (IsSetGrpd (Obj C)))
+  (core_equiv : τ (@OmegaEquivAlong
+      Cat_cat (Core_cat C) C (Core_incl_func C))) ⊢
+  @is_discrete_cat_obj_set C
+    (@discrete_cat_intro C obj_set core_equiv)
+  ≡ obj_set;
+
+assert [C : Cat]
+  (obj_set : τ (IsSetGrpd (Obj C)))
+  (core_equiv : τ (@OmegaEquivAlong
+      Cat_cat (Core_cat C) C (Core_incl_func C))) ⊢
+  @is_discrete_cat_core_equiv C
+    (@discrete_cat_intro C obj_set core_equiv)
+  ≡ core_equiv;
+
+assert [C : Cat]
+  [x y : τ (Obj C)] ⊢
+  @core_incl_hom_func C x y
+  : τ (Functor
+      (Path_cat (@= (Obj C) x y))
+      (Hom_cat C x y));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @fapp0
+    (Path_cat (@= (Obj C) x y))
+    (Hom_cat C x y)
+    (@core_incl_hom_func C x y)
+    p
+  ≡ @path_to_hom C x y p;
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C)) ⊢
+  @discrete_core_homwise C d x y
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Path_cat (@= (Obj C) x y))
+      (Hom_cat C x y)
+      (@core_incl_hom_func C x y));
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C)) ⊢
+  @discrete_core_homwise C d x y
+  ≡ @omega_equiv_along_fapp1_D0
+      (Core_cat C)
+      C
+      (Core_incl_func C)
+      (is_discrete_cat_core_equiv d)
+      x y;
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C)) ⊢
+  @discrete_core_hom_inv_func C d x y
+  : τ (Functor
+      (Hom_cat C x y)
+      (Path_cat (@= (Obj C) x y)));
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @hom_to_path C d x y f
+  : τ (@= (Obj C) x y);
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C)) ⊢
+  @discrete_core_hom_left_cell C d x y
+  : τ (OmegaEquiv
+      (Functor_cat
+        (Path_cat (@= (Obj C) x y))
+        (Path_cat (@= (Obj C) x y)))
+      (@comp_cat_fapp0
+        (Path_cat (@= (Obj C) x y))
+        (Hom_cat C x y)
+        (Path_cat (@= (Obj C) x y))
+        (@discrete_core_hom_inv_func C d x y)
+        (@core_incl_hom_func C x y))
+      (@id_func (Path_cat (@= (Obj C) x y))));
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @hom_to_path_path_to_hom C d x y p
+  : τ (@=
+      (@= (Obj C) x y)
+      (@hom_to_path C d x y (@path_to_hom C x y p))
+      p);
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @path_to_hom_hom_to_path C d x y f
+  : τ (Hom
+      (Hom_cat C x y)
+      (@path_to_hom C x y (@hom_to_path C d x y f))
+      f);
+
+// Set-truncation alone is not the selected two-field discrete-category data.
+assertnot [C : Cat]
+  (obj_set : τ (IsSetGrpd (Obj C))) ⊢
+  obj_set
+  : τ (IsDiscreteCat C);
+
+// The two round trips are carried by recursive cells, not runtime cancellation.
+assertnot [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @hom_to_path C d x y (@path_to_hom C x y p)
+  ≡ p;
+
+assertnot [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @path_to_hom C x y (@hom_to_path C d x y f)
+  ≡ f;
+
+// No runtime eta or proof-field erasure is selected for the evidence package.
+assertnot [C : Cat]
+  (d : τ (IsDiscreteCat C)) ⊢
+  d
+  ≡ @discrete_cat_intro C
+      (is_discrete_cat_obj_set d)
+      (is_discrete_cat_core_equiv d);
+
+// catalog-area: Directed categorical dimension
+assert (n : TruncLevel) [C : Cat] ⊢
+  IsObjTruncCat n C
+  ≡ IsTruncGrpd n (Obj C);
+
+assert [C : Cat]
+  (n : TruncLevel)
+  (h : τ (IsObjTruncCat (trunc_succ n) C))
+  (x y : τ (Obj C)) ⊢
+  h x y
+  : τ (IsTruncGrpd n (@= (Obj C) x y));
+
+assert ⊢ cat_zero : CatDim;
+
+assert (n : CatDim) ⊢ cat_succ n : CatDim;
+
+assert (n : CatDim) ⊢
+  cat_dim_trunc_level n
+  : TruncLevel;
+
+assert ⊢
+  cat_dim_trunc_level cat_zero
+  ≡ trunc_zero;
+
+assert (n : CatDim) ⊢
+  cat_dim_trunc_level (cat_succ n)
+  ≡ trunc_succ (cat_dim_trunc_level n);
+
+assert ⊢
+  cat_dim_trunc_level (cat_succ cat_zero)
+  ≡ trunc_one;
+
+assert ⊢
+  cat_dim_trunc_level (cat_succ (cat_succ cat_zero))
+  ≡ trunc_succ trunc_one;
+
+assert [C : Cat] ⊢
+  IsNCat cat_zero C
+  ≡ IsDiscreteCat C;
+
+assert (n : CatDim) [C : Cat] ⊢
+  IsNCat (cat_succ n) C
+  ≡ @Pi_grpd (Obj C)
+      (λ x : τ (Obj C),
+        @Pi_grpd (Obj C)
+          (λ y : τ (Obj C),
+            IsNCat n (Hom_cat C x y)));
+
+assert (n : CatDim) ⊢
+  τ (NCat n)
+  ≡ NCatData n;
+
+assert (n : CatDim)
+  (carrier : Cat)
+  (evidence : τ (IsNCat n carrier)) ⊢
+  @Struct_ncat n carrier evidence
+  : τ (NCat n);
+
+assert (n : CatDim)
+  (carrier : Cat)
+  (evidence : τ (IsNCat n carrier)) ⊢
+  @ncat_carrier n (@Struct_ncat n carrier evidence)
+  ≡ carrier;
+
+assert (n : CatDim)
+  (carrier : Cat)
+  (evidence : τ (IsNCat n carrier)) ⊢
+  @ncat_evidence n (@Struct_ncat n carrier evidence)
+  ≡ evidence;
+
+assert (n : CatDim)
+  (X : τ (NCat n)) ⊢
+  @ncat_evidence n X
+  : τ (IsNCat n (@ncat_carrier n X));
+
+assert ⊢
+  ZeroCat
+  ≡ NCat cat_zero;
+
+assert ⊢
+  OneCat
+  ≡ NCat (cat_succ cat_zero);
+
+assert (X : τ ZeroCat) ⊢
+  @ncat_evidence cat_zero X
+  : τ (IsDiscreteCat (@ncat_carrier cat_zero X));
+
+assert (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_hom_discrete X x y
+  : τ (IsDiscreteCat
+      (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y));
+
+assert (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_hom_discrete X x y
+  ≡ @ncat_evidence (cat_succ cat_zero) X x y;
+
+assert (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
+  (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_hom_core_homwise X x y f g
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Path_cat (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g))
+      (Hom_cat
+        (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g)
+      (@core_incl_hom_func
+        (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g));
+
+assert (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
+  (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_hom_core_homwise X x y f g
+  ≡ @discrete_core_homwise
+      (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_hom_discrete X x y)
+      f
+      g;
+
+// Object truncation is independent of directed dimension.
+assertnot [C : Cat] ⊢
+  IsObjTruncCat trunc_zero C
+  ≡ IsNCat cat_zero C;
+
+assertnot [C : Cat]
+  (h : τ (IsNCat cat_zero C)) ⊢
+  h
+  : τ (IsObjTruncCat trunc_zero C);
+
+// The index bridge alone does not construct the object-truncation theorem.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  h
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
+
+// Distinct dimension codes do not collapse their package classifiers.
+assertnot ⊢
+  ZeroCat
+  ≡ OneCat;
+
+// No runtime package eta or proof-field erasure is selected.
+assertnot (n : CatDim)
+  (X : τ (NCat n)) ⊢
+  X
+  ≡ @Struct_ncat n
+      (@ncat_carrier n X)
+      (@ncat_evidence n X);
+
+assertnot (n : CatDim)
+  (carrier : Cat)
+  (evidence0 evidence1 : τ (IsNCat n carrier)) ⊢
+  @Struct_ncat n carrier evidence0
+  ≡ @Struct_ncat n carrier evidence1;
+
+// catalog-area: auto
 assert [C : Cat] (x : τ (Obj C)) ⊢
   omega_equiv_to (@omega_equiv_refl C x)
   ≡ @id C x;
@@ -340,9 +4661,23 @@ assert [A B : Cat]
         @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x x p y y)
       (eq_refl x)
       (@pathover_refl (Obj A) (λ _ : τ (Obj A), Obj B) x y))
+  ≡ @iso_evidence_product
+      A B x x y y
+      (@iso_evidence_refl A x)
+      (@iso_evidence_refl B y);
+
+assertnot [A B : Cat]
+  (x : τ (Obj A))
+  (y : τ (Obj B)) ⊢
+  @iso_evidence_product
+    A B x x y y
+    (@iso_evidence_refl A x)
+    (@iso_evidence_refl B y)
   ≡ @iso_evidence_refl
       (Product_cat A B)
       (Struct_sigma x y);
+
+// catalog-area: auto
 
 assert [A B : Cat]
   [x0 x1 : τ (Obj A)]
@@ -491,11 +4826,12 @@ assert [A B : Cat]
         @PathOver (Obj A) (λ _ : τ (Obj A), Obj B) x x p y y)
       (eq_refl x)
       (@pathover_refl (Obj A) (λ _ : τ (Obj A), Obj B) x y))
-  ≡ @omega_equiv_refl
-      (Product_cat A B)
-      (Struct_sigma x y);
+  ≡ @omega_equiv_product
+      A B x x y y
+      (@omega_equiv_refl A x)
+      (@omega_equiv_refl B y);
 
-assert [A B : Cat]
+assertnot [A B : Cat]
   (x : τ (Obj A))
   (y : τ (Obj B)) ⊢
   @omega_equiv_product
@@ -510,6 +4846,8 @@ assert [A B : Cat]
   ≡ @omega_equiv_refl
       (Product_cat A B)
       (Struct_sigma x y);
+
+// catalog-area: auto
 
 assert [A B : Cat]
   [x0 x1 : τ (Obj A)]
@@ -698,6 +5036,531 @@ assert [A : Grpd]
   eq_refl (@eq_refl (@Σ_ A P) u)
   : τ (sigma_path_refl u = @eq_refl (@Σ_ A P) u);
 
+// Arbitrary Sigma path-characterization round trips.
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  @sigma_path_decode_refl A P u
+  : τ (
+      @sigma_path_decode A P u u (@sigma_path_refl A P u)
+      = @eq_refl (@Σ_ A P) u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  @sigma_path_decode_refl A P (@Struct_sigma A P x a)
+  ≡ @eq_refl
+      (@= (@Σ_ A P)
+        (@Struct_sigma A P x a)
+        (@Struct_sigma A P x a))
+      (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a));
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (p : τ (@= (@Σ_ A P) u v)) ⊢
+  @sigma_path_decode_encode A P u v p
+  : τ (
+      @sigma_path_decode A P u v (@sigma_path_encode A P u v p)
+      = p);
+
+// The arbitrary Sigma round trip is a theorem, not a global runtime eta.
+assertnot [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (p : τ (@= (@Σ_ A P) u v)) ⊢
+  @sigma_path_decode A P u v (@sigma_path_encode A P u v p)
+  ≡ p;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  @sigma_path_decode_encode
+    A P
+    (@Struct_sigma A P x a)
+    (@Struct_sigma A P x a)
+    (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a))
+  ≡ @eq_refl
+      (@= (@Σ_ A P)
+        (@Struct_sigma A P x a)
+        (@Struct_sigma A P x a))
+      (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a));
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  @sigma_path_encode_decode_refl A P u
+  : τ (
+      @sigma_path_encode A P u u
+        (@sigma_path_decode A P u u (@sigma_path_refl A P u))
+      = @sigma_path_refl A P u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  @sigma_path_encode_decode_refl A P (@Struct_sigma A P x a)
+  ≡ @eq_refl
+      (@SigmaPathView
+        A P
+        (@Struct_sigma A P x a)
+        (@Struct_sigma A P x a))
+      (@sigma_path_refl A P (@Struct_sigma A P x a));
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  @sigma_path_encode_decode_eq_refl A P u
+  : τ (
+      @sigma_path_encode A P u u
+        (@sigma_path_decode A P u u (@eq_refl (@Σ_ A P) u))
+      = @eq_refl (@Σ_ A P) u);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  @sigma_path_encode_decode_eq_refl A P (@Struct_sigma A P x a)
+  ≡ @eq_refl
+      (@= (@Σ_ A P)
+        (@Struct_sigma A P x a)
+        (@Struct_sigma A P x a))
+      (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a));
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [u v : @τΣ_ A P]
+  (w : τ (@SigmaPathView A P u v)) ⊢
+  @sigma_path_encode_decode A P u v w
+  : τ (
+      @sigma_path_encode A P u v (@sigma_path_decode A P u v w)
+      = w);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (x : τ A)
+  (a : τ (P x)) ⊢
+  @sigma_path_encode_decode
+    A P
+    (@Struct_sigma A P x a)
+    (@Struct_sigma A P x a)
+    (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a))
+  ≡ @eq_refl
+      (@= (@Σ_ A P)
+        (@Struct_sigma A P x a)
+        (@Struct_sigma A P x a))
+      (@eq_refl (@Σ_ A P) (@Struct_sigma A P x a));
+
+// Generic J supplies the arbitrary theorem propositionally; it does not gain
+// a runtime beta on the canonical structured Sigma path constructor.
+assertnot [A : Grpd]
+  [P : τ A → Grpd]
+  (u : @τΣ_ A P) ⊢
+  @sigma_path_encode A P u u
+    (@sigma_path_decode A P u u (@sigma_path_refl A P u))
+  ≡ @sigma_path_refl A P u;
+
+// PathRecord equality is already its structural view, so its named maps and
+// both round trips are transparent and retain shaped reflexivity.
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (r = s)) ⊢
+  @path_record_path_encode A r s p
+  ≡ p;
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (w : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_path_decode A r s w
+  ≡ w;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_record_path_encode
+    A r r (@eq_refl (PathRecord_grpd A) r)
+  ≡ @PathRecordPathRefl A r;
+
+assert [A : Grpd]
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_record_path_decode A r r (@PathRecordPathRefl A r)
+  ≡ @eq_refl (PathRecord_grpd A) r;
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (r = s)) ⊢
+  @path_record_path_decode_encode A r s p
+  ≡ @eq_refl (@= (PathRecord_grpd A) r s) p;
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (w : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_path_encode_decode A r s w
+  ≡ @eq_refl (@PathRecordPathView A r s) w;
+
+// The dependent tail observer is unchanged by the transparent round trip.
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (w : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_path_tail
+    A r s
+    (@path_record_path_encode A r s
+      (@path_record_path_decode A r s w))
+  ≡ @path_record_path_tail A r s w;
+
+// One nested former checks that the round-trip surface iterates.
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd (PathRecord_grpd A))]
+  (p : τ (r = s)) ⊢
+  @path_record_path_decode_encode (PathRecord_grpd A) r s p
+  ≡ @eq_refl (@= (PathRecord_grpd (PathRecord_grpd A)) r s) p;
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd (PathRecord_grpd A))]
+  (w : τ (@PathRecordPathView (PathRecord_grpd A) r s)) ⊢
+  @path_record_path_encode_decode (PathRecord_grpd A) r s w
+  ≡ @eq_refl (@PathRecordPathView (PathRecord_grpd A) r s) w;
+
+// catalog-area: Registered observational path action
+assert [A B : Grpd]
+  (f : τ A → τ B) ⊢
+  @ObsAction A B f
+  ≡ @Σ_ (@ObsActionMap A B f)
+      (λ act : τ (@ObsActionMap A B f),
+        @ObsActionCoherence A B f act);
+
+assert [A B : Grpd]
+  [f : τ A → τ B]
+  (act : τ (@ObsActionMap A B f))
+  (coherence : τ (@ObsActionCoherence A B f act)) ⊢
+  @obs_action_intro A B f act coherence
+  : τ (@ObsAction A B f);
+
+assert [A B : Grpd]
+  [f : τ A → τ B]
+  (act : τ (@ObsActionMap A B f))
+  (coherence : τ (@ObsActionCoherence A B f act)) ⊢
+  @obs_action_map A B f (@obs_action_intro A B f act coherence)
+  ≡ act;
+
+assert [A B : Grpd]
+  [f : τ A → τ B]
+  (act : τ (@ObsActionMap A B f))
+  (coherence : τ (@ObsActionCoherence A B f act))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply A B f
+    (@obs_action_intro A B f act coherence) x y p
+  ≡ act x y p;
+
+assert [A B : Grpd]
+  [f : τ A → τ B]
+  (act : τ (@ObsActionMap A B f))
+  (coherence : τ (@ObsActionCoherence A B f act))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_agrees A B f
+    (@obs_action_intro A B f act coherence) x y p
+  ≡ coherence x y p;
+
+assert [A B : Grpd]
+  (f : τ A → τ B)
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply A B f (@obs_action_from_function A B f) x y p
+  ≡ @eq_ap A B f x y p;
+
+assert [A B : Grpd]
+  (f : τ A → τ B)
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_agrees A B f (@obs_action_from_function A B f) x y p
+  ≡ @eq_refl
+      (@= B (f x) (f y))
+      (@eq_ap A B f x y p);
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @eq_ap_id A x y p
+  : τ (@= (@= A x y)
+      p
+      (@eq_ap A A (λ z : τ A, z) x y p));
+
+assert [A : Grpd]
+  (x : τ A) ⊢
+  @eq_ap_id A x x (@eq_refl A x)
+  ≡ @eq_refl (@= A x x) (@eq_refl A x);
+
+assert [A : Grpd] ⊢
+  @obs_action_id A
+  : τ (@ObsAction A A (λ z : τ A, z));
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply A A (λ z : τ A, z)
+    (@obs_action_id A) x y p
+  ≡ p;
+
+assert [A B C : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ C)
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @eq_ap_comp A B C f g x y p
+  : τ (@= (@= C (g (f x)) (g (f y)))
+      (@eq_ap B C g (f x) (f y) (@eq_ap A B f x y p))
+      (@eq_ap A C (λ z : τ A, g (f z)) x y p));
+
+assert [A B C : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ C)
+  (x : τ A) ⊢
+  @eq_ap_comp A B C f g x x (@eq_refl A x)
+  ≡ @eq_refl
+      (@= C (g (f x)) (g (f x)))
+      (@eq_refl C (g (f x)));
+
+assert [A B C : Grpd]
+  [f : τ A → τ B]
+  [g : τ B → τ C]
+  (u : τ (@ObsAction A B f))
+  (v : τ (@ObsAction B C g)) ⊢
+  @obs_action_comp A B C f g u v
+  : τ (@ObsAction A C (λ z : τ A, g (f z)));
+
+assert [A B C : Grpd]
+  [f : τ A → τ B]
+  [g : τ B → τ C]
+  (u : τ (@ObsAction A B f))
+  (v : τ (@ObsAction B C g))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply
+    A C (λ z : τ A, g (f z))
+    (@obs_action_comp A B C f g u v)
+    x y p
+  ≡ @obs_action_apply B C g v (f x) (f y)
+      (@obs_action_apply A B f u x y p);
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply
+    A A (λ z : τ A, z)
+    (@obs_action_comp
+      A A A
+      (λ z : τ A, z)
+      (λ z : τ A, z)
+      (@obs_action_id A)
+      (@obs_action_id A))
+    x y p
+  ≡ p;
+
+assert [A B C : Grpd]
+  [f : τ A → τ B]
+  [g : τ B → τ C]
+  (u : τ (@ObsAction A B f))
+  (v : τ (@ObsAction B C g))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_agrees
+    A C (λ z : τ A, g (f z))
+    (@obs_action_comp A B C f g u v)
+    x y p
+  : τ (@= (@= C (g (f x)) (g (f y)))
+      (@obs_action_apply B C g v (f x) (f y)
+        (@obs_action_apply A B f u x y p))
+      (@eq_ap A C (λ z : τ A, g (f z)) x y p));
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (s : Π x : τ A, τ (P x)) ⊢
+  @ObsDAction A P s
+  ≡ @Σ_ (@ObsDActionMap A P s)
+      (λ act : τ (@ObsDActionMap A P s),
+        @ObsDActionCoherence A P s act);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [s : Π x : τ A, τ (P x)]
+  (act : τ (@ObsDActionMap A P s))
+  (coherence : τ (@ObsDActionCoherence A P s act)) ⊢
+  @obs_daction_intro A P s act coherence
+  : τ (@ObsDAction A P s);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [s : Π x : τ A, τ (P x)]
+  (act : τ (@ObsDActionMap A P s))
+  (coherence : τ (@ObsDActionCoherence A P s act))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_daction_apply A P s
+    (@obs_daction_intro A P s act coherence) x y p
+  ≡ act x y p;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [s : Π x : τ A, τ (P x)]
+  (act : τ (@ObsDActionMap A P s))
+  (coherence : τ (@ObsDActionCoherence A P s act))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_daction_agrees A P s
+    (@obs_daction_intro A P s act coherence) x y p
+  ≡ coherence x y p;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (s : Π x : τ A, τ (P x))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_daction_apply A P s (@obs_daction_from_section A P s) x y p
+  ≡ @eq_apd A P s x y p;
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  (s : Π x : τ A, τ (P x))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_daction_agrees A P s (@obs_daction_from_section A P s) x y p
+  ≡ @eq_refl
+      (@PathOver A P x y p (s x) (s y))
+      (@eq_apd A P s x y p);
+
+assert [A B : Grpd]
+  [f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B)]
+  (u : τ (@ObsAction (PathRecord_grpd A) (PathRecord_grpd B) f))
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_action A B f u r s p
+  : τ (@PathRecordPathView B (f r) (f s));
+
+assert [A B : Grpd]
+  (f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B))
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_action A B f
+    (@obs_action_from_function (PathRecord_grpd A) (PathRecord_grpd B) f)
+    r s p
+  ≡ @eq_ap
+      (PathRecord_grpd A)
+      (PathRecord_grpd B)
+      f r s p;
+
+assert [A B : Grpd]
+  (f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B))
+  (r : τ (PathRecord_grpd A)) ⊢
+  @path_record_action A B f
+    (@obs_action_from_function (PathRecord_grpd A) (PathRecord_grpd B) f)
+    r r (@PathRecordPathRefl A r)
+  ≡ @PathRecordPathRefl B (f r);
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_action
+    A A
+    (λ t : τ (PathRecord_grpd A), t)
+    (@obs_action_id (PathRecord_grpd A))
+    r s p
+  ≡ p;
+
+assert [A B : Grpd]
+  [f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B)]
+  (u : τ (@ObsAction (PathRecord_grpd A) (PathRecord_grpd B) f))
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_action_agrees A B f u r s p
+  : τ (@= (@PathRecordPathView B (f r) (f s))
+      (@path_record_action A B f u r s p)
+      (@eq_ap (PathRecord_grpd A) (PathRecord_grpd B) f r s p));
+
+assert [A : Grpd] ⊢
+  @path_record_witness_daction A
+  : τ (@ObsDAction
+      (PathRecord_grpd A)
+      (λ r : τ (PathRecord_grpd A),
+        @= A (path_record_src r) (path_record_dst r))
+      (λ r : τ (PathRecord_grpd A), path_record_witness r));
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_witness_action A r s p
+  : τ (@PathOver
+      (PathRecord_grpd A)
+      (λ t : τ (PathRecord_grpd A),
+        @= A (path_record_src t) (path_record_dst t))
+      r s p (path_record_witness r) (path_record_witness s));
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_witness_action A r s p
+  ≡ @eq_apd
+      (PathRecord_grpd A)
+      (λ t : τ (PathRecord_grpd A),
+        @= A (path_record_src t) (path_record_dst t))
+      (λ t : τ (PathRecord_grpd A), path_record_witness t)
+      r s p;
+
+// Agreement is propositional data, not runtime equality for arbitrary packages.
+assertnot [A B : Grpd]
+  [f : τ A → τ B]
+  (u : τ (@ObsAction A B f))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_action_apply A B f u x y p
+  ≡ @eq_ap A B f x y p;
+
+assertnot [A : Grpd]
+  [P : τ A → Grpd]
+  [s : Π x : τ A, τ (P x)]
+  (u : τ (@ObsDAction A P s))
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @obs_daction_apply A P s u x y p
+  ≡ @eq_apd A P s x y p;
+
+// Registered action packages retain their coherence evidence and have no eta.
+assertnot [A B : Grpd]
+  [f : τ A → τ B]
+  (u : τ (@ObsAction A B f)) ⊢
+  u
+  ≡ @obs_action_intro A B f
+      (@obs_action_map A B f u)
+      (sigma_Snd u);
+
+// An arbitrary selected loop action does not collapse to shaped reflexivity.
+assertnot [A B : Grpd]
+  [f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B)]
+  (u : τ (@ObsAction (PathRecord_grpd A) (PathRecord_grpd B) f))
+  (r : τ (PathRecord_grpd A))
+  (p : τ (@PathRecordPathView A r r)) ⊢
+  @path_record_action A B f u r r p
+  ≡ @PathRecordPathRefl B (f r);
+
+// Action data alone does not grant arbitrary-constructor dependent-J beta.
+assertnot [A B : Grpd]
+  [f : τ (PathRecord_grpd A) → τ (PathRecord_grpd B)]
+  (u : τ (@ObsAction (PathRecord_grpd A) (PathRecord_grpd B) f))
+  (r : τ (PathRecord_grpd A))
+  (p : τ (@PathRecordPathView A r r))
+  (P : τ (PathRecord_grpd B) → Grpd)
+  (branch : τ (P (f r))) ⊢
+  @ind_eq
+    (PathRecord_grpd B)
+    (f r) (f r)
+    (@path_record_action A B f u r r p)
+    P branch
+  ≡ branch;
+
+// catalog-area: auto
+
 assert [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x))
@@ -770,6 +5633,495 @@ assert [A : Grpd]
     M
     u
   ≡ u;
+
+// Ordinary Pi happly/funext surface over the related-input path view.
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f g : Π x : τ A, τ (B x)) ⊢
+  @PiPointwisePath A B f g
+  ≡ @Pi_grpd A (λ x : τ A, f x = g x);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g))
+  (x : τ A) ⊢
+  @PiHapply A B f g p x
+  ≡ p x x (@eq_refl A x);
+
+// Application-first reduction joins the active shaped Pi reflexivity rule.
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x : τ A) ⊢
+  @PiHapply A B f f (@eq_refl (@Pi_grpd A B) f) x
+  ≡ @eq_refl (B x) (f x);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1)) ⊢
+  @PiFunext A B f g h x0 x1 p
+  ≡ @ind_eqr A x1
+      (λ x0 : τ A, λ p : τ (x0 = x1),
+        @PathOver A B x0 x1 p (f x0) (g x1))
+      (h x1)
+      x0
+      p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g))
+  (x : τ A) ⊢
+  @PiHapply A B f g (@PiFunext A B f g h) x
+  ≡ h x;
+
+// Typed reflexivity, rather than conversion assertion, exercises the selected
+// proof-time reflexive eta equation.
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  @eq_refl
+    (@= (@Pi_grpd A B) f f)
+    (@eq_refl (@Pi_grpd A B) f)
+  : τ (
+      @PiFunext A B f f
+        (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
+      = @eq_refl (@Pi_grpd A B) f);
+
+// After applying the two stable heads, the shaped-reflexivity and funext
+// action paths join by runtime computation without the proof-time equation.
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1)) ⊢
+  @PiFunext A B f f
+    (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
+    x0 x1 p
+  ≡ @eq_refl (@Pi_grpd A B) f x0 x1 p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  @pi_funext_eta A B f g p
+  : τ (@PiFunext A B f g (@PiHapply A B f g p) = p);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  @pi_funext_eta A B f f (@eq_refl (@Pi_grpd A B) f)
+  ≡ @eq_refl
+      (@= (@Pi_grpd A B) f f)
+      (@eq_refl (@Pi_grpd A B) f);
+
+// The stable reflexive coherence is proof-time only, not runtime conversion.
+assertnot [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x)) ⊢
+  @PiFunext A B f f
+    (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
+  ≡ @eq_refl (@Pi_grpd A B) f;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  @PiHapplyMap A B f g p
+  ≡ @PiHapply A B f g p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  @PiFunextMap A B f g h
+  ≡ @PiFunext A B f g h;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  @pi_happly_beta A B f g h
+  : τ (
+      @PiHapply A B f g (@PiFunext A B f g h)
+      = h);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g))
+  (x : τ A) ⊢
+  @pi_happly_beta A B f g h x x (@eq_refl A x)
+  ≡ @eq_refl (@= (B x) (f x) (g x)) (h x);
+
+// Whole-function forward beta is propositional; only its point action reduces.
+assertnot [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  @PiHapply A B f g (@PiFunext A B f g h)
+  ≡ h;
+
+// Arbitrary structured Pi paths do not acquire an additional J beta.
+assertnot [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (h : τ (@PiPointwisePath A B f f))
+  (M : τ (@Pi_grpd A B) → Grpd)
+  (u : τ (M f)) ⊢
+  @ind_eqr
+    (@Pi_grpd A B)
+    f
+    (λ k : τ (@Pi_grpd A B), λ _ : τ (k = f), M k)
+    u
+    f
+    (@PiFunext A B f f h)
+  ≡ u;
+
+// A supplied quasi-inverse selects the expected centre of each homotopy fibre.
+assert [A B : Grpd]
+  [f : τ A → τ B]
+  [g : τ B → τ A]
+  (q : τ (@EquivByInverse A B f g))
+  (b : τ B) ⊢
+  @is_contr_center
+    (@HFiber A B f b)
+    (@is_equiv_fiber
+      A B f
+      (@is_equiv_map_by_inverse A B f g q)
+      b)
+  ≡ @Struct_sigma
+      A
+      (λ a : τ A, @= B (f a) b)
+      (g b)
+      ((sigma_Snd q) b);
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)] ⊢
+  @pi_happly_by_inverse A B f g
+  : τ (@EquivByInverse
+      (@= (@Pi_grpd A B) f g)
+      (@PiPointwisePath A B f g)
+      (@PiHapplyMap A B f g)
+      (@PiFunextMap A B f g));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  (sigma_Fst (@pi_happly_by_inverse A B f g)) p
+  ≡ @pi_funext_eta A B f g p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  (sigma_Snd (@pi_happly_by_inverse A B f g)) h
+  ≡ @pi_happly_beta A B f g h;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)] ⊢
+  @pi_happly_is_equiv A B f g
+  : τ (@IsEquivMap
+      (@= (@Pi_grpd A B) f g)
+      (@PiPointwisePath A B f g)
+      (@PiHapplyMap A B f g));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  @is_equiv_fiber
+    (@= (@Pi_grpd A B) f g)
+    (@PiPointwisePath A B f g)
+    (@PiHapplyMap A B f g)
+    (@pi_happly_is_equiv A B f g)
+    h
+  : τ (IsContr
+      (@HFiber
+        (@= (@Pi_grpd A B) f g)
+        (@PiPointwisePath A B f g)
+        (@PiHapplyMap A B f g)
+        h));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)] ⊢
+  @pi_happly_type_equiv A B f g
+  : τ (TypeEquiv
+      (@= (@Pi_grpd A B) f g)
+      (@PiPointwisePath A B f g));
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  type_equiv_to (@pi_happly_type_equiv A B f g) p
+  ≡ @PiHapply A B f g p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  type_equiv_from (@pi_happly_type_equiv A B f g) h
+  ≡ @PiFunext A B f g h;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (h : τ (@PiPointwisePath A B f g)) ⊢
+  type_equiv_right (@pi_happly_type_equiv A B f g) h
+  ≡ @pi_happly_beta A B f g h;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  type_equiv_left (@pi_happly_type_equiv A B f g) p
+  : τ (
+      @PiFunext A B f g (@PiHapply A B f g p)
+      = p);
+
+// The opaque fibre contraction does not duplicate the separately derived eta.
+assertnot [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  type_equiv_left (@pi_happly_type_equiv A B f g) p
+  ≡ @pi_funext_eta A B f g p;
+
+// Arbitrary reverse-composite eta remains propositional, not runtime.
+assertnot [A : Grpd]
+  [B : τ A → Grpd]
+  [f g : Π x : τ A, τ (B x)]
+  (p : τ (f = g)) ⊢
+  @PiFunext A B f g (@PiHapply A B f g p)
+  ≡ p;
+
+// Ordinary identity, symmetry, and composition algebra for TypeEquiv.
+assert [A : Grpd] ⊢
+  @type_equiv_refl_is_equiv A
+  : τ (@IsEquivMap A A (λ x : τ A, x));
+
+assert [A : Grpd]
+  (a : τ A) ⊢
+  @is_contr_center
+    (@HFiber A A (λ x : τ A, x) a)
+    (@is_equiv_fiber
+      A A
+      (λ x : τ A, x)
+      (@type_equiv_refl_is_equiv A)
+      a)
+  ≡ @Struct_sigma A (λ x : τ A, x = a) a (eq_refl a);
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @type_equiv_sym_by_inverse A B e
+  : τ (@EquivByInverse
+      B A
+      (λ b : τ B, type_equiv_from e b)
+      (λ a : τ A, type_equiv_to e a));
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  (sigma_Fst (@type_equiv_sym_by_inverse A B e)) b
+  ≡ type_equiv_right e b;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  (sigma_Snd (@type_equiv_sym_by_inverse A B e)) a
+  ≡ type_equiv_left e a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @type_equiv_sym_is_equiv A B e
+  : τ (@IsEquivMap
+      B A
+      (λ b : τ B, type_equiv_from e b));
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @type_equiv_sym A B e
+  : τ (TypeEquiv B A);
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  type_equiv_to (@type_equiv_sym A B e) b
+  ≡ type_equiv_from e b;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_from (@type_equiv_sym A B e) a
+  ≡ type_equiv_to e a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_right (@type_equiv_sym A B e) a
+  ≡ type_equiv_left e a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  type_equiv_left (@type_equiv_sym A B e) b
+  : τ (type_equiv_to e (type_equiv_from e b) = b);
+
+// The opaque contraction theorem does not turn the other inverse law into a
+// second runtime projection rule.
+assertnot [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (b : τ B) ⊢
+  type_equiv_left (@type_equiv_sym A B e) b
+  ≡ type_equiv_right e b;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to (@type_equiv_sym B A (@type_equiv_sym A B e)) a
+  ≡ type_equiv_to e a;
+
+// Double symmetry agrees on maps, not by a global package eta.
+assertnot [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @type_equiv_sym B A (@type_equiv_sym A B e)
+  ≡ e;
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  @type_equiv_comp_left A B C eBC eAB a
+  : τ (
+      type_equiv_from eAB
+        (type_equiv_from eBC
+          (type_equiv_to eBC (type_equiv_to eAB a)))
+      = a);
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (c : τ C) ⊢
+  @type_equiv_comp_right A B C eBC eAB c
+  : τ (
+      type_equiv_to eBC
+        (type_equiv_to eAB
+          (type_equiv_from eAB (type_equiv_from eBC c)))
+      = c);
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  (sigma_Fst (@type_equiv_comp_by_inverse A B C eBC eAB)) a
+  ≡ @type_equiv_comp_left A B C eBC eAB a;
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (c : τ C) ⊢
+  (sigma_Snd (@type_equiv_comp_by_inverse A B C eBC eAB)) c
+  ≡ @type_equiv_comp_right A B C eBC eAB c;
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B)) ⊢
+  @type_equiv_comp_is_equiv A B C eBC eAB
+  : τ (@IsEquivMap
+      A C
+      (λ a : τ A,
+        type_equiv_to eBC (type_equiv_to eAB a)));
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B)) ⊢
+  @type_equiv_comp A B C eBC eAB
+  : τ (TypeEquiv A C);
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to (@type_equiv_comp A B C eBC eAB) a
+  ≡ type_equiv_to eBC (type_equiv_to eAB a);
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (c : τ C) ⊢
+  type_equiv_from (@type_equiv_comp A B C eBC eAB) c
+  ≡ type_equiv_from eAB (type_equiv_from eBC c);
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (c : τ C) ⊢
+  type_equiv_right (@type_equiv_comp A B C eBC eAB) c
+  ≡ @type_equiv_comp_right A B C eBC eAB c;
+
+assert [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_left (@type_equiv_comp A B C eBC eAB) a
+  : τ (
+      type_equiv_from eAB
+        (type_equiv_from eBC
+          (type_equiv_to eBC (type_equiv_to eAB a)))
+      = a);
+
+assertnot [A B C : Grpd]
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_left (@type_equiv_comp A B C eBC eAB) a
+  ≡ @type_equiv_comp_left A B C eBC eAB a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to
+    (@type_equiv_comp A B B (@type_equiv_refl B) e)
+    a
+  ≡ type_equiv_to e a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to
+    (@type_equiv_comp A A B e (@type_equiv_refl A))
+    a
+  ≡ type_equiv_to e a;
+
+assert [A B C D : Grpd]
+  (eCD : τ (TypeEquiv C D))
+  (eBC : τ (TypeEquiv B C))
+  (eAB : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  type_equiv_to
+    (@type_equiv_comp A C D eCD
+      (@type_equiv_comp A B C eBC eAB))
+    a
+  ≡ type_equiv_to
+      (@type_equiv_comp A B D
+        (@type_equiv_comp B C D eCD eBC)
+        eAB)
+      a;
+
+// Unit laws compute on forward maps, not by package-level eta.
+assertnot [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @type_equiv_comp A B B (@type_equiv_refl B) e
+  ≡ e;
 
 // Groupoid-level Pi and contractible-fibre type equivalence infrastructure.
 assert [A : Grpd] [B : τ A → Grpd] ⊢
@@ -913,6 +6265,167 @@ assert ⊢
   grpd_univalence_by_decoder
   : τ GrpdUnivalenceByDecoder;
 
+// Groupoid univalence decoder round trips and transport/action coherence.
+assert ⊢
+  grpd_univalence_from_decoder
+  : τ GrpdUnivalence;
+
+assert [A B : Grpd] ⊢
+  grpd_univalence_from_decoder A B
+  : τ (@IsEquivMap
+      (@= Grpd_grpd A B)
+      (TypeEquiv A B)
+      (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p));
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @grpd_univalence_selected_path A B e
+  ≡ @grpd_equiv_path A B e;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @is_contr_center
+    (@HFiber
+      (@= Grpd_grpd A B)
+      (TypeEquiv A B)
+      (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
+      e)
+    (@is_equiv_fiber
+      (@= Grpd_grpd A B)
+      (TypeEquiv A B)
+      (λ p : τ (@= Grpd_grpd A B), @idtoequiv_grpd A B p)
+      (grpd_univalence_from_decoder A B)
+      e)
+  ≡ @Struct_sigma
+      (@= Grpd_grpd A B)
+      (λ p : τ (@= Grpd_grpd A B),
+        @idtoequiv_grpd A B p = e)
+      (@grpd_equiv_path A B e)
+      (@idtoequiv_grpd_equiv_path A B e);
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_equiv_path_idtoequiv A B p
+  : τ (
+      @grpd_equiv_path A B (@idtoequiv_grpd A B p)
+      = p);
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @idtoequiv_grpd_equiv_path A B e
+  : τ (
+      @idtoequiv_grpd A B (@grpd_equiv_path A B e)
+      = e);
+
+// Both arbitrary round trips are propositions, not broad runtime eta rules.
+assertnot [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_equiv_path A B (@idtoequiv_grpd A B p)
+  ≡ p;
+
+assertnot [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @idtoequiv_grpd A B (@grpd_equiv_path A B e)
+  ≡ e;
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B))
+  (a : τ A) ⊢
+  @coe_grpd_idtoequiv A B p a
+  : τ (
+      @coe_grpd A B p a
+      = type_equiv_to (@idtoequiv_grpd A B p) a);
+
+assert [A : Grpd]
+  (a : τ A) ⊢
+  @coe_grpd_idtoequiv A A (eq_refl A) a
+  ≡ @eq_refl A a;
+
+assert [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  @grpd_equiv_path_coe A B e a
+  : τ (
+      @coe_grpd A B (@grpd_equiv_path A B e) a
+      = type_equiv_to e a);
+
+// The operational decoder square is propositional until constructor-path
+// transports join; the broad runtime orientation is deliberately absent.
+assertnot [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (a : τ A) ⊢
+  @coe_grpd A B (@grpd_equiv_path A B e) a
+  ≡ type_equiv_to e a;
+
+assert [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (TypeEquiv (B x) (C x)))
+  (f : τ (@Pi_grpd A B))
+  (x : τ A) ⊢
+  @grpd_equiv_path_pi_action A B C e f x
+  : τ (
+      (@coe_grpd
+        (@Pi_grpd A B)
+        (@Pi_grpd A C)
+        (@grpd_equiv_path
+          (@Pi_grpd A B)
+          (@Pi_grpd A C)
+          (@pi_type_equiv_same_domain A B C e))
+        f)
+        x
+      = type_equiv_to (e x) (f x));
+
+assert [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  (x : τ A)
+  (y : τ B) ⊢
+  @grpd_equiv_path_coe
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@product_type_equiv A A' B B' eA eB)
+    (@Product_pair_grpd A B x y)
+  : τ (
+      @coe_grpd
+        (Product_grpd A B)
+        (Product_grpd A' B')
+        (@grpd_equiv_path
+          (Product_grpd A B)
+          (Product_grpd A' B')
+          (@product_type_equiv A A' B B' eA eB))
+        (@Product_pair_grpd A B x y)
+      = @Product_pair_grpd A' B'
+          (type_equiv_to eA x)
+          (type_equiv_to eB y));
+
+assertnot [A A' B B' : Grpd]
+  (eA : τ (TypeEquiv A A'))
+  (eB : τ (TypeEquiv B B'))
+  (x : τ A)
+  (y : τ B) ⊢
+  @coe_grpd
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@product_grpd_path
+      A A' B B'
+      (@grpd_equiv_path A A' eA)
+      (@const_pathover
+        Grpd_grpd Grpd_grpd A A' B B'
+        (@grpd_equiv_path A A' eA)
+        (@grpd_equiv_path B B' eB)))
+    (@Product_pair_grpd A B x y)
+  ≡ @Product_pair_grpd A' B'
+      (type_equiv_to eA x)
+      (type_equiv_to eB y);
+
+// An arbitrary legacy ua capability is not silently identified with the
+// canonical decoder; new coherence consumers use the decoder package above.
+assertnot (U : τ GrpdUnivalence)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @ua_grpd U A B e
+  ≡ @grpd_equiv_path A B e;
+
 assert [A : Grpd] (a : τ A) ⊢
   type_equiv_to (@idtoequiv_grpd A A (eq_refl A)) a
   ≡ a;
@@ -928,6 +6441,366 @@ assert (U : τ GrpdUnivalence)
   (a : τ A) ⊢
   @coe_grpd A B (@ua_grpd U A B e) a
   ≡ type_equiv_to e a;
+
+// catalog-area: Groupoid-universe identity view
+// The named Phase-13 fallback exposes the existing TypeEquiv classifier while
+// keeping public universe equality opaque.
+assert [A B : Grpd] ⊢
+  @GrpdPathView A B
+  ≡ TypeEquiv A B;
+
+assert [A : Grpd] ⊢
+  @grpd_path_refl A
+  ≡ @type_equiv_refl A;
+
+assert [A : Grpd] ⊢
+  type_equiv_to (@grpd_path_refl A)
+  ≡ λ x : τ A, x;
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_path_encode A B p
+  : τ (@GrpdPathView A B);
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_path_encode A B p
+  ≡ @idtoequiv_grpd A B p;
+
+assert [A : Grpd] ⊢
+  @grpd_path_encode A A (@eq_refl Grpd_grpd A)
+  ≡ @grpd_path_refl A;
+
+assert [A B : Grpd]
+  (e : τ (@GrpdPathView A B)) ⊢
+  @grpd_path_decode A B e
+  : τ (@= Grpd_grpd A B);
+
+assert [A B : Grpd]
+  (e : τ (@GrpdPathView A B)) ⊢
+  @grpd_path_decode A B e
+  ≡ @grpd_equiv_path A B e;
+
+assert [A : Grpd] ⊢
+  @grpd_path_decode A A (@grpd_path_refl A)
+  ≡ @eq_refl Grpd_grpd A;
+
+assert [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_path_decode_encode A B p
+  : τ (
+      @grpd_path_decode A B (@grpd_path_encode A B p)
+      = p);
+
+assert [A B : Grpd]
+  (e : τ (@GrpdPathView A B)) ⊢
+  @grpd_path_encode_decode A B e
+  : τ (
+      @grpd_path_encode A B (@grpd_path_decode A B e)
+      = e);
+
+assert [A B : Grpd]
+  (e : τ (@GrpdPathView A B))
+  (a : τ A) ⊢
+  @grpd_path_decode_coe A B e a
+  : τ (
+      @coe_grpd A B (@grpd_path_decode A B e) a
+      = type_equiv_to e a);
+
+// Product encode/decode diamonds remain owned by the existing componentwise
+// rules and are visible through the transparent named maps.
+assert [A A' B B' : Grpd]
+  (eA : τ (@GrpdPathView A A'))
+  (eB : τ (@GrpdPathView B B')) ⊢
+  @grpd_path_decode
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@product_type_equiv A A' B B' eA eB)
+  ≡ @product_grpd_path
+      A A' B B'
+      (@grpd_path_decode A A' eA)
+      (@const_pathover
+        Grpd_grpd Grpd_grpd A A' B B'
+        (@grpd_path_decode A A' eA)
+        (@grpd_path_decode B B' eB));
+
+assert [A A' B B' : Grpd]
+  (pA : τ (@= Grpd_grpd A A'))
+  (pB : τ (@PathOver
+      Grpd_grpd (λ _ : Grpd, Grpd_grpd) A A' pA B B')) ⊢
+  @grpd_path_encode
+    (Product_grpd A B)
+    (Product_grpd A' B')
+    (@product_grpd_path A A' B B' pA pB)
+  ≡ @product_type_equiv
+      A A' B B'
+      (@grpd_path_encode A A' pA)
+      (@grpd_path_encode
+        B B'
+        (@const_pathover_path
+          Grpd_grpd Grpd_grpd A A' B B' pA pB));
+
+// The generic decoder square supplies Pi action under the named spelling.
+assert [A : Grpd]
+  [B C : τ A → Grpd]
+  (e : Π x : τ A, τ (@GrpdPathView (B x) (C x)))
+  (f : τ (@Pi_grpd A B))
+  (x : τ A) ⊢
+  @grpd_equiv_path_pi_action A B C e f x
+  : τ (
+      (@coe_grpd
+        (@Pi_grpd A B)
+        (@Pi_grpd A C)
+        (@grpd_path_decode
+          (@Pi_grpd A B)
+          (@Pi_grpd A C)
+          (@pi_type_equiv_same_domain A B C e))
+        f)
+        x
+      = type_equiv_to (e x) (f x));
+
+// Same-base Sigma equivalence is accepted by the view without adding a new
+// decoder or transport body.
+assert [A : Grpd]
+  [P Q : τ A → Grpd]
+  (e : Π x : τ A, τ (@GrpdPathView (P x) (Q x))) ⊢
+  @grpd_path_decode
+    (@Σ_ A P)
+    (@Σ_ A Q)
+    (@sigma_type_equiv_same_base A P Q e)
+  : τ (@= Grpd_grpd (@Σ_ A P) (@Σ_ A Q));
+
+assert ⊢
+  @grpd_path_refl Grpd_grpd
+  : τ (@GrpdPathView Grpd_grpd Grpd_grpd);
+
+// Public equality and the named view remain a deliberate encode/decode
+// boundary, including at the unstratified self-universe instance.
+assertnot [A B : Grpd] ⊢
+  @= Grpd_grpd A B
+  ≡ @GrpdPathView A B;
+
+assertnot [A B : Grpd]
+  (e : τ (@GrpdPathView A B)) ⊢
+  e
+  : τ (@= Grpd_grpd A B);
+
+assertnot [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  p
+  : τ (@GrpdPathView A B);
+
+// Both inverse laws and decoder transport remain propositional, not runtime
+// cancellation or a hidden direct-equality computation rule.
+assertnot [A B : Grpd]
+  (p : τ (@= Grpd_grpd A B)) ⊢
+  @grpd_path_decode A B (@grpd_path_encode A B p)
+  ≡ p;
+
+assertnot [A B : Grpd]
+  (e : τ (@GrpdPathView A B)) ⊢
+  @grpd_path_encode A B (@grpd_path_decode A B e)
+  ≡ e;
+
+assertnot [A B : Grpd]
+  (e : τ (@GrpdPathView A B))
+  (a : τ A) ⊢
+  @coe_grpd A B (@grpd_path_decode A B e) a
+  ≡ type_equiv_to e a;
+
+assertnot ⊢
+  @= Grpd_grpd Grpd_grpd Grpd_grpd
+  ≡ @GrpdPathView Grpd_grpd Grpd_grpd;
+
+// catalog-area: Truncation equivalence invariance
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @is_trunc_grpd_equiv_path n A B e
+  : τ (@= Grpd_grpd (IsTruncGrpd n A) (IsTruncGrpd n B));
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B)) ⊢
+  @is_trunc_grpd_type_equiv n A B e
+  : τ (TypeEquiv (IsTruncGrpd n A) (IsTruncGrpd n B));
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @is_trunc_grpd_equiv_to n A B e h
+  : τ (IsTruncGrpd n B);
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (h : τ (IsTruncGrpd n B)) ⊢
+  @is_trunc_grpd_equiv_from n A B e h
+  : τ (IsTruncGrpd n A);
+
+assert (n : TruncLevel)
+  [A : Grpd] ⊢
+  @is_trunc_grpd_equiv_path n A A (@type_equiv_refl A)
+  ≡ @eq_refl Grpd_grpd (IsTruncGrpd n A);
+
+assert (n : TruncLevel)
+  [A : Grpd] ⊢
+  @is_trunc_grpd_type_equiv n A A (@type_equiv_refl A)
+  ≡ @type_equiv_refl (IsTruncGrpd n A);
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @is_trunc_grpd_equiv_to n A A (@type_equiv_refl A) h
+  ≡ h;
+
+assert (n : TruncLevel)
+  [A : Grpd]
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @is_trunc_grpd_equiv_from n A A (@type_equiv_refl A) h
+  ≡ h;
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (h : τ (IsTruncGrpd n B)) ⊢
+  type_equiv_right (@is_trunc_grpd_type_equiv n A B e) h
+  : τ (
+      @is_trunc_grpd_equiv_to n A B e
+        (@is_trunc_grpd_equiv_from n A B e h)
+      = h);
+
+assert (n : TruncLevel)
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  (h : τ (IsTruncGrpd n A)) ⊢
+  type_equiv_left (@is_trunc_grpd_type_equiv n A B e) h
+  : τ (
+      @is_trunc_grpd_equiv_from n A B e
+        (@is_trunc_grpd_equiv_to n A B e h)
+      = h);
+
+// An arbitrary self-equivalence is not silently treated as reflexivity.
+assertnot (n : TruncLevel)
+  [A : Grpd]
+  (e : τ (TypeEquiv A A))
+  (h : τ (IsTruncGrpd n A)) ⊢
+  @is_trunc_grpd_equiv_to n A A e h
+  ≡ h;
+
+// catalog-area: Categorical object-truncation invariance
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_obj_path A B F u
+  : τ (@= Grpd_grpd (Obj A) (Obj B));
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_obj_type_equiv A B F u
+  : τ (TypeEquiv (Obj A) (Obj B));
+
+assert (n : TruncLevel)
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @is_obj_trunc_cat_equiv_type_equiv n A B F u
+  : τ (TypeEquiv (IsObjTruncCat n A) (IsObjTruncCat n B));
+
+assert (n : TruncLevel)
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  (h : τ (IsObjTruncCat n A)) ⊢
+  @is_obj_trunc_cat_equiv_to n A B F u h
+  : τ (IsObjTruncCat n B);
+
+assert (n : TruncLevel)
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  (h : τ (IsObjTruncCat n B)) ⊢
+  @is_obj_trunc_cat_equiv_from n A B F u h
+  : τ (IsObjTruncCat n A);
+
+assert [A : Cat] ⊢
+  @omega_equiv_along_obj_path
+    A A (@id_func A) (@omega_equiv_along_refl_D0 Cat_cat A)
+  ≡ @eq_refl Grpd_grpd (Obj A);
+
+assert [A : Cat] ⊢
+  @omega_equiv_along_obj_type_equiv
+    A A (@id_func A) (@omega_equiv_along_refl_D0 Cat_cat A)
+  ≡ @type_equiv_refl (Obj A);
+
+assert (n : TruncLevel)
+  [A : Cat] ⊢
+  @is_obj_trunc_cat_equiv_type_equiv
+    n A A (@id_func A) (@omega_equiv_along_refl_D0 Cat_cat A)
+  ≡ @type_equiv_refl (IsObjTruncCat n A);
+
+assert (n : TruncLevel)
+  [A : Cat]
+  (h : τ (IsObjTruncCat n A)) ⊢
+  @is_obj_trunc_cat_equiv_to
+    n A A (@id_func A) (@omega_equiv_along_refl_D0 Cat_cat A) h
+  ≡ h;
+
+assert (n : TruncLevel)
+  [A : Cat]
+  (h : τ (IsObjTruncCat n A)) ⊢
+  @is_obj_trunc_cat_equiv_from
+    n A A (@id_func A) (@omega_equiv_along_refl_D0 Cat_cat A) h
+  ≡ h;
+
+assert (n : TruncLevel)
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  (h : τ (IsObjTruncCat n B)) ⊢
+  type_equiv_right (@is_obj_trunc_cat_equiv_type_equiv n A B F u) h
+  : τ (
+      @is_obj_trunc_cat_equiv_to n A B F u
+        (@is_obj_trunc_cat_equiv_from n A B F u h)
+      = h);
+
+assert (n : TruncLevel)
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  (h : τ (IsObjTruncCat n A)) ⊢
+  type_equiv_left (@is_obj_trunc_cat_equiv_type_equiv n A B F u) h
+  : τ (
+      @is_obj_trunc_cat_equiv_from n A B F u
+        (@is_obj_trunc_cat_equiv_to n A B F u h)
+      = h);
+
+// Decoder-induced object equivalence does not runtime expose the functor map.
+assertnot [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  (x : τ (Obj A)) ⊢
+  type_equiv_to (@omega_equiv_along_obj_type_equiv A B F u) x
+  ≡ @fapp0 A B F x;
+
+// Arbitrary fixed-map evidence is not silently treated as reflexivity.
+assertnot [A : Cat]
+  [F : τ (Functor A A)]
+  (u : τ (@OmegaEquivAlong Cat_cat A A F)) ⊢
+  @omega_equiv_along_obj_type_equiv A A F u
+  ≡ @type_equiv_refl (Obj A);
+
+assertnot (n : TruncLevel)
+  [A : Cat]
+  [F : τ (Functor A A)]
+  (u : τ (@OmegaEquivAlong Cat_cat A A F))
+  (h : τ (IsObjTruncCat n A)) ⊢
+  @is_obj_trunc_cat_equiv_to n A A F u h
+  ≡ h;
+
+// catalog-area: auto
 
 // Constructor-specific computational-univalence skeleton.
 assert [A B : Grpd] ⊢
@@ -1074,7 +6947,7 @@ assert [C : Cat]
     (@path_to_hom C y z q)
     (@path_to_hom C x y p)
   ≡ @path_to_hom C x z
-      (@eq_trans (Obj C) x y z p q);
+      (@comp_fapp0 (Path_cat (Obj C)) x y z q p);
 
 assert [C : Cat] [w x y z : τ (Obj C)]
   (h : τ (Hom C y z))
@@ -3727,13 +9600,30 @@ assert [A B C : Cat]
   fapp0 uncurry_func_func G
     ≡ uncurry_func G;
 
-// Ordinary adjunction triangle cut-elimination.
+// Indexed adjunction triangles, opposite, and operation-trust boundary.
+// catalog-area: Indexed adjunction triangles, opposite, and operation trust
 assert [R L : Cat]
-  (J : τ (Adjunction R L))
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @left_adj_func R L F G J
+  ≡ F;
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @right_adj_func R L F G J
+  ≡ G;
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
   (X X' : τ (Obj R))
   (Y : τ (Obj L))
   (g : τ (Hom R X X'))
-  (f : τ (Hom L (@fapp0 R L (@left_adj_func R L J) X') Y)) ⊢
+  (f : τ (Hom L (@fapp0 R L F X') Y)) ⊢
   comp_fapp0
     (@tapp1_fapp0
       L
@@ -3742,20 +9632,20 @@ assert [R L : Cat]
         L
         R
         L
-        (@left_adj_func R L J)
-        (@right_adj_func R L J))
+        F
+        G)
       (@id_func L)
-      (@fapp0 R L (@left_adj_func R L J) X')
+      (@fapp0 R L F X')
       Y
-      (@counit_adj_transf R L J)
+      (@counit_adj_transf R L F G J)
       f)
     (@fapp1_fapp0
       R
       L
-      (@left_adj_func R L J)
+      F
       X
-      (@fapp0 L R (@right_adj_func R L J)
-        (@fapp0 R L (@left_adj_func R L J) X'))
+      (@fapp0 L R G
+        (@fapp0 R L F X'))
       (@tapp1_fapp0
         R
         R
@@ -3764,29 +9654,31 @@ assert [R L : Cat]
           R
           L
           R
-          (@right_adj_func R L J)
-          (@left_adj_func R L J))
+          G
+          F)
         X
         X'
-        (@unit_adj_transf R L J)
+        (@unit_adj_transf R L F G J)
         g))
   ≡ comp_fapp0
       f
-      (@fapp1_fapp0 R L (@left_adj_func R L J) X X' g);
+      (@fapp1_fapp0 R L F X X' g);
 
 assert [R L : Cat]
-  (J : τ (Adjunction R L))
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
   (X : τ (Obj R))
   (Y' Y : τ (Obj L))
-  (f : τ (Hom R X (@fapp0 L R (@right_adj_func R L J) Y')))
+  (f : τ (Hom R X (@fapp0 L R G Y')))
   (g : τ (Hom L Y' Y)) ⊢
   comp_fapp0
     (@fapp1_fapp0
       L
       R
-      (@right_adj_func R L J)
-      (@fapp0 R L (@left_adj_func R L J)
-        (@fapp0 L R (@right_adj_func R L J) Y'))
+      G
+      (@fapp0 R L F
+        (@fapp0 L R G Y'))
       Y
       (@tapp1_fapp0
         L
@@ -3795,12 +9687,12 @@ assert [R L : Cat]
           L
           R
           L
-          (@left_adj_func R L J)
-          (@right_adj_func R L J))
+          F
+          G)
         (@id_func L)
         Y'
         Y
-        (@counit_adj_transf R L J)
+        (@counit_adj_transf R L F G J)
         g))
     (@tapp1_fapp0
       R
@@ -3810,15 +9702,74 @@ assert [R L : Cat]
         R
         L
         R
-        (@right_adj_func R L J)
-        (@left_adj_func R L J))
+        G
+        F)
       X
-      (@fapp0 L R (@right_adj_func R L J) Y')
-      (@unit_adj_transf R L J)
+      (@fapp0 L R G Y')
+      (@unit_adj_transf R L F G J)
       f)
   ≡ comp_fapp0
-      (@fapp1_fapp0 L R (@right_adj_func R L J) Y' Y g)
+      (@fapp1_fapp0 L R G Y' Y g)
       f;
+
+// Independently named operations have no declaration-backed comparison with
+// the stable observations and therefore do not compute or unify with them.
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (eta : τ (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F))) ⊢
+  @unit_adj_transf R L F G J
+  ≡ eta;
+
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (epsilon : τ (Transf
+      (@comp_cat_fapp0 L R L F G)
+      (@id_func L))) ⊢
+  @counit_adj_transf R L F G J
+  ≡ epsilon;
+
+// A raw eta/epsilon spelling intentionally lacks the stable observation
+// heads that select triangle cut-elimination.
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (eta : τ (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F)))
+  (epsilon : τ (Transf
+      (@comp_cat_fapp0 L R L F G)
+      (@id_func L)))
+  (X X' : τ (Obj R))
+  (Y : τ (Obj L))
+  (g : τ (Hom R X X'))
+  (f : τ (Hom L (@fapp0 R L F X') Y)) ⊢
+  comp_fapp0
+    (@tapp1_fapp0
+      L L
+      (@comp_cat_fapp0 L R L F G)
+      (@id_func L)
+      (@fapp0 R L F X')
+      Y
+      epsilon
+      f)
+    (@fapp1_fapp0
+      R L F
+      X
+      (@fapp0 L R G (@fapp0 R L F X'))
+      (@tapp1_fapp0
+        R R
+        (@id_func R)
+        (@comp_cat_fapp0 R L R G F)
+        X X'
+        eta
+        g))
+  ≡ comp_fapp0 f (@fapp1_fapp0 R L F X X' g);
 
 assert [A B : Cat]
   [F G : τ (Functor A B)]
@@ -3846,46 +9797,76 @@ assert [A B : Cat]
       (@Op_func A B F);
 
 assert [A B : Cat]
-  (adj : τ (Adjunction A B)) ⊢
+  [F : τ (Functor A B)]
+  [G : τ (Functor B A)]
+  (adj : τ (@Adjunction A B F G)) ⊢
   @left_adj_func
     (Op_cat B) (Op_cat A)
-    (@Op_adjunction A B adj)
-  ≡ @Op_func B A (@right_adj_func A B adj);
+    (@Op_func B A G)
+    (@Op_func A B F)
+    (@Op_adjunction A B F G adj)
+  ≡ @Op_func B A G;
 
 assert [A B : Cat]
-  (adj : τ (Adjunction A B)) ⊢
+  [F : τ (Functor A B)]
+  [G : τ (Functor B A)]
+  (adj : τ (@Adjunction A B F G)) ⊢
   @right_adj_func
     (Op_cat B) (Op_cat A)
-    (@Op_adjunction A B adj)
-  ≡ @Op_func A B (@left_adj_func A B adj);
+    (@Op_func B A G)
+    (@Op_func A B F)
+    (@Op_adjunction A B F G adj)
+  ≡ @Op_func A B F;
 
 assert [A B : Cat]
-  (adj : τ (Adjunction A B)) ⊢
+  [F : τ (Functor A B)]
+  [G : τ (Functor B A)]
+  (adj : τ (@Adjunction A B F G)) ⊢
   @unit_adj_transf
     (Op_cat B) (Op_cat A)
-    (@Op_adjunction A B adj)
+    (@Op_func B A G)
+    (@Op_func A B F)
+    (@Op_adjunction A B F G adj)
   ≡ @Op_transf
       B B
       (@comp_cat_fapp0
         B A B
-        (@left_adj_func A B adj)
-        (@right_adj_func A B adj))
+        F
+        G)
       (@id_func B)
-      (@counit_adj_transf A B adj);
+      (@counit_adj_transf A B F G adj);
 
 assert [A B : Cat]
-  (adj : τ (Adjunction A B)) ⊢
+  [F : τ (Functor A B)]
+  [G : τ (Functor B A)]
+  (adj : τ (@Adjunction A B F G)) ⊢
   @counit_adj_transf
     (Op_cat B) (Op_cat A)
-    (@Op_adjunction A B adj)
+    (@Op_func B A G)
+    (@Op_func A B F)
+    (@Op_adjunction A B F G adj)
   ≡ @Op_transf
       A A
       (@id_func A)
       (@comp_cat_fapp0
         A B A
-        (@right_adj_func A B adj)
-        (@left_adj_func A B adj))
-      (@unit_adj_transf A B adj);
+        G
+        F)
+      (@unit_adj_transf A B F G adj);
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  [G : τ (Functor B A)]
+  (adj : τ (@Adjunction A B F G)) ⊢
+  @Op_adjunction
+    (Op_cat B)
+    (Op_cat A)
+    (@Op_func B A G)
+    (@Op_func A B F)
+    (@Op_adjunction A B F G adj)
+  ≡ adj;
+
+// catalog-area: auto
 
 assert [A B : Cat]
   (x : τ (Obj A))
@@ -7880,6 +13861,194 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
         y
         (@piapp0 K E s y);
 
+// catalog-area: Categorical-universe direct identity
+
+// Public category-universe equality has the finite fixed-map package normal form.
+assert [A B : Cat] ⊢
+  @= (Obj Cat_cat) A B
+  ≡ @CatPathView A B;
+
+assert [A B : Cat] ⊢
+  @CatPathView A B
+  ≡ OmegaEquiv Cat_cat A B;
+
+assert [A B : Cat]
+  (e : τ (@CatPathView A B)) ⊢
+  e
+  : τ (@= (Obj Cat_cat) A B);
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @cat_path_functor A B p
+  : τ (Functor A B);
+
+// Canonical package reflexivity is usable as equality but remains distinct
+// from the generic proof normal form required by literal J/eq_ap beta.
+assert [A : Cat] ⊢
+  @cat_path_refl A
+  ≡ @omega_equiv_refl Cat_cat A;
+
+assert [A : Cat] ⊢
+  @cat_path_refl A
+  : τ (@= (Obj Cat_cat) A A);
+
+assert [A : Cat] ⊢
+  @eq_refl (Obj Cat_cat) A
+  : τ (@CatPathView A A);
+
+assert [A : Cat] ⊢
+  @cat_path_functor A A (@cat_path_refl A)
+  ≡ @id_func A;
+
+assert [A : Cat] ⊢
+  @cat_path_evidence A A (@cat_path_refl A)
+  ≡ @omega_equiv_along_refl_D0 Cat_cat A;
+
+// The existing encoder/decoder own both directions and reflexive computation.
+assert [A : Cat] ⊢
+  @cat_path_encode A A (@eq_refl (Obj Cat_cat) A)
+  ≡ @cat_path_refl A;
+
+assert [A : Cat] ⊢
+  @cat_path_decode A A (@cat_path_refl A)
+  ≡ @eq_refl (Obj Cat_cat) A;
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @cat_path_decode_encode A B p
+  : τ (
+      @cat_path_decode A B (@cat_path_encode A B p)
+      = p);
+
+assert [A B : Cat]
+  (e : τ (@CatPathView A B)) ⊢
+  @cat_path_encode_decode A B e
+  : τ (
+      @cat_path_encode A B (@cat_path_decode A B e)
+      = e);
+
+assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @cat_path_encode_functor A B p
+  : τ (
+      @cat_path_functor A B (@cat_path_encode A B p)
+      = @path_to_hom Cat_cat A B p);
+
+assert [A : Cat] ⊢
+  @cat_path_encode_functor
+    A A (@eq_refl (Obj Cat_cat) A)
+  ≡ @eq_refl (Obj (Functor_cat A A)) (@id_func A);
+
+// Product action decodes, applies generic action, and re-encodes exactly once.
+assert [A B : Cat] ⊢
+  @cat_path_product
+    A A B B (@cat_path_refl A) (@cat_path_refl B)
+  ≡ @cat_path_refl (Product_cat A B);
+
+assert [A B : Cat] ⊢
+  @cat_path_functor
+    (Product_cat A B)
+    (Product_cat A B)
+    (@cat_path_product
+      A A B B (@cat_path_refl A) (@cat_path_refl B))
+  ≡ @id_func (Product_cat A B);
+
+// Direct fixed-map evidence remains iterable at the next hom level.
+assert [A B : Cat]
+  (e : τ (@CatPathView A B))
+  (x y : τ (Obj A)) ⊢
+  @cat_path_fapp1_along A B e x y
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B
+        (@fapp0 A B (cat_path_functor e) x)
+        (@fapp0 A B (cat_path_functor e) y))
+      (@fapp1_func A B (cat_path_functor e) x y));
+
+assert [A B : Cat]
+  (e : τ (@CatPathView A B))
+  (x y : τ (Obj A)) ⊢
+  @cat_path_fapp1 A B e x y
+  : τ (OmegaEquiv
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B
+        (@fapp0 A B (cat_path_functor e) x)
+        (@fapp0 A B (cat_path_functor e) y)));
+
+assert [A : Cat]
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_to
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat A x y)
+    (@cat_path_fapp1 A A (@cat_path_refl A) x y)
+  ≡ @id_func (Hom_cat A x y);
+
+// The unstratified self-universe normal form is finite at the opaque-evidence boundary.
+assert ⊢
+  @cat_path_refl Cat_cat
+  : τ (@CatPathView Cat_cat Cat_cat);
+
+// Literal reflexivity keeps the guarded generic-J beta.
+assert [A : Cat] ⊢
+  @ind_eqr
+    (Obj Cat_cat)
+    A
+    (λ X : Cat, λ _ : τ (@= (Obj Cat_cat) X A), Unit_grpd)
+    tt
+    A
+    (@eq_refl (Obj Cat_cat) A)
+  ≡ tt;
+
+// Provenance/runtime boundaries selected by the direct classifier-only rule.
+assertnot [A : Cat] ⊢
+  @eq_refl (Obj Cat_cat) A
+  ≡ @cat_path_refl A;
+
+assertnot [A : Cat] ⊢
+  @omega_equiv_to
+    Cat_cat A A (@eq_refl (Obj Cat_cat) A)
+  ≡ @id_func A;
+
+assertnot [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @cat_path_decode A B (@cat_path_encode A B p)
+  ≡ p;
+
+assertnot [A B : Cat]
+  (e : τ (@CatPathView A B)) ⊢
+  @cat_path_encode A B (@cat_path_decode A B e)
+  ≡ e;
+
+assertnot [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @cat_path_encode A B p
+  ≡ p;
+
+assertnot [A B : Cat]
+  (e : τ (@CatPathView A B)) ⊢
+  @cat_path_decode A B e
+  ≡ e;
+
+assertnot [A : Cat] ⊢
+  @ind_eqr
+    (Obj Cat_cat)
+    A
+    (λ X : Cat, λ _ : τ (@= (Obj Cat_cat) X A), Unit_grpd)
+    tt
+    A
+    (@cat_path_refl A)
+  ≡ tt;
+
+assertnot [A : Cat]
+  (x y : τ (Obj A)) ⊢
+  @cat_path_fapp1 A A (@cat_path_refl A) x y
+  ≡ @omega_equiv_refl Cat_cat (Hom_cat A x y);
+
+// catalog-area: auto
+
 assert [K : Cat] (x y : τ (Obj K)) ⊢
   fapp0
     (@homd_tgt_func K
@@ -9013,18 +15182,20 @@ assert [B J J' : Cat]
   ≡ isl;
 
 assert [A J J' B : Cat]
+  [Ladj : τ (Functor A B)]
+  [Radj : τ (Functor B A)]
   [F : τ (Functor J A)]
   [W : τ (Prof J J')]
   [L : τ (Functor J' A)]
   (isc : τ (@WeightedColimit_con A J J' F W L))
-  (adj : τ (Adjunction A B)) ⊢
+  (adj : τ (@Adjunction A B Ladj Radj)) ⊢
   @left_adjoint_preserves_weighted_colimit_con
-    A J J' B F W L isc adj
+    A J J' B Ladj Radj F W L isc adj
   : τ (@WeightedColimit_con
       B J J'
-      (@comp_cat_fapp0 J A B (@left_adj_func A B adj) F)
+      (@comp_cat_fapp0 J A B Ladj F)
       W
-      (@comp_cat_fapp0 J' A B (@left_adj_func A B adj) L));
+      (@comp_cat_fapp0 J' A B Ladj L));
 
 assert [A B : Cat]
   (a : τ (Obj A))
@@ -9843,27 +16014,31 @@ assert [B J J' I : Cat]
   ≡ s;
 
 assert [B J J' A : Cat]
+  [Ladj : τ (Functor A B)]
+  [Radj : τ (Functor B A)]
   [W : τ (Prof J' J)]
   [F : τ (Functor J B)]
   [L : τ (Functor J' B)]
   (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
-  (adj : τ (Adjunction A B)) ⊢
+  (adj : τ (@Adjunction A B Ladj Radj)) ⊢
   @right_adjoint_preserves_weighted_limit_cov_comp
-    B J J' A W F L isl adj
+    B J J' A Ladj Radj W F L isl adj
   : τ (@IsWeightedLimit_cov_comp
       A J J'
       (@comp_cat_fapp0
         J B A
-        (@right_adj_func A B adj)
+        Radj
         F)
       W
       (@comp_cat_fapp0
         J' B A
-        (@right_adj_func A B adj)
+        Radj
         L));
 
 assert [A B I K : Cat]
-  (adj : τ (Adjunction A B))
+  [Ladj : τ (Functor A B)]
+  [Radj : τ (Functor B A)]
+  (adj : τ (@Adjunction A B Ladj Radj))
   (M : τ (Functor I A))
   (F : τ (Functor K B))
   [R : τ (Prof I K)]
@@ -9871,36 +16046,40 @@ assert [A B I K : Cat]
     R
     (@Hom_prof_along
       I K B
-      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      (@comp_cat_fapp0 I A B Ladj M)
       F))) ⊢
   @prof_comparison_pull
     I K
     (@Hom_prof_along
       I K B
-      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      (@comp_cat_fapp0 I A B Ladj M)
       F)
     (@Hom_prof_along
       I K A
       M
-      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-    (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+      (@comp_cat_fapp0 K B A Radj F))
+    (@Adjunction_hom_prof_comparison_along
+      A B Ladj Radj adj I K M F)
     R
     (@prof_comparison_push
       I K
       (@Hom_prof_along
         I K B
-        (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+        (@comp_cat_fapp0 I A B Ladj M)
         F)
       (@Hom_prof_along
         I K A
         M
-        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-      (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+        (@comp_cat_fapp0 K B A Radj F))
+      (@Adjunction_hom_prof_comparison_along
+        A B Ladj Radj adj I K M F)
       R r)
   ≡ r;
 
 assert [A B I K : Cat]
-  (adj : τ (Adjunction A B))
+  [Ladj : τ (Functor A B)]
+  [Radj : τ (Functor B A)]
+  (adj : τ (@Adjunction A B Ladj Radj))
   (M : τ (Functor I A))
   (F : τ (Functor K B))
   [R : τ (Prof I K)]
@@ -9909,30 +16088,32 @@ assert [A B I K : Cat]
     (@Hom_prof_along
       I K A
       M
-      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F)))) ⊢
+      (@comp_cat_fapp0 K B A Radj F)))) ⊢
   @prof_comparison_push
     I K
     (@Hom_prof_along
       I K B
-      (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+      (@comp_cat_fapp0 I A B Ladj M)
       F)
     (@Hom_prof_along
       I K A
       M
-      (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-    (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+      (@comp_cat_fapp0 K B A Radj F))
+    (@Adjunction_hom_prof_comparison_along
+      A B Ladj Radj adj I K M F)
     R
     (@prof_comparison_pull
       I K
       (@Hom_prof_along
         I K B
-        (@comp_cat_fapp0 I A B (@left_adj_func A B adj) M)
+        (@comp_cat_fapp0 I A B Ladj M)
         F)
       (@Hom_prof_along
         I K A
         M
-        (@comp_cat_fapp0 K B A (@right_adj_func A B adj) F))
-      (@Adjunction_hom_prof_comparison_along A B adj I K M F)
+        (@comp_cat_fapp0 K B A Radj F))
+      (@Adjunction_hom_prof_comparison_along
+        A B Ladj Radj adj I K M F)
       R s)
   ≡ s;
 

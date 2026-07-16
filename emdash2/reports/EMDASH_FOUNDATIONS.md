@@ -88,6 +88,369 @@ refl_x        : x = x
 J             equality induction
 ```
 
+The decoded elementary object layer now also contains Empty, Unit, Bool,
+natural numbers, and general binary sums. Their public classifiers and decoded
+carriers are:
+
+```text
+τ(Empty_grpd) = empty       τ(Unit_grpd) = unit
+τ(Bool_grpd)  = bool        τ(Nat_grpd)  = nat
+τ(Sum_grpd(A,B)) = SumData(A,B).
+```
+
+Visible Unit, Boolean, natural-number, and general-sum constructor equality
+now have the bounded observational cases
+
+```text
+tt = tt       = Unit_grpd
+false = false = Unit_grpd       false = true  = Empty_grpd
+true  = false = Empty_grpd      true  = true  = Unit_grpd
+zero = zero = Unit_grpd         zero = succ(m) = Empty_grpd
+succ(n) = zero = Empty_grpd     succ(n) = succ(m) = (n = m)
+inl(a) = inl(a') = (a =_A a')  inl(a) = inr(b) = Empty_grpd
+inr(b) = inl(a) = Empty_grpd   inr(b) = inr(b') = (b =_B b').
+```
+
+These computations select only the classifier. Closed generic reflexivity
+remains `eq_refl Unit_grpd tt`, `eq_refl Bool_grpd false`, or
+`eq_refl Bool_grpd true`; Nat reflexivity remains `eq_refl Nat_grpd zero` or
+`eq_refl Nat_grpd (succ n)`; sum reflexivity remains the outer
+`eq_refl (Sum_grpd A B) (sum_inl a)` or corresponding `sum_inr` term. These
+terms are merely typed by the reduced Unit, predecessor-equality, or component-
+equality classifier and are not erased to `tt`, `eq_refl Nat_grpd n`, or
+component reflexivity. The generic J beta repeats its category and endpoint on
+the rule LHS. This is a subject-reduction guard: distinct elementary paths can
+share a reduced classifier, but a foreign, predecessor, or component
+reflexivity proof must not trigger a branch indexed by the outer proof. Normal
+outer reflexivity still computes through generic J, path symmetry, Core
+inclusion, path-category units, and the ordinary/omega categorical encoders
+without an elementary-former registry. The alternative proofs receive no
+extra endpoint-guarded beta, and no proof-time `unif_rule` identifies the proof
+presentations. Open Unit, Boolean, Nat, and sum endpoints retain primitive
+equality. These are runtime boundaries, not eta, canonicity, equality-
+reflection, or non-derivability theorems.
+
+The Empty, Bool, Nat, and general binary-sum eliminator facades are dependent
+and compute on their constructors through Lambdapi's generated induction
+principles. For the sum, the two native constructors have the decoded reading
+
+```text
+sum_inl(a) : Sum_grpd(A,B)       sum_inr(b) : Sum_grpd(A,B),
+
+sum_elim(P,u_inl,u_inr,sum_inl(a)) = u_inl(a)
+sum_elim(P,u_inl,u_inr,sum_inr(b)) = u_inr(b).
+```
+
+Both classifier binders are separate native-inductive parameters; grouping
+them makes Lambdapi treat the second classifier as an eliminator index and
+does not support the intended fixed-`A,B` dependent facade. This is the
+formation/introduction/elimination/beta layer only except for the separately
+bounded visible Unit/Boolean/Nat/sum classifier cases above. Empty
+observational identity, broader no-confusion, higher path action, canonicity,
+and categorical initial, coproduct, or natural-number-object properties remain
+separate tasks. The constructor conversion non-collapse diagnostics are local
+regression controls, not no-confusion or normalization theorems.
+
+The first named finite dependent record is
+
+```text
+PathRecord_A = { src : A; dst : A; witness : src = dst }.
+```
+
+It is represented by one dependent constructor, with named source, target, and
+witness projections and a dependent eliminator that computes on that
+constructor. Its equality now exposes the nested dependent-Sigma view
+
+```text
+PathRecordPathView_A(r,s)
+  = Path_{Σ src:A, Σ dst:A, src=dst}(asSigma(r),asSigma(s)).
+```
+
+Literal reflexivity reduces to the stable
+`PathRecordPathRefl_A(r)` presentation. The source and dependent-tail
+components compute, and reflexive path induction computes whether J sees the
+literal spelling first or the shaped head first. The same reflexive head is
+registered with path-category units, path symmetry, Core inclusion, and the
+two categorical equality encoders. This is a bounded shaped-reflexivity
+layer: runtime record eta and additional J computation on raw structured path
+constructors remain separate.
+
+The existing componentwise Sigma path maps now have both arbitrary
+propositional round trips:
+
+```text
+sigma_path_decode_encode(p) : decode(encode(p)) = p
+sigma_path_encode_decode(w) : encode(decode(w)) = w.
+```
+
+Generic path induction proves the arbitrary statements. Constructor-exposed
+reflexivity computes, but neither open composite is a new runtime eta rule.
+The literal-reflexivity base used by the second proof is deliberately separate
+from the canonical `sigma_path_refl` theorem: Lambdapi's proof-time Sigma
+reflexivity comparison does not propagate transitively through the nested
+decode application.
+
+Because public `PathRecord` equality already reduces directly to
+`PathRecordPathView`, `path_record_path_encode` and
+`path_record_path_decode` are transparent identity views. Their two named
+round trips compute to reflexivity, preserve `PathRecordPathRefl`, retain the
+dependent-tail observer, and iterate through a nested `PathRecord`. They do
+not introduce a second normalization through the Sigma maps or imply
+fibrancy.
+
+Registered structural action is now an explicit data boundary. For an open
+map `f : A -> B`, `ObsAction(f)` stores a selected operation on arbitrary
+paths and a pointwise path showing that operation agrees with `eq_ap(f)`.
+`ObsDAction(s)` does the same for a dependent section, comparing its selected
+`PathOver` result with `eq_apd(s)`. Thus a specialized implementation may
+compute without silently asserting an unrelated path action, and its agreement
+field is visible next-dimensional data. Canonical registrations use the
+generic semantic owners; the registered identity acts by `p |-> p`, and
+registered actions compose pointwise with a proved comparison to generic
+action of the composite.
+
+For the shaped record former,
+
+```text
+path_record_action(u,p)
+  : PathRecordPathView(f(r),f(s)),
+
+path_record_witness_action(p)
+  : PathOver(witness-family,p,witness(r),witness(s)).
+```
+
+Identity action computes on an arbitrary, not merely reflexive, structured
+record path, while canonical action sends `PathRecordPathRefl(r)` to
+`PathRecordPathRefl(f(r))`. Agreement for an arbitrary registered action is
+propositional rather than runtime equality, packages retain coherence evidence,
+and action alone deliberately does not make J compute on an arbitrary selected
+loop. That stronger claim remains the separate fibrancy/dependent-elimination
+boundary.
+
+Homotopy truncation properties use explicit levels beginning at `-2`:
+
+```text
+IsTruncGrpd(-2,A)   = IsContr(A)
+IsTruncGrpd(n+1,A)  = Π x y : A, IsTruncGrpd(n,x = y).
+```
+
+The readable `IsPropGrpd`, `IsSetGrpd`, and `IsGroupoidGrpd` views denote
+levels `-1`, `0`, and `1`. The successor equation computes, so evidence that
+`A` is `(n+1)`-truncated can be applied to `x,y` to obtain evidence that
+`x = y` is `n`-truncated. This predicate says that an existing classifier is
+already truncated; it is distinct from a future higher-inductive truncation
+reflector and from the directed categorical-dimension predicate over iterated
+homs.
+
+One-step monotonicity is also constructive and level-recursive. At the base,
+`contractible_path_center(c,x,y)` chooses the path through the centre of
+`c : IsContr(A)`, and `contractible_path_contract` contracts every competing
+path to it. Thus `is_contr_is_prop(c) : IsPropGrpd(A)`. The classifier
+`TruncMonotonicity(n)` records the general implication, and
+
+```text
+is_trunc_grpd_succ(n)
+  : IsTruncGrpd(n,A) -> IsTruncGrpd(trunc_succ(n),A)
+```
+
+recurses through the native `TruncLevel` eliminator. Its base and successor
+equations compute, but no global weakening rewrite or proof erasure is
+installed; in particular, a chosen path from open contractibility evidence is
+not identified definitionally with reflexivity.
+
+The evidence classifiers are themselves proposition-valued. Equality of two
+`IsContr(A)` witnesses uses the active Sigma path view: the second contraction
+function is transported along the selected path between centres, and
+`PiFunext` compares the functions pointwise in contractible path spaces.
+`is_contr_pi` constructs dependent products of contractible classifiers, while
+`is_prop_pi` is the proposition-level Pi closure used by the recursive theorem
+
+```text
+is_trunc_grpd_evidence_is_prop(n,A)
+  : IsPropGrpd(IsTruncGrpd(n,A)).
+```
+
+The transparent native recursor inhabits this theorem, but unfolding its
+successor through the reducible Pi/equivalence motive exceeds the bounded
+conversion check. The public theorem therefore has a stable head with local
+base and successor consumer equations. Open witnesses remain distinct at
+runtime: proposition-valuedness supplies paths and their contractions, not
+definitional proof erasure.
+
+Dependent products preserve every native truncation level. The classifier
+`PiTruncClosure(n)` states the general family theorem, and
+
+```text
+is_trunc_pi(n,A,B,h)
+  : IsTruncGrpd(n,Pi_grpd(A,B))
+```
+
+uses `is_contr_pi` at level `-2`. At a successor, the recursive theorem
+truncates the pointwise path family and
+`is_trunc_grpd_equiv_from(pi_happly_type_equiv(f,g))` transports that evidence
+back to function equality. A stable theorem head exposes only the base and
+successor consumer equations. The readable proposition-level lemma
+`is_prop_pi` is the `-1` specialization of this owner rather than a duplicate
+pointwise proof. Open pointwise evidence remains visible at runtime.
+
+Dependent sums preserve a native truncation level when both the base and every
+fibre have that level:
+
+```text
+is_trunc_sigma(n,A,B,hA,hB)
+  : IsTruncGrpd(n,Sigma_grpd(A,B)).
+```
+
+The `-2` base `is_contr_sigma` pairs the chosen base and fibre centres; its
+contraction transports the target fibre component along the base contraction.
+At a successor, Sigma equality already reduces to `SigmaPathView`: the base
+path is truncated by `hA`, and `PathOver` is definitionally an equality in the
+source fibre after transport, so `hB` supplies the fibre-path evidence. The
+recursive Sigma theorem then truncates that total path view. The stable owner
+computes only when both hypotheses are supplied, and neither is erased.
+
+Truncation evidence is invariant under an ordinary type equivalence. Given
+`e : TypeEquiv(A,B)`, the active construction maps the decoder-selected
+universe path `grpd_equiv_path(e)` through the family
+`X |-> IsTruncGrpd(n,X)` and then applies `idtoequiv_grpd`:
+
+```text
+is_trunc_grpd_type_equiv(e)
+  : TypeEquiv(IsTruncGrpd(n,A), IsTruncGrpd(n,B)).
+```
+
+Its `to` and `from` projections transport evidence in both directions, their
+round trips are inherited from `TypeEquiv`, and the reflexive case computes.
+An arbitrary self-equivalence is not collapsed to reflexivity at runtime.
+This is the ordinary groupoid/type theorem; categorical fixed-map invariance
+is a separate consumer below.
+
+The corresponding universe of already-truncated classifiers is the named
+dependent package
+
+```text
+TruncGrpdU(n) = { carrier : Grpd;
+                  evidence : IsTruncGrpd(n,carrier) }.
+```
+
+Both fields project computationally, and the evidence remains part of the
+package. The low-level aliases are
+
+```text
+PropU_grpd     = TruncGrpdU(-1)
+SetU_grpd      = TruncGrpdU(0)
+GroupoidU_grpd = TruncGrpdU(1).
+```
+
+No runtime package eta or proof erasure is selected. Proposition-valued
+truncation evidence now controls package equality through
+
+```text
+TruncGrpdPathView(n,X,Y)
+  = Sigma(p : carrier(X) = carrier(Y)),
+      PathOver(IsTruncGrpd(n,-),p,evidence(X),evidence(Y)).
+```
+
+The named encode/decode maps give propositional package-path round trips.
+Every carrier path supplies its dependent evidence component, and carrier
+projection is packaged as
+
+```text
+(X = Y) ~= (carrier(X) = carrier(Y)).
+```
+
+The forward and selected inverse maps compute, including reconstruction at a
+reflexive carrier path, while the inverse laws remain propositional. This is
+not runtime package eta. The canonical ambient decoder is itself packaged as
+
+```text
+(A = B) ~= TypeEquiv(A,B),
+```
+
+and composing the two packages gives restricted truncated-universe
+univalence:
+
+```text
+(X = Y) ~= TypeEquiv(carrier(X),carrier(Y)).
+```
+
+The forward map is ambient `idtoequiv_grpd` after carrier projection; the
+selected inverse is `grpd_equiv_path` followed by evidence reconstruction.
+Both round trips and inverse reflexivity remain propositional, while forward
+reflexivity computes. This is still decoder-mediated compatibility, not direct
+observational universe identity. Nor is `TruncGrpdU(n)` asserted to be
+`n`-truncated: under univalence its expected level is generally `n+1`.
+
+That expected-level theorem is now active. At level `-2`, every function
+between contractible classifiers has the constant inverse at the chosen source
+centre; `contractible_map_by_inverse` records both paths, and
+`is_equiv_map_evidence_is_prop` makes the inhabited equivalence-evidence fibre
+contractible. Dependent Pi and Sigma closure then give
+
+```text
+contractible_type_equiv(hA,hB) : IsContr(TypeEquiv(A,B)).
+```
+
+At a successor level, the function space inherits the truncation of its target
+and `IsEquivMap(f)` is proposition-valued, hence truncated at every successor
+by `prop_is_trunc_succ`. Therefore the successor branch needs only target
+evidence; source evidence remains in the all-level signature because the
+contractible base genuinely uses it. The stable owner exposes exactly the two
+consumer equations:
+
+```text
+is_trunc_type_equiv(-2,A,B,hA,hB)
+  = contractible_type_equiv(hA,hB)
+
+is_trunc_type_equiv(succ(n),A,B,hA,hB)
+  = trunc_type_equiv_succ(n,A,B,hB).
+```
+
+Finally, `is_trunc_grpd_universe(n)` transports this same-level carrier-
+equivalence bound backward through `trunc_grpd_univalence_type_equiv`, proving
+
+```text
+IsTruncGrpd(succ(n), TruncGrpdU(n)).
+```
+
+The theorem keeps base/source and successor/target evidence observable where
+used. It adds neither broad proof erasure nor direct universe computation.
+
+Ordinary dependent-function extensionality is exposed without discarding the
+related-input Pi path view. For `f,g : Π x:A, B(x)`, the diagonal classifier is
+
+```text
+PiPointwisePath(f,g) = Π x:A, f(x) = g(x).
+```
+
+`PiHapply(p)` observes a structured Pi path `p` on the diagonal, while
+`PiFunext(h)` extends diagonal data to arbitrary `x0,x1:A` and
+`q:x0=x1` by ordinary right-based path induction. Their selected equations
+are deliberately asymmetric:
+
+```text
+PiHapply(PiFunext(h))(x) = h(x)                 runtime;
+pi_funext_eta(p) : PiFunext(PiHapply(p)) = p   propositional.
+```
+
+The generic-J eta proof needs the reflexive equation
+`PiFunext(PiHapply(refl_f)) = refl_f`. Stable `PiHapply` and `PiFunext` heads
+retain this as a narrow two-rigid-head proof-time definitional law. A separate
+transparent presentation reduces to the same equation and supplies its
+semantic justification; typed `eq_refl` only tests that the selected
+`unif_rule` fires. The stable terms remain non-convertible at runtime, and
+applying them first joins the existing shaped Pi-reflexivity computation.
+
+The reviewed theorem capability `is_equiv_map_by_inverse` converts explicit
+left and right inverse paths to the active contractible-fibre `IsEquivMap`
+notion. Its proof remains opaque, like the existing constructor-specific
+equivalence capabilities, but the selected fibre centre computes to the
+specified inverse and right-inverse path. Consequently
+`pi_happly_type_equiv` has executable forward map, inverse, and right path.
+The contraction path and the separately derived eta proof are not identified
+by runtime computation. Arbitrary structured-Pi J computation, Sigma/record
+structural action, and computational fibrancy remain separate work.
+
 From any groupoid/type `A`, there is a path category:
 
 ```text
@@ -96,14 +459,48 @@ Obj(Path(A)) = A
 Hom_{Path(A)}(x,y) = Path(x =_A y)
 ```
 
-Composition in `Path(A)` is path transitivity.
+Composition in `Path(A)` uses the same `comp_fapp0` owner as every category:
+
+```text
+q ∘ p = comp_fapp0(Path(A),q,p).
+```
+
+The J-derived operation `eq_trans(p,q)` is propositionally equal to this
+composition through `path_comp_eq_trans(p,q)`; it is not its runtime normal
+form. Two narrow bridges compute either unit after `id` has projected to
+`eq_refl`, so the generic-identity-first and projection-first orders join.
+Associativity remains the generic proof-time category law.
+
+The opposite `Path(A)^op` is not definitionally collapsed to `Path(A)`.
+Its homs reverse endpoints. Path reversal is instead the arrow action of
+
+```text
+PathSym_A : Path(A)^op -> Path(A).
+```
+
+`PathSym_A` fixes objects and maps reflexivity to reflexivity. Generic functor
+composition supplies the ordered anti-composition law; there is no second
+constructor-specific composition rewrite. The J-derived `eq_sym` operation
+agrees propositionally through `path_sym_agrees_eq_sym`, and involution is
+initially the proposition `path_sym_invol`, not an open runtime cancellation.
+The pointwise `path_sym_core_incl_agreement` theorem states that reversing a
+path and then including it into `C^op` gives the same underlying arrow as
+including the original path into `C`. Functor-level natural packaging and the
+fixed-map omega-equivalence package remain later owners.
+
+Likewise, the postcomposition and precomposition action heads remain distinct
+runtime presentations. Their existing typed proof-time comparisons with
+shared composition prove the expected unit equalities, while the open
+projected action terms deliberately do not reduce to the underlying path.
 
 This is motivation and infrastructure, not yet the full HoTT program. The
 current v3.2 theory now has computational path views for the encoded Sigma/Pi
-object layers, explicit type-equivalence data, and groupoid/categorical
-univalence capability interfaces. Section 13 explains that staging. General
-higher-inductive pushouts and a complete computational account of every
-Sigma/Pi/universe equality remain deferred.
+object layers, ordinary Pi extensionality packaged as an equivalence, explicit
+type-equivalence data, and groupoid/categorical univalence capability
+interfaces. Section 13 explains that staging. General higher-inductive
+pushouts and a complete computational account of structured Pi and universe
+equality remain deferred. Arbitrary Sigma and first-record path round trips
+are active, with the intentionally propositional/runtime split above.
 
 ## 4. The Universe Of Categories
 
@@ -709,33 +1106,44 @@ natural transformation structure when arrows over the base must be tracked.
 
 ## 11. Basic Sigma/Pi Operations And Adjunction Shadows
 
-The active v3.2 implementation now includes a basic first-class ordinary
-functor adjunction interface. For categories `R` and `L`, an adjunction package
+The active v3.2 implementation includes an ordinary functor adjunction
+relation indexed by the already-named functors. For categories `R` and `L`,
+functors `F : R ⊢ L` and `G : L ⊢ R`, an adjunction witness has type
 
 ```text
-J : Adjunction(R,L)
+J : Adjunction(F,G).
 ```
 
-has stable projections:
+The compatibility views of the functors are transparent, while the unit and
+counit remain stable observations:
 
 ```text
-left_adj_func(J)     : R ⊢ L
-right_adj_func(J)    : L ⊢ R
-unit_adj_transf(J)   : id_R => right(J) o left(J)
-counit_adj_transf(J) : left(J) o right(J) => id_L
+left_adj_func(J)     := F
+right_adj_func(J)    := G
+unit_adj_transf(J)   : id_R => G o F
+counit_adj_transf(J) : F o G => id_L.
 ```
 
 The package also has the two component-level triangle cut-elimination rules:
 
 ```text
-counit[f] o left(unit[g]) -> f o left(g)
-right(counit[g]) o unit[f] -> right(g) o f
+counit[f] o F(unit[g]) -> f o F(g)
+G(counit[g]) o unit[f] -> G(g) o f.
 ```
 
-This is intentionally not the old v2 parameterized `adj` interface with
-projection/evidence-irrelevance unification rules. The v3.2 form is a
-first-class package with stable projection heads; parameterized bridges can be
-added later only if a concrete theorem needs them.
+Opposite adjunction swaps the indices:
+
+```text
+Op_adjunction(J) : Adjunction(Op_func(G), Op_func(F)).
+```
+
+The hom-profunctor mate and weighted-limit/colimit preservation interfaces
+also consume `F` and `G` directly. No existential package is active because no
+consumer needs to recover unknown functors. Likewise, no equation identifies
+an independently named unit or counit with the stable observations: such an
+equation needs declaration-backed agreement or an explicitly classified
+trusted postulate. Raw named-operation composites therefore do not inherit
+triangle computation accidentally.
 
 The current theory includes the expected basic operations:
 
@@ -927,6 +1335,24 @@ e.from(e.to(a)) = a
 e.to(e.from(b)) = b.
 ```
 
+The ordinary algebra is active:
+
+```text
+type_equiv_refl(A)                  : A ≃ A
+type_equiv_sym(e)                   : B ≃ A
+type_equiv_comp(eBC,eAB)            : A ≃ C
+type_equiv_to(comp(eBC,eAB))(a)     = eBC.to(eAB.to(a)).
+```
+
+Composition follows categorical order, with the later map first. Symmetry and
+composition build explicit quasi-inverse paths from the selected inverse data
+and then use the reviewed quasi-inverse-to-contractible-fibre theorem. Their
+packages are transparent Sigma values: forward maps, selected inverse maps,
+and selected right-inverse paths compute. The other contraction-derived left
+path stays opaque, and neither double symmetry nor identity composition is a
+runtime package eta. Forward-map unit and associativity shapes compute without
+adding rewrite or proof-time equations.
+
 Reflexivity computes, and the encoded product, Sigma, and Pi object layers have
 the first constructor-specific closure operations. Paths can be decoded to
 equivalences by `idtoequiv_grpd`; the converse direction is exposed through a
@@ -938,10 +1364,82 @@ ua_grpd(U,e) : A = B.
 ```
 
 The kernel also exposes a decoder-oriented witness
-`grpd_univalence_by_decoder`. This staging makes the computational boundary
-explicit: the interface is available and its reflexive/constructor projections
-are checked, but it is not a claim that every future HoTT computation rule has
-already been derived.
+`grpd_univalence_by_decoder`. Its two fields now have named projections:
+
+```text
+grpd_equiv_path_idtoequiv(p)
+  : grpd_equiv_path(idtoequiv_grpd(p)) = p
+
+idtoequiv_grpd_equiv_path(e)
+  : idtoequiv_grpd(grpd_equiv_path(e)) = e.
+```
+
+The same specified-inverse package derives
+`grpd_univalence_from_decoder : GrpdUnivalence`. Its selected
+contractible-fibre inverse, exposed as `grpd_univalence_selected_path`,
+computes to the one operational decoder `grpd_equiv_path`. This avoids
+postulating that every unrelated legacy `ua_grpd(U,e)` head selects the same
+inverse; new coherence consumers use the decoder package, while arbitrary
+`ua_grpd` remains a compatibility facade with its existing transport beta.
+
+Generic path induction proves `coe_grpd_idtoequiv(p,a)`, and the decoder right
+round trip then proves
+`grpd_equiv_path_coe(e,a) : coe(grpd_equiv_path(e),a)=e.to(a)`. This square is
+propositional, not a broad runtime rewrite: reducing the existing Product
+decoder first otherwise leaves transport along `product_grpd_path` stuck. The
+pointwise `grpd_equiv_path_pi_action` is the first nontrivial Pi-universe
+consumer. The Phase-13 groupoid identity boundary now packages exactly this
+surface as
+
+```text
+GrpdPathView(A,B) = TypeEquiv(A,B),
+grpd_path_encode(p) = idtoequiv_grpd(p),
+grpd_path_decode(e) = grpd_equiv_path(e).
+```
+
+`grpd_path_refl(A)` is `type_equiv_refl(A)`. Both inverse laws and transport
+agreement are the existing decoder propositions under named aliases, so no
+semantic univalence body, rewrite rule, or `unif_rule` is duplicated. Product
+encode/decode computation and Pi action remain owned by their established
+rules; same-base Sigma equivalence passes through the generic view.
+
+Public `A =_{Grpd_grpd} B` deliberately does not reduce to this view. The
+owner-position direct candidate was warning-neutral and passed the existing
+suite, but it made normalization of
+`τ(Grpd_grpd =_{Grpd_grpd} Grpd_grpd)` recursively reopen the same universe
+equality and exceed the 20-second bound. The named view normalizes finitely
+because nested public universe equalities stay opaque. Thus the groupoid
+fallback is active while direct public groupoid-universe identity and future
+constructor action remain separate.
+
+The categorical universe has a different measured boundary. Its public
+fixed-arrow certificate remains opaque, so the canonical owner rule
+
+```text
+A =_{Obj(Cat_cat)} B  -->  OmegaEquiv(Cat_cat,A,B)
+```
+
+has a finite self-universe normal form and is warning-neutral. The readable
+alias `CatPathView(A,B)` names that same direct normal form.
+`cat_path_refl(A)` is the canonical `omega_equiv_refl(Cat_cat,A)` package;
+`cat_path_encode` and `cat_path_decode` route through `idtoequiv_cat` and
+`omega_equiv_path`, and their inverse laws remain the decoder's existing
+propositions. The selected functor/evidence projections are exposed as
+`cat_path_functor` and `cat_path_evidence`. Product action decodes both inputs,
+uses generic `eq_ap`/transitivity, and re-encodes once, so canonical reflexive
+inputs compute. `cat_path_fapp1` instead consumes the fixed-arrow evidence
+directly through D0b and remains iterable at the next hom level.
+
+This rule changes the classifier but deliberately does not rewrite generic
+`eq_refl` to `cat_path_refl`. Raw reflexivity therefore still triggers the
+guarded generic J and `eq_ap` betas, while the canonical omega package is a
+separate direct equality witness and receives no arbitrary structured-J beta.
+The rejected reflexivity-collapse probe breaks the existing object-classifier
+path action before its outer `eq_ap` can fire and adds three critical-pair
+reports. The direct self-universe currently terminates because
+`OmegaEquivAlong_D0` is opaque; any future certificate-representation migration
+must re-run that normalization and confluence gate. This operational result is
+not a consistency or stratification claim about `Cat_cat : Cat`.
 
 At the ordinary categorical level:
 
@@ -953,6 +1451,55 @@ contains an arrow, an inverse arrow, and propositional left/right inverse
 paths. The 1-categorical univalence capability compares object equality with
 this ordinary isomorphism evidence.
 
+The fixed-arrow redesign is now the public omega-equivalence normal form:
+
+```text
+u : OmegaEquivAlong_C(f)
+(f,u) : OmegaEquiv_C(x,y)
+```
+
+`OmegaEquiv_C(x,y)` is definitionally the dependent sum of a selected arrow
+`f : Hom_C(x,y)` and neutral fixed-arrow evidence. `omega_equiv_to` and
+`omega_equiv_evidence` are the generic Sigma projections. The public inverse
+and recursive-cell observations route through that evidence; there is no
+parallel semantic body. Reflexive, opposite, and Product evidence are stable
+generators. Product evidence retains its componentwise constructor provenance
+when both components are reflexive instead of collapsing to the unrelated
+generic reflexive evidence head. Its forward/inverse projections and decoder
+components still compute; selected inverse-arrow observations happen to join
+the generic Product identity presentation, while recursive cells and the full
+decoder path retain their structured Product heads. The same policy applies to
+ordinary `iso_evidence_product`. No proof-time equation identifies the two
+provenance choices, no raw inverse composite is rewritten to identity, and no
+open package eta is installed.
+
+The semantic compatibility fibre
+`OmegaEquivFibre_C(f) := Sigma e : OmegaEquiv_C(x,y), e.to = f` is retained as
+a reference construction. Fixed-arrow evidence maps into this fibre and back,
+with a one-sided retraction. The reverse fibre eta and public package eta are
+intentionally absent, so this comparison does not claim that evidence is
+property-valued. `IsOmegaEquivArrow` remains reserved until such a theorem is
+proved.
+
+The variable-evidence hom-action is also active. For
+`u : OmegaEquivAlong_D0_{Cat_cat}(F)` it constructs
+
+```text
+omega_equiv_along_fapp1_D0(u,x,y)
+  : OmegaEquivAlong_D0_{Cat_cat}(F_1[x,y]).
+```
+
+If `L` and `R` are the selected inverse functors, raw `L_1[F x,F y]` and
+`R_1[F x,F y]` land at homs between `L(Fx),L(Fy)` and `R(Fx),R(Fy)`, not
+between `x,y`. The left selected inverse therefore uses
+`Hom(eta_x,epsilon_y) o L_1`. The right selected inverse first combines the
+components of `L o F ~ id_A` and `F o R ~ id_B` to obtain endpoint
+comparisons `L(b) <-> R(b)`, then conjugates `R_1`. Both higher inverse cells
+are returned as transparent D0 packages with stable forward-cell and evidence
+observations, so they can be projected and observed once more. These are
+canonical generator observations, not raw cancellation rewrites, a
+per-instance unification equation, or an unrestricted corecursor.
+
 For the iterated-hom reading, omega-equivalence is recursive:
 
 ```text
@@ -963,10 +1510,94 @@ e.right_inv : Hom_C(y,x)
 ```
 
 together with omega-equivalences in the appropriate hom-categories witnessing
-the two inverse composites. Reflexivity, opposite, and product closure are
-active. `CatUnivalence(C)` packages the comparison between object equality and
-`OmegaEquiv_C`; `cat_univalence(C)` and the decoder-oriented interface expose
-the selected capability.
+the two inverse composites. `omega_equiv_path` is the single public
+evidence-indexed decoder. The decoder-oriented capability owns both
+propositional round trips with `idtoequiv_cat`; it derives
+`cat_univalence_from_decoder` and the named
+`cat_univalence_type_equiv(C,x,y)`, whose selected inverse computes back to
+`omega_equiv_path`. The encoder's forward arrow agrees propositionally with
+`path_to_hom`; no open runtime fold is installed.
+
+For a category path `p : A = B`, `idtoequiv_cat_fapp1_D1(p,x,y)` applies the
+variable-evidence hom action to the selected functor and packages the result
+as a public omega-equivalence between the corresponding hom-categories. Its
+forward arrow is exactly the selected functor's hom action, its evidence
+projection is exact, and its recursive left cell is iterable. This is the
+first integrated next-hom univalence/action witness; it uses no per-instance
+unification equation or unrestricted corecursor.
+
+The first finite-dimensional specialization is now active. A discrete category
+is exactly the two-field product
+
+```text
+IsDiscreteCat(C)
+  := IsSetGrpd(Obj(C))
+     × OmegaEquivAlong_{Cat_cat}(Core_incl_func(C)).
+```
+
+The second field is not duplicated homwise. Applying the promoted D0b
+construction gives
+
+```text
+discrete_core_homwise(d,x,y)
+  : OmegaEquivAlong_{Cat_cat}(core_incl_hom_func(C,x,y)),
+
+core_incl_hom_func(C,x,y)
+  : Path_cat(x = y) -> Hom_cat(C,x,y).
+```
+
+Its object action is definitionally `path_to_hom`. The object action of its
+selected left inverse is `hom_to_path(d,f)`. The left recursive component
+supplies `hom_to_path(path_to_hom(p)) = p`; the other direction is a directed
+next-hom cell from `path_to_hom(hom_to_path(f))` to `f`, constructed by
+comparing the selected left/right inverses and using the right recursive cell.
+Both are named coherent witnesses, not runtime cancellation rules. Set
+truncation alone does not inhabit `IsDiscreteCat`, and the two-field package
+has no runtime eta or evidence erasure.
+
+Object truncation and directed categorical dimension are now separate active
+interfaces:
+
+```text
+IsObjTruncCat(n,C) := IsTruncGrpd(n,Obj(C)),
+
+cat_dim_trunc_level(cat_zero)   := trunc_zero,
+cat_dim_trunc_level(cat_succ n) := trunc_succ(cat_dim_trunc_level(n)),
+
+IsNCat(cat_zero,C)   := IsDiscreteCat(C),
+IsNCat(cat_succ n,C) := Pi x y : Obj(C), IsNCat(n,Hom_cat(C,x,y)).
+```
+
+`CatDim` is a native nonnegative code, independent of the `TruncLevel` code
+that starts at -2. The recursive `cat_dim_trunc_level` map records the
+object-level truncation predicted by directed dimension: discrete categories
+have set-valued objects, and each hom-recursive successor raises the predicted
+level once.
+
+For fixed-map evidence
+`u : OmegaEquivAlong(F)` with `F : A -> B`, the categorical decoder supplies a
+path `A = B`. Mapping `Obj` over that path gives
+`omega_equiv_along_obj_type_equiv(u) : TypeEquiv(Obj(A),Obj(B))`; composing it
+with the ordinary theorem above gives
+`is_obj_trunc_cat_equiv_type_equiv(u)` and its forward/backward evidence maps.
+The reflexive case computes. The induced ordinary equivalence is decoder-
+owned and is not claimed to expose `fapp0(F)` by runtime conversion.
+
+The dimension map remains an index calculation, not evidence of the recursive
+theorem; `IsNCat(n,C)` still does not inhabit
+`IsObjTruncCat(cat_dim_trunc_level(n),C)` without truncation of the recursive
+omega-equivalence package/evidence and the needed Sigma closure argument.
+`NCat(n)` packages a carrier category and retained
+`IsNCat(n,carrier)` evidence; `ZeroCat` and `OneCat` are its zero and successor-
+zero aliases. Constructor decoding and both projections compute, while package
+eta and proof-field erasure do not. In particular, for `X : OneCat`,
+`one_cat_hom_discrete(X,x,y)` exposes discreteness of `Hom(x,y)`, and
+`one_cat_hom_core_homwise(X,x,y,f,g)` applies the promoted discrete theorem at
+the next hom level between parallel arrows. Formation and the index bridge do
+not prove
+`IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`, and no ordinary-iso
+univalence claim is installed for `OneCat`; both require their separately
+recorded dependencies.
 
 The distinction between `IsoEvidence` and `OmegaEquiv` is intentional.
 Ordinary isomorphism data is the 1-categorical staging layer; recursive
@@ -1110,7 +1741,27 @@ representation.
 
 The current foundations intentionally do not yet include:
 
-- a complete HoTT computation theory for every equality in Sigma/Pi types;
+- observational identity for Empty, broader elementary
+  no-confusion, higher action for the elementary classifiers, or their
+  categorical universal properties; the visible Unit/Boolean/Nat/general-sum
+  constructor equality cases, generic-reflexivity provenance boundary, and
+  guarded generic J beta are active;
+- arbitrary structural action/substitution, additional nonreflexive
+  structured-J computation, and runtime eta for the named dependent
+  `PathRecord` convention; its observational path view, stable reflexivity,
+  projection betas, reflexive J, and named arbitrary path round trips are
+  active;
+- truncation reflectors, direct public groupoid-universe identity, and universe
+  metatheory; the finite decoder-owned `GrpdPathView` fallback and the direct
+  categorical `CatPathView` classifier are active,
+  while restricted truncated-universe univalence, carrier/evidence package paths,
+  the expected successor-level package-universe theorem, general one-step
+  monotonicity, dependent-Pi/Sigma closure, `TypeEquiv` invariance, and its fixed-map
+  categorical object-truncation consumer are active, while truncation of
+  recursive omega-equivalence evidence remains open;
+- additional computation of J on nonreflexive structured Pi paths; ordinary
+  `PiHapply`/`PiFunext` equivalence and arbitrary Sigma/first-record
+  path-characterization round trips are active;
 - a completed universe/univalence metatheory beyond the active explicit
   capabilities and constructor/reflexivity computations;
 - a complete coherence API for `OmegaEquiv` and univalent categories;
@@ -1170,6 +1821,18 @@ vocabulary.
 | `const_section_{K,A}(p)` | `Const_transfd K A p` |
 | `Σ_k E[k]` | `Sigma_cat E` |
 | `(k,u)` | `Struct_sigma k u` |
+| `{src,dst : A; witness : src = dst}` | `PathRecord_grpd A` / `Struct_path_record` |
+| shaped paths of dependent records | `PathRecordPathView A r s` / `PathRecordPathRefl A r` |
+| source/dependent-tail path observers | `path_record_path_src` / `path_record_path_tail` |
+| Sigma path encode/decode round trips | `sigma_path_decode_encode` / `sigma_path_encode_decode` |
+| PathRecord path encode/decode round trips | `path_record_path_decode_encode` / `path_record_path_encode_decode` |
+| `A` is `n`-truncated | `IsTruncGrpd n A` |
+| universe of `n`-truncated classifiers | `TruncGrpdU n` |
+| proposition/set/groupoid universes | `PropU_grpd` / `SetU_grpd` / `GroupoidU_grpd` |
+| proposition / set / ordinary groupoid property | `IsPropGrpd A` / `IsSetGrpd A` / `IsGroupoidGrpd A` |
+| pointwise paths between dependent functions | `PiPointwisePath A B f g` |
+| diagonal Pi path observation / extension | `PiHapply p` / `PiFunext h` |
+| Pi happly/funext equivalence | `pi_happly_type_equiv A B f g` |
 | `π₁` | `Sigma_proj1_func E` |
 | `Σ(FF)` | `sigma_map_func FF` |
 | `Σ(eta) : Σ(FF) => Σ(GG)` | `sigma_map_transf eta` |
@@ -1192,6 +1855,14 @@ vocabulary.
 | `π₁ : K × A → K` | `Product_projL_func K A` |
 | `π₂ : K × A → A` | `Product_projR_func K A` |
 | type equivalence `A ≃ B` | `TypeEquiv A B` |
+| groupoid-universe identity view | `GrpdPathView A B` |
+| encode/decode the groupoid-universe identity view | `grpd_path_encode p` / `grpd_path_decode e` |
+| direct categorical-universe identity view | `CatPathView A B` |
+| encode/decode categorical-universe identity | `cat_path_encode p` / `cat_path_decode e` |
+| categorical identity functor/evidence | `cat_path_functor e` / `cat_path_evidence e` |
+| categorical identity next-hom action | `cat_path_fapp1 e x y` |
+| inverse type equivalence | `type_equiv_sym e` |
+| composite type equivalence `eBC ∘ eAB` | `type_equiv_comp eBC eAB` |
 | groupoid univalence capability | `GrpdUnivalence` / `grpd_univalence_by_decoder` |
 | ordinary categorical isomorphism evidence | `IsoEvidence C x y` |
 | omega-equivalence | `OmegaEquiv C x y` |

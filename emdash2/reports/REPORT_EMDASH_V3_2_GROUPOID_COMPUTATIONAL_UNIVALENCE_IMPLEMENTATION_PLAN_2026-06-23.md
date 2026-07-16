@@ -1,7 +1,7 @@
 # EMDASH v3.2 Groupoid And Computational Univalence Implementation Plan
 
 Date: 2026-06-23
-Last reviewed: 2026-06-27
+Last reviewed: 2026-07-15
 
 Plan-ID: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23
 Depends-On: none
@@ -10,7 +10,11 @@ Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 Infinity-Codex-Decision-Responses: infinity-codex:019ef47a-919d-77b3-93f9-7af7a7848c73:019ef4a2-2e56-7513-9c26-878b2df22426
 
-Status: active implementation plan. Phase 1 and the first Program A slices are
+Status: promoted historical implementation decision record; forward work is
+superseded by
+`REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`,
+while this report remains authoritative for the decision/evidence history of
+the slices it promoted. Phase 1 and the first Program A slices are
 promoted in `emdash3_2.lp`: transparent `PathOver`, `pathover_refl`,
 derived reflexive `eq_apd`, functor-owned `Core_incl_func`, public
 `path_to_hom`, decoded `Pi_grpd`, contractible-fibre `TypeEquiv`, reflexive

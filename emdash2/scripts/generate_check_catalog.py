@@ -18,6 +18,7 @@ class Check:
     index: int
     line: int
     source_line: int | None
+    catalog_area: str | None
     first_line: str
     statement: str
 
@@ -74,11 +75,19 @@ def read_lines(path: Path) -> list[str]:
 def parse_checks(lines: list[str]) -> list[Check]:
     checks: list[Check] = []
     source_line: int | None = None
+    catalog_area: str | None = None
     from_pattern = re.compile(r"^//\s+From emdash3_2\.lp:([0-9]+)\.")
+    area_pattern = re.compile(r"^//\s+catalog-area:\s+(.+?)\s*$")
     i = 0
     while i < len(lines):
         line = lines[i]
         line_no = i + 1
+        area_match = area_pattern.match(line)
+        if area_match:
+            area_name = area_match.group(1)
+            catalog_area = None if area_name == "auto" else area_name
+            i += 1
+            continue
         from_match = from_pattern.match(line)
         if from_match:
             source_line = int(from_match.group(1))
@@ -99,6 +108,7 @@ def parse_checks(lines: list[str]) -> list[Check]:
                     index=len(checks) + 1,
                     line=line_no,
                     source_line=source_line,
+                    catalog_area=catalog_area,
                     first_line=line.strip(),
                     statement=" ".join(block),
                 )
@@ -111,6 +121,146 @@ def parse_checks(lines: list[str]) -> list[Check]:
 
 
 AREAS: list[Area] = [
+    Area(
+        "Structural Sigma/PathRecord path round trips",
+        (
+            "sigma_path_decode_refl",
+            "sigma_path_decode_encode",
+            "sigma_path_encode_decode",
+            "@sigma_path_decode A P u v (@sigma_path_encode",
+            "@sigma_path_encode A P u u (@sigma_path_decode",
+            "path_record_path_encode",
+            "path_record_path_decode",
+        ),
+    ),
+    Area(
+        "PathRecord observational equality and shaped reflexivity",
+        (
+            "PathRecordPath",
+            "PathRecordTail",
+            "path_record_path_",
+            "path_record_as_sigma",
+            "path_record_tail",
+            "@eq_refl (PathRecord_grpd",
+        ),
+    ),
+    Area(
+        "General decoded binary sum",
+        (
+            "Sum_grpd",
+            "SumData",
+            "sum_inl",
+            "sum_inr",
+            "sum_elim",
+        ),
+    ),
+    Area(
+        "Elementary decoded H0 formers",
+        (
+            "Empty_grpd",
+            "Unit_grpd",
+            "Bool_grpd",
+            "Nat_grpd",
+            "empty_elim",
+            "bool_elim",
+            "nat_elim",
+            "nat : TYPE",
+            "false ≡ true",
+        ),
+    ),
+    Area(
+        "Finite dependent record convention",
+        (
+            "PathRecord_grpd",
+            "PathRecordData",
+            "Struct_path_record",
+            "path_record_",
+        ),
+    ),
+    Area(
+        "Packaged truncated universes",
+        (
+            "TruncGrpdU",
+            "TruncGrpdData",
+            "Struct_trunc_grpd",
+            "trunc_grpd_",
+            "PropU_grpd",
+            "SetU_grpd",
+            "GroupoidU_grpd",
+        ),
+    ),
+    Area(
+        "Homotopy truncation property kernel",
+        (
+            "TruncLevel",
+            "trunc_",
+            "IsTruncGrpd",
+            "IsPropGrpd",
+            "IsSetGrpd",
+            "IsGroupoidGrpd",
+        ),
+    ),
+    Area(
+        "Pi happly/funext equivalence",
+        (
+            "PiPointwisePath",
+            "PiHapply",
+            "PiFunext",
+            "pi_funext_eta",
+            "pi_happly",
+            "is_equiv_map_by_inverse",
+        ),
+    ),
+    Area(
+        "TypeEquiv identity, symmetry, and composition algebra",
+        (
+            "type_equiv_refl_is_equiv",
+            "type_equiv_sym",
+            "type_equiv_comp",
+        ),
+    ),
+    Area(
+        "Public fixed-map omega-equivalence and categorical decoder",
+        (),
+    ),
+    Area(
+        "Candidate D0b variable-evidence hom action",
+        (
+            "omega_equiv_along_fapp1",
+            "omega_equiv_along_left_functor_D0",
+            "omega_equiv_along_right_functor_D0",
+            "omega_equiv_along_left_from_component_D0",
+            "omega_equiv_along_left_to_component_D0",
+        ),
+    ),
+    Area(
+        "Candidate D0 fixed-arrow omega-equivalence evidence",
+        (
+            "OmegaEquivAlong_D0",
+            "OmegaEquiv_D0",
+            "omega_equiv_to_D0",
+            "omega_equiv_evidence_D0",
+            "omega_equiv_along_",
+            "omega_equiv_refl_D0",
+        ),
+    ),
+    Area(
+        "Groupoid decoder round trips and transport coherence",
+        (
+            "grpd_univalence_from_decoder",
+            "grpd_univalence_selected_path",
+            "grpd_equiv_path_idtoequiv",
+            "idtoequiv_grpd_equiv_path",
+            "coe_grpd_idtoequiv",
+            "grpd_equiv_path_coe",
+            "grpd_equiv_path_pi_action",
+            "@grpd_equiv_path A B (@idtoequiv_grpd A B p) ≡ p",
+            "@idtoequiv_grpd A B (@grpd_equiv_path A B e) ≡ e",
+            "@coe_grpd A B (@grpd_equiv_path A B e) a ≡",
+            "@coe_grpd (Product_grpd A B) (Product_grpd A' B') (@product_grpd_path",
+            "@ua_grpd U A B e ≡ @grpd_equiv_path A B e",
+        ),
+    ),
     Area(
         "Groupoid univalence and type equivalence",
         (
@@ -133,7 +283,7 @@ AREAS: list[Area] = [
     ),
     Area(
         "Path/equality category calculus",
-        ("Path_cat", "eq_refl", "eq_trans"),
+        ("Path_cat", "Path_sym_func", "path_sym", "eq_refl", "eq_trans"),
     ),
     Area(
         "Ordinary categorical isomorphism evidence",
@@ -309,6 +459,8 @@ AREAS: list[Area] = [
 
 
 def classify(check: Check) -> str:
+    if check.catalog_area is not None:
+        return check.catalog_area
     text = check.statement
     for area in AREAS:
         if any(pattern in text for pattern in area.patterns):
@@ -350,8 +502,8 @@ def render() -> str:
             if legacy_source_tags
             else "Legacy pre-split source-line tags have been removed from the checks module;"
         ),
-        "the grouping below is based on checked statement text and stable",
-        "mathematical areas rather than source locations.",
+        "the grouping below is based on checked statement text and explicit",
+        "stable mathematical-area scopes rather than source locations.",
         "",
         "## Summary",
         "",
