@@ -19,16 +19,17 @@ notation, implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
-  proposed successor/overlay for the equality, omega-equivalence, direct
-  univalence, internal groupoidality, and structured-`PathOut`/`J` tracks of
-  the July 13 living master plan. It proposes equality-valued fixed-arrow
-  cancellation laws, a measured Sigma-versus-stable-record packaging fork,
-  direct runtime/proof-time equality-equivalence equations with shaped
-  `Path_cat` observers, `IsGroupoidalCat` through core inclusion, structured
-  motives as the MVP transport boundary, staged decoder retirement, and a
-  migration-first implementation ledger. Its status is proposed/not yet
-  adopted; the July 13 plan remains the active master plan until an explicit
-  adoption decision.
+  independently reviewed and preliminary-probe-refined proposed
+  successor/overlay for the equality, omega-equivalence, direct univalence,
+  internal groupoidality, and structured-`PathOut`/`J` tracks of the July 13
+  living master plan. It selects a decoded equality-valued fixed-arrow record,
+  a stable primitive first-class facade with a transparent Sigma comparison,
+  direct proof-time equality/equivalence with shaped `Path_cat` computation,
+  a completed `Grpd_cat` function-path boundary and derived `TypeEquiv`
+  bridges, `IsGroupoidalCat` through core inclusion, structured motives as the
+  MVP transport boundary, and staged decoder retirement. Its status remains
+  proposed/not yet adopted; the July 13 plan remains the active master plan
+  until an explicit adoption decision.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
