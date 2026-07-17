@@ -176,8 +176,90 @@ compound slots, 45 annotated slots, and 27 intentional clauses.
 | `TypeEquiv -> OmegaEquiv(Grpd_cat)` | passes; forward, inverse, and law projections compute; no warning delta | no decoder axiom is needed in this direction |
 | `OmegaEquiv(Grpd_cat) -> TypeEquiv` through internally derived quasi-inverse and existing `is_equiv_map_by_inverse` | passes; forward map, selected inverse, right law, and forward-map round trip compute; no warning delta | no new bridge capability is needed; the pre-existing bodyless theorem capability remains a proof-completeness obligation |
 
-Current local review logs (ignored and therefore reproducible/prunable rather
-than durable authorities) are:
+#### Rejected, repaired, and still-open probe ledger
+
+The negative results matter as much as the passing candidates. They reject
+particular normal forms and reduction orientations; they do **not** reject the
+equality-valued omega-equivalence architecture as a whole.
+
+| Attempt | Measured failure | Classification and available alternative |
+| --- | --- | --- |
+| transparent public `Sigma f, Along(f)` as the direct-univalence classifier | a typed term at `Eq(Obj C,x,y)` did not acquire the unfolded `tau(Sigma ...)` type: decoding the transparent Sigma ran before the classifier-level unification rule could provide the intended join; an additional rule against the unfolded Sigma did not repair it | **representation rejected, not a core blocker**; use the warning-neutral stable dependent-pair facade and retain transparent Sigma only as a derived comparison view (`031650`, `031813`) |
+| generic object-univalence comparison alone for literal `Path_cat A` | the typed assertion requiring `OmegaEquiv(Path_cat A,x,y) == Eq(A,x,y)` did not fire from the generic variable-category equation | **insufficient generic join, not a blocker**; add the narrow shaped `Path_cat` comparison, which passed without warning delta (`032208` failed; `032228`/`032231` passed) |
+| raw-path observer `omega_equiv_to(Path_cat A,p) -> p` | because classifier comparison also lets a facade package inhabit the path classifier, the variable `p` matches `omega_equiv_pack(...,f,u)`; the normal package projection reduces to `f`, while the raw-path rule reduces to the whole package. Those results do not join. The warning inventory changed from `971/157` to `972/160` | **runtime orientation rejected**; type-level acceptance of a raw path remains feasible, and the explicit `path_equiv(p)` constructor gives computational projections (`032332`, `032339`) |
+| runtime collapse `omega_equiv_pack(Path_cat A,...,f,u) -> f` intended to repair that diamond | it erased the package before `omega_equiv_to`, `omega_equiv_evidence`, and the primitive dependent eliminator could consume it, producing additional divergent orders; warnings rose to `975/164` | **shortcut rejected**; do not equate raw and packaged presentations by erasure. A future extensional/join theorem or different representation may address this, but it is not required for the explicit-path MVP (`032408`, `032413`) |
+| reflexivity observer with the reducible classifier written explicitly as `eq_refl(Obj C,x)` on the LHS | the explicit inferred classifier overlapped the existing `Obj` reductions for `Op`, `Path`, `Catd`, terminal, and related owners, adding eight unjoinable pairs (`979/157`) | **LHS repaired under the SOP**; retain the genuine category/object discriminators but write the recoverable classifier slot as `_`. The corrected owner returned exactly to `971/157` (`032020`/`032027` rejected; `032102`/`032107` passed) |
+| first `Grpd_cat` hom-completion placement/signature | subject reduction could not establish the intended `Grpd` versus `tau(Obj Grpd_cat)` endpoint (`Cannot solve Grpd ≡ τ(Obj Grpd_cat)`) | **owner/signature error, repaired rather than architectural failure**; canonical endpoints and owner order fixed the candidate (`032908` failed; final candidate below passed) |
+| broad runtime `Grpd_cat` identity and composition folds directly to lambdas | quiet checking passed, but the rules competed with generic category identity/composition and functor-action owners, raising the inventory to `1007/159` | **runtime orientation rejected, not a Grpd blocker**; use stable semantic function heads with point-application beta and narrow proof-time comparisons. That design returned to `971/157` (`032933`/`032941` rejected; `033621`/`033625` passed) |
+
+The malformed intermediate probe `031712` contained a binder-syntax error and
+is deliberately not counted as architectural evidence. Likewise, a direct
+lambda-pattern presentation was abandoned in favor of stable rigid heads:
+Lambdapi unification rules are not reliably transitive, and consumers written
+against the stable intermediary are both clearer and warning-neutral.
+
+The phrase **raw-path projection computation** therefore has a precise and
+narrow meaning here. It is not the computation of `path_equiv(p)`, which
+passed. It is the stronger proposed convenience behavior in which a bare
+`p : x =_A y`, accepted silently at the type
+`OmegaEquiv(Path_cat A,x,y)`, would also reduce under `omega_equiv_to` as if it
+had first been packaged. That reduction is the rule that failed the critical-
+pair test. This leaves a surface-coercion/join question open; it does not block
+paths as equivalences, their explicit computational package, direct
+univalence, or the structured groupoidal-J track.
+
+#### Consequences for the pre-probe proposal
+
+The preliminary probes changed the original unmeasured proposal in four
+specific ways:
+
+1. its transparent-Sigma default is not computationally viable as the direct
+   classifier normal form; the stable outer facade is now selected;
+2. the generic object-univalence comparison does not by itself supply the
+   literal `Path_cat` diamond; a shaped comparison is required;
+3. silent raw-path projection and runtime path-package collapse are no longer
+   milestones of the initial MVP; explicit `path_equiv` is the computational
+   owner while a general join is a later extension gate;
+4. direct runtime lambda folds are not an acceptable `Grpd_cat` identity and
+   composition policy; stable semantic heads plus proof-time comparison are
+   the measured replacement.
+
+None of these is a blocker to the selected core. The genuinely unresolved
+work is narrower: unrestricted evidence property/extensionality, a principled
+raw-path/package join if that convenience is ultimately wanted, full migration
+from D0 and decoder consumers, a nonliteral structured-groupoidal consumer,
+and semantic assurance for the generic equality/equivalence fixed point.
+Direct rigid runtime equality for `Grpd_cat`, unconditional `NCat` object
+truncation, and HIT/reflector work were not established by these probes; they
+must be reported as unprobed or later-phase obligations, not as failed
+candidates.
+
+#### SOP and rule-hygiene audit of the review probes
+
+The probes followed the active README/SOP discipline relevant to feasibility
+work:
+
+- candidates were placed at their intended owners in temporary full-file
+  copies rather than appended after all later rules;
+- quiet checks were bounded to 60 seconds and subject-reduction checking was
+  retained; `--no-sr-check` was not used;
+- runtime claims were tested by reduction/assertion, while proof-time
+  `unif_rule` claims were exercised by typed `eq_refl` consumers rather than
+  conversion assertions alone;
+- warning-enabled comparisons were made against the same `971/157` baseline;
+  concrete overlap families, not warning count in isolation, motivated the
+  rejected orientations;
+- inferred classifier/source slots on rewrite LHSs were written as `_` when
+  they were recoverable and were retained only when they were actual
+  discriminators or guards. The explicit-`Obj` reflexivity experiment above is
+  the measured example that forced this correction;
+- the most comprehensive candidate preserved the strict LHS audit at zero
+  unreviewed compound slots, 45 annotated slots, and 27 intentional clauses;
+- no probe was promoted to the active kernel, and no active validation was
+  weakened.
+
+Current successful local review logs (ignored and therefore
+reproducible/prunable rather than durable authorities) are:
 
 - `logs/probes/evogj_eq1_native_record_owner_full-20260717-031514.log`;
 - `logs/probes/evogj_eq1_stable_outer_direct_unif_full-20260717-032107.log`;
@@ -188,6 +270,27 @@ than durable authorities) are:
 - `logs/probes/evogj_type_equiv_to_omega_bridge_full-20260717-033909.log`;
 - `logs/probes/evogj_omega_type_equiv_bidirectional_bridge_full-20260717-034247.log`;
 - `logs/probes/evogj_outer_facade_sigma_comparison_full-20260717-034636.log`.
+
+The corresponding negative/replacement evidence is recorded in:
+
+- `logs/probes/evogj_eq1_direct_unif_owner_full-20260717-031650.log`;
+- `logs/probes/evogj_eq1_direct_unif_owner_full-20260717-031813.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032208.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032228.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032231.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032332.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032339.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032408.log`;
+- `logs/probes/evogj_eq1_path_join_full-20260717-032413.log`;
+- `logs/probes/evogj_eq1_stable_outer_direct_unif_full-20260717-032020.log`;
+- `logs/probes/evogj_eq1_stable_outer_direct_unif_full-20260717-032027.log`;
+- `logs/probes/evogj_eq1_stable_outer_direct_unif_full-20260717-032102.log`;
+- `logs/probes/evogj_eq1_stable_outer_direct_unif_full-20260717-032107.log`;
+- `logs/probes/evogj_grpd_cat_core_completion_full-20260717-032908.log`;
+- `logs/probes/evogj_grpd_cat_core_completion_full-20260717-032933.log`;
+- `logs/probes/evogj_grpd_cat_core_completion_full-20260717-032941.log`;
+- `logs/probes/evogj_grpd_cat_core_completion_full-20260717-033621.log`;
+- `logs/probes/evogj_grpd_cat_core_completion_full-20260717-033625.log`.
 
 These ignored probes and logs are review evidence, not repository authorities.
 The implementing agent must reproduce the relevant smallest candidate against
