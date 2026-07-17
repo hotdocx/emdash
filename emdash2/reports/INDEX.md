@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-13
+Date: 2026-07-17
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active code authority; reports explain current status, mathematics,
@@ -18,6 +18,17 @@ notation, implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
+  proposed successor/overlay for the equality, omega-equivalence, direct
+  univalence, internal groupoidality, and structured-`PathOut`/`J` tracks of
+  the July 13 living master plan. It proposes equality-valued fixed-arrow
+  cancellation laws, a measured Sigma-versus-stable-record packaging fork,
+  direct runtime/proof-time equality-equivalence equations with shaped
+  `Path_cat` observers, `IsGroupoidalCat` through core inclusion, structured
+  motives as the MVP transport boundary, staged decoder retirement, and a
+  migration-first implementation ledger. Its status is proposed/not yet
+  adopted; the July 13 plan remains the active master plan until an explicit
+  adoption decision.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
